@@ -152,11 +152,19 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 
 	} else {
 		paper = gl_paper_from_id (template->page_size);
+		if (paper == NULL) {
+			/* This should always be an id, but just in case a name
+			   slips by! */
+			g_warning (_("Unknown page size id \"%s\", trying as name"),
+				   template->page_size);
+			paper = gl_paper_from_name (template->page_size);
+		}
 		if (paper != NULL) {
 			template->page_width  = paper->width;
 			template->page_height = paper->height;
 		} else {
-			g_warning (_("Unknown page size id \"%s\""), template->page_size);
+			g_warning (_("Unknown page size id or name \"%s\""),
+				   template->page_size);
 		}
 		gl_paper_free (&paper);
 	}

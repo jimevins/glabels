@@ -40,8 +40,6 @@
 
 #include "debug.h"
 
-#define GL_PRINT_DEFAULT_PAPER "US Letter"
-
 #define ARC_FINE   2  /* Resolution in degrees of large arcs */
 #define ARC_COURSE 5  /* Resolution in degrees of small arcs */
 
@@ -386,44 +384,31 @@ print_info_new (GnomePrintJob    *job,
 
 	gl_debug (DEBUG_PRINT, "START");
 
+	g_return_val_if_fail (job && GNOME_IS_PRINT_JOB (job), NULL);
+	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
+
 	template = gl_label_get_template (label);
 
-	if (template == NULL) {
-		g_warning ("Label has no template");
-		return NULL;
-	}
+	g_return_val_if_fail (template, NULL);
+	g_return_val_if_fail (template->page_size, NULL);
+	g_return_val_if_fail (template->page_width > 0, NULL);
+	g_return_val_if_fail (template->page_height > 0, NULL);
 
 	pi->pc = gnome_print_job_get_context (job);
 	pi->config = gnome_print_job_get_config (job);
 
-	if ((template != NULL) && (template->page_size != NULL)) {
+	gl_debug (DEBUG_PRINT,
+		  "setting page size = \"%s\"", template->page_size);
 
-		gl_debug (DEBUG_PRINT,
-			  "setting page size = \"%s\"", template->page_size);
+	gnome_print_config_set_length (pi->config,
+				       GNOME_PRINT_KEY_PAPER_WIDTH,
+				       template->page_width,
+				       GNOME_PRINT_PS_UNIT);
+	gnome_print_config_set_length (pi->config,
+				       GNOME_PRINT_KEY_PAPER_HEIGHT,
+				       template->page_height,
+				       GNOME_PRINT_PS_UNIT);
 
-                /* Currently cannot set page size directly from name, */
-                /* since we must set Ids not Names and there is no */
-                /* way to do the reverse lookup of Id from Name. */
-                /* Sometimes they are the same, but not always */
-                /* (e.g. for the name "US Letter" id="USLetter" */
-                /* So we always use the "Custom" Id. */
-		gnome_print_config_set (pi->config,
-					GNOME_PRINT_KEY_PAPER_SIZE,
-					"Custom");
-		gnome_print_config_set_length (pi->config,
-					       GNOME_PRINT_KEY_PAPER_WIDTH,
-					       template->page_width,
-					       GNOME_PRINT_PS_UNIT);
-		gnome_print_config_set_length (pi->config,
-					       GNOME_PRINT_KEY_PAPER_HEIGHT,
-					       template->page_height,
-					       GNOME_PRINT_PS_UNIT);
-	} else {
-		g_warning ("Cannot determine correct page size.");
-		gnome_print_config_set (pi->config,
-					GNOME_PRINT_KEY_PAPER_SIZE,
-					GL_PRINT_DEFAULT_PAPER);
-	}
 	pi->page_width  = template->page_width;
 	pi->page_height = template->page_height;
 
