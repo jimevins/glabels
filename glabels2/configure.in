@@ -49,7 +49,7 @@ dnl Add the languages which your application supports here.
 GETTEXT_PACKAGE=glabels
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
-ALL_LINGUAS="fr de ja pt_BR"
+ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl"
 AM_GLIB_GNU_GETTEXT
 
 

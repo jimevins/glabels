@@ -1,5 +1,6 @@
 # List of source files containing translatable strings.
 
+src/glabels-ui.xml
 src/glabels.c
 src/glabels.h
 src/glabels-batch.c

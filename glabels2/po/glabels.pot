@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-08-20 21:43-0400\n"
+"POT-Creation-Date: 2002-08-25 21:57-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -299,19 +299,19 @@ msgstr ""
 msgid "Fill"
 msgstr ""
 
-#: src/view-object.c:406 src/view.c:1520
+#: src/view-object.c:410 src/view.c:1590
 msgid "Delete"
 msgstr ""
 
-#: src/view-object.c:416 src/view.c:1530
+#: src/view-object.c:420 src/view.c:1600
 msgid "Bring to front"
 msgstr ""
 
-#: src/view-object.c:423 src/view.c:1536
+#: src/view-object.c:427 src/view.c:1606
 msgid "Send to back"
 msgstr ""
 
-#: src/view-object.c:395
+#: src/view-object.c:399
 msgid "Edit properties..."
 msgstr ""
 
@@ -549,18 +549,18 @@ msgid "Sample data"
 msgstr ""
 
 #. Font label
-#: src/wdgt-text-props.c:184
+#: src/wdgt-text-props.c:185
 msgid "Font:"
 msgstr ""
 
 #. Text Color Label
 #: src/wdgt-bc-props.c:190 src/wdgt-fill.c:169 src/wdgt-line.c:192
-#: src/wdgt-text-props.c:237
+#: src/wdgt-text-props.c:238
 msgid "Color:"
 msgstr ""
 
 #. Alignment label
-#: src/wdgt-text-props.c:251
+#: src/wdgt-text-props.c:252
 msgid "Alignment:"
 msgstr ""
 
