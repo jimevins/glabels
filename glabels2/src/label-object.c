@@ -70,6 +70,14 @@ static void gl_label_object_finalize      (GObject            *object);
 static void merge_changed_cb              (glLabel            *label,
 					   glLabelObject      *object);
 
+static void set_size                      (glLabelObject      *object,
+					   gdouble             w,
+					   gdouble             h);
+
+static void get_size                      (glLabelObject      *object,
+					   gdouble            *w,
+					   gdouble            *h);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -102,17 +110,21 @@ gl_label_object_get_type (void)
 static void
 gl_label_object_class_init (glLabelObjectClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *gobject_class = (GObjectClass *) klass;
+	glLabelObjectClass *object_class  = (glLabelObjectClass *) klass;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	object_class->finalize = gl_label_object_finalize;
+	gobject_class->finalize = gl_label_object_finalize;
+
+	object_class->set_size = set_size;
+	object_class->get_size = get_size;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, changed),
 			      NULL, NULL,
@@ -122,7 +134,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 
 	signals[MOVED] =
 		g_signal_new ("moved",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, moved),
 			      NULL, NULL,
@@ -131,7 +143,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
 	signals[FLIP_ROTATE] =
 		g_signal_new ("flip_rotate",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, flip_rotate),
 			      NULL, NULL,
@@ -140,7 +152,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      0);
 	signals[TOP] =
 		g_signal_new ("top",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, top),
 			      NULL, NULL,
@@ -150,7 +162,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 
 	signals[BOTTOM] =
 		g_signal_new ("bottom",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, bottom),
 			      NULL, NULL,
@@ -415,6 +427,20 @@ gl_label_object_get_position (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Default set size method.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+set_size (glLabelObject *object,
+	  gdouble        w,
+	  gdouble        h)
+{
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	object->private->w = w;
+	object->private->h = h;
+}
+
 /*****************************************************************************/
 /* Set size of object.                                                       */
 /*****************************************************************************/
@@ -434,13 +460,27 @@ gl_label_object_set_size (glLabelObject *object,
 
 	} else {
 
-		object->private->w = w;
-		object->private->h = h;
+		set_size (object, w, h);
+
 	}
 
 	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Default get size method.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+get_size (glLabelObject *object,
+	  gdouble       *w,
+	  gdouble       *h)
+{
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	*w = object->private->w;
+	*h = object->private->h;
 }
 
 /*****************************************************************************/
@@ -462,8 +502,8 @@ gl_label_object_get_size (glLabelObject *object,
 
 	} else {
 
-		*w = object->private->w;
-		*h = object->private->h;
+		get_size (object, w, h);
+
 	}
 
 	gl_debug (DEBUG_LABEL, "END");

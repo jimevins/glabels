@@ -60,7 +60,7 @@ struct _glLabelTextPrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
+static glLabelObjectClass *parent_class = NULL;
 
 static guint instance = 0;
 
@@ -332,6 +332,17 @@ gl_label_text_get_props (glLabelText      *ltext,
 	gl_debug (DEBUG_LABEL, "just = %d", *just);
 }
 
+void
+gl_label_text_get_box (glLabelText *ltext,
+		       gdouble     *w,
+		       gdouble     *h)
+{
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	/* peek at the parent size. */
+	(* parent_class->get_size) (GL_LABEL_OBJECT(ltext), w, h);
+}
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  text buffer "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
@@ -358,10 +369,13 @@ get_size (glLabelObject *object,
 	GnomeGlyphList *glyphlist;
 	ArtDRect        bbox;
 	gdouble         affine[6];
+	gdouble         w_parent, h_parent;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	(* parent_class->get_size) (object, &w_parent, &h_parent);
 
 	font = gnome_font_find_closest_from_weight_slant (
 		ltext->private->font_family,
@@ -392,6 +406,11 @@ get_size (glLabelObject *object,
 		*h += ltext->private->font_size;
 
 	}
+
+	if ( *h == 0.0 ) *h = ltext->private->font_size;
+
+	if ( *w < w_parent ) *w = w_parent;
+	if ( *h < h_parent ) *h = h_parent;
 
 	g_strfreev (line);
 

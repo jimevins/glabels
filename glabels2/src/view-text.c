@@ -217,7 +217,7 @@ gl_view_text_new (glLabelText *object,
 	gl_view_object_set_view (GL_VIEW_OBJECT(view_text), view);
 	gl_view_object_set_object (GL_VIEW_OBJECT(view_text),
 				   GL_LABEL_OBJECT(object),
-				   GL_VIEW_HIGHLIGHT_SIMPLE);
+				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
 
 	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_text));
 

@@ -421,6 +421,7 @@ xml_parse_text_props (xmlNodePtr  object_node,
 {
 	GObject          *object;
 	GList            *lines;
+	gdouble           w, h;
 	gchar            *font_family;
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
@@ -435,6 +436,9 @@ xml_parse_text_props (xmlNodePtr  object_node,
 	gl_debug (DEBUG_XML, "START");
 
 	object = gl_label_text_new (label);
+
+	w = gl_xml_get_prop_double (object_node, "w", 0);
+	h = gl_xml_get_prop_double (object_node, "h", 0);
 
 	font_family = xmlGetProp (object_node, "font_family");
 
@@ -490,11 +494,12 @@ xml_parse_text_props (xmlNodePtr  object_node,
 
 	}
 
-	gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
-	gl_label_text_set_props (GL_LABEL_TEXT(object),
-				 font_family, font_size, font_weight,
-				 font_italic_flag,
-				 color, just);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_text_set_lines  (GL_LABEL_TEXT(object), lines);
+	gl_label_text_set_props  (GL_LABEL_TEXT(object),
+				  font_family, font_size, font_weight,
+				  font_italic_flag,
+				  color, just);
 
 	gl_text_node_lines_free (&lines);
 	g_free (font_family);
@@ -994,6 +999,7 @@ xml_create_text_props (xmlNodePtr     object_node,
 {
 	xmlNodePtr        line_node, field_node, literal_node;
 	GList            *lines;
+	gdouble           w, h;
 	gchar            *font_family;
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
@@ -1008,11 +1014,19 @@ xml_create_text_props (xmlNodePtr     object_node,
 
 	xmlSetProp (object_node, "type", "Text");
 
+	gl_label_text_get_box ( GL_LABEL_TEXT(object), &w, &h);
 	lines = gl_label_text_get_lines (GL_LABEL_TEXT(object));
 	gl_label_text_get_props (GL_LABEL_TEXT(object),
 				 &font_family, &font_size, &font_weight,
 				 &font_italic_flag,
 				 &color, &just);
+
+	string = g_strdup_printf ("%g", w);
+	xmlSetProp (object_node, "w", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", h);
+	xmlSetProp (object_node, "h", string);
+	g_free (string);
 
 	xmlSetProp (object_node, "font_family", font_family);
 	string = g_strdup_printf ("%g", font_size);
