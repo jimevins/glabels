@@ -28,8 +28,6 @@
 
 #include "debug.h"
 
-#define LINE_BUF_LEN 1024
-
 /*===========================================*/
 /* Private types                             */
 /*===========================================*/
@@ -41,7 +39,7 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static GList * split_fields( gchar *line, gchar delim );
+static GList * parse_line ( FILE *handle, gchar delim );
 static void free_fields( GList **fields );
 
 
@@ -89,53 +87,43 @@ gl_merge_text_close (glMergeInput * input)
 glMergeRecord *
 gl_merge_text_get_record (glMergeInput * input)
 {
-	gchar delim, *loc;
+	gchar *loc;
 	GList *fields, *p;
 	gint  i_field;
 	glMergeRecord *record = NULL;
 	glMergeField *field;
-	gchar line[LINE_BUF_LEN];
 
 	if (input != NULL) {
 
 		switch (input->type) {
 		case GL_MERGE_TEXT_TAB:
-			delim = '\t';
+			fields = parse_line( input->handle, '\t' );
 			break;
 		case GL_MERGE_TEXT_COLON:
-			delim = ':';
+			fields = parse_line( input->handle, ':' );
 			break;
 		case GL_MERGE_TEXT_COMMA:
-			delim = ',';
+			fields = parse_line( input->handle, ',' );
 			break;
 		default:
 			WARN ("Unexpected merge type");
 			return NULL;
 		}
 
-		while (fgets (line, LINE_BUF_LEN, (FILE *) input->handle) !=
-		       NULL) {
-			if (TRUE /* TODO: skip blank lines or comments */ ) {
-				g_strchomp (line);
-				record = g_new0 (glMergeRecord, 1);
-				record->select_flag = TRUE;
-				fields = split_fields (line, delim);
-				i_field = 1;
-				for (p=fields; p != NULL; p=p->next) {
-					loc =
-					    g_strdup_printf ("%d", i_field++);
-					field = g_new0 (glMergeField, 1);
-					field->value = g_strdup (p->data);
-					field->key =
-					    gl_merge_find_key (input->
-							       field_defs, loc);
-					record->field_list =
-						g_list_append (record->field_list, field);
-					g_free (loc);
-				}
-				free_fields (&fields);
-				return record;
+		if ( fields != NULL ) {
+			record = g_new0 (glMergeRecord, 1);
+			record->select_flag = TRUE;
+			i_field = 1;
+			for (p=fields; p != NULL; p=p->next) {
+				loc = g_strdup_printf ("%d", i_field++);
+				field = g_new0 (glMergeField, 1);
+				field->value = g_strdup (p->data);
+				field->key = gl_merge_find_key (input->field_defs, loc);
+				record->field_list = g_list_append (record->field_list, field);
+				g_free (loc);
 			}
+			free_fields (&fields);
+			return record;
 		}
 
 	}
@@ -149,7 +137,6 @@ GList *
 gl_merge_text_get_raw_record (glMergeInput * input)
 {
 	GList *list = NULL;
-	gchar line[LINE_BUF_LEN], delim;
 	GList *fields, *p;
 	gint i_field;
 	glMergeRawField *raw_field;
@@ -158,37 +145,29 @@ gl_merge_text_get_raw_record (glMergeInput * input)
 
 		switch (input->type) {
 		case GL_MERGE_TEXT_TAB:
-			delim = '\t';
+			fields = parse_line( input->handle, '\t' );
 			break;
 		case GL_MERGE_TEXT_COLON:
-			delim = ':';
+			fields = parse_line( input->handle, ':' );
 			break;
 		case GL_MERGE_TEXT_COMMA:
-			delim = ',';
+			fields = parse_line( input->handle, ',' );
 			break;
 		default:
 			WARN ("Unexpected merge type");
 			return NULL;
 		}
 
-		while (fgets (line, LINE_BUF_LEN, (FILE *) input->handle)
-		       != NULL) {
-			if (TRUE /* TODO: skip blank lines or comments */ ) {
-				g_strchomp (line);
-				fields = split_fields (line, delim);
-				i_field = 1;
-				for (p=fields; p != NULL; p=p->next) {
-					raw_field =
-						g_new0 (glMergeRawField, 1);
-					raw_field->loc =
-						g_strdup_printf ("%d",
-								 i_field++);
-					raw_field->value = g_strdup (p->data);
-					list = g_list_append (list, raw_field);
-				}
-				free_fields (&fields);
-				break;
+		if ( fields != NULL ) {
+			i_field = 1;
+			for (p=fields; p != NULL; p=p->next) {
+				raw_field = g_new0 (glMergeRawField, 1);
+				raw_field->loc = g_strdup_printf ("%d",
+								  i_field++);
+				raw_field->value = g_strdup (p->data);
+				list = g_list_append (list, raw_field);
 			}
+			free_fields (&fields);
 		}
 
 	}
@@ -196,49 +175,184 @@ gl_merge_text_get_raw_record (glMergeInput * input)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Split out fields by delimiter while decoding things like "\n".  */
+/* PRIVATE.  Parse line (quoted values may span multiple lines).             */
 /*---------------------------------------------------------------------------*/
-static GList * split_fields ( gchar *line,
-			      gchar delim )
+static GList * parse_line ( FILE *handle,
+			    gchar delim )
 {
 	GList *list = NULL;
 	GString *string;
-	gchar *c;
-	enum { NORMAL, ESCAPED } state;
+	gint c;
+	enum { BEGIN, NORMAL, NORMAL_ESCAPED,
+	       QUOTED, QUOTED_ESCAPED, QUOTED_QUOTE1,
+	       DONE } state;
 
-	g_return_val_if_fail (line != NULL, NULL);
-
-	state = NORMAL;
+	state = BEGIN;
 	string = g_string_new( "" );
-	for ( c=line; *c!=0; c++ ) {
+	while ( state != DONE ) {
+		c=getc (handle);
 
 		switch (state) {
 
-		case NORMAL:
-			if ( *c == '\\' ) {
-				state = ESCAPED;
-			} else if ( *c != delim ) {
-				string = g_string_append_c (string, *c);
-			} else {
-				list = g_list_append (list,
+		case BEGIN:
+			switch (c) {
+			case '\\':
+				state = NORMAL_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR. */
+				state = NORMAL;
+				break;
+			case '\n':
+			case EOF:
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
 						      g_strdup (string->str));
-				string = g_string_assign( string, "" );
+					string = g_string_assign( string, "" );
+				}
+				state = NORMAL;
+				break;
 			}
 			break;
 
-		case ESCAPED:
-			switch (*c) {
+		case NORMAL:
+			switch (c) {
+			case '\\':
+				state = NORMAL_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			case '\n':
+			case EOF:
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
+						      g_strdup (string->str));
+					string = g_string_assign( string, "" );
+				}
+				break;
+			}
+			break;
+
+		case NORMAL_ESCAPED:
+			switch (c) {
 			case 'n':
 				string = g_string_append_c (string, '\n');
+				state = NORMAL;
 				break;
 			case 't':
 				string = g_string_append_c (string, '\t');
+				state = NORMAL;
+				break;
+			case '\r':
+				/* Strip CR, stay ESCAPED. */
+				break;
+			case EOF:
+				state = DONE;
 				break;
 			default:
-				string = g_string_append_c (string, *c);
+				string = g_string_append_c (string, c);
+				state = NORMAL;
 				break;
 			}
-			state = NORMAL;
+			break;
+
+		case QUOTED:
+			switch (c) {
+			case '\\':
+				state = QUOTED_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED_QUOTE1;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				break;
+			}
+			break;
+
+		case QUOTED_ESCAPED:
+			switch (c) {
+			case 'n':
+				string = g_string_append_c (string, '\n');
+				state = QUOTED;
+				break;
+			case 't':
+				string = g_string_append_c (string, '\t');
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR, stay ESCAPED. */
+				break;
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				state = QUOTED;
+				break;
+			}
+			break;
+
+		case QUOTED_QUOTE1:
+			switch (c) {
+			case '"':
+				/* insert quotes in string, stay quoted. */
+				string = g_string_append_c (string, c);
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR, return to NORMAL. */
+				state = NORMAL;
+				break;
+			case '\n':
+			case EOF:
+				/* line or file ended after quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
+						      g_strdup (string->str));
+					string = g_string_assign( string, "" );
+				}
+				state = NORMAL;
+				break;
+			}
 			break;
 
 		default:
@@ -247,7 +361,6 @@ static GList * split_fields ( gchar *line,
 		}
 
 	}
-	list = g_list_append( list, strdup(string->str) );
 	g_string_free( string, TRUE );
 
 	return list;
