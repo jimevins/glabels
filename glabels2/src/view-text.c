@@ -43,13 +43,23 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
+#define CURSOR_COLOR    GL_COLOR_A (0, 0, 255, 128)
+
+#define CURSOR_ON_TIME  800
+#define CURSOR_OFF_TIME 400
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glViewTextPrivate {
 
-	GList     *item_list;
+	GList           *item_list;
+
+	GnomeCanvasItem *cursor;
+	gboolean         cursor_visible;
+	gboolean         cursor_state;
+	guint            cursor_timeout;
 
 	/* Page 0 widgets */
 	GtkWidget *text_entry;
@@ -100,6 +110,21 @@ static void      update_dialog_from_move_cb    (glLabelObject   *object,
 						glViewText      *view_text);
 
 static void      draw_hacktext                 (glViewText      *view_text);
+
+static void      draw_cursor                   (glViewText      *view_text);
+
+static void      mark_set_cb                   (GtkTextBuffer   *textbuffer,
+						GtkTextIter     *iter,
+						GtkTextMark     *mark,
+						glViewText      *view_text);
+
+static void      blink_start                   (glViewText      *view_text);
+static void      blink_stop                    (glViewText      *view_text);
+static gboolean  blink_cb                      (glViewText      *view_text);
+
+static gint      item_event_cb                 (GnomeCanvasItem *item,
+						GdkEvent        *event,
+						glViewObject    *view_object);
 
 
 /*****************************************************************************/
@@ -180,6 +205,8 @@ gl_view_text_new (glLabelText *object,
 {
 	glViewText         *view_text;
 	GtkMenu            *menu;
+	GtkTextBuffer      *buffer;
+	GnomeCanvasItem    *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_TEXT (object));
@@ -192,11 +219,21 @@ gl_view_text_new (glLabelText *object,
 				   GL_LABEL_OBJECT(object),
 				   GL_VIEW_HIGHLIGHT_SIMPLE);
 
+	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_text));
+
 	/* Create analogous canvas item. */
 	draw_hacktext (view_text);
+	draw_cursor (view_text);
 
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_text_cb), view_text);
+
+	g_signal_connect (G_OBJECT (group), "event",
+			  G_CALLBACK (item_event_cb), view_text);
+
+	buffer = gl_label_text_get_buffer (object);
+	g_signal_connect (G_OBJECT (buffer), "mark-set",
+			  G_CALLBACK (mark_set_cb), view_text);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -214,6 +251,7 @@ update_view_text_cb (glLabelObject *object,
 
 	/* Adjust appearance of analogous canvas item. */
 	draw_hacktext (view_text);
+	draw_cursor (view_text);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -657,24 +695,25 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 static void
 draw_hacktext (glViewText *view_text)
 {
-	glLabelObject    *object;
-	GnomeCanvasItem  *item;
-	GList            *lines;
-	gchar            *text;
-	gchar            *font_family;
-	GnomeFontWeight  font_weight;
-	gboolean         font_italic_flag;
-	gdouble          font_size;
-	guint            color;
-	GtkJustification just;
-	GnomeFont        *font;
-	GnomeGlyphList   *glyphlist;
-	ArtDRect         bbox;
-	gdouble          affine[6];
-	gdouble          x_offset, y_offset, w, object_w, object_h;
-	gint             i;
+	glLabelObject     *object;
+	GnomeCanvasItem   *item;
+	GtkTextBuffer     *buffer;
+	GtkTextIter        start, end;
+	gchar             *text;
+	gchar             *font_family;
+	GnomeFontWeight    font_weight;
+	gboolean           font_italic_flag;
+	gdouble            font_size;
+	guint              color;
+	GtkJustification   just;
+	GnomeFont         *font;
+	GnomeGlyphList    *glyphlist;
+	ArtDRect           bbox;
+	gdouble            affine[6];
+	gdouble            x_offset, y_offset, w, object_w, object_h;
+	gint               i;
 	gchar            **line;
-	GList            *li;
+	GList             *li;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -685,8 +724,9 @@ draw_hacktext (glViewText *view_text)
 				 &font_family, &font_size,
 				 &font_weight, &font_italic_flag,
 				 &color, &just);
-	lines = gl_label_text_get_lines(GL_LABEL_TEXT(object));
-	text = gl_text_node_lines_expand (lines, NULL);
+	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
+	gtk_text_buffer_get_bounds (buffer, &start, &end);
+	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 	line = g_strsplit (text, "\n", -1);
 
 	/* remove previous items from group. */
@@ -746,9 +786,227 @@ draw_hacktext (glViewText *view_text)
 
 	/* clean up */
 	g_strfreev (line);
-	gl_text_node_lines_free (&lines);
 	g_free (text);
 
 	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Draw cursor to item (group).                                   */
+/*--------------------------------------------------------------------------*/
+static void
+draw_cursor (glViewText *view_text)
+{
+	glLabelObject     *object;
+	GnomeCanvasItem   *item;
+	GtkTextBuffer     *buffer;
+	GtkTextIter        start, end;
+	gchar             *text;
+	gchar             *font_family;
+	GnomeFontWeight    font_weight;
+	gboolean           font_italic_flag;
+	gdouble            font_size;
+	guint              color;
+	GtkJustification   just;
+	GnomeFont         *font;
+	GnomeGlyphList    *glyphlist;
+	ArtDRect           bbox;
+	gdouble            affine[6];
+	gdouble            x_offset, w, object_w, object_h;
+	gint               i;
+	gchar            **line;
+	GList             *li;
+	GtkTextMark       *cursor_mark, *bound_mark;
+	GtkTextIter        cursor_iter, bound_iter;
+	gint               cursor_line, cursor_char, bound_line, bound_char;
+	gboolean           selection_flag;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query label object and properties */
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
+	gl_label_object_get_size (object, &object_w, &object_h);
+	gl_label_text_get_props (GL_LABEL_TEXT(object),
+				 &font_family, &font_size,
+				 &font_weight, &font_italic_flag,
+				 &color, &just);
+	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
+	gtk_text_buffer_get_bounds (buffer, &start, &end);
+	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
+	line = g_strsplit (text, "\n", -1);
+
+	/* Get cursor and selection information. */
+	cursor_mark = gtk_text_buffer_get_insert (buffer);
+	bound_mark  = gtk_text_buffer_get_selection_bound (buffer);
+	gtk_text_buffer_get_iter_at_mark (buffer, &cursor_iter, cursor_mark);
+	gtk_text_buffer_get_iter_at_mark (buffer, &bound_iter, bound_mark);
+	cursor_line = gtk_text_iter_get_line (&cursor_iter);
+	cursor_char = gtk_text_iter_get_visible_line_index (&cursor_iter);
+	bound_line = gtk_text_iter_get_line (&bound_iter);
+	bound_char = gtk_text_iter_get_visible_line_index (&bound_iter);
+	selection_flag = !gtk_text_iter_equal (&cursor_iter, &bound_iter);
+
+	/* get Gnome Font */
+	font = gnome_font_find_closest_from_weight_slant (font_family,
+							  font_weight,
+							  font_italic_flag,
+							  font_size);
+	art_affine_identity (affine);
+
+	for (i = 0; line[i] != NULL; i++) {
+
+		if ( i == cursor_line ) {
+			GnomeCanvasPoints *points;
+			
+			glyphlist = gnome_glyphlist_from_text_dumb (font, color,
+								    0.0, 0.0,
+								    line[i]);
+
+			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+			gnome_glyphlist_unref (glyphlist);
+			w = bbox.x1;
+
+			switch (just) {
+			case GTK_JUSTIFY_LEFT:
+				x_offset = 0.0;
+				break;
+			case GTK_JUSTIFY_CENTER:
+				x_offset = (object_w - w) / 2.0;
+				break;
+			case GTK_JUSTIFY_RIGHT:
+				x_offset = object_w - w;
+				break;
+			default:
+				x_offset = 0.0;
+				break;	/* shouldn't happen */
+			}
+
+			glyphlist = gnome_glyphlist_from_text_sized_dumb (font, color,
+									  0.0, 0.0,
+									  line[i],
+									  cursor_char);
+			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+			gnome_glyphlist_unref (glyphlist);
+			x_offset += bbox.x1;
+
+			points = gnome_canvas_points_new (2);
+			points->coords[0] = x_offset;
+			points->coords[1] = i*font_size;
+			points->coords[2] = x_offset;
+			points->coords[3] = (i+1)*font_size;
+			
+			if (view_text->private->cursor) {
+				gtk_object_destroy (GTK_OBJECT (view_text->private->cursor));
+			}
+			view_text->private->cursor =
+				gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
+							 gnome_canvas_line_get_type (),
+							 "points", points,
+							 "fill_color_rgba", CURSOR_COLOR,
+							 "width_pixels", 2,
+							 NULL);
+			gnome_canvas_points_free (points);
+
+			if ( !view_text->private->cursor_visible ) {
+				gnome_canvas_item_hide (view_text->private->cursor);
+			}
+
+		}
+
+	}
+
+	/* clean up */
+	g_strfreev (line);
+	g_free (text);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Text buffer "mark-set" callback.  Tracks cursor position.      */
+/*--------------------------------------------------------------------------*/
+static void
+mark_set_cb (GtkTextBuffer   *textbuffer,
+	     GtkTextIter     *iter,
+	     GtkTextMark     *mark,
+	     glViewText      *view_text)
+{
+	const gchar *mark_name;
+
+	mark_name = gtk_text_mark_get_name (mark);
+
+	if ( mark_name && !strcmp (mark_name, "insert") ) {
+		draw_cursor (view_text);
+	}
+}
+
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Start the cursor blinking.                                     */
+/*--------------------------------------------------------------------------*/
+static void
+blink_start (glViewText *view_text)
+{
+	if ( !view_text->private->cursor_visible ) return;
+
+	view_text->private->cursor_state = TRUE;
+	gnome_canvas_item_show (view_text->private->cursor);
+	view_text->private->cursor_timeout =
+		gtk_timeout_add (CURSOR_ON_TIME, (GtkFunction)blink_cb, view_text);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Stop the cursor blinking.                                      */
+/*--------------------------------------------------------------------------*/
+static void
+blink_stop (glViewText *view_text)
+{
+	if ( view_text->private->cursor_timeout ) {
+		gtk_timeout_remove (view_text->private->cursor_timeout);
+		view_text->private->cursor_timeout = 0;
+	}
+
+	gnome_canvas_item_hide (view_text->private->cursor);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Blink cursor timeout callback.                                 */
+/*--------------------------------------------------------------------------*/
+static gboolean
+blink_cb (glViewText *view_text)
+{
+	if ( view_text->private->cursor_visible ) {
+
+		view_text->private->cursor_state =
+			!view_text->private->cursor_state;
+
+
+		if ( view_text->private->cursor_state ) {
+			gnome_canvas_item_show (view_text->private->cursor);
+			view_text->private->cursor_timeout =
+				gtk_timeout_add (CURSOR_ON_TIME,
+						 (GtkFunction)blink_cb, view_text);
+		} else {
+			gnome_canvas_item_hide (view_text->private->cursor);
+			view_text->private->cursor_timeout =
+				gtk_timeout_add (CURSOR_OFF_TIME,
+						 (GtkFunction)blink_cb, view_text);
+		}
+
+	}
+
+	return FALSE;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Item event callback.                                           */
+/*--------------------------------------------------------------------------*/
+static gint
+item_event_cb (GnomeCanvasItem *item,
+	       GdkEvent        *event,
+	       glViewObject    *view_object)
+{
+	gl_debug (DEBUG_VIEW, "");
 }
 

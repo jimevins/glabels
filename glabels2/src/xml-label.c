@@ -726,8 +726,8 @@ xml_label_to_doc (glLabel * label,
 	gl_debug (DEBUG_XML, "merge=%p", merge);
 	if (merge != NULL) {
 		xml_create_merge_fields (doc->xmlRootNode, ns, label);
+		g_object_unref (G_OBJECT(merge));
 	}
-	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_XML, "END");
 

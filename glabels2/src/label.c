@@ -202,7 +202,9 @@ gl_label_finalize (GObject *object)
 		g_object_unref (G_OBJECT(p->data));
 	}
 
-	g_object_unref (G_OBJECT(label->private->merge));
+	if (label->private->merge != NULL) {
+		g_object_unref (G_OBJECT(label->private->merge));
+	}
 
 	g_free (label->private);
 
