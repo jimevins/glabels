@@ -266,7 +266,8 @@ insert_cb (glWdgtTextEntry *text_entry)
 	key =
 	    gtk_editable_get_chars (GTK_EDITABLE (text_entry->key_entry), 0,
 				    -1);
-	field = g_strdup_printf ("FIELD{%s}", key);
+	field = g_strdup_printf ("${%s}", key);
+	gl_debug (DEBUG_WDGT, "Inserting %s", field);
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_entry->text_entry));
 	gtk_text_buffer_insert_at_cursor (buffer, field, -1);
