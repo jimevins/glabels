@@ -66,26 +66,31 @@ static struct poptOption options[] = {
 /* Main                                                                      */
 /*****************************************************************************/
 int
-main (int argc, const char **argv)
+main (int argc, char **argv)
 {
-	poptContext pctx;
-	gchar **args;
-	gint rc;
-	GSList *p, *file_list = NULL;
-	gint n_files;
-	GnomePrintMaster *master = NULL;
-	gchar *abs_fn;
-	GnomePrintConfig *config = NULL;
-	glLabel *label = NULL;
-	glXMLLabelStatus status;
+    	GnomeProgram      *program;
+	poptContext        pctx;
+	gchar            **args;
+	gint               rc;
+	GSList            *p, *file_list = NULL;
+	gint               n_files;
+	GnomePrintMaster  *master = NULL;
+	gchar             *abs_fn;
+	GnomePrintConfig  *config = NULL;
+	glLabel           *label = NULL;
+	glXMLLabelStatus   status;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	textdomain (GETTEXT_PACKAGE);
 
-	gtk_type_init ();
+	/* Initialize minimal gnome program */
+	program = gnome_program_init ("glabels-batch", VERSION,
+				      LIBGNOME_MODULE, 1, argv,
+				      GNOME_PROGRAM_STANDARD_PROPERTIES,
+				      NULL);
 
 	/* argument parsing */
-	pctx = poptGetContext (NULL, argc, argv, options, 0);
+	pctx = poptGetContext (NULL, argc, (const char **)argv, options, 0);
 	poptSetOtherOptionHelp (pctx, _("[OPTION...] GLABELS_FILE...") );
 	if ( (rc = poptGetNextOpt(pctx)) < -1 ) {
 		fprintf (stderr, "%s: %s\n",
@@ -117,23 +122,18 @@ main (int argc, const char **argv)
 
 	/* now print the files */
 	for (p = file_list; p; p = p->next) {
-		gl_xml_label_open (p->data, &status);
+		g_print ("LABEL FILE = %s\n", p->data);
+		label = gl_xml_label_open (p->data, &status);
 		if ( status == XML_LABEL_OK ) {
 
 			if ( master == NULL ) {
 				master = gnome_print_master_new ();
-				config = gnome_print_master_get_config (master);
-				abs_fn = gl_util_make_absolute ( output );
-				gnome_print_config_set (config,
-							GNOME_PRINT_KEY_OUTPUT_FILENAME,
-							abs_fn);
-				g_free( abs_fn );
 			}
 
-			gl_print_batch( master, label, n_sheets, n_copies,
-					outline_flag, reverse_flag );
+			gl_print_batch (master, label, n_sheets, n_copies,
+					outline_flag, reverse_flag);
 
-			g_object_unref( label );
+			g_object_unref (label);
 		}
 		else {
 			fprintf ( stderr, _("cannot open glabels file %s\n"),
@@ -141,7 +141,15 @@ main (int argc, const char **argv)
 		}
 	}
 	if ( master != NULL ) {
+
+		abs_fn = gl_util_make_absolute ( output );
+		gnome_print_master_print_to_file (master, abs_fn);
+		g_free( abs_fn );
+
+		gnome_print_master_close (master);
 		gnome_print_master_print (master);
+
+		g_object_unref (master);
 	}
 
 	g_slist_free (file_list);
