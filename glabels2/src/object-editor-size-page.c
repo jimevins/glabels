@@ -236,8 +236,8 @@ size_reset_cb (glObjectEditor *editor)
 					 G_CALLBACK (h_spin_cb),
 					 editor);
 
-	w_base *= editor->priv->units_per_point;
-	h_base *= editor->priv->units_per_point;
+	w_base = editor->priv->w_base * editor->priv->units_per_point;
+	h_base = editor->priv->h_base * editor->priv->units_per_point;
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
 				   w_base);
