@@ -377,6 +377,12 @@ get_size (glLabelObject *object,
 
 	(* parent_class->get_size) (object, &w_parent, &h_parent);
 
+	if ( (w_parent != 0.0) || (h_parent != 0.0) ) {
+		*w = w_parent;
+		*h = h_parent;
+		return;
+	}
+
 	font = gnome_font_find_closest_from_weight_slant (
 		ltext->private->font_family,
 		ltext->private->font_weight,
@@ -409,8 +415,9 @@ get_size (glLabelObject *object,
 
 	if ( *h == 0.0 ) *h = ltext->private->font_size;
 
-	if ( *w < w_parent ) *w = w_parent;
-	if ( *h < h_parent ) *h = h_parent;
+	*w += 2*GL_LABEL_TEXT_MARGIN;
+	*h += 2*GL_LABEL_TEXT_MARGIN;
+
 
 	g_strfreev (line);
 

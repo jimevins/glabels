@@ -30,6 +30,8 @@
 
 G_BEGIN_DECLS
 
+#define GL_LABEL_TEXT_MARGIN 3.0
+
 
 #define GL_TYPE_LABEL_TEXT            (gl_label_text_get_type ())
 #define GL_LABEL_TEXT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_TEXT, glLabelText))

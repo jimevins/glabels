@@ -758,20 +758,20 @@ draw_hacktext (glViewText *view_text)
 
 		switch (just) {
 		case GTK_JUSTIFY_LEFT:
-			x_offset = 0.0;
+			x_offset = GL_LABEL_TEXT_MARGIN;
 			break;
 		case GTK_JUSTIFY_CENTER:
-			x_offset = (object_w - w) / 2.0;
+			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 			break;
 		case GTK_JUSTIFY_RIGHT:
-			x_offset = object_w - w;
+			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 			break;
 		default:
 			x_offset = 0.0;
 			break;	/* shouldn't happen */
 		}
 
-		y_offset =
+		y_offset = GL_LABEL_TEXT_MARGIN +
 			(i + 1) * font_size + gnome_font_get_descender (font);
 
 		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
@@ -868,13 +868,13 @@ draw_cursor (glViewText *view_text)
 
 			switch (just) {
 			case GTK_JUSTIFY_LEFT:
-				x_offset = 0.0;
+				x_offset = GL_LABEL_TEXT_MARGIN;
 				break;
 			case GTK_JUSTIFY_CENTER:
-				x_offset = (object_w - w) / 2.0;
+				x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 				break;
 			case GTK_JUSTIFY_RIGHT:
-				x_offset = object_w - w;
+				x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 				break;
 			default:
 				x_offset = 0.0;
@@ -891,9 +891,9 @@ draw_cursor (glViewText *view_text)
 
 			points = gnome_canvas_points_new (2);
 			points->coords[0] = x_offset;
-			points->coords[1] = i*font_size;
+			points->coords[1] = GL_LABEL_TEXT_MARGIN + i*font_size;
 			points->coords[2] = x_offset;
-			points->coords[3] = (i+1)*font_size;
+			points->coords[3] = GL_LABEL_TEXT_MARGIN + (i+1)*font_size;
 			
 			if (view_text->private->cursor) {
 				gtk_object_destroy (GTK_OBJECT (view_text->private->cursor));

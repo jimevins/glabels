@@ -667,21 +667,21 @@ draw_text_object (PrintInfo     *pi,
 
 		switch (just) {
 		case GTK_JUSTIFY_LEFT:
-			x_offset = 0.0;
+			x_offset = GL_LABEL_TEXT_MARGIN;
 			break;
 		case GTK_JUSTIFY_CENTER:
-			x_offset = (object_w - w) / 2.0;
+			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 			break;
 		case GTK_JUSTIFY_RIGHT:
-			x_offset = object_w - w;
+			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 			break;
 		default:
 			x_offset = 0.0;
 			break;	/* shouldn't happen */
 		}
 
-		y_offset = (i + 1) * font_size
-		    + gnome_font_get_descender (font);
+		y_offset = GL_LABEL_TEXT_MARGIN + (i + 1) * font_size
+			+ gnome_font_get_descender (font);
 
 		gnome_print_moveto (pi->pc, x_offset, y_offset);
 
