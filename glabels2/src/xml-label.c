@@ -40,6 +40,7 @@
 #include "base64.h"
 #include "xml-label.h"
 #include "xml-label-04.h"
+#include "xml-template.h"
 #include "xml.h"
 #include "util.h"
 
@@ -302,7 +303,7 @@ xml_parse_label (xmlNodePtr        root,
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
 		if (g_strcasecmp (node->name, "Sheet") == 0) {
-			template = gl_template_xml_parse_sheet (node);
+			template = gl_xml_template_parse_sheet (node);
 			if (!template) {
 				*status = XML_LABEL_UNKNOWN_MEDIA;
 				return NULL;
@@ -884,7 +885,7 @@ xml_label_to_doc (glLabel          *label,
 	xmlSetNs (doc->xmlRootNode, ns);
 
 	template = gl_label_get_template (label);
-	gl_template_xml_add_sheet (template, doc->xmlRootNode, ns);
+	gl_xml_template_add_sheet (template, doc->xmlRootNode, ns);
 
 	xml_create_objects (doc->xmlRootNode, ns, label);
 

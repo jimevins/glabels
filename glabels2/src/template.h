@@ -164,6 +164,20 @@ gint                 gl_template_get_n_labels        (const glTemplate  *templat
 glTemplateOrigin    *gl_template_get_origins         (const glTemplate  *template);
 gchar               *gl_template_get_layout_desc     (const glTemplate  *template);
 
+glTemplateLayout    *gl_template_layout_new          (gdouble            nx,
+						      gdouble            ny,
+						      gdouble            x0,
+						      gdouble            y0,
+						      gdouble            dx,
+						      gdouble            dy);
+
+glTemplateMarkup    *gl_template_markup_margin_new   (gdouble            size);
+glTemplateMarkup    *gl_template_markup_line_new     (gdouble            x1,
+						      gdouble            y1,
+						      gdouble            x2,
+						      gdouble            y2);
+
+
 G_END_DECLS
 
 #endif
