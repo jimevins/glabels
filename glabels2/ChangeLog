@@ -1,3 +1,9 @@
+2005-02-13  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/es.po:
+		Updated spanish translations. (sergio rivadero)
+
 2005-02-05  Jim Evins  <evins@snaught.com>
 
 	Some cleanup to libglabels.
