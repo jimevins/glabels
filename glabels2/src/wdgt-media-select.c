@@ -222,7 +222,6 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	media_select->template_combo = gtk_combo_new ();
 	gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
 				       template_names);
-	gl_template_free_name_list (&template_names);
 	media_select->template_entry =
 	    GTK_COMBO (media_select->template_combo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (media_select->template_entry),
@@ -230,8 +229,11 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	gtk_combo_set_value_in_list (GTK_COMBO(media_select->template_combo),
 				     TRUE, FALSE);
 	gtk_widget_set_size_request (media_select->template_entry, 400, -1);
+	gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
+			    template_names->data);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
 				media_select->template_combo);
+	gl_template_free_name_list (&template_names);
 
 	whbox = gl_hig_hbox_new ();
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
@@ -339,6 +341,8 @@ page_size_entry_changed_cb (GtkEntry * entry,
 		template_names = gl_template_get_name_list (page_size);
 		gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
 					       template_names);
+		gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
+				    template_names->data);
 		gl_template_free_name_list (&template_names);
 	}
 	g_free (page_size);
