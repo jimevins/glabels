@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include "mygal/widget-color-combo.h"
+#include "prefs.h"
 #include "wdgt-fill.h"
 #include "marshal.h"
 #include "color.h"
@@ -152,7 +154,9 @@ gl_wdgt_fill_new (void)
 static void
 gl_wdgt_fill_construct (glWdgtFill *fill)
 {
-	GtkWidget *wvbox, *whbox;
+	GtkWidget  *wvbox, *whbox;
+	ColorGroup *cg;
+	GdkColor   *gdk_color;
 
 	wvbox = GTK_WIDGET (fill);
 
@@ -166,8 +170,13 @@ gl_wdgt_fill_construct (glWdgtFill *fill)
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), fill->color_label);
 
 	/* Fill Color picker widget */
-	fill->color_picker = gnome_color_picker_new ();
-	g_signal_connect_swapped (G_OBJECT (fill->color_picker), "color_set",
+        cg = color_group_fetch ("fill_color_group", NULL);
+        gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
+        fill->color_picker = color_combo_new (NULL, _("No fill"), gdk_color, cg);
+	color_combo_box_set_preview_relief (COLOR_COMBO(fill->color_picker),
+					    GTK_RELIEF_NORMAL);
+        g_free (gdk_color);
+	g_signal_connect_swapped (G_OBJECT (fill->color_picker), "color_changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (fill));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), fill->color_picker);
@@ -190,11 +199,17 @@ void
 gl_wdgt_fill_get_params (glWdgtFill *fill,
 			 guint      *color)
 {
-	guint8 r, g, b, a;
+	GdkColor *gdk_color;
+	gboolean  is_default;
 
-	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (fill->color_picker),
-				   &r, &g, &b, &a);
-	*color = GL_COLOR_A (r, g, b, a);
+	gdk_color = color_combo_get_color (COLOR_COMBO(fill->color_picker),
+					   &is_default);
+
+	if (is_default) {
+		*color = GL_COLOR_NONE;
+	} else {
+		*color = gl_color_from_gdk_color (gdk_color);
+	}
 }
 
 /****************************************************************************/
@@ -204,11 +219,11 @@ void
 gl_wdgt_fill_set_params (glWdgtFill *fill,
 			 guint       color)
 {
-	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (fill->color_picker),
-				   GL_COLOR_I_RED (color),
-				   GL_COLOR_I_GREEN (color),
-				   GL_COLOR_I_BLUE (color),
-				   GL_COLOR_I_ALPHA (color));
+	GdkColor *gdk_color;
+
+	gdk_color = gl_color_to_gdk_color (color);
+	color_combo_set_color (COLOR_COMBO(fill->color_picker), gdk_color);
+	g_free (gdk_color);
 }
 
 /****************************************************************************/

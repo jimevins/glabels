@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include "mygal/widget-color-combo.h"
+#include "prefs.h"
 #include "wdgt-bc-props.h"
 #include "marshal.h"
 #include "color.h"
@@ -151,8 +153,9 @@ gl_wdgt_bc_props_new (void)
 static void
 gl_wdgt_bc_props_construct (glWdgtBCProps *prop)
 {
-	GtkWidget *wvbox, *whbox, *wlabel;
-	GtkObject *adjust;
+	GtkWidget  *wvbox, *whbox, *wlabel;
+	ColorGroup *cg;
+	GdkColor   *gdk_color;
 
 	wvbox = GTK_WIDGET (prop);
 
@@ -166,8 +169,13 @@ gl_wdgt_bc_props_construct (glWdgtBCProps *prop)
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->color_label);
 
 	/* Line Color picker widget */
-	prop->color_picker = gnome_color_picker_new ();
-	g_signal_connect_swapped (G_OBJECT (prop->color_picker), "color_set",
+        cg = color_group_fetch ("line_color_group", NULL);
+        gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
+        prop->color_picker = color_combo_new (NULL, _("Default"), gdk_color, cg);
+	color_combo_box_set_preview_relief (COLOR_COMBO(prop->color_picker),
+					    GTK_RELIEF_NORMAL);
+        g_free (gdk_color);
+	g_signal_connect_swapped (G_OBJECT (prop->color_picker), "color_changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (prop));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->color_picker);
@@ -190,13 +198,17 @@ void
 gl_wdgt_bc_props_get_params (glWdgtBCProps *prop,
 			     guint         *color)
 {
-	guint8 r, g, b, a;
+	GdkColor *gdk_color;
+	gboolean  is_default;
 
-	/* ------- Get updated line color ------ */
-	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (prop->color_picker),
-				   &r, &g, &b, &a);
-	*color = GL_COLOR_A (r, g, b, a);
+	gdk_color = color_combo_get_color (COLOR_COMBO(prop->color_picker),
+					   &is_default);
 
+	if (is_default) {
+		*color = gl_prefs->default_line_color;
+	} else {
+		*color = gl_color_from_gdk_color (gdk_color);
+	}
 }
 
 /***************************************************************************/
@@ -206,11 +218,11 @@ void
 gl_wdgt_bc_props_set_params (glWdgtBCProps *prop,
 			     guint          color)
 {
-	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (prop->color_picker),
-				   GL_COLOR_I_RED (color),
-				   GL_COLOR_I_GREEN (color),
-				   GL_COLOR_I_BLUE (color),
-				   GL_COLOR_I_ALPHA (color));
+	GdkColor *gdk_color;
+
+	gdk_color = gl_color_to_gdk_color (color);
+	color_combo_set_color (COLOR_COMBO(prop->color_picker), gdk_color);
+	g_free (gdk_color);
 }
 
 /****************************************************************************/

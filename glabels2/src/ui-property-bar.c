@@ -340,7 +340,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 			(gpointer)property_bar);
 
 	/* Text color widget */
-	cg = color_group_fetch ("text_color_group", ui_component);
+	cg = color_group_fetch ("text_color_group", NULL);
 	pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
 	gdk_color = gl_color_to_gdk_color (gl_prefs->default_text_color);
 	property_bar->text_color_combo = color_combo_new (pixbuf, _("Default"),
@@ -355,7 +355,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 				  "/PropertyToolbar/PropTextColor");
 
 	/* Fill color widget */
-	cg = color_group_fetch ("fill_color_group", ui_component);
+	cg = color_group_fetch ("fill_color_group", NULL);
 	pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
 	gdk_color = gl_color_to_gdk_color (gl_prefs->default_fill_color);
 	property_bar->fill_color_combo = color_combo_new (pixbuf, _("No fill"),
@@ -370,7 +370,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 				  "/PropertyToolbar/PropFillColor");
 
 	/* Line color widget */
-	cg = color_group_fetch ("line_color_group", ui_component);
+	cg = color_group_fetch ("line_color_group", NULL);
 	pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
 	gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
 	property_bar->line_color_combo = color_combo_new (pixbuf, _("No line"),

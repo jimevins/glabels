@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include "mygal/widget-color-combo.h"
+#include "prefs.h"
 #include "wdgt-line.h"
 #include "marshal.h"
 #include "color.h"
@@ -57,6 +59,7 @@ static void gl_wdgt_line_finalize      (GObject         *object);
 static void gl_wdgt_line_construct     (glWdgtLine      *line);
 
 static void changed_cb                 (glWdgtLine      *line);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -153,8 +156,10 @@ gl_wdgt_line_new (void)
 static void
 gl_wdgt_line_construct (glWdgtLine *line)
 {
-	GtkWidget *wvbox, *wframe, *whbox;
-	GtkObject *adjust;
+	GtkWidget  *wvbox, *wframe, *whbox;
+	GtkObject  *adjust;
+	ColorGroup *cg;
+	GdkColor   *gdk_color;
 
 	wvbox = GTK_WIDGET (line);
 
@@ -191,8 +196,13 @@ gl_wdgt_line_construct (glWdgtLine *line)
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->color_label);
 
 	/* Line Color picker widget */
-	line->color_picker = gnome_color_picker_new ();
-	g_signal_connect_swapped (G_OBJECT (line->color_picker), "color_set",
+        cg = color_group_fetch ("line_color_group", NULL);
+        gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
+        line->color_picker = color_combo_new (NULL, _("No line"), gdk_color, cg);
+	color_combo_box_set_preview_relief (COLOR_COMBO(line->color_picker),
+					    GTK_RELIEF_NORMAL);
+        g_free (gdk_color);
+	g_signal_connect_swapped (G_OBJECT (line->color_picker), "color_changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (line));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->color_picker);
@@ -217,14 +227,20 @@ gl_wdgt_line_get_params (glWdgtLine *line,
 			 gdouble    *width,
 			 guint      *color)
 {
-	guint8 r, g, b, a;
+	GdkColor *gdk_color;
+	gboolean  is_default;
 
 	*width =
 	    gtk_spin_button_get_value (GTK_SPIN_BUTTON(line->width_spin));
 
-	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (line->color_picker),
-				   &r, &g, &b, &a);
-	*color = GL_COLOR_A (r, g, b, a);
+	gdk_color = color_combo_get_color (COLOR_COMBO(line->color_picker),
+					   &is_default);
+
+	if (is_default) {
+		*color = GL_COLOR_NONE;
+	} else {
+		*color = gl_color_from_gdk_color (gdk_color);
+	}
 }
 
 /****************************************************************************/
@@ -235,13 +251,14 @@ gl_wdgt_line_set_params (glWdgtLine *line,
 			 gdouble     width,
 			 guint       color)
 {
+	GdkColor *gdk_color;
+
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (line->width_spin), width);
 
-	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (line->color_picker),
-				   GL_COLOR_I_RED (color),
-				   GL_COLOR_I_GREEN (color),
-				   GL_COLOR_I_BLUE (color),
-				   GL_COLOR_I_ALPHA (color));
+	gdk_color = gl_color_to_gdk_color (color);
+	color_combo_set_color (COLOR_COMBO(line->color_picker), gdk_color);
+	g_free (gdk_color);
+			       
 }
 
 /****************************************************************************/

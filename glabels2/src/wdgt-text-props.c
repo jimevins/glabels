@@ -24,6 +24,8 @@
 
 #include <gnome.h>
 
+#include "mygal/widget-color-combo.h"
+#include "prefs.h"
 #include "wdgt-text-props.h"
 #include "marshal.h"
 #include "color.h"
@@ -167,9 +169,11 @@ gl_wdgt_text_props_new (void)
 static void
 gl_wdgt_text_props_construct (glWdgtTextProps *text)
 {
-	GtkWidget *wvbox, *whbox, *wcombo, *wbhbox;
-	GList     *family_names = NULL;
-	GtkObject *adjust;
+	GtkWidget  *wvbox, *whbox, *wcombo, *wbhbox;
+	GList      *family_names = NULL;
+	GtkObject  *adjust;
+	ColorGroup *cg;
+	GdkColor   *gdk_color;
 
 	wvbox = GTK_WIDGET (text);
 
@@ -232,8 +236,13 @@ gl_wdgt_text_props_construct (glWdgtTextProps *text)
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text->color_label);
 
 	/* Text Color picker widget */
-	text->color_picker = gnome_color_picker_new ();
-	g_signal_connect_swapped (G_OBJECT (text->color_picker), "color_set",
+        cg = color_group_fetch ("text_color_group", NULL);
+        gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
+        text->color_picker = color_combo_new (NULL, _("Default"), gdk_color, cg);
+	color_combo_box_set_preview_relief (COLOR_COMBO(text->color_picker),
+					    GTK_RELIEF_NORMAL);
+        g_free (gdk_color);
+	g_signal_connect_swapped (G_OBJECT (text->color_picker), "color_changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (text));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text->color_picker);
@@ -356,7 +365,8 @@ gl_wdgt_text_props_get_params (glWdgtTextProps  *text,
 			       guint            *color,
 			       GtkJustification *just)
 {
-	guint8 r, g, b, a;
+	GdkColor *gdk_color;
+	gboolean  is_default;
 
 	/* ------ Get updated font information ------ */
 	*font_family =
@@ -375,9 +385,14 @@ gl_wdgt_text_props_get_params (glWdgtTextProps  *text,
 					  (text->font_i_button));
 
 	/* ------ Get updated color ------ */
-	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (text->color_picker),
-				   &r, &g, &b, &a);
-	*color = GL_COLOR_A (r, g, b, a);
+	gdk_color = color_combo_get_color (COLOR_COMBO(text->color_picker),
+					   &is_default);
+
+	if (is_default) {
+		*color = gl_prefs->default_text_color;
+	} else {
+		*color = gl_color_from_gdk_color (gdk_color);
+	}
 
 	/* ------- Get updated justification ------ */
 	if (gtk_toggle_button_get_active
@@ -409,8 +424,9 @@ gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
 			       guint            color,
 			       GtkJustification just)
 {
-	GList *family_names;
-	gchar *good_font_family;
+	GList    *family_names;
+	gchar    *good_font_family;
+	GdkColor *gdk_color;
 
 	/* Make sure we have a valid font family.  if not provide a good default. */
 	family_names = gnome_font_family_list ();
@@ -437,11 +453,9 @@ gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (text->font_i_button),
 				      font_italic_flag);
 
-	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (text->color_picker),
-				   GL_COLOR_I_RED (color),
-				   GL_COLOR_I_GREEN (color),
-				   GL_COLOR_I_BLUE (color),
-				   GL_COLOR_I_ALPHA (color));
+	gdk_color = gl_color_to_gdk_color (color);
+	color_combo_set_color (COLOR_COMBO(text->color_picker), gdk_color);
+	g_free (gdk_color);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (text->left_button),
 				      (just == GTK_JUSTIFY_LEFT));
