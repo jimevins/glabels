@@ -746,10 +746,10 @@ tl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -843,9 +843,9 @@ tr_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -938,10 +938,10 @@ bl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
 			y = y1;
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1036,8 +1036,8 @@ br_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
 			y = y1;
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1127,8 +1127,8 @@ sl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1219,7 +1219,7 @@ sr_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1309,8 +1309,8 @@ st_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1401,7 +1401,7 @@ sb_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			y = y1;
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1496,8 +1496,8 @@ p1_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x0;
 			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
+			dx = (event->motion.x - x0);
+			dy = (event->motion.y - y0);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
@@ -1592,8 +1592,8 @@ p2_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x0;
 			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
+			dx = (event->motion.x - x0);
+			dy = (event->motion.y - y0);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
