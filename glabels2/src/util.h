@@ -27,6 +27,7 @@
 #include <libgnomeprint/gnome-font.h>
 
 extern gchar *gl_util_add_extension (const gchar * orig_filename);
+extern gchar *gl_util_remove_extension (const gchar * orig_filename);
 
 extern gchar *gl_util_make_absolute (const gchar * filename);
 

@@ -34,49 +34,19 @@
 #include <bonobo/bonobo-ui-engine.h>
 #include <bonobo/bonobo-window.h>
 
+#include "view.h"
+
 extern BonoboUIVerb gl_ui_verbs [];
 
-extern gchar *gl_ui_no_docs_sensible_verbs []; 
-extern gchar *gl_ui_not_modified_doc_sensible_verbs []; 
-extern gchar *gl_ui_selection_sensible_verbs [];
-extern gchar *gl_ui_atomic_selection_sensible_verbs [];
 
-#define gl_ui_all_sensible_verbs gl_ui_no_docs_sensible_verbs
-
-void gl_ui_set_verb_sensitive 		(BonoboUIComponent *ui_component,
-					 gchar             *cname,
-					 gboolean           sensitive);
-void gl_ui_set_verb_list_sensitive 	(BonoboUIComponent *ui_component, 
-					 gchar            **vlist,
-					 gboolean           sensitive);
-void gl_ui_set_verb_state 		(BonoboUIComponent *ui_component, 
-					 gchar* cname, 
-					 gboolean state);
-
-/* convenience functions for plugins */
-
-void gl_ui_add_menu_item        (BonoboWindow   *window,
-				 const gchar    *path,
-				 const gchar    *name,
-				 const gchar    *label,
-				 const gchar    *tooltip,
-				 const gchar    *stock_pixmap,
-				 BonoboUIVerbFn  cb);
-
-void gl_ui_remove_menu_item     (BonoboWindow   *window,
-				 const gchar    *path,
-				 const gchar    *name);
-
-
-void gl_ui_add_menu_item_all    (const gchar    *path,
-				 const gchar    *name,
-				 const gchar    *label,
-				 const gchar    *tooltip,
-				 const gchar    *stock_pixmap,
-				 BonoboUIVerbFn  cb);
-
-void gl_ui_remove_menu_item_all (const gchar    *path,
-				 const gchar    *name);
-
+extern void gl_ui_init                   (BonoboUIComponent *ui_component,
+					  BonoboWindow      *win);
+extern void gl_ui_update_all             (BonoboUIComponent *ui_component,
+					  glView            *view);
+extern void gl_ui_update_nodoc           (BonoboUIComponent *ui_component);
+extern void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
+					  glLabel           *label);
+extern void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
+					  glView            *view);
 
 #endif /* __GL_UI_H__ */

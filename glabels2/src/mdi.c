@@ -41,17 +41,13 @@
 #include "glabels.h"
 #include "ui.h"
 #include "prefs.h"
-#include "recent.h" 
 #include "file.h"
 #include "view.h"
 #include "debug.h"
-#include "gnome-recent-view.h"
 #include "alert.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
-
-#include <gconf/gconf-client.h>
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -86,9 +82,6 @@ static void gl_mdi_init 		(glMDI 	*mdi);
 static void gl_mdi_finalize 		(GObject 	*object);
 
 static void gl_mdi_app_created_cb	(BonoboMDI *mdi, BonoboWindow *win);
-static void gl_mdi_set_app_main_toolbar_style 	 (BonoboWindow *win);
-static void gl_mdi_set_app_drawing_toolbar_style (BonoboWindow *win);
-static void gl_mdi_set_app_statusbar_style 	 (BonoboWindow *win);
 
 static gint gl_mdi_add_child_cb (BonoboMDI *mdi, BonoboMDIChild *child);
 static gint gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view);
@@ -102,12 +95,6 @@ static void gl_mdi_child_state_changed_cb (glMDIChild *child);
 static void gl_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi);
 static void gl_mdi_set_active_window_selection_verbs_sensitivity (BonoboMDI *mdi);
 
-static void gl_mdi_view_menu_item_toggled_cb (
-			BonoboUIComponent           *ui_component,
-			const char                  *path,
-			Bonobo_UIComponent_EventType type,
-			const char                  *state,
-			BonoboWindow                *win);
 
 
 /*****************************************************************************/
@@ -247,428 +234,16 @@ gl_mdi_app_created_cb (BonoboMDI *mdi, BonoboWindow *win)
 	GtkWidget *widget;
 	BonoboControl *control;
 	BonoboUIComponent *ui_component;
-        GnomeRecentView *view;
-        GnomeRecentModel *model;
-
-	static GtkTargetEntry drag_types[] =
-	{
-		{ "text/uri-list", 0, 0 },
-	};
-
-	static gint n_drag_types =
-		sizeof (drag_types) / sizeof (drag_types [0]);
 
 	gl_debug (DEBUG_MDI, "START");
 	
 	ui_component = bonobo_mdi_get_ui_component_from_window (win);
 	g_return_if_fail (ui_component != NULL);
-	
-	/* Set the toolbar style according to prefs */
-	gl_mdi_set_app_main_toolbar_style (win);
-		
-	/* Add listener fo the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewMainToolbar", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
 
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarSystem", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarIcon", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarIconText", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarTooltips", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	/* Set the toolbar style according to prefs */
-	gl_mdi_set_app_drawing_toolbar_style (win);
-		
-	/* Add listener fo the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewDrawingToolbar", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarSystem", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIcon", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIconText", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarTooltips", 
-			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-
-	gl_ui_set_verb_list_sensitive (ui_component, 
-				       gl_ui_no_docs_sensible_verbs,
-				       FALSE);
-
-        /* add a GeditRecentView object */
-        model = gl_recent_get_model ();
-        view = GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (ui_component,
-								"/menu/File/Recents"));
-        gnome_recent_view_set_model (view, model);
-        
-        g_signal_connect (G_OBJECT (view), "activate",
-                          G_CALLBACK (gl_file_open_recent), win);
+	gl_ui_init (ui_component, win);
 
 	gl_debug (DEBUG_MDI, "END");
 }
-
-/*---------------------------------------------------------------------------*/
-/* Menu item togglded callback.                                              */
-/*---------------------------------------------------------------------------*/
-static void
-gl_mdi_view_menu_item_toggled_cb (
-			BonoboUIComponent           *ui_component,
-			const char                  *path,
-			Bonobo_UIComponent_EventType type,
-			const char                  *state,
-			BonoboWindow                *win)
-{
-	gboolean s;
-
-	gl_debug (DEBUG_MDI, "%s toggled to '%s'", path, state);
-
-	s = (strcmp (state, "1") == 0);
-
-	if ((strcmp (path, "ViewMainToolbar") == 0) &&
-	    (s != gl_prefs->main_toolbar_visible))
-	{
-		gl_prefs->main_toolbar_visible = s;
-		gl_mdi_set_app_main_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarSystem") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
-		gl_mdi_set_app_main_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarIcon") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
-		gl_mdi_set_app_main_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarIconText") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
-		gl_mdi_set_app_main_toolbar_style (win);
-
-		return;
-	}
-
-	if ((strcmp (path, "MainToolbarTooltips") == 0) &&
-	    (s != gl_prefs->main_toolbar_view_tooltips))
-	{
-		gl_prefs->main_toolbar_view_tooltips = s;
-		gl_mdi_set_app_main_toolbar_style (win);
-
-		return;
-	}
-
-	if ((strcmp (path, "ViewDrawingToolbar") == 0) &&
-	    (s != gl_prefs->drawing_toolbar_visible))
-	{
-		gl_prefs->drawing_toolbar_visible = s;
-		gl_mdi_set_app_drawing_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "DrawingToolbarSystem") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
-		gl_mdi_set_app_drawing_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "DrawingToolbarIcon") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
-		gl_mdi_set_app_drawing_toolbar_style (win);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "DrawingToolbarIconText") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
-		gl_mdi_set_app_drawing_toolbar_style (win);
-
-		return;
-	}
-
-	if ((strcmp (path, "DrawingToolbarTooltips") == 0) &&
-	    (s != gl_prefs->drawing_toolbar_view_tooltips))
-	{
-		gl_prefs->drawing_toolbar_view_tooltips = s;
-		gl_mdi_set_app_drawing_toolbar_style (win);
-
-		return;
-	}
-
-}
-
-/*---------------------------------------------------------------------------*/
-/* Set main toolbar style.                                                   */
-/*---------------------------------------------------------------------------*/
-static void
-gl_mdi_set_app_main_toolbar_style (BonoboWindow *win)
-{
-	BonoboUIComponent *ui_component;
-	GConfClient *client;
-	gboolean labels;
-
-	gl_debug (DEBUG_MDI, "START");
-	
-	g_return_if_fail (BONOBO_IS_WINDOW (win));
-			
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (ui_component != NULL);
-			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	/* Updated view menu */
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ViewMainToolbar",
-			      gl_prefs->main_toolbar_visible);
-
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/MainToolbarSystem",
-				  gl_prefs->main_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/MainToolbarIcon",
-				  gl_prefs->main_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/MainToolbarIconText",
-				  gl_prefs->main_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/MainToolbarTooltips",
-				  gl_prefs->main_toolbar_visible);
-
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/MainToolbarSystem",
-			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
-
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/MainToolbarIcon",
-			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS);
-
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/MainToolbarIconText",
-			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
-
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/MainToolbarTooltips",
-			      gl_prefs->main_toolbar_view_tooltips);
-
-	
-	/* Actually update main_toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/MainToolbar",
-		"tips", gl_prefs->main_toolbar_view_tooltips ? "1" : "0",
-		NULL);
-	
-	switch (gl_prefs->main_toolbar_buttons_style)
-	{
-		case GL_TOOLBAR_SYSTEM:
-						
-			client = gconf_client_get_default ();
-			if (client == NULL) 
-				goto error;
-
-			labels = gconf_client_get_bool (client, 
-					"/desktop/gnome/interface/toolbar-labels", NULL);
-
-			g_object_unref (G_OBJECT (client));
-			
-			if (labels)
-			{			
-				gl_debug (DEBUG_MDI, "SYSTEM: BOTH");
-				bonobo_ui_component_set_prop (
-					ui_component, "/MainToolbar", "look", "both", NULL);
-			
-			}
-			else
-			{
-				gl_debug (DEBUG_MDI, "SYSTEM: ICONS");
-				bonobo_ui_component_set_prop (
-					ui_component, "/MainToolbar", "look", "icons", NULL);
-			}
-	
-			break;
-			
-		case GL_TOOLBAR_ICONS:
-			gl_debug (DEBUG_MDI, "GLABELS: ICONS");
-			bonobo_ui_component_set_prop (
-				ui_component, "/MainToolbar", "look", "icon", NULL);
-			
-			break;
-			
-		case GL_TOOLBAR_ICONS_AND_TEXT:
-			gl_debug (DEBUG_MDI, "GLABELS: ICONS_AND_TEXT");
-			bonobo_ui_component_set_prop (
-				ui_component, "/MainToolbar", "look", "both", NULL);
-			
-			break;
-		default:
-			goto error;
-			break;
-	}
-	
-	bonobo_ui_component_set_prop (
-			ui_component, "/MainToolbar",
-			"hidden", gl_prefs->main_toolbar_visible ? "0":"1", NULL);
-
- error:
-	bonobo_ui_component_thaw (ui_component, NULL);
-
-	gl_debug (DEBUG_MDI, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* Set drawing toolbar style.                                                   */
-/*---------------------------------------------------------------------------*/
-static void
-gl_mdi_set_app_drawing_toolbar_style (BonoboWindow *win)
-{
-	BonoboUIComponent *ui_component;
-	GConfClient *client;
-	gboolean labels;
-
-	gl_debug (DEBUG_MDI, "START");
-	
-	g_return_if_fail (BONOBO_IS_WINDOW (win));
-			
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (ui_component != NULL);
-			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	/* Updated view menu */
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ViewDrawingToolbar",
-			      gl_prefs->drawing_toolbar_visible);
-
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/DrawingToolbarSystem",
-				  gl_prefs->drawing_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/DrawingToolbarIcon",
-				  gl_prefs->drawing_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/DrawingToolbarIconText",
-				  gl_prefs->drawing_toolbar_visible);
-	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/DrawingToolbarTooltips",
-				  gl_prefs->drawing_toolbar_visible);
-
-	gl_ui_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarSystem",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
-
-	gl_ui_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarIcon",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS);
-
-	gl_ui_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarIconText",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
-
-	gl_ui_set_verb_state (ui_component, 
-			      "/commands/DrawingToolbarTooltips",
-			      gl_prefs->drawing_toolbar_view_tooltips);
-
-	
-	/* Actually update drawing_toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/DrawingToolbar",
-		"tips", gl_prefs->drawing_toolbar_view_tooltips ? "1" : "0",
-		NULL);
-	
-	switch (gl_prefs->drawing_toolbar_buttons_style)
-	{
-		case GL_TOOLBAR_SYSTEM:
-						
-			client = gconf_client_get_default ();
-			if (client == NULL) 
-				goto error;
-
-			labels = gconf_client_get_bool (client, 
-					"/desktop/gnome/interface/toolbar-labels", NULL);
-
-			g_object_unref (G_OBJECT (client));
-			
-			if (labels)
-			{			
-				gl_debug (DEBUG_MDI, "SYSTEM: BOTH");
-				bonobo_ui_component_set_prop (
-					ui_component, "/DrawingToolbar", "look", "both", NULL);
-			
-			}
-			else
-			{
-				gl_debug (DEBUG_MDI, "SYSTEM: ICONS");
-				bonobo_ui_component_set_prop (
-					ui_component, "/DrawingToolbar", "look", "icons", NULL);
-			}
-	
-			break;
-			
-		case GL_TOOLBAR_ICONS:
-			gl_debug (DEBUG_MDI, "GLABELS: ICONS");
-			bonobo_ui_component_set_prop (
-				ui_component, "/DrawingToolbar", "look", "icon", NULL);
-			
-			break;
-			
-		case GL_TOOLBAR_ICONS_AND_TEXT:
-			gl_debug (DEBUG_MDI, "GLABELS: ICONS_AND_TEXT");
-			bonobo_ui_component_set_prop (
-				ui_component, "/DrawingToolbar", "look", "both", NULL);
-			
-			break;
-		default:
-			goto error;
-			break;
-	}
-	
-	bonobo_ui_component_set_prop (
-			ui_component, "/DrawingToolbar",
-			"hidden", gl_prefs->drawing_toolbar_visible ? "0":"1", NULL);
-
- error:
-	bonobo_ui_component_thaw (ui_component, NULL);
-
-	gl_debug (DEBUG_MDI, "END");
-}
-
 
 /*---------------------------------------------------------------------------*/
 /* Child state changed callback.                                             */
@@ -810,11 +385,11 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 		}
 
 		
-		gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+		gtk_dialog_add_button (GTK_DIALOG (msgbox),
+				       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
 		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-			       	GTK_STOCK_SAVE,
-				GTK_RESPONSE_YES);
+				       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
 
@@ -841,22 +416,6 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 
 		gl_debug (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
 	}
-	
-	/* FIXME: there is a bug if you "close all" >1 docs, don't save the document
-	 * and then don't close the last one.
-	 */
-	/* Disable to avoid the bug */
-	/*
-	if (close)
-	{
-		g_signal_handlers_disconnect_by_func (child, 
-						      G_CALLBACK (gl_mdi_child_state_changed_cb),
-						      NULL);
-		g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
-						      G_CALLBACK (gl_mdi_child_undo_redo_state_changed_cb),
-						      NULL);
-	}
-	*/
 	
 	gl_debug (DEBUG_MDI, "END");
 	return close;
@@ -959,12 +518,9 @@ void gl_mdi_view_changed_cb (BonoboMDI *mdi, GtkWidget *old_view)
 void 
 gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 {
-	/* FIXME: it is too slooooooow! - Paolo */
-
 	BonoboWindow      *active_window = NULL;
 	BonoboMDIChild    *active_child = NULL;
 	glView            *view = NULL;
-	glLabel           *doc = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gl_debug (DEBUG_MDI, "START");
@@ -978,52 +534,16 @@ gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	g_return_if_fail (ui_component != NULL);
 	
 	active_child = bonobo_mdi_get_active_child (mdi);
-	
-	bonobo_ui_component_freeze (ui_component, NULL);
-	
+
 	if (active_child == NULL)
 	{
-		gl_ui_set_verb_list_sensitive (ui_component, 
-					       gl_ui_no_docs_sensible_verbs,
-					       FALSE);
-		goto end;
+		gl_ui_update_nodoc (ui_component);
+		return;
 	}
-	else
-	{
-		gl_ui_set_verb_list_sensitive (ui_component, 
-					       gl_ui_all_sensible_verbs,
-					       TRUE);
-	}
-
-	doc = GL_MDI_CHILD (active_child)->label;
-	g_return_if_fail (doc != NULL);
-
-	if (!gl_label_can_undo (doc))
-		gl_ui_set_verb_sensitive (ui_component,
-					  "/commands/EditUndo",
-					  FALSE);
-
-	if (!gl_label_can_redo (doc))
-		gl_ui_set_verb_sensitive (ui_component,
-					  "/commands/EditRedo",
-					  FALSE);
-
-	gl_ui_set_verb_list_sensitive (ui_component, 
-				       gl_ui_not_modified_doc_sensible_verbs,
-				       gl_label_is_modified (doc));
 
 	view = GL_VIEW (bonobo_mdi_get_active_view (mdi));
-	g_return_if_fail (view != NULL);
 
-	gl_ui_set_verb_list_sensitive (ui_component,
-				       gl_ui_selection_sensible_verbs,
-				       !gl_view_is_selection_empty (view));
-	gl_ui_set_verb_list_sensitive (ui_component,
-				       gl_ui_atomic_selection_sensible_verbs,
-				       gl_view_is_selection_atomic (view));
-
-end:
-	bonobo_ui_component_thaw (ui_component, NULL);
+	gl_ui_update_all (ui_component, view);
 
 	gl_debug (DEBUG_MDI, "END");
 }
@@ -1052,15 +572,7 @@ gl_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 	doc = GL_MDI_CHILD (active_child)->label;
 	g_return_if_fail (doc != NULL);
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_set_verb_sensitive (ui_component, "/commands/EditUndo", 
-				  gl_label_can_undo (doc));	
-
-	gl_ui_set_verb_sensitive (ui_component, "/commands/EditRedo", 
-				  gl_label_can_redo (doc));	
-
-	bonobo_ui_component_thaw (ui_component, NULL);
+	gl_ui_update_undo_redo_verbs (ui_component, doc);
 
 	gl_debug (DEBUG_MDI, "END");
 }
@@ -1086,16 +598,7 @@ gl_mdi_set_active_window_selection_verbs_sensitivity (BonoboMDI *mdi)
 	view = GL_VIEW (bonobo_mdi_get_active_view (mdi));
 	g_return_if_fail (view != NULL);
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_set_verb_list_sensitive (ui_component,
-				       gl_ui_selection_sensible_verbs,
-				       !gl_view_is_selection_empty (view));
-	gl_ui_set_verb_list_sensitive (ui_component,
-				       gl_ui_atomic_selection_sensible_verbs,
-				       gl_view_is_selection_atomic (view));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
+	gl_ui_update_selection_verbs (ui_component, view);
 
 	gl_debug (DEBUG_MDI, "END");
 }

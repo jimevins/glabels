@@ -56,6 +56,26 @@ gl_util_add_extension (const gchar * orig_filename)
 }
 
 /****************************************************************************/
+/* Remove ".glabels" extension from filename if needed.                     */
+/****************************************************************************/
+gchar *
+gl_util_remove_extension (const gchar * orig_filename)
+{
+	gchar *new_filename, *extension;
+
+	new_filename = g_strdup (orig_filename);
+
+	extension = strrchr (new_filename, '.');
+	if (extension != NULL) {
+		if (g_strcasecmp (extension, ".glabels") == 0) {
+			*extension = 0; /* truncate string, rm extension */
+		}
+	}
+
+	return new_filename;
+}
+
+/****************************************************************************/
 /* Make sure we have an absolute path to filename.                          */
 /****************************************************************************/
 gchar *
