@@ -126,6 +126,9 @@ static void       draw_outline                (PrintInfo        *pi,
 static void       clip_to_outline             (PrintInfo        *pi,
 					       glLabel          *label);
 
+static void       clip_punchouts              (PrintInfo        *pi,
+					       glLabel          *label);
+
 
 static void       create_rectangle_path         (GnomePrintContext *pc,
 						 gdouble            x0,
@@ -511,11 +514,13 @@ print_label (PrintInfo     *pi,
 		gnome_print_translate (pi->pc, width, 0.0);
 		gnome_print_scale (pi->pc, -1.0, 1.0);
 	}
+
+	clip_to_outline (pi, label);
+	draw_label (pi, label, record);
 	if (outline_flag) {
 		draw_outline (pi, label);
 	}
-	clip_to_outline (pi, label);
-	draw_label (pi, label, record);
+	clip_punchouts (pi, label);
 
 	gnome_print_grestore (pi->pc);
 
@@ -1080,6 +1085,51 @@ clip_to_outline (PrintInfo *pi,
 						    r1+waste);
 		}
 		gnome_print_clip (pi->pc);
+		break;
+
+	default:
+		g_warning ("Unknown template label style");
+		break;
+	}
+
+	gl_template_free (&template);
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Clip punchouts.  (Save some ink by not printing in CD holes)    */
+/*                                                                           */
+/* Ideally this would be done in clip_to_outline, but I am not sure how to   */
+/* invert the region for gnome_print_clip, so instead, I will just draw      */
+/* a white circle on top of everything else.                                 */
+/*---------------------------------------------------------------------------*/
+static void
+clip_punchouts (PrintInfo *pi,
+		glLabel   *label)
+{
+	gdouble r1, r2;
+	gdouble waste;
+	glTemplate *template;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	template = gl_label_get_template (label);
+
+	switch (template->label.style) {
+
+	case GL_TEMPLATE_STYLE_RECT:
+	case GL_TEMPLATE_STYLE_ROUND:
+		break;
+
+	case GL_TEMPLATE_STYLE_CD:
+		waste = template->label.cd.waste;
+		r1    = template->label.cd.r1;
+		r2    = template->label.cd.r2;
+		create_ellipse_path (pi->pc, r1, r1, r2-waste, r2-waste);
+		gnome_print_setrgbcolor (pi->pc, 1.0, 1.0, 1.0);
+		gnome_print_setopacity (pi->pc, 1.0);
+		gnome_print_fill (pi->pc);
 		break;
 
 	default:
