@@ -32,14 +32,17 @@
 /*========================================================*/
 
 struct _glLabelObjectPrivate {
-	gchar  *name;
-	gdouble x, y;
-	gdouble w, h;
+	gchar             *name;
+	gdouble            x, y;
+	gdouble            w, h;
+	glLabelObjectFlip  flip;
+	gdouble            rotate_degs;
 };
 
 enum {
 	CHANGED,
 	MOVED,
+	FLIP_ROTATE,
 	TOP,
 	BOTTOM,
 	LAST_SIGNAL
@@ -125,6 +128,15 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      gl_marshal_VOID__DOUBLE_DOUBLE,
 			      G_TYPE_NONE,
 			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
+	signals[FLIP_ROTATE] =
+		g_signal_new ("flip_rotate",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelObjectClass, flip_rotate),
+			      NULL, NULL,
+			      gl_marshal_VOID__INT_DOUBLE,
+			      G_TYPE_NONE,
+			      2, G_TYPE_INT, G_TYPE_DOUBLE);
 	signals[TOP] =
 		g_signal_new ("top",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -179,6 +191,9 @@ gl_label_object_finalize (GObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+/*****************************************************************************/
+/* New label object.                                                         */
+/*****************************************************************************/
 GObject *
 gl_label_object_new (glLabel *label)
 {
@@ -193,6 +208,28 @@ gl_label_object_new (glLabel *label)
 	gl_debug (DEBUG_LABEL, "END");
 
 	return G_OBJECT (object);
+}
+
+/*****************************************************************************/
+/* Copy properties of one label object to another.                           */
+/*****************************************************************************/
+void
+gl_label_object_copy_props (glLabelObject *dst_object,
+			    glLabelObject *src_object)
+{
+	gdouble           x, y, w, h;
+	glLabelObjectFlip flip;
+
+	g_return_if_fail (src_object && GL_IS_LABEL_OBJECT (src_object));
+	g_return_if_fail (dst_object && GL_IS_LABEL_OBJECT (dst_object));
+
+	gl_label_object_get_position    (src_object, &x, &y);
+	gl_label_object_get_size        (src_object, &w, &h);
+	flip = gl_label_object_get_flip (src_object);
+
+	gl_label_object_set_position (dst_object,  x,  y);
+	gl_label_object_set_size     (dst_object,  w,  h);
+	gl_label_object_set_flip     (dst_object,  flip);
 }
 
 /*****************************************************************************/
@@ -393,6 +430,74 @@ gl_label_object_get_size (glLabelObject *object,
 	*h = object->private->h;
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set flip state of object.                                                */
+/****************************************************************************/
+void
+gl_label_object_set_flip (glLabelObject     *object,
+			  glLabelObjectFlip  flip)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	object->private->flip = flip;
+
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
+		       flip, object->private->rotate_degs);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Flip object horizontally.                                                */
+/****************************************************************************/
+void
+gl_label_object_flip_horiz (glLabelObject *object)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	object->private->flip ^= GL_LABEL_OBJECT_FLIP_HORIZ;
+
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
+		       object->private->flip, object->private->rotate_degs);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Flip object vertically.                                                  */
+/****************************************************************************/
+void
+gl_label_object_flip_vert (glLabelObject *object)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	object->private->flip ^= GL_LABEL_OBJECT_FLIP_VERT;
+
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
+		       object->private->flip, object->private->rotate_degs);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get flip state of object.                                                */
+/****************************************************************************/
+glLabelObjectFlip
+gl_label_object_get_flip (glLabelObject      *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	return object->private->flip;
 }
 
 /****************************************************************************/

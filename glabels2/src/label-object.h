@@ -38,6 +38,13 @@ typedef enum {
         GL_LABEL_OBJECT_N_TYPES
 } glLabelObjectType;
 
+typedef enum {
+	GL_LABEL_OBJECT_FLIP_NONE  = 0,
+	GL_LABEL_OBJECT_FLIP_HORIZ = 1,
+	GL_LABEL_OBJECT_FLIP_VERT  = 2,
+	GL_LABEL_OBJECT_FLIP_BOTH  = (GL_LABEL_OBJECT_FLIP_HORIZ|GL_LABEL_OBJECT_FLIP_VERT)
+} glLabelObjectFlip;
+
 
 #define GL_TYPE_LABEL_OBJECT            (gl_label_object_get_type ())
 #define GL_LABEL_OBJECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_OBJECT, glLabelObject))
@@ -63,18 +70,32 @@ struct _glLabelObject {
 struct _glLabelObjectClass {
 	GObjectClass          parent_class;
 
-	void (*changed) (glLabelObject *object, gpointer user_data);
+	void (*changed)     (glLabelObject     *object,
+			     gpointer            user_data);
 
-	void (*moved)   (glLabelObject *object,
-			 gdouble dx, gdouble dy, gpointer user_data);
+	void (*moved)       (glLabelObject     *object,
+			     gdouble            dx,
+			     gdouble            dy,
+			     gpointer           user_data);
 
-	void (*top)     (glLabelObject *object, gpointer user_data);
-	void (*bottom)  (glLabelObject *object, gpointer user_data);
+	void (*flip_rotate) (glLabelObject     *object,
+			     glLabelObjectFlip  flip,
+			     gdouble            rotate,
+			     gpointer           user_data);
+
+	void (*top)         (glLabelObject     *object,
+			     gpointer           user_data);
+
+	void (*bottom)      (glLabelObject     *object,
+			     gpointer           user_data);
 };
 
 GType     gl_label_object_get_type              (void);
 
 GObject  *gl_label_object_new                   (glLabel       *label);
+
+void      gl_label_object_copy_props            (glLabelObject *dst_object,
+						 glLabelObject *src_object);
 
 void      gl_label_object_emit_changed          (glLabelObject *object);
 
@@ -104,6 +125,15 @@ void      gl_label_object_get_size              (glLabelObject *object,
 
 void      gl_label_object_raise_to_top          (glLabelObject *object);
 void      gl_label_object_lower_to_bottom       (glLabelObject *object);
+
+void              gl_label_object_set_flip      (glLabelObject     *object,
+						 glLabelObjectFlip  flip);
+
+void              gl_label_object_flip_horiz    (glLabelObject     *object);
+
+void              gl_label_object_flip_vert     (glLabelObject     *object);
+
+glLabelObjectFlip gl_label_object_get_flip      (glLabelObject     *object);
 
 G_END_DECLS
 
