@@ -1,5 +1,15 @@
 2003-12-27  Jim Evins  <evins@snaught.com>
 
+	reviewed by: <delete if not using a buddy>
+
+	* barcode-0.98/Makefile.am:
+		Removed config.stat entry from EXTRA_DIST files.
+	
+	* barcode-0.98/Makefile.in:
+		Removed.
+
+2003-12-27  Jim Evins  <evins@snaught.com>
+
 	* configure.in:
 		Updated to work with latest gnome-common package from CVS.
 		Removed recursive configuration of barcode-0.98.

@@ -25,7 +25,6 @@ EXTRA_DIST =			\
 	ChangeLog		\
 	cmdline.c		\
 	cmdline.h		\
-	config.status		\
 	configure		\
 	configure.in.dist	\
 	COPYING			\
