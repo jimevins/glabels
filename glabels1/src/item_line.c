@@ -462,8 +462,8 @@ gl_item_line_create_event_handler (GnomeCanvas * canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			object->x = x0;
 			object->y = y0;
 			object->arg.line.dx = (x - x0);
