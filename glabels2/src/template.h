@@ -46,18 +46,21 @@ typedef struct {
 	glTemplateLabelParent parent;
 
 	gdouble               w, h, r;  /* Dimensions */
+	gdouble               waste;
 } glTemplateLabelRect;
 
 typedef struct {
 	glTemplateLabelParent parent;
 
 	gdouble               r;        /* Dimensions */
+	gdouble               waste;
 } glTemplateLabelRound;
 
 typedef struct {
 	glTemplateLabelParent parent;
 
 	gdouble               r1, r2, w, h; /* Dimensions, w&h are for business card CDs */
+	gdouble               waste;
 } glTemplateLabelCD;
 
 typedef union {

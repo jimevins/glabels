@@ -1033,6 +1033,7 @@ clip_to_outline (PrintInfo *pi,
 {
 	gdouble w, h, r;
 	gdouble r1;
+	gdouble waste;
 	glTemplate *template;
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -1044,36 +1045,41 @@ clip_to_outline (PrintInfo *pi,
 	case GL_TEMPLATE_STYLE_RECT:
 		gl_label_get_size (label, &w, &h);
 		r = template->label.rect.r;
+		waste = template->label.rect.waste;
 		if (r == 0.0) {
 			/* simple rectangle */
-			create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
+			create_rectangle_path (pi->pc, -waste, -waste, w+waste, h+waste);
 		} else {
 			/* rectangle with rounded corners */
-			create_rounded_rectangle_path (pi->pc, 0.0, 0.0,
-						       w, h, r);
+			create_rounded_rectangle_path (pi->pc, -waste, -waste,
+						       w+waste, h+waste, r);
 		}
 		gnome_print_clip (pi->pc);
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
 		r1 = template->label.round.r;
-		create_ellipse_path (pi->pc, r1, r1, r1, r1);
+		waste = template->label.round.waste;
+		create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
 		gnome_print_clip (pi->pc);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
+		waste = template->label.cd.waste;
 		if ((template->label.cd.h == 0) && (template->label.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
 			r1 = template->label.cd.r1;
-			create_ellipse_path (pi->pc, r1, r1, r1, r1);
-			gnome_print_clip (pi->pc);
+			create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
 		} else {
 			/* Business Card CD style, clipped round label w/ hole */
 			gl_label_get_size (label, &w, &h);
 			r1 = template->label.cd.r1;
-			create_clipped_circle_path (pi->pc, w/2, h/2, w, h, r1);
-			gnome_print_clip (pi->pc);
+			create_clipped_circle_path (pi->pc,
+						    w/2, h/2,
+						    w+2*waste, h+2*waste,
+						    r1+waste);
 		}
+		gnome_print_clip (pi->pc);
 		break;
 
 	default:

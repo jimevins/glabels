@@ -217,10 +217,13 @@ xml_parse_label_rectangle (xmlNodePtr  label_node,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
+	template->label.style = GL_TEMPLATE_STYLE_RECT;
 
 	template->label.rect.w = gl_xml_get_prop_length (label_node, "width", 0);
 	template->label.rect.h = gl_xml_get_prop_length (label_node, "height", 0);
 	template->label.rect.r = gl_xml_get_prop_length (label_node, "round", 0);
+
+	template->label.rect.waste = gl_xml_get_prop_length (label_node, "waste", 0);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -249,7 +252,11 @@ xml_parse_label_round (xmlNodePtr  label_node,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
+	template->label.style = GL_TEMPLATE_STYLE_ROUND;
+
 	template->label.round.r = gl_xml_get_prop_length (label_node, "radius", 0);
+
+	template->label.round.waste = gl_xml_get_prop_length (label_node, "waste", 0);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -278,10 +285,14 @@ xml_parse_label_cd (xmlNodePtr  label_node,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
+	template->label.style = GL_TEMPLATE_STYLE_CD;
+
 	template->label.cd.r1 = gl_xml_get_prop_length (label_node, "radius", 0);
 	template->label.cd.r2 = gl_xml_get_prop_length (label_node, "hole", 0);
 	template->label.cd.w  = gl_xml_get_prop_length (label_node, "width", 0);
 	template->label.cd.h  = gl_xml_get_prop_length (label_node, "height", 0);
+
+	template->label.cd.waste = gl_xml_get_prop_length (label_node, "waste", 0);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -470,12 +481,14 @@ xml_add_label (const glTemplate *template,
 		gl_xml_set_prop_length (node, "width",  template->label.rect.w);
 		gl_xml_set_prop_length (node, "height", template->label.rect.h);
 		gl_xml_set_prop_length (node, "round",  template->label.rect.r);
+		gl_xml_set_prop_length (node, "waste",  template->label.rect.waste);
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
 		node = xmlNewChild(root, ns, "Label-round", NULL);
 		xmlSetProp (node, "id", "0");
 		gl_xml_set_prop_length (node, "radius",  template->label.round.r);
+		gl_xml_set_prop_length (node, "waste",   template->label.round.waste);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
@@ -489,6 +502,7 @@ xml_add_label (const glTemplate *template,
 		if (template->label.cd.h != 0.0) {
 			gl_xml_set_prop_length (node, "height", template->label.cd.h);
 		}
+		gl_xml_set_prop_length (node, "waste",  template->label.cd.waste);
 		break;
 
 	default:
