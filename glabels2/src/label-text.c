@@ -229,12 +229,6 @@ copy (glLabelObject *dst_object,
 	glLabelText      *ltext     = (glLabelText *)src_object;
 	glLabelText      *new_ltext = (glLabelText *)dst_object;
 	GList            *lines;
-	gchar            *font_family;
-	gdouble           font_size;
-	GnomeFontWeight   font_weight;
-	gboolean          font_italic_flag;
-	guint             color;
-	GtkJustification  just;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -252,7 +246,6 @@ copy (glLabelObject *dst_object,
 	new_ltext->private->just             = ltext->private->just;
 
 	gl_text_node_lines_free (&lines);
-	g_free (font_family);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
