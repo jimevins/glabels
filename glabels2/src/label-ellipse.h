@@ -54,20 +54,6 @@ GType           gl_label_ellipse_get_type       (void);
 
 GObject        *gl_label_ellipse_new            (glLabel        *label);
 
-void            gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
-						 gdouble         line_width);
-
-void            gl_label_ellipse_set_line_color (glLabelEllipse *lellipse,
-						 guint           line_color);
-
-void            gl_label_ellipse_set_fill_color (glLabelEllipse *lellipse,
-						 guint           fill_color);
-
-gdouble         gl_label_ellipse_get_line_width (glLabelEllipse *lellipse);
-guint           gl_label_ellipse_get_line_color (glLabelEllipse *lellipse);
-guint           gl_label_ellipse_get_fill_color (glLabelEllipse *lellipse);
-
-
 G_END_DECLS
 
 #endif /* __LABEL_ELLIPSE_H__ */

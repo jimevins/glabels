@@ -178,8 +178,8 @@ gl_view_line_new (glLabelLine *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_line_get_line_width(object);
-	line_color = gl_label_line_get_line_color(object);
+	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
 
 	/* Create analogous canvas item. */
 	points = gnome_canvas_points_new (2);
@@ -261,8 +261,8 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_line_get_line_width(GL_LABEL_LINE(object));
-	line_color = gl_label_line_get_line_color(GL_LABEL_LINE(object));
+	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
 
 	/* Adjust appearance of analogous canvas item. */
 	points = gnome_canvas_points_new (2);
@@ -340,10 +340,10 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_lsize (editor, w, h);
 
-	line_color = gl_label_line_get_line_color (GL_LABEL_LINE(object));
+	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_color (editor, line_color);
 
-	line_width = gl_label_line_get_line_width (GL_LABEL_LINE(object));
+	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_width (editor, line_width);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -382,8 +382,8 @@ update_editor_from_label_cb (glLabel        *label,
 	gl_label_get_size (label, &label_width, &label_height);
 	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
 					   label_width, label_height);
-	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
-				       label_width, label_height);
+	gl_object_editor_set_max_lsize (GL_OBJECT_EDITOR (editor),
+					label_width, label_height);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -456,9 +456,9 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 						      x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
-			gl_label_line_set_line_width (GL_LABEL_LINE(object),
+			gl_label_object_set_line_width (GL_LABEL_OBJECT(object),
 						      gl_view_get_default_line_width(view));
-			gl_label_line_set_line_color (GL_LABEL_LINE(object),
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						     gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5));
 			view_line = gl_view_line_new (GL_LABEL_LINE(object),
 						      view);
@@ -486,7 +486,7 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 			h = y - y0;
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
-			gl_label_line_set_line_color (GL_LABEL_LINE(object),
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						     gl_view_get_default_line_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_line));

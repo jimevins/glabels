@@ -47,18 +47,22 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_line_class_init    (glLabelLineClass *klass);
-static void gl_label_line_instance_init (glLabelLine      *lline);
-static void gl_label_line_finalize      (GObject          *object);
+static void    gl_label_line_class_init    (glLabelLineClass *klass);
+static void    gl_label_line_instance_init (glLabelLine      *lline);
+static void    gl_label_line_finalize      (GObject          *object);
 
-static void copy                        (glLabelObject    *dst_object,
-					 glLabelObject    *src_object);
+static void    copy                        (glLabelObject    *dst_object,
+					    glLabelObject    *src_object);
 
-static void set_line_color              (glLabelObject    *object,
-					 guint             line_color);
+static void    set_line_color              (glLabelObject    *object,
+					    guint             line_color);
 
-static void set_line_width              (glLabelObject    *object,
-					 gdouble           line_width);
+static void    set_line_width              (glLabelObject    *object,
+					    gdouble           line_width);
+
+static guint   get_line_color              (glLabelObject    *object);
+
+static gdouble get_line_width              (glLabelObject    *object);
 
 
 
@@ -101,6 +105,8 @@ gl_label_line_class_init (glLabelLineClass *klass)
 	label_object_class->copy           = copy;
 	label_object_class->set_line_color = set_line_color;
 	label_object_class->set_line_width = set_line_width;
+	label_object_class->get_line_color = get_line_color;
+	label_object_class->get_line_width = get_line_width;
 
 	object_class->finalize = gl_label_line_finalize;
 }
@@ -157,62 +163,15 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 	g_return_if_fail (new_lline && GL_IS_LABEL_LINE (new_lline));
 
-	line_width = gl_label_line_get_line_width (lline);
-	line_color = gl_label_line_get_line_color (lline);
+	line_width = get_line_width (src_object);
+	line_color = get_line_color (src_object);
 
-	gl_label_line_set_line_width (new_lline, line_width);
-	gl_label_line_set_line_color (new_lline, line_color);
+	set_line_width (dst_object, line_width);
+	set_line_color (dst_object, line_color);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
 
-
-/*****************************************************************************/
-/* Set object params.                                                        */
-/*****************************************************************************/
-void
-gl_label_line_set_line_width (glLabelLine *lline,
-			      gdouble      line_width)
-{
-	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
-
-	if ( lline->private->line_width != line_width ) {
-		lline->private->line_width = line_width;
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
-	}
-}
-
-void
-gl_label_line_set_line_color (glLabelLine *lline,
-			      guint        line_color)
-{
-	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
-
-	if ( lline->private->line_color != line_color ) {
-		lline->private->line_color = line_color;
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
-	}
-}
-
-
-/*****************************************************************************/
-/* Get object params.                                                        */
-/*****************************************************************************/
-gdouble
-gl_label_line_get_line_width (glLabelLine *lline)
-{
-	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0.0);
-
-	return lline->private->line_width;
-}
-
-guint
-gl_label_line_get_line_color (glLabelLine *lline)
-{
-	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0);
-
-	return lline->private->line_color;
-}
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set line color method.                                          */
@@ -248,4 +207,30 @@ set_line_width (glLabelObject *object,
 	}
 }
 
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static gdouble
+get_line_width (glLabelObject *object)
+{
+	glLabelLine *lline = (glLabelLine *)object;
+
+	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0.0);
+
+	return lline->private->line_width;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get line width method.                                          */
+/*---------------------------------------------------------------------------*/
+static guint
+get_line_color (glLabelObject *object)
+{
+	glLabelLine *lline = (glLabelLine *)object;
+
+	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0);
+
+	return lline->private->line_color;
+}
 

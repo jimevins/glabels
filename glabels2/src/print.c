@@ -732,10 +732,12 @@ draw_text_object (PrintInfo     *pi,
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &object_w, &object_h);
 	lines = gl_label_text_get_lines (object);
-	gl_label_text_get_props (object,
-				 &font_family, &font_size, &font_weight,
-				 &font_italic_flag,
-				 &color, &just);
+	font_family = gl_label_object_get_font_family (GL_LABEL_OBJECT(object));
+	font_size = gl_label_object_get_font_size (GL_LABEL_OBJECT(object));
+	font_weight = gl_label_object_get_font_weight (GL_LABEL_OBJECT(object));
+	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object));
+	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object));
+	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
 
 	font = gnome_font_find_closest_from_weight_slant (
                                        font_family,
@@ -813,9 +815,9 @@ draw_box_object (PrintInfo  *pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_box_get_line_width (object);
-	line_color = gl_label_box_get_line_color (object);
-	fill_color = gl_label_box_get_fill_color (object);
+	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
 
 	/* Paint fill color */
 	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
@@ -853,8 +855,8 @@ draw_line_object (PrintInfo   *pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_line_get_line_width (object);
-	line_color = gl_label_line_get_line_color (object);
+	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 
 	gnome_print_moveto (pi->pc, 0.0, 0.0);
 	gnome_print_lineto (pi->pc, w, h);
@@ -883,9 +885,9 @@ draw_ellipse_object (PrintInfo      *pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_ellipse_get_line_width (object);
-	line_color = gl_label_ellipse_get_line_color (object);
-	fill_color = gl_label_ellipse_get_fill_color (object);
+	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
 
 	rx = w / 2.0;
 	ry = h / 2.0;
@@ -990,7 +992,8 @@ draw_barcode_object (PrintInfo      *pi,
 
 	text_node = gl_label_barcode_get_data (object);
 	gl_label_barcode_get_props (object,
-				    &style, &text_flag, &checksum_flag, &color);
+				    &style, &text_flag, &checksum_flag);
+	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 
 	text = gl_text_node_expand (text_node, record);

@@ -706,6 +706,150 @@ gl_label_object_set_text_color (glLabelObject     *object,
 }
 
 /*****************************************************************************/
+/* Get font family for all text contained in object.                         */
+/*****************************************************************************/
+gchar *
+gl_label_object_get_font_family (glLabelObject     *object)
+{
+	gchar *ret = NULL;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_family != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_family (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get font size for all text contained in object.                          */
+/****************************************************************************/
+gdouble
+gl_label_object_get_font_size (glLabelObject     *object)
+{
+	gdouble ret = 0.0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_size != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_size (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get font weight for all text contained in object.                        */
+/****************************************************************************/
+GnomeFontWeight
+gl_label_object_get_font_weight (glLabelObject     *object)
+{
+	GnomeFontWeight ret = GNOME_FONT_BOOK;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), GNOME_FONT_BOOK);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get font italic flag for all text contained in object.                   */
+/****************************************************************************/
+gboolean
+gl_label_object_get_font_italic_flag (glLabelObject     *object)
+{
+	gboolean ret = FALSE;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_italic_flag != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_italic_flag (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get text alignment for all text contained in object.                     */
+/****************************************************************************/
+GtkJustification
+gl_label_object_get_text_alignment (glLabelObject     *object)
+{
+	GtkJustification ret = GTK_JUSTIFY_LEFT;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), GTK_JUSTIFY_LEFT);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get text color for all text contained in object.                         */
+/****************************************************************************/
+guint
+gl_label_object_get_text_color (glLabelObject     *object)
+{
+	guint ret = 0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_color (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/*****************************************************************************/
 /* Can fill properties be set for this object?                               */
 /*****************************************************************************/
 gboolean
@@ -746,6 +890,30 @@ gl_label_object_set_fill_color (glLabelObject     *object,
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get fill color for object.                                               */
+/****************************************************************************/
+guint
+gl_label_object_get_fill_color (glLabelObject     *object)
+{
+	guint ret = 0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_fill_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_fill_color (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
 }
 
 /*****************************************************************************/
@@ -791,6 +959,30 @@ gl_label_object_set_line_color (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+/****************************************************************************/
+/* Get line color for object.                                               */
+/****************************************************************************/
+guint
+gl_label_object_get_line_color (glLabelObject     *object)
+{
+	guint ret = 0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_line_color (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
 /*****************************************************************************/
 /* Can line width property be set for this object?                           */
 /*****************************************************************************/
@@ -832,6 +1024,30 @@ gl_label_object_set_line_width (glLabelObject     *object,
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get line width for object.                                               */
+/****************************************************************************/
+gdouble
+gl_label_object_get_line_width (glLabelObject     *object)
+{
+	gdouble ret = 0.0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_width != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_line_width (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
 }
 
 /****************************************************************************/

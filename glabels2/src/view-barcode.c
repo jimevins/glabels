@@ -285,7 +285,8 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_object_editor_get_bc_style (editor, &style, &text_flag, &cs_flag);
 	color = gl_object_editor_get_bc_color (editor);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, cs_flag, color);
+				    style, text_flag, cs_flag);
+	gl_label_object_set_line_color (object, color);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_editor_from_object_cb,
@@ -317,7 +318,8 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_size (editor, w, h);
 
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &cs_flag, &color);
+				    &style, &text_flag, &cs_flag);
+	color = gl_label_object_get_line_color (object);
 	gl_object_editor_set_bc_style (editor, style, text_flag, cs_flag);
 	gl_object_editor_set_bc_color (editor, color);
 
@@ -447,7 +449,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
-						    TRUE,
+						    TRUE);
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						    gl_color_set_opacity (
 						      gl_view_get_default_line_color(view),
                                                       0.5));
@@ -475,8 +478,9 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
-						    TRUE,
-						    gl_view_get_default_line_color(view));
+						    TRUE);
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
+							gl_view_get_default_line_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
 			gl_view_arrow_mode (view);
@@ -535,7 +539,8 @@ draw_barcode (glViewBarcode *view_barcode)
 	/* Query label object and properties */
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag, &color);
+				    &style, &text_flag, &checksum_flag);
+	color = gl_label_object_get_line_color (object);
 	gl_label_object_get_size (object, &w, &h);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {

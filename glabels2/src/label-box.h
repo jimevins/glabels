@@ -54,20 +54,6 @@ GType         gl_label_box_get_type       (void);
 
 GObject      *gl_label_box_new            (glLabel    *label);
 
-void          gl_label_box_set_line_width (glLabelBox *lbox,
-					   gdouble     line_width);
-
-void          gl_label_box_set_line_color (glLabelBox *lbox,
-					   guint       line_color);
-
-void          gl_label_box_set_fill_color (glLabelBox *lbox,
-					   guint       fill_color);
-
-gdouble       gl_label_box_get_line_width (glLabelBox *lbox);
-guint         gl_label_box_get_line_color (glLabelBox *lbox);
-guint         gl_label_box_get_fill_color (glLabelBox *lbox);
-
-
 G_END_DECLS
 
 #endif /* __LABEL_BOX_H__ */

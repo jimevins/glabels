@@ -48,21 +48,27 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_box_class_init    (glLabelBoxClass *klass);
-static void gl_label_box_instance_init (glLabelBox      *lbox);
-static void gl_label_box_finalize      (GObject         *object);
+static void    gl_label_box_class_init    (glLabelBoxClass *klass);
+static void    gl_label_box_instance_init (glLabelBox      *lbox);
+static void    gl_label_box_finalize      (GObject         *object);
 
-static void copy                       (glLabelObject   *dst_object,
-					glLabelObject   *src_object);
+static void    copy                       (glLabelObject   *dst_object,
+					   glLabelObject   *src_object);
 
-static void set_fill_color              (glLabelObject    *object,
-					 guint             fill_color);
+static void    set_fill_color              (glLabelObject    *object,
+					    guint             fill_color);
 
-static void set_line_color              (glLabelObject    *object,
-					 guint             line_color);
+static void    set_line_color              (glLabelObject    *object,
+					    guint             line_color);
 
-static void set_line_width              (glLabelObject    *object,
-					 gdouble           line_width);
+static void    set_line_width              (glLabelObject    *object,
+					    gdouble           line_width);
+
+static guint   get_fill_color              (glLabelObject    *object);
+
+static guint   get_line_color              (glLabelObject    *object);
+
+static gdouble get_line_width              (glLabelObject    *object);
 
 
 
@@ -106,6 +112,9 @@ gl_label_box_class_init (glLabelBoxClass *klass)
 	label_object_class->set_fill_color = set_fill_color;
 	label_object_class->set_line_color = set_line_color;
 	label_object_class->set_line_width = set_line_width;
+	label_object_class->get_fill_color = get_fill_color;
+	label_object_class->get_line_color = get_line_color;
+	label_object_class->get_line_width = get_line_width;
 
 	object_class->finalize = gl_label_box_finalize;
 }
@@ -162,83 +171,17 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 	g_return_if_fail (new_lbox && GL_IS_LABEL_BOX (new_lbox));
 
-	line_width = gl_label_box_get_line_width (lbox);
-	line_color = gl_label_box_get_line_color (lbox);
-	fill_color = gl_label_box_get_fill_color (lbox);
+	line_width = get_line_width (src_object);
+	line_color = get_line_color (src_object);
+	fill_color = get_fill_color (src_object);
 
-	gl_label_box_set_line_width (new_lbox, line_width);
-	gl_label_box_set_line_color (new_lbox, line_color);
-	gl_label_box_set_fill_color (new_lbox, fill_color);
+	set_line_width (dst_object, line_width);
+	set_line_color (dst_object, line_color);
+	set_fill_color (dst_object, fill_color);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
 
-
-/*****************************************************************************/
-/* Set object params.                                                        */
-/*****************************************************************************/
-void
-gl_label_box_set_line_width (glLabelBox *lbox,
-			     gdouble     line_width)
-{
-	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
-
-	if ( lbox->private->line_width != line_width ) {
-		lbox->private->line_width = line_width;
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
-	}
-}
-
-void
-gl_label_box_set_line_color (glLabelBox *lbox,
-			     guint       line_color)
-{
-	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
-
-	if ( lbox->private->line_color != line_color ) {
-		lbox->private->line_color = line_color;
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
-	}
-}
-
-void
-gl_label_box_set_fill_color (glLabelBox *lbox,
-			     guint       fill_color)
-{
-	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
-
-	if ( lbox->private->fill_color != fill_color ) {
-		lbox->private->fill_color = fill_color;
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
-	}
-}
-
-/*****************************************************************************/
-/* Get object params.                                                        */
-/*****************************************************************************/
-gdouble
-gl_label_box_get_line_width (glLabelBox *lbox)
-{
-	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0.0);
-
-	return lbox->private->line_width;
-}
-
-guint
-gl_label_box_get_line_color (glLabelBox *lbox)
-{
-	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
-
-	return lbox->private->line_color;
-}
-
-guint
-gl_label_box_get_fill_color (glLabelBox *lbox)
-{
-	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
-
-	return lbox->private->fill_color;
-}
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set fill color method.                                          */
@@ -291,4 +234,43 @@ set_line_width (glLabelObject *object,
 	}
 }
 
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get fill color method.                                          */
+/*---------------------------------------------------------------------------*/
+static gdouble
+get_line_width (glLabelObject *object)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0.0);
+
+	return lbox->private->line_width;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static guint
+get_line_color (glLabelObject *object)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
+
+	return lbox->private->line_color;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get line width method.                                          */
+/*---------------------------------------------------------------------------*/
+static guint
+get_fill_color (glLabelObject *object)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
+
+	return lbox->private->fill_color;
+}
 

@@ -179,9 +179,9 @@ gl_view_box_new (glLabelBox *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_box_get_line_width(object);
-	line_color = gl_label_box_get_line_color(object);
-	fill_color = gl_label_box_get_fill_color(object);
+	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	fill_color = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
 
 	/* Create analogous canvas item. */
 	view_box->private->item =
@@ -261,9 +261,9 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_box_get_line_width(GL_LABEL_BOX(object));
-	line_color = gl_label_box_get_line_color(GL_LABEL_BOX(object));
-	fill_color = gl_label_box_get_fill_color(GL_LABEL_BOX(object));
+	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
+	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	fill_color = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
 
 	/* Adjust appearance of analogous canvas item. */
 	gnome_canvas_item_set (view_box->private->item,
@@ -336,13 +336,13 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_size (editor, w, h);
 
-	fill_color = gl_label_box_get_fill_color (GL_LABEL_BOX(object));
+	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_fill_color (editor, fill_color);
 
-	line_color = gl_label_box_get_line_color (GL_LABEL_BOX(object));
+	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_color (editor, line_color);
 
-	line_width = gl_label_box_get_line_width (GL_LABEL_BOX(object));
+	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_width (editor, line_width);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -458,11 +458,11 @@ gl_view_box_create_event_handler (GnomeCanvas *canvas,
 						  0.0, 0.0);
 			line_color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
 			fill_color = gl_color_set_opacity (gl_view_get_default_fill_color(view), 0.5);
-			gl_label_box_set_line_width (GL_LABEL_BOX(object),
+			gl_label_object_set_line_width (GL_LABEL_OBJECT(object),
 						     gl_view_get_default_line_width(view));
-			gl_label_box_set_line_color (GL_LABEL_BOX(object),
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						     line_color);
-			gl_label_box_set_fill_color (GL_LABEL_BOX(object),
+			gl_label_object_set_fill_color (GL_LABEL_OBJECT(object),
 						     fill_color);
 			view_box = gl_view_box_new (GL_LABEL_BOX(object),
 						    view);
@@ -492,9 +492,9 @@ gl_view_box_create_event_handler (GnomeCanvas *canvas,
 			h = MAX (y, y0) - MIN (y, y0);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
-			gl_label_box_set_line_color (GL_LABEL_BOX(object),
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						     gl_view_get_default_line_color(view));
-			gl_label_box_set_fill_color (GL_LABEL_BOX(object),
+			gl_label_object_set_fill_color (GL_LABEL_OBJECT(object),
 						     gl_view_get_default_fill_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_box));

@@ -70,43 +70,61 @@ struct _glLabelObjectClass {
 	 * Methods
 	 */
 
-	void (*set_size)             (glLabelObject     *object,
-				      gdouble            w,
-				      gdouble            h);
+	void              (*set_size)             (glLabelObject     *object,
+						   gdouble            w,
+						   gdouble            h);
 
-	void (*get_size)             (glLabelObject     *object,
-				      gdouble           *w,
-				      gdouble           *h);
+	void              (*get_size)             (glLabelObject     *object,
+						   gdouble           *w,
+						   gdouble           *h);
 
-	void (*set_font_family)      (glLabelObject     *object,
-				      const gchar       *font_family);
+	void              (*set_font_family)      (glLabelObject     *object,
+						   const gchar       *font_family);
 
-	void (*set_font_size)        (glLabelObject     *object,
-				      gdouble            font_size);
+	void              (*set_font_size)        (glLabelObject     *object,
+						   gdouble            font_size);
 
-	void (*set_font_weight)      (glLabelObject     *object,
-				      GnomeFontWeight    font_weight);
+	void              (*set_font_weight)      (glLabelObject     *object,
+						   GnomeFontWeight    font_weight);
 
-	void (*set_font_italic_flag) (glLabelObject     *object,
-				      gboolean           font_italic_flag);
+	void              (*set_font_italic_flag) (glLabelObject     *object,
+						   gboolean           font_italic_flag);
 
-	void (*set_text_alignment)   (glLabelObject     *object,
-				      GtkJustification   text_alignment);
+	void              (*set_text_alignment)   (glLabelObject     *object,
+						   GtkJustification   text_alignment);
 
-	void (*set_text_color)       (glLabelObject     *object,
-				      guint              text_color);
+	void              (*set_text_color)       (glLabelObject     *object,
+						   guint              text_color);
 
-	void (*set_fill_color)       (glLabelObject     *object,
-				      guint              fill_color);
+	void              (*set_fill_color)       (glLabelObject     *object,
+						   guint              fill_color);
 
-	void (*set_line_color)       (glLabelObject     *object,
-				      guint              line_color);
+	void              (*set_line_color)       (glLabelObject     *object,
+						   guint              line_color);
 
-	void (*set_line_width)       (glLabelObject     *object,
-				      gdouble            line_width);
+	void              (*set_line_width)       (glLabelObject     *object,
+						   gdouble            line_width);
 
-	void (*copy)                 (glLabelObject     *dst_object,
-				      glLabelObject     *src_object);
+	gchar            *(*get_font_family)      (glLabelObject     *object);
+
+	gdouble           (*get_font_size)        (glLabelObject     *object);
+
+	GnomeFontWeight   (*get_font_weight)      (glLabelObject     *object);
+
+	gboolean          (*get_font_italic_flag) (glLabelObject     *object);
+
+	GtkJustification  (*get_text_alignment)   (glLabelObject     *object);
+
+	guint             (*get_text_color)       (glLabelObject     *object);
+
+	guint             (*get_fill_color)       (glLabelObject     *object);
+
+	guint             (*get_line_color)       (glLabelObject     *object);
+
+	gdouble           (*get_line_width)       (glLabelObject     *object);
+
+	void              (*copy)                 (glLabelObject     *dst_object,
+						   glLabelObject     *src_object);
 
 	/*
 	 * Signals
@@ -178,6 +196,7 @@ void           gl_label_object_get_extent            (glLabelObject     *object,
 						      gdouble           *x2,
 						      gdouble           *y2);
 
+
 gboolean       gl_label_object_can_text              (glLabelObject     *object);
 
 void           gl_label_object_set_font_family       (glLabelObject     *object,
@@ -199,10 +218,25 @@ void           gl_label_object_set_text_color        (glLabelObject     *object,
 						      guint              text_color);
 
 
+gchar           *gl_label_object_get_font_family       (glLabelObject     *object);
+
+gdouble          gl_label_object_get_font_size         (glLabelObject     *object);
+
+GnomeFontWeight  gl_label_object_get_font_weight       (glLabelObject     *object);
+
+gboolean         gl_label_object_get_font_italic_flag  (glLabelObject     *object);
+
+GtkJustification gl_label_object_get_text_alignment    (glLabelObject     *object);
+
+guint            gl_label_object_get_text_color        (glLabelObject     *object);
+
+
 gboolean       gl_label_object_can_fill              (glLabelObject     *object);
 
 void           gl_label_object_set_fill_color        (glLabelObject     *object,
 						      guint              fill_color);
+
+guint          gl_label_object_get_fill_color        (glLabelObject     *object);
 
 
 gboolean       gl_label_object_can_line_color        (glLabelObject     *object);
@@ -210,10 +244,14 @@ gboolean       gl_label_object_can_line_color        (glLabelObject     *object)
 void           gl_label_object_set_line_color        (glLabelObject     *object,
 						      guint              line_color);
 
+guint          gl_label_object_get_line_color        (glLabelObject     *object);
+
 gboolean       gl_label_object_can_line_width        (glLabelObject     *object);
 
 void           gl_label_object_set_line_width        (glLabelObject     *object,
 						      gdouble            line_width);
+
+gdouble        gl_label_object_get_line_width        (glLabelObject     *object);
 
 
 void           gl_label_object_raise_to_top          (glLabelObject     *object);

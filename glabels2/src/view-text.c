@@ -317,30 +317,24 @@ update_object_from_editor_cb (glObjectEditor *editor,
 
 
 	gl_object_editor_get_position (editor, &x, &y);
-	gl_label_object_set_position (object, x, y);
-
 	gl_object_editor_get_size (editor, &w, &h);
-	gl_label_object_set_size (object, w, h);
-
 	font_family = gl_object_editor_get_font_family (editor);
-	gl_label_object_set_font_family (object, font_family);
-	g_free (font_family);
-
 	font_size = gl_object_editor_get_font_size (editor);
-	gl_label_object_set_font_size (object, font_size);
-
 	font_weight = gl_object_editor_get_font_weight (editor);
-	gl_label_object_set_font_weight (object, font_weight);
-
 	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
-	gl_label_object_set_font_italic_flag (object, font_italic_flag);
-
 	color = gl_object_editor_get_text_color (editor);
-	gl_label_object_set_text_color (object, color);
-
 	just = gl_object_editor_get_text_alignment (editor);
+
+	gl_label_object_set_position (object, x, y);
+	gl_label_object_set_size (object, w, h);
+	gl_label_object_set_font_family (object, font_family);
+	gl_label_object_set_font_size (object, font_size);
+	gl_label_object_set_font_weight (object, font_weight);
+	gl_label_object_set_font_italic_flag (object, font_italic_flag);
+	gl_label_object_set_text_color (object, color);
 	gl_label_object_set_text_alignment (object, just);
 
+	g_free (font_family);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_editor_from_object_cb,
@@ -372,24 +366,21 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_size (editor, w, h);
 
-	gl_label_text_get_props (GL_LABEL_TEXT(object),
-				 &font_family, &font_size,
-				 &font_weight, &font_italic_flag,
-				 &color, &just);
+	font_family      = gl_label_object_get_font_family (object);
+	font_size        = gl_label_object_get_font_size (object);
+	font_weight      = gl_label_object_get_font_weight (object);
+	font_italic_flag = gl_label_object_get_font_italic_flag (object);
+	color            = gl_label_object_get_text_color (object);
+	just             = gl_label_object_get_text_alignment (object);
 
 	gl_object_editor_set_font_family (editor, font_family);
-	g_free (font_family);
-
 	gl_object_editor_set_font_size (editor, font_size);
-
 	gl_object_editor_set_font_weight (editor, font_weight);
-
 	gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
-
 	gl_object_editor_set_text_color (editor, color);
-
 	gl_object_editor_set_text_alignment (editor, just);
 
+	g_free (font_family);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -475,8 +466,8 @@ gl_view_text_get_create_cursor (void)
 /*****************************************************************************/
 int
 gl_view_text_create_event_handler (GnomeCanvas *canvas,
-				      GdkEvent    *event,
-				      glView      *view)
+				   GdkEvent    *event,
+				   glView      *view)
 {
 	static gdouble      x0, y0;
 	static gboolean     dragging = FALSE;
@@ -507,13 +498,17 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     x, y);
 			family = gl_view_get_default_font_family (view);
-			gl_label_text_set_props (GL_LABEL_TEXT(object),
-						 family,
-						 gl_view_get_default_font_size (view),
-						 gl_view_get_default_font_weight (view),
-						 gl_view_get_default_font_italic_flag (view),
-						 gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5),
-						 gl_view_get_default_text_alignment (view));
+			gl_label_object_set_font_family (GL_LABEL_OBJECT(object), family);
+			gl_label_object_set_font_size (GL_LABEL_OBJECT(object),
+						       gl_view_get_default_font_size (view));
+			gl_label_object_set_font_weight (GL_LABEL_OBJECT(object),
+							 gl_view_get_default_font_weight (view));
+			gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object),
+							      gl_view_get_default_font_italic_flag (view));
+			gl_label_object_set_text_color (GL_LABEL_OBJECT(object),
+							gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5));
+			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
+							    gl_view_get_default_text_alignment (view));
 			g_free (family);
 			lines = gl_text_node_lines_new_from_text (_("Text"));
 			gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
@@ -539,13 +534,17 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
 			family = gl_view_get_default_font_family (view);
-			gl_label_text_set_props (GL_LABEL_TEXT(object),
-						 family,
-						 gl_view_get_default_font_size (view),
-						 gl_view_get_default_font_weight (view),
-						 gl_view_get_default_font_italic_flag (view),
-						 gl_view_get_default_text_color (view),
-						 gl_view_get_default_text_alignment (view));
+			gl_label_object_set_font_family (GL_LABEL_OBJECT(object), family);
+			gl_label_object_set_font_size (GL_LABEL_OBJECT(object),
+						       gl_view_get_default_font_size (view));
+			gl_label_object_set_font_weight (GL_LABEL_OBJECT(object),
+							 gl_view_get_default_font_weight (view));
+			gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object),
+							      gl_view_get_default_font_italic_flag (view));
+			gl_label_object_set_text_color (GL_LABEL_OBJECT(object),
+							gl_view_get_default_text_color (view));
+			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
+							    gl_view_get_default_text_alignment (view));
 			g_free (family);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_text));
@@ -606,10 +605,12 @@ draw_hacktext (glViewText *view_text)
 	/* Query label object and properties */
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
 	gl_label_object_get_size (object, &object_w, &object_h);
-	gl_label_text_get_props (GL_LABEL_TEXT(object),
-				 &font_family, &font_size,
-				 &font_weight, &font_italic_flag,
-				 &color, &just);
+	font_family = gl_label_object_get_font_family (object);
+	font_size = gl_label_object_get_font_size (object);
+	font_weight = gl_label_object_get_font_weight (object);
+	font_italic_flag = gl_label_object_get_font_italic_flag (object);
+	color = gl_label_object_get_text_color (object);
+	just = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
@@ -712,10 +713,12 @@ draw_cursor (glViewText *view_text)
 	/* Query label object and properties */
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
 	gl_label_object_get_size (object, &object_w, &object_h);
-	gl_label_text_get_props (GL_LABEL_TEXT(object),
-				 &font_family, &font_size,
-				 &font_weight, &font_italic_flag,
-				 &color, &just);
+	font_family = gl_label_object_get_font_family (object);
+	font_size = gl_label_object_get_font_size (object);
+	font_weight = gl_label_object_get_font_weight (object);
+	font_italic_flag = gl_label_object_get_font_italic_flag (object);
+	color = gl_label_object_get_text_color (object);
+	just = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);

@@ -57,19 +57,21 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_barcode_class_init    (glLabelBarcodeClass *klass);
-static void gl_label_barcode_instance_init (glLabelBarcode      *lbc);
-static void gl_label_barcode_finalize      (GObject             *object);
+static void  gl_label_barcode_class_init    (glLabelBarcodeClass *klass);
+static void  gl_label_barcode_instance_init (glLabelBarcode      *lbc);
+static void  gl_label_barcode_finalize      (GObject             *object);
 
-static void copy                           (glLabelObject       *dst_object,
-					    glLabelObject       *src_object);
+static void  copy                           (glLabelObject       *dst_object,
+					     glLabelObject       *src_object);
 
-static void get_size                       (glLabelObject       *object,
-					    gdouble             *w,
-					    gdouble             *h);
+static void  get_size                       (glLabelObject       *object,
+					     gdouble             *w,
+					     gdouble             *h);
 
-static void set_line_color                 (glLabelObject    *object,
-					    guint             line_color);
+static void  set_line_color                 (glLabelObject       *object,
+					     guint                line_color);
+
+static guint get_line_color                 (glLabelObject       *object);
 
 
 
@@ -112,6 +114,7 @@ gl_label_barcode_class_init (glLabelBarcodeClass *klass)
 	label_object_class->copy           = copy;
 	label_object_class->get_size       = get_size;
 	label_object_class->set_line_color = set_line_color;
+	label_object_class->get_line_color = get_line_color;
 
 	object_class->finalize = gl_label_barcode_finalize;
 }
@@ -166,7 +169,6 @@ copy (glLabelObject *dst_object,
 	gboolean             text_flag;
 	gboolean             checksum_flag;
 	guint                color;
-	gdouble              scale;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -174,10 +176,12 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (new_lbc && GL_IS_LABEL_BARCODE (new_lbc));
 
 	text_node = gl_label_barcode_get_data (lbc);
-	gl_label_barcode_get_props (lbc, &style, &text_flag, &checksum_flag, &color);
+	gl_label_barcode_get_props (lbc, &style, &text_flag, &checksum_flag);
+	color = get_line_color (src_object);
 
 	gl_label_barcode_set_data (new_lbc, text_node);
-	gl_label_barcode_set_props (new_lbc,style, text_flag, checksum_flag, color);
+	gl_label_barcode_set_props (new_lbc,style, text_flag, checksum_flag);
+	set_line_color (dst_object, color);
 
 	gl_text_node_free (&text_node);
 
@@ -208,8 +212,7 @@ void
 gl_label_barcode_set_props (glLabelBarcode *lbc,
 			    glBarcodeStyle  style,
 			    gboolean        text_flag,
-			    gboolean        checksum_flag,
-			    guint           color)
+			    gboolean        checksum_flag)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -218,7 +221,6 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 	lbc->private->style            = style;
 	lbc->private->text_flag        = text_flag;
 	lbc->private->checksum_flag    = checksum_flag;
-	lbc->private->color            = color;
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
 
@@ -241,15 +243,13 @@ void
 gl_label_barcode_get_props (glLabelBarcode *lbc,
 			    glBarcodeStyle *style,
 			    gboolean       *text_flag,
-			    gboolean       *checksum_flag,
-			    guint          *color)
+			    gboolean       *checksum_flag)
 {
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
 	*style            = lbc->private->style;
 	*text_flag        = lbc->private->text_flag;
 	*checksum_flag    = lbc->private->checksum_flag;
-	*color            = lbc->private->color;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -320,5 +320,18 @@ set_line_color (glLabelObject *object,
 		lbarcode->private->color = line_color;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbarcode));
 	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Get line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static guint
+get_line_color (glLabelObject *object)
+{
+	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
+
+	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
+
+	return lbarcode->private->color;
 }
 

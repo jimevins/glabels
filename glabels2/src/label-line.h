@@ -54,15 +54,6 @@ GType        gl_label_line_get_type       (void);
 
 GObject     *gl_label_line_new            (glLabel     *label);
 
-void         gl_label_line_set_line_width (glLabelLine *lline,
-					   gdouble      line_width);
-
-void         gl_label_line_set_line_color (glLabelLine *lline,
-					   guint        line_color);
-
-gdouble      gl_label_line_get_line_width (glLabelLine *lline);
-guint        gl_label_line_get_line_color (glLabelLine *lline);
-
 
 G_END_DECLS
 
