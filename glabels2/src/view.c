@@ -3246,27 +3246,27 @@ selection_received_cb (GtkWidget        *widget,
 		p_next = p->next;
 
 		object = (glLabelObject *) p->data;
-		gl_label_object_set_parent (object, view->label);
+		newobject = gl_label_object_dup (object, view->label);
 
 		gl_debug (DEBUG_VIEW, "object pasted");
 
-		if (GL_IS_LABEL_BOX (object)) {
-			view_object = gl_view_box_new (GL_LABEL_BOX(object),
+		if (GL_IS_LABEL_BOX (newobject)) {
+			view_object = gl_view_box_new (GL_LABEL_BOX(newobject),
 						       view);
-		} else if (GL_IS_LABEL_ELLIPSE (object)) {
-			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object),
+		} else if (GL_IS_LABEL_ELLIPSE (newobject)) {
+			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(newobject),
 							   view);
-		} else if (GL_IS_LABEL_LINE (object)) {
-			view_object = gl_view_line_new (GL_LABEL_LINE(object),
+		} else if (GL_IS_LABEL_LINE (newobject)) {
+			view_object = gl_view_line_new (GL_LABEL_LINE(newobject),
 							view);
-		} else if (GL_IS_LABEL_IMAGE (object)) {
-			view_object = gl_view_image_new (GL_LABEL_IMAGE(object),
+		} else if (GL_IS_LABEL_IMAGE (newobject)) {
+			view_object = gl_view_image_new (GL_LABEL_IMAGE(newobject),
 							 view);
-		} else if (GL_IS_LABEL_TEXT (object)) {
-			view_object = gl_view_text_new (GL_LABEL_TEXT(object),
+		} else if (GL_IS_LABEL_TEXT (newobject)) {
+			view_object = gl_view_text_new (GL_LABEL_TEXT(newobject),
 							view);
-		} else if (GL_IS_LABEL_BARCODE (object)) {
-			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object),
+		} else if (GL_IS_LABEL_BARCODE (newobject)) {
+			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(newobject),
 							   view);
 		} else {
 			/* Should not happen! */

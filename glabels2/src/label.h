@@ -26,6 +26,7 @@
 
 #include "merge.h"
 #include "template.h"
+#include "pixbuf-cache.h"
 
 G_BEGIN_DECLS
 
@@ -106,6 +107,8 @@ glMerge      *gl_label_get_merge               (glLabel       *label);
 gchar        *gl_label_get_filename            (glLabel       *label);
 
 gchar        *gl_label_get_short_name          (glLabel       *label);
+
+GHashTable   *gl_label_get_pixbuf_cache        (glLabel       *label);
 
 gboolean      gl_label_is_modified             (glLabel       *label);
 

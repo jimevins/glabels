@@ -45,6 +45,8 @@ static GObjectClass *parent_class = NULL;
 
 static guint instance = 0;
 
+static GdkPixbuf *default_pixbuf = NULL;
+
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
@@ -101,25 +103,36 @@ gl_label_image_class_init (glLabelImageClass *klass)
 static void
 gl_label_image_instance_init (glLabelImage *limage)
 {
+	if ( default_pixbuf == NULL ) {
+		default_pixbuf =
+			gdk_pixbuf_new_from_xpm_data ((const char **)checkerboard_xpm);
+	}
+
 	limage->private = g_new0 (glLabelImagePrivate, 1);
 
 	limage->private->filename = g_new0 (glTextNode, 1);
 
-	limage->private->pixbuf =
-		gdk_pixbuf_new_from_xpm_data ((const char **)checkerboard_xpm);
+	limage->private->pixbuf = default_pixbuf;
 }
 
 static void
 gl_label_image_finalize (GObject *object)
 {
-	glLabelImage *limage;
+	glLabelObject *lobject;
+	glLabelImage  *limage;
+	GHashTable    *pixbuf_cache;
 
 	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
 
-	limage = GL_LABEL_IMAGE (object);
+	lobject = GL_LABEL_OBJECT (object);
+	limage  = GL_LABEL_IMAGE (object);
 
+	if (!limage->private->filename->field_flag) {
+		pixbuf_cache = gl_label_get_pixbuf_cache (lobject->parent);
+		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache,
+					       limage->private->filename->data);
+	}
 	gl_text_node_free (&limage->private->filename);
-	g_object_unref (G_OBJECT(limage->private->pixbuf));
 	g_free (limage->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -147,9 +160,11 @@ static void
 copy (glLabelObject *dst_object,
       glLabelObject *src_object)
 {
-	glLabelImage *limage     = (glLabelImage *)src_object;
-	glLabelImage *new_limage = (glLabelImage *)dst_object;
-	glTextNode   *filename;
+	glLabelImage     *limage     = (glLabelImage *)src_object;
+	glLabelImage     *new_limage = (glLabelImage *)dst_object;
+	glTextNode       *filename;
+	GdkPixbuf        *pixbuf;
+	GHashTable       *pixbuf_cache;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -157,6 +172,16 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (new_limage && GL_IS_LABEL_IMAGE (new_limage));
 
 	filename = gl_label_image_get_filename (limage);
+
+	/* Make sure destination label has data suitably cached. */
+	if ( !filename->field_flag && (filename->data != NULL) ) {
+		pixbuf = limage->private->pixbuf;
+		if ( pixbuf != default_pixbuf ) {
+			pixbuf_cache = gl_label_get_pixbuf_cache (dst_object->parent);
+			gl_pixbuf_cache_add_pixbuf (pixbuf_cache, filename->data, pixbuf);
+		}
+	}
+
 	gl_label_image_set_filename (new_limage, filename);
 	gl_text_node_free (&filename);
 
@@ -171,61 +196,53 @@ void
 gl_label_image_set_filename (glLabelImage *limage,
 			     glTextNode   *filename)
 {
-	GdkPixbuf *pixbuf;
+	glTextNode  *old_filename;
+	GHashTable  *pixbuf_cache;
+	GdkPixbuf   *pixbuf;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (limage && GL_IS_LABEL_IMAGE (limage));
+	g_return_if_fail (filename != NULL);
 
-	if ( (filename == NULL) || filename->field_flag || (filename->data == NULL) ) {
+	old_filename = limage->private->filename;
 
-		gl_text_node_free (&limage->private->filename);
-		limage->private->filename = gl_text_node_dup(filename);
+	/* If Unchanged don't do anything */
+	if ( (filename->field_flag == old_filename->field_flag) &&
+	     old_filename->data != NULL && filename->data != NULL &&
+	     !strcmp(filename->data, old_filename->data) )
+	{
+		return;
+	}
 
-		g_object_unref (limage->private->pixbuf);
-		limage->private->pixbuf =
-			gdk_pixbuf_new_from_xpm_data ((const char **)
-						      checkerboard_xpm);
+	pixbuf_cache = gl_label_get_pixbuf_cache (GL_LABEL_OBJECT(limage)->parent);
 
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
+	/* Remove reference to previous pixbuf from cache, if needed. */
+	if ( !old_filename->field_flag && (old_filename->data != NULL) ) {
+		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache, old_filename->data);
+	}
+
+	/* Set new filename. */
+	limage->private->filename = gl_text_node_dup(filename);
+	gl_text_node_free (&old_filename);
+
+	/* Now set the pixbuf. */
+	if ( filename->field_flag || (filename->data == NULL) ) {
+
+		limage->private->pixbuf = default_pixbuf;
+
 	} else {
 
-		if ( limage->private->filename == NULL) {
+		pixbuf = gl_pixbuf_cache_get_pixbuf (pixbuf_cache, filename->data);
 
-			limage->private->filename = gl_text_node_dup (filename);
-
-			pixbuf = gdk_pixbuf_new_from_file (filename->data, NULL);
-			g_object_unref (limage->private->pixbuf);
-			if ( pixbuf != NULL ) {
-				limage->private->pixbuf = pixbuf;
-			} else {
-				limage->private->pixbuf =
-					gdk_pixbuf_new_from_xpm_data ((const char **)
-								      checkerboard_xpm);
-			}
-
-			gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
-
-		} else if ( (limage->private->filename->data == NULL) ||
-			    strcmp (limage->private->filename->data, filename->data) != 0) {
-
-			gl_text_node_free (&limage->private->filename);
-			limage->private->filename = gl_text_node_dup (filename);
-
-			pixbuf = gdk_pixbuf_new_from_file (filename->data, NULL);
-			g_object_unref (limage->private->pixbuf);
-			if ( pixbuf != NULL ) {
-				limage->private->pixbuf = pixbuf;
-			} else {
-				limage->private->pixbuf =
-					gdk_pixbuf_new_from_xpm_data ((const char **)
-								      checkerboard_xpm);
-			}
-
-			gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
+		if (pixbuf != NULL) {
+			limage->private->pixbuf = pixbuf;
+		} else {
+			limage->private->pixbuf = default_pixbuf;
 		}
-
 	}
+
+	gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -246,13 +263,13 @@ const GdkPixbuf *
 gl_label_image_get_pixbuf (glLabelImage  *limage,
 			   glMergeRecord *record)
 {
-	GdkPixbuf *pixbuf = NULL;
-	gchar     *real_filename;
-
 	g_return_val_if_fail (limage && GL_IS_LABEL_IMAGE (limage), NULL);
 
 	if ((record != NULL) && limage->private->filename->field_flag) {
-		
+
+		GdkPixbuf   *pixbuf = NULL;
+		gchar       *real_filename;
+
 		/* Indirect filename, re-evaluate for given record. */
 
 		real_filename = gl_merge_eval_key (record,
@@ -261,17 +278,17 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 		if (real_filename != NULL) {
 			pixbuf = gdk_pixbuf_new_from_file (real_filename, NULL);
 		}
-		g_object_unref (limage->private->pixbuf);
 		if ( pixbuf != NULL ) {
-			limage->private->pixbuf = pixbuf;
+			return pixbuf;
 		} else {
-			limage->private->pixbuf =
-				gdk_pixbuf_new_from_xpm_data ((const char **)
-							      checkerboard_xpm);
+			return default_pixbuf;
 		}
 
 	}
 
 	return limage->private->pixbuf;
+
 }
+
+
 

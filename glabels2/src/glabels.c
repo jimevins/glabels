@@ -95,6 +95,9 @@ static const struct poptOption options [] =
 	{ "debug-mini-preview", '\0', POPT_ARG_NONE, &gl_debug_mini_preview, 0,
 	  N_("Show mini preview widget debugging messages."), NULL },
 
+	{ "debug-pixbuf-cache", '\0', POPT_ARG_NONE, &gl_debug_pixbuf_cache, 0,
+	  N_("Show pixbuf cache debugging messages."), NULL },
+
 	{ "debug-wdgt", '\0', POPT_ARG_NONE, &gl_debug_wdgt, 0,
 	  N_("Show widget debugging messages."), NULL },
 

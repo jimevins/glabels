@@ -26,13 +26,6 @@
 
 #include "label.h"
 #include "label-object.h"
-#include "label-text.h"
-#include "label-box.h"
-#include "label-line.h"
-#include "label-ellipse.h"
-#include "label-image.h"
-#include "label-barcode.h"
-#include "template.h"
 #include "marshal.h"
 #include "util.h"
 
@@ -48,14 +41,16 @@
 
 struct _glLabelPrivate {
 
-        glTemplate *template;
-        gboolean rotate_flag;
+        glTemplate  *template;
+        gboolean     rotate_flag;
 
-	gchar *filename;
-	gboolean modified_flag;
-	gint untitled_instance;
+	gchar       *filename;
+	gboolean     modified_flag;
+	gint         untitled_instance;
 
-	glMerge *merge;
+	glMerge     *merge;
+
+	GHashTable  *pixbuf_cache;
 };
 
 enum {
@@ -179,6 +174,7 @@ gl_label_instance_init (glLabel *label)
 
 	label->private = g_new0 (glLabelPrivate, 1);
 	label->private->merge = NULL;
+	label->private->pixbuf_cache = gl_pixbuf_cache_new ();
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -205,6 +201,8 @@ gl_label_finalize (GObject *object)
 	if (label->private->merge != NULL) {
 		g_object_unref (G_OBJECT(label->private->merge));
 	}
+
+	gl_pixbuf_cache_free (label->private->pixbuf_cache);
 
 	g_free (label->private);
 
@@ -553,6 +551,15 @@ gl_label_get_short_name (glLabel *label)
 
 		return short_name;
 	}
+}
+
+/****************************************************************************/
+/* Get pixbuf cache.                                                        */
+/****************************************************************************/
+GHashTable *
+gl_label_get_pixbuf_cache (glLabel       *label)
+{
+	return label->private->pixbuf_cache;
 }
 
 /****************************************************************************/

@@ -49,6 +49,7 @@ gint gl_debug_window = 0;
 gint gl_debug_ui = 0;
 gint gl_debug_media_select = 0;
 gint gl_debug_mini_preview = 0;
+gint gl_debug_pixbuf_cache = 0;
 gint gl_debug_wdgt = 0;
 
 /****************************************************************************/
@@ -88,6 +89,7 @@ gl_debug (gint   section,
 	    (gl_debug_ui           && section == GL_DEBUG_UI)             ||
 	    (gl_debug_media_select && section == GL_DEBUG_MEDIA_SELECT)   ||
 	    (gl_debug_mini_preview && section == GL_DEBUG_MINI_PREVIEW)   ||
+	    (gl_debug_pixbuf_cache && section == GL_DEBUG_PIXBUF_CACHE)   ||
 	    (gl_debug_wdgt         && section == GL_DEBUG_WDGT) )
 		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
 	

@@ -26,6 +26,7 @@
 
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <gdk-pixbuf/gdk-pixdata.h>
 
 #include "label.h"
 #include "label-object.h"
@@ -36,6 +37,7 @@
 #include "label-image.h"
 #include "label-barcode.h"
 #include "template.h"
+#include "base64.h"
 #include "xml-label.h"
 #include "xml-label-04.h"
 #include "util.h"
@@ -94,6 +96,12 @@ static glLabelObject *xml_parse_barcode_props  (xmlNodePtr        node,
 static void           xml_parse_merge_fields   (xmlNodePtr        node,
 						glLabel          *label);
 
+static void           xml_parse_data           (xmlNodePtr        node,
+						glLabel          *label);
+
+static void           xml_parse_pixdata        (xmlNodePtr        node,
+						glLabel          *label);
+
 
 static xmlDocPtr      xml_label_to_doc         (glLabel          *label,
 						glXMLLabelStatus *status);
@@ -133,6 +141,16 @@ static void           xml_create_barcode_props (xmlNodePtr        root,
 static void           xml_create_merge_fields  (xmlNodePtr        root,
 						xmlNsPtr          ns,
 						glLabel          *label);
+
+static void           xml_create_data          (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabel          *label);
+
+static void           xml_create_pixdata       (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabel          *label,
+						gchar            *name);
+
 
 /****************************************************************************/
 /* Open and read label from xml file.                                       */
@@ -272,6 +290,14 @@ xml_parse_label (xmlNodePtr        root,
 
 	label = GL_LABEL(gl_label_new ());
 
+	/* Pass 1, extract data nodes to pre-load cache. */
+	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
+		if (g_strcasecmp (node->name, "Data") == 0) {
+			xml_parse_data (node, label);
+		}
+	}
+
+	/* Pass 2, now extract everything else. */
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
 		if (g_strcasecmp (node->name, "Sheet") == 0) {
@@ -286,9 +312,12 @@ xml_parse_label (xmlNodePtr        root,
 			xml_parse_objects (node, label);
 		} else if (g_strcasecmp (node->name, "Merge_Fields") == 0) {
 			xml_parse_merge_fields (node, label);
+		} else if (g_strcasecmp (node->name, "Data") == 0) {
+			/* Handled in pass 1. */
 		} else {
 			if (!xmlNodeIsText (node)) {
-				g_warning (_("bad node =  \"%s\""), node->name);
+				g_warning (_("bad node in Document node =  \"%s\""),
+					   node->name);
 			}
 		}
 	}
@@ -682,6 +711,71 @@ xml_parse_merge_fields (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML data tag.                                            */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_data (xmlNodePtr  node,
+		glLabel    *label)
+{
+	xmlNodePtr  child;
+
+	gl_debug (DEBUG_XML, "START");
+
+	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
+
+		if (g_strcasecmp (child->name, "Pixdata") == 0) {
+			xml_parse_pixdata (child, label);
+		} else {
+			if (!xmlNodeIsText (child)) {
+				g_warning (_("bad node in Data node =  \"%s\""),
+					   child->name);
+			}
+		}
+	}
+
+	gl_debug (DEBUG_XML, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML pixbuf data tag.                                     */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_pixdata (xmlNodePtr  node,
+		   glLabel    *label)
+{
+	gchar      *name, *base64;
+	guchar     *stream;
+	guint       stream_length;
+	gboolean    ret;
+	GdkPixdata *pixdata;
+	GdkPixbuf  *pixbuf;
+	GHashTable *pixbuf_cache;
+
+	gl_debug (DEBUG_XML, "START");
+
+	name = xmlGetProp (node, "name");
+	base64 = xmlNodeGetContent (node);
+
+	stream = gl_base64_decode (base64, &stream_length);
+	pixdata = g_new0 (GdkPixdata, 1);
+	ret = gdk_pixdata_deserialize (pixdata, stream_length, stream, NULL);
+
+	if (ret) {
+		pixbuf = gdk_pixbuf_from_pixdata (pixdata, TRUE, NULL);
+
+		pixbuf_cache = gl_label_get_pixbuf_cache (label);
+		gl_pixbuf_cache_add_pixbuf (pixbuf_cache, name, pixbuf);
+	}
+
+	g_free (name);
+	g_free (base64);
+	g_free (stream);
+	g_free (pixdata);
+
+	gl_debug (DEBUG_XML, "END");
+}
+
 /****************************************************************************/
 /* Save label to xml label file.                                            */
 /****************************************************************************/
@@ -697,6 +791,7 @@ gl_xml_label_save (glLabel          *label,
 
 	doc = xml_label_to_doc (label, status);
 
+	xmlSetDocCompressMode (doc, 9);
 	xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 	xmlFreeDoc (doc);
 	if (xml_ret == -1) {
@@ -772,6 +867,8 @@ xml_label_to_doc (glLabel          *label,
 		xml_create_merge_fields (doc->xmlRootNode, ns, label);
 		g_object_unref (G_OBJECT(merge));
 	}
+
+	xml_create_data (doc->xmlRootNode, ns, label);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -1184,6 +1281,80 @@ xml_create_merge_fields (xmlNodePtr  root,
 	g_free (string);
 
 	g_object_unref (G_OBJECT(merge));
+
+	gl_debug (DEBUG_XML, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Label Data Node                                        */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_data (xmlNodePtr  root,
+		 xmlNsPtr    ns,
+		 glLabel    *label)
+{
+	xmlNodePtr  node;
+	GList      *name_list, *p;
+	GHashTable *pixbuf_cache;
+
+	gl_debug (DEBUG_XML, "START");
+
+	node = xmlNewChild (root, ns, "Data", NULL);
+
+	pixbuf_cache = gl_label_get_pixbuf_cache (label);
+	name_list = gl_pixbuf_cache_get_name_list (pixbuf_cache);
+
+	for (p = name_list; p != NULL; p=p->next) {
+		xml_create_pixdata (node, ns, label, p->data);
+	}
+
+	gl_pixbuf_cache_free_name_list (name_list);
+
+
+	gl_debug (DEBUG_XML, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Label Data Pixbuf Node                                 */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_pixdata (xmlNodePtr  root,
+		    xmlNsPtr    ns,
+		    glLabel    *label,
+		    gchar      *name)
+{
+	xmlNodePtr  node;
+	GHashTable *pixbuf_cache;
+	GdkPixbuf  *pixbuf;
+	GdkPixdata *pixdata;
+	guchar     *stream;
+	guint       stream_length;
+	gchar      *base64;
+
+	gl_debug (DEBUG_XML, "START");
+
+	pixbuf_cache = gl_label_get_pixbuf_cache (label);
+
+	pixbuf = gl_pixbuf_cache_get_pixbuf (pixbuf_cache, name);
+	if ( pixbuf != NULL ) {
+
+		pixdata = g_new0 (GdkPixdata, 1);
+		gdk_pixdata_from_pixbuf (pixdata, pixbuf, TRUE);
+		stream = gdk_pixdata_serialize (pixdata, &stream_length);
+		base64 = gl_base64_encode (stream, stream_length);
+
+		node = xmlNewChild (root, ns, "Pixdata", base64);
+		xmlSetProp (node, "name", name);
+		xmlSetProp (node, "encoding", "base64");
+
+		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache, name);
+
+		g_free (pixdata->pixel_data);
+		g_free (pixdata);
+		g_free (stream);
+		g_free (base64);
+	}
+
 
 	gl_debug (DEBUG_XML, "END");
 }

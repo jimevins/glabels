@@ -49,6 +49,7 @@ typedef enum {
 	GL_DEBUG_UI,
 	GL_DEBUG_MEDIA_SELECT,
 	GL_DEBUG_MINI_PREVIEW,
+	GL_DEBUG_PIXBUF_CACHE,
 	GL_DEBUG_WDGT,
 } glDebugSection;
 
@@ -69,6 +70,7 @@ extern gint gl_debug_window;
 extern gint gl_debug_ui;
 extern gint gl_debug_media_select;
 extern gint gl_debug_mini_preview;
+extern gint gl_debug_pixbuf_cache;
 extern gint gl_debug_wdgt;
 
 #ifndef __GNUC__
@@ -91,6 +93,7 @@ extern gint gl_debug_wdgt;
 #define	DEBUG_UI        GL_DEBUG_UI,      __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_MEDIA_SELECT	GL_DEBUG_MEDIA_SELECT,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_MINI_PREVIEW	GL_DEBUG_MINI_PREVIEW,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PIXBUF_CACHE	GL_DEBUG_PIXBUF_CACHE,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_WDGT	GL_DEBUG_WDGT,    __FILE__, __LINE__, __FUNCTION__
 
 void gl_debug (gint section, gchar *file,
