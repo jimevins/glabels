@@ -629,8 +629,6 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 	static gboolean     dragging = FALSE;
 	static glViewObject *view_image;
 	static GObject      *object;
-	gdouble             line_width;
-	guint               line_color, fill_color;
 	gdouble             x, y, w, h;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -653,7 +651,7 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
-						  0.0, 0.0);
+						  1.0, 1.0);
 			view_image = gl_view_image_new (GL_LABEL_IMAGE(object),
 							view);
 			x0 = x;
