@@ -35,6 +35,8 @@ void gl_ui_init                   (BonoboUIComponent *ui_component,
 				   GtkWidget         *cursor_info_frame,
 				   GtkWidget         *zoom_info_frame);
 
+void gl_ui_unref                  (BonoboUIComponent *ui_component);
+
 void gl_ui_update_all             (BonoboUIComponent *ui_component,
 				   glView            *view);
 

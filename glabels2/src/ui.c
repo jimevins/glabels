@@ -333,10 +333,27 @@ gl_ui_init (BonoboUIComponent *ui_component,
 	g_signal_connect (G_OBJECT (recent_view), "activate",
 			  G_CALLBACK (gl_file_open_recent), win);
 
-	/* Hack:  squirrel away a copy to be unreferenced in gl_window_destroy() */
+	/* Squirrel away a copy to be unreferenced in gl_ui_unref() */
 	g_object_set_data (G_OBJECT (ui_component), "recent-view", recent_view);
 
 	gl_debug (DEBUG_UI, "END");
+}
+
+/*****************************************************************************/
+/* Unref wrapper.                                                            */
+/*****************************************************************************/
+void
+gl_ui_unref (BonoboUIComponent *ui_component)
+{
+	EggRecentView *recent_view;
+
+	/* Pull out recent view to unreference. */
+	recent_view = g_object_get_data (G_OBJECT(ui_component), "recent-view");
+	if (recent_view) {
+		g_object_unref (recent_view);
+	}
+
+	bonobo_object_unref(ui_component);
 }
 
 /*****************************************************************************/
