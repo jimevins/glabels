@@ -92,7 +92,7 @@ gl_view_line_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glViewLineClass),
 			NULL,
 			NULL,
@@ -102,6 +102,7 @@ gl_view_line_get_type (void)
 			sizeof (glViewLine),
 			0,
 			(GInstanceInitFunc) gl_view_line_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,

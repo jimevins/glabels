@@ -156,7 +156,7 @@ gl_view_highlight_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glViewHighlightClass),
 			NULL,
 			NULL,
@@ -166,6 +166,7 @@ gl_view_highlight_get_type (void)
 			sizeof (glViewHighlight),
 			0,
 			(GInstanceInitFunc) gl_view_highlight_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (G_TYPE_OBJECT,

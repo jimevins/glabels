@@ -68,13 +68,13 @@ static void     selection_changed_cb        (glView               *view,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_ui_sidebar_get_type (void)
 {
-	static guint sidebar_type = 0;
+	static GType type = 0;
 
-	if (!sidebar_type) {
-		GTypeInfo sidebar_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glUISidebarClass),
 			NULL,
 			NULL,
@@ -84,15 +84,14 @@ gl_ui_sidebar_get_type (void)
 			sizeof (glUISidebar),
 			0,
 			(GInstanceInitFunc) gl_ui_sidebar_instance_init,
+			NULL
 		};
 
-		sidebar_type =
-			g_type_register_static (GTK_TYPE_VBOX,
-						"glUISidebar",
-						&sidebar_info, 0);
+		type = g_type_register_static (GTK_TYPE_VBOX,
+					       "glUISidebar", &info, 0);
 	}
 
-	return sidebar_type;
+	return type;
 }
 
 static void

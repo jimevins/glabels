@@ -51,19 +51,19 @@ struct _glViewEllipseClass {
 };
 
 
-extern GType          gl_view_ellipse_get_type (void);
+GType          gl_view_ellipse_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_ellipse_new      (glLabelEllipse *object,
-						glView     *view);
+glViewObject  *gl_view_ellipse_new      (glLabelEllipse *object,
+					 glView         *view);
 
 
 /* cursor for creating ellipse objects */
-extern GdkCursor *gl_view_ellipse_get_create_cursor (void);
+GdkCursor *gl_view_ellipse_get_create_cursor (void);
 
 /* event handler for creating ellipse objects */
-extern gint gl_view_ellipse_create_event_handler    (GnomeCanvas *canvas,
-						     GdkEvent    *event,
-						     glView      *view);
+gint gl_view_ellipse_create_event_handler    (GnomeCanvas *canvas,
+					      GdkEvent    *event,
+					      glView      *view);
 
 G_END_DECLS
 

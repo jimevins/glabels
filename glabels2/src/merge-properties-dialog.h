@@ -54,7 +54,7 @@ struct  _glMergePropertiesDialogClass
 	glHigDialogClass                parent_class;
 };
 
-GtkType    gl_merge_properties_dialog_get_type    (void) G_GNUC_CONST;
+GType      gl_merge_properties_dialog_get_type    (void) G_GNUC_CONST;
 
 GtkWidget *gl_merge_properties_dialog_new         (glView *view);
 

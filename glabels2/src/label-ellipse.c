@@ -81,7 +81,7 @@ gl_label_ellipse_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glLabelEllipseClass),
 			NULL,
 			NULL,
@@ -91,6 +91,7 @@ gl_label_ellipse_get_type (void)
 			sizeof (glLabelEllipse),
 			0,
 			(GInstanceInitFunc) gl_label_ellipse_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,

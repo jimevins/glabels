@@ -135,11 +135,11 @@ static void      print_sheets_merge               (GnomePrintConfig   *config,
 GType
 gl_print_dialog_get_type (void)
 {
-	static GType dialog_type = 0;
+	static GType type = 0;
 
-	if (!dialog_type)
+	if (!type)
     	{
-      		static const GTypeInfo dialog_info =
+      		static const GTypeInfo info =
       		{
 			sizeof (glPrintDialogClass),
         		NULL,		/* base_init */
@@ -149,16 +149,15 @@ gl_print_dialog_get_type (void)
         		NULL,           /* class_data */
         		sizeof (glPrintDialog),
         		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_print_dialog_init
+        		(GInstanceInitFunc) gl_print_dialog_init,
+			NULL
       		};
 
-     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
-						      "glPrintDialog",
-						      &dialog_info, 
-						      0);
+     		type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+					       "glPrintDialog", &info, 0);
     	}
 
-	return dialog_type;
+	return type;
 }
 
 static void

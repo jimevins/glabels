@@ -68,7 +68,7 @@ gl_label_image_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glLabelImageClass),
 			NULL,
 			NULL,
@@ -78,6 +78,7 @@ gl_label_image_get_type (void)
 			sizeof (glLabelImage),
 			0,
 			(GInstanceInitFunc) gl_label_image_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,

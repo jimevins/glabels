@@ -63,13 +63,13 @@ preview_pressed (glWdgtMiniPreview *mini_preview,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_print_copies_get_type (void)
 {
-	static guint wdgt_print_copies_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_print_copies_type) {
-		GTypeInfo wdgt_print_copies_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtPrintCopiesClass),
 			NULL,
 			NULL,
@@ -79,15 +79,14 @@ gl_wdgt_print_copies_get_type (void)
 			sizeof (glWdgtPrintCopies),
 			0,
 			(GInstanceInitFunc) gl_wdgt_print_copies_instance_init,
+			NULL
 		};
 
-		wdgt_print_copies_type =
-			g_type_register_static (gl_hig_hbox_get_type (),
-						"glWdgtPrintCopies",
-						&wdgt_print_copies_info, 0);
+		type = g_type_register_static (GL_TYPE_HIG_HBOX,
+					       "glWdgtPrintCopies", &info, 0);
 	}
 
-	return wdgt_print_copies_type;
+	return type;
 }
 
 static void

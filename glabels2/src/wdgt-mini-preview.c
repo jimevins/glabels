@@ -89,13 +89,13 @@ static void style_set_cb                       (GtkWidget        *widget,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_mini_preview_get_type (void)
 {
-	static guint wdgt_mini_preview_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_mini_preview_type) {
-		GTypeInfo wdgt_mini_preview_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtMiniPreviewClass),
 			NULL,
 			NULL,
@@ -105,15 +105,14 @@ gl_wdgt_mini_preview_get_type (void)
 			sizeof (glWdgtMiniPreview),
 			0,
 			(GInstanceInitFunc) gl_wdgt_mini_preview_instance_init,
+			NULL
 		};
 
-		wdgt_mini_preview_type =
-			g_type_register_static (gtk_hbox_get_type (),
-						"glWdgtMiniPreview",
-						&wdgt_mini_preview_info, 0);
+		type = g_type_register_static (GTK_TYPE_HBOX,
+					       "glWdgtMiniPreview", &info, 0);
 	}
 
-	return wdgt_mini_preview_type;
+	return type;
 }
 
 static void

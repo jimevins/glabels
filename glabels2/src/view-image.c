@@ -96,7 +96,7 @@ gl_view_image_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glViewImageClass),
 			NULL,
 			NULL,
@@ -106,6 +106,7 @@ gl_view_image_get_type (void)
 			sizeof (glViewImage),
 			0,
 			(GInstanceInitFunc) gl_view_image_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,

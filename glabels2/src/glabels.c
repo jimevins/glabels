@@ -25,15 +25,18 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
+#include <libbonoboui.h>
 
 #include "splash.h"
 #include "stock.h"
 #include "merge-init.h"
+#include "recent.h"
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "prefs.h"
 #include "debug.h"
 #include "window.h"
+#include "file.h"
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -120,16 +123,16 @@ static const struct poptOption options [] =
 /*========================================================*/
 /* Local function prototypes                              */
 /*========================================================*/
-gint save_session_cb (GnomeClient        *client,
-		      gint                phase,
-		      GnomeRestartStyle   save_style,
-		      gint                shutdown,
-		      GnomeInteractStyle  interact_style,
-		      gint                fast,
-		      gpointer            client_data);
+gboolean save_session_cb (GnomeClient        *client,
+			  gint                phase,
+			  GnomeRestartStyle   save_style,
+			  gint                shutdown,
+			  GnomeInteractStyle  interact_style,
+			  gint                fast,
+			  gpointer            client_data);
 
-void client_die_cb   (GnomeClient        *client,
-		      gpointer            client_data);
+void client_die_cb       (GnomeClient        *client,
+			  gpointer            client_data);
 
 /****************************************************************************/
 /* main program                                                             */
@@ -174,13 +177,13 @@ main (int argc, char **argv)
 	}
 	
 	/* Initialize subsystems */
-	gl_paper_init();
+	gl_paper_init ();
 	gl_prefs_init ();
-	gl_template_init();
-	gl_merge_init();
-	gl_recent_init();
+	gl_template_init ();
+	gl_merge_init ();
+	gl_recent_init ();
 	
-	if (bonobo_ui_init ("glabels", VERSION, &argc, argv) == FALSE) {
+	if (!bonobo_ui_init ("glabels", VERSION, &argc, argv)) {
 		g_error (_("Could not initialize Bonobo!\n"));
 	}
 
@@ -229,13 +232,13 @@ main (int argc, char **argv)
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  "Save session" callback.                                        */
 /*---------------------------------------------------------------------------*/
-gint save_session_cb (GnomeClient        *client,
-		      gint                phase,
-		      GnomeRestartStyle   save_style,
-		      gint                shutdown,
-		      GnomeInteractStyle  interact_style,
-		      gint                fast,
-		      gpointer            client_data)
+gboolean save_session_cb (GnomeClient        *client,
+			  gint                phase,
+			  GnomeRestartStyle   save_style,
+			  gint                shutdown,
+			  GnomeInteractStyle  interact_style,
+			  gint                fast,
+			  gpointer            client_data)
 {
 	gchar       *argv[128];
 	gint         argc;

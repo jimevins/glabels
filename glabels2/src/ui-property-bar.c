@@ -150,13 +150,13 @@ static void null_cmd             (BonoboUIComponent           *ui_component,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_ui_property_bar_get_type (void)
 {
-	static guint property_bar_type = 0;
+	static GType type = 0;
 
-	if (!property_bar_type) {
-		GTypeInfo property_bar_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glUIPropertyBarClass),
 			NULL,
 			NULL,
@@ -166,15 +166,14 @@ gl_ui_property_bar_get_type (void)
 			sizeof (glUIPropertyBar),
 			0,
 			(GInstanceInitFunc) gl_ui_property_bar_instance_init,
+			NULL
 		};
 
-		property_bar_type =
-			g_type_register_static (G_TYPE_OBJECT,
-						"glUIPropertyBar",
-						&property_bar_info, 0);
+		type = g_type_register_static (G_TYPE_OBJECT,
+					       "glUIPropertyBar", &info, 0);
 	}
 
-	return property_bar_type;
+	return type;
 }
 
 static void

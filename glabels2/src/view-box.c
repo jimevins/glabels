@@ -94,7 +94,7 @@ gl_view_box_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glViewBoxClass),
 			NULL,
 			NULL,
@@ -104,6 +104,7 @@ gl_view_box_get_type (void)
 			sizeof (glViewBox),
 			0,
 			(GInstanceInitFunc) gl_view_box_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,

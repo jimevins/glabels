@@ -50,7 +50,7 @@ struct _glLabelEllipseClass {
 	glLabelObjectClass     parent_class;
 };
 
-GType           gl_label_ellipse_get_type       (void);
+GType           gl_label_ellipse_get_type       (void) G_GNUC_CONST;
 
 GObject        *gl_label_ellipse_new            (glLabel        *label);
 

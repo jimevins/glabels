@@ -56,7 +56,7 @@ struct _glHigAlertClass {
 	GtkDialogClass    parent_class;
 };
 
-guint      gl_hig_alert_get_type    (void);
+GType      gl_hig_alert_get_type    (void) G_GNUC_CONST;
 
 GtkWidget *gl_hig_alert_new         (GtkWindow      *parent,
 				     GtkDialogFlags  flags,
@@ -93,7 +93,7 @@ struct _glHigDialogClass {
 	GtkDialogClass    parent_class;
 };
 
-guint      gl_hig_dialog_get_type         (void);
+GType      gl_hig_dialog_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *gl_hig_dialog_new              (void);
 
@@ -135,7 +135,7 @@ struct _glHigCategoryClass {
 	GtkVBoxClass      parent_class;
 };
 
-guint      gl_hig_category_get_type         (void);
+GType      gl_hig_category_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *gl_hig_category_new              (const gchar *header);
 
@@ -173,7 +173,7 @@ struct _glHigVBoxClass {
 	GtkVBoxClass      parent_class;
 };
 
-guint      gl_hig_vbox_get_type         (void);
+GType      gl_hig_vbox_get_type         (void) G_GNUC_CONST;
 
 GtkWidget *gl_hig_vbox_new              (glHigVBoxType  type);
 
@@ -206,7 +206,7 @@ struct _glHigHBoxClass {
 	GtkHBoxClass      parent_class;
 };
 
-guint      gl_hig_hbox_get_type           (void);
+GType      gl_hig_hbox_get_type           (void) G_GNUC_CONST;
 
 GtkWidget *gl_hig_hbox_new                (void);
 

@@ -287,11 +287,11 @@ static void finish_cb                             (glTemplateDesigner      *dlg)
 GType
 gl_template_designer_get_type (void)
 {
-	static GType dialog_type = 0;
+	static GType type = 0;
 
-	if (!dialog_type)
+	if (!type)
     	{
-      		static const GTypeInfo dialog_info =
+      		static const GTypeInfo info =
       		{
 			sizeof (glTemplateDesignerClass),
         		NULL,		/* base_init */
@@ -301,16 +301,15 @@ gl_template_designer_get_type (void)
         		NULL,           /* class_data */
         		sizeof (glTemplateDesigner),
         		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_template_designer_init
+        		(GInstanceInitFunc) gl_template_designer_init,
+			NULL
       		};
 
-     		dialog_type = g_type_register_static (GTK_TYPE_WINDOW,
-						      "glTemplateDesigner",
-						      &dialog_info, 
-						      0);
+     		type = g_type_register_static (GTK_TYPE_WINDOW,
+					       "glTemplateDesigner", &info, 0);
     	}
 
-	return dialog_type;
+	return type;
 }
 
 static void

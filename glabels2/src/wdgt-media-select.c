@@ -81,13 +81,13 @@ static gchar *get_label_size_desc              (const glTemplate       *template
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_media_select_get_type (void)
 {
-	static guint wdgt_media_select_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_media_select_type) {
-		GTypeInfo wdgt_media_select_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtMediaSelectClass),
 			NULL,
 			NULL,
@@ -97,15 +97,14 @@ gl_wdgt_media_select_get_type (void)
 			sizeof (glWdgtMediaSelect),
 			0,
 			(GInstanceInitFunc) gl_wdgt_media_select_instance_init,
+			NULL
 		};
 
-		wdgt_media_select_type =
-			g_type_register_static (gl_hig_vbox_get_type (),
-						"glWdgtMediaSelect",
-						&wdgt_media_select_info, 0);
+		type = g_type_register_static (GL_TYPE_HIG_VBOX,
+					       "glWdgtMediaSelect", &info, 0);
 	}
 
-	return wdgt_media_select_type;
+	return type;
 }
 
 static void

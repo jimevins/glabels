@@ -50,7 +50,7 @@ struct _glLabelLineClass {
 	glLabelObjectClass    parent_class;
 };
 
-GType        gl_label_line_get_type       (void);
+GType        gl_label_line_get_type       (void) G_GNUC_CONST;
 
 GObject     *gl_label_line_new            (glLabel     *label);
 

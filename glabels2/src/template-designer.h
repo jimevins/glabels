@@ -53,7 +53,7 @@ struct  _glTemplateDesignerClass
 	GtkWindowClass             parent_class;
 };
 
-GtkType    	gl_template_designer_get_type 	            (void) G_GNUC_CONST;
+GType    	gl_template_designer_get_type 	            (void) G_GNUC_CONST;
 
 GtkWidget      *gl_template_designer_new	            (GtkWindow *parent);
 

@@ -215,13 +215,13 @@ static void       selection_received_cb          (GtkWidget         *widget,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_view_get_type (void)
 {
-	static guint view_type = 0;
+	static GType type = 0;
 
-	if (!view_type) {
-		GTypeInfo view_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glViewClass),
 			NULL,
 			NULL,
@@ -231,14 +231,14 @@ gl_view_get_type (void)
 			sizeof (glView),
 			0,
 			(GInstanceInitFunc) gl_view_init,
+			NULL
 		};
 
-		view_type =
-		    g_type_register_static (gtk_vbox_get_type (),
-					    "glView", &view_info, 0);
+		type = g_type_register_static (GTK_TYPE_VBOX,
+					       "glView", &info, 0);
 	}
 
-	return view_type;
+	return type;
 }
 
 static void

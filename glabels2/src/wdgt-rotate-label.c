@@ -94,13 +94,13 @@ static GnomeCanvasItem *cdbc_item              (GnomeCanvasGroup *group,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_rotate_label_get_type (void)
 {
-	static guint wdgt_rotate_label_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_rotate_label_type) {
-		GTypeInfo wdgt_rotate_label_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtRotateLabelClass),
 			NULL,
 			NULL,
@@ -110,16 +110,14 @@ gl_wdgt_rotate_label_get_type (void)
 			sizeof (glWdgtRotateLabel),
 			0,
 			(GInstanceInitFunc) gl_wdgt_rotate_label_instance_init,
-
+			NULL
 		};
 
-		wdgt_rotate_label_type =
-			g_type_register_static (gl_hig_hbox_get_type (),
-						"glWdgtRotateLabel",
-						&wdgt_rotate_label_info, 0);
+		type = g_type_register_static (GL_TYPE_HIG_HBOX,
+					       "glWdgtRotateLabel", &info, 0);
 	}
 
-	return wdgt_rotate_label_type;
+	return type;
 }
 
 static void

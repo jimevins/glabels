@@ -1,3 +1,110 @@
+2004-07-02  Jim Evins  <evins@snaught.com>
+
+	* src/glabels.c: (main), (save_session_cb):
+		- Now include libbonoboui.h, recent.h, and file.h to provide missing
+		  prototypes.
+		- save_session_cb() now returns gboolean.
+		- Minor formatting changes.
+
+	* src/window.h:
+	* src/window.c:
+		- Now include file.h to provide missing prototype.
+		- gl_window_get_type() now returns GType, not guint.  I believe this may
+		  ultimately be cause of the segfault reported in Bug #982287, since
+		  GType is actually a gulong, which may not be compatible on other
+		  architectures (64bit) -- I cannot personally test this at this time.
+		  I was sloppy in several other xxx_get_type() functions which also
+		  returned guint -- see next group of files:
+	
+	* src/window.c: (gl_window_get_type):
+	* src/canvas-hacktext.c: (gl_canvas_hacktext_get_type):
+	* src/canvas-hacktext.h:
+	* src/hig.c: (gl_hig_alert_get_type), (gl_hig_dialog_get_type),
+	(gl_hig_category_get_type), (gl_hig_vbox_get_type),
+	(gl_hig_hbox_get_type):
+	* src/hig.h:
+	* src/label-barcode.c: (gl_label_barcode_get_type):
+	* src/label-barcode.h:
+	* src/label-box.c: (gl_label_box_get_type):
+	* src/label-box.h:
+	* src/label-ellipse.c: (gl_label_ellipse_get_type):
+	* src/label-ellipse.h:
+	* src/label-image.c: (gl_label_image_get_type):
+	* src/label-image.h:
+	* src/label-line.c: (gl_label_line_get_type):
+	* src/label-line.h:
+	* src/label-object.c: (gl_label_object_get_type):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_get_type):
+	* src/label-text.h:
+	* src/label.c: (gl_label_get_type):
+	* src/label.h:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_get_type):
+	* src/merge-properties-dialog.h:
+	* src/merge-text.c: (gl_merge_text_get_type):
+	* src/merge-text.h:
+	* src/merge.c: (gl_merge_get_type):
+	* src/merge.h:
+	* src/object-editor.c: (gl_object_editor_get_type):
+	* src/prefs-dialog.c: (gl_prefs_dialog_get_type):
+	* src/prefs-dialog.h:
+	* src/prefs-model.c: (gl_prefs_model_get_type):
+	* src/prefs-model.h:
+	* src/print-dialog.c: (gl_print_dialog_get_type):
+	* src/print-dialog.h:
+	* src/template-designer.c: (gl_template_designer_get_type):
+	* src/template-designer.h:
+	* src/ui-property-bar.c: (gl_ui_property_bar_get_type):
+	* src/ui-property-bar.h:
+	* src/ui-sidebar.c: (gl_ui_sidebar_get_type):
+	* src/ui-sidebar.h:
+	* src/view-barcode.c: (gl_view_barcode_get_type):
+	* src/view-barcode.h:
+	* src/view-box.c: (gl_view_box_get_type):
+	* src/view-box.h:
+	* src/view-ellipse.c: (gl_view_ellipse_get_type):
+	* src/view-ellipse.h:
+	* src/view-highlight.c: (gl_view_highlight_get_type):
+	* src/view-highlight.h:
+	* src/view-image.c: (gl_view_image_get_type):
+	* src/view-image.h:
+	* src/view-line.c: (gl_view_line_get_type):
+	* src/view-line.h:
+	* src/view-object.c: (gl_view_object_get_type):
+	* src/view-object.h:
+	* src/view-text.c: (gl_view_text_get_type):
+	* src/view-text.h:
+	* src/view.c: (gl_view_get_type):
+	* src/view.h:
+	* src/wdgt-chain-button.c: (gl_wdgt_chain_button_get_type):
+	* src/wdgt-image-select.c: (gl_wdgt_image_select_get_type):
+	* src/wdgt-image-select.h:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_get_type):
+	* src/wdgt-media-select.h:
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_get_type):
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_get_type):
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_type):
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.c: (gl_wdgt_rotate_label_get_type):
+	* src/wdgt-rotate-label.h:
+		- Made sure all xxx_get_type functions returned GType, not guint.  This
+		  was the case in hig.[ch], window.[ch], ui-property-bar.[ch],
+		  ui-sidebar.[ch], view.[ch], wdgt-image-select.[ch],
+		  wdgt-media-select.[ch], wdgt-mini-preview.[ch], wdgt-print-copies.[ch],
+		  wdt-print-merge.[ch], and wdgt-rotate-label.[ch].  See separate
+		  window.[ch] details above for more info.
+		- Reconciled various coding style differences in all xxx_get_type()
+		  functions:
+			* All prototypes include G_GNUC_CONST.
+			* All prototypes specify the return value as GType, not GtkType
+			  or guint.
+			* Info structures are all declared as "static const."
+			* Generalized the names of type and info variables.
+			* Miscelaneous formatting.
+
 2004-06-08  Jim Evins  <evins@snaught.com>
 
 	* src/label.c:

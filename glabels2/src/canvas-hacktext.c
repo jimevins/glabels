@@ -85,10 +85,10 @@ struct _glCanvasHacktextPriv {
 GType
 gl_canvas_hacktext_get_type (void)
 {
-	static GType hacktext_type = 0;
+	static GType type = 0;
 
-	if (!hacktext_type) {
-		static const GTypeInfo hacktext_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glCanvasHacktextClass),
 			NULL,
 			NULL,
@@ -101,12 +101,12 @@ gl_canvas_hacktext_get_type (void)
 			NULL
 		};
 
-		hacktext_type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
-							"glCanvasHacktext",
-							&hacktext_info, 0);
+		type = g_type_register_static (GNOME_TYPE_CANVAS_ITEM,
+					       "glCanvasHacktext",
+					       &info, 0);
 	}
 
-	return hacktext_type;
+	return type;
 }
 
 static void

@@ -60,7 +60,7 @@ struct _glWdgtImageSelectClass {
 			 gpointer           user_data);
 };
 
-guint       gl_wdgt_image_select_get_type             (void);
+GType       gl_wdgt_image_select_get_type             (void) G_GNUC_CONST;
 
 GtkWidget  *gl_wdgt_image_select_new                  (glMerge           *merge,
 						       glTextNode        *text_node);

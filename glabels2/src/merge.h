@@ -93,7 +93,7 @@ void              gl_merge_free_descriptions   (GList **descriptions);
 
 gchar            *gl_merge_description_to_name (gchar *description);
 
-GType             gl_merge_get_type            (void);
+GType             gl_merge_get_type            (void) G_GNUC_CONST;
 
 glMerge          *gl_merge_new                 (gchar             *name);
 

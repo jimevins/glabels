@@ -71,7 +71,7 @@ struct _glWdgtMiniPreviewClass {
 			 gpointer user_data);
 };
 
-guint      gl_wdgt_mini_preview_get_type          (void);
+GType      gl_wdgt_mini_preview_get_type          (void) G_GNUC_CONST;
 
 GtkWidget *gl_wdgt_mini_preview_new               (gint               height,
 						   gint               width);

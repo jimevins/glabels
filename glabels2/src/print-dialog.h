@@ -56,7 +56,7 @@ struct  _glPrintDialogClass
 };
 
 
-GtkType    gl_print_dialog_get_type            (void) G_GNUC_CONST;
+GType      gl_print_dialog_get_type            (void) G_GNUC_CONST;
 
 GtkWidget *gl_print_dialog_new                 (glLabel       *label,
 						BonoboWindow  *win);

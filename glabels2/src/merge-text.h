@@ -59,7 +59,7 @@ struct _glMergeTextClass {
 };
 
 
-GType             gl_merge_text_get_type            (void);
+GType             gl_merge_text_get_type            (void) G_GNUC_CONST;
 
 G_END_DECLS
 

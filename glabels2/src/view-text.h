@@ -51,19 +51,19 @@ struct _glViewTextClass {
 };
 
 
-extern GType          gl_view_text_get_type (void);
+GType          gl_view_text_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_text_new      (glLabelText *object,
-					     glView     *view);
+glViewObject  *gl_view_text_new      (glLabelText *object,
+				      glView      *view);
 
 
 /* cursor for creating text objects */
-extern GdkCursor *gl_view_text_get_create_cursor (void);
+GdkCursor *gl_view_text_get_create_cursor (void);
 
 /* event handler for creating text objects */
-extern gint gl_view_text_create_event_handler    (GnomeCanvas *canvas,
-						  GdkEvent    *event,
-						  glView      *view);
+gint gl_view_text_create_event_handler    (GnomeCanvas *canvas,
+					   GdkEvent    *event,
+					   glView      *view);
 
 G_END_DECLS
 

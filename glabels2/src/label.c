@@ -99,7 +99,7 @@ gl_label_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glLabelClass),
 			NULL,
 			NULL,
@@ -109,6 +109,7 @@ gl_label_get_type (void)
 			sizeof (glLabel),
 			0,
 			(GInstanceInitFunc) gl_label_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (G_TYPE_OBJECT,

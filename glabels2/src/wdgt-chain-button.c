@@ -65,11 +65,11 @@ static GtkTableClass *parent_class = NULL;
 GType
 gl_wdgt_chain_button_get_type (void)
 {
-  static GType button_type = 0;
+  static GType type = 0;
 
-  if (! button_type)
+  if (! type)
     {
-      static const GTypeInfo button_info =
+      static const GTypeInfo info =
       {
         sizeof (glWdgtChainButtonClass),
         NULL,           /* base_init      */
@@ -80,13 +80,14 @@ gl_wdgt_chain_button_get_type (void)
         sizeof (glWdgtChainButton),
         0,              /* n_preallocs    */
         (GInstanceInitFunc) gl_wdgt_chain_button_init,
+	NULL
       };
 
-      button_type = g_type_register_static (GTK_TYPE_TABLE, "glWdgtChainButton",
-					    &button_info, 0);
+      type = g_type_register_static (GTK_TYPE_TABLE,
+				     "glWdgtChainButton", &info, 0);
     }
 
-  return button_type;
+  return type;
 }
 
 static void

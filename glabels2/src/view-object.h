@@ -62,7 +62,7 @@ struct _glViewObjectClass {
 
 G_BEGIN_DECLS
 
-GType            gl_view_object_get_type          (void);
+GType            gl_view_object_get_type          (void) G_GNUC_CONST;
 
 GObject         *gl_view_object_new               (void);
 

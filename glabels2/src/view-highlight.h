@@ -60,7 +60,7 @@ struct _glViewHighlightClass {
 
 
 
-GType    gl_view_highlight_get_type (void);
+GType    gl_view_highlight_get_type (void) G_GNUC_CONST;
 
 GObject *gl_view_highlight_new      (glViewObject         *view_object,
 				     glViewHighlightStyle  style);

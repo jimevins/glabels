@@ -51,19 +51,19 @@ struct _glViewBoxClass {
 };
 
 
-extern GType          gl_view_box_get_type (void);
+GType          gl_view_box_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_box_new      (glLabelBox *object,
-					    glView     *view);
+glViewObject  *gl_view_box_new      (glLabelBox *object,
+				     glView     *view);
 
 
 /* cursor for creating box objects */
-extern GdkCursor *gl_view_box_get_create_cursor (void);
+GdkCursor *gl_view_box_get_create_cursor (void);
 
 /* event handler for creating box objects */
-extern gint gl_view_box_create_event_handler    (GnomeCanvas *canvas,
-						 GdkEvent    *event,
-						 glView      *view);
+gint gl_view_box_create_event_handler    (GnomeCanvas *canvas,
+					  GdkEvent    *event,
+					  glView      *view);
 
 G_END_DECLS
 

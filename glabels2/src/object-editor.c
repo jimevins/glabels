@@ -75,11 +75,11 @@ static void prefs_changed_cb                    (glObjectEditor       *editor);
 GType
 gl_object_editor_get_type (void)
 {
-	static GType editor_type = 0;
+	static GType type = 0;
 
-	if (!editor_type)
+	if (!type)
     	{
-      		static const GTypeInfo editor_info =
+      		static const GTypeInfo info =
       		{
 			sizeof (glObjectEditorClass),
         		NULL,		/* base_init */
@@ -89,16 +89,15 @@ gl_object_editor_get_type (void)
         		NULL,           /* class_data */
         		sizeof (glObjectEditor),
         		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_object_editor_init
+        		(GInstanceInitFunc) gl_object_editor_init,
+			NULL
       		};
 
-     		editor_type = g_type_register_static (GTK_TYPE_VBOX,
-						      "glObjectEditor",
-						      &editor_info, 
-						      0);
+     		type = g_type_register_static (GTK_TYPE_VBOX,
+					       "glObjectEditor", &info, 0);
     	}
 
-	return editor_type;
+	return type;
 }
 
 static void

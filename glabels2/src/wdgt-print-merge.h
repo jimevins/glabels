@@ -27,6 +27,8 @@
 #include "label.h"
 #include "hig.h"
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_WDGT_PRINT_MERGE (gl_wdgt_print_merge_get_type ())
 #define GL_WDGT_PRINT_MERGE(obj) \
         (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_PRINT_MERGE, glWdgtPrintMerge ))
@@ -58,19 +60,21 @@ struct _glWdgtPrintMergeClass {
 	glHigHBoxClass parent_class;
 };
 
-extern guint gl_wdgt_print_merge_get_type  (void);
+GType      gl_wdgt_print_merge_get_type   (void) G_GNUC_CONST;
 
-extern GtkWidget *gl_wdgt_print_merge_new  (glLabel * label);
+GtkWidget *gl_wdgt_print_merge_new        (glLabel          *label);
 
-extern void gl_wdgt_print_merge_get_copies (glWdgtPrintMerge * merge,
-					    gint * n_copies,
-					    gint * first_label,
-					    gboolean * collate_flag);
+void       gl_wdgt_print_merge_get_copies (glWdgtPrintMerge *merge,
+					   gint             *n_copies,
+					   gint             *first_label,
+					   gboolean         *collate_flag);
 
-extern void gl_wdgt_print_merge_set_copies (glWdgtPrintMerge * merge,
-					    gint n_copies,
-					    gint first_label,
-					    gint n_records,
-					    gboolean collate_flag);
+void       gl_wdgt_print_merge_set_copies (glWdgtPrintMerge *merge,
+					   gint              n_copies,
+					   gint              first_label,
+					   gint              n_records,
+					   gboolean          collate_flag);
+
+G_END_DECLS
 
 #endif

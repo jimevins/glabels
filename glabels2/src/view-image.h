@@ -51,19 +51,19 @@ struct _glViewImageClass {
 };
 
 
-extern GType          gl_view_image_get_type (void);
+GType          gl_view_image_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_image_new      (glLabelImage *object,
-					      glView     *view);
+glViewObject  *gl_view_image_new      (glLabelImage *object,
+				       glView       *view);
 
 
 /* cursor for creating image objects */
-extern GdkCursor *gl_view_image_get_create_cursor (void);
+GdkCursor *gl_view_image_get_create_cursor (void);
 
 /* event handler for creating image objects */
-extern gint gl_view_image_create_event_handler    (GnomeCanvas *canvas,
-						   GdkEvent    *event,
-						   glView      *view);
+gint gl_view_image_create_event_handler    (GnomeCanvas *canvas,
+					    GdkEvent    *event,
+					    glView      *view);
 
 G_END_DECLS
 

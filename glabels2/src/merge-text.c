@@ -95,7 +95,7 @@ gl_merge_text_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glMergeTextClass),
 			NULL,
 			NULL,
@@ -105,6 +105,7 @@ gl_merge_text_get_type (void)
 			sizeof (glMergeText),
 			0,
 			(GInstanceInitFunc) gl_merge_text_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_MERGE,

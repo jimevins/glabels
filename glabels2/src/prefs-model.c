@@ -148,7 +148,7 @@ gl_prefs_model_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glPrefsModelClass),
 			NULL,
 			NULL,
@@ -158,6 +158,7 @@ gl_prefs_model_get_type (void)
 			sizeof (glPrefsModel),
 			0,
 			(GInstanceInitFunc) gl_prefs_model_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (G_TYPE_OBJECT,

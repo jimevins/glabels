@@ -58,7 +58,7 @@ struct _glUISidebarClass {
 	GtkVBoxClass         parent_class;
 };
 
-guint        gl_ui_sidebar_get_type          (void);
+GType        gl_ui_sidebar_get_type          (void) G_GNUC_CONST;
 
 GObject     *gl_ui_sidebar_new               (BonoboUIComponent *ui_component);
 

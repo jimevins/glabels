@@ -84,7 +84,7 @@ gl_label_barcode_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		GTypeInfo info = {
+		static const GTypeInfo info = {
 			sizeof (glLabelBarcodeClass),
 			NULL,
 			NULL,
@@ -94,6 +94,7 @@ gl_label_barcode_get_type (void)
 			sizeof (glLabelBarcode),
 			0,
 			(GInstanceInitFunc) gl_label_barcode_instance_init,
+			NULL
 		};
 
 		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,

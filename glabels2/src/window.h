@@ -68,7 +68,7 @@ struct _glWindowClass {
 	BonoboWindowClass    parent_class;
 };
 
-guint        gl_window_get_type          (void);
+GType        gl_window_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gl_window_new               (void);
 

@@ -65,7 +65,7 @@ struct _glCanvasHacktextClass {
 };
 
 
-GType gl_canvas_hacktext_get_type (void);
+GType gl_canvas_hacktext_get_type (void) G_GNUC_CONST;
 
 
 G_END_DECLS

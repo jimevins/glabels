@@ -103,11 +103,11 @@ static void record_select_toggled_cb              (GtkCellRendererToggle        
 GType
 gl_merge_properties_dialog_get_type (void)
 {
-	static GType dialog_type = 0;
+	static GType type = 0;
 
-	if (!dialog_type)
+	if (!type)
     	{
-      		static const GTypeInfo dialog_info =
+      		static const GTypeInfo info =
       		{
 			sizeof (glMergePropertiesDialogClass),
         		NULL,		/* base_init */
@@ -117,16 +117,15 @@ gl_merge_properties_dialog_get_type (void)
         		NULL,           /* class_data */
         		sizeof (glMergePropertiesDialog),
         		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_merge_properties_dialog_init
+        		(GInstanceInitFunc) gl_merge_properties_dialog_init,
+			NULL
       		};
 
-     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
-						      "glMergePropertiesDialog",
-						      &dialog_info, 
-						      0);
+     		type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+					       "glMergePropertiesDialog", &info, 0);
     	}
 
-	return dialog_type;
+	return type;
 }
 
 static void

@@ -64,13 +64,13 @@ static void spin_cb                           (GtkSpinButton * spinbutton,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_print_merge_get_type (void)
 {
-	static guint wdgt_print_merge_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_print_merge_type) {
-		GTypeInfo wdgt_print_merge_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtPrintMergeClass),
 			NULL,
 			NULL,
@@ -80,15 +80,14 @@ gl_wdgt_print_merge_get_type (void)
 			sizeof (glWdgtPrintMerge),
 			0,
 			(GInstanceInitFunc) gl_wdgt_print_merge_instance_init,
+			NULL
 		};
 
-		wdgt_print_merge_type =
-			g_type_register_static (gl_hig_hbox_get_type (),
-						"glWdgtPrintMerge",
-						&wdgt_print_merge_info, 0);
+		type = g_type_register_static (GL_TYPE_HIG_HBOX,
+					       "glWdgtPrintMerge", &info, 0);
 	}
 
-	return wdgt_print_merge_type;
+	return type;
 }
 
 static void

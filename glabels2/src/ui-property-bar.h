@@ -67,7 +67,7 @@ struct _glUIPropertyBarClass {
 	GObjectClass         parent_class;
 };
 
-guint        gl_ui_property_bar_get_type          (void);
+GType        gl_ui_property_bar_get_type          (void) G_GNUC_CONST;
 
 GObject     *gl_ui_property_bar_new               (BonoboUIComponent *ui_component);
 

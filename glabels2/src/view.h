@@ -127,7 +127,7 @@ struct _glViewClass {
 
 G_BEGIN_DECLS
 
-guint      gl_view_get_type                (void);
+GType      gl_view_get_type                (void) G_GNUC_CONST;
 
 GtkWidget *gl_view_new                     (glLabel           *label);
 

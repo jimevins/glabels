@@ -113,11 +113,11 @@ static void update_prefs_from_object_page (glPrefsDialog      *dlg);
 GType
 gl_prefs_dialog_get_type (void)
 {
-	static GType dialog_type = 0;
+	static GType type = 0;
 
-	if (!dialog_type)
+	if (!type)
     	{
-      		static const GTypeInfo dialog_info =
+      		static const GTypeInfo info =
       		{
 			sizeof (glPrefsDialogClass),
         		NULL,		/* base_init */
@@ -127,16 +127,15 @@ gl_prefs_dialog_get_type (void)
         		NULL,           /* class_data */
         		sizeof (glPrefsDialog),
         		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_prefs_dialog_init
+        		(GInstanceInitFunc) gl_prefs_dialog_init,
+			NULL
       		};
 
-     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
-						      "glPrefsDialog",
-						      &dialog_info, 
-						      0);
+     		type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+					       "glPrefsDialog", &info, 0);
     	}
 
-	return dialog_type;
+	return type;
 }
 
 static void

@@ -152,7 +152,7 @@ struct _glLabelObjectClass {
 			     gpointer           user_data);
 };
 
-GType          gl_label_object_get_type              (void);
+GType          gl_label_object_get_type              (void) G_GNUC_CONST;
 
 GObject       *gl_label_object_new                   (glLabel           *label);
 

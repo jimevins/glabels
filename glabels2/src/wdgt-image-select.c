@@ -71,13 +71,13 @@ static void radio_toggled_cb                   (GtkToggleButton   *togglebutton,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_wdgt_image_select_get_type (void)
 {
-	static guint wdgt_image_select_type = 0;
+	static GType type = 0;
 
-	if (!wdgt_image_select_type) {
-		GTypeInfo wdgt_image_select_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWdgtImageSelectClass),
 			NULL,
 			NULL,
@@ -87,15 +87,14 @@ gl_wdgt_image_select_get_type (void)
 			sizeof (glWdgtImageSelect),
 			0,
 			(GInstanceInitFunc) gl_wdgt_image_select_instance_init,
+			NULL
 		};
 
-		wdgt_image_select_type =
-			g_type_register_static (gl_hig_vbox_get_type (),
-						"glWdgtImageSelect",
-						&wdgt_image_select_info, 0);
+		type = g_type_register_static (GL_TYPE_HIG_VBOX,
+					       "glWdgtImageSelect", &info, 0);
 	}
 
-	return wdgt_image_select_type;
+	return type;
 }
 
 static void

@@ -66,7 +66,7 @@ struct _glLabelClass {
 };
 
 
-GType         gl_label_get_type                (void);
+GType         gl_label_get_type                (void) G_GNUC_CONST;
 
 GObject      *gl_label_new                     (void);
 

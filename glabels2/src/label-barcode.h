@@ -54,7 +54,7 @@ struct _glLabelBarcodeClass {
 };
 
 
-GType           gl_label_barcode_get_type  (void);
+GType           gl_label_barcode_get_type  (void) G_GNUC_CONST;
 
 GObject        *gl_label_barcode_new       (glLabel        *label);
 

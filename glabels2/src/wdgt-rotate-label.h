@@ -27,6 +27,8 @@
 #include "hig.h"
 #include <libglabels/template.h>
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_WDGT_ROTATE_LABEL (gl_wdgt_rotate_label_get_type ())
 #define GL_WDGT_ROTATE_LABEL(obj) \
         (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_ROTATE_LABEL, glWdgtRotateLabel ))
@@ -57,16 +59,18 @@ struct _glWdgtRotateLabelClass {
 			 gpointer user_data);
 };
 
-extern guint     gl_wdgt_rotate_label_get_type (void);
+GType     gl_wdgt_rotate_label_get_type  (void) G_GNUC_CONST;
 
-extern GtkWidget *gl_wdgt_rotate_label_new (void);
+GtkWidget *gl_wdgt_rotate_label_new      (void);
 
-extern gboolean  gl_wdgt_rotate_label_get_state (glWdgtRotateLabel * wdgt_rotate_label);
+gboolean  gl_wdgt_rotate_label_get_state (glWdgtRotateLabel *wdgt_rotate_label);
 
-extern void      gl_wdgt_rotate_label_set_state (glWdgtRotateLabel * wdgt_rotate_label,
-						 gboolean state);
+void      gl_wdgt_rotate_label_set_state (glWdgtRotateLabel *wdgt_rotate_label,
+					  gboolean           state);
 
-extern void      gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel * wdgt_rotate_label,
-							 gchar * name);
+void      gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *wdgt_rotate_label,
+						  gchar             *name);
+
+G_END_DECLS
 
 #endif

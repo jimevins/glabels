@@ -27,6 +27,8 @@
 #include "label.h"
 #include "hig.h"
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_WDGT_PRINT_COPIES (gl_wdgt_print_copies_get_type ())
 #define GL_WDGT_PRINT_COPIES(obj) \
         (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_PRINT_COPIES, glWdgtPrintCopies ))
@@ -59,18 +61,20 @@ struct _glWdgtPrintCopiesClass {
 	glHigHBoxClass parent_class;
 };
 
-extern guint gl_wdgt_print_copies_get_type (void);
+GType      gl_wdgt_print_copies_get_type  (void) G_GNUC_CONST;
 
-extern GtkWidget *gl_wdgt_print_copies_new (glLabel * label);
+GtkWidget *gl_wdgt_print_copies_new       (glLabel           *label);
 
-extern void gl_wdgt_print_copies_get_range (glWdgtPrintCopies * copies,
-					    gint * n_sheets,
-					    gint * first_label,
-					    gint * last_label);
+void       gl_wdgt_print_copies_get_range (glWdgtPrintCopies *copies,
+					   gint              *n_sheets,
+					   gint              *first_label,
+					   gint              *last_label);
 
-extern void gl_wdgt_print_copies_set_range (glWdgtPrintCopies * copies,
-					    gint n_sheets,
-					    gint first_label,
-					    gint last_label);
+void       gl_wdgt_print_copies_set_range (glWdgtPrintCopies *copies,
+					   gint               n_sheets,
+					   gint               first_label,
+					   gint               last_label);
+
+G_END_DECLS
 
 #endif

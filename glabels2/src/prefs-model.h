@@ -111,7 +111,7 @@ struct _glPrefsModelClass {
 };
 
 
-GType         gl_prefs_model_get_type            (void);
+GType         gl_prefs_model_get_type            (void) G_GNUC_CONST;
 
 glPrefsModel *gl_prefs_model_new                 (void);
 

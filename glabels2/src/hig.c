@@ -87,13 +87,13 @@ static void       gl_hig_hbox_finalize       (GObject *object);
 /* Boilerplate Alert Object stuff.                                          */
 /****************************************************************************/
 /****************************************************************************/
-guint
+GType
 gl_hig_alert_get_type (void)
 {
-	static guint hig_alert_type = 0;
+	static GType type = 0;
 
-	if (!hig_alert_type) {
-		GTypeInfo hig_alert_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glHigAlertClass),
 			NULL,
 			NULL,
@@ -103,15 +103,14 @@ gl_hig_alert_get_type (void)
 			sizeof (glHigAlert),
 			0,
 			(GInstanceInitFunc) gl_hig_alert_init,
+			NULL
 		};
 
-		hig_alert_type =
-		    g_type_register_static (gtk_dialog_get_type (),
-					    "glHigAlert",
-					    &hig_alert_info, 0);
+		type = g_type_register_static (GTK_TYPE_DIALOG,
+					       "glHigAlert", &info, 0);
 	}
 
-	return hig_alert_type;
+	return type;
 }
 
 static void
@@ -281,13 +280,13 @@ GtkWidget* gl_hig_alert_new      (GtkWindow      *parent,
 /* Boilerplate Dialog Object stuff.                                         */
 /****************************************************************************/
 /****************************************************************************/
-guint
+GType
 gl_hig_dialog_get_type (void)
 {
-	static guint hig_dialog_type = 0;
+	static GType type = 0;
 
-	if (!hig_dialog_type) {
-		GTypeInfo hig_dialog_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glHigDialogClass),
 			NULL,
 			NULL,
@@ -297,15 +296,14 @@ gl_hig_dialog_get_type (void)
 			sizeof (glHigDialog),
 			0,
 			(GInstanceInitFunc) gl_hig_dialog_init,
+			NULL
 		};
 
-		hig_dialog_type =
-		    g_type_register_static (gtk_dialog_get_type (),
-					    "glHigDialog",
-					    &hig_dialog_info, 0);
+		type = g_type_register_static (GTK_TYPE_DIALOG,
+					       "glHigDialog", &info, 0);
 	}
 
-	return hig_dialog_type;
+	return type;
 }
 
 static void
@@ -444,13 +442,13 @@ gl_hig_dialog_add_widget (glHigDialog   *dialog,
 /* Boilerplate Category Object stuff.                                       */
 /****************************************************************************/
 /****************************************************************************/
-guint
+GType
 gl_hig_category_get_type (void)
 {
-	static guint hig_category_type = 0;
+	static GType type = 0;
 
-	if (!hig_category_type) {
-		GTypeInfo hig_category_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glHigCategoryClass),
 			NULL,
 			NULL,
@@ -460,15 +458,14 @@ gl_hig_category_get_type (void)
 			sizeof (glHigCategory),
 			0,
 			(GInstanceInitFunc) gl_hig_category_init,
+			NULL
 		};
 
-		hig_category_type =
-		    g_type_register_static (gtk_vbox_get_type (),
-					    "glHigCategory",
-					    &hig_category_info, 0);
+		type = g_type_register_static (GTK_TYPE_VBOX,
+					       "glHigCategory", &info, 0);
 	}
 
-	return hig_category_type;
+	return type;
 }
 
 static void
@@ -561,13 +558,13 @@ gl_hig_category_add_widget (glHigCategory *cat,
 /* Boilerplate VBox Object stuff.                                           */
 /****************************************************************************/
 /****************************************************************************/
-guint
+GType
 gl_hig_vbox_get_type (void)
 {
-	static guint hig_vbox_type = 0;
+	static GType type = 0;
 
-	if (!hig_vbox_type) {
-		GTypeInfo hig_vbox_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glHigVBoxClass),
 			NULL,
 			NULL,
@@ -577,15 +574,14 @@ gl_hig_vbox_get_type (void)
 			sizeof (glHigVBox),
 			0,
 			(GInstanceInitFunc) gl_hig_vbox_init,
+			NULL
 		};
 
-		hig_vbox_type =
-		    g_type_register_static (gtk_vbox_get_type (),
-					    "glHigVBox",
-					    &hig_vbox_info, 0);
+		type = g_type_register_static (GTK_TYPE_VBOX,
+					       "glHigVBox", &info, 0);
 	}
 
-	return hig_vbox_type;
+	return type;
 }
 
 static void
@@ -667,13 +663,13 @@ gl_hig_vbox_add_widget (glHigVBox     *hig_vbox,
 /* Boilerplate HBox Object stuff.                                           */
 /****************************************************************************/
 /****************************************************************************/
-guint
+GType
 gl_hig_hbox_get_type (void)
 {
-	static guint hig_hbox_type = 0;
+	static GType type = 0;
 
-	if (!hig_hbox_type) {
-		GTypeInfo hig_hbox_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glHigHBoxClass),
 			NULL,
 			NULL,
@@ -683,15 +679,14 @@ gl_hig_hbox_get_type (void)
 			sizeof (glHigHBox),
 			0,
 			(GInstanceInitFunc) gl_hig_hbox_init,
+			NULL
 		};
 
-		hig_hbox_type =
-		    g_type_register_static (gtk_hbox_get_type (),
-					    "glHigHBox",
-					    &hig_hbox_info, 0);
+		type = g_type_register_static (GTK_TYPE_HBOX,
+					       "glHigHBox", &info, 0);
 	}
 
-	return hig_hbox_type;
+	return type;
 }
 
 static void

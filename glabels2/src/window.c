@@ -27,6 +27,7 @@
 #include "util.h"
 #include "xml-label.h"
 #include "prefs.h"
+#include "file.h"
 
 #include "debug.h"
 
@@ -89,13 +90,13 @@ static void     modified_changed_cb    (glLabel       *label,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-guint
+GType
 gl_window_get_type (void)
 {
-	static guint window_type = 0;
+	static GType type = 0;
 
-	if (!window_type) {
-		GTypeInfo window_info = {
+	if (!type) {
+		static const GTypeInfo info = {
 			sizeof (glWindowClass),
 			NULL,
 			NULL,
@@ -105,15 +106,14 @@ gl_window_get_type (void)
 			sizeof (glWindow),
 			0,
 			(GInstanceInitFunc) gl_window_init,
+			NULL
 		};
 
-		window_type =
-		    g_type_register_static (bonobo_window_get_type (),
-					    "glWindow",
-					    &window_info, 0);
+		type = g_type_register_static (BONOBO_TYPE_WINDOW,
+					       "glWindow", &info, 0);
 	}
 
-	return window_type;
+	return type;
 }
 
 static void

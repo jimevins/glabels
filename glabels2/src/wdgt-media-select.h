@@ -62,7 +62,7 @@ struct _glWdgtMediaSelectClass {
 	void (*changed) (glWdgtMediaSelect * media_select, gpointer user_data);
 };
 
-guint      gl_wdgt_media_select_get_type      (void);
+GType      gl_wdgt_media_select_get_type      (void) G_GNUC_CONST;
 
 GtkWidget *gl_wdgt_media_select_new           (void);
 

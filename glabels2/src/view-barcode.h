@@ -51,19 +51,19 @@ struct _glViewBarcodeClass {
 };
 
 
-extern GType          gl_view_barcode_get_type (void);
+GType          gl_view_barcode_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_barcode_new      (glLabelBarcode *object,
-						glView     *view);
+glViewObject  *gl_view_barcode_new      (glLabelBarcode *object,
+					 glView     *view);
 
 
 /* cursor for creating barcode objects */
-extern GdkCursor *gl_view_barcode_get_create_cursor (void);
+GdkCursor *gl_view_barcode_get_create_cursor (void);
 
 /* event handler for creating barcode objects */
-extern gint gl_view_barcode_create_event_handler    (GnomeCanvas *canvas,
-						     GdkEvent    *event,
-						     glView      *view);
+gint gl_view_barcode_create_event_handler    (GnomeCanvas *canvas,
+					      GdkEvent    *event,
+					      glView      *view);
 
 G_END_DECLS
 

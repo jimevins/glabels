@@ -54,7 +54,7 @@ struct _glLabelTextClass {
 	glLabelObjectClass    parent_class;
 };
 
-GType          gl_label_text_get_type     (void);
+GType          gl_label_text_get_type     (void) G_GNUC_CONST;
 
 GObject       *gl_label_text_new          (glLabel          *label);
 

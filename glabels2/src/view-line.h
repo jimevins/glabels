@@ -51,19 +51,19 @@ struct _glViewLineClass {
 };
 
 
-extern GType          gl_view_line_get_type (void);
+GType          gl_view_line_get_type (void) G_GNUC_CONST;
 
-extern glViewObject  *gl_view_line_new      (glLabelLine *object,
-					     glView     *view);
+glViewObject  *gl_view_line_new      (glLabelLine *object,
+				      glView      *view);
 
 
 /* cursor for creating line objects */
-extern GdkCursor *gl_view_line_get_create_cursor (void);
+GdkCursor *gl_view_line_get_create_cursor (void);
 
 /* event handler for creating line objects */
-extern gint gl_view_line_create_event_handler    (GnomeCanvas *canvas,
-						  GdkEvent    *event,
-						  glView      *view);
+gint gl_view_line_create_event_handler    (GnomeCanvas *canvas,
+					   GdkEvent    *event,
+					   glView      *view);
 
 G_END_DECLS
 
