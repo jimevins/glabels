@@ -1,3 +1,11 @@
+2005-02-14  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		Updated templates to use inches instead of points.
+	* src/print-dialog.c: (printer_page_new):
+		Changed packing style when adding printer selector widget.  This fixes
+		debian Bug#295274.
+
 2005-02-13  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
