@@ -91,7 +91,7 @@
   <!-- Avery 6879 family: Address Labels, 1_1/4'' x 3_3/4'', 12 per sheet  -->
   <!-- =================================================================== -->
   <Template name="Avery  6879" size="US-Letter" _description="Address Labels">
-    <Label-rectangle id="0" width="270" height="90" round="5">
+    <Label-rectangle id="0" width="270" height="90" round="5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="6" x0="27" y0="81" dx="288" dy="108"/>
     </Label-rectangle>
@@ -236,7 +236,6 @@
     <Alias name="Avery  8271"/>
     <Alias name="Avery  8371"/>
     <Alias name="Avery  8372"/>
-    <Alias name="Avery  8373"/>
     <Alias name="Avery  8374"/>
     <Alias name="Avery  8376"/>
     <Alias name="Avery  8377"/>
@@ -261,7 +260,6 @@
     <Alias name="Avery 27882"/>
     <Alias name="Avery 28371"/>
     <Alias name="Avery 28373"/>
-    <Alias name="Avery 28873"/>
     <Alias name="Avery 28876"/>
     <Alias name="Avery 28877"/>
   </Template>
@@ -270,7 +268,7 @@
   <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     * -->
   <!-- =================================================================== -->
   <Template name="Avery  8373" size="US-Letter" _description="Business Cards">
-    <Label-rectangle id="0" width="252" height="144" round="0">
+    <Label-rectangle id="0" width="252" height="144" round="0" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="4" x0="36" y0="54" dx="288" dy="180"/>
     </Label-rectangle>
@@ -418,7 +416,7 @@
   <!-- =================================================================== -->
   <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheet  -->
   <!-- =================================================================== -->
-  <Template name="Avery  3274.1" size="US-Letter" _description="Square Stickers">
+  <Template name="Avery  3274.1" size="US-Letter" _description="Square Labels">
     <Label-rectangle id="0" width="180" height="180" round="0">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
@@ -429,7 +427,7 @@
   <!-- =================================================================== -->
   <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet    -->
   <!-- =================================================================== -->
-  <Template name="Avery  3274.2" size="US-Letter" _description="Small Round Stickers">
+  <Template name="Avery  3274.2" size="US-Letter" _description="Small Round Labels">
     <Label-round id="0" radius="54">
       <Markup-margin size="5"/>
       <Layout nx="4" ny="5" x0="36" y0="54" dx="144" dy="144"/>
@@ -439,9 +437,9 @@
   </Template>
 
   <!-- =================================================================== -->
-  <!-- Avery 3274.3 family: Big round stickers, 2_1/2'', 9 per sheet       -->
+  <!-- Avery 3274.3 family: Large round stickers, 2_1/2'', 9 per sheet     -->
   <!-- =================================================================== -->
-  <Template name="Avery  3274.3" size="US-Letter" _description="Big Round Stickers">
+  <Template name="Avery  3274.3" size="US-Letter" _description="Large Round Labels">
     <Label-round id="0" radius="90">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
