@@ -71,7 +71,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 
 	*status = XML_LABEL_OK;
 
-	if (g_strcasecmp (root->name, "Label") != 0) {
+	if (!xmlStrEqual (root->name, "Label")) {
 		g_warning (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
@@ -87,37 +87,37 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 		gl_debug (DEBUG_XML, "node name = \"%s\"", node->name);
 
 		if (!xmlNodeIsText (node)) {
-			if (g_strcasecmp (node->name, "Media_Type") == 0) {
+			if (xmlStrEqual (node->name, "Media_Type")) {
 				if (!xml04_parse_media_description (node, label)) {
 					*status = XML_LABEL_UNKNOWN_MEDIA;
 				}
-			} else if (g_strcasecmp (node->name, "Text") == 0) {
+			} else if (xmlStrEqual (node->name, "Text")) {
 				object = gl_label_text_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_text_props (node, GL_LABEL_TEXT(object));
-			} else if (g_strcasecmp (node->name, "Box") == 0) {
+			} else if (xmlStrEqual (node->name, "Box")) {
 				object = gl_label_box_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_box_props (node, GL_LABEL_BOX(object));
-			} else if (g_strcasecmp (node->name, "Line") == 0) {
+			} else if (xmlStrEqual (node->name, "Line")) {
 				object = gl_label_line_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_line_props (node, GL_LABEL_LINE(object));
-			} else if (g_strcasecmp (node->name, "Ellipse") == 0) {
+			} else if (xmlStrEqual (node->name, "Ellipse")) {
 				object = gl_label_ellipse_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_ellipse_props (node,
 							   GL_LABEL_ELLIPSE(object));
-			} else if (g_strcasecmp (node->name, "Image") == 0) {
+			} else if (xmlStrEqual (node->name, "Image")) {
 				object = gl_label_image_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_image_props (node, GL_LABEL_IMAGE(object));
-			} else if (g_strcasecmp (node->name, "Barcode") == 0) {
+			} else if (xmlStrEqual (node->name, "Barcode")) {
 				object = gl_label_barcode_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_barcode_props (node,
 							   GL_LABEL_BARCODE(object));
-			} else if (g_strcasecmp (node->name, "Merge_Properties") == 0) {
+			} else if (xmlStrEqual (node->name, "Merge_Properties")) {
 				xml04_parse_merge_properties (node, label);
 			} else {
 				g_warning (_("bad node =  \"%s\""), node->name);
@@ -230,13 +230,13 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	for (line_node = object_node->xmlChildrenNode; line_node != NULL;
 	     line_node = line_node->next) {
 
-		if (g_strcasecmp (line_node->name, "Line") == 0) {
+		if (xmlStrEqual (line_node->name, "Line")) {
 
 			nodes = NULL;
 			for (text_node = line_node->xmlChildrenNode;
 			     text_node != NULL; text_node = text_node->next) {
 
-				if (g_strcasecmp (text_node->name, "Field") ==
+				if (xmlStrEqual (text_node->name, "Field") ==
 				    0) {
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = TRUE;
@@ -433,7 +433,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 
 	child = node->xmlChildrenNode;
 	text_node = g_new0 (glTextNode, 1);
-	if (g_strcasecmp (child->name, "Field") == 0) {
+	if (xmlStrEqual (child->name, "Field")) {
 		text_node->field_flag = TRUE;
 		text_node->data       = xmlGetProp (child, "name");
 	} else if (xmlNodeIsText (child)) {

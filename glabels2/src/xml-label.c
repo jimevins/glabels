@@ -177,8 +177,10 @@ gl_xml_label_open (const gchar      *filename,
 
 	xmlFreeDoc (doc);
 
-	gl_label_set_filename (label, filename);
-	gl_label_clear_modified (label);
+	if (label) {
+		gl_label_set_filename (label, filename);
+		gl_label_clear_modified (label);
+	}
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -206,9 +208,11 @@ gl_xml_label_open_buffer (const gchar      *buffer,
 
 	label = xml_doc_to_label (doc, status);
 
-	gl_label_clear_modified (label);
-
 	xmlFreeDoc (doc);
+
+	if (label) {
+		gl_label_clear_modified (label);
+	}
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -284,7 +288,7 @@ xml_parse_label (xmlNodePtr        root,
 
 	*status = XML_LABEL_OK;
 
-	if (g_strcasecmp (root->name, "Document") != 0) {
+	if (!xmlStrEqual (root->name, "Document")) {
 		g_warning (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
@@ -294,7 +298,7 @@ xml_parse_label (xmlNodePtr        root,
 
 	/* Pass 1, extract data nodes to pre-load cache. */
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
-		if (g_strcasecmp (node->name, "Data") == 0) {
+		if (xmlStrEqual (node->name, "Data")) {
 			xml_parse_data (node, label);
 		}
 	}
@@ -302,7 +306,7 @@ xml_parse_label (xmlNodePtr        root,
 	/* Pass 2, now extract everything else. */
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (g_strcasecmp (node->name, "Sheet") == 0) {
+		if (xmlStrEqual (node->name, "Sheet")) {
 			template = gl_xml_template_parse_sheet (node);
 			if (!template) {
 				*status = XML_LABEL_UNKNOWN_MEDIA;
@@ -310,11 +314,11 @@ xml_parse_label (xmlNodePtr        root,
 			}
 			gl_label_set_template (label, template);
 			gl_template_free (&template);
-		} else if (g_strcasecmp (node->name, "Objects") == 0) {
+		} else if (xmlStrEqual (node->name, "Objects")) {
 			xml_parse_objects (node, label);
-		} else if (g_strcasecmp (node->name, "Merge_Fields") == 0) {
+		} else if (xmlStrEqual (node->name, "Merge_Fields")) {
 			xml_parse_merge_fields (node, label);
-		} else if (g_strcasecmp (node->name, "Data") == 0) {
+		} else if (xmlStrEqual (node->name, "Data")) {
 			/* Handled in pass 1. */
 		} else {
 			if (!xmlNodeIsText (node)) {
@@ -346,7 +350,7 @@ xml_parse_objects (xmlNodePtr  objects_node,
 
 	for (node = objects_node->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (g_strcasecmp (node->name, "Object") == 0) {
+		if (xmlStrEqual (node->name, "Object")) {
 			xml_parse_object (node, label);
 		} else {
 			if (!xmlNodeIsText (node)) {
@@ -374,17 +378,17 @@ xml_parse_object (xmlNodePtr  object_node,
 
 	string = xmlGetProp (object_node, "type");
 
-	if ( g_strcasecmp (string, "text") == 0 ) {
+	if ( xmlStrEqual (string, "Text") ) {
 		object = xml_parse_text_props (object_node, label);
-	} else if ( g_strcasecmp (string, "box") == 0 ) {
+	} else if ( xmlStrEqual (string, "Box") ) {
 		object = xml_parse_box_props (object_node, label);
-	} else if ( g_strcasecmp (string, "line") == 0 ) {
+	} else if ( xmlStrEqual (string, "Line") ) {
 		object = xml_parse_line_props (object_node, label);
-	} else if ( g_strcasecmp (string, "ellipse") == 0 ) {
+	} else if ( xmlStrEqual (string, "Ellipse") ) {
 		object = xml_parse_ellipse_props (object_node, label);
-	} else if ( g_strcasecmp (string, "image") == 0 ) {
+	} else if ( xmlStrEqual (string, "Image") ) {
 		object = xml_parse_image_props (object_node, label);
-	} else if ( g_strcasecmp (string, "barcode") == 0 ) {
+	} else if ( xmlStrEqual (string, "Barcode") ) {
 		object = xml_parse_barcode_props (object_node, label);
 	} else {
 		g_warning ("Unknown label object type \"%s\"", string);
@@ -462,18 +466,18 @@ xml_parse_text_props (xmlNodePtr  object_node,
 	     line_node != NULL;
 	     line_node = line_node->next) {
 
-		if (g_strcasecmp (line_node->name, "Line") == 0) {
+		if (xmlStrEqual (line_node->name, "Line")) {
 
 			nodes = NULL;
 			for (text_node = line_node->xmlChildrenNode;
 			     text_node != NULL; text_node = text_node->next) {
 
-				if (g_strcasecmp (text_node->name, "Field") == 0) {
+				if (xmlStrEqual (text_node->name, "Field")) {
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = TRUE;
 					node_text->data = xmlGetProp (text_node, "name");
 					nodes =	g_list_append (nodes, node_text);
-				} else if (g_strcasecmp (text_node->name, "Literal") == 0) {
+				} else if (xmlStrEqual (text_node->name, "Literal")) {
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = FALSE;
 					node_text->data =
@@ -631,10 +635,10 @@ xml_parse_image_props (xmlNodePtr  node,
 
 	filename = g_new0 (glTextNode, 1);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
-		if (g_strcasecmp (child->name, "Field") == 0) {
+		if (xmlStrEqual (child->name, "Field")) {
 			filename->field_flag = TRUE;
 			filename->data = xmlGetProp (child, "name");
-		} else if (g_strcasecmp (child->name, "File") == 0) {
+		} else if (xmlStrEqual (child->name, "File")) {
 			filename->field_flag = FALSE;
 			filename->data = xmlGetProp (child, "src");
 		} else if (!xmlNodeIsText (child)) {
@@ -687,10 +691,10 @@ xml_parse_barcode_props (xmlNodePtr  node,
 
 	text_node = g_new0 (glTextNode, 1);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
-		if (g_strcasecmp (child->name, "Field") == 0) {
+		if (xmlStrEqual (child->name, "Field")) {
 			text_node->field_flag = TRUE;
 			text_node->data = xmlGetProp (child, "name");
-		} else if (g_strcasecmp (child->name, "Literal") == 0) {
+		} else if (xmlStrEqual (child->name, "Literal")) {
 			text_node->field_flag = FALSE;
 			text_node->data = xmlNodeGetContent (child);
 		} else if (!xmlNodeIsText (child)) {
@@ -752,7 +756,7 @@ xml_parse_data (xmlNodePtr  node,
 
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
-		if (g_strcasecmp (child->name, "Pixdata") == 0) {
+		if (xmlStrEqual (child->name, "Pixdata")) {
 			xml_parse_pixdata (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {

@@ -95,7 +95,7 @@ gl_xml_template_read_templates_from_file (GList *templates,
 		xmlFreeDoc (doc);
 		return templates;
 	}
-	if (g_strcasecmp (root->name, "glabels-templates") != 0) {
+	if (!xmlStrEqual (root->name, "GLabels-templates")) {
 		g_warning ("\"%s\" is not a glabels template file (wrong root node)",
 		      xml_filename);
 		xmlFreeDoc (doc);
@@ -104,12 +104,12 @@ gl_xml_template_read_templates_from_file (GList *templates,
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (g_strcasecmp (node->name, "Sheet") == 0) {
+		if (xmlStrEqual (node->name, "Sheet")) {
 			template = gl_xml_template_parse_sheet (node);
 			templates = g_list_append (templates, template);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
-				if (g_strcasecmp (node->name,"comment") != 0) {
+				if (!xmlStrEqual (node->name,"comment")) {
 					g_warning ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -141,10 +141,10 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name->data);
 
 	template->page_size = xmlGetProp (sheet_node, "size");
-	if ( strcmp (template->page_size,"US-Letter") == 0 ) {
+	if ( xmlStrEqual (template->page_size,"US-Letter")) {
 		template->page_size = "US Letter";
 	}
-	if (g_strcasecmp (template->page_size, "Other") == 0) {
+	if (xmlStrEqual (template->page_size, "Other")) {
 
 		template->page_width = gl_xml_get_prop_double (sheet_node, "width", 0);
 		template->page_height = gl_xml_get_prop_double (sheet_node, "height", 0);
@@ -163,12 +163,12 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 
 	for (node = sheet_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (g_strcasecmp (node->name, "Label") == 0) {
+		if (xmlStrEqual (node->name, "Label")) {
 			xml_parse_label (node, template);
-		} else if (g_strcasecmp (node->name, "Alias") == 0) {
+		} else if (xmlStrEqual (node->name, "Alias")) {
 			xml_parse_alias (node, template);
 		} else {
-			if (g_strcasecmp (node->name, "text") != 0) {
+			if (!xmlNodeIsText (node)) {
 				g_warning ("bad node =  \"%s\"", node->name);
 			}
 		}
@@ -192,11 +192,11 @@ xml_parse_label (xmlNodePtr  label_node,
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	style = xmlGetProp (label_node, "style");
-	if (g_strcasecmp (style, "rectangle") == 0) {
+	if (xmlStrEqual (style, "rectangle")) {
 		template->label.style = GL_TEMPLATE_STYLE_RECT;
-	} else if (g_strcasecmp (style, "round") == 0) {
+	} else if (xmlStrEqual (style, "round")) {
 		template->label.style = GL_TEMPLATE_STYLE_ROUND;
-	} else if (g_strcasecmp (style, "cd") == 0) {
+	} else if (xmlStrEqual (style, "cd")) {
 		template->label.style = GL_TEMPLATE_STYLE_CD;
 	} else {
 		template->label.style = GL_TEMPLATE_STYLE_RECT;
@@ -230,11 +230,11 @@ xml_parse_label (xmlNodePtr  label_node,
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (g_strcasecmp (node->name, "Layout") == 0) {
+		if (xmlStrEqual (node->name, "Layout")) {
 			xml_parse_layout (node, template);
-		} else if (g_strcasecmp (node->name, "Markup") == 0) {
+		} else if (xmlStrEqual (node->name, "Markup")) {
 			xml_parse_markup (node, template);
-		} else if (g_strcasecmp (node->name, "text") != 0) {
+		} else if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
 	}
@@ -266,7 +266,7 @@ xml_parse_layout (xmlNodePtr  layout_node,
 
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (g_strcasecmp (node->name, "text") != 0) {
+		if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
 	}
@@ -293,7 +293,7 @@ xml_parse_markup (xmlNodePtr  markup_node,
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	type = xmlGetProp (markup_node, "type");
-	if (g_strcasecmp (type, "margin") == 0) {
+	if (xmlStrEqual (type, "margin")) {
 
 		size = gl_xml_get_prop_double (markup_node, "size", 0);
 
@@ -301,7 +301,7 @@ xml_parse_markup (xmlNodePtr  markup_node,
 			g_list_append (template->label.any.markups,
 				       gl_template_markup_margin_new (size));
 
-	} else if (g_strcasecmp (type, "line") == 0) {
+	} else if (xmlStrEqual (type, "line")) {
 
 		x1 = gl_xml_get_prop_double (markup_node, "x1", 0);
 		y1 = gl_xml_get_prop_double (markup_node, "y1", 0);
@@ -316,7 +316,7 @@ xml_parse_markup (xmlNodePtr  markup_node,
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (g_strcasecmp (node->name, "text") != 0) {
+		if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
 	}
@@ -357,7 +357,7 @@ gl_xml_template_add_sheet (const glTemplate *template,
 	xmlSetProp (node, "name", template->name->data);
 
 	xmlSetProp (node, "size", template->page_size);
-	if (g_strcasecmp (template->page_size, "Other") == 0) {
+	if (xmlStrEqual (template->page_size, "Other")) {
 
 		gl_xml_set_prop_double (node, "width", template->page_width);
 		gl_xml_set_prop_double (node, "height", template->page_height);

@@ -74,7 +74,8 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
-		val = !(g_strcasecmp (string, "false") == 0);
+		val = !((xmlStrcasecmp (string, "false") == 0) ||
+			xmlStrEqual (string, "0"));;
 		g_free (string);
 		return val;
 	}
