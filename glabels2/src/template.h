@@ -59,7 +59,7 @@ typedef struct {
 typedef struct {
 	glTemplateLabelParent parent;
 
-	gdouble               r1, r2;   /* Dimensions */
+	gdouble               r1, r2, w, h; /* Dimensions, w&h are for business card CDs */
 } glTemplateLabelCD;
 
 typedef union {

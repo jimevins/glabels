@@ -44,6 +44,9 @@
 
 #define GL_PRINT_DEFAULT_PAPER "US Letter"
 
+#define ARC_FINE   2  /* Resolution in degrees of large arcs */
+#define ARC_COURSE 5  /* Resolution in degrees of small arcs */
+
 /*=========================================================================*/
 /* Private types.                                                          */
 /*=========================================================================*/
@@ -146,6 +149,14 @@ static void       create_rounded_rectangle_path (GnomePrintContext *pc,
 						 gdouble            w,
 						 gdouble            h,
 						 gdouble            r);
+
+static void       create_clipped_circle_path    (GnomePrintContext *pc,
+						 gdouble            x0,
+						 gdouble            y0,
+						 gdouble            w,
+						 gdouble            h,
+						 gdouble            r);
+
 
 /*****************************************************************************/
 /* Simple (no merge data) print command.                                     */
@@ -1002,13 +1013,24 @@ draw_outline (PrintInfo *pi,
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		/* CD style, round label w/ concentric round hole */
-		r1 = template->label.cd.r1;
-		r2 = template->label.cd.r2;
-		create_ellipse_path (pi->pc, r1, r1, r1, r1);
-		gnome_print_stroke (pi->pc);
-		create_ellipse_path (pi->pc, r1, r1, r2, r2);
-		gnome_print_stroke (pi->pc);
+		if ((template->label.cd.h == 0) && (template->label.cd.w == 0)) {
+			/* CD style, round label w/ concentric round hole */
+			r1 = template->label.cd.r1;
+			r2 = template->label.cd.r2;
+			create_ellipse_path (pi->pc, r1, r1, r1, r1);
+			gnome_print_stroke (pi->pc);
+			create_ellipse_path (pi->pc, r1, r1, r2, r2);
+			gnome_print_stroke (pi->pc);
+		} else {
+			/* Business Card CD style, clipped round label w/ hole */
+			gl_label_get_size (label, &w, &h);
+			r1 = template->label.cd.r1;
+			r2 = template->label.cd.r2;
+			create_clipped_circle_path (pi->pc, w/2, h/2, w, h, r1);
+			gnome_print_stroke (pi->pc);
+			create_ellipse_path (pi->pc, w/2, h/2, r2, r2);
+			gnome_print_stroke (pi->pc);
+		}
 		break;
 
 	default:
@@ -1059,9 +1081,18 @@ clip_to_outline (PrintInfo *pi,
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		r1 = template->label.cd.r1;
-		create_ellipse_path (pi->pc, r1, r1, r1, r1);
-		gnome_print_clip (pi->pc);
+		if ((template->label.cd.h == 0) && (template->label.cd.w == 0)) {
+			/* CD style, round label w/ concentric round hole */
+			r1 = template->label.cd.r1;
+			create_ellipse_path (pi->pc, r1, r1, r1, r1);
+			gnome_print_clip (pi->pc);
+		} else {
+			/* Business Card CD style, clipped round label w/ hole */
+			gl_label_get_size (label, &w, &h);
+			r1 = template->label.cd.r1;
+			create_clipped_circle_path (pi->pc, w/2, h/2, w, h, r1);
+			gnome_print_clip (pi->pc);
+		}
 		break;
 
 	default:
@@ -1111,7 +1142,7 @@ create_ellipse_path (GnomePrintContext *pc,
 
 	gnome_print_newpath (pc);
 	gnome_print_moveto (pc, x0 + rx, y0);
-	for (i_theta = 2; i_theta <= 360; i_theta += 2) {
+	for (i_theta = ARC_FINE; i_theta <= 360; i_theta += ARC_FINE) {
 		x = x0 + rx * cos (i_theta * G_PI / 180.0);
 		y = y0 + ry * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
@@ -1137,22 +1168,22 @@ create_rounded_rectangle_path (GnomePrintContext *pc,
 	gnome_print_newpath (pc);
 
 	gnome_print_moveto (pc, x0 + r, y0);
-	for (i_theta = 5; i_theta <= 90; i_theta += 5) {
+	for (i_theta = ARC_COURSE; i_theta <= 90; i_theta += ARC_COURSE) {
 		x = x0 + r - r * sin (i_theta * G_PI / 180.0);
 		y = y0 + r - r * cos (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		x = x0 + r - r * cos (i_theta * G_PI / 180.0);
 		y = y0 + (h - r) + r * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		x = x0 + (w - r) + r * sin (i_theta * G_PI / 180.0);
 		y = y0 + (h - r) + r * cos (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		x = x0 + (w - r) + r * cos (i_theta * G_PI / 180.0);
 		y = y0 + r - r * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
@@ -1163,3 +1194,96 @@ create_rounded_rectangle_path (GnomePrintContext *pc,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+
+static void
+create_clipped_circle_path (GnomePrintContext *pc,
+			    gdouble            x0,
+			    gdouble            y0,
+			    gdouble            w,
+			    gdouble            h,
+			    gdouble            r)
+{
+	gdouble x, y;
+	gdouble theta1, theta2;
+	gint    i_theta;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	theta1 = (180.0/G_PI) * acos (w / (2.0*r));
+	theta2 = (180.0/G_PI) * asin (h / (2.0*r));
+
+	gnome_print_newpath (pc);
+
+	x = x0 + r * cos (theta1 * G_PI / 180.0);
+	y = y0 + r * sin (theta1 * G_PI / 180.0);
+	gnome_print_moveto (pc, x, y);
+
+	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
+		x = x0 + r * cos (i_theta * G_PI / 180.0);
+		y = y0 + r * sin (i_theta * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	x = x0 + r * cos (theta2 * G_PI / 180.0);
+	y = y0 + r * sin (theta2 * G_PI / 180.0);
+	gnome_print_lineto (pc, x, y);
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		x = x0 + r * cos ((180-theta2) * G_PI / 180.0);
+		y = y0 + r * sin ((180-theta2) * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
+		x = x0 + r * cos (i_theta * G_PI / 180.0);
+		y = y0 + r * sin (i_theta * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	x = x0 + r * cos ((180-theta1) * G_PI / 180.0);
+	y = y0 + r * sin ((180-theta1) * G_PI / 180.0);
+	gnome_print_lineto (pc, x, y);
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		x = x0 + r * cos ((180+theta1) * G_PI / 180.0);
+		y = y0 + r * sin ((180+theta1) * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
+		x = x0 + r * cos (i_theta * G_PI / 180.0);
+		y = y0 + r * sin (i_theta * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	x = x0 + r * cos ((180+theta2) * G_PI / 180.0);
+	y = y0 + r * sin ((180+theta2) * G_PI / 180.0);
+	gnome_print_lineto (pc, x, y);
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		x = x0 + r * cos ((360-theta2) * G_PI / 180.0);
+		y = y0 + r * sin ((360-theta2) * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
+		x = x0 + r * cos (i_theta * G_PI / 180.0);
+		y = y0 + r * sin (i_theta * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		x = x0 + r * cos ((360-theta1) * G_PI / 180.0);
+		y = y0 + r * sin ((360-theta1) * G_PI / 180.0);
+		gnome_print_lineto (pc, x, y);
+	}
+
+	x = x0 + r * cos (theta1 * G_PI / 180.0);
+	y = y0 + r * sin (theta1 * G_PI / 180.0);
+	gnome_print_lineto (pc, x, y);
+
+	gnome_print_closepath (pc);
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+

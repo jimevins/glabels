@@ -467,32 +467,11 @@ gl_label_get_size (glLabel *label,
 		return;
 	}
 
-        switch (template->label.style) {
-
-        case GL_TEMPLATE_STYLE_RECT:
-                if (!label->private->rotate_flag) {
-                        *w = template->label.rect.w;
-                        *h = template->label.rect.h;
-                } else {
-                        *w = template->label.rect.h;
-                        *h = template->label.rect.w;
-                }
-                break;
-
-        case GL_TEMPLATE_STYLE_ROUND:
-                *w = *h = 2.0 * template->label.round.r;
-                break;
-
-        case GL_TEMPLATE_STYLE_CD:
-                *w = *h = 2.0 * template->label.cd.r1;
-                break;
-
-        default:
-                g_warning ("Unknown template label style %d",
-			   template->label.style);
-		*w = *h = 0;
-		break;
-        }
+	if (!label->private->rotate_flag) {
+		gl_template_get_label_size (template, w, h);
+	} else {
+		gl_template_get_label_size (template, h, w);
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

@@ -589,8 +589,9 @@ static void
 xml_parse_label (xmlNodePtr label_node,
 		 glTemplate * template)
 {
-	xmlNodePtr node;
-	gchar *style;
+	xmlNodePtr  node;
+	gchar      *style;
+	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -605,6 +606,7 @@ xml_parse_label (xmlNodePtr label_node,
 		template->label.style = GL_TEMPLATE_STYLE_RECT;
 		g_warning ("Unknown label style in template");
 	}
+	g_free (style);
 
 	switch (template->label.style) {
 	case GL_TEMPLATE_STYLE_RECT:
@@ -624,6 +626,20 @@ xml_parse_label (xmlNodePtr label_node,
 		    g_strtod (xmlGetProp (label_node, "radius"), NULL);
 		template->label.cd.r2 =
 		    g_strtod (xmlGetProp (label_node, "hole"), NULL);
+		string = xmlGetProp (label_node, "width");
+		if (string != NULL) {
+			template->label.cd.w = g_strtod (string, NULL);
+			g_free (string);
+		} else {
+			template->label.cd.w = 0.0;
+		}
+		string = xmlGetProp (label_node, "height");
+		if (string != NULL) {
+			template->label.cd.h = g_strtod (string, NULL);
+			g_free (string);
+		} else {
+			template->label.cd.h = 0.0;
+		}
 		break;
 	default:
 		break;
@@ -807,6 +823,16 @@ xml_add_label (const glTemplate *template,
 		string = g_strdup_printf ("%g", template->label.cd.r2);
 		xmlSetProp (node, "hole", string);
 		g_free (string);
+		if (template->label.cd.h != 0.0) {
+			string = g_strdup_printf ("%g", template->label.cd.h);
+			xmlSetProp (node, "width", string);
+			g_free (string);
+		}
+		if (template->label.cd.w != 0.0) {
+			string = g_strdup_printf ("%g", template->label.cd.w);
+			xmlSetProp (node, "height", string);
+			g_free (string);
+		}
 		break;
 	default:
 		g_warning ("Unknown label style");
@@ -1033,8 +1059,16 @@ gl_template_get_label_size (const glTemplate *template,
 		*h = 2.0 * template->label.round.r;
 		break;
 	case GL_TEMPLATE_STYLE_CD:
-		*w = 2.0 * template->label.cd.r1;
-		*h = 2.0 * template->label.cd.r1;
+		if (template->label.cd.w == 0.0) {
+			*w = 2.0 * template->label.cd.r1;
+		} else {
+			*w = template->label.cd.w;
+		}
+		if (template->label.cd.h == 0.0) {
+			*h = 2.0 * template->label.cd.r1;
+		} else {
+			*h = template->label.cd.h;
+		}
 		break;
 	default:
 		*w = 0.0;

@@ -22,7 +22,8 @@
 
 #include <config.h>
 
-#include "libgnomeprint/gnome-print-paper.h"
+#include <math.h>
+#include <libgnomeprint/gnome-print-paper.h>
 
 #include "wdgt-mini-preview.h"
 #include "marshal.h"
@@ -34,6 +35,8 @@
 #define SHADOW_X_OFFSET 3
 #define SHADOW_Y_OFFSET 3
 #define SHADOW_COLOR GL_COLOR_A (33, 33, 33, 192)
+
+#define RES 5 /* Resolution in degrees for Business Card CD outlines */
 
 /*===========================================*/
 /* Private types                             */
@@ -72,6 +75,13 @@ static void mini_outline_list_free             (GList ** list);
 static gint canvas_event_cb                    (GnomeCanvas * canvas,
 						GdkEvent * event,
 						gpointer data);
+
+static GnomeCanvasItem *cdbc_item              (GnomeCanvasGroup *group,
+						gdouble           x1,
+						gdouble           y1,
+						glTemplate       *template);
+
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -366,7 +376,6 @@ mini_outline_list_new (GnomeCanvas *canvas,
 						      NULL);
 			break;
 		case GL_TEMPLATE_STYLE_ROUND:
-		case GL_TEMPLATE_STYLE_CD:
 			item = gnome_canvas_item_new (group,
 						      gnome_canvas_ellipse_get_type(),
 						      "x1", x1,
@@ -377,6 +386,22 @@ mini_outline_list_new (GnomeCanvas *canvas,
 						      "outline_color", "black",
 						      "fill_color", "white",
 						      NULL);
+			break;
+		case GL_TEMPLATE_STYLE_CD:
+			if ( w == h ) {
+				item = gnome_canvas_item_new (group,
+							      gnome_canvas_ellipse_get_type(),
+							      "x1", x1,
+							      "y1", y1,
+							      "x2", x2,
+							      "y2", y2,
+							      "width_pixels", 1,
+							      "outline_color", "black",
+							      "fill_color", "white",
+							      NULL);
+			} else {
+				item = cdbc_item (group, x1, y1, template);
+			}
 			break;
 		default:
 			g_warning ("Unknown label style");
@@ -560,5 +585,100 @@ gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview * preview,
 	}
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Draw CD business card item (cut-off in w and/or h).            */
+/*--------------------------------------------------------------------------*/
+static GnomeCanvasItem *
+cdbc_item (GnomeCanvasGroup *group,
+	   gdouble           x1,
+	   gdouble           y1,
+	   glTemplate       *template)
+{
+	GnomeCanvasPoints *points;
+	gint               i_coords, i_theta;
+	gdouble            theta1, theta2;
+	gdouble            x0, y0, w, h, r;
+	GnomeCanvasItem   *item;
+
+	gl_template_get_label_size (template, &w, &h);
+	r = template->label.cd.r1;
+	x0 = x1 + (w/2.0);
+	y0 = y1 + (h/2.0);
+
+	theta1 = (180.0/G_PI) * acos (w / (2.0*r));
+	theta2 = (180.0/G_PI) * asin (h / (2.0*r));
+
+	points = gnome_canvas_points_new (360/RES + 1);
+	i_coords = 0;
+
+	points->coords[i_coords++] = x0 + r * cos (theta1 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin (theta1 * G_PI / 180.0);
+
+	for ( i_theta = theta1 + RES; i_theta < theta2; i_theta +=RES ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos (theta2 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin (theta2 * G_PI / 180.0);
+
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((180-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((180-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180-theta2+RES; i_theta < (180-theta1); i_theta +=RES ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos ((180-theta1) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin ((180-theta1) * G_PI / 180.0);
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((180+theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((180+theta1) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180+theta1+RES; i_theta < (180+theta2); i_theta +=RES ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos ((180+theta2) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin ((180+theta2) * G_PI / 180.0);
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((360-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((360-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 360-theta2+RES; i_theta < (360-theta1); i_theta +=RES ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((360-theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((360-theta1) * G_PI / 180.0);
+	}
+
+	points->num_points = i_coords / 2;
+
+
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_polygon_get_type (),
+				      "points", points,
+				      "width_pixels", 1,
+				      "outline_color", "black",
+				      "fill_color", "white",
+				      NULL);
+
+	gnome_canvas_points_free (points);
+
+	return item;
 }
 

@@ -57,6 +57,9 @@
 #define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
 #define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
 
+#define ARC_FINE         2 /* Resolution in degrees of large arcs */
+#define ARC_COURSE       5 /* Resolution in degrees of small arcs */
+
 /*==========================================================================*/
 /* Private types.                                                           */
 /*==========================================================================*/
@@ -115,6 +118,7 @@ static void       draw_bg_fg_rect                 (glView *view);
 static void       draw_bg_fg_rounded_rect         (glView *view);
 static void       draw_bg_fg_round                (glView *view);
 static void       draw_bg_fg_cd                   (glView *view);
+static void       draw_bg_fg_cd_bc                (glView *view);
 
 static void       draw_grid_layer                 (glView *view);
 
@@ -129,6 +133,8 @@ static void       draw_markup_margin_rounded_rect (glView *view,
 static void       draw_markup_margin_round        (glView *view,
 						   glTemplateMarkupMargin *margin);
 static void       draw_markup_margin_cd           (glView *view,
+						   glTemplateMarkupMargin *margin);
+static void       draw_markup_margin_cd_bc        (glView *view,
 						   glTemplateMarkupMargin *margin);
 
 static void       draw_markup_line                (glView *view,
@@ -593,7 +599,11 @@ draw_bg_fg_layers (glView *view)
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		draw_bg_fg_cd (view);
+		if ((template->label.cd.w == 0.0) && (template->label.cd.h == 0.0) ) {
+			draw_bg_fg_cd (view);
+		} else {
+			draw_bg_fg_cd_bc (view);
+		}
 		break;
 
 	default:
@@ -667,27 +677,27 @@ draw_bg_fg_rounded_rect (glView *view)
 	template = gl_label_get_template (label);
 	r = template->label.rect.r;
 
-	points = gnome_canvas_points_new (4 * (1 + 90 / 5));
+	points = gnome_canvas_points_new (4 * (1 + 90 / ARC_COURSE));
 	i_coords = 0;
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 		    r - r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 		    r - r * cos (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 		    r - r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 		    (h - r) + r * sin (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 		    (w - r) + r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 		    (h - r) + r * cos (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 		    (w - r) + r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
@@ -820,6 +830,135 @@ draw_bg_fg_cd (glView *view)
 				      "width_pixels", 2,
 				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw Business Card CD style background, CD w/ chopped ends.     */
+/*---------------------------------------------------------------------------*/
+static void
+draw_bg_fg_cd_bc (glView *view)
+{
+	glLabel           *label = view->label;
+	glTemplate        *template;
+	GnomeCanvasPoints *points;
+	gint               i_coords, i_theta;
+	gdouble            theta1, theta2;
+	gdouble            x0, y0, w, h, r1, r2;
+	GnomeCanvasItem   *item;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (label != NULL);
+
+	template = gl_label_get_template (label);
+	gl_label_get_size (label, &w, &h);
+	x0 = w/2.0;
+	y0 = h/2.0;
+
+	r1 = template->label.cd.r1;
+	r2 = template->label.cd.r2;
+
+	theta1 = (180.0/G_PI) * acos (w / (2.0*r1));
+	theta2 = (180.0/G_PI) * asin (h / (2.0*r1));
+
+	points = gnome_canvas_points_new (360/ARC_FINE + 1);
+	i_coords = 0;
+
+	points->coords[i_coords++] = x0 + r1 * cos (theta1 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r1 * sin (theta1 * G_PI / 180.0);
+
+	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r1 * cos (theta2 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r1 * sin (theta2 * G_PI / 180.0);
+
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r1 * cos ((180-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin ((180-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r1 * cos ((180-theta1) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r1 * sin ((180-theta1) * G_PI / 180.0);
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r1 * cos ((180+theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin ((180+theta1) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r1 * cos ((180+theta2) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r1 * sin ((180+theta2) * G_PI / 180.0);
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r1 * cos ((360-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin ((360-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
+	}
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r1 * cos ((360-theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r1 * sin ((360-theta1) * G_PI / 180.0);
+	}
+
+	points->num_points = i_coords / 2;
+
+	/* Background */
+	/* outer circle */
+	item = gnome_canvas_item_new (view->bg_group,
+				      gnome_canvas_polygon_get_type (),
+				      "points", points,
+				      "fill_color_rgba", PAPER_COLOR,
+				      NULL);
+	/* hole */
+	item = gnome_canvas_item_new (view->bg_group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", x0 - r2,
+				      "y1", y0 - r2,
+				      "x2", x0 + r2,
+				      "y2", y0 + r2,
+				      "fill_color_rgba", GRID_COLOR,
+				      NULL);
+
+	/* Foreground */
+	/* outer circle */
+	item = gnome_canvas_item_new (view->fg_group,
+				      gnome_canvas_polygon_get_type (),
+				      "points", points,
+				      "width_pixels", 2,
+				      "outline_color_rgba", OUTLINE_COLOR,
+				      NULL);
+	/* hole */
+	item = gnome_canvas_item_new (view->fg_group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", x0 - r2,
+				      "y1", y0 - r2,
+				      "x2", x0 + r2,
+				      "y2", y0 + r2,
+				      "width_pixels", 2,
+				      "outline_color_rgba", OUTLINE_COLOR,
+				      NULL);
+
+	gnome_canvas_points_free (points);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -970,7 +1109,11 @@ draw_markup_margin (glView                 *view,
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		draw_markup_margin_cd (view, margin);
+		if ((template->label.cd.w == 0.0) && (template->label.cd.h == 0.0) ) {
+			draw_markup_margin_cd (view, margin);
+		} else {
+			draw_markup_margin_cd_bc (view, margin);
+		}
 		break;
 
 	default:
@@ -1043,27 +1186,27 @@ draw_markup_margin_rounded_rect (glView                 *view,
 	h = h - 2 * m;
 
 	/* rectangle with rounded corners */
-	points = gnome_canvas_points_new (4 * (1 + 90 / 5));
+	points = gnome_canvas_points_new (4 * (1 + 90 / ARC_COURSE));
 	i_coords = 0;
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 			m + r - r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 			m + r - r * cos (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 			m + r - r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 			m + (h - r) + r * sin (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 			m + (w - r) + r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
 			m + (h - r) + r * cos (i_theta * G_PI / 180.0);
 	}
-	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
+	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
 		points->coords[i_coords++] =
 			m + (w - r) + r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
@@ -1156,6 +1299,122 @@ draw_markup_margin_cd (glView                 *view,
 				      "y1", r1 - r2 - m,
 				      "x2", r1 + r2 + m,
 				      "y2", r1 + r2 + m,
+				      "width_pixels", 1,
+				      "outline_color_rgba", MARKUP_COLOR,
+				      NULL);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw Business Card CD margins.                                  */
+/*---------------------------------------------------------------------------*/
+static void
+draw_markup_margin_cd_bc (glView                 *view,
+			  glTemplateMarkupMargin *margin)
+{
+	glLabel           *label = view->label;
+	glTemplate        *template;
+	gdouble            m, r1, r2;
+	GnomeCanvasPoints *points;
+	gint               i_coords, i_theta;
+	gdouble            theta1, theta2;
+	gdouble            x0, y0, w, h, r;
+	GnomeCanvasItem   *item;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (label != NULL);
+
+	template = gl_label_get_template (label);
+	gl_label_get_size (label, &w, &h);
+	x0 = w/2.0;
+	y0 = h/2.0;
+
+	r1 = template->label.cd.r1;
+	r2 = template->label.cd.r2;
+	m  = margin->size;
+
+	/* outer margin */
+	r = r1 - m;
+	theta1 = (180.0/G_PI) * acos (w / (2.0*r1));
+	theta2 = (180.0/G_PI) * asin (h / (2.0*r1));
+
+	points = gnome_canvas_points_new (360/ARC_FINE + 1);
+	i_coords = 0;
+
+	points->coords[i_coords++] = x0 + r * cos (theta1 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin (theta1 * G_PI / 180.0);
+
+	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos (theta2 * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin (theta2 * G_PI / 180.0);
+
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((180-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((180-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos ((180-theta1) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin ((180-theta1) * G_PI / 180.0);
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((180+theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((180+theta1) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	points->coords[i_coords++] = x0 + r * cos ((180+theta2) * G_PI / 180.0);
+	points->coords[i_coords++] = y0 + r * sin ((180+theta2) * G_PI / 180.0);
+
+	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((360-theta2) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((360-theta2) * G_PI / 180.0);
+	}
+
+	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
+		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
+	}
+
+	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
+		points->coords[i_coords++] = x0 + r * cos ((360-theta1) * G_PI / 180.0);
+		points->coords[i_coords++] = y0 + r * sin ((360-theta1) * G_PI / 180.0);
+	}
+
+	points->num_points = i_coords / 2;
+
+	item = gnome_canvas_item_new (view->markup_group,
+				      gnome_canvas_polygon_get_type (),
+				      "points", points,
+				      "width_pixels", 1,
+				      "outline_color_rgba", MARKUP_COLOR,
+				      NULL);
+
+	gnome_canvas_points_free (points);
+
+	/* inner margin */
+	item = gnome_canvas_item_new (view->markup_group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", x0 - r2 - m,
+				      "y1", y0 - r2 - m,
+				      "x2", x0 + r2 + m,
+				      "y2", y0 + r2 + m,
 				      "width_pixels", 1,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
