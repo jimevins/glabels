@@ -37,3 +37,20 @@ gl_color_set_opacity (guint   color,
 	return new_color;
 }
 
+/*****************************************************************************/
+/* Convert canvas color into a GdkColor                                      */
+/*****************************************************************************/
+GdkColor *
+gl_color_to_gdk_color (guint color)
+{
+	GdkColor *gdk_color;
+
+	gdk_color = g_new0 (GdkColor, 1);
+
+	gdk_color->red   = GL_COLOR_F_RED   (color) * 65535;
+	gdk_color->green = GL_COLOR_F_GREEN (color) * 65535;
+	gdk_color->blue  = GL_COLOR_F_BLUE  (color) * 65535;
+
+	return gdk_color;
+}
+

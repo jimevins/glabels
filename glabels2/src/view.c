@@ -46,9 +46,10 @@
 /* Private macros and constants.                                            */
 /*==========================================================================*/
 
+#define BG_COLOR        GL_COLOR (192, 192, 192)
 #define OUTLINE_COLOR   GL_COLOR (173, 216, 230)
 #define PAPER_COLOR     GL_COLOR (255, 255, 255)
-#define GRID_COLOR      GL_COLOR (192, 192, 192)
+#define GRID_COLOR      BG_COLOR
 #define MARKUP_COLOR    GL_COLOR (240, 100, 100)
 
 #define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
@@ -359,9 +360,10 @@ gl_view_construct (glView *view)
 static GtkWidget *
 gl_view_construct_canvas (glView *view)
 {
-	gdouble scale;
-	glLabel *label = view->label;
-	gdouble label_width, label_height;
+	gdouble   scale;
+	glLabel  *label = view->label;
+	gdouble   label_width, label_height;
+	GdkColor *bg_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -371,6 +373,10 @@ gl_view_construct_canvas (glView *view)
 	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
 	view->canvas = gnome_canvas_new_aa ();
 	gtk_widget_pop_colormap ();
+
+	bg_color = gl_color_to_gdk_color (BG_COLOR);
+	gtk_widget_modify_bg (GTK_WIDGET(view->canvas), GTK_STATE_NORMAL, bg_color);
+	g_free (bg_color);
 
 	gl_label_get_size (label, &label_width, &label_height);
 	gl_debug (DEBUG_VIEW, "Label size: w=%lf, h=%lf",
