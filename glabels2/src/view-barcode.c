@@ -856,7 +856,7 @@ draw_barcode (glViewBarcode *view_barcode)
 			y_offset =
 			    bchar->fsize - gnome_font_get_descender (font);
 			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
-							gnome_canvas_hacktext_get_type (),
+							gl_canvas_hacktext_get_type (),
 							"x", bchar->x,
 							"y", bchar->y + y_offset,
 							"glyphlist", glyphlist,

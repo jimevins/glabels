@@ -541,6 +541,15 @@ gl_canvas_hacktext_req_repaint (glCanvasHacktext *hacktext,
 	if (gnome_pgl_bbox (hacktext->priv->pgl, &gbbox)) {
 		ArtIRect ibox;
 		art_drect_to_irect (&ibox, &gbbox);
+
+		/* hack: bounding box seems to be underestimated.
+		 * It may be doesn't take into account antialiasing*/
+
+		ibox.x0--;
+		ibox.y0--;
+		ibox.x1++;
+		ibox.y1++;
+		
 		gnome_canvas_request_redraw (hacktext->item.canvas, ibox.x0, ibox.y0, ibox.x1, ibox.y1);
 		if (bbox) art_irect_union (bbox, bbox, &ibox);
 	}
