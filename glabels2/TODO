@@ -1,10 +1,4 @@
 
-General
--------
-
-- Validate and clean up label templates:
-
-
 Development plan
 ----------------
 This development plan sets a specific set of milestones for future
@@ -35,9 +29,9 @@ Goals for 2.0:
 		   main window.  This dialog will be automatically displayed
 		   for new objects, so that the user can begin editing
 		   text, selecting images, or entering barcode data.
+		   [Completed]
 
 		-  Migrate to libgnomeprint-2.2. [Completed]
-
 
 
 Goals for beyond 2.0:
