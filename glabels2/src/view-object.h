@@ -85,8 +85,6 @@ GnomeCanvasItem *gl_view_object_item_new          (glViewObject         *view_ob
 						   const gchar          *first_arg_name,
 						   ...);
 
-GtkMenu         *gl_view_object_get_menu          (glViewObject         *view_object);
-
 void             gl_view_object_show_highlight    (glViewObject         *view_object);
 
 void             gl_view_object_hide_highlight    (glViewObject         *view_object);

@@ -46,7 +46,6 @@ struct _glViewObjectPrivate {
 	GnomeCanvasItem            *group;
 	glViewHighlight            *highlight;
 
-	GtkWidget                  *menu;
 	GtkWidget                  *property_dialog;
 };
 
@@ -64,8 +63,6 @@ static GObjectClass *parent_class = NULL;
 static void     gl_view_object_class_init    (glViewObjectClass   *klass);
 static void     gl_view_object_instance_init (glViewObject        *view_object);
 static void     gl_view_object_finalize      (GObject             *object);
-
-static GtkMenu *new_menu                     (glViewObject        *view_object);
 
 static void     object_moved_cb              (glLabelObject       *object,
 					      gdouble              x,
@@ -153,7 +150,6 @@ gl_view_object_finalize (GObject *object)
 	g_object_unref (GL_VIEW_OBJECT(object)->private->object);
 	g_object_unref (G_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->menu));
 	if (GL_VIEW_OBJECT(object)->private->property_dialog) {
 		gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_dialog));
 	}
@@ -232,8 +228,6 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	/* Create appropriate selection highlight canvas item. */
 	view_object->private->highlight =
 		GL_VIEW_HIGHLIGHT (gl_view_highlight_new (view_object, style));
-
-	view_object->private->menu = GTK_WIDGET(new_menu (view_object));
 
 	g_signal_connect (G_OBJECT (object), "moved",
 			  G_CALLBACK (object_moved_cb),
@@ -356,21 +350,6 @@ gl_view_object_get_dialog (glViewObject *view_object)
 }
 
 /*****************************************************************************/
-/* Popup menu for this object.                                               */
-/*****************************************************************************/
-GtkMenu *
-gl_view_object_get_menu (glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object), NULL);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return GTK_MENU(view_object->private->menu);
-}
-
-/*****************************************************************************/
 /* Highlight view of object.                                                 */
 /*****************************************************************************/
 void
@@ -402,60 +381,6 @@ gl_view_object_hide_highlight   (glViewObject *view_object)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-
-/*---------------------------------------------------------------------------*/
-/* Create a popup menu for this object view.                                 */
-/*---------------------------------------------------------------------------*/
-static GtkMenu *
-new_menu (glViewObject *view_object)
-{
-	GtkWidget *menu, *menuitem;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view_object && GL_VIEW_OBJECT(view_object), NULL);
-
-	menu = gtk_menu_new ();
-
-	menuitem = gtk_menu_item_new_with_label (_("Edit properties..."));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_view_object_show_dialog),
-				  view_object);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-
-	menuitem = gtk_menu_item_new_with_label (_("Delete"));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (g_object_unref), view_object);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-
-	menuitem = gtk_menu_item_new_with_label (_("Bring to front"));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_label_object_raise_to_top),
-				  view_object->private->object);
-
-	menuitem = gtk_menu_item_new_with_label (_("Send to back"));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_label_object_lower_to_bottom),
-				  view_object->private->object);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return GTK_MENU(menu);
-}
 
 /*****************************************************************************/
 /* Show property dialog.                                                     */
