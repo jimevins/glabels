@@ -11,4 +11,5 @@
 - Added option to auto-shrink text during document merge
 - Fixed memory leaks
 - Added format attibute to barcode objects, to allow correct layout of merged labels
+- Fixed mime type registration for GNOME 2.6
 
