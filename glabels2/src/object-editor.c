@@ -120,6 +120,15 @@ gl_object_editor_class_init (glObjectEditorClass *klass)
 			  gl_marshal_VOID__VOID,
 			  G_TYPE_NONE, 0);
 
+	gl_object_editor_signals[SIZE_CHANGED] =
+	    g_signal_new ("size_changed",
+			  G_OBJECT_CLASS_TYPE(object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (glObjectEditorClass, size_changed),
+			  NULL, NULL,
+			  gl_marshal_VOID__VOID,
+			  G_TYPE_NONE, 0);
+
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
@@ -330,6 +339,20 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE. Widget size changed callback.  Emit our "size-changed" signal.  */
+/*--------------------------------------------------------------------------*/
+void
+gl_object_editor_size_changed_cb (glObjectEditor *editor)
+{
+	gl_debug (DEBUG_EDITOR, "START");
+
+	/* Emit our "size_changed" signal */
+	g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

@@ -84,6 +84,9 @@ static void       update_canvas_item_from_object_cb  (glLabelObject    *object,
 static void       update_object_from_editor_cb       (glObjectEditor   *editor,
 						      glLabelObject    *object);
 
+static void       update_object_from_editor_size_cb  (glObjectEditor   *editor,
+						      glLabelObject    *object);
+
 static void       update_editor_from_object_cb       (glLabelObject    *object,
 						      glObjectEditor   *editor);
 
@@ -261,6 +264,8 @@ construct_properties_editor (glViewObject *view_object)
 	/* Connect signals. */
 	g_signal_connect (G_OBJECT (editor), "changed",
 			  G_CALLBACK(update_object_from_editor_cb), object);
+	g_signal_connect (G_OBJECT (editor), "size_changed",
+			  G_CALLBACK(update_object_from_editor_size_cb), object);
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_editor_from_object_cb), editor);
 	g_signal_connect (G_OBJECT (object), "moved",
@@ -298,7 +303,7 @@ static void
 update_object_from_editor_cb (glObjectEditor *editor,
 			      glLabelObject  *object)
 {
-	gdouble            x, y, w, h;
+	gdouble            x, y;
 	gchar             *font_family;
 	gdouble            font_size;
 	GnomeFontWeight    font_weight;
@@ -317,7 +322,6 @@ update_object_from_editor_cb (glObjectEditor *editor,
 					 editor);
 
 	gl_object_editor_get_position (editor, &x, &y);
-	gl_object_editor_get_size (editor, &w, &h);
 	font_family = gl_object_editor_get_font_family (editor);
 	font_size = gl_object_editor_get_font_size (editor);
 	font_weight = gl_object_editor_get_font_weight (editor);
@@ -327,7 +331,6 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	text_line_spacing = (gdouble) gl_object_editor_get_text_line_spacing (editor);
 
 	gl_label_object_set_position (object, x, y);
-	gl_label_object_set_size (object, w, h);
 	gl_label_object_set_font_family (object, font_family);
 	gl_label_object_set_font_size (object, font_size);
 	gl_label_object_set_font_weight (object, font_weight);
@@ -337,6 +340,38 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_object_set_text_line_spacing (object, text_line_spacing);
 
 	g_free (font_family);
+
+	g_signal_handlers_unblock_by_func (G_OBJECT(object),
+					   update_editor_from_object_cb,
+					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT(object),
+					   update_editor_from_move_cb,
+					   editor);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  editor "changed" callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+update_object_from_editor_size_cb (glObjectEditor *editor,
+				   glLabelObject  *object)
+{
+	gdouble            w, h;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_signal_handlers_block_by_func (G_OBJECT(object),
+					 update_editor_from_object_cb,
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(object),
+					 update_editor_from_move_cb,
+					 editor);
+
+	gl_object_editor_get_size (editor, &w, &h);
+
+	gl_label_object_set_size (object, w, h);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_editor_from_object_cb,

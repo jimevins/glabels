@@ -187,6 +187,7 @@ w_spin_cb (glObjectEditor *editor)
                                                                                 
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
                                                                                 
 }
 
@@ -202,7 +203,7 @@ h_spin_cb (glObjectEditor *editor)
                                                                                 
         if (gtk_toggle_button_get_active (toggle)) {
 
-		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
                                                                                 
                 w = h / editor->priv->size_aspect_ratio;
                                                                                 
@@ -218,6 +219,7 @@ h_spin_cb (glObjectEditor *editor)
                                                                                 
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
                                                                                 
 }
 
@@ -252,6 +254,7 @@ size_reset_cb (glObjectEditor *editor)
 					   editor);
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
 }
 
 /*****************************************************************************/

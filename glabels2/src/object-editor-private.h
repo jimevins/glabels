@@ -123,6 +123,7 @@ struct _glObjectEditorPrivate {
 
 enum {
 	CHANGED,
+	SIZE_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -153,6 +154,7 @@ void gl_object_editor_prepare_data_page         (glObjectEditor        *editor);
 
 
 void gl_object_editor_changed_cb                (glObjectEditor        *editor);
+void gl_object_editor_size_changed_cb           (glObjectEditor        *editor);
 
 void lsize_prefs_changed_cb                     (glObjectEditor        *editor);
 void size_prefs_changed_cb                      (glObjectEditor        *editor);

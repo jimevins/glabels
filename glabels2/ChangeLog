@@ -1,3 +1,24 @@
+2004-01-02  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-size-page.c: (h_spin_cb):
+		Fixed cut-n-paste error in h_spin_cb that loaded h from
+		the wrong spinbutton.
+
+	* src/object-editor.h:
+	* src/object-editor.c: (gl_object_editor_class_init),
+	(gl_object_editor_changed_cb), (gl_object_editor_size_changed_cb):
+	* src/object-editor-private.h:
+	* src/object-editor-size-page.c: (w_spin_cb), (h_spin_cb),
+	(size_reset_cb):
+		Added "size_changed" signal.
+		
+	* src/view-text.c: (construct_properties_editor),
+	(update_object_from_editor_cb),
+	(update_object_from_editor_size_cb):
+		Track size changes from object editor separately from other
+		properties.  This is so the default size (0,0) of a text
+		object is not modified unintentionally.
+
 2003-12-30  Wayne Schuller  <k_wayne@linuxpower.org>
 
 	Added feature: line spacing - allows you to comfortably space a text box to

@@ -71,7 +71,8 @@ struct  _glObjectEditorClass
 {
 	GtkVBoxClass             parent_class;
 
-	void (*changed) (glObjectEditor *editor, gpointer user_data);
+	void (*changed)      (glObjectEditor *editor, gpointer user_data);
+	void (*size_changed) (glObjectEditor *editor, gpointer user_data);
 };
 
 
