@@ -666,7 +666,7 @@
   <!-- =================================================================== -->
   <Sheet name="Neato HandiCD-R" size="US-Letter"
 	 description="Business Card CD">
-    <Label id="0" style="rectangle" height="216" width="171" round="75">
+    <Label id="0" style="cd" radius="108" width="171" hole="58">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
     </Label>
