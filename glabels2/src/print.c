@@ -507,8 +507,7 @@ draw_text_object (PrintInfo * pi,
 	GnomeFont *font;
 	gchar **line;
 	gint i;
-	gdouble w;
-	gdouble x_offset, y_offset;
+	gdouble x_offset, y_offset, w, object_w, object_h;
 	gdouble x, y;
 	gdouble x0, y0;
 	gchar *text;
@@ -527,6 +526,7 @@ draw_text_object (PrintInfo * pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x0, &y0);
+	gl_label_object_get_size (object, &object_w, &object_h);
 	lines = gl_label_text_get_lines (object);
 	gl_label_text_get_props (object,
 				 &font_family, &font_size, &font_weight,
@@ -566,10 +566,10 @@ draw_text_object (PrintInfo * pi,
 			x_offset = 0.0;
 			break;
 		case GTK_JUSTIFY_CENTER:
-			x_offset = -w / 2.0;
+			x_offset = (object_w - w) / 2.0;
 			break;
 		case GTK_JUSTIFY_RIGHT:
-			x_offset = -w;
+			x_offset = object_w - w;
 			break;
 		default:
 			x_offset = 0.0;
