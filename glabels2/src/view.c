@@ -1401,7 +1401,7 @@ gl_view_select_region (glView  *view,
 	GList *p;
 	glViewObject *view_object;
 	glLabelObject *object;
-	gdouble i_x1, i_y1, i_x2, i_y2, w, h;
+	gdouble i_x1, i_y1, i_x2, i_y2;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1414,10 +1414,7 @@ gl_view_select_region (glView  *view,
 
 			object = gl_view_object_get_object (view_object);
 
-			gl_label_object_get_position (object, &i_x1, &i_y1);
-			gl_label_object_get_size (object, &w, &h);
-			i_x2 = i_x1 + w;
-			i_y2 = i_y1 + h;
+			gl_label_object_get_extent (object, &i_x1, &i_y1, &i_x2, &i_y2);
 			if ((i_x1 >= x1) && (i_x2 <= x2) && (i_y1 >= y1)
 			    && (i_y2 <= y2)) {
 				select_object_real (view, view_object);
@@ -1657,6 +1654,30 @@ gl_view_lower_selection (glView *view)
 		view_object = GL_VIEW_OBJECT (p->data);
 		label_object = gl_view_object_get_object (view_object);
 		gl_label_object_lower_to_bottom (label_object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Rotate selected objects by given angle.                                   */
+/*****************************************************************************/
+void
+gl_view_rotate_selection (glView *view,
+			  gdouble theta_degs)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *label_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		label_object = gl_view_object_get_object (view_object);
+		gl_label_object_rotate (label_object, theta_degs);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -2077,12 +2098,11 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 				}
 
 				dragging = TRUE;
-				gdk_pointer_grab (GTK_WIDGET (view->canvas)->
-						  window, FALSE,
-						  GDK_POINTER_MOTION_MASK |
-						  GDK_BUTTON_RELEASE_MASK |
-						  GDK_BUTTON_PRESS_MASK, NULL,
-						  NULL, event->button.time);
+				gnome_canvas_item_grab (canvas->root,
+							GDK_POINTER_MOTION_MASK |
+							GDK_BUTTON_RELEASE_MASK |
+							GDK_BUTTON_PRESS_MASK,
+							NULL, event->button.time);
 				group =
 				    gnome_canvas_root (GNOME_CANVAS
 						       (view->canvas));
@@ -2113,7 +2133,8 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		case 1:
 			if (dragging) {
 				dragging = FALSE;
-				gdk_pointer_ungrab (event->button.time);
+				gnome_canvas_item_ungrab (canvas->root,
+							  event->button.time);
 				gnome_canvas_window_to_world (canvas,
 							      event->button.x,
 							      event->button.y,

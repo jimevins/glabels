@@ -75,6 +75,8 @@ static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("ToolsObjectProperties", gl_tools_object_properties),
 	BONOBO_UI_VERB ("ToolsRaiseObjects", gl_tools_raise_objects),
 	BONOBO_UI_VERB ("ToolsLowerObjects", gl_tools_lower_objects),
+	BONOBO_UI_VERB ("ToolsRotateLeft", gl_tools_rotate_objects_left),
+	BONOBO_UI_VERB ("ToolsRotateRight", gl_tools_rotate_objects_right),
 	BONOBO_UI_VERB ("ToolsFlipHorizontal", gl_tools_flip_objects_horiz),
 	BONOBO_UI_VERB ("ToolsFlipVertical", gl_tools_flip_objects_vert),
 	BONOBO_UI_VERB ("SettingsPreferences", gl_cmd_settings_preferences),

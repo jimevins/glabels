@@ -298,6 +298,42 @@ gl_tools_lower_objects (BonoboUIComponent *uic,
 }
 
 /*****************************************************************************/
+/* Rotate objects left 90 degrees.                                           */
+/*****************************************************************************/
+void
+gl_tools_rotate_objects_left (BonoboUIComponent *uic,
+			      gpointer           user_data,
+			      const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_rotate_selection (GL_VIEW(window->view), -90.0);
+	}
+}
+
+/*****************************************************************************/
+/* Rotate objects right 90 degrees.                                          */
+/*****************************************************************************/
+void
+gl_tools_rotate_objects_right (BonoboUIComponent *uic,
+			       gpointer           user_data,
+			       const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_rotate_selection (GL_VIEW(window->view), 90.0);
+	}
+}
+
+/*****************************************************************************/
 /* Flip objects horizontally callback.                                       */
 /*****************************************************************************/
 void

@@ -39,8 +39,6 @@ struct _glViewObjectPrivate {
 	GnomeCanvasItem            *group;
 	glViewHighlight            *highlight;
 
-	gdouble                    affine[6];
-
 	GtkWidget                  *menu;
 	GtkWidget                  *property_dialog;
 
@@ -69,15 +67,13 @@ static void     object_moved_cb              (glLabelObject       *object,
 					      gdouble              y,
 					      glViewObject        *view_object);
 
-static void     raise_object_cb              (GtkWidget           *widget,
+static void     raise_object_cb              (glLabelObject       *object,
 					      glViewObject        *view_object);
 
-static void     lower_object_cb              (GtkWidget           *widget,
+static void     lower_object_cb              (glLabelObject       *object,
 					      glViewObject        *view_object);
 
-static void     flip_rotate_object_cb        (GtkWidget           *widget,
-					      glLabelObjectFlip    flip,
-					      gdouble              rotate_degs,
+static void     flip_rotate_object_cb        (glLabelObject       *object,
 					      glViewObject        *view_object);
 
 
@@ -209,8 +205,6 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	GnomeCanvas        *canvas;
 	GnomeCanvasGroup   *root;
 	gdouble            x, y, w, h;
-	glLabelObjectFlip  flip;
-	gdouble            a[6];
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -229,30 +223,6 @@ gl_view_object_set_object     (glViewObject         *view_object,
 				       "x", x,
 				       "y", y,
 				       NULL);
-
-	/* create affine to handle flipping and rotation transformations */
-	art_affine_identity (view_object->private->affine);
-#if 1
-	/* Apply appropriate flipping */
-	flip = gl_label_object_get_flip (object);
-	g_print ("Flip = %d\n", flip);
-	if ( flip & GL_LABEL_OBJECT_FLIP_HORIZ ) {
-		art_affine_translate (a, -w, 0.0);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-		art_affine_scale (a, -1.0, 1.0);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-	}
-	if ( flip & GL_LABEL_OBJECT_FLIP_VERT ) {
-		art_affine_translate (a, 0.0, -h);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-		art_affine_scale (a, 1.0, -1.0);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-	}
-#endif
 
 	/* Create appropriate selection highlight canvas item. */
 	view_object->private->highlight =
@@ -358,6 +328,7 @@ gl_view_object_item_new (glViewObject *view_object,
 {
 	GnomeCanvasItem *item;
 	va_list          args;
+	gdouble          affine[6];
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -370,17 +341,8 @@ gl_view_object_item_new (glViewObject *view_object,
         gnome_canvas_item_set_valist (item, first_arg_name, args);
         va_end (args);
 
-	g_print ("Affine = {%f, %f, %f, %f, %f, %f}\n",
-		 view_object->private->affine[0],
-		 view_object->private->affine[1],
-		 view_object->private->affine[2],
-		 view_object->private->affine[3],
-		 view_object->private->affine[4],
-		 view_object->private->affine[5]);
-
-#if 1
-	gnome_canvas_item_affine_absolute (item, view_object->private->affine);
-#endif
+	gl_label_object_get_applied_affine (view_object->private->object, affine);
+	gnome_canvas_item_affine_absolute (item, affine);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -557,11 +519,9 @@ object_moved_cb (glLabelObject *object,
 /* PRIVATE.  raise item to front callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-raise_object_cb (GtkWidget    *widget,
-		 glViewObject *view_object)
+raise_object_cb (glLabelObject *object,
+		 glViewObject  *view_object)
 {
-	glLabelObject *object;
-
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* send to top */
@@ -577,11 +537,9 @@ raise_object_cb (GtkWidget    *widget,
 /* PRIVATE.  lower item to back callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
-lower_object_cb (GtkWidget    *widget,
-		 glViewObject *view_object)
+lower_object_cb (glLabelObject *object,
+		 glViewObject  *view_object)
 {
-	glLabelObject *object;
-
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Send to bottom */
@@ -599,49 +557,22 @@ lower_object_cb (GtkWidget    *widget,
 /* PRIVATE.  Flip/rotate object callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
-flip_rotate_object_cb (GtkWidget         *widget,
-		       glLabelObjectFlip  flip,
-		       gdouble            rotate_degs,
-		       glViewObject      *view_object)
+flip_rotate_object_cb (glLabelObject *object,
+		       glViewObject  *view_object)
 {
-	glLabelObject   *object;
-	gdouble          a[6];
+	gdouble          affine[6];
 	gdouble          w, h;
 	GList           *p, *item_list;
 	GnomeCanvasItem *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	gl_label_object_get_size (view_object->private->object, &w, &h);
-
-	/* Reset to identity affine */
-	art_affine_identity (view_object->private->affine);
-
-	/* Apply appropriate flipping */
-	if ( flip & GL_LABEL_OBJECT_FLIP_HORIZ ) {
-		art_affine_translate (a, -w, 0.0);
-		art_affine_multiply (view_object->private->affine, view_object->private->affine, a);
-		art_affine_scale (a, -1.0, 1.0);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-	}
-	if ( flip & GL_LABEL_OBJECT_FLIP_VERT ) {
-		art_affine_translate (a, 0.0, -h);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-		art_affine_scale (a, 1.0, -1.0);
-		art_affine_multiply (view_object->private->affine,
-				     view_object->private->affine, a);
-	}
-
-#if 1
-	/* Apply newly constructed affine */
+	gl_label_object_get_applied_affine (object, affine);
 	item_list = GNOME_CANVAS_GROUP(view_object->private->group)->item_list;
-	for ( p=item_list; p != NULL; p=p->next) {
+	for ( p=item_list; p != NULL; p=p->next ) {
 		item = GNOME_CANVAS_ITEM(p->data);
-		gnome_canvas_item_affine_absolute (item, view_object->private->affine);
+		gnome_canvas_item_affine_absolute (item, affine);
 	}
-#endif
 
 	gl_debug (DEBUG_VIEW, "END");
 }

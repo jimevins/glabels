@@ -197,6 +197,7 @@ gl_view_highlight_new (glViewObject         *view_object,
 		       glViewHighlightStyle  style)
 {
 	glViewHighlight *view_highlight;
+	gdouble          affine[6];
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -225,6 +226,10 @@ gl_view_highlight_new (glViewObject         *view_object,
 		g_warning ("Invalid resizable highlight style");
 
 	}
+
+
+	gl_label_object_get_applied_affine (view_highlight->private->object, affine);
+	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "changed",
 			  G_CALLBACK (object_changed_cb), view_highlight);
@@ -783,8 +788,8 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x2, y2;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -795,8 +800,18 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -809,9 +824,6 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to bottom-right corner */
-			x2 = x + w;
-			y2 = y + h;
 			return TRUE;
 
 		default:
@@ -824,11 +836,16 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
 			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
 			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -838,11 +855,16 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
-			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
+			y1 = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
 			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
 			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -877,8 +899,8 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x1, y2;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -889,8 +911,18 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -903,9 +935,6 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to bottom-left corner */
-			x1 = x;
-			y2 = y + h;
 			return TRUE;
 
 		default:
@@ -918,11 +947,16 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = x1;
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
 			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
 			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -932,11 +966,16 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = x1;
-			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
-			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
-			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
+			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -971,8 +1010,8 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x2, y1;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -983,8 +1022,18 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -997,9 +1046,6 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to top-right corner */
-			x2 = x + w;
-			y1 = y;
 			return TRUE;
 
 		default:
@@ -1012,11 +1058,16 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			y = y1;
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			/* y1 unchanged */
 			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1026,11 +1077,16 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
-			y = y1;
-			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
-			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			/* y1 unchanged */
+			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1065,8 +1121,8 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x1, y1;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1077,8 +1133,18 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1092,9 +1158,6 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to top-left corner */
-			x1 = x;
-			y1 = y;
 			return TRUE;
 
 		default:
@@ -1108,11 +1171,16 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = x1;
-			y = y1;
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1123,11 +1191,16 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_MOTION_NOTIFY:
 		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = x1;
-			y = y1;
-			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
-			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1165,8 +1238,8 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x2;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1177,8 +1250,18 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1191,8 +1274,6 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to right side */
-			x2 = x + w;
 			return TRUE;
 
 		default:
@@ -1205,9 +1286,16 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			/* y1 unchanged */
 			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			h = y2 - y1;
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1217,9 +1305,16 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
-			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			/* y1 unchanged */
+			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
+			h = y2 - y1;
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1254,8 +1349,8 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble x1;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1266,8 +1361,18 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1280,8 +1385,6 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to left side */
-			x1 = x;
 			return TRUE;
 
 		default:
@@ -1294,9 +1397,16 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = x1;
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			h = y2 - y1;
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1306,9 +1416,16 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = x1;
-			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
+			h = y2 - y1;
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1343,8 +1460,8 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble y2;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1355,8 +1472,18 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1369,8 +1496,6 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to bottom-right corner */
-			y2 = y + h;
 			return TRUE;
 
 		default:
@@ -1383,9 +1508,16 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			w = x2 - x1;
 			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1395,9 +1527,16 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
-			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
+			w = x2 - x1;
+			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1432,8 +1571,8 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, w, h;
-	static gdouble y1;
+	gdouble x0, y0, w, h;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1444,8 +1583,18 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &w, &h);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1458,8 +1607,6 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to top side */
-			y1 = y;
 			return TRUE;
 
 		default:
@@ -1472,9 +1619,16 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			y = y1;
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			w = x2 - x1;
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
@@ -1484,9 +1638,16 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			y = y1;
-			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			w = x2 - x1;
+			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
@@ -1521,8 +1682,8 @@ p1_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, dx, dy;
-	static gdouble x0, y0;
+	gdouble x0, y0, dx, dy;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1533,8 +1694,18 @@ p1_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &dx, &dy);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1547,9 +1718,6 @@ p1_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to P2 */
-			x0 = x + dx;
-			y0 = y + dy;
 			return TRUE;
 
 		default:
@@ -1562,11 +1730,16 @@ p1_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = x0;
-			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = event->button.x;
+			y1 = event->button.y;
+			dx = (x2 - event->button.x);
+			dy = (y2 - event->button.y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
 
@@ -1576,11 +1749,16 @@ p1_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = x0;
-			y = y0;
-			dx = (event->motion.x - x0);
-			dy = (event->motion.y - y0);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			x1 = event->button.x;
+			y1 = event->button.y;
+			dx = (x2 - event->button.x);
+			dy = (y2 - event->button.y);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
 		} else {
@@ -1615,8 +1793,8 @@ p2_resize_event_handler (GnomeCanvasItem *handle_item,
 			 GdkEvent        *event,
 			 glViewHighlight *view_highlight)
 {
-	gdouble x, y, dx, dy;
-	static gdouble x0, y0;
+	gdouble x0, y0, dx, dy;
+	gdouble x1, y1, x2, y2;
 	static gboolean dragging = FALSE;
 	glLabelObject *object;
 	GdkCursor *cursor;
@@ -1627,8 +1805,18 @@ p2_resize_event_handler (GnomeCanvasItem *handle_item,
 	}
 
 	object = view_highlight->private->object;;
-	gl_label_object_get_position (object, &x, &y);
-	gl_label_object_get_size (object, &dx, &dy);
+
+	/* origin, relative to item */
+	gl_label_object_get_position (object, &x0, &y0);
+	gnome_canvas_item_w2i (view_highlight->private->group, &x0, &y0);
+
+	/* Top left corner, relative to item */
+	x1 = 0.0;
+	y1 = 0.0;
+
+	/* Bottom right corner, relative to item */
+	gl_label_object_get_size (object, &x2, &y2);
+
 
 	switch (event->type) {
 
@@ -1641,9 +1829,6 @@ p2_resize_event_handler (GnomeCanvasItem *handle_item,
 						GDK_BUTTON_RELEASE_MASK |
 						GDK_BUTTON_PRESS_MASK,
 						NULL, event->button.time);
-			/* Anchor to P1 */
-			x0 = x;
-			y0 = y;
 			return TRUE;
 
 		default:
@@ -1656,11 +1841,16 @@ p2_resize_event_handler (GnomeCanvasItem *handle_item,
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (handle_item,
 						  event->button.time);
-			x = x0;
-			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			dx = (event->button.x - x1);
+			dy = (event->button.y - x1);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
 
@@ -1670,11 +1860,16 @@ p2_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = x0;
-			y = y0;
-			dx = (event->motion.x - x0);
-			dy = (event->motion.y - y0);
-			gl_label_object_set_position (object, x, y);
+			gnome_canvas_item_w2i (view_highlight->private->group,
+					       &event->button.x, &event->button.y);
+			/* x1 unchanged */
+			/* y1 unchanged */
+			dx = (event->button.x - x1);
+			dy = (event->button.y - x1);
+			x0 = x0 + x1;
+			y0 = y0 + y1;
+			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
+			gl_label_object_set_position (object, x0, y0);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
 		} else {

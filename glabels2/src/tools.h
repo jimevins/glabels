@@ -82,6 +82,14 @@ void gl_tools_lower_objects            (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 
+void gl_tools_rotate_objects_left      (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_rotate_objects_right     (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
 void gl_tools_flip_objects_horiz       (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);

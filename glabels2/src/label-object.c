@@ -19,8 +19,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+#include <config.h>
 
 #include <glib.h>
+#include <libart_lgpl/libart.h>
 
 #include "label-object.h"
 #include "marshal.h"
@@ -35,8 +37,7 @@ struct _glLabelObjectPrivate {
 	gchar             *name;
 	gdouble            x, y;
 	gdouble            w, h;
-	glLabelObjectFlip  flip;
-	gdouble            rotate_degs;
+	gdouble            affine[6];
 };
 
 enum {
@@ -134,9 +135,9 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, flip_rotate),
 			      NULL, NULL,
-			      gl_marshal_VOID__INT_DOUBLE,
+			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
-			      2, G_TYPE_INT, G_TYPE_DOUBLE);
+			      0);
 	signals[TOP] =
 		g_signal_new ("top",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -168,6 +169,8 @@ gl_label_object_instance_init (glLabelObject *object)
 	object->private = g_new0 (glLabelObjectPrivate, 1);
 
 	object->private->name = g_strdup_printf ("object%d", instance++);
+
+	art_affine_identity (object->private->affine);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -218,18 +221,18 @@ gl_label_object_copy_props (glLabelObject *dst_object,
 			    glLabelObject *src_object)
 {
 	gdouble           x, y, w, h;
-	glLabelObjectFlip flip;
+	gdouble           affine[6];
 
 	g_return_if_fail (src_object && GL_IS_LABEL_OBJECT (src_object));
 	g_return_if_fail (dst_object && GL_IS_LABEL_OBJECT (dst_object));
 
-	gl_label_object_get_position    (src_object, &x, &y);
-	gl_label_object_get_size        (src_object, &w, &h);
-	flip = gl_label_object_get_flip (src_object);
+	gl_label_object_get_position (src_object, &x, &y);
+	gl_label_object_get_size     (src_object, &w, &h);
+	gl_label_object_get_affine   (src_object, affine);
 
-	gl_label_object_set_position (dst_object,  x,  y);
-	gl_label_object_set_size     (dst_object,  w,  h);
-	gl_label_object_set_flip     (dst_object,  flip);
+	gl_label_object_set_position (dst_object, x, y);
+	gl_label_object_set_size     (dst_object, w, h);
+	gl_label_object_set_affine   (dst_object, affine);
 }
 
 /*****************************************************************************/
@@ -432,22 +435,46 @@ gl_label_object_get_size (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
-/****************************************************************************/
-/* Set flip state of object.                                                */
-/****************************************************************************/
+/*****************************************************************************/
+/* Get extent of object.                                                     */
+/*****************************************************************************/
 void
-gl_label_object_set_flip (glLabelObject     *object,
-			  glLabelObjectFlip  flip)
+gl_label_object_get_extent (glLabelObject *object,
+			    gdouble       *x1,
+			    gdouble       *y1,
+			    gdouble       *x2,
+			    gdouble       *y2)
 {
+	ArtPoint a1, a2, a3, a4, b1, b2, b3, b4;
+	gdouble  affine[6];
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->flip = flip;
+	/* setup untransformed corners of bounding box */
+	a1.x = 0.0;
+	a1.y = 0.0;
+	a2.x = object->private->w;
+	a2.y = 0.0;
+	a3.x = object->private->w;
+	a3.y = object->private->h;
+	a4.x = 0.0;
+	a4.y = object->private->h;
 
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
-		       flip, object->private->rotate_degs);
+	/* transform these points */
+	gl_label_object_get_applied_affine (object, affine);
+	art_affine_point (&b1, &a1, affine);
+	art_affine_point (&b2, &a2, affine);
+	art_affine_point (&b3, &a3, affine);
+	art_affine_point (&b4, &a4, affine);
 
+	/* now find the maximum extent of these points in x and y */
+	*x1 = MIN (b1.x, MIN (b2.x, MIN (b3.x, b4.x))) + object->private->x;
+	*y1 = MIN (b1.y, MIN (b2.y, MIN (b3.y, b4.y))) + object->private->y;
+	*x2 = MAX (b1.x, MAX (b2.x, MAX (b3.x, b4.x))) + object->private->x;
+	*y2 = MAX (b1.y, MAX (b2.y, MAX (b3.y, b4.y))) + object->private->y;
+	
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -461,10 +488,9 @@ gl_label_object_flip_horiz (glLabelObject *object)
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->flip ^= GL_LABEL_OBJECT_FLIP_HORIZ;
+	art_affine_flip (object->private->affine, object->private->affine, TRUE, FALSE);
 
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
-		       object->private->flip, object->private->rotate_degs);
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -479,25 +505,90 @@ gl_label_object_flip_vert (glLabelObject *object)
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->flip ^= GL_LABEL_OBJECT_FLIP_VERT;
+	art_affine_flip (object->private->affine, object->private->affine, FALSE, TRUE);
 
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0,
-		       object->private->flip, object->private->rotate_degs);
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
 
 /****************************************************************************/
-/* Get flip state of object.                                                */
+/* Rotate object.                                                           */
 /****************************************************************************/
-glLabelObjectFlip
-gl_label_object_get_flip (glLabelObject      *object)
+void
+gl_label_object_rotate (glLabelObject *object,
+			gdouble        theta_degs)
+{
+	gdouble rotate_affine[6];
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	art_affine_rotate (rotate_affine, theta_degs);
+	art_affine_multiply (object->private->affine, object->private->affine, rotate_affine);
+
+	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set raw affine                                                           */
+/****************************************************************************/
+void
+gl_label_object_set_affine (glLabelObject *object,
+			    gdouble        affine[6])
 {
 	gl_debug (DEBUG_LABEL, "");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	return object->private->flip;
+	object->private->affine[0] = affine[0];
+	object->private->affine[1] = affine[1];
+	object->private->affine[2] = affine[2];
+	object->private->affine[3] = affine[3];
+	object->private->affine[4] = affine[4];
+	object->private->affine[5] = affine[5];
+}
+
+/****************************************************************************/
+/* Get raw affine                                                           */
+/****************************************************************************/
+void
+gl_label_object_get_affine (glLabelObject *object,
+			    gdouble        affine[6])
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	affine[0] = object->private->affine[0];
+	affine[1] = object->private->affine[1];
+	affine[2] = object->private->affine[2];
+	affine[3] = object->private->affine[3];
+	affine[4] = object->private->affine[4];
+	affine[5] = object->private->affine[5];
+}
+
+/****************************************************************************/
+/* Get applied affine, i.e. translated to center of object and back         */
+/****************************************************************************/
+void
+gl_label_object_get_applied_affine (glLabelObject *object,
+				    gdouble        affine[6])
+{
+	gdouble to_center[6], to_origin[6];
+
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	/* setup transformation affine */
+	art_affine_translate (to_center, -object->private->w/2.0, -object->private->h/2.0);
+	art_affine_multiply (affine, to_center, object->private->affine);
+	art_affine_translate (to_origin, object->private->w/2.0, object->private->h/2.0);
+	art_affine_multiply (affine, affine, to_origin);
 }
 
 /****************************************************************************/

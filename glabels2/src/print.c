@@ -550,27 +550,18 @@ draw_object (PrintInfo     *pi,
 	     glLabelObject *object,
 	     glMergeRecord *record)
 {
-	gdouble x0, y0, w, h;
-	glLabelObjectFlip flip;
+	gdouble x0, y0;
+	gdouble affine[6];
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (object, &x0, &y0);
-	gl_label_object_get_size (object, &w, &h);
-	flip = gl_label_object_get_flip (object);
+	gl_label_object_get_applied_affine (object, affine);
 
 	gnome_print_gsave (pi->pc);
 
 	gnome_print_translate (pi->pc, x0, y0);
-
-	if ( flip & GL_LABEL_OBJECT_FLIP_HORIZ ) {
-		gnome_print_translate (pi->pc, w, 0.0);
-		gnome_print_scale (pi->pc, -1.0, 1.0);
-	}
-	if ( flip & GL_LABEL_OBJECT_FLIP_VERT ) {
-		gnome_print_translate (pi->pc, 0.0, h);
-		gnome_print_scale (pi->pc, 1.0, -1.0);
-	}
+	gnome_print_concat (pi->pc, affine);
 
 	if (GL_IS_LABEL_TEXT(object)) {
 		draw_text_object (pi, GL_LABEL_TEXT(object), record);

@@ -294,9 +294,9 @@ xml_parse_object (xmlNodePtr object_node,
 		  glLabel * label)
 {
 	glLabelObject *object;
-	gdouble x, y;
-	gchar *type_string;
-	gchar *flip_string;
+	gdouble        x, y;
+	gchar         *type_string;
+	gdouble        affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -324,19 +324,14 @@ xml_parse_object (xmlNodePtr object_node,
 
 	gl_label_object_set_position (object, x, y);
 
-	flip_string = xmlGetProp (object_node, "flip");
-	if ( g_strcasecmp (flip_string, "None") == 0 ) {
-		gl_label_object_set_flip (object, GL_LABEL_OBJECT_FLIP_NONE);
-	} else if ( g_strcasecmp (flip_string, "Horiz") == 0 ) {
-		gl_label_object_set_flip (object, GL_LABEL_OBJECT_FLIP_HORIZ);
-	} else if ( g_strcasecmp (flip_string, "Vert") == 0 ) {
-		gl_label_object_set_flip (object, GL_LABEL_OBJECT_FLIP_VERT);
-	} else if ( g_strcasecmp (flip_string, "Both") == 0 ) {
-		gl_label_object_set_flip (object, GL_LABEL_OBJECT_FLIP_BOTH);
-	} else {
-		g_warning ("Unknown flip type \"%s\"", flip_string);
-		return;
-	}
+	affine[0] = g_strtod (xmlGetProp (object_node, "a0"), NULL);
+	affine[1] = g_strtod (xmlGetProp (object_node, "a1"), NULL);
+	affine[2] = g_strtod (xmlGetProp (object_node, "a2"), NULL);
+	affine[3] = g_strtod (xmlGetProp (object_node, "a3"), NULL);
+	affine[4] = g_strtod (xmlGetProp (object_node, "a4"), NULL);
+	affine[5] = g_strtod (xmlGetProp (object_node, "a5"), NULL);
+
+	gl_label_object_set_affine (object, affine);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -782,9 +777,10 @@ xml_create_object (xmlNodePtr root,
 		   xmlNsPtr ns,
 		   glLabelObject * object)
 {
-	xmlNodePtr object_node;
-	gdouble x, y;
-	gchar *string;
+	xmlNodePtr  object_node;
+	gdouble     x, y;
+	gchar      *string;
+	gdouble     affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -798,24 +794,25 @@ xml_create_object (xmlNodePtr root,
 	xmlSetProp (object_node, "y", string);
 	g_free (string);
 
-	xmlSetProp (object_node, "rotate", "0");
-
-	switch (gl_label_object_get_flip (object)) {
-	case GL_LABEL_OBJECT_FLIP_NONE:
-		xmlSetProp (object_node, "flip",   "None");
-		break;
-	case GL_LABEL_OBJECT_FLIP_HORIZ:
-		xmlSetProp (object_node, "flip",   "Horiz");
-		break;
-	case GL_LABEL_OBJECT_FLIP_VERT:
-		xmlSetProp (object_node, "flip",   "Vert");
-		break;
-	case GL_LABEL_OBJECT_FLIP_BOTH:
-		xmlSetProp (object_node, "flip",   "Both");
-		break;
-	default:
-		g_assert_not_reached ();
-	}
+	gl_label_object_get_affine (object, affine);
+	string = g_strdup_printf ("%g", affine[0]);
+	xmlSetProp (object_node, "a0", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", affine[1]);
+	xmlSetProp (object_node, "a1", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", affine[2]);
+	xmlSetProp (object_node, "a2", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", affine[3]);
+	xmlSetProp (object_node, "a3", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", affine[4]);
+	xmlSetProp (object_node, "a4", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", affine[5]);
+	xmlSetProp (object_node, "a5", string);
+	g_free (string);
 
 	if ( GL_IS_LABEL_TEXT(object) ) {
 		xml_create_text_props (object_node, ns, object);

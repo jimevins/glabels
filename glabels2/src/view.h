@@ -150,6 +150,9 @@ void       gl_view_raise_selection         (glView            *view);
 
 void       gl_view_lower_selection         (glView            *view);
 
+void       gl_view_rotate_selection        (glView            *view,
+					    gdouble            theta_degs);
+
 void       gl_view_flip_selection_horiz    (glView            *view);
 
 void       gl_view_flip_selection_vert     (glView            *view);
