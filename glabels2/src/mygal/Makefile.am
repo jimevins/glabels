@@ -1,10 +1,6 @@
 INCLUDES = \
-	$(GLABELS_CFLAGS) 				\
-	-DG_DISABLE_DEPRECATED				\
-	-DGDK_DISABLE_DEPRECATED			\
-	-DGTK_DISABLE_DEPRECATED			\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
-	-DGNOME_DISABLE_DEPRECATED			
+	$(GLABELS_CFLAGS)
+
 
 noinst_LTLIBRARIES = libmygal.la
 
@@ -14,8 +10,8 @@ libmygal_la_SOURCES = 			\
 	e-util.h			\
 	e-colors.c			\
 	e-colors.h			\
-	gtk-combo-box.c			\
-	gtk-combo-box.h			\
+	mygal-combo-box.c		\
+	mygal-combo-box.h		\
 	color-palette.c			\
 	color-palette.h			\
 	color-group.c			\

@@ -13,9 +13,6 @@ AC_PROG_INTLTOOL([0.21])
 
 AM_PROG_LIBTOOL
 
-GNOME_PLATFORM_GNOME_2(yes, force)
-GNOME_COMMON_INIT
-
 AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
@@ -59,16 +56,9 @@ dnl ****************************************
 dnl Add the languages which your application supports here.
 GETTEXT_PACKAGE=glabels
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl cs it"
 AM_GLIB_GNU_GETTEXT
-
-
-
-dnl ****************************************
-dnl * Configure barcode library
-dnl ****************************************
-AC_CONFIG_SUBDIRS(barcode-0.98)
 
 
 
@@ -77,6 +67,7 @@ dnl * Makefiles
 dnl ****************************************
 AC_OUTPUT([
 Makefile
+barcode-0.98/Makefile
 src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile

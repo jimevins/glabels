@@ -19,12 +19,7 @@ INCLUDES = \
 	-DLIBDIR=\""$(libdir)"\"                        	\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 		\
-	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
-	-DG_DISABLE_DEPRECATED					\
-	-DGDK_DISABLE_DEPRECATED				\
-	-DGTK_DISABLE_DEPRECATED				\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
-	-DGNOME_DISABLE_DEPRECATED			
+	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"
 
 glabels_LDFLAGS = -export-dynamic
 
@@ -32,13 +27,13 @@ glabels_LDADD = 			\
 	$(GLABELS_LIBS)			\
 	mygal/libmygal.la		\
 	recent-files/librecent.la	\
-	-L$(LIB_BARCODE_DIR) -lbarcode	
+	$(LIB_BARCODE_DIR)/libbarcode.la
 
 glabels_batch_LDFLAGS = -export-dynamic
 
 glabels_batch_LDADD = 			\
 	$(GLABELS_LIBS)			\
-	-L$(LIB_BARCODE_DIR) -lbarcode	
+	$(LIB_BARCODE_DIR)/libbarcode.la
 
 BUILT_SOURCES = 			\
 	marshal.c			\
@@ -270,18 +265,8 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.a
+$(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.la
 
-$(LIB_BARCODE_DIR)/libbarcode.a:
+$(LIB_BARCODE_DIR)/libbarcode.la:
 	cd $(LIB_BARCODE_DIR); $(MAKE)
-
-clean: barcode_clean
-
-barcode_clean:
-	cd $(LIB_BARCODE_DIR); $(MAKE) clean
-
-distclean maintainer-clean: barcode_distclean
-
-barcode_distclean:
-	cd $(LIB_BARCODE_DIR); $(MAKE) distclean
 

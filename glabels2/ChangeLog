@@ -1,3 +1,42 @@
+2003-12-27  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated to work with latest gnome-common package from CVS.
+		Removed recursive configuration of barcode-0.98.
+
+	* acconfig.h:
+	* macros/*:
+		Removed.
+	
+	* Makefile.am:
+		Added barcode-0.98/ as a SUBDIR, and removed dist-hook.
+	
+	* barcode-0.98/Makefile.in:
+	* barcode-0.98/configure.in:
+	* barcode-0.98/Makefile.am:
+	* barcode-0.98/README.glabels:
+		Modified to ignore the barcode package's build system, and build
+		as a part of glabels.
+		Renamed Makefile.in to Makefile.in.dist.
+		Renamed configure.in to configure.in.dist.
+		Added barcode-0.98/Makefile.am and barcode-0.98/README.glabels.
+	
+	* src/Makefile.am:
+	* src/mygal/Makefile.am:
+	* src/recent-files/Makefile.am:
+		In order to build against the GNOME 2.5 platform, 
+		all use of *_DISABLE_DEPRECATED compile-time flags has been removed.
+	
+	* src/mygal/Makefile.am:
+	* src/mygal/mygal-combo-box.c:
+	* src/mygal/mygal-combo-box.h:
+	* src/mygal/widget-color-combo.c:
+	* src/mygal/widget-color-combo.h:
+	* po/POTFILES.in:
+		In order to build against the GNOME 2.5 platform, 
+		Renamed gtk_combo_box widget to mygal_combo_box, to prevent namespace
+		collisions with the real gtk_combo_box widget, now a part of gtk.
+	
 2003-12-26  Jim Evins  <evins@snaught.com>
 
 	* src/paper.c:

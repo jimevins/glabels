@@ -149,8 +149,8 @@ src/mygal/color-palette.h
 src/mygal/e-colors.c
 src/mygal/e-colors.h
 src/mygal/e-util.h
-src/mygal/gtk-combo-box.c
-src/mygal/gtk-combo-box.h
+src/mygal/mygal-combo-box.c
+src/mygal/mygal-combo-box.h
 src/mygal/widget-color-combo.c
 src/mygal/widget-color-combo.h
 data/paper-sizes.xml

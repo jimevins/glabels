@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gtk-combo-box.c - a customizable combobox
+ * mygal-combo-box.c - a customizable combobox
  * Copyright 2000, 2001, Ximian, Inc.
  *
  * Authors:
@@ -39,23 +39,23 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktearoffmenuitem.h>
 #include <gdk/gdkkeysyms.h>
-#include "gtk-combo-box.h"
+#include "mygal-combo-box.h"
 #include "e-util.h"
 
 #define PARENT_TYPE GTK_TYPE_HBOX
-static GObjectClass *gtk_combo_box_parent_class;
+static GObjectClass *mygal_combo_box_parent_class;
 
 static int gtk_combo_toggle_pressed (GtkToggleButton *tbutton,
-				     GtkComboBox *combo_box);
-static void gtk_combo_popup_tear_off (GtkComboBox *combo,
+				     MygalComboBox *combo_box);
+static void gtk_combo_popup_tear_off (MygalComboBox *combo,
 				      gboolean set_position);
-static void gtk_combo_set_tearoff_state (GtkComboBox *combo,
+static void gtk_combo_set_tearoff_state (MygalComboBox *combo,
 					 gboolean torn_off);
 static void gtk_combo_popup_reparent (GtkWidget *popup, GtkWidget *new_parent, 
 				      gboolean unrealize);
 static gboolean cb_popup_delete (GtkWidget *w, GdkEventAny *event,
-			     GtkComboBox *combo);
-static void gtk_combo_tearoff_bg_copy (GtkComboBox *combo);
+			     MygalComboBox *combo);
+static void gtk_combo_tearoff_bg_copy (MygalComboBox *combo);
 
 enum {
 	POP_DOWN_WIDGET,
@@ -65,9 +65,9 @@ enum {
 	LAST_SIGNAL
 };
 
-static guint gtk_combo_box_signals [LAST_SIGNAL] = { 0, };
+static guint mygal_combo_box_signals [LAST_SIGNAL] = { 0, };
 
-struct _GtkComboBoxPrivate {
+struct _MygalComboBoxPrivate {
 	GtkWidget *pop_down_widget;
 	GtkWidget *display_widget;
 
@@ -91,20 +91,20 @@ struct _GtkComboBoxPrivate {
 };
 
 static void
-gtk_combo_box_finalize (GObject *object)
+mygal_combo_box_finalize (GObject *object)
 {
-	GtkComboBox *combo_box = GTK_COMBO_BOX (object);
+	MygalComboBox *combo_box = MYGAL_COMBO_BOX (object);
 
 	g_free (combo_box->priv);
 
-	gtk_combo_box_parent_class->finalize (object);
+	mygal_combo_box_parent_class->finalize (object);
 }
 
 static void
-gtk_combo_box_destroy (GtkObject *object)
+mygal_combo_box_destroy (GtkObject *object)
 {
-	GtkObjectClass *klass = (GtkObjectClass *)gtk_combo_box_parent_class;
-	GtkComboBox *combo_box = GTK_COMBO_BOX (object);
+	GtkObjectClass *klass = (GtkObjectClass *)mygal_combo_box_parent_class;
+	MygalComboBox *combo_box = MYGAL_COMBO_BOX (object);
 
 	if (combo_box->priv->toplevel) {
 		gtk_object_destroy (GTK_OBJECT (combo_box->priv->toplevel));
@@ -121,63 +121,63 @@ gtk_combo_box_destroy (GtkObject *object)
 }
 
 static gboolean
-gtk_combo_box_mnemonic_activate (GtkWidget *w, gboolean group_cycling)
+mygal_combo_box_mnemonic_activate (GtkWidget *w, gboolean group_cycling)
 {
-	GtkComboBox *combo_box = GTK_COMBO_BOX (w);
+	MygalComboBox *combo_box = MYGAL_COMBO_BOX (w);
 	gtk_toggle_button_set_active (
 		GTK_TOGGLE_BUTTON (combo_box->priv->arrow_button), TRUE);
 	return TRUE;
 }
 
 static void
-gtk_combo_box_class_init (GObjectClass *object_class)
+mygal_combo_box_class_init (GObjectClass *object_class)
 {
 	GtkWidgetClass *widget_class = (GtkWidgetClass *)object_class;
-	gtk_combo_box_parent_class = g_type_class_peek_parent (object_class);
+	mygal_combo_box_parent_class = g_type_class_peek_parent (object_class);
 
-	object_class->finalize = gtk_combo_box_finalize;
-	widget_class->mnemonic_activate = gtk_combo_box_mnemonic_activate;
-	((GtkObjectClass *)object_class)->destroy = gtk_combo_box_destroy;
+	object_class->finalize = mygal_combo_box_finalize;
+	widget_class->mnemonic_activate = mygal_combo_box_mnemonic_activate;
+	((GtkObjectClass *)object_class)->destroy = mygal_combo_box_destroy;
 
-	gtk_combo_box_signals [POP_DOWN_WIDGET] = g_signal_new (
+	mygal_combo_box_signals [POP_DOWN_WIDGET] = g_signal_new (
 		"pop_down_widget",
 		G_OBJECT_CLASS_TYPE (object_class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (GtkComboBoxClass, pop_down_widget),
+		G_STRUCT_OFFSET (MygalComboBoxClass, pop_down_widget),
 		NULL, NULL,
 		e_marshal_POINTER__NONE,
 		G_TYPE_POINTER, 0, G_TYPE_NONE);
 
-	gtk_combo_box_signals [POP_DOWN_DONE] = g_signal_new (
+	mygal_combo_box_signals [POP_DOWN_DONE] = g_signal_new (
 		"pop_down_done",
 		G_OBJECT_CLASS_TYPE (object_class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (GtkComboBoxClass, pop_down_done),
+		G_STRUCT_OFFSET (MygalComboBoxClass, pop_down_done),
 		NULL, NULL,
 		e_marshal_BOOLEAN__OBJECT,
 		G_TYPE_BOOLEAN, 1, G_TYPE_OBJECT);
 
-	gtk_combo_box_signals [PRE_POP_DOWN] = g_signal_new (
+	mygal_combo_box_signals [PRE_POP_DOWN] = g_signal_new (
 		"pre_pop_down",
 		G_OBJECT_CLASS_TYPE (object_class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (GtkComboBoxClass, pre_pop_down),
+		G_STRUCT_OFFSET (MygalComboBoxClass, pre_pop_down),
 		NULL, NULL,
 		e_marshal_NONE__NONE,
 		G_TYPE_NONE, 0);
 
-	gtk_combo_box_signals [POST_POP_HIDE] = g_signal_new (
+	mygal_combo_box_signals [POST_POP_HIDE] = g_signal_new (
 		"post_pop_hide",
 		G_OBJECT_CLASS_TYPE (object_class),
 		G_SIGNAL_RUN_LAST,
-		G_STRUCT_OFFSET (GtkComboBoxClass, post_pop_hide),
+		G_STRUCT_OFFSET (MygalComboBoxClass, post_pop_hide),
 		NULL, NULL,
 		e_marshal_NONE__NONE,
 		G_TYPE_NONE, 0);
 }
 
 static void
-deactivate_arrow (GtkComboBox *combo_box)
+deactivate_arrow (MygalComboBox *combo_box)
 {
 	GtkToggleButton *arrow;
 
@@ -196,13 +196,13 @@ deactivate_arrow (GtkComboBox *combo_box)
 }
 
 /**
- * gtk_combo_box_popup_hide_unconditional
+ * mygal_combo_box_popup_hide_unconditional
  * @combo_box:  Combo box
  *
  * Hide popup, whether or not it is torn off.
  */
 static void
-gtk_combo_box_popup_hide_unconditional (GtkComboBox *combo_box)
+mygal_combo_box_popup_hide_unconditional (MygalComboBox *combo_box)
 {
 	gboolean popup_info_destroyed = FALSE;
 
@@ -222,7 +222,7 @@ gtk_combo_box_popup_hide_unconditional (GtkComboBox *combo_box)
 		
 	g_object_ref (combo_box->priv->pop_down_widget);
 	g_signal_emit (combo_box,
-		       gtk_combo_box_signals [POP_DOWN_DONE], 0,
+		       mygal_combo_box_signals [POP_DOWN_DONE], 0,
 		       combo_box->priv->pop_down_widget, &popup_info_destroyed);
 
 	if (popup_info_destroyed){
@@ -234,11 +234,11 @@ gtk_combo_box_popup_hide_unconditional (GtkComboBox *combo_box)
 	g_object_unref (combo_box->priv->pop_down_widget);
 	deactivate_arrow (combo_box);
 
-	g_signal_emit (combo_box, gtk_combo_box_signals [POST_POP_HIDE], 0);
+	g_signal_emit (combo_box, mygal_combo_box_signals [POST_POP_HIDE], 0);
 }
 
 /**
- * gtk_combo_box_popup_hide:
+ * mygal_combo_box_popup_hide:
  * @combo_box:  Combo box
  *
  * Hide popup, but not when it is torn off.
@@ -246,10 +246,10 @@ gtk_combo_box_popup_hide_unconditional (GtkComboBox *combo_box)
  * regular combo which doesn't do tearoffs.
  */
 void
-gtk_combo_box_popup_hide (GtkComboBox *combo_box)
+mygal_combo_box_popup_hide (MygalComboBox *combo_box)
 {
 	if (!combo_box->priv->torn_off)
-		gtk_combo_box_popup_hide_unconditional (combo_box);
+		mygal_combo_box_popup_hide_unconditional (combo_box);
 	else if (GTK_WIDGET_VISIBLE (combo_box->priv->toplevel)) {
 		/* Both popup and tearoff window present. Get rid of just
                    the popup shell. */
@@ -262,7 +262,7 @@ gtk_combo_box_popup_hide (GtkComboBox *combo_box)
  * Find best location for displaying
  */
 void
-gtk_combo_box_get_pos (GtkComboBox *combo_box, int *x, int *y)
+mygal_combo_box_get_pos (MygalComboBox *combo_box, int *x, int *y)
 {
 	GtkWidget *wcombo = GTK_WIDGET (combo_box);
 	int ph, pw;
@@ -282,7 +282,7 @@ gtk_combo_box_get_pos (GtkComboBox *combo_box, int *x, int *y)
 }
 
 static void
-gtk_combo_box_popup_display (GtkComboBox *combo_box)
+mygal_combo_box_popup_display (MygalComboBox *combo_box)
 {
 	int x, y;
 
@@ -297,13 +297,13 @@ gtk_combo_box_popup_display (GtkComboBox *combo_box)
 		GtkWidget *pw = NULL;
 
 		g_signal_emit (combo_box,
-			       gtk_combo_box_signals [POP_DOWN_WIDGET], 0, &pw);
+			       mygal_combo_box_signals [POP_DOWN_WIDGET], 0, &pw);
 		g_assert (pw != NULL);
 		combo_box->priv->pop_down_widget = pw;
 		gtk_container_add (GTK_CONTAINER (combo_box->priv->frame), pw);
 	}
 
-	g_signal_emit (combo_box, gtk_combo_box_signals [PRE_POP_DOWN], 0);
+	g_signal_emit (combo_box, mygal_combo_box_signals [PRE_POP_DOWN], 0);
 	
 	if (combo_box->priv->torn_off) {
 		/* To give the illusion that tearoff still displays the
@@ -319,7 +319,7 @@ gtk_combo_box_popup_display (GtkComboBox *combo_box)
 					  combo_box->priv->toplevel, TRUE);
 	}
 
-	gtk_combo_box_get_pos (combo_box, &x, &y);
+	mygal_combo_box_get_pos (combo_box, &x, &y);
 	
 	gtk_widget_set_uposition (combo_box->priv->toplevel, x, y);
 	gtk_widget_realize (combo_box->priv->popup);
@@ -336,18 +336,18 @@ gtk_combo_box_popup_display (GtkComboBox *combo_box)
 }
 
 static int
-gtk_combo_toggle_pressed (GtkToggleButton *tbutton, GtkComboBox *combo_box)
+gtk_combo_toggle_pressed (GtkToggleButton *tbutton, MygalComboBox *combo_box)
 {
 	if (tbutton->active)
-		gtk_combo_box_popup_display (combo_box);
+		mygal_combo_box_popup_display (combo_box);
 	else
-		gtk_combo_box_popup_hide_unconditional (combo_box);
+		mygal_combo_box_popup_hide_unconditional (combo_box);
 
 	return TRUE;
 }
 
 static  gint
-gtk_combo_box_button_press (GtkWidget *widget, GdkEventButton *event, GtkComboBox *combo_box)
+mygal_combo_box_button_press (GtkWidget *widget, GdkEventButton *event, MygalComboBox *combo_box)
 {
 	GtkWidget *child;
 
@@ -360,12 +360,12 @@ gtk_combo_box_button_press (GtkWidget *widget, GdkEventButton *event, GtkComboBo
 		}
 	}
 
-	gtk_combo_box_popup_hide (combo_box);
+	mygal_combo_box_popup_hide (combo_box);
 	return TRUE;
 }
 
 /**
- * gtk_combo_box_key_press
+ * mygal_combo_box_key_press
  * @widget:     Widget
  * @event:      Event
  * @combo_box:  Combo box
@@ -374,30 +374,30 @@ gtk_combo_box_button_press (GtkWidget *widget, GdkEventButton *event, GtkComboBo
  * Popup is dismissed whether or not popup is torn off.
  */
 static  gint
-gtk_combo_box_key_press (GtkWidget *widget, GdkEventKey *event,
-			 GtkComboBox *combo_box)
+mygal_combo_box_key_press (GtkWidget *widget, GdkEventKey *event,
+			 MygalComboBox *combo_box)
 {
 	if (event->keyval == GDK_Escape) {
-		gtk_combo_box_popup_hide_unconditional (combo_box);
+		mygal_combo_box_popup_hide_unconditional (combo_box);
 		return TRUE;
 	} else
 		return FALSE;
 }
 
 static void
-cb_state_change (GtkWidget *widget, GtkStateType old_state, GtkComboBox *combo_box)
+cb_state_change (GtkWidget *widget, GtkStateType old_state, MygalComboBox *combo_box)
 {
 	GtkStateType const new_state = GTK_WIDGET_STATE(widget);
 	gtk_widget_set_state (combo_box->priv->display_widget, new_state);
 }
 
 static void
-gtk_combo_box_init (GtkComboBox *combo_box)
+mygal_combo_box_init (MygalComboBox *combo_box)
 {
 	GtkWidget *arrow;
 	GdkCursor *cursor;
 
-	combo_box->priv = g_new0 (GtkComboBoxPrivate, 1);
+	combo_box->priv = g_new0 (MygalComboBoxPrivate, 1);
 
 	/*
 	 * Create the arrow
@@ -448,27 +448,27 @@ gtk_combo_box_init (GtkComboBox *combo_box)
 	gtk_frame_set_shadow_type (GTK_FRAME (combo_box->priv->frame), GTK_SHADOW_OUT);
 
 	g_signal_connect (combo_box->priv->toplevel, "button_press_event",
-			  G_CALLBACK (gtk_combo_box_button_press), combo_box);
+			  G_CALLBACK (mygal_combo_box_button_press), combo_box);
 	g_signal_connect (combo_box->priv->toplevel, "key_press_event",
-			  G_CALLBACK (gtk_combo_box_key_press), combo_box);
+			  G_CALLBACK (mygal_combo_box_key_press), combo_box);
 }
 
-E_MAKE_TYPE (gtk_combo_box,
-	     "MyGtkComboBox",
-	     GtkComboBox,
-	     gtk_combo_box_class_init,
-	     gtk_combo_box_init,
+E_MAKE_TYPE (mygal_combo_box,
+	     "MygalComboBox",
+	     MygalComboBox,
+	     mygal_combo_box_class_init,
+	     mygal_combo_box_init,
 	     PARENT_TYPE)
 
 /**
- * gtk_combo_box_set_display:
+ * mygal_combo_box_set_display:
  * @combo_box: the Combo Box to modify
  * @display_widget: The widget to be displayed
 
  * Sets the displayed widget for the @combo_box to be @display_widget
  */
 void
-gtk_combo_box_set_display (GtkComboBox *combo_box, GtkWidget *display_widget)
+mygal_combo_box_set_display (MygalComboBox *combo_box, GtkWidget *display_widget)
 {
 	g_return_if_fail (combo_box != NULL);
 	g_return_if_fail (GTK_IS_COMBO_BOX (combo_box));
@@ -507,7 +507,7 @@ cb_tearable_enter_leave (GtkWidget *w, GdkEventCrossing *event, gpointer data)
  * GTK_WINDOW (tearoff)->type = GTK_WINDOW_TOPLEVEL;
  */
 static void
-gtk_combo_popup_tear_off (GtkComboBox *combo, gboolean set_position)
+gtk_combo_popup_tear_off (MygalComboBox *combo, gboolean set_position)
 {
 	int x, y;
 	
@@ -522,7 +522,7 @@ gtk_combo_popup_tear_off (GtkComboBox *combo, gboolean set_position)
 		combo->priv->tearoff_window = tearoff;
 		gtk_widget_set_app_paintable (tearoff, TRUE);
 		g_signal_connect (tearoff, "key_press_event",
-				  G_CALLBACK (gtk_combo_box_key_press),
+				  G_CALLBACK (mygal_combo_box_key_press),
 				  combo);
 		gtk_widget_realize (tearoff);
 		title = g_object_get_data (G_OBJECT (combo),
@@ -551,7 +551,7 @@ gtk_combo_popup_tear_off (GtkComboBox *combo, gboolean set_position)
 	gtk_widget_queue_resize (GTK_WIDGET (combo->priv->popup));
 
 	if (set_position) {
-		gtk_combo_box_get_pos (combo, &x, &y);
+		mygal_combo_box_get_pos (combo, &x, &y);
 		gtk_widget_set_uposition (combo->priv->tearoff_window, x, y);
 	}
 	gtk_widget_show (GTK_WIDGET (combo->priv->popup));
@@ -569,7 +569,7 @@ gtk_combo_popup_tear_off (GtkComboBox *combo, gboolean set_position)
  * Compare with gtk_menu_set_tearoff_state in gtk/gtkmenu.c
  */
 static void       
-gtk_combo_set_tearoff_state (GtkComboBox *combo,
+gtk_combo_set_tearoff_state (MygalComboBox *combo,
 			     gboolean  torn_off)
 {
 	g_return_if_fail (combo != NULL);
@@ -597,7 +597,7 @@ gtk_combo_set_tearoff_state (GtkComboBox *combo,
  * Copy popup window image to the tearoff window.
  */
 static void
-gtk_combo_tearoff_bg_copy (GtkComboBox *combo)
+gtk_combo_tearoff_bg_copy (MygalComboBox *combo)
 {
 	GdkPixmap *pixmap;
 	GdkGC *gc;
@@ -677,7 +677,7 @@ gtk_combo_popup_reparent (GtkWidget *popup,
  */
 static gboolean
 cb_tearable_button_release (GtkWidget *w, GdkEventButton *event,
-			    GtkComboBox *combo)
+			    MygalComboBox *combo)
 {
 	GtkTearoffMenuItem *tearable;
 	
@@ -698,20 +698,20 @@ cb_tearable_button_release (GtkWidget *w, GdkEventButton *event,
 					  G_CALLBACK (cb_popup_delete),
 					  combo);
 	} else
-		gtk_combo_box_popup_hide_unconditional (combo);
+		mygal_combo_box_popup_hide_unconditional (combo);
 	
 	return TRUE;
 }
 
 static gboolean
-cb_popup_delete (GtkWidget *w, GdkEventAny *event, GtkComboBox *combo)
+cb_popup_delete (GtkWidget *w, GdkEventAny *event, MygalComboBox *combo)
 {
-	gtk_combo_box_popup_hide_unconditional (combo);
+	mygal_combo_box_popup_hide_unconditional (combo);
 	return TRUE;
 }
 
 void
-gtk_combo_box_construct (GtkComboBox *combo_box, GtkWidget *display_widget, GtkWidget *pop_down_widget)
+mygal_combo_box_construct (MygalComboBox *combo_box, GtkWidget *display_widget, GtkWidget *pop_down_widget)
 {
 	GtkWidget *tearable;
 	GtkWidget *vbox;
@@ -745,27 +745,27 @@ gtk_combo_box_construct (GtkComboBox *combo_box, GtkWidget *display_widget, GtkW
 	/*
 	 * Finish setup
 	 */
-	gtk_combo_box_set_display (combo_box, display_widget);
+	mygal_combo_box_set_display (combo_box, display_widget);
 
 	gtk_container_add (GTK_CONTAINER (combo_box->priv->frame), vbox);
 	gtk_widget_show_all (combo_box->priv->frame);
 }
 
 GtkWidget *
-gtk_combo_box_new (GtkWidget *display_widget, GtkWidget *optional_popdown)
+mygal_combo_box_new (GtkWidget *display_widget, GtkWidget *optional_popdown)
 {
-	GtkComboBox *combo_box;
+	MygalComboBox *combo_box;
 
 	g_return_val_if_fail (display_widget  != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_WIDGET (display_widget), NULL);
 
-	combo_box = g_object_new (GTK_COMBO_BOX_TYPE, NULL);
-	gtk_combo_box_construct (combo_box, display_widget, optional_popdown);
+	combo_box = g_object_new (MYGAL_COMBO_BOX_TYPE, NULL);
+	mygal_combo_box_construct (combo_box, display_widget, optional_popdown);
 	return GTK_WIDGET (combo_box);
 }
 
 void
-gtk_combo_box_set_arrow_relief (GtkComboBox *cc, GtkReliefStyle relief)
+mygal_combo_box_set_arrow_relief (MygalComboBox *cc, GtkReliefStyle relief)
 {
 	g_return_if_fail (cc != NULL);
 	g_return_if_fail (GTK_IS_COMBO_BOX (cc));
@@ -774,7 +774,7 @@ gtk_combo_box_set_arrow_relief (GtkComboBox *cc, GtkReliefStyle relief)
 }
 
 /**
- * gtk_combo_box_set_title
+ * mygal_combo_box_set_title
  * @combo: Combo box
  * @title: Title
  *
@@ -788,7 +788,7 @@ gtk_combo_box_set_arrow_relief (GtkComboBox *cc, GtkReliefStyle relief)
  * to investigate.
  */
 void       
-gtk_combo_box_set_title (GtkComboBox *combo,
+mygal_combo_box_set_title (MygalComboBox *combo,
 			 const gchar *title)
 {
 	g_return_if_fail (combo != NULL);
@@ -799,7 +799,7 @@ gtk_combo_box_set_title (GtkComboBox *combo,
 }
 
 /**
- * gtk_combo_box_set_arrow_sensitive
+ * mygal_combo_box_set_arrow_sensitive
  * @combo:  Combo box
  * @sensitive:  Sensitivity value
  *
@@ -807,7 +807,7 @@ gtk_combo_box_set_title (GtkComboBox *combo,
  */
 
 void
-gtk_combo_box_set_arrow_sensitive (GtkComboBox *combo,
+mygal_combo_box_set_arrow_sensitive (MygalComboBox *combo,
 				   gboolean sensitive)
 {
 	g_return_if_fail (combo != NULL);
@@ -816,14 +816,14 @@ gtk_combo_box_set_arrow_sensitive (GtkComboBox *combo,
 }
 
 /**
- * gtk_combo_box_set_tearable:
+ * mygal_combo_box_set_tearable:
  * @combo: Combo box
  * @tearable: whether to allow the @combo to be tearable
  *
  * controls whether the combo box's pop up widget can be torn off.
  */
 void
-gtk_combo_box_set_tearable (GtkComboBox *combo, gboolean tearable)
+mygal_combo_box_set_tearable (MygalComboBox *combo, gboolean tearable)
 {
 	g_return_if_fail (combo != NULL);
 	g_return_if_fail (GTK_IS_COMBO_BOX (combo));
