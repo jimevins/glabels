@@ -143,6 +143,9 @@ void       gl_view_select_region           (glView            *view,
 					    gdouble            x2,
 					    gdouble            y2);
 
+gboolean   gl_view_is_object_selected      (glView            *view,
+					    glViewObject      *view_object);
+
 gboolean   gl_view_is_selection_empty      (glView            *view);
 
 gboolean   gl_view_is_selection_atomic     (glView            *view);
@@ -182,6 +185,10 @@ void       gl_view_center_selection_horiz  (glView            *view);
 
 void       gl_view_center_selection_vert   (glView            *view);
 
+void       gl_view_move_selection          (glView            *view,
+					    gdouble            dx,
+					    gdouble            dy);
+
 void       gl_view_cut                     (glView            *view);
 
 void       gl_view_copy                    (glView            *view);
@@ -203,12 +210,11 @@ gboolean   gl_view_is_zoom_max             (glView            *view);
 gboolean   gl_view_is_zoom_min             (glView            *view);
 
 
+void       gl_view_popup_menu              (glView            *view,
+					    GdkEvent          *event);
+
 void       gl_view_edit_merge_props        (glView            *view);
 
-
-int        gl_view_item_event_handler      (GnomeCanvasItem   *item,
-					    GdkEvent          *event,
-					    glViewObject      *view_object);
 
 G_END_DECLS
 

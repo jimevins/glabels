@@ -78,6 +78,12 @@ static void     lower_object_cb              (glLabelObject       *object,
 static void     flip_rotate_object_cb        (glLabelObject       *object,
 					      glViewObject        *view_object);
 
+static gint     item_event_arrow_mode        (GnomeCanvasItem     *item,
+					      GdkEvent            *event,
+					      glViewObject        *view_object);
+
+
+
 
 
 /*****************************************************************************/
@@ -246,7 +252,7 @@ gl_view_object_set_object     (glViewObject         *view_object,
 			  view_object);
 
 	g_signal_connect (G_OBJECT (view_object->private->group), "event",
-			  G_CALLBACK (gl_view_item_event_handler),
+			  G_CALLBACK (gl_view_object_item_event_cb),
 			  view_object);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -487,5 +493,174 @@ gl_view_object_select (glViewObject *view_object)
 	gl_view_select_object(view_object->private->view, view_object);
 
 	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Item event handler.                                                       */
+/*****************************************************************************/
+gint
+gl_view_object_item_event_cb (GnomeCanvasItem *item,
+			      GdkEvent        *event,
+			      glViewObject    *view_object)
+{
+	glView *view;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	view = gl_view_object_get_view(view_object);
+	switch (view->state) {
+
+	case GL_VIEW_STATE_ARROW:
+		return item_event_arrow_mode (item, event, view_object);
+
+	default:
+		return FALSE;
+
+	}
+
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Item event handler (arrow mode)                                 */
+/*---------------------------------------------------------------------------*/
+static gint
+item_event_arrow_mode (GnomeCanvasItem *item,
+		       GdkEvent        *event,
+		       glViewObject    *view_object)
+{
+	static gdouble x, y;
+	static gboolean dragging = FALSE;
+	glView *view;
+	GdkCursor *cursor;
+	gdouble item_x, item_y;
+	gdouble new_x, new_y;
+	gboolean control_key_pressed;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	item_x = event->button.x;
+	item_y = event->button.y;
+	gnome_canvas_item_w2i (item->parent, &item_x, &item_y);
+
+	view = gl_view_object_get_view(view_object);
+
+	switch (event->type) {
+
+	case GDK_BUTTON_PRESS:
+		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
+		control_key_pressed = event->button.state & GDK_CONTROL_MASK;
+		switch (event->button.button) {
+		case 1:
+			if (control_key_pressed) {
+				if (gl_view_is_object_selected (view, view_object)) {
+					/* Un-selecting a selected item */
+					gl_view_unselect_object (view,
+								 view_object);
+					return TRUE;
+				} else {
+					/* Add to current selection */
+					gl_view_select_object (view,
+							       view_object);
+				}
+			} else {
+				if (!gl_view_is_object_selected (view, view_object)) {
+					/* No control, key so remove any selections before adding */
+					gl_view_unselect_all (view);
+					/* Add to current selection */
+					gl_view_select_object (view,
+							       view_object);
+				}
+			}
+			/* Go into dragging mode while button remains pressed. */
+			x = item_x;
+			y = item_y;
+			cursor = gdk_cursor_new (GDK_FLEUR);
+			gnome_canvas_item_grab (item,
+						GDK_POINTER_MOTION_MASK |
+						GDK_BUTTON_RELEASE_MASK |
+						GDK_BUTTON_PRESS_MASK,
+						cursor, event->button.time);
+			gdk_cursor_unref (cursor);
+			dragging = TRUE;
+			return TRUE;
+
+		case 3:
+			if (!gl_view_is_object_selected (view, view_object)) {
+				if (!control_key_pressed) {
+					/* No control, key so remove any selections before adding */
+					gl_view_unselect_all (view);
+				}
+			}
+			/* Add to current selection */
+			gl_view_select_object (view, view_object);
+			/* bring up apropriate menu for selection. */
+			gl_view_popup_menu (view, event);
+			return TRUE;
+
+		default:
+			return FALSE;
+		}
+
+	case GDK_BUTTON_RELEASE:
+		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
+		switch (event->button.button) {
+		case 1:
+			/* Exit dragging mode */
+			gnome_canvas_item_ungrab (item, event->button.time);
+			dragging = FALSE;
+			return TRUE;
+
+		default:
+			return FALSE;
+		}
+
+	case GDK_MOTION_NOTIFY:
+		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
+		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
+			/* Dragging mode, move selection */
+			new_x = item_x;
+			new_y = item_y;
+			gl_view_move_selection (view, (new_x - x), (new_y - y));
+			x = new_x;
+			y = new_y;
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
+	case GDK_2BUTTON_PRESS:
+		gl_debug (DEBUG_VIEW, "2BUTTON_PRESS");
+		switch (event->button.button) {
+		case 1:
+			/* Also exit dragging mode w/ double-click, run dlg */
+			gnome_canvas_item_ungrab (item, event->button.time);
+			dragging = FALSE;
+			gl_view_select_object (view, view_object);
+			gl_view_object_show_dialog (view_object);
+			return TRUE;
+
+		default:
+			return FALSE;
+		}
+
+	case GDK_ENTER_NOTIFY:
+		gl_debug (DEBUG_VIEW, "ENTER_NOTIFY");
+		cursor = gdk_cursor_new (GDK_FLEUR);
+		gdk_window_set_cursor (view->canvas->window, cursor);
+		gdk_cursor_unref (cursor);
+		return TRUE;
+
+	case GDK_LEAVE_NOTIFY:
+		gl_debug (DEBUG_VIEW, "LEAVE_NOTIFY");
+		cursor = gdk_cursor_new (GDK_LEFT_PTR);
+		gdk_window_set_cursor (view->canvas->window, cursor);
+		gdk_cursor_unref (cursor);
+		return TRUE;
+
+	default:
+		gl_debug (DEBUG_VIEW, "default");
+		return FALSE;
+	}
+
 }
 

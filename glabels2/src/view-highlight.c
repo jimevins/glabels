@@ -2055,5 +2055,5 @@ passthrough_event_handler (GnomeCanvasItem *handle_item,
 	GnomeCanvasItem *group;
 
 	group = gl_view_object_get_group (view_object);
-	return gl_view_item_event_handler (group, event, view_object);
+	return gl_view_object_item_event_cb (group, event, view_object);
 }

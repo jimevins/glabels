@@ -93,6 +93,11 @@ void             gl_view_object_show_dialog       (glViewObject         *view_ob
 
 void             gl_view_object_select            (glViewObject         *view_object);
 
+
+gint             gl_view_object_item_event_cb     (GnomeCanvasItem      *item,
+						   GdkEvent             *event,
+						   glViewObject         *view_object);
+
 G_END_DECLS
 
 #endif /* __VIEW_OBJECT_H__ */

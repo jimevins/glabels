@@ -147,12 +147,6 @@ static gboolean   is_item_member_of_group         (glView          *view,
 						   GnomeCanvasItem *item,
 						   GnomeCanvasItem *group);
 
-static gboolean   is_object_selected              (glView *view,
-						   glViewObject *view_object);
-
-static void       move_selection                  (glView *view,
-						   gdouble dx, gdouble dy);
-
 static int        canvas_event                    (GnomeCanvas *canvas,
 						   GdkEvent    *event,
 						   glView      *view);
@@ -160,16 +154,9 @@ static int        canvas_event_arrow_mode         (GnomeCanvas *canvas,
 						   GdkEvent    *event,
 						   glView      *view);
 
-static int        item_event_arrow_mode          (GnomeCanvasItem *item,
-						  GdkEvent        *event,
-						  glViewObject    *view_object);
-
 static void       construct_selection_menu       (glView *view);
 
 static void       construct_empty_selection_menu (glView *view);
-
-static void       popup_menu                     (glView       *view,
-						  GdkEvent     *event);
 
 static void       selection_clear_cb             (GtkWidget         *widget,
 						  GdkEventSelection *event,
@@ -1424,7 +1411,7 @@ gl_view_select_region (glView  *view,
 
 	for (p = view->object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT(p->data);
-		if (!is_object_selected (view, view_object)) {
+		if (!gl_view_is_object_selected (view, view_object)) {
 
 			object = gl_view_object_get_object (view_object);
 
@@ -1454,7 +1441,7 @@ select_object_real (glView       *view,
 	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
-	if (!is_object_selected (view, view_object)) {
+	if (!gl_view_is_object_selected (view, view_object)) {
 		view->selected_object_list =
 		    g_list_prepend (view->selected_object_list, view_object);
 	}
@@ -1532,11 +1519,11 @@ is_item_member_of_group (glView          *view,
 	return FALSE;
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Is the object in our current selection?                         */
-/*---------------------------------------------------------------------------*/
-static gboolean
-is_object_selected (glView       *view,
+/*****************************************************************************/
+/* Is the object in our current selection?                                   */
+/*****************************************************************************/
+gboolean
+gl_view_is_object_selected (glView       *view,
 		    glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "");
@@ -2150,6 +2137,31 @@ gl_view_center_selection_vert (glView *view)
 
 
 /*****************************************************************************/
+/* Move selected objects                                                     */
+/*****************************************************************************/
+void
+gl_view_move_selection (glView  *view,
+		gdouble  dx,
+		gdouble  dy)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_position_relative (object, dx, dy);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void
@@ -2224,31 +2236,6 @@ gl_view_paste (glView *view)
 	gtk_selection_convert (GTK_WIDGET (view->invisible),
 			       clipboard_atom, GDK_SELECTION_TYPE_STRING,
 			       GDK_CURRENT_TIME);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  move selected objects                                           */
-/*---------------------------------------------------------------------------*/
-static void
-move_selection (glView  *view,
-		gdouble  dx,
-		gdouble  dy)
-{
-	GList *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_position_relative (object, dx, dy);
-
-	}
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -2549,7 +2536,7 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 
 			if (!object_at (view, x, y)) {
 				/* bring up apropriate menu for selection. */
-				popup_menu (view, event);
+				gl_view_popup_menu (view, event);
 			}
 			return FALSE;
 		default:
@@ -2604,23 +2591,23 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 			switch (event->key.keyval) {
 			case GDK_Left:
 			case GDK_KP_Left:
-				move_selection (view,
-						-1.0 / (view->scale), 0.0);
+				gl_view_move_selection (view,
+							-1.0 / (view->scale), 0.0);
 				break;
 			case GDK_Up:
 			case GDK_KP_Up:
-				move_selection (view,
-						0.0, -1.0 / (view->scale));
+				gl_view_move_selection (view,
+							0.0, -1.0 / (view->scale));
 				break;
 			case GDK_Right:
 			case GDK_KP_Right:
-				move_selection (view,
-						1.0 / (view->scale), 0.0);
+				gl_view_move_selection (view,
+							1.0 / (view->scale), 0.0);
 				break;
 			case GDK_Down:
 			case GDK_KP_Down:
-				move_selection (view,
-						0.0, 1.0 / (view->scale));
+				gl_view_move_selection (view,
+							0.0, 1.0 / (view->scale));
 				break;
 			case GDK_Delete:
 			case GDK_KP_Delete:
@@ -2635,175 +2622,6 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 			}
 		}
 		return TRUE;	/* We handled this or we were dragging. */
-
-	default:
-		gl_debug (DEBUG_VIEW, "default");
-		return FALSE;
-	}
-
-}
-
-/*****************************************************************************/
-/* Item event handler.                                                       */
-/*****************************************************************************/
-gint
-gl_view_item_event_handler (GnomeCanvasItem *item,
-			    GdkEvent        *event,
-			    glViewObject    *view_object)
-{
-	glView *view;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	view = gl_view_object_get_view(view_object);
-	switch (view->state) {
-
-	case GL_VIEW_STATE_ARROW:
-		return item_event_arrow_mode (item, event, view_object);
-
-	default:
-		return FALSE;
-
-	}
-
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Item event handler (arrow mode)                                 */
-/*---------------------------------------------------------------------------*/
-static int
-item_event_arrow_mode (GnomeCanvasItem *item,
-		       GdkEvent        *event,
-		       glViewObject    *view_object)
-{
-	static gdouble x, y;
-	static gboolean dragging = FALSE;
-	glView *view;
-	GdkCursor *cursor;
-	gdouble item_x, item_y;
-	gdouble new_x, new_y;
-	gboolean control_key_pressed;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	item_x = event->button.x;
-	item_y = event->button.y;
-	gnome_canvas_item_w2i (item->parent, &item_x, &item_y);
-
-	view = gl_view_object_get_view(view_object);
-
-	switch (event->type) {
-
-	case GDK_BUTTON_PRESS:
-		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
-		control_key_pressed = event->button.state & GDK_CONTROL_MASK;
-		switch (event->button.button) {
-		case 1:
-			if (control_key_pressed) {
-				if (is_object_selected (view, view_object)) {
-					/* Un-selecting a selected item */
-					gl_view_unselect_object (view,
-								 view_object);
-					return TRUE;
-				} else {
-					/* Add to current selection */
-					gl_view_select_object (view,
-							       view_object);
-				}
-			} else {
-				if (!is_object_selected (view, view_object)) {
-					/* No control, key so remove any selections before adding */
-					gl_view_unselect_all (view);
-					/* Add to current selection */
-					gl_view_select_object (view,
-							       view_object);
-				}
-			}
-			/* Go into dragging mode while button remains pressed. */
-			x = item_x;
-			y = item_y;
-			cursor = gdk_cursor_new (GDK_FLEUR);
-			gnome_canvas_item_grab (item,
-						GDK_POINTER_MOTION_MASK |
-						GDK_BUTTON_RELEASE_MASK |
-						GDK_BUTTON_PRESS_MASK,
-						cursor, event->button.time);
-			gdk_cursor_unref (cursor);
-			dragging = TRUE;
-			return TRUE;
-
-		case 3:
-			if (!is_object_selected (view, view_object)) {
-				if (!control_key_pressed) {
-					/* No control, key so remove any selections before adding */
-					gl_view_unselect_all (view);
-				}
-			}
-			/* Add to current selection */
-			gl_view_select_object (view, view_object);
-			/* bring up apropriate menu for selection. */
-			popup_menu (view, event);
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_BUTTON_RELEASE:
-		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
-		switch (event->button.button) {
-		case 1:
-			/* Exit dragging mode */
-			gnome_canvas_item_ungrab (item, event->button.time);
-			dragging = FALSE;
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_MOTION_NOTIFY:
-		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
-		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			/* Dragging mode, move selection */
-			new_x = item_x;
-			new_y = item_y;
-			move_selection (view, (new_x - x), (new_y - y));
-			x = new_x;
-			y = new_y;
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-
-	case GDK_2BUTTON_PRESS:
-		gl_debug (DEBUG_VIEW, "2BUTTON_PRESS");
-		switch (event->button.button) {
-		case 1:
-			/* Also exit dragging mode w/ double-click, run dlg */
-			gnome_canvas_item_ungrab (item, event->button.time);
-			dragging = FALSE;
-			gl_view_select_object (view, view_object);
-			gl_view_object_show_dialog (view_object);
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_ENTER_NOTIFY:
-		gl_debug (DEBUG_VIEW, "ENTER_NOTIFY");
-		cursor = gdk_cursor_new (GDK_FLEUR);
-		gdk_window_set_cursor (view->canvas->window, cursor);
-		gdk_cursor_unref (cursor);
-		return TRUE;
-
-	case GDK_LEAVE_NOTIFY:
-		gl_debug (DEBUG_VIEW, "LEAVE_NOTIFY");
-		cursor = gdk_cursor_new (GDK_LEFT_PTR);
-		gdk_window_set_cursor (view->canvas->window, cursor);
-		gdk_cursor_unref (cursor);
-		return TRUE;
 
 	default:
 		gl_debug (DEBUG_VIEW, "default");
@@ -3036,12 +2854,12 @@ construct_empty_selection_menu (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  popup menu for given item.                                      */
-/*---------------------------------------------------------------------------*/
-static void
-popup_menu (glView       *view,
-	    GdkEvent     *event)
+/****************************************************************************/
+/* popup menu.                                                              */
+/****************************************************************************/
+void
+gl_view_popup_menu (glView       *view,
+		    GdkEvent     *event)
 {
 	GtkMenu *menu;
 	GList   *p;
