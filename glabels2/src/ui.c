@@ -301,6 +301,8 @@ gl_ui_init (BonoboUIComponent *ui_component,
 	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
 
 	/* Status bar */
+	gl_debug (DEBUG_UI, "START Setup status bar.");
+
         bonobo_ui_component_set_prop (ui_component,
 				      "/status", "hidden", "0", NULL);
 
@@ -318,16 +320,21 @@ gl_ui_init (BonoboUIComponent *ui_component,
         bonobo_ui_component_set_prop (ui_component,
 				      "/status/Zoom", "hidden", "0", NULL);
 
+	gl_debug (DEBUG_UI, "END Setup status bar.");
 
-	/* add a GeditRecentView object */
+
+	/* add an eggRecentView object */
         recent_model = gl_recent_get_model ();
         recent_view  =
 		EGG_RECENT_VIEW (egg_recent_view_bonobo_new (ui_component,
-							       "/menu/File/Recents"));
+							     "/menu/File/Recents"));
 	egg_recent_view_set_model (recent_view, recent_model);
 
 	g_signal_connect (G_OBJECT (recent_view), "activate",
 			  G_CALLBACK (gl_file_open_recent), win);
+
+	/* Hack:  squirrel away a copy to be unreferenced in gl_window_destroy() */
+	g_object_set_data (G_OBJECT (ui_component), "recent-view", recent_view);
 
 	gl_debug (DEBUG_UI, "END");
 }

@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include "recent-files/egg-recent-view.h"
 #include "ui.h"
 #include "window.h"
 #include "util.h"
@@ -213,6 +214,19 @@ gl_window_destroy (GtkObject *gtk_object)
 
 	window = GL_WINDOW (gtk_object);
 	window_list = g_list_remove (window_list, window);
+
+        if (window->uic) {
+		EggRecentView *recent_view;
+
+		/* Hack:  pull out recent view to unreference. */
+		recent_view = g_object_get_data (G_OBJECT(window->uic), "recent-view");
+		if (recent_view) {
+			g_object_unref (recent_view);
+		}
+
+		bonobo_object_unref(window->uic);
+		window->uic = NULL;
+        }
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy) {
 		GTK_OBJECT_CLASS (parent_class)->destroy (gtk_object);
