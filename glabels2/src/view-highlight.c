@@ -187,8 +187,6 @@ gl_view_highlight_finalize (GObject *object)
 
 	g_return_if_fail (object && GL_IS_VIEW_HIGHLIGHT (object));
 
-	g_object_unref (GL_VIEW_HIGHLIGHT(object)->private->object);
-
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_HIGHLIGHT(object)->private->group));
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
