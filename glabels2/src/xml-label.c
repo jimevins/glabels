@@ -1369,7 +1369,7 @@ xml_create_merge_fields (xmlNodePtr  root,
 
 	merge = gl_label_get_merge (label);
 
-	node = xmlNewChild (root, ns, "Merge_Fields", NULL);
+	node = xmlNewChild (root, ns, "Merge", NULL);
 
 	string = gl_merge_get_name (merge);
 	xmlSetProp (node, "type", string);
