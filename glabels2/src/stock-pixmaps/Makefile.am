@@ -1,6 +1,7 @@
 
 IMAGES = 	 			\
 	stock_arrow_24.png		\
+	stock_arrow_16.png		\
 	stock_barcode_24.png	 	\
 	stock_box_24.png		\
 	stock_ellipse_24.png	 	\
@@ -11,6 +12,7 @@ IMAGES = 	 			\
 
 VARIABLES1 = \
 		stock_arrow_24         		$(srcdir)/stock_arrow_24.png 			\
+		stock_arrow_16         		$(srcdir)/stock_arrow_16.png 			\
 		stock_barcode_24       		$(srcdir)/stock_barcode_24.png 			\
 		stock_box_24         		$(srcdir)/stock_box_24.png 			\
 		stock_ellipse_24       		$(srcdir)/stock_ellipse_24.png 			\
