@@ -53,6 +53,8 @@ struct _glView {
 	gdouble scale;
 	gint n_bg_items;
 	GList *bg_item_list;
+	gint n_fg_items;
+	GList *fg_item_list;
 
 	glViewState state;
 	glLabelObjectType create_type;

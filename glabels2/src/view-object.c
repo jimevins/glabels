@@ -210,6 +210,10 @@ gl_view_object_set_object     (glViewObject         *view_object,
 				       "y", y,
 				       NULL);
 
+	/* lower it below all items that form the foregound */
+	gnome_canvas_item_lower (view_object->private->group,
+				 view_object->private->view->n_fg_items);
+
 	/* Create appropriate selection highlight canvas item. */
 	view_object->private->highlight =
 		gl_view_highlight_new (view_object, style);
@@ -483,6 +487,10 @@ raise_object_cb (GtkWidget * widget,
 
 	gnome_canvas_item_raise_to_top (view_object->private->group);
 	gnome_canvas_item_raise_to_top (view_object->private->highlight);
+
+	/* lower it below all items that form the foregound */
+	gnome_canvas_item_lower (view_object->private->group,
+				 view_object->private->view->n_fg_items);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -433,6 +433,8 @@ draw_rect_bg (glView * view)
 
 	view->n_bg_items = 0;
 	view->bg_item_list = NULL;
+	view->n_fg_items = 0;
+	view->fg_item_list = NULL;
 
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 
@@ -460,6 +462,18 @@ draw_rect_bg (glView * view)
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_rect_get_type (),
+				      "x1", 0.0,
+				      "y1", 0.0,
+				      "x2", w,
+				      "y2", h,
+				      "width_pixels", 2,
+				      "outline_color", "light blue",
+				      NULL);
+	view->n_fg_items++;
+	view->fg_item_list = g_list_append (view->fg_item_list, item);
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -470,7 +484,7 @@ static void
 draw_rounded_rect_bg (glView * view)
 {
 	glLabel *label = view->label;
-	GnomeCanvasPoints *points;
+	GnomeCanvasPoints *label_points, *margin_points;
 	gint i_coords, i_theta;
 	glTemplate *template;
 	gdouble r, w, h, m;
@@ -486,48 +500,51 @@ draw_rounded_rect_bg (glView * view)
 
 	view->n_bg_items = 0;
 	view->bg_item_list = NULL;
+	view->n_fg_items = 0;
+	view->fg_item_list = NULL;
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
 	r = template->label_round;
 	m = template->label_margin;
 
-	points = gnome_canvas_points_new (4 * (1 + 90 / 5));
+	label_points = gnome_canvas_points_new (4 * (1 + 90 / 5));
 	i_coords = 0;
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    r - r * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    r - r * cos (i_theta * M_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    r - r * cos (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    (h - r) + r * sin (i_theta * M_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    (w - r) + r * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    (h - r) + r * cos (i_theta * M_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    (w - r) + r * cos (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
+		label_points->coords[i_coords++] =
 		    r - r * sin (i_theta * M_PI / 180.0);
 	}
+
+	/* Basic background */
 	item = gnome_canvas_item_new (group,
 				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      "points", label_points,
 				      "fill_color", "white",
 				      NULL);
-	gnome_canvas_points_free (points);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
-	/* Bounding box @ margin */
+	/* Margin outline */
 	if (template->label_margin >= template->label_round) {
 		/* simple rectangle */
 		item = gnome_canvas_item_new (group,
@@ -548,43 +565,55 @@ draw_rounded_rect_bg (glView * view)
 		h = h - 2 * m;
 
 		/* rectangle with rounded corners */
-		points = gnome_canvas_points_new (4 * (1 + 90 / 5));
+		margin_points = gnome_canvas_points_new (4 * (1 + 90 / 5));
 		i_coords = 0;
 		for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + r - r * sin (i_theta * M_PI / 180.0);
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + r - r * cos (i_theta * M_PI / 180.0);
 		}
 		for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + r - r * cos (i_theta * M_PI / 180.0);
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + (h - r) + r * sin (i_theta * M_PI / 180.0);
 		}
 		for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + (w - r) + r * sin (i_theta * M_PI / 180.0);
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + (h - r) + r * cos (i_theta * M_PI / 180.0);
 		}
 		for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + (w - r) + r * cos (i_theta * M_PI / 180.0);
-			points->coords[i_coords++] =
+			margin_points->coords[i_coords++] =
 			    m + r - r * sin (i_theta * M_PI / 180.0);
 		}
 		item = gnome_canvas_item_new (group,
 					      gnome_canvas_polygon_get_type (),
-					      "points", points,
+					      "points", margin_points,
 					      "width_pixels", 1,
 					      "outline_color", "light blue",
 					      NULL);
-		gnome_canvas_points_free (points);
+		gnome_canvas_points_free (margin_points);
 		view->n_bg_items++;
 		view->bg_item_list =
 		    g_list_append (view->bg_item_list, item);
 	}
+
+	/* Foreground outline */
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_polygon_get_type (),
+				      "points", label_points,
+				      "width_pixels", 2,
+				      "outline_color", "light blue",
+				      NULL);
+	view->n_fg_items++;
+	view->fg_item_list = g_list_append (view->fg_item_list, item);
+
+	gnome_canvas_points_free (label_points);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -597,9 +626,7 @@ draw_round_bg (glView * view)
 {
 	glLabel *label = view->label;
 	glTemplate *template;
-	GnomeCanvasPoints *points;
-	gint i_coords, i_theta;
-	gdouble r, r1;
+	gdouble r, m;
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 
@@ -614,43 +641,49 @@ draw_round_bg (glView * view)
 
 	view->n_bg_items = 0;
 	view->bg_item_list = NULL;
+	view->n_fg_items = 0;
+	view->fg_item_list = NULL;
 
-	r1 = template->label_radius;
-	points = gnome_canvas_points_new (1 + 360/2);
-	i_coords = 0;
-	for (i_theta = 0; i_theta <= 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r1 * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r1 * cos (i_theta * M_PI / 180.0);
-	}
+	r = template->label_radius;
+	m = template->label_margin;
+
+	/* Basic background */
 	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 0.0,
+				      "y1", 0.0,
+				      "x2", 2.0*r,
+				      "y2", 2.0*r,
 				      "fill_color", "white",
 				      NULL);
-	gnome_canvas_points_free (points);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
-	/* Bounding box @ margin */
-	r = template->label_radius - template->label_margin;
-	points = gnome_canvas_points_new (360 / 2);
-	i_coords = 0;
-	for (i_theta = 0; i_theta < 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r * cos (i_theta * M_PI / 180.0);
-	}
+	/* Margin outline */
 	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", m,
+				      "y1", m,
+				      "x2", 2.0*r - m,
+				      "y2", 2.0*r - m,
 				      "width_pixels", 1,
 				      "outline_color", "light blue", NULL);
-	gnome_canvas_points_free (points);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
+
+	/* Foreground outline */
+	r = template->label_radius;
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 0.0,
+				      "y1", 0.0,
+				      "x2", 2.0*r,
+				      "y2", 2.0*r,
+				      "width_pixels", 2,
+				      "outline_color", "light blue",
+				      NULL);
+	view->n_fg_items++;
+	view->fg_item_list = g_list_append (view->fg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -663,9 +696,7 @@ draw_cd_bg (glView * view)
 {
 	glLabel *label = view->label;
 	glTemplate *template;
-	GnomeCanvasPoints *points;
-	gint i_coords, i_theta;
-	gdouble r, r1, r2;
+	gdouble m, r1, r2;
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 
@@ -680,71 +711,87 @@ draw_cd_bg (glView * view)
 
 	view->n_bg_items = 0;
 	view->bg_item_list = NULL;
+	view->n_fg_items = 0;
+	view->fg_item_list = NULL;
 
 	r1 = template->label_radius;
 	r2 = template->label_hole;
-	points = gnome_canvas_points_new (2 * (1 + 360 / 2));
-	i_coords = 0;
-	for (i_theta = 0; i_theta <= 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r1 * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r1 * cos (i_theta * M_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r2 * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r2 * cos (i_theta * M_PI / 180.0);
-	}
+	m  = template->label_margin;
+
+	/* Basic background */
+	/* outer circle */
 	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 0.0,
+				      "y1", 0.0,
+				      "x2", 2.0*r1,
+				      "y2", 2.0*r1,
 				      "fill_color", "white",
 				      NULL);
-	gnome_canvas_points_free (points);
+	view->n_bg_items++;
+	view->bg_item_list = g_list_append (view->bg_item_list, item);
+	/* hole */
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", r1 - r2,
+				      "y1", r1 - r2,
+				      "x2", r1 + r2,
+				      "y2", r1 + r2,
+				      "fill_color", "gray",
+				      NULL);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
-	/* Bounding box @ margin */
+	/* Margin outline */
 	/* outer margin */
-	r = template->label_radius - template->label_margin;
-	points = gnome_canvas_points_new (360 / 2);
-	i_coords = 0;
-	for (i_theta = 0; i_theta < 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r * cos (i_theta * M_PI / 180.0);
-	}
 	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", m,
+				      "y1", m,
+				      "x2", 2.0*r1 - m,
+				      "y2", 2.0*r1 - m,
 				      "width_pixels", 1,
 				      "outline_color", "light blue", NULL);
-	gnome_canvas_points_free (points);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
-
 	/* inner margin */
-	r = template->label_hole + template->label_margin;
-	points = gnome_canvas_points_new (360 / 2);
-	i_coords = 0;
-	for (i_theta = 0; i_theta < 360; i_theta += 2) {
-		points->coords[i_coords++] =
-		    r1 - r * sin (i_theta * M_PI / 180.0);
-		points->coords[i_coords++] =
-		    r1 - r * cos (i_theta * M_PI / 180.0);
-	}
 	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", r1 - r2 - m,
+				      "y1", r1 - r2 - m,
+				      "x2", r1 + r2 + m,
+				      "y2", r1 + r2 + m,
 				      "width_pixels", 1,
 				      "outline_color", "light blue",
 				      NULL);
-	gnome_canvas_points_free (points);
 	view->n_bg_items++;
 	view->bg_item_list = g_list_append (view->bg_item_list, item);
+
+	/* Foreground outline */
+	/* outer circle */
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", 0.0,
+				      "y1", 0.0,
+				      "x2", 2.0*r1,
+				      "y2", 2.0*r1,
+				      "width_pixels", 2,
+				      "outline_color", "light blue",
+				      NULL);
+	view->n_fg_items++;
+	view->fg_item_list = g_list_append (view->fg_item_list, item);
+	/* hole */
+	item = gnome_canvas_item_new (group,
+				      gnome_canvas_ellipse_get_type (),
+				      "x1", r1 - r2,
+				      "y1", r1 - r2,
+				      "x2", r1 + r2,
+				      "y2", r1 + r2,
+				      "width_pixels", 2,
+				      "outline_color", "light blue",
+				      NULL);
+	view->n_fg_items++;
+	view->fg_item_list = g_list_append (view->fg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
