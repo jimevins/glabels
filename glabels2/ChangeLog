@@ -1,5 +1,10 @@
 2004-08-14  Jim Evins  <evins@snaught.com>
 
+	* configure.in:
+		Updated version to 2.1cvs.
+	
+2004-08-14  Jim Evins  <evins@snaught.com>
+
 	* po/ja.po:
 		Updated 2.0.x translation by Takeshi AIHANA <aihana@gnome.gr.jp>.
 
