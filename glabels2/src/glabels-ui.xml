@@ -120,15 +120,15 @@
              pixtype="stock" pixname="gl_stock_barcode"/>
 	
 	<cmd name="ToolsZoomIn"
-	     _tip="increase magnification"
+	     _tip="Increase magnification"
              pixtype="stock" pixname="gtk-zoom-in"/>
 	
 	<cmd name="ToolsZoomOut"
-	     _tip="decrease magnification"
+	     _tip="Decrease magnification"
              pixtype="stock" pixname="gtk-zoom-out"/>
 
 	<cmd name="ToolsZoom1to1"
-	     _tip="restore scale to 100%"
+	     _tip="Restore scale to 100%"
              pixtype="stock" pixname="gtk-zoom-100"/>
 
 	<cmd name="ToolsMergeProperties"
@@ -262,7 +262,7 @@
 
 <submenu name="Objects" _label="_Objects" hidden="0">
 
-        <menuitem name="ToolsArrow" verb="" _label="Select mode"/>
+        <menuitem name="ToolsArrow" verb="" _label="Select Mode"/>
         
 	<separator/>
 
@@ -275,9 +275,9 @@
 
 	<separator/>
 
-        <menuitem name="ToolsObjectProperties" verb="" _label="Object properties..."/>
-        <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to top"/>
-        <menuitem name="ToolsLowerObjects" verb="" _label="Lower to bottom"/>
+        <menuitem name="ToolsObjectProperties" verb="" _label="Object Properties..."/>
+        <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to Top"/>
+        <menuitem name="ToolsLowerObjects" verb="" _label="Lower to Bottom"/>
 
 	<separator/>
 
