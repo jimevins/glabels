@@ -66,8 +66,8 @@ static void gl_wdgt_mini_preview_finalize      (GObject * object);
 static void gl_wdgt_mini_preview_construct     (glWdgtMiniPreview * preview,
 						gint height, gint width);
 
-static GList *mini_outline_list_new            (GnomeCanvas *canvas,
-						glTemplate *template);
+static GList *mini_outline_list_new            (GnomeCanvas      *canvas,
+						const glTemplate *template);
 static void mini_outline_list_free             (GList ** list);
 
 static gint canvas_event_cb                    (GnomeCanvas * canvas,
@@ -77,7 +77,7 @@ static gint canvas_event_cb                    (GnomeCanvas * canvas,
 static GnomeCanvasItem *cdbc_item              (GnomeCanvasGroup *group,
 						gdouble           x1,
 						gdouble           y1,
-						glTemplate       *template);
+						const glTemplate *template);
 
 static void style_set_cb                       (GtkWidget        *widget,
 						GtkStyle         *previous_style,
@@ -273,19 +273,35 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 /****************************************************************************/
 /* Set label for mini-preview to determine geometry.                        */
 /****************************************************************************/
-void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview *preview,
-				     gchar             *name)
+void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
+					     const gchar       *name)
 {
 	glTemplate *template;
+
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	/* Fetch template */
+	template = gl_template_from_name (name);
+
+	gl_wdgt_mini_preview_set_template (preview, template);
+
+	gl_template_free( &template );
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/****************************************************************************/
+/* Set label for mini-preview to determine geometry.                        */
+/****************************************************************************/
+void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
+					const glTemplate  *template)
+{
 	gchar      *page_size;
 	gdouble     canvas_scale;
 	gdouble     w, h;
 	gdouble     shadow_x, shadow_y;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	/* Fetch template */
-	template = gl_template_from_name (name);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "page_size = %s, page_width = %g, page_height = %g",
 		  template->page_size, template->page_width, template->page_height);
@@ -333,8 +349,6 @@ void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview *preview,
 		mini_outline_list_new (GNOME_CANVAS(preview->canvas),
 				       template);
 
-	gl_template_free( &template );
-	
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
@@ -342,8 +356,8 @@ void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview *preview,
 /* PRIVATE.  Draw label outlines and return canvas item list.               */
 /*--------------------------------------------------------------------------*/
 static GList *
-mini_outline_list_new (GnomeCanvas *canvas,
-		       glTemplate  *template)
+mini_outline_list_new (GnomeCanvas       *canvas,
+		       const glTemplate  *template)
 {
 	GnomeCanvasGroup      *group = NULL;
 	GnomeCanvasItem       *item = NULL;
@@ -632,7 +646,7 @@ static GnomeCanvasItem *
 cdbc_item (GnomeCanvasGroup *group,
 	   gdouble           x1,
 	   gdouble           y1,
-	   glTemplate       *template)
+	   const glTemplate *template)
 {
 	GnomeCanvasPoints *points;
 	gint               i_coords, i_theta;

@@ -312,8 +312,8 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	    gtk_editable_get_chars (GTK_EDITABLE (media_select->template_entry),
 				    0, -1);
 	gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
-	gl_wdgt_mini_preview_set_label (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
-				   name);
+	gl_wdgt_mini_preview_set_label_by_name (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
+						name);
 	details_update (media_select, name);
 	g_free (name);
 
@@ -385,8 +385,8 @@ template_entry_changed_cb (GtkEntry *entry,
 	name = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
 	if ( strlen(name) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
-		gl_wdgt_mini_preview_set_label (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
-						name);
+		gl_wdgt_mini_preview_set_label_by_name (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
+							name);
 		gl_debug (DEBUG_MEDIA_SELECT, "m1");
 		details_update (media_select, name);
 		gl_debug (DEBUG_MEDIA_SELECT, "m2");

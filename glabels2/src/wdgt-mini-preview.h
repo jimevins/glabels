@@ -71,17 +71,20 @@ struct _glWdgtMiniPreviewClass {
 			 gpointer user_data);
 };
 
-guint      gl_wdgt_mini_preview_get_type        (void);
+guint      gl_wdgt_mini_preview_get_type          (void);
 
-GtkWidget *gl_wdgt_mini_preview_new             (gint               height,
-						 gint               width);
+GtkWidget *gl_wdgt_mini_preview_new               (gint               height,
+						   gint               width);
 
-void       gl_wdgt_mini_preview_set_label       (glWdgtMiniPreview *preview,
-						 gchar             *name);
+void       gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
+						   const gchar       *name);
 
-void       gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview *preview,
-						 gint               first_label,
-						 gint               last_label);
+void       gl_wdgt_mini_preview_set_template      (glWdgtMiniPreview *preview,
+						   const glTemplate  *template);
+
+void       gl_wdgt_mini_preview_highlight_range   (glWdgtMiniPreview *preview,
+						   gint               first_label,
+						   gint               last_label);
 G_END_DECLS
 
 #endif
