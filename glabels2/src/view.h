@@ -39,7 +39,7 @@ typedef enum {
 #define GL_IS_VIEW(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_VIEW))
 #define GL_IS_VIEW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW))
 
-typedef struct _glView glView;
+typedef struct _glView      glView;
 typedef struct _glViewClass glViewClass;
 
 #include "view-object.h"
@@ -47,14 +47,18 @@ typedef struct _glViewClass glViewClass;
 struct _glView {
 	GtkVBox           parent_widget;
 
-	glLabel           *label;
+	glLabel          *label;
 
-	GtkWidget         *canvas;
+	GtkWidget        *canvas;
 	gdouble           scale;
-	gint              n_bg_items;
-	GList             *bg_item_list;
-	gint              n_fg_items;
-	GList             *fg_item_list;
+
+	GnomeCanvasGroup *bg_group;              /* Background layer */
+	GnomeCanvasGroup *grid_group;            /* Grid layer */
+	GnomeCanvasGroup *markup_group;          /* Markup layer */
+	GnomeCanvasGroup *label_group;           /* Label layer (user objects) */
+	GnomeCanvasGroup *fg_group;              /* Foreground layer */
+
+	gdouble           grid_spacing;
 
 	glViewState       state;
 	glLabelObjectType create_type;
@@ -74,16 +78,21 @@ struct _glViewClass {
 	GtkVBoxClass      parent_class;
 
 	/* Selection changed signal */
-	void (*selection_changed) (glView *view, gpointer user_data);
+	void (*selection_changed) (glView   *view,
+				   gpointer  user_data);
 
 	/* Signals to support a status bar */
-	void (*zoom_changed)      (glView *view,
-				   gdouble zoom,  gpointer user_data);
-	void (*pointer_moved)     (glView *view,
-				   gdouble x, gdouble y, gpointer user_data);
-	void (*pointer_exit)      (glView *view, gpointer user_data);
-	void (*mode_changed)      (glView *view,
-				   gpointer user_data);
+	void (*zoom_changed)      (glView   *view,
+				   gdouble   zoom,
+				   gpointer  user_data);
+	void (*pointer_moved)     (glView   *view,
+				   gdouble   x,
+				   gdouble   y,
+				   gpointer  user_data);
+	void (*pointer_exit)      (glView   *view,
+				   gpointer  user_data);
+	void (*mode_changed)      (glView   *view,
+				   gpointer  user_data);
 };
 
 G_BEGIN_DECLS
@@ -96,10 +105,21 @@ GtkWidget *gl_view_new                     (glLabel           *label);
 void       gl_view_raise_fg                (glView            *view);
 
 
+void       gl_view_show_grid               (glView            *view);
+
+void       gl_view_hide_grid               (glView            *view);
+
+void       gl_view_set_grid_spacing        (glView            *view,
+					    gdouble            spacing);
+
+void       gl_view_show_markup             (glView            *view);
+
+void       gl_view_hide_markup             (glView            *view);
+
 void       gl_view_arrow_mode              (glView            *view);
 
 void       gl_view_object_create_mode      (glView            *view,
-					   glLabelObjectType  type);
+					    glLabelObjectType  type);
 
 
 void       gl_view_select_object           (glView            *view,

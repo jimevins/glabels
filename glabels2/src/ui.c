@@ -120,6 +120,8 @@ static gchar* doc_verbs [] = {
 	"/menu/Objects/CreateObjects",
 	"/menu/Objects/Order",
 	"/menu/Objects/RotateFlip",
+	"/commands/ViewGrid",
+	"/commands/ViewMarkup",
 
 	NULL
 };
@@ -167,6 +169,8 @@ static void view_menu_item_toggled_cb     (BonoboUIComponent           *ui_compo
 static void set_app_main_toolbar_style 	  (BonoboUIComponent           *ui_component);
 
 static void set_app_drawing_toolbar_style (BonoboUIComponent           *ui_component);
+
+static void set_view_style                (BonoboUIComponent           *ui_component);
 
 static void set_verb_sensitive            (BonoboUIComponent           *ui_component,
 					   gchar                       *cname,
@@ -255,6 +259,17 @@ gl_ui_init (BonoboUIComponent *ui_component,
 			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
 			(gpointer)win);
 
+
+	/* Set view grid and markup visibility according to prefs */
+	set_view_style (ui_component);
+		
+	/* Add listener for the view grid & markup */
+	bonobo_ui_component_add_listener (ui_component, "ViewGrid", 
+			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "ViewMarkup", 
+			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
+			(gpointer)win);
 
 	set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
 
@@ -455,8 +470,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 
 	s = (strcmp (state, "1") == 0);
 
-	if ((strcmp (path, "ViewMainToolbar") == 0) &&
-	    (s != gl_prefs->main_toolbar_visible))
+	if (strcmp (path, "ViewMainToolbar") == 0)
 	{
 		gl_prefs->main_toolbar_visible = s;
 		set_app_main_toolbar_style (ui_component);
@@ -465,8 +479,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "MainToolbarSystem") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
+	if (s && (strcmp (path, "MainToolbarSystem") == 0))
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_main_toolbar_style (ui_component);
@@ -475,8 +488,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "MainToolbarIcon") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS))
+	if (s && (strcmp (path, "MainToolbarIcon") == 0))
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_main_toolbar_style (ui_component);
@@ -485,8 +497,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "MainToolbarIconText") == 0) &&
-	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
+	if (s && (strcmp (path, "MainToolbarIconText") == 0))
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_main_toolbar_style (ui_component);
@@ -495,8 +506,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if ((strcmp (path, "MainToolbarTooltips") == 0) &&
-	    (s != gl_prefs->main_toolbar_view_tooltips))
+	if (strcmp (path, "MainToolbarTooltips") == 0)
 	{
 		gl_prefs->main_toolbar_view_tooltips = s;
 		set_app_main_toolbar_style (ui_component);
@@ -505,8 +515,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if ((strcmp (path, "ViewDrawingToolbar") == 0) &&
-	    (s != gl_prefs->drawing_toolbar_visible))
+	if (strcmp (path, "ViewDrawingToolbar") == 0)
 	{
 		gl_prefs->drawing_toolbar_visible = s;
 		set_app_drawing_toolbar_style (ui_component);
@@ -515,8 +524,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "DrawingToolbarSystem") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
+	if (s && (strcmp (path, "DrawingToolbarSystem") == 0))
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_drawing_toolbar_style (ui_component);
@@ -525,8 +533,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "DrawingToolbarIcon") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS))
+	if (s && (strcmp (path, "DrawingToolbarIcon") == 0))
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_drawing_toolbar_style (ui_component);
@@ -535,8 +542,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "DrawingToolbarIconText") == 0) &&
-	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
+	if (s && (strcmp (path, "DrawingToolbarIconText") == 0))
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_drawing_toolbar_style (ui_component);
@@ -545,11 +551,36 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if ((strcmp (path, "DrawingToolbarTooltips") == 0) &&
-	    (s != gl_prefs->drawing_toolbar_view_tooltips))
+	if (strcmp (path, "DrawingToolbarTooltips") == 0)
 	{
 		gl_prefs->drawing_toolbar_view_tooltips = s;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
+
+		return;
+	}
+
+	if (strcmp (path, "ViewGrid") == 0)
+	{
+		gl_prefs->grid_visible = s;
+		if (s) {
+			gl_view_show_grid (GL_VIEW(GL_WINDOW(win)->view));
+		} else {
+			gl_view_hide_grid (GL_VIEW(GL_WINDOW(win)->view));
+		}
+		gl_prefs_save_settings ();
+
+		return;
+	}
+
+	if (strcmp (path, "ViewMarkup") == 0)
+	{
+		gl_prefs->markup_visible = s;
+		if (s) {
+			gl_view_show_markup (GL_VIEW(GL_WINDOW(win)->view));
+		} else {
+			gl_view_hide_markup (GL_VIEW(GL_WINDOW(win)->view));
+		}
 		gl_prefs_save_settings ();
 
 		return;
@@ -772,6 +803,35 @@ set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
 	bonobo_ui_component_set_prop (
 			ui_component, "/DrawingToolbar",
 			"hidden", gl_prefs->drawing_toolbar_visible ? "0":"1", NULL);
+
+ error:
+	bonobo_ui_component_thaw (ui_component, NULL);
+
+	gl_debug (DEBUG_UI, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set visibility of grid and markup.                              */
+/*---------------------------------------------------------------------------*/
+static void
+set_view_style (BonoboUIComponent *ui_component)
+{
+	GConfClient *client;
+	gboolean labels;
+
+	gl_debug (DEBUG_UI, "START");
+
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT(ui_component));
+			
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	set_verb_state (ui_component, 
+			"/commands/ViewGrid",
+			gl_prefs->grid_visible);
+
+	set_verb_state (ui_component, 
+			"/commands/ViewMarkup",
+			gl_prefs->markup_visible);
 
  error:
 	bonobo_ui_component_thaw (ui_component, NULL);

@@ -82,6 +82,12 @@
 	<cmd name="DrawingToolbarTooltips" id="DrawingToolbarTooltips" _label="Show _Tooltips" type="toggle"
 	_tip="Show tooltips in the drawing toolbar" state="1"/>
 
+	<cmd name="ViewGrid" _label="_Grid" type="toggle"
+	_tip="Change the visibility of the grid in the current window" state="1"/>
+
+	<cmd name="ViewMarkup" _label="Markup" type="toggle"
+	_tip="Change the visibility of markup lines in the current window" state="1"/>
+
         <cmd name="SettingsPreferences" _label="Preferences" _tip="Configure the application"
 	  pixtype="stock" pixname="gtk-preferences"/>
 
@@ -256,7 +262,7 @@
 
 	<separator/>
 
-	<submenu name="CustomizeMainToolbar" _label="_Customize Main Toolbar">
+	<submenu name="CustomizeMainToolbar" _label="Customize Main Toolbar">
 		
 		<menuitem name="MainToolbarSystem" verb=""/>
 		<menuitem name="MainToolbarIcon" verb=""/>
@@ -268,7 +274,7 @@
 
 	</submenu>
 
-	<submenu name="CustomizeDrawingToolbar" _label="_Customize Drawing Toolbar">
+	<submenu name="CustomizeDrawingToolbar" _label="Customize Drawing Toolbar">
 		
 		<menuitem name="DrawingToolbarTooltips" verb=""/>
 
@@ -276,9 +282,14 @@
 
 	<separator/>
 
-        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
-        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
-        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
+	<menuitem name="ViewGrid" id="ViewGrid" verb="" _label="_Grid"/>
+	<menuitem name="ViewMarkup" id="ViewMarkup" verb="" _label="M_arkup"/>
+
+	<separator/>
+
+        <menuitem name="ToolsZoomIn" verb="" _label="Zoom _In"/>
+        <menuitem name="ToolsZoomOut" verb="" _label="Zoom _Out"/>
+        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom _1:1"/>
 
 	<placeholder name="ViewOps" delimit="top"/>
 

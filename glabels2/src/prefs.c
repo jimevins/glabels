@@ -62,6 +62,9 @@ glPreferences      *gl_prefs     = NULL;
 #define PREF_DRAWING_TOOLBAR_BUTTONS_STYLE  "/drawing-toolbar-buttons-style"
 #define PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS  "/drawing-toolbar-view-tooltips"
 
+#define PREF_GRID_VISIBLE                   "/grid-visible"
+#define PREF_MARKUP_VISIBLE                 "/markup-visible"
+
 #define PREF_MAX_RECENTS                    "/max-recents"
 
 /* Default values */
@@ -235,6 +238,16 @@ gl_prefs_save_settings (void)
 			       gl_prefs->drawing_toolbar_view_tooltips,
 			       NULL);
 
+	/* View properties */
+	gconf_client_set_bool (gconf_client,
+			       BASE_KEY PREF_GRID_VISIBLE,
+			       gl_prefs->grid_visible,
+			       NULL);
+
+	gconf_client_set_bool (gconf_client,
+			       BASE_KEY PREF_MARKUP_VISIBLE,
+			       gl_prefs->markup_visible,
+			       NULL);
 
 	/* Recent files */
 	gconf_client_set_int (gconf_client,
@@ -364,6 +377,17 @@ gl_prefs_load_settings (void)
 			  BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			  TRUE);
 
+
+	/* View properties */
+	gl_prefs->grid_visible =
+		get_bool (gconf_client,
+			  BASE_KEY PREF_GRID_VISIBLE,
+			  TRUE);
+
+	gl_prefs->markup_visible =
+		get_bool (gconf_client,
+			  BASE_KEY PREF_MARKUP_VISIBLE,
+			  TRUE);
 
 	/* Recent files */
 	gl_prefs->max_recents =

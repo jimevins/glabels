@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-font.h>
 
+G_BEGIN_DECLS
+
 typedef struct _glPreferences glPreferences;
 
 typedef enum {
@@ -42,56 +44,66 @@ typedef enum {
 struct _glPreferences
 {
 	/* Units */
-	glPrefsUnits    units;
+	glPrefsUnits      units;
 
 	/* Page size */
-	gchar           *default_page_size;
+	gchar            *default_page_size;
 
 	/* Text properties */
 	gchar            *default_font_family;
-	gdouble          default_font_size;
-	GnomeFontWeight  default_font_weight;
-	gboolean         default_font_italic_flag;
-	guint            default_text_color;
-	GtkJustification default_text_alignment;
+	gdouble           default_font_size;
+	GnomeFontWeight   default_font_weight;
+	gboolean          default_font_italic_flag;
+	guint             default_text_color;
+	GtkJustification  default_text_alignment;
 	
 	/* Line properties */
-	gdouble          default_line_width;
-	guint            default_line_color;
+	gdouble           default_line_width;
+	guint             default_line_color;
 	
 	/* Fill properties */
-	guint            default_fill_color;
+	guint             default_fill_color;
 
 	/* User Interface/Main Toolbar */
-	gboolean		main_toolbar_visible;
-	glToolbarSetting 	main_toolbar_buttons_style; 
-	gboolean		main_toolbar_view_tooltips;
+	gboolean	  main_toolbar_visible;
+	glToolbarSetting  main_toolbar_buttons_style; 
+	gboolean	  main_toolbar_view_tooltips;
 
 	/* User Interface/Drawing Toolbar */
-	gboolean		drawing_toolbar_visible;
-	glToolbarSetting 	drawing_toolbar_buttons_style; 
-	gboolean		drawing_toolbar_view_tooltips;
+	gboolean          drawing_toolbar_visible;
+	glToolbarSetting  drawing_toolbar_buttons_style; 
+	gboolean	  drawing_toolbar_view_tooltips;
 
-	/* User Interface/MDI Mode */
-	gint		mdi_mode;
-	gint		mdi_tabs_position; /* Tabs position in mdi notebook */
+	/* View properties */
+	gboolean          grid_visible;
+	gboolean          markup_visible;
 
 	/* Recent files */
-	gint            max_recents;
+	gint              max_recents;
 };
 
-extern glPreferences *gl_prefs;
+glPreferences *gl_prefs;
 
-extern void gl_prefs_save_settings (void);
-extern void gl_prefs_load_settings (void);
-extern void gl_prefs_init (void);
+void          gl_prefs_save_settings       (void);
 
-extern const gchar *gl_prefs_get_page_size (void);
-extern glPrefsUnits gl_prefs_get_units (void);
-extern const gchar *gl_prefs_get_units_string (void);
-extern gdouble gl_prefs_get_units_per_point (void);
-extern gdouble gl_prefs_get_units_step_size (void);
-extern gint gl_prefs_get_units_precision (void);
+void          gl_prefs_load_settings       (void);
+
+void          gl_prefs_init                (void);
+
+
+const gchar  *gl_prefs_get_page_size       (void);
+
+glPrefsUnits  gl_prefs_get_units           (void);
+
+const gchar  *gl_prefs_get_units_string    (void);
+
+gdouble       gl_prefs_get_units_per_point (void);
+
+gdouble       gl_prefs_get_units_step_size (void);
+
+gint          gl_prefs_get_units_precision (void);
+
+G_END_DECLS
 
 #endif /* __PREFS_H__ */
 

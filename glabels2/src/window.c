@@ -327,6 +327,18 @@ gl_window_set_label (glWindow    *window,
 
 	gtk_widget_show_all (window->view);
 
+	if (gl_prefs->grid_visible) {
+		gl_view_show_grid (GL_VIEW(window->view));
+	} else {
+		gl_view_hide_grid (GL_VIEW(window->view));
+	}
+
+	if (gl_prefs->markup_visible) {
+		gl_view_show_markup (GL_VIEW(window->view));
+	} else {
+		gl_view_hide_markup (GL_VIEW(window->view));
+	}
+
 	gl_ui_update_all (window->uic, GL_VIEW(window->view));
 
 	string = g_strdup_printf ("%3.0f%%",

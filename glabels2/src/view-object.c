@@ -221,10 +221,9 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 
 	/* create canvas group to contain items representing object */
-	canvas = GNOME_CANVAS (view_object->private->view->canvas);
-	root = gnome_canvas_root (canvas);
 	view_object->private->group =
-		gnome_canvas_item_new (root, gnome_canvas_group_get_type (),
+		gnome_canvas_item_new (view_object->private->view->label_group,
+				       gnome_canvas_group_get_type (),
 				       "x", x,
 				       "y", y,
 				       NULL);
@@ -580,7 +579,6 @@ lower_object_cb (GtkWidget    *widget,
 		 glViewObject *view_object)
 {
 	glLabelObject *object;
-	glView *view;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -588,8 +586,9 @@ lower_object_cb (GtkWidget    *widget,
 	gnome_canvas_item_lower_to_bottom (view_object->private->group);
 
 	/* now raise it above all items that form the backgound */
-	gnome_canvas_item_raise (view_object->private->group,
-				 view_object->private->view->n_bg_items);
+	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->markup_group));
+	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->grid_group));
+	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->bg_group));
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -46,9 +46,13 @@
 /* Private macros and constants.                                            */
 /*==========================================================================*/
 
+#define OUTLINE_COLOR   GL_COLOR (173, 216, 230)
+#define PAPER_COLOR     GL_COLOR (255, 255, 255)
+#define GRID_COLOR      GL_COLOR (192, 192, 192)
+#define MARKUP_COLOR    GL_COLOR (240, 100, 100)
+
 #define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
 #define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
-
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -97,13 +101,19 @@ static void       gl_view_construct_selection     (glView *view);
 
 static gdouble    get_apropriate_scale            (gdouble w, gdouble h);
 
-static void       draw_bg_fg                      (glView *view);
+static void       draw_layers                     (glView *view);
+
+static void       draw_label_layer                (glView *view);
+
+static void       draw_bg_fg_layers               (glView *view);
 static void       draw_bg_fg_rect                 (glView *view);
 static void       draw_bg_fg_rounded_rect         (glView *view);
 static void       draw_bg_fg_round                (glView *view);
 static void       draw_bg_fg_cd                   (glView *view);
 
-static void       draw_markup                     (glView *view);
+static void       draw_grid_layer                 (glView *view);
+
+static void       draw_markup_layer               (glView *view);
 
 static void       draw_markup_margin              (glView *view,
 						   glTemplateMarkupMargin *margin);
@@ -124,6 +134,11 @@ static void       unselect_object_real            (glView *view,
 
 static gboolean   object_at                       (glView *view,
 						   gdouble x, gdouble y);
+
+static gboolean   is_item_member_of_group         (glView          *view,
+						   GnomeCanvasItem *item,
+						   GnomeCanvasItem *group);
+
 static gboolean   is_object_selected              (glView *view,
 						   glViewObject *view_object);
 
@@ -262,6 +277,8 @@ gl_view_init (glView *view)
 
 	view->label = NULL;
 
+	view->grid_spacing = 9;
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -342,9 +359,6 @@ gl_view_construct_canvas (glView *view)
 	gdouble scale;
 	glLabel *label = view->label;
 	gdouble label_width, label_height;
-	GList *p_obj;
-	glLabelObject *object;
-	glViewObject *view_object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -375,41 +389,10 @@ gl_view_construct_canvas (glView *view)
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
 					0.0, 0.0, label_width, label_height);
 
-	/* Draw background shape of label/card */
-	draw_bg_fg (view);
-	gl_debug (DEBUG_VIEW, "n_bg_items = %d, n_fg_items = %d",
-		  view->n_bg_items, view->n_fg_items);
+	draw_layers (view);
 
 	g_signal_connect (G_OBJECT (view->canvas), "event",
 			  G_CALLBACK (canvas_event), view);
-
-	for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next) {
-		object = (glLabelObject *) p_obj->data;
-
-		if (GL_IS_LABEL_BOX (object)) {
-			view_object = gl_view_box_new (GL_LABEL_BOX(object),
-						       view);
-		} else if (GL_IS_LABEL_ELLIPSE (object)) {
-			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object),
-							   view);
-		} else if (GL_IS_LABEL_LINE (object)) {
-			view_object = gl_view_line_new (GL_LABEL_LINE(object),
-							view);
-		} else if (GL_IS_LABEL_IMAGE (object)) {
-			view_object = gl_view_image_new (GL_LABEL_IMAGE(object),
-							 view);
-		} else if (GL_IS_LABEL_TEXT (object)) {
-			view_object = gl_view_text_new (GL_LABEL_TEXT(object),
-							view);
-		} else if (GL_IS_LABEL_BARCODE (object)) {
-			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object),
-							   view);
-		} else {
-			/* Should not happen! */
-			view_object = NULL;
-			g_warning ("Invalid label object type.");
-		}
-	}
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -481,18 +464,93 @@ get_apropriate_scale (gdouble w, gdouble h)
 }
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  Create, draw and order layers.                                  */
+/*---------------------------------------------------------------------------*/
+static void
+draw_layers (glView *view)
+{
+	draw_bg_fg_layers (view);
+	draw_grid_layer (view);
+	draw_markup_layer (view);
+	draw_label_layer (view);
+
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw label layer.                                               */
+/*---------------------------------------------------------------------------*/
+static void
+draw_label_layer (glView *view)
+{
+	GnomeCanvasGroup *group;
+	glLabel          *label;
+	GList            *p_obj;
+	glLabelObject    *object;
+	glViewObject     *view_object;
+
+	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
+	view->label_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
+
+	label = view->label;
+
+	for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next) {
+		object = (glLabelObject *) p_obj->data;
+
+		if (GL_IS_LABEL_BOX (object)) {
+			view_object = gl_view_box_new (GL_LABEL_BOX(object),
+						       view);
+		} else if (GL_IS_LABEL_ELLIPSE (object)) {
+			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object),
+							   view);
+		} else if (GL_IS_LABEL_LINE (object)) {
+			view_object = gl_view_line_new (GL_LABEL_LINE(object),
+							view);
+		} else if (GL_IS_LABEL_IMAGE (object)) {
+			view_object = gl_view_image_new (GL_LABEL_IMAGE(object),
+							 view);
+		} else if (GL_IS_LABEL_TEXT (object)) {
+			view_object = gl_view_text_new (GL_LABEL_TEXT(object),
+							view);
+		} else if (GL_IS_LABEL_BARCODE (object)) {
+			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object),
+							   view);
+		} else {
+			/* Should not happen! */
+			view_object = NULL;
+			g_warning ("Invalid label object type.");
+		}
+	}
+}
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw background and foreground outlines.                        */
 /*---------------------------------------------------------------------------*/
 static void
-draw_bg_fg (glView *view)
+draw_bg_fg_layers (glView *view)
 {
-	glLabel    *label;
-	glTemplate *template;
+	glLabel          *label;
+	glTemplate       *template;
+	GnomeCanvasGroup *group;
 
-	view->n_bg_items = 0;
-	view->bg_item_list = NULL;
-	view->n_fg_items = 0;
-	view->fg_item_list = NULL;
+	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
+	view->bg_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
+	view->fg_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
 
 	label = view->label;
 	template = gl_label_get_template (label);
@@ -533,7 +591,6 @@ draw_bg_fg_rect (glView *view)
 	glTemplate       *template;
 	gdouble           w, h;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -543,35 +600,26 @@ draw_bg_fg_rect (glView *view)
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	/* Background */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->bg_group,
 				      gnome_canvas_rect_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", w,
 				      "y2", h,
-				      "fill_color", "white",
+				      "fill_color_rgba", PAPER_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
-
-	/* Markup */
-	draw_markup (view);
 
 	/* Foreground */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->fg_group,
 				      gnome_canvas_rect_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", w,
 				      "y2", h,
 				      "width_pixels", 2,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
-	view->n_fg_items++;
-	view->fg_item_list = g_list_append (view->fg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -588,14 +636,11 @@ draw_bg_fg_rounded_rect (glView *view)
 	glTemplate        *template;
 	gdouble            r, w, h;
 	GnomeCanvasItem   *item;
-	GnomeCanvasGroup  *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (label != NULL);
-
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -629,26 +674,19 @@ draw_bg_fg_rounded_rect (glView *view)
 	}
 
 	/* Background */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->bg_group,
 				      gnome_canvas_polygon_get_type (),
 				      "points", points,
-				      "fill_color", "white",
+				      "fill_color_rgba", PAPER_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
-
-	/* Markup */
-	draw_markup (view);
 
 	/* Foreground */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->fg_group,
 				      gnome_canvas_polygon_get_type (),
 				      "points", points,
 				      "width_pixels", 2,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
-	view->n_fg_items++;
-	view->fg_item_list = g_list_append (view->fg_item_list, item);
 
 	gnome_canvas_points_free (points);
 
@@ -665,7 +703,6 @@ draw_bg_fg_round (glView *view)
 	glTemplate       *template;
 	gdouble           r;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -674,37 +711,28 @@ draw_bg_fg_round (glView *view)
 
 	template = gl_label_get_template (label);
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	r = template->label.round.r;
 
 	/* Background */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->bg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", 2.0*r,
 				      "y2", 2.0*r,
-				      "fill_color", "white",
+				      "fill_color_rgba", PAPER_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
-
-	/* Markup */
-	draw_markup (view);
 
 	/* Foreground */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->fg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", 2.0*r,
 				      "y2", 2.0*r,
 				      "width_pixels", 2,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
-	view->n_fg_items++;
-	view->fg_item_list = g_list_append (view->fg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -719,7 +747,6 @@ draw_bg_fg_cd (glView *view)
 	glTemplate       *template;
 	gdouble           r1, r2;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -728,63 +755,108 @@ draw_bg_fg_cd (glView *view)
 
 	template = gl_label_get_template (label);
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	r1 = template->label.cd.r1;
 	r2 = template->label.cd.r2;
 
 	/* Background */
 	/* outer circle */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->bg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", 2.0*r1,
 				      "y2", 2.0*r1,
-				      "fill_color", "white",
+				      "fill_color_rgba", PAPER_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
 	/* hole */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->bg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", r1 - r2,
 				      "y1", r1 - r2,
 				      "x2", r1 + r2,
 				      "y2", r1 + r2,
-				      "fill_color", "gray",
+				      "fill_color_rgba", GRID_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
-
-	/* Markup */
-	draw_markup (view);
 
 	/* Foreground */
 	/* outer circle */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->fg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", 0.0,
 				      "y1", 0.0,
 				      "x2", 2.0*r1,
 				      "y2", 2.0*r1,
 				      "width_pixels", 2,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
-	view->n_fg_items++;
-	view->fg_item_list = g_list_append (view->fg_item_list, item);
 	/* hole */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->fg_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", r1 - r2,
 				      "y1", r1 - r2,
 				      "x2", r1 + r2,
 				      "y2", r1 + r2,
 				      "width_pixels", 2,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
-	view->n_fg_items++;
-	view->fg_item_list = g_list_append (view->fg_item_list, item);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw grid lines.                                                */
+/*---------------------------------------------------------------------------*/
+static void
+draw_grid_layer (glView *view)
+{
+	gdouble            w, h, x, y;
+	GnomeCanvasPoints *points;
+	GnomeCanvasItem  *item;
+	GnomeCanvasGroup *group;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
+
+	gl_label_get_size (view->label, &w, &h);
+
+	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
+	view->grid_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
+	points = gnome_canvas_points_new (2);
+
+	points->coords[1] = 0.0;
+	points->coords[3] = h;
+	for ( x=view->grid_spacing; x < w; x += view->grid_spacing ) {
+		points->coords[0] = points->coords[2] = x;
+
+		item = gnome_canvas_item_new (view->grid_group,
+					      gnome_canvas_line_get_type (),
+					      "points", points,
+					      "width_pixels", 1,
+					      "fill_color_rgba", GRID_COLOR,
+					      NULL);
+	}
+
+	points->coords[0] = 0.0;
+	points->coords[2] = w;
+	for ( y=view->grid_spacing; y < h; y += view->grid_spacing ) {
+		points->coords[1] = points->coords[3] = y;
+
+		item = gnome_canvas_item_new (view->grid_group,
+					      gnome_canvas_line_get_type (),
+					      "points", points,
+					      "width_pixels", 1,
+					      "fill_color_rgba", GRID_COLOR,
+					      NULL);
+	}
+
+	gnome_canvas_points_free (points);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -793,13 +865,21 @@ draw_bg_fg_cd (glView *view)
 /* PRIVATE.  Draw markup lines.                                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup (glView *view)
+draw_markup_layer (glView *view)
 {
+	GnomeCanvasGroup *group;
 	glLabel          *label;
 	glTemplate       *template;
 	GList            *p;
 	glTemplateMarkup *markup;
 
+	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
+	view->markup_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
 	label = view->label;
 	template = gl_label_get_template (label);
 
@@ -873,7 +953,6 @@ draw_markup_margin_rect (glView                 *view,
 	glTemplate       *template;
 	gdouble           w, h, m;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -884,20 +963,16 @@ draw_markup_margin_rect (glView                 *view,
 	template = gl_label_get_template (label);
 	m = margin->size;
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	/* Bounding box @ margin */
-	gnome_canvas_item_new (group,
+	gnome_canvas_item_new (view->markup_group,
 			       gnome_canvas_rect_get_type (),
 			       "x1", m,
 			       "y1", m,
 			       "x2", w - m,
 			       "y2", h - m,
 			       "width_pixels", 1,
-			       "outline_color", "light blue",
+			       "outline_color_rgba", MARKUP_COLOR,
 			       NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -915,14 +990,11 @@ draw_markup_margin_rounded_rect (glView                 *view,
 	glTemplate        *template;
 	gdouble            r, w, h, m;
 	GnomeCanvasItem   *item;
-	GnomeCanvasGroup  *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (label != NULL);
-
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -960,15 +1032,13 @@ draw_markup_margin_rounded_rect (glView                 *view,
 		points->coords[i_coords++] =
 			m + r - r * sin (i_theta * M_PI / 180.0);
 	}
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->markup_group,
 				      gnome_canvas_polygon_get_type (),
 				      "points", points,
 				      "width_pixels", 1,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
 	gnome_canvas_points_free (points);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -984,7 +1054,6 @@ draw_markup_margin_round (glView                 *view,
 	glTemplate       *template;
 	gdouble           r, m;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -993,22 +1062,19 @@ draw_markup_margin_round (glView                 *view,
 
 	template = gl_label_get_template (label);
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	r = template->label.round.r;
 	m = margin->size;
 
 	/* Margin outline */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->markup_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", m,
 				      "y1", m,
 				      "x2", 2.0*r - m,
 				      "y2", 2.0*r - m,
 				      "width_pixels", 1,
-				      "outline_color", "light blue", NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
+				      "outline_color_rgba", MARKUP_COLOR,
+				      NULL);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1024,7 +1090,6 @@ draw_markup_margin_cd (glView                 *view,
 	glTemplate       *template;
 	gdouble           m, r1, r2;
 	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1033,35 +1098,30 @@ draw_markup_margin_cd (glView                 *view,
 
 	template = gl_label_get_template (label);
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-
 	r1 = template->label.cd.r1;
 	r2 = template->label.cd.r2;
 	m  = margin->size;
 
 	/* outer margin */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->markup_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", m,
 				      "y1", m,
 				      "x2", 2.0*r1 - m,
 				      "y2", 2.0*r1 - m,
 				      "width_pixels", 1,
-				      "outline_color", "light blue", NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
+				      "outline_color_rgba", MARKUP_COLOR,
+				      NULL);
 	/* inner margin */
-	item = gnome_canvas_item_new (group,
+	item = gnome_canvas_item_new (view->markup_group,
 				      gnome_canvas_ellipse_get_type (),
 				      "x1", r1 - r2 - m,
 				      "y1", r1 - r2 - m,
 				      "x2", r1 + r2 + m,
 				      "y2", r1 + r2 + m,
 				      "width_pixels", 1,
-				      "outline_color", "light blue",
+				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
-	view->n_bg_items++;
-	view->bg_item_list = g_list_append (view->bg_item_list, item);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1074,9 +1134,51 @@ gl_view_raise_fg (glView *view)
 {
 	GList *p;
 
-	for (p = view->fg_item_list; p != NULL; p = p->next) {
-		gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(p->data));
-	}
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
+}
+
+/*****************************************************************************/
+/* Show grid.                                                                */
+/*****************************************************************************/
+void       gl_view_show_grid               (glView            *view)
+{
+	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->grid_group));
+}
+
+/*****************************************************************************/
+/* Hide grid.                                                                */
+/*****************************************************************************/
+void       gl_view_hide_grid               (glView            *view)
+{
+	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->grid_group));
+}
+
+/*****************************************************************************/
+/* Set grid spacing.                                                         */
+/*****************************************************************************/
+void       gl_view_set_grid_spacing        (glView            *view,
+					    gdouble            spacing)
+{
+	view->grid_spacing = spacing;
+
+	gtk_object_destroy (GTK_OBJECT(view->grid_group));
+	draw_grid_layer (view);
+}
+
+/*****************************************************************************/
+/* Show markup.                                                              */
+/*****************************************************************************/
+void       gl_view_show_markup             (glView            *view)
+{
+	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->markup_group));
+}
+
+/*****************************************************************************/
+/* Hide markup.                                                              */
+/*****************************************************************************/
+void       gl_view_hide_markup             (glView            *view)
+{
+	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->markup_group));
 }
 
 /*****************************************************************************/
@@ -1335,11 +1437,30 @@ object_at (glView  *view,
 	if (item == NULL)
 		return FALSE;
 
-	/* ignore our background items */
-	if (g_list_find (view->bg_item_list, item) != NULL)
+	/* ignore items not in label group, e.g. background items */
+	if (!is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->label_group)))
 		return FALSE;
 
 	return TRUE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Is the item a child (or grandchild, etc.) of group.             */
+/*---------------------------------------------------------------------------*/
+static gboolean
+is_item_member_of_group (glView          *view,
+			 GnomeCanvasItem *item,
+			 GnomeCanvasItem *group)
+{
+	GnomeCanvasItem *parent;
+	GnomeCanvasItem *root_group;
+
+	root_group = GNOME_CANVAS_ITEM(gnome_canvas_root (GNOME_CANVAS (view->canvas)));
+
+	for ( parent=item->parent; parent && (parent!=root_group); parent=parent->parent) {
+		if (parent == group) return TRUE;
+	}
+	return FALSE;
 }
 
 /*---------------------------------------------------------------------------*/
