@@ -125,7 +125,7 @@
   <!-- Avery-Zweckform J8676A: CD/DVD Labels 2 per sheet               -->
   <!-- =============================================================== -->
   <Template name="Avery 8676" size="A4" _description="CD/DVD Labels">
-    <Label-cd id="0" radius="166.5" hole="17">
+    <Label-cd id="0" radius="166.5" hole="17" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="130" y0="59.5" dx="0" dy="388"/>        
     </Label-cd>

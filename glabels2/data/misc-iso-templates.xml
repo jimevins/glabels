@@ -71,7 +71,7 @@
   <!-- Neato brand CD/DVD Labels (face only), 2 per sheet                 -->
   <!-- ===================================================================-->
   <Template name="Neato A4 CD" size="A4" _description="CD/DVD Labels (face only)">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="125" y0="68.890" dx="0" dy="360"/>        
     </Label-cd>                                                      
@@ -236,7 +236,7 @@
   <!-- Data Becker CD/DVD Labels (face only), 2 per sheet                 -->
   <!-- ===================================================================-->
   <Template name="DataBecker 0335" size="A4" _description="CD/DVD Labels Standard Format (face only)">
-    <Label-cd id="0" radius="164.409" hole="58.1102">
+    <Label-cd id="0" radius="164.409" hole="58.1102" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="133.228" y0="46.7716" dx="0" dy="419.527"/>
     </Label-cd>
@@ -247,7 +247,7 @@
   <!-- LeLabel 2001.018 CD/DVD Labels, 1 per sheet                        -->
   <!-- ===================================================================-->
   <Template name="LeLabel 2001.018" size="A4" _description="CD/DVD Labels">
-    <Label-cd id="0" radius="168.08" hole="54.69">
+    <Label-cd id="0" radius="168.08" hole="54.69" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="128.556" y0="42.52" dx="0" dy="0"/>
     </Label-cd>

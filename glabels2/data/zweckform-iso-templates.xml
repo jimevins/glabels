@@ -43,7 +43,7 @@
   <!-- Zweckform 3654: CD Labels  2 per Template                              -->
   <!-- ====================================================================-->
   <Template name="Zweckform 3654" size="A4" _description="CD/DVD Labels">
-    <Label-cd id="0" radius="165.78" hole="58.09">
+    <Label-cd id="0" radius="165.78" hole="58.09" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="131.78" y0="58.7998" dx="0" dy="387.97"/>
     </Label-cd>
@@ -123,7 +123,7 @@
   <!-- Zweckform 6015: CD Labels, 2 per Template                           -->
   <!-- =================================================================== -->
    <Template name="Zweckform 6015" size="A4" _description="CD Labels">
-     <Label-cd id="0" radius="165.827" hole="58.110">
+     <Label-cd id="0" radius="165.827" hole="58.110" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="131.811" y0="60.746" dx="0" dy="388.346"/>
      </Label-cd>

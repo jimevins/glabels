@@ -22,7 +22,7 @@
   <!-- =================================================================== -->
   <Template name="Memorex CD Labels" size="US-Letter"
 	 _description="CD/DVD Labels">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
       <Layout nx="1" ny="1" x0="238.5" y0="414" dx="0" dy="0"/>
@@ -34,7 +34,7 @@
   <!-- =================================================================== -->
   <Template name="Neato USCD2lbl.NTT" size="US-Letter"
          _description="CD/DVD Labels (face only)">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
     </Label-cd>
@@ -56,7 +56,7 @@
   <!-- =================================================================== -->
   <Template name="Neato HandiCD-R" size="US-Letter"
 	 _description="Business Card CD">
-    <Label-cd id="0" radius="108" width="171" hole="58">
+    <Label-cd id="0" radius="108" width="171" hole="58" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
     </Label-cd>
@@ -67,7 +67,7 @@
   <!-- =================================================================== -->
   <Template name="Stomper PRO CD" size="US-Letter"
          _description="PRO CD Labels 2-up (face only)">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
       <Layout nx="1" ny="1" x0="245" y0="416" dx="0" dy="0"/>
@@ -96,7 +96,7 @@
   <!-- ===================================================================-->
   <Template name="Meritline Mini-CD" size="US-Letter"
    _description="Mini-CD Labels">
-    <Label-cd id="0" radius="110.5" hole="57.5">
+    <Label-cd id="0" radius="110.5" hole="57.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
       <Layout nx="1" ny="1" x0="197.3" y0="289.5" dx="0" dy="0"/>
@@ -129,7 +129,7 @@
   <!-- =================================================================== -->
   <Template name="Great Gizmos" size="US-Letter"
          _description="CD/DVD Labels (face only)">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
     </Label-cd>
@@ -140,7 +140,7 @@
   <!-- =================================================================== -->
   <Template name="Imation-SoniX No.5112 15954" size="US-Letter"
          _description="CD/DVD Labels (Face Only)">
-    <Label-cd id="0" radius="167.8" hole="18.5">
+    <Label-cd id="0" radius="167.8" hole="18.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="370" dx="0" dy="0"/>
     </Label-cd>
