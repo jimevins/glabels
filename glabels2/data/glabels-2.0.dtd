@@ -107,6 +107,8 @@
                  height          %LENGTH_TYPE;           #REQUIRED
                  round           %LENGTH_TYPE;           "0 pt"
                  waste           %LENGTH_TYPE;           #IMPLIED
+                 x_waste         %LENGTH_TYPE;           #IMPLIED
+                 y_waste         %LENGTH_TYPE;           #IMPLIED
 >
 
 <!ELEMENT Label-round ((%markup_element;)*, Layout+)>

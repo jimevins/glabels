@@ -78,27 +78,30 @@ struct _glTemplateLabelType{
 	GList                *layouts;  /* List of glTemplateLayouts */
 	GList                *markups;  /* List of glTemplateMarkups */
 
-	gdouble               waste;    /* Amount of overprint allowed. */
-
 	glTemplateLabelShape  shape;
 
 	union {
 
 		struct {
-			gdouble        w;  /* Width */
-			gdouble        h;  /* Height */
-			gdouble        r;  /* Corner radius */
+			gdouble        w;        /* Width */
+			gdouble        h;        /* Height */
+			gdouble        r;        /* Corner radius */
+			gdouble        x_waste;  /* Amount of horiz overprint allowed. */
+			gdouble        y_waste;  /* Amount of vert overprint allowed. */
 		} rect;
 
 		struct {
-			gdouble        r;  /* Radius */
+			gdouble        r;      /* Radius */
+			gdouble        waste;  /* Amount of overprint allowed. */
+
 		} round;
 
 		struct {
-			gdouble        r1; /* Outer radius */
-			gdouble        r2; /* Inner radius (hole) */
-			gdouble        w;  /* Clip width, business card CDs */
-			gdouble        h;  /* Clip height, business card CDs */
+			gdouble        r1;     /* Outer radius */
+			gdouble        r2;     /* Inner radius (hole) */
+			gdouble        w;      /* Clip width, business card CDs */
+			gdouble        h;      /* Clip height, business card CDs */
+			gdouble        waste;  /* Amount of overprint allowed. */
 		} cd;
 
 	} size;
@@ -229,7 +232,8 @@ glTemplateLabelType *gl_template_rect_label_type_new  (const gchar         *id,
 						       gdouble              w,
 						       gdouble              h,
 						       gdouble              r,
-						       gdouble              waste);
+						       gdouble              x_waste,
+						       gdouble              y_waste);
 
 glTemplateLabelType *gl_template_round_label_type_new (const gchar         *id,
 						       gdouble              r,

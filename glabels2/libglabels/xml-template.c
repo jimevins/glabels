@@ -241,18 +241,28 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 				glTemplate *template)
 {
 	gchar               *id;
-	gdouble              waste;
+	gchar               *tmp;
+	gdouble              x_waste, y_waste;
 	gdouble              w, h, r;
 	glTemplateLabelType *label_type;
 	xmlNodePtr           node;
 
-	id    = xmlGetProp (label_node, "id");
-	waste = gl_xml_get_prop_length (label_node, "waste", 0);
-	w     = gl_xml_get_prop_length (label_node, "width", 0);
-	h     = gl_xml_get_prop_length (label_node, "height", 0);
-	r     = gl_xml_get_prop_length (label_node, "round", 0);
+	id      = xmlGetProp (label_node, "id");
 
-	label_type = gl_template_rect_label_type_new (id, w, h, r, waste);
+	if (tmp = xmlGetProp (label_node, "waste")) {
+		/* Handle single "waste" property. */
+		x_waste = y_waste = gl_xml_get_prop_length (label_node, "waste", 0);
+		g_free (tmp);
+	} else {
+		x_waste = gl_xml_get_prop_length (label_node, "x_waste", 0);
+		y_waste = gl_xml_get_prop_length (label_node, "y_waste", 0);
+	}
+
+	w       = gl_xml_get_prop_length (label_node, "width", 0);
+	h       = gl_xml_get_prop_length (label_node, "height", 0);
+	r       = gl_xml_get_prop_length (label_node, "round", 0);
+
+	label_type = gl_template_rect_label_type_new (id, w, h, r, x_waste, y_waste);
 	gl_template_add_label_type (template, label_type);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
@@ -606,14 +616,15 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 		gl_xml_set_prop_length (node, "width",  label_type->size.rect.w);
 		gl_xml_set_prop_length (node, "height", label_type->size.rect.h);
 		gl_xml_set_prop_length (node, "round",  label_type->size.rect.r);
-		gl_xml_set_prop_length (node, "waste",  label_type->waste);
+		gl_xml_set_prop_length (node, "x_waste",  label_type->size.rect.x_waste);
+		gl_xml_set_prop_length (node, "y_waste",  label_type->size.rect.y_waste);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:
 		node = xmlNewChild(root, ns, "Label-round", NULL);
 		xmlSetProp (node, "id", label_type->id);
 		gl_xml_set_prop_length (node, "radius",  label_type->size.round.r);
-		gl_xml_set_prop_length (node, "waste",   label_type->waste);
+		gl_xml_set_prop_length (node, "waste",   label_type->size.round.waste);
 		break;
 
 	case GL_TEMPLATE_SHAPE_CD:
@@ -627,7 +638,7 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 		if (label_type->size.cd.h != 0.0) {
 			gl_xml_set_prop_length (node, "height", label_type->size.cd.h);
 		}
-		gl_xml_set_prop_length (node, "waste",  label_type->waste);
+		gl_xml_set_prop_length (node, "waste",  label_type->size.cd.waste);
 		break;
 
 	default:

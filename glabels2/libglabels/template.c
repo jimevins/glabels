@@ -406,19 +406,21 @@ gl_template_rect_label_type_new  (const gchar         *id,
 				  gdouble              w,
 				  gdouble              h,
 				  gdouble              r,
-				  gdouble              waste)
+				  gdouble              x_waste,
+				  gdouble              y_waste)
 {
 	glTemplateLabelType *label_type;
 
 	label_type = g_new0 (glTemplateLabelType, 1);
 
 	label_type->id    = g_strdup (id);
-	label_type->waste = waste;
 	label_type->shape = GL_TEMPLATE_SHAPE_RECT;
 
 	label_type->size.rect.w = w;
 	label_type->size.rect.h = h;
 	label_type->size.rect.r = r;
+	label_type->size.rect.x_waste = x_waste;
+	label_type->size.rect.y_waste = y_waste;
 
 	return label_type;
 }
@@ -436,10 +438,10 @@ gl_template_round_label_type_new (const gchar         *id,
 	label_type = g_new0 (glTemplateLabelType, 1);
 
 	label_type->id    = g_strdup (id);
-	label_type->waste = waste;
 	label_type->shape = GL_TEMPLATE_SHAPE_ROUND;
 
 	label_type->size.round.r = r;
+	label_type->size.round.waste = waste;
 
 	return label_type;
 }
@@ -460,13 +462,13 @@ gl_template_cd_label_type_new (const gchar         *id,
 	label_type = g_new0 (glTemplateLabelType, 1);
 
 	label_type->id    = g_strdup (id);
-	label_type->waste = waste;
 	label_type->shape = GL_TEMPLATE_SHAPE_CD;
 
 	label_type->size.cd.r1 = r1;
 	label_type->size.cd.r2 = r2;
 	label_type->size.cd.w  = w;
 	label_type->size.cd.h  = h;
+	label_type->size.cd.waste = waste;
 
 	return label_type;
 }
@@ -686,14 +688,15 @@ gl_template_label_type_dup (const glTemplateLabelType *orig_label_type)
 							 orig_label_type->size.rect.w,
 							 orig_label_type->size.rect.h,
 							 orig_label_type->size.rect.r,
-							 orig_label_type->waste);
+							 orig_label_type->size.rect.x_waste,
+							 orig_label_type->size.rect.y_waste);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:
 		label_type =
 			gl_template_round_label_type_new (orig_label_type->id,
 							  orig_label_type->size.round.r,
-							  orig_label_type->waste);
+							  orig_label_type->size.round.waste);
 		break;
 
 	case GL_TEMPLATE_SHAPE_CD:
@@ -703,7 +706,7 @@ gl_template_label_type_dup (const glTemplateLabelType *orig_label_type)
 						       orig_label_type->size.cd.r2,
 						       orig_label_type->size.cd.w,
 						       orig_label_type->size.cd.h,
-						       orig_label_type->waste);
+						       orig_label_type->size.cd.waste);
 		break;
 
 	default:
@@ -854,6 +857,7 @@ template_full_page (const gchar *page_size)
 	label_type = gl_template_rect_label_type_new ("0",
 						      paper->width,
 						      paper->height,
+						      0.0,
 						      0.0,
 						      0.0);
 	gl_template_add_label_type (template, label_type);

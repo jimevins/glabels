@@ -760,7 +760,7 @@ xml191_parse_label (xmlNodePtr  label_node,
 		h = gl_xml_get_prop_length (label_node, "height", 0);
 		r = gl_xml_get_prop_length (label_node, "round", 0);
 		label_type =
-			gl_template_rect_label_type_new ("0", w, h, r, 0.0);
+			gl_template_rect_label_type_new ("0", w, h, r, 0.0, 0.0);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:

@@ -1178,7 +1178,7 @@ clip_to_outline (PrintInfo *pi,
 	const glTemplateLabelType *label_type;
 	gdouble                    w, h, r;
 	gdouble                    r1;
-	gdouble                    waste;
+	gdouble                    waste, x_waste, y_waste;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -1189,28 +1189,31 @@ clip_to_outline (PrintInfo *pi,
 	case GL_TEMPLATE_SHAPE_RECT:
 		gl_label_get_size (label, &w, &h);
 		r = label_type->size.rect.r;
-		waste = label_type->waste;
+		x_waste = label_type->size.rect.x_waste;
+		y_waste = label_type->size.rect.y_waste;
 		if (r == 0.0) {
 			/* simple rectangle */
 			create_rectangle_path (pi->pc,
-					       -waste, -waste, w+2*waste, h+2*waste);
+					       -x_waste, -y_waste,
+					       w+2*x_waste, h+2*y_waste);
 		} else {
 			/* rectangle with rounded corners */
-			create_rounded_rectangle_path (pi->pc, -waste, -waste,
-						       w+2*waste, h+2*waste, r);
+			create_rounded_rectangle_path (pi->pc,
+						       -x_waste, -y_waste,
+						       w+2*x_waste, h+2*y_waste, r);
 		}
 		gnome_print_clip (pi->pc);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:
 		r1 = label_type->size.round.r;
-		waste = label_type->waste;
+		waste = label_type->size.round.waste;
 		create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
 		gnome_print_clip (pi->pc);
 		break;
 
 	case GL_TEMPLATE_SHAPE_CD:
-		waste = label_type->waste;
+		waste = label_type->size.cd.waste;
 		if ((label_type->size.cd.h == 0) && (label_type->size.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
 			r1 = label_type->size.cd.r1;
@@ -1262,7 +1265,7 @@ clip_punchouts (PrintInfo *pi,
 
 	case GL_TEMPLATE_SHAPE_CD:
 		gl_label_get_size (label, &w, &h);
-		waste = label_type->waste;
+		waste = label_type->size.cd.waste;
 		r2    = label_type->size.cd.r2;
 		create_ellipse_path (pi->pc, w/2, h/2, r2-waste, r2-waste);
 		gnome_print_setrgbcolor (pi->pc, 1.0, 1.0, 1.0);

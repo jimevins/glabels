@@ -1,3 +1,27 @@
+2004-07-11  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+	* libglabels/template.c: (gl_template_rect_label_type_new),
+	(gl_template_round_label_type_new),
+	(gl_template_cd_label_type_new), (gl_template_label_type_dup),
+	(template_full_page):
+	* libglabels/template.h:
+	* libglabels/xml-template.c: (xml_parse_label_rectangle_node),
+	(xml_create_label_node):
+	* pixmaps/ex-rect-size.png:
+	* src/print.c: (clip_to_outline), (clip_punchouts):
+	* src/template-designer.c: (construct_rect_size_page),
+	(rect_size_page_prepare_cb), (layout_page_prepare_cb),
+	(build_template):
+	* src/template-designer.glade:
+	* src/xml-label-191.c: (xml191_parse_label):
+		Modifications to allow separate horizontal (x_waste) and vertical (y_waste)
+		properties for rectangular labels.  Templates remain backwards compatible,
+		but this breaks the libglabels API (I don't know of anyone outside of
+		glabels using libglabels at this time -- what can I say, the program is
+		is still "unstable").  This addresses the suggestion in Feature Request
+		#976313.
+
 2004-07-05  Jim Evins  <evins@snaught.com>
 	* src/print.c: (print_crop_marks), (draw_outline):
 		Changed crop marks and label outlines to black, instead of 25% gray.

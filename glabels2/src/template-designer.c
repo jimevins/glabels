@@ -130,12 +130,14 @@ struct _glTemplateDesignerPrivate
 	GtkWidget       *rect_w_spin;
 	GtkWidget       *rect_h_spin;
 	GtkWidget       *rect_r_spin;
-	GtkWidget       *rect_waste_spin;
+	GtkWidget       *rect_x_waste_spin;
+	GtkWidget       *rect_y_waste_spin;
 	GtkWidget       *rect_margin_spin;
 	GtkWidget       *rect_w_units_label;
 	GtkWidget       *rect_h_units_label;
 	GtkWidget       *rect_r_units_label;
-	GtkWidget       *rect_waste_units_label;
+	GtkWidget       *rect_x_waste_units_label;
+	GtkWidget       *rect_y_waste_units_label;
 	GtkWidget       *rect_margin_units_label;
 
 	/* Label size (round) page controls */
@@ -595,8 +597,10 @@ construct_rect_size_page (glTemplateDesigner      *dlg,
 		glade_xml_get_widget (dlg->priv->gui, "rect_h_spin");
 	dlg->priv->rect_r_spin =
 		glade_xml_get_widget (dlg->priv->gui, "rect_r_spin");
-	dlg->priv->rect_waste_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_waste_spin");
+	dlg->priv->rect_x_waste_spin =
+		glade_xml_get_widget (dlg->priv->gui, "rect_x_waste_spin");
+	dlg->priv->rect_y_waste_spin =
+		glade_xml_get_widget (dlg->priv->gui, "rect_y_waste_spin");
 	dlg->priv->rect_margin_spin =
 		glade_xml_get_widget (dlg->priv->gui, "rect_margin_spin");
 	dlg->priv->rect_w_units_label =
@@ -605,8 +609,10 @@ construct_rect_size_page (glTemplateDesigner      *dlg,
 		glade_xml_get_widget (dlg->priv->gui, "rect_h_units_label");
 	dlg->priv->rect_r_units_label =
 		glade_xml_get_widget (dlg->priv->gui, "rect_r_units_label");
-	dlg->priv->rect_waste_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_waste_units_label");
+	dlg->priv->rect_x_waste_units_label =
+		glade_xml_get_widget (dlg->priv->gui, "rect_x_waste_units_label");
+	dlg->priv->rect_y_waste_units_label =
+		glade_xml_get_widget (dlg->priv->gui, "rect_y_waste_units_label");
 	dlg->priv->rect_margin_units_label =
 		glade_xml_get_widget (dlg->priv->gui, "rect_margin_units_label");
 
@@ -633,11 +639,17 @@ construct_rect_size_page (glTemplateDesigner      *dlg,
                                         dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
         gtk_label_set_text (GTK_LABEL(dlg->priv->rect_r_units_label),
 			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin),
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
 				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin),
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
                                         dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_waste_units_label),
+        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_x_waste_units_label),
+			    dlg->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
+				    dlg->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
+                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_y_waste_units_label),
 			    dlg->priv->units_string);
         gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin),
 				    dlg->priv->digits);
@@ -653,7 +665,9 @@ construct_rect_size_page (glTemplateDesigner      *dlg,
 				   DEFAULT_RECT_H * dlg->priv->units_per_point);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin),
 				   DEFAULT_RECT_R * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin),
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
+				   DEFAULT_RECT_WASTE * dlg->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
 				   DEFAULT_RECT_WASTE * dlg->priv->units_per_point);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin),
 				   DEFAULT_MARGIN * dlg->priv->units_per_point);
@@ -1151,7 +1165,7 @@ static void
 rect_size_page_prepare_cb (glTemplateDesigner *dlg)
 {
 	gdouble max_w, max_h;
-	gdouble w, h, r, waste, margin;
+	gdouble w, h, r, x_waste, y_waste, margin;
 
 	/* Limit label size based on already chosen page size. */
 	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin));
@@ -1160,7 +1174,8 @@ rect_size_page_prepare_cb (glTemplateDesigner *dlg)
 	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
 	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
 	r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin));
-	waste  = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin));
+	x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
+	y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
 	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin));
 
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_w_spin),
@@ -1169,7 +1184,9 @@ rect_size_page_prepare_cb (glTemplateDesigner *dlg)
                                    dlg->priv->climb_rate, max_h);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_r_spin),
                                    0.0, MIN(max_w, max_h)/2.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_waste_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_x_waste_spin),
+                                   0.0, MIN(max_w, max_h)/4.0);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_y_waste_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_margin_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
@@ -1177,7 +1194,8 @@ rect_size_page_prepare_cb (glTemplateDesigner *dlg)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin), w);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin), h);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin), r);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin), waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin), x_waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin), y_waste);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin), margin);
 
 }
@@ -1261,7 +1279,7 @@ static void
 layout_page_prepare_cb (glTemplateDesigner *dlg)
 {
 	gdouble page_w, page_h;
-	gdouble w, h, waste;
+	gdouble w, h, x_waste, y_waste;
 	gint    max_nx, max_ny;
 	gint    nlayouts;
 	gdouble nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
@@ -1310,20 +1328,23 @@ layout_page_prepare_cb (glTemplateDesigner *dlg)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
 		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
+		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
 	}
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
 		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin));
 		h = w;
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
+		y_waste = x_waste;
 	}
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
 		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin));
 		h = w;
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin));
+		y_waste = x_waste;
 	}
-	max_nx = MAX (floor (page_w/(w + 2*waste) + DELTA), 1.0);
-	max_ny = MAX (floor (page_h/(h + 2*waste) + DELTA), 1.0);
+	max_nx = MAX (floor (page_w/(w + 2*x_waste) + DELTA), 1.0);
+	max_ny = MAX (floor (page_h/(h + 2*y_waste) + DELTA), 1.0);
 
 	nx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_nx_spin));
 	ny_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_ny_spin));
@@ -1343,25 +1364,25 @@ layout_page_prepare_cb (glTemplateDesigner *dlg)
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_ny_spin),
                                    1, max_ny);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_x0_spin),
-                                   waste, page_w - w - waste);
+                                   x_waste, page_w - w - x_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_y0_spin),
-                                   waste, page_h - h - waste);
+                                   y_waste, page_h - h - y_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_dx_spin),
-                                   w + 2*waste, page_w - w - 2*waste);
+                                   w + 2*x_waste, page_w - w - 2*x_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_dy_spin),
-                                   h + 2*waste, page_h - h - 2*waste);
+                                   h + 2*y_waste, page_h - h - 2*y_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_nx_spin),
                                    1, max_nx);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_ny_spin),
                                    1, max_ny);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_x0_spin),
-                                   waste, page_w - w - waste);
+                                   x_waste, page_w - w - x_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_y0_spin),
-                                   waste, page_h - h - waste);
+                                   y_waste, page_h - h - y_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_dx_spin),
-                                   w + 2*waste, page_w - w - 2*waste);
+                                   w + 2*x_waste, page_w - w - 2*x_waste);
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_dy_spin),
-                                   h + 2*waste, page_h - h - 2*waste);
+                                   h + 2*y_waste, page_h - h - 2*y_waste);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_nx_spin), nx_1);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_ny_spin), ny_1);
@@ -1508,7 +1529,7 @@ build_template (glTemplateDesigner      *dlg)
 	glPaper              *paper;
 	glTemplateLabelShape  shape;
 	glTemplateLabelType  *label_type;
-	gdouble               w, h, r, radius, hole, waste, margin;
+	gdouble               w, h, r, radius, hole, waste, x_waste, y_waste, margin;
 	gint                  nlayouts;
 	gdouble               nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble               nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
@@ -1538,7 +1559,8 @@ build_template (glTemplateDesigner      *dlg)
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
 		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin));
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
+		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
 		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin));
 	}
 
@@ -1581,7 +1603,7 @@ build_template (glTemplateDesigner      *dlg)
 		label_type =
 			gl_template_rect_label_type_new ("0",
 							 w/upp, h/upp, r/upp,
-							 waste/upp);
+							 x_waste/upp, y_waste/upp);
 		break;
 	case GL_TEMPLATE_SHAPE_ROUND:
 		label_type =
