@@ -1,5 +1,17 @@
 2005-04-02  Jim Evins <evins@snaught.com>
 
+	* src/mygal/mygal-combo-box.c: (deactivate_arrow),
+	(mygal_combo_box_popup_hide_unconditional),
+	(mygal_combo_box_popup_hide), (mygal_combo_box_popup_display),
+	(mygal_combo_toggle_pressed), (mygal_combo_box_init),
+	(mygal_combo_popup_tear_off), (mygal_combo_set_tearoff_state),
+	(mygal_combo_tearoff_bg_copy), (mygal_combo_popup_reparent),
+	(cb_tearable_button_release), (mygal_combo_box_set_tearable):
+		Renamed all internal gtk_combo functions to mygal_combo
+		to prevent namespace confusion.
+
+2005-04-02  Jim Evins <evins@snaught.com>
+
 	* src/mygal/color-palette.c: (color_palette_change_custom_color),
 	(cust_color_set), (color_palette_setup):
 	* src/mygal/color-palette.h:
