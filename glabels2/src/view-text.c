@@ -3,7 +3,7 @@
  *
  *  view_text.c:  GLabels label text object widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,11 +27,10 @@
 #include "view-text.h"
 #include "canvas-hacktext.h"
 #include "view-highlight.h"
-#include "wdgt-text-entry.h"
-#include "wdgt-text-props.h"
-#include "wdgt-position.h"
+
 #include "color.h"
-#include "hig.h"
+#include "object-editor.h"
+#include "stock.h"
 
 #include "pixmaps/cursor_text.xbm"
 #include "pixmaps/cursor_text_mask.xbm"
@@ -60,14 +59,6 @@ struct _glViewTextPrivate {
 	gboolean         cursor_state;
 	guint            cursor_timeout;
 
-	/* Page 0 widgets */
-	GtkWidget *text_entry;
-
-	/* Page 1 widgets */
-	GtkWidget *text_props;
-
-	/* Page 2 widgets */
-	GtkWidget *position;
 };
 
 /*========================================================*/
@@ -81,49 +72,46 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_text_class_init       (glViewTextClass *klass);
-static void      gl_view_text_instance_init    (glViewText      *view_text);
-static void      gl_view_text_finalize         (GObject         *object);
+static void       gl_view_text_class_init            (glViewTextClass  *klass);
+static void       gl_view_text_instance_init         (glViewText       *view_text);
+static void       gl_view_text_finalize              (GObject          *object);
 
-static void      update_view_text_cb           (glLabelObject   *object,
-						glViewText      *view_text);
+static GtkWidget *construct_properties_editor        (glViewObject     *view_object);
 
-static GtkWidget *construct_properties_dialog  (glViewObject    *view_object);
+static void       update_canvas_item_from_object_cb  (glLabelObject    *object,
+						      glViewText       *view_text);
 
-static void      response_cb                   (GtkDialog       *dialog,
-						gint             response,
-						glViewText      *view_text);
+static void       update_object_from_editor_cb       (glObjectEditor   *editor,
+						      glLabelObject    *object);
 
-static void      text_props_changed_cb         (glWdgtTextProps *text_props,
-						glViewText      *view_text);
+static void       update_editor_from_object_cb       (glLabelObject    *object,
+						      glObjectEditor   *editor);
 
-static void      position_changed_cb           (glWdgtPosition  *position,
-						glViewText      *view_text);
+static void       update_editor_from_move_cb         (glLabelObject    *object,
+						      gdouble           dx,
+						      gdouble           dy,
+						      glObjectEditor   *editor);
 
-static void      update_dialog_cb              (glLabelObject   *object,
-						glViewText      *view_text);
+static void       update_editor_from_label_cb        (glLabel          *label,
+						      glObjectEditor   *editor);
 
-static void      update_dialog_from_move_cb    (glLabelObject   *object,
-						gdouble          dx,
-						gdouble          dy,
-						glViewText      *view_text);
+static void       draw_hacktext                      (glViewText       *view_text);
 
-static void      draw_hacktext                 (glViewText      *view_text);
+static void       draw_cursor                        (glViewText       *view_text);
 
-static void      draw_cursor                   (glViewText      *view_text);
+static void       mark_set_cb                        (GtkTextBuffer    *textbuffer,
+						      GtkTextIter      *iter,
+						      GtkTextMark      *mark,
+						      glViewText       *view_text);
 
-static void      mark_set_cb                   (GtkTextBuffer   *textbuffer,
-						GtkTextIter     *iter,
-						GtkTextMark     *mark,
-						glViewText      *view_text);
+static void       blink_start                        (glViewText       *view_text);
+static void       blink_stop                         (glViewText       *view_text);
+static gboolean   blink_cb                           (glViewText       *view_text);
 
-static void      blink_start                   (glViewText      *view_text);
-static void      blink_stop                    (glViewText      *view_text);
-static gboolean  blink_cb                      (glViewText      *view_text);
+static gint       item_event_cb                      (GnomeCanvasItem  *item,
+						      GdkEvent         *event,
+						      glViewObject     *view_object);
 
-static gint      item_event_cb                 (GnomeCanvasItem *item,
-						GdkEvent        *event,
-						glViewObject    *view_object);
 
 
 /*****************************************************************************/
@@ -166,7 +154,7 @@ gl_view_text_class_init (glViewTextClass *klass)
 
 	object_class->finalize = gl_view_text_finalize;
 
-	view_object_class->construct_dialog = construct_properties_dialog;
+	view_object_class->construct_editor = construct_properties_editor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -196,11 +184,11 @@ gl_view_text_finalize (GObject *object)
 }
 
 /*****************************************************************************/
-/* NEW text object view.                                                  */
+/* NEW text object view.                                                     */
 /*****************************************************************************/
 glViewObject *
 gl_view_text_new (glLabelText *object,
-		  glView     *view)
+		  glView      *view)
 {
 	glViewText         *view_text;
 	GtkMenu            *menu;
@@ -225,7 +213,7 @@ gl_view_text_new (glLabelText *object,
 	draw_cursor (view_text);
 
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_view_text_cb), view_text);
+			  G_CALLBACK (update_canvas_item_from_object_cb), view_text);
 
 	g_signal_connect (G_OBJECT (group), "event",
 			  G_CALLBACK (item_event_cb), view_text);
@@ -239,12 +227,60 @@ gl_view_text_new (glLabelText *object,
 	return GL_VIEW_OBJECT (view_text);
 }
 
+/*****************************************************************************/
+/* Create a properties editor for a text object.                             */
+/*****************************************************************************/
+static GtkWidget *
+construct_properties_editor (glViewObject *view_object)
+{
+	GtkWidget          *editor;
+	glViewText          *view_text = (glViewText *)view_object;
+	glLabelObject      *object;
+	GtkTextBuffer      *buffer;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
+
+	/* Build editor. */
+	editor = gl_object_editor_new (GL_STOCK_TEXT, _("Text object properties"),
+				       GL_OBJECT_EDITOR_POSITION_PAGE,
+				       GL_OBJECT_EDITOR_SIZE_PAGE,
+				       GL_OBJECT_EDITOR_TEXT_PAGE,
+				       GL_OBJECT_EDITOR_EDIT_PAGE,
+				       0);
+
+	buffer = gl_label_text_get_buffer (GL_LABEL_TEXT(object));
+	gl_object_editor_set_text_buffer (GL_OBJECT_EDITOR(editor), buffer);
+	
+	/* Update */
+	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
+	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
+
+	/* Connect signals. */
+	g_signal_connect (G_OBJECT (editor), "changed",
+			  G_CALLBACK(update_object_from_editor_cb), object);
+	g_signal_connect (G_OBJECT (object), "changed",
+			  G_CALLBACK (update_editor_from_object_cb), editor);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_editor_from_move_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "size_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return editor;
+}
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_view_text_cb (glLabelObject *object,
-		     glViewText    *view_text)
+update_canvas_item_from_object_cb (glLabelObject *object,
+				   glViewText    *view_text)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -255,220 +291,63 @@ update_view_text_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*****************************************************************************/
-/* Create a properties dialog for a text object.                          */
-/*****************************************************************************/
-static GtkWidget *
-construct_properties_dialog (glViewObject *view_object)
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  editor "changed" callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+update_object_from_editor_cb (glObjectEditor *editor,
+			      glLabelObject  *object)
 {
-	glViewText        *view_text = (glViewText *)view_object;
-	GtkWidget         *dialog, *wsection, *wbutton;
-	glLabelObject     *object;
-	gdouble            x, y, w, h, label_width, label_height;
-	GtkTextBuffer     *buffer;
+	gdouble            x, y, w, h;
 	gchar             *font_family;
 	gdouble            font_size;
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
 	guint              color;
 	GtkJustification   just;
-	glMerge           *merge;
-	GtkSizeGroup      *label_size_group;
-	GtkWidget         *window;
 
 	gl_debug (DEBUG_VIEW, "START");
-
-	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
-	gl_label_text_get_props (GL_LABEL_TEXT(object),
-				 &font_family, &font_size,
-				 &font_weight, &font_italic_flag,
-				 &color, &just);
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
-
-	/*-----------------------------------------------------------------*/
-	/* Build dialog.                                                   */
-	/*-----------------------------------------------------------------*/
-	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_text))));
-	dialog = gl_hig_dialog_new_with_buttons ( _("Edit text object properties"),
-						  GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT,
-						  GTK_STOCK_CLOSE,
-					                   GTK_RESPONSE_CLOSE,
-						  NULL );
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_text);
-
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-	/*---------------------------*/
-	/* Text Section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Text"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_text->private->text_entry =
-		gl_wdgt_text_entry_new (merge);
-	gl_wdgt_text_entry_set_label_size_group (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-						 label_size_group);
-	gl_wdgt_text_entry_set_buffer (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-				       buffer);
-	gl_wdgt_text_entry_set_field_defs (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-					     merge);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_text->private->text_entry);
-
-
-	/*---------------------------*/
-	/* Text Properties section   */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Properties"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_text->private->text_props = gl_wdgt_text_props_new ();
-	gl_wdgt_text_props_set_label_size_group (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
-						 label_size_group);
-	gl_wdgt_text_props_set_params (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
-				       font_family, font_size, font_weight,
-				       font_italic_flag, color, just);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_text->private->text_props);
-	g_signal_connect ( G_OBJECT(view_text->private->text_props),
-			   "changed", G_CALLBACK (text_props_changed_cb),
-			   view_text);
-
-
-	/*----------------------------*/
-	/* Position section           */
-	/*----------------------------*/
-	wsection = gl_hig_category_new (_("Position"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_text->private->position = gl_wdgt_position_new ();
-	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_text->private->position),
-					       label_size_group);
-	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_text->private->position),
-				     x, y,
-				     label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_text->private->position);
-	g_signal_connect (G_OBJECT (view_text->private->position),
-			  "changed",
-			  G_CALLBACK(position_changed_cb), view_text);
-
-
-	/*----------------------------*/
-	/* Track object changes.      */
-	/*----------------------------*/
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_dialog_cb), view_text);
-	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_dialog_from_move_cb), view_text);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return dialog;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Response" callback.                                            */
-/*---------------------------------------------------------------------------*/
-static void
-response_cb (GtkDialog     *dialog,
-	     gint           response,
-	     glViewText    *view_text)
-{
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail(dialog != NULL);
-	g_return_if_fail(GTK_IS_DIALOG(dialog));
-
-	switch(response) {
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide (GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_DELETE_EVENT:
-		/* Dialog destroyed, remove callbacks that reference it. */
-		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
-
-		g_signal_handlers_disconnect_by_func (object, update_dialog_cb,
-						      view_text);
-		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
-						      view_text);
-		break;
-	default:
-		g_print ("response = %d", response);
-		g_assert_not_reached();
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  text_props "changed" callback.                                  */
-/*---------------------------------------------------------------------------*/
-static void
-text_props_changed_cb (glWdgtTextProps  *text_props,
-		       glViewText       *view_text)
-{
-	glLabelObject      *object;
-	gchar              *font_family;
-	gdouble            font_size;
-	GnomeFontWeight    font_weight;
-	gboolean           font_italic_flag;
-	guint              color;
-	GtkJustification   just;
-
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
-
-	gl_wdgt_text_props_get_params (text_props,
-				       &font_family, &font_size, &font_weight,
-				       &font_italic_flag,
-				       &color, &just);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_text);
-	gl_label_text_set_props (GL_LABEL_TEXT(object),
-				 font_family, font_size, font_weight,
-				 font_italic_flag,
-				 color, just);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_text);
+					 update_editor_from_object_cb,
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(object),
+					 update_editor_from_move_cb,
+					 editor);
 
+
+	gl_object_editor_get_position (editor, &x, &y);
+	gl_label_object_set_position (object, x, y);
+
+	gl_object_editor_get_size (editor, &w, &h);
+	gl_label_object_set_size (object, w, h);
+
+	font_family = gl_object_editor_get_font_family (editor);
+	gl_label_object_set_font_family (object, font_family);
 	g_free (font_family);
 
-	gl_debug (DEBUG_VIEW, "END");
-}
+	font_size = gl_object_editor_get_font_size (editor);
+	gl_label_object_set_font_size (object, font_size);
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  position "changed" callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-position_changed_cb (glWdgtPosition     *position,
-		     glViewText         *view_text)
-{
-	glLabelObject      *object;
-	gdouble            x, y;
+	font_weight = gl_object_editor_get_font_weight (editor);
+	gl_label_object_set_font_weight (object, font_weight);
 
-	gl_debug (DEBUG_VIEW, "START");
+	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
+	gl_label_object_set_font_italic_flag (object, font_italic_flag);
 
-	gl_wdgt_position_get_position (GL_WDGT_POSITION (position), &x, &y);
+	color = gl_object_editor_get_text_color (editor);
+	gl_label_object_set_text_color (object, color);
 
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_text));
+	just = gl_object_editor_get_text_alignment (editor);
+	gl_label_object_set_text_alignment (object, just);
 
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_text);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_text);
+					   update_editor_from_object_cb,
+					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT(object),
+					   update_editor_from_move_cb,
+					   editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -477,12 +356,11 @@ position_changed_cb (glWdgtPosition     *position,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject  *object,
-		  glViewText     *view_text)
+update_editor_from_object_cb (glLabelObject  *object,
+			      glObjectEditor *editor)
 {
-	gdouble            x, y;
-	glMerge            *merge;
-	gchar              *font_family;
+	gdouble            w, h;
+	gchar             *font_family;
 	gdouble            font_size;
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
@@ -491,35 +369,27 @@ update_dialog_cb (glLabelObject  *object,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_size (editor, w, h);
+
 	gl_label_text_get_props (GL_LABEL_TEXT(object),
 				 &font_family, &font_size,
 				 &font_weight, &font_italic_flag,
 				 &color, &just);
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_text->private->text_props),
-					 text_props_changed_cb, view_text);
-	g_signal_handlers_block_by_func (G_OBJECT(view_text->private->position),
-					 position_changed_cb, view_text);
+	gl_object_editor_set_font_family (editor, font_family);
+	g_free (font_family);
 
-	/* Update widgets in property dialog */
+	gl_object_editor_set_font_size (editor, font_size);
 
-	gl_wdgt_text_entry_set_field_defs (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-					   merge);
-	gl_wdgt_text_props_set_params (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
-				       font_family, font_size, font_weight,
-				       font_italic_flag, color, just);
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_text->private->position),
-				       x, y);
+	gl_object_editor_set_font_weight (editor, font_weight);
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_text->private->text_props),
-					   text_props_changed_cb, view_text);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_text->private->position),
-					   position_changed_cb, view_text);
+	gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
+
+	gl_object_editor_set_text_color (editor, color);
+
+	gl_object_editor_set_text_alignment (editor, just);
+
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -528,29 +398,41 @@ update_dialog_cb (glLabelObject  *object,
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_from_move_cb (glLabelObject *object,
-			    gdouble        dx,
-			    gdouble        dy,
-			    glViewText    *view_text)
+update_editor_from_move_cb (glLabelObject    *object,
+			    gdouble           dx,
+			    gdouble           dy,
+			    glObjectEditor   *editor)
 {
 	gdouble            x, y;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+	gl_label_object_get_position (object, &x, &y);
+	gl_object_editor_set_position (editor, x, y);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_text->private->position),
-					 position_changed_cb, view_text);
+	gl_debug (DEBUG_VIEW, "END");
+}
 
-	/* Update widgets in property dialog */
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_text->private->position),
-				       x, y);
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+update_editor_from_label_cb (glLabel        *label,
+			     glObjectEditor *editor)
+{
+	gdouble            label_width, label_height;
+	glMerge           *merge;
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_text->private->position),
-					   position_changed_cb, view_text);
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
+
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

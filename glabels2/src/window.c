@@ -34,7 +34,7 @@
 /* Private macros and constants.                                              */
 /*============================================================================*/
 
-#define DEFAULT_WINDOW_WIDTH  700
+#define DEFAULT_WINDOW_WIDTH  788
 #define DEFAULT_WINDOW_HEIGHT 560
 
 #define CURSOR_INFO_WIDTH     150
@@ -168,6 +168,8 @@ gl_window_init (glWindow *window)
 
 	window->property_bar =
 		GL_UI_PROPERTY_BAR(gl_ui_property_bar_new (ui_component));
+	window->sidebar =
+		GL_UI_SIDEBAR(gl_ui_sidebar_new (ui_component));
 
 	gtk_window_set_default_size (GTK_WINDOW (window),
 				     DEFAULT_WINDOW_WIDTH,
@@ -350,6 +352,7 @@ gl_window_set_label (glWindow    *window,
 	gl_ui_update_all (window->uic, GL_VIEW(window->view));
 
 	gl_ui_property_bar_set_view (window->property_bar, GL_VIEW(window->view));
+	gl_ui_sidebar_set_view (window->sidebar, GL_VIEW(window->view));
 
 	string = g_strdup_printf ("%3.0f%%",
 				  100.0*gl_view_get_zoom (GL_VIEW(window->view)));

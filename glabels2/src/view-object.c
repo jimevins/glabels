@@ -46,7 +46,7 @@ struct _glViewObjectPrivate {
 	GnomeCanvasItem            *group;
 	glViewHighlight            *highlight;
 
-	GtkWidget                  *property_dialog;
+	GtkWidget                  *property_editor;
 };
 
 /*========================================================*/
@@ -156,8 +156,8 @@ gl_view_object_finalize (GObject *object)
 	g_object_unref (GL_VIEW_OBJECT(object)->private->object);
 	g_object_unref (G_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
-	if (GL_VIEW_OBJECT(object)->private->property_dialog) {
-		gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_dialog));
+	if (GL_VIEW_OBJECT(object)->private->property_editor) {
+		gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_editor));
 	}
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -374,36 +374,34 @@ gl_view_object_hide_highlight   (glViewObject *view_object)
 
 
 /*****************************************************************************/
-/* Show property dialog.                                                     */
+/* Get property editor.                                                      */
 /*****************************************************************************/
-void
-gl_view_object_show_dialog (glViewObject *view_object)
+GtkWidget *
+gl_view_object_get_editor (glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
+	g_return_val_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object), NULL);
 
-	if (view_object->private->property_dialog != NULL) {
-		gtk_window_present (GTK_WINDOW (view_object->private->property_dialog));
-		return;
-	}
+	if ( GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_editor != NULL ) {
 
-	if ( GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_dialog != NULL ) {
-
-		view_object->private->property_dialog =
-			GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_dialog (view_object);
-
-		g_signal_connect (G_OBJECT (view_object->private->property_dialog),
+		if (view_object->private->property_editor == NULL) {
+			view_object->private->property_editor =
+				GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_editor (view_object);
+		}
+		g_signal_connect (G_OBJECT (view_object->private->property_editor),
 				  "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
-				  &view_object->private->property_dialog);
+				  &view_object->private->property_editor);
 	
-		gtk_widget_show_all (view_object->private->property_dialog);
+		gtk_widget_show (view_object->private->property_editor);
 
 	}
 
 
 	gl_debug (DEBUG_VIEW, "END");
+
+	return view_object->private->property_editor;
 }
 
 
@@ -632,11 +630,10 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 		gl_debug (DEBUG_VIEW, "2BUTTON_PRESS");
 		switch (event->button.button) {
 		case 1:
-			/* Also exit dragging mode w/ double-click, run dlg */
+			/* Also exit dragging mode w/ double-click */
 			gnome_canvas_item_ungrab (item, event->button.time);
 			dragging = FALSE;
 			gl_view_select_object (view, view_object);
-			gl_view_object_show_dialog (view_object);
 			return TRUE;
 
 		default:

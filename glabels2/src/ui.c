@@ -74,8 +74,8 @@ static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("ToolsZoomIn",           gl_tools_zoomin),
 	BONOBO_UI_VERB ("ToolsZoomOut",          gl_tools_zoomout),
 	BONOBO_UI_VERB ("ToolsZoom1to1",         gl_tools_zoom1to1),
+	BONOBO_UI_VERB ("ToolsZoomToFit",        gl_tools_zoom_to_fit),
 	BONOBO_UI_VERB ("ToolsMergeProperties",  gl_tools_merge_properties),
-	BONOBO_UI_VERB ("ToolsObjectProperties", gl_tools_object_properties),
 	BONOBO_UI_VERB ("ToolsRaiseObjects",     gl_tools_raise_objects),
 	BONOBO_UI_VERB ("ToolsLowerObjects",     gl_tools_lower_objects),
 	BONOBO_UI_VERB ("ToolsRotateLeft",       gl_tools_rotate_objects_left),
@@ -123,8 +123,8 @@ static gchar* doc_verbs [] = {
 	"/commands/ToolsZoomIn",
 	"/commands/ToolsZoomOut",
 	"/commands/ToolsZoom1to1",
+	"/commands/ToolsZoomToFit",
 	"/commands/ToolsMergeProperties",
-	"/commands/ToolsObjectProperties",
 	"/commands/ToolsRaiseObjects",
 	"/commands/ToolsLowerObjects",
 	"/commands/ToolsRotateLeft",
@@ -178,7 +178,6 @@ static gchar* selection_verbs [] = {
 };
 
 static gchar* atomic_selection_verbs [] = {
-	"/commands/ToolsObjectProperties",
 
 	NULL
 };

@@ -54,6 +54,8 @@ glabels_SOURCES = 			\
 	ui.c				\
 	ui-property-bar.h		\
 	ui-property-bar.c		\
+	ui-sidebar.h			\
+	ui-sidebar.c			\
 	ui-util.h			\
 	ui-util.c			\
 	commands.h			\
@@ -90,6 +92,29 @@ glabels_SOURCES = 			\
 	view-highlight.h		\
 	merge-properties-dialog.c	\
 	merge-properties-dialog.h	\
+	object-editor.c			\
+	object-editor.h			\
+	object-editor-private.h		\
+	object-editor-position-page.c	\
+	object-editor-position-page.h	\
+	object-editor-size-page.c	\
+	object-editor-size-page.h	\
+	object-editor-lsize-page.c	\
+	object-editor-lsize-page.h	\
+	object-editor-line-page.c	\
+	object-editor-line-page.h	\
+	object-editor-fill-page.c	\
+	object-editor-fill-page.h	\
+	object-editor-image-page.c	\
+	object-editor-image-page.h	\
+	object-editor-text-page.c	\
+	object-editor-text-page.h	\
+	object-editor-edit-page.c	\
+	object-editor-edit-page.h	\
+	object-editor-bc-page.c		\
+	object-editor-bc-page.h		\
+	object-editor-data-page.c	\
+	object-editor-data-page.h	\
 	print.c				\
 	print.h				\
 	print-dialog.c			\
@@ -144,28 +169,8 @@ glabels_SOURCES = 			\
 	merge-text.h			\
 	text-node.c			\
 	text-node.h			\
-	wdgt-text-props.c		\
-	wdgt-text-props.h		\
-	wdgt-text-entry.c		\
-	wdgt-text-entry.h		\
-	wdgt-position.c			\
-	wdgt-position.h			\
-	wdgt-size.c			\
-	wdgt-size.h			\
-	wdgt-line.c			\
-	wdgt-line.h			\
-	wdgt-fill.c			\
-	wdgt-fill.h			\
-	wdgt-vector.c			\
-	wdgt-vector.h			\
 	wdgt-image-select.c		\
 	wdgt-image-select.h		\
-	wdgt-bc-props.c			\
-	wdgt-bc-props.h			\
-	wdgt-bc-style.c			\
-	wdgt-bc-style.h			\
-	wdgt-bc-data.c			\
-	wdgt-bc-data.h			\
 	wdgt-print-copies.c		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\

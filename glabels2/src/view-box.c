@@ -3,7 +3,7 @@
  *
  *  view_box.c:  GLabels label box object widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,11 +26,9 @@
 
 #include "view-highlight.h"
 
-#include "wdgt-line.h"
-#include "wdgt-fill.h"
-#include "wdgt-size.h"
-#include "wdgt-position.h"
 #include "color.h"
+#include "object-editor.h"
+#include "stock.h"
 
 #include "pixmaps/cursor_box.xbm"
 #include "pixmaps/cursor_box_mask.xbm"
@@ -49,14 +47,6 @@
 
 struct _glViewBoxPrivate {
 	GnomeCanvasItem       *item;
-
-	/* Property dialog Page 0 widgets */
-	GtkWidget             *line;
-	GtkWidget             *fill;
-
-	/* Property dialog Page 1 widgets */
-	GtkWidget             *position;
-	GtkWidget             *size;
 };
 
 /*========================================================*/
@@ -70,38 +60,29 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_box_class_init       (glViewBoxClass *klass);
-static void      gl_view_box_instance_init    (glViewBox      *view_box);
-static void      gl_view_box_finalize         (GObject        *object);
+static void       gl_view_box_class_init            (glViewBoxClass   *klass);
+static void       gl_view_box_instance_init         (glViewBox        *view_box);
+static void       gl_view_box_finalize              (GObject          *object);
 
-static void      update_view_box_cb           (glLabelObject  *object,
-					       glViewBox      *view_box);
+static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
 
-static GtkWidget *construct_properties_dialog (glViewObject   *view_object);
+static void       update_canvas_item_from_object_cb (glLabelObject    *object,
+						     glViewBox        *view_box);
 
-static void      response_cb                  (GtkDialog      *dialog,
-					       gint            response,
-					       glViewBox      *view_box);
+static void       update_object_from_editor_cb      (glObjectEditor   *editor,
+						     glLabelObject    *object);
 
-static void      line_changed_cb              (glWdgtLine     *line,
-					       glViewBox      *view_box);
+static void       update_editor_from_object_cb      (glLabelObject    *object,
+						     glObjectEditor   *editor);
 
-static void      fill_changed_cb              (glWdgtFill     *fill,
-					       glViewBox      *view_box);
+static void       update_editor_from_move_cb        (glLabelObject    *object,
+						     gdouble           dx,
+						     gdouble           dy,
+						     glObjectEditor   *editor);
 
-static void      position_changed_cb          (glWdgtPosition *position,
-					       glViewBox      *view_box);
+static void       update_editor_from_label_cb       (glLabel          *label,
+						     glObjectEditor   *editor);
 
-static void      size_changed_cb              (glWdgtSize     *size,
-					       glViewBox      *view_box);
-
-static void      update_dialog_cb             (glLabelObject  *object,
-					       glViewBox      *view_box);
-
-static void      update_dialog_from_move_cb   (glLabelObject  *object,
-					       gdouble         dx,
-					       gdouble         dy,
-					       glViewBox      *view_box);
 
 
 /*****************************************************************************/
@@ -144,7 +125,7 @@ gl_view_box_class_init (glViewBoxClass *klass)
 
 	object_class->finalize = gl_view_box_finalize;
 
-	view_object_class->construct_dialog = construct_properties_dialog;
+	view_object_class->construct_editor = construct_properties_editor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -184,7 +165,6 @@ gl_view_box_new (glLabelBox *object,
 	gdouble            line_width;
 	guint              line_color, fill_color;
 	gdouble            w, h;
-	GtkMenu            *menu;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_BOX (object));
@@ -217,19 +197,61 @@ gl_view_box_new (glLabelBox *object,
 					 NULL);
 
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_view_box_cb), view_box);
+			  G_CALLBACK (update_canvas_item_from_object_cb), view_box);
 
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_box);
 }
 
+/*****************************************************************************/
+/* Create a properties dialog for a box object.                              */
+/*****************************************************************************/
+static GtkWidget *
+construct_properties_editor (glViewObject *view_object)
+{
+	GtkWidget          *editor;
+	glViewBox          *view_box = (glViewBox *)view_object;
+	glLabelObject      *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
+
+	/* Build editor. */
+	editor = gl_object_editor_new (GL_STOCK_BOX, _("Box object properties"),
+				       GL_OBJECT_EDITOR_POSITION_PAGE,
+				       GL_OBJECT_EDITOR_SIZE_PAGE,
+				       GL_OBJECT_EDITOR_FILL_PAGE,
+				       GL_OBJECT_EDITOR_LINE_PAGE,
+				       0);
+	
+	/* Update */
+	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
+	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
+
+	/* Connect signals. */
+	g_signal_connect (G_OBJECT (editor), "changed",
+			  G_CALLBACK(update_object_from_editor_cb), object);
+	g_signal_connect (G_OBJECT (object), "changed",
+			  G_CALLBACK (update_editor_from_object_cb), editor);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_editor_from_move_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "size_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return editor;
+}
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_view_box_cb (glLabelObject *object,
-		    glViewBox     *view_box)
+update_canvas_item_from_object_cb (glLabelObject *object,
+				   glViewBox     *view_box)
 {
 	gdouble            line_width;
 	guint              line_color, fill_color;
@@ -255,268 +277,45 @@ update_view_box_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*****************************************************************************/
-/* Create a properties dialog for a box object.                              */
-/*****************************************************************************/
-static GtkWidget *
-construct_properties_dialog (glViewObject *view_object)
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  editor "changed" callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+update_object_from_editor_cb (glObjectEditor *editor,
+			      glLabelObject  *object)
 {
-	glViewBox          *view_box = (glViewBox *)view_object;
-	GtkWidget          *dialog, *wsection;
-	glLabelObject      *object;
-	gdouble            line_width;
+	gdouble            w, h;
 	guint              line_color, fill_color;
-	gdouble            x, y, w, h, label_width, label_height;
-	GtkSizeGroup       *label_size_group;
-	GtkWidget          *window;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_box_get_line_width(GL_LABEL_BOX(object));
-	line_color = gl_label_box_get_line_color(GL_LABEL_BOX(object));
-	fill_color = gl_label_box_get_fill_color(GL_LABEL_BOX(object));
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
-
-	/*-----------------------------------------------------------------*/
-	/* Build dialog with notebook.                                     */
-	/*-----------------------------------------------------------------*/
-	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_box))));
-	dialog = gl_hig_dialog_new_with_buttons ( _("Edit box object properties"),
-						  GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT,
-						  GTK_STOCK_CLOSE,
-					                   GTK_RESPONSE_CLOSE,
-						  NULL );
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_box);
-
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-
-	/*---------------------------*/
-	/* Outline section           */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Outline"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_box->private->line = gl_wdgt_line_new ();
-	gl_wdgt_line_set_label_size_group (GL_WDGT_LINE(view_box->private->line),
-					   label_size_group);
-	gl_wdgt_line_set_params (GL_WDGT_LINE (view_box->private->line),
-				 line_width,
-				 line_color);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_box->private->line);
-	g_signal_connect (G_OBJECT (view_box->private->line), "changed",
-			  G_CALLBACK(line_changed_cb), view_box);
-
-	/*---------------------------*/
-	/* Fill section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Fill"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_box->private->fill = gl_wdgt_fill_new ();
-	gl_wdgt_fill_set_label_size_group (GL_WDGT_FILL(view_box->private->fill),
-					   label_size_group);
-	gl_wdgt_fill_set_params (GL_WDGT_FILL (view_box->private->fill),
-				 fill_color);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_box->private->fill);
-	g_signal_connect (G_OBJECT (view_box->private->fill), "changed",
-			  G_CALLBACK(fill_changed_cb), view_box);
-
-
-	/*---------------------------*/
-	/* Position section          */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Position"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_box->private->position = gl_wdgt_position_new ();
-	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_box->private->position),
-					       label_size_group);
-	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_box->private->position),
-				     x, y, label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_box->private->position);
-	g_signal_connect (G_OBJECT (view_box->private->position), "changed",
-			  G_CALLBACK(position_changed_cb), view_box);
-
-	/*---------------------------*/
-	/* Size section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Size"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_box->private->size = gl_wdgt_size_new ();
-	gl_wdgt_size_set_label_size_group (GL_WDGT_SIZE(view_box->private->size),
-					   label_size_group);
-	gl_wdgt_size_set_params (GL_WDGT_SIZE (view_box->private->size),
-				 w, h, TRUE, label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_box->private->size);
-	g_signal_connect (G_OBJECT (view_box->private->size), "changed",
-			  G_CALLBACK(size_changed_cb), view_box);
-
-
-	/*----------------------------*/
-	/* Track object changes.      */
-	/*----------------------------*/
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_dialog_cb), view_box);
-	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_dialog_from_move_cb), view_box);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return dialog;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Response" callback.                                            */
-/*---------------------------------------------------------------------------*/
-static void
-response_cb (GtkDialog *dialog,
-	     gint      response,
-	     glViewBox *view_box)
-{
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail(dialog != NULL);
-	g_return_if_fail(GTK_IS_DIALOG(dialog));
-
-	switch(response) {
-
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide (GTK_WIDGET(dialog));
-		break;
-
-	case GTK_RESPONSE_DELETE_EVENT:
-		/* Dialog destroyed, remove callbacks that reference it. */
-		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-
-		g_signal_handlers_disconnect_by_func (object, update_dialog_cb, view_box);
-		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
-						      view_box);
-		break;
-
-	default:
-		g_print ("response = %d", response);
-		g_assert_not_reached ();
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  line properties "changed" callback.                             */
-/*---------------------------------------------------------------------------*/
-static void
-line_changed_cb (glWdgtLine *line,
-		 glViewBox  *view_box)
-{
-	glLabelObject      *object;
 	gdouble            line_width;
-	guint              line_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-
-	gl_wdgt_line_get_params (GL_WDGT_LINE (line),
-				 &line_width,
-				 &line_color);
-
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_box);
-	gl_label_box_set_line_width(GL_LABEL_BOX(object), line_width);
-	gl_label_box_set_line_color(GL_LABEL_BOX(object), line_color);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_box);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  fill properties "changed" callback.                             */
-/*---------------------------------------------------------------------------*/
-static void
-fill_changed_cb (glWdgtFill *fill,
-		 glViewBox  *view_box)
-{
-	glLabelObject    *object;
-	guint            fill_color;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-
-	gl_wdgt_fill_get_params (GL_WDGT_FILL (fill),
-				 &fill_color);
-
+					 update_editor_from_object_cb,
+					 editor);
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_box);
-	gl_label_box_set_fill_color(GL_LABEL_BOX(object), fill_color);
+					 update_editor_from_move_cb,
+					 editor);
+
+	gl_object_editor_get_size (editor, &w, &h);
+	gl_label_object_set_size (object, w, h);
+
+	fill_color = gl_object_editor_get_fill_color (editor);
+	gl_label_object_set_fill_color (object, fill_color);
+
+	line_color = gl_object_editor_get_line_color (editor);
+	gl_label_object_set_line_color (object, line_color);
+
+	line_width = gl_object_editor_get_line_width (editor);
+	gl_label_object_set_line_width (object, line_width);
+
+
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_box);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  position "changed" callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-position_changed_cb (glWdgtPosition *position,
-		     glViewBox      *view_box)
-{
-	glLabelObject      *object;
-	gdouble            x, y;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_position_get_position (GL_WDGT_POSITION (position), &x, &y);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_box);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+					   update_editor_from_object_cb,
+					   editor);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_box);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  size "changed" callback.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-size_changed_cb (glWdgtSize *size,
-		 glViewBox  *view_box)
-{
-	glLabelObject *object;
-	gdouble       w, h;
-	gboolean      keep_aspect_ratio_flag;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_size_get_size (GL_WDGT_SIZE (size),
-			       &w, &h, &keep_aspect_ratio_flag);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_box));
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_box);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_box);
+					   update_editor_from_move_cb,
+					   editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -525,52 +324,26 @@ size_changed_cb (glWdgtSize *size,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject *object,
-		  glViewBox     *view_box)
+update_editor_from_object_cb (glLabelObject  *object,
+			      glObjectEditor *editor)
 {
-	gdouble            line_width;
+	gdouble            w, h;
 	guint              line_color, fill_color;
-	gdouble            x, y, w, h;
+	gdouble            line_width;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_box_get_line_width(GL_LABEL_BOX(object));
-	line_color = gl_label_box_get_line_color(GL_LABEL_BOX(object));
-	fill_color = gl_label_box_get_fill_color(GL_LABEL_BOX(object));
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_size (editor, w, h);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->line),
-					 line_changed_cb, view_box);
-	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->fill),
-					 fill_changed_cb, view_box);
-	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->position),
-					 position_changed_cb, view_box);
-	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->size),
-					 size_changed_cb, view_box);
+	fill_color = gl_label_box_get_fill_color (GL_LABEL_BOX(object));
+	gl_object_editor_set_fill_color (editor, fill_color);
 
-	/* Update widgets in property dialog */
-	gl_wdgt_line_set_params (GL_WDGT_LINE (view_box->private->line),
-				 line_width,
-				 line_color);
-	gl_wdgt_fill_set_params (GL_WDGT_FILL (view_box->private->fill),
-				 fill_color);
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_box->private->position),
-				       x, y);
-	gl_wdgt_size_set_size (GL_WDGT_SIZE(view_box->private->size), w, h);
+	line_color = gl_label_box_get_line_color (GL_LABEL_BOX(object));
+	gl_object_editor_set_line_color (editor, line_color);
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->line),
-					   line_changed_cb, view_box);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->fill),
-					   fill_changed_cb, view_box);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->position),
-					   position_changed_cb, view_box);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->size),
-					   size_changed_cb, view_box);
-
+	line_width = gl_label_box_get_line_width (GL_LABEL_BOX(object));
+	gl_object_editor_set_line_width (editor, line_width);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -579,29 +352,37 @@ update_dialog_cb (glLabelObject *object,
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_from_move_cb (glLabelObject *object,
-			    gdouble        dx,
-			    gdouble        dy,
-			    glViewBox     *view_box)
+update_editor_from_move_cb (glLabelObject    *object,
+			    gdouble           dx,
+			    gdouble           dy,
+			    glObjectEditor   *editor)
 {
 	gdouble            x, y;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+	gl_label_object_get_position (object, &x, &y);
+	gl_object_editor_set_position (editor, x, y);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->position),
-					 position_changed_cb, view_box);
+	gl_debug (DEBUG_VIEW, "END");
+}
 
-	/* Update widgets in property dialog */
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_box->private->position),
-				       x, y);
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+update_editor_from_label_cb (glLabel        *label,
+			     glObjectEditor *editor)
+{
+	gdouble            label_width, label_height;
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->position),
-					   position_changed_cb, view_box);
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -647,12 +428,12 @@ gl_view_box_create_event_handler (GnomeCanvas *canvas,
 				  GdkEvent    *event,
 				  glView      *view)
 {
-	static gdouble      x0, y0;
-	static gboolean     dragging = FALSE;
+	static gdouble       x0, y0;
+	static gboolean      dragging = FALSE;
 	static glViewObject *view_box;
 	static GObject      *object;
-	guint               line_color, fill_color;
-	gdouble             x, y, w, h;
+	guint                line_color, fill_color;
+	gdouble              x, y, w, h;
 
 	gl_debug (DEBUG_VIEW, "");
 

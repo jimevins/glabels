@@ -105,8 +105,11 @@ static const struct poptOption options [] =
 	{ "debug-pixbuf-cache", '\0', POPT_ARG_NONE, &gl_debug_pixbuf_cache, 0,
 	  N_("Show pixbuf cache debugging messages."), NULL },
 
-	{ "debug-wdgt", '\0', POPT_ARG_NONE, &gl_debug_wdgt, 0,
+	{ "debug-editor", '\0', POPT_ARG_NONE, &gl_debug_editor, 0,
 	  N_("Show widget debugging messages."), NULL },
+
+	{ "debug-wdgt", '\0', POPT_ARG_NONE, &gl_debug_wdgt, 0,
+	  N_("Show object editor debugging messages."), NULL },
 
 	{ "debug", '\0', POPT_ARG_NONE, &gl_debug_all, 0,
 	  N_("Turn on all debugging messages."), NULL },

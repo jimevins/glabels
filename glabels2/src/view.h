@@ -168,7 +168,7 @@ gboolean   gl_view_is_selection_atomic     (glView            *view);
 
 void       gl_view_delete_selection        (glView            *view);
 
-void       gl_view_edit_object_props       (glView            *view);
+GtkWidget *gl_view_get_editor              (glView            *view);
 
 void       gl_view_raise_selection         (glView            *view);
 
@@ -251,6 +251,8 @@ void       gl_view_paste                   (glView            *view);
 void       gl_view_zoom_in                 (glView            *view);
 
 void       gl_view_zoom_out                (glView            *view);
+
+void       gl_view_zoom_best_fit           (glView            *view);
 
 void       gl_view_set_zoom                (glView            *view,
 					    gdouble            scale);

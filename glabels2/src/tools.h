@@ -66,11 +66,11 @@ void gl_tools_zoom1to1                 (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 
-void gl_tools_merge_properties         (BonoboUIComponent *uic,
+void gl_tools_zoom_to_fit              (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 
-void gl_tools_object_properties        (BonoboUIComponent *uic,
+void gl_tools_merge_properties         (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 

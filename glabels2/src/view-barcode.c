@@ -1,9 +1,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_barcode.c:  GLabels label barcode object widget
+ *  view_text.c:  GLabels label text object widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,14 +26,11 @@
 
 #include "view-barcode.h"
 #include "canvas-hacktext.h"
-
 #include "view-highlight.h"
 
-#include "wdgt-bc-data.h"
-#include "wdgt-bc-props.h"
-#include "wdgt-bc-style.h"
-#include "wdgt-position.h"
 #include "color.h"
+#include "object-editor.h"
+#include "stock.h"
 
 #include "pixmaps/cursor_barcode.xbm"
 #include "pixmaps/cursor_barcode_mask.xbm"
@@ -50,17 +47,8 @@
 
 struct _glViewBarcodePrivate {
 
-	GList     *item_list;
+	GList           *item_list;
 
-	/* Page 0 widgets */
-	GtkWidget *bc_data;
-
-	/* Page 1 widgets */
-	GtkWidget *bc_props;
-	GtkWidget *bc_style;
-
-	/* Page 2 widgets */
-	GtkWidget *position;
 };
 
 /*========================================================*/
@@ -74,40 +62,31 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_barcode_class_init    (glViewBarcodeClass *klass);
-static void      gl_view_barcode_instance_init (glViewBarcode  *view_barcode);
-static void      gl_view_barcode_finalize      (GObject        *object);
+static void       gl_view_barcode_class_init            (glViewBarcodeClass  *klass);
+static void       gl_view_barcode_instance_init         (glViewBarcode       *view_bc);
+static void       gl_view_barcode_finalize              (GObject             *object);
 
-static void      update_view_barcode_cb        (glLabelObject  *object,
-						glViewBarcode  *view_barcode);
+static GtkWidget *construct_properties_editor           (glViewObject        *view_object);
 
-static GtkWidget *construct_properties_dialog  (glViewObject   *view_object);
+static void       update_canvas_item_from_object_cb     (glLabelObject       *object,
+							 glViewBarcode       *view_bc);
 
-static void      response_cb                   (GtkDialog      *dialog,
-						gint            response,
-						glViewBarcode  *view_barcode);
+static void       update_object_from_editor_cb          (glObjectEditor      *editor,
+							 glLabelObject       *object);
 
-static void      bc_data_changed_cb            (glWdgtBCData   *bc_data,
-						glViewBarcode  *view_barcode);
+static void       update_editor_from_object_cb          (glLabelObject       *object,
+							 glObjectEditor      *editor);
 
-static void      bc_props_changed_cb           (glWdgtBCProps  *bc_props,
-						glViewBarcode  *view_barcode);
+static void       update_editor_from_move_cb            (glLabelObject       *object,
+							 gdouble              dx,
+							 gdouble              dy,
+							 glObjectEditor      *editor);
 
-static void      bc_style_changed_cb           (glWdgtBCStyle  *bc_style,
-						glViewBarcode  *view_barcode);
+static void       update_editor_from_label_cb           (glLabel             *label,
+							 glObjectEditor      *editor);
 
-static void      position_changed_cb           (glWdgtPosition *position,
-						glViewBarcode  *view_barcode);
+static void       draw_barcode                          (glViewBarcode       *view_bc);
 
-static void      update_dialog_cb              (glLabelObject  *object,
-						glViewBarcode  *view_barcode);
-
-static void      update_dialog_from_move_cb    (glLabelObject  *object,
-						gdouble         dx,
-						gdouble         dy,
-						glViewBarcode  *view_barcode);
-
-static void      draw_barcode                  (glViewBarcode  *view_barcode);
 
 
 /*****************************************************************************/
@@ -150,17 +129,17 @@ gl_view_barcode_class_init (glViewBarcodeClass *klass)
 
 	object_class->finalize = gl_view_barcode_finalize;
 
-	view_object_class->construct_dialog = construct_properties_dialog;
+	view_object_class->construct_editor = construct_properties_editor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
 
 static void
-gl_view_barcode_instance_init (glViewBarcode *view_barcode)
+gl_view_barcode_instance_init (glViewBarcode *view_bc)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_barcode->private = g_new0 (glViewBarcodePrivate, 1);
+	view_bc->private = g_new0 (glViewBarcodePrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -186,332 +165,134 @@ glViewObject *
 gl_view_barcode_new (glLabelBarcode *object,
 		     glView         *view)
 {
-	glViewBarcode      *view_barcode;
+	glViewBarcode      *view_bc;
 	GtkMenu            *menu;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	
-	view_barcode = g_object_new (gl_view_barcode_get_type(), NULL);
+	view_bc = g_object_new (gl_view_barcode_get_type(), NULL);
 
-	gl_view_object_set_view (GL_VIEW_OBJECT(view_barcode), view);
-	gl_view_object_set_object (GL_VIEW_OBJECT(view_barcode),
+	gl_view_object_set_view (GL_VIEW_OBJECT(view_bc), view);
+	gl_view_object_set_object (GL_VIEW_OBJECT(view_bc),
 				   GL_LABEL_OBJECT(object),
 				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
 
 	/* Create analogous canvas items. */
-	draw_barcode (view_barcode);
+	draw_barcode (view_bc);
 
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_view_barcode_cb), view_barcode);
+			  G_CALLBACK (update_canvas_item_from_object_cb), view_bc);
 
 	gl_debug (DEBUG_VIEW, "END");
 
-	return GL_VIEW_OBJECT (view_barcode);
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label object "changed" callback.                                 */
-/*---------------------------------------------------------------------------*/
-static void
-update_view_barcode_cb (glLabelObject *object,
-			glViewBarcode *view_barcode)
-{
-	glView             *view;
-	GnomeCanvasItem    *group;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	view = gl_view_object_get_view (GL_VIEW_OBJECT(view_barcode));
-
-	/* Adjust appearance of analogous canvas items. */
-	draw_barcode (view_barcode);
-
-	gl_debug (DEBUG_VIEW, "END");
+	return GL_VIEW_OBJECT (view_bc);
 }
 
 /*****************************************************************************/
-/* Create a properties dialog for a barcode object.                          */
+/* Create a properties editor for a barcode object.                          */
 /*****************************************************************************/
 static GtkWidget *
-construct_properties_dialog (glViewObject *view_object)
+construct_properties_editor (glViewObject *view_object)
 {
-	glViewBarcode      *view_barcode = (glViewBarcode *)view_object;
-	GtkWidget          *dialog, *wsection;
+	GtkWidget          *editor;
+	glViewBarcode      *view_bc = (glViewBarcode *)view_object;
 	glLabelObject      *object;
-	gdouble            x, y, w, h, label_width, label_height;
-	glTextNode         *text_node;
-	glBarcodeStyle     style;
-	gboolean           text_flag;
-	gboolean           checksum_flag;
-	guint              color;
-	glMerge            *merge;
-	GtkSizeGroup       *label_size_group;
-	GtkWidget          *window;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
-	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag, &color);
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_bc));
 
-	/*-----------------------------------------------------------------*/
-	/* Build dialog.                                                   */
-	/*-----------------------------------------------------------------*/
-	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(view_object)));
-	dialog = gl_hig_dialog_new_with_buttons ( _("Edit barcode object properties"),
-						  GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT,
-						  GTK_STOCK_CLOSE,
-					                   GTK_RESPONSE_CLOSE,
-						  NULL );
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_object);
+	/* Build editor. */
+	editor = gl_object_editor_new (GL_STOCK_BARCODE, _("Barcode object properties"),
+				       GL_OBJECT_EDITOR_POSITION_PAGE,
+				       GL_OBJECT_EDITOR_SIZE_PAGE,
+				       GL_OBJECT_EDITOR_BC_PAGE,
+				       GL_OBJECT_EDITOR_DATA_PAGE,
+				       0);
 
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	/* Update */
+	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
+	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 
-	/*---------------------------*/
-	/* Data section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Data"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-
-	/* barcode data */
-	view_barcode->private->bc_data = gl_wdgt_bc_data_new (merge);
-	gl_wdgt_bc_data_set_label_size_group (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-					      label_size_group);
-	gl_wdgt_bc_data_set_data (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-				  (merge != NULL),
-				  text_node);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_barcode->private->bc_data);
-	g_signal_connect ( G_OBJECT(view_barcode->private->bc_data),
-			   "changed", G_CALLBACK (bc_data_changed_cb),
-			   view_barcode);
-
-
-	/*---------------------------*/
-	/* Appearance section        */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Properties"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-
-	/* Barcode style widget */
-	view_barcode->private->bc_style = gl_wdgt_bc_style_new ();
-	gl_wdgt_bc_style_set_label_size_group (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
-					       label_size_group);
-	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE (view_barcode->private->bc_style),
-				     style, text_flag, checksum_flag);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_barcode->private->bc_style);
-	g_signal_connect (G_OBJECT (view_barcode->private->bc_style),
-			  "changed", G_CALLBACK (bc_style_changed_cb),
-			  view_barcode);
-
-	/* barcode props entry */
-	gl_debug (DEBUG_VIEW, "Creating props entry...");
-	view_barcode->private->bc_props = gl_wdgt_bc_props_new ();
-	gl_wdgt_bc_props_set_label_size_group (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
-					       label_size_group);
-	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
-				     color);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_barcode->private->bc_props);
-	g_signal_connect ( G_OBJECT(view_barcode->private->bc_props),
-			   "changed", G_CALLBACK (bc_props_changed_cb),
-			   view_barcode);
-
-
-	/*----------------------------*/
-	/* Position section           */
-	/*----------------------------*/
-	wsection = gl_hig_category_new (_("Position"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-
-	/* ------ Position Frame ------ */
-	view_barcode->private->position = gl_wdgt_position_new ();
-	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_barcode->private->position),
-					       label_size_group);
-	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_barcode->private->position),
-				     x, y,
-				     label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_barcode->private->position);
-	g_signal_connect (G_OBJECT (view_barcode->private->position),
-			  "changed",
-			  G_CALLBACK(position_changed_cb), view_barcode);
-
-
-	/*----------------------------*/
-	/* Track object changes.      */
-	/*----------------------------*/
+	/* Connect signals. */
+	g_signal_connect (G_OBJECT (editor), "changed",
+			  G_CALLBACK(update_object_from_editor_cb), object);
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_dialog_cb), view_barcode);
+			  G_CALLBACK (update_editor_from_object_cb), editor);
 	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_dialog_from_move_cb),
-			  view_barcode);
+			  G_CALLBACK (update_editor_from_move_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "size_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 
-	return dialog;
+	return editor;
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Response" callback.                                            */
+/* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-response_cb (GtkDialog     *dialog,
-	     gint          response,
-	     glViewBarcode   *view_barcode)
+update_canvas_item_from_object_cb (glLabelObject *object,
+				   glViewBarcode *view_bc)
 {
-	glLabelObject *object;
-
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail(dialog != NULL);
-	g_return_if_fail(GTK_IS_DIALOG(dialog));
-
-	switch(response) {
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide (GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_DELETE_EVENT:
-		/* Dialog destroyed, remove callbacks that reference it. */
-		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-
-		g_signal_handlers_disconnect_by_func (object, update_dialog_cb,
-						      view_barcode);
-		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
-						      view_barcode);
-		break;
-	default:
-		g_print ("response = %d", response);
-		g_assert_not_reached();
-	}
+	/* Adjust appearance of analogous canvas item. */
+	draw_barcode (view_bc);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  barcode data "changed" callback.                                */
+/* PRIVATE.  editor "changed" callback.                                      */
 /*---------------------------------------------------------------------------*/
 static void
-bc_data_changed_cb (glWdgtBCData        *bc_data,
-		    glViewBarcode       *view_barcode)
+update_object_from_editor_cb (glObjectEditor *editor,
+			      glLabelObject  *object)
 {
-	glLabelObject    *object;
-	glTextNode       *text_node;
+	gdouble            x, y, w, h;
+	glTextNode        *text_node;
+	glBarcodeStyle     style;
+	gboolean           text_flag, cs_flag;
+	guint              color;
 
 	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-
-	text_node = gl_wdgt_bc_data_get_data (bc_data);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_barcode);
-	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_barcode);
+					 update_editor_from_object_cb,
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(object),
+					 update_editor_from_move_cb,
+					 editor);
 
+
+	gl_object_editor_get_position (editor, &x, &y);
+	gl_label_object_set_position (object, x, y);
+
+	gl_object_editor_get_size (editor, &w, &h);
+	gl_label_object_set_size (object, w, h);
+
+	text_node = gl_object_editor_get_data (editor);
+	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_text_node_free (&text_node);
 
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  barcode props "changed" callback.                               */
-/*---------------------------------------------------------------------------*/
-static void
-bc_props_changed_cb (glWdgtBCProps  *text_props,
-		     glViewBarcode  *view_barcode)
-{
-	glLabelObject      *object;
-	glBarcodeStyle     style;
-	gboolean           text_flag;
-	gboolean           checksum_flag;
-	guint              color;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-
-	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag, &color);
-	gl_wdgt_bc_props_get_params (text_props, &color);
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_barcode);
+	gl_object_editor_get_bc_style (editor, &style, &text_flag, &cs_flag);
+	color = gl_object_editor_get_bc_color (editor);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, checksum_flag, color);
+				    style, text_flag, cs_flag, color);
+
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_barcode);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  barcode style "changed" callback.                               */
-/*---------------------------------------------------------------------------*/
-static void
-bc_style_changed_cb (glWdgtBCStyle  *bc_style,
-		     glViewBarcode  *view_barcode)
-{
-	glLabelObject      *object;
-	glBarcodeStyle     style;
-	gboolean           text_flag;
-	gboolean           checksum_flag;
-	guint              color;
-
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-
-	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag, &color);
-	gl_wdgt_bc_style_get_params (bc_style, &style, &text_flag, &checksum_flag);
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_barcode);
-	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, checksum_flag, color);
+					   update_editor_from_object_cb,
+					   editor);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_barcode);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  position "changed" callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-position_changed_cb (glWdgtPosition     *position,
-		     glViewBarcode      *view_barcode)
-{
-	glLabelObject      *object;
-	gdouble            x, y;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_position_get_position (GL_WDGT_POSITION (position), &x, &y);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_barcode);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_barcode);
+					   update_editor_from_move_cb,
+					   editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -520,61 +301,31 @@ position_changed_cb (glWdgtPosition     *position,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject  *object,
-		  glViewBarcode     *view_barcode)
+update_editor_from_object_cb (glLabelObject  *object,
+			      glObjectEditor *editor)
 {
-	gdouble            x, y;
-	glTextNode         *text_node;
+	gdouble            w, h;
+	glTextNode        *text_node;
 	glBarcodeStyle     style;
-	gboolean           text_flag;
-	gboolean           checksum_flag;
+	gboolean           text_flag, cs_flag;
 	guint              color;
-	glMerge            *merge;
+	glMerge           *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_size (editor, w, h);
+
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag, &color);
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+				    &style, &text_flag, &cs_flag, &color);
+	gl_object_editor_set_bc_style (editor, style, text_flag, cs_flag);
+	gl_object_editor_set_bc_color (editor, color);
+
+	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
 	merge = gl_label_get_merge (GL_LABEL(object->parent));
-
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->bc_data),
-					 bc_data_changed_cb, view_barcode);
-	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->bc_props),
-					 bc_props_changed_cb, view_barcode);
-	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->bc_style),
-					 bc_style_changed_cb, view_barcode);
-	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->position),
-					 position_changed_cb, view_barcode);
-
-	/* Update widgets in property dialog */
-
-	gl_wdgt_bc_data_set_data (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-				  (merge != NULL),
-				  text_node);
-	gl_wdgt_bc_data_set_field_defs (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-					merge);
-	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
-				     color);
-	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
-				     style, text_flag, checksum_flag);
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_barcode->private->position),
-				       x, y);
-
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->bc_data),
-					   bc_data_changed_cb, view_barcode);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->bc_props),
-					   bc_props_changed_cb, view_barcode);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->bc_style),
-					   bc_style_changed_cb, view_barcode);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->position),
-					   position_changed_cb, view_barcode);
-
+	gl_object_editor_set_data (editor, (merge != NULL), text_node);
 	gl_text_node_free (&text_node);
+
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -583,29 +334,41 @@ update_dialog_cb (glLabelObject  *object,
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_from_move_cb (glLabelObject *object,
-			    gdouble        dx,
-			    gdouble        dy,
-			    glViewBarcode *view_barcode)
+update_editor_from_move_cb (glLabelObject    *object,
+			    gdouble           dx,
+			    gdouble           dy,
+			    glObjectEditor   *editor)
 {
 	gdouble            x, y;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+	gl_label_object_get_position (object, &x, &y);
+	gl_object_editor_set_position (editor, x, y);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->position),
-					 position_changed_cb, view_barcode);
+	gl_debug (DEBUG_VIEW, "END");
+}
 
-	/* Update widgets in property dialog */
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_barcode->private->position),
-				       x, y);
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+update_editor_from_label_cb (glLabel        *label,
+			     glObjectEditor *editor)
+{
+	gdouble            label_width, label_height;
+	glMerge           *merge;
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->position),
-					   position_changed_cb, view_barcode);
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
+
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

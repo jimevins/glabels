@@ -31,6 +31,7 @@
 #include "label.h"
 
 #include "ui-property-bar.h"
+#include "ui-sidebar.h"
 
 G_BEGIN_DECLS
 
@@ -55,6 +56,7 @@ struct _glWindow {
 	GtkWidget           *view;
 
 	glUIPropertyBar     *property_bar;
+	glUISidebar         *sidebar;
 
 	GtkWidget           *cursor_info;
 	GtkWidget           *cursor_info_frame;

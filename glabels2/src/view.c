@@ -61,6 +61,9 @@
 #define ARC_FINE         2 /* Resolution in degrees of large arcs */
 #define ARC_COURSE       5 /* Resolution in degrees of small arcs */
 
+#define ZOOMTOFIT_PAD   16
+#define HOME_SCALE       2.0
+
 /*==========================================================================*/
 /* Private types.                                                           */
 /*==========================================================================*/
@@ -87,12 +90,22 @@ static guint signals[LAST_SIGNAL] = {0};
 static GdkAtom clipboard_atom = GDK_NONE;
 
 static gdouble scales[] = {
-	8.0, 6.0, 4.0, 3.0,
-	2.0,
-	1.5, 1.0, 0.5, 0.25,
+	4.00*HOME_SCALE,
+	3.00*HOME_SCALE,
+	2.00*HOME_SCALE,
+	1.50*HOME_SCALE,
+	1.00*HOME_SCALE,
+	0.75*HOME_SCALE,
+	0.67*HOME_SCALE,
+	0.50*HOME_SCALE,
+	0.33*HOME_SCALE,
+	0.25*HOME_SCALE,
+	0.20*HOME_SCALE,
+	0.15*HOME_SCALE,
+	0.10*HOME_SCALE,
 };
 #define N_SCALES G_N_ELEMENTS(scales)
-#define HOME_SCALE 2.0
+
 
 /*==========================================================================*/
 /* Local function prototypes                                                */
@@ -105,8 +118,6 @@ static void       gl_view_finalize                (GObject *object);
 static void       gl_view_construct               (glView *view);
 static GtkWidget *gl_view_construct_canvas        (glView *view);
 static void       gl_view_construct_selection     (glView *view);
-
-static gdouble    get_apropriate_scale            (gdouble w, gdouble h);
 
 static void       draw_layers                     (glView *view);
 
@@ -405,18 +416,14 @@ gl_view_construct_canvas (glView *view)
 	gl_debug (DEBUG_VIEW, "Label size: w=%lf, h=%lf",
 		  label_width, label_height);
 
-	scale = get_apropriate_scale (label_width, label_height);
-	gl_debug (DEBUG_VIEW, "scale =%lf", scale);
+	scale = HOME_SCALE;
+	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas), scale);
+	view->scale = scale;
 
+	gl_debug (DEBUG_VIEW, "scale =%lf", scale);
 	gl_debug (DEBUG_VIEW, "Canvas size: w=%lf, h=%lf",
 			      scale * label_width + 40,
 			      scale * label_height + 40);
-	gtk_widget_set_size_request (GTK_WIDGET(view->canvas),
-				     scale * label_width + 40,
-				     scale * label_height + 40);
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  scale);
-	view->scale = scale;
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
 					0.0, 0.0, label_width, label_height);
@@ -466,33 +473,6 @@ gl_view_construct_selection (glView *view)
 			  G_CALLBACK (selection_received_cb), view);
 
 	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Determine an apropriate scale for given label & screen size     */
-/*---------------------------------------------------------------------------*/
-static gdouble
-get_apropriate_scale (gdouble w, gdouble h)
-{
-	gdouble w_screen, h_screen;
-	gint i;
-	gdouble k;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	w_screen = (gdouble) gdk_screen_width ();
-	h_screen = (gdouble) gdk_screen_height ();
-
-	for (i = 0; i < N_SCALES; i++) {
-		k = scales[i];
-		if (k <= HOME_SCALE) {
-			if ((k * w < (w_screen - 256))
-			    && (k * h < (h_screen - 256)))
-				return k;
-		}
-	}
-
-	return 0.25;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1982,25 +1962,28 @@ gl_view_delete_selection (glView *view)
 }
 
 /*****************************************************************************/
-/* Edit properties of selected object.                                       */
+/* Get object property editor of first selected object.                      */
 /*****************************************************************************/
-void
-gl_view_edit_object_props (glView *view)
+GtkWidget *
+gl_view_get_editor (glView *view)
 {
 	glViewObject *view_object;
+	GtkWidget    *editor = NULL;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	if (gl_view_is_selection_atomic (view)) {
+	if (!gl_view_is_selection_empty (view)) {
 
 		view_object = GL_VIEW_OBJECT(view->selected_object_list->data);
-		gl_view_object_show_dialog (view_object);
+		editor = gl_view_object_get_editor (view_object);
 
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
+
+	return editor;
 }
 
 /*****************************************************************************/
@@ -3011,6 +2994,45 @@ gl_view_zoom_out (glView *view)
 }
 
 /*****************************************************************************/
+/* Set zoom to best fit.                                                     */
+/*****************************************************************************/
+void
+gl_view_zoom_best_fit (glView *view)
+{
+	gint w_view, h_view;
+	gdouble w_label, h_label;
+	gdouble x_zoom, y_zoom, new_zoom;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	if ( ! GTK_WIDGET_VISIBLE(view)) {
+		gl_view_set_zoom (view, 1.0);
+		return;
+	}
+
+	w_view = GTK_WIDGET(view)->allocation.width;
+	h_view = GTK_WIDGET(view)->allocation.height;
+
+	gl_label_get_size (GL_LABEL(view->label), &w_label, &h_label);
+
+	gl_debug (DEBUG_VIEW, "View size: %d, %d", w_view, h_view);
+	gl_debug (DEBUG_VIEW, "Label size: %g, %g", w_label, h_label);
+
+	/* Calculate best zoom level */
+	x_zoom = (double)(w_view - ZOOMTOFIT_PAD) / w_label;
+	y_zoom = (double)(h_view - ZOOMTOFIT_PAD) / h_label;
+	new_zoom = MIN (x_zoom, y_zoom) / HOME_SCALE;
+	gl_debug (DEBUG_VIEW, "Candidate scales: %g, %g => %g", x_zoom, y_zoom, new_zoom);
+
+	/* Limit */
+	new_zoom = MIN (new_zoom, scales[0]/HOME_SCALE);
+	new_zoom = MAX (new_zoom, scales[N_SCALES-1]/HOME_SCALE);
+	gl_debug (DEBUG_VIEW, "Limitted zoom: %g", new_zoom);
+
+	gl_view_set_zoom (view, new_zoom);
+}
+
+/*****************************************************************************/
 /* Set current zoom factor to explicit value.                                */
 /*****************************************************************************/
 void
@@ -3351,21 +3373,6 @@ construct_selection_menu (glView *view)
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	menu = gtk_menu_new ();
-
-	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_PROPERTIES, NULL);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_view_edit_object_props), view);
-	view->atomic_selection_items =
-		g_list_prepend (view->atomic_selection_items, menuitem);
-
-	/*
-	 * Separator -------------------------
-	 */
-	menuitem = gtk_menu_item_new ();
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
 
 	/*
 	 * Submenu: Order

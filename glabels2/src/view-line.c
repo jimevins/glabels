@@ -3,7 +3,7 @@
  *
  *  view_line.c:  GLabels label line object widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,10 +26,9 @@
 
 #include "view-highlight.h"
 
-#include "wdgt-line.h"
-#include "wdgt-vector.h"
-#include "wdgt-position.h"
 #include "color.h"
+#include "object-editor.h"
+#include "stock.h"
 
 #include "pixmaps/cursor_line.xbm"
 #include "pixmaps/cursor_line_mask.xbm"
@@ -46,13 +45,6 @@
 
 struct _glViewLinePrivate {
 	GnomeCanvasItem       *item;
-
-	/* Property dialog Page 0 widgets */
-	GtkWidget             *line;
-
-	/* Property dialog Page 1 widgets */
-	GtkWidget             *position;
-	GtkWidget             *vector;
 };
 
 /*========================================================*/
@@ -66,35 +58,29 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_line_class_init      (glViewLineClass *klass);
-static void      gl_view_line_instance_init   (glViewLine     *view_line);
-static void      gl_view_line_finalize        (GObject        *object);
+static void       gl_view_line_class_init           (glViewLineClass  *klass);
+static void       gl_view_line_instance_init        (glViewLine       *view_line);
+static void       gl_view_line_finalize             (GObject          *object);
 
-static void      update_view_line_cb          (glLabelObject  *object,
-					       glViewLine     *view_line);
+static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
 
-static GtkWidget *construct_properties_dialog (glViewObject   *view_object);
+static void       update_canvas_item_from_object_cb (glLabelObject    *object,
+						     glViewLine        *view_line);
 
-static void      response_cb                  (GtkDialog      *dialog,
-					       gint            response,
-					       glViewLine     *view_line);
+static void       update_object_from_editor_cb      (glObjectEditor   *editor,
+						     glLabelObject    *object);
 
-static void      line_changed_cb              (glWdgtLine     *line,
-					       glViewLine     *view_line);
+static void       update_editor_from_object_cb      (glLabelObject    *object,
+						     glObjectEditor   *editor);
 
-static void      position_changed_cb          (glWdgtPosition *position,
-					       glViewLine     *view_line);
+static void       update_editor_from_move_cb        (glLabelObject    *object,
+						     gdouble           dx,
+						     gdouble           dy,
+						     glObjectEditor   *editor);
 
-static void      vector_changed_cb            (glWdgtVector   *vector,
-					       glViewLine     *view_line);
+static void       update_editor_from_label_cb       (glLabel          *label,
+						     glObjectEditor   *editor);
 
-static void      update_dialog_cb             (glLabelObject  *object,
-					       glViewLine     *view_line);
-
-static void      update_dialog_from_move_cb   (glLabelObject  *object,
-					       gdouble         dx,
-					       gdouble         dy,
-					       glViewLine     *view_line);
 
 
 /*****************************************************************************/
@@ -137,7 +123,7 @@ gl_view_line_class_init (glViewLineClass *klass)
 
 	object_class->finalize = gl_view_line_finalize;
 
-	view_object_class->construct_dialog = construct_properties_dialog;
+	view_object_class->construct_editor = construct_properties_editor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -167,18 +153,17 @@ gl_view_line_finalize (GObject *object)
 }
 
 /*****************************************************************************/
-/* NEW line object view.                                                  */
+/* NEW line object view.                                                     */
 /*****************************************************************************/
 glViewObject *
 gl_view_line_new (glLabelLine *object,
-		  glView     *view)
+		  glView      *view)
 {
-	glViewLine         *view_line;
+	glViewLine        *view_line;
 	gdouble            line_width;
 	guint              line_color;
 	gdouble            w, h;
-	GtkMenu            *menu;
-	GnomeCanvasPoints  *points;
+	GnomeCanvasPoints *points;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_LINE (object));
@@ -212,19 +197,60 @@ gl_view_line_new (glLabelLine *object,
 	gnome_canvas_points_free (points);
 
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_view_line_cb), view_line);
+			  G_CALLBACK (update_canvas_item_from_object_cb), view_line);
 
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_line);
 }
 
+/*****************************************************************************/
+/* Create a properties editor for a line object.                             */
+/*****************************************************************************/
+static GtkWidget *
+construct_properties_editor (glViewObject *view_object)
+{
+	GtkWidget          *editor;
+	glViewLine         *view_line = (glViewLine *)view_object;
+	glLabelObject      *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
+
+	/* Build editor. */
+	editor = gl_object_editor_new (GL_STOCK_LINE, _("Line object properties"),
+				       GL_OBJECT_EDITOR_POSITION_PAGE,
+				       GL_OBJECT_EDITOR_SIZE_LINE_PAGE,
+				       GL_OBJECT_EDITOR_LINE_PAGE,
+				       0);
+	
+	/* Update */
+	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
+	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
+
+	/* Connect signals. */
+	g_signal_connect (G_OBJECT (editor), "changed",
+			  G_CALLBACK(update_object_from_editor_cb), object);
+	g_signal_connect (G_OBJECT (object), "changed",
+			  G_CALLBACK (update_editor_from_object_cb), editor);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_editor_from_move_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "size_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return editor;
+}
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_view_line_cb (glLabelObject *object,
-		     glViewLine     *view_line)
+update_canvas_item_from_object_cb (glLabelObject *object,
+				   glViewLine     *view_line)
 {
 	gdouble            line_width;
 	guint              line_color;
@@ -254,225 +280,46 @@ update_view_line_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*****************************************************************************/
-/* Create a properties dialog for a line object.                          */
-/*****************************************************************************/
-static GtkWidget *
-construct_properties_dialog (glViewObject *view_object)
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  editor "changed" callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+update_object_from_editor_cb (glObjectEditor *editor,
+			      glLabelObject  *object)
 {
-	glViewLine         *view_line = (glViewLine *)view_object;
-	GtkWidget          *dialog, *wsection;
-	glLabelObject      *object;
-	gdouble            line_width;
+	gdouble            x, y, w, h;
 	guint              line_color;
-	gdouble            x, y, w, h, label_width, label_height;
-	GtkSizeGroup       *label_size_group;
-	GtkWidget          *window;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_line_get_line_width(GL_LABEL_LINE(object));
-	line_color = gl_label_line_get_line_color(GL_LABEL_LINE(object));
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
-
-	/*-----------------------------------------------------------------*/
-	/* Build dialog with notebook.                                     */
-	/*-----------------------------------------------------------------*/
-	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_line))));
-	dialog = gl_hig_dialog_new_with_buttons ( _("Edit line object properties"),
-						  GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT,
-						  GTK_STOCK_CLOSE,
-					                   GTK_RESPONSE_CLOSE,
-						  NULL );
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_line);
-
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-	/*---------------------------*/
-	/* Line section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Line"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_line->private->line = gl_wdgt_line_new ();
-	gl_wdgt_line_set_label_size_group (GL_WDGT_LINE(view_line->private->line),
-					   label_size_group);
-	gl_wdgt_line_set_params (GL_WDGT_LINE (view_line->private->line),
-				 line_width,
-				 line_color);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_line->private->line);
-	g_signal_connect (G_OBJECT (view_line->private->line), "changed",
-			  G_CALLBACK(line_changed_cb), view_line);
-
-	/*---------------------------*/
-	/* Position section          */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Position"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_line->private->position = gl_wdgt_position_new ();
-	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_line->private->position),
-					       label_size_group);
-	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_line->private->position),
-				     x, y,
-				     label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_line->private->position);
-	g_signal_connect (G_OBJECT (view_line->private->position),
-			  "changed",
-			  G_CALLBACK(position_changed_cb), view_line);
-
-
-	/*---------------------------*/
-	/* Size section              */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Size"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_line->private->vector = gl_wdgt_vector_new ();
-	gl_wdgt_vector_set_label_size_group (GL_WDGT_VECTOR(view_line->private->vector),
-					     label_size_group);
-	gl_wdgt_vector_set_params (GL_WDGT_VECTOR (view_line->private->vector),
-				   w, h,
-				   label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_line->private->vector);
-	g_signal_connect (G_OBJECT (view_line->private->vector), "changed",
-			  G_CALLBACK(vector_changed_cb), view_line);
-
-
-	/*----------------------------*/
-	/* Track object changes.      */
-	/*----------------------------*/
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_dialog_cb), view_line);
-	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_dialog_from_move_cb), view_line);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return dialog;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Response" callback.                                            */
-/*---------------------------------------------------------------------------*/
-static void
-response_cb (GtkDialog     *dialog,
-	     gint          response,
-	     glViewLine    *view_line)
-{
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail(dialog != NULL);
-	g_return_if_fail(GTK_IS_DIALOG(dialog));
-
-	switch(response) {
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide (GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_DELETE_EVENT:
-		/* Dialog destroyed, remove callbacks that reference it. */
-		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
-
-		g_signal_handlers_disconnect_by_func (object, update_dialog_cb,
-						      view_line);
-		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
-						      view_line);
-		break;
-	default:
-		g_print ("response = %d", response);
-		g_assert_not_reached();
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  line properties "changed" callback.                             */
-/*---------------------------------------------------------------------------*/
-static void
-line_changed_cb (glWdgtLine     *line,
-		 glViewLine     *view_line)
-{
-	glLabelObject      *object;
 	gdouble            line_width;
-	guint              line_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
-
-	gl_wdgt_line_get_params (GL_WDGT_LINE (line),
-				 &line_width,
-				 &line_color);
-
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_line);
-	gl_label_line_set_line_width(GL_LABEL_LINE(object), line_width);
-	gl_label_line_set_line_color(GL_LABEL_LINE(object), line_color);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_line);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  position "changed" callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-position_changed_cb (glWdgtPosition     *position,
-		     glViewLine         *view_line)
-{
-	glLabelObject      *object;
-	gdouble            x, y;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_position_get_position (GL_WDGT_POSITION (position), &x, &y);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
-
+					 update_editor_from_object_cb,
+					 editor);
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_line);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+					 update_editor_from_move_cb,
+					 editor);
+
+
+	gl_object_editor_get_position (editor, &x, &y);
+	gl_label_object_set_position (object, x, y);
+
+	gl_object_editor_get_lsize (editor, &w, &h);
+	gl_label_object_set_size (object, w, h);
+
+	line_color = gl_object_editor_get_line_color (editor);
+	gl_label_object_set_line_color (object, line_color);
+
+	line_width = gl_object_editor_get_line_width (editor);
+	gl_label_object_set_line_width (object, line_width);
+
+
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_line);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  vector "changed" callback.                                      */
-/*---------------------------------------------------------------------------*/
-static void
-vector_changed_cb (glWdgtVector     *vector,
-		   glViewLine     *view_line)
-{
-	glLabelObject *object;
-	gdouble       w, h;
-	gboolean      keep_aspect_ratio_flag;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_vector_get_params (GL_WDGT_VECTOR (vector), &w, &h);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_line));
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_line);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+					   update_editor_from_object_cb,
+					   editor);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_line);
+					   update_editor_from_move_cb,
+					   editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -481,48 +328,23 @@ vector_changed_cb (glWdgtVector     *vector,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject     *object,
-		  glViewLine        *view_line)
+update_editor_from_object_cb (glLabelObject  *object,
+			      glObjectEditor *editor)
 {
-	gdouble            line_width;
+	gdouble            w, h;
 	guint              line_color;
-	gdouble            x, y, w, h, label_width, label_height;
+	gdouble            line_width;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_line_get_line_width(GL_LABEL_LINE(object));
-	line_color = gl_label_line_get_line_color(GL_LABEL_LINE(object));
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_lsize (editor, w, h);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_line->private->line),
-					 line_changed_cb, view_line);
-	g_signal_handlers_block_by_func (G_OBJECT(view_line->private->position),
-					 position_changed_cb, view_line);
-	g_signal_handlers_block_by_func (G_OBJECT(view_line->private->vector),
-					 vector_changed_cb, view_line);
+	line_color = gl_label_line_get_line_color (GL_LABEL_LINE(object));
+	gl_object_editor_set_line_color (editor, line_color);
 
-	/* Update widgets in property dialog */
-	gl_wdgt_line_set_params (GL_WDGT_LINE (view_line->private->line),
-				 line_width,
-				 line_color);
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_line->private->position),
-				       x, y);
-	gl_wdgt_vector_set_params (GL_WDGT_VECTOR(view_line->private->vector),
-				   w, h, label_width, label_height);
-
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->line),
-					   line_changed_cb, view_line);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->position),
-					   position_changed_cb, view_line);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->vector),
-					   vector_changed_cb, view_line);
-
+	line_width = gl_label_line_get_line_width (GL_LABEL_LINE(object));
+	gl_object_editor_set_line_width (editor, line_width);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -531,29 +353,37 @@ update_dialog_cb (glLabelObject     *object,
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_from_move_cb (glLabelObject *object,
-			    gdouble        dx,
-			    gdouble        dy,
-			    glViewLine    *view_line)
+update_editor_from_move_cb (glLabelObject    *object,
+			    gdouble           dx,
+			    gdouble           dy,
+			    glObjectEditor   *editor)
 {
 	gdouble            x, y;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+	gl_label_object_get_position (object, &x, &y);
+	gl_object_editor_set_position (editor, x, y);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_line->private->position),
-					 position_changed_cb, view_line);
+	gl_debug (DEBUG_VIEW, "END");
+}
 
-	/* Update widgets in property dialog */
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_line->private->position),
-				       x, y);
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+update_editor_from_label_cb (glLabel        *label,
+			     glObjectEditor *editor)
+{
+	gdouble            label_width, label_height;
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->position),
-					   position_changed_cb, view_line);
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -686,3 +516,4 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	}
 
 }
+

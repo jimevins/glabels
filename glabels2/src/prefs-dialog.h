@@ -45,7 +45,7 @@ struct _glPrefsDialog
 {
 	glHigDialog           parent_instance;
 
-	glPrefsDialogPrivate *private;
+	glPrefsDialogPrivate *priv;
 
 };
 

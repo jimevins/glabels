@@ -225,6 +225,24 @@ gl_tools_zoom1to1 (BonoboUIComponent *uic,
 }
 
 /*****************************************************************************/
+/* zoom to fit callback.                                                     */
+/*****************************************************************************/
+void
+gl_tools_zoom_to_fit (BonoboUIComponent *uic,
+		      gpointer           user_data,
+		      const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_zoom_best_fit (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
 /* edit merge properties callback.                                           */
 /*****************************************************************************/
 void
@@ -239,24 +257,6 @@ gl_tools_merge_properties (BonoboUIComponent *uic,
 
 	if (window->view != NULL) {
 		gl_view_edit_merge_props (GL_VIEW(window->view));
-	}
-}
-
-/*****************************************************************************/
-/* edit object properties callback.                                          */
-/*****************************************************************************/
-void
-gl_tools_object_properties (BonoboUIComponent *uic,
-			    gpointer           user_data,
-			    const gchar       *verbname)
-
-{
-	glWindow *window;
-
-	window = GL_WINDOW (user_data);
-
-	if (window->view != NULL) {
-		gl_view_edit_object_props (GL_VIEW(window->view));
 	}
 }
 

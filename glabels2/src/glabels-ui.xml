@@ -246,14 +246,14 @@
 			pixtype="stock" pixname="gtk-zoom-100"
 		/>
 
+		<cmd name="ToolsZoomToFit"
+			_tip="Zoom to fit window"
+			pixtype="stock" pixname="gtk-zoom-fit"
+		/>
+
 		<cmd name="ToolsMergeProperties"
 			_tip="Edit merge properties"
 			pixtype="stock" pixname="gl_stock_merge"
-		/>
-
-		<cmd name="ToolsObjectProperties"
-			_tip="Edit object properties"
-			pixtype="stock" pixname="gl_stock_properties"
 		/>
 
 		<cmd name="ToolsRaiseObjects"
@@ -372,6 +372,9 @@
 
 		<cmd name="PropLineWidth"
 			_tip="Line width"
+		/>
+
+		<cmd name="PropertyEditor"
 		/>
 
 		<cmd name="HelpContents"
@@ -594,6 +597,11 @@
 				_label="Zoom _1:1"
 			/>
 
+			<menuitem name="ToolsZoomToFit"
+				verb=""
+				_label="Zoom to _fit"
+			/>
+
 		</submenu>
 
 
@@ -741,13 +749,6 @@
 
 			<separator />
 
-			<menuitem name="ToolsObjectProperties"
-				verb=""
-				_label="Object _Properties..."
-			/>
-
-			<separator />
-
 			<menuitem name="ToolsMergeProperties"
 				verb=""
 				_label="_Merge Properties..."
@@ -892,6 +893,10 @@
 			verb=""
 		/>
 
+		<toolitem name="ToolsZoomToFit"
+			verb=""
+		/>
+
 		<separator />
 
 		<toolitem name="ToolsMergeProperties"
@@ -981,6 +986,22 @@
 
 	</dockitem>
 
+
+       <dockitem name="PropertySidebar"
+                _tip="Object property editor"
+                config="0"
+                behavior="exclusive,never horizontal"
+                in_new_band="1"
+                placement="right"
+        >
+ 
+                <control name="PropertyEditor"
+                        verb=""
+                />
+ 
+        </dockitem>
+                                                                                
+                                                                                
 
 
 

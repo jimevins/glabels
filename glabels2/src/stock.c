@@ -99,7 +99,9 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_BARCODE,       stock_barcode_24, stock_barcode_16);
 	add_icons (factory, GL_STOCK_MERGE,         stock_merge_24,   stock_merge_16);
 
-	add_icons (factory, GL_STOCK_PROPERTIES,    NULL,   stock_properties_16);
+	add_icons (factory, GL_STOCK_PROPERTIES,
+		   stock_properties_24,
+		   stock_properties_16);
 
 	add_icons (factory, GL_STOCK_ORDER_TOP,     NULL, stock_order_top_16);
 	add_icons (factory, GL_STOCK_ORDER_BOTTOM,  NULL, stock_order_bottom_16);

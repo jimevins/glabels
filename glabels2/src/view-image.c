@@ -3,7 +3,7 @@
  *
  *  view_image.c:  GLabels label image object widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,11 +26,9 @@
 
 #include "view-highlight.h"
 
-#include "wdgt-image-select.h"
-#include "wdgt-line.h"
-#include "wdgt-fill.h"
-#include "wdgt-size.h"
-#include "wdgt-position.h"
+#include "color.h"
+#include "object-editor.h"
+#include "stock.h"
 
 #include "pixmaps/cursor_image.xbm"
 #include "pixmaps/cursor_image_mask.xbm"
@@ -48,14 +46,7 @@
 /*========================================================*/
 
 struct _glViewImagePrivate {
-	GnomeCanvasItem *item;
-
-	/* Page 0 widgets */
-	GtkWidget       *pixmap_entry;
-
-	/* Page 1 widgets */
-	GtkWidget       *position;
-	GtkWidget       *size;
+	GnomeCanvasItem       *item;
 };
 
 /*========================================================*/
@@ -67,43 +58,33 @@ static glViewObjectClass *parent_class = NULL;
 /* Save state of image file entry */
 static gchar *image_path = NULL;
 
-
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_image_class_init      (glViewImageClass *klass);
-static void      gl_view_image_instance_init   (glViewImage    *view_image);
-static void      gl_view_image_finalize        (GObject        *object);
+static void       gl_view_image_class_init          (glViewImageClass *klass);
+static void       gl_view_image_instance_init       (glViewImage      *view_image);
+static void       gl_view_image_finalize            (GObject          *object);
 
-static void      update_view_image_cb          (glLabelObject  *object,
-						glViewImage    *view_image);
+static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
 
-static GtkWidget *construct_properties_dialog  (glViewObject   *view_object);
+static void       update_canvas_item_from_object_cb (glLabelObject    *object,
+						     glViewImage      *view_image);
 
-static void      response_cb                   (GtkDialog      *dialog,
-						gint            response,
-						glViewImage    *view_image);
+static void       update_object_from_editor_cb      (glObjectEditor   *editor,
+						     glLabelObject    *object);
 
-static void      file_changed_cb               (GtkEntry       *pixmap_entry,
-						glViewImage    *view_image);
+static void       update_editor_from_object_cb      (glLabelObject    *object,
+						     glObjectEditor   *editor);
 
-static void      position_changed_cb           (glWdgtPosition *position,
-						glViewImage    *view_image);
+static void       update_editor_from_move_cb        (glLabelObject    *object,
+						     gdouble           dx,
+						     gdouble           dy,
+						     glObjectEditor   *editor);
 
-static void      size_changed_cb               (glWdgtSize     *size,
-						glViewImage    *view_image);
+static void       update_editor_from_label_cb       (glLabel          *label,
+						     glObjectEditor   *editor);
 
-static void      size_reset_cb                 (GtkButton      *button,
-						glViewImage    *view_image);
-
-static void      update_dialog_cb              (glLabelObject  *object,
-						glViewImage    *view_image);
-
-static void      update_dialog_from_move_cb    (glLabelObject  *object,
-						gdouble         dx,
-						gdouble         dy,
-						glViewImage    *view_image);
 
 
 /*****************************************************************************/
@@ -146,7 +127,7 @@ gl_view_image_class_init (glViewImageClass *klass)
 
 	object_class->finalize = gl_view_image_finalize;
 
-	view_object_class->construct_dialog = construct_properties_dialog;
+	view_object_class->construct_editor = construct_properties_editor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -176,7 +157,7 @@ gl_view_image_finalize (GObject *object)
 }
 
 /*****************************************************************************/
-/* NEW image object view.                                                  */
+/* NEW image object view.                                                    */
 /*****************************************************************************/
 glViewObject *
 gl_view_image_new (glLabelImage *object,
@@ -185,7 +166,6 @@ gl_view_image_new (glLabelImage *object,
 	glViewImage        *view_image;
 	const GdkPixbuf    *pixbuf;
 	gdouble            w, h;
-	GtkMenu            *menu;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
@@ -216,22 +196,65 @@ gl_view_image_new (glLabelImage *object,
 					 NULL);
 
 	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_view_image_cb), view_image);
+			  G_CALLBACK (update_canvas_item_from_object_cb), view_image);
 
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_image);
 }
 
+/*****************************************************************************/
+/* Create a properties editor for an image object.                           */
+/*****************************************************************************/
+static GtkWidget *
+construct_properties_editor (glViewObject *view_object)
+{
+	GtkWidget          *editor;
+	glViewImage        *view_image = (glViewImage *)view_object;
+	glLabelObject      *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
+
+	/* Build editor. */
+	editor = gl_object_editor_new (GL_STOCK_IMAGE, _("Image object properties"),
+				       GL_OBJECT_EDITOR_POSITION_PAGE,
+				       GL_OBJECT_EDITOR_SIZE_IMAGE_PAGE,
+				       GL_OBJECT_EDITOR_IMAGE_PAGE,
+				       0);
+	
+	/* Update */
+	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
+	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
+
+	/* Connect signals. */
+	g_signal_connect (G_OBJECT (editor), "changed",
+			  G_CALLBACK(update_object_from_editor_cb), object);
+	g_signal_connect (G_OBJECT (object), "changed",
+			  G_CALLBACK (update_editor_from_object_cb), editor);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_editor_from_move_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "size_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return editor;
+}
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_view_image_cb (glLabelObject *object,
-		      glViewImage   *view_image)
+update_canvas_item_from_object_cb (glLabelObject *object,
+				   glViewImage     *view_image)
 {
 	const GdkPixbuf    *pixbuf;
-	gdouble            w, h;
+	gdouble             w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -251,251 +274,41 @@ update_view_image_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*****************************************************************************/
-/* Create a properties dialog for a image object.                          */
-/*****************************************************************************/
-static GtkWidget *
-construct_properties_dialog (glViewObject *view_object)
-{
-	glViewImage        *view_image = (glViewImage *)view_object;
-	GtkWidget          *dialog, *wsection, *wbutton;
-	glLabelObject      *object;
-	gdouble            x, y, w, h, label_width, label_height;
-	glTextNode         *filename;
-	glMerge            *merge;
-	GtkSizeGroup       *label_size_group;
-	GtkWidget          *window;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
-	gl_label_get_size (GL_LABEL(object->parent),
-			   &label_width, &label_height);
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
-
-	/*-----------------------------------------------------------------*/
-	/* Build dialog.                                                   */
-	/*-----------------------------------------------------------------*/
-	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_image))));
-	dialog = gl_hig_dialog_new_with_buttons ( _("Edit image object properties"),
-						  GTK_WINDOW (window),
-						  GTK_DIALOG_DESTROY_WITH_PARENT,
-						  GTK_STOCK_CLOSE,
-					                   GTK_RESPONSE_CLOSE,
-						  NULL );
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_image);
-
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-	/*---------------------------*/
-	/* Image section             */
-	/*---------------------------*/
-	wsection = gl_hig_category_new (_("Image"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-
-	view_image->private->pixmap_entry =
-		gl_wdgt_image_select_new (merge, filename);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_image->private->pixmap_entry);
-	g_signal_connect ( G_OBJECT(view_image->private->pixmap_entry), "changed",
-			   G_CALLBACK (file_changed_cb), view_image);
-
-
-	/*----------------------------*/
-	/* Position section           */
-	/*----------------------------*/
-	wsection = gl_hig_category_new (_("Position"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_image->private->position = gl_wdgt_position_new ();
-	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_image->private->position),
-					       label_size_group);
-	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_image->private->position),
-				     x, y, label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_image->private->position);
-	g_signal_connect (G_OBJECT (view_image->private->position),
-			  "changed",
-			  G_CALLBACK(position_changed_cb), view_image);
-
-
-	/*----------------------------*/
-	/* Size section               */
-	/*----------------------------*/
-	wsection = gl_hig_category_new (_("Size"));
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
-	view_image->private->size = gl_wdgt_size_new ();
-	gl_wdgt_size_set_label_size_group (GL_WDGT_SIZE(view_image->private->size),
-					       label_size_group);
-	gl_wdgt_size_set_params (GL_WDGT_SIZE (view_image->private->size),
-				 w, h, TRUE, label_width, label_height);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_image->private->size);
-	g_signal_connect (G_OBJECT (view_image->private->size), "changed",
-			  G_CALLBACK(size_changed_cb), view_image);
-
-	/* ------ Size Reset Button ------ */
-	wbutton = gtk_button_new_with_label (_("Reset image size"));
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection), wbutton);
-	g_signal_connect (G_OBJECT (wbutton), "clicked",
-			  G_CALLBACK (size_reset_cb), view_image);
-
-
-	/*----------------------------*/
-	/* Track object changes.      */
-	/*----------------------------*/
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_dialog_cb), view_image);
-	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_dialog_from_move_cb), view_image);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return dialog;
-}
-
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Response" callback.                                            */
+/* PRIVATE.  editor "changed" callback.                                      */
 /*---------------------------------------------------------------------------*/
 static void
-response_cb (GtkDialog     *dialog,
-	     gint           response,
-	     glViewImage   *view_image)
+update_object_from_editor_cb (glObjectEditor *editor,
+			      glLabelObject  *object)
 {
-	glLabelObject *object;
+	gdouble            x, y, w, h;
+	glTextNode        *filename;
 
 	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail(dialog != NULL);
-	g_return_if_fail(GTK_IS_DIALOG(dialog));
-
-	switch(response) {
-	case GTK_RESPONSE_CLOSE:
-		gtk_widget_hide (GTK_WIDGET(dialog));
-		break;
-	case GTK_RESPONSE_DELETE_EVENT:
-		/* Dialog destroyed, remove callbacks that reference it. */
-		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-
-		g_signal_handlers_disconnect_by_func (object, update_dialog_cb,
-						      view_image);
-		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
-						      view_image);
-		break;
-	default:
-		g_print ("response = %d", response);
-		g_assert_not_reached();
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  file "changed" callback.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-file_changed_cb (GtkEntry          *pixmap_entry,
-		 glViewImage       *view_image)
-{
-	glLabelObject    *object;
-	glTextNode       *filename;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-
-	filename = gl_wdgt_image_select_get_data (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry));
-	gl_debug (DEBUG_VIEW, "filename = %s", filename->data);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_image);
-	gl_label_image_set_filename(GL_LABEL_IMAGE(object), filename);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_image);
-
-	gl_text_node_free (&filename);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  position "changed" callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-position_changed_cb (glWdgtPosition   *position,
-		     glViewImage      *view_image)
-{
-	glLabelObject      *object;
-	gdouble            x, y;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_position_get_position (GL_WDGT_POSITION (position), &x, &y);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-
+					 update_editor_from_object_cb,
+					 editor);
 	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_image);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+					 update_editor_from_move_cb,
+					 editor);
+
+
+	gl_object_editor_get_position (editor, &x, &y);
+	gl_label_object_set_position (object, x, y);
+
+	gl_object_editor_get_size (editor, &w, &h);
+	gl_label_object_set_size (object, w, h);
+
+	filename = gl_object_editor_get_image (editor);
+	gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_image);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  size "changed" callback.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-size_changed_cb (glWdgtSize   *size,
-		 glViewImage  *view_image)
-{
-	glLabelObject *object;
-	gdouble       w, h;
-	gboolean      keep_aspect_ratio_flag;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_wdgt_size_get_size (GL_WDGT_SIZE (size),
-			       &w, &h, &keep_aspect_ratio_flag);
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_dialog_cb, view_image);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+					   update_editor_from_object_cb,
+					   editor);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_dialog_cb, view_image);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  size "changed" callback.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-size_reset_cb (GtkButton    *button,
-	       glViewImage  *view_image)
-{
-	glLabelObject   *object;
-	gdouble         image_w, image_h;
-	const GdkPixbuf *pixbuf;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
-
-	image_w = gdk_pixbuf_get_width (pixbuf);
-	image_h = gdk_pixbuf_get_height (pixbuf);
-
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), image_w, image_h);
+					   update_editor_from_move_cb,
+					   editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -504,51 +317,30 @@ size_reset_cb (GtkButton    *button,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject   *object,
-		  glViewImage     *view_image)
+update_editor_from_object_cb (glLabelObject  *object,
+			      glObjectEditor *editor)
 {
+	gdouble            w, h;
+	const GdkPixbuf   *pixbuf;
+	gdouble            image_w, image_h;
 	glTextNode        *filename;
-	gdouble            x, y, w, h;
 	glMerge           *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_size (editor, w, h);
+
+        pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
+        image_w = gdk_pixbuf_get_width (pixbuf);
+        image_h = gdk_pixbuf_get_height (pixbuf);
+	gl_object_editor_set_base_size (editor, image_w, image_h);
+
 	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
 	merge = gl_label_get_merge (GL_LABEL(object->parent));
-
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->pixmap_entry),
-					 file_changed_cb, view_image);
-	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->position),
-					 position_changed_cb, view_image);
-	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->size),
-					 size_changed_cb, view_image);
-
-	/* Update widgets in property dialog */
-
 	if ( filename != NULL ) {
-		gl_wdgt_image_select_set_data (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry),
-					       (merge != NULL),
-					       filename);
+		gl_object_editor_set_image (editor, (merge != NULL), filename);
 	}
-	gl_wdgt_image_select_set_field_defs (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry),
-					     merge);
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_image->private->position),
-				       x, y);
-	gl_wdgt_size_set_size (GL_WDGT_SIZE(view_image->private->size), w, h);
-
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_image->private->pixmap_entry),
-					   file_changed_cb, view_image);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_image->private->position),
-					   position_changed_cb, view_image);
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_image->private->size),
-					   size_changed_cb, view_image);
-
-	g_free (filename);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -557,29 +349,41 @@ update_dialog_cb (glLabelObject   *object,
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_from_move_cb (glLabelObject *object,
-			    gdouble        dx,
-			    gdouble        dy,
-			    glViewImage   *view_image)
+update_editor_from_move_cb (glLabelObject    *object,
+			    gdouble           dx,
+			    gdouble           dy,
+			    glObjectEditor   *editor)
 {
 	gdouble            x, y;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Query properties of object. */
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+	gl_label_object_get_position (object, &x, &y);
+	gl_object_editor_set_position (editor, x, y);
 
-	/* Block widget handlers to prevent recursion */
-	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->position),
-					 position_changed_cb, view_image);
+	gl_debug (DEBUG_VIEW, "END");
+}
 
-	/* Update widgets in property dialog */
-	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_image->private->position),
-				       x, y);
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+update_editor_from_label_cb (glLabel        *label,
+			     glObjectEditor *editor)
+{
+	gdouble            label_width, label_height;
+	glMerge           *merge;
 
-	/* Unblock widget handlers */
-	g_signal_handlers_unblock_by_func (G_OBJECT(view_image->private->position),
-					   position_changed_cb, view_image);
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
+
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -56,7 +56,7 @@ struct _glViewObjectClass {
 	 * Methods
 	 */
 
-	GtkWidget * (*construct_dialog) (glViewObject *view_object);
+	GtkWidget * (*construct_editor) (glViewObject *view_object);
 };
 
 
@@ -89,7 +89,7 @@ void             gl_view_object_show_highlight    (glViewObject         *view_ob
 
 void             gl_view_object_hide_highlight    (glViewObject         *view_object);
 
-void             gl_view_object_show_dialog       (glViewObject         *view_object);
+GtkWidget       *gl_view_object_get_editor        (glViewObject         *view_object);
 
 void             gl_view_object_select            (glViewObject         *view_object);
 
