@@ -22,8 +22,12 @@
 #ifndef __BC_POSTNET_H__
 #define __BC_POSTNET_H__
 
-#include <glib.h>
+#include "bc.h"
 
-glBarcode *gl_barcode_postnet_new (gchar * digits);
+G_BEGIN_DECLS
 
-#endif
+glBarcode *gl_barcode_postnet_new (gchar *digits);
+
+G_END_DECLS
+
+#endif /* __BC_POSTNET_H__ */

@@ -26,20 +26,32 @@
 #include "mdi-child.h"
 #include "gnome-recent-view.h"
 
-extern void     gl_file_new         (void);
+G_BEGIN_DECLS
 
-extern void     gl_file_open        (glMDIChild *active_child);
-extern gboolean gl_file_open_recent (GnomeRecentView *view,
-				     const gchar *filename,
-				     BonoboWindow *win);
-extern gboolean gl_file_open_real   (const gchar *filename,
-				     GtkWindow *win);
+void     gl_file_new         (void);
 
-extern gboolean gl_file_save        (glMDIChild *child);
-extern gboolean gl_file_save_as     (glMDIChild *child);
 
-extern void     gl_file_close       (GtkWidget *view);
-extern gboolean gl_file_close_all   (void);
-extern void     gl_file_exit        (void);
+void     gl_file_open        (glMDIChild      *active_child);
 
-#endif				/* __FILE_H__ */
+gboolean gl_file_open_recent (GnomeRecentView *view,
+			      const gchar     *filename,
+			      BonoboWindow    *win);
+
+gboolean gl_file_open_real   (const gchar     *filename,
+			      GtkWindow       *win);
+
+
+gboolean gl_file_save        (glMDIChild      *child);
+
+gboolean gl_file_save_as     (glMDIChild      *child);
+
+
+void     gl_file_close       (GtkWidget       *view);
+
+gboolean gl_file_close_all   (void);
+
+void     gl_file_exit        (void);
+
+G_END_DECLS
+
+#endif /* __FILE_H__ */

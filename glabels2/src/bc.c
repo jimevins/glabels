@@ -31,10 +31,10 @@
 /* Call appropriate barcode backend to create barcode in intermediate format.*/
 /*****************************************************************************/
 glBarcode *
-gl_barcode_new (glBarcodeStyle style,
-		gboolean text_flag,
-		gdouble scale,
-		gchar * digits)
+gl_barcode_new (glBarcodeStyle  style,
+		gboolean        text_flag,
+		gdouble         scale,
+		gchar          *digits)
 {
 	glBarcode *gbc;
 
@@ -47,7 +47,10 @@ gl_barcode_new (glBarcodeStyle style,
 
 	default:
 		/* Use the GNU barcode library backend */
-		gbc = gl_barcode_gnubarcode_new (style, text_flag, scale, digits);
+		gbc = gl_barcode_gnubarcode_new (style,
+						 text_flag,
+						 scale,
+						 digits);
 		break;
 
 	}
@@ -58,7 +61,7 @@ gl_barcode_new (glBarcodeStyle style,
 /* Free previously created barcode.                                          */
 /*****************************************************************************/
 void
-gl_barcode_free (glBarcode ** gbc)
+gl_barcode_free (glBarcode **gbc)
 {
 	GList *p;
 
@@ -155,7 +158,7 @@ gl_barcode_style_to_text (glBarcodeStyle style)
 /* Convert text to style.                                                    */
 /*****************************************************************************/
 glBarcodeStyle
-gl_barcode_text_to_style (const gchar * text)
+gl_barcode_text_to_style (const gchar *text)
 {
 
 	if (g_strcasecmp (text, "POSTNET") == 0) {

@@ -54,15 +54,15 @@ gint gl_debug_wdgt = 0;
 /* Print debugging information.                                             */
 /****************************************************************************/
 void
-gl_debug (gint section,
+gl_debug (gint   section,
 	  gchar *file,
-	  gint line,
-	  gchar* function,
-	  gchar* format,
+	  gint   line,
+	  gchar *function,
+	  gchar *format,
 	  ...)
 {
-	va_list args;
-	gchar *msg;
+	va_list  args;
+	gchar   *msg;
 
 	g_return_if_fail (format != NULL);
 

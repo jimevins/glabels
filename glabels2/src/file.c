@@ -41,8 +41,8 @@
 /*===========================================*/
 
 /* Saved state for new dialog */
-static gchar *page_size = NULL;
-static gchar *sheet_name = NULL;
+static gchar   *page_size   = NULL;
+static gchar   *sheet_name  = NULL;
 static gboolean rotate_flag = FALSE;
 
 /* Saved state of file selectors */
@@ -52,18 +52,21 @@ static gchar *save_path = NULL;
 /*===========================================*/
 /* Local function prototypes.                */
 /*===========================================*/
-static void create_new_dialog_widgets (GtkDialog *dlg);
-static void new_template_changed (glWdgtMediaSelect *select,
-				  gpointer data);
-static void new_response (GtkDialog *dlg,
-			  gint      response,
-			  gpointer  user_data);
-static void open_ok (GtkWidget * widget,
-		     GtkFileSelection * fsel);
+static void create_new_dialog_widgets (GtkDialog         *dlg);
+static void new_template_changed      (glWdgtMediaSelect *select,
+				       gpointer           data);
+static void new_response              (GtkDialog         *dlg,
+				       gint               response,
+				       gpointer           user_data);
+static void open_ok                   (GtkWidget         *widget,
+				       GtkFileSelection  *fsel);
 
-static void save_as_ok_cb (GtkWidget * widget, GtkFileSelection * fsel);
-static void save_as_cancel_cb (GtkWidget * widget, GtkFileSelection * fsel);
-static void save_as_destroy_cb (GtkWidget * widget, gboolean * destroy_flag);
+static void save_as_ok_cb             (GtkWidget         *widget,
+				       GtkFileSelection  *fsel);
+static void save_as_cancel_cb         (GtkWidget         *widget,
+				       GtkFileSelection  *fsel);
+static void save_as_destroy_cb        (GtkWidget         *widget,
+				       gboolean          *destroy_flag);
 
 
 /*****************************************************************************/
@@ -72,7 +75,7 @@ static void save_as_destroy_cb (GtkWidget * widget, gboolean * destroy_flag);
 void
 gl_file_new (void)
 {
-	GtkWidget *dlg;
+	GtkWidget    *dlg;
 	BonoboWindow *win = glabels_get_active_window ();
 
 	gl_debug (DEBUG_FILE, "START");
@@ -101,7 +104,7 @@ gl_file_new (void)
 /* PRIVATE.  Create widgets.                                                 */
 /*---------------------------------------------------------------------------*/
 static void
-create_new_dialog_widgets (GtkDialog * dlg)
+create_new_dialog_widgets (GtkDialog *dlg)
 {
 	GtkWidget *wframe, *wvbox, *template_entry, *rotate_sel;
 
@@ -158,18 +161,18 @@ create_new_dialog_widgets (GtkDialog * dlg)
 /* PRIVATE.  New template changed callback.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-new_template_changed (glWdgtMediaSelect * select,
-		      gpointer data)
+new_template_changed (glWdgtMediaSelect *select,
+		      gpointer           data)
 {
 	glWdgtRotateLabel *rotate_sel = GL_WDGT_ROTATE_LABEL (data);
-	gchar *name;
+	gchar             *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
 	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (select));
 
 	gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL (rotate_sel),
-					    name);
+						name);
 
 	g_free (name);
 
@@ -181,12 +184,12 @@ new_template_changed (glWdgtMediaSelect * select,
 /*---------------------------------------------------------------------------*/
 static void
 new_response (GtkDialog *dlg,
-	      gint      response,
-	      gpointer  user_data)
+	      gint       response,
+	      gpointer   user_data)
 {
-	GtkWidget *template_entry, *rotate_sel;
+	GtkWidget  *template_entry, *rotate_sel;
 	glMDIChild *new_child = NULL;
-	gint ret;
+	gint        ret;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -240,7 +243,7 @@ void
 gl_file_open (glMDIChild *active_child)
 {
 	GtkFileSelection *fsel;
-	BonoboWindow *app = glabels_get_active_window ();
+	BonoboWindow     *app = glabels_get_active_window ();
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -272,13 +275,13 @@ gl_file_open (glMDIChild *active_child)
 /* PRIVATE.  Open "O.K." button callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
-open_ok (GtkWidget * widget,
-	 GtkFileSelection * fsel)
+open_ok (GtkWidget        *widget,
+	 GtkFileSelection *fsel)
 {
-	gchar *filename;
-	GtkWidget *dlg;
-	glMDIChild *new_child = NULL;
-	gint ret;
+	gchar            *filename;
+	GtkWidget        *dlg;
+	glMDIChild       *new_child = NULL;
+	gint              ret;
 	GnomeRecentModel *recent;
 
 	gl_debug (DEBUG_FILE, "START");
@@ -350,10 +353,10 @@ gboolean
 gl_file_open_real (const gchar     *filename,
 		   GtkWindow       *win)
 {
-	gchar *abs_filename;
-	glMDIChild *new_child = NULL;
+	gchar            *abs_filename;
+	glMDIChild       *new_child = NULL;
 	GnomeRecentModel *recent;
-	gint ret;
+	gint              ret;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -424,10 +427,10 @@ gl_file_open_real (const gchar     *filename,
 gboolean
 gl_file_save (glMDIChild *child)
 {
-	glXMLLabelStatus status;
-	glLabel *label = NULL;
-	GError *error = NULL;
-	gchar *filename = NULL;
+	glXMLLabelStatus  status;
+	glLabel          *label = NULL;
+	GError           *error = NULL;
+	gchar            *filename = NULL;
 	GnomeRecentModel *recent;
 
 	gl_debug (DEBUG_FILE, "");
@@ -502,9 +505,9 @@ gboolean
 gl_file_save_as (glMDIChild *child)
 {
 	GtkFileSelection *fsel;
-	BonoboWindow *app = glabels_get_active_window ();
-	gboolean saved_flag = FALSE;
-	gboolean destroy_flag = FALSE;
+	BonoboWindow     *app = glabels_get_active_window ();
+	gboolean          saved_flag = FALSE;
+	gboolean          destroy_flag = FALSE;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -559,18 +562,18 @@ gl_file_save_as (glMDIChild *child)
 /* PRIVATE.  "Save As" ok button callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-save_as_ok_cb (GtkWidget * widget,
-	       GtkFileSelection * fsel)
+save_as_ok_cb (GtkWidget        *widget,
+	       GtkFileSelection *fsel)
 {
-	gchar *raw_filename, *filename;
-	GtkWidget *dlg;
-	glMDIChild *child;
-	glLabel *label;
-	glXMLLabelStatus status;
+	gchar            *raw_filename, *filename;
+	GtkWidget        *dlg;
+	glMDIChild       *child;
+	glLabel          *label;
+	glXMLLabelStatus  status;
 	GnomeRecentModel *recent;
-	gboolean *saved_flag;
-	gchar *primary_msg;
-	gboolean cancel_flag = FALSE;
+	gboolean         *saved_flag;
+	gchar            *primary_msg;
+	gboolean          cancel_flag = FALSE;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -683,8 +686,8 @@ save_as_ok_cb (GtkWidget * widget,
 /* PRIVATE.  "Save As" cancel button callback.                               */
 /*---------------------------------------------------------------------------*/
 static void
-save_as_cancel_cb (GtkWidget * widget,
-		   GtkFileSelection * fsel)
+save_as_cancel_cb (GtkWidget        *widget,
+		   GtkFileSelection *fsel)
 {
 	gboolean *saved_flag = g_object_get_data (G_OBJECT (fsel), "saved_flag");
 
@@ -699,8 +702,8 @@ save_as_cancel_cb (GtkWidget * widget,
 /* PRIVATE.  "Save As" destroy callback.                                     */
 /*---------------------------------------------------------------------------*/
 static void
-save_as_destroy_cb (GtkWidget * widget,
-		    gboolean * destroy_flag)
+save_as_destroy_cb (GtkWidget *widget,
+		    gboolean  *destroy_flag)
 {
 	*destroy_flag = TRUE;
 	gtk_main_quit ();
@@ -711,10 +714,10 @@ save_as_destroy_cb (GtkWidget * widget,
 /* "Close" menu callback.                                                    */
 /*****************************************************************************/
 void
-gl_file_close (GtkWidget * view)
+gl_file_close (GtkWidget *view)
 {
-	gint ret;
-	BonoboMDIChild* child;
+	gint            ret;
+	BonoboMDIChild *child;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -752,7 +755,6 @@ gboolean
 gl_file_close_all (void)
 {
 	gboolean ret;
-	gl_debug (DEBUG_FILE, "");
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -774,7 +776,7 @@ gl_file_close_all (void)
 void
 gl_file_exit (void)
 {
-	gl_debug (DEBUG_FILE, "");
+	gl_debug (DEBUG_FILE, "START");
 	
 	if (!gl_file_close_all ())
 		return;

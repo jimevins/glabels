@@ -25,11 +25,8 @@
  *  Copyright (C) 1998-1999 The Free Software Foundation
  *  Copyright (C) 2000-2002 Ximian Inc.
  *
- */
-
-/*
- * TODO:
- * - Clipping
+ *
+ *  Modified by Jim Evins <evins@snaught.com> for gLabels.
  */
 
 #include <config.h>

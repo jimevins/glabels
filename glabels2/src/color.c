@@ -27,7 +27,7 @@
 /* Apply given opacity to given color.                                       */
 /*****************************************************************************/
 guint
-gl_color_set_opacity (guint color,
+gl_color_set_opacity (guint   color,
 		      gdouble opacity)
 {
 	guint new_color;

@@ -33,30 +33,35 @@
 
 #include "bc.h"
 #include "bc-gnubarcode.h"
-
 #include "barcode.h"
 
 #include "debug.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
 #define SHRINK_AMOUNT 0.15	/* shrink bars to account for ink spreading */
 #define FONT_SCALE    0.95	/* Shrink fonts just a hair */
 
+/*===========================================*/
+/* Local function prototypes                 */
+/*===========================================*/
 static glBarcode *render_pass1 (struct Barcode_Item *bci,
-				gboolean text_flag,
-				gdouble scale);
+				gboolean             text_flag,
+				gdouble              scale);
 
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
 glBarcode *
-gl_barcode_gnubarcode_new (glBarcodeStyle style,
-			   gboolean text_flag,
-			   gdouble scale,
-			   gchar * digits)
+gl_barcode_gnubarcode_new (glBarcodeStyle  style,
+			   gboolean        text_flag,
+			   gdouble         scale,
+			   gchar          *digits)
 {
-	glBarcode *gbc;
+	glBarcode           *gbc;
 	struct Barcode_Item *bci;
-	gint flags;
+	gint                 flags;
 
 	bci = Barcode_Create (digits);
 
@@ -127,18 +132,18 @@ gl_barcode_gnubarcode_new (glBarcodeStyle style,
  *--------------------------------------------------------------------------*/
 static glBarcode *
 render_pass1 (struct Barcode_Item *bci,
-	      gboolean text_flag,
-	      gdouble scale)
+	      gboolean             text_flag,
+	      gdouble              scale)
 {
-	glBarcode *gbc;
+	glBarcode     *gbc;
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
-	gdouble x;
-	gint i, j, barlen;
-	gdouble f1, f2;
-	gint mode = '-';	/* text below bars */
-	gdouble x0, y0, yr;
-	guchar *p, c;
+	gdouble        x;
+	gint           i, j, barlen;
+	gdouble        f1, f2;
+	gint           mode = '-'; /* text below bars */
+	gdouble        x0, y0, yr;
+	guchar        *p, c;
 
 	/* First calculate barlen */
 	barlen = bci->partial[0] - '0';

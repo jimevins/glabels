@@ -24,6 +24,8 @@
 
 #include <glib.h>
 
+G_BEGIN_DECLS
+
 typedef enum {
 	GL_BARCODE_STYLE_POSTNET,
 	GL_BARCODE_STYLE_EAN,
@@ -58,16 +60,20 @@ typedef struct {
 #define GL_BARCODE_FONT_FAMILY      "Helvetica"
 #define GL_BARCODE_FONT_WEIGHT      GNOME_FONT_BOOK
 
-extern glBarcode *gl_barcode_new (glBarcodeStyle style,
-				  gboolean text_flag,
-				  gdouble scale,
-				  gchar * digits);
 
-extern void
- gl_barcode_free (glBarcode ** bc);
+glBarcode       *gl_barcode_new              (glBarcodeStyle style,
+					      gboolean       text_flag,
+					      gdouble        scale,
+					      gchar         *digits);
 
-extern gchar *gl_barcode_default_digits (glBarcodeStyle style);
-extern const gchar *gl_barcode_style_to_text (glBarcodeStyle style);
-extern glBarcodeStyle gl_barcode_text_to_style (const gchar * text);
+void             gl_barcode_free             (glBarcode **bc);
 
-#endif
+gchar           *gl_barcode_default_digits   (glBarcodeStyle style);
+
+const gchar     *gl_barcode_style_to_text    (glBarcodeStyle style);
+glBarcodeStyle   gl_barcode_text_to_style    (const gchar *text);
+
+G_END_DECLS
+
+#endif /* __BC_H__ */
+

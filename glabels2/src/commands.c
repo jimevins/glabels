@@ -47,8 +47,8 @@
 /****************************************************************************/
 void 
 gl_cmd_file_new (BonoboUIComponent *uic,
-		 gpointer user_data,
-		 const gchar* verbname)
+		 gpointer           user_data,
+		 const gchar       *verbname)
 {
 	gl_debug (DEBUG_COMMANDS, "verbname: %s", verbname);
 	
@@ -60,8 +60,8 @@ gl_cmd_file_new (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_open (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 {
 	BonoboMDIChild *active_child;
 	
@@ -77,8 +77,8 @@ gl_cmd_file_open (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_save (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 {
 	glMDIChild *active_child;
 	
@@ -96,8 +96,8 @@ gl_cmd_file_save (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_save_as (BonoboUIComponent *uic,
-		     gpointer user_data,
-		     const gchar* verbname)
+		     gpointer           user_data,
+		     const gchar       *verbname)
 {
 	glMDIChild *active_child;
 	
@@ -115,10 +115,10 @@ gl_cmd_file_save_as (BonoboUIComponent *uic,
 /****************************************************************************/
 void
 gl_cmd_file_print (BonoboUIComponent *uic,
-		   gpointer user_data,
-		   const gchar* verbname)
+		   gpointer           user_data,
+		   const gchar       *verbname)
 {
-	glLabel *label = glabels_get_active_label ();
+	glLabel      *label = glabels_get_active_label ();
 	BonoboWindow *win = glabels_get_active_window ();
 	
 	gl_debug (DEBUG_COMMANDS, "");
@@ -135,14 +135,14 @@ gl_cmd_file_print (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_close (BonoboUIComponent *uic,
-		   gpointer user_data,
-		   const gchar* verbname)
+		   gpointer           user_data,
+		   const gchar       *verbname)
 {
 	GtkWidget *active_view;
 	
 	gl_debug (DEBUG_COMMANDS, "");
 
-	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi));
+	active_view = GTK_WIDGET (glabels_get_active_view ());
 	
 	if (active_view == NULL)
 		return;
@@ -159,8 +159,8 @@ gl_cmd_file_close (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_close_all (BonoboUIComponent *uic,
-		       gpointer user_data,
-		       const gchar* verbname)
+		       gpointer           user_data,
+		       const gchar       *verbname)
 {
 	gl_debug (DEBUG_COMMANDS, "");
 
@@ -176,8 +176,8 @@ gl_cmd_file_close_all (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_file_exit (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 {
 	gl_debug (DEBUG_COMMANDS, "");
 
@@ -194,12 +194,12 @@ gl_cmd_file_exit (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_edit_cut (BonoboUIComponent *uic,
-		 gpointer user_data,
-		 const gchar* verbname)
+		 gpointer           user_data,
+		 const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view = GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi)));
+	active_view = glabels_get_active_view ();
 	g_return_if_fail (active_view);
 	
 	gl_view_cut (active_view); 
@@ -210,12 +210,12 @@ gl_cmd_edit_cut (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_edit_copy (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view = GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi)));
+	active_view = glabels_get_active_view ();
 	g_return_if_fail (active_view);
 	
 	gl_view_copy (active_view); 
@@ -226,12 +226,12 @@ gl_cmd_edit_copy (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_edit_paste (BonoboUIComponent *uic,
-		   gpointer user_data,
-		   const gchar* verbname)
+		   gpointer           user_data,
+		   const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view = GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi)));
+	active_view = glabels_get_active_view ();
 	g_return_if_fail (active_view);
 	
 	gl_view_paste (active_view); 
@@ -243,12 +243,12 @@ gl_cmd_edit_paste (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_edit_delete (BonoboUIComponent *uic,
-		    gpointer user_data,
-		    const gchar* verbname)
+		    gpointer           user_data,
+		    const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view = GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi)));
+	active_view = glabels_get_active_view ();
 	g_return_if_fail (active_view);
 	
 	gl_view_delete_selection (active_view); 
@@ -260,13 +260,12 @@ gl_cmd_edit_delete (BonoboUIComponent *uic,
 /****************************************************************************/
 void
 gl_cmd_edit_select_all (BonoboUIComponent *uic,
-			gpointer user_data,
-			const gchar* verbname)
+			gpointer           user_data,
+			const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view =
-		GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI(glabels_mdi)));
+	active_view = glabels_get_active_view ();
 
 	g_return_if_fail (active_view);
 	
@@ -278,13 +277,12 @@ gl_cmd_edit_select_all (BonoboUIComponent *uic,
 /****************************************************************************/
 void
 gl_cmd_edit_unselect_all (BonoboUIComponent *uic,
-			  gpointer user_data,
-			  const gchar* verbname)
+			  gpointer           user_data,
+			  const gchar       *verbname)
 {
 	glView* active_view;
 
-	active_view =
-		GL_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI(glabels_mdi)));
+	active_view = glabels_get_active_view ();
 
 	g_return_if_fail (active_view);
 	
@@ -296,8 +294,8 @@ gl_cmd_edit_unselect_all (BonoboUIComponent *uic,
 /****************************************************************************/
 void
 gl_cmd_settings_preferences (BonoboUIComponent *uic,
-			     gpointer user_data,
-			     const gchar* verbname)
+			     gpointer           user_data,
+			     const gchar       *verbname)
 {
 	static GtkWidget *dlg = NULL;
 
@@ -325,8 +323,8 @@ gl_cmd_settings_preferences (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_help_contents (BonoboUIComponent *uic,
-		      gpointer user_data,
-		      const gchar* verbname)
+		      gpointer           user_data,
+		      const gchar       *verbname)
 {
 	GError *error = NULL;
 
@@ -347,11 +345,11 @@ gl_cmd_help_contents (BonoboUIComponent *uic,
 /****************************************************************************/
 void 
 gl_cmd_help_about (BonoboUIComponent *uic,
-		   gpointer user_data,
-		   const gchar* verbname)
+		   gpointer           user_data,
+		   const gchar       *verbname)
 {
 	static GtkWidget *about = NULL;
-	GdkPixbuf* pixbuf = NULL;
+	GdkPixbuf        *pixbuf = NULL;
 	
 	gchar *copy_text = "Copyright 2001-2002 Jim Evins";
 	gchar *about_text =

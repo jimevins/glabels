@@ -34,6 +34,19 @@
 
 #include "debug.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
+#define POSTNET_BAR_WIDTH      1.25
+#define POSTNET_FULLBAR_HEIGHT 9.00
+#define POSTNET_HALFBAR_HEIGHT 3.50
+#define POSTNET_BAR_PITCH      3.25
+#define POSTNET_HORIZ_MARGIN   9.00
+#define POSTNET_VERT_MARGIN    3.00
+
+/*===========================================*/
+/* Private globals                           */
+/*===========================================*/
 static gchar *symbols[] = {
 	/* 0 */ "11000",
 	/* 1 */ "00011",
@@ -49,25 +62,22 @@ static gchar *symbols[] = {
 
 static gchar *frame_symbol = "1";
 
-#define POSTNET_BAR_WIDTH      1.25
-#define POSTNET_FULLBAR_HEIGHT 9.00
-#define POSTNET_HALFBAR_HEIGHT 3.50
-#define POSTNET_BAR_PITCH      3.25
-#define POSTNET_HORIZ_MARGIN   9.00
-#define POSTNET_VERT_MARGIN    3.00
+/*===========================================*/
+/* Local function prototypes                 */
+/*===========================================*/
+static gchar *postnet_code (gchar *digits);
 
-static gchar *postnet_code (gchar * digits);
 
 /****************************************************************************/
 /* Generate list of lines that form the barcode for the given digits.       */
 /****************************************************************************/
 glBarcode *
-gl_barcode_postnet_new (gchar * digits)
+gl_barcode_postnet_new (gchar *digits)
 {
-	gchar *code, *p;
-	glBarcode *gbc;
+	gchar         *code, *p;
+	glBarcode     *gbc;
 	glBarcodeLine *line;
-	gdouble x;
+	gdouble        x;
 
 	gbc = g_new0 (glBarcode, 1);
 
@@ -111,13 +121,13 @@ gl_barcode_postnet_new (gchar * digits)
 /* PRIVATE.  Generate string of symbols, representing barcode.              */
 /*--------------------------------------------------------------------------*/
 static gchar *
-postnet_code (gchar * digits)
+postnet_code (gchar *digits)
 {
-	gchar *p;
-	gint len;
-	gint d, sum;
+	gchar   *p;
+	gint     len;
+	gint     d, sum;
 	GString *code;
-	gchar *ret;
+	gchar   *ret;
 
 	/* Left frame bar */
 	code = g_string_new (frame_symbol);

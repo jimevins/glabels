@@ -38,6 +38,8 @@
 #include "label.h"
 #include "view.h" 
 
+G_BEGIN_DECLS
+
 extern glMDI*   glabels_mdi;
 extern gboolean glabels_close_x_button_pressed;
 extern gboolean glabels_exit_button_pressed;
@@ -47,6 +49,7 @@ glLabel* 		glabels_get_active_label 		(void);
 glView* 		glabels_get_active_view 		(void);
 GList* 			glabels_get_top_windows			(void);
 
+G_END_DECLS
 
 #endif /* __GLABELS_H__ */
 

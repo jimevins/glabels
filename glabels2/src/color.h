@@ -25,6 +25,8 @@
 
 #include <libgnomecanvas/gnome-canvas.h>
 
+G_BEGIN_DECLS
+
 #define GL_COLOR(r,g,b)     GNOME_CANVAS_COLOR(r,g,b)
 #define GL_COLOR_A(r,g,b,a) GNOME_CANVAS_COLOR_A(r,g,b,a)
 
@@ -38,7 +40,8 @@
 #define GL_COLOR_F_BLUE(x)  ( (((x)>>8)  & 0xff) / 255.0 )
 #define GL_COLOR_F_ALPHA(x) ( ( (x)      & 0xff) / 255.0 )
 
-extern guint gl_color_set_opacity (guint color, gdouble opacity);
+guint gl_color_set_opacity (guint color, gdouble opacity);
 
+G_END_DECLS
 
 #endif /* __COLOR_H__ */

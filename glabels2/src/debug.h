@@ -30,6 +30,8 @@
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
+G_BEGIN_DECLS
+
 typedef enum {
 	GL_DEBUG_VIEW,
 	GL_DEBUG_ITEM,
@@ -88,7 +90,9 @@ extern gint gl_debug_wdgt;
 #define	DEBUG_MINI_PREVIEW	GL_DEBUG_MINI_PREVIEW,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_WDGT	GL_DEBUG_WDGT,    __FILE__, __LINE__, __FUNCTION__
 
-extern void gl_debug (gint section, gchar *file,
-		      gint line, gchar* function, gchar* format, ...);
+void gl_debug (gint section, gchar *file,
+	       gint line, gchar* function, gchar* format, ...);
+
+G_END_DECLS
 
 #endif /* __DEBUG_H__ */

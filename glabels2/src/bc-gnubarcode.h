@@ -24,9 +24,13 @@
 
 #include "bc.h"
 
-extern glBarcode *gl_barcode_gnubarcode_new (glBarcodeStyle style,
-					     gboolean text_flag,
-					     gdouble scale,
-					     gchar * digits);
+G_BEGIN_DECLS
 
-#endif
+glBarcode *gl_barcode_gnubarcode_new (glBarcodeStyle  style,
+				      gboolean        text_flag,
+				      gdouble         scale,
+				      gchar          *digits);
+
+G_END_DECLS
+
+#endif /* __BC_GNUBARCODE_H__ */

@@ -112,12 +112,12 @@ static const struct poptOption options [] =
 int
 main (int argc, char **argv)
 {
-	GValue value = { 0, };
-    	GnomeProgram *program;
-	poptContext ctx;
-	char **args;
-	GList *file_list = NULL, *p;
-	gint i;
+	GValue         value = { 0, };
+    	GnomeProgram  *program;
+	poptContext    ctx;
+	char         **args;
+	GList         *file_list = NULL, *p;
+	gint           i;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");

@@ -25,87 +25,90 @@
 
 #include <bonobo/bonobo-ui-component.h>
 
-extern void gl_cmd_file_new           (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+G_BEGIN_DECLS
 
-extern void gl_cmd_file_open          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_new             (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_save          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_open            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_save_as       (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_save            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_print         (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_save_as         (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_print_preview (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_print           (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_close         (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_print_preview   (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_close_all     (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_close           (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_file_exit          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_cmd_file_close_all       (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-
-extern void gl_cmd_edit_undo          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_redo          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_cut           (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_copy          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_paste         (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_delete        (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_select_all    (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
-
-extern void gl_cmd_edit_unselect_all    (BonoboUIComponent *uic,
-					 gpointer user_data,
-					 const gchar* verbname);
+void gl_cmd_file_exit            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
 
-extern void gl_cmd_settings_preferences (BonoboUIComponent *uic,
-					 gpointer user_data,
-					 const gchar* verbname);
+void gl_cmd_edit_undo            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_redo            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_cut             (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_copy            (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_paste           (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_delete          (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_select_all      (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_edit_unselect_all    (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
 
-extern void gl_cmd_help_contents 	(BonoboUIComponent *uic,
-					 gpointer user_data,
-					 const gchar* verbname);
+void gl_cmd_settings_preferences (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
 
-extern void gl_cmd_help_about 	        (BonoboUIComponent *uic,
-					 gpointer user_data,
-					 const gchar* verbname);
+
+void gl_cmd_help_contents        (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+
+void gl_cmd_help_about 	         (BonoboUIComponent *uic,
+				  gpointer           user_data,
+				  const gchar       *verbname);
+G_END_DECLS
 
 #endif /* __COMMANDS_H__ */ 

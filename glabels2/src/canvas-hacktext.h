@@ -10,6 +10,8 @@
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Raph Levien <raph@acm.org>
+ *
+ * Modified by Jim Evins <evins@snaught.com> for gLabels.
  */
 
 #include <glib.h>

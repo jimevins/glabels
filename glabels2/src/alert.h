@@ -25,11 +25,15 @@
 
 #include <gtk/gtk.h>
 
-extern GtkWidget* gl_alert_dialog_new     (GtkWindow      *parent,
-					   GtkDialogFlags  flags,
-					   GtkMessageType  type,
-					   GtkButtonsType  buttons,
-					   const gchar    *primary_text,
-					   const gchar    *secondary_text);
+G_BEGIN_DECLS
+
+GtkWidget* gl_alert_dialog_new     (GtkWindow      *parent,
+				    GtkDialogFlags  flags,
+				    GtkMessageType  type,
+				    GtkButtonsType  buttons,
+				    const gchar    *primary_text,
+				    const gchar    *secondary_text);
+
+G_END_DECLS
 
 #endif /* __ALERT_H__ */

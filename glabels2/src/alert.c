@@ -38,10 +38,10 @@ GtkWidget* gl_alert_dialog_new      (GtkWindow      *parent,
 				     const gchar    *primary_text,
 				     const gchar    *secondary_text)
 {
-	GtkWidget *dialog, *hbox, *image, *label;
-	gchar *label_text;
-	const gchar *stock_id = NULL;
-	GtkStockItem item;
+	GtkWidget    *dialog, *hbox, *image, *label;
+	gchar        *label_text;
+	const gchar  *stock_id = NULL;
+	GtkStockItem  item;
   
 	/* Create bare dialog */
 	dialog = gtk_dialog_new_with_buttons ("", parent, flags, NULL);
