@@ -6,8 +6,11 @@ glabels_pixmaps_DATA = \
 	glabels-icon.png	\
 	glabels-logo.png	\
 	glabels-about-logo.png	\
+	ex-rect-size.png	\
+	ex-round-size.png	\
+	ex-cd-size.png		\
 	ex-1layout.png		\
-	ex-2layouts.png
+	ex-2layouts.png		
 
 glabels_mime_icondir = $(datadir)/pixmaps
 

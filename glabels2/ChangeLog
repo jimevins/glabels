@@ -1,3 +1,24 @@
+2004-01-03  Jim Evins  <evins@snaught.com>
+
+	* pixmaps/ex-rect-size.png:
+	* pixmaps/ex-round-size.png:
+	* pixmaps/ex-cd-size.png:
+	* pixmaps/Makefile.am:
+		Added ex-rect-size.png, ex-round-size.png, and ex-cd-size.png image
+		files to be used as illustrations/examples in the template-designer.
+
+	* src/template-designer.c: (construct_rect_size_page),
+	(construct_round_size_page), (construct_cd_size_page),
+	(construct_nlayouts_page), (rect_size_page_prepare_cb),
+	(round_size_page_prepare_cb), (cd_size_page_prepare_cb),
+	(layout_page_prepare_cb), (build_template):
+	* src/template-designer.glade:
+		Added illustrations for rectangle, round, and cd label size pages.
+		Added margin spinboxes to these pages, and now add a margin markup
+		to the constructed template.  Added realistic default values for
+		some of the size spinboxes.  Cleaned up the code for setting spinbox
+		ranges on the layouts page.
+
 2004-01-02  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-size-page.c: (h_spin_cb):

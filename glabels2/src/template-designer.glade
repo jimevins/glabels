@@ -800,7 +800,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <child>
 			<widget class="GtkTable" id="table4">
 			  <property name="visible">True</property>
-			  <property name="n_rows">4</property>
+			  <property name="n_rows">5</property>
 			  <property name="n_columns">3</property>
 			  <property name="homogeneous">False</property>
 			  <property name="row_spacing">12</property>
@@ -809,7 +809,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label83">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Width:</property>
+			      <property name="label" translatable="yes">1. Width:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -833,7 +833,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label84">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Height:</property>
+			      <property name="label" translatable="yes">2. Height:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -857,7 +857,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label85">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Round (radius of corner):</property>
+			      <property name="label" translatable="yes">3. Round (radius of corner):</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -881,7 +881,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label86">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Waste (overprint allowed):</property>
+			      <property name="label" translatable="yes">4. Waste (overprint allowed):</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1081,6 +1081,75 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="y_options"></property>
 			    </packing>
 			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label101">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">5. Margin</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">4</property>
+			      <property name="bottom_attach">5</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="rect_margin_units_label">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">inches</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">2</property>
+			      <property name="right_attach">3</property>
+			      <property name="top_attach">4</property>
+			      <property name="bottom_attach">5</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkSpinButton" id="rect_margin_spin">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="climb_rate">0.01</property>
+			      <property name="digits">0</property>
+			      <property name="numeric">False</property>
+			      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
+			      <property name="snap_to_ticks">False</property>
+			      <property name="wrap">False</property>
+			      <property name="adjustment">0 0 100 1 10 10</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">4</property>
+			      <property name="bottom_attach">5</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -1170,7 +1239,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <child>
 			<widget class="GtkTable" id="table8">
 			  <property name="visible">True</property>
-			  <property name="n_rows">2</property>
+			  <property name="n_rows">3</property>
 			  <property name="n_columns">3</property>
 			  <property name="homogeneous">False</property>
 			  <property name="row_spacing">12</property>
@@ -1179,7 +1248,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label91">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Radius:</property>
+			      <property name="label" translatable="yes">1. Radius:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1203,7 +1272,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label92">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Waste (overprint allowed):</property>
+			      <property name="label" translatable="yes">2. Waste (overprint allowed):</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1313,6 +1382,75 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="y_options"></property>
 			    </packing>
 			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label103">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">3. Margin</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">2</property>
+			      <property name="bottom_attach">3</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="round_margin_units_label">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">inches</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">2</property>
+			      <property name="right_attach">3</property>
+			      <property name="top_attach">2</property>
+			      <property name="bottom_attach">3</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkSpinButton" id="round_margin_spin">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="climb_rate">0.01</property>
+			      <property name="digits">0</property>
+			      <property name="numeric">False</property>
+			      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
+			      <property name="snap_to_ticks">False</property>
+			      <property name="wrap">False</property>
+			      <property name="adjustment">0 0 100 1 10 10</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">2</property>
+			      <property name="bottom_attach">3</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -1402,7 +1540,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <child>
 			<widget class="GtkTable" id="table7">
 			  <property name="visible">True</property>
-			  <property name="n_rows">5</property>
+			  <property name="n_rows">6</property>
 			  <property name="n_columns">3</property>
 			  <property name="homogeneous">False</property>
 			  <property name="row_spacing">12</property>
@@ -1411,7 +1549,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label95">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Outer radius:</property>
+			      <property name="label" translatable="yes">1. Outer radius:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1435,7 +1573,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label96">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Inner radius:</property>
+			      <property name="label" translatable="yes">2. Inner radius:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1459,7 +1597,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label97">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Clipping width:</property>
+			      <property name="label" translatable="yes">3. Clipping width:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1483,7 +1621,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label98">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Clipping height:</property>
+			      <property name="label" translatable="yes">4. Clipping height:</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1507,7 +1645,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			  <child>
 			    <widget class="GtkLabel" id="label99">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Waste (overprint allowed):</property>
+			      <property name="label" translatable="yes">5. Waste (overprint allowed):</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1642,7 +1780,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
@@ -1666,7 +1804,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
@@ -1690,7 +1828,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
@@ -1714,7 +1852,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
@@ -1738,7 +1876,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
@@ -1749,6 +1887,75 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 			      <property name="top_attach">4</property>
 			      <property name="bottom_attach">5</property>
 			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label105">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">6. Margin</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">5</property>
+			      <property name="bottom_attach">6</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="cd_margin_units_label">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">inches</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">2</property>
+			      <property name="right_attach">3</property>
+			      <property name="top_attach">5</property>
+			      <property name="bottom_attach">6</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkSpinButton" id="cd_margin_spin">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="climb_rate">0.01</property>
+			      <property name="digits">0</property>
+			      <property name="numeric">False</property>
+			      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
+			      <property name="snap_to_ticks">False</property>
+			      <property name="wrap">False</property>
+			      <property name="adjustment">0 0 100 1 10 10</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">5</property>
+			      <property name="bottom_attach">6</property>
 			      <property name="y_options"></property>
 			    </packing>
 			  </child>
