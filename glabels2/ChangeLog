@@ -1,6 +1,31 @@
 2004-07-11  Jim Evins  <evins@snaught.com>
 
 	* data/glabels-2.0.dtd:
+	* src/label-text.c: (gl_label_text_instance_init), (copy),
+	(gl_label_text_set_auto_shrink), (gl_label_text_get_auto_shrink):
+	* src/label-text.h:
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_text_auto_shrink),
+	(gl_object_editor_get_text_auto_shrink):
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/print.c: (draw_text_object):
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_create_object_text):
+		Added option to allow document merge to auto shrink text size to fit
+		within the text box.  The code in print.c that actually shrinks the
+		text is loosely based on a patch submitted by Mark Harrison
+		<mark.harrison@velocitynet.com.au>.  This addresses feature request
+		#661421.
+	
+2004-07-11  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
 	* libglabels/template.c: (gl_template_rect_label_type_new),
 	(gl_template_round_label_type_new),
 	(gl_template_cd_label_type_new), (gl_template_label_type_dup),

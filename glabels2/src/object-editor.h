@@ -210,6 +210,11 @@ void        gl_object_editor_set_text_color       (glObjectEditor      *editor,
 
 guint       gl_object_editor_get_text_color       (glObjectEditor      *editor);
 
+void        gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
+						   gboolean             auto_shrink);
+
+gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor);
+
 
 /*
  * Edit Text Page

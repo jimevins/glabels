@@ -33,13 +33,14 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define DEFAULT_FONT_FAMILY      "Sans"
-#define DEFAULT_FONT_SIZE        14.0
-#define DEFAULT_FONT_WEIGHT      GNOME_FONT_BOOK
-#define DEFAULT_FONT_ITALIC_FLAG FALSE
-#define DEFAULT_JUST             GTK_JUSTIFY_LEFT
-#define DEFAULT_COLOR            GNOME_CANVAS_COLOR (0,0,0)
+#define DEFAULT_FONT_FAMILY       "Sans"
+#define DEFAULT_FONT_SIZE         14.0
+#define DEFAULT_FONT_WEIGHT       GNOME_FONT_BOOK
+#define DEFAULT_FONT_ITALIC_FLAG  FALSE
+#define DEFAULT_JUST              GTK_JUSTIFY_LEFT
+#define DEFAULT_COLOR             GNOME_CANVAS_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING 1.0
+#define DEFAULT_AUTO_SHRINK       FALSE
 
 /*========================================================*/
 /* Private types.                                         */
@@ -56,6 +57,7 @@ struct _glLabelTextPrivate {
 	GtkJustification just;
 	guint            color;
 	gdouble          line_spacing;
+	gboolean         auto_shrink;
 };
 
 /*========================================================*/
@@ -194,6 +196,7 @@ gl_label_text_instance_init (glLabelText *ltext)
 	ltext->private->just             = DEFAULT_JUST;
 	ltext->private->color            = DEFAULT_COLOR;
 	ltext->private->line_spacing     = DEFAULT_TEXT_LINE_SPACING;
+	ltext->private->auto_shrink      = DEFAULT_AUTO_SHRINK;
 
 	g_signal_connect (G_OBJECT(ltext->private->buffer), "changed",
 			  G_CALLBACK(buffer_changed_cb), ltext);
@@ -256,6 +259,7 @@ copy (glLabelObject *dst_object,
 	new_ltext->private->color            = ltext->private->color;
 	new_ltext->private->just             = ltext->private->just;
 	new_ltext->private->line_spacing     = ltext->private->line_spacing;
+	new_ltext->private->auto_shrink      = ltext->private->auto_shrink;
 
 	gl_text_node_lines_free (&lines);
 
@@ -694,5 +698,39 @@ get_text_color (glLabelObject *object)
 	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), 0);
 
 	return ltext->private->color;
+}
+
+/*****************************************************************************/
+/* Set auto shrink flag.                                                     */
+/*****************************************************************************/
+void
+gl_label_text_set_auto_shrink (glLabelText      *ltext,
+			       gboolean          auto_shrink)
+{
+	gl_debug (DEBUG_LABEL, "BEGIN");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->auto_shrink != auto_shrink) {
+
+		ltext->private->auto_shrink = auto_shrink;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Query auto shrink flag.
+/*****************************************************************************/
+gboolean
+gl_label_text_get_auto_shrink (glLabelText      *ltext)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), 0);
+
+	return ltext->private->auto_shrink;
 }
 

@@ -721,22 +721,23 @@ draw_text_object (PrintInfo     *pi,
 		  glLabelText   *object,
 		  glMergeRecord *record)
 {
-	GnomeFont *font;
-	gchar **line;
-	gint i;
-	gdouble x_offset, y_offset, w, object_w, object_h;
-	gchar *text;
-	GList *lines;
-	gchar *font_family;
-	gdouble font_size;
-	GnomeFontWeight font_weight;
-	gboolean font_italic_flag;
-	guint color;
+	GnomeFont       *font;
+	gchar          **line;
+	gint             i;
+	gdouble          x_offset, y_offset, w, object_w, object_h;
+	gchar           *text;
+	GList           *lines;
+	gchar           *font_family;
+	gdouble          font_size;
+	GnomeFontWeight  font_weight;
+	gboolean         font_italic_flag;
+	guint            color;
 	GtkJustification just;
-	GnomeGlyphList *glyphlist;
-	ArtDRect bbox;
-	gdouble affine[6];
-	gdouble text_line_spacing;
+	gboolean         auto_shrink;
+	GnomeGlyphList  *glyphlist;
+	ArtDRect         bbox;
+	gdouble          affine[6];
+	gdouble          text_line_spacing;
 
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -749,7 +750,53 @@ draw_text_object (PrintInfo     *pi,
 	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object));
 	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object));
 	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
-	text_line_spacing = gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
+	text_line_spacing =
+		gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
+	auto_shrink = gl_label_text_get_auto_shrink (object);
+
+	text = gl_text_node_lines_expand (lines, record);
+	line = g_strsplit (text, "\n", -1);
+	g_free (text);
+
+	art_affine_identity (affine);
+
+	if (record && auto_shrink) {
+		/* auto shrink text size to keep within text box limits. */
+		for (i = 0; line[i] != NULL; i++) {
+
+			font = gnome_font_find_closest_from_weight_slant (font_family,
+									  font_weight,
+									  font_italic_flag,
+									  font_size);
+			glyphlist = gnome_glyphlist_from_text_dumb (font,
+								    color,
+								    0.0, 0.0,
+								    line[i]);
+			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+			w = bbox.x1;
+
+			/* If width is too large, iteratively shrink font_size until this
+			   line fits the width, or until the font size is ridiculously
+			   small. */
+			while ( (w > object_w) && (font_size >= 1.0) ) {
+
+				font_size -= 0.5;
+
+				font = gnome_font_find_closest_from_weight_slant (
+					font_family,
+					font_weight,
+					font_italic_flag,
+					font_size);
+				glyphlist = gnome_glyphlist_from_text_dumb (font,
+									    color,
+									    0.0, 0.0,
+									    line[i]);
+				gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+				w = bbox.x1;
+			}
+		}
+
+	}
 
 	font = gnome_font_find_closest_from_weight_slant (
                                        font_family,
@@ -763,12 +810,6 @@ draw_text_object (PrintInfo     *pi,
 				 GL_COLOR_F_GREEN (color),
 				 GL_COLOR_F_BLUE (color));
 	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (color));
-
-	text = gl_text_node_lines_expand (lines, record);
-	line = g_strsplit (text, "\n", -1);
-	g_free (text);
-
-	art_affine_identity (affine);
 
 	for (i = 0; line[i] != NULL; i++) {
 

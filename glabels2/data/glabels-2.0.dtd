@@ -217,6 +217,7 @@
                  %position_attrs;
                  %size_attrs;
                  justify         %JUSTIFY_TYPE;          #REQUIRED
+                 auto_shrink     %BOOLEAN_TYPE;          #IMPLIED
                  %affine_attrs;
                  %shadow_attrs;
 >

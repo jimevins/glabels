@@ -88,6 +88,8 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "text_right_toggle");
 	editor->priv->text_line_spacing_spin =
 		glade_xml_get_widget (editor->priv->gui, "text_line_spacing_spin");
+	editor->priv->text_auto_shrink_check =
+		glade_xml_get_widget (editor->priv->gui, "text_auto_shrink_check");
 
 	/* Load family names */
 	family_names = gnome_font_family_list ();
@@ -150,6 +152,11 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 
 	g_signal_connect_swapped (G_OBJECT (editor->priv->text_line_spacing_spin),
 				  "changed",
+				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
+
+	g_signal_connect_swapped (G_OBJECT (editor->priv->text_auto_shrink_check),
+				  "toggled",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 
@@ -544,5 +551,45 @@ gl_object_editor_get_text_line_spacing (glObjectEditor      *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 
 	return text_line_spacing;
+}
+
+/*****************************************************************************/
+/* Set auto shrink checkbox.                                                 */
+/*****************************************************************************/
+void
+gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
+				       gboolean             auto_shrink)
+{
+	gl_debug (DEBUG_EDITOR, "START");
+
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_auto_shrink_check),
+					 gl_object_editor_changed_cb,
+					 editor);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_auto_shrink_check),
+                                      auto_shrink);
+
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_auto_shrink_check),
+					   gl_object_editor_changed_cb,
+					   editor);
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*****************************************************************************/
+/* Query auto shrink checkbox.                                               */
+/*****************************************************************************/
+gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor)
+{
+	gboolean auto_shrink;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+	auto_shrink = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->text_auto_shrink_check));
+
+	gl_debug (DEBUG_EDITOR, "END");
+
+	return auto_shrink;
 }
 

@@ -411,6 +411,7 @@ xml_parse_object_text (xmlNodePtr  node,
 	gdouble           w, h;
 	gchar            *string;
 	GtkJustification  just;
+	gboolean          auto_shrink;
 	gdouble           affine[6];
 	xmlNodePtr        child;
 
@@ -433,6 +434,10 @@ xml_parse_object_text (xmlNodePtr  node,
 	just = gl_util_string_to_just (string);
 	g_free (string);
 	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), just);
+
+	/* auto_shrink attr */
+	auto_shrink = gl_xml_get_prop_boolean (node, "auto_shrink", FALSE);
+	gl_label_text_set_auto_shrink (GL_LABEL_TEXT(object), auto_shrink);
 
 	/* affine attrs */
 	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
@@ -1099,6 +1104,7 @@ xml_create_object_text (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           w, h;
 	GtkJustification  just;
+	gboolean          auto_shrink;
 	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -1118,6 +1124,10 @@ xml_create_object_text (xmlNodePtr     root,
 	/* justify attr */
 	just = gl_label_object_get_text_alignment (object);
 	xmlSetProp (node, "justify", gl_util_just_to_string (just));
+
+	/* auto_shrink attr */
+	auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
+	gl_xml_set_prop_boolean (node, "auto_shrink", auto_shrink);
 
 	/* affine attrs */
 	gl_label_object_get_affine (object, affine);

@@ -66,6 +66,11 @@ void           gl_label_text_get_box      (glLabelText      *ltext,
 					   gdouble          *w,
 					   gdouble          *h);
 
+void           gl_label_text_set_auto_shrink (glLabelText      *ltext,
+					      gboolean          auto_shrink);
+gboolean       gl_label_text_get_auto_shrink (glLabelText      *ltext);
+
+
 G_END_DECLS
 
 #endif /* __LABEL_TEXT_H__ */

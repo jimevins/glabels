@@ -377,6 +377,11 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->edit_key_combo, merge != NULL);
 	}
  
+	if (editor->priv->text_auto_shrink_check) {
+		gtk_widget_set_sensitive (editor->priv->text_auto_shrink_check,
+					  merge != NULL);
+	}
+ 
 	if (editor->priv->edit_insert_field_button) {
 		gtk_widget_set_sensitive (editor->priv->edit_insert_field_button,
 					  merge != NULL);

@@ -312,6 +312,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	guint              color;
 	GtkJustification   just;
 	gdouble            text_line_spacing;
+	gboolean           auto_shrink;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -330,6 +331,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	color = gl_object_editor_get_text_color (editor);
 	just = gl_object_editor_get_text_alignment (editor);
 	text_line_spacing = (gdouble) gl_object_editor_get_text_line_spacing (editor);
+	auto_shrink = gl_object_editor_get_text_auto_shrink (editor);
 
 	gl_label_object_set_position (object, x, y);
 	gl_label_object_set_font_family (object, font_family);
@@ -339,6 +341,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_object_set_text_color (object, color);
 	gl_label_object_set_text_alignment (object, just);
 	gl_label_object_set_text_line_spacing (object, text_line_spacing);
+	gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink);
 
 	g_free (font_family);
 
@@ -399,6 +402,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	guint              color;
 	GtkJustification   just;
 	gdouble            text_line_spacing;
+	gboolean           auto_shrink;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -412,6 +416,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	color            = gl_label_object_get_text_color (object);
 	just             = gl_label_object_get_text_alignment (object);
 	text_line_spacing = gl_label_object_get_text_line_spacing (object);
+	auto_shrink      = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
 
 	gl_object_editor_set_font_family (editor, font_family);
 	gl_object_editor_set_font_size (editor, font_size);
@@ -420,6 +425,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_text_color (editor, color);
 	gl_object_editor_set_text_alignment (editor, just);
 	gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
+	gl_object_editor_set_text_auto_shrink (editor, auto_shrink);
 
 	g_free (font_family);
 
