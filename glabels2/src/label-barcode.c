@@ -21,7 +21,6 @@
  */
 
 #include <glib.h>
-#include <libgnomeprint/gnome-glyphlist.h>
 
 #include "label-barcode.h"
 

@@ -64,8 +64,6 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	const gchar  *units_string;
 	gdouble       climb_rate;
 	gint          digits;
-	GtkSizeGroup *label_size_group;
-	GtkWidget    *label;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -100,13 +98,6 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->size_h_spin),
 					climb_rate, 10.0*climb_rate);
 	gtk_label_set_text (GTK_LABEL(editor->priv->size_h_units_label), units_string);
-
-	/* Align label widths */
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	label = glade_xml_get_widget (editor->priv->gui, "size_w_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "size_h_label");
-	gtk_size_group_add_widget (label_size_group, label);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->size_page_vbox);

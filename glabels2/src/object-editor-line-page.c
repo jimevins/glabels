@@ -57,8 +57,6 @@ void
 gl_object_editor_prepare_line_page (glObjectEditor *editor)
 {
 	GdkColor     *gdk_color;
-	GtkSizeGroup *label_size_group;
-	GtkWidget    *label;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -76,13 +74,6 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 	gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
 	color_combo_set_color (COLOR_COMBO(editor->priv->line_color_combo), gdk_color);
 	g_free (gdk_color);
-
-	/* Align label widths */
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	label = glade_xml_get_widget (editor->priv->gui, "line_w_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "line_color_label");
-	gtk_size_group_add_widget (label_size_group, label);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->line_page_vbox);

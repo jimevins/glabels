@@ -585,6 +585,8 @@ draw_barcode (glViewBarcode *view_barcode)
 						"y", y_offset,
 						"glyphlist", glyphlist, NULL);
 
+		gnome_glyphlist_unref (glyphlist);
+
 		view_barcode->private->item_list =
 			g_list_prepend (view_barcode->private->item_list, item);
 	} else {
@@ -633,6 +635,8 @@ draw_barcode (glViewBarcode *view_barcode)
 							"y", bchar->y + y_offset,
 							"glyphlist", glyphlist,
 							NULL);
+
+			gnome_glyphlist_unref (glyphlist);
 
 			view_barcode->private->item_list =
 				g_list_prepend (view_barcode->private->item_list, item);

@@ -1,3 +1,42 @@
+2004-07-12  Jim Evins  <evins@snaught.com>
+
+	Various code cleanups.
+
+	* src/label-barcode.c:
+		Removed unneeded include of gnome-glyphlist.h.
+	
+	* src/label-text.c: (get_size):
+		Fixed memory leak: unref glyphlists when done with them.
+	
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page):
+	* src/object-editor-lsize-page.c:
+	(gl_object_editor_prepare_lsize_page):
+	* src/object-editor-position-page.c:
+	(gl_object_editor_prepare_position_page):
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page):
+		Removed unneeded size groups, originally intended to keep widgets aligned.
+		Now use tables to lay these out in object-editor.glade.
+	
+	* src/print.c: (draw_text_object):
+		Fixed memory leak: unref glyphlists when done with them.
+
+	* src/view-barcode.c: (draw_barcode):
+		Fixed memory leak: unref glyphlists when done with them.
+
+	* src/view-text.c: (update_object_from_editor_cb), (draw_hacktext):
+		- Removed unneeded cast of gl_object_editor_get_text_line_spacing()s
+		  return value.
+		- Fixed memory leak: unref glyphlists when done with them.
+
 2004-07-11  Jim Evins  <evins@snaught.com>
 
 	* data/glabels-2.0.dtd:

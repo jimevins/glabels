@@ -58,7 +58,6 @@ void
 gl_object_editor_prepare_image_page (glObjectEditor *editor)
 {
 	GdkColor     *gdk_color;
-	GtkSizeGroup *label_size_group;
 	GtkWidget    *ge;
 
 	gl_debug (DEBUG_EDITOR, "START");
@@ -76,11 +75,6 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 							       "img_key_combo");
 	editor->priv->img_key_entry    = glade_xml_get_widget (editor->priv->gui,
 							       "img_key_entry");
-
-	/* Align label widths */
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (label_size_group, editor->priv->img_file_radio);
-	gtk_size_group_add_widget (label_size_group, editor->priv->img_key_radio);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->img_page_vbox);

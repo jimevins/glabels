@@ -60,8 +60,6 @@ void
 gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 {
 	GList        *family_names = NULL;
-	GtkSizeGroup *label_size_group;
-	GtkWidget    *label;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -96,21 +94,6 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gtk_combo_set_popdown_strings (GTK_COMBO(editor->priv->text_family_combo),
 				       family_names);
 	gnome_font_family_list_free (family_names);
-
-	/* Align label widths */
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	label = glade_xml_get_widget (editor->priv->gui, "text_family_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "text_size_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "text_style_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "text_color_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "text_align_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "text_line_spacing_label");
-	gtk_size_group_add_widget (label_size_group, label);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->text_page_vbox);

@@ -774,6 +774,7 @@ draw_text_object (PrintInfo     *pi,
 								    line[i]);
 			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 			w = bbox.x1;
+			gnome_glyphlist_unref (glyphlist);
 
 			/* If width is too large, iteratively shrink font_size until this
 			   line fits the width, or until the font size is ridiculously
@@ -793,6 +794,7 @@ draw_text_object (PrintInfo     *pi,
 									    line[i]);
 				gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 				w = bbox.x1;
+				gnome_glyphlist_unref (glyphlist);
 			}
 		}
 
@@ -819,6 +821,7 @@ draw_text_object (PrintInfo     *pi,
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 		w = bbox.x1;
+		gnome_glyphlist_unref (glyphlist);
 
 		switch (just) {
 		case GTK_JUSTIFY_LEFT:

@@ -59,8 +59,6 @@ void
 gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 {
 	GList        *styles = NULL;
-	GtkSizeGroup *label_size_group;
-	GtkWidget    *label;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -82,13 +80,6 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	styles = gl_barcode_get_styles_list ();
 	gtk_combo_set_popdown_strings (GTK_COMBO(editor->priv->bc_style_combo), styles);
 	gl_barcode_free_styles_list (styles);
-
-	/* Align label widths */
-	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	label = glade_xml_get_widget (editor->priv->gui, "bc_style_label");
-	gtk_size_group_add_widget (label_size_group, label);
-	label = glade_xml_get_widget (editor->priv->gui, "bc_color_label");
-	gtk_size_group_add_widget (label_size_group, label);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->bc_page_vbox);

@@ -391,6 +391,8 @@ get_size (glLabelObject *object,
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 
+		gnome_glyphlist_unref (glyphlist);
+
 		if ( bbox.x1 > *w ) *w = bbox.x1;
 
 		if (i) {

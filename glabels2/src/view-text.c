@@ -330,7 +330,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
 	color = gl_object_editor_get_text_color (editor);
 	just = gl_object_editor_get_text_alignment (editor);
-	text_line_spacing = (gdouble) gl_object_editor_get_text_line_spacing (editor);
+	text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
 	auto_shrink = gl_object_editor_get_text_auto_shrink (editor);
 
 	gl_label_object_set_position (object, x, y);
@@ -724,6 +724,9 @@ draw_hacktext (glViewText *view_text)
 						"x", x_offset,
 						"y", y_offset,
 						"glyphlist", glyphlist, NULL);
+
+		gnome_glyphlist_unref (glyphlist);
+
 		view_text->private->item_list =
 			g_list_prepend (view_text->private->item_list, item);
 
