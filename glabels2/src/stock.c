@@ -74,13 +74,13 @@ gl_stock_init (void)
 	gtk_icon_factory_add_default (factory);
 
 	add_icons (factory, GL_STOCK_ARROW,   stock_arrow_24,   stock_arrow_16);
-	add_icons (factory, GL_STOCK_TEXT,    stock_text_24,    NULL);
-	add_icons (factory, GL_STOCK_LINE,    stock_line_24,    NULL);
-	add_icons (factory, GL_STOCK_BOX,     stock_box_24,     NULL);
-	add_icons (factory, GL_STOCK_ELLIPSE, stock_ellipse_24, NULL);
-	add_icons (factory, GL_STOCK_IMAGE,   stock_image_24,   NULL);
-	add_icons (factory, GL_STOCK_BARCODE, stock_barcode_24, NULL);
-	add_icons (factory, GL_STOCK_MERGE,   stock_merge_24,   NULL);
+	add_icons (factory, GL_STOCK_TEXT,    stock_text_24,    stock_text_16);
+	add_icons (factory, GL_STOCK_LINE,    stock_line_24,    stock_line_16);
+	add_icons (factory, GL_STOCK_BOX,     stock_box_24,     stock_box_16);
+	add_icons (factory, GL_STOCK_ELLIPSE, stock_ellipse_24, stock_ellipse_16);
+	add_icons (factory, GL_STOCK_IMAGE,   stock_image_24,   stock_image_16);
+	add_icons (factory, GL_STOCK_BARCODE, stock_barcode_24, stock_barcode_16);
+	add_icons (factory, GL_STOCK_MERGE,   stock_merge_24,   stock_merge_16);
 
 	g_object_unref (G_OBJECT(factory));
 }
@@ -112,7 +112,7 @@ static add_icons (GtkIconFactory *factory,
 		gtk_icon_source_set_size_wildcarded (icon_source, FALSE);
 		gtk_icon_source_set_size (icon_source, GTK_ICON_SIZE_MENU);
 		gtk_icon_set_add_source (icon_set, icon_source);
-		g_object_unref (G_OBJECT(icon_source));
+		g_free (icon_source);
 	}
 
 	/* Now associate icon set with stock id */
