@@ -96,19 +96,18 @@ static void       draw_rounded_rect_bg_fg     (glView *view);
 static void       draw_round_bg_fg            (glView *view);
 static void       draw_cd_bg_fg               (glView *view);
 
-static void       select_region              (glView *view,
-					      gdouble x1,
-					      gdouble y1,
-					      gdouble x2,
-					      gdouble y2);
-static void       select_object              (glViewObject *view_object);
-static void       unselect_object            (glViewObject *view_object);
-static gboolean   object_at                  (glView *view,
-					      gdouble x, gdouble y);
-static gboolean   is_object_selected         (glViewObject *view_object);
+static void       select_object_real          (glView *view,
+					       glViewObject *view_object);
+static void       unselect_object_real        (glView *view,
+					       glViewObject *view_object);
 
-static void       move_selection             (glView *view,
-					      gdouble dx, gdouble dy);
+static gboolean   object_at                   (glView *view,
+					       gdouble x, gdouble y);
+static gboolean   is_object_selected          (glView *view,
+					       glViewObject *view_object);
+
+static void       move_selection              (glView *view,
+					       gdouble dx, gdouble dy);
 
 static int        canvas_event                (GnomeCanvas *canvas,
 					       GdkEvent    *event,
@@ -912,14 +911,31 @@ gl_view_object_create_mode (glView            *view,
 }
 
 /*****************************************************************************/
-/* Select given object.                                                      */
+/* Select given object (adding to current selection).                        */
 /*****************************************************************************/
 void
-gl_view_select_object (glView *view, glViewObject *view_object)
+gl_view_select_object (glView       *view,
+		       glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	select_object (view_object);
+	select_object_real (view, view_object);
+
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Unselect given object (removing from current selection).                  */
+/*****************************************************************************/
+void
+gl_view_unselect_object (glView       *view,
+			 glViewObject *view_object)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	unselect_object_real (view, view_object);
 
 	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
 
@@ -941,12 +957,12 @@ gl_view_select_all (glView *view)
 	/* 1st unselect anything already selected. */
 	for (p = view->selected_object_list; p != NULL; p = p_next) {
 		p_next = p->next;
-		unselect_object (GL_VIEW_OBJECT (p->data));
+		unselect_object_real (view, GL_VIEW_OBJECT (p->data));
 	}
 
 	/* Finally select all objects. */
 	for (p = view->object_list; p != NULL; p = p->next) {
-		select_object (GL_VIEW_OBJECT (p->data));
+		select_object_real (view, GL_VIEW_OBJECT (p->data));
 	}
 
 	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
@@ -968,7 +984,7 @@ gl_view_unselect_all (glView *view)
 
 	for (p = view->selected_object_list; p != NULL; p = p_next) {
 		p_next = p->next;
-		unselect_object (GL_VIEW_OBJECT (p->data));
+		unselect_object_real (view, GL_VIEW_OBJECT (p->data));
 	}
 
 	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
@@ -976,15 +992,15 @@ gl_view_unselect_all (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Select all objects within given rectangular region.             */
-/*---------------------------------------------------------------------------*/
-static void
-select_region (glView  *view,
-	       gdouble x1,
-	       gdouble y1,
-	       gdouble x2,
-	       gdouble y2)
+/*****************************************************************************/
+/* Select all objects within given rectangular region (adding to selection). */
+/*****************************************************************************/
+void
+gl_view_select_region (glView  *view,
+		       gdouble  x1,
+		       gdouble  y1,
+		       gdouble  x2,
+		       gdouble  y2)
 {
 	GList *p;
 	glViewObject *view_object;
@@ -998,7 +1014,7 @@ select_region (glView  *view,
 
 	for (p = view->object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT(p->data);
-		if (!is_object_selected (view_object)) {
+		if (!is_object_selected (view, view_object)) {
 
 			object = gl_view_object_get_object (view_object);
 
@@ -1008,7 +1024,7 @@ select_region (glView  *view,
 			i_y2 = i_y1 + h;
 			if ((i_x1 >= x1) && (i_x2 <= x2) && (i_y1 >= y1)
 			    && (i_y2 <= y2)) {
-				select_object (view_object);
+				select_object_real (view, view_object);
 			}
 
 		}
@@ -1023,17 +1039,15 @@ select_region (glView  *view,
 /* PRIVATE. Select an object.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-select_object (glViewObject *view_object)
+select_object_real (glView       *view,
+		    glViewObject *view_object)
 {
-	glView *view;
-
 	gl_debug (DEBUG_VIEW, "START");
 
+	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
-	view = gl_view_object_get_view (view_object);
-
-	if (!is_object_selected (view_object)) {
+	if (!is_object_selected (view, view_object)) {
 		view->selected_object_list =
 		    g_list_prepend (view->selected_object_list, view_object);
 	}
@@ -1047,15 +1061,13 @@ select_object (glViewObject *view_object)
 /* PRIVATE.  Un-select object.                                               */
 /*---------------------------------------------------------------------------*/
 static void
-unselect_object (glViewObject *view_object)
+unselect_object_real (glView       *view,
+		      glViewObject *view_object)
 {
-	glView *view;
-
 	gl_debug (DEBUG_VIEW, "START");
 
+	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
-
-	view = gl_view_object_get_view (view_object);
 
 	gl_view_object_hide_highlight (view_object);
 
@@ -1070,8 +1082,8 @@ unselect_object (glViewObject *view_object)
 /*---------------------------------------------------------------------------*/
 static gboolean
 object_at (glView  *view,
-	   gdouble x,
-	   gdouble y)
+	   gdouble  x,
+	   gdouble  y)
 {
 	GnomeCanvasItem *item, *p_item;
 	GList *p;
@@ -1097,15 +1109,14 @@ object_at (glView  *view,
 /* PRIVATE.  Is the object in our current selection?                         */
 /*---------------------------------------------------------------------------*/
 static gboolean
-is_object_selected (glViewObject *view_object)
+is_object_selected (glView       *view,
+		    glViewObject *view_object)
 {
-	glView *view;
-
 	gl_debug (DEBUG_VIEW, "");
 
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
 	g_return_val_if_fail (GL_IS_VIEW_OBJECT (view_object), FALSE);
 
-	view = gl_view_object_get_view (view_object);
 	if (g_list_find (view->selected_object_list, view_object) == NULL) {
 		return FALSE;
 	}
@@ -1600,7 +1611,7 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 				y1 = MIN (y, y0);
 				x2 = MAX (x, x0);
 				y2 = MAX (y, y0);
-				select_region (view, x1, y1, x2, y2);
+				gl_view_select_region (view, x1, y1, x2, y2);
 				gtk_object_destroy (GTK_OBJECT (item));
 				return TRUE;
 			}
@@ -1729,29 +1740,23 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 		switch (event->button.button) {
 		case 1:
 			if (control_key_pressed) {
-				if (is_object_selected (view_object)) {
+				if (is_object_selected (view, view_object)) {
 					/* Un-selecting a selected item */
-					unselect_object (view_object);
-					g_signal_emit (G_OBJECT(view),
-						       signals[SELECTION_CHANGED],
-						       0);
+					gl_view_unselect_object (view,
+								 view_object);
 					return TRUE;
 				} else {
 					/* Add to current selection */
-					select_object (view_object);
-					g_signal_emit (G_OBJECT(view),
-						       signals[SELECTION_CHANGED],
-						       0);
+					gl_view_select_object (view,
+							       view_object);
 				}
 			} else {
-				if (!is_object_selected (view_object)) {
+				if (!is_object_selected (view, view_object)) {
 					/* No control, key so remove any selections before adding */
 					gl_view_unselect_all (view);
 					/* Add to current selection */
-					select_object (view_object);
-					g_signal_emit (G_OBJECT(view),
-						       signals[SELECTION_CHANGED],
-						       0);
+					gl_view_select_object (view,
+							       view_object);
 				}
 			}
 			/* Go into dragging mode while button remains pressed. */
@@ -1768,17 +1773,14 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			return TRUE;
 
 		case 3:
-			if (!is_object_selected (view_object)) {
+			if (!is_object_selected (view, view_object)) {
 				if (!control_key_pressed) {
 					/* No control, key so remove any selections before adding */
 					gl_view_unselect_all (view);
 				}
 			}
 			/* Add to current selection */
-			select_object (view_object);
-			g_signal_emit (G_OBJECT(view),
-				       signals[SELECTION_CHANGED],
-				       0);
+			gl_view_select_object (view, view_object);
 			/* bring up apropriate menu for selection. */
 			popup_selection_menu (view, view_object, event);
 			return TRUE;
@@ -1821,10 +1823,7 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			/* Also exit dragging mode w/ double-click, run dlg */
 			gnome_canvas_item_ungrab (item, event->button.time);
 			dragging = FALSE;
-			select_object (view_object);
-			g_signal_emit (G_OBJECT(view),
-				       signals[SELECTION_CHANGED],
-				       0);
+			gl_view_select_object (view, view_object);
 			gl_view_object_show_dialog (view_object);
 			return TRUE;
 
@@ -2046,7 +2045,7 @@ selection_received_cb (GtkWidget        *widget,
 			view_object = NULL;
 			g_warning ("Invalid label object type.");
 		}
-		select_object (view_object);
+		gl_view_select_object (view, view_object);
 	}
 	g_object_unref (label);
 

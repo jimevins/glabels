@@ -88,8 +88,15 @@ extern void      gl_view_object_create_mode (glView *view,
 
 extern void      gl_view_select_object      (glView *view,
 					     glViewObject *view_object);
+extern void      gl_view_unselect_object    (glView *view,
+					     glViewObject *view_object);
 extern void      gl_view_select_all         (glView *view);
 extern void      gl_view_unselect_all       (glView *view);
+extern void      gl_view_select_region      (glView  *view,
+					     gdouble  x1,
+					     gdouble  y1,
+					     gdouble  x2,
+					     gdouble  y2);
 
 extern gboolean  gl_view_is_selection_empty (glView *view);
 extern gboolean  gl_view_is_selection_atomic(glView *view);
