@@ -69,11 +69,8 @@ GtkWidget *gl_wdgt_text_entry_new            (glMerge         *merge);
 void       gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
 					      glMerge         *merge);
 
-GList     *gl_wdgt_text_entry_get_text       (glWdgtTextEntry *text_entry);
-
-void       gl_wdgt_text_entry_set_text       (glWdgtTextEntry *text_entry,
-					      gboolean         merge_flag,
-					      GList           *lines);
+void       gl_wdgt_text_entry_set_buffer     (glWdgtTextEntry *text_entry,
+					      GtkTextBuffer   *buffer);
 
 void       gl_wdgt_text_entry_set_label_size_group (glWdgtTextEntry *text_entry,
 						    GtkSizeGroup    *label_size_group);

@@ -33,11 +33,6 @@
 /* Private types                             */
 /*===========================================*/
 
-enum {
-	CHANGED,
-	LAST_SIGNAL
-};
-
 typedef void (*glWdgtTextEntrySignal) (GObject * object, gpointer data);
 
 /*===========================================*/
@@ -45,8 +40,6 @@ typedef void (*glWdgtTextEntrySignal) (GObject * object, gpointer data);
 /*===========================================*/
 
 static glHigVBoxClass *parent_class;
-
-static gint wdgt_text_entry_signals[LAST_SIGNAL] = { 0 };
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -58,7 +51,6 @@ static void gl_wdgt_text_entry_finalize      (GObject              *object);
 static void gl_wdgt_text_entry_construct     (glWdgtTextEntry      *text_entry,
 					      glMerge              *merge);
 
-static void changed_cb (glWdgtTextEntry *text_entry);
 static void insert_cb  (glWdgtTextEntry *text_entry);
 
 /****************************************************************************/
@@ -103,14 +95,6 @@ gl_wdgt_text_entry_class_init (glWdgtTextEntryClass * class)
 	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_text_entry_finalize;
-
-	wdgt_text_entry_signals[CHANGED] =
-	    g_signal_new ("changed",
-			  G_OBJECT_CLASS_TYPE(object_class),
-			  G_SIGNAL_RUN_LAST,
-			  G_STRUCT_OFFSET (glWdgtTextEntryClass, changed),
-			  NULL, NULL,
-			  gl_marshal_VOID__VOID, G_TYPE_NONE, 0);
 
 	gl_debug (DEBUG_WDGT, "END");
 }
@@ -201,9 +185,6 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 		gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_entry->text_entry));
 	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (wscroll),
 					       text_entry->text_entry);
-	g_signal_connect_swapped (G_OBJECT (text_entry->text_buffer),
-				  "changed", G_CALLBACK (changed_cb),
-				  G_OBJECT (text_entry));
 
 	/* ---- Merge field line ---- */
 	whbox = gl_hig_hbox_new ();
@@ -233,21 +214,6 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 				  "clicked", G_CALLBACK (insert_cb),
 				  G_OBJECT (text_entry));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->insert_button);
-
-	gl_debug (DEBUG_WDGT, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Callback for when text has changed.                            */
-/*--------------------------------------------------------------------------*/
-static void
-changed_cb (glWdgtTextEntry *text_entry)
-{
-	gl_debug (DEBUG_WDGT, "START");
-
-	/* Emit our "changed" signal */
-	g_signal_emit (G_OBJECT (text_entry),
-		       wdgt_text_entry_signals[CHANGED], 0);
 
 	gl_debug (DEBUG_WDGT, "END");
 }
@@ -288,6 +254,9 @@ gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
 {
 	GList *keys;
 
+	gtk_widget_set_sensitive (text_entry->key_combo, merge != NULL);
+	gtk_widget_set_sensitive (text_entry->insert_button, merge != NULL);
+
 	keys = gl_merge_get_key_list (merge);
 	if ( keys != NULL ) {
 		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
@@ -302,58 +271,15 @@ gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
 }
 
 /****************************************************************************/
-/* Get widget data.                                                         */
-/****************************************************************************/
-GList *
-gl_wdgt_text_entry_get_text (glWdgtTextEntry *text_entry)
-{
-	GtkTextBuffer *buffer;
-	gchar *text;
-	GList *lines;
-	GtkTextIter start, end;
-
-	gl_debug (DEBUG_WDGT, "START");
-
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_entry->text_entry));
-
-	gtk_text_buffer_get_bounds (buffer, &start, &end);
-
-	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
-
-	lines = gl_text_node_lines_new_from_text (text);
-
-	g_free (text);
-
-	gl_debug (DEBUG_WDGT, "END");
-
-	return lines;
-}
-
-/****************************************************************************/
-/* Set widget data.                                                         */
+/* Set text buffer                                                          */
 /****************************************************************************/
 void
-gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
-			     gboolean         merge_flag,
-			     GList           *lines)
+gl_wdgt_text_entry_set_buffer (glWdgtTextEntry *text_entry,
+			       GtkTextBuffer   *buffer)
 {
-	GtkTextBuffer *buffer;
-	gchar *text;
+	text_entry->text_buffer = buffer;
 
-	gl_debug (DEBUG_WDGT, "START");
-
-	gtk_widget_set_sensitive (text_entry->key_combo, merge_flag);
-	gtk_widget_set_sensitive (text_entry->insert_button, merge_flag);
-
-	text = gl_text_node_lines_expand (lines, NULL);
-
-	g_signal_handlers_block_by_func (G_OBJECT(text_entry->text_buffer),
-					 changed_cb, text_entry);
-	gtk_text_buffer_set_text (text_entry->text_buffer, text, -1);
-	g_signal_handlers_unblock_by_func (G_OBJECT(text_entry->text_buffer),
-					   changed_cb, text_entry);
-
-	gl_debug (DEBUG_WDGT, "END");
+	gtk_text_view_set_buffer (GTK_TEXT_VIEW(text_entry->text_entry), buffer);
 }
 
 /*****************************************************************************/

@@ -45,7 +45,9 @@
 /*========================================================*/
 
 struct _glLabelTextPrivate {
-	GList           *lines; /* list of glLabelTextNode lists */
+	GtkTextTagTable *tag_table;
+	GtkTextBuffer   *buffer;
+
 	gchar           *font_family;
 	gdouble          font_size;
 	GnomeFontWeight  font_weight;
@@ -72,6 +74,9 @@ static void gl_label_text_finalize      (GObject          *object);
 
 static void copy                        (glLabelObject    *dst_object,
 					 glLabelObject    *src_object);
+
+static void buffer_changed_cb           (GtkTextBuffer    *textbuffer,
+					 glLabelText      *ltext);
 
 static void get_size                    (glLabelObject    *object,
 					 gdouble          *w,
@@ -125,12 +130,18 @@ gl_label_text_instance_init (glLabelText *ltext)
 {
 	ltext->private = g_new0 (glLabelTextPrivate, 1);
 
+	ltext->private->tag_table        = gtk_text_tag_table_new ();
+	ltext->private->buffer           = gtk_text_buffer_new (ltext->private->tag_table);
+
 	ltext->private->font_family      = g_strdup(DEFAULT_FONT_FAMILY);
 	ltext->private->font_size        = DEFAULT_FONT_SIZE;
 	ltext->private->font_weight      = DEFAULT_FONT_WEIGHT;
 	ltext->private->font_italic_flag = DEFAULT_FONT_ITALIC_FLAG;
 	ltext->private->just             = DEFAULT_JUST;
 	ltext->private->color            = DEFAULT_COLOR;
+
+	g_signal_connect (G_OBJECT(ltext->private->buffer), "changed",
+			  G_CALLBACK(buffer_changed_cb), ltext);
 }
 
 static void
@@ -142,6 +153,8 @@ gl_label_text_finalize (GObject *object)
 
 	ltext = GL_LABEL_TEXT (object);
 
+	g_object_unref (ltext->private->tag_table);
+	g_object_unref (ltext->private->buffer);
 	g_free (ltext->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -210,14 +223,15 @@ void
 gl_label_text_set_lines (glLabelText *ltext,
 			 GList       *lines)
 {
+	gchar *text;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
-	gl_text_node_lines_free (&ltext->private->lines);
-	ltext->private->lines = gl_text_node_lines_dup (lines);
-
-	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+	text = gl_text_node_lines_expand (lines, NULL);
+	gtk_text_buffer_set_text (ltext->private->buffer, text, -1);
+	g_free (text);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -271,12 +285,30 @@ gl_label_text_set_props (glLabelText     *ltext,
 /*****************************************************************************/
 /* Get object params.                                                        */
 /*****************************************************************************/
-GList *
-gl_label_text_get_lines (glLabelText *ltext)
+GtkTextBuffer *
+gl_label_text_get_buffer (glLabelText *ltext)
 {
 	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), NULL);
 
-	return gl_text_node_lines_dup (ltext->private->lines);
+	return ltext->private->buffer;
+}
+
+GList *
+gl_label_text_get_lines (glLabelText *ltext)
+{
+	GtkTextIter  start, end;
+	gchar       *text;
+	GList       *lines;
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), NULL);
+
+	gtk_text_buffer_get_bounds (ltext->private->buffer, &start, &end);
+	text = gtk_text_buffer_get_text (ltext->private->buffer,
+					 &start, &end, FALSE);
+	lines = gl_text_node_lines_new_from_text (text);
+	g_free (text);
+
+	return lines;
 }
 
 void
@@ -301,6 +333,15 @@ gl_label_text_get_props (glLabelText      *ltext,
 }
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  text buffer "changed" callback.                                 */
+/*---------------------------------------------------------------------------*/
+void buffer_changed_cb (GtkTextBuffer *textbuffer,
+			glLabelText   *ltext)
+{
+	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+}
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  get object size method.                                         */
 /*---------------------------------------------------------------------------*/
 static void
@@ -310,6 +351,7 @@ get_size (glLabelObject *object,
 {
 	glLabelText    *ltext = (glLabelText *)object;
 	GnomeFont      *font;
+	GtkTextIter     start, end;
 	gchar          *text;
 	gchar         **line;
 	gint            i;
@@ -327,7 +369,9 @@ get_size (glLabelObject *object,
 		ltext->private->font_italic_flag,
 		ltext->private->font_size);
 
-	text = gl_text_node_lines_expand (ltext->private->lines, NULL);
+	gtk_text_buffer_get_bounds (ltext->private->buffer, &start, &end);
+	text = gtk_text_buffer_get_text (ltext->private->buffer,
+					 &start, &end, FALSE);
 	line = g_strsplit (text, "\n", -1);
 	g_free (text);
 
