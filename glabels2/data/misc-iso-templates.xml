@@ -293,6 +293,16 @@
     </Label-rectangle> 
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Celcast IJ37: Fridge magnet (stickers), 52 x 90 mm, 10 per sheet    -->
+  <!-- =================================================================== -->
+  <Template name="Celcast IJ37" size="A4" _description="Fridge Magnet Stickers">
+    <Label-rectangle id="0" width="255" height="147.5" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="43" y0="52.7" dx="255" dy="147.5"/>
+    </Label-rectangle>
+  </Template>
+
 
 
   <!-- ******************************************************************** -->
