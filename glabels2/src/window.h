@@ -51,6 +51,11 @@ struct _glWindow {
 	BonoboUIComponent   *uic;
 
 	GtkWidget           *view;
+
+	GtkWidget           *cursor_info;
+	GtkWidget           *cursor_info_frame;
+	GtkWidget           *zoom_info;
+	GtkWidget           *zoom_info_frame;
 };
 
 struct _glWindowClass {

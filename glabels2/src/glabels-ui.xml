@@ -141,10 +141,10 @@
 	<cmd name="ToolsLowerObjects"
 	     _tip="Lower object to bottom"/>
 	
-	<cmd name="HelpContents" _label="Contents" _tip="Open the gedit manual"
+	<cmd name="HelpContents" _label="Contents" _tip="Open the glabels manual"
 	accel="F1" pixtype="stock" pixname="gtk-help"/>
 
-        <cmd name="About" _label="About..." _tip="About this application"
+        <cmd name="About" _label="About..." _tip="About glabels"
         pixtype="stock" pixname="About"/>
 
 
@@ -341,6 +341,12 @@
 	<toolitem name="ToolsMergeProperties" verb=""/>
 
 </dockitem>
+
+<status resize_grip="1">
+	<item name="main"/>
+	<control name="Zoom"/>
+	<control name="Cursor"/>
+</status>
 
 </Root>
 

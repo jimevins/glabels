@@ -82,50 +82,74 @@ struct _glViewClass {
 	void (*pointer_moved)     (glView *view,
 				   gdouble x, gdouble y, gpointer user_data);
 	void (*mode_changed)      (glView *view,
-				   gchar *modeline, gpointer user_data);
+				   gpointer user_data);
 };
 
-extern guint     gl_view_get_type           (void);
+G_BEGIN_DECLS
 
-extern GtkWidget *gl_view_new               (glLabel *label);
+guint     gl_view_get_type           (void);
 
-extern void      gl_view_raise_fg           (glView *view);
+GtkWidget *gl_view_new               (glLabel           *label);
 
-extern void      gl_view_arrow_mode         (glView *view);
-extern void      gl_view_object_create_mode (glView *view,
-					     glLabelObjectType type);
 
-extern void      gl_view_select_object      (glView *view,
-					     glViewObject *view_object);
-extern void      gl_view_unselect_object    (glView *view,
-					     glViewObject *view_object);
-extern void      gl_view_select_all         (glView *view);
-extern void      gl_view_unselect_all       (glView *view);
-extern void      gl_view_select_region      (glView  *view,
-					     gdouble  x1,
-					     gdouble  y1,
-					     gdouble  x2,
-					     gdouble  y2);
+void      gl_view_raise_fg           (glView            *view);
 
-extern gboolean  gl_view_is_selection_empty (glView *view);
-extern gboolean  gl_view_is_selection_atomic(glView *view);
 
-extern void      gl_view_delete_selection   (glView *view);
-extern void      gl_view_edit_object_props  (glView *view);
-extern void      gl_view_raise_selection    (glView *view);
-extern void      gl_view_lower_selection    (glView *view);
+void      gl_view_arrow_mode         (glView            *view);
 
-extern void      gl_view_cut                (glView *view);
-extern void      gl_view_copy               (glView *view);
-extern void      gl_view_paste              (glView *view);
+void      gl_view_object_create_mode (glView            *view,
+				      glLabelObjectType  type);
 
-extern void      gl_view_zoom_in            (glView *view);
-extern void      gl_view_zoom_out           (glView *view);
-extern void      gl_view_set_zoom           (glView *view, gdouble scale);
-extern gdouble   gl_view_get_zoom           (glView *view);
 
-extern int       gl_view_item_event_handler (GnomeCanvasItem *item,
-					     GdkEvent        *event,
-					     glViewObject    *view_object);
+void      gl_view_select_object      (glView            *view,
+				      glViewObject      *view_object);
+
+void      gl_view_unselect_object    (glView            *view,
+				      glViewObject      *view_object);
+
+void      gl_view_select_all         (glView            *view);
+
+void      gl_view_unselect_all       (glView            *view);
+
+void      gl_view_select_region      (glView            *view,
+				      gdouble            x1,
+				      gdouble            y1,
+				      gdouble            x2,
+				      gdouble            y2);
+
+gboolean  gl_view_is_selection_empty (glView            *view);
+
+gboolean  gl_view_is_selection_atomic(glView            *view);
+
+void      gl_view_delete_selection   (glView            *view);
+
+void      gl_view_edit_object_props  (glView            *view);
+
+void      gl_view_raise_selection    (glView            *view);
+
+void      gl_view_lower_selection    (glView            *view);
+
+void      gl_view_cut                (glView            *view);
+
+void      gl_view_copy               (glView            *view);
+
+void      gl_view_paste              (glView            *view);
+
+
+void      gl_view_zoom_in            (glView            *view);
+
+void      gl_view_zoom_out           (glView            *view);
+
+void      gl_view_set_zoom           (glView            *view,
+				      gdouble            scale);
+
+gdouble   gl_view_get_zoom           (glView            *view);
+
+
+int       gl_view_item_event_handler (GnomeCanvasItem   *item,
+				      GdkEvent          *event,
+				      glViewObject      *view_object);
+
+G_END_DECLS
 
 #endif

@@ -33,19 +33,19 @@
 
 #include "debug.h"
 
-/*========================================================*/
-/* Private macros and constants.                          */
-/*========================================================*/
+/*=======================================================================================*/
+/* Private macros and constants.                                                         */
+/*=======================================================================================*/
 #define GLABELS_UI_XML GLABELS_UI_DIR "glabels-ui.xml"
 
-/*========================================================*/
-/* Private types.                                         */
-/*========================================================*/
+/*=======================================================================================*/
+/* Private types.                                                                        */
+/*=======================================================================================*/
 
 
-/*===========================================*/
-/* Private globals                           */
-/*===========================================*/
+/*=======================================================================================*/
+/* Private globals                                                                       */
+/*=======================================================================================*/
 
 static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("FileNew", gl_cmd_file_new),
@@ -139,32 +139,31 @@ static gchar* atomic_selection_verbs [] = {
 };
 
 
-/*===========================================*/
-/* Local function prototypes                 */
-/*===========================================*/
+/*=======================================================================================*/
+/* Local function prototypes                                                             */
+/*=======================================================================================*/
 
-static void view_menu_item_toggled_cb (
-			BonoboUIComponent           *ui_component,
-			const char                  *path,
-			Bonobo_UIComponent_EventType type,
-			const char                  *state,
-			BonoboWindow                *win);
+static void view_menu_item_toggled_cb     (BonoboUIComponent           *ui_component,
+					   const char                  *path,
+					   Bonobo_UIComponent_EventType type,
+					   const char                  *state,
+					   BonoboWindow                *win);
 
-static void set_app_main_toolbar_style 	  (BonoboUIComponent *ui_component);
-static void set_app_drawing_toolbar_style (BonoboUIComponent *ui_component);
+static void set_app_main_toolbar_style 	  (BonoboUIComponent           *ui_component);
 
-static void
-set_verb_sensitive (BonoboUIComponent  *ui_component,
-		    gchar              *cname,
-		    gboolean            sensitive);
-static void
-set_verb_list_sensitive (BonoboUIComponent   *ui_component,
-			 gchar              **vlist,
-			 gboolean             sensitive);
-static void
-set_verb_state (BonoboUIComponent   *ui_component,
-		gchar               *cname,
-		gboolean             state);
+static void set_app_drawing_toolbar_style (BonoboUIComponent           *ui_component);
+
+static void set_verb_sensitive            (BonoboUIComponent           *ui_component,
+					   gchar                       *cname,
+					   gboolean                     sensitive);
+
+static void set_verb_list_sensitive       (BonoboUIComponent           *ui_component,
+					   gchar                      **vlist,
+					   gboolean                     sensitive);
+
+static void set_verb_state                (BonoboUIComponent           *ui_component,
+					   gchar                       *cname,
+					   gboolean                     state);
 
 
 
@@ -173,10 +172,13 @@ set_verb_state (BonoboUIComponent   *ui_component,
 /*****************************************************************************/
 void
 gl_ui_init (BonoboUIComponent *ui_component,
-	    BonoboWindow      *win)
+	    BonoboWindow      *win,
+	    GtkWidget         *cursor_info_frame,
+	    GtkWidget         *zoom_info_frame)
 {
-        GnomeRecentView *recent_view;
+        GnomeRecentView  *recent_view;
         GnomeRecentModel *recent_model;
+	BonoboControl    *control;
 
 	gl_debug (DEBUG_UI, "START");
 
@@ -241,7 +243,26 @@ gl_ui_init (BonoboUIComponent *ui_component,
 
 	set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
 
-        /* add a GeditRecentView object */
+	/* Status bar */
+        bonobo_ui_component_set_prop (ui_component,
+				      "/status", "hidden", "0", NULL);
+
+	control = bonobo_control_new (cursor_info_frame);
+	bonobo_ui_component_object_set (ui_component,
+					"/status/Cursor", BONOBO_OBJREF (control), NULL);
+	bonobo_object_unref (BONOBO_OBJECT (control));
+        bonobo_ui_component_set_prop (ui_component,
+				      "/status/Cursor", "hidden", "0", NULL);
+
+	control = bonobo_control_new (zoom_info_frame);
+	bonobo_ui_component_object_set (ui_component,
+					"/status/Zoom", BONOBO_OBJREF (control), NULL);
+	bonobo_object_unref (BONOBO_OBJECT (control));
+        bonobo_ui_component_set_prop (ui_component,
+				      "/status/Zoom", "hidden", "0", NULL);
+
+
+	/* add a GeditRecentView object */
         recent_model = gl_recent_get_model ();
         recent_view  =
 		GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (ui_component,

@@ -29,24 +29,27 @@
 
 #include "debug.h"
 
-/*========================================================*/
-/* Private macros and constants.                          */
-/*========================================================*/
+/*============================================================================*/
+/* Private macros and constants.                                              */
+/*============================================================================*/
+
 #define DEFAULT_WINDOW_WIDTH  500
 #define DEFAULT_WINDOW_HEIGHT 375
 
+#define CURSOR_INFO_WIDTH     150
+#define ZOOM_INFO_WIDTH        50
 
-/*===========================================*/
-/* Private globals                           */
-/*===========================================*/
+/*============================================================================*/
+/* Private globals                                                            */
+/*============================================================================*/
 static BonoboWindowClass *parent_class;
 
 static GList *window_list = NULL;
 
 
-/*===========================================*/
-/* Local function prototypes                 */
-/*===========================================*/
+/*============================================================================*/
+/* Local function prototypes                                                  */
+/*============================================================================*/
 
 static void     gl_window_class_init   (glWindowClass *class);
 static void     gl_window_init         (glWindow      *window);
@@ -62,6 +65,10 @@ static gboolean window_delete_event_cb (glWindow      *window,
 
 static void     selection_changed_cb   (glView        *view,
 					glWindow      *window);
+
+static void     zoom_changed_cb        (glView   *view,
+					gdouble  zoom,
+					glWindow *window);
 
 static void     name_changed_cb        (glLabel       *label,
 					glWindow      *window);
@@ -130,7 +137,25 @@ gl_window_init (glWindow *window)
 	bonobo_ui_component_set_container (ui_component,
 					   BONOBO_OBJREF (ui_container),
 					   NULL);
-	gl_ui_init (ui_component, BONOBO_WINDOW (window));
+
+	window->cursor_info = gtk_label_new (NULL);
+	gtk_widget_set_size_request (window->cursor_info, CURSOR_INFO_WIDTH, -1);
+	window->cursor_info_frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME(window->cursor_info_frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER(window->cursor_info_frame), window->cursor_info);
+	gtk_widget_show_all (window->cursor_info_frame);
+
+	window->zoom_info = gtk_label_new (NULL);
+	gtk_widget_set_size_request (window->zoom_info, ZOOM_INFO_WIDTH, -1);
+	window->zoom_info_frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME(window->zoom_info_frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER(window->zoom_info_frame), window->zoom_info);
+	gtk_widget_show_all (window->zoom_info_frame);
+
+	gl_ui_init (ui_component,
+		    BONOBO_WINDOW (window),
+		    window->cursor_info_frame,
+		    window->zoom_info_frame);
 
 	gtk_window_set_default_size (GTK_WINDOW (window),
 				     DEFAULT_WINDOW_WIDTH,
@@ -272,6 +297,8 @@ void
 gl_window_set_label (glWindow    *window,
 		     glLabel     *label)
 {
+	gchar *string;
+
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (GL_IS_WINDOW (window));
@@ -293,8 +320,16 @@ gl_window_set_label (glWindow    *window,
 
 	gl_ui_update_all (window->uic, GL_VIEW(window->view));
 
+	string = g_strdup_printf ("%3.0f%%",
+				  100.0*gl_view_get_zoom (GL_VIEW(window->view)));
+	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
+	g_free (string);
+
 	g_signal_connect (G_OBJECT(window->view), "selection_changed",
 			  G_CALLBACK(selection_changed_cb), window);
+
+	g_signal_connect (G_OBJECT(window->view), "zoom_changed",
+			  G_CALLBACK(zoom_changed_cb), window);
 
 	g_signal_connect (G_OBJECT(label), "name_changed",
 			  G_CALLBACK(name_changed_cb), window);
@@ -379,6 +414,28 @@ selection_changed_cb (glView   *view,
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
 	gl_ui_update_selection_verbs (window->uic, view);
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  View "zoom state changed" callback.                             */
+/*---------------------------------------------------------------------------*/
+static void 
+zoom_changed_cb (glView   *view,
+		 gdouble  zoom,
+		 glWindow *window)
+{
+	gchar *string;
+
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+	string = g_strdup_printf ("%3.0f%%", 100.0*zoom);
+	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
+	g_free (string);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }

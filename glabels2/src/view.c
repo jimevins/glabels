@@ -42,16 +42,17 @@
 
 #include "debug.h"
 
-/*========================================================*/
-/* Private macros and constants.                          */
-/*========================================================*/
+/*==========================================================================*/
+/* Private macros and constants.                                            */
+/*==========================================================================*/
 
 #define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
 #define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
 
-/*========================================================*/
-/* Private types.                                         */
-/*========================================================*/
+
+/*==========================================================================*/
+/* Private types.                                                           */
+/*==========================================================================*/
 
 enum {
 	SELECTION_CHANGED,
@@ -61,9 +62,10 @@ enum {
 	LAST_SIGNAL
 };
 
-/*===========================================*/
-/* Private globals                           */
-/*===========================================*/
+
+/*==========================================================================*/
+/* Private globals                                                          */
+/*==========================================================================*/
 
 static GtkContainerClass *parent_class;
 
@@ -80,9 +82,10 @@ static gdouble scales[] = {
 	0.0
 };
 
-/*===========================================*/
-/* Local function prototypes                 */
-/*===========================================*/
+
+/*==========================================================================*/
+/* Local function prototypes                                                */
+/*==========================================================================*/
 
 static void       gl_view_class_init              (glViewClass *class);
 static void       gl_view_init                    (glView *view);
@@ -235,9 +238,9 @@ gl_view_class_init (glViewClass *class)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glViewClass, mode_changed),
 			      NULL, NULL,
-			      gl_marshal_VOID__STRING,
+			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
-			      1, G_TYPE_STRING);
+			      0);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1852,7 +1855,7 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		gnome_canvas_window_to_world (canvas,
 					      event->motion.x,
 					      event->motion.y, &x, &y);
-		g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, x, y);
+		g_signal_emit (G_OBJECT(view), signals[POINTER_MOVED], 0, x, y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_item_set (item,
 					       "x1", MIN (x, x0),

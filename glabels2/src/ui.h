@@ -28,21 +28,27 @@
 
 #include "view.h"
 
-extern void gl_ui_init                   (BonoboUIComponent *ui_component,
-					  BonoboWindow      *win);
+G_BEGIN_DECLS
 
-extern void gl_ui_update_all             (BonoboUIComponent *ui_component,
-					  glView            *view);
+void gl_ui_init                   (BonoboUIComponent *ui_component,
+				   BonoboWindow      *win,
+				   GtkWidget         *cursor_info_frame,
+				   GtkWidget         *zoom_info_frame);
 
-extern void gl_ui_update_nodoc           (BonoboUIComponent *ui_component);
+void gl_ui_update_all             (BonoboUIComponent *ui_component,
+				   glView            *view);
 
-extern void gl_ui_update_modified_verbs  (BonoboUIComponent *ui_component,
-					  glLabel           *label);
+void gl_ui_update_nodoc           (BonoboUIComponent *ui_component);
 
-extern void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
-					  glView            *view);
+void gl_ui_update_modified_verbs  (BonoboUIComponent *ui_component,
+				   glLabel           *label);
 
-extern void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
-					  glLabel           *label);
+void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
+				   glView            *view);
+
+void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
+				   glLabel           *label);
+
+G_END_DECLS
 
 #endif /* __GL_UI_H__ */
