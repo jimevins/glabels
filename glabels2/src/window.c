@@ -26,6 +26,7 @@
 #include "window.h"
 #include "util.h"
 #include "xml-label.h"
+#include "prefs.h"
 
 #include "debug.h"
 
@@ -66,9 +67,14 @@ static gboolean window_delete_event_cb (glWindow      *window,
 static void     selection_changed_cb   (glView        *view,
 					glWindow      *window);
 
-static void     zoom_changed_cb        (glView   *view,
-					gdouble  zoom,
-					glWindow *window);
+static void     zoom_changed_cb        (glView        *view,
+					gdouble        zoom,
+					glWindow      *window);
+
+static void     pointer_moved_cb       (glView        *view,
+					gdouble        x,
+					gdouble        y,
+					glWindow      *window);
 
 static void     name_changed_cb        (glLabel       *label,
 					glWindow      *window);
@@ -331,6 +337,9 @@ gl_window_set_label (glWindow    *window,
 	g_signal_connect (G_OBJECT(window->view), "zoom_changed",
 			  G_CALLBACK(zoom_changed_cb), window);
 
+	g_signal_connect (G_OBJECT(window->view), "pointer_moved",
+			  G_CALLBACK(pointer_moved_cb), window);
+
 	g_signal_connect (G_OBJECT(label), "name_changed",
 			  G_CALLBACK(name_changed_cb), window);
 
@@ -423,7 +432,7 @@ selection_changed_cb (glView   *view,
 /*---------------------------------------------------------------------------*/
 static void 
 zoom_changed_cb (glView   *view,
-		 gdouble  zoom,
+		 gdouble   zoom,
 		 glWindow *window)
 {
 	gchar *string;
@@ -435,6 +444,36 @@ zoom_changed_cb (glView   *view,
 
 	string = g_strdup_printf ("%3.0f%%", 100.0*zoom);
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
+	g_free (string);
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  View "pointer moved" callback.                                  */
+/*---------------------------------------------------------------------------*/
+static void
+pointer_moved_cb (glView   *view,
+		  gdouble   x,
+		  gdouble   y,
+		  glWindow *window)
+{
+	gchar *string;
+	gdouble units_per_point;
+	gint    units_precision;
+
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+	units_per_point = gl_prefs_get_units_per_point ();
+	units_precision = gl_prefs_get_units_precision ();
+
+	string = g_strdup_printf ("%.*f, %.*f",
+				  units_precision, x*units_per_point,
+				  units_precision, y*units_per_point);
+	gtk_label_set_text (GTK_LABEL(window->cursor_info), string);
 	g_free (string);
 
 	gl_debug (DEBUG_WINDOW, "END");
