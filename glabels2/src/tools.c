@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  tools.c:  toolbar module
+ *  tools.c:  implementation of drawing toolbar verbs
  *
  *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
  *
@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "tools.h"
-#include "glabels.h"
+#include "window.h"
 #include "merge-properties.h"
 
 /*===========================================*/
@@ -45,14 +45,15 @@
 /*****************************************************************************/
 void
 gl_tools_arrow (BonoboUIComponent *uic,
-		gpointer user_data,
-		const gchar* verbname)
+		gpointer           user_data,
+		const gchar       *verbname)
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_arrow_mode (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_arrow_mode (GL_VIEW(window->view));
 	}
 }
 
@@ -61,15 +62,17 @@ gl_tools_arrow (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_text (BonoboUIComponent *uic,
-	       gpointer user_data,
-	       const gchar* verbname)
+	       gpointer           user_data,
+	       const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view, GL_LABEL_OBJECT_TEXT);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_TEXT);
 	}
 }
 
@@ -78,15 +81,17 @@ gl_tools_text (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_box (BonoboUIComponent *uic,
-	      gpointer user_data,
-	      const gchar* verbname)
+	      gpointer           user_data,
+	      const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view, GL_LABEL_OBJECT_BOX);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_BOX);
 	}
 }
 
@@ -95,15 +100,17 @@ gl_tools_box (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_line (BonoboUIComponent *uic,
-	       gpointer user_data,
-	       const gchar* verbname)
+	       gpointer           user_data,
+	       const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view, GL_LABEL_OBJECT_LINE);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_LINE);
 	}
 }
 
@@ -112,16 +119,17 @@ gl_tools_line (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_ellipse (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view,
-					       GL_LABEL_OBJECT_ELLIPSE);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_ELLIPSE);
 	}
 }
 
@@ -130,15 +138,17 @@ gl_tools_ellipse (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_image (BonoboUIComponent *uic,
-		gpointer user_data,
-		const gchar* verbname)
+		gpointer           user_data,
+		const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view, GL_LABEL_OBJECT_IMAGE);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_IMAGE);
 	}
 }
 
@@ -147,16 +157,17 @@ gl_tools_image (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_barcode (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_object_create_mode (view,
-					       GL_LABEL_OBJECT_BARCODE);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_object_create_mode (GL_VIEW(window->view),
+					    GL_LABEL_OBJECT_BARCODE);
 	}
 }
 
@@ -165,15 +176,16 @@ gl_tools_barcode (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_zoomin (BonoboUIComponent *uic,
-		 gpointer user_data,
-		 const gchar* verbname)
+		 gpointer           user_data,
+		 const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_zoom_in (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_zoom_in (GL_VIEW(window->view));
 	}
 }
 
@@ -182,15 +194,16 @@ gl_tools_zoomin (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_zoomout (BonoboUIComponent *uic,
-		  gpointer user_data,
-		  const gchar* verbname)
+		  gpointer           user_data,
+		  const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_zoom_out (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_zoom_out (GL_VIEW(window->view));
 	}
 }
 
@@ -199,15 +212,16 @@ gl_tools_zoomout (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_zoom1to1 (BonoboUIComponent *uic,
-		   gpointer user_data,
-		   const gchar* verbname)
+		   gpointer           user_data,
+		   const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_set_zoom (view, 1.0);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_set_zoom (GL_VIEW(window->view), 1.0);
 	}
 }
 
@@ -216,15 +230,16 @@ gl_tools_zoom1to1 (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_merge_properties (BonoboUIComponent *uic,
-			   gpointer user_data,
-			   const gchar* verbname)
+			   gpointer           user_data,
+			   const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_merge_properties_dialog (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_merge_properties_dialog (GL_VIEW(window->view));
 	}
 }
 
@@ -233,15 +248,16 @@ gl_tools_merge_properties (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_object_properties (BonoboUIComponent *uic,
-			    gpointer user_data,
-			    const gchar* verbname)
+			    gpointer           user_data,
+			    const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_edit_object_props (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_edit_object_props (GL_VIEW(window->view));
 	}
 }
 
@@ -250,15 +266,16 @@ gl_tools_object_properties (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_raise_objects (BonoboUIComponent *uic,
-			gpointer user_data,
-			const gchar* verbname)
+			gpointer           user_data,
+			const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_raise_selection (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_raise_selection (GL_VIEW(window->view));
 	}
 }
 
@@ -267,15 +284,16 @@ gl_tools_raise_objects (BonoboUIComponent *uic,
 /*****************************************************************************/
 void
 gl_tools_lower_objects (BonoboUIComponent *uic,
-			gpointer user_data,
-			const gchar* verbname)
+			gpointer           user_data,
+			const gchar       *verbname)
 
 {
-	glView *view;
+	glWindow *window;
 
-	view = glabels_get_active_view ();
-	if (view != NULL) {
-		gl_view_lower_selection (view);
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_lower_selection (GL_VIEW(window->view));
 	}
 }
 

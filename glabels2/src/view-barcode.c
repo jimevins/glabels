@@ -29,7 +29,6 @@
 
 #include "view-highlight.h"
 
-#include "glabels.h"
 #include "wdgt-bc-data.h"
 #include "wdgt-bc-props.h"
 #include "wdgt-bc-style.h"
@@ -245,7 +244,6 @@ static GtkWidget *
 construct_properties_dialog (glViewBarcode *view_barcode)
 {
 	GtkWidget          *dialog, *wsection;
-	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
 	glTextNode         *text_node;
@@ -272,7 +270,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit barcode object properties"),
-						  GTK_WINDOW (win),
+						  NULL,
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,

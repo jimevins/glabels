@@ -37,8 +37,6 @@
 #include "label.h"
 #include "bc.h"
 #include "template.h"
-#include "mdi.h"
-#include "glabels.h"
 
 #include "wdgt-print-copies.h"
 #include "wdgt-print-merge.h"

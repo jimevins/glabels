@@ -19,14 +19,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-
-/*
- * This file is based on gedit-menus.h from gedit2:
- *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
- *
- */
 #ifndef __GL_UI_H__
 #define __GL_UI_H__
 
@@ -36,17 +28,21 @@
 
 #include "view.h"
 
-extern BonoboUIVerb gl_ui_verbs [];
-
-
 extern void gl_ui_init                   (BonoboUIComponent *ui_component,
 					  BonoboWindow      *win);
+
 extern void gl_ui_update_all             (BonoboUIComponent *ui_component,
 					  glView            *view);
+
 extern void gl_ui_update_nodoc           (BonoboUIComponent *ui_component);
-extern void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
+
+extern void gl_ui_update_modified_verbs  (BonoboUIComponent *ui_component,
 					  glLabel           *label);
+
 extern void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 					  glView            *view);
+
+extern void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
+					  glLabel           *label);
 
 #endif /* __GL_UI_H__ */

@@ -6,10 +6,8 @@ src/glabels.h
 src/glabels-batch.c
 src/splash.c
 src/splash.h
-src/mdi.c
-src/mdi.h
-src/mdi-child.c
-src/mdi-child.h
+src/window.c
+src/window.h
 src/stock.c
 src/stock.h
 src/ui.h
@@ -128,10 +126,6 @@ src/color.c
 src/color.h
 src/canvas-hacktext.c
 src/canvas-hacktext.h
-src/bonobo-mdi-child.c
-src/bonobo-mdi-child.h
-src/bonobo-mdi.c
-src/bonobo-mdi.h
 src/gnome-recent-model.c
 src/gnome-recent-model.h
 src/gnome-recent-util.c

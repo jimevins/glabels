@@ -55,10 +55,6 @@ void gl_cmd_file_close           (BonoboUIComponent *uic,
 				  gpointer           user_data,
 				  const gchar       *verbname);
 
-void gl_cmd_file_close_all       (BonoboUIComponent *uic,
-				  gpointer           user_data,
-				  const gchar       *verbname);
-
 void gl_cmd_file_exit            (BonoboUIComponent *uic,
 				  gpointer           user_data,
 				  const gchar       *verbname);

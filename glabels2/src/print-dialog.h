@@ -22,8 +22,7 @@
 #ifndef __PRINT_DIALOG_H__
 #define __PRINT_DIALOG_H__
 
-#include <gnome.h>
-#include <bonobo-mdi.h>
+#include <bonobo/bonobo-window.h>
 #include "label.h"
 
 extern void gl_print_dialog (glLabel *label, BonoboWindow *win);

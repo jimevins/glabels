@@ -26,7 +26,6 @@
 
 #include "view-highlight.h"
 
-#include "glabels.h"
 #include "wdgt-line.h"
 #include "wdgt-fill.h"
 #include "wdgt-size.h"
@@ -271,7 +270,6 @@ static GtkWidget *
 construct_properties_dialog (glViewEllipse *view_ellipse)
 {
 	GtkWidget          *dialog, *wsection;
-	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            line_width;
 	guint              line_color, fill_color;
@@ -294,7 +292,7 @@ construct_properties_dialog (glViewEllipse *view_ellipse)
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit ellipse object properties"),
-						  GTK_WINDOW (win),
+						  NULL,
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,

@@ -24,10 +24,8 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 
-#include "bonobo-mdi.h"
 #include "prefs-dialog.h"
 #include "prefs.h"
-#include "glabels.h"
 #include "wdgt-line.h"
 #include "wdgt-fill.h"
 #include "wdgt-text-props.h"

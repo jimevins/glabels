@@ -7,7 +7,7 @@ to version 2.0 are fairly well defined.
 
 Basically the goal of version 1.90 is to port all current
 features/capabilities to the GNOME 2.0 platform, clean up the architecture,
-and create a bonobo-mdi shell.
+and create a bonobo shell.
 
 The goal for version 1.92 is to improve several user interface capabilities
 and add drawing capabilities.
@@ -16,8 +16,8 @@ The goal for version 2.0 is to realize the fully developed template feature
 set, add tools for creating and downloading new templates, and add inline
 images to glabels files.
 
-The goals for version 2.2 and beyond is to add sophisticated text effects
-and support vector images.
+The goals for version 2.2 and beyond is to add rich text objects,
+add sophisticated text effects and support vector images.
 
 
 Detailed Outline:
@@ -31,7 +31,7 @@ VERSION 1.90:
 
 		- Port to Gnome 2.0 Platform
 
-		- Create a new MDI shell based on bonoboMDI (see gedit2).
+		- Create a new SDI shell based on bonobo (no more MDI!).
 
 		- Migrate to a more faithful MVC architecture:
 			- Migrate models (labels, label objects, and templates)
@@ -56,11 +56,7 @@ VERSION 1.90:
 
 	Other:
 		- Add preferences options:
-			- MDI style [*]
 			- object defaults (colors, line widths, fonts)
-
-			[*] These only need to be supported through gconf.
-
 
 		- Support all paper sizes that gnome-print knows about
 
@@ -154,6 +150,9 @@ VERSION 2.2:
 
 	- support for the import of vector graphics formats such as EPS or SVG.
 
+	- Make text items rich.  I.e. allow multiple characteristics to
+	  exist within a single object.
+
 	- Text effects.  (follow contour, shadows, ...)
 
 
@@ -172,9 +171,6 @@ Odds and ends WISHLIST for future versions:
 	- Add facility for tweaking output (origin).  This should really be
 	  part of the underlying print system but is currently difficult to
 	  accomplish, so I may want to add the hack.
-
-	- Make text items rich.  I.e. allow multiple characteristics to
-	  exist within a single object.
 
 	- Add a mini style preview for barcode properties (possibly text too?).
 

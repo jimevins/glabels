@@ -24,10 +24,6 @@
 	_tip="Close the current file" pixtype="stock" pixname="gtk-close"
 	accel="*Alt*F4"/>
 
-	<cmd name="FileCloseAll" _label="Close All"
-	_tip="Close all open files" pixtype="stock" pixname="gtk-close"
-	accel="*Shift**Alt*F4"/>
-
         <cmd name="FileExit" _label="Quit" _tip="Quit the program"
         pixtype="stock" pixname="gtk-quit" accel="*Control*Q"/>
 
@@ -186,8 +182,6 @@
 	
         <menuitem name="FileClose" verb="" _label="_Close"/>
 
-	<menuitem name="FileCloseAll" verb="" _label="Clos_e All"/>
-
         <menuitem name="FileExit" verb="" _label="_Quit"/>
 
 </submenu>
@@ -285,16 +279,6 @@
 
 </submenu>
 
-
-<submenu name="Documents" _label="_Documents">
-
-	<placeholder name="DocumentsOps_1" delimit="bottom"/>
-
-	<placeholder name="OpenDocuments" />
-
-	<placeholder name="DocumentsOps_2" delimit="top"/>
-
-</submenu>
 
 <submenu name="Help" _label="_Help">
 	

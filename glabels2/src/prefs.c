@@ -23,11 +23,9 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 
-#include <bonobo-mdi.h>
 #include <gconf/gconf-client.h>
 
 #include "prefs.h"
-#include "glabels.h"
 #include "util.h"
 
 #include "debug.h"
@@ -63,9 +61,6 @@ glPreferences      *gl_prefs     = NULL;
 #define PREF_DRAWING_TOOLBAR_VISIBLE        "/drawing-toolbar-visible"
 #define PREF_DRAWING_TOOLBAR_BUTTONS_STYLE  "/drawing-toolbar-buttons-style"
 #define PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS  "/drawing-toolbar-view-tooltips"
-
-#define PREF_MDI_MODE		            "/mdi-mode"
-#define PREF_TABS_POSITION	            "/mdi-tabs-position"
 
 #define PREF_MAX_RECENTS                    "/max-recents"
 
@@ -144,8 +139,6 @@ gl_prefs_init (void)
 void 
 gl_prefs_save_settings (void)
 {
-	BonoboWindow* active_window = NULL;		
-
 	gl_debug (DEBUG_PREFS, "START");
 	
 	g_return_if_fail (gconf_client != NULL);
@@ -241,18 +234,6 @@ gl_prefs_save_settings (void)
 			       BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			       gl_prefs->drawing_toolbar_view_tooltips,
 			       NULL);
-
-
-	/* MDI */
-	gconf_client_set_int (gconf_client,
-			      BASE_KEY PREF_MDI_MODE,
-			      gl_prefs->mdi_mode,
-			      NULL);
-
-	gconf_client_set_int (gconf_client,
-			      BASE_KEY PREF_TABS_POSITION,
-			      gl_prefs->mdi_tabs_position,
-			      NULL);
 
 
 	/* Recent files */
@@ -383,18 +364,6 @@ gl_prefs_load_settings (void)
 		get_bool (gconf_client,
 			  BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			  TRUE);
-
-
-	/* User Inferface/MDI */                
-	gl_prefs->mdi_mode =
-		get_int (gconf_client,
-			 BASE_KEY PREF_MDI_MODE,
-			 0);
-
-	gl_prefs->mdi_tabs_position =
-		get_int (gconf_client,
-			 BASE_KEY PREF_TABS_POSITION,
-			 0);
 
 
 	/* Recent files */

@@ -27,7 +27,6 @@
 #include "view-text.h"
 #include "canvas-hacktext.h"
 #include "view-highlight.h"
-#include "glabels.h"
 #include "wdgt-text-entry.h"
 #include "wdgt-text-props.h"
 #include "wdgt-position.h"
@@ -238,7 +237,6 @@ static GtkWidget *
 construct_properties_dialog (glViewText *view_text)
 {
 	GtkWidget          *dialog, *wsection, *wbutton;
-	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
 	GList              *lines;
@@ -269,7 +267,7 @@ construct_properties_dialog (glViewText *view_text)
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit text object properties"),
-						  GTK_WINDOW (win),
+						  NULL,
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,

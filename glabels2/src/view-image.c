@@ -26,7 +26,6 @@
 
 #include "view-highlight.h"
 
-#include "glabels.h"
 #include "wdgt-line.h"
 #include "wdgt-fill.h"
 #include "wdgt-size.h"
@@ -265,7 +264,6 @@ static GtkWidget *
 construct_properties_dialog (glViewImage *view_image)
 {
 	GtkWidget          *dialog, *wsection, *wbutton;
-	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
 	gchar              *filename;
@@ -285,7 +283,7 @@ construct_properties_dialog (glViewImage *view_image)
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit image object properties"),
-						  GTK_WINDOW (win),
+						  NULL,
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,

@@ -25,10 +25,8 @@
 #include <gnome.h>
 #include <string.h>
 
-#include "glabels.h"
 #include "xml-label.h"
 #include "file.h"
-#include "mdi.h"
 #include "recent.h"
 #include "hig.h"
 #include "alert.h"
@@ -74,24 +72,24 @@ static void save_as_destroy_cb        (GtkWidget         *widget,
 /* "New" menu callback.                                                      */
 /*****************************************************************************/
 void
-gl_file_new (void)
+gl_file_new (GtkWindow *window)
 {
 	GtkWidget    *dlg;
-	BonoboWindow *win = glabels_get_active_window ();
 
 	gl_debug (DEBUG_FILE, "START");
 
-	g_return_if_fail (glabels_mdi != NULL);
-	g_return_if_fail (win != NULL);
+	g_return_if_fail (window != NULL);
 
 	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
-					      GTK_WINDOW (win),
+					      window,
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					      NULL);
 
 	create_new_dialog_widgets (GL_HIG_DIALOG (dlg));
+
+	g_object_set_data (G_OBJECT (dlg), "parent_window", window);
 
 	g_signal_connect (G_OBJECT(dlg), "response",
 			  G_CALLBACK (new_response), dlg);
@@ -124,8 +122,7 @@ create_new_dialog_widgets (glHigDialog *dlg)
 	rotate_sel = gl_wdgt_rotate_label_new ();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), rotate_sel);
 
-	g_object_set_data (G_OBJECT (dlg), "template_entry",
-			     template_entry);
+	g_object_set_data (G_OBJECT (dlg), "template_entry", template_entry);
 	g_object_set_data (G_OBJECT (dlg), "rotate_sel", rotate_sel);
 
 	g_signal_connect (G_OBJECT (template_entry), "changed",
@@ -181,9 +178,11 @@ new_response (GtkDialog *dlg,
 	      gint       response,
 	      gpointer   user_data)
 {
-	GtkWidget  *template_entry, *rotate_sel;
-	glMDIChild *new_child = NULL;
+	GtkWidget  *template_entry, *rotate_sel, *new_window;
+	glTemplate *template;
+	glLabel    *label;
 	gint        ret;
+	glWindow   *window;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -191,9 +190,9 @@ new_response (GtkDialog *dlg,
 	case GTK_RESPONSE_OK:
 		template_entry =
 			GTK_WIDGET (g_object_get_data (G_OBJECT (dlg),
-							 "template_entry"));
+						       "template_entry"));
 		rotate_sel = GTK_WIDGET (g_object_get_data (G_OBJECT (dlg),
-							      "rotate_sel"));
+							    "rotate_sel"));
 
 		if (page_size != NULL)
 			g_free (page_size);
@@ -208,20 +207,23 @@ new_response (GtkDialog *dlg,
 		rotate_flag =
 			gl_wdgt_rotate_label_get_state (GL_WDGT_ROTATE_LABEL (rotate_sel));
 
-		new_child = gl_mdi_child_new (sheet_name, rotate_flag);
-		gl_debug (DEBUG_FILE, "template set.");
+		template = gl_template_from_name (sheet_name);
 
-		ret = bonobo_mdi_add_child (BONOBO_MDI (glabels_mdi),
-					    BONOBO_MDI_CHILD (new_child));
-		g_return_if_fail (ret != FALSE);
-		gl_debug (DEBUG_FILE, "Child added.");
+		label = GL_LABEL(gl_label_new ());
+		gl_label_set_template (label, template);
+		gl_label_set_rotate_flag (label, rotate_flag);
 
-		ret = bonobo_mdi_add_view (BONOBO_MDI (glabels_mdi),
-					   BONOBO_MDI_CHILD (new_child));
-		g_return_if_fail (ret != FALSE);
-		gl_debug (DEBUG_FILE, "View added.");
+		window =
+			GL_WINDOW (g_object_get_data (G_OBJECT (dlg),
+						      "parent_window"));
+		if ( gl_window_is_empty (window) ) {
+			gl_window_set_label (window, label);
+		} else {
+			new_window = gl_window_new_from_label (label);
+			gtk_widget_show_all (new_window);
+		}
+		
 
-		gtk_widget_grab_focus (GTK_WIDGET (glabels_get_active_view ()));
 		break;
 	}
 
@@ -234,17 +236,16 @@ new_response (GtkDialog *dlg,
 /* "Open" menu callback.                                                     */
 /*****************************************************************************/
 void
-gl_file_open (glMDIChild *active_child)
+gl_file_open (GtkWindow *window)
 {
 	GtkFileSelection *fsel;
-	BonoboWindow     *app = glabels_get_active_window ();
 
 	gl_debug (DEBUG_FILE, "START");
 
-	g_return_if_fail (app != NULL);
+	g_return_if_fail (window != NULL);
 
 	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Open")));
-	gtk_window_set_transient_for (GTK_WINDOW (fsel), GTK_WINDOW (app));
+	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
 	gtk_window_set_title (GTK_WINDOW (fsel), _("Open label"));
 
 	g_signal_connect (G_OBJECT (fsel->ok_button), "clicked",
@@ -274,7 +275,6 @@ open_ok (GtkWidget        *widget,
 {
 	gchar            *filename;
 	GtkWidget        *dlg;
-	glMDIChild       *new_child = NULL;
 	gint              ret;
 	GnomeRecentModel *recent;
 
@@ -333,11 +333,11 @@ open_ok (GtkWidget        *widget,
 gboolean
 gl_file_open_recent (GnomeRecentView *view,
 		     const gchar     *filename,
-		     BonoboWindow    *win)
+		     GtkWindow       *window)
 {
 	gl_debug (DEBUG_FILE, "");
 
-	return gl_file_open_real (filename, GTK_WINDOW(win));
+	return gl_file_open_real (filename, window);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -345,18 +345,20 @@ gl_file_open_recent (GnomeRecentView *view,
 /*---------------------------------------------------------------------------*/
 gboolean
 gl_file_open_real (const gchar     *filename,
-		   GtkWindow       *win)
+		   GtkWindow       *window)
 {
 	gchar            *abs_filename;
-	glMDIChild       *new_child = NULL;
+	glLabel          *label;
+	glXMLLabelStatus  status;
 	GnomeRecentModel *recent;
 	gint              ret;
+	GtkWidget        *new_window;
 
 	gl_debug (DEBUG_FILE, "START");
 
 	abs_filename = gl_util_make_absolute (filename);
-	new_child = gl_mdi_child_new_with_uri (filename, NULL);
-	if (!new_child) {
+	label = gl_xml_label_open (abs_filename, &status);
+	if (!label) {
 		GtkWidget *dlg;
 		gchar *primary_msg;
 
@@ -365,7 +367,7 @@ gl_file_open_real (const gchar     *filename,
 		primary_msg = g_strdup_printf (_("Could not open file \"%s\""),
 					       filename);
 
-		dlg = gl_alert_dialog_new (GTK_WINDOW(win),
+		dlg = gl_alert_dialog_new (window,
 					   GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_CLOSE,
@@ -385,17 +387,12 @@ gl_file_open_real (const gchar     *filename,
 
 	} else {
 
-		ret = bonobo_mdi_add_child (BONOBO_MDI (glabels_mdi),
-					    BONOBO_MDI_CHILD (new_child));
-		g_return_if_fail (ret != FALSE);
-		gl_debug (DEBUG_FILE, "Child added.");
-
-		ret = bonobo_mdi_add_view (BONOBO_MDI (glabels_mdi),
-					   BONOBO_MDI_CHILD (new_child));
-		g_return_if_fail (ret != FALSE);
-		gl_debug (DEBUG_FILE, "View added.");
-
-		gtk_widget_grab_focus (GTK_WIDGET (glabels_get_active_view ()));
+		if ( gl_window_is_empty (GL_WINDOW(window)) ) {
+			gl_window_set_label (GL_WINDOW(window), label);
+		} else {
+			new_window = gl_window_new_from_label (label);
+			gtk_widget_show_all (new_window);
+		}
 
 		recent = gl_recent_get_model ();
 		gnome_recent_model_add (recent, abs_filename);
@@ -419,26 +416,23 @@ gl_file_open_real (const gchar     *filename,
 /* "Save" menu callback.                                                     */
 /*****************************************************************************/
 gboolean
-gl_file_save (glMDIChild *child)
+gl_file_save (glLabel   *label,
+	      GtkWindow *window)
 {
 	glXMLLabelStatus  status;
-	glLabel          *label = NULL;
 	GError           *error = NULL;
 	gchar            *filename = NULL;
 	GnomeRecentModel *recent;
 
 	gl_debug (DEBUG_FILE, "");
 
-	g_return_val_if_fail (child != NULL, FALSE);
-	
-	label = child->label;
 	g_return_val_if_fail (label != NULL, FALSE);
 	
 	if (gl_label_is_untitled (label))
 	{
 		gl_debug (DEBUG_FILE, "Untitled");
 
-		return gl_file_save_as (child);
+		return gl_file_save_as (label, window);
 	}
 
 	if (!gl_label_is_modified (label))	
@@ -463,7 +457,7 @@ gl_file_save (glMDIChild *child)
 		primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
 					       filename);
 
-		dialog = gl_alert_dialog_new (GTK_WINDOW(glabels_get_active_window()),
+		dialog = gl_alert_dialog_new (window,
 					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_MESSAGE_ERROR,
 					      GTK_BUTTONS_CLOSE,
@@ -496,24 +490,24 @@ gl_file_save (glMDIChild *child)
 /* "Save As" menu callback.                                                  */
 /*****************************************************************************/
 gboolean
-gl_file_save_as (glMDIChild *child)
+gl_file_save_as (glLabel   *label,
+		 GtkWindow *window)
 {
 	GtkFileSelection *fsel;
-	BonoboWindow     *app = glabels_get_active_window ();
 	gboolean          saved_flag = FALSE;
 	gboolean          destroy_flag = FALSE;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	g_return_val_if_fail (child != NULL, FALSE);
-	g_return_val_if_fail (app != NULL, FALSE);
+	g_return_val_if_fail (label != NULL, FALSE);
+	g_return_val_if_fail (window != NULL, FALSE);
 
 
 	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Save label as")));
 	gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW (fsel), GTK_WINDOW (app));
+	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
 
-	g_object_set_data (G_OBJECT (fsel), "child", child);
+	g_object_set_data (G_OBJECT (fsel), "label", label);
 	g_object_set_data (G_OBJECT (fsel), "saved_flag", &saved_flag);
 
 	g_signal_connect (G_OBJECT (fsel->ok_button), "clicked",
@@ -561,7 +555,6 @@ save_as_ok_cb (GtkWidget        *widget,
 {
 	gchar            *raw_filename, *filename;
 	GtkWidget        *dlg;
-	glMDIChild       *child;
 	glLabel          *label;
 	glXMLLabelStatus  status;
 	GnomeRecentModel *recent;
@@ -573,14 +566,8 @@ save_as_ok_cb (GtkWidget        *widget,
 
 	g_return_if_fail (GTK_IS_FILE_SELECTION (fsel));
 
-	child = g_object_get_data (G_OBJECT(fsel), "child");
+	label = g_object_get_data (G_OBJECT(fsel), "label");
 	saved_flag = g_object_get_data (G_OBJECT(fsel), "saved_flag");
-
-	g_return_if_fail (child != NULL);
-	g_return_if_fail (GL_IS_MDI_CHILD (child));
-	gl_debug (DEBUG_FILE, "Got child");
-
-	label = child->label;
 
 	/* get the filename */
 	raw_filename = g_strdup (gtk_file_selection_get_filename (fsel));
@@ -707,61 +694,94 @@ save_as_destroy_cb (GtkWidget *widget,
 /*****************************************************************************/
 /* "Close" menu callback.                                                    */
 /*****************************************************************************/
-void
-gl_file_close (GtkWidget *view)
-{
-	gint            ret;
-	BonoboMDIChild *child;
-
-	gl_debug (DEBUG_FILE, "START");
-
-	g_return_if_fail (view != NULL);
-
-	child = bonobo_mdi_get_child_from_view (view);
-	g_return_if_fail (child != NULL);
-
-	if (g_list_length (bonobo_mdi_child_get_views (child)) > 1)
-	{		
-		ret = bonobo_mdi_remove_view (BONOBO_MDI (glabels_mdi), view, FALSE);
-		gl_debug (DEBUG_FILE, "View removed.");
-	}
-	else
-	{
-		ret = bonobo_mdi_remove_child (BONOBO_MDI (glabels_mdi), child, FALSE);
-		gl_debug (DEBUG_FILE, "Child removed.");
-	}
-
-	if (ret)
-		gl_mdi_set_active_window_title (BONOBO_MDI (glabels_mdi));
-
-	if (bonobo_mdi_get_active_child (BONOBO_MDI (glabels_mdi)) == NULL)
-	{
-		gl_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (glabels_mdi));
-	}
-
-	gl_debug (DEBUG_FILE, "END");
-}
-
-/*****************************************************************************/
-/* "Close all"                                                               */
-/*****************************************************************************/
 gboolean
-gl_file_close_all (void)
+gl_file_close (glWindow *window)
 {
-	gboolean ret;
+	glView  *view;
+	glLabel *label;
+	gboolean close = TRUE;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	ret = bonobo_mdi_remove_all (BONOBO_MDI (glabels_mdi), FALSE);
+	g_return_val_if_fail (window && GL_IS_WINDOW(window), TRUE);
 
-	if (bonobo_mdi_get_active_child (BONOBO_MDI (glabels_mdi)) == NULL)
-	{
-		gl_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (glabels_mdi));
+	if ( !gl_window_is_empty (window) ) {
+
+		view = GL_VIEW(window->view);
+		label = view->label;
+
+		if (gl_label_is_modified (label))	{
+			GtkWidget *msgbox, *w;
+			gchar *fname = NULL, *msg = NULL;
+			gint ret;
+			gboolean exiting;
+
+			fname = gl_label_get_short_name (label);
+			
+			msg = g_strdup_printf (_("Save changes to document \"%s\" before closing?"),
+					       fname);
+			
+			msgbox = gl_alert_dialog_new (GTK_WINDOW(window),
+						      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_MESSAGE_WARNING,
+						      GTK_BUTTONS_NONE,
+						      msg,
+						      _("Your changes will be lost if you don't save them."));
+
+			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+					       _("Close without saving"),
+					       GTK_RESPONSE_NO);
+
+			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+
+			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+					       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
+
+			gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
+
+			gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+
+			ret = gtk_dialog_run (GTK_DIALOG (msgbox));
+		
+			gtk_widget_destroy (msgbox);
+
+			g_free (fname);
+			g_free (msg);
+		
+			switch (ret)
+			{
+			case GTK_RESPONSE_YES:
+				close = gl_file_save (label,
+						      GTK_WINDOW(window));
+				break;
+			case GTK_RESPONSE_NO:
+				close = TRUE;
+				break;
+			default:
+				close = FALSE;
+			}
+
+			gl_debug (DEBUG_FILE, "CLOSE: %s", close ? "TRUE" : "FALSE");
+		}
+
+	}
+
+	if (close) {
+		gtk_widget_destroy (GTK_WIDGET(window));
+
+		if ( gl_window_get_window_list () == NULL ) {
+			
+			gl_debug (DEBUG_FILE, "All windows closed.");
+	
+			bonobo_main_quit ();
+		}
+
 	}
 
 	gl_debug (DEBUG_FILE, "END");
 
-	return ret;
+	return close;
 }
 
 /*****************************************************************************/
@@ -770,27 +790,18 @@ gl_file_close_all (void)
 void
 gl_file_exit (void)
 {
+	const GList *window_list;
+	GList       *p, *p_next;
+
 	gl_debug (DEBUG_FILE, "START");
-	
-	if (!gl_file_close_all ())
-		return;
 
-	gl_debug (DEBUG_FILE, "All files closed.");
-	
-	/* We need to disconnect the signal because mdi "destroy" event
-	   is connected to gl_file_exit ( i.e. this function ). */
-	g_signal_handlers_disconnect_by_func (G_OBJECT (glabels_mdi),
-					      G_CALLBACK (gl_file_exit), NULL);
-	
-	gl_prefs_save_settings ();
+	window_list = gl_window_get_window_list ();
 
-	gl_debug (DEBUG_FILE, "Unref glabels_mdi.");
+	for (p=(GList *)window_list; p != NULL; p=p_next) {
+		p_next = p->next;
 
-	g_object_unref (G_OBJECT (glabels_mdi));
-
-	gl_debug (DEBUG_FILE, "Unref glabels_mdi: DONE");
-
-	gtk_main_quit ();
+		gl_file_close (GL_WINDOW(p->data));
+	}
 
 	gl_debug (DEBUG_FILE, "END");
 }

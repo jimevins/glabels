@@ -21,8 +21,6 @@
  */
 #include <config.h>
 
-#include "glabels.h"
-#include "mdi.h"
 #include "view.h"
 #include "merge.h"
 #include "merge-ui.h"
@@ -79,7 +77,6 @@ gl_merge_properties_dialog (glView *view)
 {
 	static PropertyDialogPassback *data = NULL;
 	GtkWidget *dialog;
-	BonoboWindow *win = glabels_get_active_window ();
 
 	if (data == NULL) {
 		data = g_new0 (PropertyDialogPassback, 1);
@@ -87,7 +84,7 @@ gl_merge_properties_dialog (glView *view)
 
 	dialog = gl_hig_dialog_new_with_buttons (
 		_("Edit document-merge properties"),
-		GTK_WINDOW (win),
+		NULL,
 		GTK_DIALOG_DESTROY_WITH_PARENT,
 		GTK_STOCK_OK, GTK_RESPONSE_OK,
 		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,

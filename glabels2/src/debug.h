@@ -45,7 +45,8 @@ typedef enum {
 	GL_DEBUG_UNDO,
 	GL_DEBUG_RECENT,
 	GL_DEBUG_COMMANDS,
-	GL_DEBUG_MDI,
+	GL_DEBUG_WINDOW,
+	GL_DEBUG_UI,
 	GL_DEBUG_MEDIA_SELECT,
 	GL_DEBUG_MINI_PREVIEW,
 	GL_DEBUG_WDGT,
@@ -64,7 +65,8 @@ extern gint gl_debug_merge;
 extern gint gl_debug_commands;
 extern gint gl_debug_undo;
 extern gint gl_debug_recent;
-extern gint gl_debug_mdi;
+extern gint gl_debug_window;
+extern gint gl_debug_ui;
 extern gint gl_debug_media_select;
 extern gint gl_debug_mini_preview;
 extern gint gl_debug_wdgt;
@@ -85,7 +87,8 @@ extern gint gl_debug_wdgt;
 #define	DEBUG_UNDO	GL_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_RECENT	GL_DEBUG_RECENT,  __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_COMMANDS	GL_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_MDI	GL_DEBUG_MDI,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_WINDOW    GL_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_UI        GL_DEBUG_UI,      __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_MEDIA_SELECT	GL_DEBUG_MEDIA_SELECT,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_MINI_PREVIEW	GL_DEBUG_MINI_PREVIEW,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_WDGT	GL_DEBUG_WDGT,    __FILE__, __LINE__, __FUNCTION__

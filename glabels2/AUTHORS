@@ -29,20 +29,11 @@ canvas item:
 	Lauris Kaplinski <lauris@helixcode.com>
 
 
-I borrowed quite a bit of code from gedit2 to create the bonobo-mdi shell for
-gLabels.  The authors of gedit2:
-
-	Paolo Maggi <maggi@athena.polito.it>
-	Chema Celorio <chema@ximian.com>
-	James Willcox <jwillcox@cs.indiana.edu>
-	Federico Mena Quintero <federico@ximian.com>
-
-
 Translations:
 
 	Olivier Berger <oberger@april.org> -- French
 	Marcus Bauer <m@7n7.de> -- German (original)
-	Christian Neumair <christian-neumair@web.de> -- German
+	Christian Neumair <christian-neumair@web.de> -- German (1.89.1)
 	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
 	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
 	Víctor Moral <victor@pasmao.net> -- Spanish translations

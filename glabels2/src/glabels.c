@@ -20,37 +20,24 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/*
- * This file is based on gedit2.c from gedit2:
- *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
- *
- */
 #include <config.h>
 
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
 
-#include "glabels.h"
 #include "splash.h"
 #include "stock.h"
 #include "merge.h"
 #include "template.h"
-#include "mdi.h"
 #include "prefs.h"
-#include "file.h"
 #include "debug.h"
+#include "window.h"
 
 #define ICON_PIXMAP gnome_program_locate_file (NULL,\
 					       GNOME_FILE_DOMAIN_APP_PIXMAP,\
 					       "glabels/glabels-icon.png",\
 					       FALSE, NULL)
-
-glMDI *glabels_mdi = NULL;
-gboolean glabels_close_x_button_pressed = FALSE;
-gboolean glabels_exit_button_pressed = FALSE; 
 
 static const struct poptOption options [] =
 {
@@ -90,8 +77,11 @@ static const struct poptOption options [] =
 	{ "debug-recent", '\0', POPT_ARG_NONE, &gl_debug_recent, 0,
 	  N_("Show recent debugging messages."), NULL },
 
-	{ "debug-mdi", '\0', POPT_ARG_NONE, &gl_debug_mdi, 0,
-	  N_("Show mdi debugging messages."), NULL },
+	{ "debug-window", '\0', POPT_ARG_NONE, &gl_debug_window, 0,
+	  N_("Show window debugging messages."), NULL },
+
+	{ "debug-ui", '\0', POPT_ARG_NONE, &gl_debug_ui, 0,
+	  N_("Show ui debugging messages."), NULL },
 
 	{ "debug-media-select", '\0', POPT_ARG_NONE, &gl_debug_media_select, 0,
 	  N_("Show media select widget debugging messages."), NULL },
@@ -118,6 +108,7 @@ main (int argc, char **argv)
 	char         **args;
 	GList         *file_list = NULL, *p;
 	gint           i;
+	GtkWidget     *win;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -154,6 +145,10 @@ main (int argc, char **argv)
 	gl_merge_ui_init();
 	gl_recent_init();
 
+	if (bonobo_ui_init ("glabels", VERSION, &argc, argv) == FALSE) {
+		g_error (_("Could not initialize Bonobo!\n"));
+	}
+
 	/* Parse args and build the list of files to be loaded at startup */
 	g_value_init (&value, G_TYPE_POINTER);
     	g_object_get_property (G_OBJECT (program),
@@ -166,65 +161,22 @@ main (int argc, char **argv)
 		file_list = g_list_append (file_list, args[i]);
 	}
 
-	/* Create glabels_mdi and open the first top level window */
-	glabels_mdi = gl_mdi_new ();
-	bonobo_mdi_open_toplevel (BONOBO_MDI (glabels_mdi), NULL); 
-
+	/* Open files or create empty top-level window. */
 	for (p = file_list; p; p = p->next) {
-		gl_file_open_real (p->data,
-				   GTK_WINDOW(glabels_get_active_window()));
+		win = gl_window_new_from_file (p->data);
+		gtk_widget_show_all (win);
+	}
+	if ( gl_window_get_window_list() == NULL ) {
+		win = gl_window_new ();
+		gtk_widget_show_all (win);
 	}
 	g_list_free (file_list);
 
-	gtk_main();
+	
+	/* Begin main loop */
+	bonobo_main();
 		
 	return 0;
 }
 
-
-BonoboWindow*
-glabels_get_active_window (void)
-{
-	g_return_val_if_fail (glabels_mdi != NULL, NULL);
-
-	return	bonobo_mdi_get_active_window (BONOBO_MDI (glabels_mdi));
-}
-
-glLabel*
-glabels_get_active_label (void)
-{
-	BonoboMDIChild *active_child;
-
-	g_return_val_if_fail (glabels_mdi != NULL, NULL);
-
-	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (glabels_mdi));
-
-	if (active_child == NULL)
-		return NULL;
-
-	return GL_MDI_CHILD (active_child)->label;
-}
-
-glView*
-glabels_get_active_view (void)
-{
-	GtkWidget *active_view;
-
-	g_return_val_if_fail (glabels_mdi != NULL, NULL);
-
-	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi));
-	
-	if (active_view == NULL)
-		return NULL;
-
-	return GL_VIEW (active_view);
-}
-
-GList* 
-glabels_get_top_windows (void)
-{
-	g_return_val_if_fail (glabels_mdi != NULL, NULL);
-
-	return	bonobo_mdi_get_windows (BONOBO_MDI (glabels_mdi));
-}
 

@@ -26,7 +26,6 @@
 
 #include "view-highlight.h"
 
-#include "glabels.h"
 #include "wdgt-line.h"
 #include "wdgt-vector.h"
 #include "wdgt-position.h"
@@ -271,7 +270,6 @@ static GtkWidget *
 construct_properties_dialog (glViewLine *view_line)
 {
 	GtkWidget          *dialog, *wsection;
-	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            line_width;
 	guint              line_color;
@@ -293,7 +291,7 @@ construct_properties_dialog (glViewLine *view_line)
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit line object properties"),
-						  GTK_WINDOW (win),
+						  NULL,
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,

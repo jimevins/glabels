@@ -44,13 +44,10 @@ BUILT_SOURCES = 			\
 
 glabels_SOURCES = 			\
 	glabels.c			\
-	glabels.h			\
 	splash.c 			\
 	splash.h 			\
-	mdi.c				\
-	mdi.h				\
-	mdi-child.c			\
-	mdi-child.h			\
+	window.c			\
+	window.h			\
 	stock.c				\
 	stock.h				\
 	ui.h				\
@@ -169,10 +166,6 @@ glabels_SOURCES = 			\
 	color.h				\
 	canvas-hacktext.c		\
 	canvas-hacktext.h		\
-	bonobo-mdi-child.c		\
-	bonobo-mdi-child.h		\
-	bonobo-mdi.c			\
-	bonobo-mdi.h			\
 	gnome-recent-model.c		\
 	gnome-recent-model.h		\
 	gnome-recent-util.c		\

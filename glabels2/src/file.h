@@ -23,32 +23,36 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 
-#include "mdi-child.h"
 #include "gnome-recent-view.h"
+#include <gtk/gtk.h>
+
+#include "label.h"
+#include "window.h"
 
 G_BEGIN_DECLS
 
-void     gl_file_new         (void);
+void     gl_file_new         (GtkWindow       *window);
 
 
-void     gl_file_open        (glMDIChild      *active_child);
+void     gl_file_open        (GtkWindow       *window);
+
 
 gboolean gl_file_open_recent (GnomeRecentView *view,
 			      const gchar     *filename,
-			      BonoboWindow    *win);
+			      GtkWindow       *window);;
 
 gboolean gl_file_open_real   (const gchar     *filename,
-			      GtkWindow       *win);
+			      GtkWindow       *window);
 
 
-gboolean gl_file_save        (glMDIChild      *child);
+gboolean gl_file_save        (glLabel         *label,
+			      GtkWindow       *window);
 
-gboolean gl_file_save_as     (glMDIChild      *child);
+gboolean gl_file_save_as     (glLabel         *label,
+			      GtkWindow       *window);
 
 
-void     gl_file_close       (GtkWidget       *view);
-
-gboolean gl_file_close_all   (void);
+gboolean gl_file_close       (glWindow        *window);
 
 void     gl_file_exit        (void);
 
