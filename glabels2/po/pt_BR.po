@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 1.91.0\n"
-"POT-Creation-Date: 2002-12-31 03:04-0500\n"
+"POT-Creation-Date: 2003-06-22 01:12-0400\n"
 "PO-Revision-Date: 2003-01-03 23:15-0300\n"
 "Last-Translator: Paulo R. Ormenese <pormenese@uol.com.br>\n"
 "Language-Team: Brazilian portuguese <>\n"
@@ -286,7 +286,7 @@ msgstr "Pr_eferências..."
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/glabels-ui.xml.h:69 src/print-dialog.c:96
+#: src/glabels-ui.xml.h:69 src/print-dialog.c:104
 msgid "Print"
 msgstr "Imprimir"
 
@@ -385,11 +385,15 @@ msgstr "Enviar para _trás"
 
 #: src/glabels-ui.xml.h:94
 msgid "Set drawing toolbar button style according to desktop default"
-msgstr "Define estilo de botão da barra de ferramentas de desenho de acordo com padrão do desktop"
+msgstr ""
+"Define estilo de botão da barra de ferramentas de desenho de acordo com "
+"padrão do desktop"
 
 #: src/glabels-ui.xml.h:95
 msgid "Set main toolbar button style according to desktop default"
-msgstr "Define estilo de botão da barra de ferramentas principal de acordo com padrão do desktop"
+msgstr ""
+"Define estilo de botão da barra de ferramentas principal de acordo com "
+"padrão do desktop"
 
 #: src/glabels-ui.xml.h:96
 msgid "Show _Tooltips"
@@ -467,7 +471,7 @@ msgstr "_Criar Objeto"
 msgid "_Debug"
 msgstr "_Depurar"
 
-#: src/glabels-ui.xml.h:115 src/view.c:2819
+#: src/glabels-ui.xml.h:115 src/view.c:3078
 msgid "_Delete"
 msgstr "_Apagar"
 
@@ -538,7 +542,7 @@ msgstr "_Abrir..."
 #.
 #. * Submenu: Order
 #.
-#: src/glabels-ui.xml.h:132 src/view.c:2665
+#: src/glabels-ui.xml.h:132 src/view.c:2924
 msgid "_Order"
 msgstr "_Ordenar"
 
@@ -561,7 +565,7 @@ msgstr "_Direitas"
 #.
 #. * Submenu: Rotate/Flip
 #.
-#: src/glabels-ui.xml.h:137 src/view.c:2686
+#: src/glabels-ui.xml.h:137 src/view.c:2945
 msgid "_Rotate/Flip"
 msgstr "_Girar/Refletir"
 
@@ -585,131 +589,141 @@ msgstr "_Topos"
 msgid "_View"
 msgstr "_Visualizar"
 
-#: src/glabels.c:51
+#: src/glabels.c:52
 msgid "Show view debugging messages."
 msgstr "Exibe mensagens de depuração de visualização."
 
-#: src/glabels.c:54
+#: src/glabels.c:55
 msgid "Show item debugging messages."
 msgstr "Exibe mensagens de depuração de item."
 
-#: src/glabels.c:57
+#: src/glabels.c:58
 msgid "Show printing debugging messages."
 msgstr "Exibe mensagens de depuração de impressão."
 
-#: src/glabels.c:60
+#: src/glabels.c:61
 msgid "Show prefs debugging messages."
 msgstr "Exibe mensagens de depuração de preferências."
 
-#: src/glabels.c:63
+#: src/glabels.c:64
 msgid "Show file debugging messages."
 msgstr "Exibe mensagens de depuração de arquivo."
 
-#: src/glabels.c:66
+#: src/glabels.c:67
 msgid "Show document debugging messages."
 msgstr "Exibe mensagens de depuração de documeto."
 
-#: src/glabels.c:69
+#: src/glabels.c:70
 msgid "Show template debugging messages."
 msgstr "Exibe mensagens de depuração de modelo."
 
-#: src/glabels.c:72
+#: src/glabels.c:73
+#, fuzzy
+msgid "Show paper debugging messages."
+msgstr "Exibe mensagens de depuração de preferências."
+
+#: src/glabels.c:76
 msgid "Show xml debugging messages."
 msgstr "Exibe mensagens de depuração de xml."
 
-#: src/glabels.c:75
+#: src/glabels.c:79
 msgid "Show document merge debugging messages."
 msgstr "Exibe mensagens de depuração de fusão de documento."
 
-#: src/glabels.c:78
+#: src/glabels.c:82
 msgid "Show commands debugging messages."
 msgstr "Exibe mensagens de depuração de comandos."
 
-#: src/glabels.c:81
+#: src/glabels.c:85
 msgid "Show undo debugging messages."
 msgstr "Exibe mensagens de depuração de desfazer."
 
-#: src/glabels.c:84
+#: src/glabels.c:88
 msgid "Show recent debugging messages."
 msgstr "Exibe mensagens de depuração de recentes"
 
-#: src/glabels.c:87
+#: src/glabels.c:91
 msgid "Show window debugging messages."
 msgstr "Exibe mensagens de depuração de janela."
 
-#: src/glabels.c:90
+#: src/glabels.c:94
 msgid "Show ui debugging messages."
 msgstr "Exibe mensagens de depuração de ui."
 
-#: src/glabels.c:93
+#: src/glabels.c:97
 msgid "Show media select widget debugging messages."
 msgstr "Exibe mensagens de depuração de widget de seleção de mídia."
 
-#: src/glabels.c:96
+#: src/glabels.c:100
 msgid "Show mini preview widget debugging messages."
 msgstr "Exibe mensagens de depuração de widget de mini previsão."
 
-#: src/glabels.c:99
+#: src/glabels.c:103
+#, fuzzy
+msgid "Show pixbuf cache debugging messages."
+msgstr "Exibe mensagens de depuração de visualização."
+
+#: src/glabels.c:106
 msgid "Show widget debugging messages."
 msgstr "Exibe mensagens de depuração de widget."
 
-#: src/glabels.c:102
+#: src/glabels.c:109
 msgid "Turn on all debugging messages."
 msgstr "Ativa todas as mensagens de depuração."
 
-#: src/glabels.c:171
+#: src/glabels.c:180
 msgid "Could not initialize Bonobo!\n"
 msgstr "Impossível inicializar Bonobo!\n"
 
-#: src/glabels-batch.c:47
+#: src/glabels-batch.c:48
 msgid "print this message"
 msgstr "mostra esta mensagem"
 
-#: src/glabels-batch.c:49
+#: src/glabels-batch.c:50
 msgid "print the version of glabels-batch being used"
 msgstr "mostra a versão de glabels-batch que está sendo usada"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "set output filename (default=\"output.ps\")"
 msgstr "define o nome do arquivo de saída (padrão=\"output.ps\")"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "filename"
 msgstr "nome_de_arquivo"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "número de páginas (padrão=1)"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "sheets"
 msgstr "páginas"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "número de cópias (padrão=1)"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "copies"
 msgstr "cópias"
 
-#: src/glabels-batch.c:57 src/print-dialog.c:192
+#: src/glabels-batch.c:58 src/print-dialog.c:200
 msgid "print outlines (to test printer alignment)"
 msgstr "imprimir contornos (testar alinhamento da impressora)"
 
-#: src/glabels-batch.c:59 src/print-dialog.c:201
+#: src/glabels-batch.c:60 src/print-dialog.c:209
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "imprimir ao contrário (como uma imagem de espelho)"
 
-#: src/glabels-batch.c:94
+#: src/glabels-batch.c:95
 msgid "[OPTION...] GLABELS_FILE..."
 msgstr "[OPÇÃO...] ARQUIVO_GLABELS..."
 
-#: src/glabels-batch.c:113
+#: src/glabels-batch.c:114
 msgid "missing glabels file\n"
 msgstr "faltando arquivo glabels\n"
 
-#: src/glabels-batch.c:139
+#: src/glabels-batch.c:141
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "impossível abrir o arquivo glabels %s\n"
@@ -854,15 +868,15 @@ msgid "Close without saving"
 msgstr "Fechar sem salvar"
 
 #. Should not happen
-#: src/prefs.c:653 src/prefs.c:660 src/wdgt-line.c:180
+#: src/prefs.c:664 src/prefs.c:671 src/wdgt-line.c:180
 msgid "points"
 msgstr "pontos"
 
-#: src/prefs.c:655
+#: src/prefs.c:666
 msgid "inches"
 msgstr "poleg."
 
-#: src/prefs.c:657
+#: src/prefs.c:668
 msgid "mm"
 msgstr "mm"
 
@@ -904,12 +918,21 @@ msgstr "Milímetros"
 msgid "Default page size"
 msgstr "Tamanho de página padrão"
 
+#: src/prefs-dialog.c:309
+msgid "US Letter"
+msgstr ""
+
+#: src/prefs-dialog.c:317
+msgid "A4"
+msgstr ""
+
 #: src/prefs-dialog.c:354
 msgid "Select default properties for new objects."
 msgstr "Selecione as propriedades padrões para novos objetos."
 
 #. ------ text props entry ------
 #: src/prefs-dialog.c:359 src/view-text.c:314 src/view-text.c:634
+#: src/wdgt-bc-style.c:184
 msgid "Text"
 msgstr "Texto"
 
@@ -926,14 +949,14 @@ msgstr "Preencher"
 #.
 #. * Submenu: Align Horizontally
 #.
-#: src/view.c:2719
+#: src/view.c:2978
 msgid "Align _Horizontally"
 msgstr "Alinhar _Horizontalmente"
 
 #.
 #. * Submenu: Align Vertically
 #.
-#: src/view.c:2758
+#: src/view.c:3017
 msgid "Align _Vertically"
 msgstr "Alinhar _Verticalmente"
 
@@ -1010,7 +1033,7 @@ msgstr "Editar propriedades do objeto código de barras"
 msgid "Data"
 msgstr "Dado"
 
-#: src/view-barcode.c:801 src/print.c:905
+#: src/view-barcode.c:802 src/print.c:912
 msgid "Invalid barcode"
 msgstr "Código de barras inválido"
 
@@ -1053,111 +1076,131 @@ msgstr "Selecionar"
 msgid "Record/Field"
 msgstr "Registro/Campo"
 
-#: src/print-dialog.c:120
+#: src/print-dialog.c:128
 msgid "_Job"
 msgstr "_Trabalho"
 
-#: src/print-dialog.c:125
+#: src/print-dialog.c:133
 msgid "P_rinter"
 msgstr "Imp_ressora"
 
 #. ----------- Add simple-copies widget ------------
-#: src/print-dialog.c:155
+#: src/print-dialog.c:163
 msgid "Copies"
 msgstr "Cópias"
 
 #. ------- Otherwise add merge control widget ------------
-#: src/print-dialog.c:169
+#: src/print-dialog.c:177
 msgid "Document merge control"
 msgstr "Controle de fusão do documento"
 
 #. ----------- Add custom print options area ------------
-#: src/print-dialog.c:186
+#: src/print-dialog.c:194
 msgid "Options"
 msgstr "Opções"
 
-#: src/print-dialog.c:326 src/print-dialog.c:364
+#: src/print-dialog.c:336 src/print-dialog.c:374
 msgid "Print preview"
 msgstr "Visualizar impressão"
 
-#: src/label.c:565
+#: src/label.c:542
 msgid "Untitled"
 msgstr "Sem_título"
 
-#: src/template.c:374
+#: src/template.c:296
 #, c-format
 msgid "Generic %s full page"
 msgstr "Página completa %s genérico"
 
-#: src/template.c:414
+#: src/template.c:338
 msgid "No template files found!"
 msgstr "Nenhum arquivo modelo encontrado!"
 
-#: src/template.c:972
+#: src/template.c:435
 #, c-format
 msgid "%s x %s %s"
 msgstr "%s x %s %s"
 
-#: src/template.c:977
+#: src/template.c:440
 #, c-format
 msgid "%.5g x %.5g %s"
 msgstr "%.5g x %.5g %s"
 
-#: src/template.c:988 src/template.c:1002
+#: src/template.c:451 src/template.c:465
 #, c-format
 msgid "%s %s diameter"
 msgstr "%s %s diâmetro"
 
-#: src/template.c:992 src/template.c:1006
+#: src/template.c:455 src/template.c:469
 #, c-format
 msgid "%.5g %s diameter"
 msgstr "%.5g %s diâmetro"
 
-#: src/template.c:1136
+#: src/template.c:607
 #, c-format
 msgid "%d x %d  (%d per sheet)"
 msgstr "%d x %d  (%d por página)"
 
-#: src/template.c:1140
+#: src/template.c:611
 #, c-format
 msgid "%d per sheet"
 msgstr "%d por página"
 
-#: src/xml-label.c:151 src/xml-label.c:182
+#: src/paper.c:322
+#, fuzzy
+msgid "No paper files found!"
+msgstr "Nenhum arquivo modelo encontrado!"
+
+#: src/xml-label.c:171 src/xml-label.c:204
 msgid "xmlParseFile error"
 msgstr "erro: xmlParseFile"
 
-#: src/xml-label.c:217
+#: src/xml-label.c:241
 msgid "No document root"
 msgstr "Sem raiz do documento"
 
-#: src/xml-label.c:229
+#: src/xml-label.c:253
 msgid "Importing from glabels 0.1 format"
 msgstr "Importando do formato do glabels 0.1"
 
-#: src/xml-label.c:237
+#: src/xml-label.c:261
 msgid "Importing from glabels 0.4 format"
 msgstr "Importando do formato do glabels 0.4"
 
-#: src/xml-label.c:240
+#: src/xml-label.c:264
 msgid "bad document, unknown glabels Namespace"
 msgstr "documento ruim, espaço de nome glabels não encontrado"
 
-#: src/xml-label.c:268 src/xml-label-04.c:74
+#: src/xml-label.c:292 src/xml-label-04.c:75
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Nó raiz ruim = \"%s\""
 
-#: src/xml-label.c:291 src/xml-label.c:323 src/xml-label-04.c:123
+#: src/xml-label.c:325
+#, fuzzy, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "Nó raiz ruim = \"%s\""
+
+#: src/xml-label.c:357 src/xml-label-04.c:123
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "nó ruim = \"%s\""
 
-#: src/xml-label.c:704
+#: src/xml-label.c:763
+#, fuzzy, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "nó ruim = \"%s\""
+
+#: src/xml-label.c:831
 msgid "Problem saving xml file."
 msgstr "Problema salvando arquivo xml."
 
-#: src/merge.c:174 src/merge.c:215 src/merge.c:400 src/merge.c:403
+#: src/xml-template.c:157
+#, c-format
+msgid "Unknown page size id \"%s\""
+msgstr ""
+
+#: src/merge.c:172 src/merge.c:213 src/merge.c:398 src/merge.c:401
 msgid "None"
 msgstr "Nenhum"
 
@@ -1180,7 +1223,7 @@ msgstr "Fonte:"
 
 #. Text Color Label
 #: src/wdgt-text-props.c:230 src/wdgt-line.c:189 src/wdgt-fill.c:164
-#: src/wdgt-bc-props.c:188
+#: src/wdgt-bc-props.c:164
 msgid "Color:"
 msgstr "Cor:"
 
@@ -1247,24 +1290,14 @@ msgstr "graus"
 msgid "File:"
 msgstr "Arquivo:"
 
-#. Scale Label
-#: src/wdgt-bc-props.c:165
-msgid "Scale:"
-msgstr "Escala:"
-
-#. scale % Label
-#: src/wdgt-bc-props.c:179
-msgid "%"
-msgstr "%"
-
 #. Style Label
-#: src/wdgt-bc-style.c:165
+#: src/wdgt-bc-style.c:167
 msgid "Style:"
 msgstr "Estilo:"
 
-#: src/wdgt-bc-style.c:209
-msgid "Show text with barcode"
-msgstr "Exibir texto com código de barras"
+#: src/wdgt-bc-style.c:190
+msgid "Checksum"
+msgstr ""
 
 #: src/wdgt-bc-data.c:194
 msgid "Literal:"
@@ -1302,23 +1335,23 @@ msgstr "Cópias:"
 msgid "Collate"
 msgstr "Ordenar"
 
-#: src/wdgt-media-select.c:259
+#: src/wdgt-media-select.c:262
 msgid "Description:"
 msgstr "Descrição:"
 
-#: src/wdgt-media-select.c:269
+#: src/wdgt-media-select.c:272
 msgid "Page size:"
 msgstr "Tamanho da página:"
 
-#: src/wdgt-media-select.c:280
+#: src/wdgt-media-select.c:283
 msgid "Label size:"
 msgstr "Tamanho da etiqueta:"
 
-#: src/wdgt-media-select.c:291
+#: src/wdgt-media-select.c:294
 msgid "Layout:"
 msgstr "Disposição:"
 
-#: src/wdgt-rotate-label.c:182
+#: src/wdgt-rotate-label.c:195
 msgid "Rotate"
 msgstr "Girar"
 
@@ -1326,6 +1359,15 @@ msgstr "Girar"
 #, c-format
 msgid "Open %s"
 msgstr "Abrir %s"
+
+#~ msgid "Scale:"
+#~ msgstr "Escala:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Show text with barcode"
+#~ msgstr "Exibir texto com código de barras"
 
 #~ msgid "Edit properties..."
 #~ msgstr "Editar propriedades..."

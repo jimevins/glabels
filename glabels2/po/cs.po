@@ -3,10 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: src/commands.c:361
 msgid ""
 msgstr ""
 "Project-Id-Version: Glabels\n"
-"POT-Creation-Date: 2003-01-26 13:26-0500\n"
+"POT-Creation-Date: 2003-06-22 01:12-0400\n"
 "PO-Revision-Date: 2003-04-04 17:21--100\n"
 "Last-Translator: David Makovský (Yakeen) <yakeen@sannyas-on.net>\n"
 "Language-Team: cs <cs@li.org>\n"
@@ -54,13 +55,11 @@ msgstr "Zarovnat objekty nahoru"
 msgid "Align objects to vertical centers"
 msgstr "Zarovnat objekty svisle na střed"
 
-#: src/glabels-ui.xml.h:11
-#: src/stock.c:67
+#: src/glabels-ui.xml.h:11 src/stock.c:67
 msgid "Bar_code"
 msgstr "Čárový _kód"
 
-#: src/glabels-ui.xml.h:12
-#: src/stock.c:70
+#: src/glabels-ui.xml.h:12 src/stock.c:70
 msgid "Bring to _Front"
 msgstr "Vynést dopředu"
 
@@ -200,13 +199,11 @@ msgstr "Editace nastavení sloučení"
 msgid "Edit object properties"
 msgstr "Editace nastavení sloučení"
 
-#: src/glabels-ui.xml.h:47
-#: src/stock.c:74
+#: src/glabels-ui.xml.h:47 src/stock.c:74
 msgid "Flip _Horizontally"
 msgstr "Převrátit _vodorovně"
 
-#: src/glabels-ui.xml.h:48
-#: src/stock.c:75
+#: src/glabels-ui.xml.h:48 src/stock.c:75
 msgid "Flip _Vertically"
 msgstr "Převrátit _svisle"
 
@@ -226,9 +223,7 @@ msgstr "Ikony a text"
 msgid "Increase magnification"
 msgstr "Zvýšit zvětšení"
 
-#: src/glabels-ui.xml.h:53
-#: src/stock.c:82
-#: src/stock.c:83
+#: src/glabels-ui.xml.h:53 src/stock.c:82 src/stock.c:83
 msgid "Label Ce_nter"
 msgstr "Střed etikety"
 
@@ -264,8 +259,7 @@ msgstr "Zobrazv panelu kreslení jen ikony "
 msgid "Only show icons in the main toolbar"
 msgstr "Zobraz v hlavním panelu jen ikony"
 
-#: src/glabels-ui.xml.h:62
-#: src/file.c:246
+#: src/glabels-ui.xml.h:62 src/file.c:246
 msgid "Open"
 msgstr "_Otevřít"
 
@@ -293,8 +287,7 @@ msgstr "_Nastavení"
 msgid "Preferences"
 msgstr "Nastavení"
 
-#: src/glabels-ui.xml.h:69
-#: src/print-dialog.c:96
+#: src/glabels-ui.xml.h:69 src/print-dialog.c:104
 msgid "Print"
 msgstr "Tisk"
 
@@ -335,13 +328,11 @@ msgstr "Odstranit všechna označení"
 msgid "Restore scale to 100%"
 msgstr "Vrátit měřítko na 100%"
 
-#: src/glabels-ui.xml.h:80
-#: src/stock.c:72
+#: src/glabels-ui.xml.h:80 src/stock.c:72
 msgid "Rotate _Left"
 msgstr "Otočit do_leva"
 
-#: src/glabels-ui.xml.h:81
-#: src/stock.c:73
+#: src/glabels-ui.xml.h:81 src/stock.c:73
 msgid "Rotate _Right"
 msgstr "Otočit do_prava"
 
@@ -389,18 +380,21 @@ msgstr "Vybrat všechny objekty"
 msgid "Select, move and modify objects"
 msgstr "Označení, posun a změna objektů"
 
-#: src/glabels-ui.xml.h:93
-#: src/stock.c:71
+#: src/glabels-ui.xml.h:93 src/stock.c:71
 msgid "Send to _Back"
 msgstr "Poslat _dozadu"
 
 #: src/glabels-ui.xml.h:94
 msgid "Set drawing toolbar button style according to desktop default"
-msgstr "Nastavit tlačítka na panelu kreslení stejně jako je základní nastavení prostředí"
+msgstr ""
+"Nastavit tlačítka na panelu kreslení stejně jako je základní nastavení "
+"prostředí"
 
 #: src/glabels-ui.xml.h:95
 msgid "Set main toolbar button style according to desktop default"
-msgstr "Nastavit tlačítka na hlavním panelu stejně jako je základní nastavení prostředí"
+msgstr ""
+"Nastavit tlačítka na hlavním panelu stejně jako je základní nastavení "
+"prostředí"
 
 #: src/glabels-ui.xml.h:96
 msgid "Show _Tooltips"
@@ -450,13 +444,11 @@ msgstr "_O programu..."
 msgid "_Bottoms"
 msgstr "Naspod"
 
-#: src/glabels-ui.xml.h:108
-#: src/stock.c:64
+#: src/glabels-ui.xml.h:108 src/stock.c:64
 msgid "_Box"
 msgstr "Obdélník"
 
-#: src/glabels-ui.xml.h:109
-#: src/stock.c:78
+#: src/glabels-ui.xml.h:109 src/stock.c:78
 msgid "_Centers"
 msgstr "Nastřed"
 
@@ -480,8 +472,7 @@ msgstr "_Vytvořit objekt"
 msgid "_Debug"
 msgstr "Debugování"
 
-#: src/glabels-ui.xml.h:115
-#: src/view.c:3078
+#: src/glabels-ui.xml.h:115 src/view.c:3078
 msgid "_Delete"
 msgstr "_Smazat"
 
@@ -497,8 +488,7 @@ msgstr "_Panel kreslení"
 msgid "_Edit"
 msgstr "_Editovat"
 
-#: src/glabels-ui.xml.h:119
-#: src/stock.c:65
+#: src/glabels-ui.xml.h:119 src/stock.c:65
 msgid "_Ellipse"
 msgstr "_Elipsa"
 
@@ -518,18 +508,15 @@ msgstr "_Nápověda"
 msgid "_Icon"
 msgstr "_Ikona"
 
-#: src/glabels-ui.xml.h:124
-#: src/stock.c:66
+#: src/glabels-ui.xml.h:124 src/stock.c:66
 msgid "_Image"
 msgstr "Obrá_zek"
 
-#: src/glabels-ui.xml.h:125
-#: src/stock.c:76
+#: src/glabels-ui.xml.h:125 src/stock.c:76
 msgid "_Lefts"
 msgstr "Nalevo"
 
-#: src/glabels-ui.xml.h:126
-#: src/stock.c:63
+#: src/glabels-ui.xml.h:126 src/stock.c:63
 msgid "_Line"
 msgstr "Čára"
 
@@ -556,8 +543,7 @@ msgstr "_Otevřít"
 #.
 #. * Submenu: Order
 #.
-#: src/glabels-ui.xml.h:132
-#: src/view.c:2924
+#: src/glabels-ui.xml.h:132 src/view.c:2924
 msgid "_Order"
 msgstr "_Třídit"
 
@@ -573,16 +559,14 @@ msgstr "_Tisk..."
 msgid "_Quit"
 msgstr "_Konec"
 
-#: src/glabels-ui.xml.h:136
-#: src/stock.c:77
+#: src/glabels-ui.xml.h:136 src/stock.c:77
 msgid "_Rights"
 msgstr "Napravo"
 
 #.
 #. * Submenu: Rotate/Flip
 #.
-#: src/glabels-ui.xml.h:137
-#: src/view.c:2945
+#: src/glabels-ui.xml.h:137 src/view.c:2945
 msgid "_Rotate/Flip"
 msgstr "_Rotace/Převrácení"
 
@@ -590,18 +574,15 @@ msgstr "_Rotace/Převrácení"
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/glabels-ui.xml.h:139
-#: src/stock.c:61
+#: src/glabels-ui.xml.h:139 src/stock.c:61
 msgid "_Select Mode"
 msgstr "Mód výběru"
 
-#: src/glabels-ui.xml.h:140
-#: src/stock.c:62
+#: src/glabels-ui.xml.h:140 src/stock.c:62
 msgid "_Text"
 msgstr "_Text"
 
-#: src/glabels-ui.xml.h:141
-#: src/stock.c:79
+#: src/glabels-ui.xml.h:141 src/stock.c:79
 msgid "_Tops"
 msgstr "Nahoru"
 
@@ -609,137 +590,139 @@ msgstr "Nahoru"
 msgid "_View"
 msgstr "Pohled"
 
-#: src/glabels.c:51
+#: src/glabels.c:52
 msgid "Show view debugging messages."
 msgstr ""
 
-#: src/glabels.c:54
+#: src/glabels.c:55
 msgid "Show item debugging messages."
 msgstr ""
 
-#: src/glabels.c:57
+#: src/glabels.c:58
 msgid "Show printing debugging messages."
 msgstr ""
 
-#: src/glabels.c:60
+#: src/glabels.c:61
 msgid "Show prefs debugging messages."
 msgstr ""
 
-#: src/glabels.c:63
+#: src/glabels.c:64
 msgid "Show file debugging messages."
 msgstr ""
 
-#: src/glabels.c:66
+#: src/glabels.c:67
 msgid "Show document debugging messages."
 msgstr ""
 
-#: src/glabels.c:69
+#: src/glabels.c:70
 msgid "Show template debugging messages."
 msgstr ""
 
-#: src/glabels.c:72
+#: src/glabels.c:73
+msgid "Show paper debugging messages."
+msgstr ""
+
+#: src/glabels.c:76
 msgid "Show xml debugging messages."
 msgstr ""
 
-#: src/glabels.c:75
+#: src/glabels.c:79
 msgid "Show document merge debugging messages."
 msgstr ""
 
-#: src/glabels.c:78
+#: src/glabels.c:82
 msgid "Show commands debugging messages."
 msgstr ""
 
-#: src/glabels.c:81
+#: src/glabels.c:85
 msgid "Show undo debugging messages."
 msgstr ""
 
-#: src/glabels.c:84
+#: src/glabels.c:88
 msgid "Show recent debugging messages."
 msgstr ""
 
-#: src/glabels.c:87
+#: src/glabels.c:91
 msgid "Show window debugging messages."
 msgstr ""
 
-#: src/glabels.c:90
+#: src/glabels.c:94
 msgid "Show ui debugging messages."
 msgstr ""
 
-#: src/glabels.c:93
+#: src/glabels.c:97
 msgid "Show media select widget debugging messages."
 msgstr ""
 
-#: src/glabels.c:96
+#: src/glabels.c:100
 msgid "Show mini preview widget debugging messages."
 msgstr ""
 
-#: src/glabels.c:99
+#: src/glabels.c:103
 msgid "Show pixbuf cache debugging messages."
 msgstr ""
 
-#: src/glabels.c:102
+#: src/glabels.c:106
 msgid "Show widget debugging messages."
 msgstr ""
 
-#: src/glabels.c:105
+#: src/glabels.c:109
 msgid "Turn on all debugging messages."
 msgstr ""
 
-#: src/glabels.c:174
+#: src/glabels.c:180
 msgid "Could not initialize Bonobo!\n"
 msgstr "Nepodařila se inicializace Bonobo serveru!\n"
 
-#: src/glabels-batch.c:47
+#: src/glabels-batch.c:48
 msgid "print this message"
 msgstr "tisk této zprávy"
 
-#: src/glabels-batch.c:49
+#: src/glabels-batch.c:50
 msgid "print the version of glabels-batch being used"
 msgstr "vypíše verzi glabels-batch, která je používána"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "set output filename (default=\"output.ps\")"
 msgstr "nastavte jméno souboru výstupu  (standartně=\"output.ps\")"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "filename"
 msgstr "název souboru"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "počet stránek (standartně=1)"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "sheets"
 msgstr "sešity"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "počet kopií (standartní nastavení = 1)"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "copies"
 msgstr "kopie"
 
-#: src/glabels-batch.c:57
-#: src/print-dialog.c:192
+#: src/glabels-batch.c:58 src/print-dialog.c:200
 msgid "print outlines (to test printer alignment)"
 msgstr "tisk okrajů (test zarovnávání tiskárny)"
 
-#: src/glabels-batch.c:59
-#: src/print-dialog.c:201
+#: src/glabels-batch.c:60 src/print-dialog.c:209
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "obrácený tisk (např. převrácený obrázek)"
 
-#: src/glabels-batch.c:94
+#: src/glabels-batch.c:95
 msgid "[OPTION...] GLABELS_FILE..."
 msgstr ""
 
-#: src/glabels-batch.c:113
+#: src/glabels-batch.c:114
 msgid "missing glabels file\n"
 msgstr "chybí soubor programu glabels\n"
 
-#: src/glabels-batch.c:139
+#: src/glabels-batch.c:141
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "nepodařilo se otevřít soubor programu glabels %s\n"
@@ -772,15 +755,24 @@ msgstr "Nastřed"
 msgid ""
 "A label and business card creation program for GNOME.\n"
 " \n"
-"Glabels is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
 " \n"
-"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
 msgstr ""
 "Program pro tvorbu etiket a vizitek v prostředí GNOME.\n"
 " \n"
-"Glabels je svobodný software, můžete s ním nakládat podle GPL licence verze 2, nebo jakoukoliv pozdější.\n"
+"Glabels je svobodný software, můžete s ním nakládat podle GPL licence verze "
+"2, nebo jakoukoliv pozdější.\n"
 " \n"
-"Program je distribuován s nadějí, že bude nápomocen, ale je distribuován bez ručení záruky, tak jak je uvedeno v GPL Licenci verze 2. Pro další detaily si přečtěte tuto licenci.\n"
+"Program je distribuován s nadějí, že bude nápomocen, ale je distribuován bez "
+"ručení záruky, tak jak je uvedeno v GPL Licenci verze 2. Pro další detaily "
+"si přečtěte tuto licenci.\n"
 
 #: src/commands.c:351
 msgid "See the file AUTHORS for additional credits,"
@@ -810,13 +802,11 @@ msgstr "Orientace etikety"
 msgid "Open label"
 msgstr "Otevřít etiketu"
 
-#: src/file.c:296
-#: src/file.c:594
+#: src/file.c:296 src/file.c:594
 msgid "Empty file name selection"
 msgstr "Prázdné pole jména souboru"
 
-#: src/file.c:297
-#: src/file.c:311
+#: src/file.c:297 src/file.c:311
 msgid "Please select a file or supply a valid file name"
 msgstr "Prosím označte nebo vypište platné jméno souboru"
 
@@ -833,14 +823,12 @@ msgstr "nepodařilo se otevřít soubor \"%s\""
 msgid "Not a supported file format"
 msgstr "Formát tohoto souboru není podporován"
 
-#: src/file.c:462
-#: src/file.c:636
+#: src/file.c:462 src/file.c:636
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Nepodařilo se uložit soubor \"%s\""
 
-#: src/file.c:470
-#: src/file.c:644
+#: src/file.c:470 src/file.c:644
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Při ukládání se vyskytla chyba. Soubor nebyl uložen."
 
@@ -876,17 +864,15 @@ msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
 #. Should not happen
-#: src/prefs.c:653
-#: src/prefs.c:660
-#: src/wdgt-line.c:180
+#: src/prefs.c:664 src/prefs.c:671 src/wdgt-line.c:180
 msgid "points"
 msgstr "body"
 
-#: src/prefs.c:655
+#: src/prefs.c:666
 msgid "inches"
 msgstr "palce"
 
-#: src/prefs.c:657
+#: src/prefs.c:668
 msgid "mm"
 msgstr "mm"
 
@@ -928,28 +914,31 @@ msgstr "Milimetry"
 msgid "Default page size"
 msgstr "Standartní velikost stránky"
 
+#: src/prefs-dialog.c:309
+msgid "US Letter"
+msgstr ""
+
+#: src/prefs-dialog.c:317
+msgid "A4"
+msgstr ""
+
 #: src/prefs-dialog.c:354
 msgid "Select default properties for new objects."
 msgstr "Vyberte výchozí nastavení pro nové objekty"
 
 #. ------ text props entry ------
-#: src/prefs-dialog.c:359
-#: src/view-text.c:314
-#: src/view-text.c:634
+#: src/prefs-dialog.c:359 src/view-text.c:314 src/view-text.c:634
 #: src/wdgt-bc-style.c:184
 msgid "Text"
 msgstr "Text"
 
 #. ------ Line box ------
-#: src/prefs-dialog.c:368
-#: src/view-line.c:304
+#: src/prefs-dialog.c:368 src/view-line.c:304
 msgid "Line"
 msgstr "Čára"
 
 #. ------ Fill box ------
-#: src/prefs-dialog.c:377
-#: src/view-box.c:323
-#: src/view-ellipse.c:323
+#: src/prefs-dialog.c:377 src/view-box.c:323 src/view-ellipse.c:323
 msgid "Fill"
 msgstr "Výplň"
 
@@ -974,29 +963,22 @@ msgstr "Editace nastavení objektu obdélníku"
 #. ---------------------------
 #. Outline section
 #. ---------------------------
-#: src/view-box.c:307
-#: src/view-ellipse.c:307
+#: src/view-box.c:307 src/view-ellipse.c:307
 msgid "Outline"
 msgstr "Obrys"
 
 #. ---------------------------
 #. Position section
 #. ---------------------------
-#: src/view-box.c:339
-#: src/view-ellipse.c:339
-#: src/view-line.c:320
-#: src/view-image.c:314
-#: src/view-text.c:349
-#: src/view-barcode.c:338
+#: src/view-box.c:339 src/view-ellipse.c:339 src/view-line.c:320
+#: src/view-image.c:314 src/view-text.c:349 src/view-barcode.c:338
 msgid "Position"
 msgstr "Pozice"
 
 #. ---------------------------
 #. Size section
 #. ---------------------------
-#: src/view-box.c:354
-#: src/view-ellipse.c:354
-#: src/view-line.c:338
+#: src/view-box.c:354 src/view-ellipse.c:354 src/view-line.c:338
 #: src/view-image.c:331
 msgid "Size"
 msgstr "Velikost"
@@ -1032,8 +1014,7 @@ msgstr "Editace nastavení objektu text"
 #. ---------------------------
 #. Text Properties section
 #. ---------------------------
-#: src/view-text.c:331
-#: src/view-barcode.c:306
+#: src/view-text.c:331 src/view-barcode.c:306
 msgid "Properties"
 msgstr "Nastavení"
 
@@ -1044,13 +1025,11 @@ msgstr "Editace nastavení objektu čárového kódu"
 #. ---------------------------
 #. Data section
 #. ---------------------------
-#: src/view-barcode.c:286
-#: src/merge-properties-dialog.c:343
+#: src/view-barcode.c:286 src/merge-properties-dialog.c:343
 msgid "Data"
 msgstr "Data"
 
-#: src/view-barcode.c:802
-#: src/print.c:914
+#: src/view-barcode.c:802 src/print.c:912
 msgid "Invalid barcode"
 msgstr "Neplatný čárový kód"
 
@@ -1072,13 +1051,11 @@ msgstr "Formát:"
 msgid "Location:"
 msgstr "Umístění:"
 
-#: src/merge-properties-dialog.c:283
-#: src/merge-properties-dialog.c:394
+#: src/merge-properties-dialog.c:283 src/merge-properties-dialog.c:394
 msgid "Select merge-database source"
 msgstr "Výběr databázového zdroje pro sloučení"
 
-#: src/merge-properties-dialog.c:290
-#: src/merge-properties-dialog.c:405
+#: src/merge-properties-dialog.c:290 src/merge-properties-dialog.c:405
 msgid "N/A"
 msgstr "Není k dispozici"
 
@@ -1095,31 +1072,30 @@ msgstr "Výběr"
 msgid "Record/Field"
 msgstr "Záznam/Pole"
 
-#: src/print-dialog.c:120
+#: src/print-dialog.c:128
 msgid "_Job"
 msgstr "Úloha"
 
-#: src/print-dialog.c:125
+#: src/print-dialog.c:133
 msgid "P_rinter"
 msgstr "_Tiskárna"
 
 #. ----------- Add simple-copies widget ------------
-#: src/print-dialog.c:155
+#: src/print-dialog.c:163
 msgid "Copies"
 msgstr "Kopie"
 
 #. ------- Otherwise add merge control widget ------------
-#: src/print-dialog.c:169
+#: src/print-dialog.c:177
 msgid "Document merge control"
 msgstr "Kontrola sloučení dokumentu"
 
 #. ----------- Add custom print options area ------------
-#: src/print-dialog.c:186
+#: src/print-dialog.c:194
 msgid "Options"
 msgstr "Nastavení"
 
-#: src/print-dialog.c:326
-#: src/print-dialog.c:364
+#: src/print-dialog.c:336 src/print-dialog.c:374
 msgid "Print preview"
 msgstr "Náhled tisku"
 
@@ -1127,103 +1103,100 @@ msgstr "Náhled tisku"
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: src/template.c:381
+#: src/template.c:296
 #, c-format
 msgid "Generic %s full page"
 msgstr ""
 
-#: src/template.c:423
+#: src/template.c:338
 msgid "No template files found!"
 msgstr "Nenalezeny šablony!"
 
-#: src/template.c:585
-#, c-format
-msgid "Unknown page size \"%s\""
-msgstr "Neznámá velikost stránky \"%s\""
-
-#: src/template.c:987
+#: src/template.c:435
 #, c-format
 msgid "%s x %s %s"
 msgstr "%s x %s %s"
 
-#: src/template.c:992
+#: src/template.c:440
 #, c-format
 msgid "%.5g x %.5g %s"
 msgstr "%.5g x %.5g %s"
 
-#: src/template.c:1003
-#: src/template.c:1017
+#: src/template.c:451 src/template.c:465
 #, c-format
 msgid "%s %s diameter"
 msgstr "%s %s průměr"
 
-#: src/template.c:1007
-#: src/template.c:1021
+#: src/template.c:455 src/template.c:469
 #, c-format
 msgid "%.5g %s diameter"
 msgstr "%.5g %s průměr"
 
-#: src/template.c:1159
+#: src/template.c:607
 #, c-format
 msgid "%d x %d  (%d per sheet)"
 msgstr "%d x %d  (%d na stránku)"
 
-#: src/template.c:1163
+#: src/template.c:611
 #, c-format
 msgid "%d per sheet"
 msgstr "%d na stránku"
 
-#: src/xml-label.c:170
-#: src/xml-label.c:201
+#: src/paper.c:322
+#, fuzzy
+msgid "No paper files found!"
+msgstr "Nenalezeny šablony!"
+
+#: src/xml-label.c:171 src/xml-label.c:204
 msgid "xmlParseFile error"
 msgstr "chyba (xmlParseFile)"
 
-#: src/xml-label.c:236
+#: src/xml-label.c:241
 msgid "No document root"
 msgstr ""
 
-#: src/xml-label.c:248
+#: src/xml-label.c:253
 msgid "Importing from glabels 0.1 format"
 msgstr "Importuji formát glabels verze 0.1"
 
-#: src/xml-label.c:256
+#: src/xml-label.c:261
 msgid "Importing from glabels 0.4 format"
 msgstr "Importuji formát glabels verze 0.4"
 
-#: src/xml-label.c:259
+#: src/xml-label.c:264
 msgid "bad document, unknown glabels Namespace"
 msgstr ""
 
-#: src/xml-label.c:287
-#: src/xml-label-04.c:75
+#: src/xml-label.c:292 src/xml-label-04.c:75
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr ""
 
-#: src/xml-label.c:320
+#: src/xml-label.c:325
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr ""
 
-#: src/xml-label.c:352
-#: src/xml-label-04.c:123
+#: src/xml-label.c:357 src/xml-label-04.c:123
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr ""
 
-#: src/xml-label.c:752
+#: src/xml-label.c:763
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr ""
 
-#: src/xml-label.c:820
+#: src/xml-label.c:831
 msgid "Problem saving xml file."
 msgstr "Problém s ukládáním dat do xml."
 
-#: src/merge.c:172
-#: src/merge.c:213
-#: src/merge.c:398
-#: src/merge.c:401
+#: src/xml-template.c:157
+#, fuzzy, c-format
+msgid "Unknown page size id \"%s\""
+msgstr "Neznámá velikost stránky \"%s\""
+
+#: src/merge.c:172 src/merge.c:213 src/merge.c:398 src/merge.c:401
 msgid "None"
 msgstr "Žádný"
 
@@ -1245,9 +1218,7 @@ msgid "Font:"
 msgstr "Font:"
 
 #. Text Color Label
-#: src/wdgt-text-props.c:230
-#: src/wdgt-line.c:189
-#: src/wdgt-fill.c:164
+#: src/wdgt-text-props.c:230 src/wdgt-line.c:189 src/wdgt-fill.c:164
 #: src/wdgt-bc-props.c:164
 msgid "Color:"
 msgstr "Barva:"
@@ -1263,8 +1234,7 @@ msgid "Edit text:"
 msgstr "Editace textu:"
 
 #. Insert merge field label
-#: src/wdgt-text-entry.c:194
-#: src/wdgt-image-select.c:246
+#: src/wdgt-text-entry.c:194 src/wdgt-image-select.c:246
 #: src/wdgt-bc-data.c:216
 msgid "Key:"
 msgstr "Klíč:"
@@ -1284,8 +1254,7 @@ msgid "Y:"
 msgstr "Y:"
 
 #. W Label
-#: src/wdgt-size.c:187
-#: src/wdgt-line.c:166
+#: src/wdgt-size.c:187 src/wdgt-line.c:166
 msgid "Width:"
 msgstr "Šířka:"
 
@@ -1362,19 +1331,19 @@ msgstr "Kopie:"
 msgid "Collate"
 msgstr "Shromáždit"
 
-#: src/wdgt-media-select.c:259
+#: src/wdgt-media-select.c:262
 msgid "Description:"
 msgstr "Popis:"
 
-#: src/wdgt-media-select.c:269
+#: src/wdgt-media-select.c:272
 msgid "Page size:"
 msgstr "Velikost stránky:"
 
-#: src/wdgt-media-select.c:280
+#: src/wdgt-media-select.c:283
 msgid "Label size:"
 msgstr "Velikost etikety:"
 
-#: src/wdgt-media-select.c:291
+#: src/wdgt-media-select.c:294
 msgid "Layout:"
 msgstr "Rozložení:"
 
@@ -1386,4 +1355,3 @@ msgstr "Rotovat"
 #, c-format
 msgid "Open %s"
 msgstr "Otevřít %s"
-

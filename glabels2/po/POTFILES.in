@@ -73,12 +73,16 @@ src/label-barcode.c
 src/label-barcode.h
 src/template.c
 src/template.h
+src/paper.c
+src/paper.h
 src/xml-label.c
 src/xml-label.h
 src/xml-label-04.c
 src/xml-label-04.h
 src/xml-template.c
 src/xml-template.h
+src/xml-paper.c
+src/xml-paper.h
 src/xml.c
 src/xml.h
 src/pixbuf-cache.c
@@ -141,3 +145,5 @@ src/gnome-recent-view-bonobo.c
 src/gnome-recent-view-bonobo.h
 src/debug.c
 src/debug.h
+data/predefined-labels.template
+data/page-sizes.paper

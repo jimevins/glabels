@@ -2,10 +2,11 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Shell Hung <shell@debian.org>, 2002
 #
+#: src/commands.c:361
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.4.4\n"
-"POT-Creation-Date: 2002-08-24 22:30-0400\n"
+"POT-Creation-Date: 2003-06-22 01:12-0400\n"
 "PO-Revision-Date: 2002-07-14 18:30+0800\n"
 "Last-Translator: Shell Hung <shell@debian.org>\n"
 "Language-Team: zh-l10n <zh-l10n@linux.org.tw>\n"
@@ -13,700 +14,1489 @@ msgstr ""
 "Content-Type: text/plain; charset=big5\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/glabels_batch.c:49
+#: src/glabels-ui.xml.h:1
+msgid "About glabels"
+msgstr ""
+
+#: src/glabels-ui.xml.h:2
+msgid "About..."
+msgstr ""
+
+#: src/glabels-ui.xml.h:3
+msgid "Align _Horizontal"
+msgstr ""
+
+#: src/glabels-ui.xml.h:4
+msgid "Align _Vertical"
+msgstr ""
+
+#: src/glabels-ui.xml.h:5
+msgid "Align objects to bottoms"
+msgstr ""
+
+#: src/glabels-ui.xml.h:6
+msgid "Align objects to horizontal centers"
+msgstr ""
+
+#: src/glabels-ui.xml.h:7
+msgid "Align objects to left edges"
+msgstr ""
+
+#: src/glabels-ui.xml.h:8
+msgid "Align objects to right edges"
+msgstr ""
+
+#: src/glabels-ui.xml.h:9
+msgid "Align objects to tops"
+msgstr ""
+
+#: src/glabels-ui.xml.h:10
+msgid "Align objects to vertical centers"
+msgstr ""
+
+#: src/glabels-ui.xml.h:11 src/stock.c:67
+#, fuzzy
+msgid "Bar_code"
+msgstr "數碼條"
+
+#: src/glabels-ui.xml.h:12 src/stock.c:70
+#, fuzzy
+msgid "Bring to _Front"
+msgstr "帶出到前面"
+
+#: src/glabels-ui.xml.h:13
+msgid "Center objects to horizontal label center"
+msgstr ""
+
+#: src/glabels-ui.xml.h:14
+msgid "Center objects to vertical label center"
+msgstr ""
+
+#: src/glabels-ui.xml.h:15
+msgid "Change the visibility of markup lines in the current window"
+msgstr ""
+
+#: src/glabels-ui.xml.h:16
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr ""
+
+#: src/glabels-ui.xml.h:17
+msgid "Change the visibility of the grid in the current window"
+msgstr ""
+
+#: src/glabels-ui.xml.h:18
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr ""
+
+#: src/glabels-ui.xml.h:19
+msgid "Close"
+msgstr ""
+
+#: src/glabels-ui.xml.h:20
+#, fuzzy
+msgid "Close the current file"
+msgstr "儲存現在檔案"
+
+#: src/glabels-ui.xml.h:21
+msgid "Configure the application"
+msgstr ""
+
+#: src/glabels-ui.xml.h:22
+msgid "Contents"
+msgstr ""
+
+#: src/glabels-ui.xml.h:23
+msgid "Copy"
+msgstr ""
+
+#: src/glabels-ui.xml.h:24
+#, fuzzy
+msgid "Copy the selection"
+msgstr "移除所有選擇項"
+
+#: src/glabels-ui.xml.h:25
+#, fuzzy
+msgid "Create a new document"
+msgstr "畫線物件"
+
+#: src/glabels-ui.xml.h:26
+msgid "Create barcode object"
+msgstr "建立數碼條"
+
+#: src/glabels-ui.xml.h:27
+msgid "Create box/rectangle object"
+msgstr "建立新的盒子/方形物件"
+
+#: src/glabels-ui.xml.h:28
+msgid "Create ellipse/circle object"
+msgstr "建立橢圓形/圖形物件"
+
+#: src/glabels-ui.xml.h:29
+msgid "Create image object"
+msgstr "建立影像物件"
+
+#: src/glabels-ui.xml.h:30
+msgid "Create line object"
+msgstr "畫線物件"
+
+#: src/glabels-ui.xml.h:31
+msgid "Create text object"
+msgstr "建立新的文字物件"
+
+#: src/glabels-ui.xml.h:32
+msgid "Cu_t"
+msgstr ""
+
+#: src/glabels-ui.xml.h:33
+#, fuzzy
+msgid "Customize"
+msgstr "自訂欄位鑰"
+
+#: src/glabels-ui.xml.h:34
+msgid "Customize Drawing Toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:35
+msgid "Customize Main Toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:36
+msgid "Customize toolbars"
+msgstr ""
+
+#: src/glabels-ui.xml.h:37
+msgid "Cut"
+msgstr ""
+
+#: src/glabels-ui.xml.h:38
+msgid "Cut the selection"
+msgstr ""
+
+#: src/glabels-ui.xml.h:39
+msgid "Decrease magnification"
+msgstr ""
+
+#: src/glabels-ui.xml.h:40
+msgid "Delete"
+msgstr "刪除"
+
+#: src/glabels-ui.xml.h:41
+#, fuzzy
+msgid "Delete the selected objects"
+msgstr "建立新的文字物件"
+
+#: src/glabels-ui.xml.h:42
+msgid "Drawing toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:43
+msgid "Dump XML"
+msgstr ""
+
+#: src/glabels-ui.xml.h:44
+msgid "Dump the UI Xml description"
+msgstr ""
+
+#: src/glabels-ui.xml.h:45
+msgid "Edit merge properties"
+msgstr "修改合併設定"
+
+#: src/glabels-ui.xml.h:46
+#, fuzzy
+msgid "Edit object properties"
+msgstr "修改方塊物件設定"
+
+#: src/glabels-ui.xml.h:47 src/stock.c:74
+msgid "Flip _Horizontally"
+msgstr ""
+
+#: src/glabels-ui.xml.h:48 src/stock.c:75
+msgid "Flip _Vertically"
+msgstr ""
+
+#: src/glabels-ui.xml.h:49
+msgid "Flip object horizontally"
+msgstr ""
+
+#: src/glabels-ui.xml.h:50
+msgid "Flip object vertically"
+msgstr ""
+
+#: src/glabels-ui.xml.h:51
+msgid "Icon and _Text"
+msgstr ""
+
+#: src/glabels-ui.xml.h:52
+msgid "Increase magnification"
+msgstr ""
+
+#: src/glabels-ui.xml.h:53 src/stock.c:82 src/stock.c:83
+msgid "Label Ce_nter"
+msgstr ""
+
+#: src/glabels-ui.xml.h:54
+msgid "Lower object to bottom"
+msgstr ""
+
+#: src/glabels-ui.xml.h:55
+msgid "M_arkup"
+msgstr ""
+
+#: src/glabels-ui.xml.h:56
+msgid "Main toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:57
+msgid "Markup"
+msgstr ""
+
+#: src/glabels-ui.xml.h:58
+#, fuzzy
+msgid "New"
+msgstr "新增 (&_N)"
+
+#: src/glabels-ui.xml.h:59
+#, fuzzy
+msgid "Object _Properties..."
+msgstr "文字樣貌"
+
+#: src/glabels-ui.xml.h:60
+msgid "Only show icons in the drawing toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:61
+msgid "Only show icons in the main toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:62 src/file.c:246
+msgid "Open"
+msgstr "開啟"
+
+#: src/glabels-ui.xml.h:63
+msgid "Open a file"
+msgstr "開啟檔案"
+
+#: src/glabels-ui.xml.h:64
+#, fuzzy
+msgid "Open the glabels manual"
+msgstr "開啟標簽"
+
+#: src/glabels-ui.xml.h:65
+msgid "Paste"
+msgstr ""
+
+#: src/glabels-ui.xml.h:66
+msgid "Paste the clipboard"
+msgstr ""
+
+#: src/glabels-ui.xml.h:67
+#, fuzzy
+msgid "Pr_eferences..."
+msgstr "Glabels: 設定值"
+
+#: src/glabels-ui.xml.h:68
+#, fuzzy
+msgid "Preferences"
+msgstr "Glabels: 設定值"
+
+#: src/glabels-ui.xml.h:69 src/print-dialog.c:104
+msgid "Print"
+msgstr "列印"
+
+#: src/glabels-ui.xml.h:70
+#, fuzzy
+msgid "Print the current file"
+msgstr "列印現有檔案"
+
+#: src/glabels-ui.xml.h:71
+msgid "Quit"
+msgstr ""
+
+#: src/glabels-ui.xml.h:72
+msgid "Quit the program"
+msgstr ""
+
+#: src/glabels-ui.xml.h:73
+msgid "Raise object to top"
+msgstr ""
+
+#: src/glabels-ui.xml.h:74
+msgid "Recent _Files"
+msgstr ""
+
+#: src/glabels-ui.xml.h:75
+msgid "Redo"
+msgstr ""
+
+#: src/glabels-ui.xml.h:76
+msgid "Redo the undone action"
+msgstr ""
+
+#: src/glabels-ui.xml.h:77
+msgid "Remove all selections"
+msgstr "移除所有選擇項"
+
+#: src/glabels-ui.xml.h:79
+#, no-c-format
+msgid "Restore scale to 100%"
+msgstr ""
+
+#: src/glabels-ui.xml.h:80 src/stock.c:72
+#, fuzzy
+msgid "Rotate _Left"
+msgstr "旋轉"
+
+#: src/glabels-ui.xml.h:81 src/stock.c:73
+#, fuzzy
+msgid "Rotate _Right"
+msgstr "旋轉"
+
+#: src/glabels-ui.xml.h:82
+msgid "Rotate object 90 clockwise"
+msgstr ""
+
+#: src/glabels-ui.xml.h:83
+msgid "Rotate object 90 counter-clockwise"
+msgstr ""
+
+#: src/glabels-ui.xml.h:84
+#, fuzzy
+msgid "Save"
+msgstr "另存為..."
+
+#: src/glabels-ui.xml.h:85
+msgid "Save As"
+msgstr "另存為..."
+
+#: src/glabels-ui.xml.h:86
+#, fuzzy
+msgid "Save _As..."
+msgstr "另存為..."
+
+#: src/glabels-ui.xml.h:87
+#, fuzzy
+msgid "Save the current file"
+msgstr "儲存現在檔案"
+
+#: src/glabels-ui.xml.h:88
+msgid "Save the current file with a different name"
+msgstr ""
+
+#: src/glabels-ui.xml.h:89
+#, fuzzy
+msgid "Select All"
+msgstr "反選擇全部 (&_N)"
+
+#: src/glabels-ui.xml.h:90
+#, fuzzy
+msgid "Select _All"
+msgstr "反選擇全部 (&_N)"
+
+#: src/glabels-ui.xml.h:91
+#, fuzzy
+msgid "Select all objects"
+msgstr "選擇, 移動及修改物件"
+
+#: src/glabels-ui.xml.h:92
+msgid "Select, move and modify objects"
+msgstr "選擇, 移動及修改物件"
+
+#: src/glabels-ui.xml.h:93 src/stock.c:71
+#, fuzzy
+msgid "Send to _Back"
+msgstr "放在最底"
+
+#: src/glabels-ui.xml.h:94
+msgid "Set drawing toolbar button style according to desktop default"
+msgstr ""
+
+#: src/glabels-ui.xml.h:95
+msgid "Set main toolbar button style according to desktop default"
+msgstr ""
+
+#: src/glabels-ui.xml.h:96
+msgid "Show _Tooltips"
+msgstr ""
+
+#: src/glabels-ui.xml.h:97
+msgid "Show tooltips in the drawing toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:98
+msgid "Show tooltips in the main toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:99
+#, fuzzy
+msgid "U_n-select All"
+msgstr "反選擇全部 (&_N)"
+
+#: src/glabels-ui.xml.h:100
+#, fuzzy
+msgid "Un-select All"
+msgstr "反選擇全部 (&_N)"
+
+#: src/glabels-ui.xml.h:101
+msgid "Undo"
+msgstr ""
+
+#: src/glabels-ui.xml.h:102
+msgid "Undo the last action"
+msgstr ""
+
+#: src/glabels-ui.xml.h:103
+#, fuzzy
+msgid "Zoom _1:1"
+msgstr "1:1 顯示"
+
+#: src/glabels-ui.xml.h:104
+#, fuzzy
+msgid "Zoom _In"
+msgstr "放大"
+
+#: src/glabels-ui.xml.h:105
+#, fuzzy
+msgid "Zoom _Out"
+msgstr "縮小"
+
+#: src/glabels-ui.xml.h:106
+msgid "_About..."
+msgstr ""
+
+#: src/glabels-ui.xml.h:107
+msgid "_Bottoms"
+msgstr ""
+
+#: src/glabels-ui.xml.h:108 src/stock.c:64
+#, fuzzy
+msgid "_Box"
+msgstr "盒子"
+
+#: src/glabels-ui.xml.h:109 src/stock.c:78
+msgid "_Centers"
+msgstr ""
+
+#: src/glabels-ui.xml.h:110
+msgid "_Close"
+msgstr ""
+
+#: src/glabels-ui.xml.h:111
+msgid "_Contents"
+msgstr ""
+
+#: src/glabels-ui.xml.h:112
+msgid "_Copy"
+msgstr ""
+
+#: src/glabels-ui.xml.h:113
+#, fuzzy
+msgid "_Create Object"
+msgstr "建立新的文字物件"
+
+#: src/glabels-ui.xml.h:114
+msgid "_Debug"
+msgstr ""
+
+#: src/glabels-ui.xml.h:115 src/view.c:3078
+#, fuzzy
+msgid "_Delete"
+msgstr "刪除"
+
+#: src/glabels-ui.xml.h:116
+msgid "_Desktop Default"
+msgstr ""
+
+#: src/glabels-ui.xml.h:117
+msgid "_Drawing Toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:118
+msgid "_Edit"
+msgstr ""
+
+#: src/glabels-ui.xml.h:119 src/stock.c:65
+#, fuzzy
+msgid "_Ellipse"
+msgstr "橢圓形"
+
+#: src/glabels-ui.xml.h:120
+#, fuzzy
+msgid "_File"
+msgstr "填滿"
+
+#: src/glabels-ui.xml.h:121
+msgid "_Grid"
+msgstr ""
+
+#: src/glabels-ui.xml.h:122
+msgid "_Help"
+msgstr ""
+
+#: src/glabels-ui.xml.h:123
+msgid "_Icon"
+msgstr ""
+
+#: src/glabels-ui.xml.h:124 src/stock.c:66
+#, fuzzy
+msgid "_Image"
+msgstr "圖像"
+
+#: src/glabels-ui.xml.h:125 src/stock.c:76
+msgid "_Lefts"
+msgstr ""
+
+#: src/glabels-ui.xml.h:126 src/stock.c:63
+#, fuzzy
+msgid "_Line"
+msgstr "線"
+
+#: src/glabels-ui.xml.h:127
+msgid "_Main Toolbar"
+msgstr ""
+
+#: src/glabels-ui.xml.h:128
+#, fuzzy
+msgid "_Merge Properties..."
+msgstr "合併設定"
+
+#: src/glabels-ui.xml.h:129
+msgid "_New"
+msgstr "新增 (&_N)"
+
+#: src/glabels-ui.xml.h:130
+msgid "_Objects"
+msgstr ""
+
+#: src/glabels-ui.xml.h:131
+#, fuzzy
+msgid "_Open..."
+msgstr "開啟"
+
+#.
+#. * Submenu: Order
+#.
+#: src/glabels-ui.xml.h:132 src/view.c:2924
+msgid "_Order"
+msgstr ""
+
+#: src/glabels-ui.xml.h:133
+msgid "_Paste"
+msgstr ""
+
+#: src/glabels-ui.xml.h:134
+#, fuzzy
+msgid "_Print..."
+msgstr "列印"
+
+#: src/glabels-ui.xml.h:135
+msgid "_Quit"
+msgstr ""
+
+#: src/glabels-ui.xml.h:136 src/stock.c:77
+msgid "_Rights"
+msgstr ""
+
+#.
+#. * Submenu: Rotate/Flip
+#.
+#: src/glabels-ui.xml.h:137 src/view.c:2945
+#, fuzzy
+msgid "_Rotate/Flip"
+msgstr "旋轉"
+
+#: src/glabels-ui.xml.h:138
+#, fuzzy
+msgid "_Save"
+msgstr "另存為..."
+
+#: src/glabels-ui.xml.h:139 src/stock.c:61
+#, fuzzy
+msgid "_Select Mode"
+msgstr "選擇"
+
+#: src/glabels-ui.xml.h:140 src/stock.c:62
+#, fuzzy
+msgid "_Text"
+msgstr "文字"
+
+#: src/glabels-ui.xml.h:141 src/stock.c:79
+#, fuzzy
+msgid "_Tops"
+msgstr "工具 (&_T)"
+
+#: src/glabels-ui.xml.h:142
+#, fuzzy
+msgid "_View"
+msgstr "新增 (&_N)"
+
+#: src/glabels.c:52
+msgid "Show view debugging messages."
+msgstr ""
+
+#: src/glabels.c:55
+msgid "Show item debugging messages."
+msgstr ""
+
+#: src/glabels.c:58
+msgid "Show printing debugging messages."
+msgstr ""
+
+#: src/glabels.c:61
+msgid "Show prefs debugging messages."
+msgstr ""
+
+#: src/glabels.c:64
+msgid "Show file debugging messages."
+msgstr ""
+
+#: src/glabels.c:67
+msgid "Show document debugging messages."
+msgstr ""
+
+#: src/glabels.c:70
+msgid "Show template debugging messages."
+msgstr ""
+
+#: src/glabels.c:73
+msgid "Show paper debugging messages."
+msgstr ""
+
+#: src/glabels.c:76
+msgid "Show xml debugging messages."
+msgstr ""
+
+#: src/glabels.c:79
+msgid "Show document merge debugging messages."
+msgstr ""
+
+#: src/glabels.c:82
+msgid "Show commands debugging messages."
+msgstr ""
+
+#: src/glabels.c:85
+msgid "Show undo debugging messages."
+msgstr ""
+
+#: src/glabels.c:88
+msgid "Show recent debugging messages."
+msgstr ""
+
+#: src/glabels.c:91
+msgid "Show window debugging messages."
+msgstr ""
+
+#: src/glabels.c:94
+msgid "Show ui debugging messages."
+msgstr ""
+
+#: src/glabels.c:97
+msgid "Show media select widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:100
+msgid "Show mini preview widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:103
+msgid "Show pixbuf cache debugging messages."
+msgstr ""
+
+#: src/glabels.c:106
+msgid "Show widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:109
+msgid "Turn on all debugging messages."
+msgstr ""
+
+#: src/glabels.c:180
+msgid "Could not initialize Bonobo!\n"
+msgstr ""
+
+#: src/glabels-batch.c:48
 msgid "print this message"
 msgstr "列印這個訊息"
 
-#: src/glabels_batch.c:51
+#: src/glabels-batch.c:50
 msgid "print the version of glabels-batch being used"
 msgstr "列印出 glabels-batch 的版本資訊"
 
-#: src/glabels_batch.c:53
+#: src/glabels-batch.c:52
 msgid "set output filename (default=\"output.ps\")"
 msgstr "設定輸出檔名稱 (預設為\"output.ps\")"
 
-#: src/glabels_batch.c:53
+#: src/glabels-batch.c:52
 msgid "filename"
 msgstr "檔案名稱"
 
-#: src/glabels_batch.c:55
+#: src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "紙張數目 (預設為 1)"
 
-#: src/glabels_batch.c:55
+#: src/glabels-batch.c:54
 msgid "sheets"
 msgstr "紙張"
 
-#: src/glabels_batch.c:57
+#: src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "份數 (預設為 1)"
 
-#: src/glabels_batch.c:57
+#: src/glabels-batch.c:56
 msgid "copies"
 msgstr "份數"
 
-#: src/glabels_batch.c:59 src/print_dialog.c:152
+#: src/glabels-batch.c:58 src/print-dialog.c:200
 msgid "print outlines (to test printer alignment)"
 msgstr "印出外邊 (測試打印機參數)"
 
-#: src/glabels_batch.c:61 src/print_dialog.c:160
+#: src/glabels-batch.c:60 src/print-dialog.c:209
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "反方向列印 (如倒向影像)"
 
-#: src/glabels_batch.c:92
+#: src/glabels-batch.c:95
 msgid "[OPTION...] GLABELS_FILE..."
 msgstr "[選項...] GLABELS_FILE..."
 
-#: src/glabels_batch.c:111
+#: src/glabels-batch.c:114
 msgid "missing glabels file\n"
 msgstr "沒有輸入 glabels 的檔案\n"
 
-#: src/glabels_batch.c:139
+#: src/glabels-batch.c:141
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "開啟檔案失敗 %s\n"
 
-#: src/mdi.c:169
-#, c-format
-msgid "Revert to saved copy of %s?"
-msgstr "要載入已儲存的備份 %s ?"
-
-#: src/mdi.c:207
-msgid "Unknown media type. Using default."
-msgstr "不明的媒體類形. 使用預設."
-
-#: src/mdi.c:455
-#, c-format
-msgid ""
-"``%s'' has been modified.\n"
-"\n"
-"Do you wish to save it?"
+#: src/window.c:234
+msgid "(none) - gLabels"
 msgstr ""
-"``%s`` 已被修改.\n"
-"\n"
-"要現在儲存嗎 ?"
 
-#: src/mdi.c:459
-msgid "Don't save"
-msgstr "不要儲存"
+#: src/window.c:399
+msgid "(modified)"
+msgstr ""
 
-#: src/mdi.c:601 src/file.c:288
-msgid "Cannot save file"
+#: src/stock.c:68
+#, fuzzy
+msgid "_Merge Properties"
+msgstr "合併設定"
+
+#: src/stock.c:69
+#, fuzzy
+msgid "Object _Properties"
+msgstr "文字樣貌"
+
+#: src/stock.c:80
+msgid "Bottoms"
+msgstr ""
+
+#: src/stock.c:81
+msgid "Centers"
+msgstr ""
+
+#: src/commands.c:337
+msgid ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+msgstr ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+
+#: src/commands.c:351
+msgid "See the file AUTHORS for additional credits,"
+msgstr ""
+
+#: src/commands.c:352
+msgid "or visit http://snaught.com/glabels"
+msgstr ""
+
+#: src/commands.c:376
+#, fuzzy
+msgid "glabels"
+msgstr "標簽"
+
+#: src/file.c:82
+msgid "New Label or Card"
+msgstr "新增標簽或卡"
+
+#: src/file.c:112
+msgid "Media Type"
+msgstr "媒體種類"
+
+#: src/file.c:118
+msgid "Label orientation"
+msgstr "標簽方向"
+
+#: src/file.c:248
+msgid "Open label"
+msgstr "開啟標簽"
+
+#: src/file.c:296 src/file.c:594
+#, fuzzy
+msgid "Empty file name selection"
+msgstr "移除所有選擇項"
+
+#: src/file.c:297 src/file.c:311
+msgid "Please select a file or supply a valid file name"
+msgstr ""
+
+#: src/file.c:310
+msgid "File does not exist"
+msgstr ""
+
+#: src/file.c:372
+#, fuzzy, c-format
+msgid "Could not open file \"%s\""
+msgstr "開啟檔案失敗"
+
+#: src/file.c:380
+msgid "Not a supported file format"
+msgstr ""
+
+#: src/file.c:462 src/file.c:636
+#, fuzzy, c-format
+msgid "Could not save file \"%s\""
 msgstr "不能儲存檔案"
 
-#: src/mdi.c:623 src/file.c:311
-msgid "Save As"
-msgstr "另存為..."
+#: src/file.c:470 src/file.c:644
+msgid "Error encountered during save.  The file is still not saved."
+msgstr ""
 
-#: src/mdi.c:626
-msgid "Close / Save label as"
-msgstr "關閉 / 儲存標簽為..."
+#: src/file.c:512
+#, fuzzy, c-format
+msgid "Save \"%s\" as"
+msgstr "儲存標簽為..."
 
-#: src/mdi.c:680 src/file.c:352
-msgid "Label no longer valid!"
-msgstr "標簽並不是正確可讀的 !"
-
-#: src/mdi.c:693 src/file.c:362
-msgid "Must supply file name"
+#: src/file.c:595
+#, fuzzy
+msgid "Please supply a valid file name"
 msgstr "請必需輸入檔案名稱"
 
-#: src/mdi.c:705 src/file.c:374
-msgid "Error writing file"
-msgstr "在寫入檔案時發生錯誤"
+#: src/file.c:609
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr ""
 
-#: src/display.c:1250 src/display.c:1298
-msgid "Delete"
-msgstr "刪除"
+#: src/file.c:617
+msgid "File already exists."
+msgstr ""
 
-#: src/display.c:1260 src/display.c:1308
-msgid "Bring to front"
-msgstr "帶出到前面"
+#: src/file.c:732
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr ""
 
-#: src/display.c:1266 src/display.c:1314
-msgid "Send to back"
-msgstr "放在最底"
+#: src/file.c:740
+msgid "Your changes will be lost if you don't save them."
+msgstr ""
 
-#: src/display.c:1287
-msgid "Edit properties..."
-msgstr "修改設定..."
+#: src/file.c:743
+msgid "Close without saving"
+msgstr ""
 
-#: src/item_text.c:450
-msgid "Edit text object properties"
-msgstr "修改文字物件的設定"
+#. Should not happen
+#: src/prefs.c:664 src/prefs.c:671 src/wdgt-line.c:180
+msgid "points"
+msgstr "點"
 
-#: src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
+#: src/prefs.c:666
+msgid "inches"
+msgstr "英寸"
+
+#: src/prefs.c:668
+msgid "mm"
+msgstr "mm"
+
+#: src/prefs-dialog.c:217
+#, fuzzy
+msgid "Locale"
+msgstr "比例:"
+
+#: src/prefs-dialog.c:221
+msgid "Object defaults"
+msgstr ""
+
+#: src/prefs-dialog.c:229
+#, fuzzy
+msgid "gLabels Preferences"
+msgstr "Glabels: 設定值"
+
+#: src/prefs-dialog.c:271
+msgid "Select locale specific behavior."
+msgstr ""
+
+#. ----- Display Units Frame ------------------------------------
+#: src/prefs-dialog.c:276
+msgid "Display units"
+msgstr "顯示單位"
+
+#: src/prefs-dialog.c:282
+msgid "Points"
+msgstr "點"
+
+#: src/prefs-dialog.c:289
+msgid "Inches"
+msgstr "英寸"
+
+#: src/prefs-dialog.c:296
+msgid "Millimeters"
+msgstr "毫米"
+
+#. ----- Page Size Frame ------------------------------------
+#: src/prefs-dialog.c:303
+msgid "Default page size"
+msgstr "預設紙張大小"
+
+#: src/prefs-dialog.c:309
+msgid "US Letter"
+msgstr ""
+
+#: src/prefs-dialog.c:317
+msgid "A4"
+msgstr ""
+
+#: src/prefs-dialog.c:354
+msgid "Select default properties for new objects."
+msgstr ""
+
+#. ------ text props entry ------
+#: src/prefs-dialog.c:359 src/view-text.c:314 src/view-text.c:634
+#: src/wdgt-bc-style.c:184
 msgid "Text"
 msgstr "文字"
 
-#: src/item_text.c:479 src/item_line.c:253 src/item_box.c:245
-#: src/item_ellipse.c:247 src/item_barcode.c:317
-msgid "Appearance"
-msgstr "樣貌"
-
-#. ------ Begin Text Properties box ------
-#: src/item_text.c:482
-msgid "Text Properties"
-msgstr "文字樣貌"
-
-#. ------ Position Frame ------
-#: src/item_text.c:500 src/item_text.c:503 src/item_line.c:274
-#: src/item_box.c:275 src/item_ellipse.c:277 src/item_image.c:318
-#: src/item_barcode.c:345 src/item_barcode.c:348
-msgid "Position"
-msgstr "位置"
-
-#: src/item_line.c:243
-msgid "Edit line object properties"
-msgstr "修改線物件的設定"
-
-#. ------ Begin Line box ------
-#: src/item_line.c:256 src/menu.c:106
+#. ------ Line box ------
+#: src/prefs-dialog.c:368 src/view-line.c:304
 msgid "Line"
 msgstr "線"
 
-#: src/item_line.c:271 src/item_box.c:272 src/item_ellipse.c:274
-#: src/item_image.c:315
-msgid "Position/Size"
-msgstr "位置/大小"
-
-#. ------ Size Frame ------
-#: src/item_line.c:285 src/item_box.c:286 src/item_ellipse.c:288
-#: src/item_image.c:329
-msgid "Size"
-msgstr "大小"
-
-#: src/item_box.c:235
-msgid "Edit box object properties"
-msgstr "修改方塊物件設定"
-
-#. ------ Line box ------
-#: src/item_box.c:248 src/item_ellipse.c:250
-msgid "Outline"
-msgstr "外邊"
-
 #. ------ Fill box ------
-#: src/item_box.c:258 src/item_ellipse.c:260
+#: src/prefs-dialog.c:377 src/view-box.c:323 src/view-ellipse.c:323
 msgid "Fill"
 msgstr "填滿"
 
-#: src/item_ellipse.c:237
+#.
+#. * Submenu: Align Horizontally
+#.
+#: src/view.c:2978
+msgid "Align _Horizontally"
+msgstr ""
+
+#.
+#. * Submenu: Align Vertically
+#.
+#: src/view.c:3017
+msgid "Align _Vertically"
+msgstr ""
+
+#: src/view-box.c:291
+msgid "Edit box object properties"
+msgstr "修改方塊物件設定"
+
+#. ---------------------------
+#. Outline section
+#. ---------------------------
+#: src/view-box.c:307 src/view-ellipse.c:307
+msgid "Outline"
+msgstr "外邊"
+
+#. ---------------------------
+#. Position section
+#. ---------------------------
+#: src/view-box.c:339 src/view-ellipse.c:339 src/view-line.c:320
+#: src/view-image.c:314 src/view-text.c:349 src/view-barcode.c:338
+msgid "Position"
+msgstr "位置"
+
+#. ---------------------------
+#. Size section
+#. ---------------------------
+#: src/view-box.c:354 src/view-ellipse.c:354 src/view-line.c:338
+#: src/view-image.c:331
+msgid "Size"
+msgstr "大小"
+
+#: src/view-ellipse.c:291
 msgid "Edit ellipse object properties"
 msgstr "修改橢圓物件設定"
 
-#: src/item_image.c:257
+#: src/view-line.c:289
+msgid "Edit line object properties"
+msgstr "修改線物件的設定"
+
+#: src/view-image.c:285
 msgid "Edit image object properties"
 msgstr "修改圖像物件設定"
 
-#: src/item_image.c:268 src/menu.c:113
+#. ---------------------------
+#. Image section
+#. ---------------------------
+#: src/view-image.c:300
 msgid "Image"
 msgstr "圖像"
 
 #. ------ Size Reset Button ------
-#: src/item_image.c:342
+#: src/view-image.c:344
 msgid "Reset image size"
 msgstr "重設圖像大小"
 
-#: src/item_image.c:389 src/item_image.c:454
-msgid "Image format not currently supported"
-msgstr "圖像格式並沒有支援"
+#: src/view-text.c:299
+msgid "Edit text object properties"
+msgstr "修改文字物件的設定"
 
-#: src/item_barcode.c:287
+#. ---------------------------
+#. Text Properties section
+#. ---------------------------
+#: src/view-text.c:331 src/view-barcode.c:306
+#, fuzzy
+msgid "Properties"
+msgstr "文字樣貌"
+
+#: src/view-barcode.c:271
 msgid "Edit barcode object properties"
 msgstr "修改數碼條物件設定"
 
-#: src/item_barcode.c:297
+#. ---------------------------
+#. Data section
+#. ---------------------------
+#: src/view-barcode.c:286 src/merge-properties-dialog.c:343
 msgid "Data"
 msgstr "資料"
 
-#: src/item_barcode.c:299
-msgid "Barcode data"
-msgstr "數碼條資料"
-
-#. ------ Begin Barcode Properties Frame ------
-#: src/item_barcode.c:320 src/prefs.c:215
-msgid "General"
-msgstr "一般"
-
-#. ------ Barcode Style Frame ------
-#: src/item_barcode.c:330
-msgid "Style"
-msgstr "樣式"
-
-#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
+#: src/view-barcode.c:802 src/print.c:912
 msgid "Invalid barcode"
 msgstr "不正確的數碼條"
 
-#. W Label
-#: src/prop_size.c:182 src/prop_line.c:169
-msgid "Width:"
-msgstr "闊度:"
+#: src/merge-properties-dialog.c:232
+#, fuzzy
+msgid "Merge Properties"
+msgstr "合併設定"
 
-#. H label
-#: src/prop_size.c:198
-msgid "Height:"
-msgstr "高度:"
-
-#: src/prop_size.c:222
-msgid "Maintain current aspect ratio"
-msgstr "保留現有的大小比例"
-
-#. X label
-#: src/prop_position.c:173
-msgid "X:"
-msgstr "X:"
-
-#. Y label
-#: src/prop_position.c:191
-msgid "Y:"
-msgstr "Y:"
-
-#. Line Width units
-#: src/prop_line.c:183 src/prefs.c:448 src/prefs.c:455
-msgid "points"
-msgstr "點"
-
-#. Line Color Label
-#: src/prop_line.c:189 src/prop_fill.c:166 src/prop_text.c:234
-#: src/prop_bc.c:188
-msgid "Color:"
-msgstr "顏色:"
-
-#. Font label
-#: src/prop_text.c:181
-msgid "Font:"
-msgstr "字型:"
-
-#. Alignment label
-#: src/prop_text.c:248
-msgid "Alignment:"
-msgstr "對置:"
-
-#. Insert merge field label
-#: src/prop_text_entry.c:180 src/prop_bc_data.c:196
-msgid "Key:"
-msgstr "資料值:"
-
-#: src/prop_text_entry.c:196
-msgid "Insert merge field"
-msgstr "插入合併列"
-
-#. Length label
-#: src/prop_vector.c:183
-msgid "Length:"
-msgstr "長度:"
-
-#. Angle label
-#: src/prop_vector.c:207
-msgid "Angle:"
-msgstr "角度:"
-
-#. Angle units label
-#: src/prop_vector.c:224
-msgid "degrees"
-msgstr "度數"
-
-#. Scale Label
-#: src/prop_bc.c:168
-msgid "Scale:"
-msgstr "比例:"
-
-#. % Label
-#: src/prop_bc.c:182
-msgid "%"
-msgstr "%"
-
-#: src/prop_bc_style.c:313
-msgid "Show text with barcode"
-msgstr "顯示數碼條文字"
-
-#: src/prop_bc_data.c:176
-msgid "Literal:"
-msgstr "文字:"
-
-#: src/label.c:173 src/label.c:197
-msgid "xmlParseFile error"
-msgstr "xmlParseFile 錯誤"
-
-#: src/label.c:228
-msgid "No document root"
-msgstr "沒有文件始端"
-
-#: src/label.c:239
-msgid "document of the wrong type, glabels Namespace not found"
-msgstr "不正確的文件種類, 找不到 glabels 格式"
-
-#: src/label.c:244
-#, c-format
-msgid "Bad root node = \"%s\""
-msgstr "錯誤的基碼 = \"%s\""
-
-#: src/label.c:291
-#, c-format
-msgid "bad node =  \"%s\""
-msgstr "錯誤的節點 = \"%s\""
-
-#: src/label.c:606
-msgid "Problem saving xml file."
-msgstr "儲存 XML 檔案時發生錯誤."
-
-#: src/template.c:224
-msgid "No template files found!"
-msgstr "找不到樣版檔案 !"
-
-#: src/merge_properties.c:82
-msgid "Edit document-merge properties"
-msgstr "修改文件合併設定"
-
-#: src/merge_properties.c:131
+#. ---- Source section ----
+#: src/merge-properties-dialog.c:238
 msgid "Source"
 msgstr "來源檔"
 
-#: src/merge_properties.c:143
+#: src/merge-properties-dialog.c:246
 msgid "Format:"
 msgstr "格式:"
 
-#: src/merge_properties.c:158
+#. Location line
+#: src/merge-properties-dialog.c:274
 msgid "Location:"
 msgstr "位置:"
 
-#: src/merge_properties.c:168
-msgid "Fields"
-msgstr "欄位"
-
-#: src/merge.c:78
-msgid "None"
-msgstr "沒有"
-
-#: src/merge.c:86
-msgid "Text with tab separators"
-msgstr "以 [TAB] 為分格"
-
-#: src/merge.c:94
-msgid "Text with comma separators (CSV)"
-msgstr "以逗號分格 (CSV)"
-
-#: src/merge.c:102
-msgid "Text with colon separators"
-msgstr "以冒號分格"
-
-#: src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
-msgid "N/A"
-msgstr "N/A"
-
-#: src/merge_ui_text.c:170
+#: src/merge-properties-dialog.c:283 src/merge-properties-dialog.c:394
 msgid "Select merge-database source"
 msgstr "選擇合併資料庫來源"
 
-#: src/merge_ui_text.c:330
-msgid "Column"
-msgstr "列"
+#: src/merge-properties-dialog.c:290 src/merge-properties-dialog.c:405
+msgid "N/A"
+msgstr "N/A"
 
-#: src/merge_ui_text.c:334
-msgid "Custom field key"
-msgstr "自訂欄位鑰"
+#. ---- Sample Fields section ----
+#: src/merge-properties-dialog.c:301
+msgid "Record selection/preview:"
+msgstr ""
 
-#: src/merge_ui_text.c:338
-msgid "Sample data"
-msgstr "樣本資料"
-
-#: src/menu.c:50
-msgid "_New"
-msgstr "新增 (&_N)"
-
-#: src/menu.c:51
-msgid "Make a new, empty label"
-msgstr "製作新檔, 空的樣簽"
-
-#: src/menu.c:85
-msgid "U_nselect All "
-msgstr "反選擇全部 (&_N)"
-
-#: src/menu.c:86
-msgid "Remove all selections"
-msgstr "移除所有選擇項"
-
-#: src/menu.c:94
+#: src/merge-properties-dialog.c:327
 msgid "Select"
 msgstr "選擇"
 
-#: src/menu.c:95 src/menu.c:186
-msgid "Select, move and modify objects"
-msgstr "選擇, 移動及修改物件"
-
-#: src/menu.c:100 src/menu.c:191
-msgid "Create text object"
-msgstr "建立新的文字物件"
-
-#: src/menu.c:103
-msgid "Box"
-msgstr "盒子"
-
-#: src/menu.c:103 src/menu.c:194
-msgid "Create box/rectangle object"
-msgstr "建立新的盒子/方形物件"
-
-#: src/menu.c:106 src/menu.c:197
-msgid "Create line object"
-msgstr "畫線物件"
-
-#: src/menu.c:109
-msgid "Ellipse"
-msgstr "橢圓形"
-
-#: src/menu.c:110 src/menu.c:200
-msgid "Create ellipse/circle object"
-msgstr "建立橢圓形/圖形物件"
-
-#: src/menu.c:113 src/menu.c:203
-msgid "Create image object"
-msgstr "建立影像物件"
-
-#: src/menu.c:116
-msgid "Barcode"
-msgstr "數碼條"
-
-#: src/menu.c:116 src/menu.c:206
-msgid "Create barcode object"
-msgstr "建立數碼條"
-
-#: src/menu.c:121 src/menu.c:211
-msgid "Zoom in"
-msgstr "放大"
-
-#: src/menu.c:124 src/menu.c:214
-msgid "Zoom out"
-msgstr "縮小"
-
-#: src/menu.c:127
-msgid "Zoom 1:1"
-msgstr "1:1 顯示"
-
-#: src/menu.c:127 src/menu.c:217
-msgid "Zoom to 1:1"
-msgstr "1:1 顯示"
-
-#: src/menu.c:132 src/menu.c:223
-msgid "Merge properties"
-msgstr "合併設定"
-
-#: src/menu.c:133
-msgid "Edit merge properties"
-msgstr "修改合併設定"
-
-#: src/menu.c:157
-msgid "_Tools"
-msgstr "工具 (&_T)"
-
-#: src/menu.c:168
-msgid "  New   "
-msgstr "  新增  "
-
-#: src/menu.c:168
-msgid "New Label/Card"
-msgstr "新增標簽/卡"
-
-#: src/menu.c:170
-msgid "  Open  "
-msgstr "  開啟  "
-
-#: src/menu.c:170
-msgid "Open a file"
-msgstr "開啟檔案"
-
-#: src/menu.c:172
-msgid "  Save  "
-msgstr "  儲存  "
-
-#: src/menu.c:172
-msgid "Save current file"
-msgstr "儲存現在檔案"
-
-#: src/menu.c:175
-msgid " Print  "
-msgstr "  列印  "
-
-#: src/menu.c:175
-msgid "Print current file"
-msgstr "列印現有檔案"
-
-#: src/menu.c:290
-msgid ""
-"A label and business card creation program for GNOME.\n"
-" \n"
-"Glabels is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version.\n"
-" \n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
+#: src/merge-properties-dialog.c:335
+msgid "Record/Field"
 msgstr ""
-"A label and business card creation program for GNOME.\n"
-" \n"
-"Glabels is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version.\n"
-" \n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
 
-#: src/menu.c:326
-msgid "Function is not implemented!"
-msgstr "功能未完成 !"
+#: src/print-dialog.c:128
+msgid "_Job"
+msgstr ""
 
-#: src/file.c:72
-msgid "New Label or Card"
-msgstr "新增標簽或卡"
-
-#: src/file.c:98
-msgid "Media Type"
-msgstr "媒體種類"
-
-#: src/file.c:109
-msgid "Label orientation"
-msgstr "標簽方向"
-
-#: src/file.c:211
-msgid "Open"
-msgstr "開啟"
-
-#: src/file.c:213
-msgid "Open label"
-msgstr "開啟標簽"
-
-#: src/file.c:249
-msgid "Cannot open file"
-msgstr "開啟檔案失敗"
-
-#: src/file.c:316
-msgid "Save label as"
-msgstr "儲存標簽為..."
-
-#: src/media_select.c:222
-msgid "Description:"
-msgstr "描述:"
-
-#: src/media_select.c:227
-msgid "Page size:"
-msgstr "紙張大小:"
-
-#: src/media_select.c:232
-msgid "Label size:"
-msgstr "標簽大小:"
-
-#: src/media_select.c:237
-msgid "Layout:"
-msgstr "版面:"
-
-#: src/media_select.c:353
-#, c-format
-msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d (每頁 %d)"
-
-#: src/media_select.c:367
-#, c-format
-msgid "%s x %s %s"
-msgstr "%s x %s %s"
-
-#: src/media_select.c:372
-#, c-format
-msgid "%.5g x %.5g %s"
-msgstr "%.5g x %.5g %s"
-
-#: src/rotate_select.c:169
-msgid "Rotate"
-msgstr "旋轉"
-
-#: src/print_dialog.c:99
-msgid "Print"
+#: src/print-dialog.c:133
+#, fuzzy
+msgid "P_rinter"
 msgstr "列印"
 
 #. ----------- Add simple-copies widget ------------
-#: src/print_dialog.c:104
+#: src/print-dialog.c:163
 msgid "Copies"
 msgstr "份數"
 
-#. -------Otherwise add merge control widget ------------
-#: src/print_dialog.c:121
+#. ------- Otherwise add merge control widget ------------
+#: src/print-dialog.c:177
 msgid "Document merge control"
 msgstr "文件合併控制"
 
 #. ----------- Add custom print options area ------------
-#: src/print_dialog.c:141
+#: src/print-dialog.c:194
 msgid "Options"
 msgstr "設定"
 
-#: src/print_dialog.c:241 src/print_dialog.c:280
+#: src/print-dialog.c:336 src/print-dialog.c:374
 msgid "Print preview"
 msgstr "預覽列印"
 
-#: src/print_copies.c:170
+#: src/label.c:542
+msgid "Untitled"
+msgstr ""
+
+#: src/template.c:296
+#, c-format
+msgid "Generic %s full page"
+msgstr ""
+
+#: src/template.c:338
+msgid "No template files found!"
+msgstr "找不到樣版檔案 !"
+
+#: src/template.c:435
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
+
+#: src/template.c:440
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
+
+#: src/template.c:451 src/template.c:465
+#, c-format
+msgid "%s %s diameter"
+msgstr ""
+
+#: src/template.c:455 src/template.c:469
+#, c-format
+msgid "%.5g %s diameter"
+msgstr ""
+
+#: src/template.c:607
+#, c-format
+msgid "%d x %d  (%d per sheet)"
+msgstr "%d x %d (每頁 %d)"
+
+#: src/template.c:611
+#, fuzzy, c-format
+msgid "%d per sheet"
+msgstr "%d x %d (每頁 %d)"
+
+#: src/paper.c:322
+#, fuzzy
+msgid "No paper files found!"
+msgstr "找不到樣版檔案 !"
+
+#: src/xml-label.c:171 src/xml-label.c:204
+msgid "xmlParseFile error"
+msgstr "xmlParseFile 錯誤"
+
+#: src/xml-label.c:241
+msgid "No document root"
+msgstr "沒有文件始端"
+
+#: src/xml-label.c:253
+msgid "Importing from glabels 0.1 format"
+msgstr ""
+
+#: src/xml-label.c:261
+msgid "Importing from glabels 0.4 format"
+msgstr ""
+
+#: src/xml-label.c:264
+#, fuzzy
+msgid "bad document, unknown glabels Namespace"
+msgstr "不正確的文件種類, 找不到 glabels 格式"
+
+#: src/xml-label.c:292 src/xml-label-04.c:75
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "錯誤的基碼 = \"%s\""
+
+#: src/xml-label.c:325
+#, fuzzy, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "錯誤的基碼 = \"%s\""
+
+#: src/xml-label.c:357 src/xml-label-04.c:123
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "錯誤的節點 = \"%s\""
+
+#: src/xml-label.c:763
+#, fuzzy, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "錯誤的節點 = \"%s\""
+
+#: src/xml-label.c:831
+msgid "Problem saving xml file."
+msgstr "儲存 XML 檔案時發生錯誤."
+
+#: src/xml-template.c:157
+#, c-format
+msgid "Unknown page size id \"%s\""
+msgstr ""
+
+#: src/merge.c:172 src/merge.c:213 src/merge.c:398 src/merge.c:401
+msgid "None"
+msgstr "沒有"
+
+#: src/merge-init.c:53
+#, fuzzy
+msgid "Text file with comma delimeters (CSV)"
+msgstr "以逗號分格 (CSV)"
+
+#: src/merge-init.c:60
+#, fuzzy
+msgid "Text file with colon delimeters"
+msgstr "以冒號分格"
+
+#: src/merge-init.c:67
+#, fuzzy
+msgid "Text file with tab delimeters"
+msgstr "以 [TAB] 為分格"
+
+#. Font label
+#: src/wdgt-text-props.c:181
+msgid "Font:"
+msgstr "字型:"
+
+#. Text Color Label
+#: src/wdgt-text-props.c:230 src/wdgt-line.c:189 src/wdgt-fill.c:164
+#: src/wdgt-bc-props.c:164
+msgid "Color:"
+msgstr "顏色:"
+
+#. Alignment label
+#: src/wdgt-text-props.c:246
+msgid "Alignment:"
+msgstr "對置:"
+
+#. Text Label
+#: src/wdgt-text-entry.c:172
+msgid "Edit text:"
+msgstr ""
+
+#. Insert merge field label
+#: src/wdgt-text-entry.c:194 src/wdgt-image-select.c:246
+#: src/wdgt-bc-data.c:216
+msgid "Key:"
+msgstr "資料值:"
+
+#: src/wdgt-text-entry.c:212
+msgid "Insert merge field"
+msgstr "插入合併列"
+
+#. X label
+#: src/wdgt-position.c:185
+msgid "X:"
+msgstr "X:"
+
+#. Y label
+#: src/wdgt-position.c:206
+msgid "Y:"
+msgstr "Y:"
+
+#. W Label
+#: src/wdgt-size.c:187 src/wdgt-line.c:166
+msgid "Width:"
+msgstr "闊度:"
+
+#. H label
+#: src/wdgt-size.c:206
+msgid "Height:"
+msgstr "高度:"
+
+#: src/wdgt-size.c:228
+msgid "Maintain current aspect ratio"
+msgstr "保留現有的大小比例"
+
+#. Length label
+#: src/wdgt-vector.c:185
+msgid "Length:"
+msgstr "長度:"
+
+#. Angle label
+#: src/wdgt-vector.c:212
+msgid "Angle:"
+msgstr "角度:"
+
+#. Angle units label
+#: src/wdgt-vector.c:230
+msgid "degrees"
+msgstr "度數"
+
+#: src/wdgt-image-select.c:202
+#, fuzzy
+msgid "File:"
+msgstr "填滿"
+
+#. Style Label
+#: src/wdgt-bc-style.c:167
+#, fuzzy
+msgid "Style:"
+msgstr "樣式"
+
+#: src/wdgt-bc-style.c:190
+msgid "Checksum"
+msgstr ""
+
+#: src/wdgt-bc-data.c:194
+msgid "Literal:"
+msgstr "文字:"
+
+#: src/wdgt-print-copies.c:177
 msgid "Sheets:"
 msgstr "紙張:"
 
-#: src/print_copies.c:187
+#: src/wdgt-print-copies.c:195
 msgid "Labels"
 msgstr "標簽"
 
-#: src/print_copies.c:190
+#: src/wdgt-print-copies.c:198
 msgid "from:"
 msgstr "由:"
 
-#: src/print_copies.c:198
+#: src/wdgt-print-copies.c:205
 msgid "to:"
 msgstr "到:"
 
-#: src/print_merge.c:170
+#: src/wdgt-print-merge.c:176
 msgid "Start on label"
 msgstr "由禁簽開級"
 
-#: src/print_merge.c:179
+#: src/wdgt-print-merge.c:184
 msgid "on 1st sheet"
 msgstr "在首張紙"
 
-#: src/print_merge.c:188
-msgid "Collate"
-msgstr "校對"
-
-#: src/print_merge.c:195
+#: src/wdgt-print-merge.c:193
 msgid "Copies:"
 msgstr "份數:"
 
-#: src/prefs.c:86
-msgid "Glabels: Preferences"
-msgstr "Glabels: 設定值"
+#: src/wdgt-print-merge.c:199
+msgid "Collate"
+msgstr "校對"
 
-#. ----- Display Units Frame ------------------------------------
-#: src/prefs.c:220
-msgid "Display units"
-msgstr "顯示單位"
+#: src/wdgt-media-select.c:262
+msgid "Description:"
+msgstr "描述:"
 
-#: src/prefs.c:231
-msgid "Points"
-msgstr "點"
+#: src/wdgt-media-select.c:272
+msgid "Page size:"
+msgstr "紙張大小:"
 
-#: src/prefs.c:237
-msgid "Inches"
-msgstr "英寸"
+#: src/wdgt-media-select.c:283
+msgid "Label size:"
+msgstr "標簽大小:"
 
-#: src/prefs.c:244
-msgid "Millimeters"
-msgstr "毫米"
+#: src/wdgt-media-select.c:294
+msgid "Layout:"
+msgstr "版面:"
 
-#. ----- Display Units Frame ------------------------------------
-#: src/prefs.c:249
-msgid "Default page size"
-msgstr "預設紙張大小"
+#: src/wdgt-rotate-label.c:195
+msgid "Rotate"
+msgstr "旋轉"
 
-#: src/prefs.c:450
-msgid "inches"
-msgstr "英寸"
+#: src/gnome-recent-view-bonobo.c:189
+#, fuzzy, c-format
+msgid "Open %s"
+msgstr "開啟"
 
-#: src/prefs.c:452
-msgid "mm"
-msgstr "mm"
+#~ msgid "Revert to saved copy of %s?"
+#~ msgstr "要載入已儲存的備份 %s ?"
+
+#~ msgid "Unknown media type. Using default."
+#~ msgstr "不明的媒體類形. 使用預設."
+
+#~ msgid ""
+#~ "``%s'' has been modified.\n"
+#~ "\n"
+#~ "Do you wish to save it?"
+#~ msgstr ""
+#~ "``%s`` 已被修改.\n"
+#~ "\n"
+#~ "要現在儲存嗎 ?"
+
+#~ msgid "Don't save"
+#~ msgstr "不要儲存"
+
+#~ msgid "Close / Save label as"
+#~ msgstr "關閉 / 儲存標簽為..."
+
+#~ msgid "Label no longer valid!"
+#~ msgstr "標簽並不是正確可讀的 !"
+
+#~ msgid "Error writing file"
+#~ msgstr "在寫入檔案時發生錯誤"
+
+#~ msgid "Edit properties..."
+#~ msgstr "修改設定..."
+
+#~ msgid "Appearance"
+#~ msgstr "樣貌"
+
+#~ msgid "Position/Size"
+#~ msgstr "位置/大小"
+
+#~ msgid "Image format not currently supported"
+#~ msgstr "圖像格式並沒有支援"
+
+#~ msgid "Barcode data"
+#~ msgstr "數碼條資料"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Show text with barcode"
+#~ msgstr "顯示數碼條文字"
+
+#~ msgid "Edit document-merge properties"
+#~ msgstr "修改文件合併設定"
+
+#~ msgid "Fields"
+#~ msgstr "欄位"
+
+#~ msgid "Column"
+#~ msgstr "列"
+
+#~ msgid "Sample data"
+#~ msgstr "樣本資料"
+
+#~ msgid "Make a new, empty label"
+#~ msgstr "製作新檔, 空的樣簽"
+
+#~ msgid "Zoom to 1:1"
+#~ msgstr "1:1 顯示"
+
+#~ msgid "  New   "
+#~ msgstr "  新增  "
+
+#~ msgid "New Label/Card"
+#~ msgstr "新增標簽/卡"
+
+#~ msgid "  Open  "
+#~ msgstr "  開啟  "
+
+#~ msgid "  Save  "
+#~ msgstr "  儲存  "
+
+#~ msgid " Print  "
+#~ msgstr "  列印  "
+
+#~ msgid "Function is not implemented!"
+#~ msgstr "功能未完成 !"

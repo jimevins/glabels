@@ -2,10 +2,11 @@
 # Copyright (C) 2001-2003 Free Software Foundation, Inc.
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2001-2003.
 #
+#: src/commands.c:361
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.91.0\n"
-"POT-Creation-Date: 2003-01-03 22:03+0900\n"
+"POT-Creation-Date: 2003-06-22 01:12-0400\n"
 "PO-Revision-Date: 2003-01-03 22:00+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -285,7 +286,7 @@ msgstr "設定(_E)..."
 msgid "Preferences"
 msgstr "gLabel の設定"
 
-#: src/glabels-ui.xml.h:69 src/print-dialog.c:96
+#: src/glabels-ui.xml.h:69 src/print-dialog.c:104
 msgid "Print"
 msgstr "印刷"
 
@@ -466,7 +467,7 @@ msgstr "オブジェクトの生成(_C)"
 msgid "_Debug"
 msgstr "デバッグ(_D)"
 
-#: src/glabels-ui.xml.h:115 src/view.c:2819
+#: src/glabels-ui.xml.h:115 src/view.c:3078
 msgid "_Delete"
 msgstr "削除(_D)"
 
@@ -537,7 +538,7 @@ msgstr "開く(_O)..."
 #.
 #. * Submenu: Order
 #.
-#: src/glabels-ui.xml.h:132 src/view.c:2665
+#: src/glabels-ui.xml.h:132 src/view.c:2924
 msgid "_Order"
 msgstr "順序(_O)"
 
@@ -560,7 +561,7 @@ msgstr "右端(_R)"
 #.
 #. * Submenu: Rotate/Flip
 #.
-#: src/glabels-ui.xml.h:137 src/view.c:2686
+#: src/glabels-ui.xml.h:137 src/view.c:2945
 msgid "_Rotate/Flip"
 msgstr "回転/フリップ(_R)"
 
@@ -584,131 +585,141 @@ msgstr "上端(_T)"
 msgid "_View"
 msgstr "表示(_V)"
 
-#: src/glabels.c:51
+#: src/glabels.c:52
 msgid "Show view debugging messages."
 msgstr "表示のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:54
+#: src/glabels.c:55
 msgid "Show item debugging messages."
 msgstr "アイテムのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:57
+#: src/glabels.c:58
 msgid "Show printing debugging messages."
 msgstr "印刷のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:60
+#: src/glabels.c:61
 msgid "Show prefs debugging messages."
 msgstr "設定のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:63
+#: src/glabels.c:64
 msgid "Show file debugging messages."
 msgstr "ファイルのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:66
+#: src/glabels.c:67
 msgid "Show document debugging messages."
 msgstr "ドキュメントのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:69
+#: src/glabels.c:70
 msgid "Show template debugging messages."
 msgstr "テンプレートのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:72
+#: src/glabels.c:73
+#, fuzzy
+msgid "Show paper debugging messages."
+msgstr "設定のデバッグ・メッセージを表示する"
+
+#: src/glabels.c:76
 msgid "Show xml debugging messages."
 msgstr "XML のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:75
+#: src/glabels.c:79
 msgid "Show document merge debugging messages."
 msgstr "ドキュメント結合のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:78
+#: src/glabels.c:82
 msgid "Show commands debugging messages."
 msgstr "コマンドのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:81
+#: src/glabels.c:85
 msgid "Show undo debugging messages."
 msgstr "Undo のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:84
+#: src/glabels.c:88
 msgid "Show recent debugging messages."
 msgstr "最近開いたファイルのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:87
+#: src/glabels.c:91
 msgid "Show window debugging messages."
 msgstr "ウィンドウのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:90
+#: src/glabels.c:94
 msgid "Show ui debugging messages."
 msgstr "GUI のデバッグ・メッセージを表示する"
 
-#: src/glabels.c:93
+#: src/glabels.c:97
 msgid "Show media select widget debugging messages."
 msgstr "メディア選択ウィジットのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:96
+#: src/glabels.c:100
 msgid "Show mini preview widget debugging messages."
 msgstr "プレビュー・ウィジットのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:99
+#: src/glabels.c:103
+#, fuzzy
+msgid "Show pixbuf cache debugging messages."
+msgstr "表示のデバッグ・メッセージを表示する"
+
+#: src/glabels.c:106
 msgid "Show widget debugging messages."
 msgstr "ウィジットのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:102
+#: src/glabels.c:109
 msgid "Turn on all debugging messages."
 msgstr "全てのデバッグ・メッセージを表示する"
 
-#: src/glabels.c:171
+#: src/glabels.c:180
 msgid "Could not initialize Bonobo!\n"
 msgstr "Bonobo を初期化することができませんでした！\n"
 
-#: src/glabels-batch.c:47
+#: src/glabels-batch.c:48
 msgid "print this message"
 msgstr "このメッセージを表示する"
 
-#: src/glabels-batch.c:49
+#: src/glabels-batch.c:50
 msgid "print the version of glabels-batch being used"
 msgstr "使用している gLabel のバージョンを表示する"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "set output filename (default=\"output.ps\")"
 msgstr "出力するファイル名を指定する (デフォルト = \"output.ps\")"
 
-#: src/glabels-batch.c:51
+#: src/glabels-batch.c:52
 msgid "filename"
 msgstr "ファイル名"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "用紙の数 (デフォルト = 1)"
 
-#: src/glabels-batch.c:53
+#: src/glabels-batch.c:54
 msgid "sheets"
 msgstr "用紙の数"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "コピーの数 (デフォルト = 1)"
 
-#: src/glabels-batch.c:55
+#: src/glabels-batch.c:56
 msgid "copies"
 msgstr "コピーの数"
 
-#: src/glabels-batch.c:57 src/print-dialog.c:192
+#: src/glabels-batch.c:58 src/print-dialog.c:200
 msgid "print outlines (to test printer alignment)"
 msgstr "アウトラインを印刷する (印刷時の配置を確認するため)"
 
-#: src/glabels-batch.c:59 src/print-dialog.c:201
+#: src/glabels-batch.c:60 src/print-dialog.c:209
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "(画像をミラーするように) 反転して印刷する"
 
-#: src/glabels-batch.c:94
+#: src/glabels-batch.c:95
 msgid "[OPTION...] GLABELS_FILE..."
 msgstr "[オプション...] ファイル名..."
 
-#: src/glabels-batch.c:113
+#: src/glabels-batch.c:114
 msgid "missing glabels file\n"
 msgstr "gLabel で使用するファイルがありません\n"
 
-#: src/glabels-batch.c:139
+#: src/glabels-batch.c:141
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "gLabel で使用するファイル %s が開けません\n"
@@ -851,15 +862,15 @@ msgid "Close without saving"
 msgstr "保存せずに閉じる"
 
 #. Should not happen
-#: src/prefs.c:653 src/prefs.c:660 src/wdgt-line.c:180
+#: src/prefs.c:664 src/prefs.c:671 src/wdgt-line.c:180
 msgid "points"
 msgstr "ポイント"
 
-#: src/prefs.c:655
+#: src/prefs.c:666
 msgid "inches"
 msgstr "[インチ]"
 
-#: src/prefs.c:657
+#: src/prefs.c:668
 msgid "mm"
 msgstr "[ミリ]"
 
@@ -901,12 +912,21 @@ msgstr "ミリ"
 msgid "Default page size"
 msgstr "デフォルトの用紙サイズ"
 
+#: src/prefs-dialog.c:309
+msgid "US Letter"
+msgstr ""
+
+#: src/prefs-dialog.c:317
+msgid "A4"
+msgstr ""
+
 #: src/prefs-dialog.c:354
 msgid "Select default properties for new objects."
 msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
 
 #. ------ text props entry ------
 #: src/prefs-dialog.c:359 src/view-text.c:314 src/view-text.c:634
+#: src/wdgt-bc-style.c:184
 msgid "Text"
 msgstr "テキスト"
 
@@ -923,14 +943,14 @@ msgstr "塗りつぶし"
 #.
 #. * Submenu: Align Horizontally
 #.
-#: src/view.c:2719
+#: src/view.c:2978
 msgid "Align _Horizontally"
 msgstr "水平方向に配置(_H)"
 
 #.
 #. * Submenu: Align Vertically
 #.
-#: src/view.c:2758
+#: src/view.c:3017
 msgid "Align _Vertically"
 msgstr "垂直方向に配置(_V)"
 
@@ -1007,7 +1027,7 @@ msgstr "バーコードの編集"
 msgid "Data"
 msgstr "データ"
 
-#: src/view-barcode.c:801 src/print.c:905
+#: src/view-barcode.c:802 src/print.c:912
 msgid "Invalid barcode"
 msgstr "おかしなバーコード"
 
@@ -1050,111 +1070,131 @@ msgstr "選択"
 msgid "Record/Field"
 msgstr "レコード/フィールド"
 
-#: src/print-dialog.c:120
+#: src/print-dialog.c:128
 msgid "_Job"
 msgstr "ジョブ(_J)"
 
-#: src/print-dialog.c:125
+#: src/print-dialog.c:133
 msgid "P_rinter"
 msgstr "プリンタ(_R)"
 
 #. ----------- Add simple-copies widget ------------
-#: src/print-dialog.c:155
+#: src/print-dialog.c:163
 msgid "Copies"
 msgstr "コピー"
 
 #. ------- Otherwise add merge control widget ------------
-#: src/print-dialog.c:169
+#: src/print-dialog.c:177
 msgid "Document merge control"
 msgstr "ドキュメントをコントロールにマージする"
 
 #. ----------- Add custom print options area ------------
-#: src/print-dialog.c:186
+#: src/print-dialog.c:194
 msgid "Options"
 msgstr "オプション"
 
-#: src/print-dialog.c:326 src/print-dialog.c:364
+#: src/print-dialog.c:336 src/print-dialog.c:374
 msgid "Print preview"
 msgstr "印刷プレビュー"
 
-#: src/label.c:565
+#: src/label.c:542
 msgid "Untitled"
 msgstr "タイトルなし"
 
-#: src/template.c:374
+#: src/template.c:296
 #, c-format
 msgid "Generic %s full page"
 msgstr "Generic %s フル・ページ"
 
-#: src/template.c:414
+#: src/template.c:338
 msgid "No template files found!"
 msgstr "テンプレート・ファイルが見つかりません！"
 
-#: src/template.c:972
+#: src/template.c:435
 #, c-format
 msgid "%s x %s %s"
 msgstr "%s x %s %s"
 
-#: src/template.c:977
+#: src/template.c:440
 #, c-format
 msgid "%.5g x %.5g %s"
 msgstr "%.5g x %.5g %s"
 
-#: src/template.c:988 src/template.c:1002
+#: src/template.c:451 src/template.c:465
 #, c-format
 msgid "%s %s diameter"
 msgstr "%s %s 倍率"
 
-#: src/template.c:992 src/template.c:1006
+#: src/template.c:455 src/template.c:469
 #, c-format
 msgid "%.5g %s diameter"
 msgstr "%.5g %s 倍率"
 
-#: src/template.c:1136
+#: src/template.c:607
 #, c-format
 msgid "%d x %d  (%d per sheet)"
 msgstr "%d x %d  (%d 個/シート)"
 
-#: src/template.c:1140
+#: src/template.c:611
 #, c-format
 msgid "%d per sheet"
 msgstr "%d /シート"
 
-#: src/xml-label.c:151 src/xml-label.c:182
+#: src/paper.c:322
+#, fuzzy
+msgid "No paper files found!"
+msgstr "テンプレート・ファイルが見つかりません！"
+
+#: src/xml-label.c:171 src/xml-label.c:204
 msgid "xmlParseFile error"
 msgstr "xmlParseFile エラー"
 
-#: src/xml-label.c:217
+#: src/xml-label.c:241
 msgid "No document root"
 msgstr "root ドキュメントではありません"
 
-#: src/xml-label.c:229
+#: src/xml-label.c:253
 msgid "Importing from glabels 0.1 format"
 msgstr "gLabels 0.1 形式からインポートする"
 
-#: src/xml-label.c:237
+#: src/xml-label.c:261
 msgid "Importing from glabels 0.4 format"
 msgstr "gLabels 0.4 形式からインポートする"
 
-#: src/xml-label.c:240
+#: src/xml-label.c:264
 msgid "bad document, unknown glabels Namespace"
 msgstr "ドキュメントの種類が間違っています。Glabels 名前空間が見つかりません。"
 
-#: src/xml-label.c:268 src/xml-label-04.c:74
+#: src/xml-label.c:292 src/xml-label-04.c:75
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "おかしな root のノード = \"%s\""
 
-#: src/xml-label.c:291 src/xml-label.c:323 src/xml-label-04.c:123
+#: src/xml-label.c:325
+#, fuzzy, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "おかしな root のノード = \"%s\""
+
+#: src/xml-label.c:357 src/xml-label-04.c:123
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "おかしなノード = \"%s\""
 
-#: src/xml-label.c:704
+#: src/xml-label.c:763
+#, fuzzy, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "おかしなノード = \"%s\""
+
+#: src/xml-label.c:831
 msgid "Problem saving xml file."
 msgstr "XML ファイルの保存で問題があります"
 
-#: src/merge.c:174 src/merge.c:215 src/merge.c:400 src/merge.c:403
+#: src/xml-template.c:157
+#, c-format
+msgid "Unknown page size id \"%s\""
+msgstr ""
+
+#: src/merge.c:172 src/merge.c:213 src/merge.c:398 src/merge.c:401
 msgid "None"
 msgstr "なし"
 
@@ -1177,7 +1217,7 @@ msgstr "フォント:"
 
 #. Text Color Label
 #: src/wdgt-text-props.c:230 src/wdgt-line.c:189 src/wdgt-fill.c:164
-#: src/wdgt-bc-props.c:188
+#: src/wdgt-bc-props.c:164
 msgid "Color:"
 msgstr "色:"
 
@@ -1244,24 +1284,14 @@ msgstr "度"
 msgid "File:"
 msgstr "ファイル:"
 
-#. Scale Label
-#: src/wdgt-bc-props.c:165
-msgid "Scale:"
-msgstr "寸法:"
-
-#. scale % Label
-#: src/wdgt-bc-props.c:179
-msgid "%"
-msgstr "%"
-
 #. Style Label
-#: src/wdgt-bc-style.c:165
+#: src/wdgt-bc-style.c:167
 msgid "Style:"
 msgstr "スタイル:"
 
-#: src/wdgt-bc-style.c:209
-msgid "Show text with barcode"
-msgstr "バーコードを付けてテキストを表示する"
+#: src/wdgt-bc-style.c:190
+msgid "Checksum"
+msgstr ""
 
 #: src/wdgt-bc-data.c:194
 msgid "Literal:"
@@ -1299,23 +1329,23 @@ msgstr "コピー:"
 msgid "Collate"
 msgstr "製本"
 
-#: src/wdgt-media-select.c:259
+#: src/wdgt-media-select.c:262
 msgid "Description:"
 msgstr "説明:"
 
-#: src/wdgt-media-select.c:269
+#: src/wdgt-media-select.c:272
 msgid "Page size:"
 msgstr "用紙のサイズ:"
 
-#: src/wdgt-media-select.c:280
+#: src/wdgt-media-select.c:283
 msgid "Label size:"
 msgstr "ラベルの大きさ:"
 
-#: src/wdgt-media-select.c:291
+#: src/wdgt-media-select.c:294
 msgid "Layout:"
 msgstr "レイアウト:"
 
-#: src/wdgt-rotate-label.c:182
+#: src/wdgt-rotate-label.c:195
 msgid "Rotate"
 msgstr "回転させる"
 
@@ -1323,3 +1353,12 @@ msgstr "回転させる"
 #, c-format
 msgid "Open %s"
 msgstr "%s を開く"
+
+#~ msgid "Scale:"
+#~ msgstr "寸法:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgid "Show text with barcode"
+#~ msgstr "バーコードを付けてテキストを表示する"
