@@ -102,6 +102,7 @@ main (int argc, char **argv)
 	}
 	if ( version_flag ) {
 		fprintf ( stderr, "glabels-batch %s\n", VERSION );
+		return -1;
 	}
 	if ( help_flag ) {
 		poptPrintHelp (pctx, stderr, 0);
