@@ -347,7 +347,7 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 	static GtkWidget *about = NULL;
 	GdkPixbuf        *pixbuf = NULL;
 	
-	gchar *copy_text = "Copyright 2001-2002 Jim Evins";
+	gchar *copy_text = "Copyright 2001-2003 Jim Evins";
 	gchar *about_text =
 	    _("A label and business card creation program for GNOME.\n"
 	      " \n"
