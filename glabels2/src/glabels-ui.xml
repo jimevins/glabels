@@ -141,6 +141,37 @@
 	<cmd name="ToolsLowerObjects"
 	     _tip="Lower object to bottom"/>
 	
+	<cmd name="ToolsRotateLeft"
+	     _tip="Rotate object 90 counter-clockwise"/>
+	
+	<cmd name="ToolsRotateRight"
+	     _tip="Rotate object 90 clockwise"/>
+	
+	<cmd name="ToolsFlipHorizontal"
+	     _tip="Flip object horizontally"/>
+	
+	<cmd name="ToolsFlipVertical"
+	     _tip="Flip object vertically"/>
+
+	<cmd name="ToolsAlignLeft"
+	     _tip="Align objects to left edges"/>
+	
+	<cmd name="ToolsAlignCenter"
+	     _tip="Align objects to centers"/>
+	
+	<cmd name="ToolsAlignRight"
+	     _tip="Align objects to right edges"/>
+	
+	<cmd name="ToolsAlignTop"
+	     _tip="Align objects to tops"/>
+	
+	<cmd name="ToolsAlignMiddle"
+	     _tip="Align objects to middles"/>
+	
+	<cmd name="ToolsAlignBottom"
+	     _tip="Align objects to bottoms"/>
+
+	
 	<cmd name="HelpContents" _label="Contents" _tip="Open the glabels manual"
 	accel="F1" pixtype="stock" pixname="gtk-help"/>
 
@@ -258,20 +289,35 @@
 
         <menuitem name="ToolsArrow" verb="" _label="Select Mode"/>
         
+
+	<submenu name="CreateObjects" _label="_Create object">
+
+                <menuitem name="ToolsText" verb="" _label="Text"/>
+                <menuitem name="ToolsBox" verb="" _label="Box"/>
+                <menuitem name="ToolsLine" verb="" _label="Line"/>
+                <menuitem name="ToolsEllipse" verb="" _label="Ellipse"/>
+                <menuitem name="ToolsImage" verb="" _label="Image"/>
+                <menuitem name="ToolsBarcode" verb="" _label="Barcode"/>
+
+	</submenu>
+
 	<separator/>
 
-        <menuitem name="ToolsText" verb="" _label="Text"/>
-        <menuitem name="ToolsBox" verb="" _label="Box"/>
-        <menuitem name="ToolsLine" verb="" _label="Line"/>
-        <menuitem name="ToolsEllipse" verb="" _label="Ellipse"/>
-        <menuitem name="ToolsImage" verb="" _label="Image"/>
-        <menuitem name="ToolsBarcode" verb="" _label="Barcode"/>
+	<submenu name="Order" _label="_Order">
+                <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to Top"/>
+                <menuitem name="ToolsLowerObjects" verb="" _label="Lower to Bottom"/>
+	</submenu>
+
+	<submenu name="RotateFlip" _label="_Rotate/Flip">
+                <menuitem name="ToolsRotateLeft" verb="" _label="Rotate left"/>
+                <menuitem name="ToolsRotateRight" verb="" _label="Rotate right"/>
+                <menuitem name="ToolsFlipHorizontal" verb="" _label="Flip horizontally"/>
+                <menuitem name="ToolsFlipVertical" verb="" _label="Flip vertically"/>
+	</submenu>
 
 	<separator/>
 
         <menuitem name="ToolsObjectProperties" verb="" _label="Object Properties..."/>
-        <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to Top"/>
-        <menuitem name="ToolsLowerObjects" verb="" _label="Lower to Bottom"/>
 
 	<separator/>
 
