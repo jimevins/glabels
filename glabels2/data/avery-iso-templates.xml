@@ -109,6 +109,37 @@
     <Alias name="Avery  J8414"/>
   </Template>
 
+  <!-- =============================================================== -->
+  <!-- Avery J8435: CD Inlets Booklet part                         -->
+  <!-- =============================================================== -->
+  <Template name="Avery   8435A" size="A4" _description="CD Booklet">
+    <Label-rectangle id="0" width="155mm" height="125mm" round="0">
+      <Markup-margin size="2mm"/>
+      <Markup-line x1="32mm" y1="0mm" x2="32mm" y2="125mm"/>
+      <Layout nx="1" ny="1" x0="27.5mm" y0="22mm" dx="155mm" dy="125mm"/>
+    </Label-rectangle>
+    <Alias name="Avery  J8435A"/>
+    <Alias name="Avery  32250A"/>
+    <Alias name="Zweckform 32250A"/>
+    <Alias name="Zweckform J8435A"/>
+  </Template>
+
+  <!-- =============================================================== -->
+  <!-- Avery J8435: CD Inlets Inlet part                           -->
+  <!-- =============================================================== -->
+  <Template name="Avery   8435B" size="A4" _description="CD Inlet">
+    <Label-rectangle id="0" width="155mm" height="122mm" round="0">
+      <Markup-margin size="2mm"/>
+      <Markup-line x1="8.5mm" y1="0mm" x2="8.5mm" y2="122mm"/>
+      <Markup-line x1="146.5mm" y1="0mm" x2="146.5mm" y2="122mm"/>
+      <Layout nx="1" ny="1" x0="27.5mm" y0="21mm" dx="155mm" dy="122mm"/>
+    </Label-rectangle>
+    <Alias name="Avery  J8435B"/>
+    <Alias name="Avery  32250B"/>
+    <Alias name="Zweckform 32250B"/>
+    <Alias name="Zweckform J8435B"/>
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Avery 8651 family: Mailing labels, 38.1 x 21.2 mm, 65 per sheet     -->
   <!-- =================================================================== -->

@@ -1,5 +1,14 @@
 2004-01-03  Jim Evins  <evins@snaught.com>
 
+	* data/avery-iso-templates.xml:
+		Added user submitted templates.
+		Avery 8435A & 8435B, submitted by Ludger Solbach.
+
+	* doc/C/glabels.xml:
+		Added minimal documentation, noting the new template designer.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
 	* pixmaps/ex-rect-size.png:
 	* pixmaps/ex-round-size.png:
 	* pixmaps/ex-cd-size.png:
