@@ -125,6 +125,8 @@ glabels_SOURCES = 			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
+	xml-label-191.c			\
+	xml-label-191.h			\
 	xml-template.c			\
 	xml-template.h			\
 	xml-paper.c			\
@@ -227,6 +229,8 @@ glabels_batch_SOURCES = 		\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
+	xml-label-191.c			\
+	xml-label-191.h			\
 	xml-template.c			\
 	xml-template.h			\
 	xml-paper.c			\

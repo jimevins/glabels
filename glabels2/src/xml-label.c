@@ -40,6 +40,7 @@
 #include "base64.h"
 #include "xml-label.h"
 #include "xml-label-04.h"
+#include "xml-label-191.h"
 #include "xml-template.h"
 #include "xml.h"
 #include "util.h"
@@ -262,9 +263,17 @@ xml_doc_to_label (xmlDocPtr         doc,
 				g_warning (_("Importing from glabels 0.4 format"));
 				label = gl_xml_label_04_parse (root, status);
 			} else {
-				g_warning (_("bad document, unknown glabels Namespace"));
-				*status = XML_LABEL_ERROR_OPEN_PARSE;
-				return NULL;
+				/* Try compatability mode 1.91 */
+				ns = xmlSearchNsByHref (doc, root,
+							COMPAT191_NAME_SPACE);
+				if (ns != NULL)	{
+					g_warning (_("Importing from glabels 1.91 format"));
+					label = gl_xml_label_191_parse (root, status);
+				} else {
+					g_warning (_("bad document, unknown glabels Namespace"));
+					*status = XML_LABEL_ERROR_OPEN_PARSE;
+					return NULL;
+				}
 			}
 		}
 	}

@@ -83,6 +83,8 @@ src/xml-label.c
 src/xml-label.h
 src/xml-label-04.c
 src/xml-label-04.h
+src/xml-label-191.c
+src/xml-label-191.h
 src/xml-template.c
 src/xml-template.h
 src/xml-paper.c
