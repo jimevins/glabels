@@ -368,10 +368,9 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 	      "General Public License for more details.\n");
 
 	gchar *authors[] = {
-		_("Author:"),
-		"\tJim Evins <evins@snaught.com>",
-		"",
-		_("See the file AUTHORS for additional acknowledgments,"),
+		"Jim Evins <evins@snaught.com>",
+		" ",
+		_("See the file AUTHORS for additional credits,"),
 		_("or visit http://snaught.com/glabels"),
 		NULL
 	};
@@ -398,8 +397,8 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 				 copy_text,
 				 about_text,
 				(const char **)authors,
-				(const char **)documenters,
-				(const char *)translator_credits,
+				(const char **)NULL,
+				(const char *)NULL,
 				pixbuf);
 
 	gtk_window_set_transient_for (GTK_WINDOW (about),
