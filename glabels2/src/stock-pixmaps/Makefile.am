@@ -15,7 +15,13 @@ IMAGES = 	 			\
 	stock_merge_24.png 		\
 	stock_merge_16.png 		\
 	stock_text_24.png		\
-	stock_text_16.png
+	stock_text_16.png		\
+	stock_align_left_16.png		\
+	stock_align_right_16.png	\
+	stock_align_hcenter_16.png	\
+	stock_align_top_16.png		\
+	stock_align_bottom_16.png	\
+	stock_align_vcenter_16.png
 
 VARIABLES1 = \
 		stock_arrow_24 		$(srcdir)/stock_arrow_24.png	\
@@ -33,7 +39,13 @@ VARIABLES1 = \
 		stock_merge_24 		$(srcdir)/stock_merge_24.png	\
 		stock_merge_16 		$(srcdir)/stock_merge_16.png	\
 		stock_text_24  		$(srcdir)/stock_text_24.png     \
-		stock_text_16  		$(srcdir)/stock_text_16.png
+		stock_text_16  		$(srcdir)/stock_text_16.png	\
+		stock_align_left_16	$(srcdir)/stock_align_left_16.png \
+		stock_align_right_16	$(srcdir)/stock_align_right_16.png \
+		stock_align_hcenter_16	$(srcdir)/stock_align_hcenter_16.png \
+		stock_align_top_16	$(srcdir)/stock_align_top_16.png \
+		stock_align_bottom_16	$(srcdir)/stock_align_bottom_16.png \
+		stock_align_vcenter_16	$(srcdir)/stock_align_vcenter_16.png
 
 noinst_DATA = stockpixbufs.h
 CLEANFILES = $(noinst_DATA)

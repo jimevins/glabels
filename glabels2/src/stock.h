@@ -25,14 +25,20 @@
 
 /* Stock names */
 
-#define GL_STOCK_ARROW        "gl_stock_arrow"
-#define GL_STOCK_TEXT         "gl_stock_text"
-#define GL_STOCK_LINE         "gl_stock_line"
-#define GL_STOCK_BOX          "gl_stock_box"
-#define GL_STOCK_ELLIPSE      "gl_stock_ellipse"
-#define GL_STOCK_IMAGE        "gl_stock_image"
-#define GL_STOCK_BARCODE      "gl_stock_barcode"
-#define GL_STOCK_MERGE        "gl_stock_merge"
+#define GL_STOCK_ARROW         "gl_stock_arrow"
+#define GL_STOCK_TEXT          "gl_stock_text"
+#define GL_STOCK_LINE          "gl_stock_line"
+#define GL_STOCK_BOX           "gl_stock_box"
+#define GL_STOCK_ELLIPSE       "gl_stock_ellipse"
+#define GL_STOCK_IMAGE         "gl_stock_image"
+#define GL_STOCK_BARCODE       "gl_stock_barcode"
+#define GL_STOCK_MERGE         "gl_stock_merge"
+#define GL_STOCK_ALIGN_LEFT    "gl_stock_align_left"
+#define GL_STOCK_ALIGN_RIGHT   "gl_stock_align_right"
+#define GL_STOCK_ALIGN_HCENTER "gl_stock_align_hcenter"
+#define GL_STOCK_ALIGN_TOP     "gl_stock_align_top"
+#define GL_STOCK_ALIGN_BOTTOM  "gl_stock_align_bottom"
+#define GL_STOCK_ALIGN_VCENTER "gl_stock_align_vcenter"
 
 void gl_stock_init (void);
 

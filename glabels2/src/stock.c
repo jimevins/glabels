@@ -58,14 +58,20 @@ gl_stock_init (void)
 	GtkIconFactory *factory;
 
 	static GtkStockItem items[] = {
-		{ GL_STOCK_ARROW,   "Arrow",   0, 0, NULL },
-		{ GL_STOCK_TEXT,    "Text",    0, 0, NULL },
-		{ GL_STOCK_LINE,    "Line",    0, 0, NULL },
-		{ GL_STOCK_BOX,     "Box",     0, 0, NULL },
-		{ GL_STOCK_ELLIPSE, "Ellipse", 0, 0, NULL },
-		{ GL_STOCK_IMAGE,   "Image",   0, 0, NULL },
-		{ GL_STOCK_BARCODE, "Barcode", 0, 0, NULL },
-		{ GL_STOCK_MERGE,   "Merge",   0, 0, NULL },
+		{ GL_STOCK_ARROW,         "Arrow",          0, 0, NULL },
+		{ GL_STOCK_TEXT,          "Text",           0, 0, NULL },
+		{ GL_STOCK_LINE,          "Line",           0, 0, NULL },
+		{ GL_STOCK_BOX,           "Box",            0, 0, NULL },
+		{ GL_STOCK_ELLIPSE,       "Ellipse",        0, 0, NULL },
+		{ GL_STOCK_IMAGE,         "Image",          0, 0, NULL },
+		{ GL_STOCK_BARCODE,       "Barcode",        0, 0, NULL },
+		{ GL_STOCK_MERGE,         "Merge",          0, 0, NULL },
+		{ GL_STOCK_ALIGN_LEFT,    "AlignLeft",      0, 0, NULL },
+		{ GL_STOCK_ALIGN_RIGHT,   "AlignRight",     0, 0, NULL },
+		{ GL_STOCK_ALIGN_HCENTER, "AlignHCenter",   0, 0, NULL },
+		{ GL_STOCK_ALIGN_TOP,     "AlignTop",       0, 0, NULL },
+		{ GL_STOCK_ALIGN_BOTTOM,  "AlignBottom",    0, 0, NULL },
+		{ GL_STOCK_ALIGN_VCENTER, "AlignVCenter",   0, 0, NULL },
 	};
 
 	gtk_stock_add (items, G_N_ELEMENTS (items));
@@ -73,14 +79,20 @@ gl_stock_init (void)
 	factory = gtk_icon_factory_new ();
 	gtk_icon_factory_add_default (factory);
 
-	add_icons (factory, GL_STOCK_ARROW,   stock_arrow_24,   stock_arrow_16);
-	add_icons (factory, GL_STOCK_TEXT,    stock_text_24,    stock_text_16);
-	add_icons (factory, GL_STOCK_LINE,    stock_line_24,    stock_line_16);
-	add_icons (factory, GL_STOCK_BOX,     stock_box_24,     stock_box_16);
-	add_icons (factory, GL_STOCK_ELLIPSE, stock_ellipse_24, stock_ellipse_16);
-	add_icons (factory, GL_STOCK_IMAGE,   stock_image_24,   stock_image_16);
-	add_icons (factory, GL_STOCK_BARCODE, stock_barcode_24, stock_barcode_16);
-	add_icons (factory, GL_STOCK_MERGE,   stock_merge_24,   stock_merge_16);
+	add_icons (factory, GL_STOCK_ARROW,         stock_arrow_24,   stock_arrow_16);
+	add_icons (factory, GL_STOCK_TEXT,          stock_text_24,    stock_text_16);
+	add_icons (factory, GL_STOCK_LINE,          stock_line_24,    stock_line_16);
+	add_icons (factory, GL_STOCK_BOX,           stock_box_24,     stock_box_16);
+	add_icons (factory, GL_STOCK_ELLIPSE,       stock_ellipse_24, stock_ellipse_16);
+	add_icons (factory, GL_STOCK_IMAGE,         stock_image_24,   stock_image_16);
+	add_icons (factory, GL_STOCK_BARCODE,       stock_barcode_24, stock_barcode_16);
+	add_icons (factory, GL_STOCK_MERGE,         stock_merge_24,   stock_merge_16);
+	add_icons (factory, GL_STOCK_ALIGN_LEFT,    NULL,             stock_align_left_16);
+	add_icons (factory, GL_STOCK_ALIGN_RIGHT,   NULL,             stock_align_right_16);
+	add_icons (factory, GL_STOCK_ALIGN_HCENTER, NULL,             stock_align_hcenter_16);
+	add_icons (factory, GL_STOCK_ALIGN_TOP,     NULL,             stock_align_top_16);
+	add_icons (factory, GL_STOCK_ALIGN_BOTTOM,  NULL,             stock_align_bottom_16);
+	add_icons (factory, GL_STOCK_ALIGN_VCENTER, NULL,             stock_align_vcenter_16);
 
 	g_object_unref (G_OBJECT(factory));
 }
@@ -97,13 +109,18 @@ static add_icons (GtkIconFactory *factory,
 	GtkIconSet     *icon_set;
 	GtkIconSource  *icon_source;
 
-	/* Create icon set with default image */
-	pixbuf = gdk_pixbuf_new_from_inline (-1, inline_24, FALSE, NULL);
-	icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-	g_object_unref (G_OBJECT(pixbuf));
+	if ( inline_24 != NULL ) {
+		/* Create icon set with default image */
+		pixbuf = gdk_pixbuf_new_from_inline (-1, inline_24, FALSE, NULL);
+		icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+		g_object_unref (G_OBJECT(pixbuf));
+	} else {
+		/* Create an empty icon set */
+		icon_set = gtk_icon_set_new ();
+	}
 
-	/* Add 16x16 icon for menus to icon set */
 	if ( inline_16 != NULL ) {
+		/* Add 16x16 icon for menus to icon set */
 		icon_source = gtk_icon_source_new ();
 		pixbuf = gdk_pixbuf_new_from_inline (-1, inline_16,
 						     FALSE, NULL);
