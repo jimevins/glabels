@@ -45,11 +45,11 @@ gl_text_node_expand (glTextNode * text_node,
 	gchar *text;
 
 	if (text_node->field_flag) {
-		text = gl_merge_eval_key (text_node->data, record);
+		text = gl_merge_eval_key (record, text_node->data);
 		if (text != NULL) {
 			return text;
 		} else {
-			return g_strdup_printf ("FIELD{%s}", text_node->data);
+			return g_strdup_printf ("${%s}", text_node->data);
 		}
 	} else {
 		return g_strdup (text_node->data);
@@ -80,10 +80,10 @@ extract_text_node (gchar * text,
 
 	text_node = g_new0 (glTextNode, 1);
 
-	if (strncmp (text, "FIELD{", strlen ("FIELD{")) == 0) {
+	if (strncmp (text, "${", strlen ("${")) == 0) {
 		/* We are at the beginning of a "FIELD" node */
 		text_node->field_flag = TRUE;
-		*n = strlen ("FIELD{");
+		*n = strlen ("${");
 		text += *n;
 		for (p = text, m = 0; *p != 0; p++, m++, (*n)++) {
 			if (*p == '}') {
@@ -96,7 +96,7 @@ extract_text_node (gchar * text,
 		/* We are at the beginning of a literal node */
 		text_node->field_flag = FALSE;
 		for (p = text, *n = 0; *p != 0; p++, (*n)++) {
-			if (strncmp (p, "FIELD{", strlen ("FIELD{")) == 0)
+			if (strncmp (p, "${", strlen ("${")) == 0)
 				break;
 			if (*p == '\n')
 				break;
