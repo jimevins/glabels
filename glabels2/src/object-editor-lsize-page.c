@@ -165,6 +165,8 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 				gdouble              dx_max,
 				gdouble              dy_max)
 {
+	gdouble tmp;
+
 	gl_debug (DEBUG_EDITOR, "START");
 
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
@@ -178,8 +180,10 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "display dx_max,dy_max = %g, %g", dx_max, dy_max);
 
 	/* Set widget values */
+	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
 				   0.0, LENGTH (dx_max, dy_max));
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
 					   gl_object_editor_changed_cb,
