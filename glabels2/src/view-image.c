@@ -534,6 +534,8 @@ update_dialog_cb (glLabelObject   *object,
 					       (merge != NULL),
 					       filename);
 	}
+	gl_wdgt_image_select_set_field_defs (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry),
+					     merge);
 	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_image->private->position),
 				       x, y);
 	gl_wdgt_size_set_size (GL_WDGT_SIZE(view_image->private->size), w, h);

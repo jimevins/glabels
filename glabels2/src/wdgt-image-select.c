@@ -231,9 +231,9 @@ gl_wdgt_image_select_construct (glWdgtImageSelect *image_select,
         /* Otherwise, leave it in the last directory that we got an image. */
         gnome_pixmap_entry_set_pixmap_subdir (GNOME_PIXMAP_ENTRY(image_select->file_entry),
 					      image_path);
-	g_signal_connect ( G_OBJECT(gnome_file_entry_gtk_entry
-				    (GNOME_FILE_ENTRY (image_select->file_entry))),
-			   "changed", G_CALLBACK (changed_cb), image_select);
+	g_signal_connect_swapped ( G_OBJECT(gnome_file_entry_gtk_entry
+					    (GNOME_FILE_ENTRY (image_select->file_entry))),
+				   "changed", G_CALLBACK (changed_cb), image_select);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), image_select->file_entry);
 
 
@@ -264,6 +264,11 @@ gl_wdgt_image_select_construct (glWdgtImageSelect *image_select,
 				  G_OBJECT (image_select));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), image_select->key_combo);
 
+
+	gl_wdgt_image_select_set_data (image_select,
+				       (merge != NULL),
+				       text_node);
+
 	gl_debug (DEBUG_WDGT, "END");
 }
 
@@ -285,8 +290,8 @@ changed_cb (glWdgtImageSelect *image_select)
 /* PRIVATE.  Callback to handle toggling of radio buttons                   */
 /*--------------------------------------------------------------------------*/
 static void
-radio_toggled_cb (GtkToggleButton *togglebutton,
-		  glWdgtImageSelect    *image_select)
+radio_toggled_cb (GtkToggleButton   *togglebutton,
+		  glWdgtImageSelect *image_select)
 {
 	gl_debug (DEBUG_WDGT, "START");
 
@@ -310,7 +315,7 @@ radio_toggled_cb (GtkToggleButton *togglebutton,
 /****************************************************************************/
 void
 gl_wdgt_image_select_set_field_defs  (glWdgtImageSelect *image_select,
-				 glMerge      *merge)
+				      glMerge            *merge)
 {
 	GList *keys;
 
@@ -368,8 +373,8 @@ gl_wdgt_image_select_get_data (glWdgtImageSelect *image_select)
 /****************************************************************************/
 void
 gl_wdgt_image_select_set_data (glWdgtImageSelect *image_select,
-			  gboolean      merge_flag,
-			  glTextNode   *text_node)
+			       gboolean           merge_flag,
+			       glTextNode        *text_node)
 {
 	gint pos;
 
@@ -385,8 +390,13 @@ gl_wdgt_image_select_set_data (glWdgtImageSelect *image_select,
 		gtk_widget_set_sensitive (image_select->file_entry, TRUE);
 		gtk_widget_set_sensitive (image_select->key_combo, FALSE);
 
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY(image_select->file_entry),
-					       text_node->data);
+		if (text_node->data != NULL ) {
+			gnome_file_entry_set_filename (GNOME_FILE_ENTRY(image_select->file_entry),
+						       text_node->data);
+		} else {
+			gnome_file_entry_set_filename (GNOME_FILE_ENTRY(image_select->file_entry),
+						       "");
+		}
 	} else {
 
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
@@ -421,7 +431,7 @@ gl_wdgt_image_select_set_data (glWdgtImageSelect *image_select,
 /****************************************************************************/
 void
 gl_wdgt_image_select_set_label_size_group (glWdgtImageSelect   *image_select,
-				      GtkSizeGroup   *label_size_group)
+					   GtkSizeGroup        *label_size_group)
 {
 	gl_debug (DEBUG_WDGT, "START");
 
