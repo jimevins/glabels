@@ -284,7 +284,7 @@ static void
 update_object_from_editor_cb (glObjectEditor *editor,
 			      glLabelObject  *object)
 {
-	gdouble            w, h;
+	gdouble            x, y, w, h;
 	guint              line_color, fill_color;
 	gdouble            line_width;
 
@@ -296,6 +296,9 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	g_signal_handlers_block_by_func (G_OBJECT(object),
 					 update_editor_from_move_cb,
 					 editor);
+
+	gl_object_editor_get_position (editor, &x, &y);
+	gl_label_object_set_position (object, x, y);
 
 	gl_object_editor_get_size (editor, &w, &h);
 	gl_label_object_set_size (object, w, h);
