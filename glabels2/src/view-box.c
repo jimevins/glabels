@@ -73,32 +73,37 @@ static glViewObjectClass *parent_class = NULL;
 /*========================================================*/
 
 static void      gl_view_box_class_init       (glViewBoxClass *klass);
-static void      gl_view_box_instance_init    (glViewBox *view_box);
-static void      gl_view_box_finalize         (GObject *object);
+static void      gl_view_box_instance_init    (glViewBox      *view_box);
+static void      gl_view_box_finalize         (GObject        *object);
 
-static void      update_view_box_cb           (glLabelObject *object,
-					       glViewBox *view_box);
+static void      update_view_box_cb           (glLabelObject  *object,
+					       glViewBox      *view_box);
 
-static GtkWidget *construct_properties_dialog (glViewBox *view_box);
+static GtkWidget *construct_properties_dialog (glViewBox      *view_box);
 
-static void      response_cb                  (GtkDialog *dialog,
-					       gint response,
-					       glViewBox *view_box);
+static void      response_cb                  (GtkDialog      *dialog,
+					       gint            response,
+					       glViewBox      *view_box);
 
-static void      line_changed_cb              (glWdgtLine *line,
-					       glViewBox *view_box);
+static void      line_changed_cb              (glWdgtLine     *line,
+					       glViewBox      *view_box);
 
-static void      fill_changed_cb              (glWdgtFill *fill,
-					       glViewBox *view_box);
+static void      fill_changed_cb              (glWdgtFill     *fill,
+					       glViewBox      *view_box);
 
 static void      position_changed_cb          (glWdgtPosition *position,
-					       glViewBox *view_box);
+					       glViewBox      *view_box);
 
-static void      size_changed_cb              (glWdgtSize *size,
-					       glViewBox *view_box);
+static void      size_changed_cb              (glWdgtSize     *size,
+					       glViewBox      *view_box);
 
-static void      update_dialog_cb             (glLabelObject *object,
-					       glViewBox *view_box);
+static void      update_dialog_cb             (glLabelObject  *object,
+					       glViewBox      *view_box);
+
+static void      update_dialog_from_move_cb   (glLabelObject  *object,
+					       gdouble         dx,
+					       gdouble         dy,
+					       glViewBox      *view_box);
 
 
 /*****************************************************************************/
@@ -369,6 +374,8 @@ construct_properties_dialog (glViewBox *view_box)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_box);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb), view_box);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -556,6 +563,37 @@ update_dialog_cb (glLabelObject *object,
 	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->size),
 					   size_changed_cb, view_box);
 
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewBox     *view_box)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_box->private->position),
+					 position_changed_cb, view_box);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_box->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_box->private->position),
+					   position_changed_cb, view_box);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

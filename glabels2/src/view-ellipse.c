@@ -73,32 +73,37 @@ static glViewObjectClass *parent_class = NULL;
 /*========================================================*/
 
 static void      gl_view_ellipse_class_init    (glViewEllipseClass *klass);
-static void      gl_view_ellipse_instance_init (glViewEllipse *view_ellipse);
-static void      gl_view_ellipse_finalize      (GObject *object);
+static void      gl_view_ellipse_instance_init (glViewEllipse  *view_ellipse);
+static void      gl_view_ellipse_finalize      (GObject        *object);
 
-static void      update_view_ellipse_cb        (glLabelObject *object,
-						glViewEllipse *view_ellipse);
+static void      update_view_ellipse_cb        (glLabelObject  *object,
+						glViewEllipse  *view_ellipse);
 
-static GtkWidget *construct_properties_dialog  (glViewEllipse *view_ellipse);
+static GtkWidget *construct_properties_dialog  (glViewEllipse  *view_ellipse);
 
-static void      response_cb                   (GtkDialog *dialog,
-						gint response,
-						glViewEllipse *view_ellipse);
+static void      response_cb                   (GtkDialog      *dialog,
+						gint            response,
+						glViewEllipse  *view_ellipse);
 
-static void      line_changed_cb               (glWdgtLine *line,
-						glViewEllipse *view_ellipse);
+static void      line_changed_cb               (glWdgtLine     *line,
+						glViewEllipse  *view_ellipse);
 
-static void      fill_changed_cb               (glWdgtFill *fill,
-						glViewEllipse *view_ellipse);
+static void      fill_changed_cb               (glWdgtFill     *fill,
+						glViewEllipse  *view_ellipse);
 
 static void      position_changed_cb           (glWdgtPosition *position,
-						glViewEllipse *view_ellipse);
+						glViewEllipse  *view_ellipse);
 
-static void      size_changed_cb               (glWdgtSize *size,
-						glViewEllipse *view_ellipse);
+static void      size_changed_cb               (glWdgtSize     *size,
+						glViewEllipse  *view_ellipse);
 
-static void      update_dialog_cb              (glLabelObject *object,
-						glViewEllipse *view_ellipse);
+static void      update_dialog_cb              (glLabelObject  *object,
+						glViewEllipse  *view_ellipse);
+
+static void      update_dialog_from_move_cb    (glLabelObject  *object,
+						gdouble         dx,
+						gdouble         dy,
+						glViewEllipse  *view_ellipse);
 
 
 /*****************************************************************************/
@@ -369,6 +374,9 @@ construct_properties_dialog (glViewEllipse *view_ellipse)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_ellipse);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb),
+			  view_ellipse);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -556,6 +564,36 @@ update_dialog_cb (glLabelObject     *object,
 	g_signal_handlers_unblock_by_func (G_OBJECT(view_ellipse->private->size),
 					   size_changed_cb, view_ellipse);
 
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewEllipse *view_ellipse)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_ellipse->private->position),
+					 position_changed_cb, view_ellipse);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_ellipse->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_ellipse->private->position),
+					   position_changed_cb, view_ellipse);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -76,35 +76,40 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_barcode_class_init       (glViewBarcodeClass *klass);
-static void      gl_view_barcode_instance_init    (glViewBarcode *view_barcode);
-static void      gl_view_barcode_finalize         (GObject *object);
+static void      gl_view_barcode_class_init    (glViewBarcodeClass *klass);
+static void      gl_view_barcode_instance_init (glViewBarcode  *view_barcode);
+static void      gl_view_barcode_finalize      (GObject        *object);
 
-static void      update_view_barcode_cb           (glLabelObject *object,
-						glViewBarcode *view_barcode);
+static void      update_view_barcode_cb        (glLabelObject  *object,
+						glViewBarcode  *view_barcode);
 
-static GtkWidget *construct_properties_dialog  (glViewBarcode *view_barcode);
+static GtkWidget *construct_properties_dialog  (glViewBarcode  *view_barcode);
 
-static void      response_cb                   (GtkDialog *dialog,
-						gint response,
-						glViewBarcode *view_barcode);
+static void      response_cb                   (GtkDialog      *dialog,
+						gint            response,
+						glViewBarcode  *view_barcode);
 
-static void      bc_data_changed_cb            (glWdgtBCData *bc_data,
-						glViewBarcode *view_barcode);
+static void      bc_data_changed_cb            (glWdgtBCData   *bc_data,
+						glViewBarcode  *view_barcode);
 
-static void      bc_props_changed_cb           (glWdgtBCProps *bc_props,
-						glViewBarcode *view_barcode);
+static void      bc_props_changed_cb           (glWdgtBCProps  *bc_props,
+						glViewBarcode  *view_barcode);
 
-static void      bc_style_changed_cb           (glWdgtBCStyle *bc_style,
-						glViewBarcode *view_barcode);
+static void      bc_style_changed_cb           (glWdgtBCStyle  *bc_style,
+						glViewBarcode  *view_barcode);
 
 static void      position_changed_cb           (glWdgtPosition *position,
-						glViewBarcode *view_barcode);
+						glViewBarcode  *view_barcode);
 
-static void      update_dialog_cb              (glLabelObject *object,
-						glViewBarcode *view_barcode);
+static void      update_dialog_cb              (glLabelObject  *object,
+						glViewBarcode  *view_barcode);
 
-static void      draw_barcode                  (glViewBarcode *view_barcode);
+static void      update_dialog_from_move_cb    (glLabelObject  *object,
+						gdouble         dx,
+						gdouble         dy,
+						glViewBarcode  *view_barcode);
+
+static void      draw_barcode                  (glViewBarcode  *view_barcode);
 
 
 /*****************************************************************************/
@@ -356,6 +361,9 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_barcode);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb),
+			  view_barcode);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -559,6 +567,37 @@ update_dialog_cb (glLabelObject  *object,
 					   position_changed_cb, view_barcode);
 
 	gl_text_node_free (&text_node);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewBarcode *view_barcode)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_barcode->private->position),
+					 position_changed_cb, view_barcode);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_barcode->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_barcode->private->position),
+					   position_changed_cb, view_barcode);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

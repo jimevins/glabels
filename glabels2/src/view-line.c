@@ -68,30 +68,35 @@ static glViewObjectClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_line_class_init    (glViewLineClass *klass);
-static void      gl_view_line_instance_init (glViewLine *view_line);
-static void      gl_view_line_finalize      (GObject *object);
+static void      gl_view_line_class_init      (glViewLineClass *klass);
+static void      gl_view_line_instance_init   (glViewLine     *view_line);
+static void      gl_view_line_finalize        (GObject        *object);
 
-static void      update_view_line_cb        (glLabelObject *object,
-					     glViewLine *view_line);
+static void      update_view_line_cb          (glLabelObject  *object,
+					       glViewLine     *view_line);
 
-static GtkWidget *construct_properties_dialog (glViewLine *view_line);
+static GtkWidget *construct_properties_dialog (glViewLine     *view_line);
 
-static void      response_cb                (GtkDialog *dialog,
-					     gint response,
-					     glViewLine *view_line);
+static void      response_cb                  (GtkDialog      *dialog,
+					       gint            response,
+					       glViewLine     *view_line);
 
-static void      line_changed_cb            (glWdgtLine *line,
-					     glViewLine *view_line);
+static void      line_changed_cb              (glWdgtLine     *line,
+					       glViewLine     *view_line);
 
-static void      position_changed_cb        (glWdgtPosition *position,
-					     glViewLine *view_line);
+static void      position_changed_cb          (glWdgtPosition *position,
+					       glViewLine     *view_line);
 
-static void      vector_changed_cb          (glWdgtVector *vector,
-					     glViewLine *view_line);
+static void      vector_changed_cb            (glWdgtVector   *vector,
+					       glViewLine     *view_line);
 
-static void      update_dialog_cb           (glLabelObject *object,
-					     glViewLine *view_line);
+static void      update_dialog_cb             (glLabelObject  *object,
+					       glViewLine     *view_line);
+
+static void      update_dialog_from_move_cb   (glLabelObject  *object,
+					       gdouble         dx,
+					       gdouble         dy,
+					       glViewLine     *view_line);
 
 
 /*****************************************************************************/
@@ -355,6 +360,8 @@ construct_properties_dialog (glViewLine *view_line)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_line);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb), view_line);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -511,6 +518,37 @@ update_dialog_cb (glLabelObject     *object,
 	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->vector),
 					   vector_changed_cb, view_line);
 
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewLine    *view_line)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_line->private->position),
+					 position_changed_cb, view_line);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_line->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_line->private->position),
+					   position_changed_cb, view_line);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

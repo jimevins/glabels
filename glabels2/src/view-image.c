@@ -72,33 +72,38 @@ static gchar *image_path = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void      gl_view_image_class_init    (glViewImageClass *klass);
-static void      gl_view_image_instance_init (glViewImage *view_image);
-static void      gl_view_image_finalize      (GObject *object);
+static void      gl_view_image_class_init      (glViewImageClass *klass);
+static void      gl_view_image_instance_init   (glViewImage    *view_image);
+static void      gl_view_image_finalize        (GObject        *object);
 
-static void      update_view_image_cb        (glLabelObject *object,
-						glViewImage *view_image);
+static void      update_view_image_cb          (glLabelObject  *object,
+						glViewImage    *view_image);
 
-static GtkWidget *construct_properties_dialog  (glViewImage *view_image);
+static GtkWidget *construct_properties_dialog  (glViewImage    *view_image);
 
-static void      response_cb                   (GtkDialog *dialog,
-						gint response,
-						glViewImage *view_image);
+static void      response_cb                   (GtkDialog      *dialog,
+						gint            response,
+						glViewImage    *view_image);
 
-static void      file_changed_cb               (GtkEntry *pixmap_entry,
-						glViewImage *view_image);
+static void      file_changed_cb               (GtkEntry       *pixmap_entry,
+						glViewImage    *view_image);
 
 static void      position_changed_cb           (glWdgtPosition *position,
-						glViewImage *view_image);
+						glViewImage    *view_image);
 
-static void      size_changed_cb               (glWdgtSize *size,
-						glViewImage *view_image);
+static void      size_changed_cb               (glWdgtSize     *size,
+						glViewImage    *view_image);
 
-static void      size_reset_cb                 (GtkButton   *button,
-						glViewImage *view_image);
+static void      size_reset_cb                 (GtkButton      *button,
+						glViewImage    *view_image);
 
-static void      update_dialog_cb              (glLabelObject *object,
-						glViewImage *view_image);
+static void      update_dialog_cb              (glLabelObject  *object,
+						glViewImage    *view_image);
+
+static void      update_dialog_from_move_cb    (glLabelObject  *object,
+						gdouble         dx,
+						gdouble         dy,
+						glViewImage    *view_image);
 
 
 /*****************************************************************************/
@@ -368,6 +373,8 @@ construct_properties_dialog (glViewImage *view_image)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_image);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb), view_image);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -379,7 +386,7 @@ construct_properties_dialog (glViewImage *view_image)
 /*---------------------------------------------------------------------------*/
 static void
 response_cb (GtkDialog     *dialog,
-	     gint          response,
+	     gint           response,
 	     glViewImage   *view_image)
 {
 	gl_debug (DEBUG_VIEW, "START");
@@ -430,7 +437,7 @@ file_changed_cb (GtkEntry          *pixmap_entry,
 /* PRIVATE.  position "changed" callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
-position_changed_cb (glWdgtPosition     *position,
+position_changed_cb (glWdgtPosition   *position,
 		     glViewImage      *view_image)
 {
 	glLabelObject      *object;
@@ -455,7 +462,7 @@ position_changed_cb (glWdgtPosition     *position,
 /* PRIVATE.  size "changed" callback.                                        */
 /*---------------------------------------------------------------------------*/
 static void
-size_changed_cb (glWdgtSize     *size,
+size_changed_cb (glWdgtSize   *size,
 		 glViewImage  *view_image)
 {
 	glLabelObject *object;
@@ -506,7 +513,7 @@ size_reset_cb (GtkButton    *button,
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-update_dialog_cb (glLabelObject     *object,
+update_dialog_cb (glLabelObject   *object,
 		  glViewImage     *view_image)
 {
 	gchar              *filename;
@@ -546,6 +553,37 @@ update_dialog_cb (glLabelObject     *object,
 					   size_changed_cb, view_image);
 
 	g_free (filename);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewImage   *view_image)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->position),
+					 position_changed_cb, view_image);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_image->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_image->private->position),
+					   position_changed_cb, view_image);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -74,31 +74,36 @@ static glViewObjectClass *parent_class = NULL;
 /*========================================================*/
 
 static void      gl_view_text_class_init       (glViewTextClass *klass);
-static void      gl_view_text_instance_init    (glViewText *view_text);
-static void      gl_view_text_finalize         (GObject *object);
+static void      gl_view_text_instance_init    (glViewText      *view_text);
+static void      gl_view_text_finalize         (GObject         *object);
 
-static void      update_view_text_cb           (glLabelObject *object,
-						glViewText *view_text);
+static void      update_view_text_cb           (glLabelObject   *object,
+						glViewText      *view_text);
 
-static GtkWidget *construct_properties_dialog  (glViewText *view_text);
+static GtkWidget *construct_properties_dialog  (glViewText      *view_text);
 
-static void      response_cb                   (GtkDialog *dialog,
-						gint response,
-						glViewText *view_text);
+static void      response_cb                   (GtkDialog       *dialog,
+						gint             response,
+						glViewText      *view_text);
 
 static void      text_entry_changed_cb         (glWdgtTextEntry *text_entry,
-						glViewText *view_text);
+						glViewText      *view_text);
 
 static void      text_props_changed_cb         (glWdgtTextProps *text_props,
-						glViewText *view_text);
+						glViewText      *view_text);
 
-static void      position_changed_cb           (glWdgtPosition *position,
-						glViewText *view_text);
+static void      position_changed_cb           (glWdgtPosition  *position,
+						glViewText      *view_text);
 
-static void      update_dialog_cb              (glLabelObject *object,
-						glViewText *view_text);
+static void      update_dialog_cb              (glLabelObject   *object,
+						glViewText      *view_text);
 
-static void      draw_hacktext                 (glViewText *view_text);
+static void      update_dialog_from_move_cb    (glLabelObject   *object,
+						gdouble          dx,
+						gdouble          dy,
+						glViewText      *view_text);
+
+static void      draw_hacktext                 (glViewText      *view_text);
 
 
 /*****************************************************************************/
@@ -335,6 +340,8 @@ construct_properties_dialog (glViewText *view_text)
 	/*----------------------------*/
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_dialog_cb), view_text);
+	g_signal_connect (G_OBJECT (object), "moved",
+			  G_CALLBACK (update_dialog_from_move_cb), view_text);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -512,6 +519,37 @@ update_dialog_cb (glLabelObject  *object,
 					   position_changed_cb, view_text);
 
 	gl_text_node_lines_free (&lines);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label object "moved" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+update_dialog_from_move_cb (glLabelObject *object,
+			    gdouble        dx,
+			    gdouble        dy,
+			    glViewText    *view_text)
+{
+	gdouble            x, y;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Query properties of object. */
+	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
+
+	/* Block widget handlers to prevent recursion */
+	g_signal_handlers_block_by_func (G_OBJECT(view_text->private->position),
+					 position_changed_cb, view_text);
+
+	/* Update widgets in property dialog */
+	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_text->private->position),
+				       x, y);
+
+	/* Unblock widget handlers */
+	g_signal_handlers_unblock_by_func (G_OBJECT(view_text->private->position),
+					   position_changed_cb, view_text);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
