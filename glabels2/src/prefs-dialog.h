@@ -26,6 +26,8 @@
 #include <gtk/gtk.h>
 #include "hig.h"
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_PREFS_DIALOG            (gl_prefs_dialog_get_type ())
 #define GL_PREFS_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialog))
 #define GL_PREFS_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
@@ -54,6 +56,8 @@ struct  _glPrefsDialogClass
 
 GtkType    	gl_prefs_dialog_get_type 	(void) G_GNUC_CONST;
 
-GtkWidget*	gl_prefs_dialog_new		(GtkWindow *parent);
+GtkWidget      *gl_prefs_dialog_new		(GtkWindow *parent);
+
+G_END_DECLS
 
 #endif /* __PREFS_DIALOG_H__ */

@@ -231,7 +231,7 @@ gl_window_new (void)
 
 	window = g_object_new (gl_window_get_type (),
 			       "win_name", "glabels",
-			       "title",    _("(none) - glabels"),
+			       "title",    _("(none) - gLabels"),
 			       NULL);
 
 	gl_debug (DEBUG_WINDOW, "window=%p", window);
@@ -395,10 +395,10 @@ set_window_title (glWindow *window,
 	g_return_if_fail (name != NULL);
 
 	if (gl_label_is_modified (label)) {
-		title = g_strdup_printf ("%s %s - glabels",
+		title = g_strdup_printf ("%s %s - gLabels",
 					 name, _("(modified)"));
 	} else {
-		title = g_strdup_printf ("%s - glabels", name);
+		title = g_strdup_printf ("%s - gLabels", name);
 	}
 
 	gtk_window_set_title (GTK_WINDOW(window), title);

@@ -73,7 +73,7 @@ struct _glPrefsDialogPrivate
 /* Private globals.                                       */
 /*========================================================*/
 
-static GtkDialogClass* parent_class = NULL;
+static glHigDialogClass* parent_class = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -226,7 +226,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dlg)
         gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);   
 
         gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-        gtk_window_set_title (GTK_WINDOW (dlg), _("Preferences"));
+        gtk_window_set_title (GTK_WINDOW (dlg), _("gLabels Preferences"));
         gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 }
 
