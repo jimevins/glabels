@@ -322,6 +322,7 @@ gl_file_open_real (const gchar     *filename,
 	GtkWidget *dlg;
 	GnomeRecentModel *recent;
 	gint ret;
+	gchar *primary_msg;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -331,12 +332,17 @@ gl_file_open_real (const gchar     *filename,
 
 		gl_debug (DEBUG_FILE, "couldn't open file");
 
-		dlg = gtk_message_dialog_new (GTK_WINDOW(win),
+		primary_msg = g_strdup_printf (_("Could not open file \"%s\""),
+					       filename);
+
+		dlg = gl_util_hig_dialog_new (GTK_WINDOW(win),
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_MESSAGE_ERROR,
 					      GTK_BUTTONS_CLOSE,
-					      _("Cannot open file '%s'"),
-					      filename);
+					      primary_msg, "");
+
+		g_free (primary_msg);
+
 		gtk_dialog_run (GTK_DIALOG (dlg));
 		gtk_widget_destroy (dlg);
 
@@ -419,15 +425,21 @@ gl_file_save (glMDIChild *child)
 	if (status != XML_LABEL_OK)
 	{
 		GtkWidget *dialog;
+		gchar *primary_msg;
 
 		gl_debug (DEBUG_FILE, "FAILED");
 
-		dialog = gtk_message_dialog_new (GTK_WINDOW(glabels_get_active_window()),
+		primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
+					       filename);
+
+		dialog = gl_util_hig_dialog_new (GTK_WINDOW(glabels_get_active_window()),
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
-						 _("Error saving file '%s'"),
-						 filename);
+						 primary_msg, "");
+
+		g_free (primary_msg);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
@@ -522,6 +534,7 @@ save_as_ok_cb (GtkWidget * widget,
 	glXMLLabelStatus status;
 	GnomeRecentModel *recent;
 	gboolean *saved_flag;
+	gchar *primary_msg;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -543,11 +556,11 @@ save_as_ok_cb (GtkWidget * widget,
 
 	if (!raw_filename || (raw_filename[strlen (raw_filename) - 1] == '/')) {
 
-		dlg = gtk_message_dialog_new (GTK_WINDOW(fsel),
+		dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
 					      GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_MESSAGE_WARNING,
 					      GTK_BUTTONS_CLOSE,
-					      _("Must supply file name"));
+					      _("Must supply file name"), "");
 		gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
 	} else {
@@ -562,12 +575,17 @@ save_as_ok_cb (GtkWidget * widget,
 
 		if ( status != XML_LABEL_OK ) {
 
-			dlg = gtk_message_dialog_new (GTK_WINDOW(fsel),
+			primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
+						       filename);
+
+			dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_MESSAGE_ERROR,
 						      GTK_BUTTONS_CLOSE,
-						      _("Error writing file '%s'"),
-						      filename);
+						      primary_msg, "");
+
+			g_free (primary_msg);
+
 			gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
 		} else {

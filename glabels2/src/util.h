@@ -46,4 +46,11 @@ extern GtkJustification gl_util_string_to_just (const gchar * string);
 extern const gchar *gl_util_weight_to_string (GnomeFontWeight weight);
 extern GnomeFontWeight gl_util_string_to_weight (const gchar * string);
 
+GtkWidget* gl_util_hig_dialog_new      (GtkWindow      *parent,
+                                        GtkDialogFlags  flags,
+                                        GtkMessageType  type,
+                                        GtkButtonsType  buttons,
+					const gchar    *primary_text,
+                                        const gchar    *secondary_text);
+
 #endif				/* __UTIL_H__ */

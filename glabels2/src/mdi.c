@@ -46,6 +46,7 @@
 #include "view.h"
 #include "debug.h"
 #include "gnome-recent-view.h"
+#include "util.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -572,18 +573,19 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 
 		fname = gl_label_get_short_name (doc);
 
-		msgbox = gtk_message_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_QUESTION,
-				GTK_BUTTONS_NONE,
-				_("Do you want to save the changes you made to the document \"%s\"? \n\n"
-				  "Your changes will be lost if you don't save them."),
-				fname);
+		msg = g_strdup_printf (_("Save changes to document \"%s\" before closing?"),
+					fname);
 
-		gl_util_dialog_add_button (GTK_DIALOG (msgbox),
-					   _("Do_n't save"),
-					   GTK_STOCK_NO,
-					   GTK_RESPONSE_NO);
+		msgbox = gl_util_hig_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_NONE,
+				msg,
+				_("Your changes will be lost if you don't save them."));
+
+		gtk_dialog_add_button (GTK_DIALOG (msgbox),
+				       _("Close without saving"),
+				       GTK_RESPONSE_NO);
 
 		if (glabels_close_x_button_pressed)
 			exiting = FALSE;
@@ -598,18 +600,6 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 				exiting = FALSE;
 		}
 
-#if 0		
-		if (exiting)
-			gl_util_dialog_add_button (GTK_DIALOG (msgbox),
-						   _("_Don't quit"),
-						   GTK_STOCK_CANCEL,
-						   GTK_RESPONSE_CANCEL);
-		else
-			gl_util_dialog_add_button (GTK_DIALOG (msgbox),
-						   _("_Don't close"),
-						   GTK_STOCK_CANCEL,
-						   GTK_RESPONSE_CANCEL);
-#endif
 		
 		gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
