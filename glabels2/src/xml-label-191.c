@@ -510,7 +510,7 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 	gdouble             w, h;
 	gchar              *string;
 	glTextNode         *text_node;
-	glBarcodeStyle      style;
+	gchar              *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	guint               color;
@@ -524,9 +524,7 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 
 	color = gl_xml_get_prop_uint (node, "color", 0);
 
-	string = xmlGetProp (node, "style");
-	style = gl_barcode_text_to_style (string);
-	g_free (string);
+	id = xmlGetProp (node, "style");
 
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
@@ -548,10 +546,11 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, checksum_flag);
+				    id, text_flag, checksum_flag);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 
 	gl_text_node_free (&text_node);
+	g_free (id);
 
 	gl_debug (DEBUG_XML, "END");
 

@@ -65,32 +65,59 @@ static gchar *frame_symbol = "1";
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static gchar *postnet_code (gchar *digits);
+static gchar    *postnet_code    (const gchar *digits);
+
+static gboolean  is_length_valid (const gchar *digits,
+				  gint         n);
 
 
 /****************************************************************************/
 /* Generate list of lines that form the barcode for the given digits.       */
 /****************************************************************************/
 glBarcode *
-gl_barcode_postnet_new (glBarcodeStyle  style,
+gl_barcode_postnet_new (const gchar    *id,
 			gboolean        text_flag,
 			gboolean        checksum_flag,
 			gdouble         w,
 			gdouble         h,
-			gchar          *digits)
+			const gchar    *digits)
 {
 	gchar         *code, *p;
 	glBarcode     *gbc;
 	glBarcodeLine *line;
 	gdouble        x;
 
-	gbc = g_new0 (glBarcode, 1);
+	/* Validate code length for all subtypes. */
+	if ( (g_strcasecmp (id, "POSTNET") == 0) ) {
+		if (!is_length_valid (digits, 5) &&
+		    !is_length_valid (digits, 9) &&
+		    !is_length_valid (digits, 11)) {
+			return NULL;
+		}
+	}
+	if ( (g_strcasecmp (id, "POSTNET-5") == 0) ) {
+		if (!is_length_valid (digits, 5)) {
+			return NULL;
+		}
+	}
+	if ( (g_strcasecmp (id, "POSTNET-9") == 0) ) {
+		if (!is_length_valid (digits, 9)) {
+			return NULL;
+		}
+	}
+	if ( (g_strcasecmp (id, "POSTNET-11") == 0) ) {
+		if (!is_length_valid (digits, 11)) {
+			return NULL;
+		}
+	}
 
 	/* First get code string */
 	code = postnet_code (digits);
 	if (code == NULL) {
 		return NULL;
 	}
+
+	gbc = g_new0 (glBarcode, 1);
 
 	/* Now traverse the code string and create a list of lines */
 	x = POSTNET_HORIZ_MARGIN;
@@ -126,7 +153,7 @@ gl_barcode_postnet_new (glBarcodeStyle  style,
 /* PRIVATE.  Generate string of symbols, representing barcode.              */
 /*--------------------------------------------------------------------------*/
 static gchar *
-postnet_code (gchar *digits)
+postnet_code (const gchar *digits)
 {
 	gchar   *p;
 	gint     len;
@@ -138,8 +165,8 @@ postnet_code (gchar *digits)
 	code = g_string_new (frame_symbol);
 
 	sum = 0;
-	for (p = digits, len = 0; (*p != 0) && (len < 11); p++) {
-		if (isdigit (*p)) {
+	for (p = (gchar *)digits, len = 0; (*p != 0) && (len < 11); p++) {
+		if (g_ascii_isdigit (*p)) {
 			/* Only translate valid characters (0-9) */
 			d = (*p) - '0';
 			sum += d;
@@ -163,3 +190,27 @@ postnet_code (gchar *digits)
 
 	return ret;
 }
+
+/*--------------------------------------------------------------------------*/
+/* Validate specific length of string (for subtypes).                       */
+/*--------------------------------------------------------------------------*/
+static gboolean
+is_length_valid (const gchar *digits,
+		 gint         n)
+{
+	gchar *p;
+	gint   i;
+
+	if (!digits) {
+		return FALSE;
+	}
+
+	for (p = (gchar *)digits, i=0; *p != 0; p++) {
+		if (g_ascii_isdigit (*p)) {
+			i++;
+		}
+	}
+
+	return (i == n);
+}
+

@@ -16,17 +16,33 @@
 <!ENTITY % FONT_WEIGHT_TYPE   "(Regular | Bold)">
 
 <!-- Barcode related enumerations/types -->
-<!ENTITY % BC_STYLE_TYPE      "(POSTNET  |
-                                EAN      |
-                                UPC      |
-                                ISBN     |
-                                Code39   |
-                                Code128  |
-                                Code128C |
-                                Code128B |
-                                I25      |
-                                CBR      |
-                                MSI      |
+<!ENTITY % BC_STYLE_TYPE      "(POSTNET    |
+                                POSTNET-5  |
+                                POSTNET-9  |
+                                POSTNET-11 |
+                                EAN        |
+                                EAN-8      |
+                                EAN-8+2    |
+                                EAN-8+5    |
+                                EAN-13     |
+                                EAN-13+2   |
+                                EAN-13+5   |
+                                UPC        |
+                                UPC-A      |
+                                UPC-A+2    |
+                                UPC-A+5    |
+                                UPC-E      |
+                                UPC-E+2    |
+                                UPC-E+5    |
+                                ISBN       |
+                                ISBN+5     |
+                                Code39     |
+                                Code128    |
+                                Code128C   |
+                                Code128B   |
+                                I25        |
+                                CBR        |
+                                MSI        |
                                 PLS)"
 >
 

@@ -120,11 +120,11 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 				  G_CALLBACK (aspect_toggle_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_w_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (w_spin_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_h_spin),
-				  "changed",
+				  "value-changed",
 				  G_CALLBACK (h_spin_cb),
 				  G_OBJECT (editor));
 
@@ -147,6 +147,8 @@ aspect_toggle_cb (glObjectEditor *editor)
         glWdgtChainButton *toggle;
 	gdouble            w, h;
 
+	gl_debug (DEBUG_EDITOR, "START");
+
 	toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
 
         if (gl_wdgt_chain_button_get_active (toggle)) {
@@ -157,6 +159,8 @@ aspect_toggle_cb (glObjectEditor *editor)
                 editor->priv->size_aspect_ratio = h / w;
                                                                                 
         }
+
+	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -167,6 +171,8 @@ w_spin_cb (glObjectEditor *editor)
 {
 	gdouble            w, h;
         glWdgtChainButton *toggle;
+
+	gl_debug (DEBUG_EDITOR, "START");
 
 	toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
 
@@ -190,6 +196,7 @@ w_spin_cb (glObjectEditor *editor)
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
                                                                                 
+	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -198,9 +205,12 @@ w_spin_cb (glObjectEditor *editor)
 static void
 h_spin_cb (glObjectEditor *editor)
 {
-	gdouble w, h;
+	gdouble            w, h;
+        glWdgtChainButton *toggle;
 
-        glWdgtChainButton *toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
+	gl_debug (DEBUG_EDITOR, "START");
+
+        toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
                                                                                 
         if (gl_wdgt_chain_button_get_active (toggle)) {
 
@@ -222,6 +232,7 @@ h_spin_cb (glObjectEditor *editor)
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
                                                                                 
+	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -233,6 +244,8 @@ size_reset_cb (glObjectEditor *editor)
 	gdouble w_base, h_base;
 	gdouble w_max, h_max;
 	gdouble aspect_ratio;
+
+	gl_debug (DEBUG_EDITOR, "START");
 
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin),
 					 G_CALLBACK (w_spin_cb),
@@ -278,6 +291,8 @@ size_reset_cb (glObjectEditor *editor)
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
+
+	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*****************************************************************************/

@@ -26,12 +26,12 @@
 
 G_BEGIN_DECLS
 
-glBarcode *gl_barcode_gnubarcode_new (glBarcodeStyle  style,
+glBarcode *gl_barcode_gnubarcode_new (const gchar    *id,
 				      gboolean        text_flag,
 				      gboolean        checksum_flag,
 				      gdouble         w,
 				      gdouble         h,
-				      gchar          *digits);
+				      const gchar    *digits);
 
 G_END_DECLS
 

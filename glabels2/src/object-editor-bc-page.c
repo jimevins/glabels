@@ -121,24 +121,24 @@ static void
 style_changed_cb (glObjectEditor       *editor)
 {
         gchar          *style_string;
-        glBarcodeStyle  style;
+	const gchar    *id;
                                                                                 
         style_string =
                 gtk_editable_get_chars (GTK_EDITABLE(editor->priv->bc_style_entry), 0, -1);
                                                                                 
         /* Don't emit if entry is empty. */
         if ( *style_string != 0 ) {
-                style = gl_barcode_text_to_style (style_string);
+                id = gl_barcode_name_to_id (style_string);
                                                                                 
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(editor->priv->bc_text_check),
-					      gl_barcode_can_text (style));
+					      gl_barcode_can_text (id));
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(editor->priv->bc_cs_check),
-					      gl_barcode_can_csum (style));
+					      gl_barcode_can_csum (id));
                                                                                 
                 gtk_widget_set_sensitive (editor->priv->bc_text_check,
-                                          gl_barcode_text_optional (style));
+                                          gl_barcode_text_optional (id));
                 gtk_widget_set_sensitive (editor->priv->bc_cs_check,
-                                          gl_barcode_csum_optional (style));
+                                          gl_barcode_csum_optional (id));
                                                                                 
                                                                                 
                 /* Emit our "changed" signal */
@@ -153,7 +153,7 @@ style_changed_cb (glObjectEditor       *editor)
 /*****************************************************************************/
 void
 gl_object_editor_set_bc_style (glObjectEditor      *editor,
-			       glBarcodeStyle       style,
+			       gchar               *id,
 			       gboolean             text_flag,
 			       gboolean             checksum_flag)
 {
@@ -172,7 +172,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
                                          G_CALLBACK (gl_object_editor_changed_cb),
                                          editor);
 
-        style_string = gl_barcode_style_to_text (style);
+        style_string = gl_barcode_id_to_name (id);
  
         gtk_editable_delete_text (GTK_EDITABLE (editor->priv->bc_style_entry),
                                   0, -1);
@@ -190,9 +190,9 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
                                       checksum_flag);
 
 	gtk_widget_set_sensitive (editor->priv->bc_text_check,
-				  gl_barcode_text_optional (style));
+				  gl_barcode_text_optional (id));
 	gtk_widget_set_sensitive (editor->priv->bc_cs_check,
-				  gl_barcode_csum_optional (style));
+				  gl_barcode_csum_optional (id));
 
         g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_style_entry),
 					   G_CALLBACK (style_changed_cb),
@@ -212,7 +212,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 /*****************************************************************************/
 void
 gl_object_editor_get_bc_style (glObjectEditor      *editor,
-			       glBarcodeStyle      *style,
+			       gchar              **id,
 			       gboolean            *text_flag,
 			       gboolean            *checksum_flag)
 {
@@ -223,7 +223,7 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor,
         style_string =
                 gtk_editable_get_chars (GTK_EDITABLE(editor->priv->bc_style_entry),
                                         0, -1);
-        *style = gl_barcode_text_to_style (style_string);
+        *id = g_strdup (gl_barcode_name_to_id (style_string));
                                                                                 
         *text_flag =
             gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check));

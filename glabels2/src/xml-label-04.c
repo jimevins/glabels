@@ -412,7 +412,7 @@ static void
 xml04_parse_barcode_props (xmlNodePtr    node,
 			   glLabelBarcode *object)
 {
-	glBarcodeStyle style;
+	gchar         *id;
 	gboolean       text_flag;
 	guint          color;
 	gdouble        scale;
@@ -424,16 +424,14 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 
 	color = gl_xml_get_prop_uint (node, "color", 0);
 
-	string = xmlGetProp (node, "style");
-	style = gl_barcode_text_to_style (string);
-	g_free (string);
+	id = xmlGetProp (node, "style");
 
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	scale =	gl_xml_get_prop_double (node, "scale", 1.0);
 	if (scale == 0.0) {
 		scale = 0.5; /* Set to a valid value */
 	}
-	gl_label_barcode_set_props (object, style, text_flag, TRUE);
+	gl_label_barcode_set_props (object, id, text_flag, TRUE);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 
 	child = node->xmlChildrenNode;
@@ -450,6 +448,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 	gl_label_barcode_set_data (object, text_node);
 
 	gl_text_node_free (&text_node);
+	g_free (id);
 
 	gl_debug (DEBUG_XML, "END");
 }

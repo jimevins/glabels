@@ -1,3 +1,62 @@
+2004-02-15  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+		Added specific subtypes for various barcode types.
+	
+	* src/bc.h:
+	* src/bc.c: (id_to_index), (name_to_index), (gl_barcode_new),
+	(gl_barcode_get_styles_list), (gl_barcode_default_digits),
+	(gl_barcode_can_text), (gl_barcode_text_optional),
+	(gl_barcode_can_csum), (gl_barcode_csum_optional),
+	(gl_barcode_id_to_name), (gl_barcode_name_to_id):
+		Changed API to use a string id, rather than a fixed enumeration.  Id and
+		name are separate strings.  Added entries to backend table for specific
+		subtypes for various barcode types.
+	
+	* src/bc-postnet.h:
+	* src/bc-postnet.c: (gl_barcode_postnet_new), (postnet_code),
+	(is_length_valid):
+		Modified to conform to above API.  Now more stringent with data length
+		for various subtypes.
+	
+	* src/bc-gnubarcode.h:
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new),
+	(is_length_valid), (is_length1_valid), (is_length2_valid):
+		Modified to conform to above API.  Now more stringent with data length
+		for various subtypes.
+
+	* src/label-barcode.h:
+	* src/label-barcode.c: (copy), (gl_label_barcode_set_props),
+	(gl_label_barcode_get_props), (get_size):
+		Modified to use above API for storing barcode type.
+	
+	* src/object-editor.h:
+	* src/object-editor-bc-page.c: (style_changed_cb),
+	(gl_object_editor_set_bc_style), (gl_object_editor_get_bc_style):
+		Modified to use above API for storing barcode type.
+	
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page), (aspect_toggle_cb),
+	(w_spin_cb), (h_spin_cb), (size_reset_cb):
+		Added debug markers.
+	
+	* src/object-editor.glade:
+		Made barcode style combo's text entry  non-editable.
+	
+	* src/print.c: (draw_barcode_object):
+		Modified to use above API for barcode type.
+
+	* src/view-barcode.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_barcode_create_event_handler), (draw_barcode):
+		Modified to use above API for barcode type.
+	
+	* src/xml-label-04.c: (xml04_parse_barcode_props):
+	* src/xml-label-191.c: (xml191_parse_barcode_props):
+	* src/xml-label.c: (xml_parse_object_barcode),
+	(xml_create_object_barcode):
+		Modified to use above API for barcode type.
+
 2004-02-07  Jim Evins  <evins@snaught.com>
 
 	* src/stock-pixmaps/Makefile.am:

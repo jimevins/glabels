@@ -46,68 +46,137 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glBarcode *render_pass1 (struct Barcode_Item *bci,
-				gint                 flags);
+static glBarcode *render_pass1     (struct Barcode_Item *bci,
+				    gint                 flags);
+
+static gboolean   is_length_valid  (const gchar         *digits,
+				    gint                 n1,
+				    gint                 n2);
+
+static gboolean   is_length1_valid (const gchar         *digits,
+				    gint                 n1,
+				    gint                 n2);
+
+static gboolean   is_length2_valid (const gchar         *digits,
+				    gint                 n1,
+				    gint                 n2);
 
 
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
 glBarcode *
-gl_barcode_gnubarcode_new (glBarcodeStyle  style,
+gl_barcode_gnubarcode_new (const gchar    *id,
 			   gboolean        text_flag,
 			   gboolean        checksum_flag,
 			   gdouble         w,
 			   gdouble         h,
-			   gchar          *digits)
+			   const gchar    *digits)
 {
 	glBarcode           *gbc;
 	struct Barcode_Item *bci;
 	gint                 flags;
 
-	bci = Barcode_Create (digits);
-
-	/* First encode using GNU Barcode library */
-	switch (style) {
-	case GL_BARCODE_STYLE_EAN:
+	/* Assign type flag.  Pre-filter by length for subtypes. */
+	if (g_strcasecmp (id, "EAN") == 0) {
 		flags = BARCODE_EAN;
-		break;
-	case GL_BARCODE_STYLE_UPC:
+	} else if (g_strcasecmp (id, "EAN-8") == 0) {
+		if (!is_length_valid (digits, 7, 8)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "EAN-8+2") == 0) {
+		if (!is_length1_valid (digits, 7, 8) || !is_length2_valid (digits, 2, 2)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "EAN-8+5") == 0) {
+		if (!is_length1_valid (digits, 7, 8) || !is_length2_valid (digits, 5, 5)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "EAN-13") == 0) {
+		if (!is_length_valid (digits, 12, 13)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "EAN-13+2") == 0) {
+		if (!is_length1_valid (digits, 12,13) || !is_length2_valid (digits, 2,2)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "EAN-13+5") == 0) {
+		if (!is_length1_valid (digits, 12,13) || !is_length2_valid (digits, 5,5)) {
+			return NULL;
+		}
+		flags = BARCODE_EAN;
+	} else if (g_strcasecmp (id, "UPC") == 0) {
 		flags = BARCODE_UPC;
-		break;
-	case GL_BARCODE_STYLE_ISBN:
+	} else if (g_strcasecmp (id, "UPC-A") == 0) {
+		if (!is_length_valid (digits, 11, 12)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "UPC-A+2") == 0) {
+		if (!is_length1_valid (digits, 11,12) || !is_length2_valid (digits, 2,2)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "UPC-A+5") == 0) {
+		if (!is_length1_valid (digits, 11,12) || !is_length2_valid (digits, 5,5)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "UPC-E") == 0) {
+		if (!is_length_valid (digits, 6, 8)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "UPC-E+2") == 0) {
+		if (!is_length1_valid (digits, 6, 8) || !is_length2_valid (digits, 2,2)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "UPC-E+5") == 0) {
+		if (!is_length1_valid (digits, 6, 8) || !is_length2_valid (digits, 5,5)) {
+			return NULL;
+		}
+		flags = BARCODE_UPC;
+	} else if (g_strcasecmp (id, "ISBN") == 0) {
+		if (!is_length_valid (digits, 9, 10)) {
+			return NULL;
+		}
 		flags = BARCODE_ISBN;
-		break;
-	case GL_BARCODE_STYLE_39:
+	} else if (g_strcasecmp (id, "ISBN+5") == 0) {
+		if (!is_length1_valid (digits, 9, 10) || !is_length2_valid (digits, 5,5)) {
+			return NULL;
+		}
+		flags = BARCODE_ISBN;
+	} else if (g_strcasecmp (id, "Code39") == 0) {
 		flags = BARCODE_39;
-		break;
-	case GL_BARCODE_STYLE_128:
+	} else if (g_strcasecmp (id, "Code128") == 0) {
 		flags = BARCODE_128;
-		break;
-	case GL_BARCODE_STYLE_128C:
+	} else if (g_strcasecmp (id, "Code128C") == 0) {
 		flags = BARCODE_128C;
-		break;
-	case GL_BARCODE_STYLE_128B:
+	} else if (g_strcasecmp (id, "Code128B") == 0) {
 		flags = BARCODE_128B;
-		break;
-	case GL_BARCODE_STYLE_I25:
+	} else if (g_strcasecmp (id, "I25") == 0) {
 		flags = BARCODE_I25;
-		break;
-	case GL_BARCODE_STYLE_CBR:
+	} else if (g_strcasecmp (id, "CBR") == 0) {
 		flags = BARCODE_CBR;
-		break;
-	case GL_BARCODE_STYLE_MSI:
+	} else if (g_strcasecmp (id, "MSI") == 0) {
 		flags = BARCODE_MSI;
-		break;
-	case GL_BARCODE_STYLE_PLS:
+	} else if (g_strcasecmp (id, "PLS") == 0) {
 		flags = BARCODE_PLS;
-		break;
-	default:
-		g_warning( "Illegal barcode style %d", style );
+	} else {
+		g_warning( "Illegal barcode id %s", id );
 		flags = BARCODE_ANY;
-		break;
 	}
 
+
+	bci = Barcode_Create ((char *)digits);
+
+	/* First encode using GNU Barcode library */
 	if (!text_flag) {
 		flags |= BARCODE_NO_ASCII;
 	}
@@ -307,3 +376,80 @@ render_pass1 (struct Barcode_Item *bci,
 
 	return gbc;
 }
+
+/*--------------------------------------------------------------------------*/
+/* Validate specific length of string (for subtypes).                       */
+/*--------------------------------------------------------------------------*/
+static gboolean
+is_length_valid (const gchar *digits,
+		 gint         n1,
+		 gint         n2)
+{
+	gchar *p;
+	gint   i;
+
+	if (!digits) {
+		return FALSE;
+	}
+
+	for (p = (gchar *)digits, i=0; *p != 0; p++) {
+		if (g_ascii_isdigit (*p)) {
+			i++;
+		}
+	}
+
+	return (i >= n1) && (i <= n2);
+}
+
+/*--------------------------------------------------------------------------*/
+/* Validate specific length of string (for subtypes).                       */
+/*--------------------------------------------------------------------------*/
+static gboolean
+is_length1_valid (const gchar *digits,
+		  gint         n1,
+		  gint         n2)
+{
+	gchar *p;
+	gint   i;
+
+	if (!digits) {
+		return FALSE;
+	}
+
+	for (p = (gchar *)digits, i=0; !g_ascii_isspace (*p) && *p != 0; p++) {
+		if (g_ascii_isdigit (*p)) {
+			i++;
+		}
+	}
+
+	return (i >= n1) && (i <= n2);
+}
+
+/*--------------------------------------------------------------------------*/
+/* Validate specific length of second string (for subtypes).                */
+/*--------------------------------------------------------------------------*/
+static gboolean
+is_length2_valid (const gchar *digits,
+		  gint         n1,
+		  gint         n2)
+{
+	gchar *p;
+	gint   i;
+
+	if (!digits) {
+		return FALSE;
+	}
+
+	for (p = (gchar *)digits; !g_ascii_isspace (*p) && (*p != 0); p++) {
+		/* Skip over 1st string */
+	}
+
+	for (i=0; *p != 0; p++) {
+		if (g_ascii_isdigit (*p)) {
+			i++;
+		}
+	}
+
+	return (i >= n1) && (i <= n2);
+}
+

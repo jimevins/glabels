@@ -221,12 +221,12 @@ void        gl_object_editor_set_text_buffer      (glObjectEditor      *editor,
  * Barcode Page
  */
 void        gl_object_editor_set_bc_style         (glObjectEditor      *editor,
-						   glBarcodeStyle       style,
+						   gchar               *id,
 						   gboolean             text_flag,
 						   gboolean             checksum_flag);
 
 void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
-						   glBarcodeStyle      *style,
+						   gchar              **id,
 						   gboolean            *text_flag,
 						   gboolean            *checksum_flag);
 

@@ -676,7 +676,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gdouble             w, h;
 	gchar              *string;
 	glTextNode         *text_node;
-	glBarcodeStyle      style;
+	gchar              *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	guint               color;
@@ -697,15 +697,14 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	/* prop attrs */
-	string = xmlGetProp (node, "style");
-	style = gl_barcode_text_to_style (string);
-	g_free (string);
+	id = xmlGetProp (node, "style");
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
 	color = gl_xml_get_prop_uint (node, "color", 0);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, checksum_flag);
+				    id, text_flag, checksum_flag);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
+	g_free (id);
 
 	/* data or field attr */
 	string = xmlGetProp (node, "data");
@@ -1343,7 +1342,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           w, h;
 	glTextNode       *text_node;
-	glBarcodeStyle    style;
+	gchar            *id;
 	gboolean          text_flag;
 	gboolean          checksum_flag;
 	guint             color;
@@ -1365,12 +1364,13 @@ xml_create_object_barcode (xmlNodePtr     root,
 
 	/* Barcode properties attrs */
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &checksum_flag);
+				    &id, &text_flag, &checksum_flag);
 	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	xmlSetProp (node, "style", gl_barcode_style_to_text (style));
+	xmlSetProp (node, "style", id);
 	gl_xml_set_prop_boolean (node, "text", text_flag);
 	gl_xml_set_prop_boolean (node, "checksum", checksum_flag);
 	gl_xml_set_prop_uint_hex (node, "color", color);
+	g_free (id);
 
 	/* data OR field attr */
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));

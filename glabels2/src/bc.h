@@ -26,23 +26,6 @@
 
 G_BEGIN_DECLS
 
-typedef enum {
-	GL_BARCODE_STYLE_POSTNET,
-	GL_BARCODE_STYLE_EAN,
-	GL_BARCODE_STYLE_UPC,
-	GL_BARCODE_STYLE_ISBN,
-	GL_BARCODE_STYLE_39,
-	GL_BARCODE_STYLE_128,
-	GL_BARCODE_STYLE_128C,
-	GL_BARCODE_STYLE_128B,
-	GL_BARCODE_STYLE_I25,
-	GL_BARCODE_STYLE_CBR,
-	GL_BARCODE_STYLE_MSI,
-	GL_BARCODE_STYLE_PLS,
-
-	GL_BARCODE_N_STYLES
-} glBarcodeStyle;
-
 typedef struct {
 	gdouble x, y, length, width;
 } glBarcodeLine;
@@ -58,40 +41,40 @@ typedef struct {
 	GList *chars;		/* List of glBarcodeChar */
 } glBarcode;
 
-typedef glBarcode *(*glBarcodeNewFunc) (glBarcodeStyle  style,
+typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
 					gboolean        text_flag,
 					gboolean        checksum_flag,
 					gdouble         w,
 					gdouble         h,
-					gchar          *digits);
+					const gchar    *digits);
 
 
 #define GL_BARCODE_FONT_FAMILY      "Sans"
 #define GL_BARCODE_FONT_WEIGHT      GNOME_FONT_BOOK
 
 
-glBarcode       *gl_barcode_new              (glBarcodeStyle  style,
+glBarcode       *gl_barcode_new              (const gchar    *id,
 					      gboolean        text_flag,
 					      gboolean        checksum_flag,
 					      gdouble         w,
 					      gdouble         h,
-					      gchar          *digits);
+					      const gchar    *digits);
 
 void             gl_barcode_free             (glBarcode     **bc);
 
 GList           *gl_barcode_get_styles_list  (void);
 void             gl_barcode_free_styles_list (GList          *styles_list);
 
-gchar           *gl_barcode_default_digits   (glBarcodeStyle  style);
+gchar           *gl_barcode_default_digits   (const gchar    *id);
 
-gboolean         gl_barcode_can_text         (glBarcodeStyle  style);
-gboolean         gl_barcode_text_optional    (glBarcodeStyle  style);
+gboolean         gl_barcode_can_text         (const gchar    *id);
+gboolean         gl_barcode_text_optional    (const gchar    *id);
 
-gboolean         gl_barcode_can_csum         (glBarcodeStyle  style);
-gboolean         gl_barcode_csum_optional    (glBarcodeStyle  style);
+gboolean         gl_barcode_can_csum         (const gchar    *id);
+gboolean         gl_barcode_csum_optional    (const gchar    *id);
 
-const gchar     *gl_barcode_style_to_text    (glBarcodeStyle  style);
-glBarcodeStyle   gl_barcode_text_to_style    (const gchar    *text);
+const gchar     *gl_barcode_id_to_name       (const gchar    *id);
+const gchar     *gl_barcode_name_to_id       (const gchar    *name);
 
 G_END_DECLS
 
