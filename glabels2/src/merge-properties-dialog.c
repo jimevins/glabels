@@ -148,8 +148,8 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	dialog->private = g_new0 (glMergePropertiesDialogPrivate, 1);
 
 	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
-				GTK_STOCK_OK, GTK_RESPONSE_OK,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OK, GTK_RESPONSE_OK,
 				NULL);
 
 	g_signal_connect (G_OBJECT(dialog), "response",

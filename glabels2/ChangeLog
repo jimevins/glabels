@@ -1,3 +1,8 @@
+2004-07-26  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init):
+		Corrected button order of merge properties dialog.
+
 2004-07-18  Jim Evins  <evins@snaught.com>
 
 	* data/glabels-2.0.dtd:
