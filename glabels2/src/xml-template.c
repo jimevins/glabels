@@ -55,6 +55,8 @@ static void        xml_parse_markup_margin      (xmlNodePtr              markup_
 						 glTemplate             *template);
 static void        xml_parse_markup_line        (xmlNodePtr              markup_node,
 						 glTemplate             *template);
+static void        xml_parse_markup_circle      (xmlNodePtr              markup_node,
+						 glTemplate             *template);
 static void        xml_parse_alias              (xmlNodePtr              alias_node,
 						 glTemplate             *template);
 
@@ -68,6 +70,9 @@ static void        xml_add_markup_margin        (glTemplateMarkupMargin *margin,
 						 xmlNodePtr              root,
 						 xmlNsPtr                ns);
 static void        xml_add_markup_line          (glTemplateMarkupLine   *line,
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
+static void        xml_add_markup_circle        (glTemplateMarkupCircle *circle,
 						 xmlNodePtr              root,
 						 xmlNsPtr                ns);
 static void        xml_add_alias                (gchar                  *name,
@@ -233,6 +238,8 @@ xml_parse_label_rectangle (xmlNodePtr  label_node,
 			xml_parse_markup_margin (node, template);
 		} else if (xmlStrEqual (node->name, "Markup-line")) {
 			xml_parse_markup_line (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-circle")) {
+			xml_parse_markup_circle (node, template);
 		} else if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
@@ -406,6 +413,36 @@ xml_parse_markup_line (xmlNodePtr  markup_node,
 }
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label->Markup-circle Node.                 */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_markup_circle (xmlNodePtr  markup_node,
+		       glTemplate *template)
+{
+	gdouble     x0, y0, r;
+	xmlNodePtr  node;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	x0 = gl_xml_get_prop_length (markup_node, "x0", 0);
+	y0 = gl_xml_get_prop_length (markup_node, "y0", 0);
+	r  = gl_xml_get_prop_length (markup_node, "radius", 0);
+
+	template->label.any.markups =
+		g_list_append (template->label.any.markups,
+			       gl_template_markup_circle_new (x0, y0, r));
+
+	for (node = markup_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (!xmlNodeIsText (node)) {
+			g_warning ("bad node =  \"%s\"", node->name);
+		}
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Template->Alias Node.                                */
 /*--------------------------------------------------------------------------*/
 static void
@@ -523,6 +560,10 @@ xml_add_label (const glTemplate *template,
 			xml_add_markup_line ((glTemplateMarkupLine *)markup,
 					     node, ns);
 			break;
+		case GL_TEMPLATE_MARKUP_CIRCLE:
+			xml_add_markup_circle ((glTemplateMarkupCircle *)markup,
+					       node, ns);
+			break;
 		default:
 			g_warning ("Unknown markup type");
 			break;
@@ -561,7 +602,7 @@ xml_add_layout (glTemplateLayout *layout,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Template->Label->Markup (margin) Node.                    */
+/* PRIVATE.  Add XML Template->Label->Markup-margin Node.                   */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_margin (glTemplateMarkupMargin *margin,
@@ -580,7 +621,7 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Template->Label->Markup (line) Node.                      */
+/* PRIVATE.  Add XML Template->Label->Markup-line Node.                     */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_line (glTemplateMarkupLine *line,
@@ -597,6 +638,27 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 	gl_xml_set_prop_length (node, "y1", line->y1);
 	gl_xml_set_prop_length (node, "x2", line->x2);
 	gl_xml_set_prop_length (node, "y2", line->y2);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Template->Label->Markup-circle Node.                   */
+/*--------------------------------------------------------------------------*/
+static void
+xml_add_markup_circle (glTemplateMarkupCircle *circle,
+		       xmlNodePtr            root,
+		       xmlNsPtr              ns)
+{
+	xmlNodePtr  node;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	node = xmlNewChild(root, ns, "Markup-circle", NULL);
+
+	gl_xml_set_prop_length (node, "x0", circle->x0);
+	gl_xml_set_prop_length (node, "y0", circle->y0);
+	gl_xml_set_prop_length (node, "radius", circle->r);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }

@@ -78,6 +78,7 @@ typedef union {
 typedef enum {
 	GL_TEMPLATE_MARKUP_MARGIN,
 	GL_TEMPLATE_MARKUP_LINE,
+	GL_TEMPLATE_MARKUP_CIRCLE,
 } glTemplateMarkupType;
 
 typedef struct {
@@ -97,11 +98,18 @@ typedef struct {
 	gdouble                x1, y1, x2, y2;
 } glTemplateMarkupLine;
 
+typedef struct {
+	glTemplateMarkupParent parent;
+
+	gdouble                x0, y0, r;
+} glTemplateMarkupCircle;
+
 typedef union {
 	glTemplateMarkupType   type;
 	glTemplateMarkupParent any;
 	glTemplateMarkupMargin margin;
 	glTemplateMarkupLine   line;
+	glTemplateMarkupCircle circle;
 } glTemplateMarkup;
 
 
@@ -171,6 +179,9 @@ glTemplateMarkup    *gl_template_markup_line_new     (gdouble            x1,
 						      gdouble            y1,
 						      gdouble            x2,
 						      gdouble            y2);
+glTemplateMarkup    *gl_template_markup_circle_new   (gdouble            x0,
+						      gdouble            y0,
+						      gdouble            r);
 
 
 G_END_DECLS

@@ -144,6 +144,9 @@ static void       draw_markup_margin_cd_bc        (glView *view,
 static void       draw_markup_line                (glView *view,
 						   glTemplateMarkupLine   *line);
 
+static void       draw_markup_circle              (glView *view,
+						   glTemplateMarkupCircle *circle);
+
 
 static void       select_object_real              (glView *view,
 						   glViewObject *view_object);
@@ -1137,6 +1140,9 @@ draw_markup_layer (glView *view)
 		case GL_TEMPLATE_MARKUP_LINE:
 			draw_markup_line (view,
 					  (glTemplateMarkupLine *)markup);
+		case GL_TEMPLATE_MARKUP_CIRCLE:
+			draw_markup_line (view,
+					  (glTemplateMarkupCircle *)markup);
 			break;
 		default:
 			g_warning ("Unknown template markup type");
@@ -1531,6 +1537,31 @@ draw_markup_line (glView               *view,
 			       NULL);
 
 	gnome_canvas_points_free (points);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw circle markup.                                             */
+/*---------------------------------------------------------------------------*/
+static void
+draw_markup_circle (glView                 *view,
+		    glTemplateMarkupCircle *circle)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	/* Circle outline */
+	gnome_canvas_item_new (view->markup_group,
+			       gnome_canvas_ellipse_get_type (),
+			       "x1", circle->x0 - circle->r,
+			       "y1", circle->y0 - circle->r,
+			       "x2", circle->x0 + circle->r,
+			       "y2", circle->y0 + circle->r,
+			       "width_pixels", 1,
+			       "outline_color_rgba", MARKUP_COLOR,
+			       NULL);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

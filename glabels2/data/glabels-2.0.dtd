@@ -70,7 +70,7 @@
 <!-- Template Section                                                     -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ENTITY % label_element  "Label-rectangle | Label-round | Label-cd">
-<!ENTITY % markup_element "Markup-margin | Markup-line">
+<!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle">
 
 <!ELEMENT Template ((%label_element;)+, Alias*)>
 <!ATTLIST Template
@@ -119,6 +119,13 @@
                  y1              %LENGTH_TYPE;           #REQUIRED
                  x2              %LENGTH_TYPE;           #REQUIRED
                  y2              %LENGTH_TYPE;           #REQUIRED
+>
+
+<!ELEMENT Markup-circle EMPTY>
+<!ATTLIST Markup-circle
+                 x0              %LENGTH_TYPE;           #REQUIRED
+                 y0              %LENGTH_TYPE;           #REQUIRED
+                 radius          %LENGTH_TYPE;           #REQUIRED
 >
 
 <!ELEMENT Layout EMPTY>

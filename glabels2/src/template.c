@@ -709,7 +709,7 @@ gl_template_markup_margin_new (gdouble size)
 }
 
 /*****************************************************************************/
-/* Create new margin line structure.                                         */
+/* Create new markup line structure.                                         */
 /*****************************************************************************/
 glTemplateMarkup *
 gl_template_markup_line_new (gdouble x1,
@@ -726,6 +726,26 @@ gl_template_markup_line_new (gdouble x1,
 	markup->line.y1     = y1;
 	markup->line.x2     = x2;
 	markup->line.y2     = y2;
+
+	return markup;
+}
+
+/*****************************************************************************/
+/* Create new markup circle structure.                                       */
+/*****************************************************************************/
+glTemplateMarkup *
+gl_template_markup_circle_new (gdouble x0,
+			       gdouble y0,
+			       gdouble r)
+{
+	glTemplateMarkup *markup;
+
+	markup = g_new0 (glTemplateMarkup, 1);
+
+	markup->type        = GL_TEMPLATE_MARKUP_CIRCLE;
+	markup->circle.x0     = x0;
+	markup->circle.y0     = y0;
+	markup->circle.r      = r;
 
 	return markup;
 }
