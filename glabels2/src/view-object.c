@@ -28,6 +28,13 @@
 #include "debug.h"
 
 /*========================================================*/
+/* Private constants and macros.                          */
+/*========================================================*/
+
+/* Used for a workaround for a bug with images when flipped or rotated by 90 degrees. */
+#define DELTA_DEG 0.0001
+
+/*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
@@ -560,7 +567,7 @@ static void
 flip_rotate_object_cb (glLabelObject *object,
 		       glViewObject  *view_object)
 {
-	gdouble          affine[6];
+	gdouble          affine[6], delta_affine[6];
 	gdouble          w, h;
 	GList           *p, *item_list;
 	GnomeCanvasItem *item;
@@ -568,6 +575,11 @@ flip_rotate_object_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "START");
 
 	gl_label_object_get_applied_affine (object, affine);
+
+	/* Apply a very small rotation, fixes problems with flipped or rotated images */
+	art_affine_rotate (delta_affine, DELTA_DEG);
+	art_affine_multiply (affine, affine, delta_affine);
+	
 	item_list = GNOME_CANVAS_GROUP(view_object->private->group)->item_list;
 	for ( p=item_list; p != NULL; p=p->next ) {
 		item = GNOME_CANVAS_ITEM(p->data);
