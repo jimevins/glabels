@@ -145,7 +145,7 @@ main (int argc, char **argv)
 							"Settings.Transport.Backend",
 							"file");
 				gnome_print_config_set (config,
-							"Settings.Transport.Backend.FileName",
+							GNOME_PRINT_KEY_OUTPUT_FILENAME,
 							abs_fn);
 				g_free( abs_fn );
 			}

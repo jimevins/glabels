@@ -1,3 +1,9 @@
+2004-02-20  Jim Evins  <evins@snaught.com>
+
+	* src/glabels-batch.c: (main):
+		Changed key for setting output filename to GNOME_PRINT_KEY_OUTPUT_FILENAME
+		as suggested by Javier Donaire Segarra.  This addresses bug #901063.
+
 2004-02-16  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
