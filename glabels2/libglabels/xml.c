@@ -70,14 +70,20 @@ static UnitTableEntry unit_table[] = {
 
 static glUnitsType  default_units        = GL_UNITS_POINT;
 
-/*========================================================*/
-/* Private function prototypes.                           */
-/*========================================================*/
 
-
 /****************************************************************************/
-/* Return value of property as a double.                                    */
-/****************************************************************************/
+
+/**
+ * gl_xml_get_prop_double:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @default_val: a default value to return if property not found
+ *
+ * Return value of property as a double.
+ *
+ * Returns: the property as a double.
+ *
+ */
 gdouble
 gl_xml_get_prop_double (xmlNodePtr   node,
 			const gchar *property,
@@ -96,9 +102,18 @@ gl_xml_get_prop_double (xmlNodePtr   node,
 	return default_val;
 }
 
-/****************************************************************************/
-/* Return value of property as a boolean.                                   */
-/****************************************************************************/
+
+/**
+ * gl_xml_get_prop_boolean:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @default_val: a default value to return if property not found
+ *
+ * Return value of property as a boolean.
+ *
+ * Returns: the property as a boolean.
+ *
+ */
 gboolean
 gl_xml_get_prop_boolean (xmlNodePtr   node,
 			 const gchar *property,
@@ -119,9 +134,17 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
 }
 
 
-/****************************************************************************/
-/* Return value of property as an int. .                                    */
-/****************************************************************************/
+/**
+ * gl_xml_get_prop_int:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @default_val: a default value to return if property not found
+ *
+ * Return value of property as an integer.
+ *
+ * Returns: the property as an integer.
+ *
+ */
 gint
 gl_xml_get_prop_int (xmlNodePtr   node,
 		     const gchar *property,
@@ -141,9 +164,17 @@ gl_xml_get_prop_int (xmlNodePtr   node,
 }
 
 
-/****************************************************************************/
-/* Return value of hex property as an unsigned int.                         */
-/****************************************************************************/
+/**
+ * gl_xml_get_prop_uint:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @default_val: a default value to return if property not found
+ *
+ * Return value of property (usually formatted in hex) as an unsigned integer.
+ *
+ * Returns: the property as an unsigned integer.
+ *
+ */
 guint
 gl_xml_get_prop_uint (xmlNodePtr   node,
 		      const gchar *property,
@@ -163,9 +194,22 @@ gl_xml_get_prop_uint (xmlNodePtr   node,
 }
 
 
-/****************************************************************************/
-/* Return value of length property as a double, converting to internal units*/
-/****************************************************************************/
+/**
+ * gl_xml_get_prop_length:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @default_val: a default value to return if property not found
+ *
+ * Return value of a length property as a double, converting to internal
+ * units (points).  The property is expected to be formatted as a number
+ * followed by a units string.  If there is no units string, the length
+ * is assumed to be in points.  Valid units strings are "pt" for points,
+ * "in" for inches, "mm" for millimeters, "cm" for centimeters, and
+ * "pc" for picas.
+ *
+ * Returns: the length in points.
+ *
+ */
 gdouble
 gl_xml_get_prop_length (xmlNodePtr   node,
 			const gchar *property,
@@ -207,9 +251,16 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 	return default_val;
 }
 
-/****************************************************************************/
-/* Set property from double.                                                */
-/****************************************************************************/
+
+/**
+ * gl_xml_set_prop_double:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @val:         the value to set
+ *
+ * Set a property from a double.
+ *
+ */
 void
 gl_xml_set_prop_double (xmlNodePtr    node,
 			const gchar  *property,
@@ -223,9 +274,16 @@ gl_xml_set_prop_double (xmlNodePtr    node,
 	xmlSetProp (node, property, string);
 }
 
-/****************************************************************************/
-/* Set property from boolean.                                               */
-/****************************************************************************/
+
+/**
+ * gl_xml_set_prop_boolean:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @val:         the value to set
+ *
+ * Set a property from a boolean.
+ *
+ */
 void
 gl_xml_set_prop_boolean (xmlNodePtr    node,
 			 const gchar  *property,
@@ -234,9 +292,15 @@ gl_xml_set_prop_boolean (xmlNodePtr    node,
 	xmlSetProp (node, property, (val ? "True" : "False"));
 }
 
-/****************************************************************************/
-/* Set property from int.                                                   */
-/****************************************************************************/
+/**
+ * gl_xml_set_prop_int:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @val:         the value to set
+ *
+ * Set a property from an integer.
+ *
+ */
 void
 gl_xml_set_prop_int (xmlNodePtr    node,
 		     const gchar  *property,
@@ -249,9 +313,15 @@ gl_xml_set_prop_int (xmlNodePtr    node,
 	g_free (string);
 }
 
-/****************************************************************************/
-/* Set property from uint in hex.                                           */
-/****************************************************************************/
+/**
+ * gl_xml_set_prop_uint_hex:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @val:         the value to set
+ *
+ * Set a property from an unsigned integer and format in hex.
+ *
+ */
 void
 gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 			  const gchar  *property,
@@ -264,9 +334,18 @@ gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 	g_free (string);
 }
 
-/****************************************************************************/
-/* Set property from length.                                                */
-/****************************************************************************/
+/**
+ * gl_xml_set_prop_length:
+ * @node:        the libxml2 #xmlNodePtr of the node
+ * @property:    the property name
+ * @val:         the length to set in internal units (points)
+ *
+ * Set a property from a length, performing any necessary conversion.
+ * Length properties are formatted as a number followed by a units string.
+ * The units of the formatted property is determined by the most recent call to
+ * gl_xml_set_default_units().
+ *
+ */
 void
 gl_xml_set_prop_length (xmlNodePtr    node,
 			const gchar  *property,
@@ -286,9 +365,14 @@ gl_xml_set_prop_length (xmlNodePtr    node,
         g_free (string_unit);
 }
 
-/****************************************************************************/
-/* Set default length units.                                                */
-/****************************************************************************/
+/**
+ * gl_xml_set_default_units:
+ * @units:       default units selection (#glUnitsType)
+ *
+ * Set the default units when formatting lengths.  See
+ * gl_xml_set_prop_length().
+ *
+ */
 void
 gl_xml_set_default_units (glUnitsType   units)
 {

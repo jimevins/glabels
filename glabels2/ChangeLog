@@ -1,3 +1,30 @@
+2005-03-23  Jim Evins  <evins@snaught.com>
+
+	* INSTALL:
+		Automatically updated.
+	* Makefile.am:
+	* autogen.sh:
+	* configure.in:
+	* docs/Makefile.am:
+	* docs/libglabels/Makefile.am:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/libglabels.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* docs/libglabels/tmpl/xml.sgml:
+		Added basic gtk-doc stuff to support documenting libglabels
+		API.
+	* libglabels/xml.c:
+		Updated function comments with gtk-doc markup.
+	* missing:
+		Removed.
+
 2005-03-22  Jim Evins  <evins@snaught.com>
 
 	Since the development version now requires gtk-2.6/gnome-2.10, I

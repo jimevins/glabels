@@ -1,0 +1,43 @@
+<!-- ##### SECTION Title ##### -->
+xml-paper
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gl_xml_paper_read_papers_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_paper_parse_papers_doc ##### -->
+<para>
+
+</para>
+
+@papers_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_paper_parse_paper_node ##### -->
+<para>
+
+</para>
+
+@paper_node: 
+@Returns: 
+
+

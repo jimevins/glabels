@@ -1,0 +1,80 @@
+<!-- ##### SECTION Title ##### -->
+xml-template
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gl_xml_template_read_templates_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_template_parse_templates_doc ##### -->
+<para>
+
+</para>
+
+@templates_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_template_parse_template_node ##### -->
+<para>
+
+</para>
+
+@template_node: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_template_write_templates_to_file ##### -->
+<para>
+
+</para>
+
+@templates: 
+@utf8_filename: 
+
+
+<!-- ##### FUNCTION gl_xml_template_write_template_to_file ##### -->
+<para>
+
+</para>
+
+@template: 
+@utf8_filename: 
+
+
+<!-- ##### FUNCTION gl_xml_template_create_templates_doc ##### -->
+<para>
+
+</para>
+
+@templates: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_template_create_template_node ##### -->
+<para>
+
+</para>
+
+@template: 
+@root: 
+@ns: 
+
+

@@ -2,7 +2,7 @@
 
 LIB_BARCODE_DIR = barcode-0.98
 
-SUBDIRS = po $(LIB_BARCODE_DIR) libglabels src data help
+SUBDIRS = po $(LIB_BARCODE_DIR) libglabels src data help docs
 
 EXTRA_DIST = \
 	README \

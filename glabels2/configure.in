@@ -22,6 +22,7 @@ GNOME_COMPILE_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
+GTK_DOC_CHECK(1.0)
 
 dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS API versioning
@@ -174,6 +175,8 @@ data/man/Makefile
 po/Makefile.in
 help/Makefile
 help/C/Makefile
+docs/Makefile
+docs/libglabels/Makefile
 glabels.spec
 ])
 
