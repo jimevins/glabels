@@ -32,24 +32,32 @@
 /* Local function prototypes                 */
 /*===========================================*/
 
-static glTextNode *extract_text_node (gchar * text, gint * n);
+static glTextNode *extract_text_node  (gchar          *text,
+				       gint           *n);
+
+static gboolean    is_empty_field     (glTextNode     *text_node,
+				       glMergeRecord  *record);
 
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Expand single node into representative string.                           */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 gchar *
-gl_text_node_expand (glTextNode * text_node,
-		     glMergeRecord * record)
+gl_text_node_expand (glTextNode    *text_node,
+		     glMergeRecord *record)
 {
 	gchar *text;
 
 	if (text_node->field_flag) {
-		text = gl_merge_eval_key (record, text_node->data);
-		if (text != NULL) {
-			return text;
-		} else {
+		if (record == NULL) {
 			return g_strdup_printf ("${%s}", text_node->data);
+		} else {
+			text = gl_merge_eval_key (record, text_node->data);
+			if (text != NULL) {
+				return text;
+			} else {
+				return g_strdup_printf ("");
+			}
 		}
 	} else {
 		return g_strdup (text_node->data);
@@ -57,10 +65,31 @@ gl_text_node_expand (glTextNode * text_node,
 }
 
 /*--------------------------------------------------------------------------*/
-/* Create a single text node from given text.                               */
+/* PRIVATE.  Is node a field that evaluates empty?                          */
 /*--------------------------------------------------------------------------*/
+static gboolean
+is_empty_field (glTextNode    *text_node,
+		glMergeRecord *record)
+{
+	gchar    *text;
+	gboolean  ret = FALSE;
+
+	if ( (record != NULL) && text_node->field_flag) {
+		text = gl_merge_eval_key (record, text_node->data);
+		if ( (text == NULL) || (text[0] == 0) ) {
+			ret = TRUE;
+		}
+		g_free (text);
+	}
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Create a single text node from given text.                               */
+/****************************************************************************/
 glTextNode *
-gl_text_node_new_from_text (gchar * text)
+gl_text_node_new_from_text (gchar *text)
 {
 	gint n;
 
@@ -71,12 +100,12 @@ gl_text_node_new_from_text (gchar * text)
 /* PRIVATE.  Create a single text node from given text. n = characters used */
 /*--------------------------------------------------------------------------*/
 static glTextNode *
-extract_text_node (gchar * text,
-		   gint * n)
+extract_text_node (gchar *text,
+		   gint  *n)
 {
 	glTextNode *text_node;
-	gchar *p;
-	gint m;
+	gchar      *p;
+	gint        m;
 
 	text_node = g_new0 (glTextNode, 1);
 
@@ -107,9 +136,9 @@ extract_text_node (gchar * text,
 	return text_node;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Copy a single text node.                                                 */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 glTextNode *
 gl_text_node_dup (glTextNode *src)
 {
@@ -123,11 +152,11 @@ gl_text_node_dup (glTextNode *src)
 	return dst;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Free a single text node.                                                 */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 void
-gl_text_node_free (glTextNode ** text_node)
+gl_text_node_free (glTextNode **text_node)
 {
 	if ( *text_node == NULL ) return;
 
@@ -137,19 +166,31 @@ gl_text_node_free (glTextNode ** text_node)
 	*text_node = NULL;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Expand text lines into single string.                                    */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 gchar *
-gl_text_node_lines_expand (GList * lines,
-			   glMergeRecord * record)
+gl_text_node_lines_expand (GList         *lines,
+			   glMergeRecord *record)
 {
-	GList *p_line, *p_node;
+	GList      *p_line, *p_node;
 	glTextNode *text_node;
-	gchar *text, *old_text, *expanded_node;
+	gchar       *text, *old_text, *expanded_node;
 
 	text = g_strdup ("");	/* prime pointer for concatenation */
 	for (p_line = lines; p_line != NULL; p_line = p_line->next) {
+
+		/* special case: something like ${ADDRESS2} = "" on line by itself. */ 
+		/*               in such circumstances ignore the line completely.  */
+		p_node = (GList *)p_line->data;
+		if (p_node->next == NULL) {
+			text_node = (glTextNode *) p_node->data;
+			if ( is_empty_field (text_node, record) ) {
+				continue;
+			}
+		}
+
+		/* expand each node */
 		for (p_node = (GList *) p_line->data; p_node != NULL;
 		     p_node = p_node->next) {
 			text_node = (glTextNode *) p_node->data;
@@ -159,6 +200,8 @@ gl_text_node_lines_expand (GList * lines,
 			g_free (old_text);
 			g_free (expanded_node);
 		}
+
+		/* append newline to each line, except last. */
 		if ( p_line->next != NULL ) {
 			old_text = text;
 			text = g_strconcat (text, "\n", NULL);
@@ -169,16 +212,16 @@ gl_text_node_lines_expand (GList * lines,
 	return text;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Parse a string back into text lines.                                     */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 GList *
-gl_text_node_lines_new_from_text (gchar * text)
+gl_text_node_lines_new_from_text (gchar *text)
 {
-	GList *lines, *nodes;
+	GList      *lines, *nodes;
 	glTextNode *text_node;
-	gchar *p;
-	gint n;
+	gchar      *p;
+	gint        n;
 
 	lines = NULL;
 	nodes = NULL;
@@ -199,14 +242,14 @@ gl_text_node_lines_new_from_text (gchar * text)
 	return lines;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Copy a list of text lines.                                               */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 GList *
-gl_text_node_lines_dup (GList * src_lines)
+gl_text_node_lines_dup (GList *src_lines)
 {
-	GList *dst_lines=NULL;
-	GList *p_line, *line, *p_node;
+	GList      *dst_lines=NULL;
+	GList      *p_line, *line, *p_node;
 	glTextNode *node;
 
 	for (p_line = src_lines; p_line != NULL; p_line = p_line->next) {
@@ -222,11 +265,11 @@ gl_text_node_lines_dup (GList * src_lines)
 	return dst_lines;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Free a list of text lines.                                               */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 void
-gl_text_node_lines_free (GList ** lines)
+gl_text_node_lines_free (GList **lines)
 {
 	GList *p_line, *p_node;
 
