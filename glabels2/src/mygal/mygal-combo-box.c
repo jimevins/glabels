@@ -207,7 +207,7 @@ mygal_combo_box_popup_hide_unconditional (MygalComboBox *combo_box)
 	gboolean popup_info_destroyed = FALSE;
 
 	g_return_if_fail (combo_box != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo_box));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo_box));
 
 	gtk_widget_hide (combo_box->priv->toplevel);
 	gtk_widget_hide (combo_box->priv->popup);
@@ -287,7 +287,7 @@ mygal_combo_box_popup_display (MygalComboBox *combo_box)
 	int x, y;
 
 	g_return_if_fail (combo_box != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo_box));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo_box));
 	
 	/*
 	 * If we have no widget to display on the popdown,
@@ -471,7 +471,7 @@ void
 mygal_combo_box_set_display (MygalComboBox *combo_box, GtkWidget *display_widget)
 {
 	g_return_if_fail (combo_box != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo_box));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo_box));
 	g_return_if_fail (display_widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (display_widget));
 
@@ -573,7 +573,7 @@ gtk_combo_set_tearoff_state (MygalComboBox *combo,
 			     gboolean  torn_off)
 {
 	g_return_if_fail (combo != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo));
 	
 	if (combo->priv->torn_off != torn_off) {
 		combo->priv->torn_off = torn_off;
@@ -717,7 +717,7 @@ mygal_combo_box_construct (MygalComboBox *combo_box, GtkWidget *display_widget, 
 	GtkWidget *vbox;
 
 	g_return_if_fail (combo_box != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo_box));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo_box));
 	g_return_if_fail (display_widget  != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (display_widget));
 
@@ -768,7 +768,7 @@ void
 mygal_combo_box_set_arrow_relief (MygalComboBox *cc, GtkReliefStyle relief)
 {
 	g_return_if_fail (cc != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (cc));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (cc));
 
 	gtk_button_set_relief (GTK_BUTTON (cc->priv->arrow_button), relief);
 }
@@ -792,7 +792,7 @@ mygal_combo_box_set_title (MygalComboBox *combo,
 			 const gchar *title)
 {
 	g_return_if_fail (combo != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo));
 	
 	g_object_set_data_full (G_OBJECT (combo), "gtk-combo-title",
 				g_strdup (title), (GDestroyNotify) g_free);
@@ -826,7 +826,7 @@ void
 mygal_combo_box_set_tearable (MygalComboBox *combo, gboolean tearable)
 {
 	g_return_if_fail (combo != NULL);
-	g_return_if_fail (GTK_IS_COMBO_BOX (combo));
+	g_return_if_fail (MYGAL_IS_COMBO_BOX (combo));
 
 	if (tearable){
 		gtk_widget_show (combo->priv->tearable);

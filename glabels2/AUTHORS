@@ -21,8 +21,8 @@ canvas item:
 	Raph Levien <raph@acm.org>,
 	Lauris Kaplinski <lauris@helixcode.com>
 
-Glabels includes modified versions of several widgets from the GAL library.  These are
-copyright:
+Glabels includes modified versions of several widgets from the GAL library.
+These are copyright:
 
 	* Copyright 2000, 2001, Ximian, Inc.
 	* Copyright 2000, Michael Levy
@@ -34,6 +34,7 @@ Glabels includes gnome-recent objects.  The author:
 
 Glabels includes contributions from:
 	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
+	Wayne Schuller <k_wayne@linuxpower.org>
 	Akkana <akkana@shallowsky.com>
 	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
                                                       that first appeared in

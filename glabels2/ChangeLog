@@ -1,5 +1,27 @@
 2004-01-03  Jim Evins  <evins@snaught.com>
 
+	* AUTHORS:
+		Added acknowledgement of contributions by Wayne Schuller.
+	
+	* src/commands.c: (gl_cmd_file_print):
+		Create extra reference to print dialog, so that it can be properly re-used.
+	
+	* src/mygal/mygal-combo-box.h:
+	* src/mygal/mygal-combo-box.c:
+	(mygal_combo_box_popup_hide_unconditional),
+	(mygal_combo_box_popup_display), (mygal_combo_box_set_display),
+	(gtk_combo_set_tearoff_state), (mygal_combo_box_construct),
+	(mygal_combo_box_set_arrow_relief), (mygal_combo_box_set_title),
+	(mygal_combo_box_set_tearable):
+		Changed all occurances of GTK_IS_COMBO_BOX to MYGAL_IS_COMBO_BOX, to
+		complete the rename of this widget to prevent namespace collisions
+		with Gtk+-2.3.
+	
+	* src/prefs-dialog.glade:
+		Fixed alignment of Fill/Color widgets.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
 	* data/avery-iso-templates.xml:
 		Added user submitted templates.
 		Avery 8435A & 8435B, submitted by Ludger Solbach.

@@ -36,7 +36,7 @@ extern "C" {
 #define MYGAL_COMBO_BOX_TYPE          (mygal_combo_box_get_type())
 #define MYGAL_COMBO_BOX(obj)	      G_TYPE_CHECK_INSTANCE_CAST (obj, mygal_combo_box_get_type (), MygalComboBox)
 #define MYGAL_COMBO_BOX_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, mygal_combo_box_get_type (), MygalComboBoxClass)
-#define GTK_IS_COMBO_BOX(obj)         G_TYPE_CHECK_INSTANCE_TYPE (obj, mygal_combo_box_get_type ())
+#define MYGAL_IS_COMBO_BOX(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, mygal_combo_box_get_type ())
 
 typedef struct _MygalComboBox	     MygalComboBox;
 typedef struct _MygalComboBoxPrivate MygalComboBoxPrivate;

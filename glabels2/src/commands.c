@@ -163,8 +163,9 @@ gl_cmd_file_print (BonoboUIComponent *uic,
 	} else {
 
 		GL_VIEW(window->view)->print_dialog =
-			gl_print_dialog_new (GL_VIEW(window->view)->label,
-					     BONOBO_WINDOW(window));
+			g_object_ref (
+				gl_print_dialog_new (GL_VIEW(window->view)->label,
+						     BONOBO_WINDOW(window)) );
 
 		gtk_widget_show (GL_VIEW(window->view)->print_dialog);
 	}
