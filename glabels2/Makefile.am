@@ -2,54 +2,23 @@
 
 LIB_BARCODE_DIR = barcode-0.98
 
-SUBDIRS = po src doc
+SUBDIRS = po src data pixmaps doc
 
 EXTRA_DIST = \
-	glabels.desktop glabels.spec.in glabels.spec \
-	intltool-extract.in intltool-merge.in intltool-update.in
-
-Applicationsdir = $(datadir)/gnome/apps/Applications
-Applications_DATA = glabels.desktop
-
-pixmapdir=$(datadir)/pixmaps/glabels
-configdir=$(datadir)/glabels
-
-install-data-local:
-	@$(NORMAL_INSTALL)
-	if test -d $(srcdir)/pixmaps; then \
-	  $(mkinstalldirs) $(pixmapdir); \
-	  for pixmap in $(srcdir)/pixmaps/*; do \
-	    if test -f $$pixmap; then \
-	      $(INSTALL_DATA) $$pixmap $(pixmapdir); \
-	    fi \
-	  done \
-	fi
-	if test -d $(srcdir)/data; then \
-	  $(mkinstalldirs) $(configdir); \
-	  for file in $(srcdir)/data/*.template; do \
-	    if test -f $$file; then \
-	      $(INSTALL_DATA) $$file $(configdir); \
-	    fi \
-	  done \
-	fi 
+	README \
+	COPYING \
+	AUTHORS \
+	ChangeLog \
+	INSTALL \
+	NEWS \
+	TODO \
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in \
+	glabels.spec.in \
+	glabels.spec
 
 dist-hook:
-	if test -d pixmaps; then \
-	  mkdir $(distdir)/pixmaps; \
-	  for pixmap in pixmaps/*; do \
-	    if test -f $$pixmap; then \
-	      cp -p $$pixmap $(distdir)/pixmaps; \
-	    fi \
-	  done \
-	fi
-	if test -d data; then \
-	  mkdir $(distdir)/data; \
-	  for file in data/*.template; do \
-	    if test -f $$file; then \
-	      cp -p $$file $(distdir)/data; \
-	    fi \
-	  done \
-	fi
 	if test -d $(LIB_BARCODE_DIR); then \
 	  if test -f $(LIB_BARCODE_DIR)/Makefile; then \
 	    (cd $(LIB_BARCODE_DIR); $(MAKE) distclean); \
