@@ -72,7 +72,11 @@ struct _glView {
 	glLabel           *selection_data;
 	GtkWidget         *invisible;
 
-	GtkWidget         *menu;
+	/* Menus */
+	GList             *atomic_selection_items;
+	GList             *multi_selection_items;
+	GtkWidget         *selection_menu;
+	GtkWidget         *empty_selection_menu;
 };
 
 struct _glViewClass {
@@ -150,6 +154,10 @@ void       gl_view_lower_selection         (glView            *view);
 
 void       gl_view_rotate_selection        (glView            *view,
 					    gdouble            theta_degs);
+
+void       gl_view_rotate_selection_left   (glView            *view);
+
+void       gl_view_rotate_selection_right  (glView            *view);
 
 void       gl_view_flip_selection_horiz    (glView            *view);
 

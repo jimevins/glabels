@@ -311,7 +311,7 @@ gl_tools_rotate_objects_left (BonoboUIComponent *uic,
 	window = GL_WINDOW (user_data);
 
 	if (window->view != NULL) {
-		gl_view_rotate_selection (GL_VIEW(window->view), -90.0);
+		gl_view_rotate_selection_left (GL_VIEW(window->view));
 	}
 }
 
@@ -329,7 +329,7 @@ gl_tools_rotate_objects_right (BonoboUIComponent *uic,
 	window = GL_WINDOW (user_data);
 
 	if (window->view != NULL) {
-		gl_view_rotate_selection (GL_VIEW(window->view), 90.0);
+		gl_view_rotate_selection_right (GL_VIEW(window->view));
 	}
 }
 

@@ -38,6 +38,7 @@
 #include "view-barcode.h"
 #include "xml-label.h"
 #include "color.h"
+#include "stock.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -162,10 +163,11 @@ static int        item_event_arrow_mode          (GnomeCanvasItem *item,
 						  GdkEvent        *event,
 						  glViewObject    *view_object);
 
-static GtkWidget *new_selection_menu             (glView *view);
+static void       construct_selection_menu       (glView *view);
 
-static void       popup_selection_menu           (glView       *view,
-						  glViewObject *view_object,
+static void       construct_empty_selection_menu (glView *view);
+
+static void       popup_menu                     (glView       *view,
 						  GdkEvent     *event);
 
 static void       selection_clear_cb             (GtkWidget         *widget,
@@ -351,7 +353,8 @@ gl_view_construct (glView *view)
 
 	gl_view_construct_selection (view);
 
-	view->menu = new_selection_menu (view);
+	construct_selection_menu (view);
+	construct_empty_selection_menu (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1695,6 +1698,52 @@ gl_view_rotate_selection (glView *view,
 }
 
 /*****************************************************************************/
+/* Rotate selected objects 90 degrees left.                                  */
+/*****************************************************************************/
+void
+gl_view_rotate_selection_left (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_rotate (object, -90.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Rotate selected objects 90 degrees right.                                 */
+/*****************************************************************************/
+void
+gl_view_rotate_selection_right (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_rotate (object, 90.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
 /* Flip selected objects horizontally.                                       */
 /*****************************************************************************/
 void
@@ -2468,7 +2517,16 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 
 			}
 			return FALSE;
+		case 3:
+			gnome_canvas_window_to_world (canvas,
+						      event->button.x,
+						      event->button.y, &x, &y);
 
+			if (!object_at (view, x, y)) {
+				/* bring up apropriate menu for selection. */
+				popup_menu (view, event);
+			}
+			return FALSE;
 		default:
 			return FALSE;
 		}
@@ -2659,7 +2717,7 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			/* Add to current selection */
 			gl_view_select_object (view, view_object);
 			/* bring up apropriate menu for selection. */
-			popup_selection_menu (view, view_object, event);
+			popup_menu (view, event);
 			return TRUE;
 
 		default:
@@ -2730,66 +2788,247 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  create menu for multiple selections.                            */
+/* PRIVATE.  create menu for selections.                                     */
 /*---------------------------------------------------------------------------*/
-GtkWidget *
-new_selection_menu (glView *view)
+void
+construct_selection_menu (glView *view)
 {
-	GtkWidget *menu, *menuitem;
+	GtkWidget *menu, *menuitem, *submenu;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), NULL);
+	g_return_if_fail (GL_IS_VIEW (view));
 
 	menu = gtk_menu_new ();
 
-	menuitem = gtk_menu_item_new_with_label (_("Delete"));
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_PROPERTIES, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_edit_object_props), view);
+	view->atomic_selection_items =
+		g_list_prepend (view->atomic_selection_items, menuitem);
+
+	/*
+	 * Separator -------------------------
+	 */
+	menuitem = gtk_menu_item_new ();
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+
+	/*
+	 * Submenu: Order
+	 */
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Order"));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	submenu = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), submenu);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ORDER_TOP, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_raise_selection), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ORDER_BOTTOM, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_lower_selection), view);
+
+	/*
+	 * Submenu: Rotate/Flip
+	 */
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Rotate/Flip"));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	submenu = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), submenu);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ROTATE_LEFT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_rotate_selection_left), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ROTATE_RIGHT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_rotate_selection_right), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_FLIP_HORIZ, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_flip_selection_horiz), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_FLIP_VERT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_flip_selection_vert), view);
+
+	/*
+	 * Submenu: Align Horizontally
+	 */
+	menuitem = gtk_menu_item_new_with_mnemonic (_("Align _Horizontally"));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	submenu = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), submenu);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_LEFT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_left), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_HCENTER, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_hcenter), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_RIGHT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_right), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_CENTER_HORIZ, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_center_selection_horiz), view);
+
+	/*
+	 * Submenu: Align Vertically
+	 */
+	menuitem = gtk_menu_item_new_with_mnemonic (_("Align _Vertically"));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	submenu = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), submenu);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_TOP, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_top), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_VCENTER, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_vcenter), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_ALIGN_BOTTOM, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_align_selection_bottom), view);
+	view->multi_selection_items =
+		g_list_prepend (view->multi_selection_items, menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GL_STOCK_CENTER_VERT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_center_selection_vert), view);
+
+	/*
+	 * Separator -------------------------
+	 */
+	menuitem = gtk_menu_item_new ();
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_CUT, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_cut), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_copy), view);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PASTE, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_paste), view);
+
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Delete"));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 	gtk_widget_show (menuitem);
 	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
 				  G_CALLBACK (gl_view_delete_selection), view);
 
-	menuitem = gtk_menu_item_new ();
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
 
-	menuitem = gtk_menu_item_new_with_label (_("Bring to front"));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_view_raise_selection), view);
-
-	menuitem = gtk_menu_item_new_with_label (_("Send to back"));
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	gtk_widget_show (menuitem);
-	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (gl_view_lower_selection), view);
+	view->selection_menu = menu;
 
 	gl_debug (DEBUG_VIEW, "END");
+}
 
-	return menu;
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  create menu for empty selections.                               */
+/*---------------------------------------------------------------------------*/
+void
+construct_empty_selection_menu (glView *view)
+{
+	GtkWidget *menu, *menuitem, *submenu;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	menu = gtk_menu_new ();
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PASTE, NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+	gtk_widget_show (menuitem);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_paste), view);
+
+
+	view->empty_selection_menu = menu;
+
+	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  popup menu for given item.                                      */
 /*---------------------------------------------------------------------------*/
 static void
-popup_selection_menu (glView       *view,
-		      glViewObject *view_object,
-		      GdkEvent     *event)
+popup_menu (glView       *view,
+	    GdkEvent     *event)
 {
 	GtkMenu *menu;
+	GList   *p;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
-	if (gl_view_is_selection_atomic (view)) {
+	if (gl_view_is_selection_empty (view)) {
 
-		menu = gl_view_object_get_menu (view_object);
-		if (menu != NULL) {
-			gtk_menu_popup (GTK_MENU (menu),
+		if (view->empty_selection_menu != NULL) {
+			gtk_menu_popup (GTK_MENU (view->empty_selection_menu),
 					NULL, NULL, NULL, NULL,
 					event->button.button,
 					event->button.time);
@@ -2797,8 +3036,18 @@ popup_selection_menu (glView       *view,
 
 	} else {
 
-		if (view->menu != NULL) {
-			gtk_menu_popup (GTK_MENU (view->menu),
+		for (p=view->atomic_selection_items; p!=NULL; p=p->next) {
+			gtk_widget_set_sensitive (GTK_WIDGET(p->data),
+						  gl_view_is_selection_atomic(view));
+		}
+
+		for (p=view->multi_selection_items; p!=NULL; p=p->next) {
+			gtk_widget_set_sensitive (GTK_WIDGET(p->data),
+						  !gl_view_is_selection_atomic(view));
+		}
+
+		if (view->selection_menu != NULL) {
+			gtk_menu_popup (GTK_MENU (view->selection_menu),
 					NULL, NULL, NULL, NULL,
 					event->button.button,
 					event->button.time);
