@@ -231,15 +231,29 @@ gl_label_text_set_props (glLabelText     *ltext,
 			 guint            color,
 			 GtkJustification just)
 {
-	GdkPixbuf *pixbuf;
+	GList     *family_names;
+	gchar     *good_font_family;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
+	/* Make sure we have a valid font family.  if not privide a good default. */
+	family_names = gnome_font_family_list ();
+	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
+		good_font_family = g_strdup (font_family);
+	} else {
+		if (family_names != NULL) {
+			good_font_family = g_strdup (family_names->data); /* 1st entry */
+		} else {
+			good_font_family = NULL;
+		}
+	}
+	gnome_font_family_list_free (family_names);
+
 	g_free (ltext->private->font_family);
 
-	ltext->private->font_family      = g_strdup (font_family);
+	ltext->private->font_family      = good_font_family;
 	ltext->private->font_size        = font_size;
 	ltext->private->font_weight      = font_weight;
 	ltext->private->font_italic_flag = font_italic_flag;

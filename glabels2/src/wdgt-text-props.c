@@ -409,7 +409,24 @@ gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
 			       guint            color,
 			       GtkJustification just)
 {
-	gtk_entry_set_text (GTK_ENTRY (text->font_family_entry), font_family);
+	GList *family_names;
+	gchar *good_font_family;
+
+	/* Make sure we have a valid font family.  if not privide a good default. */
+	family_names = gnome_font_family_list ();
+	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
+		good_font_family = g_strdup (font_family);
+	} else {
+		if (family_names != NULL) {
+			good_font_family = g_strdup (family_names->data); /* 1st entry */
+		} else {
+			good_font_family = NULL;
+		}
+	}
+	gnome_font_family_list_free (family_names);
+
+	gtk_entry_set_text (GTK_ENTRY (text->font_family_entry), good_font_family);
+	g_free (good_font_family);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (text->font_size_spin),
 				   font_size);
