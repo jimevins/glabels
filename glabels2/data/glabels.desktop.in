@@ -8,3 +8,4 @@ Icon=glabels/glabels-icon.png
 Terminal=0
 Type=Application
 Categories=Application;X-Red-Hat-BaseApplication;Office;X-Red-Hat-Base;
+StartupNotify=true
