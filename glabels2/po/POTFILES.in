@@ -141,14 +141,6 @@ src/color.c
 src/color.h
 src/canvas-hacktext.c
 src/canvas-hacktext.h
-src/gnome-recent-model.c
-src/gnome-recent-model.h
-src/gnome-recent-util.c
-src/gnome-recent-util.h
-src/gnome-recent-view.c
-src/gnome-recent-view.h
-src/gnome-recent-view-bonobo.c
-src/gnome-recent-view-bonobo.h
 src/debug.c
 src/debug.h
 src/mygal/color-group.c
