@@ -56,7 +56,7 @@ static void gl_wdgt_text_entry_class_init    (glWdgtTextEntryClass *class);
 static void gl_wdgt_text_entry_instance_init (glWdgtTextEntry      *text_entry);
 static void gl_wdgt_text_entry_finalize      (GObject              *object);
 static void gl_wdgt_text_entry_construct     (glWdgtTextEntry      *text_entry,
-					      GList                *field_defs);
+					      glMerge              *merge);
 
 static void changed_cb (glWdgtTextEntry *text_entry);
 static void insert_cb  (glWdgtTextEntry *text_entry);
@@ -151,7 +151,7 @@ gl_wdgt_text_entry_finalize (GObject *object)
 /* New widget.                                                              */
 /****************************************************************************/
 GtkWidget *
-gl_wdgt_text_entry_new (GList *field_defs)
+gl_wdgt_text_entry_new (glMerge *merge)
 {
 	glWdgtTextEntry *text_entry;
 
@@ -159,7 +159,7 @@ gl_wdgt_text_entry_new (GList *field_defs)
 
 	text_entry = g_object_new (gl_wdgt_text_entry_get_type (), NULL);
 
-	gl_wdgt_text_entry_construct (text_entry, field_defs);
+	gl_wdgt_text_entry_construct (text_entry, merge);
 
 	gl_debug (DEBUG_WDGT, "END");
 
@@ -171,7 +171,7 @@ gl_wdgt_text_entry_new (GList *field_defs)
 /*--------------------------------------------------------------------------*/
 static void
 gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
-			      GList           *field_defs)
+			      glMerge         *merge)
 {
 	GtkWidget *wvbox, *whbox, *wscroll;
 	GList *keys;
@@ -216,7 +216,7 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 
 	/* Key entry widget */
 	text_entry->key_combo = gtk_combo_new ();
-	keys = gl_merge_get_key_list (field_defs);
+	keys = gl_merge_get_key_list (merge);
 	if (keys != NULL)
 		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
 					       keys);
@@ -283,11 +283,11 @@ insert_cb (glWdgtTextEntry *text_entry)
 /****************************************************************************/
 void
 gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
-				   GList           *field_defs)
+				   glMerge         *merge)
 {
 	GList *keys;
 
-	keys = gl_merge_get_key_list (field_defs);
+	keys = gl_merge_get_key_list (merge);
 	if ( keys != NULL ) {
 		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
 					       keys);

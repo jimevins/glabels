@@ -287,12 +287,11 @@ construct_properties_dialog (glViewObject *view_object)
 	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 
 	/* barcode data */
-	view_barcode->private->bc_data =
-		gl_wdgt_bc_data_new (merge->field_defs);
+	view_barcode->private->bc_data = gl_wdgt_bc_data_new (merge);
 	gl_wdgt_bc_data_set_label_size_group (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
 					      label_size_group);
 	gl_wdgt_bc_data_set_data (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-				  (merge->type != GL_MERGE_NONE),
+				  (merge != NULL),
 				  text_node);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
 				    view_barcode->private->bc_data);
@@ -556,10 +555,10 @@ update_dialog_cb (glLabelObject  *object,
 	/* Update widgets in property dialog */
 
 	gl_wdgt_bc_data_set_data (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-				  (merge->type != GL_MERGE_NONE),
+				  (merge != NULL),
 				  text_node);
 	gl_wdgt_bc_data_set_field_defs (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
-					merge->field_defs);
+					merge);
 	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
 				     scale, color);
 	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),

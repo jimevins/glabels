@@ -339,22 +339,21 @@ gl_print_batch (GnomePrintMaster *master,
 	merge = gl_label_get_merge (label);
 	template = gl_label_get_template (label);
 
-	if ( merge->type == GL_MERGE_NONE ) {
+	if ( merge == NULL ) {
 		n_per_page = gl_template_get_n_labels(template);
 
 		gl_print_simple (master, label, n_sheets, 1, n_per_page,
 				 outline_flag, reverse_flag);
 	} else {
-		record_list = gl_merge_read_data (merge->type,
-						  merge->field_defs,
-						  merge->src);
+		record_list = gl_merge_read_record_list (merge);
 
 		gl_print_merge_collated (master, label, record_list,
 					 n_copies, 1,
 					 outline_flag, reverse_flag);
 	}
-	gl_merge_free (&merge);
 	gl_template_free (&template);
+
+	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_PRINT, "END");
 }

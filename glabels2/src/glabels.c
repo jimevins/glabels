@@ -28,7 +28,7 @@
 
 #include "splash.h"
 #include "stock.h"
-#include "merge.h"
+#include "merge-init.h"
 #include "template.h"
 #include "prefs.h"
 #include "debug.h"
@@ -165,7 +165,6 @@ main (int argc, char **argv)
 
 	gl_template_init();
 	gl_merge_init();
-	gl_merge_ui_init();
 	gl_recent_init();
 
 	if (bonobo_ui_init ("glabels", VERSION, &argc, argv) == FALSE) {

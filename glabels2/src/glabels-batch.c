@@ -25,7 +25,7 @@
 #include <gnome.h>
 #include <libgnomeprint/gnome-print-master.h>
 
-#include "merge.h"
+#include "merge-init.h"
 #include "xml-label.h"
 #include "template.h"
 #include "print.h"

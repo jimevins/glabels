@@ -144,7 +144,7 @@ job_page_new (GtkWidget *dlg,
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
 	merge = gl_label_get_merge (label);
-	if (merge->type == GL_MERGE_NONE) {
+	if (merge == NULL) {
 
 		/* ----------- Add simple-copies widget ------------ */
 		wframe = gl_hig_category_new (_("Copies"));
@@ -167,13 +167,13 @@ job_page_new (GtkWidget *dlg,
 		prmerge = gl_wdgt_print_merge_new (label);
 		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), prmerge);
 
-		record_list = gl_merge_read_data (merge->type,
-						  merge->field_defs,
-						  merge->src);
+		record_list = gl_merge_read_record_list (merge);
+
 		n_records = gl_merge_count_records( record_list );
 		gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE(prmerge),
 					   n_copies, first, n_records,
 					   collate_flag);
+		g_object_unref (G_OBJECT(merge));
 	}
 	gtk_widget_show_all (wframe);
 	g_object_set_data (G_OBJECT(dlg), "copies", copies);
@@ -267,7 +267,7 @@ print_response (GtkDialog *dlg,
 
 		merge = gl_label_get_merge (label);
 
-		if (merge->type == GL_MERGE_NONE) {
+		if (merge == NULL) {
 
 			gl_wdgt_print_copies_get_range (GL_WDGT_PRINT_COPIES (copies),
 							&n_sheets, &first, &last);
@@ -278,9 +278,7 @@ print_response (GtkDialog *dlg,
 
 		} else {
 
-			record_list = gl_merge_read_data (merge->type,
-							  merge->field_defs,
-							  merge->src);
+			record_list = gl_merge_read_record_list (merge);
 			gl_wdgt_print_merge_get_copies (GL_WDGT_PRINT_MERGE (prmerge),
 							&n_copies, &first,
 							&collate_flag);
@@ -290,9 +288,8 @@ print_response (GtkDialog *dlg,
 					    collate_flag,
 					    outline_flag,
 					    reverse_flag);
+			g_object_unref (G_OBJECT(merge));
 		}
-
-		gl_merge_free (&merge);
 		break;
 
 	default:

@@ -611,36 +611,19 @@ static void
 xml_parse_merge_fields (xmlNodePtr node,
 			glLabel * label)
 {
-	xmlNodePtr child;
-	glMerge *merge;
-	glMergeFieldDefinition *field_def;
+	xmlNodePtr  child;
+	glMerge    *merge;
+	gchar      *src;
 
 	gl_debug (DEBUG_XML, "START");
 
-	merge = gl_merge_new ();
-
-	merge->type = gl_merge_text_to_type (xmlGetProp (node, "type"));
-	merge->src = xmlGetProp (node, "src");
-
-	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
-
-		if (g_strcasecmp (child->name, "Field") == 0) {
-			field_def = g_new0 (glMergeFieldDefinition, 1);
-			field_def->key = xmlGetProp (child, "key");
-			field_def->loc = xmlGetProp (child, "loc");
-			merge->field_defs =
-			    g_list_append (merge->field_defs,
-					   field_def);
-		} else if (!xmlNodeIsText (child)) {
-			g_warning ("Unexpected Merge_Fields child: \"%s\"",
-				   child->name);
-		}
-
-	}
+	merge = gl_merge_new (xmlGetProp (node, "type"));
+	src = xmlGetProp (node, "src");
+	gl_merge_set_src (merge, src);
 
 	gl_label_set_merge (label, merge);
 
-	gl_merge_free (&merge);
+	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -731,10 +714,10 @@ xml_label_to_doc (glLabel * label,
 
 	merge = gl_label_get_merge (label);
 	gl_debug (DEBUG_XML, "merge=%p", merge);
-	if (merge->type != GL_MERGE_NONE) {
+	if (merge != NULL) {
 		xml_create_merge_fields (doc->xmlRootNode, ns, label);
 	}
-	gl_merge_free (&merge);
+	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -1122,7 +1105,6 @@ xml_create_merge_fields (xmlNodePtr root,
 	gchar *string;
 	GList *p;
 	glMerge *merge;
-	glMergeFieldDefinition *field_def;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1130,21 +1112,15 @@ xml_create_merge_fields (xmlNodePtr root,
 
 	node = xmlNewChild (root, ns, "Merge_Fields", NULL);
 
-	string = gl_merge_type_to_text (merge->type);
+	string = gl_merge_get_name (merge);
 	xmlSetProp (node, "type", string);
 	g_free (string);
 
-	xmlSetProp (node, "src", merge->src);
+	string = gl_merge_get_src (merge);
+	xmlSetProp (node, "src", string);
+	g_free (string);
 
-	for (p = merge->field_defs; p != NULL; p = p->next) {
-		field_def = (glMergeFieldDefinition *) p->data;
-
-		child = xmlNewChild (node, ns, "Field", NULL);
-		xmlSetProp (child, "key", field_def->key);
-		xmlSetProp (child, "loc", field_def->loc);
-	}
-
-	gl_merge_free (&merge);
+	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_XML, "END");
 }

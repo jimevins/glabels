@@ -55,7 +55,7 @@ static void gl_wdgt_bc_data_class_init    (glWdgtBCDataClass *class);
 static void gl_wdgt_bc_data_instance_init (glWdgtBCData      *bc_data);
 static void gl_wdgt_bc_data_finalize      (GObject           *object);
 static void gl_wdgt_bc_data_construct     (glWdgtBCData      *bc_data,
-					   GList             *field_defs);
+					   glMerge           *merge);
 
 static void changed_cb                    (glWdgtBCData      *bc_data);
 static void radio_toggled_cb              (GtkToggleButton   *togglebutton,
@@ -154,7 +154,7 @@ gl_wdgt_bc_data_finalize (GObject *object)
 /* New widget.                                                              */
 /****************************************************************************/
 GtkWidget *
-gl_wdgt_bc_data_new (GList *field_defs)
+gl_wdgt_bc_data_new (glMerge *merge)
 {
 	glWdgtBCData *bc_data;
 
@@ -162,7 +162,7 @@ gl_wdgt_bc_data_new (GList *field_defs)
 
 	bc_data = g_object_new (gl_wdgt_bc_data_get_type (), NULL);
 
-	gl_wdgt_bc_data_construct (bc_data, field_defs);
+	gl_wdgt_bc_data_construct (bc_data, merge);
 
 	gl_debug (DEBUG_WDGT, "END");
 
@@ -174,7 +174,7 @@ gl_wdgt_bc_data_new (GList *field_defs)
 /*--------------------------------------------------------------------------*/
 static void
 gl_wdgt_bc_data_construct (glWdgtBCData *bc_data,
-			   GList        *field_defs)
+			   glMerge      *merge)
 {
 	GtkWidget *wvbox, *whbox;
 	GSList *radio_group = NULL;
@@ -221,7 +221,7 @@ gl_wdgt_bc_data_construct (glWdgtBCData *bc_data,
 
 	/* Key entry widget */
 	bc_data->key_combo = gtk_combo_new ();
-	keys = gl_merge_get_key_list (field_defs);
+	keys = gl_merge_get_key_list (merge);
 	if (keys != NULL)
 		gtk_combo_set_popdown_strings (GTK_COMBO (bc_data->key_combo),
 					       keys);
@@ -280,13 +280,13 @@ radio_toggled_cb (GtkToggleButton *togglebutton,
 /****************************************************************************/
 void
 gl_wdgt_bc_data_set_field_defs  (glWdgtBCData *bc_data,
-				 GList        *field_defs)
+				 glMerge      *merge)
 {
 	GList *keys;
 
 	gl_debug (DEBUG_WDGT, "START");
 
-	keys = gl_merge_get_key_list (field_defs);
+	keys = gl_merge_get_key_list (merge);
 	if ( keys != NULL ) {
 		gtk_combo_set_popdown_strings (GTK_COMBO (bc_data->key_combo),
 					       keys);

@@ -279,11 +279,11 @@ construct_properties_dialog (glViewObject *view_object)
 	wsection = gl_hig_category_new (_("Text"));
 	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_text->private->text_entry =
-		gl_wdgt_text_entry_new (merge->field_defs);
+		gl_wdgt_text_entry_new (merge);
 	gl_wdgt_text_entry_set_label_size_group (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
 						 label_size_group);
 	gl_wdgt_text_entry_set_text (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-				     (merge->type != GL_MERGE_NONE),
+				     (merge != NULL),
 				     lines);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
 				    view_text->private->text_entry);
@@ -507,10 +507,10 @@ update_dialog_cb (glLabelObject  *object,
 	/* Update widgets in property dialog */
 
 	gl_wdgt_text_entry_set_text (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-				     (merge->type != GL_MERGE_NONE),
+				     (merge != NULL),
 				     lines);
 	gl_wdgt_text_entry_set_field_defs (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
-					   merge->field_defs);
+					   merge);
 	gl_wdgt_text_props_set_params (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
 				       font_family, font_size, font_weight,
 				       font_italic_flag, color, just);

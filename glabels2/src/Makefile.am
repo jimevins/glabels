@@ -84,8 +84,8 @@ glabels_SOURCES = 			\
 	view-barcode.h			\
 	view-highlight.c		\
 	view-highlight.h		\
-	merge-properties.c		\
-	merge-properties.h		\
+	merge-properties-dialog.c	\
+	merge-properties-dialog.h	\
 	print.c				\
 	print.h				\
 	print-dialog.c			\
@@ -120,12 +120,10 @@ glabels_SOURCES = 			\
 	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
+	merge-init.c			\
+	merge-init.h			\
 	merge-text.c			\
 	merge-text.h			\
-	merge-ui.c			\
-	merge-ui.h			\
-	merge-ui-text.c			\
-	merge-ui-text.h			\
 	text-node.c			\
 	text-node.h			\
 	wdgt-text-props.c		\
@@ -210,6 +208,8 @@ glabels_batch_SOURCES = 		\
 	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
+	merge-init.c			\
+	merge-init.h			\
 	merge-text.c			\
 	merge-text.h			\
 	text-node.c			\

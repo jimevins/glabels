@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  merge_properties.h:  document merge properties dialog module header file
+ *  merge-init.h:  document merge initialization header file
  *
  *  Copyright (C) 2002  Jim Evins <evins@snaught.com>.
  *
@@ -19,11 +19,15 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-#ifndef __MERGE_PROPERTIES_H__
-#define __MERGE_PROPERTIES_H__
+#ifndef __MERGE_INIT_H__
+#define __MERGE_INIT_H__
 
-#include "view.h"
+#include "merge.h"
 
-extern void gl_merge_properties_dialog (glView *view);
+G_BEGIN_DECLS
+
+void gl_merge_init (void);
+
+G_END_DECLS
 
 #endif

@@ -3,7 +3,7 @@
  *
  *  merge.c:  document merge module
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,431 +19,498 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-
 #include <config.h>
 
 #include <gnome.h>
+#include <string.h>
 
 #include "merge.h"
-#include "merge-text.h"
 
 #include "debug.h"
 
-/*===========================================*/
-/* Private types                             */
-/*===========================================*/
-typedef struct {
-	gchar *short_text;
-	gchar *long_text;
-} TypeTexts;
+/*========================================================*/
+/* Private types.                                         */
+/*========================================================*/
+
+struct _glMergePrivate {
+	gchar             *name;
+	gchar             *description;
+	gchar             *src;
+	glMergeSrcType     src_type;
+};
+
+enum {
+	LAST_SIGNAL
+};
 
 typedef struct {
 
-	glMergeInput * (*open) (glMergeType, GList *, gchar *);
-	void (*close) (glMergeInput *);
-	glMergeRecord * (*get_record) (glMergeInput *);
-	GList * (*get_raw_record) (glMergeInput *);
+	GType              type;
+	gchar             *name;
+	gchar             *description;
+	glMergeSrcType     src_type;
 
-} BackendFunctions;
+	const gchar       *first_arg_name;
+	va_list            args;
 
-/*===========================================*/
-/* Private globals                           */
-/*===========================================*/
+} Backend;
 
-static TypeTexts type_text[GL_MERGE_N_TYPES];
+/*========================================================*/
+/* Private globals.                                       */
+/*========================================================*/
 
-static BackendFunctions func[GL_MERGE_N_TYPES];
+static GObjectClass *parent_class = NULL;
 
-/*===========================================*/
-/* Local function prototypes                 */
-/*===========================================*/
+static guint signals[LAST_SIGNAL] = {0};
+
+static GList *backends = NULL;
+
+/*========================================================*/
+/* Private function prototypes.                           */
+/*========================================================*/
+
+static void gl_merge_class_init    (glMergeClass *klass);
+static void gl_merge_instance_init (glMerge      *object);
+static void gl_merge_finalize      (GObject      *object);
+
 
 
 /*****************************************************************************/
-/* Initialize module.                                                        */
+/* Register a new merge backend.                                             */
 /*****************************************************************************/
 void
-gl_merge_init (void)
+gl_merge_register_backend (GType              type,
+			   gchar             *name,
+			   gchar             *description,
+			   glMergeSrcType     src_type,
+			   const gchar       *first_arg_name,
+			   ...)
 {
-	gint i;
+	Backend *backend;
+	va_list  args;
+	gchar   *a_nam;
+	gpointer a_val;
 
-	gl_debug (DEBUG_MERGE, "START");
+	backend = g_new0 (Backend, 1);
 
-	/* Register backend functions and data. */
+	backend->type = type;
+	backend->name = g_strdup (name);
+	backend->description = g_strdup (description);
 
-	i = GL_MERGE_NONE;
-	func[i].open = NULL;
-	func[i].close = NULL;
-	func[i].get_record = NULL;
-	func[i].get_raw_record = NULL;
-	type_text[i].short_text = "None";
-	type_text[i].long_text = _("None");
+	backend->first_arg_name = first_arg_name;
+	va_start (args, first_arg_name);
+	G_VA_COPY (backend->args, args);
+	va_end (args);
 
-	i = GL_MERGE_TEXT_TAB;
-	func[i].open = gl_merge_text_open;
-	func[i].close = gl_merge_text_close;
-	func[i].get_record = gl_merge_text_get_record;
-	func[i].get_raw_record = gl_merge_text_get_raw_record;
-	type_text[i].short_text = "Text/Tab";
-	type_text[i].long_text = _("Text with tab separators");
+	backends = g_list_append (backends, backend);
 
-	i = GL_MERGE_TEXT_COMMA;
-	func[i].open = gl_merge_text_open;
-	func[i].close = gl_merge_text_close;
-	func[i].get_record = gl_merge_text_get_record;
-	func[i].get_raw_record = gl_merge_text_get_raw_record;
-	type_text[i].short_text = "Text/Comma";
-	type_text[i].long_text = _("Text with comma separators");
-
-	i = GL_MERGE_TEXT_COLON;
-	func[i].open = gl_merge_text_open;
-	func[i].close = gl_merge_text_close;
-	func[i].get_record = gl_merge_text_get_record;
-	func[i].get_raw_record = gl_merge_text_get_raw_record;
-	type_text[i].short_text = "Text/Colon";
-	type_text[i].long_text = _("Text with colon separators");
-
-	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Create new merge information structure.                                   */
-/*****************************************************************************/
-glMerge *gl_merge_new (void)
-{
-	gl_debug (DEBUG_MERGE, "");
-
-	return g_new0 (glMerge, 1);
-}
-
-/*****************************************************************************/
-/* Duplicate merge information structure.                                    */
-/*****************************************************************************/
-glMerge *gl_merge_dup (glMerge *orig)
-{
-	glMerge *new;
-
-	gl_debug (DEBUG_MERGE, "START");
-
-	new = gl_merge_new ();
-
-	new->type       = orig->type;
-	new->src        = g_strdup (orig->src);
-	new->field_defs = gl_merge_dup_field_def_list (orig->field_defs);
-
-	gl_debug (DEBUG_MERGE, "END");
-	return new;
-}
-
-/*****************************************************************************/
-/* Free existing merge information structure.                                */
-/*****************************************************************************/
-void    gl_merge_free (glMerge **merge)
-{
-	gl_debug (DEBUG_MERGE, "START");
-
-	g_free ((*merge)->src);
-	(*merge)->src = NULL;
-	gl_merge_free_field_def_list (&(*merge)->field_defs);
-
-	*merge = NULL;
-
-	gl_debug (DEBUG_MERGE, "END");
-}
-
-/*****************************************************************************/
-/* Lookup type from short text.                                              */
-/*****************************************************************************/
-glMergeType
-gl_merge_text_to_type (gchar * text)
-{
-	glMergeType type;
-
-	gl_debug (DEBUG_MERGE, "START");
-
-	for (type = 0; type < GL_MERGE_N_TYPES; type++) {
-		if (g_strcasecmp (text, type_text[type].short_text) == 0) {
-			gl_debug (DEBUG_MERGE, "END");
-			return type;
-		}
-	}
-
-	gl_debug (DEBUG_MERGE, "END");
-
-	return GL_MERGE_NONE;
-}
-
-/*****************************************************************************/
-/* Lookup short text for given type.                                         */
-/*****************************************************************************/
-gchar *
-gl_merge_type_to_text (glMergeType type)
-{
-	gl_debug (DEBUG_MERGE, "");
-
-	return g_strdup (type_text[type].short_text);
-}
-
-/*****************************************************************************/
-/* Lookup type from long descriptive text.                                   */
-/*****************************************************************************/
-glMergeType
-gl_merge_long_text_to_type (gchar * text)
-{
-	glMergeType type;
-
-	gl_debug (DEBUG_MERGE, "START");
-
-	for (type = 0; type < GL_MERGE_N_TYPES; type++) {
-		if (g_strcasecmp (text, type_text[type].long_text) == 0) {
-	                gl_debug (DEBUG_MERGE, "END");
-			return type;
-		}
-	}
-
-	gl_debug (DEBUG_MERGE, "END");
-	return GL_MERGE_NONE;
-}
-
-/*****************************************************************************/
-/* Lookup longer, more descriptive text for given type.                      */
-/*****************************************************************************/
-gchar *
-gl_merge_type_to_long_text (glMergeType type)
-{
-	gl_debug (DEBUG_MERGE, "");
-
-	return g_strdup (type_text[type].long_text);
-}
-
-/*****************************************************************************/
-/* Retrieve a list of descriptive texts for all available types.             */
+/* Get list of registered backend descriptions.                              */
 /*****************************************************************************/
 GList *
-gl_merge_get_long_texts_list (void)
+gl_merge_get_descriptions (void)
 {
-	glMergeType type;
-	GList *list = NULL;
+	GList   *descriptions = NULL;
+	GList   *p;
+	Backend *backend;
 
-	gl_debug (DEBUG_MERGE, "START");
+	descriptions = g_list_append (descriptions, g_strdup(_("None")));
 
-	for (type = 0; type < GL_MERGE_N_TYPES; type++) {
-
-		list = g_list_append (list, gl_merge_type_to_long_text (type));
-
+	for ( p=backends; p!=NULL; p=p->next) {
+		backend = (Backend *)p->data;
+		descriptions = g_list_append (descriptions,
+					      g_strdup(backend->description));
 	}
 
-	gl_debug (DEBUG_MERGE, "END");
-	return list;
+	return descriptions;
 }
 
 /*****************************************************************************/
-/* Free list of descriptive texts.                                           */
+/* Free list of descriptions.                                                */
 /*****************************************************************************/
 void
-gl_merge_free_long_texts_list (GList ** list)
+gl_merge_free_descriptions (GList **descriptions)
 {
 	GList *p;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	for (p = *list; p != NULL; p = p->next) {
+	for (p = *descriptions; p != NULL; p = p->next) {
 		g_free (p->data);
 		p->data = NULL;
 	}
 
-	g_list_free (*list);
-	*list = NULL;
+	g_list_free (*descriptions);
+	*descriptions = NULL;
 
 	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Duplicate field definitions.                                              */
+/* Lookup name of backend from description.                                  */
 /*****************************************************************************/
-GList *gl_merge_dup_field_def_list (GList * orig)
+gchar *
+gl_merge_description_to_name (gchar *description)
 {
-	GList *new, *p_orig;
-	glMergeFieldDefinition *fd_new, *fd_orig;
+	GList   *p;
+	Backend *backend;
+
+	if (g_strcasecmp(description, _("None")) == 0) {
+		return g_strdup("None");
+	}
+
+	for ( p=backends; p!=NULL; p=p->next) {
+		backend = (Backend *)p->data;
+		if (g_strcasecmp(description, backend->description) == 0) {
+			return g_strdup(backend->name);
+		}
+	}
+
+	return g_strdup("None");
+}
+
+/*****************************************************************************/
+/* Boilerplate object stuff.                                                 */
+/*****************************************************************************/
+GType
+gl_merge_get_type (void)
+{
+	static GType type = 0;
+
+	if (!type) {
+		GTypeInfo info = {
+			sizeof (glMergeClass),
+			NULL,
+			NULL,
+			(GClassInitFunc) gl_merge_class_init,
+			NULL,
+			NULL,
+			sizeof (glMerge),
+			0,
+			(GInstanceInitFunc) gl_merge_instance_init,
+		};
+
+		type = g_type_register_static (G_TYPE_OBJECT,
+					       "glMerge", &info, 0);
+	}
+
+	return type;
+}
+
+static void
+gl_merge_class_init (glMergeClass *klass)
+{
+	GObjectClass *object_class = (GObjectClass *) klass;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	new = NULL;
-	for (p_orig = orig; p_orig != NULL; p_orig = p_orig->next) {
-		fd_orig = (glMergeFieldDefinition *) p_orig->data;
-		fd_new  = g_new0 (glMergeFieldDefinition, 1);
+	parent_class = g_type_class_peek_parent (klass);
 
-		fd_new->key = g_strdup (fd_orig->key);
-		fd_new->loc = g_strdup (fd_orig->loc);
-
-		new = g_list_append (new, fd_new);
-	}
+	object_class->finalize = gl_merge_finalize;
 
 	gl_debug (DEBUG_MERGE, "END");
-	return new;
+}
+
+static void
+gl_merge_instance_init (glMerge *merge)
+{
+	gl_debug (DEBUG_MERGE, "START");
+
+	merge->private = g_new0 (glMergePrivate, 1);
+
+	gl_debug (DEBUG_MERGE, "END");
+}
+
+static void
+gl_merge_finalize (GObject *object)
+{
+	gl_debug (DEBUG_MERGE, "START");
+
+	g_return_if_fail (object && GL_IS_MERGE (object));
+
+	g_free (GL_MERGE(object)->private->name);
+	g_free (GL_MERGE(object)->private->description);
+	g_free (GL_MERGE(object)->private->src);
+	g_free (GL_MERGE(object)->private);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Free list of field definitions.                                           */
+/* New merge object.                                                         */
+/*****************************************************************************/
+glMerge *
+gl_merge_new (gchar *name)
+{
+	glMerge *merge = NULL;
+	GList   *p;
+	Backend *backend;
+
+	gl_debug (DEBUG_MERGE, "START");
+
+	for (p=backends; p!=NULL; p=p->next) {
+		backend = (Backend *)p->data;
+
+		if (g_strcasecmp(name, backend->name) == 0) {
+
+			merge = GL_MERGE (g_object_new_valist (backend->type,
+							       backend->first_arg_name,
+							       backend->args));
+
+			merge->private->name        = name;
+			merge->private->description = backend->description;
+			merge->private->src_type    = backend->src_type;
+
+			break;
+		}
+	}
+
+	if ( (merge == NULL) && (g_strcasecmp (name, "None") != 0)) {
+		g_warning ("Unknown merge backend \"%s\"", name);
+	}
+
+	gl_debug (DEBUG_MERGE, "END");
+
+	return merge;
+}
+
+/*****************************************************************************/
+/* Duplicate merge.                                                         */
+/*****************************************************************************/
+glMerge *
+gl_merge_dup (glMerge *src_merge)
+{
+	glMerge    *dst_merge;
+
+	gl_debug (DEBUG_MERGE, "START");
+
+	if (src_merge == NULL) {
+		gl_debug (DEBUG_MERGE, "END (NULL)");
+		return NULL;
+	}
+
+	g_return_val_if_fail (GL_IS_MERGE (src_merge), NULL);
+
+	dst_merge = g_object_new (G_OBJECT_TYPE(src_merge), NULL);
+	dst_merge->private->name        = g_strdup (src_merge->private->name);
+	dst_merge->private->description = g_strdup (src_merge->private->description);
+	dst_merge->private->src         = g_strdup (src_merge->private->src);
+
+	if ( GL_MERGE_GET_CLASS(src_merge)->copy != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_MERGE_GET_CLASS(src_merge)->copy (dst_merge, src_merge);
+
+	}
+
+	gl_debug (DEBUG_MERGE, "END");
+
+	return dst_merge;
+}
+
+/*****************************************************************************/
+/* Get name of merge.                                                        */
+/*****************************************************************************/
+gchar *
+gl_merge_get_name (glMerge *merge)
+{
+	gl_debug (DEBUG_MERGE, "");
+
+	if (merge == NULL) {
+		return g_strdup("None");
+	}
+
+	g_return_val_if_fail (GL_IS_MERGE (merge), g_strdup("None"));
+
+	return g_strdup(merge->private->name);
+}
+
+/*****************************************************************************/
+/* Get description of merge.                                                 */
+/*****************************************************************************/
+gchar *
+gl_merge_get_description (glMerge *merge)
+{
+	gl_debug (DEBUG_MERGE, "");
+
+	if (merge == NULL) {
+		return g_strdup(_("None"));
+	}
+
+	g_return_val_if_fail (GL_IS_MERGE (merge), g_strdup(_("None")));
+
+	return g_strdup(merge->private->description);
+}
+
+/*****************************************************************************/
+/* Get source type of merge.                                                 */
+/*****************************************************************************/
+glMergeSrcType
+gl_merge_get_src_type (glMerge *merge)
+{
+	gl_debug (DEBUG_MERGE, "");
+
+	if (merge == NULL) {
+		return GL_MERGE_SRC_IS_FIXED;
+	}
+
+	g_return_val_if_fail (GL_IS_MERGE (merge), GL_MERGE_SRC_IS_FIXED);
+
+	return merge->private->src_type;
+}
+
+/*****************************************************************************/
+/* Set src of merge.                                                         */
 /*****************************************************************************/
 void
-gl_merge_free_field_def_list (GList ** list)
+gl_merge_set_src (glMerge *merge,
+		  gchar   *src)
 {
-	GList *p;
-	glMergeFieldDefinition *field_def;
-
 	gl_debug (DEBUG_MERGE, "START");
 
-	for (p = *list; p != NULL; p = p->next) {
-		field_def = (glMergeFieldDefinition *) p->data;
+	g_return_if_fail (merge && GL_IS_MERGE (merge));
 
-		g_free (field_def->key);
-		field_def->key = NULL;
-		g_free (field_def->loc);
-		field_def->loc = NULL;
-
-		g_free (p->data);
-		p->data = NULL;
-	}
-
-	g_list_free (*list);
-	*list = NULL;
+	g_free(merge->private->src);
+	merge->private->src = src;
 
 	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Extract a list of valid keys from field definitions list                  */
+/* Get src of merge.                                                         */
+/*****************************************************************************/
+gchar *
+gl_merge_get_src (glMerge *merge)
+{
+	gl_debug (DEBUG_MERGE, "");
+
+	if (merge == NULL) {
+		return NULL;
+	}
+
+	g_return_val_if_fail (GL_IS_MERGE (merge), NULL);
+
+	return g_strdup(merge->private->src);
+}
+
+/*****************************************************************************/
+/* Get Key List.                                                             */
 /*****************************************************************************/
 GList *
-gl_merge_get_key_list (GList * field_defs)
+gl_merge_get_key_list (glMerge *merge)
 {
-	GList *p, *keys;
-	glMergeFieldDefinition *field_def;
+	GList *key_list = NULL;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	keys = NULL;
-	for (p = field_defs; p != NULL; p = p->next) {
-		field_def = (glMergeFieldDefinition *) p->data;
+	if (merge == NULL) {
+		return NULL;
+	}
 
-		keys = g_list_append (keys, g_strdup (field_def->key));
+	g_return_val_if_fail (GL_IS_MERGE (merge), NULL);
+
+	if ( GL_MERGE_GET_CLASS(merge)->get_key_list != NULL ) {
+
+		key_list = GL_MERGE_GET_CLASS(merge)->get_key_list (merge);
+
 	}
 
 	gl_debug (DEBUG_MERGE, "END");
 
-	return keys;
+	return key_list;
 }
 
 /*****************************************************************************/
 /* Free a list of keys.                                                      */
 /*****************************************************************************/
 void
-gl_merge_free_key_list (GList ** keys)
+gl_merge_free_key_list (GList **key_list)
 {
 	GList *p;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	for (p = *keys; p != NULL; p = p->next) {
+	for (p = *key_list; p != NULL; p = p->next) {
 		g_free (p->data);
 		p->data = NULL;
 	}
 
-	g_list_free (*keys);
-	*keys = NULL;
+	g_list_free (*key_list);
+	*key_list = NULL;
 
 	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Lookup key for given locator.                                             */
-/*****************************************************************************/
-gchar *
-gl_merge_find_key (GList * field_defs,
-		   gchar * loc)
-{
-	GList *p;
-	glMergeFieldDefinition *field_def;
-
-	gl_debug (DEBUG_MERGE, "START");
-
-	for (p = field_defs; p != NULL; p = p->next) {
-		field_def = (glMergeFieldDefinition *) p->data;
-
-		if (strcmp (loc, field_def->loc) == 0) {
-			gl_debug (DEBUG_MERGE, "END");
-			return g_strdup (field_def->key);
-		}
-
-	}
-
-	gl_debug (DEBUG_MERGE, "END");
-
-	return NULL;
-}
-
-/*****************************************************************************/
-/* Open merge source front-end.                                              */
-/*****************************************************************************/
-glMergeInput *
-gl_merge_open (glMergeType type,
-	       GList * field_defs,
-	       gchar * src)
-{
-	gl_debug (DEBUG_MERGE, "");
-
-	return func[type].open (type, field_defs, src);
-}
-
-/*****************************************************************************/
-/* Close merge source front-end.                                             */
+/* Open merge source.                                                        */
 /*****************************************************************************/
 void
-gl_merge_close (glMergeInput * input)
+gl_merge_open (glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "START");
 
-	if ( input != NULL ) {
-		func[input->type].close (input);
+	g_return_if_fail (merge && GL_IS_MERGE (merge));
+
+	if ( GL_MERGE_GET_CLASS(merge)->open != NULL ) {
+
+		GL_MERGE_GET_CLASS(merge)->open (merge);
+
 	}
 
 	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Get next record from merge source, NULL if exhausted (front-end).         */
+/* Close merge source.                                                       */
 /*****************************************************************************/
-glMergeRecord *
-gl_merge_get_record (glMergeInput * input)
+void
+gl_merge_close (glMerge *merge)
 {
-	gl_debug (DEBUG_MERGE, "");
+	gl_debug (DEBUG_MERGE, "START");
 
-	if ( input == NULL ) {
-		return NULL;
+	g_return_if_fail (merge && GL_IS_MERGE (merge));
+
+	if ( GL_MERGE_GET_CLASS(merge)->close != NULL ) {
+
+		GL_MERGE_GET_CLASS(merge)->close (merge);
+
 	}
-	return func[input->type].get_record (input);
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*****************************************************************************/
-/* Get next record (raw) from merge source, NULL if exhausted (front-end).   */
+/* Get next record (list of fields) from opened merge source.                */
 /*****************************************************************************/
-GList *
-gl_merge_get_raw_record (glMergeInput * input)
+glMergeRecord *
+gl_merge_get_record (glMerge *merge)
 {
-	gl_debug (DEBUG_MERGE, "");
+	glMergeRecord *record = NULL;
 
-	if ( input == NULL ) {
-		return NULL;
+	gl_debug (DEBUG_MERGE, "START");
+
+	g_return_val_if_fail (merge && GL_IS_MERGE (merge), NULL);
+
+	if ( GL_MERGE_GET_CLASS(merge)->get_record != NULL ) {
+
+		record = GL_MERGE_GET_CLASS(merge)->get_record (merge);
+
 	}
-	return func[input->type].get_raw_record (input);
+
+	gl_debug (DEBUG_MERGE, "END");
+
+	return record;
 }
 
 /*****************************************************************************/
 /* Free a merge record (list of fields)                                      */
 /*****************************************************************************/
 void
-gl_merge_free_record (glMergeRecord ** record)
+gl_merge_free_record (glMergeRecord **record)
 {
 	GList *p;
 	glMergeField *field;
@@ -472,54 +539,25 @@ gl_merge_free_record (glMergeRecord ** record)
 }
 
 /*****************************************************************************/
-/* Free a merge record (list of fields)                                      */
-/*****************************************************************************/
-void
-gl_merge_free_raw_record (GList ** record)
-{
-	GList *p;
-	glMergeRawField *field;
-
-	gl_debug (DEBUG_MERGE, "START");
-
-	for (p = *record; p != NULL; p = p->next) {
-		field = (glMergeRawField *) p->data;
-
-		g_free (field->loc);
-		field->loc = NULL;
-		g_free (field->value);
-		field->value = NULL;
-
-		g_free (p->data);
-		p->data = NULL;
-
-	}
-
-	g_list_free (*record);
-	*record = NULL;
-
-	gl_debug (DEBUG_MERGE, "END");
-}
-
-/*****************************************************************************/
 /* Find key in given record and evaluate.                                    */
 /*****************************************************************************/
 extern gchar *
-gl_merge_eval_key (gchar * key,
-		   glMergeRecord * record)
+gl_merge_eval_key (glMergeRecord *record,
+		   gchar         *key)
+		   
 {
-	GList *p;
+	GList        *p;
 	glMergeField *field;
+	gchar        *val = NULL;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	if ( record != NULL ) {
+	if ( (record != NULL) && record->select_flag  ) {
 		for (p = record->field_list; p != NULL; p = p->next) {
 			field = (glMergeField *) p->data;
 
 			if (strcmp (key, field->key) == 0) {
-				gl_debug (DEBUG_MERGE, "END");
-				return g_strdup (field->value);
+				val = g_strdup (field->value);
 			}
 
 		}
@@ -527,28 +565,25 @@ gl_merge_eval_key (gchar * key,
 
 	gl_debug (DEBUG_MERGE, "END");
 
-	return NULL;
+	return val;
 }
 
 /*****************************************************************************/
 /* Read all records from merge source.                                       */
 /*****************************************************************************/
 GList *
-gl_merge_read_data(glMergeType type,
-		   GList *field_defs,
-		   gchar *src)
+gl_merge_read_record_list (glMerge *merge)
 {
-	glMergeInput *mp;
 	glMergeRecord *record;
 	GList *record_list = NULL;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	mp = gl_merge_open (type, field_defs, src);
-	while ( (record = gl_merge_get_record (mp)) != NULL ) {
+	gl_merge_open (merge);
+	while ( (record = gl_merge_get_record (merge)) != NULL ) {
 		record_list = g_list_append( record_list, record );
 	}
-	gl_merge_close(mp);
+	gl_merge_close (merge);
 	      
 	gl_debug (DEBUG_MERGE, "END");
 
@@ -559,7 +594,7 @@ gl_merge_read_data(glMergeType type,
 /* Free a list of records.                                                   */
 /*****************************************************************************/
 void
-gl_merge_free_data (GList ** record_list)
+gl_merge_free_record_list (GList **record_list)
 {
 	GList *p;
 	glMergeRecord *record;
@@ -602,4 +637,5 @@ gl_merge_count_records (GList *record_list)
 
 	return count;
 }
+
 

@@ -24,7 +24,7 @@
 
 #include "tools.h"
 #include "window.h"
-#include "merge-properties.h"
+#include "merge-properties-dialog.h"
 
 /*===========================================*/
 /* Private types.                            */

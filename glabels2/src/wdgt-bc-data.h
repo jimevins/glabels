@@ -61,10 +61,10 @@ struct _glWdgtBCDataClass {
 
 guint       gl_wdgt_bc_data_get_type        (void);
 
-GtkWidget  *gl_wdgt_bc_data_new             (GList        *field_defs);
+GtkWidget  *gl_wdgt_bc_data_new             (glMerge      *merge);
 
 void        gl_wdgt_bc_data_set_field_defs  (glWdgtBCData *bc_data,
-					     GList        *field_defs);
+					     glMerge      *merge);
 
 glTextNode *gl_wdgt_bc_data_get_data        (glWdgtBCData *bc_data);
 

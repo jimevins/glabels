@@ -43,8 +43,8 @@ src/view-barcode.c
 src/view-barcode.h
 src/view-highlight.c
 src/view-highlight.h
-src/merge-properties.c
-src/merge-properties.h
+src/merge-properties-dialog.c
+src/merge-properties-dialog.h
 src/print.c
 src/print.h
 src/print-dialog.c
@@ -79,12 +79,10 @@ src/xml-label-04.c
 src/xml-label-04.h
 src/merge.c
 src/merge.h
+src/merge-init.c			\
+src/merge-init.h			\
 src/merge-text.c
 src/merge-text.h
-src/merge-ui.c
-src/merge-ui.h
-src/merge-ui-text.c
-src/merge-ui-text.h
 src/text-node.c
 src/text-node.h
 src/wdgt-text-props.c

@@ -178,7 +178,7 @@ gl_label_instance_init (glLabel *label)
 	gl_debug (DEBUG_LABEL, "START");
 
 	label->private = g_new0 (glLabelPrivate, 1);
-	label->private->merge = gl_merge_new();
+	label->private->merge = NULL;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -202,7 +202,7 @@ gl_label_finalize (GObject *object)
 		g_object_unref (G_OBJECT(p->data));
 	}
 
-	gl_merge_free (&label->private->merge);
+	g_object_unref (G_OBJECT(label->private->merge));
 
 	g_free (label->private);
 
@@ -506,7 +506,7 @@ gl_label_set_merge (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	gl_merge_free (&label->private->merge);
+	g_object_unref (G_OBJECT(label->private->merge));
 	label->private->merge = gl_merge_dup (merge);
 
 	label->private->modified_flag = TRUE;

@@ -448,32 +448,15 @@ xml04_parse_merge_properties (xmlNodePtr node,
 {
 	glMerge                *merge;
 	xmlNodePtr             child;
-	glMergeFieldDefinition *field_def;
 
 	gl_debug (DEBUG_XML, "START");
 
-	merge = gl_merge_new ();
-	merge->type = gl_merge_text_to_type (xmlGetProp (node, "type"));
-	merge->src  = xmlGetProp (node, "src");
-
-	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
-
-		if (g_strcasecmp (child->name, "Field") == 0) {
-			field_def = g_new0 (glMergeFieldDefinition, 1);
-			field_def->key = xmlGetProp (child, "key");
-			field_def->loc = xmlGetProp (child, "loc");
-			merge->field_defs =
-				g_list_append (merge->field_defs, field_def);
-		} else if (!xmlNodeIsText (child)) {
-			g_warning ("Unexpected Merge_Properties child: \"%s\"",
-			      child->name);
-		}
-
-	}
+	merge = gl_merge_new (xmlGetProp (node, "type"));
+	gl_merge_set_src (merge, xmlGetProp (node, "src"));
 
 	gl_label_set_merge (label, merge);
 
-	gl_merge_free (&merge);
+	g_object_unref (G_OBJECT(merge));
 
 	gl_debug (DEBUG_XML, "END");
 }

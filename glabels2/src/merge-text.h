@@ -22,14 +22,45 @@
 #ifndef __MERGE_TEXT_H__
 #define __MERGE_TEXT_H__
 
-#include <gtk/gtk.h>
-
 #include "merge.h"
 
-extern glMergeInput *gl_merge_text_open (glMergeType type, GList * field_defs,
-					 gchar * src);
-extern void gl_merge_text_close (glMergeInput * input);
-extern glMergeRecord *gl_merge_text_get_record (glMergeInput * input);
-extern GList *gl_merge_text_get_raw_record (glMergeInput * input);
+G_BEGIN_DECLS
+
+/* The following object arguments are available:
+ *
+ * name               type             description
+ * --------------------------------------------------------------------------------
+ * delim              gchar            Field delimiter.
+ *
+ */
+
+#define GL_TYPE_MERGE_TEXT              (gl_merge_text_get_type ())
+#define GL_MERGE_TEXT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_MERGE_TEXT, glMergeText))
+#define GL_MERGE_TEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_MERGE_TEXT, glMergeTextClass))
+#define GL_IS_MERGE_TEXT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_MERGE_TEXT))
+#define GL_IS_MERGE_TEXT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_MERGE_TEXT))
+#define GL_MERGE_TEXT_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GL_TYPE_MERGE_TEXT, glMergeTextClass))
+
+
+typedef struct _glMergeText          glMergeText;
+typedef struct _glMergeTextClass     glMergeTextClass;
+
+typedef struct _glMergeTextPrivate   glMergeTextPrivate;
+
+
+struct _glMergeText {
+	glMerge              object;
+
+	glMergeTextPrivate  *private;
+};
+
+struct _glMergeTextClass {
+	glMergeClass         parent_class;
+};
+
+
+GType             gl_merge_text_get_type            (void);
+
+G_END_DECLS
 
 #endif

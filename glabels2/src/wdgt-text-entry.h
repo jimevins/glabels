@@ -64,10 +64,10 @@ struct _glWdgtTextEntryClass {
 
 guint      gl_wdgt_text_entry_get_type       (void);
 
-GtkWidget *gl_wdgt_text_entry_new            (GList           *field_defs);
+GtkWidget *gl_wdgt_text_entry_new            (glMerge         *merge);
 
 void       gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
-					      GList           *field_defs);
+					      glMerge         *merge);
 
 GList     *gl_wdgt_text_entry_get_text       (glWdgtTextEntry *text_entry);
 
