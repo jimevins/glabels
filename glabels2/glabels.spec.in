@@ -15,6 +15,7 @@ BuildRequires: libgnomeui-devel >= 2.0
 BuildRequires: libgnomecanvas-devel >= 2.0
 BuildRequires: libgnomeprint22-devel >= 2.2
 BuildRequires: libxml2-devel >= 2.4
+BuildRequires: libglade2-devel >= 2.0
 
 %description
 gLabels is a lightweight program for creating labels and
