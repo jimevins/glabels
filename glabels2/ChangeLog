@@ -1,3 +1,9 @@
+2004-01-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/avery-us-templates.xml:
+		Added Avery 5824, submitted by Fred Bacon.
+	
 2004-01-20  Jim Evins  <evins@snaught.com>
 
 	Catching up on a couple of backlogged user template submissions.

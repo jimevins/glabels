@@ -292,6 +292,16 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 5829 family: CD/DVD Labels (face only), 2 per sheet         * -->
+  <!-- =================================================================== -->
+  <Template name="Avery  5824" size="US-Letter" description="CD/DVD Labels">
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="144pt" y0="36pt" dx="351pt" dy="396pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         * -->
   <!-- =================================================================== -->
   <Template name="Avery  5931-Disc" size="US-Letter"
