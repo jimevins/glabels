@@ -248,6 +248,8 @@ gl_file_open (GtkWindow *window)
 	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
 	gtk_window_set_title (GTK_WINDOW (fsel), _("Open label"));
 
+	g_object_set_data (G_OBJECT (fsel), "parent_window", window);
+
 	g_signal_connect (G_OBJECT (fsel->ok_button), "clicked",
 			  G_CALLBACK (open_ok), fsel);
 
@@ -277,6 +279,7 @@ open_ok (GtkWidget        *widget,
 	GtkWidget        *dlg;
 	gint              ret;
 	GnomeRecentModel *recent;
+	GtkWindow        *window;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -314,7 +317,10 @@ open_ok (GtkWidget        *widget,
 
 		} else {
 		
-			if ( gl_file_open_real (filename, GTK_WINDOW(fsel)) ) {
+			window = g_object_get_data (G_OBJECT(fsel),
+						    "parent_window");
+
+			if ( gl_file_open_real (filename, window) ) {
 				gtk_widget_destroy (GTK_WIDGET (fsel));
 			}
 
