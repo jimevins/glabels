@@ -7,4 +7,9 @@ glabels_pixmaps_DATA = \
 	glabels-logo.png	\
 	glabels-about-logo.png
 
-EXTRA_DIST = $(glabels_pixmaps_DATA)
+glabels_mime_icondir = $(datadir)/pixmaps
+
+glabels_mime_icon_DATA = glabels.png
+
+EXTRA_DIST = $(glabels_pixmaps_DATA) \
+	     $(glabels_mime_icon_DATA)

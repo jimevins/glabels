@@ -1,0 +1,9 @@
+application/x-glabels:
+	open=glabels %f
+	description=gLabels Project File
+        icon_filename=glabels.png
+        default_action_type=application
+	category=Documents
+        short_list_application_ids_for_novice_user_level=glabels
+        short_list_application_ids_for_intermediate_user_level=glabels
+        short_list_application_ids_for_advanced_user_level=glabels
