@@ -683,27 +683,27 @@ draw_bg_fg_rounded_rect (glView *view)
 	i_coords = 0;
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-		    r - r * sin (i_theta * M_PI / 180.0);
+		    r - r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-		    r - r * cos (i_theta * M_PI / 180.0);
+		    r - r * cos (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-		    r - r * cos (i_theta * M_PI / 180.0);
+		    r - r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-		    (h - r) + r * sin (i_theta * M_PI / 180.0);
+		    (h - r) + r * sin (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-		    (w - r) + r * sin (i_theta * M_PI / 180.0);
+		    (w - r) + r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-		    (h - r) + r * cos (i_theta * M_PI / 180.0);
+		    (h - r) + r * cos (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-		    (w - r) + r * cos (i_theta * M_PI / 180.0);
+		    (w - r) + r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-		    r - r * sin (i_theta * M_PI / 180.0);
+		    r - r * sin (i_theta * G_PI / 180.0);
 	}
 
 	/* Background */
@@ -1059,27 +1059,27 @@ draw_markup_margin_rounded_rect (glView                 *view,
 	i_coords = 0;
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-			m + r - r * sin (i_theta * M_PI / 180.0);
+			m + r - r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-			m + r - r * cos (i_theta * M_PI / 180.0);
+			m + r - r * cos (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-			m + r - r * cos (i_theta * M_PI / 180.0);
+			m + r - r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-			m + (h - r) + r * sin (i_theta * M_PI / 180.0);
+			m + (h - r) + r * sin (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-			m + (w - r) + r * sin (i_theta * M_PI / 180.0);
+			m + (w - r) + r * sin (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-			m + (h - r) + r * cos (i_theta * M_PI / 180.0);
+			m + (h - r) + r * cos (i_theta * G_PI / 180.0);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
 		points->coords[i_coords++] =
-			m + (w - r) + r * cos (i_theta * M_PI / 180.0);
+			m + (w - r) + r * cos (i_theta * G_PI / 180.0);
 		points->coords[i_coords++] =
-			m + r - r * sin (i_theta * M_PI / 180.0);
+			m + r - r * sin (i_theta * G_PI / 180.0);
 	}
 	item = gnome_canvas_item_new (view->markup_group,
 				      gnome_canvas_polygon_get_type (),

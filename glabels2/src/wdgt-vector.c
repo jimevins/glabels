@@ -30,14 +30,10 @@
 
 #include <math.h>
 
-#ifndef M_PI
-#define M_PI		3.14159265358979323846	/* pi */
-#endif
-
 #define LENGTH(x,y) sqrt( (x)*(x) + (y)*(y) )
-#define ANGLE(x,y)  ( (180.0/M_PI)*atan2( -(y), (x) ) )
-#define COMP_X(l,a) ( (l) * cos( (M_PI/180.0)*(a) ) )
-#define COMP_Y(l,a) ( -(l) * sin( (M_PI/180.0)*(a) ) )
+#define ANGLE(x,y)  ( (180.0/G_PI)*atan2( -(y), (x) ) )
+#define COMP_X(l,a) ( (l) * cos( (G_PI/180.0)*(a) ) )
+#define COMP_Y(l,a) ( -(l) * sin( (G_PI/180.0)*(a) ) )
 
 /*===========================================*/
 /* Private types                             */

@@ -1098,8 +1098,8 @@ create_ellipse_path (GnomePrintContext *pc,
 	gnome_print_newpath (pc);
 	gnome_print_moveto (pc, x0 + rx, y0);
 	for (i_theta = 2; i_theta <= 360; i_theta += 2) {
-		x = x0 + rx * cos (i_theta * M_PI / 180.0);
-		y = y0 + ry * sin (i_theta * M_PI / 180.0);
+		x = x0 + rx * cos (i_theta * G_PI / 180.0);
+		y = y0 + ry * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
 	gnome_print_closepath (pc);
@@ -1124,23 +1124,23 @@ create_rounded_rectangle_path (GnomePrintContext *pc,
 
 	gnome_print_moveto (pc, x0 + r, y0);
 	for (i_theta = 5; i_theta <= 90; i_theta += 5) {
-		x = x0 + r - r * sin (i_theta * M_PI / 180.0);
-		y = y0 + r - r * cos (i_theta * M_PI / 180.0);
+		x = x0 + r - r * sin (i_theta * G_PI / 180.0);
+		y = y0 + r - r * cos (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		x = x0 + r - r * cos (i_theta * M_PI / 180.0);
-		y = y0 + (h - r) + r * sin (i_theta * M_PI / 180.0);
+		x = x0 + r - r * cos (i_theta * G_PI / 180.0);
+		y = y0 + (h - r) + r * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		x = x0 + (w - r) + r * sin (i_theta * M_PI / 180.0);
-		y = y0 + (h - r) + r * cos (i_theta * M_PI / 180.0);
+		x = x0 + (w - r) + r * sin (i_theta * G_PI / 180.0);
+		y = y0 + (h - r) + r * cos (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
 	for (i_theta = 0; i_theta <= 90; i_theta += 5) {
-		x = x0 + (w - r) + r * cos (i_theta * M_PI / 180.0);
-		y = y0 + r - r * sin (i_theta * M_PI / 180.0);
+		x = x0 + (w - r) + r * cos (i_theta * G_PI / 180.0);
+		y = y0 + r - r * sin (i_theta * G_PI / 180.0);
 		gnome_print_lineto (pc, x, y);
 	}
 	gnome_print_lineto (pc, x0 + r, y0);
