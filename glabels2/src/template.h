@@ -27,48 +27,130 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
+
+/*
+ *   Template Label Structure
+ */
 typedef enum {
 	GL_TEMPLATE_STYLE_RECT,
 	GL_TEMPLATE_STYLE_ROUND,
 	GL_TEMPLATE_STYLE_CD,
-} glTemplateStyle;
+} glTemplateLabelStyle;
 
 typedef struct {
-	GList *name;
-	gchar *description;
-	gchar *page_size;
-	glTemplateStyle style;
+	glTemplateLabelStyle  style;
+	GList                *layouts;  /* List of glTemplateLayouts */
+	GList                *markups;  /* List of glTemplateMarkups */
+} glTemplateLabelParent;
 
-	/* Suggested margin */
-	gdouble label_margin;
+typedef struct {
+	glTemplateLabelParent parent;
 
-	/* Simple and rounded rectangles. */
-	gdouble label_width, label_height, label_round;
+	gdouble               w, h, r;  /* Dimensions */
+} glTemplateLabelRect;
 
-	/* CD/DVD labels */
-	gdouble label_radius, label_hole;
+typedef struct {
+	glTemplateLabelParent parent;
 
-	/* Layout */
+	gdouble               r;        /* Dimensions */
+} glTemplateLabelRound;
+
+typedef struct {
+	glTemplateLabelParent parent;
+
+	gdouble               r1, r2;   /* Dimensions */
+} glTemplateLabelCD;
+
+typedef union {
+	glTemplateLabelStyle  style;
+	glTemplateLabelParent any;
+	glTemplateLabelRect   rect;
+	glTemplateLabelRound  round;
+	glTemplateLabelCD     cd;
+} glTemplateLabel;
+
+
+/*
+ *   Label Markup
+ */
+typedef enum {
+	GL_TEMPLATE_MARKUP_MARGIN,
+} glTemplateMarkupType;
+
+typedef struct {
+	/* NOTE: These fields are common to all union members. */
+	glTemplateMarkupType   type;
+} glTemplateMarkupParent;
+
+typedef struct {
+	glTemplateMarkupParent parent;
+
+	gdouble                size;
+} glTemplateMarkupMargin;
+
+typedef union {
+	glTemplateMarkupType   type;
+	glTemplateMarkupParent any;
+	glTemplateMarkupMargin margin;
+} glTemplateMarkup;
+
+
+/*
+ *   Label layout
+ */
+typedef struct {
 	gint nx, ny;
 	gdouble x0, y0, dx, dy;
+} glTemplateLayout;
+
+
+/*
+ *   Template
+ */
+typedef struct {
+	GList               *name;
+	gchar               *description;
+	gchar               *page_size;
+
+	glTemplateLabel      label;
+
 } glTemplate;
 
-extern void       gl_template_init                (void);
 
-extern GList      *gl_template_get_page_size_list (void);
-extern void       gl_template_free_page_size_list (GList **sizes);
+/*
+ *  Origin coordinates
+ */
+typedef struct {
+	gdouble x, y;
+} glTemplateOrigin;
 
-extern GList      *gl_template_get_name_list      (const gchar *page_size);
-extern void       gl_template_free_name_list      (GList **names);
 
-extern glTemplate *gl_template_from_name          (const gchar * name);
+extern void                 gl_template_init                (void);
 
-extern glTemplate *gl_template_dup                (const glTemplate *orig);
-extern void       gl_template_free                (glTemplate **template);
+extern GList               *gl_template_get_page_size_list  (void);
+extern void                 gl_template_free_page_size_list (GList **sizes);
 
-extern glTemplate *gl_template_xml_parse_sheet    (xmlNodePtr sheet_node);
+extern GList               *gl_template_get_name_list       (const gchar *page_size);
+extern void                 gl_template_free_name_list      (GList **names);
 
-extern void       gl_template_xml_add_sheet       (glTemplate * template,
-						   xmlNodePtr root,
-						   xmlNsPtr ns);
+extern glTemplate          *gl_template_from_name           (const gchar *name);
+
+extern glTemplate          *gl_template_dup                 (const glTemplate *orig);
+extern void                 gl_template_free                (glTemplate **template);
+
+extern glTemplate          *gl_template_xml_parse_sheet     (xmlNodePtr sheet_node);
+
+extern void                 gl_template_xml_add_sheet       (const glTemplate *template,
+							     xmlNodePtr root,
+							     xmlNsPtr ns);
+
+extern gchar               *gl_template_get_label_size_desc (const glTemplate *template);
+extern void                 gl_template_get_label_size      (const glTemplate *template,
+							     gdouble *w,
+							     gdouble *h);
+
+extern gint                 gl_template_get_n_labels        (const glTemplate *template);
+extern glTemplateOrigin    *gl_template_get_origins         (const glTemplate *template);
+extern gchar               *gl_template_get_layout_desc     (const glTemplate *template);
+
 #endif

@@ -221,6 +221,8 @@ glabels_batch_SOURCES = 		\
 	merge-text.h			\
 	text-node.c			\
 	text-node.h			\
+	prefs.c 			\
+	prefs.h 			\
 	util.c				\
 	util.h				\
 	debug.c 			\

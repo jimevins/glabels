@@ -158,13 +158,13 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies * copies,
 	whbox = GTK_WIDGET (copies);
 
 	template = gl_label_get_template (label);
-	copies->labels_per_sheet = template->nx * template->ny;
+	copies->labels_per_sheet = gl_template_get_n_labels (template);
 
 	/* mini_preview canvas */
 	copies->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 						    WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_label (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-				   template->name->data);
+					template->name->data);
 	gtk_box_pack_start (GTK_BOX (whbox), copies->mini_preview,
 			    TRUE, TRUE, GNOME_PAD);
 

@@ -244,12 +244,13 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 	gdouble canvas_scale;
 	GnomeCanvasGroup *group = NULL;
 	GnomeCanvasItem *label_item = NULL;
-	gdouble m, w, h;
+	gdouble m, raw_w, raw_h, w, h;
 
 	/* Fetch our data from canvas */
 	label_item = g_object_get_data (G_OBJECT (canvas), "label_item");
 
-	m = MAX (template->label_width, template->label_height);
+	gl_template_get_label_size (template, &raw_w, &raw_h);
+	m = MAX (raw_w, raw_h);
 	canvas_scale = (MINI_PREVIEW_MAX_PIXELS) / m;
 
 	/* FIXME: Stupid hack to eliminate canvas artifacts. */
@@ -271,13 +272,13 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 
 	/* draw mini label outline */
 	if (!rotate_flag) {
-		w = template->label_width;
-		h = template->label_height;
+		w = raw_w;
+		h = raw_h;
 	} else {
-		w = template->label_height;
-		h = template->label_width;
+		w = raw_h;
+		h = raw_w;
 	}
-	switch (template->style) {
+	switch (template->label.style) {
 	case GL_TEMPLATE_STYLE_RECT:
 		label_item = gnome_canvas_item_new (group,
 						    gnome_canvas_rect_get_type(),
@@ -342,11 +343,13 @@ gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel * rotate_select,
 					gchar * name)
 {
 	glTemplate *template;
+	gdouble raw_w, raw_h;
 
 	template = gl_template_from_name (name);
 	rotate_select->template = template;
+	gl_template_get_label_size (template, &raw_w, &raw_h);
 
-	if (template->label_width != template->label_height) {
+	if (raw_w != raw_h) {
 		gtk_widget_set_sensitive (rotate_select->rotate_check, TRUE);
 	} else {
 		gtk_widget_set_sensitive (rotate_select->rotate_check, FALSE);

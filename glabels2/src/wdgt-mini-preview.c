@@ -314,16 +314,17 @@ void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview * preview,
 /* PRIVATE.  Draw label outlines and return canvas item list.               */
 /*--------------------------------------------------------------------------*/
 static GList *
-mini_outline_list_new (GnomeCanvas * canvas,
-		       glTemplate * template)
+mini_outline_list_new (GnomeCanvas *canvas,
+		       glTemplate  *template)
 {
-	GnomeCanvasGroup *group = NULL;
-	GnomeCanvasItem *item = NULL;
-	GList *list = NULL;
-	gint i, ix, iy;
-	gdouble x1, y1, x2, y2, y_temp;
+	GnomeCanvasGroup      *group = NULL;
+	GnomeCanvasItem       *item = NULL;
+	GList                 *list = NULL;
+	gint                   i, n_labels;
+	glTemplateOrigin      *origins;
+	gdouble                x1, y1, x2, y2, y_temp, w, h;
 	const GnomePrintPaper *paper = NULL;
-	gdouble paper_height;
+	gdouble                paper_height;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -334,57 +335,57 @@ mini_outline_list_new (GnomeCanvas * canvas,
 	group = gnome_canvas_root (canvas);
 
 	/* draw mini label outlines */
-	i = 1;
-	for (iy = (template->ny - 1); iy >= 0; iy--) {
-		for (ix = 0; ix < template->nx; ix++, i++) {
+	n_labels = gl_template_get_n_labels (template);
+	origins  = gl_template_get_origins (template);
+	gl_template_get_label_size (template, &w, &h);
+	for ( i=0; i < n_labels; i++ ) {
 
-			x1 = ix * (template->dx) + template->x0;
-			y1 = iy * (template->dy) + template->y0;
-			x2 = x1 + template->label_width;
-			y2 = y1 + template->label_height;
+		x1 = origins[i].x;
+		y1 = origins[i].y;
+		x2 = x1 + w;
+		y2 = y1 + h;
 
-                        /* transform origin from lower left to upper left */
-			/* and swap y's so that (y1 < y2) */
-			y_temp = y2;
-			y2 = paper_height - y1;
-			y1 = paper_height - y_temp;
+		/* transform origin from lower left to upper left */
+		/* and swap y's so that (y1 < y2) */
+		y_temp = y2;
+		y2 = paper_height - y1;
+		y1 = paper_height - y_temp;
 
-			switch (template->style) {
-			case GL_TEMPLATE_STYLE_RECT:
-				item = gnome_canvas_item_new (group,
-							      gnome_canvas_rect_get_type(),
-							      "x1", x1,
-							      "y1", y1,
-							      "x2", x2,
-							      "y2", y2,
-							      "width_pixels", 1,
-							      "outline_color", "black",
-							      "fill_color", "white",
-							      NULL);
-				break;
-			case GL_TEMPLATE_STYLE_ROUND:
-			case GL_TEMPLATE_STYLE_CD:
-				item = gnome_canvas_item_new (group,
-							      gnome_canvas_ellipse_get_type(),
-							      "x1", x1,
-							      "y1", y1,
-							      "x2", x2,
-							      "y2", y2,
-							      "width_pixels", 1,
-							      "outline_color", "black",
-							      "fill_color", "white",
-							      NULL);
-				break;
-			default:
-				g_warning ("Unknown label style");
-				return list;
-				break;
-			}
-			g_object_set_data (G_OBJECT (item), "i",
-					     GINT_TO_POINTER (i));
-
-			list = g_list_append (list, item);
+		switch (template->label.style) {
+		case GL_TEMPLATE_STYLE_RECT:
+			item = gnome_canvas_item_new (group,
+						      gnome_canvas_rect_get_type(),
+						      "x1", x1,
+						      "y1", y1,
+						      "x2", x2,
+						      "y2", y2,
+						      "width_pixels", 1,
+						      "outline_color", "black",
+						      "fill_color", "white",
+						      NULL);
+			break;
+		case GL_TEMPLATE_STYLE_ROUND:
+		case GL_TEMPLATE_STYLE_CD:
+			item = gnome_canvas_item_new (group,
+						      gnome_canvas_ellipse_get_type(),
+						      "x1", x1,
+						      "y1", y1,
+						      "x2", x2,
+						      "y2", y2,
+						      "width_pixels", 1,
+						      "outline_color", "black",
+						      "fill_color", "white",
+						      NULL);
+			break;
+		default:
+			g_warning ("Unknown label style");
+			return list;
+			break;
 		}
+		g_object_set_data (G_OBJECT (item), "i",
+				   GINT_TO_POINTER (i));
+		
+		list = g_list_append (list, item);
 	}
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");

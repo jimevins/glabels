@@ -22,6 +22,7 @@
 #ifndef __PREFS_H__
 #define __PREFS_H__
 
+#include <gtk/gtk.h>
 #include <libgnomeprint/gnome-font.h>
 
 typedef struct _glPreferences glPreferences;

@@ -405,30 +405,11 @@ details_update (glWdgtMediaSelect * media_select,
 	gtk_label_set_text (GTK_LABEL (media_select->sheet_size_label),
 			    template->page_size);
 
-	text = g_strdup_printf (_("%d x %d  (%d per sheet)"),
-				template->nx, template->ny,
-				template->nx * template->ny);
-
+	text = gl_template_get_layout_desc (template);
 	gtk_label_set_text (GTK_LABEL (media_select->number_label), text);
 	g_free (text);
 
-	if ( units == GL_PREFS_UNITS_INCHES ) {
-		gchar *xstr, *ystr;
-
-		xstr = gl_util_fraction (template->label_height
-					 * units_per_point);
-		ystr = gl_util_fraction (template->label_width
-					 * units_per_point);
-		text = g_strdup_printf (_("%s x %s %s"),
-					xstr, ystr, units_string);
-		g_free (xstr);
-		g_free (ystr);
-	} else {
-		text = g_strdup_printf (_("%.5g x %.5g %s"),
-					template->label_height*units_per_point,
-					template->label_width*units_per_point,
-					units_string);
-	}
+	text = gl_template_get_label_size_desc (template);
 	gtk_label_set_text (GTK_LABEL (media_select->label_size_label), text);
 	g_free (text);
 

@@ -34,6 +34,7 @@
 #include "label-barcode.h"
 #include "template.h"
 #include "marshal.h"
+#include "util.h"
 
 #include "debug.h"
 
@@ -444,25 +445,29 @@ gl_label_get_size (glLabel * label,
 		return;
 	}
 
-        switch (template->style) {
+        switch (template->label.style) {
 
         case GL_TEMPLATE_STYLE_RECT:
                 if (!label->private->rotate_flag) {
-                        *w = template->label_width;
-                        *h = template->label_height;
+                        *w = template->label.rect.w;
+                        *h = template->label.rect.h;
                 } else {
-                        *w = template->label_height;
-                        *h = template->label_width;
+                        *w = template->label.rect.h;
+                        *h = template->label.rect.w;
                 }
                 break;
 
         case GL_TEMPLATE_STYLE_ROUND:
+                *w = *h = 2.0 * template->label.round.r;
+                break;
+
         case GL_TEMPLATE_STYLE_CD:
-                *w = *h = 2.0 * template->label_radius;
+                *w = *h = 2.0 * template->label.cd.r1;
                 break;
 
         default:
-                g_warning ("Unknown template label style %d", template->style);
+                g_warning ("Unknown template label style %d",
+			   template->label.style);
 		*w = *h = 0;
 		break;
         }

@@ -155,13 +155,13 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	whbox = GTK_WIDGET (merge);
 
 	template = gl_label_get_template (label);
-	merge->labels_per_sheet = template->nx * template->ny;
+	merge->labels_per_sheet = gl_template_get_n_labels (template);
 
 	/* mini_preview canvas */
 	merge->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 							WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_label( GL_WDGT_MINI_PREVIEW (merge->mini_preview),
-				   template->name->data );
+					template->name->data );
 	gtk_box_pack_start (GTK_BOX (whbox), merge->mini_preview,
 			    TRUE, TRUE, GNOME_PAD);
 	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
