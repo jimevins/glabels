@@ -376,13 +376,17 @@ gl_label_object_set_position (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	dx = x - object->private->x;
-	dy = y - object->private->y;
+	if ( (x != object->private->x) || (y != object->private->y) ) {
 
-	object->private->x = x;
-	object->private->y = y;
+		dx = x - object->private->x;
+		dy = y - object->private->y;
 
-	g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
+		object->private->x = x;
+		object->private->y = y;
+
+		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -399,14 +403,18 @@ gl_label_object_set_position_relative (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->x += dx;
-	object->private->y += dy;
+	if ( (dx != 0.0) || (dy != 0.0) ) {
 
-	gl_debug (DEBUG_LABEL, "       x = %f, y= %f",
-		  object->private->x,
-		  object->private->y);
+		object->private->x += dx;
+		object->private->y += dy;
 
-	g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
+		gl_debug (DEBUG_LABEL, "       x = %f, y= %f",
+			  object->private->x,
+			  object->private->y);
+
+		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -439,8 +447,13 @@ set_size (glLabelObject *object,
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->w = w;
-	object->private->h = h;
+	if ( (object->private->w != w) || (object->private->h != h) ) {
+
+		object->private->w = w;
+		object->private->h = h;
+
+		g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
+	}
 }
 
 /*****************************************************************************/
@@ -460,15 +473,10 @@ gl_label_object_set_size (glLabelObject *object,
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
 
-	} else {
-
-		set_size (object, w, h);
+		object->private->aspect_ratio = h / w;
 
 	}
 
-	object->private->aspect_ratio = h / w;
-
-	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -500,13 +508,7 @@ gl_label_object_set_size_honor_aspect (glLabelObject *object,
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
 
-	} else {
-
-		set_size (object, w, h);
-
 	}
-
-	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }

@@ -201,10 +201,14 @@ gl_label_barcode_set_data (glLabelBarcode *lbc,
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-	gl_text_node_free (&lbc->private->text_node);
-	lbc->private->text_node = gl_text_node_dup (text_node);
+	if (!gl_text_node_equal (lbc->private->text_node, text_node)) {
 
-	gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
+		gl_text_node_free (&lbc->private->text_node);
+		lbc->private->text_node = gl_text_node_dup (text_node);
+
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -219,11 +223,18 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-	lbc->private->id               = g_strdup (id);
-	lbc->private->text_flag        = text_flag;
-	lbc->private->checksum_flag    = checksum_flag;
+	if ( ((lbc->private->id == NULL) && (id != NULL))
+	     || (g_strcasecmp (lbc->private->id, id) != 0)
+	     || (lbc->private->text_flag != text_flag)
+	     || (lbc->private->checksum_flag != checksum_flag) ) {
 
-	gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
+		lbc->private->id               = g_strdup (id);
+		lbc->private->text_flag        = text_flag;
+		lbc->private->checksum_flag    = checksum_flag;
+
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

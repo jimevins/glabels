@@ -1,5 +1,20 @@
 2004-02-15  Jim Evins  <evins@snaught.com>
 
+	* src/label-barcode.c: (gl_label_barcode_set_data),
+	(gl_label_barcode_set_props):
+		Don't emit "changed" signal, if no change actually made for these
+		methods.  Reduces number of unnecessary redraws of barcodes.
+	
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_set_position),
+	(gl_label_object_set_position_relative), (set_size),
+	(gl_label_object_set_size),
+	(gl_label_object_set_size_honor_aspect):
+		Don't emit "changed" signal, if no change actually made for these
+		methods.
+
+2004-02-15  Jim Evins  <evins@snaught.com>
+
 	* data/glabels-2.0.dtd:
 		Added specific subtypes for various barcode types.
 	
