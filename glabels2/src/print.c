@@ -521,7 +521,7 @@ print_crop_marks (PrintInfo *pi)
 	page_w = pi->page_width;
 	page_h = pi->page_height;
 
-	gnome_print_setrgbcolor (pi->pc, 0.25, 0.25, 0.25);
+	gnome_print_setrgbcolor (pi->pc, 0.0, 0.0, 0.0);
 	gnome_print_setopacity (pi->pc, 1.0);
 	gnome_print_setlinewidth (pi->pc, 0.25);
 
@@ -1112,7 +1112,7 @@ draw_outline (PrintInfo *pi,
 
 	label_type = gl_template_get_first_label_type (pi->template);
 
-	gnome_print_setrgbcolor (pi->pc, 0.25, 0.25, 0.25);
+	gnome_print_setrgbcolor (pi->pc, 0.0, 0.0, 0.0);
 	gnome_print_setopacity (pi->pc, 1.0);
 	gnome_print_setlinewidth (pi->pc, 0.25);
 

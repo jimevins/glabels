@@ -1,4 +1,9 @@
 2004-07-05  Jim Evins  <evins@snaught.com>
+	* src/print.c: (print_crop_marks), (draw_outline):
+		Changed crop marks and label outlines to black, instead of 25% gray.
+		This addresses debian Bug #257460.
+
+2004-07-05  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-fill-page.c: (gl_object_editor_set_fill_color):
 	* src/object-editor-line-page.c: (gl_object_editor_set_line_color):
