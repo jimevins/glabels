@@ -95,8 +95,8 @@ src/recent-files/Makefile
 pixmaps/Makefile
 data/Makefile
 po/Makefile.in
-doc/Makefile
-doc/C/Makefile
+help/Makefile
+help/C/Makefile
 glabels.spec
 ])
 

@@ -2,7 +2,7 @@
 
 LIB_BARCODE_DIR = barcode-0.98
 
-SUBDIRS = po $(LIB_BARCODE_DIR) libglabels src data pixmaps doc
+SUBDIRS = po $(LIB_BARCODE_DIR) libglabels src data pixmaps help
 
 EXTRA_DIST = \
 	README \
