@@ -1,3 +1,7 @@
+2002-06-29  Olivier Berger  <oberger@gnu.org>
+
+	* fr.po: updated translation for 0.4.4
+
 2002-06-27  gettextize  <bug-gnu-utils@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.10.38.
