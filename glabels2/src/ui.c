@@ -208,6 +208,8 @@ static void set_app_main_toolbar_style 	  (BonoboUIComponent           *ui_compo
 
 static void set_app_drawing_toolbar_style (BonoboUIComponent           *ui_component);
 
+static void set_app_property_toolbar_style (BonoboUIComponent           *ui_component);
+
 static void set_view_style                (BonoboUIComponent           *ui_component);
 
 
@@ -282,6 +284,18 @@ gl_ui_init (BonoboUIComponent *ui_component,
 			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
 			(gpointer)win);
 	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarTooltips", 
+			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
+			(gpointer)win);
+
+	/* Set the toolbar style according to prefs */
+	set_app_property_toolbar_style (ui_component);
+		
+	/* Add listener for the view menu */
+	bonobo_ui_component_add_listener (ui_component, "ViewPropertyToolbar", 
+			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
+			(gpointer)win);
+
+	bonobo_ui_component_add_listener (ui_component, "PropertyToolbarTooltips", 
 			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
 			(gpointer)win);
 
@@ -622,6 +636,24 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
+	if (strcmp (path, "ViewPropertyToolbar") == 0)
+	{
+		gl_prefs->property_toolbar_visible = s;
+		set_app_property_toolbar_style (ui_component);
+		gl_prefs_model_save_settings (gl_prefs);
+
+		return;
+	}
+
+	if (strcmp (path, "PropertyToolbarTooltips") == 0)
+	{
+		gl_prefs->property_toolbar_view_tooltips = s;
+		set_app_property_toolbar_style (ui_component);
+		gl_prefs_model_save_settings (gl_prefs);
+
+		return;
+	}
+
 	if (strcmp (path, "ViewGrid") == 0)
 	{
 		gl_prefs->grid_visible = s;
@@ -867,6 +899,50 @@ set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
 			"hidden", gl_prefs->drawing_toolbar_visible ? "0":"1", NULL);
 
  error:
+	bonobo_ui_component_thaw (ui_component, NULL);
+
+	gl_debug (DEBUG_UI, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set property toolbar style.                                     */
+/*---------------------------------------------------------------------------*/
+static void
+set_app_property_toolbar_style (BonoboUIComponent *ui_component)
+{
+	GConfClient *client;
+	gboolean labels;
+
+	gl_debug (DEBUG_UI, "START");
+
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT(ui_component));
+			
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	/* Updated view menu */
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/ViewPropertyToolbar",
+				   gl_prefs->property_toolbar_visible);
+
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/PropertyToolbarTooltips",
+				       gl_prefs->property_toolbar_visible);
+
+	gl_ui_util_set_verb_state (ui_component, 
+			"/commands/PropertyToolbarTooltips",
+			gl_prefs->property_toolbar_view_tooltips);
+
+	
+	/* Actually update property_toolbar style */
+	bonobo_ui_component_set_prop (
+		ui_component, "/PropertyToolbar",
+		"tips", gl_prefs->property_toolbar_view_tooltips ? "1" : "0",
+		NULL);
+	
+	bonobo_ui_component_set_prop (
+			ui_component, "/PropertyToolbar",
+			"hidden", gl_prefs->property_toolbar_visible ? "0":"1", NULL);
+
 	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");

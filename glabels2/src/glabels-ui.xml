@@ -178,6 +178,19 @@
 			type="toggle" state="1"
 		/>
 
+		<cmd name="ViewPropertyToolbar"
+			_label="_Property Toolbar"
+			_tip="Change the visibility of the property toolbar in the current window"
+			type="toggle" state="0"
+		/>
+
+		<cmd name="PropertyToolbarTooltips"
+			id="PropertyToolbarTooltips"
+			_label="Show _Tooltips"
+			_tip="Show tooltips in the property toolbar"
+			type="toggle" state="1"
+		/>
+
 		<cmd name="ViewGrid"
 			_label="_Grid"
 			_tip="Change the visibility of the grid in the current window"
@@ -530,6 +543,11 @@
 				verb=""
 			/>
 
+			<menuitem name="ViewPropertyToolbar"
+				id="ViewPropertyToolbar"
+				verb=""
+			/>
+
 			<separator />
 
 			<submenu name="CustomizeMainToolbar"
@@ -561,6 +579,16 @@
 			>
 
 				<menuitem name="DrawingToolbarTooltips"
+					verb=""
+				/>
+
+			</submenu>
+
+			<submenu name="CustomizePropertyToolbar"
+				_label="Customize Property Toolbar"
+			>
+
+				<menuitem name="PropertyToolbarTooltips"
 					verb=""
 				/>
 
