@@ -39,11 +39,13 @@ typedef enum {
 } glLabelObjectType;
 
 
-#define GL_TYPE_LABEL_OBJECT            (gl_label_object_get_type ())
-#define GL_LABEL_OBJECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_OBJECT, glLabelObject))
-#define GL_LABEL_OBJECT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL_OBJECT, glLabelObjectClass))
-#define GL_IS_LABEL_OBJECT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_LABEL_OBJECT))
-#define GL_IS_LABEL_OBJECT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_LABEL_OBJECT))
+#define GL_TYPE_LABEL_OBJECT              (gl_label_object_get_type ())
+#define GL_LABEL_OBJECT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_OBJECT, glLabelObject))
+#define GL_LABEL_OBJECT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL_OBJECT, glLabelObjectClass))
+#define GL_IS_LABEL_OBJECT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_LABEL_OBJECT))
+#define GL_IS_LABEL_OBJECT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_LABEL_OBJECT))
+#define GL_LABEL_OBJECT_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GL_TYPE_LABEL_OBJECT, glLabelObjectClass))
+
 
 typedef struct _glLabelObject          glLabelObject;
 typedef struct _glLabelObjectClass     glLabelObjectClass;
@@ -63,6 +65,21 @@ struct _glLabelObject {
 struct _glLabelObjectClass {
 	GObjectClass          parent_class;
 
+	/*
+	 * Methods
+	 */
+
+	void (*set_size)    (glLabelObject     *object,
+			     gdouble            w,
+			     gdouble            h);
+
+	void (*get_size)    (glLabelObject     *object,
+			     gdouble           *w,
+			     gdouble           *h);
+
+	/*
+	 * Signals
+	 */
 	void (*changed)     (glLabelObject     *object,
 			     gpointer            user_data);
 

@@ -78,7 +78,7 @@ static void      gl_view_ellipse_finalize      (GObject        *object);
 static void      update_view_ellipse_cb        (glLabelObject  *object,
 						glViewEllipse  *view_ellipse);
 
-static GtkWidget *construct_properties_dialog  (glViewEllipse  *view_ellipse);
+static GtkWidget *construct_properties_dialog  (glViewObject   *view_object);
 
 static void      response_cb                   (GtkDialog      *dialog,
 						gint            response,
@@ -136,13 +136,16 @@ gl_view_ellipse_get_type (void)
 static void
 gl_view_ellipse_class_init (glViewEllipseClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass      *object_class      = (GObjectClass *) klass;
+	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = gl_view_ellipse_finalize;
+
+	view_object_class->construct_dialog = construct_properties_dialog;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -217,10 +220,6 @@ gl_view_ellipse_new (glLabelEllipse *object,
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_ellipse_cb), view_ellipse);
 
-	/* Create a dialog for controlling/viewing object properties. */
-	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_ellipse),
-					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
-
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_ellipse);
@@ -261,8 +260,9 @@ update_view_ellipse_cb (glLabelObject *object,
 /* Create a properties dialog for a ellipse object.                          */
 /*****************************************************************************/
 static GtkWidget *
-construct_properties_dialog (glViewEllipse *view_ellipse)
+construct_properties_dialog (glViewObject *view_object)
 {
+	glViewEllipse      *view_ellipse = (glViewEllipse *)view_object;
 	GtkWidget          *dialog, *wsection;
 	glLabelObject      *object;
 	gdouble            line_width;

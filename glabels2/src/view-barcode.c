@@ -82,7 +82,7 @@ static void      gl_view_barcode_finalize      (GObject        *object);
 static void      update_view_barcode_cb        (glLabelObject  *object,
 						glViewBarcode  *view_barcode);
 
-static GtkWidget *construct_properties_dialog  (glViewBarcode  *view_barcode);
+static GtkWidget *construct_properties_dialog  (glViewObject   *view_object);
 
 static void      response_cb                   (GtkDialog      *dialog,
 						gint            response,
@@ -142,13 +142,16 @@ gl_view_barcode_get_type (void)
 static void
 gl_view_barcode_class_init (glViewBarcodeClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass      *object_class      = (GObjectClass *) klass;
+	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = gl_view_barcode_finalize;
+
+	view_object_class->construct_dialog = construct_properties_dialog;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -204,10 +207,6 @@ gl_view_barcode_new (glLabelBarcode *object,
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_barcode_cb), view_barcode);
 
-	/* Create a dialog for controlling/viewing object properties. */
-	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_barcode),
-					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
-
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_barcode);
@@ -237,8 +236,9 @@ update_view_barcode_cb (glLabelObject *object,
 /* Create a properties dialog for a barcode object.                          */
 /*****************************************************************************/
 static GtkWidget *
-construct_properties_dialog (glViewBarcode *view_barcode)
+construct_properties_dialog (glViewObject *view_object)
 {
+	glViewBarcode      *view_barcode = (glViewBarcode *)view_object;
 	GtkWidget          *dialog, *wsection;
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
@@ -254,7 +254,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* retrieve object and query parameters */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
+	object = gl_view_object_get_object (view_object);
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
@@ -267,7 +267,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
 	window = gtk_widget_get_toplevel (
-		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_barcode))));
+		GTK_WIDGET(gl_view_object_get_view(view_object)));
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit barcode object properties"),
 						  GTK_WINDOW (window),
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -276,7 +276,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 						  NULL );
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), view_barcode);
+			  G_CALLBACK (response_cb), view_object);
 
 	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 

@@ -79,7 +79,7 @@ static void      gl_view_text_finalize         (GObject         *object);
 static void      update_view_text_cb           (glLabelObject   *object,
 						glViewText      *view_text);
 
-static GtkWidget *construct_properties_dialog  (glViewText      *view_text);
+static GtkWidget *construct_properties_dialog  (glViewObject    *view_object);
 
 static void      response_cb                   (GtkDialog       *dialog,
 						gint             response,
@@ -136,13 +136,16 @@ gl_view_text_get_type (void)
 static void
 gl_view_text_class_init (glViewTextClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass      *object_class      = (GObjectClass *) klass;
+	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = gl_view_text_finalize;
+
+	view_object_class->construct_dialog = construct_properties_dialog;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -198,10 +201,6 @@ gl_view_text_new (glLabelText *object,
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_text_cb), view_text);
 
-	/* Create a dialog for controlling/viewing object properties. */
-	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_text),
-					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
-
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_text);
@@ -226,8 +225,9 @@ update_view_text_cb (glLabelObject *object,
 /* Create a properties dialog for a text object.                          */
 /*****************************************************************************/
 static GtkWidget *
-construct_properties_dialog (glViewText *view_text)
+construct_properties_dialog (glViewObject *view_object)
 {
+	glViewText         *view_text = (glViewText *)view_object;
 	GtkWidget          *dialog, *wsection, *wbutton;
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;

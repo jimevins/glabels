@@ -48,8 +48,6 @@ struct _glViewObjectPrivate {
 
 	GtkWidget                  *menu;
 	GtkWidget                  *property_dialog;
-
-	glViewObjectDlgConstructor  dialog_constructor;
 };
 
 /*========================================================*/
@@ -256,23 +254,6 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	g_signal_connect (G_OBJECT (view_object->private->group), "event",
 			  G_CALLBACK (gl_view_item_event_handler),
 			  view_object);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*****************************************************************************/
-/* Set dialog for controlling/viewing object properties.                     */
-/*****************************************************************************/
-void
-gl_view_object_set_dlg_constructor (glViewObject               *view_object,
-				    glViewObjectDlgConstructor  dlg_constructor)
-
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
-	
-	view_object->private->dialog_constructor = dlg_constructor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -491,15 +472,19 @@ gl_view_object_show_dialog (glViewObject *view_object)
 		return;
 	}
 
-	view_object->private->property_dialog =
-		view_object->private->dialog_constructor (view_object);
+	if ( GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_dialog != NULL ) {
 
-	g_signal_connect (G_OBJECT (view_object->private->property_dialog),
-			  "destroy",
-			  G_CALLBACK (gtk_widget_destroyed),
-			  &view_object->private->property_dialog);
+		view_object->private->property_dialog =
+			GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_dialog (view_object);
+
+		g_signal_connect (G_OBJECT (view_object->private->property_dialog),
+				  "destroy",
+				  G_CALLBACK (gtk_widget_destroyed),
+				  &view_object->private->property_dialog);
 	
-	gtk_widget_show_all (view_object->private->property_dialog);
+		gtk_widget_show_all (view_object->private->property_dialog);
+
+	}
 
 
 	gl_debug (DEBUG_VIEW, "END");

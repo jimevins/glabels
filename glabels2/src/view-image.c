@@ -78,7 +78,7 @@ static void      gl_view_image_finalize        (GObject        *object);
 static void      update_view_image_cb          (glLabelObject  *object,
 						glViewImage    *view_image);
 
-static GtkWidget *construct_properties_dialog  (glViewImage    *view_image);
+static GtkWidget *construct_properties_dialog  (glViewObject   *view_object);
 
 static void      response_cb                   (GtkDialog      *dialog,
 						gint            response,
@@ -136,13 +136,16 @@ gl_view_image_get_type (void)
 static void
 gl_view_image_class_init (glViewImageClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass      *object_class      = (GObjectClass *) klass;
+	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = gl_view_image_finalize;
+
+	view_object_class->construct_dialog = construct_properties_dialog;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -214,10 +217,6 @@ gl_view_image_new (glLabelImage *object,
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_image_cb), view_image);
 
-	/* Create a dialog for controlling/viewing object properties. */
-	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_image),
-					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
-
 	gl_debug (DEBUG_VIEW, "END");
 
 	return GL_VIEW_OBJECT (view_image);
@@ -255,8 +254,9 @@ update_view_image_cb (glLabelObject *object,
 /* Create a properties dialog for a image object.                          */
 /*****************************************************************************/
 static GtkWidget *
-construct_properties_dialog (glViewImage *view_image)
+construct_properties_dialog (glViewObject *view_object)
 {
+	glViewImage        *view_image = (glViewImage *)view_object;
 	GtkWidget          *dialog, *wsection, *wbutton;
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
