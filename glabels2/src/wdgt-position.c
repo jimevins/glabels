@@ -114,8 +114,13 @@ gl_wdgt_position_class_init (glWdgtPositionClass * class)
 static void
 gl_wdgt_position_instance_init (glWdgtPosition * position)
 {
-	position->x_spin = NULL;
-	position->y_spin = NULL;
+	position->x_label = NULL;
+	position->x_spin  = NULL;
+
+	position->y_label = NULL;
+	position->y_spin  = NULL;
+
+	position->units_label = NULL;
 }
 
 static void

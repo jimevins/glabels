@@ -265,12 +265,13 @@ update_view_line_cb (glLabelObject *object,
 static GtkWidget *
 construct_properties_dialog (glViewLine *view_line)
 {
-	GtkWidget          *dialog, *notebook, *wvbox;
+	GtkWidget          *dialog, *wsection;
 	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            line_width;
 	guint              line_color;
 	gdouble            x, y, w, h, label_width, label_height;
+	GtkSizeGroup       *label_size_group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -286,66 +287,65 @@ construct_properties_dialog (glViewLine *view_line)
 	/*-----------------------------------------------------------------*/
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
-	dialog = gtk_dialog_new_with_buttons ( _("Edit line object properties"),
-					       GTK_WINDOW (win),
-					       GTK_DIALOG_DESTROY_WITH_PARENT,
-					       GTK_STOCK_CLOSE,
+	dialog = gl_hig_dialog_new_with_buttons ( _("Edit line object properties"),
+						  GTK_WINDOW (win),
+						  GTK_DIALOG_DESTROY_WITH_PARENT,
+						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
-					       NULL );
+						  NULL );
+        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), view_line);
 
-	notebook = gtk_notebook_new ();
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			    notebook, TRUE, TRUE, 0);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	/*---------------------------*/
-	/* Appearance Notebook Tab   */
+	/* Line section              */
 	/*---------------------------*/
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Appearance")));
-
-	/* ------ Line line ------ */
+	wsection = gl_hig_category_new (_("Line"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_line->private->line = gl_wdgt_line_new ();
+	gl_wdgt_line_set_label_size_group (GL_WDGT_LINE(view_line->private->line),
+					   label_size_group);
 	gl_wdgt_line_set_params (GL_WDGT_LINE (view_line->private->line),
 				 line_width,
 				 line_color);
-	gtk_box_pack_start (GTK_BOX (wvbox), view_line->private->line,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_line->private->line);
 	g_signal_connect (G_OBJECT (view_line->private->line), "changed",
 			  G_CALLBACK(line_changed_cb), view_line);
 
-
-	/*----------------------------*/
-	/* Position/Size Notebook Tab */
-	/*----------------------------*/
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Position/Size")));
-
-	/* ------ Position Frame ------ */
+	/*---------------------------*/
+	/* Position section          */
+	/*---------------------------*/
+	wsection = gl_hig_category_new (_("Position"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_line->private->position = gl_wdgt_position_new ();
+	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_line->private->position),
+					       label_size_group);
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_line->private->position),
 				     x, y,
 				     label_width, label_height);
-	gtk_box_pack_start (GTK_BOX (wvbox),
-			    view_line->private->position,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_line->private->position);
 	g_signal_connect (G_OBJECT (view_line->private->position),
 			  "changed",
 			  G_CALLBACK(position_changed_cb), view_line);
 
 
-	/* ------ Size Frame ------ */
-	view_line->private->vector = gl_wdgt_vector_new (_("Size"));
+	/*---------------------------*/
+	/* Size section              */
+	/*---------------------------*/
+	wsection = gl_hig_category_new (_("Size"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
+	view_line->private->vector = gl_wdgt_vector_new ();
+	gl_wdgt_vector_set_label_size_group (GL_WDGT_VECTOR(view_line->private->vector),
+					     label_size_group);
 	gl_wdgt_vector_set_params (GL_WDGT_VECTOR (view_line->private->vector),
 				   w, h,
 				   label_width, label_height);
-	gtk_box_pack_start (GTK_BOX (wvbox), view_line->private->vector,
-				FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_line->private->vector);
 	g_signal_connect (G_OBJECT (view_line->private->vector), "changed",
 			  G_CALLBACK(vector_changed_cb), view_line);
 

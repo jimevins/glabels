@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_VECTOR (gl_wdgt_vector_get_type ())
 #define GL_WDGT_VECTOR(obj) \
@@ -40,29 +43,40 @@ typedef struct _glWdgtVector      glWdgtVector;
 typedef struct _glWdgtVectorClass glWdgtVectorClass;
 
 struct _glWdgtVector {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *len_label;
 	GtkWidget *len_spin;
 	GtkWidget *len_units_label;
+
+	GtkWidget *angle_label;
 	GtkWidget *angle_spin;
 	GtkWidget *angle_units_label;
 };
 
 struct _glWdgtVectorClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtVector * vector, gpointer user_data);
 };
 
-extern guint gl_wdgt_vector_get_type (void);
+guint      gl_wdgt_vector_get_type             (void);
 
-extern GtkWidget *gl_wdgt_vector_new (gchar * label);
+GtkWidget *gl_wdgt_vector_new                  (void);
 
-extern void gl_wdgt_vector_get_params (glWdgtVector * vector,
-				       gdouble * dx, gdouble * dy);
+void       gl_wdgt_vector_get_params           (glWdgtVector *vector,
+						gdouble      *dx,
+						gdouble      *dy);
 
-extern void gl_wdgt_vector_set_params (glWdgtVector * vector,
-				       gdouble dx, gdouble dy,
-				       gdouble x_max, gdouble y_max);
+void       gl_wdgt_vector_set_params           (glWdgtVector *vector,
+						gdouble       dx,
+						gdouble       dy,
+						gdouble       x_max,
+						gdouble       y_max);
+
+void       gl_wdgt_vector_set_label_size_group (glWdgtVector *vector,
+						GtkSizeGroup *label_size_group);
+
+G_END_DECLS
 
 #endif

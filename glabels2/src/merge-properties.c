@@ -195,6 +195,8 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 			  G_CALLBACK (src_changed_cb), data);
 
 	gl_merge_free (&merge);
+
+        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 }
 
 /*--------------------------------------------------------------------------*/

@@ -45,7 +45,10 @@ typedef struct _glWdgtTextEntryClass glWdgtTextEntryClass;
 struct _glWdgtTextEntry {
 	glHigVBox      parent_widget;
 
+	GtkWidget     *edit_label;
 	GtkWidget     *text_entry;
+
+	GtkWidget     *key_label;
 	GtkWidget     *key_entry;
 	GtkWidget     *insert_button;
 
@@ -67,6 +70,9 @@ GList     *gl_wdgt_text_entry_get_text (glWdgtTextEntry *text_entry);
 void       gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
 					 gboolean        merge_flag,
 					 GList          *lines);
+
+void       gl_wdgt_text_entry_set_label_size_group (glWdgtTextEntry *text_entry,
+						    GtkSizeGroup    *label_size_group);
 
 G_END_DECLS
 

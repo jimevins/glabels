@@ -171,17 +171,21 @@ static void
 gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 			      GList           *field_defs)
 {
-	GtkWidget *wvbox, *whbox, *wlabel, *wscroll, *wcombo;
+	GtkWidget *wvbox, *whbox, *wscroll, *wcombo;
 	GList *keys;
 
 	gl_debug (DEBUG_WDGT, "START");
 
 	wvbox = GTK_WIDGET (text_entry);
 
+	/* ---- Entry line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
+
 	/* Text Label */
-	wlabel = gtk_label_new (_("Edit text:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wlabel);
+	text_entry->edit_label = gtk_label_new (_("Edit text:"));
+	gtk_misc_set_alignment (GTK_MISC (text_entry->edit_label), 0, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->edit_label);
 
 	/* Actual text entry widget */
 	wscroll = gtk_scrolled_window_new (NULL, NULL);
@@ -189,7 +193,7 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wscroll);
+	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), wscroll);
 	text_entry->text_entry = gtk_text_view_new ();
 	text_entry->text_buffer =
 		gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_entry->text_entry));
@@ -204,8 +208,9 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Insert merge field label */
-	wlabel = gtk_label_new (_("Key:"));
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
+	text_entry->key_label = gtk_label_new (_("Key:"));
+	gtk_misc_set_alignment (GTK_MISC (text_entry->key_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->key_label);
 
 	/* Key entry widget */
 	wcombo = gtk_combo_new ();
@@ -233,7 +238,7 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 /* PRIVATE.  Callback for when text has changed.                            */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtTextEntry * text_entry)
+changed_cb (glWdgtTextEntry *text_entry)
 {
 	gl_debug (DEBUG_WDGT, "START");
 
@@ -248,7 +253,7 @@ changed_cb (glWdgtTextEntry * text_entry)
 /* PRIVATE.  Callback to insert field into text buffer.                     */
 /*--------------------------------------------------------------------------*/
 static void
-insert_cb (glWdgtTextEntry * text_entry)
+insert_cb (glWdgtTextEntry *text_entry)
 {
 	GtkTextBuffer *buffer;
 	gchar *key, *field;
@@ -274,7 +279,7 @@ insert_cb (glWdgtTextEntry * text_entry)
 /* Get widget data.                                                         */
 /****************************************************************************/
 GList *
-gl_wdgt_text_entry_get_text (glWdgtTextEntry * text_entry)
+gl_wdgt_text_entry_get_text (glWdgtTextEntry *text_entry)
 {
 	GtkTextBuffer *buffer;
 	gchar *text;
@@ -302,9 +307,9 @@ gl_wdgt_text_entry_get_text (glWdgtTextEntry * text_entry)
 /* Set widget data.                                                         */
 /****************************************************************************/
 void
-gl_wdgt_text_entry_set_text (glWdgtTextEntry * text_entry,
-			     gboolean merge_flag,
-			     GList * lines)
+gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
+			     gboolean         merge_flag,
+			     GList           *lines)
 {
 	GtkTextBuffer *buffer;
 	gchar *text;
@@ -324,3 +329,15 @@ gl_wdgt_text_entry_set_text (glWdgtTextEntry * text_entry,
 
 	gl_debug (DEBUG_WDGT, "END");
 }
+
+/*****************************************************************************/
+/* Set size group for internal labels                                        */
+/*****************************************************************************/
+void
+gl_wdgt_text_entry_set_label_size_group (glWdgtTextEntry *text_entry,
+					 GtkSizeGroup    *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, text_entry->edit_label);
+	gtk_size_group_add_widget (label_size_group, text_entry->key_label);
+}
+

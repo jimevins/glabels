@@ -232,7 +232,7 @@ update_view_text_cb (glLabelObject *object,
 static GtkWidget *
 construct_properties_dialog (glViewText *view_text)
 {
-	GtkWidget          *dialog, *notebook, *wvbox, *wbutton;
+	GtkWidget          *dialog, *wsection, *wbutton;
 	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
@@ -261,85 +261,70 @@ construct_properties_dialog (glViewText *view_text)
 	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
 	/*-----------------------------------------------------------------*/
-	/* Build dialog with notebook.                                     */
+	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
-	gl_debug (DEBUG_VIEW, "Creating dialog...");
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit text object properties"),
 						  GTK_WINDOW (win),
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
 						  NULL );
+        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), view_text);
 
-	notebook = gtk_notebook_new ();
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), notebook);
 	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	/*---------------------------*/
-	/* Text Notebook Tab         */
+	/* Text Section              */
 	/*---------------------------*/
-	gl_debug (DEBUG_VIEW, "Creating text tab...");
-	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Text")));
-
-	/* text entry */
-	gl_debug (DEBUG_VIEW, "Creating text entry...");
+	wsection = gl_hig_category_new (_("Text"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_text->private->text_entry =
 		gl_wdgt_text_entry_new (merge->field_defs);
+	gl_wdgt_text_entry_set_label_size_group (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
+						 label_size_group);
 	gl_wdgt_text_entry_set_text (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
 				     (merge->type != GL_MERGE_NONE),
 				     lines);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
-				view_text->private->text_entry);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_text->private->text_entry);
 	g_signal_connect ( G_OBJECT(view_text->private->text_entry),
 			   "changed", G_CALLBACK (text_entry_changed_cb),
 			   view_text);
 
 
 	/*---------------------------*/
-	/* Text Props Notebook Tab   */
+	/* Text Properties section   */
 	/*---------------------------*/
-	gl_debug (DEBUG_VIEW, "Creating props tab...");
-	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Appearance")));
-
-	/* text props entry */
-	gl_debug (DEBUG_VIEW, "Creating props entry...");
+	wsection = gl_hig_category_new (_("Properties"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_text->private->text_props = gl_wdgt_text_props_new ();
 	gl_wdgt_text_props_set_label_size_group (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
 						 label_size_group);
 	gl_wdgt_text_props_set_params (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
 				       font_family, font_size, font_weight,
 				       font_italic_flag, color, just);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
-				view_text->private->text_props);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_text->private->text_props);
 	g_signal_connect ( G_OBJECT(view_text->private->text_props),
 			   "changed", G_CALLBACK (text_props_changed_cb),
 			   view_text);
 
 
 	/*----------------------------*/
-	/* Position/Size Notebook Tab */
+	/* Position section           */
 	/*----------------------------*/
-	gl_debug (DEBUG_VIEW, "Creating position tab...");
-	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Position")));
-
-	/* ------ Position Frame ------ */
-	gl_debug (DEBUG_VIEW, "Creating position entry...");
+	wsection = gl_hig_category_new (_("Position"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_text->private->position = gl_wdgt_position_new ();
+	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_text->private->position),
+					       label_size_group);
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_text->private->position),
 				     x, y,
 				     label_width, label_height);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
-				view_text->private->position);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_text->private->position);
 	g_signal_connect (G_OBJECT (view_text->private->position),
 			  "changed",
 			  G_CALLBACK(position_changed_cb), view_text);

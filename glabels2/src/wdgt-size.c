@@ -43,7 +43,7 @@ typedef void (*glWdgtSizeSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GObjectClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_size_signals[LAST_SIGNAL] = { 0 };
 
@@ -51,19 +51,22 @@ static gint wdgt_size_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_size_class_init (glWdgtSizeClass * class);
-static void gl_wdgt_size_instance_init (glWdgtSize * size);
-static void gl_wdgt_size_finalize (GObject * object);
-static void gl_wdgt_size_construct (glWdgtSize * size, gchar * label);
+static void gl_wdgt_size_class_init    (glWdgtSizeClass *class);
+static void gl_wdgt_size_instance_init (glWdgtSize      *size);
+static void gl_wdgt_size_finalize      (GObject         *object);
+static void gl_wdgt_size_construct     (glWdgtSize      *size);
 
-static void aspect_toggle_cb (GtkToggleButton * togglebutton,
-			      gpointer user_data);
-static void w_spin_cb (GtkSpinButton * spinbutton, gpointer user_data);
-static void h_spin_cb (GtkSpinButton * spinbutton, gpointer user_data);
+static void aspect_toggle_cb (GtkToggleButton *togglebutton,
+			      gpointer         user_data);
+
+static void w_spin_cb        (GtkSpinButton    *spinbutton,
+			      gpointer          user_data);
+static void h_spin_cb        (GtkSpinButton    *spinbutton,
+			      gpointer          user_data);
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/***************************************************************************/
+/* Boilerplate Object stuff.                                               */
+/***************************************************************************/
 guint
 gl_wdgt_size_get_type (void)
 {
@@ -83,21 +86,22 @@ gl_wdgt_size_get_type (void)
 		};
 
 		wdgt_size_type =
-		    g_type_register_static (gtk_vbox_get_type (),
-					    "glWdgtSize", &wdgt_size_info, 0);
+			g_type_register_static (gl_hig_vbox_get_type (),
+						"glWdgtSize",
+						&wdgt_size_info, 0);
 	}
 
 	return wdgt_size_type;
 }
 
 static void
-gl_wdgt_size_class_init (glWdgtSizeClass * class)
+gl_wdgt_size_class_init (glWdgtSizeClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_size_finalize;
 
@@ -113,11 +117,13 @@ gl_wdgt_size_class_init (glWdgtSizeClass * class)
 }
 
 static void
-gl_wdgt_size_instance_init (glWdgtSize * size)
+gl_wdgt_size_instance_init (glWdgtSize *size)
 {
 	size->aspect_ratio = 1.0;
 
+	size->w_label = NULL;
 	size->w_spin = NULL;
+	size->h_label = NULL;
 	size->h_spin = NULL;
 
 	size->units_label = NULL;
@@ -126,7 +132,7 @@ gl_wdgt_size_instance_init (glWdgtSize * size)
 }
 
 static void
-gl_wdgt_size_finalize (GObject * object)
+gl_wdgt_size_finalize (GObject *object)
 {
 	glWdgtSize *size;
 	glWdgtSizeClass *class;
@@ -139,26 +145,28 @@ gl_wdgt_size_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/***************************************************************************/
+/* New widget.                                                             */
+/***************************************************************************/
 GtkWidget *
-gl_wdgt_size_new (gchar * label)
+gl_wdgt_size_new (void)
 {
 	glWdgtSize *size;
 
 	size = g_object_new (gl_wdgt_size_get_type (), NULL);
 
-	gl_wdgt_size_construct (size, label);
+	gl_wdgt_size_construct (size);
 
 	return GTK_WIDGET (size);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*-------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                   */
+/*-------------------------------------------------------------------------*/
 static void
-gl_wdgt_size_construct (glWdgtSize * size,
-			gchar * label)
+gl_wdgt_size_construct (glWdgtSize *size)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *whbox;
 	GtkObject *w_adjust, *h_adjust;
 	const gchar *units_string;
 	gdouble units_per_point, climb_rate;
@@ -171,20 +179,15 @@ gl_wdgt_size_construct (glWdgtSize * size,
 
 	wvbox = GTK_WIDGET (size);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (3, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- W line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* W Label */
-	wlabel = gtk_label_new (_("Width:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	size->w_label = gtk_label_new (_("Width:"));
+	gtk_misc_set_alignment (GTK_MISC (size->w_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), size->w_label);
+
 	/* W spin */
 	w_adjust = gtk_adjustment_new (climb_rate, climb_rate, 100.0,
 				       climb_rate, 10.0, 10.0);
@@ -193,14 +196,17 @@ gl_wdgt_size_construct (glWdgtSize * size,
 	gtk_spin_button_set_snap_to_ticks (GTK_SPIN_BUTTON (size->w_spin),
 					   TRUE);
 	gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (size->w_spin), TRUE);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), size->w_spin,
-				   1, 2, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), size->w_spin);
+
+	/* ---- H line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* H label */
-	wlabel = gtk_label_new (_("Height:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	size->h_label = gtk_label_new (_("Height:"));
+	gtk_misc_set_alignment (GTK_MISC (size->h_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), size->h_label);
+
 	/* H spin */
 	h_adjust = gtk_adjustment_new (climb_rate, climb_rate,
 				       100.0, climb_rate, 10.0, 10.0);
@@ -209,21 +215,18 @@ gl_wdgt_size_construct (glWdgtSize * size,
 	gtk_spin_button_set_snap_to_ticks (GTK_SPIN_BUTTON (size->h_spin),
 					   TRUE);
 	gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (size->h_spin), TRUE);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), size->h_spin,
-				   1, 2, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), size->h_spin);
 
 	/* Units */
 	size->units_label = gtk_label_new (units_string);
 	gtk_misc_set_alignment (GTK_MISC (size->units_label), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable),
-				   size->units_label, 2, 3, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), size->units_label);
 
 	/* Maintain aspect ratio checkbox */
 	size->aspect_checkbox =
 	    gtk_check_button_new_with_label (_
 					     ("Maintain current aspect ratio"));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), size->aspect_checkbox, 0,
-				   3, 2, 3);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), size->aspect_checkbox);
 
 	/* Connect signals to controls */
 	g_signal_connect (G_OBJECT (size->aspect_checkbox), "toggled",
@@ -233,13 +236,13 @@ gl_wdgt_size_construct (glWdgtSize * size,
 	g_signal_connect (G_OBJECT (size->h_spin), "changed",
 			  G_CALLBACK (h_spin_cb), size);
 }
-
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Maintain aspect ratio checkbox callback.                       */
 /*--------------------------------------------------------------------------*/
 static void
-aspect_toggle_cb (GtkToggleButton * togglebutton,
-		  gpointer user_data)
+aspect_toggle_cb (GtkToggleButton *togglebutton,
+		  gpointer         user_data)
 {
 	glWdgtSize *size = GL_WDGT_SIZE (user_data);
 	GtkAdjustment *w_adjust, *h_adjust;
@@ -295,13 +298,13 @@ aspect_toggle_cb (GtkToggleButton * togglebutton,
 	g_signal_emit (G_OBJECT (size), wdgt_size_signals[CHANGED], 0);
 
 }
-
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  W spin button changed callback.                                */
 /*--------------------------------------------------------------------------*/
 static void
-w_spin_cb (GtkSpinButton * spinbutton,
-	   gpointer user_data)
+w_spin_cb (GtkSpinButton *spinbutton,
+	   gpointer       user_data)
 {
 	glWdgtSize *size = GL_WDGT_SIZE (user_data);
 	GtkToggleButton *toggle = GTK_TOGGLE_BUTTON (size->aspect_checkbox);
@@ -333,8 +336,8 @@ w_spin_cb (GtkSpinButton * spinbutton,
 /* PRIVATE.  H spin button changed callback.                                */
 /*--------------------------------------------------------------------------*/
 static void
-h_spin_cb (GtkSpinButton * spinbutton,
-	   gpointer user_data)
+h_spin_cb (GtkSpinButton *spinbutton,
+	   gpointer       user_data)
 {
 	glWdgtSize *size = GL_WDGT_SIZE (user_data);
 	GtkToggleButton *toggle = GTK_TOGGLE_BUTTON (size->aspect_checkbox);
@@ -361,15 +364,15 @@ h_spin_cb (GtkSpinButton * spinbutton,
 	g_signal_emit (G_OBJECT (size), wdgt_size_signals[CHANGED], 0);
 
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/***************************************************************************/
+/* query values from controls.                                             */
+/***************************************************************************/
 void
-gl_wdgt_size_get_size (glWdgtSize * size,
-		       gdouble * w,
-		       gdouble * h,
-		       gboolean * keep_aspect_ratio_flag)
+gl_wdgt_size_get_size (glWdgtSize *size,
+		       gdouble    *w,
+		       gdouble    *h,
+		       gboolean   *keep_aspect_ratio_flag)
 {
 	gdouble units_per_point;
 
@@ -387,16 +390,16 @@ gl_wdgt_size_get_size (glWdgtSize * size,
 	*h /= units_per_point;
 }
 
-/*====================================================================*/
-/* set values and ranges for controls.                                */
-/*====================================================================*/
+/***************************************************************************/
+/* set values and ranges for controls.                                     */
+/***************************************************************************/
 void
-gl_wdgt_size_set_params (glWdgtSize * size,
-			 gdouble w,
-			 gdouble h,
-			 gboolean keep_aspect_ratio_flag,
-			 gdouble w_max,
-			 gdouble h_max)
+gl_wdgt_size_set_params (glWdgtSize *size,
+			 gdouble     w,
+			 gdouble     h,
+			 gboolean    keep_aspect_ratio_flag,
+			 gdouble     w_max,
+			 gdouble     h_max)
 {
 	GtkObject *w_adjust, *h_adjust;
 	const gchar *units_string;
@@ -456,13 +459,13 @@ gl_wdgt_size_set_params (glWdgtSize * size,
 
 }
 
-/*====================================================================*/
-/* set size only.                                                     */
-/*====================================================================*/
+/***************************************************************************/
+/* set size only.                                                          */
+/***************************************************************************/
 void
-gl_wdgt_size_set_size (glWdgtSize * size,
-		       gdouble w,
-		       gdouble h)
+gl_wdgt_size_set_size (glWdgtSize *size,
+		       gdouble     w,
+		       gdouble     h)
 {
 	gdouble units_per_point;
 
@@ -490,4 +493,15 @@ gl_wdgt_size_set_size (glWdgtSize * size,
 	g_signal_handlers_unblock_by_func (GTK_OBJECT (size->h_spin),
 					   G_CALLBACK (h_spin_cb),
 					   size);
+}
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_size_set_label_size_group (glWdgtSize   *size,
+				   GtkSizeGroup *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, size->w_label);
+	gtk_size_group_add_widget (label_size_group, size->h_label);
 }

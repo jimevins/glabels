@@ -259,11 +259,12 @@ update_view_image_cb (glLabelObject *object,
 static GtkWidget *
 construct_properties_dialog (glViewImage *view_image)
 {
-	GtkWidget          *dialog, *notebook, *wvbox, *wbutton;
+	GtkWidget          *dialog, *wsection, *wbutton;
 	BonoboWindow       *win = glabels_get_active_window ();
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
 	gchar              *filename;
+	GtkSizeGroup       *label_size_group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -278,28 +279,23 @@ construct_properties_dialog (glViewImage *view_image)
 	/*-----------------------------------------------------------------*/
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
-	dialog = gtk_dialog_new_with_buttons ( _("Edit image object properties"),
-					       GTK_WINDOW (win),
-					       GTK_DIALOG_DESTROY_WITH_PARENT,
-					       GTK_STOCK_CLOSE,
+	dialog = gl_hig_dialog_new_with_buttons ( _("Edit image object properties"),
+						  GTK_WINDOW (win),
+						  GTK_DIALOG_DESTROY_WITH_PARENT,
+						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
-					       NULL );
+						  NULL );
+        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), view_image);
 
-	notebook = gtk_notebook_new ();
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			    notebook, TRUE, TRUE, 0);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	/*---------------------------*/
-	/* Image Notebook Tab        */
+	/* Image section             */
 	/*---------------------------*/
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Image")));
-
-	/* image entry */
+	wsection = gl_hig_category_new (_("Image"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_image->private->pixmap_entry =
 		gnome_pixmap_entry_new ("image", "Load image", TRUE);
 	gnome_pixmap_entry_set_preview_size (GNOME_PIXMAP_ENTRY
@@ -320,8 +316,8 @@ construct_properties_dialog (glViewImage *view_image)
 		image_path = g_get_current_dir ();
 	}
 
-	gtk_box_pack_start (GTK_BOX (wvbox), view_image->private->pixmap_entry,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_image->private->pixmap_entry);
 	g_signal_connect ( G_OBJECT(gnome_file_entry_gtk_entry
 				    (GNOME_FILE_ENTRY (view_image->private->pixmap_entry))),
 			   "changed", G_CALLBACK (file_changed_cb),
@@ -329,40 +325,40 @@ construct_properties_dialog (glViewImage *view_image)
 
 
 	/*----------------------------*/
-	/* Position/Size Notebook Tab */
+	/* Position section           */
 	/*----------------------------*/
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
-				  gtk_label_new (_("Position/Size")));
-
-	/* ------ Position Frame ------ */
+	wsection = gl_hig_category_new (_("Position"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 	view_image->private->position = gl_wdgt_position_new ();
+	gl_wdgt_position_set_label_size_group (GL_WDGT_POSITION(view_image->private->position),
+					       label_size_group);
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_image->private->position),
-				     x, y,
-				     label_width, label_height);
-	gtk_box_pack_start (GTK_BOX (wvbox),
-				view_image->private->position,
-			    FALSE, FALSE, 0);
+				     x, y, label_width, label_height);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_image->private->position);
 	g_signal_connect (G_OBJECT (view_image->private->position),
 			  "changed",
 			  G_CALLBACK(position_changed_cb), view_image);
 
 
-	/* ------ Size Frame ------ */
-	view_image->private->size = gl_wdgt_size_new (_("Size"));
+	/*----------------------------*/
+	/* Size section               */
+	/*----------------------------*/
+	wsection = gl_hig_category_new (_("Size"));
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
+	view_image->private->size = gl_wdgt_size_new ();
+	gl_wdgt_size_set_label_size_group (GL_WDGT_SIZE(view_image->private->size),
+					       label_size_group);
 	gl_wdgt_size_set_params (GL_WDGT_SIZE (view_image->private->size),
-				 w, h,
-				 TRUE,
-				 label_width, label_height);
-	gtk_box_pack_start (GTK_BOX (wvbox), view_image->private->size,
-				FALSE, FALSE, 0);
+				 w, h, TRUE, label_width, label_height);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_image->private->size);
 	g_signal_connect (G_OBJECT (view_image->private->size), "changed",
 			  G_CALLBACK(size_changed_cb), view_image);
 
 	/* ------ Size Reset Button ------ */
 	wbutton = gtk_button_new_with_label (_("Reset image size"));
-	gtk_box_pack_start (GTK_BOX (wvbox), wbutton, FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection), wbutton);
 	g_signal_connect (G_OBJECT (wbutton), "clicked",
 			  G_CALLBACK (size_reset_cb), view_image);
 

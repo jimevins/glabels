@@ -96,6 +96,7 @@ gl_file_new (void)
 	g_signal_connect (G_OBJECT(dlg), "response",
 			  G_CALLBACK (new_response), dlg);
 
+        gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_widget_show_all (GTK_WIDGET (dlg));
 
 	gl_debug (DEBUG_FILE, "END");

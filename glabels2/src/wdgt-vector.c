@@ -54,23 +54,24 @@ typedef void (*glWdgtVectorSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_vector_signals[LAST_SIGNAL] = { 0 };
-
+
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_vector_class_init (glWdgtVectorClass * class);
-static void gl_wdgt_vector_instance_init (glWdgtVector * vector);
-static void gl_wdgt_vector_finalize (GObject * object);
-static void gl_wdgt_vector_construct (glWdgtVector * vector, gchar * label);
-static void changed_cb (glWdgtVector * vector);
-
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+static void gl_wdgt_vector_class_init    (glWdgtVectorClass *class);
+static void gl_wdgt_vector_instance_init (glWdgtVector      *vector);
+static void gl_wdgt_vector_finalize      (GObject           *object);
+static void gl_wdgt_vector_construct     (glWdgtVector      *vector);
+
+static void changed_cb                   (glWdgtVector      *vector);
+
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_vector_get_type (void)
 {
@@ -90,7 +91,7 @@ gl_wdgt_vector_get_type (void)
 		};
 
 		wdgt_vector_type =
-			g_type_register_static (gtk_vbox_get_type (),
+			g_type_register_static (gl_hig_vbox_get_type (),
 						"glWdgtVector",
 						&wdgt_vector_info, 0);
 	}
@@ -99,13 +100,13 @@ gl_wdgt_vector_get_type (void)
 }
 
 static void
-gl_wdgt_vector_class_init (glWdgtVectorClass * class)
+gl_wdgt_vector_class_init (glWdgtVectorClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_vector_finalize;
 
@@ -121,14 +122,19 @@ gl_wdgt_vector_class_init (glWdgtVectorClass * class)
 }
 
 static void
-gl_wdgt_vector_instance_init (glWdgtVector * vector)
+gl_wdgt_vector_instance_init (glWdgtVector *vector)
 {
-	vector->len_spin = NULL;
-	vector->angle_spin = NULL;
+	vector->len_label         = NULL;
+	vector->len_spin          = NULL;
+	vector->len_units_label   = NULL;
+
+	vector->angle_label       = NULL;
+	vector->angle_spin        = NULL;
+	vector->angle_units_label = NULL;
 }
 
 static void
-gl_wdgt_vector_finalize (GObject * object)
+gl_wdgt_vector_finalize (GObject *object)
 {
 	glWdgtVector *vector;
 	glWdgtVectorClass *class;
@@ -141,26 +147,28 @@ gl_wdgt_vector_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_vector_new (gchar * label)
+gl_wdgt_vector_new (void)
 {
 	glWdgtVector *vector;
 
 	vector = g_object_new (gl_wdgt_vector_get_type (), NULL);
 
-	gl_wdgt_vector_construct (vector, label);
+	gl_wdgt_vector_construct (vector);
 
 	return GTK_WIDGET (vector);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*-------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                   */
+/*-------------------------------------------------------------------------*/
 static void
-gl_wdgt_vector_construct (glWdgtVector * vector,
-			  gchar * label)
+gl_wdgt_vector_construct (glWdgtVector *vector)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *whbox;
 	GtkObject *adjust;
 	const gchar *units_string;
 	gdouble units_per_point, climb_rate;
@@ -173,20 +181,15 @@ gl_wdgt_vector_construct (glWdgtVector * vector,
 
 	wvbox = GTK_WIDGET (vector);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- Length line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Length label */
-	wlabel = gtk_label_new (_("Length:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	vector->len_label = gtk_label_new (_("Length:"));
+	gtk_misc_set_alignment (GTK_MISC (vector->len_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->len_label);
+
 	/* Length spin */
 	adjust = gtk_adjustment_new (climb_rate, climb_rate, 100.0, climb_rate,
 				     10.0, 10.0);
@@ -198,18 +201,22 @@ gl_wdgt_vector_construct (glWdgtVector * vector,
 	g_signal_connect_swapped (G_OBJECT (vector->len_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (vector));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), vector->len_spin, 1, 2,
-				   0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->len_spin);
+
 	/* Length units label */
 	vector->len_units_label = gtk_label_new (units_string);
 	gtk_misc_set_alignment (GTK_MISC (vector->len_units_label), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), vector->len_units_label,
-				   2, 3, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->len_units_label);
+
+	/* ---- Angle line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Angle label */
-	wlabel = gtk_label_new (_("Angle:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	vector->angle_label = gtk_label_new (_("Angle:"));
+	gtk_misc_set_alignment (GTK_MISC (vector->angle_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->angle_label);
+
 	/* Angle spin */
 	adjust = gtk_adjustment_new (0.0, -180.0, +180.0, 1.0, 10.0, 10.0);
 	vector->angle_spin =
@@ -221,14 +228,12 @@ gl_wdgt_vector_construct (glWdgtVector * vector,
 	g_signal_connect_swapped (G_OBJECT (vector->angle_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (vector));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), vector->angle_spin, 1, 2,
-				   1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->angle_spin);
+
 	/* Angle units label */
 	vector->angle_units_label = gtk_label_new (_("degrees"));
 	gtk_misc_set_alignment (GTK_MISC (vector->angle_units_label), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable),
-				   vector->angle_units_label, 2, 3, 1, 2);
-
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), vector->angle_units_label);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -240,14 +245,14 @@ changed_cb (glWdgtVector * vector)
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (vector), wdgt_vector_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/****************************************************************************/
+/* query values from controls.                                              */
+/****************************************************************************/
 void
-gl_wdgt_vector_get_params (glWdgtVector * vector,
-			   gdouble * dx,
-			   gdouble * dy)
+gl_wdgt_vector_get_params (glWdgtVector *vector,
+			   gdouble      *dx,
+			   gdouble      *dy)
 {
 	gdouble length, angle;
 	gdouble units_per_point;
@@ -265,15 +270,15 @@ gl_wdgt_vector_get_params (glWdgtVector * vector,
 	*dy = COMP_Y (length, angle);
 }
 
-/*====================================================================*/
-/* set values and ranges for controls.                                */
-/*====================================================================*/
+/****************************************************************************/
+/* set values and ranges for controls.                                      */
+/****************************************************************************/
 void
-gl_wdgt_vector_set_params (glWdgtVector * vector,
-			   gdouble dx,
-			   gdouble dy,
-			   gdouble x_max,
-			   gdouble y_max)
+gl_wdgt_vector_set_params (glWdgtVector *vector,
+			   gdouble       dx,
+			   gdouble       dy,
+			   gdouble       x_max,
+			   gdouble       y_max)
 {
 	GtkObject *length_adjust;
 	gdouble length, angle;
@@ -303,4 +308,15 @@ gl_wdgt_vector_set_params (glWdgtVector * vector,
 	gtk_spin_button_update (GTK_SPIN_BUTTON (vector->len_spin));
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (vector->angle_spin), angle);
+}
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_vector_set_label_size_group (glWdgtVector *vector,
+				     GtkSizeGroup *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, vector->len_label);
+	gtk_size_group_add_widget (label_size_group, vector->angle_label);
 }

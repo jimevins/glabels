@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_SIZE (gl_wdgt_size_get_type ())
 #define GL_WDGT_SIZE(obj) \
@@ -40,39 +43,53 @@ typedef struct _glWdgtSize glWdgtSize;
 typedef struct _glWdgtSizeClass glWdgtSizeClass;
 
 struct _glWdgtSize {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
-	gdouble w, h;
-	gdouble aspect_ratio;
-	gdouble w_max, h_max;
-	gdouble w_max_orig, h_max_orig;
+	gdouble    w, h;
+	gdouble    aspect_ratio;
+	gdouble    w_max, h_max;
+	gdouble    w_max_orig, h_max_orig;
 
+	GtkWidget *w_label;
 	GtkWidget *w_spin;
+
+	GtkWidget *h_label;
 	GtkWidget *h_spin;
 	GtkWidget *units_label;
+
 	GtkWidget *aspect_checkbox;
 };
 
 struct _glWdgtSizeClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtSize * size, gpointer user_data);
 };
 
-extern guint gl_wdgt_size_get_type (void);
+guint      gl_wdgt_size_get_type             (void);
 
-extern GtkWidget *gl_wdgt_size_new (gchar * label);
+GtkWidget *gl_wdgt_size_new                  (void);
 
-extern void gl_wdgt_size_get_size (glWdgtSize * size,
-				   gdouble * w,	gdouble * h,
-				   gboolean * keep_aspect_ratio_flag);
+void       gl_wdgt_size_get_size             (glWdgtSize   *size,
+					      gdouble      *w,
+					      gdouble      *h,
+					      gboolean     *keep_aspect_ratio_flag);
 
-extern void gl_wdgt_size_set_params (glWdgtSize * size,
-				     gdouble w, gdouble h,
-				     gboolean keep_aspect_ratio_flag,
-				     gdouble w_max, gdouble h_max);
+void       gl_wdgt_size_set_params           (glWdgtSize   *size,
+					      gdouble       w,
+					      gdouble       h,
+					      gboolean      keep_aspect_ratio_flag,
+					      gdouble       w_max,
+					      gdouble       h_max);
 
-extern void gl_wdgt_size_set_size (glWdgtSize * size,
-				   gdouble w, gdouble h);
+void       gl_wdgt_size_set_size             (glWdgtSize   *size,
+					      gdouble       w,
+					      gdouble       h);
+
+void       gl_wdgt_size_set_label_size_group (glWdgtSize   *size,
+					      GtkSizeGroup *label_size_group);
+
+
+G_END_DECLS
 
 #endif
