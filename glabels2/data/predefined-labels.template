@@ -30,6 +30,7 @@
     <Alias name="Avery 5972"/>
     <Alias name="Avery 5979"/>
     <Alias name="Avery 5980"/>
+    <Alias name="Avery 6231"/>
     <Alias name="Avery 6233"/>
     <Alias name="Avery 6245"/>
     <Alias name="Avery 6460"/>
@@ -143,6 +144,16 @@
   </Sheet>
 
   <!-- =================================================================== -->
+  <!-- Avery: File Folder Labels, 51 x 89 mm, 30 per sheet                 -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5366" size="US-Letter" description="File Folder Labels">
+    <Label id="0" style="rectangle" width="252" height="48" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="15" x0="36" y0="36" dx="288" dy="48"/>
+    </Label>
+  </Sheet>
+
+ <!-- =================================================================== -->
   <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    * -->
   <!-- =================================================================== -->
   <Sheet name="Avery 5371" size="US-Letter" description="Business Cards">
@@ -391,6 +402,17 @@
     <Alias name="Avery J8161"/>
   </Sheet>
 
+  <!-- =================================================================== -->  
+  <!-- Avery 7162 family: Mailing labels, 99.1 x 33.9 mm, 16 per sheet     -->  
+  <!-- =================================================================== -->  
+  <Sheet name="Avery 7162" size="A4" description="Mailing labels">  
+    <Label id="0" style="rectangle" width="280.9" height="96.1" round="5">  
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="8" x0="11.3" y0="36.8" dx="290.5" dy="96.1"/>  
+    </Label>  
+    <Alias name="Avery L7162"/>  
+  </Sheet>
+
   <!-- =================================================================== -->
   <!-- Avery 7163 family: Mailing labels, 99.1 x 38.1 mm, 14 per sheet     -->
   <!-- =================================================================== -->
@@ -413,6 +435,17 @@
     <Alias name="Avery J8164"/>
     <Alias name="Avery L7164"/>
     <Alias name="Biltema 23-756"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7169 family: shipping labels, 99.1 x 139.0 mm, 4 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery L7169" size="A4" description="Shipping labels">
+    <Label id="0" style="rectangle" width="280.9" height="394.0" round="6">
+      <Markup type="margin" size="6"/>
+      <Layout nx="2" ny="2" x0="14.2" y0="20.0" dx="287.7" dy="394.0"/>
+    </Label>
+    <Alias name="Avery 7169"/>
   </Sheet>
 
   <!-- =================================================================== -->
@@ -463,6 +496,9 @@
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="40" dx="269" dy="153"/>
     </Label>
+    <Alias name="DECAdry SCW-2090"/>
+    <Alias name="DECAdry OCB-3327"/>
+    <Alias name="DECAdry DAW-327"/>
   </Sheet>
 
   <!-- =================================================================== -->
@@ -706,6 +742,17 @@
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Imation-SoniX CD/DVD Labels  (Face Only)                          * -->
+  <!-- =================================================================== -->
+  <Sheet name="Imation-SoniX No.5112 15954" size="US-Letter"
+         description="CD/DVD Labels (Face Only)">
+    <Label style="cd" radius="167.8" hole="18.5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="1" ny="1" x0="40.5" y0="370" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
