@@ -555,6 +555,8 @@ gl_template_xml_parse_sheet (xmlNodePtr sheet_node)
 
 	template->name = g_list_append (template->name,
 					xmlGetProp (sheet_node, "name"));
+	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name->data);
+
 	template->page_size = xmlGetProp (sheet_node, "size");
 	if ( strcmp (template->page_size,"US-Letter") == 0 ) {
 		/* Compatibility with old pre-1.0 template files.*/
