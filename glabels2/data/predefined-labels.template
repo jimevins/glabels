@@ -199,6 +199,10 @@
          description="CD/DVD Labels (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
+      <Markup type="line" x1="0" y1="166.5" x2="108" y2="166.5"/>
+      <Markup type="line" x1="225" y1="166.5" x2="333" y2="166.5"/>
+      <Markup type="line" x1="166.5" y1="0" x2="166.5" y2="108"/>
+      <Markup type="line" x1="166.5" y1="225" x2="166.5" y2="333"/>
       <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
     </Label>
     <Alias name="Avery 5691"/>
