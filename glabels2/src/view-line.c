@@ -177,7 +177,6 @@ gl_view_line_new (glLabelLine *object,
 	guint              line_color;
 	gdouble            w, h;
 	GtkMenu            *menu;
-	GtkWidget          *dialog;
 	GnomeCanvasPoints  *points;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -217,8 +216,8 @@ gl_view_line_new (glLabelLine *object,
 			  G_CALLBACK (update_view_line_cb), view_line);
 
 	/* Create a dialog for controlling/viewing object properties. */
-	dialog = construct_properties_dialog (view_line);
-	gl_view_object_set_dialog     (GL_VIEW_OBJECT(view_line), dialog);
+	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_line),
+					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -275,6 +274,7 @@ construct_properties_dialog (glViewLine *view_line)
 	guint              line_color;
 	gdouble            x, y, w, h, label_width, label_height;
 	GtkSizeGroup       *label_size_group;
+	GtkWidget          *window;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -290,8 +290,10 @@ construct_properties_dialog (glViewLine *view_line)
 	/*-----------------------------------------------------------------*/
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
+	window = gtk_widget_get_toplevel (
+		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_line))));
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit line object properties"),
-						  NULL,
+						  GTK_WINDOW (window),
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
@@ -383,7 +385,10 @@ response_cb (GtkDialog     *dialog,
 	case GTK_RESPONSE_CLOSE:
 		gtk_widget_hide (GTK_WIDGET(dialog));
 		break;
+	case GTK_RESPONSE_DELETE_EVENT:
+		break;
 	default:
+		g_print ("response = %d", response);
 		g_assert_not_reached();
 	}
 

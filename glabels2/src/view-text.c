@@ -180,7 +180,6 @@ gl_view_text_new (glLabelText *object,
 {
 	glViewText         *view_text;
 	GtkMenu            *menu;
-	GtkWidget          *dialog;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_TEXT (object));
@@ -200,8 +199,8 @@ gl_view_text_new (glLabelText *object,
 			  G_CALLBACK (update_view_text_cb), view_text);
 
 	/* Create a dialog for controlling/viewing object properties. */
-	dialog = construct_properties_dialog (view_text);
-	gl_view_object_set_dialog     (GL_VIEW_OBJECT(view_text), dialog);
+	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_text),
+					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -248,6 +247,7 @@ construct_properties_dialog (glViewText *view_text)
 	GtkJustification   just;
 	glMerge            *merge;
 	GtkSizeGroup       *label_size_group;
+	GtkWidget          *window;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -266,8 +266,10 @@ construct_properties_dialog (glViewText *view_text)
 	/*-----------------------------------------------------------------*/
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
+	window = gtk_widget_get_toplevel (
+		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_text))));
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit text object properties"),
-						  NULL,
+						  GTK_WINDOW (window),
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
@@ -363,7 +365,10 @@ response_cb (GtkDialog     *dialog,
 	case GTK_RESPONSE_CLOSE:
 		gtk_widget_hide (GTK_WIDGET(dialog));
 		break;
+	case GTK_RESPONSE_DELETE_EVENT:
+		break;
 	default:
+		g_print ("response = %d", response);
 		g_assert_not_reached();
 	}
 

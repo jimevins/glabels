@@ -186,7 +186,6 @@ gl_view_barcode_new (glLabelBarcode *object,
 {
 	glViewBarcode      *view_barcode;
 	GtkMenu            *menu;
-	GtkWidget          *dialog;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
@@ -206,8 +205,8 @@ gl_view_barcode_new (glLabelBarcode *object,
 			  G_CALLBACK (update_view_barcode_cb), view_barcode);
 
 	/* Create a dialog for controlling/viewing object properties. */
-	dialog = construct_properties_dialog (view_barcode);
-	gl_view_object_set_dialog     (GL_VIEW_OBJECT(view_barcode), dialog);
+	gl_view_object_set_dlg_constructor (GL_VIEW_OBJECT(view_barcode),
+					    GL_VIEW_OBJECT_DLG_CONSTRUCTOR(construct_properties_dialog));
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -253,6 +252,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	gdouble            scale;
 	glMerge            *merge;
 	GtkSizeGroup       *label_size_group;
+	GtkWidget          *window;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -269,8 +269,10 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	/*-----------------------------------------------------------------*/
 	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
+	window = gtk_widget_get_toplevel (
+		GTK_WIDGET(gl_view_object_get_view(GL_VIEW_OBJECT(view_barcode))));
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit barcode object properties"),
-						  NULL,
+						  GTK_WINDOW (window),
 						  GTK_DIALOG_DESTROY_WITH_PARENT,
 						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
@@ -385,7 +387,10 @@ response_cb (GtkDialog     *dialog,
 	case GTK_RESPONSE_CLOSE:
 		gtk_widget_hide (GTK_WIDGET(dialog));
 		break;
+	case GTK_RESPONSE_DELETE_EVENT:
+		break;
 	default:
+		g_print ("response = %d", response);
 		g_assert_not_reached();
 	}
 

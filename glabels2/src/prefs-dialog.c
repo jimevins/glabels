@@ -247,8 +247,11 @@ response_cb (glPrefsDialog *dlg,
 	case GTK_RESPONSE_CLOSE:
 		gtk_widget_hide (GTK_WIDGET(dlg));
 		break;
+	case GTK_RESPONSE_DELETE_EVENT:
+		break;
 	default:
-		g_assert_not_reached();
+		g_print ("response = %d", response);
+		g_assert_not_reached ();
 	}
 
 	gl_debug (DEBUG_VIEW, "END");

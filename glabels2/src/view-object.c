@@ -32,14 +32,16 @@
 
 struct _glViewObjectPrivate {
 
-	glView               *view;
-	glLabelObject        *object;
+	glView                     *view;
+	glLabelObject              *object;
 
-	GnomeCanvasItem      *group;
-	GnomeCanvasItem      *highlight;
+	GnomeCanvasItem            *group;
+	GnomeCanvasItem            *highlight;
 
-	GtkWidget            *menu;
-	GtkWidget            *property_dialog;
+	GtkWidget                  *menu;
+	GtkWidget                  *property_dialog;
+
+	glViewObjectDlgConstructor  dialog_constructor;
 };
 
 /*========================================================*/
@@ -241,16 +243,15 @@ gl_view_object_set_object     (glViewObject         *view_object,
 /* Set dialog for controlling/viewing object properties.                     */
 /*****************************************************************************/
 void
-gl_view_object_set_dialog     (glViewObject *view_object,
-			       GtkWidget *dialog)
+gl_view_object_set_dlg_constructor (glViewObject               *view_object,
+				    glViewObjectDlgConstructor  dlg_constructor)
 
 {
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
-	g_return_if_fail (dialog && GTK_IS_WIDGET (dialog));
 	
-	view_object->private->property_dialog = dialog;
+	view_object->private->dialog_constructor = dlg_constructor;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -446,7 +447,21 @@ gl_view_object_show_dialog (glViewObject *view_object)
 
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
+	if (view_object->private->property_dialog != NULL) {
+		gtk_window_present (GTK_WINDOW (view_object->private->property_dialog));
+		return;
+	}
+
+	view_object->private->property_dialog =
+		view_object->private->dialog_constructor (view_object);
+
+	g_signal_connect (G_OBJECT (view_object->private->property_dialog),
+			  "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &view_object->private->property_dialog);
+	
 	gtk_widget_show_all (view_object->private->property_dialog);
+
 
 	gl_debug (DEBUG_VIEW, "END");
 }

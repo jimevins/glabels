@@ -27,9 +27,6 @@
 #include <gnome.h>
 #include "label-object.h"
 
-G_BEGIN_DECLS
-
-
 #define GL_TYPE_VIEW_OBJECT            (gl_view_object_get_type ())
 #define GL_VIEW_OBJECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_OBJECT, glViewObject))
 #define GL_VIEW_OBJECT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_OBJECT, glViewObjectClass))
@@ -55,30 +52,44 @@ struct _glViewObjectClass {
 	GObjectClass         parent_class;
 };
 
-extern GType     gl_view_object_get_type       (void);
 
-extern GObject  *gl_view_object_new            (void);
+typedef GtkWidget * (*glViewObjectDlgConstructor)(glViewObject *);
+#define GL_VIEW_OBJECT_DLG_CONSTRUCTOR(f) ((glViewObjectDlgConstructor) (f))
 
-extern void      gl_view_object_set_view       (glViewObject *view_object,
-					        glView *view);
-extern void      gl_view_object_set_object     (glViewObject *view_object,
-					        glLabelObject *object,
-						glViewHighlightStyle style);
-extern void      gl_view_object_set_dialog     (glViewObject *view_object,
-					        GtkWidget *dialog);
+G_BEGIN_DECLS
 
-extern glView          *gl_view_object_get_view   (glViewObject *view_object);
-extern glLabelObject   *gl_view_object_get_object (glViewObject *view_object);
-extern GnomeCanvasItem *gl_view_object_get_group  (glViewObject *view_object);
-extern GtkMenu         *gl_view_object_get_menu   (glViewObject *view_object);
+GType            gl_view_object_get_type          (void);
 
-extern void      gl_view_object_update_highlight  (glViewObject *view_object);
-extern void      gl_view_object_show_highlight    (glViewObject *view_object);
-extern void      gl_view_object_hide_highlight    (glViewObject *view_object);
+GObject         *gl_view_object_new               (void);
 
-extern void      gl_view_object_show_dialog       (glViewObject *view_object);
 
-extern void      gl_view_object_select            (glViewObject *view_object);
+void             gl_view_object_set_view          (glViewObject         *view_object,
+						   glView               *view);
+
+void             gl_view_object_set_object        (glViewObject         *view_object,
+						   glLabelObject        *object,
+						   glViewHighlightStyle  style);
+
+void             gl_view_object_set_dlg_constructor (glViewObject       *view_object,
+					     glViewObjectDlgConstructor  dlg_constructor);
+
+glView          *gl_view_object_get_view          (glViewObject         *view_object);
+
+glLabelObject   *gl_view_object_get_object        (glViewObject         *view_object);
+
+GnomeCanvasItem *gl_view_object_get_group         (glViewObject         *view_object);
+
+GtkMenu         *gl_view_object_get_menu          (glViewObject         *view_object);
+
+void             gl_view_object_update_highlight  (glViewObject         *view_object);
+
+void             gl_view_object_show_highlight    (glViewObject         *view_object);
+
+void             gl_view_object_hide_highlight    (glViewObject         *view_object);
+
+void             gl_view_object_show_dialog       (glViewObject         *view_object);
+
+void             gl_view_object_select            (glViewObject         *view_object);
 
 G_END_DECLS
 
