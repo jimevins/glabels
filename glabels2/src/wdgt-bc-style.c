@@ -42,7 +42,7 @@ typedef void (*glWdgtBCStyleSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_bc_style_signals[LAST_SIGNAL] = { 0 };
 
@@ -50,16 +50,16 @@ static gint wdgt_bc_style_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_bc_style_class_init (glWdgtBCStyleClass * class);
-static void gl_wdgt_bc_style_instance_init (glWdgtBCStyle * prop_style);
-static void gl_wdgt_bc_style_finalize (GObject * object);
-static void gl_wdgt_bc_style_construct (glWdgtBCStyle * prop_style,
-					gchar * label);
-static void changed_cb (glWdgtBCStyle * prop_style);
+static void gl_wdgt_bc_style_class_init    (glWdgtBCStyleClass *class);
+static void gl_wdgt_bc_style_instance_init (glWdgtBCStyle      *bc_style);
+static void gl_wdgt_bc_style_finalize      (GObject            *object);
+static void gl_wdgt_bc_style_construct     (glWdgtBCStyle      *bc_style);
+
+static void changed_cb                     (glWdgtBCStyle      *bc_style);
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_bc_style_get_type (void)
 {
@@ -79,7 +79,7 @@ gl_wdgt_bc_style_get_type (void)
 		};
 
 		wdgt_bc_style_type =
-			g_type_register_static (gtk_vbox_get_type (),
+			g_type_register_static (gl_hig_vbox_get_type (),
 						"glWdgtBCStyle",
 						&wdgt_bc_style_info, 0);
 	}
@@ -88,13 +88,13 @@ gl_wdgt_bc_style_get_type (void)
 }
 
 static void
-gl_wdgt_bc_style_class_init (glWdgtBCStyleClass * class)
+gl_wdgt_bc_style_class_init (glWdgtBCStyleClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_bc_style_finalize;
 
@@ -110,215 +110,107 @@ gl_wdgt_bc_style_class_init (glWdgtBCStyleClass * class)
 }
 
 static void
-gl_wdgt_bc_style_instance_init (glWdgtBCStyle * prop_style)
+gl_wdgt_bc_style_instance_init (glWdgtBCStyle *bc_style)
 {
-	prop_style->postnet_radio = NULL;
-	prop_style->ean_radio = NULL;
-	prop_style->upc_radio = NULL;
-	prop_style->isbn_radio = NULL;
-	prop_style->code39_radio = NULL;
-	prop_style->code128_radio = NULL;
-	prop_style->code128c_radio = NULL;
-	prop_style->code128b_radio = NULL;
-	prop_style->i25_radio = NULL;
-	prop_style->cbr_radio = NULL;
-	prop_style->msi_radio = NULL;
-	prop_style->pls_radio = NULL;
+	bc_style->style_label  = NULL;
+	bc_style->style_entry  = NULL;
+	bc_style->text_check   = NULL;
 }
 
 static void
-gl_wdgt_bc_style_finalize (GObject * object)
+gl_wdgt_bc_style_finalize (GObject *object)
 {
-	glWdgtBCStyle *prop_style;
+	glWdgtBCStyle *bc_style;
 	glWdgtBCStyleClass *class;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_BC_STYLE (object));
 
-	prop_style = GL_WDGT_BC_STYLE (object);
+	bc_style = GL_WDGT_BC_STYLE (object);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_bc_style_new (gchar * label)
+gl_wdgt_bc_style_new (void)
 {
-	glWdgtBCStyle *prop_style;
+	glWdgtBCStyle *bc_style;
 
-	prop_style = g_object_new (gl_wdgt_bc_style_get_type (), NULL);
+	bc_style = g_object_new (gl_wdgt_bc_style_get_type (), NULL);
 
-	gl_wdgt_bc_style_construct (prop_style, label);
+	gl_wdgt_bc_style_construct (bc_style);
 
-	return GTK_WIDGET (prop_style);
+	return GTK_WIDGET (bc_style);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                    */
+/*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_bc_style_construct (glWdgtBCStyle * prop,
-			    gchar * label)
+gl_wdgt_bc_style_construct (glWdgtBCStyle *bc_style)
 {
-	GtkWidget *wvbox, *wframe, *wvbox1, *whbox2, *wvbox2;
-	GSList *radio_group = NULL;
+	GtkWidget *wvbox, *whbox, *wcombo;
+	GList *style_list;
 
-	wvbox = GTK_WIDGET (prop);
+	wvbox = GTK_WIDGET (bc_style);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
+	/* ---- Style line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
-	wvbox1 = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox1), 10);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox1);
+	/* Style Label */
+	bc_style->style_label = gtk_label_new (_("Style:"));
+	gtk_misc_set_alignment (GTK_MISC (bc_style->style_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), bc_style->style_label);
 
-	whbox2 = gtk_hbox_new (FALSE, GNOME_PAD);
-	gtk_container_add (GTK_CONTAINER (wvbox1), whbox2);
-
-	/* ... Start column ... */
-	wvbox2 = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox2), 10);
-	gtk_box_pack_start (GTK_BOX (whbox2), wvbox2, FALSE, FALSE, 0);
-
-	/* POSTNET button */
-	prop->postnet_radio =
-	    gtk_radio_button_new_with_label (radio_group, "POSTNET");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->postnet_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->postnet_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->postnet_radio), "toggled",
+	/* Style entry widget */
+	wcombo = gtk_combo_new ();
+	style_list = NULL;
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_POSTNET));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_EAN));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_UPC));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_ISBN));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_39));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128B));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128C));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_I25));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_CBR));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_MSI));
+	style_list = g_list_append (style_list,
+				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_PLS));
+	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), style_list);
+	g_list_free (style_list);
+	bc_style->style_entry = GTK_COMBO (wcombo)->entry;
+	gtk_entry_set_editable (GTK_ENTRY (bc_style->style_entry), FALSE);
+	gtk_widget_set_size_request (wcombo, 200, -1);
+	g_signal_connect_swapped (G_OBJECT (bc_style->style_entry), "changed",
 				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
+				  G_OBJECT (bc_style));
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
-	/* EAN button */
-	prop->ean_radio = gtk_radio_button_new_with_label (radio_group, "EAN");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->ean_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->ean_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->ean_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* UPC button */
-	prop->upc_radio = gtk_radio_button_new_with_label (radio_group, "UPC");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->upc_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->upc_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->upc_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* ISBN button */
-	prop->isbn_radio =
-	    gtk_radio_button_new_with_label (radio_group, "ISBN");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->isbn_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->isbn_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->isbn_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* CODE39 button */
-	prop->code39_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Code 39");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->code39_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->code39_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->code39_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* CODE128 button */
-	prop->code128_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Code 128");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->code128_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->code128_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->code128_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* ... Start column ... */
-	wvbox2 = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox2), 10);
-	gtk_box_pack_start (GTK_BOX (whbox2), wvbox2, FALSE, FALSE, 0);
-
-	/* CODE128B button */
-	prop->code128b_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Code 128-B");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->code128b_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->code128b_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->code128b_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* CODE128C button */
-	prop->code128c_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Code 128-C");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->code128c_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->code128c_radio,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->code128c_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* I25 button */
-	prop->i25_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Interleaved 2 of 5");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->i25_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->i25_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->i25_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* CBR button */
-	prop->cbr_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Codabar");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->cbr_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->cbr_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->cbr_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* MSI button */
-	prop->msi_radio = gtk_radio_button_new_with_label (radio_group, "MSI");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->msi_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->msi_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->msi_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* PLS button */
-	prop->pls_radio =
-	    gtk_radio_button_new_with_label (radio_group, "Plessey");
-	radio_group =
-	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (prop->pls_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox2), prop->pls_radio, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->pls_radio), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-
-	/* ... Separator ... */
-	gtk_box_pack_start (GTK_BOX (wvbox1), gtk_hseparator_new (), FALSE,
-			    FALSE, 0);
 
 	/* Text checkbox widget */
-	prop->text_check =
+	bc_style->text_check =
 	    gtk_check_button_new_with_label (_("Show text with barcode"));
-	gtk_box_pack_start (GTK_BOX (wvbox1), prop->text_check,
-			    FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->text_check), "toggled",
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), bc_style->text_check);
+	g_signal_connect_swapped (G_OBJECT (bc_style->text_check), "toggled",
 				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
+				  G_OBJECT (bc_style));
 
 }
 
@@ -326,138 +218,73 @@ gl_wdgt_bc_style_construct (glWdgtBCStyle * prop,
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtBCStyle * prop_style)
+changed_cb (glWdgtBCStyle *bc_style)
 {
 	/* Emit our "changed" signal */
-	g_signal_emit (G_OBJECT (prop_style),
+	g_signal_emit (G_OBJECT (bc_style),
 		       wdgt_bc_style_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
-void
-gl_wdgt_bc_style_get_params (glWdgtBCStyle * prop,
-			     glBarcodeStyle * style,
-			     gboolean * text_flag)
-{
-	*text_flag =
-	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (prop->text_check));
 
-	if (gtk_toggle_button_get_active
-	    (GTK_TOGGLE_BUTTON (prop->postnet_radio))) {
-		*style = GL_BARCODE_STYLE_POSTNET;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->ean_radio))) {
-		*style = GL_BARCODE_STYLE_EAN;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->upc_radio))) {
-		*style = GL_BARCODE_STYLE_UPC;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->isbn_radio))) {
-		*style = GL_BARCODE_STYLE_ISBN;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->code39_radio))) {
-		*style = GL_BARCODE_STYLE_39;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->code128_radio))) {
-		*style = GL_BARCODE_STYLE_128;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->code128c_radio))) {
-		*style = GL_BARCODE_STYLE_128C;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->code128b_radio))) {
-		*style = GL_BARCODE_STYLE_128B;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->i25_radio))) {
-		*style = GL_BARCODE_STYLE_I25;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->cbr_radio))) {
-		*style = GL_BARCODE_STYLE_CBR;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->msi_radio))) {
-		*style = GL_BARCODE_STYLE_MSI;
-	} else
-	    if (gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prop->pls_radio))) {
-		*style = GL_BARCODE_STYLE_PLS;
-	}
+/****************************************************************************/
+/* query values from controls.                                              */
+/****************************************************************************/
+void
+gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
+			     glBarcodeStyle *style,
+			     gboolean       *text_flag)
+{
+	gchar *style_string;
+
+	style_string =
+		gtk_editable_get_chars (GTK_EDITABLE(bc_style->style_entry),
+					0, -1);
+	*style = gl_barcode_text_to_style (style_string);
+
+	*text_flag =
+	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (bc_style->text_check));
+
+	g_free (style_string);
+}
+
+/****************************************************************************/
+/* fill in values and ranges for controls.                                  */
+/****************************************************************************/
+void
+gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
+			     glBarcodeStyle  style,
+			     gboolean        text_flag)
+{
+	const gchar *style_string;
+	gint         pos;
+
+	style_string = gl_barcode_style_to_text (style);
+
+	g_signal_handlers_block_by_func (G_OBJECT(bc_style->style_entry),
+					 G_CALLBACK (changed_cb),
+					 bc_style);
+	gtk_editable_delete_text (GTK_EDITABLE (bc_style->style_entry),
+				  0, -1);
+	g_signal_handlers_unblock_by_func (G_OBJECT(bc_style->style_entry),
+					   G_CALLBACK(changed_cb),
+					   bc_style);
+
+	pos = 0;
+	gtk_editable_insert_text (GTK_EDITABLE (bc_style->style_entry),
+				  style_string,
+				  strlen (style_string),
+				  &pos);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (bc_style->text_check),
+				      text_flag);
 
 }
 
-/*====================================================================*/
-/* fill in values and ranges for controls.                            */
-/*====================================================================*/
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
 void
-gl_wdgt_bc_style_set_params (glWdgtBCStyle * prop,
-			     glBarcodeStyle style,
-			     gboolean text_flag)
+gl_wdgt_bc_style_set_label_size_group (glWdgtBCStyle  *bc_style,
+				       GtkSizeGroup   *label_size_group)
 {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prop->text_check),
-				      text_flag);
-
-	switch (style) {
-	case GL_BARCODE_STYLE_POSTNET:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->postnet_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_EAN:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->ean_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_UPC:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->upc_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_ISBN:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->isbn_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_39:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->code39_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_128:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->code128_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_128C:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->code128c_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_128B:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->code128b_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_I25:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->i25_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_CBR:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->cbr_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_MSI:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->msi_radio), TRUE);
-		break;
-	case GL_BARCODE_STYLE_PLS:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->pls_radio), TRUE);
-		break;
-	default:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-					      (prop->postnet_radio), TRUE);
-		break;
-	}
+	gtk_size_group_add_widget (label_size_group, bc_style->style_label);
 }

@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "text-node.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_BC_DATA (gl_wdgt_bc_data_get_type ())
 #define GL_WDGT_BC_DATA(obj) \
@@ -40,7 +43,7 @@ typedef struct _glWdgtBCData glWdgtBCData;
 typedef struct _glWdgtBCDataClass glWdgtBCDataClass;
 
 struct _glWdgtBCData {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
 	GtkWidget *literal_radio;
 	GtkWidget *literal_entry;
@@ -50,19 +53,27 @@ struct _glWdgtBCData {
 };
 
 struct _glWdgtBCDataClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtBCData * bc_data, gpointer user_data);
 };
 
-extern guint gl_wdgt_bc_data_get_type (void);
+guint       gl_wdgt_bc_data_get_type        (void);
 
-extern GtkWidget *gl_wdgt_bc_data_new (gchar * label, GList * field_defs);
+GtkWidget  *gl_wdgt_bc_data_new             (GList        *field_defs);
 
-extern glTextNode *gl_wdgt_bc_data_get_data (glWdgtBCData * bc_data);
+void        gl_wdgt_bc_data_set_field_defs  (glWdgtBCData *bc_data,
+					     GList        *field_defs);
 
-extern void gl_wdgt_bc_data_set_data (glWdgtBCData * bc_data,
-				      gboolean merge_flag,
-				      glTextNode *text_node);
+glTextNode *gl_wdgt_bc_data_get_data        (glWdgtBCData *bc_data);
+
+void        gl_wdgt_bc_data_set_data        (glWdgtBCData *bc_data,
+					     gboolean      merge_flag,
+					     glTextNode   *text_node);
+
+void        gl_wdgt_bc_data_set_label_size_group (glWdgtBCData *bc_data,
+						  GtkSizeGroup *label_size_group);
+
+G_END_DECLS
 
 #endif

@@ -43,7 +43,7 @@ typedef void (*glWdgtBCPropsSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_bc_props_signals[LAST_SIGNAL] = { 0 };
 
@@ -51,15 +51,16 @@ static gint wdgt_bc_props_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_bc_props_class_init (glWdgtBCPropsClass * class);
-static void gl_wdgt_bc_props_instance_init (glWdgtBCProps * prop);
-static void gl_wdgt_bc_props_finalize (GObject * object);
-static void gl_wdgt_bc_props_construct (glWdgtBCProps * prop, gchar * label);
-static void changed_cb (glWdgtBCProps * prop);
+static void gl_wdgt_bc_props_class_init    (glWdgtBCPropsClass *class);
+static void gl_wdgt_bc_props_instance_init (glWdgtBCProps      *prop);
+static void gl_wdgt_bc_props_finalize      (GObject            *object);
+static void gl_wdgt_bc_props_construct     (glWdgtBCProps      *prop);
+
+static void changed_cb                     (glWdgtBCProps      *prop);
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/***************************************************************************/
+/* Boilerplate Object stuff.                                               */
+/***************************************************************************/
 guint
 gl_wdgt_bc_props_get_type (void)
 {
@@ -79,21 +80,22 @@ gl_wdgt_bc_props_get_type (void)
 		};
 
 		wdgt_bc_props_type =
-			g_type_register_static (gtk_vbox_get_type (),
-						"glWdgtBCProps", &wdgt_bc_props_info, 0);
+			g_type_register_static (gl_hig_vbox_get_type (),
+						"glWdgtBCProps",
+						&wdgt_bc_props_info, 0);
 	}
 
 	return wdgt_bc_props_type;
 }
 
 static void
-gl_wdgt_bc_props_class_init (glWdgtBCPropsClass * class)
+gl_wdgt_bc_props_class_init (glWdgtBCPropsClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_bc_props_finalize;
 
@@ -109,7 +111,7 @@ gl_wdgt_bc_props_class_init (glWdgtBCPropsClass * class)
 }
 
 static void
-gl_wdgt_bc_props_instance_init (glWdgtBCProps * prop)
+gl_wdgt_bc_props_instance_init (glWdgtBCProps *prop)
 {
 	prop->scale_spin = NULL;
 	prop->color_picker = NULL;
@@ -129,44 +131,41 @@ gl_wdgt_bc_props_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/***************************************************************************/
+/* New widget.                                                             */
+/***************************************************************************/
 GtkWidget *
-gl_wdgt_bc_props_new (gchar * label)
+gl_wdgt_bc_props_new (void)
 {
 	glWdgtBCProps *prop;
 
 	prop = g_object_new (gl_wdgt_bc_props_get_type (), NULL);
 
-	gl_wdgt_bc_props_construct (prop, label);
+	gl_wdgt_bc_props_construct (prop);
 
 	return GTK_WIDGET (prop);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                  */
+/*------------------------------------------------------------------------*/
 static void
-gl_wdgt_bc_props_construct (glWdgtBCProps * prop,
-		      gchar * label)
+gl_wdgt_bc_props_construct (glWdgtBCProps *prop)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *whbox, *wlabel;
 	GtkObject *adjust;
 
 	wvbox = GTK_WIDGET (prop);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- Scale line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Scale Label */
-	wlabel = gtk_label_new (_("Scale:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	prop->scale_label = gtk_label_new (_("Scale:"));
+	gtk_misc_set_alignment (GTK_MISC (prop->scale_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->scale_label);
+
 	/* Scale widget */
 	adjust = gtk_adjustment_new (100.0, 50.0, 200.0, 10.0, 10.0, 10.0);
 	prop->scale_spin =
@@ -174,45 +173,47 @@ gl_wdgt_bc_props_construct (glWdgtBCProps * prop,
 	g_signal_connect_swapped (G_OBJECT (prop->scale_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (prop));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), prop->scale_spin, 1, 2,
-				   0, 1);
-	/* % Label */
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->scale_spin);
+
+	/* scale % Label */
 	wlabel = gtk_label_new (_("%"));
 	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 2, 3, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
+
+	/* ---- Color line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Line Color Label */
-	wlabel = gtk_label_new (_("Color:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	prop->color_label = gtk_label_new (_("Color:"));
+	gtk_misc_set_alignment (GTK_MISC (prop->color_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->color_label);
+
 	/* Line Color picker widget */
 	prop->color_picker = gnome_color_picker_new ();
 	g_signal_connect_swapped (G_OBJECT (prop->color_picker), "color_set",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (prop));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), prop->color_picker, 1, 3,
-				   1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->color_picker);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtBCProps * prop)
+changed_cb (glWdgtBCProps *prop)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (prop), wdgt_bc_props_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/***************************************************************************/
+/* query values from controls.                                             */
+/***************************************************************************/
 void
-gl_wdgt_bc_props_get_params (glWdgtBCProps * prop,
-			     gdouble * scale,
-			     guint * color)
+gl_wdgt_bc_props_get_params (glWdgtBCProps *prop,
+			     gdouble       *scale,
+			     guint         *color)
 {
 	guint8 r, g, b, a;
 
@@ -228,13 +229,13 @@ gl_wdgt_bc_props_get_params (glWdgtBCProps * prop,
 
 }
 
-/*====================================================================*/
-/* fill in values and ranges for controls.                            */
-/*====================================================================*/
+/***************************************************************************/
+/* fill in values and ranges for controls.                                 */
+/***************************************************************************/
 void
-gl_wdgt_bc_props_set_params (glWdgtBCProps * prop,
-			     gdouble scale,
-			     guint color)
+gl_wdgt_bc_props_set_params (glWdgtBCProps *prop,
+			     gdouble        scale,
+			     guint          color)
 {
 	scale *= 100.0;
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (prop->scale_spin), scale);
@@ -245,3 +246,15 @@ gl_wdgt_bc_props_set_params (glWdgtBCProps * prop,
 				   GL_COLOR_I_BLUE (color),
 				   GL_COLOR_I_ALPHA (color));
 }
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_bc_props_set_label_size_group (glWdgtBCProps   *prop,
+				       GtkSizeGroup    *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, prop->scale_label);
+	gtk_size_group_add_widget (label_size_group, prop->color_label);
+}
+

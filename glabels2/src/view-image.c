@@ -277,7 +277,7 @@ construct_properties_dialog (glViewImage *view_image)
 			   &label_width, &label_height);
 
 	/*-----------------------------------------------------------------*/
-	/* Build dialog with notebook.                                     */
+	/* Build dialog.                                                   */
 	/*-----------------------------------------------------------------*/
 	dialog = gl_hig_dialog_new_with_buttons ( _("Edit image object properties"),
 						  GTK_WINDOW (win),

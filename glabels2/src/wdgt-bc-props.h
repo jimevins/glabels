@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "bc.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_BC_PROPS (gl_wdgt_bc_props_get_type ())
 #define GL_WDGT_BC_PROPS(obj) \
@@ -40,28 +43,36 @@ typedef struct _glWdgtBCProps      glWdgtBCProps;
 typedef struct _glWdgtBCPropsClass glWdgtBCPropsClass;
 
 struct _glWdgtBCProps {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *scale_label;
 	GtkWidget *scale_spin;
+
+	GtkWidget *color_label;
 	GtkWidget *color_picker;
 };
 
 struct _glWdgtBCPropsClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtBCProps * prop, gpointer user_data);
 };
 
-extern guint gl_wdgt_bc_props_get_type (void);
+guint      gl_wdgt_bc_props_get_type       (void);
 
-extern GtkWidget *gl_wdgt_bc_props_new (gchar * label);
+GtkWidget *gl_wdgt_bc_props_new            (void);
 
-extern void gl_wdgt_bc_props_get_params (glWdgtBCProps * prop,
-					 gdouble * scale,
-					 guint * color);
+void       gl_wdgt_bc_props_get_params     (glWdgtBCProps *prop,
+					    gdouble       *scale,
+					    guint         *color);
 
-extern void gl_wdgt_bc_props_set_params (glWdgtBCProps * prop,
-					 gdouble scale,
-					 guint color);
+void       gl_wdgt_bc_props_set_params     (glWdgtBCProps *prop,
+					    gdouble        scale,
+					    guint          color);
+
+void       gl_wdgt_bc_props_set_label_size_group (glWdgtBCProps *prop,
+						  GtkSizeGroup  *label_size_group);
+
+G_END_DECLS
 
 #endif

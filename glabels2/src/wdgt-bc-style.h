@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "bc.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_BC_STYLE (gl_wdgt_bc_style_get_type ())
 #define GL_WDGT_BC_STYLE(obj) \
@@ -40,40 +43,35 @@ typedef struct _glWdgtBCStyle glWdgtBCStyle;
 typedef struct _glWdgtBCStyleClass glWdgtBCStyleClass;
 
 struct _glWdgtBCStyle {
-	GtkVBox parent_widget;
+	glHigVBox parent_widget;
 
-	GtkWidget *postnet_radio;
-	GtkWidget *ean_radio;
-	GtkWidget *upc_radio;
-	GtkWidget *isbn_radio;
-	GtkWidget *code39_radio;
-	GtkWidget *code128_radio;
-	GtkWidget *code128c_radio;
-	GtkWidget *code128b_radio;
-	GtkWidget *i25_radio;
-	GtkWidget *cbr_radio;
-	GtkWidget *msi_radio;
-	GtkWidget *pls_radio;
+	GtkWidget *style_label;
+	GtkWidget *style_entry;
 
 	GtkWidget *text_check;
 };
 
 struct _glWdgtBCStyleClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtBCStyle * prop, gpointer user_data);
 };
 
-extern guint gl_wdgt_bc_style_get_type (void);
+guint      gl_wdgt_bc_style_get_type   (void);
 
-extern GtkWidget *gl_wdgt_bc_style_new (gchar * label);
+GtkWidget *gl_wdgt_bc_style_new        (void);
 
-extern void gl_wdgt_bc_style_get_params (glWdgtBCStyle * prop_style,
-					 glBarcodeStyle * style,
-					 gboolean * text_flag);
+void       gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
+					glBarcodeStyle *style,
+					gboolean       *text_flag);
 
-extern void gl_wdgt_bc_style_set_params (glWdgtBCStyle * prop_style,
-					 glBarcodeStyle style,
-					 gboolean text_flag);
+void       gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
+					glBarcodeStyle  style,
+					gboolean        text_flag);
+
+void       gl_wdgt_bc_style_set_label_size_group (glWdgtBCStyle *bc_style,
+						  GtkSizeGroup  *label_size_group);
+
+G_END_DECLS
 
 #endif

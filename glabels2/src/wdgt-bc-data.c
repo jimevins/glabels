@@ -43,7 +43,7 @@ typedef void (*glWdgtBCDataSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_bc_data_signals[LAST_SIGNAL] = { 0 };
 
@@ -51,19 +51,20 @@ static gint wdgt_bc_data_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_bc_data_class_init (glWdgtBCDataClass * class);
-static void gl_wdgt_bc_data_instance_init (glWdgtBCData * bc_data);
-static void gl_wdgt_bc_data_finalize (GObject * object);
-static void gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
-				       gchar * label, GList * field_defs);
+static void gl_wdgt_bc_data_class_init    (glWdgtBCDataClass *class);
+static void gl_wdgt_bc_data_instance_init (glWdgtBCData      *bc_data);
+static void gl_wdgt_bc_data_finalize      (GObject           *object);
+static void gl_wdgt_bc_data_construct     (glWdgtBCData      *bc_data,
+					   GList             *field_defs);
 
-static void changed_cb (glWdgtBCData * bc_data);
-static void radio_toggled_cb (GtkToggleButton * togglebutton,
-			      glWdgtBCData * bc_data);
+static void changed_cb                    (glWdgtBCData      *bc_data);
+static void radio_toggled_cb              (GtkToggleButton   *togglebutton,
+					   glWdgtBCData      *bc_data);
+
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_bc_data_get_type (void)
 {
@@ -83,7 +84,7 @@ gl_wdgt_bc_data_get_type (void)
 		};
 
 		wdgt_bc_data_type =
-			g_type_register_static (gtk_vbox_get_type (),
+			g_type_register_static (gl_hig_vbox_get_type (),
 						"glWdgtBCData",
 						&wdgt_bc_data_info, 0);
 	}
@@ -92,13 +93,13 @@ gl_wdgt_bc_data_get_type (void)
 }
 
 static void
-gl_wdgt_bc_data_class_init (glWdgtBCDataClass * class)
+gl_wdgt_bc_data_class_init (glWdgtBCDataClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_bc_data_finalize;
 
@@ -114,7 +115,7 @@ gl_wdgt_bc_data_class_init (glWdgtBCDataClass * class)
 }
 
 static void
-gl_wdgt_bc_data_instance_init (glWdgtBCData * bc_data)
+gl_wdgt_bc_data_instance_init (glWdgtBCData *bc_data)
 {
 	bc_data->literal_radio = NULL;
 	bc_data->literal_entry = NULL;
@@ -124,7 +125,7 @@ gl_wdgt_bc_data_instance_init (glWdgtBCData * bc_data)
 }
 
 static void
-gl_wdgt_bc_data_finalize (GObject * object)
+gl_wdgt_bc_data_finalize (GObject *object)
 {
 	glWdgtBCData *bc_data;
 	glWdgtBCDataClass *class;
@@ -137,41 +138,37 @@ gl_wdgt_bc_data_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_bc_data_new (gchar * label,
-		     GList * field_defs)
+gl_wdgt_bc_data_new (GList *field_defs)
 {
 	glWdgtBCData *bc_data;
 
 	bc_data = g_object_new (gl_wdgt_bc_data_get_type (), NULL);
 
-	gl_wdgt_bc_data_construct (bc_data, label, field_defs);
+	gl_wdgt_bc_data_construct (bc_data, field_defs);
 
 	return GTK_WIDGET (bc_data);
 }
 
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                    */
+/*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
-			   gchar * label,
-			   GList * field_defs)
+gl_wdgt_bc_data_construct (glWdgtBCData *bc_data,
+			   GList        *field_defs)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wcombo;
+	GtkWidget *wvbox, *whbox, *wcombo;
 	GSList *radio_group = NULL;
 	GList *keys;
 
 	wvbox = GTK_WIDGET (bc_data);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 2, FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- Literal line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Literal radio */
 	bc_data->literal_radio = gtk_radio_button_new_with_label (radio_group,
@@ -182,8 +179,7 @@ gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
 	g_signal_connect (G_OBJECT (bc_data->literal_radio), "toggled",
 			  G_CALLBACK (radio_toggled_cb),
 			  G_OBJECT (bc_data));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), bc_data->literal_radio,
-				   0, 1, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), bc_data->literal_radio);
 
 	/* Literal entry widget */
 	bc_data->literal_entry = gtk_entry_new ();
@@ -191,8 +187,11 @@ gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
 	g_signal_connect_swapped (G_OBJECT (bc_data->literal_entry),
 				  "changed", G_CALLBACK (changed_cb),
 				  G_OBJECT (bc_data));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), bc_data->literal_entry,
-				   1, 2, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), bc_data->literal_entry);
+
+	/* ---- Key line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Key radio */
 	bc_data->key_radio = gtk_radio_button_new_with_label (radio_group,
@@ -200,8 +199,7 @@ gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
 	g_signal_connect (G_OBJECT (bc_data->key_radio), "toggled",
 			  G_CALLBACK (radio_toggled_cb),
 			  G_OBJECT (bc_data));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), bc_data->key_radio,
-				   0, 1, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), bc_data->key_radio);
 
 	/* Key entry widget */
 	wcombo = gtk_combo_new ();
@@ -215,15 +213,14 @@ gl_wdgt_bc_data_construct (glWdgtBCData * bc_data,
 	g_signal_connect_swapped (G_OBJECT (bc_data->key_entry), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (bc_data));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wcombo, 1, 2, 1, 2);
-
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtBCData * bc_data)
+changed_cb (glWdgtBCData *bc_data)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (bc_data), wdgt_bc_data_signals[CHANGED], 0);
@@ -233,8 +230,8 @@ changed_cb (glWdgtBCData * bc_data)
 /* PRIVATE.  Callback to handle toggling of radio buttons                   */
 /*--------------------------------------------------------------------------*/
 static void
-radio_toggled_cb (GtkToggleButton * togglebutton,
-		  glWdgtBCData * bc_data)
+radio_toggled_cb (GtkToggleButton *togglebutton,
+		  glWdgtBCData    *bc_data)
 {
 	if (gtk_toggle_button_get_active
 	    (GTK_TOGGLE_BUTTON (bc_data->literal_radio))) {
@@ -249,11 +246,11 @@ radio_toggled_cb (GtkToggleButton * togglebutton,
 	g_signal_emit (G_OBJECT (bc_data), wdgt_bc_data_signals[CHANGED], 0);
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Get widget data.                                                         */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 glTextNode *
-gl_wdgt_bc_data_get_data (glWdgtBCData * bc_data)
+gl_wdgt_bc_data_get_data (glWdgtBCData *bc_data)
 {
 	glTextNode *text_node;
 
@@ -273,13 +270,13 @@ gl_wdgt_bc_data_get_data (glWdgtBCData * bc_data)
 	}
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Set widget data.                                                         */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 void
-gl_wdgt_bc_data_set_data (glWdgtBCData * bc_data,
-			  gboolean merge_flag,
-			  glTextNode *text_node)
+gl_wdgt_bc_data_set_data (glWdgtBCData *bc_data,
+			  gboolean      merge_flag,
+			  glTextNode   *text_node)
 {
 	gint pos;
 
@@ -335,4 +332,15 @@ gl_wdgt_bc_data_set_data (glWdgtBCData * bc_data,
 					  &pos);
 	}
 
+}
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_bc_data_set_label_size_group (glWdgtBCData   *bc_data,
+				      GtkSizeGroup   *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, bc_data->literal_radio);
+	gtk_size_group_add_widget (label_size_group, bc_data->key_radio);
 }
