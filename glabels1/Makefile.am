@@ -2,9 +2,9 @@
 
 LIB_BARCODE_DIR = barcode-0.98
 
-SUBDIRS = m4  po macros src doc
+SUBDIRS = intl po macros src doc
 
-EXTRA_DIST = config.rpath  \
+EXTRA_DIST = \
 	glabels.desktop glabels.spec.in glabels.spec autogen.sh
 
 Applicationsdir = $(datadir)/gnome/apps/Applications
@@ -56,5 +56,3 @@ dist-hook:
 	  mkdir $(distdir)/$(LIB_BARCODE_DIR); \
 	  cp -rp $(LIB_BARCODE_DIR)/* $(distdir)/$(LIB_BARCODE_DIR); \
 	fi
-
-ACLOCAL_AMFLAGS = -I m4

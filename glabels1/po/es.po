@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.2.0\n"
-"POT-Creation-Date: 2002-04-28 22:42-0400\n"
+"POT-Creation-Date: 2002-06-27 14:23-0400\n"
 "PO-Revision-Date: 2002-04-16 12:19+0200\n"
 "Last-Translator: victor <victor@pasmao.net>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
@@ -385,7 +385,8 @@ msgid "Text with tab separators"
 msgstr "Texto separado con tabuladores"
 
 #: src/merge.c:94
-msgid "Text with comma separators"
+#, fuzzy
+msgid "Text with comma separators (CSV)"
 msgstr "Texto separado con commas"
 
 #: src/merge.c:102

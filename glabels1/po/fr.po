@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.2.0\n"
-"POT-Creation-Date: 2002-04-28 22:42-0400\n"
+"POT-Creation-Date: 2002-06-27 14:23-0400\n"
 "PO-Revision-Date: 2001-10-15 15:31+0200\n"
 "Last-Translator: Olivier Berger <oberger@gnu.org>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
@@ -1186,7 +1186,8 @@ msgstr "Texte avec séparateurs de tabulation"
 
 # src/merge.c:94
 #: src/merge.c:94
-msgid "Text with comma separators"
+#, fuzzy
+msgid "Text with comma separators (CSV)"
 msgstr "Texte séparé par des virgules"
 
 # src/merge.c:107
