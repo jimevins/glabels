@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include <string.h>
+#include <libintl.h>
 
 #include "xml.h"
 #include "xml-paper.h"
@@ -108,13 +109,20 @@ glPaper *
 gl_xml_paper_parse_paper (xmlNodePtr paper_node)
 {
 	glPaper               *paper;
+	gchar                 *name;
 
 	gl_debug (DEBUG_PAPER, "START");
 
 	paper = g_new0 (glPaper, 1);
 
 	paper->id   = xmlGetProp (paper_node, "id");
-	paper->name = xmlGetProp (paper_node, "_name");
+
+	name = xmlGetProp (paper_node, "_name");
+	if (name != NULL) {
+		paper->name = gettext (name);
+	} else {
+		paper->name = xmlGetProp (paper_node, "name");
+	}
 
 	paper->width  = gl_xml_get_prop_length (paper_node, "width", 0);
 	paper->height = gl_xml_get_prop_length (paper_node, "height", 0);

@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include <string.h>
+#include <libintl.h>
 
 #include "util.h"
 #include "paper.h"
@@ -132,6 +133,7 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 {
 	glTemplate            *template;
 	xmlNodePtr             node;
+	gchar                 *description;
 	glPaper               *paper;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -159,7 +161,12 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 		gl_paper_free (&paper);
 	}
 
-	template->description = xmlGetProp (sheet_node, "description");
+	description = xmlGetProp (sheet_node, "_description");
+	if (description != NULL) {
+		template->description = gettext (description);
+	} else {
+		template->description = xmlGetProp (sheet_node, "description");
+	}
 
 	for (node = sheet_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {

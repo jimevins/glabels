@@ -373,7 +373,8 @@ read_paper_files_from_dir (GList       *papers,
 
 		if (extension != NULL) {
 
-			if (strcasecmp (extension, ".paper") == 0) {
+			if ( (g_strcasecmp (extension, ".paper") == 0)
+			     || (g_strcasecmp (filename, "paper-sizes.xml") == 0) ) {
 
 				full_filename =
 				    g_build_filename (dirname, filename, NULL);

@@ -367,7 +367,7 @@ read_template_files_from_dir (GList       *templates,
 			      const gchar *dirname)
 {
 	GDir        *dp;
-	const gchar *filename, *extension;
+	const gchar *filename, *extension, *extension2;
 	gchar       *full_filename = NULL;
 	GError      *gerror = NULL;
 
@@ -386,10 +386,12 @@ read_template_files_from_dir (GList       *templates,
 	while ((filename = g_dir_read_name (dp)) != NULL) {
 
 		extension = strrchr (filename, '.');
+		extension2 = strrchr (filename, '-');
 
 		if (extension != NULL) {
 
-			if (strcasecmp (extension, ".template") == 0) {
+			if ( (g_strcasecmp (extension, ".template") == 0)
+			     || (g_strcasecmp (extension2, "-templates.xml") == 0) ) {
 
 				full_filename =
 				    g_build_filename (dirname, filename, NULL);
