@@ -318,7 +318,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
 	view   = view_highlight->private->view;
-	scale = view->scale;
+	scale = view->zoom * view->home_scale;
 
 	object = view_highlight->private->object;
 
@@ -514,7 +514,7 @@ highlight_resizable_line_construct (glViewHighlight *view_highlight,
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
 	view   = view_highlight->private->view;
-	scale = view->scale;
+	scale = view->zoom * view->home_scale;
 
 	object = view_highlight->private->object;
 
@@ -791,7 +791,8 @@ update_resizable_box  (glViewHighlight *view_highlight)
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 
-	scale = view_highlight->private->view->scale;
+	scale = view_highlight->private->view->zoom *
+		view_highlight->private->view->home_scale;
 
 	gl_label_object_get_size (view_highlight->private->object, &w, &h);
 
@@ -882,7 +883,8 @@ update_resizable_line (glViewHighlight *view_highlight)
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 
-	scale = view_highlight->private->view->scale;
+	scale = view_highlight->private->view->zoom *
+		view_highlight->private->view->home_scale;
 
 	gl_label_object_get_size (view_highlight->private->object, &dx, &dy);
 

@@ -337,6 +337,8 @@ gl_window_set_label (glWindow    *window,
 
 	gtk_widget_show_all (window->view);
 
+	gl_view_zoom_to_fit (GL_VIEW(window->view));
+
 	if (gl_prefs->grid_visible) {
 		gl_view_show_grid (GL_VIEW(window->view));
 	} else {

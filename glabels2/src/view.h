@@ -51,7 +51,9 @@ struct _glView {
 	glLabel          *label;
 
 	GtkWidget        *canvas;
-	gdouble           scale;
+	gdouble           zoom;
+	gboolean          zoom_to_fit_flag;
+	gdouble           home_scale;
 
 	GnomeCanvasGroup *bg_group;              /* Background layer */
 	GnomeCanvasGroup *grid_group;            /* Grid layer */
@@ -252,10 +254,10 @@ void       gl_view_zoom_in                 (glView            *view);
 
 void       gl_view_zoom_out                (glView            *view);
 
-void       gl_view_zoom_best_fit           (glView            *view);
+void       gl_view_zoom_to_fit             (glView            *view);
 
 void       gl_view_set_zoom                (glView            *view,
-					    gdouble            scale);
+					    gdouble            zoom);
 
 gdouble    gl_view_get_zoom                (glView            *view);
 

@@ -62,7 +62,8 @@
 #define ARC_COURSE       5 /* Resolution in degrees of small arcs */
 
 #define ZOOMTOFIT_PAD   16
-#define HOME_SCALE       2.0
+
+#define POINTS_PER_MM    2.83464566929
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -89,22 +90,24 @@ static guint signals[LAST_SIGNAL] = {0};
 /* "CLIPBOARD" selection */
 static GdkAtom clipboard_atom = GDK_NONE;
 
-static gdouble scales[] = {
-	4.00*HOME_SCALE,
-	3.00*HOME_SCALE,
-	2.00*HOME_SCALE,
-	1.50*HOME_SCALE,
-	1.00*HOME_SCALE,
-	0.75*HOME_SCALE,
-	0.67*HOME_SCALE,
-	0.50*HOME_SCALE,
-	0.33*HOME_SCALE,
-	0.25*HOME_SCALE,
-	0.20*HOME_SCALE,
-	0.15*HOME_SCALE,
-	0.10*HOME_SCALE,
+static gdouble zooms[] = {
+	8.00,
+	6.00,
+	4.00,
+	3.00,
+	2.00,
+	1.50,
+	1.00,
+	0.75,
+	0.67,
+	0.50,
+	0.33,
+	0.25,
+	0.20,
+	0.15,
+	0.10,
 };
-#define N_SCALES G_N_ELEMENTS(scales)
+#define N_ZOOMS G_N_ELEMENTS(zooms)
 
 
 /*==========================================================================*/
@@ -118,6 +121,8 @@ static void       gl_view_finalize                (GObject *object);
 static void       gl_view_construct               (glView *view);
 static GtkWidget *gl_view_construct_canvas        (glView *view);
 static void       gl_view_construct_selection     (glView *view);
+
+static gdouble    get_home_scale                  (glView *view);
 
 static void       draw_layers                     (glView *view);
 
@@ -170,6 +175,14 @@ static gboolean   object_at                       (glView *view,
 static gboolean   is_item_member_of_group         (glView          *view,
 						   GnomeCanvasItem *item,
 						   GnomeCanvasItem *group);
+
+static void       set_zoom_real                   (glView          *view,
+						   gdouble          zoom,
+						   gboolean         scale_to_fit_flag);
+
+static void       size_allocate_cb                (glView          *view);
+
+static void       screen_changed_cb               (glView          *view);
 
 static int        canvas_event                    (GnomeCanvas *canvas,
 						   GdkEvent    *event,
@@ -392,10 +405,9 @@ gl_view_construct (glView *view)
 static GtkWidget *
 gl_view_construct_canvas (glView *view)
 {
-	gdouble   scale;
-	glLabel  *label;
-	gdouble   label_width, label_height;
-	GdkColor *bg_color;
+	glLabel   *label;
+	gdouble    label_width, label_height;
+	GdkColor  *bg_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -416,14 +428,9 @@ gl_view_construct_canvas (glView *view)
 	gl_debug (DEBUG_VIEW, "Label size: w=%lf, h=%lf",
 		  label_width, label_height);
 
-	scale = HOME_SCALE;
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas), scale);
-	view->scale = scale;
-
-	gl_debug (DEBUG_VIEW, "scale =%lf", scale);
-	gl_debug (DEBUG_VIEW, "Canvas size: w=%lf, h=%lf",
-			      scale * label_width + 40,
-			      scale * label_height + 40);
+	view->zoom = 1.0;
+	view->home_scale = get_home_scale (view);
+	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas), view->home_scale);
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
 					0.0, 0.0, label_width, label_height);
@@ -433,9 +440,59 @@ gl_view_construct_canvas (glView *view)
 	g_signal_connect (G_OBJECT (view->canvas), "event",
 			  G_CALLBACK (canvas_event), view);
 
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "size-allocate",
+				  G_CALLBACK (size_allocate_cb), view);
+
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "screen-changed",
+				  G_CALLBACK (screen_changed_cb), view);
+
 	gl_debug (DEBUG_VIEW, "END");
 
 	return view->canvas;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIAVTE.  Calculate 1:1 scale for screen.                                 */
+/*---------------------------------------------------------------------------*/
+static gdouble
+get_home_scale (glView *view)
+{
+	GdkScreen *screen;
+	gdouble    screen_width_pixels, screen_width_mm;
+	gdouble    screen_height_pixels, screen_height_mm;
+	gdouble    x_pixels_per_mm, y_pixels_per_mm;
+	gdouble    scale;
+
+	if (!gtk_widget_has_screen) return 1.0;
+
+	screen = gtk_widget_get_screen (GTK_WIDGET (view->canvas));
+
+	screen_width_pixels  = gdk_screen_get_width (screen);
+	screen_width_mm      = gdk_screen_get_width_mm (screen);
+	screen_height_pixels = gdk_screen_get_height (screen);
+	screen_height_mm     = gdk_screen_get_height_mm (screen);
+
+	x_pixels_per_mm      = screen_width_pixels / screen_width_mm;
+	y_pixels_per_mm      = screen_height_pixels / screen_height_mm;
+
+	gl_debug (DEBUG_VIEW, "Horizontal dot pitch: %g pixels/mm (%g dpi)",
+		  x_pixels_per_mm, x_pixels_per_mm * 25.4);
+	gl_debug (DEBUG_VIEW, "Vertical dot pitch: %g pixels/mm (%g dpi)",
+		  y_pixels_per_mm, y_pixels_per_mm * 25.4);
+
+	scale = (x_pixels_per_mm + y_pixels_per_mm) / 2.0;
+
+	gl_debug (DEBUG_VIEW, "Average dot pitch: %g pixels/mm (%g dpi)",
+		  scale, scale * 25.4);
+
+	scale /= POINTS_PER_MM;
+
+	gl_debug (DEBUG_VIEW, "Scale = %g pixels/point", scale);
+
+	/* Make sure scale is somewhat sane. */
+	if ( (scale < 0.25) || (scale > 4.0) ) return 1.0;
+
+	return scale;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -2942,9 +2999,9 @@ gl_view_zoom_in (glView *view)
 
 	/* Find index of current scale (or best match) */
 	i_min = 1;		/* start with 2nd largest scale */
-	dist_min = fabs (scales[1] - view->scale);
-	for (i = 2; i < N_SCALES; i++) {
-		dist = fabs (scales[i] - view->scale);
+	dist_min = fabs (zooms[1] - view->zoom);
+	for (i = 2; i < N_ZOOMS; i++) {
+		dist = fabs (zooms[i] - view->zoom);
 		if (dist < dist_min) {
 			i_min = i;
 			dist_min = dist;
@@ -2953,7 +3010,8 @@ gl_view_zoom_in (glView *view)
 
 	/* zoom in one "notch" */
 	i = MAX (0, i_min - 1);
-	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
+	gl_debug (DEBUG_VIEW, "zoom[%d] = %g", i, zooms[i]);
+	set_zoom_real (view, zooms[i], FALSE);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -2973,9 +3031,9 @@ gl_view_zoom_out (glView *view)
 
 	/* Find index of current scale (or best match) */
 	i_min = 0;		/* start with largest scale */
-	dist_min = fabs (scales[0] - view->scale);
-	for (i = 1; i < N_SCALES; i++) {
-		dist = fabs (scales[i] - view->scale);
+	dist_min = fabs (zooms[0] - view->zoom);
+	for (i = 1; i < N_ZOOMS; i++) {
+		dist = fabs (zooms[i] - view->zoom);
 		if (dist < dist_min) {
 			i_min = i;
 			dist_min = dist;
@@ -2983,12 +3041,12 @@ gl_view_zoom_out (glView *view)
 	}
 
 	/* zoom out one "notch" */
-	if (i_min >= N_SCALES)
+	if (i_min >= N_ZOOMS)
 		return;
 	i = i_min + 1;
-	if (i >= N_SCALES)
+	if (i >= N_ZOOMS)
 		return;
-	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
+	set_zoom_real (view, zooms[i], FALSE);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -2997,16 +3055,16 @@ gl_view_zoom_out (glView *view)
 /* Set zoom to best fit.                                                     */
 /*****************************************************************************/
 void
-gl_view_zoom_best_fit (glView *view)
+gl_view_zoom_to_fit (glView *view)
 {
 	gint w_view, h_view;
 	gdouble w_label, h_label;
-	gdouble x_zoom, y_zoom, new_zoom;
+	gdouble x_scale, y_scale, scale;
 
 	gl_debug (DEBUG_VIEW, "");
 
 	if ( ! GTK_WIDGET_VISIBLE(view)) {
-		gl_view_set_zoom (view, 1.0);
+		set_zoom_real (view, 1.0, TRUE);
 		return;
 	}
 
@@ -3018,18 +3076,19 @@ gl_view_zoom_best_fit (glView *view)
 	gl_debug (DEBUG_VIEW, "View size: %d, %d", w_view, h_view);
 	gl_debug (DEBUG_VIEW, "Label size: %g, %g", w_label, h_label);
 
-	/* Calculate best zoom level */
-	x_zoom = (double)(w_view - ZOOMTOFIT_PAD) / w_label;
-	y_zoom = (double)(h_view - ZOOMTOFIT_PAD) / h_label;
-	new_zoom = MIN (x_zoom, y_zoom) / HOME_SCALE;
-	gl_debug (DEBUG_VIEW, "Candidate scales: %g, %g => %g", x_zoom, y_zoom, new_zoom);
+	/* Calculate best scale */
+	x_scale = (double)(w_view - ZOOMTOFIT_PAD) / w_label;
+	y_scale = (double)(h_view - ZOOMTOFIT_PAD) / h_label;
+	scale = MIN (x_scale, y_scale);
+	gl_debug (DEBUG_VIEW, "Candidate zooms: %g, %g => %g", x_scale, y_scale, scale);
 
 	/* Limit */
-	new_zoom = MIN (new_zoom, scales[0]/HOME_SCALE);
-	new_zoom = MAX (new_zoom, scales[N_SCALES-1]/HOME_SCALE);
-	gl_debug (DEBUG_VIEW, "Limitted zoom: %g", new_zoom);
+	gl_debug (DEBUG_VIEW, "Scale: %g", scale);
+	scale = MIN (scale, zooms[0]*view->home_scale);
+	scale = MAX (scale, zooms[N_ZOOMS-1]*view->home_scale);
+	gl_debug (DEBUG_VIEW, "Limitted scale: %g", scale);
 
-	gl_view_set_zoom (view, new_zoom);
+	set_zoom_real (view, scale/view->home_scale, TRUE);
 }
 
 /*****************************************************************************/
@@ -3037,21 +3096,78 @@ gl_view_zoom_best_fit (glView *view)
 /*****************************************************************************/
 void
 gl_view_set_zoom (glView  *view,
-		  gdouble scale)
+		  gdouble zoom)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	set_zoom_real (view, zoom, FALSE);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set canvas scale.                                               *
+/*---------------------------------------------------------------------------*/
+static void
+set_zoom_real (glView          *view,
+	       gdouble          zoom,
+	       gboolean         zoom_to_fit_flag)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (scale > 0.0);
+	g_return_if_fail (zoom > 0.0);
 
-	view->scale = scale * HOME_SCALE;
+	/* Limit, if needed */
+	gl_debug (DEBUG_VIEW, "Zoom requested: %g", zoom);
+	zoom = MIN (zoom, zooms[0]);
+	zoom = MAX (zoom, zooms[N_ZOOMS-1]);
+	gl_debug (DEBUG_VIEW, "Limitted zoom: %g", zoom);
+
+	view->zoom = zoom;
+	view->zoom_to_fit_flag = zoom_to_fit_flag;
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  scale * HOME_SCALE);
+					  zoom*view->home_scale);
 
-	g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, scale);
+	g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, zoom);
 
 	gl_debug (DEBUG_VIEW, "END");
+
 }
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Size allocation changed callback.                                */
+/*---------------------------------------------------------------------------*/
+static void
+size_allocate_cb (glView          *view)
+{
+	if (view->zoom_to_fit_flag) {
+		/* Maintain best fit zoom */
+		gl_view_zoom_to_fit (view);
+	}
+}
+
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Screen changed callback.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+screen_changed_cb (glView          *view)
+{
+	view->home_scale = get_home_scale (view);
+
+	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
+					  view->zoom * view->home_scale);
+
+	if (view->zoom_to_fit_flag) {
+		/* Maintain best fit zoom */
+		gl_view_zoom_to_fit (view);
+	}
+}
+
+
 
 /*****************************************************************************/
 /* Get current zoom factor.                                                  */
@@ -3063,7 +3179,7 @@ gl_view_get_zoom (glView *view)
 
 	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
 
-	return view->scale / HOME_SCALE;
+	return view->zoom;
 }
 
 /*****************************************************************************/
@@ -3076,7 +3192,7 @@ gl_view_is_zoom_max (glView *view)
 
 	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
 
-	return view->scale >= scales[0];
+	return view->zoom >= zooms[0];
 }
 
 /*****************************************************************************/
@@ -3089,7 +3205,7 @@ gl_view_is_zoom_min (glView *view)
 
 	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
-	return view->scale <= scales[N_SCALES-1];
+	return view->zoom <= zooms[N_ZOOMS-1];
 }
 
 /*****************************************************************************/
@@ -3322,22 +3438,22 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 			case GDK_Left:
 			case GDK_KP_Left:
 				gl_view_move_selection (view,
-							-1.0 / (view->scale), 0.0);
+							-1.0 / (view->zoom), 0.0);
 				break;
 			case GDK_Up:
 			case GDK_KP_Up:
 				gl_view_move_selection (view,
-							0.0, -1.0 / (view->scale));
+							0.0, -1.0 / (view->zoom));
 				break;
 			case GDK_Right:
 			case GDK_KP_Right:
 				gl_view_move_selection (view,
-							1.0 / (view->scale), 0.0);
+							1.0 / (view->zoom), 0.0);
 				break;
 			case GDK_Down:
 			case GDK_KP_Down:
 				gl_view_move_selection (view,
-							0.0, 1.0 / (view->scale));
+							0.0, 1.0 / (view->zoom));
 				break;
 			case GDK_Delete:
 			case GDK_KP_Delete:

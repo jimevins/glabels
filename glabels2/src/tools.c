@@ -238,7 +238,7 @@ gl_tools_zoom_to_fit (BonoboUIComponent *uic,
 	window = GL_WINDOW (user_data);
 
 	if (window->view != NULL) {
-		gl_view_zoom_best_fit (GL_VIEW(window->view));
+		gl_view_zoom_to_fit (GL_VIEW(window->view));
 	}
 }
 
