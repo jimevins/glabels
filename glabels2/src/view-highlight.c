@@ -314,6 +314,7 @@ highlight_resizable_box  (glViewObject *view_object,
 				    NULL);
 
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
 
 	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
@@ -346,7 +347,9 @@ highlight_resizable_box  (glViewObject *view_object,
 	g_signal_connect (G_OBJECT (outline), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -420,6 +423,7 @@ highlight_resizable_line (glViewObject *view_object)
 				    NULL);
 
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
 
 	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
@@ -436,7 +440,9 @@ highlight_resizable_line (glViewObject *view_object)
 
 	gnome_canvas_points_free (points);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -484,14 +490,17 @@ highlight_simple         (glViewObject *view_object)
 				       NULL);
 
 
-	g_object_set_data (G_OBJECT (highlight), "outline", outline);
-
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
+
+	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
 	g_signal_connect (G_OBJECT (highlight), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -506,6 +515,7 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 		       glViewHighlightStyle style)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble w, h;
 	GnomeCanvasItem *outline;               /* Outline around item */
 	GnomeCanvasItem *tl, *tr, *bl, *br;	/* Handles at four corners */
@@ -517,6 +527,8 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &w, &h);
+
+	view = g_object_get_data (G_OBJECT (highlight), "view");
 
 	outline = g_object_get_data (G_OBJECT (highlight), "outline");
 
@@ -592,7 +604,9 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 			       "y2", h + 1.0,
 			       NULL);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -604,6 +618,7 @@ static void
 update_resizable_line (GnomeCanvasItem *highlight)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble dx, dy;
 	GnomeCanvasPoints *points;
 	GnomeCanvasItem *outline;	/* Outline around item */
@@ -615,6 +630,8 @@ update_resizable_line (GnomeCanvasItem *highlight)
 
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &dx, &dy);
+
+	view = g_object_get_data (G_OBJECT (highlight), "view");
 
 	points = gnome_canvas_points_new (2);
 
@@ -645,7 +662,9 @@ update_resizable_line (GnomeCanvasItem *highlight)
 
 	gnome_canvas_points_free (points);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -657,6 +676,7 @@ static void
 update_simple (GnomeCanvasItem *highlight)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble w, h;
 	GnomeCanvasItem *outline;               /* Outline around item */
 
@@ -667,6 +687,8 @@ update_simple (GnomeCanvasItem *highlight)
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &w, &h);
 
+	view = g_object_get_data (G_OBJECT (highlight), "view");
+
 	outline = g_object_get_data (G_OBJECT (highlight), "outline");
 
 	gnome_canvas_item_set (outline,
@@ -674,7 +696,9 @@ update_simple (GnomeCanvasItem *highlight)
 			       "y2", h + 0.5,
 			       NULL);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

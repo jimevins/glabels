@@ -53,7 +53,8 @@ static GtkContainerClass *parent_class;
 static GdkAtom clipboard_atom = GDK_NONE;
 
 #define HOME_SCALE 2.0
-static gdouble scales[] = { 8.0, 6.0, 4.0, 3.0,
+static gdouble scales[] = {
+	8.0, 6.0, 4.0, 3.0,
 	2.0,
 	1.5, 1.0, 0.5, 0.25,
 	0.0
@@ -63,64 +64,72 @@ static gdouble scales[] = { 8.0, 6.0, 4.0, 3.0,
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_view_class_init (glViewClass *class);
-static void gl_view_init       (glView * view);
-static void gl_view_finalize   (GObject * object);
+static void      gl_view_class_init          (glViewClass *class);
+static void      gl_view_init                (glView *view);
+static void      gl_view_finalize            (GObject *object);
 
 static void      gl_view_construct           (glView *view);
 static GtkWidget *gl_view_construct_canvas   (glView *view);
 static void      gl_view_construct_selection (glView *view);
 
-static gdouble get_apropriate_scale (gdouble w, gdouble h);
+static gdouble   get_apropriate_scale        (gdouble w, gdouble h);
 
-static void draw_rect_bg         (glView * view);
-static void draw_rounded_rect_bg (glView * view);
-static void draw_round_bg        (glView * view);
-static void draw_cd_bg           (glView * view);
+static void      draw_rect_bg_fg             (glView *view);
+static void      draw_rounded_rect_bg_fg     (glView *view);
+static void      draw_round_bg_fg            (glView *view);
+static void      draw_cd_bg_fg               (glView *view);
 
-static int canvas_event            (GnomeCanvas * canvas,
-			            GdkEvent * event,
-			            glView *view);
-static int canvas_event_arrow_mode (GnomeCanvas * canvas,
-				    GdkEvent * event, glView *view);
+static int       canvas_event                (GnomeCanvas *canvas,
+					      GdkEvent    *event,
+					      glView      *view);
+static int       canvas_event_arrow_mode     (GnomeCanvas *canvas,
+					      GdkEvent    *event,
+					      glView      *view);
 
-static void         select_region           (glView * view,
+static void      select_region              (glView *view,
 					     gdouble x1,
 					     gdouble y1,
 					     gdouble x2,
 					     gdouble y2);
-static void         select_object           (glViewObject *view_object);
-static void         unselect_object         (glViewObject *view_object);
-static gboolean     object_at               (glView * view,
+static void      select_object              (glViewObject *view_object);
+static void      unselect_object            (glViewObject *view_object);
+static gboolean  object_at                  (glView *view,
 					     gdouble x, gdouble y);
-static gboolean     object_selected         (glViewObject *view_object);
-static gboolean     multiple_items_selected (glView * view);
+static gboolean  object_selected            (glViewObject *view_object);
+static gboolean  multiple_items_selected    (glView *view);
 
-static int item_event_arrow_mode (GnomeCanvasItem * item,
-				  GdkEvent * event,
-				  glViewObject *view_object);
+static int       item_event_arrow_mode      (GnomeCanvasItem *item,
+					     GdkEvent        *event,
+					     glViewObject    *view_object);
 
-static GtkWidget *new_selection_menu (glView * view);
+static GtkWidget *new_selection_menu        (glView *view);
 
-static void popup_selection_menu (glView *view,
-				  glViewObject *view_object, GdkEvent *event);
+static void      popup_selection_menu       (glView       *view,
+					     glViewObject *view_object,
+					     GdkEvent     *event);
 
-static void move_selected_items (glView * view, gdouble dx, gdouble dy);
-static void move_item (GnomeCanvasItem * item, gdouble dx, gdouble dy);
+static void      move_selected_items        (glView *view,
+					     gdouble dx, gdouble dy);
+static void      move_item                  (GnomeCanvasItem *item,
+					     gdouble dx, gdouble dy);
 
-static void raise_selection_cb (GtkWidget * widget, glView * view);
-static void lower_selection_cb (GtkWidget * widget, glView * view);
+static void      raise_selection_cb         (GtkWidget *widget, glView *view);
+static void      lower_selection_cb         (GtkWidget *widget, glView *view);
 
-static void selection_clear_cb (GtkWidget * widget,
-				GdkEventSelection * event, gpointer data);
+static void      selection_clear_cb         (GtkWidget         *widget,
+					     GdkEventSelection *event,
+					     gpointer          data);
 
-static void selection_get_cb (GtkWidget * widget,
-			      GtkSelectionData * selection_data, guint info,
-			      guint time, gpointer data);
+static void      selection_get_cb           (GtkWidget         *widget,
+					     GtkSelectionData  *selection_data,
+					     guint             info,
+					     guint             time,
+					     gpointer          data);
 
-static void selection_received_cb (GtkWidget * widget,
-				   GtkSelectionData * selection_data,
-				   guint time, gpointer data);
+static void      selection_received_cb      (GtkWidget         *widget,
+					     GtkSelectionData  *selection_data,
+					     guint             time,
+					     gpointer          data);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -152,7 +161,7 @@ gl_view_get_type (void)
 }
 
 static void
-gl_view_class_init (glViewClass * class)
+gl_view_class_init (glViewClass *class)
 {
 	GObjectClass *object_class = (GObjectClass *) class;
 
@@ -166,7 +175,7 @@ gl_view_class_init (glViewClass * class)
 }
 
 static void
-gl_view_init (glView * view)
+gl_view_init (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -176,7 +185,7 @@ gl_view_init (glView * view)
 }
 
 static void
-gl_view_finalize (GObject * object)
+gl_view_finalize (GObject *object)
 {
 	glView *view;
 
@@ -193,7 +202,7 @@ gl_view_finalize (GObject * object)
 }
 
 GtkWidget *
-gl_view_new (glLabel * label)
+gl_view_new (glLabel *label)
 {
 	glView *view = g_object_new (gl_view_get_type (), NULL);
 
@@ -212,7 +221,7 @@ gl_view_new (glLabel * label)
 /* PRIVATE.  Construct composite widget.                                     */
 /*---------------------------------------------------------------------------*/
 static void
-gl_view_construct (glView * view)
+gl_view_construct (glView *view)
 {
 	GtkWidget *wvbox, *wscroll;
 
@@ -244,7 +253,7 @@ gl_view_construct (glView * view)
 /* PRIVATE.  Create canvas w/ a background in the shape of the label/card.   */
 /*---------------------------------------------------------------------------*/
 static GtkWidget *
-gl_view_construct_canvas (glView * view)
+gl_view_construct_canvas (glView *view)
 {
 	gdouble scale;
 	glLabel *label = view->label;
@@ -290,25 +299,27 @@ gl_view_construct_canvas (glView * view)
 	case GL_TEMPLATE_STYLE_RECT:
 		if (label_template->label_round == 0.0) {
 			/* Square corners. */
-			draw_rect_bg (view);
+			draw_rect_bg_fg (view);
 		} else {
 			/* Rounded corners. */
-			draw_rounded_rect_bg (view);
+			draw_rounded_rect_bg_fg (view);
 		}
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
-		draw_round_bg (view);
+		draw_round_bg_fg (view);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		draw_cd_bg (view);
+		draw_cd_bg_fg (view);
 		break;
 
 	default:
 		g_warning ("Unknown template label style");
 		break;
 	}
+	gl_debug (DEBUG_VIEW, "n_bg_items = %d, n_fg_items = %d",
+		  view->n_bg_items, view->n_fg_items);
 
 	g_signal_connect (G_OBJECT (view->canvas), "event",
 			  G_CALLBACK (canvas_event), view);
@@ -350,7 +361,7 @@ gl_view_construct_canvas (glView * view)
 /* PRIVATE.  Create selection targets.                                       */
 /*---------------------------------------------------------------------------*/
 static void
-gl_view_construct_selection (glView * view)
+gl_view_construct_selection (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -414,7 +425,7 @@ get_apropriate_scale (gdouble w, gdouble h)
 /* PRIVATE.  Draw simple recangular background.                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_rect_bg (glView * view)
+draw_rect_bg_fg (glView *view)
 {
 	glLabel *label = view->label;
 	glTemplate *template;
@@ -481,7 +492,7 @@ draw_rect_bg (glView * view)
 /* PRIVATE.  Draw rounded recangular background.                             */
 /*---------------------------------------------------------------------------*/
 static void
-draw_rounded_rect_bg (glView * view)
+draw_rounded_rect_bg_fg (glView *view)
 {
 	glLabel *label = view->label;
 	GnomeCanvasPoints *label_points, *margin_points;
@@ -622,7 +633,7 @@ draw_rounded_rect_bg (glView * view)
 /* PRIVATE.  Draw round background.                                          */
 /*---------------------------------------------------------------------------*/
 static void
-draw_round_bg (glView * view)
+draw_round_bg_fg (glView *view)
 {
 	glLabel *label = view->label;
 	glTemplate *template;
@@ -692,7 +703,7 @@ draw_round_bg (glView * view)
 /* PRIVATE.  Draw CD style background, circular w/ concentric hole.          */
 /*---------------------------------------------------------------------------*/
 static void
-draw_cd_bg (glView * view)
+draw_cd_bg_fg (glView *view)
 {
 	glLabel *label = view->label;
 	glTemplate *template;
@@ -797,10 +808,22 @@ draw_cd_bg (glView * view)
 }
 
 /*****************************************************************************/
+/* Raise foreground items to top.                                            */
+/*****************************************************************************/
+void gl_view_raise_fg (glView *view)
+{
+	GList *p;
+
+	for (p = view->fg_item_list; p != NULL; p = p->next) {
+		gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(p->data));
+	}
+}
+
+/*****************************************************************************/
 /* Set arrow mode.                                                           */
 /*****************************************************************************/
 void
-gl_view_arrow_mode (glView * view)
+gl_view_arrow_mode (glView *view)
 {
 	static GdkCursor *cursor = NULL;
 
@@ -823,7 +846,7 @@ gl_view_arrow_mode (glView * view)
 /* Set create text object mode.                                              */
 /*****************************************************************************/
 void
-gl_view_object_create_mode (glView * view,
+gl_view_object_create_mode (glView            *view,
 			    glLabelObjectType type)
 {
 	GdkCursor *cursor;
@@ -881,7 +904,7 @@ gl_view_select_object (glView *view, glViewObject *view_object)
 /* Select all items.                                                         */
 /*****************************************************************************/
 void
-gl_view_select_all (glView * view)
+gl_view_select_all (glView *view)
 {
 	GList *p;
 
@@ -902,7 +925,7 @@ gl_view_select_all (glView * view)
 /* Remove all selections                                                     */
 /*****************************************************************************/
 void
-gl_view_unselect_all (glView * view)
+gl_view_unselect_all (glView *view)
 {
 	GList *p, *p_next;
 
@@ -922,7 +945,7 @@ gl_view_unselect_all (glView * view)
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void
-gl_view_cut (glView * view)
+gl_view_cut (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -938,7 +961,7 @@ gl_view_cut (glView * view)
 /* "Copy" selected items to clipboard selections.                            */
 /*****************************************************************************/
 void
-gl_view_copy (glView * view)
+gl_view_copy (glView *view)
 {
 	GList *p;
 	glViewObject *view_object;
@@ -1008,7 +1031,7 @@ gl_view_copy (glView * view)
 /* "Paste" from private clipboard selection.                                 */
 /*****************************************************************************/
 void
-gl_view_paste (glView * view)
+gl_view_paste (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1237,7 +1260,7 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 /* PRIVATE.  Select all objects within given rectangular region.             */
 /*---------------------------------------------------------------------------*/
 static void
-select_region (glView * view,
+select_region (glView  *view,
 	       gdouble x1,
 	       gdouble y1,
 	       gdouble x2,
@@ -1280,7 +1303,7 @@ select_region (glView * view,
 static void
 select_object (glViewObject *view_object)
 {
-	glView * view;
+	glView *view;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1304,7 +1327,7 @@ select_object (glViewObject *view_object)
 static void
 unselect_object (glViewObject *view_object)
 {
-	glView * view;
+	glView *view;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1324,7 +1347,7 @@ unselect_object (glViewObject *view_object)
 /* PRIVATE. Return object at (x,y).                                          */
 /*---------------------------------------------------------------------------*/
 static gboolean
-object_at (glView * view,
+object_at (glView  *view,
 	   gdouble x,
 	   gdouble y)
 {
@@ -1371,7 +1394,7 @@ object_selected (glViewObject *view_object)
 /* PRIVATE.  Are there multiple objects in our current selection?            */
 /*---------------------------------------------------------------------------*/
 static gboolean
-multiple_items_selected (glView * view)
+multiple_items_selected (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
@@ -1554,7 +1577,7 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 /* PRIVATE.  create menu for multiple selections.                            */
 /*---------------------------------------------------------------------------*/
 GtkWidget *
-new_selection_menu (glView * view)
+new_selection_menu (glView *view)
 {
 	GtkWidget *menu, *menuitem;
 
@@ -1632,7 +1655,7 @@ popup_selection_menu (glView       *view,
 /* Delete selected objects.                                                  */
 /*---------------------------------------------------------------------------*/
 void
-gl_view_delete_selection (glView * view)
+gl_view_delete_selection (glView *view)
 {
 	GList *p, *p_next;
 
@@ -1652,8 +1675,8 @@ gl_view_delete_selection (glView * view)
 /* PRIVATE.  raise item to front callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
-raise_selection_cb (GtkWidget * widget,
-		    glView * view)
+raise_selection_cb (GtkWidget *widget,
+		    glView    *view)
 {
 	GList *p;
 
@@ -1672,8 +1695,8 @@ raise_selection_cb (GtkWidget * widget,
 /* PRIVATE.  lower item to back callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
-lower_selection_cb (GtkWidget * widget,
-		    glView * view)
+lower_selection_cb (GtkWidget *widget,
+		    glView    *view)
 {
 	GList *p;
 
@@ -1692,7 +1715,7 @@ lower_selection_cb (GtkWidget * widget,
 /* PRIVATE.  move selected items                                             */
 /*---------------------------------------------------------------------------*/
 static void
-move_selected_items (glView * view,
+move_selected_items (glView  *view,
 		     gdouble dx,
 		     gdouble dy)
 {
@@ -1717,9 +1740,9 @@ move_selected_items (glView * view,
 /* PRIVATE.  Handle "selection-clear" signal.                                */
 /*---------------------------------------------------------------------------*/
 static void
-selection_clear_cb (GtkWidget * widget,
-		    GdkEventSelection * event,
-		    gpointer data)
+selection_clear_cb (GtkWidget         *widget,
+		    GdkEventSelection *event,
+		    gpointer          data)
 {
 	glView *view = GL_VIEW (data);
 
@@ -1738,11 +1761,11 @@ selection_clear_cb (GtkWidget * widget,
 /* PRIVATE.  Handle "selection-get" signal.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-selection_get_cb (GtkWidget * widget,
-		  GtkSelectionData * selection_data,
-		  guint info,
-		  guint time,
-		  gpointer data)
+selection_get_cb (GtkWidget        *widget,
+		  GtkSelectionData *selection_data,
+		  guint            info,
+		  guint            time,
+		  gpointer         data)
 {
 	glView *view = GL_VIEW (data);
 	gchar *buffer;
@@ -1769,10 +1792,10 @@ selection_get_cb (GtkWidget * widget,
 /* PRIVATE.  Handle "selection-received" signal.  (Result of Paste)          */
 /*---------------------------------------------------------------------------*/
 static void
-selection_received_cb (GtkWidget * widget,
-		       GtkSelectionData * selection_data,
-		       guint time,
-		       gpointer data)
+selection_received_cb (GtkWidget        *widget,
+		       GtkSelectionData *selection_data,
+		       guint            time,
+		       gpointer         data)
 {
 	glView *view = GL_VIEW (data);
 	glLabel *label = NULL;
@@ -1837,7 +1860,7 @@ selection_received_cb (GtkWidget * widget,
 /* Zoom in one "notch"                                                       */
 /*****************************************************************************/
 void
-gl_view_zoom_in (glView * view)
+gl_view_zoom_in (glView *view)
 {
 	gint i, i_min;
 	gdouble dist, dist_min;
@@ -1868,7 +1891,7 @@ gl_view_zoom_in (glView * view)
 /* Zoom out one "notch"                                                      */
 /*****************************************************************************/
 void
-gl_view_zoom_out (glView * view)
+gl_view_zoom_out (glView *view)
 {
 	gint i, i_min;
 	gdouble dist, dist_min;
@@ -1903,8 +1926,8 @@ gl_view_zoom_out (glView * view)
 /* Set current zoom factor to explicit value.                                */
 /*****************************************************************************/
 void
-gl_view_set_zoom (glView * view,
-		     gdouble scale)
+gl_view_set_zoom (glView  *view,
+		  gdouble scale)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1922,7 +1945,7 @@ gl_view_set_zoom (glView * view,
 /* Get current zoom factor.                                                  */
 /*****************************************************************************/
 gdouble
-gl_view_get_zoom (glView * view)
+gl_view_get_zoom (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
