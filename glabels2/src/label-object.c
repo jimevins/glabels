@@ -38,6 +38,8 @@ struct _glLabelObjectPrivate {
 	gdouble            x, y;
 	gdouble            w, h;
 	gdouble            affine[6];
+
+	gdouble            aspect_ratio;
 };
 
 enum {
@@ -452,6 +454,46 @@ gl_label_object_set_size (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
+
+	} else {
+
+		set_size (object, w, h);
+
+	}
+
+	object->private->aspect_ratio = h / w;
+
+	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Set size of object honoring current aspect ratio.                         */
+/*****************************************************************************/
+void
+gl_label_object_set_size_honor_aspect (glLabelObject *object,
+				       gdouble        w,
+				       gdouble        h)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( h > w*object->private->aspect_ratio ) {
+
+		h = w * object->private->aspect_ratio;
+
+	} else {
+
+		w = h / object->private->aspect_ratio;
+
+	}
 
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL ) {
 

@@ -191,6 +191,10 @@ void           gl_label_object_set_size              (glLabelObject     *object,
 						      gdouble            w,
 						      gdouble            h);
 
+void           gl_label_object_set_size_honor_aspect (glLabelObject     *object,
+						      gdouble            w,
+						      gdouble            h);
+
 void           gl_label_object_get_size              (glLabelObject     *object,
 						      gdouble           *w,
 						      gdouble           *h);

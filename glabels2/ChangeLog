@@ -1,3 +1,19 @@
+2004-02-02  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_set_size),
+	(gl_label_object_set_size_honor_aspect):
+		Added gl_label_object_set_size_honor_aspect() which will maintain the
+		current aspect ratio by modifying the supplied w or h apropriately.
+	
+	* src/view-highlight.c: (tl_resize_event_handler),
+	(tr_resize_event_handler), (bl_resize_event_handler),
+	(br_resize_event_handler):
+		Corner handles will now maintain the current aspect ratio if the
+		control key is pressed while resizing.  This addresses feature
+		request #816603.
+       
+
 2004-01-31  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
