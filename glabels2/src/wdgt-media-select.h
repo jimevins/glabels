@@ -74,7 +74,7 @@ void       gl_wdgt_media_select_set_name      (glWdgtMediaSelect *media_select,
 gchar     *gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select);
 
 void       gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
-					       gchar             *page_size);
+					       gchar             *page_size_id);
 
 G_END_DECLS
 

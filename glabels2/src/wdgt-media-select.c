@@ -478,11 +478,19 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
 gchar *
 gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select)
 {
+	gchar *page_size_name, *page_size_id;
+
 	gl_debug (DEBUG_MEDIA_SELECT, "");
 
-	return
+	page_size_name =
 	    gtk_editable_get_chars (GTK_EDITABLE
 				    (media_select->page_size_entry), 0, -1);
+
+	page_size_id = gl_paper_lookup_id_from_name (page_size_name);
+
+	g_free (page_size_name);
+
+	return page_size_id;
 }
 
 /****************************************************************************/
@@ -490,11 +498,14 @@ gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select)
 /****************************************************************************/
 void
 gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
-				    gchar             *page_size)
+				    gchar             *page_size_id)
 {
-	gint pos;
+	gint   pos;
+	gchar *page_size_name;
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
+
+	page_size_name = gl_paper_lookup_name_from_id (page_size_id);
 
 	g_signal_handlers_block_by_func (G_OBJECT(media_select->page_size_entry),
 					G_CALLBACK(page_size_entry_changed_cb),
@@ -507,7 +518,9 @@ gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
 
 	pos = 0;
 	gtk_editable_insert_text (GTK_EDITABLE (media_select->page_size_entry),
-				  page_size, strlen (page_size), &pos);
+				  page_size_name, strlen (page_size_name), &pos);
+
+	g_free (page_size_name);
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
