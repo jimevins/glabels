@@ -61,46 +61,88 @@
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static glLabel *xml_doc_to_label (xmlDocPtr doc, glXMLLabelStatus *status);
-static glLabel *xml_parse_label (xmlNodePtr root, glXMLLabelStatus *status);
-static void xml_parse_objects (xmlNodePtr node, glLabel * label);
-static void xml_parse_object(xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_text_props (xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_box_props (xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_line_props (xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_ellipse_props (xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_image_props (xmlNodePtr node, glLabel *label);
-static glLabelObject *xml_parse_barcode_props (xmlNodePtr node, glLabel *label);
-static void xml_parse_merge_fields (xmlNodePtr node, glLabel *label);
+static glLabel       *xml_doc_to_label         (xmlDocPtr         doc,
+						glXMLLabelStatus *status);
 
-static xmlDocPtr xml_label_to_doc (glLabel * label, glXMLLabelStatus *status);
-static void xml_create_objects (xmlNodePtr root, xmlNsPtr ns, glLabel * label);
-static void xml_create_object (xmlNodePtr root, xmlNsPtr ns,
-			       glLabelObject * object);
-static void xml_create_text_props (xmlNodePtr root, xmlNsPtr ns,
-				 glLabelObject * object);
-static void xml_create_box_props (xmlNodePtr root, xmlNsPtr ns,
-				glLabelObject * object);
-static void xml_create_line_props (xmlNodePtr root, xmlNsPtr ns,
-				 glLabelObject * object);
-static void xml_create_ellipse_props (xmlNodePtr root, xmlNsPtr ns,
-				    glLabelObject * object);
-static void xml_create_image_props (xmlNodePtr root, xmlNsPtr ns,
-				  glLabelObject * object);
-static void xml_create_barcode_props (xmlNodePtr root, xmlNsPtr ns,
-				    glLabelObject * object);
-static void xml_create_merge_fields (xmlNodePtr root, xmlNsPtr ns,
-				      glLabel * label);
+static glLabel       *xml_parse_label          (xmlNodePtr        root,
+						glXMLLabelStatus *status);
+
+static void           xml_parse_objects        (xmlNodePtr        node,
+						glLabel          *label);
+
+static void           xml_parse_object         (xmlNodePtr        node,
+						glLabel          *label);
+
+static glLabelObject *xml_parse_text_props     (xmlNodePtr        node,
+						glLabel          *label);
+
+static glLabelObject *xml_parse_box_props      (xmlNodePtr        node,
+						glLabel          *label);
+
+static glLabelObject *xml_parse_line_props     (xmlNodePtr        node,
+						glLabel          *label);
+
+static glLabelObject *xml_parse_ellipse_props  (xmlNodePtr        node,
+						glLabel          *label);
+
+static glLabelObject *xml_parse_image_props    (xmlNodePtr        node,
+					        glLabel          *label);
+
+static glLabelObject *xml_parse_barcode_props  (xmlNodePtr        node,
+						glLabel          *label);
+
+static void           xml_parse_merge_fields   (xmlNodePtr        node,
+						glLabel          *label);
+
+
+static xmlDocPtr      xml_label_to_doc         (glLabel          *label,
+						glXMLLabelStatus *status);
+
+static void           xml_create_objects       (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabel          *label);
+
+static void           xml_create_object        (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_text_props    (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_box_props     (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_line_props    (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_ellipse_props (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_image_props   (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_barcode_props (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabelObject    *object);
+
+static void           xml_create_merge_fields  (xmlNodePtr        root,
+						xmlNsPtr          ns,
+						glLabel          *label);
 
 /****************************************************************************/
 /* Open and read label from xml file.                                       */
 /****************************************************************************/
 glLabel *
-gl_xml_label_open (const gchar * filename,
+gl_xml_label_open (const gchar      *filename,
 		   glXMLLabelStatus *status)
 {
-	xmlDocPtr doc;
-	glLabel *label;
+	xmlDocPtr  doc;
+	glLabel   *label;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -127,11 +169,11 @@ gl_xml_label_open (const gchar * filename,
 /* Read label from xml buffer.                                              */
 /****************************************************************************/
 glLabel *
-gl_xml_label_open_buffer (const gchar * buffer,
+gl_xml_label_open_buffer (const gchar      *buffer,
 			  glXMLLabelStatus *status)
 {
-	xmlDocPtr doc;
-	glLabel *label;
+	xmlDocPtr  doc;
+	glLabel   *label;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -157,12 +199,12 @@ gl_xml_label_open_buffer (const gchar * buffer,
 /* PRIVATE.  Parse xml doc structure and create label.                      */
 /*--------------------------------------------------------------------------*/
 static glLabel *
-xml_doc_to_label (xmlDocPtr doc,
+xml_doc_to_label (xmlDocPtr         doc,
 		  glXMLLabelStatus *status)
 {
-	xmlNodePtr root, node;
-	xmlNsPtr ns;
-	glLabel *label;
+	xmlNodePtr  root, node;
+	xmlNsPtr    ns;
+	glLabel    *label;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -211,11 +253,11 @@ xml_doc_to_label (xmlDocPtr doc,
 /* PRIVATE.  Parse xml root node and create label.                          */
 /*--------------------------------------------------------------------------*/
 static glLabel *
-xml_parse_label (xmlNodePtr       root,
+xml_parse_label (xmlNodePtr        root,
 		 glXMLLabelStatus *status)
 {
-	xmlNodePtr node;
-	glLabel *label;
+	xmlNodePtr  node;
+	glLabel    *label;
 	glTemplate *template;
 
 	gl_debug (DEBUG_XML, "START");
@@ -260,10 +302,10 @@ xml_parse_label (xmlNodePtr       root,
 /* PRIVATE.  Parse Objects node.                                            */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_objects (xmlNodePtr objects_node,
-		   glLabel * label)
+xml_parse_objects (xmlNodePtr  objects_node,
+		   glLabel    *label)
 {
-	gboolean rotate_flag;
+	gboolean   rotate_flag;
 	xmlNodePtr node;
 
 	gl_debug (DEBUG_XML, "START");
@@ -290,8 +332,8 @@ xml_parse_objects (xmlNodePtr objects_node,
 /* PRIVATE.  Parse XML Object Node                                          */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_object (xmlNodePtr object_node,
-		  glLabel * label)
+xml_parse_object (xmlNodePtr  object_node,
+		  glLabel    *label)
 {
 	glLabelObject *object;
 	gdouble        x, y;
@@ -340,20 +382,20 @@ xml_parse_object (xmlNodePtr object_node,
 /* PRIVATE.  Parse XML Label->Text Node Properties                          */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_text_props (xmlNodePtr object_node,
-		      glLabel * label)
+xml_parse_text_props (xmlNodePtr  object_node,
+		      glLabel    *label)
 {
-	GObject *object;
-	GList *lines;
-	gchar *font_family;
-	gdouble font_size;
-	GnomeFontWeight font_weight;
-	gboolean font_italic_flag;
-	guint color;
-	GtkJustification just;
-	xmlNodePtr line_node, text_node;
-	glTextNode *node_text;
-	GList *nodes;
+	GObject          *object;
+	GList            *lines;
+	gchar            *font_family;
+	gdouble           font_size;
+	GnomeFontWeight   font_weight;
+	gboolean          font_italic_flag;
+	guint             color;
+	GtkJustification  just;
+	xmlNodePtr        line_node, text_node;
+	glTextNode       *node_text;
+	GList            *nodes;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -429,13 +471,13 @@ xml_parse_text_props (xmlNodePtr object_node,
 /* PRIVATE.  Parse XML Label->Box Node Properties                           */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_box_props (xmlNodePtr node,
-		     glLabel * label)
+xml_parse_box_props (xmlNodePtr  node,
+		     glLabel    *label)
 {
 	GObject *object;
-	gdouble line_width;
-	guint line_color, fill_color;
-	gdouble w, h;
+	gdouble  line_width;
+	guint    line_color, fill_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -463,13 +505,13 @@ xml_parse_box_props (xmlNodePtr node,
 /* PRIVATE.  Parse XML Label->Line Node Properties                          */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_line_props (xmlNodePtr node,
-		      glLabel * label)
+xml_parse_line_props (xmlNodePtr  node,
+		      glLabel    *label)
 {
 	GObject *object;
-	gdouble line_width;
-	guint line_color;
-	gdouble w, h;
+	gdouble  line_width;
+	guint    line_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -495,13 +537,13 @@ xml_parse_line_props (xmlNodePtr node,
 /* PRIVATE.  Parse XML Label->Ellipse Node Properties                       */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_ellipse_props (xmlNodePtr node,
-			 glLabel * label)
+xml_parse_ellipse_props (xmlNodePtr  node,
+			 glLabel    *label)
 {
 	GObject *object;
-	gdouble line_width;
-	guint line_color, fill_color;
-	gdouble w, h;
+	gdouble  line_width;
+	guint    line_color, fill_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -529,8 +571,8 @@ xml_parse_ellipse_props (xmlNodePtr node,
 /* PRIVATE.  Parse XML Label->Image Node Properties                         */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_image_props (xmlNodePtr node,
-		       glLabel *label)
+xml_parse_image_props (xmlNodePtr  node,
+		       glLabel    *label)
 {
 	GObject      *object;
 	xmlNodePtr    child;
@@ -544,16 +586,17 @@ xml_parse_image_props (xmlNodePtr node,
 	w = g_strtod (xmlGetProp (node, "w"), NULL);
 	h = g_strtod (xmlGetProp (node, "h"), NULL);
 
-	child = node->xmlChildrenNode;
 	filename = g_new0 (glTextNode, 1);
-	if (g_strcasecmp (child->name, "Field") == 0) {
-		filename->field_flag = TRUE;
-		filename->data = xmlGetProp (child, "name");
-	} else if (xmlNodeIsText (child)) {
-		filename->field_flag = FALSE;
-		filename->data = xmlNodeGetContent (child);
-	} else {
-		g_warning ("Unexpected Image child: \"%s\"", child->name);
+	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
+		if (g_strcasecmp (child->name, "Field") == 0) {
+			filename->field_flag = TRUE;
+			filename->data = xmlGetProp (child, "name");
+		} else if (g_strcasecmp (child->name, "File") == 0) {
+			filename->field_flag = FALSE;
+			filename->data = xmlGetProp (child, "src");
+		} else if (!xmlNodeIsText (child)) {
+			g_warning ("Unexpected Image child: \"%s\"", child->name);
+		}
 	}
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
@@ -570,8 +613,8 @@ xml_parse_image_props (xmlNodePtr node,
 /* PRIVATE.  Parse XML Label->Barcode Node Properties                       */
 /*--------------------------------------------------------------------------*/
 static glLabelObject *
-xml_parse_barcode_props (xmlNodePtr node,
-			 glLabel *label)
+xml_parse_barcode_props (xmlNodePtr  node,
+			 glLabel    *label)
 {
 	GObject            *object;
 	xmlNodePtr          child;
@@ -591,16 +634,17 @@ xml_parse_barcode_props (xmlNodePtr node,
 	text_flag = !(g_strcasecmp (xmlGetProp (node, "text"), "false") == 0);
 	scale = g_strtod (xmlGetProp (node, "scale"), NULL);
 
-	child = node->xmlChildrenNode;
 	text_node = g_new0 (glTextNode, 1);
-	if (g_strcasecmp (child->name, "Field") == 0) {
-		text_node->field_flag = TRUE;
-		text_node->data = xmlGetProp (child, "name");
-	} else if (xmlNodeIsText (child)) {
-		text_node->field_flag = FALSE;
-		text_node->data = xmlNodeGetContent (child);
-	} else {
-		g_warning ("Unexpected Barcode child: \"%s\"", child->name);
+	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
+		if (g_strcasecmp (child->name, "Field") == 0) {
+			text_node->field_flag = TRUE;
+			text_node->data = xmlGetProp (child, "name");
+		} else if (g_strcasecmp (child->name, "Literal") == 0) {
+			text_node->field_flag = FALSE;
+			text_node->data = xmlNodeGetContent (child);
+		} else if (!xmlNodeIsText (child)) {
+			g_warning ("Unexpected Barcode child: \"%s\"", child->name);
+		}
 	}
 
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
@@ -618,8 +662,8 @@ xml_parse_barcode_props (xmlNodePtr node,
 /* PRIVATE.  Parse XML merge fields tag.                                */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_merge_fields (xmlNodePtr node,
-			glLabel * label)
+xml_parse_merge_fields (xmlNodePtr  node,
+			glLabel    *label)
 {
 	xmlNodePtr  child;
 	glMerge    *merge;
@@ -642,12 +686,12 @@ xml_parse_merge_fields (xmlNodePtr node,
 /* Save label to xml label file.                                            */
 /****************************************************************************/
 void
-gl_xml_label_save (glLabel *label,
-		   const gchar *filename,
+gl_xml_label_save (glLabel          *label,
+		   const gchar      *filename,
 		   glXMLLabelStatus *status)
 {
 	xmlDocPtr doc;
-	gint xml_ret;
+	gint      xml_ret;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -674,12 +718,12 @@ gl_xml_label_save (glLabel *label,
 /* Save label to xml buffer.                                                */
 /****************************************************************************/
 gchar *
-gl_xml_label_save_buffer (glLabel *label,
+gl_xml_label_save_buffer (glLabel          *label,
 			  glXMLLabelStatus *status)
 {
-	xmlDocPtr doc;
-	gint size;
-	gchar *buffer;
+	xmlDocPtr  doc;
+	gint       size;
+	gchar     *buffer;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -699,13 +743,13 @@ gl_xml_label_save_buffer (glLabel *label,
 /* PRIVATE.  Convert label to xml doc structure.                            */
 /*--------------------------------------------------------------------------*/
 static xmlDocPtr
-xml_label_to_doc (glLabel * label,
+xml_label_to_doc (glLabel          *label,
 		  glXMLLabelStatus *status)
 {
-	xmlDocPtr doc;
-	xmlNsPtr ns;
+	xmlDocPtr   doc;
+	xmlNsPtr    ns;
 	glTemplate *template;
-	glMerge *merge;
+	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -739,13 +783,13 @@ xml_label_to_doc (glLabel * label,
 /* PRIVATE.  Add XML Label->Objects Node                                    */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_objects (xmlNodePtr root,
-		    xmlNsPtr ns,
-		    glLabel * label)
+xml_create_objects (xmlNodePtr  root,
+		    xmlNsPtr    ns,
+		    glLabel    *label)
 {
-	xmlNodePtr node;
-	gboolean rotate_flag;
-	GList *p;
+	xmlNodePtr  node;
+	gboolean    rotate_flag;
+	GList      *p;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -766,9 +810,9 @@ xml_create_objects (xmlNodePtr root,
 /* PRIVATE.  Add XML label object Node                                      */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object (xmlNodePtr root,
-		   xmlNsPtr ns,
-		   glLabelObject * object)
+xml_create_object (xmlNodePtr     root,
+		   xmlNsPtr       ns,
+		   glLabelObject *object)
 {
 	xmlNodePtr  object_node;
 	gdouble     x, y;
@@ -830,21 +874,21 @@ xml_create_object (xmlNodePtr root,
 /* PRIVATE.  Add XML Label->Text Node Properties                            */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_text_props (xmlNodePtr object_node,
-		       xmlNsPtr ns,
-		       glLabelObject * object)
+xml_create_text_props (xmlNodePtr     object_node,
+		       xmlNsPtr       ns,
+		       glLabelObject *object)
 {
-	xmlNodePtr line_node, field_node, literal_node;
-	GList *lines;
-	gchar *font_family;
-	gdouble font_size;
-	GnomeFontWeight font_weight;
-	gboolean font_italic_flag;
-	guint color;
-	GtkJustification just;
-	gchar *string;
-	GList *p_line, *p_node;
-	glTextNode *node_text;
+	xmlNodePtr        line_node, field_node, literal_node;
+	GList            *lines;
+	gchar            *font_family;
+	gdouble           font_size;
+	GnomeFontWeight   font_weight;
+	gboolean          font_italic_flag;
+	guint             color;
+	GtkJustification  just;
+	gchar            *string;
+	GList            *p_line, *p_node;
+	glTextNode       *node_text;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -903,14 +947,14 @@ xml_create_text_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label->Box Node Properties                             */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_box_props (xmlNodePtr object_node,
-		      xmlNsPtr ns,
-		      glLabelObject * object)
+xml_create_box_props (xmlNodePtr     object_node,
+		      xmlNsPtr       ns,
+		      glLabelObject *object)
 {
-	gchar *string;
-	gdouble line_width;
-	guint line_color, fill_color;
-	gdouble w, h;
+	gchar   *string;
+	gdouble  line_width;
+	guint    line_color, fill_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -947,14 +991,14 @@ xml_create_box_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label->Line Node Properties                            */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_line_props (xmlNodePtr object_node,
-		       xmlNsPtr ns,
-		       glLabelObject * object)
+xml_create_line_props (xmlNodePtr     object_node,
+		       xmlNsPtr       ns,
+		       glLabelObject *object)
 {
-	gchar *string;
-	gdouble line_width;
-	guint line_color;
-	gdouble w, h;
+	gchar   *string;
+	gdouble  line_width;
+	guint    line_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -986,14 +1030,14 @@ xml_create_line_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label->Ellipse Node Properties                         */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_ellipse_props (xmlNodePtr object_node,
-			  xmlNsPtr ns,
-			  glLabelObject * object)
+xml_create_ellipse_props (xmlNodePtr     object_node,
+			  xmlNsPtr       ns,
+			  glLabelObject *object)
 {
-	gchar *string;
-	gdouble line_width;
-	guint line_color, fill_color;
-	gdouble w, h;
+	gchar   *string;
+	gdouble  line_width;
+	guint    line_color, fill_color;
+	gdouble  w, h;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1030,9 +1074,9 @@ xml_create_ellipse_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label->Image Node Properties                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_image_props (xmlNodePtr object_node,
-			xmlNsPtr ns,
-			glLabelObject * object)
+xml_create_image_props (xmlNodePtr     object_node,
+			xmlNsPtr       ns,
+			glLabelObject *object)
 {
 	gchar      *string;
 	gdouble     w, h;
@@ -1057,7 +1101,8 @@ xml_create_image_props (xmlNodePtr object_node,
 		child = xmlNewChild (object_node, ns, "Field", NULL);
 		xmlSetProp (child, "name", filename->data);
 	} else {
-		xmlNodeSetContent (object_node, filename->data);
+		child = xmlNewChild (object_node, ns, "File", NULL);
+		xmlSetProp (child, "src", filename->data);
 	}
 
 	gl_text_node_free (&filename);
@@ -1069,9 +1114,9 @@ xml_create_image_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label->Barcode Node Properties                         */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_barcode_props (xmlNodePtr object_node,
-			  xmlNsPtr ns,
-			  glLabelObject * object)
+xml_create_barcode_props (xmlNodePtr     object_node,
+			  xmlNsPtr       ns,
+			  glLabelObject *object)
 {
 	glTextNode          *text_node;
 	glBarcodeStyle      style;
@@ -1103,7 +1148,7 @@ xml_create_barcode_props (xmlNodePtr object_node,
 		child = xmlNewChild (object_node, ns, "Field", NULL);
 		xmlSetProp (child, "name", text_node->data);
 	} else {
-		xmlNodeSetContent (object_node, text_node->data);
+		child = xmlNewChild (object_node, ns, "Literal", text_node->data);
 	}
 
 	gl_text_node_free (&text_node);
@@ -1115,14 +1160,14 @@ xml_create_barcode_props (xmlNodePtr object_node,
 /* PRIVATE.  Add XML Label Merge Fields Node                                */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_merge_fields (xmlNodePtr root,
-			     xmlNsPtr ns,
-			     glLabel * label)
+xml_create_merge_fields (xmlNodePtr  root,
+			 xmlNsPtr    ns,
+			 glLabel    *label)
 {
-	xmlNodePtr node, child;
-	gchar *string;
-	GList *p;
-	glMerge *merge;
+	xmlNodePtr  node, child;
+	gchar      *string;
+	GList      *p;
+	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
 
