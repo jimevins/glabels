@@ -40,6 +40,7 @@ typedef struct {
 	glMerge *merge;
 
 	GtkWidget *type_entry;
+	GtkWidget *src_entry_holder;
 	GtkWidget *src_entry;
 	GtkWidget *sample;
 
@@ -78,6 +79,8 @@ gl_merge_properties_dialog (glView *view)
 	PropertyDialogPassback *data;
 	GtkWidget *dialog;
 
+	gl_debug (DEBUG_MERGE, "START");
+
 	data = g_new0 (PropertyDialogPassback, 1);
 
 	dialog = gl_hig_dialog_new_with_buttons (
@@ -99,6 +102,7 @@ gl_merge_properties_dialog (glView *view)
 
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -114,6 +118,8 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 	glMergeSrcType     src_type;
 	gchar             *src;
 	GtkSizeGroup      *label_size_group;
+
+	gl_debug (DEBUG_MERGE, "START");
 
 	data->merge = gl_label_get_merge (data->label);
 	description = gl_merge_get_description (data->merge);
@@ -136,6 +142,14 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 
 	wcombo = gtk_combo_new ();
 	texts = gl_merge_get_descriptions ();
+	gl_debug (DEBUG_MERGE, "DESCRIPTIONS:");
+	{
+		GList *p;
+
+		for (p=texts; p!=NULL; p=p->next) {
+			gl_debug (DEBUG_MERGE, "    \"%s\"", p->data);
+		}
+	}
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), texts);
 	gl_merge_free_descriptions (&texts);
 	data->type_entry = GTK_COMBO (wcombo)->entry;
@@ -154,6 +168,7 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
 
+	gl_debug (DEBUG_MERGE, "Src_type = %d", src_type);
 	switch (src_type) {
 	case GL_MERGE_SRC_IS_FILE:
 		data->src_entry =
@@ -167,7 +182,9 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 		data->src_entry = gtk_label_new (_("N/A"));
 		break;
 	}
-	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), data->src_entry);
+	data->src_entry_holder = gtk_hbox_new (FALSE, 0);
+	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
+	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), data->src_entry_holder);
 
 	/* ---- Sample Fields section ---- */
 	wframe = gl_hig_category_new (_("Sample fields"));
@@ -196,6 +213,8 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 	g_free (description);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -211,13 +230,17 @@ type_changed_cb (GtkWidget * widget,
 	glMergeSrcType     src_type;
 	GtkWidget         *wentry;
 
+	gl_debug (DEBUG_MERGE, "START");
+
 	description = gtk_editable_get_chars (GTK_EDITABLE (data->type_entry),
 					      0, -1);
 	name = gl_merge_description_to_name (description);
 
 	src = gl_merge_get_src (data->merge); /* keep current source if possible */
 
-	g_object_unref (G_OBJECT(data->merge));
+	if (data->merge != NULL) {
+		g_object_unref (G_OBJECT(data->merge));
+	}
 	data->merge = gl_merge_new (name);
 
 	gtk_widget_destroy (data->src_entry);
@@ -227,7 +250,9 @@ type_changed_cb (GtkWidget * widget,
 		data->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
 		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
-		gtk_entry_set_text (GTK_ENTRY(wentry), src);
+		if (src != NULL) {
+			gtk_entry_set_text (GTK_ENTRY(wentry), src);
+		}
 		g_signal_connect (G_OBJECT (wentry), "changed",
 				  G_CALLBACK (src_changed_cb), data);
 		break;
@@ -235,10 +260,14 @@ type_changed_cb (GtkWidget * widget,
 		data->src_entry = gtk_label_new (_("N/A"));
 		break;
 	}
+	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
+	gtk_widget_show (data->src_entry);
 
 	g_free (description);
 	g_free (name);
 	g_free (src);
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -251,6 +280,8 @@ src_changed_cb (GtkWidget * widget,
 	gchar     *src;
 	GtkWidget *wentry;
 
+	gl_debug (DEBUG_MERGE, "START");
+
 	wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
 	src = gtk_editable_get_chars (GTK_EDITABLE (wentry), 0, -1);
 
@@ -258,6 +289,8 @@ src_changed_cb (GtkWidget * widget,
 	gl_merge_ui_field_ws_set_type_src (GL_MERGE_UI_FIELD_WS
 					   (data->sample), type, src);
 #endif
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -268,6 +301,8 @@ response_cb (glHigDialog * dialog,
 	     gint response,
 	     PropertyDialogPassback * data)
 {
+	gl_debug (DEBUG_MERGE, "START");
+
 	switch (response) {
 
 	case GTK_RESPONSE_OK:
@@ -277,7 +312,11 @@ response_cb (glHigDialog * dialog,
 	}
 
 
-	g_object_unref (G_OBJECT(data->merge));
+	if (data->merge != NULL) {
+		g_object_unref (G_OBJECT(data->merge));
+	}
 	g_free (data);
 	gtk_widget_destroy (GTK_WIDGET(dialog));
+
+	gl_debug (DEBUG_MERGE, "END");
 }

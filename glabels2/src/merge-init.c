@@ -59,14 +59,14 @@ gl_merge_init (void)
 				   "Text/Colon",
 				   _("Text file with colon delimeters"),
 				   GL_MERGE_SRC_IS_FILE,
-				   "delim", ',',
+				   "delim", ':',
 				   NULL);
 
 	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
 				   "Text/Tab",
-				   _("Text file with tab delimeters (CSV)"),
+				   _("Text file with tab delimeters"),
 				   GL_MERGE_SRC_IS_FILE,
-				   "delim", ',',
+				   "delim", '\t',
 				   NULL);
 
 }

@@ -506,7 +506,9 @@ gl_label_set_merge (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	g_object_unref (G_OBJECT(label->private->merge));
+	if ( label->private->merge != NULL ) {
+		g_object_unref (G_OBJECT(label->private->merge));
+	}
 	label->private->merge = gl_merge_dup (merge);
 
 	label->private->modified_flag = TRUE;

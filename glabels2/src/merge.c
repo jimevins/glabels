@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include <gnome.h>
+#include <gobject/gvaluecollector.h>
 #include <string.h>
 
 #include "merge.h"
@@ -50,8 +51,8 @@ typedef struct {
 	gchar             *description;
 	glMergeSrcType     src_type;
 
-	const gchar       *first_arg_name;
-	va_list            args;
+	guint              n_params;
+	GParameter        *params;
 
 } Backend;
 
@@ -86,21 +87,58 @@ gl_merge_register_backend (GType              type,
 			   const gchar       *first_arg_name,
 			   ...)
 {
-	Backend *backend;
-	va_list  args;
-	gchar   *a_nam;
-	gpointer a_val;
+	Backend      *backend;
+	va_list       args;
+	const gchar  *pname;
+	GObjectClass *class;
+	GParamSpec   *pspec;
+	GParameter   *params;
+	guint         n_params = 0, n_alloced_params = 16;
 
 	backend = g_new0 (Backend, 1);
 
-	backend->type = type;
-	backend->name = g_strdup (name);
+	backend->type        = type;
+	backend->name        = g_strdup (name);
 	backend->description = g_strdup (description);
+	backend->src_type    = src_type;
 
-	backend->first_arg_name = first_arg_name;
+	params = g_new (GParameter, n_alloced_params);
 	va_start (args, first_arg_name);
-	G_VA_COPY (backend->args, args);
+	for ( pname=first_arg_name; pname != NULL; pname=va_arg (args,gchar *) ) {
+		gchar *error = NULL;
+
+		class = g_type_class_ref (type);
+		if (class == NULL) {
+			g_warning ("%s: unknown object type %d",
+				   G_STRLOC, type);
+			break;
+		}
+		pspec = g_object_class_find_property (class, pname);
+		if (pspec == NULL) {
+			g_warning ("%s: object class `%s' has no property named `%s'",
+				   G_STRLOC, g_type_name (type), pname);
+			break;
+		}
+		if (n_params >= n_alloced_params) {
+			n_alloced_params += 16;
+			params = g_renew (GParameter, params, n_alloced_params);
+		}
+		params[n_params].name = pname;
+		params[n_params].value.g_type = 0;
+		g_value_init (&params[n_params].value, pspec->value_type);
+		G_VALUE_COLLECT (&params[n_params].value, args, 0, &error);
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			break;
+		}
+
+		n_params++;
+	}
 	va_end (args);
+
+	backend->n_params = n_params;
+	backend->params   = params;
 
 	backends = g_list_append (backends, backend);
 
@@ -257,12 +295,12 @@ gl_merge_new (gchar *name)
 
 		if (g_strcasecmp(name, backend->name) == 0) {
 
-			merge = GL_MERGE (g_object_new_valist (backend->type,
-							       backend->first_arg_name,
-							       backend->args));
+			merge = GL_MERGE (g_object_newv (backend->type,
+							 backend->n_params,
+							 backend->params));
 
-			merge->private->name        = name;
-			merge->private->description = backend->description;
+			merge->private->name        = g_strdup (name);
+			merge->private->description = g_strdup (backend->description);
 			merge->private->src_type    = backend->src_type;
 
 			break;
@@ -299,6 +337,7 @@ gl_merge_dup (glMerge *src_merge)
 	dst_merge->private->name        = g_strdup (src_merge->private->name);
 	dst_merge->private->description = g_strdup (src_merge->private->description);
 	dst_merge->private->src         = g_strdup (src_merge->private->src);
+	dst_merge->private->src_type    = src_merge->private->src_type;
 
 	if ( GL_MERGE_GET_CLASS(src_merge)->copy != NULL ) {
 
