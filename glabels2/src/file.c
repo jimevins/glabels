@@ -309,22 +309,24 @@ create_properties_dialog_widgets (glHigDialog *dlg,
 	template = gl_label_get_template (label);
 	rotate_flag = gl_label_get_rotate_flag (label);
 
-	gl_debug (DEBUG_FILE, "%s, %s", template->page_size, template->name->data);
+	gl_debug (DEBUG_FILE, "%s, %s", template->page_size, template->name);
 
 	if (template->page_size != NULL) {
 		gl_wdgt_media_select_set_page_size (GL_WDGT_MEDIA_SELECT (template_entry),
 						    template->page_size);
 	}
-	if (template->name->data != NULL) {
+	if (template->name != NULL) {
+		gchar *template_name = gl_template_get_name_with_desc (template);
 		gl_wdgt_media_select_set_name (GL_WDGT_MEDIA_SELECT (template_entry),
-					       template->name->data);
+					       template_name);
 		gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL
-						    (rotate_sel), template->name->data);
+							(rotate_sel), template_name);
+		g_free (template_name);
 	} else {
 		sheet_name =
 		    gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (template_entry));
 		gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL
-						    (rotate_sel), sheet_name);
+							(rotate_sel), sheet_name);
 	}
 	gl_wdgt_rotate_label_set_state (GL_WDGT_ROTATE_LABEL (rotate_sel), rotate_flag);
 

@@ -140,9 +140,9 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 
 	template = g_new0 (glTemplate, 1);
 
-	template->name = g_list_append (template->name,
-					xmlGetProp (sheet_node, "name"));
-	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name->data);
+	template->name  = xmlGetProp (sheet_node, "name");
+	template->alias = g_list_append (template->alias, g_strdup (template->name));
+	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name);
 
 	template->page_size = xmlGetProp (sheet_node, "size");
 	if (xmlStrEqual (template->page_size, "Other")) {
@@ -350,7 +350,7 @@ xml_parse_alias (xmlNodePtr  alias_node,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	template->name = g_list_append (template->name,
+	template->alias = g_list_append (template->alias,
 					xmlGetProp (alias_node, "name"));
 
 	gl_debug (DEBUG_TEMPLATE, "END");
@@ -371,7 +371,7 @@ gl_xml_template_add_sheet (const glTemplate *template,
 
 	node = xmlNewChild (root, ns, "Sheet", NULL);
 
-	xmlSetProp (node, "name", template->name->data);
+	xmlSetProp (node, "name", template->name);
 
 	xmlSetProp (node, "size", template->page_size);
 	if (xmlStrEqual (template->page_size, "Other")) {
@@ -385,8 +385,10 @@ gl_xml_template_add_sheet (const glTemplate *template,
 
 	xml_add_label (template, node, ns);
 
-	for ( p=template->name->next; p != NULL; p=p->next ) {
-		xml_add_alias( p->data, node, ns );
+	for ( p=template->alias; p != NULL; p=p->next ) {
+		if (!xmlStrEqual (template->name, p->data)) {
+			xml_add_alias( p->data, node, ns );
+		}
 	}
 
 	gl_debug (DEBUG_TEMPLATE, "END");

@@ -164,7 +164,7 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	copies->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 						    WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_label (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-					template->name->data);
+					template->name);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), copies->mini_preview);
 
 	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_INNER);

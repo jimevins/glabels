@@ -161,7 +161,7 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	merge->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 							WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_label( GL_WDGT_MINI_PREVIEW (merge->mini_preview),
-					template->name->data );
+					template->name );
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), merge->mini_preview);
 	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
 					      1, 1);

@@ -109,6 +109,9 @@ static gdouble    get_apropriate_scale            (gdouble w, gdouble h);
 
 static void       draw_layers                     (glView *view);
 
+static void       label_resized_cb                (glLabel *label,
+						   glView *view);
+
 static void       draw_label_layer                (glView *view);
 
 static void       draw_highlight_layer            (glView *view);
@@ -483,6 +486,33 @@ draw_layers (glView *view)
 	draw_highlight_layer (view); /* Must be done before label layer */
 	draw_label_layer (view);
 
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->highlight_group));
+
+	g_signal_connect (G_OBJECT (view->label), "size_changed",
+			  G_CALLBACK (label_resized_cb), view);
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Handle label resize event.   .                                  */
+/*---------------------------------------------------------------------------*/
+static void
+label_resized_cb (glLabel *label,
+		  glView *view)
+{
+	g_return_if_fail (label && GL_IS_LABEL (label));
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	gtk_object_destroy (GTK_OBJECT (view->bg_group));
+	gtk_object_destroy (GTK_OBJECT (view->grid_group));
+	gtk_object_destroy (GTK_OBJECT (view->markup_group));
+	gtk_object_destroy (GTK_OBJECT (view->fg_group));
+
+	draw_bg_fg_layers (view);
+	draw_grid_layer (view);
+	draw_markup_layer (view);
+
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->label_group));
 	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
 	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->highlight_group));
 }

@@ -58,6 +58,7 @@ enum {
 	NAME_CHANGED,
 	MODIFIED_CHANGED,
 	MERGE_CHANGED,
+	SIZE_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -159,6 +160,15 @@ gl_label_class_init (glLabelClass *klass)
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelClass, merge_changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+	signals[SIZE_CHANGED] =
+		g_signal_new ("size_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelClass, size_changed),
 			      NULL, NULL,
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -382,13 +392,19 @@ gl_label_set_template (glLabel    *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	gl_template_free (&label->private->template);
-	label->private->template = gl_template_dup (template);
+	if ((label->private->template == NULL) ||
+	    (g_strcasecmp (template->name, label->private->template->name) != 0)) {
 
-	label->private->modified_flag = TRUE;
+		gl_template_free (&label->private->template);
+		label->private->template = gl_template_dup (template);
 
-	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
-	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+		label->private->modified_flag = TRUE;
+
+		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
+		g_signal_emit (G_OBJECT(label), signals[SIZE_CHANGED], 0);
+		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -404,12 +420,17 @@ gl_label_set_rotate_flag (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	label->private->rotate_flag = rotate_flag;
+	if (rotate_flag != label->private->rotate_flag) {
 
-	label->private->modified_flag = TRUE;
+		label->private->rotate_flag = rotate_flag;
 
-	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
-	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+		label->private->modified_flag = TRUE;
+
+		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
+		g_signal_emit (G_OBJECT(label), signals[SIZE_CHANGED], 0);
+		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

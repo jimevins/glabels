@@ -100,7 +100,7 @@ gl_template_init (void)
 GList *
 gl_template_get_name_list (const gchar *page_size)
 {
-	GList      *p_tmplt, *p_name;
+	GList      *p_tmplt, *p_alias;
 	glTemplate *template;
 	gchar      *str;
 	GList      *names = NULL;
@@ -110,10 +110,10 @@ gl_template_get_name_list (const gchar *page_size)
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
 		template = (glTemplate *) p_tmplt->data;
 		if (g_strcasecmp (page_size, template->page_size) == 0) {
-			for (p_name = template->name; p_name != NULL;
-			     p_name = p_name->next) {
+			for (p_alias = template->alias; p_alias != NULL;
+			     p_alias = p_alias->next) {
 				str = g_strdup_printf("%s: %s",
-						      (gchar *) p_name->data,
+						      (gchar *) p_alias->data,
 						      template->description);
 				names = g_list_insert_sorted (names, str,
 							     (GCompareFunc)g_strcasecmp);
@@ -155,8 +155,8 @@ gl_template_free_name_list (GList **names)
 glTemplate *
 gl_template_from_name (const gchar *name)
 {
-	GList       *p_tmplt, *p_name;
-	glTemplate  *template;
+	GList       *p_tmplt, *p_alias;
+	glTemplate  *template, *new_template;
 	gchar      **split_name;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -170,12 +170,20 @@ gl_template_from_name (const gchar *name)
 
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
 		template = (glTemplate *) p_tmplt->data;
-		for (p_name = template->name; p_name != NULL;
-		     p_name = p_name->next) {
-			if (g_strcasecmp (p_name->data, split_name[0]) == 0) {
+		for (p_alias = template->alias; p_alias != NULL;
+		     p_alias = p_alias->next) {
+			if (g_strcasecmp (p_alias->data, split_name[0]) == 0) {
+
+				new_template = gl_template_dup (template);
+
+				/* Use the real name */
+				g_free (new_template->name);
+				new_template->name = g_strdup (split_name[0]);
+
 				g_strfreev (split_name);
 				gl_debug (DEBUG_TEMPLATE, "END");
-				return gl_template_dup (template);
+
+				return new_template;
 			}
 		}
 	}
@@ -185,6 +193,16 @@ gl_template_from_name (const gchar *name)
 	gl_debug (DEBUG_TEMPLATE, "END");
 	return NULL;
 }
+
+/*****************************************************************************/
+/* Get name and format with description.                                     */
+/*****************************************************************************/
+gchar *
+gl_template_get_name_with_desc (const glTemplate  *template)
+{
+	return g_strdup_printf("%s: %s", template->name, template->description);
+}
+
 
 /*****************************************************************************/
 /* Copy a template.                                                          */
@@ -200,9 +218,11 @@ glTemplate *gl_template_dup (const glTemplate *orig_template)
 
 	template = g_new0 (glTemplate,1);
 
-	template->name = NULL;
-	for ( p=orig_template->name; p != NULL; p=p->next ) {
-		template->name = g_list_append (template->name,
+	template->name = g_strdup (orig_template->name);
+
+	template->alias = NULL;
+	for ( p=orig_template->alias; p != NULL; p=p->next ) {
+		template->alias = g_list_append (template->alias,
 						g_strdup (p->data));
 	}
 	template->description = g_strdup (orig_template->description);
@@ -243,12 +263,15 @@ void gl_template_free (glTemplate **template)
 
 	if ( *template != NULL ) {
 
-		for ( p=(*template)->name; p != NULL; p=p->next ) {
+		g_free ((*template)->name);
+		(*template)->name = NULL;
+
+		for ( p=(*template)->alias; p != NULL; p=p->next ) {
 			g_free (p->data);
 			p->data = NULL;
 		}
-		g_list_free ((*template)->name);
-		(*template)->name = NULL;
+		g_list_free ((*template)->alias);
+		(*template)->alias = NULL;
 
 		g_free ((*template)->description);
 		(*template)->description = NULL;
@@ -292,9 +315,10 @@ template_full_page (const gchar *page_size)
 
 	template = g_new0 (glTemplate, 1);
 
-	template->name         = g_list_append (template->name,
-					 g_strdup_printf(_("Generic %s full page"),
-							 page_size));
+	template->name         = g_strdup_printf (_("Generic %s full page"), page_size);
+
+	template->alias        = g_list_append (template->alias, template->name);
+
 	template->page_size    = g_strdup(page_size);
 	template->page_width   = paper->width;
 	template->page_height  = paper->height;

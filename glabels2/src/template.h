@@ -115,7 +115,7 @@ typedef struct {
  *   Template
  */
 typedef struct {
-	GList               *name;
+	gchar               *name;
 	gchar               *description;
 	gchar               *page_size;
 	gdouble              page_width;
@@ -123,6 +123,7 @@ typedef struct {
 
 	glTemplateLabel      label;
 
+	GList               *alias;
 } glTemplate;
 
 
@@ -140,6 +141,8 @@ GList               *gl_template_get_name_list       (const gchar       *page_si
 void                 gl_template_free_name_list      (GList            **names);
 
 glTemplate          *gl_template_from_name           (const gchar       *name);
+
+gchar               *gl_template_get_name_with_desc  (const glTemplate  *template);
 
 glTemplate          *gl_template_dup                 (const glTemplate  *orig);
 void                 gl_template_free                (glTemplate       **template);
