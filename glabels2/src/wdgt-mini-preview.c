@@ -280,8 +280,15 @@ void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview * preview,
 	}
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (preview->canvas),
 					  canvas_scale);
+#if 0
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
 					0.0, 0.0, paper_width, paper_height);
+#else
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
+					0.0, 0.0,
+					preview->width/canvas_scale,
+					preview->height/canvas_scale);
+#endif
 
 	/* update shadow */
 	shadow_x = SHADOW_X_OFFSET/canvas_scale;

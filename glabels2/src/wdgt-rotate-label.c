@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include "wdgt-rotate-label.h"
+#include "hig.h"
 #include "template.h"
 #include "marshal.h"
 
@@ -142,10 +143,6 @@ gl_wdgt_rotate_label_finalize (GObject * object)
 
 	rotate_select = GL_WDGT_ROTATE_LABEL (object);
 
-#if 0
-	gl_template_free (&rotate_select->template);
-#endif
-
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
@@ -170,17 +167,18 @@ gl_wdgt_rotate_label_construct (glWdgtRotateLabel * rotate_select)
 	GtkWidget *whbox;
 
 	whbox = GTK_WIDGET (rotate_select);
+	gtk_box_set_spacing (GTK_BOX(whbox), GL_HIG_SPACING);
 
 	/* Actual selection control */
 	rotate_select->rotate_check =
 	    gtk_check_button_new_with_label (_("Rotate"));
 	gtk_box_pack_start (GTK_BOX (whbox), rotate_select->rotate_check, TRUE,
-			    TRUE, GNOME_PAD);
+			    TRUE, 0);
 
 	/* mini_preview canvas */
 	rotate_select->canvas = mini_preview_canvas_new ();
 	gtk_box_pack_start (GTK_BOX (whbox), rotate_select->canvas,
-			    TRUE, TRUE, GNOME_PAD);
+			    TRUE, TRUE, 0);
 
 	/* Connect signals to controls */
 	g_signal_connect (G_OBJECT (rotate_select->rotate_check), "toggled",

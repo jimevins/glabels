@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include "wdgt-media-select.h"
+#include "hig.h"
 #include "template.h"
 #include "wdgt-mini-preview.h"
 #include "prefs.h"
@@ -194,9 +195,10 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	page_size = gl_prefs_get_page_size ();
 
 	wvbox = GTK_WIDGET (media_select);
+	gtk_box_set_spacing (GTK_BOX(wvbox), GL_HIG_SPACING);
 
-	whbox = gtk_hbox_new (FALSE, GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, GNOME_PAD);
+	whbox = gtk_hbox_new (FALSE, GL_HIG_SPACING);
+	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, 0);
 
 	/* Page size selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating page size combo...");
@@ -211,7 +213,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	gtk_widget_set_size_request (media_select->page_size_entry, 100, -1);
 	gtk_entry_set_text (GTK_ENTRY (media_select->page_size_entry),
 			    page_size);
-	gtk_box_pack_start (GTK_BOX (whbox), wcombo, FALSE, FALSE, GNOME_PAD);
+	gtk_box_pack_start (GTK_BOX (whbox), wcombo, FALSE, FALSE, 0);
 
 	/* Actual selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating template combo...");
@@ -229,69 +231,69 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 				     TRUE, FALSE);
 	gtk_widget_set_size_request (media_select->template_entry, 400, -1);
 	gtk_box_pack_start (GTK_BOX (whbox), media_select->template_combo,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 
-	whbox = gtk_hbox_new (FALSE, GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, GNOME_PAD);
+	whbox = gtk_hbox_new (FALSE, GL_HIG_SPACING);
+	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, 0);
 
 	/* mini_preview canvas */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating mini preview...");
 	media_select->mini_preview = gl_wdgt_mini_preview_new ( WDGT_MINI_PREVIEW_HEIGHT,
 							   WDGT_MINI_PREVIEW_WIDTH);
 	gtk_box_pack_start (GTK_BOX (whbox), media_select->mini_preview,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 
 	/* Label column */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating label column...");
-	wvbox1 = gtk_vbox_new (FALSE, GNOME_PAD);
+	wvbox1 = gtk_vbox_new (FALSE, GL_HIG_SPACING);
 	gtk_box_pack_start (GTK_BOX (whbox), wvbox1, FALSE, FALSE, 0);
 
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (whbox1),
 			    gtk_label_new (_("Description:")),
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (whbox1),
 			    gtk_label_new (_("Page size:")),
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (whbox1),
 			    gtk_label_new (_("Label size:")),
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (whbox1),
 			    gtk_label_new (_("Layout:")),
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 
 	/* detail widgets column */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating details column...");
-	wvbox1 = gtk_vbox_new (FALSE, GNOME_PAD);
+	wvbox1 = gtk_vbox_new (FALSE, GL_HIG_SPACING);
 	gtk_box_pack_start (GTK_BOX (whbox), wvbox1, FALSE, FALSE, 0);
 
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	media_select->desc_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (whbox1), media_select->desc_label,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	media_select->sheet_size_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (whbox1), media_select->sheet_size_label,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	media_select->label_size_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (whbox1), media_select->label_size_label,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	media_select->number_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (whbox1), media_select->number_label,
-			    FALSE, FALSE, GNOME_PAD);
+			    FALSE, FALSE, 0);
 
 	/* Update mini_preview and details from default template */
 	
