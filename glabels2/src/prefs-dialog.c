@@ -546,13 +546,13 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->text_left_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->text_center_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->text_right_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->line_width_spin),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
@@ -632,13 +632,13 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->text_left_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->text_center_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->text_right_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->line_width_spin),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));

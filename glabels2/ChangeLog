@@ -1,6 +1,14 @@
+2003-12-28  Jim Evins  <evins@snaught.com>
+
+	* src/prefs-dialog.c: (update_object_page_from_prefs):
+		Block intermediary function align_toggle_cb() instead of
+		update_prefs_from_object_page() for the three alignment
+		widgets.
+
 2003-12-28  Wayne Schuller  <k_wayne@linuxpower.org>
 
-	* src/file.c: (gl_file_new), (gl_file_properties): Swap button order and set default for higificatory pleasure.
+	* src/file.c: (gl_file_new), (gl_file_properties):
+		Swap button order and set default for higificatory pleasure.
 
 2003-12-27  Jim Evins  <evins@snaught.com>
 
