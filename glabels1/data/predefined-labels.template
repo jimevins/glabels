@@ -578,6 +578,15 @@ margin="2" round="0">
     </Label>
   </Sheet>
 
+  <!-- ====================================================== -->
+  <!-- Alpi 02793: Business Cards, 50,8 x 90 mm, 10 per sheet -->
+  <!-- ====================================================== -->
+  <Sheet name="Alpi 02793" size="A4" description="Alpi 02793: Business Cards">
+    <Label style="rectangle" width="255.118" height="144" margin="5" round="0">
+      <Layout nx="2" ny="5" x0="42.5197" y0="62.3622" dx="255.118" dy="144"/>
+    </Label>
+  </Sheet>
+
 
 </GLabels-templates>
 
