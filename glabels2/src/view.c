@@ -3353,6 +3353,7 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 
 	case GDK_BUTTON_PRESS:
 		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
+		gtk_widget_grab_focus (GTK_WIDGET(canvas));
 		switch (event->button.button) {
 		case 1:
 			gnome_canvas_window_to_world (canvas,
