@@ -55,6 +55,9 @@
 
 enum {
 	SELECTION_CHANGED,
+	ZOOM_CHANGED,
+	POINTER_MOVED,
+	MODE_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -205,6 +208,36 @@ gl_view_class_init (glViewClass *class)
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
+
+	signals[ZOOM_CHANGED] =
+		g_signal_new ("zoom_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glViewClass, zoom_changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__DOUBLE,
+			      G_TYPE_NONE,
+			      1, G_TYPE_DOUBLE);
+
+	signals[POINTER_MOVED] =
+		g_signal_new ("pointer_moved",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glViewClass, pointer_moved),
+			      NULL, NULL,
+			      gl_marshal_VOID__DOUBLE_DOUBLE,
+			      G_TYPE_NONE,
+			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
+
+	signals[MODE_CHANGED] =
+		g_signal_new ("mode_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glViewClass, mode_changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__STRING,
+			      G_TYPE_NONE,
+			      1, G_TYPE_STRING);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1648,6 +1681,8 @@ gl_view_set_zoom (glView  *view,
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
 					  scale * HOME_SCALE);
 
+	g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, scale);
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -1814,11 +1849,11 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 
 	case GDK_MOTION_NOTIFY:
 		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
+		gnome_canvas_window_to_world (canvas,
+					      event->motion.x,
+					      event->motion.y, &x, &y);
+		g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, x, y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-
 			gnome_canvas_item_set (item,
 					       "x1", MIN (x, x0),
 					       "y1", MIN (y, y0),

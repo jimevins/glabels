@@ -73,7 +73,16 @@ struct _glView {
 struct _glViewClass {
 	GtkVBoxClass      parent_class;
 
+	/* Selection changed signal */
 	void (*selection_changed) (glView *view, gpointer user_data);
+
+	/* Signals to support a status bar */
+	void (*zoom_changed)      (glView *view,
+				   gdouble zoom,  gpointer user_data);
+	void (*pointer_moved)     (glView *view,
+				   gdouble x, gdouble y, gpointer user_data);
+	void (*mode_changed)      (glView *view,
+				   gchar *modeline, gpointer user_data);
 };
 
 extern guint     gl_view_get_type           (void);
