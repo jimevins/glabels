@@ -4,15 +4,67 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 0.4.3\n"
-"POT-Creation-Date: 2002-02-22 19:29-0500\n"
-"PO-Revision-Date: 2002-06-28 00:05MSK\n"
+"Project-Id-Version: glabels 0.4.5\n"
+"POT-Creation-Date: 2002-08-24 22:30-0400\n"
+"PO-Revision-Date: 2002-09-06 01:32MSK\n"
 "Last-Translator: Vitaly Lipatov <lav@altlinux.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-R\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#: src/glabels_batch.c:49
+msgid "print this message"
+msgstr "напечатать это сообщение"
+
+#: src/glabels_batch.c:51
+msgid "print the version of glabels-batch being used"
+msgstr "напечатать используемую версию пакетной обработки glabels"
+
+#: src/glabels_batch.c:53
+msgid "set output filename (default=\"output.ps\")"
+msgstr "установить название выходного файла (по умолчанию - \"output.ps\""
+
+#: src/glabels_batch.c:53
+msgid "filename"
+msgstr "название"
+
+#: src/glabels_batch.c:55
+msgid "number of sheets (default=1)"
+msgstr "количество страниц (по умолчанию - 1)"
+
+#: src/glabels_batch.c:55
+msgid "sheets"
+msgstr "страниц"
+
+#: src/glabels_batch.c:57
+msgid "number of copies (default=1)"
+msgstr "количество копий (по умолчанию - 1)"
+
+#: src/glabels_batch.c:57
+msgid "copies"
+msgstr "копий"
+
+#: src/glabels_batch.c:59 src/print_dialog.c:152
+msgid "print outlines (to test printer alignment)"
+msgstr "напечатать контуры этикеток"
+
+#: src/glabels_batch.c:61 src/print_dialog.c:160
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "напечатать зеркально"
+
+#: src/glabels_batch.c:92
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr "[ПАРАМЕТРЫ...] файл_glabels"
+
+#: src/glabels_batch.c:111
+msgid "missing glabels file\n"
+msgstr "не указан файл glabels\n"
+
+#: src/glabels_batch.c:139
+msgid "cannot open glabels file %s\n"
+msgstr "невозможно открыть файл %s\n"
 
 #: src/mdi.c:169
 #, c-format
@@ -38,11 +90,11 @@ msgstr ""
 msgid "Don't save"
 msgstr "Не сохранять"
 
-#: src/file.c:288 src/mdi.c:601
+#: src/mdi.c:601 src/file.c:288
 msgid "Cannot save file"
 msgstr "Невозможно сохранить файл"
 
-#: src/file.c:311 src/mdi.c:623
+#: src/mdi.c:623 src/file.c:311
 msgid "Save As"
 msgstr "Сохранить как"
 
@@ -50,15 +102,15 @@ msgstr "Сохранить как"
 msgid "Close / Save label as"
 msgstr "Закрыть / Сохранить этикетку как"
 
-#: src/file.c:352 src/mdi.c:680
+#: src/mdi.c:680 src/file.c:352
 msgid "Label no longer valid!"
 msgstr "Этикетка больше не верна!"
 
-#: src/file.c:362 src/mdi.c:693
+#: src/mdi.c:693 src/file.c:362
 msgid "Must supply file name"
 msgstr "Название файла должно быть указано"
 
-#: src/file.c:374 src/mdi.c:705
+#: src/mdi.c:705 src/file.c:374
 msgid "Error writing file"
 msgstr "Ошибка записи файла"
 
@@ -86,8 +138,8 @@ msgstr "Изменить свойства объекта типа текст"
 msgid "Text"
 msgstr "Текст"
 
-#: src/item_barcode.c:317 src/item_box.c:245 src/item_ellipse.c:247
-#: src/item_line.c:253 src/item_text.c:479
+#: src/item_text.c:479 src/item_line.c:253 src/item_box.c:245
+#: src/item_ellipse.c:247 src/item_barcode.c:317
 msgid "Appearance"
 msgstr "Внешний вид"
 
@@ -97,9 +149,9 @@ msgid "Text Properties"
 msgstr "Свойства текста"
 
 #. ------ Position Frame ------
-#: src/item_barcode.c:345 src/item_barcode.c:348 src/item_box.c:275
-#: src/item_ellipse.c:277 src/item_image.c:318 src/item_line.c:274
-#: src/item_text.c:500 src/item_text.c:503
+#: src/item_text.c:500 src/item_text.c:503 src/item_line.c:274
+#: src/item_box.c:275 src/item_ellipse.c:277 src/item_image.c:318
+#: src/item_barcode.c:345 src/item_barcode.c:348
 msgid "Position"
 msgstr "Расположение"
 
@@ -112,14 +164,14 @@ msgstr "Изменить свойства объекта типа линия"
 msgid "Line"
 msgstr "Линия"
 
-#: src/item_box.c:272 src/item_ellipse.c:274 src/item_image.c:315
-#: src/item_line.c:271
+#: src/item_line.c:271 src/item_box.c:272 src/item_ellipse.c:274
+#: src/item_image.c:315
 msgid "Position/Size"
 msgstr "Расположение/Размер"
 
 #. ------ Size Frame ------
-#: src/item_box.c:286 src/item_ellipse.c:288 src/item_image.c:329
-#: src/item_line.c:285
+#: src/item_line.c:285 src/item_box.c:286 src/item_ellipse.c:288
+#: src/item_image.c:329
 msgid "Size"
 msgstr "Размер"
 
@@ -180,12 +232,12 @@ msgstr "Общее"
 msgid "Style"
 msgstr "Тип"
 
-#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:627
+#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
 msgid "Invalid barcode"
 msgstr "Неверный штрих-код"
 
 #. W Label
-#: src/prop_line.c:169 src/prop_size.c:182
+#: src/prop_size.c:182 src/prop_line.c:169
 msgid "Width:"
 msgstr "Ширина:"
 
@@ -209,13 +261,13 @@ msgid "Y:"
 msgstr "Y:"
 
 #. Line Width units
-#: src/prefs.c:448 src/prefs.c:455 src/prop_line.c:183
+#: src/prop_line.c:183 src/prefs.c:448 src/prefs.c:455
 msgid "points"
 msgstr "точек"
 
 #. Line Color Label
-#: src/prop_bc.c:188 src/prop_fill.c:166 src/prop_line.c:189
-#: src/prop_text.c:234
+#: src/prop_line.c:189 src/prop_fill.c:166 src/prop_text.c:234
+#: src/prop_bc.c:188
 msgid "Color:"
 msgstr "Цвет:"
 
@@ -230,7 +282,7 @@ msgid "Alignment:"
 msgstr "Выравнивание:"
 
 #. Insert merge field label
-#: src/prop_bc_data.c:196 src/prop_text_entry.c:180
+#: src/prop_text_entry.c:180 src/prop_bc_data.c:196
 msgid "Key:"
 msgstr "Ключ:"
 
@@ -260,7 +312,6 @@ msgstr "Масштаб:"
 
 #. % Label
 #: src/prop_bc.c:182
-#, c-format
 msgid "%"
 msgstr "%"
 
@@ -496,15 +547,14 @@ msgstr ""
 " \n"
 "Glabels является свободным программным обеспечением; вы вправе "
 "распространять её и/или модифицировать в соответствиями с условиями версии 2 "
-"либо по вашему выбору более поздней версии Стандартной Общественной Лицензии GNU, "
-"опубликованной Free Software Foundation.\n"
+"либо по вашему выбору более поздней версии Стандартной Общественной Лицензии "
+"GNU, опубликованной Free Software Foundation.\n"
 " \n"
 "Мы распространяем данную программу в надежде на то, что она будет вам "
 "полезной, однако НЕ ПРЕДОСТАВЛЯЕМ НА НЕЁ НИКАКИХ ГАРАНТИЙ, в том числе "
-"ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ПРИГОДНОСТИ ДЛЯ ИСПОЛЬЗОВАНИЯ "
-"В КОНКРЕТНЫХ ЦЕЛЯХ. Для получения более подробной информации ознакомьтесь "
-"со Стандартной Общественной Лицензией GNU.\n"
-
+"ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ПРИГОДНОСТИ ДЛЯ ИСПОЛЬЗОВАНИЯ В "
+"КОНКРЕТНЫХ ЦЕЛЯХ. Для получения более подробной информации ознакомьтесь со "
+"Стандартной Общественной Лицензией GNU.\n"
 
 #: src/menu.c:326
 msgid "Function is not implemented!"
@@ -591,14 +641,6 @@ msgstr "Управление объединением"
 #: src/print_dialog.c:141
 msgid "Options"
 msgstr "Параметры"
-
-#: src/print_dialog.c:152
-msgid "print outlines (to test printer alignment)"
-msgstr "распечатать контуры (для проверки выравнивания на принтере)"
-
-#: src/print_dialog.c:160
-msgid "print in reverse (i.e. a mirror image)"
-msgstr "распечатать зеркально"
 
 #: src/print_dialog.c:241 src/print_dialog.c:280
 msgid "Print preview"
