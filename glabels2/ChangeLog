@@ -1,3 +1,7 @@
+2003-12-28  Wayne Schuller  <k_wayne@linuxpower.org>
+
+	* src/file.c: (gl_file_new), (gl_file_properties): Swap button order and set default for higificatory pleasure.
+
 2003-12-27  Jim Evins  <evins@snaught.com>
 
 	* barcode-0.98/Makefile.am:

@@ -91,9 +91,11 @@ gl_file_new (GtkWindow *window)
 	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
 					      window,
 					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
 	create_new_dialog_widgets (GL_HIG_DIALOG (dlg));
 
@@ -258,9 +260,11 @@ gl_file_properties (glLabel   *label,
 	dlg = gl_hig_dialog_new_with_buttons (_("Label properties"),
 					      window,
 					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
 	create_properties_dialog_widgets (GL_HIG_DIALOG (dlg), label);
 
