@@ -185,7 +185,7 @@ gl_text_node_lines_expand (GList         *lines,
 		/* special case: something like ${ADDRESS2} = "" on line by itself. */ 
 		/*               in such circumstances ignore the line completely.  */
 		p_node = (GList *)p_line->data;
-		if (p_node->next == NULL) {
+		if (p_node && p_node->next == NULL) {
 			text_node = (glTextNode *) p_node->data;
 			if ( is_empty_field (text_node, record) ) {
 				continue;
