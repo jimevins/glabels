@@ -77,6 +77,8 @@ src/xml-label.c
 src/xml-label.h
 src/xml-label-04.c
 src/xml-label-04.h
+src/xml.c
+src/xml.h
 src/pixbuf-cache.c
 src/pixbuf-cache.h
 src/base64.c

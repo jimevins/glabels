@@ -118,6 +118,8 @@ glabels_SOURCES = 			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
+	xml.c				\
+	xml.h				\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\
@@ -212,6 +214,8 @@ glabels_batch_SOURCES = 		\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
+	xml.c				\
+	xml.h				\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\

@@ -27,6 +27,7 @@
 
 #include "prefs.h"
 #include "util.h"
+#include "xml.h"
 #include "template.h"
 
 #include "debug.h"
@@ -571,10 +572,10 @@ gl_template_xml_parse_sheet (xmlNodePtr sheet_node)
 		template->page_size = "US Letter";
 	}
 	if (g_strcasecmp (template->page_size, "Other") == 0) {
-		template->page_width =
-		    g_strtod (xmlGetProp (sheet_node, "width"), NULL);
-		template->page_height =
-		    g_strtod (xmlGetProp (sheet_node, "height"), NULL);
+
+		template->page_width = gl_xml_get_prop_double (sheet_node, "width", 0);
+		template->page_height = gl_xml_get_prop_double (sheet_node, "height", 0);
+
 	} else {
 		paper = gnome_print_paper_get_by_name (template->page_size);
 		if (paper != NULL) {
@@ -614,7 +615,6 @@ xml_parse_label (xmlNodePtr  label_node,
 {
 	xmlNodePtr  node;
 	gchar      *style;
-	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -632,40 +632,27 @@ xml_parse_label (xmlNodePtr  label_node,
 	g_free (style);
 
 	switch (template->label.style) {
+
 	case GL_TEMPLATE_STYLE_RECT:
-		template->label.rect.w =
-		    g_strtod (xmlGetProp (label_node, "width"), NULL);
-		template->label.rect.h =
-		    g_strtod (xmlGetProp (label_node, "height"), NULL);
-		template->label.rect.r =
-		    g_strtod (xmlGetProp (label_node, "round"), NULL);
+		template->label.rect.w = gl_xml_get_prop_double (label_node, "width", 0);
+		template->label.rect.h = gl_xml_get_prop_double (label_node, "height", 0);
+		template->label.rect.r = gl_xml_get_prop_double (label_node, "round", 0);
 		break;
+
 	case GL_TEMPLATE_STYLE_ROUND:
-		template->label.round.r =
-		    g_strtod (xmlGetProp (label_node, "radius"), NULL);
+		template->label.round.r = gl_xml_get_prop_double (label_node, "radius", 0);
 		break;
+
 	case GL_TEMPLATE_STYLE_CD:
-		template->label.cd.r1 =
-		    g_strtod (xmlGetProp (label_node, "radius"), NULL);
-		template->label.cd.r2 =
-		    g_strtod (xmlGetProp (label_node, "hole"), NULL);
-		string = xmlGetProp (label_node, "width");
-		if (string != NULL) {
-			template->label.cd.w = g_strtod (string, NULL);
-			g_free (string);
-		} else {
-			template->label.cd.w = 0.0;
-		}
-		string = xmlGetProp (label_node, "height");
-		if (string != NULL) {
-			template->label.cd.h = g_strtod (string, NULL);
-			g_free (string);
-		} else {
-			template->label.cd.h = 0.0;
-		}
+		template->label.cd.r1 = gl_xml_get_prop_double (label_node, "radius", 0);
+		template->label.cd.r2 = gl_xml_get_prop_double (label_node, "hole", 0);
+		template->label.cd.w  = gl_xml_get_prop_double (label_node, "width", 0);
+		template->label.cd.h  = gl_xml_get_prop_double (label_node, "height", 0);
 		break;
+
 	default:
 		break;
+
 	}
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
@@ -689,18 +676,20 @@ static void
 xml_parse_layout (xmlNodePtr  layout_node,
 		  glTemplate *template)
 {
-	gint nx,   ny;
-	gdouble    x0, y0, dx, dy;
-	xmlNodePtr node;
+	gint        nx, ny;
+	gdouble     x0, y0, dx, dy;
+	xmlNodePtr  node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	sscanf (xmlGetProp (layout_node, "nx"), "%d", &nx);
-	sscanf (xmlGetProp (layout_node, "ny"), "%d", &ny);
-	x0 = g_strtod (xmlGetProp (layout_node, "x0"), NULL);
-	y0 = g_strtod (xmlGetProp (layout_node, "y0"), NULL);
-	dx = g_strtod (xmlGetProp (layout_node, "dx"), NULL);
-	dy = g_strtod (xmlGetProp (layout_node, "dy"), NULL);
+	nx = gl_xml_get_prop_int (layout_node, "nx", 1);
+	ny = gl_xml_get_prop_int (layout_node, "ny", 1);
+
+	x0 = gl_xml_get_prop_double (layout_node, "x0", 0);
+	y0 = gl_xml_get_prop_double (layout_node, "y0", 0);
+
+	dx = gl_xml_get_prop_double (layout_node, "dx", 0);
+	dy = gl_xml_get_prop_double (layout_node, "dy", 0);
 
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -732,19 +721,25 @@ xml_parse_markup (xmlNodePtr  markup_node,
 
 	type = xmlGetProp (markup_node, "type");
 	if (g_strcasecmp (type, "margin") == 0) {
-		size = g_strtod (xmlGetProp (markup_node, "size"), NULL);
+
+		size = gl_xml_get_prop_double (markup_node, "size", 0);
+
 		template->label.any.markups =
 			g_list_append (template->label.any.markups,
 				       markup_margin_new (size));
+
 	} else if (g_strcasecmp (type, "line") == 0) {
-		x1 = g_strtod (xmlGetProp (markup_node, "x1"), NULL);
-		y1 = g_strtod (xmlGetProp (markup_node, "y1"), NULL);
-		x2 = g_strtod (xmlGetProp (markup_node, "x2"), NULL);
-		y2 = g_strtod (xmlGetProp (markup_node, "y2"), NULL);
+
+		x1 = gl_xml_get_prop_double (markup_node, "x1", 0);
+		y1 = gl_xml_get_prop_double (markup_node, "y1", 0);
+		x2 = gl_xml_get_prop_double (markup_node, "x2", 0);
+		y2 = gl_xml_get_prop_double (markup_node, "y2", 0);
+
 		template->label.any.markups =
 			g_list_append (template->label.any.markups,
 				       markup_line_new (x1, y1, x2, y2));
 	}
+	g_free (type);
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
