@@ -3,7 +3,7 @@
  *
  *  commands.c:  GLabels commands module
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -364,7 +364,7 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 		"Jim Evins <evins@snaught.com>",
 		" ",
 		_("See the file AUTHORS for additional credits,"),
-		_("or visit http://snaught.com/glabels"),
+		_("or visit http://glabels.sourceforge.net/"),
 		NULL
 	};
 	
