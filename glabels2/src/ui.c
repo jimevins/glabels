@@ -293,15 +293,19 @@ gl_ui_update_all (BonoboUIComponent *ui_component,
 	label = view->label;
 	g_return_if_fail (label != NULL);
 
-	set_verb_sensitive (ui_component,
-			    "/commands/EditUndo", gl_label_can_undo (label));
-
-	set_verb_sensitive (ui_component,
-			    "/commands/EditRedo", gl_label_can_redo (label));
+	set_verb_sensitive (ui_component, "/commands/EditUndo",
+			    gl_label_can_undo (label));
+	set_verb_sensitive (ui_component, "/commands/EditRedo",
+			    gl_label_can_redo (label));
 
 	set_verb_list_sensitive (ui_component, 
 				 doc_modified_verbs,
 				 gl_label_is_modified (label));
+
+	set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+			    !gl_view_is_zoom_max (view));
+	set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+			    !gl_view_is_zoom_min (view));
 
 	set_verb_list_sensitive (ui_component,
 				 selection_verbs,
@@ -371,6 +375,27 @@ gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 	set_verb_list_sensitive (ui_component,
 				 atomic_selection_verbs,
 				 gl_view_is_selection_atomic (view));
+
+	bonobo_ui_component_thaw (ui_component, NULL);
+
+	gl_debug (DEBUG_UI, "END");
+}
+
+/*****************************************************************************/
+/* Update verbs associated with zoom level of given UI component.            */
+/*****************************************************************************/
+void
+gl_ui_update_zoom_verbs (BonoboUIComponent *ui_component,
+			 glView            *view)
+{
+	gl_debug (DEBUG_UI, "START");
+
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+			    !gl_view_is_zoom_max (view));
+	set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+			    !gl_view_is_zoom_min (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 

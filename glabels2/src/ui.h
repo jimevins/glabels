@@ -46,6 +46,9 @@ void gl_ui_update_modified_verbs  (BonoboUIComponent *ui_component,
 void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 				   glView            *view);
 
+void gl_ui_update_zoom_verbs      (BonoboUIComponent *ui_component,
+				   glView            *view);
+
 void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
 				   glLabel           *label);
 
