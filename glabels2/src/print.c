@@ -161,6 +161,10 @@ static void       create_clipped_circle_path    (GnomePrintContext *pc,
 						 gdouble            h,
 						 gdouble            r);
 
+#ifndef NO_ALPHA_HACK
+static guchar *   get_pixels_as_rgb             (const GdkPixbuf   *pixbuf);
+#endif
+
 
 /*****************************************************************************/
 /* Simple (no merge data) print command.                                     */
@@ -942,13 +946,20 @@ draw_image_object (PrintInfo     *pi,
 	gnome_print_translate (pi->pc, 0.0, h);
 	gnome_print_scale (pi->pc, w, -h);
 	if (image_alpha_flag) {
+#ifndef NO_ALPHA_HACK
+		guchar *image_data2;
+
+		image_data2 = get_pixels_as_rgb (pixbuf);
+	        ret = gnome_print_rgbimage (pi->pc, image_data2,
+					    image_w, image_h, image_stride);
+		g_free (image_data2);
+#else
 	        ret = gnome_print_rgbaimage (pi->pc, image_data,
-					     image_w, image_h, image_stride);
-		gl_debug (DEBUG_PRINT, "Ret a = %d", ret);
+					    image_w, image_h, image_stride);
+#endif
 	} else {
 	        ret = gnome_print_rgbimage (pi->pc, image_data,
 					    image_w, image_h, image_stride);
-		gl_debug (DEBUG_PRINT, "Ret = %d", ret);
 	}
 	gnome_print_grestore (pi->pc);
 
@@ -1433,3 +1444,88 @@ create_clipped_circle_path (GnomePrintContext *pc,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+
+#ifndef NO_ALPHA_HACK
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Extract a copy of rgba pixels, removing alpha by compositing    */
+/* with a white background.                                                  */
+/*                                                                           */
+/* This is currently needed due to the lousy job gnome-print does in         */
+/* rendering images with alpha channels to PS.  This sacrafices the ability  */
+/* to do compositing of images with other items in the background.           */
+/*---------------------------------------------------------------------------*/
+static guchar *
+get_pixels_as_rgb (const GdkPixbuf *pixbuf)
+{
+	gint             bits_per_sample, channels;
+	gboolean         has_alpha;
+	gint             width, height, rowstride;
+	gulong           bytes;
+	guchar          *buf_src, *buf_dest;
+	guchar          *p_src, *p_dest;
+	gint             ix, iy;
+	guchar           r, g, b, a;
+	gdouble          alpha, beta;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	g_return_val_if_fail (pixbuf && GDK_IS_PIXBUF (pixbuf), NULL);
+
+	/* extract pixels and parameters from pixbuf. */
+	buf_src         = gdk_pixbuf_get_pixels (pixbuf);
+	bits_per_sample = gdk_pixbuf_get_bits_per_sample (pixbuf);
+	channels        = gdk_pixbuf_get_n_channels (pixbuf);
+	has_alpha       = gdk_pixbuf_get_has_alpha (pixbuf);
+	width           = gdk_pixbuf_get_width (pixbuf);
+	height          = gdk_pixbuf_get_height (pixbuf);
+	rowstride       = gdk_pixbuf_get_rowstride (pixbuf);
+
+	/* validate assumptions about pixbuf. */
+        g_return_val_if_fail (buf_src, NULL);
+        g_return_val_if_fail (bits_per_sample == 8, NULL);
+        g_return_val_if_fail (channels == 4, NULL);
+	g_return_val_if_fail (has_alpha, NULL);
+        g_return_val_if_fail (width > 0, NULL);
+        g_return_val_if_fail (height > 0, NULL);
+        g_return_val_if_fail (rowstride > 0, NULL);
+
+	/* Allocate a destination buffer */
+	bytes = height * rowstride;
+	gl_debug (DEBUG_PRINT, "bytes = %d", bytes);
+	buf_dest = g_try_malloc (bytes);
+	if (!buf_dest) {
+		return NULL;
+	}
+	gl_debug (DEBUG_PRINT, "buf_dest = %x", buf_dest);
+
+	/* Copy pixels, transforming rgba to rgb by compositing with a white bg. */
+	p_src  = buf_src;
+	p_dest = buf_dest;
+	for ( iy=0; iy < height; iy++ ) {
+	
+		p_src  = buf_src + iy*rowstride;
+		p_dest = buf_dest + iy*rowstride;
+
+		for ( ix=0; ix < width; ix++ ) {
+
+			r = *p_src++;
+			g = *p_src++;
+			b = *p_src++;
+			a = *p_src++;
+
+			alpha = a / 255.0;
+			beta  = 1.0 - alpha;
+
+			*p_dest++ = (guchar) (alpha*r + beta*255 + 0.5);
+			*p_dest++ = (guchar) (alpha*g + beta*255 + 0.5);
+			*p_dest++ = (guchar) (alpha*b + beta*255 + 0.5);
+
+		}
+
+	}
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	return buf_dest;
+}
+#endif
