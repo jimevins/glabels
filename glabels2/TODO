@@ -15,7 +15,7 @@ to version 2.0 are fairly well defined.
 Goals for 1.90:
 
 		-  port all current features/capabilities to the GNOME 2.0
-		   platform {Completed]
+		   platform [Completed]
 
 		-  clean up the architecture, and create a bonobo shell.
                    [Completed]
@@ -23,8 +23,8 @@ Goals for 1.90:
 
 Goals for 2.0:
 
-	`	-  Clean up label and template formats.
-		   (See data/glabels-2.0.dtd)
+		-  Clean up label and template formats.
+		   (See data/glabels-2.0.dtd) [Completed]
 
 		-  A Properties toolbar.  This will let the user change
 		   certain properties (font, colors, and line widths) of
