@@ -1,3 +1,13 @@
+2005-02-03  Jim Evins  <evins@snaught.com>
+
+	* po/cs.po:
+		Updated Czech translations. (David Makovský and Zbynek Mrkvick)
+	* po/it.po:
+		Updated Italian translations. (Daniele Medri)
+	* AUTHORS:
+		Updated credits to reflect above translations.
+
+
 2005-01-22  Jim Evins  <evins@snaught.com>
 
 	* MESSAGE-OF-DOOM:
