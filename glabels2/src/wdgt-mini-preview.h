@@ -53,6 +53,9 @@ struct _glWdgtMiniPreview {
 
 	gint            labels_per_sheet;
 	GList           *label_items;
+
+	gint            highlight_first;
+	gint            highlight_last;
 };
 
 struct _glWdgtMiniPreviewClass {

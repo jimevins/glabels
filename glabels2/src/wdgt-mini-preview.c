@@ -31,9 +31,8 @@
 #include "debug.h"
 
 #define WDGT_MINI_PREVIEW_MAX_PIXELS 175
-#define SHADOW_X_OFFSET 3
-#define SHADOW_Y_OFFSET 3
-#define SHADOW_COLOR GL_COLOR_A (33, 33, 33, 192)
+#define SHADOW_X_OFFSET 5
+#define SHADOW_Y_OFFSET 5
 
 #define RES 5 /* Resolution in degrees for Business Card CD outlines */
 
@@ -79,6 +78,11 @@ static GnomeCanvasItem *cdbc_item              (GnomeCanvasGroup *group,
 						gdouble           x1,
 						gdouble           y1,
 						glTemplate       *template);
+
+static void style_set_cb                       (GtkWidget        *widget,
+						GtkStyle         *previous_style,
+						gpointer data);
+
 
 
 
@@ -200,8 +204,10 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 				gint height,
 				gint width)
 {
-	GtkWidget *whbox;
+	GtkWidget        *whbox;
 	GnomeCanvasGroup *group;
+	GtkStyle         *style;
+	guint             shadow_color;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -223,6 +229,8 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 	group = gnome_canvas_root (GNOME_CANVAS (preview->canvas));
 
 	/* draw shadow */
+	style = gtk_widget_get_style (GTK_WIDGET(preview));
+	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
 	preview->shadow_item =
 		gnome_canvas_item_new (group,
 				       gnome_canvas_rect_get_type (),
@@ -230,7 +238,7 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 				       "y1", (gdouble)SHADOW_Y_OFFSET,
 				       "x2", (gdouble)(SHADOW_X_OFFSET + width),
 				       "y2", (gdouble)(SHADOW_Y_OFFSET + height),
-				       "fill_color_rgba", SHADOW_COLOR,
+				       "fill_color_rgba", shadow_color,
 				       NULL);
 
 	/* draw an initial paper outline */
@@ -253,6 +261,11 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 	/* Event handler */
 	g_signal_connect (G_OBJECT (preview->canvas), "event",
 			  G_CALLBACK (canvas_event_cb), preview);
+
+
+	/* Style changed handler */
+	g_signal_connect (G_OBJECT (preview), "style_set",
+			  G_CALLBACK (style_set_cb), NULL);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
@@ -551,15 +564,21 @@ canvas_event_cb (GnomeCanvas * canvas,
 /* Highlight given label outlines.                                          */
 /****************************************************************************/
 void
-gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview * preview,
-				      gint first_label,
-				      gint last_label)
+gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview *preview,
+				      gint               first_label,
+				      gint               last_label)
 {
-	GnomeCanvasItem *item = NULL;
-	GList *p = NULL;
-	gint i;
+	GtkStyle         *style;
+	guint             select_color;
+	GnomeCanvasItem  *item = NULL;
+	GList            *p = NULL;
+	gint              i;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	style = gtk_widget_get_style (GTK_WIDGET(preview));
+	select_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
+	gl_debug (DEBUG_MINI_PREVIEW, "select color = 0x%08x", select_color);
 
 	for (p = preview->label_items, i = 1; p != NULL; i++, p = p->next) {
 
@@ -567,7 +586,7 @@ gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview * preview,
 
 		if ((i >= first_label) && (i <= last_label)) {
 			gnome_canvas_item_set (item,
-					       "fill_color", "light blue",
+					       "fill_color_rgba", select_color,
 					       NULL);
 		} else {
 			gnome_canvas_item_set (item,
@@ -576,7 +595,34 @@ gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview * preview,
 
 	}
 
+	preview->highlight_first = first_label;
+	preview->highlight_last =  last_label;
+
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Refresh colors, if style changed.                              */
+/*--------------------------------------------------------------------------*/
+static void
+style_set_cb (GtkWidget        *widget,
+	      GtkStyle         *previous_style,
+	      gpointer          data)
+{
+	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	GtkStyle         *style;
+	guint             shadow_color;
+
+	style = gtk_widget_get_style (GTK_WIDGET(preview));
+
+	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
+	gnome_canvas_item_set (preview->shadow_item,
+			       "fill_color_rgba", shadow_color,
+			       NULL);
+
+	gl_wdgt_mini_preview_highlight_range (preview,
+					      preview->highlight_first,
+					      preview->highlight_last);
 }
 
 /*--------------------------------------------------------------------------*/
