@@ -309,7 +309,7 @@ construct_properties_dialog (glViewEllipse *view_ellipse)
 				  gtk_label_new (_("Appearance")));
 
 	/* ------ Line ellipse ------ */
-	view_ellipse->private->line = gl_wdgt_line_new (_("Outline"));
+	view_ellipse->private->line = gl_wdgt_line_new ();
 	gl_wdgt_line_set_params (GL_WDGT_LINE (view_ellipse->private->line),
 				 line_width,
 				 line_color);
@@ -319,7 +319,7 @@ construct_properties_dialog (glViewEllipse *view_ellipse)
 			  G_CALLBACK(line_changed_cb), view_ellipse);
 
 	/* ------ Fill ellipse ------ */
-	view_ellipse->private->fill = gl_wdgt_fill_new (_("Fill"));
+	view_ellipse->private->fill = gl_wdgt_fill_new ();
 	gl_wdgt_fill_set_params (GL_WDGT_FILL (view_ellipse->private->fill),
 				 fill_color);
 	gtk_box_pack_start (GTK_BOX (wvbox), view_ellipse->private->fill,
@@ -337,7 +337,7 @@ construct_properties_dialog (glViewEllipse *view_ellipse)
 				  gtk_label_new (_("Position/Size")));
 
 	/* ------ Position Frame ------ */
-	view_ellipse->private->position = gl_wdgt_position_new (_("Position"));
+	view_ellipse->private->position = gl_wdgt_position_new ();
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_ellipse->private->position),
 				     x, y,
 				     label_width, label_height);

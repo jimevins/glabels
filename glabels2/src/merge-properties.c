@@ -27,6 +27,7 @@
 #include "merge.h"
 #include "merge-ui.h"
 #include "merge-properties.h"
+#include "hig.h"
 
 #include "debug.h"
 
@@ -57,20 +58,24 @@ typedef struct {
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void create_merge_dialog_widgets (GtkDialog * dialog,
-					 PropertyDialogPassback * data);
+static void create_merge_dialog_widgets (glHigDialog            *dialog,
+					 PropertyDialogPassback *data);
 
-static void type_changed_cb (GtkWidget * widget, PropertyDialogPassback * data);
-static void src_changed_cb (GtkWidget * widget, PropertyDialogPassback * data);
+static void type_changed_cb             (GtkWidget              *widget,
+					 PropertyDialogPassback *data);
 
-static void response_cb (GtkDialog * dialog, gint response,
-			 PropertyDialogPassback * data);
+static void src_changed_cb              (GtkWidget              *widget,
+					 PropertyDialogPassback *data);
+
+static void response_cb                 (glHigDialog            *dialog,
+					 gint                    response,
+					 PropertyDialogPassback *data);
 
 /****************************************************************************/
 /* Launch merge properties dialog.                                          */
 /****************************************************************************/
 void
-gl_merge_properties_dialog (glView * view)
+gl_merge_properties_dialog (glView *view)
 {
 	static PropertyDialogPassback *data = NULL;
 	GtkWidget *dialog;
@@ -80,13 +85,13 @@ gl_merge_properties_dialog (glView * view)
 		data = g_new0 (PropertyDialogPassback, 1);
 	}
 
-	dialog = gtk_dialog_new_with_buttons (
-                                   _("Edit document-merge properties"),
-				   GTK_WINDOW (win),
-				   GTK_DIALOG_DESTROY_WITH_PARENT,
-				   GTK_STOCK_OK, GTK_RESPONSE_OK,
-				   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				   NULL);
+	dialog = gl_hig_dialog_new_with_buttons (
+		_("Edit document-merge properties"),
+		GTK_WINDOW (win),
+		GTK_DIALOG_DESTROY_WITH_PARENT,
+		GTK_STOCK_OK, GTK_RESPONSE_OK,
+		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		NULL);
 
 	data->dialog = dialog;
 	data->view = view;
@@ -96,7 +101,7 @@ gl_merge_properties_dialog (glView * view)
 	data->src_entry = NULL;
 	data->field_ws = NULL;
 
-	create_merge_dialog_widgets (GTK_DIALOG (dialog), data);
+	create_merge_dialog_widgets (GL_HIG_DIALOG (dialog), data);
 
 	g_signal_connect (G_OBJECT(dialog), "response",
 			  G_CALLBACK(response_cb), data);
@@ -106,74 +111,74 @@ gl_merge_properties_dialog (glView * view)
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Create and add start page to druid.                            */
+/* PRIVATE.  Create merge widgets.                                          */
 /*--------------------------------------------------------------------------*/
 static void
-create_merge_dialog_widgets (GtkDialog * dialog,
+create_merge_dialog_widgets (glHigDialog * dialog,
 			     PropertyDialogPassback * data)
 {
-	GtkWidget *wvbox, *wframe, *whbox, *wtable, *wlabel, *wcombo, *wscroll;
+	GtkWidget *wframe, *whbox, *wtable, *wlabel, *wcombo, *wscroll;
 	GList *texts;
 	glMerge *merge;
 	glMergeType type;
 	gchar *src;
 	GList *fields;
+	GtkSizeGroup *label_size_group;
 
 	merge = gl_label_get_merge (data->label);
 	type = merge->type;
 	src  = merge->src;
 	fields = merge->field_defs;
-	gl_merge_free (&merge);
 
-	wvbox = dialog->vbox;
+	/* ---- Source section ---- */
+	wframe = gl_hig_category_new (_("Source"));
+	gl_hig_dialog_add_widget (dialog, wframe);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	wframe = gtk_frame_new (_("Source"));
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	whbox = gtk_hbox_new (FALSE, GNOME_PAD);
-	gtk_container_add (GTK_CONTAINER (wframe), whbox);
-
-	wtable = gtk_table_new (2, 2, FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_box_pack_start (GTK_BOX (whbox), wtable, FALSE, FALSE, GNOME_PAD);
+	/* Format line */
+	whbox = gl_hig_hbox_new();
+	gl_hig_category_add_widget (GL_HIG_CATEGORY (wframe), whbox);
 
 	wlabel = gtk_label_new (_("Format:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
 	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
 
 	wcombo = gtk_combo_new ();
-	gtk_widget_set_usize (wcombo, 400, -1);
 	texts = gl_merge_get_long_texts_list ();
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), texts);
 	gl_merge_free_long_texts_list (&texts);
 	data->type_entry = GTK_COMBO (wcombo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (data->type_entry), FALSE);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wcombo, 1, 2, 0, 1);
 	gtk_entry_set_text (GTK_ENTRY (data->type_entry),
 			    gl_merge_type_to_long_text (type));
+	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), wcombo);
 
+	whbox = gl_hig_hbox_new();
+	gl_hig_category_add_widget (GL_HIG_CATEGORY (wframe), whbox);
+
+	/* Location line */
 	wlabel = gtk_label_new (_("Location:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
 	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
 
 	data->src_entry = gl_merge_ui_src_new ();
-	gtk_table_attach_defaults (GTK_TABLE (wtable), data->src_entry, 1, 2, 1,
-				   2);
 	gl_merge_ui_src_set_type (GL_MERGE_UI_SRC (data->src_entry), type);
 	gl_merge_ui_src_set_value (GL_MERGE_UI_SRC (data->src_entry), src);
+	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), data->src_entry);
 
-	wframe = gtk_frame_new (_("Fields"));
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
+	/* ---- Fields section ---- */
+	wframe = gl_hig_category_new (_("Fields"));
+	gl_hig_dialog_add_widget (dialog, wframe);
 
 	wscroll = gtk_scrolled_window_new (NULL, NULL);
 	gtk_container_set_border_width (GTK_CONTAINER (wscroll), 5);
-	gtk_widget_set_usize (wscroll, 500, 300);
+	gtk_widget_set_usize (wscroll, 400, 250);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
-	gtk_container_add (GTK_CONTAINER (wframe), wscroll);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), wscroll);
 
 	data->field_ws = gl_merge_ui_field_ws_new ();
 	gtk_container_set_border_width (GTK_CONTAINER (data->field_ws), 10);
@@ -189,6 +194,7 @@ create_merge_dialog_widgets (GtkDialog * dialog,
 	g_signal_connect (G_OBJECT (data->src_entry), "changed",
 			  G_CALLBACK (src_changed_cb), data);
 
+	gl_merge_free (&merge);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -233,7 +239,7 @@ src_changed_cb (GtkWidget * widget,
 /* PRIVATE.  response callback.                                             */
 /*--------------------------------------------------------------------------*/
 static void
-response_cb (GtkDialog * dialog,
+response_cb (glHigDialog * dialog,
 	     gint response,
 	     PropertyDialogPassback * data)
 {

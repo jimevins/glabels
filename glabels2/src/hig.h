@@ -27,6 +27,9 @@
 
 G_BEGIN_DECLS
 
+#define GL_HIG_PAD1   6
+#define GL_HIG_PAD2  12
+
 /*===========================================================================*/
 /* HIG Dialog wrapper.                                                       */
 /*===========================================================================*/
@@ -167,12 +170,15 @@ struct _glHigHBoxClass {
 	GtkHBoxClass      parent_class;
 };
 
-guint      gl_hig_hbox_get_type         (void);
+guint      gl_hig_hbox_get_type           (void);
 
-GtkWidget *gl_hig_hbox_new              (void);
+GtkWidget *gl_hig_hbox_new                (void);
 
-void       gl_hig_hbox_add_widget       (glHigHBox     *hig_hbox,
-					 GtkWidget     *widget);
+void       gl_hig_hbox_add_widget         (glHigHBox     *hig_hbox,
+					   GtkWidget     *widget);
+
+void       gl_hig_hbox_add_widget_justify (glHigHBox     *hig_hbox,
+					   GtkWidget     *widget);
 
 G_END_DECLS
 

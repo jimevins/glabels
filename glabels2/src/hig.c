@@ -38,7 +38,7 @@
 
 #define HIG_VBOX_INNER_SPACING         6
 
-#define HIG_HBOX_SPACING               6
+#define HIG_HBOX_SPACING              12
 
 /*===========================================*/
 /* Private globals                           */
@@ -300,7 +300,7 @@ gl_hig_category_init (glHigCategory *hig_category)
 	/* 2nd row, Column 2: User area (inner vbox) */
 	hig_category->vbox = gtk_vbox_new (FALSE, HIG_VBOX_INNER_SPACING);
 	gtk_box_pack_start (GTK_BOX(hbox),
-			    hig_category->vbox, FALSE, FALSE, 0);
+			    hig_category->vbox, TRUE, TRUE, 0);
 }
 
 static void
@@ -536,6 +536,16 @@ gl_hig_hbox_add_widget (glHigHBox     *hig_hbox,
 			GtkWidget     *widget)
 {
 	gtk_box_pack_start (GTK_BOX (hig_hbox), widget, FALSE, FALSE, 0);
+}
+
+/****************************************************************************/
+/* Add widget (from left) to hbox with a right justification.               */
+/****************************************************************************/
+void
+gl_hig_hbox_add_widget_justify (glHigHBox     *hig_hbox,
+				GtkWidget     *widget)
+{
+	gtk_box_pack_start (GTK_BOX (hig_hbox), widget, TRUE, TRUE, 0);
 }
 
 

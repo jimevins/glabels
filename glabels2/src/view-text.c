@@ -26,15 +26,14 @@
 
 #include "view-text.h"
 #include "canvas-hacktext.h"
-
 #include "view-highlight.h"
-
 #include "glabels.h"
 #include "wdgt-text-entry.h"
 #include "wdgt-text-props.h"
 #include "wdgt-position.h"
 #include "color.h"
 #include "prefs.h"
+#include "hig.h"
 
 #include "pixmaps/cursor_text.xbm"
 #include "pixmaps/cursor_text_mask.xbm"
@@ -245,6 +244,7 @@ construct_properties_dialog (glViewText *view_text)
 	guint              color;
 	GtkJustification   just;
 	glMerge            *merge;
+	GtkSizeGroup       *label_size_group;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -264,40 +264,36 @@ construct_properties_dialog (glViewText *view_text)
 	/* Build dialog with notebook.                                     */
 	/*-----------------------------------------------------------------*/
 	gl_debug (DEBUG_VIEW, "Creating dialog...");
-	dialog = gtk_dialog_new_with_buttons ( _("Edit text object properties"),
-					       GTK_WINDOW (win),
-					       GTK_DIALOG_DESTROY_WITH_PARENT,
-					       GTK_STOCK_CLOSE,
+	dialog = gl_hig_dialog_new_with_buttons ( _("Edit text object properties"),
+						  GTK_WINDOW (win),
+						  GTK_DIALOG_DESTROY_WITH_PARENT,
+						  GTK_STOCK_CLOSE,
 					                   GTK_RESPONSE_CLOSE,
-					       NULL );
+						  NULL );
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), view_text);
 
 	notebook = gtk_notebook_new ();
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			    notebook, TRUE, TRUE, 0);
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), notebook);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	/*---------------------------*/
 	/* Text Notebook Tab         */
 	/*---------------------------*/
 	gl_debug (DEBUG_VIEW, "Creating text tab...");
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
+	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
 				  gtk_label_new (_("Text")));
 
 	/* text entry */
 	gl_debug (DEBUG_VIEW, "Creating text entry...");
 	view_text->private->text_entry =
-		gl_wdgt_text_entry_new ("Text", merge->field_defs);
-	gl_debug (DEBUG_VIEW, "1");
+		gl_wdgt_text_entry_new (merge->field_defs);
 	gl_wdgt_text_entry_set_text (GL_WDGT_TEXT_ENTRY(view_text->private->text_entry),
 				     (merge->type != GL_MERGE_NONE),
 				     lines);
-	gl_debug (DEBUG_VIEW, "2");
-	gtk_box_pack_start (GTK_BOX (wvbox), view_text->private->text_entry,
-			    FALSE, FALSE, 0);
-	gl_debug (DEBUG_VIEW, "3");
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
+				view_text->private->text_entry);
 	g_signal_connect ( G_OBJECT(view_text->private->text_entry),
 			   "changed", G_CALLBACK (text_entry_changed_cb),
 			   view_text);
@@ -307,20 +303,21 @@ construct_properties_dialog (glViewText *view_text)
 	/* Text Props Notebook Tab   */
 	/*---------------------------*/
 	gl_debug (DEBUG_VIEW, "Creating props tab...");
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
+	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
 				  gtk_label_new (_("Appearance")));
 
 	/* text props entry */
 	gl_debug (DEBUG_VIEW, "Creating props entry...");
-	view_text->private->text_props =
-		gl_wdgt_text_props_new ("Text Properties");
+	view_text->private->text_props = gl_wdgt_text_props_new ();
+	gl_wdgt_text_props_set_label_size_group (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
+						 label_size_group);
 	gl_wdgt_text_props_set_params (GL_WDGT_TEXT_PROPS(view_text->private->text_props),
 				       font_family, font_size, font_weight,
 				       font_italic_flag, color, just);
-	gtk_box_pack_start (GTK_BOX (wvbox), view_text->private->text_props,
-			    FALSE, FALSE, 0);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
+				view_text->private->text_props);
 	g_signal_connect ( G_OBJECT(view_text->private->text_props),
 			   "changed", G_CALLBACK (text_props_changed_cb),
 			   view_text);
@@ -330,20 +327,19 @@ construct_properties_dialog (glViewText *view_text)
 	/* Position/Size Notebook Tab */
 	/*----------------------------*/
 	gl_debug (DEBUG_VIEW, "Creating position tab...");
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
+	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), wvbox,
 				  gtk_label_new (_("Position")));
 
 	/* ------ Position Frame ------ */
 	gl_debug (DEBUG_VIEW, "Creating position entry...");
-	view_text->private->position = gl_wdgt_position_new (_("Position"));
+	view_text->private->position = gl_wdgt_position_new ();
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_text->private->position),
 				     x, y,
 				     label_width, label_height);
-	gtk_box_pack_start (GTK_BOX (wvbox),
-				view_text->private->position,
-			    FALSE, FALSE, 0);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox),
+				view_text->private->position);
 	g_signal_connect (G_OBJECT (view_text->private->position),
 			  "changed",
 			  G_CALLBACK(position_changed_cb), view_text);
@@ -365,8 +361,8 @@ construct_properties_dialog (glViewText *view_text)
 /*---------------------------------------------------------------------------*/
 static void
 response_cb (GtkDialog     *dialog,
-	     gint          response,
-	     glViewText   *view_text)
+	     gint           response,
+	     glViewText    *view_text)
 {
 	gl_debug (DEBUG_VIEW, "START");
 

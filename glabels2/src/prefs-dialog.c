@@ -123,7 +123,7 @@ gl_prefs_dialog_get_type (void)
         		(GInstanceInitFunc) gl_prefs_dialog_init
       		};
 
-     		dialog_type = g_type_register_static (GTK_TYPE_DIALOG,
+     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
 						      "glPrefsDialog",
 						      &dialog_info, 
 						      0);
@@ -212,8 +212,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dlg)
 			 G_CALLBACK (response_cb), NULL);
 
 	notebook = gtk_notebook_new ();
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dlg)->vbox),
-			    notebook, TRUE, TRUE, 0);
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dlg), notebook);
 
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  locale_page (dlg),
@@ -263,25 +262,18 @@ response_cb (glPrefsDialog *dlg,
 static GtkWidget *
 locale_page (glPrefsDialog *dlg)
 {
-	GtkWidget *wlabel, *wvbox, *whbox, *wvbox1, *wframe;
+	GtkWidget *wlabel, *wvbox, *wframe;
 	GSList *radio_group = NULL;
 
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
+	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
 	wlabel = gtk_label_new (_("Select locale specific behavior."));
-	gtk_box_pack_start (GTK_BOX (wvbox), wlabel, FALSE, FALSE, 0);
-
-	whbox = gtk_hbox_new (TRUE, GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, FALSE, FALSE, 0);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wlabel);
 
 	/* ----- Display Units Frame ------------------------------------ */
-	wframe = gtk_frame_new (_("Display units"));
-	gtk_box_pack_start (GTK_BOX (whbox), wframe, FALSE, TRUE, 0);
-
-	wvbox1 = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox1), 10);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox1);
+	wframe = gl_hig_category_new (_("Display units"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wframe);
 
 	radio_group = NULL;
 
@@ -289,30 +281,26 @@ locale_page (glPrefsDialog *dlg)
 	    gtk_radio_button_new_with_label (radio_group, _("Points"));
 	radio_group =
 		gtk_radio_button_get_group (GTK_RADIO_BUTTON (dlg->private->units_points_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox1), dlg->private->units_points_radio,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->units_points_radio);
 
 	dlg->private->units_inches_radio =
 	    gtk_radio_button_new_with_label (radio_group, _("Inches"));
 	radio_group =
 		gtk_radio_button_get_group (GTK_RADIO_BUTTON (dlg->private->units_inches_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox1), dlg->private->units_inches_radio,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->units_inches_radio);
 
 	dlg->private->units_mm_radio =
 	    gtk_radio_button_new_with_label (radio_group, _("Millimeters"));
 	radio_group =
 		gtk_radio_button_get_group (GTK_RADIO_BUTTON (dlg->private->units_mm_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox1), dlg->private->units_mm_radio,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->units_mm_radio);
 
 	/* ----- Page Size Frame ------------------------------------ */
-	wframe = gtk_frame_new (_("Default page size"));
-	gtk_box_pack_start (GTK_BOX (whbox), wframe, FALSE, TRUE, 0);
-
-	wvbox1 = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox1), 10);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox1);
+	wframe = gl_hig_category_new (_("Default page size"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wframe);
 
 	radio_group = NULL;
 
@@ -321,15 +309,15 @@ locale_page (glPrefsDialog *dlg)
 	radio_group =
 	    gtk_radio_button_get_group (GTK_RADIO_BUTTON
 				    (dlg->private->page_size_us_letter_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox1), dlg->private->page_size_us_letter_radio, FALSE,
-			    FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->page_size_us_letter_radio);
 
 	dlg->private->page_size_a4_radio =
 	    gtk_radio_button_new_with_label (radio_group, A4);
 	radio_group =
 	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (dlg->private->page_size_a4_radio));
-	gtk_box_pack_start (GTK_BOX (wvbox1), dlg->private->page_size_a4_radio,
-			    FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->page_size_a4_radio);
 
 	g_signal_connect_swapped (
 		G_OBJECT(dlg->private->units_points_radio),
@@ -356,32 +344,42 @@ locale_page (glPrefsDialog *dlg)
 static GtkWidget *
 object_page (glPrefsDialog *dlg)
 {
-	GtkWidget *wlabel, *wvbox, *whbox;
+	GtkWidget *wlabel, *wvbox, *wframe;
+	GtkSizeGroup *label_size_group;
 
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
+	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	wlabel = gtk_label_new (_("Select default properties for new objects."));
-	gtk_box_pack_start (GTK_BOX (wvbox), wlabel, FALSE, FALSE, 0);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wlabel);
 
-	/* text props entry */
-	dlg->private->text =
-		gl_wdgt_text_props_new ("Text");
-	gtk_box_pack_start (GTK_BOX (wvbox), dlg->private->text,
-			    FALSE, FALSE, 0);
-
-	whbox = gtk_hbox_new (TRUE, GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, FALSE, FALSE, 0);
+	/* ------ text props entry ------ */
+	wframe = gl_hig_category_new (_("Text"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wframe);
+	dlg->private->text = gl_wdgt_text_props_new ();
+	gl_wdgt_text_props_set_label_size_group (GL_WDGT_TEXT_PROPS(dlg->private->text),
+						 label_size_group);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->text);
 
 	/* ------ Line box ------ */
-	dlg->private->line = gl_wdgt_line_new (_("Line"));
-	gtk_box_pack_start (GTK_BOX (whbox), dlg->private->line,
-			    FALSE, TRUE, 0);
+	wframe = gl_hig_category_new (_("Line"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wframe);
+	dlg->private->line = gl_wdgt_line_new ();
+	gl_wdgt_line_set_label_size_group (GL_WDGT_LINE(dlg->private->line),
+					   label_size_group);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->line);
 
 	/* ------ Fill box ------ */
-	dlg->private->fill = gl_wdgt_fill_new (_("Fill"));
-	gtk_box_pack_start (GTK_BOX (whbox), dlg->private->fill,
-			    FALSE, TRUE, 0);
+	wframe = gl_hig_category_new (_("Fill"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wframe);
+	dlg->private->fill = gl_wdgt_fill_new ();
+	gl_wdgt_fill_set_label_size_group (GL_WDGT_FILL(dlg->private->fill),
+					   label_size_group);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
+				    dlg->private->fill);
 
 	g_signal_connect_swapped (G_OBJECT(dlg->private->text),
 				  "changed",

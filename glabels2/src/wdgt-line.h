@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_LINE (gl_wdgt_line_get_type ())
 #define GL_WDGT_LINE(obj) \
@@ -40,29 +43,37 @@ typedef struct _glWdgtLine glWdgtLine;
 typedef struct _glWdgtLineClass glWdgtLineClass;
 
 struct _glWdgtLine {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *width_label;
 	GtkWidget *width_spin;
+
+	GtkWidget *color_label;
 	GtkWidget *color_picker;
 	GtkWidget *units_label;
 };
 
 struct _glWdgtLineClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtLine * line, gpointer user_data);
 };
 
-extern guint gl_wdgt_line_get_type (void);
+guint      gl_wdgt_line_get_type   (void);
 
-extern GtkWidget *gl_wdgt_line_new (gchar * label);
+GtkWidget *gl_wdgt_line_new        (void);
 
-extern void gl_wdgt_line_get_params (glWdgtLine * line,
-				     gdouble * width,
-				     guint * color);
+void       gl_wdgt_line_get_params (glWdgtLine *line,
+				    gdouble    *width,
+				    guint      *color);
 
-extern void gl_wdgt_line_set_params (glWdgtLine * line,
-				     gdouble width,
-				     guint color);
+void       gl_wdgt_line_set_params (glWdgtLine *line,
+				    gdouble     width,
+				    guint       color);
+
+void       gl_wdgt_line_set_label_size_group (glWdgtLine   *line,
+					      GtkSizeGroup *label_size_group);
+
+G_END_DECLS
 
 #endif

@@ -222,7 +222,7 @@ gl_merge_ui_src_new (void)
 	src->type = GL_MERGE_NONE;
 	src->backend_widget = gtk_label_new (_("N/A"));
 	gtk_misc_set_alignment (GTK_MISC (src->backend_widget), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (src), src->backend_widget, FALSE, FALSE,
+	gtk_box_pack_start (GTK_BOX (src), src->backend_widget, TRUE, TRUE,
 			    0);
 
 	gl_debug (DEBUG_MERGE, "END");
@@ -268,7 +268,7 @@ gl_merge_ui_src_set_type (glMergeUISrc * src,
 		}
 
 		gtk_box_pack_start (GTK_BOX (src), src->backend_widget,
-				    FALSE, FALSE, 0);
+				    TRUE, TRUE, 0);
 
 		if (GTK_WIDGET_VISIBLE (src)) {
 			gtk_widget_show_all (src->backend_widget);

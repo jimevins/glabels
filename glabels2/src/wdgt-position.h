@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_POSITION (gl_wdgt_position_get_type ())
 #define GL_WDGT_POSITION(obj) \
@@ -40,31 +43,44 @@ typedef struct _glWdgtPosition glWdgtPosition;
 typedef struct _glWdgtPositionClass glWdgtPositionClass;
 
 struct _glWdgtPosition {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *x_label;
 	GtkWidget *x_spin;
+
+	GtkWidget *y_label;
 	GtkWidget *y_spin;
+
 	GtkWidget *units_label;
 };
 
 struct _glWdgtPositionClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtPosition * prop, gpointer user_data);
 };
 
-extern guint gl_wdgt_position_get_type (void);
+guint      gl_wdgt_position_get_type             (void);
 
-extern GtkWidget *gl_wdgt_position_new (gchar * label);
+GtkWidget *gl_wdgt_position_new                  (void);
 
-extern void gl_wdgt_position_get_position (glWdgtPosition * position,
-					   gdouble * x, gdouble * y);
+void       gl_wdgt_position_get_position         (glWdgtPosition *position,
+						  gdouble        *x,
+						  gdouble        *y);
 
-extern void gl_wdgt_position_set_params (glWdgtPosition * position,
-					 gdouble x, gdouble y,
-					 gdouble x_max, gdouble y_max);
+void       gl_wdgt_position_set_params           (glWdgtPosition *position,
+						  gdouble         x,
+						  gdouble         y,
+						  gdouble         x_max,
+						  gdouble         y_max);
 
-extern void gl_wdgt_position_set_position (glWdgtPosition * position,
-					   gdouble x, gdouble y);
+void       gl_wdgt_position_set_position         (glWdgtPosition *position,
+						  gdouble         x,
+						  gdouble         y);
+
+void       gl_wdgt_position_set_label_size_group (glWdgtPosition *position,
+						  GtkSizeGroup   *size_group);
+
+G_END_DECLS
 
 #endif

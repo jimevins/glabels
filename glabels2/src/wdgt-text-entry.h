@@ -24,8 +24,10 @@
 #define __WDGT_TEXT_ENTRY_H__
 
 #include <gnome.h>
-
 #include "merge.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_TEXT_ENTRY (gl_wdgt_text_entry_get_type ())
 #define GL_WDGT_TEXT_ENTRY(obj) \
@@ -41,29 +43,31 @@ typedef struct _glWdgtTextEntry glWdgtTextEntry;
 typedef struct _glWdgtTextEntryClass glWdgtTextEntryClass;
 
 struct _glWdgtTextEntry {
-	GtkVBox parent_widget;
+	glHigVBox      parent_widget;
 
-	GtkWidget *text_entry;
-	GtkWidget *key_entry;
-	GtkWidget *insert_button;
+	GtkWidget     *text_entry;
+	GtkWidget     *key_entry;
+	GtkWidget     *insert_button;
 
 	GtkTextBuffer *text_buffer;
 };
 
 struct _glWdgtTextEntryClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtTextEntry * text_entry, gpointer user_data);
 };
 
-extern guint gl_wdgt_text_entry_get_type (void);
+guint      gl_wdgt_text_entry_get_type (void);
 
-extern GtkWidget *gl_wdgt_text_entry_new (gchar * label, GList * field_defs);
+GtkWidget *gl_wdgt_text_entry_new      (GList           *field_defs);
 
-extern GList *gl_wdgt_text_entry_get_text (glWdgtTextEntry * text_entry);
+GList     *gl_wdgt_text_entry_get_text (glWdgtTextEntry *text_entry);
 
-extern void gl_wdgt_text_entry_set_text (glWdgtTextEntry * text_entry,
-					 gboolean merge_flag,
-					 GList * lines);
+void       gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
+					 gboolean        merge_flag,
+					 GList          *lines);
+
+G_END_DECLS
 
 #endif

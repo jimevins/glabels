@@ -308,7 +308,7 @@ construct_properties_dialog (glViewLine *view_line)
 				  gtk_label_new (_("Appearance")));
 
 	/* ------ Line line ------ */
-	view_line->private->line = gl_wdgt_line_new (_("Outline"));
+	view_line->private->line = gl_wdgt_line_new ();
 	gl_wdgt_line_set_params (GL_WDGT_LINE (view_line->private->line),
 				 line_width,
 				 line_color);
@@ -327,7 +327,7 @@ construct_properties_dialog (glViewLine *view_line)
 				  gtk_label_new (_("Position/Size")));
 
 	/* ------ Position Frame ------ */
-	view_line->private->position = gl_wdgt_position_new (_("Position"));
+	view_line->private->position = gl_wdgt_position_new ();
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_line->private->position),
 				     x, y,
 				     label_width, label_height);

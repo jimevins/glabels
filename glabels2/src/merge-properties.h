@@ -24,6 +24,6 @@
 
 #include "view.h"
 
-extern void gl_merge_properties_dialog (glView * view);
+extern void gl_merge_properties_dialog (glView *view);
 
 #endif

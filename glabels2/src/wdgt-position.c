@@ -43,7 +43,7 @@ typedef void (*glWdgtPositionSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GObjectClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_position_signals[LAST_SIGNAL] = { 0 };
 
@@ -51,16 +51,17 @@ static gint wdgt_position_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_position_class_init (glWdgtPositionClass * class);
-static void gl_wdgt_position_instance_init (glWdgtPosition * position);
-static void gl_wdgt_position_finalize (GObject * object);
-static void gl_wdgt_position_construct (glWdgtPosition * position,
-					gchar * label);
-static void changed_cb (glWdgtPosition * position);
+static void gl_wdgt_position_class_init    (glWdgtPositionClass *class);
+static void gl_wdgt_position_instance_init (glWdgtPosition      *position);
+static void gl_wdgt_position_finalize      (GObject             *object);
+static void gl_wdgt_position_construct     (glWdgtPosition      *position);
+
+static void changed_cb                     (glWdgtPosition      *position);
+
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/***************************************************************************/
+/* Boilerplate Object stuff.                                               */
+/***************************************************************************/
 guint
 gl_wdgt_position_get_type (void)
 {
@@ -79,10 +80,10 @@ gl_wdgt_position_get_type (void)
 			(GInstanceInitFunc) gl_wdgt_position_instance_init,
 		};
 
-		wdgt_position_type = g_type_register_static (gtk_vbox_get_type (),
-							     "glWdgtPosition",
-							     &wdgt_position_info,
-							     0);
+		wdgt_position_type =
+			g_type_register_static (gl_hig_vbox_get_type (),
+						"glWdgtPosition",
+						&wdgt_position_info, 0);
 	}
 
 	return wdgt_position_type;
@@ -95,7 +96,7 @@ gl_wdgt_position_class_init (glWdgtPositionClass * class)
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_position_finalize;
 
@@ -130,26 +131,28 @@ gl_wdgt_position_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/***************************************************************************/
+/* New widget.                                                             */
+/***************************************************************************/
 GtkWidget *
-gl_wdgt_position_new (gchar * label)
+gl_wdgt_position_new (void)
 {
 	glWdgtPosition *position;
 
 	position = g_object_new (gl_wdgt_position_get_type (), NULL);
 
-	gl_wdgt_position_construct (position, label);
+	gl_wdgt_position_construct (position);
 
 	return GTK_WIDGET (position);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*-------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                   */
+/*-------------------------------------------------------------------------*/
 static void
-gl_wdgt_position_construct (glWdgtPosition * position,
-			    gchar * label)
+gl_wdgt_position_construct (glWdgtPosition *position)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *whbox;
 	GtkObject *x_adjust, *y_adjust;
 	const gchar *units_string;
 	gdouble units_per_point, climb_rate;
@@ -169,20 +172,15 @@ gl_wdgt_position_construct (glWdgtPosition * position,
 
 	wvbox = GTK_WIDGET (position);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- X line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* X label */
-	wlabel = gtk_label_new (_("X:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	position->x_label = gtk_label_new (_("X:"));
+	gtk_misc_set_alignment (GTK_MISC (position->x_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), position->x_label);
+
 	/* X spin */
 	x_adjust = gtk_adjustment_new (0.0, 0.0, 100.0, climb_rate, 10.0, 10.0);
 	position->x_spin = gtk_spin_button_new (GTK_ADJUSTMENT (x_adjust),
@@ -193,14 +191,17 @@ gl_wdgt_position_construct (glWdgtPosition * position,
 	g_signal_connect_swapped (G_OBJECT (position->x_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (position));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), position->x_spin,
-				   1, 2, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), position->x_spin);
+
+	/* ---- Y line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Y label */
-	wlabel = gtk_label_new (_("Y:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	position->y_label = gtk_label_new (_("Y:"));
+	gtk_misc_set_alignment (GTK_MISC (position->y_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), position->y_label);
+
 	/* Y spin */
 	y_adjust = gtk_adjustment_new (0.0, 0.0, 100.0, climb_rate, 10.0, 10.0);
 	position->y_spin = gtk_spin_button_new (GTK_ADJUSTMENT (y_adjust),
@@ -211,14 +212,12 @@ gl_wdgt_position_construct (glWdgtPosition * position,
 	g_signal_connect_swapped (G_OBJECT (position->y_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (position));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), position->y_spin,
-				   1, 2, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), position->y_spin);
 
 	/* Units */
 	position->units_label = gtk_label_new (units_string);
 	gtk_misc_set_alignment (GTK_MISC (position->units_label), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable),
-				   position->units_label, 2, 3, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), position->units_label);
 
 	gl_debug (DEBUG_WDGT, "END");
 }
@@ -227,19 +226,19 @@ gl_wdgt_position_construct (glWdgtPosition * position,
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtPosition * position)
+changed_cb (glWdgtPosition *position)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (position), wdgt_position_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/***************************************************************************/
+/* query values from controls.                                             */
+/***************************************************************************/
 void
-gl_wdgt_position_get_position (glWdgtPosition * position,
-			       gdouble * x,
-			       gdouble * y)
+gl_wdgt_position_get_position (glWdgtPosition *position,
+			       gdouble        *x,
+			       gdouble        *y)
 {
 	gdouble units_per_point;
 
@@ -253,15 +252,15 @@ gl_wdgt_position_get_position (glWdgtPosition * position,
 	*y /= units_per_point;
 }
 
-/*====================================================================*/
-/* fill in values and ranges for controls.                            */
-/*====================================================================*/
+/***************************************************************************/
+/* fill in values and ranges for controls.                                 */
+/***************************************************************************/
 void
-gl_wdgt_position_set_params (glWdgtPosition * position,
-			     gdouble x,
-			     gdouble y,
-			     gdouble x_max,
-			     gdouble y_max)
+gl_wdgt_position_set_params (glWdgtPosition *position,
+			     gdouble         x,
+			     gdouble         y,
+			     gdouble         x_max,
+			     gdouble         y_max)
 {
 	GtkObject *x_adjust, *y_adjust;
 	const gchar *units_string;
@@ -294,13 +293,13 @@ gl_wdgt_position_set_params (glWdgtPosition * position,
 
 }
 
-/*====================================================================*/
-/* fill in position info only.                                        */
-/*====================================================================*/
+/***************************************************************************/
+/* fill in position info only.                                             */
+/***************************************************************************/
 void
-gl_wdgt_position_set_position (glWdgtPosition * position,
-			       gdouble x,
-			       gdouble y)
+gl_wdgt_position_set_position (glWdgtPosition *position,
+			       gdouble         x,
+			       gdouble         y)
 {
 	gdouble units_per_point;
 
@@ -320,3 +319,15 @@ gl_wdgt_position_set_position (glWdgtPosition * position,
 
 	gl_debug (DEBUG_WDGT, "END");
 }
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_position_set_label_size_group (glWdgtPosition   *position,
+				       GtkSizeGroup     *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, position->x_label);
+	gtk_size_group_add_widget (label_size_group, position->y_label);
+}
+

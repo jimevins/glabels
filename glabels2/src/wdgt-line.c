@@ -51,15 +51,16 @@ static gint wdgt_line_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_line_class_init (glWdgtLineClass * class);
-static void gl_wdgt_line_instance_init (glWdgtLine * line);
-static void gl_wdgt_line_finalize (GObject * object);
-static void gl_wdgt_line_construct (glWdgtLine * line, gchar * label);
-static void changed_cb (glWdgtLine * line);
+static void gl_wdgt_line_class_init    (glWdgtLineClass *class);
+static void gl_wdgt_line_instance_init (glWdgtLine      *line);
+static void gl_wdgt_line_finalize      (GObject         *object);
+static void gl_wdgt_line_construct     (glWdgtLine      *line);
+
+static void changed_cb                 (glWdgtLine      *line);
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_line_get_type (void)
 {
@@ -79,7 +80,7 @@ gl_wdgt_line_get_type (void)
 		};
 
 		wdgt_line_type =
-		    g_type_register_static (gtk_vbox_get_type (),
+		    g_type_register_static (gl_hig_vbox_get_type (),
 					    "glWdgtLine",
 					    &wdgt_line_info, 0);
 	}
@@ -88,13 +89,13 @@ gl_wdgt_line_get_type (void)
 }
 
 static void
-gl_wdgt_line_class_init (glWdgtLineClass * class)
+gl_wdgt_line_class_init (glWdgtLineClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_line_finalize;
 
@@ -110,7 +111,7 @@ gl_wdgt_line_class_init (glWdgtLineClass * class)
 }
 
 static void
-gl_wdgt_line_instance_init (glWdgtLine * line)
+gl_wdgt_line_instance_init (glWdgtLine *line)
 {
 	line->width_spin = NULL;
 	line->color_picker = NULL;
@@ -118,7 +119,7 @@ gl_wdgt_line_instance_init (glWdgtLine * line)
 }
 
 static void
-gl_wdgt_line_finalize (GObject * object)
+gl_wdgt_line_finalize (GObject *object)
 {
 	glWdgtLine *line;
 	glWdgtLineClass *class;
@@ -131,44 +132,41 @@ gl_wdgt_line_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_line_new (gchar * label)
+gl_wdgt_line_new (void)
 {
 	glWdgtLine *line;
 
 	line = g_object_new (gl_wdgt_line_get_type (), NULL);
 
-	gl_wdgt_line_construct (line, label);
+	gl_wdgt_line_construct (line);
 
 	return GTK_WIDGET (line);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                    */
+/*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_line_construct (glWdgtLine * line,
-			gchar * label)
+gl_wdgt_line_construct (glWdgtLine *line)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *wframe, *whbox;
 	GtkObject *adjust;
 
 	wvbox = GTK_WIDGET (line);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- Line width line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Line Width Label */
-	wlabel = gtk_label_new (_("Width:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	line->width_label = gtk_label_new (_("Width:"));
+	gtk_misc_set_alignment (GTK_MISC (line->width_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->width_label);
+
 	/* Line Width widget */
 	adjust = gtk_adjustment_new (1.0, 0.25, 4.0, 0.25, 1.0, 1.0);
 	line->width_spin =
@@ -176,25 +174,28 @@ gl_wdgt_line_construct (glWdgtLine * line,
 	g_signal_connect_swapped (G_OBJECT (line->width_spin), "changed",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (line));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), line->width_spin, 1, 2,
-				   0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->width_spin);
+
 	/* Line Width units */
 	line->units_label = gtk_label_new (_("points"));
 	gtk_misc_set_alignment (GTK_MISC (line->units_label), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), line->units_label,
-				   2, 3, 0, 1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->units_label);
+
+	/* ---- Line color line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Line Color Label */
-	wlabel = gtk_label_new (_("Color:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	line->color_label = gtk_label_new (_("Color:"));
+	gtk_misc_set_alignment (GTK_MISC (line->color_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->color_label);
+
 	/* Line Color picker widget */
 	line->color_picker = gnome_color_picker_new ();
 	g_signal_connect_swapped (G_OBJECT (line->color_picker), "color_set",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (line));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), line->color_picker, 1, 3,
-				   1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), line->color_picker);
 
 }
 
@@ -202,19 +203,19 @@ gl_wdgt_line_construct (glWdgtLine * line,
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtLine * line)
+changed_cb (glWdgtLine *line)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (line), wdgt_line_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/****************************************************************************/
+/* query values from controls.                                              */
+/****************************************************************************/
 void
-gl_wdgt_line_get_params (glWdgtLine * line,
-			 gdouble * width,
-			 guint * color)
+gl_wdgt_line_get_params (glWdgtLine *line,
+			 gdouble    *width,
+			 guint      *color)
 {
 	guint8 r, g, b, a;
 
@@ -227,13 +228,13 @@ gl_wdgt_line_get_params (glWdgtLine * line,
 	*color = GL_COLOR_A (r, g, b, a);
 }
 
-/*====================================================================*/
-/* fill in values and ranges for controls.                            */
-/*====================================================================*/
+/****************************************************************************/
+/* fill in values and ranges for controls.                                  */
+/****************************************************************************/
 void
-gl_wdgt_line_set_params (glWdgtLine * line,
-			 gdouble width,
-			 guint color)
+gl_wdgt_line_set_params (glWdgtLine *line,
+			 gdouble     width,
+			 guint       color)
 {
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (line->width_spin), width);
 
@@ -243,3 +244,15 @@ gl_wdgt_line_set_params (glWdgtLine * line,
 				   GL_COLOR_I_BLUE (color),
 				   GL_COLOR_I_ALPHA (color));
 }
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_line_set_label_size_group (glWdgtLine   *line,
+				   GtkSizeGroup *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, line->width_label);
+	gtk_size_group_add_widget (label_size_group, line->color_label);
+}
+

@@ -51,15 +51,17 @@ static gint wdgt_fill_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_fill_class_init (glWdgtFillClass * class);
-static void gl_wdgt_fill_instance_init (glWdgtFill * fill);
-static void gl_wdgt_fill_finalize (GObject * object);
-static void gl_wdgt_fill_construct (glWdgtFill * fill, gchar * label);
-static void changed_cb (glWdgtFill * fill);
+static void gl_wdgt_fill_class_init    (glWdgtFillClass *class);
+static void gl_wdgt_fill_instance_init (glWdgtFill      *fill);
+static void gl_wdgt_fill_finalize      (GObject         *object);
+static void gl_wdgt_fill_construct     (glWdgtFill      *fill);
+
+static void changed_cb                 (glWdgtFill      *fill);
+
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_fill_get_type (void)
 {
@@ -79,7 +81,7 @@ gl_wdgt_fill_get_type (void)
 		};
 
 		wdgt_fill_type =
-		    g_type_register_static (gtk_vbox_get_type (),
+		    g_type_register_static (gl_hig_vbox_get_type (),
 					    "glWdgtFill",
 					    &wdgt_fill_info, 0);
 	}
@@ -88,13 +90,13 @@ gl_wdgt_fill_get_type (void)
 }
 
 static void
-gl_wdgt_fill_class_init (glWdgtFillClass * class)
+gl_wdgt_fill_class_init (glWdgtFillClass *class)
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_fill_finalize;
 
@@ -110,13 +112,13 @@ gl_wdgt_fill_class_init (glWdgtFillClass * class)
 }
 
 static void
-gl_wdgt_fill_instance_init (glWdgtFill * fill)
+gl_wdgt_fill_instance_init (glWdgtFill *fill)
 {
 	fill->color_picker = NULL;
 }
 
 static void
-gl_wdgt_fill_finalize (GObject * object)
+gl_wdgt_fill_finalize (GObject *object)
 {
 	glWdgtFill *fill;
 	glWdgtFillClass *class;
@@ -129,70 +131,64 @@ gl_wdgt_fill_finalize (GObject * object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_fill_new (gchar * label)
+gl_wdgt_fill_new (void)
 {
 	glWdgtFill *fill;
 
 	fill = g_object_new (gl_wdgt_fill_get_type (), NULL);
 
-	gl_wdgt_fill_construct (fill, label);
+	gl_wdgt_fill_construct (fill);
 
 	return GTK_WIDGET (fill);
 }
-
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                    */
+/*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_fill_construct (glWdgtFill * fill,
-			gchar * label)
+gl_wdgt_fill_construct (glWdgtFill *fill)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel;
+	GtkWidget *wvbox, *whbox;
 
 	wvbox = GTK_WIDGET (fill);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (1, 3, TRUE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* ---- Line color line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Fill Color Label */
-	wlabel = gtk_label_new (_("Color:"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gtk_label_set_justify (GTK_LABEL (wlabel), GTK_JUSTIFY_RIGHT);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 0, 1);
+	fill->color_label = gtk_label_new (_("Color:"));
+	gtk_misc_set_alignment (GTK_MISC (fill->color_label), 0, 0.5);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), fill->color_label);
 
 	/* Fill Color picker widget */
 	fill->color_picker = gnome_color_picker_new ();
 	g_signal_connect_swapped (G_OBJECT (fill->color_picker), "color_set",
 				  G_CALLBACK (changed_cb),
 				  G_OBJECT (fill));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), fill->color_picker, 1, 3,
-				   0, 1);
-
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), fill->color_picker);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtFill * fill)
+changed_cb (glWdgtFill *fill)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (fill), wdgt_fill_signals[CHANGED], 0);
 }
-
-/*====================================================================*/
-/* query values from controls.                                        */
-/*====================================================================*/
+
+/****************************************************************************/
+/* query values from controls.                                              */
+/****************************************************************************/
 void
-gl_wdgt_fill_get_params (glWdgtFill * fill,
-			 guint * color)
+gl_wdgt_fill_get_params (glWdgtFill *fill,
+			 guint      *color)
 {
 	guint8 r, g, b, a;
 
@@ -201,12 +197,12 @@ gl_wdgt_fill_get_params (glWdgtFill * fill,
 	*color = GL_COLOR_A (r, g, b, a);
 }
 
-/*====================================================================*/
-/* fill in values and ranges for controls.                            */
-/*====================================================================*/
+/****************************************************************************/
+/* fill in values and ranges for controls.                                  */
+/****************************************************************************/
 void
-gl_wdgt_fill_set_params (glWdgtFill * fill,
-			 guint color)
+gl_wdgt_fill_set_params (glWdgtFill *fill,
+			 guint       color)
 {
 	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (fill->color_picker),
 				   GL_COLOR_I_RED (color),
@@ -214,3 +210,14 @@ gl_wdgt_fill_set_params (glWdgtFill * fill,
 				   GL_COLOR_I_BLUE (color),
 				   GL_COLOR_I_ALPHA (color));
 }
+
+/****************************************************************************/
+/* Set size group for internal labels                                       */
+/****************************************************************************/
+void
+gl_wdgt_fill_set_label_size_group (glWdgtFill   *fill,
+				   GtkSizeGroup *label_size_group)
+{
+	gtk_size_group_add_widget (label_size_group, fill->color_label);
+}
+

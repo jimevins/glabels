@@ -24,6 +24,7 @@
 #define __PREFS_DIALOG_H__
 
 #include <gtk/gtk.h>
+#include "hig.h"
 
 #define GL_TYPE_PREFS_DIALOG            (gl_prefs_dialog_get_type ())
 #define GL_PREFS_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialog))
@@ -40,7 +41,7 @@ typedef struct _glPrefsDialogPrivate	glPrefsDialogPrivate;
 
 struct _glPrefsDialog
 {
-	GtkDialog parent_instance;
+	glHigDialog           parent_instance;
 
 	glPrefsDialogPrivate *private;
 
@@ -48,7 +49,7 @@ struct _glPrefsDialog
 
 struct  _glPrefsDialogClass
 {
-	GtkDialogClass parent_class;
+	glHigDialogClass      parent_class;
 };
 
 GtkType    	gl_prefs_dialog_get_type 	(void) G_GNUC_CONST;

@@ -44,7 +44,7 @@ typedef void (*glWdgtTextEntrySignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static glHigVBoxClass *parent_class;
 
 static gint wdgt_text_entry_signals[LAST_SIGNAL] = { 0 };
 
@@ -52,18 +52,18 @@ static gint wdgt_text_entry_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_text_entry_class_init (glWdgtTextEntryClass * class);
-static void gl_wdgt_text_entry_instance_init (glWdgtTextEntry * text_entry);
-static void gl_wdgt_text_entry_finalize (GObject * object);
-static void gl_wdgt_text_entry_construct (glWdgtTextEntry * text_entry,
-					  gchar * label, GList * field_defs);
+static void gl_wdgt_text_entry_class_init    (glWdgtTextEntryClass *class);
+static void gl_wdgt_text_entry_instance_init (glWdgtTextEntry      *text_entry);
+static void gl_wdgt_text_entry_finalize      (GObject              *object);
+static void gl_wdgt_text_entry_construct     (glWdgtTextEntry      *text_entry,
+					      GList                *field_defs);
 
-static void changed_cb (glWdgtTextEntry * text_entry);
-static void insert_cb (glWdgtTextEntry * text_entry);
+static void changed_cb (glWdgtTextEntry *text_entry);
+static void insert_cb  (glWdgtTextEntry *text_entry);
 
-/*================================================================*/
-/* Boilerplate Object stuff.                                      */
-/*================================================================*/
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
 guint
 gl_wdgt_text_entry_get_type (void)
 {
@@ -82,10 +82,10 @@ gl_wdgt_text_entry_get_type (void)
 			(GInstanceInitFunc) gl_wdgt_text_entry_instance_init,
 		};
 
-		wdgt_text_entry_type = g_type_register_static (gtk_vbox_get_type (),
-							       "glWdgtTextEntry",
-							       &wdgt_text_entry_info,
-							       0);
+		wdgt_text_entry_type =
+			g_type_register_static (gl_hig_vbox_get_type (),
+						"glWdgtTextEntry",
+						&wdgt_text_entry_info, 0);
 	}
 
 	return wdgt_text_entry_type;
@@ -100,7 +100,7 @@ gl_wdgt_text_entry_class_init (glWdgtTextEntryClass * class)
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_text_entry_finalize;
 
@@ -116,7 +116,7 @@ gl_wdgt_text_entry_class_init (glWdgtTextEntryClass * class)
 }
 
 static void
-gl_wdgt_text_entry_instance_init (glWdgtTextEntry * text_entry)
+gl_wdgt_text_entry_instance_init (glWdgtTextEntry *text_entry)
 {
 	gl_debug (DEBUG_WDGT, "START");
 
@@ -128,9 +128,9 @@ gl_wdgt_text_entry_instance_init (glWdgtTextEntry * text_entry)
 }
 
 static void
-gl_wdgt_text_entry_finalize (GObject * object)
+gl_wdgt_text_entry_finalize (GObject *object)
 {
-	glWdgtTextEntry *text_entry;
+	glWdgtTextEntry      *text_entry;
 	glWdgtTextEntryClass *class;
 
 	gl_debug (DEBUG_WDGT, "START");
@@ -145,9 +145,11 @@ gl_wdgt_text_entry_finalize (GObject * object)
 	gl_debug (DEBUG_WDGT, "END");
 }
 
+/****************************************************************************/
+/* New widget.                                                              */
+/****************************************************************************/
 GtkWidget *
-gl_wdgt_text_entry_new (gchar * label,
-			GList * field_defs)
+gl_wdgt_text_entry_new (GList *field_defs)
 {
 	glWdgtTextEntry *text_entry;
 
@@ -155,51 +157,55 @@ gl_wdgt_text_entry_new (gchar * label,
 
 	text_entry = g_object_new (gl_wdgt_text_entry_get_type (), NULL);
 
-	gl_wdgt_text_entry_construct (text_entry, label, field_defs);
+	gl_wdgt_text_entry_construct (text_entry, field_defs);
 
 	gl_debug (DEBUG_WDGT, "END");
 
 	return GTK_WIDGET (text_entry);
 }
 
-/*============================================================*/
-/* Construct composite widget.                                */
-/*============================================================*/
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct composite widget.                                    */
+/*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_text_entry_construct (glWdgtTextEntry * text_entry,
-			      gchar * label,
-			      GList * field_defs)
+gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
+			      GList           *field_defs)
 {
-	GtkWidget *wvbox, *wframe, *wtable, *wlabel, *wcombo;
+	GtkWidget *wvbox, *whbox, *wlabel, *wscroll, *wcombo;
 	GList *keys;
 
 	gl_debug (DEBUG_WDGT, "START");
 
 	wvbox = GTK_WIDGET (text_entry);
 
-	wframe = gtk_frame_new (label);
-	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
-
-	wtable = gtk_table_new (2, 3, FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (wtable), 10);
-	gtk_table_set_row_spacings (GTK_TABLE (wtable), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (wtable), 5);
-	gtk_container_add (GTK_CONTAINER (wframe), wtable);
+	/* Text Label */
+	wlabel = gtk_label_new (_("Edit text:"));
+	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wlabel);
 
 	/* Actual text entry widget */
+	wscroll = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_set_size_request (wscroll, -1, 70);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), wscroll);
 	text_entry->text_entry = gtk_text_view_new ();
 	text_entry->text_buffer =
 		gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_entry->text_entry));
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (wscroll),
+					       text_entry->text_entry);
 	g_signal_connect_swapped (G_OBJECT (text_entry->text_buffer),
 				  "changed", G_CALLBACK (changed_cb),
 				  G_OBJECT (text_entry));
-	gtk_widget_set_size_request (text_entry->text_entry, -1, 70);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), text_entry->text_entry,
-				   0, 3, 0, 1);
+
+	/* ---- Merge field line ---- */
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Insert merge field label */
 	wlabel = gtk_label_new (_("Key:"));
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wlabel, 0, 1, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
 
 	/* Key entry widget */
 	wcombo = gtk_combo_new ();
@@ -210,7 +216,7 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry * text_entry,
 	text_entry->key_entry = GTK_COMBO (wcombo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (text_entry->key_entry), FALSE);
 	gtk_widget_set_size_request (wcombo, 200, -1);
-	gtk_table_attach_defaults (GTK_TABLE (wtable), wcombo, 1, 2, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
 	/* Insert button */
 	text_entry->insert_button =
@@ -218,8 +224,7 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry * text_entry,
 	g_signal_connect_swapped (G_OBJECT (text_entry->insert_button),
 				  "clicked", G_CALLBACK (insert_cb),
 				  G_OBJECT (text_entry));
-	gtk_table_attach_defaults (GTK_TABLE (wtable),
-				   text_entry->insert_button, 2, 3, 1, 2);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->insert_button);
 
 	gl_debug (DEBUG_WDGT, "END");
 }
@@ -265,9 +270,9 @@ insert_cb (glWdgtTextEntry * text_entry)
 	gl_debug (DEBUG_WDGT, "END");
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Get widget data.                                                         */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 GList *
 gl_wdgt_text_entry_get_text (glWdgtTextEntry * text_entry)
 {
@@ -293,9 +298,9 @@ gl_wdgt_text_entry_get_text (glWdgtTextEntry * text_entry)
 	return lines;
 }
 
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 /* Set widget data.                                                         */
-/*--------------------------------------------------------------------------*/
+/****************************************************************************/
 void
 gl_wdgt_text_entry_set_text (glWdgtTextEntry * text_entry,
 			     gboolean merge_flag,

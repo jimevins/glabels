@@ -25,6 +25,9 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_FILL (gl_wdgt_fill_get_type ())
 #define GL_WDGT_FILL(obj) \
@@ -40,23 +43,31 @@ typedef struct _glWdgtFill glWdgtFill;
 typedef struct _glWdgtFillClass glWdgtFillClass;
 
 struct _glWdgtFill {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *color_label;
 	GtkWidget *color_picker;
 };
 
 struct _glWdgtFillClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtFill * fill, gpointer user_data);
 };
 
-extern guint gl_wdgt_fill_get_type (void);
+guint      gl_wdgt_fill_get_type             (void);
 
-extern GtkWidget *gl_wdgt_fill_new (gchar * label);
+GtkWidget *gl_wdgt_fill_new                  (void);
 
-extern void gl_wdgt_fill_get_params (glWdgtFill * fill, guint * color);
+void       gl_wdgt_fill_get_params           (glWdgtFill *fill,
+					      guint      *color);
 
-extern void gl_wdgt_fill_set_params (glWdgtFill * fill, guint color);
+void       gl_wdgt_fill_set_params           (glWdgtFill *fill,
+					      guint       color);
+
+void       gl_wdgt_fill_set_label_size_group (glWdgtFill   *fill,
+					      GtkSizeGroup *label_size_group);
+
+G_END_DECLS
 
 #endif

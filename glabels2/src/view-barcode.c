@@ -348,7 +348,7 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 
 	/* ------ Position Frame ------ */
 	gl_debug (DEBUG_VIEW, "Creating position entry...");
-	view_barcode->private->position = gl_wdgt_position_new (_("Position"));
+	view_barcode->private->position = gl_wdgt_position_new ();
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_barcode->private->position),
 				     x, y,
 				     label_width, label_height);

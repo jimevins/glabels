@@ -337,7 +337,7 @@ construct_properties_dialog (glViewImage *view_image)
 				  gtk_label_new (_("Position/Size")));
 
 	/* ------ Position Frame ------ */
-	view_image->private->position = gl_wdgt_position_new (_("Position"));
+	view_image->private->position = gl_wdgt_position_new ();
 	gl_wdgt_position_set_params (GL_WDGT_POSITION (view_image->private->position),
 				     x, y,
 				     label_width, label_height);

@@ -26,6 +26,9 @@
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-font.h>
 #include "label.h"
+#include "hig.h"
+
+G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_TEXT_PROPS (gl_wdgt_text_props_get_type ())
 #define GL_WDGT_TEXT_PROPS(obj) \
@@ -41,42 +44,50 @@ typedef struct _glWdgtTextProps glWdgtTextProps;
 typedef struct _glWdgtTextPropsClass glWdgtTextPropsClass;
 
 struct _glWdgtTextProps {
-	GtkVBox parent_widget;
+	glHigVBox  parent_widget;
 
+	GtkWidget *font_label;
 	GtkWidget *font_family_entry;
 	GtkWidget *font_size_spin;
 	GtkWidget *font_b_button;
 	GtkWidget *font_i_button;
 
+	GtkWidget *color_label;
 	GtkWidget *color_picker;
 
+	GtkWidget *alignment_label;
 	GtkWidget *left_button, *right_button, *center_button;
 };
 
 struct _glWdgtTextPropsClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtTextProps * text, gpointer user_data);
 };
 
-extern guint gl_wdgt_text_props_get_type (void);
+guint      gl_wdgt_text_props_get_type   (void);
 
-extern GtkWidget *gl_wdgt_text_props_new (gchar * label);
+GtkWidget *gl_wdgt_text_props_new        (void);
 
-extern void gl_wdgt_text_props_get_params (glWdgtTextProps * text,
-					   gchar ** font_family,
-					   gdouble * font_size,
-					   GnomeFontWeight * font_weight,
-					   gboolean * font_italic_flag,
-					   guint * color,
-					   GtkJustification * just);
+void       gl_wdgt_text_props_get_params (glWdgtTextProps  *text,
+					  gchar           **font_family,
+					  gdouble          *font_size,
+					  GnomeFontWeight  *font_weight,
+					  gboolean         *font_italic_flag,
+					  guint            *color,
+					  GtkJustification *just);
 
-extern void gl_wdgt_text_props_set_params (glWdgtTextProps * text,
-					   gchar * font_family,
-					   gdouble font_size,
-					   GnomeFontWeight font_weight,
-					   gboolean font_italic_flag,
-					   guint color,
-					   GtkJustification just);
+void       gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
+					  gchar            *font_family,
+					  gdouble           font_size,
+					  GnomeFontWeight   font_weight,
+					  gboolean          font_italic_flag,
+					  guint             color,
+					  GtkJustification  just);
+
+void       gl_wdgt_text_props_set_label_size_group (glWdgtTextProps *text,
+						    GtkSizeGroup    *size_grp);
+
+G_END_DECLS
 
 #endif
