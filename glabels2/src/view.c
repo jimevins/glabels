@@ -832,9 +832,8 @@ draw_grid_layer (glView *view)
 
 	points->coords[1] = 0.0;
 	points->coords[3] = h;
-	for ( x=view->grid_spacing; x < w; x += view->grid_spacing ) {
+	for ( x=0.0; x < w; x += view->grid_spacing ) {
 		points->coords[0] = points->coords[2] = x;
-
 		item = gnome_canvas_item_new (view->grid_group,
 					      gnome_canvas_line_get_type (),
 					      "points", points,
@@ -842,12 +841,18 @@ draw_grid_layer (glView *view)
 					      "fill_color_rgba", GRID_COLOR,
 					      NULL);
 	}
+	points->coords[0] = points->coords[2] = w;
+	item = gnome_canvas_item_new (view->grid_group,
+				      gnome_canvas_line_get_type (),
+				      "points", points,
+				      "width_pixels", 1,
+				      "fill_color_rgba", GRID_COLOR,
+				      NULL);
 
 	points->coords[0] = 0.0;
 	points->coords[2] = w;
-	for ( y=view->grid_spacing; y < h; y += view->grid_spacing ) {
+	for ( y=0.0; y < h; y += view->grid_spacing ) {
 		points->coords[1] = points->coords[3] = y;
-
 		item = gnome_canvas_item_new (view->grid_group,
 					      gnome_canvas_line_get_type (),
 					      "points", points,
@@ -855,6 +860,13 @@ draw_grid_layer (glView *view)
 					      "fill_color_rgba", GRID_COLOR,
 					      NULL);
 	}
+	points->coords[1] = points->coords[3] = h;
+	item = gnome_canvas_item_new (view->grid_group,
+				      gnome_canvas_line_get_type (),
+				      "points", points,
+				      "width_pixels", 1,
+				      "fill_color_rgba", GRID_COLOR,
+				      NULL);
 
 	gnome_canvas_points_free (points);
 
