@@ -876,12 +876,18 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
 		if (xmlNodeIsText (child)) {
+			gchar *data = xmlNodeGetContent (child); 
 
-			/* Literal text */
-			text_node = g_new0 (glTextNode, 1);
-			text_node->field_flag = FALSE;
-			text_node->data = xmlNodeGetContent (child);
-			text_nodes = g_list_append (text_nodes, text_node);
+			/* Hack: if the first char is LF, it's a xml formatting string */
+			if (data[0] != '\n') { 
+				/* Literal text */
+				text_node = g_new0 (glTextNode, 1);
+				text_node->field_flag = FALSE;
+				text_node->data = data;
+				text_nodes = g_list_append (text_nodes, text_node);
+			}
+			else 
+				g_free (data);
 
 		} else if (xmlStrEqual (child->name, "Span")) {
 
