@@ -985,9 +985,9 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 	gdouble          x0, y0, w, h;
 	gdouble          x1, y1, x2, y2;
 	static gboolean  dragging = FALSE;
+	static gboolean  is_control_pressed;
 	glLabelObject   *object;
 	GdkCursor       *cursor;
-	gboolean         is_control_pressed;
 
 	if ( view_highlight->private->view->state != GL_VIEW_STATE_ARROW ) {
 		/* don't interfere with object creation modes */
@@ -1001,6 +1001,7 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 1:
+			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = TRUE;
 			gnome_canvas_item_grab (handle_item,
 						GDK_POINTER_MOTION_MASK |
@@ -1016,7 +1017,6 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_RELEASE:
 		switch (event->button.button) {
 		case 1:
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = FALSE;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
@@ -1046,7 +1046,6 @@ tl_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
@@ -1101,9 +1100,9 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 	gdouble          x0, y0, w, h;
 	gdouble          x1, y1, x2, y2;
 	static gboolean  dragging = FALSE;
+	static gboolean  is_control_pressed;
 	glLabelObject   *object;
 	GdkCursor       *cursor;
-	gboolean         is_control_pressed;
 
 	if ( view_highlight->private->view->state != GL_VIEW_STATE_ARROW ) {
 		/* don't interfere with object creation modes */
@@ -1117,6 +1116,7 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 1:
+			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = TRUE;
 			gnome_canvas_item_grab (handle_item,
 						GDK_POINTER_MOTION_MASK |
@@ -1132,7 +1132,6 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_RELEASE:
 		switch (event->button.button) {
 		case 1:
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = FALSE;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
@@ -1162,7 +1161,6 @@ tr_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
@@ -1217,9 +1215,9 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 	gdouble          x0, y0, w, h;
 	gdouble          x1, y1, x2, y2;
 	static gboolean  dragging = FALSE;
+	static gboolean  is_control_pressed;
 	glLabelObject   *object;
 	GdkCursor       *cursor;
-	gboolean         is_control_pressed;
 
 	if ( view_highlight->private->view->state != GL_VIEW_STATE_ARROW ) {
 		/* don't interfere with object creation modes */
@@ -1233,6 +1231,7 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 1:
+			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = TRUE;
 			gnome_canvas_item_grab (handle_item,
 						GDK_POINTER_MOTION_MASK |
@@ -1248,7 +1247,6 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_BUTTON_RELEASE:
 		switch (event->button.button) {
 		case 1:
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = FALSE;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
@@ -1278,7 +1276,6 @@ bl_resize_event_handler (GnomeCanvasItem *handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
@@ -1333,9 +1330,9 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 	gdouble          x0, y0, w, h;
 	gdouble          x1, y1, x2, y2;
 	static gboolean  dragging = FALSE;
+	static gboolean  is_control_pressed;
 	glLabelObject   *object;
 	GdkCursor       *cursor;
-	gboolean         is_control_pressed;
 
 	if ( view_highlight->private->view->state != GL_VIEW_STATE_ARROW ) {
 		/* don't interfere with object creation modes */
@@ -1350,6 +1347,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
 		switch (event->button.button) {
 		case 1:
+			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = TRUE;
 			gnome_canvas_item_grab (handle_item,
 						GDK_POINTER_MOTION_MASK |
@@ -1366,7 +1364,6 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
 		switch (event->button.button) {
 		case 1:
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			dragging = FALSE;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
@@ -1396,7 +1393,6 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 	case GDK_MOTION_NOTIFY:
 		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			is_control_pressed = event->button.state & GDK_CONTROL_MASK;
 			get_origin_and_corners (view_highlight,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,

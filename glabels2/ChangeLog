@@ -1,3 +1,18 @@
+2004-02-03  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+		Track "changed" signal of pixmap entry's GtkEntry rather than its
+		"activate" signal -- this catches all changes to the entry rather than
+		just changes resulting from a browse, so one can easily pull previous
+		entries from the history.
+	
+	* src/view-highlight.c: (tl_resize_event_handler),
+	(tr_resize_event_handler), (bl_resize_event_handler),
+	(br_resize_event_handler):
+		Allow control key to be dropped while dragging a corner resize handle
+		without losing the aspect ratio lock.
+
 2004-02-02  Jim Evins  <evins@snaught.com>
 
 	* src/label-image.c: (gl_label_image_set_filename):
