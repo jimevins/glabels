@@ -4,15 +4,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 0.92\n"
-"POT-Creation-Date: 2003-11-01 19:24-0500\n"
-"PO-Revision-Date: 2003-09-07 17:59+0900\n"
-"Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
+"Project-Id-Version: glabels 1.92.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-11-13 23:11+0900\n"
+"PO-Revision-Date: 2003-11-13 23:10+0900\n"
+"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: src/glabels-ui.xml.h:1
 msgid "About glabels"
@@ -862,13 +862,12 @@ msgid "See the file AUTHORS for additional credits,"
 msgstr "補足のクレジットについては AUTHORS ファイルをご覧になるか、"
 
 #: src/commands.c:367
-#, fuzzy
 msgid "or visit http://glabels.sourceforge.net/"
-msgstr "http://snaught.com/glabels を訪れてみて下さい。"
+msgstr "または http://glabels.sourceforge.net/ を訪れてみて下さい。"
 
 #: src/commands.c:376
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/commands.c:391
 msgid "glabels"
@@ -1182,7 +1181,7 @@ msgstr "オプション"
 
 #: src/print-dialog.c:227
 msgid "print crop marks"
-msgstr ""
+msgstr "端のマークを揃えて印刷する"
 
 #: src/print-dialog.c:364 src/print-dialog.c:403
 msgid "Print preview"
@@ -1231,7 +1230,11 @@ msgstr "%d x %d  (%d 個/シート)"
 msgid "%d per sheet"
 msgstr "%d /シート"
 
-#: src/paper.c:322
+#: src/paper.c:74
+msgid "Other"
+msgstr "その他"
+
+#: src/paper.c:324
 msgid "No paper files found!"
 msgstr "用紙ふぃあるが見つかりません！"
 
@@ -1281,7 +1284,7 @@ msgstr "Data ノードにおかしなノード = \"%s\""
 
 #: src/xml-label.c:944
 msgid "Utf8 conversion error."
-msgstr ""
+msgstr "Utf8 変換エラーです。"
 
 #: src/xml-label.c:951
 msgid "Problem saving xml file."
@@ -1733,7 +1736,6 @@ msgid "US Legal"
 msgstr "US リーガル"
 
 #: data/avery-us-templates.xml.h:1
-#, fuzzy
 msgid "Address Labels"
 msgstr "宛名のラベル"
 
@@ -1744,63 +1746,52 @@ msgid "Business Cards"
 msgstr "名刺"
 
 #: data/avery-us-templates.xml.h:3
-#, fuzzy
 msgid "CD/DVD Labels (Disc Labels)"
-msgstr "CD/DVD のラベル (外側のみ)"
+msgstr "CD/DVD のラベル (Disc ラベル)"
 
 #: data/avery-us-templates.xml.h:4
-#, fuzzy
 msgid "Diskette Labels"
 msgstr "フロッピーのラベル"
 
 #: data/avery-us-templates.xml.h:5
-#, fuzzy
 msgid "Filing Labels"
-msgstr "封筒のラベル"
-
-#: data/avery-us-templates.xml.h:6
-#, fuzzy
-msgid "Full Sheet Labels"
 msgstr "ファイル・バインダーのラベル"
 
+#: data/avery-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "全用紙のラベル"
+
 #: data/avery-us-templates.xml.h:7
-#, fuzzy
 msgid "Large Round Labels"
-msgstr "汎用的なラベル"
+msgstr "大きな矩形のラベル"
 
 #: data/avery-us-templates.xml.h:8
 msgid "Name Badge Labels"
 msgstr "名前つきバッジのラベル"
 
 #: data/avery-us-templates.xml.h:9
-#, fuzzy
 msgid "Return Address Labels"
-msgstr "宛名のラベル"
+msgstr "返信用宛名のラベル"
 
 #: data/avery-us-templates.xml.h:10
-#, fuzzy
 msgid "Shipping Labels"
 msgstr "出荷ラベル"
 
 #: data/avery-us-templates.xml.h:11
-#, fuzzy
 msgid "Small Round Labels"
-msgstr "汎用的なラベル"
+msgstr "小さな矩形のラベル"
 
 #: data/avery-us-templates.xml.h:12
-#, fuzzy
 msgid "Square Labels"
-msgstr "長方形のラベル"
+msgstr "矩形のラベル"
 
 #: data/avery-us-templates.xml.h:13
-#, fuzzy
 msgid "Video Tape Face Labels"
-msgstr "VCR 外側のラベル"
+msgstr "ビデオ・テープの表面ラベル"
 
 #: data/avery-us-templates.xml.h:14
-#, fuzzy
 msgid "Video Tape Spine Labels"
-msgstr "VC 格納ケースのラベル"
+msgstr "ビデオ・テープの背面ラベル"
 
 #: data/avery-iso-templates.xml.h:1
 msgid "3.5'' Diskette labels (face only)"
@@ -1978,18 +1969,3 @@ msgstr "封筒のラベル (三列)"
 #: data/misc-iso-templates.xml.h:21
 msgid "Video Labels (face only)"
 msgstr "ビデオのラベル (外側のみ)"
-
-#~ msgid "Open %s"
-#~ msgstr "%s を開く"
-
-#~ msgid "Big Round Stickers"
-#~ msgstr "大きく丸いステッカー"
-
-#~ msgid "Full-page"
-#~ msgstr "ページ大"
-
-#~ msgid "Small Round Stickers"
-#~ msgstr "小さく丸いステッカー"
-
-#~ msgid "Square Stickers"
-#~ msgstr "四角いステッカー"
