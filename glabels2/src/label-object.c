@@ -409,8 +409,16 @@ gl_label_object_set_size (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->w = w;
-	object->private->h = h;
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
+
+	} else {
+
+		object->private->w = w;
+		object->private->h = h;
+	}
 
 	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
@@ -429,8 +437,16 @@ gl_label_object_get_size (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	*w = object->private->w;
-	*h = object->private->h;
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_size != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->get_size (object, w, h);
+
+	} else {
+
+		*w = object->private->w;
+		*h = object->private->h;
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

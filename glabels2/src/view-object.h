@@ -27,11 +27,12 @@
 #include <gnome.h>
 #include "label-object.h"
 
-#define GL_TYPE_VIEW_OBJECT            (gl_view_object_get_type ())
-#define GL_VIEW_OBJECT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_OBJECT, glViewObject))
-#define GL_VIEW_OBJECT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_OBJECT, glViewObjectClass))
-#define GL_IS_VIEW_OBJECT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW_OBJECT))
-#define GL_IS_VIEW_OBJECT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW_OBJECT))
+#define GL_TYPE_VIEW_OBJECT              (gl_view_object_get_type ())
+#define GL_VIEW_OBJECT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_OBJECT, glViewObject))
+#define GL_VIEW_OBJECT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_OBJECT, glViewObjectClass))
+#define GL_IS_VIEW_OBJECT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW_OBJECT))
+#define GL_IS_VIEW_OBJECT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW_OBJECT))
+#define GL_VIEW_OBJECT_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GL_TYPE_VIEW_OBJECT, glViewObjectClass))
 
 typedef struct _glViewObject          glViewObject;
 typedef struct _glViewObjectClass     glViewObjectClass;
@@ -50,11 +51,14 @@ struct _glViewObject {
 
 struct _glViewObjectClass {
 	GObjectClass         parent_class;
+
+	/*
+	 * Methods
+	 */
+
+	GtkWidget * (*construct_dialog) (glViewObject *view_object);
 };
 
-
-typedef GtkWidget * (*glViewObjectDlgConstructor)(glViewObject *);
-#define GL_VIEW_OBJECT_DLG_CONSTRUCTOR(f) ((glViewObjectDlgConstructor) (f))
 
 G_BEGIN_DECLS
 
@@ -69,9 +73,6 @@ void             gl_view_object_set_view          (glViewObject         *view_ob
 void             gl_view_object_set_object        (glViewObject         *view_object,
 						   glLabelObject        *object,
 						   glViewHighlightStyle  style);
-
-void             gl_view_object_set_dlg_constructor (glViewObject       *view_object,
-					     glViewObjectDlgConstructor  dlg_constructor);
 
 glView          *gl_view_object_get_view          (glViewObject         *view_object);
 
