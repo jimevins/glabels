@@ -11,6 +11,8 @@ AM_CONFIG_HEADER(config.h)
 
 AC_PROG_INTLTOOL([0.21])
 
+AM_PROG_LIBTOOL
+
 GNOME_PLATFORM_GNOME_2(yes, force)
 GNOME_COMMON_INIT
 
@@ -78,6 +80,7 @@ Makefile
 src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
+src/mygal/Makefile
 pixmaps/Makefile
 data/Makefile
 po/Makefile.in
