@@ -58,6 +58,7 @@ enum {
 	SELECTION_CHANGED,
 	ZOOM_CHANGED,
 	POINTER_MOVED,
+	POINTER_EXIT,
 	MODE_CHANGED,
 	LAST_SIGNAL
 };
@@ -74,14 +75,13 @@ static guint signals[LAST_SIGNAL] = {0};
 /* "CLIPBOARD" selection */
 static GdkAtom clipboard_atom = GDK_NONE;
 
-#define HOME_SCALE 2.0
 static gdouble scales[] = {
 	8.0, 6.0, 4.0, 3.0,
 	2.0,
 	1.5, 1.0, 0.5, 0.25,
-	0.0
 };
-
+#define N_SCALES G_N_ELEMENTS(scales)
+#define HOME_SCALE 2.0
 
 /*==========================================================================*/
 /* Local function prototypes                                                */
@@ -231,6 +231,16 @@ gl_view_class_init (glViewClass *class)
 			      gl_marshal_VOID__DOUBLE_DOUBLE,
 			      G_TYPE_NONE,
 			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
+
+	signals[POINTER_EXIT] =
+		g_signal_new ("pointer_exit",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glViewClass, pointer_exit),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 
 	signals[MODE_CHANGED] =
 		g_signal_new ("mode_changed",
@@ -458,7 +468,7 @@ get_apropriate_scale (gdouble w, gdouble h)
 	w_screen = (gdouble) gdk_screen_width ();
 	h_screen = (gdouble) gdk_screen_height ();
 
-	for (i = 0; scales[i] > 0.0; i++) {
+	for (i = 0; i < N_SCALES; i++) {
 		k = scales[i];
 		if (k <= HOME_SCALE) {
 			if ((k * w < (w_screen - 256))
@@ -1618,7 +1628,7 @@ gl_view_zoom_in (glView *view)
 	/* Find index of current scale (or best match) */
 	i_min = 1;		/* start with 2nd largest scale */
 	dist_min = fabs (scales[1] - view->scale);
-	for (i = 2; scales[i] != 0.0; i++) {
+	for (i = 2; i < N_SCALES; i++) {
 		dist = fabs (scales[i] - view->scale);
 		if (dist < dist_min) {
 			i_min = i;
@@ -1649,7 +1659,7 @@ gl_view_zoom_out (glView *view)
 	/* Find index of current scale (or best match) */
 	i_min = 0;		/* start with largest scale */
 	dist_min = fabs (scales[0] - view->scale);
-	for (i = 1; scales[i] != 0.0; i++) {
+	for (i = 1; i < N_SCALES; i++) {
 		dist = fabs (scales[i] - view->scale);
 		if (dist < dist_min) {
 			i_min = i;
@@ -1658,10 +1668,10 @@ gl_view_zoom_out (glView *view)
 	}
 
 	/* zoom out one "notch" */
-	if (scales[i_min] == 0.0)
+	if (i_min >= N_SCALES)
 		return;
 	i = i_min + 1;
-	if (scales[i] == 0.0)
+	if (i >= N_SCALES)
 		return;
 	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
 
@@ -1700,6 +1710,32 @@ gl_view_get_zoom (glView *view)
 	g_return_val_if_fail (GL_IS_VIEW (view), 1.0);
 
 	return view->scale / HOME_SCALE;
+}
+
+/*****************************************************************************/
+/* Is this the maximum zoom level.                                           */
+/*****************************************************************************/
+gboolean
+gl_view_is_zoom_max (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+
+	return view->scale >= scales[0];
+}
+
+/*****************************************************************************/
+/* Is this the minimum zoom level.                                           */
+/*****************************************************************************/
+gboolean
+gl_view_is_zoom_min (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+
+	return view->scale <= scales[N_SCALES-1];
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1866,6 +1902,11 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		} else {
 			return FALSE;
 		}
+
+	case GDK_LEAVE_NOTIFY:
+		gl_debug (DEBUG_VIEW, "LEAVEW_NOTIFY");
+		g_signal_emit (G_OBJECT(view), signals[POINTER_EXIT], 0);
+		return FALSE;
 
 	case GDK_KEY_PRESS:
 		gl_debug (DEBUG_VIEW, "KEY_PRESS");

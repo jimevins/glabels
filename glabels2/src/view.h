@@ -81,6 +81,7 @@ struct _glViewClass {
 				   gdouble zoom,  gpointer user_data);
 	void (*pointer_moved)     (glView *view,
 				   gdouble x, gdouble y, gpointer user_data);
+	void (*pointer_exit)      (glView *view, gpointer user_data);
 	void (*mode_changed)      (glView *view,
 				   gpointer user_data);
 };
@@ -144,6 +145,10 @@ void      gl_view_set_zoom           (glView            *view,
 				      gdouble            scale);
 
 gdouble   gl_view_get_zoom           (glView            *view);
+
+gboolean  gl_view_is_zoom_max        (glView            *view);
+
+gboolean  gl_view_is_zoom_min        (glView            *view);
 
 
 int       gl_view_item_event_handler (GnomeCanvasItem   *item,
