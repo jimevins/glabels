@@ -24,7 +24,6 @@
 #define __ALERT_H__
 
 #include <gtk/gtk.h>
-#include <libgnomeprint/gnome-font.h>
 
 extern GtkWidget* gl_alert_dialog_new     (GtkWindow      *parent,
 					   GtkDialogFlags  flags,
