@@ -1,0 +1,2497 @@
+# French translation of glabels.
+
+
+
+# Copyright (C) 2001 Jim Evins <evins@snaught.com>
+
+
+
+# Olivier Berger <oberger@gnu.org>, 2001.
+
+
+
+# 
+
+
+
+#: src/commands.c:384
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels 0.2.0\n"
+"POT-Creation-Date: 2002-08-20 21:43-0400\n"
+"PO-Revision-Date: 2001-10-15 15:31+0200\n"
+"Last-Translator: Olivier Berger <oberger@gnu.org>\n"
+"Language-Team: French <gnomefr@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/glabels.c:59
+msgid "Show view debugging messages."
+msgstr ""
+
+#: src/glabels.c:62
+msgid "Show item debugging messages."
+msgstr ""
+
+#: src/glabels.c:65
+msgid "Show printing debugging messages."
+msgstr ""
+
+#: src/glabels.c:68
+msgid "Show prefs debugging messages."
+msgstr ""
+
+#: src/glabels.c:71
+msgid "Show file debugging messages."
+msgstr ""
+
+#: src/glabels.c:74
+msgid "Show document debugging messages."
+msgstr ""
+
+#: src/glabels.c:77
+msgid "Show template debugging messages."
+msgstr ""
+
+#: src/glabels.c:80
+msgid "Show xml debugging messages."
+msgstr ""
+
+#: src/glabels.c:83
+msgid "Show document merge debugging messages."
+msgstr ""
+
+#: src/glabels.c:86
+msgid "Show commands debugging messages."
+msgstr ""
+
+#: src/glabels.c:89
+msgid "Show undo debugging messages."
+msgstr ""
+
+#: src/glabels.c:92
+msgid "Show recent debugging messages."
+msgstr ""
+
+#: src/glabels.c:95
+msgid "Show mdi debugging messages."
+msgstr ""
+
+#: src/glabels.c:98
+msgid "Show media select widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:101
+msgid "Show mini preview widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:104
+msgid "Show widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:107
+msgid "Turn on all debugging messages."
+msgstr ""
+
+#: src/glabels-batch.c:47
+msgid "print this message"
+msgstr ""
+
+#: src/glabels-batch.c:49
+msgid "print the version of glabels-batch being used"
+msgstr ""
+
+#: src/glabels-batch.c:51
+msgid "set output filename (default=\"output.ps\")"
+msgstr ""
+
+#: src/glabels-batch.c:51
+msgid "filename"
+msgstr ""
+
+#: src/glabels-batch.c:53
+msgid "number of sheets (default=1)"
+msgstr ""
+
+# src/print_copies.c:193
+
+
+
+# src/print_copies.c:193
+
+
+
+# src/print_copies.c:171
+
+# src/print_copies.c:170
+#: src/glabels-batch.c:53
+#, fuzzy
+msgid "sheets"
+msgstr "Feuilles :"
+
+#: src/glabels-batch.c:55
+msgid "number of copies (default=1)"
+msgstr ""
+
+# src/print.c:153
+
+
+
+# src/print.c:153
+
+
+
+# src/print.c:146
+
+# src/print_dialog.c:104
+#: src/glabels-batch.c:55
+#, fuzzy
+msgid "copies"
+msgstr "Copies"
+
+# src/print.c:180
+
+
+
+# src/print.c:180
+
+
+
+# src/print.c:196
+
+# src/print_dialog.c:152
+#: src/glabels-batch.c:57 src/print-dialog.c:205
+msgid "print outlines (to test printer alignment)"
+msgstr "imprimer des bordures (pour tester l'alignement de l'imprimante)"
+
+# src/print_dialog.c:160
+#: src/glabels-batch.c:59 src/print-dialog.c:214
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "imprimer à l'envers (i.e. une image miroir)"
+
+#: src/glabels-batch.c:90
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr ""
+
+#: src/glabels-batch.c:109
+msgid "missing glabels file\n"
+msgstr ""
+
+# src/file.c:214
+
+
+
+# src/file.c:214
+
+
+
+# src/file.c:249
+
+# src/file.c:249
+#: src/glabels-batch.c:140
+#, fuzzy, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "Impossible d'ouvrir le fichier"
+
+#: src/mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+
+# src/mdi.c:482
+
+
+
+# src/mdi.c:488
+
+
+
+# src/mdi.c:459
+
+# src/mdi.c:459
+#: src/mdi.c:584
+#, fuzzy
+msgid "Do_n't save"
+msgstr "Ne pas sauver"
+
+#: src/mdi.c:604
+msgid "_Don't quit"
+msgstr ""
+
+# src/mdi.c:482
+
+
+
+# src/mdi.c:488
+
+
+
+# src/mdi.c:459
+
+# src/mdi.c:459
+#: src/mdi.c:609
+#, fuzzy
+msgid "_Don't close"
+msgstr "Ne pas sauver"
+
+#: src/mdi.c:706
+msgid "(modified)"
+msgstr ""
+
+# src/menu.c:185
+
+
+
+# src/menu.c:185
+
+
+
+# src/menu.c:290
+
+# src/menu.c:290
+#: src/commands.c:359
+msgid ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+msgstr ""
+"Un programme de création d'étiquettes et de cartes de visite pour GNOME.\n"
+" \n"
+"Ce programme est un logiciel libre ; vous pouvez le redistribuer et/ou le "
+"modifier conformément aux dispositions de la Licence Publique Générale GNU, "
+"telle que publiée par la Free Software Foundation ; version 2 de la licence, "
+"ou encore (à votre choix) toute version ultérieure.\n"
+" \n"
+"Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE "
+"GARANTIE ; sans même la garantie implicite de COMMERCIALISATION ou "
+"D'ADAPTATION A UN OBJET PARTICULIER. Pour plus de détail, voir la Licence "
+"Publique Générale GNU.\n"
+
+# src/print_copies.c:221
+
+
+
+# src/print_copies.c:221
+
+
+
+# src/print_copies.c:199
+
+# src/print_copies.c:198
+#: src/commands.c:371
+#, fuzzy
+msgid "Author:"
+msgstr "à :"
+
+#: src/commands.c:374
+msgid "See the file AUTHORS for additional acknowledgments,"
+msgstr ""
+
+#: src/commands.c:375
+msgid "or visit http://snaught.com/glabels"
+msgstr ""
+
+# src/print_copies.c:210
+
+
+
+# src/print_copies.c:210
+
+
+
+# src/print_copies.c:188
+
+# src/print_copies.c:187
+#: src/commands.c:397
+#, fuzzy
+msgid "glabels"
+msgstr "Etiquettes"
+
+# src/file.c:59
+
+
+
+# src/file.c:59
+
+
+
+# src/file.c:72
+
+# src/file.c:72
+#: src/file.c:82
+msgid "New Label or Card"
+msgstr "Nouvelle étiquette ou carte"
+
+# src/file.c:87
+
+
+
+# src/file.c:87
+
+
+
+# src/file.c:98
+
+# src/file.c:98
+#: src/file.c:109
+msgid "Media Type"
+msgstr "Type de média"
+
+# src/file.c:98
+
+
+
+# src/file.c:98
+
+
+
+# src/file.c:109
+
+# src/file.c:109
+#: src/file.c:119
+msgid "Label orientation"
+msgstr "Orientation de l'étiquette"
+
+# src/file.c:178
+
+
+
+# src/file.c:178
+
+
+
+# src/file.c:211
+
+# src/file.c:211
+#: src/file.c:248
+msgid "Open"
+msgstr "Ouvrir"
+
+# src/file.c:183
+
+
+
+# src/file.c:183
+
+
+
+# src/file.c:213
+
+# src/file.c:213
+#: src/file.c:250
+msgid "Open label"
+msgstr "Ouvrir une étiquette"
+
+# src/file.c:214
+
+
+
+# src/file.c:214
+
+
+
+# src/file.c:249
+
+# src/file.c:249
+#: src/file.c:338
+#, fuzzy, c-format
+msgid "Cannot open file '%s'"
+msgstr "Impossible d'ouvrir le fichier"
+
+# src/file.c:330 src/mdi.c:740
+
+
+
+# src/file.c:330 src/mdi.c:746
+
+
+
+# src/file.c:374 src/mdi.c:705
+
+# src/file.c:374 src/mdi.c:705
+#: src/file.c:429
+#, fuzzy, c-format
+msgid "Error saving file '%s'"
+msgstr "Erreur d'écriture du fichier"
+
+# src/file.c:278
+
+
+
+# src/file.c:278
+
+
+
+# src/file.c:316
+
+# src/file.c:316
+#: src/file.c:468
+msgid "Save label as"
+msgstr "Enregistrer l'étiquette sous"
+
+# src/file.c:319 src/mdi.c:729
+
+
+
+# src/file.c:319 src/mdi.c:735
+
+
+
+# src/file.c:362 src/mdi.c:693
+
+# src/file.c:362 src/mdi.c:693
+#: src/file.c:550
+msgid "Must supply file name"
+msgstr "Vous devez donner un nom de fichier"
+
+# src/file.c:330 src/mdi.c:740
+
+
+
+# src/file.c:330 src/mdi.c:746
+
+
+
+# src/file.c:374 src/mdi.c:705
+
+# src/file.c:374 src/mdi.c:705
+#: src/file.c:569
+#, fuzzy, c-format
+msgid "Error writing file '%s'"
+msgstr "Erreur d'écriture du fichier"
+
+# src/print.c:171
+
+
+
+# src/prefs.c:463 src/prefs.c:470 src/prop_line.c:202
+
+
+
+# src/prefs.c:445 src/prefs.c:452 src/prop_line.c:183
+
+# src/prefs.c:448 src/prefs.c:455 src/prop_line.c:183
+#. Should not happen
+#: src/prefs.c:625 src/prefs.c:632 src/wdgt-line.c:186
+msgid "points"
+msgstr "points"
+
+# src/item_line.c:271
+
+
+
+# src/prefs.c:465
+
+
+
+# src/prefs.c:447
+
+# src/prefs.c:450
+#: src/prefs.c:627
+msgid "inches"
+msgstr "pouces"
+
+# src/prefs.c:467
+
+
+
+# src/prefs.c:449
+
+# src/prefs.c:452
+#: src/prefs.c:629
+msgid "mm"
+msgstr "mm"
+
+# src/prop_bc.c:189
+
+
+
+# src/prop_bc.c:187
+
+
+
+# src/prop_bc.c:168
+
+# src/prop_bc.c:168
+#: src/prefs-dialog.c:220
+#, fuzzy
+msgid "Locale"
+msgstr "Echelle :"
+
+#: src/prefs-dialog.c:224
+msgid "Object defaults"
+msgstr ""
+
+# src/preferences.c:92
+
+
+
+# src/prefs.c:101
+
+
+
+# src/prefs.c:92
+
+# src/prefs.c:86
+#: src/prefs-dialog.c:232
+#, fuzzy
+msgid "Preferences"
+msgstr "Glabels : Préférences"
+
+#: src/prefs-dialog.c:272
+msgid "Select locale specific behavior."
+msgstr ""
+
+# src/prefs.c:248
+
+
+
+# src/prefs.c:226
+
+# src/prefs.c:220
+#. ----- Display Units Frame ------------------------------------
+#: src/prefs-dialog.c:279
+msgid "Display units"
+msgstr "Unités d'affichage"
+
+# src/print.c:149
+
+
+
+# src/prefs.c:259
+
+
+
+# src/prefs.c:237
+
+# src/prefs.c:231
+#: src/prefs-dialog.c:289
+msgid "Points"
+msgstr "Points"
+
+# src/prefs.c:265
+
+
+
+# src/prefs.c:243
+
+# src/prefs.c:237
+#: src/prefs-dialog.c:296
+msgid "Inches"
+msgstr "Pouces"
+
+# src/prefs.c:271
+
+
+
+# src/prefs.c:250
+
+# src/prefs.c:244
+#: src/prefs-dialog.c:303
+msgid "Millimeters"
+msgstr "Milimètres"
+
+# src/item_image.c:341
+
+
+
+# src/prefs.c:278
+
+
+
+# src/prefs.c:255
+
+# src/prefs.c:249
+#. ----- Page Size Frame ------------------------------------
+#: src/prefs-dialog.c:310
+msgid "Default page size"
+msgstr "Taille de page par défaut"
+
+#: src/prefs-dialog.c:364
+msgid "Select default properties for new objects."
+msgstr ""
+
+# src/item_line.c:271
+
+
+
+# src/item_line.c:271
+
+
+
+# src/item_line.c:256 src/menu.c:106
+
+# src/item_line.c:256 src/menu.c:106
+#. ------ Line box ------
+#: src/prefs-dialog.c:377
+msgid "Line"
+msgstr "Ligne"
+
+# src/item_box.c:274 src/item_ellipse.c:279
+
+
+
+# src/item_box.c:274 src/item_ellipse.c:279
+
+
+
+# src/item_box.c:258 src/item_ellipse.c:260
+
+# src/item_box.c:258 src/item_ellipse.c:260
+#. ------ Fill box ------
+#: src/prefs-dialog.c:382 src/view-box.c:325 src/view-ellipse.c:325
+msgid "Fill"
+msgstr "Remplissage"
+
+# src/display.c:1157 src/display.c:1205
+
+
+
+# src/display.c:1160 src/display.c:1208
+
+
+
+# src/display.c:1171 src/display.c:1219
+
+# src/display.c:1186 src/display.c:1234
+#: src/view-object.c:406 src/view.c:1520
+msgid "Delete"
+msgstr "Supprimer"
+
+# src/display.c:1167 src/display.c:1215
+
+
+
+# src/display.c:1170 src/display.c:1218
+
+
+
+# src/display.c:1181 src/display.c:1229
+
+# src/display.c:1196 src/display.c:1244
+#: src/view-object.c:416 src/view.c:1530
+msgid "Bring to front"
+msgstr "Avancer au premier plan"
+
+# src/display.c:1173 src/display.c:1221
+
+
+
+# src/display.c:1176 src/display.c:1224
+
+
+
+# src/display.c:1187 src/display.c:1235
+
+# src/display.c:1202 src/display.c:1250
+#: src/view-object.c:423 src/view.c:1536
+msgid "Send to back"
+msgstr "Reculer à l'arrière-plan"
+
+# src/display.c:1194
+
+
+
+# src/display.c:1197
+
+
+
+# src/display.c:1208
+
+# src/display.c:1223
+#: src/view-object.c:395
+msgid "Edit properties..."
+msgstr "Editer les propriétés..."
+
+# src/item_box.c:251
+
+
+
+# src/item_box.c:251
+
+
+
+# src/item_box.c:235
+
+# src/item_box.c:235
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-box.c:293
+msgid "Edit box object properties"
+msgstr "Editer les propriétés de l'objet boîte..."
+
+# src/item_barcode.c:334 src/item_box.c:261 src/item_ellipse.c:266
+
+
+
+# src/item_line.c:268 src/item_text.c:464
+
+
+
+# src/item_barcode.c:340 src/item_box.c:261 src/item_ellipse.c:266
+
+
+
+# src/item_line.c:268 src/item_text.c:464
+
+
+
+# src/item_barcode.c:317 src/item_box.c:245 src/item_ellipse.c:247
+
+# src/item_line.c:253 src/item_text.c:479
+
+# src/item_barcode.c:317 src/item_box.c:245 src/item_ellipse.c:247
+# src/item_line.c:253 src/item_text.c:479
+#: src/view-barcode.c:313 src/view-box.c:312 src/view-ellipse.c:312
+#: src/view-line.c:309 src/view-text.c:311
+msgid "Appearance"
+msgstr "Apparence"
+
+# src/item_box.c:264 src/item_ellipse.c:269
+
+
+
+# src/item_box.c:264 src/item_ellipse.c:269
+
+
+
+# src/item_box.c:248 src/item_ellipse.c:250
+
+# src/item_box.c:248 src/item_ellipse.c:250
+#. ------ Line box ------
+#: src/view-box.c:315 src/view-ellipse.c:315 src/view-line.c:312
+msgid "Outline"
+msgstr "Bordure"
+
+# src/item_box.c:288 src/item_ellipse.c:293 src/item_image.c:312
+
+
+
+# src/item_line.c:286
+
+
+
+# src/item_box.c:288 src/item_ellipse.c:293 src/item_image.c:312
+
+
+
+# src/item_line.c:286
+
+
+
+# src/item_box.c:272 src/item_ellipse.c:274 src/item_image.c:315
+
+# src/item_line.c:271
+
+# src/item_box.c:272 src/item_ellipse.c:274 src/item_image.c:315
+# src/item_line.c:271
+#: src/view-box.c:340 src/view-ellipse.c:340 src/view-image.c:337
+#: src/view-line.c:328
+msgid "Position/Size"
+msgstr "Position/Taille"
+
+# src/item_barcode.c:362 src/item_barcode.c:365 src/item_box.c:291
+
+
+
+# src/item_ellipse.c:296 src/item_image.c:315 src/item_line.c:289
+
+
+
+# src/item_text.c:487 src/item_text.c:490
+
+
+
+# src/item_barcode.c:368 src/item_barcode.c:371 src/item_box.c:291
+
+
+
+# src/item_ellipse.c:296 src/item_image.c:315 src/item_line.c:289
+
+
+
+# src/item_text.c:487 src/item_text.c:490
+
+
+
+# src/item_barcode.c:345 src/item_barcode.c:348 src/item_box.c:275
+
+# src/item_ellipse.c:277 src/item_image.c:318 src/item_line.c:274
+
+# src/item_text.c:500 src/item_text.c:503
+
+# src/item_barcode.c:345 src/item_barcode.c:348 src/item_box.c:275
+# src/item_ellipse.c:277 src/item_image.c:318 src/item_line.c:274
+# src/item_text.c:500 src/item_text.c:503
+#. ------ Position Frame ------
+#: src/view-barcode.c:345 src/view-barcode.c:349 src/view-box.c:343
+#: src/view-ellipse.c:343 src/view-image.c:340 src/view-line.c:331
+#: src/view-text.c:334 src/view-text.c:338
+msgid "Position"
+msgstr "Position"
+
+# src/item_box.c:302 src/item_ellipse.c:307 src/item_image.c:326
+
+
+
+# src/item_line.c:300
+
+
+
+# src/item_box.c:302 src/item_ellipse.c:307 src/item_image.c:326
+
+
+
+# src/item_line.c:300
+
+
+
+# src/item_box.c:286 src/item_ellipse.c:288 src/item_image.c:329
+
+# src/item_line.c:285
+
+# src/item_box.c:286 src/item_ellipse.c:288 src/item_image.c:329
+# src/item_line.c:285
+#. ------ Size Frame ------
+#: src/view-box.c:354 src/view-ellipse.c:356 src/view-image.c:353
+#: src/view-line.c:344
+msgid "Size"
+msgstr "Taille"
+
+# src/item_ellipse.c:256
+
+
+
+# src/item_ellipse.c:256
+
+
+
+# src/item_ellipse.c:237
+
+# src/item_ellipse.c:237
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-ellipse.c:293
+msgid "Edit ellipse object properties"
+msgstr "Editer les propriétés de l'objet ellipse..."
+
+# src/item_line.c:258
+
+
+
+# src/item_line.c:258
+
+
+
+# src/item_line.c:243
+
+# src/item_line.c:243
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-line.c:290
+msgid "Edit line object properties"
+msgstr "Editer les propriétés de l'objet ligne..."
+
+# src/item_image.c:272
+
+
+
+# src/item_image.c:272
+
+
+
+# src/item_image.c:257
+
+# src/item_image.c:257
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-image.c:281
+msgid "Edit image object properties"
+msgstr "Editer les propriétés de l'objet image..."
+
+# src/item_image.c:283
+
+
+
+# src/item_image.c:283
+
+
+
+# src/item_image.c:268 src/menu.c:113
+
+# src/item_image.c:268 src/menu.c:113
+#: src/view-image.c:300
+msgid "Image"
+msgstr "Image"
+
+# src/item_image.c:341
+
+
+
+# src/item_image.c:340
+
+
+
+# src/item_image.c:342
+
+# src/item_image.c:342
+#. ------ Size Reset Button ------
+#: src/view-image.c:364
+msgid "Reset image size"
+msgstr "Restaurer la taille d'image"
+
+# src/item_text.c:432
+
+
+
+# src/item_text.c:432
+
+
+
+# src/item_text.c:450
+
+# src/item_text.c:450
+#: src/view-text.c:265
+msgid "Edit text object properties"
+msgstr "Editer les propriétés de l'objet texte..."
+
+# src/item_text.c:442 src/item_text.c:627
+
+
+
+# src/item_text.c:442 src/item_text.c:627
+
+
+
+# src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
+
+# src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
+#: src/view-text.c:285 src/view-text.c:605
+msgid "Text"
+msgstr "Texte"
+
+# src/item_barcode.c:299
+
+
+
+# src/item_barcode.c:299
+
+
+
+# src/item_barcode.c:287
+
+# src/item_barcode.c:287
+#: src/view-barcode.c:267
+msgid "Edit barcode object properties"
+msgstr "Editer les propriétés de l'objet code-barre..."
+
+# src/item_barcode.c:309
+
+
+
+# src/item_barcode.c:308
+
+
+
+# src/item_barcode.c:297
+
+# src/item_barcode.c:297
+#: src/view-barcode.c:287
+msgid "Data"
+msgstr "Données"
+
+# src/item_barcode.c:316
+
+
+
+# src/item_barcode.c:317
+
+
+
+# src/item_barcode.c:299
+
+# src/item_barcode.c:299
+#: src/view-barcode.c:292
+msgid "Barcode data"
+msgstr "Données de code-barre"
+
+# src/item_text.c:467
+
+
+
+# src/item_text.c:467
+
+
+
+# src/item_text.c:482
+
+# src/item_text.c:482
+#: src/view-barcode.c:318
+#, fuzzy
+msgid "Barcode Properties"
+msgstr "Propriétés du texte"
+
+# src/item_barcode.c:347
+
+
+
+# src/item_barcode.c:353
+
+
+
+# src/item_barcode.c:330
+
+# src/item_barcode.c:330
+#. ------ Barcode Style Frame ------
+#: src/view-barcode.c:328
+msgid "Style"
+msgstr "Style"
+
+# src/item_barcode.c:564 src/item_barcode.c:588 src/print.c:641
+
+
+
+# src/item_barcode.c:570 src/item_barcode.c:594 src/print.c:641
+
+
+
+# src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:799
+
+# src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:600
+#: src/print.c:814 src/view-barcode.c:758
+msgid "Invalid barcode"
+msgstr "Code-barre invalide"
+
+# src/item_box.c:251
+
+
+
+# src/item_box.c:251
+
+
+
+# src/merge_properties.c:82
+
+# src/merge_properties.c:82
+#: src/merge-properties.c:84
+msgid "Edit document-merge properties"
+msgstr "Editer les propriétés de fusion de document"
+
+# src/merge_properties.c:131
+
+# src/merge_properties.c:131
+#: src/merge-properties.c:130
+msgid "Source"
+msgstr "Source"
+
+# src/prop_text.c:214
+
+
+
+# src/prop_text.c:199
+
+
+
+# src/merge_properties.c:143
+
+# src/merge_properties.c:143
+#: src/merge-properties.c:142
+msgid "Format:"
+msgstr "Format :"
+
+# src/merge_properties.c:158
+
+# src/merge_properties.c:158
+#: src/merge-properties.c:157
+msgid "Location:"
+msgstr "Emplacement :"
+
+# src/item_box.c:274 src/item_ellipse.c:279
+
+
+
+# src/item_box.c:274 src/item_ellipse.c:279
+
+
+
+# src/merge_properties.c:168
+
+# src/merge_properties.c:168
+#: src/merge-properties.c:167
+msgid "Fields"
+msgstr "Champs"
+
+# src/print.c:149
+
+
+
+# src/print.c:149
+
+
+
+# src/print.c:141
+
+# src/print_dialog.c:99
+#. ----- Contstruct basic print dialog with notebook -----
+#: src/print-dialog.c:102
+msgid "Print"
+msgstr "Imprimer"
+
+#: src/print-dialog.c:124
+msgid "_Job"
+msgstr ""
+
+# src/print.c:149
+
+
+
+# src/print.c:149
+
+
+
+# src/print.c:141
+
+# src/print_dialog.c:99
+#: src/print-dialog.c:129
+#, fuzzy
+msgid "P_rinter"
+msgstr "Imprimer"
+
+# src/print.c:153
+
+
+
+# src/print.c:153
+
+
+
+# src/print.c:146
+
+# src/print_dialog.c:104
+#. ----------- Add simple-copies widget ------------
+#: src/print-dialog.c:158
+msgid "Copies"
+msgstr "Copies"
+
+# src/print.c:164
+
+# src/print_dialog.c:121
+#. ------- Otherwise add merge control widget ------------
+#: src/print-dialog.c:174
+msgid "Document merge control"
+msgstr "Contrôle de la fusion de document"
+
+# src/print.c:171
+
+
+
+# src/print.c:171
+
+
+
+# src/print.c:186
+
+# src/print_dialog.c:141
+#. ----------- Add custom print options area ------------
+#: src/print-dialog.c:195
+msgid "Options"
+msgstr "Options"
+
+# src/print.c:235
+
+
+
+# src/print.c:235
+
+
+
+# src/print.c:283 src/print.c:348
+
+# src/print_dialog.c:241 src/print_dialog.c:280
+#: src/print-dialog.c:345 src/print-dialog.c:384
+msgid "Print preview"
+msgstr "Aperçu avant impression"
+
+#: src/label.c:535
+#, c-format
+msgid "%s %d"
+msgstr ""
+
+#: src/label.c:535
+msgid "Untitled"
+msgstr ""
+
+# src/template.c:179
+
+
+
+# src/template.c:178
+
+# src/template.c:223
+#: src/template.c:346
+msgid "No template files found!"
+msgstr "Aucun fichier de patron trouvé !"
+
+# src/label.c:186 src/label.c:211
+
+
+
+# src/label.c:186 src/label.c:211
+
+
+
+# src/label.c:170 src/label.c:194
+
+# src/label.c:168 src/label.c:192
+#: src/xml-label.c:108 src/xml-label.c:139
+msgid "xmlParseFile error"
+msgstr "erreur xmlParseFile"
+
+# src/label.c:243
+
+
+
+# src/label.c:244
+
+
+
+# src/label.c:225
+
+# src/label.c:223
+#: src/xml-label.c:174
+msgid "No document root"
+msgstr "Pas de racine de document"
+
+#: src/xml-label.c:186
+msgid "Importing from glabels 0.1 format"
+msgstr ""
+
+#: src/xml-label.c:194
+msgid "Importing from glabels 0.4 format"
+msgstr ""
+
+# src/label.c:248
+
+
+
+# src/label.c:249
+
+
+
+# src/label.c:236
+
+# src/label.c:234
+#: src/xml-label.c:198
+#, fuzzy
+msgid "bad document, unknown glabels Namespace"
+msgstr "document de type erroné, aucun espace de noms glabels trouvé"
+
+# src/label.c:253
+
+
+
+# src/label.c:254
+
+
+
+# src/label.c:241
+
+# src/label.c:239
+#: src/xml-label.c:226
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "Mauvais noeud racine = \"%s\""
+
+# src/label.c:298
+
+
+
+# src/label.c:301
+
+
+
+# src/label.c:294
+
+# src/label.c:290
+#: src/xml-label.c:249 src/xml-label.c:281
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "mauvais noeud =  \"%s\""
+
+# src/label.c:487
+
+
+
+# src/label.c:493
+
+
+
+# src/label.c:589
+
+# src/label.c:587
+#: src/xml-label.c:656
+msgid "Problem saving xml file."
+msgstr "Problème de sauvegarde du fichier xml."
+
+# src/merge.c:80
+
+# src/merge.c:78
+#: src/merge.c:80
+msgid "None"
+msgstr "Aucun"
+
+# src/merge.c:89
+
+# src/merge.c:86
+#: src/merge.c:88
+msgid "Text with tab separators"
+msgstr "Texte avec séparateurs de tabulation"
+
+# src/merge.c:98
+
+# src/merge.c:94
+#: src/merge.c:96
+msgid "Text with comma separators"
+msgstr "Texte séparé par des virgules"
+
+# src/merge.c:107
+
+# src/merge.c:102
+#: src/merge.c:104
+msgid "Text with colon separators"
+msgstr "Texte séparé par des deux-points"
+
+# src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
+
+# src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
+#: src/merge-ui.c:223 src/merge-ui.c:265 src/merge-ui.c:435 src/merge-ui.c:483
+msgid "N/A"
+msgstr "Non défini"
+
+# src/merge_ui_text.c:170
+
+# src/merge_ui_text.c:170
+#: src/merge-ui-text.c:172
+msgid "Select merge-database source"
+msgstr "Sélection de la base de données source de la fusion"
+
+# src/merge_ui_text.c:330
+
+# src/merge_ui_text.c:330
+#: src/merge-ui-text.c:330
+msgid "Column"
+msgstr "Colonne"
+
+# src/merge_ui_text.c:334
+
+# src/merge_ui_text.c:334
+#: src/merge-ui-text.c:334
+msgid "Custom field key"
+msgstr "Clé de champ spécifique"
+
+# src/merge_ui_text.c:338
+
+# src/merge_ui_text.c:338
+#: src/merge-ui-text.c:338
+msgid "Sample data"
+msgstr "Exemple de données"
+
+# src/prop_text.c:214
+
+
+
+# src/prop_text.c:199
+
+
+
+# src/prop_text.c:181
+
+# src/prop_text.c:181
+#. Font label
+#: src/wdgt-text-props.c:184
+msgid "Font:"
+msgstr "Police :"
+
+# src/prop_bc.c:204 src/prop_fill.c:186 src/prop_line.c:203
+
+
+
+# src/prop_text.c:263
+
+
+
+# src/prop_bc.c:210 src/prop_fill.c:184 src/prop_line.c:209
+
+
+
+# src/prop_text.c:247
+
+
+
+# src/prop_bc.c:188 src/prop_fill.c:166 src/prop_line.c:189
+
+# src/prop_text.c:234
+
+# src/prop_bc.c:188 src/prop_fill.c:166 src/prop_line.c:189
+# src/prop_text.c:234
+#. Text Color Label
+#: src/wdgt-bc-props.c:190 src/wdgt-fill.c:169 src/wdgt-line.c:192
+#: src/wdgt-text-props.c:237
+msgid "Color:"
+msgstr "Couleur :"
+
+# src/prop_text.c:277
+
+
+
+# src/prop_text.c:264
+
+
+
+# src/prop_text.c:248
+
+# src/prop_text.c:248
+#. Alignment label
+#: src/wdgt-text-props.c:251
+msgid "Alignment:"
+msgstr "Alignement :"
+
+# src/prop_bc_data.c:196 src/prop_text_entry.c:180
+
+# src/prop_bc_data.c:196 src/prop_text_entry.c:180
+#. Insert merge field label
+#: src/wdgt-bc-data.c:199 src/wdgt-text-entry.c:201
+msgid "Key:"
+msgstr "Clé :"
+
+# src/prop_text_entry.c:196
+
+# src/prop_text_entry.c:196
+#: src/wdgt-text-entry.c:217
+msgid "Insert merge field"
+msgstr "Insérer champ de fusion"
+
+# src/prop_position.c:192
+
+
+
+# src/prop_position.c:173
+
+# src/prop_position.c:173
+#. X label
+#: src/wdgt-position.c:182
+msgid "X:"
+msgstr "X :"
+
+# src/prop_position.c:212
+
+
+
+# src/prop_position.c:191
+
+# src/prop_position.c:191
+#. Y label
+#: src/wdgt-position.c:200
+msgid "Y:"
+msgstr "Y :"
+
+# src/prop_line.c:188
+
+
+
+# src/prop_line.c:187 src/prop_size.c:202
+
+
+
+# src/prop_line.c:169 src/prop_size.c:182
+
+# src/prop_line.c:169 src/prop_size.c:182
+#. W Label
+#: src/wdgt-line.c:172 src/wdgt-size.c:184
+msgid "Width:"
+msgstr "Largeur :"
+
+# src/prop_size.c:220
+
+
+
+# src/prop_size.c:198
+
+# src/prop_size.c:198
+#. H label
+#: src/wdgt-size.c:200
+msgid "Height:"
+msgstr "Hauteur :"
+
+# src/prop_size.c:215
+
+
+
+# src/prop_size.c:247
+
+
+
+# src/prop_size.c:222
+
+# src/prop_size.c:222
+#: src/wdgt-size.c:224
+msgid "Maintain current aspect ratio"
+msgstr "Conserver le rapport d'échelle actuel"
+
+# src/prop_vector.c:196
+
+
+
+# src/prop_vector.c:202
+
+
+
+# src/prop_vector.c:183
+
+# src/prop_vector.c:183
+#. Length label
+#: src/wdgt-vector.c:186
+msgid "Length:"
+msgstr "Longueur :"
+
+# src/prop_vector.c:207
+
+
+
+# src/prop_vector.c:228
+
+
+
+# src/prop_vector.c:207
+
+# src/prop_vector.c:207
+#. Angle label
+#: src/wdgt-vector.c:210
+msgid "Angle:"
+msgstr "Angle :"
+
+# src/prop_vector.c:245
+
+
+
+# src/prop_vector.c:224
+
+# src/prop_vector.c:224
+#. Angle units label
+#: src/wdgt-vector.c:227
+msgid "degrees"
+msgstr "degrés"
+
+# src/prop_bc.c:189
+
+
+
+# src/prop_bc.c:187
+
+
+
+# src/prop_bc.c:168
+
+# src/prop_bc.c:168
+#. Scale Label
+#: src/wdgt-bc-props.c:170
+msgid "Scale:"
+msgstr "Echelle :"
+
+# src/prop_bc.c:202
+
+
+
+# src/prop_bc.c:182
+
+# src/prop_bc.c:182
+#. % Label
+#: src/wdgt-bc-props.c:184
+#, c-format
+msgid "%"
+msgstr "%"
+
+# src/prop_bc_style.c:328
+
+
+
+# src/prop_bc_style.c:328
+
+
+
+# src/prop_bc_style.c:313
+
+# src/prop_bc_style.c:313
+#: src/wdgt-bc-style.c:316
+msgid "Show text with barcode"
+msgstr "Afficher du texte avec le code-barre"
+
+# src/prop_bc_data.c:176
+
+# src/prop_bc_data.c:176
+#: src/wdgt-bc-data.c:179
+msgid "Literal:"
+msgstr "Littéral :"
+
+# src/print_copies.c:193
+
+
+
+# src/print_copies.c:193
+
+
+
+# src/print_copies.c:171
+
+# src/print_copies.c:170
+#: src/wdgt-print-copies.c:178
+msgid "Sheets:"
+msgstr "Feuilles :"
+
+# src/print_copies.c:210
+
+
+
+# src/print_copies.c:210
+
+
+
+# src/print_copies.c:188
+
+# src/print_copies.c:187
+#: src/wdgt-print-copies.c:195
+msgid "Labels"
+msgstr "Etiquettes"
+
+# src/print_copies.c:213
+
+
+
+# src/print_copies.c:213
+
+
+
+# src/print_copies.c:191
+
+# src/print_copies.c:190
+#: src/wdgt-print-copies.c:198
+msgid "from:"
+msgstr "de :"
+
+# src/print_copies.c:221
+
+
+
+# src/print_copies.c:221
+
+
+
+# src/print_copies.c:199
+
+# src/print_copies.c:198
+#: src/wdgt-print-copies.c:206
+msgid "to:"
+msgstr "à :"
+
+# src/print_copies_merge.c:197
+
+# src/print_merge.c:170
+#: src/wdgt-print-merge.c:177
+msgid "Start on label"
+msgstr "Commencer par l'étiquette"
+
+# src/print_copies_merge.c:206
+
+# src/print_merge.c:179
+#: src/wdgt-print-merge.c:186
+msgid "on 1st sheet"
+msgstr "en 1ère page"
+
+# src/rotate_select.c:187
+
+
+
+# src/rotate_select.c:187
+
+
+
+# src/print_copies_merge.c:186
+
+# src/print_merge.c:188
+#: src/wdgt-print-merge.c:197
+msgid "Collate"
+msgstr "Assembler"
+
+# src/print.c:153
+
+
+
+# src/print.c:153
+
+
+
+# src/print_copies_merge.c:173
+
+# src/print_merge.c:195
+#: src/wdgt-print-merge.c:204
+msgid "Copies:"
+msgstr "Copies :"
+
+# src/media_select.c:216
+
+
+
+# src/media_select.c:242
+
+
+
+# src/media_select.c:222
+
+# src/media_select.c:222
+#: src/wdgt-media-select.c:252
+msgid "Description:"
+msgstr "Description :"
+
+# src/media_select.c:221
+
+
+
+# src/media_select.c:247
+
+
+
+# src/media_select.c:227
+
+# src/media_select.c:227
+#: src/wdgt-media-select.c:257
+msgid "Page size:"
+msgstr "Taille de page :"
+
+# src/media_select.c:226
+
+
+
+# src/media_select.c:252
+
+
+
+# src/media_select.c:232
+
+# src/media_select.c:232
+#: src/wdgt-media-select.c:262
+msgid "Label size:"
+msgstr "Taille d'étiquette :"
+
+# src/media_select.c:231
+
+
+
+# src/media_select.c:257
+
+
+
+# src/media_select.c:237
+
+# src/media_select.c:237
+#: src/wdgt-media-select.c:267
+msgid "Layout:"
+msgstr "Disposition :"
+
+# src/media_select.c:515
+
+
+
+# src/media_select.c:481
+
+# src/media_select.c:353
+#: src/wdgt-media-select.c:408
+#, c-format
+msgid "%d x %d  (%d per sheet)"
+msgstr "%d x %d  (%d par feuille)"
+
+# src/media_select.c:522
+
+
+
+# src/media_select.c:488
+
+# src/media_select.c:367
+#: src/wdgt-media-select.c:422
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
+
+# src/media_select.c:522
+
+
+
+# src/media_select.c:488
+
+# src/media_select.c:372
+#: src/wdgt-media-select.c:427
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
+
+# src/rotate_select.c:187
+
+
+
+# src/rotate_select.c:187
+
+
+
+# src/rotate_select.c:167
+
+# src/rotate_select.c:169
+#: src/wdgt-rotate-label.c:176
+msgid "Rotate"
+msgstr "Rotation"
+
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
+#, c-format
+msgid "Activate %s"
+msgstr ""
+
+# src/file.c:178
+
+
+
+# src/file.c:178
+
+
+
+# src/file.c:211
+
+# src/file.c:211
+#: src/gnome-recent-view-bonobo.c:189
+#, fuzzy, c-format
+msgid "Open %s"
+msgstr "Ouvrir"
+
+# src/mdi.c:190
+
+
+
+# src/mdi.c:189
+
+
+
+# src/mdi.c:169
+
+# src/mdi.c:169
+#~ msgid "Revert to saved copy of %s?"
+#~ msgstr "Rétablir la version sauvegardée de %s ?"
+
+# src/mdi.c:219
+
+
+
+# src/mdi.c:207
+
+# src/mdi.c:207
+#~ msgid "Unknown media type. Using default."
+#~ msgstr "Type de media inconnu. Utilisation de celui par défaut."
+
+# src/mdi.c:477
+
+
+
+# src/mdi.c:483
+
+
+
+# src/mdi.c:455
+
+# src/mdi.c:455
+#~ msgid ""
+#~ "``%s'' has been modified.\n"
+#~ "\n"
+#~ "Do you wish to save it?"
+#~ msgstr ""
+#~ "``%s'' a été modifié \n"
+#~ "\n"
+#~ "Voulez-vous l'enregistrer ?"
+
+# src/file.c:248 src/mdi.c:635
+
+
+
+# src/file.c:248 src/mdi.c:641
+
+
+
+# src/file.c:288 src/mdi.c:601
+
+# src/file.c:288 src/mdi.c:601
+#~ msgid "Cannot save file"
+#~ msgstr "Impossible d'enregistrer le fichier"
+
+# src/file.c:271 src/mdi.c:660
+
+
+
+# src/file.c:271 src/mdi.c:666
+
+
+
+# src/file.c:311 src/mdi.c:623
+
+# src/file.c:311 src/mdi.c:623
+#~ msgid "Save As"
+#~ msgstr "Enregistrer sous"
+
+# src/mdi.c:663
+
+
+
+# src/mdi.c:669
+
+
+
+# src/mdi.c:626
+
+# src/mdi.c:626
+#~ msgid "Close / Save label as"
+#~ msgstr "Fermer / Enregistrer l'étiquette sous"
+
+# src/file.c:309 src/mdi.c:716
+
+
+
+# src/file.c:309 src/mdi.c:722
+
+
+
+# src/file.c:352 src/mdi.c:680
+
+# src/file.c:352 src/mdi.c:680
+#~ msgid "Label no longer valid!"
+#~ msgstr "Etiquette plus valide !"
+
+# src/item_image.c:389 src/item_image.c:444
+
+
+
+# src/item_image.c:388 src/item_image.c:442
+
+
+
+# src/item_image.c:389 src/item_image.c:454
+
+# src/item_image.c:389 src/item_image.c:454
+#~ msgid "Image format not currently supported"
+#~ msgstr "Format d'image non supporté actuellement"
+
+# src/item_barcode.c:337
+
+
+
+# src/item_barcode.c:343 src/prefs.c:243
+
+
+
+# src/item_barcode.c:320 src/prefs.c:221
+
+# src/item_barcode.c:320 src/prefs.c:215
+#~ msgid "General"
+#~ msgstr "Général"
+
+# src/menu.c:50
+
+
+
+# src/menu.c:50
+
+
+
+# src/menu.c:50
+
+# src/menu.c:50
+#~ msgid "_New"
+#~ msgstr "_Nouveau"
+
+# src/menu.c:51
+
+
+
+# src/menu.c:51
+
+
+
+# src/menu.c:51
+
+# src/menu.c:51
+#~ msgid "Make a new, empty label"
+#~ msgstr "Créer une nouvelle étiquette vide"
+
+# src/menu.c:86
+
+
+
+# src/menu.c:86
+
+
+
+# src/menu.c:85
+
+# src/menu.c:85
+#~ msgid "U_nselect All "
+#~ msgstr "_Désélectionne tout"
+
+# src/menu.c:86
+
+
+
+# src/menu.c:86
+
+
+
+# src/menu.c:86
+
+# src/menu.c:86
+#~ msgid "Remove all selections"
+#~ msgstr "Supprime toutes les sélections"
+
+# src/display.c:1157 src/display.c:1205
+
+
+
+# src/display.c:1160 src/display.c:1208
+
+
+
+# src/menu.c:94
+
+# src/menu.c:94
+#~ msgid "Select"
+#~ msgstr "Sélectionner"
+
+# src/tools.c:59
+
+
+
+# src/tools.c:59
+
+
+
+# src/menu.c:95 src/menu.c:186
+
+# src/menu.c:95 src/menu.c:186
+#~ msgid "Select, move and modify objects"
+#~ msgstr "Sélectionner, déplacer et modifier les objets"
+
+# src/tools.c:64
+
+
+
+# src/tools.c:64
+
+
+
+# src/menu.c:100 src/menu.c:191
+
+# src/menu.c:100 src/menu.c:191
+#~ msgid "Create text object"
+#~ msgstr "Créer un objet texte"
+
+# src/menu.c:103
+
+# src/menu.c:103
+#~ msgid "Box"
+#~ msgstr "Boîte"
+
+# src/tools.c:67
+
+
+
+# src/tools.c:67
+
+
+
+# src/menu.c:103 src/menu.c:194
+
+# src/menu.c:103 src/menu.c:194
+#~ msgid "Create box/rectangle object"
+#~ msgstr "Créer un objet boîte/rectangle"
+
+# src/tools.c:70
+
+
+
+# src/tools.c:70
+
+
+
+# src/menu.c:106 src/menu.c:197
+
+# src/menu.c:106 src/menu.c:197
+#~ msgid "Create line object"
+#~ msgstr "Créer un objet ligne"
+
+# src/menu.c:109
+
+# src/menu.c:109
+#~ msgid "Ellipse"
+#~ msgstr "Ellipse"
+
+# src/tools.c:73
+
+
+
+# src/tools.c:73
+
+
+
+# src/menu.c:110 src/menu.c:200
+
+# src/menu.c:110 src/menu.c:200
+#~ msgid "Create ellipse/circle object"
+#~ msgstr "Créer un objet ellipse/cercle"
+
+# src/tools.c:76
+
+
+
+# src/tools.c:76
+
+
+
+# src/menu.c:113 src/menu.c:203
+
+# src/menu.c:113 src/menu.c:203
+#~ msgid "Create image object"
+#~ msgstr "Créer un objet image"
+
+# src/item_barcode.c:316
+
+
+
+# src/item_barcode.c:317
+
+
+
+# src/menu.c:116
+
+# src/menu.c:116
+#~ msgid "Barcode"
+#~ msgstr "Code-barre"
+
+# src/tools.c:79
+
+
+
+# src/tools.c:79
+
+
+
+# src/menu.c:116 src/menu.c:206
+
+# src/menu.c:116 src/menu.c:206
+#~ msgid "Create barcode object"
+#~ msgstr "Créer un objet code-barre"
+
+# src/tools.c:84
+
+
+
+# src/tools.c:84
+
+
+
+# src/menu.c:121 src/menu.c:211
+
+# src/menu.c:121 src/menu.c:211
+#~ msgid "Zoom in"
+#~ msgstr "Zoom supérieur"
+
+# src/tools.c:87
+
+
+
+# src/tools.c:87
+
+
+
+# src/menu.c:124 src/menu.c:214
+
+# src/menu.c:124 src/menu.c:214
+#~ msgid "Zoom out"
+#~ msgstr "Zoom inférieur"
+
+# src/tools.c:90
+
+
+
+# src/tools.c:90
+
+
+
+# src/menu.c:127
+
+# src/menu.c:127
+#~ msgid "Zoom 1:1"
+#~ msgstr "Zoom 1:1"
+
+# src/tools.c:90
+
+
+
+# src/tools.c:90
+
+
+
+# src/menu.c:127 src/menu.c:217
+
+# src/menu.c:127 src/menu.c:217
+#~ msgid "Zoom to 1:1"
+#~ msgstr "Zoomer à 1:1"
+
+# src/item_text.c:467
+
+
+
+# src/item_text.c:467
+
+
+
+# src/menu.c:132 src/menu.c:223
+
+# src/menu.c:132 src/menu.c:223
+#~ msgid "Merge properties"
+#~ msgstr "Propriétés de fusion"
+
+# src/item_image.c:272
+
+
+
+# src/item_image.c:272
+
+
+
+# src/menu.c:133
+
+# src/menu.c:133
+#~ msgid "Edit merge properties"
+#~ msgstr "Editer les propriétés de fusion"
+
+# src/menu.c:157
+
+# src/menu.c:157
+#~ msgid "_Tools"
+#~ msgstr "_Outils"
+
+# src/menu.c:138
+
+
+
+# src/menu.c:138
+
+
+
+# src/menu.c:168
+
+# src/menu.c:168
+#~ msgid "  New   "
+#~ msgstr "  Nouveau   "
+
+# src/menu.c:138
+
+
+
+# src/menu.c:138
+
+
+
+# src/menu.c:168
+
+# src/menu.c:168
+#~ msgid "New Label/Card"
+#~ msgstr "Nouvelle étiquette/carte"
+
+# src/menu.c:140
+
+
+
+# src/menu.c:140
+
+
+
+# src/menu.c:170
+
+# src/menu.c:170
+#~ msgid "  Open  "
+#~ msgstr "  Ouvrir  "
+
+# src/menu.c:140
+
+
+
+# src/menu.c:140
+
+
+
+# src/menu.c:170
+
+# src/menu.c:170
+#~ msgid "Open a file"
+#~ msgstr "Ouvrir un fichier"
+
+# src/menu.c:142
+
+
+
+# src/menu.c:142
+
+
+
+# src/menu.c:172
+
+# src/menu.c:172
+#~ msgid "  Save  "
+#~ msgstr "  Enregistrer  "
+
+# src/menu.c:142
+
+
+
+# src/menu.c:142
+
+
+
+# src/menu.c:172
+
+# src/menu.c:172
+#~ msgid "Save current file"
+#~ msgstr "Sauvegarder le fichier en cours"
+
+# src/menu.c:145
+
+
+
+# src/menu.c:145
+
+
+
+# src/menu.c:175
+
+# src/menu.c:175
+#~ msgid " Print  "
+#~ msgstr " Imprimer  "
+
+# src/menu.c:145
+
+
+
+# src/menu.c:145
+
+
+
+# src/menu.c:175
+
+# src/menu.c:175
+#~ msgid "Print current file"
+#~ msgstr "Imprimer le fichier en cours"
+
+# src/menu.c:221
+
+
+
+# src/menu.c:221
+
+
+
+# src/menu.c:326
+
+# src/menu.c:326
+#~ msgid "Function is not implemented!"
+#~ msgstr "Cette fonction n'est pas implémentée !"
+
+# src/tools.c:297
+
+
+
+# src/tools.c:297
+
+
+
+#~ msgid "Function is not yet implemented!"
+#~ msgstr "Cette fonction n'est pas encore implémentée !"
+
+# src/prop_size.c:194
+
+
+
+#~ msgid "w"
+#~ msgstr "l"
+
+# src/prop_size.c:203
+
+
+
+#~ msgid "h"
+#~ msgstr "h"
+
+# src/prop_position.c:183
+
+
+
+#~ msgid "x"
+#~ msgstr "x"
+
+# src/prop_position.c:195
+
+
+
+#~ msgid "y"
+#~ msgstr "y"
+
+# src/media_select.c:462
+
+
+
+#~ msgid "%.1f x %.1f"
+#~ msgstr "%.1f x %.1f"
+
+# src/preferences.c:213
+
+
+
+#~ msgid "Startup"
+#~ msgstr "Démarrage"
+
+# src/preferences.c:215
+
+
+
+#~ msgid "Under construction"
+#~ msgstr "En construction"
+
+#, fuzzy
+#~ msgid "Maintain original aspect ratio"
+#~ msgstr "Conserver le rapport d'échelle d'origine"
+
+#~ msgid "Text color"
+#~ msgstr "Couleur du texte"
+
+#~ msgid "Line Color"
+#~ msgstr "Couleur de ligne"
+
+#~ msgid "Fill Color"
+#~ msgstr "Couleur de remplissage"

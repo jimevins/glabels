@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+<GLabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery US-Letter products (and look-alikes)                           -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Avery 5160 family: Mailing Labels, 1'' x 2_5/8'', 30 per sheet    * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5160" size="US-Letter" description="Mailing Labels">
+    <Label id="0" style="rectangle" width="189" height="72" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="10" x0="11.5" y0="36" dx="200" dy="72"/>
+    </Label>
+    <Alias name="Avery 15160"/>
+    <Alias name="Avery 18160"/>
+    <Alias name="Avery 18660"/>
+    <Alias name="Avery 25160"/>
+    <Alias name="Avery 5260"/>
+    <Alias name="Avery 5510"/>
+    <Alias name="Avery 5520"/>
+    <Alias name="Avery 5560"/>
+    <Alias name="Avery 5810"/>
+    <Alias name="Avery 5920"/>
+    <Alias name="Avery 5960"/>
+    <Alias name="Avery 5970"/>
+    <Alias name="Avery 5971"/>
+    <Alias name="Avery 5972"/>
+    <Alias name="Avery 5979"/>
+    <Alias name="Avery 5980"/>
+    <Alias name="Avery 6233"/>
+    <Alias name="Avery 6245"/>
+    <Alias name="Avery 6460"/>
+    <Alias name="Avery 6498"/>
+    <Alias name="Avery 8160"/>
+    <Alias name="Avery 8250"/>
+    <Alias name="Avery 8460"/>
+    <Alias name="Avery 8560"/>
+    <Alias name="Avery 8620"/>
+    <Alias name="Avery 8660"/>
+    <Alias name="Avery 8810"/>
+    <Alias name="Avery 8920"/>
+    <Alias name="Avery 8930"/>
+    <Alias name="Maco ll5805"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5162 family: Mailing labels, 1_1/3'' x 4'', 14 per sheet    * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5162" size="US-Letter" description="Mailing labels">
+    <Label id="0" style="rectangle" width="288" height="96" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="7" x0="10.5" y0="60" dx="303" dy="96"/>
+    </Label>
+    <Alias name="Avery 15162"/>
+    <Alias name="Avery 18162"/>
+    <Alias name="Avery 18662"/>
+    <Alias name="Avery 5262"/>
+    <Alias name="Avery 5512"/>
+    <Alias name="Avery 5522"/>
+    <Alias name="Avery 5922"/>
+    <Alias name="Avery 5962"/>
+    <Alias name="Avery 8162"/>
+    <Alias name="Avery 8252"/>
+    <Alias name="Avery 8462"/>
+    <Alias name="Avery 8662"/>
+    <Alias name="Avery 8922"/>
+    <Alias name="Avery 8932"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5163 family: Shipping labels, 4'' x 2'', 10 per sheet       * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5163" size="US-Letter" description="Shipping labels">
+    <Label id="0" style="rectangle" width="288" height="144" round="10">
+      <Markup type="margin" size="10"/>
+      <Layout nx="2" ny="5" x0="11.25" y0="36" dx="301.5" dy="144"/>
+    </Label>
+    <Alias name="Avery 15163"/>
+    <Alias name="Avery 18163"/>
+    <Alias name="Avery 18663"/>
+    <Alias name="Avery 5263"/>
+    <Alias name="Avery 5513"/>
+    <Alias name="Avery 5523"/>
+    <Alias name="Avery 5795"/>
+    <Alias name="Avery 5923"/>
+    <Alias name="Avery 5963"/>
+    <Alias name="Avery 5978"/>
+    <Alias name="Avery 8163"/>
+    <Alias name="Avery 8253"/>
+    <Alias name="Avery 8463"/>
+    <Alias name="Avery 8663"/>
+    <Alias name="Avery 8763"/>
+    <Alias name="Avery 8923"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5167 family: Address labels, 1_3/4'' x 1/2'', 80 per sheet  * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5167" size="US-Letter" description="Address labels">
+    <Label id="0" style="rectangle" width="126" height="36" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="4" ny="20" x0="20.25" y0="36" dx="148.5" dy="36"/>
+    </Label>
+    <Alias name="Avery 15167"/>
+    <Alias name="Avery 15267"/>
+    <Alias name="Avery 18167"/>
+    <Alias name="Avery 18667"/>
+    <Alias name="Avery 5267"/>
+    <Alias name="Avery 5667"/>
+    <Alias name="Avery 5927"/>
+    <Alias name="Avery 6467"/>
+    <Alias name="Avery 6504"/>
+    <Alias name="Avery 8167"/>
+    <Alias name="Avery 8567"/>
+    <Alias name="Avery 8667"/>
+    <Alias name="Avery 8927"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5196 family: Diskette labels, 2_3/4'' x 2_3/4'', 9 per sheet* -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5196" size="US-Letter" description="Diskette labels">
+    <Label id="0" style="rectangle" width="198" height="198" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="3" x0="9" y0="126" dx="198" dy="216"/>
+    </Label>
+    <Alias name="Avery 5096"/>
+    <Alias name="Avery 5896"/>
+    <Alias name="Avery 8196"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5371" size="US-Letter" description="Business Cards">
+    <Label id="0" style="rectangle" width="252" height="144" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="54" y0="36" dx="252" dy="144"/>
+    </Label>
+    <Alias name="Avery 25371"/>
+    <Alias name="Avery 26550"/>
+    <Alias name="Avery 26551"/>
+    <Alias name="Avery 27871"/>
+    <Alias name="Avery 27881"/>
+    <Alias name="Avery 27882"/>
+    <Alias name="Avery 28371"/>
+    <Alias name="Avery 28877"/>
+    <Alias name="Avery 5372"/>
+    <Alias name="Avery 5376"/>
+    <Alias name="Avery 5377"/>
+    <Alias name="Avery 5871"/>
+    <Alias name="Avery 5876"/>
+    <Alias name="Avery 5877"/>
+    <Alias name="Avery 5911"/>
+    <Alias name="Avery 8271"/>
+    <Alias name="Avery 8371"/>
+    <Alias name="Avery 8372"/>
+    <Alias name="Avery 8374"/>
+    <Alias name="Avery 8376"/>
+    <Alias name="Avery 8377"/>
+    <Alias name="Avery 8471"/>
+    <Alias name="Avery 8476"/>
+    <Alias name="Avery 8571"/>
+    <Alias name="Avery 8871"/>
+    <Alias name="Avery 8872"/>
+    <Alias name="Avery 8876"/>
+    <Alias name="Avery 8877"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 8373" size="US-Letter" description="Business Cards">
+    <Label id="0" style="rectangle" width="252" height="144" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="4" x0="36" y0="54" dx="288" dy="180"/>
+    </Label>
+    <Alias name="Avery 3612"/>
+    <Alias name="Avery 5881"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5931" size="US-Letter"
+         description="CD/DVD Labels (face only)">
+    <Label id="0" style="cd" radius="166.5" hole="58.5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
+    </Label>
+    <Alias name="Avery 5691"/>
+    <Alias name="Avery 5692"/>
+    <Alias name="Avery 5694"/>
+    <Alias name="Avery 8692"/>
+    <Alias name="Avery 8694"/>
+    <Alias name="Avery 8695"/>
+    <Alias name="Avery 8699"/>
+    <Alias name="Avery 8831"/>
+    <Alias name="Avery 8832"/>
+    <Alias name="Avery 8842"/>
+    <Alias name="Avery 8844"/>
+    <Alias name="Avery 8846"/>
+    <Alias name="Avery 8847"/>
+    <Alias name="Avery 8931"/>
+    <Alias name="Avery 8941"/>
+    <Alias name="Avery 8942"/>
+    <Alias name="Neato USCD2lbl.NTT"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997face family: VCR Labels, 1_7/8'' x 3_1/16'', 10 per sheet -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5997 - VCR Face" size="US-Letter"
+         description="VCR Face Labels">
+    <Label id="0" style="rectangle" width="220" height="133" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="80" y0="66.5" dx="236" dy="133"/>
+    </Label>
+    <Alias name="Avery 5199 - VCR Face"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997spine family: VCR Labels, 2/3'' x 5_3/4'',15 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5997 - VCR Spine" size="US-Letter"
+        description="VCR Spine Labels">
+    <Label id="0" style="rectangle" width="414" height="48" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
+    </Label>
+    <Alias name="Avery 5199 - VCR Spine"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 6490" size="US-Letter" description="Diskette labels">
+    <Label id="0" style="rectangle" width="193.5" height="144" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="5" x0="9.215999926" y0="36" dx="200.2679959" dy="144"/>
+    </Label>
+    <Alias name="Avery 6501"/>
+    <Alias name="Avery 6861"/>
+    <Alias name="Avery 8096"/>
+  </Sheet> 
+
+  <!-- =================================================================== -->
+  <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   * -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 8165" size="US-Letter" description="Full-page">
+    <Label id="0" style="rectangle" width="612" height="792"
+        round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
+    </Label>
+    <Alias name="Avery 3114"/>
+    <Alias name="Avery 3121"/>
+    <Alias name="Avery 3123"/>
+    <Alias name="Avery 3131"/>
+    <Alias name="Avery 3132"/>
+    <Alias name="Avery 3133"/>
+    <Alias name="Avery 3141"/>
+    <Alias name="Avery 3142"/>
+    <Alias name="Avery 3145"/>
+    <Alias name="Avery 3245"/>
+    <Alias name="Avery 3246"/>
+    <Alias name="Avery 3247"/>
+    <Alias name="Avery 3255"/>
+    <Alias name="Avery 3267"/>
+    <Alias name="Avery 3270"/>
+    <Alias name="Avery 3271"/>
+    <Alias name="Avery 3272"/>
+    <Alias name="Avery 3275"/>
+    <Alias name="Avery 3276"/>
+    <Alias name="Avery 3277"/>
+    <Alias name="Avery 3614"/>
+    <Alias name="Avery 3625"/>
+    <Alias name="Avery 3641"/>
+    <Alias name="Avery 3651"/>
+    <Alias name="Avery 5165"/>
+    <Alias name="Avery 5177"/>
+    <Alias name="Avery 5182"/>
+    <Alias name="Avery 5265"/>
+    <Alias name="Avery 5277"/>
+    <Alias name="Avery 5282"/>
+    <Alias name="Avery 53205"/>
+    <Alias name="Avery 53211"/>
+    <Alias name="Avery 53230"/>
+    <Alias name="Avery 53240"/>
+    <Alias name="Avery 5884"/>
+    <Alias name="Avery 5975"/>
+    <Alias name="Avery 6465"/>
+    <Alias name="Avery 6503"/>
+    <Alias name="Avery 75287"/>
+    <Alias name="Avery 75299"/>
+    <Alias name="Avery 8255"/>
+    <Alias name="Avery 8314"/>
+    <Alias name="Avery 8324"/>
+    <Alias name="Avery 8384"/>
+    <Alias name="Avery 8465"/>
+    <Alias name="Avery 8665"/>
+    <Alias name="IP Invent It! #00064-3"/>
+    <Alias name="Generic US-Letter Full-page"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheet  -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 3274.1" size="US-Letter" description="Square Stickers">
+    <Label id="0" style="rectangle" width="180" height="180" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
+    </Label>
+    <Alias name="Avery 3111"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 3274.2" size="US-Letter" description="Small Round Stickers">
+    <Label id="0" style="round" radius="54">
+      <Markup type="margin" size="5"/>
+      <Layout nx="4" ny="5" x0="36" y0="54" dx="144" dy="144"/>
+    </Label>
+    <Alias name="Avery 3112"/>
+    <Alias name="Avery 8293"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.3 family: Big round stickers, 2_1/2'', 9 per sheet       -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 3274.3" size="US-Letter" description="Big Round Stickers">
+    <Label id="0" style="round" radius="90">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
+    </Label>
+  </Sheet>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery A4 products (and look-alikes)                                  -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Avery 7163 family: Mailing labels, 99.1 x 38.1 mm, 14 per sheet     -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 7163" size="A4" description="Mailing labels">
+    <Label id="0" style="rectangle" width="280.9" height="108" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="7" x0="9.5" y0="43" dx="292" dy="108"/>
+    </Label>
+    <Alias name="Avery L7163"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8414 family: Business Cards, 50.8 x 87.0 mm, 10 per sheet     -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 8414" size="A4" description="Business Cards">
+    <Label id="0" style="rectangle" width="246.6" height="144" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="42" y0="64" dx="264" dy="144"/>
+    </Label>
+    <Alias name="Avery J8414"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8666 family: Diskette labels (face only), 70 x 52 mm, 10 per  -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 8666" size="A4"
+         description="3.5'' Diskette labels (face only)">
+    <Label id="0" style="rectangle" width="198.4" height="147.4" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="66" y0="53" dx="264" dy="147"/>
+    </Label>
+    <Alias name="Avery J8666"/>
+  </Sheet>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Zweckform A4 products                                                -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 32010: Business Cards, 54.0 x 85.0 mm, 10 per sheet       -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 32010" size="A4" description="Business Cards">
+    <Label id="0" style="rectangle" width="240.94" height="153.07" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="40" y0="40" dx="269" dy="153"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 4761: Lever Arch File Labels, 192 x 61 mm, 4 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 4761" size="A4" description="Lever Arch File Labels">
+    <Label id="0" style="rectangle" width="544.25" height="172.9" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="1" ny="4" x0="25" y0="75" dx="544.25" dy="172.9"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 3651: Rectangular Labels, 52 x 29.5 mm, 40 per sheet      -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 3651" size="A4" description="Rectangular Labels">
+    <Label id="0" style="rectangle" width="147.4016" height="83.6220" round="0">  
+      <Markup type="margin" size="5"/>
+      <Layout nx="4" ny="10" x0="2.834" y0="2.834" dx="147.4016" dy="83.6220"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 3669:  Rectangular Labels, 70 x 50.8mm, 15 per sheet      -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 3669" size="A4" description="QSL-Karten Etiketten 70mm x 50,8mm">
+    <Label id="0" style="rectangle" width="198.425" height="144" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="5" x0="0" y0="61" dx="198.425" dy="144"/>
+    </Label>
+  </Sheet>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Misc. US-Letter products.                                            -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
+  <!-- =================================================================== -->
+  <Sheet name="Southworth BC" size="US-Letter" description="Business Cards">
+    <Label id="0" style="rectangle" width="252" height="144" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
+    </Label>
+  </Sheet>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Misc. A4 products.                                                   -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Sigel DP 830/DP 930: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
+  <!-- =================================================================== -->
+  <Sheet name="Sigel DP 830/DP 930" size="A4" description="Business Cards">
+    <Label id="0" style="rectangle" width="240.9" height="155.9" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="40" y0="31" dx="269" dy="156"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Ascom A4/24/MKII: Rectangular Labels, 24 per sheet                  -->
+  <!-- =================================================================== -->
+  <Sheet name="Ascom A4/24/MKII" size="A4" description="Rectangular Labels">
+    <Label id="0" style="rectangle" width="181" height="96" round="10">
+      <Markup type="margin" size="5"/>
+      <Layout nx="3" ny="8" x0="19" y0="36" dx="187" dy="96"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Agipa 119488: Business Cards, 50 x 90 mm, 10 per sheet              -->
+  <!-- =================================================================== -->
+  <Sheet name="Agipa 119488" size="A4"
+	 description="Agipa 119488: Business Cards">
+    <Label id="0" style="rectangle" width="255" height="142" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="43" y0="67" dx="255" dy="142"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Ednet BC: Business Cards, 51 x 89 mm, 10 per sheet                  -->
+  <!-- =================================================================== -->
+  <Sheet name="Ednet" size="A4" description="Business Cards">
+    <Label id="0" style="rectangle" width="253" height="145" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
+    </Label>
+  </Sheet>
+
+</GLabels-templates>
+
+
+
+
