@@ -2,11 +2,10 @@
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2001, 2002.
 # 
-#, no-wrap
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.4.3\n"
-"POT-Creation-Date: 2002-03-10 21:14+0900\n"
+"POT-Creation-Date: 2002-08-24 22:30-0400\n"
 "PO-Revision-Date: 2002-03-10 21:17+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -14,55 +13,55 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/glabels_batch.c:47
+#: src/glabels_batch.c:49
 msgid "print this message"
 msgstr "このメッセージを表示する"
 
-#: src/glabels_batch.c:49
+#: src/glabels_batch.c:51
 msgid "print the version of glabels-batch being used"
 msgstr "使用している gLabel のバージョンを表示する"
 
-#: src/glabels_batch.c:51
+#: src/glabels_batch.c:53
 msgid "set output filename (default=\"output.ps\")"
 msgstr "出力するファイル名を指定する (デフォルト = \"output.ps\")"
 
-#: src/glabels_batch.c:51
+#: src/glabels_batch.c:53
 msgid "filename"
 msgstr "ファイル名"
 
-#: src/glabels_batch.c:53
+#: src/glabels_batch.c:55
 msgid "number of sheets (default=1)"
 msgstr "用紙の数 (デフォルト = 1)"
 
-#: src/glabels_batch.c:53
+#: src/glabels_batch.c:55
 msgid "sheets"
 msgstr "用紙の数"
 
-#: src/glabels_batch.c:55
+#: src/glabels_batch.c:57
 msgid "number of copies (default=1)"
 msgstr "コピーの数 (デフォルト = 1)"
 
-#: src/glabels_batch.c:55
+#: src/glabels_batch.c:57
 msgid "copies"
 msgstr "コピーの数"
 
-#: src/glabels_batch.c:57 src/print_dialog.c:152
+#: src/glabels_batch.c:59 src/print_dialog.c:152
 msgid "print outlines (to test printer alignment)"
 msgstr "アウトラインを印刷する (印刷時の配置を確認するため)"
 
-#: src/glabels_batch.c:59 src/print_dialog.c:160
+#: src/glabels_batch.c:61 src/print_dialog.c:160
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "反転して印刷 (i.e. 画像をミラーしたもの)"
 
-#: src/glabels_batch.c:89
+#: src/glabels_batch.c:92
 msgid "[OPTION...] GLABELS_FILE..."
 msgstr "[オプション...] ファイル名..."
 
-#: src/glabels_batch.c:108
+#: src/glabels_batch.c:111
 msgid "missing glabels file\n"
 msgstr "gLabel で使用するファイルがありません\n"
 
-#: src/glabels_batch.c:136
+#: src/glabels_batch.c:139
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "gLabel で使用するファイル %s が開けません\n"
@@ -233,7 +232,7 @@ msgstr "全般"
 msgid "Style"
 msgstr "スタイル"
 
-#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:627
+#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
 msgid "Invalid barcode"
 msgstr "おかしなバーコード"
 
@@ -383,7 +382,8 @@ msgid "Text with tab separators"
 msgstr "タブで区切ったテキスト"
 
 #: src/merge.c:94
-msgid "Text with comma separators"
+#, fuzzy
+msgid "Text with comma separators (CSV)"
 msgstr "コンマで区切ったテキスト"
 
 #: src/merge.c:102
