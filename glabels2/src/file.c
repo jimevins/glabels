@@ -287,10 +287,42 @@ open_ok (GtkWidget * widget,
 
 	/* get the filename */
 	filename = g_strdup (gtk_file_selection_get_filename (fsel));
-	if (filename) {
-		if ( gl_file_open_real (filename, GTK_WINDOW(fsel)) ) {
-			gtk_widget_destroy (GTK_WIDGET (fsel));
+
+	if (!filename || g_file_test (filename, G_FILE_TEST_IS_DIR)) {
+
+		dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
+					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					   GTK_MESSAGE_WARNING,
+					   GTK_BUTTONS_CLOSE,
+					   _("Empty file name selection"),
+					   _("Please select a file or supply a valid file name"));
+
+		gtk_dialog_run (GTK_DIALOG (dlg));
+		gtk_widget_destroy (dlg);
+
+	} else {
+
+		if (!g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+
+			dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
+						   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						   GTK_MESSAGE_WARNING,
+						   GTK_BUTTONS_CLOSE,
+						   _("File does not exist"),
+						   _("Please select a file or supply a valid file name"));
+
+			gtk_dialog_run (GTK_DIALOG (dlg));
+			gtk_widget_destroy (dlg);
+
+
+		} else {
+		
+			if ( gl_file_open_real (filename, GTK_WINDOW(fsel)) ) {
+				gtk_widget_destroy (GTK_WIDGET (fsel));
+			}
+
 		}
+
 	}
 
 	g_free (filename);
@@ -340,7 +372,8 @@ gl_file_open_real (const gchar     *filename,
 					   GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_CLOSE,
-					   primary_msg, "");
+					   primary_msg,
+					   _("Not a supported file format"));
 
 		g_free (primary_msg);
 
@@ -437,7 +470,8 @@ gl_file_save (glMDIChild *child)
 					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_MESSAGE_ERROR,
 					      GTK_BUTTONS_CLOSE,
-					      primary_msg, "");
+					      primary_msg,
+					      _("Error encountered during save.  The file is still not saved."));
 
 		g_free (primary_msg);
 
@@ -536,6 +570,7 @@ save_as_ok_cb (GtkWidget * widget,
 	GnomeRecentModel *recent;
 	gboolean *saved_flag;
 	gchar *primary_msg;
+	gboolean cancel_flag = FALSE;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -555,13 +590,14 @@ save_as_ok_cb (GtkWidget * widget,
 
 	gl_debug (DEBUG_FILE, "raw_filename = \"%s\"", raw_filename);
 
-	if (!raw_filename || (raw_filename[strlen (raw_filename) - 1] == '/')) {
+	if (!raw_filename || g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
 
 		dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
 					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_MESSAGE_WARNING,
 					   GTK_BUTTONS_CLOSE,
-					   _("Must supply file name"), "");
+					   _("Empty file name selection"),
+					   _("Please supply a valid file name"));
 
 		gtk_dialog_run (GTK_DIALOG (dlg));
 		gtk_widget_destroy (dlg);
@@ -572,40 +608,67 @@ save_as_ok_cb (GtkWidget * widget,
 
 		gl_debug (DEBUG_FILE, "filename = \"%s\"", filename);
 
-		gl_xml_label_save (label, filename, &status);
+		if (g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+			gint ret;
 
-		gl_debug (DEBUG_FILE, "status of save = %d", status);
-
-		if ( status != XML_LABEL_OK ) {
-
-			primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
+			primary_msg = g_strdup_printf (_("Overwrite file \"%s\"?"),
 						       filename);
 
 			dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
 						   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						   GTK_MESSAGE_ERROR,
-						   GTK_BUTTONS_CLOSE,
-						   primary_msg, "");
-
+						   GTK_MESSAGE_QUESTION,
+						   GTK_BUTTONS_YES_NO,
+						   primary_msg,
+						   _("File already exists."));
+			
 			g_free (primary_msg);
 
-			gtk_dialog_run (GTK_DIALOG (dlg));
+			ret = gtk_dialog_run (GTK_DIALOG (dlg));
+			if ( ret == GTK_RESPONSE_NO ) {
+				cancel_flag = TRUE;
+			}
 			gtk_widget_destroy (dlg);
+		}
 
-		} else {
+		if (!cancel_flag) {
 
-			*saved_flag = TRUE;
+			gl_xml_label_save (label, filename, &status);
 
-			recent = gl_recent_get_model ();
-			gnome_recent_model_add (recent, filename);
+			gl_debug (DEBUG_FILE, "status of save = %d", status);
 
-			if (save_path != NULL)
-				g_free (save_path);
-			save_path = g_path_get_dirname (filename);
-			if (save_path != NULL)
-				save_path = g_strconcat (save_path, "/", NULL);
+			if ( status != XML_LABEL_OK ) {
 
-			gtk_widget_destroy (GTK_WIDGET (fsel));
+				primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
+							       filename);
+
+				dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
+							   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+							   GTK_MESSAGE_ERROR,
+							   GTK_BUTTONS_CLOSE,
+							   primary_msg,
+							   _("Error encountered during save.  The file is still not saved."));
+
+				g_free (primary_msg);
+
+				gtk_dialog_run (GTK_DIALOG (dlg));
+				gtk_widget_destroy (dlg);
+
+			} else {
+
+				*saved_flag = TRUE;
+
+				recent = gl_recent_get_model ();
+				gnome_recent_model_add (recent, filename);
+
+				if (save_path != NULL)
+					g_free (save_path);
+				save_path = g_path_get_dirname (filename);
+				if (save_path != NULL)
+					save_path = g_strconcat (save_path, "/", NULL);
+
+				gtk_widget_destroy (GTK_WIDGET (fsel));
+			}
+
 		}
 
 		g_free (filename);
