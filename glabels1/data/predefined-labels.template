@@ -438,6 +438,16 @@ margin="2" round="0">
     </Label>
   </Sheet>
 
+   <!-- =================================================================== -->
+   <!-- Neato CLP-192328/26: HandiCD-R 50MB, 3" x 2_1/8'', 9 per sheet      -->
+   <!-- =================================================================== -->
+   <Sheet name="Neato HandiCD-R" size="US-Letter"
+	  description="Business Card CD">
+     <Label margin="5" style="rectangle" height="216" width="171" round="75">
+       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
+     </Label>
+   </Sheet>
+
   <!-- =================================================================== -->
   <!-- CD STOMPER PRO CD Label Refills, (Face Only), 2 per sheet         * -->
   <!-- =================================================================== -->
