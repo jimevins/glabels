@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(glabels, 2.0pre1cvs, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_INIT(glabels, 2.0.0, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -23,10 +23,32 @@ GNOME_COMPILE_WARNINGS
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
-dnl *******************************************************************
-dnl * Check for required packages and versions
-dnl *******************************************************************
-dnl Minimum versions of libraries
+dnl ---------------------------------------------------------------------------
+dnl - LIBGLABELS API versioning
+dnl ---------------------------------------------------------------------------
+dnl From the libtool manual:
+dnl 1. Start with version information of `0:0:0' for each libtool library.
+dnl 2. Update the version information only immediately before a public release.
+dnl    More frequent updates are unnecessary, and only guarantee that the current
+dnl    interface number gets larger faster.
+dnl 3. If the library source code has changed at all since the last update, then increment
+dnl    revision (`c:r:a' becomes `c:r+1:a').
+dnl 4. If any interfaces have been added, removed, or changed since the last update,
+dnl    increment current, and set revision to 0.
+dnl 5. If any interfaces have been added since the last public release, then increment age.
+dnl 6. If any interfaces have been removed since the last public release, then set age
+dnl    to 0.
+LIBGLABELS_C=1
+LIBGLABELS_R=0
+LIBGLABELS_A=0
+
+LIBGLABELS_VERSION_INFO=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
+AC_SUBST(LIBGLABELS_VERSION_INFO)
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Library dependencies
+dnl ---------------------------------------------------------------------------
 GLIB_REQUIRED=2.2.0
 GTK_REQUIRED=2.0.5
 LIBGNOME_REQUIRED=2.0.1
@@ -39,7 +61,7 @@ LIBGNOMEPRINTUI_REQUIRED=2.2.0
 LIBGNOMECANVAS_REQUIRED=2.0.1
 LIBGLADE_REQUIRED=2.0.1
 
-dnl Make above strings available for rpm spec file
+dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(LIBGNOME_REQUIRED)
@@ -52,7 +74,10 @@ AC_SUBST(LIBGNOMEPRINTUI_REQUIRED)
 AC_SUBST(LIBGNOMECANVAS_REQUIRED)
 AC_SUBST(LIBGLADE_REQUIRED)
                
-dnl glabels prerequisites
+
+dnl ---------------------------------------------------------------------------
+dnl - GLABELS prerequisites
+dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 gtk+-2.0 >= $GTK_REQUIRED \
@@ -70,7 +95,10 @@ libglade-2.0 >= $LIBGLADE_REQUIRED \
 AC_SUBST(GLABELS_CFLAGS)
 AC_SUBST(GLABELS_LIBS)
 
-dnl libglabels more modest prerequisites
+
+dnl ---------------------------------------------------------------------------
+dnl - LIBGLABELS more modest prerequisites
+dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(LIBGLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
@@ -79,17 +107,19 @@ libxml-2.0 >= $LIBXML_REQUIRED \
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
 
-dnl ----------------------------------------
+
+dnl ---------------------------------------------------------------------------
 dnl - Is the new file chooser available?
-dnl ----------------------------------------
+dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.3.2,
                   HAVE_FILE_CHOOSER="-DHAVE_FILE_CHOOSER",
                   HAVE_FILE_CHOOSER="-UHAVE_FILE_CHOOSER")
 AC_SUBST(HAVE_FILE_CHOOSER)
 
-dnl ----------------------------------------
+
+dnl ---------------------------------------------------------------------------
 dnl - Is freedesktop mime dbase available?
-dnl ----------------------------------------
+dnl ---------------------------------------------------------------------------
 AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
 AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
 
@@ -97,21 +127,21 @@ AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database, no)
 AM_CONDITIONAL(HAVE_NEWER_MIME, test x$UPDATE_DESKTOP_DATABASE != xno)
 
 
-dnl ****************************************
-dnl * Supported languages
-dnl ****************************************
-dnl Add the languages which your application supports here.
+dnl ---------------------------------------------------------------------------
+dnl - Supported languages
+dnl ---------------------------------------------------------------------------
 GETTEXT_PACKAGE=glabels
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
+
+dnl Add the languages here.
 ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl cs it"
 AM_GLIB_GNU_GETTEXT
 
 
-
-dnl ****************************************
-dnl * Makefiles
-dnl ****************************************
+dnl ---------------------------------------------------------------------------
+dnl - Makefiles, etc.
+dnl ---------------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
 barcode-0.98/Makefile
@@ -137,11 +167,14 @@ glabels.spec
 ])
 
 
+dnl ---------------------------------------------------------------------------
+dnl - Print configuration information
+dnl ---------------------------------------------------------------------------
 echo "
-
 Configuration:
 
-        Prefix:                 ${prefix}
+	Package:                ${PACKAGE}-${VERSION}:
+        Installation prefix     ${prefix}
         Source code location:   ${srcdir}
         Compiler:               ${CC} 
 

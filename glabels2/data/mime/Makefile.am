@@ -21,7 +21,8 @@ EXTRA_DIST = \
 	$(keys_in_files)	\
 	$(mime_DATA)            \
 	$(app_DATA)		\
-	$(xml_in_files)
+	$(xml_in_files)		\
+	$(newmime_DATA)
 
 CLEANFILES = $(keys_files) $(xml_files)
 
