@@ -24,6 +24,7 @@
 
 #include <string.h>
 #include <glib.h>
+#include <libgnome/gnome-util.h>
 #include <math.h>
 #include <libgnomeprint/gnome-font.h>
 
@@ -33,10 +34,26 @@
 
 
 /****************************************************************************/
+/* Get '~/.glabels' directory path.                                         */
+/****************************************************************************/
+gchar *
+gl_util_get_home_data_dir (void)
+{
+        gchar *dir = gnome_util_prepend_user_home (".glabels");
+ 
+        /* Try to create ~/.glabels directory.  If it exists, no problem. */
+        mkdir (dir, 0775);
+ 
+        return dir;
+}
+
+
+
+/****************************************************************************/
 /* Append ".glabels" extension to filename if needed.                       */
 /****************************************************************************/
 gchar *
-gl_util_add_extension (const gchar * orig_filename)
+gl_util_add_extension (const gchar *orig_filename)
 {
 	gchar *new_filename, *extension;
 
@@ -59,7 +76,7 @@ gl_util_add_extension (const gchar * orig_filename)
 /* Remove ".glabels" extension from filename if needed.                     */
 /****************************************************************************/
 gchar *
-gl_util_remove_extension (const gchar * orig_filename)
+gl_util_remove_extension (const gchar *orig_filename)
 {
 	gchar *new_filename, *extension;
 
@@ -79,7 +96,7 @@ gl_util_remove_extension (const gchar * orig_filename)
 /* Make sure we have an absolute path to filename.                          */
 /****************************************************************************/
 gchar *
-gl_util_make_absolute (const gchar * filename)
+gl_util_make_absolute (const gchar *filename)
 {
 	gchar *pwd, *absolute_filename;
 
@@ -87,8 +104,7 @@ gl_util_make_absolute (const gchar * filename)
 		absolute_filename = g_strdup (filename);
 	} else {
 		pwd = g_get_current_dir ();
-		absolute_filename =
-		    g_strjoin (G_DIR_SEPARATOR_S, pwd, filename, NULL);
+		absolute_filename = g_build_filename (pwd, filename, NULL);
 		g_free (pwd);
 	}
 
@@ -99,7 +115,7 @@ gl_util_make_absolute (const gchar * filename)
 /* Create fractional representation of number, if possible.                 */
 /****************************************************************************/
 gchar *
-gl_util_fraction( gdouble x )
+gl_util_fraction (gdouble x)
 {
 	static gdouble denom[] = { 1., 2., 3., 4., 8., 16., 32., 0. };
 	gint i;
@@ -148,7 +164,7 @@ gl_util_just_to_string (GtkJustification just)
 }
 
 GtkJustification
-gl_util_string_to_just (const gchar * string)
+gl_util_string_to_just (const gchar *string)
 {
 
 	if (g_strcasecmp (string, "Left") == 0) {
@@ -180,7 +196,7 @@ gl_util_weight_to_string (GnomeFontWeight weight)
 }
 
 GnomeFontWeight
-gl_util_string_to_weight (const gchar * string)
+gl_util_string_to_weight (const gchar *string)
 {
 
 	if (g_strcasecmp (string, "Regular") == 0) {

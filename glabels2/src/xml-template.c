@@ -474,6 +474,46 @@ xml_parse_alias (xmlNodePtr  alias_node,
 }
 
 /****************************************************************************/
+/* Write single template to XML file.                                       */
+/****************************************************************************/
+void
+gl_xml_template_write_template_to_file (const glTemplate  *template,
+					const gchar       *utf8_filename)
+{
+	xmlDocPtr  doc;
+	xmlNsPtr   ns;
+	gint       xml_ret;
+	gchar     *filename;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	doc = xmlNewDoc ("1.0");
+	doc->xmlRootNode = xmlNewDocNode (doc, NULL, "Glabels-templates", NULL);
+
+	ns = xmlNewNs (doc->xmlRootNode, XML_NAME_SPACE, NULL);
+	xmlSetNs (doc->xmlRootNode, ns);
+
+	gl_xml_template_add_template (template, doc->xmlRootNode, ns);
+
+	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+	if (!filename)
+		g_warning (_("Utf8 conversion error."));
+	else {
+		xmlSetDocCompressMode (doc, 0);
+		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
+		xmlFreeDoc (doc);
+		if (xml_ret == -1) {
+
+			g_warning (_("Problem saving xml file."));
+
+		}
+		g_free (filename);
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/****************************************************************************/
 /* Add XML Template Node                                                    */
 /****************************************************************************/
 void

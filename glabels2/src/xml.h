@@ -25,6 +25,8 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
+#define XML_NAME_SPACE "http://snaught.com/glabels/2.0/"
+
 G_BEGIN_DECLS
 
 gdouble  gl_xml_get_prop_double   (xmlNodePtr    node,

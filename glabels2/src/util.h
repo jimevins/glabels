@@ -3,7 +3,7 @@
  *
  *  util.h:  various small utility functions
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,17 +26,23 @@
 #include <gtk/gtk.h>
 #include <libgnomeprint/gnome-font.h>
 
-extern gchar *gl_util_add_extension (const gchar * orig_filename);
-extern gchar *gl_util_remove_extension (const gchar * orig_filename);
+G_BEGIN_DECLS
 
-extern gchar *gl_util_make_absolute (const gchar * filename);
+gchar              *gl_util_get_home_data_dir     (void);
 
-extern gchar *gl_util_fraction( gdouble x );
+gchar              *gl_util_add_extension         (const gchar       *orig_filename);
+gchar              *gl_util_remove_extension      (const gchar       *orig_filename);
 
-extern const gchar *gl_util_just_to_string (GtkJustification just);
-extern GtkJustification gl_util_string_to_just (const gchar * string);
+gchar              *gl_util_make_absolute         (const gchar       *filename);
 
-extern const gchar *gl_util_weight_to_string (GnomeFontWeight weight);
-extern GnomeFontWeight gl_util_string_to_weight (const gchar * string);
+gchar              *gl_util_fraction              (gdouble            x);
 
-#endif				/* __UTIL_H__ */
+const gchar        *gl_util_just_to_string        (GtkJustification   just);
+GtkJustification    gl_util_string_to_just        (const gchar       *string);
+
+const gchar        *gl_util_weight_to_string      (GnomeFontWeight    weight);
+GnomeFontWeight     gl_util_string_to_weight      (const gchar       *string);
+
+G_END_DECLS
+
+#endif /* __UTIL_H__ */

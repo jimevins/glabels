@@ -50,7 +50,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define NAME_SPACE "http://snaught.com/glabels/2.0/"
 #define COMPAT01_NAME_SPACE "http://snaught.com/glabels/0.1/"
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
 #define COMPAT191_NAME_SPACE "http://snaught.com/glabels/1.92/"
@@ -253,7 +252,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 		return NULL;
 	}
 
-	ns = xmlSearchNsByHref (doc, root, NAME_SPACE);
+	ns = xmlSearchNsByHref (doc, root, XML_NAME_SPACE);
 	if (ns != NULL) {
 		label = xml_parse_label (root, status);
 	} else {
@@ -1013,7 +1012,7 @@ xml_label_to_doc (glLabel          *label,
 	doc = xmlNewDoc ("1.0");
 	doc->xmlRootNode = xmlNewDocNode (doc, NULL, "Glabels-document", NULL);
 
-	ns = xmlNewNs (doc->xmlRootNode, NAME_SPACE, NULL);
+	ns = xmlNewNs (doc->xmlRootNode, XML_NAME_SPACE, NULL);
 	xmlSetNs (doc->xmlRootNode, ns);
 
 	template = gl_label_get_template (label);

@@ -36,6 +36,9 @@ GList       *gl_xml_template_read_templates_from_file (GList             *templa
 
 glTemplate  *gl_xml_template_parse_template           (xmlNodePtr         template_node);
 
+void         gl_xml_template_write_template_to_file   (const glTemplate  *template,
+						       const gchar       *utf8_filename);
+
 void         gl_xml_template_add_template             (const glTemplate  *template,
 						       xmlNodePtr         root,
 						       xmlNsPtr           ns);

@@ -57,7 +57,6 @@ static glTemplate *template_full_page           (const gchar            *page_si
 
 static GList      *read_templates               (void);
 
-static gchar      *get_home_data_dir            (void);
 static GList      *read_template_files_from_dir (GList                  *templates,
 						 const gchar            *dirname);
 static gint        compare_origins              (gconstpointer           a,
@@ -169,6 +168,10 @@ gl_template_register (const glTemplate  *template)
 				  template->name, pa1->data);
 
 			if (g_strcasecmp (template->name, pa1->data) == 0) {
+
+				/* FIXME: make sure templates are really identical */
+				/*        if not, apply hash to name to make unique. */
+
 				gl_debug (DEBUG_TEMPLATE, "END (found)");
 				return;
 			}
@@ -179,10 +182,19 @@ gl_template_register (const glTemplate  *template)
 
 	if (gl_paper_is_id_known (template->page_size)) {
 
+		gchar *dir, *filename, *abs_filename;
+
 		gl_debug (DEBUG_TEMPLATE, "adding \"%s\"", template->name);
 		templates = g_list_prepend (templates, gl_template_dup (template));
 
-		/* TODO: write to a unique file in .glabels. */
+		/* FIXME: make sure filename is unique */
+		dir = gl_util_get_home_data_dir ();
+		filename = g_strconcat (template->name, ".template", NULL);
+		abs_filename = g_build_filename (dir, filename, NULL);
+		gl_xml_template_write_template_to_file (template, abs_filename);
+		g_free (dir);
+		g_free (filename);
+		g_free (abs_filename);
 
 	} else {
 		g_warning ("Cannot register new template with unknown page size.");
@@ -392,7 +404,7 @@ template_full_page (const gchar *page_size)
 static GList *
 read_templates (void)
 {
-	gchar *home_data_dir = get_home_data_dir ();
+	gchar *home_data_dir = gl_util_get_home_data_dir ();
 	GList *templates = NULL;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -408,23 +420,6 @@ read_templates (void)
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 	return templates;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  get '~/.glabels' directory path.                               */
-/*--------------------------------------------------------------------------*/
-static gchar *
-get_home_data_dir (void)
-{
-	gchar *dir = gnome_util_prepend_user_home (".glabels");
-
-	gl_debug (DEBUG_TEMPLATE, "START");
-
-	/* Try to create ~/.glabels directory.  If it exists, no problem. */
-	mkdir (dir, 0775);
-
-	gl_debug (DEBUG_TEMPLATE, "END");
-	return dir;
 }
 
 /*--------------------------------------------------------------------------*/

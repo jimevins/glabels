@@ -27,6 +27,7 @@
 
 #include "paper.h"
 #include "xml-paper.h"
+#include "util.h"
 
 #include "debug.h"
 
@@ -51,7 +52,6 @@ static GList *papers = NULL;
 /*===========================================*/
 
 static GList *read_papers (void);
-static gchar *get_home_data_dir (void);
 static GList *read_paper_files_from_dir (GList       *papers,
 					 const gchar *dirname);
 
@@ -338,7 +338,7 @@ void gl_paper_free (glPaper **paper)
 static GList *
 read_papers (void)
 {
-	gchar *home_data_dir = get_home_data_dir ();
+	gchar *home_data_dir = gl_util_get_home_data_dir ();
 	GList *papers = NULL;
 
 	gl_debug (DEBUG_PAPER, "START");
@@ -354,23 +354,6 @@ read_papers (void)
 
 	gl_debug (DEBUG_PAPER, "END");
 	return papers;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  get '~/.glabels' directory path.                               */
-/*--------------------------------------------------------------------------*/
-static gchar *
-get_home_data_dir (void)
-{
-	gchar *dir = gnome_util_prepend_user_home (".glabels");
-
-	gl_debug (DEBUG_PAPER, "START");
-
-	/* Try to create ~/.glabels directory.  If it exists, no problem. */
-	mkdir (dir, 0775);
-
-	gl_debug (DEBUG_PAPER, "END");
-	return dir;
 }
 
 /*--------------------------------------------------------------------------*/

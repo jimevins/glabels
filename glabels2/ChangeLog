@@ -1,0 +1,27 @@
+2003-12-26  Jim Evins  <evins@snaught.com>
+
+	* src/paper.c:
+	* src/template.c:
+	* src/util.c:
+	* src/util.h:
+		Moved local versions of get_home_data_dir() in paper.c and
+		template.c to util package.  Cleaned up formatting in
+		util.[ch].
+
+	* src/template.c:
+		In gl_template_register() save a copy of the template in
+		~/.glabels if the template is not known.  Still need to
+		handle duplicate filename case and duplicate name but
+		different template case.
+	
+	* src/xml-label.c:
+	* src/xml.h:
+		Moved local definition of NAME_SPACE macro from xml-label.c
+		to xml.h.
+	
+	* src/xml-template.c:
+	* src/xml-template.h:
+		Added function gl_xml_template_write_template_to_file(), used
+		in gl_template_register().
+
+	
