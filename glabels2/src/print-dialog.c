@@ -95,6 +95,9 @@ static GtkWidget *printer_page_new                (glPrintDialog      *dialog,
 static void       merge_changed_cb                (glLabel            *label,
 						   glPrintDialog      *dialog);
 
+static void       size_changed_cb                 (glLabel            *label,
+						   glPrintDialog      *dialog);
+
 static void       delete_event_cb                 (glPrintDialog      *dialog,
 						   gpointer            user_data);
 
@@ -346,6 +349,9 @@ job_page_new (glPrintDialog *dialog,
 	g_signal_connect (G_OBJECT(label), "merge_changed",
 			  G_CALLBACK (merge_changed_cb), dialog);
 
+	g_signal_connect (G_OBJECT(label), "size_changed",
+			  G_CALLBACK (size_changed_cb), dialog);
+
 	return vbox;
 }
 
@@ -398,6 +404,35 @@ merge_changed_cb (glLabel            *label,
 		gtk_widget_hide_all (dialog->priv->simple_frame);
 		gtk_widget_show_all (dialog->priv->merge_frame);
 	}
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  "size_changed" (template changed) callback.                    */
+/*--------------------------------------------------------------------------*/
+static void
+size_changed_cb (glLabel            *label,
+		 glPrintDialog      *dialog)
+{
+	gl_debug (DEBUG_PRINT, "START");
+
+	/* Remove and unref original widgets. */
+	gtk_container_remove (GTK_CONTAINER(GL_HIG_CATEGORY(dialog->priv->simple_frame)->vbox),
+			      dialog->priv->copies);
+	gtk_container_remove (GTK_CONTAINER(GL_HIG_CATEGORY(dialog->priv->merge_frame)->vbox),
+			      dialog->priv->prmerge);
+
+	/* Create new widgets based on updated label and install */
+	dialog->priv->copies = gl_wdgt_print_copies_new (label);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(dialog->priv->simple_frame),
+				    dialog->priv->copies);
+	dialog->priv->prmerge = gl_wdgt_print_merge_new (label);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(dialog->priv->merge_frame),
+				    dialog->priv->prmerge);
+
+	/* Update these widgets. */
+	merge_changed_cb (label, dialog);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
