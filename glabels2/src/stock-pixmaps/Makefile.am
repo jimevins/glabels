@@ -27,7 +27,9 @@ IMAGES = 	 			\
 	stock_align_hcenter_16.png	\
 	stock_align_top_16.png		\
 	stock_align_bottom_16.png	\
-	stock_align_vcenter_16.png
+	stock_align_vcenter_16.png	\
+	stock_center_horiz_16.png	\
+	stock_center_vert_16.png
 
 VARIABLES1 = \
 		stock_arrow_24 		$(srcdir)/stock_arrow_24.png	\
@@ -57,7 +59,10 @@ VARIABLES1 = \
 		stock_align_hcenter_16	$(srcdir)/stock_align_hcenter_16.png \
 		stock_align_top_16	$(srcdir)/stock_align_top_16.png \
 		stock_align_bottom_16	$(srcdir)/stock_align_bottom_16.png \
-		stock_align_vcenter_16	$(srcdir)/stock_align_vcenter_16.png
+		stock_align_vcenter_16	$(srcdir)/stock_align_vcenter_16.png \
+		stock_center_horiz_16	$(srcdir)/stock_center_horiz_16.png \
+		stock_center_vert_16	$(srcdir)/stock_center_vert_16.png
+
 
 noinst_DATA = stockpixbufs.h
 CLEANFILES = $(noinst_DATA)

@@ -78,6 +78,8 @@ gl_stock_init (void)
 		{ GL_STOCK_ALIGN_TOP,     "AlignTop",       0, 0, NULL },
 		{ GL_STOCK_ALIGN_BOTTOM,  "AlignBottom",    0, 0, NULL },
 		{ GL_STOCK_ALIGN_VCENTER, "AlignVCenter",   0, 0, NULL },
+		{ GL_STOCK_CENTER_HORIZ,  "CenterHoriz",    0, 0, NULL },
+		{ GL_STOCK_CENTER_VERT,   "CenterVert",     0, 0, NULL },
 	};
 
 	gtk_stock_add (items, G_N_ELEMENTS (items));
@@ -106,6 +108,8 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_ALIGN_TOP,     NULL, stock_align_top_16);
 	add_icons (factory, GL_STOCK_ALIGN_BOTTOM,  NULL, stock_align_bottom_16);
 	add_icons (factory, GL_STOCK_ALIGN_VCENTER, NULL, stock_align_vcenter_16);
+	add_icons (factory, GL_STOCK_CENTER_HORIZ,  NULL, stock_center_horiz_16);
+	add_icons (factory, GL_STOCK_CENTER_VERT,   NULL, stock_center_vert_16);
 
 	g_object_unref (G_OBJECT(factory));
 }

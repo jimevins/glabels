@@ -45,6 +45,8 @@
 #define GL_STOCK_ALIGN_TOP     "gl_stock_align_top"
 #define GL_STOCK_ALIGN_BOTTOM  "gl_stock_align_bottom"
 #define GL_STOCK_ALIGN_VCENTER "gl_stock_align_vcenter"
+#define GL_STOCK_CENTER_HORIZ  "gl_stock_center_horiz"
+#define GL_STOCK_CENTER_VERT   "gl_stock_center_vert"
 
 void gl_stock_init (void);
 
