@@ -335,21 +335,6 @@ gl_view_object_item_new (glViewObject *view_object,
 }
 
 /*****************************************************************************/
-/* Return dialog for controlling/viewing object properties.                  */
-/*****************************************************************************/
-GtkWidget *
-gl_view_object_get_dialog (glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object), NULL);
-	
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view_object->private->property_dialog;
-}
-
-/*****************************************************************************/
 /* Highlight view of object.                                                 */
 /*****************************************************************************/
 void
