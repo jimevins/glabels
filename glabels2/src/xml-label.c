@@ -255,6 +255,8 @@ xml_doc_to_label (xmlDocPtr         doc,
 	ns = xmlSearchNsByHref (doc, root, GL_XML_NAME_SPACE);
 	if (ns != NULL) {
 		label = xml_parse_label (root, status);
+		if (label)
+			gl_label_set_compression (label, xmlGetDocCompressMode (doc));
 	} else {
 		/* Try compatability mode 0.1 */
 		ns = xmlSearchNsByHref (doc, root, COMPAT01_NAME_SPACE);
@@ -952,7 +954,7 @@ gl_xml_label_save (glLabel          *label,
 	if (!filename)
 		g_warning (_("Utf8 conversion error."));
 	else {
-		xmlSetDocCompressMode (doc, 9);
+		xmlSetDocCompressMode (doc, gl_label_get_compression (label));
 		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 		xmlFreeDoc (doc);
 		if (xml_ret == -1) {

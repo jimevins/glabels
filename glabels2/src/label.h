@@ -126,6 +126,11 @@ void          gl_label_set_filename            (glLabel       *label,
 
 void          gl_label_clear_modified          (glLabel       *label);
 
+void          gl_label_set_compression         (glLabel       *label,
+						gint           compression);
+
+gint          gl_label_get_compression         (glLabel       *label);
+
 G_END_DECLS
 
 

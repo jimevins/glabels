@@ -45,6 +45,7 @@ struct _glLabelPrivate {
         gboolean     rotate_flag;
 
 	gchar       *filename;
+	gint         compression;
 	gboolean     modified_flag;
 	gint         untitled_instance;
 
@@ -229,6 +230,8 @@ gl_label_new (void)
 	gl_debug (DEBUG_LABEL, "START");
 
 	label = g_object_new (gl_label_get_type(), NULL);
+
+	label->private->compression = 9;
 
 	label->private->modified_flag = FALSE;
 
@@ -654,4 +657,33 @@ gl_label_clear_modified (glLabel *label)
 }
 
 
+/****************************************************************************/
+/* Set compression level.                                                   */
+/****************************************************************************/
+void
+gl_label_set_compression (glLabel  *label,
+			  gint      compression)
+{
+	gl_debug (DEBUG_LABEL, "set %d", compression);
+
+	/* Older versions of libxml2 always return a -1 for documents "read in," so
+	 * default to 9.  Also, default to 9 for anything else out of range. */
+	if ((compression < 0) || (compression >9)) {
+		compression = 9;
+	}
+
+	gl_debug (DEBUG_LABEL, "actual set %d", compression);
+	label->private->compression = compression;
+}
+
+
+/****************************************************************************/
+/* Get compression level.                                                   */
+/****************************************************************************/
+gint
+gl_label_get_compression (glLabel *label)
+{
+	gl_debug (DEBUG_LABEL, "return %d", label->private->compression);
+	return label->private->compression;
+}
 
