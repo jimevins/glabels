@@ -201,7 +201,9 @@ gl_xml_template_parse_template (xmlNodePtr template_node)
 			xml_parse_alias (node, template);
 		} else {
 			if (!xmlNodeIsText (node)) {
-				g_warning ("bad node =  \"%s\"", node->name);
+				if (!xmlStrEqual (node->name,"comment")) {
+					g_warning ("bad node =  \"%s\"",node->name);
+				}
 			}
 		}
 	}
@@ -241,7 +243,9 @@ xml_parse_label_rectangle (xmlNodePtr  label_node,
 		} else if (xmlStrEqual (node->name, "Markup-circle")) {
 			xml_parse_markup_circle (node, template);
 		} else if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -274,7 +278,9 @@ xml_parse_label_round (xmlNodePtr  label_node,
 		} else if (xmlStrEqual (node->name, "Markup-line")) {
 			xml_parse_markup_line (node, template);
 		} else if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -310,7 +316,9 @@ xml_parse_label_cd (xmlNodePtr  label_node,
 		} else if (xmlStrEqual (node->name, "Markup-line")) {
 			xml_parse_markup_line (node, template);
 		} else if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -342,7 +350,9 @@ xml_parse_layout (xmlNodePtr  layout_node,
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -374,7 +384,9 @@ xml_parse_markup_margin (xmlNodePtr  markup_node,
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -405,7 +417,9 @@ xml_parse_markup_line (xmlNodePtr  markup_node,
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
@@ -435,7 +449,9 @@ xml_parse_markup_circle (xmlNodePtr  markup_node,
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			if (!xmlStrEqual (node->name,"comment")) {
+				g_warning ("bad node =  \"%s\"",node->name);
+			}
 		}
 	}
 
