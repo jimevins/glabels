@@ -41,8 +41,16 @@ desktop-file-install --vendor gnome                \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/%{name}.desktop
 
+%{__rm} -rf $RPM_BUILD_ROOT/var/scrollkeeper
+
 %clean
 %{__rm} -rf %{buildroot}
+
+%post
+scrollkeeper-update
+
+%postun
+scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(-, root, root)
@@ -51,13 +59,17 @@ desktop-file-install --vendor gnome                \
 %{_bindir}/*
 %{_datadir}/glabels/
 %{_datadir}/pixmaps/*
+%{_datadir}/omf/
 %{_datadir}/applications/*.desktop
 %{_datadir}/application-registry/*
 %{_datadir}/mime-info/*
 
 
 %changelog
-* Sat Oct 18 2002 Jim Evins <evins@snaught.com>
+* Tue Dec 23 2003 Jim Evins <evins@snaught.com>
+- Added support for scrollkeeper
+
+* Sat Oct 18 2003 Jim Evins <evins@snaught.com>
 - Updated, based largely on Dag Wieers <dag@wieers.com> glabels.spec
 
 * Sat May 19 2001 Jim Evins <evins@snaught.com>
