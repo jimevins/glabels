@@ -310,10 +310,13 @@ gl_view_finalize (GObject *object)
 GtkWidget *
 gl_view_new (glLabel *label)
 {
-	glView *view = g_object_new (gl_view_get_type (), NULL);
+	glView *view;
 
 	gl_debug (DEBUG_VIEW, "START");
 
+	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
+
+	view = g_object_new (gl_view_get_type (), NULL);
 	view->label = label;
 
 	gl_view_construct (view);
@@ -363,14 +366,16 @@ static GtkWidget *
 gl_view_construct_canvas (glView *view)
 {
 	gdouble   scale;
-	glLabel  *label = view->label;
+	glLabel  *label;
 	gdouble   label_width, label_height;
 	GdkColor *bg_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), NULL);
-	g_return_val_if_fail (label != NULL, NULL);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
+	g_return_val_if_fail (view->label && GL_IS_LABEL (view->label), NULL);
+
+	label = view->label;
 
 	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
 	view->canvas = gnome_canvas_new_aa ();
@@ -480,6 +485,9 @@ get_apropriate_scale (gdouble w, gdouble h)
 static void
 draw_layers (glView *view)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
 	draw_bg_fg_layers (view);
 	draw_grid_layer (view);
 	draw_markup_layer (view);
@@ -529,6 +537,9 @@ draw_label_layer (glView *view)
 	glLabelObject    *object;
 	glViewObject     *view_object;
 
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 	view->label_group = GNOME_CANVAS_GROUP(
 		gnome_canvas_item_new (group,
@@ -576,6 +587,8 @@ draw_highlight_layer (glView *view)
 {
 	GnomeCanvasGroup *group;
 
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 	view->highlight_group = GNOME_CANVAS_GROUP(
 		gnome_canvas_item_new (group,
@@ -595,6 +608,9 @@ draw_bg_fg_layers (glView *view)
 	glTemplate       *template;
 	GnomeCanvasGroup *group;
 
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 	view->bg_group = GNOME_CANVAS_GROUP(
 		gnome_canvas_item_new (group,
@@ -609,7 +625,7 @@ draw_bg_fg_layers (glView *view)
 				       "y", 0.0,
 				       NULL));
 
-	label = view->label;
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	switch (template->label.style) {
@@ -648,15 +664,17 @@ draw_bg_fg_layers (glView *view)
 static void
 draw_bg_fg_rect (glView *view)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           w, h;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label = view->label;
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -691,7 +709,7 @@ draw_bg_fg_rect (glView *view)
 static void
 draw_bg_fg_rounded_rect (glView *view)
 {
-	glLabel           *label = view->label;
+	glLabel           *label;
 	GnomeCanvasPoints *points;
 	gint               i_coords, i_theta;
 	glTemplate        *template;
@@ -700,8 +718,10 @@ draw_bg_fg_rounded_rect (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label = view->label;
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -760,16 +780,17 @@ draw_bg_fg_rounded_rect (glView *view)
 static void
 draw_bg_fg_round (glView *view)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           r;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
 
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	r = template->label.round.r;
@@ -804,16 +825,17 @@ draw_bg_fg_round (glView *view)
 static void
 draw_bg_fg_cd (glView *view)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           r1, r2;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	r1 = template->label.cd.r1;
@@ -870,7 +892,7 @@ draw_bg_fg_cd (glView *view)
 static void
 draw_bg_fg_cd_bc (glView *view)
 {
-	glLabel           *label = view->label;
+	glLabel           *label;
 	glTemplate        *template;
 	GnomeCanvasPoints *points;
 	gint               i_coords, i_theta;
@@ -880,8 +902,10 @@ draw_bg_fg_cd_bc (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label    = view->label;
 
 	template = gl_label_get_template (label);
 	gl_label_get_size (label, &w, &h);
@@ -1075,6 +1099,9 @@ draw_markup_layer (glView *view)
 	GList            *p;
 	glTemplateMarkup *markup;
 
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 	view->markup_group = GNOME_CANVAS_GROUP(
 		gnome_canvas_item_new (group,
@@ -1082,7 +1109,8 @@ draw_markup_layer (glView *view)
 				       "x", 0.0,
 				       "y", 0.0,
 				       NULL));
-	label = view->label;
+
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	for ( p=template->label.any.markups; p != NULL; p=p->next ) {
@@ -1114,7 +1142,10 @@ draw_markup_margin (glView                 *view,
 	glLabel    *label;
 	glTemplate *template;
 
-	label = view->label;
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	switch (template->label.style) {
@@ -1159,15 +1190,17 @@ static void
 draw_markup_margin_rect (glView                 *view,
 			 glTemplateMarkupMargin *margin)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           w, h, m;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label = view->label;
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -1194,7 +1227,7 @@ static void
 draw_markup_margin_rounded_rect (glView                 *view,
 				 glTemplateMarkupMargin *margin)
 {
-	glLabel           *label = view->label;
+	glLabel           *label;
 	GnomeCanvasPoints *points;
 	gint               i_coords, i_theta;
 	glTemplate        *template;
@@ -1203,8 +1236,10 @@ draw_markup_margin_rounded_rect (glView                 *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+	label = view->label;
 
 	gl_label_get_size (label, &w, &h);
 	template = gl_label_get_template (label);
@@ -1260,16 +1295,17 @@ static void
 draw_markup_margin_round (glView                 *view,
 			  glTemplateMarkupMargin *margin)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           r, m;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	r = template->label.round.r;
@@ -1296,16 +1332,17 @@ static void
 draw_markup_margin_cd (glView                 *view,
 		       glTemplateMarkupMargin *margin)
 {
-	glLabel          *label = view->label;
+	glLabel          *label;
 	glTemplate       *template;
 	gdouble           m, r1, r2;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
+	label    = view->label;
 	template = gl_label_get_template (label);
 
 	r1 = template->label.cd.r1;
@@ -1343,7 +1380,7 @@ static void
 draw_markup_margin_cd_bc (glView                 *view,
 			  glTemplateMarkupMargin *margin)
 {
-	glLabel           *label = view->label;
+	glLabel           *label;
 	glTemplate        *template;
 	gdouble            m, r1, r2;
 	GnomeCanvasPoints *points;
@@ -1354,9 +1391,10 @@ draw_markup_margin_cd_bc (glView                 *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (label != NULL);
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
+	label    = view->label;
 	template = gl_label_get_template (label);
 	gl_label_get_size (label, &w, &h);
 	x0 = w/2.0;
@@ -1463,7 +1501,7 @@ draw_markup_line (glView               *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	points = gnome_canvas_points_new (2);
 	points->coords[0] = line->x1;
@@ -1489,6 +1527,8 @@ draw_markup_line (glView               *view,
 /*****************************************************************************/
 void       gl_view_show_grid               (glView            *view)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->grid_group));
 }
 
@@ -1497,6 +1537,8 @@ void       gl_view_show_grid               (glView            *view)
 /*****************************************************************************/
 void       gl_view_hide_grid               (glView            *view)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->grid_group));
 }
 
@@ -1506,6 +1548,8 @@ void       gl_view_hide_grid               (glView            *view)
 void       gl_view_set_grid_spacing        (glView            *view,
 					    gdouble            spacing)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	view->grid_spacing = spacing;
 
 	gtk_object_destroy (GTK_OBJECT(view->grid_group));
@@ -1517,6 +1561,8 @@ void       gl_view_set_grid_spacing        (glView            *view,
 /*****************************************************************************/
 void       gl_view_show_markup             (glView            *view)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->markup_group));
 }
 
@@ -1525,6 +1571,8 @@ void       gl_view_show_markup             (glView            *view)
 /*****************************************************************************/
 void       gl_view_hide_markup             (glView            *view)
 {
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->markup_group));
 }
 
@@ -1538,7 +1586,7 @@ gl_view_arrow_mode (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (!cursor) {
 		cursor = gdk_cursor_new (GDK_LEFT_PTR);
@@ -1562,7 +1610,7 @@ gl_view_object_create_mode (glView            *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	switch (type) {
 	case GL_LABEL_OBJECT_BOX:
@@ -1605,6 +1653,8 @@ gl_view_select_object (glView       *view,
 {
 	gl_debug (DEBUG_VIEW, "START");
 
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
 	select_object_real (view, view_object);
 
 	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
@@ -1620,6 +1670,8 @@ gl_view_unselect_object (glView       *view,
 			 glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	unselect_object_real (view, view_object);
 
@@ -1638,7 +1690,7 @@ gl_view_select_all (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	/* 1st unselect anything already selected. */
 	for (p = view->selected_object_list; p != NULL; p = p_next) {
@@ -1666,7 +1718,7 @@ gl_view_unselect_all (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p_next) {
 		p_next = p->next;
@@ -1695,7 +1747,7 @@ gl_view_select_region (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail ((x1 <= x2) && (y1 <= y2));
 
 	for (p = view->object_list; p != NULL; p = p->next) {
@@ -1727,7 +1779,7 @@ select_object_real (glView       *view,
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
 	if (!gl_view_is_object_selected (view, view_object)) {
@@ -1749,7 +1801,7 @@ unselect_object_real (glView       *view,
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
 	gl_view_object_hide_highlight (view_object);
@@ -1773,7 +1825,7 @@ object_at (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	item = gnome_canvas_get_item_at (GNOME_CANVAS (view->canvas), x, y);
 
@@ -1800,6 +1852,8 @@ is_item_member_of_group (glView          *view,
 	GnomeCanvasItem *parent;
 	GnomeCanvasItem *root_group;
 
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
 	root_group = GNOME_CANVAS_ITEM(gnome_canvas_root (GNOME_CANVAS (view->canvas)));
 
 	for ( parent=item->parent; parent && (parent!=root_group); parent=parent->parent) {
@@ -1817,7 +1871,7 @@ gl_view_is_object_selected (glView       *view,
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 	g_return_val_if_fail (GL_IS_VIEW_OBJECT (view_object), FALSE);
 
 	if (g_list_find (view->selected_object_list, view_object) == NULL) {
@@ -1834,7 +1888,7 @@ gl_view_is_selection_empty (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	if (view->selected_object_list == NULL) {
 		return TRUE;
@@ -1851,7 +1905,7 @@ gl_view_is_selection_atomic (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	if (view->selected_object_list == NULL)
 		return FALSE;
@@ -1870,7 +1924,7 @@ gl_view_delete_selection (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p_next) {
 		p_next = p->next;
@@ -1892,7 +1946,7 @@ gl_view_edit_object_props (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (gl_view_is_selection_atomic (view)) {
 
@@ -1916,7 +1970,7 @@ gl_view_raise_selection (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -1939,7 +1993,7 @@ gl_view_lower_selection (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -1963,7 +2017,7 @@ gl_view_rotate_selection (glView *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -1986,7 +2040,7 @@ gl_view_rotate_selection_left (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -2009,7 +2063,7 @@ gl_view_rotate_selection_right (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -2032,7 +2086,7 @@ gl_view_flip_selection_horiz (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -2055,7 +2109,7 @@ gl_view_flip_selection_vert (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
@@ -2079,7 +2133,7 @@ gl_view_align_selection_left (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2122,7 +2176,7 @@ gl_view_align_selection_right (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2165,7 +2219,7 @@ gl_view_align_selection_hcenter (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2225,7 +2279,7 @@ gl_view_align_selection_top (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2267,7 +2321,7 @@ gl_view_align_selection_bottom (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2310,7 +2364,7 @@ gl_view_align_selection_vcenter (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view) &&
 			  !gl_view_is_selection_atomic (view));
@@ -2370,7 +2424,7 @@ gl_view_center_selection_horiz (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view));
 
@@ -2404,7 +2458,7 @@ gl_view_center_selection_vert (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	g_return_if_fail (!gl_view_is_selection_empty (view));
 
@@ -2458,7 +2512,7 @@ gl_view_cut (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	gl_view_copy (view);
 	gl_view_delete_selection (view);
@@ -2480,7 +2534,7 @@ gl_view_copy (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (view->selected_object_list) {
 
@@ -2520,7 +2574,7 @@ gl_view_paste (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	gtk_selection_convert (GTK_WIDGET (view->invisible),
 			       clipboard_atom, GDK_SELECTION_TYPE_STRING,
@@ -2540,7 +2594,7 @@ gl_view_zoom_in (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	/* Find index of current scale (or best match) */
 	i_min = 1;		/* start with 2nd largest scale */
@@ -2571,7 +2625,7 @@ gl_view_zoom_out (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	/* Find index of current scale (or best match) */
 	i_min = 0;		/* start with largest scale */
@@ -2604,7 +2658,7 @@ gl_view_set_zoom (glView  *view,
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (scale > 0.0);
 
 	view->scale = scale * HOME_SCALE;
@@ -2624,7 +2678,7 @@ gl_view_get_zoom (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), 1.0);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
 
 	return view->scale / HOME_SCALE;
 }
@@ -2650,7 +2704,7 @@ gl_view_is_zoom_min (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	return view->scale <= scales[N_SCALES-1];
 }
@@ -2663,7 +2717,7 @@ gl_view_edit_merge_props (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (view->merge_props_dialog != NULL) {
 		gtk_widget_show_all (view->merge_props_dialog);
@@ -2690,6 +2744,8 @@ canvas_event (GnomeCanvas *canvas,
 	gdouble x, y;
 
 	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	/* emit pointer signals regardless of state */
 	switch (event->type) {
@@ -2777,6 +2833,8 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 	GdkCursor *cursor;
 
 	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	switch (event->type) {
 
@@ -2929,7 +2987,7 @@ construct_selection_menu (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	menu = gtk_menu_new ();
 
@@ -3127,7 +3185,7 @@ construct_empty_selection_menu (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	menu = gtk_menu_new ();
 
@@ -3155,7 +3213,7 @@ gl_view_popup_menu (glView       *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (gl_view_is_selection_empty (view)) {
 
@@ -3202,7 +3260,7 @@ selection_clear_cb (GtkWidget         *widget,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	view->have_selection = FALSE;
 	g_object_unref (view->selection_data);
@@ -3227,7 +3285,7 @@ selection_get_cb (GtkWidget        *widget,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (view->have_selection) {
 
@@ -3260,7 +3318,7 @@ selection_received_cb (GtkWidget        *widget,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (selection_data->length < 0) {
 		return;
