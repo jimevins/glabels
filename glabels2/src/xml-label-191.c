@@ -151,6 +151,7 @@ gl_xml_label_191_parse (xmlNodePtr        root,
 				*status = XML_LABEL_UNKNOWN_MEDIA;
 				return NULL;
 			}
+			gl_template_register (template);
 			gl_label_set_template (label, template);
 			gl_template_free (&template);
 		} else if (xmlStrEqual (node->name, "Objects")) {

@@ -46,6 +46,8 @@ void                 gl_paper_free_id_list        (GList            **ids);
 GList               *gl_paper_get_name_list       (void);
 void                 gl_paper_free_name_list      (GList            **names);
 
+gboolean             gl_paper_is_id_known         (const gchar       *id);
+
 glPaper             *gl_paper_from_id             (const gchar       *id);
 glPaper             *gl_paper_from_name           (const gchar       *name);
 

@@ -150,6 +150,48 @@ gl_template_free_name_list (GList **names)
 }
 
 /*****************************************************************************/
+/* Register template: if not in current list, add it.                        */
+/*****************************************************************************/
+void
+gl_template_register (const glTemplate  *template)
+{
+	GList      *p_tmplt, *pa1;
+	glTemplate *template1;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
+		template1 = (glTemplate *) p_tmplt->data;
+
+		for (pa1=template1->alias; pa1!=NULL; pa1=pa1->next) {
+			
+			gl_debug (DEBUG_TEMPLATE, "comparing \"%s\" & \"%s\"",
+				  template->name, pa1->data);
+
+			if (g_strcasecmp (template->name, pa1->data) == 0) {
+				gl_debug (DEBUG_TEMPLATE, "END (found)");
+				return;
+			}
+				
+		}
+
+	}
+
+	if (gl_paper_is_id_known (template->page_size)) {
+
+		gl_debug (DEBUG_TEMPLATE, "adding \"%s\"", template->name);
+		templates = g_list_prepend (templates, gl_template_dup (template));
+
+		/* TODO: write to a unique file in .glabels. */
+
+	} else {
+		g_warning ("Cannot register new template with unknown page size.");
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*****************************************************************************/
 /* Return a template structure from a name.                                  */
 /*****************************************************************************/
 glTemplate *
@@ -191,7 +233,9 @@ gl_template_from_name (const gchar *name)
 	g_strfreev (split_name);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
-	return NULL;
+
+	/* No matching template has been found so return the first template */
+	return gl_template_dup ((glTemplate *) templates->data);
 }
 
 /*****************************************************************************/

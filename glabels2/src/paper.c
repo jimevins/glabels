@@ -162,6 +162,34 @@ gl_paper_free_name_list (GList **names)
 }
 
 /*****************************************************************************/
+/* Is page size id known?                                                    */
+/*****************************************************************************/
+gboolean
+gl_paper_is_id_known (const gchar *id)
+{
+	GList       *p;
+	glPaper     *paper;
+
+	gl_debug (DEBUG_PAPER, "START");
+
+	if (id == NULL) {
+		gl_debug (DEBUG_PAPER, "END (false, id=NULL)");
+		return FALSE;
+	}
+
+	for (p = papers; p != NULL; p = p->next) {
+		paper = (glPaper *) p->data;
+		if (g_strcasecmp (paper->id, id) == 0) {
+			gl_debug (DEBUG_PAPER, "END (true)");
+			return TRUE;
+		}
+	}
+
+	gl_debug (DEBUG_PAPER, "END (false)");
+	return FALSE;
+}
+
+/*****************************************************************************/
 /* Return a paper structure from id.                                         */
 /*****************************************************************************/
 glPaper *

@@ -151,6 +151,8 @@ void                 gl_template_init                (void);
 GList               *gl_template_get_name_list       (const gchar       *page_size);
 void                 gl_template_free_name_list      (GList            **names);
 
+void                 gl_template_register            (const glTemplate  *template);
+
 glTemplate          *gl_template_from_name           (const gchar       *name);
 
 gchar               *gl_template_get_name_with_desc  (const glTemplate  *template);

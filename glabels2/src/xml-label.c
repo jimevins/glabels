@@ -329,9 +329,11 @@ xml_parse_label (xmlNodePtr        root,
 		if (xmlStrEqual (child_node->name, "Template")) {
 			template = gl_xml_template_parse_template (child_node);
 			if (!template) {
+				g_object_unref (label);
 				*status = XML_LABEL_UNKNOWN_MEDIA;
 				return NULL;
 			}
+			gl_template_register (template);
 			gl_label_set_template (label, template);
 			gl_template_free (&template);
 		} else if (xmlStrEqual (child_node->name, "Objects")) {
@@ -344,6 +346,9 @@ xml_parse_label (xmlNodePtr        root,
 			if (!xmlNodeIsText (child_node)) {
 				g_warning (_("bad node in Document node =  \"%s\""),
 					   child_node->name);
+				g_object_unref (label);
+				*status = XML_LABEL_ERROR_OPEN_PARSE;
+				return NULL;
 			}
 		}
 	}
