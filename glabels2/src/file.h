@@ -34,6 +34,10 @@ G_BEGIN_DECLS
 void     gl_file_new         (GtkWindow       *window);
 
 
+void     gl_file_properties  (glLabel         *label,
+			      GtkWindow       *window);
+
+
 void     gl_file_open        (GtkWindow       *window);
 
 

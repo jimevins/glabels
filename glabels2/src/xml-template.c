@@ -158,6 +158,8 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 			g_warning (_("Unknown page size id \"%s\", trying as name"),
 				   template->page_size);
 			paper = gl_paper_from_name (template->page_size);
+			g_free (template->page_size);
+			template->page_size = g_strdup (paper->id);
 		}
 		if (paper != NULL) {
 			template->page_width  = paper->width;

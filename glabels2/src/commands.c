@@ -56,6 +56,21 @@ gl_cmd_file_new (BonoboUIComponent *uic,
 }
 
 /****************************************************************************/
+/* File->Properties command.                                                */
+/****************************************************************************/
+void 
+gl_cmd_file_properties (BonoboUIComponent *uic,
+			gpointer           user_data,
+			const gchar       *verbname)
+{
+	glWindow *window = GL_WINDOW (user_data);
+
+	gl_debug (DEBUG_COMMANDS, "");
+	
+	gl_file_properties (GL_VIEW(window->view)->label, GTK_WINDOW(window));
+}
+
+/****************************************************************************/
 /* File->Open command.                                                      */
 /****************************************************************************/
 void 

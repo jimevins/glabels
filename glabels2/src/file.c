@@ -50,21 +50,30 @@ static gchar *save_path = NULL;
 /*===========================================*/
 /* Local function prototypes.                */
 /*===========================================*/
-static void create_new_dialog_widgets (glHigDialog       *dlg);
-static void new_template_changed      (glWdgtMediaSelect *select,
-				       gpointer           data);
-static void new_response              (GtkDialog         *dlg,
-				       gint               response,
-				       gpointer           user_data);
-static void open_ok                   (GtkWidget         *widget,
-				       GtkFileSelection  *fsel);
+static void create_new_dialog_widgets        (glHigDialog       *dlg);
+static void new_template_changed             (glWdgtMediaSelect *select,
+					      gpointer           data);
+static void new_response                     (GtkDialog         *dlg,
+					      gint               response,
+					      gpointer           user_data);
 
-static void save_as_ok_cb             (GtkWidget         *widget,
-				       GtkFileSelection  *fsel);
-static void save_as_cancel_cb         (GtkWidget         *widget,
-				       GtkFileSelection  *fsel);
-static void save_as_destroy_cb        (GtkWidget         *widget,
-				       gboolean          *destroy_flag);
+static void create_properties_dialog_widgets (glHigDialog       *dlg,
+					      glLabel           *label);
+static void properties_template_changed      (glWdgtMediaSelect *select,
+					      gpointer           data);
+static void properties_response              (GtkDialog         *dlg,
+					      gint               response,
+					      gpointer           user_data);
+
+static void open_ok                          (GtkWidget         *widget,
+					      GtkFileSelection  *fsel);
+
+static void save_as_ok_cb                    (GtkWidget         *widget,
+					      GtkFileSelection  *fsel);
+static void save_as_cancel_cb                (GtkWidget         *widget,
+					      GtkFileSelection  *fsel);
+static void save_as_destroy_cb               (GtkWidget         *widget,
+					      gboolean          *destroy_flag);
 
 
 /*****************************************************************************/
@@ -222,6 +231,170 @@ new_response (GtkDialog *dlg,
 			gtk_widget_show_all (new_window);
 		}
 		
+
+		break;
+	}
+
+	gtk_widget_destroy (GTK_WIDGET (dlg));
+
+	gl_debug (DEBUG_FILE, "END");
+}
+
+
+/*****************************************************************************/
+/* "Properties" menu callback.                                               */
+/*****************************************************************************/
+void
+gl_file_properties (glLabel   *label,
+		    GtkWindow *window)
+{
+	GtkWidget    *dlg;
+
+	gl_debug (DEBUG_FILE, "START");
+
+	g_return_if_fail (label && GL_IS_LABEL (label));
+	g_return_if_fail (window && GTK_IS_WINDOW (window));
+
+	dlg = gl_hig_dialog_new_with_buttons (_("Label properties"),
+					      window,
+					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      NULL);
+
+	create_properties_dialog_widgets (GL_HIG_DIALOG (dlg), label);
+
+	g_object_set_data (G_OBJECT (dlg), "label", label);
+
+	g_signal_connect (G_OBJECT(dlg), "response",
+			  G_CALLBACK (properties_response), dlg);
+
+        gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
+	gtk_widget_show_all (GTK_WIDGET (dlg));
+
+	gl_debug (DEBUG_FILE, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Create widgets.                                                 */
+/*---------------------------------------------------------------------------*/
+static void
+create_properties_dialog_widgets (glHigDialog *dlg,
+				  glLabel     *label)
+{
+	GtkWidget  *wframe, *template_entry, *rotate_sel;
+	glTemplate *template;
+	gboolean    rotate_flag;
+
+	gl_debug (DEBUG_FILE, "START");
+
+	wframe = gl_hig_category_new (_("Media Type"));
+	gl_hig_dialog_add_widget (dlg, wframe);
+
+	template_entry = gl_wdgt_media_select_new ();
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), template_entry);
+
+	wframe = gl_hig_category_new (_("Label orientation"));
+	gl_hig_dialog_add_widget (dlg, wframe);
+
+	rotate_sel = gl_wdgt_rotate_label_new ();
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), rotate_sel);
+
+	g_object_set_data (G_OBJECT (dlg), "template_entry", template_entry);
+	g_object_set_data (G_OBJECT (dlg), "rotate_sel", rotate_sel);
+
+	g_signal_connect (G_OBJECT (template_entry), "changed",
+			  G_CALLBACK (properties_template_changed), rotate_sel);
+
+	template = gl_label_get_template (label);
+	rotate_flag = gl_label_get_rotate_flag (label);
+
+	gl_debug (DEBUG_FILE, "%s, %s", template->page_size, template->name->data);
+
+	if (template->page_size != NULL) {
+		gl_wdgt_media_select_set_page_size (GL_WDGT_MEDIA_SELECT (template_entry),
+						    template->page_size);
+	}
+	if (template->name->data != NULL) {
+		gl_wdgt_media_select_set_name (GL_WDGT_MEDIA_SELECT (template_entry),
+					       template->name->data);
+		gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL
+						    (rotate_sel), template->name->data);
+	} else {
+		sheet_name =
+		    gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (template_entry));
+		gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL
+						    (rotate_sel), sheet_name);
+	}
+	gl_wdgt_rotate_label_set_state (GL_WDGT_ROTATE_LABEL (rotate_sel), rotate_flag);
+
+	gl_debug (DEBUG_FILE, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Properties template changed callback.                           */
+/*---------------------------------------------------------------------------*/
+static void
+properties_template_changed (glWdgtMediaSelect *select,
+			     gpointer           data)
+{
+	glWdgtRotateLabel *rotate_sel = GL_WDGT_ROTATE_LABEL (data);
+	gchar             *name;
+
+	gl_debug (DEBUG_FILE, "START");
+
+	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (select));
+
+	gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL (rotate_sel),
+						name);
+
+	g_free (name);
+
+	gl_debug (DEBUG_FILE, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Properties "ok" button callback.                                */
+/*---------------------------------------------------------------------------*/
+static void
+properties_response (GtkDialog *dlg,
+		     gint       response,
+		     gpointer   user_data)
+{
+	GtkWidget  *template_entry, *rotate_sel;
+	glTemplate *template;
+	glLabel    *label;
+	gint        ret;
+	glWindow   *window;
+
+	gl_debug (DEBUG_FILE, "START");
+
+	switch (response) {
+	case GTK_RESPONSE_OK:
+		template_entry =
+			GTK_WIDGET (g_object_get_data (G_OBJECT (dlg),
+						       "template_entry"));
+		rotate_sel = GTK_WIDGET (g_object_get_data (G_OBJECT (dlg),
+							    "rotate_sel"));
+
+		if (page_size != NULL)
+			g_free (page_size);
+		page_size =
+			gl_wdgt_media_select_get_page_size (GL_WDGT_MEDIA_SELECT (template_entry));
+
+		if (sheet_name != NULL)
+			g_free (sheet_name);
+		sheet_name =
+			gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (template_entry));
+
+		rotate_flag =
+			gl_wdgt_rotate_label_get_state (GL_WDGT_ROTATE_LABEL (rotate_sel));
+
+		template = gl_template_from_name (sheet_name);
+
+		label = GL_LABEL(g_object_get_data (G_OBJECT (dlg), "label"));
+		gl_label_set_template (label, template);
+		gl_label_set_rotate_flag (label, rotate_flag);
 
 		break;
 	}

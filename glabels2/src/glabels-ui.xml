@@ -4,6 +4,9 @@
         <cmd name="FileNew" _label="New"
 	_tip="Create a new document" pixtype="stock" pixname="gtk-new" accel="*Control*N"/>
         
+        <cmd name="FileProperties" _label="Properties"
+	_tip="Create a new document" pixtype="stock" pixname="gtk-properties"/>
+        
         <cmd name="FileOpen" _label="Open"
 	_tip="Open a file" pixtype="stock" pixname="gtk-open" accel="*Control*O"/>
 	
@@ -234,6 +237,10 @@
 	<placeholder name="FileOps_1" />
 
 	<placeholder name="FileOps_2" delimit="top"/>
+
+	<separator/>
+
+        <menuitem name="FileProperties" verb="" _label="Proper_ties"/>
 
 	<separator/>
 	
