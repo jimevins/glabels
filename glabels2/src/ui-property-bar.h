@@ -59,6 +59,8 @@ struct _glUIPropertyBar {
 
 	GtkWidget           *line_color_combo;
 	GtkWidget           *line_width_spin;
+
+	gboolean	     stop_signals;
 };
 
 struct _glUIPropertyBarClass {
