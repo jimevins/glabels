@@ -213,9 +213,9 @@ construct_properties_editor (glViewObject *view_object)
 				       0);
 
 	/* Update */
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
 	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
-	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 
 	/* Connect signals. */
 	g_signal_connect (G_OBJECT (editor), "changed",

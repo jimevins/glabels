@@ -178,11 +178,11 @@ gl_object_editor_set_max_position (glObjectEditor      *editor,
 	/* Set widget values */
 	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->pos_x_spin));
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->pos_x_spin),
-				   0.0, x_max);
+				   -x_max, 2.0*x_max);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->pos_x_spin), tmp);
 	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->pos_y_spin));
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->pos_y_spin),
-				   0.0, y_max);
+				   -y_max, 2.0*y_max);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->pos_y_spin), tmp);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->pos_x_spin),

@@ -182,7 +182,7 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 	/* Set widget values */
 	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
-				   0.0, LENGTH (dx_max, dy_max));
+				   0.0, 2.0*LENGTH (dx_max, dy_max));
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
