@@ -66,11 +66,11 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_text_class_init (glLabelTextClass *klass);
-static void gl_label_text_instance_init (glLabelText *ltext);
-static void gl_label_text_finalize (GObject *object);
+static void gl_label_text_class_init    (glLabelTextClass *klass);
+static void gl_label_text_instance_init (glLabelText      *ltext);
+static void gl_label_text_finalize      (GObject          *object);
 
-static void update_size (glLabelText *ltext);
+static void update_size                 (glLabelText      *ltext);
 
 
 /*****************************************************************************/
@@ -158,17 +158,17 @@ gl_label_text_new (glLabel *label)
 /*****************************************************************************/
 glLabelText *
 gl_label_text_dup (glLabelText *ltext,
-		    glLabel *label)
+		   glLabel     *label)
 {
 	glLabelText      *new_ltext;
-	gdouble          x, y, w, h;
+	gdouble           x, y, w, h;
 	GList            *lines;
 	gchar            *font_family;
-	gdouble          font_size;
-	GnomeFontWeight  font_weight;
-	gboolean         font_italic_flag;
-	guint            color;
-	GtkJustification just;
+	gdouble           font_size;
+	GnomeFontWeight   font_weight;
+	gboolean          font_italic_flag;
+	guint             color;
+	GtkJustification  just;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -209,7 +209,7 @@ gl_label_text_dup (glLabelText *ltext,
 /*****************************************************************************/
 void
 gl_label_text_set_lines (glLabelText *ltext,
-			 GList *lines)
+			 GList       *lines)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -226,12 +226,12 @@ gl_label_text_set_lines (glLabelText *ltext,
 }
 
 void
-gl_label_text_set_props (glLabelText *ltext,
-			 gchar *font_family,
-			 gdouble font_size,
-			 GnomeFontWeight font_weight,
-			 gboolean font_italic_flag,
-			 guint color,
+gl_label_text_set_props (glLabelText     *ltext,
+			 gchar           *font_family,
+			 gdouble          font_size,
+			 GnomeFontWeight  font_weight,
+			 gboolean         font_italic_flag,
+			 guint            color,
 			 GtkJustification just)
 {
 	GdkPixbuf *pixbuf;
@@ -271,12 +271,12 @@ gl_label_text_get_lines (glLabelText *ltext)
 }
 
 void
-gl_label_text_get_props (glLabelText *ltext,
-			 gchar **font_family,
-			 gdouble *font_size,
-			 GnomeFontWeight *font_weight,
-			 gboolean *font_italic_flag,
-			 guint *color,
+gl_label_text_get_props (glLabelText      *ltext,
+			 gchar           **font_family,
+			 gdouble          *font_size,
+			 GnomeFontWeight  *font_weight,
+			 gboolean         *font_italic_flag,
+			 guint            *color,
 			 GtkJustification *just)
 {
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
@@ -297,14 +297,14 @@ gl_label_text_get_props (glLabelText *ltext,
 static void
 update_size (glLabelText *ltext)
 {
-	gdouble w, h;
-	GnomeFont *font;
-	gchar *text;
-	gchar **line;
-	gint i;
+	gdouble         w, h;
+	GnomeFont      *font;
+	gchar          *text;
+	gchar         **line;
+	gint            i;
 	GnomeGlyphList *glyphlist;
-	ArtDRect bbox;
-	gdouble affine[6];
+	ArtDRect        bbox;
+	gdouble         affine[6];
 
 	gl_debug (DEBUG_LABEL, "START");
 

@@ -48,9 +48,9 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_box_class_init (glLabelBoxClass *klass);
-static void gl_label_box_instance_init (glLabelBox *lbox);
-static void gl_label_box_finalize (GObject *object);
+static void gl_label_box_class_init    (glLabelBoxClass *klass);
+static void gl_label_box_instance_init (glLabelBox      *lbox);
+static void gl_label_box_finalize      (GObject         *object);
 
 
 /*****************************************************************************/
@@ -131,11 +131,11 @@ gl_label_box_new (glLabel *label)
 /*****************************************************************************/
 glLabelBox *
 gl_label_box_dup (glLabelBox *lbox,
-		  glLabel *label)
+		  glLabel    *label)
 {
 	glLabelBox *new_lbox;
-	gdouble    x, y, w, h, line_width;
-	guint      line_color, fill_color;
+	gdouble     x, y, w, h, line_width;
+	guint       line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -170,7 +170,7 @@ gl_label_box_dup (glLabelBox *lbox,
 /*****************************************************************************/
 void
 gl_label_box_set_line_width (glLabelBox *lbox,
-			     gdouble    line_width)
+			     gdouble     line_width)
 {
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
@@ -182,7 +182,7 @@ gl_label_box_set_line_width (glLabelBox *lbox,
 
 void
 gl_label_box_set_line_color (glLabelBox *lbox,
-			     guint      line_color)
+			     guint       line_color)
 {
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
@@ -194,7 +194,7 @@ gl_label_box_set_line_color (glLabelBox *lbox,
 
 void
 gl_label_box_set_fill_color (glLabelBox *lbox,
-			     guint      fill_color)
+			     guint       fill_color)
 {
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 

@@ -57,11 +57,11 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_barcode_class_init (glLabelBarcodeClass *klass);
-static void gl_label_barcode_instance_init (glLabelBarcode *lbc);
-static void gl_label_barcode_finalize (GObject *object);
+static void gl_label_barcode_class_init    (glLabelBarcodeClass *klass);
+static void gl_label_barcode_instance_init (glLabelBarcode      *lbc);
+static void gl_label_barcode_finalize      (GObject             *object);
 
-static void update_size (glLabelBarcode *lbc);
+static void update_size                    (glLabelBarcode      *lbc);
 
 
 /*****************************************************************************/
@@ -143,15 +143,15 @@ gl_label_barcode_new (glLabel *label)
 /*****************************************************************************/
 glLabelBarcode *
 gl_label_barcode_dup (glLabelBarcode *lbc,
-		    glLabel *label)
+		      glLabel        *label)
 {
 	glLabelBarcode      *new_lbc;
 	glTextNode          *text_node;
-	gdouble             x, y, w, h;
-	glBarcodeStyle      style;
-	gboolean            text_flag;
-	guint               color;
-	gdouble             scale;
+	gdouble              x, y, w, h;
+	glBarcodeStyle       style;
+	gboolean             text_flag;
+	guint                color;
+	gdouble              scale;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -185,7 +185,7 @@ gl_label_barcode_dup (glLabelBarcode *lbc,
 /*****************************************************************************/
 void
 gl_label_barcode_set_data (glLabelBarcode *lbc,
-			   glTextNode *text_node)
+			   glTextNode     *text_node)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -203,13 +203,11 @@ gl_label_barcode_set_data (glLabelBarcode *lbc,
 
 void
 gl_label_barcode_set_props (glLabelBarcode *lbc,
-			    glBarcodeStyle style,
-			    gboolean text_flag,
-			    guint color,
-			    gdouble scale)
+			    glBarcodeStyle  style,
+			    gboolean        text_flag,
+			    guint           color,
+			    gdouble         scale)
 {
-	GdkPixbuf *pixbuf;
-
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
@@ -241,9 +239,9 @@ gl_label_barcode_get_data (glLabelBarcode *lbc)
 void
 gl_label_barcode_get_props (glLabelBarcode *lbc,
 			    glBarcodeStyle *style,
-			    gboolean *text_flag,
-			    guint *color,
-			    gdouble *scale)
+			    gboolean       *text_flag,
+			    guint          *color,
+			    gdouble        *scale)
 {
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 

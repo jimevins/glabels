@@ -43,32 +43,32 @@ typedef struct _glLabelBoxPrivate   glLabelBoxPrivate;
 struct _glLabelBox {
 	glLabelObject         object;
 
-	glLabelBoxPrivate *private;
+	glLabelBoxPrivate    *private;
 };
 
 struct _glLabelBoxClass {
 	glLabelObjectClass    parent_class;
 };
 
-extern GType         gl_label_box_get_type       (void);
+GType         gl_label_box_get_type       (void);
 
-extern GObject      *gl_label_box_new            (glLabel *label);
+GObject      *gl_label_box_new            (glLabel *label);
 
-extern glLabelBox   *gl_label_box_dup            (glLabelBox *lbox,
-						  glLabel *label);
+glLabelBox   *gl_label_box_dup            (glLabelBox *lbox,
+					   glLabel    *label);
 
-extern void          gl_label_box_set_line_width (glLabelBox *lbox,
-						  gdouble line_width);
+void          gl_label_box_set_line_width (glLabelBox *lbox,
+					   gdouble     line_width);
 
-extern void          gl_label_box_set_line_color (glLabelBox *lbox,
-						  guint line_color);
+void          gl_label_box_set_line_color (glLabelBox *lbox,
+					   guint       line_color);
 
-extern void          gl_label_box_set_fill_color (glLabelBox *lbox,
-						  guint fill_color);
+void          gl_label_box_set_fill_color (glLabelBox *lbox,
+					   guint       fill_color);
 
-extern gdouble       gl_label_box_get_line_width (glLabelBox *lbox);
-extern guint         gl_label_box_get_line_color (glLabelBox *lbox);
-extern guint         gl_label_box_get_fill_color (glLabelBox *lbox);
+gdouble       gl_label_box_get_line_width (glLabelBox *lbox);
+guint         gl_label_box_get_line_color (glLabelBox *lbox);
+guint         gl_label_box_get_fill_color (glLabelBox *lbox);
 
 
 G_END_DECLS

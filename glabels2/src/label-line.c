@@ -47,9 +47,9 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_line_class_init (glLabelLineClass *klass);
-static void gl_label_line_instance_init (glLabelLine *lline);
-static void gl_label_line_finalize (GObject *object);
+static void gl_label_line_class_init    (glLabelLineClass *klass);
+static void gl_label_line_instance_init (glLabelLine      *lline);
+static void gl_label_line_finalize      (GObject          *object);
 
 
 /*****************************************************************************/
@@ -130,7 +130,7 @@ gl_label_line_new (glLabel *label)
 /*****************************************************************************/
 glLabelLine *
 gl_label_line_dup (glLabelLine *lline,
-		      glLabel *label)
+		   glLabel     *label)
 {
 	glLabelLine *new_lline;
 	gdouble        x, y, w, h, line_width;
@@ -166,7 +166,7 @@ gl_label_line_dup (glLabelLine *lline,
 /*****************************************************************************/
 void
 gl_label_line_set_line_width (glLabelLine *lline,
-				 gdouble        line_width)
+			      gdouble      line_width)
 {
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
@@ -178,7 +178,7 @@ gl_label_line_set_line_width (glLabelLine *lline,
 
 void
 gl_label_line_set_line_color (glLabelLine *lline,
-				 guint          line_color)
+			      guint        line_color)
 {
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 

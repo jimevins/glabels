@@ -53,7 +53,7 @@ typedef struct _glLabelObjectPrivate   glLabelObjectPrivate;
 #include "label.h"
 
 struct _glLabelObject {
-	GObject              object;
+	GObject               object;
 
 	glLabel              *parent;
 
@@ -61,45 +61,49 @@ struct _glLabelObject {
 };
 
 struct _glLabelObjectClass {
-	GObjectClass         parent_class;
+	GObjectClass          parent_class;
 
 	void (*changed) (glLabelObject *object, gpointer user_data);
 
-	void (*moved) (glLabelObject *object,
-		       gdouble dx, gdouble dy, gpointer user_data);
+	void (*moved)   (glLabelObject *object,
+			 gdouble dx, gdouble dy, gpointer user_data);
 
-	void (*top) (glLabelObject *object, gpointer user_data);
-	void (*bottom) (glLabelObject *object, gpointer user_data);
+	void (*top)     (glLabelObject *object, gpointer user_data);
+	void (*bottom)  (glLabelObject *object, gpointer user_data);
 };
 
-extern GType     gl_label_object_get_type     (void);
+GType     gl_label_object_get_type              (void);
 
-extern GObject  *gl_label_object_new          (glLabel *label);
+GObject  *gl_label_object_new                   (glLabel       *label);
 
-extern void      gl_label_object_emit_changed (glLabelObject *object);
+void      gl_label_object_emit_changed          (glLabelObject *object);
 
-extern void      gl_label_object_set_parent   (glLabelObject *object,
-					       glLabel *label);
-extern glLabel  *gl_label_object_get_parent   (glLabelObject *object);
+void      gl_label_object_set_parent            (glLabelObject *object,
+						 glLabel       *label);
+glLabel  *gl_label_object_get_parent            (glLabelObject *object);
 
-extern void      gl_label_object_set_name     (glLabelObject *object,
-					       gchar *name);
-extern gchar    *gl_label_object_get_name     (glLabelObject *object);
+void      gl_label_object_set_name              (glLabelObject *object,
+						 gchar         *name);
+gchar    *gl_label_object_get_name              (glLabelObject *object);
 
-extern void      gl_label_object_set_position (glLabelObject *object,
-					       gdouble x, gdouble y);
-extern void      gl_label_object_set_position_relative (glLabelObject *object,
-							gdouble dx,
-							gdouble dy);
-extern void      gl_label_object_get_position (glLabelObject *object,
-					       gdouble *x, gdouble *y);
-extern void      gl_label_object_set_size (glLabelObject *object,
-					   gdouble w, gdouble h);
-extern void      gl_label_object_get_size (glLabelObject *object,
-					   gdouble *w, gdouble *h);
+void      gl_label_object_set_position          (glLabelObject *object,
+						 gdouble         x,
+						 gdouble         y);
+void      gl_label_object_set_position_relative (glLabelObject *object,
+						 gdouble        dx,
+						 gdouble        dy);
+void      gl_label_object_get_position          (glLabelObject *object,
+						 gdouble       *x,
+						 gdouble       *y);
+void      gl_label_object_set_size              (glLabelObject *object,
+						 gdouble        w,
+						 gdouble        h);
+void      gl_label_object_get_size              (glLabelObject *object,
+						 gdouble       *w,
+						 gdouble       *h);
 
-extern void          gl_label_object_raise_to_top    (glLabelObject * object);
-extern void          gl_label_object_lower_to_bottom (glLabelObject * object);
+void      gl_label_object_raise_to_top          (glLabelObject *object);
+void      gl_label_object_lower_to_bottom       (glLabelObject *object);
 
 G_END_DECLS
 

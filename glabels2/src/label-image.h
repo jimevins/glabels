@@ -43,26 +43,26 @@ typedef struct _glLabelImagePrivate   glLabelImagePrivate;
 struct _glLabelImage {
 	glLabelObject         object;
 
-	glLabelImagePrivate *private;
+	glLabelImagePrivate  *private;
 };
 
 struct _glLabelImageClass {
 	glLabelObjectClass    parent_class;
 };
 
-extern GType        gl_label_image_get_type      (void);
+GType            gl_label_image_get_type     (void);
 
-extern GObject      *gl_label_image_new          (glLabel *label);
+GObject         *gl_label_image_new          (glLabel *label);
 
-extern glLabelImage *gl_label_image_dup          (glLabelImage *limage,
-						  glLabel *label);
+glLabelImage    *gl_label_image_dup          (glLabelImage *limage,
+					      glLabel      *label);
 
-extern void         gl_label_image_set_filename  (glLabelImage *limage,
-						  const gchar *filename);
+void             gl_label_image_set_filename (glLabelImage *limage,
+					      const gchar  *filename);
 
-extern gchar        *gl_label_image_get_filename (glLabelImage *limage);
+gchar           *gl_label_image_get_filename (glLabelImage *limage);
 
-extern const GdkPixbuf *gl_label_image_get_pixbuf (glLabelImage *limage);
+const GdkPixbuf *gl_label_image_get_pixbuf   (glLabelImage *limage);
 
 G_END_DECLS
 

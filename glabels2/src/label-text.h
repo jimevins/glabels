@@ -45,38 +45,38 @@ typedef struct _glLabelTextPrivate   glLabelTextPrivate;
 struct _glLabelText {
 	glLabelObject         object;
 
-	glLabelTextPrivate    *private;
+	glLabelTextPrivate   *private;
 };
 
 struct _glLabelTextClass {
 	glLabelObjectClass    parent_class;
 };
 
-extern GType        gl_label_text_get_type     (void);
+GType         gl_label_text_get_type     (void);
 
-extern GObject      *gl_label_text_new         (glLabel *label);
+GObject      *gl_label_text_new          (glLabel          *label);
 
-extern glLabelText *gl_label_text_dup          (glLabelText *ltext,
-						glLabel *label);
+glLabelText  *gl_label_text_dup          (glLabelText      *ltext,
+					  glLabel          *label);
 
-extern void         gl_label_text_set_lines    (glLabelText *ltext,
-						GList *lines);
-extern void         gl_label_text_set_props    (glLabelText *ltext,
-						gchar *font_family,
-						gdouble font_size,
-						GnomeFontWeight font_weight,
-						gboolean font_italic_flag,
-						guint color,
-						GtkJustification just);
+void          gl_label_text_set_lines    (glLabelText      *ltext,
+					  GList            *lines);
+void          gl_label_text_set_props    (glLabelText      *ltext,
+					  gchar            *font_family,
+					  gdouble           font_size,
+					  GnomeFontWeight   font_weight,
+					  gboolean          font_italic_flag,
+					  guint             color,
+					  GtkJustification  just);
 
-extern GList        *gl_label_text_get_lines   (glLabelText *ltext);
-extern void         gl_label_text_get_props    (glLabelText *ltext,
-						gchar **font_family,
-						gdouble *font_size,
-						GnomeFontWeight *font_weight,
-						gboolean *font_italic_flag,
-						guint *color,
-						GtkJustification *just);
+GList        *gl_label_text_get_lines    (glLabelText      *ltext);
+void          gl_label_text_get_props    (glLabelText      *ltext,
+					  gchar           **font_family,
+					  gdouble          *font_size,
+					  GnomeFontWeight  *font_weight,
+					  gboolean         *font_italic_flag,
+					  guint            *color,
+					  GtkJustification *just);
 
 G_END_DECLS
 

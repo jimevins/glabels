@@ -43,28 +43,28 @@ typedef struct _glLabelLinePrivate   glLabelLinePrivate;
 struct _glLabelLine {
 	glLabelObject         object;
 
-	glLabelLinePrivate *private;
+	glLabelLinePrivate   *private;
 };
 
 struct _glLabelLineClass {
 	glLabelObjectClass    parent_class;
 };
 
-extern GType       gl_label_line_get_type       (void);
+GType        gl_label_line_get_type       (void);
 
-extern GObject    *gl_label_line_new            (glLabel *label);
+GObject     *gl_label_line_new            (glLabel     *label);
 
-extern glLabelLine *gl_label_line_dup        (glLabelLine *lline,
-						    glLabel *label);
+glLabelLine *gl_label_line_dup            (glLabelLine *lline,
+					   glLabel     *label);
 
-extern void        gl_label_line_set_line_width (glLabelLine *lline,
-						    gdouble line_width);
+void         gl_label_line_set_line_width (glLabelLine *lline,
+					   gdouble      line_width);
 
-extern void        gl_label_line_set_line_color (glLabelLine *lline,
-						    guint line_color);
+void         gl_label_line_set_line_color (glLabelLine *lline,
+					   guint        line_color);
 
-extern gdouble     gl_label_line_get_line_width (glLabelLine *lline);
-extern guint       gl_label_line_get_line_color (glLabelLine *lline);
+gdouble      gl_label_line_get_line_width (glLabelLine *lline);
+guint        gl_label_line_get_line_color (glLabelLine *lline);
 
 
 G_END_DECLS

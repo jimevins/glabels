@@ -46,34 +46,35 @@ typedef struct _glLabelBarcodePrivate   glLabelBarcodePrivate;
 struct _glLabelBarcode {
 	glLabelObject            object;
 
-	glLabelBarcodePrivate    *private;
+	glLabelBarcodePrivate   *private;
 };
 
 struct _glLabelBarcodeClass {
 	glLabelObjectClass       parent_class;
 };
 
-extern GType          gl_label_barcode_get_type  (void);
 
-extern GObject        *gl_label_barcode_new      (glLabel *label);
+GType           gl_label_barcode_get_type  (void);
 
-extern glLabelBarcode *gl_label_barcode_dup      (glLabelBarcode *lbc,
-						  glLabel *label);
+GObject        *gl_label_barcode_new       (glLabel        *label);
 
-extern void           gl_label_barcode_set_data  (glLabelBarcode *lbc,
-						  glTextNode *text_node);
-extern void           gl_label_barcode_set_props (glLabelBarcode *lbc,
-						  glBarcodeStyle style,
-						  gboolean text_flag,
-						  guint color,
-						  gdouble scale);
+glLabelBarcode *gl_label_barcode_dup       (glLabelBarcode *lbc,
+					    glLabel        *label);
 
-extern glTextNode     *gl_label_barcode_get_data (glLabelBarcode *lbc);
-extern void           gl_label_barcode_get_props (glLabelBarcode *lbc,
-						  glBarcodeStyle *style,
-						  gboolean *text_flag,
-						  guint *color,
-						  gdouble *scale);
+void            gl_label_barcode_set_data  (glLabelBarcode *lbc,
+					    glTextNode     *text_node);
+void            gl_label_barcode_set_props (glLabelBarcode *lbc,
+					    glBarcodeStyle  style,
+					    gboolean        text_flag,
+					    guint           color,
+					    gdouble         scale);
+
+glTextNode     *gl_label_barcode_get_data  (glLabelBarcode *lbc);
+void            gl_label_barcode_get_props (glLabelBarcode *lbc,
+					    glBarcodeStyle *style,
+					    gboolean       *text_flag,
+					    guint          *color,
+					    gdouble        *scale);
 
 G_END_DECLS
 

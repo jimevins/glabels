@@ -49,9 +49,9 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_image_class_init (glLabelImageClass *klass);
-static void gl_label_image_instance_init (glLabelImage *limage);
-static void gl_label_image_finalize (GObject *object);
+static void gl_label_image_class_init    (glLabelImageClass *klass);
+static void gl_label_image_instance_init (glLabelImage      *limage);
+static void gl_label_image_finalize      (GObject           *object);
 
 
 /*****************************************************************************/
@@ -136,10 +136,10 @@ gl_label_image_new (glLabel *label)
 /*****************************************************************************/
 glLabelImage *
 gl_label_image_dup (glLabelImage *limage,
-		    glLabel *label)
+		    glLabel      *label)
 {
 	glLabelImage *new_limage;
-	gdouble      x, y, w, h;
+	gdouble       x, y, w, h;
 	gchar        *filename;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -172,7 +172,7 @@ gl_label_image_dup (glLabelImage *limage,
 /*****************************************************************************/
 void
 gl_label_image_set_filename (glLabelImage *limage,
-			     const gchar *filename)
+			     const gchar  *filename)
 {
 	GdkPixbuf *pixbuf;
 

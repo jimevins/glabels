@@ -41,34 +41,34 @@ typedef struct _glLabelEllipseClass     glLabelEllipseClass;
 typedef struct _glLabelEllipsePrivate   glLabelEllipsePrivate;
 
 struct _glLabelEllipse {
-	glLabelObject         object;
+	glLabelObject          object;
 
 	glLabelEllipsePrivate *private;
 };
 
 struct _glLabelEllipseClass {
-	glLabelObjectClass    parent_class;
+	glLabelObjectClass     parent_class;
 };
 
-extern GType       gl_label_ellipse_get_type       (void);
+GType           gl_label_ellipse_get_type       (void);
 
-extern GObject    *gl_label_ellipse_new            (glLabel *label);
+GObject        *gl_label_ellipse_new            (glLabel *label);
 
-extern glLabelEllipse *gl_label_ellipse_dup        (glLabelEllipse *lellipse,
-						    glLabel *label);
+glLabelEllipse *gl_label_ellipse_dup            (glLabelEllipse *lellipse,
+						 glLabel        *label);
 
-extern void        gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
-						    gdouble line_width);
+void            gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
+						 gdouble         line_width);
 
-extern void        gl_label_ellipse_set_line_color (glLabelEllipse *lellipse,
-						    guint line_color);
+void            gl_label_ellipse_set_line_color (glLabelEllipse *lellipse,
+						 guint           line_color);
 
-extern void        gl_label_ellipse_set_fill_color (glLabelEllipse *lellipse,
-						    guint fill_color);
+void            gl_label_ellipse_set_fill_color (glLabelEllipse *lellipse,
+						 guint           fill_color);
 
-extern gdouble     gl_label_ellipse_get_line_width (glLabelEllipse *lellipse);
-extern guint       gl_label_ellipse_get_line_color (glLabelEllipse *lellipse);
-extern guint       gl_label_ellipse_get_fill_color (glLabelEllipse *lellipse);
+gdouble         gl_label_ellipse_get_line_width (glLabelEllipse *lellipse);
+guint           gl_label_ellipse_get_line_color (glLabelEllipse *lellipse);
+guint           gl_label_ellipse_get_fill_color (glLabelEllipse *lellipse);
 
 
 G_END_DECLS

@@ -32,7 +32,7 @@
 /*========================================================*/
 
 struct _glLabelObjectPrivate {
-	gchar *name;
+	gchar  *name;
 	gdouble x, y;
 	gdouble w, h;
 };
@@ -59,9 +59,9 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_object_class_init (glLabelObjectClass *klass);
-static void gl_label_object_instance_init (glLabelObject *object);
-static void gl_label_object_finalize (GObject *object);
+static void gl_label_object_class_init    (glLabelObjectClass *klass);
+static void gl_label_object_instance_init (glLabelObject      *object);
+static void gl_label_object_finalize      (GObject            *object);
 
 
 /*****************************************************************************/
@@ -212,7 +212,7 @@ gl_label_object_emit_changed (glLabelObject *object)
 /*****************************************************************************/
 void
 gl_label_object_set_parent (glLabelObject *object,
-			    glLabel *label)
+			    glLabel       *label)
 {
 	glLabel *old_parent;
 
@@ -252,7 +252,7 @@ gl_label_object_get_parent (glLabelObject *object)
 /*****************************************************************************/
 void
 gl_label_object_set_name (glLabelObject *object,
-			  gchar *name)
+			  gchar         *name)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -286,8 +286,8 @@ gl_label_object_get_name (glLabelObject *object)
 /*****************************************************************************/
 void
 gl_label_object_set_position (glLabelObject *object,
-			      gdouble x,
-			      gdouble y)
+			      gdouble        x,
+			      gdouble        y)
 {
 	gdouble dx, dy;
 
@@ -311,8 +311,8 @@ gl_label_object_set_position (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_object_set_position_relative (glLabelObject *object,
-				       gdouble dx,
-				       gdouble dy)
+				       gdouble        dx,
+				       gdouble        dy)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -335,8 +335,8 @@ gl_label_object_set_position_relative (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_object_get_position (glLabelObject *object,
-			      gdouble *x,
-			      gdouble *y)
+			      gdouble       *x,
+			      gdouble       *y)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -353,8 +353,8 @@ gl_label_object_get_position (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_object_set_size (glLabelObject *object,
-			  gdouble w,
-			  gdouble h)
+			  gdouble        w,
+			  gdouble        h)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -373,8 +373,8 @@ gl_label_object_set_size (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_object_get_size (glLabelObject *object,
-			  gdouble *w,
-			  gdouble *h)
+			  gdouble       *w,
+			  gdouble       *h)
 {
 	gl_debug (DEBUG_LABEL, "START");
 

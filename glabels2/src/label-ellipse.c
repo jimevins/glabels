@@ -48,9 +48,9 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_ellipse_class_init (glLabelEllipseClass *klass);
-static void gl_label_ellipse_instance_init (glLabelEllipse *lellipse);
-static void gl_label_ellipse_finalize (GObject *object);
+static void gl_label_ellipse_class_init    (glLabelEllipseClass *klass);
+static void gl_label_ellipse_instance_init (glLabelEllipse      *lellipse);
+static void gl_label_ellipse_finalize      (GObject             *object);
 
 
 /*****************************************************************************/
@@ -131,11 +131,11 @@ gl_label_ellipse_new (glLabel *label)
 /*****************************************************************************/
 glLabelEllipse *
 gl_label_ellipse_dup (glLabelEllipse *lellipse,
-		      glLabel *label)
+		      glLabel        *label)
 {
 	glLabelEllipse *new_lellipse;
-	gdouble        x, y, w, h, line_width;
-	guint          line_color, fill_color;
+	gdouble         x, y, w, h, line_width;
+	guint           line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -169,7 +169,7 @@ gl_label_ellipse_dup (glLabelEllipse *lellipse,
 /*****************************************************************************/
 void
 gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
-				 gdouble        line_width)
+				 gdouble         line_width)
 {
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
@@ -181,7 +181,7 @@ gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
 
 void
 gl_label_ellipse_set_line_color (glLabelEllipse *lellipse,
-				 guint          line_color)
+				 guint           line_color)
 {
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
@@ -193,7 +193,7 @@ gl_label_ellipse_set_line_color (glLabelEllipse *lellipse,
 
 void
 gl_label_ellipse_set_fill_color (glLabelEllipse *lellipse,
-				 guint          fill_color)
+				 guint           fill_color)
 {
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
