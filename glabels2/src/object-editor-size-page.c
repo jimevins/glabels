@@ -120,11 +120,11 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 				  G_CALLBACK (aspect_toggle_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_w_spin),
-				  "value-changed",
+				  "changed",
 				  G_CALLBACK (w_spin_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_h_spin),
-				  "value-changed",
+				  "changed",
 				  G_CALLBACK (h_spin_cb),
 				  G_OBJECT (editor));
 

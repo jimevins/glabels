@@ -1,3 +1,10 @@
+2004-03-13  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-size-page.c: (gl_object_editor_prepare_size_page):
+		Changed spin callback signals from "value-changed" back to "changed."
+		This was accidentally introduced in a previous revision, and can cause
+		size changes just by selecting the size tab.
+
 2004-03-06  Jim Evins  <evins@snaught.com>
 
 	* src/view.c: (draw_grid_layer):
