@@ -1792,7 +1792,29 @@ canvas_event (GnomeCanvas *canvas,
 	      GdkEvent    *event,
 	      glView      *view)
 {
+	gdouble x, y;
+
 	gl_debug (DEBUG_VIEW, "");
+
+	/* emit pointer signals regardless of state */
+	switch (event->type) {
+	case GDK_MOTION_NOTIFY:
+		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
+		gnome_canvas_window_to_world (canvas,
+					      event->motion.x,
+					      event->motion.y, &x, &y);
+		g_signal_emit (G_OBJECT(view), signals[POINTER_MOVED], 0, x, y);
+		break; /* fall through */
+
+	case GDK_LEAVE_NOTIFY:
+		gl_debug (DEBUG_VIEW, "LEAVEW_NOTIFY");
+		g_signal_emit (G_OBJECT(view), signals[POINTER_EXIT], 0);
+		break; /* fall through */
+
+	default:
+		break; /* fall through */
+	}
+
 
 	switch (view->state) {
 
@@ -1937,7 +1959,6 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		gnome_canvas_window_to_world (canvas,
 					      event->motion.x,
 					      event->motion.y, &x, &y);
-		g_signal_emit (G_OBJECT(view), signals[POINTER_MOVED], 0, x, y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_item_set (item,
 					       "x1", MIN (x, x0),
@@ -1948,11 +1969,6 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		} else {
 			return FALSE;
 		}
-
-	case GDK_LEAVE_NOTIFY:
-		gl_debug (DEBUG_VIEW, "LEAVEW_NOTIFY");
-		g_signal_emit (G_OBJECT(view), signals[POINTER_EXIT], 0);
-		return FALSE;
 
 	case GDK_KEY_PRESS:
 		gl_debug (DEBUG_VIEW, "KEY_PRESS");
