@@ -72,11 +72,6 @@ static void   highlight_resizable_line_construct (glViewHighlight        *view_h
 static void   highlight_simple_construct         (glViewHighlight        *view_highlight,
 						  glViewObject           *view_object);
 
-static void   object_moved_cb                    (glLabelObject          *object,
-						  gdouble                 x,
-						  gdouble                 y,
-						  glViewHighlight        *view_highlight);
-
 static void   object_changed_cb                  (glLabelObject          *object,
 						  glViewHighlight        *view_highlight);
 
@@ -231,9 +226,6 @@ gl_view_highlight_new (glViewObject         *view_object,
 
 	}
 
-	g_signal_connect (G_OBJECT (view_highlight->private->object), "moved",
-			  G_CALLBACK (object_moved_cb), view_highlight);
-
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "changed",
 			  G_CALLBACK (object_changed_cb), view_highlight);
 
@@ -250,7 +242,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 				   glViewObject           *view_object,
 				   glViewHighlightStyle    style)
 {
-	gdouble x, y, w, h;
+	gdouble w, h;
 	GnomeCanvasItem *group;
 	glView *view;
 	glLabelObject *object;
@@ -269,13 +261,12 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (view->canvas)),
+		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -431,7 +422,7 @@ static void
 highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 				    glViewObject           *view_object)
 {
-	gdouble x, y, dx, dy;
+	gdouble dx, dy;
 	GnomeCanvasItem *group;
 	GnomeCanvasPoints *points;
 	glView *view;
@@ -451,15 +442,14 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &dx, &dy);
 
 	points = gnome_canvas_points_new (2);
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (view->canvas)),
+		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -521,7 +511,7 @@ static void
 highlight_simple_construct (glViewHighlight        *view_highlight,
 			    glViewObject           *view_object)
 {
-	gdouble x, y, w, h;
+	gdouble w, h;
 	GnomeCanvasItem *group;
 	glView *view;
 	glLabelObject *object;
@@ -540,14 +530,13 @@ highlight_simple_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (view->canvas)),
+		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -592,28 +581,6 @@ void
 gl_view_highlight_hide (glViewHighlight *view_highlight)
 {
 	gnome_canvas_item_hide (view_highlight->private->group);
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Object moved callback.                                          */
-/*---------------------------------------------------------------------------*/
-static void
-object_moved_cb (glLabelObject    *object,
-		 gdouble           dx,
-		 gdouble           dy,
-		 glViewHighlight  *view_highlight)
-{
-	GnomeCanvasItem    *item, *highlight;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	/* Adjust location of highlight group */
-	gnome_canvas_item_move (view_highlight->private->group, dx, dy);
-
-	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1116,6 +1083,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 	switch (event->type) {
 
 	case GDK_BUTTON_PRESS:
+		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
 		switch (event->button.button) {
 		case 1:
 			dragging = TRUE;
@@ -1134,6 +1102,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		}
 
 	case GDK_BUTTON_RELEASE:
+		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
 		switch (event->button.button) {
 		case 1:
 			dragging = FALSE;
@@ -1152,6 +1121,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		}
 
 	case GDK_MOTION_NOTIFY:
+		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
 			y = y1;
@@ -1165,6 +1135,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		}
 
 	case GDK_ENTER_NOTIFY:
+		gl_debug (DEBUG_VIEW, "ENTER_NOTIFY");
 		cursor = gdk_cursor_new (GDK_CROSSHAIR);
 		gdk_window_set_cursor (view_highlight->private->view->canvas->window,
 				       cursor);
@@ -1172,6 +1143,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		return TRUE;
 
 	case GDK_LEAVE_NOTIFY:
+		gl_debug (DEBUG_VIEW, "LEAVE_NOTIFY");
 		cursor = gdk_cursor_new (GDK_LEFT_PTR);
 		gdk_window_set_cursor (view_highlight->private->view->canvas->window,
 				       cursor);
@@ -1179,6 +1151,7 @@ br_resize_event_handler (GnomeCanvasItem *handle_item,
 		return TRUE;
 
 	default:
+		gl_debug (DEBUG_VIEW, "default");
 		return FALSE;
 	}
 
