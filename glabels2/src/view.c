@@ -1140,6 +1140,7 @@ draw_markup_layer (glView *view)
 		case GL_TEMPLATE_MARKUP_LINE:
 			draw_markup_line (view,
 					  (glTemplateMarkupLine *)markup);
+			break;
 		case GL_TEMPLATE_MARKUP_CIRCLE:
 			draw_markup_circle (view,
 					    (glTemplateMarkupCircle *)markup);
