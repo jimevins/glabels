@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  menus.c:  GLabels menus module
+ *  ui.c:  GLabels ui module
  *
  *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
  *
@@ -29,12 +29,12 @@
  */
 #include <config.h>
 
-#include "menus.h"
+#include "ui.h"
 #include "commands.h"
 #include "tools.h"
 #include "glabels.h"
 
-BonoboUIVerb gl_verbs [] = {
+BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("FileNew", gl_cmd_file_new),
 	BONOBO_UI_VERB ("FileOpen", gl_cmd_file_open),
 	BONOBO_UI_VERB ("FileSave", gl_cmd_file_save),
@@ -70,7 +70,7 @@ BonoboUIVerb gl_verbs [] = {
 	BONOBO_UI_VERB_END
 };
 
-gchar* gl_menus_no_docs_sensible_verbs [] = {
+gchar* gl_ui_no_docs_sensible_verbs [] = {
 	"/commands/FileSave",
 	"/commands/FileSaveAs",
 	"/commands/FilePrint",
@@ -103,51 +103,86 @@ gchar* gl_menus_no_docs_sensible_verbs [] = {
 	NULL
 };
 
-gchar* gl_menus_not_modified_doc_sensible_verbs [] = {
+gchar* gl_ui_not_modified_doc_sensible_verbs [] = {
 	"/commands/FileSave",
+
+	NULL
+};
+
+gchar* gl_ui_selection_sensible_verbs [] = {
+	"/commands/EditCut",
+	"/commands/EditCopy",
+	"/commands/EditDelete",
+	"/commands/EditUnSelectAll",
+	"/commands/ToolsRaiseObjects",
+	"/commands/ToolsLowerObjects",
+
+	NULL
+};
+
+gchar* gl_ui_atomic_selection_sensible_verbs [] = {
+	"/commands/ToolsObjectProperties",
 
 	NULL
 };
 
 
 void
-gl_menus_set_verb_sensitive (BonoboUIComponent *ui_component, gchar* cname, gboolean sensitive)
+gl_ui_set_verb_sensitive (BonoboUIComponent  *ui_component,
+			  gchar              *cname,
+			  gboolean            sensitive)
 {
 	g_return_if_fail (cname != NULL);
 	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
-	bonobo_ui_component_set_prop (
-		ui_component, cname, "sensitive", sensitive ? "1" : "0", NULL);
+	bonobo_ui_component_set_prop (ui_component,
+				      cname,
+				      "sensitive",
+				      sensitive ? "1" : "0",
+				      NULL);
 }
 
 void
-gl_menus_set_verb_list_sensitive (BonoboUIComponent *ui_component, gchar** vlist, gboolean sensitive)
+gl_ui_set_verb_list_sensitive (BonoboUIComponent   *ui_component,
+			       gchar              **vlist,
+			       gboolean             sensitive)
 {
 	g_return_if_fail (vlist != NULL);
 	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
 	for ( ; *vlist; ++vlist)
 	{
-		bonobo_ui_component_set_prop (
-			ui_component, *vlist, "sensitive", sensitive ? "1" : "0", NULL);
+		bonobo_ui_component_set_prop (ui_component,
+					      *vlist,
+					      "sensitive",
+					      sensitive ? "1" : "0",
+					      NULL);
 	}
 }
 
 void
-gl_menus_set_verb_state (BonoboUIComponent *ui_component, gchar* cname, gboolean state)
+gl_ui_set_verb_state (BonoboUIComponent   *ui_component,
+		      gchar               *cname,
+		      gboolean             state)
 {
 	g_return_if_fail (cname != NULL);
 	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
-	bonobo_ui_component_set_prop (
-		ui_component, cname, "state", state ? "1" : "0", NULL);
+	bonobo_ui_component_set_prop (ui_component,
+				      cname,
+				      "state",
+				      state ? "1" : "0",
+				      NULL);
 }
 
 void
-gl_menus_add_menu_item (BonoboWindow *window, const gchar *path,
-		     const gchar *name, const gchar *label,
-		     const gchar *tooltip, const gchar *stock_pixmap,
-		     BonoboUIVerbFn cb)
+gl_ui_add_menu_item (BonoboWindow   *window,
+		     const gchar    *path,
+		     const gchar    *name,
+		     const gchar    *label,
+		     const gchar    *tooltip,
+		     const gchar    *stock_pixmap,
+		     BonoboUIVerbFn  cb)
 {
 	BonoboUIComponent *ui_component;
 	gchar *item_path;
@@ -159,7 +194,8 @@ gl_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 	g_return_if_fail (cb != NULL);
 	
 	item_path = g_strconcat (path, name, NULL);
-	ui_component = bonobo_mdi_get_ui_component_from_window (BONOBO_WINDOW (window));
+	ui_component =
+		bonobo_mdi_get_ui_component_from_window (BONOBO_WINDOW (window));
 	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) {
 		gchar *xml;
 
@@ -179,11 +215,15 @@ gl_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 		}
 
 
-		bonobo_ui_component_set_translate (ui_component, path,
-						   xml, NULL);
+		bonobo_ui_component_set_translate (ui_component,
+						   path,
+						   xml,
+						   NULL);
 
-		bonobo_ui_component_set_translate (ui_component, "/commands/",
-						   cmd, NULL);
+		bonobo_ui_component_set_translate (ui_component,
+						   "/commands/",
+						   cmd,
+						   NULL);
 						   
 		bonobo_ui_component_add_verb (ui_component, name, cb, NULL);
 
@@ -195,8 +235,9 @@ gl_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 }
 
 void
-gl_menus_remove_menu_item (BonoboWindow *window, const gchar *path,
-			const gchar *name)
+gl_ui_remove_menu_item (BonoboWindow *window,
+			const gchar  *path,
+			const gchar  *name)
 {
 	BonoboUIComponent *ui_component;
 	gchar *item_path;
@@ -206,7 +247,8 @@ gl_menus_remove_menu_item (BonoboWindow *window, const gchar *path,
 	g_return_if_fail (name != NULL);
 
 	item_path = g_strconcat (path, name, NULL);
-	ui_component = bonobo_mdi_get_ui_component_from_window (BONOBO_WINDOW (window));
+	ui_component =
+		bonobo_mdi_get_ui_component_from_window (BONOBO_WINDOW (window));
 
 	if (bonobo_ui_component_path_exists (ui_component, item_path, NULL)) {
 		gchar *cmd;
@@ -223,10 +265,12 @@ gl_menus_remove_menu_item (BonoboWindow *window, const gchar *path,
 }
 
 void
-gl_menus_add_menu_item_all (const gchar *path, const gchar *name,
-			 const gchar *label, const gchar *tooltip,
-			 const gchar *stock_pixmap,
-			 BonoboUIVerbFn cb)
+gl_ui_add_menu_item_all (const gchar    *path,
+			 const gchar    *name,
+			 const gchar    *label,
+			 const gchar    *tooltip,
+			 const gchar    *stock_pixmap,
+			 BonoboUIVerbFn  cb)
 {
 	GList* top_windows;
 	
@@ -238,15 +282,21 @@ gl_menus_add_menu_item_all (const gchar *path, const gchar *name,
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
 
 
-		gl_menus_add_menu_item (window, path, name, label, tooltip,
-				     stock_pixmap, cb);
+		gl_ui_add_menu_item (window,
+				     path,
+				     name,
+				     label,
+				     tooltip,
+				     stock_pixmap,
+				     cb);
 		
 		top_windows = g_list_next (top_windows);
 	}
 }
 
 void
-gl_menus_remove_menu_item_all (const gchar *path, const gchar *name)
+gl_ui_remove_menu_item_all (const gchar *path,
+			    const gchar *name)
 {
 	GList* top_windows;
 	
@@ -258,7 +308,7 @@ gl_menus_remove_menu_item_all (const gchar *path, const gchar *name)
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
 
 
-		gl_menus_remove_menu_item (window, path, name);
+		gl_ui_remove_menu_item (window, path, name);
 
 		
 		top_windows = g_list_next (top_windows);

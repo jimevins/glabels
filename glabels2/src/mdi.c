@@ -39,7 +39,7 @@
 #include "mdi.h"
 #include "mdi-child.h"
 #include "glabels.h"
-#include "menus.h"
+#include "ui.h"
 #include "prefs.h"
 #include "recent.h" 
 #include "file.h"
@@ -99,6 +99,7 @@ static void gl_mdi_child_changed_cb (BonoboMDI *mdi, BonoboMDIChild *old_child);
 static void gl_mdi_child_state_changed_cb (glMDIChild *child);
 
 static void gl_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi);
+static void gl_mdi_set_active_window_selection_verbs_sensitivity (BonoboMDI *mdi);
 
 static void gl_mdi_view_menu_item_toggled_cb (
 			BonoboUIComponent           *ui_component,
@@ -168,7 +169,7 @@ gl_mdi_init (glMDI  *mdi)
 
 	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi),
 					 GLABELS_UI_DIR "glabels-ui.xml",
-					 gl_verbs);
+					 gl_ui_verbs);
 	
 	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
 
@@ -220,7 +221,7 @@ gl_mdi_finalize (GObject *object)
 
 
 /*****************************************************************************/
-/* NEW mdi objecg.                                                           */
+/* NEW mdi object.                                                           */
 /*****************************************************************************/
 glMDI*
 gl_mdi_new (void)
@@ -283,9 +284,9 @@ gl_mdi_app_created_cb (BonoboMDI *mdi, BonoboWindow *win)
 			(gpointer)win);
 
 
-	gl_menus_set_verb_list_sensitive (ui_component, 
-					  gl_menus_no_docs_sensible_verbs,
-					  FALSE);
+	gl_ui_set_verb_list_sensitive (ui_component, 
+				       gl_ui_no_docs_sensible_verbs,
+				       FALSE);
 
         /* add a GeditRecentView object */
         model = gl_recent_get_model ();
@@ -383,38 +384,38 @@ gl_mdi_set_app_toolbar_style (BonoboWindow *win)
 	bonobo_ui_component_freeze (ui_component, NULL);
 
 	/* Updated view menu */
-	gl_menus_set_verb_state (ui_component, 
-				    "/commands/ViewToolbar",
-				    gl_prefs->toolbar_visible);
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ViewToolbar",
+			      gl_prefs->toolbar_visible);
 
-	gl_menus_set_verb_sensitive (ui_component, 
-				        "/commands/ToolbarSystem",
-				        gl_prefs->toolbar_visible);
-	gl_menus_set_verb_sensitive (ui_component, 
-				        "/commands/ToolbarIcon",
-				        gl_prefs->toolbar_visible);
-	gl_menus_set_verb_sensitive (ui_component, 
-				        "/commands/ToolbarIconText",
-				        gl_prefs->toolbar_visible);
-	gl_menus_set_verb_sensitive (ui_component, 
-				        "/commands/ToolbarTooltips",
-				        gl_prefs->toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/ToolbarSystem",
+				  gl_prefs->toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/ToolbarIcon",
+				  gl_prefs->toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/ToolbarIconText",
+				  gl_prefs->toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/ToolbarTooltips",
+				  gl_prefs->toolbar_visible);
 
-	gl_menus_set_verb_state (ui_component, 
-				    "/commands/ToolbarSystem",
-				    gl_prefs->toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ToolbarSystem",
+			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
 
-	gl_menus_set_verb_state (ui_component, 
-				    "/commands/ToolbarIcon",
-				    gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS);
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ToolbarIcon",
+			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS);
 
-	gl_menus_set_verb_state (ui_component, 
-				    "/commands/ToolbarIconText",
-				    gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ToolbarIconText",
+			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
 
-	gl_menus_set_verb_state (ui_component, 
-				    "/commands/ToolbarTooltips",
-				    gl_prefs->toolbar_view_tooltips);
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ToolbarTooltips",
+			      gl_prefs->toolbar_view_tooltips);
 
 	
 	/* Actually update toolbar style */
@@ -533,12 +534,32 @@ gl_mdi_add_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 }
 
 /*---------------------------------------------------------------------------*/
+/* View selection state changed callback.                                    */
+/*---------------------------------------------------------------------------*/
+static void 
+gl_mdi_view_selection_state_changed_cb (glView *view)
+{
+	gl_debug (DEBUG_MDI, "START");
+
+	if (bonobo_mdi_get_active_view (BONOBO_MDI (glabels_mdi)) != GTK_WIDGET (view))
+		return;
+	
+	gl_mdi_set_active_window_selection_verbs_sensitivity (BONOBO_MDI (glabels_mdi));
+	gl_debug (DEBUG_MDI, "END");
+}
+
+/*---------------------------------------------------------------------------*/
 /* Add view callback.                                                        */
 /*---------------------------------------------------------------------------*/
 static gint 
 gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view)
 {
 	gl_debug (DEBUG_MDI, "START");
+
+	g_signal_connect (G_OBJECT (view), "selection_changed",
+			  G_CALLBACK (gl_mdi_view_selection_state_changed_cb), 
+			  NULL);
+
 	gl_debug (DEBUG_MDI, "END");
 	return TRUE;
 }
@@ -752,9 +773,10 @@ gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 {
 	/* FIXME: it is too slooooooow! - Paolo */
 
-	BonoboWindow* active_window = NULL;
-	BonoboMDIChild* active_child = NULL;
-	glLabel* doc = NULL;
+	BonoboWindow      *active_window = NULL;
+	BonoboMDIChild    *active_child = NULL;
+	glView            *view = NULL;
+	glLabel           *doc = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gl_debug (DEBUG_MDI, "START");
@@ -773,34 +795,44 @@ gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	
 	if (active_child == NULL)
 	{
-		gl_menus_set_verb_list_sensitive (ui_component, 
-				gl_menus_no_docs_sensible_verbs, FALSE);
+		gl_ui_set_verb_list_sensitive (ui_component, 
+					       gl_ui_no_docs_sensible_verbs,
+					       FALSE);
 		goto end;
 	}
 	else
 	{
-		gl_menus_set_verb_list_sensitive (ui_component, 
-				gl_menus_all_sensible_verbs, TRUE);
+		gl_ui_set_verb_list_sensitive (ui_component, 
+					       gl_ui_all_sensible_verbs,
+					       TRUE);
 	}
 
 	doc = GL_MDI_CHILD (active_child)->label;
 	g_return_if_fail (doc != NULL);
 
 	if (!gl_label_can_undo (doc))
-		gl_menus_set_verb_sensitive (ui_component,
-					     "/commands/EditUndo", FALSE);
+		gl_ui_set_verb_sensitive (ui_component,
+					  "/commands/EditUndo",
+					  FALSE);
 
 	if (!gl_label_can_redo (doc))
-		gl_menus_set_verb_sensitive (ui_component,
-					     "/commands/EditRedo", FALSE);
+		gl_ui_set_verb_sensitive (ui_component,
+					  "/commands/EditRedo",
+					  FALSE);
 
-	if (!gl_label_is_modified (doc))
-	{
-		gl_menus_set_verb_list_sensitive (ui_component, 
-				gl_menus_not_modified_doc_sensible_verbs,
-						  FALSE);
-		goto end;
-	}
+	gl_ui_set_verb_list_sensitive (ui_component, 
+				       gl_ui_not_modified_doc_sensible_verbs,
+				       gl_label_is_modified (doc));
+
+	view = GL_VIEW (bonobo_mdi_get_active_view (mdi));
+	g_return_if_fail (view != NULL);
+
+	gl_ui_set_verb_list_sensitive (ui_component,
+				       gl_ui_selection_sensible_verbs,
+				       !gl_view_is_selection_empty (view));
+	gl_ui_set_verb_list_sensitive (ui_component,
+				       gl_ui_atomic_selection_sensible_verbs,
+				       gl_view_is_selection_atomic (view));
 
 end:
 	bonobo_ui_component_thaw (ui_component, NULL);
@@ -834,11 +866,46 @@ gl_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	gl_menus_set_verb_sensitive (ui_component, "/commands/EditUndo", 
-			gl_label_can_undo (doc));	
+	gl_ui_set_verb_sensitive (ui_component, "/commands/EditUndo", 
+				  gl_label_can_undo (doc));	
 
-	gl_menus_set_verb_sensitive (ui_component, "/commands/EditRedo", 
-			gl_label_can_redo (doc));	
+	gl_ui_set_verb_sensitive (ui_component, "/commands/EditRedo", 
+				  gl_label_can_redo (doc));	
+
+	bonobo_ui_component_thaw (ui_component, NULL);
+
+	gl_debug (DEBUG_MDI, "END");
+}
+
+/*****************************************************************************/
+/* Set sensitivity of selection verbs in active window.                      */
+/*****************************************************************************/
+static void 
+gl_mdi_set_active_window_selection_verbs_sensitivity (BonoboMDI *mdi)
+{
+	BonoboWindow      *active_window = NULL;
+	glView            *view = NULL;
+	BonoboUIComponent *ui_component;
+	
+	gl_debug (DEBUG_MDI, "START");
+	
+	active_window = bonobo_mdi_get_active_window (mdi);
+	g_return_if_fail (active_window != NULL);
+	
+	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
+	
+	view = GL_VIEW (bonobo_mdi_get_active_view (mdi));
+	g_return_if_fail (view != NULL);
+
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	gl_ui_set_verb_list_sensitive (ui_component,
+				       gl_ui_selection_sensible_verbs,
+				       !gl_view_is_selection_empty (view));
+	gl_ui_set_verb_list_sensitive (ui_component,
+				       gl_ui_atomic_selection_sensible_verbs,
+				       gl_view_is_selection_atomic (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 

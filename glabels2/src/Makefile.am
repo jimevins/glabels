@@ -53,8 +53,8 @@ glabels_SOURCES = 			\
 	mdi-child.h			\
 	stock.c				\
 	stock.h				\
-	menus.h				\
-	menus.c				\
+	ui.h				\
+	ui.c				\
 	commands.h			\
 	commands.c			\
 	file.h				\

@@ -12,8 +12,8 @@ src/mdi-child.c
 src/mdi-child.h
 src/stock.c
 src/stock.h
-src/menus.h
-src/menus.c
+src/ui.h
+src/ui.c
 src/commands.h
 src/commands.c
 src/file.h

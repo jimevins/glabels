@@ -38,17 +38,33 @@
 #include "view-barcode.h"
 #include "xml-label.h"
 #include "color.h"
+#include "marshal.h"
 
 #include "debug.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
+
 #define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
 #define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
+
+/*========================================================*/
+/* Private types.                                         */
+/*========================================================*/
+
+enum {
+	SELECTION_CHANGED,
+	LAST_SIGNAL
+};
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
 static GtkContainerClass *parent_class;
+
+static guint signals[LAST_SIGNAL] = {0};
 
 /* "CLIPBOARD" selection */
 static GdkAtom clipboard_atom = GDK_NONE;
@@ -65,68 +81,66 @@ static gdouble scales[] = {
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void      gl_view_class_init          (glViewClass *class);
-static void      gl_view_init                (glView *view);
-static void      gl_view_finalize            (GObject *object);
+static void       gl_view_class_init          (glViewClass *class);
+static void       gl_view_init                (glView *view);
+static void       gl_view_finalize            (GObject *object);
 
-static void      gl_view_construct           (glView *view);
-static GtkWidget *gl_view_construct_canvas   (glView *view);
-static void      gl_view_construct_selection (glView *view);
+static void       gl_view_construct           (glView *view);
+static GtkWidget *gl_view_construct_canvas    (glView *view);
+static void       gl_view_construct_selection (glView *view);
 
-static gdouble   get_apropriate_scale        (gdouble w, gdouble h);
+static gdouble    get_apropriate_scale        (gdouble w, gdouble h);
 
-static void      draw_rect_bg_fg             (glView *view);
-static void      draw_rounded_rect_bg_fg     (glView *view);
-static void      draw_round_bg_fg            (glView *view);
-static void      draw_cd_bg_fg               (glView *view);
+static void       draw_rect_bg_fg             (glView *view);
+static void       draw_rounded_rect_bg_fg     (glView *view);
+static void       draw_round_bg_fg            (glView *view);
+static void       draw_cd_bg_fg               (glView *view);
 
-static int       canvas_event                (GnomeCanvas *canvas,
-					      GdkEvent    *event,
-					      glView      *view);
-static int       canvas_event_arrow_mode     (GnomeCanvas *canvas,
-					      GdkEvent    *event,
-					      glView      *view);
+static void       select_region              (glView *view,
+					      gdouble x1,
+					      gdouble y1,
+					      gdouble x2,
+					      gdouble y2);
+static void       select_object              (glViewObject *view_object);
+static void       unselect_object            (glViewObject *view_object);
+static gboolean   object_at                  (glView *view,
+					      gdouble x, gdouble y);
+static gboolean   is_object_selected         (glViewObject *view_object);
 
-static void      select_region              (glView *view,
-					     gdouble x1,
-					     gdouble y1,
-					     gdouble x2,
-					     gdouble y2);
-static void      select_object              (glViewObject *view_object);
-static void      unselect_object            (glViewObject *view_object);
-static gboolean  object_at                  (glView *view,
-					     gdouble x, gdouble y);
-static gboolean  object_selected            (glViewObject *view_object);
+static void       move_selection             (glView *view,
+					      gdouble dx, gdouble dy);
 
-static int       item_event_arrow_mode      (GnomeCanvasItem *item,
-					     GdkEvent        *event,
-					     glViewObject    *view_object);
+static int        canvas_event                (GnomeCanvas *canvas,
+					       GdkEvent    *event,
+					       glView      *view);
+static int        canvas_event_arrow_mode     (GnomeCanvas *canvas,
+					       GdkEvent    *event,
+					       glView      *view);
 
-static GtkWidget *new_selection_menu        (glView *view);
+static int        item_event_arrow_mode      (GnomeCanvasItem *item,
+					      GdkEvent        *event,
+					      glViewObject    *view_object);
 
-static void      popup_selection_menu       (glView       *view,
-					     glViewObject *view_object,
-					     GdkEvent     *event);
+static GtkWidget *new_selection_menu         (glView *view);
 
-static void      move_selected_items        (glView *view,
-					     gdouble dx, gdouble dy);
-static void      move_item                  (GnomeCanvasItem *item,
-					     gdouble dx, gdouble dy);
+static void       popup_selection_menu       (glView       *view,
+					      glViewObject *view_object,
+					      GdkEvent     *event);
 
-static void      selection_clear_cb         (GtkWidget         *widget,
-					     GdkEventSelection *event,
-					     gpointer          data);
+static void       selection_clear_cb         (GtkWidget         *widget,
+					      GdkEventSelection *event,
+					      gpointer          data);
 
-static void      selection_get_cb           (GtkWidget         *widget,
-					     GtkSelectionData  *selection_data,
-					     guint             info,
-					     guint             time,
-					     gpointer          data);
+static void       selection_get_cb           (GtkWidget         *widget,
+					      GtkSelectionData  *selection_data,
+					      guint             info,
+					      guint             time,
+					      gpointer          data);
 
-static void      selection_received_cb      (GtkWidget         *widget,
-					     GtkSelectionData  *selection_data,
-					     guint             time,
-					     gpointer          data);
+static void       selection_received_cb      (GtkWidget         *widget,
+					      GtkSelectionData  *selection_data,
+					      guint             time,
+					      gpointer          data);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -167,6 +181,16 @@ gl_view_class_init (glViewClass *class)
 	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_finalize;
+
+	signals[SELECTION_CHANGED] =
+		g_signal_new ("selection_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glViewClass, selection_changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -897,6 +921,8 @@ gl_view_select_object (glView *view, glViewObject *view_object)
 
 	select_object (view_object);
 
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -906,17 +932,24 @@ gl_view_select_object (glView *view, glViewObject *view_object)
 void
 gl_view_select_all (glView *view)
 {
-	GList *p;
+	GList *p, *p_next;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
 
-	gl_view_unselect_all (view);
+	/* 1st unselect anything already selected. */
+	for (p = view->selected_object_list; p != NULL; p = p_next) {
+		p_next = p->next;
+		unselect_object (GL_VIEW_OBJECT (p->data));
+	}
 
+	/* Finally select all objects. */
 	for (p = view->object_list; p != NULL; p = p->next) {
 		select_object (GL_VIEW_OBJECT (p->data));
 	}
+
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -938,7 +971,145 @@ gl_view_unselect_all (glView *view)
 		unselect_object (GL_VIEW_OBJECT (p->data));
 	}
 
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
+
 	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Select all objects within given rectangular region.             */
+/*---------------------------------------------------------------------------*/
+static void
+select_region (glView  *view,
+	       gdouble x1,
+	       gdouble y1,
+	       gdouble x2,
+	       gdouble y2)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *object;
+	gdouble i_x1, i_y1, i_x2, i_y2, w, h;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail ((x1 <= x2) && (y1 <= y2));
+
+	for (p = view->object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT(p->data);
+		if (!is_object_selected (view_object)) {
+
+			object = gl_view_object_get_object (view_object);
+
+			gl_label_object_get_position (object, &i_x1, &i_y1);
+			gl_label_object_get_size (object, &w, &h);
+			i_x2 = i_x1 + w;
+			i_y2 = i_y1 + h;
+			if ((i_x1 >= x1) && (i_x2 <= x2) && (i_y1 >= y1)
+			    && (i_y2 <= y2)) {
+				select_object (view_object);
+			}
+
+		}
+	}
+
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Select an object.                                                */
+/*---------------------------------------------------------------------------*/
+static void
+select_object (glViewObject *view_object)
+{
+	glView *view;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
+
+	view = gl_view_object_get_view (view_object);
+
+	if (!is_object_selected (view_object)) {
+		view->selected_object_list =
+		    g_list_prepend (view->selected_object_list, view_object);
+	}
+	gl_view_object_show_highlight (view_object);
+	gtk_widget_grab_focus (GTK_WIDGET (view->canvas));
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Un-select object.                                               */
+/*---------------------------------------------------------------------------*/
+static void
+unselect_object (glViewObject *view_object)
+{
+	glView *view;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
+
+	view = gl_view_object_get_view (view_object);
+
+	gl_view_object_hide_highlight (view_object);
+
+	view->selected_object_list =
+	    g_list_remove (view->selected_object_list, view_object);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Return object at (x,y).                                          */
+/*---------------------------------------------------------------------------*/
+static gboolean
+object_at (glView  *view,
+	   gdouble x,
+	   gdouble y)
+{
+	GnomeCanvasItem *item, *p_item;
+	GList *p;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+
+	item = gnome_canvas_get_item_at (GNOME_CANVAS (view->canvas), x, y);
+
+	/* No item is at x, y */
+	if (item == NULL)
+		return FALSE;
+
+	/* ignore our background items */
+	if (g_list_find (view->bg_item_list, item) != NULL)
+		return FALSE;
+
+	return TRUE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Is the object in our current selection?                         */
+/*---------------------------------------------------------------------------*/
+static gboolean
+is_object_selected (glViewObject *view_object)
+{
+	glView *view;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW_OBJECT (view_object), FALSE);
+
+	view = gl_view_object_get_view (view_object);
+	if (g_list_find (view->selected_object_list, view_object) == NULL) {
+		return FALSE;
+	}
+	return TRUE;
 }
 
 /*****************************************************************************/
@@ -991,6 +1162,8 @@ gl_view_delete_selection (glView *view)
 		p_next = p->next;
 		g_object_unref (G_OBJECT (p->data));
 	}
+
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1162,6 +1335,31 @@ gl_view_paste (glView *view)
 	gtk_selection_convert (GTK_WIDGET (view->invisible),
 			       clipboard_atom, GDK_SELECTION_TYPE_STRING,
 			       GDK_CURRENT_TIME);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  move selected objects                                           */
+/*---------------------------------------------------------------------------*/
+static void
+move_selection (glView  *view,
+		gdouble  dx,
+		gdouble  dy)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_position_relative (object, dx, dy);
+
+	}
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1435,25 +1633,23 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 			switch (event->key.keyval) {
 			case GDK_Left:
 			case GDK_KP_Left:
-				move_selected_items (view,
-						     -1.0 / (view->scale),
-						     0.0);
+				move_selection (view,
+						-1.0 / (view->scale), 0.0);
 				break;
 			case GDK_Up:
 			case GDK_KP_Up:
-				move_selected_items (view, 0.0,
-						     -1.0 / (view->scale));
+				move_selection (view,
+						0.0, -1.0 / (view->scale));
 				break;
 			case GDK_Right:
 			case GDK_KP_Right:
-				move_selected_items (view,
-						     1.0 / (view->scale),
-						     0.0);
+				move_selection (view,
+						1.0 / (view->scale), 0.0);
 				break;
 			case GDK_Down:
 			case GDK_KP_Down:
-				move_selected_items (view, 0.0,
-						     1.0 / (view->scale));
+				move_selection (view,
+						0.0, 1.0 / (view->scale));
 				break;
 			case GDK_Delete:
 			case GDK_KP_Delete:
@@ -1474,140 +1670,6 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 		return FALSE;
 	}
 
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Select all objects within given rectangular region.             */
-/*---------------------------------------------------------------------------*/
-static void
-select_region (glView  *view,
-	       gdouble x1,
-	       gdouble y1,
-	       gdouble x2,
-	       gdouble y2)
-{
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *object;
-	gdouble i_x1, i_y1, i_x2, i_y2, w, h;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail ((x1 <= x2) && (y1 <= y2));
-
-	for (p = view->object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT(p->data);
-		if (!object_selected (view_object)) {
-
-			object = gl_view_object_get_object (view_object);
-
-			gl_label_object_get_position (object, &i_x1, &i_y1);
-			gl_label_object_get_size (object, &w, &h);
-			i_x2 = i_x1 + w;
-			i_y2 = i_y1 + h;
-			if ((i_x1 >= x1) && (i_x2 <= x2) && (i_y1 >= y1)
-			    && (i_y2 <= y2)) {
-				select_object (view_object);
-			}
-
-		}
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Select an object.                                                */
-/*---------------------------------------------------------------------------*/
-static void
-select_object (glViewObject *view_object)
-{
-	glView *view;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
-
-	view = gl_view_object_get_view (view_object);
-
-	if (!object_selected (view_object)) {
-		view->selected_object_list =
-		    g_list_prepend (view->selected_object_list, view_object);
-	}
-	gl_view_object_show_highlight (view_object);
-	gtk_widget_grab_focus (GTK_WIDGET (view->canvas));
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Un-select object.                                               */
-/*---------------------------------------------------------------------------*/
-static void
-unselect_object (glViewObject *view_object)
-{
-	glView *view;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
-
-	view = gl_view_object_get_view (view_object);
-
-	gl_view_object_hide_highlight (view_object);
-
-	view->selected_object_list =
-	    g_list_remove (view->selected_object_list, view_object);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Return object at (x,y).                                          */
-/*---------------------------------------------------------------------------*/
-static gboolean
-object_at (glView  *view,
-	   gdouble x,
-	   gdouble y)
-{
-	GnomeCanvasItem *item, *p_item;
-	GList *p;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
-
-	item = gnome_canvas_get_item_at (GNOME_CANVAS (view->canvas), x, y);
-
-	/* No item is at x, y */
-	if (item == NULL)
-		return FALSE;
-
-	/* ignore our background items */
-	if (g_list_find (view->bg_item_list, item) != NULL)
-		return FALSE;
-
-	return TRUE;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Is the object in our current selection?                         */
-/*---------------------------------------------------------------------------*/
-static gboolean
-object_selected (glViewObject *view_object)
-{
-	glView *view;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (GL_IS_VIEW_OBJECT (view_object), FALSE);
-
-	view = gl_view_object_get_view (view_object);
-	if (g_list_find (view->selected_object_list, view_object) == NULL) {
-		return FALSE;
-	}
-	return TRUE;
 }
 
 /*****************************************************************************/
@@ -1667,20 +1729,29 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 		switch (event->button.button) {
 		case 1:
 			if (control_key_pressed) {
-				if (object_selected (view_object)) {
+				if (is_object_selected (view_object)) {
 					/* Un-selecting a selected item */
 					unselect_object (view_object);
+					g_signal_emit (G_OBJECT(view),
+						       signals[SELECTION_CHANGED],
+						       0);
 					return TRUE;
 				} else {
 					/* Add to current selection */
 					select_object (view_object);
+					g_signal_emit (G_OBJECT(view),
+						       signals[SELECTION_CHANGED],
+						       0);
 				}
 			} else {
-				if (!object_selected (view_object)) {
+				if (!is_object_selected (view_object)) {
 					/* No control, key so remove any selections before adding */
 					gl_view_unselect_all (view);
 					/* Add to current selection */
 					select_object (view_object);
+					g_signal_emit (G_OBJECT(view),
+						       signals[SELECTION_CHANGED],
+						       0);
 				}
 			}
 			/* Go into dragging mode while button remains pressed. */
@@ -1697,7 +1768,7 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			return TRUE;
 
 		case 3:
-			if (!object_selected (view_object)) {
+			if (!is_object_selected (view_object)) {
 				if (!control_key_pressed) {
 					/* No control, key so remove any selections before adding */
 					gl_view_unselect_all (view);
@@ -1705,6 +1776,9 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			}
 			/* Add to current selection */
 			select_object (view_object);
+			g_signal_emit (G_OBJECT(view),
+				       signals[SELECTION_CHANGED],
+				       0);
 			/* bring up apropriate menu for selection. */
 			popup_selection_menu (view, view_object, event);
 			return TRUE;
@@ -1732,7 +1806,7 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			/* Dragging mode, move selection */
 			new_x = item_x;
 			new_y = item_y;
-			move_selected_items (view, (new_x - x), (new_y - y));
+			move_selection (view, (new_x - x), (new_y - y));
 			x = new_x;
 			y = new_y;
 			return TRUE;
@@ -1748,6 +1822,9 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 			gnome_canvas_item_ungrab (item, event->button.time);
 			dragging = FALSE;
 			select_object (view_object);
+			g_signal_emit (G_OBJECT(view),
+				       signals[SELECTION_CHANGED],
+				       0);
 			gl_view_object_show_dialog (view_object);
 			return TRUE;
 
@@ -1850,31 +1927,6 @@ popup_selection_menu (glView       *view,
 					event->button.button,
 					event->button.time);
 		}
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  move selected items                                             */
-/*---------------------------------------------------------------------------*/
-static void
-move_selected_items (glView  *view,
-		     gdouble dx,
-		     gdouble dy)
-{
-	GList *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_position_relative (object, dx, dy);
 
 	}
 
