@@ -413,6 +413,15 @@ margin="2" round="0">
     </Label>
   </Sheet>
 
+  <!-- =================================================================== -->
+  <!-- Zweckform 4780: Allround Labels, 48,5 x 25,4 mm, 40 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 4780" size="A4" description="Allround Labels">
+    <Label style="rectangle" width="137.48" height="72" margin="3" round="0">
+      <Layout nx="4" ny="10" x0="23" y0="68" dx="137.48" dy="72"/>
+    </Label>
+  </Sheet>
+
 
 
   <!-- ******************************************************************** -->
@@ -560,6 +569,14 @@ margin="2" round="0">
     </Label>
   </Sheet>
 
+  <!-- =================================================================== -->
+  <!-- Hema Etiketten: 65 x 38 mm, 21 per sheet                            -->
+  <!-- =================================================================== -->
+  <Sheet name="Hema Etiketten" size="A4" description="Rectangular Labels">
+    <Label style="rectangle" width="178" height="108" margin="5" round="5">
+      <Layout nx="3" ny="7" x0="20" y0="42" dx="187" dy="107"/>
+    </Label>
+  </Sheet>
 
 
 </GLabels-templates>
