@@ -6,9 +6,13 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 runtime_files = \
+	glabels-2.0.dtd \
 	paper-sizes.xml \
-	predefined-templates.xml \
-	glabels-2.0.dtd
+	avery-us-templates.xml \
+	avery-iso-templates.xml \
+	zweckform-iso-templates.xml \
+	misc-us-templates.xml \
+	misc-iso-templates.xml
 
 EXTRA_DIST = \
 	$(desktop_DATA) \

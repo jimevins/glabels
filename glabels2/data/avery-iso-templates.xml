@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<Glabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery A4 products (and look-alikes)                                  -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
+  <!-- =================================================================== -->
+  <Template name="Avery 7160" size="A4" _description="Mailing labels">
+    <Label-rectangle id="0" width="181.4" height="108.0" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="7" x0="21.2" y0="43.9" dx="187.2" dy="108.0"/>
+    </Label-rectangle>
+    <Alias name="Avery L7160"/>
+    <Alias name="Avery J8160"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7161 family: Mailing labels, 63.5 x 46.6 mm, 18 per sheet     -->
+  <!-- =================================================================== -->
+  <Template name="Avery 7161" size="A4" _description="Mailing labels">
+    <Label-rectangle id="0" width="180.2" height="132.6" round="7">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="6" x0="21" y0="23" dx="186.9" dy="132.5"/>
+    </Label-rectangle>
+    <Alias name="Avery L7161"/>
+    <Alias name="Avery J8161"/>
+  </Template>
+
+  <!-- ================================================================== -->  
+  <!-- Avery 7162 family: Mailing labels, 99.1 x 33.9 mm, 16 per sheet    -->  
+  <!-- ================================================================== -->  
+  <Template name="Avery 7162" size="A4" _description="Mailing labels">  
+    <Label-rectangle id="0" width="280.9" height="96.1" round="5">  
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="8" x0="11.3" y0="36.8" dx="290.5" dy="96.1"/>  
+    </Label-rectangle>  
+    <Alias name="Avery L7162"/>  
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7163 family: Mailing labels, 99.1 x 38.1 mm, 14 per sheet     -->
+  <!-- =================================================================== -->
+  <Template name="Avery 7163" size="A4" _description="Mailing labels">
+    <Label-rectangle id="0" width="280.9" height="108" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="7" x0="9.5" y0="43" dx="292" dy="108"/>
+    </Label-rectangle>
+    <Alias name="Avery L7163"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7164 family: Address labels, 63.50 x 71.98 mm, 12 per sheet   -->
+  <!-- =================================================================== -->
+  <Template name="Avery 7164" size="A4" _description="Address labels">
+    <Label-rectangle id="0" width="180" height="204.038" round="8.5">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="4" x0="20.84" y0="10" dx="187.08" dy="204.038"/>
+    </Label-rectangle>
+    <Alias name="Avery J8164"/>
+    <Alias name="Avery L7164"/>
+    <Alias name="Biltema 23-756"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7169 family: shipping labels, 99.1 x 139.0 mm, 4 per sheet    -->
+  <!-- =================================================================== -->
+  <Template name="Avery L7169" size="A4" _description="Shipping labels">
+    <Label-rectangle id="0" width="280.9" height="394.0" round="6">
+      <Markup-margin size="6"/>
+      <Layout nx="2" ny="2" x0="14.2" y0="20.0" dx="287.7" dy="394.0"/>
+    </Label-rectangle>
+    <Alias name="Avery 7169"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 7414 family: Business Cards, 52mm x 90mm, 10 per sheet        -->
+  <!-- =================================================================== -->
+  <Template name="Avery L7414" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="255.1" height="147.4" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="42.51" y0="52.44" dx="255.1" dy="147.4"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8414 family: Business Cards, 50.8 x 87.0 mm, 10 per sheet     -->
+  <!-- =================================================================== -->
+  <Template name="Avery 8414" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="246.6" height="144" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="42" y0="57.890" dx="264" dy="144"/>
+    </Label-rectangle>
+    <Alias name="Avery J8414"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8651 family: Mailing labels, 38.1 x 21.2 mm, 65 per sheet     -->
+  <!-- =================================================================== -->
+  <Template name="Avery 8651" size="A4" _description="Mini Address">
+    <Label-rectangle id="0" width="108" height="60.09" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="5" ny="13" x0="13.32" y0="30.90" dx="115.09" dy="60.09"/>
+    </Label-rectangle>
+    <Alias name="Avery L8651"/>
+    <Alias name="Avery J8651"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8666 family: Diskette labels (face only), 70 x 52 mm, 10 per  -->
+  <!-- =================================================================== -->
+  <Template name="Avery 8666" size="A4"
+         _description="3.5'' Diskette labels (face only)">
+    <Label-rectangle id="0" width="198.4" height="147.4" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="66" y0="53" dx="264" dy="147"/>
+    </Label-rectangle>
+    <Alias name="Avery J8666"/>
+  </Template>
+
+  <!-- =============================================================== -->
+  <!-- Avery-Zweckform J8676A: CD/DVD Labels 2 per sheet               -->
+  <!-- =============================================================== -->
+  <Template name="Avery 8676" size="A4" _description="CD/DVD Labels">
+    <Label-cd id="0" radius="166.5" hole="17">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="2" x0="130" y0="59.5" dx="0" dy="388"/>        
+    </Label-cd>
+    <Alias name="Avery J8676"/>
+  </Template>
+
+  <!-- =============================================================== -->
+  <!-- Avery 18036 Mailing Labels, 70mm x 32mm, 27 per sheet           -->
+  <!-- =============================================================== -->
+  <Template name="Avery 18036" size="A4" _description="Mailing Labels">
+    <Label-rectangle id="0" width="198" height="91" round="0">
+      <Markup-margin size="10"/>
+      <Layout nx="3" ny="9" x0="0" y0="13" dx="198" dy="91"/>
+    </Label-rectangle>
+  </Template>
+
+
+
+</Glabels-templates>
+
+
+
+

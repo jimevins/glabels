@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<Glabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery US-Letter products (and look-alikes)                           -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Avery 5160 family: Mailing Labels, 1'' x 2_5/8'', 30 per sheet    * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5160" size="US-Letter" _description="Mailing Labels">
+    <Label-rectangle id="0" width="189" height="72" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="10" x0="11.5" y0="36" dx="200" dy="72"/>
+    </Label-rectangle>
+    <Alias name="Avery 15160"/>
+    <Alias name="Avery 18160"/>
+    <Alias name="Avery 18660"/>
+    <Alias name="Avery 25160"/>
+    <Alias name="Avery 5260"/>
+    <Alias name="Avery 5510"/>
+    <Alias name="Avery 5520"/>
+    <Alias name="Avery 5560"/>
+    <Alias name="Avery 5810"/>
+    <Alias name="Avery 5920"/>
+    <Alias name="Avery 5960"/>
+    <Alias name="Avery 5970"/>
+    <Alias name="Avery 5971"/>
+    <Alias name="Avery 5972"/>
+    <Alias name="Avery 5979"/>
+    <Alias name="Avery 5980"/>
+    <Alias name="Avery 6231"/>
+    <Alias name="Avery 6233"/>
+    <Alias name="Avery 6245"/>
+    <Alias name="Avery 6460"/>
+    <Alias name="Avery 6498"/>
+    <Alias name="Avery 8160"/>
+    <Alias name="Avery 8250"/>
+    <Alias name="Avery 8460"/>
+    <Alias name="Avery 8560"/>
+    <Alias name="Avery 8620"/>
+    <Alias name="Avery 8660"/>
+    <Alias name="Avery 8810"/>
+    <Alias name="Avery 8920"/>
+    <Alias name="Avery 8930"/>
+    <Alias name="Maco ll5805"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5162 family: Mailing labels, 1_1/3'' x 4'', 14 per sheet    * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5162" size="US-Letter" _description="Mailing labels">
+    <Label-rectangle id="0" width="288" height="96" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="7" x0="10.5" y0="60" dx="303" dy="96"/>
+    </Label-rectangle>
+    <Alias name="Avery 15162"/>
+    <Alias name="Avery 18162"/>
+    <Alias name="Avery 18662"/>
+    <Alias name="Avery 5262"/>
+    <Alias name="Avery 5512"/>
+    <Alias name="Avery 5522"/>
+    <Alias name="Avery 5922"/>
+    <Alias name="Avery 5962"/>
+    <Alias name="Avery 8162"/>
+    <Alias name="Avery 8252"/>
+    <Alias name="Avery 8462"/>
+    <Alias name="Avery 8662"/>
+    <Alias name="Avery 8922"/>
+    <Alias name="Avery 8932"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5163 family: Shipping labels, 4'' x 2'', 10 per sheet       * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5163" size="US-Letter" _description="Shipping labels">
+    <Label-rectangle id="0" width="288" height="144" round="10">
+      <Markup-margin size="10"/>
+      <Layout nx="2" ny="5" x0="11.25" y0="36" dx="301.5" dy="144"/>
+    </Label-rectangle>
+    <Alias name="Avery 15163"/>
+    <Alias name="Avery 18163"/>
+    <Alias name="Avery 18663"/>
+    <Alias name="Avery 5263"/>
+    <Alias name="Avery 5513"/>
+    <Alias name="Avery 5523"/>
+    <Alias name="Avery 5795"/>
+    <Alias name="Avery 5923"/>
+    <Alias name="Avery 5963"/>
+    <Alias name="Avery 5978"/>
+    <Alias name="Avery 8163"/>
+    <Alias name="Avery 8253"/>
+    <Alias name="Avery 8463"/>
+    <Alias name="Avery 8663"/>
+    <Alias name="Avery 8763"/>
+    <Alias name="Avery 8923"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5164 family: Mailing Labels.                                  -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5164" size="US-Letter" _description="Mailing Labels">
+    <Label-rectangle id="0" width="288" height="234" round="10">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="3" x0="13" y0="36" dx="301" dy="234"/>
+    </Label-rectangle>
+    <Alias name="Avery 8164"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5167 family: Address labels, 1_3/4'' x 1/2'', 80 per sheet  * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5167" size="US-Letter" _description="Address labels">
+    <Label-rectangle id="0" width="126" height="36" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="20" x0="20.25" y0="36" dx="148.5" dy="36"/>
+    </Label-rectangle>
+    <Alias name="Avery 15167"/>
+    <Alias name="Avery 15267"/>
+    <Alias name="Avery 18167"/>
+    <Alias name="Avery 18667"/>
+    <Alias name="Avery 5267"/>
+    <Alias name="Avery 5667"/>
+    <Alias name="Avery 5927"/>
+    <Alias name="Avery 6467"/>
+    <Alias name="Avery 6504"/>
+    <Alias name="Avery 8167"/>
+    <Alias name="Avery 8567"/>
+    <Alias name="Avery 8667"/>
+    <Alias name="Avery 8927"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5196 family: Diskette labels, 2_3/4'' x 2_3/4'', 9 per sheet* -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5196" size="US-Letter" _description="Diskette labels">
+    <Label-rectangle id="0" width="198" height="198" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="3" x0="9" y0="36" dx="198" dy="216"/>
+    </Label-rectangle>
+    <Alias name="Avery 5096"/>
+    <Alias name="Avery 5896"/>
+    <Alias name="Avery 8196"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5261 family: Mailing Labels, 1'' x 4'', 20 per sheet        * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5261" size="US-Letter" _description="Mailing Labels">
+    <Label-rectangle id="0" width="288" height="72" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="10" x0="11.5" y0="36" dx="303" dy="72"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery: File Folder Labels, 51 x 89 mm, 30 per sheet                 -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5366" size="US-Letter" _description="File Folder Labels">
+    <Label-rectangle id="0" width="252" height="48" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="15" x0="36" y0="36" dx="288" dy="48"/>
+    </Label-rectangle>
+  </Template>
+
+ <!-- =================================================================== -->
+  <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5371" size="US-Letter" _description="Business Cards">
+    <Label-rectangle id="0" width="252" height="144" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="54" y0="36" dx="252" dy="144"/>
+    </Label-rectangle>
+    <Alias name="Avery 25371"/>
+    <Alias name="Avery 26550"/>
+    <Alias name="Avery 26551"/>
+    <Alias name="Avery 27871"/>
+    <Alias name="Avery 27881"/>
+    <Alias name="Avery 27882"/>
+    <Alias name="Avery 28371"/>
+    <Alias name="Avery 28877"/>
+    <Alias name="Avery 5372"/>
+    <Alias name="Avery 5376"/>
+    <Alias name="Avery 5377"/>
+    <Alias name="Avery 5871"/>
+    <Alias name="Avery 5876"/>
+    <Alias name="Avery 5877"/>
+    <Alias name="Avery 5911"/>
+    <Alias name="Avery 8271"/>
+    <Alias name="Avery 8371"/>
+    <Alias name="Avery 8372"/>
+    <Alias name="Avery 8374"/>
+    <Alias name="Avery 8376"/>
+    <Alias name="Avery 8377"/>
+    <Alias name="Avery 8471"/>
+    <Alias name="Avery 8476"/>
+    <Alias name="Avery 8571"/>
+    <Alias name="Avery 8871"/>
+    <Alias name="Avery 8872"/>
+    <Alias name="Avery 8876"/>
+    <Alias name="Avery 8877"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5395 family: Name Badge Labels, 2_1/3'' x 3_3/8'', 8 per sheet -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5395" size="US-Letter" _description="Name Badge Labels">
+    <Label-rectangle id="0" width="235" height="168" round="15">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="4" x0="53" y0="42" dx="272.5" dy="180.5"/>
+    </Label-rectangle>
+    <Alias name="Avery 15395"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 8373" size="US-Letter" _description="Business Cards">
+    <Label-rectangle id="0" width="252" height="144" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="4" x0="36" y0="54" dx="288" dy="180"/>
+    </Label-rectangle>
+    <Alias name="Avery 3612"/>
+    <Alias name="Avery 5881"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5931" size="US-Letter"
+         _description="CD/DVD Labels (face only)">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
+      <Markup-margin size="5"/>
+      <Markup-line x1="0" y1="166.5" x2="108" y2="166.5"/>
+      <Markup-line x1="225" y1="166.5" x2="333" y2="166.5"/>
+      <Markup-line x1="166.5" y1="0" x2="166.5" y2="108"/>
+      <Markup-line x1="166.5" y1="225" x2="166.5" y2="333"/>
+      <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
+    </Label-cd>
+    <Alias name="Avery 5691"/>
+    <Alias name="Avery 5692"/>
+    <Alias name="Avery 5694"/>
+    <Alias name="Avery 8692"/>
+    <Alias name="Avery 8694"/>
+    <Alias name="Avery 8695"/>
+    <Alias name="Avery 8699"/>
+    <Alias name="Avery 8831"/>
+    <Alias name="Avery 8832"/>
+    <Alias name="Avery 8842"/>
+    <Alias name="Avery 8844"/>
+    <Alias name="Avery 8846"/>
+    <Alias name="Avery 8847"/>
+    <Alias name="Avery 8931"/>
+    <Alias name="Avery 8941"/>
+    <Alias name="Avery 8942"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997face family: VCR Labels, 1_7/8'' x 3_1/16'', 10 per sheet -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5997 - VCR Face" size="US-Letter"
+         _description="VCR Face Labels">
+    <Label-rectangle id="0" width="220" height="133" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
+    </Label-rectangle>
+    <Alias name="Avery 5199 - VCR Face"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997spine family: VCR Labels, 2/3'' x 5_3/4'',15 per sheet    -->
+  <!-- =================================================================== -->
+  <Template name="Avery 5997 - VCR Spine" size="US-Letter"
+        _description="VCR Spine Labels">
+    <Label-rectangle id="0" width="414" height="48" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
+    </Label-rectangle>
+    <Alias name="Avery 5199 - VCR Spine"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 6490" size="US-Letter" _description="Diskette labels">
+    <Label-rectangle id="0" width="193.5" height="144" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="5" x0="9.215999926" y0="36" dx="200.2679959" dy="144"/>
+    </Label-rectangle>
+    <Alias name="Avery 6501"/>
+    <Alias name="Avery 6861"/>
+    <Alias name="Avery 8096"/>
+  </Template> 
+
+  <!-- =================================================================== -->
+  <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   * -->
+  <!-- =================================================================== -->
+  <Template name="Avery 8165" size="US-Letter" _description="Full-page">
+    <Label-rectangle id="0" width="612" height="792" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
+    </Label-rectangle>
+    <Alias name="Avery 3114"/>
+    <Alias name="Avery 3121"/>
+    <Alias name="Avery 3123"/>
+    <Alias name="Avery 3131"/>
+    <Alias name="Avery 3132"/>
+    <Alias name="Avery 3133"/>
+    <Alias name="Avery 3141"/>
+    <Alias name="Avery 3142"/>
+    <Alias name="Avery 3145"/>
+    <Alias name="Avery 3245"/>
+    <Alias name="Avery 3246"/>
+    <Alias name="Avery 3247"/>
+    <Alias name="Avery 3255"/>
+    <Alias name="Avery 3267"/>
+    <Alias name="Avery 3270"/>
+    <Alias name="Avery 3271"/>
+    <Alias name="Avery 3272"/>
+    <Alias name="Avery 3275"/>
+    <Alias name="Avery 3276"/>
+    <Alias name="Avery 3277"/>
+    <Alias name="Avery 3614"/>
+    <Alias name="Avery 3625"/>
+    <Alias name="Avery 3641"/>
+    <Alias name="Avery 3651"/>
+    <Alias name="Avery 5165"/>
+    <Alias name="Avery 5177"/>
+    <Alias name="Avery 5182"/>
+    <Alias name="Avery 5265"/>
+    <Alias name="Avery 5277"/>
+    <Alias name="Avery 5282"/>
+    <Alias name="Avery 53205"/>
+    <Alias name="Avery 53211"/>
+    <Alias name="Avery 53230"/>
+    <Alias name="Avery 53240"/>
+    <Alias name="Avery 5884"/>
+    <Alias name="Avery 5975"/>
+    <Alias name="Avery 6465"/>
+    <Alias name="Avery 6503"/>
+    <Alias name="Avery 75287"/>
+    <Alias name="Avery 75299"/>
+    <Alias name="Avery 8255"/>
+    <Alias name="Avery 8314"/>
+    <Alias name="Avery 8324"/>
+    <Alias name="Avery 8384"/>
+    <Alias name="Avery 8465"/>
+    <Alias name="Avery 8665"/>
+    <Alias name="IP Invent It! #00064-3"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheet  -->
+  <!-- =================================================================== -->
+  <Template name="Avery 3274.1" size="US-Letter" _description="Square Stickers">
+    <Label-rectangle id="0" width="180" height="180" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
+    </Label-rectangle>
+    <Alias name="Avery 3111"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet    -->
+  <!-- =================================================================== -->
+  <Template name="Avery 3274.2" size="US-Letter" _description="Small Round Stickers">
+    <Label-round id="0" radius="54">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="5" x0="36" y0="54" dx="144" dy="144"/>
+    </Label-round>
+    <Alias name="Avery 3112"/>
+    <Alias name="Avery 8293"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.3 family: Big round stickers, 2_1/2'', 9 per sheet       -->
+  <!-- =================================================================== -->
+  <Template name="Avery 3274.3" size="US-Letter" _description="Big Round Stickers">
+    <Label-round id="0" radius="90">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
+    </Label-round>
+  </Template>
+
+
+
+</Glabels-templates>
+
+
+
+

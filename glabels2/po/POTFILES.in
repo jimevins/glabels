@@ -160,5 +160,9 @@ src/mygal/gtk-combo-box.c
 src/mygal/gtk-combo-box.h
 src/mygal/widget-color-combo.c
 src/mygal/widget-color-combo.h
-data/predefined-templates.xml
 data/paper-sizes.xml
+data/avery-us-templates.xml
+data/avery-iso-templates.xml
+data/zweckform-iso-templates.xml
+data/misc-us-templates.xml
+data/misc-iso-templates.xml

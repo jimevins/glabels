@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<Glabels-templates>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Misc. US-Letter products.                                            -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
+  <!-- =================================================================== -->
+  <Template name="Southworth BC" size="US-Letter" _description="Business Cards">
+    <Label-rectangle id="0" width="252" height="144" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Memorex CD Labels                                                 * -->
+  <!-- =================================================================== -->
+  <Template name="Memorex CD Labels" size="US-Letter"
+	 _description="CD/DVD Labels">
+    <Label-cd id="0" radius="166.5" hole="58.5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="238.5" y0="414" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Neato USCD2lbl.NTT: CD/DVD Labels (face only), 2 per sheet          -->
+  <!-- =================================================================== -->
+  <Template name="Neato USCD2lbl.NTT" size="US-Letter"
+         _description="CD/DVD Labels (face only)">
+    <Label-cd id="0" radius="166.5" hole="58.5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Neato USCD2lbl.NTT: CD/DVD Labels (rectangles), 2 per sheet         -->
+  <!-- =================================================================== -->
+  <Template name="Neato USCD2lbl Rectangles" size="US-Letter"
+	 _description="CD Template Rectangles">
+    <Label-rectangle id="0" width="77.04" height="234.36" round="10">
+      <Markup-margin size="2.016"/>
+      <Layout nx="2" ny="1" x0="51.3" y0="279.72" dx="433.44" dy="0"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Neato CLP-192328/26: HandiCD-R 50MB, 3" x 2_1/8'', 9 per sheet      -->
+  <!-- =================================================================== -->
+  <Template name="Neato HandiCD-R" size="US-Letter"
+	 _description="Business Card CD">
+    <Label-cd id="0" radius="108" width="171" hole="58">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- CD STOMPER PRO CD Label Refills, (Face Only)                      * -->
+  <!-- =================================================================== -->
+  <Template name="Stomper PRO CD" size="US-Letter"
+         _description="PRO CD Labels 2-up (face only)">
+    <Label-cd id="0" radius="166.5" hole="58.5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="245" y0="416" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
+  <Template name="Stomper PRO Zip" size="US-Letter"
+         _description="PRO CD Labels 2-up (Face only)">
+    <Label-rectangle id="0" width="168" height="142" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="2" x0="407" y0="68" dx="0" dy="142"/>
+      <Layout nx="1" ny="2" x0="37" y0="440" dx="0" dy="142"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template name="Stomper PRO Spine" size="US-Letter"
+         _description="PRO CD Labels 2-up (CD spine only)">
+    <Label-rectangle id="0" width="288" height="20" round="0">
+      <Markup-margin size="2"/>
+      <Layout nx="2" ny="1" x0="18" y0="385" dx="288" dy="0"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- ===================================================================-->
+  <!-- Meritline Mini CD/DVD Labels (face only), 5 per sheet              -->
+  <!-- ===================================================================-->
+  <Template name="Meritline Mini-CD" size="US-Letter"
+   _description="Mini-CD Labels">
+    <Label-cd id="0" radius="110.5" hole="57.5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
+      <Layout nx="1" ny="1" x0="197.3" y0="289.5" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
+  <!-- ===================================================================-->
+  <!-- Neato Slimline CD Jewel Case Insert, 2 per sheet.                  -->
+  <!-- Left margin area is CD spine; ignore other margins.                -->
+  <!-- To write text on spine, use "upside down" template, "rotated",     -->
+  <!-- spine is bottom margin, print label sheet BOTTOM FIRST.            -->
+  <!-- ===================================================================-->
+  <Template name="Neato Slimline CD Case" size="US-Letter"
+         _description="Slimline CD Case (rightside up)">
+    <Label-rectangle id="0" width="394.5" height="342.5" round="0">
+      <Markup-margin size="7.5"/>
+      <Layout nx="1" ny="2" x0="130" y0="41.9" dx="0" dy="363"/>
+    </Label-rectangle>
+  </Template>
+  <Template name="Neato Slimline CD Case, spine" size="US-Letter"
+         _description="Slimline CD Case (upside down)">
+    <Label-rectangle id="0" width="394.5" height="342.5" round="0">
+      <Markup-margin size="7.5"/>
+      <Layout nx="1" ny="2" x0="96.5" y0="41.9" dx="0" dy="363"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Great Gizmos : CD/DVD Labels (face only), 2 per sheet             * -->
+  <!-- =================================================================== -->
+  <Template name="Great Gizmos" size="US-Letter"
+         _description="CD/DVD Labels (face only)">
+    <Label-cd id="0" radius="166.5" hole="58.5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Imation-SoniX CD/DVD Labels  (Face Only)                          * -->
+  <!-- =================================================================== -->
+  <Template name="Imation-SoniX No.5112 15954" size="US-Letter"
+         _description="CD/DVD Labels (Face Only)">
+    <Label-cd id="0" radius="167.8" hole="18.5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="1" x0="40.5" y0="370" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
+
+
+</Glabels-templates>
+
+
+
+
