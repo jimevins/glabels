@@ -743,9 +743,9 @@ gl_template_markup_circle_new (gdouble x0,
 	markup = g_new0 (glTemplateMarkup, 1);
 
 	markup->type        = GL_TEMPLATE_MARKUP_CIRCLE;
-	markup->circle.x0     = x0;
-	markup->circle.y0     = y0;
-	markup->circle.r      = r;
+	markup->circle.x0   = x0;
+	markup->circle.y0   = y0;
+	markup->circle.r    = r;
 
 	return markup;
 }
