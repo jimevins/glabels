@@ -1,3 +1,13 @@
+2004-06-08  Jim Evins  <evins@snaught.com>
+
+	* src/label.c:
+	* src/label.h:
+	* src/xml-label.c:
+	* AUTHORS:
+		Don't touch compression of original file -- still defaults to 9 for
+		new files.  Original patch provided by Javier Donaire Segarra
+		(#912252 in patch tracker).
+
 2004-05-05  Jim Evins  <evins@snaught.com>
 
 	* data/glabels-2.0.dtd:
