@@ -251,6 +251,11 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (whbox1),
+			    gtk_label_new (""),
+			    FALSE, FALSE, 0);
+	whbox1 = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (whbox1),
 			    gtk_label_new (_("Description:")),
 			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
@@ -274,6 +279,11 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	wvbox1 = gtk_vbox_new (FALSE, GL_HIG_SPACING);
 	gtk_box_pack_start (GTK_BOX (whbox), wvbox1, FALSE, FALSE, 0);
 
+	whbox1 = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (whbox1),
+			    gtk_label_new (""),
+			    FALSE, FALSE, 0);
 	whbox1 = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
 	media_select->desc_label = gtk_label_new ("");

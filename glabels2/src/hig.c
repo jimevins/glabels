@@ -105,19 +105,11 @@ gl_hig_dialog_init (glHigDialog *hig_dialog)
 	gtk_container_set_border_width (GTK_CONTAINER(hig_dialog),
 					HIG_DIALOG_BORDER);
 
-#if 0
 	hig_dialog->vbox = gtk_vbox_new (FALSE, HIG_DIALOG_VBOX_SPACING);
 	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
 			    hig_dialog->vbox, FALSE, FALSE, 0);
-#else
-	hig_dialog->vbox = GTK_DIALOG(hig_dialog)->vbox;
 	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
 			     HIG_DIALOG_VBOX_SPACING);
-#endif
-
-	/* FIXME:  Doesn't seem to accomplish anything. */
-	gtk_container_set_border_width (GTK_CONTAINER(GTK_DIALOG(hig_dialog)->action_area),
-					HIG_DIALOG_ACTION_BORDER);
 }
 
 static void

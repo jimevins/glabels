@@ -390,7 +390,7 @@ mini_outline_list_new (GnomeCanvas *canvas,
 			break;
 		}
 		g_object_set_data (G_OBJECT (item), "i",
-				   GINT_TO_POINTER (i));
+				   GINT_TO_POINTER (i+1));
 		
 		list = g_list_append (list, item);
 	}

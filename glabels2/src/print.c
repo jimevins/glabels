@@ -55,7 +55,7 @@ typedef struct _PrintInfo {
 	GnomePrintConfig *config;
 
 	/* gLabels Template */
-	const glTemplate *template;
+	glTemplate *template;
 	gboolean label_rotate_flag;
 
 } PrintInfo;
@@ -369,31 +369,8 @@ print_info_new (GnomePrintMaster * master,
 					GL_PRINT_DEFAULT_PAPER);
 	}
 
-#if 1
-	/* gnome_print_config_dump (pi->config); */
-	{
-		GList *p, *list;
-		GnomePrintPaper *paper;
-		gchar *name;
-
-		list = gnome_print_paper_get_list();
-		for ( p=list; p != NULL; p=p->next ) {
-			paper = (GnomePrintPaper *)p->data;
-			gl_debug (DEBUG_PRINT, "  \"%s\"", paper->name);
-		}
-		gl_debug (DEBUG_PRINT,
-			  "template->page_size = \"%s\"", template->page_size);
-
-		name = gnome_print_config_get (pi->config,
-					       GNOME_PRINT_KEY_PAPER_SIZE);
-		gl_debug (DEBUG_PRINT, "config = \"%s\"", name);
-	}
-#endif
-
 	pi->template = template;
 	pi->label_rotate_flag = gl_label_get_rotate_flag (label);
-
-	gl_template_free (&template);
 
 	gl_debug (DEBUG_PRINT, "END");
 
@@ -407,6 +384,8 @@ static void
 print_info_free (PrintInfo ** pi)
 {
 	gl_debug (DEBUG_PRINT, "START");
+
+	gl_template_free (&(*pi)->template);
 
 	gnome_print_context_close ((*pi)->pc);
 
