@@ -3,7 +3,7 @@
  *
  *  bc_postnet.h:  GLabels POSTNET barcode module header file
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,12 @@
 
 G_BEGIN_DECLS
 
-glBarcode *gl_barcode_postnet_new (gchar *digits);
+glBarcode *gl_barcode_postnet_new (glBarcodeStyle  style,
+				   gboolean        text_flag,
+				   gboolean        checksum_flag,
+				   gdouble         w,
+				   gdouble         h,
+				   gchar          *digits);
 
 G_END_DECLS
 

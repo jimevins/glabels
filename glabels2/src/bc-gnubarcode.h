@@ -3,7 +3,7 @@
  *
  *  bc_gnubarcode.h:  front-end to GNU-barcode-library module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,9 @@ G_BEGIN_DECLS
 
 glBarcode *gl_barcode_gnubarcode_new (glBarcodeStyle  style,
 				      gboolean        text_flag,
-				      gdouble         scale,
+				      gboolean        checksum_flag,
+				      gdouble         w,
+				      gdouble         h,
 				      gchar          *digits);
 
 G_END_DECLS

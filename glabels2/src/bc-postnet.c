@@ -3,7 +3,7 @@
  *
  *  bc_postnet.c:  GLabels POSTNET barcode module
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,7 +72,12 @@ static gchar *postnet_code (gchar *digits);
 /* Generate list of lines that form the barcode for the given digits.       */
 /****************************************************************************/
 glBarcode *
-gl_barcode_postnet_new (gchar *digits)
+gl_barcode_postnet_new (glBarcodeStyle  style,
+			gboolean        text_flag,
+			gboolean        checksum_flag,
+			gdouble         w,
+			gdouble         h,
+			gchar          *digits)
 {
 	gchar         *code, *p;
 	glBarcode     *gbc;

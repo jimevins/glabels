@@ -3,7 +3,7 @@
  *
  *  bc-gnubarcode.c:  front-end to GNU-barcode-library module
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  Some of this code is borrowed from the postscript renderer (ps.c)
  *  from the GNU barcode library:
@@ -47,8 +47,8 @@
 /* Local function prototypes                 */
 /*===========================================*/
 static glBarcode *render_pass1 (struct Barcode_Item *bci,
-				gboolean             text_flag,
-				gdouble              scale);
+				gint                 flags);
+
 
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
@@ -56,7 +56,9 @@ static glBarcode *render_pass1 (struct Barcode_Item *bci,
 glBarcode *
 gl_barcode_gnubarcode_new (glBarcodeStyle  style,
 			   gboolean        text_flag,
-			   gdouble         scale,
+			   gboolean        checksum_flag,
+			   gdouble         w,
+			   gdouble         h,
 			   gchar          *digits)
 {
 	glBarcode           *gbc;
@@ -105,6 +107,18 @@ gl_barcode_gnubarcode_new (glBarcodeStyle  style,
 		flags = BARCODE_ANY;
 		break;
 	}
+
+	if (!text_flag) {
+		flags |= BARCODE_NO_ASCII;
+	}
+	if (!checksum_flag) {
+		flags |= BARCODE_NO_CHECKSUM;
+	}
+
+	bci->scalef = 0.0;
+	bci->width  = w;
+	bci->height = h;
+
 	Barcode_Encode (bci, flags);
 	if (!bci->partial || !bci->textinfo) {
 		g_warning ("Barcode Data Invalid");
@@ -114,7 +128,7 @@ gl_barcode_gnubarcode_new (glBarcodeStyle  style,
 
 	/* now render with our custom back-end,
 	   to create appropriate intermdediate format */
-	gbc = render_pass1 (bci, text_flag, scale);
+	gbc = render_pass1 (bci, flags);
 
 	Barcode_Delete (bci);
 	return gbc;
@@ -132,18 +146,32 @@ gl_barcode_gnubarcode_new (glBarcodeStyle  style,
  *--------------------------------------------------------------------------*/
 static glBarcode *
 render_pass1 (struct Barcode_Item *bci,
-	      gboolean             text_flag,
-	      gdouble              scale)
+	      gint                 flags)
 {
+	gint           validbits = BARCODE_NO_ASCII;
 	glBarcode     *gbc;
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
+	gdouble        scalef = 1.0;
 	gdouble        x;
 	gint           i, j, barlen;
 	gdouble        f1, f2;
 	gint           mode = '-'; /* text below bars */
 	gdouble        x0, y0, yr;
 	guchar        *p, c;
+
+	if (bci->width > (2*bci->margin)) {
+		bci->width -= 2*bci->margin;
+	}
+	if (bci->height > (2*bci->margin)) {
+		bci->height -= 2*bci->margin;
+	}
+
+	/* If any flag is clear in "flags", inherit it from "bci->flags" */
+	if (!(flags & BARCODE_NO_ASCII)) {
+		flags |= bci->flags & BARCODE_NO_ASCII;
+	}
+	flags = bci->flags = (flags & validbits) | (bci->flags & ~validbits);
 
 	/* First calculate barlen */
 	barlen = bci->partial[0] - '0';
@@ -157,17 +185,50 @@ render_pass1 (struct Barcode_Item *bci,
 		}
 	}
 
+	/* The scale factor depends on bar length */
+	if (!bci->scalef) {
+		if (!bci->width) bci->width = barlen; /* default */
+		scalef = bci->scalef = (double)bci->width / (double)barlen;
+		if (scalef < 0.5) scalef = 0.5;
+	}
+
 	/* The width defaults to "just enough" */
-	bci->width = barlen * scale + 1;
+	bci->width = barlen * scalef + 1;
+
+	/* But it can be too small, in this case enlarge and center the area */
+	if (bci->width < barlen * scalef) {
+		int wid = barlen * scalef + 1;
+		bci->xoff -= (wid - bci->width)/2 ;
+		bci->width = wid;
+		/* Can't extend too far on the left */
+		if (bci->xoff < 0) {
+			bci->width += -bci->xoff;
+			bci->xoff = 0;
+		}
+	}
 
 	/* The height defaults to 80 points (rescaled) */
 	if (!bci->height)
-		bci->height = 80 * scale;
+		bci->height = 80 * scalef;
+
+	/* If too small (5 + text), reduce the scale factor and center */
+	i = 5 + 10 * ((bci->flags & BARCODE_NO_ASCII)==0);
+	if (bci->height < i * scalef ) {
+#if 0
+		double scaleg = ((double)bci->height) / i;
+		int wid = bci->width * scaleg / scalef;
+		bci->xoff += (bci->width - wid)/2;
+		bci->width = wid;
+		scalef = scaleg;
+#else
+		bci->height = i * scalef;
+#endif
+	}
 
 	gbc = g_new0 (glBarcode, 1);
 
 	/* Now traverse the code string and create a list of lines */
-	x = bci->margin + (bci->partial[0] - '0') * scale;
+	x = bci->margin + (bci->partial[0] - '0') * scalef;
 	for (p = bci->partial + 1, i = 1; *p != 0; p++, i++) {
 		/* special cases: '+' and '-' */
 		if (*p == '+' || *p == '-') {
@@ -181,34 +242,34 @@ render_pass1 (struct Barcode_Item *bci,
 		else
 			j = *p - 'a' + 1;
 		if (i % 2) {	/* bar */
-			x0 = x + (j * scale) / 2;
+			x0 = x + (j * scalef) / 2;
 			y0 = bci->margin;
 			yr = bci->height;
-			if (text_flag) {	/* leave space for text */
+			if (!(bci->flags & BARCODE_NO_ASCII)) {	/* leave space for text */
 				if (mode == '-') {
 					/* text below bars: 10 or 5 points */
-					yr -= (isdigit (*p) ? 10 : 5) * scale;
+					yr -= (isdigit (*p) ? 10 : 5) * scalef;
 				} else {	/* '+' */
 					/* above bars: 10 or 0 from bottom,
 					   and 10 from top */
-					y0 += 10 * scale;
-					yr -= (isdigit (*p) ? 20 : 10) * scale;
+					y0 += 10 * scalef;
+					yr -= (isdigit (*p) ? 20 : 10) * scalef;
 				}
 			}
 			line = g_new0 (glBarcodeLine, 1);
 			line->x = x0;
 			line->y = y0;
 			line->length = yr;
-			line->width = (j * scale) - SHRINK_AMOUNT;
+			line->width = (j * scalef) - SHRINK_AMOUNT;
 			gbc->lines = g_list_append (gbc->lines, line);
 		}
-		x += j * scale;
+		x += j * scalef;
 
 	}
 
 	/* Now the text */
 	mode = '-';		/* reinstantiate default */
-	if (text_flag) {
+	if (!(bci->flags & BARCODE_NO_ASCII)) {
 		for (p = bci->textinfo; p; p = strchr (p, ' ')) {
 			while (*p == ' ')
 				p++;
@@ -223,14 +284,14 @@ render_pass1 (struct Barcode_Item *bci,
 				continue;
 			}
 			bchar = g_new0 (glBarcodeChar, 1);
-			bchar->x = f1 * scale + bci->margin;
+			bchar->x = f1 * scalef + bci->margin;
 			if (mode == '-') {
 				bchar->y =
-				    bci->margin + bci->height - 8 * scale;
+				    bci->margin + bci->height - 8 * scalef;
 			} else {
 				bchar->y = bci->margin;
 			}
-			bchar->fsize = f2 * FONT_SCALE * scale;
+			bchar->fsize = f2 * FONT_SCALE * scalef;
 			bchar->c = c;
 			gbc->chars = g_list_append (gbc->chars, bchar);
 		}
@@ -239,6 +300,10 @@ render_pass1 (struct Barcode_Item *bci,
 	/* Fill in other info */
 	gbc->height = bci->height + 2.0 * bci->margin;
 	gbc->width = bci->width + 2.0 * bci->margin;
+
+#if 0
+	g_print ("w=%f, h=%f\n", gbc->width, gbc->height);
+#endif
 
 	return gbc;
 }

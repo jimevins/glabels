@@ -55,7 +55,9 @@ static void gl_wdgt_bc_style_instance_init (glWdgtBCStyle      *bc_style);
 static void gl_wdgt_bc_style_finalize      (GObject            *object);
 static void gl_wdgt_bc_style_construct     (glWdgtBCStyle      *bc_style);
 
-static void changed_cb                     (glWdgtBCStyle      *bc_style);
+static void style_changed_cb               (glWdgtBCStyle      *bc_style);
+static void checkbox_changed_cb            (glWdgtBCStyle      *bc_style);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -168,57 +170,80 @@ gl_wdgt_bc_style_construct (glWdgtBCStyle *bc_style)
 
 	/* Style entry widget */
 	wcombo = gtk_combo_new ();
-	style_list = NULL;
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_POSTNET));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_EAN));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_UPC));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_ISBN));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_39));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128B));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_128C));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_I25));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_CBR));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_MSI));
-	style_list = g_list_append (style_list,
-				    (gchar *)gl_barcode_style_to_text(GL_BARCODE_STYLE_PLS));
+	style_list = gl_barcode_get_styles_list ();;
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), style_list);
-	g_list_free (style_list);
+	gl_barcode_free_styles_list (style_list);
 	bc_style->style_entry = GTK_COMBO (wcombo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (bc_style->style_entry), FALSE);
 	gtk_widget_set_size_request (wcombo, 200, -1);
-	g_signal_connect_swapped (G_OBJECT (bc_style->style_entry), "changed",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (bc_style));
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
 
 	/* Text checkbox widget */
 	bc_style->text_check =
-	    gtk_check_button_new_with_label (_("Show text with barcode"));
+	    gtk_check_button_new_with_label (_("Text"));
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), bc_style->text_check);
-	g_signal_connect_swapped (G_OBJECT (bc_style->text_check), "toggled",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (bc_style));
 
+
+	/* Checksum checkbox widget */
+	bc_style->checksum_check =
+	    gtk_check_button_new_with_label (_("Checksum"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), bc_style->checksum_check);
+
+
+	/* Connect signal callbacks */
+	g_signal_connect_swapped (G_OBJECT (bc_style->style_entry), "changed",
+				  G_CALLBACK (style_changed_cb),
+				  G_OBJECT (bc_style));
+	g_signal_connect_swapped (G_OBJECT (bc_style->text_check), "toggled",
+				  G_CALLBACK (checkbox_changed_cb),
+				  G_OBJECT (bc_style));
+	g_signal_connect_swapped (G_OBJECT (bc_style->checksum_check), "toggled",
+				  G_CALLBACK (checkbox_changed_cb),
+				  G_OBJECT (bc_style));
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Callback for when any control in the widget has changed.       */
+/* PRIVATE.  Callback for when style has changed.                           */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtBCStyle *bc_style)
+style_changed_cb (glWdgtBCStyle *bc_style)
+{
+	gchar          *style_string;
+	glBarcodeStyle  style;
+
+	style_string =
+		gtk_editable_get_chars (GTK_EDITABLE(bc_style->style_entry),
+					0, -1);
+
+	/* Don't emit if entry is empty. */					
+	if ( *style_string != 0 ) {
+		style = gl_barcode_text_to_style (style_string);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(bc_style->text_check),
+					     gl_barcode_can_text (style));
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(bc_style->checksum_check),
+					     gl_barcode_can_csum (style));
+
+		gtk_widget_set_sensitive (bc_style->text_check,
+					  gl_barcode_text_optional (style));
+		gtk_widget_set_sensitive (bc_style->checksum_check,
+					  gl_barcode_csum_optional (style));
+
+
+		/* Emit our "changed" signal */
+		g_signal_emit (G_OBJECT (bc_style),
+			       wdgt_bc_style_signals[CHANGED], 0);
+	}
+
+	g_free (style_string);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Callback for when either checkbox has changed.                 */
+/*--------------------------------------------------------------------------*/
+static void
+checkbox_changed_cb (glWdgtBCStyle *bc_style)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (bc_style),
@@ -231,7 +256,8 @@ changed_cb (glWdgtBCStyle *bc_style)
 void
 gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
 			     glBarcodeStyle *style,
-			     gboolean       *text_flag)
+			     gboolean       *text_flag,
+			     gboolean       *checksum_flag)
 {
 	gchar *style_string;
 
@@ -243,6 +269,9 @@ gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
 	*text_flag =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (bc_style->text_check));
 
+	*checksum_flag =
+	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (bc_style->checksum_check));
+
 	g_free (style_string);
 }
 
@@ -252,7 +281,8 @@ gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
 void
 gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
 			     glBarcodeStyle  style,
-			     gboolean        text_flag)
+			     gboolean        text_flag,
+			     gboolean        checksum_flag)
 {
 	const gchar *style_string;
 	gint         pos;
@@ -260,12 +290,12 @@ gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
 	style_string = gl_barcode_style_to_text (style);
 
 	g_signal_handlers_block_by_func (G_OBJECT(bc_style->style_entry),
-					 G_CALLBACK (changed_cb),
+					 G_CALLBACK (style_changed_cb),
 					 bc_style);
 	gtk_editable_delete_text (GTK_EDITABLE (bc_style->style_entry),
 				  0, -1);
 	g_signal_handlers_unblock_by_func (G_OBJECT(bc_style->style_entry),
-					   G_CALLBACK(changed_cb),
+					   G_CALLBACK(style_changed_cb),
 					   bc_style);
 
 	pos = 0;
@@ -276,6 +306,9 @@ gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (bc_style->text_check),
 				      text_flag);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (bc_style->checksum_check),
+				      checksum_flag);
 
 }
 

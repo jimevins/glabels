@@ -63,15 +63,15 @@ void            gl_label_barcode_set_data  (glLabelBarcode *lbc,
 void            gl_label_barcode_set_props (glLabelBarcode *lbc,
 					    glBarcodeStyle  style,
 					    gboolean        text_flag,
-					    guint           color,
-					    gdouble         scale);
+					    gboolean        checksum_flag,
+					    guint           color);
 
 glTextNode     *gl_label_barcode_get_data  (glLabelBarcode *lbc);
 void            gl_label_barcode_get_props (glLabelBarcode *lbc,
 					    glBarcodeStyle *style,
 					    gboolean       *text_flag,
-					    guint          *color,
-					    gdouble        *scale);
+					    gboolean       *checksum_flag,
+					    guint          *color);
 
 G_END_DECLS
 

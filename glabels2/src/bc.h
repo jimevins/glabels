@@ -3,7 +3,7 @@
  *
  *  bc.h:  GLabels barcode module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,10 +36,11 @@ typedef enum {
 	GL_BARCODE_STYLE_128C,
 	GL_BARCODE_STYLE_128B,
 	GL_BARCODE_STYLE_I25,
-	GL_BARCODE_STYLE_128RAW,
 	GL_BARCODE_STYLE_CBR,
 	GL_BARCODE_STYLE_MSI,
 	GL_BARCODE_STYLE_PLS,
+
+	GL_BARCODE_N_STYLES
 } glBarcodeStyle;
 
 typedef struct {
@@ -57,21 +58,40 @@ typedef struct {
 	GList *chars;		/* List of glBarcodeChar */
 } glBarcode;
 
+typedef glBarcode *(*glBarcodeNewFunc) (glBarcodeStyle  style,
+					gboolean        text_flag,
+					gboolean        checksum_flag,
+					gdouble         w,
+					gdouble         h,
+					gchar          *digits);
+
+
 #define GL_BARCODE_FONT_FAMILY      "Helvetica"
 #define GL_BARCODE_FONT_WEIGHT      GNOME_FONT_BOOK
 
 
-glBarcode       *gl_barcode_new              (glBarcodeStyle style,
-					      gboolean       text_flag,
-					      gdouble        scale,
-					      gchar         *digits);
+glBarcode       *gl_barcode_new              (glBarcodeStyle  style,
+					      gboolean        text_flag,
+					      gboolean        checksum_flag,
+					      gdouble         w,
+					      gdouble         h,
+					      gchar          *digits);
 
-void             gl_barcode_free             (glBarcode **bc);
+void             gl_barcode_free             (glBarcode     **bc);
 
-gchar           *gl_barcode_default_digits   (glBarcodeStyle style);
+GList           *gl_barcode_get_styles_list  (void);
+void             gl_barcode_free_styles_list (GList          *styles_list);
 
-const gchar     *gl_barcode_style_to_text    (glBarcodeStyle style);
-glBarcodeStyle   gl_barcode_text_to_style    (const gchar *text);
+gchar           *gl_barcode_default_digits   (glBarcodeStyle  style);
+
+gboolean         gl_barcode_can_text         (glBarcodeStyle  style);
+gboolean         gl_barcode_text_optional    (glBarcodeStyle  style);
+
+gboolean         gl_barcode_can_csum         (glBarcodeStyle  style);
+gboolean         gl_barcode_csum_optional    (glBarcodeStyle  style);
+
+const gchar     *gl_barcode_style_to_text    (glBarcodeStyle  style);
+glBarcodeStyle   gl_barcode_text_to_style    (const gchar    *text);
 
 G_END_DECLS
 

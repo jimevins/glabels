@@ -45,9 +45,6 @@ typedef struct _glWdgtBCPropsClass glWdgtBCPropsClass;
 struct _glWdgtBCProps {
 	glHigVBox  parent_widget;
 
-	GtkWidget *scale_label;
-	GtkWidget *scale_spin;
-
 	GtkWidget *color_label;
 	GtkWidget *color_picker;
 };
@@ -63,11 +60,9 @@ guint      gl_wdgt_bc_props_get_type       (void);
 GtkWidget *gl_wdgt_bc_props_new            (void);
 
 void       gl_wdgt_bc_props_get_params     (glWdgtBCProps *prop,
-					    gdouble       *scale,
 					    guint         *color);
 
 void       gl_wdgt_bc_props_set_params     (glWdgtBCProps *prop,
-					    gdouble        scale,
 					    guint          color);
 
 void       gl_wdgt_bc_props_set_label_size_group (glWdgtBCProps *prop,

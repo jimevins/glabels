@@ -199,7 +199,7 @@ gl_view_barcode_new (glLabelBarcode *object,
 	gl_view_object_set_view (GL_VIEW_OBJECT(view_barcode), view);
 	gl_view_object_set_object (GL_VIEW_OBJECT(view_barcode),
 				   GL_LABEL_OBJECT(object),
-				   GL_VIEW_HIGHLIGHT_SIMPLE);
+				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
 
 	/* Create analogous canvas items. */
 	draw_barcode (view_barcode);
@@ -245,8 +245,8 @@ construct_properties_dialog (glViewObject *view_object)
 	glTextNode         *text_node;
 	glBarcodeStyle     style;
 	gboolean           text_flag;
+	gboolean           checksum_flag;
 	guint              color;
-	gdouble            scale;
 	glMerge            *merge;
 	GtkSizeGroup       *label_size_group;
 	GtkWidget          *window;
@@ -258,7 +258,7 @@ construct_properties_dialog (glViewObject *view_object)
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
+				    &style, &text_flag, &checksum_flag, &color);
 	gl_label_get_size (GL_LABEL(object->parent),
 			   &label_width, &label_height);
 	merge = gl_label_get_merge (GL_LABEL(object->parent));
@@ -311,7 +311,7 @@ construct_properties_dialog (glViewObject *view_object)
 	gl_wdgt_bc_style_set_label_size_group (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
 					       label_size_group);
 	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE (view_barcode->private->bc_style),
-				     style, text_flag);
+				     style, text_flag, checksum_flag);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
 				    view_barcode->private->bc_style);
 	g_signal_connect (G_OBJECT (view_barcode->private->bc_style),
@@ -324,7 +324,7 @@ construct_properties_dialog (glViewObject *view_object)
 	gl_wdgt_bc_props_set_label_size_group (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
 					       label_size_group);
 	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
-				     scale, color);
+				     color);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
 				    view_barcode->private->bc_props);
 	g_signal_connect ( G_OBJECT(view_barcode->private->bc_props),
@@ -439,22 +439,21 @@ bc_props_changed_cb (glWdgtBCProps  *text_props,
 	glLabelObject      *object;
 	glBarcodeStyle     style;
 	gboolean           text_flag;
+	gboolean           checksum_flag;
 	guint              color;
-	gdouble            scale;
-
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
-	gl_wdgt_bc_props_get_params (text_props, &scale, &color);
+				    &style, &text_flag, &checksum_flag, &color);
+	gl_wdgt_bc_props_get_params (text_props, &color);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
 					 update_dialog_cb, view_barcode);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, color, scale);
+				    style, text_flag, checksum_flag, color);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_dialog_cb, view_barcode);
 
@@ -471,8 +470,8 @@ bc_style_changed_cb (glWdgtBCStyle  *bc_style,
 	glLabelObject      *object;
 	glBarcodeStyle     style;
 	gboolean           text_flag;
+	gboolean           checksum_flag;
 	guint              color;
-	gdouble            scale;
 
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -480,13 +479,13 @@ bc_style_changed_cb (glWdgtBCStyle  *bc_style,
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
-	gl_wdgt_bc_style_get_params (bc_style, &style, &text_flag);
+				    &style, &text_flag, &checksum_flag, &color);
+	gl_wdgt_bc_style_get_params (bc_style, &style, &text_flag, &checksum_flag);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
 					 update_dialog_cb, view_barcode);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, color, scale);
+				    style, text_flag, checksum_flag, color);
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_dialog_cb, view_barcode);
 
@@ -498,7 +497,7 @@ bc_style_changed_cb (glWdgtBCStyle  *bc_style,
 /*---------------------------------------------------------------------------*/
 static void
 position_changed_cb (glWdgtPosition     *position,
-		     glViewBarcode         *view_barcode)
+		     glViewBarcode      *view_barcode)
 {
 	glLabelObject      *object;
 	gdouble            x, y;
@@ -529,8 +528,8 @@ update_dialog_cb (glLabelObject  *object,
 	glTextNode         *text_node;
 	glBarcodeStyle     style;
 	gboolean           text_flag;
+	gboolean           checksum_flag;
 	guint              color;
-	gdouble            scale;
 	glMerge            *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -538,7 +537,7 @@ update_dialog_cb (glLabelObject  *object,
 	/* Query properties of object. */
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
+				    &style, &text_flag, &checksum_flag, &color);
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
@@ -560,9 +559,9 @@ update_dialog_cb (glLabelObject  *object,
 	gl_wdgt_bc_data_set_field_defs (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
 					merge);
 	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
-				     scale, color);
+				     color);
 	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
-				     style, text_flag);
+				     style, text_flag, checksum_flag);
 	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_barcode->private->position),
 				       x, y);
 
@@ -753,8 +752,9 @@ draw_barcode (glViewBarcode *view_barcode)
 	glTextNode *text_node;
 	glBarcodeStyle style;
 	gboolean text_flag;
+	gboolean checksum_flag;
 	guint color;
-	gdouble scale;
+	gdouble w, h;
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
 	glBarcode *gbc;
@@ -771,7 +771,8 @@ draw_barcode (glViewBarcode *view_barcode)
 	/* Query label object and properties */
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
+				    &style, &text_flag, &checksum_flag, &color);
+	gl_label_object_get_size (object, &w, &h);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {
 		digits = gl_barcode_default_digits (style);
@@ -795,7 +796,7 @@ draw_barcode (glViewBarcode *view_barcode)
 							  FALSE,
 							  10.0);
 
-	gbc = gl_barcode_new (style, text_flag, scale, digits);
+	gbc = gl_barcode_new (style, text_flag, checksum_flag, w, h, digits);
 	if (gbc == NULL) {
 
 		cstring = _("Invalid barcode");

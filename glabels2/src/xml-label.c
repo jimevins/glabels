@@ -664,8 +664,8 @@ xml_parse_barcode_props (xmlNodePtr  node,
 	glTextNode         *text_node;
 	glBarcodeStyle      style;
 	gboolean            text_flag;
+	gboolean            checksum_flag;
 	guint               color;
-	gdouble             scale;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -678,8 +678,7 @@ xml_parse_barcode_props (xmlNodePtr  node,
 	g_free (string);
 
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
-
-	scale = gl_xml_get_prop_double (node, "scale", 1.0);
+	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
 
 	text_node = g_new0 (glTextNode, 1);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
@@ -696,7 +695,7 @@ xml_parse_barcode_props (xmlNodePtr  node,
 
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    style, text_flag, color, scale);
+				    style, text_flag, checksum_flag, color);
 
 	gl_text_node_free (&text_node);
 
@@ -1184,8 +1183,8 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 	glTextNode          *text_node;
 	glBarcodeStyle      style;
 	gboolean            text_flag;
+	gboolean            checksum_flag;
 	guint               color;
-	gdouble             scale;
 	xmlNodePtr          child;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1194,13 +1193,13 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &style, &text_flag, &color, &scale);
+				    &style, &text_flag, &checksum_flag, &color);
 
 	gl_xml_set_prop_uint_hex (object_node, "color", color);
 
 	xmlSetProp (object_node, "style", gl_barcode_style_to_text (style));
 	gl_xml_set_prop_boolean (object_node, "text", text_flag);
-	gl_xml_set_prop_double (object_node, "scale", scale);
+	gl_xml_set_prop_boolean (object_node, "checksum", checksum_flag);
 
 	if (text_node->field_flag) {
 		child = xmlNewChild (object_node, ns, "Field", NULL);

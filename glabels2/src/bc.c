@@ -3,7 +3,7 @@
  *
  *  bc.c:  GLabels barcode module
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,74 @@
 #include "bc-gnubarcode.h"
 
 #include "debug.h"
+
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
+
+/*========================================================*/
+/* Private types.                                         */
+/*========================================================*/
+
+typedef struct {
+	gchar            *name;
+	glBarcodeNewFunc  new;
+	gboolean          can_text;
+	gboolean          text_optional;
+	gboolean          can_checksum;
+	gboolean          checksum_optional;
+	gchar            *default_digits;
+} Backend;
+
+
+/*========================================================*/
+/* Private globals.                                       */
+/*========================================================*/
+
+Backend backends[GL_BARCODE_N_STYLES] = {
+
+	{ "POSTNET", gl_barcode_postnet_new,
+	  FALSE, FALSE, TRUE, FALSE, "000000000"},
+
+	{ "EAN", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000"},
+
+	{ "UPC", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000"},
+
+	{ "ISBN", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0 00000"},
+
+	{ "Code39", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "Code128", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "Code128C", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "Code128B", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "I25", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "CBR", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "MSI", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+	{ "PLS", gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+
+};
+
+/*========================================================*/
+/* Private function prototypes.                           */
+/*========================================================*/
+
 
 /*****************************************************************************/
 /* Call appropriate barcode backend to create barcode in intermediate format.*/
@@ -33,30 +101,26 @@
 glBarcode *
 gl_barcode_new (glBarcodeStyle  style,
 		gboolean        text_flag,
-		gdouble         scale,
+		gboolean        checksum_flag,
+		gdouble         w,
+		gdouble         h,
 		gchar          *digits)
 {
 	glBarcode *gbc;
 
-	switch (style) {
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), NULL);
+	g_return_val_if_fail (digits!=NULL, NULL);
 
-	case GL_BARCODE_STYLE_POSTNET:
-		/* Use the POSTNET backend module */
-		gbc = gl_barcode_postnet_new (digits);
-		break;
+	gbc = backends[style].new (style,
+				   text_flag,
+				   checksum_flag,
+				   w,
+				   h,
+				   digits);
 
-	default:
-		/* Use the GNU barcode library backend */
-		gbc = gl_barcode_gnubarcode_new (style,
-						 text_flag,
-						 scale,
-						 digits);
-		break;
-
-	}
 	return gbc;
 }
-
+
 /*****************************************************************************/
 /* Free previously created barcode.                                          */
 /*****************************************************************************/
@@ -85,36 +149,87 @@ gl_barcode_free (glBarcode **gbc)
 		*gbc = NULL;
 	}
 }
-
+
+/*****************************************************************************/
+/* Get a list of names for valid barcode styles.                             */
+/*****************************************************************************/
+GList *
+gl_barcode_get_styles_list  (void)
+{
+	glBarcodeStyle  style;
+	GList          *list = NULL;
+
+	for (style=0; style <GL_BARCODE_N_STYLES; style++) {
+		list = g_list_append (list, g_strdup (backends[style].name));
+	}
+
+	return list;
+}
+
+/*****************************************************************************/
+/* Free up a previously allocated list of style names.                       */
+/*****************************************************************************/
+void
+gl_barcode_free_styles_list (GList *styles_list)
+{
+	GList *p;
+
+	for (p=styles_list; p != NULL; p=p->next) {
+		g_free (p->data);
+		p->data = NULL;
+	}
+
+	g_list_free (styles_list);
+}
+
+
 /*****************************************************************************/
 /* Return an appropriate set of digits for the given barcode style.          */
 /*****************************************************************************/
 gchar *
 gl_barcode_default_digits (glBarcodeStyle style)
 {
-	switch (style) {
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), "0");
 
-	case GL_BARCODE_STYLE_POSTNET:
-		return g_strdup ("000000000");
-	case GL_BARCODE_STYLE_EAN:
-		return g_strdup ("000000000000 00000");
-	case GL_BARCODE_STYLE_UPC:
-		return g_strdup ("00000000000 00000");
-	case GL_BARCODE_STYLE_ISBN:
-		return g_strdup ("0-00000-000-0 00000");
-	case GL_BARCODE_STYLE_39:
-	case GL_BARCODE_STYLE_128:
-	case GL_BARCODE_STYLE_128C:
-	case GL_BARCODE_STYLE_128B:
-	case GL_BARCODE_STYLE_I25:
-	case GL_BARCODE_STYLE_CBR:
-	case GL_BARCODE_STYLE_MSI:
-	case GL_BARCODE_STYLE_PLS:
-		return g_strdup ("0000000000");
-	default:
-		return g_strdup ("0");
-	}
+	return g_strdup (backends[style].default_digits);
+}
 
+/*****************************************************************************/
+/* Query text capabilities.                                                  */
+/*****************************************************************************/
+gboolean
+gl_barcode_can_text (glBarcodeStyle  style)
+{
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), FALSE);
+
+	return backends[style].can_text;
+}
+
+gboolean
+gl_barcode_text_optional (glBarcodeStyle  style)
+{
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), FALSE);
+
+	return backends[style].text_optional;
+}
+
+/*****************************************************************************/
+/* Query checksum capabilities.                                              */
+/*****************************************************************************/
+gboolean
+gl_barcode_can_csum (glBarcodeStyle  style)
+{
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), FALSE);
+
+	return backends[style].can_checksum;
+}
+
+gboolean
+gl_barcode_csum_optional (glBarcodeStyle  style)
+{
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), FALSE);
+
+	return backends[style].checksum_optional;
 }
 
 /*****************************************************************************/
@@ -123,35 +238,9 @@ gl_barcode_default_digits (glBarcodeStyle style)
 const gchar *
 gl_barcode_style_to_text (glBarcodeStyle style)
 {
-	switch (style) {
-	case GL_BARCODE_STYLE_POSTNET:
-		return "POSTNET";
-	case GL_BARCODE_STYLE_EAN:
-		return "EAN";
-	case GL_BARCODE_STYLE_UPC:
-		return "UPC";
-	case GL_BARCODE_STYLE_ISBN:
-		return "ISBN";
-	case GL_BARCODE_STYLE_39:
-		return "Code39";
-	case GL_BARCODE_STYLE_128:
-		return "Code128";
-	case GL_BARCODE_STYLE_128C:
-		return "Code128C";
-	case GL_BARCODE_STYLE_128B:
-		return "Code128B";
-	case GL_BARCODE_STYLE_I25:
-		return "I25";
-	case GL_BARCODE_STYLE_CBR:
-		return "CBR";
-	case GL_BARCODE_STYLE_MSI:
-		return "MSI";
-	case GL_BARCODE_STYLE_PLS:
-		return "PLS";
-	default:
-		g_warning( "Illegal barcode style %d", style );
-		return "?";
-	}
+	g_return_val_if_fail ((style>=0) && (style<GL_BARCODE_N_STYLES), NULL);
+
+	return backends[style].name;
 }
 
 /*****************************************************************************/
@@ -161,44 +250,14 @@ glBarcodeStyle
 gl_barcode_text_to_style (const gchar *text)
 {
 
-	if (g_strcasecmp (text, "POSTNET") == 0) {
-		return GL_BARCODE_STYLE_POSTNET;
-	}
-	if (g_strcasecmp (text, "EAN") == 0) {
-		return GL_BARCODE_STYLE_EAN;
-	}
-	if (g_strcasecmp (text, "UPC") == 0) {
-		return GL_BARCODE_STYLE_UPC;
-	}
-	if (g_strcasecmp (text, "ISBN") == 0) {
-		return GL_BARCODE_STYLE_ISBN;
-	}
-	if (g_strcasecmp (text, "Code39") == 0) {
-		return GL_BARCODE_STYLE_39;
-	}
-	if (g_strcasecmp (text, "Code128") == 0) {
-		return GL_BARCODE_STYLE_128;
-	}
-	if (g_strcasecmp (text, "Code128C") == 0) {
-		return GL_BARCODE_STYLE_128C;
-	}
-	if (g_strcasecmp (text, "Code128B") == 0) {
-		return GL_BARCODE_STYLE_128B;
-	}
-	if (g_strcasecmp (text, "I25") == 0) {
-		return GL_BARCODE_STYLE_I25;
-	}
-	if (g_strcasecmp (text, "CBR") == 0) {
-		return GL_BARCODE_STYLE_CBR;
-	}
-	if (g_strcasecmp (text, "MSI") == 0) {
-		return GL_BARCODE_STYLE_MSI;
-	}
-	if (g_strcasecmp (text, "PLS") == 0) {
-		return GL_BARCODE_STYLE_PLS;
-	} else {
-		g_warning( "Unknown barcode style text \"%s\"", text );
-		return GL_BARCODE_STYLE_POSTNET;
+	glBarcodeStyle  style;
+
+	for (style=0; style <GL_BARCODE_N_STYLES; style++) {
+		if (g_strcasecmp (text, backends[style].name) == 0) {
+			return style;
+		}
 	}
 
+	g_warning( "Unknown barcode style text \"%s\"", text );
+	return GL_BARCODE_STYLE_POSTNET;
 }

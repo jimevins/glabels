@@ -113,7 +113,6 @@ gl_wdgt_bc_props_class_init (glWdgtBCPropsClass *class)
 static void
 gl_wdgt_bc_props_instance_init (glWdgtBCProps *prop)
 {
-	prop->scale_spin = NULL;
 	prop->color_picker = NULL;
 }
 
@@ -157,29 +156,6 @@ gl_wdgt_bc_props_construct (glWdgtBCProps *prop)
 
 	wvbox = GTK_WIDGET (prop);
 
-	/* ---- Scale line ---- */
-	whbox = gl_hig_hbox_new ();
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
-
-	/* Scale Label */
-	prop->scale_label = gtk_label_new (_("Scale:"));
-	gtk_misc_set_alignment (GTK_MISC (prop->scale_label), 0, 0.5);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->scale_label);
-
-	/* Scale widget */
-	adjust = gtk_adjustment_new (100.0, 50.0, 200.0, 10.0, 10.0, 10.0);
-	prop->scale_spin =
-	    gtk_spin_button_new (GTK_ADJUSTMENT (adjust), 10.0, 0);
-	g_signal_connect_swapped (G_OBJECT (prop->scale_spin), "changed",
-				  G_CALLBACK (changed_cb),
-				  G_OBJECT (prop));
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), prop->scale_spin);
-
-	/* scale % Label */
-	wlabel = gtk_label_new (_("%"));
-	gtk_misc_set_alignment (GTK_MISC (wlabel), 0, 0.5);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wlabel);
-
 	/* ---- Color line ---- */
 	whbox = gl_hig_hbox_new ();
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
@@ -212,15 +188,9 @@ changed_cb (glWdgtBCProps *prop)
 /***************************************************************************/
 void
 gl_wdgt_bc_props_get_params (glWdgtBCProps *prop,
-			     gdouble       *scale,
 			     guint         *color)
 {
 	guint8 r, g, b, a;
-
-	/* ------- Get updated scale ------ */
-	*scale =
-	    gtk_spin_button_get_value (GTK_SPIN_BUTTON(prop->scale_spin));
-	*scale /= 100.0;
 
 	/* ------- Get updated line color ------ */
 	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (prop->color_picker),
@@ -234,12 +204,8 @@ gl_wdgt_bc_props_get_params (glWdgtBCProps *prop,
 /***************************************************************************/
 void
 gl_wdgt_bc_props_set_params (glWdgtBCProps *prop,
-			     gdouble        scale,
 			     guint          color)
 {
-	scale *= 100.0;
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (prop->scale_spin), scale);
-
 	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (prop->color_picker),
 				   GL_COLOR_I_RED (color),
 				   GL_COLOR_I_GREEN (color),
@@ -254,7 +220,6 @@ void
 gl_wdgt_bc_props_set_label_size_group (glWdgtBCProps   *prop,
 				       GtkSizeGroup    *label_size_group)
 {
-	gtk_size_group_add_widget (label_size_group, prop->scale_label);
 	gtk_size_group_add_widget (label_size_group, prop->color_label);
 }
 

@@ -49,6 +49,7 @@ struct _glWdgtBCStyle {
 	GtkWidget *style_entry;
 
 	GtkWidget *text_check;
+	GtkWidget *checksum_check;
 };
 
 struct _glWdgtBCStyleClass {
@@ -63,11 +64,13 @@ GtkWidget *gl_wdgt_bc_style_new        (void);
 
 void       gl_wdgt_bc_style_get_params (glWdgtBCStyle  *bc_style,
 					glBarcodeStyle *style,
-					gboolean       *text_flag);
+					gboolean       *text_flag,
+					gboolean       *checksum_flag);
 
 void       gl_wdgt_bc_style_set_params (glWdgtBCStyle  *bc_style,
 					glBarcodeStyle  style,
-					gboolean        text_flag);
+					gboolean        text_flag,
+					gboolean        checksum_flag);
 
 void       gl_wdgt_bc_style_set_label_size_group (glWdgtBCStyle *bc_style,
 						  GtkSizeGroup  *label_size_group);
