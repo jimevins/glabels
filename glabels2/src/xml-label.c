@@ -660,6 +660,7 @@ xml_parse_barcode_props (xmlNodePtr  node,
 {
 	GObject            *object;
 	xmlNodePtr          child;
+	gdouble             w, h;
 	gchar              *string;
 	glTextNode         *text_node;
 	glBarcodeStyle      style;
@@ -670,6 +671,9 @@ xml_parse_barcode_props (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "START");
 
 	object = gl_label_barcode_new (label);
+
+	w = gl_xml_get_prop_double (node, "w", 0);
+	h = gl_xml_get_prop_double (node, "h", 0);
 
 	color = gl_xml_get_prop_uint_hex (node, "color", 0);
 
@@ -692,6 +696,8 @@ xml_parse_barcode_props (xmlNodePtr  node,
 			g_warning ("Unexpected Barcode child: \"%s\"", child->name);
 		}
 	}
+
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
@@ -1180,6 +1186,7 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 			  xmlNsPtr       ns,
 			  glLabelObject *object)
 {
+	gdouble     w, h;
 	glTextNode          *text_node;
 	glBarcodeStyle      style;
 	gboolean            text_flag;
@@ -1190,6 +1197,12 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 	gl_debug (DEBUG_XML, "START");
 
 	xmlSetProp (object_node, "type", "Barcode");
+
+	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+               
+	gl_xml_set_prop_double (object_node, "w", w);
+	gl_xml_set_prop_double (object_node, "h", h);
+               		
 
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
