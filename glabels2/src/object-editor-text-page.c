@@ -86,6 +86,8 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "text_center_toggle");
 	editor->priv->text_right_toggle =
 		glade_xml_get_widget (editor->priv->gui, "text_right_toggle");
+	editor->priv->text_line_spacing_spin =
+		glade_xml_get_widget (editor->priv->gui, "text_line_spacing_spin");
 
 	/* Load family names */
 	family_names = gnome_font_family_list ();
@@ -104,6 +106,8 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	label = glade_xml_get_widget (editor->priv->gui, "text_color_label");
 	gtk_size_group_add_widget (label_size_group, label);
 	label = glade_xml_get_widget (editor->priv->gui, "text_align_label");
+	gtk_size_group_add_widget (label_size_group, label);
+	label = glade_xml_get_widget (editor->priv->gui, "text_line_spacing_label");
 	gtk_size_group_add_widget (label_size_group, label);
 
 	/* Un-hide */
@@ -143,6 +147,11 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 			  "toggled",
 			  G_CALLBACK (align_toggle_cb),
 			  G_OBJECT (editor));
+
+	g_signal_connect_swapped (G_OBJECT (editor->priv->text_line_spacing_spin),
+				  "changed",
+				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -496,4 +505,44 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
 }
 
 
+/*****************************************************************************/
+/* Set text line spacing.                                                    */
+/*****************************************************************************/
+void
+gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
+				        gdouble              text_line_spacing)
+{
+	gl_debug (DEBUG_EDITOR, "START");
+
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_line_spacing_spin),
+					 gl_object_editor_changed_cb,
+					 editor);
+
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->text_line_spacing_spin),
+                                   text_line_spacing);
+
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_line_spacing_spin),
+					   gl_object_editor_changed_cb,
+					   editor);
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*****************************************************************************/
+/* Query text line spacing.                                                  */
+/*****************************************************************************/
+gdouble
+gl_object_editor_get_text_line_spacing (glObjectEditor      *editor)
+{
+	gdouble text_line_spacing;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+	text_line_spacing = 
+		gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->text_line_spacing_spin));
+
+	gl_debug (DEBUG_EDITOR, "END");
+
+	return text_line_spacing;
+}
 

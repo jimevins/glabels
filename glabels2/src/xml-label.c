@@ -845,6 +845,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	GnomeFontWeight   font_weight;
 	gboolean          font_italic_flag;
 	guint             color;
+	gdouble           text_line_spacing;
 	gchar            *string;
 	GList            *lines, *text_nodes;
 	xmlNodePtr        child;
@@ -874,6 +875,10 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	/* Text color attr */
 	color = gl_xml_get_prop_uint (node, "color", 0);
 	gl_label_object_set_text_color (object, color);
+
+	/* Text line spacing attr  */
+	text_line_spacing = gl_xml_get_prop_double (node, "line_spacing", 1.0);
+	gl_label_object_set_text_line_spacing (object, text_line_spacing); 
 
 	/* Now descend children, and build lines of text nodes */
 	lines = NULL;
@@ -1508,6 +1513,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	gboolean          font_italic_flag;
 	guint             color;
 	GtkJustification  just;
+	gdouble           text_line_spacing;
 	GList            *lines, *p_line, *p_node;
 	glTextNode       *text_node;
 	xmlNodePtr        child;
@@ -1517,6 +1523,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	/* All span attrs at top level. */
 	font_family = gl_label_object_get_font_family (GL_LABEL_OBJECT(object_text));
 	font_size = gl_label_object_get_font_size (GL_LABEL_OBJECT(object_text));
+	text_line_spacing = gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object_text));
 	font_weight = gl_label_object_get_font_weight (GL_LABEL_OBJECT(object_text));
 	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object_text));
 	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object_text));
@@ -1526,6 +1533,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	xmlSetProp (node, "font_weight", gl_util_weight_to_string (font_weight));
 	gl_xml_set_prop_boolean (node, "font_italic", font_italic_flag);
 	gl_xml_set_prop_uint_hex (node, "color", color);
+	gl_xml_set_prop_double (node, "line_spacing", text_line_spacing);
 
 	/* Build children. */
 	lines = gl_label_text_get_lines (GL_LABEL_TEXT(object_text));

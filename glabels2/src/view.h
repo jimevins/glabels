@@ -94,6 +94,7 @@ struct _glView {
 	gboolean           default_font_italic_flag;
 	guint              default_text_color;
 	GtkJustification   default_text_alignment;
+	gdouble            default_text_line_spacing;
 
 	/* Default object line properties */
 	gdouble            default_line_width;
@@ -221,6 +222,9 @@ void       gl_view_set_selection_font_size        (glView           *view,
 void       gl_view_set_selection_font_weight      (glView           *view,
 						   GnomeFontWeight   font_weight);
 
+void       gl_view_set_selection_text_line_spacing (glView           *view,
+						   gdouble           text_line_spacing);
+
 void       gl_view_set_selection_font_italic_flag (glView           *view,
 						   gboolean          font_italic_flag);
 
@@ -301,6 +305,9 @@ void       gl_view_set_default_line_color       (glView            *view,
 
 void       gl_view_set_default_fill_color       (glView            *view,
 						 guint              fill_color);
+void       gl_view_set_default_text_line_spacing (glView            *view,
+						 gdouble            text_line_spacing);
+
 
 
 gchar           *gl_view_get_default_font_family      (glView            *view);
@@ -314,6 +321,8 @@ gboolean         gl_view_get_default_font_italic_flag (glView            *view);
 guint            gl_view_get_default_text_color       (glView            *view);
 
 GtkJustification gl_view_get_default_text_alignment   (glView            *view);
+
+gdouble          gl_view_get_default_text_line_spacing (glView            *view);
 
 gdouble          gl_view_get_default_line_width       (glView            *view);
 

@@ -96,6 +96,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_left_toggle;
 	GtkWidget  *text_center_toggle;
 	GtkWidget  *text_right_toggle;
+	GtkWidget  *text_line_spacing_spin;
 
 	GtkWidget  *edit_page_vbox;
 	GtkWidget  *edit_text_view;

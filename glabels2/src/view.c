@@ -394,6 +394,7 @@ gl_view_construct (glView *view)
 	gl_view_set_default_font_italic_flag (view, gl_prefs->default_font_italic_flag);
 	gl_view_set_default_text_color       (view, gl_prefs->default_text_color);
 	gl_view_set_default_text_alignment   (view, gl_prefs->default_text_alignment);
+	gl_view_set_default_text_line_spacing (view, gl_prefs->default_text_line_spacing);
 	gl_view_set_default_line_width       (view, gl_prefs->default_line_width);
 	gl_view_set_default_line_color       (view, gl_prefs->default_line_color);
 	gl_view_set_default_fill_color       (view, gl_prefs->default_fill_color);
@@ -2748,6 +2749,29 @@ gl_view_set_selection_text_alignment (glView            *view,
 }
 
 /*****************************************************************************/
+/* Set text line spacing for all text contained in selected objects.         */
+/*****************************************************************************/
+void
+gl_view_set_selection_text_line_spacing (glView            *view,
+				         gdouble            text_line_spacing)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_text_line_spacing (object, text_line_spacing);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+/*****************************************************************************/
 /* Set text color for all text contained in selected objects.                */
 /*****************************************************************************/
 void
@@ -3986,6 +4010,22 @@ gl_view_set_default_text_alignment (glView            *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+/****************************************************************************/
+/* Set default text line spacing.                                           */
+/****************************************************************************/
+void
+gl_view_set_default_text_line_spacing (glView            *view,
+			               gdouble            text_line_spacing)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_text_line_spacing = text_line_spacing;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
 
 /****************************************************************************/
 /* Set default line width.                                                  */
@@ -4133,6 +4173,22 @@ gl_view_get_default_text_alignment (glView            *view)
 
 	return view->default_text_alignment;
 }
+
+/****************************************************************************/
+/* Get default text line spacing.                                           */
+/****************************************************************************/
+gdouble
+gl_view_get_default_text_line_spacing (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_text_line_spacing;
+}
+
 
 
 /****************************************************************************/

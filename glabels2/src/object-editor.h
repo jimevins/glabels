@@ -199,6 +199,11 @@ void        gl_object_editor_set_text_alignment   (glObjectEditor      *editor,
 
 GtkJustification gl_object_editor_get_text_alignment (glObjectEditor      *editor);
 
+void        gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
+						   gdouble              text_line_spacing);
+
+gdouble     gl_object_editor_get_text_line_spacing (glObjectEditor      *editor);
+
 void        gl_object_editor_set_text_color       (glObjectEditor      *editor,
 						   guint                text_color);
 

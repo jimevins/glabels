@@ -726,6 +726,7 @@ draw_text_object (PrintInfo     *pi,
 	GnomeGlyphList *glyphlist;
 	ArtDRect bbox;
 	gdouble affine[6];
+	gdouble text_line_spacing;
 
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -738,6 +739,7 @@ draw_text_object (PrintInfo     *pi,
 	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object));
 	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object));
 	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
+	text_line_spacing = gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
 
 	font = gnome_font_find_closest_from_weight_slant (
                                        font_family,
@@ -782,8 +784,14 @@ draw_text_object (PrintInfo     *pi,
 			break;	/* shouldn't happen */
 		}
 
-		y_offset = GL_LABEL_TEXT_MARGIN + (i + 1) * font_size
-			+ gnome_font_get_descender (font);
+		/* Work out the y position to the BOTTOM of the first line */
+		y_offset = GL_LABEL_TEXT_MARGIN +
+			   + gnome_font_get_descender (font)
+	       		   + (i + 1) * font_size * text_line_spacing;
+
+		/* Remove any text line spacing from the first row. */
+		y_offset -= font_size * (text_line_spacing - 1);
+
 
 		gnome_print_moveto (pi->pc, x_offset, y_offset);
 

@@ -46,6 +46,7 @@
 #define PREF_DEFAULT_FONT_ITALIC_FLAG       "/default-font-italic-flag"
 #define PREF_DEFAULT_TEXT_COLOR             "/default-text-color"
 #define PREF_DEFAULT_TEXT_ALIGNMENT         "/default-text-alignment"
+#define PREF_DEFAULT_TEXT_LINE_SPACING      "/default-text-line-spacing"
 
 #define PREF_DEFAULT_LINE_WIDTH             "/default-line-width"
 #define PREF_DEFAULT_LINE_COLOR             "/default-line-color"
@@ -78,6 +79,7 @@
 #define DEFAULT_FONT_ITALIC_FLAG   FALSE
 #define DEFAULT_TEXT_JUST_STRING   gl_util_just_to_string (GTK_JUSTIFY_LEFT)
 #define DEFAULT_TEXT_COLOR         GNOME_CANVAS_COLOR (0,0,0)
+#define DEFAULT_TEXT_LINE_SPACING  1.0
 
 #define DEFAULT_LINE_WIDTH         1.0
 #define DEFAULT_LINE_COLOR         GNOME_CANVAS_COLOR_A (0, 0, 0, 255)
@@ -300,6 +302,10 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 				 gl_util_just_to_string(prefs_model->default_text_alignment),
 				 NULL);
 
+	gconf_client_set_float  (prefs_model->gconf_client,
+				 BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
+				 prefs_model->default_text_line_spacing,
+				 NULL);
 
 	/* Line properties */
 	gconf_client_set_float  (prefs_model->gconf_client,
@@ -445,6 +451,12 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	prefs_model->default_text_alignment = gl_util_string_to_just( string );
 	g_free( string );
 
+	prefs_model->default_text_line_spacing =
+		get_float (prefs_model->gconf_client,
+			   BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
+			   DEFAULT_TEXT_LINE_SPACING);
+
+	gl_debug (DEBUG_PREFS, "text_line_spacing = %f", prefs_model->default_text_line_spacing);
 
 	/* Line properties */
 	prefs_model->default_line_width =
@@ -661,7 +673,6 @@ get_float (GConfClient *client,
 		return retval;
 
 	} else {
-
 		return def;
 
 	}

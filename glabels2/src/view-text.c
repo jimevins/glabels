@@ -305,6 +305,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gboolean           font_italic_flag;
 	guint              color;
 	GtkJustification   just;
+	gdouble            text_line_spacing;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -315,7 +316,6 @@ update_object_from_editor_cb (glObjectEditor *editor,
 					 update_editor_from_move_cb,
 					 editor);
 
-
 	gl_object_editor_get_position (editor, &x, &y);
 	gl_object_editor_get_size (editor, &w, &h);
 	font_family = gl_object_editor_get_font_family (editor);
@@ -324,6 +324,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
 	color = gl_object_editor_get_text_color (editor);
 	just = gl_object_editor_get_text_alignment (editor);
+	text_line_spacing = (gdouble) gl_object_editor_get_text_line_spacing (editor);
 
 	gl_label_object_set_position (object, x, y);
 	gl_label_object_set_size (object, w, h);
@@ -333,6 +334,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_object_set_font_italic_flag (object, font_italic_flag);
 	gl_label_object_set_text_color (object, color);
 	gl_label_object_set_text_alignment (object, just);
+	gl_label_object_set_text_line_spacing (object, text_line_spacing);
 
 	g_free (font_family);
 
@@ -360,6 +362,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gboolean           font_italic_flag;
 	guint              color;
 	GtkJustification   just;
+	gdouble            text_line_spacing;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -372,6 +375,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
 	color            = gl_label_object_get_text_color (object);
 	just             = gl_label_object_get_text_alignment (object);
+	text_line_spacing = gl_label_object_get_text_line_spacing (object);
 
 	gl_object_editor_set_font_family (editor, font_family);
 	gl_object_editor_set_font_size (editor, font_size);
@@ -379,6 +383,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
 	gl_object_editor_set_text_color (editor, color);
 	gl_object_editor_set_text_alignment (editor, just);
+	gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
 
 	g_free (font_family);
 
@@ -509,6 +514,8 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 							gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5));
 			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
 							    gl_view_get_default_text_alignment (view));
+			gl_label_object_set_text_line_spacing (GL_LABEL_OBJECT(object), gl_view_get_default_text_line_spacing (view));
+						       
 			g_free (family);
 			lines = gl_text_node_lines_new_from_text (_("Text"));
 			gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
@@ -545,6 +552,8 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 							gl_view_get_default_text_color (view));
 			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
 							    gl_view_get_default_text_alignment (view));
+			gl_label_object_set_text_line_spacing (GL_LABEL_OBJECT(object), gl_view_get_default_text_line_spacing (view));
+
 			g_free (family);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_text));
@@ -589,6 +598,7 @@ draw_hacktext (glViewText *view_text)
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
 	gdouble            font_size;
+	gdouble            text_line_spacing;
 	guint              color;
 	GtkJustification   just;
 	GnomeFont         *font;
@@ -607,6 +617,7 @@ draw_hacktext (glViewText *view_text)
 	gl_label_object_get_size (object, &object_w, &object_h);
 	font_family = gl_label_object_get_font_family (object);
 	font_size = gl_label_object_get_font_size (object);
+	text_line_spacing = gl_label_object_get_text_line_spacing (object);
 	font_weight = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
 	color = gl_label_object_get_text_color (object);
@@ -658,8 +669,13 @@ draw_hacktext (glViewText *view_text)
 			break;	/* shouldn't happen */
 		}
 
+		/* Work out the y position to the BOTTOM of the first line */
 		y_offset = GL_LABEL_TEXT_MARGIN +
-			(i + 1) * font_size + gnome_font_get_descender (font);
+			   + gnome_font_get_descender (font)
+	       		   + (i + 1) * font_size * text_line_spacing;
+
+		/* Remove any text line spacing from the first row. */
+		y_offset -= font_size * (text_line_spacing - 1);
 
 		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
 						gl_canvas_hacktext_get_type (),

@@ -73,6 +73,7 @@ struct _glPrefsModel {
 	gboolean          default_font_italic_flag;
 	guint             default_text_color;
 	GtkJustification  default_text_alignment;
+	gdouble           default_text_line_spacing;
 	
 	/* Line properties */
 	gdouble           default_line_width;

@@ -65,6 +65,7 @@ struct _glPrefsDialogPrivate
 	GtkWidget       *text_left_toggle;
 	GtkWidget       *text_center_toggle;
 	GtkWidget       *text_right_toggle;
+	GtkWidget       *text_line_spacing_spin;
 
 	/* Default line properties */
 	GtkWidget       *line_width_spin;
@@ -341,6 +342,8 @@ construct_object_page (glPrefsDialog *dlg)
 		glade_xml_get_widget (dlg->priv->gui, "text_center_toggle");
 	dlg->priv->text_right_toggle =
 		glade_xml_get_widget (dlg->priv->gui, "text_right_toggle");
+	dlg->priv->text_line_spacing_spin =
+		glade_xml_get_widget (dlg->priv->gui, "text_line_spacing_spin");
 
 	dlg->priv->line_width_spin =
 		glade_xml_get_widget (dlg->priv->gui, "line_width_spin");
@@ -390,6 +393,11 @@ construct_object_page (glPrefsDialog *dlg)
 			  "toggled",
 			  G_CALLBACK(align_toggle_cb),
 			  G_OBJECT(dlg));
+
+	g_signal_connect_swapped (G_OBJECT(dlg->priv->text_line_spacing_spin),
+				  "changed",
+				  G_CALLBACK(update_prefs_from_object_page),
+				  G_OBJECT(dlg));
 
 	g_signal_connect_swapped (G_OBJECT(dlg->priv->line_width_spin),
 				  "changed",
@@ -554,6 +562,9 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 		G_OBJECT(dlg->priv->text_right_toggle),
 		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
+		G_OBJECT(dlg->priv->text_line_spacing_spin),
+		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
+	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->line_width_spin),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
@@ -601,6 +612,8 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->text_right_toggle),
                                  (gl_prefs->default_text_alignment == GTK_JUSTIFY_RIGHT));
 
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->text_line_spacing_spin),
+                                   gl_prefs->default_text_line_spacing);
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->line_width_spin),
                                    gl_prefs->default_line_width);
@@ -639,6 +652,9 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->text_right_toggle),
 		G_CALLBACK(align_toggle_cb), G_OBJECT(dlg));
+	g_signal_handlers_unblock_by_func (
+		G_OBJECT(dlg->priv->text_line_spacing_spin),
+		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->line_width_spin),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
@@ -731,6 +747,9 @@ update_prefs_from_object_page (glPrefsDialog *dlg)
                 gl_prefs->default_text_alignment = GTK_JUSTIFY_LEFT;
         }
                                                                                 
+
+        gl_prefs->default_text_line_spacing =
+                gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->text_line_spacing_spin));
 
         gl_prefs->default_line_width =
                 gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->line_width_spin));

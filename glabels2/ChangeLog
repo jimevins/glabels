@@ -1,3 +1,43 @@
+2003-12-30  Wayne Schuller  <k_wayne@linuxpower.org>
+
+	Added feature: line spacing - allows you to comfortably space a text box to
+	fit a label perfectly.
+
+	* data/glabels-2.0.dtd:
+	* src/label-object.c: (gl_label_object_set_text_line_spacing),
+	(gl_label_object_get_text_alignment),
+	(gl_label_object_get_text_line_spacing):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_class_init),
+	(gl_label_text_instance_init), (copy), (get_size),
+	(set_text_line_spacing), (get_text_alignment),
+	(get_text_line_spacing):
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_text_line_spacing),
+	(gl_object_editor_get_text_line_spacing):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+	* src/prefs-dialog.glade:
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings), (get_float):
+	* src/prefs-model.h:
+	* src/print.c: (draw_text_object):
+	* src/ui-sidebar.c:
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_text_create_event_handler), (draw_hacktext):
+	* src/view.c: (gl_view_construct),
+	(gl_view_set_selection_text_line_spacing),
+	(gl_view_set_default_text_line_spacing),
+	(gl_view_get_default_text_line_spacing):
+	* src/view.h:
+	* src/xml-label.c: (xml_parse_toplevel_span),
+	(xml_create_toplevel_span):
+
 2003-12-30  Jim Evins  <evins@snaught.com>
 
 	* src/template-designer.c:

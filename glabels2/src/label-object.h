@@ -93,6 +93,9 @@ struct _glLabelObjectClass {
 	void              (*set_text_alignment)   (glLabelObject     *object,
 						   GtkJustification   text_alignment);
 
+	void              (*set_text_line_spacing) (glLabelObject     *object,
+						    gdouble            text_line_spacing);
+
 	void              (*set_text_color)       (glLabelObject     *object,
 						   guint              text_color);
 
@@ -114,6 +117,8 @@ struct _glLabelObjectClass {
 	gboolean          (*get_font_italic_flag) (glLabelObject     *object);
 
 	GtkJustification  (*get_text_alignment)   (glLabelObject     *object);
+
+	gdouble           (*get_text_line_spacing) (glLabelObject     *object);
 
 	guint             (*get_text_color)       (glLabelObject     *object);
 
@@ -217,6 +222,9 @@ void           gl_label_object_set_text_alignment    (glLabelObject     *object,
 void           gl_label_object_set_text_color        (glLabelObject     *object,
 						      guint              text_color);
 
+void           gl_label_object_set_text_line_spacing (glLabelObject     *object,
+						      gdouble            text_line_spacing);
+
 
 gchar           *gl_label_object_get_font_family       (glLabelObject     *object);
 
@@ -227,6 +235,8 @@ GnomeFontWeight  gl_label_object_get_font_weight       (glLabelObject     *objec
 gboolean         gl_label_object_get_font_italic_flag  (glLabelObject     *object);
 
 GtkJustification gl_label_object_get_text_alignment    (glLabelObject     *object);
+
+gdouble          gl_label_object_get_text_line_spacing (glLabelObject     *object);
 
 guint            gl_label_object_get_text_color        (glLabelObject     *object);
 

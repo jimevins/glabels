@@ -685,6 +685,27 @@ gl_label_object_set_text_alignment (glLabelObject     *object,
 }
 
 /****************************************************************************/
+/* Set text line spacing for all text contained in object.                  */
+/****************************************************************************/
+void
+gl_label_object_set_text_line_spacing (glLabelObject     *object,
+			               gdouble            text_line_spacing)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_line_spacing != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_line_spacing (object, text_line_spacing);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
 /* Set text color for all text contained in object.                         */
 /****************************************************************************/
 void
@@ -817,6 +838,30 @@ gl_label_object_get_text_alignment (glLabelObject     *object)
 
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment (object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return ret;
+}
+
+/****************************************************************************/
+/* Get text line spacing for all text contained in object.                  */
+/****************************************************************************/
+gdouble
+gl_label_object_get_text_line_spacing (glLabelObject     *object)
+{
+	gdouble ret = 0.0;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_line_spacing != NULL ) {
+
+		/* We have an object specific method, use it */
+		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_line_spacing (object);
 
 	}
 

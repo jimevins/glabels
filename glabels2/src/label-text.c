@@ -39,6 +39,7 @@
 #define DEFAULT_FONT_ITALIC_FLAG FALSE
 #define DEFAULT_JUST             GTK_JUSTIFY_LEFT
 #define DEFAULT_COLOR            GNOME_CANVAS_COLOR (0,0,0)
+#define DEFAULT_TEXT_LINE_SPACING 1.0
 
 /*========================================================*/
 /* Private types.                                         */
@@ -54,6 +55,7 @@ struct _glLabelTextPrivate {
 	gboolean         font_italic_flag;
 	GtkJustification just;
 	guint            color;
+	gdouble          line_spacing;
 };
 
 /*========================================================*/
@@ -97,6 +99,9 @@ static void set_font_italic_flag        (glLabelObject    *object,
 static void set_text_alignment          (glLabelObject    *object,
 					 GtkJustification  text_alignment);
 
+static void set_text_line_spacing       (glLabelObject    *object,
+					 gdouble           text_line_spacing);
+
 static void set_text_color              (glLabelObject    *object,
 					 guint             text_color);
 
@@ -109,6 +114,8 @@ static GnomeFontWeight get_font_weight             (glLabelObject    *object);
 static gboolean         get_font_italic_flag       (glLabelObject    *object);
 
 static GtkJustification get_text_alignment          (glLabelObject    *object);
+
+static gdouble         get_text_line_spacing        (glLabelObject    *object);
 
 static guint            get_text_color              (glLabelObject    *object);
 
@@ -158,12 +165,14 @@ gl_label_text_class_init (glLabelTextClass *klass)
 	label_object_class->set_font_weight      = set_font_weight;
 	label_object_class->set_font_italic_flag = set_font_italic_flag;
 	label_object_class->set_text_alignment   = set_text_alignment;
+	label_object_class->set_text_line_spacing = set_text_line_spacing;
 	label_object_class->set_text_color       = set_text_color;
 	label_object_class->get_font_family      = get_font_family;
 	label_object_class->get_font_size        = get_font_size;
 	label_object_class->get_font_weight      = get_font_weight;
 	label_object_class->get_font_italic_flag = get_font_italic_flag;
 	label_object_class->get_text_alignment   = get_text_alignment;
+	label_object_class->get_text_line_spacing = get_text_line_spacing;
 	label_object_class->get_text_color       = get_text_color;
 
 	object_class->finalize = gl_label_text_finalize;
@@ -183,6 +192,7 @@ gl_label_text_instance_init (glLabelText *ltext)
 	ltext->private->font_italic_flag = DEFAULT_FONT_ITALIC_FLAG;
 	ltext->private->just             = DEFAULT_JUST;
 	ltext->private->color            = DEFAULT_COLOR;
+	ltext->private->line_spacing     = DEFAULT_TEXT_LINE_SPACING;
 
 	g_signal_connect (G_OBJECT(ltext->private->buffer), "changed",
 			  G_CALLBACK(buffer_changed_cb), ltext);
@@ -244,6 +254,7 @@ copy (glLabelObject *dst_object,
 	new_ltext->private->font_italic_flag = ltext->private->font_italic_flag;
 	new_ltext->private->color            = ltext->private->color;
 	new_ltext->private->just             = ltext->private->just;
+	new_ltext->private->line_spacing     = ltext->private->line_spacing;
 
 	gl_text_node_lines_free (&lines);
 
@@ -377,7 +388,11 @@ get_size (glLabelObject *object,
 
 		if ( bbox.x1 > *w ) *w = bbox.x1;
 
-		*h += ltext->private->font_size;
+		if (i) {
+			*h += ltext->private->line_spacing * ltext->private->font_size;
+		} else {
+			*h += ltext->private->font_size;
+		}
 
 	}
 
@@ -530,6 +545,29 @@ set_text_alignment (glLabelObject    *object,
 }
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  set text line spacing method.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+set_text_line_spacing (glLabelObject *object,
+	               gdouble        line_spacing)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->line_spacing != line_spacing) {
+
+		ltext->private->line_spacing = line_spacing;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  set text color method.                                          */
 /*---------------------------------------------------------------------------*/
 static void
@@ -625,6 +663,21 @@ get_text_alignment (glLabelObject    *object)
 	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), GTK_JUSTIFY_LEFT);
 
 	return ltext->private->just;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  get text line spacing method.                                   */
+/*---------------------------------------------------------------------------*/
+static gdouble
+get_text_line_spacing (glLabelObject *object)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), 0.0);
+
+	return ltext->private->line_spacing;
 }
 
 /*---------------------------------------------------------------------------*/

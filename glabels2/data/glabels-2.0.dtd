@@ -294,6 +294,7 @@
                  font_weight     %FONT_WEIGHT_TYPE;      #IMPLIED
                  font_italic     %BOOLEAN_TYPE;          #IMPLIED
                  color           %UINT_TYPE;             #IMPLIED
+                 line_spacing    %LENGTH_TYPE;           #IMPLIED
 >
 
 <!ELEMENT Field EMPTY>
