@@ -16,7 +16,9 @@
 <!ENTITY % FONT_WEIGHT_TYPE   "(Regular | Bold)">
 
 <!-- Barcode related enumerations/types -->
-<!ENTITY % BC_STYLE_TYPE      "(POSTNET    |
+<!ENTITY % BC_STYLE_TYPE      "CDATA">
+                              <!-- one of:
+                              "(POSTNET    |
                                 POSTNET-5  |
                                 POSTNET-9  |
                                 POSTNET-11 |
@@ -44,7 +46,7 @@
                                 CBR        |
                                 MSI        |
                                 PLS)"
->
+                               -->
 
 <!-- Data encoding method -->
 <!ENTITY % DATA_ENCODING_TYPE "(None | Base64)">

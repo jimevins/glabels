@@ -68,6 +68,18 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 7165 family: Address labels                                   -->
+  <!-- =================================================================== -->
+  <Template name="Avery  7165" size="A4" description="Address Labels">
+    <Label-rectangle id="0" width="280.8pt" height="191.991pt" round="0pt" waste="0pt">
+      <Markup-margin size="5.66929pt"/>
+      <Layout nx="2" ny="4" x0="13.2378pt" y0="36.9638pt" dx="288.113pt" dy="191.991pt"/>
+    </Label-rectangle>
+    <Alias name="Avery  J8165"/>
+    <Alias name="Avery  L7165"/>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 7169 family: shipping labels, 99.1 x 139.0 mm, 4 per sheet    -->
   <!-- =================================================================== -->
   <Template name="Avery   7169" size="A4" _description="Shipping labels">

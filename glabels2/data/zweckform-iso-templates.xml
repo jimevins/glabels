@@ -52,12 +52,32 @@
   <Template name="Zweckform  3669" size="A4" _description="QSL-Karten Etiketten 70mm x 50,8mm">
     <Label-rectangle id="0" width="198.425" height="144" round="0">
       <Markup-margin size="5"/>
-     <Layout nx="3" ny="5" x0="0" y0="61" dx="198.425" dy="144"/>
+      <Layout nx="3" ny="5" x0="0" y0="61" dx="198.425" dy="144"/>
     </Label-rectangle>
   </Template>
 
   <!-- =================================================================== -->
-  <!-- Zweckform 4746: Video Labels, 147,32 x 20 mm, 13 per sheet    -->
+  <!-- Zweckform 3688: Ordnerruecken Labels                                -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  3688" size="A4" description="File Back Labels">
+    <Label-rectangle id="0" width="544.252pt" height="172.913pt" round="0pt" waste="0pt">
+      <Markup-margin size="9.07087pt"/>
+      <Layout nx="1" ny="4" x0="28.3465pt" y0="76.5354pt" dx="544.252pt" dy="172.913pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 4732: Multi-purpose Stick+Lift labels                     -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  4732" size="A4" description="Multi-purpose Stick+Lift Labels">
+    <Label-rectangle id="0" width="102.047pt" height="48.189pt" round="5.66929pt" waste="0pt">
+      <Markup-margin size="5.66929pt"/>
+      <Layout nx="5" ny="16" x0="31.1811pt" y0="36.8504pt" dx="107.717pt" dy="48.189pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 4746: Video Labels, 147,32 x 20 mm, 13 per sheet          -->
   <!-- =================================================================== -->
   <Template name="Zweckform  4746" size="A4" _description="Video Labels (back)">
     <Label-rectangle id="0" width="416.6" height="56.6929" round="5">
@@ -125,6 +145,16 @@
       <Layout nx="1" ny="2" x0="131.811" y0="60.746" dx="0" dy="388.346"/>
      </Label-cd>
    </Template>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 6021: Allround Labels                                     -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  6021" size="A4" description="Allround Labels">
+    <Label-rectangle id="0" width="130.392pt" height="47.9055pt" round="0pt" waste="0pt">
+      <Markup-margin size="5pt"/>
+      <Layout nx="4" ny="16" x0="24.0945pt" y0="39.6853pt" dx="136.913pt" dy="47.9055pt"/>
+    </Label-rectangle>
+  </Template>
 
   <!-- =================================================================== -->
   <!-- Zweckform 32010: Business Cards, 54.0 x 85.0 mm, 10 per sheet       -->

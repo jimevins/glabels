@@ -637,11 +637,6 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 
 	}
 
-	for ( p=label_type->layouts; p != NULL; p=p->next ) {
-		layout = (glTemplateLayout *)p->data;
-		xml_create_layout_node (layout, node, ns);
-	}
-
 	for ( p=label_type->markups; p != NULL; p=p->next ) {
 		markup = (glTemplateMarkup *)p->data;
 		switch (markup->type) {
@@ -658,6 +653,11 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 			g_warning ("Unknown markup type");
 			break;
 		}
+	}
+
+	for ( p=label_type->layouts; p != NULL; p=p->next ) {
+		layout = (glTemplateLayout *)p->data;
+		xml_create_layout_node (layout, node, ns);
 	}
 
 }

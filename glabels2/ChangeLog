@@ -1,3 +1,18 @@
+2004-05-05  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+		Broke DTD previously when adding new barcode types that contain a
+		plus sign (+).  Simply changed the BC_STYLE_TYPE entity to "CDATA"
+		to avoid the problem.
+	* data/avery-iso-templates.xml:
+	* data/zweckform-iso-templates.xml:
+	* AUTHORS:
+		Added templates for Avery 7165, Zweckform 3688, 4732, and 6021.  Templates
+		provided by Frank Altpeter.
+	* libglabels/xml-template.c: (xml_create_label_node):
+		Reordered markup and layout sub-nodes so that resulting templates will
+		validate against DTD.
+
 2004-03-13  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-size-page.c: (gl_object_editor_prepare_size_page):
