@@ -6,14 +6,6 @@ Jim Evins <evins@snaught.com>
 Acknowledgments
 ===============
 
-Contributors:
-	Akkana <akkana@shallowsky.com>
-	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
-                                                      that first appeared in
-                                                      0.4.3:
-	Alessandro Zummo <azummo@towertech.it>
-
-
 The GNU Barcode Library provides a large chunk of the barcode functionality
 and is distributed with glabels.  See ./barcode-0.98/README for more
 information.  The author:
@@ -29,6 +21,23 @@ canvas item:
 	Raph Levien <raph@acm.org>,
 	Lauris Kaplinski <lauris@helixcode.com>
 
+Glabels includes modified versions of several widgets from the GAL library.  These are
+copyright:
+
+	* Copyright 2000, 2001, Ximian, Inc.
+	* Copyright 2000, Michael Levy
+	* Copyright 2001, Almer S. Tigelaar
+
+Glabels includes gnome-recent objects.  The author:
+
+	James Willcox <jwillcox@cs.indiana.edu>
+
+Contributors:
+	Akkana <akkana@shallowsky.com>
+	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
+                                                      that first appeared in
+                                                      0.4.3:
+	Alessandro Zummo <azummo@towertech.it>
 
 Translations:
 
