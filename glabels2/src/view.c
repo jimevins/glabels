@@ -39,6 +39,7 @@
 #include "xml-label.h"
 #include "color.h"
 #include "stock.h"
+#include "merge-properties-dialog.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -2376,6 +2377,30 @@ gl_view_is_zoom_min (glView *view)
 	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
 
 	return view->scale <= scales[N_SCALES-1];
+}
+
+/*****************************************************************************/
+/* Launch merge properties dialog.                                           */
+/*****************************************************************************/
+void
+gl_view_edit_merge_props (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	if (view->merge_props_dialog != NULL) {
+		gtk_widget_show_all (view->merge_props_dialog);
+		gtk_window_present (GTK_WINDOW(view->merge_props_dialog));
+		return;
+	}
+
+	view->merge_props_dialog = gl_merge_properties_dialog_new (view);
+	gtk_widget_show_all (view->merge_props_dialog);
+
+	g_signal_connect (G_OBJECT(view->merge_props_dialog), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &view->merge_props_dialog);
 }
 
 /*---------------------------------------------------------------------------*/

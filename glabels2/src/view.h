@@ -77,6 +77,9 @@ struct _glView {
 	GList             *multi_selection_items;
 	GtkWidget         *selection_menu;
 	GtkWidget         *empty_selection_menu;
+
+	/* Merge Properties Dialog */
+	GtkWidget         *merge_props_dialog;
 };
 
 struct _glViewClass {
@@ -198,6 +201,9 @@ gdouble    gl_view_get_zoom                (glView            *view);
 gboolean   gl_view_is_zoom_max             (glView            *view);
 
 gboolean   gl_view_is_zoom_min             (glView            *view);
+
+
+void       gl_view_edit_merge_props        (glView            *view);
 
 
 int        gl_view_item_event_handler      (GnomeCanvasItem   *item,

@@ -22,11 +22,41 @@
 #ifndef __MERGE_PROPERTIES_DIALOG_H__
 #define __MERGE_PROPERTIES_DIALOG_H__
 
+#include <gtk/gtk.h>
+#include "hig.h"
 #include "view.h"
 
 G_BEGIN_DECLS
 
-extern void gl_merge_properties_dialog (glView *view);
+#define GL_TYPE_MERGE_PROPERTIES_DIALOG            (gl_merge_properties_dialog_get_type ())
+#define GL_MERGE_PROPERTIES_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialog))
+#define GL_MERGE_PROPERTIES_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
+#define GL_IS_MERGE_PROPERTIES_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG))
+#define GL_IS_MERGE_PROPERTIES_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG))
+#define GL_MERGE_PROPERTIES_DIALOG_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
+
+
+typedef struct _glMergePropertiesDialog         glMergePropertiesDialog;
+typedef struct _glMergePropertiesDialogClass    glMergePropertiesDialogClass;
+
+typedef struct _glMergePropertiesDialogPrivate  glMergePropertiesDialogPrivate;
+
+struct _glMergePropertiesDialog
+{
+	glHigDialog                     parent_instance;
+
+	glMergePropertiesDialogPrivate *private;
+
+};
+
+struct  _glMergePropertiesDialogClass
+{
+	glHigDialogClass                parent_class;
+};
+
+GtkType    gl_merge_properties_dialog_get_type    (void) G_GNUC_CONST;
+
+GtkWidget *gl_merge_properties_dialog_new         (glView *view);
 
 G_END_DECLS
 

@@ -32,9 +32,7 @@
 /* Private data types                        */
 /*===========================================*/
 
-typedef struct {
-
-	GtkWidget *dialog;
+struct _glMergePropertiesDialogPrivate {
 
 	glView       *view;
 	glLabel      *label;
@@ -49,7 +47,7 @@ typedef struct {
 
 	gchar        *saved_src;
 
-} PropertyDialogPassback;
+};
 
 enum {
 	/* Real columns */
@@ -68,74 +66,145 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
+static glHigDialogClass* parent_class = NULL;
+
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void create_merge_dialog_widgets (glHigDialog            *dialog,
-					 PropertyDialogPassback *data);
+static void gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *klass);
+static void gl_merge_properties_dialog_init       (glMergePropertiesDialog      *dlg);
+static void gl_merge_properties_dialog_finalize   (GObject                      *object);
+static void gl_merge_properties_dialog_construct  (glMergePropertiesDialog      *dialog,
+						   glView                       *view);
 
-static void type_changed_cb             (GtkWidget              *widget,
-					 PropertyDialogPassback *data);
+static void type_changed_cb                       (GtkWidget                    *widget,
+						   glMergePropertiesDialog      *dialog);
 
-static void src_changed_cb              (GtkWidget              *widget,
-					 PropertyDialogPassback *data);
+static void src_changed_cb                        (GtkWidget                    *widget,
+						   glMergePropertiesDialog      *dialog);
 
-static void response_cb                 (glHigDialog            *dialog,
-					 gint                    response,
-					 PropertyDialogPassback *data);
+static void response_cb                           (glMergePropertiesDialog      *dialog,
+					           gint                          response,
+						   gpointer                      user_data);
 
-static void load_tree                   (GtkTreeStore           *store,
-					 glMerge                *merge);
+static void load_tree                             (GtkTreeStore                 *store,
+					           glMerge                      *merge);
 
-static void
-record_select_toggled_cb                (GtkCellRendererToggle  *cell,
-					 gchar                  *path_str,
-					 GtkTreeStore           *store);
+static void record_select_toggled_cb              (GtkCellRendererToggle        *cell,
+						   gchar                        *path_str,
+						   GtkTreeStore                 *store);
 
 
 
-/****************************************************************************/
-/* Launch merge properties dialog.                                          */
-/****************************************************************************/
-void
-gl_merge_properties_dialog (glView *view)
+/*****************************************************************************/
+/* Boilerplate object stuff.                                                 */
+/*****************************************************************************/
+GType
+gl_merge_properties_dialog_get_type (void)
 {
-	PropertyDialogPassback *data;
-	GtkWidget *dialog;
+	static GType dialog_type = 0;
 
-	gl_debug (DEBUG_MERGE, "START");
+	if (!dialog_type)
+    	{
+      		static const GTypeInfo dialog_info =
+      		{
+			sizeof (glMergePropertiesDialogClass),
+        		NULL,		/* base_init */
+        		NULL,		/* base_finalize */
+        		(GClassInitFunc) gl_merge_properties_dialog_class_init,
+        		NULL,           /* class_finalize */
+        		NULL,           /* class_data */
+        		sizeof (glMergePropertiesDialog),
+        		0,              /* n_preallocs */
+        		(GInstanceInitFunc) gl_merge_properties_dialog_init
+      		};
 
-	data = g_new0 (PropertyDialogPassback, 1);
+     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+						      "glMergePropertiesDialog",
+						      &dialog_info, 
+						      0);
+    	}
 
-	dialog = gl_hig_dialog_new_with_buttons (
-		_("Edit document-merge properties"),
-		NULL,
-		GTK_DIALOG_DESTROY_WITH_PARENT,
-		GTK_STOCK_OK, GTK_RESPONSE_OK,
-		GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		NULL);
+	return dialog_type;
+}
 
-	data->dialog = dialog;
-	data->view = view;
-	data->label = view->label;
+static void
+gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	create_merge_dialog_widgets (GL_HIG_DIALOG (dialog), data);
+	gl_debug (DEBUG_MERGE, "");
+	
+  	parent_class = g_type_class_peek_parent (klass);
+
+  	object_class->finalize = gl_merge_properties_dialog_finalize;  	
+}
+
+static void
+gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
+{
+	gl_debug (DEBUG_MERGE, "");
+
+	dialog->private = g_new0 (glMergePropertiesDialogPrivate, 1);
+
+	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
+				GTK_STOCK_OK, GTK_RESPONSE_OK,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				NULL);
 
 	g_signal_connect (G_OBJECT(dialog), "response",
-			  G_CALLBACK(response_cb), data);
+			  G_CALLBACK(response_cb), NULL);
 
-	gtk_widget_show_all (GTK_WIDGET (dialog));
+}
 
-	gl_debug (DEBUG_MERGE, "END");
+static void 
+gl_merge_properties_dialog_finalize (GObject *object)
+{
+	glMergePropertiesDialog* dialog;
+	
+	gl_debug (DEBUG_MERGE, "");
+
+	g_return_if_fail (object != NULL);
+	
+   	dialog = GL_MERGE_PROPERTIES_DIALOG (object);
+
+	g_return_if_fail (GL_IS_MERGE_PROPERTIES_DIALOG (dialog));
+	g_return_if_fail (dialog->private != NULL);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+
+	if (dialog->private->merge != NULL) {
+		g_object_unref (G_OBJECT(dialog->private->merge));
+	}
+
+	g_free (dialog->private);
+}
+
+/*****************************************************************************/
+/* NEW merge properties dialog.                                              */
+/*****************************************************************************/
+GtkWidget*
+gl_merge_properties_dialog_new (glView *view)
+{
+	GtkWidget *dialog;
+
+	gl_debug (DEBUG_MERGE, "");
+
+	dialog = GTK_WIDGET (g_object_new (GL_TYPE_MERGE_PROPERTIES_DIALOG, NULL));
+
+	gl_merge_properties_dialog_construct (GL_MERGE_PROPERTIES_DIALOG(dialog),
+					      view);
+
+	return dialog;
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Create merge widgets.                                          */
 /*--------------------------------------------------------------------------*/
 static void
-create_merge_dialog_widgets (glHigDialog            *dialog,
-			     PropertyDialogPassback *data)
+gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
+				      glView                  *view)
 {
 	GtkWidget         *wframe, *whbox, *wtable, *wlabel, *wcombo, *wscroll, *wentry;
 	GList             *texts;
@@ -146,17 +215,28 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection  *selection;
+	gchar             *name, *title;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	data->merge = gl_label_get_merge (data->label);
-	description = gl_merge_get_description (data->merge);
-	src_type    = gl_merge_get_src_type (data->merge);
-	src         = gl_merge_get_src (data->merge);
+	dialog->private->view  = view;
+	dialog->private->label = view->label;
+
+	dialog->private->merge = gl_label_get_merge (dialog->private->label);
+	description            = gl_merge_get_description (dialog->private->merge);
+	src_type               = gl_merge_get_src_type (dialog->private->merge);
+	src                    = gl_merge_get_src (dialog->private->merge);
+
+	/* --- Window title --- */
+	name = gl_label_get_short_name (view->label);
+	title = g_strdup_printf ("%s %s", name, _("Merge Properties"));
+	gtk_window_set_title (GTK_WINDOW (dialog), title);
+	g_free (name);
+	g_free (title);
 
 	/* ---- Source section ---- */
 	wframe = gl_hig_category_new (_("Source"));
-	gl_hig_dialog_add_widget (dialog, wframe);
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wframe);
 	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	/* Format line */
@@ -180,12 +260,12 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 	}
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), texts);
 	gl_merge_free_descriptions (&texts);
-	data->type_entry = GTK_COMBO (wcombo)->entry;
-	gtk_entry_set_editable (GTK_ENTRY (data->type_entry), FALSE);
-	gtk_entry_set_text (GTK_ENTRY (data->type_entry), description);
+	dialog->private->type_entry = GTK_COMBO (wcombo)->entry;
+	gtk_entry_set_editable (GTK_ENTRY (dialog->private->type_entry), FALSE);
+	gtk_entry_set_text (GTK_ENTRY (dialog->private->type_entry), description);
 	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), wcombo);
-	g_signal_connect (G_OBJECT (data->type_entry), "changed",
-			  G_CALLBACK (type_changed_cb), data);
+	g_signal_connect (G_OBJECT (dialog->private->type_entry), "changed",
+			  G_CALLBACK (type_changed_cb), dialog);
 
 	whbox = gl_hig_hbox_new();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY (wframe), whbox);
@@ -199,25 +279,27 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 	gl_debug (DEBUG_MERGE, "Src_type = %d", src_type);
 	switch (src_type) {
 	case GL_MERGE_SRC_IS_FILE:
-		data->src_entry =
+		dialog->private->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
-		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
+		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(dialog->private->src_entry));
 		gtk_entry_set_text (GTK_ENTRY(wentry), src);
 		g_signal_connect (G_OBJECT (wentry), "changed",
-				  G_CALLBACK (src_changed_cb), data);
+				  G_CALLBACK (src_changed_cb), dialog);
 		break;
 	default:
-		data->src_entry = gtk_label_new (_("N/A"));
-		gtk_misc_set_alignment (GTK_MISC (data->src_entry), 0.0, 0.5);
+		dialog->private->src_entry = gtk_label_new (_("N/A"));
+		gtk_misc_set_alignment (GTK_MISC (dialog->private->src_entry), 0.0, 0.5);
 		break;
 	}
-	data->src_entry_holder = gtk_hbox_new (FALSE, 0);
-	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
-	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), data->src_entry_holder);
+	dialog->private->src_entry_holder = gtk_hbox_new (FALSE, 0);
+	gtk_container_add( GTK_CONTAINER(dialog->private->src_entry_holder),
+			   dialog->private->src_entry);
+	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox),
+					dialog->private->src_entry_holder);
 
 	/* ---- Sample Fields section ---- */
 	wframe = gl_hig_category_new (_("Record selection/preview:"));
-	gl_hig_dialog_add_widget (dialog, wframe);
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wframe);
 
 	wscroll = gtk_scrolled_window_new (NULL, NULL);
 	gtk_container_set_border_width (GTK_CONTAINER (wscroll), 5);
@@ -227,42 +309,43 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 					GTK_POLICY_AUTOMATIC);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY (wframe), wscroll);
 
-	data->store = gtk_tree_store_new (N_COLUMNS,
+	dialog->private->store = gtk_tree_store_new (N_COLUMNS,
 					  G_TYPE_BOOLEAN, /* Record selector */
 					  G_TYPE_STRING,  /* Record/Field name */
 					  G_TYPE_STRING,  /* Field value */
 					  G_TYPE_BOOLEAN, /* Is Record? */
 					  G_TYPE_POINTER  /* Pointer to record */);
-	load_tree (data->store, data->merge);
-	data->tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(data->store));
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(data->tree), TRUE);
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data->tree));
+	load_tree (dialog->private->store, dialog->private->merge);
+	dialog->private->tree =
+		gtk_tree_view_new_with_model (GTK_TREE_MODEL(dialog->private->store));
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(dialog->private->tree), TRUE);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(dialog->private->tree));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
 	renderer = gtk_cell_renderer_toggle_new ();
 	g_signal_connect (G_OBJECT (renderer), "toggled",
-			  G_CALLBACK (record_select_toggled_cb), data->store);
+			  G_CALLBACK (record_select_toggled_cb), dialog->private->store);
 	column = gtk_tree_view_column_new_with_attributes (_("Select"), renderer,
 							   "active", SELECT_COLUMN,
 							   "visible", IS_RECORD_COLUMN,
 							   NULL);
 	gtk_tree_view_column_set_clickable (column, TRUE);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(dialog->private->tree), column);
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_object_set (GTK_OBJECT(renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes (_("Record/Field"), renderer,
 							   "text", RECORD_FIELD_COLUMN,
 							   NULL);
 	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
-	gtk_tree_view_set_expander_column (GTK_TREE_VIEW(data->tree), column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(dialog->private->tree), column);
+	gtk_tree_view_set_expander_column (GTK_TREE_VIEW(dialog->private->tree), column);
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_object_set (GTK_OBJECT(renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes (_("Data"), renderer,
 							   "text", VALUE_COLUMN,
 							   NULL);
 	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
-	gtk_container_add (GTK_CONTAINER (wscroll), data->tree);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(dialog->private->tree), column);
+	gtk_container_add (GTK_CONTAINER (wscroll), dialog->private->tree);
 	
 	g_free (src);
 	g_free (description);
@@ -276,8 +359,8 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 /* PRIVATE.  type "changed" callback.                                       */
 /*--------------------------------------------------------------------------*/
 static void
-type_changed_cb (GtkWidget              *widget,
-		 PropertyDialogPassback *data)
+type_changed_cb (GtkWidget               *widget,
+		 glMergePropertiesDialog *dialog)
 {
 	gchar             *description;
 	gchar             *name;
@@ -287,46 +370,46 @@ type_changed_cb (GtkWidget              *widget,
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	description = gtk_editable_get_chars (GTK_EDITABLE (data->type_entry),
+	description = gtk_editable_get_chars (GTK_EDITABLE (dialog->private->type_entry),
 					      0, -1);
 	name = gl_merge_description_to_name (description);
 
-	src = gl_merge_get_src (data->merge); /* keep current source if possible */
+	src = gl_merge_get_src (dialog->private->merge); /* keep current src if possible */
 	if ( src != NULL ) {
 		gl_debug (DEBUG_MERGE, "Saving src = \"%s\"", src);
-		g_free (data->saved_src);
-		data->saved_src = src;
+		g_free (dialog->private->saved_src);
+		dialog->private->saved_src = src;
 	}
 
-	if (data->merge != NULL) {
-		g_object_unref (G_OBJECT(data->merge));
+	if (dialog->private->merge != NULL) {
+		g_object_unref (G_OBJECT(dialog->private->merge));
 	}
-	data->merge = gl_merge_new (name);
+	dialog->private->merge = gl_merge_new (name);
 
-	gtk_widget_destroy (data->src_entry);
-	src_type = gl_merge_get_src_type (data->merge);
+	gtk_widget_destroy (dialog->private->src_entry);
+	src_type = gl_merge_get_src_type (dialog->private->merge);
 	switch (src_type) {
 	case GL_MERGE_SRC_IS_FILE:
-		data->src_entry =
+		dialog->private->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
-		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
-		if (data->saved_src != NULL) {
-			gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", data->saved_src);
-			gtk_entry_set_text (GTK_ENTRY(wentry), data->saved_src);
-			gl_merge_set_src (data->merge, data->saved_src);
+		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(dialog->private->src_entry));
+		if (dialog->private->saved_src != NULL) {
+			gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", dialog->private->saved_src);
+			gtk_entry_set_text (GTK_ENTRY(wentry), dialog->private->saved_src);
+			gl_merge_set_src (dialog->private->merge, dialog->private->saved_src);
 		}
 		g_signal_connect (G_OBJECT (wentry), "changed",
-				  G_CALLBACK (src_changed_cb), data);
+				  G_CALLBACK (src_changed_cb), dialog);
 		break;
 	default:
-		data->src_entry = gtk_label_new (_("N/A"));
-		gtk_misc_set_alignment (GTK_MISC (data->src_entry), 0.0, 0.5);
+		dialog->private->src_entry = gtk_label_new (_("N/A"));
+		gtk_misc_set_alignment (GTK_MISC (dialog->private->src_entry), 0.0, 0.5);
 		break;
 	}
-	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
-	gtk_widget_show (data->src_entry);
+	gtk_container_add( GTK_CONTAINER(dialog->private->src_entry_holder), dialog->private->src_entry);
+	gtk_widget_show (dialog->private->src_entry);
 
-	load_tree (data->store, data->merge);
+	load_tree (dialog->private->store, dialog->private->merge);
 
 	g_free (description);
 	g_free (name);
@@ -338,20 +421,20 @@ type_changed_cb (GtkWidget              *widget,
 /* PRIVATE.  source "changed" callback.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-src_changed_cb (GtkWidget              *widget,
-		PropertyDialogPassback *data)
+src_changed_cb (GtkWidget               *widget,
+		glMergePropertiesDialog *dialog)
 {
 	gchar     *src;
 	GtkWidget *wentry;
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
+	wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(dialog->private->src_entry));
 	src = gtk_editable_get_chars (GTK_EDITABLE (wentry), 0, -1);
-	gl_merge_set_src (data->merge, src);
+	gl_merge_set_src (dialog->private->merge, src);
 	g_free (src);
 
-	load_tree (data->store, data->merge);
+	load_tree (dialog->private->store, dialog->private->merge);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -360,9 +443,9 @@ src_changed_cb (GtkWidget              *widget,
 /* PRIVATE.  response callback.                                             */
 /*--------------------------------------------------------------------------*/
 static void
-response_cb (glHigDialog            *dialog,
-	     gint                    response,
-	     PropertyDialogPassback *data)
+response_cb (glMergePropertiesDialog *dialog,
+	     gint                     response,
+	     gpointer                 user_data)
 {
 	gl_debug (DEBUG_MERGE, "START");
 
@@ -370,15 +453,10 @@ response_cb (glHigDialog            *dialog,
 
 	case GTK_RESPONSE_OK:
 
-		gl_label_set_merge (data->label, data->merge);
+		gl_label_set_merge (dialog->private->label, dialog->private->merge);
 		break;
 	}
 
-
-	if (data->merge != NULL) {
-		g_object_unref (G_OBJECT(data->merge));
-	}
-	g_free (data);
 	gtk_widget_destroy (GTK_WIDGET(dialog));
 
 	gl_debug (DEBUG_MERGE, "END");

@@ -24,7 +24,6 @@
 
 #include "tools.h"
 #include "window.h"
-#include "merge-properties-dialog.h"
 
 /*===========================================*/
 /* Private types.                            */
@@ -239,7 +238,7 @@ gl_tools_merge_properties (BonoboUIComponent *uic,
 	window = GL_WINDOW (user_data);
 
 	if (window->view != NULL) {
-		gl_merge_properties_dialog (GL_VIEW(window->view));
+		gl_view_edit_merge_props (GL_VIEW(window->view));
 	}
 }
 
