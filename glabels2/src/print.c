@@ -108,13 +108,16 @@ static void       draw_text_object            (PrintInfo        *pi,
 					       glMergeRecord    *record);
 
 static void       draw_box_object             (PrintInfo        *pi,
-					       glLabelBox       *object);
+					       glLabelBox       *object,
+						   glMergeRecord  *record);
 
 static void       draw_line_object            (PrintInfo        *pi,
-					       glLabelLine      *object);
+					       glLabelLine      *object,
+						   glMergeRecord  *record);						   
 
 static void       draw_ellipse_object         (PrintInfo        *pi,
-					       glLabelEllipse   *object);
+					       glLabelEllipse   *object,
+						   glMergeRecord  *record);
 
 static void       draw_image_object           (PrintInfo        *pi,
 					       glLabelImage     *object,
@@ -368,6 +371,7 @@ gl_print_batch (GnomePrintJob    *job,
 		glLabel          *label,
 		gint              n_sheets,
 		gint              n_copies,
+		gint              first,
 		glPrintFlags     *flags)
 {
 	glMerge                   *merge;
@@ -384,9 +388,9 @@ gl_print_batch (GnomePrintJob    *job,
 	if ( merge == NULL ) {
 		n_per_page = gl_template_get_n_labels(label_type);
 
-		gl_print_simple (job, label, n_sheets, 1, n_per_page, flags);
+		gl_print_simple (job, label, n_sheets, first, n_per_page, flags);
 	} else {
-		gl_print_merge_collated (job, label, n_copies, 1, flags);
+		gl_print_merge_collated (job, label, n_copies, first, flags);
 	}
 	gl_template_free (template);
 
@@ -697,11 +701,11 @@ draw_object (PrintInfo     *pi,
 	if (GL_IS_LABEL_TEXT(object)) {
 		draw_text_object (pi, GL_LABEL_TEXT(object), record);
 	} else if (GL_IS_LABEL_BOX(object)) {
-		draw_box_object (pi, GL_LABEL_BOX(object));
+		draw_box_object (pi, GL_LABEL_BOX(object), record);
 	} else if (GL_IS_LABEL_LINE(object)) {
-		draw_line_object (pi, GL_LABEL_LINE(object));
+		draw_line_object (pi, GL_LABEL_LINE(object), record);
 	} else if (GL_IS_LABEL_ELLIPSE(object)) {
-		draw_ellipse_object (pi, GL_LABEL_ELLIPSE(object));
+		draw_ellipse_object (pi, GL_LABEL_ELLIPSE(object), record);
 	} else if (GL_IS_LABEL_IMAGE(object)) {
 		draw_image_object (pi, GL_LABEL_IMAGE(object), record);
 	} else if (GL_IS_LABEL_BARCODE(object)) {
@@ -732,6 +736,7 @@ draw_text_object (PrintInfo     *pi,
 	GnomeFontWeight  font_weight;
 	gboolean         font_italic_flag;
 	guint            color;
+	glColorNode     *color_node;
 	GtkJustification just;
 	gboolean         auto_shrink;
 	GnomeGlyphList  *glyphlist;
@@ -748,7 +753,11 @@ draw_text_object (PrintInfo     *pi,
 	font_size = gl_label_object_get_font_size (GL_LABEL_OBJECT(object));
 	font_weight = gl_label_object_get_font_weight (GL_LABEL_OBJECT(object));
 	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object));
-	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object));
+
+	color_node = gl_label_object_get_text_color (GL_LABEL_OBJECT(object));
+	color = gl_color_node_expand (color_node, record);
+	gl_color_node_free (&color_node);
+	
 	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
 	text_line_spacing =
 		gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
@@ -868,19 +877,28 @@ draw_text_object (PrintInfo     *pi,
 /*---------------------------------------------------------------------------*/
 static void
 draw_box_object (PrintInfo  *pi,
-		 glLabelBox *object)
+		 glLabelBox *object,
+		 glMergeRecord  *record)
 {
-	gdouble w, h;
-	gdouble line_width;
-	guint line_color, fill_color;
+	gdouble      w, h;
+	gdouble      line_width;
+	guint        line_color;
+	glColorNode *line_color_node;
+	glColorNode *fill_color_node;
+	guint        fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
-
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	line_color = gl_color_node_expand (line_color_node, record);
+	fill_color = gl_color_node_expand (fill_color_node, record);
+	gl_color_node_free (&line_color_node);
+	gl_color_node_free (&fill_color_node);
+	
 	/* Paint fill color */
 	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
 	gnome_print_setrgbcolor (pi->pc,
@@ -908,17 +926,22 @@ draw_box_object (PrintInfo  *pi,
 /*---------------------------------------------------------------------------*/
 static void
 draw_line_object (PrintInfo   *pi,
-		  glLabelLine *object)
+		  glLabelLine *object,
+		  glMergeRecord  *record)
 {
-	gdouble w, h;
-	gdouble line_width;
-	guint line_color;
+	gdouble      w, h;
+	gdouble      line_width;
+	guint        line_color;
+	glColorNode *line_color_node;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	line_color = gl_color_node_expand (line_color_node, record);
+	gl_color_node_free (&line_color_node);
 
 	gnome_print_moveto (pi->pc, 0.0, 0.0);
 	gnome_print_lineto (pi->pc, w, h);
@@ -938,18 +961,27 @@ draw_line_object (PrintInfo   *pi,
 /*---------------------------------------------------------------------------*/
 static void
 draw_ellipse_object (PrintInfo      *pi,
-		     glLabelEllipse *object)
+		     glLabelEllipse *object,
+                     glMergeRecord  *record)
 {
-	gdouble x0, y0, rx, ry, w, h;
-	gdouble line_width;
-	guint line_color, fill_color;
+	gdouble      x0, y0, rx, ry, w, h;
+	gdouble      line_width;
+	glColorNode *line_color_node;
+	glColorNode *fill_color_node;
+	guint        line_color;
+	guint        fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	line_color = gl_color_node_expand (line_color_node, record);
+	fill_color = gl_color_node_expand (fill_color_node, record);
+	gl_color_node_free (&line_color_node);
+	gl_color_node_free (&fill_color_node);
 
 	rx = w / 2.0;
 	ry = h / 2.0;
@@ -1048,6 +1080,7 @@ draw_barcode_object (PrintInfo      *pi,
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	guint               color;
+	glColorNode        *color_node;
 	guint               format_digits;
 	gdouble             w, h;
 
@@ -1056,7 +1089,11 @@ draw_barcode_object (PrintInfo      *pi,
 	text_node = gl_label_barcode_get_data (object);
 	gl_label_barcode_get_props (object,
 				    &id, &text_flag, &checksum_flag, &format_digits);
-	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+					
+	color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	color = gl_color_node_expand (color_node, record);
+	gl_color_node_free (&color_node);
+	
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 
 	text = gl_text_node_expand (text_node, record);

@@ -19,6 +19,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+#include <config.h>
 
 #include <glib.h>
 
@@ -258,9 +259,9 @@ construct_properties_editor (glViewObject *view_object)
 	gl_object_editor_set_text_buffer (GL_OBJECT_EDITOR(editor), buffer);
 	
 	/* Update */
+	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
 	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
-	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 
 	/* Connect signals. */
 	g_signal_connect (G_OBJECT (editor), "changed",
@@ -272,7 +273,7 @@ construct_properties_editor (glViewObject *view_object)
 	g_signal_connect (G_OBJECT (object), "moved",
 			  G_CALLBACK (update_editor_from_move_cb), editor);
 	g_signal_connect (G_OBJECT (object->parent), "size_changed",
-			  G_CALLBACK (update_editor_from_label_cb), editor);
+			  G_CALLBACK (update_editor_from_label_cb), editor);			  
 	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
 			  G_CALLBACK (update_editor_from_label_cb), editor);
 
@@ -309,7 +310,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gdouble            font_size;
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
-	guint              color;
+	glColorNode       *color_node;
 	GtkJustification   just;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
@@ -328,7 +329,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	font_size = gl_object_editor_get_font_size (editor);
 	font_weight = gl_object_editor_get_font_weight (editor);
 	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
-	color = gl_object_editor_get_text_color (editor);
+	color_node = gl_object_editor_get_text_color (editor);
 	just = gl_object_editor_get_text_alignment (editor);
 	text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
 	auto_shrink = gl_object_editor_get_text_auto_shrink (editor);
@@ -338,11 +339,12 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_object_set_font_size (object, font_size);
 	gl_label_object_set_font_weight (object, font_weight);
 	gl_label_object_set_font_italic_flag (object, font_italic_flag);
-	gl_label_object_set_text_color (object, color);
+	gl_label_object_set_text_color (object, color_node);
 	gl_label_object_set_text_alignment (object, just);
 	gl_label_object_set_text_line_spacing (object, text_line_spacing);
 	gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink);
 
+	gl_color_node_free (&color_node);
 	g_free (font_family);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
@@ -399,21 +401,23 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gdouble            font_size;
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
-	guint              color;
+	glColorNode       *color_node;
 	GtkJustification   just;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
+	glMerge			   *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_size (editor, w, h);
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
 	font_family      = gl_label_object_get_font_family (object);
 	font_size        = gl_label_object_get_font_size (object);
 	font_weight      = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
-	color            = gl_label_object_get_text_color (object);
+	color_node       = gl_label_object_get_text_color (object);
 	just             = gl_label_object_get_text_alignment (object);
 	text_line_spacing = gl_label_object_get_text_line_spacing (object);
 	auto_shrink      = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
@@ -422,11 +426,12 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_font_size (editor, font_size);
 	gl_object_editor_set_font_weight (editor, font_weight);
 	gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
-	gl_object_editor_set_text_color (editor, color);
+	gl_object_editor_set_text_color (editor, (merge != NULL), color_node);
 	gl_object_editor_set_text_alignment (editor, just);
 	gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
 	gl_object_editor_set_text_auto_shrink (editor, auto_shrink);
 
+	gl_color_node_free (&color_node);
 	g_free (font_family);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -516,13 +521,14 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 				   GdkEvent    *event,
 				   glView      *view)
 {
-	static gdouble      x0, y0;
-	static gboolean     dragging = FALSE;
+	static gdouble       x0, y0;
+	static gboolean      dragging = FALSE;
 	static glViewObject *view_text;
 	static GObject      *object;
-	gdouble             x, y;
+	gdouble              x, y;
 	GList               *lines;
 	gchar               *family;
+	glColorNode         *color_node;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -532,6 +538,7 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
 		switch (event->button.button) {
 		case 1:
+			color_node = gl_color_node_new_default ();
 			dragging = TRUE;
 			gnome_canvas_item_grab (canvas->root,
 						GDK_POINTER_MOTION_MASK |
@@ -552,8 +559,10 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 							 gl_view_get_default_font_weight (view));
 			gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object),
 							      gl_view_get_default_font_italic_flag (view));
+								  
+			color_node->color = gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5);
 			gl_label_object_set_text_color (GL_LABEL_OBJECT(object),
-							gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5));
+							color_node);
 			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
 							    gl_view_get_default_text_alignment (view));
 			gl_label_object_set_text_line_spacing (GL_LABEL_OBJECT(object), gl_view_get_default_text_line_spacing (view));
@@ -565,6 +574,7 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 						      view);
 			x0 = x;
 			y0 = y;
+			gl_color_node_free (&color_node);
 			return TRUE;
 
 		default:
@@ -575,6 +585,7 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
 		switch (event->button.button) {
 		case 1:
+			color_node = gl_color_node_new_default ();
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
@@ -590,8 +601,10 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 							 gl_view_get_default_font_weight (view));
 			gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object),
 							      gl_view_get_default_font_italic_flag (view));
+			
+			color_node->color = gl_view_get_default_text_color (view);
 			gl_label_object_set_text_color (GL_LABEL_OBJECT(object),
-							gl_view_get_default_text_color (view));
+							color_node);
 			gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object),
 							    gl_view_get_default_text_alignment (view));
 			gl_label_object_set_text_line_spacing (GL_LABEL_OBJECT(object), gl_view_get_default_text_line_spacing (view));
@@ -600,6 +613,7 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_text));
 			gl_view_arrow_mode (view);
+			gl_color_node_free (&color_node);
 			return TRUE;
 
 		default:
@@ -641,7 +655,7 @@ draw_hacktext (glViewText *view_text)
 	gboolean           font_italic_flag;
 	gdouble            font_size;
 	gdouble            text_line_spacing;
-	guint              color;
+	glColorNode       *color_node;
 	GtkJustification   just;
 	GnomeFont         *font;
 	GnomeGlyphList    *glyphlist;
@@ -662,7 +676,11 @@ draw_hacktext (glViewText *view_text)
 	text_line_spacing = gl_label_object_get_text_line_spacing (object);
 	font_weight = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
-	color = gl_label_object_get_text_color (object);
+	color_node = gl_label_object_get_text_color (object);
+	if (color_node->field_flag)
+	{
+		color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
 	just = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
@@ -689,7 +707,7 @@ draw_hacktext (glViewText *view_text)
 	/* render to group, one item per line. */
 	for (i = 0; line[i] != NULL; i++) {
 
-		glyphlist = gnome_glyphlist_from_text_dumb (font, color,
+		glyphlist = gnome_glyphlist_from_text_dumb (font, color_node->color,
 							    0.0, 0.0,
 							    line[i]);
 
@@ -733,6 +751,7 @@ draw_hacktext (glViewText *view_text)
 	}
 
 	/* clean up */
+	gl_color_node_free (&color_node);
 	g_strfreev (line);
 	g_free (text);
 
@@ -754,7 +773,7 @@ draw_cursor (glViewText *view_text)
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
 	gdouble            font_size;
-	guint              color;
+	glColorNode       *color_node;
 	GtkJustification   just;
 	GnomeFont         *font;
 	GnomeGlyphList    *glyphlist;
@@ -778,7 +797,7 @@ draw_cursor (glViewText *view_text)
 	font_size = gl_label_object_get_font_size (object);
 	font_weight = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
-	color = gl_label_object_get_text_color (object);
+	color_node = gl_label_object_get_text_color (object);
 	just = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
@@ -808,7 +827,7 @@ draw_cursor (glViewText *view_text)
 		if ( i == cursor_line ) {
 			GnomeCanvasPoints *points;
 			
-			glyphlist = gnome_glyphlist_from_text_dumb (font, color,
+			glyphlist = gnome_glyphlist_from_text_dumb (font, color_node->color,
 								    0.0, 0.0,
 								    line[i]);
 
@@ -831,7 +850,7 @@ draw_cursor (glViewText *view_text)
 				break;	/* shouldn't happen */
 			}
 
-			glyphlist = gnome_glyphlist_from_text_sized_dumb (font, color,
+			glyphlist = gnome_glyphlist_from_text_sized_dumb (font, color_node->color,
 									  0.0, 0.0,
 									  line[i],
 									  cursor_char);
@@ -866,6 +885,7 @@ draw_cursor (glViewText *view_text)
 	}
 
 	/* clean up */
+	gl_color_node_free (&color_node);
 	g_strfreev (line);
 	g_free (text);
 
@@ -959,4 +979,3 @@ item_event_cb (GnomeCanvasItem *item,
 {
 	gl_debug (DEBUG_VIEW, "");
 }
-

@@ -383,6 +383,18 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 					  merge != NULL);
 	}
  
+	if (editor->priv->text_color_key_combo) {
+		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, merge != NULL);
+	}
+ 
+	if (editor->priv->text_color_key_radio) {
+		gtk_widget_set_sensitive (editor->priv->text_color_key_radio, merge != NULL);
+		if (merge == NULL) {
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON(editor->priv->text_color_radio), TRUE);
+		}
+	}	
+	
 	if (editor->priv->edit_insert_field_button) {
 		gtk_widget_set_sensitive (editor->priv->edit_insert_field_button,
 					  merge != NULL);
@@ -411,7 +423,7 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 				GTK_TOGGLE_BUTTON(editor->priv->data_literal_radio), TRUE);
 		}
 	}
- 
+	
 	fixed_flag = editor->priv->data_format_fixed_flag;
 	if (editor->priv->data_format_label) {
 		gtk_widget_set_sensitive (editor->priv->data_format_label,
@@ -429,7 +441,43 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
 					  (merge != NULL) && !fixed_flag);
 	}
+
+	if (editor->priv->fill_key_combo) {
+		gtk_widget_set_sensitive (editor->priv->fill_key_combo, merge != NULL);
+	}
  
+	if (editor->priv->fill_key_radio) {
+		gtk_widget_set_sensitive (editor->priv->fill_key_radio, merge != NULL);
+		if (merge == NULL) {
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON(editor->priv->fill_color_radio), TRUE);
+		}
+	}
+	
+	if (editor->priv->line_key_combo) {
+		gtk_widget_set_sensitive (editor->priv->line_key_combo, merge != NULL);
+	}
+ 
+	if (editor->priv->line_key_radio) {
+		gtk_widget_set_sensitive (editor->priv->line_key_radio, merge != NULL);
+		if (merge == NULL) {
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON(editor->priv->line_color_radio), TRUE);
+		}
+	}
+	
+	if (editor->priv->bc_key_combo) {
+		gtk_widget_set_sensitive (editor->priv->bc_key_combo, merge != NULL);
+	}
+ 
+	if (editor->priv->bc_key_radio) {
+		gtk_widget_set_sensitive (editor->priv->bc_key_radio, merge != NULL);
+		if (merge == NULL) {
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON(editor->priv->bc_color_radio), TRUE);
+		}
+	}	
+	
         keys = gl_merge_get_key_list (merge);
         if ( keys != NULL ) {
 
@@ -447,7 +495,27 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		if (combo) {
 			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
 		}
+		
+		combo = editor->priv->fill_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
 
+		combo = editor->priv->text_color_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+
+		combo = editor->priv->line_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+		
+		combo = editor->priv->bc_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+		
                 gl_merge_free_key_list (&keys);
         } else {
 
@@ -462,12 +530,32 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		if (combo) {
 			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
 		}
-
+		
 		combo = editor->priv->data_key_combo;
 		if (combo) {
 			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
 		}
+		
+		combo = editor->priv->fill_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+		
+		combo = editor->priv->text_color_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
 
+		combo = editor->priv->line_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+		
+		combo = editor->priv->bc_key_combo;
+		if (combo) {
+			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+		}
+		
                 g_list_free (keys);
         }
  
@@ -565,4 +653,3 @@ prefs_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
-

@@ -19,6 +19,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+#include <config.h>
 
 #include <glib.h>
 
@@ -164,8 +165,9 @@ gl_view_ellipse_new (glLabelEllipse *object,
 {
 	glViewEllipse     *view_ellipse;
 	gdouble            line_width;
-	guint              line_color, fill_color;
+	glColorNode       *line_color_node;
 	gdouble            w, h;
+	glColorNode       *fill_color_node;
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_ELLIPSE (object));
@@ -181,8 +183,16 @@ gl_view_ellipse_new (glLabelEllipse *object,
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
-	fill_color = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
+	line_color_node = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		line_color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
+	fill_color_node = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
+	if (fill_color_node->field_flag)
+	{
+		fill_color_node->color = GL_COLOR_FILL_MERGE_DEFAULT;
+	}	
 
 	/* Create analogous canvas item. */
 	view_ellipse->private->item =
@@ -193,10 +203,13 @@ gl_view_ellipse_new (glLabelEllipse *object,
 					 "x2", w + DELTA,
 					 "y2", h + DELTA,
 					 "width_units", line_width,
-					 "outline_color_rgba", line_color,
-					 "fill_color_rgba", fill_color,
+					 "outline_color_rgba", line_color_node->color,
+					 "fill_color_rgba", fill_color_node->color,
 					 NULL);
 
+	gl_color_node_free (&line_color_node);
+	gl_color_node_free (&fill_color_node);
+	
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_canvas_item_from_object_cb), view_ellipse);
 
@@ -241,6 +254,8 @@ construct_properties_editor (glViewObject *view_object)
 			  G_CALLBACK (update_editor_from_move_cb), editor);
 	g_signal_connect (G_OBJECT (object->parent), "size_changed",
 			  G_CALLBACK (update_editor_from_label_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -255,25 +270,37 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 				   glViewEllipse *view_ellipse)
 {
 	gdouble            line_width;
-	guint              line_color, fill_color;
+	glColorNode       *line_color_node;
 	gdouble            w, h;
+	glColorNode       *fill_color_node;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
-	fill_color = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
+	line_color_node = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		line_color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
+	fill_color_node = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
+	if (fill_color_node->field_flag)
+	{
+		fill_color_node->color = GL_COLOR_FILL_MERGE_DEFAULT;
+	}
 
 	/* Adjust appearance of analogous canvas item. */
 	gnome_canvas_item_set (view_ellipse->private->item,
 			       "x2", w + DELTA,
 			       "y2", h + DELTA,
 			       "width_units", line_width,
-			       "outline_color_rgba", line_color,
-			       "fill_color_rgba", fill_color,
+			       "outline_color_rgba", line_color_node->color,
+			       "fill_color_rgba", fill_color_node->color,
 			       NULL);
+	
+	gl_color_node_free (&line_color_node);
+	gl_color_node_free (&fill_color_node);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -286,8 +313,10 @@ update_object_from_editor_cb (glObjectEditor *editor,
 			      glLabelObject  *object)
 {
 	gdouble            x, y, w, h;
-	guint              line_color, fill_color;
+	glColorNode       *line_color_node;
 	gdouble            line_width;
+	glColorNode       *fill_color_node;
+	glMerge           *merge;	
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -305,11 +334,13 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_object_editor_get_size (editor, &w, &h);
 	gl_label_object_set_size (object, w, h);
 
-	fill_color = gl_object_editor_get_fill_color (editor);
-	gl_label_object_set_fill_color (object, fill_color);
+	fill_color_node = gl_object_editor_get_fill_color (editor);
+	gl_label_object_set_fill_color (object, fill_color_node);
+	gl_color_node_free (&fill_color_node);
 
-	line_color = gl_object_editor_get_line_color (editor);
-	gl_label_object_set_line_color (object, line_color);
+	line_color_node = gl_object_editor_get_line_color (editor);
+	gl_label_object_set_line_color (object, line_color_node);
+	gl_color_node_free (&line_color_node);
 
 	line_width = gl_object_editor_get_line_width (editor);
 	gl_label_object_set_line_width (object, line_width);
@@ -333,19 +364,24 @@ update_editor_from_object_cb (glLabelObject  *object,
 			      glObjectEditor *editor)
 {
 	gdouble            w, h;
-	guint              line_color, fill_color;
+	glColorNode       *line_color_node;
 	gdouble            line_width;
+	glColorNode       *fill_color_node;
+	glMerge		  *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_size (editor, w, h);
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
-	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_fill_color (editor, fill_color);
+	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	gl_object_editor_set_fill_color (editor, (merge != NULL), fill_color_node);
+	gl_color_node_free (&fill_color_node);
 
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_line_color (editor, line_color);
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	gl_object_editor_set_line_color (editor, (merge != NULL), line_color_node);
+	gl_color_node_free (&line_color_node);
 
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_width (editor, line_width);
@@ -380,6 +416,7 @@ update_editor_from_label_cb (glLabel        *label,
 			     glObjectEditor *editor)
 {
 	gdouble            label_width, label_height;
+	glMerge			   *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -388,6 +425,9 @@ update_editor_from_label_cb (glLabel        *label,
 					   label_width, label_height);
 	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
 				       label_width, label_height);
+	
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -437,16 +477,22 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 	static gboolean      dragging = FALSE;
 	static glViewObject *view_ellipse;
 	static GObject      *object;
-	guint                line_color, fill_color;
+	glColorNode         *line_color_node;
 	gdouble              x, y, w, h;
+	glColorNode         *fill_color_node;
 
 	gl_debug (DEBUG_VIEW, "");
 
+	
+	
 	switch (event->type) {
 
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 1:
+			fill_color_node = gl_color_node_new_default ();
+			line_color_node = gl_color_node_new_default ();
+		
 			dragging = TRUE;
 			gnome_canvas_item_grab ( canvas->root,
 						 GDK_POINTER_MOTION_MASK |
@@ -461,16 +507,19 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 						     x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
-			line_color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
-			fill_color = gl_color_set_opacity (gl_view_get_default_fill_color(view), 0.5);
+			line_color_node->color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
+			fill_color_node->color = gl_color_set_opacity (gl_view_get_default_fill_color(view), 0.5);
 			gl_label_object_set_line_width (GL_LABEL_OBJECT(object),
 						     gl_view_get_default_line_width(view));
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-							 line_color);
+							 line_color_node);
 			gl_label_object_set_fill_color (GL_LABEL_OBJECT(object),
-							 fill_color);
+							 fill_color_node);
 			view_ellipse = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object),
 							    view);
+			
+			gl_color_node_free (&fill_color_node);
+			gl_color_node_free (&line_color_node);
 			x0 = x;
 			y0 = y;
 			return TRUE;
@@ -482,6 +531,9 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 	case GDK_BUTTON_RELEASE:
 		switch (event->button.button) {
 		case 1:
+			fill_color_node = gl_color_node_new_default ();
+			line_color_node = gl_color_node_new_default ();
+		
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
@@ -497,13 +549,17 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 			h = MAX (y, y0) - MIN (y, y0);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
-			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-						     gl_view_get_default_line_color(view));
-			gl_label_object_set_fill_color (GL_LABEL_OBJECT(object),
-						     gl_view_get_default_fill_color(view));
+			line_color_node->color = gl_view_get_default_line_color(view);
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+			
+			fill_color_node->color = gl_view_get_default_fill_color(view);
+			gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_ellipse));
 			gl_view_arrow_mode (view);
+			
+			gl_color_node_free (&fill_color_node);
+			gl_color_node_free (&line_color_node);
 			return TRUE;
 
 		default:

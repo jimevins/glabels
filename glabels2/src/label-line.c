@@ -32,7 +32,7 @@
 
 struct _glLabelLinePrivate {
 	gdouble          line_width;
-	guint            line_color;
+	glColorNode     *line_color_node;
 };
 
 /*========================================================*/
@@ -55,12 +55,12 @@ static void    copy                        (glLabelObject    *dst_object,
 					    glLabelObject    *src_object);
 
 static void    set_line_color              (glLabelObject    *object,
-					    guint             line_color);
+					    glColorNode      *line_color_node);
 
 static void    set_line_width              (glLabelObject    *object,
 					    gdouble           line_width);
 
-static guint   get_line_color              (glLabelObject    *object);
+static glColorNode   *get_line_color       (glLabelObject    *object);
 
 static gdouble get_line_width              (glLabelObject    *object);
 
@@ -116,6 +116,7 @@ static void
 gl_label_line_instance_init (glLabelLine *lline)
 {
 	lline->private = g_new0 (glLabelLinePrivate, 1);
+	lline->private->line_color_node = gl_color_node_new_default ();
 }
 
 static void
@@ -127,6 +128,7 @@ gl_label_line_finalize (GObject *object)
 
 	lline = GL_LABEL_LINE (object);
 
+	gl_color_node_free (&(lline->private->line_color_node));
 	g_free (lline->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -157,7 +159,7 @@ copy (glLabelObject *dst_object,
 	glLabelLine *lline     = (glLabelLine *)src_object;
 	glLabelLine *new_lline = (glLabelLine *)dst_object;
 	gdouble      line_width;
-	guint        line_color;
+	glColorNode *line_color_node;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -165,11 +167,13 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (new_lline && GL_IS_LABEL_LINE (new_lline));
 
 	line_width = get_line_width (src_object);
-	line_color = get_line_color (src_object);
+	line_color_node = get_line_color (src_object);
 
 	set_line_width (dst_object, line_width);
-	set_line_color (dst_object, line_color);
+	set_line_color (dst_object, line_color_node);
 
+	gl_color_node_free (&line_color_node);
+	
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -179,14 +183,17 @@ copy (glLabelObject *dst_object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_color (glLabelObject *object,
-		guint          line_color)
+		glColorNode   *line_color_node)
 {
 	glLabelLine *lline = (glLabelLine *)object;
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
-	if ( lline->private->line_color != line_color ) {
-		lline->private->line_color = line_color;
+	if ( !gl_color_node_equal (lline->private->line_color_node, line_color_node)) {
+		
+		gl_color_node_free (&(lline->private->line_color_node ));
+		lline->private->line_color_node = gl_color_node_dup (line_color_node);
+		
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
 	}
 }
@@ -225,13 +232,12 @@ get_line_width (glLabelObject *object)
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line width method.                                          */
 /*---------------------------------------------------------------------------*/
-static guint
+static glColorNode*
 get_line_color (glLabelObject *object)
 {
 	glLabelLine *lline = (glLabelLine *)object;
 
 	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0);
 
-	return lline->private->line_color;
+	return gl_color_node_dup (lline->private->line_color_node);
 }
-

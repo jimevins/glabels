@@ -511,6 +511,7 @@ update_text_properties (glView *view,
 	gchar *selection_font_family, *font_family;
 	gdouble selection_font_size, font_size;
 	guint selection_text_color, text_color;
+	glColorNode *text_color_node;
 	gboolean selection_is_italic, is_italic;
 	gboolean selection_is_bold, is_bold;
 	GtkJustification selection_justification, justification;
@@ -550,7 +551,17 @@ update_text_properties (glView *view,
 		}	
 
 		font_size = gl_label_object_get_font_size (object);
-		text_color = gl_label_object_get_text_color (object);
+		
+		text_color_node = gl_label_object_get_text_color (object);
+		if (text_color_node->field_flag) {
+			/* If a merge field is set we use the default color for merged color*/
+			text_color = GL_COLOR_MERGE_DEFAULT;
+			
+		} else {
+			text_color = text_color_node->color;
+		}
+		gl_color_node_free (&text_color_node);
+		
 		is_italic = gl_label_object_get_font_italic_flag (object);
 		is_bold = gl_label_object_get_font_weight (object) == GNOME_FONT_BOLD;
 		justification = gl_label_object_get_text_alignment (object);
@@ -640,6 +651,7 @@ update_fill_color (glView *view,
 	glLabelObject *object;
 	guint selection_fill_color, fill_color;
 	GdkColor *gdk_color;
+	glColorNode *fill_color_node;
 
 	can = gl_view_can_selection_fill (view);
 	gl_ui_util_set_verb_list_sensitive (property_bar->ui_component,
@@ -657,7 +669,15 @@ update_fill_color (glView *view,
 		if (!gl_label_object_can_fill (object)) 
 			continue;
 
-		fill_color = gl_label_object_get_fill_color (object);
+		fill_color_node = gl_label_object_get_fill_color (object);
+		if (fill_color_node->field_flag) {
+			/* If a merge field is set we use the default color for merged color*/
+			fill_color = GL_COLOR_FILL_MERGE_DEFAULT;
+			
+		} else {
+			fill_color = fill_color_node->color;
+		}
+		gl_color_node_free (&fill_color_node);
 
 		if (is_first_object) {
 			selection_fill_color = fill_color;
@@ -686,6 +706,7 @@ update_line_color (glView *view,
 	GList *p;
 	glLabelObject *object;
 	guint selection_line_color, line_color;
+	glColorNode *line_color_node;
 	GdkColor *gdk_color;
 
 	can = gl_view_can_selection_line_color (view);
@@ -704,7 +725,15 @@ update_line_color (glView *view,
 		if (!gl_label_object_can_line_color (object)) 
 			continue;
 
-		line_color = gl_label_object_get_line_color (object);
+		line_color_node = gl_label_object_get_line_color (object);
+		if (line_color_node->field_flag) {
+			/* If a merge field is set we use the default color for merged color*/
+			line_color = GL_COLOR_MERGE_DEFAULT;
+			
+		} else {
+			line_color = line_color_node->color;
+		}
+		gl_color_node_free (&line_color_node);
 
 		if (is_first_object) {
 			selection_line_color = line_color;
@@ -880,7 +909,7 @@ text_color_changed_cb (ColorCombo           *cc,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
-	guint text_color;
+	glColorNode *text_color_node;
 
 	if (property_bar->stop_signals)
 		return;
@@ -893,27 +922,30 @@ text_color_changed_cb (ColorCombo           *cc,
 					 selection_changed_cb,
 					 property_bar);
 
-	text_color = gl_color_from_gdk_color (gdk_color);
-
+	text_color_node = gl_color_node_new_default ();
+	text_color_node->color = gl_color_from_gdk_color (gdk_color);
+	
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  text_color, custom, by_user, is_default);
+		  text_color_node->color, custom, by_user, is_default);
 
 	if (is_default) {
-
+		text_color_node->color = gl_prefs->default_text_color;
 		gl_view_set_selection_text_color (property_bar->view,
-						  gl_prefs->default_text_color);
+						  text_color_node);
 		gl_view_set_default_text_color   (property_bar->view,
 						  gl_prefs->default_text_color);
 
 	} else {
 
 		gl_view_set_selection_text_color (property_bar->view,
-						  text_color);
+						  text_color_node);
 		gl_view_set_default_text_color   (property_bar->view,
-						  text_color);
+						  text_color_node->color);
 
 	}
 
+	gl_color_node_free (&text_color_node);
+	
 	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->view->label),
 					   selection_changed_cb,
 					   property_bar);
@@ -932,7 +964,7 @@ fill_color_changed_cb (ColorCombo           *cc,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
-	guint fill_color;
+	glColorNode *fill_color_node;
 
 	if (property_bar->stop_signals)
 		return;
@@ -945,27 +977,31 @@ fill_color_changed_cb (ColorCombo           *cc,
 					 selection_changed_cb,
 					 property_bar);
 
-	fill_color = gl_color_from_gdk_color (gdk_color);
+	fill_color_node = gl_color_node_new_default ();
+
+	fill_color_node->color = gl_color_from_gdk_color (gdk_color);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  fill_color, custom, by_user, is_default);
+		  fill_color_node->color, custom, by_user, is_default);
 
 	if (is_default) {
 
+		fill_color_node->color = GL_COLOR_NONE;
 		gl_view_set_selection_fill_color (property_bar->view,
-						  GL_COLOR_NONE);
+						  fill_color_node);
 		gl_view_set_default_fill_color   (property_bar->view,
-						  GL_COLOR_NONE);
+						  fill_color_node->color);
 
 	} else {
 
 		gl_view_set_selection_fill_color (property_bar->view,
-						  fill_color);
+						  fill_color_node);
 		gl_view_set_default_fill_color   (property_bar->view,
-						  fill_color);
+						  fill_color_node->color);
 
 	}
-
+	gl_color_node_free (&fill_color_node);
+	
 	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->view->label),
 					   selection_changed_cb,
 					   property_bar);
@@ -984,7 +1020,7 @@ line_color_changed_cb (ColorCombo           *cc,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
-	guint line_color;
+	glColorNode *line_color_node;
 
 	if (property_bar->stop_signals)
 		return;
@@ -997,26 +1033,28 @@ line_color_changed_cb (ColorCombo           *cc,
 					 selection_changed_cb,
 					 property_bar);
 
-	line_color = gl_color_from_gdk_color (gdk_color);
+	line_color_node = gl_color_node_new_default ();
+	line_color_node->color = gl_color_from_gdk_color (gdk_color);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  line_color, custom, by_user, is_default);
+		  line_color_node->color, custom, by_user, is_default);
 
 	if (is_default) {
-
+		line_color_node->color = GL_COLOR_NONE;
 		gl_view_set_selection_line_color (property_bar->view,
-						  GL_COLOR_NONE);
+						  line_color_node);
 		gl_view_set_default_line_color   (property_bar->view,
-						  GL_COLOR_NONE);
+						  line_color_node->color);
 
 	} else {
 
 		gl_view_set_selection_line_color (property_bar->view,
-						  line_color);
+						  line_color_node);
 		gl_view_set_default_line_color   (property_bar->view,
-						  line_color);
+						  line_color_node->color);
 
 	}
+	gl_color_node_free (&line_color_node);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->view->label),
 					   selection_changed_cb,
@@ -1164,4 +1202,3 @@ null_cmd (BonoboUIComponent           *ui_component,
 	  const gchar                 *verbname)
 {
 }
-

@@ -54,6 +54,7 @@ typedef struct _glLabelObjectClass     glLabelObjectClass;
 typedef struct _glLabelObjectPrivate   glLabelObjectPrivate;
 
 #include "label.h"
+#include "color.h"
 
 struct _glLabelObject {
 	GObject               object;
@@ -97,13 +98,13 @@ struct _glLabelObjectClass {
 						    gdouble           text_line_spacing);
 
 	void              (*set_text_color)       (glLabelObject     *object,
-						   guint              text_color);
+						   glColorNode       *text_color_node);
 
 	void              (*set_fill_color)       (glLabelObject     *object,
-						   guint              fill_color);
+						   glColorNode       *fill_color_node);
 
 	void              (*set_line_color)       (glLabelObject     *object,
-						   guint              line_color);
+						   glColorNode       *line_color_node);
 
 	void              (*set_line_width)       (glLabelObject     *object,
 						   gdouble            line_width);
@@ -120,11 +121,11 @@ struct _glLabelObjectClass {
 
 	gdouble           (*get_text_line_spacing) (glLabelObject    *object);
 
-	guint             (*get_text_color)       (glLabelObject     *object);
+	glColorNode*      (*get_text_color)       (glLabelObject     *object);
 
-	guint             (*get_fill_color)       (glLabelObject     *object);
+	glColorNode*      (*get_fill_color)       (glLabelObject     *object);
 
-	guint             (*get_line_color)       (glLabelObject     *object);
+	glColorNode*      (*get_line_color)       (glLabelObject     *object);
 
 	gdouble           (*get_line_width)       (glLabelObject     *object);
 
@@ -224,7 +225,7 @@ void           gl_label_object_set_text_alignment    (glLabelObject     *object,
 						      GtkJustification   text_alignment);
 
 void           gl_label_object_set_text_color        (glLabelObject     *object,
-						      guint              text_color);
+						      glColorNode       *text_color_node);
 
 void           gl_label_object_set_text_line_spacing (glLabelObject     *object,
 						      gdouble            text_line_spacing);
@@ -242,23 +243,23 @@ GtkJustification gl_label_object_get_text_alignment    (glLabelObject     *objec
 
 gdouble          gl_label_object_get_text_line_spacing (glLabelObject     *object);
 
-guint            gl_label_object_get_text_color        (glLabelObject     *object);
+glColorNode     *gl_label_object_get_text_color        (glLabelObject     *object);
 
 
 gboolean       gl_label_object_can_fill              (glLabelObject     *object);
 
 void           gl_label_object_set_fill_color        (glLabelObject     *object,
-						      guint              fill_color);
+						      glColorNode       *fill_color_node);
 
-guint          gl_label_object_get_fill_color        (glLabelObject     *object);
+glColorNode*   gl_label_object_get_fill_color        (glLabelObject     *object);
 
 
 gboolean       gl_label_object_can_line_color        (glLabelObject     *object);
 
 void           gl_label_object_set_line_color        (glLabelObject     *object,
-						      guint              line_color);
+						      glColorNode       *line_color_node);
 
-guint          gl_label_object_get_line_color        (glLabelObject     *object);
+glColorNode   *gl_label_object_get_line_color        (glLabelObject     *object);
 
 gboolean       gl_label_object_can_line_width        (glLabelObject     *object);
 

@@ -31,6 +31,7 @@
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "util.h"
+#include "debug.h"
 
 /*============================================*/
 /* Private globals                            */
@@ -40,6 +41,7 @@ static gboolean version_flag = FALSE;
 static gchar    *output      = "output.ps";
 static gint     n_copies     = 1;
 static gint     n_sheets     = 1;
+static gint     first        = 1;
 static gboolean outline_flag = FALSE;
 static gboolean reverse_flag = FALSE;
 static gboolean crop_marks_flag = FALSE;
@@ -56,6 +58,8 @@ static struct poptOption options[] = {
 	 N_("number of sheets (default=1)"), N_("sheets")},
 	{"copies", 'c', POPT_ARG_INT, &n_copies, 0,
 	 N_("number of copies (default=1)"), N_("copies")},
+	{"first", 'f', POPT_ARG_INT, &first, 0,
+	 N_("first label on first sheet (default=1)"), N_("first")},
 	{"outline", 'l', POPT_ARG_NONE, &outline_flag, 0,
 	 N_("print outlines (to test printer alignment)"), NULL},
 	{"reverse", 'r', POPT_ARG_NONE, &reverse_flag, 0,
@@ -131,6 +135,7 @@ main (int argc, char **argv)
 	flags.crop_marks = crop_marks_flag;
 
 	/* initialize components */
+	gl_debug_init ();
 	gl_merge_init ();
 	gl_paper_init ();
 	gl_template_init ();
@@ -170,7 +175,7 @@ main (int argc, char **argv)
 				g_free( abs_fn );
 			}
 
-			gl_print_batch (job, label, n_sheets, n_copies, &flags);
+			gl_print_batch (job, label, n_sheets, n_copies, first, &flags);
 			g_object_unref (label);
 		}
 		else {

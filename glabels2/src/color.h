@@ -24,13 +24,22 @@
 #define __COLOR_H__
 
 #include <libgnomecanvas/gnome-canvas.h>
+#include "merge.h"
 
 G_BEGIN_DECLS
+
+typedef struct {
+	gboolean field_flag;
+	guint color;
+	gchar *key;
+} glColorNode;
 
 #define GL_COLOR(r,g,b)     GNOME_CANVAS_COLOR(r,g,b)
 #define GL_COLOR_A(r,g,b,a) GNOME_CANVAS_COLOR_A(r,g,b,a)
 
 #define GL_COLOR_NONE GL_COLOR_A(0,0,0,0)
+#define GL_COLOR_FILL_MERGE_DEFAULT GL_COLOR_A(255,255,255,128)
+#define GL_COLOR_MERGE_DEFAULT      GL_COLOR_A(0,0,0,128)
 
 #define GL_COLOR_I_RED(x)   (((x)>>24) & 0xff)
 #define GL_COLOR_I_GREEN(x) (((x)>>16) & 0xff)
@@ -46,6 +55,16 @@ guint     gl_color_set_opacity (guint color, gdouble opacity);
 
 GdkColor *gl_color_to_gdk_color   (guint     color);
 guint     gl_color_from_gdk_color (GdkColor *gdk_color);
+
+glColorNode *gl_color_node_new_default    ();
+
+glColorNode *gl_color_node_dup            (glColorNode     *color_node);
+gboolean     gl_color_node_equal          (glColorNode     *color_node1,
+					   glColorNode     *color_node2);
+guint        gl_color_node_expand         (glColorNode     *color_node,
+					   glMergeRecord   *record);
+void         gl_color_node_free           (glColorNode    **color_node);
+
 
 G_END_DECLS
 

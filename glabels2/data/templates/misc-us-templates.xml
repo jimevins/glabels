@@ -166,6 +166,16 @@
     </Label-rectangle>
   </Template> 
 
+  <!-- =================================================================== -->
+  <!-- Kingdom L Cassette Labels, 12 per sheet.                            -->
+  <!-- =================================================================== -->
+  <Template name="Kingdom L" size="US-Letter" _description="Cassette Labels">
+    <Label-rectangle id="0" width="252pt" height="117pt" round="9pt" x_waste="2.376pt" y_waste="2.376pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="2" ny="6" x0="33.12pt" y0="27pt" dx="261pt" dy="126.144pt"/>
+    </Label-rectangle>
+  </Template>
+
 </Glabels-templates>
 
 

@@ -57,6 +57,9 @@
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ELEMENT Glabels-paper-sizes (Paper-size*)>
+<!ATTLIST Glabels-paper-sizes
+                 xmlns           %STRING_TYPE;           #IMPLIED
+>
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
@@ -64,6 +67,9 @@
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ELEMENT Glabels-templates (Template*)>
+<!ATTLIST Glabels-templates
+                 xmlns           %STRING_TYPE;           #IMPLIED
+>
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
@@ -71,6 +77,9 @@
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ELEMENT Glabels-document (Template, Objects+, Merge?, Data*)>
+<!ATTLIST Glabels-document
+                 xmlns           %STRING_TYPE;           #IMPLIED
+>
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Paper size                                                           -->
@@ -191,12 +200,14 @@
 >
 
 <!ENTITY % line_attrs
-                 "line_width      %LENGTH_TYPE;          #IMPLIED
-                  line_color      %UINT_TYPE;            #IMPLIED"
+                 "line_width       %LENGTH_TYPE;          #IMPLIED
+                  line_color       %UINT_TYPE;            #IMPLIED
+                  line_color_field %STRING_TYPE;          #IMPLIED"
 >
 
 <!ENTITY % fill_attrs
-                 "fill_color      %UINT_TYPE;            #IMPLIED"
+                 "fill_color       %UINT_TYPE;           #IMPLIED
+                  fill_color_field %STRING_TYPE;         #IMPLIED"
 >
 
 <!ENTITY % affine_attrs
@@ -267,13 +278,14 @@
 <!ATTLIST Object-barcode
                  %position_attrs;
                  %size_attrs;
-                 style           %BC_STYLE_TYPE;         #REQUIRED
-                 text            %BOOLEAN_TYPE;          #REQUIRED
-                 checksum        %BOOLEAN_TYPE;          #REQUIRED
-                 color           %UINT_TYPE;             #REQUIRED
-                 data            %STRING_TYPE;           #IMPLIED
-                 field           %STRING_TYPE;           #IMPLIED
-                 format          %UINT_TYPE;             #IMPLIED
+                 style            %BC_STYLE_TYPE;         #REQUIRED
+                 text             %BOOLEAN_TYPE;          #REQUIRED
+                 checksum         %BOOLEAN_TYPE;          #REQUIRED
+                 color            %UINT_TYPE;             #IMPLIED
+                 color_field      %STRING_TYPE;           #IMPLIED
+                 data             %STRING_TYPE;           #IMPLIED
+                 field            %STRING_TYPE;           #IMPLIED
+                 format           %UINT_TYPE;             #IMPLIED
                  %affine_attrs;
                  %shadow_attrs;
 >
@@ -316,6 +328,7 @@
                  font_weight     %FONT_WEIGHT_TYPE;      #IMPLIED
                  font_italic     %BOOLEAN_TYPE;          #IMPLIED
                  color           %UINT_TYPE;             #IMPLIED
+				 color_field     %STRING_TYPE;           #IMPLIED
                  line_spacing    %LENGTH_TYPE;           #IMPLIED
 >
 
@@ -325,5 +338,3 @@
 >
 
 <!ELEMENT NL EMPTY>
-
-

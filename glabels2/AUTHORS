@@ -40,6 +40,7 @@ These are copyright:
 	 * Copyright (C) 1999-2000 Sven Neumann <sven@gimp.org>
 
 Glabels includes contributions from:
+	Frederic Ruaudel  <grumz@users.sf.net>
 	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
 	Wayne Schuller <k_wayne@linuxpower.org>
 	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
@@ -53,7 +54,8 @@ Glabels includes contributions from:
 
 Translations:
 
-	Olivier Berger <oberger@april.org> -- French
+	Olivier Berger <oberger@april.org> -- French (original)
+	Florent Morel <florent@taket.org> -- French (2.0.2)
 	Marcus Bauer <m@7n7.de> -- German (original)
 	Christian Neumair <christian-neumair@web.de> -- German (1.89.1)
 	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
@@ -139,5 +141,8 @@ particular products (I apologize if I have missed anybody):
 	JBadger
 	Frank Altpeter
 	Matthew J. Lockner
+	Larry Harriman
+	Juan Carlos Valero
+	Nick Hill
 
 And many others for their many helpful suggestions and bug reports -- thanks.

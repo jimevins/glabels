@@ -1,3 +1,262 @@
+2005-01-22  Jim Evins  <evins@snaught.com>
+
+	* MESSAGE-OF-DOOM:
+		Added.
+	* Makefile.am:
+		Added MESSAGE-OF-DOOM to EXTRA_DIST.
+	* NEWS:
+		Final prep for 2.1.0.
+	* configure.in:
+		Set version to 2.1.0.  Output MESSAGE-OF-DOOM.
+	* glabels.spec.in:
+		Added '--remove-original' flag to desktop-file-install, so that there is
+		only one menu entry.
+	
+2005-01-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		- Font family entry should not be editable.
+		- img_key_entry should have sensitivity=YES, so that it follows the
+		  sensitivity of img_key_combo.
+	
+2005-01-19  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+		Give credit to Frederic Ruaudel for the color merge patches.
+
+2005-01-18  Frederic Ruaudel  <grumz@users.sf.net>
+ 
+ 	Add support to merge color for all other color attribute (Feature 
+ 	Requests item #1008635. If the data is invalid, the color used is transparent 
+ 	(GL_COLOR_NONE). The format	for color in merge data file are those accepted 
+ 	by gdk_color_parse() these include name for a color from rgb.txt, such as 
+ 	DarkSlateGray, or a hex specification such as #305050. File format has been 
+ 	changed but backward compatibility is preserved for all format. For
+	box/ellipse/line, keep attribute "line_color" for static color or replace by
+	"line_color_field" for merge data. For text/barcode objects, keep attribute
+	"color" for static color or replace by "color_field" for merge data. In the
+	edit canvas window, merged color are represented by half-transparent black
+	line/area.
+ 
+ 	* data/dtd/glabels-2.0.dtd:
+ 		Added line_color_field to line_attrs. Added color_field to 
+ 		Object-barcode and Span.
+ 	* data/glade/object-editor.glade:
+ 		Modify the layout of the editor to add merge possibility to color options
+ 	* src/color.c:
+ 		Fix a copy/paste error in a comment
+ 	* src/color.h:
+ 		Add default color for merge color representation in the editor canvas.
+ 	* src/label-barcode.c:
+ 	* src/object-editor-bc-page.c:
+ 	* src/view-barcode.c:
+ 		Add merge color support for barcode color.
+ 	* src/label-box.c:
+ 	* src/view-box.c:
+ 		Add merge color support for box border color.
+ 	* src/label-ellipse.c:
+ 	* src/view-ellipse.c:
+ 		Add merge color support for ellipse border color.
+ 	* src/label-line.c:
+ 	* src/view-line.c:
+ 		Add merge color support for line color.
+ 	* src/label-object.c:
+ 	* src/label-object.h:
+ 	* src/object-editor.c:
+ 	* src/object-editor.h:
+ 	* src/ui-property-bar.c:
+ 	* src/view.c:
+ 	* src/view.h:
+ 	* src/xml-label-04.c:
+ 	* src/xml-label-191.c:
+ 		Add support for merging to other color attribute.
+ 	* src/label-text.c:
+ 	* src/object-editor-text-page.c:
+ 	* src/view-text.c:
+ 		Add merge color support for text color.
+ 	* src/object-editor-fill-page.c:
+ 		Change a blocked handler that didn't match the good widget. Fix the type
+ 		of some debug message.
+ 	* src/object-editor-line-page.c:
+ 		Add merging support to line color option.
+ 	* src/object-editor-private.h:
+ 		Add variables for new widget.
+ 	* src/print.c:
+ 		Modify the draw functions to get merge data if needed.
+ 	* src/window.c:
+ 		Change the default size of the window in order to see all widget in the
+ 		"text style tab" of the editor.
+ 	* src/xml-label.c:
+ 		Modify the parser to record/retreive the field value for objects that need
+ 		"color" attribute. For box/ellipse/line, keep attribute "line_color" for 
+ 		static color or replace by "line_color_field" for merge data. For 
+ 		text/barcode objects, keep attribute "color" for static color or replace 
+ 		by "color_field" for merge data.
+ 	
+2005-01-17  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (screen_changed_cb):
+		Don't do anything if we don't have a screen.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (get_home_scale):
+		Fixed bad call to gtk_widget_has_screen() -- huh?.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.0.dtd:
+		Added fill_color_field to fill_attrs.  Also added xmlns attribute to all
+		top-level elements.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Set entries for fill and data field key dropdowns to NOT editable.
+	* src/view-box.c: (construct_properties_editor):
+	* src/view-ellipse.c: (construct_properties_editor):
+		Update object editor when label's merge property has changed.
+	* src/xml-label.c: (xml_parse_object_ellipse):
+		Completed the merge color support for the ellipse item.
+
+2005-01-06  Frederic Ruaudel  <grumz@users.sf.net>
+
+	Add support to merge color for object that have a "Fill color" attribute (Feature 
+	Requests item #1008635. If the data is invalid, the color used is transparent 
+	(GL_COLOR_NONE). The format	for color in merge data file are those accepted 
+	by gdk_color_parse() these include name for a color from rgb.txt, such as 
+	DarkSlateGray, or a hex specification such as #305050. File format has been 
+	changed but backward compatibility is preserved for all format. For box/ellipse, 
+	keep attribute "fill_color" for static	color or replace by "fill_color_field" 
+	for merge data.
+
+	* data/glade/object-editor.glade:
+		Modify "Fill" tab to add the merge key combo and convert the labels into 
+		radio button.
+	* src/color.h:
+	* src/color.c:
+		Add "glColorNode" structure and associated functions to manage it. This 
+		structure is equivalent for color than the "glTextNode". It holds the color
+		and the key field.
+	* src/label-object.h:
+	* src/label-object.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/ui-property-bar.c:
+	* src/view.h:
+	* src/view.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+		Change functions of objects that have a "fill color" attribute to use the 
+		new "glColorNode" structure. Use barcode code as example.
+	* src/Makefile.am:
+		Add the color.[ch] file to glabels_batch binary that now need support for 
+		"glColorNode".
+	* src/object-editor.h:
+	* src/object-editor.c:
+	* src/object-editor-fill-page.c:
+		Manage the new widget of the editor's "Fill" tab : key combo and radio button
+		to choose between static color or merge key. Use barcode code as example.
+	* src/object-editor-private.h:
+		Add new widget in the "_glObjectEditorPrivate" structure.
+	* src/print.c:
+		Modify the draw functions to get merge data if needed.
+	* src/xml-label.c:
+		Modify the parser to record/retreive the field value for objects that need
+		"Fill color" attribute. For box/ellipse, put attribute "fill_color" for static
+		color or "fill_color_field" for merge data.		
+	
+2005-01-04  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
+		Added templates, submitted by Larry Harriman, Juan Carlos Valero, and
+		Nick Hill.
+
+2004-11-26  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/fr.po:
+		Updated french translations provided by Florent Morel <florent@taket.org>.
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+		Added '#include <config.h>' -- HAVE_*GETTEXT macros were not defined and
+		thus _() strings were not being translated.
+
+2004-11-14  Jim Evins  <evins@snaught.com>
+
+	* src/debug.h:
+	* src/debug.c: (gl_debug_init), (gl_debug):
+		Borrowed from gedit:  use environmental variables to select debug
+		sections.
+	* src/splash.c:
+		Removed unused include of debug.h.
+	* src/glabels.c: (main):
+		Added call to gl_debug_init(), and removed debug clutter from command line
+		options.
+	* src/glabels-batch.c: (main):
+		Added call to gl_debug_init().
+
+2004-11-13  Jim Evins  <evins@snaught.com>
+
+	Drawing and property toolbars were being initialized with the "icons and text"
+	look in Fedora Core 3.  Even though none of the buttons had any text attached to
+	them, the buttons were being sized as if they were.  This led to less real estate
+	for the property editor, leading to Bug #1064630.  The
+	
+	* data/ui/glabels-ui.xml:
+		Added explicit "look" property to both drawing and property toolbars.
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+		Removed drawing_toolbar_button_style configuration parameter.
+	* src/ui.c: (view_menu_item_toggled_cb),
+	(set_app_drawing_toolbar_style):
+		Do not attempt to adjust look property of the drawing toolbar.
+
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/pixmaps/glabels-about-logo.png:
+		Updated about logo.
+	
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/man/glabels.1:
+	* src/glabels-batch.c: (main):
+	* src/print.h:
+	* src/print.c: (gl_print_batch):
+
+		Added option to glabels-batch to select the first label to begin
+		printing on.
+
+2004-09-26  Jim Evins  <evins@snaught.com>
+
+	* data/desktop/glabels.desktop.in:
+		Point to app icon, "glabels.png"
+	* data/mime/glabels.keys.in:
+		Point at mime icon, "glabels-application-x-glabels.png"
+	* data/pixmaps/Makefile.am:
+		Added glabels_app_icondir.  Renamed icons.
+	* data/pixmaps/glabels.png:
+		New cleaned up app icon.  Deleted glabels-icon.png.
+	* data/pixmaps/glabels-application-x-glabels.png:
+		New mime icon.
+	* data/pixmaps/glabels-splash.png:
+		Renamed glabels-logo to glabels-splash to be more correct about role.
+	* src/glabels.c:
+	* src/template-designer.c:
+		Point at app icon, "glabels.png"
+	* src/splash.c:
+		Point at renamed splash image, "glabels-splash.png"
+
 2004-08-22  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
@@ -1055,5 +1314,3 @@
 	* src/xml-template.h:
 		Added function gl_xml_template_write_template_to_file(), used
 		in gl_template_register().
-
-	

@@ -36,7 +36,7 @@
 /*============================================================================*/
 
 #define DEFAULT_WINDOW_WIDTH  788
-#define DEFAULT_WINDOW_HEIGHT 560
+#define DEFAULT_WINDOW_HEIGHT 600
 
 #define CURSOR_INFO_WIDTH     150
 #define ZOOM_INFO_WIDTH        50
@@ -566,4 +566,3 @@ modified_changed_cb (glLabel  *label,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
-

@@ -18,5 +18,6 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	glabels.spec.in \
-	glabels.spec
+	glabels.spec \
+	MESSAGE-OF-DOOM
 

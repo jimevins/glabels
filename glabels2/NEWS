@@ -1,3 +1,25 @@
+* gLabels 2.1.0 (unstable) release.  Release date 2005-01-22.
+
+- Added ability to select color from merge source (Frederic Ruaudel)
+- See 2.0.2
+
+* gLabels 2.0.2 release.  Release date 2005-01-22.
+
+- Desktop file reconciled with desktop-entry-spec
+- New cleaned-up icon
+- Added option to glabels-batch to allow selection of first label.
+- Added options to glabels-batch to allow selection of merge source and crop marks.
+  (José Dapena Paz)
+- Updated french translation (Florent Morel)
+- Fixed translation problem with object editor labels
+- Minor bug fixes and cleanup
+- New templates
+
+* gLabels 2.0.1 release.  Release date 2004-08-15.
+
+- Fixed crash when reading some labels created with 1.93.x.
+- Updated japanese translations (Takeshi AIHANA)
+- Fixed crash from improperly freeing translation strings.
 
 * gLabels 2.0.0 release.  Release date 2004-08-09.
 

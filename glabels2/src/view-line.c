@@ -19,6 +19,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+#include <config.h>
 
 #include <glib.h>
 
@@ -162,7 +163,7 @@ gl_view_line_new (glLabelLine *object,
 {
 	glViewLine        *view_line;
 	gdouble            line_width;
-	guint              line_color;
+	glColorNode       *line_color_node;
 	gdouble            w, h;
 	GnomeCanvasPoints *points;
 
@@ -180,7 +181,11 @@ gl_view_line_new (glLabelLine *object,
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	line_color_node = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		line_color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
 
 	/* Create analogous canvas item. */
 	points = gnome_canvas_points_new (2);
@@ -193,8 +198,9 @@ gl_view_line_new (glLabelLine *object,
 					 gnome_canvas_line_get_type (),
 					 "points", points,
 					 "width_units", line_width,
-					 "fill_color_rgba", line_color,
+					 "fill_color_rgba", line_color_node->color,
 					 NULL);
+	gl_color_node_free (&line_color_node);
 	gnome_canvas_points_free (points);
 
 	g_signal_connect (G_OBJECT (object), "changed",
@@ -240,6 +246,8 @@ construct_properties_editor (glViewObject *view_object)
 			  G_CALLBACK (update_editor_from_move_cb), editor);
 	g_signal_connect (G_OBJECT (object->parent), "size_changed",
 			  G_CALLBACK (update_editor_from_label_cb), editor);
+	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
+			  G_CALLBACK (update_editor_from_label_cb), editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -254,16 +262,20 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 				   glViewLine     *view_line)
 {
 	gdouble            line_width;
-	guint              line_color;
+	glColorNode       *line_color_node;
 	gdouble            w, h;
-	GnomeCanvasPoints  *points;
+	GnomeCanvasPoints *points;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	line_color_node = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		line_color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
 
 	/* Adjust appearance of analogous canvas item. */
 	points = gnome_canvas_points_new (2);
@@ -274,8 +286,9 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 	gnome_canvas_item_set (view_line->private->item,
 			       "points", points,
 			       "width_units", line_width,
-			       "fill_color_rgba", line_color,
+			       "fill_color_rgba", line_color_node->color,
 			       NULL);
+	gl_color_node_free (&line_color_node);
 	gnome_canvas_points_free (points);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -289,7 +302,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 			      glLabelObject  *object)
 {
 	gdouble            x, y, w, h;
-	guint              line_color;
+	glColorNode       *line_color_node;
 	gdouble            line_width;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -307,9 +320,10 @@ update_object_from_editor_cb (glObjectEditor *editor,
 
 	gl_object_editor_get_lsize (editor, &w, &h);
 	gl_label_object_set_size (object, w, h);
-
-	line_color = gl_object_editor_get_line_color (editor);
-	gl_label_object_set_line_color (object, line_color);
+	
+	line_color_node = gl_object_editor_get_line_color (editor);
+	gl_label_object_set_line_color (object, line_color_node);
+	gl_color_node_free (&line_color_node);
 
 	line_width = gl_object_editor_get_line_width (editor);
 	gl_label_object_set_line_width (object, line_width);
@@ -333,16 +347,20 @@ update_editor_from_object_cb (glLabelObject  *object,
 			      glObjectEditor *editor)
 {
 	gdouble            w, h;
-	guint              line_color;
+	glColorNode       *line_color_node;
 	gdouble            line_width;
+	glMerge	          *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_lsize (editor, w, h);
+	
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_line_color (editor, line_color);
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	gl_object_editor_set_line_color (editor, (merge != NULL), line_color_node);
+	gl_color_node_free (&line_color_node);
 
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
 	gl_object_editor_set_line_width (editor, line_width);
@@ -377,6 +395,7 @@ update_editor_from_label_cb (glLabel        *label,
 			     glObjectEditor *editor)
 {
 	gdouble            label_width, label_height;
+	glMerge     	  *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -385,6 +404,9 @@ update_editor_from_label_cb (glLabel        *label,
 					   label_width, label_height);
 	gl_object_editor_set_max_lsize (GL_OBJECT_EDITOR (editor),
 					label_width, label_height);
+	
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -430,11 +452,12 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 				   GdkEvent    *event,
 				   glView      *view)
 {
-	static gdouble      x0, y0;
-	static gboolean     dragging = FALSE;
+	static gdouble       x0, y0;
+	static gboolean      dragging = FALSE;
 	static glViewObject *view_line;
 	static GObject      *object;
-	gdouble             x, y, w, h;
+	gdouble              x, y, w, h;
+	glColorNode         *line_color_node;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -443,6 +466,7 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	case GDK_BUTTON_PRESS:
 		switch (event->button.button) {
 		case 1:
+			line_color_node = gl_color_node_new_default ();
 			dragging = TRUE;
 			gnome_canvas_item_grab (canvas->root,
 						GDK_POINTER_MOTION_MASK |
@@ -459,12 +483,14 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 						  0.0, 0.0);
 			gl_label_object_set_line_width (GL_LABEL_OBJECT(object),
 						      gl_view_get_default_line_width(view));
+			line_color_node->color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-						     gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5));
+						     line_color_node);
 			view_line = gl_view_line_new (GL_LABEL_LINE(object),
 						      view);
 			x0 = x;
 			y0 = y;
+			gl_color_node_free (&line_color_node);
 			return TRUE;
 
 		default:
@@ -474,6 +500,7 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	case GDK_BUTTON_RELEASE:
 		switch (event->button.button) {
 		case 1:
+			line_color_node = gl_color_node_new_default ();
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
@@ -487,11 +514,13 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 			h = y - y0;
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
+			line_color_node->color = gl_view_get_default_line_color(view);
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-						     gl_view_get_default_line_color(view));
+						     line_color_node);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_line));
 			gl_view_arrow_mode (view);
+			gl_color_node_free (&line_color_node);
 			return TRUE;
 
 		default:
@@ -517,4 +546,3 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	}
 
 }
-

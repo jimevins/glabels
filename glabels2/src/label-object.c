@@ -755,7 +755,7 @@ gl_label_object_set_text_line_spacing (glLabelObject     *object,
 /****************************************************************************/
 void
 gl_label_object_set_text_color (glLabelObject     *object,
-				guint              text_color)
+				glColorNode       *text_color_node)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -764,7 +764,7 @@ gl_label_object_set_text_color (glLabelObject     *object,
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color != NULL ) {
 
 		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color (object, text_color);
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color (object, text_color_node);
 
 	}
 
@@ -918,10 +918,10 @@ gl_label_object_get_text_line_spacing (glLabelObject     *object)
 /****************************************************************************/
 /* Get text color for all text contained in object.                         */
 /****************************************************************************/
-guint
+glColorNode*
 gl_label_object_get_text_color (glLabelObject     *object)
 {
-	guint ret = 0;
+	glColorNode *ret = NULL;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -966,7 +966,7 @@ gl_label_object_can_fill (glLabelObject     *object)
 /****************************************************************************/
 void
 gl_label_object_set_fill_color (glLabelObject     *object,
-				guint              fill_color)
+				glColorNode       *fill_color_node)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -975,7 +975,7 @@ gl_label_object_set_fill_color (glLabelObject     *object,
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL ) {
 
 		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color (object, fill_color);
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color (object, fill_color_node);
 
 	}
 
@@ -985,10 +985,10 @@ gl_label_object_set_fill_color (glLabelObject     *object,
 /****************************************************************************/
 /* Get fill color for object.                                               */
 /****************************************************************************/
-guint
+glColorNode*
 gl_label_object_get_fill_color (glLabelObject     *object)
 {
-	guint ret = 0;
+	glColorNode *ret = NULL;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -1033,7 +1033,7 @@ gl_label_object_can_line_color (glLabelObject     *object)
 /****************************************************************************/
 void
 gl_label_object_set_line_color (glLabelObject     *object,
-				guint              line_color)
+				glColorNode       *line_color_node)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -1042,7 +1042,7 @@ gl_label_object_set_line_color (glLabelObject     *object,
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL ) {
 
 		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color (object, line_color);
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color (object, line_color_node);
 
 	}
 
@@ -1052,10 +1052,10 @@ gl_label_object_set_line_color (glLabelObject     *object,
 /****************************************************************************/
 /* Get line color for object.                                               */
 /****************************************************************************/
-guint
+glColorNode*
 gl_label_object_get_line_color (glLabelObject     *object)
 {
-	guint ret = 0;
+	glColorNode *ret = NULL;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -1323,4 +1323,3 @@ merge_changed_cb (glLabel       *label,
 {
 	gl_label_object_emit_changed (object);
 }
-

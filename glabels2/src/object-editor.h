@@ -26,6 +26,7 @@
 #include "text-node.h"
 #include "merge.h"
 #include "bc.h"
+#include "color.h"
 #include <gtk/gtkenums.h>
 #include <libgnomeprint/gnome-font.h>
 
@@ -143,18 +144,20 @@ void        gl_object_editor_get_lsize            (glObjectEditor      *editor,
  * Fill Page
  */
 void        gl_object_editor_set_fill_color       (glObjectEditor      *editor,
-						   guint                color);
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
 
-guint       gl_object_editor_get_fill_color       (glObjectEditor      *editor);
+glColorNode* gl_object_editor_get_fill_color      (glObjectEditor      *editor);
 
 
 /*
  * Line/Outline Page
  */
 void        gl_object_editor_set_line_color       (glObjectEditor      *editor,
-						   guint                color);
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
 
-guint       gl_object_editor_get_line_color       (glObjectEditor      *editor);
+glColorNode* gl_object_editor_get_line_color      (glObjectEditor      *editor);
 
 void        gl_object_editor_set_line_width       (glObjectEditor      *editor,
 						   gdouble              width);
@@ -201,14 +204,15 @@ void        gl_object_editor_set_text_alignment   (glObjectEditor      *editor,
 GtkJustification gl_object_editor_get_text_alignment (glObjectEditor      *editor);
 
 void        gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
-						   gdouble              text_line_spacing);
+						   gdouble               text_line_spacing);
 
 gdouble     gl_object_editor_get_text_line_spacing (glObjectEditor      *editor);
 
-void        gl_object_editor_set_text_color       (glObjectEditor      *editor,
-						   guint                text_color);
+void        gl_object_editor_set_text_color       (glObjectEditor       *editor,
+						   gboolean              merge_flag,
+						   glColorNode          *text_color_node);
 
-guint       gl_object_editor_get_text_color       (glObjectEditor      *editor);
+glColorNode* gl_object_editor_get_text_color      (glObjectEditor      *editor);
 
 void        gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
 						   gboolean             auto_shrink);
@@ -238,9 +242,10 @@ void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
 						   guint               *format_digits);
 
 void        gl_object_editor_set_bc_color         (glObjectEditor      *editor,
-						   guint                text_color);
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
 
-guint       gl_object_editor_get_bc_color         (glObjectEditor      *editor);
+glColorNode* gl_object_editor_get_bc_color        (glObjectEditor      *editor);
 
 
 /*

@@ -49,7 +49,8 @@
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void style_changed_cb (glObjectEditor       *editor);
+static void style_changed_cb     (glObjectEditor       *editor);
+static void bc_radio_toggled_cb  (glObjectEditor       *editor);
 
 
 /*--------------------------------------------------------------------------*/
@@ -75,6 +76,14 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "bc_cs_check");
 	editor->priv->bc_color_combo =
 		glade_xml_get_widget (editor->priv->gui, "bc_color_combo");
+	editor->priv->bc_key_combo = 
+		glade_xml_get_widget (editor->priv->gui, "bc_key_combo");	
+	editor->priv->bc_key_entry = 
+		glade_xml_get_widget (editor->priv->gui, "bc_key_entry");	
+	editor->priv->bc_key_radio = 
+		glade_xml_get_widget (editor->priv->gui, "bc_key_radio");	
+	editor->priv->bc_color_radio = 
+		glade_xml_get_widget (editor->priv->gui, "bc_color_radio");	
 	editor->priv->data_format_label =
 		glade_xml_get_widget (editor->priv->gui, "data_format_label");
 	editor->priv->data_ex_label =
@@ -91,6 +100,11 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gtk_combo_set_popdown_strings (GTK_COMBO(editor->priv->bc_style_combo), styles);
 	gl_barcode_free_styles_list (styles);
 
+	/* Modify widgets */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->bc_color_radio), TRUE);
+	gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);
+	gtk_widget_set_sensitive (editor->priv->bc_key_combo, FALSE);
+	
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->bc_page_vbox);
 
@@ -110,6 +124,18 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_color_combo),
 				  "color_changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
+	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_key_entry),
+				  "changed",
+				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
+	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_color_radio),
+				  "toggled",
+				  G_CALLBACK (bc_radio_toggled_cb),
+				  G_OBJECT (editor));				  
+	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_key_radio),
+				  "toggled",
+				  G_CALLBACK (bc_radio_toggled_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->data_digits_spin),
 				  "changed",
@@ -313,52 +339,123 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor,
 /*****************************************************************************/
 void
 gl_object_editor_set_bc_color (glObjectEditor      *editor,
-			       guint                bc_color)
+			       gboolean             merge_flag,
+			       glColorNode         *color_node)
 {
 	GdkColor *gdk_color;
+	gint pos;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_color_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_key_entry),
+					 gl_object_editor_changed_cb,
+					 editor);
 
-        gdk_color = gl_color_to_gdk_color (bc_color);
-        color_combo_set_color (COLOR_COMBO(editor->priv->bc_color_combo), gdk_color);
-        g_free (gdk_color);
+	gtk_widget_set_sensitive (editor->priv->bc_key_radio, merge_flag);
 
+	if ( color_node->color == GL_COLOR_NONE ) {
+
+		color_combo_set_color_to_default (COLOR_COMBO(editor->priv->bc_color_combo));
+
+	} else {
+
+		gdk_color = gl_color_to_gdk_color (color_node->color);
+		color_combo_set_color (COLOR_COMBO(editor->priv->bc_color_combo),
+					   gdk_color);
+		g_free (gdk_color);
+	}
+	
+	if (!color_node->field_flag) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+						  (editor->priv->bc_color_radio), TRUE); 
+		gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);
+		gtk_widget_set_sensitive (editor->priv->bc_key_combo, FALSE);
+		
+	} else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+						  (editor->priv->bc_key_radio), TRUE); 
+		gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
+		gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
+		
+		gtk_editable_delete_text (GTK_EDITABLE (editor->priv->bc_key_entry), 0, -1);
+		pos = 0;
+		if (color_node->key != NULL ) {
+			gtk_editable_insert_text (GTK_EDITABLE (editor->priv->bc_key_entry),
+									color_node->key,
+									strlen (color_node->key),
+									&pos);
+		}
+	}	
+	
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_color_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
-
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_key_entry),
+					   gl_object_editor_changed_cb,
+					   editor);
+	
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*****************************************************************************/
 /* Query bc color.                                                           */
 /*****************************************************************************/
-guint
+glColorNode*
 gl_object_editor_get_bc_color (glObjectEditor      *editor)
 {
-	GdkColor  *gdk_color;
-	guint     color;
-	gboolean  is_default;
+	GdkColor     *gdk_color;
+	glColorNode  *color_node;
+	gboolean      is_default;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        gdk_color = color_combo_get_color (COLOR_COMBO(editor->priv->bc_color_combo),
+	color_node = gl_color_node_new_default ();
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_key_radio))) {
+		color_node->field_flag = TRUE;
+		color_node->color = gl_prefs->default_line_color;
+		color_node->key = 
+			gtk_editable_get_chars (GTK_EDITABLE (editor->priv->bc_key_entry), 0, -1);
+	} else {
+		color_node->field_flag = FALSE;
+		color_node->key = NULL;
+		gdk_color = color_combo_get_color (COLOR_COMBO(editor->priv->bc_color_combo),
                                            &is_default);
-                                                                                
-        if (is_default) {
-                color = gl_prefs->default_line_color;
-        } else {
-                color = gl_color_from_gdk_color (gdk_color);
-        }
-                                                                                
 
+		if (is_default) {
+			color_node->color = gl_prefs->default_line_color;
+		} else {
+			color_node->color = gl_color_from_gdk_color (gdk_color);
+		}
+	}
+	
 	gl_debug (DEBUG_EDITOR, "END");
 
-	return color;
+	return color_node;
 }
 
-
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  barcode color radio callback.                                  */
+/*--------------------------------------------------------------------------*/
+static void
+bc_radio_toggled_cb (glObjectEditor *editor)
+{
+    gl_debug (DEBUG_EDITOR, "START");
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_color_radio))) {
+                gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);
+                gtk_widget_set_sensitive (editor->priv->bc_key_combo, FALSE);
+    } else {
+                gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
+                gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
+		
+	}
+ 
+    /* Emit our "changed" signal */
+    g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+ 
+    gl_debug (DEBUG_EDITOR, "END");
+}

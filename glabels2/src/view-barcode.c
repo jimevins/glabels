@@ -19,6 +19,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+#include <config.h>
 
 #include <glib.h>
 
@@ -261,7 +262,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	glTextNode        *text_node;
 	gchar             *id;
 	gboolean           text_flag, cs_flag;
-	guint              color;
+	glColorNode       *color_node;
 	guint              format_digits;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -285,10 +286,11 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_text_node_free (&text_node);
 
 	gl_object_editor_get_bc_style (editor, &id, &text_flag, &cs_flag, &format_digits);
-	color = gl_object_editor_get_bc_color (editor);
+	color_node = gl_object_editor_get_bc_color (editor);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 				    id, text_flag, cs_flag, format_digits);
-	gl_label_object_set_line_color (object, color);
+	gl_label_object_set_line_color (object, color_node);
+	gl_color_node_free (&color_node);
 	g_free (id);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
@@ -312,7 +314,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	glTextNode        *text_node;
 	gchar             *id;
 	gboolean           text_flag, cs_flag;
-	guint              color;
+	glColorNode       *color_node;
 	glMerge           *merge;
 	guint              format_digits;
 
@@ -320,16 +322,18 @@ update_editor_from_object_cb (glLabelObject  *object,
 
 	gl_label_object_get_size (object, &w, &h);
 	gl_object_editor_set_size (editor, w, h);
+	
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
 				    &id, &text_flag, &cs_flag, &format_digits);
-	color = gl_label_object_get_line_color (object);
+	color_node = gl_label_object_get_line_color (object);
 	gl_object_editor_set_bc_style (editor, id, text_flag, cs_flag, format_digits);
-	gl_object_editor_set_bc_color (editor, color);
+	gl_object_editor_set_bc_color (editor, (merge != NULL), color_node);
+	gl_color_node_free (&color_node);
 	g_free (id);
 
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
 	gl_object_editor_set_data (editor, (merge != NULL), text_node);
 	gl_text_node_free (&text_node);
 
@@ -427,6 +431,7 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 	static GObject      *object;
 	gdouble             x, y;
 	glTextNode          *text_node;
+	glColorNode         *color_node;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -436,6 +441,7 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
 		switch (event->button.button) {
 		case 1:
+			color_node = gl_color_node_new_default ();
 			dragging = TRUE;
 			gnome_canvas_item_grab (canvas->root,
 						GDK_POINTER_MOTION_MASK |
@@ -456,14 +462,16 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 						    FALSE,
 						    TRUE,
 						    0);
-			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-						    gl_color_set_opacity (
+			color_node->color = gl_color_set_opacity (
 						      gl_view_get_default_line_color(view),
-                                                      0.5));
+                                                      0.5);
+			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
+							color_node);
 			view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object),
 							    view);
 			x0 = x;
 			y0 = y;
+			gl_color_node_free (&color_node);
 			return TRUE;
 
 		default:
@@ -474,6 +482,7 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
 		switch (event->button.button) {
 		case 1:
+			color_node = gl_color_node_new_default ();
 			dragging = FALSE;
 			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
@@ -486,11 +495,13 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 						    FALSE,
 						    TRUE,
 						    0);
+			color_node->color = gl_view_get_default_line_color(view);
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-							gl_view_get_default_line_color(view));
+							color_node);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
 			gl_view_arrow_mode (view);
+			gl_color_node_free (&color_node);
 			return TRUE;
 
 		default:
@@ -528,7 +539,7 @@ draw_barcode (glViewBarcode *view_barcode)
 	gchar *id;
 	gboolean text_flag;
 	gboolean checksum_flag;
-	guint color;
+	glColorNode *color_node;
 	gdouble w, h;
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
@@ -548,7 +559,11 @@ draw_barcode (glViewBarcode *view_barcode)
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
 				    &id, &text_flag, &checksum_flag, &format_digits);
-	color = gl_label_object_get_line_color (object);
+	color_node = gl_label_object_get_line_color (object);
+	if (color_node->field_flag)
+	{
+		color_node->color = GL_COLOR_MERGE_DEFAULT;
+	}
 	gl_label_object_get_size (object, &w, &h);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {
@@ -578,7 +593,7 @@ draw_barcode (glViewBarcode *view_barcode)
 
 		cstring = _("Invalid barcode data");
 		glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
-								  color,
+								  color_node->color,
 								  0.0, 0.0,
 								  cstring,
 								  strlen
@@ -609,7 +624,7 @@ draw_barcode (glViewBarcode *view_barcode)
 							gnome_canvas_line_get_type (),
 							"points", points,
 							"width_units", line->width,
-							"fill_color_rgba", color,
+							"fill_color_rgba", color_node->color,
 							NULL);
 			view_barcode->private->item_list =
 				g_list_prepend (view_barcode->private->item_list, item);
@@ -624,7 +639,7 @@ draw_barcode (glViewBarcode *view_barcode)
 						       GL_BARCODE_FONT_WEIGHT,
 						       FALSE, bchar->fsize);
 			glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
-									  color,
+									  color_node->color,
 									  0.0,
 									  0.0,
 									  &
@@ -651,10 +666,10 @@ draw_barcode (glViewBarcode *view_barcode)
 	}
 
 	/* clean up */
+	gl_color_node_free (&color_node);
 	gl_barcode_free (&gbc);
 	g_free (digits);
 	g_free (id);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
-

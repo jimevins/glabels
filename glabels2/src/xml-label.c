@@ -471,12 +471,14 @@ static void
 xml_parse_object_box (xmlNodePtr  node,
 		      glLabel    *label)
 {
-	GObject *object;
-	gdouble  x, y;
-	gdouble  w, h;
-	gdouble  line_width;
-	guint    line_color, fill_color;
-	gdouble  affine[6];
+	GObject      *object;
+	gdouble       x, y;
+	gdouble       w, h;
+	gdouble       line_width;
+	glColorNode  *line_color_node;
+	gdouble       affine[6];
+	gchar        *string;
+	glColorNode  *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -494,14 +496,32 @@ xml_parse_object_box (xmlNodePtr  node,
 
 	/* line attrs */
 	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
-	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color);
+	
+	line_color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "line_color_field");
+	if ( string ) {
+		line_color_node->field_flag = TRUE;
+		line_color_node->key = string;
+	} else {
+		line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);
+	}
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_color_node_free (&line_color_node);
+
 
 	/* fill attrs */
-	fill_color = gl_xml_get_prop_uint (node, "fill_color", 0);
-	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color);
-
+	fill_color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "fill_color_field");
+	if ( string ) {
+		fill_color_node->field_flag = TRUE;
+		fill_color_node->key = string;
+	} else {
+		fill_color_node->color = gl_xml_get_prop_uint (node, "fill_color", 0);
+	}
+	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node);
+	gl_color_node_free (&fill_color_node);
+	
 	/* affine attrs */
 	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
 	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
@@ -521,12 +541,14 @@ static void
 xml_parse_object_ellipse (xmlNodePtr  node,
 			  glLabel    *label)
 {
-	GObject *object;
-	gdouble  x, y;
-	gdouble  w, h;
-	gdouble  line_width;
-	guint    line_color, fill_color;
-	gdouble  affine[6];
+	GObject     *object;
+	gdouble      x, y;
+	gdouble      w, h;
+	gdouble      line_width;
+	glColorNode *line_color_node;
+	gdouble      affine[6];
+	gchar       *string;
+	glColorNode *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -544,13 +566,31 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 
 	/* line attrs */
 	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
-	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color);
+
+	line_color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "line_color_field");
+	if ( string ) {
+		line_color_node->field_flag = TRUE;
+		line_color_node->key = string;
+	} else {
+		line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);		
+	}
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_color_node_free (&line_color_node);
+
 
 	/* fill attrs */
-	fill_color = gl_xml_get_prop_uint (node, "fill_color", 0);
-	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color);
+	fill_color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "fill_color_field");
+	if ( string ) {
+		fill_color_node->field_flag = TRUE;
+		fill_color_node->key = string;
+	} else {
+		fill_color_node->color = gl_xml_get_prop_uint (node, "fill_color", 0);
+	}
+	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node);
+	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
 	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
@@ -571,12 +611,13 @@ static void
 xml_parse_object_line (xmlNodePtr  node,
 		       glLabel    *label)
 {
-	GObject *object;
-	gdouble  x, y;
-	gdouble  dx, dy;
-	gdouble  line_width;
-	guint    line_color;
-	gdouble  affine[6];
+	GObject     *object;
+	gdouble      x, y;
+	gdouble      dx, dy;
+	gdouble      line_width;
+	glColorNode *line_color_node;
+	gdouble      affine[6];
+	gchar       *string;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -594,9 +635,18 @@ xml_parse_object_line (xmlNodePtr  node,
 
 	/* line attrs */
 	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
-	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color);
+	
+	line_color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "line_color_field");
+	if ( string ) {
+		line_color_node->field_flag = TRUE;
+		line_color_node->key = string;
+	} else {
+		line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);		
+	}
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_color_node_free (&line_color_node);
 
 	/* affine attrs */
 	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
@@ -686,7 +736,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gchar              *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
-	guint               color;
+	glColorNode        *color_node;
 	guint               format_digits;
 	gdouble             affine[6];
 
@@ -708,12 +758,21 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	id = xmlGetProp (node, "style");
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
-	color = gl_xml_get_prop_uint (node, "color", 0);
 	format_digits = gl_xml_get_prop_uint (node, "format", 10);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 				    id, text_flag, checksum_flag, format_digits);
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 	g_free (id);
+	
+	color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "color_field");
+	if ( string ) {
+		color_node->field_flag = TRUE;
+		color_node->key = string;
+	} else {
+		color_node->color = gl_xml_get_prop_uint (node, "color", 0);		
+	}
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node);
+	gl_color_node_free (&color_node);
 
 	/* data or field attr */
 	string = xmlGetProp (node, "data");
@@ -852,7 +911,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
 	gboolean          font_italic_flag;
-	guint             color;
+	glColorNode      *color_node;
 	gdouble           text_line_spacing;
 	gchar            *string;
 	GList            *lines, *text_nodes;
@@ -881,8 +940,17 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	gl_label_object_set_font_italic_flag (object, font_italic_flag);
 
 	/* Text color attr */
-	color = gl_xml_get_prop_uint (node, "color", 0);
-	gl_label_object_set_text_color (object, color);
+	color_node = gl_color_node_new_default ();
+	string = xmlGetProp (node, "color_field");
+	if ( string ) {
+		color_node->field_flag = TRUE;
+		color_node->key = string;
+	} else {
+		color_node->color = gl_xml_get_prop_uint (node, "color", 0);		
+	}
+	gl_label_object_set_text_color (object, color_node);
+	gl_color_node_free (&color_node);
+	
 
 	/* Text line spacing attr  */
 	text_line_spacing = gl_xml_get_prop_double (node, "line_spacing", 1.0);
@@ -1158,8 +1226,9 @@ xml_create_object_box (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           w, h;
 	gdouble           line_width;
-	guint             line_color, fill_color;
+	glColorNode      *line_color_node;
 	gdouble           affine[6];
+	glColorNode *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1177,13 +1246,30 @@ xml_create_object_box (xmlNodePtr     root,
 
 	/* line attrs */
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_xml_set_prop_length (node, "line_width", line_width);
-	gl_xml_set_prop_uint_hex (node, "line_color", line_color);
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		xmlSetProp (node, "line_color_field", line_color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "line_color", line_color_node->color);
+	}
+	gl_color_node_free (&line_color_node);
 
-	/* fill attrs */
-	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
-	gl_xml_set_prop_uint_hex (node, "fill_color", fill_color);
+	/* fill attrs (color or field) */
+	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	if (fill_color_node->field_flag)
+	{
+		xmlSetProp (node, "fill_color_field", fill_color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "fill_color", fill_color_node->color);
+	}
+	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
 	gl_label_object_get_affine (object, affine);
@@ -1209,8 +1295,9 @@ xml_create_object_ellipse (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           w, h;
 	gdouble           line_width;
-	guint             line_color, fill_color;
+	glColorNode      *line_color_node;
 	gdouble           affine[6];
+	glColorNode *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1228,13 +1315,31 @@ xml_create_object_ellipse (xmlNodePtr     root,
 
 	/* line attrs */
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_xml_set_prop_length (node, "line_width", line_width);
-	gl_xml_set_prop_uint_hex (node, "line_color", line_color);
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		xmlSetProp (node, "line_color_field", line_color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "line_color", line_color_node->color);
+	}
+	gl_color_node_free (&line_color_node);
 
-	/* fill attrs */
-	fill_color = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
-	gl_xml_set_prop_uint_hex (node, "fill_color", fill_color);
+
+	/* fill attrs (color or field) */
+	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
+	if (fill_color_node->field_flag)
+	{
+		xmlSetProp (node, "fill_color_field", fill_color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "fill_color", fill_color_node->color);
+	}
+	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
 	gl_label_object_get_affine (object, affine);
@@ -1260,7 +1365,7 @@ xml_create_object_line (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           dx, dy;
 	gdouble           line_width;
-	guint             line_color;
+	glColorNode      *line_color_node;
 	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -1279,9 +1384,19 @@ xml_create_object_line (xmlNodePtr     root,
 
 	/* line attrs */
 	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	line_color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_xml_set_prop_length (node, "line_width", line_width);
-	gl_xml_set_prop_uint_hex (node, "line_color", line_color);
+	
+	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	if (line_color_node->field_flag)
+	{
+		xmlSetProp (node, "line_color_field", line_color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "line_color", line_color_node->color);
+	}
+	gl_color_node_free (&line_color_node);
+
 
 	/* affine attrs */
 	gl_label_object_get_affine (object, affine);
@@ -1359,7 +1474,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gchar            *id;
 	gboolean          text_flag;
 	gboolean          checksum_flag;
-	guint             color;
+	glColorNode      *color_node;
 	guint             format_digits;
 	gdouble           affine[6];
 
@@ -1380,12 +1495,23 @@ xml_create_object_barcode (xmlNodePtr     root,
 	/* Barcode properties attrs */
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
 				    &id, &text_flag, &checksum_flag, &format_digits);
-	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	xmlSetProp (node, "style", id);
 	gl_xml_set_prop_boolean (node, "text", text_flag);
 	gl_xml_set_prop_boolean (node, "checksum", checksum_flag);
-	gl_xml_set_prop_uint_hex (node, "color", color);
+	
 	g_free (id);
+	
+	color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
+	if (color_node->field_flag)
+	{
+		xmlSetProp (node, "color_field", color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "color", color_node->color);
+	}
+	gl_color_node_free (&color_node);
+
 
 	/* data OR field attr */
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
@@ -1527,7 +1653,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
 	gboolean          font_italic_flag;
-	guint             color;
+	glColorNode      *color_node;
 	GtkJustification  just;
 	gdouble           text_line_spacing;
 	GList            *lines, *p_line, *p_node;
@@ -1542,13 +1668,24 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	text_line_spacing = gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object_text));
 	font_weight = gl_label_object_get_font_weight (GL_LABEL_OBJECT(object_text));
 	font_italic_flag = gl_label_object_get_font_italic_flag (GL_LABEL_OBJECT(object_text));
-	color = gl_label_object_get_text_color (GL_LABEL_OBJECT(object_text));
+	
+	color_node = gl_label_object_get_text_color (GL_LABEL_OBJECT(object_text));
+	if (color_node->field_flag)
+	{
+		xmlSetProp (node, "color_field", color_node->key);
+	}
+	else
+	{
+		gl_xml_set_prop_uint_hex (node, "color", color_node->color);
+	}
+	gl_color_node_free (&color_node);
+	
 	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object_text));
 	xmlSetProp (node, "font_family", font_family);
 	gl_xml_set_prop_double (node, "font_size", font_size);
 	xmlSetProp (node, "font_weight", gl_util_weight_to_string (font_weight));
 	gl_xml_set_prop_boolean (node, "font_italic", font_italic_flag);
-	gl_xml_set_prop_uint_hex (node, "color", color);
+	
 	gl_xml_set_prop_double (node, "line_spacing", text_line_spacing);
 
 	/* Build children. */

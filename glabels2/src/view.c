@@ -466,7 +466,7 @@ get_home_scale (glView *view)
 	gdouble    x_pixels_per_mm, y_pixels_per_mm;
 	gdouble    scale;
 
-	if (!gtk_widget_has_screen) return 1.0;
+	if (!gtk_widget_has_screen (GTK_WIDGET (view->canvas))) return 1.0;
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (view->canvas));
 
@@ -2795,7 +2795,7 @@ gl_view_set_selection_text_line_spacing (glView            *view,
 /*****************************************************************************/
 void
 gl_view_set_selection_text_color (glView            *view,
-				  guint              text_color)
+				  glColorNode       *text_color_node)
 {
 	GList *p;
 	glLabelObject *object;
@@ -2807,7 +2807,7 @@ gl_view_set_selection_text_color (glView            *view,
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_text_color (object, text_color);
+		gl_label_object_set_text_color (object, text_color_node);
 
 	}
 
@@ -2844,7 +2844,7 @@ gl_view_can_selection_fill (glView            *view)
 /*****************************************************************************/
 void
 gl_view_set_selection_fill_color (glView            *view,
-				  guint              fill_color)
+				  glColorNode       *fill_color_node)
 {
 	GList *p;
 	glLabelObject *object;
@@ -2856,7 +2856,7 @@ gl_view_set_selection_fill_color (glView            *view,
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_fill_color (object, fill_color);
+		gl_label_object_set_fill_color (object, fill_color_node);
 
 	}
 
@@ -2893,7 +2893,7 @@ gl_view_can_selection_line_color (glView            *view)
 /*****************************************************************************/
 void
 gl_view_set_selection_line_color (glView            *view,
-				  guint              line_color)
+				  glColorNode       *line_color_node)
 {
 	GList *p;
 	glLabelObject *object;
@@ -2905,7 +2905,7 @@ gl_view_set_selection_line_color (glView            *view,
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_line_color (object, line_color);
+		gl_label_object_set_line_color (object, line_color_node);
 
 	}
 
@@ -3222,14 +3222,18 @@ screen_changed_cb (glView          *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view->home_scale = get_home_scale (view);
+	if (gtk_widget_has_screen (GTK_WIDGET (view->canvas))) {
 
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  view->zoom * view->home_scale);
+		view->home_scale = get_home_scale (view);
 
-	if (view->zoom_to_fit_flag) {
-		/* Maintain best fit zoom */
-		gl_view_zoom_to_fit (view);
+		gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
+						  view->zoom * view->home_scale);
+
+		if (view->zoom_to_fit_flag) {
+			/* Maintain best fit zoom */
+			gl_view_zoom_to_fit (view);
+		}
+
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -4254,4 +4258,3 @@ guint gl_view_get_default_fill_color (glView            *view)
 
 	return view->default_fill_color;
 }
-

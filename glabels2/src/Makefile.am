@@ -227,6 +227,8 @@ glabels_batch_SOURCES = 		\
 	prefs-model.h 			\
 	util.c				\
 	util.h				\
+	color.c				\
+	color.h				\
 	debug.c 			\
 	debug.h 			\
 	$(BUILT_SOURCES)

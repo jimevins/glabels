@@ -39,7 +39,7 @@
 struct _glLabelBarcodePrivate {
 	glTextNode     *text_node;
 	gchar          *id;
-	guint           color;
+	glColorNode    *color_node;
 	gboolean        text_flag;
 	gboolean        checksum_flag;
 	guint           format_digits;
@@ -69,9 +69,9 @@ static void  get_size                       (glLabelObject       *object,
 					     gdouble             *h);
 
 static void  set_line_color                 (glLabelObject       *object,
-					     guint                line_color);
+					     glColorNode         *line_color);
 
-static guint get_line_color                 (glLabelObject       *object);
+static glColorNode *get_line_color           (glLabelObject       *object);
 
 
 
@@ -124,6 +124,7 @@ static void
 gl_label_barcode_instance_init (glLabelBarcode *lbc)
 {
 	lbc->private = g_new0 (glLabelBarcodePrivate, 1);
+	lbc->private->color_node = gl_color_node_new_default ();
 }
 
 static void
@@ -135,6 +136,7 @@ gl_label_barcode_finalize (GObject *object)
 
 	lbc = GL_LABEL_BARCODE (object);
 
+	gl_color_node_free (&(lbc->private->color_node));
 	gl_text_node_free (&lbc->private->text_node);
 	g_free (lbc->private);
 
@@ -169,7 +171,7 @@ copy (glLabelObject *dst_object,
 	gchar               *id;
 	gboolean             text_flag;
 	gboolean             checksum_flag;
-	guint                color;
+	glColorNode         *color_node;
 	guint                format_digits;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -179,12 +181,13 @@ copy (glLabelObject *dst_object,
 
 	text_node = gl_label_barcode_get_data (lbc);
 	gl_label_barcode_get_props (lbc, &id, &text_flag, &checksum_flag, &format_digits);
-	color = get_line_color (src_object);
+	color_node = get_line_color (src_object);
 
 	gl_label_barcode_set_data (new_lbc, text_node);
 	gl_label_barcode_set_props (new_lbc, id, text_flag, checksum_flag, format_digits);
-	set_line_color (dst_object, color);
+	set_line_color (dst_object, color_node);
 
+	gl_color_node_free (&color_node);
 	gl_text_node_free (&text_node);
 	g_free (id);
 
@@ -331,14 +334,16 @@ get_size (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_color (glLabelObject *object,
-		guint          line_color)
+		glColorNode   *line_color_node)
 {
 	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
 
 	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
 
-	if ( lbarcode->private->color != line_color ) {
-		lbarcode->private->color = line_color;
+	if ( !gl_color_node_equal(lbarcode->private->color_node, line_color_node) ) {
+		
+		gl_color_node_free (&(lbarcode->private->color_node));
+		lbarcode->private->color_node = gl_color_node_dup (line_color_node);
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbarcode));
 	}
 }
@@ -346,13 +351,12 @@ set_line_color (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line color method.                                          */
 /*---------------------------------------------------------------------------*/
-static guint
+static glColorNode*
 get_line_color (glLabelObject *object)
 {
 	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
 
 	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
 
-	return lbarcode->private->color;
+	return gl_color_node_dup (lbarcode->private->color_node);
 }
-

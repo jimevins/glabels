@@ -67,6 +67,16 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Herma 5079: CD/DVD Labels, 2 per sheet                              -->
+  <!-- =================================================================== -->
+  <Template name="Herma 5079" size="A4" description="CD/DVD Labels">
+    <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="133.228pt" y0="46.7717pt" dx="346.819pt" dy="419.528pt"/>
+    </Label-cd>
+  </Template>
+
   <!-- ===================================================================-->
   <!-- Neato brand CD/DVD Labels (face only), 2 per sheet                 -->
   <!-- ===================================================================-->
@@ -312,6 +322,17 @@
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="34.5" y0="47" dx="0" dy="0"/>
       <Layout nx="1" ny="1" x0="223" y0="459" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Pressit CD Labels/                                                  -->
+  <!-- =================================================================== -->
+  <Template name="Pressit  50blank" size="A4" _description="CD Labels">
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="1" x0="30.096pt" y0="70.416pt" dx="351pt" dy="351pt"/>
+      <Layout nx="1" ny="1" x0="233.208pt" y0="440.712pt" dx="351pt" dy="351pt"/>
     </Label-cd>
   </Template>
 

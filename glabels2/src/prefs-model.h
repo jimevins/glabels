@@ -89,7 +89,6 @@ struct _glPrefsModel {
 
 	/* User Interface/Drawing Toolbar */
 	gboolean          drawing_toolbar_visible;
-	glToolbarSetting  drawing_toolbar_buttons_style; 
 	gboolean	  drawing_toolbar_view_tooltips;
 
 	/* User Interface/Property Toolbar */

@@ -44,6 +44,7 @@ typedef struct _glView      glView;
 typedef struct _glViewClass glViewClass;
 
 #include "view-object.h"
+#include "color.h"
 
 struct _glView {
 	GtkVBox           parent_widget;
@@ -232,17 +233,17 @@ void       gl_view_set_selection_text_alignment   (glView           *view,
 						   GtkJustification  text_alignment);
 
 void       gl_view_set_selection_text_color       (glView           *view,
-						   guint             text_color);
+						   glColorNode      *text_color_node);
 
 gboolean   gl_view_can_selection_fill             (glView           *view);
 
 void       gl_view_set_selection_fill_color       (glView           *view,
-						   guint             fill_color);
+						   glColorNode      *fill_color);
 
 gboolean   gl_view_can_selection_line_color       (glView           *view);
 
 void       gl_view_set_selection_line_color       (glView           *view,
-						   guint             line_color);
+						   glColorNode      *line_color_node);
 
 gboolean   gl_view_can_selection_line_width       (glView           *view);
 
