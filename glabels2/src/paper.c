@@ -62,11 +62,17 @@ static GList *read_paper_files_from_dir (GList       *papers,
 void
 gl_paper_init (void)
 {
-	GList *page_sizes, *p;
+	glPaper *other;
 
 	gl_debug (DEBUG_PAPER, "START");
 
 	papers = read_papers ();
+
+	/* Create and append an "Other" entry. */
+	other = g_new0 (glPaper,1);
+	other->id   = g_strdup ("Other");
+	other->name = g_strdup (_("Other"));
+	papers = g_list_append (papers, other);
 
 	gl_debug (DEBUG_PAPER, "END");
 }
@@ -87,8 +93,6 @@ gl_paper_get_id_list (void)
 		paper = (glPaper *)p->data;
 		ids = g_list_append (ids, g_strdup (paper->id));
 	}
-
-	ids = g_list_append (ids, g_strdup ("Other"));
 
 	gl_debug (DEBUG_PAPER, "END");
 	return ids;
@@ -131,8 +135,6 @@ gl_paper_get_name_list (void)
 		paper = (glPaper *)p->data;
 		names = g_list_append (names, g_strdup (paper->name));
 	}
-
-	names = g_list_append (names, g_strdup ("Other"));
 
 	gl_debug (DEBUG_PAPER, "END");
 	return names;
