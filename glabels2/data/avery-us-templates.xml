@@ -457,6 +457,49 @@
   </Template>
 
 
+  <!-- ******************************************************************** -->
+  <!-- Avery labels in tech builitin 152 				    -->
+  <!-- http://www.avery.com/help/tech_bulletin.jsp?tech_bull_code=152       -->
+  <!-- ******************************************************************** -->
+  <Template name="Avery LSK-8" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="0" width="1.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template name="Avery LSK-8.5" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="1" width="1.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <Template name="Avery LSK-5" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="2" width="1.75in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template name="Avery LSK-5.5" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="3" width="1.75in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <Template name="Avery LSK-3" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="4" width="3.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template name="Avery LSK-3.5" size="US-Letter" description="Divider Labels">
+    <Label-rectangle id="5" width="3.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
 
 </Glabels-templates>
 

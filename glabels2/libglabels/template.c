@@ -927,21 +927,16 @@ read_template_files_from_dir (GList       *templates,
 		extension = strrchr (filename, '.');
 		extension2 = strrchr (filename, '-');
 
-		if (extension != NULL) {
+		if ( (extension && (g_strcasecmp (extension, ".template") == 0)) ||
+		     (extension2 && (g_strcasecmp (extension2, "-templates.xml") == 0)) ) {
 
-			if ( (g_strcasecmp (extension, ".template") == 0)
-			     || (g_strcasecmp (extension2, "-templates.xml") == 0) ) {
+			full_filename = g_build_filename (dirname, filename, NULL);
+			new_templates =
+				gl_xml_template_read_templates_from_file (full_filename);
+			g_free (full_filename);
 
-				full_filename =
-				    g_build_filename (dirname, filename, NULL);
-				new_templates =
-				    gl_xml_template_read_templates_from_file (full_filename);
-				g_free (full_filename);
-
-				templates = g_list_concat (templates, new_templates);
-				new_templates = NULL;
-			}
-
+			templates = g_list_concat (templates, new_templates);
+			new_templates = NULL;
 		}
 
 	}

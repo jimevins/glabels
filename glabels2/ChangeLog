@@ -1,3 +1,19 @@
+2004-01-31  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/avery-us-templates.xml:
+		Added entries for "LSK-3," "LSK-5," and "LSK-8."  Submitted by JBadger.
+	
+	* libglabels/template.c: (read_template_files_from_dir):
+		Corrected problem with testing for extensions.
+	
+	* src/object-editor.glade:
+		Corrected grouping of radio buttons in barcode data page.
+
+	* src/print.c: (draw_barcode_object):
+	* src/view-barcode.c: (draw_barcode):
+		Corrected problem with calculation of y_offset for locating characters.
+
 2004-01-24  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:

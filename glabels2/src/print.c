@@ -1034,12 +1034,12 @@ draw_barcode_object (PrintInfo      *pi,
 		gnome_print_setopacity (pi->pc,
 					GL_COLOR_F_ALPHA (color));
 
-		y_offset = 12.0 - gnome_font_get_descender (font);
+		y_offset = 12.0 - fabs (gnome_font_get_descender (font));
 		gnome_print_moveto (pi->pc, 0.0, y_offset);
 
 		gnome_print_gsave (pi->pc);
 		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, _("Invalid barcode"));
+		gnome_print_show (pi->pc, _("Invalid barcode data"));
 		gnome_print_grestore (pi->pc);
 
 	} else {
@@ -1076,9 +1076,9 @@ draw_barcode_object (PrintInfo      *pi,
 						GL_COLOR_F_ALPHA (color));
 
 			y_offset =
-			    bchar->y + bchar->fsize -
-			    gnome_font_get_descender (font);
-			gnome_print_moveto (pi->pc, bchar->x, y_offset);
+			    bchar->fsize - fabs (gnome_font_get_descender (font));
+
+			gnome_print_moveto (pi->pc, bchar->x, bchar->y+y_offset);
 
 			cstring = g_strdup_printf ("%c", bchar->c);
 			gnome_print_gsave (pi->pc);

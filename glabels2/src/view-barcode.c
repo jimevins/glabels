@@ -568,14 +568,14 @@ draw_barcode (glViewBarcode *view_barcode)
 	gbc = gl_barcode_new (style, text_flag, checksum_flag, w, h, digits);
 	if (gbc == NULL) {
 
-		cstring = _("Invalid barcode");
+		cstring = _("Invalid barcode data");
 		glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
 								  color,
 								  0.0, 0.0,
 								  cstring,
 								  strlen
 								  (cstring));
-		y_offset = 10.0 - gnome_font_get_descender (font);
+		y_offset = 10.0 - fabs (gnome_font_get_descender (font));
 		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
 						gl_canvas_hacktext_get_type (),
 						"x", 0.0,
@@ -622,7 +622,8 @@ draw_barcode (glViewBarcode *view_barcode)
 									   c),
 									  1);
 			y_offset =
-			    bchar->fsize - gnome_font_get_descender (font);
+			    bchar->fsize - fabs (gnome_font_get_descender (font));
+
 			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
 							gl_canvas_hacktext_get_type (),
 							"x", bchar->x,
