@@ -51,61 +51,61 @@ static GList *templates = NULL;
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glTemplate *template_full_page           (const gchar *page_size);
+static glTemplate *template_full_page           (const gchar            *page_size);
 
 static GList      *read_templates               (void);
 
 static gchar      *get_home_data_dir            (void);
-static GList      *read_template_files_from_dir (GList *templates,
-						 const gchar *dirname);
-static GList      *read_templates_from_file     (GList *templates,
-						 gchar *xml_filename);
+static GList      *read_template_files_from_dir (GList                  *templates,
+						 const gchar            *dirname);
+static GList      *read_templates_from_file     (GList                  *templates,
+						 gchar                  *xml_filename);
 
-static void        xml_parse_label              (xmlNodePtr label_node,
-						 glTemplate *template);
-static void        xml_parse_layout             (xmlNodePtr layout_node,
-						 glTemplate *template);
-static void        xml_parse_markup             (xmlNodePtr markup_node,
-						 glTemplate *template);
-static void        xml_parse_alias              (xmlNodePtr alias_node,
-						 glTemplate *template);
+static void        xml_parse_label              (xmlNodePtr              label_node,
+						 glTemplate             *template);
+static void        xml_parse_layout             (xmlNodePtr              layout_node,
+						 glTemplate             *template);
+static void        xml_parse_markup             (xmlNodePtr              markup_node,
+						 glTemplate             *template);
+static void        xml_parse_alias              (xmlNodePtr              alias_node,
+						 glTemplate             *template);
 
-static void        xml_add_label                (const glTemplate *template,
-						 xmlNodePtr root,
-						 xmlNsPtr ns);
-static void        xml_add_layout               (glTemplateLayout *layout,
-						 xmlNodePtr root,
-						 xmlNsPtr ns);
+static void        xml_add_label                (const glTemplate       *template,
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
+static void        xml_add_layout               (glTemplateLayout       *layout,
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
 static void        xml_add_markup_margin        (glTemplateMarkupMargin *margin,
-						 xmlNodePtr root,
-						 xmlNsPtr ns);
-static void        xml_add_markup_line          (glTemplateMarkupLine *line,
-						 xmlNodePtr root,
-						 xmlNsPtr ns);
-static void        xml_add_alias                (gchar *name,
-						 xmlNodePtr root,
-						 xmlNsPtr ns);
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
+static void        xml_add_markup_line          (glTemplateMarkupLine   *line,
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
+static void        xml_add_alias                (gchar                  *name,
+						 xmlNodePtr              root,
+						 xmlNsPtr                ns);
 
-static gint compare_origins (gconstpointer a,
-			     gconstpointer b,
-			     gpointer user_data);
+static gint        compare_origins              (gconstpointer           a,
+						 gconstpointer           b,
+						 gpointer                user_data);
 
-static glTemplateLayout *layout_new  (gdouble nx,
-				      gdouble ny,
-				      gdouble x0,
-				      gdouble y0,
-				      gdouble dx,
-				      gdouble dy);
-static glTemplateLayout *layout_dup  (glTemplateLayout *orig_layout);
-static void              layout_free (glTemplateLayout **layout);
+static glTemplateLayout *layout_new             (gdouble                 nx,
+						 gdouble                 ny,
+						 gdouble                 x0,
+						 gdouble                 y0,
+						 gdouble                 dx,
+						 gdouble                 dy);
+static glTemplateLayout *layout_dup             (glTemplateLayout       *orig_layout);
+static void              layout_free            (glTemplateLayout      **layout);
 
-static glTemplateMarkup *markup_margin_new  (gdouble size);
-static glTemplateMarkup *markup_line_new    (gdouble x1,
-					     gdouble y1,
-					     gdouble x2,
-					     gdouble y2);
-static glTemplateMarkup *markup_dup         (glTemplateMarkup *orig_markup);
-static void              markup_free        (glTemplateMarkup **markup);
+static glTemplateMarkup *markup_margin_new      (gdouble                 size);
+static glTemplateMarkup *markup_line_new        (gdouble                 x1,
+						 gdouble                 y1,
+						 gdouble                 x2,
+						 gdouble                 y2);
+static glTemplateMarkup *markup_dup             (glTemplateMarkup       *orig_markup);
+static void              markup_free            (glTemplateMarkup      **markup);
 
 /*****************************************************************************/
 /* Initialize module.                                                        */
@@ -121,8 +121,10 @@ gl_template_init (void)
 
 	page_sizes = gl_template_get_page_size_list ();
 	for ( p=page_sizes; p != NULL; p=p->next ) {
-		templates = g_list_append (templates,
-					   template_full_page (p->data));
+		if ( g_strcasecmp(p->data, "Other") != 0 ) {
+			templates = g_list_append (templates,
+						   template_full_page (p->data));
+		}
 	}
 	gl_template_free_page_size_list (&page_sizes);
 
@@ -135,8 +137,8 @@ gl_template_init (void)
 GList *
 gl_template_get_page_size_list (void)
 {
-	GList *names = NULL;
-	GList *p, *paper_list;
+	GList           *names = NULL;
+	GList           *p, *paper_list;
 	GnomePrintPaper *paper;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -149,6 +151,8 @@ gl_template_get_page_size_list (void)
 		}
 	}
 
+	names = g_list_append (names, g_strdup ("Other"));
+
 	gl_debug (DEBUG_TEMPLATE, "END");
 	return names;
 }
@@ -157,7 +161,7 @@ gl_template_get_page_size_list (void)
 /* Free a list of page size names.                                           */
 /*****************************************************************************/
 void
-gl_template_free_page_size_list (GList ** names)
+gl_template_free_page_size_list (GList **names)
 {
 	GList *p_name;
 
@@ -178,12 +182,12 @@ gl_template_free_page_size_list (GList ** names)
 /* Get a list of valid template names for given page size                    */
 /*****************************************************************************/
 GList *
-gl_template_get_name_list (const gchar * page_size)
+gl_template_get_name_list (const gchar *page_size)
 {
-	GList *p_tmplt, *p_name;
+	GList      *p_tmplt, *p_name;
 	glTemplate *template;
-	gchar *str;
-	GList *names = NULL;
+	gchar      *str;
+	GList      *names = NULL;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -212,7 +216,7 @@ gl_template_get_name_list (const gchar * page_size)
 /* Free a list of template names.                                            */
 /*****************************************************************************/
 void
-gl_template_free_name_list (GList ** names)
+gl_template_free_name_list (GList **names)
 {
 	GList *p_name;
 
@@ -233,11 +237,11 @@ gl_template_free_name_list (GList ** names)
 /* Return a template structure from a name.                                  */
 /*****************************************************************************/
 glTemplate *
-gl_template_from_name (const gchar * name)
+gl_template_from_name (const gchar *name)
 {
-	GList *p_tmplt, *p_name;
-	glTemplate *template;
-	gchar **split_name;
+	GList       *p_tmplt, *p_name;
+	glTemplate  *template;
+	gchar      **split_name;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -287,6 +291,8 @@ glTemplate *gl_template_dup (const glTemplate *orig_template)
 	}
 	template->description = g_strdup (orig_template->description);
 	template->page_size   = g_strdup (orig_template->page_size);
+	template->page_width  = orig_template->page_width;
+	template->page_height = orig_template->page_height;
 
 	template->label       = orig_template->label;
 
@@ -361,7 +367,7 @@ static glTemplate *
 template_full_page (const gchar *page_size)
 {
 	const GnomePrintPaper *paper;
-	glTemplate *template;
+	glTemplate            *template;
 
 	paper = gnome_print_paper_get_by_name (page_size);
 	if ( paper == NULL ) {
@@ -374,6 +380,8 @@ template_full_page (const gchar *page_size)
 					 g_strdup_printf(_("Generic %s full page"),
 							 page_size));
 	template->page_size    = g_strdup(page_size);
+	template->page_width   = paper->width;
+	template->page_height  = paper->height;
 	template->description  = g_strdup(FULL_PAGE);
 
 	template->label.style  = GL_TEMPLATE_STYLE_RECT;
@@ -439,13 +447,13 @@ get_home_data_dir (void)
 /* PRIVATE.  Read all template files from given directory.  Append to list. */
 /*--------------------------------------------------------------------------*/
 static GList *
-read_template_files_from_dir (GList * templates,
-			      const gchar * dirname)
+read_template_files_from_dir (GList       *templates,
+			      const gchar *dirname)
 {
-	GDir *dp;
+	GDir        *dp;
 	const gchar *filename, *extension;
-	gchar *full_filename = NULL;
-	GError *gerror = NULL;
+	gchar       *full_filename = NULL;
+	GError      *gerror = NULL;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -490,11 +498,11 @@ read_template_files_from_dir (GList * templates,
 /* PRIVATE.  Read templates from template file.                             */
 /*--------------------------------------------------------------------------*/
 static GList *
-read_templates_from_file (GList * templates,
-			  gchar * xml_filename)
+read_templates_from_file (GList *templates,
+			  gchar *xml_filename)
 {
-	xmlDocPtr doc;
-	xmlNodePtr root, node;
+	xmlDocPtr   doc;
+	xmlNodePtr  root, node;
 	glTemplate *template;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -546,8 +554,9 @@ read_templates_from_file (GList * templates,
 glTemplate *
 gl_template_xml_parse_sheet (xmlNodePtr sheet_node)
 {
-	glTemplate *template;
-	xmlNodePtr node;
+	glTemplate            *template;
+	xmlNodePtr             node;
+	const GnomePrintPaper *paper;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -559,9 +568,23 @@ gl_template_xml_parse_sheet (xmlNodePtr sheet_node)
 
 	template->page_size = xmlGetProp (sheet_node, "size");
 	if ( strcmp (template->page_size,"US-Letter") == 0 ) {
-		/* Compatibility with old pre-1.0 template files.*/
 		template->page_size = "US Letter";
 	}
+	if (g_strcasecmp (template->page_size, "Other") == 0) {
+		template->page_width =
+		    g_strtod (xmlGetProp (sheet_node, "width"), NULL);
+		template->page_height =
+		    g_strtod (xmlGetProp (sheet_node, "height"), NULL);
+	} else {
+		paper = gnome_print_paper_get_by_name (template->page_size);
+		if (paper != NULL) {
+			template->page_width  = paper->width;
+			template->page_height = paper->height;
+		} else {
+			g_warning (_("Unknown page size \"%s\""), template->page_size);
+		}
+	}
+
 	template->description = xmlGetProp (sheet_node, "description");
 
 	for (node = sheet_node->xmlChildrenNode; node != NULL;
@@ -586,8 +609,8 @@ gl_template_xml_parse_sheet (xmlNodePtr sheet_node)
 /* PRIVATE.  Parse XML Sheet->Label Node.                                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_label (xmlNodePtr label_node,
-		 glTemplate * template)
+xml_parse_label (xmlNodePtr  label_node,
+		 glTemplate *template)
 {
 	xmlNodePtr  node;
 	gchar      *style;
@@ -663,11 +686,11 @@ xml_parse_label (xmlNodePtr label_node,
 /* PRIVATE.  Parse XML Sheet->Label->Layout Node.                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_layout (xmlNodePtr layout_node,
-		  glTemplate * template)
+xml_parse_layout (xmlNodePtr  layout_node,
+		  glTemplate *template)
 {
-	gint nx, ny;
-	gdouble x0, y0, dx, dy;
+	gint nx,   ny;
+	gdouble    x0, y0, dx, dy;
 	xmlNodePtr node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -697,13 +720,13 @@ xml_parse_layout (xmlNodePtr layout_node,
 /* PRIVATE.  Parse XML Sheet->Label->Markup Node.                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup (xmlNodePtr markup_node,
-		  glTemplate * template)
+xml_parse_markup (xmlNodePtr  markup_node,
+		  glTemplate *template)
 {
-	gchar *type;
-	gdouble size;
-	gdouble x1, y1, x2, y2;
-	xmlNodePtr node;
+	gchar      *type;
+	gdouble     size;
+	gdouble     x1, y1, x2, y2;
+	xmlNodePtr  node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -737,8 +760,8 @@ xml_parse_markup (xmlNodePtr markup_node,
 /* PRIVATE.  Parse XML Sheet->Alias Node.                                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_alias (xmlNodePtr alias_node,
-		 glTemplate * template)
+xml_parse_alias (xmlNodePtr  alias_node,
+		 glTemplate *template)
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -752,19 +775,32 @@ xml_parse_alias (xmlNodePtr alias_node,
 /* Add XML Template Node                                                    */
 /****************************************************************************/
 void
-gl_template_xml_add_sheet (const glTemplate * template,
-			   xmlNodePtr root,
-			   xmlNsPtr ns)
+gl_template_xml_add_sheet (const glTemplate *template,
+			   xmlNodePtr        root,
+			   xmlNsPtr          ns)
 {
-	xmlNodePtr node;
-	GList *p;
+	xmlNodePtr  node;
+	GList      *p;
+	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	node = xmlNewChild (root, ns, "Sheet", NULL);
 
 	xmlSetProp (node, "name", template->name->data);
+
 	xmlSetProp (node, "size", template->page_size);
+	if (g_strcasecmp (template->page_size, "Other") == 0) {
+
+		string = g_strdup_printf ("%g", template->page_width);
+		xmlSetProp (node, "width", string);
+		g_free (string);
+
+		string = g_strdup_printf ("%g", template->page_height);
+		xmlSetProp (node, "height", string);
+		g_free (string);
+	}
+
 	xmlSetProp (node, "description", template->description);
 
 	xml_add_label (template, node, ns);
@@ -781,12 +817,12 @@ gl_template_xml_add_sheet (const glTemplate * template,
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_label (const glTemplate *template,
-	       xmlNodePtr root,
-	       xmlNsPtr ns)
+	       xmlNodePtr        root,
+	       xmlNsPtr          ns)
 {
-	xmlNodePtr node;
-	gchar *string;
-	GList *p;
+	xmlNodePtr        node;
+	gchar            *string;
+	GList            *p;
 	glTemplateMarkup *markup;
 	glTemplateLayout *layout;
 
@@ -869,11 +905,11 @@ xml_add_label (const glTemplate *template,
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_layout (glTemplateLayout *layout,
-		xmlNodePtr root,
-		xmlNsPtr ns)
+		xmlNodePtr        root,
+		xmlNsPtr          ns)
 {
-	xmlNodePtr node;
-	gchar *string;
+	xmlNodePtr  node;
+	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -905,11 +941,11 @@ xml_add_layout (glTemplateLayout *layout,
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_margin (glTemplateMarkupMargin *margin,
-		       xmlNodePtr root,
-		       xmlNsPtr ns)
+		       xmlNodePtr              root,
+		       xmlNsPtr                ns)
 {
-	xmlNodePtr node;
-	gchar *string;
+	xmlNodePtr  node;
+	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -928,11 +964,11 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_line (glTemplateMarkupLine *line,
-		     xmlNodePtr root,
-		     xmlNsPtr ns)
+		     xmlNodePtr            root,
+		     xmlNsPtr              ns)
 {
-	xmlNodePtr node;
-	gchar *string;
+	xmlNodePtr  node;
+	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -959,9 +995,9 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 /* PRIVATE.  Add XML Sheet->Alias Node.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-xml_add_alias (gchar *name,
-	       xmlNodePtr root,
-	       xmlNsPtr ns)
+xml_add_alias (gchar      *name,
+	       xmlNodePtr  root,
+	       xmlNsPtr    ns)
 {
 	xmlNodePtr node;
 
@@ -979,10 +1015,10 @@ xml_add_alias (gchar *name,
 gchar *
 gl_template_get_label_size_desc (const glTemplate *template)
 {
-	glPrefsUnits units;
-	const gchar *units_string;
-	gdouble units_per_point;
-	gchar *string = NULL;
+	glPrefsUnits  units;
+	const gchar  *units_string;
+	gdouble       units_per_point;
+	gchar        *string = NULL;
 
 	units           = gl_prefs_get_units ();
 	units_string    = gl_prefs_get_units_string ();
@@ -1083,8 +1119,8 @@ gl_template_get_label_size (const glTemplate *template,
 gint
 gl_template_get_n_labels (const glTemplate *template)
 {
-	gint n_labels = 0;
-	GList *p;
+	gint              n_labels = 0;
+	GList            *p;
 	glTemplateLayout *layout;
 
 	for ( p=template->label.any.layouts; p != NULL; p=p->next ) {
@@ -1102,9 +1138,9 @@ gl_template_get_n_labels (const glTemplate *template)
 glTemplateOrigin *
 gl_template_get_origins (const glTemplate *template)
 {
-	gint i_label, n_labels, ix, iy;
+	gint              i_label, n_labels, ix, iy;
 	glTemplateOrigin *origins;
-	GList *p;
+	GList            *p;
 	glTemplateLayout *layout;
 
 	n_labels = gl_template_get_n_labels (template);
@@ -1134,7 +1170,7 @@ gl_template_get_origins (const glTemplate *template)
 static gint
 compare_origins (gconstpointer a,
 		 gconstpointer b,
-		 gpointer user_data)
+		 gpointer      user_data)
 {
 	const glTemplateOrigin *a_origin = a, *b_origin = b;
 
@@ -1159,9 +1195,9 @@ compare_origins (gconstpointer a,
 gchar *
 gl_template_get_layout_desc (const glTemplate *template)
 {
-	gint n_labels;
+	gint              n_labels;
 	glTemplateLayout *layout;
-	gchar *string;
+	gchar            *string;
 
 	n_labels = gl_template_get_n_labels (template);
 

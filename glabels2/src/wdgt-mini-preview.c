@@ -261,38 +261,37 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
 /****************************************************************************/
 /* Set label for mini-preview to determine geometry.                        */
 /****************************************************************************/
-void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview * preview,
-				     gchar *name)
+void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview *preview,
+				     gchar             *name)
 {
 	glTemplate *template;
-	gchar *page_size;
-	const GnomePrintPaper *paper = NULL;
-	gdouble paper_width, paper_height;
-	gdouble canvas_scale;
-	gdouble w, h;
-	gdouble shadow_x, shadow_y;
+	gchar      *page_size;
+	gdouble     canvas_scale;
+	gdouble     w, h;
+	gdouble     shadow_x, shadow_y;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	/* Fetch template */
 	template = gl_template_from_name (name);
 
+	gl_debug (DEBUG_MINI_PREVIEW, "page_size = %s, page_width = %g, page_height = %g",
+		  template->page_size, template->page_width, template->page_height);
+
 	/* get paper size and set scale */
-	paper = gnome_print_paper_get_by_name (template->page_size);
-	paper_width = paper->width;
-	paper_height = paper->height;
 	w = preview->width - 4 - 2*SHADOW_X_OFFSET;
 	h = preview->height - 4 - 2*SHADOW_Y_OFFSET;
-	if ( (w/paper_width) > (h/paper_height) ) {
-		canvas_scale = h / paper_height;
+	if ( (w/template->page_width) > (h/template->page_height) ) {
+		canvas_scale = h / template->page_height;
 	} else {
-		canvas_scale = w / paper_width;
+		canvas_scale = w / template->page_width;
 	}
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (preview->canvas),
 					  canvas_scale);
 #if 0
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
-					0.0, 0.0, paper_width, paper_height);
+					0.0, 0.0,
+					template->page_width, template->page_height);
 #else
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
 					0.0, 0.0,
@@ -306,14 +305,14 @@ void gl_wdgt_mini_preview_set_label (glWdgtMiniPreview * preview,
 	gnome_canvas_item_set (preview->shadow_item,
 			       "x1", shadow_x,
 			       "y1", shadow_y,
-			       "x2", shadow_x + paper_width,
-			       "y2", shadow_y + paper_height,
+			       "x2", shadow_x + template->page_width,
+			       "y2", shadow_y + template->page_height,
 			       NULL);
 
 	/* update paper outline */
 	gnome_canvas_item_set (preview->paper_item,
-			       "x2", paper_width,
-			       "y2", paper_height,
+			       "x2", template->page_width,
+			       "y2", template->page_height,
 			       NULL);
 
 	/* update label items */
@@ -340,14 +339,8 @@ mini_outline_list_new (GnomeCanvas *canvas,
 	gint                   i, n_labels;
 	glTemplateOrigin      *origins;
 	gdouble                x1, y1, x2, y2, w, h;
-	const GnomePrintPaper *paper = NULL;
-	gdouble                paper_height;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	/* get paper height */
-	paper = gnome_print_paper_get_by_name  (template->page_size);
-	paper_height = paper->height;
 
 	group = gnome_canvas_root (canvas);
 

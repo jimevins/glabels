@@ -26,6 +26,8 @@
 #include <gnome.h>
 #include "label.h"
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_WDGT_MINI_PREVIEW (gl_wdgt_mini_preview_get_type ())
 #define GL_WDGT_MINI_PREVIEW(obj) \
         (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_MINI_PREVIEW, glWdgtMiniPreview ))
@@ -66,15 +68,17 @@ struct _glWdgtMiniPreviewClass {
 			 gpointer user_data);
 };
 
-extern guint     gl_wdgt_mini_preview_get_type   (void);
+guint      gl_wdgt_mini_preview_get_type        (void);
 
-extern GtkWidget *gl_wdgt_mini_preview_new       (gint height, gint width);
+GtkWidget *gl_wdgt_mini_preview_new             (gint               height,
+						 gint               width);
 
-extern void gl_wdgt_mini_preview_set_label       (glWdgtMiniPreview * preview,
-						  gchar * name);
+void       gl_wdgt_mini_preview_set_label       (glWdgtMiniPreview *preview,
+						 gchar             *name);
 
-extern void gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview * preview,
-						  gint first_label,
-						  gint last_label);
+void       gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview *preview,
+						 gint               first_label,
+						 gint               last_label);
+G_END_DECLS
 
 #endif

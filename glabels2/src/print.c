@@ -383,9 +383,8 @@ static PrintInfo *
 print_info_new (GnomePrintMaster *master,
 		glLabel          *label)
 {
-	PrintInfo *pi = g_new0 (PrintInfo, 1);
-	glTemplate *template;
-	const GnomePrintPaper *paper = NULL;
+	PrintInfo            *pi = g_new0 (PrintInfo, 1);
+	glTemplate           *template;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -404,34 +403,31 @@ print_info_new (GnomePrintMaster *master,
 		gl_debug (DEBUG_PRINT,
 			  "setting page size = \"%s\"", template->page_size);
 
-
-		/* Currently cannot set page size directly from name, */
-		/* since we must set Ids not Names and there is no */
-		/* way to do the reverse lookup of Id from Name. */
-		/* Sometimes they are the same, but not always */
-		/* (e.g. for the name "US Letter" id="USLetter" */
-		/* So we use the "Custom" Id. */
-		paper = gnome_print_paper_get_by_name (template->page_size);
+                /* Currently cannot set page size directly from name, */
+                /* since we must set Ids not Names and there is no */
+                /* way to do the reverse lookup of Id from Name. */
+                /* Sometimes they are the same, but not always */
+                /* (e.g. for the name "US Letter" id="USLetter" */
+                /* So we always use the "Custom" Id. */
 		gnome_print_config_set (pi->config,
 					GNOME_PRINT_KEY_PAPER_SIZE,
 					"Custom");
 		gnome_print_config_set_length (pi->config,
 					       GNOME_PRINT_KEY_PAPER_WIDTH,
-					       paper->width,
+					       template->page_width,
 					       GNOME_PRINT_PS_UNIT);
 		gnome_print_config_set_length (pi->config,
 					       GNOME_PRINT_KEY_PAPER_HEIGHT,
-					       paper->height,
+					       template->page_height,
 					       GNOME_PRINT_PS_UNIT);
 	} else {
 		g_warning ("Cannot determine correct page size.");
-		paper = gnome_print_paper_get_by_name (GL_PRINT_DEFAULT_PAPER);
 		gnome_print_config_set (pi->config,
 					GNOME_PRINT_KEY_PAPER_SIZE,
 					GL_PRINT_DEFAULT_PAPER);
 	}
-	pi->page_width = paper->width;
-	pi->page_height = paper->height;
+	pi->page_width  = template->page_width;
+	pi->page_height = template->page_height;
 
 	pi->template = template;
 	pi->label_rotate_flag = gl_label_get_rotate_flag (label);

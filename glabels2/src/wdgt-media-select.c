@@ -58,19 +58,19 @@ static gint wdgt_media_select_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_media_select_class_init    (glWdgtMediaSelectClass * class);
-static void gl_wdgt_media_select_instance_init (glWdgtMediaSelect * media_select);
-static void gl_wdgt_media_select_finalize      (GObject * object);
+static void gl_wdgt_media_select_class_init    (glWdgtMediaSelectClass *class);
+static void gl_wdgt_media_select_instance_init (glWdgtMediaSelect      *media_select);
+static void gl_wdgt_media_select_finalize      (GObject                *object);
 
-static void gl_wdgt_media_select_construct     (glWdgtMediaSelect * media_select);
+static void gl_wdgt_media_select_construct     (glWdgtMediaSelect      *media_select);
 
-static void page_size_entry_changed_cb         (GtkEntry * entry,
-						gpointer user_data);
-static void template_entry_changed_cb          (GtkEntry * entry,
-						gpointer user_data);
+static void page_size_entry_changed_cb         (GtkEntry               *entry,
+						gpointer                user_data);
+static void template_entry_changed_cb          (GtkEntry               *entry,
+						gpointer                user_data);
 
-static void details_update                     (glWdgtMediaSelect * media_select,
-						gchar * name);
+static void details_update                     (glWdgtMediaSelect      *media_select,
+						gchar                  *name);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -103,7 +103,7 @@ gl_wdgt_media_select_get_type (void)
 }
 
 static void
-gl_wdgt_media_select_class_init (glWdgtMediaSelectClass * class)
+gl_wdgt_media_select_class_init (glWdgtMediaSelectClass *class)
 {
 	GObjectClass *object_class;
 
@@ -128,7 +128,7 @@ gl_wdgt_media_select_class_init (glWdgtMediaSelectClass * class)
 }
 
 static void
-gl_wdgt_media_select_instance_init (glWdgtMediaSelect * media_select)
+gl_wdgt_media_select_instance_init (glWdgtMediaSelect *media_select)
 {
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -146,7 +146,7 @@ gl_wdgt_media_select_instance_init (glWdgtMediaSelect * media_select)
 }
 
 static void
-gl_wdgt_media_select_finalize (GObject * object)
+gl_wdgt_media_select_finalize (GObject *object)
 {
 	glWdgtMediaSelect *media_select;
 	glWdgtMediaSelectClass *class;
@@ -183,13 +183,13 @@ gl_wdgt_media_select_new (void)
 /* PRIVATE.  Construct composite widget.                                    */
 /*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
+gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
-	GtkWidget *whbox, *wvbox, *wcombo, *wvbox1, *whbox1, *wlabel;
+	GtkWidget    *whbox, *wvbox, *wcombo, *wvbox1, *whbox1, *wlabel;
 	GtkSizeGroup *label_size_group;
-	gchar *name;
-	GList *template_names, *page_sizes = NULL;
-	const gchar *page_size;
+	gchar        *name;
+	GList        *template_names, *page_sizes = NULL;
+	const gchar  *page_size;
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -324,12 +324,12 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-page_size_entry_changed_cb (GtkEntry * entry,
-			    gpointer user_data)
+page_size_entry_changed_cb (GtkEntry *entry,
+			    gpointer  user_data)
 {
 	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
-	gchar *page_size;
-	GList *template_names;
+	gchar             *page_size;
+	GList             *template_names;
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -339,6 +339,9 @@ page_size_entry_changed_cb (GtkEntry * entry,
 	if ( strlen(page_size) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "page_size = \"%s\"", page_size);
 		template_names = gl_template_get_name_list (page_size);
+		if (template_names == NULL) {
+			template_names = g_list_append (template_names, g_strdup(""));
+		}
 		gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
 					       template_names);
 		gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
@@ -354,8 +357,8 @@ page_size_entry_changed_cb (GtkEntry * entry,
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-template_entry_changed_cb (GtkEntry * entry,
-			   gpointer user_data)
+template_entry_changed_cb (GtkEntry *entry,
+			   gpointer  user_data)
 {
 	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
 	gchar *name;
@@ -386,8 +389,8 @@ template_entry_changed_cb (GtkEntry * entry,
 /* PRIVATE. update "details" widgets from new template.               */
 /*--------------------------------------------------------------------------*/
 static void
-details_update (glWdgtMediaSelect * media_select,
-		gchar * name)
+details_update (glWdgtMediaSelect *media_select,
+		gchar             *name)
 {
 	glTemplate *template;
 	gchar *text;
@@ -427,7 +430,7 @@ details_update (glWdgtMediaSelect * media_select,
 /* query selected label template name.                                      */
 /****************************************************************************/
 gchar *
-gl_wdgt_media_select_get_name (glWdgtMediaSelect * media_select)
+gl_wdgt_media_select_get_name (glWdgtMediaSelect *media_select)
 {
 	gl_debug (DEBUG_MEDIA_SELECT, "");
 	return
@@ -439,8 +442,8 @@ gl_wdgt_media_select_get_name (glWdgtMediaSelect * media_select)
 /* set selected label template name.                                        */
 /****************************************************************************/
 void
-gl_wdgt_media_select_set_name (glWdgtMediaSelect * media_select,
-			       gchar * name)
+gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
+			       gchar             *name)
 {
 	gint pos;
 
@@ -466,7 +469,7 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect * media_select,
 /* query selected label template page size.                                 */
 /****************************************************************************/
 gchar *
-gl_wdgt_media_select_get_page_size (glWdgtMediaSelect * media_select)
+gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select)
 {
 	gl_debug (DEBUG_MEDIA_SELECT, "");
 
@@ -479,8 +482,8 @@ gl_wdgt_media_select_get_page_size (glWdgtMediaSelect * media_select)
 /* set selected label template page size.                                   */
 /****************************************************************************/
 void
-gl_wdgt_media_select_set_page_size (glWdgtMediaSelect * media_select,
-				    gchar * page_size)
+gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
+				    gchar             *page_size)
 {
 	gint pos;
 

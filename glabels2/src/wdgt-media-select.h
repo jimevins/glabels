@@ -26,6 +26,8 @@
 #include <gnome.h>
 #include "hig.h"
 
+G_BEGIN_DECLS
+
 #define GL_TYPE_WDGT_MEDIA_SELECT (gl_wdgt_media_select_get_type ())
 #define GL_WDGT_MEDIA_SELECT(obj) \
         (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_MEDIA_SELECT, glWdgtMediaSelect ))
@@ -60,18 +62,20 @@ struct _glWdgtMediaSelectClass {
 	void (*changed) (glWdgtMediaSelect * media_select, gpointer user_data);
 };
 
-extern guint gl_wdgt_media_select_get_type       (void);
+guint      gl_wdgt_media_select_get_type      (void);
 
-extern GtkWidget *gl_wdgt_media_select_new       (void);
+GtkWidget *gl_wdgt_media_select_new           (void);
 
-extern gchar *gl_wdgt_media_select_get_name      (glWdgtMediaSelect * media_select);
+gchar     *gl_wdgt_media_select_get_name      (glWdgtMediaSelect *media_select);
 
-extern void   gl_wdgt_media_select_set_name      (glWdgtMediaSelect * media_select,
-						  gchar * name);
+void       gl_wdgt_media_select_set_name      (glWdgtMediaSelect *media_select,
+					       gchar             *name);
 
-extern gchar *gl_wdgt_media_select_get_page_size (glWdgtMediaSelect * media_select);
+gchar     *gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select);
 
-extern void   gl_wdgt_media_select_set_page_size (glWdgtMediaSelect * media_select,
-						  gchar * page_size);
+void       gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
+					       gchar             *page_size);
+
+G_END_DECLS
 
 #endif

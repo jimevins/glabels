@@ -120,6 +120,8 @@ typedef struct {
 	GList               *name;
 	gchar               *description;
 	gchar               *page_size;
+	gdouble              page_width;
+	gdouble              page_height;
 
 	glTemplateLabel      label;
 
