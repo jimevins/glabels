@@ -362,13 +362,12 @@ canvas_event_cb (GnomeCanvas * canvas,
 	gint i;
 	gdouble x, y;
 
-	gnome_canvas_window_to_world (canvas,
-				      event->button.x, event->button.y,
-				      &x, &y);
-
 	switch (event->type) {
 
 	case GDK_BUTTON_PRESS:
+		gnome_canvas_window_to_world (canvas,
+					      event->button.x, event->button.y,
+					      &x, &y);
 		switch (event->button.button) {
 		case 1:
 			/* Get item at cursor and make sure
@@ -406,6 +405,9 @@ canvas_event_cb (GnomeCanvas * canvas,
 		break;
 
 	case GDK_BUTTON_RELEASE:
+		gnome_canvas_window_to_world (canvas,
+					      event->button.x, event->button.y,
+					      &x, &y);
 		switch (event->button.button) {
 		case 1:
 			/* Exit dragging mode */
@@ -419,6 +421,9 @@ canvas_event_cb (GnomeCanvas * canvas,
 		break;
 
 	case GDK_MOTION_NOTIFY:
+		gnome_canvas_window_to_world (canvas,
+					      event->motion.x, event->motion.y,
+					      &x, &y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			/* Get item at cursor and
 			   make sure it's a label object ("i" is valid) */
