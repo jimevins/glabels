@@ -226,7 +226,7 @@ selection_changed_cb (glView      *view,
 
 	gtk_container_remove (GTK_CONTAINER(sidebar), sidebar->child);
 
-	if (gl_view_is_selection_empty (view)) {
+	if (gl_view_is_selection_empty (view) || !gl_view_is_selection_atomic (view)) {
 
 		sidebar->child = gtk_widget_ref (sidebar->empty_child);
 		
