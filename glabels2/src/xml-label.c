@@ -626,11 +626,6 @@ xml_parse_object_image (xmlNodePtr  node,
 	y = gl_xml_get_prop_length (node, "y", 0.0);
 	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
 
-	/* size attrs */
-	w = gl_xml_get_prop_length (node, "w", 0);
-	h = gl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
-
 	/* src or field attr */
 	string = xmlGetProp (node, "src");
 	if ( string ) {
@@ -651,6 +646,11 @@ xml_parse_object_image (xmlNodePtr  node,
 			g_warning ("Missing Object-image src or field attr");
 		}
 	}
+
+	/* size attrs */
+	w = gl_xml_get_prop_length (node, "w", 0);
+	h = gl_xml_get_prop_length (node, "h", 0);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	/* affine attrs */
 	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);

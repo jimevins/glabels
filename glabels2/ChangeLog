@@ -1,3 +1,11 @@
+2004-02-16  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label-04.c: (xml04_parse_image_props):
+	* src/xml-label-191.c: (xml191_parse_image_props):
+	* src/xml-label.c: (xml_parse_object_image):
+		Delay setting image size until after image has been applied to new
+		object.
+	
 2004-02-15  Jim Evins  <evins@snaught.com>
 
 	* src/label-barcode.c: (gl_label_barcode_set_data),

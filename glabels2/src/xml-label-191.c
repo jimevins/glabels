@@ -488,8 +488,8 @@ xml191_parse_image_props (xmlNodePtr  node,
 		}
 	}
 
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	gl_text_node_free (&filename);
 

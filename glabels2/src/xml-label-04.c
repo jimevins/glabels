@@ -392,15 +392,15 @@ xml04_parse_image_props (xmlNodePtr    node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
-
 	filename = g_new0 (glTextNode, 1);
 	filename->field_flag = FALSE;
 	filename->data = xmlGetProp (node, "filename");
 	gl_label_image_set_filename (object, filename);
 	gl_text_node_free (&filename);
+
+	w = gl_xml_get_prop_double (node, "w", 0);
+	h = gl_xml_get_prop_double (node, "h", 0);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	gl_debug (DEBUG_XML, "END");
 }
