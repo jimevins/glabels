@@ -303,6 +303,18 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- CD STOMPER PRO CD Label Refills, (Face Only) ISO Version            -->
+  <!-- =================================================================== -->
+  <Template name="Stomper PRO A4" size="A4"
+         _description="PRO CD Labels 2-up (face only)">
+    <Label-cd id="0" radius="166.5" hole="58" waste="10">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="1" x0="34.5" y0="47" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="223" y0="459" dx="0" dy="0"/>
+    </Label-cd>
+  </Template>
+
 
 
   <!-- ******************************************************************** -->
