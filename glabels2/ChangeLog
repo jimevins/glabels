@@ -1,5 +1,12 @@
 2004-08-08  Jim Evins  <evins@snaught.com>
 
+	* glabels.spec.in:
+		- Updated URL
+		- More specific of what to install in /usr/bin and /usr/lib
+		- Remove built mime registration files from staging directory
+
+2004-08-08  Jim Evins  <evins@snaught.com>
+
 	* data/mime/Makefile.am:
 		Fixed typo:  key_files should have been keys_files.
 

@@ -4,7 +4,7 @@ Version:   @VERSION@
 Release:   1
 Copyright: GPL
 Group: Applications/Publishing
-URL: http://snaught.com/glabels/
+URL: http://glabels.sourceforge.net/
 
 Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/root-%{name}-%{version}
@@ -41,7 +41,12 @@ desktop-file-install --vendor gnome                \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%{__rm} -rf $RPM_BUILD_ROOT/var/scrollkeeper
+%{__rm} -rf %{buildroot}/var/scrollkeeper
+%{__rm} -f %{buildroot}%{_datadir}/mime/XMLnamespaces
+%{__rm} -f %{buildroot}%{_datadir}/mime/globs
+%{__rm} -f %{buildroot}%{_datadir}/mime/magic
+%{__rm} -rf %{buildroot}%{_datadir}/mime/application
+
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -62,8 +67,9 @@ fi
 %defattr(-, root, root)
 %doc README COPYING COPYING-DOCS COPYING.LIBGLABELS ChangeLog NEWS AUTHORS INSTALL
 %doc %{_datadir}/gnome/help/glabels/
-%{_bindir}/*
-%{_libdir}/*
+%{_bindir}/glabels
+%{_bindir}/glabels-batch
+%{_libdir}/libglabels.*
 %{_includedir}/libglabels/*
 %{_datadir}/glabels/
 %{_datadir}/pixmaps/*
