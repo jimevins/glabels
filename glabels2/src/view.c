@@ -467,6 +467,8 @@ get_home_scale (glView *view)
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (view->canvas));
 
+	gl_debug (DEBUG_VIEW, "Screen = %p", screen);
+
 	screen_width_pixels  = gdk_screen_get_width (screen);
 	screen_width_mm      = gdk_screen_get_width_mm (screen);
 	screen_height_pixels = gdk_screen_get_height (screen);
@@ -3124,12 +3126,16 @@ set_zoom_real (glView          *view,
 	zoom = MAX (zoom, zooms[N_ZOOMS-1]);
 	gl_debug (DEBUG_VIEW, "Limitted zoom: %g", zoom);
 
-	view->zoom = zoom;
-	view->zoom_to_fit_flag = zoom_to_fit_flag;
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  zoom*view->home_scale);
+	if ( zoom != view->zoom ) {
 
-	g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, zoom);
+		view->zoom = zoom;
+		view->zoom_to_fit_flag = zoom_to_fit_flag;
+		gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
+						  zoom*view->home_scale);
+
+		g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, zoom);
+
+	}
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -3142,10 +3148,14 @@ set_zoom_real (glView          *view,
 static void
 size_allocate_cb (glView          *view)
 {
+	gl_debug (DEBUG_VIEW, "START");
+
 	if (view->zoom_to_fit_flag) {
 		/* Maintain best fit zoom */
 		gl_view_zoom_to_fit (view);
 	}
+
+	gl_debug (DEBUG_VIEW, "END");
 }
 
 
@@ -3156,6 +3166,8 @@ size_allocate_cb (glView          *view)
 static void
 screen_changed_cb (glView          *view)
 {
+	gl_debug (DEBUG_VIEW, "START");
+
 	view->home_scale = get_home_scale (view);
 
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
@@ -3165,6 +3177,8 @@ screen_changed_cb (glView          *view)
 		/* Maintain best fit zoom */
 		gl_view_zoom_to_fit (view);
 	}
+
+	gl_debug (DEBUG_VIEW, "END");
 }
 
 
