@@ -52,54 +52,72 @@ struct _glLabel {
 struct _glLabelClass {
 	GObjectClass         parent_class;
 
-	void (*changed) (glLabel *label, gpointer user_data);
+	void (*changed)          (glLabel *label, gpointer user_data);
 
-	void (*name_changed) (glLabel *label, gpointer user_data);
+	void (*name_changed)     (glLabel *label, gpointer user_data);
 
 	void (*modified_changed) (glLabel *label, gpointer user_data);
 
 };
 
 
-extern GType         gl_label_get_type          (void);
+GType         gl_label_get_type                (void);
 
-extern GObject      *gl_label_new               (void);
+GObject      *gl_label_new                     (void);
 
-extern void          gl_label_add_object      (glLabel *label,
-					       glLabelObject *object);
-extern void          gl_label_remove_object   (glLabel *label,
-					       glLabelObject *object);
-extern void          gl_label_raise_object_to_top (glLabel *label,
-						     glLabelObject * object);
-extern void          gl_label_lower_object_to_bottom  (glLabel *label,
-						       glLabelObject * object);
 
-extern void          gl_label_set_template      (glLabel * label,
-						 glTemplate *template);
+void          gl_label_add_object              (glLabel       *label,
+						glLabelObject *object);
 
-extern void          gl_label_set_rotate_flag   (glLabel * label,
-						 gboolean rotate_flag);
+void          gl_label_remove_object           (glLabel       *label,
+						glLabelObject *object);
 
-extern glTemplate   *gl_label_get_template      (glLabel * label);
-extern gboolean      gl_label_get_rotate_flag   (glLabel * label);
-extern void          gl_label_get_size          (glLabel * label,
-						 gdouble *w,
-						 gdouble *h);
+void          gl_label_raise_object_to_top     (glLabel       *label,
+						glLabelObject *object);
 
-extern void          gl_label_set_merge         (glLabel * label,
-						 glMerge * merge);
-extern glMerge      *gl_label_get_merge         (glLabel * label);
+void          gl_label_lower_object_to_bottom  (glLabel       *label,
+						glLabelObject *object);
 
-extern gchar        *gl_label_get_filename      (glLabel * label);
-extern gchar        *gl_label_get_short_name    (glLabel * label);
-extern gboolean      gl_label_is_modified       (glLabel * label);
-extern gboolean      gl_label_is_untitled       (glLabel * label);
-extern gboolean      gl_label_can_undo          (glLabel * label);
-extern gboolean      gl_label_can_redo          (glLabel * label);
 
-extern void          gl_label_set_filename      (glLabel *label,
-						 const gchar *filename);
-extern void          gl_label_clear_modified    (glLabel *label);
+void          gl_label_set_template            (glLabel       *label,
+						glTemplate    *template);
+
+void          gl_label_set_rotate_flag         (glLabel       *label,
+						gboolean       rotate_flag);
+
+
+glTemplate   *gl_label_get_template            (glLabel       *label);
+
+gboolean      gl_label_get_rotate_flag         (glLabel       *label);
+
+void          gl_label_get_size                (glLabel       *label,
+						gdouble       *w,
+						gdouble       *h);
+
+
+void          gl_label_set_merge               (glLabel       *label,
+						glMerge       *merge);
+
+glMerge      *gl_label_get_merge               (glLabel       *label);
+
+
+gchar        *gl_label_get_filename            (glLabel       *label);
+
+gchar        *gl_label_get_short_name          (glLabel       *label);
+
+gboolean      gl_label_is_modified             (glLabel       *label);
+
+gboolean      gl_label_is_untitled             (glLabel       *label);
+
+gboolean      gl_label_can_undo                (glLabel       *label);
+
+gboolean      gl_label_can_redo                (glLabel       *label);
+
+
+void          gl_label_set_filename            (glLabel       *label,
+						const gchar   *filename);
+
+void          gl_label_clear_modified          (glLabel       *label);
 
 G_END_DECLS
 

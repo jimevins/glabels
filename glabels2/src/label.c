@@ -79,13 +79,17 @@ static guint untitled = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_class_init (glLabelClass *klass);
-static void gl_label_instance_init (glLabel *label);
-static void gl_label_finalize (GObject *object);
+static void gl_label_class_init    (glLabelClass *klass);
+static void gl_label_instance_init (glLabel      *label);
+static void gl_label_finalize      (GObject      *object);
 
-static void object_changed_cb (glLabelObject *object, glLabel *label);
-static void object_moved_cb (glLabelObject *object,
-			     gdouble x, gdouble y, glLabel *label);
+static void object_changed_cb      (glLabelObject *object,
+				    glLabel       *label);
+
+static void object_moved_cb        (glLabelObject *object,
+			            gdouble        x,
+				    gdouble        y,
+				    glLabel       *label);
 
 
 /*****************************************************************************/
@@ -173,7 +177,7 @@ static void
 gl_label_finalize (GObject *object)
 {
 	glLabel *label;
-	GList *p, *p_next;
+	GList   *p, *p_next;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -218,7 +222,7 @@ gl_label_new (void)
 /* Add object to label.                                                      */
 /*****************************************************************************/
 void
-gl_label_add_object (glLabel *label,
+gl_label_add_object (glLabel       *label,
 		     glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
@@ -247,7 +251,7 @@ gl_label_add_object (glLabel *label,
 /* Remove object from label.                                                 */
 /*****************************************************************************/
 void
-gl_label_remove_object (glLabel *label,
+gl_label_remove_object (glLabel       *label,
 			glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
@@ -281,7 +285,8 @@ gl_label_remove_object (glLabel *label,
 /* PRIVATE.  Object changed callback.                                        */
 /*---------------------------------------------------------------------------*/
 static void
-object_changed_cb (glLabelObject *object, glLabel *label)
+object_changed_cb (glLabelObject *object,
+		   glLabel       *label)
 {
 
 	if ( !label->private->modified_flag ) {
@@ -298,7 +303,10 @@ object_changed_cb (glLabelObject *object, glLabel *label)
 /* PRIVATE.  Object moved callback.                                          */
 /*---------------------------------------------------------------------------*/
 static void
-object_moved_cb (glLabelObject *object, gdouble x, gdouble y, glLabel *label)
+object_moved_cb (glLabelObject *object,
+		 gdouble        x,
+		 gdouble        y,
+		 glLabel       *label)
 {
 
 	if ( !label->private->modified_flag ) {
@@ -315,7 +323,8 @@ object_moved_cb (glLabelObject *object, gdouble x, gdouble y, glLabel *label)
 /* Bring label object to front/top.                                         */
 /****************************************************************************/
 void
-gl_label_raise_object_to_top (glLabel *label, glLabelObject *object)
+gl_label_raise_object_to_top (glLabel       *label,
+			      glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -335,7 +344,8 @@ gl_label_raise_object_to_top (glLabel *label, glLabelObject *object)
 /* Send label object to rear/bottom.                                        */
 /****************************************************************************/
 void
-gl_label_lower_object_to_bottom (glLabel *label, glLabelObject *object)
+gl_label_lower_object_to_bottom (glLabel       *label,
+				 glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -355,7 +365,7 @@ gl_label_lower_object_to_bottom (glLabel *label, glLabelObject *object)
 /* set template.                                                            */
 /****************************************************************************/
 extern void
-gl_label_set_template (glLabel *label,
+gl_label_set_template (glLabel    *label,
 		       glTemplate *template)
 {
 	gl_debug (DEBUG_LABEL, "START");
@@ -398,7 +408,7 @@ gl_label_set_rotate_flag (glLabel *label,
 /* Get template.                                                            */
 /****************************************************************************/
 glTemplate *
-gl_label_get_template (glLabel * label)
+gl_label_get_template (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -413,7 +423,7 @@ gl_label_get_template (glLabel * label)
 /* Get rotate flag.                                                         */
 /****************************************************************************/
 gboolean
-gl_label_get_rotate_flag (glLabel * label)
+gl_label_get_rotate_flag (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -428,7 +438,7 @@ gl_label_get_rotate_flag (glLabel * label)
 /* Get label size.                                                          */
 /****************************************************************************/
 void
-gl_label_get_size (glLabel * label,
+gl_label_get_size (glLabel *label,
 		   gdouble *w,
 		   gdouble *h)
 {
@@ -479,8 +489,8 @@ gl_label_get_size (glLabel * label,
 /* set merge information structure.                                         */
 /****************************************************************************/
 extern void
-gl_label_set_merge (glLabel * label,
-		    glMerge * merge)
+gl_label_set_merge (glLabel *label,
+		    glMerge *merge)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -501,7 +511,7 @@ gl_label_set_merge (glLabel * label,
 /* Get merge information structure.                                         */
 /****************************************************************************/
 glMerge *
-gl_label_get_merge (glLabel * label)
+gl_label_get_merge (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -516,7 +526,7 @@ gl_label_get_merge (glLabel * label)
 /* return filename.                                                         */
 /****************************************************************************/
 gchar *
-gl_label_get_filename (glLabel * label)
+gl_label_get_filename (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "");
 
@@ -527,7 +537,7 @@ gl_label_get_filename (glLabel * label)
 /* return short filename.                                                   */
 /****************************************************************************/
 gchar *
-gl_label_get_short_name (glLabel * label)
+gl_label_get_short_name (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "");
 
@@ -555,7 +565,7 @@ gl_label_get_short_name (glLabel * label)
 /* Is label modified?                                                       */
 /****************************************************************************/
 gboolean
-gl_label_is_modified (glLabel * label)
+gl_label_is_modified (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "return %d", label->private->modified_flag);
 	return label->private->modified_flag;
@@ -565,7 +575,7 @@ gl_label_is_modified (glLabel * label)
 /* Is label untitled?                                                       */
 /****************************************************************************/
 gboolean
-gl_label_is_untitled (glLabel * label)
+gl_label_is_untitled (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "return %d",(label->private->filename == NULL));
 	return (label->private->filename == NULL);
@@ -575,7 +585,7 @@ gl_label_is_untitled (glLabel * label)
 /* Can undo?                                                                */
 /****************************************************************************/
 gboolean
-gl_label_can_undo          (glLabel * label)
+gl_label_can_undo (glLabel *label)
 {
 	return FALSE;
 }
@@ -585,7 +595,7 @@ gl_label_can_undo          (glLabel * label)
 /* Can redo?                                                                */
 /****************************************************************************/
 gboolean
-gl_label_can_redo          (glLabel * label)
+gl_label_can_redo (glLabel *label)
 {
 	return FALSE;
 }
@@ -595,8 +605,8 @@ gl_label_can_redo          (glLabel * label)
 /* Set filename.                                                            */
 /****************************************************************************/
 void
-gl_label_set_filename      (glLabel *label,
-			    const gchar *filename)
+gl_label_set_filename (glLabel     *label,
+		       const gchar *filename)
 {
 	label->private->filename = g_strdup (filename);
 
@@ -607,7 +617,7 @@ gl_label_set_filename      (glLabel *label,
 /* Clear modified flag.                                                     */
 /****************************************************************************/
 void
-gl_label_clear_modified    (glLabel *label)
+gl_label_clear_modified (glLabel *label)
 {
 
 	if ( label->private->modified_flag ) {
