@@ -33,6 +33,7 @@
 /*===========================================*/
 
 typedef struct {
+
 	GtkWidget *dialog;
 
 	glView  *view;
@@ -42,12 +43,24 @@ typedef struct {
 	GtkWidget *type_entry;
 	GtkWidget *src_entry_holder;
 	GtkWidget *src_entry;
-	GtkWidget *sample;
 
-	glMergeSrcType  src_type;
-	gchar          *sample_src;
+	GtkTreeStore *store;
+	GtkWidget    *tree;
 
 } PropertyDialogPassback;
+
+enum {
+	/* Real columns */
+	SELECT_COLUMN,
+	RECORD_FIELD_COLUMN,
+	VALUE_COLUMN,
+
+	/* Invisible columns */
+	IS_RECORD_COLUMN,
+	DATA_COLUMN, /* points to glMergeRecord */
+
+	N_COLUMNS
+};
 
 /*===========================================*/
 /* Private globals                           */
@@ -69,6 +82,16 @@ static void src_changed_cb              (GtkWidget              *widget,
 static void response_cb                 (glHigDialog            *dialog,
 					 gint                    response,
 					 PropertyDialogPassback *data);
+
+static void load_tree                   (GtkTreeStore           *store,
+					 glMerge                *merge);
+
+static void
+record_select_toggled_cb                (GtkCellRendererToggle  *cell,
+					 gchar                  *path_str,
+					 GtkTreeStore           *store);
+
+
 
 /****************************************************************************/
 /* Launch merge properties dialog.                                          */
@@ -109,8 +132,8 @@ gl_merge_properties_dialog (glView *view)
 /* PRIVATE.  Create merge widgets.                                          */
 /*--------------------------------------------------------------------------*/
 static void
-create_merge_dialog_widgets (glHigDialog * dialog,
-			     PropertyDialogPassback * data)
+create_merge_dialog_widgets (glHigDialog            *dialog,
+			     PropertyDialogPassback *data)
 {
 	GtkWidget         *wframe, *whbox, *wtable, *wlabel, *wcombo, *wscroll, *wentry;
 	GList             *texts;
@@ -118,6 +141,9 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 	glMergeSrcType     src_type;
 	gchar             *src;
 	GtkSizeGroup      *label_size_group;
+	GtkCellRenderer   *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeSelection  *selection;
 
 	gl_debug (DEBUG_MERGE, "START");
 
@@ -180,6 +206,7 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 		break;
 	default:
 		data->src_entry = gtk_label_new (_("N/A"));
+		gtk_misc_set_alignment (GTK_MISC (data->src_entry), 0.0, 0.5);
 		break;
 	}
 	data->src_entry_holder = gtk_hbox_new (FALSE, 0);
@@ -187,28 +214,52 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 	gl_hig_hbox_add_widget_justify (GL_HIG_HBOX(whbox), data->src_entry_holder);
 
 	/* ---- Sample Fields section ---- */
-	wframe = gl_hig_category_new (_("Sample fields"));
+	wframe = gl_hig_category_new (_("Record selection/preview:"));
 	gl_hig_dialog_add_widget (dialog, wframe);
 
-#if 0
 	wscroll = gtk_scrolled_window_new (NULL, NULL);
 	gtk_container_set_border_width (GTK_CONTAINER (wscroll), 5);
-	gtk_widget_set_usize (wscroll, 400, 250);
+	gtk_widget_set_usize (wscroll, 500, 350);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), wscroll);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY (wframe), wscroll);
 
-	data->sample = gl_merge_ui_field_ws_new ();
-	gtk_container_set_border_width (GTK_CONTAINER (data->sample), 10);
-	gl_merge_ui_field_ws_set_type_src (GL_MERGE_UI_FIELD_WS
-					   (data->field_ws), type, src);
-	gl_merge_ui_field_ws_set_field_defs (GL_MERGE_UI_FIELD_WS
-					     (data->sample), fields);
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (wscroll),
-					       data->sample);
-#endif
-
+	data->store = gtk_tree_store_new (N_COLUMNS,
+					  G_TYPE_BOOLEAN, /* Record selector */
+					  G_TYPE_STRING,  /* Record/Field name */
+					  G_TYPE_STRING,  /* Field value */
+					  G_TYPE_BOOLEAN, /* Is Record? */
+					  G_TYPE_POINTER  /* Pointer to record */);
+	load_tree (data->store, data->merge);
+	data->tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(data->store));
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(data->tree), TRUE);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(data->tree));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
+	renderer = gtk_cell_renderer_toggle_new ();
+	g_signal_connect (G_OBJECT (renderer), "toggled",
+			  G_CALLBACK (record_select_toggled_cb), data->store);
+	column = gtk_tree_view_column_new_with_attributes (_("Select"), renderer,
+							   "active", SELECT_COLUMN,
+							   "visible", IS_RECORD_COLUMN,
+							   NULL);
+	gtk_tree_view_column_set_clickable (column, TRUE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_object_set (GTK_OBJECT(renderer), "yalign", 0.0, NULL);
+	column = gtk_tree_view_column_new_with_attributes (_("Record/Field"), renderer,
+							   "text", RECORD_FIELD_COLUMN,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
+	gtk_tree_view_set_expander_column (GTK_TREE_VIEW(data->tree), column);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_object_set (GTK_OBJECT(renderer), "yalign", 0.0, NULL);
+	column = gtk_tree_view_column_new_with_attributes (_("Data"), renderer,
+							   "text", VALUE_COLUMN,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
+	gtk_container_add (GTK_CONTAINER (wscroll), data->tree);
+	
 	g_free (src);
 	g_free (description);
 
@@ -221,8 +272,8 @@ create_merge_dialog_widgets (glHigDialog * dialog,
 /* PRIVATE.  type "changed" callback.                                       */
 /*--------------------------------------------------------------------------*/
 static void
-type_changed_cb (GtkWidget * widget,
-		 PropertyDialogPassback * data)
+type_changed_cb (GtkWidget              *widget,
+		 PropertyDialogPassback *data)
 {
 	gchar             *description;
 	gchar             *name;
@@ -258,6 +309,7 @@ type_changed_cb (GtkWidget * widget,
 		break;
 	default:
 		data->src_entry = gtk_label_new (_("N/A"));
+		gtk_misc_set_alignment (GTK_MISC (data->src_entry), 0.0, 0.5);
 		break;
 	}
 	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
@@ -274,8 +326,8 @@ type_changed_cb (GtkWidget * widget,
 /* PRIVATE.  source "changed" callback.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-src_changed_cb (GtkWidget * widget,
-		PropertyDialogPassback * data)
+src_changed_cb (GtkWidget              *widget,
+		PropertyDialogPassback *data)
 {
 	gchar     *src;
 	GtkWidget *wentry;
@@ -284,11 +336,10 @@ src_changed_cb (GtkWidget * widget,
 
 	wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
 	src = gtk_editable_get_chars (GTK_EDITABLE (wentry), 0, -1);
+	gl_merge_set_src (data->merge, src);
+	g_free (src);
 
-#if 0
-	gl_merge_ui_field_ws_set_type_src (GL_MERGE_UI_FIELD_WS
-					   (data->sample), type, src);
-#endif
+	load_tree (data->store, data->merge);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -297,9 +348,9 @@ src_changed_cb (GtkWidget * widget,
 /* PRIVATE.  response callback.                                             */
 /*--------------------------------------------------------------------------*/
 static void
-response_cb (glHigDialog * dialog,
-	     gint response,
-	     PropertyDialogPassback * data)
+response_cb (glHigDialog            *dialog,
+	     gint                    response,
+	     PropertyDialogPassback *data)
 {
 	gl_debug (DEBUG_MERGE, "START");
 
@@ -320,3 +371,88 @@ response_cb (glHigDialog * dialog,
 
 	gl_debug (DEBUG_MERGE, "END");
 }
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Load tree store from merge data.                               */
+/*--------------------------------------------------------------------------*/
+static void
+load_tree (GtkTreeStore           *store,
+	   glMerge                *merge)
+{
+	const GList   *record_list;
+	GList         *p_rec, *p_field;
+	glMergeRecord *record;
+	glMergeField  *field;
+	GtkTreeIter    iter1, iter2;
+	gchar         *primary_key;
+	gchar         *primary_value;
+
+	gtk_tree_store_clear (store);
+
+	primary_key = gl_merge_get_primary_key (merge);
+	record_list = gl_merge_get_record_list (merge);
+
+	for ( p_rec=(GList *)record_list; p_rec!=NULL; p_rec=p_rec->next ) {
+		record = (glMergeRecord *)p_rec->data;
+		
+		primary_value = gl_merge_eval_key (record, primary_key);
+
+		gtk_tree_store_append (store, &iter1, NULL);
+		gtk_tree_store_set (store, &iter1,
+				    SELECT_COLUMN,       record->select_flag,
+				    RECORD_FIELD_COLUMN, primary_value,
+				    IS_RECORD_COLUMN,    TRUE,
+				    DATA_COLUMN,         record,
+				    -1);
+
+		g_free (primary_value);
+
+		for ( p_field=record->field_list; p_field!=NULL; p_field=p_field->next ) {
+			field = (glMergeField *)p_field->data;
+
+			gtk_tree_store_append (store, &iter2, &iter1);
+			gtk_tree_store_set (store, &iter2,
+					    RECORD_FIELD_COLUMN, field->key,
+					    VALUE_COLUMN,        field->value,
+					    IS_RECORD_COLUMN,    FALSE,
+					    -1);
+		}
+	}
+
+	g_free (primary_key);
+	
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Record select toggled.                                         */
+/*--------------------------------------------------------------------------*/
+static void
+record_select_toggled_cb (GtkCellRendererToggle *cell,
+			  gchar                 *path_str,
+			  GtkTreeStore          *store)
+{
+  GtkTreePath   *path;
+  GtkTreeIter    iter;
+  glMergeRecord *record;
+
+  /* get toggled iter */
+  path = gtk_tree_path_new_from_string (path_str);
+  gtk_tree_model_get_iter (GTK_TREE_MODEL(store), &iter, path);
+
+  /* get current data */
+  gtk_tree_model_get (GTK_TREE_MODEL(store), &iter,
+		      DATA_COLUMN,   &record,
+		      -1);
+
+  /* toggle the select flag within the record */
+  record->select_flag ^= 1;
+
+  /* set new value in store */
+  gtk_tree_store_set (store, &iter,
+		      SELECT_COLUMN, record->select_flag,
+		      -1);
+
+  /* clean up */
+  gtk_tree_path_free (path);
+}
+
