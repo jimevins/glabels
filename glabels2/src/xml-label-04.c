@@ -286,6 +286,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 		break;
 	default:
 		/* should not happen */
+		break;
 	}
 
 	gl_debug (DEBUG_XML, "END");
