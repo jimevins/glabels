@@ -1,3 +1,13 @@
+2004-03-06  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (draw_grid_layer):
+		For round labels (round and cd) adjust grid so that it lines up with
+		center of label.  Also, no longer draw box around label in the grid layer,
+		it is hidden by he fg layer anyway.  Feature suggested by
+		nemolivier@free.fr.  Although the grid is aligned with the center of the
+		label, the coordinate system is still relative to the upper left corner
+		of the rectangle containing the label.
+
 2004-02-25  Jim Evins  <evins@snaught.com>
 
 	* configure.in:

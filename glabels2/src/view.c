@@ -1095,10 +1095,12 @@ draw_bg_fg_cd_bc (glView *view)
 static void
 draw_grid_layer (glView *view)
 {
-	gdouble            w, h, x, y;
-	GnomeCanvasPoints *points;
-	GnomeCanvasItem  *item;
-	GnomeCanvasGroup *group;
+	gdouble                    w, h, x, y, x0, y0;
+	GnomeCanvasPoints         *points;
+	GnomeCanvasItem           *item;
+	GnomeCanvasGroup          *group;
+	glTemplate                *template;
+	const glTemplateLabelType *template_type;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1106,6 +1108,17 @@ draw_grid_layer (glView *view)
 	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
 
 	gl_label_get_size (view->label, &w, &h);
+	template = gl_label_get_template (view->label);
+	template_type = gl_template_get_first_label_type (template);
+	
+	if (template_type->shape == GL_TEMPLATE_SHAPE_RECT) {
+		x0 = 0.0;
+		y0 = 0.0;
+	} else {
+		/* for round labels, adjust grid to line up with center of label. */
+		x0 = fmod (w/2.0, view->grid_spacing);
+		y0 = fmod (h/2.0, view->grid_spacing);
+	}
 
 	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
 	view->grid_group = GNOME_CANVAS_GROUP(
@@ -1118,7 +1131,7 @@ draw_grid_layer (glView *view)
 
 	points->coords[1] = 0.0;
 	points->coords[3] = h;
-	for ( x=0.0; x < w; x += view->grid_spacing ) {
+	for ( x=x0+view->grid_spacing; x < w; x += view->grid_spacing ) {
 		points->coords[0] = points->coords[2] = x;
 		item = gnome_canvas_item_new (view->grid_group,
 					      gnome_canvas_line_get_type (),
@@ -1127,17 +1140,10 @@ draw_grid_layer (glView *view)
 					      "fill_color_rgba", GRID_COLOR,
 					      NULL);
 	}
-	points->coords[0] = points->coords[2] = w;
-	item = gnome_canvas_item_new (view->grid_group,
-				      gnome_canvas_line_get_type (),
-				      "points", points,
-				      "width_pixels", 1,
-				      "fill_color_rgba", GRID_COLOR,
-				      NULL);
 
 	points->coords[0] = 0.0;
 	points->coords[2] = w;
-	for ( y=0.0; y < h; y += view->grid_spacing ) {
+	for ( y=y0+view->grid_spacing; y < h; y += view->grid_spacing ) {
 		points->coords[1] = points->coords[3] = y;
 		item = gnome_canvas_item_new (view->grid_group,
 					      gnome_canvas_line_get_type (),
@@ -1146,15 +1152,9 @@ draw_grid_layer (glView *view)
 					      "fill_color_rgba", GRID_COLOR,
 					      NULL);
 	}
-	points->coords[1] = points->coords[3] = h;
-	item = gnome_canvas_item_new (view->grid_group,
-				      gnome_canvas_line_get_type (),
-				      "points", points,
-				      "width_pixels", 1,
-				      "fill_color_rgba", GRID_COLOR,
-				      NULL);
 
 	gnome_canvas_points_free (points);
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
