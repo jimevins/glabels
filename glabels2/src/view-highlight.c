@@ -46,6 +46,7 @@ struct _glViewHighlightPrivate {
 	glLabelObject           *object;
 	glView                  *view;
 
+	GnomeCanvasItem         *position_group;
 	GnomeCanvasItem         *group;
 	GnomeCanvasItem         *outline;
 	GnomeCanvasItem         *tl, *tr, *bl, *br; /* Corner handles */
@@ -81,6 +82,9 @@ static void   highlight_simple_construct         (glViewHighlight        *view_h
 static void   object_moved_cb                    (glLabelObject          *object,
 						  gdouble                 x,
 						  gdouble                 y,
+						  glViewHighlight        *view_highlight);
+
+static void   flip_rotate_object_cb              (glLabelObject          *object,
 						  glViewHighlight        *view_highlight);
 
 static void   object_changed_cb                  (glLabelObject          *object,
@@ -197,7 +201,7 @@ gl_view_highlight_finalize (GObject *object)
 
 	g_return_if_fail (object && GL_IS_VIEW_HIGHLIGHT (object));
 
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_HIGHLIGHT(object)->private->group));
+	gtk_object_destroy (GTK_OBJECT(GL_VIEW_HIGHLIGHT(object)->private->position_group));
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
@@ -212,17 +216,30 @@ gl_view_highlight_new (glViewObject         *view_object,
 		       glViewHighlightStyle  style)
 {
 	glViewHighlight *view_highlight;
+	glView          *view;
+	glLabelObject   *object;
+	gdouble          x, y;
 	gdouble          affine[6];
-	GList           *item_list, *p;
-	GnomeCanvasItem *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT(view_object));
 
+	view   = gl_view_object_get_view (view_object);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_position (object, &x, &y);
+
 	view_highlight = g_object_new (gl_view_highlight_get_type (), NULL);
 
-	view_highlight->private->style = style;
+	view_highlight->private->style          = style;
+	view_highlight->private->view           = view;
+	view_highlight->private->object         = object;
+	view_highlight->private->position_group =
+		gnome_canvas_item_new (view->highlight_group,
+				       gnome_canvas_group_get_type (),
+				       "x", x,
+				       "y", y,
+				       NULL);
 
 	switch (style) {
 
@@ -246,17 +263,16 @@ gl_view_highlight_new (glViewObject         *view_object,
 
 
 	gl_label_object_get_applied_affine (view_highlight->private->object, affine);
-	item_list = GNOME_CANVAS_GROUP(view_highlight->private->group)->item_list;
-	for ( p=item_list; p != NULL; p=p->next ) {
-		item = GNOME_CANVAS_ITEM(p->data);
-		gnome_canvas_item_affine_absolute (item, affine);
-	}
+	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "moved",
 			  G_CALLBACK (object_moved_cb), view_highlight);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "changed",
 			  G_CALLBACK (object_changed_cb), view_highlight);
+
+	g_signal_connect (G_OBJECT (view_highlight->private->object), "flip_rotate",
+			  G_CALLBACK (flip_rotate_object_cb), view_highlight);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->view), "zoom_changed",
 			  G_CALLBACK (view_scale_changed_cb), view_highlight);
@@ -274,34 +290,34 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 				   glViewObject           *view_object,
 				   glViewHighlightStyle    style)
 {
-	gdouble          x, y, w, h;
-	GnomeCanvasItem *group;
-	glView          *view;
-	glLabelObject   *object;
-	gdouble          scale;
+	gdouble           w, h;
+	GnomeCanvasItem  *group;
+	GnomeCanvasGroup *position_group;
+	glView           *view;
+	glLabelObject    *object;
+	gdouble           scale;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
-	view   = gl_view_object_get_view (view_object);
-	view_highlight->private->view = view;
+	view   = view_highlight->private->view;
 	scale = view->scale;
 
-	object = gl_view_object_get_object (view_object);
-	view_highlight->private->object = object;
+	object = view_highlight->private->object;
+
+	position_group = GNOME_CANVAS_GROUP(view_highlight->private->position_group);
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (view->highlight_group,
+		gnome_canvas_item_new (position_group,
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -467,8 +483,9 @@ static void
 highlight_resizable_line_construct (glViewHighlight *view_highlight,
 				    glViewObject    *view_object)
 {
-	gdouble            x, y, dx, dy;
+	gdouble            dx, dy;
 	GnomeCanvasItem   *group;
+	GnomeCanvasGroup  *position_group;
 #ifdef SHOW_OUTLINE
 	GnomeCanvasPoints *points;
 #endif
@@ -481,17 +498,16 @@ highlight_resizable_line_construct (glViewHighlight *view_highlight,
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
-	view   = gl_view_object_get_view (view_object);
-	view_highlight->private->view = view;
+	view   = view_highlight->private->view;
 	scale = view->scale;
 
-	object = gl_view_object_get_object (view_object);
-	view_highlight->private->object = object;
+	object = view_highlight->private->object;
+
+	position_group = GNOME_CANVAS_GROUP(view_highlight->private->position_group);
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &dx, &dy);
 
 #ifdef SHOW_OUTLINE
@@ -499,9 +515,9 @@ highlight_resizable_line_construct (glViewHighlight *view_highlight,
 #endif
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (view->highlight_group,
+		gnome_canvas_item_new (position_group,
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -569,33 +585,33 @@ static void
 highlight_simple_construct (glViewHighlight *view_highlight,
 			    glViewObject    *view_object)
 {
-	gdouble          x, y, w, h;
-	GnomeCanvasItem *group;
-	glView          *view;
-	glLabelObject   *object;
+	gdouble           w, h;
+	GnomeCanvasItem  *group;
+	GnomeCanvasGroup *position_group;
+	glView           *view;
+	glLabelObject    *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 
-	view   = gl_view_object_get_view (view_object);
-	view_highlight->private->view = view;
+	view   = view_highlight->private->view;
 
-	object = gl_view_object_get_object (view_object);
-	view_highlight->private->object = object;
+	object = view_highlight->private->object;
+
+	position_group = GNOME_CANVAS_GROUP(view_highlight->private->position_group);
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (view->highlight_group,
+		gnome_canvas_item_new (position_group,
 				       gnome_canvas_group_get_type (),
-				       "x", x, "y", y, NULL);
+				       "x", 0.0, "y", 0.0, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -650,8 +666,26 @@ object_moved_cb (glLabelObject   *object,
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	/* Adjust location of analogous canvas group. */
-	gnome_canvas_item_move (view_highlight->private->group, dx, dy);
+	/* Adjust location of outer canvas group. */
+	gnome_canvas_item_move (view_highlight->private->position_group, dx, dy);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Flip/rotate object callback.                                    */
+/*---------------------------------------------------------------------------*/
+static void
+flip_rotate_object_cb (glLabelObject    *object,
+		       glViewHighlight  *view_highlight)
+{
+	gdouble          affine[6];
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Adjust affine of inner canvas group. */
+	gl_label_object_get_applied_affine (object, affine);
+	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -663,6 +697,8 @@ static void
 object_changed_cb (glLabelObject   *object,
 		   glViewHighlight *view_highlight)
 {
+	gdouble          affine[6];
+
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));

@@ -471,7 +471,6 @@ flip_rotate_object_cb (glLabelObject *object,
 		       glViewObject  *view_object)
 {
 	gdouble          affine[6], delta_affine[6];
-	gdouble          w, h;
 	GList           *p, *item_list;
 	GnomeCanvasItem *item;
 
