@@ -565,8 +565,14 @@ static void
 label_resized_cb (glLabel *label,
 		  glView *view)
 {
+	gdouble label_width, label_height;
+
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
+					0.0, 0.0, label_width, label_height);
 
 	gtk_object_destroy (GTK_OBJECT (view->bg_group));
 	gtk_object_destroy (GTK_OBJECT (view->grid_group));
