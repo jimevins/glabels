@@ -29,34 +29,36 @@
 
 G_BEGIN_DECLS
 
+typedef struct {
+	gboolean outline;
+	gboolean reverse;
+	gboolean crop_marks;
+} glPrintFlags;
+
 void gl_print_simple           (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_sheets,
 				gint              first,
 				gint              last,
-				gboolean          outline_flag,
-				gboolean          reverse_flag);
+				glPrintFlags     *flags);
 
 void gl_print_merge_collated   (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_copies,
 				gint              first,
-				gboolean          outline_flag,
-				gboolean          reverse_flag);
+				glPrintFlags     *flags);
 
 void gl_print_merge_uncollated (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_copies,
 				gint              first,
-				gboolean          outline_flag,
-				gboolean          reverse_flag);
+				glPrintFlags     *flags);
 
 void gl_print_batch            (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_sheets,
 				gint              n_bcopies,
-				gboolean          outline_flag,
-				gboolean          reverse_flag);
+				glPrintFlags     *flags);
 
 G_END_DECLS
 

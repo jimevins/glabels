@@ -80,6 +80,7 @@ main (int argc, char **argv)
 	GnomePrintConfig  *config = NULL;
 	glLabel           *label = NULL;
 	glXMLLabelStatus   status;
+	glPrintFlags       flags;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	textdomain (GETTEXT_PACKAGE);
@@ -117,6 +118,10 @@ main (int argc, char **argv)
 	}
 	poptFreeContext (pctx);
 
+	flags.outline = outline_flag;
+	flags.reverse = reverse_flag;
+	flags.crop_marks = FALSE;
+
 	/* initialize components */
 	gl_merge_init ();
 	gl_paper_init ();
@@ -132,8 +137,7 @@ main (int argc, char **argv)
 				job = gnome_print_job_new (NULL);
 			}
 
-			gl_print_batch (job, label, n_sheets, n_copies,
-					outline_flag, reverse_flag);
+			gl_print_batch (job, label, n_sheets, n_copies, &flags);
 
 			g_object_unref (label);
 		}

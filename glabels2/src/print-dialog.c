@@ -3,7 +3,7 @@
  *
  *  print.c:  Print module
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -61,6 +61,7 @@ GnomePrintConfig   *gnome_printer_selector_get_config (GtkWidget *psel);
 /* remember state of dialog. */
 static gboolean outline_flag = FALSE;
 static gboolean reverse_flag = FALSE;
+static gboolean crop_marks_flag = FALSE;
 static gboolean collate_flag = FALSE;
 static gint first = 1, last = 1, n_sheets = 0, n_copies = 1;
 
@@ -75,16 +76,25 @@ static void print_response (GtkDialog *dlg,
 			    gint      response,
 			    glLabel   *label);
 
-static void print_sheets (GnomePrintConfig *config, glLabel * label,
-			  gboolean preview_flag,
-			  gint n_sheets, gint first, gint last,
-			  gboolean outline_flag, gboolean reverse_flag);
+static void print_sheets       (GnomePrintConfig *config,
+				glLabel          *label,
+				gboolean          preview_flag,
+				gint              n_sheets,
+				gint              first,
+				gint              last,
+				gboolean          outline_flag,
+				gboolean          reverse_flag,
+				gboolean          crop_marks_flag);
 
-static void print_sheets_merge (GnomePrintConfig *config, glLabel * label,
-				gboolean preview_flag,
-				gint n_copies, gint first,
-				gboolean collate_flag,
-				gboolean outline_flag, gboolean reverse_flag);
+static void print_sheets_merge (GnomePrintConfig *config,
+				glLabel          *label,
+				gboolean          preview_flag,
+				gint              n_copies,
+				gint              first,
+				gboolean          collate_flag,
+				gboolean          outline_flag,
+				gboolean          reverse_flag,
+				gboolean          crop_marks_flag);
 
 
 /*****************************************************************************/
@@ -151,7 +161,7 @@ job_page_new (GtkWidget *dlg,
 	glMerge *merge;
 	GtkWidget *wframe;
 	GtkWidget *copies = NULL, *prmerge = NULL;
-	GtkWidget *wvbox, *outline_check, *reverse_check;
+	GtkWidget *wvbox, *outline_check, *reverse_check, *crop_marks_check;
 	gint n_records;
 
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
@@ -212,6 +222,14 @@ job_page_new (GtkWidget *dlg,
 				      reverse_flag);
 	g_object_set_data (G_OBJECT(dlg), "reverse_check", reverse_check);
 
+	/* add Crop marks check button */
+	crop_marks_check =
+	    gtk_check_button_new_with_label (_("print crop marks"));
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), crop_marks_check);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (crop_marks_check),
+				      crop_marks_flag);
+	g_object_set_data (G_OBJECT(dlg), "crop_marks_check", crop_marks_check);
+
 	gtk_widget_show_all (wframe);
 
 	return vbox;
@@ -249,7 +267,7 @@ print_response (GtkDialog *dlg,
 		glLabel   *label)
 {
 	GtkWidget *copies, *prmerge;
-	GtkWidget *outline_check, *reverse_check;
+	GtkWidget *outline_check, *reverse_check, *crop_marks_check;
 	GtkWidget *printer_select;
 	GnomePrintConfig *config;
 	glMerge *merge;
@@ -264,6 +282,8 @@ print_response (GtkDialog *dlg,
 						    "outline_check");
 		reverse_check  = g_object_get_data (G_OBJECT(dlg),
 						    "reverse_check");
+		crop_marks_check  = g_object_get_data (G_OBJECT(dlg),
+						       "crop_marks_check");
 		printer_select = g_object_get_data (G_OBJECT(dlg),
 						    "printer_select");
 
@@ -276,6 +296,9 @@ print_response (GtkDialog *dlg,
 		reverse_flag =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
 						      (reverse_check));
+		crop_marks_flag =
+			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+						      (crop_marks_check));
 
 		merge = gl_label_get_merge (label);
 
@@ -286,7 +309,7 @@ print_response (GtkDialog *dlg,
 			print_sheets (config, label,
 				      (response == GNOME_PRINT_DIALOG_RESPONSE_PREVIEW),
 				      n_sheets, first, last,
-				      outline_flag, reverse_flag);
+				      outline_flag, reverse_flag, crop_marks_flag);
 
 		} else {
 
@@ -298,7 +321,8 @@ print_response (GtkDialog *dlg,
 					    n_copies, first,
 					    collate_flag,
 					    outline_flag,
-					    reverse_flag);
+					    reverse_flag,
+					    crop_marks_flag);
 			g_object_unref (G_OBJECT(merge));
 		}
 		break;
@@ -322,13 +346,17 @@ print_sheets (GnomePrintConfig *config,
 	      gint              first,
 	      gint              last,
 	      gboolean          outline_flag,
-	      gboolean          reverse_flag)
+	      gboolean          reverse_flag,
+	      gboolean          crop_marks_flag)
 {
 	GnomePrintJob *job;
+	glPrintFlags   flags;
 
 	job = gnome_print_job_new (config);
-	gl_print_simple (job, label, n_sheets, first, last,
-			 outline_flag, reverse_flag);
+	flags.outline = outline_flag;
+	flags.reverse = reverse_flag;
+	flags.crop_marks = crop_marks_flag;
+	gl_print_simple (job, label, n_sheets, first, last, &flags);
 	gnome_print_job_close (job);
 
 	if (preview_flag) {
@@ -353,19 +381,20 @@ print_sheets_merge (GnomePrintConfig *config,
 		    gint              first,
 		    gboolean          collate_flag,
 		    gboolean          outline_flag,
-		    gboolean          reverse_flag)
+		    gboolean          reverse_flag,
+		    gboolean          crop_marks_flag)
 {
 	GnomePrintJob *job;
+	glPrintFlags   flags;
 
 	job = gnome_print_job_new (config);
+	flags.outline = outline_flag;
+	flags.reverse = reverse_flag;
+	flags.crop_marks = crop_marks_flag;
 	if ( collate_flag ) {
-		gl_print_merge_collated (job, label,
-					 n_copies, first,
-					 outline_flag, reverse_flag);
+		gl_print_merge_collated (job, label, n_copies, first, &flags);
 	} else {
-		gl_print_merge_uncollated (job, label,
-					   n_copies, first,
-					   outline_flag, reverse_flag);
+		gl_print_merge_uncollated (job, label, n_copies, first, &flags);
 	}
 	gnome_print_job_close (job);
 

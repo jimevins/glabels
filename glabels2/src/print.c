@@ -43,6 +43,9 @@
 #define ARC_FINE   2  /* Resolution in degrees of large arcs */
 #define ARC_COURSE 5  /* Resolution in degrees of small arcs */
 
+#define TICK_OFFSET  2.25
+#define TICK_LENGTH 18.0
+
 /*=========================================================================*/
 /* Private types.                                                          */
 /*=========================================================================*/
@@ -79,6 +82,8 @@ static void       print_info_free             (PrintInfo       **pi);
 static void       print_page_begin            (PrintInfo        *pi);
 
 static void       print_page_end              (PrintInfo        *pi);
+
+static void       print_crop_marks            (PrintInfo        *pi);
 
 static void       print_label                 (PrintInfo        *pi,
 					       glLabel          *label,
@@ -166,8 +171,7 @@ gl_print_simple (GnomePrintJob    *job,
 		 gint              n_sheets,
 		 gint              first,
 		 gint              last,
-		 gboolean          outline_flag,
-		 gboolean          reverse_flag)
+		 glPrintFlags     *flags)
 {
 	PrintInfo *pi;
 	gint i_sheet, i_label;
@@ -182,12 +186,15 @@ gl_print_simple (GnomePrintJob    *job,
 	for (i_sheet = 0; i_sheet < n_sheets; i_sheet++) {
 
 		print_page_begin (pi);
+		if (flags->crop_marks) {
+			print_crop_marks (pi);
+		}
 
 		for (i_label = first - 1; i_label < last; i_label++) {
 
 			print_label (pi, label,
 				     origins[i_label].x, origins[i_label].y,
-				     NULL, outline_flag, reverse_flag);
+				     NULL, flags->outline, flags->reverse);
 
 		}
 
@@ -209,8 +216,7 @@ gl_print_merge_collated (GnomePrintJob    *job,
 			 glLabel          *label,
 			 gint              n_copies,
 			 gint              first,
-			 gboolean          outline_flag,
-			 gboolean          reverse_flag)
+			 glPrintFlags     *flags)
 {
 	glMerge                *merge;
 	const GList            *record_list;
@@ -242,13 +248,16 @@ gl_print_merge_collated (GnomePrintJob    *job,
 				if ((i_label == 0) || (i_sheet == 0)) {
 					i_sheet++;
 					print_page_begin (pi);
+					if (flags->crop_marks) {
+						print_crop_marks (pi);
+					}
 				}
 
 				print_label (pi, label,
 					     origins[i_label].x,
 					     origins[i_label].y,
 					     record,
-					     outline_flag, reverse_flag);
+					     flags->outline, flags->reverse);
 
 				i_label = (i_label + 1) % n_labels_per_page;
 				if (i_label == 0) {
@@ -277,8 +286,7 @@ gl_print_merge_uncollated (GnomePrintJob    *job,
 			   glLabel          *label,
 			   gint              n_copies,
 			   gint              first,
-			   gboolean          outline_flag,
-			   gboolean          reverse_flag)
+			   glPrintFlags     *flags)
 {
 	glMerge                *merge;
 	const GList            *record_list;
@@ -312,13 +320,16 @@ gl_print_merge_uncollated (GnomePrintJob    *job,
 				if ((i_label == 0) || (i_sheet == 0)) {
 					i_sheet++;
 					print_page_begin (pi);
+					if (flags->crop_marks) {
+						print_crop_marks (pi);
+					}
 				}
 
 				print_label (pi, label,
 					     origins[i_label].x,
 					     origins[i_label].y,
 					     record,
-					     outline_flag, reverse_flag);
+					     flags->outline, flags->reverse);
 
 				i_label = (i_label + 1) % n_labels_per_page;
 				if (i_label == 0) {
@@ -347,8 +358,7 @@ gl_print_batch (GnomePrintJob    *job,
 		glLabel          *label,
 		gint              n_sheets,
 		gint              n_copies,
-		gboolean          outline_flag,
-		gboolean          reverse_flag)
+		glPrintFlags     *flags)
 {
 	gint n_per_page;
 	glMerge *merge;
@@ -362,11 +372,9 @@ gl_print_batch (GnomePrintJob    *job,
 	if ( merge == NULL ) {
 		n_per_page = gl_template_get_n_labels(template);
 
-		gl_print_simple (job, label, n_sheets, 1, n_per_page,
-				 outline_flag, reverse_flag);
+		gl_print_simple (job, label, n_sheets, 1, n_per_page, flags);
 	} else {
-		gl_print_merge_collated (job, label, n_copies, 1,
-					 outline_flag, reverse_flag);
+		gl_print_merge_collated (job, label, n_copies, 1, flags);
 	}
 	gl_template_free (&template);
 
@@ -475,6 +483,108 @@ print_page_end (PrintInfo *pi)
 	gl_debug (DEBUG_PRINT, "START");
 
 	gnome_print_showpage (pi->pc);
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Print crop tick marks.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+print_crop_marks (PrintInfo *pi)
+{
+	gdouble           w, h, page_w, page_h;
+	GList            *p;
+	glTemplateLayout *layout;
+	gdouble           xmin, ymin, xmax, ymax, dx, dy;
+	gdouble           x1, y1, x2, y2, x3, y3, x4, y4;
+	gint              ix, iy, nx, ny;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	gl_template_get_label_size (pi->template, &w, &h);
+
+	page_w = pi->page_width;
+	page_h = pi->page_height;
+
+	gnome_print_setrgbcolor (pi->pc, 0.25, 0.25, 0.25);
+	gnome_print_setopacity (pi->pc, 1.0);
+	gnome_print_setlinewidth (pi->pc, 0.25);
+
+	for (p=pi->template->label.any.layouts; p != NULL; p=p->next) {
+
+		layout = (glTemplateLayout *)p->data;
+
+		xmin = layout->x0;
+		ymin = layout->y0;
+		xmax = layout->x0 + layout->dx*(layout->nx - 1) + w;
+		ymax = layout->y0 + layout->dy*(layout->ny - 1) + h;
+
+		dx = layout->dx;
+		dy = layout->dy;
+
+		nx = layout->nx;
+		ny = layout->ny;
+
+		for (ix=0; ix < nx; ix++) {
+
+			x1 = xmin + ix*dx;
+			x2 = x1 + w;
+
+			y1 = MAX((ymin - TICK_OFFSET), 0.0);
+			y2 = MAX((y1 - TICK_LENGTH), 0.0);
+
+			y3 = MIN((ymax + TICK_OFFSET), page_h);
+			y4 = MIN((y3 + TICK_LENGTH), page_h);
+
+			gnome_print_moveto (pi->pc, x1, y1);
+			gnome_print_lineto (pi->pc, x1, y2);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x2, y1);
+			gnome_print_lineto (pi->pc, x2, y2);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x1, y3);
+			gnome_print_lineto (pi->pc, x1, y4);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x2, y3);
+			gnome_print_lineto (pi->pc, x2, y4);
+			gnome_print_stroke (pi->pc);
+
+		}
+
+		for (iy=0; iy < ny; iy++) {
+
+			y1 = ymin + iy*dy;
+			y2 = y1 + h;
+
+			x1 = MAX((xmin - TICK_OFFSET), 0.0);
+			x2 = MAX((x1 - TICK_LENGTH), 0.0);
+
+			x3 = MIN((xmax + TICK_OFFSET), page_w);
+			x4 = MIN((x3 + TICK_LENGTH), page_w);
+
+			gnome_print_moveto (pi->pc, x1, y1);
+			gnome_print_lineto (pi->pc, x2, y1);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x1, y2);
+			gnome_print_lineto (pi->pc, x2, y2);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x3, y1);
+			gnome_print_lineto (pi->pc, x4, y1);
+			gnome_print_stroke (pi->pc);
+
+			gnome_print_moveto (pi->pc, x3, y2);
+			gnome_print_lineto (pi->pc, x4, y2);
+			gnome_print_stroke (pi->pc);
+
+		}
+
+	}
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1323,4 +1433,3 @@ create_clipped_circle_path (GnomePrintContext *pc,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
-
