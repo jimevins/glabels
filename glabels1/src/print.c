@@ -78,7 +78,9 @@ static void draw_barcode_object (PrintInfo * pi, glLabelObject * object,
 				 glMergeRecord * record);
 
 static void draw_outline (PrintInfo * pi, glLabel * label);
+#ifdef CLIP_LABEL
 static void clip_to_outline (PrintInfo * pi, glLabel * label);
+#endif
 
 static void create_rectangle_path (GnomePrintContext * pc,
 				   gdouble x0, gdouble y0,
@@ -351,7 +353,9 @@ print_label (PrintInfo * pi,
 	if (outline_flag) {
 		draw_outline (pi, label);
 	}
+#ifdef CLIP_LABEL /* FIXME: this may be causing problems for some people. */
 	clip_to_outline (pi, label);
+#endif
 	draw_label (pi, label, record);
 
 	gnome_print_grestore (pi->pc);
@@ -743,6 +747,7 @@ draw_outline (PrintInfo * pi,
 
 }
 
+#ifdef CLIP_LABEL
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Clip to outline.                                                */
 /*---------------------------------------------------------------------------*/
@@ -783,6 +788,7 @@ clip_to_outline (PrintInfo * pi,
 	}
 
 }
+#endif
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Path creation utilities.                                        */
