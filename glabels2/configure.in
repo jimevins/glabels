@@ -60,6 +60,14 @@ libxml-2.0 >= $LIBXML_REQUIRED \
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
 
+dnl ----------------------------------------
+dnl - Is the new file chooser available?
+dnl ----------------------------------------
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.3.2,
+                  HAVE_FILE_CHOOSER="-DHAVE_FILE_CHOOSER",
+                  HAVE_FILE_CHOOSER="-UHAVE_FILE_CHOOSER")
+AC_SUBST(HAVE_FILE_CHOOSER)
+
 dnl ****************************************
 dnl * Supported languages
 dnl ****************************************

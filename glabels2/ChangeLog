@@ -1,5 +1,17 @@
 2004-02-16  Jim Evins  <evins@snaught.com>
 
+	* configure.in:
+		If gtk+ >= 2.3.2 then define HAVE_FILE_CHOOSER.
+	
+	* src/Makefile.am:
+		Added HAVE_FILE_CHOOSER to INCLUDES.
+	
+	* src/file.c: (gl_file_open), (open_response), (gl_file_open_real),
+	(gl_file_save_as), (save_as_response):
+		Ported to use GtkFileChooserDialog if HAVE_FILE_CHOOSER is defined.
+
+2004-02-16  Jim Evins  <evins@snaught.com>
+
 	* src/xml-label-04.c: (xml04_parse_image_props):
 	* src/xml-label-191.c: (xml191_parse_image_props):
 	* src/xml-label.c: (xml_parse_object_image):
