@@ -33,7 +33,7 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define DEFAULT_FONT_FAMILY      "Helvetica"
+#define DEFAULT_FONT_FAMILY      "Sans"
 #define DEFAULT_FONT_SIZE        14.0
 #define DEFAULT_FONT_WEIGHT      GNOME_FONT_BOOK
 #define DEFAULT_FONT_ITALIC_FLAG FALSE

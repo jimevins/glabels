@@ -72,7 +72,7 @@ glPreferences      *gl_prefs     = NULL;
 #define DEFAULT_UNITS_STRING       units_to_string (GL_PREFS_UNITS_INCHES)
 #define DEFAULT_PAGE_SIZE          "US-Letter"
 
-#define DEFAULT_FONT_FAMILY        "Helvetica"
+#define DEFAULT_FONT_FAMILY        "Sans"
 #define DEFAULT_FONT_SIZE          14.0
 #define DEFAULT_FONT_WEIGHT_STRING gl_util_weight_to_string (GNOME_FONT_BOOK)
 #define DEFAULT_FONT_ITALIC_FLAG   FALSE

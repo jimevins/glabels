@@ -66,7 +66,7 @@ typedef glBarcode *(*glBarcodeNewFunc) (glBarcodeStyle  style,
 					gchar          *digits);
 
 
-#define GL_BARCODE_FONT_FAMILY      "Helvetica"
+#define GL_BARCODE_FONT_FAMILY      "Sans"
 #define GL_BARCODE_FONT_WEIGHT      GNOME_FONT_BOOK
 
 
