@@ -172,7 +172,6 @@ gl_view_line_new (glLabelLine *object,
 		  glView     *view)
 {
 	glViewLine         *view_line;
-	GnomeCanvasItem    *group;
 	gdouble            line_width;
 	guint              line_color;
 	gdouble            w, h;
@@ -196,20 +195,18 @@ gl_view_line_new (glLabelLine *object,
 	line_color = gl_label_line_get_line_color(object);
 
 	/* Create analogous canvas item. */
-	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_line));
-
 	points = gnome_canvas_points_new (2);
 	points->coords[0] = 0.0;
 	points->coords[1] = 0.0;
 	points->coords[2] = w;
 	points->coords[3] = h;
 	view_line->private->item =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
-				       gnome_canvas_line_get_type (),
-				       "points", points,
-				       "width_units", line_width,
-				       "fill_color_rgba", line_color,
-				       NULL);
+		gl_view_object_item_new (GL_VIEW_OBJECT(view_line),
+					 gnome_canvas_line_get_type (),
+					 "points", points,
+					 "width_units", line_width,
+					 "fill_color_rgba", line_color,
+					 NULL);
 	gnome_canvas_points_free (points);
 
 	g_signal_connect (G_OBJECT (object), "changed",

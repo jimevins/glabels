@@ -1485,6 +1485,52 @@ gl_view_lower_selection (glView *view)
 }
 
 /*****************************************************************************/
+/* Flip selected objects horizontally.                                       */
+/*****************************************************************************/
+void
+gl_view_flip_selection_horiz (glView *view)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *label_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		label_object = gl_view_object_get_object (view_object);
+		gl_label_object_flip_horiz (label_object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Flip selected objects vertically.                                         */
+/*****************************************************************************/
+void
+gl_view_flip_selection_vert (glView *view)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *label_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		label_object = gl_view_object_get_object (view_object);
+		gl_label_object_flip_vert (label_object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void

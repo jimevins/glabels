@@ -297,3 +297,39 @@ gl_tools_lower_objects (BonoboUIComponent *uic,
 	}
 }
 
+/*****************************************************************************/
+/* Flip objects horizontally callback.                                       */
+/*****************************************************************************/
+void
+gl_tools_flip_objects_horiz (BonoboUIComponent *uic,
+			     gpointer           user_data,
+			     const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_flip_selection_horiz (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Flip objects vertically callback.                                         */
+/*****************************************************************************/
+void
+gl_tools_flip_objects_vert (BonoboUIComponent *uic,
+			    gpointer           user_data,
+			    const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_flip_selection_vert (GL_VIEW(window->view));
+	}
+}
+

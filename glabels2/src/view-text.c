@@ -214,11 +214,7 @@ static void
 update_view_text_cb (glLabelObject *object,
 		     glViewText    *view_text)
 {
-	glView             *view;
-
 	gl_debug (DEBUG_VIEW, "START");
-
-	view = gl_view_object_get_view (GL_VIEW_OBJECT(view_text));
 
 	/* Adjust appearance of analogous canvas item. */
 	draw_hacktext (view_text);
@@ -700,7 +696,7 @@ static void
 draw_hacktext (glViewText *view_text)
 {
 	glLabelObject    *object;
-	GnomeCanvasItem  *group, *item;
+	GnomeCanvasItem  *item;
 	GList            *lines;
 	gchar            *text;
 	gchar            *font_family;
@@ -730,9 +726,6 @@ draw_hacktext (glViewText *view_text)
 	lines = gl_label_text_get_lines(GL_LABEL_TEXT(object));
 	text = gl_text_node_lines_expand (lines, NULL);
 	line = g_strsplit (text, "\n", -1);
-
-	/* get parent item/group to render to. */
-	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_text));
 
 	/* remove previous items from group. */
 	for (li = view_text->private->item_list; li != NULL; li = li->next) {
@@ -779,11 +772,11 @@ draw_hacktext (glViewText *view_text)
 		y_offset =
 			(i + 1) * font_size + gnome_font_get_descender (font);
 
-		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (group),
-					      gl_canvas_hacktext_get_type (),
-					      "x", x_offset,
-					      "y", y_offset,
-					      "glyphlist", glyphlist, NULL);
+		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
+						gl_canvas_hacktext_get_type (),
+						"x", x_offset,
+						"y", y_offset,
+						"glyphlist", glyphlist, NULL);
 		view_text->private->item_list =
 			g_list_prepend (view_text->private->item_list, item);
 

@@ -179,7 +179,6 @@ gl_view_image_new (glLabelImage *object,
 		   glView       *view)
 {
 	glViewImage        *view_image;
-	GnomeCanvasItem    *group;
 	const GdkPixbuf    *pixbuf;
 	gdouble            w, h;
 	GtkMenu            *menu;
@@ -200,18 +199,17 @@ gl_view_image_new (glLabelImage *object,
 	pixbuf = gl_label_image_get_pixbuf(object);
 
 	/* Create analogous canvas item. */
-	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_image));
 	view_image->private->item =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
-				       gnome_canvas_pixbuf_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       "width_set", TRUE,
-				       "height_set", TRUE,
-				       "width", w,
-				       "height", h,
-				       "pixbuf", pixbuf,
-				       NULL);
+		gl_view_object_item_new (GL_VIEW_OBJECT(view_image),
+					 gnome_canvas_pixbuf_get_type (),
+					 "x", 0.0,
+					 "y", 0.0,
+					 "width_set", TRUE,
+					 "height_set", TRUE,
+					 "width", w,
+					 "height", h,
+					 "pixbuf", pixbuf,
+					 NULL);
 
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_image_cb), view_image);

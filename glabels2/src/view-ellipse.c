@@ -179,7 +179,6 @@ gl_view_ellipse_new (glLabelEllipse *object,
 		     glView     *view)
 {
 	glViewEllipse      *view_ellipse;
-	GnomeCanvasItem    *group;
 	gdouble            line_width;
 	guint              line_color, fill_color;
 	gdouble            w, h;
@@ -203,18 +202,17 @@ gl_view_ellipse_new (glLabelEllipse *object,
 	fill_color = gl_label_ellipse_get_fill_color(object);
 
 	/* Create analogous canvas item. */
-	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_ellipse));
 	view_ellipse->private->item =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
-				       gnome_canvas_ellipse_get_type (),
-				       "x1", 0.0,
-				       "y1", 0.0,
-				       "x2", w + DELTA,
-				       "y2", h + DELTA,
-				       "width_units", line_width,
-				       "outline_color_rgba", line_color,
-				       "fill_color_rgba", fill_color,
-				       NULL);
+		gl_view_object_item_new (GL_VIEW_OBJECT(view_ellipse),
+					 gnome_canvas_ellipse_get_type (),
+					 "x1", 0.0,
+					 "y1", 0.0,
+					 "x2", w + DELTA,
+					 "y2", h + DELTA,
+					 "width_units", line_width,
+					 "outline_color_rgba", line_color,
+					 "fill_color_rgba", fill_color,
+					 NULL);
 
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_view_ellipse_cb), view_ellipse);

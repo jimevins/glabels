@@ -24,60 +24,72 @@
 
 #include <bonobo/bonobo-ui-component.h>
 
-extern void gl_tools_arrow            (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+G_BEGIN_DECLS
 
-extern void gl_tools_text             (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_arrow                    (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_box              (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_text                     (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_line             (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_box                      (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_ellipse          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_line                     (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_image            (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_ellipse                  (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_barcode           (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_image                    (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_zoomin           (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_barcode                  (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_zoomout          (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_zoomin                   (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_zoom1to1         (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_zoomout                  (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_merge_properties (BonoboUIComponent *uic,
-				       gpointer user_data,
-				       const gchar* verbname);
+void gl_tools_zoom1to1                 (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_object_properties (BonoboUIComponent *uic,
-					gpointer user_data,
-					const gchar* verbname);
+void gl_tools_merge_properties         (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_raise_objects (BonoboUIComponent *uic,
-				    gpointer user_data,
-				    const gchar* verbname);
+void gl_tools_object_properties        (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
 
-extern void gl_tools_lower_objects (BonoboUIComponent *uic,
-				    gpointer user_data,
-				    const gchar* verbname);
+void gl_tools_raise_objects            (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_lower_objects            (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_flip_objects_horiz       (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_flip_objects_vert        (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+G_END_DECLS
 
 #endif

@@ -79,6 +79,11 @@ glLabelObject   *gl_view_object_get_object        (glViewObject         *view_ob
 
 GnomeCanvasItem *gl_view_object_get_group         (glViewObject         *view_object);
 
+GnomeCanvasItem *gl_view_object_item_new          (glViewObject         *view_object,
+						   GType                 type,
+						   const gchar          *first_arg_name,
+						   ...);
+
 GtkMenu         *gl_view_object_get_menu          (glViewObject         *view_object);
 
 void             gl_view_object_update_highlight  (glViewObject         *view_object);

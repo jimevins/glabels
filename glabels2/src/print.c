@@ -95,6 +95,10 @@ static void       draw_label                  (PrintInfo        *pi,
 					       glMergeRecord    *record);
 
 
+static void       draw_object                 (PrintInfo        *pi,
+					       glLabelObject    *object,
+					       glMergeRecord    *record);
+
 static void       draw_text_object            (PrintInfo        *pi,
 					       glLabelText      *object,
 					       glMergeRecord    *record);
@@ -532,22 +536,58 @@ draw_label (PrintInfo     *pi,
 	for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next) {
 		object = (glLabelObject *) p_obj->data;
 
-		if (GL_IS_LABEL_TEXT(object)) {
-			draw_text_object (pi, GL_LABEL_TEXT(object), record);
-		} else if (GL_IS_LABEL_BOX(object)) {
-			draw_box_object (pi, GL_LABEL_BOX(object));
-		} else if (GL_IS_LABEL_LINE(object)) {
-			draw_line_object (pi, GL_LABEL_LINE(object));
-		} else if (GL_IS_LABEL_ELLIPSE(object)) {
-			draw_ellipse_object (pi, GL_LABEL_ELLIPSE(object));
-		} else if (GL_IS_LABEL_IMAGE(object)) {
-			draw_image_object (pi, GL_LABEL_IMAGE(object));
-		} else if (GL_IS_LABEL_BARCODE(object)) {
-			draw_barcode_object (pi, GL_LABEL_BARCODE(object),
-					     record);
-		}
-
+		draw_object (pi, object, record);
 	}
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw object.                                                    */
+/*---------------------------------------------------------------------------*/
+static void
+draw_object (PrintInfo     *pi,
+	     glLabelObject *object,
+	     glMergeRecord *record)
+{
+	gdouble x0, y0, w, h;
+	glLabelObjectFlip flip;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	gl_label_object_get_position (object, &x0, &y0);
+	gl_label_object_get_size (object, &w, &h);
+	flip = gl_label_object_get_flip (object);
+
+	gnome_print_gsave (pi->pc);
+
+	gnome_print_translate (pi->pc, x0, y0);
+
+	if ( flip & GL_LABEL_OBJECT_FLIP_HORIZ ) {
+		gnome_print_translate (pi->pc, w, 0.0);
+		gnome_print_scale (pi->pc, -1.0, 1.0);
+	}
+	if ( flip & GL_LABEL_OBJECT_FLIP_VERT ) {
+		gnome_print_translate (pi->pc, 0.0, h);
+		gnome_print_scale (pi->pc, 1.0, -1.0);
+	}
+
+	if (GL_IS_LABEL_TEXT(object)) {
+		draw_text_object (pi, GL_LABEL_TEXT(object), record);
+	} else if (GL_IS_LABEL_BOX(object)) {
+		draw_box_object (pi, GL_LABEL_BOX(object));
+	} else if (GL_IS_LABEL_LINE(object)) {
+		draw_line_object (pi, GL_LABEL_LINE(object));
+	} else if (GL_IS_LABEL_ELLIPSE(object)) {
+		draw_ellipse_object (pi, GL_LABEL_ELLIPSE(object));
+	} else if (GL_IS_LABEL_IMAGE(object)) {
+		draw_image_object (pi, GL_LABEL_IMAGE(object));
+	} else if (GL_IS_LABEL_BARCODE(object)) {
+		draw_barcode_object (pi, GL_LABEL_BARCODE(object),
+				     record);
+	}
+
+	gnome_print_grestore (pi->pc);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -564,8 +604,6 @@ draw_text_object (PrintInfo     *pi,
 	gchar **line;
 	gint i;
 	gdouble x_offset, y_offset, w, object_w, object_h;
-	gdouble x, y;
-	gdouble x0, y0;
 	gchar *text;
 	GList *lines;
 	gchar *font_family;
@@ -581,7 +619,6 @@ draw_text_object (PrintInfo     *pi,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x0, &y0);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &object_w, &object_h);
 	lines = gl_label_text_get_lines (object);
 	gl_label_text_get_props (object,
@@ -635,9 +672,7 @@ draw_text_object (PrintInfo     *pi,
 		y_offset = (i + 1) * font_size
 		    + gnome_font_get_descender (font);
 
-		x = x0 + x_offset;
-		y = y0 + y_offset;
-		gnome_print_moveto (pi->pc, x, y);
+		gnome_print_moveto (pi->pc, x_offset, y_offset);
 
 		gnome_print_gsave (pi->pc);
 		gnome_print_scale (pi->pc, 1.0, -1.0);
@@ -660,20 +695,19 @@ static void
 draw_box_object (PrintInfo  *pi,
 		 glLabelBox *object)
 {
-	gdouble x, y, w, h;
+	gdouble w, h;
 	gdouble line_width;
 	guint line_color, fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_box_get_line_width (object);
 	line_color = gl_label_box_get_line_color (object);
 	fill_color = gl_label_box_get_fill_color (object);
 
 	/* Paint fill color */
-	create_rectangle_path (pi->pc, x, y, w, h);
+	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
 	gnome_print_setrgbcolor (pi->pc,
 				 GL_COLOR_F_RED (fill_color),
 				 GL_COLOR_F_GREEN (fill_color),
@@ -682,7 +716,7 @@ draw_box_object (PrintInfo  *pi,
 	gnome_print_fill (pi->pc);
 
 	/* Draw outline */
-	create_rectangle_path (pi->pc, x, y, w, h);
+	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
 	gnome_print_setrgbcolor (pi->pc,
 				 GL_COLOR_F_RED (line_color),
 				 GL_COLOR_F_GREEN (line_color),
@@ -701,19 +735,18 @@ static void
 draw_line_object (PrintInfo   *pi,
 		  glLabelLine *object)
 {
-	gdouble x, y, w, h;
+	gdouble w, h;
 	gdouble line_width;
 	guint line_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_line_get_line_width (object);
 	line_color = gl_label_line_get_line_color (object);
 
-	gnome_print_moveto (pi->pc, x, y);
-	gnome_print_lineto (pi->pc, x + w, y + h);
+	gnome_print_moveto (pi->pc, 0.0, 0.0);
+	gnome_print_lineto (pi->pc, w, h);
 	gnome_print_setrgbcolor (pi->pc,
 				 GL_COLOR_F_RED (line_color),
 				 GL_COLOR_F_GREEN (line_color),
@@ -732,13 +765,12 @@ static void
 draw_ellipse_object (PrintInfo      *pi,
 		     glLabelEllipse *object)
 {
-	gdouble x, y, x0, y0, rx, ry, w, h;
+	gdouble x0, y0, rx, ry, w, h;
 	gdouble line_width;
 	guint line_color, fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	line_width = gl_label_ellipse_get_line_width (object);
 	line_color = gl_label_ellipse_get_line_color (object);
@@ -746,8 +778,8 @@ draw_ellipse_object (PrintInfo      *pi,
 
 	rx = w / 2.0;
 	ry = h / 2.0;
-	x0 = x + rx;
-	y0 = y + ry;
+	x0 = rx;
+	y0 = ry;
 
 	/* Paint fill color */
 	create_ellipse_path (pi->pc, x0, y0, rx, ry);
@@ -778,7 +810,7 @@ static void
 draw_image_object (PrintInfo    *pi,
 		   glLabelImage *object)
 {
-	gdouble x, y, w, h;
+	gdouble w, h;
 	const GdkPixbuf *pixbuf;
 	guchar *image_data;
 	gint image_w, image_h, image_stride;
@@ -787,7 +819,6 @@ draw_image_object (PrintInfo    *pi,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size     (GL_LABEL_OBJECT(object), &w, &h);
 
 	pixbuf = gl_label_image_get_pixbuf (object);
@@ -798,7 +829,7 @@ draw_image_object (PrintInfo    *pi,
 	image_alpha_flag = gdk_pixbuf_get_has_alpha(pixbuf);
 
 	gnome_print_gsave (pi->pc);
-	gnome_print_translate (pi->pc, x, y+h);
+	gnome_print_translate (pi->pc, 0.0, h);
 	gnome_print_scale (pi->pc, w, -h);
 	if (image_alpha_flag) {
 	        ret = gnome_print_rgbaimage (pi->pc, image_data,
@@ -826,7 +857,7 @@ draw_barcode_object (PrintInfo      *pi,
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
 	GList *li;
-	gdouble x, y, y_offset;
+	gdouble y_offset;
 	GnomeFont *font;
 	gchar *text, *cstring;
 	glTextNode          *text_node;
@@ -837,7 +868,6 @@ draw_barcode_object (PrintInfo      *pi,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	text_node = gl_label_barcode_get_data (object);
 	gl_label_barcode_get_props (object,
 				    &style, &text_flag, &color, &scale);
@@ -863,7 +893,7 @@ draw_barcode_object (PrintInfo      *pi,
 					GL_COLOR_F_ALPHA (color));
 
 		y_offset = 12.0 - gnome_font_get_descender (font);
-		gnome_print_moveto (pi->pc, x, y + y_offset);
+		gnome_print_moveto (pi->pc, 0.0, y_offset);
 
 		gnome_print_gsave (pi->pc);
 		gnome_print_scale (pi->pc, 1.0, -1.0);
@@ -875,9 +905,8 @@ draw_barcode_object (PrintInfo      *pi,
 		for (li = gbc->lines; li != NULL; li = li->next) {
 			line = (glBarcodeLine *) li->data;
 
-			gnome_print_moveto (pi->pc, x + line->x, y + line->y);
-			gnome_print_lineto (pi->pc, x + line->x,
-					    y + line->y + line->length);
+			gnome_print_moveto (pi->pc, line->x, line->y);
+			gnome_print_lineto (pi->pc, line->x, line->y + line->length);
 			gnome_print_setrgbcolor (pi->pc,
 						 GL_COLOR_F_RED (color),
 						 GL_COLOR_F_GREEN (color),
@@ -907,7 +936,7 @@ draw_barcode_object (PrintInfo      *pi,
 			y_offset =
 			    bchar->y + bchar->fsize -
 			    gnome_font_get_descender (font);
-			gnome_print_moveto (pi->pc, x + bchar->x, y + y_offset);
+			gnome_print_moveto (pi->pc, bchar->x, y_offset);
 
 			cstring = g_strdup_printf ("%c", bchar->c);
 			gnome_print_gsave (pi->pc);

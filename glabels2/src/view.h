@@ -88,72 +88,76 @@ struct _glViewClass {
 
 G_BEGIN_DECLS
 
-guint     gl_view_get_type           (void);
+guint      gl_view_get_type                (void);
 
-GtkWidget *gl_view_new               (glLabel           *label);
-
-
-void      gl_view_raise_fg           (glView            *view);
+GtkWidget *gl_view_new                     (glLabel           *label);
 
 
-void      gl_view_arrow_mode         (glView            *view);
-
-void      gl_view_object_create_mode (glView            *view,
-				      glLabelObjectType  type);
+void       gl_view_raise_fg                (glView            *view);
 
 
-void      gl_view_select_object      (glView            *view,
-				      glViewObject      *view_object);
+void       gl_view_arrow_mode              (glView            *view);
 
-void      gl_view_unselect_object    (glView            *view,
-				      glViewObject      *view_object);
-
-void      gl_view_select_all         (glView            *view);
-
-void      gl_view_unselect_all       (glView            *view);
-
-void      gl_view_select_region      (glView            *view,
-				      gdouble            x1,
-				      gdouble            y1,
-				      gdouble            x2,
-				      gdouble            y2);
-
-gboolean  gl_view_is_selection_empty (glView            *view);
-
-gboolean  gl_view_is_selection_atomic(glView            *view);
-
-void      gl_view_delete_selection   (glView            *view);
-
-void      gl_view_edit_object_props  (glView            *view);
-
-void      gl_view_raise_selection    (glView            *view);
-
-void      gl_view_lower_selection    (glView            *view);
-
-void      gl_view_cut                (glView            *view);
-
-void      gl_view_copy               (glView            *view);
-
-void      gl_view_paste              (glView            *view);
+void       gl_view_object_create_mode      (glView            *view,
+					   glLabelObjectType  type);
 
 
-void      gl_view_zoom_in            (glView            *view);
+void       gl_view_select_object           (glView            *view,
+					    glViewObject      *view_object);
 
-void      gl_view_zoom_out           (glView            *view);
+void       gl_view_unselect_object         (glView            *view,
+					    glViewObject      *view_object);
 
-void      gl_view_set_zoom           (glView            *view,
-				      gdouble            scale);
+void       gl_view_select_all              (glView            *view);
 
-gdouble   gl_view_get_zoom           (glView            *view);
+void       gl_view_unselect_all            (glView            *view);
 
-gboolean  gl_view_is_zoom_max        (glView            *view);
+void       gl_view_select_region           (glView            *view,
+					    gdouble            x1,
+					    gdouble            y1,
+					    gdouble            x2,
+					    gdouble            y2);
 
-gboolean  gl_view_is_zoom_min        (glView            *view);
+gboolean   gl_view_is_selection_empty      (glView            *view);
+
+gboolean   gl_view_is_selection_atomic     (glView            *view);
+
+void       gl_view_delete_selection        (glView            *view);
+
+void       gl_view_edit_object_props       (glView            *view);
+
+void       gl_view_raise_selection         (glView            *view);
+
+void       gl_view_lower_selection         (glView            *view);
+
+void       gl_view_flip_selection_horiz    (glView            *view);
+
+void       gl_view_flip_selection_vert     (glView            *view);
+
+void       gl_view_cut                     (glView            *view);
+
+void       gl_view_copy                    (glView            *view);
+
+void       gl_view_paste                   (glView            *view);
 
 
-int       gl_view_item_event_handler (GnomeCanvasItem   *item,
-				      GdkEvent          *event,
-				      glViewObject      *view_object);
+void       gl_view_zoom_in                 (glView            *view);
+
+void       gl_view_zoom_out                (glView            *view);
+
+void       gl_view_set_zoom                (glView            *view,
+					    gdouble            scale);
+
+gdouble    gl_view_get_zoom                (glView            *view);
+
+gboolean   gl_view_is_zoom_max             (glView            *view);
+
+gboolean   gl_view_is_zoom_min             (glView            *view);
+
+
+int        gl_view_item_event_handler      (GnomeCanvasItem   *item,
+					    GdkEvent          *event,
+					    glViewObject      *view_object);
 
 G_END_DECLS
 

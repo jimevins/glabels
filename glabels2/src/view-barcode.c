@@ -745,7 +745,7 @@ static void
 draw_barcode (glViewBarcode *view_barcode)
 {
 	glLabelObject    *object;
-	GnomeCanvasItem  *group, *item;
+	GnomeCanvasItem  *item;
 	glTextNode *text_node;
 	glBarcodeStyle style;
 	gboolean text_flag;
@@ -775,9 +775,6 @@ draw_barcode (glViewBarcode *view_barcode)
 		digits = gl_text_node_expand (text_node, NULL);
 	}
 
-	/* get parent item/group to render to. */
-	group = gl_view_object_get_group (GL_VIEW_OBJECT(view_barcode));
-
 	/* remove previous items from group. */
 	for (li = view_barcode->private->item_list; li!=NULL; li = li->next) {
 		gl_debug (DEBUG_VIEW, "in loop");
@@ -805,11 +802,11 @@ draw_barcode (glViewBarcode *view_barcode)
 								  strlen
 								  (cstring));
 		y_offset = 10.0 - gnome_font_get_descender (font);
-		item = gnome_canvas_item_new (GNOME_CANVAS_GROUP (group),
-					      gl_canvas_hacktext_get_type (),
-					      "x", 0.0,
-					      "y", y_offset,
-					      "glyphlist", glyphlist, NULL);
+		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
+						gl_canvas_hacktext_get_type (),
+						"x", 0.0,
+						"y", y_offset,
+						"glyphlist", glyphlist, NULL);
 
 		view_barcode->private->item_list =
 			g_list_prepend (view_barcode->private->item_list, item);
@@ -824,13 +821,12 @@ draw_barcode (glViewBarcode *view_barcode)
 			points->coords[2] = line->x;
 			points->coords[3] = line->y + line->length;
 
-			item =
-			    gnome_canvas_item_new (GNOME_CANVAS_GROUP (group),
-						   gnome_canvas_line_get_type
-						   (), "points", points,
-						   "width_units", line->width,
-						   "fill_color_rgba", color,
-						   NULL);
+			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
+							gnome_canvas_line_get_type (),
+							"points", points,
+							"width_units", line->width,
+							"fill_color_rgba", color,
+							NULL);
 			view_barcode->private->item_list =
 				g_list_prepend (view_barcode->private->item_list, item);
 		}
@@ -853,13 +849,12 @@ draw_barcode (glViewBarcode *view_barcode)
 									  1);
 			y_offset =
 			    bchar->fsize - gnome_font_get_descender (font);
-			item =
-			    gnome_canvas_item_new (GNOME_CANVAS_GROUP (group),
-						   gnome_canvas_hacktext_get_type
-						   (), "x", bchar->x, "y",
-						   bchar->y + y_offset,
-						   "glyphlist", glyphlist,
-						   NULL);
+			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
+							gnome_canvas_hacktext_get_type (),
+							"x", bchar->x,
+							"y", bchar->y + y_offset,
+							"glyphlist", glyphlist,
+							NULL);
 
 			view_barcode->private->item_list =
 				g_list_prepend (view_barcode->private->item_list, item);
