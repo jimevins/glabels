@@ -22,9 +22,10 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
+#include <libgnome/gnome-help.h>
+#include <libgnome/gnome-url.h>
 
 #include "commands.h"
 #include "view.h"
@@ -368,6 +369,16 @@ gl_cmd_help_contents (BonoboUIComponent *uic,
 	}
 }
 
+/*--------------------------------------------------------------------------*/
+/* Private: URL handler.                                                    */
+/*--------------------------------------------------------------------------*/
+static void
+activate_url (GtkAboutDialog *about, const gchar *url, gpointer data)
+{
+	gnome_url_show (url, NULL);
+}
+
+
 /****************************************************************************/
 /* Help->About command.                                                     */
 /****************************************************************************/
@@ -376,37 +387,47 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 		   gpointer           user_data,
 		   const gchar       *verbname)
 {
-	glWindow *window = GL_WINDOW (user_data);
+	glWindow         *window = GL_WINDOW (user_data);
+
 	static GtkWidget *about = NULL;
+
 	GdkPixbuf        *pixbuf = NULL;
 	
-	gchar *copy_text = "Copyright 2001-2003 Jim Evins";
-	gchar *about_text =
-	    _("A label and business card creation program for GNOME.\n"
-	      " \n"
-	      "Glabels is free software; you can redistribute it and/or modify it "
-	      "under the terms of the GNU General Public License as published by "
-	      "the Free Software Foundation; either version 2 of the License, or "
-	      "(at your option) any later version.\n" " \n"
-	      "This program is distributed in the hope that it will be useful, but "
-	      "WITHOUT ANY WARRANTY; without even the implied warranty of "
-	      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU "
-	      "General Public License for more details.\n");
-
-	gchar *authors[] = {
+	const gchar *authors[] = {
 		"Jim Evins <evins@snaught.com>",
+		" ",
+		"Frederic Ruaudel  <grumz@users.sf.net>",
+		"Wayne Schuller <k_wayne@linuxpower.org>",
+		"Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>",
 		" ",
 		_("See the file AUTHORS for additional credits,"),
 		_("or visit http://glabels.sourceforge.net/"),
 		NULL
 	};
 	
-	gchar *documenters[] = {
-		"",
+	const gchar *artists[] = {
+		"Nestor Di <nestordi@usuarios.retecal.es>",
+		"Jim Evins <evins@snaught.com>",
 		NULL
 	};
+	
+	const gchar *copy_text = "Copyright \xc2\xa9 2001-2005 Jim Evins";
 
-	gchar *translator_credits = _(" ");
+	const gchar *about_text = _("A label and business card creation program.\n");
+
+	const gchar *url = "http://glabels.sourceforge.net";
+
+	const gchar *translator_credits = _("translator-credits");
+
+	const gchar *license = _(
+	      "Glabels is free software; you can redistribute it and/or modify it\n"
+	      "under the terms of the GNU General Public License as published by\n"
+	      "the Free Software Foundation; either version 2 of the License, or\n"
+	      "(at your option) any later version.\n" "\n"
+	      "This program is distributed in the hope that it will be useful, but\n"
+	      "WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+	      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
+	      "the GNU General Public License for more details.\n");
 
 	gl_debug (DEBUG_COMMANDS, "");
 
@@ -414,33 +435,46 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 
 	if (about != NULL)
 	{
-		gdk_window_show (about->window);
-		gdk_window_raise (about->window);
+		gtk_window_set_transient_for (GTK_WINDOW (about),
+					      GTK_WINDOW (window));
+		gtk_window_present (GTK_WINDOW (about));
 		return;
 	}
 	
 	pixbuf = gdk_pixbuf_new_from_file ( LOGO_PIXMAP, NULL);
 
-	about = gnome_about_new (_("glabels"), VERSION,
-				 copy_text,
-				 about_text,
-				(const char **)authors,
-				(const char **)NULL,
-				(const char *)NULL,
-				pixbuf);
+	gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
+
+	about = gtk_about_dialog_new ();
+	gtk_about_dialog_set_name      (GTK_ABOUT_DIALOG(about), _("glabels"));
+	gtk_about_dialog_set_version   (GTK_ABOUT_DIALOG(about), VERSION);
+	gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(about), copy_text);
+	gtk_about_dialog_set_comments  (GTK_ABOUT_DIALOG(about), about_text);
+	gtk_about_dialog_set_website   (GTK_ABOUT_DIALOG(about), url);
+	gtk_about_dialog_set_logo      (GTK_ABOUT_DIALOG(about), pixbuf);
+
+	gtk_about_dialog_set_authors   (GTK_ABOUT_DIALOG(about), authors);
+	gtk_about_dialog_set_artists   (GTK_ABOUT_DIALOG(about), artists);
+	gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about),
+						 translator_credits);
+	gtk_about_dialog_set_license   (GTK_ABOUT_DIALOG(about), license);
+	
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+
+	g_signal_connect (G_OBJECT (about), "response",
+			  G_CALLBACK (gtk_widget_destroy), NULL);
+	g_signal_connect (G_OBJECT (about), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed), &about);
 
 	gtk_window_set_transient_for (GTK_WINDOW (about),
 				      GTK_WINDOW (window));
 
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+	gtk_window_present (GTK_WINDOW (about));
 
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 	
-	g_signal_connect (G_OBJECT (about), "destroy",
-			  G_CALLBACK (gtk_widget_destroyed), &about);
 	
-	gtk_widget_show (about);
 }
 
 
