@@ -75,6 +75,8 @@ static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("ToolsObjectProperties", gl_tools_object_properties),
 	BONOBO_UI_VERB ("ToolsRaiseObjects", gl_tools_raise_objects),
 	BONOBO_UI_VERB ("ToolsLowerObjects", gl_tools_lower_objects),
+	BONOBO_UI_VERB ("ToolsFlipHorizontal", gl_tools_flip_objects_horiz),
+	BONOBO_UI_VERB ("ToolsFlipVertical", gl_tools_flip_objects_vert),
 	BONOBO_UI_VERB ("SettingsPreferences", gl_cmd_settings_preferences),
 	BONOBO_UI_VERB ("HelpContents", gl_cmd_help_contents),
 	BONOBO_UI_VERB ("About", gl_cmd_help_about),
@@ -111,6 +113,13 @@ static gchar* doc_verbs [] = {
 	"/commands/ToolsObjectProperties",
 	"/commands/ToolsRaiseObjects",
 	"/commands/ToolsLowerObjects",
+	"/commands/ToolsRotateLeft",
+	"/commands/ToolsRotateRight",
+	"/commands/ToolsFlipHorizontal",
+	"/commands/ToolsFlipVertical",
+	"/menu/Objects/CreateObjects",
+	"/menu/Objects/Order",
+	"/menu/Objects/RotateFlip",
 
 	NULL
 };
@@ -128,6 +137,12 @@ static gchar* selection_verbs [] = {
 	"/commands/EditUnSelectAll",
 	"/commands/ToolsRaiseObjects",
 	"/commands/ToolsLowerObjects",
+	"/commands/ToolsRotateLeft",
+	"/commands/ToolsRotateRight",
+	"/commands/ToolsFlipHorizontal",
+	"/commands/ToolsFlipVertical",
+	"/menu/Objects/Order",
+	"/menu/Objects/RotateFlip",
 
 	NULL
 };
@@ -445,6 +460,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->main_toolbar_visible = s;
 		set_app_main_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -454,6 +470,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_main_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -463,6 +480,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_main_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -472,6 +490,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_main_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -481,6 +500,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->main_toolbar_view_tooltips = s;
 		set_app_main_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -490,6 +510,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->drawing_toolbar_visible = s;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -499,6 +520,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -508,6 +530,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -517,6 +540,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
@@ -526,6 +550,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->drawing_toolbar_view_tooltips = s;
 		set_app_drawing_toolbar_style (ui_component);
+		gl_prefs_save_settings ();
 
 		return;
 	}
