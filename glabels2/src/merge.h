@@ -65,16 +65,18 @@ struct _glMerge {
 struct _glMergeClass {
 	GObjectClass     parent_class;
 
-        GList         *(*get_key_list)   (glMerge *merge);
+        GList         *(*get_key_list)    (glMerge *merge);
 
-	void           (*open)           (glMerge *merge);
+        gchar         *(*get_primary_key) (glMerge *merge);
 
-	void           (*close)          (glMerge *merge);
+	void           (*open)            (glMerge *merge);
 
-	glMergeRecord *(*get_record)     (glMerge *merge);
+	void           (*close)           (glMerge *merge);
 
-	void           (*copy)           (glMerge *dst_merge,
-					  glMerge *src_merge);
+	glMergeRecord *(*get_record)      (glMerge *merge);
+
+	void           (*copy)            (glMerge *dst_merge,
+					   glMerge *src_merge);
 };
 
 
@@ -112,22 +114,14 @@ GList            *gl_merge_get_key_list        (glMerge           *merge);
 
 void              gl_merge_free_key_list       (GList            **keys);
 
-void              gl_merge_open                (glMerge           *merge);
-
-void              gl_merge_close               (glMerge           *merge);
-
-glMergeRecord    *gl_merge_get_record          (glMerge           *merge);
-
-void              gl_merge_free_record         (glMergeRecord    **record);
+gchar            *gl_merge_get_primary_key     (glMerge           *merge);
 
 gchar            *gl_merge_eval_key            (glMergeRecord     *record,
 						gchar             *key);
 
-GList            *gl_merge_read_record_list    (glMerge           *merge);
+const GList      *gl_merge_get_record_list     (glMerge           *merge);
 
-void              gl_merge_free_record_list    (GList            **record_list);
-
-gint              gl_merge_count_records       (GList             *record_list);
+gint              gl_merge_get_record_count    (glMerge           *merge);
 
 G_END_DECLS
 
