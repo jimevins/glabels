@@ -294,7 +294,7 @@ gl_barcode_default_digits (const gchar *id,
 
 	if (backends[i].can_freeform) {
 
-		return g_strnfill (n, '0');
+		return g_strnfill (MAX (n,1), '0');
 
 	} else {
 

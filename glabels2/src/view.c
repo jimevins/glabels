@@ -466,7 +466,7 @@ get_home_scale (glView *view)
 	gdouble    x_pixels_per_mm, y_pixels_per_mm;
 	gdouble    scale;
 
-	if (!gtk_widget_has_screen) return 1.0;
+	if (!gtk_widget_has_screen (GTK_WIDGET (view->canvas))) return 1.0;
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (view->canvas));
 
@@ -3222,14 +3222,18 @@ screen_changed_cb (glView          *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view->home_scale = get_home_scale (view);
+	if (gtk_widget_has_screen (GTK_WIDGET (view->canvas))) {
 
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  view->zoom * view->home_scale);
+		view->home_scale = get_home_scale (view);
 
-	if (view->zoom_to_fit_flag) {
-		/* Maintain best fit zoom */
-		gl_view_zoom_to_fit (view);
+		gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
+						  view->zoom * view->home_scale);
+
+		if (view->zoom_to_fit_flag) {
+			/* Maintain best fit zoom */
+			gl_view_zoom_to_fit (view);
+		}
+
 	}
 
 	gl_debug (DEBUG_VIEW, "END");

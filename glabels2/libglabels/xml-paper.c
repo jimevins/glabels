@@ -136,7 +136,14 @@ gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 
 	name = xmlGetProp (paper_node, "_name");
 	if (name != NULL) {
-		name = gettext (name);
+
+		gchar *tmp = gettext (name);
+
+		if (tmp != name) {
+			g_free (name);
+			name = g_strdup (tmp);
+		}
+
 	} else {
 		name = xmlGetProp (paper_node, "name");
 	}

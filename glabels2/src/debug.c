@@ -27,77 +27,94 @@
  * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
  *
  */
-#include <glib.h>
 
 #include "debug.h"
 
-/* External debug options, used here and in glabels.c */
-gint gl_debug_all = 0;
-gint gl_debug_view = 0;
-gint gl_debug_item = 0;
-gint gl_debug_prefs = 0;
-gint gl_debug_print = 0;
-gint gl_debug_file = 0;
-gint gl_debug_label = 0;
-gint gl_debug_template = 0;
-gint gl_debug_paper = 0;
-gint gl_debug_xml = 0;
-gint gl_debug_merge = 0;
-gint gl_debug_commands = 0;
-gint gl_debug_undo = 0;
-gint gl_debug_recent = 0;
-gint gl_debug_window = 0;
-gint gl_debug_ui = 0;
-gint gl_debug_property_bar = 0;
-gint gl_debug_media_select = 0;
-gint gl_debug_mini_preview = 0;
-gint gl_debug_pixbuf_cache = 0;
-gint gl_debug_editor = 0;
-gint gl_debug_wdgt = 0;
+glDebugSection debug_flags = GLABELS_DEBUG_NONE;
+
+/****************************************************************************/
+/* Initialize debug flags, based on environmental variables.                */
+/****************************************************************************/
+void
+gl_debug_init (void)
+{
+	if (g_getenv ("GLABELS_DEBUG") != NULL)
+	{
+		/* enable all debugging */
+		debug_flags = ~GLABELS_DEBUG_NONE;
+		return;
+	}
+
+	if (g_getenv ("GLABELS_DEBUG_VIEW") != NULL)
+		debug_flags |= GLABELS_DEBUG_VIEW;
+	if (g_getenv ("GLABELS_DEBUG_ITEM") != NULL)
+		debug_flags |= GLABELS_DEBUG_ITEM;
+	if (g_getenv ("GLABELS_DEBUG_PRINT") != NULL)
+		debug_flags |= GLABELS_DEBUG_PRINT;
+	if (g_getenv ("GLABELS_DEBUG_PREFS") != NULL)
+		debug_flags |= GLABELS_DEBUG_PREFS;
+	if (g_getenv ("GLABELS_DEBUG_FILE") != NULL)
+		debug_flags |= GLABELS_DEBUG_FILE;
+	if (g_getenv ("GLABELS_DEBUG_LABEL") != NULL)
+		debug_flags |= GLABELS_DEBUG_LABEL;
+	if (g_getenv ("GLABELS_DEBUG_TEMPLATE") != NULL)
+		debug_flags |= GLABELS_DEBUG_TEMPLATE;
+	if (g_getenv ("GLABELS_DEBUG_PAPER") != NULL)
+		debug_flags |= GLABELS_DEBUG_PAPER;
+	if (g_getenv ("GLABELS_DEBUG_XML") != NULL)
+		debug_flags |= GLABELS_DEBUG_XML;
+	if (g_getenv ("GLABELS_DEBUG_MERGE") != NULL)
+		debug_flags |= GLABELS_DEBUG_MERGE;
+	if (g_getenv ("GLABELS_DEBUG_UNDO") != NULL)
+		debug_flags |= GLABELS_DEBUG_UNDO;
+	if (g_getenv ("GLABELS_DEBUG_RECENT") != NULL)
+		debug_flags |= GLABELS_DEBUG_RECENT;
+	if (g_getenv ("GLABELS_DEBUG_COMMANDS") != NULL)
+		debug_flags |= GLABELS_DEBUG_COMMANDS;
+	if (g_getenv ("GLABELS_DEBUG_WINDOW") != NULL)
+		debug_flags |= GLABELS_DEBUG_WINDOW;
+	if (g_getenv ("GLABELS_DEBUG_UI") != NULL)
+		debug_flags |= GLABELS_DEBUG_UI;
+	if (g_getenv ("GLABELS_DEBUG_PROPERTY_BAR") != NULL)
+		debug_flags |= GLABELS_DEBUG_PROPERTY_BAR;
+	if (g_getenv ("GLABELS_DEBUG_MEDIA_SELECT") != NULL)
+		debug_flags |= GLABELS_DEBUG_MEDIA_SELECT;
+	if (g_getenv ("GLABELS_DEBUG_MINI_PREVIEW") != NULL)
+		debug_flags |= GLABELS_DEBUG_MINI_PREVIEW;
+	if (g_getenv ("GLABELS_DEBUG_PIXBUF_CACHE") != NULL)
+		debug_flags |= GLABELS_DEBUG_PIXBUF_CACHE;
+	if (g_getenv ("GLABELS_DEBUG_EDITOR") != NULL)
+		debug_flags |= GLABELS_DEBUG_EDITOR;
+	if (g_getenv ("GLABELS_DEBUG_WDGT") != NULL)
+		debug_flags |= GLABELS_DEBUG_WDGT;
+}
+
 
 /****************************************************************************/
 /* Print debugging information.                                             */
 /****************************************************************************/
 void
-gl_debug (gint   section,
-	  gchar *file,
-	  gint   line,
-	  gchar *function,
-	  gchar *format,
+gl_debug (glDebugSection  section,
+	  const gchar    *file,
+	  gint            line,
+	  const gchar    *function,
+	  const gchar    *format,
 	  ...)
 {
-	va_list  args;
-	gchar   *msg;
+	if  (debug_flags & section)
+	{
+		va_list  args;
+		gchar   *msg;
 
-	g_return_if_fail (format != NULL);
+		g_return_if_fail (format != NULL);
 
-	va_start (args, format);
-	msg = g_strdup_vprintf (format, args);
-	va_end (args);
+		va_start (args, format);
+		msg = g_strdup_vprintf (format, args);
+		va_end (args);
 
-	if (gl_debug_all ||
-	    (gl_debug_view         && section == GL_DEBUG_VIEW)           ||
-	    (gl_debug_item         && section == GL_DEBUG_ITEM)           ||
-	    (gl_debug_print        && section == GL_DEBUG_PRINT)          ||
-	    (gl_debug_prefs        && section == GL_DEBUG_PREFS)          ||
-	    (gl_debug_file         && section == GL_DEBUG_FILE)           ||
-	    (gl_debug_label        && section == GL_DEBUG_LABEL)          ||
-	    (gl_debug_template     && section == GL_DEBUG_TEMPLATE)       ||
-	    (gl_debug_paper        && section == GL_DEBUG_PAPER)          ||
-	    (gl_debug_xml          && section == GL_DEBUG_XML)            ||
-	    (gl_debug_merge        && section == GL_DEBUG_MERGE)          ||
-	    (gl_debug_commands     && section == GL_DEBUG_COMMANDS)       ||
-	    (gl_debug_undo         && section == GL_DEBUG_UNDO)           ||
-	    (gl_debug_recent       && section == GL_DEBUG_RECENT)         ||
-	    (gl_debug_window       && section == GL_DEBUG_WINDOW)         ||
-	    (gl_debug_ui           && section == GL_DEBUG_UI)             ||
-	    (gl_debug_property_bar && section == GL_DEBUG_PROPERTY_BAR)   ||
-	    (gl_debug_media_select && section == GL_DEBUG_MEDIA_SELECT)   ||
-	    (gl_debug_mini_preview && section == GL_DEBUG_MINI_PREVIEW)   ||
-	    (gl_debug_pixbuf_cache && section == GL_DEBUG_PIXBUF_CACHE)   ||
-	    (gl_debug_editor       && section == GL_DEBUG_EDITOR)         ||
-	    (gl_debug_wdgt         && section == GL_DEBUG_WDGT) )
 		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+
+		g_free (msg);
+	}
 	
-	g_free (msg);
 }
