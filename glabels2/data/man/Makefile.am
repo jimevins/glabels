@@ -1,5 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = desktop dtd glade man mime pixmaps templates ui
+man_MANS = glabels.1
 
+EXTRA_DIST = $(man_MANS)
 

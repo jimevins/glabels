@@ -1,3 +1,45 @@
+2004-08-08  Jim Evins  <evins@snaught.com>
+
+	Reorganization of runtime data files.  Also added registration of mimetype with
+	new freedesktop.org mime database if available.
+	
+	* data/*
+		Moved files to appropriate subdirectories, creating local Makefile.am
+		in each subdirectory.
+		- Moved paper-sizes.xml and *-templates.xml to templates subdirectory.
+		  These are now installed at $datadir/glabels/templates.
+		- Moved glabels.1 to man subdirectory.
+		- Moved glabels-2.0.dtd to dtd subdirectory.
+		- Moved glabels.desktop.in to desktop subdirectory.
+		- Moved glabels.keys.in and glabels.mime to mime subdirectory.
+	* data/pixmaps/*
+		Moved "./pixmaps" to "./data/pixmaps"
+	* data/ui/*
+		Moved src/glabels-ui.xml to data/ui directory. Created Makefile.am.
+	* data/glade/*
+		Moved libglade files from src to data/glade. Created Makefile.am.
+	* Makefile.am:
+		Removed pixmaps from SUBDIRS.
+	* configure.in:
+		- Removed pixmaps from makefiles.
+		- Added makefiles for new subdirs of data.
+		- Added tests for freedesktop.org mime database.
+	* glabels.spec.in:
+		- Added tests for freedesktop.org mime database for post install and
+		  post un-install actions.
+	* libglabels/Makefile.am:
+		Moved system template files to $(datadir)/glabels/templates.
+	* libglabels/libglabels-private.h:
+		Moved system template files to $(datadir)/glabels/templates.
+	* po/POTFILES.in:
+		- Accounted for movement of ui and libglade files.
+		- Added missing .in files.
+		- Reorganized by directory.
+	* src/Makefile.am:
+		Accounted for movement of ui and libglade files.
+	* data/mime/glabels.xml.in:
+		New file for registering with freedesktop.org mime database.
+
 2004-08-07  Jim Evins  <evins@snaught.com>
 
 	* src/recent-files/*:

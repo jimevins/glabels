@@ -1,0 +1,10 @@
+[Desktop Entry]
+_Name=gLabels Label Designer
+_Comment=Create labels, business cards and media covers.
+Exec=glabels %F
+Icon=glabels/glabels-icon.png
+Terminal=0
+Type=Application
+Categories=GNOME;Application;Office
+StartupNotify=true
+MimeType=application/x-glabels;

@@ -238,17 +238,7 @@ marshal.c: marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gl_marshal >> $@
 
-ui_DATA = \
-	glabels-ui.xml
-
-glade_DATA = \
-	object-editor.glade		\
-	prefs-dialog.glade		\
-	template-designer.glade
-
 EXTRA_DIST = \
-	$(ui_DATA)			\
-	$(glade_DATA)			\
 	marshal.list			
 
 CLEANFILES = $(BUILT_SOURCES)

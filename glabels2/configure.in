@@ -68,6 +68,16 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.3.2,
                   HAVE_FILE_CHOOSER="-UHAVE_FILE_CHOOSER")
 AC_SUBST(HAVE_FILE_CHOOSER)
 
+dnl ----------------------------------------
+dnl - Is freedesktop mime dbase available?
+dnl ----------------------------------------
+AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
+AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
+
+AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database, no)
+AM_CONDITIONAL(HAVE_NEWER_MIME, test x$UPDATE_DESKTOP_DATABASE != xno)
+
+
 dnl ****************************************
 dnl * Supported languages
 dnl ****************************************
@@ -92,8 +102,15 @@ src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
 src/mygal/Makefile
 src/recent-files/Makefile
-pixmaps/Makefile
 data/Makefile
+data/templates/Makefile
+data/pixmaps/Makefile
+data/mime/Makefile
+data/ui/Makefile
+data/glade/Makefile
+data/desktop/Makefile
+data/dtd/Makefile
+data/man/Makefile
 po/Makefile.in
 help/Makefile
 help/C/Makefile

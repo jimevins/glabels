@@ -48,9 +48,15 @@ desktop-file-install --vendor gnome                \
 
 %post
 scrollkeeper-update
+if (update-mime-database -v &> /dev/null); then
+  update-mime-database "%{_datadir}/mime" > /dev/null
+fi
 
 %postun
 scrollkeeper-update
+if (update-mime-database -v &> /dev/null); then
+  update-mime-database "%{_datadir}/mime" > /dev/null
+fi
 
 %files -f %{name}.lang
 %defattr(-, root, root)
@@ -65,9 +71,13 @@ scrollkeeper-update
 %{_datadir}/applications/*.desktop
 %{_datadir}/application-registry/*
 %{_datadir}/mime-info/*
+%{_datadir}/mime/packages/*
 %{_datadir}/man/*
 
 %changelog
+* Sun Aug  8 2004 Jim Evins <evins@snaught.com>
+- Added support for freedesktop.org mime database registration
+
 * Sat Feb 21 2004 Jim Evins <evins@snaught.com>
 - Added libglabels related files
 

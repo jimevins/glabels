@@ -1,6 +1,9 @@
+templatesdir = $(datadir)/glabels/templates
+
 INCLUDES = \
-	$(LIBGLABELS_CFLAGS)		\
-	-DDATADIR=\""$(datadir)"\"	
+	$(LIBGLABELS_CFLAGS)				\
+	-DDATADIR=\""$(datadir)"\"			\
+	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\"
 
 libglabels_la_LDFLAGS=\
         -version-info 0:0:0 \

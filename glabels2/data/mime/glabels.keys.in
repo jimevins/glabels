@@ -1,6 +1,6 @@
 application/x-glabels:
 	open=glabels %f
-	description=gLabels Project File
+	_description=gLabels Project File
         icon_filename=glabels.png
         default_action_type=application
 	category=Documents
