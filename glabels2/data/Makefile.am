@@ -37,10 +37,10 @@ EXTRA_DIST = \
 
 configdir=$(datadir)/glabels
 install-data-local:
-	  $(mkinstalldirs) $(configdir); \
+	  $(mkinstalldirs) $(DESTDIR)$(configdir); \
 	  for file in $(runtime_files); do \
 	    if test -f $$file; then \
-	      $(INSTALL_DATA) $$file $(configdir); \
+	      $(INSTALL_DATA) $$file $(DESTDIR)$(configdir); \
 	    fi \
 	  done
 
