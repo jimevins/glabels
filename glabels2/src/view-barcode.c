@@ -34,7 +34,6 @@
 #include "wdgt-bc-style.h"
 #include "wdgt-position.h"
 #include "color.h"
-#include "prefs.h"
 
 #include "pixmaps/cursor_barcode.xbm"
 #include "pixmaps/cursor_barcode_mask.xbm"
@@ -686,7 +685,9 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
 						    TRUE,
-						    gl_color_set_opacity (gl_prefs->default_line_color, 0.5));
+						    gl_color_set_opacity (
+						      gl_view_get_default_line_color(view),
+                                                      0.5));
 			view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object),
 							    view);
 			x0 = x;
@@ -712,7 +713,7 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
 						    TRUE,
-						    gl_prefs->default_line_color);
+						    gl_view_get_default_line_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
 			gl_view_arrow_mode (view);

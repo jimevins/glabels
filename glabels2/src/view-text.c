@@ -31,7 +31,6 @@
 #include "wdgt-text-props.h"
 #include "wdgt-position.h"
 #include "color.h"
-#include "prefs.h"
 #include "hig.h"
 
 #include "pixmaps/cursor_text.xbm"
@@ -603,6 +602,7 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 	static GObject      *object;
 	gdouble             x, y;
 	GList               *lines;
+	gchar               *family;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -624,13 +624,15 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 			object = gl_label_text_new (view->label);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     x, y);
+			family = gl_view_get_default_font_family (view);
 			gl_label_text_set_props (GL_LABEL_TEXT(object),
-						 gl_prefs->default_font_family,
-						 gl_prefs->default_font_size,
-						 gl_prefs->default_font_weight,
-						 gl_prefs->default_font_italic_flag,
-						 gl_color_set_opacity (gl_prefs->default_text_color, 0.5),
-						 gl_prefs->default_text_alignment);
+						 family,
+						 gl_view_get_default_font_size (view),
+						 gl_view_get_default_font_weight (view),
+						 gl_view_get_default_font_italic_flag (view),
+						 gl_color_set_opacity (gl_view_get_default_text_color (view), 0.5),
+						 gl_view_get_default_text_alignment (view));
+			g_free (family);
 			lines = gl_text_node_lines_new_from_text (_("Text"));
 			gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
 			view_text = gl_view_text_new (GL_LABEL_TEXT(object),
@@ -654,13 +656,15 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 						      event->button.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
+			family = gl_view_get_default_font_family (view);
 			gl_label_text_set_props (GL_LABEL_TEXT(object),
-						 gl_prefs->default_font_family,
-						 gl_prefs->default_font_size,
-						 gl_prefs->default_font_weight,
-						 gl_prefs->default_font_italic_flag,
-						 gl_prefs->default_text_color,
-						 gl_prefs->default_text_alignment);
+						 family,
+						 gl_view_get_default_font_size (view),
+						 gl_view_get_default_font_weight (view),
+						 gl_view_get_default_font_italic_flag (view),
+						 gl_view_get_default_text_color (view),
+						 gl_view_get_default_text_alignment (view));
+			g_free (family);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_text));
 			gl_view_arrow_mode (view);

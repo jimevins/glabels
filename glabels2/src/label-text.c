@@ -82,6 +82,24 @@ static void get_size                    (glLabelObject    *object,
 					 gdouble          *w,
 					 gdouble          *h);
 
+static void set_font_family             (glLabelObject    *object,
+					 const gchar      *font_family);
+
+static void set_font_size               (glLabelObject    *object,
+					 gdouble           font_size);
+
+static void set_font_weight             (glLabelObject    *object,
+					 GnomeFontWeight   font_weight);
+
+static void set_font_italic_flag        (glLabelObject    *object,
+					 gboolean          font_italic_flag);
+
+static void set_text_alignment          (glLabelObject    *object,
+					 GtkJustification  text_alignment);
+
+static void set_text_color              (glLabelObject    *object,
+					 guint             text_color);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -119,8 +137,16 @@ gl_label_text_class_init (glLabelTextClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	label_object_class->copy     = copy;
-	label_object_class->get_size = get_size;
+	label_object_class->copy                 = copy;
+
+	label_object_class->get_size             = get_size;
+
+	label_object_class->set_font_family      = set_font_family;
+	label_object_class->set_font_size        = set_font_size;
+	label_object_class->set_font_weight      = set_font_weight;
+	label_object_class->set_font_italic_flag = set_font_italic_flag;
+	label_object_class->set_text_alignment   = set_text_alignment;
+	label_object_class->set_text_color       = set_text_color;
 
 	object_class->finalize = gl_label_text_finalize;
 }
@@ -252,7 +278,7 @@ gl_label_text_set_props (glLabelText     *ltext,
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
-	/* Make sure we have a valid font family.  if not privide a good default. */
+	/* Make sure we have a valid font family.  if not provide a good default. */
 	family_names = gnome_font_family_list ();
 	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
 		good_font_family = g_strdup (font_family);
@@ -420,6 +446,166 @@ get_size (glLabelObject *object,
 
 
 	g_strfreev (line);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set font family method.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+set_font_family (glLabelObject *object,
+		 const gchar   *font_family)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+	GList          *family_names;
+	gchar          *good_font_family;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+	g_return_if_fail (font_family);
+
+	family_names = gnome_font_family_list ();
+	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
+		good_font_family = g_strdup (font_family);
+	} else {
+		if (family_names != NULL) {
+			good_font_family = g_strdup (family_names->data); /* 1st entry */
+		} else {
+			good_font_family = g_strdup (font_family);
+		}
+	}
+	gnome_font_family_list_free (family_names);
+
+	if (ltext->private->font_family) {
+		if (g_strcasecmp (ltext->private->font_family, good_font_family) == 0) {
+			gl_debug (DEBUG_LABEL, "END (no change)");
+			return;
+		}
+		g_free (ltext->private->font_family);
+	}
+	ltext->private->font_family = g_strdup (good_font_family);
+	g_free (good_font_family);
+
+	gl_debug (DEBUG_LABEL, "new font family = %s", ltext->private->font_family);
+
+	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set font size method.                                           */
+/*---------------------------------------------------------------------------*/
+static void
+set_font_size (glLabelObject *object,
+	       gdouble        font_size)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->font_size != font_size) {
+
+		ltext->private->font_size = font_size;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set font weight method.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+set_font_weight (glLabelObject   *object,
+		 GnomeFontWeight  font_weight)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->font_weight != font_weight) {
+
+		ltext->private->font_weight = font_weight;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set font italic flag method.                                    */
+/*---------------------------------------------------------------------------*/
+static void
+set_font_italic_flag (glLabelObject *object,
+		      gboolean       font_italic_flag)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->font_italic_flag != font_italic_flag) {
+
+		ltext->private->font_italic_flag = font_italic_flag;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set text alignment method.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+set_text_alignment (glLabelObject    *object,
+		    GtkJustification  text_alignment)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->just != text_alignment) {
+
+		ltext->private->just = text_alignment;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  set text color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_text_color (glLabelObject *object,
+		guint        text_color)
+{
+	glLabelText    *ltext = (glLabelText *)object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	if (ltext->private->color != text_color) {
+
+		ltext->private->color = text_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
+
+	}
 
 	gl_debug (DEBUG_LABEL, "END");
 }

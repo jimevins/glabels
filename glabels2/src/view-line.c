@@ -30,7 +30,6 @@
 #include "wdgt-vector.h"
 #include "wdgt-position.h"
 #include "color.h"
-#include "prefs.h"
 
 #include "pixmaps/cursor_line.xbm"
 #include "pixmaps/cursor_line_mask.xbm"
@@ -628,9 +627,9 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
 			gl_label_line_set_line_width (GL_LABEL_LINE(object),
-						      gl_prefs->default_line_width);
+						      gl_view_get_default_line_width(view));
 			gl_label_line_set_line_color (GL_LABEL_LINE(object),
-						     gl_color_set_opacity (gl_prefs->default_line_color, 0.5));
+						     gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5));
 			view_line = gl_view_line_new (GL_LABEL_LINE(object),
 						      view);
 			x0 = x;
@@ -658,7 +657,7 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
 			gl_label_line_set_line_color (GL_LABEL_LINE(object),
-						     gl_prefs->default_line_color);
+						     gl_view_get_default_line_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_line));
 			gl_view_arrow_mode (view);

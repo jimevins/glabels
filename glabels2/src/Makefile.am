@@ -1,6 +1,6 @@
 LIB_BARCODE_DIR = ../barcode-0.98
 
-SUBDIRS= pixmaps stock-pixmaps
+SUBDIRS= pixmaps stock-pixmaps mygal
 
 bin_PROGRAMS = glabels glabels-batch
 
@@ -28,6 +28,7 @@ glabels_LDFLAGS = -export-dynamic
 
 glabels_LDADD = 			\
 	$(GLABELS_LIBS)			\
+	mygal/libmygal.la		\
 	-L$(LIB_BARCODE_DIR) -lbarcode	
 
 glabels_batch_LDFLAGS = -export-dynamic
@@ -52,6 +53,10 @@ glabels_SOURCES = 			\
 	stock.h				\
 	ui.h				\
 	ui.c				\
+	ui-property-bar.h		\
+	ui-property-bar.c		\
+	ui-util.h			\
+	ui-util.c			\
 	commands.h			\
 	commands.c			\
 	file.h				\

@@ -40,6 +40,7 @@
 #include "color.h"
 #include "stock.h"
 #include "merge-properties-dialog.h"
+#include "prefs.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -284,6 +285,8 @@ gl_view_init (glView *view)
 
 	view->grid_spacing = 9;
 
+	view->default_font_family = NULL;
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -355,6 +358,16 @@ gl_view_construct (glView *view)
 
 	construct_selection_menu (view);
 	construct_empty_selection_menu (view);
+
+	gl_view_set_default_font_family      (view, gl_prefs->default_font_family);
+	gl_view_set_default_font_size        (view, gl_prefs->default_font_size);
+	gl_view_set_default_font_weight      (view, gl_prefs->default_font_weight);
+	gl_view_set_default_font_italic_flag (view, gl_prefs->default_font_italic_flag);
+	gl_view_set_default_text_color       (view, gl_prefs->default_text_color);
+	gl_view_set_default_text_alignment   (view, gl_prefs->default_text_alignment);
+	gl_view_set_default_line_width       (view, gl_prefs->default_line_width);
+	gl_view_set_default_line_color       (view, gl_prefs->default_line_color);
+	gl_view_set_default_fill_color       (view, gl_prefs->default_fill_color);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -2505,6 +2518,322 @@ gl_view_move_selection (glView  *view,
 }
 
 /*****************************************************************************/
+/* Can text properties be set for selection?                                 */
+/*****************************************************************************/
+gboolean
+gl_view_can_selection_text (glView            *view)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		if (gl_label_object_can_text (object)) {
+			return TRUE;
+		}
+
+	}
+
+	return FALSE;
+}
+
+/*****************************************************************************/
+/* Set font family for all text contained in selected objects.               */
+/*****************************************************************************/
+void
+gl_view_set_selection_font_family (glView            *view,
+				   const gchar       *font_family)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_font_family (object, font_family);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set font size for all text contained in selected objects.                 */
+/*****************************************************************************/
+void
+gl_view_set_selection_font_size (glView            *view,
+				 gdouble            font_size)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_font_size (object, font_size);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set font weight for all text contained in selected objects.               */
+/*****************************************************************************/
+void
+gl_view_set_selection_font_weight (glView            *view,
+				   GnomeFontWeight    font_weight)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_font_weight (object, font_weight);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set font italic flag for all text contained in selected objects.          */
+/*****************************************************************************/
+void
+gl_view_set_selection_font_italic_flag (glView            *view,
+					gboolean           font_italic_flag)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_font_italic_flag (object, font_italic_flag);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set text alignment for all text contained in selected objects.            */
+/*****************************************************************************/
+void
+gl_view_set_selection_text_alignment (glView            *view,
+				      GtkJustification   text_alignment)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_text_alignment (object, text_alignment);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set text color for all text contained in selected objects.                */
+/*****************************************************************************/
+void
+gl_view_set_selection_text_color (glView            *view,
+				  guint              text_color)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_text_color (object, text_color);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Can fill properties be set for selection?                                 */
+/*****************************************************************************/
+gboolean
+gl_view_can_selection_fill (glView            *view)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		if (gl_label_object_can_fill (object)) {
+			return TRUE;
+		}
+
+	}
+
+	return FALSE;
+}
+
+/*****************************************************************************/
+/* Set fill color for all selected objects.                                  */
+/*****************************************************************************/
+void
+gl_view_set_selection_fill_color (glView            *view,
+				  guint              fill_color)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_fill_color (object, fill_color);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Can line color properties be set for selection?                           */
+/*****************************************************************************/
+gboolean
+gl_view_can_selection_line_color (glView            *view)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		if (gl_label_object_can_line_color (object)) {
+			return TRUE;
+		}
+
+	}
+
+	return FALSE;
+}
+
+/*****************************************************************************/
+/* Set line color for all selected objects.                                  */
+/*****************************************************************************/
+void
+gl_view_set_selection_line_color (glView            *view,
+				  guint              line_color)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_line_color (object, line_color);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Can line width properties be set for selection?                           */
+/*****************************************************************************/
+gboolean
+gl_view_can_selection_line_width (glView            *view)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		if (gl_label_object_can_line_width (object)) {
+			return TRUE;
+		}
+
+	}
+
+	return FALSE;
+}
+
+/*****************************************************************************/
+/* Set line width for all selected objects.                                  */
+/*****************************************************************************/
+void
+gl_view_set_selection_line_width (glView            *view,
+				  gdouble            line_width)
+{
+	GList *p;
+	glLabelObject *object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+
+		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		gl_label_object_set_line_width (object, line_width);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void
@@ -3366,5 +3695,302 @@ selection_received_cb (GtkWidget        *widget,
 	g_object_unref (label);
 
 	gl_debug (DEBUG_VIEW, "END");
+}
+
+/****************************************************************************/
+/* Set default font family.                                                 */
+/****************************************************************************/
+void
+gl_view_set_default_font_family (glView            *view,
+				 const gchar       *font_family)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	if (view->default_font_family) {
+		g_free (view->default_font_family);
+	}
+	view->default_font_family = g_strdup (font_family);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default font size.                                                   */
+/****************************************************************************/
+void
+gl_view_set_default_font_size (glView            *view,
+			       gdouble            font_size)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_font_size = font_size;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default font weight.                                                 */
+/****************************************************************************/
+void
+gl_view_set_default_font_weight (glView            *view,
+				 GnomeFontWeight    font_weight)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_font_weight = font_weight;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default font italic flag.                                            */
+/****************************************************************************/
+void
+gl_view_set_default_font_italic_flag (glView            *view,
+				      gboolean           font_italic_flag)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_font_italic_flag = font_italic_flag;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default text color.                                                  */
+/****************************************************************************/
+void
+gl_view_set_default_text_color (glView            *view,
+				guint              text_color)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_text_color = text_color;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default text alignment.                                              */
+/****************************************************************************/
+void
+gl_view_set_default_text_alignment (glView            *view,
+				    GtkJustification   text_alignment)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_text_alignment = text_alignment;
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default line width.                                                  */
+/****************************************************************************/
+void
+gl_view_set_default_line_width (glView            *view,
+				gdouble            line_width)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_line_width = line_width;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default line color.                                                  */
+/****************************************************************************/
+void
+gl_view_set_default_line_color (glView            *view,
+				guint              line_color)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_line_color = line_color;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set default fill color.                                                  */
+/****************************************************************************/
+void
+gl_view_set_default_fill_color (glView            *view,
+				guint              fill_color)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	view->default_fill_color = fill_color;
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+
+/****************************************************************************/
+/* Get default font family.                                                 */
+/****************************************************************************/
+gchar *
+gl_view_get_default_font_family (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return g_strdup (view->default_font_family);
+}
+
+
+/****************************************************************************/
+/* Get default font size.                                                   */
+/****************************************************************************/
+gdouble
+gl_view_get_default_font_size (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 12.0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_font_size;
+}
+
+
+/****************************************************************************/
+/* Get default font weight.                                                 */
+/****************************************************************************/
+GnomeFontWeight
+gl_view_get_default_font_weight (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), GNOME_FONT_BOOK);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_font_weight;
+}
+
+
+/****************************************************************************/
+/* Get default font italic flag.                                            */
+/****************************************************************************/
+gboolean
+gl_view_get_default_font_italic_flag (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_font_italic_flag;
+}
+
+
+/****************************************************************************/
+/* Get default text color.                                                  */
+/****************************************************************************/
+guint
+gl_view_get_default_text_color (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_text_color;
+}
+
+
+/****************************************************************************/
+/* Get default text alignment.                                              */
+/****************************************************************************/
+GtkJustification
+gl_view_get_default_text_alignment (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), GTK_JUSTIFY_LEFT);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_text_alignment;
+}
+
+
+/****************************************************************************/
+/* Get default line width.                                                  */
+/****************************************************************************/
+gdouble
+gl_view_get_default_line_width (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_line_width;
+}
+
+
+/****************************************************************************/
+/* Get default line color.                                                  */
+/****************************************************************************/
+guint gl_view_get_default_line_color (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_line_color;
+}
+
+
+/****************************************************************************/
+/* Get default fill color.                                                  */
+/****************************************************************************/
+guint gl_view_get_default_fill_color (glView            *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return view->default_fill_color;
 }
 

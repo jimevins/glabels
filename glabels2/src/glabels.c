@@ -93,6 +93,9 @@ static const struct poptOption options [] =
 	{ "debug-ui", '\0', POPT_ARG_NONE, &gl_debug_ui, 0,
 	  N_("Show ui debugging messages."), NULL },
 
+	{ "debug-property-bar", '\0', POPT_ARG_NONE, &gl_debug_property_bar, 0,
+	  N_("Show property_bar debugging messages."), NULL },
+
 	{ "debug-media-select", '\0', POPT_ARG_NONE, &gl_debug_media_select, 0,
 	  N_("Show media select widget debugging messages."), NULL },
 

@@ -31,7 +31,6 @@
 #include "wdgt-size.h"
 #include "wdgt-position.h"
 #include "color.h"
-#include "prefs.h"
 
 #include "pixmaps/cursor_box.xbm"
 #include "pixmaps/cursor_box_mask.xbm"
@@ -676,10 +675,10 @@ gl_view_box_create_event_handler (GnomeCanvas *canvas,
 						     x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
-			line_color = gl_color_set_opacity (gl_prefs->default_line_color, 0.5);
-			fill_color = gl_color_set_opacity (gl_prefs->default_fill_color, 0.5);
+			line_color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
+			fill_color = gl_color_set_opacity (gl_view_get_default_fill_color(view), 0.5);
 			gl_label_box_set_line_width (GL_LABEL_BOX(object),
-						     gl_prefs->default_line_width);
+						     gl_view_get_default_line_width(view));
 			gl_label_box_set_line_color (GL_LABEL_BOX(object),
 						     line_color);
 			gl_label_box_set_fill_color (GL_LABEL_BOX(object),
@@ -713,9 +712,9 @@ gl_view_box_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
 			gl_label_box_set_line_color (GL_LABEL_BOX(object),
-						     gl_prefs->default_line_color);
+						     gl_view_get_default_line_color(view));
 			gl_label_box_set_fill_color (GL_LABEL_BOX(object),
-						     gl_prefs->default_fill_color);
+						     gl_view_get_default_fill_color(view));
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_box));
 			gl_view_arrow_mode (view);

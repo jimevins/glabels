@@ -30,6 +30,8 @@ G_BEGIN_DECLS
 #define GL_COLOR(r,g,b)     GNOME_CANVAS_COLOR(r,g,b)
 #define GL_COLOR_A(r,g,b,a) GNOME_CANVAS_COLOR_A(r,g,b,a)
 
+#define GL_COLOR_NONE GL_COLOR_A(0,0,0,0)
+
 #define GL_COLOR_I_RED(x)   (((x)>>24) & 0xff)
 #define GL_COLOR_I_GREEN(x) (((x)>>16) & 0xff)
 #define GL_COLOR_I_BLUE(x)  (((x)>>8)  & 0xff)
@@ -42,7 +44,8 @@ G_BEGIN_DECLS
 
 guint     gl_color_set_opacity (guint color, gdouble opacity);
 
-GdkColor *gl_color_to_gdk_color (guint color);
+GdkColor *gl_color_to_gdk_color   (guint     color);
+guint     gl_color_from_gdk_color (GdkColor *gdk_color);
 
 G_END_DECLS
 

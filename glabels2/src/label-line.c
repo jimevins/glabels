@@ -54,6 +54,13 @@ static void gl_label_line_finalize      (GObject          *object);
 static void copy                        (glLabelObject    *dst_object,
 					 glLabelObject    *src_object);
 
+static void set_line_color              (glLabelObject    *object,
+					 guint             line_color);
+
+static void set_line_width              (glLabelObject    *object,
+					 gdouble           line_width);
+
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -91,7 +98,9 @@ gl_label_line_class_init (glLabelLineClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	label_object_class->copy = copy;
+	label_object_class->copy           = copy;
+	label_object_class->set_line_color = set_line_color;
+	label_object_class->set_line_width = set_line_width;
 
 	object_class->finalize = gl_label_line_finalize;
 }
@@ -204,4 +213,39 @@ gl_label_line_get_line_color (glLabelLine *lline)
 
 	return lline->private->line_color;
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_color (glLabelObject *object,
+		guint          line_color)
+{
+	glLabelLine *lline = (glLabelLine *)object;
+
+	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
+
+	if ( lline->private->line_color != line_color ) {
+		lline->private->line_color = line_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line width method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_width (glLabelObject *object,
+		gdouble        line_width)
+{
+	glLabelLine *lline = (glLabelLine *)object;
+
+	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
+
+	if ( lline->private->line_width != line_width ) {
+		lline->private->line_width = line_width;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
+	}
+}
+
 

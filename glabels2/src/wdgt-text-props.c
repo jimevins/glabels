@@ -412,7 +412,7 @@ gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
 	GList *family_names;
 	gchar *good_font_family;
 
-	/* Make sure we have a valid font family.  if not privide a good default. */
+	/* Make sure we have a valid font family.  if not provide a good default. */
 	family_names = gnome_font_family_list ();
 	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
 		good_font_family = g_strdup (font_family);

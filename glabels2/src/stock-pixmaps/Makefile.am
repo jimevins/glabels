@@ -30,7 +30,11 @@ IMAGES = 	 			\
 	stock_align_bottom_16.png	\
 	stock_align_vcenter_16.png	\
 	stock_center_horiz_16.png	\
-	stock_center_vert_16.png
+	stock_center_vert_16.png	\
+	stock_bucket_fill_16.png	\
+	stock_bucket_fill_24.png	\
+	stock_pencil_16.png		\
+	stock_pencil_24.png
 
 VARIABLES1 = \
 		stock_arrow_24 		$(srcdir)/stock_arrow_24.png	\
@@ -63,7 +67,11 @@ VARIABLES1 = \
 		stock_align_bottom_16	$(srcdir)/stock_align_bottom_16.png \
 		stock_align_vcenter_16	$(srcdir)/stock_align_vcenter_16.png \
 		stock_center_horiz_16	$(srcdir)/stock_center_horiz_16.png \
-		stock_center_vert_16	$(srcdir)/stock_center_vert_16.png
+		stock_center_vert_16	$(srcdir)/stock_center_vert_16.png \
+		stock_bucket_fill_16	$(srcdir)/stock_bucket_fill_16.png \
+		stock_bucket_fill_24	$(srcdir)/stock_bucket_fill_24.png \
+		stock_pencil_16		$(srcdir)/stock_pencil_16.png \
+		stock_pencil_24		$(srcdir)/stock_pencil_24.png
 
 
 noinst_DATA = stockpixbufs.h

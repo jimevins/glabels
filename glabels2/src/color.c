@@ -54,3 +54,18 @@ gl_color_to_gdk_color (guint color)
 	return gdk_color;
 }
 
+/*****************************************************************************/
+/* Convert GdkColor into a canvas color                                      */
+/*****************************************************************************/
+guint
+gl_color_from_gdk_color (GdkColor *gdk_color)
+{
+	guint color;
+
+	color = GL_COLOR ((gdk_color->red   >>8),
+			  (gdk_color->green >>8),
+			  (gdk_color->blue  >>8));
+
+	return color;
+}
+

@@ -68,6 +68,10 @@ static void get_size                       (glLabelObject       *object,
 					    gdouble             *w,
 					    gdouble             *h);
 
+static void set_line_color                 (glLabelObject    *object,
+					    guint             line_color);
+
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -105,8 +109,9 @@ gl_label_barcode_class_init (glLabelBarcodeClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	label_object_class->copy     = copy;
-	label_object_class->get_size = get_size;
+	label_object_class->copy           = copy;
+	label_object_class->get_size       = get_size;
+	label_object_class->set_line_color = set_line_color;
 
 	object_class->finalize = gl_label_barcode_finalize;
 }
@@ -298,5 +303,22 @@ get_size (glLabelObject *object,
 	g_free (data);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_color (glLabelObject *object,
+		guint          line_color)
+{
+	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
+
+	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
+
+	if ( lbarcode->private->color != line_color ) {
+		lbarcode->private->color = line_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbarcode));
+	}
 }
 

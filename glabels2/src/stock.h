@@ -48,6 +48,8 @@
 #define GL_STOCK_ALIGN_VCENTER "gl_stock_align_vcenter"
 #define GL_STOCK_CENTER_HORIZ  "gl_stock_center_horiz"
 #define GL_STOCK_CENTER_VERT   "gl_stock_center_vert"
+#define GL_STOCK_BUCKET_FILL   "gl_stock_bucket_fill"
+#define GL_STOCK_PENCIL        "gl_stock_pencil"
 
 void gl_stock_init (void);
 

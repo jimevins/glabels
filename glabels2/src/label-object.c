@@ -555,6 +555,285 @@ gl_label_object_get_extent (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+/*****************************************************************************/
+/* Can text properties be set for this object?                               */
+/*****************************************************************************/
+gboolean
+gl_label_object_can_text (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL ) {
+
+		return TRUE;
+
+	} else {
+
+		return FALSE;
+
+	}
+
+}
+
+/*****************************************************************************/
+/* Set font family for all text contained in object.                         */
+/*****************************************************************************/
+void
+gl_label_object_set_font_family (glLabelObject     *object,
+				 const gchar       *font_family)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family (object, font_family);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set font size for all text contained in object.                          */
+/****************************************************************************/
+void
+gl_label_object_set_font_size (glLabelObject     *object,
+			       gdouble            font_size)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_size != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_size (object, font_size);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set font weight for all text contained in object.                        */
+/****************************************************************************/
+void
+gl_label_object_set_font_weight (glLabelObject     *object,
+				 GnomeFontWeight    font_weight)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_weight != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_weight (object, font_weight);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set font italic flag for all text contained in object.                   */
+/****************************************************************************/
+void
+gl_label_object_set_font_italic_flag (glLabelObject     *object,
+				      GnomeFontWeight    font_italic_flag)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag (object,
+									 font_italic_flag);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set text alignment for all text contained in object.                     */
+/****************************************************************************/
+void
+gl_label_object_set_text_alignment (glLabelObject     *object,
+				    GtkJustification   text_alignment)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment (object,
+								       text_alignment);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set text color for all text contained in object.                         */
+/****************************************************************************/
+void
+gl_label_object_set_text_color (glLabelObject     *object,
+				guint              text_color)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color (object, text_color);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Can fill properties be set for this object?                               */
+/*****************************************************************************/
+gboolean
+gl_label_object_can_fill (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL ) {
+
+		return TRUE;
+
+	} else {
+
+		return FALSE;
+
+	}
+
+}
+
+/****************************************************************************/
+/* Set fill color for object.                                               */
+/****************************************************************************/
+void
+gl_label_object_set_fill_color (glLabelObject     *object,
+				guint              fill_color)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color (object, fill_color);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Can line color property be set for this object?                           */
+/*****************************************************************************/
+gboolean
+gl_label_object_can_line_color (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL ) {
+
+		return TRUE;
+
+	} else {
+
+		return FALSE;
+
+	}
+
+}
+
+/****************************************************************************/
+/* Set line color for object.                                               */
+/****************************************************************************/
+void
+gl_label_object_set_line_color (glLabelObject     *object,
+				guint              line_color)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color (object, line_color);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Can line width property be set for this object?                           */
+/*****************************************************************************/
+gboolean
+gl_label_object_can_line_width (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL ) {
+
+		return TRUE;
+
+	} else {
+
+		return FALSE;
+
+	}
+
+}
+
+/****************************************************************************/
+/* Set line width for object.                                               */
+/****************************************************************************/
+void
+gl_label_object_set_line_width (glLabelObject     *object,
+				gdouble            line_width)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width (object, line_width);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
 /****************************************************************************/
 /* Flip object horizontally.                                                */
 /****************************************************************************/

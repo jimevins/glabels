@@ -55,6 +55,16 @@ static void gl_label_ellipse_finalize      (GObject             *object);
 static void copy                           (glLabelObject       *dst_object,
 					    glLabelObject       *src_object);
 
+static void set_fill_color                 (glLabelObject    *object,
+					    guint             fill_color);
+
+static void set_line_color                 (glLabelObject    *object,
+					    guint             line_color);
+
+static void set_line_width                 (glLabelObject    *object,
+					    gdouble           line_width);
+
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -92,7 +102,10 @@ gl_label_ellipse_class_init (glLabelEllipseClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	label_object_class->copy = copy;
+	label_object_class->copy           = copy;
+	label_object_class->set_fill_color = set_fill_color;
+	label_object_class->set_line_color = set_line_color;
+	label_object_class->set_line_width = set_line_width;
 
 	object_class->finalize = gl_label_ellipse_finalize;
 }
@@ -226,4 +239,56 @@ gl_label_ellipse_get_fill_color (glLabelEllipse *lellipse)
 
 	return lellipse->private->fill_color;
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set fill color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_fill_color (glLabelObject *object,
+		guint          fill_color)
+{
+	glLabelEllipse *lellipse = (glLabelEllipse *)object;
+
+	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
+
+	if ( lellipse->private->fill_color != fill_color ) {
+		lellipse->private->fill_color = fill_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_color (glLabelObject *object,
+		guint          line_color)
+{
+	glLabelEllipse *lellipse = (glLabelEllipse *)object;
+
+	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
+
+	if ( lellipse->private->line_color != line_color ) {
+		lellipse->private->line_color = line_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line width method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_width (glLabelObject *object,
+		gdouble        line_width)
+{
+	glLabelEllipse *lellipse = (glLabelEllipse *)object;
+
+	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
+
+	if ( lellipse->private->line_width != line_width ) {
+		lellipse->private->line_width = line_width;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
+	}
+}
+
 

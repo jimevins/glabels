@@ -55,6 +55,16 @@ static void gl_label_box_finalize      (GObject         *object);
 static void copy                       (glLabelObject   *dst_object,
 					glLabelObject   *src_object);
 
+static void set_fill_color              (glLabelObject    *object,
+					 guint             fill_color);
+
+static void set_line_color              (glLabelObject    *object,
+					 guint             line_color);
+
+static void set_line_width              (glLabelObject    *object,
+					 gdouble           line_width);
+
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -92,7 +102,10 @@ gl_label_box_class_init (glLabelBoxClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	label_object_class->copy = copy;
+	label_object_class->copy           = copy;
+	label_object_class->set_fill_color = set_fill_color;
+	label_object_class->set_line_color = set_line_color;
+	label_object_class->set_line_width = set_line_width;
 
 	object_class->finalize = gl_label_box_finalize;
 }
@@ -226,4 +239,56 @@ gl_label_box_get_fill_color (glLabelBox *lbox)
 
 	return lbox->private->fill_color;
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set fill color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_fill_color (glLabelObject *object,
+		guint          fill_color)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
+
+	if ( lbox->private->fill_color != fill_color ) {
+		lbox->private->fill_color = fill_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line color method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_color (glLabelObject *object,
+		guint          line_color)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
+
+	if ( lbox->private->line_color != line_color ) {
+		lbox->private->line_color = line_color;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set line width method.                                          */
+/*---------------------------------------------------------------------------*/
+static void
+set_line_width (glLabelObject *object,
+		gdouble        line_width)
+{
+	glLabelBox *lbox = (glLabelBox *)object;
+
+	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
+
+	if ( lbox->private->line_width != line_width ) {
+		lbox->private->line_width = line_width;
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
+	}
+}
+
 

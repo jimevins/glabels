@@ -48,6 +48,7 @@ gint gl_debug_undo = 0;
 gint gl_debug_recent = 0;
 gint gl_debug_window = 0;
 gint gl_debug_ui = 0;
+gint gl_debug_property_bar = 0;
 gint gl_debug_media_select = 0;
 gint gl_debug_mini_preview = 0;
 gint gl_debug_pixbuf_cache = 0;
@@ -89,6 +90,7 @@ gl_debug (gint   section,
 	    (gl_debug_recent       && section == GL_DEBUG_RECENT)         ||
 	    (gl_debug_window       && section == GL_DEBUG_WINDOW)         ||
 	    (gl_debug_ui           && section == GL_DEBUG_UI)             ||
+	    (gl_debug_property_bar && section == GL_DEBUG_PROPERTY_BAR)   ||
 	    (gl_debug_media_select && section == GL_DEBUG_MEDIA_SELECT)   ||
 	    (gl_debug_mini_preview && section == GL_DEBUG_MINI_PREVIEW)   ||
 	    (gl_debug_pixbuf_cache && section == GL_DEBUG_PIXBUF_CACHE)   ||

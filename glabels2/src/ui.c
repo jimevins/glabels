@@ -25,6 +25,7 @@
 #include <gconf/gconf-client.h>
 
 #include "ui.h"
+#include "ui-util.h"
 #include "commands.h"
 #include "tools.h"
 #include "recent.h" 
@@ -209,18 +210,6 @@ static void set_app_drawing_toolbar_style (BonoboUIComponent           *ui_compo
 
 static void set_view_style                (BonoboUIComponent           *ui_component);
 
-static void set_verb_sensitive            (BonoboUIComponent           *ui_component,
-					   gchar                       *cname,
-					   gboolean                     sensitive);
-
-static void set_verb_list_sensitive       (BonoboUIComponent           *ui_component,
-					   gchar                      **vlist,
-					   gboolean                     sensitive);
-
-static void set_verb_state                (BonoboUIComponent           *ui_component,
-					   gchar                       *cname,
-					   gboolean                     state);
-
 
 
 /*****************************************************************************/
@@ -308,7 +297,7 @@ gl_ui_init (BonoboUIComponent *ui_component,
 			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
 			(gpointer)win);
 
-	set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
+	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
 
 	/* Status bar */
         bonobo_ui_component_set_prop (ui_component,
@@ -355,37 +344,37 @@ gl_ui_update_all (BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_list_sensitive (ui_component, doc_verbs, TRUE);
+	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, TRUE);
 
 	label = view->label;
 	g_return_if_fail (label != NULL);
 
-	set_verb_sensitive (ui_component, "/commands/EditUndo",
-			    gl_label_can_undo (label));
-	set_verb_sensitive (ui_component, "/commands/EditRedo",
-			    gl_label_can_redo (label));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/EditUndo",
+				       gl_label_can_undo (label));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/EditRedo",
+				       gl_label_can_redo (label));
 
-	set_verb_list_sensitive (ui_component, 
-				 doc_modified_verbs,
-				 gl_label_is_modified (label));
+	gl_ui_util_set_verb_list_sensitive (ui_component, 
+					    doc_modified_verbs,
+					    gl_label_is_modified (label));
 
-	set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
-			    !gl_view_is_zoom_max (view));
-	set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
-			    !gl_view_is_zoom_min (view));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+				       !gl_view_is_zoom_max (view));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+				       !gl_view_is_zoom_min (view));
 
-	set_verb_list_sensitive (ui_component,
-				 selection_verbs,
-				 !gl_view_is_selection_empty (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    selection_verbs,
+					    !gl_view_is_selection_empty (view));
 
-	set_verb_list_sensitive (ui_component,
-				 atomic_selection_verbs,
-				 gl_view_is_selection_atomic (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    atomic_selection_verbs,
+					    gl_view_is_selection_atomic (view));
 
-	set_verb_list_sensitive (ui_component,
-				 multi_selection_verbs,
-				 !gl_view_is_selection_empty (view)
-				 && !gl_view_is_selection_atomic (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    multi_selection_verbs,
+					    !gl_view_is_selection_empty (view)
+					    && !gl_view_is_selection_atomic (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -402,7 +391,7 @@ gl_ui_update_nodoc (BonoboUIComponent *ui_component)
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 	
-	set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
+	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -420,9 +409,9 @@ gl_ui_update_modified_verbs (BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_list_sensitive (ui_component, 
-				 doc_modified_verbs,
-				 gl_label_is_modified (label));
+	gl_ui_util_set_verb_list_sensitive (ui_component, 
+					    doc_modified_verbs,
+					    gl_label_is_modified (label));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -440,18 +429,18 @@ gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_list_sensitive (ui_component,
-				 selection_verbs,
-				 !gl_view_is_selection_empty (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    selection_verbs,
+					    !gl_view_is_selection_empty (view));
 
-	set_verb_list_sensitive (ui_component,
-				 atomic_selection_verbs,
-				 gl_view_is_selection_atomic (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    atomic_selection_verbs,
+					    gl_view_is_selection_atomic (view));
 
-	set_verb_list_sensitive (ui_component,
-				 multi_selection_verbs,
-				 !gl_view_is_selection_empty (view)
-				 && !gl_view_is_selection_atomic (view));
+	gl_ui_util_set_verb_list_sensitive (ui_component,
+					    multi_selection_verbs,
+					    !gl_view_is_selection_empty (view)
+					    && !gl_view_is_selection_atomic (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -469,10 +458,10 @@ gl_ui_update_zoom_verbs (BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
-			    !gl_view_is_zoom_max (view));
-	set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
-			    !gl_view_is_zoom_min (view));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+				       !gl_view_is_zoom_max (view));
+	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+				       !gl_view_is_zoom_min (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -490,11 +479,13 @@ gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_sensitive (ui_component,
-			    "/commands/EditUndo", gl_label_can_undo (label));
+	gl_ui_util_set_verb_sensitive (ui_component,
+				       "/commands/EditUndo",
+				       gl_label_can_undo (label));
 
-	set_verb_sensitive (ui_component,
-			    "/commands/EditRedo", gl_label_can_redo (label));
+	gl_ui_util_set_verb_sensitive (ui_component,
+				       "/commands/EditRedo",
+				       gl_label_can_redo (label));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 
@@ -651,38 +642,38 @@ set_app_main_toolbar_style (BonoboUIComponent *ui_component)
 	bonobo_ui_component_freeze (ui_component, NULL);
 
 	/* Updated view menu */
-	set_verb_state (ui_component, 
-			"/commands/ViewMainToolbar",
-			gl_prefs->main_toolbar_visible);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/ViewMainToolbar",
+				   gl_prefs->main_toolbar_visible);
 
-	set_verb_sensitive (ui_component, 
-			    "/commands/MainToolbarSystem",
-			    gl_prefs->main_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/MainToolbarIcon",
-			    gl_prefs->main_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/MainToolbarIconText",
-			    gl_prefs->main_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/MainToolbarTooltips",
-			    gl_prefs->main_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/MainToolbarSystem",
+				       gl_prefs->main_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/MainToolbarIcon",
+				       gl_prefs->main_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/MainToolbarIconText",
+				       gl_prefs->main_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/MainToolbarTooltips",
+				       gl_prefs->main_toolbar_visible);
 
-	set_verb_state (ui_component, 
-			"/commands/MainToolbarSystem",
-			gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/MainToolbarSystem",
+				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
 
-	set_verb_state (ui_component, 
-			"/commands/MainToolbarIcon",
-			gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/MainToolbarIcon",
+				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS);
 
-	set_verb_state (ui_component, 
-			"/commands/MainToolbarIconText",
-			gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/MainToolbarIconText",
+				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
 
-	set_verb_state (ui_component, 
-			"/commands/MainToolbarTooltips",
-			gl_prefs->main_toolbar_view_tooltips);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/MainToolbarTooltips",
+				   gl_prefs->main_toolbar_view_tooltips);
 
 	
 	/* Actually update main_toolbar style */
@@ -761,39 +752,39 @@ set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
 	bonobo_ui_component_freeze (ui_component, NULL);
 
 	/* Updated view menu */
-	set_verb_state (ui_component, 
-			"/commands/ViewDrawingToolbar",
-			gl_prefs->drawing_toolbar_visible);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/ViewDrawingToolbar",
+				   gl_prefs->drawing_toolbar_visible);
 
-	set_verb_sensitive (ui_component, 
-			    "/commands/DrawingToolbarSystem",
-			    gl_prefs->drawing_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/DrawingToolbarIcon",
-			    gl_prefs->drawing_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/DrawingToolbarIconText",
-			    gl_prefs->drawing_toolbar_visible);
-	set_verb_sensitive (ui_component, 
-			    "/commands/DrawingToolbarTooltips",
-			    gl_prefs->drawing_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/DrawingToolbarSystem",
+				       gl_prefs->drawing_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/DrawingToolbarIcon",
+				       gl_prefs->drawing_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/DrawingToolbarIconText",
+				       gl_prefs->drawing_toolbar_visible);
+	gl_ui_util_set_verb_sensitive (ui_component, 
+				       "/commands/DrawingToolbarTooltips",
+				       gl_prefs->drawing_toolbar_visible);
 
-	set_verb_state (
+	gl_ui_util_set_verb_state (
 		ui_component, 
 		"/commands/DrawingToolbarSystem",
 		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
 
-	set_verb_state (
+	gl_ui_util_set_verb_state (
 		ui_component, 
 		"/commands/DrawingToolbarIcon",
 		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS);
 
-	set_verb_state (
+	gl_ui_util_set_verb_state (
 		ui_component, 
 		"/commands/DrawingToolbarIconText",
 		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
 
-	set_verb_state (ui_component, 
+	gl_ui_util_set_verb_state (ui_component, 
 			"/commands/DrawingToolbarTooltips",
 			gl_prefs->drawing_toolbar_view_tooltips);
 
@@ -872,13 +863,13 @@ set_view_style (BonoboUIComponent *ui_component)
 			
 	bonobo_ui_component_freeze (ui_component, NULL);
 
-	set_verb_state (ui_component, 
-			"/commands/ViewGrid",
-			gl_prefs->grid_visible);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/ViewGrid",
+				   gl_prefs->grid_visible);
 
-	set_verb_state (ui_component, 
-			"/commands/ViewMarkup",
-			gl_prefs->markup_visible);
+	gl_ui_util_set_verb_state (ui_component, 
+				   "/commands/ViewMarkup",
+				   gl_prefs->markup_visible);
 
  error:
 	bonobo_ui_component_thaw (ui_component, NULL);
@@ -886,73 +877,4 @@ set_view_style (BonoboUIComponent *ui_component)
 	gl_debug (DEBUG_UI, "END");
 }
 
-
-/*---------------------------------------------------------------------------*/
-/* Set sensitivity of verb.                                                  */
-/*---------------------------------------------------------------------------*/
-static void
-set_verb_sensitive (BonoboUIComponent  *ui_component,
-		    gchar              *cname,
-		    gboolean            sensitive)
-{
-	gl_debug (DEBUG_UI, "START");
-
-	g_return_if_fail (cname != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
-
-	bonobo_ui_component_set_prop (ui_component,
-				      cname,
-				      "sensitive",
-				      sensitive ? "1" : "0",
-				      NULL);
-
-	gl_debug (DEBUG_UI, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* Set sensitivity of a list of verbs.                                       */
-/*---------------------------------------------------------------------------*/
-static void
-set_verb_list_sensitive (BonoboUIComponent   *ui_component,
-			 gchar              **vlist,
-			 gboolean             sensitive)
-{
-	gl_debug (DEBUG_UI, "START");
-
-	g_return_if_fail (vlist != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
-
-	for ( ; *vlist; ++vlist)
-	{
-		bonobo_ui_component_set_prop (ui_component,
-					      *vlist,
-					      "sensitive",
-					      sensitive ? "1" : "0",
-					      NULL);
-	}
-
-	gl_debug (DEBUG_UI, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* Set state of a verb.                                                      */
-/*---------------------------------------------------------------------------*/
-static void
-set_verb_state (BonoboUIComponent   *ui_component,
-		gchar               *cname,
-		gboolean             state)
-{
-	gl_debug (DEBUG_UI, "START");
-
-	g_return_if_fail (cname != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
-
-	bonobo_ui_component_set_prop (ui_component,
-				      cname,
-				      "state",
-				      state ? "1" : "0",
-				      NULL);
-
-	gl_debug (DEBUG_UI, "END");
-}
 

@@ -81,6 +81,8 @@ gl_stock_init (void)
 		{ GL_STOCK_ALIGN_VCENTER, N_("Centers"),               0, 0, NULL },
 		{ GL_STOCK_CENTER_HORIZ,  N_("Label Ce_nter"),         0, 0, NULL },
 		{ GL_STOCK_CENTER_VERT,   N_("Label Ce_nter"),         0, 0, NULL },
+		{ GL_STOCK_BUCKET_FILL,   N_("Fill color"),            0, 0, NULL },
+		{ GL_STOCK_PENCIL,        N_("Line color"),            0, 0, NULL },
 	};
 
 	gtk_stock_add (items, G_N_ELEMENTS (items));
@@ -113,6 +115,9 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_ALIGN_VCENTER, NULL, stock_align_vcenter_16);
 	add_icons (factory, GL_STOCK_CENTER_HORIZ,  NULL, stock_center_horiz_16);
 	add_icons (factory, GL_STOCK_CENTER_VERT,   NULL, stock_center_vert_16);
+
+	add_icons (factory, GL_STOCK_BUCKET_FILL,   stock_bucket_fill_24, stock_bucket_fill_16);
+	add_icons (factory, GL_STOCK_PENCIL,        stock_pencil_24,      stock_pencil_16);
 
 	g_object_unref (G_OBJECT(factory));
 }

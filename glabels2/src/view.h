@@ -25,6 +25,7 @@
 
 #include <gtk/gtk.h>
 #include <libgnomecanvas/libgnomecanvas.h>
+#include <libgnomeprint/gnome-font.h>
 
 #include "label-object.h"
 
@@ -80,6 +81,21 @@ struct _glView {
 
 	/* Merge Properties Dialog */
 	GtkWidget         *merge_props_dialog;
+
+	/* Default object text properties */
+	gchar             *default_font_family;
+	gdouble            default_font_size;
+	GnomeFontWeight    default_font_weight;
+	gboolean           default_font_italic_flag;
+	guint              default_text_color;
+	GtkJustification   default_text_alignment;
+
+	/* Default object line properties */
+	gdouble            default_line_width;
+	guint              default_line_color;
+	
+	/* Default object fill properties */
+	guint             default_fill_color;
 };
 
 struct _glViewClass {
@@ -189,6 +205,42 @@ void       gl_view_move_selection          (glView            *view,
 					    gdouble            dx,
 					    gdouble            dy);
 
+gboolean   gl_view_can_selection_text             (glView           *view);
+
+void       gl_view_set_selection_font_family      (glView           *view,
+						   const gchar      *font_family);
+
+void       gl_view_set_selection_font_size        (glView           *view,
+						   gdouble           font_size);
+
+void       gl_view_set_selection_font_weight      (glView           *view,
+						   GnomeFontWeight   font_weight);
+
+void       gl_view_set_selection_font_italic_flag (glView           *view,
+						   gboolean          font_italic_flag);
+
+void       gl_view_set_selection_text_alignment   (glView           *view,
+						   GtkJustification  text_alignment);
+
+void       gl_view_set_selection_text_color       (glView           *view,
+						   guint             text_color);
+
+gboolean   gl_view_can_selection_fill             (glView           *view);
+
+void       gl_view_set_selection_fill_color       (glView           *view,
+						   guint             fill_color);
+
+gboolean   gl_view_can_selection_line_color       (glView           *view);
+
+void       gl_view_set_selection_line_color       (glView           *view,
+						   guint             line_color);
+
+gboolean   gl_view_can_selection_line_width       (glView           *view);
+
+void       gl_view_set_selection_line_width       (glView           *view,
+						   gdouble           line_width);
+
+
 void       gl_view_cut                     (glView            *view);
 
 void       gl_view_copy                    (glView            *view);
@@ -214,6 +266,54 @@ void       gl_view_popup_menu              (glView            *view,
 					    GdkEvent          *event);
 
 void       gl_view_edit_merge_props        (glView            *view);
+
+
+void       gl_view_set_default_font_family      (glView            *view,
+						 const gchar       *font_family);
+
+void       gl_view_set_default_font_size        (glView            *view,
+						 gdouble            font_size);
+
+void       gl_view_set_default_font_weight      (glView            *view,
+						 GnomeFontWeight    font_weight);
+
+void       gl_view_set_default_font_italic_flag (glView            *view,
+					         gboolean           font_italic_flag);
+
+void       gl_view_set_default_text_color       (glView            *view,
+						 guint              text_color);
+
+void       gl_view_set_default_text_alignment   (glView            *view,
+						 GtkJustification   text_alignment);
+
+void       gl_view_set_default_line_width       (glView            *view,
+						 gdouble            line_width);
+
+void       gl_view_set_default_line_color       (glView            *view,
+						 guint              line_color);
+
+void       gl_view_set_default_fill_color       (glView            *view,
+						 guint              fill_color);
+
+
+gchar           *gl_view_get_default_font_family      (glView            *view);
+
+gdouble          gl_view_get_default_font_size        (glView            *view);
+
+GnomeFontWeight  gl_view_get_default_font_weight      (glView            *view);
+
+gboolean         gl_view_get_default_font_italic_flag (glView            *view);
+
+guint            gl_view_get_default_text_color       (glView            *view);
+
+GtkJustification gl_view_get_default_text_alignment   (glView            *view);
+
+gdouble          gl_view_get_default_line_width       (glView            *view);
+
+guint            gl_view_get_default_line_color       (glView            *view);
+
+guint            gl_view_get_default_fill_color       (glView            *view);
+
 
 
 G_END_DECLS

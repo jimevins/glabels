@@ -30,6 +30,8 @@
 #include "view.h"
 #include "label.h"
 
+#include "ui-property-bar.h"
+
 G_BEGIN_DECLS
 
 #define GL_TYPE_WINDOW (gl_window_get_type ())
@@ -51,6 +53,8 @@ struct _glWindow {
 	BonoboUIComponent   *uic;
 
 	GtkWidget           *view;
+
+	glUIPropertyBar     *property_bar;
 
 	GtkWidget           *cursor_info;
 	GtkWidget           *cursor_info_frame;
