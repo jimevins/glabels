@@ -73,7 +73,6 @@ static void print_sheets (GnomePrintConfig *config, glLabel * label,
 			  gboolean outline_flag, gboolean reverse_flag);
 
 static void print_sheets_merge (GnomePrintConfig *config, glLabel * label,
-				GList *record_list,
 				gboolean preview_flag,
 				gint n_copies, gint first,
 				gboolean collate_flag,
@@ -138,7 +137,6 @@ job_page_new (GtkWidget *dlg,
 	GtkWidget *wframe;
 	GtkWidget *copies = NULL, *prmerge = NULL;
 	GtkWidget *wvbox, *outline_check, *reverse_check;
-	GList *record_list;
 	gint n_records;
 
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
@@ -167,9 +165,7 @@ job_page_new (GtkWidget *dlg,
 		prmerge = gl_wdgt_print_merge_new (label);
 		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), prmerge);
 
-		record_list = gl_merge_read_record_list (merge);
-
-		n_records = gl_merge_count_records( record_list );
+		n_records = gl_merge_get_record_count( merge );
 		gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE(prmerge),
 					   n_copies, first, n_records,
 					   collate_flag);
@@ -241,7 +237,6 @@ print_response (GtkDialog *dlg,
 	GtkWidget *printer_select;
 	GnomePrintConfig *config;
 	glMerge *merge;
-	GList *record_list;
 
 	switch (response) {
 
@@ -278,11 +273,10 @@ print_response (GtkDialog *dlg,
 
 		} else {
 
-			record_list = gl_merge_read_record_list (merge);
 			gl_wdgt_print_merge_get_copies (GL_WDGT_PRINT_MERGE (prmerge),
 							&n_copies, &first,
 							&collate_flag);
-			print_sheets_merge (config, label, record_list,
+			print_sheets_merge (config, label,
 					    (response == GNOME_PRINT_DIALOG_RESPONSE_PREVIEW),
 					    n_copies, first,
 					    collate_flag,
@@ -305,13 +299,13 @@ print_response (GtkDialog *dlg,
 /*---------------------------------------------------------------------------*/
 static void
 print_sheets (GnomePrintConfig *config,
-	      glLabel * label,
-	      gboolean preview_flag,
-	      gint n_sheets,
-	      gint first,
-	      gint last,
-	      gboolean outline_flag,
-	      gboolean reverse_flag)
+	      glLabel          *label,
+	      gboolean          preview_flag,
+	      gint              n_sheets,
+	      gint              first,
+	      gint              last,
+	      gboolean          outline_flag,
+	      gboolean          reverse_flag)
 {
 	GnomePrintMaster *master;
 
@@ -336,24 +330,23 @@ print_sheets (GnomePrintConfig *config,
 /*---------------------------------------------------------------------------*/
 static void
 print_sheets_merge (GnomePrintConfig *config,
-		    glLabel * label,
-		    GList * record_list,
-		    gboolean preview_flag,
-		    gint n_copies,
-		    gint first,
-		    gboolean collate_flag,
-		    gboolean outline_flag,
-		    gboolean reverse_flag)
+		    glLabel          *label,
+		    gboolean          preview_flag,
+		    gint              n_copies,
+		    gint              first,
+		    gboolean          collate_flag,
+		    gboolean          outline_flag,
+		    gboolean          reverse_flag)
 {
 	GnomePrintMaster *master;
 
 	master = gnome_print_master_new_from_config (config);
 	if ( collate_flag ) {
-		gl_print_merge_collated (master, label, record_list,
+		gl_print_merge_collated (master, label,
 					 n_copies, first,
 					 outline_flag, reverse_flag);
 	} else {
-		gl_print_merge_uncollated (master, label, record_list,
+		gl_print_merge_uncollated (master, label,
 					   n_copies, first,
 					   outline_flag, reverse_flag);
 	}

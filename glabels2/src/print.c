@@ -196,19 +196,23 @@ gl_print_simple (GnomePrintMaster *master,
 void
 gl_print_merge_collated (GnomePrintMaster *master,
 			 glLabel          *label,
-			 GList            *record_list,
 			 gint              n_copies,
 			 gint              first,
 			 gboolean          outline_flag,
 			 gboolean          reverse_flag)
 {
-	PrintInfo *pi;
-	gint i_sheet, i_label, n_labels_per_page, i_copy;
-	glMergeRecord *record;
-	GList *p;
-	glTemplateOrigin *origins;
+	glMerge                *merge;
+	const GList            *record_list;
+	PrintInfo              *pi;
+	gint                    i_sheet, i_label, n_labels_per_page, i_copy;
+	glMergeRecord          *record;
+	GList                  *p;
+	glTemplateOrigin       *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
+
+	merge = gl_label_get_merge (label);
+	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (master, label);
 
@@ -218,13 +222,14 @@ gl_print_merge_collated (GnomePrintMaster *master,
 	i_sheet = 0;
 	i_label = first - 1;
 
-	for ( p=record_list; p!=NULL; p=p->next ) {
+	for ( p=(GList *)record_list; p!=NULL; p=p->next ) {
 		record = (glMergeRecord *)p->data;
 			
 		if ( record->select_flag ) {
 			for (i_copy = 0; i_copy < n_copies; i_copy++) {
 
 				if ((i_label == 0) || (i_sheet == 0)) {
+					i_sheet++;
 					print_page_begin (pi);
 				}
 
@@ -259,19 +264,23 @@ gl_print_merge_collated (GnomePrintMaster *master,
 void
 gl_print_merge_uncollated (GnomePrintMaster *master,
 			   glLabel          *label,
-			   GList            *record_list,
 			   gint              n_copies,
 			   gint              first,
 			   gboolean          outline_flag,
 			   gboolean          reverse_flag)
 {
-	PrintInfo *pi;
-	gint i_sheet, i_label, n_labels_per_page, i_copy;
-	glMergeRecord *record;
-	GList *p;
-	glTemplateOrigin *origins;
+	glMerge                *merge;
+	const GList            *record_list;
+	PrintInfo              *pi;
+	gint                    i_sheet, i_label, n_labels_per_page, i_copy;
+	glMergeRecord          *record;
+	GList                  *p;
+	glTemplateOrigin       *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
+
+	merge = gl_label_get_merge (label);
+	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (master, label);
 
@@ -283,13 +292,14 @@ gl_print_merge_uncollated (GnomePrintMaster *master,
 
 	for (i_copy = 0; i_copy < n_copies; i_copy++) {
 
-		for ( p=record_list; p!=NULL; p=p->next ) {
+		for ( p=(GList *)record_list; p!=NULL; p=p->next ) {
 			record = (glMergeRecord *)p->data;
 			
 			if ( record->select_flag ) {
 
 
 				if ((i_label == 0) || (i_sheet == 0)) {
+					i_sheet++;
 					print_page_begin (pi);
 				}
 
@@ -330,7 +340,6 @@ gl_print_batch (GnomePrintMaster *master,
 		gboolean          reverse_flag)
 {
 	gint n_per_page;
-	GList *record_list = NULL;
 	glMerge *merge;
 	glTemplate *template;
 	
@@ -345,10 +354,7 @@ gl_print_batch (GnomePrintMaster *master,
 		gl_print_simple (master, label, n_sheets, 1, n_per_page,
 				 outline_flag, reverse_flag);
 	} else {
-		record_list = gl_merge_read_record_list (merge);
-
-		gl_print_merge_collated (master, label, record_list,
-					 n_copies, 1,
+		gl_print_merge_collated (master, label, n_copies, 1,
 					 outline_flag, reverse_flag);
 	}
 	gl_template_free (&template);
@@ -451,6 +457,8 @@ print_page_begin (PrintInfo *pi)
 {
 	gchar *str;
 
+	gl_debug (DEBUG_PRINT, "START");
+
 	pi->sheet++;
 
 	str = g_strdup_printf ("sheet%02d", pi->sheet);
@@ -460,6 +468,8 @@ print_page_begin (PrintInfo *pi)
 	/* Translate and scale, so that our origin is at the upper left. */
 	gnome_print_translate (pi->pc, 0.0, pi->page_height);
 	gnome_print_scale (pi->pc, 1.0, -1.0);
+
+	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*---------------------------------------------------------------------------*/
@@ -468,7 +478,11 @@ print_page_begin (PrintInfo *pi)
 static void
 print_page_end (PrintInfo *pi)
 {
+	gl_debug (DEBUG_PRINT, "START");
+
 	gnome_print_showpage (pi->pc);
+
+	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*---------------------------------------------------------------------------*/
