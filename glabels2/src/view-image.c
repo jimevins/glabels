@@ -384,6 +384,8 @@ response_cb (GtkDialog     *dialog,
 	     gint           response,
 	     glViewImage   *view_image)
 {
+	glLabelObject *object;
+
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail(dialog != NULL);
@@ -394,6 +396,13 @@ response_cb (GtkDialog     *dialog,
 		gtk_widget_hide (GTK_WIDGET(dialog));
 		break;
 	case GTK_RESPONSE_DELETE_EVENT:
+		/* Dialog destroyed, remove callbacks that reference it. */
+		object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
+
+		g_signal_handlers_disconnect_by_func (object, update_dialog_cb,
+						      view_image);
+		g_signal_handlers_disconnect_by_func (object, update_dialog_from_move_cb,
+						      view_image);
 		break;
 	default:
 		g_print ("response = %d", response);
