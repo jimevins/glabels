@@ -33,6 +33,7 @@
 #define GL_STOCK_IMAGE         "gl_stock_image"
 #define GL_STOCK_BARCODE       "gl_stock_barcode"
 #define GL_STOCK_MERGE         "gl_stock_merge"
+#define GL_STOCK_PROPERTIES    "gl_stock_properties"
 #define GL_STOCK_ORDER_TOP     "gl_stock_order_top"
 #define GL_STOCK_ORDER_BOTTOM  "gl_stock_order_bottom"
 #define GL_STOCK_ROTATE_LEFT   "gl_stock_rotate_left"

@@ -14,6 +14,7 @@ IMAGES = 	 			\
 	stock_line_16.png	 	\
 	stock_merge_24.png 		\
 	stock_merge_16.png 		\
+	stock_properties_16.png		\
 	stock_text_24.png		\
 	stock_text_16.png		\
 	stock_order_top_16.png		\
@@ -46,6 +47,7 @@ VARIABLES1 = \
 		stock_line_16  		$(srcdir)/stock_line_16.png	\
 		stock_merge_24 		$(srcdir)/stock_merge_24.png	\
 		stock_merge_16 		$(srcdir)/stock_merge_16.png	\
+		stock_properties_16	$(srcdir)/stock_properties_16.png \
 		stock_text_24  		$(srcdir)/stock_text_24.png     \
 		stock_text_16  		$(srcdir)/stock_text_16.png	\
 		stock_order_top_16	$(srcdir)/stock_order_top_16.png \

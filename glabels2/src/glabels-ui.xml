@@ -139,7 +139,7 @@
 	
 	<cmd name="ToolsObjectProperties"
 	     _tip="Edit object properties"
-             pixtype="stock" pixname="gtk-properties"/>
+             pixtype="stock" pixname="gl_stock_properties"/>
 	
 	<cmd name="ToolsRaiseObjects"
 	     _tip="Raise object to top"

@@ -58,28 +58,29 @@ gl_stock_init (void)
 	GtkIconFactory *factory;
 
 	static GtkStockItem items[] = {
-		{ GL_STOCK_ARROW,         "Arrow",          0, 0, NULL },
-		{ GL_STOCK_TEXT,          "Text",           0, 0, NULL },
-		{ GL_STOCK_LINE,          "Line",           0, 0, NULL },
-		{ GL_STOCK_BOX,           "Box",            0, 0, NULL },
-		{ GL_STOCK_ELLIPSE,       "Ellipse",        0, 0, NULL },
-		{ GL_STOCK_IMAGE,         "Image",          0, 0, NULL },
-		{ GL_STOCK_BARCODE,       "Barcode",        0, 0, NULL },
-		{ GL_STOCK_MERGE,         "Merge",          0, 0, NULL },
-		{ GL_STOCK_ORDER_TOP,     "OrderTop",       0, 0, NULL },
-		{ GL_STOCK_ORDER_BOTTOM,  "OrderBottom",    0, 0, NULL },
-		{ GL_STOCK_ROTATE_LEFT,   "RotateLeft",     0, 0, NULL },
-		{ GL_STOCK_ROTATE_RIGHT,  "RotateRight",    0, 0, NULL },
-		{ GL_STOCK_FLIP_HORIZ,    "FlipHoriz",      0, 0, NULL },
-		{ GL_STOCK_FLIP_VERT,     "FlipVert",       0, 0, NULL },
-		{ GL_STOCK_ALIGN_LEFT,    "AlignLeft",      0, 0, NULL },
-		{ GL_STOCK_ALIGN_RIGHT,   "AlignRight",     0, 0, NULL },
-		{ GL_STOCK_ALIGN_HCENTER, "AlignHCenter",   0, 0, NULL },
-		{ GL_STOCK_ALIGN_TOP,     "AlignTop",       0, 0, NULL },
-		{ GL_STOCK_ALIGN_BOTTOM,  "AlignBottom",    0, 0, NULL },
-		{ GL_STOCK_ALIGN_VCENTER, "AlignVCenter",   0, 0, NULL },
-		{ GL_STOCK_CENTER_HORIZ,  "CenterHoriz",    0, 0, NULL },
-		{ GL_STOCK_CENTER_VERT,   "CenterVert",     0, 0, NULL },
+		{ GL_STOCK_ARROW,         N_("_Select Mode"),          0, 0, NULL },
+		{ GL_STOCK_TEXT,          N_("_Text"),                 0, 0, NULL },
+		{ GL_STOCK_LINE,          N_("_Line"),                 0, 0, NULL },
+		{ GL_STOCK_BOX,           N_("_Box"),                  0, 0, NULL },
+		{ GL_STOCK_ELLIPSE,       N_("_Ellipse"),              0, 0, NULL },
+		{ GL_STOCK_IMAGE,         N_("_Image"),                0, 0, NULL },
+		{ GL_STOCK_BARCODE,       N_("Bar_code"),              0, 0, NULL },
+		{ GL_STOCK_MERGE,         N_("_Merge Properties"),     0, 0, NULL },
+		{ GL_STOCK_PROPERTIES,    N_("Object _Properties"),    0, 0, NULL },
+		{ GL_STOCK_ORDER_TOP,     N_("Bring to _Front"),       0, 0, NULL },
+		{ GL_STOCK_ORDER_BOTTOM,  N_("Send to _Back"),         0, 0, NULL },
+		{ GL_STOCK_ROTATE_LEFT,   N_("Rotate _Left"),          0, 0, NULL },
+		{ GL_STOCK_ROTATE_RIGHT,  N_("Rotate _Right"),         0, 0, NULL },
+		{ GL_STOCK_FLIP_HORIZ,    N_("Flip _Horizontally"),    0, 0, NULL },
+		{ GL_STOCK_FLIP_VERT,     N_("Flip _Vertically"),      0, 0, NULL },
+		{ GL_STOCK_ALIGN_LEFT,    N_("_Lefts"),                0, 0, NULL },
+		{ GL_STOCK_ALIGN_RIGHT,   N_("_Rights"),               0, 0, NULL },
+		{ GL_STOCK_ALIGN_HCENTER, N_("_Centers"),              0, 0, NULL },
+		{ GL_STOCK_ALIGN_TOP,     N_("_Tops"),                 0, 0, NULL },
+		{ GL_STOCK_ALIGN_BOTTOM,  N_("Bottoms"),               0, 0, NULL },
+		{ GL_STOCK_ALIGN_VCENTER, N_("Centers"),               0, 0, NULL },
+		{ GL_STOCK_CENTER_HORIZ,  N_("Label Ce_nter"),         0, 0, NULL },
+		{ GL_STOCK_CENTER_VERT,   N_("Label Ce_nter"),         0, 0, NULL },
 	};
 
 	gtk_stock_add (items, G_N_ELEMENTS (items));
@@ -95,6 +96,8 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_IMAGE,         stock_image_24,   stock_image_16);
 	add_icons (factory, GL_STOCK_BARCODE,       stock_barcode_24, stock_barcode_16);
 	add_icons (factory, GL_STOCK_MERGE,         stock_merge_24,   stock_merge_16);
+
+	add_icons (factory, GL_STOCK_PROPERTIES,    NULL,   stock_properties_16);
 
 	add_icons (factory, GL_STOCK_ORDER_TOP,     NULL, stock_order_top_16);
 	add_icons (factory, GL_STOCK_ORDER_BOTTOM,  NULL, stock_order_bottom_16);
