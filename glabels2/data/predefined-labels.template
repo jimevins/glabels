@@ -533,13 +533,14 @@
   </Sheet>
 
   <!-- =================================================================== -->
-  <!-- Memorex CD Labels 2 Pass  				         * -->
+  <!-- Memorex CD Labels                                                 * -->
   <!-- =================================================================== -->
   <Sheet name="Memorex CD Labels" size="US-Letter"
-	 description="CD/DVD Labels (2 Pass)">
+	 description="CD/DVD Labels">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="238.5" y0="414" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
@@ -555,21 +556,23 @@
   </Sheet>
 
   <!-- =================================================================== -->
-  <!-- CD STOMPER PRO CD Label Refills, (Face Only), 2 per sheet         * -->
+  <!-- CD STOMPER PRO CD Label Refills, (Face Only)                      * -->
   <!-- =================================================================== -->
   <Sheet name="Stomper PRO CD" size="US-Letter"
-         description="PRO CD Labels 2-up (face only, 2 Pass)">
+         description="PRO CD Labels 2-up (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="245" y0="416" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
   <Sheet name="Stomper PRO Zip" size="US-Letter"
-         description="PRO CD Labels 2-up (Face only, 2 Pass)">
+         description="PRO CD Labels 2-up (Face only)">
     <Label id="0" style="rectangle" width="168" height="142" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="407" y0="68" dx="0" dy="142"/>
+      <Layout nx="1" ny="2" x0="37" y0="440" dx="0" dy="142"/>
     </Label>
   </Sheet>
 
@@ -584,19 +587,11 @@
   <!-- ===================================================================-->
   <!-- Meritline Mini CD/DVD Labels (face only), 5 per sheet              -->
   <!-- ===================================================================-->
-  <Sheet name="Meritline Mini-CD 4" size="US-Letter"
-   description="Mini-CD Labels, outer 4">
+  <Sheet name="Meritline Mini-CD" size="US-Letter"
+   description="Mini-CD Labels">
     <Label id="0" style="cd" radius="110.5" hole="57.5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
-    </Label>
-  </Sheet>
-  <!-- y0=47 is probably about right, but changing it isn't helping! -->
-
-  <Sheet name="Meritline Mini-CD 1" size="US-Letter"
-   description="Mini-CD Labels, center 1">
-    <Label id="0" style="cd" radius="110.5" hole="57.5">
-      <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="197.3" y0="289.5" dx="0" dy="0"/>
     </Label>
   </Sheet>
