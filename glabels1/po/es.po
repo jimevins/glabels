@@ -1,80 +1,26 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# LANGUAGE translation of glabels.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# victor <victor@pasmao.net>, 2002.
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-04-28 22:42-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: glabels 0.2.0\n"
+"POT-Creation-Date: 2002-02-22 19:29-0500\n"
+"PO-Revision-Date: 2002-04-16 12:19+0200\n"
+"Last-Translator: victor <victor@pasmao.net>\n"
+"Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
-
-#: src/glabels_batch.c:47
-msgid "print this message"
-msgstr ""
-
-#: src/glabels_batch.c:49
-msgid "print the version of glabels-batch being used"
-msgstr ""
-
-#: src/glabels_batch.c:51
-msgid "set output filename (default=\"output.ps\")"
-msgstr ""
-
-#: src/glabels_batch.c:51
-msgid "filename"
-msgstr ""
-
-#: src/glabels_batch.c:53
-msgid "number of sheets (default=1)"
-msgstr ""
-
-#: src/glabels_batch.c:53
-msgid "sheets"
-msgstr ""
-
-#: src/glabels_batch.c:55
-msgid "number of copies (default=1)"
-msgstr ""
-
-#: src/glabels_batch.c:55
-msgid "copies"
-msgstr ""
-
-#: src/glabels_batch.c:57 src/print_dialog.c:152
-msgid "print outlines (to test printer alignment)"
-msgstr ""
-
-#: src/glabels_batch.c:59 src/print_dialog.c:160
-msgid "print in reverse (i.e. a mirror image)"
-msgstr ""
-
-#: src/glabels_batch.c:89
-msgid "[OPTION...] GLABELS_FILE..."
-msgstr ""
-
-#: src/glabels_batch.c:108
-msgid "missing glabels file\n"
-msgstr ""
-
-#: src/glabels_batch.c:136
-#, c-format
-msgid "cannot open glabels file %s\n"
-msgstr ""
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: src/mdi.c:169
 #, c-format
 msgid "Revert to saved copy of %s?"
-msgstr ""
+msgstr "¿ Recuperar la copia salvada de %s ?"
 
 #: src/mdi.c:207
 msgid "Unknown media type. Using default."
-msgstr ""
+msgstr "Tipo de papel desconocido. Utilizando el tipo por omisión."
 
 #: src/mdi.c:455
 #, c-format
@@ -83,450 +29,453 @@ msgid ""
 "\n"
 "Do you wish to save it?"
 msgstr ""
+"\"%s\" ha sido modificado.\n"
+"\n"
+"¿ Desea salvarlo ?"
 
 #: src/mdi.c:459
 msgid "Don't save"
-msgstr ""
+msgstr "No salvar"
 
 #: src/file.c:288 src/mdi.c:601
 msgid "Cannot save file"
-msgstr ""
+msgstr "No puedo salvar el archivo"
 
 #: src/file.c:311 src/mdi.c:623
 msgid "Save As"
-msgstr ""
+msgstr "Salva como"
 
 #: src/mdi.c:626
 msgid "Close / Save label as"
-msgstr ""
+msgstr "Cerrar / Salvar etiqueta como"
 
 #: src/file.c:352 src/mdi.c:680
 msgid "Label no longer valid!"
-msgstr ""
+msgstr "¡ La etiqueta ya no es válida !"
 
 #: src/file.c:362 src/mdi.c:693
 msgid "Must supply file name"
-msgstr ""
+msgstr "Debe proporcionar un nombre de archivo"
 
 #: src/file.c:374 src/mdi.c:705
 msgid "Error writing file"
-msgstr ""
+msgstr "Error salvando el archivo"
 
 #: src/display.c:1250 src/display.c:1298
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 #: src/display.c:1260 src/display.c:1308
 msgid "Bring to front"
-msgstr ""
+msgstr "Traer al frente"
 
 #: src/display.c:1266 src/display.c:1314
 msgid "Send to back"
-msgstr ""
+msgstr "Enviar al fondo"
 
 #: src/display.c:1287
 msgid "Edit properties..."
-msgstr ""
+msgstr "Modificar propiedades"
 
 #: src/item_text.c:450
 msgid "Edit text object properties"
-msgstr ""
+msgstr "Modificar las propiedades del objeto texto"
 
 #: src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: src/item_barcode.c:317 src/item_box.c:245 src/item_ellipse.c:247
 #: src/item_line.c:253 src/item_text.c:479
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 #. ------ Begin Text Properties box ------
 #: src/item_text.c:482
 msgid "Text Properties"
-msgstr ""
+msgstr "Propiedades del texto"
 
 #. ------ Position Frame ------
 #: src/item_barcode.c:345 src/item_barcode.c:348 src/item_box.c:275
 #: src/item_ellipse.c:277 src/item_image.c:318 src/item_line.c:274
 #: src/item_text.c:500 src/item_text.c:503
 msgid "Position"
-msgstr ""
+msgstr "Posición"
 
 #: src/item_line.c:243
 msgid "Edit line object properties"
-msgstr ""
+msgstr "Modificar las propiedades del objeto línea"
 
 #. ------ Begin Line box ------
 #: src/item_line.c:256 src/menu.c:106
 msgid "Line"
-msgstr ""
+msgstr "Línea"
 
 #: src/item_box.c:272 src/item_ellipse.c:274 src/item_image.c:315
 #: src/item_line.c:271
 msgid "Position/Size"
-msgstr ""
+msgstr "Posición/Tamaño"
 
 #. ------ Size Frame ------
 #: src/item_box.c:286 src/item_ellipse.c:288 src/item_image.c:329
 #: src/item_line.c:285
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #: src/item_box.c:235
 msgid "Edit box object properties"
-msgstr ""
+msgstr "Modificar propiedades del objeto caja"
 
 #. ------ Line box ------
 #: src/item_box.c:248 src/item_ellipse.c:250
 msgid "Outline"
-msgstr ""
+msgstr "Contorno"
 
 #. ------ Fill box ------
 #: src/item_box.c:258 src/item_ellipse.c:260
 msgid "Fill"
-msgstr ""
+msgstr "Relleno"
 
 #: src/item_ellipse.c:237
 msgid "Edit ellipse object properties"
-msgstr ""
+msgstr "Modificar las propiedades del objeto elipse"
 
 #: src/item_image.c:257
 msgid "Edit image object properties"
-msgstr ""
+msgstr "Modificar las propiedades del objeto imagen"
 
 #: src/item_image.c:268 src/menu.c:113
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #. ------ Size Reset Button ------
 #: src/item_image.c:342
 msgid "Reset image size"
-msgstr ""
+msgstr "Restablecer el tamaño de la imagen"
 
 #: src/item_image.c:389 src/item_image.c:454
 msgid "Image format not currently supported"
-msgstr ""
+msgstr "Formato de imagen no soportado actualmente"
 
 #: src/item_barcode.c:287
 msgid "Edit barcode object properties"
-msgstr ""
+msgstr "Modificar las propiedades del objeto código de barras"
 
 #: src/item_barcode.c:297
 msgid "Data"
-msgstr ""
+msgstr "Datos"
 
 #: src/item_barcode.c:299
 msgid "Barcode data"
-msgstr ""
+msgstr "Datos del código de barras"
 
 #. ------ Begin Barcode Properties Frame ------
 #: src/item_barcode.c:320 src/prefs.c:215
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. ------ Barcode Style Frame ------
 #: src/item_barcode.c:330
 msgid "Style"
-msgstr ""
+msgstr "Estilo"
 
-#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
+#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:627
 msgid "Invalid barcode"
-msgstr ""
+msgstr "Código de barras no válido"
 
 #. W Label
 #: src/prop_line.c:169 src/prop_size.c:182
 msgid "Width:"
-msgstr ""
+msgstr "Ancho"
 
 #. H label
 #: src/prop_size.c:198
 msgid "Height:"
-msgstr ""
+msgstr "Alto"
 
 #: src/prop_size.c:222
 msgid "Maintain current aspect ratio"
-msgstr ""
+msgstr "Mantener la proporción actual del aspecto"
 
 #. X label
 #: src/prop_position.c:173
 msgid "X:"
-msgstr ""
+msgstr "X:"
 
 #. Y label
 #: src/prop_position.c:191
 msgid "Y:"
-msgstr ""
+msgstr "Y:"
 
 #. Line Width units
 #: src/prefs.c:448 src/prefs.c:455 src/prop_line.c:183
 msgid "points"
-msgstr ""
+msgstr "puntos"
 
 #. Line Color Label
 #: src/prop_bc.c:188 src/prop_fill.c:166 src/prop_line.c:189
 #: src/prop_text.c:234
 msgid "Color:"
-msgstr ""
+msgstr "Color"
 
 #. Font label
 #: src/prop_text.c:181
 msgid "Font:"
-msgstr ""
+msgstr "Fuente:"
 
 #. Alignment label
 #: src/prop_text.c:248
 msgid "Alignment:"
-msgstr ""
+msgstr "Alineación:"
 
 #. Insert merge field label
 #: src/prop_bc_data.c:196 src/prop_text_entry.c:180
 msgid "Key:"
-msgstr ""
+msgstr "Clave:"
 
 #: src/prop_text_entry.c:196
 msgid "Insert merge field"
-msgstr ""
+msgstr "Insertar campo para fusionar"
 
 #. Length label
 #: src/prop_vector.c:183
 msgid "Length:"
-msgstr ""
+msgstr "Longitud:"
 
 #. Angle label
 #: src/prop_vector.c:207
 msgid "Angle:"
-msgstr ""
+msgstr "Ángulo:"
 
 #. Angle units label
 #: src/prop_vector.c:224
 msgid "degrees"
-msgstr ""
+msgstr "grados"
 
 #. Scale Label
 #: src/prop_bc.c:168
 msgid "Scale:"
-msgstr ""
+msgstr "Escala:"
 
 #. % Label
 #: src/prop_bc.c:182
 #, c-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: src/prop_bc_style.c:313
 msgid "Show text with barcode"
-msgstr ""
+msgstr "Mostrar texto con código de barras"
 
 #: src/prop_bc_data.c:176
 msgid "Literal:"
-msgstr ""
+msgstr "Literal:"
 
 #: src/label.c:173 src/label.c:197
 msgid "xmlParseFile error"
-msgstr ""
+msgstr "error xmlParseFile"
 
 #: src/label.c:228
 msgid "No document root"
-msgstr ""
+msgstr "No hay documento raíz"
 
 #: src/label.c:239
 msgid "document of the wrong type, glabels Namespace not found"
-msgstr ""
+msgstr "documento de tipo erróneo, glabels Espacio de nombres no encontrado"
 
 #: src/label.c:244
 #, c-format
 msgid "Bad root node = \"%s\""
-msgstr ""
+msgstr "Nodo raíz erróneo = \"%s\""
 
 #: src/label.c:291
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr ""
+msgstr "Nodo erróneo =  \"%s\""
 
 #: src/label.c:606
 msgid "Problem saving xml file."
-msgstr ""
+msgstr "Problemas salvando archivo xml"
 
 #: src/template.c:224
 msgid "No template files found!"
-msgstr ""
+msgstr "No he encontrado archivos de plantilla"
 
 #: src/merge_properties.c:82
 msgid "Edit document-merge properties"
-msgstr ""
+msgstr "Modificar las propiedades del documento de fusión"
 
 #: src/merge_properties.c:131
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #: src/merge_properties.c:143
 msgid "Format:"
-msgstr ""
+msgstr "Formato:"
 
 #: src/merge_properties.c:158
 msgid "Location:"
-msgstr ""
+msgstr "Localización:"
 
 #: src/merge_properties.c:168
 msgid "Fields"
-msgstr ""
+msgstr "Campos"
 
 #: src/merge.c:78
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: src/merge.c:86
 msgid "Text with tab separators"
-msgstr ""
+msgstr "Texto separado con tabuladores"
 
 #: src/merge.c:94
 msgid "Text with comma separators"
-msgstr ""
+msgstr "Texto separado con commas"
 
 #: src/merge.c:102
 msgid "Text with colon separators"
-msgstr ""
+msgstr "Texto separado con caracteres dos puntos"
 
 #: src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: src/merge_ui_text.c:170
 msgid "Select merge-database source"
-msgstr ""
+msgstr "Seleccione la fuente de datos para fusionar"
 
 #: src/merge_ui_text.c:330
 msgid "Column"
-msgstr ""
+msgstr "Columna"
 
 #: src/merge_ui_text.c:334
 msgid "Custom field key"
-msgstr ""
+msgstr "Campo clave personalizable"
 
 #: src/merge_ui_text.c:338
 msgid "Sample data"
-msgstr ""
+msgstr "Datos de ejemplo"
 
 #: src/menu.c:50
 msgid "_New"
-msgstr ""
+msgstr "_Nuevo"
 
 #: src/menu.c:51
 msgid "Make a new, empty label"
-msgstr ""
+msgstr "Crear una etiqueta vacía nueva"
 
 #: src/menu.c:85
 msgid "U_nselect All "
-msgstr ""
+msgstr "_Deseleccionar todo"
 
 #: src/menu.c:86
 msgid "Remove all selections"
-msgstr ""
+msgstr "Eliminar todas las selecciones"
 
 #: src/menu.c:94
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: src/menu.c:95 src/menu.c:186
 msgid "Select, move and modify objects"
-msgstr ""
+msgstr "Seleccionar, mover y modificar objetos"
 
 #: src/menu.c:100 src/menu.c:191
 msgid "Create text object"
-msgstr ""
+msgstr "Crear un objeto de texto"
 
 #: src/menu.c:103
 msgid "Box"
-msgstr ""
+msgstr "Caja"
 
 #: src/menu.c:103 src/menu.c:194
 msgid "Create box/rectangle object"
-msgstr ""
+msgstr "Crear un objeto tipo caja/rectángulo"
 
 #: src/menu.c:106 src/menu.c:197
 msgid "Create line object"
-msgstr ""
+msgstr "Crear un objeto línea"
 
 #: src/menu.c:109
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipse"
 
 #: src/menu.c:110 src/menu.c:200
 msgid "Create ellipse/circle object"
-msgstr ""
+msgstr "Crear un objeto circular/elíptico"
 
 #: src/menu.c:113 src/menu.c:203
 msgid "Create image object"
-msgstr ""
+msgstr "Crear un objeto imagen"
 
 #: src/menu.c:116
 msgid "Barcode"
-msgstr ""
+msgstr "Código de barras"
 
 #: src/menu.c:116 src/menu.c:206
 msgid "Create barcode object"
-msgstr ""
+msgstr "Crear un objeto código de barras"
 
 #: src/menu.c:121 src/menu.c:211
 msgid "Zoom in"
-msgstr ""
+msgstr "Agrandar "
 
 #: src/menu.c:124 src/menu.c:214
 msgid "Zoom out"
-msgstr ""
+msgstr "Reducir"
 
 #: src/menu.c:127
 msgid "Zoom 1:1"
-msgstr ""
+msgstr "Vista 1:1"
 
 #: src/menu.c:127 src/menu.c:217
 msgid "Zoom to 1:1"
-msgstr ""
+msgstr "Vista a 1:1"
 
 #: src/menu.c:132 src/menu.c:223
 msgid "Merge properties"
-msgstr ""
+msgstr "Propiedades de fusión de datos"
 
 #: src/menu.c:133
 msgid "Edit merge properties"
-msgstr ""
+msgstr "Modificar propiedades de fusión de datos"
 
 #: src/menu.c:157
 msgid "_Tools"
-msgstr ""
+msgstr "_Herramientas"
 
 #: src/menu.c:168
 msgid "  New   "
-msgstr ""
+msgstr "Nuevo"
 
 #: src/menu.c:168
 msgid "New Label/Card"
-msgstr ""
+msgstr "Nueva tarjeta/etiqueta"
 
 #: src/menu.c:170
 msgid "  Open  "
-msgstr ""
+msgstr "  Abrir  "
 
 #: src/menu.c:170
 msgid "Open a file"
-msgstr ""
+msgstr "Abrir un archivo"
 
 #: src/menu.c:172
 msgid "  Save  "
-msgstr ""
+msgstr "  Guardar  "
 
 #: src/menu.c:172
 msgid "Save current file"
-msgstr ""
+msgstr "Guardar el archivo en uso"
 
 #: src/menu.c:175
 msgid " Print  "
-msgstr ""
+msgstr " Imprimir  "
 
 #: src/menu.c:175
 msgid "Print current file"
-msgstr ""
+msgstr "Imprimir el archivo en uso"
 
 #: src/menu.c:290
 msgid ""
@@ -538,163 +487,173 @@ msgid ""
 "version.\n"
 " \n"
 "This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
 msgstr ""
 
 #: src/menu.c:326
 msgid "Function is not implemented!"
-msgstr ""
+msgstr "¡ La funcionalidad no está aún implementada !"
 
 #: src/file.c:72
 msgid "New Label or Card"
-msgstr ""
+msgstr "Nueva etiqueta o tarjeta"
 
 #: src/file.c:98
 msgid "Media Type"
-msgstr ""
+msgstr "Tipo de papel"
 
 #: src/file.c:109
 msgid "Label orientation"
-msgstr ""
+msgstr "Orientación de la etiqueta"
 
 #: src/file.c:211
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: src/file.c:213
 msgid "Open label"
-msgstr ""
+msgstr "Abrir etiqueta"
 
 #: src/file.c:249
 msgid "Cannot open file"
-msgstr ""
+msgstr "No puedo abrir el archivo"
 
 #: src/file.c:316
 msgid "Save label as"
-msgstr ""
+msgstr "Guardar la etiqueta como"
 
 #: src/media_select.c:222
 msgid "Description:"
-msgstr ""
+msgstr "Descripción:"
 
 #: src/media_select.c:227
 msgid "Page size:"
-msgstr ""
+msgstr "Tamaño de la página:"
 
 #: src/media_select.c:232
 msgid "Label size:"
-msgstr ""
+msgstr "Tamaño de la etiqueta:"
 
 #: src/media_select.c:237
 msgid "Layout:"
-msgstr ""
+msgstr "Disposición:"
 
 #: src/media_select.c:353
 #, c-format
 msgid "%d x %d  (%d per sheet)"
-msgstr ""
+msgstr "%d x %d  (%d por hoja)"
 
 #: src/media_select.c:367
 #, c-format
 msgid "%s x %s %s"
-msgstr ""
+msgstr "%s x %s %s"
 
 #: src/media_select.c:372
 #, c-format
 msgid "%.5g x %.5g %s"
-msgstr ""
+msgstr "%.5g x %.5g %s"
 
 #: src/rotate_select.c:169
 msgid "Rotate"
-msgstr ""
+msgstr "Rotar"
 
 #: src/print_dialog.c:99
 msgid "Print"
-msgstr ""
+msgstr "Imprimir"
 
 #. ----------- Add simple-copies widget ------------
 #: src/print_dialog.c:104
 msgid "Copies"
-msgstr ""
+msgstr "Copias"
 
 #. -------Otherwise add merge control widget ------------
 #: src/print_dialog.c:121
 msgid "Document merge control"
-msgstr ""
+msgstr "Control de la fusión de documentos"
 
 #. ----------- Add custom print options area ------------
 #: src/print_dialog.c:141
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
+
+#: src/print_dialog.c:152
+msgid "print outlines (to test printer alignment)"
+msgstr "Imprimir un esbozo (para verificar la alineación de la impresora)"
+
+#: src/print_dialog.c:160
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "Impresión invertida (imagen espejo)"
 
 #: src/print_dialog.c:241 src/print_dialog.c:280
 msgid "Print preview"
-msgstr ""
+msgstr "Previsualizar la impresión"
 
 #: src/print_copies.c:170
 msgid "Sheets:"
-msgstr ""
+msgstr "Hojas:"
 
 #: src/print_copies.c:187
 msgid "Labels"
-msgstr ""
+msgstr "Etiquetas"
 
 #: src/print_copies.c:190
 msgid "from:"
-msgstr ""
+msgstr "desde:"
 
 #: src/print_copies.c:198
 msgid "to:"
-msgstr ""
+msgstr "hasta:"
 
 #: src/print_merge.c:170
 msgid "Start on label"
-msgstr ""
+msgstr "Comenzar en la etiqueta"
 
 #: src/print_merge.c:179
 msgid "on 1st sheet"
-msgstr ""
+msgstr "en la primera hoja"
 
 #: src/print_merge.c:188
+#, fuzzy
 msgid "Collate"
 msgstr ""
 
 #: src/print_merge.c:195
 msgid "Copies:"
-msgstr ""
+msgstr "Copias:"
 
 #: src/prefs.c:86
 msgid "Glabels: Preferences"
-msgstr ""
+msgstr "Glabels: Preferencias"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:220
 msgid "Display units"
-msgstr ""
+msgstr "Mostrar unidades de medida"
 
 #: src/prefs.c:231
 msgid "Points"
-msgstr ""
+msgstr "Puntos"
 
 #: src/prefs.c:237
 msgid "Inches"
-msgstr ""
+msgstr "Pulgadas"
 
 #: src/prefs.c:244
 msgid "Millimeters"
-msgstr ""
+msgstr "Milímetros"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:249
 msgid "Default page size"
-msgstr ""
+msgstr "Tamaño de página por omisión"
 
 #: src/prefs.c:450
 msgid "inches"
-msgstr ""
+msgstr "pulgadas"
 
 #: src/prefs.c:452
 msgid "mm"
-msgstr ""
+msgstr "mm"
+
