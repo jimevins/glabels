@@ -500,7 +500,7 @@ gl_label_object_get_extent (glLabelObject *object,
 	a4.y = h;
 
 	/* transform these points */
-	gl_label_object_get_applied_affine (object, affine);
+	gl_label_object_get_affine (object, affine);
 	art_affine_point (&b1, &a1, affine);
 	art_affine_point (&b2, &a2, affine);
 	art_affine_point (&b3, &a3, affine);
@@ -609,26 +609,40 @@ gl_label_object_get_affine (glLabelObject *object,
 }
 
 /****************************************************************************/
-/* Get applied affine, i.e. translated to center of object and back         */
+/* Get i2w affine, i.e. applied affine + translation.                       */
 /****************************************************************************/
 void
-gl_label_object_get_applied_affine (glLabelObject *object,
-				    gdouble        affine[6])
+gl_label_object_get_i2w_affine (glLabelObject *object,
+				gdouble        affine[6])
 {
-	gdouble w, h;
-	gdouble to_center[6], to_origin[6];
+	gdouble x, y;
+	gdouble translation[6];
 
 	gl_debug (DEBUG_LABEL, "");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	gl_label_object_get_size (object, &w, &h);
+	gl_label_object_get_affine (object, affine);
+	gl_label_object_get_position (object, &x, &y);
 
-	/* setup transformation affine */
-	art_affine_translate (to_center, -w/2.0, -h/2.0);
-	art_affine_multiply (affine, to_center, object->private->affine);
-	art_affine_translate (to_origin, w/2.0, h/2.0);
-	art_affine_multiply (affine, affine, to_origin);
+	art_affine_translate (translation, x, y);
+	art_affine_multiply (affine, affine, translation);
+}
+
+/****************************************************************************/
+/* Get w2i affine, i.e. inverse of applied affine + translation.            */
+/****************************************************************************/
+void
+gl_label_object_get_w2i_affine (glLabelObject *object,
+				gdouble        affine[6])
+{
+	gdouble i2w[6];
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	gl_label_object_get_i2w_affine (object, i2w);
+	art_affine_invert (affine, i2w);
 }
 
 /****************************************************************************/

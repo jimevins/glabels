@@ -169,7 +169,10 @@ void           gl_label_object_set_affine            (glLabelObject     *object,
 void           gl_label_object_get_affine            (glLabelObject     *object,
 						      gdouble           affine[6]);
 
-void           gl_label_object_get_applied_affine    (glLabelObject     *object,
+void           gl_label_object_get_i2w_affine        (glLabelObject     *object,
+						      gdouble           affine[6]);
+
+void           gl_label_object_get_w2i_affine        (glLabelObject     *object,
 						      gdouble           affine[6]);
 
 G_END_DECLS

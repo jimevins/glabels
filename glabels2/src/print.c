@@ -570,7 +570,7 @@ draw_object (PrintInfo     *pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (object, &x0, &y0);
-	gl_label_object_get_applied_affine (object, affine);
+	gl_label_object_get_affine (object, affine);
 
 	gnome_print_gsave (pi->pc);
 

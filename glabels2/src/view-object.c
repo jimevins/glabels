@@ -327,7 +327,7 @@ gl_view_object_item_new (glViewObject *view_object,
         gnome_canvas_item_set_valist (item, first_arg_name, args);
         va_end (args);
 
-	gl_label_object_get_applied_affine (view_object->private->object, affine);
+	gl_label_object_get_affine (view_object->private->object, affine);
 
 	/* Apply a very small rotation, fixes problems with flipped or rotated images */
 	art_affine_rotate (delta_affine, DELTA_DEG);
@@ -467,7 +467,7 @@ flip_rotate_object_cb (glLabelObject *object,
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	gl_label_object_get_applied_affine (object, affine);
+	gl_label_object_get_affine (object, affine);
 
 	/* Apply a very small rotation, fixes problems with flipped or rotated images */
 	art_affine_rotate (delta_affine, DELTA_DEG);

@@ -262,7 +262,7 @@ gl_view_highlight_new (glViewObject         *view_object,
 	}
 
 
-	gl_label_object_get_applied_affine (view_highlight->private->object, affine);
+	gl_label_object_get_affine (view_highlight->private->object, affine);
 	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "moved",
@@ -684,7 +684,7 @@ flip_rotate_object_cb (glLabelObject    *object,
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Adjust affine of inner canvas group. */
-	gl_label_object_get_applied_affine (object, affine);
+	gl_label_object_get_affine (object, affine);
 	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
 
 	gl_debug (DEBUG_VIEW, "END");
