@@ -1,3 +1,14 @@
+2004-02-21  Jim Evins  <evins@snaught.com>
+
+	* data/avery-iso-templates.xml:
+		Added aliases for Avery 8651.  Patch provided by Wayne Schuller.
+	
+	* glabels.spec.in:
+		Added libglabels library and include file to installed files.
+		
+	* configure.in:
+		Final prep for 1.93.3.
+
 2004-02-20  Jim Evins  <evins@snaught.com>
 
 	* src/glabels-batch.c: (main):

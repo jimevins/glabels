@@ -145,13 +145,16 @@
   <!-- =================================================================== -->
   <!-- Avery 8651 family: Mailing labels, 38.1 x 21.2 mm, 65 per sheet     -->
   <!-- =================================================================== -->
-  <Template name="Avery   8651" size="A4" _description="Mini Address">
+  <Template name="Avery   8651" size="A4" _description="Mini Address Labels">
     <Label-rectangle id="0" width="108" height="60.09" round="5">
       <Markup-margin size="5"/>
       <Layout nx="5" ny="13" x0="13.32" y0="30.90" dx="115.09" dy="60.09"/>
     </Label-rectangle>
     <Alias name="Avery  L8651"/>
     <Alias name="Avery  J8651"/>
+    <Alias name="Avery  J8551"/>
+    <Alias name="Avery  L7651"/>
+    <Alias name="Avery  L7551"/>
   </Template>
 
   <!-- =================================================================== -->
