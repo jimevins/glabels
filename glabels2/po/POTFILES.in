@@ -76,6 +76,8 @@ src/template.c
 src/template.h
 src/xml-label.c
 src/xml-label.h
+src/xml-label-04.c
+src/xml-label-04.h
 src/merge.c
 src/merge.h
 src/merge-text.c
