@@ -7,7 +7,8 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 
 runtime_files = \
 	paper-sizes.xml \
-	predefined-templates.xml
+	predefined-templates.xml \
+	glabels-2.0.dtd
 
 EXTRA_DIST = \
 	$(desktop_DATA) \

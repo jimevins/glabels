@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<GLabels-paper-sizes>
+<Glabels-paper-sizes>
 
-  <!-- Most popular -->
+  <!-- Most popular (at top of list) -->
   <Paper-size id="US-Letter"    _name="US Letter"    width="8.5in" height="11in"/>
   <Paper-size id="A4"           _name="A4"           width="210mm" height="297mm"/>
 
   <!-- Other US paper sizes -->
   <Paper-size id="US-Legal"     _name="US Legal"     width="8.5in" height="14in"/>
-  <Paper-size id="US-Executive" _name="US Executive" width="8.5in" height="11in"/>
+  <Paper-size id="US-Executive" _name="US Executive" width="7.25in" height="10.5in"/>
 
   <!-- Other ISO A series sizes -->
   <Paper-size id="A0"           _name="A0"           width="841mm" height="1189mm"/>
@@ -34,4 +34,4 @@
   <Paper-size id="B9"           _name="B9"           width="44mm"   height="62mm"/>
   <Paper-size id="B10"          _name="B10"          width="31mm"   height="44mm"/>
 
-</GLabels-paper-sizes>
+</Glabels-paper-sizes>
