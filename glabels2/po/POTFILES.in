@@ -145,5 +145,5 @@ src/gnome-recent-view-bonobo.c
 src/gnome-recent-view-bonobo.h
 src/debug.c
 src/debug.h
-data/predefined-labels.template
-data/page-sizes.paper
+data/predefined-templates.xml
+data/paper-sizes.xml

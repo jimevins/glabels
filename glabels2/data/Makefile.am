@@ -6,8 +6,8 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 runtime_files = \
-	page-sizes.paper \
-	predefined-labels.template
+	paper-sizes.xml \
+	predefined-templates.xml
 
 EXTRA_DIST = \
 	$(desktop_DATA) \

@@ -9,7 +9,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5160 family: Mailing Labels, 1'' x 2_5/8'', 30 per sheet    * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5160" size="US-Letter" description="Mailing Labels">
+  <Sheet name="Avery 5160" size="US-Letter" _description="Mailing Labels">
     <Label id="0" style="rectangle" width="189" height="72" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="10" x0="11.5" y0="36" dx="200" dy="72"/>
@@ -50,7 +50,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5162 family: Mailing labels, 1_1/3'' x 4'', 14 per sheet    * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5162" size="US-Letter" description="Mailing labels">
+  <Sheet name="Avery 5162" size="US-Letter" _description="Mailing labels">
     <Label id="0" style="rectangle" width="288" height="96" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="7" x0="10.5" y0="60" dx="303" dy="96"/>
@@ -74,7 +74,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5163 family: Shipping labels, 4'' x 2'', 10 per sheet       * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5163" size="US-Letter" description="Shipping labels">
+  <Sheet name="Avery 5163" size="US-Letter" _description="Shipping labels">
     <Label id="0" style="rectangle" width="288" height="144" round="10">
       <Markup type="margin" size="10"/>
       <Layout nx="2" ny="5" x0="11.25" y0="36" dx="301.5" dy="144"/>
@@ -100,7 +100,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5164 family: Mailing Labels.                                  -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5164" size="US-Letter" description="Mailing Labels">
+  <Sheet name="Avery 5164" size="US-Letter" _description="Mailing Labels">
     <Label id="0" style="rectangle" width="288" height="234" round="10">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="3" x0="13" y0="36" dx="301" dy="234"/>
@@ -111,7 +111,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5167 family: Address labels, 1_3/4'' x 1/2'', 80 per sheet  * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5167" size="US-Letter" description="Address labels">
+  <Sheet name="Avery 5167" size="US-Letter" _description="Address labels">
     <Label id="0" style="rectangle" width="126" height="36" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="20" x0="20.25" y0="36" dx="148.5" dy="36"/>
@@ -134,7 +134,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5196 family: Diskette labels, 2_3/4'' x 2_3/4'', 9 per sheet* -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5196" size="US-Letter" description="Diskette labels">
+  <Sheet name="Avery 5196" size="US-Letter" _description="Diskette labels">
     <Label id="0" style="rectangle" width="198" height="198" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="3" x0="9" y0="36" dx="198" dy="216"/>
@@ -147,7 +147,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5261 family: Mailing Labels, 1'' x 4'', 20 per sheet        * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5261" size="US-Letter" description="Mailing Labels">
+  <Sheet name="Avery 5261" size="US-Letter" _description="Mailing Labels">
     <Label id="0" style="rectangle" width="288" height="72" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="10" x0="11.5" y0="36" dx="303" dy="72"/>
@@ -157,7 +157,7 @@
   <!-- =================================================================== -->
   <!-- Avery: File Folder Labels, 51 x 89 mm, 30 per sheet                 -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5366" size="US-Letter" description="File Folder Labels">
+  <Sheet name="Avery 5366" size="US-Letter" _description="File Folder Labels">
     <Label id="0" style="rectangle" width="252" height="48" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="15" x0="36" y0="36" dx="288" dy="48"/>
@@ -167,7 +167,7 @@
  <!-- =================================================================== -->
   <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5371" size="US-Letter" description="Business Cards">
+  <Sheet name="Avery 5371" size="US-Letter" _description="Business Cards">
     <Label id="0" style="rectangle" width="252" height="144" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="54" y0="36" dx="252" dy="144"/>
@@ -205,7 +205,7 @@
   <!-- =================================================================== -->
   <!-- Avery 5395 family: Name Badge Labels, 2_1/3'' x 3_3/8'', 8 per sheet -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 5395" size="US-Letter" description="Name Badge Labels">
+  <Sheet name="Avery 5395" size="US-Letter" _description="Name Badge Labels">
     <Label id="0" style="rectangle" width="235" height="168" round="15">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="4" x0="53" y0="42" dx="272.5" dy="180.5"/>
@@ -216,7 +216,7 @@
   <!-- =================================================================== -->
   <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 8373" size="US-Letter" description="Business Cards">
+  <Sheet name="Avery 8373" size="US-Letter" _description="Business Cards">
     <Label id="0" style="rectangle" width="252" height="144" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="4" x0="36" y0="54" dx="288" dy="180"/>
@@ -229,7 +229,7 @@
   <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         * -->
   <!-- =================================================================== -->
   <Sheet name="Avery 5931" size="US-Letter"
-         description="CD/DVD Labels (face only)">
+         _description="CD/DVD Labels (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Markup type="line" x1="0" y1="166.5" x2="108" y2="166.5"/>
@@ -260,7 +260,7 @@
   <!-- Avery 5997face family: VCR Labels, 1_7/8'' x 3_1/16'', 10 per sheet -->
   <!-- =================================================================== -->
   <Sheet name="Avery 5997 - VCR Face" size="US-Letter"
-         description="VCR Face Labels">
+         _description="VCR Face Labels">
     <Label id="0" style="rectangle" width="220" height="133" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
@@ -272,7 +272,7 @@
   <!-- Avery 5997spine family: VCR Labels, 2/3'' x 5_3/4'',15 per sheet    -->
   <!-- =================================================================== -->
   <Sheet name="Avery 5997 - VCR Spine" size="US-Letter"
-        description="VCR Spine Labels">
+        _description="VCR Spine Labels">
     <Label id="0" style="rectangle" width="414" height="48" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
@@ -283,7 +283,7 @@
   <!-- =================================================================== -->
   <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 6490" size="US-Letter" description="Diskette labels">
+  <Sheet name="Avery 6490" size="US-Letter" _description="Diskette labels">
     <Label id="0" style="rectangle" width="193.5" height="144" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="5" x0="9.215999926" y0="36" dx="200.2679959" dy="144"/>
@@ -296,7 +296,7 @@
   <!-- =================================================================== -->
   <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   * -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 8165" size="US-Letter" description="Full-page">
+  <Sheet name="Avery 8165" size="US-Letter" _description="Full-page">
     <Label id="0" style="rectangle" width="612" height="792" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
@@ -353,7 +353,7 @@
   <!-- =================================================================== -->
   <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheet  -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 3274.1" size="US-Letter" description="Square Stickers">
+  <Sheet name="Avery 3274.1" size="US-Letter" _description="Square Stickers">
     <Label id="0" style="rectangle" width="180" height="180" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
@@ -364,7 +364,7 @@
   <!-- =================================================================== -->
   <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 3274.2" size="US-Letter" description="Small Round Stickers">
+  <Sheet name="Avery 3274.2" size="US-Letter" _description="Small Round Stickers">
     <Label id="0" style="round" radius="54">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="5" x0="36" y0="54" dx="144" dy="144"/>
@@ -376,7 +376,7 @@
   <!-- =================================================================== -->
   <!-- Avery 3274.3 family: Big round stickers, 2_1/2'', 9 per sheet       -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 3274.3" size="US-Letter" description="Big Round Stickers">
+  <Sheet name="Avery 3274.3" size="US-Letter" _description="Big Round Stickers">
     <Label id="0" style="round" radius="90">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="3" x0="22.5" y0="90" dx="193.5" dy="216"/>
@@ -392,7 +392,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 7160" size="A4" description="Mailing labels">
+  <Sheet name="Avery 7160" size="A4" _description="Mailing labels">
     <Label id="0" style="rectangle" width="181.4" height="108.0" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="7" x0="21.2" y0="43.9" dx="187.2" dy="108.0"/>
@@ -404,7 +404,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7161 family: Mailing labels, 63.5 x 46.6 mm, 18 per sheet     -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 7161" size="A4" description="Mailing labels">
+  <Sheet name="Avery 7161" size="A4" _description="Mailing labels">
     <Label id="0" style="rectangle" width="180.2" height="132.6" round="7">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="6" x0="21" y0="23" dx="186.9" dy="132.5"/>
@@ -416,7 +416,7 @@
   <!-- ================================================================== -->  
   <!-- Avery 7162 family: Mailing labels, 99.1 x 33.9 mm, 16 per sheet    -->  
   <!-- ================================================================== -->  
-  <Sheet name="Avery 7162" size="A4" description="Mailing labels">  
+  <Sheet name="Avery 7162" size="A4" _description="Mailing labels">  
     <Label id="0" style="rectangle" width="280.9" height="96.1" round="5">  
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="8" x0="11.3" y0="36.8" dx="290.5" dy="96.1"/>  
@@ -427,7 +427,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7163 family: Mailing labels, 99.1 x 38.1 mm, 14 per sheet     -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 7163" size="A4" description="Mailing labels">
+  <Sheet name="Avery 7163" size="A4" _description="Mailing labels">
     <Label id="0" style="rectangle" width="280.9" height="108" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="7" x0="9.5" y0="43" dx="292" dy="108"/>
@@ -438,7 +438,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7164 family: Address labels, 63.50 x 71.98 mm, 12 per sheet   -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 7164" size="A4" description="Address labels">
+  <Sheet name="Avery 7164" size="A4" _description="Address labels">
     <Label id="0" style="rectangle" width="180" height="204.038" round="8.5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="4" x0="20.84" y0="10" dx="187.08" dy="204.038"/>
@@ -451,7 +451,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7169 family: shipping labels, 99.1 x 139.0 mm, 4 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Avery L7169" size="A4" description="Shipping labels">
+  <Sheet name="Avery L7169" size="A4" _description="Shipping labels">
     <Label id="0" style="rectangle" width="280.9" height="394.0" round="6">
       <Markup type="margin" size="6"/>
       <Layout nx="2" ny="2" x0="14.2" y0="20.0" dx="287.7" dy="394.0"/>
@@ -462,7 +462,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7414 family: Business Cards, 52mm x 90mm, 10 per sheet        -->
   <!-- =================================================================== -->
-  <Sheet name="Avery L7414" size="A4" description="Business Cards">
+  <Sheet name="Avery L7414" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="255.1" height="147.4" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="42.51" y0="52.44" dx="255.1" dy="147.4"/>
@@ -472,7 +472,7 @@
   <!-- =================================================================== -->
   <!-- Avery 8414 family: Business Cards, 50.8 x 87.0 mm, 10 per sheet     -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 8414" size="A4" description="Business Cards">
+  <Sheet name="Avery 8414" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="246.6" height="144" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="42" y0="57.890" dx="264" dy="144"/>
@@ -483,7 +483,7 @@
   <!-- =================================================================== -->
   <!-- Avery 8651 family: Mailing labels, 38.1 x 21.2 mm, 65 per sheet     -->
   <!-- =================================================================== -->
-  <Sheet name="Avery 8651" size="A4" description="Mini Address">
+  <Sheet name="Avery 8651" size="A4" _description="Mini Address">
     <Label id="0" style="rectangle" width="108" height="60.09" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="5" ny="13" x0="13.32" y0="30.90" dx="115.09" dy="60.09"/>
@@ -496,7 +496,7 @@
   <!-- Avery 8666 family: Diskette labels (face only), 70 x 52 mm, 10 per  -->
   <!-- =================================================================== -->
   <Sheet name="Avery 8666" size="A4"
-         description="3.5'' Diskette labels (face only)">
+         _description="3.5'' Diskette labels (face only)">
     <Label id="0" style="rectangle" width="198.4" height="147.4" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="66" y0="53" dx="264" dy="147"/>
@@ -507,7 +507,7 @@
   <!-- =============================================================== -->
   <!-- Avery-Zweckform J8676A: CD/DVD Labels 2 per sheet               -->
   <!-- =============================================================== -->
-  <Sheet name="Avery 8676" size="A4" description="CD/DVD Labels">
+  <Sheet name="Avery 8676" size="A4" _description="CD/DVD Labels">
     <Label id="0" style="cd" radius="166.5" hole="17">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="130" y0="59.5" dx="0" dy="388"/>        
@@ -518,7 +518,7 @@
   <!-- =============================================================== -->
   <!-- Avery 18036 Mailing Labels, 70mm x 32mm, 27 per sheet           -->
   <!-- =============================================================== -->
-  <Sheet name="Avery 18036" size="A4" description="Mailing Labels">
+  <Sheet name="Avery 18036" size="A4" _description="Mailing Labels">
     <Label style="rectangle" width="198" height="91" round="0">
       <Markup type="margin" size="10"/>
       <Layout nx="3" ny="9" x0="0" y0="13" dx="198" dy="91"/>
@@ -533,7 +533,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 32010: Business Cards, 54.0 x 85.0 mm, 10 per sheet       -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 32010" size="A4" description="Business Cards">
+  <Sheet name="Zweckform 32010" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="240.94" height="153.07" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="40" dx="269" dy="153"/>
@@ -546,7 +546,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4761: Lever Arch File Labels, 192 x 61 mm, 4 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 4761" size="A4" description="Lever Arch File Labels">
+  <Sheet name="Zweckform 4761" size="A4" _description="Lever Arch File Labels">
     <Label id="0" style="rectangle" width="544.25" height="172.9" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="4" x0="25" y0="75" dx="544.25" dy="172.9"/>
@@ -556,7 +556,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 3651: Rectangular Labels, 52 x 29.5 mm, 40 per sheet      -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 3651" size="A4" description="Rectangular Labels">
+  <Sheet name="Zweckform 3651" size="A4" _description="Rectangular Labels">
     <Label id="0" style="rectangle" width="147.4016" height="83.6220" round="0">  
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="10" x0="2.834" y0="2.834" dx="147.4016" dy="83.6220"/>
@@ -566,7 +566,7 @@
   <!-- ====================================================================-->
   <!-- Zweckform 3654: CD Labels  2 per Sheet                              -->
   <!-- ====================================================================-->
-  <Sheet name="Zweckform 3654" size="A4" description="CD/DVD Labels">
+  <Sheet name="Zweckform 3654" size="A4" _description="CD/DVD Labels">
     <Label id="0" style="cd" radius="165.78" hole="58.09">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="131.78" y0="58.7998" dx="0" dy="387.97"/>
@@ -576,7 +576,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 3659: Rectangular Labels, 97 x 42.125 mm, 12 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 3659" size="A4" description="Mailing Labels -- 12">
+  <Sheet name="Zweckform 3659" size="A4" _description="Mailing Labels -- 12">
     <Label id="0" style="rectangle" width="274" height="120.5" round="0">  
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="6" x0="22.68" y0="60" dx="274" dy="120.5"/>
@@ -586,7 +586,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 3669:  Rectangular Labels, 70 x 50.8mm, 15 per sheet      -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 3669" size="A4" description="QSL-Karten Etiketten 70mm x 50,8mm">
+  <Sheet name="Zweckform 3669" size="A4" _description="QSL-Karten Etiketten 70mm x 50,8mm">
     <Label id="0" style="rectangle" width="198.425" height="144" round="0">
       <Markup type="margin" size="5"/>
      <Layout nx="3" ny="5" x0="0" y0="61" dx="198.425" dy="144"/>
@@ -596,7 +596,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4746: Video Labels, 147,32 x 20 mm, 13 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 4746" size="A4" description="Video Labels (back)">
+  <Sheet name="Zweckform 4746" size="A4" _description="Video Labels (back)">
     <Label id="0" style="rectangle" width="416.6" height="56.6929" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="13" x0="88.8377" y0="52.2425" dx="416.6" dy="56.6929"/>
@@ -606,7 +606,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4780: Allround Labels, 48,5 x 25,4 mm, 40 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Zweckform 4780" size="A4" description="Allround Labels">
+  <Sheet name="Zweckform 4780" size="A4" _description="Allround Labels">
     <Label id="0" style="rectangle" width="137.48" height="72" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="10" x0="23" y0="53.8898" dx="137.48" dy="72"/>
@@ -616,7 +616,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 3490: Rectangular Labels, 70 x 36 mm, 24 per sheet        -->
   <!-- =================================================================== -->
-   <Sheet name="Zweckform 3490" size="A4" description="Rectangular Copier Labels">
+   <Sheet name="Zweckform 3490" size="A4" _description="Rectangular Copier Labels">
      <Label id="0" style="rectangle" width="198.425" height="102.047" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="8" x0="" y0="12.557" dx="198.425" dy="102.047"/>
@@ -626,7 +626,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4781: Rectangular Labels, 97 x 42.3 mm, 12 per sheet      -->
   <!-- =================================================================== -->
-   <Sheet name="Zweckform 4781" size="A4" description="Rectangular Copier Labels">
+   <Sheet name="Zweckform 4781" size="A4" _description="Rectangular Copier Labels">
      <Label id="0" style="rectangle" width="274.960" height="119.905" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="6" x0="22.677" y0="61.030" dx="274.960" dy="119.905"/>
@@ -636,7 +636,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 6091: Correction and Cover, 64.6 x 33.8 mm, 24 per sheet  -->
   <!-- =================================================================== -->
-   <Sheet name="Zweckform 6091" size="A4" description="Correction and Cover-up Labels">
+   <Sheet name="Zweckform 6091" size="A4" _description="Correction and Cover-up Labels">
      <Label id="0" style="rectangle" width="183.118" height="95.811" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="8" x0="22.961" y0="37.502" dx="183.118" dy="95.881"/>
@@ -646,7 +646,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 6015: CD Labels, 2 per Sheet                              -->
   <!-- =================================================================== -->
-   <Sheet name="Zweckform 6015" size="A4" description="CD Labels">
+   <Sheet name="Zweckform 6015" size="A4" _description="CD Labels">
      <Label id="0" style="cd" radius="165.827" hole="58.110">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="131.811" y0="60.746" dx="0" dy="388.346"/>
@@ -662,7 +662,7 @@
   <!-- =================================================================== -->
   <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
   <!-- =================================================================== -->
-  <Sheet name="Southworth BC" size="US-Letter" description="Business Cards">
+  <Sheet name="Southworth BC" size="US-Letter" _description="Business Cards">
     <Label id="0" style="rectangle" width="252" height="144" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
@@ -673,7 +673,7 @@
   <!-- Memorex CD Labels                                                 * -->
   <!-- =================================================================== -->
   <Sheet name="Memorex CD Labels" size="US-Letter"
-	 description="CD/DVD Labels">
+	 _description="CD/DVD Labels">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
@@ -685,7 +685,7 @@
   <!-- Neato USCD2lbl.NTT: CD/DVD Labels (face only), 2 per sheet          -->
   <!-- =================================================================== -->
   <Sheet name="Neato USCD2lbl.NTT" size="US-Letter"
-         description="CD/DVD Labels (face only)">
+         _description="CD/DVD Labels (face only)">
     <Label style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
@@ -696,7 +696,7 @@
   <!-- Neato USCD2lbl.NTT: CD/DVD Labels (rectangles), 2 per sheet         -->
   <!-- =================================================================== -->
   <Sheet name="Neato USCD2lbl Rectangles" size="US-Letter"
-	 description="CD Sheet Rectangles">
+	 _description="CD Sheet Rectangles">
     <Label style="rectangle" width="77.04" height="234.36" round="10">
       <Markup type="margin" size="2.016"/>
       <Layout nx="2" ny="1" x0="51.3" y0="279.72" dx="433.44" dy="0"/>
@@ -707,7 +707,7 @@
   <!-- Neato CLP-192328/26: HandiCD-R 50MB, 3" x 2_1/8'', 9 per sheet      -->
   <!-- =================================================================== -->
   <Sheet name="Neato HandiCD-R" size="US-Letter"
-	 description="Business Card CD">
+	 _description="Business Card CD">
     <Label id="0" style="cd" radius="108" width="171" hole="58">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
@@ -718,7 +718,7 @@
   <!-- CD STOMPER PRO CD Label Refills, (Face Only)                      * -->
   <!-- =================================================================== -->
   <Sheet name="Stomper PRO CD" size="US-Letter"
-         description="PRO CD Labels 2-up (face only)">
+         _description="PRO CD Labels 2-up (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
@@ -727,7 +727,7 @@
   </Sheet>
 
   <Sheet name="Stomper PRO Zip" size="US-Letter"
-         description="PRO CD Labels 2-up (Face only)">
+         _description="PRO CD Labels 2-up (Face only)">
     <Label id="0" style="rectangle" width="168" height="142" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="407" y0="68" dx="0" dy="142"/>
@@ -736,7 +736,7 @@
   </Sheet>
 
   <Sheet name="Stomper PRO Spine" size="US-Letter"
-         description="PRO CD Labels 2-up (CD spine only)">
+         _description="PRO CD Labels 2-up (CD spine only)">
     <Label id="0" style="rectangle" width="288" height="20" round="0">
       <Markup type="margin" size="2"/>
       <Layout nx="2" ny="1" x0="18" y0="385" dx="288" dy="0"/>
@@ -747,7 +747,7 @@
   <!-- Meritline Mini CD/DVD Labels (face only), 5 per sheet              -->
   <!-- ===================================================================-->
   <Sheet name="Meritline Mini-CD" size="US-Letter"
-   description="Mini-CD Labels">
+   _description="Mini-CD Labels">
     <Label id="0" style="cd" radius="110.5" hole="57.5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
@@ -762,14 +762,14 @@
   <!-- spine is bottom margin, print label sheet BOTTOM FIRST.            -->
   <!-- ===================================================================-->
   <Sheet name="Neato Slimline CD Case" size="US-Letter"
-         description="Slimline CD Case (rightside up)">
+         _description="Slimline CD Case (rightside up)">
     <Label id="0" style="rectangle" width="394.5" height="342.5" round="0">
       <Markup type="margin" size="7.5"/>
       <Layout nx="1" ny="2" x0="130" y0="41.9" dx="0" dy="363"/>
     </Label>
   </Sheet>
   <Sheet name="Neato Slimline CD Case, spine" size="US-Letter"
-         description="Slimline CD Case (upside down)">
+         _description="Slimline CD Case (upside down)">
     <Label id="0" style="rectangle" width="394.5" height="342.5" round="0">
       <Markup type="margin" size="7.5"/>
       <Layout nx="1" ny="2" x0="96.5" y0="41.9" dx="0" dy="363"/>
@@ -780,7 +780,7 @@
   <!-- Great Gizmos : CD/DVD Labels (face only), 2 per sheet             * -->
   <!-- =================================================================== -->
   <Sheet name="Great Gizmos" size="US-Letter"
-         description="CD/DVD Labels (face only)">
+         _description="CD/DVD Labels (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
@@ -791,7 +791,7 @@
   <!-- Imation-SoniX CD/DVD Labels  (Face Only)                          * -->
   <!-- =================================================================== -->
   <Sheet name="Imation-SoniX No.5112 15954" size="US-Letter"
-         description="CD/DVD Labels (Face Only)">
+         _description="CD/DVD Labels (Face Only)">
     <Label style="cd" radius="167.8" hole="18.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="370" dx="0" dy="0"/>
@@ -806,7 +806,7 @@
   <!-- =================================================================== -->
   <!-- Sigel DP 830/DP 930: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
   <!-- =================================================================== -->
-  <Sheet name="Sigel DP 830/DP 930" size="A4" description="Business Cards">
+  <Sheet name="Sigel DP 830/DP 930" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="240.9" height="155.9" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="31" dx="269" dy="156"/>
@@ -816,7 +816,7 @@
   <!-- =================================================================== -->
   <!-- Ascom A4/24/MKII: Rectangular Labels, 24 per sheet                  -->
   <!-- =================================================================== -->
-  <Sheet name="Ascom A4/24/MKII" size="A4" description="Rectangular Labels">
+  <Sheet name="Ascom A4/24/MKII" size="A4" _description="Rectangular Labels">
     <Label id="0" style="rectangle" width="181" height="96" round="10">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="8" x0="19" y0="36" dx="187" dy="96"/>
@@ -827,7 +827,7 @@
   <!-- Agipa 119488: Business Cards, 50 x 90 mm, 10 per sheet              -->
   <!-- =================================================================== -->
   <Sheet name="Agipa 119488" size="A4"
-	 description="Agipa 119488: Business Cards">
+	 _description="Agipa 119488: Business Cards">
     <Label id="0" style="rectangle" width="255" height="142" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="43" y0="67" dx="255" dy="142"/>
@@ -837,7 +837,7 @@
   <!-- =================================================================== -->
   <!-- Ednet BC: Business Cards, 51 x 89 mm, 10 per sheet                  -->
   <!-- =================================================================== -->
-  <Sheet name="Ednet" size="A4" description="Business Cards">
+  <Sheet name="Ednet" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="253" height="145" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
@@ -847,7 +847,7 @@
   <!-- =================================================================== -->
   <!-- Herma 4620: Mailing Labels - 2 columns, 107 x 37 mm, 16 per sheet   -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4620" size="A4" description="Mailing Labels-2 columns">
+  <Sheet name="Herma 4620" size="A4" _description="Mailing Labels-2 columns">
     <Label id="0" style="rectangle" width="298" height="105" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="8" x0="0" y0="0" dx="298" dy="105"/>
@@ -857,7 +857,7 @@
   <!-- =================================================================== -->
   <!-- Herma 4464: Mailing Labels - 3 columns, 70 x 37.125 mm, 24 per sheet-->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4464" size="A4" description="Mailing Labels-3 columns">
+  <Sheet name="Herma 4464" size="A4" _description="Mailing Labels-3 columns">
     <Label id="0" style="rectangle" width="199" height="105" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="8" x0="0" y0="0" dx="199" dy="105"/>
@@ -867,7 +867,7 @@
   <!-- ===================================================================-->
   <!-- Neato brand CD/DVD Labels (face only), 2 per sheet                 -->
   <!-- ===================================================================-->
-  <Sheet name="Neato A4 CD" size="A4" description="CD/DVD Labels (face only)">
+  <Sheet name="Neato A4 CD" size="A4" _description="CD/DVD Labels (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="125" y0="68.890" dx="0" dy="360"/>        
@@ -877,7 +877,7 @@
   <!-- =================================================================== -->
   <!-- DATA BECKER: Business Cards, 50 x 90 mm, 10 per sheet               -->
   <!-- =================================================================== -->
-  <Sheet name="DataBecker" size="A4" description="Business Cards">
+  <Sheet name="DataBecker" size="A4" _description="Business Cards">
     <Label id="0" style="rectangle" width="255" height="142" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="36" y0="69.890" dx="255" dy="142"/>
@@ -887,7 +887,7 @@
   <!-- =================================================================== -->
   <!-- Hema Etiketten: 65 x 38 mm, 21 per sheet                            -->
   <!-- =================================================================== -->
-  <Sheet name="Hema Etiketten" size="A4" description="Rectangular Labels">
+  <Sheet name="Hema Etiketten" size="A4" _description="Rectangular Labels">
     <Label id="0" style="rectangle" width="178" height="108" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="7" x0="20" y0="49.890" dx="187" dy="107"/>
@@ -897,7 +897,7 @@
   <!-- ====================================================== -->
   <!-- Alpi 02793: Business Cards, 50,8 x 90 mm, 10 per sheet -->
   <!-- ====================================================== -->
-  <Sheet name="Alpi 02793" size="A4" description="Alpi 02793: Business Cards">
+  <Sheet name="Alpi 02793" size="A4" _description="Alpi 02793: Business Cards">
     <Label id="0" style="rectangle" width="255.118" height="144" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="42.5197" y0="62.3622" dx="255.118" dy="144"/>
@@ -907,7 +907,7 @@
   <!-- =================================================================== -->
   <!-- APLI 1999:  Mailing Labels, 9,9cm x 6,8cm, 8 per sheet              -->
   <!-- =================================================================== -->
-  <Sheet name="APLI 1999" size="A4" description="Mailing Labels">
+  <Sheet name="APLI 1999" size="A4" _description="Mailing Labels">
     <Label id="0" style="rectangle" width="281" height="193" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="4" x0="13" y0="21.890" dx="289" dy="194"/>
@@ -917,7 +917,7 @@
   <!-- =================================================================== -->
   <!-- Data Becker Etiketten Paket: Ordnerrucken, 192 x 61,5 mm, 4 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4284" size="A4" description="Arch File Labels (large)">
+  <Sheet name="Herma 4284" size="A4" _description="Arch File Labels (large)">
     <Label id="0" style="rectangle" width="544.252" height="174.331" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="4" x0="25.5118" y0="38.2677" dx="544.252" dy="197.008"/>
@@ -929,7 +929,7 @@
   <!-- =================================================================== -->
   <!-- Data Becker Etiketten Paket: Ordnerrucken, 192 x 39 mm, 6 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4283" size="A4" description="Arch File Labels (small)">
+  <Sheet name="Herma 4283" size="A4" _description="Arch File Labels (small)">
     <Label id="0" style="rectangle" width="544.252" height="110.551" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="6" x0="25.5118" y0="32.5984" dx="544.252" dy="133.228"/>
@@ -941,7 +941,7 @@
   <!-- =================================================================== -->
   <!-- Data Becker Etiketten Paket: Video Etiketten, 78,7 x 46,5 mm, 12 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4828" size="A4" description="Video Labels (face only)">
+  <Sheet name="Herma 4828" size="A4" _description="Video Labels (face only)">
     <Label id="0" style="rectangle" width="223.086" height="131.811" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="6" x0="38.5512" y0="24.9449" dx="295.086" dy="131.811"/>
@@ -952,7 +952,7 @@
   <!-- =================================================================== -->
   <!-- Data Becker Etiketten Paket: Disketten Etiketten, 70 x 50,8 mm, 10 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 8803" size="A4" description="Diskette Labels (face only)">
+  <Sheet name="Herma 8803" size="A4" _description="Diskette Labels (face only)">
     <Label id="0" style="rectangle" width="198.425" height="144" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="5" x0="60.9448" y0="60.9448" dx="270.425" dy="144"/>
@@ -963,7 +963,7 @@
   <!-- =================================================================== -->
   <!-- Otto Versand: Allzweck Etiketten, 38 x 21,2 mm, 65 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4606" size="A4" description="Allround Labels --65">
+  <Sheet name="Herma 4606" size="A4" _description="Allround Labels --65">
     <Label id="0" style="rectangle" width="107.716" height="60.0945" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="5" ny="13" x0="26.9291" y0="29.7638" dx="107.716" dy="60.0945"/>
@@ -974,7 +974,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Allzweck Etiketten, 48,3 x 16,9 mm, 64 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4607" size="A4" description="Allround Labels --64">
+  <Sheet name="Herma 4607" size="A4" _description="Allround Labels --64">
     <Label id="0" style="rectangle" width="136.913" height="47.9055" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="16" x0="24.0945" y0="39.6853" dx="136.913" dy="47.9055"/>
@@ -985,7 +985,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Allzweck Etiketten, 48,3 x 25,4 mm, 44 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4608" size="A4" description="Allround Labels --44">
+  <Sheet name="Herma 4608" size="A4" _description="Allround Labels --44">
     <Label id="0" style="rectangle" width="136.913" height="72" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="11" x0="24.0945" y0="24.0945" dx="136.913" dy="72"/>
@@ -997,7 +997,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Allzweck Etiketten, 66 x 33,8 mm, 24 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4614" size="A4" description="Allround Labels --24">
+  <Sheet name="Herma 4614" size="A4" _description="Allround Labels --24">
     <Label id="0" style="rectangle" width="187.086" height="95.811" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="8" x0="16.1575" y0="36.8504" dx="187.086" dy="95.811"/>
@@ -1009,7 +1009,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Adress Etiketten, 105 x 42,3 mm, 24 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4625" size="A4" description="Mailing Labels --14">
+  <Sheet name="Herma 4625" size="A4" _description="Mailing Labels --14">
     <Label id="0" style="rectangle" width="297.638" height="119.905" round="0">
       <Markup type="margin" size="5"/>
       <Layout nx="2" ny="7" x0="0" y0="0" dx="297.638" dy="119.905"/>
@@ -1021,7 +1021,7 @@
   <!-- =================================================================== -->
   <!-- Herma Musteretiketten: Ordnerrucken, 192 x 38 mm, 7 per sheet    -->
   <!-- =================================================================== -->
-  <Sheet name="Herma 4293" size="A4" description="Arch File Labels">
+  <Sheet name="Herma 4293" size="A4" _description="Arch File Labels">
     <Label id="0" style="rectangle" width="544.252" height="107.716" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="7" x0="25.5118" y0="42.5197" dx="544.252" dy="107.716"/>
@@ -1032,7 +1032,7 @@
   <!-- ===================================================================-->
   <!-- Data Becker CD/DVD Labels (face only), 2 per sheet                 -->
   <!-- ===================================================================-->
-  <Sheet name="DataBecker 0335" size="A4" description="CD/DVD Labels Standard Format (face only)">
+  <Sheet name="DataBecker 0335" size="A4" _description="CD/DVD Labels Standard Format (face only)">
     <Label id="0" style="cd" radius="164.409" hole="58.1102">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="133.228" y0="46.7716" dx="0" dy="419.527"/>
@@ -1043,7 +1043,7 @@
   <!-- ===================================================================-->
   <!-- LeLabel 2001.018 CD/DVD Labels, 1 per sheet                        -->
   <!-- ===================================================================-->
-  <Sheet name="LeLabel 2001.018" size="A4" description="CD/DVD Labels">
+  <Sheet name="LeLabel 2001.018" size="A4" _description="CD/DVD Labels">
     <Label id="0" style="cd" radius="168.08" hole="54.69">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="1" x0="128.556" y0="42.52" dx="0" dy="0"/>
@@ -1059,7 +1059,7 @@
   <!-- =================================================================== -->
   <!-- EPSON Photo Stickers, 17 x 24 mm, 16 per sheet                      -->
   <!-- =================================================================== -->
-  <Sheet name="Epson S041144" size="A6" description="EPSON Photo Stickers 16">
+  <Sheet name="Epson S041144" size="A6" _description="EPSON Photo Stickers 16">
     <Label id="0" style="rectangle" width="48" height="68" round="7">
       <Markup type="margin" size="5"/>
       <Layout nx="4" ny="4" x0="33" y0="59" dx="59.5" dy="79.5"/>
