@@ -150,8 +150,8 @@ gl_view_object_finalize (GObject *object)
 		g_list_remove (view->selected_object_list, object);
 
 	g_object_unref (GL_VIEW_OBJECT(object)->private->object);
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
 	g_object_unref (G_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
+	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->menu));
 	if (GL_VIEW_OBJECT(object)->private->property_dialog) {
 		gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_dialog));
