@@ -64,8 +64,6 @@ typedef struct {
 
 static GObjectClass *parent_class = NULL;
 
-static guint signals[LAST_SIGNAL] = {0};
-
 static GList *backends = NULL;
 
 /*========================================================*/

@@ -54,8 +54,6 @@ enum {
 
 static glMergeClass *parent_class = NULL;
 
-static guint signals[LAST_SIGNAL] = {0};
-
 
 /*===========================================*/
 /* Local function prototypes                 */
