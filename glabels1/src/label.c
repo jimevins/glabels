@@ -168,6 +168,7 @@ gl_label_open_xml (glLabel ** label,
 	xmlDocPtr doc;
 	glLabelStatus status;
 
+	xmlUseNewParser (TRUE);
 	doc = xmlParseFile (filename);
 	if (!doc) {
 		WARN (_("xmlParseFile error"));
@@ -192,6 +193,7 @@ gl_label_open_xml_buffer (glLabel ** label,
 	xmlDocPtr doc;
 	glLabelStatus status;
 
+	xmlUseNewParser (TRUE);
 	doc = xmlParseDoc ((xmlChar *) buffer);
 	if (!doc) {
 		WARN (_("xmlParseFile error"));
