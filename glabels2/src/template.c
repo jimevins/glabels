@@ -79,6 +79,9 @@ static void        xml_add_layout               (glTemplateLayout *layout,
 static void        xml_add_markup_margin        (glTemplateMarkupMargin *margin,
 						 xmlNodePtr root,
 						 xmlNsPtr ns);
+static void        xml_add_markup_line          (glTemplateMarkupLine *line,
+						 xmlNodePtr root,
+						 xmlNsPtr ns);
 static void        xml_add_alias                (gchar *name,
 						 xmlNodePtr root,
 						 xmlNsPtr ns);
@@ -97,6 +100,10 @@ static glTemplateLayout *layout_dup  (glTemplateLayout *orig_layout);
 static void              layout_free (glTemplateLayout **layout);
 
 static glTemplateMarkup *markup_margin_new  (gdouble size);
+static glTemplateMarkup *markup_line_new    (gdouble x1,
+					     gdouble y1,
+					     gdouble x2,
+					     gdouble y2);
 static glTemplateMarkup *markup_dup         (glTemplateMarkup *orig_markup);
 static void              markup_free        (glTemplateMarkup **markup);
 
@@ -677,6 +684,7 @@ xml_parse_markup (xmlNodePtr markup_node,
 {
 	gchar *type;
 	gdouble size;
+	gdouble x1, y1, x2, y2;
 	xmlNodePtr node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -687,6 +695,14 @@ xml_parse_markup (xmlNodePtr markup_node,
 		template->label.any.markups =
 			g_list_append (template->label.any.markups,
 				       markup_margin_new (size));
+	} else if (g_strcasecmp (type, "line") == 0) {
+		x1 = g_strtod (xmlGetProp (markup_node, "x1"), NULL);
+		y1 = g_strtod (xmlGetProp (markup_node, "y1"), NULL);
+		x2 = g_strtod (xmlGetProp (markup_node, "x2"), NULL);
+		y2 = g_strtod (xmlGetProp (markup_node, "y2"), NULL);
+		template->label.any.markups =
+			g_list_append (template->label.any.markups,
+				       markup_line_new (x1, y1, x2, y2));
 	}
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
@@ -802,6 +818,10 @@ xml_add_label (const glTemplate *template,
 			xml_add_markup_margin ((glTemplateMarkupMargin *)markup,
 					       node, ns);
 			break;
+		case GL_TEMPLATE_MARKUP_LINE:
+			xml_add_markup_line ((glTemplateMarkupLine *)markup,
+					     node, ns);
+			break;
 		default:
 			g_warning ("Unknown markup type");
 			break;
@@ -853,7 +873,7 @@ xml_add_layout (glTemplateLayout *layout,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Label->Markup Node.                             */
+/* PRIVATE.  Add XML Sheet->Label->Markup (margin) Node.                    */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_margin (glTemplateMarkupMargin *margin,
@@ -870,6 +890,38 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 
 	string = g_strdup_printf ("%g", margin->size);
 	xmlSetProp (node, "size", string);
+	g_free (string);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Sheet->Label->Markup (line) Node.                      */
+/*--------------------------------------------------------------------------*/
+static void
+xml_add_markup_line (glTemplateMarkupLine *line,
+		     xmlNodePtr root,
+		     xmlNsPtr ns)
+{
+	xmlNodePtr node;
+	gchar *string;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	node = xmlNewChild(root, ns, "Markup", NULL);
+	xmlSetProp (node, "type", "line");
+
+	string = g_strdup_printf ("%g", line->x1);
+	xmlSetProp (node, "x1", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", line->y1);
+	xmlSetProp (node, "y1", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", line->x2);
+	xmlSetProp (node, "x2", string);
+	g_free (string);
+	string = g_strdup_printf ("%g", line->y2);
+	xmlSetProp (node, "y2", string);
 	g_free (string);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
@@ -1153,6 +1205,28 @@ markup_margin_new (gdouble size)
 
 	markup->type        = GL_TEMPLATE_MARKUP_MARGIN;
 	markup->margin.size = size;
+
+	return markup;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Create new margin line structure.                              */
+/*--------------------------------------------------------------------------*/
+static glTemplateMarkup *
+markup_line_new (gdouble x1,
+		 gdouble y1,
+		 gdouble x2,
+		 gdouble y2)
+{
+	glTemplateMarkup *markup;
+
+	markup = g_new0 (glTemplateMarkup, 1);
+
+	markup->type        = GL_TEMPLATE_MARKUP_LINE;
+	markup->line.x1     = x1;
+	markup->line.y1     = y1;
+	markup->line.x2     = x2;
+	markup->line.y2     = y2;
 
 	return markup;
 }

@@ -75,6 +75,7 @@ typedef union {
  */
 typedef enum {
 	GL_TEMPLATE_MARKUP_MARGIN,
+	GL_TEMPLATE_MARKUP_LINE,
 } glTemplateMarkupType;
 
 typedef struct {
@@ -88,10 +89,17 @@ typedef struct {
 	gdouble                size;
 } glTemplateMarkupMargin;
 
+typedef struct {
+	glTemplateMarkupParent parent;
+
+	gdouble                x1, y1, x2, y2;
+} glTemplateMarkupLine;
+
 typedef union {
 	glTemplateMarkupType   type;
 	glTemplateMarkupParent any;
 	glTemplateMarkupMargin margin;
+	glTemplateMarkupLine   line;
 } glTemplateMarkup;
 
 

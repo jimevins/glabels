@@ -126,6 +126,9 @@ static void       draw_markup_margin_round        (glView *view,
 static void       draw_markup_margin_cd           (glView *view,
 						   glTemplateMarkupMargin *margin);
 
+static void       draw_markup_line                (glView *view,
+						   glTemplateMarkupLine   *line);
+
 
 static void       select_object_real              (glView *view,
 						   glViewObject *view_object);
@@ -903,6 +906,10 @@ draw_markup_layer (glView *view)
 			draw_markup_margin (view,
 					    (glTemplateMarkupMargin *)markup);
 			break;
+		case GL_TEMPLATE_MARKUP_LINE:
+			draw_markup_line (view,
+					  (glTemplateMarkupLine *)markup);
+			break;
 		default:
 			g_warning ("Unknown template markup type");
 			break;
@@ -1134,6 +1141,38 @@ draw_markup_margin_cd (glView                 *view,
 				      "width_pixels", 1,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw line markup.                                               */
+/*---------------------------------------------------------------------------*/
+static void
+draw_markup_line (glView               *view,
+		  glTemplateMarkupLine *line)
+{
+	GnomeCanvasPoints *points;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	points = gnome_canvas_points_new (2);
+	points->coords[0] = line->x1;
+	points->coords[1] = line->y1;
+	points->coords[2] = line->x2;
+	points->coords[3] = line->y2;
+
+	/* Bounding box @ margin */
+	gnome_canvas_item_new (view->markup_group,
+			       gnome_canvas_line_get_type (),
+			       "points", points,
+			       "width_pixels", 1,
+			       "fill_color_rgba", MARKUP_COLOR,
+			       NULL);
+
+	gnome_canvas_points_free (points);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
