@@ -98,6 +98,17 @@
   </Sheet>
 
   <!-- =================================================================== -->
+  <!-- Avery 5164 family: Mailing Labels.                                  -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 5164" size="US-Letter" description="Mailing Labels">
+    <Label id="0" style="rectangle" width="288" height="234" round="10">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="3" x0="13" y0="36" dx="301" dy="234"/>
+    </Label>
+    <Alias name="Avery 8164"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
   <!-- Avery 5167 family: Address labels, 1_3/4'' x 1/2'', 80 per sheet  * -->
   <!-- =================================================================== -->
   <Sheet name="Avery 5167" size="US-Letter" description="Address labels">
@@ -402,9 +413,9 @@
     <Alias name="Avery J8161"/>
   </Sheet>
 
-  <!-- =================================================================== -->  
-  <!-- Avery 7162 family: Mailing labels, 99.1 x 33.9 mm, 16 per sheet     -->  
-  <!-- =================================================================== -->  
+  <!-- ================================================================== -->  
+  <!-- Avery 7162 family: Mailing labels, 99.1 x 33.9 mm, 16 per sheet    -->  
+  <!-- ================================================================== -->  
   <Sheet name="Avery 7162" size="A4" description="Mailing labels">  
     <Label id="0" style="rectangle" width="280.9" height="96.1" round="5">  
       <Markup type="margin" size="5"/>
@@ -449,6 +460,16 @@
   </Sheet>
 
   <!-- =================================================================== -->
+  <!-- Avery 7414 family: Business Cards, 52mm x 90mm, 10 per sheet        -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery L7414" size="A4" description="Business Cards">
+    <Label id="0" style="rectangle" width="255.1" height="147.4" round="0">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="5" x0="42.51" y0="52.44" dx="255.1" dy="147.4"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
   <!-- Avery 8414 family: Business Cards, 50.8 x 87.0 mm, 10 per sheet     -->
   <!-- =================================================================== -->
   <Sheet name="Avery 8414" size="A4" description="Business Cards">
@@ -457,6 +478,18 @@
       <Layout nx="2" ny="5" x0="42" y0="57.890" dx="264" dy="144"/>
     </Label>
     <Alias name="Avery J8414"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8651 family: Mailing labels, 38.1 x 21.2 mm, 65 per sheet     -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 8651" size="A4" description="Mini Address">
+    <Label id="0" style="rectangle" width="108" height="60.09" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="5" ny="13" x0="13.32" y0="30.90" dx="115.09" dy="60.09"/>
+    </Label>
+    <Alias name="Avery L8651"/>
+    <Alias name="Avery J8651"/>
   </Sheet>
 
   <!-- =================================================================== -->
@@ -482,6 +515,15 @@
     <Alias name="Avery J8676"/>
   </Sheet>
 
+  <!-- =============================================================== -->
+  <!-- Avery 18036 Mailing Labels, 70mm x 32mm, 27 per sheet           -->
+  <!-- =============================================================== -->
+  <Sheet name="Avery 18036" size="A4" description="Mailing Labels">
+    <Label style="rectangle" width="198" height="91" round="0">
+      <Markup type="margin" size="10"/>
+      <Layout nx="3" ny="9" x0="0" y0="13" dx="198" dy="91"/>
+    </Label>
+  </Sheet>
 
 
   <!-- ******************************************************************** -->
