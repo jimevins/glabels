@@ -29,6 +29,7 @@
 
 #include <gdk/gdk.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "hack.h"
 
@@ -48,7 +49,7 @@ gl_hack_text_to_utf8 (gchar * text)
 
 	len = strlen (text);
 	wide_text = g_new (GdkWChar, len + 1);
-	enc_status = gdk_mbstowcs (wide_text, text, len);
+	enc_status = mbstowcs ((wchar_t *)wide_text, (char *)text, len);
 	if (enc_status < 0) {
 		g_free (wide_text);
 		return NULL;
@@ -80,7 +81,7 @@ gl_hack_get_width_string (GnomeFont * font,
 
 	len = strlen (text);
 	wide_text = g_new (GdkWChar, len + 1);
-	enc_status = gdk_mbstowcs (wide_text, text, len);
+	enc_status = mbstowcs ((wchar_t *)wide_text, (char *)text, len);
 	if (enc_status < 0) {
 		g_free (wide_text);
 		return 0.0;
