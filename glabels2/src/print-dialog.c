@@ -87,12 +87,17 @@ gl_print_dialog (glLabel *label, BonoboWindow *win)
 {
 	GtkWidget *dlg;
 	GtkWidget *pp_button, *notebook, *page;
+	gchar     *name, *title;
 
-	g_return_if_fail (label != NULL);
-	g_return_if_fail (win != NULL);
+	g_return_if_fail (label && GL_IS_LABEL(label));
+	g_return_if_fail (win && BONOBO_IS_WINDOW(win));
+
+	name = gl_label_get_short_name (label);
+	title = g_strdup_printf ("%s \"%s\"", _("Print"), name);
+	g_free (name);
 
 	/* ----- Contstruct basic print dialog with notebook ----- */
-	dlg = gl_hig_dialog_new_with_buttons (_("Print"), GTK_WINDOW(win),
+	dlg = gl_hig_dialog_new_with_buttons (title, GTK_WINDOW(win),
 					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					   GTK_STOCK_PRINT, GNOME_PRINT_DIALOG_RESPONSE_PRINT,
@@ -123,6 +128,8 @@ gl_print_dialog (glLabel *label, BonoboWindow *win)
 			  G_CALLBACK (print_response), label);
 
 	gtk_widget_show_all (GTK_WIDGET (dlg));
+
+	g_free (title);
 }
 
 /*---------------------------------------------------------------------------*/

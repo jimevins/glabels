@@ -81,7 +81,7 @@ gl_file_new (GtkWindow *window)
 
 	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
 					      window,
-					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					      NULL);
@@ -501,14 +501,18 @@ gl_file_save_as (glLabel   *label,
 	GtkFileSelection *fsel;
 	gboolean          saved_flag = FALSE;
 	gboolean          destroy_flag = FALSE;
+	gchar            *name, *title;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	g_return_val_if_fail (label != NULL, FALSE);
-	g_return_val_if_fail (window != NULL, FALSE);
+	g_return_val_if_fail (label && GL_IS_LABEL(label), FALSE);
+	g_return_val_if_fail (window && GTK_IS_WINDOW(window), FALSE);
 
+	name = gl_label_get_short_name (label);
+	title = g_strdup_printf (_("Save \"%s\" as"), name);
+	g_free (name);
 
-	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Save label as")));
+	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (title));
 	gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
 	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
 
@@ -544,6 +548,8 @@ gl_file_save_as (glLabel   *label,
 						      &destroy_flag);
 		gtk_widget_destroy (GTK_WIDGET (fsel));
 	}
+
+	g_free (title);
 
 	gl_debug (DEBUG_FILE, "END");
 
