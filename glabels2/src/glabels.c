@@ -34,11 +34,17 @@
 #include "debug.h"
 #include "window.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
 #define ICON_PIXMAP gnome_program_locate_file (NULL,\
 					       GNOME_FILE_DOMAIN_APP_PIXMAP,\
 					       "glabels/glabels-icon.png",\
 					       FALSE, NULL)
 
+/*========================================================*/
+/* Private globals                                        */
+/*========================================================*/
 static const struct poptOption options [] =
 {
 	{ "debug-view", '\0', POPT_ARG_NONE, &gl_debug_view, 0,
@@ -98,12 +104,29 @@ static const struct poptOption options [] =
 	{NULL, '\0', 0, NULL, 0}
 };
 
+/*========================================================*/
+/* Local function prototypes                              */
+/*========================================================*/
+gint save_session_cb (GnomeClient        *client,
+		      gint                phase,
+		      GnomeRestartStyle   save_style,
+		      gint                shutdown,
+		      GnomeInteractStyle  interact_style,
+		      gint                fast,
+		      gpointer            client_data);
 
+void client_die_cb   (GnomeClient        *client,
+		      gpointer            client_data);
+
+/****************************************************************************/
+/* main program                                                             */
+/****************************************************************************/
 int
 main (int argc, char **argv)
 {
 	GValue         value = { 0, };
     	GnomeProgram  *program;
+	GnomeClient   *client;
 	poptContext    ctx;
 	char         **args;
 	GList         *file_list = NULL, *p;
@@ -149,6 +172,15 @@ main (int argc, char **argv)
 		g_error (_("Could not initialize Bonobo!\n"));
 	}
 
+	client = gnome_master_client();
+
+	g_signal_connect (G_OBJECT (client), "save_yourself",
+			  G_CALLBACK (save_session_cb),
+			  (gpointer)argv[0]);
+
+	g_signal_connect (G_OBJECT (client), "die",
+			  G_CALLBACK (client_die_cb), NULL);
+
 	/* Parse args and build the list of files to be loaded at startup */
 	g_value_init (&value, G_TYPE_POINTER);
     	g_object_get_property (G_OBJECT (program),
@@ -177,6 +209,50 @@ main (int argc, char **argv)
 	bonobo_main();
 		
 	return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  "Save session" callback.                                        */
+/*---------------------------------------------------------------------------*/
+gint save_session_cb (GnomeClient        *client,
+		      gint                phase,
+		      GnomeRestartStyle   save_style,
+		      gint                shutdown,
+		      GnomeInteractStyle  interact_style,
+		      gint                fast,
+		      gpointer            client_data)
+{
+	gchar       *argv[128];
+	gint         argc;
+	const GList *window_list;
+	GList       *p;
+	glWindow    *window;
+	glLabel     *label;
+
+	argv[0] = (gchar *)client_data;
+	argc = 1;
+
+	window_list = gl_window_get_window_list();
+	for ( p=(GList *)window_list; p != NULL; p=p->next ) {
+		window = GL_WINDOW(p->data);
+		if ( !gl_window_is_empty (window) ) {
+			label = GL_VIEW(window->view)->label;
+			argv[argc++] = gl_label_get_filename (label);
+		}
+	}
+	gnome_client_set_clone_command(client, argc, argv);
+	gnome_client_set_restart_command(client, argc, argv);
+	
+	return TRUE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  "Die" callback.                                                 */
+/*---------------------------------------------------------------------------*/
+void client_die_cb (GnomeClient *client,
+		    gpointer     client_data)
+{
+	gl_file_exit ();
 }
 
 
