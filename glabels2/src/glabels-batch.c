@@ -66,7 +66,7 @@ static struct poptOption options[] = {
 /* Main                                                                      */
 /*****************************************************************************/
 int
-main (int argc, char **argv)
+main (int argc, const char **argv)
 {
 	poptContext pctx;
 	gchar **args;
