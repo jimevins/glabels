@@ -521,11 +521,14 @@ gl_label_object_get_extent (glLabelObject *object,
 void
 gl_label_object_flip_horiz (glLabelObject *object)
 {
+	gdouble flip_affine[6];
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	art_affine_flip (object->private->affine, object->private->affine, TRUE, FALSE);
+	art_affine_scale (flip_affine, -1.0, 1.0);
+	art_affine_multiply (object->private->affine, object->private->affine, flip_affine);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -538,11 +541,14 @@ gl_label_object_flip_horiz (glLabelObject *object)
 void
 gl_label_object_flip_vert (glLabelObject *object)
 {
+	gdouble flip_affine[6];
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	art_affine_flip (object->private->affine, object->private->affine, FALSE, TRUE);
+	art_affine_scale (flip_affine, 1.0, -1.0);
+	art_affine_multiply (object->private->affine, object->private->affine, flip_affine);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
