@@ -1438,7 +1438,7 @@ xml_create_pixdata (xmlNodePtr  root,
 	if ( pixbuf != NULL ) {
 
 		pixdata = g_new0 (GdkPixdata, 1);
-		gdk_pixdata_from_pixbuf (pixdata, pixbuf, TRUE);
+		gdk_pixdata_from_pixbuf (pixdata, pixbuf, FALSE);
 		stream = gdk_pixdata_serialize (pixdata, &stream_length);
 		base64 = gl_base64_encode (stream, stream_length);
 
@@ -1448,7 +1448,6 @@ xml_create_pixdata (xmlNodePtr  root,
 
 		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache, name);
 
-		g_free (pixdata->pixel_data);
 		g_free (pixdata);
 		g_free (stream);
 		g_free (base64);
