@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(glabels, 1.93.0, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_INIT(glabels, 1.93.1cvs, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
