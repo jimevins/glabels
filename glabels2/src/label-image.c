@@ -53,6 +53,9 @@ static void gl_label_image_class_init    (glLabelImageClass *klass);
 static void gl_label_image_instance_init (glLabelImage      *limage);
 static void gl_label_image_finalize      (GObject           *object);
 
+static void copy                         (glLabelObject     *dst_object,
+					  glLabelObject     *src_object);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -85,9 +88,12 @@ gl_label_image_get_type (void)
 static void
 gl_label_image_class_init (glLabelImageClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy = copy;
 
 	object_class->finalize = gl_label_image_finalize;
 }
@@ -132,31 +138,26 @@ gl_label_image_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelImage *
-gl_label_image_dup (glLabelImage *limage,
-		    glLabel      *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelImage *new_limage;
+	glLabelImage *limage     = (glLabelImage *)src_object;
+	glLabelImage *new_limage = (glLabelImage *)dst_object;
 	gchar        *filename;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (limage && GL_IS_LABEL_IMAGE (limage));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_limage = GL_LABEL_IMAGE(gl_label_image_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_limage), GL_LABEL_OBJECT(limage));
+	g_return_if_fail (new_limage && GL_IS_LABEL_IMAGE (new_limage));
 
 	filename = gl_label_image_get_filename (limage);
 	gl_label_image_set_filename (new_limage, filename);
 	g_free (filename);
 
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_limage;
 }
 
 

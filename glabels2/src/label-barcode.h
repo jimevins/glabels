@@ -58,9 +58,6 @@ GType           gl_label_barcode_get_type  (void);
 
 GObject        *gl_label_barcode_new       (glLabel        *label);
 
-glLabelBarcode *gl_label_barcode_dup       (glLabelBarcode *lbc,
-					    glLabel        *label);
-
 void            gl_label_barcode_set_data  (glLabelBarcode *lbc,
 					    glTextNode     *text_node);
 void            gl_label_barcode_set_props (glLabelBarcode *lbc,

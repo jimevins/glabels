@@ -70,7 +70,12 @@ static void gl_label_text_class_init    (glLabelTextClass *klass);
 static void gl_label_text_instance_init (glLabelText      *ltext);
 static void gl_label_text_finalize      (GObject          *object);
 
-static void update_size                 (glLabelText      *ltext);
+static void copy                        (glLabelObject    *dst_object,
+					 glLabelObject    *src_object);
+
+static void get_size                    (glLabelObject    *object,
+					 gdouble          *w,
+					 gdouble          *h);
 
 
 /*****************************************************************************/
@@ -104,9 +109,13 @@ gl_label_text_get_type (void)
 static void
 gl_label_text_class_init (glLabelTextClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy     = copy;
+	label_object_class->get_size = get_size;
 
 	object_class->finalize = gl_label_text_finalize;
 }
@@ -154,13 +163,14 @@ gl_label_text_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelText *
-gl_label_text_dup (glLabelText *ltext,
-		   glLabel     *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelText      *new_ltext;
+	glLabelText      *ltext     = (glLabelText *)src_object;
+	glLabelText      *new_ltext = (glLabelText *)dst_object;
 	GList            *lines;
 	gchar            *font_family;
 	gdouble           font_size;
@@ -172,11 +182,7 @@ gl_label_text_dup (glLabelText *ltext,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_ltext = GL_LABEL_TEXT(gl_label_text_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_ltext), GL_LABEL_OBJECT(ltext));
+	g_return_if_fail (new_ltext && GL_IS_LABEL_TEXT (new_ltext));
 
 	lines = gl_label_text_get_lines (ltext);
 	gl_label_text_get_props (ltext,
@@ -194,8 +200,6 @@ gl_label_text_dup (glLabelText *ltext,
 	g_free (font_family);
 
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_ltext;
 }
 
 
@@ -212,8 +216,6 @@ gl_label_text_set_lines (glLabelText *ltext,
 
 	gl_text_node_lines_free (&ltext->private->lines);
 	ltext->private->lines = gl_text_node_lines_dup (lines);
-
-	update_size (ltext);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
@@ -245,8 +247,6 @@ gl_label_text_set_props (glLabelText     *ltext,
 	ltext->private->just             = just;
 
 	gl_debug (DEBUG_LABEL, "just = %d", ltext->private->just);
-
-	update_size (ltext);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
@@ -287,12 +287,14 @@ gl_label_text_get_props (glLabelText      *ltext,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Update object size.                                             */
+/* PRIVATE.  get object size method.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-update_size (glLabelText *ltext)
+get_size (glLabelObject *object,
+	  gdouble       *w,
+	  gdouble       *h)
 {
-	gdouble         w, h;
+	glLabelText    *ltext = (glLabelText *)object;
 	GnomeFont      *font;
 	gchar          *text;
 	gchar         **line;
@@ -302,6 +304,8 @@ update_size (glLabelText *ltext)
 	gdouble         affine[6];
 
 	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
 	font = gnome_font_find_closest_from_weight_slant (
 		ltext->private->font_family,
@@ -315,8 +319,8 @@ update_size (glLabelText *ltext)
 
 	art_affine_identity (affine);
 
-	w = 0.0;
-	h = 0.0;
+	*w = 0.0;
+	*h = 0.0;
 	for (i = 0; line[i] != NULL; i++) {
 
 		glyphlist = gnome_glyphlist_from_text_dumb (font, 0,
@@ -325,15 +329,13 @@ update_size (glLabelText *ltext)
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 
-		if ( bbox.x1 > w ) w = bbox.x1;
+		if ( bbox.x1 > *w ) *w = bbox.x1;
 
-		h += ltext->private->font_size;
+		*h += ltext->private->font_size;
 
 	}
 
 	g_strfreev (line);
-
-	gl_label_object_set_size (GL_LABEL_OBJECT(ltext), w, h);
 
 	gl_debug (DEBUG_LABEL, "END");
 }

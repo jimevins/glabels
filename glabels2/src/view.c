@@ -2080,31 +2080,7 @@ gl_view_copy (glView *view)
 			view_object = GL_VIEW_OBJECT (p->data);
 			object = gl_view_object_get_object (view_object);
 
-			gl_debug (DEBUG_VIEW, "Object copied");
-
-			if (GL_IS_LABEL_BOX (object)) {
-				gl_label_box_dup (GL_LABEL_BOX(object),
-						  view->selection_data);
-			} else if (GL_IS_LABEL_ELLIPSE (object)) {
-				gl_label_ellipse_dup (GL_LABEL_ELLIPSE(object),
-						      view->selection_data);
-			} else if (GL_IS_LABEL_LINE (object)) {
-				gl_label_line_dup (GL_LABEL_LINE(object),
-						   view->selection_data);
-			} else if (GL_IS_LABEL_IMAGE (object)) {
-				gl_label_image_dup (GL_LABEL_IMAGE(object),
-						    view->selection_data);
-			} else if (GL_IS_LABEL_TEXT (object)) {
-				gl_label_text_dup (GL_LABEL_TEXT(object),
-						   view->selection_data);
-			} else if (GL_IS_LABEL_BARCODE (object)) {
-				gl_label_barcode_dup (GL_LABEL_BARCODE(object),
-						      view->selection_data);
-			} else {
-				/* Should not happen! */
-				g_warning ("Invalid label object type.");
-			}
-
+			gl_label_object_dup (object, view->selection_data);
 
 		}
 

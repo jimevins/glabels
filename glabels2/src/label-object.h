@@ -77,6 +77,9 @@ struct _glLabelObjectClass {
 			     gdouble           *w,
 			     gdouble           *h);
 
+	void (*copy)        (glLabelObject     *dst_object,
+			     glLabelObject     *src_object);
+
 	/*
 	 * Signals
 	 */
@@ -98,76 +101,76 @@ struct _glLabelObjectClass {
 			     gpointer           user_data);
 };
 
-GType     gl_label_object_get_type              (void);
+GType          gl_label_object_get_type              (void);
 
-GObject  *gl_label_object_new                   (glLabel           *label);
-
-
-void      gl_label_object_copy_props            (glLabelObject     *dst_object,
-						 glLabelObject     *src_object);
-
-void      gl_label_object_emit_changed          (glLabelObject     *object);
+GObject       *gl_label_object_new                   (glLabel           *label);
 
 
-void      gl_label_object_set_parent            (glLabelObject     *object,
-						 glLabel           *label);
+glLabelObject *gl_label_object_dup                   (glLabelObject     *src_object,
+						      glLabel           *label);
 
-glLabel  *gl_label_object_get_parent            (glLabelObject     *object);
-
-
-void      gl_label_object_set_name              (glLabelObject     *object,
-						 gchar             *name);
-
-gchar    *gl_label_object_get_name              (glLabelObject     *object);
+void           gl_label_object_emit_changed          (glLabelObject     *object);
 
 
-void      gl_label_object_set_position          (glLabelObject     *object,
-						 gdouble            x,
-						 gdouble            y);
+void           gl_label_object_set_parent            (glLabelObject     *object,
+						      glLabel           *label);
 
-void      gl_label_object_set_position_relative (glLabelObject     *object,
-						 gdouble            dx,
-						 gdouble            dy);
-
-void      gl_label_object_get_position          (glLabelObject     *object,
-						 gdouble           *x,
-						 gdouble           *y);
-
-void      gl_label_object_set_size              (glLabelObject     *object,
-						 gdouble            w,
-						 gdouble            h);
-
-void      gl_label_object_get_size              (glLabelObject     *object,
-						 gdouble           *w,
-						 gdouble           *h);
-
-void      gl_label_object_get_extent            (glLabelObject     *object,
-						 gdouble           *x1,
-						 gdouble           *y1,
-						 gdouble           *x2,
-						 gdouble           *y2);
+glLabel       *gl_label_object_get_parent            (glLabelObject     *object);
 
 
-void      gl_label_object_raise_to_top          (glLabelObject     *object);
+void           gl_label_object_set_name              (glLabelObject     *object,
+						      gchar             *name);
 
-void      gl_label_object_lower_to_bottom       (glLabelObject     *object);
+gchar         *gl_label_object_get_name              (glLabelObject     *object);
 
 
-void      gl_label_object_flip_horiz            (glLabelObject     *object);
+void           gl_label_object_set_position          (glLabelObject     *object,
+						      gdouble            x,
+						      gdouble            y);
 
-void      gl_label_object_flip_vert             (glLabelObject     *object);
+void           gl_label_object_set_position_relative (glLabelObject     *object,
+						      gdouble            dx,
+						      gdouble            dy);
 
-void      gl_label_object_rotate                (glLabelObject     *object,
-						 gdouble            theta_degs);
+void           gl_label_object_get_position          (glLabelObject     *object,
+						      gdouble           *x,
+						      gdouble           *y);
 
-void      gl_label_object_set_affine            (glLabelObject     *object,
-						 gdouble           affine[6]);
+void           gl_label_object_set_size              (glLabelObject     *object,
+						      gdouble            w,
+						      gdouble            h);
 
-void      gl_label_object_get_affine            (glLabelObject     *object,
-						 gdouble           affine[6]);
+void           gl_label_object_get_size              (glLabelObject     *object,
+						      gdouble           *w,
+						      gdouble           *h);
 
-void      gl_label_object_get_applied_affine    (glLabelObject     *object,
-						 gdouble           affine[6]);
+void           gl_label_object_get_extent            (glLabelObject     *object,
+						      gdouble           *x1,
+						      gdouble           *y1,
+						      gdouble           *x2,
+						      gdouble           *y2);
+
+
+void           gl_label_object_raise_to_top          (glLabelObject     *object);
+
+void           gl_label_object_lower_to_bottom       (glLabelObject     *object);
+
+
+void           gl_label_object_flip_horiz            (glLabelObject     *object);
+
+void           gl_label_object_flip_vert             (glLabelObject     *object);
+
+void           gl_label_object_rotate                (glLabelObject     *object,
+						      gdouble            theta_degs);
+
+void           gl_label_object_set_affine            (glLabelObject     *object,
+						      gdouble           affine[6]);
+
+void           gl_label_object_get_affine            (glLabelObject     *object,
+						      gdouble           affine[6]);
+
+void           gl_label_object_get_applied_affine    (glLabelObject     *object,
+						      gdouble           affine[6]);
 
 G_END_DECLS
 

@@ -52,6 +52,9 @@ static void gl_label_ellipse_class_init    (glLabelEllipseClass *klass);
 static void gl_label_ellipse_instance_init (glLabelEllipse      *lellipse);
 static void gl_label_ellipse_finalize      (GObject             *object);
 
+static void copy                           (glLabelObject       *dst_object,
+					    glLabelObject       *src_object);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -84,9 +87,12 @@ gl_label_ellipse_get_type (void)
 static void
 gl_label_ellipse_class_init (glLabelEllipseClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy = copy;
 
 	object_class->finalize = gl_label_ellipse_finalize;
 }
@@ -127,25 +133,21 @@ gl_label_ellipse_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelEllipse *
-gl_label_ellipse_dup (glLabelEllipse *lellipse,
-		      glLabel        *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelEllipse *new_lellipse;
+	glLabelEllipse *lellipse     = (glLabelEllipse *)src_object;
+	glLabelEllipse *new_lellipse = (glLabelEllipse *)dst_object;
 	gdouble         line_width;
 	guint           line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_lellipse = GL_LABEL_ELLIPSE(gl_label_ellipse_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lellipse),
-				    GL_LABEL_OBJECT(lellipse));
+	g_return_if_fail (new_lellipse && GL_IS_LABEL_ELLIPSE (new_lellipse));
 
 	line_width = gl_label_ellipse_get_line_width (lellipse);
 	line_color = gl_label_ellipse_get_line_color (lellipse);
@@ -156,8 +158,6 @@ gl_label_ellipse_dup (glLabelEllipse *lellipse,
 	gl_label_ellipse_set_fill_color (new_lellipse, fill_color);
 
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_lellipse;
 }
 
 

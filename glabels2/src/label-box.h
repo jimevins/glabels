@@ -52,10 +52,7 @@ struct _glLabelBoxClass {
 
 GType         gl_label_box_get_type       (void);
 
-GObject      *gl_label_box_new            (glLabel *label);
-
-glLabelBox   *gl_label_box_dup            (glLabelBox *lbox,
-					   glLabel    *label);
+GObject      *gl_label_box_new            (glLabel    *label);
 
 void          gl_label_box_set_line_width (glLabelBox *lbox,
 					   gdouble     line_width);

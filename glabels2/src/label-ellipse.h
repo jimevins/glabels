@@ -52,10 +52,7 @@ struct _glLabelEllipseClass {
 
 GType           gl_label_ellipse_get_type       (void);
 
-GObject        *gl_label_ellipse_new            (glLabel *label);
-
-glLabelEllipse *gl_label_ellipse_dup            (glLabelEllipse *lellipse,
-						 glLabel        *label);
+GObject        *gl_label_ellipse_new            (glLabel        *label);
 
 void            gl_label_ellipse_set_line_width (glLabelEllipse *lellipse,
 						 gdouble         line_width);

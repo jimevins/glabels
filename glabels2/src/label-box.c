@@ -52,6 +52,9 @@ static void gl_label_box_class_init    (glLabelBoxClass *klass);
 static void gl_label_box_instance_init (glLabelBox      *lbox);
 static void gl_label_box_finalize      (GObject         *object);
 
+static void copy                       (glLabelObject   *dst_object,
+					glLabelObject   *src_object);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -84,9 +87,12 @@ gl_label_box_get_type (void)
 static void
 gl_label_box_class_init (glLabelBoxClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy = copy;
 
 	object_class->finalize = gl_label_box_finalize;
 }
@@ -127,24 +133,21 @@ gl_label_box_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelBox *
-gl_label_box_dup (glLabelBox *lbox,
-		  glLabel    *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelBox *new_lbox;
+	glLabelBox *lbox     = (glLabelBox *)src_object;
+	glLabelBox *new_lbox = (glLabelBox *)dst_object;
 	gdouble     line_width;
 	guint       line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_lbox = GL_LABEL_BOX(gl_label_box_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lbox), GL_LABEL_OBJECT(lbox));
+	g_return_if_fail (new_lbox && GL_IS_LABEL_BOX (new_lbox));
 
 	line_width = gl_label_box_get_line_width (lbox);
 	line_color = gl_label_box_get_line_color (lbox);
@@ -154,10 +157,7 @@ gl_label_box_dup (glLabelBox *lbox,
 	gl_label_box_set_line_color (new_lbox, line_color);
 	gl_label_box_set_fill_color (new_lbox, fill_color);
 
-
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_lbox;
 }
 
 

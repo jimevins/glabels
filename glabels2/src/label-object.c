@@ -214,17 +214,23 @@ gl_label_object_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Copy properties of one label object to another.                           */
+/* Duplicate object.                                                         */
 /*****************************************************************************/
-void
-gl_label_object_copy_props (glLabelObject *dst_object,
-			    glLabelObject *src_object)
+glLabelObject *
+gl_label_object_dup (glLabelObject *src_object,
+		     glLabel       *label)
 {
+	glLabelObject    *dst_object;
 	gdouble           x, y, w, h;
 	gdouble           affine[6];
 
+	gl_debug (DEBUG_LABEL, "START");
+
 	g_return_if_fail (src_object && GL_IS_LABEL_OBJECT (src_object));
-	g_return_if_fail (dst_object && GL_IS_LABEL_OBJECT (dst_object));
+
+	dst_object = g_object_new (G_OBJECT_TYPE(src_object), NULL);
+
+	gl_label_object_set_parent (dst_object, label);
 
 	gl_label_object_get_position (src_object, &x, &y);
 	gl_label_object_get_size     (src_object, &w, &h);
@@ -233,6 +239,17 @@ gl_label_object_copy_props (glLabelObject *dst_object,
 	gl_label_object_set_position (dst_object, x, y);
 	gl_label_object_set_size     (dst_object, w, h);
 	gl_label_object_set_affine   (dst_object, affine);
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(src_object)->copy != NULL ) {
+
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(src_object)->copy (dst_object, src_object);
+
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+
+	return dst_object;
 }
 
 /*****************************************************************************/

@@ -56,9 +56,6 @@ GType         gl_label_text_get_type     (void);
 
 GObject      *gl_label_text_new          (glLabel          *label);
 
-glLabelText  *gl_label_text_dup          (glLabelText      *ltext,
-					  glLabel          *label);
-
 void          gl_label_text_set_lines    (glLabelText      *ltext,
 					  GList            *lines);
 void          gl_label_text_set_props    (glLabelText      *ltext,

@@ -61,7 +61,12 @@ static void gl_label_barcode_class_init    (glLabelBarcodeClass *klass);
 static void gl_label_barcode_instance_init (glLabelBarcode      *lbc);
 static void gl_label_barcode_finalize      (GObject             *object);
 
-static void update_size                    (glLabelBarcode      *lbc);
+static void copy                           (glLabelObject       *dst_object,
+					    glLabelObject       *src_object);
+
+static void get_size                       (glLabelObject       *object,
+					    gdouble             *w,
+					    gdouble             *h);
 
 
 /*****************************************************************************/
@@ -95,9 +100,13 @@ gl_label_barcode_get_type (void)
 static void
 gl_label_barcode_class_init (glLabelBarcodeClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy     = copy;
+	label_object_class->get_size = get_size;
 
 	object_class->finalize = gl_label_barcode_finalize;
 }
@@ -139,13 +148,14 @@ gl_label_barcode_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelBarcode *
-gl_label_barcode_dup (glLabelBarcode *lbc,
-		      glLabel        *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelBarcode      *new_lbc;
+	glLabelBarcode      *lbc     = (glLabelBarcode *)src_object;
+	glLabelBarcode      *new_lbc = (glLabelBarcode *)dst_object;
 	glTextNode          *text_node;
 	glBarcodeStyle       style;
 	gboolean             text_flag;
@@ -155,11 +165,7 @@ gl_label_barcode_dup (glLabelBarcode *lbc,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_lbc = GL_LABEL_BARCODE(gl_label_barcode_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lbc), GL_LABEL_OBJECT(lbc));
+	g_return_if_fail (new_lbc && GL_IS_LABEL_BARCODE (new_lbc));
 
 	text_node = gl_label_barcode_get_data (lbc);
 	gl_label_barcode_get_props (lbc, &style, &text_flag, &color, &scale);
@@ -170,8 +176,6 @@ gl_label_barcode_dup (glLabelBarcode *lbc,
 	gl_text_node_free (&text_node);
 
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_lbc;
 }
 
 
@@ -188,8 +192,6 @@ gl_label_barcode_set_data (glLabelBarcode *lbc,
 
 	gl_text_node_free (&lbc->private->text_node);
 	lbc->private->text_node = gl_text_node_dup (text_node);
-
-	update_size (lbc);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
 
@@ -211,8 +213,6 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 	lbc->private->text_flag        = text_flag;
 	lbc->private->color            = color;
 	lbc->private->scale            = scale;
-
-	update_size (lbc);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
 
@@ -247,15 +247,20 @@ gl_label_barcode_get_props (glLabelBarcode *lbc,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Update object size.                                             */
+/* PRIVATE.  Get object size method.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-update_size (glLabelBarcode *lbc)
+get_size (glLabelObject *object,
+	  gdouble       *w,
+	  gdouble       *h)
 {
+	glLabelBarcode      *lbc = (glLabelBarcode *)object;
 	gchar               *data;
 	glBarcode           *gbc;
 
 	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
 	data = gl_barcode_default_digits (lbc->private->style);
 	gbc = gl_barcode_new (lbc->private->style,
@@ -263,8 +268,8 @@ update_size (glLabelBarcode *lbc)
 			      lbc->private->scale,
 			      data);
 
-	gl_label_object_set_size (GL_LABEL_OBJECT(lbc),
-				  gbc->width, gbc->height);
+	*w = gbc->width;
+	*h = gbc->height;
 
 	gl_barcode_free (&gbc);
 

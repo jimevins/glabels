@@ -52,10 +52,7 @@ struct _glLabelImageClass {
 
 GType            gl_label_image_get_type     (void);
 
-GObject         *gl_label_image_new          (glLabel *label);
-
-glLabelImage    *gl_label_image_dup          (glLabelImage *limage,
-					      glLabel      *label);
+GObject         *gl_label_image_new          (glLabel      *label);
 
 void             gl_label_image_set_filename (glLabelImage *limage,
 					      const gchar  *filename);

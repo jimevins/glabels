@@ -51,6 +51,9 @@ static void gl_label_line_class_init    (glLabelLineClass *klass);
 static void gl_label_line_instance_init (glLabelLine      *lline);
 static void gl_label_line_finalize      (GObject          *object);
 
+static void copy                        (glLabelObject    *dst_object,
+					 glLabelObject    *src_object);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -83,9 +86,12 @@ gl_label_line_get_type (void)
 static void
 gl_label_line_class_init (glLabelLineClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass       *object_class       = (GObjectClass *) klass;
+	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
 
 	parent_class = g_type_class_peek_parent (klass);
+
+	label_object_class->copy = copy;
 
 	object_class->finalize = gl_label_line_finalize;
 }
@@ -126,24 +132,21 @@ gl_label_line_new (glLabel *label)
 }
 
 /*****************************************************************************/
-/* Duplicate object.                                                         */
+/* Copy object contents.                                                     */
 /*****************************************************************************/
-glLabelLine *
-gl_label_line_dup (glLabelLine *lline,
-		   glLabel     *label)
+static void
+copy (glLabelObject *dst_object,
+      glLabelObject *src_object)
 {
-	glLabelLine *new_lline;
+	glLabelLine *lline     = (glLabelLine *)src_object;
+	glLabelLine *new_lline = (glLabelLine *)dst_object;
 	gdouble      line_width;
 	guint        line_color;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	new_lline = GL_LABEL_LINE(gl_label_line_new (label));
-
-	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lline), GL_LABEL_OBJECT(lline));
+	g_return_if_fail (new_lline && GL_IS_LABEL_LINE (new_lline));
 
 	line_width = gl_label_line_get_line_width (lline);
 	line_color = gl_label_line_get_line_color (lline);
@@ -152,8 +155,6 @@ gl_label_line_dup (glLabelLine *lline,
 	gl_label_line_set_line_color (new_lline, line_color);
 
 	gl_debug (DEBUG_LABEL, "END");
-
-	return new_lline;
 }
 
 
