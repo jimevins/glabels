@@ -37,6 +37,7 @@
 #include "label-barcode.h"
 #include "template.h"
 #include "xml-label.h"
+#include "xml-label-04.h"
 #include "util.h"
 
 #include "debug.h"
@@ -652,12 +653,16 @@ gl_xml_label_save (glLabel *label,
 	xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 	xmlFreeDoc (doc);
 	if (xml_ret == -1) {
+
 		g_warning (_("Problem saving xml file."));
 		*status = XML_LABEL_ERROR_SAVE_FILE;
-	}
 
-	gl_label_set_filename (label, filename);
-	gl_label_clear_modified (label);
+	} else {
+
+		gl_label_set_filename (label, filename);
+		gl_label_clear_modified (label);
+
+	}
 
 	gl_debug (DEBUG_XML, "END");
 }
