@@ -1,41 +1,34 @@
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  (LIBGLABELS) Template library for GLABELS
  *
  *  paper.c:  paper module
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2003, 2004  Jim Evins <evins@snaught.com>.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *  This file is part of the LIBGLABELS library.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Library General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Library General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  You should have received a copy of the GNU Library General Public
+ *  License along with this library; if not, write to the Free
+ *  Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+ *  MA 02111-1307, USA
  */
 
-#include <config.h>
+#include "libglabels-private.h"
 
 #include <string.h>
-#include <libgnome/libgnome.h>
 
 #include "paper.h"
 #include "xml-paper.h"
-#include "util.h"
-
-#include "debug.h"
-
-#define GL_DATA_DIR gnome_program_locate_file (NULL,\
-					 GNOME_FILE_DOMAIN_APP_DATADIR,\
-					 "glabels",\
-					 FALSE, NULL)
-
 
 /*===========================================*/
 /* Private types                             */
@@ -64,21 +57,77 @@ gl_paper_init (void)
 {
 	glPaper *other;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (papers) {
+		return; /* Already initialized. */
+	}
 
 	papers = read_papers ();
 
 	/* Create and append an "Other" entry. */
-	other = g_new0 (glPaper,1);
-	other->id   = g_strdup ("Other");
-	other->name = g_strdup (_("Other"));
+	other = gl_paper_new ("Other", _("Other"), 0.0, 0.0);
 	papers = g_list_append (papers, other);
-
-	gl_debug (DEBUG_PAPER, "END");
 }
 
 /*****************************************************************************/
-/* Get a list of valid page size ids                                         */
+/* Create a new paper structure.                                             */
+/*****************************************************************************/
+glPaper *
+gl_paper_new (gchar             *id,
+	      gchar             *name,
+	      gdouble            width,
+	      gdouble            height)
+{
+	glPaper *paper;
+
+	paper         = g_new0 (glPaper,1);
+	paper->id     = g_strdup (id);
+	paper->name   = g_strdup (name);
+	paper->width  = width;
+	paper->height = height;
+
+	return paper;
+}
+
+/*****************************************************************************/
+/* Copy a paper.                                                          */
+/*****************************************************************************/
+glPaper *gl_paper_dup (const glPaper *orig_paper)
+{
+	glPaper       *paper;
+
+	g_return_val_if_fail (orig_paper, NULL);
+
+	paper = g_new0 (glPaper,1);
+
+	paper->id     = g_strdup (orig_paper->id);
+	paper->name   = g_strdup (orig_paper->name);
+	paper->width  = orig_paper->width;
+	paper->height = orig_paper->height;
+
+	return paper;
+}
+
+/*****************************************************************************/
+/* Free up a paper.                                                       */
+/*****************************************************************************/
+void gl_paper_free (glPaper *paper)
+{
+
+	if ( paper != NULL ) {
+
+		g_free (paper->id);
+		paper->name = NULL;
+
+		g_free (paper->name);
+		paper->name = NULL;
+
+		g_free (paper);
+	}
+
+}
+
+/*****************************************************************************/
+/* Get a list of known page size ids                                         */
 /*****************************************************************************/
 GList *
 gl_paper_get_id_list (void)
@@ -87,14 +136,15 @@ gl_paper_get_id_list (void)
 	GList           *p;
 	glPaper         *paper;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (!papers) {
+		gl_paper_init ();
+	}
 
 	for ( p=papers; p != NULL; p=p->next ) {
 		paper = (glPaper *)p->data;
 		ids = g_list_append (ids, g_strdup (paper->id));
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return ids;
 }
 
@@ -102,25 +152,20 @@ gl_paper_get_id_list (void)
 /* Free a list of page size ids.                                             */
 /*****************************************************************************/
 void
-gl_paper_free_id_list (GList **ids)
+gl_paper_free_id_list (GList *ids)
 {
 	GList *p;
 
-	gl_debug (DEBUG_PAPER, "START");
-
-	for (p = *ids; p != NULL; p = p->next) {
+	for (p = ids; p != NULL; p = p->next) {
 		g_free (p->data);
 		p->data = NULL;
 	}
 
-	g_list_free (*ids);
-	*ids = NULL;
-
-	gl_debug (DEBUG_PAPER, "END");
+	g_list_free (ids);
 }
 
 /*****************************************************************************/
-/* Get a list of valid page size names                                       */
+/* Get a list of known page size names                                       */
 /*****************************************************************************/
 GList *
 gl_paper_get_name_list (void)
@@ -129,14 +174,15 @@ gl_paper_get_name_list (void)
 	GList           *p;
 	glPaper         *paper;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (!papers) {
+		gl_paper_init ();
+	}
 
 	for ( p=papers; p != NULL; p=p->next ) {
 		paper = (glPaper *)p->data;
 		names = g_list_append (names, g_strdup (paper->name));
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return names;
 }
 
@@ -144,21 +190,16 @@ gl_paper_get_name_list (void)
 /* Free a list of page size names.                                           */
 /*****************************************************************************/
 void
-gl_paper_free_name_list (GList **names)
+gl_paper_free_name_list (GList *names)
 {
 	GList *p;
 
-	gl_debug (DEBUG_PAPER, "START");
-
-	for (p = *names; p != NULL; p = p->next) {
+	for (p = names; p != NULL; p = p->next) {
 		g_free (p->data);
 		p->data = NULL;
 	}
 
-	g_list_free (*names);
-	*names = NULL;
-
-	gl_debug (DEBUG_PAPER, "END");
+	g_list_free (names);
 }
 
 /*****************************************************************************/
@@ -170,23 +211,35 @@ gl_paper_is_id_known (const gchar *id)
 	GList       *p;
 	glPaper     *paper;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (!papers) {
+		gl_paper_init ();
+	}
 
 	if (id == NULL) {
-		gl_debug (DEBUG_PAPER, "END (false, id=NULL)");
 		return FALSE;
 	}
 
 	for (p = papers; p != NULL; p = p->next) {
 		paper = (glPaper *) p->data;
 		if (g_strcasecmp (paper->id, id) == 0) {
-			gl_debug (DEBUG_PAPER, "END (true)");
 			return TRUE;
 		}
 	}
 
-	gl_debug (DEBUG_PAPER, "END (false)");
 	return FALSE;
+}
+
+/*****************************************************************************/
+/* Is page size id "Other?"                                                  */
+/*****************************************************************************/
+gboolean
+gl_paper_is_id_other (const gchar *id)
+{
+	if (id == NULL) {
+		return FALSE;
+	}
+
+	return (g_strcasecmp (id, "Other") == 0);
 }
 
 /*****************************************************************************/
@@ -198,7 +251,9 @@ gl_paper_from_id (const gchar *id)
 	GList       *p;
 	glPaper     *paper;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (!papers) {
+		gl_paper_init ();
+	}
 
 	if (id == NULL) {
 		/* If no id, return first paper as a default */
@@ -208,12 +263,10 @@ gl_paper_from_id (const gchar *id)
 	for (p = papers; p != NULL; p = p->next) {
 		paper = (glPaper *) p->data;
 		if (g_strcasecmp (paper->id, id) == 0) {
-			gl_debug (DEBUG_PAPER, "END");
 			return gl_paper_dup (paper);
 		}
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return NULL;
 }
 
@@ -226,7 +279,9 @@ gl_paper_from_name (const gchar *name)
 	GList       *p;
 	glPaper     *paper;
 
-	gl_debug (DEBUG_PAPER, "START");
+	if (!papers) {
+		gl_paper_init ();
+	}
 
 	if (name == NULL) {
 		/* If no name, return first paper as a default */
@@ -236,12 +291,10 @@ gl_paper_from_name (const gchar *name)
 	for (p = papers; p != NULL; p = p->next) {
 		paper = (glPaper *) p->data;
 		if (g_strcasecmp (paper->name, name) == 0) {
-			gl_debug (DEBUG_PAPER, "END");
 			return gl_paper_dup (paper);
 		}
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return NULL;
 }
 
@@ -251,18 +304,18 @@ gl_paper_from_name (const gchar *name)
 gchar *
 gl_paper_lookup_id_from_name (const gchar       *name)
 {
-	glPaper *paper;
+	glPaper *paper = NULL;
 	gchar   *id = NULL;
 
-	gl_debug (DEBUG_PAPER, "START");
+	g_return_val_if_fail (name, NULL);
 
 	paper = gl_paper_from_name (name);
 	if ( paper != NULL ) {
 		id = g_strdup (paper->id);
-		gl_paper_free (&paper);
+		gl_paper_free (paper);
+		paper = NULL;
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return id;
 }
 
@@ -272,64 +325,19 @@ gl_paper_lookup_id_from_name (const gchar       *name)
 gchar *
 gl_paper_lookup_name_from_id (const gchar       *id)
 {
-	glPaper *paper;
+	glPaper *paper = NULL;
 	gchar   *name = NULL;
 
-	gl_debug (DEBUG_PAPER, "START");
+	g_return_val_if_fail (id, NULL);
 
 	paper = gl_paper_from_id (id);
 	if ( paper != NULL ) {
 		name = g_strdup (paper->name);
-		gl_paper_free (&paper);
+		gl_paper_free (paper);
+		paper = NULL;
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return name;
-}
-
-/*****************************************************************************/
-/* Copy a paper.                                                          */
-/*****************************************************************************/
-glPaper *gl_paper_dup (const glPaper *orig_paper)
-{
-	glPaper       *paper;
-
-	gl_debug (DEBUG_PAPER, "START");
-
-	paper = g_new0 (glPaper,1);
-
-	paper->id     = g_strdup (orig_paper->id);
-	paper->name   = g_strdup (orig_paper->name);
-	paper->width  = orig_paper->width;
-	paper->height = orig_paper->height;
-
-	gl_debug (DEBUG_PAPER, "END");
-	return paper;
-}
-
-/*****************************************************************************/
-/* Free up a paper.                                                       */
-/*****************************************************************************/
-void gl_paper_free (glPaper **paper)
-{
-	GList *p;
-
-	gl_debug (DEBUG_PAPER, "START");
-
-	if ( *paper != NULL ) {
-
-		g_free ((*paper)->id);
-		(*paper)->name = NULL;
-
-		g_free ((*paper)->name);
-		(*paper)->name = NULL;
-
-		g_free (*paper);
-		*paper = NULL;
-
-	}
-
-	gl_debug (DEBUG_PAPER, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -338,21 +346,21 @@ void gl_paper_free (glPaper **paper)
 static GList *
 read_papers (void)
 {
-	gchar *home_data_dir = gl_util_get_home_data_dir ();
+	gchar *data_dir;
 	GList *papers = NULL;
 
-	gl_debug (DEBUG_PAPER, "START");
+	data_dir = GL_SYSTEM_DATA_DIR;
+	papers = read_paper_files_from_dir (papers, data_dir);
+	g_free (data_dir);
 
-	papers = read_paper_files_from_dir (papers, GL_DATA_DIR);
-	papers = read_paper_files_from_dir (papers, home_data_dir);
-
-	g_free (home_data_dir);
+	data_dir = GL_USER_DATA_DIR;
+	papers = read_paper_files_from_dir (papers, data_dir);
+	g_free (data_dir);
 
 	if (papers == NULL) {
 		g_warning (_("No paper files found!"));
 	}
 
-	gl_debug (DEBUG_PAPER, "END");
 	return papers;
 }
 
@@ -367,16 +375,19 @@ read_paper_files_from_dir (GList       *papers,
 	const gchar *filename, *extension;
 	gchar       *full_filename = NULL;
 	GError      *gerror = NULL;
+	GList       *new_papers = NULL;
 
-	gl_debug (DEBUG_PAPER, "START");
-
-	if (dirname == NULL)
+	if (dirname == NULL) {
 		return papers;
+	}
+
+	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
+		return papers;
+	}
 
 	dp = g_dir_open (dirname, 0, &gerror);
 	if (gerror != NULL) {
 	        g_warning ("cannot open data directory: %s", gerror->message );
-		gl_debug (DEBUG_PAPER, "END");
 		return papers;
 	}
 
@@ -391,10 +402,12 @@ read_paper_files_from_dir (GList       *papers,
 
 				full_filename =
 				    g_build_filename (dirname, filename, NULL);
-				papers =
-				    gl_xml_paper_read_papers_from_file (papers,
-									full_filename);
+				new_papers =
+				    gl_xml_paper_read_papers_from_file (full_filename);
 				g_free (full_filename);
+
+				papers = g_list_concat (papers, new_papers);
+				new_papers = NULL;
 
 			}
 
@@ -404,7 +417,32 @@ read_paper_files_from_dir (GList       *papers,
 
 	g_dir_close (dp);
 
-	gl_debug (DEBUG_PAPER, "END");
 	return papers;
 }
+
+/*****************************************************************************/
+/* Print known papers (for debugging purposes)                               */
+/*****************************************************************************/
+void
+gl_paper_print_known_papers (void)
+{
+	GList       *p;
+	glPaper     *paper;
+
+	if (!papers) {
+		gl_paper_init ();
+	}
+
+	g_print ("%s():\n", __FUNCTION__);
+	for (p = papers; p != NULL; p = p->next) {
+		paper = (glPaper *) p->data;
+
+		g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
+			 paper->id, paper->name, paper->width, paper->height);
+
+	}
+	g_print ("\n");
+
+}
+
 

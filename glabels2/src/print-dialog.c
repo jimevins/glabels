@@ -32,7 +32,6 @@
 #include "print-dialog.h"
 #include "print.h"
 #include "label.h"
-#include "template.h"
 
 #include "wdgt-print-copies.h"
 #include "wdgt-print-merge.h"

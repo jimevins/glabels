@@ -201,7 +201,7 @@ gl_label_finalize (GObject *object)
 
 	label = GL_LABEL (object);
 
-	gl_template_free (&label->private->template);
+	gl_template_free (label->private->template);
 
 	for (p = label->objects; p != NULL; p = p_next) {
 		p_next = p->next;	/* NOTE: p will be left dangling */
@@ -395,7 +395,7 @@ gl_label_set_template (glLabel    *label,
 	if ((label->private->template == NULL) ||
 	    (g_strcasecmp (template->name, label->private->template->name) != 0)) {
 
-		gl_template_free (&label->private->template);
+		gl_template_free (label->private->template);
 		label->private->template = gl_template_dup (template);
 
 		label->private->modified_flag = TRUE;
@@ -473,7 +473,8 @@ gl_label_get_size (glLabel *label,
 		   gdouble *w,
 		   gdouble *h)
 {
-	glTemplate *template;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -485,11 +486,12 @@ gl_label_get_size (glLabel *label,
 		*w = *h = 0;
 		return;
 	}
+	label_type = gl_template_get_first_label_type (template);
 
 	if (!label->private->rotate_flag) {
-		gl_template_get_label_size (template, w, h);
+		gl_template_get_label_size (label_type, w, h);
 	} else {
-		gl_template_get_label_size (template, h, w);
+		gl_template_get_label_size (label_type, h, w);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");

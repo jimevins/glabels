@@ -28,8 +28,6 @@
 
 G_BEGIN_DECLS
 
-gchar              *gl_util_get_home_data_dir     (void);
-
 gchar              *gl_util_add_extension         (const gchar       *orig_filename);
 gchar              *gl_util_remove_extension      (const gchar       *orig_filename);
 

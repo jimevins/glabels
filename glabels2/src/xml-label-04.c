@@ -31,7 +31,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
-#include "xml.h"
+#include <libglabels/xml.h>
 
 #include "debug.h"
 
@@ -157,7 +157,7 @@ xml04_parse_media_description (xmlNodePtr node,
 
 	gl_label_set_template (label, template);
 
-	gl_template_free (&template);
+	gl_template_free (template);
 	g_free (template_name);
 
 	gl_debug (DEBUG_XML, "END");

@@ -25,7 +25,7 @@
 #include "marshal.h"
 #include "prefs-model.h"
 #include "util.h"
-#include "paper.h"
+#include <libglabels/paper.h>
 #include "color.h"
 
 #include "debug.h"
@@ -544,7 +544,8 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	if ( paper == NULL ) {
 		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
 	} else {
-		gl_paper_free (&paper);
+		gl_paper_free (paper);
+		paper = NULL;
 	}
 
 	gl_debug (DEBUG_PREFS, "max_recents = %d", prefs_model->max_recents);

@@ -27,9 +27,9 @@
 
 #include "merge-init.h"
 #include "xml-label.h"
-#include "paper.h"
-#include "template.h"
 #include "print.h"
+#include <libglabels/paper.h>
+#include <libglabels/template.h>
 #include "util.h"
 
 /*============================================*/

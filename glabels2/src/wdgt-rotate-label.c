@@ -26,9 +26,9 @@
 
 #include "wdgt-rotate-label.h"
 #include "hig.h"
-#include "template.h"
 #include "marshal.h"
 #include "color.h"
+#include <libglabels/template.h>
 
 #include "debug.h"
 
@@ -259,16 +259,19 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 			    glTemplate  *template,
 			    gboolean     rotate_flag)
 {
-	gdouble           canvas_scale;
-	GnomeCanvasGroup *group = NULL;
-	GnomeCanvasItem  *label_item = NULL;
-	gdouble           m, m_canvas, w, h;
-	guint             line_color, fill_color;
+	const glTemplateLabelType *label_type;
+	gdouble                    canvas_scale;
+	GnomeCanvasGroup          *group = NULL;
+	GnomeCanvasItem           *label_item = NULL;
+	gdouble                    m, m_canvas, w, h;
+	guint                      line_color, fill_color;
 
 	/* Fetch our data from canvas */
 	label_item = g_object_get_data (G_OBJECT (canvas), "label_item");
 
-	gl_template_get_label_size (template, &w, &h);
+	label_type = gl_template_get_first_label_type (template);
+
+	gl_template_get_label_size (label_type, &w, &h);
 	m = MAX (w, h);
 	canvas_scale = MINI_PREVIEW_MAX_PIXELS / m;
 	m_canvas = MINI_PREVIEW_CANVAS_PIXELS / canvas_scale;
@@ -295,8 +298,8 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 	}
 
 	/* draw mini label outline */
-	switch (template->label.style) {
-	case GL_TEMPLATE_STYLE_RECT:
+	switch (label_type->shape) {
+	case GL_TEMPLATE_SHAPE_RECT:
 		label_item = gnome_canvas_item_new (group,
 						    gnome_canvas_rect_get_type(),
 						    "x1", -w / 2.0,
@@ -308,7 +311,7 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 						    "fill_color_rgba", fill_color,
 						    NULL);
 		break;
-	case GL_TEMPLATE_STYLE_ROUND:
+	case GL_TEMPLATE_SHAPE_ROUND:
 		label_item = gnome_canvas_item_new (group,
 						    gnome_canvas_ellipse_get_type(),
 						    "x1", -w / 2.0,
@@ -320,7 +323,7 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 						    "fill_color_rgba", fill_color,
 						    NULL);
 		break;
-	case GL_TEMPLATE_STYLE_CD:
+	case GL_TEMPLATE_SHAPE_CD:
 		if ( w == h ) {
 			label_item = gnome_canvas_item_new (group,
 							    gnome_canvas_ellipse_get_type(),
@@ -334,7 +337,7 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 							    NULL);
 		} else {
 			label_item = cdbc_item (group,
-						w, h, template->label.cd.r1,
+						w, h, label_type->size.cd.r1,
 						1, line_color, fill_color);
 		}
 		break;
@@ -383,12 +386,15 @@ void
 gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_select,
 					gchar             *name)
 {
-	glTemplate *template;
-	gdouble     raw_w, raw_h;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    raw_w, raw_h;
 
-	template = gl_template_from_name (name);
+	template   = gl_template_from_name (name);
+	label_type = gl_template_get_first_label_type (template);
+
 	rotate_select->template = template;
-	gl_template_get_label_size (template, &raw_w, &raw_h);
+	gl_template_get_label_size (label_type, &raw_w, &raw_h);
 
 	gtk_widget_set_sensitive (rotate_select->rotate_check,
 				  (raw_w != raw_h));
@@ -411,10 +417,10 @@ cdbc_item (GnomeCanvasGroup *group,
 	   guint             line_color,
 	   guint             fill_color)
 {
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	gdouble            theta1, theta2;
-	GnomeCanvasItem   *item;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	gdouble                    theta1, theta2;
+	GnomeCanvasItem           *item;
 
 	theta1 = (180.0/G_PI) * acos (w / (2.0*r));
 	theta2 = (180.0/G_PI) * asin (h / (2.0*r));

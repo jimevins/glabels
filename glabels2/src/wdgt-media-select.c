@@ -24,12 +24,12 @@
 
 #include "wdgt-media-select.h"
 #include "hig.h"
-#include "template.h"
 #include "wdgt-mini-preview.h"
 #include "prefs.h"
 #include "util.h"
-#include "paper.h"
 #include "marshal.h"
+#include <libglabels/paper.h>
+#include <libglabels/template.h>
 
 #include "debug.h"
 
@@ -74,6 +74,9 @@ static void prefs_changed_cb                   (glPrefsModel           *gl_prefs
 
 static void details_update                     (glWdgtMediaSelect      *media_select,
 						gchar                  *name);
+
+static gchar *get_layout_desc                  (const glTemplate       *template);
+static gchar *get_label_size_desc              (const glTemplate       *template);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -213,7 +216,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	wcombo = gtk_combo_new ();
 	page_sizes = gl_paper_get_name_list ();
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), page_sizes);
-	gl_paper_free_name_list (&page_sizes);
+	gl_paper_free_name_list (page_sizes);
 	media_select->page_size_entry = GTK_COMBO (wcombo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (media_select->page_size_entry),
 				FALSE);
@@ -241,7 +244,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 			    template_names->data);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
 				media_select->template_combo);
-	gl_template_free_name_list (&template_names);
+	gl_template_free_name_list (template_names);
 
 	whbox = gl_hig_hbox_new ();
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
@@ -360,7 +363,7 @@ page_size_entry_changed_cb (GtkEntry *entry,
 					       template_names);
 		gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
 				    template_names->data);
-		gl_template_free_name_list (&template_names);
+		gl_template_free_name_list (template_names);
 		g_free (page_size_id);
 	}
 	g_free (page_size_name);
@@ -451,15 +454,15 @@ details_update (glWdgtMediaSelect *media_select,
 	gtk_label_set_text (GTK_LABEL (media_select->sheet_size_label),
 			    template->page_size);
 
-	text = gl_template_get_layout_desc (template);
+	text = get_layout_desc (template);
 	gtk_label_set_text (GTK_LABEL (media_select->number_label), text);
 	g_free (text);
 
-	text = gl_template_get_label_size_desc (template);
+	text = get_label_size_desc (template);
 	gtk_label_set_text (GTK_LABEL (media_select->label_size_label), text);
 	g_free (text);
 
-	gl_template_free( &template );
+	gl_template_free (template);
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
@@ -555,3 +558,103 @@ gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Get a description of the layout and number of labels.          */
+/*--------------------------------------------------------------------------*/
+static gchar *
+get_layout_desc (const glTemplate *template)
+{
+	const glTemplateLabelType *label_type;
+	gint                       n_labels;
+	glTemplateLayout          *layout;
+	gchar                     *string;
+
+	label_type = gl_template_get_first_label_type (template);
+
+	n_labels = gl_template_get_n_labels (label_type);
+
+	if ( label_type->layouts->next == NULL ) {
+		layout = (glTemplateLayout *)label_type->layouts->data;
+		string = g_strdup_printf (_("%d x %d  (%d per sheet)"),
+					  layout->nx, layout->ny,
+					  n_labels);
+	} else {
+		string = g_strdup_printf (_("%d per sheet"),
+					  n_labels);
+	}
+
+	return string;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Get label size description.                                    */ 
+/*--------------------------------------------------------------------------*/
+static gchar *
+get_label_size_desc (const glTemplate *template)
+{
+	glPrefsUnits               units;
+	const gchar               *units_string;
+	gdouble                    units_per_point;
+	const glTemplateLabelType *label_type;
+	gchar                     *string = NULL;
+
+	units           = gl_prefs_get_units ();
+	units_string    = gl_prefs_get_units_string ();
+	units_per_point = gl_prefs_get_units_per_point ();
+
+	label_type = gl_template_get_first_label_type (template);
+
+	switch (label_type->shape) {
+	case GL_TEMPLATE_SHAPE_RECT:
+		if ( units == GL_UNITS_INCHES ) {
+			gchar *xstr, *ystr;
+
+			xstr = gl_util_fraction (label_type->size.rect.w*units_per_point);
+			ystr = gl_util_fraction (label_type->size.rect.h*units_per_point);
+			string = g_strdup_printf (_("%s x %s %s"),
+						  xstr, ystr, units_string);
+			g_free (xstr);
+			g_free (ystr);
+		} else {
+			string = g_strdup_printf (_("%.5g x %.5g %s"),
+						  label_type->size.rect.w*units_per_point,
+						  label_type->size.rect.h*units_per_point,
+						  units_string);
+		}
+		break;
+	case GL_TEMPLATE_SHAPE_ROUND:
+		if ( units == GL_UNITS_INCHES ) {
+			gchar *dstr;
+
+			dstr = gl_util_fraction (2.0*label_type->size.round.r*units_per_point);
+			string = g_strdup_printf (_("%s %s diameter"),
+						  dstr, units_string);
+			g_free (dstr);
+		} else {
+			string = g_strdup_printf (_("%.5g %s diameter"),
+						  2.0*label_type->size.round.r*units_per_point,
+						  units_string);
+		}
+		break;
+	case GL_TEMPLATE_SHAPE_CD:
+		if ( units == GL_UNITS_INCHES ) {
+			gchar *dstr;
+
+			dstr = gl_util_fraction (2.0*label_type->size.cd.r1*units_per_point);
+			string = g_strdup_printf (_("%s %s diameter"),
+						  dstr, units_string);
+			g_free (dstr);
+		} else {
+			string = g_strdup_printf (_("%.5g %s diameter"),
+						  2.0*label_type->size.cd.r1*units_per_point,
+						  units_string);
+		}
+		break;
+	default:
+		break;
+	}
+
+	return string;
+}
+

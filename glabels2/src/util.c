@@ -30,23 +30,7 @@
 
 #include "util.h"
 
-#define FRAC_DELTA 0.00005
-
-
-/****************************************************************************/
-/* Get '~/.glabels' directory path.                                         */
-/****************************************************************************/
-gchar *
-gl_util_get_home_data_dir (void)
-{
-        gchar *dir = gnome_util_prepend_user_home (".glabels");
- 
-        /* Try to create ~/.glabels directory.  If it exists, no problem. */
-        mkdir (dir, 0775);
- 
-        return dir;
-}
-
+#define FRAC_EPSILON 0.00005
 
 
 /****************************************************************************/
@@ -125,7 +109,7 @@ gl_util_fraction (gdouble x)
 	for ( i=0; denom[i] != 0.0; i++ ) {
 		product = x * denom[i];
 		remainder = fabs(product - ((gint)(product+0.5)));
-		if ( remainder < FRAC_DELTA ) break;
+		if ( remainder < FRAC_EPSILON ) break;
 	}
 
 	if ( denom[i] == 0.0 ) {

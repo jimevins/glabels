@@ -35,7 +35,7 @@
 #include "label-image.h"
 #include "label-barcode.h"
 #include "bc.h"
-#include "template.h"
+#include <libglabels/template.h>
 #include "color.h"
 
 #include "debug.h"
@@ -177,15 +177,17 @@ gl_print_simple (GnomePrintJob    *job,
 		 gint              last,
 		 glPrintFlags     *flags)
 {
-	PrintInfo *pi;
-	gint i_sheet, i_label;
-	glTemplateOrigin *origins;
+	PrintInfo                 *pi;
+	const glTemplateLabelType *label_type;
+	gint                       i_sheet, i_label;
+	glTemplateOrigin          *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	pi = print_info_new (job, label);
+	pi         = print_info_new (job, label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
-	origins = gl_template_get_origins (pi->template);
+	origins = gl_template_get_origins (label_type);
 
 	for (i_sheet = 0; i_sheet < n_sheets; i_sheet++) {
 
@@ -222,13 +224,14 @@ gl_print_merge_collated (GnomePrintJob    *job,
 			 gint              first,
 			 glPrintFlags     *flags)
 {
-	glMerge                *merge;
-	const GList            *record_list;
-	PrintInfo              *pi;
-	gint                    i_sheet, i_label, n_labels_per_page, i_copy;
-	glMergeRecord          *record;
-	GList                  *p;
-	glTemplateOrigin       *origins;
+	glMerge                   *merge;
+	const GList               *record_list;
+	PrintInfo                 *pi;
+	const glTemplateLabelType *label_type;
+	gint                       i_sheet, i_label, n_labels_per_page, i_copy;
+	glMergeRecord             *record;
+	GList                     *p;
+	glTemplateOrigin          *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -236,9 +239,10 @@ gl_print_merge_collated (GnomePrintJob    *job,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (job, label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
-	n_labels_per_page = gl_template_get_n_labels (pi->template);
-	origins = gl_template_get_origins (pi->template);
+	n_labels_per_page = gl_template_get_n_labels (label_type);
+	origins = gl_template_get_origins (label_type);
 
 	i_sheet = 0;
 	i_label = first - 1;
@@ -292,13 +296,14 @@ gl_print_merge_uncollated (GnomePrintJob    *job,
 			   gint              first,
 			   glPrintFlags     *flags)
 {
-	glMerge                *merge;
-	const GList            *record_list;
-	PrintInfo              *pi;
-	gint                    i_sheet, i_label, n_labels_per_page, i_copy;
-	glMergeRecord          *record;
-	GList                  *p;
-	glTemplateOrigin       *origins;
+	glMerge                   *merge;
+	const GList               *record_list;
+	PrintInfo                 *pi;
+	const glTemplateLabelType *label_type;
+	gint                       i_sheet, i_label, n_labels_per_page, i_copy;
+	glMergeRecord             *record;
+	GList                     *p;
+	glTemplateOrigin          *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -306,9 +311,10 @@ gl_print_merge_uncollated (GnomePrintJob    *job,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (job, label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
-	n_labels_per_page = gl_template_get_n_labels (pi->template);
-	origins = gl_template_get_origins (pi->template);
+	n_labels_per_page = gl_template_get_n_labels (label_type);
+	origins = gl_template_get_origins (label_type);
 
 	i_sheet = 0;
 	i_label = first - 1;
@@ -364,23 +370,25 @@ gl_print_batch (GnomePrintJob    *job,
 		gint              n_copies,
 		glPrintFlags     *flags)
 {
-	gint n_per_page;
-	glMerge *merge;
-	glTemplate *template;
+	glMerge                   *merge;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gint                       n_per_page;
 	
 	gl_debug (DEBUG_PRINT, "START");
 
 	merge = gl_label_get_merge (label);
 	template = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
 	if ( merge == NULL ) {
-		n_per_page = gl_template_get_n_labels(template);
+		n_per_page = gl_template_get_n_labels(label_type);
 
 		gl_print_simple (job, label, n_sheets, 1, n_per_page, flags);
 	} else {
 		gl_print_merge_collated (job, label, n_copies, 1, flags);
 	}
-	gl_template_free (&template);
+	gl_template_free (template);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -443,7 +451,8 @@ print_info_free (PrintInfo **pi)
 {
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_template_free (&(*pi)->template);
+	gl_template_free ((*pi)->template);
+	(*pi)->template = NULL;
 
 	gnome_print_context_close ((*pi)->pc);
 
@@ -495,16 +504,19 @@ print_page_end (PrintInfo *pi)
 static void
 print_crop_marks (PrintInfo *pi)
 {
-	gdouble           w, h, page_w, page_h;
-	GList            *p;
-	glTemplateLayout *layout;
-	gdouble           xmin, ymin, xmax, ymax, dx, dy;
-	gdouble           x1, y1, x2, y2, x3, y3, x4, y4;
-	gint              ix, iy, nx, ny;
+	const glTemplateLabelType *label_type;
+	gdouble                    w, h, page_w, page_h;
+	GList                     *p;
+	glTemplateLayout          *layout;
+	gdouble                    xmin, ymin, xmax, ymax, dx, dy;
+	gdouble                    x1, y1, x2, y2, x3, y3, x4, y4;
+	gint                       ix, iy, nx, ny;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gl_template_get_label_size (pi->template, &w, &h);
+	label_type = gl_template_get_first_label_type (pi->template);
+
+	gl_template_get_label_size (label_type, &w, &h);
 
 	page_w = pi->page_width;
 	page_h = pi->page_height;
@@ -513,7 +525,7 @@ print_crop_marks (PrintInfo *pi)
 	gnome_print_setopacity (pi->pc, 1.0);
 	gnome_print_setlinewidth (pi->pc, 0.25);
 
-	for (p=pi->template->label.any.layouts; p != NULL; p=p->next) {
+	for (p=label_type->layouts; p != NULL; p=p->next) {
 
 		layout = (glTemplateLayout *)p->data;
 
@@ -603,12 +615,12 @@ print_label (PrintInfo     *pi,
 	     gboolean       outline_flag,
 	     gboolean       reverse_flag)
 {
-	gdouble width, height;
-	glTemplate *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    width, height;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	template = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
 	gl_label_get_size (label, &width, &height);
 
@@ -635,8 +647,6 @@ print_label (PrintInfo     *pi,
 	clip_punchouts (pi, label);
 
 	gnome_print_grestore (pi->pc);
-
-	gl_template_free (&template);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1093,23 +1103,23 @@ static void
 draw_outline (PrintInfo *pi,
 	      glLabel   *label)
 {
-	gdouble w, h, r;
-	gdouble r1, r2;
-	glTemplate *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    w, h, r;
+	gdouble                    r1, r2;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	template = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
 	gnome_print_setrgbcolor (pi->pc, 0.25, 0.25, 0.25);
 	gnome_print_setopacity (pi->pc, 1.0);
 	gnome_print_setlinewidth (pi->pc, 0.25);
 
-	switch (template->label.style) {
+	switch (label_type->shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
+	case GL_TEMPLATE_SHAPE_RECT:
 		gl_label_get_size (label, &w, &h);
-		r = template->label.rect.r;
+		r = label_type->size.rect.r;
 		if (r == 0.0) {
 			/* simple rectangle */
 			create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
@@ -1121,18 +1131,18 @@ draw_outline (PrintInfo *pi,
 		gnome_print_stroke (pi->pc);
 		break;
 
-	case GL_TEMPLATE_STYLE_ROUND:
+	case GL_TEMPLATE_SHAPE_ROUND:
 		/* Round style */
-		r1 = template->label.round.r;
+		r1 = label_type->size.round.r;
 		create_ellipse_path (pi->pc, r1, r1, r1, r1);
 		gnome_print_stroke (pi->pc);
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
-		if ((template->label.cd.h == 0) && (template->label.cd.w == 0)) {
+	case GL_TEMPLATE_SHAPE_CD:
+		if ((label_type->size.cd.h == 0) && (label_type->size.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
-			r1 = template->label.cd.r1;
-			r2 = template->label.cd.r2;
+			r1 = label_type->size.cd.r1;
+			r2 = label_type->size.cd.r2;
 			create_ellipse_path (pi->pc, r1, r1, r1, r1);
 			gnome_print_stroke (pi->pc);
 			create_ellipse_path (pi->pc, r1, r1, r2, r2);
@@ -1140,8 +1150,8 @@ draw_outline (PrintInfo *pi,
 		} else {
 			/* Business Card CD style, clipped round label w/ hole */
 			gl_label_get_size (label, &w, &h);
-			r1 = template->label.cd.r1;
-			r2 = template->label.cd.r2;
+			r1 = label_type->size.cd.r1;
+			r2 = label_type->size.cd.r2;
 			create_clipped_circle_path (pi->pc, w/2, h/2, w, h, r1);
 			gnome_print_stroke (pi->pc);
 			create_ellipse_path (pi->pc, w/2, h/2, r2, r2);
@@ -1154,8 +1164,6 @@ draw_outline (PrintInfo *pi,
 		break;
 	}
 
-	gl_template_free (&template);
-
 	gl_debug (DEBUG_PRINT, "END");
 }
 
@@ -1166,21 +1174,21 @@ static void
 clip_to_outline (PrintInfo *pi,
 		 glLabel   *label)
 {
-	gdouble w, h, r;
-	gdouble r1;
-	gdouble waste;
-	glTemplate *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    w, h, r;
+	gdouble                    r1;
+	gdouble                    waste;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	template = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
-	switch (template->label.style) {
+	switch (label_type->shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
+	case GL_TEMPLATE_SHAPE_RECT:
 		gl_label_get_size (label, &w, &h);
-		r = template->label.rect.r;
-		waste = template->label.rect.waste;
+		r = label_type->size.rect.r;
+		waste = label_type->waste;
 		if (r == 0.0) {
 			/* simple rectangle */
 			create_rectangle_path (pi->pc,
@@ -1193,23 +1201,23 @@ clip_to_outline (PrintInfo *pi,
 		gnome_print_clip (pi->pc);
 		break;
 
-	case GL_TEMPLATE_STYLE_ROUND:
-		r1 = template->label.round.r;
-		waste = template->label.round.waste;
+	case GL_TEMPLATE_SHAPE_ROUND:
+		r1 = label_type->size.round.r;
+		waste = label_type->waste;
 		create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
 		gnome_print_clip (pi->pc);
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
-		waste = template->label.cd.waste;
-		if ((template->label.cd.h == 0) && (template->label.cd.w == 0)) {
+	case GL_TEMPLATE_SHAPE_CD:
+		waste = label_type->waste;
+		if ((label_type->size.cd.h == 0) && (label_type->size.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
-			r1 = template->label.cd.r1;
+			r1 = label_type->size.cd.r1;
 			create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
 		} else {
 			/* Business Card CD style, clipped round label w/ hole */
 			gl_label_get_size (label, &w, &h);
-			r1 = template->label.cd.r1;
+			r1 = label_type->size.cd.r1;
 			create_clipped_circle_path (pi->pc,
 						    w/2, h/2,
 						    w+2*waste, h+2*waste,
@@ -1222,8 +1230,6 @@ clip_to_outline (PrintInfo *pi,
 		g_warning ("Unknown template label style");
 		break;
 	}
-
-	gl_template_free (&template);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1239,24 +1245,24 @@ static void
 clip_punchouts (PrintInfo *pi,
 		glLabel   *label)
 {
-	gdouble w, h, r2;
-	gdouble waste;
-	glTemplate *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    w, h, r2;
+	gdouble                    waste;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	template = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (pi->template);
 
-	switch (template->label.style) {
+	switch (label_type->shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
-	case GL_TEMPLATE_STYLE_ROUND:
+	case GL_TEMPLATE_SHAPE_RECT:
+	case GL_TEMPLATE_SHAPE_ROUND:
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
+	case GL_TEMPLATE_SHAPE_CD:
 		gl_label_get_size (label, &w, &h);
-		waste = template->label.cd.waste;
-		r2    = template->label.cd.r2;
+		waste = label_type->waste;
+		r2    = label_type->size.cd.r2;
 		create_ellipse_path (pi->pc, w/2, h/2, r2-waste, r2-waste);
 		gnome_print_setrgbcolor (pi->pc, 1.0, 1.0, 1.0);
 		gnome_print_setopacity (pi->pc, 1.0);
@@ -1267,8 +1273,6 @@ clip_punchouts (PrintInfo *pi,
 		g_warning ("Unknown template label style");
 		break;
 	}
-
-	gl_template_free (&template);
 
 	gl_debug (DEBUG_PRINT, "END");
 }

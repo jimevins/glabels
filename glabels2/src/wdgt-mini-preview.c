@@ -285,7 +285,7 @@ void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 
 	gl_wdgt_mini_preview_set_template (preview, template);
 
-	gl_template_free( &template );
+	gl_template_free (template);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
@@ -357,21 +357,24 @@ static GList *
 mini_outline_list_new (GnomeCanvas       *canvas,
 		       const glTemplate  *template)
 {
-	GnomeCanvasGroup      *group = NULL;
-	GnomeCanvasItem       *item = NULL;
-	GList                 *list = NULL;
-	gint                   i, n_labels;
-	glTemplateOrigin      *origins;
-	gdouble                x1, y1, x2, y2, w, h;
+	GnomeCanvasGroup          *group = NULL;
+	const glTemplateLabelType *label_type;
+	GnomeCanvasItem           *item = NULL;
+	GList                     *list = NULL;
+	gint                       i, n_labels;
+	glTemplateOrigin          *origins;
+	gdouble                    x1, y1, x2, y2, w, h;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	group = gnome_canvas_root (canvas);
 
+	label_type = gl_template_get_first_label_type (template);
+
 	/* draw mini label outlines */
-	n_labels = gl_template_get_n_labels (template);
-	origins  = gl_template_get_origins (template);
-	gl_template_get_label_size (template, &w, &h);
+	n_labels = gl_template_get_n_labels (label_type);
+	origins  = gl_template_get_origins (label_type);
+	gl_template_get_label_size (label_type, &w, &h);
 	for ( i=0; i < n_labels; i++ ) {
 
 		x1 = origins[i].x;
@@ -379,8 +382,8 @@ mini_outline_list_new (GnomeCanvas       *canvas,
 		x2 = x1 + w;
 		y2 = y1 + h;
 
-		switch (template->label.style) {
-		case GL_TEMPLATE_STYLE_RECT:
+		switch (label_type->shape) {
+		case GL_TEMPLATE_SHAPE_RECT:
 			item = gnome_canvas_item_new (group,
 						      gnome_canvas_rect_get_type(),
 						      "x1", x1,
@@ -392,7 +395,7 @@ mini_outline_list_new (GnomeCanvas       *canvas,
 						      "fill_color", "white",
 						      NULL);
 			break;
-		case GL_TEMPLATE_STYLE_ROUND:
+		case GL_TEMPLATE_SHAPE_ROUND:
 			item = gnome_canvas_item_new (group,
 						      gnome_canvas_ellipse_get_type(),
 						      "x1", x1,
@@ -404,7 +407,7 @@ mini_outline_list_new (GnomeCanvas       *canvas,
 						      "fill_color", "white",
 						      NULL);
 			break;
-		case GL_TEMPLATE_STYLE_CD:
+		case GL_TEMPLATE_SHAPE_CD:
 			if ( w == h ) {
 				item = gnome_canvas_item_new (group,
 							      gnome_canvas_ellipse_get_type(),
@@ -646,14 +649,17 @@ cdbc_item (GnomeCanvasGroup *group,
 	   gdouble           y1,
 	   const glTemplate *template)
 {
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	gdouble            theta1, theta2;
-	gdouble            x0, y0, w, h, r;
-	GnomeCanvasItem   *item;
+	const glTemplateLabelType *label_type;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	gdouble                    theta1, theta2;
+	gdouble                    x0, y0, w, h, r;
+	GnomeCanvasItem           *item;
 
-	gl_template_get_label_size (template, &w, &h);
-	r = template->label.cd.r1;
+	label_type = gl_template_get_first_label_type (template);
+
+	gl_template_get_label_size (label_type, &w, &h);
+	r = label_type->size.cd.r1;
 	x0 = x1 + (w/2.0);
 	y0 = y1 + (h/2.0);
 

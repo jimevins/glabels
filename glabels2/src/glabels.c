@@ -29,8 +29,8 @@
 #include "splash.h"
 #include "stock.h"
 #include "merge-init.h"
-#include "paper.h"
-#include "template.h"
+#include <libglabels/paper.h>
+#include <libglabels/template.h>
 #include "prefs.h"
 #include "debug.h"
 #include "window.h"

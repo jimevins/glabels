@@ -36,13 +36,13 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
-#include "paper.h"
-#include "template.h"
 #include "base64.h"
 #include "xml-label.h"
 #include "xml-label-04.h"
-#include "xml-template.h"
-#include "xml.h"
+#include <libglabels/paper.h>
+#include <libglabels/template.h>
+#include <libglabels/xml-template.h>
+#include <libglabels/xml.h>
 #include "util.h"
 
 #include "debug.h"
@@ -101,11 +101,11 @@ static glTemplate    *xml191_parse_sheet          (xmlNodePtr        node);
 static void           xml191_parse_label          (xmlNodePtr        label_node,
 						   glTemplate       *template);
 
-static void           xml191_parse_layout         (xmlNodePtr        layout_node,
-						   glTemplate       *template);
+static void           xml191_parse_layout         (xmlNodePtr           layout_node,
+						   glTemplateLabelType *label_type);
 
-static void           xml191_parse_markup         (xmlNodePtr        markup_node,
-						   glTemplate       *template);
+static void           xml191_parse_markup         (xmlNodePtr           markup_node,
+						   glTemplateLabelType *label_type);
 
 static void           xml191_parse_alias          (xmlNodePtr        alias_node,
 						   glTemplate       *template);
@@ -153,7 +153,7 @@ gl_xml_label_191_parse (xmlNodePtr        root,
 			}
 			gl_template_register (template);
 			gl_label_set_template (label, template);
-			gl_template_free (&template);
+			gl_template_free (template);
 		} else if (xmlStrEqual (node->name, "Objects")) {
 			xml191_parse_objects (node, label);
 		} else if (xmlStrEqual (node->name, "Merge_Fields")) {
@@ -657,24 +657,21 @@ xml191_parse_pixdata (xmlNodePtr  node,
 static glTemplate *
 xml191_parse_sheet (xmlNodePtr sheet_node)
 {
+	gchar                 *name, *description, *page_size;
+	gdouble                page_width, page_height;
 	glTemplate            *template;
 	xmlNodePtr             node;
-	gchar                 *description;
 	glPaper               *paper;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	template = g_new0 (glTemplate, 1);
+	name  = xmlGetProp (sheet_node, "name");
 
-	template->name  = xmlGetProp (sheet_node, "name");
-	template->alias = g_list_append (template->alias, g_strdup (template->name));
-	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name);
+	page_size = xmlGetProp (sheet_node, "size");
+	if (gl_paper_is_id_other (page_size)) {
 
-	template->page_size = xmlGetProp (sheet_node, "size");
-	if (xmlStrEqual (template->page_size, "Other")) {
-
-		template->page_width = gl_xml_get_prop_length (sheet_node, "width", 0);
-		template->page_height = gl_xml_get_prop_length (sheet_node, "height", 0);
+		page_width = gl_xml_get_prop_length (sheet_node, "width", 0);
+		page_height = gl_xml_get_prop_length (sheet_node, "height", 0);
 
 	} else {
 		paper = gl_paper_from_id (template->page_size);
@@ -688,13 +685,13 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 			template->page_size = g_strdup (paper->id);
 		}
 		if (paper != NULL) {
-			template->page_width  = paper->width;
-			template->page_height = paper->height;
+			page_width  = paper->width;
+			page_height = paper->height;
 		} else {
 			g_warning (_("Unknown page size id or name \"%s\""),
-				   template->page_size);
+				   page_size);
 		}
-		gl_paper_free (&paper);
+		gl_paper_free (paper);
 	}
 
 	description = xmlGetProp (sheet_node, "_description");
@@ -703,6 +700,9 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 	} else {
 		template->description = xmlGetProp (sheet_node, "description");
 	}
+
+	template = gl_template_new (name, description,
+				    page_size, page_width, page_height);
 
 	for (node = sheet_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -717,6 +717,10 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 		}
 	}
 
+	g_free (name);
+	g_free (description);
+	g_free (page_size);
+
 	gl_debug (DEBUG_TEMPLATE, "END");
 
 	return template;
@@ -729,41 +733,50 @@ static void
 xml191_parse_label (xmlNodePtr  label_node,
 		    glTemplate *template)
 {
-	xmlNodePtr  node;
-	gchar      *style;
+	gchar                *style;
+	glTemplateLabelShape  shape;
+	gdouble               w, h, r, r1, r2;
+	glTemplateLabelType  *label_type;
+	xmlNodePtr            node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	style = xmlGetProp (label_node, "style");
 	if (xmlStrEqual (style, "rectangle")) {
-		template->label.style = GL_TEMPLATE_STYLE_RECT;
+		shape = GL_TEMPLATE_SHAPE_RECT;
 	} else if (xmlStrEqual (style, "round")) {
-		template->label.style = GL_TEMPLATE_STYLE_ROUND;
+		shape = GL_TEMPLATE_SHAPE_ROUND;
 	} else if (xmlStrEqual (style, "cd")) {
-		template->label.style = GL_TEMPLATE_STYLE_CD;
+		shape = GL_TEMPLATE_SHAPE_CD;
 	} else {
-		template->label.style = GL_TEMPLATE_STYLE_RECT;
+		shape = GL_TEMPLATE_SHAPE_RECT;
 		g_warning ("Unknown label style in template");
 	}
 	g_free (style);
 
-	switch (template->label.style) {
+	switch (shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
-		template->label.rect.w = gl_xml_get_prop_length (label_node, "width", 0);
-		template->label.rect.h = gl_xml_get_prop_length (label_node, "height", 0);
-		template->label.rect.r = gl_xml_get_prop_length (label_node, "round", 0);
+	case GL_TEMPLATE_SHAPE_RECT:
+		w = gl_xml_get_prop_length (label_node, "width", 0);
+		h = gl_xml_get_prop_length (label_node, "height", 0);
+		r = gl_xml_get_prop_length (label_node, "round", 0);
+		label_type =
+			gl_template_rect_label_type_new ("0", w, h, r, 0.0);
 		break;
 
-	case GL_TEMPLATE_STYLE_ROUND:
-		template->label.round.r = gl_xml_get_prop_length (label_node, "radius", 0);
+	case GL_TEMPLATE_SHAPE_ROUND:
+		r = gl_xml_get_prop_length (label_node, "round", 0);
+		label_type =
+			gl_template_round_label_type_new ("0", r, 0.0);
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
-		template->label.cd.r1 = gl_xml_get_prop_length (label_node, "radius", 0);
-		template->label.cd.r2 = gl_xml_get_prop_length (label_node, "hole", 0);
-		template->label.cd.w  = gl_xml_get_prop_length (label_node, "width", 0);
-		template->label.cd.h  = gl_xml_get_prop_length (label_node, "height", 0);
+	case GL_TEMPLATE_SHAPE_CD:
+		r1 = gl_xml_get_prop_length (label_node, "radius", 0);
+		r2 = gl_xml_get_prop_length (label_node, "hole", 0);
+		w  = gl_xml_get_prop_length (label_node, "width", 0);
+		h  = gl_xml_get_prop_length (label_node, "height", 0);
+		label_type =
+			gl_template_cd_label_type_new ("0", r1, r2, w, h, 0.0);
 		break;
 
 	default:
@@ -771,12 +784,14 @@ xml191_parse_label (xmlNodePtr  label_node,
 
 	}
 
+	gl_template_add_label_type (template, label_type);
+
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (xmlStrEqual (node->name, "Layout")) {
-			xml191_parse_layout (node, template);
+			xml191_parse_layout (node, label_type);
 		} else if (xmlStrEqual (node->name, "Markup")) {
-			xml191_parse_markup (node, template);
+			xml191_parse_markup (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
@@ -789,8 +804,8 @@ xml191_parse_label (xmlNodePtr  label_node,
 /* PRIVATE.  Parse XML Sheet->Label->Layout Node.                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml191_parse_layout (xmlNodePtr  layout_node,
-		     glTemplate *template)
+xml191_parse_layout (xmlNodePtr           layout_node,
+		     glTemplateLabelType *label_type)
 {
 	gint        nx, ny;
 	gdouble     x0, y0, dx, dy;
@@ -814,9 +829,8 @@ xml191_parse_layout (xmlNodePtr  layout_node,
 		}
 	}
 
-	template->label.any.layouts =
-		g_list_append (template->label.any.layouts,
-			       gl_template_layout_new (nx, ny, x0, y0, dx, dy));
+	gl_template_add_layout (label_type,
+				gl_template_layout_new (nx, ny, x0, y0, dx, dy));
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -826,7 +840,7 @@ xml191_parse_layout (xmlNodePtr  layout_node,
 /*--------------------------------------------------------------------------*/
 static void
 xml191_parse_markup (xmlNodePtr  markup_node,
-		     glTemplate *template)
+		     glTemplateLabelType *label_type)
 {
 	gchar      *type;
 	gdouble     size;
@@ -840,9 +854,8 @@ xml191_parse_markup (xmlNodePtr  markup_node,
 
 		size = gl_xml_get_prop_length (markup_node, "size", 0);
 
-		template->label.any.markups =
-			g_list_append (template->label.any.markups,
-				       gl_template_markup_margin_new (size));
+		gl_template_add_markup (label_type,
+					gl_template_markup_margin_new (size));
 
 	} else if (xmlStrEqual (type, "line")) {
 
@@ -851,9 +864,8 @@ xml191_parse_markup (xmlNodePtr  markup_node,
 		x2 = gl_xml_get_prop_length (markup_node, "x2", 0);
 		y2 = gl_xml_get_prop_length (markup_node, "y2", 0);
 
-		template->label.any.markups =
-			g_list_append (template->label.any.markups,
-				       gl_template_markup_line_new (x1, y1, x2, y2));
+		gl_template_add_markup (label_type,
+					gl_template_markup_line_new (x1, y1, x2, y2));
 	}
 	g_free (type);
 
@@ -874,10 +886,13 @@ static void
 xml191_parse_alias (xmlNodePtr  alias_node,
 		    glTemplate *template)
 {
+	gchar       *name;
+
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	template->alias = g_list_append (template->alias,
-					xmlGetProp (alias_node, "name"));
+	name = xmlGetProp (alias_node, "name");
+	gl_template_add_alias (template, name);
+	g_free (name);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }

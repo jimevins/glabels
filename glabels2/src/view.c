@@ -147,23 +147,23 @@ static void       draw_grid_layer                 (glView *view);
 static void       draw_markup_layer               (glView *view);
 
 static void       draw_markup_margin              (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 static void       draw_markup_margin_rect         (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 static void       draw_markup_margin_rounded_rect (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 static void       draw_markup_margin_round        (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 static void       draw_markup_margin_cd           (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 static void       draw_markup_margin_cd_bc        (glView *view,
-						   glTemplateMarkupMargin *margin);
+						   glTemplateMarkup *margin);
 
 static void       draw_markup_line                (glView *view,
-						   glTemplateMarkupLine   *line);
+						   glTemplateMarkup *line);
 
 static void       draw_markup_circle              (glView *view,
-						   glTemplateMarkupCircle *circle);
+						   glTemplateMarkup *circle);
 
 
 static void       select_object_real              (glView *view,
@@ -668,9 +668,10 @@ draw_highlight_layer (glView *view)
 static void
 draw_bg_fg_layers (glView *view)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	GnomeCanvasGroup *group;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	GnomeCanvasGroup          *group;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
@@ -689,13 +690,14 @@ draw_bg_fg_layers (glView *view)
 				       "y", 0.0,
 				       NULL));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	switch (template->label.style) {
+	switch (label_type->shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
-		if (template->label.rect.r == 0.0) {
+	case GL_TEMPLATE_SHAPE_RECT:
+		if (label_type->size.rect.r == 0.0) {
 			/* Square corners. */
 			draw_bg_fg_rect (view);
 		} else {
@@ -704,12 +706,12 @@ draw_bg_fg_layers (glView *view)
 		}
 		break;
 
-	case GL_TEMPLATE_STYLE_ROUND:
+	case GL_TEMPLATE_SHAPE_ROUND:
 		draw_bg_fg_round (view);
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
-		if ((template->label.cd.w == 0.0) && (template->label.cd.h == 0.0) ) {
+	case GL_TEMPLATE_SHAPE_CD:
+		if ((label_type->size.cd.w == 0.0) && (label_type->size.cd.h == 0.0) ) {
 			draw_bg_fg_cd (view);
 		} else {
 			draw_bg_fg_cd_bc (view);
@@ -729,7 +731,6 @@ static void
 draw_bg_fg_rect (glView *view)
 {
 	glLabel          *label;
-	glTemplate       *template;
 	gdouble           w, h;
 	GnomeCanvasItem  *item;
 
@@ -741,7 +742,6 @@ draw_bg_fg_rect (glView *view)
 	label = view->label;
 
 	gl_label_get_size (label, &w, &h);
-	template = gl_label_get_template (label);
 
 	/* Background */
 	item = gnome_canvas_item_new (view->bg_group,
@@ -773,23 +773,25 @@ draw_bg_fg_rect (glView *view)
 static void
 draw_bg_fg_rounded_rect (glView *view)
 {
-	glLabel           *label;
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	glTemplate        *template;
-	gdouble            r, w, h;
-	GnomeCanvasItem   *item;
+	glLabel                   *label;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    r, w, h;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label = view->label;
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
 	gl_label_get_size (label, &w, &h);
-	template = gl_label_get_template (label);
-	r = template->label.rect.r;
+	r = label_type->size.rect.r;
 
 	points = gnome_canvas_points_new (4 * (1 + 90 / ARC_COURSE));
 	i_coords = 0;
@@ -844,20 +846,22 @@ draw_bg_fg_rounded_rect (glView *view)
 static void
 draw_bg_fg_round (glView *view)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	gdouble           r;
-	GnomeCanvasItem  *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    r;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	r = template->label.round.r;
+	r = label_type->size.round.r;
 
 	/* Background */
 	item = gnome_canvas_item_new (view->bg_group,
@@ -889,21 +893,23 @@ draw_bg_fg_round (glView *view)
 static void
 draw_bg_fg_cd (glView *view)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	gdouble           r1, r2;
-	GnomeCanvasItem  *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    r1, r2;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	r1 = template->label.cd.r1;
-	r2 = template->label.cd.r2;
+	r1 = label_type->size.cd.r1;
+	r2 = label_type->size.cd.r2;
 
 	/* Background */
 	/* outer circle */
@@ -956,28 +962,30 @@ draw_bg_fg_cd (glView *view)
 static void
 draw_bg_fg_cd_bc (glView *view)
 {
-	glLabel           *label;
-	glTemplate        *template;
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	gdouble            theta1, theta2;
-	gdouble            x0, y0, w, h, r1, r2;
-	GnomeCanvasItem   *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	gdouble                    theta1, theta2;
+	gdouble                    x0, y0, w, h, r1, r2;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	template = gl_label_get_template (label);
 	gl_label_get_size (label, &w, &h);
 	x0 = w/2.0;
 	y0 = h/2.0;
 
-	r1 = template->label.cd.r1;
-	r2 = template->label.cd.r2;
+	r1 = label_type->size.cd.r1;
+	r2 = label_type->size.cd.r2;
 
 	theta1 = (180.0/G_PI) * acos (w / (2.0*r1));
 	theta2 = (180.0/G_PI) * asin (h / (2.0*r1));
@@ -1157,11 +1165,12 @@ draw_grid_layer (glView *view)
 static void
 draw_markup_layer (glView *view)
 {
-	GnomeCanvasGroup *group;
-	glLabel          *label;
-	glTemplate       *template;
-	GList            *p;
-	glTemplateMarkup *markup;
+	GnomeCanvasGroup          *group;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	GList                     *p;
+	glTemplateMarkup          *markup;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
@@ -1174,24 +1183,22 @@ draw_markup_layer (glView *view)
 				       "y", 0.0,
 				       NULL));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	for ( p=template->label.any.markups; p != NULL; p=p->next ) {
+	for ( p=label_type->markups; p != NULL; p=p->next ) {
 		markup = (glTemplateMarkup *)p->data;
 
 		switch (markup->type) {
 		case GL_TEMPLATE_MARKUP_MARGIN:
-			draw_markup_margin (view,
-					    (glTemplateMarkupMargin *)markup);
+			draw_markup_margin (view, markup);
 			break;
 		case GL_TEMPLATE_MARKUP_LINE:
-			draw_markup_line (view,
-					  (glTemplateMarkupLine *)markup);
+			draw_markup_line (view, markup);
 			break;
 		case GL_TEMPLATE_MARKUP_CIRCLE:
-			draw_markup_circle (view,
-					    (glTemplateMarkupCircle *)markup);
+			draw_markup_circle (view, markup);
 			break;
 		default:
 			g_warning ("Unknown template markup type");
@@ -1204,44 +1211,46 @@ draw_markup_layer (glView *view)
 /* PRIVATE.  Draw margin markup.                                             */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin (glView                 *view,
-		    glTemplateMarkupMargin *margin)
+draw_markup_margin (glView           *view,
+		    glTemplateMarkup *markup)
 {
-	glLabel    *label;
-	glTemplate *template;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	switch (template->label.style) {
+	switch (label_type->shape) {
 
-	case GL_TEMPLATE_STYLE_RECT:
-		if (template->label.rect.r == 0.0) {
+	case GL_TEMPLATE_SHAPE_RECT:
+		if (label_type->size.rect.r == 0.0) {
 			/* Square corners. */
-			draw_markup_margin_rect (view, margin);
+			draw_markup_margin_rect (view, markup);
 		} else {
-			if ( margin->size < template->label.rect.r) {
+			if ( markup->data.margin.size < label_type->size.rect.r) {
 				/* Rounded corners. */
-				draw_markup_margin_rounded_rect (view, margin);
+				draw_markup_margin_rounded_rect (view, markup);
 			} else {
 				/* Square corners. */
-				draw_markup_margin_rect (view, margin);
+				draw_markup_margin_rect (view, markup);
 			}
 		}
 		break;
 
-	case GL_TEMPLATE_STYLE_ROUND:
-		draw_markup_margin_round (view, margin);
+	case GL_TEMPLATE_SHAPE_ROUND:
+		draw_markup_margin_round (view, markup);
 		break;
 
-	case GL_TEMPLATE_STYLE_CD:
-		if ((template->label.cd.w == 0.0) && (template->label.cd.h == 0.0) ) {
-			draw_markup_margin_cd (view, margin);
+	case GL_TEMPLATE_SHAPE_CD:
+		if ((label_type->size.cd.w == 0.0) && (label_type->size.cd.h == 0.0) ) {
+			draw_markup_margin_cd (view, markup);
 		} else {
-			draw_markup_margin_cd_bc (view, margin);
+			draw_markup_margin_cd_bc (view, markup);
 		}
 		break;
 
@@ -1255,24 +1264,26 @@ draw_markup_margin (glView                 *view,
 /* PRIVATE.  Draw simple recangular margin.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_rect (glView                 *view,
-			 glTemplateMarkupMargin *margin)
+draw_markup_margin_rect (glView           *view,
+			 glTemplateMarkup *markup)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	gdouble           w, h, m;
-	GnomeCanvasItem  *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    w, h, m;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label = view->label;
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
 	gl_label_get_size (label, &w, &h);
-	template = gl_label_get_template (label);
-	m = margin->size;
+	m = markup->data.margin.size;
 
 	/* Bounding box @ margin */
 	gnome_canvas_item_new (view->markup_group,
@@ -1292,27 +1303,29 @@ draw_markup_margin_rect (glView                 *view,
 /* PRIVATE.  Draw rounded recangular markup.                                 */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_rounded_rect (glView                 *view,
-				 glTemplateMarkupMargin *margin)
+draw_markup_margin_rounded_rect (glView           *view,
+				 glTemplateMarkup *markup)
 {
-	glLabel           *label;
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	glTemplate        *template;
-	gdouble            r, w, h, m;
-	GnomeCanvasItem   *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	gdouble                    r, w, h, m;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label = view->label;
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
 	gl_label_get_size (label, &w, &h);
-	template = gl_label_get_template (label);
-	r = template->label.rect.r;
-	m = margin->size;
+	r = label_type->size.rect.r;
+	m = markup->data.margin.size;
 
 	r = r - m;
 	w = w - 2 * m;
@@ -1360,24 +1373,26 @@ draw_markup_margin_rounded_rect (glView                 *view,
 /* PRIVATE.  Draw round margin.                                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_round (glView                 *view,
-			  glTemplateMarkupMargin *margin)
+draw_markup_margin_round (glView           *view,
+			  glTemplateMarkup *markup)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	gdouble           r, m;
-	GnomeCanvasItem  *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    r, m;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	r = template->label.round.r;
-	m = margin->size;
+	r = label_type->size.round.r;
+	m = markup->data.margin.size;
 
 	/* Margin outline */
 	item = gnome_canvas_item_new (view->markup_group,
@@ -1397,25 +1412,27 @@ draw_markup_margin_round (glView                 *view,
 /* PRIVATE.  Draw CD margins.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_cd (glView                 *view,
-		       glTemplateMarkupMargin *margin)
+draw_markup_margin_cd (glView           *view,
+		       glTemplateMarkup *markup)
 {
-	glLabel          *label;
-	glTemplate       *template;
-	gdouble           m, r1, r2;
-	GnomeCanvasItem  *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    m, r1, r2;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
 
-	r1 = template->label.cd.r1;
-	r2 = template->label.cd.r2;
-	m  = margin->size;
+	r1 = label_type->size.cd.r1;
+	r2 = label_type->size.cd.r2;
+	m  = markup->data.margin.size;
 
 	/* outer margin */
 	item = gnome_canvas_item_new (view->markup_group,
@@ -1445,32 +1462,35 @@ draw_markup_margin_cd (glView                 *view,
 /* PRIVATE.  Draw Business Card CD margins.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_cd_bc (glView                 *view,
-			  glTemplateMarkupMargin *margin)
+draw_markup_margin_cd_bc (glView           *view,
+			  glTemplateMarkup *markup)
 {
-	glLabel           *label;
-	glTemplate        *template;
-	gdouble            m, r1, r2;
-	GnomeCanvasPoints *points;
-	gint               i_coords, i_theta;
-	gdouble            theta1, theta2;
-	gdouble            x0, y0, w, h, r;
-	GnomeCanvasItem   *item;
+	glLabel                   *label;
+	glTemplate                *template;
+	const glTemplateLabelType *label_type;
+	gdouble                    m, r1, r2;
+	GnomeCanvasPoints         *points;
+	gint                       i_coords, i_theta;
+	gdouble                    theta1, theta2;
+	gdouble                    x0, y0, w, h, r;
+	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label    = view->label;
-	template = gl_label_get_template (label);
+	label      = view->label;
+	template   = gl_label_get_template (label);
+	label_type = gl_template_get_first_label_type (template);
+
 	gl_label_get_size (label, &w, &h);
 	x0 = w/2.0;
 	y0 = h/2.0;
 
-	r1 = template->label.cd.r1;
-	r2 = template->label.cd.r2;
-	m  = margin->size;
+	r1 = label_type->size.cd.r1;
+	r2 = label_type->size.cd.r2;
+	m  = markup->data.margin.size;
 
 	/* outer margin */
 	r = r1 - m;
@@ -1562,8 +1582,8 @@ draw_markup_margin_cd_bc (glView                 *view,
 /* PRIVATE.  Draw line markup.                                               */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_line (glView               *view,
-		  glTemplateMarkupLine *line)
+draw_markup_line (glView           *view,
+		  glTemplateMarkup *markup)
 {
 	GnomeCanvasPoints *points;
 
@@ -1572,12 +1592,11 @@ draw_markup_line (glView               *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	points = gnome_canvas_points_new (2);
-	points->coords[0] = line->x1;
-	points->coords[1] = line->y1;
-	points->coords[2] = line->x2;
-	points->coords[3] = line->y2;
+	points->coords[0] = markup->data.line.x1;
+	points->coords[1] = markup->data.line.y1;
+	points->coords[2] = markup->data.line.x2;
+	points->coords[3] = markup->data.line.y2;
 
-	/* Bounding box @ margin */
 	gnome_canvas_item_new (view->markup_group,
 			       gnome_canvas_line_get_type (),
 			       "points", points,
@@ -1594,8 +1613,8 @@ draw_markup_line (glView               *view,
 /* PRIVATE.  Draw circle markup.                                             */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_circle (glView                 *view,
-		    glTemplateMarkupCircle *circle)
+draw_markup_circle (glView           *view,
+		    glTemplateMarkup *markup)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1604,10 +1623,10 @@ draw_markup_circle (glView                 *view,
 	/* Circle outline */
 	gnome_canvas_item_new (view->markup_group,
 			       gnome_canvas_ellipse_get_type (),
-			       "x1", circle->x0 - circle->r,
-			       "y1", circle->y0 - circle->r,
-			       "x2", circle->x0 + circle->r,
-			       "y2", circle->y0 + circle->r,
+			       "x1", markup->data.circle.x0 - markup->data.circle.r,
+			       "y1", markup->data.circle.y0 - markup->data.circle.r,
+			       "x2", markup->data.circle.x0 + markup->data.circle.r,
+			       "y2", markup->data.circle.y0 + markup->data.circle.r,
 			       "width_pixels", 1,
 			       "outline_color_rgba", MARKUP_COLOR,
 			       NULL);
@@ -2984,7 +3003,7 @@ gl_view_copy (glView *view)
 		view->selection_data = GL_LABEL(gl_label_new ());
 		gl_label_set_template (view->selection_data, template);
 		gl_label_set_rotate_flag (view->selection_data, rotate_flag);
-		gl_template_free (&template);
+		gl_template_free (template);
 
 		for (p = view->selected_object_list; p != NULL; p = p->next) {
 

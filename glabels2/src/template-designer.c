@@ -28,7 +28,8 @@
 
 #include "template-designer.h"
 #include "prefs.h"
-#include "paper.h"
+#include <libglabels/paper.h>
+#include <libglabels/template.h>
 #include "wdgt-mini-preview.h"
 #include "print-dialog.h"
 
@@ -512,7 +513,7 @@ construct_pg_size_page (glTemplateDesigner      *dlg,
 	/* Load page size combo */
 	page_sizes = gl_paper_get_name_list ();
 	gtk_combo_set_popdown_strings (GTK_COMBO(dlg->priv->pg_size_combo), page_sizes);
-	gl_paper_free_name_list (&page_sizes);
+	gl_paper_free_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
 	default_page_size_name = gl_paper_lookup_name_from_id (default_page_size_id);
 	gtk_entry_set_text (GTK_ENTRY(dlg->priv->pg_size_entry), default_page_size_name);
@@ -1137,7 +1138,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dlg)
 						   paper->height * dlg->priv->units_per_point);
 		}
 
-		gl_paper_free (&paper);
+		gl_paper_free (paper);
 	}
 
 	g_free (page_size_name);
@@ -1455,7 +1456,7 @@ layout_page_changed_cb (glTemplateDesigner *dlg)
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dlg->priv->layout_mini_preview),
 					   template);
 
-	gl_template_free (&template);
+	gl_template_free (template);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1477,7 +1478,7 @@ print_test_cb (glTemplateDesigner      *dlg)
 	gl_print_dialog_force_outline_flag (GL_PRINT_DIALOG(print_dialog));
 	gtk_widget_show (print_dialog);
 
-	gl_template_free (&template);
+	gl_template_free (template);
 	g_object_unref (G_OBJECT(label));
 }
 
@@ -1502,18 +1503,23 @@ finish_cb (glTemplateDesigner *dlg)
 static glTemplate *
 build_template (glTemplateDesigner      *dlg)
 {
-	gchar                *brand, *part_num, *desc;
+	gdouble               upp;
+	gchar                *brand, *part_num, *name, *desc;
 	gchar                *page_size_name;
 	glPaper              *paper;
-	glTemplateLabelStyle  shape;
+	glTemplateLabelShape  shape;
+	glTemplateLabelType  *label_type;
 	gdouble               w, h, r, radius, hole, waste, margin;
 	gint                  nlayouts;
 	gdouble               nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble               nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
 	glTemplate           *template;
 
+	upp = dlg->priv->units_per_point;
+
 	brand    = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->brand_entry), 0, -1);
 	part_num = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->part_num_entry), 0, -1);
+	name     = g_strdup_printf ("%s %s", brand, part_num);
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->description_entry), 0, -1);
 
 	page_size_name =
@@ -1522,14 +1528,14 @@ build_template (glTemplateDesigner      *dlg)
 	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
 			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin))
-			/ dlg->priv->units_per_point;
+			/ upp;
 		paper->height =
 			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin))
-			 / dlg->priv->units_per_point;
+			 / upp;
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
-		shape = GL_TEMPLATE_STYLE_RECT;
+		shape = GL_TEMPLATE_SHAPE_RECT;
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
 		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin));
@@ -1538,14 +1544,14 @@ build_template (glTemplateDesigner      *dlg)
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
-		shape = GL_TEMPLATE_STYLE_ROUND;
+		shape = GL_TEMPLATE_SHAPE_ROUND;
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin));
 		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
 		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin));
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
-		shape = GL_TEMPLATE_STYLE_CD;
+		shape = GL_TEMPLATE_SHAPE_CD;
 		radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin));
 		hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin));
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin));
@@ -1568,61 +1574,55 @@ build_template (glTemplateDesigner      *dlg)
 	dx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin));
 	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin));
 
-	template = g_new0 (glTemplate, 1);
 
-	template->name = g_strdup_printf ("%s %s", brand, part_num);
-	template->alias = g_list_append (template->alias, g_strdup (template->name));
-	template->page_size = g_strdup (paper->id);
-	template->page_width = paper->width;
-	template->page_height = paper->height;
-	template->description = g_strdup (desc);
+	template = gl_template_new (name, desc, paper->id, paper->width, paper->height);
 
-	template->label.style = shape;
 	switch (shape) {
-	case GL_TEMPLATE_STYLE_RECT:
-		template->label.rect.w = w / dlg->priv->units_per_point;
-		template->label.rect.h = h / dlg->priv->units_per_point;
-		template->label.rect.r = r / dlg->priv->units_per_point;
-		template->label.rect.waste = waste / dlg->priv->units_per_point;
+	case GL_TEMPLATE_SHAPE_RECT:
+		label_type =
+			gl_template_rect_label_type_new ("0",
+							 w/upp, h/upp, r/upp,
+							 waste/upp);
 		break;
-	case GL_TEMPLATE_STYLE_ROUND:
-		template->label.round.r = r / dlg->priv->units_per_point;
-		template->label.round.waste = waste / dlg->priv->units_per_point;
+	case GL_TEMPLATE_SHAPE_ROUND:
+		label_type =
+			gl_template_round_label_type_new ("0", r/upp, waste/upp);
 		break;
-	case GL_TEMPLATE_STYLE_CD:
-		template->label.cd.r1 = radius / dlg->priv->units_per_point;
-		template->label.cd.r2 = hole / dlg->priv->units_per_point;
-		template->label.cd.w = w / dlg->priv->units_per_point;
-		template->label.cd.h = h / dlg->priv->units_per_point;
-		template->label.cd.waste = waste / dlg->priv->units_per_point;
+	case GL_TEMPLATE_SHAPE_CD:
+		label_type =
+			gl_template_cd_label_type_new ("0",
+						       radius/upp, hole/upp,
+						       w/upp, h/upp,
+						       waste/upp);
 		break;
 	}
-	template->label.any.markups =
-		g_list_append (template->label.any.markups,
-			       gl_template_markup_margin_new (margin / dlg->priv->units_per_point));
-	template->label.any.layouts =
-		g_list_append (template->label.any.layouts,
-			       gl_template_layout_new (nx_1, ny_1,
-						       x0_1 / dlg->priv->units_per_point,
-						       y0_1 / dlg->priv->units_per_point,
-						       dx_1 / dlg->priv->units_per_point,
-						       dy_1 / dlg->priv->units_per_point));
+	gl_template_add_label_type (template, label_type);
+
+	gl_template_add_markup (label_type,
+				gl_template_markup_margin_new (margin/upp));
+
+	gl_template_add_layout (label_type,
+				gl_template_layout_new (nx_1, ny_1,
+							x0_1/upp,
+							y0_1/upp,
+							dx_1/upp,
+							dy_1/upp));
 	if (nlayouts > 1) {
-		template->label.any.layouts =
-			g_list_append (template->label.any.layouts,
-				       gl_template_layout_new (nx_2, ny_2,
-							       x0_2 / dlg->priv->units_per_point,
-							       y0_2 / dlg->priv->units_per_point,
-							       dx_2 / dlg->priv->units_per_point,
-							       dy_2 / dlg->priv->units_per_point));
+		gl_template_add_layout (label_type,
+					gl_template_layout_new (nx_2, ny_2,
+								x0_2/upp,
+								y0_2/upp,
+								dx_2/upp,
+								dy_2/upp));
 	}
 
 	g_free (brand);
 	g_free (part_num);
+	g_free (name);
 	g_free (desc);
 
 	g_free (page_size_name);
-	gl_paper_free (&paper);
+	gl_paper_free (paper);
 
 	return template;
 }

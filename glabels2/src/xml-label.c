@@ -36,13 +36,13 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
-#include "template.h"
 #include "base64.h"
 #include "xml-label.h"
 #include "xml-label-04.h"
 #include "xml-label-191.h"
-#include "xml-template.h"
-#include "xml.h"
+#include <libglabels/template.h>
+#include <libglabels/xml-template.h>
+#include <libglabels/xml.h>
 #include "util.h"
 
 #include "debug.h"
@@ -252,7 +252,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 		return NULL;
 	}
 
-	ns = xmlSearchNsByHref (doc, root, XML_NAME_SPACE);
+	ns = xmlSearchNsByHref (doc, root, GL_XML_NAME_SPACE);
 	if (ns != NULL) {
 		label = xml_parse_label (root, status);
 	} else {
@@ -326,7 +326,7 @@ xml_parse_label (xmlNodePtr        root,
 	     child_node = child_node->next) {
 
 		if (xmlStrEqual (child_node->name, "Template")) {
-			template = gl_xml_template_parse_template (child_node);
+			template = gl_xml_template_parse_template_node (child_node);
 			if (!template) {
 				g_object_unref (label);
 				*status = XML_LABEL_UNKNOWN_MEDIA;
@@ -334,7 +334,7 @@ xml_parse_label (xmlNodePtr        root,
 			}
 			gl_template_register (template);
 			gl_label_set_template (label, template);
-			gl_template_free (&template);
+			gl_template_free (template);
 		} else if (xmlStrEqual (child_node->name, "Objects")) {
 			xml_parse_objects (child_node, label);
 		} else if (xmlStrEqual (child_node->name, "Merge")) {
@@ -1017,11 +1017,11 @@ xml_label_to_doc (glLabel          *label,
 	doc = xmlNewDoc ("1.0");
 	doc->xmlRootNode = xmlNewDocNode (doc, NULL, "Glabels-document", NULL);
 
-	ns = xmlNewNs (doc->xmlRootNode, XML_NAME_SPACE, NULL);
+	ns = xmlNewNs (doc->xmlRootNode, GL_XML_NAME_SPACE, NULL);
 	xmlSetNs (doc->xmlRootNode, ns);
 
 	template = gl_label_get_template (label);
-	gl_xml_template_add_template (template, doc->xmlRootNode, ns);
+	gl_xml_template_create_template_node (template, doc->xmlRootNode, ns);
 
 	xml_create_objects (doc->xmlRootNode, ns, label);
 

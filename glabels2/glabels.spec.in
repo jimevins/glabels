@@ -54,7 +54,7 @@ scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(-, root, root)
-%doc README COPYING ChangeLog NEWS AUTHORS INSTALL
+%doc README COPYING COPYING-DOCS COPYING.LIBGLABELS ChangeLog NEWS AUTHORS INSTALL
 %doc %{_datadir}/gnome/help/glabels/
 %{_bindir}/*
 %{_datadir}/glabels/

@@ -25,6 +25,7 @@ glabels_LDFLAGS = -export-dynamic
 
 glabels_LDADD = 			\
 	$(GLABELS_LIBS)			\
+	../libglabels/libglabels.la	\
 	mygal/libmygal.la		\
 	recent-files/librecent.la	\
 	$(LIB_BARCODE_DIR)/libbarcode.la
@@ -33,6 +34,7 @@ glabels_batch_LDFLAGS = -export-dynamic
 
 glabels_batch_LDADD = 			\
 	$(GLABELS_LIBS)			\
+	../libglabels/libglabels.la	\
 	$(LIB_BARCODE_DIR)/libbarcode.la
 
 BUILT_SOURCES = 			\
@@ -132,22 +134,12 @@ glabels_SOURCES = 			\
 	label-image.h			\
 	label-barcode.c			\
 	label-barcode.h			\
-	template.c 			\
-	template.h 			\
-	paper.c 			\
-	paper.h 			\
 	xml-label.c			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
 	xml-label-191.c			\
 	xml-label-191.h			\
-	xml-template.c			\
-	xml-template.h			\
-	xml-paper.c			\
-	xml-paper.h			\
-	xml.c				\
-	xml.h				\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\
@@ -208,22 +200,12 @@ glabels_batch_SOURCES = 		\
 	label-image.h			\
 	label-barcode.c			\
 	label-barcode.h			\
-	template.c 			\
-	template.h 			\
-	paper.c 			\
-	paper.h 			\
 	xml-label.c			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
 	xml-label-191.c			\
 	xml-label-191.h			\
-	xml-template.c			\
-	xml-template.h			\
-	xml-paper.c			\
-	xml-paper.h			\
-	xml.c				\
-	xml.h				\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\
@@ -272,4 +254,7 @@ $(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.la
 
 $(LIB_BARCODE_DIR)/libbarcode.la:
 	cd $(LIB_BARCODE_DIR); $(MAKE)
+
+../libglabels/libglabels.la:
+	cd ../libglabels; $(MAKE)
 

@@ -1,3 +1,83 @@
+2004-01-06  Jim Evins  <evins@snaught.com>
+
+	Split-out template.[ch], paper.[ch], xml-template.[ch], xml-paper.[ch], and
+	xml.[ch] into a separate library called libglabels, to facilitate third
+	party use of glabels template files.  This was suggested by Wayne Schuller.
+	Once split-out, some modifications to the structures and functions to
+	make a cleaner more useful API, hopefully.  Rather extensive changes have
+	propogated to other modules.
+
+	* src/paper.h:
+	* src/paper.c:
+	* src/template.h:
+	* src/template.c:
+	* src/xml-paper.h:
+	* src/xml-paper.c:
+	* src/xml-template.h:
+	* src/xml-template.c:
+	* src/xml.h:
+	* src/xml.c:
+		These files have been moved to libglabels/.  API cleanup performed.
+
+	* libglabels/libglabels.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/Makefile.am:
+		These files have been added to finish out libglabels.
+	
+	* Makefile.am:
+	* configure.in:
+	* glabels.spec.in:
+	* po/POTFILES.in:
+	* src/Makefile.am:
+		Modified to reflect new sets of files in src/ and libglabels/.
+
+	* COPYING.LIBGLABELS:
+	* COPYING-DOCS:
+		Added copy of the LGPL for libglabels, and a copy the GFDL for
+		documentation.
+	
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label.c: (gl_label_finalize), (gl_label_set_template),
+	(gl_label_get_size):
+	* src/label.h:
+	* src/prefs-model.c: (gl_prefs_model_load_settings):
+	* src/print-dialog.c:
+	* src/print.c: (gl_print_simple), (gl_print_merge_collated),
+	(gl_print_merge_uncollated), (gl_print_batch), (print_info_free),
+	(print_crop_marks), (print_label), (draw_outline),
+	(clip_to_outline), (clip_punchouts):
+	* src/template-designer.c: (construct_pg_size_page),
+	(pg_size_page_changed_cb), (layout_page_changed_cb),
+	(print_test_cb), (build_template):
+	* src/util.c: (gl_util_fraction):
+	* src/util.h:
+	* src/view.c: (draw_bg_fg_layers), (draw_bg_fg_rect),
+	(draw_bg_fg_rounded_rect), (draw_bg_fg_round), (draw_bg_fg_cd),
+	(draw_bg_fg_cd_bc), (draw_markup_layer), (draw_markup_margin),
+	(draw_markup_margin_rect), (draw_markup_margin_rounded_rect),
+	(draw_markup_margin_round), (draw_markup_margin_cd),
+	(draw_markup_margin_cd_bc), (draw_markup_line),
+	(draw_markup_circle), (gl_view_copy):
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_construct),
+	(page_size_entry_changed_cb), (details_update), (get_layout_desc),
+	(get_label_size_desc):
+	* src/wdgt-mini-preview.c:
+	(gl_wdgt_mini_preview_set_label_by_name), (mini_outline_list_new),
+	(cdbc_item):
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_construct):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_construct):
+	* src/wdgt-rotate-label.c: (mini_preview_canvas_update),
+	(gl_wdgt_rotate_label_set_template_name), (cdbc_item):
+	* src/wdgt-rotate-label.h:
+	* src/xml-label-04.c: (xml04_parse_media_description):
+	* src/xml-label-191.c: (gl_xml_label_191_parse),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_layout),
+	(xml191_parse_markup), (xml191_parse_alias):
+	* src/xml-label.c: (xml_doc_to_label), (xml_parse_label),
+	(xml_label_to_doc):
+		Various changes to accomodate new libglabels API.
+	
 2004-01-03  Jim Evins  <evins@snaught.com>
 
 	* configure.in:

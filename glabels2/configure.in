@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(glabels, 1.93.2, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_INIT(glabels, 1.93.3cvs, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -19,7 +19,6 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 
 GNOME_COMPILE_WARNINGS
-GNOME_X_CHECKS
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
@@ -28,6 +27,7 @@ dnl *******************************************************************
 dnl * Check for required package and version
 dnl *******************************************************************
 dnl Minimum versions of libraries
+GLIB_REQUIRED=2.2.0
 GTK_REQUIRED=2.0.5
 LIBGNOMEUI_REQUIRED=2.0.1
 LIBBONOBO_REQUIRED=2.0.0
@@ -37,7 +37,9 @@ LIBGNOMEPRINTUI_REQUIRED=2.2.0
 LIBGNOMECANVAS_REQUIRED=2.0.1
 LIBGLADE_REQUIRED=2.0.1
                
-PKG_CHECK_MODULES(GLABELS, gtk+-2.0 >= $GTK_REQUIRED \
+PKG_CHECK_MODULES(GLABELS, \
+glib-2.0 >= $GLIB_REQUIRED \
+gtk+-2.0 >= $GTK_REQUIRED \
 libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED \
 libbonobo-2.0 >= $LIBBONOBO_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
@@ -49,6 +51,14 @@ libglade-2.0 >= $LIBGLADE_REQUIRED \
 
 AC_SUBST(GLABELS_CFLAGS)
 AC_SUBST(GLABELS_LIBS)
+
+PKG_CHECK_MODULES(LIBGLABELS, \
+glib-2.0 >= $GLIB_REQUIRED \
+libxml-2.0 >= $LIBXML_REQUIRED \
+)
+
+AC_SUBST(LIBGLABELS_CFLAGS)
+AC_SUBST(LIBGLABELS_LIBS)
 
 dnl ****************************************
 dnl * Supported languages
@@ -68,6 +78,7 @@ dnl ****************************************
 AC_OUTPUT([
 Makefile
 barcode-0.98/Makefile
+libglabels/Makefile
 src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile

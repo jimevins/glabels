@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 #include "hig.h"
-#include "template.h"
+#include <libglabels/template.h>
 
 #define GL_TYPE_WDGT_ROTATE_LABEL (gl_wdgt_rotate_label_get_type ())
 #define GL_WDGT_ROTATE_LABEL(obj) \

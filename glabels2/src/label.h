@@ -24,8 +24,8 @@
 
 #include <glib-object.h>
 
+#include <libglabels/template.h>
 #include "merge.h"
-#include "template.h"
 #include "pixbuf-cache.h"
 
 G_BEGIN_DECLS
