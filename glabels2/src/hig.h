@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  hig.h:  HIG inspired dialog and layout tools
+ *  hig.h:  HIG inspired dialogs and layout tools
  *
  *  Copyright (C) 2002  Jim Evins <evins@snaught.com>.
  *
@@ -29,6 +29,42 @@ G_BEGIN_DECLS
 
 #define GL_HIG_PAD1   6
 #define GL_HIG_PAD2  12
+
+
+/*===========================================================================*/
+/* HIG inspired alert.                                                       */
+/*===========================================================================*/
+
+#define GL_TYPE_HIG_ALERT (gl_hig_alert_get_type ())
+#define GL_HIG_ALERT(obj) \
+        (GTK_CHECK_CAST((obj), GL_TYPE_HIG_ALERT, glHigAlert ))
+#define GL_HIG_ALERT_CLASS(klass) \
+        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_HIG_ALERT, glHigAlertClass))
+#define GL_IS_HIG_ALERT(obj) \
+        (GTK_CHECK_TYPE ((obj), GL_TYPE_HIG_ALERT))
+#define GL_IS_HIG_ALERT_CLASS(klass) \
+        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_HIG_ALERT))
+
+typedef struct _glHigAlert      glHigAlert;
+typedef struct _glHigAlertClass glHigAlertClass;
+
+struct _glHigAlert {
+	GtkDialog         parent_widget;
+};
+
+struct _glHigAlertClass {
+	GtkDialogClass    parent_class;
+};
+
+guint      gl_hig_alert_get_type    (void);
+
+GtkWidget *gl_hig_alert_new         (GtkWindow      *parent,
+				     GtkDialogFlags  flags,
+				     GtkMessageType  type,
+				     GtkButtonsType  buttons,
+				     const gchar    *primary_text,
+				     const gchar    *secondary_text);
+
 
 /*===========================================================================*/
 /* HIG Dialog wrapper.                                                       */
@@ -106,7 +142,6 @@ GtkWidget *gl_hig_category_new              (const gchar *header);
 void       gl_hig_category_add_widget       (glHigCategory *cat,
 					     GtkWidget     *widget);
 
-G_END_DECLS
 
 /*===========================================================================*/
 /* HIG VBOX wrapper.                                                         */
@@ -145,6 +180,7 @@ GtkWidget *gl_hig_vbox_new              (glHigVBoxType  type);
 void       gl_hig_vbox_add_widget       (glHigVBox     *hig_vbox,
 					 GtkWidget     *widget);
 
+
 /*===========================================================================*/
 /* HIG HBOX wrapper.                                                         */
 /*===========================================================================*/
@@ -179,6 +215,7 @@ void       gl_hig_hbox_add_widget         (glHigHBox     *hig_hbox,
 
 void       gl_hig_hbox_add_widget_justify (glHigHBox     *hig_hbox,
 					   GtkWidget     *widget);
+
 
 G_END_DECLS
 

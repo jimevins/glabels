@@ -24,8 +24,6 @@ src/prefs.c
 src/prefs.h
 src/prefs-dialog.c
 src/prefs-dialog.h
-src/alert.c
-src/alert.h
 src/hig.c
 src/hig.h
 src/view.c
