@@ -39,7 +39,7 @@ dnl 5. If any interfaces have been added since the last public release, then inc
 dnl 6. If any interfaces have been removed since the last public release, then set age
 dnl    to 0.
 LIBGLABELS_C=1
-LIBGLABELS_R=0
+LIBGLABELS_R=1
 LIBGLABELS_A=0
 
 LIBGLABELS_VERSION_INFO=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}

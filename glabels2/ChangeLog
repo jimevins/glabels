@@ -1,5 +1,15 @@
 2004-08-14  Jim Evins  <evins@snaught.com>
 
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node):
+	* src/xml-label-191.c: (xml191_parse_sheet):
+		Fixed improper freeing of gettext strings.  Merged from 2.0.1.
+	* configure.in:
+		Reconciled libglabels versioning with 2.0.1.
+	
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
 	* configure.in:
 		Updated version to 2.1cvs.
 	

@@ -173,7 +173,14 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 
 	description = xmlGetProp (template_node, "_description");
 	if (description != NULL) {
-		description = gettext (description);
+
+		gchar *tmp = gettext (description);
+
+		if (tmp != description) {
+			g_free (description);
+			description = g_strdup (tmp);
+		}
+
 	} else {
 		description = xmlGetProp (template_node, "description");
 	}

@@ -695,7 +695,16 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 
 	description = xmlGetProp (sheet_node, "_description");
 	if (description != NULL) {
-		template->description = gettext (description);
+
+		gchar *tmp = gettext (description);
+
+		if (tmp == description) {
+			template->description = description;
+		} else {
+			template->description = g_strdup (tmp);
+		}
+
+
 	} else {
 		template->description = xmlGetProp (sheet_node, "description");
 	}
