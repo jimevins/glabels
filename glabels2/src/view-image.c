@@ -643,12 +643,11 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 		switch (event->button.button) {
 		case 1:
 			dragging = TRUE;
-			gdk_pointer_grab (GTK_WIDGET (view->canvas)->window,
-					  FALSE,
-					  GDK_POINTER_MOTION_MASK |
-					  GDK_BUTTON_RELEASE_MASK |
-					  GDK_BUTTON_PRESS_MASK,
-					  NULL, NULL, event->button.time);
+			gnome_canvas_item_grab (canvas->root,
+						GDK_POINTER_MOTION_MASK |
+						GDK_BUTTON_RELEASE_MASK |
+						GDK_BUTTON_PRESS_MASK,
+						NULL, event->button.time);
 			gnome_canvas_window_to_world (canvas,
 						      event->button.x,
 						      event->button.y, &x, &y);
@@ -671,7 +670,7 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 		switch (event->button.button) {
 		case 1:
 			dragging = FALSE;
-			gdk_pointer_ungrab (event->button.time);
+			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
 						      event->button.x,
 						      event->button.y, &x, &y);

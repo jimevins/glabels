@@ -652,12 +652,11 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 		switch (event->button.button) {
 		case 1:
 			dragging = TRUE;
-			gdk_pointer_grab (GTK_WIDGET (view->canvas)->window,
-					  FALSE,
-					  GDK_POINTER_MOTION_MASK |
-					  GDK_BUTTON_RELEASE_MASK |
-					  GDK_BUTTON_PRESS_MASK,
-					  NULL, NULL, event->button.time);
+			gnome_canvas_item_grab (canvas->root,
+						GDK_POINTER_MOTION_MASK |
+						GDK_BUTTON_RELEASE_MASK |
+						GDK_BUTTON_PRESS_MASK,
+						NULL, event->button.time);
 			gnome_canvas_window_to_world (canvas,
 						      event->button.x,
 						      event->button.y, &x, &y);
@@ -669,7 +668,8 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 			line_color = gl_color_set_opacity (gl_prefs->default_line_color, 0.5);
 			fill_color = gl_color_set_opacity (gl_prefs->default_fill_color, 0.5);
 			gl_label_ellipse_set_line_width (GL_LABEL_ELLIPSE(object),
-						     gl_prefs->default_line_width);			gl_label_ellipse_set_line_color (GL_LABEL_ELLIPSE(object),
+						     gl_prefs->default_line_width);
+			gl_label_ellipse_set_line_color (GL_LABEL_ELLIPSE(object),
 						     line_color);
 			gl_label_ellipse_set_fill_color (GL_LABEL_ELLIPSE(object),
 						     fill_color);
@@ -687,7 +687,7 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 		switch (event->button.button) {
 		case 1:
 			dragging = FALSE;
-			gdk_pointer_ungrab (event->button.time);
+			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			gnome_canvas_window_to_world (canvas,
 						      event->button.x,
 						      event->button.y, &x, &y);

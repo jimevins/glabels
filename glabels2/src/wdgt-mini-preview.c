@@ -456,12 +456,11 @@ canvas_event_cb (GnomeCanvas * canvas,
 				break;
 			/* Go into dragging mode while remains pressed. */
 			dragging = TRUE;
-			gdk_pointer_grab (GTK_WIDGET (canvas)->window,
-					  FALSE,
-					  GDK_POINTER_MOTION_MASK |
-					  GDK_BUTTON_RELEASE_MASK |
-					  GDK_BUTTON_PRESS_MASK, NULL, NULL,
-					  event->button.time);
+			gnome_canvas_item_grab (canvas->root,
+						GDK_POINTER_MOTION_MASK |
+						GDK_BUTTON_RELEASE_MASK |
+						GDK_BUTTON_PRESS_MASK,
+						NULL, event->button.time);
 			g_signal_emit (G_OBJECT(preview),
 				       wdgt_mini_preview_signals[CLICKED],
 				       0, i);
@@ -486,7 +485,7 @@ canvas_event_cb (GnomeCanvas * canvas,
 		case 1:
 			/* Exit dragging mode */
 			dragging = FALSE;
-			gdk_pointer_ungrab (event->button.time);
+			gnome_canvas_item_ungrab (canvas->root, event->button.time);
 			break;
 
 		default:
