@@ -199,6 +199,7 @@ gl_label_image_set_filename (glLabelImage *limage,
 	glTextNode  *old_filename;
 	GHashTable  *pixbuf_cache;
 	GdkPixbuf   *pixbuf;
+	gdouble      image_w, image_h, aspect_ratio, w, h;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -241,6 +242,19 @@ gl_label_image_set_filename (glLabelImage *limage,
 			limage->private->pixbuf = default_pixbuf;
 		}
 	}
+
+	/* Treat current size as a bounding box, scale image to maintain aspect
+	 * ratio while fitting it in this bounding box. */
+	image_w = gdk_pixbuf_get_width (limage->private->pixbuf);
+	image_h = gdk_pixbuf_get_height (limage->private->pixbuf);
+	aspect_ratio = image_h / image_w;
+	gl_label_object_get_size (GL_LABEL_OBJECT(limage), &w, &h);
+	if ( h > w*aspect_ratio ) {
+		h = w * aspect_ratio;
+	} else {
+		w = h / aspect_ratio;
+	}
+	gl_label_object_set_size (GL_LABEL_OBJECT(limage), w, h);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
 

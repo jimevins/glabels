@@ -230,16 +230,38 @@ static void
 size_reset_cb (glObjectEditor *editor)
 {
 	gdouble w_base, h_base;
+	gdouble w_max, h_max;
+	gdouble aspect_ratio;
 
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin),
-					 G_CALLBACK (h_spin_cb),
+					 G_CALLBACK (w_spin_cb),
 					 editor);
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_h_spin),
 					 G_CALLBACK (h_spin_cb),
 					 editor);
 
-	w_base = editor->priv->w_base * editor->priv->units_per_point;
-	h_base = editor->priv->h_base * editor->priv->units_per_point;
+	w_base = editor->priv->w_base;
+	h_base = editor->priv->h_base;
+
+	w_max = editor->priv->w_max;
+	h_max = editor->priv->h_max;
+
+	if ( (w_base > w_max) || (h_base > h_max) ) {
+
+		aspect_ratio = h_base / w_base;
+
+		if ( h_max > w_max*aspect_ratio ) {
+			w_base = w_max;
+			h_base = w_max * aspect_ratio;
+
+		} else {
+			w_base = h_max / aspect_ratio;
+			h_base = h_max;
+		}
+	}
+
+	w_base *= editor->priv->units_per_point;
+	h_base *= editor->priv->units_per_point;
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
 				   w_base);
@@ -247,7 +269,7 @@ size_reset_cb (glObjectEditor *editor)
 				   h_base);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin),
-					   G_CALLBACK (h_spin_cb),
+					   G_CALLBACK (w_spin_cb),
 					   editor);
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_h_spin),
 					   G_CALLBACK (h_spin_cb),

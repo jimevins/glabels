@@ -1,5 +1,21 @@
 2004-02-02  Jim Evins  <evins@snaught.com>
 
+	* src/label-image.c: (gl_label_image_set_filename):
+		When setting a new filename adjust size such that the aspect ratio of
+		the image is preserved using the current size as a bounding box.
+		
+	* src/view-image.c: (update_object_from_editor_cb):
+		When updating object from editor, feed back possible size changes to
+		editor as a result of a possible change in image.
+	
+	* src/object-editor-size-page.c: (size_reset_cb):
+		Fixed typo when blocking spin handlers.  If the base size is larger than
+		the max size, treat max size as a bounding box while keeping aspect
+		ratio.
+		
+
+2004-02-02  Jim Evins  <evins@snaught.com>
+
 	* src/label-object.h:
 	* src/label-object.c: (gl_label_object_set_size),
 	(gl_label_object_set_size_honor_aspect):

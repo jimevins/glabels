@@ -283,6 +283,8 @@ update_object_from_editor_cb (glObjectEditor *editor,
 {
 	gdouble            x, y, w, h;
 	glTextNode        *filename;
+	const GdkPixbuf   *pixbuf;
+	gdouble            image_w, image_h;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -302,6 +304,16 @@ update_object_from_editor_cb (glObjectEditor *editor,
 
 	filename = gl_object_editor_get_image (editor);
 	gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+
+	/* Setting filename may have modified the size. */
+	gl_label_object_get_size (object, &w, &h);
+	gl_object_editor_set_size (editor, w, h);
+
+	/* It may also have a new base size. */
+        pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
+        image_w = gdk_pixbuf_get_width (pixbuf);
+        image_h = gdk_pixbuf_get_height (pixbuf);
+	gl_object_editor_set_base_size (editor, image_w, image_h);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_editor_from_object_cb,
