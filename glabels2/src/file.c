@@ -30,6 +30,7 @@
 #include "file.h"
 #include "mdi.h"
 #include "recent.h"
+#include "hig.h"
 #include "alert.h"
 #include "util.h"
 #include "wdgt-media-select.h"
@@ -52,7 +53,7 @@ static gchar *save_path = NULL;
 /*===========================================*/
 /* Local function prototypes.                */
 /*===========================================*/
-static void create_new_dialog_widgets (GtkDialog         *dlg);
+static void create_new_dialog_widgets (glHigDialog       *dlg);
 static void new_template_changed      (glWdgtMediaSelect *select,
 				       gpointer           data);
 static void new_response              (GtkDialog         *dlg,
@@ -83,14 +84,14 @@ gl_file_new (void)
 	g_return_if_fail (glabels_mdi != NULL);
 	g_return_if_fail (win != NULL);
 
-	dlg = gtk_dialog_new_with_buttons (_("New Label or Card"),
-					   GTK_WINDOW (win),
-					   GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_STOCK_OK, GTK_RESPONSE_OK,
-					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					   NULL);
+	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
+					      GTK_WINDOW (win),
+					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      NULL);
 
-	create_new_dialog_widgets (GTK_DIALOG (dlg));
+	create_new_dialog_widgets (GL_HIG_DIALOG (dlg));
 
 	g_signal_connect (G_OBJECT(dlg), "response",
 			  G_CALLBACK (new_response), dlg);
@@ -104,31 +105,25 @@ gl_file_new (void)
 /* PRIVATE.  Create widgets.                                                 */
 /*---------------------------------------------------------------------------*/
 static void
-create_new_dialog_widgets (GtkDialog *dlg)
+create_new_dialog_widgets (glHigDialog *dlg)
 {
-	GtkWidget *wframe, *wvbox, *template_entry, *rotate_sel;
+	GtkWidget *wframe, *template_entry, *rotate_sel;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	wframe = gtk_frame_new (_("Media Type"));
+	wframe = gl_hig_category_new (_("Media Type"));
 	gtk_box_pack_start (GTK_BOX (dlg->vbox), wframe, FALSE, FALSE, 0);
-
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox);
 
 	template_entry = gl_wdgt_media_select_new ();
-	gtk_container_add (GTK_CONTAINER (wvbox), template_entry);
+	gtk_box_pack_start (GTK_BOX (GL_HIG_CATEGORY(wframe)->vbox),
+			    template_entry, FALSE, FALSE, 0);
 
-	wframe = gtk_frame_new (_("Label orientation"));
+	wframe = gl_hig_category_new (_("Label orientation"));
 	gtk_box_pack_start (GTK_BOX (dlg->vbox), wframe, FALSE, FALSE, 0);
 
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 10);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox);
-
 	rotate_sel = gl_wdgt_rotate_label_new ();
-	gtk_box_pack_start (GTK_BOX (wvbox), rotate_sel, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GL_HIG_CATEGORY(wframe)->vbox),
+			    rotate_sel, FALSE, FALSE, 0);
 
 	g_object_set_data (G_OBJECT (dlg), "template_entry",
 			     template_entry);

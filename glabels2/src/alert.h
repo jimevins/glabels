@@ -27,12 +27,35 @@
 
 G_BEGIN_DECLS
 
-GtkWidget* gl_alert_dialog_new     (GtkWindow      *parent,
-				    GtkDialogFlags  flags,
-				    GtkMessageType  type,
-				    GtkButtonsType  buttons,
-				    const gchar    *primary_text,
-				    const gchar    *secondary_text);
+#define GL_TYPE_ALERT_DIALOG (gl_alert_dialog_get_type ())
+#define GL_ALERT_DIALOG(obj) \
+        (GTK_CHECK_CAST((obj), GL_TYPE_ALERT_DIALOG, glAlertDialog ))
+#define GL_ALERT_DIALOG_CLASS(klass) \
+        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_ALERT_DIALOG, glAlertDialogClass))
+#define GL_IS_ALERT_DIALOG(obj) \
+        (GTK_CHECK_TYPE ((obj), GL_TYPE_ALERT_DIALOG))
+#define GL_IS_ALERT_DIALOG_CLASS(klass) \
+        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_ALERT_DIALOG))
+
+typedef struct _glAlertDialog      glAlertDialog;
+typedef struct _glAlertDialogClass glAlertDialogClass;
+
+struct _glAlertDialog {
+	GtkDialog         parent_widget;
+};
+
+struct _glAlertDialogClass {
+	GtkDialogClass    parent_class;
+};
+
+guint      gl_alert_dialog_get_type    (void);
+
+GtkWidget *gl_alert_dialog_new         (GtkWindow      *parent,
+					GtkDialogFlags  flags,
+					GtkMessageType  type,
+					GtkButtonsType  buttons,
+					const gchar    *primary_text,
+					const gchar    *secondary_text);
 
 G_END_DECLS
 

@@ -69,6 +69,8 @@ glabels_SOURCES = 			\
 	prefs-dialog.h 			\
 	alert.c				\
 	alert.h				\
+	hig.c				\
+	hig.h				\
 	view.c				\
 	view.h				\
 	view-object.c			\

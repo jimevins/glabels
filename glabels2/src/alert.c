@@ -26,10 +26,86 @@
 
 #include "alert.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
 #define HIG_ALERT_BORDER   6
 #define HIG_ALERT_SPACING 12
 
+/*===========================================*/
+/* Private globals                           */
+/*===========================================*/
+static GtkDialogClass *parent_class;
+
+
+/*===========================================*/
+/* Local function prototypes                 */
+/*===========================================*/
+
+static void       gl_alert_dialog_class_init (glAlertDialogClass *class);
+static void       gl_alert_dialog_init       (glAlertDialog *alert_dialog);
+static void       gl_alert_dialog_finalize   (GObject *object);
+
 
+/****************************************************************************/
+/* Boilerplate Object stuff.                                                */
+/****************************************************************************/
+guint
+gl_alert_dialog_get_type (void)
+{
+	static guint alert_dialog_type = 0;
+
+	if (!alert_dialog_type) {
+		GTypeInfo alert_dialog_info = {
+			sizeof (glAlertDialogClass),
+			NULL,
+			NULL,
+			(GClassInitFunc) gl_alert_dialog_class_init,
+			NULL,
+			NULL,
+			sizeof (glAlertDialog),
+			0,
+			(GInstanceInitFunc) gl_alert_dialog_init,
+		};
+
+		alert_dialog_type =
+		    g_type_register_static (gtk_dialog_get_type (),
+					    "glAlertDialog",
+					    &alert_dialog_info, 0);
+	}
+
+	return alert_dialog_type;
+}
+
+static void
+gl_alert_dialog_class_init (glAlertDialogClass *class)
+{
+	GObjectClass *object_class = (GObjectClass *) class;
+
+	parent_class = g_type_class_peek_parent (class);
+
+	object_class->finalize = gl_alert_dialog_finalize;
+}
+
+static void
+gl_alert_dialog_init (glAlertDialog *alert_dialog)
+{
+}
+
+static void
+gl_alert_dialog_finalize (GObject *object)
+{
+	glAlertDialog *alert_dialog;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GL_IS_ALERT_DIALOG (object));
+
+	alert_dialog = GL_ALERT_DIALOG (object);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+
 /****************************************************************************/
 /* Create a message dialog that attempts to be HIG compliant.               */
 /****************************************************************************/
@@ -45,8 +121,19 @@ GtkWidget* gl_alert_dialog_new      (GtkWindow      *parent,
 	const gchar  *stock_id = NULL;
 	GtkStockItem  item;
   
-	/* Create bare dialog */
-	dialog = gtk_dialog_new_with_buttons ("", parent, flags, NULL);
+	/* Bare dialog */
+	dialog = g_object_new (gl_alert_dialog_get_type (), NULL);
+
+	/* Parent */
+	gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
+
+	/* Flags */
+	if ( flags & GTK_DIALOG_MODAL ) {
+		gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
+	}
+	if ( flags & GTK_DIALOG_DESTROY_WITH_PARENT ) {
+		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
+	}
 
 	/* Create HBOX */
 	hbox = gtk_hbox_new (FALSE, HIG_ALERT_SPACING);
