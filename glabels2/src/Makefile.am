@@ -163,6 +163,8 @@ glabels_SOURCES = 			\
 	wdgt-rotate-label.h		\
 	util.c				\
 	util.h				\
+	color.c				\
+	color.h				\
 	canvas-hacktext.c		\
 	canvas-hacktext.h		\
 	bonobo-mdi-child.c		\

@@ -37,11 +37,12 @@
 #include "view-text.h"
 #include "view-barcode.h"
 #include "xml-label.h"
+#include "color.h"
 
 #include "debug.h"
 
-#define SEL_LINE_COLOR  GNOME_CANVAS_COLOR_A (0, 0, 255, 128)
-#define SEL_FILL_COLOR  GNOME_CANVAS_COLOR_A (192, 192, 255, 128)
+#define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
+#define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
 
 /*===========================================*/
 /* Private globals                           */

@@ -26,13 +26,9 @@
 
 #include "wdgt-text-props.h"
 #include "marshal.h"
+#include "color.h"
 
 #include "debug.h"
-
-#define RED(x)   ( ((x)>>24) & 0xff )
-#define GREEN(x) ( ((x)>>16) & 0xff )
-#define BLUE(x)  ( ((x)>>8)  & 0xff )
-#define ALPHA(x) (  (x)      & 0xff )
 
 /*===========================================*/
 /* Private types                             */
@@ -391,7 +387,7 @@ gl_wdgt_text_props_get_params (glWdgtTextProps  *text,
 	/* ------ Get updated color ------ */
 	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (text->color_picker),
 				   &r, &g, &b, &a);
-	*color = GNOME_CANVAS_COLOR_A (r, g, b, a);
+	*color = GL_COLOR_A (r, g, b, a);
 
 	/* ------- Get updated justification ------ */
 	if (gtk_toggle_button_get_active
@@ -435,8 +431,10 @@ gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
 				      font_italic_flag);
 
 	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (text->color_picker),
-				   RED (color), GREEN (color), BLUE (color),
-				   ALPHA (color));
+				   GL_COLOR_I_RED (color),
+				   GL_COLOR_I_GREEN (color),
+				   GL_COLOR_I_BLUE (color),
+				   GL_COLOR_I_ALPHA (color));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (text->left_button),
 				      (just == GTK_JUSTIFY_LEFT));

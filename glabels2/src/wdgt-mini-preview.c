@@ -26,13 +26,14 @@
 
 #include "wdgt-mini-preview.h"
 #include "marshal.h"
+#include "color.h"
 
 #include "debug.h"
 
 #define WDGT_MINI_PREVIEW_MAX_PIXELS 175
 #define SHADOW_X_OFFSET 3
 #define SHADOW_Y_OFFSET 3
-#define SHADOW_COLOR GNOME_CANVAS_COLOR_A (33, 33, 33, 192)
+#define SHADOW_COLOR GL_COLOR_A (33, 33, 33, 192)
 
 /*===========================================*/
 /* Private types                             */

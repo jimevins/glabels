@@ -122,6 +122,8 @@ src/wdgt-rotate-label.c
 src/wdgt-rotate-label.h
 src/util.c
 src/util.h
+src/color.c
+src/color.h
 src/canvas-hacktext.c
 src/canvas-hacktext.h
 src/bonobo-mdi-child.c
