@@ -26,6 +26,8 @@
 
 #include "alert.h"
 
+#define HIG_ALERT_BORDER   6
+#define HIG_ALERT_SPACING 12
 
 
 /****************************************************************************/
@@ -47,7 +49,7 @@ GtkWidget* gl_alert_dialog_new      (GtkWindow      *parent,
 	dialog = gtk_dialog_new_with_buttons ("", parent, flags, NULL);
 
 	/* Create HBOX */
-	hbox = gtk_hbox_new (FALSE, 12);
+	hbox = gtk_hbox_new (FALSE, HIG_ALERT_SPACING);
 	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dialog)->vbox),
 			    hbox, FALSE, FALSE, 0);
 
@@ -89,15 +91,17 @@ GtkWidget* gl_alert_dialog_new      (GtkWindow      *parent,
 
 	/* Adjust dialog properties */
 	gtk_window_set_title (GTK_WINDOW(dialog), "");
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), 6);
+	gtk_container_set_border_width (GTK_CONTAINER(dialog),
+					HIG_ALERT_BORDER);
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 
 	/* Adjust VBOX properties */
-	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(dialog)->vbox), 12);
+	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(dialog)->vbox),
+			     HIG_ALERT_SPACING);
 
 	/* Adjust HBOX properties */
-	gtk_box_set_spacing (GTK_BOX(hbox), 12);
-	gtk_container_set_border_width (GTK_CONTAINER(hbox), 6);
+	gtk_box_set_spacing (GTK_BOX(hbox), HIG_ALERT_SPACING);
+	gtk_container_set_border_width (GTK_CONTAINER(hbox), HIG_ALERT_BORDER);
 
 	/* Adjust IMAGE properties */
 	gtk_misc_set_alignment (GTK_MISC(image), 0.5, 0.0);
