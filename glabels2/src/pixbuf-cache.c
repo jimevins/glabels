@@ -173,6 +173,8 @@ gl_pixbuf_cache_remove_pixbuf (GHashTable *pixbuf_cache,
 {
 	CacheRecord *record;
 
+	if (name == NULL) return;
+
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
 	record = g_hash_table_lookup (pixbuf_cache, name);
