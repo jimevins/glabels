@@ -140,6 +140,8 @@ glabels_SOURCES = 			\
 	wdgt-fill.h			\
 	wdgt-vector.c			\
 	wdgt-vector.h			\
+	wdgt-image-select.c		\
+	wdgt-image-select.h		\
 	wdgt-bc-props.c			\
 	wdgt-bc-props.h			\
 	wdgt-bc-style.c			\

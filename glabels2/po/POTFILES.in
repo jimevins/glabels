@@ -79,8 +79,8 @@ src/xml-label-04.c
 src/xml-label-04.h
 src/merge.c
 src/merge.h
-src/merge-init.c			\
-src/merge-init.h			\
+src/merge-init.c
+src/merge-init.h
 src/merge-text.c
 src/merge-text.h
 src/text-node.c
@@ -99,6 +99,8 @@ src/wdgt-fill.c
 src/wdgt-fill.h
 src/wdgt-vector.c
 src/wdgt-vector.h
+src/wdgt-image-select.c
+src/wdgt-image-select.h
 src/wdgt-bc-props.c
 src/wdgt-bc-props.h
 src/wdgt-bc-style.c
