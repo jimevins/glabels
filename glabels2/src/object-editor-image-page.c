@@ -59,6 +59,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 {
 	GdkColor     *gdk_color;
 	GtkSizeGroup *label_size_group;
+	GtkWidget    *ge;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -85,8 +86,9 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	gtk_widget_show_all (editor->priv->img_page_vbox);
 
 	/* Connect signals */
-	g_signal_connect_swapped (G_OBJECT (editor->priv->img_pixmap_entry),
-				  "activate",
+	ge = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(editor->priv->img_pixmap_entry));
+	g_signal_connect_swapped (G_OBJECT (ge),
+				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->img_key_entry),

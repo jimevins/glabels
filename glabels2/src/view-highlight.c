@@ -1486,15 +1486,16 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 						  event->button.time);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			/* y1 unchanged */
 			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
 			h = y2 - y1;
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			x1 = x2 - w;
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
 		default:
@@ -1507,15 +1508,16 @@ sl_resize_event_handler (GnomeCanvasItem *handle_item,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			x1 = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			/* y1 unchanged */
 			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
 			h = y2 - y1;
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			x1 = x2 - w;
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
 			return FALSE;
@@ -1589,15 +1591,16 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 						  event->button.time);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			/* y1 unchanged */
 			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
 			h = y2 - y1;
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
 		default:
@@ -1610,15 +1613,16 @@ sr_resize_event_handler (GnomeCanvasItem *handle_item,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			/* y1 unchanged */
 			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
 			h = y2 - y1;
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
 			return FALSE;
@@ -1692,15 +1696,16 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 						  event->button.time);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
 			w = x2 - x1;
 			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			y1 = y2 - h;
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
 		default:
@@ -1713,15 +1718,16 @@ st_resize_event_handler (GnomeCanvasItem *handle_item,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			y1 = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
 			w = x2 - x1;
 			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			y1 = y2 - h;
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
 			return FALSE;
@@ -1795,15 +1801,16 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 						  event->button.time);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			/* y1 unchanged */
 			w = x2 - x1;
 			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 
 		default:
@@ -1816,15 +1823,16 @@ sb_resize_event_handler (GnomeCanvasItem *handle_item,
 						&x0, &y0, &x1, &y1, &x2, &y2);
 			gnome_canvas_item_w2i (view_highlight->private->group,
 					       &event->button.x, &event->button.y);
-			/* x1 unchanged */
-			/* y1 unchanged */
 			w = x2 - x1;
 			h = MAX (event->button.y - x1, MIN_ITEM_SIZE);
+			gl_label_object_set_size (object, w, h);
+			gl_label_object_get_size (object, &w, &h);
+			/* x1 unchanged */
+			/* y1 unchanged */
 			x0 = x0 + x1;
 			y0 = y0 + y1;
 			gnome_canvas_item_i2w (view_highlight->private->group, &x0, &y0);
 			gl_label_object_set_position (object, x0, y0);
-			gl_label_object_set_size (object, w, h);
 			return TRUE;
 		} else {
 			return FALSE;

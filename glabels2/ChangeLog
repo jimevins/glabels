@@ -1,3 +1,20 @@
+2004-02-04  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+		Track "changed" signal of pixmap entry's GtkEntry rather than its
+		"activate" signal -- this catches all changes to the entry rather than
+		just changes resulting from a browse, so one can easily pull previous
+		entries from the history. (This change is marked below on 2004-02-03,
+		but somehow never got checked in.)
+
+	* src/view-highlight.c: (sl_resize_event_handler),
+	(sr_resize_event_handler), (st_resize_event_handler),
+	(sb_resize_event_handler):
+		Side resize handles will now confirm the actual resize that the object
+		accepted before adjusting position parameters.  Previously some interesting
+		things happened when resizing a barcode to its minimum size.
+
 2004-02-03  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-image-page.c:
