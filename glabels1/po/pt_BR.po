@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 0.4.1\n"
+"Project-Id-Version: glabels 0.4.6\n"
 "POT-Creation-Date: 2002-08-24 22:30-0400\n"
-"PO-Revision-Date: 2002-01-31 21:20+ZONE\n"
+"PO-Revision-Date: 2003-01-03 22:30-0300\n"
 "Last-Translator: Paulo R. Ormenese <pormenese@uol.com.br>\n"
 "Language-Team: Brazilian portuguese <>\n"
 "MIME-Version: 1.0\n"
@@ -15,37 +15,35 @@ msgstr ""
 
 #: src/glabels_batch.c:49
 msgid "print this message"
-msgstr ""
+msgstr "mostra esta mensagem"
 
 #: src/glabels_batch.c:51
 msgid "print the version of glabels-batch being used"
-msgstr ""
+msgstr "mostra a versão de glabels-batch que está sendo utilizada"
 
 #: src/glabels_batch.c:53
 msgid "set output filename (default=\"output.ps\")"
-msgstr ""
+msgstr "define o nome do arquivo de saída (padrão=\"output.ps\")"
 
 #: src/glabels_batch.c:53
 msgid "filename"
-msgstr ""
+msgstr "nome de arquivo"
 
 #: src/glabels_batch.c:55
 msgid "number of sheets (default=1)"
-msgstr ""
+msgstr "número de páginas (padrão=1)"
 
 #: src/glabels_batch.c:55
-#, fuzzy
 msgid "sheets"
-msgstr "Páginas:"
+msgstr "páginas"
 
 #: src/glabels_batch.c:57
 msgid "number of copies (default=1)"
-msgstr ""
+msgstr "número de cópias (padrão=1)"
 
 #: src/glabels_batch.c:57
-#, fuzzy
 msgid "copies"
-msgstr "Cópias"
+msgstr "cópias"
 
 #: src/glabels_batch.c:59 src/print_dialog.c:152
 msgid "print outlines (to test printer alignment)"
@@ -57,16 +55,16 @@ msgstr "imprimir ao contrário (como uma imagem de espelho)"
 
 #: src/glabels_batch.c:92
 msgid "[OPTION...] GLABELS_FILE..."
-msgstr ""
+msgstr "[OPÇÃO...] ARQUIVO_GLABELS..."
 
 #: src/glabels_batch.c:111
 msgid "missing glabels file\n"
-msgstr ""
+msgstr "faltando arquivo glabels\n"
 
 #: src/glabels_batch.c:139
-#, fuzzy, c-format
+#, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "Impossível abrir o arquivo"
+msgstr "impossível abrir o arquivo glabels\n"
 
 #: src/mdi.c:169
 #, c-format
@@ -94,7 +92,7 @@ msgstr "Não salve"
 
 #: src/mdi.c:601 src/file.c:288
 msgid "Cannot save file"
-msgstr "Não posso salvar o arquivo"
+msgstr "Impossível salvar o arquivo"
 
 #: src/mdi.c:623 src/file.c:311
 msgid "Save As"
@@ -330,7 +328,6 @@ msgid "xmlParseFile error"
 msgstr "erro: xmlParseFile"
 
 #: src/label.c:228
-#, fuzzy
 msgid "No document root"
 msgstr "Sem raiz do documento"
 
@@ -385,9 +382,8 @@ msgid "Text with tab separators"
 msgstr "Texto separado com tab"
 
 #: src/merge.c:94
-#, fuzzy
 msgid "Text with comma separators (CSV)"
-msgstr "Texto separado com vírgula"
+msgstr "Texto separado com vírgulas (CSV)"
 
 #: src/merge.c:102
 msgid "Text with colon separators"
@@ -674,9 +670,8 @@ msgid "on 1st sheet"
 msgstr "na primeira folha"
 
 #: src/print_merge.c:188
-#, fuzzy
 msgid "Collate"
-msgstr "Montar"
+msgstr "Ordenar"
 
 #: src/print_merge.c:195
 msgid "Copies:"
