@@ -189,6 +189,14 @@
 	     _tip="Align objects to bottoms"
              pixtype="stock" pixname="gl_stock_align_bottom"/>
 
+	<cmd name="ToolsCenterHorizontal"
+	     _tip="Center objects to horizontal label center"
+             pixtype="stock" pixname="gl_stock_center_horiz"/>
+	
+	<cmd name="ToolsCenterVertical"
+	     _tip="Center objects to vertical label center"
+             pixtype="stock" pixname="gl_stock_center_vert"/>
+	
 	
 	<cmd name="HelpContents" _label="Contents" _tip="Open the glabels manual"
 	accel="F1" pixtype="stock" pixname="gtk-help"/>
@@ -339,15 +347,17 @@
 	</submenu>
 
 	<submenu name="AlignHoriz" _label="Align _Horizontal">
-                <menuitem name="ToolsAlignLeft" verb="" _label="_Left"/>
-                <menuitem name="ToolsAlignHCenter" verb="" _label="_Center"/>
-                <menuitem name="ToolsAlignRight" verb="" _label="_Right"/>
+                <menuitem name="ToolsAlignLeft" verb="" _label="_Lefts"/>
+                <menuitem name="ToolsAlignHCenter" verb="" _label="_Centers"/>
+                <menuitem name="ToolsAlignRight" verb="" _label="_Rights"/>
+                <menuitem name="ToolsCenterHorizontal" verb="" _label="Label Ce_nter"/>
 	</submenu>
 
 	<submenu name="AlignVert" _label="Align _Vertical">
-                <menuitem name="ToolsAlignTop" verb="" _label="_Top"/>
-                <menuitem name="ToolsAlignVCenter" verb="" _label="_Center"/>
-                <menuitem name="ToolsAlignBottom" verb="" _label="_Bottom"/>
+                <menuitem name="ToolsAlignTop" verb="" _label="_Tops"/>
+                <menuitem name="ToolsAlignVCenter" verb="" _label="_Centers"/>
+                <menuitem name="ToolsAlignBottom" verb="" _label="_Bottoms"/>
+                <menuitem name="ToolsCenterVertical" verb="" _label="Label Ce_nter"/>
 	</submenu>
 
 	<separator/>

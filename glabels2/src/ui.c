@@ -85,6 +85,8 @@ static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("ToolsAlignTop",         gl_tools_align_objects_top),
 	BONOBO_UI_VERB ("ToolsAlignBottom",      gl_tools_align_objects_bottom),
 	BONOBO_UI_VERB ("ToolsAlignVCenter",     gl_tools_align_objects_vcenter),
+	BONOBO_UI_VERB ("ToolsCenterHorizontal", gl_tools_center_objects_horiz),
+	BONOBO_UI_VERB ("ToolsCenterVertical",   gl_tools_center_objects_vert),
 	BONOBO_UI_VERB ("SettingsPreferences",   gl_cmd_settings_preferences),
 	BONOBO_UI_VERB ("HelpContents",          gl_cmd_help_contents),
 	BONOBO_UI_VERB ("About",                 gl_cmd_help_about),
@@ -131,6 +133,8 @@ static gchar* doc_verbs [] = {
 	"/commands/ToolsAlignTop",
 	"/commands/ToolsAlignBottom",
 	"/commands/ToolsAlignVCenter",
+	"/commands/ToolsCenterHorizontal",
+	"/commands/ToolsCenterVertical",
 	"/menu/Objects/CreateObjects",
 	"/menu/Objects/Order",
 	"/menu/Objects/RotateFlip",
@@ -159,8 +163,12 @@ static gchar* selection_verbs [] = {
 	"/commands/ToolsRotateRight",
 	"/commands/ToolsFlipHorizontal",
 	"/commands/ToolsFlipVertical",
+	"/commands/ToolsCenterHorizontal",
+	"/commands/ToolsCenterVertical",
 	"/menu/Objects/Order",
 	"/menu/Objects/RotateFlip",
+	"/menu/Objects/AlignHoriz",
+	"/menu/Objects/AlignVert",
 
 	NULL
 };
@@ -178,8 +186,6 @@ static gchar* multi_selection_verbs [] = {
 	"/commands/ToolsAlignTop",
 	"/commands/ToolsAlignBottom",
 	"/commands/ToolsAlignVCenter",
-	"/menu/Objects/AlignHoriz",
-	"/menu/Objects/AlignVert",
 
 	NULL
 };

@@ -2032,6 +2032,74 @@ gl_view_align_selection_vcenter (glView *view)
 }
 
 /*****************************************************************************/
+/* Center selected objects to in center of label.                            */
+/*****************************************************************************/
+void
+gl_view_center_selection_horiz (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dx, x_label_center, x_obj_center, x1, y1, x2, y2, w, h;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view));
+
+	gl_label_get_size (view->label, &w, &h);
+	x_label_center = w / 2.0;
+
+	/* adjust the object positions */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		x_obj_center = (x1 + x2) / 2.0;
+		dx = x_label_center - x_obj_center;
+		gl_label_object_set_position_relative (object, dx, 0.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*****************************************************************************/
+/* Center selected objects to in center of label.                            */
+/*****************************************************************************/
+void
+gl_view_center_selection_vert (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dy, y_label_center, y_obj_center, x1, y1, x2, y2, w, h;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view));
+
+	gl_label_get_size (view->label, &w, &h);
+	y_label_center = h / 2.0;
+
+	/* adjust the object positions */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		y_obj_center = (y1 + y2) / 2.0;
+		dy = y_label_center - y_obj_center;
+		gl_label_object_set_position_relative (object, 0.0, dy);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void

@@ -477,3 +477,39 @@ gl_tools_align_objects_vcenter (BonoboUIComponent *uic,
 	}
 }
 
+/*****************************************************************************/
+/* Center objects horizontally callback.                                     */
+/*****************************************************************************/
+void
+gl_tools_center_objects_horiz (BonoboUIComponent *uic,
+			       gpointer           user_data,
+			       const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_center_selection_horiz (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Center objects vertically callback.                                       */
+/*****************************************************************************/
+void
+gl_tools_center_objects_vert (BonoboUIComponent *uic,
+			      gpointer           user_data,
+			      const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_center_selection_vert (GL_VIEW(window->view));
+	}
+}
+

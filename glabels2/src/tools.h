@@ -122,6 +122,14 @@ void gl_tools_align_objects_vcenter    (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 
+void gl_tools_center_objects_horiz     (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_center_objects_vert      (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
 G_END_DECLS
 
 #endif
