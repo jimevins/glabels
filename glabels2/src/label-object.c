@@ -187,6 +187,7 @@ gl_label_object_finalize (GObject *object)
 	parent = GL_LABEL_OBJECT(object)->parent;
 	gl_label_remove_object (parent, GL_LABEL_OBJECT(object));
 
+	g_free (GL_LABEL_OBJECT(object)->private->name);
 	g_free (GL_LABEL_OBJECT(object)->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
