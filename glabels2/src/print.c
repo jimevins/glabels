@@ -496,7 +496,8 @@ print_label (PrintInfo     *pi,
 	gnome_print_translate (pi->pc, x, y);
 	if (gl_label_get_rotate_flag (label)) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
-		gnome_print_rotate (pi->pc, 90.0);
+		gnome_print_rotate (pi->pc, -90.0);
+		gnome_print_translate (pi->pc, -width, 0.0);
 	}
 	if ( reverse_flag ) {
 		gnome_print_translate (pi->pc, width, 0.0);
