@@ -319,16 +319,16 @@ gl_file_open_real (const gchar     *filename,
 {
 	gchar *abs_filename;
 	glMDIChild *new_child = NULL;
-	GtkWidget *dlg;
 	GnomeRecentModel *recent;
 	gint ret;
-	gchar *primary_msg;
 
 	gl_debug (DEBUG_FILE, "START");
 
 	abs_filename = gl_util_make_absolute (filename);
 	new_child = gl_mdi_child_new_with_uri (filename, NULL);
 	if (!new_child) {
+		GtkWidget *dlg;
+		gchar *primary_msg;
 
 		gl_debug (DEBUG_FILE, "couldn't open file");
 
@@ -433,7 +433,7 @@ gl_file_save (glMDIChild *child)
 					       filename);
 
 		dialog = gl_util_hig_dialog_new (GTK_WINDOW(glabels_get_active_window()),
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
 						 primary_msg, "");
@@ -506,8 +506,8 @@ gl_file_save_as (glMDIChild *child)
 
 	/* Destroy dialog if not already destroyed. */
 	if (!destroy_flag) {
-		/* Disconnect our destroy callback first, so that we don't kill the
-		 * current gtk_main() loop. */
+		/* Disconnect our destroy callback first, so that we don't
+		 * kill the current gtk_main() loop. */
 		g_signal_handlers_disconnect_by_func (GTK_OBJECT (fsel),
 						      G_CALLBACK (save_as_destroy_cb),
 						      &destroy_flag);
@@ -557,11 +557,13 @@ save_as_ok_cb (GtkWidget * widget,
 	if (!raw_filename || (raw_filename[strlen (raw_filename) - 1] == '/')) {
 
 		dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
-					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_MESSAGE_WARNING,
 					      GTK_BUTTONS_CLOSE,
 					      _("Must supply file name"), "");
-		gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+
+		gtk_dialog_run (GTK_DIALOG (dlg));
+		gtk_widget_destroy (dlg);
 
 	} else {
 
@@ -579,14 +581,15 @@ save_as_ok_cb (GtkWidget * widget,
 						       filename);
 
 			dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
-						      GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_MESSAGE_ERROR,
 						      GTK_BUTTONS_CLOSE,
 						      primary_msg, "");
 
 			g_free (primary_msg);
 
-			gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+			gtk_dialog_run (GTK_DIALOG (dlg));
+			gtk_widget_destroy (dlg);
 
 		} else {
 
