@@ -252,8 +252,8 @@ void                 gl_template_add_layout           (glTemplateLabelType *labe
 void                 gl_template_add_markup           (glTemplateLabelType *label_type,
 						       glTemplateMarkup    *markup);
 
-glTemplateLayout    *gl_template_layout_new           (gdouble              nx,
-						       gdouble              ny,
+glTemplateLayout    *gl_template_layout_new           (gint                 nx,
+						       gint                 ny,
 						       gdouble              x0,
 						       gdouble              y0,
 						       gdouble              dx,

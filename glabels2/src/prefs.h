@@ -36,7 +36,7 @@ void          gl_prefs_init                (void);
 
 const gchar  *gl_prefs_get_page_size       (void);
 
-glPrefsUnits  gl_prefs_get_units           (void);
+glUnitsType   gl_prefs_get_units           (void);
 
 const gchar  *gl_prefs_get_units_string    (void);
 

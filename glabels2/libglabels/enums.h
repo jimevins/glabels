@@ -1,9 +1,9 @@
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
- *  libglabels.h:  libglabels master header file
+ *  enums.h:  common libGLabels enumerations header file
  *
- *  Copyright (C) 2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2003, 2004  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -23,14 +23,27 @@
  *  MA 02111-1307, USA
  */
 
-#ifndef __LIBGLABELS_H__
-#define __LIBGLABELS_H__
+#ifndef __ENUMS_H__
+#define __ENUMS_H__
 
-#include <libglabels/enums.h>
-#include <libglabels/paper.h>
-#include <libglabels/template.h>
-#include <libglabels/xml-paper.h>
-#include <libglabels/xml-template.h>
-#include <libglabels/xml.h>
+#include <glib.h>
 
-#endif /* __LIBGLABELS_H__ */
+G_BEGIN_DECLS
+
+/* Units of distance */
+typedef enum {
+	GL_UNITS_POINT,
+	GL_UNITS_INCH,
+	GL_UNITS_MM,
+	GL_UNITS_CM,
+	GL_UNITS_PICA,
+
+	GL_UNITS_FIRST = GL_UNITS_POINT,
+	GL_UNITS_LAST  = GL_UNITS_PICA,
+} glUnitsType;
+
+
+G_END_DECLS
+
+
+#endif /* __ENUMS_H__ */

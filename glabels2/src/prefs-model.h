@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeprint/gnome-font.h>
+#include <libglabels/enums.h>
 
 G_BEGIN_DECLS
 
@@ -34,12 +35,6 @@ typedef enum {
 	GL_TOOLBAR_ICONS,
 	GL_TOOLBAR_ICONS_AND_TEXT
 } glToolbarSetting;
-
-typedef enum {
-	GL_UNITS_PTS,
-	GL_UNITS_INCHES,
-	GL_UNITS_MM,
-} glPrefsUnits;
 
 #define GL_TYPE_PREFS_MODEL              (gl_prefs_model_get_type ())
 #define GL_PREFS_MODEL(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_PREFS_MODEL, glPrefsModel))
@@ -61,7 +56,7 @@ struct _glPrefsModel {
 	GConfClient      *gconf_client;
 
 	/* Units */
-	glPrefsUnits      units;
+	glUnitsType       units;
 
 	/* Page size */
 	gchar            *default_page_size;

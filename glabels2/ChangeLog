@@ -1,3 +1,37 @@
+2005-02-05  Jim Evins  <evins@snaught.com>
+
+	Some cleanup to libglabels.
+	
+	* configure.in:
+		Updated version to 2.1.1cvs.  Added generation of libglabels.pc.
+	* libglabels/libglabels.pc.in
+		Created.
+	* libglabels/enums.h
+		Created.  Currently only contains glUnitsType which provides enumerations
+		for all possible units of distance.
+	* libglabels/Makefile.am:
+		Incorporated new files enums.h and libglabels.pc[.in].
+	* libglabels/libglabels.h:
+		Include enums.h.
+	* libglabels/template.h:
+	* libglabels/template.c: (gl_template_layout_new):
+		Changed parameters nx and ny to gint from gdouble.
+	* libglabels/xml.h:
+	* libglabels/xml.c: (gl_xml_get_prop_length),
+	(gl_xml_set_prop_length), (gl_xml_set_default_units):
+		Added support for different output units.
+	* src/prefs-dialog.c: (update_locale_page_from_prefs),
+	(update_prefs_from_locale_page):
+	* src/prefs-model.c: (string_to_units), (units_to_string):
+	* src/prefs-model.h:
+	* src/prefs.c: (gl_prefs_get_units_per_point),
+	(gl_prefs_get_units_precision), (gl_prefs_get_units_step_size),
+	(gl_prefs_get_units_string):
+	* src/prefs.h:
+	* src/wdgt-media-select.c: (details_update), (get_label_size_desc):
+		Reconciled all length enumerations with the new enumerations provided
+		in libglabels/enums.h.
+
 2005-02-03  Jim Evins  <evins@snaught.com>
 
 	* po/cs.po:

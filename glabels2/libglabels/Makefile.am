@@ -16,6 +16,7 @@ libglabelsincludedir=$(includedir)/libglabels
 
 libglabels_la_SOURCES =		\
 	libglabels-private.h	\
+	enums.h			\
 	paper.h			\
 	paper.c			\
 	template.h		\
@@ -29,8 +30,16 @@ libglabels_la_SOURCES =		\
 
 libglabelsinclude_HEADERS = 	\
 	libglabels.h		\
+	enums.h			\
 	paper.h			\
 	template.h		\
 	xml-paper.h		\
 	xml-template.h		\
 	xml.h			
+
+EXTRA_DIST =			\
+	libglabels.pc.in
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libglabels.pc
+

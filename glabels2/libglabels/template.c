@@ -505,8 +505,8 @@ gl_template_add_markup (glTemplateLabelType *label_type,
 /* Create new layout structure.                                              */
 /*****************************************************************************/
 glTemplateLayout *
-gl_template_layout_new (gdouble nx,
-			gdouble ny,
+gl_template_layout_new (gint    nx,
+			gint    ny,
 			gdouble x0,
 			gdouble y0,
 			gdouble dx,

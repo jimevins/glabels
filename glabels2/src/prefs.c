@@ -78,7 +78,7 @@ gl_prefs_get_page_size (void)
 /****************************************************************************/
 /* Get desired units.                                                       */
 /****************************************************************************/
-glPrefsUnits
+glUnitsType
 gl_prefs_get_units (void)
 {
 	return gl_prefs->units;
@@ -92,9 +92,9 @@ gl_prefs_get_units_per_point (void)
 {
 
 	switch (gl_prefs->units) {
-	case GL_UNITS_PTS:
+	case GL_UNITS_POINT:
 		return 1.0;	/* points */
-	case GL_UNITS_INCHES:
+	case GL_UNITS_INCH:
 		return 1.0 / 72.0;	/* inches */
 	case GL_UNITS_MM:
 		return 0.35277778;	/* mm */
@@ -112,9 +112,9 @@ gl_prefs_get_units_precision (void)
 {
 
 	switch (gl_prefs->units) {
-	case GL_UNITS_PTS:
+	case GL_UNITS_POINT:
 		return 1;	/* points */
-	case GL_UNITS_INCHES:
+	case GL_UNITS_INCH:
 		return 3;	/* inches */
 	case GL_UNITS_MM:
 		return 1;	/* mm */
@@ -132,9 +132,9 @@ gl_prefs_get_units_step_size (void)
 {
 
 	switch (gl_prefs->units) {
-	case GL_UNITS_PTS:
+	case GL_UNITS_POINT:
 		return 0.1;	/* points */
-	case GL_UNITS_INCHES:
+	case GL_UNITS_INCH:
 		return 0.001;	/* inches */
 	case GL_UNITS_MM:
 		return 0.1;	/* mm */
@@ -152,9 +152,9 @@ gl_prefs_get_units_string (void)
 {
 
 	switch (gl_prefs->units) {
-	case GL_UNITS_PTS:
+	case GL_UNITS_POINT:
 		return _("points");
-	case GL_UNITS_INCHES:
+	case GL_UNITS_INCH:
 		return _("inches");
 	case GL_UNITS_MM:
 		return _("mm");

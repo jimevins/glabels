@@ -69,7 +69,7 @@
 #define PREF_MAX_RECENTS                    "/max-recents"
 
 /* Default values */
-#define DEFAULT_UNITS_STRING       units_to_string (GL_UNITS_INCHES)
+#define DEFAULT_UNITS_STRING       units_to_string (GL_UNITS_INCH)
 #define DEFAULT_PAGE_SIZE          "US-Letter"
 
 #define DEFAULT_FONT_FAMILY        "Sans"
@@ -133,8 +133,8 @@ static gdouble        get_float                    (GConfClient         *client,
 						    const gchar         *key,
 						    gdouble              def);
 
-static glPrefsUnits   string_to_units              (const gchar         *string);
-static const gchar   *units_to_string              (glPrefsUnits         units);
+static glUnitsType    string_to_units              (const gchar         *string);
+static const gchar   *units_to_string              (glUnitsType          units);
 
 
 
@@ -672,32 +672,32 @@ get_float (GConfClient *client,
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Utilities to deal with units.                                   */
 /*---------------------------------------------------------------------------*/
-static glPrefsUnits
+static glUnitsType
 string_to_units (const gchar *string)
 {
-	glPrefsUnits units;
+	glUnitsType units;
 
 	if (g_strcasecmp (string, "Points") == 0) {
-		units = GL_UNITS_PTS;
+		units = GL_UNITS_POINT;
 	} else if (g_strcasecmp (string, "Inches") == 0) {
-		units = GL_UNITS_INCHES;
+		units = GL_UNITS_INCH;
 	} else if (g_strcasecmp (string, "Millimeters") == 0) {
 		units = GL_UNITS_MM;
 	} else {
-		units = GL_UNITS_INCHES;
+		units = GL_UNITS_INCH;
 	}
 
 	return units;
 }
 
 static const
-gchar *units_to_string (glPrefsUnits units)
+gchar *units_to_string (glUnitsType units)
 {
 	switch (units) {
-	case GL_UNITS_PTS:
+	case GL_UNITS_POINT:
 		return "Points";
 		break;
-	case GL_UNITS_INCHES:
+	case GL_UNITS_INCH:
 		return "Inches";
 		break;
 	case GL_UNITS_MM:

@@ -434,7 +434,7 @@ details_update (glWdgtMediaSelect *media_select,
 {
 	glTemplate *template;
 	gchar *text;
-	glPrefsUnits units;
+	glUnitsType units;
 	const gchar *units_string;
 	gdouble units_per_point;
 
@@ -592,7 +592,7 @@ get_layout_desc (const glTemplate *template)
 static gchar *
 get_label_size_desc (const glTemplate *template)
 {
-	glPrefsUnits               units;
+	glUnitsType                units;
 	const gchar               *units_string;
 	gdouble                    units_per_point;
 	const glTemplateLabelType *label_type;
@@ -606,7 +606,7 @@ get_label_size_desc (const glTemplate *template)
 
 	switch (label_type->shape) {
 	case GL_TEMPLATE_SHAPE_RECT:
-		if ( units == GL_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCH ) {
 			gchar *xstr, *ystr;
 
 			xstr = gl_util_fraction (label_type->size.rect.w*units_per_point);
@@ -623,7 +623,7 @@ get_label_size_desc (const glTemplate *template)
 		}
 		break;
 	case GL_TEMPLATE_SHAPE_ROUND:
-		if ( units == GL_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCH ) {
 			gchar *dstr;
 
 			dstr = gl_util_fraction (2.0*label_type->size.round.r*units_per_point);
@@ -637,7 +637,7 @@ get_label_size_desc (const glTemplate *template)
 		}
 		break;
 	case GL_TEMPLATE_SHAPE_CD:
-		if ( units == GL_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCH ) {
 			gchar *dstr;
 
 			dstr = gl_util_fraction (2.0*label_type->size.cd.r1*units_per_point);

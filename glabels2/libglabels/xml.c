@@ -42,8 +42,8 @@
 /*========================================================*/
 
 typedef struct {
-	gchar  *name;
-	gdouble points_per_unit;
+	gchar       *name;
+	gdouble      points_per_unit;
 } UnitTableEntry;
 
 /*========================================================*/
@@ -55,14 +55,17 @@ static UnitTableEntry unit_table[] = {
 	/* These names are identical to the absolute length units supported in
 	   the CSS2 Specification (Section 4.3.2) */
 
-	{"pt",           POINTS_PER_POINT},
-	{"in",           POINTS_PER_INCH},
-	{"mm",           POINTS_PER_MM},
-	{"cm",           POINTS_PER_CM},
-	{"pc",           POINTS_PER_PICA},
+	/* This table must be sorted exactly as the enumerations in glUnitsType */
 
-	{NULL, 0}
+	/* [GL_UNITS_POINT] */   {"pt",      POINTS_PER_POINT},
+	/* [GL_UNITS_INCH]  */   {"in",      POINTS_PER_INCH},
+	/* [GL_UNITS_MM]    */   {"mm",      POINTS_PER_MM},
+	/* [GL_UNITS_CM]    */   {"cm",      POINTS_PER_CM},
+	/* [GL_UNITS_PICA]  */   {"pc",      POINTS_PER_PICA},
+
 };
+
+static glUnitsType  default_units        = GL_UNITS_POINT;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -177,13 +180,13 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 		if (unit != string) {
 			unit = g_strchug (unit);
 			if (strlen (unit) > 0 ) {
-				for (i=0; unit_table[i].name != NULL; i++) {
+				for (i=GL_UNITS_FIRST; i<=GL_UNITS_LAST; i++) {
 					if (xmlStrcasecmp (unit, unit_table[i].name) == 0) {
 						val *= unit_table[i].points_per_unit;
 						break;
 					}
 				}
-				if (unit_table[i].name == NULL) {
+				if (i>GL_UNITS_LAST) {
 					g_warning ("Line %d, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
 						   xmlGetLineNo (node), node->name, property,
 						   unit);
@@ -269,11 +272,26 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
 	gchar  *string_unit;
 
+	/* Convert to default units */
+	val /= unit_table[default_units].points_per_unit;
+
 	/* Guarantee "C" locale by use of g_ascii_formatd */
 	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
-	string_unit = g_strdup_printf ("%spt", string);
+	string_unit = g_strdup_printf ("%s%s", string, unit_table[default_units].name);
 	xmlSetProp (node, property, string_unit);
         g_free (string_unit);
 }
+
+/****************************************************************************/
+/* Set default length units.                                                */
+/****************************************************************************/
+void
+gl_xml_set_default_units (glUnitsType   units)
+{
+	g_return_if_fail ((units >= GL_UNITS_FIRST) && (units <= GL_UNITS_LAST));
+
+	default_units = units;
+}
+
 

@@ -29,6 +29,8 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
+#include "enums.h"
+
 #define GL_XML_NAME_SPACE "http://snaught.com/glabels/2.0/"
 
 G_BEGIN_DECLS
@@ -73,6 +75,8 @@ void     gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 void     gl_xml_set_prop_length   (xmlNodePtr    node,
 				   const gchar  *property,
 				   gdouble       val);
+
+void     gl_xml_set_default_units (glUnitsType   units);
 
 G_END_DECLS
 
