@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=gLabels
+Name=gLabels Label Designer
 Name[ja]=gLabels
-Comment=Create Labels & Business Cards
+Comment=Create labels, business cards and media covers.
 Comment[ja]=ラベルとビジネスカードの作成プログラム
 Exec=glabels
 Icon=glabels/glabels-icon.png
