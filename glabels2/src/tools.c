@@ -369,3 +369,111 @@ gl_tools_flip_objects_vert (BonoboUIComponent *uic,
 	}
 }
 
+/*****************************************************************************/
+/* Align objects left callback.                                              */
+/*****************************************************************************/
+void
+gl_tools_align_objects_left (BonoboUIComponent *uic,
+			     gpointer           user_data,
+			     const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_left (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Align objects right callback.                                             */
+/*****************************************************************************/
+void
+gl_tools_align_objects_right (BonoboUIComponent *uic,
+			      gpointer           user_data,
+			      const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_right (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Align objects horizontal center callback.                                 */
+/*****************************************************************************/
+void
+gl_tools_align_objects_hcenter (BonoboUIComponent *uic,
+				gpointer           user_data,
+				const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_hcenter (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Align objects top callback.                                               */
+/*****************************************************************************/
+void
+gl_tools_align_objects_top (BonoboUIComponent *uic,
+			    gpointer           user_data,
+			    const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_top (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Align objects bottom callback.                                            */
+/*****************************************************************************/
+void
+gl_tools_align_objects_bottom (BonoboUIComponent *uic,
+			       gpointer           user_data,
+			       const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_bottom (GL_VIEW(window->view));
+	}
+}
+
+/*****************************************************************************/
+/* Align objects vertical center callback.                                   */
+/*****************************************************************************/
+void
+gl_tools_align_objects_vcenter (BonoboUIComponent *uic,
+				gpointer           user_data,
+				const gchar       *verbname)
+
+{
+	glWindow *window;
+
+	window = GL_WINDOW (user_data);
+
+	if (window->view != NULL) {
+		gl_view_align_selection_vcenter (GL_VIEW(window->view));
+	}
+}
+

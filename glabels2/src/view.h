@@ -155,6 +155,18 @@ void       gl_view_flip_selection_horiz    (glView            *view);
 
 void       gl_view_flip_selection_vert     (glView            *view);
 
+void       gl_view_align_selection_left    (glView            *view);
+
+void       gl_view_align_selection_right   (glView            *view);
+
+void       gl_view_align_selection_hcenter (glView            *view);
+
+void       gl_view_align_selection_top     (glView            *view);
+
+void       gl_view_align_selection_bottom  (glView            *view);
+
+void       gl_view_align_selection_vcenter (glView            *view);
+
 void       gl_view_cut                     (glView            *view);
 
 void       gl_view_copy                    (glView            *view);

@@ -160,22 +160,28 @@
 	     _tip="Flip object vertically"/>
 
 	<cmd name="ToolsAlignLeft"
-	     _tip="Align objects to left edges"/>
+	     _tip="Align objects to left edges"
+             pixtype="stock" pixname="gl_stock_align_left"/>
 	
-	<cmd name="ToolsAlignCenter"
-	     _tip="Align objects to centers"/>
+	<cmd name="ToolsAlignHCenter"
+	     _tip="Align objects to horizontal centers"
+             pixtype="stock" pixname="gl_stock_align_hcenter"/>
 	
 	<cmd name="ToolsAlignRight"
-	     _tip="Align objects to right edges"/>
+	     _tip="Align objects to right edges"
+             pixtype="stock" pixname="gl_stock_align_right"/>
 	
 	<cmd name="ToolsAlignTop"
-	     _tip="Align objects to tops"/>
+	     _tip="Align objects to tops"
+             pixtype="stock" pixname="gl_stock_align_top"/>
 	
-	<cmd name="ToolsAlignMiddle"
-	     _tip="Align objects to middles"/>
+	<cmd name="ToolsAlignVCenter"
+	     _tip="Align objects to vertical centers"
+             pixtype="stock" pixname="gl_stock_align_vcenter"/>
 	
 	<cmd name="ToolsAlignBottom"
-	     _tip="Align objects to bottoms"/>
+	     _tip="Align objects to bottoms"
+             pixtype="stock" pixname="gl_stock_align_bottom"/>
 
 	
 	<cmd name="HelpContents" _label="Contents" _tip="Open the glabels manual"
@@ -324,6 +330,15 @@
                 <menuitem name="ToolsRotateRight" verb="" _label="Rotate right"/>
                 <menuitem name="ToolsFlipHorizontal" verb="" _label="Flip horizontally"/>
                 <menuitem name="ToolsFlipVertical" verb="" _label="Flip vertically"/>
+	</submenu>
+
+	<submenu name="Align" _label="_Align">
+                <menuitem name="ToolsAlignLeft" verb="" _label="Align lefts"/>
+                <menuitem name="ToolsAlignRight" verb="" _label="Align rights"/>
+                <menuitem name="ToolsAlignHCenter" verb="" _label="Align horizontal centers"/>
+                <menuitem name="ToolsAlignTop" verb="" _label="Align tops"/>
+                <menuitem name="ToolsAlignBottom" verb="" _label="Align bottoms"/>
+                <menuitem name="ToolsAlignVCenter" verb="" _label="Align vertical centers"/>
 	</submenu>
 
 	<separator/>

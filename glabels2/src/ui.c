@@ -33,55 +33,61 @@
 
 #include "debug.h"
 
-/*=======================================================================================*/
-/* Private macros and constants.                                                         */
-/*=======================================================================================*/
+/*==========================================================================*/
+/* Private macros and constants.                                            */
+/*==========================================================================*/
 #define GLABELS_UI_XML GLABELS_UI_DIR "glabels-ui.xml"
 
-/*=======================================================================================*/
-/* Private types.                                                                        */
-/*=======================================================================================*/
+/*==========================================================================*/
+/* Private types.                                                           */
+/*==========================================================================*/
 
 
-/*=======================================================================================*/
-/* Private globals                                                                       */
-/*=======================================================================================*/
+/*==========================================================================*/
+/* Private globals                                                          */
+/*==========================================================================*/
 
 static BonoboUIVerb gl_ui_verbs [] = {
-	BONOBO_UI_VERB ("FileNew", gl_cmd_file_new),
-	BONOBO_UI_VERB ("FileOpen", gl_cmd_file_open),
-	BONOBO_UI_VERB ("FileSave", gl_cmd_file_save),
-	BONOBO_UI_VERB ("FileSaveAs", gl_cmd_file_save_as),
-	BONOBO_UI_VERB ("FilePrint", gl_cmd_file_print),
-	BONOBO_UI_VERB ("FileClose", gl_cmd_file_close),
-	BONOBO_UI_VERB ("FileExit", gl_cmd_file_exit),
-	BONOBO_UI_VERB ("EditCut", gl_cmd_edit_cut),
-	BONOBO_UI_VERB ("EditCopy", gl_cmd_edit_copy),
-	BONOBO_UI_VERB ("EditPaste", gl_cmd_edit_paste),
-	BONOBO_UI_VERB ("EditDelete", gl_cmd_edit_delete),
-	BONOBO_UI_VERB ("EditSelectAll", gl_cmd_edit_select_all),
-	BONOBO_UI_VERB ("EditUnSelectAll", gl_cmd_edit_unselect_all),
-	BONOBO_UI_VERB ("ToolsArrow", gl_tools_arrow),
-	BONOBO_UI_VERB ("ToolsText", gl_tools_text),
-	BONOBO_UI_VERB ("ToolsBox", gl_tools_box),
-	BONOBO_UI_VERB ("ToolsLine", gl_tools_line),
-	BONOBO_UI_VERB ("ToolsEllipse", gl_tools_ellipse),
-	BONOBO_UI_VERB ("ToolsImage", gl_tools_image),
-	BONOBO_UI_VERB ("ToolsBarcode", gl_tools_barcode),
-	BONOBO_UI_VERB ("ToolsZoomIn", gl_tools_zoomin),
-	BONOBO_UI_VERB ("ToolsZoomOut", gl_tools_zoomout),
-	BONOBO_UI_VERB ("ToolsZoom1to1", gl_tools_zoom1to1),
-	BONOBO_UI_VERB ("ToolsMergeProperties", gl_tools_merge_properties),
+	BONOBO_UI_VERB ("FileNew",               gl_cmd_file_new),
+	BONOBO_UI_VERB ("FileOpen",              gl_cmd_file_open),
+	BONOBO_UI_VERB ("FileSave",              gl_cmd_file_save),
+	BONOBO_UI_VERB ("FileSaveAs",            gl_cmd_file_save_as),
+	BONOBO_UI_VERB ("FilePrint",             gl_cmd_file_print),
+	BONOBO_UI_VERB ("FileClose",             gl_cmd_file_close),
+	BONOBO_UI_VERB ("FileExit",              gl_cmd_file_exit),
+	BONOBO_UI_VERB ("EditCut",               gl_cmd_edit_cut),
+	BONOBO_UI_VERB ("EditCopy",              gl_cmd_edit_copy),
+	BONOBO_UI_VERB ("EditPaste",             gl_cmd_edit_paste),
+	BONOBO_UI_VERB ("EditDelete",            gl_cmd_edit_delete),
+	BONOBO_UI_VERB ("EditSelectAll",         gl_cmd_edit_select_all),
+	BONOBO_UI_VERB ("EditUnSelectAll",       gl_cmd_edit_unselect_all),
+	BONOBO_UI_VERB ("ToolsArrow",            gl_tools_arrow),
+	BONOBO_UI_VERB ("ToolsText",             gl_tools_text),
+	BONOBO_UI_VERB ("ToolsBox",              gl_tools_box),
+	BONOBO_UI_VERB ("ToolsLine",             gl_tools_line),
+	BONOBO_UI_VERB ("ToolsEllipse",          gl_tools_ellipse),
+	BONOBO_UI_VERB ("ToolsImage",            gl_tools_image),
+	BONOBO_UI_VERB ("ToolsBarcode",          gl_tools_barcode),
+	BONOBO_UI_VERB ("ToolsZoomIn",           gl_tools_zoomin),
+	BONOBO_UI_VERB ("ToolsZoomOut",          gl_tools_zoomout),
+	BONOBO_UI_VERB ("ToolsZoom1to1",         gl_tools_zoom1to1),
+	BONOBO_UI_VERB ("ToolsMergeProperties",  gl_tools_merge_properties),
 	BONOBO_UI_VERB ("ToolsObjectProperties", gl_tools_object_properties),
-	BONOBO_UI_VERB ("ToolsRaiseObjects", gl_tools_raise_objects),
-	BONOBO_UI_VERB ("ToolsLowerObjects", gl_tools_lower_objects),
-	BONOBO_UI_VERB ("ToolsRotateLeft", gl_tools_rotate_objects_left),
-	BONOBO_UI_VERB ("ToolsRotateRight", gl_tools_rotate_objects_right),
-	BONOBO_UI_VERB ("ToolsFlipHorizontal", gl_tools_flip_objects_horiz),
-	BONOBO_UI_VERB ("ToolsFlipVertical", gl_tools_flip_objects_vert),
-	BONOBO_UI_VERB ("SettingsPreferences", gl_cmd_settings_preferences),
-	BONOBO_UI_VERB ("HelpContents", gl_cmd_help_contents),
-	BONOBO_UI_VERB ("About", gl_cmd_help_about),
+	BONOBO_UI_VERB ("ToolsRaiseObjects",     gl_tools_raise_objects),
+	BONOBO_UI_VERB ("ToolsLowerObjects",     gl_tools_lower_objects),
+	BONOBO_UI_VERB ("ToolsRotateLeft",       gl_tools_rotate_objects_left),
+	BONOBO_UI_VERB ("ToolsRotateRight",      gl_tools_rotate_objects_right),
+	BONOBO_UI_VERB ("ToolsFlipHorizontal",   gl_tools_flip_objects_horiz),
+	BONOBO_UI_VERB ("ToolsFlipVertical",     gl_tools_flip_objects_vert),
+	BONOBO_UI_VERB ("ToolsAlignLeft",        gl_tools_align_objects_left),
+	BONOBO_UI_VERB ("ToolsAlignRight",       gl_tools_align_objects_right),
+	BONOBO_UI_VERB ("ToolsAlignHCenter",     gl_tools_align_objects_hcenter),
+	BONOBO_UI_VERB ("ToolsAlignTop",         gl_tools_align_objects_top),
+	BONOBO_UI_VERB ("ToolsAlignBottom",      gl_tools_align_objects_bottom),
+	BONOBO_UI_VERB ("ToolsAlignVCenter",     gl_tools_align_objects_vcenter),
+	BONOBO_UI_VERB ("SettingsPreferences",   gl_cmd_settings_preferences),
+	BONOBO_UI_VERB ("HelpContents",          gl_cmd_help_contents),
+	BONOBO_UI_VERB ("About",                 gl_cmd_help_about),
 
 	BONOBO_UI_VERB_END
 };
@@ -119,9 +125,16 @@ static gchar* doc_verbs [] = {
 	"/commands/ToolsRotateRight",
 	"/commands/ToolsFlipHorizontal",
 	"/commands/ToolsFlipVertical",
+	"/commands/ToolsAlignLeft",
+	"/commands/ToolsAlignRight",
+	"/commands/ToolsAlignHCenter",
+	"/commands/ToolsAlignTop",
+	"/commands/ToolsAlignBottom",
+	"/commands/ToolsAlignVCenter",
 	"/menu/Objects/CreateObjects",
 	"/menu/Objects/Order",
 	"/menu/Objects/RotateFlip",
+	"/menu/Objects/Align",
 	"/commands/ViewGrid",
 	"/commands/ViewMarkup",
 
@@ -157,10 +170,22 @@ static gchar* atomic_selection_verbs [] = {
 	NULL
 };
 
+static gchar* multi_selection_verbs [] = {
+	"/commands/ToolsAlignLeft",
+	"/commands/ToolsAlignRight",
+	"/commands/ToolsAlignHCenter",
+	"/commands/ToolsAlignTop",
+	"/commands/ToolsAlignBottom",
+	"/commands/ToolsAlignVCenter",
+	"/menu/Objects/Align",
 
-/*=======================================================================================*/
-/* Local function prototypes                                                             */
-/*=======================================================================================*/
+	NULL
+};
+
+
+/*==========================================================================*/
+/* Local function prototypes                                                */
+/*==========================================================================*/
 
 static void view_menu_item_toggled_cb     (BonoboUIComponent           *ui_component,
 					   const char                  *path,
@@ -347,6 +372,11 @@ gl_ui_update_all (BonoboUIComponent *ui_component,
 				 atomic_selection_verbs,
 				 gl_view_is_selection_atomic (view));
 
+	set_verb_list_sensitive (ui_component,
+				 multi_selection_verbs,
+				 !gl_view_is_selection_empty (view)
+				 && !gl_view_is_selection_atomic (view));
+
 	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
@@ -407,6 +437,11 @@ gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 	set_verb_list_sensitive (ui_component,
 				 atomic_selection_verbs,
 				 gl_view_is_selection_atomic (view));
+
+	set_verb_list_sensitive (ui_component,
+				 multi_selection_verbs,
+				 !gl_view_is_selection_empty (view)
+				 && !gl_view_is_selection_atomic (view));
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 

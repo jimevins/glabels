@@ -98,6 +98,30 @@ void gl_tools_flip_objects_vert        (BonoboUIComponent *uic,
 					gpointer           user_data,
 					const gchar       *verbname);
 
+void gl_tools_align_objects_left       (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_align_objects_right      (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_align_objects_hcenter    (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_align_objects_top        (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_align_objects_bottom     (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
+void gl_tools_align_objects_vcenter    (BonoboUIComponent *uic,
+					gpointer           user_data,
+					const gchar       *verbname);
+
 G_END_DECLS
 
 #endif

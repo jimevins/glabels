@@ -1630,9 +1630,9 @@ gl_view_edit_object_props (glView *view)
 void
 gl_view_raise_selection (glView *view)
 {
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *label_object;
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1640,8 +1640,8 @@ gl_view_raise_selection (glView *view)
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
-		label_object = gl_view_object_get_object (view_object);
-		gl_label_object_raise_to_top (label_object);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_raise_to_top (object);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1653,9 +1653,9 @@ gl_view_raise_selection (glView *view)
 void
 gl_view_lower_selection (glView *view)
 {
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *label_object;
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1663,8 +1663,8 @@ gl_view_lower_selection (glView *view)
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
-		label_object = gl_view_object_get_object (view_object);
-		gl_label_object_lower_to_bottom (label_object);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_lower_to_bottom (object);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1677,9 +1677,9 @@ void
 gl_view_rotate_selection (glView *view,
 			  gdouble theta_degs)
 {
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *label_object;
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1687,8 +1687,8 @@ gl_view_rotate_selection (glView *view,
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
-		label_object = gl_view_object_get_object (view_object);
-		gl_label_object_rotate (label_object, theta_degs);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_rotate (object, theta_degs);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1700,9 +1700,9 @@ gl_view_rotate_selection (glView *view,
 void
 gl_view_flip_selection_horiz (glView *view)
 {
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *label_object;
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1710,8 +1710,8 @@ gl_view_flip_selection_horiz (glView *view)
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
-		label_object = gl_view_object_get_object (view_object);
-		gl_label_object_flip_horiz (label_object);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_flip_horiz (object);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1723,9 +1723,9 @@ gl_view_flip_selection_horiz (glView *view)
 void
 gl_view_flip_selection_vert (glView *view)
 {
-	GList *p;
-	glViewObject *view_object;
-	glLabelObject *label_object;
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1733,8 +1733,299 @@ gl_view_flip_selection_vert (glView *view)
 
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
-		label_object = gl_view_object_get_object (view_object);
-		gl_label_object_flip_vert (label_object);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_flip_vert (object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Align selected objects to left most edge.                                 */
+/*****************************************************************************/
+void
+gl_view_align_selection_left (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dx, x1min, x1, y1, x2, y2;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find left most edge */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1min, &y1, &x2, &y2);
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		if ( x1 < x1min ) x1min = x1;
+	}
+
+	/* now adjust the object positions to line up the left edges */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dx = x1min - x1;
+		gl_label_object_set_position_relative (object, dx, 0.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*****************************************************************************/
+/* Align selected objects to right most edge.                                */
+/*****************************************************************************/
+void
+gl_view_align_selection_right (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dx, x2max, x1, y1, x2, y2;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find right most edge */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1, &y1, &x2max, &y2);
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		if ( x2 > x2max ) x2max = x2;
+	}
+
+	/* now adjust the object positions to line up the right edges */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dx = x2max - x2;
+		gl_label_object_set_position_relative (object, dx, 0.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Align selected objects to horizontal center of objects.                   */
+/*****************************************************************************/
+void
+gl_view_align_selection_hcenter (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dx, dxmin, xsum, xavg, xcenter, x1, y1, x2, y2;
+	gint           n;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find average center of objects */
+	xsum = 0.0;
+	n = 0;
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		xsum += (x1 + x2) / 2.0;
+		n++;
+	}
+	xavg = xsum / n;
+
+	/* find center of object closest to average center */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+	dxmin = fabs (xavg - (x1 + x2)/2.0);
+	xcenter = (x1 + x2)/2.0;
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dx = fabs (xavg - (x1 + x2)/2.0);
+		if ( dx < dxmin ) {
+			dxmin = dx;
+			xcenter = (x1 + x2)/2.0;
+		}
+	}
+
+	/* now adjust the object positions to line up this center */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dx = xcenter - (x1 + x2)/2.0;
+		gl_label_object_set_position_relative (object, dx, 0.0);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Align selected objects to top most edge.                                  */
+/*****************************************************************************/
+void
+gl_view_align_selection_top (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dy, y1min, x1, y1, x2, y2;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find top most edge */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1, &y1min, &x2, &y2);
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		if ( y1 < y1min ) y1min = y1;
+	}
+
+	/* now adjust the object positions to line up the top edges */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dy = y1min - y1;
+		gl_label_object_set_position_relative (object, 0.0, dy);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Align selected objects to bottom most edge.                               */
+/*****************************************************************************/
+void
+gl_view_align_selection_bottom (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dy, y2max, x1, y1, x2, y2;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find bottom most edge */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2max);
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		if ( y2 > y2max ) y2max = y2;
+	}
+
+	/* now adjust the object positions to line up the bottom edges */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dy = y2max - y2;
+		gl_label_object_set_position_relative (object, 0.0, dy);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Align selected objects to viertical center of objects.                    */
+/*****************************************************************************/
+void
+gl_view_align_selection_vcenter (glView *view)
+{
+	GList         *p;
+	glViewObject  *view_object;
+	glLabelObject *object;
+	gdouble        dy, dymin, ysum, yavg, ycenter, x1, y1, x2, y2;
+	gint           n;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	g_return_if_fail (!gl_view_is_selection_empty (view) &&
+			  !gl_view_is_selection_atomic (view));
+
+	/* find average center of objects */
+	ysum = 0.0;
+	n = 0;
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		ysum += (y1 + y2) / 2.0;
+		n++;
+	}
+	yavg = ysum / n;
+
+	/* find center of object closest to average center */
+	p = view->selected_object_list;
+	view_object = GL_VIEW_OBJECT (p->data);
+	object = gl_view_object_get_object (view_object);
+	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+	dymin = fabs (yavg - (y1 + y2)/2.0);
+	ycenter = (y1 + y2)/2.0;
+	for (p = p->next; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dy = fabs (yavg - (y1 + y2)/2.0);
+		if ( dy < dymin ) {
+			dymin = dy;
+			ycenter = (y1 + y2)/2.0;
+		}
+	}
+
+	/* now adjust the object positions to line up this center */
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
+		dy = ycenter - (y1 + y2)/2.0;
+		gl_label_object_set_position_relative (object, 0.0, dy);
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
