@@ -526,7 +526,7 @@ draw_text_object (PrintInfo * pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x0, &y0);
-	gl_label_object_get_size (object, &object_w, &object_h);
+	gl_label_object_get_size (GL_LABEL_OBJECT(object), &object_w, &object_h);
 	lines = gl_label_text_get_lines (object);
 	gl_label_text_get_props (object,
 				 &font_family, &font_size, &font_weight,

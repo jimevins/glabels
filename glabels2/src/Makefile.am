@@ -12,10 +12,12 @@ INCLUDES = \
 	-I$(top_builddir) 				\
 	$(GLABELS_CFLAGS) 				\
 	-I$(LIB_BARCODE_DIR)				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DPREFIX=\""$(prefix)"\"                        \
+	-DSYSCONFDIR=\""$(sysconfdir)"\"                \
+	-DDATADIR=\""$(datadir)"\"                      \
+	-DLIBDIR=\""$(libdir)"\"                        \
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 	\
-	-DGLABELS_GLADEDIR=\""$(datadir)/glabels/glade/"\" \
 	-DG_DISABLE_DEPRECATED				\
 	-DGDK_DISABLE_DEPRECATED			\
 	-DGTK_DISABLE_DEPRECATED			\
@@ -65,6 +67,8 @@ glabels_SOURCES = 			\
 	prefs.h 			\
 	prefs-dialog.c 			\
 	prefs-dialog.h 			\
+	alert.c				\
+	alert.h				\
 	view.c				\
 	view.h				\
 	view-object.c			\

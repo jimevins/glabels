@@ -46,7 +46,7 @@
 #include "view.h"
 #include "debug.h"
 #include "gnome-recent-view.h"
-#include "util.h"
+#include "alert.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -576,7 +576,7 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 		msg = g_strdup_printf (_("Save changes to document \"%s\" before closing?"),
 					fname);
 
-		msgbox = gl_util_hig_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
+		msgbox = gl_alert_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_WARNING,
 				GTK_BUTTONS_NONE,

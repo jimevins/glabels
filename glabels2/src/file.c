@@ -30,6 +30,7 @@
 #include "file.h"
 #include "mdi.h"
 #include "recent.h"
+#include "alert.h"
 #include "util.h"
 #include "wdgt-media-select.h"
 #include "wdgt-rotate-label.h"
@@ -335,11 +336,11 @@ gl_file_open_real (const gchar     *filename,
 		primary_msg = g_strdup_printf (_("Could not open file \"%s\""),
 					       filename);
 
-		dlg = gl_util_hig_dialog_new (GTK_WINDOW(win),
-					      GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_MESSAGE_ERROR,
-					      GTK_BUTTONS_CLOSE,
-					      primary_msg, "");
+		dlg = gl_alert_dialog_new (GTK_WINDOW(win),
+					   GTK_DIALOG_DESTROY_WITH_PARENT,
+					   GTK_MESSAGE_ERROR,
+					   GTK_BUTTONS_CLOSE,
+					   primary_msg, "");
 
 		g_free (primary_msg);
 
@@ -432,11 +433,11 @@ gl_file_save (glMDIChild *child)
 		primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
 					       filename);
 
-		dialog = gl_util_hig_dialog_new (GTK_WINDOW(glabels_get_active_window()),
-						 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 primary_msg, "");
+		dialog = gl_alert_dialog_new (GTK_WINDOW(glabels_get_active_window()),
+					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_MESSAGE_ERROR,
+					      GTK_BUTTONS_CLOSE,
+					      primary_msg, "");
 
 		g_free (primary_msg);
 
@@ -556,11 +557,11 @@ save_as_ok_cb (GtkWidget * widget,
 
 	if (!raw_filename || (raw_filename[strlen (raw_filename) - 1] == '/')) {
 
-		dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
-					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_MESSAGE_WARNING,
-					      GTK_BUTTONS_CLOSE,
-					      _("Must supply file name"), "");
+		dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
+					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					   GTK_MESSAGE_WARNING,
+					   GTK_BUTTONS_CLOSE,
+					   _("Must supply file name"), "");
 
 		gtk_dialog_run (GTK_DIALOG (dlg));
 		gtk_widget_destroy (dlg);
@@ -580,11 +581,11 @@ save_as_ok_cb (GtkWidget * widget,
 			primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
 						       filename);
 
-			dlg = gl_util_hig_dialog_new (GTK_WINDOW(fsel),
-						      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						      GTK_MESSAGE_ERROR,
-						      GTK_BUTTONS_CLOSE,
-						      primary_msg, "");
+			dlg = gl_alert_dialog_new (GTK_WINDOW(fsel),
+						   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						   GTK_MESSAGE_ERROR,
+						   GTK_BUTTONS_CLOSE,
+						   primary_msg, "");
 
 			g_free (primary_msg);
 

@@ -32,25 +32,10 @@ extern gchar *gl_util_make_absolute (const gchar * filename);
 
 extern gchar *gl_util_fraction( gdouble x );
 
-extern GtkWidget* gl_util_button_new_with_stock_image (const gchar* text,
-						       const gchar* stock_id);
-
-extern GtkWidget* gl_util_dialog_add_button (GtkDialog *dialog, 
-					     const gchar* text, 
-					     const gchar* stock_id, 
-					     gint response_id);
-
 extern const gchar *gl_util_just_to_string (GtkJustification just);
 extern GtkJustification gl_util_string_to_just (const gchar * string);
 
 extern const gchar *gl_util_weight_to_string (GnomeFontWeight weight);
 extern GnomeFontWeight gl_util_string_to_weight (const gchar * string);
-
-GtkWidget* gl_util_hig_dialog_new      (GtkWindow      *parent,
-                                        GtkDialogFlags  flags,
-                                        GtkMessageType  type,
-                                        GtkButtonsType  buttons,
-					const gchar    *primary_text,
-                                        const gchar    *secondary_text);
 
 #endif				/* __UTIL_H__ */
