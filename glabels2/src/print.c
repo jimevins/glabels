@@ -382,8 +382,6 @@ gl_print_batch (GnomePrintJob    *job,
 	}
 	gl_template_free (&template);
 
-	g_object_unref (G_OBJECT(merge));
-
 	gl_debug (DEBUG_PRINT, "END");
 }
 

@@ -135,10 +135,21 @@ main (int argc, char **argv)
 
 			if ( job == NULL ) {
 				job = gnome_print_job_new (NULL);
+				abs_fn = gl_util_make_absolute ( output );
+				config = gnome_print_job_get_config (job);
+				gnome_print_config_set (config,
+							"Printer",
+							"GENERIC");
+				gnome_print_config_set (config,
+							"Settings.Transport.Backend",
+							"file");
+				gnome_print_config_set (config,
+							"Settings.Transport.Backend.FileName",
+							abs_fn);
+				g_free( abs_fn );
 			}
 
 			gl_print_batch (job, label, n_sheets, n_copies, &flags);
-
 			g_object_unref (label);
 		}
 		else {
@@ -147,10 +158,6 @@ main (int argc, char **argv)
 		}
 	}
 	if ( job != NULL ) {
-
-		abs_fn = gl_util_make_absolute ( output );
-		gnome_print_job_print_to_file (job, abs_fn);
-		g_free( abs_fn );
 
 		gnome_print_job_close (job);
 		gnome_print_job_print (job);
