@@ -536,7 +536,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->main_toolbar_visible = s;
 		set_app_main_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -545,7 +545,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_main_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -554,7 +554,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_main_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -563,7 +563,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_main_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -572,7 +572,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->main_toolbar_view_tooltips = s;
 		set_app_main_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -581,7 +581,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->drawing_toolbar_visible = s;
 		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -590,7 +590,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
 		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -599,7 +599,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
 		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -608,7 +608,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{		
 		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
 		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -617,7 +617,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 	{
 		gl_prefs->drawing_toolbar_view_tooltips = s;
 		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -630,7 +630,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		} else {
 			gl_view_hide_grid (GL_VIEW(GL_WINDOW(win)->view));
 		}
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}
@@ -643,7 +643,7 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		} else {
 			gl_view_hide_markup (GL_VIEW(GL_WINDOW(win)->view));
 		}
-		gl_prefs_save_settings ();
+		gl_prefs_model_save_settings (gl_prefs);
 
 		return;
 	}

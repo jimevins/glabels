@@ -70,6 +70,8 @@ glabels_SOURCES = 			\
 	tools.c				\
 	prefs.c 			\
 	prefs.h 			\
+	prefs-model.c 			\
+	prefs-model.h 			\
 	prefs-dialog.c 			\
 	prefs-dialog.h 			\
 	hig.c				\
@@ -239,6 +241,8 @@ glabels_batch_SOURCES = 		\
 	text-node.h			\
 	prefs.c 			\
 	prefs.h 			\
+	prefs-model.c 			\
+	prefs-model.h 			\
 	util.c				\
 	util.h				\
 	debug.c 			\

@@ -137,7 +137,7 @@ gl_cmd_file_print (BonoboUIComponent *uic,
 
 	if (GL_VIEW(window->view)->print_dialog) {
 
-		gtk_window_present (GL_VIEW(window->view)->print_dialog);
+		gtk_window_present (GTK_WINDOW(GL_VIEW(window->view)->print_dialog));
 
 	} else {
 

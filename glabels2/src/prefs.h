@@ -3,7 +3,7 @@
  *
  *  prefs.h:  Application preferences module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,74 +22,17 @@
 #ifndef __PREFS_H__
 #define __PREFS_H__
 
-#include <gtk/gtk.h>
-#include <libgnomeprint/gnome-font.h>
+#include "prefs-model.h"
 
 G_BEGIN_DECLS
 
-typedef struct _glPreferences glPreferences;
 
-typedef enum {
-	GL_TOOLBAR_SYSTEM = 0,
-	GL_TOOLBAR_ICONS,
-	GL_TOOLBAR_ICONS_AND_TEXT
-} glToolbarSetting;
 
-typedef enum {
-	GL_PREFS_UNITS_PTS,
-	GL_PREFS_UNITS_INCHES,
-	GL_PREFS_UNITS_MM,
-} glPrefsUnits;
+extern glPrefsModel *gl_prefs;
 
-struct _glPreferences
-{
-	/* Units */
-	glPrefsUnits      units;
 
-	/* Page size */
-	gchar            *default_page_size;
-
-	/* Text properties */
-	gchar            *default_font_family;
-	gdouble           default_font_size;
-	GnomeFontWeight   default_font_weight;
-	gboolean          default_font_italic_flag;
-	guint             default_text_color;
-	GtkJustification  default_text_alignment;
-	
-	/* Line properties */
-	gdouble           default_line_width;
-	guint             default_line_color;
-	
-	/* Fill properties */
-	guint             default_fill_color;
-
-	/* User Interface/Main Toolbar */
-	gboolean	  main_toolbar_visible;
-	glToolbarSetting  main_toolbar_buttons_style; 
-	gboolean	  main_toolbar_view_tooltips;
-
-	/* User Interface/Drawing Toolbar */
-	gboolean          drawing_toolbar_visible;
-	glToolbarSetting  drawing_toolbar_buttons_style; 
-	gboolean	  drawing_toolbar_view_tooltips;
-
-	/* View properties */
-	gboolean          grid_visible;
-	gboolean          markup_visible;
-
-	/* Recent files */
-	gint              max_recents;
-};
-
-glPreferences *gl_prefs;
-
-void          gl_prefs_save_settings       (void);
-
-void          gl_prefs_load_settings       (void);
 
 void          gl_prefs_init                (void);
-
 
 const gchar  *gl_prefs_get_page_size       (void);
 

@@ -453,7 +453,7 @@ gl_template_get_label_size_desc (const glTemplate *template)
 
 	switch (template->label.style) {
 	case GL_TEMPLATE_STYLE_RECT:
-		if ( units == GL_PREFS_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCHES ) {
 			gchar *xstr, *ystr;
 
 			xstr = gl_util_fraction (template->label.rect.w * units_per_point);
@@ -470,7 +470,7 @@ gl_template_get_label_size_desc (const glTemplate *template)
 		}
 		break;
 	case GL_TEMPLATE_STYLE_ROUND:
-		if ( units == GL_PREFS_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCHES ) {
 			gchar *dstr;
 
 			dstr = gl_util_fraction (2.0 * template->label.round.r * units_per_point);
@@ -484,7 +484,7 @@ gl_template_get_label_size_desc (const glTemplate *template)
 		}
 		break;
 	case GL_TEMPLATE_STYLE_CD:
-		if ( units == GL_PREFS_UNITS_INCHES ) {
+		if ( units == GL_UNITS_INCHES ) {
 			gchar *dstr;
 
 			dstr = gl_util_fraction (2.0 * template->label.cd.r1 * units_per_point);

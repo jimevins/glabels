@@ -199,6 +199,7 @@ gl_prefs_dialog_new (GtkWindow *parent)
 	GtkWidget *dlg;
 
 	gl_debug (DEBUG_PREFS, "START");
+	gl_debug (DEBUG_PREFS, "page size = \"%s\"", gl_prefs->default_page_size);
 
 	dlg = GTK_WIDGET (g_object_new (GL_TYPE_PREFS_DIALOG, NULL));
 
@@ -469,17 +470,17 @@ update_locale_page_from_prefs (glPrefsDialog *dlg)
 		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dlg));
 
 	switch (gl_prefs->units) {
-	case GL_PREFS_UNITS_PTS:
+	case GL_UNITS_PTS:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dlg->priv->units_points_radio),
 			TRUE);
 		break;
-	case GL_PREFS_UNITS_INCHES:
+	case GL_UNITS_INCHES:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dlg->priv->units_inches_radio),
 			TRUE);
 		break;
-	case GL_PREFS_UNITS_MM:
+	case GL_UNITS_MM:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dlg->priv->units_mm_radio),
 			TRUE);
@@ -522,7 +523,7 @@ update_locale_page_from_prefs (glPrefsDialog *dlg)
 /* PRIVATE.  Update object page widgets from current prefs.                 */
 /*--------------------------------------------------------------------------*/
 static void
- update_object_page_from_prefs (glPrefsDialog *dlg)
+update_object_page_from_prefs (glPrefsDialog *dlg)
 {
         GList    *family_names;
         gchar    *good_font_family;
@@ -657,15 +658,15 @@ update_prefs_from_locale_page (glPrefsDialog *dlg)
 {
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dlg->priv->units_points_radio))) {
-		gl_prefs->units = GL_PREFS_UNITS_PTS;
+		gl_prefs->units = GL_UNITS_PTS;
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dlg->priv->units_inches_radio))) {
-		gl_prefs->units = GL_PREFS_UNITS_INCHES;
+		gl_prefs->units = GL_UNITS_INCHES;
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dlg->priv->units_mm_radio))) {
-		gl_prefs->units = GL_PREFS_UNITS_MM;
+		gl_prefs->units = GL_UNITS_MM;
 	}
 
 	if (gtk_toggle_button_get_active (
@@ -677,7 +678,7 @@ update_prefs_from_locale_page (glPrefsDialog *dlg)
 		gl_prefs->default_page_size = A4_ID;
 	}
 
-	gl_prefs_save_settings ();
+	gl_prefs_model_save_settings (gl_prefs);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -747,7 +748,7 @@ update_prefs_from_object_page (glPrefsDialog *dlg)
                 gl_prefs->default_fill_color = gl_color_from_gdk_color (gdk_color);
         }
 
-	gl_prefs_save_settings ();
+	gl_prefs_model_save_settings (gl_prefs);
 }
 
 

@@ -173,12 +173,9 @@ main (int argc, char **argv)
 		gnome_window_icon_set_default_from_file (ICON_PIXMAP);
 	}
 	
-	/* Load user preferences */
-	gl_prefs_init ();
-	gl_prefs_load_settings ();
-
 	/* Initialize subsystems */
 	gl_paper_init();
+	gl_prefs_init ();
 	gl_template_init();
 	gl_merge_init();
 	gl_recent_init();
