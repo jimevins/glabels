@@ -175,6 +175,9 @@ gl_xml_label_open (const gchar      *filename,
 		return NULL;
 	}
 
+	xmlXIncludeProcess (doc);
+	xmlReconciliateNs (doc, xmlDocGetRootElement (doc));
+
 	label = xml_doc_to_label (doc, status);
 
 	xmlFreeDoc (doc);
