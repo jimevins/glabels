@@ -36,16 +36,18 @@ typedef struct {
 
 	GtkWidget *dialog;
 
-	glView  *view;
-	glLabel *label;
-	glMerge *merge;
+	glView       *view;
+	glLabel      *label;
+	glMerge      *merge;
 
-	GtkWidget *type_entry;
-	GtkWidget *src_entry_holder;
-	GtkWidget *src_entry;
+	GtkWidget    *type_entry;
+	GtkWidget    *src_entry_holder;
+	GtkWidget    *src_entry;
 
 	GtkTreeStore *store;
 	GtkWidget    *tree;
+
+	gchar        *saved_src;
 
 } PropertyDialogPassback;
 
@@ -250,6 +252,7 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 	column = gtk_tree_view_column_new_with_attributes (_("Record/Field"), renderer,
 							   "text", RECORD_FIELD_COLUMN,
 							   NULL);
+	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
 	gtk_tree_view_set_expander_column (GTK_TREE_VIEW(data->tree), column);
 	renderer = gtk_cell_renderer_text_new ();
@@ -257,6 +260,7 @@ create_merge_dialog_widgets (glHigDialog            *dialog,
 	column = gtk_tree_view_column_new_with_attributes (_("Data"), renderer,
 							   "text", VALUE_COLUMN,
 							   NULL);
+	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW(data->tree), column);
 	gtk_container_add (GTK_CONTAINER (wscroll), data->tree);
 	
@@ -288,6 +292,11 @@ type_changed_cb (GtkWidget              *widget,
 	name = gl_merge_description_to_name (description);
 
 	src = gl_merge_get_src (data->merge); /* keep current source if possible */
+	if ( src != NULL ) {
+		gl_debug (DEBUG_MERGE, "Saving src = \"%s\"", src);
+		g_free (data->saved_src);
+		data->saved_src = src;
+	}
 
 	if (data->merge != NULL) {
 		g_object_unref (G_OBJECT(data->merge));
@@ -301,8 +310,10 @@ type_changed_cb (GtkWidget              *widget,
 		data->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
 		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(data->src_entry));
-		if (src != NULL) {
-			gtk_entry_set_text (GTK_ENTRY(wentry), src);
+		if (data->saved_src != NULL) {
+			gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", data->saved_src);
+			gtk_entry_set_text (GTK_ENTRY(wentry), data->saved_src);
+			gl_merge_set_src (data->merge, data->saved_src);
 		}
 		g_signal_connect (G_OBJECT (wentry), "changed",
 				  G_CALLBACK (src_changed_cb), data);
@@ -315,9 +326,10 @@ type_changed_cb (GtkWidget              *widget,
 	gtk_container_add( GTK_CONTAINER(data->src_entry_holder), data->src_entry);
 	gtk_widget_show (data->src_entry);
 
+	load_tree (data->store, data->merge);
+
 	g_free (description);
 	g_free (name);
-	g_free (src);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
