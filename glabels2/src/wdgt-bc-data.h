@@ -49,6 +49,7 @@ struct _glWdgtBCData {
 	GtkWidget *literal_entry;
 
 	GtkWidget *key_radio;
+	GtkWidget *key_combo;
 	GtkWidget *key_entry;
 };
 

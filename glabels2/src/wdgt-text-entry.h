@@ -49,6 +49,7 @@ struct _glWdgtTextEntry {
 	GtkWidget     *text_entry;
 
 	GtkWidget     *key_label;
+	GtkWidget     *key_combo;
 	GtkWidget     *key_entry;
 	GtkWidget     *insert_button;
 
@@ -61,15 +62,18 @@ struct _glWdgtTextEntryClass {
 	void (*changed) (glWdgtTextEntry * text_entry, gpointer user_data);
 };
 
-guint      gl_wdgt_text_entry_get_type (void);
+guint      gl_wdgt_text_entry_get_type       (void);
 
-GtkWidget *gl_wdgt_text_entry_new      (GList           *field_defs);
+GtkWidget *gl_wdgt_text_entry_new            (GList           *field_defs);
 
-GList     *gl_wdgt_text_entry_get_text (glWdgtTextEntry *text_entry);
+void       gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
+					      GList           *field_defs);
 
-void       gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
-					 gboolean        merge_flag,
-					 GList          *lines);
+GList     *gl_wdgt_text_entry_get_text       (glWdgtTextEntry *text_entry);
+
+void       gl_wdgt_text_entry_set_text       (glWdgtTextEntry *text_entry,
+					      gboolean         merge_flag,
+					      GList           *lines);
 
 void       gl_wdgt_text_entry_set_label_size_group (glWdgtTextEntry *text_entry,
 						    GtkSizeGroup    *label_size_group);

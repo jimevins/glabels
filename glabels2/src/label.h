@@ -58,6 +58,8 @@ struct _glLabelClass {
 
 	void (*modified_changed) (glLabel *label, gpointer user_data);
 
+	void (*merge_changed)    (glLabel *label, gpointer user_data);
+
 };
 
 

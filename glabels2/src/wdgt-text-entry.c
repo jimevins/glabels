@@ -120,8 +120,10 @@ gl_wdgt_text_entry_instance_init (glWdgtTextEntry *text_entry)
 {
 	gl_debug (DEBUG_WDGT, "START");
 
-	text_entry->text_entry = NULL;
-	text_entry->key_entry = NULL;
+	text_entry->text_entry    = NULL;
+
+	text_entry->key_combo     = NULL;
+	text_entry->key_entry     = NULL;
 	text_entry->insert_button = NULL;
 
 	gl_debug (DEBUG_WDGT, "END");
@@ -171,7 +173,7 @@ static void
 gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 			      GList           *field_defs)
 {
-	GtkWidget *wvbox, *whbox, *wscroll, *wcombo;
+	GtkWidget *wvbox, *whbox, *wscroll;
 	GList *keys;
 
 	gl_debug (DEBUG_WDGT, "START");
@@ -213,15 +215,16 @@ gl_wdgt_text_entry_construct (glWdgtTextEntry *text_entry,
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->key_label);
 
 	/* Key entry widget */
-	wcombo = gtk_combo_new ();
+	text_entry->key_combo = gtk_combo_new ();
 	keys = gl_merge_get_key_list (field_defs);
 	if (keys != NULL)
-		gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), keys);
+		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
+					       keys);
 	gl_merge_free_key_list (&keys);
-	text_entry->key_entry = GTK_COMBO (wcombo)->entry;
+	text_entry->key_entry = GTK_COMBO (text_entry->key_combo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (text_entry->key_entry), FALSE);
-	gtk_widget_set_size_request (wcombo, 200, -1);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
+	gtk_widget_set_size_request (text_entry->key_combo, 200, -1);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), text_entry->key_combo);
 
 	/* Insert button */
 	text_entry->insert_button =
@@ -276,6 +279,28 @@ insert_cb (glWdgtTextEntry *text_entry)
 }
 
 /****************************************************************************/
+/* Set new field definitions.                                               */
+/****************************************************************************/
+void
+gl_wdgt_text_entry_set_field_defs (glWdgtTextEntry *text_entry,
+				   GList           *field_defs)
+{
+	GList *keys;
+
+	keys = gl_merge_get_key_list (field_defs);
+	if ( keys != NULL ) {
+		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
+					       keys);
+		gl_merge_free_key_list (&keys);
+	} else {
+		keys = g_list_append (keys, "");
+		gtk_combo_set_popdown_strings (GTK_COMBO (text_entry->key_combo),
+					       keys);
+		g_list_free (keys);
+	}
+}
+
+/****************************************************************************/
 /* Get widget data.                                                         */
 /****************************************************************************/
 GList *
@@ -316,7 +341,7 @@ gl_wdgt_text_entry_set_text (glWdgtTextEntry *text_entry,
 
 	gl_debug (DEBUG_WDGT, "START");
 
-	gtk_widget_set_sensitive (text_entry->key_entry, merge_flag);
+	gtk_widget_set_sensitive (text_entry->key_combo, merge_flag);
 	gtk_widget_set_sensitive (text_entry->insert_button, merge_flag);
 
 	text = gl_text_node_lines_expand (lines, NULL);

@@ -310,6 +310,18 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	wsection = gl_hig_category_new (_("Properties"));
 	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
 
+	/* Barcode style widget */
+	view_barcode->private->bc_style = gl_wdgt_bc_style_new ();
+	gl_wdgt_bc_style_set_label_size_group (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
+					       label_size_group);
+	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE (view_barcode->private->bc_style),
+				     style, text_flag);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
+				    view_barcode->private->bc_style);
+	g_signal_connect (G_OBJECT (view_barcode->private->bc_style),
+			  "changed", G_CALLBACK (bc_style_changed_cb),
+			  view_barcode);
+
 	/* barcode props entry */
 	gl_debug (DEBUG_VIEW, "Creating props entry...");
 	view_barcode->private->bc_props = gl_wdgt_bc_props_new ();
@@ -322,18 +334,6 @@ construct_properties_dialog (glViewBarcode *view_barcode)
 	g_signal_connect ( G_OBJECT(view_barcode->private->bc_props),
 			   "changed", G_CALLBACK (bc_props_changed_cb),
 			   view_barcode);
-
-	/* Barcode style widget */
-	view_barcode->private->bc_style = gl_wdgt_bc_style_new ();
-	gl_wdgt_bc_style_set_label_size_group (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),
-					       label_size_group);
-	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE (view_barcode->private->bc_style),
-				     style, text_flag);
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
-				    view_barcode->private->bc_style);
-	g_signal_connect (G_OBJECT (view_barcode->private->bc_style),
-			  "changed", G_CALLBACK (bc_style_changed_cb),
-			  view_barcode);
 
 
 	/*----------------------------*/
@@ -549,6 +549,8 @@ update_dialog_cb (glLabelObject  *object,
 	gl_wdgt_bc_data_set_data (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
 				  (merge->type != GL_MERGE_NONE),
 				  text_node);
+	gl_wdgt_bc_data_set_field_defs (GL_WDGT_BC_DATA(view_barcode->private->bc_data),
+					merge->field_defs);
 	gl_wdgt_bc_props_set_params (GL_WDGT_BC_PROPS(view_barcode->private->bc_props),
 				     scale, color);
 	gl_wdgt_bc_style_set_params (GL_WDGT_BC_STYLE(view_barcode->private->bc_style),

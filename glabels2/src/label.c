@@ -62,6 +62,7 @@ enum {
 	CHANGED,
 	NAME_CHANGED,
 	MODIFIED_CHANGED,
+	MERGE_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -154,6 +155,15 @@ gl_label_class_init (glLabelClass *klass)
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelClass, modified_changed),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+	signals[MERGE_CHANGED] =
+		g_signal_new ("merge_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelClass, merge_changed),
 			      NULL, NULL,
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -501,6 +511,7 @@ gl_label_set_merge (glLabel *label,
 
 	label->private->modified_flag = TRUE;
 
+	g_signal_emit (G_OBJECT(label), signals[MERGE_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
 

@@ -63,6 +63,9 @@ static void gl_label_object_class_init    (glLabelObjectClass *klass);
 static void gl_label_object_instance_init (glLabelObject      *object);
 static void gl_label_object_finalize      (GObject            *object);
 
+static void merge_changed_cb              (glLabel            *label,
+					   glLabelObject      *object);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -223,9 +226,15 @@ gl_label_object_set_parent (glLabelObject *object,
 
 	old_parent = object->parent;
 	if ( old_parent != NULL ) {
+		g_signal_handlers_disconnect_by_func (old_parent,
+						      G_CALLBACK(merge_changed_cb),
+						      object);
 		gl_label_remove_object( old_parent, object );
 	}
 	gl_label_add_object( label, object );
+
+	g_signal_connect (G_OBJECT(label), "merge_changed",
+			  G_CALLBACK(merge_changed_cb), object);
 
 	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
@@ -422,5 +431,15 @@ gl_label_object_lower_to_bottom (glLabelObject *object)
 	g_signal_emit (G_OBJECT(object), signals[BOTTOM], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Label's merge data changed callback.                           */
+/*--------------------------------------------------------------------------*/
+static void
+merge_changed_cb (glLabel       *label,
+		  glLabelObject *object)
+{
+	gl_label_object_emit_changed (object);
 }
 
