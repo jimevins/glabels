@@ -783,6 +783,9 @@ xml_create_object (xmlNodePtr root,
 	xmlSetProp (object_node, "y", string);
 	g_free (string);
 
+	xmlSetProp (object_node, "rotate", "0");
+	xmlSetProp (object_node, "flip",   "None");
+
 	if ( GL_IS_LABEL_TEXT(object) ) {
 		xml_create_text_props (object_node, ns, object);
 	} else if ( GL_IS_LABEL_BOX(object) ) {
