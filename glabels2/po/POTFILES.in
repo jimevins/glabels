@@ -2,7 +2,6 @@
 
 src/glabels-ui.xml
 src/glabels.c
-src/glabels.h
 src/glabels-batch.c
 src/splash.c
 src/splash.h
