@@ -433,15 +433,6 @@ gl_canvas_hacktext_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 
 	gnome_canvas_item_reset_bounds (item);
 
-	g_print ("%s: Affine = {%f, %f, %f, %f, %f, %f}\n",
-		 __FUNCTION__,
-		 affine[0],
-		 affine[1],
-		 affine[2],
-		 affine[3],
-		 affine[4],
-		 affine[5]);
-
 	hacktext->priv->affine[0] = affine[0];
 	hacktext->priv->affine[1] = affine[1];
 	hacktext->priv->affine[2] = -affine[2];
@@ -472,15 +463,6 @@ gl_canvas_hacktext_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 		hacktext->priv->pgl = pgl;
 	}
 	       
-	g_print ("%s: Affine = {%f, %f, %f, %f, %f, %f}\n\n",
-		 __FUNCTION__,
-		 hacktext->priv->affine[0],
-		 hacktext->priv->affine[1],
-		 hacktext->priv->affine[2],
-		 hacktext->priv->affine[3],
-		 hacktext->priv->affine[4],
-		 hacktext->priv->affine[5]);
-
 	gl_canvas_hacktext_req_repaint (hacktext, &ibbox);
 
 	hacktext->item.x1 = ibbox.x0;
