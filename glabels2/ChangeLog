@@ -1,6 +1,10 @@
 2003-12-27  Jim Evins  <evins@snaught.com>
 
-	reviewed by: <delete if not using a buddy>
+	* barcode-0.98/Makefile.am:
+		One last time:  removed doc/Makefile and po/Makefile.in.in from
+		EXTRA_DIST files.
+	
+2003-12-27  Jim Evins  <evins@snaught.com>
 
 	* barcode-0.98/Makefile.am:
 		Removed config.stat entry from EXTRA_DIST files.

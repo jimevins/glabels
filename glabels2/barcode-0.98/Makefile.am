@@ -62,13 +62,11 @@ EXTRA_DIST =			\
 	doc/manpager		\
 	doc/texi2html		\
 	doc/barcode.info	\
-	doc/Makefile		\
 	doc/mktxt		\
 	doc/barcode.pdf		\
 	doc/doc.barcode		\
 	doc/Makefile.in		\
-	doc/README		\
-	po/Makefile.in.in
+	doc/README
 
 
 
