@@ -1141,8 +1141,8 @@ draw_markup_layer (glView *view)
 			draw_markup_line (view,
 					  (glTemplateMarkupLine *)markup);
 		case GL_TEMPLATE_MARKUP_CIRCLE:
-			draw_markup_line (view,
-					  (glTemplateMarkupCircle *)markup);
+			draw_markup_circle (view,
+					    (glTemplateMarkupCircle *)markup);
 			break;
 		default:
 			g_warning ("Unknown template markup type");

@@ -153,8 +153,8 @@ src/debug.c
 src/debug.h
 src/mygal/color-group.c
 src/mygal/color-group.h
-src/mygal/color-pallette.c
-src/mygal/color-pallette.h
+src/mygal/color-palette.c
+src/mygal/color-palette.h
 src/mygal/e-colors.c
 src/mygal/e-colors.h
 src/mygal/e-util.h
