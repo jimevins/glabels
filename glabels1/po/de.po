@@ -5,13 +5,68 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 0.2.0\n"
-"POT-Creation-Date: 2002-02-22 19:29-0500\n"
+"POT-Creation-Date: 2002-04-28 22:42-0400\n"
 "PO-Revision-Date: 2001-10-15 15:31+0200\n"
 "Last-Translator: Marcus Bauer <m@7n7.de>\n"
 "Language-Team: German <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/glabels_batch.c:47
+msgid "print this message"
+msgstr ""
+
+#: src/glabels_batch.c:49
+msgid "print the version of glabels-batch being used"
+msgstr ""
+
+#: src/glabels_batch.c:51
+msgid "set output filename (default=\"output.ps\")"
+msgstr ""
+
+#: src/glabels_batch.c:51
+msgid "filename"
+msgstr ""
+
+#: src/glabels_batch.c:53
+msgid "number of sheets (default=1)"
+msgstr ""
+
+#: src/glabels_batch.c:53
+#, fuzzy
+msgid "sheets"
+msgstr "Seiten:"
+
+#: src/glabels_batch.c:55
+msgid "number of copies (default=1)"
+msgstr ""
+
+#: src/glabels_batch.c:55
+#, fuzzy
+msgid "copies"
+msgstr "Kopien"
+
+#: src/glabels_batch.c:57 src/print_dialog.c:152
+msgid "print outlines (to test printer alignment)"
+msgstr "Begrenzungen drucken (um Druckausrichtung zu testen)"
+
+#: src/glabels_batch.c:59 src/print_dialog.c:160
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "Spiegelbildlich drucken"
+
+#: src/glabels_batch.c:89
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr ""
+
+#: src/glabels_batch.c:108
+msgid "missing glabels file\n"
+msgstr ""
+
+#: src/glabels_batch.c:136
+#, fuzzy, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "Datei kann nicht geöffnet werden"
 
 #: src/mdi.c:169
 #, c-format
@@ -181,7 +236,7 @@ msgstr "Allgemeine Einstellungen"
 msgid "Style"
 msgstr "Stil"
 
-#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:627
+#: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
 msgid "Invalid barcode"
 msgstr "Ungültiger Barcode-Wert"
 
@@ -605,14 +660,6 @@ msgstr "Kontrolle der Mischung mit Datenquelle (Serienfunktion)"
 #: src/print_dialog.c:141
 msgid "Options"
 msgstr "Optionen"
-
-#: src/print_dialog.c:152
-msgid "print outlines (to test printer alignment)"
-msgstr "Begrenzungen drucken (um Druckausrichtung zu testen)"
-
-#: src/print_dialog.c:160
-msgid "print in reverse (i.e. a mirror image)"
-msgstr "Spiegelbildlich drucken"
 
 #: src/print_dialog.c:241 src/print_dialog.c:280
 msgid "Print preview"
