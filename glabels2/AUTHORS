@@ -11,6 +11,7 @@ Contributors:
 	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
                                                       that first appeared in
                                                       0.4.3:
+	Alessandro Zummo <azummo@towertech.it>
 
 
 The GNU Barcode Library provides a large chunk of the barcode functionality
@@ -40,7 +41,7 @@ Translations:
 	Vitaly Lipatov <LAV@VL3143.spb.edu> -- Russian translations
 	Shell, Hin-lik Hung <shell@home.shellhung.org> -- Chinese Translations
 	Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl> -- Polish Translations
-
+	David Makovský (Yakeen) <yakeen@sannyas-on.net> -- Czech Translations
 
 The following people have submitted label templates or information about
 particular products:
@@ -96,5 +97,9 @@ particular products:
 	Julien BLACHE <jb@jblache.org>
 	James D Strandboge <jstrand1@rochester.rr.com>
 	Linas Jakucionis <l@rl.lt>
+	Henrik Brix Andersen <brix@gimp.org>
+	Nigel Titley <nigel@titley.com>
+	Sean 'Shaleh' Perry <shalehperry@attbi.com>
+	Anthony Brockman <anthonybrockman@yahoo.com.au>
 
 And many others for their many helpful suggestions and bug reports -- thanks.
