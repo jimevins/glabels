@@ -220,8 +220,7 @@ gl_wdgt_line_get_params (glWdgtLine *line,
 	guint8 r, g, b, a;
 
 	*width =
-	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-					      (line->width_spin));
+	    gtk_spin_button_get_value (GTK_SPIN_BUTTON(line->width_spin));
 
 	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (line->color_picker),
 				   &r, &g, &b, &a);
