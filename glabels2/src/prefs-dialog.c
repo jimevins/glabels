@@ -513,24 +513,24 @@ static update_object_page_from_prefs (glPrefsDialog *dlg)
 static update_prefs_from_locale_page (glPrefsDialog *dlg)
 {
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dlg->private->units_points_radio)) == 0) {
+		    GTK_TOGGLE_BUTTON(dlg->private->units_points_radio))) {
 		gl_prefs->units = GL_PREFS_UNITS_PTS;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dlg->private->units_inches_radio)) == 0) {
+		    GTK_TOGGLE_BUTTON(dlg->private->units_inches_radio))) {
 		gl_prefs->units = GL_PREFS_UNITS_INCHES;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dlg->private->units_mm_radio)) == 0) {
+		    GTK_TOGGLE_BUTTON(dlg->private->units_mm_radio))) {
 		gl_prefs->units = GL_PREFS_UNITS_MM;
 	}
 
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dlg->private->page_size_us_letter_radio)) == 0) {
+		    GTK_TOGGLE_BUTTON(dlg->private->page_size_us_letter_radio))) {
 		gl_prefs->default_page_size = US_LETTER;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dlg->private->page_size_a4_radio)) == 0) {
+		    GTK_TOGGLE_BUTTON(dlg->private->page_size_a4_radio))) {
 		gl_prefs->default_page_size = A4;
 	}
 
