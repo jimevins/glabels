@@ -61,30 +61,31 @@ static guint signals[LAST_SIGNAL] = {0};
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void           gl_merge_text_class_init     (glMergeTextClass *klass);
-static void           gl_merge_text_instance_init  (glMergeText      *object);
-static void           gl_merge_text_finalize       (GObject          *object);
+static void           gl_merge_text_class_init      (glMergeTextClass *klass);
+static void           gl_merge_text_instance_init   (glMergeText      *object);
+static void           gl_merge_text_finalize        (GObject          *object);
 
-static void           gl_merge_text_set_property   (GObject          *object,
-						    guint             param_id,
-						    const GValue     *value,
-						    GParamSpec       *pspec);
+static void           gl_merge_text_set_property    (GObject          *object,
+						     guint             param_id,
+						     const GValue     *value,
+						     GParamSpec       *pspec);
 
-static void           gl_merge_text_get_property   (GObject          *object,
-						    guint             param_id,
-						    GValue           *value,
-						    GParamSpec       *pspec);
+static void           gl_merge_text_get_property    (GObject          *object,
+						     guint             param_id,
+						     GValue           *value,
+						     GParamSpec       *pspec);
 
-static GList         *gl_merge_text_get_key_list   (glMerge          *merge);
-static void           gl_merge_text_open           (glMerge          *merge);
-static void           gl_merge_text_close          (glMerge          *merge);
-static glMergeRecord *gl_merge_text_get_record     (glMerge          *merge);
-static void           gl_merge_text_copy           (glMerge          *dst_merge,
-						    glMerge          *src_merge);
+static GList         *gl_merge_text_get_key_list    (glMerge          *merge);
+static gchar         *gl_merge_text_get_primary_key (glMerge          *merge);
+static void           gl_merge_text_open            (glMerge          *merge);
+static void           gl_merge_text_close           (glMerge          *merge);
+static glMergeRecord *gl_merge_text_get_record      (glMerge          *merge);
+static void           gl_merge_text_copy            (glMerge          *dst_merge,
+						     glMerge          *src_merge);
 
-static GList         *split_fields                 (gchar            *line,
-						    gchar             delim);
-static void           free_fields                  (GList           **fields);
+static GList         *parse_line                    (FILE             *fp,
+						     gchar             delim);
+static void           free_fields                   (GList           **fields);
 
 
 /*****************************************************************************/
@@ -137,11 +138,12 @@ gl_merge_text_class_init (glMergeTextClass *klass)
 
 	object_class->finalize = gl_merge_text_finalize;
 
-	merge_class->get_key_list = gl_merge_text_get_key_list;
-	merge_class->open         = gl_merge_text_open;
-	merge_class->close        = gl_merge_text_close;
-	merge_class->get_record   = gl_merge_text_get_record;
-	merge_class->copy         = gl_merge_text_copy;
+	merge_class->get_key_list    = gl_merge_text_get_key_list;
+	merge_class->get_primary_key = gl_merge_text_get_primary_key;
+	merge_class->open            = gl_merge_text_open;
+	merge_class->close           = gl_merge_text_close;
+	merge_class->get_record      = gl_merge_text_get_record;
+	merge_class->copy            = gl_merge_text_copy;
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -230,50 +232,50 @@ gl_merge_text_get_property (GObject     *object,
 static GList *
 gl_merge_text_get_key_list (glMerge *merge)
 {
-	glMergeText *merge_text;
-	gchar       *src;
-	FILE        *fp;
-	gchar        delim;
-	gchar        line[LINE_BUF_LEN];
-	GList       *fields, *p;
-	gint         i_field, n_fields, n_fields_max = 0;
-	GList       *key_list;
+	glMergeText   *merge_text;
+	GList         *record_list, *p_rec;
+	glMergeRecord *record;
+	GList         *p_field;
+	gint           i_field, n_fields, n_fields_max = 0;
+	GList         *key_list;
 	
-	/* Fields are simply column numbers. */
-	/* FIXME:  the key_list should probably be cached, and only re-evaluated */
-	/*         if the source has changed. */
+	/* Field keys are simply column numbers. */
+
+	gl_debug (DEBUG_MERGE, "BEGIN");
 
 	merge_text = GL_MERGE_TEXT (merge);
 
-	src = gl_merge_get_src (merge);
-	delim = merge_text->private->delim;
+	record_list = (GList *)gl_merge_get_record_list (merge);
 
-	fp = fopen (src, "r");
-	if ( fp == NULL ) {
-		return NULL;
-	}
+	for ( p_rec=record_list; p_rec!=NULL; p_rec=p_rec->next ) {
+		record = (glMergeRecord *)p_rec->data;
 
-	while ( fgets (line, LINE_BUF_LEN, fp) != NULL ) {
-
-		if (TRUE /* TODO: skip blank lines or comments */ ) {
-			g_strchomp (line);
-			fields = split_fields (line, delim);
-			n_fields = 0;
-			for (p=fields; p != NULL; p=p->next) {
-				n_fields++;
-			}
-			free_fields (&fields);
-			if ( n_fields > n_fields_max ) n_fields = n_fields_max;
+		n_fields = 0;
+		for ( p_field=record->field_list; p_field!=NULL; p_field=p_field->next ) {
+			n_fields++;
 		}
-
+		if ( n_fields > n_fields_max ) n_fields_max = n_fields;
 	}
 
 	key_list = NULL;
-	for (i_field=1; i_field <= n_fields; i_field++) {
+	for (i_field=1; i_field <= n_fields_max; i_field++) {
 		key_list = g_list_append (key_list, g_strdup_printf ("%d", i_field));
 	}
 
+
+	gl_debug (DEBUG_MERGE, "END");
+
 	return key_list;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Get "primary" key.                                                       */
+/*--------------------------------------------------------------------------*/
+static gchar *
+gl_merge_text_get_primary_key (glMerge *merge)
+{
+	/* For now, let's always assume the first column is the primary key. */
+	return g_strdup ("1");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -323,8 +325,7 @@ gl_merge_text_get_record (glMerge *merge)
 	glMergeText   *merge_text;
 	gchar          delim;
 	FILE          *fp;
-	gchar          line[LINE_BUF_LEN];
-	glMergeRecord *record = NULL;
+	glMergeRecord *record;
 	GList         *fields, *p;
 	gint           i_field;
 	glMergeField  *field;
@@ -338,30 +339,25 @@ gl_merge_text_get_record (glMerge *merge)
 		return NULL;
 	}
 	       
-	while ( fgets (line, LINE_BUF_LEN, fp) != NULL ) {
-
-		if (TRUE /* TODO: skip blank lines or comments */ ) {
-			g_strchomp (line);
-			record = g_new0 (glMergeRecord, 1);
-			record->select_flag = TRUE;
-			fields = split_fields (line, delim);
-			i_field = 1;
-			for (p=fields; p != NULL; p=p->next) {
-				
-				field = g_new0 (glMergeField, 1);
-				field->key = g_strdup_printf ("%d", i_field++);
-				field->value = g_strdup (p->data);
-
-				record->field_list =
-					g_list_append (record->field_list, field);
-			}
-			free_fields (&fields);
-			return record;
-		}
-
+	fields = parse_line (fp, delim);
+	if ( fields == NULL ) {
+		return NULL;
 	}
 
-	return NULL;
+	record = g_new0 (glMergeRecord, 1);
+	record->select_flag = TRUE;
+	i_field = 1;
+	for (p=fields; p != NULL; p=p->next) {
+
+		field = g_new0 (glMergeField, 1);
+		field->key = g_strdup_printf ("%d", i_field++);
+		field->value = g_strdup (p->data);
+
+		record->field_list = g_list_append (record->field_list, field);
+	}
+	free_fields (&fields);
+
+	return record;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -381,49 +377,185 @@ gl_merge_text_copy (glMerge *dst_merge,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Split out fields by delimiter while decoding things like "\n".  */
+/* PRIVATE.  Parse line (quoted values may span multiple lines).             */
 /*---------------------------------------------------------------------------*/
-static GList * split_fields ( gchar *line,
-			      gchar delim )
+static GList *
+parse_line (FILE  *fp,
+	    gchar  delim )
 {
 	GList *list = NULL;
 	GString *string;
-	gchar *c;
-	enum { NORMAL, ESCAPED } state;
+	gint c;
+	enum { BEGIN, NORMAL, NORMAL_ESCAPED,
+	       QUOTED, QUOTED_ESCAPED, QUOTED_QUOTE1,
+	       DONE } state;
 
-	g_return_val_if_fail (line != NULL, NULL);
-
-	state = NORMAL;
+	state = BEGIN;
 	string = g_string_new( "" );
-	for ( c=line; *c!=0; c++ ) {
+	while ( state != DONE ) {
+		c=getc (fp);
 
 		switch (state) {
 
-		case NORMAL:
-			if ( *c == '\\' ) {
-				state = ESCAPED;
-			} else if ( *c != delim ) {
-				string = g_string_append_c (string, *c);
-			} else {
-				list = g_list_append (list,
+		case BEGIN:
+			switch (c) {
+			case '\\':
+				state = NORMAL_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR. */
+				state = NORMAL;
+				break;
+			case '\n':
+			case EOF:
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
 						      g_strdup (string->str));
-				string = g_string_assign( string, "" );
+					string = g_string_assign( string, "" );
+				}
+				state = NORMAL;
+				break;
 			}
 			break;
 
-		case ESCAPED:
-			switch (*c) {
+		case NORMAL:
+			switch (c) {
+			case '\\':
+				state = NORMAL_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			case '\n':
+			case EOF:
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
+						      g_strdup (string->str));
+					string = g_string_assign( string, "" );
+				}
+				break;
+			}
+			break;
+
+		case NORMAL_ESCAPED:
+			switch (c) {
 			case 'n':
 				string = g_string_append_c (string, '\n');
+				state = NORMAL;
 				break;
 			case 't':
 				string = g_string_append_c (string, '\t');
+				state = NORMAL;
+				break;
+			case '\r':
+				/* Strip CR, stay ESCAPED. */
+				break;
+			case EOF:
+				state = DONE;
 				break;
 			default:
-				string = g_string_append_c (string, *c);
+				string = g_string_append_c (string, c);
+				state = NORMAL;
 				break;
 			}
-			state = NORMAL;
+			break;
+
+		case QUOTED:
+			switch (c) {
+			case '\\':
+				state = QUOTED_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED_QUOTE1;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				break;
+			}
+			break;
+
+		case QUOTED_ESCAPED:
+			switch (c) {
+			case 'n':
+				string = g_string_append_c (string, '\n');
+				state = QUOTED;
+				break;
+			case 't':
+				string = g_string_append_c (string, '\t');
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR, stay ESCAPED. */
+				break;
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				state = QUOTED;
+				break;
+			}
+			break;
+
+		case QUOTED_QUOTE1:
+			switch (c) {
+			case '"':
+				/* insert quotes in string, stay quoted. */
+				string = g_string_append_c (string, c);
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR, return to NORMAL. */
+				state = NORMAL;
+				break;
+			case '\n':
+			case EOF:
+				/* line or file ended after quoted item */
+				list = g_list_append (list,
+						      g_strdup (string->str));
+				state = DONE;
+				break;
+			default:
+				if ( c != delim ) {
+					string = g_string_append_c (string, c);
+				} else {
+					list = g_list_append (list,
+						      g_strdup (string->str));
+					string = g_string_assign( string, "" );
+				}
+				state = NORMAL;
+				break;
+			}
 			break;
 
 		default:
@@ -432,7 +564,6 @@ static GList * split_fields ( gchar *line,
 		}
 
 	}
-	list = g_list_append( list, g_strdup(string->str) );
 	g_string_free( string, TRUE );
 
 	return list;
