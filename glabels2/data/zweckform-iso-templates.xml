@@ -139,6 +139,16 @@
     <Alias name="DECAdry DAW-327"/>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Zweckform 4760: File Labels, 192 x 38 mm, 7 per sheet               -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  4760" size="A4" description="File Back Labels">
+    <Label-rectangle id="0" width="544.252pt" height="107.717pt" round="5.66929pt" waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="7" x0="25.5118pt" y0="43.7386pt" dx="544.252pt" dy="107.717pt"/>
+    </Label-rectangle>
+  </Template>
+
 
 </Glabels-templates>
 

@@ -16,6 +16,8 @@
     </Label-rectangle>
     <Alias name="Avery  L7160"/>
     <Alias name="Avery  J8160"/>
+    <Alias name="DECAdry DLW-1731"/>
+    <Alias name="DECAdry OLW-7131"/>
   </Template>
 
   <!-- =================================================================== -->

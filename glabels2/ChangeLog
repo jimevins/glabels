@@ -1,3 +1,17 @@
+2004-01-20  Jim Evins  <evins@snaught.com>
+
+	Catching up on a couple of backlogged user template submissions.
+
+	* data/avery-iso-templates.xml:
+		Added "DECAdry OLW-4731" and "DECAdry DLW-1731" aliases for Avery 7160.
+		Suggested by Linas Jakucionis.
+	
+	* data/zweckform-iso-templates.xml:
+		Added Zweckform 4760, submitted by Thomas Vill.
+
+	* AUTHORS:
+		Updated to reflect above submissions.
+
 2004-01-06  Jim Evins  <evins@snaught.com>
 
 	Split-out template.[ch], paper.[ch], xml-template.[ch], xml-paper.[ch], and
