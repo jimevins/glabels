@@ -65,6 +65,8 @@
 
 #define POINTS_PER_MM    2.83464566929
 
+#define DELTA 0.01
+
 /*==========================================================================*/
 /* Private types.                                                           */
 /*==========================================================================*/
@@ -3380,8 +3382,10 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 				item =
 				    gnome_canvas_item_new (group,
 							   gnome_canvas_rect_get_type (),
-							   "x1", x, "y1", y,
-							   "x2", x, "y2", y,
+							   "x1", x-DELTA,
+							   "y1", y-DELTA,
+							   "x2", x+DELTA,
+							   "y2", y+DELTA,
 							   "width_pixels", 2,
 							   "outline_color_rgba",
 							   SEL_LINE_COLOR,
@@ -3439,11 +3443,14 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 					      event->motion.x,
 					      event->motion.y, &x, &y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
+			gl_debug (DEBUG_VIEW,
+				  "Dragging: (x0=%g, y0=%g), (x=%g, y=%g)", x0, y0, x, y);
 			gnome_canvas_item_set (item,
-					       "x1", MIN (x, x0),
-					       "y1", MIN (y, y0),
-					       "x2", MAX (x, x0),
-					       "y2", MAX (y, y0), NULL);
+					       "x1", MIN (x, x0) - DELTA,
+					       "y1", MIN (y, y0) - DELTA,
+					       "x2", MAX (x, x0) + DELTA,
+					       "y2", MAX (y, y0) + DELTA,
+					       NULL);
 			return TRUE;
 		} else {
 			return FALSE;
