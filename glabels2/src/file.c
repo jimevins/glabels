@@ -112,18 +112,16 @@ create_new_dialog_widgets (glHigDialog *dlg)
 	gl_debug (DEBUG_FILE, "START");
 
 	wframe = gl_hig_category_new (_("Media Type"));
-	gtk_box_pack_start (GTK_BOX (dlg->vbox), wframe, FALSE, FALSE, 0);
+	gl_hig_dialog_add_widget (dlg, wframe);
 
 	template_entry = gl_wdgt_media_select_new ();
-	gtk_box_pack_start (GTK_BOX (GL_HIG_CATEGORY(wframe)->vbox),
-			    template_entry, FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), template_entry);
 
 	wframe = gl_hig_category_new (_("Label orientation"));
-	gtk_box_pack_start (GTK_BOX (dlg->vbox), wframe, FALSE, FALSE, 0);
+	gl_hig_dialog_add_widget (dlg, wframe);
 
 	rotate_sel = gl_wdgt_rotate_label_new ();
-	gtk_box_pack_start (GTK_BOX (GL_HIG_CATEGORY(wframe)->vbox),
-			    rotate_sel, FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), rotate_sel);
 
 	g_object_set_data (G_OBJECT (dlg), "template_entry",
 			     template_entry);

@@ -32,6 +32,7 @@
 #include <libgnomeprintui/gnome-print-master-preview.h>
 
 #include "print-dialog.h"
+#include "hig.h"
 #include "print.h"
 #include "label.h"
 #include "bc.h"
@@ -94,7 +95,7 @@ gl_print_dialog (glLabel *label, BonoboWindow *win)
 	g_return_if_fail (win != NULL);
 
 	/* ----- Contstruct basic print dialog with notebook ----- */
-	dlg = gtk_dialog_new_with_buttons (_("Print"), GTK_WINDOW(win),
+	dlg = gl_hig_dialog_new_with_buttons (_("Print"), GTK_WINDOW(win),
 					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					   GTK_STOCK_PRINT, GNOME_PRINT_DIALOG_RESPONSE_PRINT,
@@ -108,10 +109,8 @@ gl_print_dialog (glLabel *label, BonoboWindow *win)
 	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
 					 GNOME_PRINT_DIALOG_RESPONSE_PRINT);
 	notebook = gtk_notebook_new ();
-	gtk_container_set_border_width (GTK_CONTAINER (notebook), 4);
 	gtk_widget_show (notebook);
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox), notebook);
-
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dlg), notebook);
 
 	/* ----- Create Job notebook page ----- */
 	page = job_page_new (dlg, label);
@@ -144,19 +143,17 @@ job_page_new (GtkWidget *dlg,
 	GList *record_list;
 	gint n_records;
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
 	merge = gl_label_get_merge (label);
 	if (merge->type == GL_MERGE_NONE) {
 
 		/* ----------- Add simple-copies widget ------------ */
-		wframe = gtk_frame_new (_("Copies"));
-		gtk_box_pack_start (GTK_BOX (vbox), wframe, FALSE, FALSE, 0);
+		wframe = gl_hig_category_new (_("Copies"));
+		gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
 
 		copies = gl_wdgt_print_copies_new (label);
-		gtk_container_set_border_width (GTK_CONTAINER (copies),
-						GNOME_PAD_SMALL);
-		gtk_container_add (GTK_CONTAINER (wframe), copies);
+		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), copies);
 
 		if (n_sheets) {
 			gl_wdgt_print_copies_set_range (GL_WDGT_PRINT_COPIES (copies),
@@ -166,13 +163,11 @@ job_page_new (GtkWidget *dlg,
 	} else {
 
 		/* ------- Otherwise add merge control widget ------------ */
-		wframe = gtk_frame_new (_("Document merge control"));
-		gtk_box_pack_start (GTK_BOX (vbox), wframe, FALSE, FALSE, 0);
+		wframe = gl_hig_category_new (_("Document merge control"));
+		gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
 
 		prmerge = gl_wdgt_print_merge_new (label);
-		gtk_container_set_border_width (GTK_CONTAINER (prmerge),
-						GNOME_PAD_SMALL);
-		gtk_container_add (GTK_CONTAINER (wframe), prmerge);
+		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), prmerge);
 
 		record_list = gl_merge_read_data (merge->type,
 						  merge->field_defs,
@@ -187,18 +182,14 @@ job_page_new (GtkWidget *dlg,
 	g_object_set_data (G_OBJECT(dlg), "prmerge", prmerge);
 
 	/* ----------- Add custom print options area ------------ */
-	wframe = gtk_frame_new (_("Options"));
-	gtk_box_pack_start (GTK_BOX (vbox), wframe, FALSE, FALSE, 0);
-	wvbox = gtk_vbox_new (FALSE, GNOME_PAD);
-	gtk_container_set_border_width (GTK_CONTAINER (wvbox),
-					GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (wframe), wvbox);
+	wframe = gl_hig_category_new (_("Options"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
 
 	/* add Outline check button */
 	outline_check =
 	    gtk_check_button_new_with_label (
 		    _("print outlines (to test printer alignment)"));
-	gtk_box_pack_start (GTK_BOX (wvbox), outline_check, FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), outline_check);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (outline_check),
 				      outline_flag);
 	g_object_set_data (G_OBJECT(dlg), "outline_check", outline_check);
@@ -207,7 +198,7 @@ job_page_new (GtkWidget *dlg,
 	reverse_check =
 	    gtk_check_button_new_with_label (
 		    _("print in reverse (i.e. a mirror image)"));
-	gtk_box_pack_start (GTK_BOX (wvbox), reverse_check, FALSE, FALSE, 0);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), reverse_check);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (reverse_check),
 				      reverse_flag);
 	g_object_set_data (G_OBJECT(dlg), "reverse_check", reverse_check);
@@ -227,13 +218,12 @@ printer_page_new (GtkWidget *dlg,
 	GtkWidget *vbox;
 	GtkWidget *printer_select;
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
 	printer_select =
 		gnome_printer_selection_new (gnome_print_config_default ());
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 4);
 	gtk_widget_show (printer_select);
-	gtk_box_pack_start (GTK_BOX(vbox), printer_select, FALSE, FALSE, 0);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), printer_select);
 
 	g_object_set_data (G_OBJECT(dlg), "printer_select", printer_select);
 

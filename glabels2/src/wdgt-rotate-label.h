@@ -24,6 +24,7 @@
 #define __WDGT_ROTATE_LABEL_H__
 
 #include <gnome.h>
+#include "hig.h"
 #include "template.h"
 
 #define GL_TYPE_WDGT_ROTATE_LABEL (gl_wdgt_rotate_label_get_type ())
@@ -40,7 +41,7 @@ typedef struct _glWdgtRotateLabel      glWdgtRotateLabel;
 typedef struct _glWdgtRotateLabelClass glWdgtRotateLabelClass;
 
 struct _glWdgtRotateLabel {
-	GtkHBox    parent_widget;
+	glHigHBox   parent_widget;
 
 	GtkWidget  *rotate_check;
 
@@ -50,7 +51,7 @@ struct _glWdgtRotateLabel {
 };
 
 struct _glWdgtRotateLabelClass {
-	GtkHBoxClass parent_class;
+	glHigHBoxClass parent_class;
 
 	void (*changed) (glWdgtRotateLabel * wdgt_rotate_label,
 			 gpointer user_data);

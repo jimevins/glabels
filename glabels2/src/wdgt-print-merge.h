@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
 
 #define GL_TYPE_WDGT_PRINT_MERGE (gl_wdgt_print_merge_get_type ())
 #define GL_WDGT_PRINT_MERGE(obj) \
@@ -40,7 +41,7 @@ typedef struct _glWdgtPrintMerge      glWdgtPrintMerge;
 typedef struct _glWdgtPrintMergeClass glWdgtPrintMergeClass;
 
 struct _glWdgtPrintMerge {
-	GtkHBox   parent_widget;
+	glHigHBox parent_widget;
 
 	gint      labels_per_sheet;
 	GtkWidget *mini_preview;
@@ -54,7 +55,7 @@ struct _glWdgtPrintMerge {
 };
 
 struct _glWdgtPrintMergeClass {
-	GtkHBoxClass parent_class;
+	glHigHBoxClass parent_class;
 };
 
 extern guint gl_wdgt_print_merge_get_type  (void);

@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 #include "label.h"
+#include "hig.h"
 
 #define GL_TYPE_WDGT_PRINT_COPIES (gl_wdgt_print_copies_get_type ())
 #define GL_WDGT_PRINT_COPIES(obj) \
@@ -40,7 +41,7 @@ typedef struct _glWdgtPrintCopies      glWdgtPrintCopies;
 typedef struct _glWdgtPrintCopiesClass glWdgtPrintCopiesClass;
 
 struct _glWdgtPrintCopies {
-	GtkHBox   parent_widget;
+	glHigHBox parent_widget;
 
 	gint      labels_per_sheet;
 
@@ -55,7 +56,7 @@ struct _glWdgtPrintCopies {
 };
 
 struct _glWdgtPrintCopiesClass {
-	GtkHBoxClass parent_class;
+	glHigHBoxClass parent_class;
 };
 
 extern guint gl_wdgt_print_copies_get_type (void);

@@ -94,7 +94,7 @@ gl_wdgt_media_select_get_type (void)
 		};
 
 		wdgt_media_select_type =
-			g_type_register_static (gtk_vbox_get_type (),
+			g_type_register_static (gl_hig_vbox_get_type (),
 						"glWdgtMediaSelect",
 						&wdgt_media_select_info, 0);
 	}
@@ -111,7 +111,7 @@ gl_wdgt_media_select_class_init (glWdgtMediaSelectClass * class)
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_media_select_finalize;
 
@@ -185,7 +185,8 @@ gl_wdgt_media_select_new (void)
 static void
 gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 {
-	GtkWidget *whbox, *wvbox, *wcombo, *wvbox1, *whbox1;
+	GtkWidget *whbox, *wvbox, *wcombo, *wvbox1, *whbox1, *wlabel;
+	GtkSizeGroup *label_size_group;
 	gchar *name;
 	GList *template_names, *page_sizes = NULL;
 	const gchar *page_size;
@@ -195,10 +196,9 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	page_size = gl_prefs_get_page_size ();
 
 	wvbox = GTK_WIDGET (media_select);
-	gtk_box_set_spacing (GTK_BOX(wvbox), GL_HIG_SPACING);
 
-	whbox = gtk_hbox_new (FALSE, GL_HIG_SPACING);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, 0);
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* Page size selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating page size combo...");
@@ -213,7 +213,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	gtk_widget_set_size_request (media_select->page_size_entry, 100, -1);
 	gtk_entry_set_text (GTK_ENTRY (media_select->page_size_entry),
 			    page_size);
-	gtk_box_pack_start (GTK_BOX (whbox), wcombo, FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
 	/* Actual selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating template combo...");
@@ -230,80 +230,69 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect * media_select)
 	gtk_combo_set_value_in_list (GTK_COMBO(media_select->template_combo),
 				     TRUE, FALSE);
 	gtk_widget_set_size_request (media_select->template_entry, 400, -1);
-	gtk_box_pack_start (GTK_BOX (whbox), media_select->template_combo,
-			    FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
+				media_select->template_combo);
 
-	whbox = gtk_hbox_new (FALSE, GL_HIG_SPACING);
-	gtk_box_pack_start (GTK_BOX (wvbox), whbox, TRUE, TRUE, 0);
+	whbox = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox);
 
 	/* mini_preview canvas */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating mini preview...");
 	media_select->mini_preview = gl_wdgt_mini_preview_new ( WDGT_MINI_PREVIEW_HEIGHT,
 							   WDGT_MINI_PREVIEW_WIDTH);
-	gtk_box_pack_start (GTK_BOX (whbox), media_select->mini_preview,
-			    FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
+				media_select->mini_preview);
 
-	/* Label column */
-	gl_debug (DEBUG_MEDIA_SELECT, "Creating label column...");
-	wvbox1 = gtk_vbox_new (FALSE, GL_HIG_SPACING);
-	gtk_box_pack_start (GTK_BOX (whbox), wvbox1, FALSE, FALSE, 0);
+	/* ---- Information area ---- */
+	wvbox1 = gl_hig_vbox_new (GL_HIG_VBOX_INNER);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wvbox1);
+	label_size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (""),
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (_("Description:")),
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (_("Page size:")),
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (_("Label size:")),
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (_("Layout:")),
-			    FALSE, FALSE, 0);
+	/* blank line */
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox1), gtk_label_new (""));
 
-	/* detail widgets column */
-	gl_debug (DEBUG_MEDIA_SELECT, "Creating details column...");
-	wvbox1 = gtk_vbox_new (FALSE, GL_HIG_SPACING);
-	gtk_box_pack_start (GTK_BOX (whbox), wvbox1, FALSE, FALSE, 0);
-
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (whbox1),
-			    gtk_label_new (""),
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	/* Description line */
+	whbox1 = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox1), whbox1);
+	wlabel = gtk_label_new (_("Description:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), wlabel);
 	media_select->desc_label = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (whbox1), media_select->desc_label,
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), media_select->desc_label);
+
+	/* Page size line */
+	whbox1 = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox1), whbox1);
+	wlabel = gtk_label_new (_("Page size:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), wlabel);
 	media_select->sheet_size_label = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (whbox1), media_select->sheet_size_label,
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
+				media_select->sheet_size_label);
+
+	/* Label size line */
+	whbox1 = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox1), whbox1);
+	wlabel = gtk_label_new (_("Label size:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), wlabel);
 	media_select->label_size_label = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (whbox1), media_select->label_size_label,
-			    FALSE, FALSE, 0);
-	whbox1 = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (wvbox1), whbox1, FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
+				media_select->label_size_label);
+
+	/* Layout line */
+	whbox1 = gl_hig_hbox_new ();
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox1), whbox1);
+	wlabel = gtk_label_new (_("Layout:"));
+	gtk_size_group_add_widget (label_size_group, wlabel);
+	gtk_misc_set_alignment (GTK_MISC(wlabel), 0.0, 0.0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), wlabel);
 	media_select->number_label = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (whbox1), media_select->number_label,
-			    FALSE, FALSE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
+				media_select->number_label);
 
 	/* Update mini_preview and details from default template */
 	

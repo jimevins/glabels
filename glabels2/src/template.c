@@ -364,7 +364,8 @@ template_full_page (const gchar *page_size)
 	template = g_new0 (glTemplate, 1);
 
 	template->name         = g_list_append (template->name,
-					 g_strdup_printf("*%s", page_size));
+					 g_strdup_printf(_("Generic %s full page"),
+							 page_size));
 	template->page_size    = g_strdup(page_size);
 	template->description  = g_strdup(FULL_PAGE);
 

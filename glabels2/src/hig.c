@@ -29,17 +29,24 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define HIG_DIALOG_BORDER        12
-#define HIG_DIALOG_VBOX_SPACING  18
-#define HIG_DIALOG_ACTION_BORDER  0
+#define HIG_DIALOG_BORDER             12
+#define HIG_DIALOG_VBOX_SPACING       18
+#define HIG_DIALOG_OUTER_VBOX_SPACING 12
 
-#define HIG_GENERAL_SPACING       6
+#define HIG_VBOX_OUTER_SPACING        18
+#define HIG_VBOX_OUTER_BORDER         12
+
+#define HIG_VBOX_INNER_SPACING         6
+
+#define HIG_HBOX_SPACING               6
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 static GtkDialogClass *hig_dialog_parent_class;
 static GtkVBoxClass   *hig_category_parent_class;
+static GtkVBoxClass   *hig_vbox_parent_class;
+static GtkHBoxClass   *hig_hbox_parent_class;
 
 
 /*===========================================*/
@@ -57,6 +64,14 @@ static void       add_buttons_valist         (glHigDialog *dialog,
 static void       gl_hig_category_class_init (glHigCategoryClass *class);
 static void       gl_hig_category_init       (glHigCategory *hig_category);
 static void       gl_hig_category_finalize   (GObject *object);
+
+static void       gl_hig_vbox_class_init     (glHigVBoxClass *class);
+static void       gl_hig_vbox_init           (glHigVBox *hig_vbox);
+static void       gl_hig_vbox_finalize       (GObject *object);
+
+static void       gl_hig_hbox_class_init     (glHigHBoxClass *class);
+static void       gl_hig_hbox_init           (glHigHBox *hig_hbox);
+static void       gl_hig_hbox_finalize       (GObject *object);
 
 
 /****************************************************************************/
@@ -108,8 +123,9 @@ gl_hig_dialog_init (glHigDialog *hig_dialog)
 	hig_dialog->vbox = gtk_vbox_new (FALSE, HIG_DIALOG_VBOX_SPACING);
 	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
 			    hig_dialog->vbox, FALSE, FALSE, 0);
+
 	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
-			     HIG_DIALOG_VBOX_SPACING);
+			     HIG_DIALOG_OUTER_VBOX_SPACING);
 }
 
 static void
@@ -208,6 +224,16 @@ add_buttons_valist(glHigDialog    *dialog,
     }
 }
 
+/****************************************************************************/
+/* Add widget (from top) to dialog's vbox.                                  */
+/****************************************************************************/
+void
+gl_hig_dialog_add_widget (glHigDialog   *dialog,
+			  GtkWidget     *widget)
+{
+	gtk_box_pack_start (GTK_BOX (dialog->vbox), widget, FALSE, FALSE, 0);
+}
+
 
 /****************************************************************************/
 /* Boilerplate Category Object stuff.                                       */
@@ -254,7 +280,7 @@ gl_hig_category_init (glHigCategory *hig_category)
 {
 	GtkWidget *hbox;
 
-	gtk_box_set_spacing (GTK_BOX(hig_category), HIG_GENERAL_SPACING);
+	gtk_box_set_spacing (GTK_BOX(hig_category), HIG_VBOX_INNER_SPACING);
 
 	/* 1st row: Label */
 	hig_category->label = gtk_label_new ("");
@@ -264,7 +290,7 @@ gl_hig_category_init (glHigCategory *hig_category)
 			    hig_category->label, FALSE, FALSE, 0);
 	
 	/* 2nd row: HBOX */
-	hbox = gtk_hbox_new (FALSE, HIG_GENERAL_SPACING);
+	hbox = gtk_hbox_new (FALSE, HIG_VBOX_INNER_SPACING);
 	gtk_box_pack_start (GTK_BOX(hig_category), hbox, FALSE, FALSE, 0);
 
 	/* 2nd row, Column 1: Indentation spacing */
@@ -272,7 +298,7 @@ gl_hig_category_init (glHigCategory *hig_category)
 			    gtk_label_new ("    "), FALSE, FALSE, 0);
 
 	/* 2nd row, Column 2: User area (inner vbox) */
-	hig_category->vbox = gtk_vbox_new (FALSE, HIG_GENERAL_SPACING);
+	hig_category->vbox = gtk_vbox_new (FALSE, HIG_VBOX_INNER_SPACING);
 	gtk_box_pack_start (GTK_BOX(hbox),
 			    hig_category->vbox, FALSE, FALSE, 0);
 }
@@ -312,4 +338,204 @@ GtkWidget* gl_hig_category_new (const gchar *header)
 
 	return category;
 }
+
+/****************************************************************************/
+/* Add widget (from top) to category's vbox.                                */
+/****************************************************************************/
+void
+gl_hig_category_add_widget (glHigCategory *cat,
+			    GtkWidget     *widget)
+{
+	gtk_box_pack_start (GTK_BOX (cat->vbox), widget, FALSE, FALSE, 0);
+}
+
+
+
+/****************************************************************************/
+/* Boilerplate VBox Object stuff.                                           */
+/****************************************************************************/
+guint
+gl_hig_vbox_get_type (void)
+{
+	static guint hig_vbox_type = 0;
+
+	if (!hig_vbox_type) {
+		GTypeInfo hig_vbox_info = {
+			sizeof (glHigVBoxClass),
+			NULL,
+			NULL,
+			(GClassInitFunc) gl_hig_vbox_class_init,
+			NULL,
+			NULL,
+			sizeof (glHigVBox),
+			0,
+			(GInstanceInitFunc) gl_hig_vbox_init,
+		};
+
+		hig_vbox_type =
+		    g_type_register_static (gtk_vbox_get_type (),
+					    "glHigVBox",
+					    &hig_vbox_info, 0);
+	}
+
+	return hig_vbox_type;
+}
+
+static void
+gl_hig_vbox_class_init (glHigVBoxClass *class)
+{
+	GObjectClass *object_class = (GObjectClass *) class;
+
+	hig_vbox_parent_class = g_type_class_peek_parent (class);
+
+	object_class->finalize = gl_hig_vbox_finalize;
+}
+
+static void
+gl_hig_vbox_init (glHigVBox *hig_vbox)
+{
+	/* defaults to an INNER VBox */
+	gtk_box_set_spacing (GTK_BOX(hig_vbox), HIG_VBOX_INNER_SPACING);
+	gtk_container_set_border_width (GTK_CONTAINER(hig_vbox), 0);
+}
+
+static void
+gl_hig_vbox_finalize (GObject *object)
+{
+	glHigVBox *hig_vbox;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GL_IS_HIG_VBOX (object));
+
+	hig_vbox = GL_HIG_VBOX (object);
+
+	G_OBJECT_CLASS (hig_vbox_parent_class)->finalize (object);
+}
+
+
+/****************************************************************************/
+/* Create a vbox wrapper that attempts to be HIG compliant.                 */
+/****************************************************************************/
+GtkWidget* gl_hig_vbox_new (glHigVBoxType type)
+{
+	GtkWidget    *hig_vbox;
+
+	hig_vbox = g_object_new (gl_hig_vbox_get_type (), NULL);
+
+	switch (type) {
+
+	case GL_HIG_VBOX_OUTER:
+		gtk_box_set_spacing (GTK_BOX(hig_vbox),
+				     HIG_VBOX_OUTER_SPACING);
+		gtk_container_set_border_width (GTK_CONTAINER(hig_vbox),
+						HIG_VBOX_OUTER_BORDER);
+		break;
+
+	case GL_HIG_VBOX_INNER:
+		gtk_box_set_spacing (GTK_BOX(hig_vbox),
+				     HIG_VBOX_INNER_SPACING);
+		gtk_container_set_border_width (GTK_CONTAINER(hig_vbox), 0);
+		
+	default:
+		break;
+
+	}
+
+	return hig_vbox;
+}
+
+/****************************************************************************/
+/* Add widget (from top) to vbox.                                           */
+/****************************************************************************/
+void
+gl_hig_vbox_add_widget (glHigVBox     *hig_vbox,
+			GtkWidget     *widget)
+{
+	gtk_box_pack_start (GTK_BOX (hig_vbox), widget, FALSE, FALSE, 0);
+}
+
+
+/****************************************************************************/
+/* Boilerplate HBox Object stuff.                                           */
+/****************************************************************************/
+guint
+gl_hig_hbox_get_type (void)
+{
+	static guint hig_hbox_type = 0;
+
+	if (!hig_hbox_type) {
+		GTypeInfo hig_hbox_info = {
+			sizeof (glHigHBoxClass),
+			NULL,
+			NULL,
+			(GClassInitFunc) gl_hig_hbox_class_init,
+			NULL,
+			NULL,
+			sizeof (glHigHBox),
+			0,
+			(GInstanceInitFunc) gl_hig_hbox_init,
+		};
+
+		hig_hbox_type =
+		    g_type_register_static (gtk_hbox_get_type (),
+					    "glHigHBox",
+					    &hig_hbox_info, 0);
+	}
+
+	return hig_hbox_type;
+}
+
+static void
+gl_hig_hbox_class_init (glHigHBoxClass *class)
+{
+	GObjectClass *object_class = (GObjectClass *) class;
+
+	hig_hbox_parent_class = g_type_class_peek_parent (class);
+
+	object_class->finalize = gl_hig_hbox_finalize;
+}
+
+static void
+gl_hig_hbox_init (glHigHBox *hig_hbox)
+{
+	gtk_box_set_spacing (GTK_BOX(hig_hbox), HIG_HBOX_SPACING);
+	gtk_container_set_border_width (GTK_CONTAINER(hig_hbox), 0);
+}
+
+static void
+gl_hig_hbox_finalize (GObject *object)
+{
+	glHigHBox *hig_hbox;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GL_IS_HIG_HBOX (object));
+
+	hig_hbox = GL_HIG_HBOX (object);
+
+	G_OBJECT_CLASS (hig_hbox_parent_class)->finalize (object);
+}
+
+
+/****************************************************************************/
+/* Create a hbox wrapper that attempts to be HIG compliant.                 */
+/****************************************************************************/
+GtkWidget* gl_hig_hbox_new (void)
+{
+	GtkWidget    *hig_hbox;
+
+	hig_hbox = g_object_new (gl_hig_hbox_get_type (), NULL);
+
+	return hig_hbox;
+}
+
+/****************************************************************************/
+/* Add widget (from left) to hbox.                                          */
+/****************************************************************************/
+void
+gl_hig_hbox_add_widget (glHigHBox     *hig_hbox,
+			GtkWidget     *widget)
+{
+	gtk_box_pack_start (GTK_BOX (hig_hbox), widget, FALSE, FALSE, 0);
+}
+
 

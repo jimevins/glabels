@@ -26,10 +26,19 @@
 #include "hig.h"
 #include "template.h"
 #include "marshal.h"
+#include "color.h"
 
 #include "debug.h"
 
+/*========================================================*/
+/* Private macros and constants.                          */
+/*========================================================*/
 #define MINI_PREVIEW_MAX_PIXELS 48
+
+#define LINE_COLOR             GL_COLOR(0,0,0)
+#define FILL_COLOR             GL_COLOR(255,255,255)
+#define UNSENSITIVE_LINE_COLOR GL_COLOR(0x66,0x66,0x66)
+#define UNSENSITIVE_FILL_COLOR GL_COLOR(0xCC,0xCC,0xCC)
 
 /*===========================================*/
 /* Private types                             */
@@ -92,7 +101,7 @@ gl_wdgt_rotate_label_get_type (void)
 		};
 
 		wdgt_rotate_label_type =
-			g_type_register_static (gtk_hbox_get_type (),
+			g_type_register_static (gl_hig_hbox_get_type (),
 						"glWdgtRotateLabel",
 						&wdgt_rotate_label_info, 0);
 	}
@@ -107,7 +116,7 @@ gl_wdgt_rotate_label_class_init (glWdgtRotateLabelClass * class)
 
 	object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_rotate_label_finalize;
 
@@ -167,18 +176,16 @@ gl_wdgt_rotate_label_construct (glWdgtRotateLabel * rotate_select)
 	GtkWidget *whbox;
 
 	whbox = GTK_WIDGET (rotate_select);
-	gtk_box_set_spacing (GTK_BOX(whbox), GL_HIG_SPACING);
 
 	/* Actual selection control */
 	rotate_select->rotate_check =
 	    gtk_check_button_new_with_label (_("Rotate"));
-	gtk_box_pack_start (GTK_BOX (whbox), rotate_select->rotate_check, TRUE,
-			    TRUE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
+				rotate_select->rotate_check);
 
 	/* mini_preview canvas */
 	rotate_select->canvas = mini_preview_canvas_new ();
-	gtk_box_pack_start (GTK_BOX (whbox), rotate_select->canvas,
-			    TRUE, TRUE, 0);
+	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), rotate_select->canvas);
 
 	/* Connect signals to controls */
 	g_signal_connect (G_OBJECT (rotate_select->rotate_check), "toggled",
@@ -243,6 +250,7 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 	GnomeCanvasGroup *group = NULL;
 	GnomeCanvasItem *label_item = NULL;
 	gdouble m, raw_w, raw_h, w, h;
+	guint line_color, fill_color;
 
 	/* Fetch our data from canvas */
 	label_item = g_object_get_data (G_OBJECT (canvas), "label_item");
@@ -268,6 +276,15 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 		gtk_object_destroy (GTK_OBJECT (label_item));
 	}
 
+	/* Adjust sensitivity (should the canvas be grayed?) */
+	if (raw_w != raw_h) {
+		line_color = LINE_COLOR;
+		fill_color = FILL_COLOR;
+	} else {
+		line_color = UNSENSITIVE_LINE_COLOR;
+		fill_color = UNSENSITIVE_FILL_COLOR;
+	}
+
 	/* draw mini label outline */
 	if (!rotate_flag) {
 		w = raw_w;
@@ -285,8 +302,8 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 						    "x2", +w / 2.0,
 						    "y2", +h / 2.0,
 						    "width_pixels", 1,
-						    "outline_color", "black",
-						    "fill_color", "white",
+						    "outline_color_rgba", line_color,
+						    "fill_color_rgba", fill_color,
 						    NULL);
 		break;
 	case GL_TEMPLATE_STYLE_ROUND:
@@ -298,8 +315,8 @@ mini_preview_canvas_update (GnomeCanvas * canvas,
 						    "x2", +w / 2.0,
 						    "y2", +h / 2.0,
 						    "width_pixels", 2,
-						    "outline_color", "black",
-						    "fill_color", "white",
+						    "outline_color_rgba", line_color,
+						    "fill_color_rgba", fill_color,
 						    NULL);
 		break;
 	default:
@@ -347,11 +364,8 @@ gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel * rotate_select,
 	rotate_select->template = template;
 	gl_template_get_label_size (template, &raw_w, &raw_h);
 
-	if (raw_w != raw_h) {
-		gtk_widget_set_sensitive (rotate_select->rotate_check, TRUE);
-	} else {
-		gtk_widget_set_sensitive (rotate_select->rotate_check, FALSE);
-	}
+	gtk_widget_set_sensitive (rotate_select->rotate_check,
+				  (raw_w != raw_h));
 
 	mini_preview_canvas_update (GNOME_CANVAS (rotate_select->canvas),
 				    template, FALSE);

@@ -24,6 +24,7 @@
 #define __WDGT_MEDIA_SELECT_H__
 
 #include <gnome.h>
+#include "hig.h"
 
 #define GL_TYPE_WDGT_MEDIA_SELECT (gl_wdgt_media_select_get_type ())
 #define GL_WDGT_MEDIA_SELECT(obj) \
@@ -39,7 +40,7 @@ typedef struct _glWdgtMediaSelect      glWdgtMediaSelect;
 typedef struct _glWdgtMediaSelectClass glWdgtMediaSelectClass;
 
 struct _glWdgtMediaSelect {
-	GtkVBox   parent_widget;
+	glHigVBox  parent_widget;
 
 	GtkWidget *page_size_entry;
 	GtkWidget *template_combo;
@@ -54,7 +55,7 @@ struct _glWdgtMediaSelect {
 };
 
 struct _glWdgtMediaSelectClass {
-	GtkVBoxClass parent_class;
+	glHigVBoxClass parent_class;
 
 	void (*changed) (glWdgtMediaSelect * media_select, gpointer user_data);
 };

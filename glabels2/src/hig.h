@@ -27,10 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define GL_HIG_SPACING 6
-
 /*===========================================================================*/
-/* HIG Dialog.                                                               */
+/* HIG Dialog wrapper.                                                       */
 /*===========================================================================*/
 
 #define GL_TYPE_HIG_DIALOG (gl_hig_dialog_get_type ())
@@ -66,9 +64,12 @@ GtkWidget *gl_hig_dialog_new_with_buttons (const gchar    *title,
 					   const gchar    *first_button_text,
 					   ...);
 
+void       gl_hig_dialog_add_widget       (glHigDialog   *dialog,
+					   GtkWidget     *widget);
+
 
 /*===========================================================================*/
-/* HIG Category.                                                             */
+/* HIG Category (analogous to a gtk_frame).                                  */
 /*===========================================================================*/
 
 #define GL_TYPE_HIG_CATEGORY (gl_hig_category_get_type ())
@@ -98,6 +99,80 @@ struct _glHigCategoryClass {
 guint      gl_hig_category_get_type         (void);
 
 GtkWidget *gl_hig_category_new              (const gchar *header);
+
+void       gl_hig_category_add_widget       (glHigCategory *cat,
+					     GtkWidget     *widget);
+
+G_END_DECLS
+
+/*===========================================================================*/
+/* HIG VBOX wrapper.                                                         */
+/*===========================================================================*/
+
+typedef enum {
+	GL_HIG_VBOX_OUTER,
+	GL_HIG_VBOX_INNER,
+} glHigVBoxType;
+
+#define GL_TYPE_HIG_VBOX (gl_hig_vbox_get_type ())
+#define GL_HIG_VBOX(obj) \
+        (GTK_CHECK_CAST((obj), GL_TYPE_HIG_VBOX, glHigVBox ))
+#define GL_HIG_VBOX_CLASS(klass) \
+        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_HIG_VBOX, glHigVBoxClass))
+#define GL_IS_HIG_VBOX(obj) \
+        (GTK_CHECK_TYPE ((obj), GL_TYPE_HIG_VBOX))
+#define GL_IS_HIG_VBOX_CLASS(klass) \
+        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_HIG_VBOX))
+
+typedef struct _glHigVBox      glHigVBox;
+typedef struct _glHigVBoxClass glHigVBoxClass;
+
+struct _glHigVBox {
+	GtkVBox           parent_widget;
+};
+
+struct _glHigVBoxClass {
+	GtkVBoxClass      parent_class;
+};
+
+guint      gl_hig_vbox_get_type         (void);
+
+GtkWidget *gl_hig_vbox_new              (glHigVBoxType  type);
+
+void       gl_hig_vbox_add_widget       (glHigVBox     *hig_vbox,
+					 GtkWidget     *widget);
+
+/*===========================================================================*/
+/* HIG HBOX wrapper.                                                         */
+/*===========================================================================*/
+
+#define GL_TYPE_HIG_HBOX (gl_hig_hbox_get_type ())
+#define GL_HIG_HBOX(obj) \
+        (GTK_CHECK_CAST((obj), GL_TYPE_HIG_HBOX, glHigHBox ))
+#define GL_HIG_HBOX_CLASS(klass) \
+        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_HIG_HBOX, glHigHBoxClass))
+#define GL_IS_HIG_HBOX(obj) \
+        (GTK_CHECK_TYPE ((obj), GL_TYPE_HIG_HBOX))
+#define GL_IS_HIG_HBOX_CLASS(klass) \
+        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_HIG_HBOX))
+
+typedef struct _glHigHBox      glHigHBox;
+typedef struct _glHigHBoxClass glHigHBoxClass;
+
+struct _glHigHBox {
+	GtkHBox           parent_widget;
+};
+
+struct _glHigHBoxClass {
+	GtkHBoxClass      parent_class;
+};
+
+guint      gl_hig_hbox_get_type         (void);
+
+GtkWidget *gl_hig_hbox_new              (void);
+
+void       gl_hig_hbox_add_widget       (glHigHBox     *hig_hbox,
+					 GtkWidget     *widget);
 
 G_END_DECLS
 
