@@ -25,11 +25,9 @@
 #include <time.h>
 #include <ctype.h>
 #include <gtk/gtk.h>
-#include <libgnomeprint/gnome-print-paper.h>
-#include <libgnomeprintui/gnome-printer-dialog.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
-#include <libgnomeprint/gnome-print-master.h>
-#include <libgnomeprintui/gnome-print-master-preview.h>
+#include <libgnomeprint/gnome-print-job.h>
+#include <libgnomeprintui/gnome-print-job-preview.h>
 
 #include "print-dialog.h"
 #include "hig.h"
@@ -42,6 +40,15 @@
 #include "wdgt-print-merge.h"
 
 #include "debug.h"
+
+/***************************************************************************/
+/* FIXME: GnomePrinterSelector is not public in libgnomeprintui-2.2.       */
+/*                                                                         */
+/* I know that I'm asking for trouble, but here are standin prototypes:    */
+GtkWidget          *gnome_printer_selector_new (GnomePrintConfig *config);
+GnomePrintConfig   *gnome_printer_selector_get_config (GtkWidget *psel);
+#define GNOME_PRINTER_SELECTOR(x) (x)
+/***************************************************************************/
 
 /*===========================================*/
 /* Private types.                            */
@@ -60,6 +67,7 @@ static gint first = 1, last = 1, n_sheets = 0, n_copies = 1;
 /*===========================================*/
 /* Private function prototypes.              */
 /*===========================================*/
+
 static GtkWidget *job_page_new     (GtkWidget *dlg, glLabel *label);
 static GtkWidget *printer_page_new (GtkWidget *dlg, glLabel *label);
 
@@ -221,8 +229,9 @@ printer_page_new (GtkWidget *dlg,
 
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
+	/* FIXME: GnomePrinterSelector is not public in libgnomeprintui-2.2 */
 	printer_select =
-		gnome_printer_selection_new (gnome_print_config_default ());
+		gnome_printer_selector_new (gnome_print_config_default ());
 	gtk_widget_show (printer_select);
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), printer_select);
 
@@ -258,7 +267,8 @@ print_response (GtkDialog *dlg,
 		printer_select = g_object_get_data (G_OBJECT(dlg),
 						    "printer_select");
 
-		config = gnome_printer_selection_get_config (GNOME_PRINTER_SELECTION(printer_select));
+		/* FIXME: GnomePrinterSelector is not public in libgnomeprintui-2.2. */
+		config = gnome_printer_selector_get_config (GNOME_PRINTER_SELECTOR(printer_select));
 
 		outline_flag =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
@@ -314,22 +324,22 @@ print_sheets (GnomePrintConfig *config,
 	      gboolean          outline_flag,
 	      gboolean          reverse_flag)
 {
-	GnomePrintMaster *master;
+	GnomePrintJob *job;
 
-	master = gnome_print_master_new_from_config (config);
-	gl_print_simple (master, label, n_sheets, first, last,
+	job = gnome_print_job_new (config);
+	gl_print_simple (job, label, n_sheets, first, last,
 			 outline_flag, reverse_flag);
-	gnome_print_master_close (master);
+	gnome_print_job_close (job);
 
 	if (preview_flag) {
 		GtkWidget *preview_widget =
-		    gnome_print_master_preview_new (master, _("Print preview"));
+		    gnome_print_job_preview_new (job, _("Print preview"));
 		gtk_widget_show (GTK_WIDGET (preview_widget));
 	} else {
-		gnome_print_master_print (master);
+		gnome_print_job_print (job);
 	}
 
-	g_object_unref (G_OBJECT (master));
+	g_object_unref (G_OBJECT (job));
 }
 
 /*---------------------------------------------------------------------------*/
@@ -345,28 +355,28 @@ print_sheets_merge (GnomePrintConfig *config,
 		    gboolean          outline_flag,
 		    gboolean          reverse_flag)
 {
-	GnomePrintMaster *master;
+	GnomePrintJob *job;
 
-	master = gnome_print_master_new_from_config (config);
+	job = gnome_print_job_new (config);
 	if ( collate_flag ) {
-		gl_print_merge_collated (master, label,
+		gl_print_merge_collated (job, label,
 					 n_copies, first,
 					 outline_flag, reverse_flag);
 	} else {
-		gl_print_merge_uncollated (master, label,
+		gl_print_merge_uncollated (job, label,
 					   n_copies, first,
 					   outline_flag, reverse_flag);
 	}
-	gnome_print_master_close (master);
+	gnome_print_job_close (job);
 
 	if (preview_flag) {
 	        GtkWidget *preview_widget =
-		    gnome_print_master_preview_new (master, _("Print preview"));
+		    gnome_print_job_preview_new (job, _("Print preview"));
 		gtk_widget_show (GTK_WIDGET (preview_widget));
 	} else {
-		gnome_print_master_print (master);
+		gnome_print_job_print (job);
 	}
 
-	g_object_unref (G_OBJECT (master));
+	g_object_unref (G_OBJECT (job));
 }
 

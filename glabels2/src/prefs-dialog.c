@@ -35,8 +35,8 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define US_LETTER "US Letter"
-#define A4        "A4"
+#define US_LETTER_ID "US-Letter"
+#define A4_ID        "A4"
 
 /*========================================================*/
 /* Private types.                                         */
@@ -306,7 +306,7 @@ locale_page (glPrefsDialog *dlg)
 	radio_group = NULL;
 
 	dlg->private->page_size_us_letter_radio =
-	    gtk_radio_button_new_with_label (radio_group, US_LETTER);
+	    gtk_radio_button_new_with_label (radio_group, _("US Letter"));
 	radio_group =
 	    gtk_radio_button_get_group (GTK_RADIO_BUTTON
 				    (dlg->private->page_size_us_letter_radio));
@@ -314,7 +314,7 @@ locale_page (glPrefsDialog *dlg)
 				    dlg->private->page_size_us_letter_radio);
 
 	dlg->private->page_size_a4_radio =
-	    gtk_radio_button_new_with_label (radio_group, A4);
+	    gtk_radio_button_new_with_label (radio_group, _("A4"));
 	radio_group =
 	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (dlg->private->page_size_a4_radio));
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe),
@@ -440,11 +440,11 @@ static update_locale_page_from_prefs (glPrefsDialog *dlg)
 		break;
 	}
 
-	if ( g_strcasecmp(gl_prefs->default_page_size, US_LETTER) == 0) {
+	if ( g_strcasecmp(gl_prefs->default_page_size, US_LETTER_ID) == 0) {
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dlg->private->page_size_us_letter_radio),
 			TRUE);
-	} else if ( g_strcasecmp(gl_prefs->default_page_size, A4) == 0) {
+	} else if ( g_strcasecmp(gl_prefs->default_page_size, A4_ID) == 0) {
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dlg->private->page_size_a4_radio),
 			TRUE);
@@ -530,11 +530,11 @@ static update_prefs_from_locale_page (glPrefsDialog *dlg)
 
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dlg->private->page_size_us_letter_radio))) {
-		gl_prefs->default_page_size = US_LETTER;
+		gl_prefs->default_page_size = US_LETTER_ID;
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dlg->private->page_size_a4_radio))) {
-		gl_prefs->default_page_size = A4;
+		gl_prefs->default_page_size = A4_ID;
 	}
 
 	gl_prefs_save_settings ();

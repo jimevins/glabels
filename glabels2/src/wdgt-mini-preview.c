@@ -23,7 +23,6 @@
 #include <config.h>
 
 #include <math.h>
-#include <libgnomeprint/gnome-print-paper.h>
 
 #include "wdgt-mini-preview.h"
 #include "marshal.h"

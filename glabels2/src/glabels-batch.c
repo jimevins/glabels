@@ -23,10 +23,11 @@
 #include <config.h>
 
 #include <gnome.h>
-#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-job.h>
 
 #include "merge-init.h"
 #include "xml-label.h"
+#include "paper.h"
 #include "template.h"
 #include "print.h"
 #include "util.h"
@@ -74,7 +75,7 @@ main (int argc, char **argv)
 	gint               rc;
 	GSList            *p, *file_list = NULL;
 	gint               n_files;
-	GnomePrintMaster  *master = NULL;
+	GnomePrintJob     *job = NULL;
 	gchar             *abs_fn;
 	GnomePrintConfig  *config = NULL;
 	glLabel           *label = NULL;
@@ -118,6 +119,7 @@ main (int argc, char **argv)
 
 	/* initialize components */
 	gl_merge_init ();
+	gl_paper_init ();
 	gl_template_init ();
 
 	/* now print the files */
@@ -126,11 +128,11 @@ main (int argc, char **argv)
 		label = gl_xml_label_open (p->data, &status);
 		if ( status == XML_LABEL_OK ) {
 
-			if ( master == NULL ) {
-				master = gnome_print_master_new ();
+			if ( job == NULL ) {
+				job = gnome_print_job_new (NULL);
 			}
 
-			gl_print_batch (master, label, n_sheets, n_copies,
+			gl_print_batch (job, label, n_sheets, n_copies,
 					outline_flag, reverse_flag);
 
 			g_object_unref (label);
@@ -140,16 +142,16 @@ main (int argc, char **argv)
 				  (char *)p->data );
 		}
 	}
-	if ( master != NULL ) {
+	if ( job != NULL ) {
 
 		abs_fn = gl_util_make_absolute ( output );
-		gnome_print_master_print_to_file (master, abs_fn);
+		gnome_print_job_print_to_file (job, abs_fn);
 		g_free( abs_fn );
 
-		gnome_print_master_close (master);
-		gnome_print_master_print (master);
+		gnome_print_job_close (job);
+		gnome_print_job_print (job);
 
-		g_object_unref (master);
+		g_object_unref (job);
 	}
 
 	g_slist_free (file_list);

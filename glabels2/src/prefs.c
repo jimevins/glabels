@@ -27,6 +27,7 @@
 
 #include "prefs.h"
 #include "util.h"
+#include "paper.h"
 
 #include "debug.h"
 
@@ -69,7 +70,7 @@ glPreferences      *gl_prefs     = NULL;
 
 /* Default values */
 #define DEFAULT_UNITS_STRING       units_to_string (GL_PREFS_UNITS_INCHES)
-#define DEFAULT_PAGE_SIZE          "US Letter"
+#define DEFAULT_PAGE_SIZE          "US-Letter"
 
 #define DEFAULT_FONT_FAMILY        "Helvetica"
 #define DEFAULT_FONT_SIZE          14.0
@@ -267,7 +268,8 @@ gl_prefs_save_settings (void)
 void
 gl_prefs_load_settings (void)
 {
-	gchar *string;
+	gchar   *string;
+	glPaper *paper;
 
 	gl_debug (DEBUG_PREFS, "START");
 	
@@ -395,6 +397,15 @@ gl_prefs_load_settings (void)
 			 BASE_KEY PREF_MAX_RECENTS,
 			 4);
 
+
+	/* Proof read the default page size -- it must be a valid id. */
+	/* (For compatability with older versions.) */
+	paper = gl_paper_from_id (gl_prefs->default_page_size);
+	if ( paper == NULL ) {
+		gl_prefs->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
+	} else {
+		gl_paper_free (&paper);
+	}
 
 	gl_debug (DEBUG_PREFS, "max_recents = %d", gl_prefs->max_recents);
 

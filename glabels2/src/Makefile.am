@@ -114,12 +114,16 @@ glabels_SOURCES = 			\
 	label-barcode.h			\
 	template.c 			\
 	template.h 			\
+	paper.c 			\
+	paper.h 			\
 	xml-label.c			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
 	xml-template.c			\
 	xml-template.h			\
+	xml-paper.c			\
+	xml-paper.h			\
 	xml.c				\
 	xml.h				\
 	pixbuf-cache.c			\
@@ -212,12 +216,16 @@ glabels_batch_SOURCES = 		\
 	label-barcode.h			\
 	template.c 			\
 	template.h 			\
+	paper.c 			\
+	paper.h 			\
 	xml-label.c			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
 	xml-template.c			\
 	xml-template.h			\
+	xml-paper.c			\
+	xml-paper.h			\
 	xml.c				\
 	xml.h				\
 	pixbuf-cache.c			\

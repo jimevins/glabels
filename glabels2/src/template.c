@@ -23,13 +23,13 @@
 #include <config.h>
 
 #include <string.h>
-#include <libgnomeprint/gnome-print-paper.h>
 
 #include "prefs.h"
 #include "util.h"
 #include "xml.h"
 #include "template.h"
 #include "xml-template.h"
+#include "paper.h"
 
 #include "debug.h"
 
@@ -82,61 +82,14 @@ gl_template_init (void)
 
 	templates = read_templates ();
 
-	page_sizes = gl_template_get_page_size_list ();
+	page_sizes = gl_paper_get_id_list ();
 	for ( p=page_sizes; p != NULL; p=p->next ) {
 		if ( g_strcasecmp(p->data, "Other") != 0 ) {
 			templates = g_list_append (templates,
 						   template_full_page (p->data));
 		}
 	}
-	gl_template_free_page_size_list (&page_sizes);
-
-	gl_debug (DEBUG_TEMPLATE, "END");
-}
-
-/*****************************************************************************/
-/* Get a list of valid page size names                                       */
-/*****************************************************************************/
-GList *
-gl_template_get_page_size_list (void)
-{
-	GList           *names = NULL;
-	GList           *p, *paper_list;
-	GnomePrintPaper *paper;
-
-	gl_debug (DEBUG_TEMPLATE, "START");
-
-	paper_list = gnome_print_paper_get_list();
-	for ( p=paper_list; p != NULL; p=p->next ) {
-		paper = (GnomePrintPaper *)p->data;
-		if ( g_strcasecmp(paper->name, "custom") != 0 ) {
-			names = g_list_append (names, g_strdup (paper->name));
-		}
-	}
-
-	names = g_list_append (names, g_strdup ("Other"));
-
-	gl_debug (DEBUG_TEMPLATE, "END");
-	return names;
-}
-
-/*****************************************************************************/
-/* Free a list of page size names.                                           */
-/*****************************************************************************/
-void
-gl_template_free_page_size_list (GList **names)
-{
-	GList *p_name;
-
-	gl_debug (DEBUG_TEMPLATE, "START");
-
-	for (p_name = *names; p_name != NULL; p_name = p_name->next) {
-		g_free (p_name->data);
-		p_name->data = NULL;
-	}
-
-	g_list_free (*names);
-	*names = NULL;
+	gl_paper_free_id_list (&page_sizes);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -210,7 +163,7 @@ gl_template_from_name (const gchar *name)
 
 	if (name == NULL) {
 		/* If no name, return first template as a default */
-		return (glTemplate *) templates->data;
+		return gl_template_dup ((glTemplate *) templates->data);
 	}
 
 	split_name = g_strsplit (name, ":", 2);
@@ -329,10 +282,10 @@ void gl_template_free (glTemplate **template)
 static glTemplate *
 template_full_page (const gchar *page_size)
 {
-	const GnomePrintPaper *paper;
+	glPaper               *paper;
 	glTemplate            *template;
 
-	paper = gnome_print_paper_get_by_name (page_size);
+	paper = gl_paper_from_id (page_size);
 	if ( paper == NULL ) {
 		return NULL;
 	}
@@ -360,6 +313,8 @@ template_full_page (const gchar *page_size)
 		g_list_append (template->label.any.markups,
 			       gl_template_markup_margin_new (5.0));
 
+	gl_paper_free (&paper);
+
 	return template;
 }
 
@@ -373,8 +328,6 @@ read_templates (void)
 	GList *templates = NULL;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
-
-	LIBXML_TEST_VERSION;
 
 	templates = read_template_files_from_dir (templates, GL_DATA_DIR);
 	templates = read_template_files_from_dir (templates, home_data_dir);

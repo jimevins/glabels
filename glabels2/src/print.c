@@ -25,8 +25,6 @@
 #include <time.h>
 #include <ctype.h>
 #include <gtk/gtk.h>
-#include <libgnomeprint/gnome-print-paper.h>
-#include <libgnomeprintui/gnome-printer-dialog.h>
 
 #include "print.h"
 #include "label.h"
@@ -74,7 +72,7 @@ typedef struct _PrintInfo {
 /*=========================================================================*/
 /* Private function prototypes.                                            */
 /*=========================================================================*/
-static PrintInfo *print_info_new              (GnomePrintMaster *master,
+static PrintInfo *print_info_new              (GnomePrintJob    *job,
 					       glLabel          *label);
 
 static void       print_info_free             (PrintInfo       **pi);
@@ -162,7 +160,7 @@ static void       create_clipped_circle_path    (GnomePrintContext *pc,
 /* Simple (no merge data) print command.                                     */
 /*****************************************************************************/
 void
-gl_print_simple (GnomePrintMaster *master,
+gl_print_simple (GnomePrintJob    *job,
 		 glLabel          *label,
 		 gint              n_sheets,
 		 gint              first,
@@ -176,7 +174,7 @@ gl_print_simple (GnomePrintMaster *master,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	pi = print_info_new (master, label);
+	pi = print_info_new (job, label);
 
 	origins = gl_template_get_origins (pi->template);
 
@@ -206,7 +204,7 @@ gl_print_simple (GnomePrintMaster *master,
 /* Merge print command (collated copies)                                     */
 /*****************************************************************************/
 void
-gl_print_merge_collated (GnomePrintMaster *master,
+gl_print_merge_collated (GnomePrintJob    *job,
 			 glLabel          *label,
 			 gint              n_copies,
 			 gint              first,
@@ -226,7 +224,7 @@ gl_print_merge_collated (GnomePrintMaster *master,
 	merge = gl_label_get_merge (label);
 	record_list = gl_merge_get_record_list (merge);
 
-	pi = print_info_new (master, label);
+	pi = print_info_new (job, label);
 
 	n_labels_per_page = gl_template_get_n_labels (pi->template);
 	origins = gl_template_get_origins (pi->template);
@@ -274,7 +272,7 @@ gl_print_merge_collated (GnomePrintMaster *master,
 /* Merge print command (uncollated copies)                                   */
 /*****************************************************************************/
 void
-gl_print_merge_uncollated (GnomePrintMaster *master,
+gl_print_merge_uncollated (GnomePrintJob    *job,
 			   glLabel          *label,
 			   gint              n_copies,
 			   gint              first,
@@ -294,7 +292,7 @@ gl_print_merge_uncollated (GnomePrintMaster *master,
 	merge = gl_label_get_merge (label);
 	record_list = gl_merge_get_record_list (merge);
 
-	pi = print_info_new (master, label);
+	pi = print_info_new (job, label);
 
 	n_labels_per_page = gl_template_get_n_labels (pi->template);
 	origins = gl_template_get_origins (pi->template);
@@ -344,7 +342,7 @@ gl_print_merge_uncollated (GnomePrintMaster *master,
 /* Batch print.  Call appropriate function above.                            */
 /*****************************************************************************/
 void
-gl_print_batch (GnomePrintMaster *master,
+gl_print_batch (GnomePrintJob    *job,
 		glLabel          *label,
 		gint              n_sheets,
 		gint              n_copies,
@@ -363,10 +361,10 @@ gl_print_batch (GnomePrintMaster *master,
 	if ( merge == NULL ) {
 		n_per_page = gl_template_get_n_labels(template);
 
-		gl_print_simple (master, label, n_sheets, 1, n_per_page,
+		gl_print_simple (job, label, n_sheets, 1, n_per_page,
 				 outline_flag, reverse_flag);
 	} else {
-		gl_print_merge_collated (master, label, n_copies, 1,
+		gl_print_merge_collated (job, label, n_copies, 1,
 					 outline_flag, reverse_flag);
 	}
 	gl_template_free (&template);
@@ -380,7 +378,7 @@ gl_print_batch (GnomePrintMaster *master,
 /* PRIVATE.  new print info structure                                        */
 /*---------------------------------------------------------------------------*/
 static PrintInfo *
-print_info_new (GnomePrintMaster *master,
+print_info_new (GnomePrintJob    *job,
 		glLabel          *label)
 {
 	PrintInfo            *pi = g_new0 (PrintInfo, 1);
@@ -395,8 +393,8 @@ print_info_new (GnomePrintMaster *master,
 		return NULL;
 	}
 
-	pi->pc = gnome_print_master_get_context (master);
-	pi->config = gnome_print_master_get_config (master);
+	pi->pc = gnome_print_job_get_context (job);
+	pi->config = gnome_print_job_get_config (job);
 
 	if ((template != NULL) && (template->page_size != NULL)) {
 

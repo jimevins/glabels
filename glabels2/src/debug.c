@@ -40,6 +40,7 @@ gint gl_debug_print = 0;
 gint gl_debug_file = 0;
 gint gl_debug_label = 0;
 gint gl_debug_template = 0;
+gint gl_debug_paper = 0;
 gint gl_debug_xml = 0;
 gint gl_debug_merge = 0;
 gint gl_debug_commands = 0;
@@ -80,6 +81,7 @@ gl_debug (gint   section,
 	    (gl_debug_file         && section == GL_DEBUG_FILE)           ||
 	    (gl_debug_label        && section == GL_DEBUG_LABEL)          ||
 	    (gl_debug_template     && section == GL_DEBUG_TEMPLATE)       ||
+	    (gl_debug_paper        && section == GL_DEBUG_PAPER)          ||
 	    (gl_debug_xml          && section == GL_DEBUG_XML)            ||
 	    (gl_debug_merge        && section == GL_DEBUG_MERGE)          ||
 	    (gl_debug_commands     && section == GL_DEBUG_COMMANDS)       ||

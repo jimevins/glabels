@@ -29,6 +29,7 @@
 #include "splash.h"
 #include "stock.h"
 #include "merge-init.h"
+#include "paper.h"
 #include "template.h"
 #include "prefs.h"
 #include "debug.h"
@@ -67,6 +68,9 @@ static const struct poptOption options [] =
 
 	{ "debug-template", '\0', POPT_ARG_NONE, &gl_debug_template, 0,
 	  N_("Show template debugging messages."), NULL },
+
+	{ "debug-paper", '\0', POPT_ARG_NONE, &gl_debug_paper, 0,
+	  N_("Show paper debugging messages."), NULL },
 
 	{ "debug-xml", '\0', POPT_ARG_NONE, &gl_debug_xml, 0,
 	  N_("Show xml debugging messages."), NULL },
@@ -166,6 +170,8 @@ main (int argc, char **argv)
 	gl_prefs_init ();
 	gl_prefs_load_settings ();
 
+	/* Initialize subsystems */
+	gl_paper_init();
 	gl_template_init();
 	gl_merge_init();
 	gl_recent_init();

@@ -40,6 +40,7 @@ typedef enum {
 	GL_DEBUG_FILE,
 	GL_DEBUG_LABEL,
 	GL_DEBUG_TEMPLATE,
+	GL_DEBUG_PAPER,
 	GL_DEBUG_XML,
 	GL_DEBUG_MERGE,
 	GL_DEBUG_UNDO,
@@ -61,6 +62,7 @@ extern gint gl_debug_prefs;
 extern gint gl_debug_file;
 extern gint gl_debug_label;
 extern gint gl_debug_template;
+extern gint gl_debug_paper;
 extern gint gl_debug_xml;
 extern gint gl_debug_merge;
 extern gint gl_debug_commands;
@@ -84,6 +86,7 @@ extern gint gl_debug_wdgt;
 #define	DEBUG_FILE	GL_DEBUG_FILE,    __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_LABEL	GL_DEBUG_LABEL,   __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_TEMPLATE	GL_DEBUG_TEMPLATE,__FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PAPER	GL_DEBUG_PAPER,   __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_XML	GL_DEBUG_XML,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_MERGE	GL_DEBUG_MERGE,   __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_UNDO	GL_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__

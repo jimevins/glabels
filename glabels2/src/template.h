@@ -24,8 +24,6 @@
 #define __TEMPLATE_H__
 
 #include <libgnome/libgnome.h>
-#include <libxml/tree.h>
-#include <libxml/parser.h>
 
 G_BEGIN_DECLS
 
@@ -138,9 +136,6 @@ typedef struct {
 
 void                 gl_template_init                (void);
 
-GList               *gl_template_get_page_size_list  (void);
-void                 gl_template_free_page_size_list (GList            **sizes);
-
 GList               *gl_template_get_name_list       (const gchar       *page_size);
 void                 gl_template_free_name_list      (GList            **names);
 
@@ -148,12 +143,6 @@ glTemplate          *gl_template_from_name           (const gchar       *name);
 
 glTemplate          *gl_template_dup                 (const glTemplate  *orig);
 void                 gl_template_free                (glTemplate       **template);
-
-glTemplate          *gl_template_xml_parse_sheet     (xmlNodePtr         sheet_node);
-
-void                 gl_template_xml_add_sheet       (const glTemplate  *template,
-						      xmlNodePtr         root,
-						      xmlNsPtr           ns);
 
 gchar               *gl_template_get_label_size_desc (const glTemplate  *template);
 void                 gl_template_get_label_size      (const glTemplate  *template,

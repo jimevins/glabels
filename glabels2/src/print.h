@@ -23,13 +23,13 @@
 #define __PRINT_H__
 
 #include <gnome.h>
-#include <libgnomeprint/gnome-print-master.h>
-#include <libgnomeprintui/gnome-print-master-preview.h>
+#include <libgnomeprint/gnome-print-job.h>
+
 #include "label.h"
 
 G_BEGIN_DECLS
 
-void gl_print_simple           (GnomePrintMaster *master,
+void gl_print_simple           (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_sheets,
 				gint              first,
@@ -37,21 +37,21 @@ void gl_print_simple           (GnomePrintMaster *master,
 				gboolean          outline_flag,
 				gboolean          reverse_flag);
 
-void gl_print_merge_collated   (GnomePrintMaster *master,
+void gl_print_merge_collated   (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_copies,
 				gint              first,
 				gboolean          outline_flag,
 				gboolean          reverse_flag);
 
-void gl_print_merge_uncollated (GnomePrintMaster *master,
+void gl_print_merge_uncollated (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_copies,
 				gint              first,
 				gboolean          outline_flag,
 				gboolean          reverse_flag);
 
-void gl_print_batch            (GnomePrintMaster *master,
+void gl_print_batch            (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_sheets,
 				gint              n_bcopies,

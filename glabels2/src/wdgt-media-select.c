@@ -28,6 +28,7 @@
 #include "wdgt-mini-preview.h"
 #include "prefs.h"
 #include "util.h"
+#include "paper.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -189,11 +190,13 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	GtkSizeGroup *label_size_group;
 	gchar        *name;
 	GList        *template_names, *page_sizes = NULL;
-	const gchar  *page_size;
+	const gchar  *page_size_id;
+	gchar        *page_size_name;
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-	page_size = gl_prefs_get_page_size ();
+	page_size_id = gl_prefs_get_page_size ();
+	page_size_name = gl_paper_lookup_name_from_id (page_size_id);
 
 	wvbox = GTK_WIDGET (media_select);
 
@@ -203,22 +206,22 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	/* Page size selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating page size combo...");
 	wcombo = gtk_combo_new ();
-	page_sizes = gl_template_get_page_size_list ();
+	page_sizes = gl_paper_get_name_list ();
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), page_sizes);
-	gl_template_free_page_size_list (&page_sizes);
+	gl_paper_free_name_list (&page_sizes);
 	media_select->page_size_entry = GTK_COMBO (wcombo)->entry;
 	gtk_entry_set_editable (GTK_ENTRY (media_select->page_size_entry),
 				FALSE);
 	gtk_combo_set_value_in_list (GTK_COMBO(wcombo), TRUE, FALSE);
 	gtk_widget_set_size_request (media_select->page_size_entry, 100, -1);
 	gtk_entry_set_text (GTK_ENTRY (media_select->page_size_entry),
-			    page_size);
+			    page_size_name);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
 	/* Actual selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating template combo...");
-	gl_debug (DEBUG_MEDIA_SELECT, "page_size = %s", page_size);
-	template_names = gl_template_get_name_list (page_size);
+	gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = %s", page_size_name);
+	template_names = gl_template_get_name_list (page_size_id);
 	media_select->template_combo = gtk_combo_new ();
 	gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
 				       template_names);
@@ -317,6 +320,8 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 			  G_CALLBACK (template_entry_changed_cb),
 			  media_select);
 
+	g_free (page_size_name);
+
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
@@ -328,17 +333,18 @@ page_size_entry_changed_cb (GtkEntry *entry,
 			    gpointer  user_data)
 {
 	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
-	gchar             *page_size;
+	gchar             *page_size_name, *page_size_id;
 	GList             *template_names;
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
 
 	/* Update template selections for new page size */
-	page_size = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
-	if ( strlen(page_size) ) {
-		gl_debug (DEBUG_MEDIA_SELECT, "page_size = \"%s\"", page_size);
-		template_names = gl_template_get_name_list (page_size);
+	page_size_name = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	if ( strlen(page_size_name) ) {
+		gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = \"%s\"", page_size_name);
+		page_size_id = gl_paper_lookup_id_from_name (page_size_name);
+		template_names = gl_template_get_name_list (page_size_id);
 		if (template_names == NULL) {
 			template_names = g_list_append (template_names, g_strdup(""));
 		}
@@ -347,8 +353,9 @@ page_size_entry_changed_cb (GtkEntry *entry,
 		gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
 				    template_names->data);
 		gl_template_free_name_list (&template_names);
+		g_free (page_size_id);
 	}
-	g_free (page_size);
+	g_free (page_size_name);
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
@@ -371,7 +378,7 @@ template_entry_changed_cb (GtkEntry *entry,
 	if ( strlen(name) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
 		gl_wdgt_mini_preview_set_label (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
-					   name);
+						name);
 		gl_debug (DEBUG_MEDIA_SELECT, "m1");
 		details_update (media_select, name);
 		gl_debug (DEBUG_MEDIA_SELECT, "m2");

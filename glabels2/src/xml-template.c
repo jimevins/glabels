@@ -23,9 +23,9 @@
 #include <config.h>
 
 #include <string.h>
-#include <libgnomeprint/gnome-print-paper.h>
 
 #include "util.h"
+#include "paper.h"
 #include "xml.h"
 #include "xml-template.h"
 
@@ -81,6 +81,8 @@ gl_xml_template_read_templates_from_file (GList *templates,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
+	LIBXML_TEST_VERSION;
+
 	doc = xmlParseFile (xml_filename);
 	if (!doc) {
 		g_warning ("\"%s\" is not a glabels template file (not XML)",
@@ -130,7 +132,7 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 {
 	glTemplate            *template;
 	xmlNodePtr             node;
-	const GnomePrintPaper *paper;
+	glPaper               *paper;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -141,22 +143,20 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name->data);
 
 	template->page_size = xmlGetProp (sheet_node, "size");
-	if ( xmlStrEqual (template->page_size,"US-Letter")) {
-		template->page_size = "US Letter";
-	}
 	if (xmlStrEqual (template->page_size, "Other")) {
 
 		template->page_width = gl_xml_get_prop_length (sheet_node, "width", 0);
 		template->page_height = gl_xml_get_prop_length (sheet_node, "height", 0);
 
 	} else {
-		paper = gnome_print_paper_get_by_name (template->page_size);
+		paper = gl_paper_from_id (template->page_size);
 		if (paper != NULL) {
 			template->page_width  = paper->width;
 			template->page_height = paper->height;
 		} else {
-			g_warning (_("Unknown page size \"%s\""), template->page_size);
+			g_warning (_("Unknown page size id \"%s\""), template->page_size);
 		}
+		gl_paper_free (&paper);
 	}
 
 	template->description = xmlGetProp (sheet_node, "description");
