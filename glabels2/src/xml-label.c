@@ -45,7 +45,7 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define NAME_SPACE "http://snaught.com/glabels/1.90/"
+#define NAME_SPACE "http://snaught.com/glabels/1.92/"
 #define COMPAT01_NAME_SPACE "http://snaught.com/glabels/0.1/"
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
 
@@ -382,22 +382,21 @@ xml_parse_text_props (xmlNodePtr object_node,
 			for (text_node = line_node->xmlChildrenNode;
 			     text_node != NULL; text_node = text_node->next) {
 
-				if (g_strcasecmp (text_node->name, "Field") ==
-				    0) {
+				if (g_strcasecmp (text_node->name, "Field") == 0) {
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = TRUE;
 					node_text->data =
 						xmlGetProp (text_node, "name");
 					nodes =
 						g_list_append (nodes, node_text);
-				} else if (xmlNodeIsText (text_node)) {
+				} else if (g_strcasecmp (text_node->name, "Literal") == 0) {
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = FALSE;
 					node_text->data =
 						xmlNodeGetContent (text_node);
 					nodes =
 						g_list_append (nodes, node_text);
-				} else {
+				} else if (!xmlNodeIsText) {
 					g_warning ("Unexpected Text Line child: \"%s\"",
 						   text_node->name);
 				}
@@ -824,7 +823,7 @@ xml_create_text_props (xmlNodePtr object_node,
 		       xmlNsPtr ns,
 		       glLabelObject * object)
 {
-	xmlNodePtr line_node, field_node;
+	xmlNodePtr line_node, field_node, literal_node;
 	GList *lines;
 	gchar *font_family;
 	gdouble font_size;
@@ -874,7 +873,9 @@ xml_create_text_props (xmlNodePtr object_node,
 				xmlSetProp (field_node, "name",
 					    node_text->data);
 			} else {
-				xmlNodeAddContent (line_node, node_text->data);
+				literal_node =
+				    xmlNewChild (line_node, ns,
+						 "Literal", node_text->data);
 			}
 
 		}
