@@ -76,6 +76,9 @@ static void     pointer_moved_cb       (glView        *view,
 					gdouble        y,
 					glWindow      *window);
 
+static void     pointer_exit_cb        (glView        *view,
+					glWindow      *window);
+
 static void     name_changed_cb        (glLabel       *label,
 					glWindow      *window);
 
@@ -340,6 +343,9 @@ gl_window_set_label (glWindow    *window,
 	g_signal_connect (G_OBJECT(window->view), "pointer_moved",
 			  G_CALLBACK(pointer_moved_cb), window);
 
+	g_signal_connect (G_OBJECT(window->view), "pointer_exit",
+			  G_CALLBACK(pointer_exit_cb), window);
+
 	g_signal_connect (G_OBJECT(label), "name_changed",
 			  G_CALLBACK(name_changed_cb), window);
 
@@ -446,6 +452,8 @@ zoom_changed_cb (glView   *view,
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
 	g_free (string);
 
+	gl_ui_update_zoom_verbs (window->uic, view);
+
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
@@ -475,6 +483,23 @@ pointer_moved_cb (glView   *view,
 				  units_precision, y*units_per_point);
 	gtk_label_set_text (GTK_LABEL(window->cursor_info), string);
 	g_free (string);
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  View "pointer exit" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+pointer_exit_cb (glView   *view,
+		 glWindow *window)
+{
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+	gtk_label_set_text (GTK_LABEL(window->cursor_info), "");
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
