@@ -263,6 +263,16 @@
     </Label-rectangle>
   </Template>
 
+  <!-- ===================================================================-->
+  <!-- Media Line CD/DVD Labels (face only), 2 per sheet -->
+  <!-- ===================================================================-->
+  <Template name="MediaLine 760-50475 A4 CD" size="A4" description="CD/DVD Labels (face only)">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="2" x0="133" y0="45" dx="0" dy="422"/>
+    </Label-cd>
+  </Template>
+
 
   <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
