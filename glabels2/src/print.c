@@ -1108,7 +1108,7 @@ static void
 clip_punchouts (PrintInfo *pi,
 		glLabel   *label)
 {
-	gdouble r1, r2;
+	gdouble w, h, r2;
 	gdouble waste;
 	glTemplate *template;
 
@@ -1123,10 +1123,10 @@ clip_punchouts (PrintInfo *pi,
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
+		gl_label_get_size (label, &w, &h);
 		waste = template->label.cd.waste;
-		r1    = template->label.cd.r1;
 		r2    = template->label.cd.r2;
-		create_ellipse_path (pi->pc, r1, r1, r2-waste, r2-waste);
+		create_ellipse_path (pi->pc, w/2, h/2, r2-waste, r2-waste);
 		gnome_print_setrgbcolor (pi->pc, 1.0, 1.0, 1.0);
 		gnome_print_setopacity (pi->pc, 1.0);
 		gnome_print_fill (pi->pc);
