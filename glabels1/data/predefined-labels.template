@@ -584,6 +584,16 @@ margin="2" round="0">
     </Label>
   </Sheet>
 
+  <!-- =================================================================== -->
+  <!-- Great Gizmos : CD/DVD Labels (face only), 2 per sheet             * -->
+  <!-- =================================================================== -->
+  <Sheet name="Great Gizmos" size="US-Letter"
+         description="CD/DVD Labels (face only)">
+    <Label style="cd" radius="166.5" hole="58.5" margin="5">
+      <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
+    </Label>
+  </Sheet>
+
 
   <!-- ******************************************************************** -->
   <!-- Misc. A4 products.                                                   -->
