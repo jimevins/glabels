@@ -1,5 +1,29 @@
 2004-07-02  Jim Evins  <evins@snaught.com>
 
+	* data/glabels.1:
+		Created man page.  Based on page submitted by Matthew J. Lockner, however
+		it has been severely edited.
+	
+	* data/avery-other-templates.xml
+	* data/misc-other-templates.xml:
+		Started new files for predefined templates with non-standard sheet sizes.
+		These have been initially populated with the Avery 06141 and
+		OfficeMax #86112, both provided by Matthew J. Lockner.
+	
+	* data/Makefile.am:
+		Install above manpage and template files.
+	
+	* glabels.spec.in:
+		Make sure we install man pages.
+	
+	* src/glabels-batch.c:
+		Changed short form of help option to '-?' to be consistent with glabels.
+	
+	* AUTHORS:
+		Added acknowledgement for above labels.
+
+2004-07-02  Jim Evins  <evins@snaught.com>
+
 	* src/glabels.c: (main), (save_session_cb):
 		- Now include libbonoboui.h, recent.h, and file.h to provide missing
 		  prototypes.

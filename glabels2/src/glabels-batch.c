@@ -44,7 +44,7 @@ static gboolean outline_flag = FALSE;
 static gboolean reverse_flag = FALSE;
 
 static struct poptOption options[] = {
-	{"help", 'h', POPT_ARG_NONE, &help_flag, 1,
+	{"help", '?', POPT_ARG_NONE, &help_flag, 1,
 	 N_("print this message"), NULL},
 	{"version", 'v', POPT_ARG_NONE, &version_flag, 0,
 	 N_("print the version of glabels-batch being used"), NULL},

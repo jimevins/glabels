@@ -1,0 +1,64 @@
+.TH glabels 1 "Jun 28, 2004"
+.SH NAME
+glabels \- Label and business card creation program for GNOME
+.SH SYNOPSIS
+.B glabels
+.RI [OPTIONS]
+.RI [label-filename...]
+.sp
+.B glabels-batch
+.RI [OPTIONS]
+.RI [label-filename...]
+.SH DESCRIPTION
+.B glabels
+is a lightweight program for creating labels and business cards for
+the GNOME desktop environment. It is designed to work with various
+laser/ink-jet peel-off label and business card sheets that you'll find at most
+office supply stores.
+.B glabels
+is pre-configured with templates for many of these products.
+It also provides an interactive template designer for creating new
+templates according to user specifications.
+.PP
+For full documentation see the \fBgLabels\fR online help.
+
+.PP
+.B glabels-batch
+is a command line utility to print labels previously prepared with
+.B glabels.
+.SH OPTIONS
+.TP
+\fB\-?\fR, \fB\-\-help\fR
+Display a summary of available command-line options.
+.TP
+\fB\-\-usage\fR
+Display a short usage summary.
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+Print program version information.
+.PP
+.B Options specific to glabels-batch
+.TP
+\fB\-o\fR \fIfilename\fR, \fB\-\-output\fR=\fIfilename\fR
+Set output filename to \fIfilename\fR. (default="output.ps")
+.TP
+\fB\-s\fR \fIn\fR, \fB\-\-sheets\fR=\fIn\fR
+Set number of sheets to \fIn\fR. (default=1)
+.TP
+\fB\-c\fR \fIn\fR, \fB\-\-copies\fR=\fIn\fR
+Set number of copies to \fIn\fR. (default=1)
+.TP
+\fB\-l\fR, \fB\-\-outline\fR
+Print outlines around labels.  This is useful for testing printer alignment
+or printing proof sheets.
+.TP
+\fB\-r\fR, \fB\-\-reverse\fR
+Print mirror image of labels.  This is useful for clear labels intended to be
+seen from the back through glass.
+
+.SH FILES
+The $HOME/.glabels directory contains all user-defined templates.
+.SH SEE ALSO
+The gLabels homepage at <http://glabels.sourceforge.net/>.
+.SH AUTHOR
+Jim Evins <evins@snaught.com>

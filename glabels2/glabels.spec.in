@@ -65,7 +65,7 @@ scrollkeeper-update
 %{_datadir}/applications/*.desktop
 %{_datadir}/application-registry/*
 %{_datadir}/mime-info/*
-
+%{_datadir}/man/*
 
 %changelog
 * Sat Feb 21 2004 Jim Evins <evins@snaught.com>

@@ -19,21 +19,26 @@ mime_DATA = $(KEYS_FILES) glabels.mime
 appdir = $(datadir)/application-registry
 app_DATA = glabels.applications
 
+man_MANS = glabels.1
+
 runtime_files = \
 	glabels-2.0.dtd \
 	paper-sizes.xml \
 	avery-us-templates.xml \
 	avery-iso-templates.xml \
+	avery-other-templates.xml \
 	zweckform-iso-templates.xml \
 	misc-us-templates.xml \
-	misc-iso-templates.xml
+	misc-iso-templates.xml \
+	misc-other-templates.xml
 
 EXTRA_DIST = \
 	$(DESKTOP_IN_FILES)	\
 	$(KEYS_IN_FILES)	\
 	$(mime_DATA)            \
 	$(app_DATA)		\
-	$(runtime_files)
+	$(runtime_files)	\
+	$(man_MANS)
 
 configdir=$(datadir)/glabels
 install-data-local:

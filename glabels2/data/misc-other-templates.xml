@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Glabels-templates xmlns="http://snaught.com/glabels/2.0/">
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery non-standard size products (not US-Letter/Legal or ISO)        -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- OfficeMax 86112: Multi-Purpose Labels, 2'' x 4'', 3 per sheet       -->
+  <!-- =================================================================== -->
+  <Template name="OfficeMax 86112" size="Other" width="297pt" height="450pt"
+            description="Multi-Purpose Labels">
+    <Label-rectangle id="0" width="288pt" height="144pt" round="9pt" waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="3" x0="4.5pt" y0="3.6pt" dx="288pt" dy="148.5pt"/>
+    </Label-rectangle>
+  </Template>
+
+
+</Glabels-templates>
