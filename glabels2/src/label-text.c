@@ -358,6 +358,14 @@ gl_label_text_get_props (glLabelText      *ltext,
 	gl_debug (DEBUG_LABEL, "just = %d", *just);
 }
 
+GtkJustification
+gl_label_text_get_text_alignment (glLabelText *ltext)
+{
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	return ltext->private->just;
+}
+
 void
 gl_label_text_get_box (glLabelText *ltext,
 		       gdouble     *w,

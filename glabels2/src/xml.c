@@ -266,7 +266,7 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 {
 	gchar  *string;
 
-	string = g_strdup_printf ("%g pt", val);
+	string = g_strdup_printf ("%gpt", val);
 	xmlSetProp (node, property, string);
 	g_free (string);
 }

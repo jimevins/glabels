@@ -75,7 +75,7 @@ gl_xml_paper_read_papers_from_file (GList *papers,
 		xmlFreeDoc (doc);
 		return papers;
 	}
-	if (!xmlStrEqual (root->name, "GLabels-paper-sizes")) {
+	if (!xmlStrEqual (root->name, "Glabels-paper-sizes")) {
 		g_warning ("\"%s\" is not a glabels paper file (wrong root node)",
 		      xml_filename);
 		xmlFreeDoc (doc);

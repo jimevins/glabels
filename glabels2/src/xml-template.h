@@ -34,9 +34,9 @@ G_BEGIN_DECLS
 GList       *gl_xml_template_read_templates_from_file (GList             *templates,
 						       gchar             *xml_filename);
 
-glTemplate  *gl_xml_template_parse_sheet              (xmlNodePtr         sheet_node);
+glTemplate  *gl_xml_template_parse_template           (xmlNodePtr         template_node);
 
-void         gl_xml_template_add_sheet                (const glTemplate  *template,
+void         gl_xml_template_add_template             (const glTemplate  *template,
 						       xmlNodePtr         root,
 						       xmlNsPtr           ns);
 

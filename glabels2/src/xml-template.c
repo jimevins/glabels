@@ -43,11 +43,17 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static void        xml_parse_label              (xmlNodePtr              label_node,
+static void        xml_parse_label_rectangle    (xmlNodePtr              layout_node,
 						 glTemplate             *template);
-static void        xml_parse_layout             (xmlNodePtr              layout_node,
+static void        xml_parse_label_round        (xmlNodePtr              layout_node,
 						 glTemplate             *template);
-static void        xml_parse_markup             (xmlNodePtr              markup_node,
+static void        xml_parse_label_cd           (xmlNodePtr              layout_node,
+						 glTemplate             *template);
+static void        xml_parse_layout             (xmlNodePtr              label_node,
+						 glTemplate             *template);
+static void        xml_parse_markup_margin      (xmlNodePtr              markup_node,
+						 glTemplate             *template);
+static void        xml_parse_markup_line        (xmlNodePtr              markup_node,
 						 glTemplate             *template);
 static void        xml_parse_alias              (xmlNodePtr              alias_node,
 						 glTemplate             *template);
@@ -98,7 +104,7 @@ gl_xml_template_read_templates_from_file (GList *templates,
 		xmlFreeDoc (doc);
 		return templates;
 	}
-	if (!xmlStrEqual (root->name, "GLabels-templates")) {
+	if (!xmlStrEqual (root->name, "Glabels-templates")) {
 		g_warning ("\"%s\" is not a glabels template file (wrong root node)",
 		      xml_filename);
 		xmlFreeDoc (doc);
@@ -107,8 +113,8 @@ gl_xml_template_read_templates_from_file (GList *templates,
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (xmlStrEqual (node->name, "Sheet")) {
-			template = gl_xml_template_parse_sheet (node);
+		if (xmlStrEqual (node->name, "Template")) {
+			template = gl_xml_template_parse_template (node);
 			templates = g_list_append (templates, template);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
@@ -129,7 +135,7 @@ gl_xml_template_read_templates_from_file (GList *templates,
 /* Parse XML template Node.                                                  */
 /*****************************************************************************/
 glTemplate *
-gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
+gl_xml_template_parse_template (xmlNodePtr template_node)
 {
 	glTemplate            *template;
 	xmlNodePtr             node;
@@ -140,15 +146,15 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 
 	template = g_new0 (glTemplate, 1);
 
-	template->name  = xmlGetProp (sheet_node, "name");
+	template->name  = xmlGetProp (template_node, "name");
 	template->alias = g_list_append (template->alias, g_strdup (template->name));
-	gl_debug (DEBUG_TEMPLATE, "Sheet = %s", template->name);
+	gl_debug (DEBUG_TEMPLATE, "Template = %s", template->name);
 
-	template->page_size = xmlGetProp (sheet_node, "size");
+	template->page_size = xmlGetProp (template_node, "size");
 	if (xmlStrEqual (template->page_size, "Other")) {
 
-		template->page_width = gl_xml_get_prop_length (sheet_node, "width", 0);
-		template->page_height = gl_xml_get_prop_length (sheet_node, "height", 0);
+		template->page_width = gl_xml_get_prop_length (template_node, "width", 0);
+		template->page_height = gl_xml_get_prop_length (template_node, "height", 0);
 
 	} else {
 		paper = gl_paper_from_id (template->page_size);
@@ -171,17 +177,21 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 		gl_paper_free (&paper);
 	}
 
-	description = xmlGetProp (sheet_node, "_description");
+	description = xmlGetProp (template_node, "_description");
 	if (description != NULL) {
 		template->description = gettext (description);
 	} else {
-		template->description = xmlGetProp (sheet_node, "description");
+		template->description = xmlGetProp (template_node, "description");
 	}
 
-	for (node = sheet_node->xmlChildrenNode; node != NULL;
+	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (xmlStrEqual (node->name, "Label")) {
-			xml_parse_label (node, template);
+		if (xmlStrEqual (node->name, "Label-rectangle")) {
+			xml_parse_label_rectangle (node, template);
+		} else if (xmlStrEqual (node->name, "Label-round")) {
+			xml_parse_label_round (node, template);
+		} else if (xmlStrEqual (node->name, "Label-cd")) {
+			xml_parse_label_cd (node, template);
 		} else if (xmlStrEqual (node->name, "Alias")) {
 			xml_parse_alias (node, template);
 		} else {
@@ -197,60 +207,29 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML Sheet->Label Node.                                   */
+/* PRIVATE.  Parse XML Template->Label-rectangle Node.                      */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_label (xmlNodePtr  label_node,
-		 glTemplate *template)
+xml_parse_label_rectangle (xmlNodePtr  label_node,
+			   glTemplate *template)
 {
 	xmlNodePtr  node;
-	gchar      *style;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	style = xmlGetProp (label_node, "style");
-	if (xmlStrEqual (style, "rectangle")) {
-		template->label.style = GL_TEMPLATE_STYLE_RECT;
-	} else if (xmlStrEqual (style, "round")) {
-		template->label.style = GL_TEMPLATE_STYLE_ROUND;
-	} else if (xmlStrEqual (style, "cd")) {
-		template->label.style = GL_TEMPLATE_STYLE_CD;
-	} else {
-		template->label.style = GL_TEMPLATE_STYLE_RECT;
-		g_warning ("Unknown label style in template");
-	}
-	g_free (style);
 
-	switch (template->label.style) {
-
-	case GL_TEMPLATE_STYLE_RECT:
-		template->label.rect.w = gl_xml_get_prop_length (label_node, "width", 0);
-		template->label.rect.h = gl_xml_get_prop_length (label_node, "height", 0);
-		template->label.rect.r = gl_xml_get_prop_length (label_node, "round", 0);
-		break;
-
-	case GL_TEMPLATE_STYLE_ROUND:
-		template->label.round.r = gl_xml_get_prop_length (label_node, "radius", 0);
-		break;
-
-	case GL_TEMPLATE_STYLE_CD:
-		template->label.cd.r1 = gl_xml_get_prop_length (label_node, "radius", 0);
-		template->label.cd.r2 = gl_xml_get_prop_length (label_node, "hole", 0);
-		template->label.cd.w  = gl_xml_get_prop_length (label_node, "width", 0);
-		template->label.cd.h  = gl_xml_get_prop_length (label_node, "height", 0);
-		break;
-
-	default:
-		break;
-
-	}
+	template->label.rect.w = gl_xml_get_prop_length (label_node, "width", 0);
+	template->label.rect.h = gl_xml_get_prop_length (label_node, "height", 0);
+	template->label.rect.r = gl_xml_get_prop_length (label_node, "round", 0);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (xmlStrEqual (node->name, "Layout")) {
 			xml_parse_layout (node, template);
-		} else if (xmlStrEqual (node->name, "Markup")) {
-			xml_parse_markup (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-margin")) {
+			xml_parse_markup_margin (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-line")) {
+			xml_parse_markup_line (node, template);
 		} else if (!xmlNodeIsText (node)) {
 			g_warning ("bad node =  \"%s\"", node->name);
 		}
@@ -260,7 +239,68 @@ xml_parse_label (xmlNodePtr  label_node,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML Sheet->Label->Layout Node.                           */
+/* PRIVATE.  Parse XML Template->Label-round Node.                          */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_label_round (xmlNodePtr  label_node,
+		       glTemplate *template)
+{
+	xmlNodePtr  node;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	template->label.round.r = gl_xml_get_prop_length (label_node, "radius", 0);
+
+	for (node = label_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (xmlStrEqual (node->name, "Layout")) {
+			xml_parse_layout (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-margin")) {
+			xml_parse_markup_margin (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-line")) {
+			xml_parse_markup_line (node, template);
+		} else if (!xmlNodeIsText (node)) {
+			g_warning ("bad node =  \"%s\"", node->name);
+		}
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label-cd Node.                             */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_label_cd (xmlNodePtr  label_node,
+		    glTemplate *template)
+{
+	xmlNodePtr  node;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	template->label.cd.r1 = gl_xml_get_prop_length (label_node, "radius", 0);
+	template->label.cd.r2 = gl_xml_get_prop_length (label_node, "hole", 0);
+	template->label.cd.w  = gl_xml_get_prop_length (label_node, "width", 0);
+	template->label.cd.h  = gl_xml_get_prop_length (label_node, "height", 0);
+
+	for (node = label_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (xmlStrEqual (node->name, "Layout")) {
+			xml_parse_layout (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-margin")) {
+			xml_parse_markup_margin (node, template);
+		} else if (xmlStrEqual (node->name, "Markup-line")) {
+			xml_parse_markup_line (node, template);
+		} else if (!xmlNodeIsText (node)) {
+			g_warning ("bad node =  \"%s\"", node->name);
+		}
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label->Layout Node.`                        */
 /*--------------------------------------------------------------------------*/
 static void
 xml_parse_layout (xmlNodePtr  layout_node,
@@ -296,40 +336,22 @@ xml_parse_layout (xmlNodePtr  layout_node,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML Sheet->Label->Markup Node.                           */
+/* PRIVATE.  Parse XML Template->Label->Markup-margin Node.                 */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup (xmlNodePtr  markup_node,
-		  glTemplate *template)
+xml_parse_markup_margin (xmlNodePtr  markup_node,
+			 glTemplate *template)
 {
-	gchar      *type;
 	gdouble     size;
-	gdouble     x1, y1, x2, y2;
 	xmlNodePtr  node;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	type = xmlGetProp (markup_node, "type");
-	if (xmlStrEqual (type, "margin")) {
+	size = gl_xml_get_prop_length (markup_node, "size", 0);
 
-		size = gl_xml_get_prop_length (markup_node, "size", 0);
-
-		template->label.any.markups =
-			g_list_append (template->label.any.markups,
-				       gl_template_markup_margin_new (size));
-
-	} else if (xmlStrEqual (type, "line")) {
-
-		x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
-		y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
-		x2 = gl_xml_get_prop_length (markup_node, "x2", 0);
-		y2 = gl_xml_get_prop_length (markup_node, "y2", 0);
-
-		template->label.any.markups =
-			g_list_append (template->label.any.markups,
-				       gl_template_markup_line_new (x1, y1, x2, y2));
-	}
-	g_free (type);
+	template->label.any.markups =
+		g_list_append (template->label.any.markups,
+			       gl_template_markup_margin_new (size));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -342,7 +364,38 @@ xml_parse_markup (xmlNodePtr  markup_node,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML Sheet->Alias Node.                                   */
+/* PRIVATE.  Parse XML Template->Label->Markup-line Node.                   */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_markup_line (xmlNodePtr  markup_node,
+		       glTemplate *template)
+{
+	gdouble     x1, y1, x2, y2;
+	xmlNodePtr  node;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
+
+	x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
+	y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
+	x2 = gl_xml_get_prop_length (markup_node, "x2", 0);
+	y2 = gl_xml_get_prop_length (markup_node, "y2", 0);
+
+	template->label.any.markups =
+		g_list_append (template->label.any.markups,
+			       gl_template_markup_line_new (x1, y1, x2, y2));
+
+	for (node = markup_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (!xmlNodeIsText (node)) {
+			g_warning ("bad node =  \"%s\"", node->name);
+		}
+	}
+
+	gl_debug (DEBUG_TEMPLATE, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Alias Node.                                */
 /*--------------------------------------------------------------------------*/
 static void
 xml_parse_alias (xmlNodePtr  alias_node,
@@ -360,16 +413,16 @@ xml_parse_alias (xmlNodePtr  alias_node,
 /* Add XML Template Node                                                    */
 /****************************************************************************/
 void
-gl_xml_template_add_sheet (const glTemplate *template,
-			   xmlNodePtr        root,
-			   xmlNsPtr          ns)
+gl_xml_template_add_template (const glTemplate *template,
+			      xmlNodePtr        root,
+			      xmlNsPtr          ns)
 {
 	xmlNodePtr  node;
 	GList      *p;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	node = xmlNewChild (root, ns, "Sheet", NULL);
+	node = xmlNewChild (root, ns, "Template", NULL);
 
 	xmlSetProp (node, "name", template->name);
 
@@ -395,7 +448,7 @@ gl_xml_template_add_sheet (const glTemplate *template,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Label Node.                                     */
+/* PRIVATE.  Add XML Template->Label Node.                                     */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_label (const glTemplate *template,
@@ -409,26 +462,25 @@ xml_add_label (const glTemplate *template,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	node = xmlNewChild(root, ns, "Label", NULL);
-
-	xmlSetProp (node, "id", "0");
-
 	switch (template->label.style) {
 
 	case GL_TEMPLATE_STYLE_RECT:
-		xmlSetProp (node, "style", "rectangle");
+		node = xmlNewChild(root, ns, "Label-rectangle", NULL);
+		xmlSetProp (node, "id", "0");
 		gl_xml_set_prop_length (node, "width",  template->label.rect.w);
 		gl_xml_set_prop_length (node, "height", template->label.rect.h);
 		gl_xml_set_prop_length (node, "round",  template->label.rect.r);
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
-		xmlSetProp (node, "style", "round");
+		node = xmlNewChild(root, ns, "Label-round", NULL);
+		xmlSetProp (node, "id", "0");
 		gl_xml_set_prop_length (node, "radius",  template->label.round.r);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		xmlSetProp (node, "style", "cd");
+		node = xmlNewChild(root, ns, "Label-cd", NULL);
+		xmlSetProp (node, "id", "0");
 		gl_xml_set_prop_length (node, "radius",  template->label.cd.r1);
 		gl_xml_set_prop_length (node, "hole",    template->label.cd.r2);
 		if (template->label.cd.w != 0.0) {
@@ -441,6 +493,7 @@ xml_add_label (const glTemplate *template,
 
 	default:
 		g_warning ("Unknown label style");
+		return;
 		break;
 
 	}
@@ -471,7 +524,7 @@ xml_add_label (const glTemplate *template,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Label->Layout Node.                             */
+/* PRIVATE.  Add XML Template->Label->Layout Node.                             */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_layout (glTemplateLayout *layout,
@@ -494,7 +547,7 @@ xml_add_layout (glTemplateLayout *layout,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Label->Markup (margin) Node.                    */
+/* PRIVATE.  Add XML Template->Label->Markup (margin) Node.                    */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_margin (glTemplateMarkupMargin *margin,
@@ -505,8 +558,7 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	node = xmlNewChild(root, ns, "Markup", NULL);
-	xmlSetProp (node, "type", "margin");
+	node = xmlNewChild(root, ns, "Markup-margin", NULL);
 
 	gl_xml_set_prop_length (node, "size", margin->size);
 
@@ -514,7 +566,7 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Label->Markup (line) Node.                      */
+/* PRIVATE.  Add XML Template->Label->Markup (line) Node.                      */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_markup_line (glTemplateMarkupLine *line,
@@ -525,8 +577,7 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	node = xmlNewChild(root, ns, "Markup", NULL);
-	xmlSetProp (node, "type", "line");
+	node = xmlNewChild(root, ns, "Markup-line", NULL);
 
 	gl_xml_set_prop_length (node, "x1", line->x1);
 	gl_xml_set_prop_length (node, "y1", line->y1);
@@ -537,7 +588,7 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Sheet->Alias Node.                                     */
+/* PRIVATE.  Add XML Template->Alias Node.                                     */
 /*--------------------------------------------------------------------------*/
 static void
 xml_add_alias (gchar      *name,

@@ -77,6 +77,9 @@ void           gl_label_text_get_props    (glLabelText      *ltext,
 					   gboolean         *font_italic_flag,
 					   guint            *color,
 					   GtkJustification *just);
+
+GtkJustification gl_label_text_get_text_alignment (glLabelText *ltext);
+
 void           gl_label_text_get_box      (glLabelText      *ltext,
 					   gdouble          *w,
 					   gdouble          *h);
