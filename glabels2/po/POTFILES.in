@@ -27,6 +27,8 @@ src/tools.h
 src/tools.c
 src/prefs.c
 src/prefs.h
+src/prefs-model.c
+src/prefs-model.h
 src/prefs-dialog.c
 src/prefs-dialog.h
 src/prefs-dialog.glade
