@@ -1,3 +1,13 @@
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	Fixes for Bug #1008181.
+
+	* src/bc.c: (gl_barcode_default_digits):
+		Make a format of zero digits, harmless.
+	* src/xml-label.c: (xml_parse_object_barcode):
+		Set default value of the format property of barcode objects to 10, not
+		zero.  This will prevent crashes when reading pre 2.0.x files.
+
 2004-08-09  Jim Evins  <evins@snaught.com>
 
 	* NEWS:
