@@ -129,14 +129,12 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 	root = xmlDocGetRootElement (templates_doc);
 	if (!root || !root->name) {
 		g_warning ("\"%s\" is not a glabels template file (no root node)",
-			   templates_doc->name);
-		xmlFreeDoc (templates_doc);
+			   templates_doc->URL);
 		return templates;
 	}
 	if (!xmlStrEqual (root->name, "Glabels-templates")) {
 		g_warning ("\"%s\" is not a glabels template file (wrong root node)",
-		      templates_doc->name);
-		xmlFreeDoc (templates_doc);
+		      templates_doc->URL);
 		return templates;
 	}
 

@@ -1,3 +1,12 @@
+2004-02-25  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Changed version to 2.0pre1cvs
+	
+	* libglabels/xml-template.c: (gl_xml_template_parse_templates_doc):
+		Removed extra xmlFreeDoc() calls upon error.  Also print the doc->URL
+		instead of doc->name fields when errors encountered.
+
 2004-02-21  Jim Evins  <evins@snaught.com>
 
 	* data/avery-iso-templates.xml:
