@@ -91,24 +91,27 @@ VERSION 1.92:
 			- X, Y position
 			- mode and parameters (size and origin during creation)
 
-		- Undo, Redo capability
-
 		- Image filenames from merge fields.  When adding inline
 		  image date in the next version, this capability must
 		  remain valid.
 
 		- Drawing features:
 			- object rotation and flipping functions.
-			- configurable grid.  Also add a "snap-to" capability.
+			- configurable grid.  
+			- a "snap-to" capability.
 			- object alignment capabilities.
 			- resizing of barcodes on canvas. (Must keep barcodes
 			  within "legal" limits)
+			- resizing of text?
+			- edit text in place?
 
-		- Add rounding option to rectangles
+		- Clean up document merge API.
 
-		- Place property dialogs in a single dockable window (1 per
-		  window). (Maybe, still thinking on this one)
+		- Per-barccode options:
+			- if checksum optional give checkbox
+			- barcode length: free-form, fixed legal values (zero fill?)
 
+		- Undo, Redo capability
 
 
 VERSION 1.93:  Development testbed for VERSION 2.0
@@ -129,6 +132,7 @@ VERSION 2.0:
 
 		- Along those same lines, create a druid to download new
 		  templates from a central repository, much like in GBonds.
+
 
 VERSION 2.1:  Development testbed for VERSION 2.2
 
@@ -168,13 +172,4 @@ Odds and ends WISHLIST for future versions:
 	  accomplish, so I may want to add the hack.
 
 	- Add a mini style preview for barcode properties (possibly text too?).
-
-	- Eye candy: Create a custom widget to replace spin buttons for
-	  positioning and sizing that have arrows in the proper direction.
-	  Really bad ASCII art:
-
-	        <-  X  ->
-
-		->||<-  W  |<-->|
-
 
