@@ -43,6 +43,23 @@ guint    gl_xml_get_prop_uint_hex (xmlNodePtr    node,
 				   const gchar  *property,
 				   guint         default_val);
 
+
+void     gl_xml_set_prop_double   (xmlNodePtr    node,
+				   const gchar  *property,
+				   gdouble       val);
+
+void     gl_xml_set_prop_boolean  (xmlNodePtr    node,
+				   const gchar  *property,
+				   gboolean      val);
+
+void     gl_xml_set_prop_int      (xmlNodePtr    node,
+				   const gchar  *property,
+				   gint          val);
+
+void     gl_xml_set_prop_uint_hex (xmlNodePtr    node,
+				   const gchar  *property,
+				   guint         val);
+
 G_END_DECLS
 
 

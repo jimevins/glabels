@@ -127,3 +127,55 @@ gl_xml_get_prop_uint_hex (xmlNodePtr   node,
 }
 
 
+/****************************************************************************/
+/* Set property from double.                                                */
+/****************************************************************************/
+void     gl_xml_set_prop_double   (xmlNodePtr    node,
+				   const gchar  *property,
+				   gdouble       val)
+{
+	gchar  *string;
+
+	string = g_strdup_printf ("%g", val);
+	xmlSetProp (node, property, string);
+	g_free (string);
+}
+
+/****************************************************************************/
+/* Set property from boolean.                                               */
+/****************************************************************************/
+void     gl_xml_set_prop_boolean  (xmlNodePtr    node,
+				   const gchar  *property,
+				   gboolean      val)
+{
+	xmlSetProp (node, property, (val ? "True" : "False"));
+}
+
+/****************************************************************************/
+/* Set property from int.                                                   */
+/****************************************************************************/
+void     gl_xml_set_prop_int      (xmlNodePtr    node,
+				   const gchar  *property,
+				   gint          val)
+{
+	gchar  *string;
+
+	string = g_strdup_printf ("%d", val);
+	xmlSetProp (node, property, string);
+	g_free (string);
+}
+
+/****************************************************************************/
+/* Set property from uint in hex.                                           */
+/****************************************************************************/
+void     gl_xml_set_prop_uint_hex (xmlNodePtr    node,
+				   const gchar  *property,
+				   guint         val)
+{
+	gchar  *string;
+
+	string = g_strdup_printf ("0x%08x", val);
+	xmlSetProp (node, property, string);
+	g_free (string);
+}
+

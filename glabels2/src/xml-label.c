@@ -916,7 +916,7 @@ xml_create_objects (xmlNodePtr  root,
 
 	node = xmlNewChild (root, ns, "Objects", NULL);
 	xmlSetProp (node, "id", "0");
-	xmlSetProp (node, "rotate", rotate_flag ? "True" : "False");
+	gl_xml_set_prop_boolean (node, "rotate", rotate_flag);
 
 	for (p = label->objects; p != NULL; p = p->next) {
 		xml_create_object (node, ns, GL_LABEL_OBJECT(p->data));
@@ -935,7 +935,6 @@ xml_create_object (xmlNodePtr     root,
 {
 	xmlNodePtr  object_node;
 	gdouble     x, y;
-	gchar      *string;
 	gdouble     affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -943,32 +942,16 @@ xml_create_object (xmlNodePtr     root,
 	object_node = xmlNewChild (root, ns, "Object", NULL);
 
 	gl_label_object_get_position (object, &x, &y);
-	string = g_strdup_printf ("%g", x);
-	xmlSetProp (object_node, "x", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", y);
-	xmlSetProp (object_node, "y", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "x", x);
+	gl_xml_set_prop_double (object_node, "y", y);
 
 	gl_label_object_get_affine (object, affine);
-	string = g_strdup_printf ("%g", affine[0]);
-	xmlSetProp (object_node, "a0", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", affine[1]);
-	xmlSetProp (object_node, "a1", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", affine[2]);
-	xmlSetProp (object_node, "a2", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", affine[3]);
-	xmlSetProp (object_node, "a3", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", affine[4]);
-	xmlSetProp (object_node, "a4", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", affine[5]);
-	xmlSetProp (object_node, "a5", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "a0", affine[0]);
+	gl_xml_set_prop_double (object_node, "a1", affine[1]);
+	gl_xml_set_prop_double (object_node, "a2", affine[2]);
+	gl_xml_set_prop_double (object_node, "a3", affine[3]);
+	gl_xml_set_prop_double (object_node, "a4", affine[4]);
+	gl_xml_set_prop_double (object_node, "a5", affine[5]);
 
 	if ( GL_IS_LABEL_TEXT(object) ) {
 		xml_create_text_props (object_node, ns, object);
@@ -1006,7 +989,6 @@ xml_create_text_props (xmlNodePtr     object_node,
 	gboolean          font_italic_flag;
 	guint             color;
 	GtkJustification  just;
-	gchar            *string;
 	GList            *p_line, *p_node;
 	glTextNode       *node_text;
 
@@ -1021,27 +1003,18 @@ xml_create_text_props (xmlNodePtr     object_node,
 				 &font_italic_flag,
 				 &color, &just);
 
-	string = g_strdup_printf ("%g", w);
-	xmlSetProp (object_node, "w", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", h);
-	xmlSetProp (object_node, "h", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "w", w);
+	gl_xml_set_prop_double (object_node, "h", h);
 
 	xmlSetProp (object_node, "font_family", font_family);
-	string = g_strdup_printf ("%g", font_size);
-	xmlSetProp (object_node, "font_size", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "font_size", font_size);
 	xmlSetProp (object_node, "font_weight",
 		    gl_util_weight_to_string (font_weight));
-	xmlSetProp (object_node, "font_italic",
-		    font_italic_flag?"True":"False");
+	gl_xml_set_prop_boolean (object_node, "font_italic", font_italic_flag);
 
 	xmlSetProp (object_node, "justify", gl_util_just_to_string (just));
 
-	string = g_strdup_printf ("0x%08x", color);
-	xmlSetProp (object_node, "color", string);
-	g_free (string);
+	gl_xml_set_prop_uint_hex (object_node, "color", color);
 
 	for (p_line = lines; p_line != NULL; p_line = p_line->next) {
 		line_node = xmlNewChild (object_node, ns, "Line", NULL);
@@ -1079,7 +1052,6 @@ xml_create_box_props (xmlNodePtr     object_node,
 		      xmlNsPtr       ns,
 		      glLabelObject *object)
 {
-	gchar   *string;
 	gdouble  line_width;
 	guint    line_color, fill_color;
 	gdouble  w, h;
@@ -1093,24 +1065,13 @@ xml_create_box_props (xmlNodePtr     object_node,
 	line_color = gl_label_box_get_line_color (GL_LABEL_BOX(object));
 	fill_color = gl_label_box_get_fill_color (GL_LABEL_BOX(object));
 
-	string = g_strdup_printf ("%g", w);
-	xmlSetProp (object_node, "w", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", h);
-	xmlSetProp (object_node, "h", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "w", w);
+	gl_xml_set_prop_double (object_node, "h", h);
 
-	string = g_strdup_printf ("%g", line_width);
-	xmlSetProp (object_node, "line_width", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "line_width", line_width);
 
-	string = g_strdup_printf ("0x%08x", line_color);
-	xmlSetProp (object_node, "line_color", string);
-	g_free (string);
-
-	string = g_strdup_printf ("0x%08x", fill_color);
-	xmlSetProp (object_node, "fill_color", string);
-	g_free (string);
+	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
+	gl_xml_set_prop_uint_hex (object_node, "fill_color", fill_color);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1123,7 +1084,6 @@ xml_create_line_props (xmlNodePtr     object_node,
 		       xmlNsPtr       ns,
 		       glLabelObject *object)
 {
-	gchar   *string;
 	gdouble  line_width;
 	guint    line_color;
 	gdouble  w, h;
@@ -1136,20 +1096,12 @@ xml_create_line_props (xmlNodePtr     object_node,
 	line_width = gl_label_line_get_line_width (GL_LABEL_LINE(object));
 	line_color = gl_label_line_get_line_color (GL_LABEL_LINE(object));
 
-	string = g_strdup_printf ("%g", w);
-	xmlSetProp (object_node, "dx", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", h);
-	xmlSetProp (object_node, "dy", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "dx", w);
+	gl_xml_set_prop_double (object_node, "dy", h);
 
-	string = g_strdup_printf ("%g", line_width);
-	xmlSetProp (object_node, "line_width", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "line_width", line_width);
 
-	string = g_strdup_printf ("0x%08x", line_color);
-	xmlSetProp (object_node, "line_color", string);
-	g_free (string);
+	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1162,7 +1114,6 @@ xml_create_ellipse_props (xmlNodePtr     object_node,
 			  xmlNsPtr       ns,
 			  glLabelObject *object)
 {
-	gchar   *string;
 	gdouble  line_width;
 	guint    line_color, fill_color;
 	gdouble  w, h;
@@ -1176,24 +1127,13 @@ xml_create_ellipse_props (xmlNodePtr     object_node,
 	line_color = gl_label_ellipse_get_line_color (GL_LABEL_ELLIPSE(object));
 	fill_color = gl_label_ellipse_get_fill_color (GL_LABEL_ELLIPSE(object));
 
-	string = g_strdup_printf ("%g", w);
-	xmlSetProp (object_node, "w", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", h);
-	xmlSetProp (object_node, "h", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "w", w);
+	gl_xml_set_prop_double (object_node, "h", h);
 
-	string = g_strdup_printf ("%g", line_width);
-	xmlSetProp (object_node, "line_width", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "line_width", line_width);
 
-	string = g_strdup_printf ("0x%08x", line_color);
-	xmlSetProp (object_node, "line_color", string);
-	g_free (string);
-
-	string = g_strdup_printf ("0x%08x", fill_color);
-	xmlSetProp (object_node, "fill_color", string);
-	g_free (string);
+	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
+	gl_xml_set_prop_uint_hex (object_node, "fill_color", fill_color);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1206,7 +1146,6 @@ xml_create_image_props (xmlNodePtr     object_node,
 			xmlNsPtr       ns,
 			glLabelObject *object)
 {
-	gchar      *string;
 	gdouble     w, h;
 	glTextNode *filename;
 	xmlNodePtr  child;
@@ -1218,12 +1157,8 @@ xml_create_image_props (xmlNodePtr     object_node,
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
 
-	string = g_strdup_printf ("%g", w);
-	xmlSetProp (object_node, "w", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", h);
-	xmlSetProp (object_node, "h", string);
-	g_free (string);
+	gl_xml_set_prop_double (object_node, "w", w);
+	gl_xml_set_prop_double (object_node, "h", h);
 
 	if (filename->field_flag) {
 		child = xmlNewChild (object_node, ns, "Field", NULL);
@@ -1252,7 +1187,6 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 	guint               color;
 	gdouble             scale;
 	xmlNodePtr          child;
-	gchar              *string;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1262,15 +1196,11 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
 				    &style, &text_flag, &color, &scale);
 
-	string = g_strdup_printf ("0x%08x", color);
-	xmlSetProp (object_node, "color", string);
-	g_free (string);
+	gl_xml_set_prop_uint_hex (object_node, "color", color);
 
 	xmlSetProp (object_node, "style", gl_barcode_style_to_text (style));
-	xmlSetProp (object_node, "text", text_flag?"True":"False");
-	string = g_strdup_printf ("%g", scale);
-	xmlSetProp (object_node, "scale", string);
-	g_free (string);
+	gl_xml_set_prop_boolean (object_node, "text", text_flag);
+	gl_xml_set_prop_double (object_node, "scale", scale);
 
 	if (text_node->field_flag) {
 		child = xmlNewChild (object_node, ns, "Field", NULL);

@@ -776,7 +776,6 @@ gl_template_xml_add_sheet (const glTemplate *template,
 {
 	xmlNodePtr  node;
 	GList      *p;
-	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
@@ -787,13 +786,9 @@ gl_template_xml_add_sheet (const glTemplate *template,
 	xmlSetProp (node, "size", template->page_size);
 	if (g_strcasecmp (template->page_size, "Other") == 0) {
 
-		string = g_strdup_printf ("%g", template->page_width);
-		xmlSetProp (node, "width", string);
-		g_free (string);
+		gl_xml_set_prop_double (node, "width", template->page_width);
+		gl_xml_set_prop_double (node, "height", template->page_height);
 
-		string = g_strdup_printf ("%g", template->page_height);
-		xmlSetProp (node, "height", string);
-		g_free (string);
 	}
 
 	xmlSetProp (node, "description", template->description);
@@ -816,7 +811,6 @@ xml_add_label (const glTemplate *template,
 	       xmlNsPtr          ns)
 {
 	xmlNodePtr        node;
-	gchar            *string;
 	GList            *p;
 	glTemplateMarkup *markup;
 	glTemplateLayout *layout;
@@ -828,46 +822,35 @@ xml_add_label (const glTemplate *template,
 	xmlSetProp (node, "id", "0");
 
 	switch (template->label.style) {
+
 	case GL_TEMPLATE_STYLE_RECT:
 		xmlSetProp (node, "style", "rectangle");
-		string = g_strdup_printf ("%g", template->label.rect.w);
-		xmlSetProp (node, "width", string);
-		g_free (string);
-		string = g_strdup_printf ("%g", template->label.rect.h);
-		xmlSetProp (node, "height", string);
-		g_free (string);
-		string = g_strdup_printf ("%g", template->label.rect.r);
-		xmlSetProp (node, "round", string);
-		g_free (string);
+		gl_xml_set_prop_double (node, "width",  template->label.rect.w);
+		gl_xml_set_prop_double (node, "height", template->label.rect.h);
+		gl_xml_set_prop_double (node, "round",  template->label.rect.r);
 		break;
+
 	case GL_TEMPLATE_STYLE_ROUND:
 		xmlSetProp (node, "style", "round");
-		string = g_strdup_printf ("%g", template->label.round.r);
-		xmlSetProp (node, "radius", string);
-		g_free (string);
+		gl_xml_set_prop_double (node, "radius",  template->label.round.r);
 		break;
+
 	case GL_TEMPLATE_STYLE_CD:
 		xmlSetProp (node, "style", "cd");
-		string = g_strdup_printf ("%g", template->label.cd.r1);
-		xmlSetProp (node, "radius", string);
-		g_free (string);
-		string = g_strdup_printf ("%g", template->label.cd.r2);
-		xmlSetProp (node, "hole", string);
-		g_free (string);
-		if (template->label.cd.h != 0.0) {
-			string = g_strdup_printf ("%g", template->label.cd.h);
-			xmlSetProp (node, "width", string);
-			g_free (string);
-		}
+		gl_xml_set_prop_double (node, "radius",  template->label.cd.r1);
+		gl_xml_set_prop_double (node, "hole",    template->label.cd.r2);
 		if (template->label.cd.w != 0.0) {
-			string = g_strdup_printf ("%g", template->label.cd.w);
-			xmlSetProp (node, "height", string);
-			g_free (string);
+			gl_xml_set_prop_double (node, "width",  template->label.cd.w);
+		}
+		if (template->label.cd.h != 0.0) {
+			gl_xml_set_prop_double (node, "height", template->label.cd.h);
 		}
 		break;
+
 	default:
 		g_warning ("Unknown label style");
 		break;
+
 	}
 
 	for ( p=template->label.any.markups; p != NULL; p=p->next ) {
@@ -904,29 +887,16 @@ xml_add_layout (glTemplateLayout *layout,
 		xmlNsPtr          ns)
 {
 	xmlNodePtr  node;
-	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	node = xmlNewChild(root, ns, "Layout", NULL);
-	string = g_strdup_printf ("%d", layout->nx);
-	xmlSetProp (node, "nx", string);
-	g_free (string);
-	string = g_strdup_printf ("%d", layout->ny);
-	xmlSetProp (node, "ny", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", layout->x0);
-	xmlSetProp (node, "x0", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", layout->y0);
-	xmlSetProp (node, "y0", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", layout->dx);
-	xmlSetProp (node, "dx", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", layout->dy);
-	xmlSetProp (node, "dy", string);
-	g_free (string);
+	gl_xml_set_prop_int (node, "nx", layout->nx);
+	gl_xml_set_prop_int (node, "ny", layout->ny);
+	gl_xml_set_prop_double (node, "x0", layout->x0);
+	gl_xml_set_prop_double (node, "y0", layout->y0);
+	gl_xml_set_prop_double (node, "dx", layout->dx);
+	gl_xml_set_prop_double (node, "dy", layout->dy);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -940,16 +910,13 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 		       xmlNsPtr                ns)
 {
 	xmlNodePtr  node;
-	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	node = xmlNewChild(root, ns, "Markup", NULL);
 	xmlSetProp (node, "type", "margin");
 
-	string = g_strdup_printf ("%g", margin->size);
-	xmlSetProp (node, "size", string);
-	g_free (string);
+	gl_xml_set_prop_double (node, "size", margin->size);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -963,25 +930,16 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 		     xmlNsPtr              ns)
 {
 	xmlNodePtr  node;
-	gchar      *string;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	node = xmlNewChild(root, ns, "Markup", NULL);
 	xmlSetProp (node, "type", "line");
 
-	string = g_strdup_printf ("%g", line->x1);
-	xmlSetProp (node, "x1", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", line->y1);
-	xmlSetProp (node, "y1", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", line->x2);
-	xmlSetProp (node, "x2", string);
-	g_free (string);
-	string = g_strdup_printf ("%g", line->y2);
-	xmlSetProp (node, "y2", string);
-	g_free (string);
+	gl_xml_set_prop_double (node, "x1", line->x1);
+	gl_xml_set_prop_double (node, "y1", line->y1);
+	gl_xml_set_prop_double (node, "x2", line->x2);
+	gl_xml_set_prop_double (node, "y2", line->y2);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
