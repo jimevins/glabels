@@ -10,12 +10,21 @@ Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/root-%{name}-%{version}
 Prefix: %{_prefix}
 
-BuildRequires: gtk+-devel >= 1.2
-BuildRequires: libgnomeui-devel >= 2.0
-BuildRequires: libgnomecanvas-devel >= 2.0
-BuildRequires: libgnomeprint22-devel >= 2.2
-BuildRequires: libxml2-devel >= 2.4
-BuildRequires: libglade2-devel >= 2.0
+BuildRequires: gtk2-devel >= @GTK_REQUIRED@
+BuildRequires: libxml2-devel >= @LIBXML_REQUIRED@
+BuildRequires: libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
+BuildRequires: libbonoboui-devel >= @LIBBONOBOUI_REQUIRED@
+BuildRequires: libgnomecanvas-devel >= @LIBGNOMECANVAS_REQUIRED@
+BuildRequires: libgnomeprintui22-devel >= @LIBGNOMEPRINT_REQUIRED@
+BuildRequires: libglade2-devel >= @LIBGLADE_REQUIRED@
+
+Requires: gtk2 >= @GTK_REQUIRED@
+Requires: libxml2 >= @LIBXML_REQUIRED@
+Requires: libgnomeui >= @LIBGNOMEUI_REQUIRED@
+Requires: libbonoboui >= @LIBBONOBOUI_REQUIRED@
+Requires: libgnomecanvas >= @LIBGNOMECANVAS_REQUIRED@
+Requires: libgnomeprintui22 >= @LIBGNOMEPRINT_REQUIRED@
+Requires: libglade2 >= @LIBGLADE_REQUIRED@
 
 %description
 gLabels is a lightweight program for creating labels and

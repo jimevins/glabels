@@ -24,24 +24,42 @@ AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 
 dnl *******************************************************************
-dnl * Check for required package and version
+dnl * Check for required packages and versions
 dnl *******************************************************************
 dnl Minimum versions of libraries
 GLIB_REQUIRED=2.2.0
 GTK_REQUIRED=2.0.5
+LIBGNOME_REQUIRED=2.0.1
 LIBGNOMEUI_REQUIRED=2.0.1
 LIBBONOBO_REQUIRED=2.0.0
+LIBBONOBOUI_REQUIRED=2.0.0
 LIBXML_REQUIRED=2.4.23
 LIBGNOMEPRINT_REQUIRED=2.2.0
 LIBGNOMEPRINTUI_REQUIRED=2.2.0
 LIBGNOMECANVAS_REQUIRED=2.0.1
 LIBGLADE_REQUIRED=2.0.1
+
+dnl Make above strings available for rpm spec file
+AC_SUBST(GLIB_REQUIRED)
+AC_SUBST(GTK_REQUIRED)
+AC_SUBST(LIBGNOME_REQUIRED)
+AC_SUBST(LIBGNOMEUI_REQUIRED)
+AC_SUBST(LIBBONOBO_REQUIRED)
+AC_SUBST(LIBBONOBOUI_REQUIRED)
+AC_SUBST(LIBXML_REQUIRED)
+AC_SUBST(LIBGNOMEPRINT_REQUIRED)
+AC_SUBST(LIBGNOMEPRINTUI_REQUIRED)
+AC_SUBST(LIBGNOMECANVAS_REQUIRED)
+AC_SUBST(LIBGLADE_REQUIRED)
                
+dnl glabels prerequisites
 PKG_CHECK_MODULES(GLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 gtk+-2.0 >= $GTK_REQUIRED \
+libgnome-2.0 >= $LIBGNOME_REQUIRED \
 libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED \
 libbonobo-2.0 >= $LIBBONOBO_REQUIRED \
+libbonoboui-2.0 >= $LIBBONOBOUI_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
 libgnomeprint-2.2 >= $LIBGNOMEPRINT_REQUIRED \
 libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED \
@@ -52,6 +70,7 @@ libglade-2.0 >= $LIBGLADE_REQUIRED \
 AC_SUBST(GLABELS_CFLAGS)
 AC_SUBST(GLABELS_LIBS)
 
+dnl libglabels more modest prerequisites
 PKG_CHECK_MODULES(LIBGLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \

@@ -1,3 +1,9 @@
+2004-08-09  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* glabels.spec.in:
+		Cleanup of required library macros.
+
 2004-08-08  Jim Evins  <evins@snaught.com>
 
 	* glabels.spec.in:
