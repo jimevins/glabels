@@ -299,8 +299,7 @@ gl_prefs_load_settings (void)
 		get_string (gconf_client,
 			    BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
 			    DEFAULT_FONT_WEIGHT_STRING);
-	gl_prefs->default_font_weight =
-		gl_util_string_to_weight( string );
+	gl_prefs->default_font_weight = gl_util_string_to_weight( string );
 	g_free( string );
 
 	gl_prefs->default_text_color =
@@ -312,7 +311,7 @@ gl_prefs_load_settings (void)
 		get_string (gconf_client,
 			    BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
 			    DEFAULT_TEXT_JUST_STRING);
-	gl_prefs->default_font_weight =	gl_util_string_to_just( string );
+	gl_prefs->default_text_alignment = gl_util_string_to_just( string );
 	g_free( string );
 
 
