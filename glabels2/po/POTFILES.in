@@ -11,6 +11,10 @@ src/stock.c
 src/stock.h
 src/ui.h
 src/ui.c
+src/ui-property-bar.h
+src/ui-property-bar.c
+src/ui-util.h
+src/ui-util.c
 src/commands.h
 src/commands.c
 src/file.h
@@ -145,5 +149,16 @@ src/gnome-recent-view-bonobo.c
 src/gnome-recent-view-bonobo.h
 src/debug.c
 src/debug.h
+src/mygal/color-group.c
+src/mygal/color-group.h
+src/mygal/color-pallette.c
+src/mygal/color-pallette.h
+src/mygal/e-colors.c
+src/mygal/e-colors.h
+src/mygal/e-util.h
+src/mygal/gtk-combo-box.c
+src/mygal/gtk-combo-box.h
+src/mygal/widget-color-combo.c
+src/mygal/widget-color-combo.h
 data/predefined-templates.xml
 data/paper-sizes.xml
