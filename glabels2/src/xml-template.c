@@ -146,8 +146,8 @@ gl_xml_template_parse_sheet (xmlNodePtr sheet_node)
 	}
 	if (xmlStrEqual (template->page_size, "Other")) {
 
-		template->page_width = gl_xml_get_prop_double (sheet_node, "width", 0);
-		template->page_height = gl_xml_get_prop_double (sheet_node, "height", 0);
+		template->page_width = gl_xml_get_prop_length (sheet_node, "width", 0);
+		template->page_height = gl_xml_get_prop_length (sheet_node, "height", 0);
 
 	} else {
 		paper = gnome_print_paper_get_by_name (template->page_size);
@@ -207,20 +207,20 @@ xml_parse_label (xmlNodePtr  label_node,
 	switch (template->label.style) {
 
 	case GL_TEMPLATE_STYLE_RECT:
-		template->label.rect.w = gl_xml_get_prop_double (label_node, "width", 0);
-		template->label.rect.h = gl_xml_get_prop_double (label_node, "height", 0);
-		template->label.rect.r = gl_xml_get_prop_double (label_node, "round", 0);
+		template->label.rect.w = gl_xml_get_prop_length (label_node, "width", 0);
+		template->label.rect.h = gl_xml_get_prop_length (label_node, "height", 0);
+		template->label.rect.r = gl_xml_get_prop_length (label_node, "round", 0);
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
-		template->label.round.r = gl_xml_get_prop_double (label_node, "radius", 0);
+		template->label.round.r = gl_xml_get_prop_length (label_node, "radius", 0);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
-		template->label.cd.r1 = gl_xml_get_prop_double (label_node, "radius", 0);
-		template->label.cd.r2 = gl_xml_get_prop_double (label_node, "hole", 0);
-		template->label.cd.w  = gl_xml_get_prop_double (label_node, "width", 0);
-		template->label.cd.h  = gl_xml_get_prop_double (label_node, "height", 0);
+		template->label.cd.r1 = gl_xml_get_prop_length (label_node, "radius", 0);
+		template->label.cd.r2 = gl_xml_get_prop_length (label_node, "hole", 0);
+		template->label.cd.w  = gl_xml_get_prop_length (label_node, "width", 0);
+		template->label.cd.h  = gl_xml_get_prop_length (label_node, "height", 0);
 		break;
 
 	default:
@@ -258,11 +258,11 @@ xml_parse_layout (xmlNodePtr  layout_node,
 	nx = gl_xml_get_prop_int (layout_node, "nx", 1);
 	ny = gl_xml_get_prop_int (layout_node, "ny", 1);
 
-	x0 = gl_xml_get_prop_double (layout_node, "x0", 0);
-	y0 = gl_xml_get_prop_double (layout_node, "y0", 0);
+	x0 = gl_xml_get_prop_length (layout_node, "x0", 0);
+	y0 = gl_xml_get_prop_length (layout_node, "y0", 0);
 
-	dx = gl_xml_get_prop_double (layout_node, "dx", 0);
-	dy = gl_xml_get_prop_double (layout_node, "dy", 0);
+	dx = gl_xml_get_prop_length (layout_node, "dx", 0);
+	dy = gl_xml_get_prop_length (layout_node, "dy", 0);
 
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -295,7 +295,7 @@ xml_parse_markup (xmlNodePtr  markup_node,
 	type = xmlGetProp (markup_node, "type");
 	if (xmlStrEqual (type, "margin")) {
 
-		size = gl_xml_get_prop_double (markup_node, "size", 0);
+		size = gl_xml_get_prop_length (markup_node, "size", 0);
 
 		template->label.any.markups =
 			g_list_append (template->label.any.markups,
@@ -303,10 +303,10 @@ xml_parse_markup (xmlNodePtr  markup_node,
 
 	} else if (xmlStrEqual (type, "line")) {
 
-		x1 = gl_xml_get_prop_double (markup_node, "x1", 0);
-		y1 = gl_xml_get_prop_double (markup_node, "y1", 0);
-		x2 = gl_xml_get_prop_double (markup_node, "x2", 0);
-		y2 = gl_xml_get_prop_double (markup_node, "y2", 0);
+		x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
+		y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
+		x2 = gl_xml_get_prop_length (markup_node, "x2", 0);
+		y2 = gl_xml_get_prop_length (markup_node, "y2", 0);
 
 		template->label.any.markups =
 			g_list_append (template->label.any.markups,
@@ -359,8 +359,8 @@ gl_xml_template_add_sheet (const glTemplate *template,
 	xmlSetProp (node, "size", template->page_size);
 	if (xmlStrEqual (template->page_size, "Other")) {
 
-		gl_xml_set_prop_double (node, "width", template->page_width);
-		gl_xml_set_prop_double (node, "height", template->page_height);
+		gl_xml_set_prop_length (node, "width", template->page_width);
+		gl_xml_set_prop_length (node, "height", template->page_height);
 
 	}
 
@@ -398,25 +398,25 @@ xml_add_label (const glTemplate *template,
 
 	case GL_TEMPLATE_STYLE_RECT:
 		xmlSetProp (node, "style", "rectangle");
-		gl_xml_set_prop_double (node, "width",  template->label.rect.w);
-		gl_xml_set_prop_double (node, "height", template->label.rect.h);
-		gl_xml_set_prop_double (node, "round",  template->label.rect.r);
+		gl_xml_set_prop_length (node, "width",  template->label.rect.w);
+		gl_xml_set_prop_length (node, "height", template->label.rect.h);
+		gl_xml_set_prop_length (node, "round",  template->label.rect.r);
 		break;
 
 	case GL_TEMPLATE_STYLE_ROUND:
 		xmlSetProp (node, "style", "round");
-		gl_xml_set_prop_double (node, "radius",  template->label.round.r);
+		gl_xml_set_prop_length (node, "radius",  template->label.round.r);
 		break;
 
 	case GL_TEMPLATE_STYLE_CD:
 		xmlSetProp (node, "style", "cd");
-		gl_xml_set_prop_double (node, "radius",  template->label.cd.r1);
-		gl_xml_set_prop_double (node, "hole",    template->label.cd.r2);
+		gl_xml_set_prop_length (node, "radius",  template->label.cd.r1);
+		gl_xml_set_prop_length (node, "hole",    template->label.cd.r2);
 		if (template->label.cd.w != 0.0) {
-			gl_xml_set_prop_double (node, "width",  template->label.cd.w);
+			gl_xml_set_prop_length (node, "width",  template->label.cd.w);
 		}
 		if (template->label.cd.h != 0.0) {
-			gl_xml_set_prop_double (node, "height", template->label.cd.h);
+			gl_xml_set_prop_length (node, "height", template->label.cd.h);
 		}
 		break;
 
@@ -466,10 +466,10 @@ xml_add_layout (glTemplateLayout *layout,
 	node = xmlNewChild(root, ns, "Layout", NULL);
 	gl_xml_set_prop_int (node, "nx", layout->nx);
 	gl_xml_set_prop_int (node, "ny", layout->ny);
-	gl_xml_set_prop_double (node, "x0", layout->x0);
-	gl_xml_set_prop_double (node, "y0", layout->y0);
-	gl_xml_set_prop_double (node, "dx", layout->dx);
-	gl_xml_set_prop_double (node, "dy", layout->dy);
+	gl_xml_set_prop_length (node, "x0", layout->x0);
+	gl_xml_set_prop_length (node, "y0", layout->y0);
+	gl_xml_set_prop_length (node, "dx", layout->dx);
+	gl_xml_set_prop_length (node, "dy", layout->dy);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -489,7 +489,7 @@ xml_add_markup_margin (glTemplateMarkupMargin *margin,
 	node = xmlNewChild(root, ns, "Markup", NULL);
 	xmlSetProp (node, "type", "margin");
 
-	gl_xml_set_prop_double (node, "size", margin->size);
+	gl_xml_set_prop_length (node, "size", margin->size);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -509,10 +509,10 @@ xml_add_markup_line (glTemplateMarkupLine *line,
 	node = xmlNewChild(root, ns, "Markup", NULL);
 	xmlSetProp (node, "type", "line");
 
-	gl_xml_set_prop_double (node, "x1", line->x1);
-	gl_xml_set_prop_double (node, "y1", line->y1);
-	gl_xml_set_prop_double (node, "x2", line->x2);
-	gl_xml_set_prop_double (node, "y2", line->y2);
+	gl_xml_set_prop_length (node, "x1", line->x1);
+	gl_xml_set_prop_length (node, "y1", line->y1);
+	gl_xml_set_prop_length (node, "x2", line->x2);
+	gl_xml_set_prop_length (node, "y2", line->y2);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }

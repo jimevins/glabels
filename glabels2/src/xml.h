@@ -39,9 +39,13 @@ gint     gl_xml_get_prop_int      (xmlNodePtr    node,
 				   const gchar  *property,
 				   gint          default_val);
 
-guint    gl_xml_get_prop_uint_hex (xmlNodePtr    node,
+guint    gl_xml_get_prop_uint     (xmlNodePtr    node,
 				   const gchar  *property,
 				   guint         default_val);
+
+gdouble  gl_xml_get_prop_length   (xmlNodePtr    node,
+				   const gchar  *property,
+				   gdouble       default_val);
 
 
 void     gl_xml_set_prop_double   (xmlNodePtr    node,
@@ -59,6 +63,10 @@ void     gl_xml_set_prop_int      (xmlNodePtr    node,
 void     gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 				   const gchar  *property,
 				   guint         val);
+
+void     gl_xml_set_prop_length   (xmlNodePtr    node,
+				   const gchar  *property,
+				   gdouble       val);
 
 G_END_DECLS
 

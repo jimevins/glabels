@@ -398,8 +398,8 @@ xml_parse_object (xmlNodePtr  object_node,
 	g_free (string);
 
 
-	x = gl_xml_get_prop_double (object_node, "x", 0.0);
-	y = gl_xml_get_prop_double (object_node, "y", 0.0);
+	x = gl_xml_get_prop_length (object_node, "x", 0.0);
+	y = gl_xml_get_prop_length (object_node, "y", 0.0);
 
 	gl_label_object_set_position (object, x, y);
 
@@ -442,8 +442,8 @@ xml_parse_text_props (xmlNodePtr  object_node,
 
 	object = gl_label_text_new (label);
 
-	w = gl_xml_get_prop_double (object_node, "w", 0);
-	h = gl_xml_get_prop_double (object_node, "h", 0);
+	w = gl_xml_get_prop_length (object_node, "w", 0);
+	h = gl_xml_get_prop_length (object_node, "h", 0);
 
 	font_family = xmlGetProp (object_node, "font_family");
 
@@ -459,7 +459,7 @@ xml_parse_text_props (xmlNodePtr  object_node,
 	just = gl_util_string_to_just (string);
 	g_free (string);
 
-	color = gl_xml_get_prop_uint_hex (object_node, "color", 0);
+	color = gl_xml_get_prop_uint (object_node, "color", 0);
 
 	lines = NULL;
 	for (line_node = object_node->xmlChildrenNode;
@@ -530,13 +530,13 @@ xml_parse_box_props (xmlNodePtr  node,
 
 	object = gl_label_box_new (label);
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = gl_xml_get_prop_length (node, "w", 0);
+	h = gl_xml_get_prop_length (node, "h", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 1.0);
+	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
 
-	line_color = gl_xml_get_prop_uint_hex (node, "line_color", 0);
-	fill_color = gl_xml_get_prop_uint_hex (node, "fill_color", 0);
+	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
+	fill_color = gl_xml_get_prop_uint (node, "fill_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_box_set_line_width (GL_LABEL_BOX(object), line_width);
@@ -564,12 +564,12 @@ xml_parse_line_props (xmlNodePtr  node,
 
 	object = gl_label_line_new (label);
 
-	w = gl_xml_get_prop_double (node, "dx", 0);
-	h = gl_xml_get_prop_double (node, "dy", 0);
+	w = gl_xml_get_prop_length (node, "dx", 0);
+	h = gl_xml_get_prop_length (node, "dy", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 1.0);
+	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
 
-	line_color = gl_xml_get_prop_uint_hex (node, "line_color", 0);
+	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_line_set_line_width (GL_LABEL_LINE(object), line_width);
@@ -596,13 +596,13 @@ xml_parse_ellipse_props (xmlNodePtr  node,
 
 	object = gl_label_ellipse_new (label);
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = gl_xml_get_prop_length (node, "w", 0);
+	h = gl_xml_get_prop_length (node, "h", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 1.0);
+	line_width = gl_xml_get_prop_length (node, "line_width", 1.0);
 
-	line_color = gl_xml_get_prop_uint_hex (node, "line_color", 0);
-	fill_color = gl_xml_get_prop_uint_hex (node, "fill_color", 0);
+	line_color = gl_xml_get_prop_uint (node, "line_color", 0);
+	fill_color = gl_xml_get_prop_uint (node, "fill_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_ellipse_set_line_width (GL_LABEL_ELLIPSE(object), line_width);
@@ -630,8 +630,8 @@ xml_parse_image_props (xmlNodePtr  node,
 
 	object = gl_label_image_new (label);
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = gl_xml_get_prop_length (node, "w", 0);
+	h = gl_xml_get_prop_length (node, "h", 0);
 
 	filename = g_new0 (glTextNode, 1);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
@@ -677,10 +677,10 @@ xml_parse_barcode_props (xmlNodePtr  node,
 
 	object = gl_label_barcode_new (label);
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = gl_xml_get_prop_length (node, "w", 0);
+	h = gl_xml_get_prop_length (node, "h", 0);
 
-	color = gl_xml_get_prop_uint_hex (node, "color", 0);
+	color = gl_xml_get_prop_uint (node, "color", 0);
 
 	string = xmlGetProp (node, "style");
 	style = gl_barcode_text_to_style (string);
@@ -952,8 +952,8 @@ xml_create_object (xmlNodePtr     root,
 	object_node = xmlNewChild (root, ns, "Object", NULL);
 
 	gl_label_object_get_position (object, &x, &y);
-	gl_xml_set_prop_double (object_node, "x", x);
-	gl_xml_set_prop_double (object_node, "y", y);
+	gl_xml_set_prop_length (object_node, "x", x);
+	gl_xml_set_prop_length (object_node, "y", y);
 
 	gl_label_object_get_affine (object, affine);
 	gl_xml_set_prop_double (object_node, "a0", affine[0]);
@@ -1013,8 +1013,8 @@ xml_create_text_props (xmlNodePtr     object_node,
 				 &font_italic_flag,
 				 &color, &just);
 
-	gl_xml_set_prop_double (object_node, "w", w);
-	gl_xml_set_prop_double (object_node, "h", h);
+	gl_xml_set_prop_length (object_node, "w", w);
+	gl_xml_set_prop_length (object_node, "h", h);
 
 	xmlSetProp (object_node, "font_family", font_family);
 	gl_xml_set_prop_double (object_node, "font_size", font_size);
@@ -1075,10 +1075,10 @@ xml_create_box_props (xmlNodePtr     object_node,
 	line_color = gl_label_box_get_line_color (GL_LABEL_BOX(object));
 	fill_color = gl_label_box_get_fill_color (GL_LABEL_BOX(object));
 
-	gl_xml_set_prop_double (object_node, "w", w);
-	gl_xml_set_prop_double (object_node, "h", h);
+	gl_xml_set_prop_length (object_node, "w", w);
+	gl_xml_set_prop_length (object_node, "h", h);
 
-	gl_xml_set_prop_double (object_node, "line_width", line_width);
+	gl_xml_set_prop_length (object_node, "line_width", line_width);
 
 	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
 	gl_xml_set_prop_uint_hex (object_node, "fill_color", fill_color);
@@ -1106,10 +1106,10 @@ xml_create_line_props (xmlNodePtr     object_node,
 	line_width = gl_label_line_get_line_width (GL_LABEL_LINE(object));
 	line_color = gl_label_line_get_line_color (GL_LABEL_LINE(object));
 
-	gl_xml_set_prop_double (object_node, "dx", w);
-	gl_xml_set_prop_double (object_node, "dy", h);
+	gl_xml_set_prop_length (object_node, "dx", w);
+	gl_xml_set_prop_length (object_node, "dy", h);
 
-	gl_xml_set_prop_double (object_node, "line_width", line_width);
+	gl_xml_set_prop_length (object_node, "line_width", line_width);
 
 	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
 
@@ -1137,10 +1137,10 @@ xml_create_ellipse_props (xmlNodePtr     object_node,
 	line_color = gl_label_ellipse_get_line_color (GL_LABEL_ELLIPSE(object));
 	fill_color = gl_label_ellipse_get_fill_color (GL_LABEL_ELLIPSE(object));
 
-	gl_xml_set_prop_double (object_node, "w", w);
-	gl_xml_set_prop_double (object_node, "h", h);
+	gl_xml_set_prop_length (object_node, "w", w);
+	gl_xml_set_prop_length (object_node, "h", h);
 
-	gl_xml_set_prop_double (object_node, "line_width", line_width);
+	gl_xml_set_prop_length (object_node, "line_width", line_width);
 
 	gl_xml_set_prop_uint_hex (object_node, "line_color", line_color);
 	gl_xml_set_prop_uint_hex (object_node, "fill_color", fill_color);
@@ -1167,8 +1167,8 @@ xml_create_image_props (xmlNodePtr     object_node,
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
 
-	gl_xml_set_prop_double (object_node, "w", w);
-	gl_xml_set_prop_double (object_node, "h", h);
+	gl_xml_set_prop_length (object_node, "w", w);
+	gl_xml_set_prop_length (object_node, "h", h);
 
 	if (filename->field_flag) {
 		child = xmlNewChild (object_node, ns, "Field", NULL);
@@ -1205,8 +1205,8 @@ xml_create_barcode_props (xmlNodePtr     object_node,
 
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
                
-	gl_xml_set_prop_double (object_node, "w", w);
-	gl_xml_set_prop_double (object_node, "h", h);
+	gl_xml_set_prop_length (object_node, "w", w);
+	gl_xml_set_prop_length (object_node, "h", h);
                		
 
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
