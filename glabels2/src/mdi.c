@@ -86,8 +86,9 @@ static void gl_mdi_init 		(glMDI 	*mdi);
 static void gl_mdi_finalize 		(GObject 	*object);
 
 static void gl_mdi_app_created_cb	(BonoboMDI *mdi, BonoboWindow *win);
-static void gl_mdi_set_app_toolbar_style 	(BonoboWindow *win);
-static void gl_mdi_set_app_statusbar_style 	(BonoboWindow *win);
+static void gl_mdi_set_app_main_toolbar_style 	 (BonoboWindow *win);
+static void gl_mdi_set_app_drawing_toolbar_style (BonoboWindow *win);
+static void gl_mdi_set_app_statusbar_style 	 (BonoboWindow *win);
 
 static gint gl_mdi_add_child_cb (BonoboMDI *mdi, BonoboMDIChild *child);
 static gint gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view);
@@ -263,23 +264,44 @@ gl_mdi_app_created_cb (BonoboMDI *mdi, BonoboWindow *win)
 	g_return_if_fail (ui_component != NULL);
 	
 	/* Set the toolbar style according to prefs */
-	gl_mdi_set_app_toolbar_style (win);
+	gl_mdi_set_app_main_toolbar_style (win);
 		
 	/* Add listener fo the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewToolbar", 
+	bonobo_ui_component_add_listener (ui_component, "ViewMainToolbar", 
 			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
 			(gpointer)win);
 
-	bonobo_ui_component_add_listener (ui_component, "ToolbarSystem", 
+	bonobo_ui_component_add_listener (ui_component, "MainToolbarSystem", 
 			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
 			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "ToolbarIcon", 
+	bonobo_ui_component_add_listener (ui_component, "MainToolbarIcon", 
 			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
 			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "ToolbarIconText", 
+	bonobo_ui_component_add_listener (ui_component, "MainToolbarIconText", 
 			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
 			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "ToolbarTooltips", 
+	bonobo_ui_component_add_listener (ui_component, "MainToolbarTooltips", 
+			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
+			(gpointer)win);
+
+	/* Set the toolbar style according to prefs */
+	gl_mdi_set_app_drawing_toolbar_style (win);
+		
+	/* Add listener fo the view menu */
+	bonobo_ui_component_add_listener (ui_component, "ViewDrawingToolbar", 
+			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
+			(gpointer)win);
+
+	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarSystem", 
+			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIcon", 
+			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIconText", 
+			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarTooltips", 
 			(BonoboUIListenerFn)gl_mdi_view_menu_item_toggled_cb, 
 			(gpointer)win);
 
@@ -317,47 +339,92 @@ gl_mdi_view_menu_item_toggled_cb (
 
 	s = (strcmp (state, "1") == 0);
 
-	if ((strcmp (path, "ViewToolbar") == 0) &&
-	    (s != gl_prefs->toolbar_visible))
+	if ((strcmp (path, "ViewMainToolbar") == 0) &&
+	    (s != gl_prefs->main_toolbar_visible))
 	{
-		gl_prefs->toolbar_visible = s;
-		gl_mdi_set_app_toolbar_style (win);
+		gl_prefs->main_toolbar_visible = s;
+		gl_mdi_set_app_main_toolbar_style (win);
 
 		return;
 	}
 
-	if (s && (strcmp (path, "ToolbarSystem") == 0) &&
-	    (gl_prefs->toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
+	if (s && (strcmp (path, "MainToolbarSystem") == 0) &&
+	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
 	{		
-		gl_prefs->toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
-		gl_mdi_set_app_toolbar_style (win);
+		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
+		gl_mdi_set_app_main_toolbar_style (win);
 
 		return;
 	}
 
-	if (s && (strcmp (path, "ToolbarIcon") == 0) &&
-	    (gl_prefs->toolbar_buttons_style != GL_TOOLBAR_ICONS))
+	if (s && (strcmp (path, "MainToolbarIcon") == 0) &&
+	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS))
 	{		
-		gl_prefs->toolbar_buttons_style = GL_TOOLBAR_ICONS;
-		gl_mdi_set_app_toolbar_style (win);
+		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
+		gl_mdi_set_app_main_toolbar_style (win);
 
 		return;
 	}
 
-	if (s && (strcmp (path, "ToolbarIconText") == 0) &&
-	    (gl_prefs->toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
+	if (s && (strcmp (path, "MainToolbarIconText") == 0) &&
+	    (gl_prefs->main_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
 	{		
-		gl_prefs->toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
-		gl_mdi_set_app_toolbar_style (win);
+		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
+		gl_mdi_set_app_main_toolbar_style (win);
 
 		return;
 	}
 
-	if ((strcmp (path, "ToolbarTooltips") == 0) &&
-	    (s != gl_prefs->toolbar_view_tooltips))
+	if ((strcmp (path, "MainToolbarTooltips") == 0) &&
+	    (s != gl_prefs->main_toolbar_view_tooltips))
 	{
-		gl_prefs->toolbar_view_tooltips = s;
-		gl_mdi_set_app_toolbar_style (win);
+		gl_prefs->main_toolbar_view_tooltips = s;
+		gl_mdi_set_app_main_toolbar_style (win);
+
+		return;
+	}
+
+	if ((strcmp (path, "ViewDrawingToolbar") == 0) &&
+	    (s != gl_prefs->drawing_toolbar_visible))
+	{
+		gl_prefs->drawing_toolbar_visible = s;
+		gl_mdi_set_app_drawing_toolbar_style (win);
+
+		return;
+	}
+
+	if (s && (strcmp (path, "DrawingToolbarSystem") == 0) &&
+	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_SYSTEM))
+	{		
+		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
+		gl_mdi_set_app_drawing_toolbar_style (win);
+
+		return;
+	}
+
+	if (s && (strcmp (path, "DrawingToolbarIcon") == 0) &&
+	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS))
+	{		
+		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
+		gl_mdi_set_app_drawing_toolbar_style (win);
+
+		return;
+	}
+
+	if (s && (strcmp (path, "DrawingToolbarIconText") == 0) &&
+	    (gl_prefs->drawing_toolbar_buttons_style != GL_TOOLBAR_ICONS_AND_TEXT))
+	{		
+		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
+		gl_mdi_set_app_drawing_toolbar_style (win);
+
+		return;
+	}
+
+	if ((strcmp (path, "DrawingToolbarTooltips") == 0) &&
+	    (s != gl_prefs->drawing_toolbar_view_tooltips))
+	{
+		gl_prefs->drawing_toolbar_view_tooltips = s;
+		gl_mdi_set_app_drawing_toolbar_style (win);
 
 		return;
 	}
@@ -365,10 +432,10 @@ gl_mdi_view_menu_item_toggled_cb (
 }
 
 /*---------------------------------------------------------------------------*/
-/* Set toolbar style.                                                        */
+/* Set main toolbar style.                                                   */
 /*---------------------------------------------------------------------------*/
 static void
-gl_mdi_set_app_toolbar_style (BonoboWindow *win)
+gl_mdi_set_app_main_toolbar_style (BonoboWindow *win)
 {
 	BonoboUIComponent *ui_component;
 	GConfClient *client;
@@ -385,46 +452,46 @@ gl_mdi_set_app_toolbar_style (BonoboWindow *win)
 
 	/* Updated view menu */
 	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ViewToolbar",
-			      gl_prefs->toolbar_visible);
+			      "/commands/ViewMainToolbar",
+			      gl_prefs->main_toolbar_visible);
 
 	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/ToolbarSystem",
-				  gl_prefs->toolbar_visible);
+				  "/commands/MainToolbarSystem",
+				  gl_prefs->main_toolbar_visible);
 	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/ToolbarIcon",
-				  gl_prefs->toolbar_visible);
+				  "/commands/MainToolbarIcon",
+				  gl_prefs->main_toolbar_visible);
 	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/ToolbarIconText",
-				  gl_prefs->toolbar_visible);
+				  "/commands/MainToolbarIconText",
+				  gl_prefs->main_toolbar_visible);
 	gl_ui_set_verb_sensitive (ui_component, 
-				  "/commands/ToolbarTooltips",
-				  gl_prefs->toolbar_visible);
+				  "/commands/MainToolbarTooltips",
+				  gl_prefs->main_toolbar_visible);
 
 	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ToolbarSystem",
-			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
+			      "/commands/MainToolbarSystem",
+			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
 
 	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ToolbarIcon",
-			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS);
+			      "/commands/MainToolbarIcon",
+			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS);
 
 	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ToolbarIconText",
-			      gl_prefs->toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
+			      "/commands/MainToolbarIconText",
+			      gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
 
 	gl_ui_set_verb_state (ui_component, 
-			      "/commands/ToolbarTooltips",
-			      gl_prefs->toolbar_view_tooltips);
+			      "/commands/MainToolbarTooltips",
+			      gl_prefs->main_toolbar_view_tooltips);
 
 	
-	/* Actually update toolbar style */
+	/* Actually update main_toolbar style */
 	bonobo_ui_component_set_prop (
-		ui_component, "/Toolbar",
-		"tips", gl_prefs->toolbar_view_tooltips ? "1" : "0",
+		ui_component, "/MainToolbar",
+		"tips", gl_prefs->main_toolbar_view_tooltips ? "1" : "0",
 		NULL);
 	
-	switch (gl_prefs->toolbar_buttons_style)
+	switch (gl_prefs->main_toolbar_buttons_style)
 	{
 		case GL_TOOLBAR_SYSTEM:
 						
@@ -441,14 +508,14 @@ gl_mdi_set_app_toolbar_style (BonoboWindow *win)
 			{			
 				gl_debug (DEBUG_MDI, "SYSTEM: BOTH");
 				bonobo_ui_component_set_prop (
-					ui_component, "/Toolbar", "look", "both", NULL);
+					ui_component, "/MainToolbar", "look", "both", NULL);
 			
 			}
 			else
 			{
 				gl_debug (DEBUG_MDI, "SYSTEM: ICONS");
 				bonobo_ui_component_set_prop (
-					ui_component, "/Toolbar", "look", "icons", NULL);
+					ui_component, "/MainToolbar", "look", "icons", NULL);
 			}
 	
 			break;
@@ -456,14 +523,14 @@ gl_mdi_set_app_toolbar_style (BonoboWindow *win)
 		case GL_TOOLBAR_ICONS:
 			gl_debug (DEBUG_MDI, "GLABELS: ICONS");
 			bonobo_ui_component_set_prop (
-				ui_component, "/Toolbar", "look", "icon", NULL);
+				ui_component, "/MainToolbar", "look", "icon", NULL);
 			
 			break;
 			
 		case GL_TOOLBAR_ICONS_AND_TEXT:
 			gl_debug (DEBUG_MDI, "GLABELS: ICONS_AND_TEXT");
 			bonobo_ui_component_set_prop (
-				ui_component, "/Toolbar", "look", "both", NULL);
+				ui_component, "/MainToolbar", "look", "both", NULL);
 			
 			break;
 		default:
@@ -472,8 +539,129 @@ gl_mdi_set_app_toolbar_style (BonoboWindow *win)
 	}
 	
 	bonobo_ui_component_set_prop (
-			ui_component, "/Toolbar",
-			"hidden", gl_prefs->toolbar_visible ? "0":"1", NULL);
+			ui_component, "/MainToolbar",
+			"hidden", gl_prefs->main_toolbar_visible ? "0":"1", NULL);
+
+ error:
+	bonobo_ui_component_thaw (ui_component, NULL);
+
+	gl_debug (DEBUG_MDI, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Set drawing toolbar style.                                                   */
+/*---------------------------------------------------------------------------*/
+static void
+gl_mdi_set_app_drawing_toolbar_style (BonoboWindow *win)
+{
+	BonoboUIComponent *ui_component;
+	GConfClient *client;
+	gboolean labels;
+
+	gl_debug (DEBUG_MDI, "START");
+	
+	g_return_if_fail (BONOBO_IS_WINDOW (win));
+			
+	ui_component = bonobo_mdi_get_ui_component_from_window (win);
+	g_return_if_fail (ui_component != NULL);
+			
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	/* Updated view menu */
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/ViewDrawingToolbar",
+			      gl_prefs->drawing_toolbar_visible);
+
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/DrawingToolbarSystem",
+				  gl_prefs->drawing_toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/DrawingToolbarIcon",
+				  gl_prefs->drawing_toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/DrawingToolbarIconText",
+				  gl_prefs->drawing_toolbar_visible);
+	gl_ui_set_verb_sensitive (ui_component, 
+				  "/commands/DrawingToolbarTooltips",
+				  gl_prefs->drawing_toolbar_visible);
+
+	gl_ui_set_verb_state (
+		ui_component, 
+		"/commands/DrawingToolbarSystem",
+		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
+
+	gl_ui_set_verb_state (
+		ui_component, 
+		"/commands/DrawingToolbarIcon",
+		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS);
+
+	gl_ui_set_verb_state (
+		ui_component, 
+		"/commands/DrawingToolbarIconText",
+		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
+
+	gl_ui_set_verb_state (ui_component, 
+			      "/commands/DrawingToolbarTooltips",
+			      gl_prefs->drawing_toolbar_view_tooltips);
+
+	
+	/* Actually update drawing_toolbar style */
+	bonobo_ui_component_set_prop (
+		ui_component, "/DrawingToolbar",
+		"tips", gl_prefs->drawing_toolbar_view_tooltips ? "1" : "0",
+		NULL);
+	
+	switch (gl_prefs->drawing_toolbar_buttons_style)
+	{
+		case GL_TOOLBAR_SYSTEM:
+						
+			client = gconf_client_get_default ();
+			if (client == NULL) 
+				goto error;
+
+			labels = gconf_client_get_bool (client, 
+					"/desktop/gnome/interface/toolbar-labels", NULL);
+
+			g_object_unref (G_OBJECT (client));
+			
+			if (labels)
+			{			
+				gl_debug (DEBUG_MDI, "SYSTEM: BOTH");
+				bonobo_ui_component_set_prop (
+					ui_component, "/DrawingToolbar", "look", "both", NULL);
+			
+			}
+			else
+			{
+				gl_debug (DEBUG_MDI, "SYSTEM: ICONS");
+				bonobo_ui_component_set_prop (
+					ui_component, "/DrawingToolbar", "look", "icons", NULL);
+			}
+	
+			break;
+			
+		case GL_TOOLBAR_ICONS:
+			gl_debug (DEBUG_MDI, "GLABELS: ICONS");
+			bonobo_ui_component_set_prop (
+				ui_component, "/DrawingToolbar", "look", "icon", NULL);
+			
+			break;
+			
+		case GL_TOOLBAR_ICONS_AND_TEXT:
+			gl_debug (DEBUG_MDI, "GLABELS: ICONS_AND_TEXT");
+			bonobo_ui_component_set_prop (
+				ui_component, "/DrawingToolbar", "look", "both", NULL);
+			
+			break;
+		default:
+			goto error;
+			break;
+	}
+	
+	bonobo_ui_component_set_prop (
+			ui_component, "/DrawingToolbar",
+			"hidden", gl_prefs->drawing_toolbar_visible ? "0":"1", NULL);
 
  error:
 	bonobo_ui_component_thaw (ui_component, NULL);
