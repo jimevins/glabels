@@ -190,7 +190,7 @@ void           gl_label_object_set_font_weight       (glLabelObject     *object,
 						      GnomeFontWeight    font_weight);
 
 void           gl_label_object_set_font_italic_flag  (glLabelObject     *object,
-						      GnomeFontWeight    font_italic_flag);
+						      gboolean           font_italic_flag);
 
 void           gl_label_object_set_text_alignment    (glLabelObject     *object,
 						      GtkJustification   text_alignment);

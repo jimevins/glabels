@@ -645,7 +645,7 @@ gl_label_object_set_font_weight (glLabelObject     *object,
 /****************************************************************************/
 void
 gl_label_object_set_font_italic_flag (glLabelObject     *object,
-				      GnomeFontWeight    font_italic_flag)
+				      gboolean           font_italic_flag)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
