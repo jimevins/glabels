@@ -40,10 +40,20 @@
   <!-- =================================================================== -->
   <!-- Ednet BC: Business Cards, 51 x 89 mm, 10 per sheet                  -->
   <!-- =================================================================== -->
-  <Template name="Ednet" size="A4" _description="Business Cards">
+  <Template name="Ednet BC" size="A4" _description="Business Cards">
     <Label-rectangle id="0" width="253" height="145" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Ednet 45021: Inkjet/Laser Labels 70x37mm                            -->
+  <!-- =================================================================== -->
+  <Template name="Ednet 45021" size="A4" description="Inkjet &amp; Laser Labels 70x37mm">
+    <Label-rectangle id="0" width="198.425pt" height="104.882pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="3" ny="8" x0="0pt" y0="0pt" dx="198.425pt" dy="104.882pt"/>
     </Label-rectangle>
   </Template>
 

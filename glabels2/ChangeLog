@@ -1,3 +1,10 @@
+2005-02-28  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/misc-iso-templates.xml:
+		Added 'Ednet 45021' template provided by Ali Akcaagac
+		<aliakc@web.de>.
+
 2005-02-14  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-us-templates.xml:
