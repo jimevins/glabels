@@ -32,6 +32,8 @@ gl_color_set_opacity (guint color,
 {
 	guint new_color;
 
-	new_color = (color & 0xFFFFFF00) | ((guint)(255.0*opacity) & 0xFF);
+	new_color = (color & 0xFFFFFF00) | (((guint)(255.0*opacity)) & 0xFF);
+
+	return new_color;
 }
 

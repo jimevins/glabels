@@ -588,7 +588,7 @@ gl_view_image_get_create_cursor (void)
 }
 
 /*****************************************************************************/
-/* Canvas event handler for creating image objects.                            */
+/* Canvas event handler for creating image objects.                          */
 /*****************************************************************************/
 int
 gl_view_image_create_event_handler (GnomeCanvas *canvas,
@@ -626,7 +626,7 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
 			view_image = gl_view_image_new (GL_LABEL_IMAGE(object),
-						    view);
+							view);
 			x0 = x;
 			y0 = y;
 			return TRUE;

@@ -33,6 +33,8 @@
 #include "wdgt-text-entry.h"
 #include "wdgt-text-props.h"
 #include "wdgt-position.h"
+#include "color.h"
+#include "prefs.h"
 
 #include "pixmaps/cursor_text.xbm"
 #include "pixmaps/cursor_text_mask.xbm"
@@ -602,6 +604,13 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 			object = gl_label_text_new (view->label);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     x, y);
+			gl_label_text_set_props (GL_LABEL_TEXT(object),
+						 gl_prefs->default_font_family,
+						 gl_prefs->default_font_size,
+						 gl_prefs->default_font_weight,
+						 gl_prefs->default_font_italic_flag,
+						 gl_color_set_opacity (gl_prefs->default_text_color, 0.5),
+						 gl_prefs->default_text_alignment);
 			lines = gl_text_node_lines_new_from_text (_("Text"));
 			gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
 			view_text = gl_view_text_new (GL_LABEL_TEXT(object),
@@ -625,6 +634,13 @@ gl_view_text_create_event_handler (GnomeCanvas *canvas,
 						      event->button.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
+			gl_label_text_set_props (GL_LABEL_TEXT(object),
+						 gl_prefs->default_font_family,
+						 gl_prefs->default_font_size,
+						 gl_prefs->default_font_weight,
+						 gl_prefs->default_font_italic_flag,
+						 gl_prefs->default_text_color,
+						 gl_prefs->default_text_alignment);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_text));
 			gl_view_arrow_mode (view);

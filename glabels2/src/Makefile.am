@@ -185,8 +185,6 @@ glabels_SOURCES = 			\
 
 glabels_batch_SOURCES = 		\
 	glabels-batch.c			\
-	prefs.c 			\
-	prefs.h 			\
 	print.c				\
 	print.h				\
 	bc.c				\
