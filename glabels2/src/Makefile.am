@@ -153,8 +153,6 @@ glabels_SOURCES = 			\
 	merge-text.h			\
 	text-node.c			\
 	text-node.h			\
-	wdgt-image-select.c		\
-	wdgt-image-select.h		\
 	wdgt-print-copies.c		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\

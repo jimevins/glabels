@@ -90,7 +90,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *img_page_vbox;
 	GtkWidget  *img_file_radio;
 	GtkWidget  *img_key_radio;
-	GtkWidget  *img_pixmap_entry;
+	GtkWidget  *img_file_button;
 	GtkWidget  *img_key_combo;
 	GtkWidget  *img_key_entry;
 

@@ -1,3 +1,21 @@
+2005-04-03  Jim Evins <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/wdgt-image-select.h:
+	* src/wdgt-image-select.c:
+		Removed obsolete wdgt-image-select.[ch] files.
+	* libglabels/paper.c: (gl_paper_dup):
+		Fixed rename of parameter introduced during documentation
+		updates.
+	* data/glade/object-editor.glade:
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page), (img_radio_toggled_cb),
+	(gl_object_editor_set_image), (gl_object_editor_get_image),
+	(update_preview_cb), (add_image_filters_to_chooser):
+	* src/object-editor-private.h:
+		Replaced deprecated GnomePixmapEntry with
+		GtkFileChooserButton.
+
 2005-04-02  Jim Evins <evins@snaught.com>
 
 	* src/mygal/mygal-combo-box.c: (deactivate_arrow),

@@ -117,14 +117,14 @@ glPaper *gl_paper_dup (const glPaper *orig)
 {
 	glPaper       *paper;
 
-	g_return_val_if_fail (orig_paper, NULL);
+	g_return_val_if_fail (orig, NULL);
 
 	paper = g_new0 (glPaper,1);
 
-	paper->id     = g_strdup (orig_paper->id);
-	paper->name   = g_strdup (orig_paper->name);
-	paper->width  = orig_paper->width;
-	paper->height = orig_paper->height;
+	paper->id     = g_strdup (orig->id);
+	paper->name   = g_strdup (orig->name);
+	paper->width  = orig->width;
+	paper->height = orig->height;
 
 	return paper;
 }
