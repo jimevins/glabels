@@ -340,6 +340,17 @@
   <!-- ******************************************************************** -->
 
   <!-- =================================================================== -->
+  <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
+  <!-- =================================================================== -->
+  <Sheet name="Avery 7160" size="A4" description="Mailing labels">
+    <Label style="rectangle" width="181.4" height="108.0" margin="5" round="5">
+      <Layout nx="3" ny="7" x0="21.2" y0="43.9" dx="187.2" dy="108.0"/>
+    </Label>
+    <Alias name="Avery L7160"/>
+    <Alias name="Avery J8160"/>
+  </Sheet>
+
+  <!-- =================================================================== -->
   <!-- Avery 7163 family: Mailing labels, 99.1 x 38.1 mm, 14 per sheet     -->
   <!-- =================================================================== -->
   <Sheet name="Avery 7163" size="A4" description="Mailing labels">
@@ -368,6 +379,16 @@
       <Layout nx="2" ny="5" x0="66" y0="53" dx="264" dy="147"/>
     </Label>
     <Alias name="Avery J8666"/>
+  </Sheet>
+
+  <!-- =============================================================== -->
+  <!-- Avery-Zweckform J8676A: CD/DVD Labels 2 per sheet               -->
+  <!-- =============================================================== -->
+  <Sheet name="Avery 8676" size="A4" description="CD/DVD Labels">
+    <Label style="cd" radius="166.5" hole="17" margin="5">
+      <Layout nx="1" ny="2" x0="130" y0="59.5" dx="0" dy="388"/>        
+    </Label>
+    <Alias name="Avery J8676"/>
   </Sheet>
 
 
@@ -401,6 +422,15 @@
     <Label style="rectangle" width="147.4016" height="83.6220"
 margin="2" round="0">  
       <Layout nx="4" ny="10" x0="2.834" y0="2.834" dx="147.4016" dy="83.6220"/>
+    </Label>
+  </Sheet>
+
+  <!-- ====================================================================-->
+  <!-- Zweckform 3654: CD Labels  2 per Sheet                              -->
+  <!-- ====================================================================-->
+  <Sheet name="Zweckform 3654" size="A4" description="CD/DVD Labels">
+    <Label style="cd" radius="165.78" hole="58.09" margin="5">
+      <Layout nx="1" ny="2" x0="131.78" y0="63.56" dx="0" dy="387.97"/>
     </Label>
   </Sheet>
 
@@ -657,6 +687,15 @@ margin="2" round="0">
     <Label style="rectangle" width="255.118" height="144" margin="5" round="0">
       <Layout nx="2" ny="5" x0="42.5197" y0="62.3622" dx="255.118" dy="144"/>
     </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- APLI 1999:  Mailing Labels, 9,9cm x 6,8cm, 8 per sheet              -->
+  <!-- =================================================================== -->
+  <Sheet name="APLI 1999" size="A4" description="Mailing Labels">
+        <Label type="rectangle" width="281" height="193" round="5" margin="5">
+                <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
+        </Label>
   </Sheet>
 
   <!-- =================================================================== -->
