@@ -1,5 +1,10 @@
 2004-08-08  Jim Evins  <evins@snaught.com>
 
+	* data/mime/Makefile.am:
+		Fixed typo:  key_files should have been keys_files.
+
+2004-08-08  Jim Evins  <evins@snaught.com>
+
 	Reorganization of runtime data files.  Also added registration of mimetype with
 	new freedesktop.org mime database if available.
 	

@@ -23,7 +23,7 @@ EXTRA_DIST = \
 	$(app_DATA)		\
 	$(xml_in_files)
 
-CLEANFILES = $(key_files) $(xml_files)
+CLEANFILES = $(keys_files) $(xml_files)
 
 
 install-data-hook:
