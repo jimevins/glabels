@@ -24,6 +24,8 @@
 #define __LABEL_IMAGE_H__
 
 #include "label-object.h"
+#include "text-node.h"
+#include "merge.h"
 #include "gdk-pixbuf/gdk-pixbuf.h"
 
 G_BEGIN_DECLS
@@ -52,14 +54,15 @@ struct _glLabelImageClass {
 
 GType            gl_label_image_get_type     (void);
 
-GObject         *gl_label_image_new          (glLabel      *label);
+GObject         *gl_label_image_new          (glLabel       *label);
 
-void             gl_label_image_set_filename (glLabelImage *limage,
-					      const gchar  *filename);
+void             gl_label_image_set_filename (glLabelImage  *limage,
+					      glTextNode    *filename);
 
-gchar           *gl_label_image_get_filename (glLabelImage *limage);
+glTextNode      *gl_label_image_get_filename (glLabelImage  *limage);
 
-const GdkPixbuf *gl_label_image_get_pixbuf   (glLabelImage *limage);
+const GdkPixbuf *gl_label_image_get_pixbuf   (glLabelImage  *limage,
+					      glMergeRecord *record);
 
 G_END_DECLS
 

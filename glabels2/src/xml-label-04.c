@@ -381,7 +381,7 @@ xml04_parse_image_props (xmlNodePtr    node,
 			 glLabelImage  *object)
 {
 	gdouble w, h;
-	gchar *filename;
+	glTextNode *filename;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -389,9 +389,11 @@ xml04_parse_image_props (xmlNodePtr    node,
 	h = g_strtod (xmlGetProp (node, "h"), NULL);
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
-	filename = xmlGetProp (node, "filename");
+	filename = g_new0 (glTextNode, 1);
+	filename->field_flag = FALSE;
+	filename->data = xmlGetProp (node, "filename");
 	gl_label_image_set_filename (object, filename);
-	g_free (filename);
+	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_XML, "END");
 }

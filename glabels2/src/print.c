@@ -113,7 +113,8 @@ static void       draw_ellipse_object         (PrintInfo        *pi,
 					       glLabelEllipse   *object);
 
 static void       draw_image_object           (PrintInfo        *pi,
-					       glLabelImage     *object);
+					       glLabelImage     *object,
+					       glMergeRecord    *record);
 
 static void       draw_barcode_object         (PrintInfo        *pi,
 					       glLabelBarcode   *object,
@@ -585,10 +586,9 @@ draw_object (PrintInfo     *pi,
 	} else if (GL_IS_LABEL_ELLIPSE(object)) {
 		draw_ellipse_object (pi, GL_LABEL_ELLIPSE(object));
 	} else if (GL_IS_LABEL_IMAGE(object)) {
-		draw_image_object (pi, GL_LABEL_IMAGE(object));
+		draw_image_object (pi, GL_LABEL_IMAGE(object), record);
 	} else if (GL_IS_LABEL_BARCODE(object)) {
-		draw_barcode_object (pi, GL_LABEL_BARCODE(object),
-				     record);
+		draw_barcode_object (pi, GL_LABEL_BARCODE(object), record);
 	}
 
 	gnome_print_grestore (pi->pc);
@@ -811,8 +811,9 @@ draw_ellipse_object (PrintInfo      *pi,
 /* PRIVATE.  Draw image object.                                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_image_object (PrintInfo    *pi,
-		   glLabelImage *object)
+draw_image_object (PrintInfo     *pi,
+		   glLabelImage  *object,
+		   glMergeRecord *record)
 {
 	gdouble w, h;
 	const GdkPixbuf *pixbuf;
@@ -825,7 +826,7 @@ draw_image_object (PrintInfo    *pi,
 
 	gl_label_object_get_size     (GL_LABEL_OBJECT(object), &w, &h);
 
-	pixbuf = gl_label_image_get_pixbuf (object);
+	pixbuf = gl_label_image_get_pixbuf (object, record);
 	image_data = gdk_pixbuf_get_pixels (pixbuf);
 	image_w = gdk_pixbuf_get_width (pixbuf);
 	image_h = gdk_pixbuf_get_height (pixbuf);

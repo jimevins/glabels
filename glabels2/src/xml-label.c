@@ -532,9 +532,10 @@ static glLabelObject *
 xml_parse_image_props (xmlNodePtr node,
 		       glLabel *label)
 {
-	GObject *object;
-	gdouble w, h;
-	gchar   *filename;
+	GObject      *object;
+	xmlNodePtr    child;
+	gdouble       w, h;
+	glTextNode   *filename;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -543,12 +544,22 @@ xml_parse_image_props (xmlNodePtr node,
 	w = g_strtod (xmlGetProp (node, "w"), NULL);
 	h = g_strtod (xmlGetProp (node, "h"), NULL);
 
-	filename = xmlNodeGetContent (node);
+	child = node->xmlChildrenNode;
+	filename = g_new0 (glTextNode, 1);
+	if (g_strcasecmp (child->name, "Field") == 0) {
+		filename->field_flag = TRUE;
+		filename->data = xmlGetProp (child, "name");
+	} else if (xmlNodeIsText (child)) {
+		filename->field_flag = FALSE;
+		filename->data = xmlNodeGetContent (child);
+	} else {
+		g_warning ("Unexpected Image child: \"%s\"", child->name);
+	}
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
 
-	g_free (filename);
+	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -562,9 +573,9 @@ static glLabelObject *
 xml_parse_barcode_props (xmlNodePtr node,
 			 glLabel *label)
 {
-	GObject *object;
-	xmlNodePtr child;
-	glTextNode          *text_node;
+	GObject            *object;
+	xmlNodePtr          child;
+	glTextNode         *text_node;
 	glBarcodeStyle      style;
 	gboolean            text_flag;
 	guint               color;
@@ -1023,9 +1034,10 @@ xml_create_image_props (xmlNodePtr object_node,
 			xmlNsPtr ns,
 			glLabelObject * object)
 {
-	gchar *string;
-	gdouble w, h;
-	gchar *filename;
+	gchar      *string;
+	gdouble     w, h;
+	glTextNode *filename;
+	xmlNodePtr  child;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1041,9 +1053,14 @@ xml_create_image_props (xmlNodePtr object_node,
 	xmlSetProp (object_node, "h", string);
 	g_free (string);
 
-	xmlNodeSetContent (object_node, filename);
+	if (filename->field_flag) {
+		child = xmlNewChild (object_node, ns, "Field", NULL);
+		xmlSetProp (child, "name", filename->data);
+	} else {
+		xmlNodeSetContent (object_node, filename->data);
+	}
 
-	g_free (filename);
+	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1061,8 +1078,8 @@ xml_create_barcode_props (xmlNodePtr object_node,
 	gboolean            text_flag;
 	guint               color;
 	gdouble             scale;
-	xmlNodePtr child;
-	gchar *string;
+	xmlNodePtr          child;
+	gchar              *string;
 
 	gl_debug (DEBUG_XML, "START");
 

@@ -144,6 +144,8 @@ gl_text_node_dup (glTextNode *src)
 {
 	glTextNode *dst;
 
+	if ( src == NULL ) return NULL;
+
 	dst = g_new0 (glTextNode, 1);
 
 	dst->field_flag = src->field_flag;

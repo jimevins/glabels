@@ -26,6 +26,7 @@
 
 #include "view-highlight.h"
 
+#include "wdgt-image-select.h"
 #include "wdgt-line.h"
 #include "wdgt-fill.h"
 #include "wdgt-size.h"
@@ -199,7 +200,7 @@ gl_view_image_new (glLabelImage *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	pixbuf = gl_label_image_get_pixbuf(object);
+	pixbuf = gl_label_image_get_pixbuf(object, NULL);
 
 	/* Create analogous canvas item. */
 	view_image->private->item =
@@ -236,7 +237,7 @@ update_view_image_cb (glLabelObject *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object));
+	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
 
 	/* Adjust appearance of analogous canvas item. */
 	gnome_canvas_item_set (view_image->private->item,
@@ -260,7 +261,8 @@ construct_properties_dialog (glViewObject *view_object)
 	GtkWidget          *dialog, *wsection, *wbutton;
 	glLabelObject      *object;
 	gdouble            x, y, w, h, label_width, label_height;
-	gchar              *filename;
+	glTextNode         *filename;
+	glMerge            *merge;
 	GtkSizeGroup       *label_size_group;
 	GtkWidget          *window;
 
@@ -273,6 +275,7 @@ construct_properties_dialog (glViewObject *view_object)
 	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
 	gl_label_get_size (GL_LABEL(object->parent),
 			   &label_width, &label_height);
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
 	/*-----------------------------------------------------------------*/
 	/* Build dialog.                                                   */
@@ -296,32 +299,13 @@ construct_properties_dialog (glViewObject *view_object)
 	/*---------------------------*/
 	wsection = gl_hig_category_new (_("Image"));
 	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), wsection);
+
 	view_image->private->pixmap_entry =
-		gnome_pixmap_entry_new ("image", "Load image", TRUE);
-	gnome_pixmap_entry_set_preview_size (GNOME_PIXMAP_ENTRY
-					     (view_image->private->pixmap_entry),
-					     128, 128);
-
-	/* Set default path for image entry */
-	if (filename != NULL) {
-		/* Set default path to the directory containing image. */
-		if (image_path != NULL)
-			g_free (image_path);
-		image_path = g_path_get_dirname (filename);
-		if (image_path != NULL) {
-			image_path = g_strconcat (image_path, "/", NULL);
-		}
-	} else if (image_path == NULL) {
-		/* First time, set it to our CWD. */
-		image_path = g_get_current_dir ();
-	}
-
+		gl_wdgt_image_select_new (merge, filename);
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wsection),
 				    view_image->private->pixmap_entry);
-	g_signal_connect ( G_OBJECT(gnome_file_entry_gtk_entry
-				    (GNOME_FILE_ENTRY (view_image->private->pixmap_entry))),
-			   "changed", G_CALLBACK (file_changed_cb),
-			   view_image);
+	g_signal_connect ( G_OBJECT(view_image->private->pixmap_entry), "changed",
+			   G_CALLBACK (file_changed_cb), view_image);
 
 
 	/*----------------------------*/
@@ -420,14 +404,14 @@ file_changed_cb (GtkEntry          *pixmap_entry,
 		 glViewImage       *view_image)
 {
 	glLabelObject    *object;
-	gchar            *filename;
+	glTextNode       *filename;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
 
-	filename = gnome_pixmap_entry_get_filename (GNOME_PIXMAP_ENTRY(view_image->private->pixmap_entry));
-	gl_debug (DEBUG_VIEW, "filename = %s", filename);
+	filename = gl_wdgt_image_select_get_data (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry));
+	gl_debug (DEBUG_VIEW, "filename = %s", filename->data);
 
 	g_signal_handlers_block_by_func (G_OBJECT(object),
 					 update_dialog_cb, view_image);
@@ -435,7 +419,7 @@ file_changed_cb (GtkEntry          *pixmap_entry,
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_dialog_cb, view_image);
 
-	g_free (filename);
+	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -506,7 +490,7 @@ size_reset_cb (GtkButton    *button,
 	gl_debug (DEBUG_VIEW, "START");
 
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_image));
-	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object));
+	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
 
 	image_w = gdk_pixbuf_get_width (pixbuf);
 	image_h = gdk_pixbuf_get_height (pixbuf);
@@ -523,8 +507,9 @@ static void
 update_dialog_cb (glLabelObject   *object,
 		  glViewImage     *view_image)
 {
-	gchar              *filename;
+	glTextNode        *filename;
 	gdouble            x, y, w, h;
+	glMerge           *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -532,6 +517,7 @@ update_dialog_cb (glLabelObject   *object,
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 	filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
+	merge = gl_label_get_merge (GL_LABEL(object->parent));
 
 	/* Block widget handlers to prevent recursion */
 	g_signal_handlers_block_by_func (G_OBJECT(view_image->private->pixmap_entry),
@@ -544,7 +530,8 @@ update_dialog_cb (glLabelObject   *object,
 	/* Update widgets in property dialog */
 
 	if ( filename != NULL ) {
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (view_image->private->pixmap_entry),
+		gl_wdgt_image_select_set_data (GL_WDGT_IMAGE_SELECT(view_image->private->pixmap_entry),
+					       (merge != NULL),
 					       filename);
 	}
 	gl_wdgt_position_set_position (GL_WDGT_POSITION(view_image->private->position),
