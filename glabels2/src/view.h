@@ -57,6 +57,7 @@ struct _glView {
 	GnomeCanvasGroup *markup_group;          /* Markup layer */
 	GnomeCanvasGroup *label_group;           /* Label layer (user objects) */
 	GnomeCanvasGroup *fg_group;              /* Foreground layer */
+	GnomeCanvasGroup *highlight_group;       /* Highlight layer */
 
 	gdouble           grid_spacing;
 
@@ -100,9 +101,6 @@ G_BEGIN_DECLS
 guint      gl_view_get_type                (void);
 
 GtkWidget *gl_view_new                     (glLabel           *label);
-
-
-void       gl_view_raise_fg                (glView            *view);
 
 
 void       gl_view_show_grid               (glView            *view);

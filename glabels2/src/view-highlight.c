@@ -28,13 +28,19 @@
 
 #include "debug.h"
 
+/*===========================================*/
+/* Private constants and macros.             */
+/*===========================================*/
+
 #define MIN_ITEM_SIZE 1.0
-#define FG_COLOR GNOME_CANVAS_COLOR_A (0, 0, 255, 255)
-#define BG_COLOR GNOME_CANVAS_COLOR_A (255, 255, 255, 255)
+#define FG_COLOR GNOME_CANVAS_COLOR_A (0, 200, 0, 100)
+#define BG_COLOR GNOME_CANVAS_COLOR_A (0, 0, 0, 200)
+#define HANDLE_PIXELS 3.0 /* 2*HANDLE_PIXELS = handle size */
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
+
 struct _glViewHighlightPrivate {
 	glViewHighlightStyle     style;
 	glLabelObject           *object;
@@ -72,7 +78,16 @@ static void   highlight_resizable_line_construct (glViewHighlight        *view_h
 static void   highlight_simple_construct         (glViewHighlight        *view_highlight,
 						  glViewObject           *view_object);
 
+static void   object_moved_cb                    (glLabelObject          *object,
+						  gdouble                 x,
+						  gdouble                 y,
+						  glViewHighlight        *view_highlight);
+
 static void   object_changed_cb                  (glLabelObject          *object,
+						  glViewHighlight        *view_highlight);
+
+static void   view_scale_changed_cb              (glView                 *view,
+						  gdouble                 scale,
 						  glViewHighlight        *view_highlight);
 
 
@@ -198,6 +213,8 @@ gl_view_highlight_new (glViewObject         *view_object,
 {
 	glViewHighlight *view_highlight;
 	gdouble          affine[6];
+	GList           *item_list, *p;
+	GnomeCanvasItem *item;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -229,10 +246,20 @@ gl_view_highlight_new (glViewObject         *view_object,
 
 
 	gl_label_object_get_applied_affine (view_highlight->private->object, affine);
-	gnome_canvas_item_affine_absolute (view_highlight->private->group, affine);
+	item_list = GNOME_CANVAS_GROUP(view_highlight->private->group)->item_list;
+	for ( p=item_list; p != NULL; p=p->next ) {
+		item = GNOME_CANVAS_ITEM(p->data);
+		gnome_canvas_item_affine_absolute (item, affine);
+	}
+
+	g_signal_connect (G_OBJECT (view_highlight->private->object), "moved",
+			  G_CALLBACK (object_moved_cb), view_highlight);
 
 	g_signal_connect (G_OBJECT (view_highlight->private->object), "changed",
 			  G_CALLBACK (object_changed_cb), view_highlight);
+
+	g_signal_connect (G_OBJECT (view_highlight->private->view), "zoom_changed",
+			  G_CALLBACK (view_scale_changed_cb), view_highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -247,10 +274,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 				   glViewObject           *view_object,
 				   glViewHighlightStyle    style)
 {
-	gdouble w, h;
+	gdouble          x, y, w, h;
 	GnomeCanvasItem *group;
-	glView *view;
-	glLabelObject *object;
+	glView          *view;
+	glLabelObject   *object;
+	gdouble          scale;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -259,6 +287,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 
 	view   = gl_view_object_get_view (view_object);
 	view_highlight->private->view = view;
+	scale = view->scale;
 
 	object = gl_view_object_get_object (view_object);
 	view_highlight->private->object = object;
@@ -266,15 +295,17 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
+	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
+		gnome_canvas_item_new (view->highlight_group,
 				       gnome_canvas_group_get_type (),
-				       "x", 0.0, "y", 0.0, NULL);
+				       "x", x, "y", y, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
+#ifdef SHOW_OUTLINE
 	switch (style) {
 	case GL_VIEW_HIGHLIGHT_BOX_RESIZABLE:
 		view_highlight->private->outline =
@@ -284,7 +315,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 					       "y1", -0.5,
 					       "x2", w + 0.5,
 					       "y2", h + 0.5,
-					       "width_pixels", 2,
+					       "width_pixels", 3,
 					       "outline_color_rgba", FG_COLOR,
 					       NULL);
 		break;
@@ -296,7 +327,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 					       "y1", -0.5,
 					       "x2", w + 0.5,
 					       "y2", h + 0.5,
-					       "width_pixels", 2,
+					       "width_pixels", 3,
 					       "outline_color_rgba", FG_COLOR,
 					       NULL);
 		break;
@@ -304,14 +335,16 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 		view_highlight->private->outline = NULL;
 		g_warning ("Invalid resizable highlight style");
 	}
+#endif
 
 	view_highlight->private->tl =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", -1.0,
-				       "y1", -1.0,
-				       "x2", +1.0,
-				       "y2", +1.0,
+				       "x1", -HANDLE_PIXELS/scale,
+				       "y1", -HANDLE_PIXELS/scale,
+				       "x2", +HANDLE_PIXELS/scale,
+				       "y2", +HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -319,10 +352,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->tr =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", w - 1.0,
-				       "y1", -1.0,
-				       "x2", w + 1.0,
-				       "y2", +1.0,
+				       "x1", w - HANDLE_PIXELS/scale,
+				       "y1", -HANDLE_PIXELS/scale,
+				       "x2", w + HANDLE_PIXELS/scale,
+				       "y2", +HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -330,10 +364,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->bl =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", -1.0,
-				       "y1", h - 1.0,
-				       "x2", +1.0,
-				       "y2", h + 1.0,
+				       "x1", -HANDLE_PIXELS/scale,
+				       "y1", h - HANDLE_PIXELS/scale,
+				       "x2", +HANDLE_PIXELS/scale,
+				       "y2", h + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -341,10 +376,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->br =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", w - 1.0,
-				       "y1", h - 1.0,
-				       "x2", w + 1.0,
-				       "y2", h + 1.0,
+				       "x1", w - HANDLE_PIXELS/scale,
+				       "y1", h - HANDLE_PIXELS/scale,
+				       "x2", w + HANDLE_PIXELS/scale,
+				       "y2", h + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -352,10 +388,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->sl =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", -1.0,
-				       "y1", h / 2.0 - 1.0,
-				       "x2", +1.0,
-				       "y2", h / 2.0 + 1.0,
+				       "x1", -HANDLE_PIXELS/scale,
+				       "y1", h / 2.0 - HANDLE_PIXELS/scale,
+				       "x2", +HANDLE_PIXELS/scale,
+				       "y2", h / 2.0 + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -363,10 +400,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->sr =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", w - 1.0,
-				       "y1", h / 2.0 - 1.0,
-				       "x2", w + 1.0,
-				       "y2", h / 2.0 + 1.0,
+				       "x1", w - HANDLE_PIXELS/scale,
+				       "y1", h / 2.0 - HANDLE_PIXELS/scale,
+				       "x2", w + HANDLE_PIXELS/scale,
+				       "y2", h / 2.0 + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -374,10 +412,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->st =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", w / 2.0 - 1.0,
-				       "y1", -1.0,
-				       "x2", w / 2.0 + 1.0,
-				       "y2", +1.0,
+				       "x1", w / 2.0 - HANDLE_PIXELS/scale,
+				       "y1", -HANDLE_PIXELS/scale,
+				       "x2", w / 2.0 + HANDLE_PIXELS/scale,
+				       "y2", +HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -385,10 +424,11 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->sb =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", w / 2.0 - 1.0,
-				       "y1", h - 1.0,
-				       "x2", w / 2.0 + 1.0,
-				       "y2", h + 1.0,
+				       "x1", w / 2.0 - HANDLE_PIXELS/scale,
+				       "y1", h - HANDLE_PIXELS/scale,
+				       "x2", w / 2.0 + HANDLE_PIXELS/scale,
+				       "y2", h + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -410,12 +450,12 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 	g_signal_connect (G_OBJECT (view_highlight->private->sb), "event",
 			  G_CALLBACK (sb_resize_event_handler), view_highlight);
 
+#ifdef SHOW_OUTLINE
 	g_signal_connect (G_OBJECT (view_highlight->private->outline), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
+#endif
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (group);
-	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -424,14 +464,17 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 /* PRIVATE.  Create a resizable line highlight.                              */
 /*---------------------------------------------------------------------------*/
 static void
-highlight_resizable_line_construct (glViewHighlight        *view_highlight,
-				    glViewObject           *view_object)
+highlight_resizable_line_construct (glViewHighlight *view_highlight,
+				    glViewObject    *view_object)
 {
-	gdouble dx, dy;
-	GnomeCanvasItem *group;
+	gdouble            x, y, dx, dy;
+	GnomeCanvasItem   *group;
+#ifdef SHOW_OUTLINE
 	GnomeCanvasPoints *points;
-	glView *view;
-	glLabelObject *object;
+#endif
+	glView            *view;
+	glLabelObject     *object;
+	gdouble            scale;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -440,6 +483,7 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 
 	view   = gl_view_object_get_view (view_object);
 	view_highlight->private->view = view;
+	scale = view->scale;
 
 	object = gl_view_object_get_object (view_object);
 	view_highlight->private->object = object;
@@ -447,17 +491,21 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
+	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &dx, &dy);
 
+#ifdef SHOW_OUTLINE
 	points = gnome_canvas_points_new (2);
+#endif
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
+		gnome_canvas_item_new (view->highlight_group,
 				       gnome_canvas_group_get_type (),
-				       "x", 0.0, "y", 0.0, NULL);
+				       "x", x, "y", y, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
+#ifdef SHOW_OUTLINE
 	points->coords[0] = 0.0;
 	points->coords[1] = 0.0;
 	points->coords[2] = dx;
@@ -469,14 +517,16 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 				       "width_pixels", 3,
 				       "fill_color_rgba", FG_COLOR,
 				       NULL);
+#endif
 
 	view_highlight->private->p1 =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", -1.0,
-				       "y1", -1.0,
-				       "x2", +1.0,
-				       "y2", +1.0,
+				       "x1", -HANDLE_PIXELS/scale,
+				       "y1", -HANDLE_PIXELS/scale,
+				       "x2", +HANDLE_PIXELS/scale,
+				       "y2", +HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -484,10 +534,11 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 	view_highlight->private->p2 =
 		gnome_canvas_item_new (GNOME_CANVAS_GROUP(group),
 				       gnome_canvas_rect_get_type (),
-				       "x1", dx - 1.0,
-				       "y1", dy - 1.0,
-				       "x2", dx + 1.0,
-				       "y2", dy + 1.0,
+				       "x1", dx - HANDLE_PIXELS/scale,
+				       "y1", dy - HANDLE_PIXELS/scale,
+				       "x2", dx + HANDLE_PIXELS/scale,
+				       "y2", dy + HANDLE_PIXELS/scale,
+				       "width_pixels", 1,
 				       "fill_color_rgba", FG_COLOR,
 				       "outline_color_rgba", BG_COLOR,
 				       NULL);
@@ -497,14 +548,16 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 	g_signal_connect (G_OBJECT (view_highlight->private->p2), "event",
 			  G_CALLBACK (p2_resize_event_handler), view_highlight);
 
+#ifdef SHOW_OUTLINE
 	g_signal_connect (G_OBJECT (view_highlight->private->outline), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
+#endif
 
+#ifdef SHOW_OUTLINE
 	gnome_canvas_points_free (points);
+#endif
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (group);
-	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -513,13 +566,13 @@ highlight_resizable_line_construct (glViewHighlight        *view_highlight,
 /* PRIVATE.  Create a simple box highlight.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-highlight_simple_construct (glViewHighlight        *view_highlight,
-			    glViewObject           *view_object)
+highlight_simple_construct (glViewHighlight *view_highlight,
+			    glViewObject    *view_object)
 {
-	gdouble w, h;
+	gdouble          x, y, w, h;
 	GnomeCanvasItem *group;
-	glView *view;
-	glLabelObject *object;
+	glView          *view;
+	glLabelObject   *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -535,13 +588,14 @@ highlight_simple_construct (glViewHighlight        *view_highlight,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
+	gl_label_object_get_position (object, &x, &y);
 	gl_label_object_get_size (object, &w, &h);
 
 
 	view_highlight->private->group =
-		gnome_canvas_item_new (GNOME_CANVAS_GROUP(gl_view_object_get_group (view_object)),
+		gnome_canvas_item_new (view->highlight_group,
 				       gnome_canvas_group_get_type (),
-				       "x", 0.0, "y", 0.0, NULL);
+				       "x", x, "y", y, NULL);
 	gnome_canvas_item_hide (view_highlight->private->group);
 	group = view_highlight->private->group;
 
@@ -552,7 +606,7 @@ highlight_simple_construct (glViewHighlight        *view_highlight,
 				       "y1", -0.5,
 				       "x2", w + 0.5,
 				       "y2", h + 0.5,
-				       "width_pixels", 2,
+				       "width_pixels", 3,
 				       "outline_color_rgba", FG_COLOR,
 				       NULL);
 
@@ -560,9 +614,7 @@ highlight_simple_construct (glViewHighlight        *view_highlight,
 	g_signal_connect (G_OBJECT (view_highlight->private->outline), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (group);
-	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -576,7 +628,6 @@ gl_view_highlight_show (glViewHighlight *view_highlight)
 	gnome_canvas_item_show (view_highlight->private->group);
 
 	gnome_canvas_item_raise_to_top (view_highlight->private->group);
-	gl_view_raise_fg (view_highlight->private->view);
 }
 
 /****************************************************************************/
@@ -586,6 +637,23 @@ void
 gl_view_highlight_hide (glViewHighlight *view_highlight)
 {
 	gnome_canvas_item_hide (view_highlight->private->group);
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  label object "moved" callback.                                  */
+/*---------------------------------------------------------------------------*/
+static void
+object_moved_cb (glLabelObject   *object,
+		 gdouble          dx,
+		 gdouble          dy,
+		 glViewHighlight *view_highlight)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* Adjust location of analogous canvas group. */
+	gnome_canvas_item_move (view_highlight->private->group, dx, dy);
+
+	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
@@ -624,86 +692,125 @@ object_changed_cb (glLabelObject   *object,
 }
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE. view scale (zoom) changed callback.                              */
+/*---------------------------------------------------------------------------*/
+static void
+view_scale_changed_cb (glView          *view,
+		       gdouble          scale,
+		       glViewHighlight *view_highlight)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	switch (view_highlight->private->style) {
+
+	case GL_VIEW_HIGHLIGHT_BOX_RESIZABLE:
+	case GL_VIEW_HIGHLIGHT_ELLIPSE_RESIZABLE:
+		update_resizable_box (view_highlight);
+		break;
+
+	case GL_VIEW_HIGHLIGHT_LINE_RESIZABLE:
+		update_resizable_line (view_highlight);
+		break;
+
+	case GL_VIEW_HIGHLIGHT_SIMPLE:
+		update_simple (view_highlight);
+		break;
+
+	default:
+		g_warning ("Invalid resizable highlight style");
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Update a resizable box highlight.                               */
 /*---------------------------------------------------------------------------*/
 static void
 update_resizable_box  (glViewHighlight *view_highlight)
 {
 	gdouble w, h;
+	gdouble scale;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 
+	scale = view_highlight->private->view->scale;
+
 	gl_label_object_get_size (view_highlight->private->object, &w, &h);
 
 
+#ifdef SHOW_OUTLINE
 	gnome_canvas_item_set (view_highlight->private->outline,
 			       "x1", -0.5,
 			       "y1", -0.5,
 			       "x2", w + 0.5,
 			       "y2", h + 0.5,
 			       NULL);
+#endif
 
 	gnome_canvas_item_set (view_highlight->private->tl,
-			       "x1", -1.0,
-			       "y1", -1.0,
-			       "x2", +1.0,
-			       "y2", +1.0,
+			       "x1", -HANDLE_PIXELS/scale,
+			       "y1", -HANDLE_PIXELS/scale,
+			       "x2", +HANDLE_PIXELS/scale,
+			       "y2", +HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->tr,
-			       "x1", w - 1.0,
-			       "y1", -1.0,
-			       "x2", w + 1.0,
-			       "y2", +1.0,
+			       "x1", w - HANDLE_PIXELS/scale,
+			       "y1", -HANDLE_PIXELS/scale,
+			       "x2", w + HANDLE_PIXELS/scale,
+			       "y2", +HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->bl,
-			       "x1", -1.0,
-			       "y1", h - 1.0,
-			       "x2", +1.0,
-			       "y2", h + 1.0,
+			       "x1", -HANDLE_PIXELS/scale,
+			       "y1", h - HANDLE_PIXELS/scale,
+			       "x2", +HANDLE_PIXELS/scale,
+			       "y2", h + HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->br,
-			       "x1", w - 1.0,
-			       "y1", h - 1.0,
-			       "x2", w + 1.0,
-			       "y2", h + 1.0,
+			       "x1", w - HANDLE_PIXELS/scale,
+			       "y1", h - HANDLE_PIXELS/scale,
+			       "x2", w + HANDLE_PIXELS/scale,
+			       "y2", h + HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->sl,
-			       "x1", -1.0,
-			       "y1", h / 2.0 - 1.0,
-			       "x2", +1.0,
-			       "y2", h / 2.0 + 1.0,
+			       "x1", -HANDLE_PIXELS/scale,
+			       "y1", h / 2.0 - HANDLE_PIXELS/scale,
+			       "x2", +HANDLE_PIXELS/scale,
+			       "y2", h / 2.0 + HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->sr,
-			       "x1", w - 1.0,
-			       "y1", h / 2.0 - 1.0,
-			       "x2", w + 1.0,
-			       "y2", h / 2.0 + 1.0,
+			       "x1", w - HANDLE_PIXELS/scale,
+			       "y1", h / 2.0 - HANDLE_PIXELS/scale,
+			       "x2", w + HANDLE_PIXELS/scale,
+			       "y2", h / 2.0 + HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->st,
-			       "x1", w / 2.0 - 1.0,
-			       "y1", -1.0,
-			       "x2", w / 2.0 + 1.0,
-			       "y2", +1.0,
+			       "x1", w / 2.0 - HANDLE_PIXELS/scale,
+			       "y1", -HANDLE_PIXELS/scale,
+			       "x2", w / 2.0 + HANDLE_PIXELS/scale,
+			       "y2", +HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->sb,
-			       "x1", w / 2.0 - 1.0,
-			       "y1", h - 1.0,
-			       "x2", w / 2.0 + 1.0,
-			       "y2", h + 1.0,
+			       "x1", w / 2.0 - HANDLE_PIXELS/scale,
+			       "y1", h - HANDLE_PIXELS/scale,
+			       "x2", w / 2.0 + HANDLE_PIXELS/scale,
+			       "y2", h + HANDLE_PIXELS/scale,
 			       NULL);
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (view_highlight->private->group);
-	gl_view_raise_fg (view_highlight->private->view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -715,14 +822,20 @@ static void
 update_resizable_line (glViewHighlight *view_highlight)
 {
 	gdouble dx, dy;
+#ifdef SHOW_OUTLINE
 	GnomeCanvasPoints *points;
+#endif
+	gdouble scale;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_highlight && GL_IS_VIEW_HIGHLIGHT (view_highlight));
 
+	scale = view_highlight->private->view->scale;
+
 	gl_label_object_get_size (view_highlight->private->object, &dx, &dy);
 
+#ifdef SHOW_OUTLINE
 	points = gnome_canvas_points_new (2);
 
 	points->coords[0] = 0.0;
@@ -730,26 +843,27 @@ update_resizable_line (glViewHighlight *view_highlight)
 	points->coords[2] = dx;
 	points->coords[3] = dy;
 	gnome_canvas_item_set (view_highlight->private->outline, "points", points, NULL);
+#endif
 
 	gnome_canvas_item_set (view_highlight->private->p1,
-			       "x1", -1.0,
-			       "y1", -1.0,
-			       "x2", +1.0,
-			       "y2", +1.0,
+			       "x1", -HANDLE_PIXELS/scale,
+			       "y1", -HANDLE_PIXELS/scale,
+			       "x2", +HANDLE_PIXELS/scale,
+			       "y2", +HANDLE_PIXELS/scale,
 			       NULL);
 
 	gnome_canvas_item_set (view_highlight->private->p2,
-			       "x1", dx - 1.0,
-			       "y1", dy - 1.0,
-			       "x2", dx + 1.0,
-			       "y2", dy + 1.0,
+			       "x1", dx - HANDLE_PIXELS/scale,
+			       "y1", dy - HANDLE_PIXELS/scale,
+			       "x2", dx + HANDLE_PIXELS/scale,
+			       "y2", dy + HANDLE_PIXELS/scale,
 			       NULL);
 
+#ifdef SHOW_OUTLINE
 	gnome_canvas_points_free (points);
+#endif
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (view_highlight->private->group);
-	gl_view_raise_fg (view_highlight->private->view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -773,9 +887,7 @@ update_simple (glViewHighlight *view_highlight)
 			       "y2", h + 0.5,
 			       NULL);
 
-	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (view_highlight->private->group);
-	gl_view_raise_fg (view_highlight->private->view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

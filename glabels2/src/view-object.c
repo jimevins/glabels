@@ -32,7 +32,7 @@
 /*========================================================*/
 
 /* Used for a workaround for a bug with images when flipped or rotated by 90 degrees. */
-#define DELTA_DEG 0.0001
+#define DELTA_DEG 0.001
 
 /*========================================================*/
 /* Private types.                                         */
@@ -235,8 +235,6 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	view_object->private->highlight =
 		GL_VIEW_HIGHLIGHT (gl_view_highlight_new (view_object, style));
 
-	gl_view_raise_fg (view_object->private->view);
-
 	view_object->private->menu = GTK_WIDGET(new_menu (view_object));
 
 	g_signal_connect (G_OBJECT (object), "moved",
@@ -335,7 +333,7 @@ gl_view_object_item_new (glViewObject *view_object,
 {
 	GnomeCanvasItem *item;
 	va_list          args;
-	gdouble          affine[6];
+	gdouble          affine[6], delta_affine[6];
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -349,6 +347,11 @@ gl_view_object_item_new (glViewObject *view_object,
         va_end (args);
 
 	gl_label_object_get_applied_affine (view_object->private->object, affine);
+
+	/* Apply a very small rotation, fixes problems with flipped or rotated images */
+	art_affine_rotate (delta_affine, DELTA_DEG);
+	art_affine_multiply (affine, affine, delta_affine);
+	
 	gnome_canvas_item_affine_absolute (item, affine);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -512,8 +515,6 @@ object_moved_cb (glLabelObject *object,
 		 gdouble        dy,
 		 glViewObject  *view_object)
 {
-	GnomeCanvasItem    *item, *highlight;
-
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Adjust location of analogous canvas group. */
@@ -534,9 +535,6 @@ raise_object_cb (glLabelObject *object,
 	/* send to top */
 	gnome_canvas_item_raise_to_top (view_object->private->group);
 
-	/* send highlight to top */
-	gl_view_highlight_show (view_object->private->highlight);
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -551,11 +549,6 @@ lower_object_cb (glLabelObject *object,
 
 	/* Send to bottom */
 	gnome_canvas_item_lower_to_bottom (view_object->private->group);
-
-	/* now raise it above all items that form the backgound */
-	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->markup_group));
-	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->grid_group));
-	gnome_canvas_item_lower_to_bottom (GNOME_CANVAS_ITEM(view_object->private->view->bg_group));
 
 	gl_debug (DEBUG_VIEW, "END");
 }

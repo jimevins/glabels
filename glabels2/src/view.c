@@ -106,6 +106,8 @@ static void       draw_layers                     (glView *view);
 
 static void       draw_label_layer                (glView *view);
 
+static void       draw_highlight_layer            (glView *view);
+
 static void       draw_bg_fg_layers               (glView *view);
 static void       draw_bg_fg_rect                 (glView *view);
 static void       draw_bg_fg_rounded_rect         (glView *view);
@@ -481,9 +483,11 @@ draw_layers (glView *view)
 	draw_bg_fg_layers (view);
 	draw_grid_layer (view);
 	draw_markup_layer (view);
+	draw_highlight_layer (view); /* Must be done before label layer */
 	draw_label_layer (view);
 
 	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
+	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->highlight_group));
 }
 
 /*---------------------------------------------------------------------------*/
@@ -535,6 +539,23 @@ draw_label_layer (glView *view)
 			g_warning ("Invalid label object type.");
 		}
 	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Create highlight layer.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+draw_highlight_layer (glView *view)
+{
+	GnomeCanvasGroup *group;
+
+	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
+	view->highlight_group = GNOME_CANVAS_GROUP(
+		gnome_canvas_item_new (group,
+				       gnome_canvas_group_get_type (),
+				       "x", 0.0,
+				       "y", 0.0,
+				       NULL));
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1184,17 +1205,6 @@ draw_markup_line (glView               *view,
 }
 
 /*****************************************************************************/
-/* Raise foreground items to top.                                            */
-/*****************************************************************************/
-void
-gl_view_raise_fg (glView *view)
-{
-	GList *p;
-
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
-}
-
-/*****************************************************************************/
 /* Show grid.                                                                */
 /*****************************************************************************/
 void       gl_view_show_grid               (glView            *view)
@@ -1491,8 +1501,9 @@ object_at (glView  *view,
 	if (item == NULL)
 		return FALSE;
 
-	/* ignore items not in label group, e.g. background items */
-	if (!is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->label_group)))
+	/* ignore items not in label or highlight layers, e.g. background items */
+	if (!is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->label_group)) &&
+	    !is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->highlight_group)))
 		return FALSE;
 
 	return TRUE;
