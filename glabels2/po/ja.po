@@ -1,0 +1,854 @@
+# glabels ja.po
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Takeshi Aihana <aihana@gnome.gr.jp>, 2001, 2002.
+# 
+#: src/commands.c:384
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels 0.4.1\n"
+"POT-Creation-Date: 2002-08-20 21:43-0400\n"
+"PO-Revision-Date: 2002-01-15 22:34+0900\n"
+"Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/glabels.c:59
+msgid "Show view debugging messages."
+msgstr ""
+
+#: src/glabels.c:62
+msgid "Show item debugging messages."
+msgstr ""
+
+#: src/glabels.c:65
+msgid "Show printing debugging messages."
+msgstr ""
+
+#: src/glabels.c:68
+msgid "Show prefs debugging messages."
+msgstr ""
+
+#: src/glabels.c:71
+msgid "Show file debugging messages."
+msgstr ""
+
+#: src/glabels.c:74
+msgid "Show document debugging messages."
+msgstr ""
+
+#: src/glabels.c:77
+msgid "Show template debugging messages."
+msgstr ""
+
+#: src/glabels.c:80
+msgid "Show xml debugging messages."
+msgstr ""
+
+#: src/glabels.c:83
+msgid "Show document merge debugging messages."
+msgstr ""
+
+#: src/glabels.c:86
+msgid "Show commands debugging messages."
+msgstr ""
+
+#: src/glabels.c:89
+msgid "Show undo debugging messages."
+msgstr ""
+
+#: src/glabels.c:92
+msgid "Show recent debugging messages."
+msgstr ""
+
+#: src/glabels.c:95
+msgid "Show mdi debugging messages."
+msgstr ""
+
+#: src/glabels.c:98
+msgid "Show media select widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:101
+msgid "Show mini preview widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:104
+msgid "Show widget debugging messages."
+msgstr ""
+
+#: src/glabels.c:107
+msgid "Turn on all debugging messages."
+msgstr ""
+
+#: src/glabels-batch.c:47
+msgid "print this message"
+msgstr ""
+
+#: src/glabels-batch.c:49
+msgid "print the version of glabels-batch being used"
+msgstr ""
+
+#: src/glabels-batch.c:51
+msgid "set output filename (default=\"output.ps\")"
+msgstr ""
+
+#: src/glabels-batch.c:51
+msgid "filename"
+msgstr ""
+
+#: src/glabels-batch.c:53
+msgid "number of sheets (default=1)"
+msgstr ""
+
+#: src/glabels-batch.c:53
+#, fuzzy
+msgid "sheets"
+msgstr "用紙:"
+
+#: src/glabels-batch.c:55
+msgid "number of copies (default=1)"
+msgstr ""
+
+#: src/glabels-batch.c:55
+#, fuzzy
+msgid "copies"
+msgstr "コピー"
+
+#: src/glabels-batch.c:57 src/print-dialog.c:205
+msgid "print outlines (to test printer alignment)"
+msgstr "アウトラインを印刷する (印刷時の配置を確認するため)"
+
+#: src/glabels-batch.c:59 src/print-dialog.c:214
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "反転して印刷 (i.e. 画像をミラーしたもの)"
+
+#: src/glabels-batch.c:90
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr ""
+
+#: src/glabels-batch.c:109
+msgid "missing glabels file\n"
+msgstr ""
+
+#: src/glabels-batch.c:140
+#, fuzzy, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "ファイルが開けません"
+
+#: src/mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+
+#: src/mdi.c:584
+#, fuzzy
+msgid "Do_n't save"
+msgstr "保存しない"
+
+#: src/mdi.c:604
+msgid "_Don't quit"
+msgstr ""
+
+#: src/mdi.c:609
+#, fuzzy
+msgid "_Don't close"
+msgstr "保存しない"
+
+#: src/mdi.c:706
+msgid "(modified)"
+msgstr ""
+
+#: src/commands.c:359
+msgid ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+msgstr ""
+"GNOME 向けのラベル/ビジネスカードの作成プログラムです。\n"
+"\n"
+"Glabels はフリーソフトです。フリーソフトウェア財団が定める GNU 一般公有使用許"
+"諾契約書の第2版もしくはそれ以降のバージョンの下で複製、改編、再配布が認められ"
+"ています。\n"
+"\n"
+"このプログラムが役に立つことを望む中で配布されていますが、完全無保証です。販"
+"売目的または商用目的の保証はありません。詳細については GNU 一般公有使用許諾契"
+"約書を参照して下さい。\n"
+
+#: src/commands.c:371
+#, fuzzy
+msgid "Author:"
+msgstr "終了:"
+
+#: src/commands.c:374
+msgid "See the file AUTHORS for additional acknowledgments,"
+msgstr ""
+
+#: src/commands.c:375
+msgid "or visit http://snaught.com/glabels"
+msgstr ""
+
+#: src/commands.c:397
+#, fuzzy
+msgid "glabels"
+msgstr "ラベル"
+
+#: src/file.c:82
+msgid "New Label or Card"
+msgstr "新規ラベルまたはカード"
+
+#: src/file.c:109
+msgid "Media Type"
+msgstr "メディアの種類"
+
+#: src/file.c:119
+msgid "Label orientation"
+msgstr "ラベルの向き"
+
+#: src/file.c:248
+msgid "Open"
+msgstr "開く"
+
+#: src/file.c:250
+msgid "Open label"
+msgstr "ラベルを開きます"
+
+#: src/file.c:338
+#, fuzzy, c-format
+msgid "Cannot open file '%s'"
+msgstr "ファイルが開けません"
+
+#: src/file.c:429
+#, fuzzy, c-format
+msgid "Error saving file '%s'"
+msgstr "ファイルの書き込みでエラー"
+
+#: src/file.c:468
+msgid "Save label as"
+msgstr "ラベルに名前を付けて保存します"
+
+#: src/file.c:550
+msgid "Must supply file name"
+msgstr "ファイル名を指定して下さい"
+
+#: src/file.c:569
+#, fuzzy, c-format
+msgid "Error writing file '%s'"
+msgstr "ファイルの書き込みでエラー"
+
+#. Should not happen
+#: src/prefs.c:625 src/prefs.c:632 src/wdgt-line.c:186
+msgid "points"
+msgstr "ポイント"
+
+#: src/prefs.c:627
+msgid "inches"
+msgstr "[インチ]"
+
+#: src/prefs.c:629
+msgid "mm"
+msgstr "[ミリ]"
+
+#: src/prefs-dialog.c:220
+#, fuzzy
+msgid "Locale"
+msgstr "寸法:"
+
+#: src/prefs-dialog.c:224
+msgid "Object defaults"
+msgstr ""
+
+#: src/prefs-dialog.c:232
+#, fuzzy
+msgid "Preferences"
+msgstr "Glabels: 設定"
+
+#: src/prefs-dialog.c:272
+msgid "Select locale specific behavior."
+msgstr ""
+
+#. ----- Display Units Frame ------------------------------------
+#: src/prefs-dialog.c:279
+msgid "Display units"
+msgstr "表示する単位"
+
+#: src/prefs-dialog.c:289
+msgid "Points"
+msgstr "ポイント"
+
+#: src/prefs-dialog.c:296
+msgid "Inches"
+msgstr "インチ"
+
+#: src/prefs-dialog.c:303
+msgid "Millimeters"
+msgstr "ミリ"
+
+#. ----- Page Size Frame ------------------------------------
+#: src/prefs-dialog.c:310
+msgid "Default page size"
+msgstr "デフォルトの用紙サイズ"
+
+#: src/prefs-dialog.c:364
+msgid "Select default properties for new objects."
+msgstr ""
+
+#. ------ Line box ------
+#: src/prefs-dialog.c:377
+msgid "Line"
+msgstr "直線"
+
+#. ------ Fill box ------
+#: src/prefs-dialog.c:382 src/view-box.c:325 src/view-ellipse.c:325
+msgid "Fill"
+msgstr "塗りつぶし"
+
+#: src/view-object.c:406 src/view.c:1520
+msgid "Delete"
+msgstr "削除"
+
+#: src/view-object.c:416 src/view.c:1530
+msgid "Bring to front"
+msgstr "前に持って来る"
+
+#: src/view-object.c:423 src/view.c:1536
+msgid "Send to back"
+msgstr "後ろにまわす"
+
+#: src/view-object.c:395
+msgid "Edit properties..."
+msgstr "プロパティの編集..."
+
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-box.c:293
+msgid "Edit box object properties"
+msgstr "四角の編集"
+
+#: src/view-barcode.c:313 src/view-box.c:312 src/view-ellipse.c:312
+#: src/view-line.c:309 src/view-text.c:311
+msgid "Appearance"
+msgstr "外観"
+
+#. ------ Line box ------
+#: src/view-box.c:315 src/view-ellipse.c:315 src/view-line.c:312
+msgid "Outline"
+msgstr "矩形"
+
+#: src/view-box.c:340 src/view-ellipse.c:340 src/view-image.c:337
+#: src/view-line.c:328
+msgid "Position/Size"
+msgstr "位置とサイズ"
+
+#. ------ Position Frame ------
+#: src/view-barcode.c:345 src/view-barcode.c:349 src/view-box.c:343
+#: src/view-ellipse.c:343 src/view-image.c:340 src/view-line.c:331
+#: src/view-text.c:334 src/view-text.c:338
+msgid "Position"
+msgstr "位置"
+
+#. ------ Size Frame ------
+#: src/view-box.c:354 src/view-ellipse.c:356 src/view-image.c:353
+#: src/view-line.c:344
+msgid "Size"
+msgstr "サイズ"
+
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-ellipse.c:293
+msgid "Edit ellipse object properties"
+msgstr "楕円の編集"
+
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-line.c:290
+msgid "Edit line object properties"
+msgstr "直線の編集"
+
+#. -----------------------------------------------------------------
+#. Build dialog with notebook.
+#. -----------------------------------------------------------------
+#: src/view-image.c:281
+msgid "Edit image object properties"
+msgstr "画像の編集"
+
+#: src/view-image.c:300
+msgid "Image"
+msgstr "画像"
+
+#. ------ Size Reset Button ------
+#: src/view-image.c:364
+msgid "Reset image size"
+msgstr "画像サイズのリセット"
+
+#: src/view-text.c:265
+msgid "Edit text object properties"
+msgstr "テキストの編集"
+
+#: src/view-text.c:285 src/view-text.c:605
+msgid "Text"
+msgstr "テキスト"
+
+#: src/view-barcode.c:267
+msgid "Edit barcode object properties"
+msgstr "バーコードの編集"
+
+#: src/view-barcode.c:287
+msgid "Data"
+msgstr "データ"
+
+#: src/view-barcode.c:292
+msgid "Barcode data"
+msgstr "バーコード・データ"
+
+#: src/view-barcode.c:318
+#, fuzzy
+msgid "Barcode Properties"
+msgstr "文字プロパティ..."
+
+#. ------ Barcode Style Frame ------
+#: src/view-barcode.c:328
+msgid "Style"
+msgstr "スタイル"
+
+#: src/print.c:814 src/view-barcode.c:758
+msgid "Invalid barcode"
+msgstr "おかしなバーコード"
+
+#: src/merge-properties.c:84
+msgid "Edit document-merge properties"
+msgstr "結合ドキュメント・プロパティの編集"
+
+#: src/merge-properties.c:130
+msgid "Source"
+msgstr "ソース"
+
+#: src/merge-properties.c:142
+msgid "Format:"
+msgstr "書式:"
+
+#: src/merge-properties.c:157
+msgid "Location:"
+msgstr "場所:"
+
+#: src/merge-properties.c:167
+msgid "Fields"
+msgstr "フィールド"
+
+#. ----- Contstruct basic print dialog with notebook -----
+#: src/print-dialog.c:102
+msgid "Print"
+msgstr "印刷"
+
+#: src/print-dialog.c:124
+msgid "_Job"
+msgstr ""
+
+#: src/print-dialog.c:129
+#, fuzzy
+msgid "P_rinter"
+msgstr "印刷"
+
+#. ----------- Add simple-copies widget ------------
+#: src/print-dialog.c:158
+msgid "Copies"
+msgstr "コピー"
+
+#. ------- Otherwise add merge control widget ------------
+#: src/print-dialog.c:174
+msgid "Document merge control"
+msgstr "ドキュメントをコントロールにマージする"
+
+#. ----------- Add custom print options area ------------
+#: src/print-dialog.c:195
+msgid "Options"
+msgstr "オプション"
+
+#: src/print-dialog.c:345 src/print-dialog.c:384
+msgid "Print preview"
+msgstr "印刷プレビュー"
+
+#: src/label.c:535
+#, c-format
+msgid "%s %d"
+msgstr ""
+
+#: src/label.c:535
+msgid "Untitled"
+msgstr ""
+
+#: src/template.c:346
+msgid "No template files found!"
+msgstr "テンプレート・ファイルが見つかりません！"
+
+#: src/xml-label.c:108 src/xml-label.c:139
+msgid "xmlParseFile error"
+msgstr "xmlParseFile エラー"
+
+#: src/xml-label.c:174
+msgid "No document root"
+msgstr "root ドキュメントではありません"
+
+#: src/xml-label.c:186
+msgid "Importing from glabels 0.1 format"
+msgstr ""
+
+#: src/xml-label.c:194
+msgid "Importing from glabels 0.4 format"
+msgstr ""
+
+#: src/xml-label.c:198
+#, fuzzy
+msgid "bad document, unknown glabels Namespace"
+msgstr "ドキュメントの種類が間違っています。Glabels 名前空間が見つかりません。"
+
+#: src/xml-label.c:226
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "おかしな root のノード = \"%s\""
+
+#: src/xml-label.c:249 src/xml-label.c:281
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "おかしなノード = \"%s\""
+
+#: src/xml-label.c:656
+msgid "Problem saving xml file."
+msgstr "XML ファイルの保存で問題があります"
+
+#: src/merge.c:80
+msgid "None"
+msgstr "なし"
+
+#: src/merge.c:88
+msgid "Text with tab separators"
+msgstr "タブで区切ったテキスト"
+
+#: src/merge.c:96
+msgid "Text with comma separators"
+msgstr "コンマで区切ったテキスト"
+
+#: src/merge.c:104
+msgid "Text with colon separators"
+msgstr "コロンで区切ったテキスト"
+
+#: src/merge-ui.c:223 src/merge-ui.c:265 src/merge-ui.c:435 src/merge-ui.c:483
+msgid "N/A"
+msgstr "N/A"
+
+#: src/merge-ui-text.c:172
+msgid "Select merge-database source"
+msgstr "結合データベース・ソースの選択"
+
+#: src/merge-ui-text.c:330
+msgid "Column"
+msgstr "列"
+
+#: src/merge-ui-text.c:334
+msgid "Custom field key"
+msgstr "カスタム・フィールド・キー"
+
+#: src/merge-ui-text.c:338
+msgid "Sample data"
+msgstr "サンプルデータ"
+
+#. Font label
+#: src/wdgt-text-props.c:184
+msgid "Font:"
+msgstr "フォント:"
+
+#. Text Color Label
+#: src/wdgt-bc-props.c:190 src/wdgt-fill.c:169 src/wdgt-line.c:192
+#: src/wdgt-text-props.c:237
+msgid "Color:"
+msgstr "色:"
+
+#. Alignment label
+#: src/wdgt-text-props.c:251
+msgid "Alignment:"
+msgstr "位置:"
+
+#. Insert merge field label
+#: src/wdgt-bc-data.c:199 src/wdgt-text-entry.c:201
+msgid "Key:"
+msgstr "キー:"
+
+#: src/wdgt-text-entry.c:217
+msgid "Insert merge field"
+msgstr "結合フィールドの挿入"
+
+#. X label
+#: src/wdgt-position.c:182
+msgid "X:"
+msgstr "X:"
+
+#. Y label
+#: src/wdgt-position.c:200
+msgid "Y:"
+msgstr "Y:"
+
+#. W Label
+#: src/wdgt-line.c:172 src/wdgt-size.c:184
+msgid "Width:"
+msgstr "幅:"
+
+#. H label
+#: src/wdgt-size.c:200
+msgid "Height:"
+msgstr "高さ:"
+
+#: src/wdgt-size.c:224
+msgid "Maintain current aspect ratio"
+msgstr "現在のアスペクト比率を維持する"
+
+#. Length label
+#: src/wdgt-vector.c:186
+msgid "Length:"
+msgstr "長さ:"
+
+#. Angle label
+#: src/wdgt-vector.c:210
+msgid "Angle:"
+msgstr "角度:"
+
+#. Angle units label
+#: src/wdgt-vector.c:227
+msgid "degrees"
+msgstr "度"
+
+#. Scale Label
+#: src/wdgt-bc-props.c:170
+msgid "Scale:"
+msgstr "寸法:"
+
+#. % Label
+#: src/wdgt-bc-props.c:184
+#, c-format
+msgid "%"
+msgstr "%"
+
+#: src/wdgt-bc-style.c:316
+msgid "Show text with barcode"
+msgstr "バーコードを付けてテキストを表示する"
+
+#: src/wdgt-bc-data.c:179
+msgid "Literal:"
+msgstr "リテラル:"
+
+#: src/wdgt-print-copies.c:178
+msgid "Sheets:"
+msgstr "用紙:"
+
+#: src/wdgt-print-copies.c:195
+msgid "Labels"
+msgstr "ラベル"
+
+#: src/wdgt-print-copies.c:198
+msgid "from:"
+msgstr "開始:"
+
+#: src/wdgt-print-copies.c:206
+msgid "to:"
+msgstr "終了:"
+
+#: src/wdgt-print-merge.c:177
+msgid "Start on label"
+msgstr "ラベルの開始"
+
+#: src/wdgt-print-merge.c:186
+msgid "on 1st sheet"
+msgstr "(最初のシート)"
+
+#: src/wdgt-print-merge.c:197
+msgid "Collate"
+msgstr "製本"
+
+#: src/wdgt-print-merge.c:204
+msgid "Copies:"
+msgstr "コピー:"
+
+#: src/wdgt-media-select.c:252
+msgid "Description:"
+msgstr "説明:"
+
+#: src/wdgt-media-select.c:257
+msgid "Page size:"
+msgstr "用紙のサイズ:"
+
+#: src/wdgt-media-select.c:262
+msgid "Label size:"
+msgstr "ラベルの大きさ:"
+
+#: src/wdgt-media-select.c:267
+msgid "Layout:"
+msgstr "レイアウト:"
+
+#: src/wdgt-media-select.c:408
+#, c-format
+msgid "%d x %d  (%d per sheet)"
+msgstr "%d x %d  (%d 個/シート)"
+
+#: src/wdgt-media-select.c:422
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
+
+#: src/wdgt-media-select.c:427
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
+
+#: src/wdgt-rotate-label.c:176
+msgid "Rotate"
+msgstr "回転させる"
+
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
+#, c-format
+msgid "Activate %s"
+msgstr ""
+
+#: src/gnome-recent-view-bonobo.c:189
+#, fuzzy, c-format
+msgid "Open %s"
+msgstr "開く"
+
+#~ msgid "Revert to saved copy of %s?"
+#~ msgstr "%s のコピーを反転しますか？"
+
+#~ msgid "Unknown media type. Using default."
+#~ msgstr "メディアの種類が特定できません。デフォルトを使用します。"
+
+#~ msgid ""
+#~ "``%s'' has been modified.\n"
+#~ "\n"
+#~ "Do you wish to save it?"
+#~ msgstr ""
+#~ "%s は編集されています。\n"
+#~ "\n"
+#~ "保存しますか？"
+
+#~ msgid "Cannot save file"
+#~ msgstr "ファイルを保存することが出来ません"
+
+#~ msgid "Save As"
+#~ msgstr "名前を付けて保存"
+
+#~ msgid "Close / Save label as"
+#~ msgstr "ラベルに名前を付けて保存して閉じます"
+
+#~ msgid "Label no longer valid!"
+#~ msgstr "ラベルは有効ではありません！"
+
+#~ msgid "Image format not currently supported"
+#~ msgstr "画像フォーマットはサポートしていません"
+
+#~ msgid "General"
+#~ msgstr "全般"
+
+#~ msgid "_New"
+#~ msgstr "新規(_N)"
+
+#~ msgid "Make a new, empty label"
+#~ msgstr "新規に空のラベルを作成します"
+
+#~ msgid "U_nselect All "
+#~ msgstr "全て選択解除(_N)"
+
+#~ msgid "Remove all selections"
+#~ msgstr "選択範囲を解除します"
+
+#~ msgid "Select"
+#~ msgstr "選択"
+
+#~ msgid "Select, move and modify objects"
+#~ msgstr "オブジェクトの選択、移動、編集を行います"
+
+#~ msgid "Create text object"
+#~ msgstr "テキスト・オブジェクトを作成します"
+
+#~ msgid "Box"
+#~ msgstr "四角"
+
+#~ msgid "Create box/rectangle object"
+#~ msgstr "四角/三角のオブジェクトを作成します"
+
+#~ msgid "Create line object"
+#~ msgstr "直線オブジェクトを作成します"
+
+#~ msgid "Ellipse"
+#~ msgstr "楕円"
+
+#~ msgid "Create ellipse/circle object"
+#~ msgstr "楕円/円オブジェクトを作成します"
+
+#~ msgid "Create image object"
+#~ msgstr "画像オブジェクトを作成します"
+
+#~ msgid "Barcode"
+#~ msgstr "バーコード"
+
+#~ msgid "Create barcode object"
+#~ msgstr "バーコード・オブジェクトを作成します"
+
+#~ msgid "Zoom in"
+#~ msgstr "拡大"
+
+#~ msgid "Zoom out"
+#~ msgstr "縮小"
+
+#~ msgid "Zoom 1:1"
+#~ msgstr "元のサイズへ"
+
+#~ msgid "Zoom to 1:1"
+#~ msgstr "縦横比 1:1 のサイズにします"
+
+#~ msgid "Merge properties"
+#~ msgstr "結合プロパティ"
+
+#~ msgid "Edit merge properties"
+#~ msgstr "結合プロパティを編集します"
+
+#~ msgid "_Tools"
+#~ msgstr "ツール(_T)"
+
+#~ msgid "  New   "
+#~ msgstr " 新規 "
+
+#~ msgid "New Label/Card"
+#~ msgstr "新規のラベル/カードを作成します"
+
+#~ msgid "  Open  "
+#~ msgstr " 開く "
+
+#~ msgid "Open a file"
+#~ msgstr "ファイルを開きます"
+
+#~ msgid "  Save  "
+#~ msgstr " 保存 "
+
+#~ msgid "Save current file"
+#~ msgstr "このファイルを保存します"
+
+#~ msgid " Print  "
+#~ msgstr " 印刷 "
+
+#~ msgid "Print current file"
+#~ msgstr "このファイルを印刷します"
+
+#~ msgid "Function is not implemented!"
+#~ msgstr "まだこの機能は実装されていません！"

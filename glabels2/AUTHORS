@@ -1,0 +1,73 @@
+gLabels Author
+==============
+
+Jim Evins <evins@snaught.com>
+
+Acknowledgments
+===============
+
+Contributors:
+	Akkana <akkana@shallowsky.com>
+	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
+                                                      that first appeared in
+                                                      0.4.3:
+
+
+The GNU Barcode Library provides a large chunk of the barcode functionality
+and is distributed with glabels.  See ./barcode-0.98/README for more
+information.  The author:
+
+	Alessandro Rubini <rubini@gnu.org>
+
+
+I borrowed the hacktext canvas item from libgnomeprint to render text that
+is faithful to the final printed product.  Original authors of the hacktext
+canvas item:
+
+	Federico Mena <federico@nuclecu.unam.mx>,
+	Raph Levien <raph@acm.org>,
+	Lauris Kaplinski <lauris@helixcode.com>
+
+
+I borrowed quite a bit of code from gedit2 to create the bonobo-mdi shell for
+gLabels.  The authors of gedit2:
+
+	Paolo Maggi <maggi@athena.polito.it>
+	Chema Celorio <chema@ximian.com>
+	James Willcox <jwillcox@cs.indiana.edu>
+	Federico Mena Quintero <federico@ximian.com>
+
+
+Translations:
+
+	Olivier Berger <oberger@april.org> -- French
+	Marcus Bauer <m@7n7.de> -- German
+	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
+	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
+
+
+The following people have submitted label templates or information about
+particular products:
+
+	Hap <hap1@home.net>
+	Olivier Berger <oberger@april.org>
+	Marcus Bauer <m@7n7.de>
+	Jochen Hein <jochen@jochen.org>
+	Jonathan Buzzard <jonathan@buzzard.org.uk>
+	Jeff Davis <jdavis@hess.com>
+	Ludger Solbach <soulman@zhadum.de>
+	Darren Ross <darren@freebirdtech.com>
+	George Mitchell <ghmitch@neteze.com>
+	Douglas Bollinger <dcb@321.net>
+	Tim Jackson <tim@timj.co.uk>
+	John Stoffel <john@stoffel.org>
+	Dany De Bontridder <dany.db@chello.be>
+	Andy Longton <alongton@metamark.com>
+	Bostjan Muller <neonatus@neonatus.net>
+	John Helms <jhelms@pczplus.com>
+	no-exit <no-exit@plunge.net>
+	Mozilla from marela <mozilla@marela.com>
+	Holger <holger@lange-online.net>
+
+
+And many others for their many helpful suggestions and bug reports -- thanks.

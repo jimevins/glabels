@@ -1,0 +1,328 @@
+<Root>
+
+<commands>
+        <cmd name="FileNew" _label="New"
+	_tip="Create a new document" pixtype="stock" pixname="gtk-new" accel="*Control*N"/>
+        
+        <cmd name="FileOpen" _label="Open"
+	_tip="Open a file" pixtype="stock" pixname="gtk-open" accel="*Control*O"/>
+	
+        <cmd name="FileSave" _label="Save"
+	_tip="Save the current file" pixtype="stock" pixname="gtk-save"
+	accel="*Control*S"/>
+	
+        <cmd name="FileSaveAs" _label="Save As"
+        _tip="Save the current file with a different name"
+	pixtype="stock" pixname="gtk-save-as"
+	accel="*Shift**Control*S"/>
+
+        <cmd name="FilePrint" _label="Print"
+	_tip="Print the current file" pixtype="stock" pixname="gtk-print"
+	accel="*Control*P"/>
+	
+        <cmd name="FileClose" _label="Close"
+	_tip="Close the current file" pixtype="stock" pixname="gtk-close"
+	accel="*Alt*F4"/>
+
+	<cmd name="FileCloseAll" _label="Close All"
+	_tip="Close all open files" pixtype="stock" pixname="gtk-close"
+	accel="*Shift**Alt*F4"/>
+
+        <cmd name="FileExit" _label="Quit" _tip="Quit the program"
+        pixtype="stock" pixname="gtk-quit" accel="*Control*Q"/>
+
+
+
+	<cmd name="EditUndo" _label="Undo" _tip="Undo the last action"
+        pixtype="stock" pixname="gtk-undo" accel="*Control*Z"/>
+	
+        <cmd name="EditRedo" _label="Redo" _tip="Redo the undone action"
+        pixtype="stock" pixname="gtk-redo" accel="*Shift**Control*Z"/>
+	
+        <cmd name="EditCut" _label="Cut" _tip="Cut the selection"
+        pixtype="stock" pixname="gtk-cut" accel="*Control*X"/>
+	
+        <cmd name="EditCopy" _label="Copy"
+	_tip="Copy the selection" pixtype="stock" pixname="gtk-copy" accel="*Control*c"/>
+	
+        <cmd name="EditPaste" _label="Paste"
+	_tip="Paste the clipboard" pixtype="stock" pixname="gtk-paste" accel="*Control*v"/>
+	
+        <cmd name="EditDelete" _label="Delete" 
+       _tip="Delete the selected objects"/>
+
+	<cmd name="EditSelectAll" _label="Select All" _tip="Select all objects"
+	accel="*Control*A"/>     
+
+	<cmd name="EditUnSelectAll" _label="Un-select All" _tip="Remove all selections"/>
+
+	<cmd name="ViewToolbar" _label="_Toolbar" type="toggle"
+	_tip="Change the visibility of the toolbar in the current window" state="0"/>
+
+        <cmd name="ToolbarSystem" id="ToolbarSystem" _label="_Desktop Default" type="radio" 
+         group="buttons" state = "1" _tip="Set toolbar button style according to desktop default"/>
+
+	<cmd name="ToolbarIcon" id="ToolbarIcon" _label="_Icon" type="radio" 
+	 group="buttons" _tip="Only show icons in the toolbar"/>
+
+	<cmd name="ToolbarIconText" id="ToolbarIconText" _label="Icon and _Text" type="radio" 
+	 group="buttons" _tip ="Show both icons and texts in the toolbar"/>
+
+        <cmd name="SettingsPreferences" _label="Preferences" _tip="Configure the application"
+	  pixtype="stock" pixname="gtk-preferences"/>
+
+	<cmd name="ToolbarTooltips" id="ToolbarTooltips" _label="Show _Tooltips" type="toggle"
+	_tip="Show tooltips in the toolbar" state="1"/>
+
+	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
+
+
+	<cmd name="ToolsArrow"
+	     _tip="Select, move and modify objects"
+             pixtype="stock" pixname="gl_stock_arrow"/>
+	
+	<cmd name="ToolsText"
+	     _tip="Create text object"
+             pixtype="stock" pixname="gl_stock_text"/>
+	
+	<cmd name="ToolsLine"
+	     _tip="Create line object"
+             pixtype="stock" pixname="gl_stock_line"/>
+	
+	<cmd name="ToolsBox"
+	     _tip="Create box/rectangle object"
+             pixtype="stock" pixname="gl_stock_box"/>
+	
+	<cmd name="ToolsEllipse"
+	     _tip="Create ellipse/circle object"
+             pixtype="stock" pixname="gl_stock_ellipse"/>
+	
+	<cmd name="ToolsImage"
+	     _tip="Create image object"
+             pixtype="stock" pixname="gl_stock_image"/>
+	
+	<cmd name="ToolsBarcode"
+	     _tip="Create barcode object"
+             pixtype="stock" pixname="gl_stock_barcode"/>
+	
+	<cmd name="ToolsZoomIn"
+	     _tip="increase magnification"
+             pixtype="stock" pixname="gtk-zoom-in"/>
+	
+	<cmd name="ToolsZoomOut"
+	     _tip="decrease magnification"
+             pixtype="stock" pixname="gtk-zoom-out"/>
+
+	<cmd name="ToolsZoom1to1"
+	     _tip="restore scale to 100%"
+             pixtype="stock" pixname="gtk-zoom-100"/>
+
+	<cmd name="ToolsMergeProperties"
+	     _tip="Edit merge properties"
+             pixtype="stock" pixname="gl_stock_merge"/>
+	
+	
+	<cmd name="HelpContents" _label="Contents" _tip="Open the gedit manual"
+	accel="F1"/>
+
+        <cmd name="About" _label="About..." _tip="About this application"/>
+
+
+	<cmd name="BonoboUIDump" _label="Dump XML" _tip="Dump the UI Xml description" hidden="0"/>
+
+</commands>
+
+<menu>
+
+<submenu name="File" _label="_File">
+        
+        <menuitem name="FileNew" verb="" _label="_New"/>
+        
+        <menuitem name="FileOpen" verb="" _label="_Open..."/>
+
+	<submenu name="Recents" _label="Recent _Files">
+
+	</submenu>
+
+	<separator/>
+
+        <menuitem name="FileSave" verb="" _label="_Save"/>
+	
+        <menuitem name="FileSaveAs" verb="" _label="Save _As..."/>
+
+	<separator/>
+			
+	<menuitem name="FilePrint" verb="" _label="_Print..."/>
+
+	<placeholder name="FileOps_1" />
+
+	<placeholder name="FileOps_2" delimit="top"/>
+
+	<separator/>
+	
+        <menuitem name="FileClose" verb="" _label="_Close"/>
+
+	<menuitem name="FileCloseAll" verb="" _label="Clos_e All"/>
+
+        <menuitem name="FileExit" verb="" _label="_Quit"/>
+
+</submenu>
+
+<submenu name="Edit" _label="_Edit">
+
+        <menuitem name="EditCut" verb="" _label="Cu_t"/>
+	
+        <menuitem name="EditCopy" verb="" _label="_Copy"/>
+	
+        <menuitem name="EditPaste" verb="" _label="_Paste"/>
+	
+        <menuitem name="EditDelete" verb="" _label="_Delete"/>
+	
+	<placeholder name="EditOps_1" /> 
+	
+	<separator/>
+
+	<placeholder name="EditOps_2" /> 
+
+        <menuitem name="EditSelectAll" verb="" _label="Select _All"/>
+
+        <menuitem name="EditUnSelectAll" verb="" _label="U_n-select All"/>
+
+	<placeholder name="EditOps_3" /> 
+
+	<placeholder name="EditOps_4" delimit="top"/>
+
+	<placeholder name="EditOps_5" delimit="top"/>
+
+	<separator/>
+
+	<menuitem name="SettingsPreferences" verb="" _label="Pr_eferences..."/>
+
+</submenu>
+
+<submenu name="View" _label="_View" hidden="0">
+
+	<menuitem name="ViewToolbar" id="ViewToolbar" verb=""/>
+
+	<separator/>
+
+	<submenu name="CustomizeToolbar" _label="_Customize Toolbar">
+		
+		<menuitem name="ToolbarSystem" verb=""/>
+
+		<menuitem name="ToolbarIcon" verb=""/>
+
+		<menuitem name="ToolbarIconText" verb=""/>
+
+		<separator/>
+
+		<menuitem name="ToolbarTooltips" verb=""/>
+
+	</submenu>
+
+	<placeholder name="ViewOps" delimit="top"/>
+
+</submenu>
+
+
+<submenu name="Tools" _label="_Tools" hidden="0">
+
+        <menuitem name="ToolsArrow" verb="" _label="Select"/>
+        
+	<separator/>
+
+        <menuitem name="ToolsText" verb="" _label="Text"/>
+        <menuitem name="ToolsBox" verb="" _label="Box"/>
+        <menuitem name="ToolsLine" verb="" _label="Line"/>
+        <menuitem name="ToolsEllipse" verb="" _label="Ellipse"/>
+        <menuitem name="ToolsImage" verb="" _label="Image"/>
+        <menuitem name="ToolsBarcode" verb="" _label="Barcode"/>
+
+	<separator/>
+
+        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
+        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
+        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
+
+	<separator/>
+
+        <menuitem name="ToolsMergeProperties" verb="" _label="Merge Properties"/>
+
+</submenu>
+
+
+<submenu name="Documents" _label="_Documents">
+
+	<placeholder name="DocumentsOps_1" delimit="bottom"/>
+
+	<placeholder name="OpenDocuments" />
+
+	<placeholder name="DocumentsOps_2" delimit="top"/>
+
+</submenu>
+
+<submenu name="Help" _label="_Help">
+	
+	<menuitem name="HelpContents" verb="" _label="_Contents"/>
+	
+        <menuitem name="About" verb="" _label="_About..."/>
+
+</submenu>
+
+<submenu name="Debug" _label="_Debug" hidden="1">
+
+	<menuitem name="BonoboUIDump" verb=""/>
+	<menuitem name="BonoboCustomize" label ="Customize" verb=""/>
+</submenu>
+
+</menu>
+
+<dockitem name="Toolbar" _tip="Main toolbar" config="0" 
+	behavior = "exclusive" in_new_band="1">
+	
+	<toolitem name="FileNew" verb=""/>
+	<toolitem name="FileOpen" verb=""/>
+	<toolitem name="FileSave" verb=""/>
+	<toolitem name="FileClose" verb=""/>
+
+	<separator/>
+
+	<toolitem name="FilePrint" verb=""/>
+	
+	<separator/>
+
+	<toolitem name="EditCut" verb=""/>
+	<toolitem name="EditCopy" verb=""/>
+	<toolitem name="EditPaste" verb=""/>
+
+</dockitem>
+
+
+<dockitem name="ToolbarTools" _tip="Tools toolbar" config="0" 
+	behavior = "exclusive" in_new_band="1" band_num="2">
+	
+	<toolitem name="ToolsArrow" verb=""/>
+
+	<separator/>
+
+	<toolitem name="ToolsText" verb=""/>
+	<toolitem name="ToolsBox" verb=""/>
+	<toolitem name="ToolsLine" verb=""/>
+	<toolitem name="ToolsEllipse" verb=""/>
+	<toolitem name="ToolsImage" verb=""/>
+	<toolitem name="ToolsBarcode" verb=""/>
+
+	<separator/>
+
+	<toolitem name="ToolsZoomIn" verb=""/>
+	<toolitem name="ToolsZoomOut" verb=""/>
+	<toolitem name="ToolsZoom1to1" verb=""/>
+
+	<separator/>
+
+	<toolitem name="ToolsMergeProperties" verb=""/>
+
+</dockitem>
+
+</Root>
+

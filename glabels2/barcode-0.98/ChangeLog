@@ -1,0 +1,460 @@
+2002-03-01  Alessandro Rubini  <rubini@linux.it>
+
+	* library.c (Barcode_Encode): handle bitsets separately, like
+		in Barcode_Print (otherwise, you might loose NO_CHECKSUM).
+
+	* debian/changelog: moved to 0.98 (but should fix all debian/ stuff)
+
+	* contrib/barcode-for-delphi.tar.gz: new, contributed by Michael Geddes
+
+	* contrib/barcode-for-delphi.tar.gz.README: short info for file above
+
+	* main.c (main): allow "-g" to set size of code in a table as well
+		-- suggested and initiallt implemented by Joachim Reichelt.
+	(main): fixed missing "Page: 1 1" in postscript for tables
+	(main): for tables don't use Encode_and_Print, use a local
+		unrolled version, so the default margin can be removed and
+		we avoid problems with negative xoff in the output phase
+		(first column may be offset, as noted by Karl Magnus Kolstoe)
+
+	* doc/doc.barcode: documented change above.
+	
+	* README: removed refernces to systemy.it, I'm no more there
+	Added link to FreeBSD ports tree and GLabels
+	Organized as sections with titles
+
+	* contrib/barcode-SVG.tar.gz: new contribution, by David J. Humphreys
+
+	* contrib/barcode-SVG.tar.gz.README: short description of file above
+
+	* contrib/grab-0.0.4.tar.gz: new program, by Tuukka Toivonen.
+
+	* contrib/grab-0.0.4.tar.gz.README: short description of file above
+	
+2002-03-01  Boszormenyi Zoltan <zboszor@externet.hu>
+
+	* barcode.spec: new file
+
+2002-02-27  Alessandro Rubini  <rubini@linux.it>
+
+	* bookland/bookland.py: updated to version 0.92 by Judah Milgram
+
+2001-11-13  Alessandro Rubini  <rubini@linux.it>
+
+	* README: Added a pointer to the Windows port.
+
+2001-11-09  Cloyce D. Spradling  <cloyce@headgear.org>
+	
+	* code128.c (Barcode_128b_verify): prototype fix (unsigned char).
+	
+	* ps.c (Barcode_ps_print): the comment for ascii codes must only
+		be printed if ascii is being printed (benign bug).
+
+2001-11-06  Christoph Pross  <c.pross@beck-ipc.com>
+
+	* pcl.c (Barcode_pcl_print): bugfix: bars were misplaced
+	
+2001-10-16  Nathan D. Holmes <nh412124@ursa.cosd.fedex.com>
+
+	====> Version 0.97 released to ftp.systemy.it and ftp.gnu.org
+
+	* code93.c: new file (I modified something as well - Alessandro)
+
+	* doc/doc.barcode (Supported Encodings): added docs for code93
+
+	* main.c: added code93 names
+
+	* Makefile.in (LIBOBJECTS): added code93.o
+
+	* library.c: added code93 entry points
+
+2001-10-16  Alessandro Rubini  <rubini@linux.it>
+
+	* doc/manpager: added (trivial) support for @itemize, added copyright
+
+	* sample.c (main): accept -P to create PCL output
+
+	* doc/doc.barcode (PCL Output): added the section, using text
+	provided by Andrea Scopece and turning it into texinfo.
+	Removed also a few extra newlines that made bad man pages
+
+2001-10-16  Andrea Scopece  <a.scopece@vizzavi.it>
+
+	* barcode.h: added BARCODE_OUT_PCL and BARCODE_OUT_PCL_III
+
+	* library.c (Barcode_Print): use BARCODE_OUT_PCL to select pcl_print()
+
+	* Makefile.in (LIBOBJECTS): added pcl.o
+
+	* pcl.c: new file, with PCL output support
+
+2001-10-16  Alessandro Rubini  <rubini@linux.it>
+
+	* doc/doc.barcode (Supported Encodings): added documentation for
+		EAN and UPC with checksum, as coded by mr. Böszörményi (below)
+
+2001-10-16  Boszormenyi Zoltan <zboszor@externet.hu>
+
+	* ean.c: 
+
+	I found that barcode-0.96 does not correctly encodes UPC-E.
+	This was mainly because in upc_e_to_a() the switch() branches
+	all ended without "break;".
+
+	Printing UPC-E did not print the leading encoding number and
+	the trailing UPC-A checksum. Now it does.
+
+	Accept EAN-13 and EAN-8 with and without the checksum.
+	So always treat 7 and 12 digit sequences as valid EAN codes
+	and accept 8 and 13 digit sequences as valid EAN codes when
+	the last digit is the same as the calculated one.
+
+	Accept UPC-A as above (11 or 12 digit sequences.)
+
+	Accepts UPC-E as:
+	6 digit sequence: the middle part of the code (leading '0' assumed)
+	7 digit sequence: the middle part and either a leading '0' or '1',
+	    or a trailing UPC-A checksum. In that case, leading '0' assumed.
+	8 digit sequence: a leading '0' or '1', middle part, checksum
+
+	UPC-A, UPC-E, EAN-13, and EAN-8 may all include
+	an additional barcode to the right of the main barcode.
+
+	As a 7 or a 12 digit sequence may be ambiguous, please remember
+	that EAN is checked before UPC if you specified BARCODE_ANY.
+
+2001-08-20  Alessandro Rubini  <rubini@linux.it>
+
+	* sample.c (main): added upc-e and ean-8 samples
+
+2001-08-11  Boszormenyi Zoltan <zboszor@externet.hu>
+
+	* ps.c (Barcode_ps_print): don't output "showpage" in EPS mode
+
+2001-08-11  Alessandro Rubini  <rubini@linux.it>
+
+	* README: Changed host names, added barcode-commit list.
+
+2000-11-29  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/doc.barcode (The Field List): 1pt == 0.352mm, not 0.0352
+		(thanks to Stephen Irven for reporting)
+
+2000-11-09  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	====> Version 0.96 released to ftp.systemy.it and ftp.gnu.org
+
+	* doc/Makefile.in ($(TARGET).html): fixed bug introduced on Sep 08
+
+	* doc/doc.barcode (top): correctly deal with "makeinfo --html"
+
+2000-11-08  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* README: new network pointers added
+
+	* codabar.c (Barcode_cbr_encode): don't print ascii text for the
+		checksum.
+
+	* doc/doc.barcode (The Intermediate Representaion): new section
+	Documented the new encodings by Leonid.
+	Promoted two sections to chapters
+	Added Leonid in the AUTHORS section of the manpage.
+
+	* Makefile.in: don't remove docs in distclean, as the distribution
+		now includes the docs
+	
+2000-11-07  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* Makefile.in (clean): don't remove docs, do that only in distclean
+
+	* doc/Makefile.in: a new life for the former Makefile (to build
+		with both gmake and pmake with features added on 2000-09-08)
+
+	* configure.in: use $MAKE in checking for gmake if set
+		(to allow testing with BSD make)
+	Check if makeinfo can manage html, used for doc/Makefile.in
+
+2000-11-07  Leonid A. Broukhis <leob@mailcom.com>
+
+	* code128.c (Barcode_encode_as): fixed a bug that prevented F
+		symbols to be correctly encoded.
+
+	* plessey.c: new file, for Plessey encoding.
+
+	* msi.c: new file, for MSI encoding.
+
+	* codabar.c: new file, for CodaBar encoding.
+
+	* code128.c (Barcode_128raw_encode): new encoding
+	(Barcode_128raw_verify): checker for new encoding
+
+	* barcode.h, library.c, main.c: added code128raw, codabar,
+		MSI and Plessey
+
+2000-11-07  Hans Schou <chlor@schou.dk>
+
+	* contrib/barcodeps-0.1.tgz: new file, sent to Alessandro on Oct 7
+
+2000-10-10  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/manpager: use gsub instead of gensub, even though it may
+		leas to problems with some input. This achieves compatibility
+		with the original awk, so gawk is not needed any more
+
+2000-10-02  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* ps.c (Barcode_ps_print): add a backslash in front of '(' too.
+		Suggested by H Y <hlyi@yahoo.com>.
+	(Barcode_ps_print): use ps arrays to get compact (and prettier)
+		PostScript output. Suggested by Hans Schou <chlor@schou.dk>.
+
+	* main.c (get_geometry): accept "+offset+offset" to keep default size.
+		Suggested by Godmar Back <gback@cs.utah.edu>.
+
+2000-09-16  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* ps.c (Barcode_ps_print): use "half text height" instead of 
+		"two text heights" as minimum bar height. Suggested by
+		Oliver Vecernik <vecernik@aon.at>.
+
+2000-09-14  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* barcode.h: added the standard  ``extern "C"'' stuff for C++
+	(bug reported by Dany Pardo <dani@minerva.enpl.es>)
+
+2000-09-08  Andrea Ferraris  <andrea@gnu.systemy.it>
+
+	* doc/Makefile: added support for pdf and html via makeinfo
+
+	* doc/doc.barcode: added a missing trailing dot in an xref
+
+2000-08-28  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* i25.c (Barcode_i25_encode): fixed checksum calculation
+		(thanks to Hans Schou <chlor@schou.dk> for reporting)
+
+2000-05-19  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	====> Version 0.95.1 released to ftp.prosa.it
+
+	* code128.c (Barcode_128_make_array): use code C if encoding 2 digits
+
+2000-05-08  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* cmdline.c (commandline_errormsg): removed "?:" gcc extension
+
+	* configure.in: added checks for unistd.h and strcasecmp, as
+		windows doesn't have them (thanks Marten Karl)
+
+2000-04-21  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/Makefile: modified to build with both gmake and pmake
+
+	* Makefile: modified to build with both gmake and pmake
+
+2000-04-20  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* Makefile.in (.depend): removed gmake-specific features.
+		Thanks to Jukka A. Ukkonen for reporting.
+
+	* configure.in: detect gmake and avoid its features if not there
+
+	* ps.c (Barcode_ps_print): fix: codes with (relatively) short bars
+		were enlarged in height instead of reduced in width (also
+		the enlarging was wrong). Thanks to Rob Seace for reporting.
+
+2000-04-09  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* code128.c (Barcode_128_encode): removed extra messages to stderr,
+		forgot in the code when I finished code128 support
+
+	* doc/doc.barcode: bugfix: in the description of geometry, the unit
+		of measure is configurable 
+
+2000-02-03  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+====> Version 0.95 released to ftp.prosa.it and ftp.gnu.org
+
+2000-01-26  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* code128.c (Barcode_128_encode): new encoding: full-featured code128
+
+	* README: added reference to original ftp site
+
+2000-01-05  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* main.c (get_page_geometry): avoid using snprintf(), missing in HP/UX
+
+	* code39.c (Barcode_39_verify): added missing parens (a syntax error,
+		but only apparent where islower() is not a macro). Thanks to
+		Alexandre Oliva for finding it out.
+
+2000-01-04  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/doc.barcode (The API): removed spurious "flags" argument
+		from description of Barcode_Encode_and_Print().
+		Thanks to Willy Wittesaele for noting the error.
+
+1999-12-24  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* main.c (get_geometry): fixed the y margin (thanks to Steve Kunath)
+
+====> Version 0.94 released to ftp.prosa.it and ftp.gnu.org
+
+1999-10-24  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* INSTALL: added instructions to install on a Debian GNU/Linux system
+
+	* debian/*: edited information for proper Debian support
+	
+	* debian/rules (binary-arch): new file, from "deb-make"
+
+	* Makefile.in (install): added "-m 0644" to install non-executables
+
+	* code128.c (Barcode_128b_encode): fixed checksum calculation.
+
+====> Version 0.93 released to ftp.prosa.it and ftp.gnu.org
+
+1999-09-26  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/doc.barcode: fixed the rendering of complex options (-g and -t)
+	Removed extra "table of contents" heading in the ps output
+	Changed attribution on cover page
+
+	* main.c (get_table and others): be more specific in error msgs
+	(get_page_geometry): numeric specification is according to "-u"
+	(get_table): accept unsymmetric margin specification
+	(option_table): added "-u" to accept "cm", "mm", "in", "pt"
+	(get_page_geometry): bugfix: numeric spec was always consideder mm
+
+	* cmdline.c (commandline): don't always print help
+
+	* Makefile.in ($(INFO)): added missing dependency: distributed docs
+		formats were out of date with distributed doc source.
+
+1999-09-13  Alessandro Rubini  <rubini@amelia.prosa.it>
+
+	* main.c (main): print tables: y used xmargin (Tim Withers,Jon Bakken)
+
+1999-09-06  Alessandro Rubini  <rubini@plinio.prosa.it>
+
+	* Makefile.in: prevent -Wall when compiling getopt.
+
+	* i25.c, ean.c, ps.c: switched to unsigned char, to prevent warnings
+		on newer gcc's (thanks Al Piszcz)
+
+====> Version 0.92 released to ftp.prosa.it and ftp.gnu.org
+
+1999-08-31  Alessandro Rubini  <rubini@plinio.prosa.it>
+
+	* i25.c: the right guard was thinner than other bars
+
+	* doc/doc.barcode: spelling and manpage fixes (thanks Joachim Schaaf)
+
+====> Version 0.91.4 released to ftp.prosa.it
+
+1999-08-23  Thad Floryan <thad@thadlabs.com>
+
+	* main.c (strerror): replacement strerror selected by autoconf
+
+1999-08-06  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* changed all "ENODATA" in "EINVAL", as some system miss ENODATA
+
+	* Makefile.in (all): removed ".depend" from all, as it needs gcc
+
+	* i25.c (Barcode_i25_encode): fixed wrong free() in an unlinely path
+
+	* ean.c (Barcode_ean_encode): don't use sprintf's result, as some
+	systems return a char pointer instead of the number of chars.
+
+	* configure.in: new file, as autoconf support is being added
+
+====> Version 0.91.3 released to ftp.prosa.it
+
+1999-08-05  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* code128.c (Barcode_128c_encode): fixed malloc of textinfo (was short)
+
+	* i25.c (Barcode_i25_encode): new encoding: interleaved 2 of 5
+
+	* ean.c (Barcode_ean_encode): enlarged static "text", to fit add-5
+
+	* code128.c (Barcode_128b_encode): new encoding: 128-B 
+
+====> Version 0.91.2 released to ftp.prosa.it
+
+1999-08-04  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* bookland/bookland.py: upgraded to version 0.06 (Judas Milgram)
+
+	* ean.c (Barcode_ean_encode): fixed layout of 1st/last digit in UPC-A
+
+	* code128.c (Barcode_128c_encode): fixed checksum calculation
+
+====> Version 0.91.1 released to ftp.prosa.it
+
+1999-07-09  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* sample.c (main): due changes to show code128-C
+
+	* code128.c (Barcode_128c_encode): implemented code 128-C
+
+	* ps.c (Barcode_ps_print): Accept float position and font size
+
+	* code39.c (Barcode_39_encode): reduced font (looked too big)
+
+====> Version 0.91 released to both ftp.prosa.it and ftp.gnu.org
+
+1999-07-08  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* ps.c (Barcode_ps_print): shrink all the bars by 0.15 points
+	(Barcode_ps_print): Use Helvetica as font, not Courier-Bold
+	(Barcode_ps_print): remember previous font to make shorter ps output
+
+1999-07-07  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* bookland/bookland.py: new enntry, by Judah Milgram.
+
+	* ean.c (Barcode_isbn_verify): fixed bug with "-X" codes (thanks Judah)
+
+====> Version 0.90.3 released to ftp.prosa.it/pub/software
+
+1999-07-07  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* doc/doc.barcode: fixed the "BUGS" section (remove fixed stuff)
+
+	* ean.c (Barcode_ean_encode): added '+' markers in partial and textinfo
+
+	* ps.c (Barcode_ps_print): added support for text over bars ('+' mode)
+
+====> Version 0.90.2, internal checkpoint
+
+1999-07-06  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* Makefile: dirty autodetect of libpaper
+
+	* main.c (get_page_geometry): parse a cmdline argument (mcm@glisco.it)
+	(main): added "--version"
+	(main): added diagnostic message for unencodable strings
+
+====> Version 0.90.1 released to ftp.prosa.it/pub/software
+
+1999-07-03  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* barcode.h: removed BARCODE_OUT_PG_* as only the library doesn't
+	need to hack with the page size.
+
+	* ean.c (Barcode_ean_encode): supplemental 2 and 5 encodings (no text)
+
+	* library.c: use unsigned char all over the place, to prevent warnings
+
+1999-07-01  Alessandro Rubini  <rubini@morgana.systemy.it>
+
+	* ean.c: added EAN-8 and UPC-E support
+
+	* Updated the address of the FSF in any source file 
+
+	* README: new file. 
+
+====> Version 0.90 is the first public release. No Changelog up to now.

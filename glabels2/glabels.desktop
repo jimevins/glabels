@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gLabels
+Name[ja]=gLabels
+Comment=Create Labels & Business Cards
+Comment[ja]=ラベルとビジネスカードの作成プログラム
+Exec=glabels
+Icon=glabels/glabels-icon.png
+Terminal=0
+Type=Application
