@@ -1023,8 +1023,8 @@ canvas_event_arrow_mode (GnomeCanvas * canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 
 			gnome_canvas_item_set (item,
 					       "x1", MIN (x, x0),

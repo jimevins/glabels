@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include <unistd.h>
+#include <stdlib.h>
 #include <gnome.h>
 #include <libgnomeprint/gnome-printer.h>
 
@@ -82,6 +84,7 @@ main (int argc,
 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain (PACKAGE);
 
+	setlocale (LC_ALL, "");
 	gtk_type_init ();
 
 	/* argument parsing */
@@ -138,6 +141,7 @@ main (int argc,
 		}
 	}
 	if ( master != NULL ) {
+		unlink (output);
 		gnome_print_master_print (master);
 	}
 

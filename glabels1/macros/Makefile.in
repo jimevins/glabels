@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -93,9 +93,9 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
+MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
-MSGFMT = @MSGFMT@
 ORBIT_CFLAGS = @ORBIT_CFLAGS@
 ORBIT_CONFIG = @ORBIT_CONFIG@
 ORBIT_IDL = @ORBIT_IDL@
@@ -114,15 +114,37 @@ cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 l = @l@
 
-MACROS =    aclocal-include.m4				  compiler-flags.m4				  curses.m4					  gnome-bonobo-check.m4				  gnome-fileutils.m4				  gnome-gettext.m4				  gnome-ghttp-check.m4				  gnome-gnorba-check.m4				  gnome-guile-checks.m4				  gnome-libgtop-check.m4			  gnome-objc-checks.m4				  gnome-orbit-check.m4				  gnome-print-check.m4				  gnome-pthread-check.m4			  gnome-support.m4				  gnome-undelfs.m4				  gnome-vfs.m4					  gnome-x-checks.m4				  gnome-xml-check.m4				  gnome.m4					  linger.m4					  need-declaration.m4
+MACROS = \
+  aclocal-include.m4				\
+  compiler-flags.m4				\
+  curses.m4					\
+  gnome-bonobo-check.m4				\
+  gnome-fileutils.m4				\
+  gnome-gettext.m4				\
+  gnome-ghttp-check.m4				\
+  gnome-gnorba-check.m4				\
+  gnome-guile-checks.m4				\
+  gnome-libgtop-check.m4			\
+  gnome-objc-checks.m4				\
+  gnome-orbit-check.m4				\
+  gnome-print-check.m4				\
+  gnome-pthread-check.m4			\
+  gnome-support.m4				\
+  gnome-undelfs.m4				\
+  gnome-vfs.m4					\
+  gnome-x-checks.m4				\
+  gnome-xml-check.m4				\
+  gnome.m4					\
+  linger.m4					\
+  need-declaration.m4
 
 
 EXTRA_DIST = $(MACROS) gnome-common.m4 autogen.sh
 MAINTAINERCLEANFILES = macros.dep
 
-@INSIDE_GNOME_COMMON_TRUE@gnome_aclocaldir = $(datadir)/aclocal/gnome
+@INSIDE_GNOME_COMMON_TRUE@gnome_aclocaldir = @INSIDE_GNOME_COMMON_TRUE@$(datadir)/aclocal/gnome
 
-@INSIDE_GNOME_COMMON_TRUE@gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 autogen.sh
+@INSIDE_GNOME_COMMON_TRUE@gnome_aclocal_DATA = @INSIDE_GNOME_COMMON_TRUE@$(MACROS) gnome-macros.dep gnome-common.m4 autogen.sh
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -137,7 +159,7 @@ TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps macros/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
@@ -245,8 +267,8 @@ installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
-macros.dep: Makefile.am
-	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=macros/%)' > $@
+@MAINT@macros.dep: Makefile.am
+@MAINT@	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=macros/%)' > $@
 
 @INSIDE_GNOME_COMMON_TRUE@gnome-macros.dep: Makefile.am
 @INSIDE_GNOME_COMMON_TRUE@	@echo '$$(top_srcdir)/aclocal.m4: $(MACROS:%=$(gnome_aclocaldir)/%)' > $@

@@ -91,7 +91,7 @@ gl_merge_init (void)
 	func[i].get_record = gl_merge_text_get_record;
 	func[i].get_raw_record = gl_merge_text_get_raw_record;
 	type_text[i].short_text = "Text/Comma";
-	type_text[i].long_text = _("Text with comma separators");
+	type_text[i].long_text = _("Text with comma separators (CSV)");
 
 	i = GL_MERGE_TEXT_COLON;
 	func[i].open = gl_merge_text_open;
