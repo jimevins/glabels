@@ -1,3 +1,10 @@
+2004-07-05  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-fill-page.c: (gl_object_editor_set_fill_color):
+	* src/object-editor-line-page.c: (gl_object_editor_set_line_color):
+		Preserve "is_default" of fill and line color_combos when creating from
+		existing objects.
+
 2004-07-02  Jim Evins  <evins@snaught.com>
 
 	* data/glabels.1:

@@ -98,9 +98,18 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 					 gl_object_editor_changed_cb,
 					 editor);
 
-	gdk_color = gl_color_to_gdk_color (color);
-	color_combo_set_color (COLOR_COMBO(editor->priv->fill_color_combo), gdk_color);
-	g_free (gdk_color);
+	if ( color == GL_COLOR_NONE ) {
+
+		color_combo_set_color_to_default (COLOR_COMBO(editor->priv->fill_color_combo));
+
+	} else {
+
+		gdk_color = gl_color_to_gdk_color (color);
+		color_combo_set_color (COLOR_COMBO(editor->priv->fill_color_combo),
+				       gdk_color);
+		g_free (gdk_color);
+
+	}
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->fill_color_combo),
 					   gl_object_editor_changed_cb,
