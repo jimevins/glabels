@@ -3,7 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "2.0">
-  <!ENTITY manrevision "1.93.2">
+  <!ENTITY manrevision "2.0">
   <!ENTITY date "December 2003">
   <!ENTITY app "<application>gLabels</application>">
   <!-- Information about the entities
@@ -1391,9 +1391,17 @@
               </entry>
 	    </row>
 	    <row valign="top">
-	      <entry><para>waste</para></entry>
+	      <entry><para>x_waste</para></entry>
 	      <entry>
-                <para>Amount of waste (over-print) to allow.  This is useful
+                <para>Amount of horizontal waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>y_waste</para></entry>
+	      <entry>
+                <para>Amount of vertical waste (over-print) to allow.  This is useful
                   for minimizing alignment problems when using non-white
                   backgrounds (e.g. images).</para>
               </entry>

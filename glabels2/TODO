@@ -1,42 +1,24 @@
 
 Development plan
 ----------------
-This development plan sets a specific set of milestones for future
-versions of glabels.  Although subject to change, milestones leading
-to version 2.0 are fairly well defined.
+This development plan sets a specific set of milestones for future versions of glabels.
+At this time (just prior to releasing 2.0.0) these milestones are somewhat nebulous and
+subject to change.
 
 
-Goals for 1.90:
+Goals for 2.0.x:
 
-		-  port all current features/capabilities to the GNOME 2.0
-		   platform [Completed]
+		-  Bugfixes
 
-		-  clean up the architecture, and create a bonobo shell.
-                   [Completed]
+		-  Translations
 
 
-Goals for 2.0:
+Possible Goals for 2.1.x (next development branch):
 
-		-  Clean up label and template formats.
-		   (See data/glabels-2.0.dtd) [Completed]
+		-  Undo, Redo capability (possibly backport to 2.0.x)
 
-		-  A Properties toolbar.  This will let the user change
-		   certain properties (font, colors, and line widths) of
-		   selected objects en-masse. [Completed]
-
-		-  A docked property dialog.  Instead of popping up individual
-		   property dialogs, a single dialog will be docked in the
-		   main window.  This dialog will be automatically displayed
-		   for new objects, so that the user can begin editing
-		   text, selecting images, or entering barcode data.
-		   [Completed]
-
-		-  Migrate to libgnomeprint-2.2. [Completed]
-
-
-Goals for beyond 2.0:
-
-		-  Editing text in-place.
+		-  Editing text in-place (may not be all that necessary with the new
+		   object editor sidebar.
 
 		-  Make text items rich.  I.e. allow multiple characteristics
 		   to exist within a single object.
@@ -48,40 +30,27 @@ Goals for beyond 2.0:
 		   overlays photographs, so that it stands out against
 		   varying backgrounds.
 
-		-  Undo, Redo capability
+		-  Possible technology upgrades:
 
-		-  Create a druid for creating new label templates.
-		   As part of the druid allow test sheets to be printed
-		   and the new labels e-mailed to me (at the user's request).
-		   Include a mini-preview, as the label is constructed.
+			o Pango.  This is a must to support rich text items.
 
-		-  Along those same lines, create a druid to download new
-		   templates from a central repository, much like in GBonds.
+			o Cairo-based canvas.  Either someone elses or home-grown.
 
-		-  Allow multiple label styles per template. For instance
-		   a sheet may contain a CD label, and cover label.  This
-		   may cause problems for document merges -- labels could be
-		   considered grouped for document merges when their numbers
-		   match or they could have document merge applied to them
-		   independently but in parallel.  Arrange in a tabbed
-		   notebook, or as multiple canvases arranged in view?
-
-		-  support for the import of vector graphics formats such
-		   as EPS or SVG.
+			o Cairo print rendering.
 
 
+		-  Ability to select/unselect individual records during a merge-print.
 
-Odds and ends WISHLIST for future versions:	
+		-  Add additional "merge" backends.  Candidates include:
+			vCard
+			generic XML
+			freedb (CDDB) for CD labels
+			gnome-db
 
-	- Ability to select/unselect individual records during a merge-print.
+		-  Add facility for tweaking output (origin).  This should really be
+		   part of the underlying print system but is currently difficult to
+		   accomplish, so I may want to add the hack. (candidate to backport
+		   to 2.0.x)
 
-	- Add additional "merge" backends.  Candidates include:
-		vCard
-		generic XML
-		freedb (CDDB) for CD labels
-
-	- Add facility for tweaking output (origin).  This should really be
-	  part of the underlying print system but is currently difficult to
-	  accomplish, so I may want to add the hack.
 
 

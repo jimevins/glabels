@@ -1,5 +1,13 @@
 2004-08-09  Jim Evins  <evins@snaught.com>
 
+	* NEWS:
+	* TODO:
+	* help/C/glabels-C.omf:
+	* help/C/glabels.xml:
+		Brought documentation up-to-date for 2.0.0 release.
+	
+2004-08-09  Jim Evins  <evins@snaught.com>
+
 	These are hopefully the final preparations for 2.0.0.
 
 	* data/mime/Makefile.am:

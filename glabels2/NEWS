@@ -1,0 +1,14 @@
+
+* gLabels 2.0.0 release.  Release date 2004-08-09.
+
+- Fixed crash when encountering old template files
+- Align grid to label center for DVD/CD and round labels
+- Don't touch compression of original file
+- 64-bit fixes
+- Added man page
+- Fixed missing outline problem experienced with some printers
+- Added separate horizontal and vertical waste properties for rectangular templates
+- Added option to auto-shrink text during document merge
+- Fixed memory leaks
+- Added format attibute to barcode objects, to allow correct layout of merged labels
+
