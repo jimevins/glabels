@@ -230,7 +230,7 @@
   <!-- =================================================================== -->
   <Template name="Avery 5931" size="US-Letter"
          _description="CD/DVD Labels (face only)">
-    <Label-cd id="0" radius="166.5" hole="58.5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Markup-line x1="0" y1="166.5" x2="108" y2="166.5"/>
       <Markup-line x1="225" y1="166.5" x2="333" y2="166.5"/>
