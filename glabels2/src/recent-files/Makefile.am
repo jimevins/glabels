@@ -6,16 +6,6 @@ INCLUDES = \
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
 
-headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit/recent-files
-header_DATA =				\
-        egg-recent-model.h		\
-        egg-recent-item.h		\
-        egg-recent-view.h		\
-        egg-recent-view-bonobo.h	\
-        egg-recent-view-gtk.h		\
-	egg-recent-vfs-utils.h		\
-	egg-recent-util.h
-
 EGG_FILES =				\
         egg-recent-model.c		\
         egg-recent-item.c		\
@@ -24,7 +14,13 @@ EGG_FILES =				\
         egg-recent-view-gtk.c		\
 	egg-recent-vfs-utils.c		\
         egg-recent-util.c		\
-	$(header_DATA)
+        egg-recent-model.h		\
+        egg-recent-item.h		\
+        egg-recent-view.h		\
+        egg-recent-view-bonobo.h	\
+        egg-recent-view-gtk.h		\
+	egg-recent-vfs-utils.h		\
+	egg-recent-util.h
 
 noinst_LTLIBRARIES = librecent.la
 
