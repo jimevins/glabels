@@ -128,7 +128,7 @@ gl_object_editor_init (glObjectEditor *editor)
 	
 	editor->priv = g_new0 (glObjectEditorPrivate, 1);
 
-	editor->priv->gui = glade_xml_new ("object-editor.glade",
+	editor->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "object-editor.glade",
 					   "editor_vbox",
 					   NULL);
 

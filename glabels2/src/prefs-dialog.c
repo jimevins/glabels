@@ -157,7 +157,7 @@ gl_prefs_dialog_init (glPrefsDialog *dlg)
 
 	dlg->priv = g_new0 (glPrefsDialogPrivate, 1);
 
-	dlg->priv->gui = glade_xml_new ("prefs-dialog.glade",
+	dlg->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "prefs-dialog.glade",
 					"prefs_notebook",
 					NULL);
 

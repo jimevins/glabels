@@ -5,23 +5,25 @@ SUBDIRS= pixmaps stock-pixmaps mygal recent-files
 bin_PROGRAMS = glabels glabels-batch
 
 uidir = $(datadir)/glabels/ui/
+gladedir = $(datadir)/glabels/glade/
 
 
 INCLUDES = \
-	-I$(top_srcdir) 				\
-	-I$(top_builddir) 				\
-	$(GLABELS_CFLAGS) 				\
-	-I$(LIB_BARCODE_DIR)				\
-	-DPREFIX=\""$(prefix)"\"                        \
-	-DSYSCONFDIR=\""$(sysconfdir)"\"                \
-	-DDATADIR=\""$(datadir)"\"                      \
-	-DLIBDIR=\""$(libdir)"\"                        \
-	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 	\
-	-DG_DISABLE_DEPRECATED				\
-	-DGDK_DISABLE_DEPRECATED			\
-	-DGTK_DISABLE_DEPRECATED			\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-I$(top_srcdir) 					\
+	-I$(top_builddir) 					\
+	$(GLABELS_CFLAGS) 					\
+	-I$(LIB_BARCODE_DIR)					\
+	-DPREFIX=\""$(prefix)"\"                        	\
+	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\
+	-DDATADIR=\""$(datadir)"\"                      	\
+	-DLIBDIR=\""$(libdir)"\"                        	\
+	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
+	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 		\
+	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
+	-DG_DISABLE_DEPRECATED					\
+	-DGDK_DISABLE_DEPRECATED				\
+	-DGTK_DISABLE_DEPRECATED				\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
 
 glabels_LDFLAGS = -export-dynamic
@@ -96,25 +98,15 @@ glabels_SOURCES = 			\
 	object-editor.h			\
 	object-editor-private.h		\
 	object-editor-position-page.c	\
-	object-editor-position-page.h	\
 	object-editor-size-page.c	\
-	object-editor-size-page.h	\
 	object-editor-lsize-page.c	\
-	object-editor-lsize-page.h	\
 	object-editor-line-page.c	\
-	object-editor-line-page.h	\
 	object-editor-fill-page.c	\
-	object-editor-fill-page.h	\
 	object-editor-image-page.c	\
-	object-editor-image-page.h	\
 	object-editor-text-page.c	\
-	object-editor-text-page.h	\
 	object-editor-edit-page.c	\
-	object-editor-edit-page.h	\
 	object-editor-bc-page.c		\
-	object-editor-bc-page.h		\
 	object-editor-data-page.c	\
-	object-editor-data-page.h	\
 	print.c				\
 	print.h				\
 	print-dialog.c			\
@@ -260,10 +252,16 @@ marshal.c: marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gl_marshal >> $@
 
-ui_DATA = glabels-ui.xml
+ui_DATA = \
+	glabels-ui.xml
+
+glade_DATA = \
+	object-editor.glade		\
+	prefs-dialog.glade
 
 EXTRA_DIST = \
 	$(ui_DATA)			\
+	$(glade_DATA)			\
 	marshal.list			
 
 CLEANFILES = $(BUILT_SOURCES)
