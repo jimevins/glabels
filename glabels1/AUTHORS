@@ -11,7 +11,7 @@ screen new in 0.4.3.
 
 Alessandro Rubini <rubini@gnu.org> -- Author of the GNU Barcode Library.
 This library provides a large chunk of the barcode functionality and is
-distributed with glabels.  See ./barcode-0.96/README for more information.
+distributed with glabels.  See ./barcode-0.98/README for more information.
 
 Olivier Berger <oberger@april.org> -- French translations
 Marcus Bauer <m@7n7.de> -- German translations

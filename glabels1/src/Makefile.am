@@ -1,4 +1,4 @@
-LIB_BARCODE_DIR = ../barcode-0.96
+LIB_BARCODE_DIR = ../barcode-0.98
 
 SUBDIRS = pixmaps
 

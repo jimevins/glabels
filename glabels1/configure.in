@@ -103,7 +103,7 @@ fi
 dnl ****************************************
 dnl * Configure barcode library
 dnl ****************************************
-AC_CONFIG_SUBDIRS(barcode-0.96)
+AC_CONFIG_SUBDIRS(barcode-0.98)
 
 
 
