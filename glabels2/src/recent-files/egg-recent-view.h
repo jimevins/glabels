@@ -7,6 +7,8 @@
 #include "egg-recent-model.h"
 #include "egg-recent-item.h"
 
+G_BEGIN_DECLS
+
 #define EGG_TYPE_RECENT_VIEW             (egg_recent_view_get_type ())
 #define EGG_RECENT_VIEW(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), EGG_TYPE_RECENT_VIEW, EggRecentView))
 #define EGG_RECENT_VIEW_CLASS(vtable)    (G_TYPE_CHECK_CLASS_CAST ((vtable), EGG_TYPE_RECENT_VIEW, EggRecentViewClass))
@@ -36,5 +38,6 @@ EggRecentModel *egg_recent_view_get_model	(EggRecentView *view);
 void	egg_recent_view_set_model		(EggRecentView *view,
 						 EggRecentModel *model);
 
+G_END_DECLS
 
 #endif /* __EGG_RECENT_VIEW_H__ */

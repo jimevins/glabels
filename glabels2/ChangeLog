@@ -1,5 +1,10 @@
 2004-08-07  Jim Evins  <evins@snaught.com>
 
+	* src/recent-files/*:
+		Re-synced to latest libegg/recent-files.
+	
+2004-08-07  Jim Evins  <evins@snaught.com>
+
 	* Makefile.am:
 	* configure.in:
 	* help/*

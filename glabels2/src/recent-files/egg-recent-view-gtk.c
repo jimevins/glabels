@@ -188,10 +188,6 @@ egg_recent_view_gtk_new_menu_item (EggRecentViewGtk *view,
 {
 	GtkWidget *menu_item;
 	EggRecentViewGtkMenuData *md=(EggRecentViewGtkMenuData *)g_malloc (sizeof (EggRecentViewGtkMenuData));
-	gchar *text;
-	gchar *basename;
-	gchar *escaped;
-	gchar *uri;
 
 	g_return_val_if_fail (view, NULL);
 
@@ -199,15 +195,13 @@ egg_recent_view_gtk_new_menu_item (EggRecentViewGtk *view,
 		gchar *mime_type;
 		GtkWidget *image;
 		GdkPixbuf *pixbuf;
+		gchar *text;
+		gchar *short_name;
+		gchar *escaped;
 
-		uri = egg_recent_item_get_uri_for_display (item);
-		if (uri == NULL)
-			return NULL;
-		
-		basename = g_path_get_basename (uri);
-		escaped = egg_recent_util_escape_underlines (basename);
-		g_free (basename);
-		g_free (uri);
+		short_name = egg_recent_item_get_short_name (item);
+		escaped = egg_recent_util_escape_underlines (short_name);
+		g_free (short_name);
 
 		if (view->show_numbers) {
 			/* avoid having conflicting mnemonics */
@@ -227,15 +221,18 @@ egg_recent_view_gtk_new_menu_item (EggRecentViewGtk *view,
 #ifndef USE_STABLE_LIBGNOMEUI
 		{
 			int width, height;
+			gchar *uri;
 
 			gtk_icon_size_lookup_for_settings
 					(gtk_widget_get_settings (view->menu),
 					 view->icon_size,
 					 &width, &height);
 
+			uri = egg_recent_item_get_uri (item);
 			pixbuf = egg_recent_util_get_icon (view->theme, uri,
 							   mime_type,
 							   height);
+			g_free (uri);
 		}
 #else
 		pixbuf = NULL;
