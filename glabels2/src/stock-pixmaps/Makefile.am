@@ -16,6 +16,12 @@ IMAGES = 	 			\
 	stock_merge_16.png 		\
 	stock_text_24.png		\
 	stock_text_16.png		\
+	stock_order_top_16.png		\
+	stock_order_bottom_16.png	\
+	stock_rotate_left_16.png	\
+	stock_rotate_right_16.png	\
+	stock_flip_horiz_16.png		\
+	stock_flip_vert_16.png		\
 	stock_align_left_16.png		\
 	stock_align_right_16.png	\
 	stock_align_hcenter_16.png	\
@@ -40,6 +46,12 @@ VARIABLES1 = \
 		stock_merge_16 		$(srcdir)/stock_merge_16.png	\
 		stock_text_24  		$(srcdir)/stock_text_24.png     \
 		stock_text_16  		$(srcdir)/stock_text_16.png	\
+		stock_order_top_16	$(srcdir)/stock_order_top_16.png \
+		stock_order_bottom_16	$(srcdir)/stock_order_bottom_16.png \
+		stock_rotate_left_16	$(srcdir)/stock_rotate_left_16.png \
+		stock_rotate_right_16	$(srcdir)/stock_rotate_right_16.png \
+		stock_flip_horiz_16	$(srcdir)/stock_flip_horiz_16.png \
+		stock_flip_vert_16	$(srcdir)/stock_flip_vert_16.png \
 		stock_align_left_16	$(srcdir)/stock_align_left_16.png \
 		stock_align_right_16	$(srcdir)/stock_align_right_16.png \
 		stock_align_hcenter_16	$(srcdir)/stock_align_hcenter_16.png \
