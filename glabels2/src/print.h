@@ -27,27 +27,39 @@
 #include <libgnomeprintui/gnome-print-master-preview.h>
 #include "label.h"
 
-extern void gl_print_simple (GnomePrintMaster * master, glLabel * label,
-			     gint n_sheets, gint first, gint last,
-			     gboolean outline_flag, gboolean reverse_flag);
+G_BEGIN_DECLS
 
-extern void gl_print_merge_collated (GnomePrintMaster * master,
-				     glLabel * label,
-				     GList *record_list,
-				     gint n_copies, gint first,
-				     gboolean outline_flag,
-				     gboolean reverse_flag);
+void gl_print_simple           (GnomePrintMaster *master,
+				glLabel          *label,
+				gint              n_sheets,
+				gint              first,
+				gint              last,
+				gboolean          outline_flag,
+				gboolean          reverse_flag);
 
-extern void gl_print_merge_uncollated (GnomePrintMaster * master,
-				       glLabel * label,
-				       GList *record_list,
-				       gint n_copies, gint first,
-				       gboolean outline_flag,
-				       gboolean reverse_flag);
+void gl_print_merge_collated   (GnomePrintMaster *master,
+				glLabel          *label,
+				GList            *record_list,
+				gint              n_copies,
+				gint              first,
+				gboolean          outline_flag,
+				gboolean          reverse_flag);
 
-extern void gl_print_batch (GnomePrintMaster * master, glLabel * label,
-			    gint n_sheets, gint n_copies,
-			    gboolean outline_flag, gboolean reverse_flag);
+void gl_print_merge_uncollated (GnomePrintMaster *master,
+				glLabel          *label,
+				GList            *record_list,
+				gint              n_copies,
+				gint              first,
+				gboolean          outline_flag,
+				gboolean          reverse_flag);
 
+void gl_print_batch            (GnomePrintMaster *master,
+				glLabel          *label,
+				gint              n_sheets,
+				gint              n_bcopies,
+				gboolean          outline_flag,
+				gboolean          reverse_flag);
+
+G_END_DECLS
 
 #endif

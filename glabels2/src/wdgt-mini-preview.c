@@ -329,7 +329,7 @@ mini_outline_list_new (GnomeCanvas *canvas,
 	GList                 *list = NULL;
 	gint                   i, n_labels;
 	glTemplateOrigin      *origins;
-	gdouble                x1, y1, x2, y2, y_temp, w, h;
+	gdouble                x1, y1, x2, y2, w, h;
 	const GnomePrintPaper *paper = NULL;
 	gdouble                paper_height;
 
@@ -351,12 +351,6 @@ mini_outline_list_new (GnomeCanvas *canvas,
 		y1 = origins[i].y;
 		x2 = x1 + w;
 		y2 = y1 + h;
-
-		/* transform origin from lower left to upper left */
-		/* and swap y's so that (y1 < y2) */
-		y_temp = y2;
-		y2 = paper_height - y1;
-		y1 = paper_height - y_temp;
 
 		switch (template->label.style) {
 		case GL_TEMPLATE_STYLE_RECT:

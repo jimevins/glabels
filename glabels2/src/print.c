@@ -44,9 +44,10 @@
 
 #define GL_PRINT_DEFAULT_PAPER "US Letter"
 
-/*===========================================*/
-/* Private types.                            */
-/*===========================================*/
+/*=========================================================================*/
+/* Private types.                                                          */
+/*=========================================================================*/
+
 typedef struct _PrintInfo {
 	/* gnome print context */
 	GnomePrintContext *pc;
@@ -58,58 +59,103 @@ typedef struct _PrintInfo {
 	glTemplate *template;
 	gboolean label_rotate_flag;
 
+	/* page size */
+	gdouble page_width;
+	gdouble page_height;
+
+	/* page counter */
+	gint sheet;
 } PrintInfo;
 
-/*===========================================*/
-/* Private function prototypes.              */
-/*===========================================*/
-static PrintInfo *print_info_new (GnomePrintMaster * master, glLabel * label);
-static void print_info_free (PrintInfo ** pi);
 
-static void print_label (PrintInfo * pi, glLabel * label, gdouble x, gdouble y,
-			 glMergeRecord * record, gboolean outline_flag,
-			 gboolean reverse_flag);
+/*=========================================================================*/
+/* Private function prototypes.                                            */
+/*=========================================================================*/
+static PrintInfo *print_info_new              (GnomePrintMaster *master,
+					       glLabel          *label);
 
-static void draw_label (PrintInfo * pi, glLabel * label,
-			glMergeRecord * record);
+static void       print_info_free             (PrintInfo       **pi);
 
-static void draw_text_object (PrintInfo * pi, glLabelText * object,
-			      glMergeRecord * record);
-static void draw_box_object (PrintInfo * pi, glLabelBox * object);
-static void draw_line_object (PrintInfo * pi, glLabelLine * object);
-static void draw_ellipse_object (PrintInfo * pi, glLabelEllipse * object);
-static void draw_image_object (PrintInfo * pi, glLabelImage * object);
-static void draw_barcode_object (PrintInfo * pi, glLabelBarcode * object,
-				 glMergeRecord * record);
 
-static void draw_outline (PrintInfo * pi, glLabel * label);
-static void clip_to_outline (PrintInfo * pi, glLabel * label);
+static void       print_page_begin            (PrintInfo        *pi);
 
-static void create_rectangle_path (GnomePrintContext * pc,
-				   gdouble x0, gdouble y0,
-				   gdouble w, gdouble h);
-static void create_ellipse_path (GnomePrintContext * pc,
-				 gdouble x0, gdouble y0,
-				 gdouble rx, gdouble ry);
-static void create_rounded_rectangle_path (GnomePrintContext * pc,
-					   gdouble x0, gdouble y0,
-					   gdouble w, gdouble h, gdouble r);
+static void       print_page_end              (PrintInfo        *pi);
+
+static void       print_label                 (PrintInfo        *pi,
+					       glLabel          *label,
+					       gdouble           x,
+					       gdouble           y,
+					       glMergeRecord    *record,
+					       gboolean          outline_flag,
+					       gboolean          reverse_flag);
+
+
+static void       draw_label                  (PrintInfo        *pi,
+					       glLabel          *label,
+					       glMergeRecord    *record);
+
+
+static void       draw_text_object            (PrintInfo        *pi,
+					       glLabelText      *object,
+					       glMergeRecord    *record);
+
+static void       draw_box_object             (PrintInfo        *pi,
+					       glLabelBox       *object);
+
+static void       draw_line_object            (PrintInfo        *pi,
+					       glLabelLine      *object);
+
+static void       draw_ellipse_object         (PrintInfo        *pi,
+					       glLabelEllipse   *object);
+
+static void       draw_image_object           (PrintInfo        *pi,
+					       glLabelImage     *object);
+
+static void       draw_barcode_object         (PrintInfo        *pi,
+					       glLabelBarcode   *object,
+					       glMergeRecord    *record);
+
+
+static void       draw_outline                (PrintInfo        *pi,
+					       glLabel          *label);
+
+static void       clip_to_outline             (PrintInfo        *pi,
+					       glLabel          *label);
+
+
+static void       create_rectangle_path         (GnomePrintContext *pc,
+						 gdouble            x0,
+						 gdouble            y0,
+						 gdouble            w,
+						 gdouble            h);
+
+static void       create_ellipse_path           (GnomePrintContext *pc,
+						 gdouble            x0,
+						 gdouble            y0,
+						 gdouble            rx,
+						 gdouble            ry);
+
+static void       create_rounded_rectangle_path (GnomePrintContext *pc,
+						 gdouble            x0,
+						 gdouble            y0,
+						 gdouble            w,
+						 gdouble            h,
+						 gdouble            r);
 
 /*****************************************************************************/
 /* Simple (no merge data) print command.                                     */
 /*****************************************************************************/
 void
-gl_print_simple (GnomePrintMaster * master,
-		 glLabel * label,
-		 gint n_sheets,
-		 gint first,
-		 gint last,
-		 gboolean outline_flag,
-		 gboolean reverse_flag)
+gl_print_simple (GnomePrintMaster *master,
+		 glLabel          *label,
+		 gint              n_sheets,
+		 gint              first,
+		 gint              last,
+		 gboolean          outline_flag,
+		 gboolean          reverse_flag)
 {
 	PrintInfo *pi;
 	gint i_sheet, i_label;
-	gchar *page_str = NULL;
 	glTemplateOrigin *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -120,9 +166,7 @@ gl_print_simple (GnomePrintMaster * master,
 
 	for (i_sheet = 0; i_sheet < n_sheets; i_sheet++) {
 
-		page_str = g_strdup_printf ("sheet %d", i_sheet + 1);
-		gnome_print_beginpage (pi->pc, page_str);
-		g_free (page_str);
+		print_page_begin (pi);
 
 		for (i_label = first - 1; i_label < last; i_label++) {
 
@@ -132,7 +176,7 @@ gl_print_simple (GnomePrintMaster * master,
 
 		}
 
-		gnome_print_showpage (pi->pc);
+		print_page_end (pi);
 	}
 
 	g_free (origins);
@@ -146,17 +190,16 @@ gl_print_simple (GnomePrintMaster * master,
 /* Merge print command (collated copies)                                     */
 /*****************************************************************************/
 void
-gl_print_merge_collated (GnomePrintMaster * master,
-			 glLabel * label,
-			 GList * record_list,
-			 gint n_copies,
-			 gint first,
-			 gboolean outline_flag,
-			 gboolean reverse_flag)
+gl_print_merge_collated (GnomePrintMaster *master,
+			 glLabel          *label,
+			 GList            *record_list,
+			 gint              n_copies,
+			 gint              first,
+			 gboolean          outline_flag,
+			 gboolean          reverse_flag)
 {
 	PrintInfo *pi;
 	gint i_sheet, i_label, n_labels_per_page, i_copy;
-	gchar *str = NULL;
 	glMergeRecord *record;
 	GList *p;
 	glTemplateOrigin *origins;
@@ -178,10 +221,7 @@ gl_print_merge_collated (GnomePrintMaster * master,
 			for (i_copy = 0; i_copy < n_copies; i_copy++) {
 
 				if ((i_label == 0) || (i_sheet == 0)) {
-					str = g_strdup_printf ("sheet %d",
-							       ++i_sheet);
-					gnome_print_beginpage (pi->pc, str);
-					g_free (str);
+					print_page_begin (pi);
 				}
 
 				print_label (pi, label,
@@ -192,14 +232,14 @@ gl_print_merge_collated (GnomePrintMaster * master,
 
 				i_label = (i_label + 1) % n_labels_per_page;
 				if (i_label == 0) {
-					gnome_print_showpage (pi->pc);
+					print_page_end (pi);
 				}
 			}
 		}
 	}
 
 	if (i_label != 0) {
-		gnome_print_showpage (pi->pc);
+		print_page_end (pi);
 	}
 
 	g_free (origins);
@@ -213,17 +253,16 @@ gl_print_merge_collated (GnomePrintMaster * master,
 /* Merge print command (uncollated copies)                                   */
 /*****************************************************************************/
 void
-gl_print_merge_uncollated (GnomePrintMaster * master,
-			   glLabel * label,
-			   GList * record_list,
-			   gint n_copies,
-			   gint first,
-			   gboolean outline_flag,
-			   gboolean reverse_flag)
+gl_print_merge_uncollated (GnomePrintMaster *master,
+			   glLabel          *label,
+			   GList            *record_list,
+			   gint              n_copies,
+			   gint              first,
+			   gboolean          outline_flag,
+			   gboolean          reverse_flag)
 {
 	PrintInfo *pi;
 	gint i_sheet, i_label, n_labels_per_page, i_copy;
-	gchar *str = NULL;
 	glMergeRecord *record;
 	GList *p;
 	glTemplateOrigin *origins;
@@ -247,10 +286,7 @@ gl_print_merge_uncollated (GnomePrintMaster * master,
 
 
 				if ((i_label == 0) || (i_sheet == 0)) {
-					str = g_strdup_printf ("sheet %d",
-							       ++i_sheet);
-					gnome_print_beginpage (pi->pc, str);
-					g_free (str);
+					print_page_begin (pi);
 				}
 
 				print_label (pi, label,
@@ -261,14 +297,14 @@ gl_print_merge_uncollated (GnomePrintMaster * master,
 
 				i_label = (i_label + 1) % n_labels_per_page;
 				if (i_label == 0) {
-					gnome_print_showpage (pi->pc);
+					print_page_end (pi);
 				}
 			}
 		}
 
 	}
 	if (i_label != 0) {
-		gnome_print_showpage (pi->pc);
+		print_page_end (pi);
 	}
 
 	g_free (origins);
@@ -282,9 +318,12 @@ gl_print_merge_uncollated (GnomePrintMaster * master,
 /* Batch print.  Call appropriate function above.                            */
 /*****************************************************************************/
 void
-gl_print_batch (GnomePrintMaster * master, glLabel * label,
-		gint n_sheets, gint n_copies,
-		gboolean outline_flag, gboolean reverse_flag)
+gl_print_batch (GnomePrintMaster *master,
+		glLabel          *label,
+		gint              n_sheets,
+		gint              n_copies,
+		gboolean          outline_flag,
+		gboolean          reverse_flag)
 {
 	gint n_per_page;
 	GList *record_list = NULL;
@@ -320,11 +359,12 @@ gl_print_batch (GnomePrintMaster * master, glLabel * label,
 /* PRIVATE.  new print info structure                                        */
 /*---------------------------------------------------------------------------*/
 static PrintInfo *
-print_info_new (GnomePrintMaster * master,
-		glLabel * label)
+print_info_new (GnomePrintMaster *master,
+		glLabel          *label)
 {
 	PrintInfo *pi = g_new0 (PrintInfo, 1);
 	glTemplate *template;
+	const GnomePrintPaper *paper = NULL;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -339,7 +379,6 @@ print_info_new (GnomePrintMaster * master,
 	pi->config = gnome_print_master_get_config (master);
 
 	if ((template != NULL) && (template->page_size != NULL)) {
-		const GnomePrintPaper *paper = NULL;
 
 		gl_debug (DEBUG_PRINT,
 			  "setting page size = \"%s\"", template->page_size);
@@ -364,13 +403,19 @@ print_info_new (GnomePrintMaster * master,
 					       paper->height,
 					       GNOME_PRINT_PS_UNIT);
 	} else {
+		g_warning ("Cannot determine correct page size.");
+		paper = gnome_print_paper_get_by_name (GL_PRINT_DEFAULT_PAPER);
 		gnome_print_config_set (pi->config,
 					GNOME_PRINT_KEY_PAPER_SIZE,
 					GL_PRINT_DEFAULT_PAPER);
 	}
+	pi->page_width = paper->width;
+	pi->page_height = paper->height;
 
 	pi->template = template;
 	pi->label_rotate_flag = gl_label_get_rotate_flag (label);
+
+	pi->sheet = 0;
 
 	gl_debug (DEBUG_PRINT, "END");
 
@@ -381,7 +426,7 @@ print_info_new (GnomePrintMaster * master,
 /* PRIVATE.  free print info structure                                       */
 /*---------------------------------------------------------------------------*/
 static void
-print_info_free (PrintInfo ** pi)
+print_info_free (PrintInfo **pi)
 {
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -396,6 +441,34 @@ print_info_free (PrintInfo ** pi)
 }
 
 /*---------------------------------------------------------------------------*/
+/* PRIVATE.  Begin a new page.                                               */
+/*---------------------------------------------------------------------------*/
+static void
+print_page_begin (PrintInfo *pi)
+{
+	gchar *str;
+
+	pi->sheet++;
+
+	str = g_strdup_printf ("sheet%02d", pi->sheet);
+	gnome_print_beginpage (pi->pc, str);
+	g_free (str);
+
+	/* Translate and scale, so that our origin is at the upper left. */
+	gnome_print_translate (pi->pc, 0.0, pi->page_height);
+	gnome_print_scale (pi->pc, 1.0, -1.0);
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  End a page.                                                     */
+/*---------------------------------------------------------------------------*/
+static void
+print_page_end (PrintInfo *pi)
+{
+	gnome_print_showpage (pi->pc);
+}
+
+/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Print i'th label.                                               */
 /*---------------------------------------------------------------------------*/
 static void
@@ -407,7 +480,6 @@ print_label (PrintInfo     *pi,
 	     gboolean       outline_flag,
 	     gboolean       reverse_flag)
 {
-	gdouble a[6];
 	gdouble width, height;
 	glTemplate *template;
 
@@ -425,17 +497,10 @@ print_label (PrintInfo     *pi,
 	if (gl_label_get_rotate_flag (label)) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
 		gnome_print_rotate (pi->pc, 90.0);
-		gnome_print_scale (pi->pc, 1.0, -1.0);
-	} else {
-		gl_debug (DEBUG_PRINT, "Rotate flag NOT set");
-		art_affine_scale (a, 1.0, -1.0);
-		a[5] = height;
-		gnome_print_concat (pi->pc, a);
 	}
 	if ( reverse_flag ) {
 		gnome_print_translate (pi->pc, width, 0.0);
-		art_affine_scale (a, -1.0, 1.0);
-		gnome_print_concat (pi->pc, a);
+		gnome_print_scale (pi->pc, -1.0, 1.0);
 	}
 	if (outline_flag) {
 		draw_outline (pi, label);
@@ -454,9 +519,9 @@ print_label (PrintInfo     *pi,
 /* PRIVATE.  Draw label.                                                     */
 /*---------------------------------------------------------------------------*/
 static void
-draw_label (PrintInfo * pi,
-	    glLabel * label,
-	    glMergeRecord * record)
+draw_label (PrintInfo     *pi,
+	    glLabel       *label,
+	    glMergeRecord *record)
 {
 	GList *p_obj;
 	glLabelObject *object;
@@ -490,9 +555,9 @@ draw_label (PrintInfo * pi,
 /* PRIVATE.  Draw text object.                                               */
 /*---------------------------------------------------------------------------*/
 static void
-draw_text_object (PrintInfo * pi,
-		  glLabelText * object,
-		  glMergeRecord * record)
+draw_text_object (PrintInfo     *pi,
+		  glLabelText   *object,
+		  glMergeRecord *record)
 {
 	GnomeFont *font;
 	gchar **line;
@@ -591,8 +656,8 @@ draw_text_object (PrintInfo * pi,
 /* PRIVATE.  Draw box object.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-draw_box_object (PrintInfo * pi,
-		 glLabelBox * object)
+draw_box_object (PrintInfo  *pi,
+		 glLabelBox *object)
 {
 	gdouble x, y, w, h;
 	gdouble line_width;
@@ -632,8 +697,8 @@ draw_box_object (PrintInfo * pi,
 /* PRIVATE.  Draw line object.                                               */
 /*---------------------------------------------------------------------------*/
 static void
-draw_line_object (PrintInfo * pi,
-		  glLabelLine * object)
+draw_line_object (PrintInfo   *pi,
+		  glLabelLine *object)
 {
 	gdouble x, y, w, h;
 	gdouble line_width;
@@ -663,8 +728,8 @@ draw_line_object (PrintInfo * pi,
 /* PRIVATE.  Draw ellipse object.                                            */
 /*---------------------------------------------------------------------------*/
 static void
-draw_ellipse_object (PrintInfo * pi,
-		     glLabelEllipse * object)
+draw_ellipse_object (PrintInfo      *pi,
+		     glLabelEllipse *object)
 {
 	gdouble x, y, x0, y0, rx, ry, w, h;
 	gdouble line_width;
@@ -709,8 +774,8 @@ draw_ellipse_object (PrintInfo * pi,
 /* PRIVATE.  Draw image object.                                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_image_object (PrintInfo * pi,
-		   glLabelImage * object)
+draw_image_object (PrintInfo    *pi,
+		   glLabelImage *object)
 {
 	gdouble x, y, w, h;
 	const GdkPixbuf *pixbuf;
@@ -752,9 +817,9 @@ draw_image_object (PrintInfo * pi,
 /* PRIVATE.  Draw box object.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-draw_barcode_object (PrintInfo * pi,
-		     glLabelBarcode * object,
-		     glMergeRecord * record)
+draw_barcode_object (PrintInfo      *pi,
+		     glLabelBarcode *object,
+		     glMergeRecord  *record)
 {
 	glBarcode *gbc;
 	glBarcodeLine *line;
@@ -863,8 +928,8 @@ draw_barcode_object (PrintInfo * pi,
 /* PRIVATE.  Draw outline.                                                   */
 /*---------------------------------------------------------------------------*/
 static void
-draw_outline (PrintInfo * pi,
-	      glLabel * label)
+draw_outline (PrintInfo *pi,
+	      glLabel   *label)
 {
 	gdouble w, h, r;
 	gdouble r1, r2;
@@ -925,8 +990,8 @@ draw_outline (PrintInfo * pi,
 /* PRIVATE.  Clip to outline.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-clip_to_outline (PrintInfo * pi,
-		 glLabel * label)
+clip_to_outline (PrintInfo *pi,
+		 glLabel   *label)
 {
 	gdouble w, h, r;
 	gdouble r1;
@@ -978,11 +1043,11 @@ clip_to_outline (PrintInfo * pi,
 /* PRIVATE.  Path creation utilities.                                        */
 /*---------------------------------------------------------------------------*/
 static void
-create_rectangle_path (GnomePrintContext * pc,
-		       gdouble x0,
-		       gdouble y0,
-		       gdouble w,
-		       gdouble h)
+create_rectangle_path (GnomePrintContext *pc,
+		       gdouble            x0,
+		       gdouble            y0,
+		       gdouble            w,
+		       gdouble            h)
 {
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -998,11 +1063,11 @@ create_rectangle_path (GnomePrintContext * pc,
 }
 
 static void
-create_ellipse_path (GnomePrintContext * pc,
-		     gdouble x0,
-		     gdouble y0,
-		     gdouble rx,
-		     gdouble ry)
+create_ellipse_path (GnomePrintContext *pc,
+		     gdouble            x0,
+		     gdouble            y0,
+		     gdouble            rx,
+		     gdouble            ry)
 {
 	gdouble x, y;
 	gint i_theta;
@@ -1022,12 +1087,12 @@ create_ellipse_path (GnomePrintContext * pc,
 }
 
 static void
-create_rounded_rectangle_path (GnomePrintContext * pc,
-			       gdouble x0,
-			       gdouble y0,
-			       gdouble w,
-			       gdouble h,
-			       gdouble r)
+create_rounded_rectangle_path (GnomePrintContext *pc,
+			       gdouble            x0,
+			       gdouble            y0,
+			       gdouble            w,
+			       gdouble            h,
+			       gdouble            r)
 {
 	gdouble x, y;
 	gint i_theta;

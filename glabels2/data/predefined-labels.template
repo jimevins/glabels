@@ -125,7 +125,7 @@
   <Sheet name="Avery 5196" size="US-Letter" description="Diskette labels">
     <Label id="0" style="rectangle" width="198" height="198" round="5">
       <Markup type="margin" size="5"/>
-      <Layout nx="3" ny="3" x0="9" y0="126" dx="198" dy="216"/>
+      <Layout nx="3" ny="3" x0="9" y0="36" dx="198" dy="216"/>
     </Label>
     <Alias name="Avery 5096"/>
     <Alias name="Avery 5896"/>
@@ -227,7 +227,7 @@
          description="VCR Face Labels">
     <Label id="0" style="rectangle" width="220" height="133" round="5">
       <Markup type="margin" size="5"/>
-      <Layout nx="2" ny="5" x0="80" y0="66.5" dx="236" dy="133"/>
+      <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
     </Label>
     <Alias name="Avery 5199 - VCR Face"/>
   </Sheet>
@@ -382,7 +382,7 @@
   <Sheet name="Avery 8414" size="A4" description="Business Cards">
     <Label id="0" style="rectangle" width="246.6" height="144" round="0">
       <Markup type="margin" size="5"/>
-      <Layout nx="2" ny="5" x0="42" y0="64" dx="264" dy="144"/>
+      <Layout nx="2" ny="5" x0="42" y0="57.890" dx="264" dy="144"/>
     </Label>
     <Alias name="Avery J8414"/>
   </Sheet>
@@ -452,7 +452,7 @@
   <Sheet name="Zweckform 3654" size="A4" description="CD/DVD Labels">
     <Label id="0" style="cd" radius="165.78" hole="58.09">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="2" x0="131.78" y0="63.56" dx="0" dy="387.97"/>
+      <Layout nx="1" ny="2" x0="131.78" y0="58.7998" dx="0" dy="387.97"/>
     </Label>
   </Sheet>
 
@@ -492,7 +492,7 @@
   <Sheet name="Zweckform 4780" size="A4" description="Allround Labels">
     <Label id="0" style="rectangle" width="137.48" height="72" round="0">
       <Markup type="margin" size="5"/>
-      <Layout nx="4" ny="10" x0="23" y0="68" dx="137.48" dy="72"/>
+      <Layout nx="4" ny="10" x0="23" y0="53.8898" dx="137.48" dy="72"/>
     </Label>
   </Sheet>
 
@@ -539,7 +539,7 @@
 	 description="CD/DVD Labels (2 Pass)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="1" x0="40.5" y0="414" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
@@ -561,7 +561,7 @@
          description="PRO CD Labels 2-up (face only, 2 Pass)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="1" x0="34" y0="416" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
@@ -569,7 +569,7 @@
          description="PRO CD Labels 2-up (Face only, 2 Pass)">
     <Label id="0" style="rectangle" width="168" height="142" round="0">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="2" x0="407" y0="440" dx="0" dy="142"/>
+      <Layout nx="1" ny="2" x0="407" y0="68" dx="0" dy="142"/>
     </Label>
   </Sheet>
 
@@ -577,7 +577,7 @@
          description="PRO CD Labels 2-up (CD spine only)">
     <Label id="0" style="rectangle" width="288" height="20" round="0">
       <Markup type="margin" size="2"/>
-      <Layout nx="2" ny="1" x0="18" y0="387" dx="288" dy="0"/>
+      <Layout nx="2" ny="1" x0="18" y0="385" dx="288" dy="0"/>
     </Label>
   </Sheet>
 
@@ -588,7 +588,7 @@
    description="Mini-CD Labels, outer 4">
     <Label id="0" style="cd" radius="110.5" hole="57.5">
       <Markup type="margin" size="5"/>
-      <Layout nx="2" ny="2" x0="48.4" y0="41.9" dx="299.5" dy="481.5"/>
+      <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
     </Label>
   </Sheet>
   <!-- y0=47 is probably about right, but changing it isn't helping! -->
@@ -597,7 +597,7 @@
    description="Mini-CD Labels, center 1">
     <Label id="0" style="cd" radius="110.5" hole="57.5">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="1" x0="197.3" y0="281.5" dx="0" dy="0"/>
+      <Layout nx="1" ny="1" x0="197.3" y0="289.5" dx="0" dy="0"/>
     </Label>
   </Sheet>
 
@@ -611,14 +611,14 @@
          description="Slimline CD Case (rightside up)">
     <Label id="0" style="rectangle" width="394.5" height="342.5" round="0">
       <Markup type="margin" size="7.5"/>
-      <Layout nx="1" ny="2" x0="130" y0="44.6" dx="0" dy="363"/>
+      <Layout nx="1" ny="2" x0="130" y0="41.9" dx="0" dy="363"/>
     </Label>
   </Sheet>
   <Sheet name="Neato Slimline CD Case, spine" size="US-Letter"
          description="Slimline CD Case (upside down)">
     <Label id="0" style="rectangle" width="394.5" height="342.5" round="0">
       <Markup type="margin" size="7.5"/>
-      <Layout nx="1" ny="2" x0="96.5" y0="44.6" dx="0" dy="363"/>
+      <Layout nx="1" ny="2" x0="96.5" y0="41.9" dx="0" dy="363"/>
     </Label>
   </Sheet>
 
@@ -705,18 +705,8 @@
   <Sheet name="Neato A4 CD" size="A4" description="CD/DVD Labels (face only)">
     <Label id="0" style="cd" radius="166.5" hole="58.5">
       <Markup type="margin" size="5"/>
-      <Layout nx="1" ny="2" x0="125" y0="80" dx="0" dy="360"/>        
+      <Layout nx="1" ny="2" x0="125" y0="68.890" dx="0" dy="360"/>        
     </Label>                                                      
-  </Sheet>
-
-  <!-- =================================================================== -->
-  <!-- EPSON Photo Stickers, 17 x 24 mm, 16 per sheet (Actually A6)        -->
-  <!-- =================================================================== -->
-  <Sheet name="Epson S041144" size="A4" description="EPSON Photo Stickers 16">
-    <Label id="0" style="rectangle" width="48" height="68" round="7">
-      <Markup type="margin" size="5"/>
-      <Layout nx="4" ny="4" x0="33" y0="59" dx="59.5" dy="79.5"/>
-    </Label>
   </Sheet>
 
   <!-- =================================================================== -->
@@ -725,7 +715,7 @@
   <Sheet name="DataBecker" size="A4" description="Business Cards">
     <Label id="0" style="rectangle" width="255" height="142" round="0">
       <Markup type="margin" size="5"/>
-      <Layout nx="2" ny="5" x0="36" y0="62" dx="255" dy="142"/>
+      <Layout nx="2" ny="5" x0="36" y0="69.890" dx="255" dy="142"/>
     </Label>
   </Sheet>
 
@@ -735,7 +725,7 @@
   <Sheet name="Hema Etiketten" size="A4" description="Rectangular Labels">
     <Label id="0" style="rectangle" width="178" height="108" round="5">
       <Markup type="margin" size="5"/>
-      <Layout nx="3" ny="7" x0="20" y0="42" dx="187" dy="107"/>
+      <Layout nx="3" ny="7" x0="20" y0="49.890" dx="187" dy="107"/>
     </Label>
   </Sheet>
 
@@ -755,7 +745,7 @@
   <Sheet name="APLI 1999" size="A4" description="Mailing Labels">
     <Label id="0" style="rectangle" width="281" height="193" round="5">
       <Markup type="margin" size="5"/>
-      <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
+      <Layout nx="2" ny="4" x0="13" y0="21.890" dx="289" dy="194"/>
     </Label>
   </Sheet>
 
@@ -822,7 +812,7 @@
   <Sheet name="Herma 4607" size="A4" description="Allround Labels --64">
     <Label id="0" style="rectangle" width="136.913" height="47.9055" round="0">
       <Markup type="margin" size="5"/>
-      <Layout nx="4" ny="16" x0="24.0945" y0="35.7165" dx="136.913" dy="47.9055"/>
+      <Layout nx="4" ny="16" x0="24.0945" y0="39.6853" dx="136.913" dy="47.9055"/>
     </Label>
     <Alias name="Herma 4271"/>
   </Sheet>
@@ -883,6 +873,21 @@
       <Layout nx="1" ny="2" x0="133.228" y0="46.7716" dx="0" dy="419.527"/>
     </Label>
     <Alias name="DataBecker 0368"/>
+  </Sheet>
+
+
+  <!-- ******************************************************************** -->
+  <!-- Misc. A6 products.                                                   -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- EPSON Photo Stickers, 17 x 24 mm, 16 per sheet                      -->
+  <!-- =================================================================== -->
+  <Sheet name="Epson S041144" size="A6" description="EPSON Photo Stickers 16">
+    <Label id="0" style="rectangle" width="48" height="68" round="7">
+      <Markup type="margin" size="5"/>
+      <Layout nx="4" ny="4" x0="33" y0="59" dx="59.5" dy="79.5"/>
+    </Label>
   </Sheet>
 
 </GLabels-templates>
