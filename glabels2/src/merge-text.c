@@ -349,7 +349,11 @@ gl_merge_text_get_record (glMerge *merge)
 
 		field = g_new0 (glMergeField, 1);
 		field->key = g_strdup_printf ("%d", i_field++);
+#ifndef CSV_ALWAYS_UTF8
+		field->value = g_locale_to_utf8 (p->data, -1, NULL, NULL, NULL);
+#else
 		field->value = g_strdup (p->data);
+#endif
 
 		record->field_list = g_list_append (record->field_list, field);
 	}
