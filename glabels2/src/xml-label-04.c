@@ -232,12 +232,14 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 
 		if (xmlStrEqual (line_node->name, "Line")) {
 
+			gl_debug (DEBUG_XML, "->Line node");
+
 			nodes = NULL;
 			for (text_node = line_node->xmlChildrenNode;
 			     text_node != NULL; text_node = text_node->next) {
 
-				if (xmlStrEqual (text_node->name, "Field") ==
-				    0) {
+				if (xmlStrEqual (text_node->name, "Field")) {
+					gl_debug (DEBUG_XML, "->Line->Field node");
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = TRUE;
 					node_text->data =
@@ -245,10 +247,13 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 					nodes =
 					    g_list_append (nodes, node_text);
 				} else if (xmlNodeIsText (text_node)) {
+					gl_debug (DEBUG_XML, "->Line->\"literal\" node");
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = FALSE;
 					node_text->data =
 					    xmlNodeGetContent (text_node);
+					gl_debug (DEBUG_XML, "text = \"%s\"",
+						  node_text->data);
 					nodes =
 					    g_list_append (nodes, node_text);
 				} else {
