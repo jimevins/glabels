@@ -1,5 +1,10 @@
 2004-01-03  Jim Evins  <evins@snaught.com>
 
+	* configure.in:
+		Release 1.93.2.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
 	* AUTHORS:
 		Added acknowledgement of contributions by Wayne Schuller.
 	
