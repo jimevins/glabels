@@ -2004,18 +2004,21 @@ gl_view_is_selection_atomic (glView *view)
 void
 gl_view_delete_selection (glView *view)
 {
-	GList *p, *p_next;
+	GList *object_list, *p, *p_next;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	for (p = view->selected_object_list; p != NULL; p = p_next) {
+	object_list = view->selected_object_list;
+	view->selected_object_list = NULL;
+	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
+
+	for (p = object_list; p != NULL; p = p_next) {
 		p_next = p->next;
 		g_object_unref (G_OBJECT (p->data));
+		object_list = g_list_delete_link (object_list, p);
 	}
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
