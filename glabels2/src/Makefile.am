@@ -115,6 +115,8 @@ glabels_SOURCES = 			\
 	template.h 			\
 	xml-label.c			\
 	xml-label.h			\
+	xml-label-04.c			\
+	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
 	merge-text.c			\
@@ -207,6 +209,8 @@ glabels_batch_SOURCES = 		\
 	template.h 			\
 	xml-label.c			\
 	xml-label.h			\
+	xml-label-04.c			\
+	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
 	merge-text.c			\

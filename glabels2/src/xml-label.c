@@ -192,8 +192,7 @@ xml_doc_to_label (xmlDocPtr doc,
 						COMPAT04_NAME_SPACE);
 			if (ns != NULL)	{
 				g_warning (_("Importing from glabels 0.4 format"));
-				g_warning ("TODO");
-				label = NULL; /* TODO */
+				label = gl_xml_label_04_parse (root, status);
 			} else {
 				g_warning (_("bad document, unknown glabels Namespace"));
 				*status = XML_LABEL_ERROR_OPEN_PARSE;

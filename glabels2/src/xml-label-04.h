@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  xml-label.h:  GLabels xml label module header file
+ *  xml-label-04.h:  GLabels xml label compat module header file
  *
  *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
  *
@@ -19,35 +19,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-#ifndef __XML_LABEL_H__
-#define __XML_LABEL_H__
+#ifndef __XML_LABEL_04_H__
+#define __XML_LABEL_04_H__
 
-#include "label.h"
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
+#include "xml-label.h"
 
 G_BEGIN_DECLS
 
-
-typedef enum {
-	XML_LABEL_UNKNOWN_MEDIA = 1,
-	XML_LABEL_OK = 0,
-	XML_LABEL_ERROR_OPEN_PARSE = -10,
-	XML_LABEL_ERROR_SAVE_FILE = -20,
-} glXMLLabelStatus;
-
-
-extern glLabel      *gl_xml_label_open          (const gchar * filename,
+extern glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 						 glXMLLabelStatus *status);
-extern glLabel      *gl_xml_label_open_buffer   (const gchar * buffer,
-						 glXMLLabelStatus *status);
-
-extern void          gl_xml_label_save          (glLabel * label,
-						 const gchar * filename,
-						 glXMLLabelStatus *status);
-extern gchar        *gl_xml_label_save_buffer   (glLabel * label,
-						 glXMLLabelStatus *status);
-
 
 G_END_DECLS
 
 
-#endif /* __XML_LABEL_H__ */
+#endif /* __XML_LABEL_04_H__ */
