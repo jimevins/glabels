@@ -48,7 +48,7 @@ AC_DEFUN(GLABELS_CHECK_LIB, [
 dnl ****************************************
 dnl * LIBXML
 dnl ****************************************
-GLABELS_CHECK_LIB(LIBXML, 1.8.10, xml)
+GLABELS_CHECK_LIB(LIBXML, 1.8.11, xml)
 GNOME_XML_CFLAGS=`gnome-config --cflags xml`
 GNOME_XML_LIBS=`gnome-config --libs xml`
 AC_SUBST(GNOME_XML_CFLAGS)
@@ -124,7 +124,7 @@ fi
 dnl ****************************************
 dnl * Makefiles
 dnl ****************************************
-AC_OUTPUT([
+AC_OUTPUT([ m4/Makefile 
 Makefile
 macros/Makefile
 src/Makefile
