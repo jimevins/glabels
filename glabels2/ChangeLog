@@ -1,3 +1,13 @@
+2004-08-15  Jim Evins  <evins@snaught.com>
+
+	* data/desktop/glabels.desktop.in:
+		- Added encoding line
+		- Removed period from comment
+		- Fixed Terminal line, changed "0" to "false"
+		- Added semicolen to Categories line
+	* po/ja.po:
+		- Made sure desktop.in comment string above still translated properly
+
 2004-08-14  Jim Evins  <evins@snaught.com>
 
 	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):

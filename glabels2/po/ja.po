@@ -5,8 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-11 08:44+0900\n"
+"POT-Creation-Date: 2004-08-15 18:13-0400\n"
 "PO-Revision-Date: 2004-08-11 08:44+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -752,22 +751,22 @@ msgstr "おかしなノード = \"%s\""
 msgid "bad node in Data node =  \"%s\""
 msgstr "Data ノードにおかしなノード = \"%s\""
 
-#: src/xml-label.c:962 libglabels/xml-template.c:528
+#: src/xml-label.c:962 libglabels/xml-template.c:535
 msgid "Utf8 conversion error."
 msgstr "Utf8 変換エラーです。"
 
-#: src/xml-label.c:969 libglabels/xml-template.c:535
+#: src/xml-label.c:969 libglabels/xml-template.c:542
 msgid "Problem saving xml file."
 msgstr "XML ファイルの保存で問題があります"
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: src/xml-label-191.c:680 libglabels/xml-template.c:192
+#: src/xml-label-191.c:680 libglabels/xml-template.c:199
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "不明なページ・サイズの ID \"%s\" です。名前として扱います。"
 
-#: src/xml-label-191.c:690 libglabels/xml-template.c:202
+#: src/xml-label-191.c:690 libglabels/xml-template.c:209
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "不明なページ・サイズの ID または名前 \"%s\" です。"
@@ -2446,7 +2445,7 @@ msgid "Video Labels (face only)"
 msgstr "ビデオのラベル (外側のみ)"
 
 #: data/desktop/glabels.desktop.in.h:1
-msgid "Create labels, business cards and media covers."
+msgid "Create labels, business cards and media covers"
 msgstr "ラベルや名刺、メディアのカバーを生成します"
 
 #: data/desktop/glabels.desktop.in.h:2
