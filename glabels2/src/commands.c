@@ -29,7 +29,7 @@
 #include "commands.h"
 #include "view.h"
 #include "file.h"
-#include "print.h"
+#include "print-dialog.h"
 #include "prefs.h"
 #include "prefs-dialog.h"
 #include "debug.h"
@@ -135,7 +135,17 @@ gl_cmd_file_print (BonoboUIComponent *uic,
 
 	g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_print_dialog (GL_VIEW(window->view)->label, GTK_WINDOW(window));
+	if (GL_VIEW(window->view)->print_dialog) {
+
+		gtk_window_present (GL_VIEW(window->view)->print_dialog);
+
+	} else {
+
+		GL_VIEW(window->view)->print_dialog =
+			gl_print_dialog_new (GL_VIEW(window->view), BONOBO_WINDOW(window));
+
+		gtk_widget_show (GL_VIEW(window->view)->print_dialog);
+	}
 
 }
 

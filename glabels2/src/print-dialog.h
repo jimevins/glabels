@@ -1,9 +1,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  print_dialog.h:  Print dialog module header file
+ *  print-dialog.h:  Print dialog module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,9 +22,45 @@
 #ifndef __PRINT_DIALOG_H__
 #define __PRINT_DIALOG_H__
 
+#include <gtk/gtk.h>
 #include <bonobo/bonobo-window.h>
-#include "label.h"
+#include "hig.h"
+#include "view.h"
 
-extern void gl_print_dialog (glLabel *label, BonoboWindow *win);
+G_BEGIN_DECLS
+
+#define GL_TYPE_PRINT_DIALOG            (gl_print_dialog_get_type ())
+#define GL_PRINT_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_PRINT_DIALOG, glPrintDialog))
+#define GL_PRINT_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_PRINT_DIALOG, glPrintDialogClass))
+#define GL_IS_PRINT_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_PRINT_DIALOG))
+#define GL_IS_PRINT_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_PRINT_DIALOG))
+#define GL_PRINT_DIALOG_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_PRINT_DIALOG, glPrintDialogClass))
+
+
+typedef struct _glPrintDialog         glPrintDialog;
+typedef struct _glPrintDialogClass    glPrintDialogClass;
+
+typedef struct _glPrintDialogPrivate  glPrintDialogPrivate;
+
+struct _glPrintDialog
+{
+	glHigDialog           parent_instance;
+
+	glPrintDialogPrivate *priv;
+
+};
+
+struct  _glPrintDialogClass
+{
+	glHigDialogClass      parent_class;
+};
+
+
+GtkType    gl_print_dialog_get_type     (void) G_GNUC_CONST;
+
+GtkWidget *gl_print_dialog_new          (glView       *view,
+					 BonoboWindow *win);
+
+G_END_DECLS
 
 #endif

@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  print.c:  Print module
+ *  print-dialog.c:  Print dialog module
  *
  *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
  *
@@ -30,10 +30,8 @@
 #include <libgnomeprintui/gnome-print-job-preview.h>
 
 #include "print-dialog.h"
-#include "hig.h"
 #include "print.h"
 #include "label.h"
-#include "bc.h"
 #include "template.h"
 
 #include "wdgt-print-copies.h"
@@ -51,186 +49,302 @@ GnomePrintConfig   *gnome_printer_selector_get_config (GtkWidget *psel);
 /***************************************************************************/
 
 /*===========================================*/
-/* Private types.                            */
+/* Private data types                        */
 /*===========================================*/
 
+struct _glPrintDialogPrivate {
+
+	GtkWidget *simple_frame;
+	GtkWidget *copies;
+
+	GtkWidget *merge_frame;
+	GtkWidget *prmerge;
+
+	GtkWidget *outline_check;
+	GtkWidget *reverse_check;
+	GtkWidget *crop_marks_check;
+
+	GtkWidget *printer_select;
+};
+
+
 /*===========================================*/
-/* Private globals.                          */
+/* Private globals                           */
 /*===========================================*/
 
-/* remember state of dialog. */
-static gboolean outline_flag = FALSE;
-static gboolean reverse_flag = FALSE;
-static gboolean crop_marks_flag = FALSE;
-static gboolean collate_flag = FALSE;
-static gint first = 1, last = 1, n_sheets = 0, n_copies = 1;
+static glHigDialogClass* parent_class = NULL;
 
 /*===========================================*/
-/* Private function prototypes.              */
+/* Local function prototypes                 */
 /*===========================================*/
 
-static GtkWidget *job_page_new     (GtkWidget *dlg, glLabel *label);
-static GtkWidget *printer_page_new (GtkWidget *dlg, glLabel *label);
+static void       gl_print_dialog_class_init      (glPrintDialogClass *klass);
+static void       gl_print_dialog_init            (glPrintDialog      *dlg);
+static void       gl_print_dialog_finalize        (GObject            *object);
 
-static void print_response (GtkDialog *dlg,
-			    gint      response,
-			    glLabel   *label);
+static void       gl_print_dialog_construct       (glPrintDialog      *dialog,
+						   glView             *view,
+						   BonoboWindow       *win);
 
-static void print_sheets       (GnomePrintConfig *config,
-				glLabel          *label,
-				gboolean          preview_flag,
-				gint              n_sheets,
-				gint              first,
-				gint              last,
-				gboolean          outline_flag,
-				gboolean          reverse_flag,
-				gboolean          crop_marks_flag);
+static GtkWidget *job_page_new                    (glPrintDialog      *dialog,
+						   glLabel            *label);
 
-static void print_sheets_merge (GnomePrintConfig *config,
-				glLabel          *label,
-				gboolean          preview_flag,
-				gint              n_copies,
-				gint              first,
-				gboolean          collate_flag,
-				gboolean          outline_flag,
-				gboolean          reverse_flag,
-				gboolean          crop_marks_flag);
+static GtkWidget *printer_page_new                (glPrintDialog      *dialog,
+						   glLabel            *label);
+
+static void       merge_changed_cb                (glLabel            *label,
+						   glPrintDialog      *dialog);
+
+static void       delete_event_cb                 (glPrintDialog      *dialog,
+						   gpointer            user_data);
+
+static void       print_response_cb               (glPrintDialog      *dialog,
+						   gint                response,
+						   glLabel            *label);
+
+static void       print_sheets                    (GnomePrintConfig   *config,
+						   glLabel            *label,
+						   gboolean            preview_flag,
+						   gint                n_sheets,
+						   gint                first,
+						   gint                last,
+						   gboolean            outline_flag,
+						   gboolean            reverse_flag,
+						   gboolean            crop_marks_flag);
+
+static void      print_sheets_merge               (GnomePrintConfig   *config,
+						   glLabel            *label,
+						   gboolean            preview_flag,
+						   gint                n_copies,
+						   gint                first,
+						   gboolean            collate_flag,
+						   gboolean            outline_flag,
+						   gboolean            reverse_flag,
+						   gboolean            crop_marks_flag);
+
+
 
 
 /*****************************************************************************/
-/* "Print" dialog.                                                           */
+/* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-void
-gl_print_dialog (glLabel *label, BonoboWindow *win)
+GType
+gl_print_dialog_get_type (void)
 {
-	GtkWidget *dlg;
-	GtkWidget *pp_button, *notebook, *page;
+	static GType dialog_type = 0;
+
+	if (!dialog_type)
+    	{
+      		static const GTypeInfo dialog_info =
+      		{
+			sizeof (glPrintDialogClass),
+        		NULL,		/* base_init */
+        		NULL,		/* base_finalize */
+        		(GClassInitFunc) gl_print_dialog_class_init,
+        		NULL,           /* class_finalize */
+        		NULL,           /* class_data */
+        		sizeof (glPrintDialog),
+        		0,              /* n_preallocs */
+        		(GInstanceInitFunc) gl_print_dialog_init
+      		};
+
+     		dialog_type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+						      "glPrintDialog",
+						      &dialog_info, 
+						      0);
+    	}
+
+	return dialog_type;
+}
+
+static void
+gl_print_dialog_class_init (glPrintDialogClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	gl_debug (DEBUG_PRINT, "");
+	
+  	parent_class = g_type_class_peek_parent (klass);
+
+  	object_class->finalize = gl_print_dialog_finalize;  	
+}
+
+static void
+gl_print_dialog_init (glPrintDialog *dialog)
+{
+	GtkWidget *pp_button;
+
+	gl_debug (DEBUG_PRINT, "");
+
+	dialog->priv = g_new0 (glPrintDialogPrivate, 1);
+
+	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_PRINT,  GNOME_PRINT_DIALOG_RESPONSE_PRINT,
+				NULL);
+
+	pp_button =
+		gtk_dialog_add_button (GTK_DIALOG (dialog),
+				       GTK_STOCK_PRINT_PREVIEW, GNOME_PRINT_DIALOG_RESPONSE_PREVIEW);
+	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (dialog)->action_area), 
+					    pp_button, TRUE);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+					 GNOME_PRINT_DIALOG_RESPONSE_PRINT);
+
+        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	g_signal_connect (G_OBJECT(dialog),
+			  "delete_event",
+			  G_CALLBACK (delete_event_cb),
+			  NULL);
+                                                                                
+}
+
+static void 
+gl_print_dialog_finalize (GObject *object)
+{
+	glPrintDialog* dialog;
+	
+	gl_debug (DEBUG_PRINT, "");
+
+	g_return_if_fail (object != NULL);
+	
+   	dialog = GL_PRINT_DIALOG (object);
+
+	g_return_if_fail (GL_IS_PRINT_DIALOG (dialog));
+	g_return_if_fail (dialog->priv != NULL);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+
+	g_free (dialog->priv);
+}
+
+/*****************************************************************************/
+/* NEW object properties dialog.                                              */
+/*****************************************************************************/
+GtkWidget *
+gl_print_dialog_new (glView       *view,
+		     BonoboWindow *win)
+{
+	GtkWidget *dialog;
+
+	gl_debug (DEBUG_PRINT, "");
+
+	dialog = GTK_WIDGET (g_object_new (GL_TYPE_PRINT_DIALOG, NULL));
+
+	gl_print_dialog_construct (GL_PRINT_DIALOG(dialog), view, win);
+
+	return dialog;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Construct dialog.                                              */
+/*--------------------------------------------------------------------------*/
+static void
+gl_print_dialog_construct (glPrintDialog      *dialog,
+			   glView             *view,
+			   BonoboWindow       *win)
+{
+	GtkWidget *notebook, *page;
 	gchar     *name, *title;
 
-	g_return_if_fail (label && GL_IS_LABEL(label));
+	gl_debug (DEBUG_PRINT, "START");
+
+	g_return_if_fail (view && GL_IS_VIEW(view));
+	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
 	g_return_if_fail (win && BONOBO_IS_WINDOW(win));
 
-	name = gl_label_get_short_name (label);
+	name = gl_label_get_short_name (view->label);
 	title = g_strdup_printf ("%s \"%s\"", _("Print"), name);
 	g_free (name);
 
-	/* ----- Contstruct basic print dialog with notebook ----- */
-	dlg = gl_hig_dialog_new_with_buttons (title, GTK_WINDOW(win),
-					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					   GTK_STOCK_PRINT, GNOME_PRINT_DIALOG_RESPONSE_PRINT,
+	gtk_window_set_title (GTK_WINDOW(dialog), title);
+	gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(win));
+	gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
 
-					   NULL);
-	pp_button = gtk_dialog_add_button (GTK_DIALOG (dlg),
-					   GTK_STOCK_PRINT_PREVIEW, 
-					   GNOME_PRINT_DIALOG_RESPONSE_PREVIEW);
-	gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (GTK_DIALOG (dlg)->action_area), 
-					    pp_button, TRUE);
-	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
-					 GNOME_PRINT_DIALOG_RESPONSE_PRINT);
 	notebook = gtk_notebook_new ();
-	gtk_widget_show (notebook);
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dlg), notebook);
+	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), notebook);
 
 	/* ----- Create Job notebook page ----- */
-	page = job_page_new (dlg, label);
+	page = job_page_new (dialog, view->label);
 	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), page,
 				  gtk_label_new_with_mnemonic (_("_Job")));
 
 	/* ----- Create Printer notebook page ----- */
-	page = printer_page_new (dlg, label);
+	page = printer_page_new (dialog, view->label);
 	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), page,
 				  gtk_label_new_with_mnemonic (_("P_rinter")));
 
-	g_signal_connect (G_OBJECT(dlg), "response",
-			  G_CALLBACK (print_response), label);
+	g_signal_connect (G_OBJECT(dialog), "response",
+			  G_CALLBACK (print_response_cb), view->label);
 
-	gtk_widget_show_all (GTK_WIDGET (dlg));
+	gtk_widget_show_all (GTK_WIDGET (dialog));
+
+	merge_changed_cb (GL_LABEL(view->label), dialog);
 
 	g_free (title);
+
+
+	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create "Job" page.                                              */
 /*---------------------------------------------------------------------------*/
 static GtkWidget *
-job_page_new (GtkWidget *dlg,
-	      glLabel   *label)
+job_page_new (glPrintDialog *dialog,
+	      glLabel       *label)
 {
 	GtkWidget *vbox;
-	glMerge *merge;
 	GtkWidget *wframe;
-	GtkWidget *copies = NULL, *prmerge = NULL;
-	GtkWidget *wvbox, *outline_check, *reverse_check, *crop_marks_check;
-	gint n_records;
 
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
-	merge = gl_label_get_merge (label);
-	if (merge == NULL) {
+	/* ----------- Add simple-copies widget ------------ */
+	dialog->priv->simple_frame = gl_hig_category_new (_("Copies"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), dialog->priv->simple_frame);
 
-		/* ----------- Add simple-copies widget ------------ */
-		wframe = gl_hig_category_new (_("Copies"));
-		gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
+	dialog->priv->copies = gl_wdgt_print_copies_new (label);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(dialog->priv->simple_frame),
+				    dialog->priv->copies);
 
-		copies = gl_wdgt_print_copies_new (label);
-		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), copies);
+	/* ------- Add merge control widget ------------ */
+	dialog->priv->merge_frame = gl_hig_category_new (_("Document merge control"));
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), dialog->priv->merge_frame);
 
-		if (n_sheets) {
-			gl_wdgt_print_copies_set_range (GL_WDGT_PRINT_COPIES (copies),
-							n_sheets, first, last);
-		}
-
-	} else {
-
-		/* ------- Otherwise add merge control widget ------------ */
-		wframe = gl_hig_category_new (_("Document merge control"));
-		gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
-
-		prmerge = gl_wdgt_print_merge_new (label);
-		gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), prmerge);
-
-		n_records = gl_merge_get_record_count( merge );
-		gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE(prmerge),
-					   n_copies, first, n_records,
-					   collate_flag);
-		g_object_unref (G_OBJECT(merge));
-	}
-	gtk_widget_show_all (wframe);
-	g_object_set_data (G_OBJECT(dlg), "copies", copies);
-	g_object_set_data (G_OBJECT(dlg), "prmerge", prmerge);
+	dialog->priv->prmerge = gl_wdgt_print_merge_new (label);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(dialog->priv->merge_frame),
+				    dialog->priv->prmerge);
 
 	/* ----------- Add custom print options area ------------ */
 	wframe = gl_hig_category_new (_("Options"));
 	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), wframe);
 
 	/* add Outline check button */
-	outline_check =
+	dialog->priv->outline_check =
 	    gtk_check_button_new_with_label (
 		    _("print outlines (to test printer alignment)"));
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), outline_check);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (outline_check),
-				      outline_flag);
-	g_object_set_data (G_OBJECT(dlg), "outline_check", outline_check);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), dialog->priv->outline_check);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->outline_check),
+				      FALSE);
 
 	/* add Reverse check button */
-	reverse_check =
+	dialog->priv->reverse_check =
 	    gtk_check_button_new_with_label (
 		    _("print in reverse (i.e. a mirror image)"));
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), reverse_check);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (reverse_check),
-				      reverse_flag);
-	g_object_set_data (G_OBJECT(dlg), "reverse_check", reverse_check);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), dialog->priv->reverse_check);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->reverse_check),
+				      FALSE);
 
 	/* add Crop marks check button */
-	crop_marks_check =
+	dialog->priv->crop_marks_check =
 	    gtk_check_button_new_with_label (_("print crop marks"));
-	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), crop_marks_check);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (crop_marks_check),
-				      crop_marks_flag);
-	g_object_set_data (G_OBJECT(dlg), "crop_marks_check", crop_marks_check);
+	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), dialog->priv->crop_marks_check);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->crop_marks_check),
+				      FALSE);
 
-	gtk_widget_show_all (wframe);
+	g_signal_connect (G_OBJECT(label), "merge_changed",
+			  G_CALLBACK (merge_changed_cb), dialog);
 
 	return vbox;
 }
@@ -239,8 +353,8 @@ job_page_new (GtkWidget *dlg,
 /* PRIVATE.  Create "Printer" page.                                          */
 /*---------------------------------------------------------------------------*/
 static GtkWidget *
-printer_page_new (GtkWidget *dlg,
-		  glLabel   *label)
+printer_page_new (glPrintDialog *dialog,
+		  glLabel       *label)
 {
 	GtkWidget *vbox;
 	GtkWidget *printer_select;
@@ -248,63 +362,96 @@ printer_page_new (GtkWidget *dlg,
 	vbox = gl_hig_vbox_new (GL_HIG_VBOX_OUTER);
 
 	/* FIXME: GnomePrinterSelector is not public in libgnomeprintui-2.2 */
-	printer_select =
+	dialog->priv->printer_select =
 		gnome_printer_selector_new (gnome_print_config_default ());
-	gtk_widget_show (printer_select);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), printer_select);
-
-	g_object_set_data (G_OBJECT(dlg), "printer_select", printer_select);
+	gtk_widget_show (dialog->priv->printer_select);
+	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), dialog->priv->printer_select);
 
 	return vbox;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  "merge_changed" callback.                                      */
+/*--------------------------------------------------------------------------*/
+static void
+merge_changed_cb (glLabel            *label,
+		  glPrintDialog      *dialog)
+{
+	glMerge   *merge;
+	gint       n_records;
+
+	gl_debug (DEBUG_PRINT, "START");
+
+	merge = gl_label_get_merge (label);
+	if (merge == NULL) {
+
+		gtk_widget_show_all (dialog->priv->simple_frame);
+		gtk_widget_hide_all (dialog->priv->merge_frame);
+
+	} else {
+
+		n_records = gl_merge_get_record_count( merge );
+		gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE(dialog->priv->prmerge),
+						1, 1, n_records, FALSE);
+		g_object_unref (G_OBJECT(merge));
+
+		gtk_widget_hide_all (dialog->priv->simple_frame);
+		gtk_widget_show_all (dialog->priv->merge_frame);
+	}
+
+	gl_debug (DEBUG_PRINT, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  delete event callback.                                         */
+/*--------------------------------------------------------------------------*/
+static void
+delete_event_cb (glPrintDialog *dialog,
+		  gpointer       user_data)
+{
+	gl_debug (DEBUG_PRINT, "START");
+
+	gtk_widget_hide (GTK_WIDGET(dialog));
+
+	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Print "response" callback.                                      */
 /*---------------------------------------------------------------------------*/
 static void
-print_response (GtkDialog *dlg,
-		gint      response,
-		glLabel   *label)
+print_response_cb (glPrintDialog *dialog,
+		   gint           response,
+		   glLabel       *label)
 {
-	GtkWidget *copies, *prmerge;
-	GtkWidget *outline_check, *reverse_check, *crop_marks_check;
-	GtkWidget *printer_select;
 	GnomePrintConfig *config;
-	glMerge *merge;
+	glMerge          *merge;
+	gboolean          outline_flag, reverse_flag, crop_marks_flag, collate_flag;
+	gint              first, last, n_sheets, n_copies;
 
 	switch (response) {
 
 	case GNOME_PRINT_DIALOG_RESPONSE_PRINT:
 	case GNOME_PRINT_DIALOG_RESPONSE_PREVIEW:
-		copies         = g_object_get_data (G_OBJECT(dlg), "copies");
-		prmerge        = g_object_get_data (G_OBJECT(dlg), "prmerge");
-		outline_check  = g_object_get_data (G_OBJECT(dlg),
-						    "outline_check");
-		reverse_check  = g_object_get_data (G_OBJECT(dlg),
-						    "reverse_check");
-		crop_marks_check  = g_object_get_data (G_OBJECT(dlg),
-						       "crop_marks_check");
-		printer_select = g_object_get_data (G_OBJECT(dlg),
-						    "printer_select");
 
 		/* FIXME: GnomePrinterSelector is not public in libgnomeprintui-2.2. */
-		config = gnome_printer_selector_get_config (GNOME_PRINTER_SELECTOR(printer_select));
+		config = gnome_printer_selector_get_config (GNOME_PRINTER_SELECTOR(dialog->priv->printer_select));
 
 		outline_flag =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-						      (outline_check));
+						      (dialog->priv->outline_check));
 		reverse_flag =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-						      (reverse_check));
+						      (dialog->priv->reverse_check));
 		crop_marks_flag =
 			gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-						      (crop_marks_check));
+						      (dialog->priv->crop_marks_check));
 
 		merge = gl_label_get_merge (label);
 
 		if (merge == NULL) {
 
-			gl_wdgt_print_copies_get_range (GL_WDGT_PRINT_COPIES (copies),
+			gl_wdgt_print_copies_get_range (GL_WDGT_PRINT_COPIES (dialog->priv->copies),
 							&n_sheets, &first, &last);
 			print_sheets (config, label,
 				      (response == GNOME_PRINT_DIALOG_RESPONSE_PREVIEW),
@@ -313,7 +460,7 @@ print_response (GtkDialog *dlg,
 
 		} else {
 
-			gl_wdgt_print_merge_get_copies (GL_WDGT_PRINT_MERGE (prmerge),
+			gl_wdgt_print_merge_get_copies (GL_WDGT_PRINT_MERGE (dialog->priv->prmerge),
 							&n_copies, &first,
 							&collate_flag);
 			print_sheets_merge (config, label,
@@ -332,7 +479,7 @@ print_response (GtkDialog *dlg,
 
 	}
 
-	gtk_widget_destroy (GTK_WIDGET (dlg));
+	gtk_widget_hide (GTK_WIDGET(dialog));
 }
 
 /*---------------------------------------------------------------------------*/

@@ -84,6 +84,9 @@ struct _glView {
 	/* Merge Properties Dialog */
 	GtkWidget         *merge_props_dialog;
 
+	/* Print Dialog */
+	GtkWidget         *print_dialog;
+
 	/* Default object text properties */
 	gchar             *default_font_family;
 	gdouble            default_font_size;
