@@ -1,5 +1,12 @@
 2005-04-02  Jim Evins <evins@snaught.com>
 
+	* src/mygal/color-palette.c: (color_palette_change_custom_color),
+	(cust_color_set), (color_palette_setup):
+	* src/mygal/color-palette.h:
+		Replaced deprecated GnomeColorPicker with GtkColorButton.
+
+2005-04-02  Jim Evins <evins@snaught.com>
+
 	* docs/libglabels/libglabels-sections.txt:
 	* docs/libglabels/libglabels-undocumented.txt:
 	* docs/libglabels/tmpl/enums.sgml:
