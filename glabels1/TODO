@@ -37,6 +37,14 @@ Feature wishlist
 	generic XML
 	freedb (CDDB) for CD labels
 
+- Mod to text backend to filter out quotes (").  Field separators would be
+  ignored when between quotes.  Literal quotes would be inserted w/ a
+  backslash.
+
+- Somehow allow insertion of a merge field so that if empty do not emit
+  a newline.  For example if FIELD{ADDRESS2} is on a line by itself, you
+  probably do not want to print an empty line if the field is empty.
+
 - Add object rotation and flipping functions.
 
 - Add a configurable grid.  Also add a "snap-to" capability.

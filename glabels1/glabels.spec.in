@@ -47,6 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %doc README COPYING ChangeLog NEWS AUTHORS INSTALL
 %{prefix}/bin/glabels
+%{prefix}/bin/glabels-batch
 %{prefix}/share/*
 
 
