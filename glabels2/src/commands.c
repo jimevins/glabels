@@ -373,7 +373,7 @@ gl_cmd_help_about (BonoboUIComponent *uic,
 		NULL
 	};
 
-	gchar *translator_credits = _("");
+	gchar *translator_credits = _(" ");
 
 	gl_debug (DEBUG_COMMANDS, "");
 
