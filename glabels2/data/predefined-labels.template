@@ -358,7 +358,7 @@
   <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
   <!-- =================================================================== -->
   <Sheet name="Avery 7160" size="A4" description="Mailing labels">
-    <Label style="rectangle" width="181.4" height="108.0" round="5">
+    <Label id="0" style="rectangle" width="181.4" height="108.0" round="5">
       <Markup type="margin" size="5"/>
       <Layout nx="3" ny="7" x0="21.2" y0="43.9" dx="187.2" dy="108.0"/>
     </Label>
@@ -404,7 +404,7 @@
   <!-- Avery-Zweckform J8676A: CD/DVD Labels 2 per sheet               -->
   <!-- =============================================================== -->
   <Sheet name="Avery 8676" size="A4" description="CD/DVD Labels">
-    <Label style="cd" radius="166.5" hole="17">
+    <Label id="0" style="cd" radius="166.5" hole="17">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="130" y0="59.5" dx="0" dy="388"/>        
     </Label>
@@ -451,7 +451,7 @@
   <!-- Zweckform 3654: CD Labels  2 per Sheet                              -->
   <!-- ====================================================================-->
   <Sheet name="Zweckform 3654" size="A4" description="CD/DVD Labels">
-    <Label style="cd" radius="165.78" hole="58.09">
+    <Label id="0" style="cd" radius="165.78" hole="58.09">
       <Markup type="margin" size="5"/>
       <Layout nx="1" ny="2" x0="131.78" y0="63.56" dx="0" dy="387.97"/>
     </Label>
@@ -743,10 +743,10 @@
   <!-- APLI 1999:  Mailing Labels, 9,9cm x 6,8cm, 8 per sheet              -->
   <!-- =================================================================== -->
   <Sheet name="APLI 1999" size="A4" description="Mailing Labels">
-        <Label type="rectangle" width="281" height="193" round="5">
-                <Markup type="margin" size="5"/>
-                <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
-        </Label>
+    <Label id="0" style="rectangle" width="281" height="193" round="5">
+      <Markup type="margin" size="5"/>
+      <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
+    </Label>
   </Sheet>
 
   <!-- =================================================================== -->

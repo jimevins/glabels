@@ -693,9 +693,9 @@ margin="2" round="0">
   <!-- APLI 1999:  Mailing Labels, 9,9cm x 6,8cm, 8 per sheet              -->
   <!-- =================================================================== -->
   <Sheet name="APLI 1999" size="A4" description="Mailing Labels">
-        <Label type="rectangle" width="281" height="193" round="5" margin="5">
-                <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
-        </Label>
+    <Label style="rectangle" width="281" height="193" round="5" margin="5">
+      <Layout nx="2" ny="4" x0="13" y0="45" dx="289" dy="194"/>
+    </Label>
   </Sheet>
 
   <!-- =================================================================== -->
