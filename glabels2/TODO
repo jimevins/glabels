@@ -107,12 +107,7 @@ VERSION 1.92:
 		- Add rounding option to rectangles
 
 		- Place property dialogs in a single dockable window (1 per
-		  MDI/app window).  Move dialogs associated with view,
-		  when a new MDI/app window is created.
-
-		- Change label types on-the-fly.  This should probably be
-		  some form of property of the label.  Perhaps, a right-click
-		  away from any selection.
+		  window). (Maybe, still thinking on this one)
 
 
 
