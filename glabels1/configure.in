@@ -85,7 +85,7 @@ dnl ****************************************
 dnl * Supported languages
 dnl ****************************************
 dnl Add the languages which your application supports here.
-ALL_LINGUAS="fr de ja pt_BR"
+ALL_LINGUAS="fr de ja pt_BR es"
 AM_GNU_GETTEXT
 
 dnl ****************************************
