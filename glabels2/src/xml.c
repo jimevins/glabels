@@ -27,11 +27,11 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define POINTS_PER_POINT    1.0
+#define POINTS_PER_POINT    1.0 /* internal units are points. */
 #define POINTS_PER_INCH    72.0
 #define POINTS_PER_MM       2.83464566929
 #define POINTS_PER_CM       (10.0*POINTS_PER_MM)
-#define POINTS_PER_M        (1000.0*POINTS_PER_MM)
+#define POINTS_PER_PICA     (1.0/12.0)
 
 /*========================================================*/
 /* Private types.                                         */
@@ -46,23 +46,17 @@ typedef struct {
 /* Private globals.                                       */
 /*========================================================*/
 
-UnitTableEntry unit_table[] = {
-	{"point",        POINTS_PER_POINT},
-	{"points",       POINTS_PER_POINT},
+static UnitTableEntry unit_table[] = {
+
+	/* These names are identical to the absolute length units supported in
+	   the CSS2 Specification (Section 4.3.2) */
+
 	{"pt",           POINTS_PER_POINT},
-	{"pts",          POINTS_PER_POINT},
 	{"in",           POINTS_PER_INCH},
-	{"inch",         POINTS_PER_INCH},
-	{"inches",       POINTS_PER_INCH},
 	{"mm",           POINTS_PER_MM},
-	{"millimeter",   POINTS_PER_MM},
-	{"millimeters",  POINTS_PER_MM},
 	{"cm",           POINTS_PER_CM},
-	{"centimeter",   POINTS_PER_CM},
-	{"centimeters",  POINTS_PER_CM},
-	{"m",            POINTS_PER_M},
-	{"meter",        POINTS_PER_M},
-	{"meters",       POINTS_PER_M},
+	{"pc",           POINTS_PER_PICA},
+
 	{NULL, 0}
 };
 
@@ -177,11 +171,13 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 		g_free (string);
 
 		switch (n) {
+
 		case 1:
 			break;
+
 		case 2:
 			for (i=0; unit_table[i].name != NULL; i++) {
-				if (xmlStrcasecmp (units, unit_table[i].name) != 0) {
+				if (xmlStrcasecmp (units, unit_table[i].name) == 0) {
 					val *= unit_table[i].points_per_unit;
 					break;
 				}
@@ -192,9 +188,11 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 					   units);
 			}
 			break;
+
 		default:
 			val = 0.0;
 			break;
+
 		}
 		return val;
 	}
@@ -268,7 +266,7 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 {
 	gchar  *string;
 
-	string = g_strdup_printf ("%gpts", val);
+	string = g_strdup_printf ("%g pt", val);
 	xmlSetProp (node, property, string);
 	g_free (string);
 }
