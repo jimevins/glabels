@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
+
 #include "wdgt-print-copies.h"
 #include "wdgt-mini-preview.h"
 #include "marshal.h"

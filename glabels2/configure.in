@@ -109,12 +109,22 @@ AC_SUBST(LIBGLABELS_LIBS)
 
 
 dnl ---------------------------------------------------------------------------
-dnl - Is the new file chooser available?
+dnl - Enable deprecation testing
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.3.2,
-                  HAVE_FILE_CHOOSER="-DHAVE_FILE_CHOOSER",
-                  HAVE_FILE_CHOOSER="-UHAVE_FILE_CHOOSER")
-AC_SUBST(HAVE_FILE_CHOOSER)
+AC_ARG_ENABLE(deprecations,
+              [AC_HELP_STRING([--enable-deprecations],
+                              [warn about deprecated usages [default=no]])],,
+              [enable_deprecations=no])
+
+if test "x$enable_deprecations" = "xyes"; then
+   DISABLE_DEPRECATED_CFLAGS="\
+-DG_DISABLE_DEPRECATED \
+-DGDK_DISABLE_DEPRECATED \
+-DGTK_DISABLE_DEPRECATED \
+-DGDK_PIXBUF_DISABLE_DEPRECATED \
+-DGNOME_DISABLE_DEPRECATED"
+   AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
+fi
 
 
 dnl ---------------------------------------------------------------------------

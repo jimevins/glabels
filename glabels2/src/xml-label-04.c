@@ -24,6 +24,8 @@
 
 #include <gnome.h>
 
+#include <glib/gi18n.h>
+
 #include "xml-label-04.h"
 #include "label-text.h"
 #include "label-box.h"

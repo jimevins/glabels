@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <math.h>
 
 #include "wdgt-rotate-label.h"

@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
+
 #include "wdgt-media-select.h"
 #include "hig.h"
 #include "wdgt-mini-preview.h"

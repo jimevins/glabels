@@ -21,6 +21,7 @@
  */
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <math.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>

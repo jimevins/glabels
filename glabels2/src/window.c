@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
+
 #include "ui.h"
 #include "window.h"
 #include "util.h"

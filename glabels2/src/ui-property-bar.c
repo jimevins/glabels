@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <libgnomeprint/gnome-font.h>
 
 #include "ui-property-bar.h"

@@ -22,7 +22,7 @@
 #include <config.h>
 
 #include <glib.h>
-
+#include <glib/gi18n.h>
 #include <libgnomeprint/gnome-glyphlist.h>
 
 #include "view-barcode.h"

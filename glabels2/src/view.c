@@ -22,9 +22,9 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gtk/gtkinvisible.h>
-
 #include <string.h>
 #include <math.h>
 

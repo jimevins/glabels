@@ -21,6 +21,8 @@
  */
 #include <config.h>
 
+#include <glib/gi18n.h>
+
 #include "view.h"
 #include "merge.h"
 #include "merge-properties-dialog.h"

@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#include <gnome.h>
+#include <glib/gi18n.h>
 #include <string.h>
 
 #include "xml-label.h"
@@ -65,24 +65,12 @@ static void properties_response              (GtkDialog         *dlg,
 					      gint               response,
 					      gpointer           user_data);
 
-#ifdef HAVE_FILE_CHOOSER
 static void open_response                    (GtkDialog         *chooser,
 					      gint               response,
 					      GtkWindow         *window);
 static void save_as_response                 (GtkDialog         *chooser,
 					      gint               response,
 					      glLabel           *label);
-#else
-static void open_ok                          (GtkWidget         *widget,
-					      GtkFileSelection  *fsel);
-static void save_as_ok_cb                    (GtkWidget         *widget,
-					      GtkFileSelection  *fsel);
-static void save_as_cancel_cb                (GtkWidget         *widget,
-					      GtkFileSelection  *fsel);
-static void save_as_destroy_cb               (GtkWidget         *widget,
-					      gboolean          *destroy_flag);
-#endif
-
 
 
 /*****************************************************************************/
@@ -419,8 +407,6 @@ properties_response (GtkDialog *dlg,
 	gl_debug (DEBUG_FILE, "END");
 }
 
-#ifdef HAVE_FILE_CHOOSER
-
 /*****************************************************************************/
 /* "Open" menu callback.                                                     */
 /*****************************************************************************/
@@ -546,114 +532,6 @@ open_response (GtkDialog     *chooser,
 	gl_debug (DEBUG_FILE, "END");
 }
 
-#else
-
-/*****************************************************************************/
-/* "Open" menu callback.                                                     */
-/*****************************************************************************/
-void
-gl_file_open (GtkWindow *window)
-{
-	GtkFileSelection *fsel;
-
-	gl_debug (DEBUG_FILE, "START");
-
-	g_return_if_fail (window != NULL);
-
-	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Open")));
-	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
-	gtk_window_set_title (GTK_WINDOW (fsel), _("Open label"));
-
-	g_object_set_data (G_OBJECT (fsel), "parent_window", window);
-
-	g_signal_connect (G_OBJECT (fsel->ok_button), "clicked",
-			  G_CALLBACK (open_ok), fsel);
-
-	g_signal_connect_swapped (G_OBJECT (fsel->cancel_button), "clicked",
-				  G_CALLBACK (gtk_widget_destroy),
-				  G_OBJECT (fsel));
-
-	/* Recover state of open dialog */
-	if (open_path != NULL) {
-		gtk_file_selection_set_filename (fsel, open_path);
-	}
-
-	/* show the dialog */
-	gtk_widget_show (GTK_WIDGET (fsel));
-
-	gl_debug (DEBUG_FILE, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Open "O.K." button callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-open_ok (GtkWidget        *widget,
-	 GtkFileSelection *fsel)
-{
-	gchar            *raw_filename;
-	gchar 		 *filename;
-	GtkWidget        *dlg;
-	gint              ret;
-	EggRecentModel 	 *recent;
-	GtkWindow        *window;
-
-	gl_debug (DEBUG_FILE, "START");
-
-	g_return_if_fail (GTK_IS_FILE_SELECTION (fsel));
-
-	/* get the filename */
-	raw_filename = g_strdup (gtk_file_selection_get_filename (fsel));
-	filename = g_filename_to_utf8 (raw_filename, -1, NULL, NULL, NULL);
-
-	if (!raw_filename || 
-	    !filename || 
-	    g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
-
-		dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_CLOSE,
-					_("Empty file name selection"),
-					_("Please select a file or supply a valid file name"));
-
-		gtk_dialog_run (GTK_DIALOG (dlg));
-		gtk_widget_destroy (dlg);
-
-	} else {
-
-		if (!g_file_test (raw_filename, G_FILE_TEST_IS_REGULAR)) {
-
-			dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_WARNING,
-						GTK_BUTTONS_CLOSE,
-						_("File does not exist"),
-						_("Please select a file or supply a valid file name"));
-
-			gtk_dialog_run (GTK_DIALOG (dlg));
-			gtk_widget_destroy (dlg);
-
-
-		} else {
-		
-			window = g_object_get_data (G_OBJECT(fsel),
-						    "parent_window");
-
-			if ( gl_file_open_real (filename, window) ) {
-				gtk_widget_destroy (GTK_WIDGET (fsel));
-			}
-
-		}
-
-	}
-
-	g_free (filename);
-	g_free (raw_filename);
-
-	gl_debug (DEBUG_FILE, "END");
-}
-#endif
 
 /*****************************************************************************/
 /* "Open recent" menu callback.                                              */
@@ -739,10 +617,6 @@ gl_file_open_real (const gchar     *filename,
 		if (open_path != NULL)
 			g_free (open_path);
 		open_path = g_path_get_dirname (abs_filename);
-#ifndef HAVE_FILE_CHOOSER
-		if (open_path != NULL)
-			open_path = g_strconcat (open_path, "/", NULL);
-#endif
 		g_free (abs_filename);
 
 		gl_debug (DEBUG_FILE, "END true");
@@ -824,8 +698,6 @@ gl_file_save (glLabel   *label,
 		return TRUE;
 	}
 }
-
-#ifdef HAVE_FILE_CHOOSER
 
 /*****************************************************************************/
 /* "Save As" menu callback.                                                  */
@@ -1025,221 +897,6 @@ save_as_response (GtkDialog     *chooser,
 	gl_debug (DEBUG_FILE, "END");
 }
 
-#else
-
-/*****************************************************************************/
-/* "Save As" menu callback.                                                  */
-/*****************************************************************************/
-gboolean
-gl_file_save_as (glLabel   *label,
-		 GtkWindow *window)
-{
-	GtkFileSelection *fsel;
-	gboolean          saved_flag = FALSE;
-	gboolean          destroy_flag = FALSE;
-	gchar            *name, *title;
-
-	gl_debug (DEBUG_FILE, "START");
-
-	g_return_val_if_fail (label && GL_IS_LABEL(label), FALSE);
-	g_return_val_if_fail (window && GTK_IS_WINDOW(window), FALSE);
-
-	name = gl_label_get_short_name (label);
-	title = g_strdup_printf (_("Save \"%s\" as"), name);
-	g_free (name);
-
-	fsel = GTK_FILE_SELECTION (gtk_file_selection_new (title));
-	gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW (fsel), window);
-
-	g_object_set_data (G_OBJECT (fsel), "label", label);
-	g_object_set_data (G_OBJECT (fsel), "saved_flag", &saved_flag);
-
-	g_signal_connect (G_OBJECT (fsel->ok_button), "clicked",
-			  G_CALLBACK (save_as_ok_cb), fsel);
-
-	g_signal_connect (G_OBJECT (fsel->cancel_button), "clicked",
-			  G_CALLBACK (save_as_cancel_cb), fsel);
-
-	g_signal_connect (G_OBJECT (fsel), "destroy",
-			  G_CALLBACK (save_as_destroy_cb), &destroy_flag);
-
-	/* Recover proper state of save-as dialog */
-	if (save_path != NULL) {
-		gtk_file_selection_set_filename (fsel, save_path);
-	}
-
-	/* show the dialog */
-	gtk_widget_show (GTK_WIDGET (fsel));
-
-	/* Hold here and process events until we are done with this dialog. */
-	gtk_main ();
-
-	/* Destroy dialog if not already destroyed. */
-	if (!destroy_flag) {
-		/* Disconnect our destroy callback first, so that we don't
-		 * kill the current gtk_main() loop. */
-		g_signal_handlers_disconnect_by_func (GTK_OBJECT (fsel),
-						      G_CALLBACK (save_as_destroy_cb),
-						      &destroy_flag);
-		gtk_widget_destroy (GTK_WIDGET (fsel));
-	}
-
-	g_free (title);
-
-	gl_debug (DEBUG_FILE, "END");
-
-	/* Return flag as set by one of the above callbacks, TRUE = saved */
-	return saved_flag;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Save As" ok button callback.                                   */
-/*---------------------------------------------------------------------------*/
-static void
-save_as_ok_cb (GtkWidget        *widget,
-	       GtkFileSelection *fsel)
-{
-	gchar            *raw_filename, *filename, *full_filename;
-	GtkWidget        *dlg;
-	glLabel          *label;
-	glXMLLabelStatus  status;
-	EggRecentModel   *recent;
-	gboolean         *saved_flag;
-	gchar            *primary_msg;
-	gboolean          cancel_flag = FALSE;
-
-	gl_debug (DEBUG_FILE, "START");
-
-	g_return_if_fail (GTK_IS_FILE_SELECTION (fsel));
-
-	label = g_object_get_data (G_OBJECT(fsel), "label");
-	saved_flag = g_object_get_data (G_OBJECT(fsel), "saved_flag");
-
-	/* get the filename */
-	raw_filename = g_strdup (gtk_file_selection_get_filename (fsel));
-
-	gl_debug (DEBUG_FILE, "raw_filename = \"%s\"", raw_filename);
-
-	if (!raw_filename || g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
-
-		dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_CLOSE,
-					_("Empty file name selection"),
-					_("Please supply a valid file name"));
-
-		gtk_dialog_run (GTK_DIALOG (dlg));
-		gtk_widget_destroy (dlg);
-
-	} else {
-
-		full_filename = gl_util_add_extension (raw_filename);
-
-		filename = g_filename_to_utf8 (full_filename, -1, NULL, NULL, NULL);
-
-		gl_debug (DEBUG_FILE, "filename = \"%s\"", filename);
-
-		if (g_file_test (full_filename, G_FILE_TEST_IS_REGULAR)) {
-			gint ret;
-
-			primary_msg = g_strdup_printf (_("Overwrite file \"%s\"?"),
-						       filename);
-
-			dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_QUESTION,
-						GTK_BUTTONS_YES_NO,
-						primary_msg,
-						_("File already exists."));
-			
-			g_free (primary_msg);
-
-			ret = gtk_dialog_run (GTK_DIALOG (dlg));
-			if ( ret == GTK_RESPONSE_NO ) {
-				cancel_flag = TRUE;
-			}
-			gtk_widget_destroy (dlg);
-		}
-
-		if (!cancel_flag) {
-
-			gl_xml_label_save (label, filename, &status);
-
-			gl_debug (DEBUG_FILE, "status of save = %d", status);
-
-			if ( status != XML_LABEL_OK ) {
-
-				primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
-							       filename);
-
-				dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
-							GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-							GTK_MESSAGE_ERROR,
-							GTK_BUTTONS_CLOSE,
-							primary_msg,
-							_("Error encountered during save.  The file is still not saved."));
-
-				g_free (primary_msg);
-
-				gtk_dialog_run (GTK_DIALOG (dlg));
-				gtk_widget_destroy (dlg);
-
-			} else {
-
-				*saved_flag = TRUE;
-
-				gl_recent_add_uri (filename);
-
-				if (save_path != NULL)
-					g_free (save_path);
-				save_path = g_path_get_dirname (filename);
-				if (save_path != NULL)
-					save_path = g_strconcat (save_path, "/", NULL);
-
-				gtk_widget_destroy (GTK_WIDGET (fsel));
-			}
-
-		}
-
-		g_free (filename);
-		g_free (full_filename);
-	}
-
-	g_free (raw_filename);
-
-	gl_debug (DEBUG_FILE, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Save As" cancel button callback.                               */
-/*---------------------------------------------------------------------------*/
-static void
-save_as_cancel_cb (GtkWidget        *widget,
-		   GtkFileSelection *fsel)
-{
-	gboolean *saved_flag = g_object_get_data (G_OBJECT (fsel), "saved_flag");
-
-	g_return_if_fail (GTK_IS_FILE_SELECTION (fsel));
-
-	*saved_flag = FALSE;
-	gtk_widget_hide (GTK_WIDGET (fsel));
-	gtk_main_quit ();
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Save As" destroy callback.                                     */
-/*---------------------------------------------------------------------------*/
-static void
-save_as_destroy_cb (GtkWidget *widget,
-		    gboolean  *destroy_flag)
-{
-	*destroy_flag = TRUE;
-	gtk_main_quit ();
-}
-
-#endif
 
 /*****************************************************************************/
 /* "Close" menu callback.                                                    */

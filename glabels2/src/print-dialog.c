@@ -21,6 +21,7 @@
  */
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>

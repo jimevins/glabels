@@ -22,9 +22,9 @@
 #include <config.h>
 
 #include <glib.h>
+#include <glib/gi18n.h>
 
 #include "view-line.h"
-
 #include "view-highlight.h"
 
 #include "color.h"

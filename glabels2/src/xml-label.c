@@ -24,6 +24,7 @@
 
 #include <gnome.h>
 
+#include <glib/gi18n.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <gdk-pixbuf/gdk-pixdata.h>

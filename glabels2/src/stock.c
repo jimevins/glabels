@@ -21,7 +21,10 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+
+#include <glib/gi18n.h>
+#include <gtk/gtkiconfactory.h>
+#include <gtk/gtkstock.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include "stock.h"
 #include "stock-pixmaps/stockpixbufs.h"

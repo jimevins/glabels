@@ -22,7 +22,8 @@
 
 #include <config.h>
 
-#include <gnome.h>
+#include <glib/gi18n.h>
+#include <libgnome/libgnome.h>
 #include <libgnomeprint/gnome-print-job.h>
 
 #include "merge-init.h"

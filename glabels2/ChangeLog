@@ -1,5 +1,59 @@
 2005-03-22  Jim Evins  <evins@snaught.com>
 
+	Since the development version now requires gtk-2.6/gnome-2.10, I
+	have made a first pass at removing deprecations.
+
+	* configure.in:
+	* libglabels/Makefile.am:
+	* src/Makefile.am:
+		Added configure option to turn on X_DISABLE_DEPRECATED flags.
+		Also removed all remnants of HAVE_FILECHOOSER.
+	* src/file.c: (gl_file_open_real):
+		Removed code for old GtkFileSelection.
+	* libglabels/libglabels-private.h:
+	* libglabels/paper.c:
+	* libglabels/template.c:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* src/bc.c:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label.c:
+	* src/merge-init.c:
+	* src/merge-properties-dialog.c:
+	* src/merge.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/prefs.c:
+	* src/print-dialog.c:
+	* src/print.c:
+	* src/stock.c:
+	* src/template-designer.c:
+	* src/ui-property-bar.c:
+	* src/ui-sidebar.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-image-select.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+	* src/window.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Added '#include <glib/gi18n.h>" where needed.
+		Removed any unused '#include <gnome.h>"s.
+
+2005-03-22  Jim Evins  <evins@snaught.com>
+
 	* src/commands.c: (activate_url), (gl_cmd_help_about):
 		Replaced GnomeAbout with GtkAboutDialog.  Therefore the
 		development version of glabels now depends on GTK 2.6 and

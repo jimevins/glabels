@@ -26,21 +26,6 @@
 #ifndef __LIBGLABELS_PRIVATE_H__
 #define __LIBGLABELS_PRIVATE_H__
 
-#include <config.h>
-
-#if ENABLE_NLS
-
-#       include <libintl.h>
-#       define _(x) dgettext (GETTEXT_PACKAGE, x)
-#       define N_(x) x
-
-#else
-
-#       define _(x) x
-#       define N_(x) x
-
-#endif
-
 /* Data system and user data directories.  (must free w/ g_free()) */
 #define GL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
 #define GL_USER_DATA_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)

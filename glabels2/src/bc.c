@@ -21,7 +21,7 @@
  */
 #include <config.h>
 
-#include <libgnome/libgnome.h>
+#include <glib/gi18n.h>
 
 #include "bc.h"
 #include "bc-postnet.h"

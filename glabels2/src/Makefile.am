@@ -20,7 +20,7 @@ INCLUDES = \
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 		\
 	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
-	$(HAVE_FILE_CHOOSER)
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 glabels_LDFLAGS = -export-dynamic
 

@@ -3,7 +3,8 @@ templatesdir = $(datadir)/glabels/templates
 INCLUDES = \
 	$(LIBGLABELS_CFLAGS)				\
 	-DDATADIR=\""$(datadir)"\"			\
-	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\"
+	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\" \
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 libglabels_la_LDFLAGS=\
         -version-info $(LIBGLABELS_VERSION_INFO) \

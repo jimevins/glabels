@@ -22,6 +22,8 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
+
 #include "wdgt-image-select.h"
 #include "merge.h"
 #include "marshal.h"
