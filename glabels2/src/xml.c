@@ -162,38 +162,35 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 			gdouble      default_val)
 {
 	gdouble  val;
-	gchar   *string, units[65];
-	gint     n, i;
+	gchar   *string, *unit;
+	gint     i;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
-		n = sscanf (string, "%lf%64s", &val, units);
-		g_free (string);
 
-		switch (n) {
+		val = g_strtod (string, &unit);
 
-		case 1:
-			break;
-
-		case 2:
-			for (i=0; unit_table[i].name != NULL; i++) {
-				if (xmlStrcasecmp (units, unit_table[i].name) == 0) {
-					val *= unit_table[i].points_per_unit;
-					break;
+		if (unit != string) {
+			unit = g_strchug (unit);
+			if (strlen (unit) > 0 ) {
+				for (i=0; unit_table[i].name != NULL; i++) {
+					if (xmlStrcasecmp (unit, unit_table[i].name) == 0) {
+						val *= unit_table[i].points_per_unit;
+						break;
+					}
+				}
+				if (unit_table[i].name == NULL) {
+					g_warning ("Line %d, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
+						   xmlGetLineNo (node), node->name, property,
+						   unit);
 				}
 			}
-			if (unit_table[i].name == NULL) {
-				g_warning ("Line %d, Node \"%s\", Property \"%s\": Unknown units \"%s\", assuming points",
-					   xmlGetLineNo (node), node->name, property,
-					   units);
-			}
-			break;
-
-		default:
-			val = 0.0;
-			break;
-
 		}
+		else {
+			val = 0.0;
+		}
+
+		g_free (string);
 		return val;
 	}
 
@@ -208,11 +205,12 @@ gl_xml_set_prop_double (xmlNodePtr    node,
 			const gchar  *property,
 			gdouble       val)
 {
-	gchar  *string;
+	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
 
-	string = g_strdup_printf ("%g", val);
+	/* Guarantee "C" locale by use of g_ascii_formatd */
+	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
+
 	xmlSetProp (node, property, string);
-	g_free (string);
 }
 
 /****************************************************************************/
@@ -264,10 +262,14 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 			const gchar  *property,
 			gdouble       val)
 {
-	gchar  *string;
+	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
+	gchar  *string_unit;
 
-	string = g_strdup_printf ("%gpt", val);
-	xmlSetProp (node, property, string);
-	g_free (string);
+	/* Guarantee "C" locale by use of g_ascii_formatd */
+	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
+
+	string_unit = g_strdup_printf ("%spt", string);
+	xmlSetProp (node, property, string_unit);
+        g_free (string_unit);
 }
 
