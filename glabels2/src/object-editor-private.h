@@ -119,7 +119,11 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *data_text_entry;
 	GtkWidget  *data_key_entry;
 	GtkWidget  *data_key_combo;
-
+	GtkWidget  *data_format_label;
+	GtkWidget  *data_ex_label;
+	GtkWidget  *data_digits_label;
+	GtkWidget  *data_digits_spin;
+	gboolean    data_format_fixed_flag;
 };
 
 enum {

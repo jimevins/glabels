@@ -366,6 +366,7 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 {
         GList     *keys;
 	GtkWidget *combo;
+	gboolean   fixed_flag;
  
         gl_debug (DEBUG_EDITOR, "START");
 
@@ -411,7 +412,23 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		}
 	}
  
-
+	fixed_flag = editor->priv->data_format_fixed_flag;
+	if (editor->priv->data_format_label) {
+		gtk_widget_set_sensitive (editor->priv->data_format_label,
+					  (merge != NULL));
+	}
+	if (editor->priv->data_ex_label) {
+		gtk_widget_set_sensitive (editor->priv->data_ex_label,
+					  (merge != NULL));
+	}
+	if (editor->priv->data_digits_label) {
+		gtk_widget_set_sensitive (editor->priv->data_digits_label,
+					  (merge != NULL) && !fixed_flag);
+	}
+	if (editor->priv->data_digits_spin) {
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
+					  (merge != NULL) && !fixed_flag);
+	}
  
         keys = gl_merge_get_key_list (merge);
         if ( keys != NULL ) {

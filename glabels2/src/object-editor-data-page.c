@@ -110,10 +110,20 @@ data_radio_toggled_cb (glObjectEditor *editor)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
                 gtk_widget_set_sensitive (editor->priv->data_text_entry, TRUE);
                 gtk_widget_set_sensitive (editor->priv->data_key_combo, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin, FALSE);
         } else {
                 gtk_widget_set_sensitive (editor->priv->data_text_entry, FALSE);
                 gtk_widget_set_sensitive (editor->priv->data_key_combo, TRUE);
-        }
+		gtk_widget_set_sensitive (editor->priv->data_format_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label,
+					  !editor->priv->data_format_fixed_flag);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
+					  !editor->priv->data_format_fixed_flag);
+	}
  
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
@@ -148,6 +158,10 @@ gl_object_editor_set_data (glObjectEditor      *editor,
                                               (editor->priv->data_literal_radio), TRUE); 
                 gtk_widget_set_sensitive (editor->priv->data_text_entry, TRUE);
                 gtk_widget_set_sensitive (editor->priv->data_key_combo, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label, FALSE);
  
                 gtk_editable_delete_text (GTK_EDITABLE (editor->priv->data_text_entry), 0, -1);
                 pos = 0;
@@ -165,6 +179,12 @@ gl_object_editor_set_data (glObjectEditor      *editor,
                                                                                 
                 gtk_widget_set_sensitive (editor->priv->data_text_entry, FALSE);
                 gtk_widget_set_sensitive (editor->priv->data_key_combo, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_format_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label,
+					  !editor->priv->data_format_fixed_flag);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
+					  !editor->priv->data_format_fixed_flag);
                                                                                 
                 gtk_editable_delete_text (GTK_EDITABLE (editor->priv->data_key_entry), 0, -1);
                 pos = 0;
@@ -216,4 +236,3 @@ gl_object_editor_get_data (glObjectEditor      *editor)
  
         return text_node;
 }
-

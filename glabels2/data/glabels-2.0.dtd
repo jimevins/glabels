@@ -273,6 +273,7 @@
                  color           %UINT_TYPE;             #REQUIRED
                  data            %STRING_TYPE;           #IMPLIED
                  field           %STRING_TYPE;           #IMPLIED
+                 format          %UINT_TYPE;             #IMPLIED
                  %affine_attrs;
                  %shadow_attrs;
 >

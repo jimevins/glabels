@@ -46,6 +46,8 @@ typedef struct {
 	gboolean          can_checksum;
 	gboolean          checksum_optional;
 	gchar            *default_digits;
+	gboolean          can_freeform;
+	guint             prefered_n;
 } Backend;
 
 
@@ -56,90 +58,90 @@ typedef struct {
 Backend backends[] = {
 
 	{ "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "000000000"},
+	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
 	{ "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "00000"},
+	  FALSE, FALSE, TRUE, FALSE, "12345", FALSE, 5},
 
 	{ "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "000000000"},
+	  FALSE, FALSE, TRUE, FALSE, "12345-6789", FALSE, 9},
 
 	{ "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
-	  FALSE, FALSE, TRUE, FALSE, "00000000000"},
+	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
 	{ "EAN", N_("EAN (any)"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
 
 	{ "EAN-8", N_("EAN-8"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000"},
+	  TRUE, TRUE, TRUE, FALSE, "0000000", FALSE, 7},
 
 	{ "EAN-8+2", N_("EAN-8 +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000 00"},
+	  TRUE, TRUE, TRUE, FALSE, "0000000 00", FALSE, 9},
 
 	{ "EAN-8+5", N_("EAN-8 +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "0000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "0000000 00000", FALSE, 12},
 
 	{ "EAN-13", N_("EAN-13"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000"},
+	  TRUE, TRUE, TRUE, FALSE, "000000000000", FALSE, 12},
 
 	{ "EAN-13+2", N_("EAN-13 +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00"},
+	  TRUE, TRUE, TRUE, FALSE, "000000000000 00", FALSE, 14},
 
 	{ "EAN-13+5", N_("EAN-13 +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
 
 	{ "UPC", N_("UPC (UPC-A or UPC-E)"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
 
 	{ "UPC-A", N_("UPC-A"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000"},
+	  TRUE, TRUE, TRUE, FALSE, "00000000000", FALSE, 11},
 
 	{ "UPC-A+2", N_("UPC-A +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00"},
+	  TRUE, TRUE, TRUE, FALSE, "00000000000 00", FALSE, 13},
 
 	{ "UPC-A+5", N_("UPC-A +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
 
 	{ "UPC-E", N_("UPC-E"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000"},
+	  TRUE, TRUE, TRUE, FALSE, "000000", FALSE, 6},
 
 	{ "UPC-E+2", N_("UPC-E +2"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000 00"},
+	  TRUE, TRUE, TRUE, FALSE, "000000 00", FALSE, 8},
 
 	{ "UPC-E+5", N_("UPC-E +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000 00000"},
+	  TRUE, TRUE, TRUE, FALSE, "000000 00000", FALSE, 11},
 
 	{ "ISBN", N_("ISBN"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0"},
+	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0", FALSE, 10},
 
 	{ "ISBN+5", N_("ISBN +5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0 00000"},
+	  TRUE, TRUE, TRUE, TRUE, "0-00000-000-0 00000", FALSE, 15},
 
 	{ "Code39", N_("Code 39"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "Code128", N_("Code 128"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "Code128C", N_("Code 128C"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "Code128B", N_("Code 128B"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "I25", N_("Interleaved 2 of 5"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "CBR", N_("Codabar"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "MSI", N_("MSI"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000"},
+	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL}
+	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
 
 };
 
@@ -283,9 +285,22 @@ gl_barcode_free_styles_list (GList *styles_list)
 /* Return an appropriate set of digits for the given barcode style.          */
 /*****************************************************************************/
 gchar *
-gl_barcode_default_digits (const gchar *id)
+gl_barcode_default_digits (const gchar *id,
+			   guint        n)
 {
-	return g_strdup (backends[id_to_index (id)].default_digits);
+	int i;
+
+	i = id_to_index (id);
+
+	if (backends[i].can_freeform) {
+
+		return g_strnfill (n, '0');
+
+	} else {
+
+		return g_strdup (backends[i].default_digits);
+
+	}
 }
 
 /*****************************************************************************/
@@ -316,6 +331,25 @@ gboolean
 gl_barcode_csum_optional (const gchar *id)
 {
 	return backends[id_to_index (id)].checksum_optional;
+}
+
+
+/*****************************************************************************/
+/* Query if freeform input is allowed.                                       */
+/*****************************************************************************/
+gboolean
+gl_barcode_can_freeform     (const gchar    *id)
+{
+	return backends[id_to_index (id)].can_freeform;
+}
+
+/*****************************************************************************/
+/* Query prefered number of digits of input.                                 */
+/*****************************************************************************/
+guint
+gl_barcode_get_prefered_n (const gchar    *id)
+{
+	return backends[id_to_index (id)].prefered_n;
 }
 
 /*****************************************************************************/

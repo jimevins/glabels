@@ -546,7 +546,7 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    id, text_flag, checksum_flag);
+				    id, text_flag, checksum_flag, 0);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 
 	gl_text_node_free (&text_node);

@@ -228,12 +228,14 @@ void        gl_object_editor_set_text_buffer      (glObjectEditor      *editor,
 void        gl_object_editor_set_bc_style         (glObjectEditor      *editor,
 						   gchar               *id,
 						   gboolean             text_flag,
-						   gboolean             checksum_flag);
+						   gboolean             checksum_flag,
+						   guint                format_digits);
 
 void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
 						   gchar              **id,
 						   gboolean            *text_flag,
-						   gboolean            *checksum_flag);
+						   gboolean            *checksum_flag,
+						   guint               *format_digits);
 
 void        gl_object_editor_set_bc_color         (glObjectEditor      *editor,
 						   guint                text_color);
@@ -249,7 +251,6 @@ void        gl_object_editor_set_data             (glObjectEditor      *editor,
 						   glTextNode          *text_node);
 
 glTextNode *gl_object_editor_get_data             (glObjectEditor      *editor);
-
 
 
 

@@ -687,6 +687,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	guint               color;
+	guint               format_digits;
 	gdouble             affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -708,8 +709,9 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
 	color = gl_xml_get_prop_uint (node, "color", 0);
+	format_digits = gl_xml_get_prop_uint (node, "format", 0);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    id, text_flag, checksum_flag);
+				    id, text_flag, checksum_flag, format_digits);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 	g_free (id);
 
@@ -1358,6 +1360,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gboolean          text_flag;
 	gboolean          checksum_flag;
 	guint             color;
+	guint             format_digits;
 	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -1376,7 +1379,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 
 	/* Barcode properties attrs */
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &checksum_flag);
+				    &id, &text_flag, &checksum_flag, &format_digits);
 	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	xmlSetProp (node, "style", id);
 	gl_xml_set_prop_boolean (node, "text", text_flag);
@@ -1388,6 +1391,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {
 		xmlSetProp (node, "field", text_node->data);
+	        gl_xml_set_prop_int (node, "format", format_digits);
 	} else {
 		xmlSetProp (node, "data", text_node->data);
 	}

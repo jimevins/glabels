@@ -1,3 +1,35 @@
+2004-07-18  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+	* src/bc.c: (gl_barcode_default_digits), (gl_barcode_can_freeform),
+	(gl_barcode_get_prefered_n):
+	* src/bc.h:
+	* src/label-barcode.c: (copy), (gl_label_barcode_set_props),
+	(gl_label_barcode_get_props), (get_size):
+	* src/label-barcode.h:
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page),
+	(style_changed_cb), (gl_object_editor_set_bc_style),
+	(gl_object_editor_get_bc_style):
+	* src/object-editor-data-page.c: (data_radio_toggled_cb),
+	(gl_object_editor_set_data), (gl_object_editor_get_data):
+	* src/object-editor-private.h:
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/print.c: (draw_barcode_object):
+	* src/view-barcode.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_barcode_create_event_handler), (draw_barcode):
+	* src/xml-label-04.c: (xml04_parse_barcode_props):
+	* src/xml-label-191.c: (xml191_parse_barcode_props):
+	* src/xml-label.c: (xml_parse_object_barcode),
+	(xml_create_object_barcode):
+		Added "format" attribute to barcode objects.  This attribute is used
+		to properly format freeform barcodes barcodes prior to merge data is
+		applied, so that barcodes can be accurately layed out.  This addresses
+		remaining issues of feature request #824787.  Also added an example of
+		the format in the object editor.
+
 2004-07-12  Jim Evins  <evins@snaught.com>
 
 	Various code cleanups.

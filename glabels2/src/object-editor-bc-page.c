@@ -75,6 +75,16 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "bc_cs_check");
 	editor->priv->bc_color_combo =
 		glade_xml_get_widget (editor->priv->gui, "bc_color_combo");
+	editor->priv->data_format_label =
+		glade_xml_get_widget (editor->priv->gui, "data_format_label");
+	editor->priv->data_ex_label =
+		glade_xml_get_widget (editor->priv->gui, "data_ex_label");
+	editor->priv->data_digits_label =
+		glade_xml_get_widget (editor->priv->gui, "data_digits_label");
+	editor->priv->data_digits_spin =
+		glade_xml_get_widget (editor->priv->gui, "data_digits_spin");
+
+	editor->priv->data_format_fixed_flag = FALSE;
 
 	/* Load barcode styles */
 	styles = gl_barcode_get_styles_list ();
@@ -101,6 +111,10 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 				  "color_changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
+	g_signal_connect_swapped (G_OBJECT (editor->priv->data_digits_spin),
+				  "changed",
+				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -111,8 +125,10 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 static void
 style_changed_cb (glObjectEditor       *editor)
 {
-        gchar          *style_string;
+        gchar          *style_string = NULL;
 	const gchar    *id;
+	gchar          *ex_string = NULL;
+	guint           digits;
                                                                                 
         style_string =
                 gtk_editable_get_chars (GTK_EDITABLE(editor->priv->bc_style_entry), 0, -1);
@@ -131,12 +147,37 @@ style_changed_cb (glObjectEditor       *editor)
                 gtk_widget_set_sensitive (editor->priv->bc_cs_check,
                                           gl_barcode_csum_optional (id));
                                                                                 
+		editor->priv->data_format_fixed_flag = !gl_barcode_can_freeform (id);
+		digits = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin));
+		if (editor->priv->data_format_fixed_flag) {
+			digits = gl_barcode_get_prefered_n(id);
+			gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), 
+						   digits);
+		}
                                                                                 
+		ex_string = gl_barcode_default_digits (id, digits);
+		gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
+			gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
+			gtk_widget_set_sensitive (editor->priv->data_ex_label, FALSE);
+			gtk_widget_set_sensitive (editor->priv->data_digits_label, FALSE);
+			gtk_widget_set_sensitive (editor->priv->data_digits_spin, FALSE);
+		} else {
+			gtk_widget_set_sensitive (editor->priv->data_format_label, TRUE);
+			gtk_widget_set_sensitive (editor->priv->data_ex_label, TRUE);
+			gtk_widget_set_sensitive (editor->priv->data_digits_label,
+						  !editor->priv->data_format_fixed_flag);
+			gtk_widget_set_sensitive (editor->priv->data_digits_spin,
+						  !editor->priv->data_format_fixed_flag);
+		}
+ 
                 /* Emit our "changed" signal */
                 g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
         }
                                                                                 
         g_free (style_string);
+        g_free (ex_string);
 }
                                                                                 
 /*****************************************************************************/
@@ -146,10 +187,12 @@ void
 gl_object_editor_set_bc_style (glObjectEditor      *editor,
 			       gchar               *id,
 			       gboolean             text_flag,
-			       gboolean             checksum_flag)
+			       gboolean             checksum_flag,
+			       guint                format_digits)
 {
 	const gchar *style_string;
         gint         pos;
+	gchar       *ex_string;
  
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -162,6 +205,9 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
         g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_cs_check),
                                          G_CALLBACK (gl_object_editor_changed_cb),
                                          editor);
+	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_digits_spin),
+					 G_CALLBACK (gl_object_editor_changed_cb),
+					 editor);
 
         style_string = gl_barcode_id_to_name (id);
  
@@ -185,6 +231,33 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 	gtk_widget_set_sensitive (editor->priv->bc_cs_check,
 				  gl_barcode_csum_optional (id));
 
+	editor->priv->data_format_fixed_flag = !gl_barcode_can_freeform (id);
+
+	if (editor->priv->data_format_fixed_flag) {
+		format_digits = gl_barcode_get_prefered_n (id);
+	}
+
+	ex_string = gl_barcode_default_digits (id, format_digits);
+	gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
+	g_free (ex_string);
+
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), 
+				   format_digits);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
+		gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label, FALSE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin, FALSE);
+        } else {
+		gtk_widget_set_sensitive (editor->priv->data_format_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_ex_label, TRUE);
+		gtk_widget_set_sensitive (editor->priv->data_digits_label,
+					  !editor->priv->data_format_fixed_flag);
+		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
+					  !editor->priv->data_format_fixed_flag);
+	}
+ 
         g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_style_entry),
 					   G_CALLBACK (style_changed_cb),
 					   editor);
@@ -194,6 +267,9 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
         g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_cs_check),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_digits_spin),
+					 G_CALLBACK (gl_object_editor_changed_cb),
+					 editor);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -205,7 +281,8 @@ void
 gl_object_editor_get_bc_style (glObjectEditor      *editor,
 			       gchar              **id,
 			       gboolean            *text_flag,
-			       gboolean            *checksum_flag)
+			       gboolean            *checksum_flag,
+			       guint               *format_digits)
 {
         gchar *style_string;
 
@@ -222,6 +299,10 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor,
         *checksum_flag =
             gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_cs_check));
                                                                                 
+
+	*format_digits =
+		gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->data_digits_spin));
+
         g_free (style_string);
 
 	gl_debug (DEBUG_EDITOR, "END");

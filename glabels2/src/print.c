@@ -1048,13 +1048,14 @@ draw_barcode_object (PrintInfo      *pi,
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	guint               color;
+	guint               format_digits;
 	gdouble             w, h;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	text_node = gl_label_barcode_get_data (object);
 	gl_label_barcode_get_props (object,
-				    &id, &text_flag, &checksum_flag);
+				    &id, &text_flag, &checksum_flag, &format_digits);
 	color = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 

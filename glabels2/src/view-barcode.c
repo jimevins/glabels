@@ -262,6 +262,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gchar             *id;
 	gboolean           text_flag, cs_flag;
 	guint              color;
+	guint              format_digits;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -283,10 +284,10 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 	gl_text_node_free (&text_node);
 
-	gl_object_editor_get_bc_style (editor, &id, &text_flag, &cs_flag);
+	gl_object_editor_get_bc_style (editor, &id, &text_flag, &cs_flag, &format_digits);
 	color = gl_object_editor_get_bc_color (editor);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    id, text_flag, cs_flag);
+				    id, text_flag, cs_flag, format_digits);
 	gl_label_object_set_line_color (object, color);
 	g_free (id);
 
@@ -313,6 +314,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gboolean           text_flag, cs_flag;
 	guint              color;
 	glMerge           *merge;
+	guint              format_digits;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -320,9 +322,9 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_size (editor, w, h);
 
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &cs_flag);
+				    &id, &text_flag, &cs_flag, &format_digits);
 	color = gl_label_object_get_line_color (object);
-	gl_object_editor_set_bc_style (editor, id, text_flag, cs_flag);
+	gl_object_editor_set_bc_style (editor, id, text_flag, cs_flag, format_digits);
 	gl_object_editor_set_bc_color (editor, color);
 	g_free (id);
 
@@ -452,7 +454,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    "POSTNET",
 						    FALSE,
-						    TRUE);
+						    TRUE,
+						    0);
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 						    gl_color_set_opacity (
 						      gl_view_get_default_line_color(view),
@@ -481,7 +484,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    "POSTNET",
 						    FALSE,
-						    TRUE);
+						    TRUE,
+						    0);
 			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
 							gl_view_get_default_line_color(view));
 			gl_view_unselect_all (view);
@@ -536,18 +540,19 @@ draw_barcode (glViewBarcode *view_barcode)
 	GnomeFont *font;
 	GnomeGlyphList *glyphlist;
 	gdouble y_offset;
+	guint format_digits;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Query label object and properties */
 	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &checksum_flag);
+				    &id, &text_flag, &checksum_flag, &format_digits);
 	color = gl_label_object_get_line_color (object);
 	gl_label_object_get_size (object, &w, &h);
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
 	if (text_node->field_flag) {
-		digits = gl_barcode_default_digits (id);
+		digits = gl_barcode_default_digits (id, format_digits);
 	} else {
 		digits = gl_text_node_expand (text_node, NULL);
 	}

@@ -65,13 +65,17 @@ void             gl_barcode_free             (glBarcode     **bc);
 GList           *gl_barcode_get_styles_list  (void);
 void             gl_barcode_free_styles_list (GList          *styles_list);
 
-gchar           *gl_barcode_default_digits   (const gchar    *id);
+gchar           *gl_barcode_default_digits   (const gchar    *id,
+					      guint            n);
 
 gboolean         gl_barcode_can_text         (const gchar    *id);
 gboolean         gl_barcode_text_optional    (const gchar    *id);
 
 gboolean         gl_barcode_can_csum         (const gchar    *id);
 gboolean         gl_barcode_csum_optional    (const gchar    *id);
+
+gboolean         gl_barcode_can_freeform     (const gchar    *id);
+guint            gl_barcode_get_prefered_n   (const gchar    *id);
 
 const gchar     *gl_barcode_id_to_name       (const gchar    *id);
 const gchar     *gl_barcode_name_to_id       (const gchar    *name);

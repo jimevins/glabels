@@ -431,7 +431,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 	if (scale == 0.0) {
 		scale = 0.5; /* Set to a valid value */
 	}
-	gl_label_barcode_set_props (object, id, text_flag, TRUE);
+	gl_label_barcode_set_props (object, id, text_flag, TRUE, 0);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);
 
 	child = node->xmlChildrenNode;

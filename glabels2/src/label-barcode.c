@@ -42,6 +42,7 @@ struct _glLabelBarcodePrivate {
 	guint           color;
 	gboolean        text_flag;
 	gboolean        checksum_flag;
+	guint           format_digits;
 };
 
 /*========================================================*/
@@ -169,6 +170,7 @@ copy (glLabelObject *dst_object,
 	gboolean             text_flag;
 	gboolean             checksum_flag;
 	guint                color;
+	guint                format_digits;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -176,11 +178,11 @@ copy (glLabelObject *dst_object,
 	g_return_if_fail (new_lbc && GL_IS_LABEL_BARCODE (new_lbc));
 
 	text_node = gl_label_barcode_get_data (lbc);
-	gl_label_barcode_get_props (lbc, &id, &text_flag, &checksum_flag);
+	gl_label_barcode_get_props (lbc, &id, &text_flag, &checksum_flag, &format_digits);
 	color = get_line_color (src_object);
 
 	gl_label_barcode_set_data (new_lbc, text_node);
-	gl_label_barcode_set_props (new_lbc, id, text_flag, checksum_flag);
+	gl_label_barcode_set_props (new_lbc, id, text_flag, checksum_flag, format_digits);
 	set_line_color (dst_object, color);
 
 	gl_text_node_free (&text_node);
@@ -217,7 +219,8 @@ void
 gl_label_barcode_set_props (glLabelBarcode *lbc,
 			    gchar          *id,
 			    gboolean        text_flag,
-			    gboolean        checksum_flag)
+			    gboolean        checksum_flag,
+			    guint           format_digits)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -226,11 +229,13 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 	if ( ((lbc->private->id == NULL) && (id != NULL))
 	     || (g_strcasecmp (lbc->private->id, id) != 0)
 	     || (lbc->private->text_flag != text_flag)
-	     || (lbc->private->checksum_flag != checksum_flag) ) {
+	     || (lbc->private->checksum_flag != checksum_flag)
+	     || (lbc->private->format_digits != format_digits)) {
 
 		lbc->private->id               = g_strdup (id);
 		lbc->private->text_flag        = text_flag;
 		lbc->private->checksum_flag    = checksum_flag;
+		lbc->private->format_digits    = format_digits;
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
 
@@ -255,13 +260,15 @@ void
 gl_label_barcode_get_props (glLabelBarcode *lbc,
 			    gchar          **id,
 			    gboolean       *text_flag,
-			    gboolean       *checksum_flag)
+			    gboolean       *checksum_flag,
+			    guint          *format_digits)
 {
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
 	*id               = g_strdup (lbc->private->id);
 	*text_flag        = lbc->private->text_flag;
 	*checksum_flag    = lbc->private->checksum_flag;
+	*format_digits    = lbc->private->format_digits;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -285,7 +292,8 @@ get_size (glLabelObject *object,
 
 
 	if (lbc->private->text_node->field_flag) {
-		data = gl_barcode_default_digits (lbc->private->id);
+		data = gl_barcode_default_digits (lbc->private->id,
+						  lbc->private->format_digits);
 	} else {
 		data = gl_text_node_expand (lbc->private->text_node, NULL);
 	}
@@ -299,7 +307,8 @@ get_size (glLabelObject *object,
 
 	if ( gbc == NULL ) {
 		/* Try again with default digits. */
-		data = gl_barcode_default_digits (lbc->private->id);
+		data = gl_barcode_default_digits (lbc->private->id,
+						  lbc->private->format_digits);
 		gbc = gl_barcode_new (lbc->private->id,
 				      lbc->private->text_flag,
 				      lbc->private->checksum_flag,
