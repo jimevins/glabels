@@ -21,7 +21,8 @@
  */
 #include <config.h>
 
-#include "gnome-recent-view.h"
+#include "recent-files/egg-recent-view.h"
+#include "recent-files/egg-recent-view-bonobo.h"
 #include <gconf/gconf-client.h>
 
 #include "ui.h"
@@ -221,9 +222,9 @@ gl_ui_init (BonoboUIComponent *ui_component,
 	    GtkWidget         *cursor_info_frame,
 	    GtkWidget         *zoom_info_frame)
 {
-        GnomeRecentView  *recent_view;
-        GnomeRecentModel *recent_model;
-	BonoboControl    *control;
+        EggRecentView	*recent_view;
+        EggRecentModel 	*recent_model;
+	BonoboControl	*control;
 
 	gl_debug (DEBUG_UI, "START");
 
@@ -321,12 +322,12 @@ gl_ui_init (BonoboUIComponent *ui_component,
 	/* add a GeditRecentView object */
         recent_model = gl_recent_get_model ();
         recent_view  =
-		GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (ui_component,
-								 "/menu/File/Recents"));
-        gnome_recent_view_set_model (recent_view, recent_model);
-        
-        g_signal_connect (G_OBJECT (recent_view), "activate",
-                          G_CALLBACK (gl_file_open_recent), win);
+		EGG_RECENT_VIEW (egg_recent_view_bonobo_new (ui_component,
+							       "/menu/File/Recents"));
+	egg_recent_view_set_model (recent_view, recent_model);
+
+	g_signal_connect (G_OBJECT (recent_view), "activate",
+			  G_CALLBACK (gl_file_open_recent), win);
 
 	gl_debug (DEBUG_UI, "END");
 }

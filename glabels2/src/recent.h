@@ -22,11 +22,13 @@
 #ifndef __RECENT_H__
 #define __RECENT_H__
 
-#include "gnome-recent-model.h"
+#include "recent-files/egg-recent-model.h"
 
 
-GnomeRecentModel * gl_recent_get_model (void);
-void               gl_recent_init (void);
+gchar * 		gl_recent_get_filename (EggRecentItem *item);
+void			gl_recent_add_uri (gchar *uri);
+EggRecentModel * 	gl_recent_get_model (void);
+void               	gl_recent_init (void);
 
 #endif /*__RECENT_H__*/
 

@@ -449,10 +449,11 @@ static void
 open_ok (GtkWidget        *widget,
 	 GtkFileSelection *fsel)
 {
-	gchar            *filename;
+	gchar            *raw_filename;
+	gchar 		 *filename;
 	GtkWidget        *dlg;
 	gint              ret;
-	GnomeRecentModel *recent;
+	EggRecentModel 	 *recent;
 	GtkWindow        *window;
 
 	gl_debug (DEBUG_FILE, "START");
@@ -460,9 +461,12 @@ open_ok (GtkWidget        *widget,
 	g_return_if_fail (GTK_IS_FILE_SELECTION (fsel));
 
 	/* get the filename */
-	filename = g_strdup (gtk_file_selection_get_filename (fsel));
+	raw_filename = g_strdup (gtk_file_selection_get_filename (fsel));
+	filename = g_filename_to_utf8 (raw_filename, -1, NULL, NULL, NULL);
 
-	if (!filename || g_file_test (filename, G_FILE_TEST_IS_DIR)) {
+	if (!raw_filename || 
+	    !filename || 
+	    g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
 
 		dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
 					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -476,7 +480,7 @@ open_ok (GtkWidget        *widget,
 
 	} else {
 
-		if (!g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+		if (!g_file_test (raw_filename, G_FILE_TEST_IS_REGULAR)) {
 
 			dlg = gl_hig_alert_new (GTK_WINDOW(fsel),
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -503,6 +507,7 @@ open_ok (GtkWidget        *widget,
 	}
 
 	g_free (filename);
+	g_free (raw_filename);
 
 	gl_debug (DEBUG_FILE, "END");
 }
@@ -511,13 +516,25 @@ open_ok (GtkWidget        *widget,
 /* "Open recent" menu callback.                                              */
 /*****************************************************************************/
 gboolean
-gl_file_open_recent (GnomeRecentView *view,
-		     const gchar     *filename,
+gl_file_open_recent (EggRecentView   *view,
+		     EggRecentItem   *item,
 		     GtkWindow       *window)
 {
+	gboolean result = FALSE;
+	gchar *filename;
+	
 	gl_debug (DEBUG_FILE, "");
 
-	return gl_file_open_real (filename, window);
+	filename = gl_recent_get_filename (item);
+
+	if (filename) {
+		gl_debug (DEBUG_FILE, "open recent: %s", filename);
+
+		result = gl_file_open_real (filename, window);
+		g_free (filename);
+	}
+
+	return result;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -530,7 +547,7 @@ gl_file_open_real (const gchar     *filename,
 	gchar            *abs_filename;
 	glLabel          *label;
 	glXMLLabelStatus  status;
-	GnomeRecentModel *recent;
+	EggRecentModel   *recent;
 	gint              ret;
 	GtkWidget        *new_window;
 
@@ -574,8 +591,7 @@ gl_file_open_real (const gchar     *filename,
 			gtk_widget_show_all (new_window);
 		}
 
-		recent = gl_recent_get_model ();
-		gnome_recent_model_add (recent, abs_filename);
+		gl_recent_add_uri (abs_filename);
 
 		if (open_path != NULL)
 			g_free (open_path);
@@ -602,7 +618,7 @@ gl_file_save (glLabel   *label,
 	glXMLLabelStatus  status;
 	GError           *error = NULL;
 	gchar            *filename = NULL;
-	GnomeRecentModel *recent;
+	EggRecentModel 	 *recent;
 
 	gl_debug (DEBUG_FILE, "");
 
@@ -657,8 +673,7 @@ gl_file_save (glLabel   *label,
 	{
 		gl_debug (DEBUG_FILE, "OK");
 
-		recent = gl_recent_get_model ();
-		gnome_recent_model_add (recent, filename);
+		gl_recent_add_uri (filename);
 
 		g_free (filename);
 
@@ -739,11 +754,11 @@ static void
 save_as_ok_cb (GtkWidget        *widget,
 	       GtkFileSelection *fsel)
 {
-	gchar            *raw_filename, *filename;
+	gchar            *raw_filename, *filename, *full_filename;
 	GtkWidget        *dlg;
 	glLabel          *label;
 	glXMLLabelStatus  status;
-	GnomeRecentModel *recent;
+	EggRecentModel   *recent;
 	gboolean         *saved_flag;
 	gchar            *primary_msg;
 	gboolean          cancel_flag = FALSE;
@@ -774,11 +789,13 @@ save_as_ok_cb (GtkWidget        *widget,
 
 	} else {
 
-		filename = gl_util_add_extension (raw_filename);
+		full_filename = gl_util_add_extension (raw_filename);
+
+		filename = g_filename_to_utf8 (full_filename, -1, NULL, NULL, NULL);
 
 		gl_debug (DEBUG_FILE, "filename = \"%s\"", filename);
 
-		if (g_file_test (filename, G_FILE_TEST_IS_REGULAR)) {
+		if (g_file_test (full_filename, G_FILE_TEST_IS_REGULAR)) {
 			gint ret;
 
 			primary_msg = g_strdup_printf (_("Overwrite file \"%s\"?"),
@@ -827,8 +844,7 @@ save_as_ok_cb (GtkWidget        *widget,
 
 				*saved_flag = TRUE;
 
-				recent = gl_recent_get_model ();
-				gnome_recent_model_add (recent, filename);
+				gl_recent_add_uri (filename);
 
 				if (save_path != NULL)
 					g_free (save_path);
@@ -842,6 +858,7 @@ save_as_ok_cb (GtkWidget        *widget,
 		}
 
 		g_free (filename);
+		g_free (full_filename);
 	}
 
 	g_free (raw_filename);

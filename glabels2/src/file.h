@@ -23,7 +23,7 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 
-#include "gnome-recent-view.h"
+#include "recent-files/egg-recent-view.h"
 #include <gtk/gtk.h>
 
 #include "label.h"
@@ -41,8 +41,8 @@ void     gl_file_properties  (glLabel         *label,
 void     gl_file_open        (GtkWindow       *window);
 
 
-gboolean gl_file_open_recent (GnomeRecentView *view,
-			      const gchar     *filename,
+gboolean gl_file_open_recent (EggRecentView   *view,
+			      EggRecentItem   *filename,
 			      GtkWindow       *window);;
 
 gboolean gl_file_open_real   (const gchar     *filename,

@@ -142,6 +142,7 @@ main (int argc, char **argv)
 	GList         *file_list = NULL, *p;
 	gint           i;
 	GtkWidget     *win;
+	gchar	      *utf8_filename;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -178,7 +179,7 @@ main (int argc, char **argv)
 	gl_template_init();
 	gl_merge_init();
 	gl_recent_init();
-
+	
 	if (bonobo_ui_init ("glabels", VERSION, &argc, argv) == FALSE) {
 		g_error (_("Could not initialize Bonobo!\n"));
 	}
@@ -201,13 +202,16 @@ main (int argc, char **argv)
 	args = (char**) poptGetArgs(ctx);
 	for (i = 0; args && args[i]; i++) 
 	{
-		file_list = g_list_append (file_list, args[i]);
+		utf8_filename = g_filename_to_utf8 (args[i], -1, NULL, NULL, NULL);
+		if (utf8_filename)
+			file_list = g_list_append (file_list, utf8_filename);
 	}
 
 	/* Open files or create empty top-level window. */
 	for (p = file_list; p; p = p->next) {
 		win = gl_window_new_from_file (p->data);
 		gtk_widget_show_all (win);
+		g_free (p->data);
 	}
 	if ( gl_window_get_window_list() == NULL ) {
 		win = gl_window_new ();

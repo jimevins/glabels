@@ -160,13 +160,17 @@ static void           xml_create_toplevel_span (xmlNodePtr        node,
 /* Open and read label from xml file.                                       */
 /****************************************************************************/
 glLabel *
-gl_xml_label_open (const gchar      *filename,
+gl_xml_label_open (const gchar      *utf8_filename,
 		   glXMLLabelStatus *status)
 {
 	xmlDocPtr  doc;
 	glLabel   *label;
+	gchar 	  *filename;
 
 	gl_debug (DEBUG_XML, "START");
+
+	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+	g_return_val_if_fail (filename, NULL);
 
 	doc = xmlParseFile (filename);
 	if (!doc) {
@@ -183,10 +187,11 @@ gl_xml_label_open (const gchar      *filename,
 	xmlFreeDoc (doc);
 
 	if (label) {
-		gl_label_set_filename (label, filename);
+		gl_label_set_filename (label, utf8_filename);
 		gl_label_clear_modified (label);
 	}
 
+	g_free (filename);
 	gl_debug (DEBUG_XML, "END");
 
 	return label;
@@ -917,29 +922,36 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 /****************************************************************************/
 void
 gl_xml_label_save (glLabel          *label,
-		   const gchar      *filename,
+		   const gchar      *utf8_filename,
 		   glXMLLabelStatus *status)
 {
 	xmlDocPtr doc;
 	gint      xml_ret;
+	gchar 	  *filename;
 
 	gl_debug (DEBUG_XML, "START");
 
 	doc = xml_label_to_doc (label, status);
 
-	xmlSetDocCompressMode (doc, 9);
-	xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
-	xmlFreeDoc (doc);
-	if (xml_ret == -1) {
+	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
+	if (!filename)
+		g_warning (_("Utf8 conversion error."));
+	else {
+		xmlSetDocCompressMode (doc, 9);
+		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
+		xmlFreeDoc (doc);
+		if (xml_ret == -1) {
 
-		g_warning (_("Problem saving xml file."));
-		*status = XML_LABEL_ERROR_SAVE_FILE;
+			g_warning (_("Problem saving xml file."));
+			*status = XML_LABEL_ERROR_SAVE_FILE;
 
-	} else {
+		} else {
 
-		gl_label_set_filename (label, filename);
-		gl_label_clear_modified (label);
+			gl_label_set_filename (label, utf8_filename);
+			gl_label_clear_modified (label);
 
+		}
+		g_free (filename);
 	}
 
 	gl_debug (DEBUG_XML, "END");

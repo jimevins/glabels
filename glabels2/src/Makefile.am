@@ -1,6 +1,6 @@
 LIB_BARCODE_DIR = ../barcode-0.98
 
-SUBDIRS= pixmaps stock-pixmaps mygal
+SUBDIRS= pixmaps stock-pixmaps mygal recent-files
 
 bin_PROGRAMS = glabels glabels-batch
 
@@ -29,6 +29,7 @@ glabels_LDFLAGS = -export-dynamic
 glabels_LDADD = 			\
 	$(GLABELS_LIBS)			\
 	mygal/libmygal.la		\
+	recent-files/librecent.la	\
 	-L$(LIB_BARCODE_DIR) -lbarcode	
 
 glabels_batch_LDFLAGS = -export-dynamic
@@ -39,9 +40,7 @@ glabels_batch_LDADD = 			\
 
 BUILT_SOURCES = 			\
 	marshal.c			\
-	marshal.h			\
-	gnome-recent-marshal.c		\
-	gnome-recent-marshal.h
+	marshal.h			
 
 glabels_SOURCES = 			\
 	glabels.c			\
@@ -183,14 +182,6 @@ glabels_SOURCES = 			\
 	color.h				\
 	canvas-hacktext.c		\
 	canvas-hacktext.h		\
-	gnome-recent-model.c		\
-	gnome-recent-model.h		\
-	gnome-recent-util.c		\
-	gnome-recent-util.h		\
-	gnome-recent-view.c		\
-	gnome-recent-view.h		\
-	gnome-recent-view-bonobo.c	\
-	gnome-recent-view-bonobo.h	\
 	debug.c 			\
 	debug.h 			\
 	$(BUILT_SOURCES)
@@ -264,20 +255,11 @@ marshal.c: marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gl_marshal >> $@
 
-gnome-recent-marshal.h: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --header --prefix=gnome_recent > $@
-
-gnome-recent-marshal.c: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
-	echo "#include \"gnome-recent-marshal.h\"" > $@ && \
-	$(GLIB_GENMARSHAL) $< --body --prefix=gnome_recent >> $@
-
-
 ui_DATA = glabels-ui.xml
 
 EXTRA_DIST = \
 	$(ui_DATA)			\
-	marshal.list			\
-	gnome-recent-marshal.list
+	marshal.list			
 
 CLEANFILES = $(BUILT_SOURCES)
 
