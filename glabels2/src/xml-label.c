@@ -709,7 +709,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = gl_xml_get_prop_boolean (node, "checksum", TRUE);
 	color = gl_xml_get_prop_uint (node, "color", 0);
-	format_digits = gl_xml_get_prop_uint (node, "format", 0);
+	format_digits = gl_xml_get_prop_uint (node, "format", 10);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 				    id, text_flag, checksum_flag, format_digits);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color);

@@ -1,4 +1,10 @@
 
+* gLabels 2.0.2 release.  Release date 2004-08-15.
+
+- Fixed crash when reading some labels created with 1.93.x.
+- Updated japanese translations (Takeshi AIHANA)
+- Fixed crash from improperly freeing translation strings.
+
 * gLabels 2.0.0 release.  Release date 2004-08-09.
 
 - Fixed crash when encountering old template files
@@ -11,4 +17,5 @@
 - Added option to auto-shrink text during document merge
 - Fixed memory leaks
 - Added format attibute to barcode objects, to allow correct layout of merged labels
+- Fixed mime type registration for GNOME 2.6
 

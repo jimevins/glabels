@@ -1,3 +1,37 @@
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+		Updated for 2.0.1 release.
+	* configure.in:
+		Updated libglabels versioning, due to fixes to xml-paper and xml-template.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node):
+	* src/xml-label-191.c: (xml191_parse_sheet):
+		Fixed improper use of gettext.
+	
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated version to 2.0.1.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* po/ja.po:
+		Updated 2.0.x translation by Takeshi AIHANA <aihana@gnome.gr.jp>.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	Fixes for Bug #1008181.
+
+	* src/bc.c: (gl_barcode_default_digits):
+		Make a format of zero digits, harmless.
+	* src/xml-label.c: (xml_parse_object_barcode):
+		Set default value of the format property of barcode objects to 10, not
+		zero.  This will prevent crashes when reading pre 2.0.x files.
+
 2004-08-09  Jim Evins  <evins@snaught.com>
 
 	* NEWS:
