@@ -253,6 +253,15 @@
     </Label-cd>
   </Template>
 
+  <!-- ===================================================================-->
+  <!-- Viking 02204 Etiketten, 21 per sheet                               -->
+  <!-- ===================================================================-->
+  <Template name="Viking 02204" size="A4" _description="Etiketten">
+    <Label-rectangle id="0" width="198" height="120" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="7" x0="0" y0="0" dx="198" dy="120"/>
+    </Label-rectangle>
+  </Template>
 
 
   <!-- ******************************************************************** -->

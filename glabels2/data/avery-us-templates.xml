@@ -105,6 +105,7 @@
       <Markup-margin size="5"/>
       <Layout nx="2" ny="3" x0="13" y0="36" dx="301" dy="234"/>
     </Label-rectangle>
+    <Alias name="Avery 5264"/>
     <Alias name="Avery 8164"/>
   </Template>
 

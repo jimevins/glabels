@@ -146,7 +146,25 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Netc Label Stock: DLT Labels, (www.netclabels.com), 30 per sheet    -->
+  <!-- =================================================================== -->
+  <Template name="Netc 749303-70001 " size="US-Letter" _description="DLT Labels">
+    <Label-rectangle id="0" width="162" height="59.4" round="0">
+      <Markup-margin size="18"/>
+      <Layout nx="3" ny="10" x0="36" y0="45" dx="189" dy="72"/>
+    </Label-rectangle>
+  </Template>
 
+  <!-- =================================================================== -->
+  <!-- Tough-Tags TTLW-2016 Microtube labels, 85 per sheet.                -->
+  <!-- =================================================================== -->
+  <Template name="Tough-Tags TTLW-2016" size="US-Letter" _description="Microtube labels">
+    <Label-rectangle id="0" width="92.16" height="36" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="5" ny="17" x0="68" y0="4.17" dx="100.8" dy="45.3"/>
+    </Label-rectangle>
+  </Template> 
 
 </Glabels-templates>
 
