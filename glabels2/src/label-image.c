@@ -139,7 +139,6 @@ gl_label_image_dup (glLabelImage *limage,
 		    glLabel      *label)
 {
 	glLabelImage *new_limage;
-	gdouble       x, y, w, h;
 	gchar        *filename;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -149,16 +148,10 @@ gl_label_image_dup (glLabelImage *limage,
 
 	new_limage = GL_LABEL_IMAGE(gl_label_image_new (label));
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(limage), &x, &y);
-	gl_label_object_get_size     (GL_LABEL_OBJECT(limage), &w, &h);
-
-	gl_label_object_set_position (GL_LABEL_OBJECT(new_limage),  x,  y);
-	gl_label_object_set_size     (GL_LABEL_OBJECT(new_limage),  w,  h);
+	gl_label_object_copy_props (GL_LABEL_OBJECT(new_limage), GL_LABEL_OBJECT(limage));
 
 	filename = gl_label_image_get_filename (limage);
-
 	gl_label_image_set_filename (new_limage, filename);
-
 	g_free (filename);
 
 	gl_debug (DEBUG_LABEL, "END");

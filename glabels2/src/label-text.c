@@ -161,7 +161,6 @@ gl_label_text_dup (glLabelText *ltext,
 		   glLabel     *label)
 {
 	glLabelText      *new_ltext;
-	gdouble           x, y, w, h;
 	GList            *lines;
 	gchar            *font_family;
 	gdouble           font_size;
@@ -177,11 +176,7 @@ gl_label_text_dup (glLabelText *ltext,
 
 	new_ltext = GL_LABEL_TEXT(gl_label_text_new (label));
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(ltext), &x, &y);
-	gl_label_object_get_size     (GL_LABEL_OBJECT(ltext), &w, &h);
-
-	gl_label_object_set_position (GL_LABEL_OBJECT(new_ltext),  x,  y);
-	gl_label_object_set_size     (GL_LABEL_OBJECT(new_ltext),  w,  h);
+	gl_label_object_copy_props (GL_LABEL_OBJECT(new_ltext), GL_LABEL_OBJECT(ltext));
 
 	lines = gl_label_text_get_lines (ltext);
 	gl_label_text_get_props (ltext,

@@ -134,7 +134,7 @@ gl_label_ellipse_dup (glLabelEllipse *lellipse,
 		      glLabel        *label)
 {
 	glLabelEllipse *new_lellipse;
-	gdouble         x, y, w, h, line_width;
+	gdouble         line_width;
 	guint           line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -144,11 +144,8 @@ gl_label_ellipse_dup (glLabelEllipse *lellipse,
 
 	new_lellipse = GL_LABEL_ELLIPSE(gl_label_ellipse_new (label));
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(lellipse), &x, &y);
-	gl_label_object_get_size     (GL_LABEL_OBJECT(lellipse), &w, &h);
-
-	gl_label_object_set_position (GL_LABEL_OBJECT(new_lellipse),  x,  y);
-	gl_label_object_set_size     (GL_LABEL_OBJECT(new_lellipse),  w,  h);
+	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lellipse),
+				    GL_LABEL_OBJECT(lellipse));
 
 	line_width = gl_label_ellipse_get_line_width (lellipse);
 	line_color = gl_label_ellipse_get_line_color (lellipse);

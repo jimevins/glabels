@@ -147,7 +147,6 @@ gl_label_barcode_dup (glLabelBarcode *lbc,
 {
 	glLabelBarcode      *new_lbc;
 	glTextNode          *text_node;
-	gdouble              x, y, w, h;
 	glBarcodeStyle       style;
 	gboolean             text_flag;
 	guint                color;
@@ -160,11 +159,7 @@ gl_label_barcode_dup (glLabelBarcode *lbc,
 
 	new_lbc = GL_LABEL_BARCODE(gl_label_barcode_new (label));
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(lbc), &x, &y);
-	gl_label_object_get_size     (GL_LABEL_OBJECT(lbc), &w, &h);
-
-	gl_label_object_set_position (GL_LABEL_OBJECT(new_lbc),  x,  y);
-	gl_label_object_set_size     (GL_LABEL_OBJECT(new_lbc),  w,  h);
+	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lbc), GL_LABEL_OBJECT(lbc));
 
 	text_node = gl_label_barcode_get_data (lbc);
 	gl_label_barcode_get_props (lbc, &style, &text_flag, &color, &scale);

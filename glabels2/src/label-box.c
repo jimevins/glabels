@@ -134,7 +134,7 @@ gl_label_box_dup (glLabelBox *lbox,
 		  glLabel    *label)
 {
 	glLabelBox *new_lbox;
-	gdouble     x, y, w, h, line_width;
+	gdouble     line_width;
 	guint       line_color, fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -144,11 +144,7 @@ gl_label_box_dup (glLabelBox *lbox,
 
 	new_lbox = GL_LABEL_BOX(gl_label_box_new (label));
 
-	gl_label_object_get_position (GL_LABEL_OBJECT(lbox), &x, &y);
-	gl_label_object_get_size     (GL_LABEL_OBJECT(lbox), &w, &h);
-
-	gl_label_object_set_position (GL_LABEL_OBJECT(new_lbox),  x,  y);
-	gl_label_object_set_size     (GL_LABEL_OBJECT(new_lbox),  w,  h);
+	gl_label_object_copy_props (GL_LABEL_OBJECT(new_lbox), GL_LABEL_OBJECT(lbox));
 
 	line_width = gl_label_box_get_line_width (lbox);
 	line_color = gl_label_box_get_line_color (lbox);
