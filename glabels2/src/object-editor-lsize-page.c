@@ -133,6 +133,10 @@ gl_object_editor_set_lsize (glObjectEditor      *editor,
 					 gl_object_editor_changed_cb,
 					 editor);
 
+	/* save a copy in internal units */
+	editor->priv->dx = dx;
+	editor->priv->dy = dy;
+
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal dx,dy = %g, %g", dx, dy);
 	dx *= editor->priv->units_per_point;
@@ -172,6 +176,10 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
 					 gl_object_editor_changed_cb,
 					 editor);
+
+	/* save a copy in internal units */
+	editor->priv->dx_max = dx_max;
+	editor->priv->dy_max = dy_max;
 
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal dx_max,dy_max = %g, %g", dx_max, dy_max);
@@ -213,6 +221,55 @@ gl_object_editor_get_lsize (glObjectEditor      *editor,
 
 	*dx = COMP_X (r, theta);
 	*dy = COMP_Y (r, theta);
+
+	/* save a copy in internal units */
+	editor->priv->dx = *dx;
+	editor->priv->dy = *dy;
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*****************************************************************************/
+/* PRIVATE. Prefs changed callback.  Update units related items.            */
+/*****************************************************************************/
+void
+lsize_prefs_changed_cb (glObjectEditor *editor)
+{
+	const gchar  *units_string;
+	gdouble       climb_rate;
+	gint          digits;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+        /* Get new configuration information */
+        units_string = gl_prefs_get_units_string ();
+        editor->priv->units_per_point = gl_prefs_get_units_per_point ();
+        climb_rate = gl_prefs_get_units_step_size ();
+        digits = gl_prefs_get_units_precision ();
+
+	/* Update characteristics of r_spin */
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
+					 gl_object_editor_changed_cb,
+					 editor);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
+				    digits);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
+					climb_rate, 10.0*climb_rate);
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
+					   gl_object_editor_changed_cb,
+					   editor);
+
+	/* Update r_units_label */
+	gtk_label_set_text (GTK_LABEL(editor->priv->lsize_r_units_label),
+			    units_string);
+
+	/* Update values of r_spin/theta_spin */
+	gl_object_editor_set_lsize (editor,
+				    editor->priv->dx,
+				    editor->priv->dy);
+	gl_object_editor_set_max_lsize (editor,
+					editor->priv->dx_max,
+					editor->priv->dy_max);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

@@ -43,6 +43,10 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *pos_y_spin;
 	GtkWidget  *pos_x_units_label;
 	GtkWidget  *pos_y_units_label;
+	gdouble     x;
+	gdouble     y;
+	gdouble     x_max;
+	gdouble     y_max;
 
 	GtkWidget  *size_page_vbox;
 	GtkWidget  *size_w_spin;
@@ -52,6 +56,10 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *size_aspect_checkbutton;
 	GtkWidget  *size_reset_image_button;
 	gdouble     size_aspect_ratio;
+	gdouble     w;
+	gdouble     h;
+	gdouble     w_max;
+	gdouble     h_max;
 	gdouble     w_base;
 	gdouble     h_base;
 
@@ -59,6 +67,10 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *lsize_r_spin;
 	GtkWidget  *lsize_theta_spin;
 	GtkWidget  *lsize_r_units_label;
+	gdouble     dx;
+	gdouble     dy;
+	gdouble     dx_max;
+	gdouble     dy_max;
 
 	GtkWidget  *fill_page_vbox;
 	GtkWidget  *fill_color_combo;
@@ -140,6 +152,10 @@ void gl_object_editor_prepare_data_page         (glObjectEditor        *editor);
 
 
 void gl_object_editor_changed_cb                (glObjectEditor        *editor);
+
+void lsize_prefs_changed_cb                     (glObjectEditor        *editor);
+void size_prefs_changed_cb                      (glObjectEditor        *editor);
+void position_prefs_changed_cb                  (glObjectEditor        *editor);
 
 G_END_DECLS
 

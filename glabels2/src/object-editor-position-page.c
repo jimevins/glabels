@@ -130,6 +130,10 @@ gl_object_editor_set_position (glObjectEditor      *editor,
 					 gl_object_editor_changed_cb,
 					 editor);
 
+	/* save a copy in internal units */
+	editor->priv->x = x;
+	editor->priv->y = y;
+
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal x,y = %g, %g", x, y);
 	x *= editor->priv->units_per_point;
@@ -168,6 +172,10 @@ gl_object_editor_set_max_position (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->pos_y_spin),
 					 gl_object_editor_changed_cb,
 					 editor);
+
+	/* save a copy in internal units */
+	editor->priv->x_max = x_max;
+	editor->priv->y_max = y_max;
 
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal x_max,y_max = %g, %g", x_max, y_max);
@@ -212,6 +220,67 @@ gl_object_editor_get_position (glObjectEditor      *editor,
 	/* convert everything back to our internal units (points) */
 	*x /= editor->priv->units_per_point;
 	*y /= editor->priv->units_per_point;
+
+	/* save a copy in internal units */
+	editor->priv->x = *x;
+	editor->priv->y = *y;
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*****************************************************************************/
+/* PRIVATE. Prefs changed callback.  Update units related items.            */
+/*****************************************************************************/
+void
+position_prefs_changed_cb (glObjectEditor *editor)
+{
+	const gchar  *units_string;
+	gdouble       climb_rate;
+	gint          digits;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+        /* Get new configuration information */
+        units_string = gl_prefs_get_units_string ();
+        editor->priv->units_per_point = gl_prefs_get_units_per_point ();
+        climb_rate = gl_prefs_get_units_step_size ();
+        digits = gl_prefs_get_units_precision ();
+
+	/* Update characteristics of x_spin/y_spin */
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->pos_x_spin),
+					 gl_object_editor_changed_cb,
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->pos_y_spin),
+					 gl_object_editor_changed_cb,
+					 editor);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->pos_x_spin),
+				    digits);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->pos_y_spin),
+				    digits);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->pos_x_spin),
+					climb_rate, 10.0*climb_rate);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->pos_y_spin),
+					climb_rate, 10.0*climb_rate);
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->pos_x_spin),
+					   gl_object_editor_changed_cb,
+					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->pos_y_spin),
+					   gl_object_editor_changed_cb,
+					   editor);
+
+	/* Update units_labels */
+	gtk_label_set_text (GTK_LABEL(editor->priv->pos_x_units_label),
+			    units_string);
+	gtk_label_set_text (GTK_LABEL(editor->priv->pos_y_units_label),
+			    units_string);
+
+	/* Update values of x_spin/y_spin */
+	gl_object_editor_set_position (editor,
+				       editor->priv->x,
+				       editor->priv->y);
+	gl_object_editor_set_max_position (editor,
+					   editor->priv->x_max,
+					   editor->priv->y_max);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

@@ -227,6 +227,8 @@ h_spin_cb (glObjectEditor *editor)
 static void
 size_reset_cb (glObjectEditor *editor)
 {
+	gdouble w_base, h_base;
+
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->size_w_spin),
 					 G_CALLBACK (h_spin_cb),
 					 editor);
@@ -234,10 +236,13 @@ size_reset_cb (glObjectEditor *editor)
 					 G_CALLBACK (h_spin_cb),
 					 editor);
 
+	w_base *= editor->priv->units_per_point;
+	h_base *= editor->priv->units_per_point;
+
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
-				   editor->priv->w_base);
+				   w_base);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
-				   editor->priv->h_base);
+				   h_base);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->size_w_spin),
 					   G_CALLBACK (h_spin_cb),
@@ -265,6 +270,10 @@ gl_object_editor_set_size (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->size_h_spin),
 					 h_spin_cb,
 					 editor);
+
+	/* save a copy in internal units */
+	editor->priv->w = w;
+	editor->priv->h = h;
 
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal w,h = %g, %g", w, h);
@@ -308,6 +317,10 @@ gl_object_editor_set_max_size (glObjectEditor      *editor,
 					 h_spin_cb,
 					 editor);
 
+	/* save a copy in internal units */
+	editor->priv->w_max = w_max;
+	editor->priv->h_max = h_max;
+
 	/* convert internal units to displayed units */
 	gl_debug (DEBUG_EDITOR, "internal w_max,h_max = %g, %g", w_max, h_max);
 	w_max *= editor->priv->units_per_point;
@@ -342,9 +355,6 @@ gl_object_editor_set_base_size    (glObjectEditor      *editor,
 				   gdouble              w_base,
 				   gdouble              h_base)
 {
-	w_base *= editor->priv->units_per_point;
-	h_base *= editor->priv->units_per_point;
-
 	gl_debug (DEBUG_EDITOR, "Setting w_base = %g", w_base);
 	gl_debug (DEBUG_EDITOR, "Setting h_base = %g", h_base);
 
@@ -370,6 +380,67 @@ gl_object_editor_get_size (glObjectEditor      *editor,
 	/* convert everything back to our internal units (points) */
 	*w /= editor->priv->units_per_point;
 	*h /= editor->priv->units_per_point;
+
+	/* save a copy in internal units */
+	editor->priv->w = *w;
+	editor->priv->h = *h;
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*****************************************************************************/
+/* PRIVATE. Prefs changed callback.  Update units related items.            */
+/*****************************************************************************/
+void
+size_prefs_changed_cb (glObjectEditor *editor)
+{
+	const gchar  *units_string;
+	gdouble       climb_rate;
+	gint          digits;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+        /* Get new configuration information */
+        units_string = gl_prefs_get_units_string ();
+        editor->priv->units_per_point = gl_prefs_get_units_per_point ();
+        climb_rate = gl_prefs_get_units_step_size ();
+        digits = gl_prefs_get_units_precision ();
+
+	/* Update characteristics of w_spin/h_spin */
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->size_w_spin),
+					 w_spin_cb,
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->size_h_spin),
+					 h_spin_cb,
+					 editor);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_w_spin),
+				    digits);
+	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->size_h_spin),
+				    digits);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->size_w_spin),
+					climb_rate, 10.0*climb_rate);
+	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->size_h_spin),
+					climb_rate, 10.0*climb_rate);
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->size_w_spin),
+					   w_spin_cb,
+					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->size_h_spin),
+					   h_spin_cb,
+					   editor);
+
+	/* Update units_labels */
+	gtk_label_set_text (GTK_LABEL(editor->priv->size_w_units_label),
+			    units_string);
+	gtk_label_set_text (GTK_LABEL(editor->priv->size_h_units_label),
+			    units_string);
+
+	/* Update values of w_spin/h_spin */
+	gl_object_editor_set_size (editor,
+				   editor->priv->w,
+				   editor->priv->h);
+	gl_object_editor_set_max_size (editor,
+				       editor->priv->w_max,
+				       editor->priv->h_max);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

@@ -65,6 +65,8 @@ static void gl_object_notebook_construct_valist (glObjectEditor       *editor,
 						 glObjectEditorOption  first_option,
 						 va_list               args);
 
+static void prefs_changed_cb                    (glObjectEditor       *editor);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -173,6 +175,9 @@ gl_object_editor_finalize (GObject *object)
 	g_return_if_fail (editor->priv != NULL);
 
 	g_free (editor->priv);
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
+					      prefs_changed_cb, editor);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
@@ -307,6 +312,10 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 	if (pages) {
 		gtk_widget_show (editor->priv->notebook);
 	}
+
+	g_signal_connect_swapped (G_OBJECT (gl_prefs), "changed",
+				  G_CALLBACK (prefs_changed_cb),
+				  editor);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -469,3 +478,28 @@ gl_object_editor_construct_color_combo (gchar *name,
 
 	return color_combo;
 }
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE. Prefs changed callback.  Update units related items.            */
+/*--------------------------------------------------------------------------*/
+static void
+prefs_changed_cb (glObjectEditor *editor)
+{
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+	if (editor->priv->lsize_r_spin) {
+		lsize_prefs_changed_cb (editor);
+	}
+		
+	if (editor->priv->size_w_spin) {
+		size_prefs_changed_cb (editor);
+	}
+		
+	if (editor->priv->pos_x_spin) {
+		position_prefs_changed_cb (editor);
+	}
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+

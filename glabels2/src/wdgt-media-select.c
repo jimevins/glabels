@@ -69,6 +69,8 @@ static void page_size_entry_changed_cb         (GtkEntry               *entry,
 						gpointer                user_data);
 static void template_entry_changed_cb          (GtkEntry               *entry,
 						gpointer                user_data);
+static void prefs_changed_cb                   (glPrefsModel           *gl_prefs,
+						gpointer                user_data);
 
 static void details_update                     (glWdgtMediaSelect      *media_select,
 						gchar                  *name);
@@ -158,6 +160,9 @@ gl_wdgt_media_select_finalize (GObject *object)
 	g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
 	media_select = GL_WDGT_MEDIA_SELECT (object);
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
+					      prefs_changed_cb, media_select);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
@@ -319,6 +324,9 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	g_signal_connect (G_OBJECT (media_select->template_entry), "changed",
 			  G_CALLBACK (template_entry_changed_cb),
 			  media_select);
+	g_signal_connect (G_OBJECT (gl_prefs), "changed",
+			  G_CALLBACK (prefs_changed_cb),
+			  media_select);
 
 	g_free (page_size_name);
 
@@ -386,6 +394,29 @@ template_entry_changed_cb (GtkEntry *entry,
 		/* Emit our "changed" signal */
 		g_signal_emit (G_OBJECT (user_data),
 			       wdgt_media_select_signals[CHANGED], 0);
+	}
+	g_free (name);
+
+	gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  modify widget due to change in prefs                           */
+/*--------------------------------------------------------------------------*/
+static void
+prefs_changed_cb (glPrefsModel *gl_prefs,
+		  gpointer      user_data)
+{
+	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
+	gchar *name;
+
+	gl_debug (DEBUG_MEDIA_SELECT, "START");
+
+	/* Update mini_preview canvas & details with template */
+	name = gtk_editable_get_chars (GTK_EDITABLE (media_select->template_entry), 0, -1);
+	if ( strlen(name) ) {
+		gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
+		details_update (media_select, name);
 	}
 	g_free (name);
 
