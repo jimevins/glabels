@@ -479,6 +479,7 @@ gl_label_object_get_extent (glLabelObject *object,
 			    gdouble       *x2,
 			    gdouble       *y2)
 {
+	gdouble  w, h;
 	ArtPoint a1, a2, a3, a4, b1, b2, b3, b4;
 	gdouble  affine[6];
 
@@ -486,15 +487,17 @@ gl_label_object_get_extent (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
+	gl_label_object_get_size (object, &w, &h);
+
 	/* setup untransformed corners of bounding box */
 	a1.x = 0.0;
 	a1.y = 0.0;
-	a2.x = object->private->w;
+	a2.x = w;
 	a2.y = 0.0;
-	a3.x = object->private->w;
-	a3.y = object->private->h;
+	a3.x = w;
+	a3.y = h;
 	a4.x = 0.0;
-	a4.y = object->private->h;
+	a4.y = h;
 
 	/* transform these points */
 	gl_label_object_get_applied_affine (object, affine);
@@ -612,16 +615,19 @@ void
 gl_label_object_get_applied_affine (glLabelObject *object,
 				    gdouble        affine[6])
 {
+	gdouble w, h;
 	gdouble to_center[6], to_origin[6];
 
 	gl_debug (DEBUG_LABEL, "");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
+	gl_label_object_get_size (object, &w, &h);
+
 	/* setup transformation affine */
-	art_affine_translate (to_center, -object->private->w/2.0, -object->private->h/2.0);
+	art_affine_translate (to_center, -w/2.0, -h/2.0);
 	art_affine_multiply (affine, to_center, object->private->affine);
-	art_affine_translate (to_origin, object->private->w/2.0, object->private->h/2.0);
+	art_affine_translate (to_origin, w/2.0, h/2.0);
 	art_affine_multiply (affine, affine, to_origin);
 }
 
