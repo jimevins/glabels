@@ -137,6 +137,8 @@ src/wdgt-mini-preview.c
 src/wdgt-mini-preview.h
 src/wdgt-rotate-label.c
 src/wdgt-rotate-label.h
+src/wdgt-chain-button.c
+src/wdgt-chain-button.h
 src/util.c
 src/util.h
 src/color.c

@@ -29,6 +29,7 @@
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "wdgt-chain-button.h"
 #include "marshal.h"
 
 #include "object-editor-private.h"
@@ -500,6 +501,24 @@ gl_object_editor_construct_color_combo (gchar *name,
 	color_combo_box_set_preview_relief (COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
 
 	return color_combo;
+}
+
+/*****************************************************************************/
+/* Construct chain button "Custom widget".                                   */
+/*****************************************************************************/
+GtkWidget *
+gl_object_editor_construct_chain_button (gchar *name,
+					 gchar *string1,
+					 gchar *string2,
+					 gint   int1,
+					 gint   int2)
+{
+	GtkWidget  *chain_button;
+
+	chain_button = gl_wdgt_chain_button_new (GL_WDGT_CHAIN_RIGHT);
+	gl_wdgt_chain_button_set_active (GL_WDGT_CHAIN_BUTTON(chain_button), TRUE);
+
+	return chain_button;
 }
 
 /*--------------------------------------------------------------------------*/

@@ -1,3 +1,44 @@
+2004-02-07  Jim Evins  <evins@snaught.com>
+
+	* src/stock-pixmaps/Makefile.am:
+	* src/stock-pixmaps/stock_hchain_24.png:
+	* src/stock-pixmaps/stock_hchain_broken_24.png:
+	* src/stock-pixmaps/stock_vchain_24.png:
+	* src/stock-pixmaps/stock_vchain_broken_24.png:
+		Added chain pixmaps borrowed from the gimp's default theme.
+
+	* src/stock.h:
+	* src/stock.c: (gl_stock_init), (add_button_icon):
+		Added above pixmaps to stock icon sets.  Created add_button_icon() to
+		add these pixmaps sized as GTK_ICON_SIZE_BUTTON.
+	
+	* src/wdgt-chain-button.h
+	* src/wdgt-chain-button.c
+	* src/Makefile.am:
+	* po/POTFILES.in:
+		Added this Modified version of gimpchainbutton widget, borrowed from
+		the gimp.
+	
+	* AUTHORS:
+		Added acknowledgements of the above borrowing from the gimp.
+	
+	* src/object-editor-size-page.c: (aspect_toggle_cb), (w_spin_cb),
+	(h_spin_cb):
+	* src/object-editor.c: (gl_object_editor_construct_chain_button):
+	* src/object-editor.glade:
+		Replaced the keep aspect ratio check box with the above chain-button
+		widget.
+	
+	* src/text-node.c: (gl_text_node_equal):
+	* src/text-node.h:
+		Added function gl_text_node_equal() to compare text_nodes.
+	
+	* src/label-image.c: (gl_label_image_set_filename):
+		Replaced incomplete text_node comparison code with invocation of
+		gl_text_node_equal.  This fixed the problem of not being able to
+		resize an image using the object_editor if the aspect ratio is not
+		locked.
+
 2004-02-04  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-image-page.c:

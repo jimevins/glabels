@@ -209,10 +209,7 @@ gl_label_image_set_filename (glLabelImage *limage,
 	old_filename = limage->private->filename;
 
 	/* If Unchanged don't do anything */
-	if ( (filename->field_flag == old_filename->field_flag) &&
-	     old_filename->data != NULL && filename->data != NULL &&
-	     !strcmp(filename->data, old_filename->data) )
-	{
+	if ( gl_text_node_equal (filename, old_filename ) ) {
 		return;
 	}
 

@@ -35,7 +35,11 @@ IMAGES = 	 			\
 	stock_bucket_fill_16.png	\
 	stock_bucket_fill_24.png	\
 	stock_pencil_16.png		\
-	stock_pencil_24.png
+	stock_pencil_24.png		\
+	stock_hchain_24.png		\
+	stock_hchain_broken_24.png	\
+	stock_vchain_24.png		\
+	stock_vchain_broken_24.png
 
 VARIABLES1 = \
 		stock_arrow_24 		$(srcdir)/stock_arrow_24.png	\
@@ -73,7 +77,11 @@ VARIABLES1 = \
 		stock_bucket_fill_16	$(srcdir)/stock_bucket_fill_16.png \
 		stock_bucket_fill_24	$(srcdir)/stock_bucket_fill_24.png \
 		stock_pencil_16		$(srcdir)/stock_pencil_16.png \
-		stock_pencil_24		$(srcdir)/stock_pencil_24.png
+		stock_pencil_24		$(srcdir)/stock_pencil_24.png \
+		stock_hchain_24		$(srcdir)/stock_hchain_24.png \
+		stock_hchain_broken_24	$(srcdir)/stock_hchain_broken_24.png \
+		stock_vchain_24		$(srcdir)/stock_vchain_24.png \
+		stock_vchain_broken_24	$(srcdir)/stock_vchain_broken_24.png
 
 
 noinst_DATA = stockpixbufs.h

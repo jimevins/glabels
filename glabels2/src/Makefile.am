@@ -164,6 +164,8 @@ glabels_SOURCES = 			\
 	wdgt-mini-preview.h		\
 	wdgt-rotate-label.c		\
 	wdgt-rotate-label.h		\
+	wdgt-chain-button.c		\
+	wdgt-chain-button.h		\
 	util.c				\
 	util.h				\
 	color.c				\

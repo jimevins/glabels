@@ -48,6 +48,10 @@ static add_icons (GtkIconFactory *factory,
 		  const guchar   *inline_24,
 		  const guchar   *inline_16);
 
+static add_button_icon (GtkIconFactory *factory,
+			const gchar    *stock_id,
+			const guchar   *inline_24);
+
 
 /****************************************************************************/
 /* Initialize our stock icons.                                              */
@@ -83,6 +87,10 @@ gl_stock_init (void)
 		{ GL_STOCK_CENTER_VERT,   N_("Label Ce_nter"),         0, 0, NULL },
 		{ GL_STOCK_BUCKET_FILL,   N_("Fill color"),            0, 0, NULL },
 		{ GL_STOCK_PENCIL,        N_("Line color"),            0, 0, NULL },
+		{ GL_STOCK_HCHAIN,        N_("Linked"),                0, 0, NULL },
+		{ GL_STOCK_HCHAIN_BROKEN, N_("Not Linked"),            0, 0, NULL },
+		{ GL_STOCK_VCHAIN,        N_("Linked"),                0, 0, NULL },
+		{ GL_STOCK_VCHAIN_BROKEN, N_("Not Linked"),            0, 0, NULL },
 	};
 
 	gtk_stock_add (items, G_N_ELEMENTS (items));
@@ -121,6 +129,11 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_BUCKET_FILL,   stock_bucket_fill_24, stock_bucket_fill_16);
 	add_icons (factory, GL_STOCK_PENCIL,        stock_pencil_24,      stock_pencil_16);
 
+	add_button_icon (factory, GL_STOCK_HCHAIN,        stock_hchain_24);
+	add_button_icon (factory, GL_STOCK_HCHAIN_BROKEN, stock_hchain_broken_24);
+	add_button_icon (factory, GL_STOCK_VCHAIN,        stock_vchain_24);
+	add_button_icon (factory, GL_STOCK_VCHAIN_BROKEN, stock_vchain_broken_24);
+
 	g_object_unref (G_OBJECT(factory));
 }
 
@@ -158,6 +171,33 @@ static add_icons (GtkIconFactory *factory,
 		gtk_icon_set_add_source (icon_set, icon_source);
 		g_free (icon_source);
 	}
+
+	/* Now associate icon set with stock id */
+	gtk_icon_factory_add (factory, stock_id, icon_set);
+	gtk_icon_set_unref (icon_set);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Unpack and associate given button icon with stock_id.          */
+/*--------------------------------------------------------------------------*/
+static add_button_icon (GtkIconFactory *factory,
+			const gchar    *stock_id,
+			const guchar   *inline_24)
+{
+	GtkIconSet     *icon_set;
+	GdkPixbuf      *pixbuf;
+	GtkIconSource  *icon_source;
+
+	icon_set = gtk_icon_set_new ();
+
+	icon_source = gtk_icon_source_new ();
+	pixbuf = gdk_pixbuf_new_from_inline (-1, inline_24, FALSE, NULL);
+	gtk_icon_source_set_pixbuf (icon_source, pixbuf);
+	g_object_unref (G_OBJECT(pixbuf));
+	gtk_icon_source_set_size_wildcarded (icon_source, FALSE);
+	gtk_icon_source_set_size (icon_source, GTK_ICON_SIZE_BUTTON);
+	gtk_icon_set_add_source (icon_set, icon_source);
+	g_free (icon_source);
 
 	/* Now associate icon set with stock id */
 	gtk_icon_factory_add (factory, stock_id, icon_set);

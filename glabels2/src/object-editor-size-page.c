@@ -26,6 +26,7 @@
 
 #include "object-editor.h"
 #include "prefs.h"
+#include "wdgt-chain-button.h"
 
 #include "object-editor-private.h"
 
@@ -143,12 +144,12 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 static void
 aspect_toggle_cb (glObjectEditor *editor)
 {
-        GtkToggleButton *toggle;
-	gdouble          w, h;
+        glWdgtChainButton *toggle;
+	gdouble            w, h;
 
-	toggle = GTK_TOGGLE_BUTTON (editor->priv->size_aspect_checkbutton);
+	toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
 
-        if (gtk_toggle_button_get_active (toggle)) {
+        if (gl_wdgt_chain_button_get_active (toggle)) {
                                                                                 
                 w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->size_w_spin));
                 h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->size_h_spin));
@@ -164,12 +165,12 @@ aspect_toggle_cb (glObjectEditor *editor)
 static void
 w_spin_cb (glObjectEditor *editor)
 {
-	gdouble w, h;
-        GtkToggleButton *toggle;
+	gdouble            w, h;
+        glWdgtChainButton *toggle;
 
-	toggle = GTK_TOGGLE_BUTTON (editor->priv->size_aspect_checkbutton);
+	toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
 
-        if (gtk_toggle_button_get_active (toggle)) {
+        if (gl_wdgt_chain_button_get_active (toggle)) {
 
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
                                                                                 
@@ -199,9 +200,9 @@ h_spin_cb (glObjectEditor *editor)
 {
 	gdouble w, h;
 
-        GtkToggleButton *toggle = GTK_TOGGLE_BUTTON (editor->priv->size_aspect_checkbutton);
+        glWdgtChainButton *toggle = GL_WDGT_CHAIN_BUTTON (editor->priv->size_aspect_checkbutton);
                                                                                 
-        if (gtk_toggle_button_get_active (toggle)) {
+        if (gl_wdgt_chain_button_get_active (toggle)) {
 
 		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
                                                                                 

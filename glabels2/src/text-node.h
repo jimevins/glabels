@@ -38,6 +38,9 @@ glTextNode *gl_text_node_new_from_text       (gchar          *text);
 glTextNode *gl_text_node_dup                 (glTextNode     *text_node);
 void        gl_text_node_free                (glTextNode    **text_node);
 
+gboolean    gl_text_node_equal               (glTextNode     *text_node1,
+					      glTextNode     *text_node2);
+
 gchar      *gl_text_node_lines_expand        (GList          *lines,
 					      glMergeRecord  *record);
 GList      *gl_text_node_lines_new_from_text (gchar          *text);

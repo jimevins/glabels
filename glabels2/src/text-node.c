@@ -169,6 +169,40 @@ gl_text_node_free (glTextNode **text_node)
 }
 
 /****************************************************************************/
+/* Compare 2 text nodes for equality.                                       */
+/****************************************************************************/
+gboolean
+gl_text_node_equal (glTextNode     *text_node1,
+		    glTextNode     *text_node2)
+{
+	/* First take care of the case of either or both being NULL. */
+	if ( text_node1 == NULL ) {
+		return ( text_node2 == NULL );
+	} else {
+		if ( text_node2 == NULL ) {
+			return FALSE;
+		}
+	}
+
+	/* Bail if field flags differ. */
+	if ( text_node1->field_flag != text_node2->field_flag ) {
+		return FALSE;
+	}
+
+	/* Now take care of the case of either or both data fields being NULL. */
+	if ( text_node1->data == NULL ) {
+		return ( text_node2->data == NULL );
+	} else {
+		if ( text_node2->data == NULL ) {
+			return FALSE;
+		}
+	}
+
+	/* Field flags are identical, so now compare the data. */
+	return (strcmp (text_node1->data, text_node2->data) == 0);
+}
+
+/****************************************************************************/
 /* Expand text lines into single string.                                    */
 /****************************************************************************/
 gchar *

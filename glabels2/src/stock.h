@@ -50,6 +50,10 @@
 #define GL_STOCK_CENTER_VERT   "gl_stock_center_vert"
 #define GL_STOCK_BUCKET_FILL   "gl_stock_bucket_fill"
 #define GL_STOCK_PENCIL        "gl_stock_pencil"
+#define GL_STOCK_HCHAIN        "gl_stock_hchain"
+#define GL_STOCK_HCHAIN_BROKEN "gl_stock_hchain_broken"
+#define GL_STOCK_VCHAIN        "gl_stock_vchain"
+#define GL_STOCK_VCHAIN_BROKEN "gl_stock_vchain_broken"
 
 void gl_stock_init (void);
 
