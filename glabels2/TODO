@@ -1,158 +1,74 @@
 
+
 Development plan
 ----------------
 This development plan sets a specific set of milestones for future
 versions of glabels.  Although subject to change, milestones leading
 to version 2.0 are fairly well defined.
 
-Basically the goal of version 1.90 is to port all current
-features/capabilities to the GNOME 2.0 platform, clean up the architecture,
-and create a bonobo shell.
 
-The goal for version 1.92 is to improve several user interface capabilities
-and add drawing capabilities.
+Goals for 1.90:
 
-The goal for version 2.0 is to realize the fully developed template feature
-set, add tools for creating and downloading new templates, and add inline
-images to glabels files.
+		-  port all current features/capabilities to the GNOME 2.0
+		   platform {Completed]
 
-The goals for version 2.2 and beyond is to add rich text objects,
-add sophisticated text effects and support vector images.
+		-  clean up the architecture, and create a bonobo shell.
+                   [Completed]
 
 
-Detailed Outline:
------------------
+Goals for 2.0:
 
-VERSION 1.89:  Development testbed for VERSION 1.90
+	`	-  Clean up label and template formats.
+		   (See data/glabels-2.0.dtd)
 
-VERSION 1.90:
+		-  A Properties toolbar.  This will let the user change
+		   certain properties (font, colors, and line widths) of
+		   selected objects en-masse. [Completed]
 
-	Architecture Design
+		-  A docked property dialog.  Instead of popping up individual
+		   property dialogs, a single dialog will be docked in the
+		   main window.  This dialog will be automatically displayed
+		   for new objects, so that the user can begin editing
+		   text, selecting images, or entering barcode data.
 
-		- Port to Gnome 2.0 Platform
-
-		- Create a new SDI shell based on bonobo (no more MDI!).
-
-		- Migrate to a more faithful MVC architecture:
-			- Migrate models (labels, label objects, and templates)
-			  to real objects
-			- Views should track models
-
-	Label File format changes:
-		- <object type="text" ...> rather than <Text ...>
-
-		- a label should include a template or "Sheet" tag instead
-		  of just the name of the media type, so that obsolete names
-		  don't render the label file useless.  this should be created
-		  and parsed by functions from the template module.
-
-		- compatibility with old file formats
-
-		- make sure that the format does not preclude the additions
-		  planned in future releases and that these additions do
-		  not break labels created with this version.  Namely, image
-		  filenames from merge data, inline images, object rotation,
-		  object flipping, text effects, and rounded rectangles.
-
-	Other:
-		- Add preferences options:
-			- object defaults (colors, line widths, fonts)
-
-		- Support all paper sizes that gnome-print knows about
-
-		- Recent documents
+		-  Migrate to libgnomeprint-2.2. [Completed]
 
 
-VERSION 1.91:  Development testbed for VERSION 1.92
 
-VERSION 1.92:
+Goals for beyond 2.0:
 
-	Template File format:
-		- Allow multiple layouts per label type.  This will support
-		  odd labels that are not layed out in a grid.  For instance
-		  one oddball label, or label laid out in a running-bond:
+		-  Editing text in-place.
 
-			  +------+ +------+
-			  |      | |      |
-			  +------+ +------+
-			      +------+ +------+
-			      |      | |      |
-			      +------+ +------+
-			  ...
+		-  Make text items rich.  I.e. allow multiple characteristics
+		   to exist within a single object.
 
-		  This is not multiple label types per sheet.  (see below)
+		-  Text effects.  (follow contour, non-rectangular text boxes,
+	           ...)
 
-		- Add invisible markup to templates, e.g. folds or other
-		  helpful lines.
+		-  Object shadows.  This is very important for text that
+		   overlays photographs, so that it stands out against
+		   varying backgrounds.
 
-	Other:
-		- Status bar showing:
-			- % Zoom
-			- X, Y position
-			- mode and parameters (size and origin during creation)
+		-  Undo, Redo capability
 
-		- Image filenames from merge fields.  When adding inline
-		  image date in the next version, this capability must
-		  remain valid.
+		-  Create a druid for creating new label templates.
+		   As part of the druid allow test sheets to be printed
+		   and the new labels e-mailed to me (at the user's request).
+		   Include a mini-preview, as the label is constructed.
 
-		- Drawing features:
-			- object rotation and flipping functions.
-			- configurable grid.  
-			- a "snap-to" capability.
-			- object alignment capabilities.
-			- resizing of barcodes on canvas. (Must keep barcodes
-			  within "legal" limits)
-			- resizing of text?
-			- edit text in place?
+		-  Along those same lines, create a druid to download new
+		   templates from a central repository, much like in GBonds.
 
-		- Clean up document merge API.
+		-  Allow multiple label styles per template. For instance
+		   a sheet may contain a CD label, and cover label.  This
+		   may cause problems for document merges -- labels could be
+		   considered grouped for document merges when their numbers
+		   match or they could have document merge applied to them
+		   independently but in parallel.  Arrange in a tabbed
+		   notebook, or as multiple canvases arranged in view?
 
-		- Per-barccode options:
-			- if checksum optional give checkbox
-			- barcode length: free-form, fixed legal values (zero fill?)
-
-		- Undo, Redo capability
-
-
-VERSION 1.93:  Development testbed for VERSION 2.0
-
-VERSION 2.0:
-
-	Label File format changes:
-		- external images should be put inline somehow so that the
-		  label file will not be rendered useless if on a different
-		  machine or the original image file is renamed, moved or
-		  deleted.
-
-	Features:
-		- Create a druid for creating new label templates.
-		  As part of the druid allow test sheets to be printed
-		  and the new labels e-mailed to me (at the user's request).
-		  Include a mini-preview, as the label is constructed.
-
-		- Along those same lines, create a druid to download new
-		  templates from a central repository, much like in GBonds.
-
-
-VERSION 2.1:  Development testbed for VERSION 2.2
-
-VERSION 2.2:
-
-	Template File format:
-		- Allow multiple label styles per template. For instance
-		  a sheet may contain a CD label, and cover label.  This
-		  may cause problems for document merges -- labels could be
-		  considered grouped for document merges when their numbers
-		  match or they could have document merge applied to them
-		  independently but in parallel.  Arrange in a tabbed
-		  notebook, or as multiple canvases arranged in view?
-
-	- support for the import of vector graphics formats such as EPS or SVG.
-
-	- Make text items rich.  I.e. allow multiple characteristics to
-	  exist within a single object.
-
-	- Text effects.  (follow contour, shadows, ...)
+		-  support for the import of vector graphics formats such
+		   as EPS or SVG.
 
 
 
@@ -165,11 +81,8 @@ Odds and ends WISHLIST for future versions:
 		generic XML
 		freedb (CDDB) for CD labels
 
-	- Capability to edit text in-place.
-
 	- Add facility for tweaking output (origin).  This should really be
 	  part of the underlying print system but is currently difficult to
 	  accomplish, so I may want to add the hack.
 
-	- Add a mini style preview for barcode properties (possibly text too?).
 
