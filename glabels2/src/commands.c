@@ -36,11 +36,10 @@
 #include "prefs-dialog.h"
 #include "debug.h"
 
-#ifdef PACKAGE_DATA_DIR
-#define LOGO_PIXMAP (PACKAGE_DATA_DIR "/pixmaps/glabels/glabels-about-logo.png")
-#else
-#define LOGO_PIXMAP gnome_pixmap_file("glabels/glabels-about-logo.png")
-#endif
+#define LOGO_PIXMAP gnome_program_locate_file (NULL,\
+					 GNOME_FILE_DOMAIN_APP_PIXMAP,\
+					 "glabels/glabels-about-logo.png",\
+					 FALSE, NULL)
 
 
 /****************************************************************************/

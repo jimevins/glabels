@@ -43,11 +43,10 @@
 #include "file.h"
 #include "debug.h"
 
-#ifdef PACKAGE_DATA_DIR
-#define ICON_PIXMAP (PACKAGE_DATA_DIR "/pixmaps/glabels/glabels-icon.png")
-#else
-#define ICON_PIXMAP gnome_pixmap_file("glabels/glabels-icon.png")
-#endif
+#define ICON_PIXMAP gnome_program_locate_file (NULL,\
+					       GNOME_FILE_DOMAIN_APP_PIXMAP,\
+					       "glabels/glabels-icon.png",\
+					       FALSE, NULL)
 
 glMDI *glabels_mdi = NULL;
 gboolean glabels_close_x_button_pressed = FALSE;
@@ -126,9 +125,10 @@ main (int argc, char **argv)
 
 	/* Initialize gnome program */
 	program = gnome_program_init ("glabels", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, options,
-			    NULL);
+				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PROGRAM_STANDARD_PROPERTIES,
+				      GNOME_PARAM_POPT_TABLE, options,
+				      NULL);
 
 	/* Splash screen */
 	gl_splash ();

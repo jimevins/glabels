@@ -29,11 +29,10 @@
 
 #include "debug.h"
 
-#ifdef PACKAGE_DATA_DIR
-#define SPLASH_PIXMAP (PACKAGE_DATA_DIR "/pixmaps/glabels/glabels-logo.png")
-#else
-#define SPLASH_PIXMAP gnome_pixmap_file("glabels/glabels-logo.png")
-#endif
+#define SPLASH_PIXMAP gnome_program_locate_file (NULL,\
+						 GNOME_FILE_DOMAIN_APP_PIXMAP,\
+						 "glabels/glabels-logo.png",\
+						 FALSE, NULL)
 
 #define SPLASH_TIMEOUT 2000
 

@@ -66,8 +66,7 @@ static struct poptOption options[] = {
 /* Main                                                                      */
 /*****************************************************************************/
 int
-main (int argc,
-      char *argv[])
+main (int argc, char **argv)
 {
 	poptContext pctx;
 	gchar **args;
@@ -80,8 +79,8 @@ main (int argc,
 	glLabel *label = NULL;
 	glXMLLabelStatus status;
 
-	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
-	textdomain (PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
+	textdomain (GETTEXT_PACKAGE);
 
 	gtk_type_init ();
 
