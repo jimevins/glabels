@@ -1,12 +1,13 @@
 <!-- ##### SECTION Title ##### -->
-paper
+Paper Definitions
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Paper size definitions
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+This section describes a structure for representing a paper size definition
+and related functions.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

@@ -1,12 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-xml-template
+XML Template Functions
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Functions to create and parse glabels XML template nodes and files
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+This section describes a number of functions for creating and parsing
+glabels XML template nodes and files.  Template nodes are used in both
+template files and document files.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

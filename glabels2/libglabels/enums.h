@@ -32,11 +32,11 @@ G_BEGIN_DECLS
 
 /* Units of distance */
 typedef enum {
-	GL_UNITS_POINT,
-	GL_UNITS_INCH,
-	GL_UNITS_MM,
-	GL_UNITS_CM,
-	GL_UNITS_PICA,
+	GL_UNITS_POINT, /* encoded as "pt" */
+	GL_UNITS_INCH,  /* encoded as "in" */
+	GL_UNITS_MM,    /* encoded as "mm" */
+	GL_UNITS_CM,    /* encoded as "cm" */
+	GL_UNITS_PICA,  /* encoded as "pc" */
 
 	GL_UNITS_FIRST = GL_UNITS_POINT,
 	GL_UNITS_LAST  = GL_UNITS_PICA,

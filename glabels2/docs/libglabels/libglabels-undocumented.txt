@@ -1,6 +1,6 @@
-14% symbol docs coverage.
-11 symbols documented.
-66 not documented.
+47% symbol docs coverage.
+36 symbols documented.
+41 not documented.
 
 
 glPaper
@@ -11,22 +11,6 @@ glTemplateLayout
 glTemplateMarkup
 glTemplateMarkupType
 glTemplateOrigin
-glUnitsType
-gl_paper_dup
-gl_paper_free
-gl_paper_free_id_list
-gl_paper_free_name_list
-gl_paper_from_id
-gl_paper_from_name
-gl_paper_get_id_list
-gl_paper_get_name_list
-gl_paper_init
-gl_paper_is_id_known
-gl_paper_is_id_other
-gl_paper_lookup_id_from_name
-gl_paper_lookup_name_from_id
-gl_paper_new
-gl_paper_print_known_papers
 gl_template_add_alias
 gl_template_add_label_type
 gl_template_add_layout
@@ -59,14 +43,5 @@ gl_template_print_known_templates
 gl_template_rect_label_type_new
 gl_template_register
 gl_template_round_label_type_new
-gl_xml_paper_parse_paper_node
-gl_xml_paper_parse_papers_doc
-gl_xml_paper_read_papers_from_file
-gl_xml_template_create_template_node
 gl_xml_template_create_templates_doc
-gl_xml_template_parse_template_node
-gl_xml_template_parse_templates_doc
-gl_xml_template_read_templates_from_file
-gl_xml_template_write_template_to_file
-gl_xml_template_write_templates_to_file
 

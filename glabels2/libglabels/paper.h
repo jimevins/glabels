@@ -37,10 +37,10 @@ G_BEGIN_DECLS
 typedef struct _glPaper glPaper;
 
 struct _glPaper {
-	gchar               *id;
-	gchar               *name;
-	gdouble              width;
-	gdouble              height;
+	gchar               *id;     /* Unique ID of paper definition */
+	gchar               *name;   /* Localized name of paper */
+	gdouble              width;  /* Width (in points) */
+	gdouble              height; /* Height (in points) */
 };
 
 

@@ -45,10 +45,16 @@
 /* Local function prototypes                 */
 /*===========================================*/
 
-
-/*****************************************************************************/
-/* Read papers from paper file.                                              */
-/*****************************************************************************/
+
+/**
+ * gl_xml_paper_read_papers_from_file:
+ * @utf8_filename:       Filename of papers file (name encoded as UTF-8)
+ *
+ * Read paper definitions from a file.
+ *
+ * Returns: a list of #glPaper structures.
+ *
+ */
 GList *
 gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 {
@@ -79,9 +85,16 @@ gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 	return papers;
 }
 
-/*****************************************************************************/
-/* Read papers from paper xml doc tree.                                      */
-/*****************************************************************************/
+
+/**
+ * gl_xml_paper_parse_papers_doc:
+ * @papers_doc:  libxml #xmlDocPtr tree, representing a papers definition file.
+ *
+ * Read paper definitions from a libxml #xmlDocPtr tree.
+ *
+ * Returns: a list of #glPaper structures.
+ *
+ */
 GList *
 gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 {
@@ -122,9 +135,16 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 	return papers;
 }
 
-/*****************************************************************************/
-/* Parse XML paper Node.                                                     */
-/*****************************************************************************/
+
+/**
+ * gl_xml_paper_parse_paper_node:
+ * @paper_node:  libxml #xmlNodePtr paper node from a #xmlDocPtr tree.
+ *
+ * Read a single paper definition from a libxml #xmlNodePtr node.
+ *
+ * Returns: a pointer to a newly created #glPaper structure.
+ *
+ */
 glPaper *
 gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {

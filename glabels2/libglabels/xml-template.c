@@ -82,9 +82,15 @@ static void  xml_create_alias_node          (const gchar                  *name,
 					     const xmlNsPtr                ns);
 
 
-/*****************************************************************************/
-/* Read templates from template file.                                        */
-/*****************************************************************************/
+/**
+ * gl_xml_template_read_templates_from_file:
+ * @utf8_filename:       Filename of papers file (name encoded as UTF-8)
+ *
+ * Read glabels templates from template file.
+ *
+ * Returns: a list of #glTemplate structures.
+ *
+ */
 GList *
 gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 {
@@ -115,9 +121,16 @@ gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 	return templates;
 }
 
-/*****************************************************************************/
-/* Read templates from templates xml doc tree.                               */
-/*****************************************************************************/
+
+/**
+ * gl_xml_template_parse_templates_doc:
+ * @templates_doc:  libxml #xmlDocPtr tree, representing template file.
+ *
+ * Read glabels templates from a libxml #xmlDocPtr tree.
+ *
+ * Returns: a list of #glTemplate structures.
+ *
+ */
 GList *
 gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 {
@@ -157,9 +170,16 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 	return templates;
 }
 
-/*****************************************************************************/
-/* Parse XML template Node.                                                  */
-/*****************************************************************************/
+
+/**
+ * gl_xml_template_parse_template_node:
+ * @template_node:  libxml #xmlNodePtr template node from a #xmlDocPtr tree.
+ *
+ * Read a single glabels template from a libxml #xmlNodePtr node.
+ *
+ * Returns: a pointer to a newly created #glTemplate structure.
+ *
+ */
 glTemplate *
 gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 {
@@ -507,9 +527,14 @@ xml_parse_alias_node (xmlNodePtr  alias_node,
 	g_free (name);
 }
 
-/****************************************************************************/
-/* Write a list of templates to XML file.                                   */
-/****************************************************************************/
+/**
+ * gl_xml_template_write_templates_to_file:
+ * @templates:      List of #glTemplate structures
+ * @utf8_filename:  Filename of templates file (name encoded as UTF-8)
+ *
+ * Write a list of #glTemplate structures to a glabels XML template file.
+ *
+ */
 void
 gl_xml_template_write_templates_to_file (GList       *templates,
 					 const gchar *utf8_filename)
@@ -549,9 +574,15 @@ gl_xml_template_write_templates_to_file (GList       *templates,
 
 }
 
-/****************************************************************************/
-/* Write single template to XML file.                                       */
-/****************************************************************************/
+
+/**
+ * gl_xml_template_write_template_to_file:
+ * @template:       #glTemplate structure to be written
+ * @utf8_filename:  Filename of templates file (name encoded as UTF-8)
+ *
+ * Write a single #glTemplate structures to a glabels XML template file.
+ *
+ */
 void
 gl_xml_template_write_template_to_file (const glTemplate  *template,
 					const gchar       *utf8_filename)
@@ -565,9 +596,16 @@ gl_xml_template_write_template_to_file (const glTemplate  *template,
 	g_list_free (templates);
 }
 
-/****************************************************************************/
-/* Add XML Template Node                                                    */
-/****************************************************************************/
+
+/**
+ * gl_xml_template_create_template_node:
+ * @template:       #glTemplate structure to be written
+ * @root:           parent node to receive new child node
+ * @ns:             a libxml #xmlNsPtr
+ *
+ * Add a single #glTemplate child node to given #xmlNodePtr.
+ *
+ */
 void
 gl_xml_template_create_template_node (const glTemplate *template,
 				      xmlNodePtr        root,

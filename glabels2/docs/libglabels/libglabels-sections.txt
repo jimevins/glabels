@@ -1,14 +1,17 @@
 <SECTION>
+<FILE>libglabels</FILE>
+<INCLUDE>libglabels/libglabels.h</INCLUDE>
+</SECTION>
+
+<SECTION>
 <FILE>enums</FILE>
+<INCLUDE>libglabels/enums.h</INCLUDE>
 glUnitsType
 </SECTION>
 
 <SECTION>
-<FILE>libglabels</FILE>
-</SECTION>
-
-<SECTION>
 <FILE>paper</FILE>
+<INCLUDE>libglabels/paper.h</INCLUDE>
 glPaper
 gl_paper_init
 gl_paper_new
@@ -29,6 +32,7 @@ gl_paper_print_known_papers
 
 <SECTION>
 <FILE>template</FILE>
+<INCLUDE>libglabels/template.h</INCLUDE>
 glTemplate
 glTemplateLabelType
 glTemplateLayout
@@ -72,6 +76,7 @@ gl_template_print_aliases
 
 <SECTION>
 <FILE>xml-paper</FILE>
+<INCLUDE>libglabels/xml-paper.h</INCLUDE>
 gl_xml_paper_read_papers_from_file
 gl_xml_paper_parse_papers_doc
 gl_xml_paper_parse_paper_node
@@ -79,6 +84,7 @@ gl_xml_paper_parse_paper_node
 
 <SECTION>
 <FILE>xml-template</FILE>
+<INCLUDE>libglabels/xml-templates.h</INCLUDE>
 gl_xml_template_read_templates_from_file
 gl_xml_template_parse_templates_doc
 gl_xml_template_parse_template_node
@@ -90,6 +96,7 @@ gl_xml_template_create_template_node
 
 <SECTION>
 <FILE>xml</FILE>
+<INCLUDE>libglabels/xml.h</INCLUDE>
 gl_xml_get_prop_double
 gl_xml_get_prop_boolean
 gl_xml_get_prop_int

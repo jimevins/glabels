@@ -1,3 +1,18 @@
+2005-04-02  Jim Evins <evins@snaught.com>
+
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* libglabels/enums.h:
+	* libglabels/paper.c: (gl_paper_dup):
+	* libglabels/paper.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+		More documentation updates for libglabels.
+	
 2005-03-23  Jim Evins  <evins@snaught.com>
 
 	* INSTALL:
