@@ -2,27 +2,79 @@
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Takeshi Aihana <aihana@gnome.gr.jp>, 2001, 2002.
 # 
+#, no-wrap
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 0.4.1\n"
-"POT-Creation-Date: 2002-02-22 19:29-0500\n"
-"PO-Revision-Date: 2002-01-15 22:34+0900\n"
+"Project-Id-Version: glabels 0.4.3\n"
+"POT-Creation-Date: 2002-03-10 21:14+0900\n"
+"PO-Revision-Date: 2002-03-10 21:17+0900\n"
 "Last-Translator: Takeshi Aihana <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/glabels_batch.c:47
+msgid "print this message"
+msgstr "¤³¤Î¥á¥Ã¥»¡¼¥¸¤òÉ½¼¨¤¹¤ë"
+
+#: src/glabels_batch.c:49
+msgid "print the version of glabels-batch being used"
+msgstr "»ÈÍÑ¤·¤Æ¤¤¤ë gLabel ¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÉ½¼¨¤¹¤ë"
+
+#: src/glabels_batch.c:51
+msgid "set output filename (default=\"output.ps\")"
+msgstr "½ĞÎÏ¤¹¤ë¥Õ¥¡¥¤¥ëÌ¾¤ò»ØÄê¤¹¤ë (¥Ç¥Õ¥©¥ë¥È = \"output.ps\")"
+
+#: src/glabels_batch.c:51
+msgid "filename"
+msgstr "¥Õ¥¡¥¤¥ëÌ¾"
+
+#: src/glabels_batch.c:53
+msgid "number of sheets (default=1)"
+msgstr "ÍÑ»æ¤Î¿ô (¥Ç¥Õ¥©¥ë¥È = 1)"
+
+#: src/glabels_batch.c:53
+msgid "sheets"
+msgstr "ÍÑ»æ¤Î¿ô"
+
+#: src/glabels_batch.c:55
+msgid "number of copies (default=1)"
+msgstr "¥³¥Ô¡¼¤Î¿ô (¥Ç¥Õ¥©¥ë¥È = 1)"
+
+#: src/glabels_batch.c:55
+msgid "copies"
+msgstr "¥³¥Ô¡¼¤Î¿ô"
+
+#: src/glabels_batch.c:57 src/print_dialog.c:152
+msgid "print outlines (to test printer alignment)"
+msgstr "¥¢¥¦¥È¥é¥¤¥ó¤ò°õºş¤¹¤ë (°õºş»ş¤ÎÇÛÃÖ¤ò³ÎÇ§¤¹¤ë¤¿¤á)"
+
+#: src/glabels_batch.c:59 src/print_dialog.c:160
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "È¿Å¾¤·¤Æ°õºş (i.e. ²èÁü¤ò¥ß¥é¡¼¤·¤¿¤â¤Î)"
+
+#: src/glabels_batch.c:89
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr "[¥ª¥×¥·¥ç¥ó...] ¥Õ¥¡¥¤¥ëÌ¾..."
+
+#: src/glabels_batch.c:108
+msgid "missing glabels file\n"
+msgstr "gLabel ¤Ç»ÈÍÑ¤¹¤ë¥Õ¥¡¥¤¥ë¤¬¤¢¤ê¤Ş¤»¤ó\n"
+
+#: src/glabels_batch.c:136
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "gLabel ¤Ç»ÈÍÑ¤¹¤ë¥Õ¥¡¥¤¥ë %s ¤¬³«¤±¤Ş¤»¤ó\n"
 
 #: src/mdi.c:169
 #, c-format
 msgid "Revert to saved copy of %s?"
-msgstr "%s ã®ã‚³ãƒ”ãƒ¼ã‚’åè»¢ã—ã¾ã™ã‹ï¼Ÿ"
+msgstr "%s ¤Î¥³¥Ô¡¼¤òÈ¿Å¾¤·¤Ş¤¹¤«¡©"
 
 #: src/mdi.c:207
 msgid "Unknown media type. Using default."
-msgstr ""
-"ãƒ¡ãƒ‡ã‚£ã‚¢ã®ç¨®é¡ãŒç‰¹å®šã§ãã¾ã›ã‚“ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚’ä½¿ç”¨ã—ã"
-"¾ã™ã€‚"
+msgstr "¥á¥Ç¥£¥¢¤Î¼ïÎà¤¬ÆÃÄê¤Ç¤­¤Ş¤»¤ó¡£¥Ç¥Õ¥©¥ë¥È¤ò»ÈÍÑ¤·¤Ş¤¹¡£"
 
 #: src/mdi.c:455
 #, c-format
@@ -31,173 +83,173 @@ msgid ""
 "\n"
 "Do you wish to save it?"
 msgstr ""
-"%s ã¯ç·¨é›†ã•ã‚Œã¦ã„ã¾ã™ã€‚\n"
+"%s ¤ÏÊÔ½¸¤µ¤ì¤Æ¤¤¤Ş¤¹¡£\n"
 "\n"
-"ä¿å­˜ã—ã¾ã™ã‹ï¼Ÿ"
+"ÊİÂ¸¤·¤Ş¤¹¤«¡©"
 
 #: src/mdi.c:459
 msgid "Don't save"
-msgstr "ä¿å­˜ã—ãªã„"
+msgstr "ÊİÂ¸¤·¤Ê¤¤"
 
-#: src/file.c:288 src/mdi.c:601
+#: src/mdi.c:601 src/file.c:288
 msgid "Cannot save file"
-msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã™ã‚‹ã“ã¨ãŒå‡ºæ¥ã¾ã›ã‚“"
+msgstr "¥Õ¥¡¥¤¥ë¤òÊİÂ¸¤¹¤ë¤³¤È¤¬½ĞÍè¤Ş¤»¤ó"
 
-#: src/file.c:311 src/mdi.c:623
+#: src/mdi.c:623 src/file.c:311
 msgid "Save As"
-msgstr "åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜"
+msgstr "Ì¾Á°¤òÉÕ¤±¤ÆÊİÂ¸"
 
 #: src/mdi.c:626
 msgid "Close / Save label as"
-msgstr "ãƒ©ãƒ™ãƒ«ã«åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜ã—ã¦é–‰ã˜ã¾ã™"
+msgstr "¥é¥Ù¥ë¤ËÌ¾Á°¤òÉÕ¤±¤ÆÊİÂ¸¤·¤ÆÊÄ¤¸¤Ş¤¹"
 
-#: src/file.c:352 src/mdi.c:680
+#: src/mdi.c:680 src/file.c:352
 msgid "Label no longer valid!"
-msgstr "ãƒ©ãƒ™ãƒ«ã¯æœ‰åŠ¹ã§ã¯ã‚ã‚Šã¾ã›ã‚“ï¼"
+msgstr "¥é¥Ù¥ë¤ÏÍ­¸ú¤Ç¤Ï¤¢¤ê¤Ş¤»¤ó¡ª"
 
-#: src/file.c:362 src/mdi.c:693
+#: src/mdi.c:693 src/file.c:362
 msgid "Must supply file name"
-msgstr "ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®šã—ã¦ä¸‹ã•ã„"
+msgstr "¥Õ¥¡¥¤¥ëÌ¾¤ò»ØÄê¤·¤Æ²¼¤µ¤¤"
 
-#: src/file.c:374 src/mdi.c:705
+#: src/mdi.c:705 src/file.c:374
 msgid "Error writing file"
-msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿ã§ã‚¨ãƒ©ãƒ¼"
+msgstr "¥Õ¥¡¥¤¥ë¤Î½ñ¤­¹ş¤ß¤Ç¥¨¥é¡¼"
 
 #: src/display.c:1250 src/display.c:1298
 msgid "Delete"
-msgstr "å‰Šé™¤"
+msgstr "ºï½ü"
 
 #: src/display.c:1260 src/display.c:1308
 msgid "Bring to front"
-msgstr "å‰ã«æŒã£ã¦æ¥ã‚‹"
+msgstr "Á°¤Ë»ı¤Ã¤ÆÍè¤ë"
 
 #: src/display.c:1266 src/display.c:1314
 msgid "Send to back"
-msgstr "å¾Œã‚ã«ã¾ã‚ã™"
+msgstr "¸å¤í¤Ë¤Ş¤ï¤¹"
 
 #: src/display.c:1287
 msgid "Edit properties..."
-msgstr "ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®ç·¨é›†..."
+msgstr "¥×¥í¥Ñ¥Æ¥£¤ÎÊÔ½¸..."
 
 #: src/item_text.c:450
 msgid "Edit text object properties"
-msgstr "ãƒ†ã‚­ã‚¹ãƒˆã®ç·¨é›†"
+msgstr "¥Æ¥­¥¹¥È¤ÎÊÔ½¸"
 
 #: src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
 msgid "Text"
-msgstr "ãƒ†ã‚­ã‚¹ãƒˆ"
+msgstr "¥Æ¥­¥¹¥È"
 
-#: src/item_barcode.c:317 src/item_box.c:245 src/item_ellipse.c:247
-#: src/item_line.c:253 src/item_text.c:479
+#: src/item_text.c:479 src/item_line.c:253 src/item_box.c:245
+#: src/item_ellipse.c:247 src/item_barcode.c:317
 msgid "Appearance"
-msgstr "å¤–è¦³"
+msgstr "³°´Ñ"
 
 #. ------ Begin Text Properties box ------
 #: src/item_text.c:482
 msgid "Text Properties"
-msgstr "æ–‡å­—ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£..."
+msgstr "Ê¸»ú¥×¥í¥Ñ¥Æ¥£..."
 
 #. ------ Position Frame ------
-#: src/item_barcode.c:345 src/item_barcode.c:348 src/item_box.c:275
-#: src/item_ellipse.c:277 src/item_image.c:318 src/item_line.c:274
-#: src/item_text.c:500 src/item_text.c:503
+#: src/item_text.c:500 src/item_text.c:503 src/item_line.c:274
+#: src/item_box.c:275 src/item_ellipse.c:277 src/item_image.c:318
+#: src/item_barcode.c:345 src/item_barcode.c:348
 msgid "Position"
-msgstr "ä½ç½®"
+msgstr "°ÌÃÖ"
 
 #: src/item_line.c:243
 msgid "Edit line object properties"
-msgstr "ç›´ç·šã®ç·¨é›†"
+msgstr "Ä¾Àş¤ÎÊÔ½¸"
 
 #. ------ Begin Line box ------
 #: src/item_line.c:256 src/menu.c:106
 msgid "Line"
-msgstr "ç›´ç·š"
+msgstr "Ä¾Àş"
 
-#: src/item_box.c:272 src/item_ellipse.c:274 src/item_image.c:315
-#: src/item_line.c:271
+#: src/item_line.c:271 src/item_box.c:272 src/item_ellipse.c:274
+#: src/item_image.c:315
 msgid "Position/Size"
-msgstr "ä½ç½®ã¨ã‚µã‚¤ã‚º"
+msgstr "°ÌÃÖ¤È¥µ¥¤¥º"
 
 #. ------ Size Frame ------
-#: src/item_box.c:286 src/item_ellipse.c:288 src/item_image.c:329
-#: src/item_line.c:285
+#: src/item_line.c:285 src/item_box.c:286 src/item_ellipse.c:288
+#: src/item_image.c:329
 msgid "Size"
-msgstr "ã‚µã‚¤ã‚º"
+msgstr "¥µ¥¤¥º"
 
 #: src/item_box.c:235
 msgid "Edit box object properties"
-msgstr "å››è§’ã®ç·¨é›†"
+msgstr "»Í³Ñ¤ÎÊÔ½¸"
 
 #. ------ Line box ------
 #: src/item_box.c:248 src/item_ellipse.c:250
 msgid "Outline"
-msgstr "çŸ©å½¢"
+msgstr "¶ë·Á"
 
 #. ------ Fill box ------
 #: src/item_box.c:258 src/item_ellipse.c:260
 msgid "Fill"
-msgstr "å¡—ã‚Šã¤ã¶ã—"
+msgstr "ÅÉ¤ê¤Ä¤Ö¤·"
 
 #: src/item_ellipse.c:237
 msgid "Edit ellipse object properties"
-msgstr "æ¥•å††ã®ç·¨é›†"
+msgstr "ÂÊ±ß¤ÎÊÔ½¸"
 
 #: src/item_image.c:257
 msgid "Edit image object properties"
-msgstr "ç”»åƒã®ç·¨é›†"
+msgstr "²èÁü¤ÎÊÔ½¸"
 
 #: src/item_image.c:268 src/menu.c:113
 msgid "Image"
-msgstr "ç”»åƒ"
+msgstr "²èÁü"
 
 #. ------ Size Reset Button ------
 #: src/item_image.c:342
 msgid "Reset image size"
-msgstr "ç”»åƒã‚µã‚¤ã‚ºã®ãƒªã‚»ãƒƒãƒˆ"
+msgstr "²èÁü¥µ¥¤¥º¤Î¥ê¥»¥Ã¥È"
 
 #: src/item_image.c:389 src/item_image.c:454
 msgid "Image format not currently supported"
-msgstr "ç”»åƒãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã›ã‚“"
+msgstr "²èÁü¥Õ¥©¡¼¥Ş¥Ã¥È¤Ï¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ş¤»¤ó"
 
 #: src/item_barcode.c:287
 msgid "Edit barcode object properties"
-msgstr "ãƒãƒ¼ã‚³ãƒ¼ãƒ‰ã®ç·¨é›†"
+msgstr "¥Ğ¡¼¥³¡¼¥É¤ÎÊÔ½¸"
 
 #: src/item_barcode.c:297
 msgid "Data"
-msgstr "ãƒ‡ãƒ¼ã‚¿"
+msgstr "¥Ç¡¼¥¿"
 
 #: src/item_barcode.c:299
 msgid "Barcode data"
-msgstr "ãƒãƒ¼ã‚³ãƒ¼ãƒ‰ãƒ»ãƒ‡ãƒ¼ã‚¿"
+msgstr "¥Ğ¡¼¥³¡¼¥É¡¦¥Ç¡¼¥¿"
 
 #. ------ Begin Barcode Properties Frame ------
 #: src/item_barcode.c:320 src/prefs.c:215
 msgid "General"
-msgstr "å…¨èˆ¬"
+msgstr "Á´ÈÌ"
 
 #. ------ Barcode Style Frame ------
 #: src/item_barcode.c:330
 msgid "Style"
-msgstr "ã‚¹ã‚¿ã‚¤ãƒ«"
+msgstr "¥¹¥¿¥¤¥ë"
 
 #: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:627
 msgid "Invalid barcode"
-msgstr "ãŠã‹ã—ãªãƒãƒ¼ã‚³ãƒ¼ãƒ‰"
+msgstr "¤ª¤«¤·¤Ê¥Ğ¡¼¥³¡¼¥É"
 
 #. W Label
-#: src/prop_line.c:169 src/prop_size.c:182
+#: src/prop_size.c:182 src/prop_line.c:169
 msgid "Width:"
-msgstr "å¹…:"
+msgstr "Éı:"
 
 #. H label
 #: src/prop_size.c:198
 msgid "Height:"
-msgstr "é«˜ã•:"
+msgstr "¹â¤µ:"
 
 #: src/prop_size.c:222
 msgid "Maintain current aspect ratio"
-msgstr "ç¾åœ¨ã®ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ç‡ã‚’ç¶­æŒã™ã‚‹"
+msgstr "¸½ºß¤Î¥¢¥¹¥Ú¥¯¥ÈÈæÎ¨¤ò°İ»ı¤¹¤ë"
 
 #. X label
 #: src/prop_position.c:173
@@ -210,136 +262,133 @@ msgid "Y:"
 msgstr "Y:"
 
 #. Line Width units
-#: src/prefs.c:448 src/prefs.c:455 src/prop_line.c:183
+#: src/prop_line.c:183 src/prefs.c:448 src/prefs.c:455
 msgid "points"
-msgstr "ãƒã‚¤ãƒ³ãƒˆ"
+msgstr "¥İ¥¤¥ó¥È"
 
 #. Line Color Label
-#: src/prop_bc.c:188 src/prop_fill.c:166 src/prop_line.c:189
-#: src/prop_text.c:234
+#: src/prop_line.c:189 src/prop_fill.c:166 src/prop_text.c:234
+#: src/prop_bc.c:188
 msgid "Color:"
-msgstr "è‰²:"
+msgstr "¿§:"
 
 #. Font label
 #: src/prop_text.c:181
 msgid "Font:"
-msgstr "ãƒ•ã‚©ãƒ³ãƒˆ:"
+msgstr "¥Õ¥©¥ó¥È:"
 
 #. Alignment label
 #: src/prop_text.c:248
 msgid "Alignment:"
-msgstr "ä½ç½®:"
+msgstr "°ÌÃÖ:"
 
 #. Insert merge field label
-#: src/prop_bc_data.c:196 src/prop_text_entry.c:180
+#: src/prop_text_entry.c:180 src/prop_bc_data.c:196
 msgid "Key:"
-msgstr "ã‚­ãƒ¼:"
+msgstr "¥­¡¼:"
 
 #: src/prop_text_entry.c:196
 msgid "Insert merge field"
-msgstr "çµåˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æŒ¿å…¥"
+msgstr "·ë¹ç¥Õ¥£¡¼¥ë¥É¤ÎÁŞÆş"
 
 #. Length label
 #: src/prop_vector.c:183
 msgid "Length:"
-msgstr "é•·ã•:"
+msgstr "Ä¹¤µ:"
 
 #. Angle label
 #: src/prop_vector.c:207
 msgid "Angle:"
-msgstr "è§’åº¦:"
+msgstr "³ÑÅÙ:"
 
 #. Angle units label
 #: src/prop_vector.c:224
 msgid "degrees"
-msgstr "åº¦"
+msgstr "ÅÙ"
 
 #. Scale Label
 #: src/prop_bc.c:168
 msgid "Scale:"
-msgstr "å¯¸æ³•:"
+msgstr "À£Ë¡:"
 
 #. % Label
 #: src/prop_bc.c:182
-#, c-format
 msgid "%"
 msgstr "%"
 
 #: src/prop_bc_style.c:313
 msgid "Show text with barcode"
-msgstr "ãƒãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’ä»˜ã‘ã¦ãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹"
+msgstr "¥Ğ¡¼¥³¡¼¥É¤òÉÕ¤±¤Æ¥Æ¥­¥¹¥È¤òÉ½¼¨¤¹¤ë"
 
 #: src/prop_bc_data.c:176
 msgid "Literal:"
-msgstr "ãƒªãƒ†ãƒ©ãƒ«:"
+msgstr "¥ê¥Æ¥é¥ë:"
 
 #: src/label.c:173 src/label.c:197
 msgid "xmlParseFile error"
-msgstr "xmlParseFile ã‚¨ãƒ©ãƒ¼"
+msgstr "xmlParseFile ¥¨¥é¡¼"
 
 #: src/label.c:228
 msgid "No document root"
-msgstr "root ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã§ã¯ã‚ã‚Šã¾ã›ã‚“"
+msgstr "root ¥É¥­¥å¥á¥ó¥È¤Ç¤Ï¤¢¤ê¤Ş¤»¤ó"
 
 #: src/label.c:239
 msgid "document of the wrong type, glabels Namespace not found"
-msgstr ""
-"ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã®ç¨®é¡ãŒé–“é•ã£ã¦ã„ã¾ã™ã€‚Glabels "
-"åå‰ç©ºé–“ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"
+msgstr "¥É¥­¥å¥á¥ó¥È¤Î¼ïÎà¤¬´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£Glabels Ì¾Á°¶õ´Ö¤¬¸«¤Ä¤«¤ê¤Ş¤»¤ó¡£"
 
 #: src/label.c:244
 #, c-format
 msgid "Bad root node = \"%s\""
-msgstr "ãŠã‹ã—ãª root ã®ãƒãƒ¼ãƒ‰ = \"%s\""
+msgstr "¤ª¤«¤·¤Ê root ¤Î¥Î¡¼¥É = \"%s\""
 
 #: src/label.c:291
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr "ãŠã‹ã—ãªãƒãƒ¼ãƒ‰ = \"%s\""
+msgstr "¤ª¤«¤·¤Ê¥Î¡¼¥É = \"%s\""
 
 #: src/label.c:606
 msgid "Problem saving xml file."
-msgstr "XML ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã§å•é¡ŒãŒã‚ã‚Šã¾ã™"
+msgstr "XML ¥Õ¥¡¥¤¥ë¤ÎÊİÂ¸¤ÇÌäÂê¤¬¤¢¤ê¤Ş¤¹"
 
 #: src/template.c:224
 msgid "No template files found!"
-msgstr "ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼"
+msgstr "¥Æ¥ó¥×¥ì¡¼¥È¡¦¥Õ¥¡¥¤¥ë¤¬¸«¤Ä¤«¤ê¤Ş¤»¤ó¡ª"
 
 #: src/merge_properties.c:82
 msgid "Edit document-merge properties"
-msgstr "çµåˆãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆãƒ»ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®ç·¨é›†"
+msgstr "·ë¹ç¥É¥­¥å¥á¥ó¥È¡¦¥×¥í¥Ñ¥Æ¥£¤ÎÊÔ½¸"
 
 #: src/merge_properties.c:131
 msgid "Source"
-msgstr "ã‚½ãƒ¼ã‚¹"
+msgstr "¥½¡¼¥¹"
 
 #: src/merge_properties.c:143
 msgid "Format:"
-msgstr "æ›¸å¼:"
+msgstr "½ñ¼°:"
 
 #: src/merge_properties.c:158
 msgid "Location:"
-msgstr "å ´æ‰€:"
+msgstr "¾ì½ê:"
 
 #: src/merge_properties.c:168
 msgid "Fields"
-msgstr "ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰"
+msgstr "¥Õ¥£¡¼¥ë¥É"
 
 #: src/merge.c:78
 msgid "None"
-msgstr "ãªã—"
+msgstr "¤Ê¤·"
 
 #: src/merge.c:86
 msgid "Text with tab separators"
-msgstr "ã‚¿ãƒ–ã§åŒºåˆ‡ã£ãŸãƒ†ã‚­ã‚¹ãƒˆ"
+msgstr "¥¿¥Ö¤Ç¶èÀÚ¤Ã¤¿¥Æ¥­¥¹¥È"
 
 #: src/merge.c:94
 msgid "Text with comma separators"
-msgstr "ã‚³ãƒ³ãƒã§åŒºåˆ‡ã£ãŸãƒ†ã‚­ã‚¹ãƒˆ"
+msgstr "¥³¥ó¥Ş¤Ç¶èÀÚ¤Ã¤¿¥Æ¥­¥¹¥È"
 
 #: src/merge.c:102
 msgid "Text with colon separators"
-msgstr "ã‚³ãƒ­ãƒ³ã§åŒºåˆ‡ã£ãŸãƒ†ã‚­ã‚¹ãƒˆ"
+msgstr "¥³¥í¥ó¤Ç¶èÀÚ¤Ã¤¿¥Æ¥­¥¹¥È"
 
 #: src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
 msgid "N/A"
@@ -347,139 +396,139 @@ msgstr "N/A"
 
 #: src/merge_ui_text.c:170
 msgid "Select merge-database source"
-msgstr "çµåˆãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ãƒ»ã‚½ãƒ¼ã‚¹ã®é¸æŠ"
+msgstr "·ë¹ç¥Ç¡¼¥¿¥Ù¡¼¥¹¡¦¥½¡¼¥¹¤ÎÁªÂò"
 
 #: src/merge_ui_text.c:330
 msgid "Column"
-msgstr "åˆ—"
+msgstr "Îó"
 
 #: src/merge_ui_text.c:334
 msgid "Custom field key"
-msgstr "ã‚«ã‚¹ã‚¿ãƒ ãƒ»ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ»ã‚­ãƒ¼"
+msgstr "¥«¥¹¥¿¥à¡¦¥Õ¥£¡¼¥ë¥É¡¦¥­¡¼"
 
 #: src/merge_ui_text.c:338
 msgid "Sample data"
-msgstr "ã‚µãƒ³ãƒ—ãƒ«ãƒ‡ãƒ¼ã‚¿"
+msgstr "¥µ¥ó¥×¥ë¥Ç¡¼¥¿"
 
 #: src/menu.c:50
 msgid "_New"
-msgstr "æ–°è¦(_N)"
+msgstr "¿·µ¬(_N)"
 
 #: src/menu.c:51
 msgid "Make a new, empty label"
-msgstr "æ–°è¦ã«ç©ºã®ãƒ©ãƒ™ãƒ«ã‚’ä½œæˆã—ã¾ã™"
+msgstr "¿·µ¬¤Ë¶õ¤Î¥é¥Ù¥ë¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:85
 msgid "U_nselect All "
-msgstr "å…¨ã¦é¸æŠè§£é™¤(_N)"
+msgstr "Á´¤ÆÁªÂò²ò½ü(_N)"
 
 #: src/menu.c:86
 msgid "Remove all selections"
-msgstr "é¸æŠç¯„å›²ã‚’è§£é™¤ã—ã¾ã™"
+msgstr "ÁªÂòÈÏ°Ï¤ò²ò½ü¤·¤Ş¤¹"
 
 #: src/menu.c:94
 msgid "Select"
-msgstr "é¸æŠ"
+msgstr "ÁªÂò"
 
 #: src/menu.c:95 src/menu.c:186
 msgid "Select, move and modify objects"
-msgstr "ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é¸æŠã€ç§»å‹•ã€ç·¨é›†ã‚’è¡Œã„ã¾ã™"
+msgstr "¥ª¥Ö¥¸¥§¥¯¥È¤ÎÁªÂò¡¢°ÜÆ°¡¢ÊÔ½¸¤ò¹Ô¤¤¤Ş¤¹"
 
 #: src/menu.c:100 src/menu.c:191
 msgid "Create text object"
-msgstr "ãƒ†ã‚­ã‚¹ãƒˆãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "¥Æ¥­¥¹¥È¡¦¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:103
 msgid "Box"
-msgstr "å››è§’"
+msgstr "»Í³Ñ"
 
 #: src/menu.c:103 src/menu.c:194
 msgid "Create box/rectangle object"
-msgstr "å››è§’/ä¸‰è§’ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "»Í³Ñ/»°³Ñ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:106 src/menu.c:197
 msgid "Create line object"
-msgstr "ç›´ç·šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "Ä¾Àş¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:109
 msgid "Ellipse"
-msgstr "æ¥•å††"
+msgstr "ÂÊ±ß"
 
 #: src/menu.c:110 src/menu.c:200
 msgid "Create ellipse/circle object"
-msgstr "æ¥•å††/å††ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "ÂÊ±ß/±ß¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:113 src/menu.c:203
 msgid "Create image object"
-msgstr "ç”»åƒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "²èÁü¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:116
 msgid "Barcode"
-msgstr "ãƒãƒ¼ã‚³ãƒ¼ãƒ‰"
+msgstr "¥Ğ¡¼¥³¡¼¥É"
 
 #: src/menu.c:116 src/menu.c:206
 msgid "Create barcode object"
-msgstr "ãƒãƒ¼ã‚³ãƒ¼ãƒ‰ãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™"
+msgstr "¥Ğ¡¼¥³¡¼¥É¡¦¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:121 src/menu.c:211
 msgid "Zoom in"
-msgstr "æ‹¡å¤§"
+msgstr "³ÈÂç"
 
 #: src/menu.c:124 src/menu.c:214
 msgid "Zoom out"
-msgstr "ç¸®å°"
+msgstr "½Ì¾®"
 
 #: src/menu.c:127
 msgid "Zoom 1:1"
-msgstr "å…ƒã®ã‚µã‚¤ã‚ºã¸"
+msgstr "¸µ¤Î¥µ¥¤¥º¤Ø"
 
 #: src/menu.c:127 src/menu.c:217
 msgid "Zoom to 1:1"
-msgstr "ç¸¦æ¨ªæ¯” 1:1 ã®ã‚µã‚¤ã‚ºã«ã—ã¾ã™"
+msgstr "½Ä²£Èæ 1:1 ¤Î¥µ¥¤¥º¤Ë¤·¤Ş¤¹"
 
 #: src/menu.c:132 src/menu.c:223
 msgid "Merge properties"
-msgstr "çµåˆãƒ—ãƒ­ãƒ‘ãƒ†ã‚£"
+msgstr "·ë¹ç¥×¥í¥Ñ¥Æ¥£"
 
 #: src/menu.c:133
 msgid "Edit merge properties"
-msgstr "çµåˆãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ç·¨é›†ã—ã¾ã™"
+msgstr "·ë¹ç¥×¥í¥Ñ¥Æ¥£¤òÊÔ½¸¤·¤Ş¤¹"
 
 #: src/menu.c:157
 msgid "_Tools"
-msgstr "ãƒ„ãƒ¼ãƒ«(_T)"
+msgstr "¥Ä¡¼¥ë(_T)"
 
 #: src/menu.c:168
 msgid "  New   "
-msgstr " æ–°è¦ "
+msgstr " ¿·µ¬ "
 
 #: src/menu.c:168
 msgid "New Label/Card"
-msgstr "æ–°è¦ã®ãƒ©ãƒ™ãƒ«/ã‚«ãƒ¼ãƒ‰ã‚’ä½œæˆã—ã¾ã™"
+msgstr "¿·µ¬¤Î¥é¥Ù¥ë/¥«¡¼¥É¤òºîÀ®¤·¤Ş¤¹"
 
 #: src/menu.c:170
 msgid "  Open  "
-msgstr " é–‹ã "
+msgstr " ³«¤¯ "
 
 #: src/menu.c:170
 msgid "Open a file"
-msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ãã¾ã™"
+msgstr "¥Õ¥¡¥¤¥ë¤ò³«¤­¤Ş¤¹"
 
 #: src/menu.c:172
 msgid "  Save  "
-msgstr " ä¿å­˜ "
+msgstr " ÊİÂ¸ "
 
 #: src/menu.c:172
 msgid "Save current file"
-msgstr "ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã—ã¾ã™"
+msgstr "¤³¤Î¥Õ¥¡¥¤¥ë¤òÊİÂ¸¤·¤Ş¤¹"
 
 #: src/menu.c:175
 msgid " Print  "
-msgstr " å°åˆ· "
+msgstr " °õºş "
 
 #: src/menu.c:175
 msgid "Print current file"
-msgstr "ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å°åˆ·ã—ã¾ã™"
+msgstr "¤³¤Î¥Õ¥¡¥¤¥ë¤ò°õºş¤·¤Ş¤¹"
 
 #: src/menu.c:290
 msgid ""
@@ -495,72 +544,68 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
 msgstr ""
-"GNOME "
-"å‘ã‘ã®ãƒ©ãƒ™ãƒ«/ãƒ“ã‚¸ãƒã‚¹ã‚«ãƒ¼ãƒ‰ã®ä½œæˆãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã™ã€‚\n"
+"GNOME ¸ş¤±¤Î¥é¥Ù¥ë/¥Ó¥¸¥Í¥¹¥«¡¼¥É¤ÎºîÀ®¥×¥í¥°¥é¥à¤Ç¤¹¡£\n"
 "\n"
-"Glabels "
-"ã¯ãƒ•ãƒªãƒ¼ã‚½ãƒ•ãƒˆã§ã™ã€‚ãƒ•ãƒªãƒ¼ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢è²¡å›£ãŒå®šã‚ã‚‹ "
-"GNU "
-"ä¸€èˆ¬å…¬æœ‰ä½¿ç”¨è¨±è«¾å¥‘ç´„æ›¸ã®ç¬¬2ç‰ˆã‚‚ã—ãã¯ãã‚Œä»¥é™ã®ãƒãƒ¼ã"
-"‚¸ãƒ§ãƒ³ã®ä¸‹ã§è¤‡è£½ã€æ”¹ç·¨ã€å†é…å¸ƒãŒèªã‚ã‚‰ã‚Œã¦ã„ã¾ã™ã€‚\n"
+"Glabels ¤Ï¥Õ¥ê¡¼¥½¥Õ¥È¤Ç¤¹¡£¥Õ¥ê¡¼¥½¥Õ¥È¥¦¥§¥¢ºâÃÄ¤¬Äê¤á¤ë GNU °ìÈÌ¸øÍ­»ÈÍÑµö"
+"Âú·ÀÌó½ñ¤ÎÂè2ÈÇ¤â¤·¤¯¤Ï¤½¤ì°Ê¹ß¤Î¥Ğ¡¼¥¸¥ç¥ó¤Î²¼¤ÇÊ£À½¡¢²şÊÔ¡¢ºÆÇÛÉÛ¤¬Ç§¤á¤é¤ì"
+"¤Æ¤¤¤Ş¤¹¡£\n"
 "\n"
-"ã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒå½¹ã«ç«‹ã¤ã“ã¨ã‚’æœ›ã‚€ä¸­ã§é…å¸ƒã•ã‚Œã¦ã„ã"
-"¾ã™ãŒã€å®Œå…¨ç„¡ä¿è¨¼ã§ã™ã€‚è²©å£²ç›®çš„ã¾ãŸã¯å•†ç”¨ç›®çš„ã®ä¿è¨¼ã"
-"¯ã‚ã‚Šã¾ã›ã‚“ã€‚è©³ç´°ã«ã¤ã„ã¦ã¯ GNU "
-"ä¸€èˆ¬å…¬æœ‰ä½¿ç”¨è¨±è«¾å¥‘ç´„æ›¸ã‚’å‚ç…§ã—ã¦ä¸‹ã•ã„ã€‚\n"
+"¤³¤Î¥×¥í¥°¥é¥à¤¬Ìò¤ËÎ©¤Ä¤³¤È¤òË¾¤àÃæ¤ÇÇÛÉÛ¤µ¤ì¤Æ¤¤¤Ş¤¹¤¬¡¢´°Á´ÌµÊİ¾Ú¤Ç¤¹¡£ÈÎ"
+"ÇäÌÜÅª¤Ş¤¿¤Ï¾¦ÍÑÌÜÅª¤ÎÊİ¾Ú¤Ï¤¢¤ê¤Ş¤»¤ó¡£¾ÜºÙ¤Ë¤Ä¤¤¤Æ¤Ï GNU °ìÈÌ¸øÍ­»ÈÍÑµöÂú·À"
+"Ìó½ñ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£\n"
 
 #: src/menu.c:326
 msgid "Function is not implemented!"
-msgstr "ã¾ã ã“ã®æ©Ÿèƒ½ã¯å®Ÿè£…ã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼"
+msgstr "¤Ş¤À¤³¤Îµ¡Ç½¤Ï¼ÂÁõ¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡ª"
 
 #: src/file.c:72
 msgid "New Label or Card"
-msgstr "æ–°è¦ãƒ©ãƒ™ãƒ«ã¾ãŸã¯ã‚«ãƒ¼ãƒ‰"
+msgstr "¿·µ¬¥é¥Ù¥ë¤Ş¤¿¤Ï¥«¡¼¥É"
 
 #: src/file.c:98
 msgid "Media Type"
-msgstr "ãƒ¡ãƒ‡ã‚£ã‚¢ã®ç¨®é¡"
+msgstr "¥á¥Ç¥£¥¢¤Î¼ïÎà"
 
 #: src/file.c:109
 msgid "Label orientation"
-msgstr "ãƒ©ãƒ™ãƒ«ã®å‘ã"
+msgstr "¥é¥Ù¥ë¤Î¸ş¤­"
 
 #: src/file.c:211
 msgid "Open"
-msgstr "é–‹ã"
+msgstr "³«¤¯"
 
 #: src/file.c:213
 msgid "Open label"
-msgstr "ãƒ©ãƒ™ãƒ«ã‚’é–‹ãã¾ã™"
+msgstr "¥é¥Ù¥ë¤ò³«¤­¤Ş¤¹"
 
 #: src/file.c:249
 msgid "Cannot open file"
-msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"
+msgstr "¥Õ¥¡¥¤¥ë¤¬³«¤±¤Ş¤»¤ó"
 
 #: src/file.c:316
 msgid "Save label as"
-msgstr "ãƒ©ãƒ™ãƒ«ã«åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜ã—ã¾ã™"
+msgstr "¥é¥Ù¥ë¤ËÌ¾Á°¤òÉÕ¤±¤ÆÊİÂ¸¤·¤Ş¤¹"
 
 #: src/media_select.c:222
 msgid "Description:"
-msgstr "èª¬æ˜:"
+msgstr "ÀâÌÀ:"
 
 #: src/media_select.c:227
 msgid "Page size:"
-msgstr "ç”¨ç´™ã®ã‚µã‚¤ã‚º:"
+msgstr "ÍÑ»æ¤Î¥µ¥¤¥º:"
 
 #: src/media_select.c:232
 msgid "Label size:"
-msgstr "ãƒ©ãƒ™ãƒ«ã®å¤§ãã•:"
+msgstr "¥é¥Ù¥ë¤ÎÂç¤­¤µ:"
 
 #: src/media_select.c:237
 msgid "Layout:"
-msgstr "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ:"
+msgstr "¥ì¥¤¥¢¥¦¥È:"
 
 #: src/media_select.c:353
 #, c-format
 msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d  (%d å€‹/ã‚·ãƒ¼ãƒˆ)"
+msgstr "%d x %d  (%d ¸Ä/¥·¡¼¥È)"
 
 #: src/media_select.c:367
 #, c-format
@@ -574,102 +619,93 @@ msgstr "%.5g x %.5g %s"
 
 #: src/rotate_select.c:169
 msgid "Rotate"
-msgstr "å›è»¢ã•ã›ã‚‹"
+msgstr "²óÅ¾¤µ¤»¤ë"
 
 #: src/print_dialog.c:99
 msgid "Print"
-msgstr "å°åˆ·"
+msgstr "°õºş"
 
 #. ----------- Add simple-copies widget ------------
 #: src/print_dialog.c:104
 msgid "Copies"
-msgstr "ã‚³ãƒ”ãƒ¼"
+msgstr "¥³¥Ô¡¼"
 
 #. -------Otherwise add merge control widget ------------
 #: src/print_dialog.c:121
 msgid "Document merge control"
-msgstr "ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ãƒãƒ¼ã‚¸ã™ã‚‹"
+msgstr "¥É¥­¥å¥á¥ó¥È¤ò¥³¥ó¥È¥í¡¼¥ë¤Ë¥Ş¡¼¥¸¤¹¤ë"
 
 #. ----------- Add custom print options area ------------
 #: src/print_dialog.c:141
 msgid "Options"
-msgstr "ã‚ªãƒ—ã‚·ãƒ§ãƒ³"
-
-#: src/print_dialog.c:152
-msgid "print outlines (to test printer alignment)"
-msgstr ""
-"ã‚¢ã‚¦ãƒˆãƒ©ã‚¤ãƒ³ã‚’å°åˆ·ã™ã‚‹ (å°åˆ·æ™‚ã®é…ç½®ã‚’ç¢ºèªã™ã‚‹ãŸã‚)"
-
-#: src/print_dialog.c:160
-msgid "print in reverse (i.e. a mirror image)"
-msgstr "åè»¢ã—ã¦å°åˆ· (i.e. ç”»åƒã‚’ãƒŸãƒ©ãƒ¼ã—ãŸã‚‚ã®)"
+msgstr "¥ª¥×¥·¥ç¥ó"
 
 #: src/print_dialog.c:241 src/print_dialog.c:280
 msgid "Print preview"
-msgstr "å°åˆ·ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼"
+msgstr "°õºş¥×¥ì¥Ó¥å¡¼"
 
 #: src/print_copies.c:170
 msgid "Sheets:"
-msgstr "ç”¨ç´™:"
+msgstr "ÍÑ»æ:"
 
 #: src/print_copies.c:187
 msgid "Labels"
-msgstr "ãƒ©ãƒ™ãƒ«"
+msgstr "¥é¥Ù¥ë"
 
 #: src/print_copies.c:190
 msgid "from:"
-msgstr "é–‹å§‹:"
+msgstr "³«»Ï:"
 
 #: src/print_copies.c:198
 msgid "to:"
-msgstr "çµ‚äº†:"
+msgstr "½ªÎ»:"
 
 #: src/print_merge.c:170
 msgid "Start on label"
-msgstr "ãƒ©ãƒ™ãƒ«ã®é–‹å§‹"
+msgstr "¥é¥Ù¥ë¤Î³«»Ï"
 
 #: src/print_merge.c:179
 msgid "on 1st sheet"
-msgstr "(æœ€åˆã®ã‚·ãƒ¼ãƒˆ)"
+msgstr "(ºÇ½é¤Î¥·¡¼¥È)"
 
 #: src/print_merge.c:188
 msgid "Collate"
-msgstr "è£½æœ¬"
+msgstr "À½ËÜ"
 
 #: src/print_merge.c:195
 msgid "Copies:"
-msgstr "ã‚³ãƒ”ãƒ¼:"
+msgstr "¥³¥Ô¡¼:"
 
 #: src/prefs.c:86
 msgid "Glabels: Preferences"
-msgstr "Glabels: è¨­å®š"
+msgstr "Glabels: ÀßÄê"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:220
 msgid "Display units"
-msgstr "è¡¨ç¤ºã™ã‚‹å˜ä½"
+msgstr "É½¼¨¤¹¤ëÃ±°Ì"
 
 #: src/prefs.c:231
 msgid "Points"
-msgstr "ãƒã‚¤ãƒ³ãƒˆ"
+msgstr "¥İ¥¤¥ó¥È"
 
 #: src/prefs.c:237
 msgid "Inches"
-msgstr "ã‚¤ãƒ³ãƒ"
+msgstr "¥¤¥ó¥Á"
 
 #: src/prefs.c:244
 msgid "Millimeters"
-msgstr "ãƒŸãƒª"
+msgstr "¥ß¥ê"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:249
 msgid "Default page size"
-msgstr "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ç”¨ç´™ã‚µã‚¤ã‚º"
+msgstr "¥Ç¥Õ¥©¥ë¥È¤ÎÍÑ»æ¥µ¥¤¥º"
 
 #: src/prefs.c:450
 msgid "inches"
-msgstr "[ã‚¤ãƒ³ãƒ]"
+msgstr "[¥¤¥ó¥Á]"
 
 #: src/prefs.c:452
 msgid "mm"
-msgstr "[ãƒŸãƒª]"
+msgstr "[¥ß¥ê]"
