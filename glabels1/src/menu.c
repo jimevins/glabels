@@ -31,9 +31,9 @@
 #include "tools.h"
 
 #ifdef PACKAGE_DATA_DIR
-#define LOGO_PIXMAP (PACKAGE_DATA_DIR "/pixmaps/glabels/glabels-logo.png")
+#define LOGO_PIXMAP (PACKAGE_DATA_DIR "/pixmaps/glabels/glabels-about-logo.png")
 #else
-#define LOGO_PIXMAP gnome_pixmap_file("glabels/glabels-logo.png")
+#define LOGO_PIXMAP gnome_pixmap_file("glabels/glabels-about-logo.png")
 #endif
 
 /*===========================================*/

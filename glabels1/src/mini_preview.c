@@ -269,19 +269,31 @@ mini_outline_list_new (GnomeCanvas * canvas,
 	GnomeCanvasItem *item = NULL;
 	GList *list = NULL;
 	gint i, ix, iy;
-	gdouble x1, y1, x2, y2;
+	gdouble x1, y1, x2, y2, y_temp;
+	const GnomePaper *paper = NULL;
+	gdouble paper_height;
+
+	/* get paper height */
+	paper = gnome_paper_with_name (template->page_size);
+	paper_height = gnome_paper_psheight (paper);
 
 	group = gnome_canvas_root (canvas);
 
 	/* draw mini label outlines */
 	i = 1;
-	for (iy = 0; iy < template->ny; iy++) {
+	for (iy = (template->ny - 1); iy >= 0; iy--) {
 		for (ix = 0; ix < template->nx; ix++, i++) {
 
 			x1 = ix * (template->dx) + template->x0;
 			y1 = iy * (template->dy) + template->y0;
 			x2 = x1 + template->label_width;
 			y2 = y1 + template->label_height;
+
+			/* transform origin from lower left to upper left */
+			/* and swap y's so that (y1 < y2) */
+			y_temp = y2;
+			y2 = paper_height - y1;
+			y1 = paper_height - y_temp;
 
 			switch (template->style) {
 			case GL_TEMPLATE_STYLE_RECT:
@@ -362,13 +374,12 @@ canvas_event_cb (GnomeCanvas * canvas,
 	gint i;
 	gdouble x, y;
 
-	gnome_canvas_window_to_world (canvas,
-				      event->button.x, event->button.y,
-				      &x, &y);
-
 	switch (event->type) {
 
 	case GDK_BUTTON_PRESS:
+		gnome_canvas_window_to_world (canvas,
+					      event->button.x, event->button.y,
+					      &x, &y);
 		switch (event->button.button) {
 		case 1:
 			/* Get item at cursor and make sure
@@ -406,6 +417,9 @@ canvas_event_cb (GnomeCanvas * canvas,
 		break;
 
 	case GDK_BUTTON_RELEASE:
+		gnome_canvas_window_to_world (canvas,
+					      event->button.x, event->button.y,
+					      &x, &y);
 		switch (event->button.button) {
 		case 1:
 			/* Exit dragging mode */
@@ -419,6 +433,9 @@ canvas_event_cb (GnomeCanvas * canvas,
 		break;
 
 	case GDK_MOTION_NOTIFY:
+		gnome_canvas_window_to_world (canvas,
+					      event->motion.x, event->motion.y,
+					      &x, &y);
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			/* Get item at cursor and
 			   make sure it's a label object ("i" is valid) */

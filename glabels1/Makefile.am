@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-LIB_BARCODE_DIR = barcode-0.96
+LIB_BARCODE_DIR = barcode-0.98
 
 SUBDIRS = intl po macros src doc
 

@@ -396,11 +396,29 @@ margin="2" round="0">
   </Sheet>
 
   <!-- =================================================================== -->
+  <!-- Zweckform 3659: Rectangular Labels, 97 x 42.125 mm, 12 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 3659" size="A4" description="Mailing Labels -- 12">
+    <Label style="rectangle" width="274" height="120.5" margin="5" round="0">  
+      <Layout nx="2" ny="6" x0="22.68" y0="60" dx="274" dy="120.5"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
   <!-- Zweckform 3669:  Rectangular Labels, 70 x 50.8mm, 15 per sheet      -->
   <!-- =================================================================== -->
   <Sheet name="Zweckform 3669" size="A4" description="QSL-Karten Etiketten 70mm x 50,8mm">
     <Label style="rectangle" width="198.425" height="144" margin="0" round="0">
      <Layout nx="3" ny="5" x0="0" y0="61" dx="198.425" dy="144"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Zweckform 4780: Allround Labels, 48,5 x 25,4 mm, 40 per sheet    -->
+  <!-- =================================================================== -->
+  <Sheet name="Zweckform 4780" size="A4" description="Allround Labels">
+    <Label style="rectangle" width="137.48" height="72" margin="3" round="0">
+      <Layout nx="4" ny="10" x0="23" y0="68" dx="137.48" dy="72"/>
     </Label>
   </Sheet>
 
@@ -416,6 +434,50 @@ margin="2" round="0">
   <Sheet name="Southworth BC" size="US-Letter" description="Business Cards">
     <Label style="rectangle" width="252" height="144" margin="5" round="0">
       <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Memorex CD Labels 2 Pass  				         * -->
+  <!-- =================================================================== -->
+  <Sheet name="Memorex CD Labels" size="US-Letter"
+	 description="CD/DVD Labels (2 Pass)">
+    <Label style="cd" radius="166.5" hole="58.5" margin="5">
+      <Layout nx="1" ny="1" x0="40.5" y0="414" dx="0" dy="0"/>
+    </Label>
+  </Sheet>
+
+   <!-- =================================================================== -->
+   <!-- Neato CLP-192328/26: HandiCD-R 50MB, 3" x 2_1/8'', 9 per sheet      -->
+   <!-- =================================================================== -->
+   <Sheet name="Neato HandiCD-R" size="US-Letter"
+	  description="Business Card CD">
+     <Label margin="5" style="rectangle" height="216" width="171" round="75">
+       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
+     </Label>
+   </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- CD STOMPER PRO CD Label Refills, (Face Only), 2 per sheet         * -->
+  <!-- =================================================================== -->
+  <Sheet name="Stomper PRO CD" size="US-Letter"
+         description="PRO CD Labels 2-up (face only, 2 Pass)">
+    <Label style="cd" radius="166.5" hole="58.5" margin="5">
+      <Layout nx="1" ny="1" x0="34" y0="416" dx="0" dy="0"/>
+    </Label>
+  </Sheet>
+
+  <Sheet name="Stomper PRO Zip" size="US-Letter"
+         description="PRO CD Labels 2-up (Face only, 2 Pass)">
+    <Label style="rectangle" width="168" height="142" margin="5" round="0">
+      <Layout nx="1" ny="2" x0="407" y0="440" dx="0" dy="142"/>
+    </Label>
+  </Sheet>
+
+  <Sheet name="Stomper PRO Spine" size="US-Letter"
+         description="PRO CD Labels 2-up (CD spine only)">
+    <Label style="rectangle" width="288" height="20" margin="2" round="0">
+      <Layout nx="2" ny="1" x0="18" y0="387" dx="288" dy="0"/>
     </Label>
   </Sheet>
 
@@ -461,6 +523,70 @@ margin="2" round="0">
       <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
     </Label>
   </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Herma 4620: Mailing Labels - 2 columns, 107 x 37 mm, 16 per sheet   -->
+  <!-- =================================================================== -->
+  <Sheet name="Herma 4620" size="A4" description="Mailing Labels-2 columns">
+    <Label style="rectangle" width="298" height="105" margin="5" round="0">
+      <Layout nx="2" ny="8" x0="0" y0="0" dx="298" dy="105"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Herma 4464: Mailing Labels - 3 columns, 70 x 37.125 mm, 24 per sheet-->
+  <!-- =================================================================== -->
+  <Sheet name="Herma 4464" size="A4" description="Mailing Labels-3 columns">
+    <Label style="rectangle" width="199" height="105" margin="5" round="0">
+      <Layout nx="3" ny="8" x0="0" y0="0" dx="199" dy="105"/>
+    </Label>
+  </Sheet>
+
+  <!-- ===================================================================-->
+  <!-- Neato brand CD/DVD Labels (face only), 2 per sheet                 -->
+  <!-- ===================================================================-->
+  <Sheet name="Neato A4 CD" size="A4" description="CD/DVD Labels (face only)">
+    <Label style="cd" radius="166.5" hole="58.5" margin="5">
+      <Layout nx="1" ny="2" x0="125" y0="80" dx="0" dy="360"/>        
+    </Label>                                                      
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- EPSON Photo Stickers, 17 x 24 mm, 16 per sheet (Actually A6)        -->
+  <!-- =================================================================== -->
+  <Sheet name="Epson S041144" size="A4" description="EPSON Photo Stickers 16">
+    <Label style="rectangle" width="48" height="68" margin="4" round="7">
+      <Layout nx="4" ny="4" x0="33" y0="59" dx="59.5" dy="79.5"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- DATA BECKER: Business Cards, 50 x 90 mm, 10 per sheet               -->
+  <!-- =================================================================== -->
+  <Sheet name="DataBecker" size="A4" description="Business Cards">
+    <Label style="rectangle" width="255" height="142" margin="5" round="0">
+      <Layout nx="2" ny="5" x0="36" y0="62" dx="255" dy="142"/>
+    </Label>
+  </Sheet>
+
+  <!-- =================================================================== -->
+  <!-- Hema Etiketten: 65 x 38 mm, 21 per sheet                            -->
+  <!-- =================================================================== -->
+  <Sheet name="Hema Etiketten" size="A4" description="Rectangular Labels">
+    <Label style="rectangle" width="178" height="108" margin="5" round="5">
+      <Layout nx="3" ny="7" x0="20" y0="42" dx="187" dy="107"/>
+    </Label>
+  </Sheet>
+
+  <!-- ====================================================== -->
+  <!-- Alpi 02793: Business Cards, 50,8 x 90 mm, 10 per sheet -->
+  <!-- ====================================================== -->
+  <Sheet name="Alpi 02793" size="A4" description="Alpi 02793: Business Cards">
+    <Label style="rectangle" width="255.118" height="144" margin="5" round="0">
+      <Layout nx="2" ny="5" x0="42.5197" y0="62.3622" dx="255.118" dy="144"/>
+    </Label>
+  </Sheet>
+
 
 </GLabels-templates>
 
