@@ -154,7 +154,6 @@ gl_object_editor_init (glObjectEditor *editor)
 
 	/* Hide all notebook pages to start with. */
 	gtk_widget_hide_all (editor->priv->notebook);
-	gtk_widget_show (editor->priv->notebook);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -233,6 +232,7 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 				     va_list               args)
 {
 	glObjectEditorOption option;
+	gint pages = 0;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -249,43 +249,53 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 
 		case GL_OBJECT_EDITOR_POSITION_PAGE:
 			gl_object_editor_prepare_position_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_SIZE_PAGE:
 		case GL_OBJECT_EDITOR_SIZE_IMAGE_PAGE:
 			gl_object_editor_prepare_size_page (editor, option);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_SIZE_LINE_PAGE:
 			gl_object_editor_prepare_lsize_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_FILL_PAGE:
 			gl_object_editor_prepare_fill_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_LINE_PAGE:
 			gl_object_editor_prepare_line_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_IMAGE_PAGE:
 			gl_object_editor_prepare_image_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_TEXT_PAGE:
 			gl_object_editor_prepare_text_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_EDIT_PAGE:
 			gl_object_editor_prepare_edit_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_BC_PAGE:
 			gl_object_editor_prepare_bc_page (editor);
+			pages++;
 			break;
 
 		case GL_OBJECT_EDITOR_DATA_PAGE:
 			gl_object_editor_prepare_data_page (editor);
+			pages++;
 			break;
 
 		default:
@@ -293,6 +303,9 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 			g_assert_not_reached ();
 		}
 		
+	}
+	if (pages) {
+		gtk_widget_show (editor->priv->notebook);
 	}
 
 	gl_debug (DEBUG_EDITOR, "END");
