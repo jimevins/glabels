@@ -284,7 +284,6 @@
 	<toolitem name="FileNew" verb=""/>
 	<toolitem name="FileOpen" verb=""/>
 	<toolitem name="FileSave" verb=""/>
-	<toolitem name="FileClose" verb=""/>
 
 	<separator/>
 
