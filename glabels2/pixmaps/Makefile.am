@@ -5,7 +5,9 @@ glabels_pixmapsdir = $(datadir)/pixmaps/glabels
 glabels_pixmaps_DATA = \
 	glabels-icon.png	\
 	glabels-logo.png	\
-	glabels-about-logo.png
+	glabels-about-logo.png	\
+	ex-1layout.png		\
+	ex-2layouts.png
 
 glabels_mime_icondir = $(datadir)/pixmaps
 

@@ -85,6 +85,10 @@ void       gl_wdgt_mini_preview_set_template      (glWdgtMiniPreview *preview,
 void       gl_wdgt_mini_preview_highlight_range   (glWdgtMiniPreview *preview,
 						   gint               first_label,
 						   gint               last_label);
+
+void       gl_wdgt_mini_preview_set_bg_color      (glWdgtMiniPreview *preview,
+						   guint              color);
+
 G_END_DECLS
 
 #endif

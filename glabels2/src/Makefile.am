@@ -108,6 +108,8 @@ glabels_SOURCES = 			\
 	print.h				\
 	print-dialog.c			\
 	print-dialog.h			\
+	template-designer.c		\
+	template-designer.h		\
 	bc.c				\
 	bc.h				\
 	bc-gnubarcode.c			\
@@ -256,7 +258,8 @@ ui_DATA = \
 
 glade_DATA = \
 	object-editor.glade		\
-	prefs-dialog.glade
+	prefs-dialog.glade		\
+	template-designer.glade
 
 EXTRA_DIST = \
 	$(ui_DATA)			\

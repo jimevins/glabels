@@ -1175,11 +1175,12 @@ clip_to_outline (PrintInfo *pi,
 		waste = template->label.rect.waste;
 		if (r == 0.0) {
 			/* simple rectangle */
-			create_rectangle_path (pi->pc, -waste, -waste, w+waste, h+waste);
+			create_rectangle_path (pi->pc,
+					       -waste, -waste, w+2*waste, h+2*waste);
 		} else {
 			/* rectangle with rounded corners */
 			create_rounded_rectangle_path (pi->pc, -waste, -waste,
-						       w+waste, h+waste, r);
+						       w+2*waste, h+2*waste, r);
 		}
 		gnome_print_clip (pi->pc);
 		break;

@@ -72,6 +72,9 @@ src/print.c
 src/print.h
 src/print-dialog.c
 src/print-dialog.h
+src/template-designer.c
+src/template-designer.h
+src/template-designer.glade
 src/bc.c
 src/bc.h
 src/bc-gnubarcode.c

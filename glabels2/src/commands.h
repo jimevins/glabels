@@ -35,6 +35,10 @@ void gl_cmd_file_properties      (BonoboUIComponent *uic,
 				  gpointer           user_data,
 				  const gchar       *verbname);
 
+void gl_cmd_file_template_designer (BonoboUIComponent *uic,
+				    gpointer           user_data,
+				    const gchar       *verbname);
+
 void gl_cmd_file_open            (BonoboUIComponent *uic,
 				  gpointer           user_data,
 				  const gchar       *verbname);

@@ -54,6 +54,8 @@ GnomePrintConfig   *gnome_printer_selector_get_config (GtkWidget *psel);
 
 struct _glPrintDialogPrivate {
 
+	glLabel   *label;
+
 	GtkWidget *simple_frame;
 	GtkWidget *copies;
 
@@ -83,7 +85,7 @@ static void       gl_print_dialog_init            (glPrintDialog      *dlg);
 static void       gl_print_dialog_finalize        (GObject            *object);
 
 static void       gl_print_dialog_construct       (glPrintDialog      *dialog,
-						   glView             *view,
+						   glLabel            *label,
 						   BonoboWindow       *win);
 
 static GtkWidget *job_page_new                    (glPrintDialog      *dialog,
@@ -217,6 +219,11 @@ gl_print_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_PRINT_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+	if (dialog->priv->label) {
+		g_object_unref (G_OBJECT(dialog->priv->label));
+	}
+	g_free (dialog->priv);
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	g_free (dialog->priv);
@@ -226,7 +233,7 @@ gl_print_dialog_finalize (GObject *object)
 /* NEW object properties dialog.                                              */
 /*****************************************************************************/
 GtkWidget *
-gl_print_dialog_new (glView       *view,
+gl_print_dialog_new (glLabel      *label,
 		     BonoboWindow *win)
 {
 	GtkWidget *dialog;
@@ -235,7 +242,7 @@ gl_print_dialog_new (glView       *view,
 
 	dialog = GTK_WIDGET (g_object_new (GL_TYPE_PRINT_DIALOG, NULL));
 
-	gl_print_dialog_construct (GL_PRINT_DIALOG(dialog), view, win);
+	gl_print_dialog_construct (GL_PRINT_DIALOG(dialog), label, win);
 
 	return dialog;
 }
@@ -245,7 +252,7 @@ gl_print_dialog_new (glView       *view,
 /*--------------------------------------------------------------------------*/
 static void
 gl_print_dialog_construct (glPrintDialog      *dialog,
-			   glView             *view,
+			   glLabel            *label,
 			   BonoboWindow       *win)
 {
 	GtkWidget *notebook, *page;
@@ -253,37 +260,39 @@ gl_print_dialog_construct (glPrintDialog      *dialog,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	g_return_if_fail (view && GL_IS_VIEW(view));
-	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
-	g_return_if_fail (win && BONOBO_IS_WINDOW(win));
+	g_return_if_fail (label && GL_IS_LABEL(label));
 
-	name = gl_label_get_short_name (view->label);
+	dialog->priv->label = GL_LABEL(g_object_ref (G_OBJECT(label)));
+
+	name = gl_label_get_short_name (label);
 	title = g_strdup_printf ("%s \"%s\"", _("Print"), name);
 	g_free (name);
 
 	gtk_window_set_title (GTK_WINDOW(dialog), title);
-	gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(win));
-	gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
+	if (win) {
+		gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(win));
+		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
+	}
 
 	notebook = gtk_notebook_new ();
 	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), notebook);
 
 	/* ----- Create Job notebook page ----- */
-	page = job_page_new (dialog, view->label);
+	page = job_page_new (dialog, label);
 	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), page,
 				  gtk_label_new_with_mnemonic (_("_Job")));
 
 	/* ----- Create Printer notebook page ----- */
-	page = printer_page_new (dialog, view->label);
+	page = printer_page_new (dialog, label);
 	gtk_notebook_append_page (GTK_NOTEBOOK(notebook), page,
 				  gtk_label_new_with_mnemonic (_("P_rinter")));
 
 	g_signal_connect (G_OBJECT(dialog), "response",
-			  G_CALLBACK (print_response_cb), view->label);
+			  G_CALLBACK (print_response_cb), label);
 
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
-	merge_changed_cb (GL_LABEL(view->label), dialog);
+	merge_changed_cb (GL_LABEL(label), dialog);
 
 	g_free (title);
 
@@ -590,4 +599,19 @@ print_sheets_merge (GnomePrintConfig *config,
 
 	g_object_unref (G_OBJECT (job));
 }
+
+/*****************************************************************************/
+/* Set outline flag/checkbox.                                                */
+/*****************************************************************************/
+void
+gl_print_dialog_force_outline_flag (glPrintDialog *dialog)
+{
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(dialog->priv->outline_check),
+				      TRUE);
+
+	gtk_widget_set_sensitive (dialog->priv->outline_check, FALSE);
+	gtk_widget_set_sensitive (dialog->priv->reverse_check, FALSE);
+	gtk_widget_set_sensitive (dialog->priv->crop_marks_check, FALSE);
+}
+
 

@@ -29,6 +29,7 @@
 #include "commands.h"
 #include "view.h"
 #include "file.h"
+#include "template-designer.h"
 #include "print-dialog.h"
 #include "prefs.h"
 #include "prefs-dialog.h"
@@ -68,6 +69,26 @@ gl_cmd_file_properties (BonoboUIComponent *uic,
 	gl_debug (DEBUG_COMMANDS, "");
 	
 	gl_file_properties (GL_VIEW(window->view)->label, GTK_WINDOW(window));
+}
+
+/****************************************************************************/
+/* File->Template Designer command.                                         */
+/****************************************************************************/
+void
+gl_cmd_file_template_designer (BonoboUIComponent *uic,
+			       gpointer           user_data,
+			       const gchar       *verbname)
+{
+	glWindow  *window = GL_WINDOW (user_data);
+	GtkWidget *dialog;
+
+	gl_debug (DEBUG_COMMANDS, "");
+
+	g_return_if_fail (window && GL_IS_WINDOW(window));
+
+	dialog = gl_template_designer_new (GTK_WINDOW(window));
+
+	gtk_widget_show (dialog);
 }
 
 /****************************************************************************/
@@ -142,7 +163,8 @@ gl_cmd_file_print (BonoboUIComponent *uic,
 	} else {
 
 		GL_VIEW(window->view)->print_dialog =
-			gl_print_dialog_new (GL_VIEW(window->view), BONOBO_WINDOW(window));
+			gl_print_dialog_new (GL_VIEW(window->view)->label,
+					     BONOBO_WINDOW(window));
 
 		gtk_widget_show (GL_VIEW(window->view)->print_dialog);
 	}

@@ -1,3 +1,57 @@
+2003-12-30  Jim Evins  <evins@snaught.com>
+
+	* src/template-designer.c:
+	* src/template-designer.h:
+	* src/template-designer.glade:
+		New template designer assistant.
+	
+	* po/POTFILES.in:
+	* src/Makefile.am:
+		Added entries for src/template-designer.* files.
+	
+	* pixmaps/ex-1layout.png
+	* pixmaps/ex-2layouts.png
+	* pixmaps/Makefile.am:
+		Added the new image files ex-*.png used as illustrations in the
+		template designer assistant.
+	
+	* src/print-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_finalize),
+	(gl_print_dialog_new), (gl_print_dialog_construct),
+	(gl_print_dialog_force_outline_flag):
+		Changed first argument of gl_print_dialog_new() from glView to glLabel,
+		to support printing from the template designer assistant which does not
+		have a full-fledged view.  Nothing else from the view object was being
+		used by the dialog anyway.
+
+		Added the gl_print_dialog_force_outline_flag() method, for better
+		integration with the template designer assistant.
+		
+
+	* src/commands.h:
+	* src/commands.c: (gl_cmd_file_template_designer),
+	(gl_cmd_file_print):
+		Modified print command to provide label instead of view to dialog.
+		Added the gl_cmd_file_template_designer() command to invoke the
+		template designer assistant.
+	
+	* src/ui.c:
+	* src/glabels-ui.xml:
+		Added support for template designer assistant.
+	
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_set_template),
+	(gl_wdgt_mini_preview_set_bg_color):
+		Preview is now centered in canvas.  Added
+		gl_wdgt_mini_preview_set_bg_color() to allow the template designer
+		assistant to match the background color with its own.
+	
+	* src/print.c: (clip_to_outline):
+		Fixed really stupid bug when adding waste to clip region of rectangular
+		labels/cards.  Each side of the clip region needs to be extended by
+		twice the waste margin, as well as negatively offset by the waste
+		margin.
+
 2003-12-28  Jim Evins  <evins@snaught.com>
 
 	* src/prefs-dialog.c: (update_object_page_from_prefs):

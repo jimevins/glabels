@@ -13,7 +13,7 @@
 
 		<cmd name="FileProperties"
 			_label="Properties"
-			_tip="Create a new document"
+			_tip="Modify document properties"
 			pixtype="stock" pixname="gtk-properties"
 		/>
 
@@ -36,6 +36,11 @@
 			_tip="Save the current file with a different name"
 			pixtype="stock" pixname="gtk-save-as"
 			accel="*Shift**Control*S"
+		/>
+
+		<cmd name="FileTemplateDesigner"
+			_label="Template Designer"
+			_tip="Create a custom template"
 		/>
 
 		<cmd name="FilePrint"
@@ -463,7 +468,12 @@
 
 			<menuitem name="FileProperties"
 				verb=""
-				_label="Proper_ties"
+				_label="Proper_ties..."
+			/>
+
+			<menuitem name="FileTemplateDesigner"
+				verb=""
+				_label="Template _Designer..."
 			/>
 
 			<separator />

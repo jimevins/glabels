@@ -299,6 +299,7 @@ void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 	gchar      *page_size;
 	gdouble     canvas_scale;
 	gdouble     w, h;
+	gdouble     offset_x, offset_y;
 	gdouble     shadow_x, shadow_y;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
@@ -316,16 +317,13 @@ void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 	}
 	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (preview->canvas),
 					  canvas_scale);
-#if 0
+	offset_x = (preview->width/canvas_scale - template->page_width) / 2.0;
+	offset_y = (preview->height/canvas_scale - template->page_height) / 2.0;
+
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
-					0.0, 0.0,
-					template->page_width, template->page_height);
-#else
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
-					0.0, 0.0,
-					preview->width/canvas_scale,
-					preview->height/canvas_scale);
-#endif
+					-offset_x, -offset_y,
+					preview->width/canvas_scale - offset_x,
+					preview->height/canvas_scale - offset_y);
 
 	/* update shadow */
 	shadow_x = SHADOW_X_OFFSET/canvas_scale;
@@ -732,5 +730,19 @@ cdbc_item (GnomeCanvasGroup *group,
 	gnome_canvas_points_free (points);
 
 	return item;
+}
+
+/****************************************************************************/
+/* Change/set background color of preview.                                  */
+/****************************************************************************/
+void
+gl_wdgt_mini_preview_set_bg_color (glWdgtMiniPreview *preview,
+				   guint              color)
+{
+	GdkColor *gdk_color;
+
+	gdk_color = gl_color_to_gdk_color (color);
+	gtk_widget_modify_bg (GTK_WIDGET(preview->canvas), GTK_STATE_NORMAL, gdk_color);
+	g_free (gdk_color);
 }
 

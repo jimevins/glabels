@@ -52,6 +52,7 @@
 static BonoboUIVerb gl_ui_verbs [] = {
 	BONOBO_UI_VERB ("FileNew",               gl_cmd_file_new),
 	BONOBO_UI_VERB ("FileProperties",        gl_cmd_file_properties),
+	BONOBO_UI_VERB ("FileTemplateDesigner",  gl_cmd_file_template_designer),
 	BONOBO_UI_VERB ("FileOpen",              gl_cmd_file_open),
 	BONOBO_UI_VERB ("FileSave",              gl_cmd_file_save),
 	BONOBO_UI_VERB ("FileSaveAs",            gl_cmd_file_save_as),
