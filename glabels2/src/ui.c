@@ -134,7 +134,8 @@ static gchar* doc_verbs [] = {
 	"/menu/Objects/CreateObjects",
 	"/menu/Objects/Order",
 	"/menu/Objects/RotateFlip",
-	"/menu/Objects/Align",
+	"/menu/Objects/AlignHoriz",
+	"/menu/Objects/AlignVert",
 	"/commands/ViewGrid",
 	"/commands/ViewMarkup",
 
@@ -177,7 +178,8 @@ static gchar* multi_selection_verbs [] = {
 	"/commands/ToolsAlignTop",
 	"/commands/ToolsAlignBottom",
 	"/commands/ToolsAlignVCenter",
-	"/menu/Objects/Align",
+	"/menu/Objects/AlignHoriz",
+	"/menu/Objects/AlignVert",
 
 	NULL
 };

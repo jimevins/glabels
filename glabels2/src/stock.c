@@ -66,6 +66,12 @@ gl_stock_init (void)
 		{ GL_STOCK_IMAGE,         "Image",          0, 0, NULL },
 		{ GL_STOCK_BARCODE,       "Barcode",        0, 0, NULL },
 		{ GL_STOCK_MERGE,         "Merge",          0, 0, NULL },
+		{ GL_STOCK_ORDER_TOP,     "OrderTop",       0, 0, NULL },
+		{ GL_STOCK_ORDER_BOTTOM,  "OrderBottom",    0, 0, NULL },
+		{ GL_STOCK_ROTATE_LEFT,   "RotateLeft",     0, 0, NULL },
+		{ GL_STOCK_ROTATE_RIGHT,  "RotateRight",    0, 0, NULL },
+		{ GL_STOCK_FLIP_HORIZ,    "FlipHoriz",      0, 0, NULL },
+		{ GL_STOCK_FLIP_VERT,     "FlipVert",       0, 0, NULL },
 		{ GL_STOCK_ALIGN_LEFT,    "AlignLeft",      0, 0, NULL },
 		{ GL_STOCK_ALIGN_RIGHT,   "AlignRight",     0, 0, NULL },
 		{ GL_STOCK_ALIGN_HCENTER, "AlignHCenter",   0, 0, NULL },
@@ -87,12 +93,19 @@ gl_stock_init (void)
 	add_icons (factory, GL_STOCK_IMAGE,         stock_image_24,   stock_image_16);
 	add_icons (factory, GL_STOCK_BARCODE,       stock_barcode_24, stock_barcode_16);
 	add_icons (factory, GL_STOCK_MERGE,         stock_merge_24,   stock_merge_16);
-	add_icons (factory, GL_STOCK_ALIGN_LEFT,    NULL,             stock_align_left_16);
-	add_icons (factory, GL_STOCK_ALIGN_RIGHT,   NULL,             stock_align_right_16);
-	add_icons (factory, GL_STOCK_ALIGN_HCENTER, NULL,             stock_align_hcenter_16);
-	add_icons (factory, GL_STOCK_ALIGN_TOP,     NULL,             stock_align_top_16);
-	add_icons (factory, GL_STOCK_ALIGN_BOTTOM,  NULL,             stock_align_bottom_16);
-	add_icons (factory, GL_STOCK_ALIGN_VCENTER, NULL,             stock_align_vcenter_16);
+
+	add_icons (factory, GL_STOCK_ORDER_TOP,     NULL, stock_order_top_16);
+	add_icons (factory, GL_STOCK_ORDER_BOTTOM,  NULL, stock_order_bottom_16);
+	add_icons (factory, GL_STOCK_ROTATE_LEFT,   NULL, stock_rotate_left_16);
+	add_icons (factory, GL_STOCK_ROTATE_RIGHT,  NULL, stock_rotate_right_16);
+	add_icons (factory, GL_STOCK_FLIP_HORIZ,    NULL, stock_flip_horiz_16);
+	add_icons (factory, GL_STOCK_FLIP_VERT,     NULL, stock_flip_vert_16);
+	add_icons (factory, GL_STOCK_ALIGN_LEFT,    NULL, stock_align_left_16);
+	add_icons (factory, GL_STOCK_ALIGN_RIGHT,   NULL, stock_align_right_16);
+	add_icons (factory, GL_STOCK_ALIGN_HCENTER, NULL, stock_align_hcenter_16);
+	add_icons (factory, GL_STOCK_ALIGN_TOP,     NULL, stock_align_top_16);
+	add_icons (factory, GL_STOCK_ALIGN_BOTTOM,  NULL, stock_align_bottom_16);
+	add_icons (factory, GL_STOCK_ALIGN_VCENTER, NULL, stock_align_vcenter_16);
 
 	g_object_unref (G_OBJECT(factory));
 }
