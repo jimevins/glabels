@@ -685,8 +685,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
-						    gl_color_set_opacity (gl_prefs->default_line_color, 0.5),
-						    1.0);
+						    TRUE,
+						    gl_color_set_opacity (gl_prefs->default_line_color, 0.5));
 			view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object),
 							    view);
 			x0 = x;
@@ -711,8 +711,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
-						    gl_prefs->default_line_color,
-						    1.0);
+						    TRUE,
+						    gl_prefs->default_line_color);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
 			gl_view_arrow_mode (view);
