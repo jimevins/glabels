@@ -202,14 +202,21 @@ gl_view_highlight_instance_init (glViewHighlight *view_highlight)
 static void
 gl_view_highlight_finalize (GObject *object)
 {
-	glLabel       *parent;
-	glView        *view;
+	glLabel         *parent;
+	glViewHighlight *view_highlight;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_HIGHLIGHT (object));
 
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_HIGHLIGHT(object)->private->position_group));
+	view_highlight = GL_VIEW_HIGHLIGHT (object);
+
+	/* Free up handler owned by view. */
+	g_signal_handlers_disconnect_by_func (G_OBJECT (view_highlight->private->view),
+					      G_CALLBACK (view_scale_changed_cb),
+					      object);
+
+	gtk_object_destroy (GTK_OBJECT(view_highlight->private->position_group));
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
