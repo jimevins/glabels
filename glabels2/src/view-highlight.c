@@ -314,6 +314,7 @@ highlight_resizable_box  (glViewObject *view_object,
 				    NULL);
 
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
 
 	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
@@ -346,7 +347,9 @@ highlight_resizable_box  (glViewObject *view_object,
 	g_signal_connect (G_OBJECT (outline), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -420,6 +423,7 @@ highlight_resizable_line (glViewObject *view_object)
 				    NULL);
 
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
 
 	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
@@ -436,7 +440,9 @@ highlight_resizable_line (glViewObject *view_object)
 
 	gnome_canvas_points_free (points);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -484,14 +490,17 @@ highlight_simple         (glViewObject *view_object)
 				       NULL);
 
 
-	g_object_set_data (G_OBJECT (highlight), "outline", outline);
-
 	g_object_set_data (G_OBJECT (highlight), "object", object);
+	g_object_set_data (G_OBJECT (highlight), "view",   view);
+
+	g_object_set_data (G_OBJECT (highlight), "outline", outline);
 
 	g_signal_connect (G_OBJECT (highlight), "event",
 			  G_CALLBACK (passthrough_event_handler), view_object);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -506,6 +515,7 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 		       glViewHighlightStyle style)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble w, h;
 	GnomeCanvasItem *outline;               /* Outline around item */
 	GnomeCanvasItem *tl, *tr, *bl, *br;	/* Handles at four corners */
@@ -517,6 +527,8 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &w, &h);
+
+	view = g_object_get_data (G_OBJECT (highlight), "view");
 
 	outline = g_object_get_data (G_OBJECT (highlight), "outline");
 
@@ -592,7 +604,9 @@ update_resizable_box  (GnomeCanvasItem *highlight,
 			       "y2", h + 1.0,
 			       NULL);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -604,6 +618,7 @@ static void
 update_resizable_line (GnomeCanvasItem *highlight)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble dx, dy;
 	GnomeCanvasPoints *points;
 	GnomeCanvasItem *outline;	/* Outline around item */
@@ -615,6 +630,8 @@ update_resizable_line (GnomeCanvasItem *highlight)
 
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &dx, &dy);
+
+	view = g_object_get_data (G_OBJECT (highlight), "view");
 
 	points = gnome_canvas_points_new (2);
 
@@ -645,7 +662,9 @@ update_resizable_line (GnomeCanvasItem *highlight)
 
 	gnome_canvas_points_free (points);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -657,6 +676,7 @@ static void
 update_simple (GnomeCanvasItem *highlight)
 {
 	glLabelObject *object;
+	glView *view;
 	gdouble w, h;
 	GnomeCanvasItem *outline;               /* Outline around item */
 
@@ -667,6 +687,8 @@ update_simple (GnomeCanvasItem *highlight)
 	object = g_object_get_data (G_OBJECT (highlight), "object");
 	gl_label_object_get_size (object, &w, &h);
 
+	view = g_object_get_data (G_OBJECT (highlight), "view");
+
 	outline = g_object_get_data (G_OBJECT (highlight), "outline");
 
 	gnome_canvas_item_set (outline,
@@ -674,7 +696,9 @@ update_simple (GnomeCanvasItem *highlight)
 			       "y2", h + 0.5,
 			       NULL);
 
+	/* send to top, then lower below all items that form the foregound */
 	gnome_canvas_item_raise_to_top (highlight);
+	gl_view_raise_fg (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -746,10 +770,10 @@ tl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -843,9 +867,9 @@ tr_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -938,10 +962,10 @@ bl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
 			y = y1;
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1036,8 +1060,8 @@ br_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
 			y = y1;
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1127,8 +1151,8 @@ sl_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			x = MIN (event->button.x, x2 - MIN_ITEM_SIZE);
-			w = MAX (x2 - event->button.x, MIN_ITEM_SIZE);
+			x = MIN (event->motion.x, x2 - MIN_ITEM_SIZE);
+			w = MAX (x2 - event->motion.x, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1219,7 +1243,7 @@ sr_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x1;
-			w = MAX (event->button.x - x1, MIN_ITEM_SIZE);
+			w = MAX (event->motion.x - x1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1309,8 +1333,8 @@ st_resize_event_handler (GnomeCanvasItem * handle_item,
 
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			y = MIN (event->button.y, y2 - MIN_ITEM_SIZE);
-			h = MAX (y2 - event->button.y, MIN_ITEM_SIZE);
+			y = MIN (event->motion.y, y2 - MIN_ITEM_SIZE);
+			h = MAX (y2 - event->motion.y, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1401,7 +1425,7 @@ sb_resize_event_handler (GnomeCanvasItem * handle_item,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			y = y1;
-			h = MAX (event->button.y - y1, MIN_ITEM_SIZE);
+			h = MAX (event->motion.y - y1, MIN_ITEM_SIZE);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, w, h);
 			return TRUE;
@@ -1496,8 +1520,8 @@ p1_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x0;
 			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
+			dx = (event->motion.x - x0);
+			dy = (event->motion.y - y0);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;
@@ -1592,8 +1616,8 @@ p2_resize_event_handler (GnomeCanvasItem * handle_item,
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			x = x0;
 			y = y0;
-			dx = (event->button.x - x0);
-			dy = (event->button.y - y0);
+			dx = (event->motion.x - x0);
+			dy = (event->motion.y - y0);
 			gl_label_object_set_position (object, x, y);
 			gl_label_object_set_size (object, dx, dy);
 			return TRUE;

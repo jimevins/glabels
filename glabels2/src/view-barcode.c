@@ -34,6 +34,8 @@
 #include "wdgt-bc-props.h"
 #include "wdgt-bc-style.h"
 #include "wdgt-position.h"
+#include "color.h"
+#include "prefs.h"
 
 #include "pixmaps/cursor_barcode.xbm"
 #include "pixmaps/cursor_barcode_mask.xbm"
@@ -645,7 +647,7 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 						    GL_BARCODE_STYLE_POSTNET,
 						    FALSE,
-						    GNOME_CANVAS_COLOR_A (0,0,0,255),
+						    gl_color_set_opacity (gl_prefs->default_line_color, 0.5),
 						    1.0);
 			view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object),
 							    view);
@@ -668,6 +670,11 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 						      event->button.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
+			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
+						    GL_BARCODE_STYLE_POSTNET,
+						    FALSE,
+						    gl_prefs->default_line_color,
+						    1.0);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
 			gl_view_arrow_mode (view);
@@ -681,8 +688,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
 			return TRUE;

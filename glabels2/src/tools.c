@@ -228,3 +228,54 @@ gl_tools_merge_properties (BonoboUIComponent *uic,
 	}
 }
 
+/*****************************************************************************/
+/* edit object properties callback.                                          */
+/*****************************************************************************/
+void
+gl_tools_object_properties (BonoboUIComponent *uic,
+			    gpointer user_data,
+			    const gchar* verbname)
+
+{
+	glView *view;
+
+	view = glabels_get_active_view ();
+	if (view != NULL) {
+		gl_view_edit_object_props (view);
+	}
+}
+
+/*****************************************************************************/
+/* Raise objects to top callback.                                            */
+/*****************************************************************************/
+void
+gl_tools_raise_objects (BonoboUIComponent *uic,
+			gpointer user_data,
+			const gchar* verbname)
+
+{
+	glView *view;
+
+	view = glabels_get_active_view ();
+	if (view != NULL) {
+		gl_view_raise_selection (view);
+	}
+}
+
+/*****************************************************************************/
+/* Lower objects to bottom callback.                                         */
+/*****************************************************************************/
+void
+gl_tools_lower_objects (BonoboUIComponent *uic,
+			gpointer user_data,
+			const gchar* verbname)
+
+{
+	glView *view;
+
+	view = glabels_get_active_view ();
+	if (view != NULL) {
+		gl_view_lower_selection (view);
+	}
+}
+

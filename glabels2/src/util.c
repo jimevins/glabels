@@ -110,84 +110,6 @@ gl_util_fraction( gdouble x )
 }
 
 /****************************************************************************/
-/* Create button w/ both text and stock image.                              */
-/****************************************************************************/
-GtkWidget* 
-gl_button_new_with_stock_image (const gchar* text, const gchar* stock_id)
-{
-	GtkWidget *button;
-	GtkStockItem item;
-	GtkWidget *label;
-	GtkWidget *image;
-	GtkWidget *hbox;
-	GtkWidget *align;
-
-	button = gtk_button_new ();
-
- 	if (GTK_BIN (button)->child)
-    		gtk_container_remove (GTK_CONTAINER (button),
-				      GTK_BIN (button)->child);
-
-  	if (gtk_stock_lookup (stock_id, &item))
-    	{
-      		label = gtk_label_new_with_mnemonic (text);
-
-		gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
-      
-		image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
-      		hbox = gtk_hbox_new (FALSE, 2);
-
-      		align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-      
-      		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-      		gtk_box_pack_end (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-      
-      		gtk_container_add (GTK_CONTAINER (button), align);
-      		gtk_container_add (GTK_CONTAINER (align), hbox);
-      		gtk_widget_show_all (align);
-
-      		return button;
-    	}
-
-      	label = gtk_label_new_with_mnemonic (text);
-      	gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
-  
-  	gtk_misc_set_alignment (GTK_MISC (label), 0.5, 0.5);
-
-  	gtk_widget_show (label);
-  	gtk_container_add (GTK_CONTAINER (button), label);
-
-	return button;
-}
-
-/****************************************************************************/
-/* Add button to gtk_dialog w/ text and stock image.                        */
-/****************************************************************************/
-GtkWidget*
-gl_util_dialog_add_button (GtkDialog *dialog,
-			   const gchar* text,
-			   const gchar* stock_id,
-			   gint response_id)
-{
-	GtkWidget *button;
-	
-	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
-	g_return_val_if_fail (text != NULL, NULL);
-	g_return_val_if_fail (stock_id != NULL, NULL);
-
-	button = gl_button_new_with_stock_image (text, stock_id);
-	g_return_val_if_fail (button != NULL, NULL);
-
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-
-	gtk_widget_show (button);
-
-	gtk_dialog_add_action_widget (dialog, button, response_id);	
-
-	return button;
-}
-
-/****************************************************************************/
 /* Utilities to deal with GTK_JUSTIFICATION types.                          */
 /****************************************************************************/
 const gchar *
@@ -250,3 +172,4 @@ gl_util_string_to_weight (const gchar * string)
 	}
 
 }
+

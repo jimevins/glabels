@@ -33,10 +33,10 @@ typedef enum {
 	GL_VIEW_STATE_OBJECT_CREATE
 } glViewState;
 
-#define GL_TYPE_VIEW (gl_view_get_type ())
-#define GL_VIEW(obj) (GTK_CHECK_CAST((obj), GL_TYPE_VIEW, glView ))
-#define GL_VIEW_CLASS(klass) (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW, glViewClass))
-#define GL_IS_VIEW(obj) (GTK_CHECK_TYPE ((obj), GL_TYPE_VIEW))
+#define GL_TYPE_VIEW            (gl_view_get_type ())
+#define GL_VIEW(obj)            (GTK_CHECK_CAST((obj), GL_TYPE_VIEW, glView ))
+#define GL_VIEW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW, glViewClass))
+#define GL_IS_VIEW(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_VIEW))
 #define GL_IS_VIEW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW))
 
 typedef struct _glView glView;
@@ -45,57 +45,78 @@ typedef struct _glViewClass glViewClass;
 #include "view-object.h"
 
 struct _glView {
-	GtkVBox parent_widget;
+	GtkVBox           parent_widget;
 
-	glLabel *label;
+	glLabel           *label;
 
-	GtkWidget *canvas;
-	gdouble scale;
-	gint n_bg_items;
-	GList *bg_item_list;
+	GtkWidget         *canvas;
+	gdouble           scale;
+	gint              n_bg_items;
+	GList             *bg_item_list;
+	gint              n_fg_items;
+	GList             *fg_item_list;
 
-	glViewState state;
+	glViewState       state;
 	glLabelObjectType create_type;
 
-	GList *object_list;
-	GList *selected_object_list;
+	GList             *object_list;           /* glViewObjects */
+	GList             *selected_object_list;  /* glViewObjects */
 
-	gint have_selection;
-	glLabel *selection_data;
-	GtkWidget *invisible;
+	/* Clipboard selection stuff */
+	gint              have_selection;
+	glLabel           *selection_data;
+	GtkWidget         *invisible;
 
-	GtkWidget *menu;
+	GtkWidget         *menu;
 };
 
 struct _glViewClass {
-	GtkVBoxClass parent_class;
+	GtkVBoxClass      parent_class;
+
+	void (*selection_changed) (glView *view, gpointer user_data);
 };
 
-extern guint gl_view_get_type (void);
+extern guint     gl_view_get_type           (void);
 
-extern GtkWidget *gl_view_new (glLabel * label);
+extern GtkWidget *gl_view_new               (glLabel *label);
 
-extern void gl_view_arrow_mode (glView * view);
-extern void gl_view_object_create_mode (glView * view,
-					glLabelObjectType type);
+extern void      gl_view_raise_fg           (glView *view);
 
-extern void gl_view_select_object (glView *view, glViewObject *view_object);
-extern void gl_view_select_all (glView *view);
-extern void gl_view_unselect_all (glView *view);
-extern void gl_view_delete_selection (glView *view);
+extern void      gl_view_arrow_mode         (glView *view);
+extern void      gl_view_object_create_mode (glView *view,
+					     glLabelObjectType type);
 
+extern void      gl_view_select_object      (glView *view,
+					     glViewObject *view_object);
+extern void      gl_view_unselect_object    (glView *view,
+					     glViewObject *view_object);
+extern void      gl_view_select_all         (glView *view);
+extern void      gl_view_unselect_all       (glView *view);
+extern void      gl_view_select_region      (glView  *view,
+					     gdouble  x1,
+					     gdouble  y1,
+					     gdouble  x2,
+					     gdouble  y2);
 
-extern int gl_view_item_event_handler (GnomeCanvasItem * item,
-				       GdkEvent * event,
-				       glViewObject *view_object);
+extern gboolean  gl_view_is_selection_empty (glView *view);
+extern gboolean  gl_view_is_selection_atomic(glView *view);
 
-extern void gl_view_cut (glView * view);
-extern void gl_view_copy (glView * view);
-extern void gl_view_paste (glView * view);
+extern void      gl_view_delete_selection   (glView *view);
+extern void      gl_view_edit_object_props  (glView *view);
+extern void      gl_view_raise_selection    (glView *view);
+extern void      gl_view_lower_selection    (glView *view);
 
-extern void gl_view_zoom_in (glView * view);
-extern void gl_view_zoom_out (glView * view);
-extern void gl_view_set_zoom (glView * view, gdouble scale);
-extern gdouble gl_view_get_zoom (glView * view);
+extern void      gl_view_cut                (glView *view);
+extern void      gl_view_copy               (glView *view);
+extern void      gl_view_paste              (glView *view);
+
+extern void      gl_view_zoom_in            (glView *view);
+extern void      gl_view_zoom_out           (glView *view);
+extern void      gl_view_set_zoom           (glView *view, gdouble scale);
+extern gdouble   gl_view_get_zoom           (glView *view);
+
+extern int       gl_view_item_event_handler (GnomeCanvasItem *item,
+					     GdkEvent        *event,
+					     glViewObject    *view_object);
 
 #endif

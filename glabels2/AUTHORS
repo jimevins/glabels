@@ -41,9 +41,14 @@ gLabels.  The authors of gedit2:
 Translations:
 
 	Olivier Berger <oberger@april.org> -- French
-	Marcus Bauer <m@7n7.de> -- German
+	Marcus Bauer <m@7n7.de> -- German (original)
+	Christian Neumair <christian-neumair@web.de> -- German
 	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
 	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
+	Víctor Moral <victor@pasmao.net> -- Spanish translations
+	Vitaly Lipatov <LAV@VL3143.spb.edu> -- Russian translations
+	Shell, Hin-lik Hung <shell@home.shellhung.org> -- Chinese Translations
+	Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl> -- Polish Translations
 
 
 The following people have submitted label templates or information about
@@ -68,6 +73,23 @@ particular products:
 	no-exit <no-exit@plunge.net>
 	Mozilla from marela <mozilla@marela.com>
 	Holger <holger@lange-online.net>
-
+	Bill Tihen <bill@tasis.ch>
+	Dan Gray <dan@dangray.org>
+	Keith Hudson <kwhudson@netin.com>
+	Tamas Bondar <tamas.bondar@pp.nic.fi>
+	George Mitchell <ghmitch@neteze.com>
+	Erich Pfennig <erich@alternativ.net>
+	Gwen Patton <ardrhi@voicenet.com>
+	Miek Gieben <miekg@atoom.net>
+	Joerg Schmitz-Linneweber <schmitz-linneweber@aston-technologie.de>
+	David Makovský <yakeen@sugama.cz>
+	Oliver Schwank <oli@flinx.sub.org>
+	Akkana <akkana@shallowsky.com>
+	Ted Poe <poet@theworld.com>
+	hans-helmut.belter <hans-helmut.belter@arcor.de>
+	Uli Wachowitz <uli@wach-o-witz.de>
+	Stephan Hegel <stephan.hegel@gmx.de>
+	Holger Reinmann <holger.reinmann@t-online.de>
+	Michael Wojciechowski <wojci@netimage.dk>
 
 And many others for their many helpful suggestions and bug reports -- thanks.

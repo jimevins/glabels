@@ -56,26 +56,40 @@
 
 	<cmd name="EditUnSelectAll" _label="Un-select All" _tip="Remove all selections"/>
 
-	<cmd name="ViewToolbar" _label="_Toolbar" type="toggle"
-	_tip="Change the visibility of the toolbar in the current window" state="0"/>
+	<cmd name="ViewMainToolbar" _label="_Main Toolbar" type="toggle"
+	_tip="Change the visibility of the main toolbar in the current window" state="0"/>
 
-        <cmd name="ToolbarSystem" id="ToolbarSystem" _label="_Desktop Default" type="radio" 
-         group="buttons" state = "1" _tip="Set toolbar button style according to desktop default"/>
+        <cmd name="MainToolbarSystem" id="MainToolbarSystem" _label="_Desktop Default" type="radio" 
+         group="main_buttons" state = "1" _tip="Set main toolbar button style according to desktop default"/>
 
-	<cmd name="ToolbarIcon" id="ToolbarIcon" _label="_Icon" type="radio" 
-	 group="buttons" _tip="Only show icons in the toolbar"/>
+	<cmd name="MainToolbarIcon" id="MainToolbarIcon" _label="_Icon" type="radio" 
+	 group="main_buttons" _tip="Only show icons in the main toolbar"/>
 
-	<cmd name="ToolbarIconText" id="ToolbarIconText" _label="Icon and _Text" type="radio" 
-	 group="buttons" _tip ="Show both icons and texts in the toolbar"/>
+	<cmd name="MainToolbarIconText" id="MainToolbarIconText" _label="Icon and _Text" type="radio" 
+	 group="main_buttons" _tip ="Show both icons and texts in the main toolbar"/>
+
+	<cmd name="MainToolbarTooltips" id="MainToolbarTooltips" _label="Show _Tooltips" type="toggle"
+	_tip="Show tooltips in the main toolbar" state="1"/>
+
+	<cmd name="ViewDrawingToolbar" _label="_Drawing Toolbar" type="toggle"
+	_tip="Change the visibility of the drawing toolbar in the current window" state="0"/>
+
+        <cmd name="DrawingToolbarSystem" id="DrawingToolbarSystem" _label="_Desktop Default" type="radio" 
+         group="drawing_buttons" state = "1" _tip="Set drawing toolbar button style according to desktop default"/>
+
+	<cmd name="DrawingToolbarIcon" id="DrawingToolbarIcon" _label="_Icon" type="radio" 
+	 group="drawing_buttons" _tip="Only show icons in the drawing toolbar"/>
+
+	<cmd name="DrawingToolbarIconText" id="DrawingToolbarIconText" _label="Icon and _Text" type="radio" 
+	 group="drawing_buttons" _tip ="Show both icons and texts in the drawing toolbar"/>
+
+	<cmd name="DrawingToolbarTooltips" id="DrawingToolbarTooltips" _label="Show _Tooltips" type="toggle"
+	_tip="Show tooltips in the drawing toolbar" state="1"/>
 
         <cmd name="SettingsPreferences" _label="Preferences" _tip="Configure the application"
 	  pixtype="stock" pixname="gtk-preferences"/>
 
-	<cmd name="ToolbarTooltips" id="ToolbarTooltips" _label="Show _Tooltips" type="toggle"
-	_tip="Show tooltips in the toolbar" state="1"/>
-
 	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
-
 
 	<cmd name="ToolsArrow"
 	     _tip="Select, move and modify objects"
@@ -106,26 +120,36 @@
              pixtype="stock" pixname="gl_stock_barcode"/>
 	
 	<cmd name="ToolsZoomIn"
-	     _tip="increase magnification"
+	     _tip="Increase magnification"
              pixtype="stock" pixname="gtk-zoom-in"/>
 	
 	<cmd name="ToolsZoomOut"
-	     _tip="decrease magnification"
+	     _tip="Decrease magnification"
              pixtype="stock" pixname="gtk-zoom-out"/>
 
 	<cmd name="ToolsZoom1to1"
-	     _tip="restore scale to 100%"
+	     _tip="Restore scale to 100%"
              pixtype="stock" pixname="gtk-zoom-100"/>
 
 	<cmd name="ToolsMergeProperties"
 	     _tip="Edit merge properties"
              pixtype="stock" pixname="gl_stock_merge"/>
 	
+	<cmd name="ToolsObjectProperties"
+	     _tip="Edit object properties"
+             pixtype="stock" pixname="gtk-properties"/>
+	
+	<cmd name="ToolsRaiseObjects"
+	     _tip="Raise object to top"/>
+	
+	<cmd name="ToolsLowerObjects"
+	     _tip="Lower object to bottom"/>
 	
 	<cmd name="HelpContents" _label="Contents" _tip="Open the gedit manual"
-	accel="F1"/>
+	accel="F1" pixtype="stock" pixname="gtk-help"/>
 
-        <cmd name="About" _label="About..." _tip="About this application"/>
+        <cmd name="About" _label="About..." _tip="About this application"
+        pixtype="stock" pixname="About"/>
 
 
 	<cmd name="BonoboUIDump" _label="Dump XML" _tip="Dump the UI Xml description" hidden="0"/>
@@ -202,32 +226,43 @@
 
 <submenu name="View" _label="_View" hidden="0">
 
-	<menuitem name="ViewToolbar" id="ViewToolbar" verb=""/>
+	<menuitem name="ViewMainToolbar" id="ViewMainToolbar" verb=""/>
+	<menuitem name="ViewDrawingToolbar" id="ViewDrawingToolbar" verb=""/>
 
 	<separator/>
 
-	<submenu name="CustomizeToolbar" _label="_Customize Toolbar">
+	<submenu name="CustomizeMainToolbar" _label="_Customize Main Toolbar">
 		
-		<menuitem name="ToolbarSystem" verb=""/>
-
-		<menuitem name="ToolbarIcon" verb=""/>
-
-		<menuitem name="ToolbarIconText" verb=""/>
+		<menuitem name="MainToolbarSystem" verb=""/>
+		<menuitem name="MainToolbarIcon" verb=""/>
+		<menuitem name="MainToolbarIconText" verb=""/>
 
 		<separator/>
 
-		<menuitem name="ToolbarTooltips" verb=""/>
+		<menuitem name="MainToolbarTooltips" verb=""/>
 
 	</submenu>
+
+	<submenu name="CustomizeDrawingToolbar" _label="_Customize Drawing Toolbar">
+		
+		<menuitem name="DrawingToolbarTooltips" verb=""/>
+
+	</submenu>
+
+	<separator/>
+
+        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
+        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
+        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
 
 	<placeholder name="ViewOps" delimit="top"/>
 
 </submenu>
 
 
-<submenu name="Tools" _label="_Tools" hidden="0">
+<submenu name="Objects" _label="_Objects" hidden="0">
 
-        <menuitem name="ToolsArrow" verb="" _label="Select"/>
+        <menuitem name="ToolsArrow" verb="" _label="Select Mode"/>
         
 	<separator/>
 
@@ -240,13 +275,13 @@
 
 	<separator/>
 
-        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
-        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
-        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
+        <menuitem name="ToolsObjectProperties" verb="" _label="Object Properties..."/>
+        <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to Top"/>
+        <menuitem name="ToolsLowerObjects" verb="" _label="Lower to Bottom"/>
 
 	<separator/>
 
-        <menuitem name="ToolsMergeProperties" verb="" _label="Merge Properties"/>
+        <menuitem name="ToolsMergeProperties" verb="" _label="Merge Properties..."/>
 
 </submenu>
 
@@ -277,13 +312,12 @@
 
 </menu>
 
-<dockitem name="Toolbar" _tip="Main toolbar" config="0" 
+<dockitem name="MainToolbar" _tip="Main toolbar" config="0" 
 	behavior = "exclusive" in_new_band="1">
 	
 	<toolitem name="FileNew" verb=""/>
 	<toolitem name="FileOpen" verb=""/>
 	<toolitem name="FileSave" verb=""/>
-	<toolitem name="FileClose" verb=""/>
 
 	<separator/>
 
@@ -298,7 +332,7 @@
 </dockitem>
 
 
-<dockitem name="ToolbarTools" _tip="Tools toolbar" config="0" 
+<dockitem name="DrawingToolbar" _tip="Drawing toolbar" config="0" 
 	behavior = "exclusive" in_new_band="1" band_num="2">
 	
 	<toolitem name="ToolsArrow" verb=""/>

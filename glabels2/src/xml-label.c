@@ -37,6 +37,7 @@
 #include "label-barcode.h"
 #include "template.h"
 #include "xml-label.h"
+#include "xml-label-04.h"
 #include "util.h"
 
 #include "debug.h"
@@ -192,8 +193,7 @@ xml_doc_to_label (xmlDocPtr doc,
 						COMPAT04_NAME_SPACE);
 			if (ns != NULL)	{
 				g_warning (_("Importing from glabels 0.4 format"));
-				g_warning ("TODO");
-				label = NULL; /* TODO */
+				label = gl_xml_label_04_parse (root, status);
 			} else {
 				g_warning (_("bad document, unknown glabels Namespace"));
 				*status = XML_LABEL_ERROR_OPEN_PARSE;
@@ -653,12 +653,16 @@ gl_xml_label_save (glLabel *label,
 	xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 	xmlFreeDoc (doc);
 	if (xml_ret == -1) {
+
 		g_warning (_("Problem saving xml file."));
 		*status = XML_LABEL_ERROR_SAVE_FILE;
-	}
 
-	gl_label_set_filename (label, filename);
-	gl_label_clear_modified (label);
+	} else {
+
+		gl_label_set_filename (label, filename);
+		gl_label_clear_modified (label);
+
+	}
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -778,6 +782,9 @@ xml_create_object (xmlNodePtr root,
 	string = g_strdup_printf ("%g", y);
 	xmlSetProp (object_node, "y", string);
 	g_free (string);
+
+	xmlSetProp (object_node, "rotate", "0");
+	xmlSetProp (object_node, "flip",   "None");
 
 	if ( GL_IS_LABEL_TEXT(object) ) {
 		xml_create_text_props (object_node, ns, object);

@@ -1,13 +1,18 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(glabels, 1.89.0, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_PREREQ(2.52)
+
+AC_INIT(glabels, 1.89.1, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 
+AC_PROG_INTLTOOL([0.21])
+
 GNOME_PLATFORM_GNOME_2(yes, force)
+GNOME_COMMON_INIT
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -26,6 +31,7 @@ dnl *******************************************************************
 dnl Minimum versions of libraries
 GTK_REQUIRED=2.0.5
 LIBGNOMEUI_REQUIRED=2.0.1
+LIBBONOBO_REQUIRED=2.0.0
 LIBXML_REQUIRED=2.4.23
 LIBGNOMEPRINT_REQUIRED=1.115.0
 LIBGNOMEPRINTUI_REQUIRED=1.115.0
@@ -34,6 +40,7 @@ GDKPIXBUF_REQUIRED=2.0.5
                
 PKG_CHECK_MODULES(GLABELS, gtk+-2.0 >= $GTK_REQUIRED
 			   libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
+			   libbonobo-2.0 >= $LIBBONOBO_REQUIRED
 			   libxml-2.0 >= $LIBXML_REQUIRED
 			   libgnomeprint-2.0 >= $LIBGNOMEPRINT_REQUIRED
 			   libgnomeprintui-2.0 >= $LIBGNOMEPRINTUI_REQUIRED
@@ -49,20 +56,9 @@ dnl Add the languages which your application supports here.
 GETTEXT_PACKAGE=glabels
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
-ALL_LINGUAS="fr de ja pt_BR"
+ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl"
 AM_GLIB_GNU_GETTEXT
 
-
-dnl ****************************************
-dnl * Set PACKAGE_LOCALE_DIR in config.h.
-dnl ****************************************
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
-  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${ac_default_prefix}/${DATADIRNAME}")
-else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
-  AC_DEFINE_UNQUOTED(PACKAGE_DATA_DIR, "${prefix}/${DATADIRNAME}")
-fi
 
 
 dnl ****************************************

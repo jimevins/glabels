@@ -61,10 +61,15 @@ struct _glPreferences
 	/* Fill properties */
 	guint            default_fill_color;
 
-	/* User Interface/Toolbar */
-	gboolean		toolbar_visible;
-	glToolbarSetting 	toolbar_buttons_style; 
-	gboolean		toolbar_view_tooltips;
+	/* User Interface/Main Toolbar */
+	gboolean		main_toolbar_visible;
+	glToolbarSetting 	main_toolbar_buttons_style; 
+	gboolean		main_toolbar_view_tooltips;
+
+	/* User Interface/Drawing Toolbar */
+	gboolean		drawing_toolbar_visible;
+	glToolbarSetting 	drawing_toolbar_buttons_style; 
+	gboolean		drawing_toolbar_view_tooltips;
 
 	/* User Interface/MDI Mode */
 	gint		mdi_mode;

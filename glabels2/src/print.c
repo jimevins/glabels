@@ -38,15 +38,11 @@
 #include "label-barcode.h"
 #include "bc.h"
 #include "template.h"
+#include "color.h"
 
 #include "debug.h"
 
 #define GL_PRINT_DEFAULT_PAPER "US Letter"
-
-#define RED(x)   ( (((x)>>24) & 0xff) / 255.0 )
-#define GREEN(x) ( (((x)>>16) & 0xff) / 255.0 )
-#define BLUE(x)  ( (((x)>>8)  & 0xff) / 255.0 )
-#define ALPHA(x) ( ( (x)      & 0xff) / 255.0 )
 
 /*===========================================*/
 /* Private types.                            */
@@ -507,8 +503,7 @@ draw_text_object (PrintInfo * pi,
 	GnomeFont *font;
 	gchar **line;
 	gint i;
-	gdouble w;
-	gdouble x_offset, y_offset;
+	gdouble x_offset, y_offset, w, object_w, object_h;
 	gdouble x, y;
 	gdouble x0, y0;
 	gchar *text;
@@ -527,6 +522,7 @@ draw_text_object (PrintInfo * pi,
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x0, &y0);
+	gl_label_object_get_size (GL_LABEL_OBJECT(object), &object_w, &object_h);
 	lines = gl_label_text_get_lines (object);
 	gl_label_text_get_props (object,
 				 &font_family, &font_size, &font_weight,
@@ -541,10 +537,10 @@ draw_text_object (PrintInfo * pi,
 	gnome_print_setfont (pi->pc, font);
 
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (color),
-				 GREEN (color),
-				 BLUE (color));
-	gnome_print_setopacity (pi->pc, ALPHA (color));
+				 GL_COLOR_F_RED (color),
+				 GL_COLOR_F_GREEN (color),
+				 GL_COLOR_F_BLUE (color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (color));
 
 	text = gl_text_node_lines_expand (lines, record);
 	line = g_strsplit (text, "\n", -1);
@@ -566,10 +562,10 @@ draw_text_object (PrintInfo * pi,
 			x_offset = 0.0;
 			break;
 		case GTK_JUSTIFY_CENTER:
-			x_offset = -w / 2.0;
+			x_offset = (object_w - w) / 2.0;
 			break;
 		case GTK_JUSTIFY_RIGHT:
-			x_offset = -w;
+			x_offset = object_w - w;
 			break;
 		default:
 			x_offset = 0.0;
@@ -619,19 +615,19 @@ draw_box_object (PrintInfo * pi,
 	/* Paint fill color */
 	create_rectangle_path (pi->pc, x, y, w, h);
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (fill_color),
-				 GREEN (fill_color),
-				 BLUE (fill_color));
-	gnome_print_setopacity (pi->pc, ALPHA (fill_color));
+				 GL_COLOR_F_RED (fill_color),
+				 GL_COLOR_F_GREEN (fill_color),
+				 GL_COLOR_F_BLUE (fill_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (fill_color));
 	gnome_print_fill (pi->pc);
 
 	/* Draw outline */
 	create_rectangle_path (pi->pc, x, y, w, h);
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (line_color),
-				 GREEN (line_color),
-				 BLUE (line_color));
-	gnome_print_setopacity (pi->pc, ALPHA (line_color));
+				 GL_COLOR_F_RED (line_color),
+				 GL_COLOR_F_GREEN (line_color),
+				 GL_COLOR_F_BLUE (line_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
 	gnome_print_setlinewidth (pi->pc, line_width);
 	gnome_print_stroke (pi->pc);
 
@@ -659,10 +655,10 @@ draw_line_object (PrintInfo * pi,
 	gnome_print_moveto (pi->pc, x, y);
 	gnome_print_lineto (pi->pc, x + w, y + h);
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (line_color),
-				 GREEN (line_color),
-				 BLUE (line_color));
-	gnome_print_setopacity (pi->pc, ALPHA (line_color));
+				 GL_COLOR_F_RED (line_color),
+				 GL_COLOR_F_GREEN (line_color),
+				 GL_COLOR_F_BLUE (line_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
 	gnome_print_setlinewidth (pi->pc, line_width);
 	gnome_print_stroke (pi->pc);
 
@@ -696,19 +692,19 @@ draw_ellipse_object (PrintInfo * pi,
 	/* Paint fill color */
 	create_ellipse_path (pi->pc, x0, y0, rx, ry);
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (fill_color),
-				 GREEN (fill_color),
-				 BLUE (fill_color));
-	gnome_print_setopacity (pi->pc, ALPHA (fill_color));
+				 GL_COLOR_F_RED (fill_color),
+				 GL_COLOR_F_GREEN (fill_color),
+				 GL_COLOR_F_BLUE (fill_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (fill_color));
 	gnome_print_fill (pi->pc);
 
 	/* Draw outline */
 	create_ellipse_path (pi->pc, x0, y0, rx, ry);
 	gnome_print_setrgbcolor (pi->pc,
-				 RED (line_color),
-				 GREEN (line_color),
-				 BLUE (line_color));
-	gnome_print_setopacity (pi->pc, ALPHA (line_color));
+				 GL_COLOR_F_RED (line_color),
+				 GL_COLOR_F_GREEN (line_color),
+				 GL_COLOR_F_BLUE (line_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
 	gnome_print_setlinewidth (pi->pc, line_width);
 	gnome_print_stroke (pi->pc);
 
@@ -800,11 +796,11 @@ draw_barcode_object (PrintInfo * pi,
 		gnome_print_setfont (pi->pc, font);
 
 		gnome_print_setrgbcolor (pi->pc,
-					 RED (color),
-					 GREEN (color),
-					 BLUE (color));
+					 GL_COLOR_F_RED (color),
+					 GL_COLOR_F_GREEN (color),
+					 GL_COLOR_F_BLUE (color));
 		gnome_print_setopacity (pi->pc,
-					ALPHA (color));
+					GL_COLOR_F_ALPHA (color));
 
 		y_offset = 12.0 - gnome_font_get_descender (font);
 		gnome_print_moveto (pi->pc, x, y + y_offset);
@@ -823,11 +819,11 @@ draw_barcode_object (PrintInfo * pi,
 			gnome_print_lineto (pi->pc, x + line->x,
 					    y + line->y + line->length);
 			gnome_print_setrgbcolor (pi->pc,
-						 RED (color),
-						 GREEN (color),
-						 BLUE (color));
+						 GL_COLOR_F_RED (color),
+						 GL_COLOR_F_GREEN (color),
+						 GL_COLOR_F_BLUE (color));
 			gnome_print_setopacity (pi->pc,
-						ALPHA (color));
+						GL_COLOR_F_ALPHA (color));
 			gnome_print_setlinewidth (pi->pc, line->width);
 			gnome_print_stroke (pi->pc);
 		}
@@ -842,11 +838,11 @@ draw_barcode_object (PrintInfo * pi,
 			gnome_print_setfont (pi->pc, font);
 
 			gnome_print_setrgbcolor (pi->pc,
-						 RED (color),
-						 GREEN (color),
-						 BLUE (color));
+						 GL_COLOR_F_RED (color),
+						 GL_COLOR_F_GREEN (color),
+						 GL_COLOR_F_BLUE (color));
 			gnome_print_setopacity (pi->pc,
-						ALPHA (color));
+						GL_COLOR_F_ALPHA (color));
 
 			y_offset =
 			    bchar->y + bchar->fsize -

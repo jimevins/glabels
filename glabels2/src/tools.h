@@ -68,4 +68,16 @@ extern void gl_tools_merge_properties (BonoboUIComponent *uic,
 				       gpointer user_data,
 				       const gchar* verbname);
 
+extern void gl_tools_object_properties (BonoboUIComponent *uic,
+					gpointer user_data,
+					const gchar* verbname);
+
+extern void gl_tools_raise_objects (BonoboUIComponent *uic,
+				    gpointer user_data,
+				    const gchar* verbname);
+
+extern void gl_tools_lower_objects (BonoboUIComponent *uic,
+				    gpointer user_data,
+				    const gchar* verbname);
+
 #endif

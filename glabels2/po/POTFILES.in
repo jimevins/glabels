@@ -1,5 +1,6 @@
 # List of source files containing translatable strings.
 
+src/glabels-ui.xml
 src/glabels.c
 src/glabels.h
 src/glabels-batch.c
@@ -11,8 +12,8 @@ src/mdi-child.c
 src/mdi-child.h
 src/stock.c
 src/stock.h
-src/menus.h
-src/menus.c
+src/ui.h
+src/ui.c
 src/commands.h
 src/commands.c
 src/file.h
@@ -25,6 +26,8 @@ src/prefs.c
 src/prefs.h
 src/prefs-dialog.c
 src/prefs-dialog.h
+src/alert.c
+src/alert.h
 src/view.c
 src/view.h
 src/view-object.c
@@ -75,6 +78,8 @@ src/template.c
 src/template.h
 src/xml-label.c
 src/xml-label.h
+src/xml-label-04.c
+src/xml-label-04.h
 src/merge.c
 src/merge.h
 src/merge-text.c
@@ -117,6 +122,8 @@ src/wdgt-rotate-label.c
 src/wdgt-rotate-label.h
 src/util.c
 src/util.h
+src/color.c
+src/color.h
 src/canvas-hacktext.c
 src/canvas-hacktext.h
 src/bonobo-mdi-child.c

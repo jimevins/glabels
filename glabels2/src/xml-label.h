@@ -1,7 +1,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  label.h:  GLabels label module header file
+ *  xml-label.h:  GLabels xml label module header file
  *
  *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
  *

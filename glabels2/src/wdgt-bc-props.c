@@ -24,13 +24,9 @@
 
 #include "wdgt-bc-props.h"
 #include "marshal.h"
+#include "color.h"
 
 #include "debug.h"
-
-#define RED(x)   ( ((x)>>24) & 0xff )
-#define GREEN(x) ( ((x)>>16) & 0xff )
-#define BLUE(x)  ( ((x)>>8)  & 0xff )
-#define ALPHA(x) (  (x)      & 0xff )
 
 /*===========================================*/
 /* Private types                             */
@@ -228,7 +224,7 @@ gl_wdgt_bc_props_get_params (glWdgtBCProps * prop,
 	/* ------- Get updated line color ------ */
 	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (prop->color_picker),
 				   &r, &g, &b, &a);
-	*color = GNOME_CANVAS_COLOR_A (r, g, b, a);
+	*color = GL_COLOR_A (r, g, b, a);
 
 }
 
@@ -244,7 +240,8 @@ gl_wdgt_bc_props_set_params (glWdgtBCProps * prop,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (prop->scale_spin), scale);
 
 	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (prop->color_picker),
-				   RED (color), GREEN (color), BLUE (color),
-				   ALPHA (color));
-
+				   GL_COLOR_I_RED (color),
+				   GL_COLOR_I_GREEN (color),
+				   GL_COLOR_I_BLUE (color),
+				   GL_COLOR_I_ALPHA (color));
 }

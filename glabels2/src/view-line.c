@@ -30,6 +30,8 @@
 #include "wdgt-line.h"
 #include "wdgt-vector.h"
 #include "wdgt-position.h"
+#include "color.h"
+#include "prefs.h"
 
 #include "pixmaps/cursor_line.xbm"
 #include "pixmaps/cursor_line_mask.xbm"
@@ -39,9 +41,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define CREATE_LINE_COLOR   GNOME_CANVAS_COLOR_A (0, 0, 0, 192)
-
-#define DEFAULT_LINE_COLOR  GNOME_CANVAS_COLOR_A (0, 0, 0, 255)
 
 /*========================================================*/
 /* Private types.                                         */
@@ -561,8 +560,6 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	static gboolean     dragging = FALSE;
 	static glViewObject *view_line;
 	static GObject      *object;
-	gdouble             line_width;
-	guint               line_color;
 	gdouble             x, y, w, h;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -587,12 +584,10 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 						      x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
-			line_width = 1.0;
-			line_color = CREATE_LINE_COLOR;
 			gl_label_line_set_line_width (GL_LABEL_LINE(object),
-						     line_width);
+						      gl_prefs->default_line_width);
 			gl_label_line_set_line_color (GL_LABEL_LINE(object),
-						     line_color);
+						     gl_color_set_opacity (gl_prefs->default_line_color, 0.5));
 			view_line = gl_view_line_new (GL_LABEL_LINE(object),
 						      view);
 			x0 = x;
@@ -619,9 +614,8 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 			h = y - y0;
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
-			line_color = DEFAULT_LINE_COLOR;
 			gl_label_line_set_line_color (GL_LABEL_LINE(object),
-						     line_color);
+						     gl_prefs->default_line_color);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_line));
 			gl_view_arrow_mode (view);
@@ -634,8 +628,8 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			w = x - x0;
 			h = y - y0;
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),

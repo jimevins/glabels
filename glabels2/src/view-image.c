@@ -588,7 +588,7 @@ gl_view_image_get_create_cursor (void)
 }
 
 /*****************************************************************************/
-/* Canvas event handler for creating image objects.                            */
+/* Canvas event handler for creating image objects.                          */
 /*****************************************************************************/
 int
 gl_view_image_create_event_handler (GnomeCanvas *canvas,
@@ -626,7 +626,7 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
 			view_image = gl_view_image_new (GL_LABEL_IMAGE(object),
-						    view);
+							view);
 			x0 = x;
 			y0 = y;
 			return TRUE;
@@ -665,8 +665,8 @@ gl_view_image_create_event_handler (GnomeCanvas *canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     MIN (x, x0), MIN (y, y0));
 			w = MAX (x, x0) - MIN (x, x0);

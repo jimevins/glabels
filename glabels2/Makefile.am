@@ -5,7 +5,8 @@ LIB_BARCODE_DIR = barcode-0.98
 SUBDIRS = po src doc
 
 EXTRA_DIST = \
-	glabels.desktop glabels.spec.in glabels.spec
+	glabels.desktop glabels.spec.in glabels.spec \
+	intltool-extract.in intltool-merge.in intltool-update.in
 
 Applicationsdir = $(datadir)/gnome/apps/Applications
 Applications_DATA = glabels.desktop

@@ -31,6 +31,8 @@
 #include "wdgt-fill.h"
 #include "wdgt-size.h"
 #include "wdgt-position.h"
+#include "color.h"
+#include "prefs.h"
 
 #include "pixmaps/cursor_ellipse.xbm"
 #include "pixmaps/cursor_ellipse_mask.xbm"
@@ -40,11 +42,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define CREATE_LINE_COLOR   GNOME_CANVAS_COLOR_A (0, 0, 0, 192)
-#define CREATE_FILL_COLOR   GNOME_CANVAS_COLOR_A (0, 255, 0, 192)
-
-#define DEFAULT_LINE_COLOR  GNOME_CANVAS_COLOR_A (0, 0, 0, 255)
-#define DEFAULT_FILL_COLOR  GNOME_CANVAS_COLOR_A (0, 255, 0, 255)
 
 #define DELTA 0.01
 
@@ -594,7 +591,7 @@ gl_view_ellipse_get_create_cursor (void)
 }
 
 /*****************************************************************************/
-/* Canvas event handler for creating ellipse objects.                            */
+/* Canvas event handler for creating ellipse objects.                        */
 /*****************************************************************************/
 int
 gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
@@ -605,7 +602,6 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 	static gboolean     dragging = FALSE;
 	static glViewObject *view_ellipse;
 	static GObject      *object;
-	gdouble             line_width;
 	guint               line_color, fill_color;
 	gdouble             x, y, w, h;
 
@@ -631,12 +627,10 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 						     x, y);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  0.0, 0.0);
-			line_width = 1.0;
-			line_color = CREATE_LINE_COLOR;
-			fill_color = CREATE_FILL_COLOR;
+			line_color = gl_color_set_opacity (gl_prefs->default_line_color, 0.5);
+			fill_color = gl_color_set_opacity (gl_prefs->default_fill_color, 0.5);
 			gl_label_ellipse_set_line_width (GL_LABEL_ELLIPSE(object),
-						     line_width);
-			gl_label_ellipse_set_line_color (GL_LABEL_ELLIPSE(object),
+						     gl_prefs->default_line_width);			gl_label_ellipse_set_line_color (GL_LABEL_ELLIPSE(object),
 						     line_color);
 			gl_label_ellipse_set_fill_color (GL_LABEL_ELLIPSE(object),
 						     fill_color);
@@ -668,12 +662,10 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 			h = MAX (y, y0) - MIN (y, y0);
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),
 						  w, h);
-			line_color = DEFAULT_LINE_COLOR;
-			fill_color = DEFAULT_FILL_COLOR;
 			gl_label_ellipse_set_line_color (GL_LABEL_ELLIPSE(object),
-						     line_color);
+						     gl_prefs->default_line_color);
 			gl_label_ellipse_set_fill_color (GL_LABEL_ELLIPSE(object),
-						     fill_color);
+						     gl_prefs->default_fill_color);
 			gl_view_unselect_all (view);
 			gl_view_object_select (GL_VIEW_OBJECT(view_ellipse));
 			gl_view_arrow_mode (view);
@@ -686,8 +678,8 @@ gl_view_ellipse_create_event_handler (GnomeCanvas *canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						     MIN (x, x0), MIN (y, y0));
 			w = MAX (x, x0) - MIN (x, x0);

@@ -12,10 +12,12 @@ INCLUDES = \
 	-I$(top_builddir) 				\
 	$(GLABELS_CFLAGS) 				\
 	-I$(LIB_BARCODE_DIR)				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DPREFIX=\""$(prefix)"\"                        \
+	-DSYSCONFDIR=\""$(sysconfdir)"\"                \
+	-DDATADIR=\""$(datadir)"\"                      \
+	-DLIBDIR=\""$(libdir)"\"                        \
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 	\
-	-DGLABELS_GLADEDIR=\""$(datadir)/glabels/glade/"\" \
 	-DG_DISABLE_DEPRECATED				\
 	-DGDK_DISABLE_DEPRECATED			\
 	-DGTK_DISABLE_DEPRECATED			\
@@ -51,8 +53,8 @@ glabels_SOURCES = 			\
 	mdi-child.h			\
 	stock.c				\
 	stock.h				\
-	menus.h				\
-	menus.c				\
+	ui.h				\
+	ui.c				\
 	commands.h			\
 	commands.c			\
 	file.h				\
@@ -65,6 +67,8 @@ glabels_SOURCES = 			\
 	prefs.h 			\
 	prefs-dialog.c 			\
 	prefs-dialog.h 			\
+	alert.c				\
+	alert.h				\
 	view.c				\
 	view.h				\
 	view-object.c			\
@@ -115,6 +119,8 @@ glabels_SOURCES = 			\
 	template.h 			\
 	xml-label.c			\
 	xml-label.h			\
+	xml-label-04.c			\
+	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
 	merge-text.c			\
@@ -157,6 +163,8 @@ glabels_SOURCES = 			\
 	wdgt-rotate-label.h		\
 	util.c				\
 	util.h				\
+	color.c				\
+	color.h				\
 	canvas-hacktext.c		\
 	canvas-hacktext.h		\
 	bonobo-mdi-child.c		\
@@ -177,8 +185,6 @@ glabels_SOURCES = 			\
 
 glabels_batch_SOURCES = 		\
 	glabels-batch.c			\
-	prefs.c 			\
-	prefs.h 			\
 	print.c				\
 	print.h				\
 	bc.c				\
@@ -207,6 +213,8 @@ glabels_batch_SOURCES = 		\
 	template.h 			\
 	xml-label.c			\
 	xml-label.h			\
+	xml-label-04.c			\
+	xml-label-04.h			\
 	merge.c				\
 	merge.h				\
 	merge-text.c			\

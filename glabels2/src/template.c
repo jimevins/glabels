@@ -29,11 +29,10 @@
 
 #include "debug.h"
 
-#ifdef PACKAGE_DATA_DIR
-#define GL_DATA_DIR (PACKAGE_DATA_DIR G_DIR_SEPARATOR_S "glabels")
-#else
-#define GL_DATA_DIR gnome_datadir_file("glabels")
-#endif
+#define GL_DATA_DIR gnome_program_locate_file (NULL,\
+					 GNOME_FILE_DOMAIN_APP_DATADIR,\
+					 "glabels",\
+					 FALSE, NULL)
 
 #define FULL_PAGE "Full-page"
 

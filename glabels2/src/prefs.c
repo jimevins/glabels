@@ -56,9 +56,13 @@ glPreferences      *gl_prefs     = NULL;
 
 #define PREF_DEFAULT_FILL_COLOR             "/default-fill-color"
 
-#define PREF_TOOLBAR_VISIBLE                "/toolbar-visible"
-#define PREF_TOOLBAR_BUTTONS_STYLE          "/toolbar-buttons-style"
-#define PREF_TOOLBAR_VIEW_TOOLTIPS          "/toolbar-view-tooltips"
+#define PREF_MAIN_TOOLBAR_VISIBLE           "/main-toolbar-visible"
+#define PREF_MAIN_TOOLBAR_BUTTONS_STYLE     "/main-toolbar-buttons-style"
+#define PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS     "/main-toolbar-view-tooltips"
+
+#define PREF_DRAWING_TOOLBAR_VISIBLE        "/drawing-toolbar-visible"
+#define PREF_DRAWING_TOOLBAR_BUTTONS_STYLE  "/drawing-toolbar-buttons-style"
+#define PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS  "/drawing-toolbar-view-tooltips"
 
 #define PREF_MDI_MODE		            "/mdi-mode"
 #define PREF_TABS_POSITION	            "/mdi-tabs-position"
@@ -206,20 +210,36 @@ gl_prefs_save_settings (void)
 				 NULL);
 
 
-	/* Toolbar */
+	/* Main Toolbar */
 	gconf_client_set_bool (gconf_client,
-			       BASE_KEY PREF_TOOLBAR_VISIBLE,
-			       gl_prefs->toolbar_visible,
+			       BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
+			       gl_prefs->main_toolbar_visible,
 			       NULL);
 
 	gconf_client_set_int (gconf_client,
-			      BASE_KEY PREF_TOOLBAR_BUTTONS_STYLE,
-			      gl_prefs->toolbar_buttons_style,
+			      BASE_KEY PREF_MAIN_TOOLBAR_BUTTONS_STYLE,
+			      gl_prefs->main_toolbar_buttons_style,
 			      NULL);
 
 	gconf_client_set_bool (gconf_client,
-			       BASE_KEY PREF_TOOLBAR_VIEW_TOOLTIPS,
-			       gl_prefs->toolbar_view_tooltips,
+			       BASE_KEY PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS,
+			       gl_prefs->main_toolbar_view_tooltips,
+			       NULL);
+
+	/* Drawing Toolbar */
+	gconf_client_set_bool (gconf_client,
+			       BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
+			       gl_prefs->drawing_toolbar_visible,
+			       NULL);
+
+	gconf_client_set_int (gconf_client,
+			      BASE_KEY PREF_DRAWING_TOOLBAR_BUTTONS_STYLE,
+			      gl_prefs->drawing_toolbar_buttons_style,
+			      NULL);
+
+	gconf_client_set_bool (gconf_client,
+			       BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
+			       gl_prefs->drawing_toolbar_view_tooltips,
 			       NULL);
 
 
@@ -332,20 +352,36 @@ gl_prefs_load_settings (void)
 			 DEFAULT_FILL_COLOR);
 
 
-	/* User Inferface/Toolbar */
-	gl_prefs->toolbar_visible =
+	/* User Inferface/Main Toolbar */
+	gl_prefs->main_toolbar_visible =
 		get_bool (gconf_client,
-			  BASE_KEY PREF_TOOLBAR_VISIBLE,
+			  BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
 			  TRUE);
 
-	gl_prefs->toolbar_buttons_style =
+	gl_prefs->main_toolbar_buttons_style =
 		get_int (gconf_client,
-			 BASE_KEY PREF_TOOLBAR_BUTTONS_STYLE,
+			 BASE_KEY PREF_MAIN_TOOLBAR_BUTTONS_STYLE,
 			 GL_TOOLBAR_SYSTEM);
 
-	gl_prefs->toolbar_view_tooltips =
+	gl_prefs->main_toolbar_view_tooltips =
 		get_bool (gconf_client,
-			  BASE_KEY PREF_TOOLBAR_VIEW_TOOLTIPS,
+			  BASE_KEY PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS,
+			  TRUE);
+
+	/* User Inferface/Drawing Toolbar */
+	gl_prefs->drawing_toolbar_visible =
+		get_bool (gconf_client,
+			  BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
+			  TRUE);
+
+	gl_prefs->drawing_toolbar_buttons_style =
+		get_int (gconf_client,
+			 BASE_KEY PREF_DRAWING_TOOLBAR_BUTTONS_STYLE,
+			 GL_TOOLBAR_SYSTEM);
+
+	gl_prefs->drawing_toolbar_view_tooltips =
+		get_bool (gconf_client,
+			  BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			  TRUE);
 
 

@@ -26,13 +26,9 @@
 
 #include "wdgt-text-props.h"
 #include "marshal.h"
+#include "color.h"
 
 #include "debug.h"
-
-#define RED(x)   ( ((x)>>24) & 0xff )
-#define GREEN(x) ( ((x)>>16) & 0xff )
-#define BLUE(x)  ( ((x)>>8)  & 0xff )
-#define ALPHA(x) (  (x)      & 0xff )
 
 /*===========================================*/
 /* Private types                             */
@@ -43,8 +39,7 @@ enum {
 	LAST_SIGNAL
 };
 
-typedef void (*glWdgtTextPropsSignal) (GObject * object,
-				  gpointer data);
+typedef void (*glWdgtTextPropsSignal) (GObject *object, gpointer data);
 
 /*===========================================*/
 /* Private globals                           */
@@ -58,14 +53,16 @@ static gint wdgt_text_props_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_text_props_class_init (glWdgtTextPropsClass * class);
-static void gl_wdgt_text_props_instance_init (glWdgtTextProps * text);
-static void gl_wdgt_text_props_finalize (GObject * object);
-static void gl_wdgt_text_props_construct (glWdgtTextProps * text, gchar * label);
+static void gl_wdgt_text_props_class_init    (glWdgtTextPropsClass *class);
+static void gl_wdgt_text_props_instance_init (glWdgtTextProps *text);
+static void gl_wdgt_text_props_finalize      (GObject *object);
+static void gl_wdgt_text_props_construct     (glWdgtTextProps *text,
+					      gchar *label);
 
-static void changed_cb (glWdgtTextProps * text);
-static void just_toggled_cb (GtkToggleButton * togglebutton,
-			     gpointer user_data);
+static void family_changed_cb (GtkEntry *entry, glWdgtTextProps *text);
+static void changed_cb        (glWdgtTextProps *text);
+static void just_toggled_cb   (GtkToggleButton *togglebutton,
+			       gpointer user_data);
 
 /*================================================================*/
 /* Boilerplate Object stuff.                                      */
@@ -97,7 +94,7 @@ gl_wdgt_text_props_get_type (void)
 }
 
 static void
-gl_wdgt_text_props_class_init (glWdgtTextPropsClass * class)
+gl_wdgt_text_props_class_init (glWdgtTextPropsClass *class)
 {
 	GObjectClass *object_class;
 
@@ -119,7 +116,7 @@ gl_wdgt_text_props_class_init (glWdgtTextPropsClass * class)
 }
 
 static void
-gl_wdgt_text_props_instance_init (glWdgtTextProps * text)
+gl_wdgt_text_props_instance_init (glWdgtTextProps *text)
 {
 	text->font_family_entry = NULL;
 	text->font_size_spin = NULL;
@@ -134,7 +131,7 @@ gl_wdgt_text_props_instance_init (glWdgtTextProps * text)
 }
 
 static void
-gl_wdgt_text_props_finalize (GObject * object)
+gl_wdgt_text_props_finalize (GObject *object)
 {
 	glWdgtTextProps *text;
 
@@ -147,7 +144,7 @@ gl_wdgt_text_props_finalize (GObject * object)
 }
 
 GtkWidget *
-gl_wdgt_text_props_new (gchar * label)
+gl_wdgt_text_props_new (gchar *label)
 {
 	glWdgtTextProps *text;
 
@@ -162,11 +159,11 @@ gl_wdgt_text_props_new (gchar * label)
 /* Construct composite widget.                                */
 /*============================================================*/
 static void
-gl_wdgt_text_props_construct (glWdgtTextProps * text,
-			gchar * label)
+gl_wdgt_text_props_construct (glWdgtTextProps *text,
+			      gchar           *label)
 {
 	GtkWidget *wvbox, *wframe, *wtable, *wlabel, *whbox1, *wcombo;
-	GList *family_names = NULL;
+	GList     *family_names = NULL;
 	GtkObject *adjust;
 
 	wvbox = GTK_WIDGET (text);
@@ -196,12 +193,12 @@ gl_wdgt_text_props_construct (glWdgtTextProps * text,
 	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), family_names);
 	gnome_font_family_list_free (family_names);
 	text->font_family_entry = GTK_COMBO (wcombo)->entry;
+	gtk_combo_set_value_in_list (GTK_COMBO(wcombo), TRUE, FALSE);
 	gtk_entry_set_editable (GTK_ENTRY (text->font_family_entry), FALSE);
 	gtk_widget_set_size_request (wcombo, 200, -1);
 	gtk_box_pack_start (GTK_BOX (whbox1), wcombo, FALSE, FALSE, 0);
-	g_signal_connect_swapped (G_OBJECT (text->font_family_entry),
-				  "changed", G_CALLBACK (changed_cb),
-				  G_OBJECT (text));
+	g_signal_connect (G_OBJECT (text->font_family_entry),
+			  "changed", G_CALLBACK (family_changed_cb), text);
 
 	/* Font size entry widget */
 	adjust = gtk_adjustment_new (1.0, 1.0, 250.0, 1.0, 10.0, 10.0);
@@ -288,10 +285,28 @@ gl_wdgt_text_props_construct (glWdgtTextProps * text,
 }
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  modify widget due to change in selection                       */
+/*--------------------------------------------------------------------------*/
+static void
+family_changed_cb (GtkEntry        *entry,
+		   glWdgtTextProps *text)
+{
+	gchar *family_name;
+
+	family_name = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	if ( strlen(family_name) ) {
+		/* Emit our "changed" signal */
+		g_signal_emit (G_OBJECT (text),
+			       wdgt_text_props_signals[CHANGED], 0);
+	}
+	g_free (family_name);
+}
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Callback for when any control in the widget has changed.       */
 /*--------------------------------------------------------------------------*/
 static void
-changed_cb (glWdgtTextProps * text)
+changed_cb (glWdgtTextProps *text)
 {
 	/* Emit our "changed" signal */
 	g_signal_emit (G_OBJECT (text), wdgt_text_props_signals[CHANGED], 0);
@@ -301,8 +316,8 @@ changed_cb (glWdgtTextProps * text)
 /* PRIVATE.  Justify toggle button callback.                                */
 /*--------------------------------------------------------------------------*/
 static void
-just_toggled_cb (GtkToggleButton * togglebutton,
-		 gpointer user_data)
+just_toggled_cb (GtkToggleButton *togglebutton,
+		 gpointer        user_data)
 {
 	glWdgtTextProps *text = GL_WDGT_TEXT_PROPS (user_data);
 
@@ -343,13 +358,13 @@ just_toggled_cb (GtkToggleButton * togglebutton,
 /* query values from controls.                                        */
 /*====================================================================*/
 void
-gl_wdgt_text_props_get_params (glWdgtTextProps * text,
-			       gchar ** font_family,
-			       gdouble * font_size,
-			       GnomeFontWeight * font_weight,
-			       gboolean * font_italic_flag,
-			       guint * color,
-			       GtkJustification * just)
+gl_wdgt_text_props_get_params (glWdgtTextProps  *text,
+			       gchar            **font_family,
+			       gdouble          *font_size,
+			       GnomeFontWeight  *font_weight,
+			       gboolean         *font_italic_flag,
+			       guint            *color,
+			       GtkJustification *just)
 {
 	guint8 r, g, b, a;
 
@@ -372,7 +387,7 @@ gl_wdgt_text_props_get_params (glWdgtTextProps * text,
 	/* ------ Get updated color ------ */
 	gnome_color_picker_get_i8 (GNOME_COLOR_PICKER (text->color_picker),
 				   &r, &g, &b, &a);
-	*color = GNOME_CANVAS_COLOR_A (r, g, b, a);
+	*color = GL_COLOR_A (r, g, b, a);
 
 	/* ------- Get updated justification ------ */
 	if (gtk_toggle_button_get_active
@@ -396,12 +411,12 @@ gl_wdgt_text_props_get_params (glWdgtTextProps * text,
 /* fill in values and ranges for controls.                            */
 /*====================================================================*/
 void
-gl_wdgt_text_props_set_params (glWdgtTextProps * text,
-			       gchar * font_family,
-			       gdouble font_size,
-			       GnomeFontWeight font_weight,
-			       gboolean font_italic_flag,
-			       guint color,
+gl_wdgt_text_props_set_params (glWdgtTextProps  *text,
+			       gchar            *font_family,
+			       gdouble          font_size,
+			       GnomeFontWeight  font_weight,
+			       gboolean         font_italic_flag,
+			       guint            color,
 			       GtkJustification just)
 {
 	gtk_entry_set_text (GTK_ENTRY (text->font_family_entry), font_family);
@@ -416,8 +431,10 @@ gl_wdgt_text_props_set_params (glWdgtTextProps * text,
 				      font_italic_flag);
 
 	gnome_color_picker_set_i8 (GNOME_COLOR_PICKER (text->color_picker),
-				   RED (color), GREEN (color), BLUE (color),
-				   ALPHA (color));
+				   GL_COLOR_I_RED (color),
+				   GL_COLOR_I_GREEN (color),
+				   GL_COLOR_I_BLUE (color),
+				   GL_COLOR_I_ALPHA (color));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (text->left_button),
 				      (just == GTK_JUSTIFY_LEFT));
