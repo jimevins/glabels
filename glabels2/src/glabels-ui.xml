@@ -76,7 +76,6 @@
 
 	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
 
-
 	<cmd name="ToolsArrow"
 	     _tip="Select, move and modify objects"
              pixtype="stock" pixname="gl_stock_arrow"/>
@@ -121,6 +120,15 @@
 	     _tip="Edit merge properties"
              pixtype="stock" pixname="gl_stock_merge"/>
 	
+	<cmd name="ToolsObjectProperties"
+	     _tip="Edit object properties"
+             pixtype="stock" pixname="gtk-properties"/>
+	
+	<cmd name="ToolsRaiseObjects"
+	     _tip="Raise object to top"/>
+	
+	<cmd name="ToolsLowerObjects"
+	     _tip="Lower object to bottom"/>
 	
 	<cmd name="HelpContents" _label="Contents" _tip="Open the gedit manual"
 	accel="F1" pixtype="stock" pixname="gtk-help"/>
@@ -221,14 +229,20 @@
 
 	</submenu>
 
+	<separator/>
+
+        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
+        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
+        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
+
 	<placeholder name="ViewOps" delimit="top"/>
 
 </submenu>
 
 
-<submenu name="Tools" _label="_Tools" hidden="0">
+<submenu name="Objects" _label="_Objects" hidden="0">
 
-        <menuitem name="ToolsArrow" verb="" _label="Select"/>
+        <menuitem name="ToolsArrow" verb="" _label="Select mode"/>
         
 	<separator/>
 
@@ -241,13 +255,13 @@
 
 	<separator/>
 
-        <menuitem name="ToolsZoomIn" verb="" _label="Zoom In"/>
-        <menuitem name="ToolsZoomOut" verb="" _label="Zoom Out"/>
-        <menuitem name="ToolsZoom1to1" verb="" _label="Zoom 1:1"/>
+        <menuitem name="ToolsObjectProperties" verb="" _label="Object properties..."/>
+        <menuitem name="ToolsRaiseObjects" verb="" _label="Raise to top"/>
+        <menuitem name="ToolsLowerObjects" verb="" _label="Lower to bottom"/>
 
 	<separator/>
 
-        <menuitem name="ToolsMergeProperties" verb="" _label="Merge Properties"/>
+        <menuitem name="ToolsMergeProperties" verb="" _label="Merge Properties..."/>
 
 </submenu>
 

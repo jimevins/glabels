@@ -97,7 +97,6 @@ static void      unselect_object            (glViewObject *view_object);
 static gboolean  object_at                  (glView *view,
 					     gdouble x, gdouble y);
 static gboolean  object_selected            (glViewObject *view_object);
-static gboolean  multiple_items_selected    (glView *view);
 
 static int       item_event_arrow_mode      (GnomeCanvasItem *item,
 					     GdkEvent        *event,
@@ -113,9 +112,6 @@ static void      move_selected_items        (glView *view,
 					     gdouble dx, gdouble dy);
 static void      move_item                  (GnomeCanvasItem *item,
 					     gdouble dx, gdouble dy);
-
-static void      raise_selection_cb         (GtkWidget *widget, glView *view);
-static void      lower_selection_cb         (GtkWidget *widget, glView *view);
 
 static void      selection_clear_cb         (GtkWidget         *widget,
 					     GdkEventSelection *event,
@@ -202,6 +198,9 @@ gl_view_finalize (GObject *object)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+/****************************************************************************/
+/* NEW view object.                                                         */
+/****************************************************************************/
 GtkWidget *
 gl_view_new (glLabel *label)
 {
@@ -359,7 +358,7 @@ gl_view_construct_canvas (glView *view)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Create selection targets.                                       */
+/* PRIVATE.  Create clipboard selection targets.                             */
 /*---------------------------------------------------------------------------*/
 static void
 gl_view_construct_selection (glView *view)
@@ -943,6 +942,128 @@ gl_view_unselect_all (glView *view)
 }
 
 /*****************************************************************************/
+/* Is our current selection empty?                                           */
+/*****************************************************************************/
+gboolean
+gl_view_is_selection_empty (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+
+	if (view->selected_object_list == NULL) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+/*****************************************************************************/
+/* Is our current selection atomic?  I.e. only one item selected.            */
+/*****************************************************************************/
+gboolean
+gl_view_is_selection_atomic (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
+
+	if (view->selected_object_list == NULL)
+		return FALSE;
+	if (view->selected_object_list->next == NULL)
+		return TRUE;
+	return FALSE;
+}
+
+/*****************************************************************************/
+/* Delete selected objects. (Bypass clipboard)                               */
+/*****************************************************************************/
+void
+gl_view_delete_selection (glView *view)
+{
+	GList *p, *p_next;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p_next) {
+		p_next = p->next;
+		g_object_unref (G_OBJECT (p->data));
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Edit properties of selected object.                                       */
+/*****************************************************************************/
+void
+gl_view_edit_object_props (glView *view)
+{
+	glViewObject *view_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	if (gl_view_is_selection_atomic (view)) {
+
+		view_object = GL_VIEW_OBJECT(view->selected_object_list->data);
+		gl_view_object_show_dialog (view_object);
+
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Raise selected items to top.                                              */
+/*****************************************************************************/
+void
+gl_view_raise_selection (glView *view)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *label_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		label_object = gl_view_object_get_object (view_object);
+		gl_label_object_raise_to_top (label_object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Lower selected items to bottom.                                           */
+/*****************************************************************************/
+void
+gl_view_lower_selection (glView *view)
+{
+	GList *p;
+	glViewObject *view_object;
+	glLabelObject *label_object;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	for (p = view->selected_object_list; p != NULL; p = p->next) {
+		view_object = GL_VIEW_OBJECT (p->data);
+		label_object = gl_view_object_get_object (view_object);
+		gl_label_object_lower_to_bottom (label_object);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
 void
@@ -1043,6 +1164,104 @@ gl_view_paste (glView *view)
 			       GDK_CURRENT_TIME);
 
 	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Zoom in one "notch"                                                       */
+/*****************************************************************************/
+void
+gl_view_zoom_in (glView *view)
+{
+	gint i, i_min;
+	gdouble dist, dist_min;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	/* Find index of current scale (or best match) */
+	i_min = 1;		/* start with 2nd largest scale */
+	dist_min = fabs (scales[1] - view->scale);
+	for (i = 2; scales[i] != 0.0; i++) {
+		dist = fabs (scales[i] - view->scale);
+		if (dist < dist_min) {
+			i_min = i;
+			dist_min = dist;
+		}
+	}
+
+	/* zoom in one "notch" */
+	i = MAX (0, i_min - 1);
+	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Zoom out one "notch"                                                      */
+/*****************************************************************************/
+void
+gl_view_zoom_out (glView *view)
+{
+	gint i, i_min;
+	gdouble dist, dist_min;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+
+	/* Find index of current scale (or best match) */
+	i_min = 0;		/* start with largest scale */
+	dist_min = fabs (scales[0] - view->scale);
+	for (i = 1; scales[i] != 0.0; i++) {
+		dist = fabs (scales[i] - view->scale);
+		if (dist < dist_min) {
+			i_min = i;
+			dist_min = dist;
+		}
+	}
+
+	/* zoom out one "notch" */
+	if (scales[i_min] == 0.0)
+		return;
+	i = i_min + 1;
+	if (scales[i] == 0.0)
+		return;
+	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Set current zoom factor to explicit value.                                */
+/*****************************************************************************/
+void
+gl_view_set_zoom (glView  *view,
+		  gdouble scale)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (GL_IS_VIEW (view));
+	g_return_if_fail (scale > 0.0);
+
+	view->scale = scale * HOME_SCALE;
+	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
+					  scale * HOME_SCALE);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*****************************************************************************/
+/* Get current zoom factor.                                                  */
+/*****************************************************************************/
+gdouble
+gl_view_get_zoom (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GL_IS_VIEW (view), 1.0);
+
+	return view->scale / HOME_SCALE;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1391,23 +1610,6 @@ object_selected (glViewObject *view_object)
 	return TRUE;
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Are there multiple objects in our current selection?            */
-/*---------------------------------------------------------------------------*/
-static gboolean
-multiple_items_selected (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (GL_IS_VIEW (view), FALSE);
-
-	if (view->selected_object_list == NULL)
-		return FALSE;
-	if (view->selected_object_list->next == NULL)
-		return FALSE;
-	return TRUE;
-}
-
 /*****************************************************************************/
 /* Item event handler.                                                       */
 /*****************************************************************************/
@@ -1601,14 +1803,14 @@ new_selection_menu (glView *view)
 	menuitem = gtk_menu_item_new_with_label (_("Bring to front"));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 	gtk_widget_show (menuitem);
-	g_signal_connect (G_OBJECT (menuitem), "activate",
-			  G_CALLBACK (raise_selection_cb), view);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_raise_selection), view);
 
 	menuitem = gtk_menu_item_new_with_label (_("Send to back"));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 	gtk_widget_show (menuitem);
-	g_signal_connect (G_OBJECT (menuitem), "activate",
-			  G_CALLBACK (lower_selection_cb), view);
+	g_signal_connect_swapped (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (gl_view_lower_selection), view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -1630,14 +1832,7 @@ popup_selection_menu (glView       *view,
 	g_return_if_fail (GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
-	if (multiple_items_selected (view)) {
-		if (view->menu != NULL) {
-			gtk_menu_popup (GTK_MENU (view->menu),
-					NULL, NULL, NULL, NULL,
-					event->button.button,
-					event->button.time);
-		}
-	} else {
+	if (gl_view_is_selection_atomic (view)) {
 
 		menu = gl_view_object_get_menu (view_object);
 		if (menu != NULL) {
@@ -1647,66 +1842,15 @@ popup_selection_menu (glView       *view,
 					event->button.time);
 		}
 
-	}
+	} else {
 
-	gl_debug (DEBUG_VIEW, "END");
-}
+		if (view->menu != NULL) {
+			gtk_menu_popup (GTK_MENU (view->menu),
+					NULL, NULL, NULL, NULL,
+					event->button.button,
+					event->button.time);
+		}
 
-/*---------------------------------------------------------------------------*/
-/* Delete selected objects.                                                  */
-/*---------------------------------------------------------------------------*/
-void
-gl_view_delete_selection (glView *view)
-{
-	GList *p, *p_next;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p_next) {
-		p_next = p->next;
-		g_object_unref (G_OBJECT (p->data));
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  raise item to front callback.                                   */
-/*---------------------------------------------------------------------------*/
-static void
-raise_selection_cb (GtkWidget *widget,
-		    glView    *view)
-{
-	GList *p;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		gl_label_object_raise_to_top (GL_LABEL_OBJECT (p->data));
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  lower item to back callback.                                    */
-/*---------------------------------------------------------------------------*/
-static void
-lower_selection_cb (GtkWidget *widget,
-		    glView    *view)
-{
-	GList *p;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		gl_label_object_lower_to_bottom (GL_LABEL_OBJECT (p->data));
 	}
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1857,100 +2001,3 @@ selection_received_cb (GtkWidget        *widget,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*****************************************************************************/
-/* Zoom in one "notch"                                                       */
-/*****************************************************************************/
-void
-gl_view_zoom_in (glView *view)
-{
-	gint i, i_min;
-	gdouble dist, dist_min;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	/* Find index of current scale (or best match) */
-	i_min = 1;		/* start with 2nd largest scale */
-	dist_min = fabs (scales[1] - view->scale);
-	for (i = 2; scales[i] != 0.0; i++) {
-		dist = fabs (scales[i] - view->scale);
-		if (dist < dist_min) {
-			i_min = i;
-			dist_min = dist;
-		}
-	}
-
-	/* zoom in one "notch" */
-	i = MAX (0, i_min - 1);
-	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*****************************************************************************/
-/* Zoom out one "notch"                                                      */
-/*****************************************************************************/
-void
-gl_view_zoom_out (glView *view)
-{
-	gint i, i_min;
-	gdouble dist, dist_min;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-
-	/* Find index of current scale (or best match) */
-	i_min = 0;		/* start with largest scale */
-	dist_min = fabs (scales[0] - view->scale);
-	for (i = 1; scales[i] != 0.0; i++) {
-		dist = fabs (scales[i] - view->scale);
-		if (dist < dist_min) {
-			i_min = i;
-			dist_min = dist;
-		}
-	}
-
-	/* zoom out one "notch" */
-	if (scales[i_min] == 0.0)
-		return;
-	i = i_min + 1;
-	if (scales[i] == 0.0)
-		return;
-	gl_view_set_zoom (view, scales[i] / HOME_SCALE);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*****************************************************************************/
-/* Set current zoom factor to explicit value.                                */
-/*****************************************************************************/
-void
-gl_view_set_zoom (glView  *view,
-		  gdouble scale)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (GL_IS_VIEW (view));
-	g_return_if_fail (scale > 0.0);
-
-	view->scale = scale * HOME_SCALE;
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-					  scale * HOME_SCALE);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*****************************************************************************/
-/* Get current zoom factor.                                                  */
-/*****************************************************************************/
-gdouble
-gl_view_get_zoom (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (GL_IS_VIEW (view), 1.0);
-
-	return view->scale / HOME_SCALE;
-}

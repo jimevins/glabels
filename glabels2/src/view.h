@@ -59,9 +59,10 @@ struct _glView {
 	glViewState       state;
 	glLabelObjectType create_type;
 
-	GList             *object_list;
-	GList             *selected_object_list;
+	GList             *object_list;           /* glViewObjects */
+	GList             *selected_object_list;  /* glViewObjects */
 
+	/* Clipboard selection stuff */
 	gint              have_selection;
 	glLabel           *selection_data;
 	GtkWidget         *invisible;
@@ -71,6 +72,8 @@ struct _glView {
 
 struct _glViewClass {
 	GtkVBoxClass      parent_class;
+
+	void (*selection_changed) (glView *view, gpointer user_data);
 };
 
 extern guint     gl_view_get_type           (void);
@@ -87,12 +90,14 @@ extern void      gl_view_select_object      (glView *view,
 					     glViewObject *view_object);
 extern void      gl_view_select_all         (glView *view);
 extern void      gl_view_unselect_all       (glView *view);
+
+extern gboolean  gl_view_is_selection_empty (glView *view);
+extern gboolean  gl_view_is_selection_atomic(glView *view);
+
 extern void      gl_view_delete_selection   (glView *view);
-
-
-extern int       gl_view_item_event_handler (GnomeCanvasItem *item,
-					     GdkEvent        *event,
-					     glViewObject    *view_object);
+extern void      gl_view_edit_object_props  (glView *view);
+extern void      gl_view_raise_selection    (glView *view);
+extern void      gl_view_lower_selection    (glView *view);
 
 extern void      gl_view_cut                (glView *view);
 extern void      gl_view_copy               (glView *view);
@@ -102,5 +107,9 @@ extern void      gl_view_zoom_in            (glView *view);
 extern void      gl_view_zoom_out           (glView *view);
 extern void      gl_view_set_zoom           (glView *view, gdouble scale);
 extern gdouble   gl_view_get_zoom           (glView *view);
+
+extern int       gl_view_item_event_handler (GnomeCanvasItem *item,
+					     GdkEvent        *event,
+					     glViewObject    *view_object);
 
 #endif

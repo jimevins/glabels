@@ -60,6 +60,9 @@ BonoboUIVerb gl_verbs [] = {
 	BONOBO_UI_VERB ("ToolsZoomOut", gl_tools_zoomout),
 	BONOBO_UI_VERB ("ToolsZoom1to1", gl_tools_zoom1to1),
 	BONOBO_UI_VERB ("ToolsMergeProperties", gl_tools_merge_properties),
+	BONOBO_UI_VERB ("ToolsObjectProperties", gl_tools_object_properties),
+	BONOBO_UI_VERB ("ToolsRaiseObjects", gl_tools_raise_objects),
+	BONOBO_UI_VERB ("ToolsLowerObjects", gl_tools_lower_objects),
 	BONOBO_UI_VERB ("SettingsPreferences", gl_cmd_settings_preferences),
 	BONOBO_UI_VERB ("HelpContents", gl_cmd_help_contents),
 	BONOBO_UI_VERB ("About", gl_cmd_help_about),
@@ -93,6 +96,9 @@ gchar* gl_menus_no_docs_sensible_verbs [] = {
 	"/commands/ToolsZoomOut",
 	"/commands/ToolsZoom1to1",
 	"/commands/ToolsMergeProperties",
+	"/commands/ToolsObjectProperties",
+	"/commands/ToolsRaiseObjects",
+	"/commands/ToolsLowerObjects",
 
 	NULL
 };
