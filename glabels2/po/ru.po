@@ -1,17 +1,18 @@
-# Brazilian Portuguese translation of Glabels.
-# Copyright (C) 2001 Jim Evins <evins@snaught.com>
-# Paulo R. Ormenese <pormenese@uol.com.br>, 2001.
-#
+# Russian translation of glabels.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Vitaly Lipatov <lav@altlinux.ru>, 2002
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 0.4.1\n"
+"Project-Id-Version: glabels 0.4.3\n"
 "POT-Creation-Date: 2002-08-24 22:30-0400\n"
-"PO-Revision-Date: 2002-01-31 21:20+ZONE\n"
-"Last-Translator: Paulo R. Ormenese <pormenese@uol.com.br>\n"
-"Language-Team: Brazilian portuguese <>\n"
+"PO-Revision-Date: 2002-06-28 00:05MSK\n"
+"Last-Translator: Vitaly Lipatov <lav@altlinux.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=KOI8-R\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: src/glabels_batch.c:49
 msgid "print this message"
@@ -36,7 +37,7 @@ msgstr ""
 #: src/glabels_batch.c:55
 #, fuzzy
 msgid "sheets"
-msgstr "PАginas:"
+msgstr "Листов:"
 
 #: src/glabels_batch.c:57
 msgid "number of copies (default=1)"
@@ -45,15 +46,15 @@ msgstr ""
 #: src/glabels_batch.c:57
 #, fuzzy
 msgid "copies"
-msgstr "CСpias"
+msgstr "Копий"
 
 #: src/glabels_batch.c:59 src/print_dialog.c:152
 msgid "print outlines (to test printer alignment)"
-msgstr "imprimir contornos (testar alinhamento da impressora)"
+msgstr "распечатать контуры (для проверки выравнивания на принтере)"
 
 #: src/glabels_batch.c:61 src/print_dialog.c:160
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "imprimir ao contrАrio (como uma imagem de espelho)"
+msgstr "распечатать зеркально"
 
 #: src/glabels_batch.c:92
 msgid "[OPTION...] GLABELS_FILE..."
@@ -66,16 +67,16 @@ msgstr ""
 #: src/glabels_batch.c:139
 #, fuzzy, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "ImpossМvel abrir o arquivo"
+msgstr "Невозможно открыть файл"
 
 #: src/mdi.c:169
 #, c-format
 msgid "Revert to saved copy of %s?"
-msgstr "Reverter para a cСpia gravada de %s?"
+msgstr "Вернуться к сохранённой копии %s?"
 
 #: src/mdi.c:207
 msgid "Unknown media type. Using default."
-msgstr "Tipo de mМdia desconhecido. Usando padrЦo."
+msgstr "Неизвестный тип носителя. Используем значение по умолчанию."
 
 #: src/mdi.c:455
 #, c-format
@@ -84,173 +85,173 @@ msgid ""
 "\n"
 "Do you wish to save it?"
 msgstr ""
-"``%s'' foi modificado.\n"
+"``%s'' был изменён.\n"
 "\n"
-"Deseja salvА-lo?"
+"Сохранить его?"
 
 #: src/mdi.c:459
 msgid "Don't save"
-msgstr "NЦo salve"
+msgstr "Не сохранять"
 
 #: src/mdi.c:601 src/file.c:288
 msgid "Cannot save file"
-msgstr "NЦo posso salvar o arquivo"
+msgstr "Невозможно сохранить файл"
 
 #: src/mdi.c:623 src/file.c:311
 msgid "Save As"
-msgstr "Salvar como"
+msgstr "Сохранить как"
 
 #: src/mdi.c:626
 msgid "Close / Save label as"
-msgstr "Fechar / Salvar etiqueta como"
+msgstr "Закрыть / Сохранить этикетку как"
 
 #: src/mdi.c:680 src/file.c:352
 msgid "Label no longer valid!"
-msgstr "Etiqueta nЦo И mais vАlida"
+msgstr "Этикетка больше не верна!"
 
 #: src/mdi.c:693 src/file.c:362
 msgid "Must supply file name"
-msgstr "NecessАrio informar nome do arquivo"
+msgstr "Название файла должно быть указано"
 
 #: src/mdi.c:705 src/file.c:374
 msgid "Error writing file"
-msgstr "Erro gravando o arquivo"
+msgstr "Ошибка записи файла"
 
 #: src/display.c:1250 src/display.c:1298
 msgid "Delete"
-msgstr "Apagar"
+msgstr "Удалить"
 
 #: src/display.c:1260 src/display.c:1308
 msgid "Bring to front"
-msgstr "Trazer para frente"
+msgstr "На передний план"
 
 #: src/display.c:1266 src/display.c:1314
 msgid "Send to back"
-msgstr "Enviar para trАs"
+msgstr "На задний план"
 
 #: src/display.c:1287
 msgid "Edit properties..."
-msgstr "Editar propriedades..."
+msgstr "Изменить свойства..."
 
 #: src/item_text.c:450
 msgid "Edit text object properties"
-msgstr "Editar propriedades do objeto texto"
+msgstr "Изменить свойства объекта типа текст"
 
 #: src/item_text.c:460 src/item_text.c:464 src/item_text.c:637 src/menu.c:100
 msgid "Text"
-msgstr "Texto"
+msgstr "Текст"
 
 #: src/item_text.c:479 src/item_line.c:253 src/item_box.c:245
 #: src/item_ellipse.c:247 src/item_barcode.c:317
 msgid "Appearance"
-msgstr "AparЙncia"
+msgstr "Внешний вид"
 
 #. ------ Begin Text Properties box ------
 #: src/item_text.c:482
 msgid "Text Properties"
-msgstr "Propriedades de Texto"
+msgstr "Свойства текста"
 
 #. ------ Position Frame ------
 #: src/item_text.c:500 src/item_text.c:503 src/item_line.c:274
 #: src/item_box.c:275 src/item_ellipse.c:277 src/item_image.c:318
 #: src/item_barcode.c:345 src/item_barcode.c:348
 msgid "Position"
-msgstr "PosiГЦo"
+msgstr "Расположение"
 
 #: src/item_line.c:243
 msgid "Edit line object properties"
-msgstr "Editar propriedades do objeto linha"
+msgstr "Изменить свойства объекта типа линия"
 
 #. ------ Begin Line box ------
 #: src/item_line.c:256 src/menu.c:106
 msgid "Line"
-msgstr "Linha"
+msgstr "Линия"
 
 #: src/item_line.c:271 src/item_box.c:272 src/item_ellipse.c:274
 #: src/item_image.c:315
 msgid "Position/Size"
-msgstr "PosiГЦo/Tamanho"
+msgstr "Расположение/Размер"
 
 #. ------ Size Frame ------
 #: src/item_line.c:285 src/item_box.c:286 src/item_ellipse.c:288
 #: src/item_image.c:329
 msgid "Size"
-msgstr "Tamanho"
+msgstr "Размер"
 
 #: src/item_box.c:235
 msgid "Edit box object properties"
-msgstr "Editar propriedades do objeto caixa"
+msgstr "Изменить свойства объекта типа прямоугольник"
 
 #. ------ Line box ------
 #: src/item_box.c:248 src/item_ellipse.c:250
 msgid "Outline"
-msgstr "Contorno"
+msgstr "Контур"
 
 #. ------ Fill box ------
 #: src/item_box.c:258 src/item_ellipse.c:260
 msgid "Fill"
-msgstr "Preencher"
+msgstr "Заполнение"
 
 #: src/item_ellipse.c:237
 msgid "Edit ellipse object properties"
-msgstr "Editar propriedades do objeto elipse"
+msgstr "Исправить свойства объекта типа эллипс"
 
 #: src/item_image.c:257
 msgid "Edit image object properties"
-msgstr "Editar propriedades do objeto imagem"
+msgstr "Исправить свойства объекта типа изображение"
 
 #: src/item_image.c:268 src/menu.c:113
 msgid "Image"
-msgstr "Imagem"
+msgstr "Изображение"
 
 #. ------ Size Reset Button ------
 #: src/item_image.c:342
 msgid "Reset image size"
-msgstr "Redefinir tamanho da imagem"
+msgstr "Установить размер изображения по умолчанию"
 
 #: src/item_image.c:389 src/item_image.c:454
 msgid "Image format not currently supported"
-msgstr "Formato de imagem nЦo suportado atualmente"
+msgstr "Данный формат изображений не поддерживается"
 
 #: src/item_barcode.c:287
 msgid "Edit barcode object properties"
-msgstr "Editar propriedades do objeto cСdigo de barras"
+msgstr "Изменить свойства объекта типа штрих-код"
 
 #: src/item_barcode.c:297
 msgid "Data"
-msgstr "Dado"
+msgstr "Данные"
 
 #: src/item_barcode.c:299
 msgid "Barcode data"
-msgstr "Dado do CСdigo de Barras:"
+msgstr "Данные штрих-кода"
 
 #. ------ Begin Barcode Properties Frame ------
 #: src/item_barcode.c:320 src/prefs.c:215
 msgid "General"
-msgstr "Geral"
+msgstr "Общее"
 
 #. ------ Barcode Style Frame ------
 #: src/item_barcode.c:330
 msgid "Style"
-msgstr "Estilo"
+msgstr "Тип"
 
 #: src/item_barcode.c:549 src/item_barcode.c:572 src/print.c:631
 msgid "Invalid barcode"
-msgstr "CСdigo de barras invАlido"
+msgstr "Неверный штрих-код"
 
 #. W Label
 #: src/prop_size.c:182 src/prop_line.c:169
 msgid "Width:"
-msgstr "Largura:"
+msgstr "Ширина:"
 
 #. H label
 #: src/prop_size.c:198
 msgid "Height:"
-msgstr "Altura:"
+msgstr "Высота:"
 
 #: src/prop_size.c:222
 msgid "Maintain current aspect ratio"
-msgstr "Manter taxa de aspecto atual"
+msgstr "Сохранять текущие пропорции"
 
 #. X label
 #: src/prop_position.c:173
@@ -265,52 +266,52 @@ msgstr "Y:"
 #. Line Width units
 #: src/prop_line.c:183 src/prefs.c:448 src/prefs.c:455
 msgid "points"
-msgstr "pontos"
+msgstr "точек"
 
 #. Line Color Label
 #: src/prop_line.c:189 src/prop_fill.c:166 src/prop_text.c:234
 #: src/prop_bc.c:188
 msgid "Color:"
-msgstr "Cor:"
+msgstr "Цвет:"
 
 #. Font label
 #: src/prop_text.c:181
 msgid "Font:"
-msgstr "Fonte:"
+msgstr "Шрифт:"
 
 #. Alignment label
 #: src/prop_text.c:248
 msgid "Alignment:"
-msgstr "Alinhamento:"
+msgstr "Выравнивание:"
 
 #. Insert merge field label
 #: src/prop_text_entry.c:180 src/prop_bc_data.c:196
 msgid "Key:"
-msgstr "Chave:"
+msgstr "Ключ:"
 
 #: src/prop_text_entry.c:196
 msgid "Insert merge field"
-msgstr "Inserir campo de fusЦo"
+msgstr "Вставить объединительное поле"
 
 #. Length label
 #: src/prop_vector.c:183
 msgid "Length:"
-msgstr "Comprimento:"
+msgstr "Длина:"
 
 #. Angle label
 #: src/prop_vector.c:207
 msgid "Angle:"
-msgstr "бngulo:"
+msgstr "Угол:"
 
 #. Angle units label
 #: src/prop_vector.c:224
 msgid "degrees"
-msgstr "graus"
+msgstr "градусов"
 
 #. Scale Label
 #: src/prop_bc.c:168
 msgid "Scale:"
-msgstr "Escala:"
+msgstr "Масштаб:"
 
 #. % Label
 #: src/prop_bc.c:182
@@ -319,219 +320,217 @@ msgstr "%"
 
 #: src/prop_bc_style.c:313
 msgid "Show text with barcode"
-msgstr "Exibir texto com cСdigo de barras"
+msgstr "Показать текст со штрих-кодом"
 
 #: src/prop_bc_data.c:176
 msgid "Literal:"
-msgstr "Literal:"
+msgstr "Буквально:"
 
 #: src/label.c:173 src/label.c:197
 msgid "xmlParseFile error"
-msgstr "erro: xmlParseFile"
+msgstr "Ошибка при разборе файла XML"
 
 #: src/label.c:228
-#, fuzzy
 msgid "No document root"
-msgstr "Sem raiz do documento"
+msgstr "Нет корня документа"
 
 #: src/label.c:239
 msgid "document of the wrong type, glabels Namespace not found"
-msgstr "documento de tipo errado, espaГo de nome glabels nЦo encontrado"
+msgstr "документ неверного типа, пространство имён не найдено"
 
 #: src/label.c:244
 #, c-format
 msgid "Bad root node = \"%s\""
-msgstr "NС raiz ruim = \"%s\""
+msgstr "Неверный корневой узел = \"%s\""
 
 #: src/label.c:291
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr "nС ruim = \"%s\""
+msgstr "неверный узел =  \"%s\""
 
 #: src/label.c:606
 msgid "Problem saving xml file."
-msgstr "Problema salvando arquivo xml."
+msgstr "Проблемы при сохранении файла XML"
 
 #: src/template.c:224
 msgid "No template files found!"
-msgstr "Nenhum arquivo modelo encontrado!"
+msgstr "Не найдены файлы шаблона!"
 
 #: src/merge_properties.c:82
 msgid "Edit document-merge properties"
-msgstr "Editar propriedades de fusЦo do documento"
+msgstr "Исправить свойства документа-объединения"
 
 #: src/merge_properties.c:131
 msgid "Source"
-msgstr "Fonte"
+msgstr "Источник"
 
 #: src/merge_properties.c:143
 msgid "Format:"
-msgstr "Formato:"
+msgstr "Формат:"
 
 #: src/merge_properties.c:158
 msgid "Location:"
-msgstr "LocalizaГЦo"
+msgstr "Расположение:"
 
 #: src/merge_properties.c:168
 msgid "Fields"
-msgstr "Campos"
+msgstr "Поля"
 
 #: src/merge.c:78
 msgid "None"
-msgstr "Nenhum"
+msgstr "Ничего"
 
 #: src/merge.c:86
 msgid "Text with tab separators"
-msgstr "Texto separado com tab"
+msgstr "Текст с табуляторами в качестве разделителя"
 
 #: src/merge.c:94
-#, fuzzy
 msgid "Text with comma separators (CSV)"
-msgstr "Texto separado com vМrgula"
+msgstr "Текст с запятыми в качестве разделителя"
 
 #: src/merge.c:102
 msgid "Text with colon separators"
-msgstr "Texto separado com dois pontos"
+msgstr "Текст с двоеточиями в качестве разделителя"
 
 #: src/merge_ui.c:207 src/merge_ui.c:242 src/merge_ui.c:387 src/merge_ui.c:428
 msgid "N/A"
-msgstr "NЦo definido"
+msgstr "Недоступно"
 
 #: src/merge_ui_text.c:170
 msgid "Select merge-database source"
-msgstr "Selecione a fonte da base de dados da fusЦo"
+msgstr "Выбрать источник объединения-базы данных"
 
 #: src/merge_ui_text.c:330
 msgid "Column"
-msgstr "Coluna"
+msgstr "Столбец"
 
 #: src/merge_ui_text.c:334
 msgid "Custom field key"
-msgstr "Chave do campo especМfico"
+msgstr "Нестандартный ключ поля"
 
 #: src/merge_ui_text.c:338
 msgid "Sample data"
-msgstr "Dado de amostra"
+msgstr "Пример данных"
 
 #: src/menu.c:50
 msgid "_New"
-msgstr "_Novo"
+msgstr "_Создать"
 
 #: src/menu.c:51
 msgid "Make a new, empty label"
-msgstr "Criar uma etiqueta nova, vazia"
+msgstr "Создать новую, пустую этикетку"
 
 #: src/menu.c:85
 msgid "U_nselect All "
-msgstr "D_esmarcar Tudo "
+msgstr "_Снять выделение"
 
 #: src/menu.c:86
 msgid "Remove all selections"
-msgstr "Remover todas as seleГУes"
+msgstr "Удалить всё выделенное"
 
 #: src/menu.c:94
 msgid "Select"
-msgstr "Selecionar"
+msgstr "Выбор"
 
 #: src/menu.c:95 src/menu.c:186
 msgid "Select, move and modify objects"
-msgstr "Selecionar, movimentar e modificar objetos"
+msgstr "Выбрать, переместить или изменить объекты"
 
 #: src/menu.c:100 src/menu.c:191
 msgid "Create text object"
-msgstr "Criar objeto texto"
+msgstr "Создать текстовый объект"
 
 #: src/menu.c:103
 msgid "Box"
-msgstr "Caixa"
+msgstr "Прямоугольник"
 
 #: src/menu.c:103 src/menu.c:194
 msgid "Create box/rectangle object"
-msgstr "Criar objeto caixa/retБngulo"
+msgstr "Создать прямоугольник"
 
 #: src/menu.c:106 src/menu.c:197
 msgid "Create line object"
-msgstr "Criar objeto linha"
+msgstr "Создать линию"
 
 #: src/menu.c:109
 msgid "Ellipse"
-msgstr "Elipse"
+msgstr "Эллипс"
 
 #: src/menu.c:110 src/menu.c:200
 msgid "Create ellipse/circle object"
-msgstr "Criar objeto elipse/cМrculo"
+msgstr "Создать эллипс/круг"
 
 #: src/menu.c:113 src/menu.c:203
 msgid "Create image object"
-msgstr "Criar objeto imagem"
+msgstr "Создать изображение"
 
 #: src/menu.c:116
 msgid "Barcode"
-msgstr "CСdigo de Barras"
+msgstr "Штрих-код"
 
 #: src/menu.c:116 src/menu.c:206
 msgid "Create barcode object"
-msgstr "Criar objeto cСdigo de barras"
+msgstr "Создать объект штрих-кода"
 
 #: src/menu.c:121 src/menu.c:211
 msgid "Zoom in"
-msgstr "Mais Zoom"
+msgstr "Увеличить"
 
 #: src/menu.c:124 src/menu.c:214
 msgid "Zoom out"
-msgstr "Menos Zoom"
+msgstr "Уменьшить"
 
 #: src/menu.c:127
 msgid "Zoom 1:1"
-msgstr "Zoom 1:1"
+msgstr "Масштаб 1:1"
 
 #: src/menu.c:127 src/menu.c:217
 msgid "Zoom to 1:1"
-msgstr "Zoom para 1:1"
+msgstr "Установить масштаб"
 
 #: src/menu.c:132 src/menu.c:223
 msgid "Merge properties"
-msgstr "Propriedades de FusЦo"
+msgstr "Свойства объединения"
 
 #: src/menu.c:133
 msgid "Edit merge properties"
-msgstr "Editar propriedades de fusЦo"
+msgstr "Исправить свойства объединения"
 
 #: src/menu.c:157
 msgid "_Tools"
-msgstr "_Ferramentas"
+msgstr "_Инструменты"
 
 #: src/menu.c:168
 msgid "  New   "
-msgstr "  Novo  "
+msgstr "Создать"
 
 #: src/menu.c:168
 msgid "New Label/Card"
-msgstr "Nova Etiqueta/CartЦo"
+msgstr "Создать новую этикетку или визитку"
 
 #: src/menu.c:170
 msgid "  Open  "
-msgstr " Abrir  "
+msgstr "Открыть"
 
 #: src/menu.c:170
 msgid "Open a file"
-msgstr "Abrir um arquivo"
+msgstr "Открыть файл"
 
 #: src/menu.c:172
 msgid "  Save  "
-msgstr " Salvar "
+msgstr "Сохранить"
 
 #: src/menu.c:172
 msgid "Save current file"
-msgstr "Salvar arquivo atual"
+msgstr "Сохранить текущий файл"
 
 #: src/menu.c:175
 msgid " Print  "
-msgstr " Imprimir  "
+msgstr "Распечатать"
 
 #: src/menu.c:175
 msgid "Print current file"
-msgstr "Imprimir arquivo atual"
+msgstr "Распечатать текущий файл"
 
 #: src/menu.c:290
 msgid ""
@@ -547,70 +546,71 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
 msgstr ""
-"Um programa para criaГЦo de etiquetas e cartУes de negСcios para o GNOME.\n"
-"\n"
-"Glabels И software livre; vocЙ pode redistribuМ-lo e/ou modificА-lo sob os "
-"termos da LicenГa PЗblica Geral GNU conforme publicada pela Free Software "
-"Foundation; ou a versЦo 2 da LicenГa, ou (sob sua opГЦo) qualquer versЦo "
-"posterior.\n"
-"\n"
-"Este programa И distribuido na esperanГa de que seja Зtil, mas SEM QUALQUER "
-"GARANTIA; sem mesmo as garantias implМcitas de COMERCIALIZAгцO ou AJUSTES A "
-"UM PROPсSITO PARTICULAR. Veja a LicenГa PЗblica Geral GNU para mais "
-"detalhes.\n"
+"Программа создания этикеток и визиток для GNOME\n"
+" \n"
+"Glabels является свободным программным обеспечением; вы вправе "
+"распространять её и/или модифицировать в соответствиями с условиями версии 2 "
+"либо по вашему выбору более поздней версии Стандартной Общественной Лицензии "
+"GNU, опубликованной Free Software Foundation.\n"
+" \n"
+"Мы распространяем данную программу в надежде на то, что она будет вам "
+"полезной, однако НЕ ПРЕДОСТАВЛЯЕМ НА НЕЁ НИКАКИХ ГАРАНТИЙ, в том числе "
+"ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ПРИГОДНОСТИ ДЛЯ ИСПОЛЬЗОВАНИЯ В "
+"КОНКРЕТНЫХ ЦЕЛЯХ. Для получения более подробной информации ознакомьтесь со "
+"Стандартной Общественной Лицензией GNU.\n"
 
 #: src/menu.c:326
 msgid "Function is not implemented!"
-msgstr "FunГЦo nЦo estА implementada!"
+msgstr "Функция не реализована!"
 
 #: src/file.c:72
 msgid "New Label or Card"
-msgstr "Nova Etiqueta ou CartЦo"
+msgstr "Новая этикетка или визитка"
 
 #: src/file.c:98
 msgid "Media Type"
-msgstr "Tipo de mМdia"
+msgstr "Тип носителя"
 
 #: src/file.c:109
 msgid "Label orientation"
-msgstr "OrientaГЦo da etiqueta"
+msgstr "Расположение этикетки"
 
 #: src/file.c:211
 msgid "Open"
-msgstr "Abrir"
+msgstr "Открыть"
 
 #: src/file.c:213
 msgid "Open label"
-msgstr "Abrir etiqueta"
+msgstr "Открыть этикетку"
 
 #: src/file.c:249
 msgid "Cannot open file"
-msgstr "ImpossМvel abrir o arquivo"
+msgstr "Невозможно открыть файл"
 
 #: src/file.c:316
 msgid "Save label as"
-msgstr "Salvar etiqueta como"
+msgstr "Сохранить этикетку как"
 
 #: src/media_select.c:222
 msgid "Description:"
-msgstr "DescriГЦo:"
+msgstr "Описание:"
 
 #: src/media_select.c:227
 msgid "Page size:"
-msgstr "Tamanho da pАgina:"
+msgstr "Размер страницы:"
 
 #: src/media_select.c:232
 msgid "Label size:"
-msgstr "Tamanho da etiqueta:"
+msgstr "Размер этикетки:"
 
 #: src/media_select.c:237
 msgid "Layout:"
-msgstr "DisposiГЦo:"
+msgstr "Формат:"
 
 #: src/media_select.c:353
 #, c-format
 msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d  (%d por pАgina)"
+msgstr "%d x %d (%d на лист)"
 
 #: src/media_select.c:367
 #, c-format
@@ -624,97 +624,93 @@ msgstr "%.5g x %.5g %s"
 
 #: src/rotate_select.c:169
 msgid "Rotate"
-msgstr "Girar"
+msgstr "Повернуть"
 
 #: src/print_dialog.c:99
 msgid "Print"
-msgstr "Imprimir"
+msgstr "Распечатать"
 
 #. ----------- Add simple-copies widget ------------
 #: src/print_dialog.c:104
 msgid "Copies"
-msgstr "CСpias"
+msgstr "Копий"
 
 #. -------Otherwise add merge control widget ------------
 #: src/print_dialog.c:121
 msgid "Document merge control"
-msgstr "Controle de fusЦo do documento"
+msgstr "Управление объединением"
 
 #. ----------- Add custom print options area ------------
 #: src/print_dialog.c:141
 msgid "Options"
-msgstr "OpГУes"
+msgstr "Параметры"
 
 #: src/print_dialog.c:241 src/print_dialog.c:280
 msgid "Print preview"
-msgstr "Visualizar impressЦo"
+msgstr "Просмотреть"
 
 #: src/print_copies.c:170
 msgid "Sheets:"
-msgstr "PАginas:"
+msgstr "Листов:"
 
 #: src/print_copies.c:187
 msgid "Labels"
-msgstr "Etiquetas"
+msgstr "Этикетки"
 
 #: src/print_copies.c:190
 msgid "from:"
-msgstr "de:"
+msgstr "с:"
 
 #: src/print_copies.c:198
 msgid "to:"
-msgstr "atИ:"
+msgstr "до:"
 
 #: src/print_merge.c:170
 msgid "Start on label"
-msgstr "Iniciar na etiqueta"
+msgstr "Начать с этикетки"
 
 #: src/print_merge.c:179
 msgid "on 1st sheet"
-msgstr "na primeira folha"
+msgstr "на первом листе"
 
 #: src/print_merge.c:188
-#, fuzzy
 msgid "Collate"
-msgstr "Montar"
+msgstr "Собирать"
 
 #: src/print_merge.c:195
 msgid "Copies:"
-msgstr "CСpias:"
+msgstr "Копий:"
 
 #: src/prefs.c:86
 msgid "Glabels: Preferences"
-msgstr "Glabels: PreferЙncias"
+msgstr "Glabels: Параметры"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:220
 msgid "Display units"
-msgstr "Exibir unidades"
+msgstr "Единицы отображения"
 
 #: src/prefs.c:231
 msgid "Points"
-msgstr "Pontos"
+msgstr "Точки"
 
 #: src/prefs.c:237
 msgid "Inches"
-msgstr "Polegadas"
+msgstr "Дюймы"
 
 #: src/prefs.c:244
 msgid "Millimeters"
-msgstr "MilМmetros"
+msgstr "Миллиметры"
 
 #. ----- Display Units Frame ------------------------------------
 #: src/prefs.c:249
 msgid "Default page size"
-msgstr "Tamanho de pАgina padrЦo"
+msgstr "Размер бумаги по умолчанию"
 
 #: src/prefs.c:450
 msgid "inches"
-msgstr "poleg."
+msgstr "дюймов"
 
 #: src/prefs.c:452
 msgid "mm"
-msgstr "mm"
-
-#~ msgid "Function is not yet implemented!"
-#~ msgstr "FunГЦo ainda nЦo implementada!"
+msgstr "мм"

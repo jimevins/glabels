@@ -634,8 +634,8 @@ gl_view_line_create_event_handler (GnomeCanvas *canvas,
 	case GDK_MOTION_NOTIFY:
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			w = x - x0;
 			h = y - y0;
 			gl_label_object_set_size (GL_LABEL_OBJECT(object),

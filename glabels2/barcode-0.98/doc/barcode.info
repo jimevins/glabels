@@ -1,4 +1,4 @@
-This is barcode.info, produced by makeinfo version 4.0 from
+This is barcode.info, produced by makeinfo version 4.0b from
 barcode.texinfo.
 
    This file is the User's Manual for the barcode library (version
@@ -731,17 +731,17 @@ and then bless the package as version 1.0.
 
 
 Tag Table:
-Node: Top153
-Node: Overview525
-Node: The Barcode Object1403
-Node: The Field List2820
-Node: The Intermediate Representation6585
-Node: Supported Flags8358
-Node: The API11342
-Node: The barcode Executable14028
-Node: The Command Line14457
-Node: Supported Encodings19556
-Node: PCL Output28996
-Node: Bugs and Pending Issues31315
+Node: Top154
+Node: Overview526
+Node: The Barcode Object1404
+Node: The Field List2821
+Node: The Intermediate Representation6586
+Node: Supported Flags8359
+Node: The API11343
+Node: The barcode Executable14029
+Node: The Command Line14458
+Node: Supported Encodings19557
+Node: PCL Output28997
+Node: Bugs and Pending Issues31316
 
 End Tag Table

@@ -681,8 +681,8 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
 		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
 			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
+						      event->motion.x,
+						      event->motion.y, &x, &y);
 			gl_label_object_set_position (GL_LABEL_OBJECT(object),
 						      x, y);
 			return TRUE;
