@@ -35,11 +35,13 @@
 
 #include "label.h"
 
-#define GL_TYPE_MDI_CHILD	(gl_mdi_child_get_type ())
-#define GL_MDI_CHILD(o)		(GTK_CHECK_CAST ((o), GL_TYPE_MDI_CHILD, glMDIChild))
-#define GL_MDI_CHILD_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MDI_CHILD, \
-					glMDIChildClass))
-#define GL_IS_MDI_CHILD(o)		(GTK_CHECK_TYPE ((o), GL_TYPE_MDI_CHILD))
+G_BEGIN_DECLS
+
+#define GL_TYPE_MDI_CHILD            (gl_mdi_child_get_type ())
+#define GL_MDI_CHILD(o)		     (GTK_CHECK_CAST ((o), GL_TYPE_MDI_CHILD, glMDIChild))
+#define GL_MDI_CHILD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MDI_CHILD, \
+				      glMDIChildClass))
+#define GL_IS_MDI_CHILD(o)	     (GTK_CHECK_TYPE ((o), GL_TYPE_MDI_CHILD))
 #define GL_IS_MDI_CHILD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_MDI_CHILD))
 #define GL_MDI_CHILD_GET_CLASS(o)    (GTK_CHECK_GET_CLASS ((o), GL_TYPE_MDI_CHILD, glMdiChildClass))
 
@@ -51,10 +53,10 @@ typedef struct _glMDIChildPrivate glMDIChildPrivate;
 
 struct _glMDIChild
 {
-	BonoboMDIChild child;
+	BonoboMDIChild      child;
 	
-	glLabel* label;
-	glMDIChildPrivate *priv;
+	glLabel            *label;
+	glMDIChildPrivate  *priv;
 };
 
 struct _glMDIChildClass
@@ -68,12 +70,15 @@ struct _glMDIChildClass
 };
 
 
-GtkType        	gl_mdi_child_get_type 	(void) G_GNUC_CONST;
+GtkType        	gl_mdi_child_get_type     (void) G_GNUC_CONST;
 
-glMDIChild*	gl_mdi_child_new	(const gchar *tmplt_name,
-					 gboolean rotate_flag);
+glMDIChild*	gl_mdi_child_new          (const gchar *tmplt_name,
+					   gboolean     rotate_flag);
 
-glMDIChild*	gl_mdi_child_new_with_uri (const gchar *uri, GError **error);
+glMDIChild*	gl_mdi_child_new_with_uri (const gchar *uri,
+					   GError     **error);
+
+G_END_DECLS
 
 #endif /* __MDI_CHILD_H__ */
 

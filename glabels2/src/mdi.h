@@ -33,11 +33,13 @@
 
 #include <bonobo-mdi.h>
 
-#define GL_TYPE_MDI			(gl_mdi_get_type ())
-#define GL_MDI(obj)			(GTK_CHECK_CAST ((obj), GL_TYPE_MDI, glMDI))
-#define GL_MDI_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MDI, glMDIClass))
+G_BEGIN_DECLS
+
+#define GL_TYPE_MDI		(gl_mdi_get_type ())
+#define GL_MDI(obj)		(GTK_CHECK_CAST ((obj), GL_TYPE_MDI, glMDI))
+#define GL_MDI_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MDI, glMDIClass))
 #define GL_IS_MDI(obj)		(GTK_CHECK_TYPE ((obj), GL_TYPE_MDI))
-#define GL_IS_MDI_CLASS(klass)  	(GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_MDI))
+#define GL_IS_MDI_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_MDI))
 #define GL_MDI_GET_CLASS(obj)  	(GTK_CHECK_GET_CLASS ((obj), GL_TYPE_MDI, glMdiClass))
 
 
@@ -48,14 +50,14 @@ typedef struct _glMDIPrivate		glMDIPrivate;
 
 struct _glMDI
 {
-	BonoboMDI mdi;
+	BonoboMDI       mdi;
 	
-	glMDIPrivate *priv;
+	glMDIPrivate   *priv;
 };
 
 struct _glMDIClass
 {
-	BonoboMDIClass parent_class;
+	BonoboMDIClass  parent_class;
 };
 
 
@@ -65,9 +67,11 @@ glMDI*	        gl_mdi_new                                 (void);
 
 void		gl_mdi_set_active_window_title             (BonoboMDI *mdi);
 
-void		gl_mdi_update_ui_according_to_preferences  (glMDI *mdi);
+void		gl_mdi_update_ui_according_to_preferences  (glMDI     *mdi);
 
 void 		gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi);
+
+G_END_DECLS
 
 #endif /* __MDI_H__ */
 

@@ -77,18 +77,18 @@ static BonoboMDIClass *parent_class = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_mdi_class_init 	(glMDIClass	*klass);
-static void gl_mdi_init 		(glMDI 	*mdi);
-static void gl_mdi_finalize 		(GObject 	*object);
+static void gl_mdi_class_init  (glMDIClass *klass);
+static void gl_mdi_init        (glMDI      *mdi);
+static void gl_mdi_finalize    (GObject    *object);
 
-static void gl_mdi_app_created_cb	(BonoboMDI *mdi, BonoboWindow *win);
+static void gl_mdi_app_created_cb   (BonoboMDI *mdi, BonoboWindow   *win);
 
-static gint gl_mdi_add_child_cb (BonoboMDI *mdi, BonoboMDIChild *child);
-static gint gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view);
-static gint gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child);
-static gint gl_mdi_remove_view_cb (BonoboMDI *mdi, GtkWidget *view);
+static gint gl_mdi_add_child_cb     (BonoboMDI *mdi, BonoboMDIChild *child);
+static gint gl_mdi_add_view_cb      (BonoboMDI *mdi, GtkWidget      *view);
+static gint gl_mdi_remove_child_cb  (BonoboMDI *mdi, BonoboMDIChild *child);
+static gint gl_mdi_remove_view_cb   (BonoboMDI *mdi, GtkWidget      *view);
 
-static void gl_mdi_view_changed_cb (BonoboMDI *mdi, GtkWidget *old_view);
+static void gl_mdi_view_changed_cb  (BonoboMDI *mdi, GtkWidget      *old_view);
 static void gl_mdi_child_changed_cb (BonoboMDI *mdi, BonoboMDIChild *old_child);
 static void gl_mdi_child_state_changed_cb (glMDIChild *child);
 
@@ -229,10 +229,11 @@ gl_mdi_new (void)
 /* App created callback.                                                     */
 /*---------------------------------------------------------------------------*/
 static void
-gl_mdi_app_created_cb (BonoboMDI *mdi, BonoboWindow *win)
+gl_mdi_app_created_cb (BonoboMDI    *mdi,
+		       BonoboWindow *win)
 {
-	GtkWidget *widget;
-	BonoboControl *control;
+	GtkWidget         *widget;
+	BonoboControl     *control;
 	BonoboUIComponent *ui_component;
 
 	gl_debug (DEBUG_MDI, "START");
@@ -281,7 +282,8 @@ gl_mdi_child_undo_redo_state_changed_cb (glMDIChild *child)
 /* Add child callback.                                                       */
 /*---------------------------------------------------------------------------*/
 static gint 
-gl_mdi_add_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
+gl_mdi_add_child_cb (BonoboMDI      *mdi,
+		     BonoboMDIChild *child)
 {
 	gl_debug (DEBUG_MDI, "START");
 
@@ -315,7 +317,8 @@ gl_mdi_view_selection_state_changed_cb (glView *view)
 /* Add view callback.                                                        */
 /*---------------------------------------------------------------------------*/
 static gint 
-gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view)
+gl_mdi_add_view_cb (BonoboMDI *mdi,
+		    GtkWidget *view)
 {
 	gl_debug (DEBUG_MDI, "START");
 
@@ -331,9 +334,10 @@ gl_mdi_add_view_cb (BonoboMDI *mdi, GtkWidget *view)
 /* Remove child callback.                                                    */
 /*---------------------------------------------------------------------------*/
 static gint 
-gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
+gl_mdi_remove_child_cb (BonoboMDI      *mdi,
+			BonoboMDIChild *child)
 {
-	glLabel* doc;
+	glLabel *doc;
 	gboolean close = TRUE;
 	
 	gl_debug (DEBUG_MDI, "START");
@@ -425,7 +429,8 @@ gl_mdi_remove_child_cb (BonoboMDI *mdi, BonoboMDIChild *child)
 /* Remove view callback.                                                     */
 /*---------------------------------------------------------------------------*/
 static gint 
-gl_mdi_remove_view_cb (BonoboMDI *mdi,  GtkWidget *view)
+gl_mdi_remove_view_cb (BonoboMDI *mdi,
+		       GtkWidget *view)
 {
 	gl_debug (DEBUG_MDI, "");
 	gl_debug (DEBUG_MDI, "END");
@@ -439,10 +444,10 @@ gl_mdi_remove_view_cb (BonoboMDI *mdi,  GtkWidget *view)
 void 
 gl_mdi_set_active_window_title (BonoboMDI *mdi)
 {
-	BonoboMDIChild* active_child = NULL;
-	glLabel* doc = NULL;
-	gchar* docname = NULL;
-	gchar* title = NULL;
+	BonoboMDIChild *active_child = NULL;
+	glLabel        *doc          = NULL;
+	gchar          *docname      = NULL;
+	gchar          *title        = NULL;
 	
 	gl_debug (DEBUG_MDI, "START");
 
@@ -481,7 +486,8 @@ gl_mdi_set_active_window_title (BonoboMDI *mdi)
 /* Child changed callback.                                                   */
 /*---------------------------------------------------------------------------*/
 static 
-void gl_mdi_child_changed_cb (BonoboMDI *mdi, BonoboMDIChild *old_child)
+void gl_mdi_child_changed_cb (BonoboMDI      *mdi,
+			      BonoboMDIChild *old_child)
 {
 	gl_debug (DEBUG_MDI, "START");
 
@@ -494,11 +500,12 @@ void gl_mdi_child_changed_cb (BonoboMDI *mdi, BonoboMDIChild *old_child)
 /* View changed callback.                                                    */
 /*---------------------------------------------------------------------------*/
 static 
-void gl_mdi_view_changed_cb (BonoboMDI *mdi, GtkWidget *old_view)
+void gl_mdi_view_changed_cb (BonoboMDI *mdi,
+			     GtkWidget *old_view)
 {
 	BonoboWindow *win;
-	GtkWidget* status;
-	GtkWidget *active_view;
+	GtkWidget    *status;
+	GtkWidget    *active_view;
 	
 	gl_debug (DEBUG_MDI, "START");
 
@@ -519,8 +526,8 @@ void
 gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 {
 	BonoboWindow      *active_window = NULL;
-	BonoboMDIChild    *active_child = NULL;
-	glView            *view = NULL;
+	BonoboMDIChild    *active_child  = NULL;
+	glView            *view          = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gl_debug (DEBUG_MDI, "START");
@@ -555,9 +562,9 @@ gl_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 static void 
 gl_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 {
-	BonoboWindow* active_window = NULL;
-	BonoboMDIChild* active_child = NULL;
-	glLabel* doc = NULL;
+	BonoboWindow      *active_window = NULL;
+	BonoboMDIChild    *active_child  = NULL;
+	glLabel           *doc           = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gl_debug (DEBUG_MDI, "START");
@@ -584,7 +591,7 @@ static void
 gl_mdi_set_active_window_selection_verbs_sensitivity (BonoboMDI *mdi)
 {
 	BonoboWindow      *active_window = NULL;
-	glView            *view = NULL;
+	glView            *view          = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gl_debug (DEBUG_MDI, "START");

@@ -48,22 +48,24 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gl_mdi_child_class_init 	(glMDIChildClass	*klass);
-static void gl_mdi_child_init	(glMDIChild 		*mdi);
-static void gl_mdi_child_finalize 	(GObject 		*obj);
-static void gl_mdi_child_destroy 	(GtkObject 		*obj);
+static void gl_mdi_child_class_init (glMDIChildClass *klass);
+static void gl_mdi_child_init       (glMDIChild      *mdi);
+static void gl_mdi_child_finalize   (GObject         *obj);
+static void gl_mdi_child_destroy    (GtkObject       *obj);
 
-static void gl_mdi_child_real_state_changed (glMDIChild* child);
+static void       gl_mdi_child_real_state_changed (glMDIChild* child);
 
 static GtkWidget *gl_mdi_child_create_view (BonoboMDIChild *child);
 
-static void gl_mdi_child_document_state_changed_handler (glLabel *label, 
-							   glMDIChild* child);
+static void       gl_mdi_child_document_state_changed_handler (glLabel *label, 
+							       glMDIChild* child);
 
-static void gl_mdi_child_document_can_undo_redo_handler (glLabel *label, 
-						gboolean can, glMDIChild* child);
+static void       gl_mdi_child_document_can_undo_redo_handler (glLabel *label, 
+							       gboolean can,
+							       glMDIChild* child);
 
-static gchar* gl_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data);
+static gchar*     gl_mdi_child_get_config_string (BonoboMDIChild *child,
+						  gpointer data);
 
 static BonoboMDIChildClass *parent_class = NULL;
 static guint mdi_child_signals[LAST_SIGNAL] = { 0 };
