@@ -219,9 +219,6 @@ update_view_text_cb (glLabelObject *object,
 	/* Adjust appearance of analogous canvas item. */
 	draw_hacktext (view_text);
 
-	/* Adjust highlight */
-	gl_view_object_update_highlight (GL_VIEW_OBJECT(view_text));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 

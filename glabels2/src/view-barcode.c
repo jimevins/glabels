@@ -230,9 +230,6 @@ update_view_barcode_cb (glLabelObject *object,
 	/* Adjust appearance of analogous canvas items. */
 	draw_barcode (view_barcode);
 
-	/* Adjust highlight */
-	gl_view_object_update_highlight (GL_VIEW_OBJECT(view_barcode));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 

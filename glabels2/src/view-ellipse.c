@@ -254,9 +254,6 @@ update_view_ellipse_cb (glLabelObject *object,
 			       "fill_color_rgba", fill_color,
 			       NULL);
 
-	/* Adjust highlight */
-	gl_view_object_update_highlight (GL_VIEW_OBJECT(view_ellipse));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 

@@ -253,9 +253,6 @@ update_view_line_cb (glLabelObject *object,
 			       NULL);
 	gnome_canvas_points_free (points);
 
-	/* Adjust highlight */
-	gl_view_object_update_highlight (GL_VIEW_OBJECT(view_line));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 

@@ -248,9 +248,6 @@ update_view_image_cb (glLabelObject *object,
 			       "pixbuf", pixbuf,
 			       NULL);
 
-	/* Adjust highlight */
-	gl_view_object_update_highlight (GL_VIEW_OBJECT(view_image));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 

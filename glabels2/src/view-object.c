@@ -37,7 +37,7 @@ struct _glViewObjectPrivate {
 	glLabelObject              *object;
 
 	GnomeCanvasItem            *group;
-	GnomeCanvasItem            *highlight;
+	glViewHighlight            *highlight;
 
 	gdouble                    affine[6];
 
@@ -151,7 +151,7 @@ gl_view_object_finalize (GObject *object)
 
 	g_object_unref (GL_VIEW_OBJECT(object)->private->object);
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
+	g_object_unref (G_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->menu));
 	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_dialog));
 
@@ -255,7 +255,7 @@ gl_view_object_set_object     (glViewObject         *view_object,
 
 	/* Create appropriate selection highlight canvas item. */
 	view_object->private->highlight =
-		gl_view_highlight_new (view_object, style);
+		GL_VIEW_HIGHLIGHT (gl_view_highlight_new (view_object, style));
 
 	gl_view_raise_fg (view_object->private->view);
 
@@ -377,7 +377,7 @@ gl_view_object_item_new (glViewObject *view_object,
 		 view_object->private->affine[4],
 		 view_object->private->affine[5]);
 
-#if 0
+#if 1
 	gnome_canvas_item_affine_absolute (item, view_object->private->affine);
 #endif
 
@@ -417,22 +417,6 @@ gl_view_object_get_menu (glViewObject *view_object)
 }
 
 /*****************************************************************************/
-/* Update Highlight of object.                                               */
-/*****************************************************************************/
-void
-gl_view_object_update_highlight     (glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
-	g_return_if_fail (view_object->private->highlight);
-	
-	gl_view_highlight_update (view_object->private->highlight);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*****************************************************************************/
 /* Highlight view of object.                                                 */
 /*****************************************************************************/
 void
@@ -443,10 +427,7 @@ gl_view_object_show_highlight     (glViewObject *view_object)
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 	g_return_if_fail (view_object->private->highlight);
 	
-	gnome_canvas_item_show (view_object->private->highlight);
-	gnome_canvas_item_raise_to_top (view_object->private->highlight);
-
-	gl_view_raise_fg (view_object->private->view);
+	gl_view_highlight_show (view_object->private->highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -462,7 +443,7 @@ gl_view_object_hide_highlight   (glViewObject *view_object)
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 	g_return_if_fail (view_object->private->highlight);
 	
-	gnome_canvas_item_hide (view_object->private->highlight);
+	gl_view_highlight_hide (view_object->private->highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -568,9 +549,6 @@ object_moved_cb (glLabelObject *object,
 	/* Adjust location of analogous canvas group. */
 	gnome_canvas_item_move (view_object->private->group, dx, dy);
 
-	/* Adjust location of highlight group */
-	gnome_canvas_item_move (view_object->private->highlight, dx, dy);
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -589,9 +567,7 @@ raise_object_cb (GtkWidget    *widget,
 	gnome_canvas_item_raise_to_top (view_object->private->group);
 
 	/* send highlight to top */
-	gnome_canvas_item_raise_to_top (view_object->private->highlight);
-
-	gl_view_raise_fg (view_object->private->view);
+	gl_view_highlight_show (view_object->private->highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -657,7 +633,7 @@ flip_rotate_object_cb (GtkWidget         *widget,
 				     view_object->private->affine, a);
 	}
 
-#if 0
+#if 1
 	/* Apply newly constructed affine */
 	item_list = GNOME_CANVAS_GROUP(view_object->private->group)->item_list;
 	for ( p=item_list; p != NULL; p=p->next) {
