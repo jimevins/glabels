@@ -25,24 +25,28 @@
 #include <gnome.h>
 #include "merge.h"
 
+G_BEGIN_DECLS
+
 typedef struct {
 	gboolean field_flag;
 	gchar *data;
 } glTextNode;
 
-extern gchar *gl_text_node_expand              (glTextNode * text_node,
-						glMergeRecord * record);
-extern glTextNode *gl_text_node_new_from_text  (gchar * text);
-extern glTextNode *gl_text_node_dup            (glTextNode * text_node);
-extern void gl_text_node_free                  (glTextNode ** text_node);
+gchar      *gl_text_node_expand              (glTextNode     *text_node,
+					      glMergeRecord  *record);
+glTextNode *gl_text_node_new_from_text       (gchar          *text);
+glTextNode *gl_text_node_dup                 (glTextNode     *text_node);
+void        gl_text_node_free                (glTextNode    **text_node);
 
-extern gchar *gl_text_node_lines_expand        (GList * lines,
-						glMergeRecord * record);
-extern GList *gl_text_node_lines_new_from_text (gchar * text);
-extern GList *gl_text_node_lines_dup           (GList *lines);
-extern void   gl_text_node_lines_free          (GList ** lines);
+gchar      *gl_text_node_lines_expand        (GList          *lines,
+					      glMergeRecord  *record);
+GList      *gl_text_node_lines_new_from_text (gchar          *text);
+GList      *gl_text_node_lines_dup           (GList          *lines);
+void        gl_text_node_lines_free          (GList         **lines);
 
 /* debug function */
-extern void gl_text_node_lines_print (GList * lines );
+void        gl_text_node_lines_print         (GList          *lines);
+
+G_END_DECLS
 
 #endif

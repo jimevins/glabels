@@ -27,6 +27,7 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 
+G_BEGIN_DECLS
 
 /*
  *   Template Label Structure
@@ -133,32 +134,34 @@ typedef struct {
 } glTemplateOrigin;
 
 
-extern void                 gl_template_init                (void);
+void                 gl_template_init                (void);
 
-extern GList               *gl_template_get_page_size_list  (void);
-extern void                 gl_template_free_page_size_list (GList **sizes);
+GList               *gl_template_get_page_size_list  (void);
+void                 gl_template_free_page_size_list (GList            **sizes);
 
-extern GList               *gl_template_get_name_list       (const gchar *page_size);
-extern void                 gl_template_free_name_list      (GList **names);
+GList               *gl_template_get_name_list       (const gchar       *page_size);
+void                 gl_template_free_name_list      (GList            **names);
 
-extern glTemplate          *gl_template_from_name           (const gchar *name);
+glTemplate          *gl_template_from_name           (const gchar       *name);
 
-extern glTemplate          *gl_template_dup                 (const glTemplate *orig);
-extern void                 gl_template_free                (glTemplate **template);
+glTemplate          *gl_template_dup                 (const glTemplate  *orig);
+void                 gl_template_free                (glTemplate       **template);
 
-extern glTemplate          *gl_template_xml_parse_sheet     (xmlNodePtr sheet_node);
+glTemplate          *gl_template_xml_parse_sheet     (xmlNodePtr         sheet_node);
 
-extern void                 gl_template_xml_add_sheet       (const glTemplate *template,
-							     xmlNodePtr root,
-							     xmlNsPtr ns);
+void                 gl_template_xml_add_sheet       (const glTemplate  *template,
+						      xmlNodePtr         root,
+						      xmlNsPtr           ns);
 
-extern gchar               *gl_template_get_label_size_desc (const glTemplate *template);
-extern void                 gl_template_get_label_size      (const glTemplate *template,
-							     gdouble *w,
-							     gdouble *h);
+gchar               *gl_template_get_label_size_desc (const glTemplate  *template);
+void                 gl_template_get_label_size      (const glTemplate  *template,
+						      gdouble           *w,
+						      gdouble           *h);
 
-extern gint                 gl_template_get_n_labels        (const glTemplate *template);
-extern glTemplateOrigin    *gl_template_get_origins         (const glTemplate *template);
-extern gchar               *gl_template_get_layout_desc     (const glTemplate *template);
+gint                 gl_template_get_n_labels        (const glTemplate  *template);
+glTemplateOrigin    *gl_template_get_origins         (const glTemplate  *template);
+gchar               *gl_template_get_layout_desc     (const glTemplate  *template);
+
+G_END_DECLS
 
 #endif
