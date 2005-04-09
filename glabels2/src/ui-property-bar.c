@@ -105,7 +105,7 @@ static void     gl_ui_property_bar_construct     (glUIPropertyBar      *property
 
 static void     selection_changed_cb             (glUIPropertyBar      *property_bar);
 
-static void     font_family_changed_cb           (GtkEntry             *entry,
+static void     font_family_changed_cb           (GtkComboBox          *combo,
 						  glUIPropertyBar      *property_bar);
 
 static void     font_size_changed_cb             (GtkSpinButton        *spin,
@@ -251,10 +251,10 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 {
 	GtkWidget  *wcombo;
 	GList      *family_names = NULL;
+	GList      *family_node;
 	GtkObject  *adjust;
 	ColorGroup *cg;
 	GdkPixbuf  *pixbuf;
-	gchar      *good_font_family;
 	GdkColor   *gdk_color;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
@@ -263,31 +263,26 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 	property_bar->ui_component = ui_component;
 
 	/* Font family entry widget */
-	wcombo = gtk_combo_new ();
+	wcombo = gtk_combo_box_new_text ();
 	family_names = gnome_font_family_list ();
-	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), family_names);
-	property_bar->font_family_entry = GTK_COMBO (wcombo)->entry;
-	gtk_combo_set_value_in_list (GTK_COMBO(wcombo), TRUE, TRUE);
-	gtk_entry_set_editable (GTK_ENTRY (property_bar->font_family_entry), FALSE);
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (wcombo), family_names);
+	property_bar->font_family_combo = wcombo;
 	gtk_widget_set_size_request (wcombo, 200, -1);
 
-	/* Make sure we have a valid font family.  if not provide a good default. */
-	if (g_list_find_custom (family_names,
-				gl_prefs->default_font_family,
-				(GCompareFunc)g_utf8_collate)) {
-		good_font_family = g_strdup (gl_prefs->default_font_family);
+	/* Make sure we have a valid font.  if not provide a good default. */
+	family_node = g_list_find_custom (family_names,
+					  gl_prefs->default_font_family,
+					  (GCompareFunc)g_utf8_collate);
+	if (family_node) {
+		gtk_combo_box_set_active (wcombo,
+					  g_list_position (family_names,
+							   family_node));
 	} else {
-		if (family_names != NULL) {
-			good_font_family = g_strdup (family_names->data); /* 1st entry */
-		} else {
-			good_font_family = NULL;
-		}
+		gtk_combo_box_set_active (wcombo, 0);
 	}
-	gtk_entry_set_text (GTK_ENTRY (property_bar->font_family_entry), good_font_family);
-	g_free (good_font_family);
 	gnome_font_family_list_free (family_names);
 
-	g_signal_connect (G_OBJECT (property_bar->font_family_entry),
+	g_signal_connect (G_OBJECT (property_bar->font_family_combo),
 			  "changed", G_CALLBACK (font_family_changed_cb), property_bar);
 
 	gl_ui_util_insert_widget (ui_component, wcombo, "/PropertyToolbar/PropFontName");
@@ -407,13 +402,13 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 /****************************************************************************/
 static void
 reset_to_default_properties (glView *view,
-			glUIPropertyBar *property_bar)
+			     glUIPropertyBar *property_bar)
 {
 	GList     *family_names;
 	gchar     *good_font_family;
 	GdkColor  *gdk_color;
 
-	/* Make sure we have a valid font family.  if not provide a good default. */
+	/* Make sure we have a valid font.  if not provide a good default. */
 	family_names = gnome_font_family_list ();
 	if (g_list_find_custom (family_names,
 				view->default_font_family,
@@ -426,7 +421,8 @@ reset_to_default_properties (glView *view,
 			good_font_family = NULL;
 		}
 	}
-	gtk_entry_set_text (GTK_ENTRY (property_bar->font_family_entry), good_font_family);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->font_family_combo),
+					   good_font_family);
 	g_free (good_font_family);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->font_size_spin),
@@ -591,8 +587,8 @@ update_text_properties (glView *view,
 	if (is_same_font_family && (selection_font_family != NULL)) 
 		gl_debug (DEBUG_PROPERTY_BAR, "same font family = %s", 
 			  selection_font_family);
-	gtk_entry_set_text (GTK_ENTRY (property_bar->font_family_entry),
-			    is_same_font_family?selection_font_family:"");
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->font_family_combo),
+					   is_same_font_family?selection_font_family:"");
 	g_free (selection_font_family);
 
 	if (is_same_font_size) {
@@ -837,7 +833,7 @@ selection_changed_cb (glUIPropertyBar *property_bar)
 /* PRIVATE.  Font family entry changed.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-font_family_changed_cb (GtkEntry        *entry,
+font_family_changed_cb (GtkComboBox     *combo,
 			glUIPropertyBar *property_bar)
 {
 	gchar *font_family;
@@ -851,7 +847,7 @@ font_family_changed_cb (GtkEntry        *entry,
 					 selection_changed_cb,
 					 property_bar);
 
-	font_family = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
 	if ( strlen(font_family) ) {
 		gl_view_set_selection_font_family (property_bar->view,
 						   font_family);

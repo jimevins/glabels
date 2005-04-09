@@ -193,3 +193,75 @@ gl_util_string_to_weight (const gchar *string)
 
 }
 
+void
+gl_util_combo_box_set_strings (GtkComboBox       *combo,
+			       GList             *list)
+{
+	GList *p;
+
+	g_return_if_fail (list);
+
+	for (p=list; p!=NULL; p=p->next) {
+		if (p->data) {
+			gtk_combo_box_append_text (combo, p->data);
+		}
+	}
+}
+
+typedef struct {
+  const gchar *text;
+  GtkTreeIter  iter;
+  gboolean     found;
+} TextSearchData;
+
+static gboolean
+search_text_func (GtkTreeModel *model,
+		  GtkTreePath  *path,
+		  GtkTreeIter  *iter,
+		  gpointer      data)
+{
+  TextSearchData *search_data = (TextSearchData *)data;
+  gchar          *text = NULL;
+
+  gtk_tree_model_get (model, iter, 0, &text, -1);
+
+  if (strcmp (text,search_data->text) == 0) {
+    search_data->found = TRUE;
+    search_data->iter  = *iter;
+  }
+
+  g_free (text);
+  
+  return FALSE;
+}
+
+void
+gl_util_combo_box_set_active_text (GtkComboBox       *combo,
+				   const gchar       *text)
+{
+	GtkTreeModel   *model = gtk_combo_box_get_model(combo);
+
+	g_return_if_fail (GTK_IS_LIST_STORE (model));
+
+	if (!text) {
+
+		gtk_combo_box_set_active (combo, -1);
+
+	} else {
+		TextSearchData  search_data;
+
+		search_data.text        = text;
+		search_data.found       = FALSE;
+
+		gtk_tree_model_foreach (model, search_text_func, &search_data);
+		if (search_data.found) {
+			gtk_combo_box_set_active_iter (combo,
+						       &search_data.iter);
+		} else {
+			gtk_combo_box_set_active (combo, -1);
+		}    
+
+	}
+
+}
+

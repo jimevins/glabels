@@ -51,7 +51,7 @@ struct _glUIPropertyBar {
 
 	glView              *view;
 
-	GtkWidget           *font_family_entry;
+	GtkWidget           *font_family_combo;
 	GtkWidget           *font_size_spin;
 	GtkWidget           *text_color_combo;
 

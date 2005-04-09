@@ -1,3 +1,17 @@
+2005-04-08  Jim Evins <evins@snaught.com>
+
+	* src/util.h:
+	* src/util.c: (gl_util_combo_box_set_strings), (search_text_func),
+	(gl_util_combo_box_set_active_text):
+		Added utility functions to simplify working with GtkComboBox
+		widgets in GTK-2.6.
+	* src/ui-property-bar.h:
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties), (update_text_properties),
+	(font_family_changed_cb):
+		Replaced deprecated GtkCombo with GtkComboBox.
+	
+	
 2005-04-03  Jim Evins <evins@snaught.com>
 
 	* src/Makefile.am:

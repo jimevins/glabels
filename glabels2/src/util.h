@@ -41,6 +41,11 @@ GtkJustification    gl_util_string_to_just        (const gchar       *string);
 const gchar        *gl_util_weight_to_string      (GnomeFontWeight    weight);
 GnomeFontWeight     gl_util_string_to_weight      (const gchar       *string);
 
+void gl_util_combo_box_set_strings     (GtkComboBox       *combo,
+				        GList             *list);
+void gl_util_combo_box_set_active_text (GtkComboBox       *combo,
+					const gchar       *text);
+
 G_END_DECLS
 
 #endif /* __UTIL_H__ */
