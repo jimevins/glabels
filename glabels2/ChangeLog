@@ -1,3 +1,27 @@
+2005-04-10  Jim Evins <evins@snaught.com>
+
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node),
+	(xml_parse_label_rectangle_node), (xml_parse_label_round_node),
+	(xml_parse_label_cd_node), (xml_parse_alias_node):
+	* libglabels/xml.c: (gl_xml_get_prop_double),
+	(gl_xml_get_prop_boolean), (gl_xml_get_prop_int),
+	(gl_xml_get_prop_uint), (gl_xml_get_prop_length):
+	* src/xml-label-04.c: (xml04_parse_media_description),
+	(xml04_parse_text_props), (xml04_parse_barcode_props),
+	(xml04_parse_merge_properties):
+	* src/xml-label-191.c: (xml191_parse_object),
+	(xml191_parse_text_props), (xml191_parse_barcode_props),
+	(xml191_parse_merge_fields), (xml191_parse_pixdata),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_markup),
+	(xml191_parse_alias):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_parse_object_barcode), (xml_parse_merge_fields),
+	(xml_parse_pixdata), (xml_parse_toplevel_span):
+		Make sure to use xmlFree for anything obtained from libxml
+		in case libxml and glib use different memory management
+		space.
+
 2005-04-08  Jim Evins <evins@snaught.com>
 
 	* src/util.h:

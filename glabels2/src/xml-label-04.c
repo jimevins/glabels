@@ -139,7 +139,7 @@ static gboolean
 xml04_parse_media_description (xmlNodePtr node,
 			       glLabel    *label)
 {
-	gchar      *template_name;
+	xmlChar    *template_name;
 	glTemplate *template;
 	gboolean   ret;
 
@@ -160,7 +160,7 @@ xml04_parse_media_description (xmlNodePtr node,
 	gl_label_set_template (label, template);
 
 	gl_template_free (template);
-	g_free (template_name);
+	xmlFree (template_name);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -193,17 +193,17 @@ static void
 xml04_parse_text_props (xmlNodePtr    object_node,
 			glLabelText   *object)
 {
-	gchar            *font_family;
+	xmlChar         *font_family;
 	gdouble          font_size;
 	GnomeFontWeight  font_weight;
 	gboolean         font_italic_flag;
-	glColorNode      *color_node;
+	glColorNode     *color_node;
 	GtkJustification just;
 	xmlNodePtr       line_node, text_node;
-	glTextNode       *node_text;
-	GList            *nodes, *lines;
+	glTextNode      *node_text;
+	GList           *nodes, *lines;
 	gdouble          w, h, x, y;
-	gchar            *string;
+	xmlChar         *string;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -211,12 +211,12 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	font_size = gl_xml_get_prop_double (object_node, "font_size", 0);
 	string = xmlGetProp (object_node, "font_weight");
 	font_weight = gl_util_string_to_weight (string);
-	g_free (string);
+	xmlFree (string);
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, "justify");
 	just = gl_util_string_to_just (string);
-	g_free (string);
+	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
 	color_node->color = gl_xml_get_prop_uint (object_node, "color", 0);
@@ -278,7 +278,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	gl_label_text_set_lines (object, lines);
 
 	gl_text_node_lines_free (&lines);
-	g_free (font_family);
+	xmlFree (font_family);
 
 	/* Adjust location.  In 0.4.x, text was anchored at x,y */
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
@@ -432,13 +432,12 @@ static void
 xml04_parse_barcode_props (xmlNodePtr    node,
 			   glLabelBarcode *object)
 {
-	gchar         *id;
+	xmlChar       *id;
 	gboolean       text_flag;
 	glColorNode   *color_node;
 	gdouble        scale;
 	xmlNodePtr     child;
-	glTextNode     *text_node;
-	gchar          *string;
+	glTextNode    *text_node;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -470,7 +469,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 
 	gl_color_node_free (&color_node);
 	gl_text_node_free (&text_node);
-	g_free (id);
+	xmlFree (id);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -482,19 +481,19 @@ static void
 xml04_parse_merge_properties (xmlNodePtr node,
 			      glLabel    *label)
 {
-	glMerge                *merge;
+	glMerge               *merge;
 	xmlNodePtr             child;
-	gchar                  *string;
+	xmlChar               *string;
 
 	gl_debug (DEBUG_XML, "START");
 
 	string = xmlGetProp (node, "type");
 	merge = gl_merge_new (string);
-	g_free (string);
+	xmlFree (string);
 
 	string = xmlGetProp (node, "src");
 	gl_merge_set_src (merge, string);
-	g_free (string);
+	xmlFree (string);
 
 	gl_label_set_merge (label, merge);
 

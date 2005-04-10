@@ -410,7 +410,7 @@ xml_parse_object_text (xmlNodePtr  node,
 	GObject          *object;
 	gdouble           x, y;
 	gdouble           w, h;
-	gchar            *string;
+	xmlChar          *string;
 	GtkJustification  just;
 	gboolean          auto_shrink;
 	gdouble           affine[6];
@@ -433,7 +433,7 @@ xml_parse_object_text (xmlNodePtr  node,
 	/* justify attr */
 	string = xmlGetProp (node, "justify");
 	just = gl_util_string_to_just (string);
-	g_free (string);
+	xmlFree (string);
 	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), just);
 
 	/* auto_shrink attr */
@@ -732,9 +732,9 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	GObject            *object;
 	gdouble             x, y;
 	gdouble             w, h;
-	gchar              *string;
+	xmlChar            *string;
 	glTextNode         *text_node;
-	gchar              *id;
+	xmlChar            *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	glColorNode        *color_node;
@@ -762,13 +762,14 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	format_digits = gl_xml_get_prop_uint (node, "format", 10);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
 				    id, text_flag, checksum_flag, format_digits);
-	g_free (id);
+	xmlFree (id);
 	
 	color_node = gl_color_node_new_default ();
 	string = xmlGetProp (node, "color_field");
 	if ( string ) {
 		color_node->field_flag = TRUE;
-		color_node->key = string;
+		color_node->key = g_strdup (string);
+		xmlFree (string);
 	} else {
 		color_node->color = gl_xml_get_prop_uint (node, "color", 0);		
 	}
@@ -780,17 +781,19 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	if ( string ) {
 		text_node = g_new0 (glTextNode, 1);
 		text_node->field_flag = FALSE;
-		text_node->data = string;
+		text_node->data = g_strdup (string);
 		gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 		gl_text_node_free (&text_node);
+		xmlFree (string);
 	} else {
 		string = xmlGetProp (node, "field");
 		if ( string ) {
 			text_node = g_new0 (glTextNode, 1);
 			text_node->field_flag = TRUE;
-			text_node->data = string;
+			text_node->data = g_strdup (string);
 			gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 			gl_text_node_free (&text_node);
+			xmlFree (string);
 		} else {
 			g_warning ("Missing Object-barcode data or field attr");
 		}
@@ -816,18 +819,18 @@ xml_parse_merge_fields (xmlNodePtr  node,
 			glLabel    *label)
 {
 	xmlNodePtr  child;
-	gchar      *string;
+	xmlChar    *string;
 	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
 
 	string = xmlGetProp (node, "type");
 	merge = gl_merge_new (string);
-	g_free (string);
+	xmlFree (string);
 
 	string = xmlGetProp (node, "src");
 	gl_merge_set_src (merge, string);
-	g_free (string);
+	xmlFree (string);
 
 	gl_label_set_merge (label, merge);
 
@@ -869,7 +872,7 @@ static void
 xml_parse_pixdata (xmlNodePtr  node,
 		   glLabel    *label)
 {
-	gchar      *name, *base64;
+	xmlChar    *name, *base64;
 	guchar     *stream;
 	guint       stream_length;
 	gboolean    ret;
@@ -893,8 +896,9 @@ xml_parse_pixdata (xmlNodePtr  node,
 		gl_pixbuf_cache_add_pixbuf (pixbuf_cache, name, pixbuf);
 	}
 
-	g_free (name);
-	g_free (base64);
+	xmlFree (name);
+	xmlFree (base64);
+
 	g_free (stream);
 	g_free (pixdata);
 
@@ -908,13 +912,13 @@ static void
 xml_parse_toplevel_span  (xmlNodePtr        node,
 			  glLabelObject    *object)
 {
-	gchar            *font_family;
+	xmlChar          *font_family;
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
 	gboolean          font_italic_flag;
 	glColorNode      *color_node;
 	gdouble           text_line_spacing;
-	gchar            *string;
+	xmlChar          *string;
 	GList            *lines, *text_nodes;
 	xmlNodePtr        child;
 	glTextNode       *text_node;
@@ -924,7 +928,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	/* Font family attr */
 	font_family = xmlGetProp (node, "font_family");
 	gl_label_object_set_font_family (object, font_family);
-	g_free (font_family);
+	xmlFree (font_family);
 
 	/* Font size attr */
 	font_size = gl_xml_get_prop_double (node, "font_size", 0.0);
@@ -933,7 +937,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	/* Font weight attr */
 	string = xmlGetProp (node, "font_weight");
 	font_weight = gl_util_string_to_weight (string);
-	g_free (string);
+	xmlFree (string);
 	gl_label_object_set_font_weight (object, font_weight);
 
 	/* Font italic flag attr */
@@ -945,7 +949,8 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	string = xmlGetProp (node, "color_field");
 	if ( string ) {
 		color_node->field_flag = TRUE;
-		color_node->key = string;
+		color_node->key = g_strdup (string);
+		xmlFree (string);
 	} else {
 		color_node->color = gl_xml_get_prop_uint (node, "color", 0);		
 	}
@@ -963,18 +968,17 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
 		if (xmlNodeIsText (child)) {
-			gchar *data = xmlNodeGetContent (child); 
+			xmlChar *data = xmlNodeGetContent (child); 
 
 			/* Hack: if the first char is LF, it's a xml formatting string */
 			if (data[0] != '\n') { 
 				/* Literal text */
 				text_node = g_new0 (glTextNode, 1);
 				text_node->field_flag = FALSE;
-				text_node->data = data;
+				text_node->data = g_strdup (data);
 				text_nodes = g_list_append (text_nodes, text_node);
 			}
-			else 
-				g_free (data);
+			xmlFree (data);
 
 		} else if (xmlStrEqual (child->name, "Span")) {
 

@@ -183,9 +183,9 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 glTemplate *
 gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 {
-	gchar                 *name;
-	gchar                 *description;
-	gchar                 *page_size;
+	xmlChar               *name;
+	xmlChar               *description;
+	xmlChar               *page_size;
 	gdouble                page_width, page_height;
 	glPaper               *paper = NULL;
 	glTemplate            *template;
@@ -196,11 +196,11 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	description = xmlGetProp (template_node, "_description");
 	if (description != NULL) {
 
-		gchar *tmp = gettext (description);
+		xmlChar *tmp = gettext (description);
 
 		if (tmp != description) {
-			g_free (description);
-			description = g_strdup (tmp);
+			xmlFree (description);
+			description = xmlStrdup (tmp);
 		}
 
 	} else {
@@ -221,8 +221,8 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			g_warning (_("Unknown page size id \"%s\", trying as name"),
 				   page_size);
 			paper = gl_paper_from_name (page_size);
-			g_free (page_size);
-			page_size = g_strdup (paper->id);
+			xmlFree (page_size);
+			page_size = xmlStrdup (paper->id);
 		}
 		if (paper != NULL) {
 			page_width  = paper->width;
@@ -259,6 +259,10 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		}
 	}
 
+	xmlFree (name);
+	xmlFree (description);
+	xmlFree (page_size);
+
 	return template;
 }
 
@@ -269,8 +273,8 @@ static void
 xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 				glTemplate *template)
 {
-	gchar               *id;
-	gchar               *tmp;
+	xmlChar             *id;
+	xmlChar             *tmp;
 	gdouble              x_waste, y_waste;
 	gdouble              w, h, r;
 	glTemplateLabelType *label_type;
@@ -281,7 +285,7 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 	if (tmp = xmlGetProp (label_node, "waste")) {
 		/* Handle single "waste" property. */
 		x_waste = y_waste = gl_xml_get_prop_length (label_node, "waste", 0);
-		g_free (tmp);
+		xmlFree (tmp);
 	} else {
 		x_waste = gl_xml_get_prop_length (label_node, "x_waste", 0);
 		y_waste = gl_xml_get_prop_length (label_node, "y_waste", 0);
@@ -311,6 +315,7 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 		}
 	}
 
+	xmlFree (id);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -320,7 +325,7 @@ static void
 xml_parse_label_round_node (xmlNodePtr  label_node,
 			    glTemplate *template)
 {
-	gchar               *id;
+	xmlChar             *id;
 	gdouble              waste;
 	gdouble              r;
 	glTemplateLabelType *label_type;
@@ -350,6 +355,7 @@ xml_parse_label_round_node (xmlNodePtr  label_node,
 		}
 	}
 
+	xmlFree (id);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -359,7 +365,7 @@ static void
 xml_parse_label_cd_node (xmlNodePtr  label_node,
 			 glTemplate *template)
 {
-	gchar               *id;
+	xmlChar             *id;
 	gdouble              waste;
 	gdouble              r1, r2, w, h;
 	glTemplateLabelType *label_type;
@@ -392,6 +398,7 @@ xml_parse_label_cd_node (xmlNodePtr  label_node,
 		}
 	}
 
+	xmlFree (id);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -518,13 +525,13 @@ static void
 xml_parse_alias_node (xmlNodePtr  alias_node,
 		      glTemplate *template)
 {
-	gchar       *name;
+	xmlChar       *name;
 
 	name = xmlGetProp (alias_node, "name");
 
 	gl_template_add_alias (template, name);
 
-	g_free (name);
+	xmlFree (name);
 }
 
 /**

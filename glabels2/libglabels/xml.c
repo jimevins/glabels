@@ -90,12 +90,12 @@ gl_xml_get_prop_double (xmlNodePtr   node,
 			gdouble      default_val)
 {
 	gdouble  val;
-	gchar   *string;
+	xmlChar *string;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
 		val = g_strtod (string, NULL);
-		g_free (string);
+		xmlFree (string);
 		return val;
 	}
 
@@ -120,13 +120,13 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
 			 gboolean     default_val)
 {
 	gboolean  val;
-	gchar    *string;
+	xmlChar  *string;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
 		val = !((xmlStrcasecmp (string, "false") == 0) ||
 			xmlStrEqual (string, "0"));;
-		g_free (string);
+		xmlFree (string);
 		return val;
 	}
 
@@ -151,12 +151,12 @@ gl_xml_get_prop_int (xmlNodePtr   node,
 		     gint         default_val)
 {
 	gint     val;
-	gchar   *string;
+	xmlChar *string;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
 		val = strtol (string, NULL, 0);
-		g_free (string);
+		xmlFree (string);
 		return val;
 	}
 
@@ -181,12 +181,12 @@ gl_xml_get_prop_uint (xmlNodePtr   node,
 		      guint        default_val)
 {
 	guint    val;
-	gchar   *string;
+	xmlChar *string;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
 		val = strtoul (string, NULL, 0);
-		g_free (string);
+		xmlFree (string);
 		return val;
 	}
 
@@ -216,13 +216,14 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 			gdouble      default_val)
 {
 	gdouble  val;
-	gchar   *string, *unit;
+	xmlChar *string;
+	xmlChar *unit;
 	gint     i;
 
 	string = xmlGetProp (node, property);
 	if ( string != NULL ) {
 
-		val = g_strtod (string, &unit);
+		val = g_strtod (string, (gchar **)&unit);
 
 		if (unit != string) {
 			unit = g_strchug (unit);
@@ -244,7 +245,7 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 			val = 0.0;
 		}
 
-		g_free (string);
+		xmlFree (string);
 		return val;
 	}
 

@@ -212,7 +212,7 @@ xml191_parse_object (xmlNodePtr  object_node,
 {
 	glLabelObject *object;
 	gdouble        x, y;
-	gchar         *string;
+	xmlChar       *string;
 	gdouble        affine[6];
 
 	gl_debug (DEBUG_XML, "START");
@@ -233,10 +233,10 @@ xml191_parse_object (xmlNodePtr  object_node,
 		object = xml191_parse_barcode_props (object_node, label);
 	} else {
 		g_warning ("Unknown label object type \"%s\"", string);
-		g_free (string);
+		xmlFree (string);
 		return;
 	}
-	g_free (string);
+	xmlFree (string);
 
 
 	x = gl_xml_get_prop_length (object_node, "x", 0.0);
@@ -268,7 +268,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 	GObject          *object;
 	GList            *lines;
 	gdouble           w, h;
-	gchar            *font_family;
+	xmlChar          *font_family;
 	gdouble           font_size;
 	GnomeFontWeight   font_weight;
 	gboolean          font_italic_flag;
@@ -277,7 +277,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 	xmlNodePtr        line_node, text_node;
 	glTextNode       *node_text;
 	GList            *nodes;
-	gchar            *string;
+	xmlChar          *string;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -292,13 +292,13 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 
 	string = xmlGetProp (object_node, "font_weight");
 	font_weight = gl_util_string_to_weight (string);
-	g_free (string);
+	xmlFree (string);
 
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, "justify");
 	just = gl_util_string_to_just (string);
-	g_free (string);
+	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
 	color_node->color = gl_xml_get_prop_uint (object_node, "color", 0);
@@ -352,7 +352,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 
 	gl_color_node_free (&color_node);
 	gl_text_node_lines_free (&lines);
-	g_free (font_family);
+	xmlFree (font_family);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -526,9 +526,8 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 	GObject            *object;
 	xmlNodePtr          child;
 	gdouble             w, h;
-	gchar              *string;
 	glTextNode         *text_node;
-	gchar              *id;
+	xmlChar            *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
 	glColorNode        *color_node;
@@ -570,7 +569,7 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 
 	gl_color_node_free (&color_node);	
 	gl_text_node_free (&text_node);
-	g_free (id);
+	xmlFree (id);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -585,18 +584,18 @@ xml191_parse_merge_fields (xmlNodePtr  node,
 			   glLabel    *label)
 {
 	xmlNodePtr  child;
-	gchar      *string;
+	xmlChar    *string;
 	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
 
 	string = xmlGetProp (node, "type");
 	merge = gl_merge_new (string);
-	g_free (string);
+	xmlFree (string);
 
 	string = xmlGetProp (node, "src");
 	gl_merge_set_src (merge, string);
-	g_free (string);
+	xmlFree (string);
 
 	gl_label_set_merge (label, merge);
 
@@ -638,7 +637,7 @@ static void
 xml191_parse_pixdata (xmlNodePtr  node,
 		      glLabel    *label)
 {
-	gchar      *name, *base64;
+	xmlChar    *name, *base64;
 	guchar     *stream;
 	guint       stream_length;
 	gboolean    ret;
@@ -662,8 +661,9 @@ xml191_parse_pixdata (xmlNodePtr  node,
 		gl_pixbuf_cache_add_pixbuf (pixbuf_cache, name, pixbuf);
 	}
 
-	g_free (name);
-	g_free (base64);
+	xmlFree (name);
+	xmlFree (base64);
+
 	g_free (stream);
 	g_free (pixdata);
 
@@ -676,7 +676,7 @@ xml191_parse_pixdata (xmlNodePtr  node,
 static glTemplate *
 xml191_parse_sheet (xmlNodePtr sheet_node)
 {
-	gchar                 *name, *description, *page_size;
+	xmlChar               *name, *description, *page_size;
 	gdouble                page_width, page_height;
 	glTemplate            *template;
 	xmlNodePtr             node;
@@ -716,7 +716,7 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 	description = xmlGetProp (sheet_node, "_description");
 	if (description != NULL) {
 
-		gchar *tmp = gettext (description);
+		xmlChar *tmp = gettext (description);
 
 		if (tmp == description) {
 			template->description = description;
@@ -745,9 +745,9 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 		}
 	}
 
-	g_free (name);
-	g_free (description);
-	g_free (page_size);
+	xmlFree (name);
+	xmlFree (description);
+	xmlFree (page_size);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 
@@ -761,7 +761,7 @@ static void
 xml191_parse_label (xmlNodePtr  label_node,
 		    glTemplate *template)
 {
-	gchar                *style;
+	xmlChar              *style;
 	glTemplateLabelShape  shape;
 	gdouble               w, h, r, r1, r2;
 	glTemplateLabelType  *label_type;
@@ -780,7 +780,7 @@ xml191_parse_label (xmlNodePtr  label_node,
 		shape = GL_TEMPLATE_SHAPE_RECT;
 		g_warning ("Unknown label style in template");
 	}
-	g_free (style);
+	xmlFree (style);
 
 	switch (shape) {
 
@@ -870,7 +870,7 @@ static void
 xml191_parse_markup (xmlNodePtr  markup_node,
 		     glTemplateLabelType *label_type)
 {
-	gchar      *type;
+	xmlChar    *type;
 	gdouble     size;
 	gdouble     x1, y1, x2, y2;
 	xmlNodePtr  node;
@@ -895,7 +895,7 @@ xml191_parse_markup (xmlNodePtr  markup_node,
 		gl_template_add_markup (label_type,
 					gl_template_markup_line_new (x1, y1, x2, y2));
 	}
-	g_free (type);
+	xmlFree (type);
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -914,13 +914,13 @@ static void
 xml191_parse_alias (xmlNodePtr  alias_node,
 		    glTemplate *template)
 {
-	gchar       *name;
+	xmlChar    *name;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	name = xmlGetProp (alias_node, "name");
 	gl_template_add_alias (template, name);
-	g_free (name);
+	xmlFree (name);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }

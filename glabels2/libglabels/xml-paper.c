@@ -149,7 +149,7 @@ glPaper *
 gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {
 	glPaper               *paper;
-	gchar                 *id, *name;
+	xmlChar               *id, *name;
 	gdouble                width, height;
 
 	LIBXML_TEST_VERSION;
@@ -159,11 +159,11 @@ gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 	name = xmlGetProp (paper_node, "_name");
 	if (name != NULL) {
 
-		gchar *tmp = gettext (name);
+		xmlChar *tmp = gettext (name);
 
 		if (tmp != name) {
-			g_free (name);
-			name = g_strdup (tmp);
+			xmlFree (name);
+			name = xmlStrdup (tmp);
 		}
 
 	} else {
@@ -175,8 +175,8 @@ gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 
 	paper = gl_paper_new (id, name, width, height);
 
-	g_free (id);
-	g_free (name);
+	xmlFree (id);
+	xmlFree (name);
 
 	return paper;
 }
