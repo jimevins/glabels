@@ -1,3 +1,32 @@
+2005-04-16  Jim Evins  <evins@snaught.com>
+
+	* data/glade/Makefile.am:
+	* data/glade/merge-properties-dialog.glade:
+		Added merge properties dialog glade description file.
+	* src/merge-properties-dialog.h:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_get_type),
+	(gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_finalize),
+	(gl_merge_properties_dialog_new),
+	(gl_merge_properties_dialog_construct), (type_changed_cb),
+	(src_changed_cb), (response_cb), (load_tree),
+	(record_select_toggled_cb), (select_all_button_clicked_cb),
+	(unselect_all_button_clicked_cb):
+		Modified merge properties dialog to use libglade.  Added
+		"select all" and "unselect all" buttons.
+	* src/merge-text.c: (parse_line):
+		Handle empty lines better.
+	* src/merge.c: (gl_merge_eval_key):
+		Evaluate the key whether the record is selected or not.
+	* src/util.h:
+	* src/util.c: (gl_util_combo_box_add_text_model):
+		Since libglade does not use the gtk_combo_box_new_text()
+		constructor for GtkComboBoxes, a utility function was created
+		to add an appropriate text model to a GtkComboBox.
+	* src/view.c: (gl_view_edit_merge_props):
+		Removed unnecessary "show all's".
+
 2005-04-15  Jim Evins  <evins@snaught.com>
 
 	* po/ru.po:

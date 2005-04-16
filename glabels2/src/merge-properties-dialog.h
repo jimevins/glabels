@@ -22,8 +22,7 @@
 #ifndef __MERGE_PROPERTIES_DIALOG_H__
 #define __MERGE_PROPERTIES_DIALOG_H__
 
-#include <gtk/gtk.h>
-#include "hig.h"
+#include <gtk/gtkdialog.h>
 #include "view.h"
 
 G_BEGIN_DECLS
@@ -43,15 +42,15 @@ typedef struct _glMergePropertiesDialogPrivate  glMergePropertiesDialogPrivate;
 
 struct _glMergePropertiesDialog
 {
-	glHigDialog                     parent_instance;
+	GtkDialog                       parent_instance;
 
-	glMergePropertiesDialogPrivate *private;
+	glMergePropertiesDialogPrivate *priv;
 
 };
 
 struct  _glMergePropertiesDialogClass
 {
-	glHigDialogClass                parent_class;
+	GtkDialogClass                  parent_class;
 };
 
 GType      gl_merge_properties_dialog_get_type    (void) G_GNUC_CONST;

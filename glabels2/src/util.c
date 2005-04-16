@@ -22,13 +22,12 @@
 
 #include <config.h>
 
+#include "util.h"
+
 #include <string.h>
 #include <glib.h>
-#include <libgnome/gnome-util.h>
 #include <math.h>
 #include <libgnomeprint/gnome-font.h>
-
-#include "util.h"
 
 #define FRAC_EPSILON 0.00005
 
@@ -193,6 +192,9 @@ gl_util_string_to_weight (const gchar *string)
 
 }
 
+/****************************************************************************/
+/* Convienience function to set strings in a text combo_box from a GList    */
+/****************************************************************************/
 void
 gl_util_combo_box_set_strings (GtkComboBox       *combo,
 			       GList             *list)
@@ -207,6 +209,10 @@ gl_util_combo_box_set_strings (GtkComboBox       *combo,
 		}
 	}
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  gl_util_combo_box_set_active_text support.                      */
+/*---------------------------------------------------------------------------*/
 
 typedef struct {
   const gchar *text;
@@ -235,6 +241,9 @@ search_text_func (GtkTreeModel *model,
   return FALSE;
 }
 
+/****************************************************************************/
+/* Convienience function to set active text in a text combo_box from text   */
+/****************************************************************************/
 void
 gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 				   const gchar       *text)
@@ -263,5 +272,27 @@ gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 
 	}
 
+}
+
+/****************************************************************************/
+/* Convienience function to add a simple text model to an existing          */
+/* combo_box.  This is needed since combo_boxes created with glade do not   */
+/* use the gtk_combo_box_new_text() constructor.                            */
+/****************************************************************************/
+void
+gl_util_combo_box_add_text_model (GtkComboBox       *combo)
+{
+	GtkCellRenderer *cell;
+	GtkListStore *store;
+
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
+	g_object_unref (store);
+
+	cell = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), cell, TRUE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), cell,
+					"text", 0,
+					NULL);
 }
 

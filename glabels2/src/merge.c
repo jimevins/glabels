@@ -21,11 +21,11 @@
  */
 #include <config.h>
 
+#include "merge.h"
+
 #include <glib/gi18n.h>
 #include <gobject/gvaluecollector.h>
 #include <string.h>
-
-#include "merge.h"
 
 #include "debug.h"
 
@@ -697,7 +697,7 @@ gl_merge_eval_key (glMergeRecord *record,
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	if ( (record != NULL) && record->select_flag  ) {
+	if ( (record != NULL) ) {
 		for (p = record->field_list; p != NULL; p = p->next) {
 			field = (glMergeField *) p->data;
 

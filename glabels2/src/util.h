@@ -45,6 +45,7 @@ void gl_util_combo_box_set_strings     (GtkComboBox       *combo,
 				        GList             *list);
 void gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 					const gchar       *text);
+void gl_util_combo_box_add_text_model  (GtkComboBox       *combo);
 
 G_END_DECLS
 

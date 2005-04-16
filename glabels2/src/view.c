@@ -3291,13 +3291,12 @@ gl_view_edit_merge_props (glView *view)
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	if (view->merge_props_dialog != NULL) {
-		gtk_widget_show_all (view->merge_props_dialog);
 		gtk_window_present (GTK_WINDOW(view->merge_props_dialog));
 		return;
 	}
 
 	view->merge_props_dialog = gl_merge_properties_dialog_new (view);
-	gtk_widget_show_all (view->merge_props_dialog);
+	gtk_window_present (GTK_WINDOW (view->merge_props_dialog));
 
 	g_signal_connect (G_OBJECT(view->merge_props_dialog), "destroy",
 			  G_CALLBACK (gtk_widget_destroyed),

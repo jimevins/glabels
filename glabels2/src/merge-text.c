@@ -22,9 +22,9 @@
 
 #include <config.h>
 
-#include <stdio.h>
-
 #include "merge-text.h"
+
+#include <stdio.h>
 
 #include "debug.h"
 
@@ -413,6 +413,11 @@ parse_line (FILE  *fp,
 				state = NORMAL;
 				break;
 			case '\n':
+				/* treat as one empty field. */
+				list = g_list_append (list,
+						      g_strdup (""));
+				state = DONE;
+				break;
 			case EOF:
 				state = DONE;
 				break;
