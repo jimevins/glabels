@@ -346,6 +346,16 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Ryman Standard CD/DVD Labels.                                       -->
+  <!-- =================================================================== -->
+  <Template name="Ryman Standard CD/DVD" size="A4" _description="CD/DVD Labels">
+    <Label-cd id="0" radius="165.827pt" hole="58.1102pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="131.811pt" y0="60.6614pt" dx="245.622pt" dy="388.346pt"/>
+    </Label-cd>
+  </Template>
+
 
 
   <!-- ******************************************************************** -->

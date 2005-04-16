@@ -299,6 +299,28 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 5388 family: Index Cards, 5'' x 3'', 3 per sheet              -->
+  <!-- =================================================================== -->
+  <Template name="Avery  5388" size="US-Letter" description="Index Cards">
+    <Label-rectangle id="0" width="5in" height="3in" round="0pt" waste="0pt">
+      <Layout nx="1" ny="3" x0="1.75in" y0="1in" dx="5in" dy="3in"/>
+      <Markup-margin size="0.125in"/>
+    </Label-rectangle>
+    <Alias name="Avery  5386"/>
+    <Alias name="Avery  8388"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5389 family: Post Cards, 6'' x 4'', 2 per sheet               -->
+  <!-- =================================================================== -->
+  <Template name="Avery  5389" size="US-Letter" description="Post cards">
+    <Label-rectangle id="0" width="6in" height="4in" round="0pt" waste="0pt">
+      <Layout nx="1" ny="2" x0="1.25in" y0="1.25in" dx="6in" dy="4.5in"/>
+      <Markup-margin size="0.125in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     x -->
   <!-- =================================================================== -->
   <Template name="Avery  8373" size="US-Letter" _description="Business Cards">

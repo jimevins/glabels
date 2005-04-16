@@ -1,3 +1,12 @@
+2005-04-15  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		Added Avery 5388 and 5389 templates provided by Peter L. Berghold.
+	* data/templates/misc-iso-templates.xml:
+		Added Ryman standard CD/DVD template, provided by Dan Clark.
+	* AUTHORS:
+		Added acknowledgements for above.
+	
 2005-04-10  Jim Evins <evins@snaught.com>
 
 	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
