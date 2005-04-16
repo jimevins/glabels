@@ -372,6 +372,28 @@
     </Label-rectangle>
   </Template>
 
+
+
+  <!-- ******************************************************************** -->
+  <!-- Tamplates for A4 and A3 media, size 50 x 90 mm                       -->
+  <!-- ******************************************************************** -->
+  
+  <Template name="Russian A3 5x9" size="A3" description="Business Cards">
+    <Label-rectangle id="0" width="90mm" height="50mm" round="0">
+      <Layout nx="3" ny="8" x0="14mm" y0="10mm" dx="90mm" dy="50mm"/>
+      <Markup-margin size="5pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template name="Russian A4 5x9" size="A4" description="Business Cards">
+    <Label-rectangle id="0" width="50mm" height="90mm" round="0">
+      <Layout nx="4" ny="3" x0="5mm" y0="13mm" dx="50mm" dy="90mm"/>
+      <Markup-margin size="5pt"/>
+    </Label-rectangle>
+  </Template>
+
+
+
 </Glabels-templates>
 
 

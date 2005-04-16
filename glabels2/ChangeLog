@@ -1,5 +1,14 @@
 2005-04-15  Jim Evins  <evins@snaught.com>
 
+	* po/ru.po:
+		Updated russian translation (Vitaly Lipatov)
+	* data/templates/misc-iso-templates.xml:
+		Added templates for russian business cards provided by Vitaly Lipatov.
+	* AUTHORS:
+		Updated acknowledgements for above.
+
+2005-04-15  Jim Evins  <evins@snaught.com>
+
 	* data/templates/avery-us-templates.xml:
 		Added Avery 5388 and 5389 templates provided by Peter L. Berghold.
 	* data/templates/misc-iso-templates.xml:
