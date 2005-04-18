@@ -30,10 +30,10 @@
  */
 #include <config.h>
 
-#include <glib.h>
-#include <string.h>
-
 #include "base64.h"
+
+#include <glib/gmem.h>
+#include <string.h>
 
 /*========================================================*/
 /* Private macros and constants.                          */

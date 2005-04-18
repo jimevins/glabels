@@ -22,8 +22,6 @@
 #ifndef __VIEW_HIGHLIGHT_H__
 #define __VIEW_HIGHLIGHT_H__
 
-#include <gnome.h>
-
 typedef enum {
 	GL_VIEW_HIGHLIGHT_BOX_RESIZABLE,
 	GL_VIEW_HIGHLIGHT_ELLIPSE_RESIZABLE,

@@ -24,14 +24,16 @@
  */
 #include <config.h>
 
+#include "xml-paper.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmessages.h>
 #include <string.h>
 #include <libintl.h>
 
 #include "libglabels-private.h"
 
 #include "xml.h"
-#include "xml-paper.h"
 
 /*===========================================*/
 /* Private types                             */

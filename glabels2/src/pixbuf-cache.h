@@ -22,7 +22,8 @@
 #ifndef __PIXBUF_CACHE_H__
 #define __PIXBUF_CACHE_H__
 
-#include <glib.h>
+#include <glib/gmem.h>
+#include <glib/ghash.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS

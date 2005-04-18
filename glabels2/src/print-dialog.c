@@ -21,16 +21,18 @@
  */
 #include <config.h>
 
+#include "print-dialog.h"
+
 #include <glib/gi18n.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <gtk/gtk.h>
+#include <gtk/gtkdialog.h>
+#include <gtk/gtknotebook.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprint/gnome-print-job.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 
-#include "print-dialog.h"
 #include "print.h"
 #include "label.h"
 

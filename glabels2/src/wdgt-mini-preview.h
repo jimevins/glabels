@@ -23,7 +23,8 @@
 #ifndef __WDGT_MINI_PREVIEW_H__
 #define __WDGT_MINI_PREVIEW_H__
 
-#include <gnome.h>
+#include <gtk/gtkhbox.h>
+#include <libgnomecanvas/gnome-canvas.h>
 #include "label.h"
 
 G_BEGIN_DECLS

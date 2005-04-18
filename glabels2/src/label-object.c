@@ -21,10 +21,13 @@
  */
 #include <config.h>
 
-#include <glib.h>
+#include "label-object.h"
+
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
 #include <libart_lgpl/libart.h>
 
-#include "label-object.h"
 #include "marshal.h"
 
 #include "debug.h"

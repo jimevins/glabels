@@ -21,8 +21,8 @@
  */
 #include <config.h>
 
-
 #include "recent.h"
+
 #include "prefs.h"
 
 #include "debug.h"

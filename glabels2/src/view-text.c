@@ -21,11 +21,13 @@
  */
 #include <config.h>
 
-#include <glib.h>
+#include "view-text.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmem.h>
+#include <gtk/gtkmenu.h>
 #include <libgnomeprint/gnome-glyphlist.h>
 
-#include "view-text.h"
 #include "canvas-hacktext.h"
 #include "view-highlight.h"
 

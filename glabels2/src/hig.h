@@ -23,7 +23,9 @@
 #ifndef __HIG_H__
 #define __HIG_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkmessagedialog.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 

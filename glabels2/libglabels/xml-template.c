@@ -24,7 +24,10 @@
  */
 #include <config.h>
 
+#include "xml-template.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmessages.h>
 #include <string.h>
 #include <libintl.h>
 
@@ -32,7 +35,6 @@
 
 #include "paper.h"
 #include "xml.h"
-#include "xml-template.h"
 
 /*===========================================*/
 /* Private types                             */

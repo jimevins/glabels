@@ -26,7 +26,8 @@
 #ifndef __XML_PAPER_H__
 #define __XML_PAPER_H__
 
-#include <glib.h>
+#include <glib/gtypes.h>
+#include <glib/glist.h>
 #include <libxml/tree.h>
 
 #include "paper.h"

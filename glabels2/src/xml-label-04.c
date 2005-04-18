@@ -22,11 +22,10 @@
 
 #include <config.h>
 
-#include <gnome.h>
+#include "xml-label-04.h"
 
 #include <glib/gi18n.h>
 
-#include "xml-label-04.h"
 #include "label-text.h"
 #include "label-box.h"
 #include "label-line.h"

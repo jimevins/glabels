@@ -22,10 +22,11 @@
 
 #include <config.h>
 
+#include "ui-sidebar.h"
+
 #include <glib/gi18n.h>
 #include <libgnomeprint/gnome-font.h>
 
-#include "ui-sidebar.h"
 #include "ui-util.h"
 #include "object-editor.h"
 #include "stock.h"

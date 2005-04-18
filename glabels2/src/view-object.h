@@ -24,7 +24,6 @@
 #define __VIEW_OBJECT_H__
 
 #include <glib-object.h>
-#include <gnome.h>
 #include "label-object.h"
 
 #define GL_TYPE_VIEW_OBJECT              (gl_view_object_get_type ())

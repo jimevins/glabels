@@ -27,6 +27,8 @@
 #ifndef __BASE64_H__
 #define __BASE64_H__
 
+#include <glib/gtypes.h>
+
 G_BEGIN_DECLS
 
 gchar  *gl_base64_encode (const guchar *in,

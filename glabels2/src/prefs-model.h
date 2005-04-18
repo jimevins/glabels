@@ -23,7 +23,7 @@
 #define __PREFS_MODEL_H__
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
+#include <gtk/gtkenums.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeprint/gnome-font.h>
 #include <libglabels/enums.h>

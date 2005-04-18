@@ -21,12 +21,17 @@
  */
 #include <config.h>
 
-#include <glib/gi18n.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
-#include <glade/glade-xml.h>
-
 #include "prefs-dialog.h"
+
+#include <glib/gi18n.h>
+#include <libgnomeprint/gnome-font.h>
+#include <glade/glade-xml.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkstock.h>
+#include <gtk/gtkcombo.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtkspinbutton.h>
+
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"

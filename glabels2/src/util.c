@@ -28,6 +28,9 @@
 #include <glib.h>
 #include <math.h>
 #include <libgnomeprint/gnome-font.h>
+#include <gtk/gtkliststore.h>
+#include <gtk/gtkcellrenderertext.h>
+#include <gtk/gtkcelllayout.h>
 
 #define FRAC_EPSILON 0.00005
 

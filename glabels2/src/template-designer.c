@@ -21,13 +21,20 @@
  */
 #include <config.h>
 
+#include "template-designer.h"
+
 #include <glib/gi18n.h>
 #include <math.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 #include <glade/glade-xml.h>
+#include <libgnome/gnome-program.h>
+#include <libgnomeui/gnome-druid.h>
+#include <libgnomeui/gnome-druid-page-edge.h>
+#include <libgnomeui/gnome-druid-page-standard.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkcombo.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtkspinbutton.h>
 
-#include "template-designer.h"
 #include "prefs.h"
 #include <libglabels/paper.h>
 #include <libglabels/template.h>

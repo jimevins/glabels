@@ -22,10 +22,14 @@
 
 #include <config.h>
 
+#include "wdgt-rotate-label.h"
+
 #include <glib/gi18n.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkcheckbutton.h>
+#include <libgnomecanvas/gnome-canvas-util.h>
 #include <math.h>
 
-#include "wdgt-rotate-label.h"
 #include "hig.h"
 #include "marshal.h"
 #include "color.h"

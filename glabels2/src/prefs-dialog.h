@@ -23,7 +23,7 @@
 #ifndef __PREFS_DIALOG_H__
 #define __PREFS_DIALOG_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkwindow.h>
 #include "hig.h"
 
 G_BEGIN_DECLS

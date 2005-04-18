@@ -23,7 +23,8 @@
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkenums.h>
+#include <gtk/gtkcombobox.h>
 #include <libgnomeprint/gnome-font.h>
 
 G_BEGIN_DECLS

@@ -23,7 +23,6 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include <gtk/gtk.h>
 #include <bonobo/bonobo-window.h>
 #include <bonobo/bonobo-ui-component.h>
 

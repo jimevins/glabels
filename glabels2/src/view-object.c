@@ -23,6 +23,7 @@
 #include <glib.h>
 
 #include "view-object.h"
+
 #include "libart_lgpl/libart.h"
 
 #include "debug.h"

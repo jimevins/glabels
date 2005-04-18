@@ -21,11 +21,17 @@
  */
 #include <config.h>
 
+#include "object-editor.h"
+
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtknotebook.h>
+#include <gtk/gtkcombo.h>
+#include <gtk/gtktogglebutton.h>
+
 #include <math.h>
 
-#include "object-editor.h"
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"

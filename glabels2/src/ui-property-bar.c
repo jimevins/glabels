@@ -22,10 +22,13 @@
 
 #include <config.h>
 
+#include "ui-property-bar.h"
+
 #include <glib/gi18n.h>
+#include <gtk/gtkcombobox.h>
+#include <gtk/gtkspinbutton.h>
 #include <libgnomeprint/gnome-font.h>
 
-#include "ui-property-bar.h"
 #include "ui-util.h"
 #include "mygal/widget-color-combo.h"
 #include "stock-pixmaps/stockpixbufs.h"
@@ -274,11 +277,11 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar,
 					  gl_prefs->default_font_family,
 					  (GCompareFunc)g_utf8_collate);
 	if (family_node) {
-		gtk_combo_box_set_active (wcombo,
+		gtk_combo_box_set_active (GTK_COMBO_BOX (wcombo),
 					  g_list_position (family_names,
 							   family_node));
 	} else {
-		gtk_combo_box_set_active (wcombo, 0);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (wcombo), 0);
 	}
 	gnome_font_family_list_free (family_names);
 

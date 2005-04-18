@@ -27,6 +27,11 @@
 #include <glade/glade-xml.h>
 #include <gtk/gtkfilechooserbutton.h>
 #include <gtk/gtkcombobox.h>
+#include <gtk/gtkstock.h>
+#include <gtk/gtktreestore.h>
+#include <gtk/gtkcellrenderertoggle.h>
+#include <gtk/gtkcellrenderertext.h>
+#include <gtk/gtklabel.h>
 
 #include "view.h"
 #include "merge.h"

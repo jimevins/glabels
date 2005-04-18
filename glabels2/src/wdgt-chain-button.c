@@ -25,9 +25,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
-
 #include "wdgt-chain-button.h"
+
+#include <gtk/gtkdrawingarea.h>
+#include <gtk/gtkimage.h>
+#include <gtk/gtkbutton.h>
+
 #include "stock.h"
 
 

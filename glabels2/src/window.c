@@ -22,10 +22,13 @@
 
 #include <config.h>
 
+#include "window.h"
+
 #include <glib/gi18n.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtkframe.h>
 
 #include "ui.h"
-#include "window.h"
 #include "util.h"
 #include "xml-label.h"
 #include "prefs.h"

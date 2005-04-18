@@ -22,13 +22,15 @@
 #ifndef __OBJECT_EDITOR_H__
 #define __OBJECT_EDITOR_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkenums.h>
+#include <libgnomeprint/gnome-font.h>
+#include <gtk/gtktextbuffer.h>
+
 #include "text-node.h"
 #include "merge.h"
 #include "bc.h"
 #include "color.h"
-#include <gtk/gtkenums.h>
-#include <libgnomeprint/gnome-font.h>
 
 G_BEGIN_DECLS
 

@@ -21,10 +21,13 @@
  */
 #include <config.h>
 
-#include <gnome.h>
+#include "object-editor.h"
+
+#include <glib/gi18n.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkeditable.h>
 #include <math.h>
 
-#include "object-editor.h"
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"

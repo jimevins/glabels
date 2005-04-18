@@ -24,7 +24,7 @@
 #define __FILE_H__
 
 #include "recent-files/egg-recent-view.h"
-#include <gtk/gtk.h>
+#include <gtk/gtkwindow.h>
 
 #include "label.h"
 #include "window.h"

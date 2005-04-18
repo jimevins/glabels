@@ -21,14 +21,16 @@
  */
 #include <config.h>
 
-#include <glib.h>
+#include "view-barcode.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmem.h>
+#include <glib/glist.h>
+#include <gtk/gtkmenu.h>
 #include <libgnomeprint/gnome-glyphlist.h>
 
-#include "view-barcode.h"
 #include "canvas-hacktext.h"
 #include "view-highlight.h"
-
 #include "color.h"
 #include "object-editor.h"
 #include "stock.h"

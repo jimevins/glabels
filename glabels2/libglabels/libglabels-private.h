@@ -26,6 +26,9 @@
 #ifndef __LIBGLABELS_PRIVATE_H__
 #define __LIBGLABELS_PRIVATE_H__
 
+#include <glib/gutils.h>
+#include <glib/gfileutils.h>
+
 /* Data system and user data directories.  (must free w/ g_free()) */
 #define GL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
 #define GL_USER_DATA_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)

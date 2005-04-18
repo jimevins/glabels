@@ -30,6 +30,10 @@
 
 #include "debug.h"
 
+#include <glib/gutils.h>
+#include <glib/gmessages.h>
+#include <glib/gstrfuncs.h>
+
 glDebugSection debug_flags = GLABELS_DEBUG_NONE;
 
 /****************************************************************************/

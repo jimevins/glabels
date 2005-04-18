@@ -21,11 +21,12 @@
  */
 #include <config.h>
 
+#include "prefs-model.h"
+
+#include <libglabels/paper.h>
 
 #include "marshal.h"
-#include "prefs-model.h"
 #include "util.h"
-#include <libglabels/paper.h>
 #include "color.h"
 
 #include "debug.h"

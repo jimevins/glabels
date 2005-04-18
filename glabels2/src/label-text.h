@@ -24,6 +24,7 @@
 #define __LABEL_TEXT_H__
 
 #include <gtk/gtkenums.h>
+#include <gtk/gtktextbuffer.h>
 #include <libgnomeprint/gnome-font.h>
 #include "text-node.h"
 #include "label-object.h"

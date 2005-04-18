@@ -22,10 +22,10 @@
 
 #include <config.h>
 
+#include "label.h"
+
 #include <glib/gi18n.h>
 
-#include "label.h"
-#include "label-object.h"
 #include "marshal.h"
 #include "util.h"
 

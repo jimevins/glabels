@@ -23,7 +23,6 @@
 #ifndef __WDGT_ROTATE_LABEL_H__
 #define __WDGT_ROTATE_LABEL_H__
 
-#include <gnome.h>
 #include "hig.h"
 #include <libglabels/template.h>
 

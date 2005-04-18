@@ -26,7 +26,7 @@
 #include "label-object.h"
 #include "text-node.h"
 #include "merge.h"
-#include "gdk-pixbuf/gdk-pixbuf.h"
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
 

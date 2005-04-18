@@ -23,6 +23,12 @@
 #ifndef __SPLASH_H__
 #define __SPLASH_H__
 
+#include <glib/gmacros.h>
+
+G_BEGIN_DECLS
+
 void gl_splash (void);
+
+G_END_DECLS
 
 #endif

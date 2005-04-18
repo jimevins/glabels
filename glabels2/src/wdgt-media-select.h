@@ -23,7 +23,6 @@
 #ifndef __WDGT_MEDIA_SELECT_H__
 #define __WDGT_MEDIA_SELECT_H__
 
-#include <gnome.h>
 #include "hig.h"
 
 G_BEGIN_DECLS

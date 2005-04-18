@@ -22,7 +22,7 @@
 #ifndef __OBJECT_EDITOR_PRIVATE_H__
 #define __OBJECT_EDITOR_PRIVATE_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkwidget.h>
 #include <glade/glade-xml.h>
 
 G_BEGIN_DECLS

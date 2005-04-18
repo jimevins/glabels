@@ -21,12 +21,12 @@
  */
 #include <config.h>
 
-#include <glib.h>
-#include <glib/gi18n.h>
-
 #include "view-ellipse.h"
-#include "view-highlight.h"
 
+#include <glib/gi18n.h>
+#include <glib/gmem.h>
+
+#include "view-highlight.h"
 #include "color.h"
 #include "object-editor.h"
 #include "stock.h"

@@ -26,7 +26,8 @@
 #ifndef __TEMPLATE_H__
 #define __TEMPLATE_H__
 
-#include <glib.h>
+#include <glib/gtypes.h>
+#include <glib/glist.h>
 
 G_BEGIN_DECLS
 

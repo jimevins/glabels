@@ -22,7 +22,8 @@
 #ifndef __BC_H__
 #define __BC_H__
 
-#include <glib.h>
+#include <glib/gtypes.h>
+#include <glib/glist.h>
 
 G_BEGIN_DECLS
 

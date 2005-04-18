@@ -28,11 +28,14 @@
 
 #include <config.h>
 
+#include "bc-gnubarcode.h"
+
 #include <ctype.h>
 #include <string.h>
+#include <glib/gstring.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
 
-#include "bc.h"
-#include "bc-gnubarcode.h"
 #include "barcode.h"
 
 #include "debug.h"

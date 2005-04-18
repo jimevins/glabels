@@ -20,9 +20,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#include <glib.h>
-
 #include "label-line.h"
+
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
 
 #include "debug.h"
 

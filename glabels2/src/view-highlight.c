@@ -22,9 +22,9 @@
 
 #include <config.h>
 
-#include <math.h>
-
 #include "view-highlight.h"
+
+#include <math.h>
 
 #include "debug.h"
 

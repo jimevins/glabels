@@ -21,11 +21,15 @@
  */
 #include <config.h>
 
-#include <gnome.h>
-#include <math.h>
-#include <gtk/gtkimage.h>
-
 #include "object-editor.h"
+
+#include <glib/gi18n.h>
+#include <gtk/gtkimage.h>
+#include <gtk/gtkfilechooserbutton.h>
+#include <gtk/gtkeditable.h>
+#include <gtk/gtktogglebutton.h>
+#include <math.h>
+
 #include "prefs.h"
 
 #include "object-editor-private.h"

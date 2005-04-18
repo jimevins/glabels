@@ -24,13 +24,17 @@
  */
 #include <config.h>
 
+#include "template.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gdir.h>
+#include <glib/gmessages.h>
 #include <string.h>
 
 #include "libglabels-private.h"
-
 #include "xml.h"
-#include "template.h"
 #include "xml-template.h"
 #include "paper.h"
 

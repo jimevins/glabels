@@ -21,9 +21,9 @@
  */
 #include <config.h>
 
-#include <glib/gi18n.h>
+#include "prefs.h"
 
-#include "prefs-model.h"
+#include <glib/gi18n.h>
 
 #include "debug.h"
 

@@ -22,11 +22,15 @@
 
 #include <config.h>
 
+#include "file.h"
+
 #include <glib/gi18n.h>
+#include <gtk/gtkdialog.h>
+#include <gtk/gtkfilechooserdialog.h>
+#include <gtk/gtkstock.h>
 #include <string.h>
 
 #include "xml-label.h"
-#include "file.h"
 #include "recent.h"
 #include "hig.h"
 #include "util.h"

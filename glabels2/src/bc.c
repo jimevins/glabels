@@ -21,9 +21,13 @@
  */
 #include <config.h>
 
-#include <glib/gi18n.h>
-
 #include "bc.h"
+
+#include <glib/gi18n.h>
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
+
 #include "bc-postnet.h"
 #include "bc-gnubarcode.h"
 

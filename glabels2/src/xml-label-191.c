@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#include <gnome.h>
+#include "xml-label-191.h"
 
 #include <glib/gi18n.h>
 #include <libxml/tree.h>
@@ -39,7 +39,6 @@
 #include "label-barcode.h"
 #include "base64.h"
 #include "xml-label.h"
-#include "xml-label-04.h"
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include <libglabels/xml-template.h>

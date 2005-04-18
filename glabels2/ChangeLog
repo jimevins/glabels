@@ -1,3 +1,111 @@
+2005-04-17  Jim Evins  <evins@snaught.com>
+
+	* libglabels/libglabels-private.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-paper.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* libglabels/xml.h:
+	* src/base64.c:
+	* src/base64.h:
+	* src/bc-gnubarcode.c:
+	* src/bc-postnet.c:
+	* src/bc.c:
+	* src/bc.h:
+	* src/commands.c:
+	* src/debug.c:
+	* src/debug.h:
+	* src/file.c:
+	* src/file.h:
+	* src/hig.c:
+	* src/hig.h:
+	* src/label-barcode.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/label-image.c:
+	* src/label-image.h:
+	* src/label-line.c:
+	* src/label-object.c:
+	* src/label-text.c:
+	* src/label-text.h:
+	* src/label.c:
+	* src/merge-properties-dialog.c:
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-size-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/object-editor.h:
+	* src/pixbuf-cache.h:
+	* src/prefs-dialog.c:
+	* src/prefs-dialog.h:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print.c:
+	* src/print.h:
+	* src/recent.c:
+	* src/recent.h:
+	* src/splash.c:
+	* src/splash.h:
+	* src/stock.h:
+	* src/template-designer.c:
+	* src/template-designer.h:
+	* src/text-node.h:
+	* src/tools.c:
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct):
+	* src/ui-sidebar.c:
+	* src/ui-util.c:
+	* src/ui.c:
+	* src/util.c:
+	* src/util.h:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-highlight.c:
+	* src/view-highlight.h:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/view.h:
+	* src/wdgt-chain-button.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-media-select.h:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.c:
+	* src/wdgt-rotate-label.h:
+	* src/window.c:
+	* src/window.h:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Cleanup of header files:
+		- all header files are now stand-alone, verified by including
+		  first in corresponding "c" files
+		- replaced blanket includes of gnome, gtk, and glib with
+		  targetted includes
+	
 2005-04-16  Jim Evins  <evins@snaught.com>
 
 	* data/glade/Makefile.am:

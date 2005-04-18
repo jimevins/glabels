@@ -21,13 +21,14 @@
  */
 #include <config.h>
 
+#include "print.h"
+
 #include <glib/gi18n.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <gtk/gtk.h>
+#include <gtk/gtkenums.h>
 
-#include "print.h"
 #include "label.h"
 #include "label-text.h"
 #include "label-box.h"

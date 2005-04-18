@@ -23,7 +23,8 @@
 #ifndef __VIEW_H__
 #define __VIEW_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkenums.h>
 #include <libgnomecanvas/libgnomecanvas.h>
 #include <libgnomeprint/gnome-font.h>
 

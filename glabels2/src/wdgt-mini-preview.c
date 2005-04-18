@@ -22,9 +22,11 @@
 
 #include <config.h>
 
+#include "wdgt-mini-preview.h"
+
+#include <libgnomecanvas/gnome-canvas-util.h>
 #include <math.h>
 
-#include "wdgt-mini-preview.h"
 #include "marshal.h"
 #include "color.h"
 

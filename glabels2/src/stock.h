@@ -23,6 +23,10 @@
 #ifndef __STOCK_H__
 #define __STOCK_H__
 
+#include <glib/gmacros.h>
+
+G_BEGIN_DECLS
+
 /* Stock names */
 
 #define GL_STOCK_ARROW         "gl_stock_arrow"
@@ -56,5 +60,7 @@
 #define GL_STOCK_VCHAIN_BROKEN "gl_stock_vchain_broken"
 
 void gl_stock_init (void);
+
+G_END_DECLS
 
 #endif

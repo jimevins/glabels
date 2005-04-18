@@ -22,7 +22,8 @@
 #ifndef __TEXT_NODE_H__
 #define __TEXT_NODE_H__
 
-#include <gnome.h>
+#include <glib/gtypes.h>
+#include <glib/glist.h>
 #include "merge.h"
 
 G_BEGIN_DECLS

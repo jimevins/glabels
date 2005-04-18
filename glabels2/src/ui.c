@@ -21,11 +21,12 @@
  */
 #include <config.h>
 
+#include "ui.h"
+
 #include "recent-files/egg-recent-view.h"
 #include "recent-files/egg-recent-view-bonobo.h"
 #include <gconf/gconf-client.h>
 
-#include "ui.h"
 #include "ui-util.h"
 #include "commands.h"
 #include "tools.h"

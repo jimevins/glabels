@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include "tools.h"
+
 #include "window.h"
 
 /*===========================================*/

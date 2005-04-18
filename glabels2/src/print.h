@@ -22,7 +22,6 @@
 #ifndef __PRINT_H__
 #define __PRINT_H__
 
-#include <gnome.h>
 #include <libgnomeprint/gnome-print-job.h>
 
 #include "label.h"

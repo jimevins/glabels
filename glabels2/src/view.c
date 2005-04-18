@@ -22,13 +22,19 @@
 
 #include <config.h>
 
+#include "view.h"
+
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtkselection.h>
 #include <gtk/gtkinvisible.h>
+#include <gtk/gtkmenu.h>
+#include <gtk/gtkimagemenuitem.h>
+#include <gtk/gtkstock.h>
+#include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <math.h>
 
-#include "view.h"
 #include "view-object.h"
 #include "view-box.h"
 #include "view-ellipse.h"

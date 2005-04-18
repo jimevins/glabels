@@ -22,7 +22,6 @@
 #ifndef __PRINT_DIALOG_H__
 #define __PRINT_DIALOG_H__
 
-#include <gtk/gtk.h>
 #include <bonobo/bonobo-window.h>
 #include "hig.h"
 #include "view.h"

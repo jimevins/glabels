@@ -24,11 +24,14 @@
  */
 #include <config.h>
 
+#include "xml.h"
+
 #include <glib/gi18n.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
 
 #include "libglabels-private.h"
 
-#include "xml.h"
 
 /*========================================================*/
 /* Private macros and constants.                          */

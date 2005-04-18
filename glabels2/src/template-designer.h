@@ -23,7 +23,7 @@
 #ifndef __TEMPLATE_DESIGNER_H__
 #define __TEMPLATE_DESIGNER_H__
 
-#include <gtk/gtk.h>
+#include <gtk/gtkwindow.h>
 
 G_BEGIN_DECLS
 

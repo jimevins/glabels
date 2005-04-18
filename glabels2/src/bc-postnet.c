@@ -27,10 +27,12 @@
 
 #include <config.h>
 
-#include <ctype.h>
-
-#include "bc.h"
 #include "bc-postnet.h"
+
+#include <ctype.h>
+#include <glib/gstring.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
 
 #include "debug.h"
 

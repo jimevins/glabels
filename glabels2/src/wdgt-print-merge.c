@@ -22,9 +22,15 @@
 
 #include <config.h>
 
-#include <glib/gi18n.h>
-
 #include "wdgt-print-merge.h"
+
+#include <glib/gi18n.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkspinbutton.h>
+#include <gtk/gtkcheckbutton.h>
+#include <gtk/gtklabel.h>
+
+
 #include "wdgt-mini-preview.h"
 #include "marshal.h"
 

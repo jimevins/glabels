@@ -24,12 +24,17 @@
  */
 #include <config.h>
 
+#include "paper.h"
+
 #include <glib/gi18n.h>
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gdir.h>
+#include <glib/gmessages.h>
 #include <string.h>
 
 #include "libglabels-private.h"
 
-#include "paper.h"
 #include "xml-paper.h"
 
 /*===========================================*/

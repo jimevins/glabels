@@ -22,9 +22,14 @@
 
 #include <config.h>
 
-#include <glib/gi18n.h>
-
 #include "wdgt-media-select.h"
+
+#include <glib/gi18n.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtkcombo.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtksizegroup.h>
+
 #include "hig.h"
 #include "wdgt-mini-preview.h"
 #include "prefs.h"

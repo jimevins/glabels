@@ -23,7 +23,6 @@
 #ifndef __WDGT_PRINT_COPIES_H__
 #define __WDGT_PRINT_COPIES_H__
 
-#include <gnome.h>
 #include "label.h"
 #include "hig.h"
 

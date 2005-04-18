@@ -20,12 +20,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#include <glib.h>
-#include <libgnomeprint/gnome-glyphlist.h>
-
 #include "label-text.h"
 
-#include "pixmaps/checkerboard.xpm"
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
+#include <libgnomeprint/gnome-glyphlist.h>
 
 #include "debug.h"
 

@@ -23,7 +23,6 @@
 #ifndef __WDGT_PRINT_MERGE_H__
 #define __WDGT_PRINT_MERGE_H__
 
-#include <gnome.h>
 #include "label.h"
 #include "hig.h"
 

@@ -22,12 +22,14 @@
 
 #include <config.h>
 
+#include "commands.h"
+
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <gtk/gtkwindow.h>
+#include <gtk/gtkaboutdialog.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-url.h>
 
-#include "commands.h"
 #include "view.h"
 #include "file.h"
 #include "template-designer.h"

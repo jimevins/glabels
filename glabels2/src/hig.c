@@ -22,9 +22,14 @@
 
 #include <config.h>
 
-#include <glib.h>
-
 #include "hig.h"
+
+#include <glib/gmem.h>
+#include <glib/gstrfuncs.h>
+#include <glib/gmessages.h>
+#include <gtk/gtkstock.h>
+#include <gtk/gtkimage.h>
+#include <gtk/gtklabel.h>
 
 /*========================================================*/
 /* Private macros and constants.                          */

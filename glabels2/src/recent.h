@@ -24,11 +24,14 @@
 
 #include "recent-files/egg-recent-model.h"
 
+G_BEGIN_DECLS
 
 gchar * 		gl_recent_get_filename (EggRecentItem *item);
 void			gl_recent_add_uri (gchar *uri);
 EggRecentModel * 	gl_recent_get_model (void);
 void               	gl_recent_init (void);
+
+G_END_DECLS
 
 #endif /*__RECENT_H__*/
 

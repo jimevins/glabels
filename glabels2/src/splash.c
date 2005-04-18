@@ -20,12 +20,17 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-#include "config.h"
-
-#include <gtk/gtk.h>
-#include <libgnome/libgnome.h>
+#include <config.h>
 
 #include "splash.h"
+
+#include <gtk/gtkwindow.h>
+#include <gtk/gtkframe.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkhbox.h>
+#include <gtk/gtkimage.h>
+#include <gtk/gtklabel.h>
+#include <libgnome/gnome-util.h>
 
 #define SPLASH_PIXMAP gnome_program_locate_file (NULL,\
 						 GNOME_FILE_DOMAIN_APP_PIXMAP,\
