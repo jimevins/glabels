@@ -1,3 +1,9 @@
+2005-04-18  Jim Evins  <evins@snaught.com>
+
+	* src/stock.c:
+		Neglected to save this one in previous checkin to support
+		header cleanup.
+	
 2005-04-17  Jim Evins  <evins@snaught.com>
 
 	* libglabels/libglabels-private.h:
