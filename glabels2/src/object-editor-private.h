@@ -75,7 +75,6 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *fill_page_vbox;
 	GtkWidget  *fill_color_combo;
 	GtkWidget  *fill_key_combo;
-	GtkWidget  *fill_key_entry;
 	GtkWidget  *fill_key_radio;
 	GtkWidget  *fill_color_radio;
 
@@ -85,17 +84,14 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *line_color_combo;
 	GtkWidget  *line_key_radio;
 	GtkWidget  *line_key_combo;
-	GtkWidget  *line_key_entry;
 
 	GtkWidget  *img_page_vbox;
 	GtkWidget  *img_file_radio;
 	GtkWidget  *img_key_radio;
 	GtkWidget  *img_file_button;
 	GtkWidget  *img_key_combo;
-	GtkWidget  *img_key_entry;
 
 	GtkWidget  *text_page_vbox;
-	GtkWidget  *text_family_entry;
 	GtkWidget  *text_family_combo;
 	GtkWidget  *text_size_spin;
 	GtkWidget  *text_bold_toggle;
@@ -104,7 +100,6 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_color_combo;
 	GtkWidget  *text_color_key_radio;
 	GtkWidget  *text_color_key_combo;
-	GtkWidget  *text_color_key_entry;
 	GtkWidget  *text_left_toggle;
 	GtkWidget  *text_center_toggle;
 	GtkWidget  *text_right_toggle;
@@ -114,12 +109,10 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *edit_page_vbox;
 	GtkWidget  *edit_text_view;
 	GtkWidget  *edit_key_label;
-	GtkWidget  *edit_key_entry;
 	GtkWidget  *edit_key_combo;
 	GtkWidget  *edit_insert_field_button;
 
 	GtkWidget  *bc_page_vbox;
-	GtkWidget  *bc_style_entry;
 	GtkWidget  *bc_style_combo;
 	GtkWidget  *bc_text_check;
 	GtkWidget  *bc_cs_check;
@@ -127,13 +120,11 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *bc_color_combo;
 	GtkWidget  *bc_key_radio;
 	GtkWidget  *bc_key_combo;
-	GtkWidget  *bc_key_entry;
 
 	GtkWidget  *data_page_vbox;
 	GtkWidget  *data_literal_radio;
 	GtkWidget  *data_key_radio;
 	GtkWidget  *data_text_entry;
-	GtkWidget  *data_key_entry;
 	GtkWidget  *data_key_combo;
 	GtkWidget  *data_format_label;
 	GtkWidget  *data_ex_label;

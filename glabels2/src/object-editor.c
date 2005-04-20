@@ -27,7 +27,7 @@
 #include <glade/glade-xml.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtknotebook.h>
-#include <gtk/gtkcombo.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtktogglebutton.h>
 
 #include <math.h>
@@ -489,37 +489,37 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 
 		combo = editor->priv->img_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->edit_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->data_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->fill_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->text_color_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->line_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->bc_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
                 gl_merge_free_key_list (&keys);
@@ -529,37 +529,37 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 
 		combo = editor->priv->img_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->edit_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->data_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->fill_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->text_color_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 
 		combo = editor->priv->line_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
 		combo = editor->priv->bc_key_combo;
 		if (combo) {
-			gtk_combo_set_popdown_strings (GTK_COMBO (combo), keys);
+			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 		}
 		
                 g_list_free (keys);

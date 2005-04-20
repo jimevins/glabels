@@ -25,7 +25,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtktogglebutton.h>
-#include <gtk/gtkeditable.h>
+#include <gtk/gtkcombobox.h>
 #include <math.h>
 
 #include "prefs.h"
@@ -72,14 +72,14 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 							       "fill_color_combo");
 	editor->priv->fill_key_combo = glade_xml_get_widget (editor->priv->gui,
 							       	"fill_key_combo");	
-	editor->priv->fill_key_entry = glade_xml_get_widget (editor->priv->gui,
-							       	"fill_key_entry");	
 	editor->priv->fill_key_radio = glade_xml_get_widget (editor->priv->gui,
 							       	"fill_key_radio");	
 	editor->priv->fill_color_radio = glade_xml_get_widget (editor->priv->gui,
 							       	"fill_color_radio");	
 
 	
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
+
 	/* Modify widgets based on configuration */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio), TRUE);
 	gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
@@ -96,7 +96,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 				  "color_changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
-	g_signal_connect_swapped (G_OBJECT (editor->priv->fill_key_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->fill_key_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -120,14 +120,13 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 				 glColorNode         *color_node)
 {
 	GdkColor *gdk_color;
-	gint pos;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->fill_color_combo),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->fill_key_entry),
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->fill_key_combo),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
 
@@ -158,20 +157,14 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->fill_key_combo, TRUE);
 		
-		gtk_editable_delete_text (GTK_EDITABLE (editor->priv->fill_key_entry), 0, -1);
-		pos = 0;
-		if (color_node->key != NULL ) {
-			gtk_editable_insert_text (GTK_EDITABLE (editor->priv->fill_key_entry),
-									color_node->key,
-									strlen (color_node->key),
-									&pos);
-		}
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo),
+						   color_node->key);
 	}
 	
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->fill_color_combo),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->fill_key_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->fill_key_combo),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
 
@@ -195,7 +188,7 @@ gl_object_editor_get_fill_color (glObjectEditor      *editor)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->fill_key_radio))) {
 		color_node->field_flag = TRUE;
 		color_node->key = 
-			gtk_editable_get_chars (GTK_EDITABLE (editor->priv->fill_key_entry), 0, -1);
+			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo));
     } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

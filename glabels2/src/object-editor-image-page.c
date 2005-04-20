@@ -26,7 +26,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtkimage.h>
 #include <gtk/gtkfilechooserbutton.h>
-#include <gtk/gtkeditable.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtktogglebutton.h>
 #include <math.h>
 
@@ -84,8 +84,8 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 							       "img_file_button");
 	editor->priv->img_key_combo    = glade_xml_get_widget (editor->priv->gui,
 							       "img_key_combo");
-	editor->priv->img_key_entry    = glade_xml_get_widget (editor->priv->gui,
-							       "img_key_entry");
+
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->img_key_combo));
 
 	/* Modify file button properties. */
 	add_image_filters_to_chooser (GTK_FILE_CHOOSER (editor->priv->img_file_button));
@@ -103,7 +103,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 				  "selection-changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
-	g_signal_connect_swapped (G_OBJECT (editor->priv->img_key_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->img_key_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -149,14 +149,12 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 			    gboolean             merge_flag,
 			    glTextNode          *text_node)
 {
-        gint pos;
- 
         gl_debug (DEBUG_EDITOR, "START");
  
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_button),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_entry),
+	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_combo),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
 
@@ -183,18 +181,14 @@ gl_object_editor_set_image (glObjectEditor      *editor,
                 gtk_widget_set_sensitive (editor->priv->img_file_button, FALSE);
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, TRUE);
                                                                                 
-                gtk_editable_delete_text (GTK_EDITABLE (editor->priv->img_key_entry), 0, -1);
-                pos = 0;
-                gtk_editable_insert_text (GTK_EDITABLE (editor->priv->img_key_entry),
-                                          text_node->data,
-                                          strlen (text_node->data),
-                                          &pos);
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo),
+						   text_node->data);
         }
                                                                                 
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_button),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_combo),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
                                                                                 
@@ -220,8 +214,7 @@ gl_object_editor_get_image (glObjectEditor      *editor)
         } else {
                 text_node->field_flag = TRUE;
                 text_node->data =
-                    gtk_editable_get_chars (GTK_EDITABLE (editor->priv->img_key_entry),
-                                            0, -1);
+			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo));
         }
  
 	gl_debug (DEBUG_EDITOR, "text_node: field_flag=%d, data=%s",

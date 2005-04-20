@@ -26,9 +26,8 @@
 #include <glib/gi18n.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkspinbutton.h>
-#include <gtk/gtkcombo.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtktogglebutton.h>
-#include <gtk/gtkeditable.h>
 #include <math.h>
 
 #include "prefs.h"
@@ -72,8 +71,6 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	/* Extract widgets from XML tree. */
 	editor->priv->bc_page_vbox =
 		glade_xml_get_widget (editor->priv->gui, "bc_page_vbox");
-	editor->priv->bc_style_entry =
-		glade_xml_get_widget (editor->priv->gui, "bc_style_entry");
 	editor->priv->bc_style_combo =
 		glade_xml_get_widget (editor->priv->gui, "bc_style_combo");
 	editor->priv->bc_text_check =
@@ -84,8 +81,6 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "bc_color_combo");
 	editor->priv->bc_key_combo = 
 		glade_xml_get_widget (editor->priv->gui, "bc_key_combo");	
-	editor->priv->bc_key_entry = 
-		glade_xml_get_widget (editor->priv->gui, "bc_key_entry");	
 	editor->priv->bc_key_radio = 
 		glade_xml_get_widget (editor->priv->gui, "bc_key_radio");	
 	editor->priv->bc_color_radio = 
@@ -101,9 +96,13 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 
 	editor->priv->data_format_fixed_flag = FALSE;
 
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));
+
 	/* Load barcode styles */
 	styles = gl_barcode_get_styles_list ();
-	gtk_combo_set_popdown_strings (GTK_COMBO(editor->priv->bc_style_combo), styles);
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo),
+				       styles);
 	gl_barcode_free_styles_list (styles);
 
 	/* Modify widgets */
@@ -115,7 +114,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gtk_widget_show_all (editor->priv->bc_page_vbox);
 
 	/* Connect signals */
-	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_style_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_style_combo),
 				  "changed",
 				  G_CALLBACK (style_changed_cb),
 				  G_OBJECT (editor));
@@ -131,7 +130,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 				  "color_changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
-	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_key_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->bc_key_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -163,7 +162,7 @@ style_changed_cb (glObjectEditor       *editor)
 	guint           digits;
                                                                                 
         style_string =
-                gtk_editable_get_chars (GTK_EDITABLE(editor->priv->bc_style_entry), 0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
                                                                                 
         /* Don't emit if entry is empty. */
         if ( *style_string != 0 ) {
@@ -223,12 +222,11 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 			       guint                format_digits)
 {
 	const gchar *style_string;
-        gint         pos;
 	gchar       *ex_string;
  
 	gl_debug (DEBUG_EDITOR, "START");
 
-        g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_style_entry),
+        g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_style_combo),
                                          G_CALLBACK (style_changed_cb),
                                          editor);
         g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_text_check),
@@ -243,14 +241,8 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 
         style_string = gl_barcode_id_to_name (id);
  
-        gtk_editable_delete_text (GTK_EDITABLE (editor->priv->bc_style_entry),
-                                  0, -1);
- 
-        pos = 0;
-        gtk_editable_insert_text (GTK_EDITABLE (editor->priv->bc_style_entry),
-                                  style_string,
-                                  strlen (style_string),
-                                  &pos);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo),
+					   style_string);
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check),
                                       text_flag);
@@ -290,7 +282,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 					  !editor->priv->data_format_fixed_flag);
 	}
  
-        g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_style_entry),
+        g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_style_combo),
 					   G_CALLBACK (style_changed_cb),
 					   editor);
         g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_text_check),
@@ -321,8 +313,7 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "START");
                                                                                 
         style_string =
-                gtk_editable_get_chars (GTK_EDITABLE(editor->priv->bc_style_entry),
-                                        0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
         *id = g_strdup (gl_barcode_name_to_id (style_string));
                                                                                 
         *text_flag =
@@ -349,14 +340,13 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 			       glColorNode         *color_node)
 {
 	GdkColor *gdk_color;
-	gint pos;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_color_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_key_entry),
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_key_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
 
@@ -386,20 +376,14 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
 		
-		gtk_editable_delete_text (GTK_EDITABLE (editor->priv->bc_key_entry), 0, -1);
-		pos = 0;
-		if (color_node->key != NULL ) {
-			gtk_editable_insert_text (GTK_EDITABLE (editor->priv->bc_key_entry),
-									color_node->key,
-									strlen (color_node->key),
-									&pos);
-		}
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo),
+						   color_node->key);
 	}	
 	
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_color_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_key_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_key_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
 	
@@ -424,7 +408,7 @@ gl_object_editor_get_bc_color (glObjectEditor      *editor)
 		color_node->field_flag = TRUE;
 		color_node->color = gl_prefs->default_line_color;
 		color_node->key = 
-			gtk_editable_get_chars (GTK_EDITABLE (editor->priv->bc_key_entry), 0, -1);
+			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo));
 	} else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

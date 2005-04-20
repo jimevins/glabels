@@ -25,6 +25,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtkeditable.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtktogglebutton.h>
 #include <math.h>
 
@@ -75,8 +76,8 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 								 "data_text_entry");
 	editor->priv->data_key_combo     = glade_xml_get_widget (editor->priv->gui,
 								 "data_key_combo");
-	editor->priv->data_key_entry     = glade_xml_get_widget (editor->priv->gui,
-								 "data_key_entry");
+
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->data_key_combo));
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->data_page_vbox);
@@ -86,7 +87,7 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
-	g_signal_connect_swapped (G_OBJECT (editor->priv->data_key_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->data_key_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -149,7 +150,7 @@ gl_object_editor_set_data (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_text_entry),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_key_entry),
+	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_key_combo),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
 
@@ -189,19 +190,16 @@ gl_object_editor_set_data (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->data_digits_spin,
 					  !editor->priv->data_format_fixed_flag);
                                                                                 
-                gtk_editable_delete_text (GTK_EDITABLE (editor->priv->data_key_entry), 0, -1);
-                pos = 0;
-                gtk_editable_insert_text (GTK_EDITABLE (editor->priv->data_key_entry),
-                                          text_node->data,
-                                          strlen (text_node->data),
-                                          &pos);
+
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo),
+						   text_node->data);
         }
                                                                                 
 
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_text_entry),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_key_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_key_combo),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
 
@@ -228,8 +226,7 @@ gl_object_editor_get_data (glObjectEditor      *editor)
         } else {
                 text_node->field_flag = TRUE;
                 text_node->data =
-                    gtk_editable_get_chars (GTK_EDITABLE (editor->priv->data_key_entry),
-                                            0, -1);
+			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo));
         }
  
 	gl_debug (DEBUG_EDITOR, "text_node: field_flag=%d, data=%s",

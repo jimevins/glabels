@@ -26,8 +26,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkspinbutton.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkeditable.h>
+#include <gtk/gtkcombobox.h>
 #include <math.h>
 
 #include "prefs.h"
@@ -72,8 +71,6 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	/* Extract widgets from XML tree. */
 	editor->priv->text_page_vbox =
 		glade_xml_get_widget (editor->priv->gui, "text_page_vbox");
-	editor->priv->text_family_entry =
-		glade_xml_get_widget (editor->priv->gui, "text_family_entry");
 	editor->priv->text_family_combo =
 		glade_xml_get_widget (editor->priv->gui, "text_family_combo");
 	editor->priv->text_size_spin =
@@ -90,8 +87,6 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "text_color_key_radio");
 	editor->priv->text_color_key_combo =
 		glade_xml_get_widget (editor->priv->gui, "text_color_key_combo");
-	editor->priv->text_color_key_entry =
-		glade_xml_get_widget (editor->priv->gui, "text_color_key_entry");
 	editor->priv->text_left_toggle =
 		glade_xml_get_widget (editor->priv->gui, "text_left_toggle");
 	editor->priv->text_center_toggle =
@@ -103,9 +98,12 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	editor->priv->text_auto_shrink_check =
 		glade_xml_get_widget (editor->priv->gui, "text_auto_shrink_check");
 
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_family_combo));
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
+
 	/* Load family names */
 	family_names = gnome_font_family_list ();
-	gtk_combo_set_popdown_strings (GTK_COMBO(editor->priv->text_family_combo),
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->text_family_combo),
 				       family_names);
 	gnome_font_family_list_free (family_names);
 
@@ -118,7 +116,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gtk_widget_show_all (editor->priv->text_page_vbox);
 
 	/* Connect signals */
-	g_signal_connect_swapped (G_OBJECT (editor->priv->text_family_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->text_family_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -138,7 +136,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 				  "color_changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
-	g_signal_connect_swapped (G_OBJECT (editor->priv->text_color_key_entry),
+	g_signal_connect_swapped (G_OBJECT (editor->priv->text_color_key_combo),
 				  "changed",
 				  G_CALLBACK (gl_object_editor_changed_cb),
 				  G_OBJECT (editor));
@@ -229,7 +227,7 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_family_entry),
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_family_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
 
@@ -245,10 +243,10 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
                 }
         }
         gnome_font_family_list_free (family_names);
-        gtk_entry_set_text (GTK_ENTRY (editor->priv->text_family_entry), good_font_family);
+        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo), good_font_family);
         g_free (good_font_family);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_family_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_family_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
 
@@ -265,9 +263,7 @@ gl_object_editor_get_font_family (glObjectEditor      *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	font_family =
-		gtk_editable_get_chars (GTK_EDITABLE (editor->priv->text_family_entry),
-					0, -1);
+	font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo));
 
 	gl_debug (DEBUG_EDITOR, "END");
 
@@ -488,7 +484,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_color_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_color_key_entry),
+	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->text_color_key_combo),
 					 gl_object_editor_changed_cb,
 					 editor);
 
@@ -520,22 +516,15 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, TRUE);
 		
-		gtk_editable_delete_text (GTK_EDITABLE (editor->priv->text_color_key_entry), 0, -1);
-		pos = 0;
 		gl_debug (DEBUG_EDITOR, "color field true 1");
-		if (text_color_node->key != NULL ) {
-			gtk_editable_insert_text (GTK_EDITABLE (editor->priv->text_color_key_entry),
-									text_color_node->key,
-									strlen (text_color_node->key),
-									&pos);
-		}
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
 		gl_debug (DEBUG_EDITOR, "color field true 2");
 	}
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_color_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_color_key_entry),
+	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_color_key_combo),
 					   gl_object_editor_changed_cb,
 					   editor);
 
@@ -560,7 +549,7 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
 		color_node->field_flag = TRUE;
 		color_node->color = gl_prefs->default_text_color;
 		color_node->key = 
-			gtk_editable_get_chars (GTK_EDITABLE (editor->priv->text_color_key_entry), 0, -1);
+			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
     } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

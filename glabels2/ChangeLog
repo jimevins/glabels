@@ -1,3 +1,38 @@
+2005-04-19  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page),
+	(style_changed_cb), (gl_object_editor_set_bc_style),
+	(gl_object_editor_get_bc_style), (gl_object_editor_set_bc_color),
+	(gl_object_editor_get_bc_color):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page), (gl_object_editor_set_data),
+	(gl_object_editor_get_data):
+	* src/object-editor-edit-page.c:
+	(gl_object_editor_prepare_edit_page), (insert_button_cb):
+	* src/object-editor-fill-page.c:
+	(gl_object_editor_prepare_fill_page),
+	(gl_object_editor_set_fill_color),
+	(gl_object_editor_get_fill_color):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page),
+	(gl_object_editor_set_image), (gl_object_editor_get_image):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page),
+	(gl_object_editor_set_line_color),
+	(gl_object_editor_get_line_color):
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family),
+	(gl_object_editor_get_font_family),
+	(gl_object_editor_set_text_color),
+	(gl_object_editor_get_text_color):
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/ui-sidebar.c:
+		In the object editor: replaced all instances of the deprecated
+		GtkCombo widget with the new GtkComboBox.
+
 2005-04-18  Jim Evins  <evins@snaught.com>
 
 	* src/stock.c:

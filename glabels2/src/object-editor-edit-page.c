@@ -24,9 +24,8 @@
 #include "object-editor.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtksizegroup.h>
-#include <gtk/gtkeditable.h>
 #include <gtk/gtktextview.h>
+#include <gtk/gtkcombobox.h>
 #include <math.h>
 
 #include "prefs.h"
@@ -63,7 +62,6 @@ void
 gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 {
 	GList        *family_names = NULL;
-	GtkSizeGroup *label_size_group;
 	GtkWidget    *label;
 
 	gl_debug (DEBUG_EDITOR, "START");
@@ -75,12 +73,12 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "edit_text_view");
 	editor->priv->edit_key_label =
 		glade_xml_get_widget (editor->priv->gui, "edit_key_label");
-	editor->priv->edit_key_entry =
-		glade_xml_get_widget (editor->priv->gui, "edit_key_entry");
 	editor->priv->edit_key_combo =
 		glade_xml_get_widget (editor->priv->gui, "edit_key_combo");
 	editor->priv->edit_insert_field_button =
 		glade_xml_get_widget (editor->priv->gui, "edit_insert_field_button");
+
+	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->edit_key_combo));
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->edit_page_vbox);
@@ -105,8 +103,7 @@ insert_button_cb (glObjectEditor  *editor)
  
         gl_debug (DEBUG_EDITOR, "START");
  
-        key =
-            gtk_editable_get_chars (GTK_EDITABLE (editor->priv->edit_key_entry), 0, -1);
+	key = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->edit_key_combo));
         field = g_strdup_printf ("${%s}", key);
         gl_debug (DEBUG_WDGT, "Inserting %s", field);
  

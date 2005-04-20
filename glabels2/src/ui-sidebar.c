@@ -37,7 +37,7 @@
 /* Private macros and constants.                                              */
 /*============================================================================*/
 
-#define DEFAULT_SIDEBAR_WIDTH 320
+#define DEFAULT_SIDEBAR_WIDTH 340
 
 /*============================================================================*/
 /* Private globals                                                            */
