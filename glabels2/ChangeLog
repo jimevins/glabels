@@ -1,3 +1,11 @@
+2005-04-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/prefs-dialog.glade:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+		Replaced the deprecated	GtkCombo widget with the new
+		GtkComboBox.
+	
 2005-04-19  Jim Evins  <evins@snaught.com>
 
 	* data/glade/object-editor.glade:

@@ -28,13 +28,14 @@
 #include <glade/glade-xml.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkstock.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkentry.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
 
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "util.h"
+
 #include "debug.h"
 
 /*========================================================*/
@@ -62,7 +63,6 @@ struct _glPrefsDialogPrivate
 	GtkWidget	*page_size_a4_radio;
 
 	/* Default text properties */
-	GtkWidget       *text_family_entry;
 	GtkWidget       *text_family_combo;
 	GtkWidget       *text_size_spin;
 	GtkWidget       *text_bold_toggle;
@@ -329,8 +329,6 @@ construct_object_page (glPrefsDialog *dlg)
 {
         GList    *family_names;
 
-	dlg->priv->text_family_entry =
-		glade_xml_get_widget (dlg->priv->gui, "text_family_entry");
 	dlg->priv->text_family_combo =
 		glade_xml_get_widget (dlg->priv->gui, "text_family_combo");
 	dlg->priv->text_size_spin =
@@ -358,14 +356,16 @@ construct_object_page (glPrefsDialog *dlg)
 	dlg->priv->fill_color_combo =
 		glade_xml_get_widget (dlg->priv->gui, "fill_color_combo");
 
+	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dlg->priv->text_family_combo));
+
         /* Load family names */
         family_names = gnome_font_family_list ();
-        gtk_combo_set_popdown_strings (GTK_COMBO(dlg->priv->text_family_combo),
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dlg->priv->text_family_combo),
 				       family_names);
         gnome_font_family_list_free (family_names);
                                                                                 
 
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->text_family_entry),
+	g_signal_connect_swapped (G_OBJECT(dlg->priv->text_family_combo),
 				  "changed",
 				  G_CALLBACK(update_prefs_from_object_page),
 				  G_OBJECT(dlg));
@@ -543,7 +543,7 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 	GdkColor *gdk_color;
  
 	g_signal_handlers_block_by_func (
-		G_OBJECT(dlg->priv->text_family_entry),
+		G_OBJECT(dlg->priv->text_family_combo),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_block_by_func (
 		G_OBJECT(dlg->priv->text_size_spin),
@@ -594,7 +594,8 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
                 }
         }
         gnome_font_family_list_free (family_names);
-        gtk_entry_set_text (GTK_ENTRY (dlg->priv->text_family_entry), good_font_family);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dlg->priv->text_family_combo),
+					   good_font_family);
         g_free (good_font_family);
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->text_size_spin),
@@ -634,7 +635,7 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 
 
 	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dlg->priv->text_family_entry),
+		G_OBJECT(dlg->priv->text_family_combo),
 		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dlg));
 	g_signal_handlers_unblock_by_func (
 		G_OBJECT(dlg->priv->text_size_spin),
@@ -714,8 +715,7 @@ update_prefs_from_object_page (glPrefsDialog *dlg)
 
         g_free (gl_prefs->default_font_family);
         gl_prefs->default_font_family =
-                gtk_editable_get_chars (GTK_EDITABLE (dlg->priv->text_family_entry),
-					0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dlg->priv->text_family_combo));
         gl_prefs->default_font_size =
                 gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->text_size_spin));
 
