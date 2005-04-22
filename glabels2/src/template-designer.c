@@ -31,8 +31,7 @@
 #include <libgnomeui/gnome-druid-page-edge.h>
 #include <libgnomeui/gnome-druid-page-standard.h>
 #include <gtk/gtktogglebutton.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkentry.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
 
 #include "prefs.h"
@@ -122,7 +121,6 @@ struct _glTemplateDesignerPrivate
 
 	/* Page size page controls */
 	GtkWidget       *pg_size_combo;
-	GtkWidget       *pg_size_entry;
 	GtkWidget       *pg_w_spin;
 	GtkWidget       *pg_h_spin;
 	GtkWidget       *pg_w_units_label;
@@ -508,8 +506,6 @@ construct_pg_size_page (glTemplateDesigner      *dlg,
 	/* Page Size Page Widgets */
 	dlg->priv->pg_size_combo =
 		glade_xml_get_widget (dlg->priv->gui, "pg_size_combo");
-	dlg->priv->pg_size_entry =
-		glade_xml_get_widget (dlg->priv->gui, "pg_size_entry");
 	dlg->priv->pg_w_spin =
 		glade_xml_get_widget (dlg->priv->gui, "pg_w_spin");
 	dlg->priv->pg_h_spin =
@@ -519,13 +515,15 @@ construct_pg_size_page (glTemplateDesigner      *dlg,
 	dlg->priv->pg_h_units_label =
 		glade_xml_get_widget (dlg->priv->gui, "pg_h_units_label");
 
+	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
+
 	/* Load page size combo */
 	page_sizes = gl_paper_get_name_list ();
-	gtk_combo_set_popdown_strings (GTK_COMBO(dlg->priv->pg_size_combo), page_sizes);
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dlg->priv->pg_size_combo), page_sizes);
 	gl_paper_free_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
 	default_page_size_name = gl_paper_lookup_name_from_id (default_page_size_id);
-	gtk_entry_set_text (GTK_ENTRY(dlg->priv->pg_size_entry), default_page_size_name);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
 
 	/* Apply units to spinbuttons and units labels. */
@@ -548,7 +546,7 @@ construct_pg_size_page (glTemplateDesigner      *dlg,
 
 	/* Connect a handler that listens for changes in these widgets */
 	/* This controls sensitivity of related widgets. */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->pg_size_entry), "changed",
+	g_signal_connect_swapped (G_OBJECT(dlg->priv->pg_size_combo), "changed",
 				  G_CALLBACK(pg_size_page_changed_cb), dlg);
 
 	/* Use this same handler to prepare the page. */
@@ -1130,7 +1128,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dlg)
 	
 
 	page_size_name =
-		gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->pg_size_entry), 0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
 
 	if (page_size_name && strlen(page_size_name)) {
 
@@ -1551,7 +1549,7 @@ build_template (glTemplateDesigner      *dlg)
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->description_entry), 0, -1);
 
 	page_size_name =
-		gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->pg_size_entry), 0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
 	paper = gl_paper_from_name (page_size_name);
 	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
