@@ -202,9 +202,13 @@ void
 gl_util_combo_box_set_strings (GtkComboBox       *combo,
 			       GList             *list)
 {
-	GList *p;
+	GtkTreeModel *model;
+	GList        *p;
 
 	g_return_if_fail (list);
+
+	model = gtk_combo_box_get_model(combo);
+	gtk_list_store_clear (GTK_LIST_STORE (model));
 
 	for (p=list; p!=NULL; p=p->next) {
 		if (p->data) {

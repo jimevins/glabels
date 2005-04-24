@@ -43,9 +43,8 @@ typedef struct _glWdgtMediaSelectClass glWdgtMediaSelectClass;
 struct _glWdgtMediaSelect {
 	glHigVBox  parent_widget;
 
-	GtkWidget *page_size_entry;
+	GtkWidget *page_size_combo;
 	GtkWidget *template_combo;
-	GtkWidget *template_entry;
 
 	GtkWidget *mini_preview;
 

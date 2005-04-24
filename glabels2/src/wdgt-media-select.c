@@ -26,8 +26,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtklabel.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkentry.h>
+#include <gtk/gtkcombobox.h>
 #include <gtk/gtksizegroup.h>
 
 #include "hig.h"
@@ -72,9 +71,9 @@ static void gl_wdgt_media_select_finalize      (GObject                *object);
 
 static void gl_wdgt_media_select_construct     (glWdgtMediaSelect      *media_select);
 
-static void page_size_entry_changed_cb         (GtkEntry               *entry,
+static void page_size_combo_changed_cb         (GtkComboBox            *combo,
 						gpointer                user_data);
-static void template_entry_changed_cb          (GtkEntry               *entry,
+static void template_combo_changed_cb          (GtkComboBox            *combo,
 						gpointer                user_data);
 static void prefs_changed_cb                   (glPrefsModel           *gl_prefs,
 						gpointer                user_data);
@@ -144,8 +143,8 @@ gl_wdgt_media_select_instance_init (glWdgtMediaSelect *media_select)
 {
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-	media_select->page_size_entry = NULL;
-	media_select->template_entry = NULL;
+	media_select->page_size_combo = NULL;
+	media_select->template_combo = NULL;
 
 	media_select->mini_preview = NULL;
 
@@ -219,34 +218,25 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 
 	/* Page size selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating page size combo...");
-	wcombo = gtk_combo_new ();
+	wcombo = gtk_combo_box_new_text ();
+	media_select->page_size_combo = wcombo;
 	page_sizes = gl_paper_get_name_list ();
-	gtk_combo_set_popdown_strings (GTK_COMBO (wcombo), page_sizes);
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (wcombo), page_sizes);
 	gl_paper_free_name_list (page_sizes);
-	media_select->page_size_entry = GTK_COMBO (wcombo)->entry;
-	gtk_entry_set_editable (GTK_ENTRY (media_select->page_size_entry),
-				FALSE);
-	gtk_combo_set_value_in_list (GTK_COMBO(wcombo), TRUE, FALSE);
-	gtk_widget_set_size_request (media_select->page_size_entry, 100, -1);
-	gtk_entry_set_text (GTK_ENTRY (media_select->page_size_entry),
-			    page_size_name);
+	gtk_widget_set_size_request (media_select->page_size_combo, 100, -1);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (wcombo),
+					   page_size_name);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wcombo);
 
 	/* Actual selection control */
 	gl_debug (DEBUG_MEDIA_SELECT, "Creating template combo...");
 	gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = %s", page_size_name);
 	template_names = gl_template_get_name_list (page_size_id);
-	media_select->template_combo = gtk_combo_new ();
-	gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
+	media_select->template_combo = gtk_combo_box_new_text ();
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->template_combo),
 				       template_names);
-	media_select->template_entry =
-	    GTK_COMBO (media_select->template_combo)->entry;
-	gtk_entry_set_editable (GTK_ENTRY (media_select->template_entry),
-				FALSE);
-	gtk_combo_set_value_in_list (GTK_COMBO(media_select->template_combo),
-				     TRUE, FALSE);
-	gtk_widget_set_size_request (media_select->template_entry, 400, -1);
-	gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
+	gtk_widget_set_size_request (media_select->template_combo, 400, -1);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->template_combo),
 			    template_names->data);
 	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox),
 				media_select->template_combo);
@@ -315,11 +305,9 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 
 	/* Update mini_preview and details from default template */
 	
-	gl_debug (DEBUG_MEDIA_SELECT, "template_entry = %p",
-		  media_select->template_entry);
-	name =
-	    gtk_editable_get_chars (GTK_EDITABLE (media_select->template_entry),
-				    0, -1);
+	gl_debug (DEBUG_MEDIA_SELECT, "template_combo = %p",
+		  media_select->template_combo);
+	name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->template_combo));
 	gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
 	gl_wdgt_mini_preview_set_label_by_name (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
 						name);
@@ -327,11 +315,11 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 	g_free (name);
 
 	/* Connect signals to controls */
-	g_signal_connect (G_OBJECT (media_select->page_size_entry), "changed",
-			  G_CALLBACK (page_size_entry_changed_cb),
+	g_signal_connect (G_OBJECT (media_select->page_size_combo), "changed",
+			  G_CALLBACK (page_size_combo_changed_cb),
 			  media_select);
-	g_signal_connect (G_OBJECT (media_select->template_entry), "changed",
-			  G_CALLBACK (template_entry_changed_cb),
+	g_signal_connect (G_OBJECT (media_select->template_combo), "changed",
+			  G_CALLBACK (template_combo_changed_cb),
 			  media_select);
 	g_signal_connect (G_OBJECT (gl_prefs), "changed",
 			  G_CALLBACK (prefs_changed_cb),
@@ -346,8 +334,8 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-page_size_entry_changed_cb (GtkEntry *entry,
-			    gpointer  user_data)
+page_size_combo_changed_cb (GtkComboBox *combo,
+			    gpointer     user_data)
 {
 	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
 	gchar             *page_size_name, *page_size_id;
@@ -357,7 +345,7 @@ page_size_entry_changed_cb (GtkEntry *entry,
 
 
 	/* Update template selections for new page size */
-	page_size_name = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
 	if ( strlen(page_size_name) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = \"%s\"", page_size_name);
 		page_size_id = gl_paper_lookup_id_from_name (page_size_name);
@@ -365,10 +353,10 @@ page_size_entry_changed_cb (GtkEntry *entry,
 		if (template_names == NULL) {
 			template_names = g_list_append (template_names, g_strdup(""));
 		}
-		gtk_combo_set_popdown_strings (GTK_COMBO (media_select->template_combo),
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->template_combo),
 					       template_names);
-		gtk_entry_set_text (GTK_ENTRY (media_select->template_entry),
-				    template_names->data);
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->template_combo),
+						   template_names->data);
 		gl_template_free_name_list (template_names);
 		g_free (page_size_id);
 	}
@@ -381,8 +369,8 @@ page_size_entry_changed_cb (GtkEntry *entry,
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-template_entry_changed_cb (GtkEntry *entry,
-			   gpointer  user_data)
+template_combo_changed_cb (GtkComboBox *combo,
+			   gpointer     user_data)
 {
 	glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
 	gchar *name;
@@ -390,8 +378,8 @@ template_entry_changed_cb (GtkEntry *entry,
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
 	/* Update mini_preview canvas & details with template */
-	gl_debug (DEBUG_MEDIA_SELECT, "template_entry = %p", entry);
-	name = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	gl_debug (DEBUG_MEDIA_SELECT, "template_combo = %p", combo);
+	name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
 	if ( strlen(name) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
 		gl_wdgt_mini_preview_set_label_by_name (GL_WDGT_MINI_PREVIEW (media_select->mini_preview),
@@ -422,7 +410,7 @@ prefs_changed_cb (glPrefsModel *gl_prefs,
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
 	/* Update mini_preview canvas & details with template */
-	name = gtk_editable_get_chars (GTK_EDITABLE (media_select->template_entry), 0, -1);
+	name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->template_combo));
 	if ( strlen(name) ) {
 		gl_debug (DEBUG_MEDIA_SELECT, "name = \"%s\"", name);
 		details_update (media_select, name);
@@ -480,9 +468,7 @@ gchar *
 gl_wdgt_media_select_get_name (glWdgtMediaSelect *media_select)
 {
 	gl_debug (DEBUG_MEDIA_SELECT, "");
-	return
-	    gtk_editable_get_chars (GTK_EDITABLE (media_select->template_entry),
-				    0, -1);
+	return gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->template_combo));
 }
 
 /****************************************************************************/
@@ -496,18 +482,8 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
 
 	gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(media_select->template_entry),
-					G_CALLBACK(template_entry_changed_cb),
-					media_select);
-	gtk_editable_delete_text (GTK_EDITABLE (media_select->template_entry),
-				  0, -1);
-	g_signal_handlers_unblock_by_func (G_OBJECT(media_select->template_entry),
-					   G_CALLBACK(template_entry_changed_cb),
-					   media_select);
-
-	pos = 0;
-	gtk_editable_insert_text (GTK_EDITABLE (media_select->template_entry),
-				  name, strlen (name), &pos);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->template_combo),
+					   name);
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
@@ -523,8 +499,7 @@ gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select)
 	gl_debug (DEBUG_MEDIA_SELECT, "");
 
 	page_size_name =
-	    gtk_editable_get_chars (GTK_EDITABLE
-				    (media_select->page_size_entry), 0, -1);
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->page_size_combo));
 
 	page_size_id = gl_paper_lookup_id_from_name (page_size_name);
 
@@ -547,19 +522,8 @@ gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
 
 	page_size_name = gl_paper_lookup_name_from_id (page_size_id);
 
-	g_signal_handlers_block_by_func (G_OBJECT(media_select->page_size_entry),
-					G_CALLBACK(page_size_entry_changed_cb),
-					media_select);
-	gtk_editable_delete_text (GTK_EDITABLE (media_select->page_size_entry),
-				  0, -1);
-	g_signal_handlers_unblock_by_func (G_OBJECT(media_select->page_size_entry),
-					  G_CALLBACK(page_size_entry_changed_cb),
-					  media_select);
-
-	pos = 0;
-	gtk_editable_insert_text (GTK_EDITABLE (media_select->page_size_entry),
-				  page_size_name, strlen (page_size_name), &pos);
-
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->page_size_combo),
+					   page_size_name);
 	g_free (page_size_name);
 
 	gl_debug (DEBUG_MEDIA_SELECT, "END");

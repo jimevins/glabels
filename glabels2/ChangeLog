@@ -1,3 +1,17 @@
+2005-04-23  Jim Evins  <evins@snaught.com>
+
+	* src/util.c: (gl_util_combo_box_set_strings):
+		Make sure to clear model before loading a new list of strings.
+	* src/wdgt-media-select.h:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_instance_init),
+	(gl_wdgt_media_select_construct), (page_size_combo_changed_cb),
+	(template_combo_changed_cb), (prefs_changed_cb),
+	(gl_wdgt_media_select_get_name), (gl_wdgt_media_select_set_name),
+	(gl_wdgt_media_select_get_page_size),
+	(gl_wdgt_media_select_set_page_size):
+		Replaced the deprecated	GtkCombo widget with the new
+		GtkComboBox.
+
 2005-04-21  Jim Evins  <evins@snaught.com>
 
 	* data/glade/template-designer.glade:
