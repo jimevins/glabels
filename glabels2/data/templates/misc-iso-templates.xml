@@ -356,6 +356,17 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Fellows 04715 CD/DVD Labels (Face only).                            -->
+  <!-- =================================================================== -->
+  <Template name="Fellows 04715" size="A4" description="CD Labels">
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="133.2pt" y0="50.4pt" dx="244.276pt" dy="363.6pt"/>
+    </Label-cd>
+  </Template>
+
+
 
 
   <!-- ******************************************************************** -->

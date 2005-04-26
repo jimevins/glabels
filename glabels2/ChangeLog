@@ -1,3 +1,10 @@
+2005-04-25  Jim Evins  <evins@snaught.com>
+
+	* data/templates/misc-iso-templates.xml:
+		Added Fellows 04715 template provided by Steve Saxon.
+	* AUTHORS:
+		Updated acknowledgement for above.
+
 2005-04-23  Jim Evins  <evins@snaught.com>
 
 	* src/util.c: (gl_util_combo_box_set_strings):
