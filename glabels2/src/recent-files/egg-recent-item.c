@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -39,6 +39,7 @@ egg_recent_item_new (void)
 	item->private_data = FALSE;
 	item->uri = NULL;
 	item->mime_type = NULL;
+	item->mime_type_is_explicit = FALSE;
 
 	item->refcount = 1;
 
@@ -97,11 +98,6 @@ egg_recent_item_new_from_uri (const gchar *uri)
 		return NULL;
 	}
 	
-	item->mime_type = gnome_vfs_get_mime_type (item->uri);
-
-	if (!item->mime_type)
-		item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
-
 	return item;
 }
 
@@ -132,6 +128,7 @@ egg_recent_item_copy (const EggRecentItem *item)
 	newitem->uri = g_strdup (item->uri);
 	if (item->mime_type)
 		newitem->mime_type = g_strdup (item->mime_type);
+	newitem->mime_type_is_explicit = item->mime_type_is_explicit
 	newitem->timestamp = item->timestamp;
 	newitem->private_data = item->private_data;
 	newitem->groups = egg_recent_item_copy_groups (item->groups);
@@ -181,6 +178,21 @@ egg_recent_item_new_valist (const gchar *uri, va_list args)
 	return item;
 }
 */
+
+static void
+egg_recent_item_update_mime_type (EggRecentItem *item)
+{
+	if (!item->mime_type_is_explicit) {
+		g_free (item->mime_type);
+		item->mime_type = NULL;
+
+		if (item->uri)
+			item->mime_type = gnome_vfs_get_mime_type (item->uri);
+
+		if (!item->mime_type)
+			item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
+	}
+}
 
 gboolean
 egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
@@ -248,7 +260,7 @@ make_valid_utf8 (const char *name)
 
 	string = NULL;
 	remainder = name;
-	remaining_bytes = strlen (name);
+	remaining_bytes = name ? strlen (name) : 0;
 
 	while (remaining_bytes != 0) {
 		if (g_utf8_validate (remainder, remaining_bytes, &invalid))
@@ -300,7 +312,8 @@ egg_recent_item_get_short_name (const EggRecentItem *item)
 		return NULL;
 
 	uri = gnome_vfs_uri_new (item->uri);
-	g_assert (uri != NULL); /* We already checked this in egg_recent_item_set_uri() */
+	if (uri == NULL)
+		return NULL;
 
 	short_name = gnome_vfs_uri_extract_short_name (uri);
 	valid = FALSE;
@@ -325,7 +338,7 @@ egg_recent_item_get_short_name (const EggRecentItem *item)
 		short_name = tmp;
 	}
 
-	g_free (uri);
+	gnome_vfs_uri_unref (uri);
 
 	return short_name;
 }
@@ -333,12 +346,22 @@ egg_recent_item_get_short_name (const EggRecentItem *item)
 void 
 egg_recent_item_set_mime_type (EggRecentItem *item, const gchar *mime)
 {
-	item->mime_type = g_strdup (mime);
+	g_free (item->mime_type);
+	item->mime_type = NULL;
+
+	if (mime && mime[0]) {
+		item->mime_type_is_explicit = TRUE;
+		item->mime_type             = g_strdup (mime);
+	} else {
+		item->mime_type_is_explicit = FALSE;
+	}
 }
 
 gchar * 
-egg_recent_item_get_mime_type (const EggRecentItem *item)
+egg_recent_item_get_mime_type (EggRecentItem *item)
 {
+	egg_recent_item_update_mime_type (item);
+
 	return g_strdup (item->mime_type);
 }
 

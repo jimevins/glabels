@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -71,7 +73,7 @@ static void properties_response              (GtkDialog         *dlg,
 
 static void open_response                    (GtkDialog         *chooser,
 					      gint               response,
-					      GtkWindow         *window);
+					      glWindow          *window);
 static void save_as_response                 (GtkDialog         *chooser,
 					      gint               response,
 					      glLabel           *label);
@@ -81,7 +83,7 @@ static void save_as_response                 (GtkDialog         *chooser,
 /* "New" menu callback.                                                      */
 /*****************************************************************************/
 void
-gl_file_new (GtkWindow *window)
+gl_file_new (glWindow  *window)
 {
 	GtkWidget    *dlg;
 
@@ -90,7 +92,7 @@ gl_file_new (GtkWindow *window)
 	g_return_if_fail (window != NULL);
 
 	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
-					      window,
+					      GTK_WINDOW (window),
 					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
@@ -249,7 +251,7 @@ new_response (GtkDialog *dlg,
 /*****************************************************************************/
 void
 gl_file_properties (glLabel   *label,
-		    GtkWindow *window)
+		    glWindow  *window)
 {
 	GtkWidget    *dlg;
 
@@ -259,7 +261,7 @@ gl_file_properties (glLabel   *label,
 	g_return_if_fail (window && GTK_IS_WINDOW (window));
 
 	dlg = gl_hig_dialog_new_with_buttons (_("Label properties"),
-					      window,
+					      GTK_WINDOW (window),
 					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,
@@ -415,7 +417,7 @@ properties_response (GtkDialog *dlg,
 /* "Open" menu callback.                                                     */
 /*****************************************************************************/
 void
-gl_file_open (GtkWindow *window)
+gl_file_open (glWindow  *window)
 {
 	GtkWidget     *chooser;
 	GtkFileFilter *filter;
@@ -425,7 +427,7 @@ gl_file_open (GtkWindow *window)
 	g_return_if_fail (window != NULL);
 
 	chooser = gtk_file_chooser_dialog_new ("Open label",
-					       window,
+					       GTK_WINDOW (window),
 					       GTK_FILE_CHOOSER_ACTION_OPEN,
 					       GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -464,7 +466,7 @@ gl_file_open (GtkWindow *window)
 static void
 open_response (GtkDialog     *chooser,
 	       gint           response,
-	       GtkWindow     *window)
+	       glWindow      *window)
 {
 	gchar            *raw_filename;
 	gchar 		 *filename;
@@ -540,26 +542,17 @@ open_response (GtkDialog     *chooser,
 /*****************************************************************************/
 /* "Open recent" menu callback.                                              */
 /*****************************************************************************/
-gboolean
-gl_file_open_recent (EggRecentView   *view,
-		     EggRecentItem   *item,
-		     GtkWindow       *window)
+void
+gl_file_open_recent (const gchar     *filename,
+		     glWindow        *window)
 {
-	gboolean result = FALSE;
-	gchar *filename;
-	
 	gl_debug (DEBUG_FILE, "");
-
-	filename = gl_recent_get_filename (item);
 
 	if (filename) {
 		gl_debug (DEBUG_FILE, "open recent: %s", filename);
 
-		result = gl_file_open_real (filename, window);
-		g_free (filename);
+		gl_file_open_real (filename, window);
 	}
-
-	return result;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -567,7 +560,7 @@ gl_file_open_recent (EggRecentView   *view,
 /*---------------------------------------------------------------------------*/
 gboolean
 gl_file_open_real (const gchar     *filename,
-		   GtkWindow       *window)
+		   glWindow        *window)
 {
 	gchar            *abs_filename;
 	glLabel          *label;
@@ -589,7 +582,7 @@ gl_file_open_real (const gchar     *filename,
 		primary_msg = g_strdup_printf (_("Could not open file \"%s\""),
 					       filename);
 
-		dlg = gl_hig_alert_new (window,
+		dlg = gl_hig_alert_new (GTK_WINDOW (window),
 					GTK_DIALOG_DESTROY_WITH_PARENT,
 					GTK_MESSAGE_ERROR,
 					GTK_BUTTONS_CLOSE,
@@ -635,7 +628,7 @@ gl_file_open_real (const gchar     *filename,
 /*****************************************************************************/
 gboolean
 gl_file_save (glLabel   *label,
-	      GtkWindow *window)
+	      glWindow  *window)
 {
 	glXMLLabelStatus  status;
 	GError           *error = NULL;
@@ -675,7 +668,7 @@ gl_file_save (glLabel   *label,
 		primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
 					       filename);
 
-		dialog = gl_hig_alert_new (window,
+		dialog = gl_hig_alert_new (GTK_WINDOW (window),
 					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_CLOSE,
@@ -708,7 +701,7 @@ gl_file_save (glLabel   *label,
 /*****************************************************************************/
 gboolean
 gl_file_save_as (glLabel   *label,
-		 GtkWindow *window)
+		 glWindow  *window)
 {
 	GtkWidget        *chooser;
 	GtkFileFilter    *filter;
@@ -718,14 +711,14 @@ gl_file_save_as (glLabel   *label,
 	gl_debug (DEBUG_FILE, "START");
 
 	g_return_val_if_fail (label && GL_IS_LABEL(label), FALSE);
-	g_return_val_if_fail (window && GTK_IS_WINDOW(window), FALSE);
+	g_return_val_if_fail (window && GL_IS_WINDOW(window), FALSE);
 
 	name = gl_label_get_short_name (label);
 	title = g_strdup_printf (_("Save \"%s\" as"), name);
 	g_free (name);
 
 	chooser = gtk_file_chooser_dialog_new (title,
-					       window,
+					       GTK_WINDOW (window),
 					       GTK_FILE_CHOOSER_ACTION_SAVE,
 					       GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -963,8 +956,7 @@ gl_file_close (glWindow *window)
 			switch (ret)
 			{
 			case GTK_RESPONSE_YES:
-				close = gl_file_save (label,
-						      GTK_WINDOW(window));
+				close = gl_file_save (label, window);
 				break;
 			case GTK_RESPONSE_NO:
 				close = TRUE;
@@ -985,7 +977,7 @@ gl_file_close (glWindow *window)
 			
 			gl_debug (DEBUG_FILE, "All windows closed.");
 	
-			bonobo_main_quit ();
+			gtk_main_quit ();
 		}
 
 	}

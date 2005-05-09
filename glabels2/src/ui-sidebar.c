@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-sidebar.c:  Object property sidebar
@@ -40,16 +42,22 @@
 #define DEFAULT_SIDEBAR_WIDTH 340
 
 /*============================================================================*/
+/* Private data types                                                         */
+/*============================================================================*/
+
+struct _glUISidebarPrivate {
+
+	glView              *view;
+
+	GtkWidget           *child;
+	GtkWidget           *empty_child;
+};
+
+/*============================================================================*/
 /* Private globals                                                            */
 /*============================================================================*/
 
-static GObjectClass *parent_class;
-
-static gchar* doc_verbs [] = {
-	"/commands/PropertyEditor",
-
-	NULL
-};
+static GtkVBoxClass *parent_class;
 
 /*============================================================================*/
 /* Local function prototypes                                                  */
@@ -59,8 +67,7 @@ static void     gl_ui_sidebar_class_init    (glUISidebarClass     *class);
 static void     gl_ui_sidebar_instance_init (glUISidebar          *sidebar);
 static void     gl_ui_sidebar_finalize      (GObject              *object);
 
-static void     gl_ui_sidebar_construct     (glUISidebar          *sidebar,
-					     BonoboUIComponent    *ui_component);
+static void     gl_ui_sidebar_construct     (glUISidebar          *sidebar);
 
 static void     selection_changed_cb        (glView               *view,
 					     glUISidebar          *sidebar);
@@ -115,7 +122,7 @@ gl_ui_sidebar_instance_init (glUISidebar *sidebar)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	sidebar->view = NULL;
+	sidebar->priv = g_new0 (glUISidebarPrivate, 1);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -132,12 +139,13 @@ gl_ui_sidebar_finalize (GObject *object)
 
 	sidebar = GL_UI_SIDEBAR (object);
 
-	if (sidebar->view) {
-		g_object_unref (G_OBJECT(sidebar->view));
-		sidebar = NULL;
+	if (sidebar->priv->view) {
+		g_object_unref (G_OBJECT(sidebar->priv->view));
 	}
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
+
+	g_free (sidebar->priv);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -145,8 +153,8 @@ gl_ui_sidebar_finalize (GObject *object)
 /****************************************************************************/
 /* Create a NEW sidebar.                                                    */
 /****************************************************************************/
-GObject *
-gl_ui_sidebar_new (BonoboUIComponent *ui_component)
+GtkWidget *
+gl_ui_sidebar_new (void)
 {
 	glUISidebar *sidebar;
 
@@ -156,38 +164,31 @@ gl_ui_sidebar_new (BonoboUIComponent *ui_component)
 
 	gtk_widget_set_size_request (GTK_WIDGET (sidebar), DEFAULT_SIDEBAR_WIDTH, -1);
 
-	gl_ui_sidebar_construct (sidebar, ui_component);
+	gl_ui_sidebar_construct (sidebar);
 
 	gl_debug (DEBUG_UI, "END");
 
-	return G_OBJECT(sidebar);
+	return GTK_WIDGET(sidebar);
 }
 
 /******************************************************************************/
 /* Initialize property toolbar.                                               */
 /******************************************************************************/
 static void
-gl_ui_sidebar_construct (glUISidebar       *sidebar,
-			 BonoboUIComponent *ui_component)
+gl_ui_sidebar_construct (glUISidebar       *sidebar)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	sidebar->ui_component = ui_component;
+	sidebar->priv->empty_child = gl_object_editor_new (GL_STOCK_PROPERTIES,
+							   _("Object properties"),
+							   GL_OBJECT_EDITOR_EMPTY,
+							   NULL);
 
-	gl_ui_util_insert_widget (ui_component,
-				  GTK_WIDGET (sidebar),
-				  "/PropertySidebar/PropertyEditor");
+	sidebar->priv->child = gtk_widget_ref (sidebar->priv->empty_child);
+	gtk_widget_show (sidebar->priv->child);
+	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->priv->child);
 
-	sidebar->empty_child = gl_object_editor_new (GL_STOCK_PROPERTIES,
-						     _("Object properties"),
-						     GL_OBJECT_EDITOR_EMPTY,
-						     NULL);
-
-	sidebar->child = gtk_widget_ref (sidebar->empty_child);
-	gtk_widget_show (sidebar->child);
-	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->child);
-
-	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
+	gtk_widget_set_sensitive (GTK_WIDGET (sidebar), FALSE);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -203,9 +204,9 @@ gl_ui_sidebar_set_view (glUISidebar *sidebar,
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	gl_ui_util_set_verb_list_sensitive (sidebar->ui_component, doc_verbs, TRUE);
+	gtk_widget_set_sensitive (GTK_WIDGET (sidebar), TRUE);
 
-	sidebar->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
+	sidebar->priv->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
 
 	g_signal_connect (G_OBJECT(view), "selection_changed",
 			  G_CALLBACK(selection_changed_cb), sidebar);
@@ -225,24 +226,21 @@ selection_changed_cb (glView      *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (sidebar && GL_IS_UI_SIDEBAR (sidebar));
 
-	gtk_container_remove (GTK_CONTAINER(sidebar), sidebar->child);
+	gtk_container_remove (GTK_CONTAINER(sidebar), sidebar->priv->child);
 
 	if (gl_view_is_selection_empty (view) || !gl_view_is_selection_atomic (view)) {
 
-		sidebar->child = gtk_widget_ref (sidebar->empty_child);
+		sidebar->priv->child = gtk_widget_ref (sidebar->priv->empty_child);
 		
 	} else {
 
-		sidebar->child = gtk_widget_ref (gl_view_get_editor (view));
+		sidebar->priv->child = gtk_widget_ref (gl_view_get_editor (view));
 
 	}
 
-	gtk_widget_show (sidebar->child);
-#if 0
-	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->child);
-#else
-	gtk_box_pack_start (GTK_BOX(sidebar), sidebar->child, TRUE, TRUE, 0);
-#endif
+	gtk_widget_show (sidebar->priv->child);
+
+	gtk_box_pack_start (GTK_BOX(sidebar), sidebar->priv->child, TRUE, TRUE, 0);
 
 	gl_debug (DEBUG_UI, "END");
 }

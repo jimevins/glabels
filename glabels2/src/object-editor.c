@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  object-editor.c:  object properties editor module
@@ -171,6 +173,7 @@ gl_object_editor_init (glObjectEditor *editor)
 
 	/* Hide all notebook pages to start with. */
 	gtk_widget_hide_all (editor->priv->notebook);
+	gtk_widget_set_no_show_all (editor->priv->notebook, TRUE);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

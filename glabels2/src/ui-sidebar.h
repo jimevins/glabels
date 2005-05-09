@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-sidebar.h:  Object property sidebar header file
@@ -23,9 +25,7 @@
 #ifndef __UI_SIDEBAR_H__
 #define __UI_SIDEBAR_H__
 
-#include <glib-object.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-window.h>
+#include <gtk/gtkvbox.h>
 
 #include "view.h"
 
@@ -41,17 +41,15 @@ G_BEGIN_DECLS
 #define GL_IS_UI_SIDEBAR_CLASS(klass) \
         (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_SIDEBAR))
 
-typedef struct _glUISidebar      glUISidebar;
-typedef struct _glUISidebarClass glUISidebarClass;
+typedef struct _glUISidebar        glUISidebar;
+typedef struct _glUISidebarClass   glUISidebarClass;
+
+typedef struct _glUISidebarPrivate glUISidebarPrivate;
 
 struct _glUISidebar {
 	GtkVBox              parent_widget;
 
-	BonoboUIComponent   *ui_component;
-
-	glView              *view;
-	GtkWidget           *child;
-	GtkWidget           *empty_child;
+	glUISidebarPrivate  *priv;
 };
 
 struct _glUISidebarClass {
@@ -60,7 +58,7 @@ struct _glUISidebarClass {
 
 GType        gl_ui_sidebar_get_type          (void) G_GNUC_CONST;
 
-GObject     *gl_ui_sidebar_new               (BonoboUIComponent *ui_component);
+GtkWidget   *gl_ui_sidebar_new               (void);
 
 void         gl_ui_sidebar_set_view          (glUISidebar       *sidebar,
 					      glView            *view);

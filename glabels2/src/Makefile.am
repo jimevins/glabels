@@ -52,20 +52,18 @@ glabels_SOURCES = 			\
 	stock.h				\
 	ui.h				\
 	ui.c				\
+	ui-util.h			\
+	ui-util.c			\
+	ui-commands.h			\
+	ui-commands.c			\
 	ui-property-bar.h		\
 	ui-property-bar.c		\
 	ui-sidebar.h			\
 	ui-sidebar.c			\
-	ui-util.h			\
-	ui-util.c			\
-	commands.h			\
-	commands.c			\
 	file.h				\
 	file.c				\
 	recent.h			\
 	recent.c			\
-	tools.h				\
-	tools.c				\
 	prefs.c 			\
 	prefs.h 			\
 	prefs-model.c 			\

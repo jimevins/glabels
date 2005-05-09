@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  window.h:  a gLabels app window
@@ -23,8 +25,10 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include <bonobo/bonobo-window.h>
-#include <bonobo/bonobo-ui-component.h>
+#include <gtk/gtkwindow.h>
+#include <gtk/gtkuimanager.h>
+#include "recent-files/egg-recent-view.h"
+#include "recent-files/egg-recent-view-uimanager.h"
 
 #include "view.h"
 #include "label.h"
@@ -48,23 +52,27 @@ typedef struct _glWindow      glWindow;
 typedef struct _glWindowClass glWindowClass;
 
 struct _glWindow {
-	BonoboWindow         parent_widget;
+	GtkWindow               parent_widget;
 
-	BonoboUIComponent   *uic;
+	GtkUIManager           *ui;
 
-	GtkWidget           *view;
+	GtkWidget              *view;
 
-	glUIPropertyBar     *property_bar;
-	glUISidebar         *sidebar;
+	GtkWidget              *hbox;
 
-	GtkWidget           *cursor_info;
-	GtkWidget           *cursor_info_frame;
-	GtkWidget           *zoom_info;
-	GtkWidget           *zoom_info_frame;
+	glUIPropertyBar        *property_bar;
+	glUISidebar            *sidebar;
+
+	EggRecentViewUIManager *recent_view;
+
+	GtkWidget              *cursor_info;
+	GtkWidget              *cursor_info_frame;
+	GtkWidget              *zoom_info;
+	GtkWidget              *zoom_info_frame;
 };
 
 struct _glWindowClass {
-	BonoboWindowClass    parent_class;
+	GtkWindowClass          parent_class;
 };
 
 GType        gl_window_get_type          (void) G_GNUC_CONST;

@@ -6,7 +6,8 @@ glade_DATA = \
 	object-editor.glade		\
 	prefs-dialog.glade		\
 	template-designer.glade		\
-	merge-properties-dialog.glade
+	merge-properties-dialog.glade	\
+	property-bar.glade
 
 EXTRA_DIST = $(glade_DATA)
 

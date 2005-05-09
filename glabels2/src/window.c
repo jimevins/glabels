@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  window.c:  a gLabels app window
@@ -25,14 +27,18 @@
 #include "window.h"
 
 #include <glib/gi18n.h>
+#include <gtk/gtkvbox.h>
+#include <gtk/gtkhbox.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkframe.h>
 
 #include "ui.h"
+#include "ui-commands.h"
 #include "util.h"
 #include "xml-label.h"
 #include "prefs.h"
 #include "file.h"
+#include "recent.h" 
 
 #include "debug.h"
 
@@ -49,7 +55,7 @@
 /*============================================================================*/
 /* Private globals                                                            */
 /*============================================================================*/
-static BonoboWindowClass *parent_class;
+static GtkWindowClass *parent_class;
 
 static GList *window_list = NULL;
 
@@ -91,6 +97,9 @@ static void     name_changed_cb        (glLabel       *label,
 static void     modified_changed_cb    (glLabel       *label,
 					glWindow      *window);
 
+static char    *recent_tooltip_func    (EggRecentItem *item,
+					gpointer       user_data);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -114,7 +123,7 @@ gl_window_get_type (void)
 			NULL
 		};
 
-		type = g_type_register_static (BONOBO_TYPE_WINDOW,
+		type = g_type_register_static (GTK_TYPE_WINDOW,
 					       "glWindow", &info, 0);
 	}
 
@@ -141,23 +150,51 @@ gl_window_class_init (glWindowClass *class)
 static void
 gl_window_init (glWindow *window)
 {
-	BonoboUIContainer *ui_container;
-	BonoboUIComponent *ui_component;
+	GtkWidget        *vbox1;
+	GtkUIManager     *ui;
+	GtkWidget        *status_hbox;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
-	ui_container = bonobo_window_get_ui_container(BONOBO_WINDOW(window));
-	ui_component = bonobo_ui_component_new_default ();
-	bonobo_ui_component_set_container (ui_component,
-					   BONOBO_OBJREF (ui_container),
-					   NULL);
+	vbox1 = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (window), vbox1);
 
-	window->cursor_info = gtk_label_new (NULL);
-	gtk_widget_set_size_request (window->cursor_info, CURSOR_INFO_WIDTH, -1);
-	window->cursor_info_frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME(window->cursor_info_frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER(window->cursor_info_frame), window->cursor_info);
-	gtk_widget_show_all (window->cursor_info_frame);
+	window->ui = ui = gl_ui_new (GTK_WINDOW (window));
+	gtk_box_pack_start (GTK_BOX (vbox1),
+			    gtk_ui_manager_get_widget (ui, "/MenuBar"),
+			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox1),
+			    gtk_ui_manager_get_widget (ui, "/MainToolBar"),
+			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox1),
+			    gtk_ui_manager_get_widget (ui, "/DrawingToolBar"),
+			    FALSE, FALSE, 0);
+
+	/* add an eggRecentView */
+        window->recent_view  =
+		egg_recent_view_uimanager_new (ui,
+					       "/ui/MenuBar/FileMenu/FileRecentsMenu/FileRecentsPlaceHolder",
+					       G_CALLBACK (gl_ui_cmd_file_open_recent),
+					       window);
+	egg_recent_view_uimanager_show_icons (window->recent_view, FALSE);
+	egg_recent_view_uimanager_set_tooltip_func (window->recent_view,
+						    recent_tooltip_func,
+						    NULL);
+	egg_recent_view_set_model (EGG_RECENT_VIEW (window->recent_view),
+				   gl_recent_get_model ());
+
+
+	window->hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox1), window->hbox, TRUE, TRUE, 0);
+
+	window->sidebar = GL_UI_SIDEBAR (gl_ui_sidebar_new ());
+	gtk_box_pack_end (GTK_BOX (window->hbox), GTK_WIDGET (window->sidebar), FALSE, FALSE, 0);
+
+	window->property_bar = GL_UI_PROPERTY_BAR (gl_ui_property_bar_new ());
+	gtk_box_pack_start (GTK_BOX (vbox1), GTK_WIDGET (window->property_bar), FALSE, FALSE, 0);
+
+	status_hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox1), status_hbox, FALSE, FALSE, 0);
 
 	window->zoom_info = gtk_label_new (NULL);
 	gtk_widget_set_size_request (window->zoom_info, ZOOM_INFO_WIDTH, -1);
@@ -165,16 +202,19 @@ gl_window_init (glWindow *window)
 	gtk_frame_set_shadow_type (GTK_FRAME(window->zoom_info_frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER(window->zoom_info_frame), window->zoom_info);
 	gtk_widget_show_all (window->zoom_info_frame);
+	gtk_box_pack_end (GTK_BOX (status_hbox),
+			  window->zoom_info_frame,
+			  FALSE, FALSE, 0);
 
-	gl_ui_init (ui_component,
-		    BONOBO_WINDOW (window),
-		    window->cursor_info_frame,
-		    window->zoom_info_frame);
-
-	window->property_bar =
-		GL_UI_PROPERTY_BAR(gl_ui_property_bar_new (ui_component));
-	window->sidebar =
-		GL_UI_SIDEBAR(gl_ui_sidebar_new (ui_component));
+	window->cursor_info = gtk_label_new (NULL);
+	gtk_widget_set_size_request (window->cursor_info, CURSOR_INFO_WIDTH, -1);
+	window->cursor_info_frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME(window->cursor_info_frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER(window->cursor_info_frame), window->cursor_info);
+	gtk_widget_show_all (window->cursor_info_frame);
+	gtk_box_pack_end (GTK_BOX (status_hbox),
+			  window->cursor_info_frame,
+			  FALSE, FALSE, 0);
 
 	gtk_window_set_default_size (GTK_WINDOW (window),
 				     DEFAULT_WINDOW_WIDTH,
@@ -183,7 +223,6 @@ gl_window_init (glWindow *window)
 	g_signal_connect (G_OBJECT(window), "delete-event",
 			  G_CALLBACK(window_delete_event_cb), NULL);
 	
-	window->uic  = ui_component;
 	window->view = NULL;
 
 	window_list = g_list_append (window_list, window);
@@ -221,9 +260,14 @@ gl_window_destroy (GtkObject *gtk_object)
 	window = GL_WINDOW (gtk_object);
 	window_list = g_list_remove (window_list, window);
 
-        if (window->uic) {
-		gl_ui_unref(window->uic);
-		window->uic = NULL;
+	if (window->recent_view) {
+		g_object_unref (window->recent_view);
+		window->recent_view = NULL;
+	}
+
+        if (window->ui) {
+		gl_ui_unref(window->ui);
+		window->ui = NULL;
         }
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy) {
@@ -244,8 +288,7 @@ gl_window_new (void)
 
 	gl_debug (DEBUG_WINDOW, "START");
 
-	window = g_object_new (gl_window_get_type (),
-			       "win_name", "glabels",
+	window = g_object_new (GL_TYPE_WINDOW,
 			       "title",    _("(none) - gLabels"),
 			       NULL);
 
@@ -338,7 +381,7 @@ gl_window_set_label (glWindow    *window,
 	}
 
 	window->view = gl_view_new (label);
-	bonobo_window_set_contents (BONOBO_WINDOW(window), window->view);
+	gtk_box_pack_start (GTK_BOX (window->hbox), window->view,TRUE, TRUE, 0);
 
 	gtk_widget_show_all (window->view);
 
@@ -356,7 +399,7 @@ gl_window_set_label (glWindow    *window,
 		gl_view_hide_markup (GL_VIEW(window->view));
 	}
 
-	gl_ui_update_all (window->uic, GL_VIEW(window->view));
+	gl_ui_update_all (window->ui, GL_VIEW(window->view));
 
 	gl_ui_property_bar_set_view (window->property_bar, GL_VIEW(window->view));
 	gl_ui_sidebar_set_view (window->sidebar, GL_VIEW(window->view));
@@ -460,7 +503,7 @@ selection_changed_cb (glView   *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-	gl_ui_update_selection_verbs (window->uic, view);
+	gl_ui_update_selection_verbs (window->ui, view);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -484,7 +527,7 @@ zoom_changed_cb (glView   *view,
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
 	g_free (string);
 
-	gl_ui_update_zoom_verbs (window->uic, view);
+	gl_ui_update_zoom_verbs (window->ui, view);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -567,7 +610,28 @@ modified_changed_cb (glLabel  *label,
 
 	set_window_title (window, label);
 
-	gl_ui_update_modified_verbs (window->uic, label);
+	gl_ui_update_modified_verbs (window->ui, label);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Tooltip function for recent file menu items.                    */
+/*---------------------------------------------------------------------------*/
+static char *
+recent_tooltip_func (EggRecentItem *item, gpointer user_data)
+{
+	char *tip;
+	char *uri_for_display;
+
+	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	g_return_val_if_fail (uri_for_display != NULL, NULL);
+
+	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+
+	g_free (uri_for_display);
+
+	return tip;
+}
+
+

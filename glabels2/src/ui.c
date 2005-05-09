@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui.c:  GLabels ui module
@@ -23,23 +25,21 @@
 
 #include "ui.h"
 
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-view-bonobo.h"
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 
 #include "ui-util.h"
-#include "commands.h"
-#include "tools.h"
-#include "recent.h" 
+#include "ui-commands.h"
 #include "file.h"
 #include "prefs.h"
+#include "stock.h"
+#include "window.h"
 
 #include "debug.h"
 
 /*==========================================================================*/
 /* Private macros and constants.                                            */
 /*==========================================================================*/
-#define GLABELS_UI_XML GLABELS_UI_DIR "glabels-ui.xml"
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -47,134 +47,628 @@
 
 
 /*==========================================================================*/
+/* Local function prototypes                                                */
+/*==========================================================================*/
+
+static void view_ui_item_toggled_cb        (GtkToggleAction *action,
+					    GtkUIManager    *ui);
+
+static void set_app_main_toolbar_style 	   (GtkUIManager    *ui);
+
+static void set_app_drawing_toolbar_style  (GtkUIManager    *ui);
+
+static void set_view_style                 (GtkUIManager    *ui);
+
+/*==========================================================================*/
 /* Private globals                                                          */
 /*==========================================================================*/
 
-static BonoboUIVerb gl_ui_verbs [] = {
-	BONOBO_UI_VERB ("FileNew",               gl_cmd_file_new),
-	BONOBO_UI_VERB ("FileProperties",        gl_cmd_file_properties),
-	BONOBO_UI_VERB ("FileTemplateDesigner",  gl_cmd_file_template_designer),
-	BONOBO_UI_VERB ("FileOpen",              gl_cmd_file_open),
-	BONOBO_UI_VERB ("FileSave",              gl_cmd_file_save),
-	BONOBO_UI_VERB ("FileSaveAs",            gl_cmd_file_save_as),
-	BONOBO_UI_VERB ("FilePrint",             gl_cmd_file_print),
-	BONOBO_UI_VERB ("FileClose",             gl_cmd_file_close),
-	BONOBO_UI_VERB ("FileExit",              gl_cmd_file_exit),
-	BONOBO_UI_VERB ("EditCut",               gl_cmd_edit_cut),
-	BONOBO_UI_VERB ("EditCopy",              gl_cmd_edit_copy),
-	BONOBO_UI_VERB ("EditPaste",             gl_cmd_edit_paste),
-	BONOBO_UI_VERB ("EditDelete",            gl_cmd_edit_delete),
-	BONOBO_UI_VERB ("EditSelectAll",         gl_cmd_edit_select_all),
-	BONOBO_UI_VERB ("EditUnSelectAll",       gl_cmd_edit_unselect_all),
-	BONOBO_UI_VERB ("ToolsArrow",            gl_tools_arrow),
-	BONOBO_UI_VERB ("ToolsText",             gl_tools_text),
-	BONOBO_UI_VERB ("ToolsBox",              gl_tools_box),
-	BONOBO_UI_VERB ("ToolsLine",             gl_tools_line),
-	BONOBO_UI_VERB ("ToolsEllipse",          gl_tools_ellipse),
-	BONOBO_UI_VERB ("ToolsImage",            gl_tools_image),
-	BONOBO_UI_VERB ("ToolsBarcode",          gl_tools_barcode),
-	BONOBO_UI_VERB ("ToolsZoomIn",           gl_tools_zoomin),
-	BONOBO_UI_VERB ("ToolsZoomOut",          gl_tools_zoomout),
-	BONOBO_UI_VERB ("ToolsZoom1to1",         gl_tools_zoom1to1),
-	BONOBO_UI_VERB ("ToolsZoomToFit",        gl_tools_zoom_to_fit),
-	BONOBO_UI_VERB ("ToolsMergeProperties",  gl_tools_merge_properties),
-	BONOBO_UI_VERB ("ToolsRaiseObjects",     gl_tools_raise_objects),
-	BONOBO_UI_VERB ("ToolsLowerObjects",     gl_tools_lower_objects),
-	BONOBO_UI_VERB ("ToolsRotateLeft",       gl_tools_rotate_objects_left),
-	BONOBO_UI_VERB ("ToolsRotateRight",      gl_tools_rotate_objects_right),
-	BONOBO_UI_VERB ("ToolsFlipHorizontal",   gl_tools_flip_objects_horiz),
-	BONOBO_UI_VERB ("ToolsFlipVertical",     gl_tools_flip_objects_vert),
-	BONOBO_UI_VERB ("ToolsAlignLeft",        gl_tools_align_objects_left),
-	BONOBO_UI_VERB ("ToolsAlignRight",       gl_tools_align_objects_right),
-	BONOBO_UI_VERB ("ToolsAlignHCenter",     gl_tools_align_objects_hcenter),
-	BONOBO_UI_VERB ("ToolsAlignTop",         gl_tools_align_objects_top),
-	BONOBO_UI_VERB ("ToolsAlignBottom",      gl_tools_align_objects_bottom),
-	BONOBO_UI_VERB ("ToolsAlignVCenter",     gl_tools_align_objects_vcenter),
-	BONOBO_UI_VERB ("ToolsCenterHorizontal", gl_tools_center_objects_horiz),
-	BONOBO_UI_VERB ("ToolsCenterVertical",   gl_tools_center_objects_vert),
-	BONOBO_UI_VERB ("SettingsPreferences",   gl_cmd_settings_preferences),
-	BONOBO_UI_VERB ("HelpContents",          gl_cmd_help_contents),
-	BONOBO_UI_VERB ("About",                 gl_cmd_help_about),
+static GtkActionEntry entries[] = {
 
-	BONOBO_UI_VERB_END
+	/* Menu entries. */
+	{ "FileMenu",                NULL, "_File" },
+	{ "FileRecentsMenu",         NULL, "Recent _Files" },
+	{ "EditMenu",                NULL, "_Edit" },
+	{ "ViewMenu",                NULL, "_View" },
+	{ "ViewMainToolBarMenu",     NULL, "Customize Main Toolbar" },
+	{ "ViewDrawingToolBarMenu",  NULL, "Customize Drawing Toolbar" },
+	{ "ViewPropertyToolBarMenu", NULL, "Customize Properties Toolbar" },
+	{ "ObjectsMenu",             NULL, "_Objects" },
+	{ "ObjectsCreateMenu",       NULL, "_Create" },
+	{ "ObjectsOrderMenu",        NULL, "_Order" },
+	{ "ObjectsRotateFlipMenu",   NULL, "_Rotate/Flip" },
+	{ "ObjectsAlignHorizMenu",   NULL, "Align _Horizontal" },
+	{ "ObjectsAlignVertMenu",    NULL, "Align _Vertical" },
+	{ "HelpMenu",                NULL, "_Help" },
+
+
+	/* File action entries. */
+	{ "FileNew",
+	  GTK_STOCK_NEW,
+	  "_New",
+	  "<control>N",
+	  "Create a new file",
+	  G_CALLBACK (gl_ui_cmd_file_new) },
+
+	{ "FileOpen",
+	  GTK_STOCK_OPEN,
+	  "_Open...",
+	  "<control>O",
+	  "Open a file",
+	  G_CALLBACK (gl_ui_cmd_file_open) },
+
+	{ "FileSave",
+	  GTK_STOCK_SAVE,
+	  "_Save",
+	  "<control>S",
+	  "Save current file",
+	  G_CALLBACK (gl_ui_cmd_file_save) },
+
+	{ "FileSaveAs",
+	  GTK_STOCK_SAVE,
+	  "Save _As...",
+	  "<shift><control>S",
+	  "Save the current file to a different name",
+	  G_CALLBACK (gl_ui_cmd_file_save_as) },
+
+	{ "FilePrint",
+	  GTK_STOCK_PRINT,
+	  "_Print...",
+	  "<control>P",
+	  "Print the current file",
+	  G_CALLBACK (gl_ui_cmd_file_print) },
+
+	{ "FileProperties",
+	  GTK_STOCK_PROPERTIES,
+	  "Properties...",
+	  NULL,
+	  "Modify document properties",
+	  G_CALLBACK (gl_ui_cmd_file_properties) },
+
+	{ "FileTemplateDesigner",
+	  NULL,
+	  "Template _Designer...",
+	  NULL,
+	  "Create a custom template",
+	  G_CALLBACK (gl_ui_cmd_file_template_designer) },
+
+	{ "FileClose",
+	  GTK_STOCK_CLOSE,
+	  "_Close",
+	  "<alt>F4",
+	  "Close the current file",
+	  G_CALLBACK (gl_ui_cmd_file_close) },
+
+	{ "FileQuit",
+	  GTK_STOCK_QUIT,
+	  "_Quit",
+	  "<control>Q",
+	  "Quit the program",
+	  G_CALLBACK (gl_ui_cmd_file_quit) },
+
+
+	/* Edit action entries. */
+	{ "EditCut",
+	  GTK_STOCK_CUT,
+	  "Cut",
+	  "<control>X",
+	  "Cut the selection",
+	  G_CALLBACK (gl_ui_cmd_edit_cut) },
+
+	{ "EditCopy",
+	  GTK_STOCK_COPY,
+	  "Copy",
+	  "<control>C",
+	  "Copy the selection",
+	  G_CALLBACK (gl_ui_cmd_edit_copy) },
+
+	{ "EditPaste",
+	  GTK_STOCK_PASTE,
+	  "Paste",
+	  "<control>V",
+	  "Paste the clipboard",
+	  G_CALLBACK (gl_ui_cmd_edit_paste) },
+
+	{ "EditDelete",
+	  NULL,
+	  "Delete",
+	  NULL,
+	  "Delete the selected objects",
+	  G_CALLBACK (gl_ui_cmd_edit_delete) },
+
+	{ "EditSelectAll",
+	  NULL,
+	  "Select All",
+	  "<control>A",
+	  "Select all objects",
+	  G_CALLBACK (gl_ui_cmd_edit_select_all) },
+
+	{ "EditUnSelectAll",
+	  NULL,
+	  "Un-select All",
+	  NULL,
+	  "Remove all selections",
+	  G_CALLBACK (gl_ui_cmd_edit_unselect_all) },
+
+	{ "EditPreferences",
+	  GTK_STOCK_PREFERENCES,
+	  "Preferences",
+	  NULL,
+	  "Configure the application",
+	  G_CALLBACK (gl_ui_cmd_edit_preferences) },
+
+
+	/* View action entries. */
+	{ "ViewZoomIn",
+	  GTK_STOCK_ZOOM_IN,
+	  "Zoom in",
+	  NULL,
+	  "Increase magnification",
+	  G_CALLBACK (gl_ui_cmd_view_zoomin) },
+
+	{ "ViewZoomOut",
+	  GTK_STOCK_ZOOM_OUT,
+	  "Zoom out",
+	  NULL,
+	  "Decrease magnification",
+	  G_CALLBACK (gl_ui_cmd_view_zoomout) },
+
+	{ "ViewZoom1to1",
+	  GTK_STOCK_ZOOM_100,
+	  "Zoom 1 to 1",
+	  NULL,
+	  "Restore scale to 100%",
+	  G_CALLBACK (gl_ui_cmd_view_zoom1to1) },
+
+	{ "ViewZoomToFit",
+	  GTK_STOCK_ZOOM_FIT,
+	  "Zoom to fit",
+	  NULL,
+	  "Set scale to fit window",
+	  G_CALLBACK (gl_ui_cmd_view_zoom_to_fit) },
+
+
+	/* Objects action entries. */
+	{ "ObjectsArrowMode",
+	  GL_STOCK_ARROW,
+	  "Select Mode",
+	  NULL,
+	  "Select, move and modify objects",
+	  G_CALLBACK (gl_ui_cmd_objects_arrow_mode) },
+
+	{ "ObjectsCreateText",
+	  GL_STOCK_TEXT,
+	  "Text",
+	  NULL,
+	  "Create text object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_text) },
+
+	{ "ObjectsCreateBox",
+	  GL_STOCK_BOX,
+	  "Box",
+	  NULL,
+	  "Create box/rectangle object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_box) },
+
+	{ "ObjectsCreateLine",
+	  GL_STOCK_LINE,
+	  "Line",
+	  NULL,
+	  "Create line object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_line) },
+
+	{ "ObjectsCreateEllipse",
+	  GL_STOCK_ELLIPSE,
+	  "Ellipse",
+	  NULL,
+	  "Create ellipse/circle object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_ellipse) },
+
+	{ "ObjectsCreateImage",
+	  GL_STOCK_IMAGE,
+	  "Image",
+	  NULL,
+	  "Create image object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_image) },
+
+	{ "ObjectsCreateBarcode",
+	  GL_STOCK_BARCODE,
+	  "Barcode",
+	  NULL,
+	  "Create barcode object",
+	  G_CALLBACK (gl_ui_cmd_objects_create_barcode) },
+	
+	{ "ObjectsRaise",
+	  GL_STOCK_ORDER_TOP,
+	  "Bring to front", NULL,
+	  "Raise object to top",
+	  G_CALLBACK (gl_ui_cmd_objects_raise) },
+
+	{ "ObjectsLower",
+	  GL_STOCK_ORDER_BOTTOM,
+	  "Send to back",
+	  NULL,
+	  "Lower object to bottom",
+	  G_CALLBACK (gl_ui_cmd_objects_lower) },
+
+	{ "ObjectsRotateLeft",
+	  GL_STOCK_ROTATE_LEFT,
+	  "Rotate left",
+	  NULL,
+	  "Rotate object 90 degrees counter-clockwise",
+	  G_CALLBACK (gl_ui_cmd_objects_rotate_left) },
+
+	{ "ObjectsRotateRight",
+	  GL_STOCK_ROTATE_RIGHT,
+	  "Rotate right",
+	  NULL,
+	  "Rotate object 90 degrees clockwise",
+	  G_CALLBACK (gl_ui_cmd_objects_rotate_right) },
+
+	{ "ObjectsFlipHorizontal",
+	  GL_STOCK_FLIP_HORIZ,
+	  "Flip horizontally",
+	  NULL,
+	  "Flip object horizontally",
+	  G_CALLBACK (gl_ui_cmd_objects_flip_horiz) },
+
+	{ "ObjectsFlipVertical",
+	  GL_STOCK_FLIP_VERT,
+	  "Flip vertically",
+	  NULL,
+	  "Flip object vertically",
+	  G_CALLBACK (gl_ui_cmd_objects_flip_vert) },
+
+	{ "ObjectsAlignLeft",
+	  GL_STOCK_ALIGN_LEFT,
+	  "Align left",
+	  NULL,
+	  "Align objects to left edges",
+	  G_CALLBACK (gl_ui_cmd_objects_align_left) },
+
+	{ "ObjectsAlignRight",
+	  GL_STOCK_ALIGN_RIGHT,
+	  "Align right",
+	  NULL,
+	  "Align objects to right edges",
+	  G_CALLBACK (gl_ui_cmd_objects_align_right) },
+
+	{ "ObjectsAlignHCenter",
+	  GL_STOCK_ALIGN_HCENTER,
+	  "Align horizontal center",
+	  NULL,
+	  "Align objects to horizontal centers",
+	  G_CALLBACK (gl_ui_cmd_objects_align_hcenter) },
+
+	{ "ObjectsAlignTop",
+	  GL_STOCK_ALIGN_TOP,
+	  "Align tops",
+	  NULL,
+	  "Align objects to top edges",
+	  G_CALLBACK (gl_ui_cmd_objects_align_top) },
+
+	{ "ObjectsAlignBottom",
+	  GL_STOCK_ALIGN_BOTTOM,
+	  "Align bottoms",
+	  NULL,
+	  "Align objects to bottom edges",
+	  G_CALLBACK (gl_ui_cmd_objects_align_bottom) },
+
+	{ "ObjectsAlignVCenter",
+	  GL_STOCK_ALIGN_VCENTER,
+	  "Align vertical center",
+	  NULL,
+	  "Align objects to vertical centers",
+	  G_CALLBACK (gl_ui_cmd_objects_align_vcenter) },
+
+	{ "ObjectsCenterHorizontal",
+	  GL_STOCK_CENTER_HORIZ,
+	  "Center horizontally",
+	  NULL,
+	  "Center objects to horizontal label center",
+	  G_CALLBACK (gl_ui_cmd_objects_center_horiz) },
+
+	{ "ObjectsCenterVertical",
+	  GL_STOCK_CENTER_VERT,
+	  "Center vertically",
+	  NULL,
+	  "Center objects to vertical label center",
+	  G_CALLBACK (gl_ui_cmd_objects_center_vert) },
+
+	{ "ObjectsMergeProperties",
+	  GL_STOCK_MERGE,
+	  "Merge properties",
+	  NULL,
+	  "Edit merge properties",
+	  G_CALLBACK (gl_ui_cmd_objects_merge_properties) },
+
+
+	/* Help actions entries. */
+	{ "HelpContents",
+	  GTK_STOCK_HELP,
+	  "Contents",
+	  "F1",
+	  "Open glabels manual",
+	  G_CALLBACK (gl_ui_cmd_help_contents) },
+
+	{ "HelpAbout",
+	  GTK_STOCK_ABOUT,
+	  "About...",
+	  NULL,
+	  "About glabels",
+	  G_CALLBACK (gl_ui_cmd_help_about) },
+
 };
+static guint n_entries = G_N_ELEMENTS (entries);
+
+static GtkToggleActionEntry toggle_entries[] = {
+
+	{ "ViewPropertyToolBar",
+	  NULL,
+	  "Property toolbar",
+	  NULL,
+	  "Change the visibility of the property toolbar in the current window",
+	  G_CALLBACK (gl_ui_cmd_view_property_bar_toggle),
+	  TRUE },
+
+	{ "ViewPropertyToolBarToolTips",
+	  NULL,
+	  "Show tooltips",
+	  NULL,
+	  "Show tooltips for property toolbar",
+	  G_CALLBACK (gl_ui_cmd_view_property_bar_tips_toggle),
+	  TRUE },
+
+	{ "ViewGrid",
+	  NULL,
+	  "Grid",
+	  NULL,
+	  "Change the visibility of the grid in the current window",
+	  G_CALLBACK (gl_ui_cmd_view_grid_toggle),
+	  TRUE },
+
+	{ "ViewMarkup",
+	  NULL,
+	  "Markup",
+	  NULL,
+	  "Change the visibility of markup lines in the current window",
+	  G_CALLBACK (gl_ui_cmd_view_markup_toggle),
+	  TRUE },
+
+};
+static guint n_toggle_entries = G_N_ELEMENTS (toggle_entries);
+
+static GtkToggleActionEntry ui_toggle_entries[] = {
+
+	{ "ViewMainToolBar",
+	  NULL,
+	  "Main toolbar",
+	  NULL,
+	  "Change the visibility of the main toolbar in the current window",
+	  G_CALLBACK (view_ui_item_toggled_cb),
+	  TRUE },
+
+	{ "ViewDrawingToolBar",
+	  NULL,
+	  "Drawing toolbar",
+	  NULL,
+	  "Change the visibility of the drawing toolbar in the current window",
+	  G_CALLBACK (view_ui_item_toggled_cb),
+	  TRUE },
+
+	{ "ViewMainToolBarToolTips",
+	  NULL,
+	  "Show tooltips",
+	  NULL,
+	  "Show tooltips for main toolbar",
+	  G_CALLBACK (view_ui_item_toggled_cb),
+	  TRUE },
+
+	{ "ViewDrawingToolBarToolTips",
+	  NULL,
+	  "Show tooltips",
+	  NULL,
+	  "Show tooltips for drawing toolbar",
+	  G_CALLBACK (view_ui_item_toggled_cb),
+	  TRUE },
+
+};
+static guint n_ui_toggle_entries = G_N_ELEMENTS (ui_toggle_entries);
+
+static const gchar *ui_info = 
+"<ui>"
+""
+"	<menubar name='MenuBar'>"
+"		<menu action='FileMenu'>"
+"			<menuitem action='FileNew' />"
+"			<menuitem action='FileOpen' />"
+"                       <menu action='FileRecentsMenu'>"
+"			        <placeholder name='FileRecentsPlaceHolder' />"
+"                       </menu>"
+"			<separator />"
+"			<menuitem action='FileSave' />"
+"			<menuitem action='FileSaveAs' />"
+"			<separator />"
+"			<menuitem action='FilePrint' />"
+"			<separator />"
+"			<menuitem action='FileProperties' />"
+"			<menuitem action='FileTemplateDesigner' />"
+"			<separator />"
+"			<menuitem action='FileClose' />"
+"			<menuitem action='FileQuit' />"
+"		</menu>"
+"		<menu action='EditMenu'>"
+"			<menuitem action='EditCut' />"
+"			<menuitem action='EditCopy' />"
+"			<menuitem action='EditPaste' />"
+"			<menuitem action='EditDelete' />"
+"			<separator />"
+"			<menuitem action='EditSelectAll' />"
+"			<menuitem action='EditUnSelectAll' />"
+"			<separator />"
+"			<menuitem action='EditPreferences' />"
+"		</menu>"
+"		<menu action='ViewMenu'>"
+"			<menuitem action='ViewMainToolBar' />"
+"			<menuitem action='ViewDrawingToolBar' />"
+"			<menuitem action='ViewPropertyToolBar' />"
+"			<separator />"
+"			<menu action='ViewMainToolBarMenu'>"
+"				<menuitem action='ViewMainToolBarToolTips' />"
+"			</menu>"
+"			<menu action='ViewDrawingToolBarMenu'>"
+"				<menuitem action='ViewDrawingToolBarToolTips' />"
+"			</menu>"
+"			<menu action='ViewPropertyToolBarMenu'>"
+"				<menuitem action='ViewPropertyToolBarToolTips' />"
+"			</menu>"
+"			<separator />"
+"			<menuitem action='ViewGrid' />"
+"			<menuitem action='ViewMarkup' />"
+"			<separator />"
+"			<menuitem action='ViewZoomIn' />"
+"			<menuitem action='ViewZoomOut' />"
+"			<menuitem action='ViewZoom1to1' />"
+"			<menuitem action='ViewZoomToFit' />"
+"		</menu>"
+"		<menu action='ObjectsMenu'>"
+"			<menuitem action='ObjectsArrowMode' />"
+"			<menu action='ObjectsCreateMenu'>"
+"				<menuitem action='ObjectsCreateText' />"
+"				<menuitem action='ObjectsCreateBox' />"
+"				<menuitem action='ObjectsCreateLine' />"
+"				<menuitem action='ObjectsCreateEllipse' />"
+"				<menuitem action='ObjectsCreateImage' />"
+"				<menuitem action='ObjectsCreateBarcode' />"
+"			</menu>"
+"			<separator />"
+"			<menu action='ObjectsOrderMenu'>"
+"				<menuitem action='ObjectsRaise' />"
+"				<menuitem action='ObjectsLower' />"
+"			</menu>"
+"			<menu action='ObjectsRotateFlipMenu'>"
+"				<menuitem action='ObjectsRotateLeft' />"
+"				<menuitem action='ObjectsRotateRight' />"
+"				<menuitem action='ObjectsFlipHorizontal' />"
+"				<menuitem action='ObjectsFlipVertical' />"
+"			</menu>"
+"			<menu action='ObjectsAlignHorizMenu'>"
+"				<menuitem action='ObjectsAlignLeft' />"
+"				<menuitem action='ObjectsAlignHCenter' />"
+"				<menuitem action='ObjectsAlignRight' />"
+"				<menuitem action='ObjectsCenterHorizontal' />"
+"			</menu>"
+"			<menu action='ObjectsAlignVertMenu'>"
+"				<menuitem action='ObjectsAlignTop' />"
+"				<menuitem action='ObjectsAlignVCenter' />"
+"				<menuitem action='ObjectsAlignBottom' />"
+"				<menuitem action='ObjectsCenterVertical' />"
+"			</menu>"
+"			<separator />"
+"			<menuitem action='ObjectsMergeProperties' />"
+"		</menu>"
+"		<menu action='HelpMenu'>"
+"			<menuitem action='HelpContents' />"
+"			<menuitem action='HelpAbout' />"
+"		</menu>"
+"	</menubar>"
+""
+"	<toolbar name='MainToolBar'>"
+"		<toolitem action='FileNew' />"
+"		<toolitem action='FileOpen' />"
+"		<toolitem action='FileSave' />"
+"		<separator />"
+"		<toolitem action='FilePrint' />"
+"		<separator />"
+"		<toolitem action='EditCut' />"
+"		<toolitem action='EditCopy' />"
+"		<toolitem action='EditPaste' />"
+"	</toolbar>"
+""
+"	<toolbar name='DrawingToolBar'>"
+"		<toolitem action='ObjectsArrowMode' />"
+"		<separator />"
+"		<toolitem action='ObjectsCreateText' />"
+"		<toolitem action='ObjectsCreateBox' />"
+"		<toolitem action='ObjectsCreateLine' />"
+"		<toolitem action='ObjectsCreateEllipse' />"
+"		<toolitem action='ObjectsCreateImage' />"
+"		<toolitem action='ObjectsCreateBarcode' />"
+"		<separator />"
+"		<toolitem action='ViewZoomIn' />"
+"		<toolitem action='ViewZoomOut' />"
+"		<toolitem action='ViewZoom1to1' />"
+"		<toolitem action='ViewZoomToFit' />"
+"		<separator />"
+"		<toolitem action='ObjectsMergeProperties' />"
+"	</toolbar>"
+""
+"</ui>";
+
 
 static gchar* doc_verbs [] = {
-	"/commands/FileProperties",
-	"/commands/FileSave",
-	"/commands/FileSaveAs",
-	"/commands/FilePrint",
-	"/commands/FilePrintPreview",
-	"/commands/FileClose",
-	"/commands/FileCloseAll",
-	"/commands/EditUndo",
-	"/commands/EditRedo",
-	"/commands/EditCut",
-	"/commands/EditCopy",
-	"/commands/EditPaste",
-	"/commands/EditDelete",
-	"/commands/EditSelectAll",
-	"/commands/EditUnSelectAll",
-	"/commands/ToolsArrow",
-	"/commands/ToolsText",
-	"/commands/ToolsLine",
-	"/commands/ToolsBox",
-	"/commands/ToolsEllipse",
-	"/commands/ToolsImage",
-	"/commands/ToolsBarcode",
-	"/commands/ToolsZoomIn",
-	"/commands/ToolsZoomOut",
-	"/commands/ToolsZoom1to1",
-	"/commands/ToolsZoomToFit",
-	"/commands/ToolsMergeProperties",
-	"/commands/ToolsRaiseObjects",
-	"/commands/ToolsLowerObjects",
-	"/commands/ToolsRotateLeft",
-	"/commands/ToolsRotateRight",
-	"/commands/ToolsFlipHorizontal",
-	"/commands/ToolsFlipVertical",
-	"/commands/ToolsAlignLeft",
-	"/commands/ToolsAlignRight",
-	"/commands/ToolsAlignHCenter",
-	"/commands/ToolsAlignTop",
-	"/commands/ToolsAlignBottom",
-	"/commands/ToolsAlignVCenter",
-	"/commands/ToolsCenterHorizontal",
-	"/commands/ToolsCenterVertical",
-	"/menu/Objects/CreateObjects",
-	"/menu/Objects/Order",
-	"/menu/Objects/RotateFlip",
-	"/menu/Objects/AlignHoriz",
-	"/menu/Objects/AlignVert",
-	"/commands/ViewGrid",
-	"/commands/ViewMarkup",
+	"/ui/MenuBar/FileMenu/FileProperties",
+	"/ui/MenuBar/FileMenu/FileSave",
+	"/ui/MenuBar/FileMenu/FileSaveAs",
+	"/ui/MenuBar/FileMenu/FilePrint",
+	"/ui/MenuBar/FileMenu/FileClose",
+	"/ui/MenuBar/EditMenu/EditCut",
+	"/ui/MenuBar/EditMenu/EditCopy",
+	"/ui/MenuBar/EditMenu/EditPaste",
+	"/ui/MenuBar/EditMenu/EditDelete",
+	"/ui/MenuBar/EditMenu/EditSelectAll",
+	"/ui/MenuBar/EditMenu/EditUnSelectAll",
+	"/ui/MenuBar/ViewMenu/ViewZoomIn",
+	"/ui/MenuBar/ViewMenu/ViewZoomOut",
+	"/ui/MenuBar/ViewMenu/ViewZoom1to1",
+	"/ui/MenuBar/ViewMenu/ViewZoomToFit",
+	"/ui/MenuBar/ViewMenu/ViewGrid",
+	"/ui/MenuBar/ViewMenu/ViewMarkup",
+	"/ui/MenuBar/ObjectsMenu/ObjectsArrowMode",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateText",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateLine",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateBox",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateEllipse",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateImage",
+	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateBarcode",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsRaise",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsLower",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipVertical",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignHCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsCenterHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignTop",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignBottom",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignVCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsCenterVertical",
+	"/ui/MenuBar/ObjectsMenu/ObjectsMergeProperties",
 
 	NULL
 };
 
 static gchar* doc_modified_verbs [] = {
-	"/commands/FileSave",
+	"/ui/MenuBar/FileMenu/Save",
 
 	NULL
 };
 
 static gchar* selection_verbs [] = {
-	"/commands/EditCut",
-	"/commands/EditCopy",
-	"/commands/EditDelete",
-	"/commands/EditUnSelectAll",
-	"/commands/ToolsRaiseObjects",
-	"/commands/ToolsLowerObjects",
-	"/commands/ToolsRotateLeft",
-	"/commands/ToolsRotateRight",
-	"/commands/ToolsFlipHorizontal",
-	"/commands/ToolsFlipVertical",
-	"/commands/ToolsCenterHorizontal",
-	"/commands/ToolsCenterVertical",
-	"/menu/Objects/Order",
-	"/menu/Objects/RotateFlip",
-	"/menu/Objects/AlignHoriz",
-	"/menu/Objects/AlignVert",
+	"/ui/MenuBar/EditMenu/EditCut",
+	"/ui/MenuBar/EditMenu/EditCopy",
+	"/ui/MenuBar/EditMenu/EditDelete",
+	"/ui/MenuBar/EditMenu/EditUnSelectAll",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsRaise",
+	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsLower",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsFlipVertical",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsCenterHorizontal",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsCenterVertical",
 
 	NULL
 };
@@ -185,238 +679,117 @@ static gchar* atomic_selection_verbs [] = {
 };
 
 static gchar* multi_selection_verbs [] = {
-	"/commands/ToolsAlignLeft",
-	"/commands/ToolsAlignRight",
-	"/commands/ToolsAlignHCenter",
-	"/commands/ToolsAlignTop",
-	"/commands/ToolsAlignBottom",
-	"/commands/ToolsAlignVCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignLeft",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignRight",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignHorizMenu/ObjectsAlignHCenter",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignTop",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignBottom",
+	"/ui/MenuBar/ObjectsMenu/ObjectsAlignVertMenu/ObjectsAlignVCenter",
 
 	NULL
 };
 
 
-/*==========================================================================*/
-/* Local function prototypes                                                */
-/*==========================================================================*/
-
-static void view_menu_item_toggled_cb     (BonoboUIComponent           *ui_component,
-					   const char                  *path,
-					   Bonobo_UIComponent_EventType type,
-					   const char                  *state,
-					   BonoboWindow                *win);
-
-static void set_app_main_toolbar_style 	  (BonoboUIComponent           *ui_component);
-
-static void set_app_drawing_toolbar_style (BonoboUIComponent           *ui_component);
-
-static void set_app_property_toolbar_style (BonoboUIComponent           *ui_component);
-
-static void set_view_style                (BonoboUIComponent           *ui_component);
-
-
-
 /*****************************************************************************/
 /* Initialize UI component for given window.                                 */
 /*****************************************************************************/
-void
-gl_ui_init (BonoboUIComponent *ui_component,
-	    BonoboWindow      *win,
-	    GtkWidget         *cursor_info_frame,
-	    GtkWidget         *zoom_info_frame)
+GtkUIManager *
+gl_ui_new (GtkWindow *window)
 {
-        EggRecentView	*recent_view;
-        EggRecentModel 	*recent_model;
-	BonoboControl	*control;
+	GtkUIManager            *ui;
+	GtkActionGroup          *actions;
+	GError                  *error = NULL;
 
 	gl_debug (DEBUG_UI, "START");
 
-	gl_debug (DEBUG_UI, "window = %p", win);
+	g_return_val_if_fail (window && GTK_IS_WINDOW (window), NULL);
 
-	g_return_if_fail (ui_component != NULL);
+	gl_debug (DEBUG_UI, "window = %p", window);
 
-	bonobo_ui_engine_config_set_path (bonobo_window_get_ui_engine (win),
-					  "/glabels/UIConfig/kvps");
-	gl_debug (DEBUG_UI, "Path set");
+	ui = gtk_ui_manager_new ();
 
-	bonobo_ui_util_set_ui (ui_component,
-			       "", GLABELS_UI_XML, "gLabels", NULL);
-	gl_debug (DEBUG_UI, "UI set");
+	actions = gtk_action_group_new ("Actions");
+	gtk_action_group_add_actions (actions, entries, n_entries, window);
+	gtk_action_group_add_toggle_actions (actions, 
+					     toggle_entries, n_toggle_entries, 
+					     window);
+	gtk_action_group_add_toggle_actions (actions, 
+					     ui_toggle_entries, n_ui_toggle_entries, 
+					     ui);
 
-	bonobo_ui_component_add_verb_list_with_data(ui_component,
-						    gl_ui_verbs, win);
-	gl_debug (DEBUG_UI, "verb list added");
+	gtk_ui_manager_insert_action_group (ui, actions, 0);
+	gtk_window_add_accel_group (window, gtk_ui_manager_get_accel_group (ui));
 
-	/* Set the toolbar style according to prefs */
-	set_app_main_toolbar_style (ui_component);
+	if (!gtk_ui_manager_add_ui_from_string (ui, ui_info, strlen (ui_info), &error)) {
+		g_message ("building menus failed: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* Set the toolbar styles according to prefs */
+	set_app_main_toolbar_style (ui);
+	set_app_drawing_toolbar_style (ui);
 		
-	/* Add listener for the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewMainToolbar", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarSystem", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarIcon", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarIconText", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "MainToolbarTooltips", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	/* Set the toolbar style according to prefs */
-	set_app_drawing_toolbar_style (ui_component);
-		
-	/* Add listener for the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewDrawingToolbar", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarSystem", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIcon", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarIconText", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "DrawingToolbarTooltips", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	/* Set the toolbar style according to prefs */
-	set_app_property_toolbar_style (ui_component);
-		
-	/* Add listener for the view menu */
-	bonobo_ui_component_add_listener (ui_component, "ViewPropertyToolbar", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	bonobo_ui_component_add_listener (ui_component, "PropertyToolbarTooltips", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-
 	/* Set view grid and markup visibility according to prefs */
-	set_view_style (ui_component);
+	set_view_style (ui);
 		
-	/* Add listener for the view grid & markup */
-	bonobo_ui_component_add_listener (ui_component, "ViewGrid", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "ViewMarkup", 
-			(BonoboUIListenerFn)view_menu_item_toggled_cb, 
-			(gpointer)win);
-
-	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
-
-	/* Status bar */
-	gl_debug (DEBUG_UI, "START Setup status bar.");
-
-        bonobo_ui_component_set_prop (ui_component,
-				      "/status", "hidden", "0", NULL);
-
-	control = bonobo_control_new (cursor_info_frame);
-	bonobo_ui_component_object_set (ui_component,
-					"/status/Cursor", BONOBO_OBJREF (control), NULL);
-	bonobo_object_unref (BONOBO_OBJECT (control));
-        bonobo_ui_component_set_prop (ui_component,
-				      "/status/Cursor", "hidden", "0", NULL);
-
-	control = bonobo_control_new (zoom_info_frame);
-	bonobo_ui_component_object_set (ui_component,
-					"/status/Zoom", BONOBO_OBJREF (control), NULL);
-	bonobo_object_unref (BONOBO_OBJECT (control));
-        bonobo_ui_component_set_prop (ui_component,
-				      "/status/Zoom", "hidden", "0", NULL);
-
-	gl_debug (DEBUG_UI, "END Setup status bar.");
-
-
-	/* add an eggRecentView object */
-        recent_model = gl_recent_get_model ();
-        recent_view  =
-		EGG_RECENT_VIEW (egg_recent_view_bonobo_new (ui_component,
-							     "/menu/File/Recents"));
-	egg_recent_view_set_model (recent_view, recent_model);
-
-	g_signal_connect (G_OBJECT (recent_view), "activate",
-			  G_CALLBACK (gl_file_open_recent), win);
-
-	/* Squirrel away a copy to be unreferenced in gl_ui_unref() */
-	g_object_set_data (G_OBJECT (ui_component), "recent-view", recent_view);
+	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
 
 	gl_debug (DEBUG_UI, "END");
+
+	return ui;
 }
 
 /*****************************************************************************/
 /* Unref wrapper.                                                            */
 /*****************************************************************************/
 void
-gl_ui_unref (BonoboUIComponent *ui_component)
+gl_ui_unref (GtkUIManager *ui)
 {
-	EggRecentView *recent_view;
+	gl_debug (DEBUG_UI, "START");
 
-	/* Pull out recent view to unreference. */
-	recent_view = g_object_get_data (G_OBJECT(ui_component), "recent-view");
-	if (recent_view) {
-		g_object_unref (recent_view);
-	}
+	g_object_unref(ui);
 
-	bonobo_object_unref(ui_component);
+	gl_debug (DEBUG_UI, "END");
 }
 
 /*****************************************************************************/
 /* Update all verbs of given UI component.                                   */
 /*****************************************************************************/
 void
-gl_ui_update_all (BonoboUIComponent *ui_component,
-		  glView            *view)
+gl_ui_update_all (GtkUIManager *ui,
+		  glView       *view)
 {
 	glLabel *label;
 
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, TRUE);
+	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, TRUE);
 
 	label = view->label;
 	g_return_if_fail (label != NULL);
 
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/EditUndo",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/EditMenu/EditUndo",
 				       gl_label_can_undo (label));
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/EditRedo",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/EditMenu/EditRedo",
 				       gl_label_can_redo (label));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component, 
-					    doc_modified_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, doc_modified_verbs,
 					    gl_label_is_modified (label));
 
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewZoomIn",
 				       !gl_view_is_zoom_max (view));
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewZoomOut",
 				       !gl_view_is_zoom_min (view));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
 					    !gl_view_is_selection_empty (view));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    atomic_selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs,
 					    gl_view_is_selection_atomic (view));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    multi_selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs,
 					    !gl_view_is_selection_empty (view)
 					    && !gl_view_is_selection_atomic (view));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -425,15 +798,11 @@ gl_ui_update_all (BonoboUIComponent *ui_component,
 /* Update all verbs of given UI component to "no document" state.            */
 /*****************************************************************************/
 void
-gl_ui_update_nodoc (BonoboUIComponent *ui_component)
+gl_ui_update_nodoc (GtkUIManager *ui)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-	
-	gl_ui_util_set_verb_list_sensitive (ui_component, doc_verbs, FALSE);
-
-	bonobo_ui_component_thaw (ui_component, NULL);
+	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -442,18 +811,14 @@ gl_ui_update_nodoc (BonoboUIComponent *ui_component)
 /* Update label modified verbs of given UI component.                        */
 /*****************************************************************************/
 void
-gl_ui_update_modified_verbs (BonoboUIComponent *ui_component,
-			     glLabel           *label)
+gl_ui_update_modified_verbs (GtkUIManager *ui,
+			     glLabel      *label)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_list_sensitive (ui_component, 
+	gl_ui_util_set_verb_list_sensitive (ui, 
 					    doc_modified_verbs,
 					    gl_label_is_modified (label));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -462,27 +827,20 @@ gl_ui_update_modified_verbs (BonoboUIComponent *ui_component,
 /* Update verbs associated with selection state of given UI component.       */
 /*****************************************************************************/
 void
-gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
-			      glView            *view)
+gl_ui_update_selection_verbs (GtkUIManager *ui,
+			      glView       *view)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
 					    !gl_view_is_selection_empty (view));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    atomic_selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs,
 					    gl_view_is_selection_atomic (view));
 
-	gl_ui_util_set_verb_list_sensitive (ui_component,
-					    multi_selection_verbs,
+	gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs,
 					    !gl_view_is_selection_empty (view)
 					    && !gl_view_is_selection_atomic (view));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -491,19 +849,15 @@ gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
 /* Update verbs associated with zoom level of given UI component.            */
 /*****************************************************************************/
 void
-gl_ui_update_zoom_verbs (BonoboUIComponent *ui_component,
-			 glView            *view)
+gl_ui_update_zoom_verbs (GtkUIManager *ui,
+			 glView       *view)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomIn",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewZoomIn",
 				       !gl_view_is_zoom_max (view));
-	gl_ui_util_set_verb_sensitive (ui_component, "/commands/ToolsZoomOut",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewZoomOut",
 				       !gl_view_is_zoom_min (view));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -512,22 +866,16 @@ gl_ui_update_zoom_verbs (BonoboUIComponent *ui_component,
 /* Update undo/redo verbs of given UI component.                             */
 /*****************************************************************************/
 void
-gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
-			      glLabel           *label)
+gl_ui_update_undo_redo_verbs (GtkUIManager *ui,
+			      glLabel      *label)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_sensitive (ui_component,
-				       "/commands/EditUndo",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/EditMenu/EditUndo",
 				       gl_label_can_undo (label));
 
-	gl_ui_util_set_verb_sensitive (ui_component,
-				       "/commands/EditRedo",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/EditMenu/EditRedo",
 				       gl_label_can_redo (label));
-
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -536,233 +884,86 @@ gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
 /* PRIVATE.  View menu item toggled callback.                                */
 /*---------------------------------------------------------------------------*/
 static void
-view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
-			   const char                  *path,
-			   Bonobo_UIComponent_EventType type,
-			   const char                  *state,
-			   BonoboWindow                *win)
+view_ui_item_toggled_cb (GtkToggleAction *action,
+			 GtkUIManager    *ui)
 {
-	gboolean s;
+	const gchar *name;
+	gboolean     state;
+
+	gl_debug (DEBUG_UI, "START");
+
+	g_return_if_fail (action && GTK_IS_TOGGLE_ACTION (action));
+
+	name  = gtk_action_get_name (GTK_ACTION (action));
+	state = gtk_toggle_action_get_active (action);
+
+	gl_debug (DEBUG_UI, "Action = %s, State = %d", name, state);
+
+	if (strcmp (name, "ViewMainToolBar") == 0)
+	{
+		gl_prefs->main_toolbar_visible = state;
+		set_app_main_toolbar_style (ui);
+		gl_prefs_model_save_settings (gl_prefs);
+	}
+
+	if (strcmp (name, "ViewMainToolBarToolTips") == 0)
+	{
+		gl_prefs->main_toolbar_view_tooltips = state;
+		set_app_main_toolbar_style (ui);
+		gl_prefs_model_save_settings (gl_prefs);
+	}
+
+	if (strcmp (name, "ViewDrawingToolBar") == 0)
+	{
+		gl_prefs->drawing_toolbar_visible = state;
+		set_app_drawing_toolbar_style (ui);
+		gl_prefs_model_save_settings (gl_prefs);
+	}
+
+	if (strcmp (name, "ViewDrawingToolBarToolTips") == 0)
+	{
+		gl_prefs->drawing_toolbar_view_tooltips = state;
+		set_app_drawing_toolbar_style (ui);
+		gl_prefs_model_save_settings (gl_prefs);
+	}
 
 	gl_debug (DEBUG_UI, "");
-
-	s = (strcmp (state, "1") == 0);
-
-	if (strcmp (path, "ViewMainToolbar") == 0)
-	{
-		gl_prefs->main_toolbar_visible = s;
-		set_app_main_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarSystem") == 0))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
-		set_app_main_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarIcon") == 0))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS;
-		set_app_main_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "MainToolbarIconText") == 0))
-	{		
-		gl_prefs->main_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
-		set_app_main_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "MainToolbarTooltips") == 0)
-	{
-		gl_prefs->main_toolbar_view_tooltips = s;
-		set_app_main_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "ViewDrawingToolbar") == 0)
-	{
-		gl_prefs->drawing_toolbar_visible = s;
-		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "DrawingToolbarTooltips") == 0)
-	{
-		gl_prefs->drawing_toolbar_view_tooltips = s;
-		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "ViewPropertyToolbar") == 0)
-	{
-		gl_prefs->property_toolbar_visible = s;
-		set_app_property_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "PropertyToolbarTooltips") == 0)
-	{
-		gl_prefs->property_toolbar_view_tooltips = s;
-		set_app_property_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "ViewGrid") == 0)
-	{
-		gl_prefs->grid_visible = s;
-		if (s) {
-			gl_view_show_grid (GL_VIEW(GL_WINDOW(win)->view));
-		} else {
-			gl_view_hide_grid (GL_VIEW(GL_WINDOW(win)->view));
-		}
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (strcmp (path, "ViewMarkup") == 0)
-	{
-		gl_prefs->markup_visible = s;
-		if (s) {
-			gl_view_show_markup (GL_VIEW(GL_WINDOW(win)->view));
-		} else {
-			gl_view_hide_markup (GL_VIEW(GL_WINDOW(win)->view));
-		}
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set main toolbar style.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-set_app_main_toolbar_style (BonoboUIComponent *ui_component)
+set_app_main_toolbar_style (GtkUIManager *ui)
 {
-	GConfClient *client;
-	gboolean labels;
+	GtkWidget *toolbar;
 
 	gl_debug (DEBUG_UI, "START");
 
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
+	g_return_if_fail (ui && GTK_IS_UI_MANAGER (ui));
 			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
 	/* Updated view menu */
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/ViewMainToolbar",
+	gl_ui_util_set_verb_state (ui, "/ui/ViewMenu/ViewMainToolBar",
 				   gl_prefs->main_toolbar_visible);
 
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/MainToolbarSystem",
-				       gl_prefs->main_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/MainToolbarIcon",
-				       gl_prefs->main_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/MainToolbarIconText",
-				       gl_prefs->main_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/MainToolbarTooltips",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/ViewMenu/ViewMainToolBarToolTips",
 				       gl_prefs->main_toolbar_visible);
 
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/MainToolbarSystem",
-				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
-
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/MainToolbarIcon",
-				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS);
-
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/MainToolbarIconText",
-				   gl_prefs->main_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
-
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/MainToolbarTooltips",
+	gl_ui_util_set_verb_state (ui, "/ui/ViewMenu/ViewMainToolBarToolTips",
 				   gl_prefs->main_toolbar_view_tooltips);
 
 	
-	/* Actually update main_toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/MainToolbar",
-		"tips", gl_prefs->main_toolbar_view_tooltips ? "1" : "0",
-		NULL);
-	
-	switch (gl_prefs->main_toolbar_buttons_style)
-	{
-		case GL_TOOLBAR_SYSTEM:
-						
-			client = gconf_client_get_default ();
-			if (client == NULL) 
-				goto error;
+	toolbar = gtk_ui_manager_get_widget (ui, "/MainToolBar");
 
-			labels = gconf_client_get_bool (client, 
-					"/desktop/gnome/interface/toolbar-labels", NULL);
+	gtk_toolbar_set_tooltips (GTK_TOOLBAR (toolbar),
+				  gl_prefs->main_toolbar_view_tooltips);
 
-			g_object_unref (G_OBJECT (client));
-			
-			if (labels)
-			{			
-				bonobo_ui_component_set_prop (
-					ui_component, "/MainToolbar", "look", "both", NULL);
-			
-			}
-			else
-			{
-				bonobo_ui_component_set_prop (
-					ui_component, "/MainToolbar", "look", "icons", NULL);
-			}
-	
-			break;
-			
-		case GL_TOOLBAR_ICONS:
-			bonobo_ui_component_set_prop (
-				ui_component, "/MainToolbar", "look", "icon", NULL);
-			
-			break;
-			
-		case GL_TOOLBAR_ICONS_AND_TEXT:
-			bonobo_ui_component_set_prop (
-				ui_component, "/MainToolbar", "look", "both", NULL);
-			
-			break;
-		default:
-			goto error;
-			break;
+	if (gl_prefs->main_toolbar_visible) {
+		gtk_widget_show_all (toolbar);
+	} else {
+		gtk_widget_hide (toolbar);
 	}
 	
-	bonobo_ui_component_set_prop (
-			ui_component, "/MainToolbar",
-			"hidden", gl_prefs->main_toolbar_visible ? "0":"1", NULL);
-
- error:
-	bonobo_ui_component_thaw (ui_component, NULL);
-
 	gl_debug (DEBUG_UI, "END");
 }
 
@@ -771,97 +972,38 @@ set_app_main_toolbar_style (BonoboUIComponent *ui_component)
 /* PRIVATE.  Set drawing toolbar style.                                      */
 /*---------------------------------------------------------------------------*/
 static void
-set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
+set_app_drawing_toolbar_style (GtkUIManager *ui)
 {
-	GConfClient *client;
-	gboolean labels;
+	GtkWidget *toolbar;
 
 	gl_debug (DEBUG_UI, "START");
 
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT(ui_component));
+	g_return_if_fail (ui && GTK_IS_UI_MANAGER (ui));
 			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
 	/* Updated view menu */
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/ViewDrawingToolbar",
+	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewDrawingToolBar",
 				   gl_prefs->drawing_toolbar_visible);
 
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/DrawingToolbarSystem",
-				       gl_prefs->drawing_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/DrawingToolbarIcon",
-				       gl_prefs->drawing_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/DrawingToolbarIconText",
-				       gl_prefs->drawing_toolbar_visible);
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/DrawingToolbarTooltips",
+	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewDrawingToolBarToolTips",
 				       gl_prefs->drawing_toolbar_visible);
 
-	gl_ui_util_set_verb_state (ui_component, 
-			"/commands/DrawingToolbarTooltips",
-			gl_prefs->drawing_toolbar_view_tooltips);
+	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenuDrawingToolBarToolTips",
+				   gl_prefs->drawing_toolbar_view_tooltips);
 
 	
-	/* Actually update drawing_toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/DrawingToolbar",
-		"tips", gl_prefs->drawing_toolbar_view_tooltips ? "1" : "0",
-		NULL);
+	toolbar = gtk_ui_manager_get_widget (ui, "/DrawingToolBar");
+
+	gtk_toolbar_set_tooltips (GTK_TOOLBAR (toolbar),
+				  gl_prefs->drawing_toolbar_view_tooltips);
+
+	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
+
+	if (gl_prefs->drawing_toolbar_visible) {
+		gtk_widget_show_all (toolbar);
+	} else {
+		gtk_widget_hide (toolbar);
+	}
 	
-	bonobo_ui_component_set_prop (
-			ui_component, "/DrawingToolbar",
-			"hidden", gl_prefs->drawing_toolbar_visible ? "0":"1", NULL);
-
- error:
-	bonobo_ui_component_thaw (ui_component, NULL);
-
-	gl_debug (DEBUG_UI, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set property toolbar style.                                     */
-/*---------------------------------------------------------------------------*/
-static void
-set_app_property_toolbar_style (BonoboUIComponent *ui_component)
-{
-	GConfClient *client;
-	gboolean labels;
-
-	gl_debug (DEBUG_UI, "START");
-
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT(ui_component));
-			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	/* Updated view menu */
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/ViewPropertyToolbar",
-				   gl_prefs->property_toolbar_visible);
-
-	gl_ui_util_set_verb_sensitive (ui_component, 
-				       "/commands/PropertyToolbarTooltips",
-				       gl_prefs->property_toolbar_visible);
-
-	gl_ui_util_set_verb_state (ui_component, 
-			"/commands/PropertyToolbarTooltips",
-			gl_prefs->property_toolbar_view_tooltips);
-
-	
-	/* Actually update property_toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/PropertyToolbar",
-		"tips", gl_prefs->property_toolbar_view_tooltips ? "1" : "0",
-		NULL);
-	
-	bonobo_ui_component_set_prop (
-			ui_component, "/PropertyToolbar",
-			"hidden", gl_prefs->property_toolbar_visible ? "0":"1", NULL);
-
-	bonobo_ui_component_thaw (ui_component, NULL);
-
 	gl_debug (DEBUG_UI, "END");
 }
 
@@ -869,29 +1011,18 @@ set_app_property_toolbar_style (BonoboUIComponent *ui_component)
 /* PRIVATE.  Set visibility of grid and markup.                              */
 /*---------------------------------------------------------------------------*/
 static void
-set_view_style (BonoboUIComponent *ui_component)
+set_view_style (GtkUIManager *ui)
 {
-	GConfClient *client;
-	gboolean labels;
-
 	gl_debug (DEBUG_UI, "START");
 
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT(ui_component));
+	g_return_if_fail (ui && GTK_IS_UI_MANAGER(ui));
 			
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/ViewGrid",
+	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewGrid",
 				   gl_prefs->grid_visible);
 
-	gl_ui_util_set_verb_state (ui_component, 
-				   "/commands/ViewMarkup",
+	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewMarkup",
 				   gl_prefs->markup_visible);
-
- error:
-	bonobo_ui_component_thaw (ui_component, NULL);
 
 	gl_debug (DEBUG_UI, "END");
 }
-
 

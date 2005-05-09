@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-util.c:  GLabels ui utilities module
@@ -23,7 +25,8 @@
 
 #include "ui-util.h"
 
-#include <bonobo/bonobo-control.h>
+#include <gtk/gtkaction.h>
+#include <gtk/gtktoggleaction.h>
 
 #include "debug.h"
 
@@ -49,20 +52,23 @@
 /* Set sensitivity of verb.                                                  */
 /*****************************************************************************/
 void
-gl_ui_util_set_verb_sensitive (BonoboUIComponent  *ui_component,
-			       gchar              *cname,
-			       gboolean            sensitive)
+gl_ui_util_set_verb_sensitive (GtkUIManager  *ui,
+			       gchar         *cname,
+			       gboolean       sensitive)
 {
+	GtkAction *action;
+
 	gl_debug (DEBUG_UI, "START");
 
 	g_return_if_fail (cname != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
+	g_return_if_fail (GTK_IS_UI_MANAGER (ui));
 
-	bonobo_ui_component_set_prop (ui_component,
-				      cname,
-				      "sensitive",
-				      sensitive ? "1" : "0",
-				      NULL);
+	action = gtk_ui_manager_get_action (ui, cname);
+
+	if (action) {
+		gl_debug (DEBUG_UI, "Set action \"%s\" sensitive = %d", cname, sensitive);
+		gtk_action_set_sensitive (action, sensitive);
+	}
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -71,22 +77,24 @@ gl_ui_util_set_verb_sensitive (BonoboUIComponent  *ui_component,
 /* Set sensitivity of a list of verbs.                                       */
 /*****************************************************************************/
 void
-gl_ui_util_set_verb_list_sensitive (BonoboUIComponent   *ui_component,
-				    gchar              **vlist,
-				    gboolean             sensitive)
+gl_ui_util_set_verb_list_sensitive (GtkUIManager  *ui,
+				    gchar        **vlist,
+				    gboolean       sensitive)
 {
+	GtkAction *action;
+
 	gl_debug (DEBUG_UI, "START");
 
 	g_return_if_fail (vlist != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
+	g_return_if_fail (GTK_IS_UI_MANAGER (ui));
 
 	for ( ; *vlist; ++vlist)
 	{
-		bonobo_ui_component_set_prop (ui_component,
-					      *vlist,
-					      "sensitive",
-					      sensitive ? "1" : "0",
-					      NULL);
+		action = gtk_ui_manager_get_action (ui, *vlist);
+
+		if (action) {
+			gtk_action_set_sensitive (action, sensitive);
+		}
 	}
 
 	gl_debug (DEBUG_UI, "END");
@@ -96,44 +104,22 @@ gl_ui_util_set_verb_list_sensitive (BonoboUIComponent   *ui_component,
 /* Set state of a verb.                                                      */
 /*****************************************************************************/
 void
-gl_ui_util_set_verb_state (BonoboUIComponent   *ui_component,
-			   gchar               *cname,
-			   gboolean             state)
+gl_ui_util_set_verb_state (GtkUIManager  *ui,
+			   gchar         *cname,
+			   gboolean       state)
 {
+	GtkToggleAction *action;
+
 	gl_debug (DEBUG_UI, "START");
 
 	g_return_if_fail (cname != NULL);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
+	g_return_if_fail (GTK_IS_UI_MANAGER (ui));
 
-	bonobo_ui_component_set_prop (ui_component,
-				      cname,
-				      "state",
-				      state ? "1" : "0",
-				      NULL);
+	action = GTK_TOGGLE_ACTION (gtk_ui_manager_get_action (ui, cname));
 
-	gl_debug (DEBUG_UI, "END");
-}
-
-
-/*****************************************************************************/
-/* Insert widget at path.                                                    */
-/*****************************************************************************/
-void
-gl_ui_util_insert_widget (BonoboUIComponent *ui_component,
-			  GtkWidget         *widget,
-			  const char        *path)
-{
-        BonoboControl *control;
- 
-	gl_debug (DEBUG_UI, "START");
-
-        gtk_widget_show_all (widget);
-        control = bonobo_control_new (widget);
-        bonobo_ui_component_object_set (ui_component,
-					path,
-					BONOBO_OBJREF (control),
-					NULL);
-        bonobo_object_unref (BONOBO_OBJECT (control));
+	if (action) {
+		gtk_toggle_action_set_active (action, state);
+	}
 
 	gl_debug (DEBUG_UI, "END");
 }

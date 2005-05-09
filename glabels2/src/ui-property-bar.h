@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-property-bar.h:  Property toolbar header file
@@ -23,9 +25,7 @@
 #ifndef __UI_PROPERTY_BAR_H__
 #define __UI_PROPERTY_BAR_H__
 
-#include <glib-object.h>
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-window.h>
+#include <gtk/gtkhbox.h>
 
 #include "view.h"
 
@@ -41,38 +41,32 @@ G_BEGIN_DECLS
 #define GL_IS_UI_PROPERTY_BAR_CLASS(klass) \
         (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_PROPERTY_BAR))
 
-typedef struct _glUIPropertyBar      glUIPropertyBar;
-typedef struct _glUIPropertyBarClass glUIPropertyBarClass;
+typedef struct _glUIPropertyBar        glUIPropertyBar;
+typedef struct _glUIPropertyBarClass   glUIPropertyBarClass;
+
+typedef struct _glUIPropertyBarPrivate glUIPropertyBarPrivate;
 
 struct _glUIPropertyBar {
-	GObject              parent_widget;
+	GtkHBox                 parent_widget;
 
-	BonoboUIComponent   *ui_component;
+	glUIPropertyBarPrivate *priv;
 
-	glView              *view;
-
-	GtkWidget           *font_family_combo;
-	GtkWidget           *font_size_spin;
-	GtkWidget           *text_color_combo;
-
-	GtkWidget           *fill_color_combo;
-
-	GtkWidget           *line_color_combo;
-	GtkWidget           *line_width_spin;
-
-	gboolean	     stop_signals;
 };
 
 struct _glUIPropertyBarClass {
-	GObjectClass         parent_class;
+	GtkHBoxClass            parent_class;
 };
 
 GType        gl_ui_property_bar_get_type          (void) G_GNUC_CONST;
 
-GObject     *gl_ui_property_bar_new               (BonoboUIComponent *ui_component);
+GtkWidget   *gl_ui_property_bar_new               (void);
 
 void         gl_ui_property_bar_set_view          (glUIPropertyBar *property_bar,
 						   glView          *view);
+
+void         gl_ui_property_bar_set_tooltips      (glUIPropertyBar *property_bar,
+						   gboolean         state);
+
 
 
 G_END_DECLS

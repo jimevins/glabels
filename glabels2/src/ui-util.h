@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-util.h:  GLabels UI utilities module header file
@@ -22,26 +24,21 @@
 #ifndef __GL_UI_UTIL_H__
 #define __GL_UI_UTIL_H__
 
-#include <bonobo/bonobo-ui-component.h>
+#include <gtk/gtkuimanager.h>
 
 G_BEGIN_DECLS
 
-void       gl_ui_util_set_verb_sensitive      (BonoboUIComponent           *ui_component,
-					       gchar                       *cname,
-					       gboolean                     sensitive);
+void       gl_ui_util_set_verb_sensitive      (GtkUIManager  *ui,
+					       gchar         *cname,
+					       gboolean       sensitive);
 
-void       gl_ui_util_set_verb_list_sensitive (BonoboUIComponent           *ui_component,
-					       gchar                      **vlist,
-					       gboolean                     sensitive);
+void       gl_ui_util_set_verb_list_sensitive (GtkUIManager  *ui,
+					       gchar        **vlist,
+					       gboolean       sensitive);
 
-void       gl_ui_util_set_verb_state          (BonoboUIComponent           *ui_component,
-					       gchar                       *cname,
-					       gboolean                     state);
-
-void       gl_ui_util_insert_widget           (BonoboUIComponent           *ui_component,
-					       GtkWidget                   *widget,
-					       const char                  *path);
-
+void       gl_ui_util_set_verb_state          (GtkUIManager  *ui,
+					       gchar         *cname,
+					       gboolean       state);
 
 G_END_DECLS
 

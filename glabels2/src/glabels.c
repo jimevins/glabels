@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  glabels.c:  GLabels main module
@@ -26,7 +28,6 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <libbonoboui.h>
 
 #include "splash.h"
 #include "stock.h"
@@ -113,10 +114,6 @@ main (int argc, char **argv)
 	gl_merge_init ();
 	gl_recent_init ();
 	
-	if (!bonobo_ui_init ("glabels", VERSION, &argc, argv)) {
-		g_error (_("Could not initialize Bonobo!\n"));
-	}
-
 	client = gnome_master_client();
 
 	g_signal_connect (G_OBJECT (client), "save_yourself",
@@ -154,7 +151,7 @@ main (int argc, char **argv)
 
 	
 	/* Begin main loop */
-	bonobo_main();
+	gtk_main();
 		
 	return 0;
 }

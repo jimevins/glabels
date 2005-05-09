@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -23,7 +25,6 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 
-#include "recent-files/egg-recent-view.h"
 #include <gtk/gtkwindow.h>
 
 #include "label.h"
@@ -31,29 +32,28 @@
 
 G_BEGIN_DECLS
 
-void     gl_file_new         (GtkWindow       *window);
+void     gl_file_new         (glWindow        *window);
 
 
 void     gl_file_properties  (glLabel         *label,
-			      GtkWindow       *window);
+			      glWindow        *window);
 
 
-void     gl_file_open        (GtkWindow       *window);
+void     gl_file_open        (glWindow        *window);
 
 
-gboolean gl_file_open_recent (EggRecentView   *view,
-			      EggRecentItem   *filename,
-			      GtkWindow       *window);;
+void     gl_file_open_recent (const gchar     *filename,
+			      glWindow        *window);
 
 gboolean gl_file_open_real   (const gchar     *filename,
-			      GtkWindow       *window);
+			      glWindow        *window);
 
 
 gboolean gl_file_save        (glLabel         *label,
-			      GtkWindow       *window);
+			      glWindow        *window);
 
 gboolean gl_file_save_as     (glLabel         *label,
-			      GtkWindow       *window);
+			      glWindow        *window);
 
 
 gboolean gl_file_close       (glWindow        *window);

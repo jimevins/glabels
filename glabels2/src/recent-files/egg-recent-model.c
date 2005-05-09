@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -677,12 +677,17 @@ static void
 egg_recent_model_monitor (EggRecentModel *model, gboolean should_monitor)
 {
 	if (should_monitor && model->priv->monitor == NULL) {
+		char *uri;
+
+		uri = gnome_vfs_get_uri_from_local_path (model->priv->path);
 
 		gnome_vfs_monitor_add (&model->priv->monitor,
-					     model->priv->path,
-					     GNOME_VFS_MONITOR_FILE,
-					     egg_recent_model_monitor_cb,
-					     model);
+				       uri,
+				       GNOME_VFS_MONITOR_FILE,
+				       egg_recent_model_monitor_cb,
+				       model);
+
+		g_free (uri);
 
 		/* if the above fails, don't worry about it.
 		 * local notifications will still happen
@@ -857,13 +862,16 @@ static FILE *
 egg_recent_model_open_file (EggRecentModel *model)
 {
 	FILE *file;
+	mode_t prev_umask;
 	
 	file = fopen (model->priv->path, "r+");
 	if (file == NULL) {
 		/* be paranoid */
-		umask (077);
+		prev_umask = umask (077);
 
 		file = fopen (model->priv->path, "w+");
+
+		umask (prev_umask);
 
 		g_return_val_if_fail (file != NULL, NULL);
 	}
@@ -1283,6 +1291,7 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 		ret = TRUE;
 	} else {
 		g_warning ("Failed to lock:  %s", strerror (errno));
+		fclose (file);
 		return FALSE;
 	}
 

@@ -1,4 +1,6 @@
-/*
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+/**
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui.h:  GLabels UI module header file
@@ -22,37 +24,33 @@
 #ifndef __GL_UI_H__
 #define __GL_UI_H__
 
-#include <bonobo/bonobo-ui-component.h>
-#include <bonobo/bonobo-ui-engine.h>
-#include <bonobo/bonobo-window.h>
+#include <gtk/gtkuimanager.h>
+#include <gtk/gtkwindow.h>
 
 #include "view.h"
 
 G_BEGIN_DECLS
 
-void gl_ui_init                   (BonoboUIComponent *ui_component,
-				   BonoboWindow      *win,
-				   GtkWidget         *cursor_info_frame,
-				   GtkWidget         *zoom_info_frame);
+GtkUIManager *gl_ui_new                    (GtkWindow         *window);
 
-void gl_ui_unref                  (BonoboUIComponent *ui_component);
+void          gl_ui_unref                  (GtkUIManager      *ui);
 
-void gl_ui_update_all             (BonoboUIComponent *ui_component,
-				   glView            *view);
+void          gl_ui_update_all             (GtkUIManager      *ui,
+					    glView            *view);
 
-void gl_ui_update_nodoc           (BonoboUIComponent *ui_component);
+void          gl_ui_update_nodoc           (GtkUIManager      *ui);
 
-void gl_ui_update_modified_verbs  (BonoboUIComponent *ui_component,
-				   glLabel           *label);
+void          gl_ui_update_modified_verbs  (GtkUIManager      *ui,
+					    glLabel           *label);
 
-void gl_ui_update_selection_verbs (BonoboUIComponent *ui_component,
-				   glView            *view);
+void          gl_ui_update_selection_verbs (GtkUIManager      *ui,
+					    glView            *view);
 
-void gl_ui_update_zoom_verbs      (BonoboUIComponent *ui_component,
-				   glView            *view);
+void          gl_ui_update_zoom_verbs      (GtkUIManager      *ui,
+					    glView            *view);
 
-void gl_ui_update_undo_redo_verbs (BonoboUIComponent *ui_component,
-				   glLabel           *label);
+void          gl_ui_update_undo_redo_verbs (GtkUIManager      *ui,
+					    glLabel           *label);
 
 G_END_DECLS
 

@@ -1,3 +1,58 @@
+2005-05-09  Jim Evins  <evins@snaught.com>
+
+	Replaced libbonoboui with GtkUIManager for creation of basic user interface menus
+	and toolbars.
+
+	* configure.in:
+	* glabels.spec.in:
+		Removed dependencies on libbonoboui.
+	* data/Makefile.am:
+	* data/ui/Makefile.am:
+	* data/ui/glabels-ui.xml:
+		Removed data/ui directory.
+	* data/glade/Makefile.am:
+	* data/property-bar.glade:
+		Added glade description of property-bar for new libglade implementation
+		of glUIPropertyBar.
+	* src/Makefile.am:
+	* src/commands.h:
+	* src/commands.c:
+	* src/tools.h:
+	* src/tools.c:
+	* src/ui-commands.h:
+	* src/ui-commands.c:
+		Replaced commands.[ch] and tools.[ch] with the single ui-commands.[ch] module
+		since the distinction between "commands" and "tools" is no longer that clear.
+	* src/file.h:
+	* src/file.c:
+		Modified to expect glWindow instead of GtkWindow.  gl_file_open_recent()
+		no longer has knowledge of eggRecent*.
+	* src/glabels.c: (main):
+		Removed libbonobo initialization and replaced bonobo_main loop with gtk_main
+		loop.
+	* src/object-editor.c: (gl_object_editor_init):
+		Make sure notebook does not respond to a "show_all" on the parent.
+	* src/recent-files/Makefile.am:
+	* src/recent-files/*.[ch]
+		Updated from latest version of libegg which now has a view based on
+		GtkUIManager.  Removed unused bonobo and gtk views.
+	* src/ui-property-bar.h:
+	* src/ui-property-bar.c:
+		New implementation based on libglade.
+	* src/ui-sidebar.h:
+	* src/ui-sidebar.c:
+		Sidebar is now simply a GtkWidget and does not expect to be a part of
+		a libbonoboui interface.
+	* src/ui-util.h:
+	* src/ui-util.c:
+	* src/ui.h:
+	* src/ui.c:
+		Converted for use with GtkUIManager.
+	* src/window.h:
+	* src/window.c:
+		Now derived from GtkWindow instead of BonoboWindow and uses GtkUIManager
+		to create menus and toolbars.
+
 2005-04-25  Jim Evins  <evins@snaught.com>
 
 	* data/templates/misc-iso-templates.xml:
