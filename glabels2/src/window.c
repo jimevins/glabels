@@ -159,7 +159,7 @@ gl_window_init (glWindow *window)
 	vbox1 = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (window), vbox1);
 
-	window->ui = ui = gl_ui_new (GTK_WINDOW (window));
+	window->ui = ui = gl_ui_new (window);
 	gtk_box_pack_start (GTK_BOX (vbox1),
 			    gtk_ui_manager_get_widget (ui, "/MenuBar"),
 			    FALSE, FALSE, 0);
@@ -196,6 +196,11 @@ gl_window_init (glWindow *window)
 	status_hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox1), status_hbox, FALSE, FALSE, 0);
 
+	window->status_bar = gtk_statusbar_new ();
+	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->status_bar), FALSE);
+	gtk_box_pack_start (GTK_BOX (status_hbox),
+			    window->status_bar,
+			    TRUE, TRUE, 0);
 	window->zoom_info = gtk_label_new (NULL);
 	gtk_widget_set_size_request (window->zoom_info, ZOOM_INFO_WIDTH, -1);
 	window->zoom_info_frame = gtk_frame_new (NULL);
@@ -223,6 +228,9 @@ gl_window_init (glWindow *window)
 	g_signal_connect (G_OBJECT(window), "delete-event",
 			  G_CALLBACK(window_delete_event_cb), NULL);
 	
+	window->menu_tips_context_id =
+		gtk_statusbar_get_context_id (GTK_STATUSBAR (window->status_bar), "menu_tips");
+
 	window->view = NULL;
 
 	window_list = g_list_append (window_list, window);

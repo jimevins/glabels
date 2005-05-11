@@ -59,6 +59,24 @@ static void set_app_drawing_toolbar_style  (GtkUIManager    *ui);
 
 static void set_view_style                 (GtkUIManager    *ui);
 
+static void connect_proxy_cb               (GtkUIManager    *ui,
+					    GtkAction       *action,
+					    GtkWidget       *proxy,
+					    glWindow        *window);
+
+static void disconnect_proxy_cb            (GtkUIManager    *ui,
+					    GtkAction       *action,
+					    GtkWidget       *proxy,
+					    glWindow        *window);
+
+static void menu_item_select_cb            (GtkMenuItem     *proxy,
+					    glWindow        *window);
+
+static void menu_item_deselect_cb          (GtkMenuItem     *proxy,
+					    glWindow        *window);
+
+
+
 /*==========================================================================*/
 /* Private globals                                                          */
 /*==========================================================================*/
@@ -66,336 +84,337 @@ static void set_view_style                 (GtkUIManager    *ui);
 static GtkActionEntry entries[] = {
 
 	/* Menu entries. */
-	{ "FileMenu",                NULL, "_File" },
-	{ "FileRecentsMenu",         NULL, "Recent _Files" },
-	{ "EditMenu",                NULL, "_Edit" },
-	{ "ViewMenu",                NULL, "_View" },
-	{ "ViewMainToolBarMenu",     NULL, "Customize Main Toolbar" },
-	{ "ViewDrawingToolBarMenu",  NULL, "Customize Drawing Toolbar" },
-	{ "ViewPropertyToolBarMenu", NULL, "Customize Properties Toolbar" },
-	{ "ObjectsMenu",             NULL, "_Objects" },
-	{ "ObjectsCreateMenu",       NULL, "_Create" },
-	{ "ObjectsOrderMenu",        NULL, "_Order" },
-	{ "ObjectsRotateFlipMenu",   NULL, "_Rotate/Flip" },
-	{ "ObjectsAlignHorizMenu",   NULL, "Align _Horizontal" },
-	{ "ObjectsAlignVertMenu",    NULL, "Align _Vertical" },
-	{ "HelpMenu",                NULL, "_Help" },
+	{ "FileMenu",                NULL, N_("_File") },
+	{ "FileRecentsMenu",         NULL, N_("Recent _Files") },
+	{ "EditMenu",                NULL, N_("_Edit") },
+	{ "ViewMenu",                NULL, N_("_View") },
+	{ "ViewMainToolBarMenu",     NULL, N_("Customize Main Toolbar") },
+	{ "ViewDrawingToolBarMenu",  NULL, N_("Customize Drawing Toolbar") },
+	{ "ViewPropertyToolBarMenu", NULL, N_("Customize Properties Toolbar") },
+	{ "ObjectsMenu",             NULL, N_("_Objects") },
+	{ "ObjectsCreateMenu",       NULL, N_("_Create") },
+	{ "ObjectsOrderMenu",        NULL, N_("_Order") },
+	{ "ObjectsRotateFlipMenu",   NULL, N_("_Rotate/Flip") },
+	{ "ObjectsAlignHorizMenu",   NULL, N_("Align _Horizontal") },
+	{ "ObjectsAlignVertMenu",    NULL, N_("Align _Vertical") },
+	{ "HelpMenu",                NULL, N_("_Help") },
 
 
 	/* File action entries. */
 	{ "FileNew",
 	  GTK_STOCK_NEW,
-	  "_New",
+	  N_("_New"),
 	  "<control>N",
-	  "Create a new file",
+	  N_("Create a new file"),
 	  G_CALLBACK (gl_ui_cmd_file_new) },
 
 	{ "FileOpen",
 	  GTK_STOCK_OPEN,
-	  "_Open...",
+	  N_("_Open..."),
 	  "<control>O",
-	  "Open a file",
+	  N_("Open a file"),
 	  G_CALLBACK (gl_ui_cmd_file_open) },
 
 	{ "FileSave",
 	  GTK_STOCK_SAVE,
-	  "_Save",
+	  N_("_Save"),
 	  "<control>S",
-	  "Save current file",
+	  N_("Save current file"),
 	  G_CALLBACK (gl_ui_cmd_file_save) },
 
 	{ "FileSaveAs",
 	  GTK_STOCK_SAVE,
-	  "Save _As...",
+	  N_("Save _As..."),
 	  "<shift><control>S",
-	  "Save the current file to a different name",
+	  N_("Save the current file to a different name"),
 	  G_CALLBACK (gl_ui_cmd_file_save_as) },
 
 	{ "FilePrint",
 	  GTK_STOCK_PRINT,
-	  "_Print...",
+	  N_("_Print..."),
 	  "<control>P",
-	  "Print the current file",
+	  N_("Print the current file"),
 	  G_CALLBACK (gl_ui_cmd_file_print) },
 
 	{ "FileProperties",
 	  GTK_STOCK_PROPERTIES,
-	  "Properties...",
+	  N_("Properties..."),
 	  NULL,
-	  "Modify document properties",
+	  N_("Modify document properties"),
 	  G_CALLBACK (gl_ui_cmd_file_properties) },
 
 	{ "FileTemplateDesigner",
 	  NULL,
-	  "Template _Designer...",
+	  N_("Template _Designer..."),
 	  NULL,
-	  "Create a custom template",
+	  N_("Create a custom template"),
 	  G_CALLBACK (gl_ui_cmd_file_template_designer) },
 
 	{ "FileClose",
 	  GTK_STOCK_CLOSE,
-	  "_Close",
+	  N_("_Close"),
 	  "<alt>F4",
-	  "Close the current file",
+	  N_("Close the current file"),
 	  G_CALLBACK (gl_ui_cmd_file_close) },
 
 	{ "FileQuit",
 	  GTK_STOCK_QUIT,
-	  "_Quit",
+	  N_("_Quit"),
 	  "<control>Q",
-	  "Quit the program",
+	  N_("Quit the program"),
 	  G_CALLBACK (gl_ui_cmd_file_quit) },
 
 
 	/* Edit action entries. */
 	{ "EditCut",
 	  GTK_STOCK_CUT,
-	  "Cut",
+	  N_("Cut"),
 	  "<control>X",
-	  "Cut the selection",
+	  N_("Cut the selection"),
 	  G_CALLBACK (gl_ui_cmd_edit_cut) },
 
 	{ "EditCopy",
 	  GTK_STOCK_COPY,
-	  "Copy",
+	  N_("Copy"),
 	  "<control>C",
-	  "Copy the selection",
+	  N_("Copy the selection"),
 	  G_CALLBACK (gl_ui_cmd_edit_copy) },
 
 	{ "EditPaste",
 	  GTK_STOCK_PASTE,
-	  "Paste",
+	  N_("Paste"),
 	  "<control>V",
-	  "Paste the clipboard",
+	  N_("Paste the clipboard"),
 	  G_CALLBACK (gl_ui_cmd_edit_paste) },
 
 	{ "EditDelete",
 	  NULL,
-	  "Delete",
+	  N_("Delete"),
 	  NULL,
-	  "Delete the selected objects",
+	  N_("Delete the selected objects"),
 	  G_CALLBACK (gl_ui_cmd_edit_delete) },
 
 	{ "EditSelectAll",
 	  NULL,
-	  "Select All",
+	  N_("Select All"),
 	  "<control>A",
-	  "Select all objects",
+	  N_("Select all objects"),
 	  G_CALLBACK (gl_ui_cmd_edit_select_all) },
 
 	{ "EditUnSelectAll",
 	  NULL,
-	  "Un-select All",
+	  N_("Un-select All"),
 	  NULL,
-	  "Remove all selections",
+	  N_("Remove all selections"),
 	  G_CALLBACK (gl_ui_cmd_edit_unselect_all) },
 
 	{ "EditPreferences",
 	  GTK_STOCK_PREFERENCES,
-	  "Preferences",
+	  N_("Preferences"),
 	  NULL,
-	  "Configure the application",
+	  N_("Configure the application"),
 	  G_CALLBACK (gl_ui_cmd_edit_preferences) },
 
 
 	/* View action entries. */
 	{ "ViewZoomIn",
 	  GTK_STOCK_ZOOM_IN,
-	  "Zoom in",
+	  N_("Zoom in"),
 	  NULL,
-	  "Increase magnification",
+	  N_("Increase magnification"),
 	  G_CALLBACK (gl_ui_cmd_view_zoomin) },
 
 	{ "ViewZoomOut",
 	  GTK_STOCK_ZOOM_OUT,
-	  "Zoom out",
+	  N_("Zoom out"),
 	  NULL,
-	  "Decrease magnification",
+	  N_("Decrease magnification"),
 	  G_CALLBACK (gl_ui_cmd_view_zoomout) },
 
 	{ "ViewZoom1to1",
 	  GTK_STOCK_ZOOM_100,
-	  "Zoom 1 to 1",
+	  N_("Zoom 1 to 1"),
 	  NULL,
-	  "Restore scale to 100%",
+	  N_("Restore scale to 100%"),
 	  G_CALLBACK (gl_ui_cmd_view_zoom1to1) },
 
 	{ "ViewZoomToFit",
 	  GTK_STOCK_ZOOM_FIT,
-	  "Zoom to fit",
+	  N_("Zoom to fit"),
 	  NULL,
-	  "Set scale to fit window",
+	  N_("Set scale to fit window"),
 	  G_CALLBACK (gl_ui_cmd_view_zoom_to_fit) },
 
 
 	/* Objects action entries. */
 	{ "ObjectsArrowMode",
 	  GL_STOCK_ARROW,
-	  "Select Mode",
+	  N_("Select Mode"),
 	  NULL,
-	  "Select, move and modify objects",
+	  N_("Select, move and modify objects"),
 	  G_CALLBACK (gl_ui_cmd_objects_arrow_mode) },
 
 	{ "ObjectsCreateText",
 	  GL_STOCK_TEXT,
-	  "Text",
+	  N_("Text"),
 	  NULL,
-	  "Create text object",
+	  N_("Create text object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_text) },
 
 	{ "ObjectsCreateBox",
 	  GL_STOCK_BOX,
-	  "Box",
+	  N_("Box"),
 	  NULL,
-	  "Create box/rectangle object",
+	  N_("Create box/rectangle object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_box) },
 
 	{ "ObjectsCreateLine",
 	  GL_STOCK_LINE,
-	  "Line",
+	  N_("Line"),
 	  NULL,
-	  "Create line object",
+	  N_("Create line object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_line) },
 
 	{ "ObjectsCreateEllipse",
 	  GL_STOCK_ELLIPSE,
-	  "Ellipse",
+	  N_("Ellipse"),
 	  NULL,
-	  "Create ellipse/circle object",
+	  N_("Create ellipse/circle object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_ellipse) },
 
 	{ "ObjectsCreateImage",
 	  GL_STOCK_IMAGE,
-	  "Image",
+	  N_("Image"),
 	  NULL,
-	  "Create image object",
+	  N_("Create image object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_image) },
 
 	{ "ObjectsCreateBarcode",
 	  GL_STOCK_BARCODE,
-	  "Barcode",
+	  N_("Barcode"),
 	  NULL,
-	  "Create barcode object",
+	  N_("Create barcode object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_barcode) },
 	
 	{ "ObjectsRaise",
 	  GL_STOCK_ORDER_TOP,
-	  "Bring to front", NULL,
-	  "Raise object to top",
+	  N_("Bring to front"),
+	  NULL,
+	  N_("Raise object to top"),
 	  G_CALLBACK (gl_ui_cmd_objects_raise) },
 
 	{ "ObjectsLower",
 	  GL_STOCK_ORDER_BOTTOM,
-	  "Send to back",
+	  N_("Send to back"),
 	  NULL,
-	  "Lower object to bottom",
+	  N_("Lower object to bottom"),
 	  G_CALLBACK (gl_ui_cmd_objects_lower) },
 
 	{ "ObjectsRotateLeft",
 	  GL_STOCK_ROTATE_LEFT,
-	  "Rotate left",
+	  N_("Rotate left"),
 	  NULL,
-	  "Rotate object 90 degrees counter-clockwise",
+	  N_("Rotate object 90 degrees counter-clockwise"),
 	  G_CALLBACK (gl_ui_cmd_objects_rotate_left) },
 
 	{ "ObjectsRotateRight",
 	  GL_STOCK_ROTATE_RIGHT,
-	  "Rotate right",
+	  N_("Rotate right"),
 	  NULL,
-	  "Rotate object 90 degrees clockwise",
+	  N_("Rotate object 90 degrees clockwise"),
 	  G_CALLBACK (gl_ui_cmd_objects_rotate_right) },
 
 	{ "ObjectsFlipHorizontal",
 	  GL_STOCK_FLIP_HORIZ,
-	  "Flip horizontally",
+	  N_("Flip horizontally"),
 	  NULL,
-	  "Flip object horizontally",
+	  N_("Flip object horizontally"),
 	  G_CALLBACK (gl_ui_cmd_objects_flip_horiz) },
 
 	{ "ObjectsFlipVertical",
 	  GL_STOCK_FLIP_VERT,
-	  "Flip vertically",
+	  N_("Flip vertically"),
 	  NULL,
-	  "Flip object vertically",
+	  N_("Flip object vertically"),
 	  G_CALLBACK (gl_ui_cmd_objects_flip_vert) },
 
 	{ "ObjectsAlignLeft",
 	  GL_STOCK_ALIGN_LEFT,
-	  "Align left",
+	  N_("Align left"),
 	  NULL,
-	  "Align objects to left edges",
+	  N_("Align objects to left edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_left) },
 
 	{ "ObjectsAlignRight",
 	  GL_STOCK_ALIGN_RIGHT,
-	  "Align right",
+	  N_("Align right"),
 	  NULL,
-	  "Align objects to right edges",
+	  N_("Align objects to right edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_right) },
 
 	{ "ObjectsAlignHCenter",
 	  GL_STOCK_ALIGN_HCENTER,
-	  "Align horizontal center",
+	  N_("Align horizontal center"),
 	  NULL,
-	  "Align objects to horizontal centers",
+	  N_("Align objects to horizontal centers"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_hcenter) },
 
 	{ "ObjectsAlignTop",
 	  GL_STOCK_ALIGN_TOP,
-	  "Align tops",
+	  N_("Align tops"),
 	  NULL,
-	  "Align objects to top edges",
+	  N_("Align objects to top edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_top) },
 
 	{ "ObjectsAlignBottom",
 	  GL_STOCK_ALIGN_BOTTOM,
-	  "Align bottoms",
+	  N_("Align bottoms"),
 	  NULL,
-	  "Align objects to bottom edges",
+	  N_("Align objects to bottom edges"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_bottom) },
 
 	{ "ObjectsAlignVCenter",
 	  GL_STOCK_ALIGN_VCENTER,
-	  "Align vertical center",
+	  N_("Align vertical center"),
 	  NULL,
-	  "Align objects to vertical centers",
+	  N_("Align objects to vertical centers"),
 	  G_CALLBACK (gl_ui_cmd_objects_align_vcenter) },
 
 	{ "ObjectsCenterHorizontal",
 	  GL_STOCK_CENTER_HORIZ,
-	  "Center horizontally",
+	  N_("Center horizontally"),
 	  NULL,
-	  "Center objects to horizontal label center",
+	  N_("Center objects to horizontal label center"),
 	  G_CALLBACK (gl_ui_cmd_objects_center_horiz) },
 
 	{ "ObjectsCenterVertical",
 	  GL_STOCK_CENTER_VERT,
-	  "Center vertically",
+	  N_("Center vertically"),
 	  NULL,
-	  "Center objects to vertical label center",
+	  N_("Center objects to vertical label center"),
 	  G_CALLBACK (gl_ui_cmd_objects_center_vert) },
 
 	{ "ObjectsMergeProperties",
 	  GL_STOCK_MERGE,
-	  "Merge properties",
+	  N_("Merge properties"),
 	  NULL,
-	  "Edit merge properties",
+	  N_("Edit merge properties"),
 	  G_CALLBACK (gl_ui_cmd_objects_merge_properties) },
 
 
 	/* Help actions entries. */
 	{ "HelpContents",
 	  GTK_STOCK_HELP,
-	  "Contents",
+	  N_("Contents"),
 	  "F1",
-	  "Open glabels manual",
+	  N_("Open glabels manual"),
 	  G_CALLBACK (gl_ui_cmd_help_contents) },
 
 	{ "HelpAbout",
 	  GTK_STOCK_ABOUT,
-	  "About...",
+	  N_("About..."),
 	  NULL,
-	  "About glabels",
+	  N_("About glabels"),
 	  G_CALLBACK (gl_ui_cmd_help_about) },
 
 };
@@ -405,33 +424,33 @@ static GtkToggleActionEntry toggle_entries[] = {
 
 	{ "ViewPropertyToolBar",
 	  NULL,
-	  "Property toolbar",
+	  N_("Property toolbar"),
 	  NULL,
-	  "Change the visibility of the property toolbar in the current window",
+	  N_("Change the visibility of the property toolbar in the current window"),
 	  G_CALLBACK (gl_ui_cmd_view_property_bar_toggle),
 	  TRUE },
 
 	{ "ViewPropertyToolBarToolTips",
 	  NULL,
-	  "Show tooltips",
+	  N_("Show tooltips"),
 	  NULL,
-	  "Show tooltips for property toolbar",
+	  N_("Show tooltips for property toolbar"),
 	  G_CALLBACK (gl_ui_cmd_view_property_bar_tips_toggle),
 	  TRUE },
 
 	{ "ViewGrid",
 	  NULL,
-	  "Grid",
+	  N_("Grid"),
 	  NULL,
-	  "Change the visibility of the grid in the current window",
+	  N_("Change the visibility of the grid in the current window"),
 	  G_CALLBACK (gl_ui_cmd_view_grid_toggle),
 	  TRUE },
 
 	{ "ViewMarkup",
 	  NULL,
-	  "Markup",
+	  N_("Markup"),
 	  NULL,
-	  "Change the visibility of markup lines in the current window",
+	  N_("Change the visibility of markup lines in the current window"),
 	  G_CALLBACK (gl_ui_cmd_view_markup_toggle),
 	  TRUE },
 
@@ -442,33 +461,33 @@ static GtkToggleActionEntry ui_toggle_entries[] = {
 
 	{ "ViewMainToolBar",
 	  NULL,
-	  "Main toolbar",
+	  N_("Main toolbar"),
 	  NULL,
-	  "Change the visibility of the main toolbar in the current window",
+	  N_("Change the visibility of the main toolbar in the current window"),
 	  G_CALLBACK (view_ui_item_toggled_cb),
 	  TRUE },
 
 	{ "ViewDrawingToolBar",
 	  NULL,
-	  "Drawing toolbar",
+	  N_("Drawing toolbar"),
 	  NULL,
-	  "Change the visibility of the drawing toolbar in the current window",
+	  N_("Change the visibility of the drawing toolbar in the current window"),
 	  G_CALLBACK (view_ui_item_toggled_cb),
 	  TRUE },
 
 	{ "ViewMainToolBarToolTips",
 	  NULL,
-	  "Show tooltips",
+	  N_("Show tooltips"),
 	  NULL,
-	  "Show tooltips for main toolbar",
+	  N_("Show tooltips for main toolbar"),
 	  G_CALLBACK (view_ui_item_toggled_cb),
 	  TRUE },
 
 	{ "ViewDrawingToolBarToolTips",
 	  NULL,
-	  "Show tooltips",
+	  N_("Show tooltips"),
 	  NULL,
-	  "Show tooltips for drawing toolbar",
+	  N_("Show tooltips for drawing toolbar"),
 	  G_CALLBACK (view_ui_item_toggled_cb),
 	  TRUE },
 
@@ -691,10 +710,10 @@ static gchar* multi_selection_verbs [] = {
 
 
 /*****************************************************************************/
-/* Initialize UI component for given window.                                 */
+/** Initialize UI component for given window.                                */
 /*****************************************************************************/
 GtkUIManager *
-gl_ui_new (GtkWindow *window)
+gl_ui_new (glWindow *window)
 {
 	GtkUIManager            *ui;
 	GtkActionGroup          *actions;
@@ -702,14 +721,19 @@ gl_ui_new (GtkWindow *window)
 
 	gl_debug (DEBUG_UI, "START");
 
-	g_return_val_if_fail (window && GTK_IS_WINDOW (window), NULL);
+	g_return_val_if_fail (window && GL_IS_WINDOW (window), NULL);
 
 	gl_debug (DEBUG_UI, "window = %p", window);
 
 	ui = gtk_ui_manager_new ();
 
+	g_signal_connect (ui, "connect_proxy",
+			  G_CALLBACK (connect_proxy_cb), window);
+	g_signal_connect (ui, "disconnect_proxy",
+			  G_CALLBACK (disconnect_proxy_cb), window);
+
 	actions = gtk_action_group_new ("Actions");
-	gtk_action_group_add_actions (actions, entries, n_entries, window);
+	gtk_action_group_add_actions (actions, entries, n_entries, GTK_WINDOW (window));
 	gtk_action_group_add_toggle_actions (actions, 
 					     toggle_entries, n_toggle_entries, 
 					     window);
@@ -718,7 +742,7 @@ gl_ui_new (GtkWindow *window)
 					     ui);
 
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
-	gtk_window_add_accel_group (window, gtk_ui_manager_get_accel_group (ui));
+	gtk_window_add_accel_group (GTK_WINDOW (window), gtk_ui_manager_get_accel_group (ui));
 
 	if (!gtk_ui_manager_add_ui_from_string (ui, ui_info, strlen (ui_info), &error)) {
 		g_message ("building menus failed: %s", error->message);
@@ -740,7 +764,7 @@ gl_ui_new (GtkWindow *window)
 }
 
 /*****************************************************************************/
-/* Unref wrapper.                                                            */
+/** Unref wrapper.                                                           */
 /*****************************************************************************/
 void
 gl_ui_unref (GtkUIManager *ui)
@@ -1024,5 +1048,80 @@ set_view_style (GtkUIManager *ui)
 				   gl_prefs->markup_visible);
 
 	gl_debug (DEBUG_UI, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Connect proxy callback.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+connect_proxy_cb (GtkUIManager *ui,
+		  GtkAction    *action,
+		  GtkWidget    *proxy,
+		  glWindow     *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy))
+	{
+		g_signal_connect (proxy, "select",
+				  G_CALLBACK (menu_item_select_cb), window);
+		g_signal_connect (proxy, "deselect",
+				  G_CALLBACK (menu_item_deselect_cb), window);
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Disconnect proxy callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+disconnect_proxy_cb (GtkUIManager *ui,
+		     GtkAction    *action,
+		     GtkWidget    *proxy,
+		     glWindow     *window)
+{
+	if (GTK_IS_MENU_ITEM (proxy))
+	{
+		g_signal_handlers_disconnect_by_func
+			(proxy, G_CALLBACK (menu_item_select_cb), window);
+		g_signal_handlers_disconnect_by_func
+			(proxy, G_CALLBACK (menu_item_deselect_cb), window);
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Menu item select callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+menu_item_select_cb (GtkMenuItem *proxy,
+		     glWindow    *window)
+{
+	GtkAction *action;
+	char      *message;
+
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+	g_return_if_fail (window->status_bar && GTK_IS_STATUSBAR (window->status_bar));
+
+	action = g_object_get_data (G_OBJECT (proxy),  "gtk-action");
+	g_return_if_fail (action != NULL);
+	
+	g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
+	if (message)
+	{
+		gtk_statusbar_push (GTK_STATUSBAR (window->status_bar),
+				    window->menu_tips_context_id, message);
+		g_free (message);
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Menu item deselect callback.                                    */
+/*---------------------------------------------------------------------------*/
+static void
+menu_item_deselect_cb (GtkMenuItem *proxy,
+		       glWindow    *window)
+{
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+	g_return_if_fail (window->status_bar && GTK_IS_STATUSBAR (window->status_bar));
+
+	gtk_statusbar_pop (GTK_STATUSBAR (window->status_bar),
+			   window->menu_tips_context_id);
 }
 

@@ -25,13 +25,13 @@
 #define __GL_UI_H__
 
 #include <gtk/gtkuimanager.h>
-#include <gtk/gtkwindow.h>
 
+#include "window.h"
 #include "view.h"
 
 G_BEGIN_DECLS
 
-GtkUIManager *gl_ui_new                    (GtkWindow         *window);
+GtkUIManager *gl_ui_new                    (glWindow          *window);
 
 void          gl_ui_unref                  (GtkUIManager      *ui);
 

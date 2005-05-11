@@ -65,10 +65,13 @@ struct _glWindow {
 
 	EggRecentViewUIManager *recent_view;
 
+	GtkWidget              *status_bar;
 	GtkWidget              *cursor_info;
 	GtkWidget              *cursor_info_frame;
 	GtkWidget              *zoom_info;
 	GtkWidget              *zoom_info_frame;
+
+	guint                   menu_tips_context_id;
 };
 
 struct _glWindowClass {
