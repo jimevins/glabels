@@ -128,6 +128,7 @@ void
 gl_ui_cmd_file_open_recent (GtkAction *action,
 			    glWindow  *window)
 {
+	EggRecentViewUIManager *recent_view;
 	EggRecentItem          *item;
 	gchar                  *utf8_filename;
 
@@ -136,7 +137,10 @@ gl_ui_cmd_file_open_recent (GtkAction *action,
 	g_return_if_fail (action && GTK_IS_ACTION(action));
 	g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	item = egg_recent_view_uimanager_get_item (window->recent_view, action);
+	recent_view = g_object_get_data (G_OBJECT(window->ui), "recent-view");
+	g_return_if_fail (recent_view && EGG_IS_RECENT_VIEW_UIMANAGER (recent_view));
+
+	item = egg_recent_view_uimanager_get_item (recent_view, action);
 	utf8_filename = gl_recent_get_filename (item);
 
 	gl_file_open_recent (utf8_filename, window);

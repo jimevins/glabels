@@ -31,6 +31,7 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkframe.h>
+#include <gtk/gtkstatusbar.h>
 
 #include "ui.h"
 #include "ui-commands.h"
@@ -38,7 +39,6 @@
 #include "xml-label.h"
 #include "prefs.h"
 #include "file.h"
-#include "recent.h" 
 
 #include "debug.h"
 
@@ -96,9 +96,6 @@ static void     name_changed_cb        (glLabel       *label,
 
 static void     modified_changed_cb    (glLabel       *label,
 					glWindow      *window);
-
-static char    *recent_tooltip_func    (EggRecentItem *item,
-					gpointer       user_data);
 
 
 /****************************************************************************/
@@ -169,20 +166,6 @@ gl_window_init (glWindow *window)
 	gtk_box_pack_start (GTK_BOX (vbox1),
 			    gtk_ui_manager_get_widget (ui, "/DrawingToolBar"),
 			    FALSE, FALSE, 0);
-
-	/* add an eggRecentView */
-        window->recent_view  =
-		egg_recent_view_uimanager_new (ui,
-					       "/ui/MenuBar/FileMenu/FileRecentsMenu/FileRecentsPlaceHolder",
-					       G_CALLBACK (gl_ui_cmd_file_open_recent),
-					       window);
-	egg_recent_view_uimanager_show_icons (window->recent_view, FALSE);
-	egg_recent_view_uimanager_set_tooltip_func (window->recent_view,
-						    recent_tooltip_func,
-						    NULL);
-	egg_recent_view_set_model (EGG_RECENT_VIEW (window->recent_view),
-				   gl_recent_get_model ());
-
 
 	window->hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox1), window->hbox, TRUE, TRUE, 0);
@@ -267,11 +250,6 @@ gl_window_destroy (GtkObject *gtk_object)
 
 	window = GL_WINDOW (gtk_object);
 	window_list = g_list_remove (window_list, window);
-
-	if (window->recent_view) {
-		g_object_unref (window->recent_view);
-		window->recent_view = NULL;
-	}
 
         if (window->ui) {
 		gl_ui_unref(window->ui);
@@ -622,24 +600,4 @@ modified_changed_cb (glLabel  *label,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Tooltip function for recent file menu items.                    */
-/*---------------------------------------------------------------------------*/
-static char *
-recent_tooltip_func (EggRecentItem *item, gpointer user_data)
-{
-	char *tip;
-	char *uri_for_display;
-
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
-	g_return_val_if_fail (uri_for_display != NULL, NULL);
-
-	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
-
-	g_free (uri_for_display);
-
-	return tip;
-}
-
 

@@ -27,8 +27,6 @@
 
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkuimanager.h>
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-view-uimanager.h"
 
 #include "view.h"
 #include "label.h"
@@ -62,8 +60,6 @@ struct _glWindow {
 
 	glUIPropertyBar        *property_bar;
 	glUISidebar            *sidebar;
-
-	EggRecentViewUIManager *recent_view;
 
 	GtkWidget              *status_bar;
 	GtkWidget              *cursor_info;

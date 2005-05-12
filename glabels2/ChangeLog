@@ -1,3 +1,12 @@
+2005-05-11  Jim Evins  <evins@snaught.com>
+
+	* src/window.h:
+	* src/window.c: (gl_window_init), (gl_window_destroy):
+	* src/ui.c: (gl_ui_new), (gl_ui_unref), (recent_tooltip_func):
+	* src/ui-commands.c: (gl_ui_cmd_file_open_recent):
+		Moved management of recent_view back from window.c to ui.c -- it just feels
+		better there.
+	
 2005-05-10  Jim Evins  <evins@snaught.com>
 
 	* src/window.h:
