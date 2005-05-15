@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -22,7 +24,7 @@
 #ifndef __PRINT_DIALOG_H__
 #define __PRINT_DIALOG_H__
 
-#include <bonobo/bonobo-window.h>
+#include <gtk/gtkwindow.h>
 #include "hig.h"
 #include "view.h"
 
@@ -58,7 +60,7 @@ struct  _glPrintDialogClass
 GType      gl_print_dialog_get_type            (void) G_GNUC_CONST;
 
 GtkWidget *gl_print_dialog_new                 (glLabel       *label,
-						BonoboWindow  *win);
+						GtkWindow     *win);
 
 void       gl_print_dialog_force_outline_flag  (glPrintDialog *dialog);
 

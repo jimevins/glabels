@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  view.h:  GLabels View module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2005  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -77,18 +79,6 @@ struct _glView {
 	glLabel           *selection_data;
 	GtkWidget         *invisible;
 
-	/* Menus */
-	GList             *atomic_selection_items;
-	GList             *multi_selection_items;
-	GtkWidget         *selection_menu;
-	GtkWidget         *empty_selection_menu;
-
-	/* Merge Properties Dialog */
-	GtkWidget         *merge_props_dialog;
-
-	/* Print Dialog */
-	GtkWidget         *print_dialog;
-
 	/* Default object text properties */
 	gchar             *default_font_family;
 	gdouble            default_font_size;
@@ -112,6 +102,12 @@ struct _glViewClass {
 	/* Selection changed signal */
 	void (*selection_changed) (glView   *view,
 				   gpointer  user_data);
+
+	/* Signal to launch a context menu */
+	void (*context_menu_activate) (glView   *view,
+				       gint      button,
+				       guint32   activate_time,
+				       gpointer  user_data);
 
 	/* Signals to support a status bar */
 	void (*zoom_changed)      (glView   *view,
@@ -273,12 +269,6 @@ gdouble    gl_view_get_zoom                (glView            *view);
 gboolean   gl_view_is_zoom_max             (glView            *view);
 
 gboolean   gl_view_is_zoom_min             (glView            *view);
-
-
-void       gl_view_popup_menu              (glView            *view,
-					    GdkEvent          *event);
-
-void       gl_view_edit_merge_props        (glView            *view);
 
 
 void       gl_view_set_default_font_family      (glView            *view,

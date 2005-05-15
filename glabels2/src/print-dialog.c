@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -88,7 +90,7 @@ static void       gl_print_dialog_finalize        (GObject            *object);
 
 static void       gl_print_dialog_construct       (glPrintDialog      *dialog,
 						   glLabel            *label,
-						   BonoboWindow       *win);
+						   GtkWindow          *win);
 
 static GtkWidget *job_page_new                    (glPrintDialog      *dialog,
 						   glLabel            *label);
@@ -235,7 +237,7 @@ gl_print_dialog_finalize (GObject *object)
 /*****************************************************************************/
 GtkWidget *
 gl_print_dialog_new (glLabel      *label,
-		     BonoboWindow *win)
+		     GtkWindow    *win)
 {
 	GtkWidget *dialog;
 
@@ -254,7 +256,7 @@ gl_print_dialog_new (glLabel      *label,
 static void
 gl_print_dialog_construct (glPrintDialog      *dialog,
 			   glLabel            *label,
-			   BonoboWindow       *win)
+			   GtkWindow          *win)
 {
 	GtkWidget *notebook, *page;
 	gchar     *name, *title;

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -582,19 +584,6 @@ item_event_arrow_mode (GnomeCanvasItem *item,
 						cursor, event->button.time);
 			gdk_cursor_unref (cursor);
 			dragging = TRUE;
-			return TRUE;
-
-		case 3:
-			if (!gl_view_is_object_selected (view, view_object)) {
-				if (!control_key_pressed) {
-					/* No control, key so remove any selections before adding */
-					gl_view_unselect_all (view);
-				}
-			}
-			/* Add to current selection */
-			gl_view_select_object (view, view_object);
-			/* bring up apropriate menu for selection. */
-			gl_view_popup_menu (view, event);
 			return TRUE;
 
 		default:

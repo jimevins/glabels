@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-commands.c:  GLabels UI commands module
@@ -194,18 +194,24 @@ gl_ui_cmd_file_print (GtkAction *action,
 	g_return_if_fail (action && GTK_IS_ACTION(action));
 	g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (GL_VIEW(window->view)->print_dialog) {
+	if (window->print_dialog) {
 
-		gtk_window_present (GTK_WINDOW(GL_VIEW(window->view)->print_dialog));
+		gtk_window_present (GTK_WINDOW(window->print_dialog));
+		gtk_window_set_transient_for (GTK_WINDOW (window->print_dialog),
+					      GTK_WINDOW (window));
 
 	} else {
 
-		GL_VIEW(window->view)->print_dialog =
+		window->print_dialog =
 			g_object_ref (
 				gl_print_dialog_new (GL_VIEW(window->view)->label,
-						     BONOBO_WINDOW(window)) );
+						     GTK_WINDOW(window)) );
 
-		gtk_widget_show (GL_VIEW(window->view)->print_dialog);
+		g_signal_connect (G_OBJECT(window->print_dialog), "destroy",
+				  G_CALLBACK (gtk_widget_destroyed),
+				  &window->print_dialog);
+
+		gtk_widget_show (GTK_WIDGET (window->print_dialog));
 	}
 
 	gl_debug (DEBUG_COMMANDS, "END");
@@ -1006,8 +1012,25 @@ gl_ui_cmd_objects_merge_properties (GtkAction *action,
 	g_return_if_fail (action && GTK_IS_ACTION(action));
 	g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_edit_merge_props (GL_VIEW(window->view));
+	if (window->merge_dialog) {
+
+		gtk_window_present (GTK_WINDOW(window->merge_dialog));
+		gtk_window_set_transient_for (GTK_WINDOW (window->merge_dialog),
+					      GTK_WINDOW (window));
+
+	} else {
+
+		window->merge_dialog =
+			g_object_ref (
+				gl_merge_properties_dialog_new (GL_VIEW(window->view)->label,
+								GTK_WINDOW(window)) );
+
+		g_signal_connect (G_OBJECT(window->merge_dialog), "destroy",
+				  G_CALLBACK (gtk_widget_destroyed),
+				  &window->merge_dialog);
+
+		gtk_widget_show (GTK_WIDGET (window->merge_dialog));
+
 	}
 
 	gl_debug (DEBUG_COMMANDS, "END");
@@ -1111,9 +1134,9 @@ gl_ui_cmd_help_about (GtkAction *action,
 	if (about != NULL)
 	{
 
+		gtk_window_present (GTK_WINDOW (about));
 		gtk_window_set_transient_for (GTK_WINDOW (about),
 					      GTK_WINDOW (window));
-		gtk_window_present (GTK_WINDOW (about));
 
 	} else {
 	

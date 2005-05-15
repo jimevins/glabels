@@ -4,10 +4,6 @@ SUBDIRS= pixmaps stock-pixmaps mygal recent-files
 
 bin_PROGRAMS = glabels glabels-batch
 
-uidir = $(datadir)/glabels/ui/
-gladedir = $(datadir)/glabels/glade/
-
-
 INCLUDES = \
 	-I$(top_srcdir) 					\
 	-I$(top_builddir) 					\
@@ -18,7 +14,6 @@ INCLUDES = \
 	-DDATADIR=\""$(datadir)"\"                      	\
 	-DLIBDIR=\""$(libdir)"\"                        	\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 		\
 	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
 	$(DISABLE_DEPRECATED_CFLAGS)
 

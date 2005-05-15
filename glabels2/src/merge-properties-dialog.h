@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -23,7 +25,8 @@
 #define __MERGE_PROPERTIES_DIALOG_H__
 
 #include <gtk/gtkdialog.h>
-#include "view.h"
+#include <gtk/gtkwindow.h>
+#include "label.h"
 
 G_BEGIN_DECLS
 
@@ -55,7 +58,8 @@ struct  _glMergePropertiesDialogClass
 
 GType      gl_merge_properties_dialog_get_type    (void) G_GNUC_CONST;
 
-GtkWidget *gl_merge_properties_dialog_new         (glView *view);
+GtkWidget *gl_merge_properties_dialog_new         (glLabel   *label,
+	                                           GtkWindow *window);
 
 G_END_DECLS
 

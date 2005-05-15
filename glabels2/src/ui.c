@@ -105,6 +105,9 @@ static GtkActionEntry entries[] = {
 	{ "ObjectsAlignVertMenu",    NULL, N_("Align _Vertical") },
 	{ "HelpMenu",                NULL, N_("_Help") },
 
+	/* Popup entries. */
+	{ "ContextMenu", NULL, N_("Context Menu") },
+	{ "EmptySelectionContextMenu", NULL, N_("Context Menu") },
 
 	/* File action entries. */
 	{ "FileNew",
@@ -628,6 +631,40 @@ static const gchar *ui_info =
 "		<toolitem action='ObjectsMergeProperties' />"
 "	</toolbar>"
 ""
+"	<popup action='ContextMenu'>"
+"		<menu action='ObjectsOrderMenu'>"
+"			<menuitem action='ObjectsRaise' />"
+"			<menuitem action='ObjectsLower' />"
+"		</menu>"
+"		<menu action='ObjectsRotateFlipMenu'>"
+"			<menuitem action='ObjectsRotateLeft' />"
+"			<menuitem action='ObjectsRotateRight' />"
+"			<menuitem action='ObjectsFlipHorizontal' />"
+"			<menuitem action='ObjectsFlipVertical' />"
+"		</menu>"
+"		<menu action='ObjectsAlignHorizMenu'>"
+"			<menuitem action='ObjectsAlignLeft' />"
+"			<menuitem action='ObjectsAlignHCenter' />"
+"			<menuitem action='ObjectsAlignRight' />"
+"			<menuitem action='ObjectsCenterHorizontal' />"
+"		</menu>"
+"		<menu action='ObjectsAlignVertMenu'>"
+"			<menuitem action='ObjectsAlignTop' />"
+"			<menuitem action='ObjectsAlignVCenter' />"
+"			<menuitem action='ObjectsAlignBottom' />"
+"			<menuitem action='ObjectsCenterVertical' />"
+"		</menu>"
+"		<separator />"
+"		<menuitem action='EditCut' />"
+"		<menuitem action='EditCopy' />"
+"		<menuitem action='EditPaste' />"
+"		<menuitem action='EditDelete' />"
+"	</popup>"
+""
+"	<popup action='EmptySelectionContextMenu'>"
+"		<menuitem action='EditPaste' />"
+"	</popup>"
+""
 "</ui>";
 
 
@@ -751,6 +788,7 @@ gl_ui_new (glWindow *window)
 	gtk_ui_manager_insert_action_group (ui, actions, 0);
 	gtk_window_add_accel_group (GTK_WINDOW (window), gtk_ui_manager_get_accel_group (ui));
 
+	gl_debug (DEBUG_UI, "Creating ui from string");
 	if (!gtk_ui_manager_add_ui_from_string (ui, ui_info, strlen (ui_info), &error)) {
 		g_message ("building menus failed: %s", error->message);
 		g_error_free (error);

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -33,7 +35,7 @@
 #include <gtk/gtkcellrenderertext.h>
 #include <gtk/gtklabel.h>
 
-#include "view.h"
+#include "label.h"
 #include "merge.h"
 #include "util.h"
 
@@ -47,7 +49,6 @@ struct _glMergePropertiesDialogPrivate {
 
 	GladeXML     *gui;
 
-	glView       *view;
 	glLabel      *label;
 	glMerge      *merge;
 
@@ -92,7 +93,8 @@ static void gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass 
 static void gl_merge_properties_dialog_init       (glMergePropertiesDialog      *dlg);
 static void gl_merge_properties_dialog_finalize   (GObject                      *object);
 static void gl_merge_properties_dialog_construct  (glMergePropertiesDialog      *dialog,
-						   glView                       *view);
+						   glLabel                      *label,
+						   GtkWindow                    *window);
 
 static void type_changed_cb                       (GtkWidget                    *widget,
 						   glMergePropertiesDialog      *dialog);
@@ -209,7 +211,8 @@ gl_merge_properties_dialog_finalize (GObject *object)
 /* NEW merge properties dialog.                                              */
 /*****************************************************************************/
 GtkWidget*
-gl_merge_properties_dialog_new (glView *view)
+gl_merge_properties_dialog_new (glLabel   *label,
+	                        GtkWindow *window)
 {
 	GtkWidget *dialog;
 
@@ -218,7 +221,7 @@ gl_merge_properties_dialog_new (glView *view)
 	dialog = GTK_WIDGET (g_object_new (GL_TYPE_MERGE_PROPERTIES_DIALOG, NULL));
 
 	gl_merge_properties_dialog_construct (GL_MERGE_PROPERTIES_DIALOG (dialog),
-					      view);
+					      label, window);
 
 	gl_debug (DEBUG_MERGE, "END");
 
@@ -230,7 +233,8 @@ gl_merge_properties_dialog_new (glView *view)
 /*--------------------------------------------------------------------------*/
 static void
 gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
-				      glView                  *view)
+				      glLabel                 *label,
+				      GtkWindow               *window)
 {
 	gchar             *description;
 	glMergeSrcType     src_type;
@@ -251,6 +255,11 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_OK, GTK_RESPONSE_OK,
 				NULL);
+
+	if (window) {
+		gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
+		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
+	}
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
@@ -275,8 +284,7 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
 
-	dialog->priv->view  = view;
-	dialog->priv->label = view->label;
+	dialog->priv->label = label;
 
 	dialog->priv->merge = gl_label_get_merge (dialog->priv->label);
 	description         = gl_merge_get_description (dialog->priv->merge);
@@ -284,7 +292,7 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	src                 = gl_merge_get_src (dialog->priv->merge);
 
 	/* --- Window title --- */
-	name = gl_label_get_short_name (view->label);
+	name = gl_label_get_short_name (label);
 	title = g_strdup_printf ("%s %s", name, _("Merge Properties"));
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 	g_free (name);

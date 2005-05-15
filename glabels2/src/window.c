@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  window.c:  a gLabels app window
@@ -78,6 +78,11 @@ static gboolean window_delete_event_cb (glWindow      *window,
 
 static void     selection_changed_cb   (glView        *view,
 					glWindow      *window);
+
+static void   context_menu_activate_cb (glView       *view,
+					gint          button,
+					guint32       activate_time,
+					glWindow     *window);
 
 static void     zoom_changed_cb        (glView        *view,
 					gdouble        zoom,
@@ -213,6 +218,12 @@ gl_window_init (glWindow *window)
 	
 	window->menu_tips_context_id =
 		gtk_statusbar_get_context_id (GTK_STATUSBAR (window->status_bar), "menu_tips");
+
+	window->print_dialog = NULL;
+	window->merge_dialog = NULL;
+	window->context_menu = GTK_MENU (gtk_ui_manager_get_widget (ui, "/ContextMenu"));
+	window->empty_selection_context_menu =
+		GTK_MENU (gtk_ui_manager_get_widget (ui, "/EmptySelectionContextMenu"));
 
 	window->view = NULL;
 
@@ -398,6 +409,9 @@ gl_window_set_label (glWindow    *window,
 	g_signal_connect (G_OBJECT(window->view), "selection_changed",
 			  G_CALLBACK(selection_changed_cb), window);
 
+	g_signal_connect (G_OBJECT(window->view), "context_menu_activate",
+			  G_CALLBACK(context_menu_activate_cb), window);
+
 	g_signal_connect (G_OBJECT(window->view), "zoom_changed",
 			  G_CALLBACK(zoom_changed_cb), window);
 
@@ -492,6 +506,35 @@ selection_changed_cb (glView   *view,
 	gl_ui_update_selection_verbs (window->ui, view);
 
 	gl_debug (DEBUG_WINDOW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  View "context menu activate" callback.                          */
+/*---------------------------------------------------------------------------*/
+static void
+context_menu_activate_cb (glView       *view,
+			  gint          button,
+			  guint32       activate_time,
+			  glWindow     *window)
+{
+        gl_debug (DEBUG_WINDOW, "START");
+
+        g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+        if (gl_view_is_selection_empty (view)) {
+
+		gtk_menu_popup (GTK_MENU (window->empty_selection_context_menu),
+				NULL, NULL, NULL, NULL, button, activate_time);
+
+        } else {
+
+		gtk_menu_popup (GTK_MENU (window->context_menu),
+				NULL, NULL, NULL, NULL, button, activate_time);
+
+        }
+
+        gl_debug (DEBUG_WINDOW, "END");
 }
 
 /*---------------------------------------------------------------------------*/

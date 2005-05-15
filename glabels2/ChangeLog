@@ -1,3 +1,39 @@
+2005-05-14  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+		Removed obsolete macros.
+	* src/marshal.list:
+		Added marshalling template to support new view signal: "context_menu_activate."
+	* src/view.h:
+	* src/view.c: (gl_view_class_init), (gl_view_construct),
+	(canvas_event_arrow_mode):
+		- Removed hardcoded context menus and added new signal "context_menu_activate"
+		to push this up to the uimanager.
+		- Removed merge properties and print dialogs so that they can be managed with
+		the window by the uimanager.
+	* src/merge-properties-dialog.h:
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_new),
+	(gl_merge_properties_dialog_construct):
+		Changed calling convention of gl_merge_properties_dialog_new() to use
+		glLabel and GtkWindow instead of view to make more consistent with other
+		dialogs.
+	* src/print-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_new),
+	(gl_print_dialog_construct):
+		Removed last artifact of libbonoboui.
+	* src/ui-commands.c: (gl_ui_cmd_file_print),
+	(gl_ui_cmd_objects_merge_properties), (gl_ui_cmd_help_about):
+		Reconciled style for launching dialogs.
+	* src/ui.c: (gl_ui_new):
+		Added context menus to ui manager.
+	* src/view-object.c: (item_event_arrow_mode):
+		No longer try to select objects with right-click.
+	* src/window.h:
+	* src/window.c: (gl_window_init), (gl_window_set_label),
+	(context_menu_activate_cb):
+		Context menus and all dialogs are now managed in a consistent way in window
+		by the ui manager.
+
 2005-05-11  Jim Evins  <evins@snaught.com>
 
 	* src/window.h:

@@ -27,12 +27,14 @@
 
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkuimanager.h>
+#include <gtk/gtkmenu.h>
 
 #include "view.h"
 #include "label.h"
-
 #include "ui-property-bar.h"
 #include "ui-sidebar.h"
+#include "print-dialog.h"
+#include "merge-properties-dialog.h"
 
 G_BEGIN_DECLS
 
@@ -52,22 +54,27 @@ typedef struct _glWindowClass glWindowClass;
 struct _glWindow {
 	GtkWindow               parent_widget;
 
-	GtkUIManager           *ui;
+	GtkUIManager            *ui;
 
-	GtkWidget              *view;
+	GtkWidget               *view;
 
-	GtkWidget              *hbox;
+	GtkWidget               *hbox;
 
-	glUIPropertyBar        *property_bar;
-	glUISidebar            *sidebar;
+	glUIPropertyBar         *property_bar;
+	glUISidebar             *sidebar;
 
-	GtkWidget              *status_bar;
-	GtkWidget              *cursor_info;
-	GtkWidget              *cursor_info_frame;
-	GtkWidget              *zoom_info;
-	GtkWidget              *zoom_info_frame;
+	GtkWidget               *status_bar;
+	GtkWidget               *cursor_info;
+	GtkWidget               *cursor_info_frame;
+	GtkWidget               *zoom_info;
+	GtkWidget               *zoom_info_frame;
 
-	guint                   menu_tips_context_id;
+	guint                    menu_tips_context_id;
+
+	glPrintDialog           *print_dialog;
+	glMergePropertiesDialog *merge_dialog;
+	GtkMenu                 *context_menu;
+	GtkMenu                 *empty_selection_context_menu;
 };
 
 struct _glWindowClass {
