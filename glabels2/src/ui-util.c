@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui-util.c:  GLabels ui utilities module
@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************/
-/* Set sensitivity of verb.                                                  */
+/** Set sensitivity of verb.                                                 */
 /*****************************************************************************/
 void
 gl_ui_util_set_verb_sensitive (GtkUIManager  *ui,
@@ -74,7 +74,7 @@ gl_ui_util_set_verb_sensitive (GtkUIManager  *ui,
 }
 
 /*****************************************************************************/
-/* Set sensitivity of a list of verbs.                                       */
+/** Set sensitivity of a list of verbs.                                      */
 /*****************************************************************************/
 void
 gl_ui_util_set_verb_list_sensitive (GtkUIManager  *ui,
@@ -101,7 +101,7 @@ gl_ui_util_set_verb_list_sensitive (GtkUIManager  *ui,
 }
 
 /*****************************************************************************/
-/* Set state of a verb.                                                      */
+/** Set state of a verb.                                                     */
 /*****************************************************************************/
 void
 gl_ui_util_set_verb_state (GtkUIManager  *ui,

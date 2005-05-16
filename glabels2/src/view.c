@@ -199,18 +199,18 @@ static int        canvas_event_arrow_mode         (GnomeCanvas *canvas,
 
 static void       selection_clear_cb             (GtkWidget         *widget,
 						  GdkEventSelection *event,
-						  gpointer          data);
+						  glView            *view);
 
 static void       selection_get_cb               (GtkWidget         *widget,
 						  GtkSelectionData  *selection_data,
 						  guint             info,
 						  guint             time,
-						  gpointer          data);
+						  glView           *view);
 
 static void       selection_received_cb          (GtkWidget         *widget,
 						  GtkSelectionData  *selection_data,
 						  guint             time,
-						  gpointer          data);
+						  glView           *view);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -358,7 +358,7 @@ gl_view_new (glLabel *label)
 
 	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
-	view = g_object_new (gl_view_get_type (), NULL);
+	view = g_object_new (GL_TYPE_VIEW, NULL);
 	view->label = label;
 
 	gl_view_construct (view);
@@ -374,7 +374,8 @@ gl_view_new (glLabel *label)
 static void
 gl_view_construct (glView *view)
 {
-	GtkWidget *wvbox, *wscroll;
+	GtkWidget *wvbox;
+	GtkWidget *wscroll;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -416,7 +417,8 @@ static GtkWidget *
 gl_view_construct_canvas (glView *view)
 {
 	glLabel   *label;
-	gdouble    label_width, label_height;
+	gdouble    label_width;
+	gdouble    label_height;
 	GdkColor  *bg_color;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -468,9 +470,12 @@ static gdouble
 get_home_scale (glView *view)
 {
 	GdkScreen *screen;
-	gdouble    screen_width_pixels, screen_width_mm;
-	gdouble    screen_height_pixels, screen_height_mm;
-	gdouble    x_pixels_per_mm, y_pixels_per_mm;
+	gdouble    screen_width_pixels;
+	gdouble    screen_width_mm;
+	gdouble    screen_height_pixels;
+	gdouble    screen_height_mm;
+	gdouble    x_pixels_per_mm;
+	gdouble    y_pixels_per_mm;
 	gdouble    scale;
 
 	if (!gtk_widget_has_screen (GTK_WIDGET (view->canvas))) return 1.0;
@@ -571,9 +576,10 @@ draw_layers (glView *view)
 /*---------------------------------------------------------------------------*/
 static void
 label_resized_cb (glLabel *label,
-		  glView *view)
+		  glView  *view)
 {
-	gdouble label_width, label_height;
+	gdouble label_width;
+	gdouble label_height;
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (view && GL_IS_VIEW (view));
@@ -738,7 +744,8 @@ static void
 draw_bg_fg_rect (glView *view)
 {
 	glLabel          *label;
-	gdouble           w, h;
+	gdouble           w;
+	gdouble           h;
 	GnomeCanvasItem  *item;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -782,10 +789,13 @@ draw_bg_fg_rounded_rect (glView *view)
 {
 	glLabel                   *label;
 	GnomeCanvasPoints         *points;
-	gint                       i_coords, i_theta;
+	gint                       i_coords;
+	gint                       i_theta;
 	glTemplate                *template;
 	const glTemplateLabelType *label_type;
-	gdouble                    r, w, h;
+	gdouble                    r;
+	gdouble                    w;
+	gdouble                    h;
 	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -903,7 +913,8 @@ draw_bg_fg_cd (glView *view)
 	glLabel                   *label;
 	glTemplate                *template;
 	const glTemplateLabelType *label_type;
-	gdouble                    r1, r2;
+	gdouble                    r1;
+	gdouble                    r2;
 	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -973,9 +984,13 @@ draw_bg_fg_cd_bc (glView *view)
 	glTemplate                *template;
 	const glTemplateLabelType *label_type;
 	GnomeCanvasPoints         *points;
-	gint                       i_coords, i_theta;
-	gdouble                    theta1, theta2;
-	gdouble                    x0, y0, w, h, r1, r2;
+	gint                       i_coords;
+	gint                       i_theta;
+	gdouble                    theta1;
+	gdouble                    theta2;
+	gdouble                    x0, y0;
+	gdouble                    w, h;
+	gdouble                    r1, r2;
 	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -1102,7 +1117,9 @@ draw_bg_fg_cd_bc (glView *view)
 static void
 draw_grid_layer (glView *view)
 {
-	gdouble                    w, h, x, y, x0, y0;
+	gdouble                    w, h;
+	gdouble                    x, y;
+	gdouble                    x0, y0;
 	GnomeCanvasPoints         *points;
 	GnomeCanvasItem           *item;
 	GnomeCanvasGroup          *group;
@@ -1317,7 +1334,8 @@ draw_markup_margin_rounded_rect (glView           *view,
 	glTemplate                *template;
 	const glTemplateLabelType *label_type;
 	GnomeCanvasPoints         *points;
-	gint                       i_coords, i_theta;
+	gint                       i_coords;
+	gint                       i_theta;
 	gdouble                    r, w, h, m;
 	GnomeCanvasItem           *item;
 
@@ -1477,9 +1495,11 @@ draw_markup_margin_cd_bc (glView           *view,
 	const glTemplateLabelType *label_type;
 	gdouble                    m, r1, r2;
 	GnomeCanvasPoints         *points;
-	gint                       i_coords, i_theta;
+	gint                       i_coords;
+	gint                       i_theta;
 	gdouble                    theta1, theta2;
-	gdouble                    x0, y0, w, h, r;
+	gdouble                    x0, y0;
+	gdouble                    w, h, r;
 	GnomeCanvasItem           *item;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -1644,7 +1664,8 @@ draw_markup_circle (glView           *view,
 /*****************************************************************************/
 /* Show grid.                                                                */
 /*****************************************************************************/
-void       gl_view_show_grid               (glView            *view)
+void
+gl_view_show_grid (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1654,7 +1675,8 @@ void       gl_view_show_grid               (glView            *view)
 /*****************************************************************************/
 /* Hide grid.                                                                */
 /*****************************************************************************/
-void       gl_view_hide_grid               (glView            *view)
+void
+gl_view_hide_grid (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1664,8 +1686,9 @@ void       gl_view_hide_grid               (glView            *view)
 /*****************************************************************************/
 /* Set grid spacing.                                                         */
 /*****************************************************************************/
-void       gl_view_set_grid_spacing        (glView            *view,
-					    gdouble            spacing)
+void
+gl_view_set_grid_spacing (glView  *view,
+			  gdouble  spacing)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1678,7 +1701,8 @@ void       gl_view_set_grid_spacing        (glView            *view,
 /*****************************************************************************/
 /* Show markup.                                                              */
 /*****************************************************************************/
-void       gl_view_show_markup             (glView            *view)
+void
+gl_view_show_markup (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1688,7 +1712,8 @@ void       gl_view_show_markup             (glView            *view)
 /*****************************************************************************/
 /* Hide markup.                                                              */
 /*****************************************************************************/
-void       gl_view_hide_markup             (glView            *view)
+void
+gl_view_hide_markup (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1723,7 +1748,7 @@ gl_view_arrow_mode (glView *view)
 /*****************************************************************************/
 void
 gl_view_object_create_mode (glView            *view,
-			    glLabelObjectType type)
+			    glLabelObjectType  type)
 {
 	GdkCursor *cursor;
 
@@ -1833,7 +1858,8 @@ gl_view_select_all (glView *view)
 void
 gl_view_unselect_all (glView *view)
 {
-	GList *p, *p_next;
+	GList *p;
+	GList *p_next;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1859,10 +1885,11 @@ gl_view_select_region (glView  *view,
 		       gdouble  x2,
 		       gdouble  y2)
 {
-	GList *p;
-	glViewObject *view_object;
+	GList         *p;
+	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble i_x1, i_y1, i_x2, i_y2;
+	gdouble        i_x1, i_y1;
+	gdouble        i_x2, i_y2;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1939,8 +1966,8 @@ object_at (glView  *view,
 	   gdouble  x,
 	   gdouble  y)
 {
-	GnomeCanvasItem *item, *p_item;
-	GList *p;
+	GnomeCanvasItem *item;
+	GList           *p;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -1986,7 +2013,7 @@ is_item_member_of_group (glView          *view,
 /*****************************************************************************/
 gboolean
 gl_view_is_object_selected (glView       *view,
-		    glViewObject *view_object)
+			    glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "");
 
@@ -2039,7 +2066,9 @@ gl_view_is_selection_atomic (glView *view)
 void
 gl_view_delete_selection (glView *view)
 {
-	GList *object_list, *p, *p_next;
+	GList *object_list;
+	GList *p;
+	GList *p_next;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2297,7 +2326,10 @@ gl_view_align_selection_right (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dx, x2max, x1, y1, x2, y2;
+	gdouble        dx;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        x2max;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2339,7 +2371,12 @@ gl_view_align_selection_hcenter (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dx, dxmin, xsum, xavg, xcenter, x1, y1, x2, y2;
+	gdouble        dx;
+	gdouble        dxmin;
+	gdouble        xsum, xavg;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        xcenter;
 	gint           n;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2400,7 +2437,10 @@ gl_view_align_selection_top (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy, y1min, x1, y1, x2, y2;
+	gdouble        dy;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        y1min;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2442,7 +2482,10 @@ gl_view_align_selection_bottom (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy, y2max, x1, y1, x2, y2;
+	gdouble        dy;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        y2max;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2484,7 +2527,12 @@ gl_view_align_selection_vcenter (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy, dymin, ysum, yavg, ycenter, x1, y1, x2, y2;
+	gdouble        dy;
+	gdouble        dymin;
+	gdouble        ysum, yavg;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        ycenter;
 	gint           n;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2545,7 +2593,12 @@ gl_view_center_selection_horiz (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dx, x_label_center, x_obj_center, x1, y1, x2, y2, w, h;
+	gdouble        dx;
+	gdouble        x_label_center;
+	gdouble        x_obj_center;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2579,7 +2632,12 @@ gl_view_center_selection_vert (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy, y_label_center, y_obj_center, x1, y1, x2, y2, w, h;
+	gdouble        dy;
+	gdouble        y_label_center;
+	gdouble        y_obj_center;
+	gdouble        x1, y1;
+	gdouble        x2, y2;
+	gdouble        w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -2609,10 +2667,10 @@ gl_view_center_selection_vert (glView *view)
 /*****************************************************************************/
 void
 gl_view_move_selection (glView  *view,
-		gdouble  dx,
-		gdouble  dy)
+			gdouble  dx,
+			gdouble  dy)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2633,9 +2691,9 @@ gl_view_move_selection (glView  *view,
 /* Can text properties be set for selection?                                 */
 /*****************************************************************************/
 gboolean
-gl_view_can_selection_text (glView            *view)
+gl_view_can_selection_text (glView *view)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -2658,10 +2716,10 @@ gl_view_can_selection_text (glView            *view)
 /* Set font family for all text contained in selected objects.               */
 /*****************************************************************************/
 void
-gl_view_set_selection_font_family (glView            *view,
-				   const gchar       *font_family)
+gl_view_set_selection_font_family (glView      *view,
+				   const gchar *font_family)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2682,10 +2740,10 @@ gl_view_set_selection_font_family (glView            *view,
 /* Set font size for all text contained in selected objects.                 */
 /*****************************************************************************/
 void
-gl_view_set_selection_font_size (glView            *view,
-				 gdouble            font_size)
+gl_view_set_selection_font_size (glView  *view,
+				 gdouble  font_size)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2706,10 +2764,10 @@ gl_view_set_selection_font_size (glView            *view,
 /* Set font weight for all text contained in selected objects.               */
 /*****************************************************************************/
 void
-gl_view_set_selection_font_weight (glView            *view,
-				   GnomeFontWeight    font_weight)
+gl_view_set_selection_font_weight (glView          *view,
+				   GnomeFontWeight  font_weight)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2730,10 +2788,10 @@ gl_view_set_selection_font_weight (glView            *view,
 /* Set font italic flag for all text contained in selected objects.          */
 /*****************************************************************************/
 void
-gl_view_set_selection_font_italic_flag (glView            *view,
-					gboolean           font_italic_flag)
+gl_view_set_selection_font_italic_flag (glView   *view,
+					gboolean  font_italic_flag)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2757,7 +2815,7 @@ void
 gl_view_set_selection_text_alignment (glView            *view,
 				      GtkJustification   text_alignment)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2778,10 +2836,10 @@ gl_view_set_selection_text_alignment (glView            *view,
 /* Set text line spacing for all text contained in selected objects.         */
 /*****************************************************************************/
 void
-gl_view_set_selection_text_line_spacing (glView            *view,
-				         gdouble            text_line_spacing)
+gl_view_set_selection_text_line_spacing (glView  *view,
+				         gdouble  text_line_spacing)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2801,10 +2859,10 @@ gl_view_set_selection_text_line_spacing (glView            *view,
 /* Set text color for all text contained in selected objects.                */
 /*****************************************************************************/
 void
-gl_view_set_selection_text_color (glView            *view,
-				  glColorNode       *text_color_node)
+gl_view_set_selection_text_color (glView      *view,
+				  glColorNode *text_color_node)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2825,9 +2883,9 @@ gl_view_set_selection_text_color (glView            *view,
 /* Can fill properties be set for selection?                                 */
 /*****************************************************************************/
 gboolean
-gl_view_can_selection_fill (glView            *view)
+gl_view_can_selection_fill (glView *view)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -2850,10 +2908,10 @@ gl_view_can_selection_fill (glView            *view)
 /* Set fill color for all selected objects.                                  */
 /*****************************************************************************/
 void
-gl_view_set_selection_fill_color (glView            *view,
-				  glColorNode       *fill_color_node)
+gl_view_set_selection_fill_color (glView      *view,
+				  glColorNode *fill_color_node)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2874,9 +2932,9 @@ gl_view_set_selection_fill_color (glView            *view,
 /* Can line color properties be set for selection?                           */
 /*****************************************************************************/
 gboolean
-gl_view_can_selection_line_color (glView            *view)
+gl_view_can_selection_line_color (glView *view)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -2899,10 +2957,10 @@ gl_view_can_selection_line_color (glView            *view)
 /* Set line color for all selected objects.                                  */
 /*****************************************************************************/
 void
-gl_view_set_selection_line_color (glView            *view,
-				  glColorNode       *line_color_node)
+gl_view_set_selection_line_color (glView      *view,
+				  glColorNode *line_color_node)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2923,9 +2981,9 @@ gl_view_set_selection_line_color (glView            *view,
 /* Can line width properties be set for selection?                           */
 /*****************************************************************************/
 gboolean
-gl_view_can_selection_line_width (glView            *view)
+gl_view_can_selection_line_width (glView *view)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "");
@@ -2948,10 +3006,10 @@ gl_view_can_selection_line_width (glView            *view)
 /* Set line width for all selected objects.                                  */
 /*****************************************************************************/
 void
-gl_view_set_selection_line_width (glView            *view,
-				  gdouble            line_width)
+gl_view_set_selection_line_width (glView  *view,
+				  gdouble  line_width)
 {
-	GList *p;
+	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -2990,11 +3048,11 @@ gl_view_cut (glView *view)
 void
 gl_view_copy (glView *view)
 {
-	GList *p;
-	glViewObject *view_object;
+	GList         *p;
+	glViewObject  *view_object;
 	glLabelObject *object;
-	glTemplate *template;
-	gboolean rotate_flag;
+	glTemplate    *template;
+	gboolean       rotate_flag;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3053,7 +3111,7 @@ gl_view_paste (glView *view)
 void
 gl_view_zoom_in (glView *view)
 {
-	gint i, i_min;
+	gint    i, i_min;
 	gdouble dist, dist_min;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -3085,7 +3143,7 @@ gl_view_zoom_in (glView *view)
 void
 gl_view_zoom_out (glView *view)
 {
-	gint i, i_min;
+	gint    i, i_min;
 	gdouble dist, dist_min;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -3120,7 +3178,7 @@ gl_view_zoom_out (glView *view)
 void
 gl_view_zoom_to_fit (glView *view)
 {
-	gint w_view, h_view;
+	gint    w_view, h_view;
 	gdouble w_label, h_label;
 	gdouble x_scale, y_scale, scale;
 
@@ -3159,7 +3217,7 @@ gl_view_zoom_to_fit (glView *view)
 /*****************************************************************************/
 void
 gl_view_set_zoom (glView  *view,
-		  gdouble zoom)
+		  gdouble  zoom)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3172,9 +3230,9 @@ gl_view_set_zoom (glView  *view,
 /* PRIVATE.  Set canvas scale.                                               *
 /*---------------------------------------------------------------------------*/
 static void
-set_zoom_real (glView          *view,
-	       gdouble          zoom,
-	       gboolean         zoom_to_fit_flag)
+set_zoom_real (glView   *view,
+	       gdouble   zoom,
+	       gboolean  zoom_to_fit_flag)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3207,7 +3265,7 @@ set_zoom_real (glView          *view,
 /* PRIVATE. Size allocation changed callback.                                */
 /*---------------------------------------------------------------------------*/
 static void
-size_allocate_cb (glView          *view)
+size_allocate_cb (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3225,7 +3283,7 @@ size_allocate_cb (glView          *view)
 /* PRIVATE. Screen changed callback.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-screen_changed_cb (glView          *view)
+screen_changed_cb (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3379,12 +3437,14 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 			 GdkEvent    *event,
 			 glView      *view)
 {
-	static gdouble x0, y0;
-	static gboolean dragging = FALSE;
+	static gdouble          x0, y0;
+	static gboolean         dragging = FALSE;
 	static GnomeCanvasItem *item;
-	gdouble x, y, x1, y1, x2, y2;
-	GnomeCanvasGroup *group;
-	GdkCursor *cursor;
+	gdouble                 x, y;
+	gdouble                 x1, y1;
+	gdouble                 x2, y2;
+	GnomeCanvasGroup       *group;
+	GdkCursor              *cursor;
 
 	gl_debug (DEBUG_VIEW, "");
 
@@ -3539,10 +3599,8 @@ canvas_event_arrow_mode (GnomeCanvas *canvas,
 static void
 selection_clear_cb (GtkWidget         *widget,
 		    GdkEventSelection *event,
-		    gpointer          data)
+		    glView            *view)
 {
-	glView *view = GL_VIEW (data);
-
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
@@ -3560,13 +3618,12 @@ selection_clear_cb (GtkWidget         *widget,
 static void
 selection_get_cb (GtkWidget        *widget,
 		  GtkSelectionData *selection_data,
-		  guint            info,
-		  guint            time,
-		  gpointer         data)
+		  guint             info,
+		  guint             time,
+		  glView           *view)
 {
-	glView *view = GL_VIEW (data);
-	gchar *buffer;
-	glXMLLabelStatus status;
+	gchar            *buffer;
+	glXMLLabelStatus  status;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3591,15 +3648,14 @@ selection_get_cb (GtkWidget        *widget,
 static void
 selection_received_cb (GtkWidget        *widget,
 		       GtkSelectionData *selection_data,
-		       guint            time,
-		       gpointer         data)
+		       guint             time,
+		       glView           *view)
 {
-	glView *view = GL_VIEW (data);
-	glLabel *label = NULL;
-	glXMLLabelStatus status;
-	GList *p, *p_next;
-	glLabelObject *object, *newobject;
-	glViewObject *view_object;
+	glLabel          *label = NULL;
+	glXMLLabelStatus  status;
+	GList            *p, *p_next;
+	glLabelObject    *object, *newobject;
+	glViewObject     *view_object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3657,8 +3713,8 @@ selection_received_cb (GtkWidget        *widget,
 /* Set default font family.                                                 */
 /****************************************************************************/
 void
-gl_view_set_default_font_family (glView            *view,
-				 const gchar       *font_family)
+gl_view_set_default_font_family (glView      *view,
+				 const gchar *font_family)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3677,8 +3733,8 @@ gl_view_set_default_font_family (glView            *view,
 /* Set default font size.                                                   */
 /****************************************************************************/
 void
-gl_view_set_default_font_size (glView            *view,
-			       gdouble            font_size)
+gl_view_set_default_font_size (glView  *view,
+			       gdouble  font_size)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3694,8 +3750,8 @@ gl_view_set_default_font_size (glView            *view,
 /* Set default font weight.                                                 */
 /****************************************************************************/
 void
-gl_view_set_default_font_weight (glView            *view,
-				 GnomeFontWeight    font_weight)
+gl_view_set_default_font_weight (glView          *view,
+				 GnomeFontWeight  font_weight)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3711,8 +3767,8 @@ gl_view_set_default_font_weight (glView            *view,
 /* Set default font italic flag.                                            */
 /****************************************************************************/
 void
-gl_view_set_default_font_italic_flag (glView            *view,
-				      gboolean           font_italic_flag)
+gl_view_set_default_font_italic_flag (glView   *view,
+				      gboolean  font_italic_flag)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3728,8 +3784,8 @@ gl_view_set_default_font_italic_flag (glView            *view,
 /* Set default text color.                                                  */
 /****************************************************************************/
 void
-gl_view_set_default_text_color (glView            *view,
-				guint              text_color)
+gl_view_set_default_text_color (glView *view,
+				guint   text_color)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3745,8 +3801,8 @@ gl_view_set_default_text_color (glView            *view,
 /* Set default text alignment.                                              */
 /****************************************************************************/
 void
-gl_view_set_default_text_alignment (glView            *view,
-				    GtkJustification   text_alignment)
+gl_view_set_default_text_alignment (glView           *view,
+				    GtkJustification  text_alignment)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3760,8 +3816,8 @@ gl_view_set_default_text_alignment (glView            *view,
 /* Set default text line spacing.                                           */
 /****************************************************************************/
 void
-gl_view_set_default_text_line_spacing (glView            *view,
-			               gdouble            text_line_spacing)
+gl_view_set_default_text_line_spacing (glView  *view,
+			               gdouble  text_line_spacing)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3777,8 +3833,8 @@ gl_view_set_default_text_line_spacing (glView            *view,
 /* Set default line width.                                                  */
 /****************************************************************************/
 void
-gl_view_set_default_line_width (glView            *view,
-				gdouble            line_width)
+gl_view_set_default_line_width (glView  *view,
+				gdouble  line_width)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3794,8 +3850,8 @@ gl_view_set_default_line_width (glView            *view,
 /* Set default line color.                                                  */
 /****************************************************************************/
 void
-gl_view_set_default_line_color (glView            *view,
-				guint              line_color)
+gl_view_set_default_line_color (glView *view,
+				guint   line_color)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3811,8 +3867,8 @@ gl_view_set_default_line_color (glView            *view,
 /* Set default fill color.                                                  */
 /****************************************************************************/
 void
-gl_view_set_default_fill_color (glView            *view,
-				guint              fill_color)
+gl_view_set_default_fill_color (glView *view,
+				guint   fill_color)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3829,7 +3885,7 @@ gl_view_set_default_fill_color (glView            *view,
 /* Get default font family.                                                 */
 /****************************************************************************/
 gchar *
-gl_view_get_default_font_family (glView            *view)
+gl_view_get_default_font_family (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3845,7 +3901,7 @@ gl_view_get_default_font_family (glView            *view)
 /* Get default font size.                                                   */
 /****************************************************************************/
 gdouble
-gl_view_get_default_font_size (glView            *view)
+gl_view_get_default_font_size (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3861,7 +3917,7 @@ gl_view_get_default_font_size (glView            *view)
 /* Get default font weight.                                                 */
 /****************************************************************************/
 GnomeFontWeight
-gl_view_get_default_font_weight (glView            *view)
+gl_view_get_default_font_weight (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3877,7 +3933,7 @@ gl_view_get_default_font_weight (glView            *view)
 /* Get default font italic flag.                                            */
 /****************************************************************************/
 gboolean
-gl_view_get_default_font_italic_flag (glView            *view)
+gl_view_get_default_font_italic_flag (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3893,7 +3949,7 @@ gl_view_get_default_font_italic_flag (glView            *view)
 /* Get default text color.                                                  */
 /****************************************************************************/
 guint
-gl_view_get_default_text_color (glView            *view)
+gl_view_get_default_text_color (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3909,7 +3965,7 @@ gl_view_get_default_text_color (glView            *view)
 /* Get default text alignment.                                              */
 /****************************************************************************/
 GtkJustification
-gl_view_get_default_text_alignment (glView            *view)
+gl_view_get_default_text_alignment (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3924,7 +3980,7 @@ gl_view_get_default_text_alignment (glView            *view)
 /* Get default text line spacing.                                           */
 /****************************************************************************/
 gdouble
-gl_view_get_default_text_line_spacing (glView            *view)
+gl_view_get_default_text_line_spacing (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3941,7 +3997,7 @@ gl_view_get_default_text_line_spacing (glView            *view)
 /* Get default line width.                                                  */
 /****************************************************************************/
 gdouble
-gl_view_get_default_line_width (glView            *view)
+gl_view_get_default_line_width (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3956,7 +4012,8 @@ gl_view_get_default_line_width (glView            *view)
 /****************************************************************************/
 /* Get default line color.                                                  */
 /****************************************************************************/
-guint gl_view_get_default_line_color (glView            *view)
+guint
+gl_view_get_default_line_color (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3971,7 +4028,8 @@ guint gl_view_get_default_line_color (glView            *view)
 /****************************************************************************/
 /* Get default fill color.                                                  */
 /****************************************************************************/
-guint gl_view_get_default_fill_color (glView            *view)
+guint
+gl_view_get_default_fill_color (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 

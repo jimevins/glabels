@@ -276,7 +276,7 @@ gl_window_destroy (GtkObject *gtk_object)
 
 
 /****************************************************************************/
-/* Create an app window.                                                    */
+/** Create a glabels window.                                                */
 /****************************************************************************/
 GtkWidget *
 gl_window_new (void)
@@ -298,7 +298,7 @@ gl_window_new (void)
 }
 
 /****************************************************************************/
-/* Create an app window from a label.                                       */
+/** Create a glabels window from a label.                                   */
 /****************************************************************************/
 GtkWidget*
 gl_window_new_from_label (glLabel *label)
@@ -317,7 +317,7 @@ gl_window_new_from_label (glLabel *label)
 }
 
 /****************************************************************************/
-/* Create an app window from a file.                                        */
+/** Create a glabels window from a glabels file.                            */
 /****************************************************************************/
 GtkWidget*
 gl_window_new_from_file (const gchar *filename)
@@ -343,7 +343,7 @@ gl_window_new_from_file (const gchar *filename)
 }
 
 /****************************************************************************/
-/* Is window empty?                                                         */
+/** Is window empty?                                                        */
 /****************************************************************************/
 gboolean
 gl_window_is_empty (glWindow    *window)
@@ -355,7 +355,7 @@ gl_window_is_empty (glWindow    *window)
 }
 
 /****************************************************************************/
-/* Create view from label and place in window.                              */
+/** Create view from label and place in window.                             */
 /****************************************************************************/
 void
 gl_window_set_label (glWindow    *window,
@@ -431,7 +431,7 @@ gl_window_set_label (glWindow    *window,
 }
 
 /****************************************************************************/
-/* Return list of app windows.                                              */
+/** Return list of glabels windows.                                         */
 /****************************************************************************/
 const GList *
 gl_window_get_window_list (void)
@@ -441,7 +441,7 @@ gl_window_get_window_list (void)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set window title based on name and state of label.              */
+/** PRIVATE.  Set window title based on name and state of label.             */
 /*---------------------------------------------------------------------------*/
 static void 
 set_window_title (glWindow *window,
@@ -473,7 +473,7 @@ set_window_title (glWindow *window,
 }
 
 /*-------------------------------------------------------------------------*/
-/* PRIVATE.  Window "delete-event" callback.                               */
+/** PRIVATE.  Window "delete-event" callback.                              */
 /*-------------------------------------------------------------------------*/
 static gboolean
 window_delete_event_cb (glWindow      *window,
@@ -492,7 +492,7 @@ window_delete_event_cb (glWindow      *window,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "selection state changed" callback.                        */
+/** PRIVATE.  View "selection state changed" callback.                       */
 /*---------------------------------------------------------------------------*/
 static void 
 selection_changed_cb (glView   *view,
@@ -509,7 +509,7 @@ selection_changed_cb (glView   *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "context menu activate" callback.                          */
+/** PRIVATE.  View "context menu activate" callback.                         */
 /*---------------------------------------------------------------------------*/
 static void
 context_menu_activate_cb (glView       *view,
@@ -538,7 +538,7 @@ context_menu_activate_cb (glView       *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "zoom state changed" callback.                             */
+/** PRIVATE.  View "zoom state changed" callback.                            */
 /*---------------------------------------------------------------------------*/
 static void 
 zoom_changed_cb (glView   *view,
@@ -562,7 +562,7 @@ zoom_changed_cb (glView   *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "pointer moved" callback.                                  */
+/** PRIVATE.  View "pointer moved" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void
 pointer_moved_cb (glView   *view,
@@ -592,7 +592,7 @@ pointer_moved_cb (glView   *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "pointer exit" callback.                                   */
+/** PRIVATE.  View "pointer exit" callback.                                  */
 /*---------------------------------------------------------------------------*/
 static void
 pointer_exit_cb (glView   *view,
@@ -609,7 +609,7 @@ pointer_exit_cb (glView   *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Label "name changed" callback.                                  */
+/** PRIVATE.  Label "name changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
 static void 
 name_changed_cb (glLabel  *label,
@@ -626,7 +626,7 @@ name_changed_cb (glLabel  *label,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Label "modified state changed" callback.                        */
+/** PRIVATE.  Label "modified state changed" callback.                       */
 /*---------------------------------------------------------------------------*/
 static void 
 modified_changed_cb (glLabel  *label,

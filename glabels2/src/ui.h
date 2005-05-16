@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui.h:  GLabels UI module header file

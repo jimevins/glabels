@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  ui.c:  GLabels ui module
@@ -841,7 +841,7 @@ gl_ui_unref (GtkUIManager *ui)
 }
 
 /*****************************************************************************/
-/* Update all verbs of given UI component.                                   */
+/** Update all verbs of given UI component.                                  */
 /*****************************************************************************/
 void
 gl_ui_update_all (GtkUIManager *ui,
@@ -883,7 +883,7 @@ gl_ui_update_all (GtkUIManager *ui,
 }
 
 /*****************************************************************************/
-/* Update all verbs of given UI component to "no document" state.            */
+/** Update all verbs of given UI component to "no document" state.           */
 /*****************************************************************************/
 void
 gl_ui_update_nodoc (GtkUIManager *ui)
@@ -896,7 +896,7 @@ gl_ui_update_nodoc (GtkUIManager *ui)
 }
 
 /*****************************************************************************/
-/* Update label modified verbs of given UI component.                        */
+/** Update label modified verbs of given UI component.                       */
 /*****************************************************************************/
 void
 gl_ui_update_modified_verbs (GtkUIManager *ui,
@@ -912,7 +912,7 @@ gl_ui_update_modified_verbs (GtkUIManager *ui,
 }
 
 /*****************************************************************************/
-/* Update verbs associated with selection state of given UI component.       */
+/** Update verbs associated with selection state of given UI component.      */
 /*****************************************************************************/
 void
 gl_ui_update_selection_verbs (GtkUIManager *ui,
@@ -934,7 +934,7 @@ gl_ui_update_selection_verbs (GtkUIManager *ui,
 }
 
 /*****************************************************************************/
-/* Update verbs associated with zoom level of given UI component.            */
+/** Update verbs associated with zoom level of given UI component.           */
 /*****************************************************************************/
 void
 gl_ui_update_zoom_verbs (GtkUIManager *ui,
@@ -951,7 +951,7 @@ gl_ui_update_zoom_verbs (GtkUIManager *ui,
 }
 
 /*****************************************************************************/
-/* Update undo/redo verbs of given UI component.                             */
+/** Update undo/redo verbs of given UI component.                            */
 /*****************************************************************************/
 void
 gl_ui_update_undo_redo_verbs (GtkUIManager *ui,
@@ -969,7 +969,7 @@ gl_ui_update_undo_redo_verbs (GtkUIManager *ui,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View menu item toggled callback.                                */
+/** PRIVATE.  View menu item toggled callback.                               */
 /*---------------------------------------------------------------------------*/
 static void
 view_ui_item_toggled_cb (GtkToggleAction *action,
@@ -1019,7 +1019,7 @@ view_ui_item_toggled_cb (GtkToggleAction *action,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set main toolbar style.                                         */
+/** PRIVATE.  Set main toolbar style.                                        */
 /*---------------------------------------------------------------------------*/
 static void
 set_app_main_toolbar_style (GtkUIManager *ui)
@@ -1057,7 +1057,7 @@ set_app_main_toolbar_style (GtkUIManager *ui)
 
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set drawing toolbar style.                                      */
+/** PRIVATE.  Set drawing toolbar style.                                     */
 /*---------------------------------------------------------------------------*/
 static void
 set_app_drawing_toolbar_style (GtkUIManager *ui)
@@ -1096,7 +1096,7 @@ set_app_drawing_toolbar_style (GtkUIManager *ui)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set visibility of grid and markup.                              */
+/** PRIVATE.  Set visibility of grid and markup.                             */
 /*---------------------------------------------------------------------------*/
 static void
 set_view_style (GtkUIManager *ui)
@@ -1115,7 +1115,7 @@ set_view_style (GtkUIManager *ui)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Connect proxy callback.                                         */
+/** PRIVATE.  Connect proxy callback.                                        */
 /*---------------------------------------------------------------------------*/
 static void
 connect_proxy_cb (GtkUIManager *ui,
@@ -1133,7 +1133,7 @@ connect_proxy_cb (GtkUIManager *ui,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Disconnect proxy callback.                                      */
+/** PRIVATE.  Disconnect proxy callback.                                     */
 /*---------------------------------------------------------------------------*/
 static void
 disconnect_proxy_cb (GtkUIManager *ui,
@@ -1151,7 +1151,7 @@ disconnect_proxy_cb (GtkUIManager *ui,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Menu item select callback.                                      */
+/** PRIVATE.  Menu item select callback.                                     */
 /*---------------------------------------------------------------------------*/
 static void
 menu_item_select_cb (GtkMenuItem *proxy,
@@ -1176,7 +1176,7 @@ menu_item_select_cb (GtkMenuItem *proxy,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Menu item deselect callback.                                    */
+/** PRIVATE.  Menu item deselect callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
 menu_item_deselect_cb (GtkMenuItem *proxy,
@@ -1190,7 +1190,7 @@ menu_item_deselect_cb (GtkMenuItem *proxy,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Tooltip function for recent file menu items.                    */
+/** PRIVATE.  Tooltip function for recent file menu items.                   */
 /*---------------------------------------------------------------------------*/
 static char *
 recent_tooltip_func (EggRecentItem *item, gpointer user_data)

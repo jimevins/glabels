@@ -1,3 +1,15 @@
+2005-05-15  Jim Evins  <evins@snaught.com>
+
+	* src/ui-commands.h:
+	* src/ui-util.c:
+	* src/ui-util.h:
+	* src/ui.c:
+	* src/ui.h:
+	* src/view.c:
+	* src/window.c:
+	* src/window.h:
+		A little code reformatting -- no functional changes.
+	
 2005-05-14  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:
