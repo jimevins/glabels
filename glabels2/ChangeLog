@@ -1,3 +1,12 @@
+2005-05-17  Jim Evins  <evins@snaught.com>
+
+	* src/hig.h:
+	* src/hig.c:
+		Removed HigAlert class since it is obsoleted by the GtkMessageDialog class.
+	* src/file.c: (open_response), (gl_file_open_real), (gl_file_save),
+	(save_as_response), (gl_file_close):
+		Replaced all instances of HigAlert widgets with GtkMessageDialog widgets.
+
 2005-05-15  Jim Evins  <evins@snaught.com>
 
 	* src/ui-commands.h:

@@ -28,6 +28,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtkdialog.h>
+#include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkfilechooserdialog.h>
 #include <gtk/gtkstock.h>
 #include <string.h>
@@ -490,12 +491,14 @@ open_response (GtkDialog     *chooser,
 		    !filename || 
 		    g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
 
-			dlg = gl_hig_alert_new (GTK_WINDOW(chooser),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_CLOSE,
-					_("Empty file name selection"),
-					_("Please select a file or supply a valid file name"));
+			dlg = gtk_message_dialog_new (GTK_WINDOW(chooser),
+						      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_MESSAGE_WARNING,
+						      GTK_BUTTONS_CLOSE,
+						      _("Empty file name selection"));
+			gtk_message_dialog_format_secondary_text (
+				GTK_MESSAGE_DIALOG (dlg),
+				_("Please select a file or supply a valid file name"));
 
 			gtk_dialog_run (GTK_DIALOG (dlg));
 			gtk_widget_destroy (dlg);
@@ -504,12 +507,14 @@ open_response (GtkDialog     *chooser,
 
 			if (!g_file_test (raw_filename, G_FILE_TEST_IS_REGULAR)) {
 
-				dlg = gl_hig_alert_new (GTK_WINDOW(chooser),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_WARNING,
-						GTK_BUTTONS_CLOSE,
-						_("File does not exist"),
-						_("Please select a file or supply a valid file name"));
+				dlg = gtk_message_dialog_new (GTK_WINDOW(chooser),
+							      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+							      GTK_MESSAGE_WARNING,
+							      GTK_BUTTONS_CLOSE,
+							      _("File does not exist"));
+				gtk_message_dialog_format_secondary_text (
+					GTK_MESSAGE_DIALOG (dlg),
+					_("Please select a file or supply a valid file name"));
 
 				gtk_dialog_run (GTK_DIALOG (dlg));
 				gtk_widget_destroy (dlg);
@@ -575,21 +580,17 @@ gl_file_open_real (const gchar     *filename,
 	label = gl_xml_label_open (abs_filename, &status);
 	if (!label) {
 		GtkWidget *dlg;
-		gchar *primary_msg;
 
 		gl_debug (DEBUG_FILE, "couldn't open file");
 
-		primary_msg = g_strdup_printf (_("Could not open file \"%s\""),
-					       filename);
-
-		dlg = gl_hig_alert_new (GTK_WINDOW (window),
-					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_CLOSE,
-					primary_msg,
-					_("Not a supported file format"));
-
-		g_free (primary_msg);
+		dlg = gtk_message_dialog_new (GTK_WINDOW (window),
+					      GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_MESSAGE_ERROR,
+					      GTK_BUTTONS_CLOSE,
+					      _("Could not open file \"%s\""),
+					      filename);
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
+							  _("Not a supported file format"));
 
 		gtk_dialog_run (GTK_DIALOG (dlg));
 		gtk_widget_destroy (dlg);
@@ -660,25 +661,22 @@ gl_file_save (glLabel   *label,
 
 	if (status != XML_LABEL_OK)
 	{
-		GtkWidget *dialog;
-		gchar *primary_msg;
+		GtkWidget *dlg;
 
 		gl_debug (DEBUG_FILE, "FAILED");
 
-		primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
-					       filename);
+		dlg = gtk_message_dialog_new (GTK_WINDOW (window),
+					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_MESSAGE_ERROR,
+					      GTK_BUTTONS_CLOSE,
+					      _("Could not save file \"%s\""),
+					      filename);
+		gtk_message_dialog_format_secondary_text (
+			GTK_MESSAGE_DIALOG (dlg),
+			_("Error encountered during save.  The file is still not saved."));
 
-		dialog = gl_hig_alert_new (GTK_WINDOW (window),
-					   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_MESSAGE_ERROR,
-					   GTK_BUTTONS_CLOSE,
-					   primary_msg,
-					   _("Error encountered during save.  The file is still not saved."));
-
-		g_free (primary_msg);
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		gtk_dialog_run (GTK_DIALOG (dlg));
+		gtk_widget_destroy (dlg);
 
 		g_free (filename);
 
@@ -777,7 +775,6 @@ save_as_response (GtkDialog     *chooser,
 	glXMLLabelStatus  status;
 	EggRecentModel   *recent;
 	gboolean         *saved_flag;
-	gchar            *primary_msg;
 	gboolean          cancel_flag = FALSE;
 
 	gl_debug (DEBUG_FILE, "START");
@@ -796,12 +793,14 @@ save_as_response (GtkDialog     *chooser,
 
 		if (!raw_filename || g_file_test (raw_filename, G_FILE_TEST_IS_DIR)) {
 
-			dlg = gl_hig_alert_new (GTK_WINDOW(chooser),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_CLOSE,
-					_("Empty file name selection"),
-					_("Please supply a valid file name"));
+			dlg = gtk_message_dialog_new (GTK_WINDOW(chooser),
+						      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_MESSAGE_WARNING,
+						      GTK_BUTTONS_CLOSE,
+						      _("Empty file name selection"));
+			gtk_message_dialog_format_secondary_text (
+				GTK_MESSAGE_DIALOG (dlg),
+				_("Please supply a valid file name"));
 
 			gtk_dialog_run (GTK_DIALOG (dlg));
 			gtk_widget_destroy (dlg);
@@ -818,17 +817,15 @@ save_as_response (GtkDialog     *chooser,
 			if (g_file_test (full_filename, G_FILE_TEST_IS_REGULAR)) {
 				gint ret;
 
-				primary_msg = g_strdup_printf (_("Overwrite file \"%s\"?"),
+				dlg = gtk_message_dialog_new (GTK_WINDOW(chooser),
+							      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+							      GTK_MESSAGE_QUESTION,
+							      GTK_BUTTONS_YES_NO,
+							      _("Overwrite file \"%s\"?"),
 							       filename);
-
-				dlg = gl_hig_alert_new (GTK_WINDOW(chooser),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_QUESTION,
-						GTK_BUTTONS_YES_NO,
-						primary_msg,
-						_("File already exists."));
-			
-				g_free (primary_msg);
+				gtk_message_dialog_format_secondary_text (
+					GTK_MESSAGE_DIALOG (dlg),
+					_("File already exists."));
 
 				ret = gtk_dialog_run (GTK_DIALOG (dlg));
 				if ( ret == GTK_RESPONSE_NO ) {
@@ -845,17 +842,16 @@ save_as_response (GtkDialog     *chooser,
 
 				if ( status != XML_LABEL_OK ) {
 
-					primary_msg = g_strdup_printf (_("Could not save file \"%s\""),
-								       filename);
-
-					dlg = gl_hig_alert_new (GTK_WINDOW(chooser),
-							GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-							GTK_MESSAGE_ERROR,
-							GTK_BUTTONS_CLOSE,
-							primary_msg,
-							_("Error encountered during save.  The file is still not saved."));
-
-					g_free (primary_msg);
+					dlg = gtk_message_dialog_new (
+						GTK_WINDOW(chooser),
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_ERROR,
+						GTK_BUTTONS_CLOSE,
+						_("Could not save file \"%s\""),
+						filename);
+					gtk_message_dialog_format_secondary_text (
+						GTK_MESSAGE_DIALOG (dlg),
+						_("Error encountered during save.  The file is still not saved."));
 
 					gtk_dialog_run (GTK_DIALOG (dlg));
 					gtk_widget_destroy (dlg);
@@ -915,43 +911,42 @@ gl_file_close (glWindow *window)
 		label = view->label;
 
 		if (gl_label_is_modified (label))	{
-			GtkWidget *msgbox, *w;
-			gchar *fname = NULL, *msg = NULL;
+			GtkWidget *dlg, *w;
+			gchar *fname = NULL;
 			gint ret;
 			gboolean exiting;
 
 			fname = gl_label_get_short_name (label);
 			
-			msg = g_strdup_printf (_("Save changes to document \"%s\" before closing?"),
-					       fname);
-			
-			msgbox = gl_hig_alert_new (GTK_WINDOW(window),
-						   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						   GTK_MESSAGE_WARNING,
-						   GTK_BUTTONS_NONE,
-						   msg,
-						   _("Your changes will be lost if you don't save them."));
+			dlg = gtk_message_dialog_new (GTK_WINDOW(window),
+							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_WARNING,
+							 GTK_BUTTONS_NONE,
+							 _("Save changes to document \"%s\" before closing?"),
+							 fname);
+			gtk_message_dialog_format_secondary_text (
+				GTK_MESSAGE_DIALOG (dlg),
+				_("Your changes will be lost if you don't save them."));
 
-			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+			gtk_dialog_add_button (GTK_DIALOG (dlg),
 					       _("Close without saving"),
 					       GTK_RESPONSE_NO);
 
-			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+			gtk_dialog_add_button (GTK_DIALOG (dlg),
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
-			gtk_dialog_add_button (GTK_DIALOG (msgbox),
+			gtk_dialog_add_button (GTK_DIALOG (dlg),
 					       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
 
-			gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
+			gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_YES);
 
-			gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+			gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 
-			ret = gtk_dialog_run (GTK_DIALOG (msgbox));
+			ret = gtk_dialog_run (GTK_DIALOG (dlg));
 		
-			gtk_widget_destroy (msgbox);
+			gtk_widget_destroy (dlg);
 
 			g_free (fname);
-			g_free (msg);
 		
 			switch (ret)
 			{

@@ -34,41 +34,6 @@ G_BEGIN_DECLS
 
 
 /*===========================================================================*/
-/* HIG inspired alert.                                                       */
-/*===========================================================================*/
-
-#define GL_TYPE_HIG_ALERT (gl_hig_alert_get_type ())
-#define GL_HIG_ALERT(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_HIG_ALERT, glHigAlert ))
-#define GL_HIG_ALERT_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_HIG_ALERT, glHigAlertClass))
-#define GL_IS_HIG_ALERT(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_HIG_ALERT))
-#define GL_IS_HIG_ALERT_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_HIG_ALERT))
-
-typedef struct _glHigAlert      glHigAlert;
-typedef struct _glHigAlertClass glHigAlertClass;
-
-struct _glHigAlert {
-	GtkDialog         parent_widget;
-};
-
-struct _glHigAlertClass {
-	GtkDialogClass    parent_class;
-};
-
-GType      gl_hig_alert_get_type    (void) G_GNUC_CONST;
-
-GtkWidget *gl_hig_alert_new         (GtkWindow      *parent,
-				     GtkDialogFlags  flags,
-				     GtkMessageType  type,
-				     GtkButtonsType  buttons,
-				     const gchar    *primary_text,
-				     const gchar    *secondary_text);
-
-
-/*===========================================================================*/
 /* HIG Dialog wrapper.                                                       */
 /*===========================================================================*/
 

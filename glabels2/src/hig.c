@@ -34,9 +34,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define HIG_ALERT_BORDER               6
-#define HIG_ALERT_SPACING             12
-
 #define HIG_DIALOG_BORDER             12
 #define HIG_DIALOG_VBOX_SPACING       18
 #define HIG_DIALOG_OUTER_VBOX_SPACING 12
@@ -51,7 +48,6 @@
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
-static GtkDialogClass *hig_alert_parent_class;
 static GtkDialogClass *hig_dialog_parent_class;
 static GtkVBoxClass   *hig_category_parent_class;
 static GtkVBoxClass   *hig_vbox_parent_class;
@@ -61,10 +57,6 @@ static GtkHBoxClass   *hig_hbox_parent_class;
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-
-static void       gl_hig_alert_class_init    (glHigAlertClass *class);
-static void       gl_hig_alert_init          (glHigAlert *hig_alert);
-static void       gl_hig_alert_finalize      (GObject *object);
 
 static void       gl_hig_dialog_class_init   (glHigDialogClass *class);
 static void       gl_hig_dialog_init         (glHigDialog *hig_dialog);
@@ -85,200 +77,6 @@ static void       gl_hig_vbox_finalize       (GObject *object);
 static void       gl_hig_hbox_class_init     (glHigHBoxClass *class);
 static void       gl_hig_hbox_init           (glHigHBox *hig_hbox);
 static void       gl_hig_hbox_finalize       (GObject *object);
-
-
-/****************************************************************************/
-/****************************************************************************/
-/* Boilerplate Alert Object stuff.                                          */
-/****************************************************************************/
-/****************************************************************************/
-GType
-gl_hig_alert_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glHigAlertClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_hig_alert_class_init,
-			NULL,
-			NULL,
-			sizeof (glHigAlert),
-			0,
-			(GInstanceInitFunc) gl_hig_alert_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_DIALOG,
-					       "glHigAlert", &info, 0);
-	}
-
-	return type;
-}
-
-static void
-gl_hig_alert_class_init (glHigAlertClass *class)
-{
-	GObjectClass *object_class = (GObjectClass *) class;
-
-	hig_alert_parent_class = g_type_class_peek_parent (class);
-
-	object_class->finalize = gl_hig_alert_finalize;
-}
-
-static void
-gl_hig_alert_init (glHigAlert *hig_alert)
-{
-}
-
-static void
-gl_hig_alert_finalize (GObject *object)
-{
-	glHigAlert *hig_alert;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GL_IS_HIG_ALERT (object));
-
-	hig_alert = GL_HIG_ALERT (object);
-
-	G_OBJECT_CLASS (hig_alert_parent_class)->finalize (object);
-}
-
-
-/****************************************************************************/
-/* Create a message dialog that attempts to be HIG compliant.               */
-/****************************************************************************/
-GtkWidget* gl_hig_alert_new      (GtkWindow      *parent,
-				  GtkDialogFlags  flags,
-				  GtkMessageType  type,
-				  GtkButtonsType  buttons,
-				  const gchar    *primary_text,
-				  const gchar    *secondary_text)
-{
-	GtkWidget    *dialog, *hbox, *image, *label;
-	gchar        *label_text;
-	const gchar  *stock_id = NULL;
-	GtkStockItem  item;
-  
-	/* Bare dialog */
-	dialog = g_object_new (gl_hig_alert_get_type (), NULL);
-
-	/* Parent */
-	gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
-
-	/* Flags */
-	if ( flags & GTK_DIALOG_MODAL ) {
-		gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
-	}
-	if ( flags & GTK_DIALOG_DESTROY_WITH_PARENT ) {
-		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
-	}
-
-	/* Create HBOX */
-	hbox = gtk_hbox_new (FALSE, HIG_ALERT_SPACING);
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			    hbox, FALSE, FALSE, 0);
-
-	/* Create image */
-	switch (type) {
-	case GTK_MESSAGE_INFO:
-		stock_id = GTK_STOCK_DIALOG_INFO;
-		break;
-	case GTK_MESSAGE_QUESTION:
-		stock_id = GTK_STOCK_DIALOG_QUESTION;
-		break;
-	case GTK_MESSAGE_WARNING:
-		stock_id = GTK_STOCK_DIALOG_WARNING;
-		break;
-	case GTK_MESSAGE_ERROR:
-		stock_id = GTK_STOCK_DIALOG_ERROR;
-		break;
-	default:
-		stock_id = GTK_STOCK_DIALOG_INFO;
-		g_warning ("Unknown GtkMessageType %d", type);
-		break;
-	}
-	if (gtk_stock_lookup (stock_id, &item)) {
-		image = gtk_image_new_from_stock (stock_id,
-						  GTK_ICON_SIZE_DIALOG);
-	} else {
-		image = gtk_image_new_from_stock (NULL,
-						  GTK_ICON_SIZE_DIALOG);
-		g_warning ("Stock dialog ID doesn't exist?");
-	}
-	gtk_box_pack_start (GTK_BOX(hbox), image, FALSE, FALSE, 0);
-
-	/* Create label containing primary and secondary text */
-	label_text = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
-				      primary_text, secondary_text);
-	label = gtk_label_new (label_text);
-	g_free (label_text);
-	gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-	/* Adjust dialog properties */
-	gtk_window_set_title (GTK_WINDOW(dialog), "");
-	gtk_container_set_border_width (GTK_CONTAINER(dialog),
-					HIG_ALERT_BORDER);
-	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
-
-	/* Adjust VBOX properties */
-	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(dialog)->vbox),
-			     HIG_ALERT_SPACING);
-
-	/* Adjust HBOX properties */
-	gtk_box_set_spacing (GTK_BOX(hbox), HIG_ALERT_SPACING);
-	gtk_container_set_border_width (GTK_CONTAINER(hbox), HIG_ALERT_BORDER);
-
-	/* Adjust IMAGE properties */
-	gtk_misc_set_alignment (GTK_MISC(image), 0.5, 0.0);
-
-	/* Adjust LABEL properties */
-	gtk_label_set_line_wrap (GTK_LABEL(label), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL(label), TRUE);
-	gtk_misc_set_alignment (GTK_MISC(image), 0.5, 0.0);
-
-	/* Add buttons */
-	switch (buttons) {
-	case GTK_BUTTONS_NONE:
-		/* nothing */
-		break;
-	case GTK_BUTTONS_OK:
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_OK, GTK_RESPONSE_OK);
-		break;
-	case GTK_BUTTONS_CLOSE:
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
-		break;
-	case GTK_BUTTONS_CANCEL:
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-		break;
-	case GTK_BUTTONS_YES_NO:
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_NO, GTK_RESPONSE_NO);
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_YES, GTK_RESPONSE_YES);
-		break;
-	case GTK_BUTTONS_OK_CANCEL:
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-		gtk_dialog_add_button (GTK_DIALOG(dialog),
-				       GTK_STOCK_OK, GTK_RESPONSE_OK);
-		break;
-	default:
-		g_warning ("Unknown GtkButtonsType");
-		break;
-	}
-
-	/* Show dialog widgets */
-	gtk_widget_show_all (hbox);
-
-	return dialog;
-}
-
 
 /****************************************************************************/
 /****************************************************************************/
