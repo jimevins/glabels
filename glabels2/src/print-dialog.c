@@ -78,7 +78,7 @@ struct _glPrintDialogPrivate {
 /* Private globals                           */
 /*===========================================*/
 
-static glHigDialogClass* parent_class = NULL;
+static GtkDialogClass* parent_class = NULL;
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -158,7 +158,7 @@ gl_print_dialog_get_type (void)
 			NULL
       		};
 
-     		type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+     		type = g_type_register_static (GTK_TYPE_DIALOG,
 					       "glPrintDialog", &info, 0);
     	}
 
@@ -186,6 +186,9 @@ gl_print_dialog_init (glPrintDialog *dialog)
 
 	dialog->priv = g_new0 (glPrintDialogPrivate, 1);
 
+	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
+
+	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_PRINT,  GNOME_PRINT_DIALOG_RESPONSE_PRINT,
@@ -278,7 +281,7 @@ gl_print_dialog_construct (glPrintDialog      *dialog,
 	}
 
 	notebook = gtk_notebook_new ();
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dialog), notebook);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, FALSE, FALSE, 0);
 
 	/* ----- Create Job notebook page ----- */
 	page = job_page_new (dialog, label);

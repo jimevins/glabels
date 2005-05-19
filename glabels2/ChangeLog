@@ -1,3 +1,19 @@
+2005-05-18  Jim Evins  <evins@snaught.com>
+
+	* src/hig.h:
+	* src/hig.c:
+		Removed glHigDialog class.
+	* src/file.c: (gl_file_new), (create_new_dialog_widgets),
+	(gl_file_properties), (create_properties_dialog_widgets):
+	* src/prefs-dialog.h:
+	* src/prefs-dialog.c: (gl_prefs_dialog_get_type),
+	(gl_prefs_dialog_init), (gl_prefs_dialog_construct):
+	* src/print-dialog.h:
+	* src/prefs-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_get_type),
+	(gl_print_dialog_init), (gl_print_dialog_construct):
+		Replaced all instances of glHigDialog with GtkDialog.
+	
 2005-05-17  Jim Evins  <evins@snaught.com>
 
 	* src/hig.h:

@@ -25,7 +25,7 @@
 #define __PRINT_DIALOG_H__
 
 #include <gtk/gtkwindow.h>
-#include "hig.h"
+#include <gtk/gtkdialog.h>
 #include "view.h"
 
 G_BEGIN_DECLS
@@ -45,7 +45,7 @@ typedef struct _glPrintDialogPrivate  glPrintDialogPrivate;
 
 struct _glPrintDialog
 {
-	glHigDialog           parent_instance;
+	GtkDialog             parent_instance;
 
 	glPrintDialogPrivate *priv;
 
@@ -53,7 +53,7 @@ struct _glPrintDialog
 
 struct  _glPrintDialogClass
 {
-	glHigDialogClass      parent_class;
+	GtkDialogClass        parent_class;
 };
 
 

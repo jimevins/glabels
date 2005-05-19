@@ -48,7 +48,6 @@
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
-static GtkDialogClass *hig_dialog_parent_class;
 static GtkVBoxClass   *hig_category_parent_class;
 static GtkVBoxClass   *hig_vbox_parent_class;
 static GtkHBoxClass   *hig_hbox_parent_class;
@@ -57,14 +56,6 @@ static GtkHBoxClass   *hig_hbox_parent_class;
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-
-static void       gl_hig_dialog_class_init   (glHigDialogClass *class);
-static void       gl_hig_dialog_init         (glHigDialog *hig_dialog);
-static void       gl_hig_dialog_finalize     (GObject *object);
-
-static void       add_buttons_valist         (glHigDialog *dialog,
-					      const gchar *first_button_text,
-					      va_list      args);
 
 static void       gl_hig_category_class_init (glHigCategoryClass *class);
 static void       gl_hig_category_init       (glHigCategory *hig_category);
@@ -77,168 +68,6 @@ static void       gl_hig_vbox_finalize       (GObject *object);
 static void       gl_hig_hbox_class_init     (glHigHBoxClass *class);
 static void       gl_hig_hbox_init           (glHigHBox *hig_hbox);
 static void       gl_hig_hbox_finalize       (GObject *object);
-
-/****************************************************************************/
-/****************************************************************************/
-/* Boilerplate Dialog Object stuff.                                         */
-/****************************************************************************/
-/****************************************************************************/
-GType
-gl_hig_dialog_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glHigDialogClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_hig_dialog_class_init,
-			NULL,
-			NULL,
-			sizeof (glHigDialog),
-			0,
-			(GInstanceInitFunc) gl_hig_dialog_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_DIALOG,
-					       "glHigDialog", &info, 0);
-	}
-
-	return type;
-}
-
-static void
-gl_hig_dialog_class_init (glHigDialogClass *class)
-{
-	GObjectClass *object_class = (GObjectClass *) class;
-
-	hig_dialog_parent_class = g_type_class_peek_parent (class);
-
-	object_class->finalize = gl_hig_dialog_finalize;
-}
-
-static void
-gl_hig_dialog_init (glHigDialog *hig_dialog)
-{
-	gtk_container_set_border_width (GTK_CONTAINER(hig_dialog),
-					HIG_DIALOG_BORDER);
-
-	hig_dialog->vbox = gtk_vbox_new (FALSE, HIG_DIALOG_VBOX_SPACING);
-	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
-			    hig_dialog->vbox, FALSE, FALSE, 0);
-
-	gtk_box_set_spacing (GTK_BOX(GTK_DIALOG(hig_dialog)->vbox),
-			     HIG_DIALOG_OUTER_VBOX_SPACING);
-}
-
-static void
-gl_hig_dialog_finalize (GObject *object)
-{
-	glHigDialog *hig_dialog;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GL_IS_HIG_DIALOG (object));
-
-	hig_dialog = GL_HIG_DIALOG (object);
-
-	G_OBJECT_CLASS (hig_dialog_parent_class)->finalize (object);
-}
-
-
-/****************************************************************************/
-/* Create a dialog that attempts to be HIG compliant.                       */
-/****************************************************************************/
-GtkWidget* gl_hig_dialog_new (void)
-{
-	GtkWidget    *dialog;
-
-	dialog = g_object_new (gl_hig_dialog_get_type (), NULL);
-
-	return dialog;
-}
-
-
-
-/****************************************************************************/
-/* Create a dialog that attempts to be HIG compliant with buttons.          */
-/****************************************************************************/
-GtkWidget *gl_hig_dialog_new_with_buttons (const gchar    *title,
-					   GtkWindow      *parent,
-					   GtkDialogFlags  flags,
-					   const gchar    *first_button_text,
-					   ...)
-{
-	GtkWidget    *dialog;
-	va_list       args;
-  
-	/* Create bare dialog */
-	dialog = g_object_new (gl_hig_dialog_get_type (), NULL);
-
-	/* Title */
-	gtk_window_set_title (GTK_WINDOW(dialog), title);
-
-	/* Parent */
-	gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
-
-	/* Flags */
-	if ( flags & GTK_DIALOG_MODAL ) {
-		gtk_window_set_modal (GTK_WINDOW(dialog), TRUE);
-	}
-	if ( flags & GTK_DIALOG_DESTROY_WITH_PARENT ) {
-		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
-	}
-
-	/* Buttons */
-	va_start (args, first_button_text);
-	add_buttons_valist (GL_HIG_DIALOG(dialog), first_button_text, args);
-	va_end (args);
-
-
-	return dialog;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Add buttons to dialog from va_list.                             */
-/*---------------------------------------------------------------------------*/
-static void
-add_buttons_valist(glHigDialog    *dialog,
-		   const gchar    *first_button_text,
-		   va_list         args)
-{
-  const gchar* text;
-  gint response_id;
-
-  g_return_if_fail (GL_IS_HIG_DIALOG (dialog));
-  
-  if (first_button_text == NULL)
-    return;
-  
-  text = first_button_text;
-  response_id = va_arg (args, gint);
-
-  while (text != NULL)
-    {
-      gtk_dialog_add_button (GTK_DIALOG(dialog), text, response_id);
-
-      text = va_arg (args, gchar*);
-      if (text == NULL)
-        break;
-      response_id = va_arg (args, int);
-    }
-}
-
-/****************************************************************************/
-/* Add widget (from top) to dialog's vbox.                                  */
-/****************************************************************************/
-void
-gl_hig_dialog_add_widget (glHigDialog   *dialog,
-			  GtkWidget     *widget)
-{
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), widget, FALSE, FALSE, 0);
-}
-
 
 /****************************************************************************/
 /****************************************************************************/

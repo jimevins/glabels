@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -24,7 +26,7 @@
 #define __PREFS_DIALOG_H__
 
 #include <gtk/gtkwindow.h>
-#include "hig.h"
+#include <gtk/gtkdialog.h>
 
 G_BEGIN_DECLS
 
@@ -43,7 +45,7 @@ typedef struct _glPrefsDialogPrivate	glPrefsDialogPrivate;
 
 struct _glPrefsDialog
 {
-	glHigDialog           parent_instance;
+	GtkDialog             parent_instance;
 
 	glPrefsDialogPrivate *priv;
 
@@ -51,7 +53,7 @@ struct _glPrefsDialog
 
 struct  _glPrefsDialogClass
 {
-	glHigDialogClass      parent_class;
+	GtkDialogClass        parent_class;
 };
 
 GType    	gl_prefs_dialog_get_type 	(void) G_GNUC_CONST;

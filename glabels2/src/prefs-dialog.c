@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -32,6 +34,7 @@
 #include <gtk/gtkspinbutton.h>
 
 #include "prefs.h"
+#include "hig.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
 #include "util.h"
@@ -85,7 +88,7 @@ struct _glPrefsDialogPrivate
 /* Private globals.                                       */
 /*========================================================*/
 
-static glHigDialogClass* parent_class = NULL;
+static GtkDialogClass* parent_class = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -137,7 +140,7 @@ gl_prefs_dialog_get_type (void)
 			NULL
       		};
 
-     		type = g_type_register_static (GL_TYPE_HIG_DIALOG,
+     		type = g_type_register_static (GTK_TYPE_DIALOG,
 					       "glPrefsDialog", &info, 0);
     	}
 
@@ -171,6 +174,19 @@ gl_prefs_dialog_init (glPrefsDialog *dlg)
 		g_warning ("Could not open prefs-dialog.glade, reinstall glabels!");
 		return;
 	}
+
+	gtk_container_set_border_width (GTK_CONTAINER(dlg), GL_HIG_PAD2);
+
+	gtk_dialog_set_has_separator (GTK_DIALOG(dlg), FALSE);
+	gtk_dialog_add_button (GTK_DIALOG(dlg), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
+	gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_CLOSE);
+
+	g_signal_connect(G_OBJECT (dlg), "response",
+			 G_CALLBACK (response_cb), NULL);
+
+        gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+        gtk_window_set_title (GTK_WINDOW (dlg), _("gLabels Preferences"));
+        gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 
 	gl_debug (DEBUG_PREFS, "END");
 }
@@ -231,16 +247,8 @@ gl_prefs_dialog_construct (glPrefsDialog *dlg)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dlg));
 	g_return_if_fail (dlg->priv != NULL);
 
-	gtk_dialog_add_button (GTK_DIALOG(dlg),
-			       GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
-
-	gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_CLOSE);
-
-	g_signal_connect(G_OBJECT (dlg), "response",
-			 G_CALLBACK (response_cb), NULL);
-
 	notebook = glade_xml_get_widget (dlg->priv->gui, "prefs_notebook");
-	gl_hig_dialog_add_widget (GL_HIG_DIALOG(dlg), notebook);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), notebook, FALSE, FALSE, 0);
 
 	construct_locale_page (dlg);
 	construct_object_page (dlg);
@@ -249,10 +257,6 @@ gl_prefs_dialog_construct (glPrefsDialog *dlg)
 	update_object_page_from_prefs (dlg);
 
         gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);   
-
-        gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-        gtk_window_set_title (GTK_WINDOW (dlg), _("gLabels Preferences"));
-        gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 }
 
 /*---------------------------------------------------------------------------*/

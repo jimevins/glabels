@@ -57,14 +57,14 @@ static gchar *save_path = NULL;
 /*===========================================*/
 /* Local function prototypes.                */
 /*===========================================*/
-static void create_new_dialog_widgets        (glHigDialog       *dlg);
+static void create_new_dialog_widgets        (GtkDialog         *dlg);
 static void new_template_changed             (glWdgtMediaSelect *select,
 					      gpointer           data);
 static void new_response                     (GtkDialog         *dlg,
 					      gint               response,
 					      gpointer           user_data);
 
-static void create_properties_dialog_widgets (glHigDialog       *dlg,
+static void create_properties_dialog_widgets (GtkDialog         *dlg,
 					      glLabel           *label);
 static void properties_template_changed      (glWdgtMediaSelect *select,
 					      gpointer           data);
@@ -92,16 +92,17 @@ gl_file_new (glWindow  *window)
 
 	g_return_if_fail (window != NULL);
 
-	dlg = gl_hig_dialog_new_with_buttons (_("New Label or Card"),
-					      GTK_WINDOW (window),
-					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
-					      NULL);
+	dlg = gtk_dialog_new_with_buttons (_("New Label or Card"),
+					   GTK_WINDOW (window),
+					   GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT|GTK_DIALOG_NO_SEPARATOR,
+					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					   GTK_STOCK_OK, GTK_RESPONSE_OK,
+					   NULL);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_OK);
+	gtk_container_set_border_width (GTK_CONTAINER(dlg), GL_HIG_PAD2);
 
-	create_new_dialog_widgets (GL_HIG_DIALOG (dlg));
+	create_new_dialog_widgets (GTK_DIALOG (dlg));
 
 	g_object_set_data (G_OBJECT (dlg), "parent_window", window);
 
@@ -118,20 +119,23 @@ gl_file_new (glWindow  *window)
 /* PRIVATE.  Create widgets.                                                 */
 /*---------------------------------------------------------------------------*/
 static void
-create_new_dialog_widgets (glHigDialog *dlg)
+create_new_dialog_widgets (GtkDialog *dlg)
 {
-	GtkWidget *wframe, *template_entry, *rotate_sel;
+	GtkWidget *wvbox, *wframe, *template_entry, *rotate_sel;
 
 	gl_debug (DEBUG_FILE, "START");
 
+	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(dlg->vbox), wvbox, FALSE, FALSE, 0);
+
 	wframe = gl_hig_category_new (_("Media Type"));
-	gl_hig_dialog_add_widget (dlg, wframe);
+	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
 
 	template_entry = gl_wdgt_media_select_new ();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), template_entry);
 
 	wframe = gl_hig_category_new (_("Label orientation"));
-	gl_hig_dialog_add_widget (dlg, wframe);
+	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
 
 	rotate_sel = gl_wdgt_rotate_label_new ();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), rotate_sel);
@@ -261,16 +265,17 @@ gl_file_properties (glLabel   *label,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (window && GTK_IS_WINDOW (window));
 
-	dlg = gl_hig_dialog_new_with_buttons (_("Label properties"),
-					      GTK_WINDOW (window),
-					      GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
-					      NULL);
+	dlg = gtk_dialog_new_with_buttons (_("Label properties"),
+					   GTK_WINDOW (window),
+					   GTK_DIALOG_MODAL|GTK_DIALOG_DESTROY_WITH_PARENT|GTK_DIALOG_NO_SEPARATOR,
+					   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					   GTK_STOCK_OK, GTK_RESPONSE_OK,
+					   NULL);
+	gtk_container_set_border_width (GTK_CONTAINER(dlg), GL_HIG_PAD2);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
-	create_properties_dialog_widgets (GL_HIG_DIALOG (dlg), label);
+	create_properties_dialog_widgets (GTK_DIALOG (dlg), label);
 
 	g_object_set_data (G_OBJECT (dlg), "label", label);
 
@@ -287,23 +292,26 @@ gl_file_properties (glLabel   *label,
 /* PRIVATE.  Create widgets.                                                 */
 /*---------------------------------------------------------------------------*/
 static void
-create_properties_dialog_widgets (glHigDialog *dlg,
+create_properties_dialog_widgets (GtkDialog   *dlg,
 				  glLabel     *label)
 {
-	GtkWidget  *wframe, *template_entry, *rotate_sel;
+	GtkWidget  *wvbox, *wframe, *template_entry, *rotate_sel;
 	glTemplate *template;
 	gboolean    rotate_flag;
 
 	gl_debug (DEBUG_FILE, "START");
 
+	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(dlg->vbox), wvbox, FALSE, FALSE, 0);
+
 	wframe = gl_hig_category_new (_("Media Type"));
-	gl_hig_dialog_add_widget (dlg, wframe);
+	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
 
 	template_entry = gl_wdgt_media_select_new ();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), template_entry);
 
 	wframe = gl_hig_category_new (_("Label orientation"));
-	gl_hig_dialog_add_widget (dlg, wframe);
+	gtk_box_pack_start (GTK_BOX (wvbox), wframe, FALSE, FALSE, 0);
 
 	rotate_sel = gl_wdgt_rotate_label_new ();
 	gl_hig_category_add_widget (GL_HIG_CATEGORY(wframe), rotate_sel);

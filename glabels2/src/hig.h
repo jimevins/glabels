@@ -34,47 +34,6 @@ G_BEGIN_DECLS
 
 
 /*===========================================================================*/
-/* HIG Dialog wrapper.                                                       */
-/*===========================================================================*/
-
-#define GL_TYPE_HIG_DIALOG (gl_hig_dialog_get_type ())
-#define GL_HIG_DIALOG(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_HIG_DIALOG, glHigDialog ))
-#define GL_HIG_DIALOG_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_HIG_DIALOG, glHigDialogClass))
-#define GL_IS_HIG_DIALOG(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_HIG_DIALOG))
-#define GL_IS_HIG_DIALOG_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_HIG_DIALOG))
-
-typedef struct _glHigDialog      glHigDialog;
-typedef struct _glHigDialogClass glHigDialogClass;
-
-struct _glHigDialog {
-	GtkDialog         parent_widget;
-
-	GtkWidget        *vbox;
-};
-
-struct _glHigDialogClass {
-	GtkDialogClass    parent_class;
-};
-
-GType      gl_hig_dialog_get_type         (void) G_GNUC_CONST;
-
-GtkWidget *gl_hig_dialog_new              (void);
-
-GtkWidget *gl_hig_dialog_new_with_buttons (const gchar    *title,
-					   GtkWindow      *parent,
-					   GtkDialogFlags  flags,
-					   const gchar    *first_button_text,
-					   ...);
-
-void       gl_hig_dialog_add_widget       (glHigDialog   *dialog,
-					   GtkWidget     *widget);
-
-
-/*===========================================================================*/
 /* HIG Category (analogous to a gtk_frame).                                  */
 /*===========================================================================*/
 
