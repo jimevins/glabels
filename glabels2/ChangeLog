@@ -1,3 +1,11 @@
+2005-05-19  Jim Evins,,,  <set EMAIL_ADDRESS environment variable>
+
+	reviewed by: <delete if not using a buddy>
+
+	* data/glade/merge-properties-dialog.glade:
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_construct):
+
 2005-05-18  Jim Evins  <evins@snaught.com>
 
 	* src/hig.h:

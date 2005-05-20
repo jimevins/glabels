@@ -38,6 +38,7 @@
 #include "label.h"
 #include "merge.h"
 #include "util.h"
+#include "hig.h"
 
 #include "debug.h"
 
@@ -179,6 +180,20 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 		return;
 	}
 
+	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
+
+	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OK, GTK_RESPONSE_OK,
+				NULL);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	g_signal_connect(G_OBJECT (dialog), "response",
+			 G_CALLBACK (response_cb), NULL);
+
+
 	gl_debug (DEBUG_MERGE, "END");
 }
 
@@ -251,20 +266,10 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	g_return_if_fail (GL_IS_MERGE_PROPERTIES_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OK, GTK_RESPONSE_OK,
-				NULL);
-
 	if (window) {
 		gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
 		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
 	}
-
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-	g_signal_connect(G_OBJECT (dialog), "response",
-			 G_CALLBACK (response_cb), NULL);
 
 	vbox = glade_xml_get_widget (dialog->priv->gui,
 				     "merge_properties_vbox");
