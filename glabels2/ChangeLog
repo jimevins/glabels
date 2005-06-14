@@ -1,10 +1,24 @@
-2005-05-19  Jim Evins,,,  <set EMAIL_ADDRESS environment variable>
+2005-06-13  Jim Evins  <evins@snaught.com>
 
-	reviewed by: <delete if not using a buddy>
+	* help/C/figures/merge-ex1-1.png:
+	* help/C/figures/merge-ex1-2.png:
+	* help/C/figures/merge-ex1-3.png:
+	* help/C/figures/merge-ex1-4.png:
+	* help/C/figures/merge-ex2-1.png:
+	* help/C/figures/merge-ex2-2.png:
+	* help/C/figures/merge-ex2-3.png:
+	* help/C/figures/merge-ex2-4.png:
+		Added figures for document merge tutorial.
+	* help/C/glabels.xml:
+		Added document merge tutorial.
+
+2005-05-19  Jim Evins  <evins@snaught.com>
 
 	* data/glade/merge-properties-dialog.glade:
+		Fixed irregular spacing.
 	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),
 	(gl_merge_properties_dialog_construct):
+		Set outer padding and remove separator.
 
 2005-05-18  Jim Evins  <evins@snaught.com>
 

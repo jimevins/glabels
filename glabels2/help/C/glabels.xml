@@ -1045,6 +1045,10 @@
         from each record for field keys in the all text, barcode, and
         image objects.</para>
 
+      <para>See <xref linkend="glabels-merge-tutorial" /> for a detailed
+        tutorial on the document merge feature.</para>
+
+
     </sect2>
 
 
@@ -1200,6 +1204,252 @@
 	</varlistentry> 
       </variablelist> 
     </sect2> 
+  </sect1>
+
+
+
+
+<!-- ============= Document Merge Tutorial ================================== -->
+  <sect1 id="glabels-merge-tutorial"> 
+    <title>Document Merge Tutorial</title>
+
+    <para>Document Merge (sometimes called "Mail Merge") is a powerful
+      feature that allows a unique label or card to be printed for each
+      record in an external data source.  It is however, the most mis-understood
+      feature of <application>glabels</application>.  The following examples
+      will step through a couple of common tasks using the document merge
+      feature.</para>
+
+    <sect2 id="merge-ex1">
+      <title>Example 1: Name Tags</title>
+  
+      <para>In this example we are organizing an orientation party for the new
+        crew members of our ship.  We have a list of freshman crew members that we
+        created in <application>gnumeric</application> and exported as the following
+        CSV file.  We could have created this file by using a text editor, but heck it
+        is the 23rd century.</para>
+
+      <programlisting>
+Name,Department,SN
+"Jim Kirk",Management,"SC937-0176 CEC"
+"Mr. Spock",Sciences,S179-276SP
+"Leonard McCoy",Medicine,unknown
+"Montgomery Scott",Engineering,SE-197-54T
+      </programlisting>
+
+      <para>In <application>glabels</application> we have created a new glabels
+        document using the Avery 5395 "Name Badge Labels" template.  Next we use the
+        <menuchoice> <guimenu>Objects</guimenu>
+        <guimenuitem>Merge Properties</guimenuitem> </menuchoice> menu item to display
+        the <guilabel>merge properties</guilabel> dialog.  We use this dialog to
+        select the source type (in our case CSV) and the merge source (filename) as
+        shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex1-1-fig"> 
+	<title>Merge properties dialog</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex1-1.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Before applying the merge source, we uncheck the first record since it is only
+        column headers from our original <application>gnumeric</application> spreadsheet
+        and would simply waste our first label.  We could also unselect any other records
+        that we didn't want to print a label for.</para>
+
+      <para>We can also view each record in more detail by clicking on the appropriate
+        expander (the little triangles) as shown.  Once we are satisfied with the
+        selections in this dialog we click <guibutton>OK</guibutton> to accept the
+        changes.</para>
+
+      <para>Now we start adding objects to our glabels document as shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex1-2-fig"> 
+	<title>Adding objects</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex1-2.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>In this example we have added three text objects and a barcode object.  The
+        first text object contains only simple literal text ("Hello, my name is").  The
+        second text object contains a single merge field ("${1}") corresponding to the
+        first field of a record (first column of a line) which contains the new crew
+        member's full name.  The third text field contains both literal text
+        ("Department: ") followed by a single merge field ("${2}") corresponding to
+        the second field or the crew member's department.  The barcode object is
+        configured to use field (or key) "3" which contains our crew member's
+        starfleet serial number.</para>
+
+      <para>Now we can print our name tags by selecting the
+        <menuchoice> <guimenu>File</guimenu>
+        <guimenuitem>Print</guimenuitem> </menuchoice> menu item.  This will display
+        print dialog as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex1-3-fig"> 
+	<title>Printing name tags</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex1-3.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Just to make sure our labels are going to look okay, we select the
+        <guilabel>Print outlines</guilabel> option and click
+        <guibutton>Print Preview</guibutton>.  This will display a print preview dialog
+        as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex1-4-fig"> 
+	<title>Name tags preview</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex1-4.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our name tags and start beaming our guests
+        aboard.</para>
+
+    </sect2>
+
+    <sect2 id="merge-ex2">
+      <title>Example 2: Address Labels</title>
+  
+      <para>In this example we are going to throw a party and need to print mailing
+        address labels for our invitations.  We have a list of our closest friends
+        that we created in <application>gnumeric</application> and exported as the
+        following CSV file.  It should be noted that not everyone has a middle initial or
+        a two line address.</para>
+
+      <programlisting>
+LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP
+,,,,,,,
+Critter,Ess,S,"123 Faux St.",,Alexandria,VA,22310
+Doe,John,,"Apt 1X","451 Mystery St.",Trenton,NJ,08601
+Summers,Joyce,,"1630 Revello Dr",,Sunnydale,CA,95037
+McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
+Kramer,Cosmo,,"Apt 5B","129 W. 81 St.",Manhatten,NY,10024-7207
+      </programlisting>
+
+      <para>In <application>glabels</application> we have created a new glabels
+        document using the Avery 5512 "Address Labels" template.  Next we use the
+        <menuchoice> <guimenu>Objects</guimenu>
+        <guimenuitem>Merge Properties</guimenuitem> </menuchoice> menu item to display
+        the <guilabel>merge properties</guilabel> dialog.  We use this dialog to
+        select the source type (in our case CSV) and the merge source (filename) as
+        shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex2-1-fig"> 
+	<title>Merge properties dialog</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-1.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Before applying the merge source, we uncheck the first record since it is only
+        column headers from our original <application>gnumeric</application> spreadsheet
+        and would simply waste our first label.  We also unselect the second record
+        which is empty (an artifact of our original spreadsheet).  We could also unselect
+        any other records that we didn't want to print a label for.</para>
+
+      <para>We can also view each record in more detail by clicking on the appropriate
+        expander (the little triangles) as shown.  Once we are satisfied with the
+        selections in this dialog we click <guibutton>OK</guibutton> to accept the
+        changes.</para>
+
+      <para>Now we start adding objects to our glabels document as shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex2-2-fig"> 
+	<title>Adding objects</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-2.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>In this example we have a single text object.  This text object contains
+        all of our merge fields organized on multiple lines as a mailing address.
+        Notice that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each
+        located with no other text on their own lines.  When
+        <application>glabels</application> encounters a field as the only text on
+        a line, it will not expand the line if the field is empty.</para>
+
+      <para>Now we can print our address labels by selecting the
+        <menuchoice> <guimenu>File</guimenu>
+        <guimenuitem>Print</guimenuitem> </menuchoice> menu item.  This will display
+        print dialog as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex2-3-fig"> 
+	<title>Printing name tags</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-3.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Just to make sure our labels are going to look okay, we select the
+        <guilabel>Print outlines</guilabel> option and click
+        <guibutton>Print Preview</guibutton>.  This will display a print preview dialog
+        as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex2-4-fig"> 
+	<title>Name tags preview</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-4.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our address labels and start mailing
+        our party invitations.</para>
+
+    </sect2>
+
   </sect1>
 
 
