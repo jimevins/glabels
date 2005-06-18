@@ -1351,7 +1351,7 @@ Critter,Ess,S,"123 Faux St.",,Alexandria,VA,22310
 Doe,John,,"Apt 1X","451 Mystery St.",Trenton,NJ,08601
 Summers,Joyce,,"1630 Revello Dr",,Sunnydale,CA,95037
 McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
-Kramer,Cosmo,,"Apt 5B","129 W. 81 St.",Manhatten,NY,10024-7207
+Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
       </programlisting>
 
       <para>In <application>glabels</application> we have created a new glabels
