@@ -1,3 +1,9 @@
+2005-06-19  Jim Evins  <evins@snaught.com>
+
+	* src/template-designer.c: (construct_layout_page):
+		Removed attempt to match background color of mini preview widget to
+		background.
+
 2005-06-17  Jim Evins  <evins@snaught.com>
 
 	* help/C/figures/merge-ex2-4.png:

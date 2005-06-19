@@ -89,7 +89,6 @@
 #define DEFAULT_CD_HOLE      58.5
 #define DEFAULT_CD_WASTE      9.0 /* Should never exceed 1/2 the distance between items. */
 
-#define CONTENTS_BG 0xF5F5F5FF
 #define DELTA 0.01
 #define MAX_PAGE_DIM_POINTS 5000.0
 
@@ -984,10 +983,6 @@ construct_layout_page (glTemplateDesigner      *dlg,
                                         dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
         gtk_label_set_text (GTK_LABEL(dlg->priv->layout_dy_units_label),
 			    dlg->priv->units_string);
-
-	/* Adjust preview */
-	gl_wdgt_mini_preview_set_bg_color (GL_WDGT_MINI_PREVIEW(dlg->priv->layout_mini_preview),
-					   CONTENTS_BG);
 
 	/* Connect a handler that listens for changes in these widgets */
 	/* This controls sensitivity of related widgets. */
