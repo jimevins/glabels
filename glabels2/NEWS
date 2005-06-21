@@ -1,3 +1,16 @@
+* gLabels 2.1.1 (unstable) release.  Release date 2005-06-21.
+
+- Added document merge tutorial to help documentation
+- Replaced deprecated widgets (now requires Gnome 2.10 and GTK+ 2.6)
+- Replaced libbonoboui with GtkUIManager (now requires Gnome 2.10 and GTK+ 2.6)
+- Updated Russian translation (Vitaly Lipatov)
+- Updated Spanish translation (Sergio Rivadero)
+- Updated Czech translation (David Makovský and Zbynek Mrkvick)
+- Updated Italian translation (Daniele Medri)
+- Added documentation for libglabels
+- Minor bug fixes and cleanup
+- New templates
+
 * gLabels 2.1.0 (unstable) release.  Release date 2005-01-22.
 
 - Added ability to select color from merge source (Frederic Ruaudel)

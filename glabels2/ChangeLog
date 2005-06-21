@@ -1,5 +1,10 @@
 2005-06-20  Jim Evins  <evins@snaught.com>
 
+	* NEWS:
+		Final prep for 2.1.1 release.
+
+2005-06-20  Jim Evins  <evins@snaught.com>
+
 	* configure.in:
 		Final preps for 2.1.1 release.
 	* docs/libglabels/libglabels.types:
