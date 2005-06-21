@@ -16,14 +16,12 @@ src/ui-sidebar.h
 src/ui-sidebar.c
 src/ui-util.h
 src/ui-util.c
-src/commands.h
-src/commands.c
+src/ui-commands.h
+src/ui-commands.c
 src/file.h
 src/file.c
 src/recent.h
 src/recent.c
-src/tools.h
-src/tools.c
 src/prefs.c
 src/prefs.h
 src/prefs-model.c
@@ -111,8 +109,6 @@ src/merge-text.c
 src/merge-text.h
 src/text-node.c
 src/text-node.h
-src/wdgt-image-select.c
-src/wdgt-image-select.h
 src/wdgt-print-copies.c
 src/wdgt-print-copies.h
 src/wdgt-print-merge.c
@@ -155,8 +151,6 @@ libglabels/xml-paper.c
 libglabels/xml-paper.h
 libglabels/xml.c
 libglabels/xml.h
-
-data/ui/glabels-ui.xml
 
 data/glade/prefs-dialog.glade
 data/glade/object-editor.glade
