@@ -1,3 +1,10 @@
+2005-06-26  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+		Somehow never got checked in before.
+	* docs/libglabels/libglabels.types:
+		Removed -- don't need it afterall.
+
 2005-06-20  Jim Evins  <evins@snaught.com>
 
 	* NEWS:
