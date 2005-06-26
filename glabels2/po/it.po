@@ -1,167 +1,101 @@
+# translation of it.po to Italian
 # Italian translation of glabels.
 # Copyright (C) 2003 THE glabels'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Andrea <mancio_and@yahoo.it>, 2003.
-# , fuzzy
-# 
-# 
+# Daniele Medri <daniele.medri@libero.it>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 1.93.2\n"
-"POT-Creation-Date: 2004-08-08 00:43-0400\n"
-"PO-Revision-Date: 2003-11-14 20:38+0100\n"
-"Last-Translator: Andrea <mancio_and@yahoo.it>\n"
+"Project-Id-Version: it\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-22 11:49-0500\n"
+"PO-Revision-Date: 2005-01-31 20:41+0100\n"
+"Last-Translator: Daniele Medri <daniele.medri@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"X-Generator: KBabel 1.9.1\n"
 
-#: src/glabels.c:55
-msgid "Show view debugging messages."
-msgstr "Mostra messaggi di debug."
-
-#: src/glabels.c:58
-msgid "Show item debugging messages."
-msgstr ""
-
-#: src/glabels.c:61
-msgid "Show printing debugging messages."
-msgstr ""
-
-#: src/glabels.c:64
-msgid "Show prefs debugging messages."
-msgstr ""
-
-#: src/glabels.c:67
-msgid "Show file debugging messages."
-msgstr ""
-
-#: src/glabels.c:70
-msgid "Show document debugging messages."
-msgstr ""
-
-#: src/glabels.c:73
-msgid "Show template debugging messages."
-msgstr ""
-
-#: src/glabels.c:76
-msgid "Show paper debugging messages."
-msgstr ""
-
-#: src/glabels.c:79
-msgid "Show xml debugging messages."
-msgstr ""
-
-#: src/glabels.c:82
-msgid "Show document merge debugging messages."
-msgstr ""
-
-#: src/glabels.c:85
-msgid "Show commands debugging messages."
-msgstr ""
-
-#: src/glabels.c:88
-msgid "Show undo debugging messages."
-msgstr ""
-
-#: src/glabels.c:91
-msgid "Show recent debugging messages."
-msgstr ""
-
-#: src/glabels.c:94
-msgid "Show window debugging messages."
-msgstr ""
-
-#: src/glabels.c:97
-msgid "Show ui debugging messages."
-msgstr ""
-
-#: src/glabels.c:100
-msgid "Show property_bar debugging messages."
-msgstr ""
-
-#: src/glabels.c:103
-msgid "Show media select widget debugging messages."
-msgstr ""
-
-#: src/glabels.c:106
-msgid "Show mini preview widget debugging messages."
-msgstr ""
-
-#: src/glabels.c:109
-msgid "Show pixbuf cache debugging messages."
-msgstr ""
-
-#: src/glabels.c:112
-msgid "Show widget debugging messages."
-msgstr ""
-
-#: src/glabels.c:115
-#, fuzzy
-msgid "Show object editor debugging messages."
-msgstr "Mostra messaggi di debug."
-
-#: src/glabels.c:118
-msgid "Turn on all debugging messages."
-msgstr "Attiva tutti i messaggi di debug."
-
-#: src/glabels.c:187
+#: src/glabels.c:116
 msgid "Could not initialize Bonobo!\n"
-msgstr ""
+msgstr "Non √® possibile inizializzare Bonobo!\n"
 
-#: src/glabels-batch.c:48
+#: src/glabels-batch.c:52
 msgid "print this message"
 msgstr "stampa questo messaggio"
 
-#: src/glabels-batch.c:50
+#: src/glabels-batch.c:54
 msgid "print the version of glabels-batch being used"
-msgstr ""
+msgstr "stampa la versione di glabels batch utilizzata"
 
-#: src/glabels-batch.c:52
+#: src/glabels-batch.c:56
 msgid "set output filename (default=\"output.ps\")"
-msgstr "setta il nome del file di output (default=\"output.ps\")"
+msgstr "imposta il nome del file di output (default=\"output.ps\")"
 
-#: src/glabels-batch.c:52
+#: src/glabels-batch.c:56 src/glabels-batch.c:70
 msgid "filename"
 msgstr "nome file"
 
-#: src/glabels-batch.c:54
+#: src/glabels-batch.c:58
 msgid "number of sheets (default=1)"
 msgstr "numero di fogli (default=1)"
 
-#: src/glabels-batch.c:54
+#: src/glabels-batch.c:58
 msgid "sheets"
 msgstr "fogli"
 
-#: src/glabels-batch.c:56
+#: src/glabels-batch.c:60
 msgid "number of copies (default=1)"
 msgstr "numero di copie (default=1)"
 
-#: src/glabels-batch.c:56
+#: src/glabels-batch.c:60
 msgid "copies"
 msgstr "copie"
 
-#: src/glabels-batch.c:58 src/print-dialog.c:336
+#: src/glabels-batch.c:62
+msgid "first label on first sheet (default=1)"
+msgstr "prima etichetta del primo foglio (default=1)"
+
+#: src/glabels-batch.c:62
+msgid "first"
+msgstr "primo"
+
+#: src/glabels-batch.c:64 src/print-dialog.c:336
 msgid "print outlines (to test printer alignment)"
-msgstr ""
+msgstr "stampa bordi (per provare l'allineamento della stampante)"
 
-#: src/glabels-batch.c:60 src/print-dialog.c:344
+#: src/glabels-batch.c:66 src/print-dialog.c:344
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "stampa al contrario (cioË: un'immagine specchiata)"
+msgstr "stampa al contrario (es. un'immagine riflessa)"
 
-#: src/glabels-batch.c:96
+#: src/glabels-batch.c:68 src/print-dialog.c:351
+msgid "print crop marks"
+msgstr "stampa segni di taglio"
+
+#: src/glabels-batch.c:70
+msgid "input file for merging"
+msgstr "file per la stampa unione"
+
+#: src/glabels-batch.c:107
 msgid "[OPTION...] GLABELS_FILE..."
-msgstr ""
+msgstr "[OPTION...] GLABELS_FILE..."
 
-#: src/glabels-batch.c:116
+#: src/glabels-batch.c:127
+#, c-format
 msgid "missing glabels file\n"
-msgstr ""
+msgstr "file di glabels mancante\n"
 
-#: src/glabels-batch.c:157
+#: src/glabels-batch.c:158
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "non √® possibile unire i documenti con il file glabels %s\n"
+
+#: src/glabels-batch.c:182
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr ""
+msgstr "non √® possibile aprire il file glabels %s\n"
 
 #: src/window.c:244
 msgid "(none) - gLabels"
@@ -171,27 +105,27 @@ msgstr "(niente) - gLabels"
 msgid "(modified)"
 msgstr "(modificato)"
 
-#: src/stock.c:65 data/ui/glabels-ui.xml.h:165
+#: src/stock.c:65 data/ui/glabels-ui.xml.h:162
 msgid "_Select Mode"
-msgstr ""
+msgstr "Modalit√† di _selezione"
 
-#: src/stock.c:66 data/ui/glabels-ui.xml.h:166
+#: src/stock.c:66 data/ui/glabels-ui.xml.h:163
 msgid "_Text"
 msgstr "_Testo"
 
-#: src/stock.c:67 data/ui/glabels-ui.xml.h:151
+#: src/stock.c:67 data/ui/glabels-ui.xml.h:148
 msgid "_Line"
 msgstr "_Linea"
 
-#: src/stock.c:68 data/ui/glabels-ui.xml.h:133
+#: src/stock.c:68 data/ui/glabels-ui.xml.h:130
 msgid "_Box"
-msgstr ""
+msgstr "_Box"
 
-#: src/stock.c:69 data/ui/glabels-ui.xml.h:144
+#: src/stock.c:69 data/ui/glabels-ui.xml.h:141
 msgid "_Ellipse"
 msgstr "_Ellisse"
 
-#: src/stock.c:70 data/ui/glabels-ui.xml.h:149
+#: src/stock.c:70 data/ui/glabels-ui.xml.h:146
 msgid "_Image"
 msgstr "_Immagine"
 
@@ -201,25 +135,25 @@ msgstr "_Codice a barre"
 
 #: src/stock.c:72
 msgid "_Merge Properties"
-msgstr ""
+msgstr "Propriet√† di _unione"
 
 #: src/stock.c:73
 msgid "Object _Properties"
-msgstr "_Propriet‡∑Oggetto"
+msgstr "_Propriet√†¬∑Oggetto"
 
 #: src/stock.c:74 data/ui/glabels-ui.xml.h:13
 msgid "Bring to _Front"
 msgstr "Porta avanti"
 
-#: src/stock.c:75 data/ui/glabels-ui.xml.h:110
+#: src/stock.c:75 data/ui/glabels-ui.xml.h:109
 msgid "Send to _Back"
 msgstr ""
 
-#: src/stock.c:76 data/ui/glabels-ui.xml.h:97
+#: src/stock.c:76 data/ui/glabels-ui.xml.h:96
 msgid "Rotate _Left"
 msgstr "Ruota a sinistra"
 
-#: src/stock.c:77 data/ui/glabels-ui.xml.h:98
+#: src/stock.c:77 data/ui/glabels-ui.xml.h:97
 msgid "Rotate _Right"
 msgstr "Ruota a destra"
 
@@ -231,19 +165,19 @@ msgstr "Capovolgi _Orizzontalmente"
 msgid "Flip _Vertically"
 msgstr "Capovolgi _Verticalmente"
 
-#: src/stock.c:80 data/ui/glabels-ui.xml.h:150
+#: src/stock.c:80 data/ui/glabels-ui.xml.h:147
 msgid "_Lefts"
 msgstr ""
 
-#: src/stock.c:81 data/ui/glabels-ui.xml.h:162
+#: src/stock.c:81 data/ui/glabels-ui.xml.h:159
 msgid "_Rights"
 msgstr ""
 
-#: src/stock.c:82 data/ui/glabels-ui.xml.h:134
+#: src/stock.c:82 data/ui/glabels-ui.xml.h:131
 msgid "_Centers"
 msgstr ""
 
-#: src/stock.c:83 data/ui/glabels-ui.xml.h:167
+#: src/stock.c:83 data/ui/glabels-ui.xml.h:164
 msgid "_Tops"
 msgstr ""
 
@@ -268,9 +202,8 @@ msgid "Line color"
 msgstr "Colore Linea"
 
 #: src/stock.c:90 src/stock.c:92
-#, fuzzy
 msgid "Linked"
-msgstr "Linea"
+msgstr "Collegato"
 
 #: src/stock.c:91 src/stock.c:93
 msgid "Not Linked"
@@ -278,7 +211,7 @@ msgstr ""
 
 #: src/ui-property-bar.c:345 src/object-editor.c:499
 msgid "Default"
-msgstr ""
+msgstr "Predefinito"
 
 #: src/ui-property-bar.c:360 src/object-editor.c:512
 msgid "No fill"
@@ -289,9 +222,8 @@ msgid "No line"
 msgstr ""
 
 #: src/ui-sidebar.c:180
-#, fuzzy
 msgid "Object properties"
-msgstr "_Propriet‡∑Oggetto"
+msgstr "Propriet√† oggetto"
 
 #: src/commands.c:385
 msgid ""
@@ -318,7 +250,7 @@ msgstr ""
 
 #: src/commands.c:409
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/commands.c:424
 msgid "glabels"
@@ -330,7 +262,7 @@ msgstr ""
 
 #: src/file.c:132 src/file.c:304
 msgid "Media Type"
-msgstr ""
+msgstr "Tipo media"
 
 #: src/file.c:138 src/file.c:310
 msgid "Label orientation"
@@ -338,16 +270,15 @@ msgstr "Orientazione etichetta"
 
 #: src/file.c:269
 msgid "Label properties"
-msgstr "Propriet‡ etichetta"
+msgstr "Propriet√† etichetta"
 
 #: src/file.c:452 src/file.c:870
 msgid "All files"
-msgstr ""
+msgstr "Tutti i file"
 
 #: src/file.c:457 src/file.c:875
-#, fuzzy
 msgid "gLabels documents"
-msgstr "Propriet‡ etichetta"
+msgstr "Documenti di gLabels"
 
 #: src/file.c:505 src/file.c:617 src/file.c:934 src/file.c:1130
 msgid "Empty file name selection"
@@ -361,7 +292,7 @@ msgstr ""
 msgid "File does not exist"
 msgstr "Il file non esiste"
 
-#: src/file.c:563 data/ui/glabels-ui.xml.h:75
+#: src/file.c:563 data/ui/glabels-ui.xml.h:74
 msgid "Open"
 msgstr "Apri"
 
@@ -403,7 +334,7 @@ msgstr ""
 
 #: src/file.c:960 src/file.c:1155
 msgid "File already exists."
-msgstr "File gi‡ esistente."
+msgstr "File gi√† esistente."
 
 #: src/file.c:1271
 #, c-format
@@ -440,77 +371,70 @@ msgstr ""
 #.
 #. * Submenu: Order
 #.
-#: src/view.c:3570 data/ui/glabels-ui.xml.h:157
+#: src/view.c:3574 data/ui/glabels-ui.xml.h:154
 msgid "_Order"
 msgstr "_Ordine"
 
 #.
 #. * Submenu: Rotate/Flip
 #.
-#: src/view.c:3591 data/ui/glabels-ui.xml.h:163
+#: src/view.c:3595 data/ui/glabels-ui.xml.h:160
 msgid "_Rotate/Flip"
 msgstr "_Ruota/Capovolgi"
 
 #.
 #. * Submenu: Align Horizontally
 #.
-#: src/view.c:3624
+#: src/view.c:3628
 msgid "Align _Horizontally"
 msgstr ""
 
 #.
 #. * Submenu: Align Vertically
 #.
-#: src/view.c:3663
+#: src/view.c:3667
 msgid "Align _Vertically"
 msgstr ""
 
-#: src/view.c:3724 data/ui/glabels-ui.xml.h:140
+#: src/view.c:3728 data/ui/glabels-ui.xml.h:137
 msgid "_Delete"
 msgstr "Cancella"
 
 #. Build editor.
-#: src/view-box.c:223
-#, fuzzy
+#: src/view-box.c:224
 msgid "Box object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Box"
 
 #. Build editor.
-#: src/view-ellipse.c:223
-#, fuzzy
+#: src/view-ellipse.c:224
 msgid "Ellipse object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Ellisse"
 
 #. Build editor.
-#: src/view-line.c:223
-#, fuzzy
+#: src/view-line.c:224
 msgid "Line object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Linea"
 
 #. Build editor.
-#: src/view-image.c:222
-#, fuzzy
+#: src/view-image.c:223
 msgid "Image object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Immagine"
 
 #. Build editor.
-#: src/view-text.c:250
-#, fuzzy
+#: src/view-text.c:251
 msgid "Text object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Testo"
 
-#: src/view-text.c:562 data/glade/object-editor.glade.h:28
+#: src/view-text.c:563 data/glade/object-editor.glade.h:28
 msgid "Text"
 msgstr "Testo"
 
 #. Build editor.
-#: src/view-barcode.c:209
-#, fuzzy
+#: src/view-barcode.c:210
 msgid "Barcode object properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Propriet√† dell'oggetto Codice a barre"
 
-#: src/view-barcode.c:579 src/print.c:1088
-#, fuzzy
+#: src/view-barcode.c:580 src/print.c:1089
 msgid "Invalid barcode data"
 msgstr "Codice a barre non valido"
 
@@ -525,12 +449,12 @@ msgstr "Sorgente"
 
 #: src/merge-properties-dialog.c:245
 msgid "Format:"
-msgstr ""
+msgstr "Formato:"
 
 #. Location line
 #: src/merge-properties-dialog.c:273
 msgid "Location:"
-msgstr ""
+msgstr "Posizione:"
 
 #: src/merge-properties-dialog.c:282 src/merge-properties-dialog.c:393
 msgid "Select merge-database source"
@@ -547,7 +471,7 @@ msgstr ""
 
 #: src/merge-properties-dialog.c:326
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 #: src/merge-properties-dialog.c:334
 msgid "Record/Field"
@@ -555,9 +479,9 @@ msgstr ""
 
 #: src/merge-properties-dialog.c:342 data/glade/object-editor.glade.h:9
 msgid "Data"
-msgstr ""
+msgstr "Dati"
 
-#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:82
+#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:81
 msgid "Print"
 msgstr "Stampa"
 
@@ -583,10 +507,6 @@ msgstr ""
 #: src/print-dialog.c:330
 msgid "Options"
 msgstr "Opzioni"
-
-#: src/print-dialog.c:351
-msgid "print crop marks"
-msgstr ""
 
 #: src/print-dialog.c:553 src/print-dialog.c:592
 msgid "Print preview"
@@ -710,7 +630,7 @@ msgstr ""
 
 #: src/label.c:569
 msgid "Untitled"
-msgstr ""
+msgstr "Senza titolo"
 
 #: src/xml-label.c:176 src/xml-label.c:213
 msgid "xmlParseFile error"
@@ -756,29 +676,29 @@ msgstr ""
 msgid "bad node in Data node =  \"%s\""
 msgstr ""
 
-#: src/xml-label.c:962 libglabels/xml-template.c:528
+#: src/xml-label.c:962 libglabels/xml-template.c:535
 msgid "Utf8 conversion error."
 msgstr ""
 
-#: src/xml-label.c:969 libglabels/xml-template.c:535
+#: src/xml-label.c:969 libglabels/xml-template.c:542
 msgid "Problem saving xml file."
 msgstr "Problema nel salvataggio del file xml"
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: src/xml-label-191.c:680 libglabels/xml-template.c:192
+#: src/xml-label-191.c:680 libglabels/xml-template.c:199
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr ""
 
-#: src/xml-label-191.c:690 libglabels/xml-template.c:202
+#: src/xml-label-191.c:690 libglabels/xml-template.c:209
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr ""
 
 #: src/merge.c:172 src/merge.c:213 src/merge.c:399 src/merge.c:402
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: src/merge-init.c:53
 msgid "Text file with comma delimeters (CSV)"
@@ -794,11 +714,11 @@ msgstr ""
 
 #: src/wdgt-image-select.c:201 data/glade/object-editor.glade.h:11
 msgid "File:"
-msgstr ""
+msgstr "File:"
 
 #: src/wdgt-image-select.c:245 data/glade/object-editor.glade.h:16
 msgid "Key:"
-msgstr ""
+msgstr "Chiave:"
 
 #: src/wdgt-print-copies.c:179
 msgid "Sheets:"
@@ -822,7 +742,7 @@ msgstr ""
 
 #: src/wdgt-print-merge.c:186
 msgid "on 1st sheet"
-msgstr "nel 1∞ foglio"
+msgstr "nel 1¬∞ foglio"
 
 #: src/wdgt-print-merge.c:195
 msgid "Copies:"
@@ -830,7 +750,7 @@ msgstr "Copie:"
 
 #: src/wdgt-print-merge.c:201
 msgid "Collate"
-msgstr ""
+msgstr "Fascicoli"
 
 #: src/wdgt-media-select.c:269 data/glade/template-designer.glade.h:29
 msgid "Description:"
@@ -838,7 +758,7 @@ msgstr "Descrizione:"
 
 #: src/wdgt-media-select.c:279 data/glade/template-designer.glade.h:53
 msgid "Page size:"
-msgstr "Dimensioni∑pagina:"
+msgstr "Dimensioni¬∑pagina:"
 
 #: src/wdgt-media-select.c:290
 msgid "Label size:"
@@ -885,7 +805,7 @@ msgstr "Girare"
 #. This is the default custom color
 #: src/mygal/color-palette.c:396
 msgid "custom"
-msgstr ""
+msgstr "personalizzato"
 
 #. "Custom" color - we'll pop up a GnomeColorPicker
 #: src/mygal/color-palette.c:438
@@ -1046,7 +966,7 @@ msgstr ""
 
 #: src/mygal/color-palette.c:624 src/mygal/color-palette.c:634
 msgid "light blue"
-msgstr ""
+msgstr "blu chiaro"
 
 #: src/mygal/color-palette.c:625 src/mygal/color-palette.c:638
 msgid "light purple"
@@ -1143,27 +1063,24 @@ msgid "Center objects to vertical label center"
 msgstr ""
 
 #: data/ui/glabels-ui.xml.h:17
-#, fuzzy
 msgid "Change the visibility of markup lines in the current window"
-msgstr ""
-"Cambia la visibilit‡ delle linee di demarcazioen nella finestra corrente"
+msgstr "Cambia la visibilit√† delle linee di demarcazione nella finestra corrente"
 
 #: data/ui/glabels-ui.xml.h:18
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr "Cambia la visibilit‡ della toolbar di disegno nella finestra corrente"
+msgstr "Cambia la visibilit√† della toolbar di disegno nella finestra corrente"
 
 #: data/ui/glabels-ui.xml.h:19
 msgid "Change the visibility of the grid in the current window"
-msgstr "Cambia la visibilit‡ della griglia nella finestra corrente"
+msgstr "Cambia la visibilit√† della griglia nella finestra corrente"
 
 #: data/ui/glabels-ui.xml.h:20
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr "Cambia la visibilit‡ della toolbar principale nella finestra corrente"
+msgstr "Cambia la visibilit√† della toolbar principale nella finestra corrente"
 
 #: data/ui/glabels-ui.xml.h:21
-#, fuzzy
 msgid "Change the visibility of the property toolbar in the current window"
-msgstr "Cambia la visibilit‡ della toolbar principale nella finestra corrente"
+msgstr "Cambia la visibilit√† della barra degli strumenti principale nella finestra corrente"
 
 #: data/ui/glabels-ui.xml.h:22
 msgid "Close"
@@ -1190,9 +1107,8 @@ msgid "Copy the selection"
 msgstr "Copia la selezione"
 
 #: data/ui/glabels-ui.xml.h:28
-#, fuzzy
 msgid "Create a custom template"
-msgstr "Crea un nuovo documento"
+msgstr "Crea un modello personalizzato"
 
 #: data/ui/glabels-ui.xml.h:29
 msgid "Create a new document"
@@ -1227,7 +1143,6 @@ msgid "Cu_t"
 msgstr "_Taglia"
 
 #: data/ui/glabels-ui.xml.h:37
-#, fuzzy
 msgid "Customize"
 msgstr "Personalizza"
 
@@ -1240,13 +1155,12 @@ msgid "Customize Main Toolbar"
 msgstr "Personalizza la toolbar principale"
 
 #: data/ui/glabels-ui.xml.h:40
-#, fuzzy
 msgid "Customize Property Toolbar"
-msgstr "Personalizza∑le∑toolbar"
+msgstr ""
 
 #: data/ui/glabels-ui.xml.h:41
 msgid "Customize toolbars"
-msgstr "Personalizza∑le∑toolbar"
+msgstr "Personalizza¬∑le¬∑toolbar"
 
 #: data/ui/glabels-ui.xml.h:42
 msgid "Cut"
@@ -1302,7 +1216,7 @@ msgstr "Selettore font"
 
 #: data/ui/glabels-ui.xml.h:58
 msgid "Font size"
-msgstr "Dimesione∑font"
+msgstr "Dimesione¬∑font"
 
 #: data/ui/glabels-ui.xml.h:59
 msgid "Icon and _Text"
@@ -1314,12 +1228,11 @@ msgstr "Incrementa ingradimento"
 
 #: data/ui/glabels-ui.xml.h:61
 msgid "Italic"
-msgstr ""
+msgstr "Corsivo"
 
 #: data/ui/glabels-ui.xml.h:63
-#, fuzzy
 msgid "Left align"
-msgstr "Allinea∑a∑sinistra"
+msgstr "Allinea¬∑a¬∑sinistra"
 
 #: data/ui/glabels-ui.xml.h:65
 msgid "Line width"
@@ -1342,329 +1255,311 @@ msgid "Markup"
 msgstr ""
 
 #: data/ui/glabels-ui.xml.h:70
-#, fuzzy
 msgid "Modify document properties"
-msgstr "Edita le propriet‡ dell'oggetto"
+msgstr "Modifica le propriet√† del documento"
 
 #: data/ui/glabels-ui.xml.h:71
 msgid "New"
 msgstr "Nuovo"
 
 #: data/ui/glabels-ui.xml.h:72
-#, fuzzy
 msgid "Object property editor"
-msgstr "_Propriet‡∑Oggetto"
+msgstr ""
 
 #: data/ui/glabels-ui.xml.h:73
-msgid "Only show icons in the drawing toolbar"
-msgstr "Visualizza solo le icone nella toolbar di disegno"
-
-#: data/ui/glabels-ui.xml.h:74
 msgid "Only show icons in the main toolbar"
 msgstr "Visualizza solo le icone nella toolbar principale"
 
-#: data/ui/glabels-ui.xml.h:76
+#: data/ui/glabels-ui.xml.h:75
 msgid "Open a file"
 msgstr "Apri un file"
 
-#: data/ui/glabels-ui.xml.h:77
+#: data/ui/glabels-ui.xml.h:76
 msgid "Open the glabels manual"
 msgstr "Apri il manuale di glabels"
 
-#: data/ui/glabels-ui.xml.h:78
+#: data/ui/glabels-ui.xml.h:77
 msgid "Paste"
 msgstr "Incolla"
 
-#: data/ui/glabels-ui.xml.h:79
+#: data/ui/glabels-ui.xml.h:78
 msgid "Paste the clipboard"
 msgstr "Incolla gli appunti"
 
-#: data/ui/glabels-ui.xml.h:80
+#: data/ui/glabels-ui.xml.h:79
 msgid "Pr_eferences..."
 msgstr "Pr_eferenze..."
 
-#: data/ui/glabels-ui.xml.h:81
+#: data/ui/glabels-ui.xml.h:80
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: data/ui/glabels-ui.xml.h:83
+#: data/ui/glabels-ui.xml.h:82
 msgid "Print the current file"
 msgstr "Stampa il file corrente"
 
-#: data/ui/glabels-ui.xml.h:84
-#, fuzzy
+#: data/ui/glabels-ui.xml.h:83
 msgid "Proper_ties..."
-msgstr "Proprie_t‡"
+msgstr "Proprie_t√†..."
+
+#: data/ui/glabels-ui.xml.h:84
+msgid "Properties"
+msgstr "Propriet√†"
 
 #: data/ui/glabels-ui.xml.h:85
-msgid "Properties"
-msgstr "Propriet‡"
-
-#: data/ui/glabels-ui.xml.h:86
 msgid "Property toolbar"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:87
+#: data/ui/glabels-ui.xml.h:86
 msgid "Quit"
 msgstr "Esci"
 
-#: data/ui/glabels-ui.xml.h:88
+#: data/ui/glabels-ui.xml.h:87
 msgid "Quit the program"
 msgstr "Esci dal programma"
 
-#: data/ui/glabels-ui.xml.h:89
+#: data/ui/glabels-ui.xml.h:88
 msgid "Raise object to top"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:90
+#: data/ui/glabels-ui.xml.h:89
 msgid "Recent _Files"
 msgstr "_File Recenti"
 
-#: data/ui/glabels-ui.xml.h:91
+#: data/ui/glabels-ui.xml.h:90
 msgid "Redo"
 msgstr "Ripeti"
 
-#: data/ui/glabels-ui.xml.h:92
+#: data/ui/glabels-ui.xml.h:91
 msgid "Redo the undone action"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:93
+#: data/ui/glabels-ui.xml.h:92
 msgid "Remove all selections"
 msgstr "Rimuovi tutte le selezioni"
 
-#: data/ui/glabels-ui.xml.h:95
+#: data/ui/glabels-ui.xml.h:94
 #, no-c-format
 msgid "Restore scale to 100%"
 msgstr "Ripristina la scala al 100%"
 
-#: data/ui/glabels-ui.xml.h:96
+#: data/ui/glabels-ui.xml.h:95
 msgid "Right align"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:99
+#: data/ui/glabels-ui.xml.h:98
 msgid "Rotate object 90 clockwise"
-msgstr "Ruota l'oggetto di 90∞ in verso orario"
+msgstr "Ruota l'oggetto di 90¬∞ in verso orario"
+
+#: data/ui/glabels-ui.xml.h:99
+msgid "Rotate object 90 counter-clockwise"
+msgstr "Ruota l'oggetto di 90¬∞ in verso antiorario"
 
 #: data/ui/glabels-ui.xml.h:100
-msgid "Rotate object 90 counter-clockwise"
-msgstr "Ruota l'oggetto di 90∞ in verso antiorario"
-
-#: data/ui/glabels-ui.xml.h:101
 msgid "Save"
 msgstr "Salva"
 
-#: data/ui/glabels-ui.xml.h:102
+#: data/ui/glabels-ui.xml.h:101
 msgid "Save As"
-msgstr ""
+msgstr "Salva con nome"
 
-#: data/ui/glabels-ui.xml.h:103
+#: data/ui/glabels-ui.xml.h:102
 msgid "Save _As..."
 msgstr "Salva _con nome..."
 
-#: data/ui/glabels-ui.xml.h:104
+#: data/ui/glabels-ui.xml.h:103
 msgid "Save the current file"
 msgstr "Salva il file corrente"
 
-#: data/ui/glabels-ui.xml.h:105
+#: data/ui/glabels-ui.xml.h:104
 msgid "Save the current file with a different name"
 msgstr "Salva il file corrente con un nome differente"
 
-#: data/ui/glabels-ui.xml.h:106
+#: data/ui/glabels-ui.xml.h:105
 msgid "Select All"
 msgstr "Seleziona tutto"
 
-#: data/ui/glabels-ui.xml.h:107
+#: data/ui/glabels-ui.xml.h:106
 msgid "Select _All"
 msgstr "Seleziona tutto"
 
-#: data/ui/glabels-ui.xml.h:108
+#: data/ui/glabels-ui.xml.h:107
 msgid "Select all objects"
 msgstr "Seleziona tutti gli oggetti"
 
-#: data/ui/glabels-ui.xml.h:109
+#: data/ui/glabels-ui.xml.h:108
 msgid "Select, move and modify objects"
-msgstr "Seleziona, muove e modifica oggetti"
+msgstr "Seleziona, muovi e modifica oggetti"
 
-#: data/ui/glabels-ui.xml.h:111
-msgid "Set drawing toolbar button style according to desktop default"
-msgstr ""
-
-#: data/ui/glabels-ui.xml.h:112
+#: data/ui/glabels-ui.xml.h:110
 msgid "Set main toolbar button style according to desktop default"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:113
+#: data/ui/glabels-ui.xml.h:111
 msgid "Show _Tooltips"
 msgstr "Mostra suggerimenti"
 
-#: data/ui/glabels-ui.xml.h:114
-msgid "Show both icons and texts in the drawing toolbar"
-msgstr "Mostra icone e testo nella toolbar di disegno"
-
-#: data/ui/glabels-ui.xml.h:115
+#: data/ui/glabels-ui.xml.h:112
 msgid "Show both icons and texts in the main toolbar"
 msgstr "Mostra icone e testo nella toolbar principale"
 
-#: data/ui/glabels-ui.xml.h:116
+#: data/ui/glabels-ui.xml.h:113
 msgid "Show tooltips in the drawing toolbar"
 msgstr "Mostra suggerimenti nella toolbar di disegno"
 
-#: data/ui/glabels-ui.xml.h:117
+#: data/ui/glabels-ui.xml.h:114
 msgid "Show tooltips in the main toolbar"
 msgstr "Mostra suggerimenti nella toolbar principale"
 
-#: data/ui/glabels-ui.xml.h:118
-#, fuzzy
+#: data/ui/glabels-ui.xml.h:115
 msgid "Show tooltips in the property toolbar"
-msgstr "Mostra suggerimenti nella toolbar principale"
+msgstr "Mostra suggerimenti nella barra degli strumenti principale"
 
-#: data/ui/glabels-ui.xml.h:119
+#: data/ui/glabels-ui.xml.h:116
 msgid "Template Designer"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:120
+#: data/ui/glabels-ui.xml.h:117
 msgid "Template _Designer..."
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:121
+#: data/ui/glabels-ui.xml.h:118
 msgid "Text color"
 msgstr "Colore testo"
 
-#: data/ui/glabels-ui.xml.h:122
+#: data/ui/glabels-ui.xml.h:119
 msgid "U_n-select All"
 msgstr "Deseleziona tutto"
 
-#: data/ui/glabels-ui.xml.h:123
+#: data/ui/glabels-ui.xml.h:120
 msgid "Un-select All"
-msgstr "Deseleziona∑tutto"
+msgstr "Deseleziona¬∑tutto"
 
-#: data/ui/glabels-ui.xml.h:124
+#: data/ui/glabels-ui.xml.h:121
 msgid "Undo"
 msgstr "Annulla"
 
-#: data/ui/glabels-ui.xml.h:125
+#: data/ui/glabels-ui.xml.h:122
 msgid "Undo the last action"
 msgstr "Annulla l'ultima azione"
 
-#: data/ui/glabels-ui.xml.h:126
+#: data/ui/glabels-ui.xml.h:123
 msgid "Zoom _1:1"
 msgstr "Zoom _1:1"
 
-#: data/ui/glabels-ui.xml.h:127
+#: data/ui/glabels-ui.xml.h:124
 msgid "Zoom _In"
 msgstr "Zoom _in avanti"
 
-#: data/ui/glabels-ui.xml.h:128
+#: data/ui/glabels-ui.xml.h:125
 msgid "Zoom _Out"
 msgstr "Zomm indietro"
 
-#: data/ui/glabels-ui.xml.h:129
-#, fuzzy
+#: data/ui/glabels-ui.xml.h:126
 msgid "Zoom to _fit"
-msgstr "Zomm indietro"
+msgstr ""
 
-#: data/ui/glabels-ui.xml.h:130
+#: data/ui/glabels-ui.xml.h:127
 msgid "Zoom to fit window"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:131
+#: data/ui/glabels-ui.xml.h:128
 msgid "_About..."
 msgstr "Informazioni..."
 
-#: data/ui/glabels-ui.xml.h:132
+#: data/ui/glabels-ui.xml.h:129
 msgid "_Bottoms"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:135
+#: data/ui/glabels-ui.xml.h:132
 msgid "_Close"
 msgstr "_Chiudi"
 
-#: data/ui/glabels-ui.xml.h:136
+#: data/ui/glabels-ui.xml.h:133
 msgid "_Contents"
 msgstr "_Contenuti"
 
-#: data/ui/glabels-ui.xml.h:137
+#: data/ui/glabels-ui.xml.h:134
 msgid "_Copy"
 msgstr "_Copia"
 
-#: data/ui/glabels-ui.xml.h:138
+#: data/ui/glabels-ui.xml.h:135
 msgid "_Create Object"
 msgstr "_Crea Oggetto"
 
-#: data/ui/glabels-ui.xml.h:139
+#: data/ui/glabels-ui.xml.h:136
 msgid "_Debug"
 msgstr "_Debug"
 
-#: data/ui/glabels-ui.xml.h:141
+#: data/ui/glabels-ui.xml.h:138
 msgid "_Desktop Default"
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:142
+#: data/ui/glabels-ui.xml.h:139
 msgid "_Drawing Toolbar"
 msgstr "Toolbar di disegno"
 
-#: data/ui/glabels-ui.xml.h:143
+#: data/ui/glabels-ui.xml.h:140
 msgid "_Edit"
 msgstr "_Modifica"
 
-#: data/ui/glabels-ui.xml.h:145
+#: data/ui/glabels-ui.xml.h:142
 msgid "_File"
 msgstr "_File"
 
-#: data/ui/glabels-ui.xml.h:146
+#: data/ui/glabels-ui.xml.h:143
 msgid "_Grid"
 msgstr "_Griglia"
 
-#: data/ui/glabels-ui.xml.h:147
+#: data/ui/glabels-ui.xml.h:144
 msgid "_Help"
 msgstr "_Aiuto"
 
-#: data/ui/glabels-ui.xml.h:148
+#: data/ui/glabels-ui.xml.h:145
 msgid "_Icon"
 msgstr "_Icone"
 
-#: data/ui/glabels-ui.xml.h:152
+#: data/ui/glabels-ui.xml.h:149
 msgid "_Main Toolbar"
 msgstr "Toolbar principale"
 
-#: data/ui/glabels-ui.xml.h:153
+#: data/ui/glabels-ui.xml.h:150
 msgid "_Merge Properties..."
 msgstr ""
 
-#: data/ui/glabels-ui.xml.h:154
+#: data/ui/glabels-ui.xml.h:151
 msgid "_New"
 msgstr "_Nuovo"
 
-#: data/ui/glabels-ui.xml.h:155
+#: data/ui/glabels-ui.xml.h:152
 msgid "_Objects"
 msgstr "_Oggetti"
 
-#: data/ui/glabels-ui.xml.h:156
+#: data/ui/glabels-ui.xml.h:153
 msgid "_Open..."
 msgstr "_Apri..."
 
-#: data/ui/glabels-ui.xml.h:158
+#: data/ui/glabels-ui.xml.h:155
 msgid "_Paste"
 msgstr "Incolla"
 
-#: data/ui/glabels-ui.xml.h:159
+#: data/ui/glabels-ui.xml.h:156
 msgid "_Print..."
 msgstr "Stampa..."
 
-#: data/ui/glabels-ui.xml.h:160
-#, fuzzy
+#: data/ui/glabels-ui.xml.h:157
 msgid "_Property Toolbar"
-msgstr "Toolbar di disegno"
+msgstr ""
 
-#: data/ui/glabels-ui.xml.h:161
+#: data/ui/glabels-ui.xml.h:158
 msgid "_Quit"
 msgstr "_Esci"
 
-#: data/ui/glabels-ui.xml.h:164
+#: data/ui/glabels-ui.xml.h:161
 msgid "_Save"
 msgstr "_Salva"
 
-#: data/ui/glabels-ui.xml.h:168
+#: data/ui/glabels-ui.xml.h:165
 msgid "_View"
 msgstr "_Visualizza"
 
@@ -1675,7 +1570,7 @@ msgstr ""
 #: data/glade/prefs-dialog.glade.h:2 data/glade/object-editor.glade.h:1
 #: data/glade/template-designer.glade.h:5
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: data/glade/prefs-dialog.glade.h:3
 msgid "<span weight=\"bold\">Default page size</span>"
@@ -1711,7 +1606,7 @@ msgstr "Carattere:"
 
 #: data/glade/prefs-dialog.glade.h:11
 msgid "ISO A4"
-msgstr ""
+msgstr "ISO A4"
 
 #: data/glade/prefs-dialog.glade.h:12
 msgid "Inches"
@@ -1723,7 +1618,7 @@ msgstr ""
 
 #: data/glade/prefs-dialog.glade.h:14
 msgid "Locale"
-msgstr ""
+msgstr "Impostazioni nazionali"
 
 #: data/glade/prefs-dialog.glade.h:15
 msgid "Millimeters"
@@ -1739,15 +1634,16 @@ msgstr "Punti"
 
 #: data/glade/prefs-dialog.glade.h:18
 msgid "Select default properties for new objects."
-msgstr "Seleziona le propriet‡ predefinite per i nuovi oggetti."
+msgstr "Seleziona le propriet√† predefinite per i nuovi oggetti."
 
 #: data/glade/prefs-dialog.glade.h:19
 msgid "Select locale specific behavior."
 msgstr ""
 
-#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:25
+#. Most popular (at top of list)
+#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:29
 msgid "US Letter"
-msgstr "US∑Letter"
+msgstr "US¬∑Letter"
 
 #: data/glade/prefs-dialog.glade.h:21 data/glade/object-editor.glade.h:29
 #: data/glade/template-designer.glade.h:72
@@ -1772,11 +1668,11 @@ msgstr "Angolo:"
 
 #: data/glade/object-editor.glade.h:7
 msgid "Checksum"
-msgstr ""
+msgstr "Checksum"
 
 #: data/glade/object-editor.glade.h:10
 msgid "Family:"
-msgstr ""
+msgstr "Famiglia:"
 
 #: data/glade/object-editor.glade.h:12
 msgid "Fill"
@@ -1823,14 +1719,12 @@ msgid "Size"
 msgstr "Dimensioni"
 
 #: data/glade/object-editor.glade.h:25
-#, fuzzy
 msgid "Size:"
-msgstr "Dimensioni"
+msgstr "Dimensione:"
 
 #: data/glade/object-editor.glade.h:26
-#, fuzzy
 msgid "Style"
-msgstr "Stile:"
+msgstr "Stile"
 
 #: data/glade/object-editor.glade.h:27
 msgid "Style:"
@@ -1838,11 +1732,11 @@ msgstr "Stile:"
 
 #: data/glade/object-editor.glade.h:30
 msgid "X:"
-msgstr ""
+msgstr "X:"
 
 #: data/glade/object-editor.glade.h:31
 msgid "Y:"
-msgstr ""
+msgstr "Y:"
 
 #: data/glade/object-editor.glade.h:32
 msgid "degrees"
@@ -1857,9 +1751,8 @@ msgid "digits:"
 msgstr ""
 
 #: data/glade/object-editor.glade.h:35
-#, fuzzy
 msgid "format:"
-msgstr "da:"
+msgstr "formato:"
 
 #: data/glade/template-designer.glade.h:1
 msgid "  "
@@ -1886,14 +1779,12 @@ msgid "1. Radius:"
 msgstr ""
 
 #: data/glade/template-designer.glade.h:8
-#, fuzzy
 msgid "1. Width:"
-msgstr "Larghezza:"
+msgstr "1. Larghezza:"
 
 #: data/glade/template-designer.glade.h:9
-#, fuzzy
 msgid "2. Height:"
-msgstr "Altezza:"
+msgstr "2. Altezza:"
 
 #: data/glade/template-designer.glade.h:10
 msgid "2. Inner radius:"
@@ -1984,9 +1875,8 @@ msgid "Label Size (CD/DVD)"
 msgstr ""
 
 #: data/glade/template-designer.glade.h:41
-#, fuzzy
 msgid "Label Size (Round)"
-msgstr "Dimensioni etichetta:"
+msgstr "Dimensioni etichetta"
 
 #: data/glade/template-designer.glade.h:42
 msgid "Label or Card Shape"
@@ -2009,9 +1899,8 @@ msgid "Layout(s)"
 msgstr ""
 
 #: data/glade/template-designer.glade.h:47
-#, fuzzy
 msgid "Name and Description"
-msgstr "Descrizione:"
+msgstr "Nome e descrizione"
 
 #: data/glade/template-designer.glade.h:48
 msgid "Number across (nx):"
@@ -2030,9 +1919,8 @@ msgid "Number of layouts:"
 msgstr ""
 
 #: data/glade/template-designer.glade.h:52
-#, fuzzy
 msgid "Page Size"
-msgstr "Dimensioni∑pagina:"
+msgstr "Dimensione pagina"
 
 #: data/glade/template-designer.glade.h:54
 msgid "Part #:"
@@ -2069,9 +1957,8 @@ msgid "Please select the page size of the template stationery."
 msgstr ""
 
 #: data/glade/template-designer.glade.h:61
-#, fuzzy
 msgid "Print test sheet"
-msgstr "nel 1∞ foglio"
+msgstr "Stampa foglio di prova"
 
 #: data/glade/template-designer.glade.h:62
 msgid "Rectangular or square (can have rounded corners)"
@@ -2079,7 +1966,7 @@ msgstr ""
 
 #: data/glade/template-designer.glade.h:63
 msgid "Round"
-msgstr ""
+msgstr "Rotonda"
 
 #: data/glade/template-designer.glade.h:64
 msgid ""
@@ -2104,231 +1991,266 @@ msgid ""
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
 
-#: data/templates/paper-sizes.xml.h:1
-msgid "A0"
-msgstr ""
-
+#. Other ISO A series sizes
 #: data/templates/paper-sizes.xml.h:2
-msgid "A1"
-msgstr ""
+msgid "A0"
+msgstr "A0"
 
 #: data/templates/paper-sizes.xml.h:3
-msgid "A10"
-msgstr ""
+msgid "A1"
+msgstr "A1"
 
 #: data/templates/paper-sizes.xml.h:4
-msgid "A2"
-msgstr ""
+msgid "A10"
+msgstr "A10"
 
 #: data/templates/paper-sizes.xml.h:5
-msgid "A3"
-msgstr ""
+msgid "A2"
+msgstr "A2"
 
 #: data/templates/paper-sizes.xml.h:6
+msgid "A3"
+msgstr "A3"
+
+#: data/templates/paper-sizes.xml.h:7
 msgid "A4"
 msgstr "A4"
 
-#: data/templates/paper-sizes.xml.h:7
-msgid "A5"
-msgstr ""
-
 #: data/templates/paper-sizes.xml.h:8
-msgid "A6"
-msgstr ""
+msgid "A5"
+msgstr "A5"
 
 #: data/templates/paper-sizes.xml.h:9
-msgid "A7"
-msgstr ""
+msgid "A6"
+msgstr "A6"
 
 #: data/templates/paper-sizes.xml.h:10
-msgid "A8"
-msgstr ""
+msgid "A7"
+msgstr "A7"
 
 #: data/templates/paper-sizes.xml.h:11
-msgid "A9"
-msgstr ""
+msgid "A8"
+msgstr "A8"
 
 #: data/templates/paper-sizes.xml.h:12
-msgid "B0"
-msgstr ""
+msgid "A9"
+msgstr "A9"
 
-#: data/templates/paper-sizes.xml.h:13
-msgid "B1"
-msgstr ""
-
+#. ISO B series sizes
 #: data/templates/paper-sizes.xml.h:14
+msgid "B0"
+msgstr "B0"
+
+#: data/templates/paper-sizes.xml.h:15
+msgid "B1"
+msgstr "B1"
+
+#: data/templates/paper-sizes.xml.h:16
 msgid "B10"
 msgstr ""
 
-#: data/templates/paper-sizes.xml.h:15
-msgid "B2"
-msgstr ""
-
-#: data/templates/paper-sizes.xml.h:16
-msgid "B3"
-msgstr ""
-
 #: data/templates/paper-sizes.xml.h:17
-msgid "B4"
-msgstr ""
+msgid "B2"
+msgstr "B2"
 
 #: data/templates/paper-sizes.xml.h:18
-msgid "B5"
-msgstr ""
+msgid "B3"
+msgstr "B3"
 
 #: data/templates/paper-sizes.xml.h:19
-msgid "B6"
-msgstr ""
+msgid "B4"
+msgstr "B4"
 
 #: data/templates/paper-sizes.xml.h:20
-msgid "B7"
-msgstr ""
+msgid "B5"
+msgstr "B5"
 
 #: data/templates/paper-sizes.xml.h:21
-msgid "B8"
-msgstr ""
+msgid "B6"
+msgstr "B6"
 
 #: data/templates/paper-sizes.xml.h:22
-msgid "B9"
-msgstr ""
+msgid "B7"
+msgstr "B7"
 
 #: data/templates/paper-sizes.xml.h:23
-msgid "US Executive"
-msgstr ""
+msgid "B8"
+msgstr "B8"
 
 #: data/templates/paper-sizes.xml.h:24
-msgid "US Legal"
-msgstr ""
+msgid "B9"
+msgstr "B9"
 
-#: data/templates/avery-us-templates.xml.h:1
-#: data/templates/zweckform-iso-templates.xml.h:1
+#: data/templates/paper-sizes.xml.h:25
+msgid "US Executive"
+msgstr "US Executive"
+
+#. Other US paper sizes
+#: data/templates/paper-sizes.xml.h:27
+#, fuzzy
+msgid "US Legal"
+msgstr "US Legal"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:2
+#: data/templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:2
-#: data/templates/avery-iso-templates.xml.h:2
-#: data/templates/zweckform-iso-templates.xml.h:3
-#: data/templates/misc-us-templates.xml.h:2
-#: data/templates/misc-iso-templates.xml.h:9
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. ======================================================
+#: data/templates/avery-us-templates.xml.h:4
+#: data/templates/avery-iso-templates.xml.h:4
+#: data/templates/zweckform-iso-templates.xml.h:6
+#: data/templates/misc-us-templates.xml.h:3
+#: data/templates/misc-iso-templates.xml.h:17
 msgid "Business Cards"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:3
+#: data/templates/avery-us-templates.xml.h:5
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "Etichette CD/DVD (Etichette Dischi)"
 
-#: data/templates/avery-us-templates.xml.h:4
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:7
 msgid "Diskette Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:5
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:9
 msgid "Filing Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:6
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:11
 msgid "Full Sheet Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:7
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:13
 msgid "Large Round Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:8
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:15
 msgid "Name Badge Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:9
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:17
 msgid "Return Address Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:10
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:19
 msgid "Shipping Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:11
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:21
 msgid "Small Round Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:12
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:23
 msgid "Square Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:13
+#: data/templates/avery-us-templates.xml.h:24
 msgid "Video Tape Face Labels"
 msgstr ""
 
-#: data/templates/avery-us-templates.xml.h:14
+#: data/templates/avery-us-templates.xml.h:25
 msgid "Video Tape Spine Labels"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:1
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:2
 msgid "Address labels"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:3
+#. ===============================================================
+#: data/templates/avery-iso-templates.xml.h:6
 msgid "CD Booklet"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:4
+#. ===============================================================
+#: data/templates/avery-iso-templates.xml.h:8
 msgid "CD Inlet"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:5
-#: data/templates/zweckform-iso-templates.xml.h:4
-#: data/templates/misc-us-templates.xml.h:4
-#: data/templates/misc-iso-templates.xml.h:10
+#. ===============================================================
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:10
+#: data/templates/zweckform-iso-templates.xml.h:8
+#: data/templates/misc-us-templates.xml.h:5
+#: data/templates/misc-iso-templates.xml.h:21
 msgid "CD/DVD Labels"
 msgstr "Etichette CD/DVD"
 
-#: data/templates/avery-iso-templates.xml.h:6
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:12
 msgid "Diskette labels"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:7
-#: data/templates/zweckform-iso-templates.xml.h:7
-#: data/templates/misc-iso-templates.xml.h:17
+#. ===============================================================
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:14
+#: data/templates/zweckform-iso-templates.xml.h:14
+#: data/templates/misc-iso-templates.xml.h:35
 msgid "Mailing Labels"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:8
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:16
 msgid "Mailing labels"
 msgstr ""
 
-#: data/templates/avery-iso-templates.xml.h:9
-#, fuzzy
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:18
 msgid "Mini Address Labels"
-msgstr "Etichette Mini-CD"
+msgstr "Etichette Mini-indirizzo"
 
-#: data/templates/avery-iso-templates.xml.h:10
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:20
 msgid "Shipping labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:2
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:5
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:10
 msgid "Correction and Cover-up Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:6
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:12
 msgid "Lever Arch File Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:8
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:16
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:9
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:18
 msgid "Rectangular Copier Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:10
-#: data/templates/misc-iso-templates.xml.h:22
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:20
+#: data/templates/misc-iso-templates.xml.h:44
 msgid "Rectangular Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:11
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:22
 msgid "Video Labels (back)"
 msgstr ""
 
@@ -2336,49 +2258,57 @@ msgstr ""
 msgid "Business Card CD"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:3
+#: data/templates/misc-us-templates.xml.h:4
 msgid "CD Template Rectangles"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:5
+#: data/templates/misc-us-templates.xml.h:6
 msgid "CD/DVD Labels (Face Only)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:6
-#: data/templates/misc-iso-templates.xml.h:11
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:7
+#: data/templates/misc-iso-templates.xml.h:23
 msgid "CD/DVD Labels (face only)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:7
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:9
+msgid "Cassette Labels"
+msgstr "Etichette per cassette"
+
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:11
 msgid "DLT Labels"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:8
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:13
 msgid "Microtube labels"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:9
+#: data/templates/misc-us-templates.xml.h:14
 msgid "Mini-CD Labels"
 msgstr "Etichette Mini-CD"
 
-#: data/templates/misc-us-templates.xml.h:10
+#: data/templates/misc-us-templates.xml.h:15
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:11
+#: data/templates/misc-us-templates.xml.h:16
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:12
-#: data/templates/misc-iso-templates.xml.h:21
+#: data/templates/misc-us-templates.xml.h:17
+#: data/templates/misc-iso-templates.xml.h:42
 msgid "PRO CD Labels 2-up (face only)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:13
+#: data/templates/misc-us-templates.xml.h:18
 msgid "Slimline CD Case (rightside up)"
 msgstr ""
 
-#: data/templates/misc-us-templates.xml.h:14
+#: data/templates/misc-us-templates.xml.h:19
 msgid "Slimline CD Case (upside down)"
 msgstr ""
 
@@ -2386,91 +2316,100 @@ msgstr ""
 msgid "Agipa 119488: Business Cards"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:2
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:3
 msgid "Allround Labels --24"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:3
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:5
 msgid "Allround Labels --44"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:4
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:7
 msgid "Allround Labels --64"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:5
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:9
 msgid "Allround Labels --65"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:6
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:11
 msgid "Arch File Labels"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:7
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:13
 msgid "Arch File Labels (large)"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:8
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:15
 msgid "Arch File Labels (small)"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:12
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:19
+msgid "CD Labels"
+msgstr "Etichette CD"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:25
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:13
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:27
 msgid "Diskette Labels (face only)"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:14
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:29
 msgid "EPSON Photo Stickers 16"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:15
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:31
 msgid "Etiketten"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:16
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:33
 msgid "Fridge Magnet Stickers"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:18
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:37
 msgid "Mailing Labels --14"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:19
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:39
 msgid "Mailing Labels-2 columns"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:20
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:41
 msgid "Mailing Labels-3 columns"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:23
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:46
 msgid "Video Labels (face only)"
-msgstr ""
+msgstr "Etichette video (solo frontespizio)"
 
 #: data/desktop/glabels.desktop.in.h:1
-msgid "Create labels, business cards and media covers."
-msgstr ""
+msgid "Create labels, business cards and media covers"
+msgstr "Crea etichette, biglietti da visita e copertine"
 
 #: data/desktop/glabels.desktop.in.h:2
 msgid "gLabels Label Designer"
-msgstr ""
+msgstr "gLabels Designer di etichetta"
 
 #: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
-#, fuzzy
 msgid "gLabels Project File"
-msgstr "Propriet‡ etichetta"
+msgstr "File di progetto di gLabels"
 
-#~ msgid "Object _Properties..."
-#~ msgstr "_Propriet‡ Oggetto..."
-
-#~ msgid "Edit text:"
-#~ msgstr "Edita testo:"
-
-#~ msgid "Maintain current aspect ratio"
-#~ msgstr "Mantieni le proporzioni correnti"
-
-#~ msgid "CD Labels"
-#~ msgstr "Etichette CD"

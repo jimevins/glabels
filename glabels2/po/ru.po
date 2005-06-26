@@ -1,316 +1,226 @@
 # Russian translation of glabels.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Vitaly Lipatov <lav@altlinux.ru>, 2002
+# Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+# Vitaly Lipatov <lav@altlinux.ru>, 2002, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 1.90.0\n"
-"POT-Creation-Date: 2004-08-08 00:43-0400\n"
-"PO-Revision-Date: 2002-10-27 17:07MSK\n"
+"Project-Id-Version: glabels 2.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-22 14:03-0500\n"
+"PO-Revision-Date: 2005-04-10 02:18MSK\n"
 "Last-Translator: Vitaly Lipatov <lav@altlinux.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/glabels.c:55
-msgid "Show view debugging messages."
-msgstr "Отображать отладочные сообщения просмотра."
-
-#: src/glabels.c:58
-msgid "Show item debugging messages."
-msgstr "Отображать отладочные сообщения пунктов."
-
-#: src/glabels.c:61
-msgid "Show printing debugging messages."
-msgstr "Отображать отладочные сообщения печати."
-
-#: src/glabels.c:64
-msgid "Show prefs debugging messages."
-msgstr "Отображать отладочные сообщения настроек."
-
-#: src/glabels.c:67
-msgid "Show file debugging messages."
-msgstr "Отображать отладочные сообщения файлов."
-
-#: src/glabels.c:70
-msgid "Show document debugging messages."
-msgstr "Отображать отладочные сообщения документа."
-
-#: src/glabels.c:73
-msgid "Show template debugging messages."
-msgstr "Отображать отладочные сообщения шаблона."
-
-#: src/glabels.c:76
-#, fuzzy
-msgid "Show paper debugging messages."
-msgstr "Отображать отладочные сообщения настроек."
-
-#: src/glabels.c:79
-msgid "Show xml debugging messages."
-msgstr "Отображать отладочные сообщения XML."
-
-#: src/glabels.c:82
-msgid "Show document merge debugging messages."
-msgstr "Отображать отладочные сообщения объединения документов."
-
-#: src/glabels.c:85
-msgid "Show commands debugging messages."
-msgstr "Отображать отладочные сообщения команд."
-
-#: src/glabels.c:88
-msgid "Show undo debugging messages."
-msgstr "Отображать отладочные сообщения отмены действий."
-
-#: src/glabels.c:91
-msgid "Show recent debugging messages."
-msgstr "Отображать недавние отладочные сообщения."
-
-#: src/glabels.c:94
-msgid "Show window debugging messages."
-msgstr "Отображать отладочные сообщения окон."
-
-#: src/glabels.c:97
-msgid "Show ui debugging messages."
-msgstr "Отображать отладочные сообщения интерфейса с пользователем."
-
-#: src/glabels.c:100
-#, fuzzy
-msgid "Show property_bar debugging messages."
-msgstr "Отображать отладочные сообщения настроек."
-
-#: src/glabels.c:103
-msgid "Show media select widget debugging messages."
-msgstr "Отображать отладочные сообщения выбора носителя."
-
-#: src/glabels.c:106
-msgid "Show mini preview widget debugging messages."
-msgstr "Отображать отладочные сообщения мини-просмотра."
-
-#: src/glabels.c:109
-#, fuzzy
-msgid "Show pixbuf cache debugging messages."
-msgstr "Отображать отладочные сообщения просмотра."
-
-#: src/glabels.c:112
-msgid "Show widget debugging messages."
-msgstr "Отображать отладочные сообщения виджетов."
-
-#: src/glabels.c:115
-#, fuzzy
-msgid "Show object editor debugging messages."
-msgstr "Отображать недавние отладочные сообщения."
-
-#: src/glabels.c:118
-msgid "Turn on all debugging messages."
-msgstr "Включить все отладочные сообщения."
-
-#: src/glabels.c:187
+#: src/glabels.c:116
 msgid "Could not initialize Bonobo!\n"
-msgstr "Невозможно инициализировать Bonobo!\n"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟я┌я▄ Bonobo!\n"
 
-#: src/glabels-batch.c:48
+#: src/glabels-batch.c:52
 msgid "print this message"
-msgstr "напечатать это сообщение"
+msgstr "п╫п╟п©п╣я┤п╟я┌п╟я┌я▄ я█я┌п╬ я│п╬п╬п╠я┴п╣п╫п╦п╣"
 
-#: src/glabels-batch.c:50
+#: src/glabels-batch.c:54
 msgid "print the version of glabels-batch being used"
-msgstr "напечатать используемую версию пакетной обработки glabels"
+msgstr "п╡я▀п╡п╬п╢п╦я┌ п╡п╣я─я│п╦я▌ п╦я│п©п╬п╩я▄п╥я┐п╣п╪п╬пЁп╬ glabels-batch"
 
-#: src/glabels-batch.c:52
+#: src/glabels-batch.c:56
 msgid "set output filename (default=\"output.ps\")"
-msgstr "установить название выходного файла (по умолчанию - \"output.ps\""
+msgstr "я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п╫п╟п╥п╡п╟п╫п╦п╣ п╡я▀я┘п╬п╢п╫п╬пЁп╬ я└п╟п╧п╩п╟ (п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ - \"output.ps\""
 
-#: src/glabels-batch.c:52
+#: src/glabels-batch.c:56 src/glabels-batch.c:70
 msgid "filename"
-msgstr "название"
+msgstr "п╫п╟п╥п╡п╟п╫п╦п╣"
 
-#: src/glabels-batch.c:54
+#: src/glabels-batch.c:58
 msgid "number of sheets (default=1)"
-msgstr "количество страниц (по умолчанию - 1)"
+msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ я│я┌я─п╟п╫п╦я├ (п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ - 1)"
 
-#: src/glabels-batch.c:54
+#: src/glabels-batch.c:58
 msgid "sheets"
-msgstr "страниц"
+msgstr "я│я┌я─п╟п╫п╦я├"
 
-#: src/glabels-batch.c:56
+#: src/glabels-batch.c:60
 msgid "number of copies (default=1)"
-msgstr "количество копий (по умолчанию - 1)"
+msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╨п╬п©п╦п╧ (п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ - 1)"
 
-#: src/glabels-batch.c:56
+#: src/glabels-batch.c:60
 msgid "copies"
-msgstr "копий"
+msgstr "п╨п╬п©п╦п╧"
 
-#: src/glabels-batch.c:58 src/print-dialog.c:336
+#: src/glabels-batch.c:62
+msgid "first label on first sheet (default=1)"
+msgstr "п©п╣я─п╡п╟я▐ я█я┌п╦п╨п╣я┌п╨п╟ п╫п╟ п©п╣я─п╡п╬п╧ я│я┌я─п╟п╫п╦я├п╣ (п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ - 1)"
+
+#: src/glabels-batch.c:62
+msgid "first"
+msgstr "п©п╣я─п╡п╬п╣"
+
+#: src/glabels-batch.c:64 src/print-dialog.c:336
 msgid "print outlines (to test printer alignment)"
-msgstr "напечатать контуры этикеток"
+msgstr "п©п╣я┤п╟я┌п╟я┌я▄ п╨п╬п╫я┌я┐я─я▀ я█я┌п╦п╨п╣я┌п╬п╨"
 
-#: src/glabels-batch.c:60 src/print-dialog.c:344
+#: src/glabels-batch.c:66 src/print-dialog.c:344
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "напечатать зеркально"
+msgstr "п©п╣я┤п╟я┌п╟я┌я▄ п©п╣я─п╣п╡я▒я─п╫я┐я┌п╬ (п╨п╟п╨ п╬я┌я─п╟п╤п╟п╣я┌я│я▐ п╡ п╥п╣я─п╨п╟п╩п╣)"
 
-#: src/glabels-batch.c:96
+#: src/glabels-batch.c:68 src/print-dialog.c:351
+msgid "print crop marks"
+msgstr "п©п╣я┤п╟я┌п╟я┌я▄ п╪п╣я┌п╨п╦ п╢п╩я▐ п╬п╠я─п╣п╥п╨п╦"
+
+#: src/glabels-batch.c:70
+msgid "input file for merging"
+msgstr "п╡я┘п╬п╢п╫п╬п╧ я└п╟п╧п╩ п╢п╩я▐ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐"
+
+#: src/glabels-batch.c:107
 msgid "[OPTION...] GLABELS_FILE..."
-msgstr "[ПАРАМЕТРЫ...] файл_glabels"
+msgstr "[п÷п░п═п░п°п∙п╒п═п╚...] я└п╟п╧п╩_glabels..."
 
-#: src/glabels-batch.c:116
+#: src/glabels-batch.c:127
+#, c-format
 msgid "missing glabels file\n"
-msgstr "не указан файл glabels\n"
+msgstr "п╫п╣ я┐п╨п╟п╥п╟п╫ я└п╟п╧п╩ glabels\n"
 
-#: src/glabels-batch.c:157
+#: src/glabels-batch.c:158
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦п╣ п╢п╬п╨я┐п╪п╣п╫я┌п╟ я│ я└п╟п╧п╩п╬п╪ glabels %s\n"
+
+#: src/glabels-batch.c:182
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "невозможно открыть файл %s\n"
+msgstr "п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s\n"
 
 #: src/window.c:244
-#, fuzzy
 msgid "(none) - gLabels"
-msgstr "(ничего) - glabels"
+msgstr "(п╫п╦я┤п╣пЁп╬) - gLabels"
 
 #: src/window.c:414
 msgid "(modified)"
-msgstr "(изменено)"
+msgstr "(п╦п╥п╪п╣п╫п╣п╫п╬)"
 
-#: src/stock.c:65 data/ui/glabels-ui.xml.h:165
-#, fuzzy
+#: src/stock.c:65 data/ui/glabels-ui.xml.h:162
 msgid "_Select Mode"
-msgstr "Режим выбора"
+msgstr "_п═п╣п╤п╦п╪ п╡я▀п╠п╬я─п╟"
 
-#: src/stock.c:66 data/ui/glabels-ui.xml.h:166
-#, fuzzy
+#: src/stock.c:66 data/ui/glabels-ui.xml.h:163
 msgid "_Text"
-msgstr "Текст"
+msgstr "_п╒п╣п╨я│я┌"
 
-#: src/stock.c:67 data/ui/glabels-ui.xml.h:151
-#, fuzzy
+#: src/stock.c:67 data/ui/glabels-ui.xml.h:148
 msgid "_Line"
-msgstr "Линия"
+msgstr "_п⌡п╦п╫п╦я▐"
 
-#: src/stock.c:68 data/ui/glabels-ui.xml.h:133
-#, fuzzy
+#: src/stock.c:68 data/ui/glabels-ui.xml.h:130
 msgid "_Box"
-msgstr "Прямоугольник"
+msgstr "_п÷я─я▐п╪п╬я┐пЁп╬п╩я▄п╫п╦п╨"
 
-#: src/stock.c:69 data/ui/glabels-ui.xml.h:144
-#, fuzzy
+#: src/stock.c:69 data/ui/glabels-ui.xml.h:141
 msgid "_Ellipse"
-msgstr "Эллипс"
+msgstr "_п╜п╩п╩п╦п©я│"
 
-#: src/stock.c:70 data/ui/glabels-ui.xml.h:149
-#, fuzzy
+#: src/stock.c:70 data/ui/glabels-ui.xml.h:146
 msgid "_Image"
-msgstr "Изображение"
+msgstr "_п≤п╥п╬п╠я─п╟п╤п╣п╫п╦п╣"
 
 #: src/stock.c:71 data/ui/glabels-ui.xml.h:11
-#, fuzzy
 msgid "Bar_code"
-msgstr "Штрих-код"
+msgstr "_п╗я┌я─п╦я┘-п╨п╬п╢"
 
 #: src/stock.c:72
-#, fuzzy
 msgid "_Merge Properties"
-msgstr "Свойства объединения..."
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ _п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #: src/stock.c:73
-#, fuzzy
 msgid "Object _Properties"
-msgstr "Свойства объекта..."
+msgstr "_п║п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╨я┌п╟"
 
 #: src/stock.c:74 data/ui/glabels-ui.xml.h:13
-#, fuzzy
 msgid "Bring to _Front"
-msgstr "На передний план"
+msgstr "п²п╟ _п©п╣я─п╣п╢п╫п╦п╧ п©п╩п╟п╫"
 
-#: src/stock.c:75 data/ui/glabels-ui.xml.h:110
-#, fuzzy
+#: src/stock.c:75 data/ui/glabels-ui.xml.h:109
 msgid "Send to _Back"
-msgstr "На задний план"
+msgstr "п²п╟ _п╥п╟п╢п╫п╦п╧ п©п╩п╟п╫"
 
-#: src/stock.c:76 data/ui/glabels-ui.xml.h:97
-#, fuzzy
+#: src/stock.c:76 data/ui/glabels-ui.xml.h:96
 msgid "Rotate _Left"
-msgstr "Повернуть"
+msgstr "п÷п╬п╡п╣я─п╫я┐я┌я▄ п╫п╟_п╩п╣п╡п╬"
 
-#: src/stock.c:77 data/ui/glabels-ui.xml.h:98
-#, fuzzy
+#: src/stock.c:77 data/ui/glabels-ui.xml.h:97
 msgid "Rotate _Right"
-msgstr "Повернуть"
+msgstr "п÷п╬п╡п╣я─п╫я┐я┌я▄ п╫п╟_п©я─п╟п╡п╬"
 
 #: src/stock.c:78 data/ui/glabels-ui.xml.h:52
 msgid "Flip _Horizontally"
-msgstr ""
+msgstr "п·я┌я─п╟п╥п╦я┌я▄ _пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫п╬"
 
 #: src/stock.c:79 data/ui/glabels-ui.xml.h:53
 msgid "Flip _Vertically"
-msgstr ""
+msgstr "п·я┌я─п╟п╥п╦я┌я▄ _п╡п╣я─я┌п╦п╨п╟п╩я▄п╫п╬"
 
-#: src/stock.c:80 data/ui/glabels-ui.xml.h:150
+#: src/stock.c:80 data/ui/glabels-ui.xml.h:147
 msgid "_Lefts"
-msgstr ""
+msgstr "п║_п╩п╣п╡п╟"
 
-#: src/stock.c:81 data/ui/glabels-ui.xml.h:162
+#: src/stock.c:81 data/ui/glabels-ui.xml.h:159
 msgid "_Rights"
-msgstr ""
+msgstr "п║_п©я─п╟п╡п╟"
 
-#: src/stock.c:82 data/ui/glabels-ui.xml.h:134
-#, fuzzy
+#: src/stock.c:82 data/ui/glabels-ui.xml.h:131
 msgid "_Centers"
-msgstr "_Содержание справки"
+msgstr "п÷п╬ _я├п╣п╫я┌я─я┐"
 
-#: src/stock.c:83 data/ui/glabels-ui.xml.h:167
+#: src/stock.c:83 data/ui/glabels-ui.xml.h:164
 msgid "_Tops"
-msgstr ""
+msgstr "п÷п╬ _п╡п╣я─я┘я┐"
 
 #: src/stock.c:84
 msgid "Bottoms"
-msgstr ""
+msgstr "п÷п╬ п╫п╦п╥я┐"
 
 #: src/stock.c:85
-#, fuzzy
 msgid "Centers"
-msgstr "Содержание справки"
+msgstr "п÷п╬ я├п╣п╫я┌я─я┐"
 
 #: src/stock.c:86 src/stock.c:87 data/ui/glabels-ui.xml.h:62
 msgid "Label Ce_nter"
-msgstr ""
+msgstr "_п╕п╣п╫я┌я─ я█я┌п╦п╨п╣я┌п╨п╦"
 
 #: src/stock.c:88 data/ui/glabels-ui.xml.h:51
 msgid "Fill color"
-msgstr ""
+msgstr "п╕п╡п╣я┌ п╥п╟п╩п╦п╡п╨п╦"
 
 #: src/stock.c:89 data/ui/glabels-ui.xml.h:64
 msgid "Line color"
-msgstr ""
+msgstr "п╕п╡п╣я┌ п╩п╦п╫п╦п╦"
 
 #: src/stock.c:90 src/stock.c:92
-#, fuzzy
 msgid "Linked"
-msgstr "Линия"
+msgstr "п÷я─п╦п╨я─п╣п©п╩п╣п╫п╬"
 
 #: src/stock.c:91 src/stock.c:93
-#, fuzzy
 msgid "Not Linked"
-msgstr "Ничего"
+msgstr "п²п╣ п©я─п╦п╨я─п╣п©п╩п╣п╫п╬"
 
-#: src/ui-property-bar.c:345 src/object-editor.c:499
-#, fuzzy
+#: src/ui-property-bar.c:345 src/object-editor.c:587
 msgid "Default"
-msgstr "Удалить"
+msgstr "п÷п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌"
 
-#: src/ui-property-bar.c:360 src/object-editor.c:512
+#: src/ui-property-bar.c:360 src/object-editor.c:600
 msgid "No fill"
-msgstr ""
+msgstr "п²п╣ п╥п╟п©п╬п╩п╫я▐я┌я▄"
 
-#: src/ui-property-bar.c:375 src/object-editor.c:505
-#, fuzzy
+#: src/ui-property-bar.c:375 src/object-editor.c:593
 msgid "No line"
-msgstr "Ничего"
+msgstr "п²п╣я┌ п╩п╦п╫п╦п╦"
 
 #: src/ui-sidebar.c:180
-#, fuzzy
 msgid "Object properties"
-msgstr "Свойства объекта..."
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╨я┌п╟"
 
 #: src/commands.c:385
 msgid ""
@@ -326,27 +236,26 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
 msgstr ""
-"Программа создания этикеток и визиток для GNOME\n"
+"п÷я─п╬пЁя─п╟п╪п╪п╟ я│п╬п╥п╢п╟п╫п╦я▐ я█я┌п╦п╨п╣я┌п╬п╨ п╦ п╡п╦п╥п╦я┌п╬п╨ п╢п╩я▐ GNOME\n"
 " \n"
-"Glabels является свободным программным обеспечением; вы вправе "
-"распространять её и/или модифицировать в соответствии с условиями версии 2 "
-"либо по вашему выбору более поздней версии Стандартной Общественной Лицензии "
-"GNU, опубликованной Free Software Foundation.\n"
+"Glabels я▐п╡п╩я▐п╣я┌я│я▐ я│п╡п╬п╠п╬п╢п╫я▀п╪ п©я─п╬пЁя─п╟п╪п╪п╫я▀п╪ п╬п╠п╣я│п©п╣я┤п╣п╫п╦п╣п╪; п╡я▀ п╡п©я─п╟п╡п╣ "
+"я─п╟я│п©я─п╬я│я┌я─п╟п╫я▐я┌я▄ п╣я▒ п╦/п╦п╩п╦ п╪п╬п╢п╦я└п╦я├п╦я─п╬п╡п╟я┌я▄ п╡ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╦ я│ я┐я│п╩п╬п╡п╦я▐п╪п╦ п╡п╣я─я│п╦п╦ 2 "
+"п╩п╦п╠п╬ п©п╬ п╡п╟я┬п╣п╪я┐ п╡я▀п╠п╬я─я┐ п╠п╬п╩п╣п╣ п©п╬п╥п╢п╫п╣п╧ п╡п╣я─я│п╦п╦ п║я┌п╟п╫п╢п╟я─я┌п╫п╬п╧ п·п╠я┴п╣я│я┌п╡п╣п╫п╫п╬п╧ п⌡п╦я├п╣п╫п╥п╦п╦ "
+"GNU, п╬п©я┐п╠п╩п╦п╨п╬п╡п╟п╫п╫п╬п╧ Free Software Foundation.\n"
 " \n"
-"Мы распространяем данную программу в надежде на то, что она будет вам "
-"полезной, однако НЕ ПРЕДОСТАВЛЯЕМ НА НЕЁ НИКАКИХ ГАРАНТИЙ, в том числе "
-"ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ПРИГОДНОСТИ ДЛЯ ИСПОЛЬЗОВАНИЯ В "
-"КОНКРЕТНЫХ ЦЕЛЯХ. Для получения более подробной информации ознакомьтесь со "
-"Стандартной Общественной Лицензией GNU.\n"
+"п°я▀ я─п╟я│п©я─п╬я│я┌я─п╟п╫я▐п╣п╪ п╢п╟п╫п╫я┐я▌ п©я─п╬пЁя─п╟п╪п╪я┐ п╡ п╫п╟п╢п╣п╤п╢п╣ п╫п╟ я┌п╬, я┤я┌п╬ п╬п╫п╟ п╠я┐п╢п╣я┌ п╡п╟п╪ "
+"п©п╬п╩п╣п╥п╫п╬п╧, п╬п╢п╫п╟п╨п╬ п²п∙ п÷п═п∙п■п·п║п╒п░п▓п⌡п╞п∙п° п²п░ п²п∙п│ п²п≤п п░п п≤п╔ п⌠п░п═п░п²п╒п≤п≥, п╡ я┌п╬п╪ я┤п╦я│п╩п╣ "
+"п⌠п░п═п░п²п╒п≤п≤ п╒п·п▓п░п═п²п·п⌠п· п║п·п║п╒п·п╞п²п≤п╞ п÷п═п≤ п÷п═п·п■п░п√п∙ п╦ п÷п═п≤п⌠п·п■п²п·п║п╒п≤ п■п⌡п╞ п≤п║п÷п·п⌡п╛п≈п·п▓п░п²п≤п╞ п▓ "
+"п п·п²п п═п∙п╒п²п╚п╔ п╕п∙п⌡п╞п╔. п■п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ п╠п╬п╩п╣п╣ п©п╬п╢я─п╬п╠п╫п╬п╧ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬п╥п╫п╟п╨п╬п╪я▄я┌п╣я│я▄ я│п╬ "
+"п║я┌п╟п╫п╢п╟я─я┌п╫п╬п╧ п·п╠я┴п╣я│я┌п╡п╣п╫п╫п╬п╧ п⌡п╦я├п╣п╫п╥п╦п╣п╧ GNU.\n"
 
 #: src/commands.c:399
 msgid "See the file AUTHORS for additional credits,"
-msgstr "Смотрите в файл AUTHORS для дополнительной информации,"
+msgstr "п║п╪п╬я┌я─п╦я┌п╣ п╡ я└п╟п╧п╩ AUTHORS п╢п╩я▐ п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╬п╧ п╦п╫я└п╬я─п╪п╟я├п╦п╦,"
 
 #: src/commands.c:400
-#, fuzzy
 msgid "or visit http://glabels.sourceforge.net/"
-msgstr "или посетите сайт http://snaught.com/glabels"
+msgstr "п╦п╩п╦ п©п╬я│п╣я┌п╦я┌п╣ я│п╟п╧я┌ http://glabels.sourceforge.net/"
 
 #: src/commands.c:409
 msgid " "
@@ -358,380 +267,363 @@ msgstr "glabels"
 
 #: src/file.c:100
 msgid "New Label or Card"
-msgstr "Новая этикетка или визитка"
+msgstr "п²п╬п╡п╟я▐ я█я┌п╦п╨п╣я┌п╨п╟ п╦п╩п╦ п╡п╦п╥п╦я┌п╨п╟"
 
 #: src/file.c:132 src/file.c:304
 msgid "Media Type"
-msgstr "Тип носителя"
+msgstr "п═п╟п╥п╪п╣я─ п╠я┐п╪п╟пЁп╦"
 
 #: src/file.c:138 src/file.c:310
 msgid "Label orientation"
-msgstr "Расположение этикетки"
+msgstr "п═п╟я│п©п╬п╩п╬п╤п╣п╫п╦п╣ я█я┌п╦п╨п╣я┌п╨п╦"
 
 #: src/file.c:269
-#, fuzzy
 msgid "Label properties"
-msgstr "Свойства объекта..."
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ я█я┌п╦п╨п╣я┌п╨п╦"
 
 #: src/file.c:452 src/file.c:870
 msgid "All files"
-msgstr ""
+msgstr "п▓я│п╣ я└п╟п╧п╩я▀"
 
 #: src/file.c:457 src/file.c:875
-#, fuzzy
 msgid "gLabels documents"
-msgstr "Параметры"
+msgstr "п■п╬п╨я┐п╪п╣п╫я┌я▀ gLabels"
 
 #: src/file.c:505 src/file.c:617 src/file.c:934 src/file.c:1130
 msgid "Empty file name selection"
-msgstr "Пустой выбор файла"
+msgstr "п÷я┐я│я┌п╬п╧ п╡я▀п╠п╬я─ я└п╟п╧п╩п╟"
 
 #: src/file.c:506 src/file.c:520 src/file.c:618 src/file.c:632
 msgid "Please select a file or supply a valid file name"
-msgstr "Выберите файл или введите корректное название файла"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ я└п╟п╧п╩ п╦п╩п╦ п╡п╡п╣п╢п╦я┌п╣ п╨п╬я─я─п╣п╨я┌п╫п╬п╣ п╫п╟п╥п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟"
 
 #: src/file.c:519 src/file.c:631
 msgid "File does not exist"
-msgstr "Файл не существует"
+msgstr "п╓п╟п╧п╩ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
-#: src/file.c:563 data/ui/glabels-ui.xml.h:75
+#: src/file.c:563 data/ui/glabels-ui.xml.h:74
 msgid "Open"
-msgstr "Открыть"
+msgstr "п·я┌п╨я─я▀я┌я▄"
 
 #: src/file.c:565
 msgid "Open label"
-msgstr "Открыть этикетку"
+msgstr "п·я┌п╨я─я▀я┌я▄ я█я┌п╦п╨п╣я┌п╨я┐"
 
 #: src/file.c:707
 #, c-format
 msgid "Could not open file \"%s\""
-msgstr "Невозможно открыть файл  \"%s\""
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩  \"%s\""
 
 #: src/file.c:715
 msgid "Not a supported file format"
-msgstr "Файл неподдерживаемого формата"
+msgstr "п╓п╟п╧п╩ п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╬пЁп╬ я└п╬я─п╪п╟я┌п╟"
 
 #: src/file.c:797 src/file.c:979 src/file.c:1174
 #, c-format
 msgid "Could not save file \"%s\""
-msgstr "Невозможно сохранить файл \"%s\""
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ \"%s\""
 
 #: src/file.c:805 src/file.c:987 src/file.c:1182
 msgid "Error encountered during save.  The file is still not saved."
-msgstr "Произошла ошибка при сохранении файла.  Файл всё ещё не сохранён."
+msgstr "п÷я─п╬п╦п╥п╬я┬п╩п╟ п╬я┬п╦п╠п╨п╟ п©я─п╦ я│п╬я┘я─п╟п╫п╣п╫п╦п╦ я└п╟п╧п╩п╟.  п╓п╟п╧п╩ п╡я│я▒ п╣я┴я▒ п╫п╣ я│п╬я┘я─п╟п╫я▒п╫."
 
 #: src/file.c:848 src/file.c:1048
-#, fuzzy, c-format
+#, c-format
 msgid "Save \"%s\" as"
-msgstr "Сохранить этикетку как"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ \"%s\" п╨п╟п╨"
 
 #: src/file.c:935 src/file.c:1131
 msgid "Please supply a valid file name"
-msgstr "Укажите корректное название файла"
+msgstr "пёп╨п╟п╤п╦я┌п╣ п╨п╬я─я─п╣п╨я┌п╫п╬п╣ п╫п╟п╥п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟"
 
 #: src/file.c:952 src/file.c:1147
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "Перезаписать файла \"%s\"?"
+msgstr "п÷п╣я─п╣п╥п╟п©п╦я│п╟я┌я▄ я└п╟п╧п╩ \"%s\"?"
 
 #: src/file.c:960 src/file.c:1155
 msgid "File already exists."
-msgstr "Файл уже существует."
+msgstr "п╓п╟п╧п╩ я┐п╤п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌."
 
 #: src/file.c:1271
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Сохранить изменения в документе \"%s\" перед закрытием?"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╦п╥п╪п╣п╫п╣п╫п╦я▐ п╡ п╢п╬п╨я┐п╪п╣п╫я┌п╣ \"%s\" п©п╣я─п╣п╢ п╥п╟п╨я─я▀я┌п╦п╣п╪?"
 
 #: src/file.c:1279
 msgid "Your changes will be lost if you don't save them."
-msgstr "Все изменения будут потеряны, если вы их не сохраните."
+msgstr "п▓я│п╣ п╦п╥п╪п╣п╫п╣п╫п╦я▐ п╠я┐п╢я┐я┌ п©п╬я┌п╣я─я▐п╫я▀, п╣я│п╩п╦ п╡я▀ п╦я┘ п╫п╣ я│п╬я┘я─п╟п╫п╦я┌п╣."
 
 #: src/file.c:1282
 msgid "Close without saving"
-msgstr "Закрыть без сохранения"
+msgstr "п≈п╟п╨я─я▀я┌я▄ п╠п╣п╥ я│п╬я┘я─п╟п╫п╣п╫п╦я▐"
 
 #. Should not happen
 #: src/prefs.c:156 src/prefs.c:163 data/glade/prefs-dialog.glade.h:23
 #: data/glade/object-editor.glade.h:37
 msgid "points"
-msgstr "точек"
+msgstr "я┌п╬я┤п╣п╨"
 
 #: src/prefs.c:158 data/glade/object-editor.glade.h:36
 #: data/glade/template-designer.glade.h:74
 msgid "inches"
-msgstr "дюймов"
+msgstr "п╢я▌п╧п╪п╬п╡"
 
 #: src/prefs.c:160
 msgid "mm"
-msgstr "мм"
+msgstr "п╪п╪"
 
 #: src/prefs-dialog.c:248 data/glade/prefs-dialog.glade.h:22
-#, fuzzy
 msgid "gLabels Preferences"
-msgstr "Параметры"
+msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀ gLabels"
 
 #.
 #. * Submenu: Order
 #.
-#: src/view.c:3570 data/ui/glabels-ui.xml.h:157
+#: src/view.c:3574 data/ui/glabels-ui.xml.h:154
 msgid "_Order"
-msgstr ""
+msgstr "_п÷п╬я─я▐п╢п╬п╨"
 
 #.
 #. * Submenu: Rotate/Flip
 #.
-#: src/view.c:3591 data/ui/glabels-ui.xml.h:163
-#, fuzzy
+#: src/view.c:3595 data/ui/glabels-ui.xml.h:160
 msgid "_Rotate/Flip"
-msgstr "Повернуть"
+msgstr "_п÷п╬п╡п╣я─п╫я┐я┌я▄/п·я┌я─п╟п╥п╦я┌я▄"
 
 #.
 #. * Submenu: Align Horizontally
 #.
-#: src/view.c:3624
+#: src/view.c:3628
 msgid "Align _Horizontally"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ _пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫п╬"
 
 #.
 #. * Submenu: Align Vertically
 #.
-#: src/view.c:3663
+#: src/view.c:3667
 msgid "Align _Vertically"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ _п╡п╣я─я┌п╦п╨п╟п╩я▄п╫п╬"
 
-#: src/view.c:3724 data/ui/glabels-ui.xml.h:140
+#: src/view.c:3728 data/ui/glabels-ui.xml.h:137
 msgid "_Delete"
-msgstr "У_далить"
+msgstr "пё_п╢п╟п╩п╦я┌я▄"
 
 #. Build editor.
-#: src/view-box.c:223
-#, fuzzy
+#: src/view-box.c:236
 msgid "Box object properties"
-msgstr "Изменить свойства объекта типа прямоугольник"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ п©я─я▐п╪п╬я┐пЁп╬п╩я▄п╫п╦п╨п╟"
 
 #. Build editor.
-#: src/view-ellipse.c:223
-#, fuzzy
+#: src/view-ellipse.c:236
 msgid "Ellipse object properties"
-msgstr "Исправить свойства объекта типа эллипс"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ я█п╩п╩п╦п©я│п╟"
 
 #. Build editor.
-#: src/view-line.c:223
-#, fuzzy
+#: src/view-line.c:229
 msgid "Line object properties"
-msgstr "Изменить свойства объекта"
+msgstr "п║п╡п╬п╧я│я┌п╡п╬ п╩п╦п╫п╦п╦"
 
 #. Build editor.
-#: src/view-image.c:222
-#, fuzzy
+#: src/view-image.c:223
 msgid "Image object properties"
-msgstr "Исправить свойства объекта типа изображение"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦я▐"
 
 #. Build editor.
-#: src/view-text.c:250
-#, fuzzy
+#: src/view-text.c:251
 msgid "Text object properties"
-msgstr "Изменить свойства объекта"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ я┌п╣п╨я│я┌п╟"
 
-#: src/view-text.c:562 data/glade/object-editor.glade.h:28
+#: src/view-text.c:571 data/glade/object-editor.glade.h:28
 msgid "Text"
-msgstr "Текст"
+msgstr "п╒п╣п╨я│я┌"
 
 #. Build editor.
-#: src/view-barcode.c:209
-#, fuzzy
+#: src/view-barcode.c:210
 msgid "Barcode object properties"
-msgstr "Изменить свойства объекта типа штрих-код"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╨я┌п╟ я┌п╦п©п╟ я┬я┌я─п╦я┘-п╨п╬п╢"
 
-#: src/view-barcode.c:579 src/print.c:1088
-#, fuzzy
+#: src/view-barcode.c:594 src/print.c:1125
 msgid "Invalid barcode data"
-msgstr "Неверный штрих-код"
+msgstr "п²п╣п╡п╣я─п╫я▀п╣ п╢п╟п╫п╫я▀п╣ я┬я┌я─п╦я┘-п╨п╬п╢п╟"
 
 #: src/merge-properties-dialog.c:231
-#, fuzzy
 msgid "Merge Properties"
-msgstr "Свойства объединения..."
+msgstr "п║п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #. ---- Source section ----
 #: src/merge-properties-dialog.c:237
 msgid "Source"
-msgstr "Источник"
+msgstr "п≤я│я┌п╬я┤п╫п╦п╨"
 
 #: src/merge-properties-dialog.c:245
 msgid "Format:"
-msgstr "Формат:"
+msgstr "п╓п╬я─п╪п╟я┌:"
 
 #. Location line
 #: src/merge-properties-dialog.c:273
 msgid "Location:"
-msgstr "Расположение:"
+msgstr "п═п╟я│п©п╬п╩п╬п╤п╣п╫п╦п╣:"
 
 #: src/merge-properties-dialog.c:282 src/merge-properties-dialog.c:393
 msgid "Select merge-database source"
-msgstr "Выбрать источник объединения-базы данных"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╦я│я┌п╬я┤п╫п╦п╨ п╢п╟п╫п╫я▀я┘ п╢п╩я▐ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #: src/merge-properties-dialog.c:289 src/merge-properties-dialog.c:404
 msgid "N/A"
-msgstr "Недоступно"
+msgstr "п²п╣п╢п╬я│я┌я┐п©п╫п╬"
 
 #. ---- Sample Fields section ----
 #: src/merge-properties-dialog.c:300
 msgid "Record selection/preview:"
-msgstr ""
+msgstr "п÷я─п╬я│п╪п╬я┌я─ п╦ п╡я▀п╠п╬я─ п╥п╟п©п╦я│п╣п╧:"
 
 #: src/merge-properties-dialog.c:326
-#, fuzzy
 msgid "Select"
-msgstr "Выбрать всё"
+msgstr "п▓я▀п╠я─п╟п╫"
 
 #: src/merge-properties-dialog.c:334
 msgid "Record/Field"
-msgstr ""
+msgstr "п≈п╟п©п╦я│я▄/п÷п╬п╩п╣"
 
 #: src/merge-properties-dialog.c:342 data/glade/object-editor.glade.h:9
 msgid "Data"
-msgstr "Данные"
+msgstr "п■п╟п╫п╫я▀п╣"
 
-#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:82
+#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:81
 msgid "Print"
-msgstr "Напечатать"
+msgstr "п²п╟п©п╣я┤п╟я┌п╟я┌я▄"
 
 #: src/print-dialog.c:281
 msgid "_Job"
-msgstr "_Задание"
+msgstr "_п≈п╟п╢п╟п╫п╦п╣"
 
 #: src/print-dialog.c:286
 msgid "P_rinter"
-msgstr "П_ринтер"
+msgstr "п÷_я─п╦п╫я┌п╣я─"
 
 #. ----------- Add simple-copies widget ------------
 #: src/print-dialog.c:314
 msgid "Copies"
-msgstr "Копий"
+msgstr "п п╬п©п╦п╧"
 
 #. ------- Add merge control widget ------------
 #: src/print-dialog.c:322
 msgid "Document merge control"
-msgstr "Управление объединением"
+msgstr "пёп©я─п╟п╡п╩п╣п╫п╦п╣ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. ----------- Add custom print options area ------------
 #: src/print-dialog.c:330
 msgid "Options"
-msgstr "Параметры"
-
-#: src/print-dialog.c:351
-msgid "print crop marks"
-msgstr ""
+msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀"
 
 #: src/print-dialog.c:553 src/print-dialog.c:592
 msgid "Print preview"
-msgstr "Просмотреть"
+msgstr "п÷я─п╬я│п╪п╬я┌я─п╣я┌я▄"
 
 #: src/template-designer.c:409 data/glade/template-designer.glade.h:73
 msgid "gLabels Template Designer"
-msgstr ""
+msgstr "п■п╦п╥п╟п╧п╫п╣я─ я┬п╟п╠п╩п╬п╫п╬п╡ gLabels"
 
 #: src/bc.c:60
 msgid "POSTNET (any)"
-msgstr ""
+msgstr "POSTNET (п╩я▌п╠п╬п╧)"
 
 #: src/bc.c:63
 msgid "POSTNET-5 (ZIP only)"
-msgstr ""
+msgstr "POSTNET-5 (я┌п╬п╩я▄п╨п╬ п©п╬я┤я┌п╬п╡я▀п╧ п╦п╫п╢п╣п╨я│)"
 
 #: src/bc.c:66
 msgid "POSTNET-9 (ZIP+4)"
-msgstr ""
+msgstr "POSTNET-9 (ZIP+4)"
 
 #: src/bc.c:69
 msgid "POSTNET-11 (DPBC)"
-msgstr ""
+msgstr "POSTNET-11 (DPBC)"
 
 #: src/bc.c:72
 msgid "EAN (any)"
-msgstr ""
+msgstr "EAN (п╩я▌п╠п╬п╧)"
 
 #: src/bc.c:75
 msgid "EAN-8"
-msgstr ""
+msgstr "EAN-8"
 
 #: src/bc.c:78
 msgid "EAN-8 +2"
-msgstr ""
+msgstr "EAN-8 +2"
 
 #: src/bc.c:81
 msgid "EAN-8 +5"
-msgstr ""
+msgstr "EAN-8 +5"
 
 #: src/bc.c:84
 msgid "EAN-13"
-msgstr ""
+msgstr "EAN-13"
 
 #: src/bc.c:87
 msgid "EAN-13 +2"
-msgstr ""
+msgstr "EAN-13 +2"
 
 #: src/bc.c:90
 msgid "EAN-13 +5"
-msgstr ""
+msgstr "EAN-13 +5"
 
 #: src/bc.c:93
 msgid "UPC (UPC-A or UPC-E)"
-msgstr ""
+msgstr "UPC (UPC-A or UPC-E)"
 
 #: src/bc.c:96
 msgid "UPC-A"
-msgstr ""
+msgstr "UPC-A"
 
 #: src/bc.c:99
 msgid "UPC-A +2"
-msgstr ""
+msgstr "UPC-A +2"
 
 #: src/bc.c:102
 msgid "UPC-A +5"
-msgstr ""
+msgstr "UPC-A +5"
 
 #: src/bc.c:105
 msgid "UPC-E"
-msgstr ""
+msgstr "UPC-E"
 
 #: src/bc.c:108
 msgid "UPC-E +2"
-msgstr ""
+msgstr "UPC-E +2"
 
 #: src/bc.c:111
 msgid "UPC-E +5"
-msgstr ""
+msgstr "UPC-E +5"
 
 #: src/bc.c:114
 msgid "ISBN"
-msgstr ""
+msgstr "ISBN"
 
 #: src/bc.c:117
 msgid "ISBN +5"
-msgstr ""
+msgstr "ISBN +5"
 
 #: src/bc.c:120
 msgid "Code 39"
-msgstr ""
+msgstr "Code 39"
 
 #: src/bc.c:123
 msgid "Code 128"
-msgstr ""
+msgstr "Code 128"
 
 #: src/bc.c:126
 msgid "Code 128C"
-msgstr ""
+msgstr "Code 128C"
 
 #: src/bc.c:129
 msgid "Code 128B"
-msgstr ""
+msgstr "Code 128B"
 
 #: src/bc.c:132
 msgid "Interleaved 2 of 5"
-msgstr ""
+msgstr "Interleaved 2 of 5"
 
 #: src/bc.c:135
 msgid "Codabar"
@@ -739,7 +631,7 @@ msgstr ""
 
 #: src/bc.c:138
 msgid "MSI"
-msgstr ""
+msgstr "MSI"
 
 #: src/bc.c:141
 msgid "Plessey"
@@ -747,158 +639,153 @@ msgstr ""
 
 #: src/label.c:569
 msgid "Untitled"
-msgstr "Без названия"
+msgstr "п▒п╣п╥ п╫п╟п╥п╡п╟п╫п╦я▐"
 
 #: src/xml-label.c:176 src/xml-label.c:213
 msgid "xmlParseFile error"
-msgstr "Ошибка при разборе файла XML"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ я─п╟п╥п╠п╬я─п╣ я└п╟п╧п╩п╟ XML"
 
 #: src/xml-label.c:250
 msgid "No document root"
-msgstr "Нет корня документа"
+msgstr "п²п╣я┌ п╨п╬я─п╫я▐ п╢п╬п╨я┐п╪п╣п╫я┌п╟"
 
 #: src/xml-label.c:264
 msgid "Importing from glabels 0.1 format"
-msgstr "Импортируем из файла glabels версии 0.1"
+msgstr "п≤п╪п©п╬я─я┌п╦я─я┐п╣п╪ п╦п╥ я└п╟п╧п╩п╟ glabels п╡п╣я─я│п╦п╦ 0.1"
 
 #: src/xml-label.c:272
 msgid "Importing from glabels 0.4 format"
-msgstr "Импортируем из файла glabels версии 0.4"
+msgstr "п≤п╪п©п╬я─я┌п╦я─я┐п╣п╪ п╦п╥ я└п╟п╧п╩п╟ glabels п╡п╣я─я│п╦п╦ 0.4"
 
 #: src/xml-label.c:279
-#, fuzzy
 msgid "Importing from glabels 1.91 format"
-msgstr "Импортируем из файла glabels версии 0.1"
+msgstr "п≤п╪п©п╬я─я┌п╦я─я┐п╣п╪ п╦п╥ я└п╬я─п╪п╟я┌п╟ glabels п╡п╣я─я│п╦п╦ 1.91"
 
 #: src/xml-label.c:282
 msgid "bad document, unknown glabels Namespace"
-msgstr "документ неверного типа, неизвестное пространство имён glabels"
+msgstr "п╢п╬п╨я┐п╪п╣п╫я┌ п╫п╣п╡п╣я─п╫п╬пЁп╬ я┌п╦п©п╟, п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪я▒п╫ glabels"
 
 #: src/xml-label.c:311 src/xml-label-04.c:75 src/xml-label-191.c:131
 #, c-format
 msgid "Bad root node = \"%s\""
-msgstr "Неверный корневой узел = \"%s\""
+msgstr "п²п╣п╡п╣я─п╫я▀п╧ п╨п╬я─п╫п╣п╡п╬п╧ я┐п╥п╣п╩ = \"%s\""
 
 #: src/xml-label.c:348 src/xml-label-191.c:165
-#, fuzzy, c-format
+#, c-format
 msgid "bad node in Document node =  \"%s\""
-msgstr "Неверный корневой узел = \"%s\""
+msgstr "п²п╣п╡п╣я─п╫я▀п╧ я┐п╥п╣п╩ п╡ я┐п╥п╩п╣ п╢п╬п╨я┐п╪п╣п╫я┌п╟=  \"%s\""
 
 #: src/xml-label.c:393 src/xml-label-04.c:123 src/xml-label-191.c:197
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr "неверный узел =  \"%s\""
+msgstr "п╫п╣п╡п╣я─п╫я▀п╧ я┐п╥п╣п╩ =  \"%s\""
 
-#: src/xml-label.c:796 src/xml-label-191.c:605
-#, fuzzy, c-format
+#: src/xml-label.c:855 src/xml-label-191.c:624
+#, c-format
 msgid "bad node in Data node =  \"%s\""
-msgstr "неверный узел =  \"%s\""
+msgstr "п╫п╣п╡п╣я─п╫я▀п╧ я┐п╥п╣п╩ п╡ я┐п╥п╩п╣ п╢п╟п╫п╫я▀я┘=  \"%s\""
 
-#: src/xml-label.c:962 libglabels/xml-template.c:528
+#: src/xml-label.c:1030 libglabels/xml-template.c:535
 msgid "Utf8 conversion error."
-msgstr ""
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟п╫п╦я▐ UTF8."
 
-#: src/xml-label.c:969 libglabels/xml-template.c:535
+#: src/xml-label.c:1037 libglabels/xml-template.c:542
 msgid "Problem saving xml file."
-msgstr "Проблемы при сохранении файла XML"
+msgstr "п÷я─п╬п╠п╩п╣п╪я▀ п©я─п╦ я│п╬я┘я─п╟п╫п╣п╫п╦п╦ я└п╟п╧п╩п╟ XML"
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: src/xml-label-191.c:680 libglabels/xml-template.c:192
+#: src/xml-label-191.c:699 libglabels/xml-template.c:199
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
-msgstr ""
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я─п╟п╥п╪п╣я─п╟ я│я┌я─п╟п╫п╦я├я▀ \"%s\", п©я─п╬п╠я┐п╣п╪ п╨п╟п╨ п╫п╟п╥п╡п╟п╫п╦п╣"
 
-#: src/xml-label-191.c:690 libglabels/xml-template.c:202
+#: src/xml-label-191.c:709 libglabels/xml-template.c:209
 #, c-format
 msgid "Unknown page size id or name \"%s\""
-msgstr ""
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ я─п╟п╥п╪п╣я─п╟ я│я┌я─п╟п╫п╦я├я▀ п╦п╩п╦ п╫п╟п╥п╡п╟п╫п╦п╣ \"%s\""
 
 #: src/merge.c:172 src/merge.c:213 src/merge.c:399 src/merge.c:402
 msgid "None"
-msgstr "Ничего"
+msgstr "п²п╦я┤п╣пЁп╬"
 
 #: src/merge-init.c:53
-#, fuzzy
 msgid "Text file with comma delimeters (CSV)"
-msgstr "Текст с запятыми в качестве разделителя"
+msgstr "п╒п╣п╨я│я┌ я│ я─п╟п╥п╢п╣п╩п╦я┌п╣п╩п╣п╪ \"п╥п╟п©я▐я┌п╟я▐\" (CSV)"
 
 #: src/merge-init.c:60
-#, fuzzy
 msgid "Text file with colon delimeters"
-msgstr "Текст с двоеточиями в качестве разделителя"
+msgstr "п╒п╣п╨я│я┌ я│ я─п╟п╥п╢п╣п╩п╦я┌п╣п╩п╣п╪ \"п╢п╡п╬п╣я┌п╬я┤п╦п╣\""
 
 #: src/merge-init.c:67
-#, fuzzy
 msgid "Text file with tab delimeters"
-msgstr "Текст с символами табуляции в качестве разделителя"
+msgstr "п╒п╣п╨я│я┌ я│ я─п╟п╥п╢п╣п╩п╦я┌п╣п╩п╣п╪ \"я│п╦п╪п╡п╬п╩ я┌п╟п╠я┐п╩я▐я├п╦п╦\""
 
 #: src/wdgt-image-select.c:201 data/glade/object-editor.glade.h:11
-#, fuzzy
 msgid "File:"
-msgstr "_Файл"
+msgstr "п╓п╟п╧п╩:"
 
 #: src/wdgt-image-select.c:245 data/glade/object-editor.glade.h:16
 msgid "Key:"
-msgstr "Ключ:"
+msgstr "п п╩я▌я┤:"
 
 #: src/wdgt-print-copies.c:179
 msgid "Sheets:"
-msgstr "Листов:"
+msgstr "п⌡п╦я│я┌п╬п╡:"
 
 #: src/wdgt-print-copies.c:197
 msgid "Labels"
-msgstr "Этикетки"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦"
 
 #: src/wdgt-print-copies.c:200
 msgid "from:"
-msgstr "с:"
+msgstr "я│:"
 
 #: src/wdgt-print-copies.c:207
 msgid "to:"
-msgstr "до:"
+msgstr "п╢п╬:"
 
 #: src/wdgt-print-merge.c:178
 msgid "Start on label"
-msgstr "Начать с этикетки"
+msgstr "п²п╟я┤п╟я┌я▄ я│ я█я┌п╦п╨п╣я┌п╨п╦"
 
 #: src/wdgt-print-merge.c:186
 msgid "on 1st sheet"
-msgstr "на первом листе"
+msgstr "п╫п╟ п©п╣я─п╡п╬п╪ п╩п╦я│я┌п╣"
 
 #: src/wdgt-print-merge.c:195
 msgid "Copies:"
-msgstr "Копий:"
+msgstr "п п╬п©п╦п╧:"
 
 #: src/wdgt-print-merge.c:201
 msgid "Collate"
-msgstr "Собирать"
+msgstr "п║п╬п╠п╦я─п╟я┌я▄"
 
 #: src/wdgt-media-select.c:269 data/glade/template-designer.glade.h:29
 msgid "Description:"
-msgstr "Описание:"
+msgstr "п·п©п╦я│п╟п╫п╦п╣:"
 
 #: src/wdgt-media-select.c:279 data/glade/template-designer.glade.h:53
 msgid "Page size:"
-msgstr "Размер страницы:"
+msgstr "п═п╟п╥п╪п╣я─ я│я┌я─п╟п╫п╦я├я▀:"
 
 #: src/wdgt-media-select.c:290
 msgid "Label size:"
-msgstr "Размер этикетки:"
+msgstr "п═п╟п╥п╪п╣я─ я█я┌п╦п╨п╣я┌п╨п╦:"
 
 #: src/wdgt-media-select.c:301
 msgid "Layout:"
-msgstr "Формат:"
+msgstr "п╓п╬я─п╪п╟я┌:"
 
 #: src/wdgt-media-select.c:578
 #, c-format
 msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d (%d на лист)"
+msgstr "%d x %d (%d п╫п╟ п╩п╦я│я┌)"
 
 #: src/wdgt-media-select.c:582
 #, c-format
 msgid "%d per sheet"
-msgstr "%d на лист"
+msgstr "%d п╫п╟ п╩п╦я│я┌"
 
 #: src/wdgt-media-select.c:614
 #, c-format
@@ -913,992 +800,948 @@ msgstr "%.5g x %.5g %s"
 #: src/wdgt-media-select.c:630 src/wdgt-media-select.c:644
 #, c-format
 msgid "%s %s diameter"
-msgstr "%s %s диаметр"
+msgstr "%s %s п╢п╦п╟п╪п╣я┌я─"
 
 #: src/wdgt-media-select.c:634 src/wdgt-media-select.c:648
 #, c-format
 msgid "%.5g %s diameter"
-msgstr "%.5g %s диаметр"
+msgstr "%.5g %s п╢п╦п╟п╪п╣я┌я─"
 
 #: src/wdgt-rotate-label.c:193
 msgid "Rotate"
-msgstr "Повернуть"
+msgstr "п÷п╬п╡п╣я─п╫я┐я┌я▄"
 
 #. This is the default custom color
 #: src/mygal/color-palette.c:396
-#, fuzzy
 msgid "custom"
-msgstr "Настроить"
+msgstr "п╡я▀п╠п╬я─п╬я┤п╫п╬"
 
 #. "Custom" color - we'll pop up a GnomeColorPicker
 #: src/mygal/color-palette.c:438
-#, fuzzy
 msgid "Custom Color:"
-msgstr "Настроить панель инструментов"
+msgstr "п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╦п╧ я├п╡п╣я┌:"
 
 #: src/mygal/color-palette.c:446
 msgid "Choose Custom Color"
-msgstr ""
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╦п╧ я├п╡п╣я┌"
 
 #: src/mygal/color-palette.c:579
 msgid "black"
-msgstr ""
+msgstr "я┤я▒я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:580
 msgid "light brown"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-п╨п╬я─п╦я┤п╫п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:581
 msgid "brown gold"
-msgstr ""
+msgstr "п╥п╬п╩п╬я┌п╬п╧ п╨п╬я─п╦я┤п╫п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:582
 msgid "dark green #2"
-msgstr ""
+msgstr "я┤я▒я─п╫п╬-п╥п╣п╩я▒п╫я▀п╧ ?2"
 
 #: src/mygal/color-palette.c:583
 msgid "navy"
-msgstr ""
+msgstr "п╪п╬я─я│п╨п╬п╧"
 
 #: src/mygal/color-palette.c:584 src/mygal/color-palette.c:640
 msgid "dark blue"
-msgstr ""
+msgstr "я┌я▒п╪п╫п╬-я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:585
 msgid "purple #2"
-msgstr ""
+msgstr "п©я┐я─п©я┐я─п╫я▀п╧ ?2"
 
 #: src/mygal/color-palette.c:586
 msgid "very dark gray"
-msgstr ""
+msgstr "п╬я┤п╣п╫я▄ я┌я▒п╪п╫п╬-я│п╣я─я▀п╧"
 
 #: src/mygal/color-palette.c:589 src/mygal/color-palette.c:645
 msgid "dark red"
-msgstr ""
+msgstr "я┌я▒п╪п╫п╬-п╨я─п╟я│п╫я▀п╧"
 
 #: src/mygal/color-palette.c:590
 msgid "red-orange"
-msgstr ""
+msgstr "п╨я─п╟я│п╫п╬-п╬я─п╟п╫п╤п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:591
 msgid "gold"
-msgstr ""
+msgstr "п╥п╬п╩п╬я┌п╬п╧"
 
 #: src/mygal/color-palette.c:592
 msgid "dark green"
-msgstr ""
+msgstr "я┌я▒п╪п╫п╬-п╥п╣п╩я▒п╫я▀п╧"
 
 #: src/mygal/color-palette.c:593 src/mygal/color-palette.c:646
 msgid "dull blue"
-msgstr ""
+msgstr "я┌я┐я│п╨п╩п╬-я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:594 src/mygal/color-palette.c:647
 msgid "blue"
-msgstr ""
+msgstr "я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:595
 msgid "dull purple"
-msgstr ""
+msgstr "я┌я┐я│п╨п╩п╬-п©я┐я─п©я┐я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:596
 msgid "dark grey"
-msgstr ""
+msgstr "я┌я▒п╪п╫п╬-я│п╣я─я▀п╧"
 
 #: src/mygal/color-palette.c:599
 msgid "red"
-msgstr ""
+msgstr "п╨я─п╟я│п╫я▀п╧"
 
 #: src/mygal/color-palette.c:600
 msgid "orange"
-msgstr ""
+msgstr "п╬я─п╟п╫п╤п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:601
 msgid "lime"
-msgstr ""
+msgstr "п╩п╦п╪п╬п╫п╫я▀п╧"
 
 #: src/mygal/color-palette.c:602
 msgid "dull green"
-msgstr ""
+msgstr "я┌я┐я│п╨п╩п╬-п╥п╣п╩я▒п╫я▀п╧"
 
 #: src/mygal/color-palette.c:603
 msgid "dull blue #2"
-msgstr ""
+msgstr "я┌я┐я│п╨п╬-я│п╦п╫п╦п╧ ?2"
 
 #: src/mygal/color-palette.c:604
 msgid "sky blue #2"
-msgstr ""
+msgstr "п╫п╣п╠п╣я│п╫п╬-я│п╦п╫п╦п╧ ?2"
 
 #: src/mygal/color-palette.c:605 src/mygal/color-palette.c:644
 msgid "purple"
-msgstr ""
+msgstr "п©я┐я─п©я┐я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:606
 msgid "gray"
-msgstr ""
+msgstr "я│п╣я─я▀п╧"
 
 #: src/mygal/color-palette.c:609 src/mygal/color-palette.c:641
-#, fuzzy
 msgid "magenta"
-msgstr "Изображение"
+msgstr "п╪п╟п╩п╦п╫п╬п╡я▀п╧"
 
 #: src/mygal/color-palette.c:610
 msgid "bright orange"
-msgstr ""
+msgstr "я▐я─п╨п╬-п╬я─п╟п╫п╤п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:611 src/mygal/color-palette.c:642
 msgid "yellow"
-msgstr ""
+msgstr "п╤я▒п╩я┌я▀п╧"
 
 #: src/mygal/color-palette.c:612
-#, fuzzy
 msgid "green"
-msgstr "градусов"
+msgstr "п╥п╣п╩я▒п╫я▀п╧"
 
 #: src/mygal/color-palette.c:613 src/mygal/color-palette.c:643
 msgid "cyan"
-msgstr ""
+msgstr "я├п╦п╟п╫"
 
 #: src/mygal/color-palette.c:614
 msgid "bright blue"
-msgstr ""
+msgstr "я▐я─п╨п╬-я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:615 src/mygal/color-palette.c:632
 msgid "red purple"
-msgstr ""
+msgstr "п╨я─п╟я│п╫п╬-п©я┐я─п©я┐я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:616
 msgid "light grey"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-я│п╣я─я▀п╧"
 
 #: src/mygal/color-palette.c:619 src/mygal/color-palette.c:636
 msgid "pink"
-msgstr ""
+msgstr "я─п╬п╥п╬п╡я▀п╧"
 
 #: src/mygal/color-palette.c:620
 msgid "light orange"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-п╬я─п╟п╫п╤п╣п╡я▀п╧"
 
 #: src/mygal/color-palette.c:621 src/mygal/color-palette.c:633
 msgid "light yellow"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-п╤я▒п╩я┌я▀п╧"
 
 #: src/mygal/color-palette.c:622
 msgid "light green"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-п╥п╣п╩я▒п╫я▀п╧"
 
 #: src/mygal/color-palette.c:623
 msgid "light cyan"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-я├п╦п╟п╫"
 
 #: src/mygal/color-palette.c:624 src/mygal/color-palette.c:634
 msgid "light blue"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:625 src/mygal/color-palette.c:638
 msgid "light purple"
-msgstr ""
+msgstr "я│п╡п╣я┌п╩п╬-п©я┐я─п©я┐я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:626
 msgid "white"
-msgstr ""
+msgstr "п╠п╣п╩я▀п╧"
 
 #: src/mygal/color-palette.c:631
 msgid "purplish blue"
-msgstr ""
+msgstr "п©я┐я─п©я┐я─п╫п╬-я│п╦п╫п╦п╧"
 
 #: src/mygal/color-palette.c:635
 msgid "dark purple"
-msgstr ""
+msgstr "я┌я▒п╪п╫п╬-п©я┐я─п©я┐я─п╫я▀п╧"
 
 #: src/mygal/color-palette.c:637
 msgid "sky blue"
-msgstr ""
+msgstr "п╫п╣п╠п╣я│п╫п╬-я│п╦п╫п╦п╧"
 
 #: libglabels/template.c:848
 #, c-format
 msgid "Generic %s full page"
-msgstr "Основная %s полная страница"
+msgstr "п·я│п╫п╬п╡п╫п╟я▐ %s п©п╬п╩п╫п╟я▐ я│я┌я─п╟п╫п╦я├п╟"
 
 #: libglabels/template.c:897
 msgid "No template files found!"
-msgstr "Не найдены файлы шаблона!"
+msgstr "п²п╣ п╫п╟п╧п╢п╣п╫я▀ я└п╟п╧п╩я▀ я┬п╟п╠п╩п╬п╫п╟!"
 
 #. Create and append an "Other" entry.
 #: libglabels/paper.c:67
 msgid "Other"
-msgstr ""
+msgstr "п■я─я┐пЁп╬п╧"
 
 #: libglabels/paper.c:361
-#, fuzzy
 msgid "No paper files found!"
-msgstr "Не найдены файлы шаблона!"
+msgstr "п²п╣ п╫п╟п╧п╢п╣п╫я▀ я└п╟п╧п╩я▀ п╬п©п╦я│п╟п╫п╦я▐ п╠я┐п╪п╟пЁп╦!"
 
 #: data/ui/glabels-ui.xml.h:1
-#, fuzzy
 msgid "About glabels"
-msgstr "glabels"
+msgstr "п· gLabels"
 
 #: data/ui/glabels-ui.xml.h:2
 msgid "About..."
-msgstr "О программе..."
+msgstr "п· п©я─п╬пЁя─п╟п╪п╪п╣..."
 
 #: data/ui/glabels-ui.xml.h:3
 msgid "Align _Horizontal"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п©п╬ _пЁп╬я─п╦п╥п╬п╫я┌п╟п╩п╦"
 
 #: data/ui/glabels-ui.xml.h:4
 msgid "Align _Vertical"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п©п╬ _п╡п╣я─я┌п╦п╨п╟п╩п╦"
 
 #: data/ui/glabels-ui.xml.h:5
-#, fuzzy
 msgid "Align objects to bottoms"
-msgstr "Переместить объект на задний план"
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ п╫п╦п╥п╟п╪"
 
 #: data/ui/glabels-ui.xml.h:6
 msgid "Align objects to horizontal centers"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫я▀п╪ я├п╣п╫я┌я─п╟п╪"
 
 #: data/ui/glabels-ui.xml.h:7
 msgid "Align objects to left edges"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ п╩п╣п╡п╬п╪я┐ п╨я─п╟я▌"
 
 #: data/ui/glabels-ui.xml.h:8
 msgid "Align objects to right edges"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ п©я─п╟п╡п╬п╪я┐ п╨я─п╟я▌"
 
 #: data/ui/glabels-ui.xml.h:9
-#, fuzzy
 msgid "Align objects to tops"
-msgstr "Переместить объект на передний план"
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ п╡п╣я─я┘п╟п╪"
 
 #: data/ui/glabels-ui.xml.h:10
 msgid "Align objects to vertical centers"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ п╡п╣я─я┌п╦п╨п╟п╩я▄п╫я▀п╪ я├п╣п╫я┌я─п╟п╪"
 
 #: data/ui/glabels-ui.xml.h:12
 msgid "Bold"
-msgstr ""
+msgstr "п√п╦я─п╫я▀п╧"
 
 #: data/ui/glabels-ui.xml.h:14
-#, fuzzy
 msgid "Center align"
-msgstr "Содержание справки"
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ п©п╬ я├п╣п╫я┌я─я┐"
 
 #: data/ui/glabels-ui.xml.h:15
 msgid "Center objects to horizontal label center"
-msgstr ""
+msgstr "п╕п╣п╫я┌я─п╦я─п╬п╡п╟я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ я├п╣п╫я┌я─я┐ пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫п╬п╧ п╪п╣я┌п╨п╦"
 
 #: data/ui/glabels-ui.xml.h:16
 msgid "Center objects to vertical label center"
-msgstr ""
+msgstr "п╕п╣п╫я┌я─п╦я─п╬п╡п╟я┌я▄ п╬п╠я┼п╣п╨я┌я▀ п©п╬ я├п╣п╫я┌я─я┐ п╡п╣я─я┌п╦п╨п╟п╩я▄п╫п╬п╧ п╪п╣я┌п╨п╦"
 
 #: data/ui/glabels-ui.xml.h:17
-#, fuzzy
 msgid "Change the visibility of markup lines in the current window"
-msgstr "Изменяет видимость главной панели инструментов в текущем окне"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╡п╦п╢п╦п╪п╬я│я┌я▄ п╩п╦п╫п╦п╦ я─п╟п╥п╪п╣я┌п╨п╦ п╡ я┌п╣п╨я┐я┴п╣п╪ п╬п╨п╫п╣"
 
 #: data/ui/glabels-ui.xml.h:18
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr "Изменяет видимость панели инструментов для рисования в текущем окне"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╡п╦п╢п╦п╪п╬я│я┌я▄ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡ п╢п╩я▐ я─п╦я│п╬п╡п╟п╫п╦я▐ п╡ я┌п╣п╨я┐я┴п╣п╪ п╬п╨п╫п╣"
 
 #: data/ui/glabels-ui.xml.h:19
-#, fuzzy
 msgid "Change the visibility of the grid in the current window"
-msgstr "Изменяет видимость главной панели инструментов в текущем окне"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╡п╦п╢п╦п╪п╬я│я┌я▄ я│п╣я┌п╨п╦ п╡ я┌п╣п╨я┐я┴п╣п╪ п╬п╨п╫п╣"
 
 #: data/ui/glabels-ui.xml.h:20
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr "Изменяет видимость главной панели инструментов в текущем окне"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╡п╦п╢п╦п╪п╬я│я┌я▄ пЁп╩п╟п╡п╫п╬п╧ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡ п╡ я┌п╣п╨я┐я┴п╣п╪ п╬п╨п╫п╣"
 
 #: data/ui/glabels-ui.xml.h:21
-#, fuzzy
 msgid "Change the visibility of the property toolbar in the current window"
-msgstr "Изменяет видимость главной панели инструментов в текущем окне"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╡п╦п╢п╦п╪п╬я│я┌я▄ п©п╟п╫п╣п╩п╦ я│п╡п╬п╧я│я┌п╡ п╡ я┌п╣п╨я┐я┴п╣п╪ п╬п╨п╫п╣"
 
 #: data/ui/glabels-ui.xml.h:22
 msgid "Close"
-msgstr "Закрыть"
+msgstr "п≈п╟п╨я─я▀я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:23
 msgid "Close the current file"
-msgstr "Закрыть текущий файл"
+msgstr "п≈п╟п╨я─я▀я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #: data/ui/glabels-ui.xml.h:24
 msgid "Configure the application"
-msgstr "Настроить программу"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©я─п╬пЁя─п╟п╪п╪я┐"
 
 #: data/ui/glabels-ui.xml.h:25
 msgid "Contents"
-msgstr "Содержание справки"
+msgstr "п║п╬п╢п╣я─п╤п╟п╫п╦п╣ я│п©я─п╟п╡п╨п╦"
 
 #: data/ui/glabels-ui.xml.h:26
 msgid "Copy"
-msgstr "Запомнить"
+msgstr "п≈п╟п©п╬п╪п╫п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:27
 msgid "Copy the selection"
-msgstr "Запомнить выделенное"
+msgstr "п≈п╟п©п╬п╪п╫п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫п╬п╣"
 
 #: data/ui/glabels-ui.xml.h:28
-#, fuzzy
 msgid "Create a custom template"
-msgstr "Создать новый документ"
+msgstr "п║п╬п╥п╢п╟я┌я▄ я│п╡п╬п╧ я┬п╟п╠п╩п╬п╫"
 
 #: data/ui/glabels-ui.xml.h:29
 msgid "Create a new document"
-msgstr "Создать новый документ"
+msgstr "п║п╬п╥п╢п╟я┌я▄ п╫п╬п╡я▀п╧ п╢п╬п╨я┐п╪п╣п╫я┌"
 
 #: data/ui/glabels-ui.xml.h:30
 msgid "Create barcode object"
-msgstr "Разместить штрих-код"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ я┬я┌я─п╦я┘-п╨п╬п╢"
 
 #: data/ui/glabels-ui.xml.h:31
 msgid "Create box/rectangle object"
-msgstr "Разместить прямоугольник"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ п©я─я▐п╪п╬я┐пЁп╬п╩я▄п╫п╦п╨"
 
 #: data/ui/glabels-ui.xml.h:32
 msgid "Create ellipse/circle object"
-msgstr "Разместить эллипс/круг"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ я█п╩п╩п╦п©я│/п╨я─я┐пЁ"
 
 #: data/ui/glabels-ui.xml.h:33
 msgid "Create image object"
-msgstr "Разместить растровое изображение"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ я─п╟я│я┌я─п╬п╡п╬п╣ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╣"
 
 #: data/ui/glabels-ui.xml.h:34
 msgid "Create line object"
-msgstr "Разместить линию"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ п╩п╦п╫п╦я▌"
 
 #: data/ui/glabels-ui.xml.h:35
 msgid "Create text object"
-msgstr "Разместить текст"
+msgstr "п═п╟п╥п╪п╣я│я┌п╦я┌я▄ я┌п╣п╨я│я┌"
 
 #: data/ui/glabels-ui.xml.h:36
 msgid "Cu_t"
-msgstr "_Вырезать"
+msgstr "_п▓я▀я─п╣п╥п╟я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:37
 msgid "Customize"
-msgstr "Настроить"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:38
-#, fuzzy
 msgid "Customize Drawing Toolbar"
-msgstr "_Настроить панель рисования"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©п╟п╫п╣п╩я▄ я─п╦я│п╬п╡п╟п╫п╦я▐"
 
 #: data/ui/glabels-ui.xml.h:39
-#, fuzzy
 msgid "Customize Main Toolbar"
-msgstr "_Настроить панель инструментов"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©п╟п╫п╣п╩я▄ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:40
-#, fuzzy
 msgid "Customize Property Toolbar"
-msgstr "Настроить панель инструментов"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©п╟п╫п╣п╩я▄ я│п╡п╬п╧я│я┌п╡"
 
 #: data/ui/glabels-ui.xml.h:41
 msgid "Customize toolbars"
-msgstr "Настроить панель инструментов"
+msgstr "п²п╟я│я┌я─п╬п╦я┌я▄ п©п╟п╫п╣п╩я▄ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:42
 msgid "Cut"
-msgstr "Вырезать"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:43
 msgid "Cut the selection"
-msgstr "Вырезать выделенное"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫п╬п╣"
 
 #: data/ui/glabels-ui.xml.h:44
 msgid "Decrease magnification"
-msgstr "Уменьшить"
+msgstr "пёп╪п╣п╫я▄я┬п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:45
 msgid "Delete"
-msgstr "Удалить"
+msgstr "пёп╢п╟п╩п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:46
 msgid "Delete the selected objects"
-msgstr "Удалить выбранные объекты"
+msgstr "пёп╢п╟п╩п╦я┌я▄ п╡я▀п╠я─п╟п╫п╫я▀п╣ п╬п╠я┼п╣п╨я┌я▀"
 
 #: data/ui/glabels-ui.xml.h:47
 msgid "Drawing toolbar"
-msgstr "Панель рисования"
+msgstr "п÷п╟п╫п╣п╩я▄ я─п╦я│п╬п╡п╟п╫п╦я▐"
 
 #: data/ui/glabels-ui.xml.h:48
 msgid "Dump XML"
-msgstr "Дамп XML"
+msgstr "п■п╟п╪п© XML"
 
 #: data/ui/glabels-ui.xml.h:49
 msgid "Dump the UI Xml description"
-msgstr "Дамп XML-описания UI"
+msgstr "п■п╟п╪п© XML-п╬п©п╦я│п╟п╫п╦я▐ UI"
 
 #: data/ui/glabels-ui.xml.h:50
 msgid "Edit merge properties"
-msgstr "Изменить свойства объединения"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #: data/ui/glabels-ui.xml.h:54
 msgid "Flip object horizontally"
-msgstr ""
+msgstr "п·я┌я─п╟п╥п╦я┌я▄ п╬п╠я┼п╣п╨я┌ пЁп╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫п╬"
 
 #: data/ui/glabels-ui.xml.h:55
 msgid "Flip object vertically"
-msgstr ""
+msgstr "п·я┌я─п╟п╥п╦я┌я▄ п╬п╠я┼п╣п╨я┌ п╡п╣я─я┌п╦п╨п╟п╩я▄п╫п╬"
 
 #: data/ui/glabels-ui.xml.h:56
 msgid "Font name"
-msgstr ""
+msgstr "п²п╟п╥п╡п╟п╫п╦п╣ я┬я─п╦я└я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:57
-#, fuzzy
 msgid "Font selector"
-msgstr "Запомнить выделенное"
+msgstr "п▓я▀п╠п╬я─ я┬я─п╦я└я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:58
 msgid "Font size"
-msgstr ""
+msgstr "п═п╟п╥п╪п╣я─ я┬я─п╦я└я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:59
 msgid "Icon and _Text"
-msgstr "Пиктограмма и _Текст"
+msgstr "п÷п╦п╨я┌п╬пЁя─п╟п╪п╪п╟ п╦ _п╒п╣п╨я│я┌"
 
 #: data/ui/glabels-ui.xml.h:60
 msgid "Increase magnification"
-msgstr "Увеличить"
+msgstr "пёп╡п╣п╩п╦я┤п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:61
 msgid "Italic"
-msgstr ""
+msgstr "п я┐я─я│п╦п╡"
 
 #: data/ui/glabels-ui.xml.h:63
 msgid "Left align"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ я│п╩п╣п╡п╟"
 
 #: data/ui/glabels-ui.xml.h:65
 msgid "Line width"
-msgstr ""
+msgstr "п╒п╬п╩я┴п╦п╫п╟ п╩п╦п╫п╦п╦"
 
 #: data/ui/glabels-ui.xml.h:66
 msgid "Lower object to bottom"
-msgstr "Переместить объект на задний план"
+msgstr "п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╬п╠я┼п╣п╨я┌ п╫п╟ п╥п╟п╢п╫п╦п╧ п©п╩п╟п╫"
 
 #: data/ui/glabels-ui.xml.h:67
 msgid "M_arkup"
-msgstr ""
+msgstr "_п═п╟п╥п╪п╣я┌п╨п╟"
 
 #: data/ui/glabels-ui.xml.h:68
 msgid "Main toolbar"
-msgstr "Показывать панель инструментов"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╟п╫п╣п╩я▄ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:69
 msgid "Markup"
-msgstr ""
+msgstr "п═п╟п╥п╪п╣я┌п╨п╟"
 
 #: data/ui/glabels-ui.xml.h:70
-#, fuzzy
 msgid "Modify document properties"
-msgstr "Изменить свойства объединения документов"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╢п╬п╨я┐п╪п╣п╫я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:71
 msgid "New"
-msgstr "Создать"
+msgstr "п║п╬п╥п╢п╟я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:72
-#, fuzzy
 msgid "Object property editor"
-msgstr "Свойства объекта..."
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ я│п╡п╬п╧я│я┌п╡ п╬п╠я┼п╣п╨я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:73
-msgid "Only show icons in the drawing toolbar"
-msgstr "Показывать только картинки в панели инструментов для рисования"
-
-#: data/ui/glabels-ui.xml.h:74
 msgid "Only show icons in the main toolbar"
-msgstr "Показывать только картинки в главной панели инструментов"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╨п╟я─я┌п╦п╫п╨п╦ п╡ пЁп╩п╟п╡п╫п╬п╧ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
+
+#: data/ui/glabels-ui.xml.h:75
+msgid "Open a file"
+msgstr "п·я┌п╨я─я▀я┌я▄ я└п╟п╧п╩"
 
 #: data/ui/glabels-ui.xml.h:76
-msgid "Open a file"
-msgstr "Открыть файл"
+msgid "Open the glabels manual"
+msgstr "п·я┌п╨я─я▀я┌я▄ я─я┐п╨п╬п╡п╬п╢я│я┌п╡п╬ п©п╬ glabels"
 
 #: data/ui/glabels-ui.xml.h:77
-#, fuzzy
-msgid "Open the glabels manual"
-msgstr "Открыть руководство по gedit"
+msgid "Paste"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:78
-msgid "Paste"
-msgstr "Вставить"
+msgid "Paste the clipboard"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ п╠я┐я└п╣я─п╟"
 
 #: data/ui/glabels-ui.xml.h:79
-msgid "Paste the clipboard"
-msgstr "Вставить из буфера"
+msgid "Pr_eferences..."
+msgstr "_п²п╟я│я┌я─п╬п╦я┌я▄..."
 
 #: data/ui/glabels-ui.xml.h:80
-msgid "Pr_eferences..."
-msgstr "_Настроить..."
-
-#: data/ui/glabels-ui.xml.h:81
 msgid "Preferences"
-msgstr "Параметры"
+msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀"
+
+#: data/ui/glabels-ui.xml.h:82
+msgid "Print the current file"
+msgstr "п²п╟п©п╣я┤п╟я┌п╟я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #: data/ui/glabels-ui.xml.h:83
-msgid "Print the current file"
-msgstr "Напечатать текущий файл"
+msgid "Proper_ties..."
+msgstr "п║п╡п╬п╧я│_я┌п╡п╟..."
 
 #: data/ui/glabels-ui.xml.h:84
-#, fuzzy
-msgid "Proper_ties..."
-msgstr "Свойства"
+msgid "Properties"
+msgstr "п║п╡п╬п╧я│я┌п╡п╟"
 
 #: data/ui/glabels-ui.xml.h:85
-msgid "Properties"
-msgstr "Свойства"
+msgid "Property toolbar"
+msgstr "п÷п╟п╫п╣п╩я▄ я│п╡п╬п╧я│я┌п╡"
 
 #: data/ui/glabels-ui.xml.h:86
-msgid "Property toolbar"
-msgstr ""
+msgid "Quit"
+msgstr "п▓я▀п╧я┌п╦"
 
 #: data/ui/glabels-ui.xml.h:87
-msgid "Quit"
-msgstr "Выйти"
+msgid "Quit the program"
+msgstr "п▓я▀п╧я┌п╦ п╦п╥ п©я─п╬пЁя─п╟п╪п╪я▀"
 
 #: data/ui/glabels-ui.xml.h:88
-msgid "Quit the program"
-msgstr "Выйти из программы"
+msgid "Raise object to top"
+msgstr "п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╬п╠я┼п╣п╨я┌ п╫п╟ п©п╣я─п╣п╢п╫п╦п╧ п©п╩п╟п╫"
 
 #: data/ui/glabels-ui.xml.h:89
-msgid "Raise object to top"
-msgstr "Переместить объект на передний план"
+msgid "Recent _Files"
+msgstr "п²п╣п╢п╟п╡п╫п╦п╣ _я└п╟п╧п╩я▀"
 
 #: data/ui/glabels-ui.xml.h:90
-msgid "Recent _Files"
-msgstr "Недавние _файлы"
+msgid "Redo"
+msgstr "п÷п╬п╡я┌п╬я─п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:91
-msgid "Redo"
-msgstr "Повторить"
+msgid "Redo the undone action"
+msgstr "п÷п╬п╡я┌п╬я─п╦я┌я▄ п╬я┌п╪п╣п╫я▒п╫п╫п╬п╣ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #: data/ui/glabels-ui.xml.h:92
-msgid "Redo the undone action"
-msgstr "Повторить отменённое действие"
-
-#: data/ui/glabels-ui.xml.h:93
 msgid "Remove all selections"
-msgstr "Удалить всё выделенное"
+msgstr "пёп╢п╟п╩п╦я┌я▄ п╡я│я▒ п╡я▀п╢п╣п╩п╣п╫п╫п╬п╣"
 
-#: data/ui/glabels-ui.xml.h:95
+#: data/ui/glabels-ui.xml.h:94
 #, no-c-format
 msgid "Restore scale to 100%"
-msgstr "Масштаб 1:1"
+msgstr "п°п╟я│я┬я┌п╟п╠ 1:1"
 
-#: data/ui/glabels-ui.xml.h:96
+#: data/ui/glabels-ui.xml.h:95
 msgid "Right align"
-msgstr ""
+msgstr "п▓я▀я─п╬п╡п╫я▐я┌я▄ я│п©я─п╟п╡п╟"
+
+#: data/ui/glabels-ui.xml.h:98
+msgid "Rotate object 90 clockwise"
+msgstr "п÷п╬п╡п╣я─п╫я┐я┌я▄ п╬п╠я┼п╣п╨я┌ п╫п╟ 90 пЁя─п╟п╢я┐я│п╬п╡ п©п╬ я┤п╟я│п╬п╡п╬п╧ я│я┌я─п╣п╩п╨п╣"
 
 #: data/ui/glabels-ui.xml.h:99
-msgid "Rotate object 90 clockwise"
-msgstr ""
+msgid "Rotate object 90 counter-clockwise"
+msgstr "п÷п╬п╡п╣я─п╫я┐я┌я▄ п╬п╠я┼п╣п╨я┌ п╫п╟ 90 пЁя─п╟п╢я┐я│п╬п╡ п©я─п╬я┌п╦п╡ я┤п╟я│п╬п╡п╬п╧ я│я┌я─п╣п╩п╨п╣"
 
 #: data/ui/glabels-ui.xml.h:100
-msgid "Rotate object 90 counter-clockwise"
-msgstr ""
+msgid "Save"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:101
-msgid "Save"
-msgstr "Сохранить"
+msgid "Save As"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨"
 
 #: data/ui/glabels-ui.xml.h:102
-msgid "Save As"
-msgstr "Сохранить как"
+msgid "Save _As..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ _п╨п╟п╨..."
 
 #: data/ui/glabels-ui.xml.h:103
-msgid "Save _As..."
-msgstr "Сохранить _как..."
+msgid "Save the current file"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩"
 
 #: data/ui/glabels-ui.xml.h:104
-msgid "Save the current file"
-msgstr "Сохранить текущий файл"
+msgid "Save the current file with a different name"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я└п╟п╧п╩ п©п╬п╢ п╢я─я┐пЁп╦п╪ п╦п╪п╣п╫п╣п╪"
 
 #: data/ui/glabels-ui.xml.h:105
-msgid "Save the current file with a different name"
-msgstr "Сохранить текущий файл под другим именем"
+msgid "Select All"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╡я│я▒"
 
 #: data/ui/glabels-ui.xml.h:106
-msgid "Select All"
-msgstr "Выбрать всё"
+msgid "Select _All"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╡я│_я▒"
 
 #: data/ui/glabels-ui.xml.h:107
-msgid "Select _All"
-msgstr "Выбрать вс_ё"
+msgid "Select all objects"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╡я│п╣ п╬п╠я┼п╣п╨я┌я▀"
 
 #: data/ui/glabels-ui.xml.h:108
-msgid "Select all objects"
-msgstr "Выбрать все объекты"
-
-#: data/ui/glabels-ui.xml.h:109
 msgid "Select, move and modify objects"
-msgstr "Выбрать, переместить или изменить объекты"
+msgstr "п▓я▀п╠я─п╟я┌я▄, п©п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╦п╩п╦ п╦п╥п╪п╣п╫п╦я┌я▄ п╬п╠я┼п╣п╨я┌я▀"
 
-#: data/ui/glabels-ui.xml.h:111
-msgid "Set drawing toolbar button style according to desktop default"
-msgstr ""
-"Установить стиль кнопок панели рисования согласно настройкам рабочего стола"
-
-#: data/ui/glabels-ui.xml.h:112
+#: data/ui/glabels-ui.xml.h:110
 msgid "Set main toolbar button style according to desktop default"
 msgstr ""
-"Установить стиль кнопок главной панели инструментов согласно настройкам "
-"рабочего стола"
+"пёя│я┌п╟п╫п╬п╡п╦я┌я▄ я│я┌п╦п╩я▄ п╨п╫п╬п©п╬п╨ пЁп╩п╟п╡п╫п╬п╧ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡ я│п╬пЁп╩п╟я│п╫п╬ п╫п╟я│я┌я─п╬п╧п╨п╟п╪ "
+"я─п╟п╠п╬я┤п╣пЁп╬ я│я┌п╬п╩п╟"
+
+#: data/ui/glabels-ui.xml.h:111
+msgid "Show _Tooltips"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ _п©п╬п╢я│п╨п╟п╥п╨п╦"
+
+#: data/ui/glabels-ui.xml.h:112
+msgid "Show both icons and texts in the main toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п╦ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀ п╦ я┌п╣п╨я│я┌ п╡ пЁп╩п╟п╡п╫п╬п╧ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:113
-msgid "Show _Tooltips"
-msgstr "Показывать _подсказки"
+msgid "Show tooltips in the drawing toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╬п╢я│п╨п╟п╥п╨п╦ п╡ п©п╟п╫п╣п╩п╦ я─п╦я│п╬п╡п╟п╫п╦я▐"
 
 #: data/ui/glabels-ui.xml.h:114
-#, fuzzy
-msgid "Show both icons and texts in the drawing toolbar"
-msgstr "Показывать подсказки в панели рисования"
+msgid "Show tooltips in the main toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╬п╢я│п╨п╟п╥п╨п╦ п╡ пЁп╩п╟п╡п╫п╬п╧ п©п╟п╫п╣п╩п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:115
-#, fuzzy
-msgid "Show both icons and texts in the main toolbar"
-msgstr "Показывать подсказки в главной панели инструментов"
+msgid "Show tooltips in the property toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╬п╢я│п╨п╟п╥п╨п╦ п╫п╟ п©п╟п╫п╣п╩п╦ я│п╡п╬п╧я│я┌п╡"
 
 #: data/ui/glabels-ui.xml.h:116
-msgid "Show tooltips in the drawing toolbar"
-msgstr "Показывать подсказки в панели рисования"
+msgid "Template Designer"
+msgstr "п■п╦п╥п╟п╧п╫п╣я─ я┬п╟п╠п╩п╬п╫п╬п╡"
 
 #: data/ui/glabels-ui.xml.h:117
-msgid "Show tooltips in the main toolbar"
-msgstr "Показывать подсказки в главной панели инструментов"
+msgid "Template _Designer..."
+msgstr "п■п╦п╥п╟п╧п╫п╣я─ _п╗п╟п╠п╩п╬п╫п╬п╡..."
 
 #: data/ui/glabels-ui.xml.h:118
-#, fuzzy
-msgid "Show tooltips in the property toolbar"
-msgstr "Показывать подсказки в главной панели инструментов"
+msgid "Text color"
+msgstr "п╕п╡п╣я┌ я┌п╣п╨я│я┌п╟"
 
 #: data/ui/glabels-ui.xml.h:119
-msgid "Template Designer"
-msgstr ""
+msgid "U_n-select All"
+msgstr "_п║п╫я▐я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ я│п╬ п╡я│п╣пЁп╬"
 
 #: data/ui/glabels-ui.xml.h:120
-msgid "Template _Designer..."
-msgstr ""
+msgid "Un-select All"
+msgstr "_п║п╫я▐я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ я│п╬ п╡я│п╣пЁп╬"
 
 #: data/ui/glabels-ui.xml.h:121
-msgid "Text color"
-msgstr ""
+msgid "Undo"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:122
-msgid "U_n-select All"
-msgstr "_Снять выделение со всего"
+msgid "Undo the last action"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄ п©п╬я│п╩п╣п╢п╫п╣п╣ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #: data/ui/glabels-ui.xml.h:123
-msgid "Un-select All"
-msgstr "_Снять выделение со всего"
+msgid "Zoom _1:1"
+msgstr "п°п╟я│я┬я┌п╟п╠ _1:1"
 
 #: data/ui/glabels-ui.xml.h:124
-msgid "Undo"
-msgstr "Отменить"
+msgid "Zoom _In"
+msgstr "пё_п╡п╣п╩п╦я┤п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:125
-msgid "Undo the last action"
-msgstr "Отменить последнее действие"
+msgid "Zoom _Out"
+msgstr "пё_п╪п╣п╫я▄я┬п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:126
-#, fuzzy
-msgid "Zoom _1:1"
-msgstr "Масштаб 1:1"
+msgid "Zoom to _fit"
+msgstr "пёп╪п╣я│я┌п╦я┌я▄ я├п╣п╩п╦п╨п╬п╪ п╡ п╬п╨п╫п╬"
 
 #: data/ui/glabels-ui.xml.h:127
-#, fuzzy
-msgid "Zoom _In"
-msgstr "Увеличить"
+msgid "Zoom to fit window"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п╪п╟я│я┬я┌п╟п╠, я┤я┌п╬п╠я▀ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╣ п╠я▀п╩п╬ п╡п╦п╢п╫п╬ п©п╬п╩п╫п╬я│я┌я▄я▌"
 
 #: data/ui/glabels-ui.xml.h:128
-#, fuzzy
-msgid "Zoom _Out"
-msgstr "Уменьшить"
+msgid "_About..."
+msgstr "_п· п©я─п╬пЁя─п╟п╪п╪п╣..."
 
 #: data/ui/glabels-ui.xml.h:129
-#, fuzzy
-msgid "Zoom to _fit"
-msgstr "Уменьшить"
-
-#: data/ui/glabels-ui.xml.h:130
-msgid "Zoom to fit window"
-msgstr ""
-
-#: data/ui/glabels-ui.xml.h:131
-msgid "_About..."
-msgstr "_О программе..."
+msgid "_Bottoms"
+msgstr "п÷п╬ _п╫п╦п╥я┐"
 
 #: data/ui/glabels-ui.xml.h:132
-msgid "_Bottoms"
-msgstr ""
+msgid "_Close"
+msgstr "_п≈п╟п╨я─я▀я┌я▄"
+
+#: data/ui/glabels-ui.xml.h:133
+msgid "_Contents"
+msgstr "_п║п╬п╢п╣я─п╤п╟п╫п╦п╣ я│п©я─п╟п╡п╨п╦"
+
+#: data/ui/glabels-ui.xml.h:134
+msgid "_Copy"
+msgstr "_п≈п╟п©п╬п╪п╫п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:135
-msgid "_Close"
-msgstr "_Закрыть"
+msgid "_Create Object"
+msgstr "_п║п╬п╥п╢п╟я┌я▄ п╬п╠я┼п╣п╨я┌"
 
 #: data/ui/glabels-ui.xml.h:136
-msgid "_Contents"
-msgstr "_Содержание справки"
-
-#: data/ui/glabels-ui.xml.h:137
-msgid "_Copy"
-msgstr "_Запомнить"
+msgid "_Debug"
+msgstr "_п·я┌п╩п╟п╢п╨п╟"
 
 #: data/ui/glabels-ui.xml.h:138
-#, fuzzy
-msgid "_Create Object"
-msgstr "Разместить линию"
+msgid "_Desktop Default"
+msgstr "_п║п╬пЁп╩п╟я│п╫п╬ п╫п╟я│я┌я─п╬п╧п╨п╟п╪ я─п╟п╠п╬я┤п╣пЁп╬ я│я┌п╬п╩п╟"
 
 #: data/ui/glabels-ui.xml.h:139
-msgid "_Debug"
-msgstr "_Отладка"
+msgid "_Drawing Toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╟п╫п╣п╩я▄ _я─п╦я│п╬п╡п╟п╫п╦я▐"
 
-#: data/ui/glabels-ui.xml.h:141
-msgid "_Desktop Default"
-msgstr "_Согласно настройкам рабочего стола"
+#: data/ui/glabels-ui.xml.h:140
+msgid "_Edit"
+msgstr "_п÷я─п╟п╡п╨п╟"
 
 #: data/ui/glabels-ui.xml.h:142
-msgid "_Drawing Toolbar"
-msgstr "Показывать панель _рисования"
+msgid "_File"
+msgstr "_п╓п╟п╧п╩"
 
 #: data/ui/glabels-ui.xml.h:143
-msgid "_Edit"
-msgstr "_Правка"
+msgid "_Grid"
+msgstr "_п║п╣я┌п╨п╟"
+
+#: data/ui/glabels-ui.xml.h:144
+msgid "_Help"
+msgstr "_п║п©я─п╟п╡п╨п╟"
 
 #: data/ui/glabels-ui.xml.h:145
-msgid "_File"
-msgstr "_Файл"
-
-#: data/ui/glabels-ui.xml.h:146
-msgid "_Grid"
-msgstr ""
-
-#: data/ui/glabels-ui.xml.h:147
-msgid "_Help"
-msgstr "_Справка"
-
-#: data/ui/glabels-ui.xml.h:148
 msgid "_Icon"
-msgstr "_Пиктограмма"
+msgstr "_п÷п╦п╨я┌п╬пЁя─п╟п╪п╪п╟"
+
+#: data/ui/glabels-ui.xml.h:149
+msgid "_Main Toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╟п╫п╣п╩я▄ _п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
+
+#: data/ui/glabels-ui.xml.h:150
+msgid "_Merge Properties..."
+msgstr "_п║п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦я▐..."
+
+#: data/ui/glabels-ui.xml.h:151
+msgid "_New"
+msgstr "_п║п╬п╥п╢п╟я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:152
-msgid "_Main Toolbar"
-msgstr "Показывать панель _инструментов"
+msgid "_Objects"
+msgstr "_п·п╠я┼п╣п╨я┌я▀"
 
 #: data/ui/glabels-ui.xml.h:153
-#, fuzzy
-msgid "_Merge Properties..."
-msgstr "Свойства объединения..."
-
-#: data/ui/glabels-ui.xml.h:154
-msgid "_New"
-msgstr "_Создать"
+msgid "_Open..."
+msgstr "_п·я┌п╨я─я▀я┌я▄..."
 
 #: data/ui/glabels-ui.xml.h:155
-msgid "_Objects"
-msgstr "_Объекты"
+msgid "_Paste"
+msgstr "п▓я│я┌_п╟п╡п╦я┌я▄"
 
 #: data/ui/glabels-ui.xml.h:156
-msgid "_Open..."
-msgstr "_Открыть..."
+msgid "_Print..."
+msgstr "_п²п╟п©п╣я┤п╟я┌п╟я┌я▄..."
+
+#: data/ui/glabels-ui.xml.h:157
+msgid "_Property Toolbar"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ п©п╟п╫п╣п╩я▄ я│_п╡п╬п╧я│я┌п╡"
 
 #: data/ui/glabels-ui.xml.h:158
-msgid "_Paste"
-msgstr "Вст_авить"
-
-#: data/ui/glabels-ui.xml.h:159
-msgid "_Print..."
-msgstr "_Напечатать..."
-
-#: data/ui/glabels-ui.xml.h:160
-#, fuzzy
-msgid "_Property Toolbar"
-msgstr "Показывать панель _рисования"
+msgid "_Quit"
+msgstr "п▓_я▀п╧я┌п╦"
 
 #: data/ui/glabels-ui.xml.h:161
-msgid "_Quit"
-msgstr "В_ыйти"
-
-#: data/ui/glabels-ui.xml.h:164
 msgid "_Save"
-msgstr "_Сохранить"
+msgstr "_п║п╬я┘я─п╟п╫п╦я┌я▄"
 
-#: data/ui/glabels-ui.xml.h:168
+#: data/ui/glabels-ui.xml.h:165
 msgid "_View"
-msgstr "_Вид"
+msgstr "_п▓п╦п╢"
 
 #: data/glade/prefs-dialog.glade.h:1
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: data/glade/prefs-dialog.glade.h:2 data/glade/object-editor.glade.h:1
 #: data/glade/template-designer.glade.h:5
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: data/glade/prefs-dialog.glade.h:3
 msgid "<span weight=\"bold\">Default page size</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">п═п╟п╥п╪п╣я─ я│я┌я─п╟п╫п╦я├я▀ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌</span>"
 
 #: data/glade/prefs-dialog.glade.h:4
 msgid "<span weight=\"bold\">Fill</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">п≈п╟п©п╬п╩п╫п╣п╫п╦п╣</span>"
 
 #: data/glade/prefs-dialog.glade.h:5
 msgid "<span weight=\"bold\">Line</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">п⌡п╦п╫п╦я▐</span>"
 
 #: data/glade/prefs-dialog.glade.h:6
 msgid "<span weight=\"bold\">Text</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">п╒п╣п╨я│я┌</span>"
 
 #: data/glade/prefs-dialog.glade.h:7
 msgid "<span weight=\"bold\">Units</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">п∙п╢п╦п╫п╦я├я▀ п╦п╥п╪п╣я─п╣п╫п╦я▐</span>"
 
 #: data/glade/prefs-dialog.glade.h:8 data/glade/object-editor.glade.h:4
 msgid "Alignment:"
-msgstr "Выравнивание:"
+msgstr "п▓я▀я─п╟п╡п╫п╦п╡п╟п╫п╦п╣:"
 
 #: data/glade/prefs-dialog.glade.h:9 data/glade/object-editor.glade.h:8
 msgid "Color:"
-msgstr "Цвет:"
+msgstr "п╕п╡п╣я┌:"
 
 #: data/glade/prefs-dialog.glade.h:10
 msgid "Font:"
-msgstr "Шрифт:"
+msgstr "п╗я─п╦я└я┌:"
 
 #: data/glade/prefs-dialog.glade.h:11
 msgid "ISO A4"
-msgstr ""
+msgstr "ISO A4"
 
 #: data/glade/prefs-dialog.glade.h:12
 msgid "Inches"
-msgstr "Дюймы"
+msgstr "п■я▌п╧п╪я▀"
 
 #: data/glade/prefs-dialog.glade.h:13 data/glade/object-editor.glade.h:19
 msgid "Line Spacing:"
 msgstr ""
+"п°п╣п╤я│я┌я─п╬я┤п╫я▀п╧\n"
+"п╦п╫я┌п╣я─п╡п╟п╩:"
 
 #: data/glade/prefs-dialog.glade.h:14
 msgid "Locale"
-msgstr "Локаль"
+msgstr "п⌡п╬п╨п╟п╩я▄"
 
 #: data/glade/prefs-dialog.glade.h:15
 msgid "Millimeters"
-msgstr "Миллиметры"
+msgstr "п°п╦п╩п╩п╦п╪п╣я┌я─я▀"
 
 #: data/glade/prefs-dialog.glade.h:16
 msgid "Object defaults"
-msgstr "Настройки объектов по умолчанию"
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ п╬п╠я┼п╣п╨я┌п╬п╡ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌"
 
 #: data/glade/prefs-dialog.glade.h:17
 msgid "Points"
-msgstr "Точки"
+msgstr "п÷я┐п╫п╨я┌я▀"
 
 #: data/glade/prefs-dialog.glade.h:18
 msgid "Select default properties for new objects."
-msgstr "Укажите свойства новых объектов по умолчанию."
+msgstr "пёп╨п╟п╤п╦я┌п╣ я│п╡п╬п╧я│я┌п╡п╟ п╫п╬п╡я▀я┘ п╬п╠я┼п╣п╨я┌п╬п╡ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌."
 
 #: data/glade/prefs-dialog.glade.h:19
 msgid "Select locale specific behavior."
-msgstr "Укажите ваши предпочтения."
+msgstr "пёп╨п╟п╤п╦я┌п╣ п╡п╟я┬п╦ п©я─п╣п╢п©п╬я┤я┌п╣п╫п╦я▐."
 
-#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:25
+#. Most popular (at top of list)
+#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:29
 msgid "US Letter"
-msgstr ""
+msgstr "US Letter"
 
 #: data/glade/prefs-dialog.glade.h:21 data/glade/object-editor.glade.h:29
 #: data/glade/template-designer.glade.h:72
 msgid "Width:"
-msgstr "Ширина:"
+msgstr "п╗п╦я─п╦п╫п╟:"
 
 #: data/glade/object-editor.glade.h:2
 msgid "00000000000 00000"
-msgstr ""
+msgstr "00000000000 00000"
 
 #: data/glade/object-editor.glade.h:3
 msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-msgstr ""
+msgstr "<span weight=\"bold\" size=\"larger\">Xxx я│п╡п╬п╧я│я┌п╡п╟ п╬п╠я┼п╣п╨я┌п╟</span>"
 
 #: data/glade/object-editor.glade.h:5
 msgid "Allow merge to automatically shrink text"
-msgstr ""
+msgstr "п═п╟п╥я─п╣я┬п╦я┌я▄ п╟п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ я┐п╪п╣п╫я▄я┬п╟я┌я▄ я┌п╣п╨я│я┌ п©я─п╦ п╬п╠я┼п╣п╢п╦п╫п╣п╫п╦п╦"
 
 #: data/glade/object-editor.glade.h:6
 msgid "Angle:"
-msgstr "Угол:"
+msgstr "пёпЁп╬п╩:"
 
 #: data/glade/object-editor.glade.h:7
 msgid "Checksum"
-msgstr ""
+msgstr "п п╬п╫я┌я─п╬п╩я▄п╫п╟я▐ я│я┐п╪п╪п╟"
 
 #: data/glade/object-editor.glade.h:10
-#, fuzzy
 msgid "Family:"
-msgstr "_Файл"
+msgstr "п║п╣п╪п╣п╧я│я┌п╡п╬:"
 
 #: data/glade/object-editor.glade.h:12
 msgid "Fill"
-msgstr "Заполнение"
+msgstr "п≈п╟п©п╬п╩п╫п╣п╫п╦п╣"
 
 #: data/glade/object-editor.glade.h:13 data/glade/template-designer.glade.h:33
 msgid "Height:"
-msgstr "Высота:"
+msgstr "п▓я▀я│п╬я┌п╟:"
 
 #: data/glade/object-editor.glade.h:14
 msgid "Image"
-msgstr "Изображение"
+msgstr "п≤п╥п╬п╠я─п╟п╤п╣п╫п╦п╣"
 
 #: data/glade/object-editor.glade.h:15
 msgid "Insert merge field"
-msgstr "Вставить объединительное поле"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╬п╠я┼п╣п╢п╦п╫п╦я┌п╣п╩я▄п╫п╬п╣ п©п╬п╩п╣"
 
 #: data/glade/object-editor.glade.h:17
 msgid "Length:"
-msgstr "Длина:"
+msgstr "п■п╩п╦п╫п╟:"
 
 #: data/glade/object-editor.glade.h:18
 msgid "Line"
-msgstr "Линия"
+msgstr "п⌡п╦п╫п╦я▐"
 
 #: data/glade/object-editor.glade.h:20
 msgid "Literal:"
-msgstr "Буквально:"
+msgstr "п▒я┐п╨п╡п╟п╩я▄п╫п╬:"
 
 #: data/glade/object-editor.glade.h:21
 msgid "Load image"
-msgstr ""
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╣"
 
 #: data/glade/object-editor.glade.h:22
 msgid "Position"
-msgstr "Расположение"
+msgstr "п═п╟я│п©п╬п╩п╬п╤п╣п╫п╦п╣"
 
 #: data/glade/object-editor.glade.h:23
 msgid "Reset image size"
-msgstr "Установить размер изображения по умолчанию"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ я─п╟п╥п╪п╣я─ п╦п╥п╬п╠я─п╟п╤п╣п╫п╦я▐ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌"
 
 #: data/glade/object-editor.glade.h:24
 msgid "Size"
-msgstr "Размер"
+msgstr "п═п╟п╥п╪п╣я─"
 
 #: data/glade/object-editor.glade.h:25
-#, fuzzy
 msgid "Size:"
-msgstr "Размер"
+msgstr "п═п╟п╥п╪п╣я─:"
 
 #: data/glade/object-editor.glade.h:26
-#, fuzzy
 msgid "Style"
-msgstr "Стиль:"
+msgstr "п║я┌п╦п╩я▄:"
 
 #: data/glade/object-editor.glade.h:27
 msgid "Style:"
-msgstr "Стиль:"
+msgstr "п║я┌п╦п╩я▄:"
 
 #: data/glade/object-editor.glade.h:30
 msgid "X:"
@@ -1910,102 +1753,99 @@ msgstr "Y:"
 
 #: data/glade/object-editor.glade.h:32
 msgid "degrees"
-msgstr "градусов"
+msgstr "пЁя─п╟п╢я┐я│п╬п╡"
 
 #: data/glade/object-editor.glade.h:33
 msgid "dialog1"
-msgstr ""
+msgstr "dialog1"
 
 #: data/glade/object-editor.glade.h:34
 msgid "digits:"
-msgstr ""
+msgstr "я├п╦я└я─я▀:"
 
 #: data/glade/object-editor.glade.h:35
-#, fuzzy
 msgid "format:"
-msgstr "Формат:"
+msgstr "я└п╬я─п╪п╟я┌:"
 
 #: data/glade/template-designer.glade.h:1
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: data/glade/template-designer.glade.h:2
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr ""
+msgstr "(п╫п╟п©я─п╦п╪п╣я─, \"п÷п╬я┤я┌п╬п╡я▀п╣ я█я┌п╦п╨п╣я┌п╨п╦,\" \"п▓п╦п╥п╦я┌п╫я▀п╣ п╨п╟я─я┌п╬я┤п╨п╦,\" ...)"
 
 #: data/glade/template-designer.glade.h:3
 msgid "(e.g., 8163A)"
-msgstr ""
+msgstr "(e.g., 8163A)"
 
 #: data/glade/template-designer.glade.h:4
 msgid "(e.g., Avery, Acme, ...)"
-msgstr ""
+msgstr "(e.g., Avery, Acme, ...)"
 
 #: data/glade/template-designer.glade.h:6
 msgid "1. Outer radius:"
-msgstr ""
+msgstr "1. п²п╟я─я┐п╤п╫я▀п╧ я─п╟п╢п╦я┐я│:"
 
 #: data/glade/template-designer.glade.h:7
 msgid "1. Radius:"
-msgstr ""
+msgstr "1. п═п╟п╢п╦я┐я│:"
 
 #: data/glade/template-designer.glade.h:8
-#, fuzzy
 msgid "1. Width:"
-msgstr "Ширина:"
+msgstr "1. п╗п╦я─п╦п╫п╟:"
 
 #: data/glade/template-designer.glade.h:9
-#, fuzzy
 msgid "2. Height:"
-msgstr "Высота:"
+msgstr "2. п▓я▀я│п╬я┌п╟:"
 
 #: data/glade/template-designer.glade.h:10
 msgid "2. Inner radius:"
-msgstr ""
+msgstr "2. п▓п╫я┐я┌я─п╣п╫п╫п╦п╧ я─п╟п╢п╦я┐я│:"
 
 #: data/glade/template-designer.glade.h:11
 msgid "2. Waste (overprint allowed):"
-msgstr ""
+msgstr "2. п÷я┐я│я┌п╬п╣ п©п╬п╩п╣ (п╫п╟ п╫я▒п╪ п╪п╬п╤п╫п╬ п╠я┐п╢п╣я┌ п©п╣я┤п╟я┌я▄):"
 
 #: data/glade/template-designer.glade.h:12
 msgid "3. Clipping width:"
-msgstr ""
+msgstr "3. п╗п╦я─п╦п╫п╟ п╢п╩я▐ п╬п╠я─п╣п╥п╨п╦:"
 
 #: data/glade/template-designer.glade.h:13
 msgid "3. Margin"
-msgstr ""
+msgstr "3. п÷п╬п╩п╣"
 
 #: data/glade/template-designer.glade.h:14
 msgid "3. Round (radius of corner):"
-msgstr ""
+msgstr "3. п·п╨я─я┐пЁп╩п╬я│я┌я▄ (я─п╟п╢п╦я┐я│ п╡п╣я─я┬п╦п╫я▀):"
 
 #: data/glade/template-designer.glade.h:15
 msgid "4. Clipping height:"
-msgstr ""
+msgstr "4. п▓я▀я│п╬я┌п╟ п╬п╠я─п╣п╥п╨п╦:"
 
 #: data/glade/template-designer.glade.h:16
 msgid "4. Horiz. waste (overprint allowed):"
-msgstr ""
+msgstr "4. п÷я┐я│я┌п╬п╣ пЁп╬я─п╦п╥. п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ (п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╥п╟п©п╬п╩п╫п╣п╫п╬):"
 
 #: data/glade/template-designer.glade.h:17
 msgid "5. Vert. waste (overprint allowed):"
-msgstr ""
+msgstr "5. п÷я┐я│я┌п╬п╣ п╡п╣я─я┌. п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ (п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╥п╟п©п╬п╩п╫п╣п╫п╬):"
 
 #: data/glade/template-designer.glade.h:18
 msgid "5. Waste (overprint allowed):"
-msgstr ""
+msgstr "5. п÷я┐я│я┌п╬п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ (п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╥п╟п©п╬п╩п╫п╣п╫п╬):"
 
 #: data/glade/template-designer.glade.h:19
 msgid "6. Margin"
-msgstr ""
+msgstr "6. п÷п╬п╩п╣"
 
 #: data/glade/template-designer.glade.h:20
 msgid "Brand/Manufacturer:"
-msgstr ""
+msgstr "п÷я─п╬п╦п╥п╡п╬п╢п╦я┌п╣п╩я▄ п╦п╩п╦ я┌п╬я─пЁп╬п╡п╟я▐ п╪п╟я─п╨п╟:"
 
 #: data/glade/template-designer.glade.h:21
 msgid "CD/DVD (including credit card CDs)"
-msgstr ""
+msgstr "CD/DVD (п╡п╨п╩я▌я┤п╟я▐ CD я─п╟п╥п╪п╣я─п╬п╪ я│ п╡п╦п╥п╦я┌п╨я┐)"
 
 #: data/glade/template-designer.glade.h:22
 msgid ""
@@ -2017,22 +1857,29 @@ msgid ""
 "Otherwise, you may click \"Cancel\" to abandon your design\n"
 "or \"Back\" to continue editing this design."
 msgstr ""
+"п÷п╬п╥п╢я─п╟п╡п╩я▐п╣п╪!\n"
+"\n"
+"п▓я▀ п╥п╟п╡п╣я─я┬п╦п╩п╦ я│п╬п╥п╢п╟п╫п╦п╣ я┬п╟п╠п╩п╬п╫п╟ п╡ gLabels.\n"
+"п╖я┌п╬п╠я▀ я│п╬я┘я─п╟п╫п╦я┌я▄ я─п╟п╥я─п╟п╠п╬я┌п╨я┐, п╫п╟п╤п╪п╦я┌п╣ \"п÷я─п╦п╪п╣п╫п╦я┌я▄\"\n"
+"\n"
+"п╒п╟п╨п╤п╣ п╡я▀ п╪п╬п╤п╣я┌п╣ п╫п╟п╤п╟я┌я▄ \"п·я┌п╪п╣п╫п╦я┌я▄\", я┤я┌п╬п╠я▀ п╫п╣ я│п╬я┘я─п╟п╫я▐я┌я▄, п╦п╩п╦ \"п²п╟п╥п╟п╢\", "
+"я┤я┌п╬п╠я▀ п©я─п╬п╢п╬п╩п╤п╦я┌я▄ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣."
 
 #: data/glade/template-designer.glade.h:30
 msgid "Design Completed"
-msgstr ""
+msgstr "п·я└п╬я─п╪п╩п╣п╫п╦п╣ п╥п╟п╡п╣я─я┬п╣п╫п╬"
 
 #: data/glade/template-designer.glade.h:31
 msgid "Distance from left edge (x0):"
-msgstr ""
+msgstr "п═п╟я│я│я┌п╬я▐п╫п╦п╣ п╬я┌ п╩п╣п╡п╬пЁп╬ я┐пЁп╩п╟ (x0):"
 
 #: data/glade/template-designer.glade.h:32
 msgid "Distance from top edge (y0):"
-msgstr ""
+msgstr "п═п╟я│я│я┌п╬я▐п╫п╦п╣ п╬я┌ п╡п╣я─я┘п╫п╣пЁп╬ я┐пЁп╩п╟ (y0)"
 
 #: data/glade/template-designer.glade.h:34
 msgid "Horizontal pitch (dx):"
-msgstr ""
+msgstr "п≤п╫я┌п╣я─п╡п╟п╩ п©п╬ пЁп╬я─п╦п╥п╬п╫я┌п╟п╩п╦ (dx):"
 
 #: data/glade/template-designer.glade.h:35
 msgid ""
@@ -2042,128 +1889,132 @@ msgid ""
 "Most templates only need one layout, as in the first example.\n"
 "The second example illustrates when two layouts are needed."
 msgstr ""
+"п║п╨п╬п╩я▄п╨п╬ я└п╬я─п╪ п╠я┐п╢п╣я┌ я│п╬п╢п╣я─п╤п╟я┌я▄ я┬п╟п╠п╩п╬п╫? \n"
+"\n"
+"п╓п╬я─п╪п╟ - я█я┌п╬ п╫п╟п╠п╬я─ я█я┌п╦п╨п╣я┌п╬п╨ п╦п╩п╦ п╡п╦п╥п╦я┌п╬п╨, п╨п╬я┌п╬я─я▀п╣ п╪п╬п╤я┐я┌ п╠я▀я┌я▄ я─п╟я│п©я─п╣п╢п╣п╩п╣п╫я▀ п©п╬ "
+"п©я─п╬я│я┌п╬п╧ я│п╣я┌п╨п╣.\n"
+"п▒п╬п╩я▄я┬п╦п╫я│я┌п╡я┐ я┬п╟п╠п╩п╬п╫п╬п╡ я┌я─п╣п╠я┐п╣я┌я│я▐ я┌п╬п╩я▄п╨п╬ п╬п╢п╫п╟ я└п╬я─п╪п╟, п╨п╟п╨ п╡ п©п╣я─п╡п╬п╪ п©я─п╦п╪п╣я─п╣.\n"
+"п▓я┌п╬я─п╬п╧ п©я─п╦п╪п╣я─ п╦п╩п╩я▌я│я┌я─п╦я─я┐п╣я┌ я│п╩я┐я┤п╟п╧, п╨п╬пЁп╢п╟ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п©я─п╦п╪п╣п╫я▐я┌я▄ п╢п╡п╣ я└п╬я─п╪я▀."
 
 #: data/glade/template-designer.glade.h:40
 msgid "Label Size (CD/DVD)"
-msgstr ""
+msgstr "п═п╟п╥п╪п╣я─ п╪п╣я┌п╨п╦ (CD/DVD)"
 
 #: data/glade/template-designer.glade.h:41
-#, fuzzy
 msgid "Label Size (Round)"
-msgstr "Размер этикетки:"
+msgstr "п═п╟п╥п╪п╣я─ п╪п╣я┌п╨п╦ (п╢п╦п╟п╪п╣я┌я─)"
 
 #: data/glade/template-designer.glade.h:42
-#, fuzzy
 msgid "Label or Card Shape"
-msgstr "Новая этикетка или визитка"
+msgstr "п╓п╬я─п╪п╟ я█я┌п╦п╨п╣я┌п╨п╦ п╦п╩п╦ п╡п╦п╥п╦я┌п╨п╦"
 
 #: data/glade/template-designer.glade.h:43
 msgid "Label or Card Size (Rectangular)"
-msgstr ""
+msgstr "п═п╟п╥п╡п╣я─ я█я┌п╦п╨п╣я┌п╨п╦ п╦п╩п╦ п╡п╦п╥п╦я┌п╨п╦ (п©я─я▐п╪п╬я┐пЁп╬п╩я▄п╫п╦п╨)"
 
 #: data/glade/template-designer.glade.h:44
-#, fuzzy
 msgid "Layout #1"
-msgstr "Формат:"
+msgstr "п╓п╬я─п╪п╟ #1"
 
 #: data/glade/template-designer.glade.h:45
-#, fuzzy
 msgid "Layout #2"
-msgstr "Формат:"
+msgstr "п╓п╬я─п╪п╟ #2"
 
 #: data/glade/template-designer.glade.h:46
-#, fuzzy
 msgid "Layout(s)"
-msgstr "Формат:"
+msgstr "п╓п╬я─п╪я▀"
 
 #: data/glade/template-designer.glade.h:47
-#, fuzzy
 msgid "Name and Description"
-msgstr "Описание:"
+msgstr "п²п╟п╥п╡п╟п╫п╦п╣ п╦ п·п©п╦я│п╟п╫п╦п╣"
 
 #: data/glade/template-designer.glade.h:48
 msgid "Number across (nx):"
-msgstr ""
+msgstr "п÷п╬ пЁп╬я─п╦п╥п╬п╫я┌п╟п╩п╦ (nx):"
 
 #: data/glade/template-designer.glade.h:49
 msgid "Number down (ny):"
-msgstr ""
+msgstr "п÷п╬ п╡п╣я─я┌п╦п╨п╟п╩п╦ (ny):"
 
 #: data/glade/template-designer.glade.h:50
 msgid "Number of Layouts"
-msgstr ""
+msgstr "п п╬п╩п╦я┤п╣я│я┌п╡п╬ я└п╬я─п╪"
 
 #: data/glade/template-designer.glade.h:51
 msgid "Number of layouts:"
-msgstr ""
+msgstr "п п╬п╩п╦я┤п╣я│я┌п╡п╬ я└п╬я─п╪:"
 
 #: data/glade/template-designer.glade.h:52
-#, fuzzy
 msgid "Page Size"
-msgstr "Размер страницы:"
+msgstr "п═п╟п╥п╪п╣я─ я│я┌я─п╟п╫п╦я├я▀"
 
 #: data/glade/template-designer.glade.h:54
 msgid "Part #:"
-msgstr ""
+msgstr "п╖п╟я│я┌я▄ #:"
 
 #: data/glade/template-designer.glade.h:55
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
-msgstr ""
+msgstr "пёп╨п╟п╤п╦я┌п╣ я│п╩п╣п╢я┐я▌я┴я┐я▌ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я├п╦п╬п╫п╫я┐я▌ п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬ ."
 
 #: data/glade/template-designer.glade.h:56
 msgid "Please enter the following layout information."
-msgstr ""
+msgstr "п▓п╡п╣п╢п╦я┌п╣ я│п╩п╣п╢я┐я▌я┴я┐я▌ п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬п╠ п╬я└п╬я─п╪п╩п╣п╫п╦п╦."
 
 #: data/glade/template-designer.glade.h:57
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
-msgstr ""
+msgstr "п▓п╡п╣п╢п╦я┌п╣ пЁп╣п╬п╪п╣я┌я─п╦я┤п╣я│п╨п╦п╣ я─п╟п╥п╪п╣я─я▀ п╬п╢п╦п╫п╬я┤п╫п╬п╧ я█я┌п╦п╨п╣я┌п╨п╦ п╡ п╡п╟я┬п╣п╪ я┬п╟п╠п╩п╬п╫п╣."
 
 #: data/glade/template-designer.glade.h:58
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
 msgstr ""
+"п▓п╡п╣п╢п╦я┌п╣ пЁп╣п╬п╪п╣я┌я─п╦я┤п╣я│п╨п╦п╣ я─п╟п╥п╪п╣я─я▀ п╬п╢п╦п╫п╬я┤п╫п╬п╧ я█я┌п╦п╨п╣я┌п╨п╦ п╦п╩п╦ п╡п╦п╥п╦я┌п╨п╦ п╡ п╡п╟я┬п╣п╪ "
+"я┬п╟п╠п╩п╬п╫п╣."
 
 #: data/glade/template-designer.glade.h:59
 msgid "Please select the basic shape of the labels or cards."
-msgstr ""
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╬я│п╫п╬п╡п╫я┐я▌ я└п╦пЁя┐я─я┐ я█я┌п╦п╨п╣я┌п╨п╦ п╦п╩п╦ п╨п╟я─я┌п╬я┤п╨п╦."
 
 #: data/glade/template-designer.glade.h:60
 msgid "Please select the page size of the template stationery."
-msgstr ""
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ я─п╟п╥п╪п╣я─ я│я┌я─п╟п╫п╦я├я▀ п╢п╩я▐ я┬п╟п╠п╩п╬п╫п╟."
 
 #: data/glade/template-designer.glade.h:61
-#, fuzzy
 msgid "Print test sheet"
-msgstr "на первом листе"
+msgstr "п²п╟п©п╣я┤п╟я┌п╟я┌я▄ я┌п╣я│я┌п╬п╡я┐я▌ я│я┌я─п╟п╫п╦я├я┐"
 
 #: data/glade/template-designer.glade.h:62
 msgid "Rectangular or square (can have rounded corners)"
-msgstr ""
+msgstr "п÷я─я▐п╪п╬я┐пЁп╬п╩я▄п╫п╦п╨ п╦п╩п╦ п╨п╡п╟п╢я─п╟я┌ (п╪п╬п╤п╣я┌ п╦п╪п╣я┌я▄ я│п╨я─я┐пЁп╩я▒п╫п╫я▀п╣ п╨я─п╟я▐)"
 
 #: data/glade/template-designer.glade.h:63
 msgid "Round"
-msgstr ""
+msgstr "п я─я┐пЁ"
 
 #: data/glade/template-designer.glade.h:64
 msgid ""
 "Templates needing\n"
 "two layouts."
 msgstr ""
+"п■п╩я▐ п╢п╟п╫п╫п╬пЁп╬ я┬п╟п╠п╩п╬п╫п╟\n"
+"я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╡п╣ я└п╬я─п╪я▀."
 
 #: data/glade/template-designer.glade.h:66
 msgid ""
 "Templates needing only\n"
 "one layout."
 msgstr ""
+"п■п╩я▐ п╢п╟п╫п╫п╬пЁп╬ я┬п╟п╠п╩п╬п╫п╟ я┌я─п╣п╠я┐п╣я┌я│я▐\n"
+"я┌п╬п╩я▄п╨п╬ п╬п╢п╫п╟ я└п╬я─п╪п╟."
 
 #: data/glade/template-designer.glade.h:68
 msgid "Vertical pitch (dy):"
-msgstr ""
+msgstr "п≤п╫я┌п╣я─п╡п╟п╩ п©п╬ п╡п╣я─я┌п╦п╨п╟п╩п╦ (dy):"
 
 #: data/glade/template-designer.glade.h:69
 msgid ""
@@ -2171,437 +2022,438 @@ msgid ""
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
+"п■п╬п╠я─п╬ п©п╬п╤п╟п╩п╬п╡п╟я┌я▄ п╡ п■п╦п╥п╟п╧п╫п╣я─ я┬п╟п╠п╩п╬п╫п╬п╡ gLabels.\n"
+"\n"
+"п╜я┌п╬я┌ п╢п╦п╟п╩п╬пЁ п╠я┐п╢п╣я┌ я│п╬п©я─п╬п╡п╬п╤п╢п╟я┌я▄ п╡п╟я│ п╡ я│п╬п╥п╢п╟п╫п╦п╦ п╡п╟я┬п╣пЁп╬ я│п╬п╠я│я┌п╡п╣п╫п╫п╬пЁп╬ я┬п╟п╠п╩п╬п╫п╟ "
+"gLabels."
 
-#: data/templates/paper-sizes.xml.h:1
-msgid "A0"
-msgstr ""
-
+#. Other ISO A series sizes
 #: data/templates/paper-sizes.xml.h:2
-msgid "A1"
-msgstr ""
+msgid "A0"
+msgstr "A0"
 
 #: data/templates/paper-sizes.xml.h:3
-msgid "A10"
-msgstr ""
+msgid "A1"
+msgstr "A1"
 
 #: data/templates/paper-sizes.xml.h:4
-msgid "A2"
-msgstr ""
+msgid "A10"
+msgstr "A10"
 
 #: data/templates/paper-sizes.xml.h:5
-msgid "A3"
-msgstr ""
+msgid "A2"
+msgstr "A2"
 
 #: data/templates/paper-sizes.xml.h:6
-msgid "A4"
-msgstr ""
+msgid "A3"
+msgstr "A3"
 
 #: data/templates/paper-sizes.xml.h:7
-msgid "A5"
-msgstr ""
+msgid "A4"
+msgstr "A4"
 
 #: data/templates/paper-sizes.xml.h:8
-msgid "A6"
-msgstr ""
+msgid "A5"
+msgstr "A5"
 
 #: data/templates/paper-sizes.xml.h:9
-msgid "A7"
-msgstr ""
+msgid "A6"
+msgstr "A6"
 
 #: data/templates/paper-sizes.xml.h:10
-msgid "A8"
-msgstr ""
+msgid "A7"
+msgstr "A7"
 
 #: data/templates/paper-sizes.xml.h:11
-msgid "A9"
-msgstr ""
+msgid "A8"
+msgstr "A8"
 
 #: data/templates/paper-sizes.xml.h:12
-msgid "B0"
-msgstr ""
+msgid "A9"
+msgstr "A9"
 
-#: data/templates/paper-sizes.xml.h:13
-msgid "B1"
-msgstr ""
-
+#. ISO B series sizes
 #: data/templates/paper-sizes.xml.h:14
-msgid "B10"
-msgstr ""
+msgid "B0"
+msgstr "B0"
 
 #: data/templates/paper-sizes.xml.h:15
-msgid "B2"
-msgstr ""
+msgid "B1"
+msgstr "B1"
 
 #: data/templates/paper-sizes.xml.h:16
-msgid "B3"
-msgstr ""
+msgid "B10"
+msgstr "B10"
 
 #: data/templates/paper-sizes.xml.h:17
-msgid "B4"
-msgstr ""
+msgid "B2"
+msgstr "B2"
 
 #: data/templates/paper-sizes.xml.h:18
-msgid "B5"
-msgstr ""
+msgid "B3"
+msgstr "B3"
 
 #: data/templates/paper-sizes.xml.h:19
-msgid "B6"
-msgstr ""
+msgid "B4"
+msgstr "B4"
 
 #: data/templates/paper-sizes.xml.h:20
-msgid "B7"
-msgstr ""
+msgid "B5"
+msgstr "B5"
 
 #: data/templates/paper-sizes.xml.h:21
-msgid "B8"
-msgstr ""
+msgid "B6"
+msgstr "B6"
 
 #: data/templates/paper-sizes.xml.h:22
-msgid "B9"
-msgstr ""
+msgid "B7"
+msgstr "B7"
 
 #: data/templates/paper-sizes.xml.h:23
-msgid "US Executive"
-msgstr ""
+msgid "B8"
+msgstr "B8"
 
 #: data/templates/paper-sizes.xml.h:24
+msgid "B9"
+msgstr "B9"
+
+#: data/templates/paper-sizes.xml.h:25
+msgid "US Executive"
+msgstr "US Executive"
+
+#. Other US paper sizes
+#: data/templates/paper-sizes.xml.h:27
 msgid "US Legal"
-msgstr ""
+msgstr "US Legal"
 
-#: data/templates/avery-us-templates.xml.h:1
-#: data/templates/zweckform-iso-templates.xml.h:1
-msgid "Address Labels"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/avery-us-templates.xml.h:2
-#: data/templates/avery-iso-templates.xml.h:2
-#: data/templates/zweckform-iso-templates.xml.h:3
-#: data/templates/misc-us-templates.xml.h:2
-#: data/templates/misc-iso-templates.xml.h:9
-msgid "Business Cards"
-msgstr ""
+#: data/templates/zweckform-iso-templates.xml.h:2
+msgid "Address Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╟ я│ п╟п╢я─п╣я│п╬п╪"
 
-#: data/templates/avery-us-templates.xml.h:3
-msgid "CD/DVD Labels (Disc Labels)"
-msgstr ""
-
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. ======================================================
 #: data/templates/avery-us-templates.xml.h:4
-msgid "Diskette Labels"
-msgstr ""
+#: data/templates/avery-iso-templates.xml.h:4
+#: data/templates/zweckform-iso-templates.xml.h:6
+#: data/templates/misc-us-templates.xml.h:3
+#: data/templates/misc-iso-templates.xml.h:17
+msgid "Business Cards"
+msgstr "п▓п╦п╥п╦я┌п╫я▀п╣ п╨п╟я─я┌п╬я┤п╨п╦"
 
 #: data/templates/avery-us-templates.xml.h:5
-#, fuzzy
-msgid "Filing Labels"
-msgstr "Этикетки"
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "п°п╣я┌п╨п╦ п╢п╩я▐ CD/DVD (п²п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╢п╦я│п╨)"
 
-#: data/templates/avery-us-templates.xml.h:6
-msgid "Full Sheet Labels"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/avery-us-templates.xml.h:7
-#, fuzzy
-msgid "Large Round Labels"
-msgstr "Начать с этикетки"
+msgid "Diskette Labels"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╢п╦я│п╨п╣я┌я▀"
 
-#: data/templates/avery-us-templates.xml.h:8
-msgid "Name Badge Labels"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/avery-us-templates.xml.h:9
-msgid "Return Address Labels"
-msgstr ""
+msgid "Filing Labels"
+msgstr "п≈п╟п©п╬п╩п╫я▐п╣п╪я▀п╣ я█я┌п╦п╨п╣я┌п╨п╦"
 
-#: data/templates/avery-us-templates.xml.h:10
-msgid "Shipping Labels"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/avery-us-templates.xml.h:11
-#, fuzzy
-msgid "Small Round Labels"
-msgstr "Начать с этикетки"
+msgid "Full Sheet Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╫п╟ п╡я│я▌ я│я┌я─п╟п╫п╦я├я┐"
 
-#: data/templates/avery-us-templates.xml.h:12
-#, fuzzy
-msgid "Square Labels"
-msgstr "Этикетки"
-
+#. ===================================================================
 #: data/templates/avery-us-templates.xml.h:13
+msgid "Large Round Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ я│ п╠п╬п╩я▄я┬п╦п╪ п╥п╟п╨я─я┐пЁп╩п╣п╫п╦п╣п╪"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:15
+msgid "Name Badge Labels"
+msgstr "п≤п╪п╣п╫п╫п╬п╧ п╠п╣п╧п╢п╤п╦п╨"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:17
+msgid "Return Address Labels"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╟ п╢п╩я▐ п╬п╠я─п╟я┌п╫п╬пЁп╬ п╟п╢я─п╣я│п╟"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:19
+msgid "Shipping Labels"
+msgstr "п╕п╣п╫п╫п╦п╨п╦"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:21
+msgid "Small Round Labels"
+msgstr "п°п╟п╩п╣п╫я▄п╨п╦п╣ п╨я─я┐пЁп╩я▀п╣ я█я┌п╦п╨п╣я┌п╨п╦"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:23
+msgid "Square Labels"
+msgstr "п÷я─я▐п╪п╬я┐пЁп╬п╩я▄п╫я▀п╣ я█я┌п╦п╨п╣я┌п╨п╦"
+
+#: data/templates/avery-us-templates.xml.h:24
 msgid "Video Tape Face Labels"
-msgstr ""
+msgstr "п⌡п╦я├п╣п╡я▀п╣ п╫п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╡п╦п╢п╣п╬п╨п╟я│я│п╣я┌я┐"
 
-#: data/templates/avery-us-templates.xml.h:14
+#: data/templates/avery-us-templates.xml.h:25
 msgid "Video Tape Spine Labels"
-msgstr ""
+msgstr "п╒п╬я─я├п╣п╡я▀п╣ п╫п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╡п╦п╢п╣п╬п╨п╟я│я│п╣я┌я┐"
 
-#: data/templates/avery-iso-templates.xml.h:1
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:2
 msgid "Address labels"
-msgstr ""
+msgstr "п░п╢я─п╣я│п╫я▀п╣ п╫п╟п╨п╩п╣п╧п╨п╦"
 
-#: data/templates/avery-iso-templates.xml.h:3
-msgid "CD Booklet"
-msgstr ""
-
-#: data/templates/avery-iso-templates.xml.h:4
-msgid "CD Inlet"
-msgstr ""
-
-#: data/templates/avery-iso-templates.xml.h:5
-#: data/templates/zweckform-iso-templates.xml.h:4
-#: data/templates/misc-us-templates.xml.h:4
-#: data/templates/misc-iso-templates.xml.h:10
-#, fuzzy
-msgid "CD/DVD Labels"
-msgstr "Этикетки"
-
+#. ===============================================================
 #: data/templates/avery-iso-templates.xml.h:6
-#, fuzzy
-msgid "Diskette labels"
-msgstr "glabels"
+msgid "CD Booklet"
+msgstr "п▓п╨п╩п╟п╢я▀я┬ п╡ CD"
 
-#: data/templates/avery-iso-templates.xml.h:7
-#: data/templates/zweckform-iso-templates.xml.h:7
-#: data/templates/misc-iso-templates.xml.h:17
-msgid "Mailing Labels"
-msgstr ""
-
+#. ===============================================================
 #: data/templates/avery-iso-templates.xml.h:8
 #, fuzzy
-msgid "Mailing labels"
-msgstr "glabels"
+msgid "CD Inlet"
+msgstr "CD"
 
-#: data/templates/avery-iso-templates.xml.h:9
-msgid "Mini Address Labels"
-msgstr ""
-
+#. ===============================================================
+#. ===================================================================
 #: data/templates/avery-iso-templates.xml.h:10
-#, fuzzy
-msgid "Shipping labels"
-msgstr "Открыть этикетку"
-
-#: data/templates/zweckform-iso-templates.xml.h:2
-#, fuzzy
-msgid "Allround Labels"
-msgstr "glabels"
-
-#: data/templates/zweckform-iso-templates.xml.h:5
-msgid "Correction and Cover-up Labels"
-msgstr ""
-
-#: data/templates/zweckform-iso-templates.xml.h:6
-msgid "Lever Arch File Labels"
-msgstr ""
-
 #: data/templates/zweckform-iso-templates.xml.h:8
-msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+#: data/templates/misc-us-templates.xml.h:5
+#: data/templates/misc-iso-templates.xml.h:21
+msgid "CD/DVD Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╢п╩я▐ CD/DVD"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:12
+msgid "Diskette labels"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╢п╦я│п╨п╣я┌я▀"
+
+#. ===============================================================
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:14
+#: data/templates/zweckform-iso-templates.xml.h:14
+#: data/templates/misc-iso-templates.xml.h:35
+msgid "Mailing Labels"
+msgstr "п÷п╬я┤я┌п╬п╡я▀п╣ я█я┌п╦п╨п╣я┌п╨п╦"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:16
+msgid "Mailing labels"
+msgstr "п÷п╬я┤я┌п╬п╡я▀п╣ п╫п╟п╨п╩п╣п╧п╨п╦"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:18
+msgid "Mini Address Labels"
+msgstr "п°п╟п╩п╣п╫я▄п╨п╦п╣ п╫п╟п╨п╩п╣п╧п╨п╦ я│ п╟п╢я─п╣я│п╬п╪"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:20
+msgid "Shipping labels"
+msgstr "п╕п╣п╫п╫п╦п╨п╦"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:4
+msgid "Allround Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:9
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:10
+msgid "Correction and Cover-up Labels"
+msgstr "п≤я│п©я─п╟п╡п╩я▐я▌я┴п╦п╣ п╦ п©п╬п╨я─я▀п╡п╟я▌я┴п╦п╣ п╪п╣я┌п╨п╦"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:12
+#, fuzzy
+msgid "Lever Arch File Labels"
+msgstr "п╓п╟п╧п╩"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:16
+#, fuzzy
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "x"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:18
 msgid "Rectangular Copier Labels"
 msgstr ""
 
-#: data/templates/zweckform-iso-templates.xml.h:10
-#: data/templates/misc-iso-templates.xml.h:22
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:20
+#: data/templates/misc-iso-templates.xml.h:44
 msgid "Rectangular Labels"
-msgstr ""
+msgstr "п÷я─я▐п╪п╬я┐пЁп╬п╩я▄п╫я▀п╣ п╪п╣я┌п╨п╦"
 
-#: data/templates/zweckform-iso-templates.xml.h:11
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:22
 msgid "Video Labels (back)"
-msgstr ""
+msgstr "п▓п╦п╢п╣п╬п╫п╟п╨п╩п╣п╧п╨п╦ (п╬п╠п╬я─п╬я┌п╫п╟я▐ я│я┌п╬я─п╬п╫п╟)"
 
 #: data/templates/misc-us-templates.xml.h:1
 msgid "Business Card CD"
-msgstr ""
+msgstr "п▓п╦п╥п╦я┌п╫п╟я▐ п╨п╟я─я┌п╬я┤п╨п╟ п╫п╟ CD"
 
-#: data/templates/misc-us-templates.xml.h:3
+#: data/templates/misc-us-templates.xml.h:4
 msgid "CD Template Rectangles"
-msgstr ""
-
-#: data/templates/misc-us-templates.xml.h:5
-msgid "CD/DVD Labels (Face Only)"
-msgstr ""
+msgstr "п÷я─я▐п╪п╬я┐пЁп╬п╩я▄п╫я▀п╧ я┬п╟п╠п╩п╬п╫ п╢п╩я▐ CD"
 
 #: data/templates/misc-us-templates.xml.h:6
-#: data/templates/misc-iso-templates.xml.h:11
-msgid "CD/DVD Labels (face only)"
-msgstr ""
+msgid "CD/DVD Labels (Face Only)"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╢п╩я▐ CD/DVD (п╩п╦я├п╣п╡п╟я▐ я│я┌п╬я─п╬п╫п╟)"
 
+#. ===================================================================
 #: data/templates/misc-us-templates.xml.h:7
-#, fuzzy
-msgid "DLT Labels"
-msgstr "Этикетки"
+#: data/templates/misc-iso-templates.xml.h:23
+msgid "CD/DVD Labels (face only)"
+msgstr "п▓п╨п╩п╟п╢я▀я┬п╦ CD/DVD (п╩п╦я├п╣п╡п╟я▐ я│я┌п╬я─п╬п╫п╟)"
 
-#: data/templates/misc-us-templates.xml.h:8
-#, fuzzy
-msgid "Microtube labels"
-msgstr "glabels"
-
+#. ===================================================================
 #: data/templates/misc-us-templates.xml.h:9
-msgid "Mini-CD Labels"
-msgstr ""
+msgid "Cassette Labels"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╨п╟я│я│п╣я┌я▀"
 
-#: data/templates/misc-us-templates.xml.h:10
-msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/misc-us-templates.xml.h:11
-msgid "PRO CD Labels 2-up (Face only)"
-msgstr ""
+msgid "DLT Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╫п╟ DLT"
 
-#: data/templates/misc-us-templates.xml.h:12
-#: data/templates/misc-iso-templates.xml.h:21
-msgid "PRO CD Labels 2-up (face only)"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/misc-us-templates.xml.h:13
-msgid "Slimline CD Case (rightside up)"
-msgstr ""
+msgid "Microtube labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╢п╩я▐ Microtube"
 
 #: data/templates/misc-us-templates.xml.h:14
+msgid "Mini-CD Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╢п╩я▐ п°п╦п╫п╦-CD"
+
+#: data/templates/misc-us-templates.xml.h:15
+#, fuzzy
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "CD CD"
+
+#: data/templates/misc-us-templates.xml.h:16
+#, fuzzy
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "CD"
+
+#: data/templates/misc-us-templates.xml.h:17
+#: data/templates/misc-iso-templates.xml.h:42
+#, fuzzy
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "CD"
+
+#: data/templates/misc-us-templates.xml.h:18
+msgid "Slimline CD Case (rightside up)"
+msgstr "п╒п╬п╫п╨п╦п╣ п╨п╬я─п╬п╠п╨п╦ п╢п╩я▐ CD (п©я─п╟п╡п╟я▐ я│я┌п╬я─п╬п╫п╟ п╡п╡п╣я─я┘я┐)"
+
+#: data/templates/misc-us-templates.xml.h:19
 msgid "Slimline CD Case (upside down)"
-msgstr ""
+msgstr "п╒п╬п╫п╨п╦п╣ п╨п╬я─п╬п╠п╨п╦ п╢п╩я▐ CD (п╨п╡п╣я─я┘ п╫п╬пЁп╟п╪п╦)"
 
 #: data/templates/misc-iso-templates.xml.h:1
 msgid "Agipa 119488: Business Cards"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:2
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:3
 msgid "Allround Labels --24"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:3
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:5
 msgid "Allround Labels --44"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:4
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:7
 msgid "Allround Labels --64"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:5
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:9
 msgid "Allround Labels --65"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:6
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:11
+#, fuzzy
 msgid "Arch File Labels"
-msgstr ""
+msgstr "п╓п╟п╧п╩"
 
-#: data/templates/misc-iso-templates.xml.h:7
-msgid "Arch File Labels (large)"
-msgstr ""
-
-#: data/templates/misc-iso-templates.xml.h:8
-msgid "Arch File Labels (small)"
-msgstr ""
-
-#: data/templates/misc-iso-templates.xml.h:12
-msgid "CD/DVD Labels Standard Format (face only)"
-msgstr ""
-
+#. ===================================================================
 #: data/templates/misc-iso-templates.xml.h:13
-msgid "Diskette Labels (face only)"
-msgstr ""
+#, fuzzy
+msgid "Arch File Labels (large)"
+msgstr "п╓п╟п╧п╩ п╠п╬п╩я▄я┬п╬п╧"
 
-#: data/templates/misc-iso-templates.xml.h:14
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:15
+#, fuzzy
+msgid "Arch File Labels (small)"
+msgstr "п╓п╟п╧п╩ п╪п╟п╩п╣п╫я▄п╨п╦п╧"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:19
+msgid "CD Labels"
+msgstr "п╜я┌п╦п╨п╣я┌п╨п╦ п╢п╩я▐ CD"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:25
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ я│я┌п╟п╫п╢п╟я─я┌п╫п╬пЁп╬ я└п╬я─п╪п╟я┌п╟ п╢п╩я▐ CD/DVD (п╩п╦я├п╣п╡п╟я▐ я│я┌п╬я─п╬п╫п╟)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:27
+msgid "Diskette Labels (face only)"
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╢п╩я▐ п╢п╦я│п╨п╣я┌ (п╩п╦я├п╣п╡п╟я▐ я│я┌п╬я─п╬п╫п╟)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:29
 msgid "EPSON Photo Stickers 16"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:15
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:31
 msgid "Etiketten"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:16
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:33
 msgid "Fridge Magnet Stickers"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:18
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:37
 msgid "Mailing Labels --14"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:19
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:39
 msgid "Mailing Labels-2 columns"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:20
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:41
 msgid "Mailing Labels-3 columns"
 msgstr ""
 
-#: data/templates/misc-iso-templates.xml.h:23
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:46
 msgid "Video Labels (face only)"
-msgstr ""
+msgstr "п²п╟п╨п╩п╣п╧п╨п╦ п╫п╟ п╡п╦п╢п╣п╬п╨п╟я│я│п╣я┌я▀ (п╩п╦я├п╣п╡п╟я▐ я│я┌п╬я─п╬п╫п╟)"
 
 #: data/desktop/glabels.desktop.in.h:1
-msgid "Create labels, business cards and media covers."
-msgstr ""
+msgid "Create labels, business cards and media covers"
+msgstr "п║п╬п╥п╢п╟п╫п╦п╣ я█я┌п╦п╨п╣я┌п╬п╨, п╡п╦п╥п╦я┌п╫я▀я┘ п╨п╟я─я┌п╬я┤п╣п╨ п╦ п╡п╨п╩п╟п╢я▀я┬п╣п╧ п╢п╩я▐ п╢п╦я│п╨п╬п╡"
 
 #: data/desktop/glabels.desktop.in.h:2
 msgid "gLabels Label Designer"
-msgstr ""
+msgstr "п■п╦п╥п╟п╧п╫п╣я─ я█я┌п╦п╨п╣я┌п╬п╨ gLabels"
 
 #: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
-#, fuzzy
 msgid "gLabels Project File"
-msgstr "Свойства объекта..."
+msgstr "п╓п╟п╧п╩ п©я─п╬п╣п╨я┌п╟ gLabels"
 
-#, fuzzy
-#~ msgid "Object _Properties..."
-#~ msgstr "Свойства объекта..."
-
-#~ msgid "Display units"
-#~ msgstr "Единицы отображения"
-
-#~ msgid "Default page size"
-#~ msgstr "Размер бумаги по умолчанию"
-
-#~ msgid "Outline"
-#~ msgstr "Контур"
-
-#~ msgid "Edit line object properties"
-#~ msgstr "Изменить свойства объекта типа линия"
-
-#~ msgid "Edit text object properties"
-#~ msgstr "Изменить свойства объекта типа текст"
-
-#~ msgid "Edit text:"
-#~ msgstr "Исправить текст:"
-
-#~ msgid "Maintain current aspect ratio"
-#~ msgstr "Сохранять текущие пропорции"
-
-#, fuzzy
-#~ msgid "CD Labels"
-#~ msgstr "Этикетки"
-
-#~ msgid "Open %s"
-#~ msgstr "Открыть %s"
-
-#~ msgid "About this application"
-#~ msgstr "Об этой  программе"
-
-#~ msgid "Lower to Bottom"
-#~ msgstr "На задний план"
-
-#~ msgid "Raise to Top"
-#~ msgstr "На передний план"
-
-#~ msgid "Edit properties..."
-#~ msgstr "Изменить свойства..."
-
-#~ msgid "Fields"
-#~ msgstr "Поля"
-
-#~ msgid "Column"
-#~ msgstr "Столбец"
-
-#~ msgid "Custom field key"
-#~ msgstr "Нестандартный ключ поля"
-
-#~ msgid "Sample data"
-#~ msgstr "Пример данных"
-
-#~ msgid "Scale:"
-#~ msgstr "Масштаб:"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Show text with barcode"
-#~ msgstr "Показать текст со штрих-кодом"

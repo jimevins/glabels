@@ -13,6 +13,11 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -34,6 +39,7 @@
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-7</property>
 	    </widget>
 	  </child>
@@ -140,6 +146,8 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="editable">True</property>
+			      <property name="overwrite">False</property>
+			      <property name="accepts_tab">True</property>
 			      <property name="justification">GTK_JUSTIFY_LEFT</property>
 			      <property name="wrap_mode">GTK_WRAP_NONE</property>
 			      <property name="cursor_visible">True</property>
@@ -239,6 +247,7 @@
 			  <property name="label" translatable="yes">Insert merge field</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -458,7 +467,7 @@
 				<widget class="GtkEntry" id="text_family_entry">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="editable">True</property>
+				  <property name="editable">False</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">0</property>
 				  <property name="text" translatable="yes"></property>
@@ -537,6 +546,7 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 
@@ -564,6 +574,7 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 
@@ -607,6 +618,7 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 
@@ -634,6 +646,7 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 
@@ -661,6 +674,7 @@
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 
@@ -766,6 +780,7 @@
 			  <property name="label" translatable="yes">Allow merge to automatically shrink text</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1044,7 +1059,6 @@
 			    <widget class="Custom" id="fill_color_combo">
 			      <property name="visible">True</property>
 			      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-			      <property name="string1"></property>
 			      <property name="int1">0</property>
 			      <property name="int2">0</property>
 			      <property name="last_modification_time">Sat, 15 Nov 2003 20:47:48 GMT</property>
@@ -1117,6 +1131,7 @@
 			  <property name="label" translatable="yes">File:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1143,6 +1158,7 @@
 		      <property name="browse_dialog_title" translatable="yes">Load image</property>
 		      <property name="modal">False</property>
 		      <property name="do_preview">True</property>
+		      <property name="use_filechooser">False</property>
 
 		      <child internal-child="entry">
 			<widget class="GtkEntry" id="combo-entry3">
@@ -1190,6 +1206,7 @@
 			  <property name="label" translatable="yes">Key:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1214,7 +1231,6 @@
 			  <child internal-child="entry">
 			    <widget class="GtkEntry" id="img_key_entry">
 			      <property name="visible">True</property>
-			      <property name="sensitive">False</property>
 			      <property name="can_focus">True</property>
 			      <property name="editable">False</property>
 			      <property name="visibility">True</property>
@@ -1295,6 +1311,7 @@
 			  <property name="label" translatable="yes">Literal:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1316,6 +1333,7 @@
 			  <property name="label" translatable="yes">Key:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1384,7 +1402,7 @@
 				<widget class="GtkEntry" id="data_key_entry">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="editable">True</property>
+				  <property name="editable">False</property>
 				  <property name="visibility">True</property>
 				  <property name="max_length">0</property>
 				  <property name="text" translatable="yes"></property>
@@ -1731,6 +1749,7 @@
 			  <property name="label" translatable="yes">Text</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1752,6 +1771,7 @@
 			  <property name="label" translatable="yes">Checksum</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1931,6 +1951,7 @@
 			      <property name="label" translatable="yes">Reset image size</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>

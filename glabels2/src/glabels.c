@@ -43,82 +43,12 @@
 /*========================================================*/
 #define ICON_PIXMAP gnome_program_locate_file (NULL,\
 					       GNOME_FILE_DOMAIN_APP_PIXMAP,\
-					       "glabels/glabels-icon.png",\
+					       "glabels.png",\
 					       FALSE, NULL)
 
 /*========================================================*/
 /* Private globals                                        */
 /*========================================================*/
-static const struct poptOption options [] =
-{
-	{ "debug-view", '\0', POPT_ARG_NONE, &gl_debug_view, 0,
-	  N_("Show view debugging messages."), NULL },
-
-	{ "debug-item", '\0', POPT_ARG_NONE, &gl_debug_item, 0,
-	  N_("Show item debugging messages."), NULL },
-
-	{ "debug-print", '\0', POPT_ARG_NONE, &gl_debug_print, 0,
-	  N_("Show printing debugging messages."), NULL },
-
-	{ "debug-prefs", '\0', POPT_ARG_NONE, &gl_debug_prefs, 0,
-	  N_("Show prefs debugging messages."), NULL },
-
-	{ "debug-file", '\0', POPT_ARG_NONE, &gl_debug_file, 0,
-	  N_("Show file debugging messages."), NULL },
-
-	{ "debug-label", '\0', POPT_ARG_NONE, &gl_debug_label, 0,
-	  N_("Show document debugging messages."), NULL },
-
-	{ "debug-template", '\0', POPT_ARG_NONE, &gl_debug_template, 0,
-	  N_("Show template debugging messages."), NULL },
-
-	{ "debug-paper", '\0', POPT_ARG_NONE, &gl_debug_paper, 0,
-	  N_("Show paper debugging messages."), NULL },
-
-	{ "debug-xml", '\0', POPT_ARG_NONE, &gl_debug_xml, 0,
-	  N_("Show xml debugging messages."), NULL },
-
-	{ "debug-merge", '\0', POPT_ARG_NONE, &gl_debug_merge, 0,
-	  N_("Show document merge debugging messages."), NULL },
-
-	{ "debug-commands", '\0', POPT_ARG_NONE, &gl_debug_commands, 0,
-	  N_("Show commands debugging messages."), NULL },
-
-	{ "debug-undo", '\0', POPT_ARG_NONE, &gl_debug_undo, 0,
-	  N_("Show undo debugging messages."), NULL },
-
-	{ "debug-recent", '\0', POPT_ARG_NONE, &gl_debug_recent, 0,
-	  N_("Show recent debugging messages."), NULL },
-
-	{ "debug-window", '\0', POPT_ARG_NONE, &gl_debug_window, 0,
-	  N_("Show window debugging messages."), NULL },
-
-	{ "debug-ui", '\0', POPT_ARG_NONE, &gl_debug_ui, 0,
-	  N_("Show ui debugging messages."), NULL },
-
-	{ "debug-property-bar", '\0', POPT_ARG_NONE, &gl_debug_property_bar, 0,
-	  N_("Show property_bar debugging messages."), NULL },
-
-	{ "debug-media-select", '\0', POPT_ARG_NONE, &gl_debug_media_select, 0,
-	  N_("Show media select widget debugging messages."), NULL },
-
-	{ "debug-mini-preview", '\0', POPT_ARG_NONE, &gl_debug_mini_preview, 0,
-	  N_("Show mini preview widget debugging messages."), NULL },
-
-	{ "debug-pixbuf-cache", '\0', POPT_ARG_NONE, &gl_debug_pixbuf_cache, 0,
-	  N_("Show pixbuf cache debugging messages."), NULL },
-
-	{ "debug-editor", '\0', POPT_ARG_NONE, &gl_debug_editor, 0,
-	  N_("Show widget debugging messages."), NULL },
-
-	{ "debug-wdgt", '\0', POPT_ARG_NONE, &gl_debug_wdgt, 0,
-	  N_("Show object editor debugging messages."), NULL },
-
-	{ "debug", '\0', POPT_ARG_NONE, &gl_debug_all, 0,
-	  N_("Turn on all debugging messages."), NULL },
-
-	{NULL, '\0', 0, NULL, 0}
-};
 
 /*========================================================*/
 /* Local function prototypes                              */
@@ -158,13 +88,10 @@ main (int argc, char **argv)
 	program = gnome_program_init ("glabels", VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
-				      GNOME_PARAM_POPT_TABLE, options,
 				      NULL);
 
 	/* Splash screen */
 	gl_splash ();
-
-	gl_stock_init();
 
 	/* Set default icon */
 	if (!g_file_test (ICON_PIXMAP, G_FILE_TEST_EXISTS))
@@ -177,6 +104,8 @@ main (int argc, char **argv)
 	}
 	
 	/* Initialize subsystems */
+	gl_debug_init ();
+	gl_stock_init ();
 	gl_paper_init ();
 	gl_prefs_init ();
 	gl_template_init ();

@@ -31,6 +31,7 @@
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "util.h"
+#include "debug.h"
 
 /*============================================*/
 /* Private globals                            */
@@ -40,8 +41,11 @@ static gboolean version_flag = FALSE;
 static gchar    *output      = "output.ps";
 static gint     n_copies     = 1;
 static gint     n_sheets     = 1;
+static gint     first        = 1;
 static gboolean outline_flag = FALSE;
 static gboolean reverse_flag = FALSE;
+static gboolean crop_marks_flag = FALSE;
+static gchar    *input       = NULL;
 
 static struct poptOption options[] = {
 	{"help", '?', POPT_ARG_NONE, &help_flag, 1,
@@ -54,10 +58,16 @@ static struct poptOption options[] = {
 	 N_("number of sheets (default=1)"), N_("sheets")},
 	{"copies", 'c', POPT_ARG_INT, &n_copies, 0,
 	 N_("number of copies (default=1)"), N_("copies")},
+	{"first", 'f', POPT_ARG_INT, &first, 0,
+	 N_("first label on first sheet (default=1)"), N_("first")},
 	{"outline", 'l', POPT_ARG_NONE, &outline_flag, 0,
 	 N_("print outlines (to test printer alignment)"), NULL},
 	{"reverse", 'r', POPT_ARG_NONE, &reverse_flag, 0,
 	 N_("print in reverse (i.e. a mirror image)"), NULL},
+	{"cropmarks", 'C', POPT_ARG_NONE, &crop_marks_flag, 0,
+	 N_("print crop marks"), NULL},
+	{"input", 'i', POPT_ARG_STRING, &input, 0,
+	 N_("input file for merging"), N_("filename")},
 	{NULL, '\0', 0, NULL, 0, NULL, NULL}
 };
 
@@ -79,6 +89,7 @@ main (int argc, char **argv)
 	gchar             *abs_fn;
 	GnomePrintConfig  *config = NULL;
 	glLabel           *label = NULL;
+	glMerge           *merge = NULL;
 	glXMLLabelStatus   status;
 	glPrintFlags       flags;
 
@@ -121,19 +132,33 @@ main (int argc, char **argv)
 
 	flags.outline = outline_flag;
 	flags.reverse = reverse_flag;
-	flags.crop_marks = FALSE;
+	flags.crop_marks = crop_marks_flag;
 
 	/* initialize components */
+	gl_debug_init ();
 	gl_merge_init ();
 	gl_paper_init ();
 	gl_template_init ();
 
 	/* now print the files */
 	for (p = file_list; p; p = p->next) {
-		g_print ("LABEL FILE = %s\n", p->data);
+		g_print ("LABEL FILE = %s\n", (gchar *) p->data);
 		label = gl_xml_label_open (p->data, &status);
+
+
 		if ( status == XML_LABEL_OK ) {
 
+		        if (input != NULL) {
+				merge = gl_label_get_merge (label);
+				if (merge != NULL) {
+					gl_merge_set_src(merge, input);
+					gl_label_set_merge(label, merge);
+				} else {
+					fprintf ( stderr,
+						  _("cannot perform document merge with glabels file %s\n"),
+						  (char *)p->data );
+				}
+			}
 			if ( job == NULL ) {
 				job = gnome_print_job_new (NULL);
 				abs_fn = gl_util_make_absolute ( output );
@@ -150,7 +175,7 @@ main (int argc, char **argv)
 				g_free( abs_fn );
 			}
 
-			gl_print_batch (job, label, n_sheets, n_copies, &flags);
+			gl_print_batch (job, label, n_sheets, n_copies, first, &flags);
 			g_object_unref (label);
 		}
 		else {

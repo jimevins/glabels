@@ -368,6 +368,7 @@ gl_print_batch (GnomePrintJob    *job,
 		glLabel          *label,
 		gint              n_sheets,
 		gint              n_copies,
+		gint              first,
 		glPrintFlags     *flags)
 {
 	glMerge                   *merge;
@@ -384,9 +385,9 @@ gl_print_batch (GnomePrintJob    *job,
 	if ( merge == NULL ) {
 		n_per_page = gl_template_get_n_labels(label_type);
 
-		gl_print_simple (job, label, n_sheets, 1, n_per_page, flags);
+		gl_print_simple (job, label, n_sheets, first, n_per_page, flags);
 	} else {
-		gl_print_merge_collated (job, label, n_copies, 1, flags);
+		gl_print_merge_collated (job, label, n_copies, first, flags);
 	}
 	gl_template_free (template);
 

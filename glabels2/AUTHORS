@@ -47,22 +47,27 @@ Glabels includes contributions from:
                                                       0.4.3:
 	Javier Donaire Segarra <jyuyu@users.sourceforge.net>
 	Alessandro Zummo <azummo@towertech.it>
+	José Dapena Paz <jdapena@igalia.com>
 	Akkana <akkana@shallowsky.com>
 	Dag Wieers <dag@wieers.com>
 
 Translations:
 
-	Olivier Berger <oberger@april.org> -- French
+	Olivier Berger <oberger@april.org> -- French (original)
+	Florent Morel <florent@taket.org> -- French (2.0.2)
 	Marcus Bauer <m@7n7.de> -- German (original)
 	Christian Neumair <christian-neumair@web.de> -- German (1.89.1)
 	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
 	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
 	Víctor Moral <victor@pasmao.net> -- Spanish translations
-	Vitaly Lipatov <LAV@VL3143.spb.edu> -- Russian translations
+	sergio rivadero <sergiorivadero@argentina.com> -- Spanish Translations (2.0.3)
+	Vitaly Lipatov <lav@altlinux.ru> -- Russian translations
 	Shell, Hin-lik Hung <shell@home.shellhung.org> -- Chinese Translations
 	Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl> -- Polish Translations
 	David Makovský (Yakeen) <yakeen@sannyas-on.net> -- Czech Translations
+	Zbynek Mrkvicka <zbynek@oachot.cz> -- Czech Translations (2.0.3)
 	Mancio <mancio_and@yahoo.it> -- Italian Translations
+	Daniele Medri <daniele.medri@libero.it> -- Italian Translations (2.0.3)
 
 The following people have submitted label templates or information about
 particular products (I apologize if I have missed anybody):
@@ -138,5 +143,13 @@ particular products (I apologize if I have missed anybody):
 	JBadger
 	Frank Altpeter
 	Matthew J. Lockner
+	Larry Harriman
+	Juan Carlos Valero
+	Nick Hill
+	Ali Akcaagac
+	Dan Clark
+	Peter L. Berghold
+	Vitaly Lipitov
+	Steve Saxon
 
 And many others for their many helpful suggestions and bug reports -- thanks.
