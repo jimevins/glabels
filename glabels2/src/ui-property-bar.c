@@ -420,6 +420,7 @@ reset_to_default_properties (glView *view,
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
 					   good_font_family);
 	g_free (good_font_family);
+	gnome_font_family_list_free (family_names);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->font_size_spin),
 				   view->default_font_size);

@@ -1,3 +1,11 @@
+2005-09-19  Jim Evins  <evins@snaught.com>
+
+	* data/glade/property-bar.glade:
+		Remove items from font_family_combo.  This prevents the
+		double entry after adding text model and list of fonts.
+	* src/ui-property-bar.c: (reset_to_default_properties):
+		Free font_family_list.
+
 2005-07-01  Jim Evins  <evins@snaught.com>
 
 	* po/it.po:
