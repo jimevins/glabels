@@ -32,10 +32,7 @@
 #include <gtk/gtklabel.h>
 #include <libgnome/gnome-util.h>
 
-#define SPLASH_PIXMAP gnome_program_locate_file (NULL,\
-						 GNOME_FILE_DOMAIN_APP_PIXMAP,\
-						 "glabels/glabels-splash.png",\
-						 FALSE, NULL)
+#define SPLASH_PIXMAP_FILE "glabels/glabels-splash.png"
 
 #define SPLASH_TIMEOUT 2000
 
@@ -50,7 +47,8 @@ static gint splash_timeout (gpointer not_used);
 void
 gl_splash (void)
 {
-	GtkWidget *wimage, *wvbox, *whbox, *wframe1, *wframe2;
+	gchar *splash_pixmap_file;
+	GtkWidget *wimage, *wvbox, *wframe1, *wframe2;
 	gchar *label;
 	GdkPixbuf *pixbuf;
 	GError *gerror = NULL;
@@ -68,18 +66,22 @@ gl_splash (void)
 	wvbox = gtk_vbox_new (FALSE, 5);
 	gtk_container_set_border_width (GTK_CONTAINER (wvbox), 2);
 
-	whbox = gtk_hbox_new (FALSE, 5);
+	splash_pixmap_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP,
+							SPLASH_PIXMAP_FILE,
+							FALSE, NULL);
 
-	if (!g_file_test (SPLASH_PIXMAP, G_FILE_TEST_EXISTS)) {
-		g_warning ("Could not find %s", SPLASH_PIXMAP);
+	if (!g_file_test (splash_pixmap_file, G_FILE_TEST_EXISTS)) {
+		g_warning ("Could not find %s", SPLASH_PIXMAP_FILE);
 	}
-	pixbuf = gdk_pixbuf_new_from_file (SPLASH_PIXMAP, &gerror);
+	pixbuf = gdk_pixbuf_new_from_file (splash_pixmap_file, &gerror);
 	if (gerror != NULL) {
 	        g_warning ("cannot open splash pixbuf: %s", gerror->message );
 		gtk_widget_destroy (splash);
 		return;
 	}
+	g_free (splash_pixmap_file);
 	wimage = gtk_image_new_from_pixbuf (pixbuf);
+	g_object_unref (G_OBJECT (pixbuf));
 
 	gtk_container_add (GTK_CONTAINER (splash), wframe1);
 	gtk_container_add (GTK_CONTAINER (wframe1), wframe2);

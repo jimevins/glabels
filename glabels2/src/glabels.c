@@ -43,10 +43,7 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define ICON_PIXMAP gnome_program_locate_file (NULL,\
-					       GNOME_FILE_DOMAIN_APP_PIXMAP,\
-					       "glabels.png",\
-					       FALSE, NULL)
+#define ICON_PIXMAP_FILE "glabels.png"
 
 /*========================================================*/
 /* Private globals                                        */
@@ -74,6 +71,7 @@ main (int argc, char **argv)
 {
 	GValue         value = { 0, };
     	GnomeProgram  *program;
+	gchar         *icon_file;
 	GnomeClient   *client;
 	poptContext    ctx;
 	char         **args;
@@ -96,14 +94,17 @@ main (int argc, char **argv)
 	gl_splash ();
 
 	/* Set default icon */
-	if (!g_file_test (ICON_PIXMAP, G_FILE_TEST_EXISTS))
+	icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP,
+					       ICON_PIXMAP_FILE,  FALSE, NULL);
+	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
 	{
-		g_warning ("Could not find %s", ICON_PIXMAP);
+		g_warning ("Could not find %s", ICON_PIXMAP_FILE);
 	}
 	else
 	{
-		gnome_window_icon_set_default_from_file (ICON_PIXMAP);
+		gnome_window_icon_set_default_from_file (icon_file);
 	}
+	g_free (icon_file);
 	
 	/* Initialize subsystems */
 	gl_debug_init ();
