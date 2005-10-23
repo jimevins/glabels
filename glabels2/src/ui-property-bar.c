@@ -34,6 +34,7 @@
 #include <gtk/gtktoggletoolbutton.h>
 #include <libgnomeprint/gnome-font.h>
 #include <gtk/gtktooltips.h>
+#include <string.h>
 
 #include "util.h"
 #include "mygal/widget-color-combo.h"

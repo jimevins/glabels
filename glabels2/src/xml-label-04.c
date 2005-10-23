@@ -72,7 +72,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 
 	*status = XML_LABEL_OK;
 
-	if (!xmlStrEqual (root->name, "Label")) {
+	if (!xmlStrEqual (root->name, (xmlChar *)"Label")) {
 		g_warning (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
@@ -88,37 +88,37 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 		gl_debug (DEBUG_XML, "node name = \"%s\"", node->name);
 
 		if (!xmlNodeIsText (node)) {
-			if (xmlStrEqual (node->name, "Media_Type")) {
+			if (xmlStrEqual (node->name, (xmlChar *)"Media_Type")) {
 				if (!xml04_parse_media_description (node, label)) {
 					*status = XML_LABEL_UNKNOWN_MEDIA;
 				}
-			} else if (xmlStrEqual (node->name, "Text")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Text")) {
 				object = gl_label_text_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_text_props (node, GL_LABEL_TEXT(object));
-			} else if (xmlStrEqual (node->name, "Box")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Box")) {
 				object = gl_label_box_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_box_props (node, GL_LABEL_BOX(object));
-			} else if (xmlStrEqual (node->name, "Line")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Line")) {
 				object = gl_label_line_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_line_props (node, GL_LABEL_LINE(object));
-			} else if (xmlStrEqual (node->name, "Ellipse")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Ellipse")) {
 				object = gl_label_ellipse_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_ellipse_props (node,
 							   GL_LABEL_ELLIPSE(object));
-			} else if (xmlStrEqual (node->name, "Image")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Image")) {
 				object = gl_label_image_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_image_props (node, GL_LABEL_IMAGE(object));
-			} else if (xmlStrEqual (node->name, "Barcode")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Barcode")) {
 				object = gl_label_barcode_new (label);
 				xml04_parse_object (node, GL_LABEL_OBJECT(object));
 				xml04_parse_barcode_props (node,
 							   GL_LABEL_BARCODE(object));
-			} else if (xmlStrEqual (node->name, "Merge_Properties")) {
+			} else if (xmlStrEqual (node->name, (xmlChar *)"Merge_Properties")) {
 				xml04_parse_merge_properties (node, label);
 			} else {
 				g_warning (_("bad node =  \"%s\""), node->name);
@@ -146,7 +146,7 @@ xml04_parse_media_description (xmlNodePtr node,
 
 	template_name = xmlNodeGetContent (node);
 
-	template = gl_template_from_name (template_name);
+	template = gl_template_from_name ((gchar *)template_name);
 	if (template == NULL) {
 		g_warning ("Undefined template \"%s\"", template_name);
 		/* Get a default */
@@ -206,21 +206,21 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	font_family = xmlGetProp (object_node, "font_family");
+	font_family = xmlGetProp (object_node, (xmlChar *)"font_family");
 	font_size = gl_xml_get_prop_double (object_node, "font_size", 0);
-	string = xmlGetProp (object_node, "font_weight");
+	string = xmlGetProp (object_node, (xmlChar *)"font_weight");
 	font_weight = gl_util_string_to_weight (string);
 	xmlFree (string);
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
-	string = xmlGetProp (object_node, "justify");
+	string = xmlGetProp (object_node, (xmlChar *)"justify");
 	just = gl_util_string_to_just (string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
 	color_node->color = gl_xml_get_prop_uint (object_node, "color", 0);
 
-	gl_label_object_set_font_family (GL_LABEL_OBJECT(object), font_family);
+	gl_label_object_set_font_family (GL_LABEL_OBJECT(object), (gchar *)font_family);
 	gl_label_object_set_font_size (GL_LABEL_OBJECT(object), font_size);
 	gl_label_object_set_font_weight (GL_LABEL_OBJECT(object), font_weight);
 	gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object), font_italic_flag);
@@ -233,7 +233,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	for (line_node = object_node->xmlChildrenNode; line_node != NULL;
 	     line_node = line_node->next) {
 
-		if (xmlStrEqual (line_node->name, "Line")) {
+		if (xmlStrEqual (line_node->name, (xmlChar *)"Line")) {
 
 			gl_debug (DEBUG_XML, "->Line node");
 
@@ -241,12 +241,12 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 			for (text_node = line_node->xmlChildrenNode;
 			     text_node != NULL; text_node = text_node->next) {
 
-				if (xmlStrEqual (text_node->name, "Field")) {
+				if (xmlStrEqual (text_node->name, (xmlChar *)"Field")) {
 					gl_debug (DEBUG_XML, "->Line->Field node");
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = TRUE;
 					node_text->data =
-					    xmlGetProp (text_node, "name");
+						(gchar *)xmlGetProp (text_node, (xmlChar *)"name");
 					nodes =
 					    g_list_append (nodes, node_text);
 				} else if (xmlNodeIsText (text_node)) {
@@ -254,7 +254,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 					node_text = g_new0 (glTextNode, 1);
 					node_text->field_flag = FALSE;
 					node_text->data =
-					    xmlNodeGetContent (text_node);
+						(gchar *)xmlNodeGetContent (text_node);
 					gl_debug (DEBUG_XML, "text = \"%s\"",
 						  node_text->data);
 					nodes =
@@ -413,7 +413,7 @@ xml04_parse_image_props (xmlNodePtr    node,
 
 	filename = g_new0 (glTextNode, 1);
 	filename->field_flag = FALSE;
-	filename->data = xmlGetProp (node, "filename");
+	filename->data = (gchar *)xmlGetProp (node, (xmlChar *)"filename");
 	gl_label_image_set_filename (object, filename);
 	gl_text_node_free (&filename);
 
@@ -443,24 +443,24 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 	color_node = gl_color_node_new_default ();
 	color_node->color = gl_xml_get_prop_uint (node, "color", 0);
 
-	id = xmlGetProp (node, "style");
+	id = xmlGetProp (node, (xmlChar *)"style");
 
 	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
 	scale =	gl_xml_get_prop_double (node, "scale", 1.0);
 	if (scale == 0.0) {
 		scale = 0.5; /* Set to a valid value */
 	}
-	gl_label_barcode_set_props (object, id, text_flag, TRUE, 0);
+	gl_label_barcode_set_props (object, (gchar *)id, text_flag, TRUE, 0);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node);
 
 	child = node->xmlChildrenNode;
 	text_node = g_new0 (glTextNode, 1);
-	if (xmlStrEqual (child->name, "Field")) {
+	if (xmlStrEqual (child->name, (xmlChar *)"Field")) {
 		text_node->field_flag = TRUE;
-		text_node->data       = xmlGetProp (child, "name");
+		text_node->data       = (gchar *)xmlGetProp (child, (xmlChar *)"name");
 	} else if (xmlNodeIsText (child)) {
 		text_node->field_flag = FALSE;
-		text_node->data       = xmlNodeGetContent (child);
+		text_node->data       = (gchar *)xmlNodeGetContent (child);
 	} else {
 		g_warning ("Unexpected Barcode child: \"%s\"", child->name);
 	}
@@ -486,12 +486,12 @@ xml04_parse_merge_properties (xmlNodePtr node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	string = xmlGetProp (node, "type");
-	merge = gl_merge_new (string);
+	string = xmlGetProp (node, (xmlChar *)"type");
+	merge = gl_merge_new ((gchar *)string);
 	xmlFree (string);
 
-	string = xmlGetProp (node, "src");
-	gl_merge_set_src (merge, string);
+	string = xmlGetProp (node, (xmlChar *)"src");
+	gl_merge_set_src (merge, (gchar *)string);
 	xmlFree (string);
 
 	gl_label_set_merge (label, merge);

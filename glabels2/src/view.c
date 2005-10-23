@@ -3634,8 +3634,8 @@ selection_get_cb (GtkWidget        *widget,
 		buffer = gl_xml_label_save_buffer (view->selection_data,
 						   &status);
 		gtk_selection_data_set (selection_data,
-					GDK_SELECTION_TYPE_STRING, 8, buffer,
-					strlen (buffer));
+					GDK_SELECTION_TYPE_STRING, 8,
+					(guchar *)buffer, strlen (buffer));
 		g_free (buffer);
 	}
 
@@ -3670,7 +3670,7 @@ selection_received_cb (GtkWidget        *widget,
 
 	gl_view_unselect_all (view);
 
-	label = gl_xml_label_open_buffer (selection_data->data, &status);
+	label = gl_xml_label_open_buffer ((gchar *)selection_data->data, &status);
 	for (p = label->objects; p != NULL; p = p_next) {
 		p_next = p->next;
 

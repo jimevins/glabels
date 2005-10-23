@@ -373,7 +373,7 @@ get_size (glLabelObject *object,
 	}
 
 	font = gnome_font_find_closest_from_weight_slant (
-		ltext->private->font_family,
+		(guchar *)ltext->private->font_family,
 		ltext->private->font_weight,
 		ltext->private->font_italic_flag,
 		ltext->private->font_size);
@@ -392,7 +392,7 @@ get_size (glLabelObject *object,
 
 		glyphlist = gnome_glyphlist_from_text_dumb (font, 0,
 							    0.0, 0.0,
-							    line[i]);
+							    (guchar *)line[i]);
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 

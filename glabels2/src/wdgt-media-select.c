@@ -28,6 +28,7 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtksizegroup.h>
+#include <string.h>
 
 #include "hig.h"
 #include "wdgt-mini-preview.h"

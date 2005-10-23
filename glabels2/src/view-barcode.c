@@ -28,6 +28,8 @@
 #include <glib/glist.h>
 #include <gtk/gtkmenu.h>
 #include <libgnomeprint/gnome-glyphlist.h>
+#include <string.h>
+#include <math.h>
 
 #include "canvas-hacktext.h"
 #include "view-highlight.h"
@@ -401,11 +403,11 @@ gl_view_barcode_get_create_cursor (void)
 
 	if (!cursor) {
 		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   cursor_barcode_bits,
+							   (gchar *)cursor_barcode_bits,
 							   cursor_barcode_width,
 							   cursor_barcode_height);
 		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   cursor_barcode_mask_bits,
+							   (gchar *)cursor_barcode_mask_bits,
 							   cursor_barcode_mask_width,
 							   cursor_barcode_mask_height);
 		cursor =
@@ -585,7 +587,7 @@ draw_barcode (glViewBarcode *view_barcode)
 	gl_debug (DEBUG_VIEW, "2");
 
 	/* get Gnome Font */
-	font = gnome_font_find_closest_from_weight_slant (GL_BARCODE_FONT_FAMILY,
+	font = gnome_font_find_closest_from_weight_slant ((guchar *)GL_BARCODE_FONT_FAMILY,
 							  GL_BARCODE_FONT_WEIGHT,
 							  FALSE,
 							  10.0);
@@ -597,9 +599,8 @@ draw_barcode (glViewBarcode *view_barcode)
 		glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
 								  color_node->color,
 								  0.0, 0.0,
-								  cstring,
-								  strlen
-								  (cstring));
+								  (guchar *)cstring,
+								  strlen (cstring));
 		y_offset = 10.0 - fabs (gnome_font_get_descender (font));
 		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
 						gl_canvas_hacktext_get_type (),
@@ -637,17 +638,14 @@ draw_barcode (glViewBarcode *view_barcode)
 			bchar = (glBarcodeChar *) li->data;
 
 			font = gnome_font_find_closest_from_weight_slant (
-				                       GL_BARCODE_FONT_FAMILY,
-						       GL_BARCODE_FONT_WEIGHT,
-						       FALSE, bchar->fsize);
-			glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
-									  color_node->color,
-									  0.0,
-									  0.0,
-									  &
-									  (bchar->
-									   c),
-									  1);
+				(guchar *)GL_BARCODE_FONT_FAMILY,
+				GL_BARCODE_FONT_WEIGHT,
+				FALSE, bchar->fsize);
+			glyphlist = gnome_glyphlist_from_text_sized_dumb (
+				font,
+				color_node->color,
+				0.0, 0.0,
+				(guchar *)&(bchar->c), 1);
 			y_offset =
 			    bchar->fsize - fabs (gnome_font_get_descender (font));
 

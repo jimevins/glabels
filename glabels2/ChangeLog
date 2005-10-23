@@ -1,3 +1,35 @@
+2005-10-22  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* src/base64.c:
+	* src/bc-gnubarcode.c:
+	* src/canvas-hacktext.c:
+	* src/label-text.c:
+	* src/object-editor-data-page.c:
+	* src/print-dialog.c:
+	* src/print.c:
+	* src/recent.c:
+	* src/template-designer.c:
+	* src/text-node.c:
+	* src/ui-property-bar.c:
+	* src/ui.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Modified to compile warning free with gcc-4.0.  Mostly
+		casting to change signedness of characters.  Did not
+		attack gnu-barcode library yet.
+
 2005-10-22  Jim Evins <evins@snaught.com>
 
 	* src/glabels.c: (main):

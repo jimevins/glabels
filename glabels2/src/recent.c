@@ -23,6 +23,8 @@
 
 #include "recent.h"
 
+#include <string.h>
+
 #include "prefs.h"
 
 #include "debug.h"

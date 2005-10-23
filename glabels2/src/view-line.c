@@ -426,11 +426,11 @@ gl_view_line_get_create_cursor (void)
 
 	if (!cursor) {
 		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   cursor_line_bits,
+							   (gchar *)cursor_line_bits,
 							   cursor_line_width,
 							   cursor_line_height);
 		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   cursor_line_mask_bits,
+							   (gchar *)cursor_line_mask_bits,
 							   cursor_line_mask_width,
 							   cursor_line_mask_height);
 		cursor =

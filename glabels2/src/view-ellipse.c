@@ -447,11 +447,11 @@ gl_view_ellipse_get_create_cursor (void)
 
 	if (!cursor) {
 		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   cursor_ellipse_bits,
+							   (gchar *)cursor_ellipse_bits,
 							   cursor_ellipse_width,
 							   cursor_ellipse_height);
 		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   cursor_ellipse_mask_bits,
+							   (gchar *)cursor_ellipse_mask_bits,
 							   cursor_ellipse_mask_width,
 							   cursor_ellipse_mask_height);
 		cursor =

@@ -445,11 +445,11 @@ gl_view_box_get_create_cursor (void)
 
 	if (!cursor) {
 		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   cursor_box_bits,
+							   (gchar *)cursor_box_bits,
 							   cursor_box_width,
 							   cursor_box_height);
 		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   cursor_box_mask_bits,
+							   (gchar *)cursor_box_mask_bits,
 							   cursor_box_mask_width,
 							   cursor_box_mask_height);
 		cursor =

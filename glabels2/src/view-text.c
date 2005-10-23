@@ -497,11 +497,11 @@ gl_view_text_get_create_cursor (void)
 
 	if (!cursor) {
 		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   cursor_text_bits,
+							   (gchar *)cursor_text_bits,
 							   cursor_text_width,
 							   cursor_text_height);
 		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   cursor_text_mask_bits,
+							   (gchar *)cursor_text_mask_bits,
 							   cursor_text_mask_width,
 							   cursor_text_mask_height);
 		cursor =
@@ -700,7 +700,7 @@ draw_hacktext (glViewText *view_text)
 	gl_debug (DEBUG_VIEW, "2");
 
 	/* get Gnome Font */
-	font = gnome_font_find_closest_from_weight_slant (font_family,
+	font = gnome_font_find_closest_from_weight_slant ((guchar *)font_family,
 							  font_weight,
 							  font_italic_flag,
 							  font_size);
@@ -711,7 +711,7 @@ draw_hacktext (glViewText *view_text)
 
 		glyphlist = gnome_glyphlist_from_text_dumb (font, color_node->color,
 							    0.0, 0.0,
-							    line[i]);
+							    (guchar *)line[i]);
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 		w = bbox.x1;
@@ -818,7 +818,7 @@ draw_cursor (glViewText *view_text)
 	selection_flag = !gtk_text_iter_equal (&cursor_iter, &bound_iter);
 
 	/* get Gnome Font */
-	font = gnome_font_find_closest_from_weight_slant (font_family,
+	font = gnome_font_find_closest_from_weight_slant ((guchar *)font_family,
 							  font_weight,
 							  font_italic_flag,
 							  font_size);
@@ -831,7 +831,7 @@ draw_cursor (glViewText *view_text)
 			
 			glyphlist = gnome_glyphlist_from_text_dumb (font, color_node->color,
 								    0.0, 0.0,
-								    line[i]);
+								    (guchar *)line[i]);
 
 			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 			gnome_glyphlist_unref (glyphlist);
@@ -854,7 +854,7 @@ draw_cursor (glViewText *view_text)
 
 			glyphlist = gnome_glyphlist_from_text_sized_dumb (font, color_node->color,
 									  0.0, 0.0,
-									  line[i],
+									  (guchar *)line[i],
 									  cursor_char);
 			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 			gnome_glyphlist_unref (glyphlist);

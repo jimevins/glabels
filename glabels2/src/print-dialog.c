@@ -558,7 +558,7 @@ print_sheets (GnomePrintConfig *config,
 
 	if (preview_flag) {
 		GtkWidget *preview_widget =
-		    gnome_print_job_preview_new (job, _("Print preview"));
+		    gnome_print_job_preview_new (job, (guchar *)_("Print preview"));
 		gtk_widget_show (GTK_WIDGET (preview_widget));
 	} else {
 		gnome_print_job_print (job);
@@ -597,7 +597,7 @@ print_sheets_merge (GnomePrintConfig *config,
 
 	if (preview_flag) {
 	        GtkWidget *preview_widget =
-		    gnome_print_job_preview_new (job, _("Print preview"));
+		    gnome_print_job_preview_new (job, (guchar *)_("Print preview"));
 		gtk_widget_show (GTK_WIDGET (preview_widget));
 	} else {
 		gnome_print_job_print (job);

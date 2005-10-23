@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
+#include <string.h>
 
 #include "libglabels-private.h"
 
@@ -48,7 +49,7 @@
 /*========================================================*/
 
 typedef struct {
-	gchar       *name;
+	xmlChar     *name;
 	gdouble      points_per_unit;
 } UnitTableEntry;
 
@@ -63,11 +64,11 @@ static UnitTableEntry unit_table[] = {
 
 	/* This table must be sorted exactly as the enumerations in glUnitsType */
 
-	/* [GL_UNITS_POINT] */   {"pt",      POINTS_PER_POINT},
-	/* [GL_UNITS_INCH]  */   {"in",      POINTS_PER_INCH},
-	/* [GL_UNITS_MM]    */   {"mm",      POINTS_PER_MM},
-	/* [GL_UNITS_CM]    */   {"cm",      POINTS_PER_CM},
-	/* [GL_UNITS_PICA]  */   {"pc",      POINTS_PER_PICA},
+	/* [GL_UNITS_POINT] */   {(xmlChar *)"pt",      POINTS_PER_POINT},
+	/* [GL_UNITS_INCH]  */   {(xmlChar *)"in",      POINTS_PER_INCH},
+	/* [GL_UNITS_MM]    */   {(xmlChar *)"mm",      POINTS_PER_MM},
+	/* [GL_UNITS_CM]    */   {(xmlChar *)"cm",      POINTS_PER_CM},
+	/* [GL_UNITS_PICA]  */   {(xmlChar *)"pc",      POINTS_PER_PICA},
 
 };
 
@@ -95,9 +96,9 @@ gl_xml_get_prop_double (xmlNodePtr   node,
 	gdouble  val;
 	xmlChar *string;
 
-	string = xmlGetProp (node, property);
+	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
-		val = g_strtod (string, NULL);
+		val = g_strtod ((gchar *)string, NULL);
 		xmlFree (string);
 		return val;
 	}
@@ -125,10 +126,10 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
 	gboolean  val;
 	xmlChar  *string;
 
-	string = xmlGetProp (node, property);
+	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
-		val = !((xmlStrcasecmp (string, "false") == 0) ||
-			xmlStrEqual (string, "0"));;
+		val = !((xmlStrcasecmp (string, (xmlChar *)"false") == 0) ||
+			xmlStrEqual (string, (xmlChar *)"0"));;
 		xmlFree (string);
 		return val;
 	}
@@ -156,9 +157,9 @@ gl_xml_get_prop_int (xmlNodePtr   node,
 	gint     val;
 	xmlChar *string;
 
-	string = xmlGetProp (node, property);
+	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
-		val = strtol (string, NULL, 0);
+		val = strtol ((char *)string, NULL, 0);
 		xmlFree (string);
 		return val;
 	}
@@ -186,9 +187,9 @@ gl_xml_get_prop_uint (xmlNodePtr   node,
 	guint    val;
 	xmlChar *string;
 
-	string = xmlGetProp (node, property);
+	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
-		val = strtoul (string, NULL, 0);
+		val = strtoul ((char *)string, NULL, 0);
 		xmlFree (string);
 		return val;
 	}
@@ -223,14 +224,14 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 	xmlChar *unit;
 	gint     i;
 
-	string = xmlGetProp (node, property);
+	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
 
-		val = g_strtod (string, (gchar **)&unit);
+		val = g_strtod ((gchar *)string, (gchar **)&unit);
 
 		if (unit != string) {
-			unit = g_strchug (unit);
-			if (strlen (unit) > 0 ) {
+			unit = (xmlChar *)g_strchug ((gchar *)unit);
+			if (strlen ((char *)unit) > 0 ) {
 				for (i=GL_UNITS_FIRST; i<=GL_UNITS_LAST; i++) {
 					if (xmlStrcasecmp (unit, unit_table[i].name) == 0) {
 						val *= unit_table[i].points_per_unit;
@@ -275,7 +276,7 @@ gl_xml_set_prop_double (xmlNodePtr    node,
 	/* Guarantee "C" locale by use of g_ascii_formatd */
 	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
-	xmlSetProp (node, property, string);
+	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
 }
 
 
@@ -293,7 +294,7 @@ gl_xml_set_prop_boolean (xmlNodePtr    node,
 			 const gchar  *property,
 			 gboolean      val)
 {
-	xmlSetProp (node, property, (val ? "True" : "False"));
+	xmlSetProp (node, (xmlChar *)property, (xmlChar *)(val ? "True" : "False"));
 }
 
 /**
@@ -313,7 +314,7 @@ gl_xml_set_prop_int (xmlNodePtr    node,
 	gchar  *string;
 
 	string = g_strdup_printf ("%d", val);
-	xmlSetProp (node, property, string);
+	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
 	g_free (string);
 }
 
@@ -334,7 +335,7 @@ gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 	gchar  *string;
 
 	string = g_strdup_printf ("0x%08x", val);
-	xmlSetProp (node, property, string);
+	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string);
 	g_free (string);
 }
 
@@ -365,7 +366,7 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
 	string_unit = g_strdup_printf ("%s%s", string, unit_table[default_units].name);
-	xmlSetProp (node, property, string_unit);
+	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string_unit);
         g_free (string_unit);
 }
 

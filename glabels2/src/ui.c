@@ -29,6 +29,7 @@
 #include <gconf/gconf-client.h>
 #include "recent-files/egg-recent-view.h"
 #include "recent-files/egg-recent-view-uimanager.h"
+#include <string.h>
 
 #include "ui-util.h"
 #include "ui-commands.h"

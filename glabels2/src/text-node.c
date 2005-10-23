@@ -24,6 +24,8 @@
 
 #include "text-node.h"
 
+#include <string.h>
+
 #include "merge.h"
 
 #include "debug.h"

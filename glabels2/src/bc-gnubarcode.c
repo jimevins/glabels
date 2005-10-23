@@ -230,7 +230,7 @@ render_pass1 (struct Barcode_Item *bci,
 	gdouble        f1, f2;
 	gint           mode = '-'; /* text below bars */
 	gdouble        x0, y0, yr;
-	guchar        *p, c;
+	gchar         *p, c;
 
 	if (bci->width > (2*bci->margin)) {
 		bci->width -= 2*bci->margin;

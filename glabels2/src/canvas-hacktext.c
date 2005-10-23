@@ -448,9 +448,10 @@ gl_canvas_hacktext_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 
 		if (!hacktext->priv->font) return;
 
-		hacktext->priv->glyphlist = gnome_glyphlist_from_text_dumb (hacktext->priv->font, hacktext->fill_rgba,
-									    0.0, 0.0,
-									    hacktext->text);
+		hacktext->priv->glyphlist = gnome_glyphlist_from_text_dumb (
+			hacktext->priv->font, hacktext->fill_rgba,
+			0.0, 0.0,
+			(guchar *)hacktext->text);
 	}
 
 	if (hacktext->priv->glyphlist) {

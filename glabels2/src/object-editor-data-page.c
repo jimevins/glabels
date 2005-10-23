@@ -27,6 +27,7 @@
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtktogglebutton.h>
+#include <string.h>
 #include <math.h>
 
 #include "prefs.h"

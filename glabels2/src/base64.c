@@ -196,6 +196,6 @@ gl_base64_decode (const gchar *in, guint *outlen)
 
 	} while (*in && digit4 != '=');
 
-	return out;
+	return (guchar *)out;
 }
 

@@ -428,11 +428,11 @@ print_info_new (GnomePrintJob    *job,
 		  "setting page size = \"%s\"", template->page_size);
 
 	gnome_print_config_set_length (pi->config,
-				       GNOME_PRINT_KEY_PAPER_WIDTH,
+				       (guchar *)GNOME_PRINT_KEY_PAPER_WIDTH,
 				       template->page_width,
 				       GNOME_PRINT_PS_UNIT);
 	gnome_print_config_set_length (pi->config,
-				       GNOME_PRINT_KEY_PAPER_HEIGHT,
+				       (guchar *)GNOME_PRINT_KEY_PAPER_HEIGHT,
 				       template->page_height,
 				       GNOME_PRINT_PS_UNIT);
 
@@ -481,7 +481,7 @@ print_page_begin (PrintInfo *pi)
 	pi->sheet++;
 
 	str = g_strdup_printf ("sheet%02d", pi->sheet);
-	gnome_print_beginpage (pi->pc, str);
+	gnome_print_beginpage (pi->pc, (guchar *)str);
 	g_free (str);
 
 	/* Translate and scale, so that our origin is at the upper left. */
@@ -775,14 +775,16 @@ draw_text_object (PrintInfo     *pi,
 		/* auto shrink text size to keep within text box limits. */
 		for (i = 0; line[i] != NULL; i++) {
 
-			font = gnome_font_find_closest_from_weight_slant (font_family,
-									  font_weight,
-									  font_italic_flag,
-									  font_size);
-			glyphlist = gnome_glyphlist_from_text_dumb (font,
-								    color,
-								    0.0, 0.0,
-								    line[i]);
+			font = gnome_font_find_closest_from_weight_slant (
+				(guchar *)font_family,
+				font_weight,
+				font_italic_flag,
+				font_size);
+			glyphlist = gnome_glyphlist_from_text_dumb (
+				font,
+				color,
+				0.0, 0.0,
+				(guchar *)line[i]);
 			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 			w = bbox.x1;
 			gnome_glyphlist_unref (glyphlist);
@@ -795,14 +797,15 @@ draw_text_object (PrintInfo     *pi,
 				font_size -= 0.5;
 
 				font = gnome_font_find_closest_from_weight_slant (
-					font_family,
+					(guchar *)font_family,
 					font_weight,
 					font_italic_flag,
 					font_size);
-				glyphlist = gnome_glyphlist_from_text_dumb (font,
-									    color,
-									    0.0, 0.0,
-									    line[i]);
+				glyphlist = gnome_glyphlist_from_text_dumb (
+					font,
+					color,
+					0.0, 0.0,
+					(guchar *)line[i]);
 				gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 				w = bbox.x1;
 				gnome_glyphlist_unref (glyphlist);
@@ -812,7 +815,7 @@ draw_text_object (PrintInfo     *pi,
 	}
 
 	font = gnome_font_find_closest_from_weight_slant (
-                                       font_family,
+                                       (guchar *)font_family,
 				       font_weight,
 				       font_italic_flag,
 				       font_size);
@@ -828,7 +831,7 @@ draw_text_object (PrintInfo     *pi,
 
 		glyphlist = gnome_glyphlist_from_text_dumb (font, color,
 							    0.0, 0.0,
-							    line[i]);
+							    (guchar *)line[i]);
 
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 		w = bbox.x1;
@@ -862,7 +865,7 @@ draw_text_object (PrintInfo     *pi,
 
 		gnome_print_gsave (pi->pc);
 		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, line[i]);
+		gnome_print_show (pi->pc, (guchar *)line[i]);
 		gnome_print_grestore (pi->pc);
 	}
 
@@ -1107,9 +1110,9 @@ draw_barcode_object (PrintInfo      *pi,
 	if (gbc == NULL) {
 
 		font = gnome_font_find_closest_from_weight_slant (
-                                               GL_BARCODE_FONT_FAMILY,
-					       GL_BARCODE_FONT_WEIGHT,
-					       FALSE, 12.0);
+			(guchar *)GL_BARCODE_FONT_FAMILY,
+			GL_BARCODE_FONT_WEIGHT,
+			FALSE, 12.0);
 		gnome_print_setfont (pi->pc, font);
 
 		gnome_print_setrgbcolor (pi->pc,
@@ -1124,7 +1127,7 @@ draw_barcode_object (PrintInfo      *pi,
 
 		gnome_print_gsave (pi->pc);
 		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, _("Invalid barcode data"));
+		gnome_print_show (pi->pc, (guchar *)_("Invalid barcode data"));
 		gnome_print_grestore (pi->pc);
 
 	} else {
@@ -1148,9 +1151,9 @@ draw_barcode_object (PrintInfo      *pi,
 			bchar = (glBarcodeChar *) li->data;
 
 			font = gnome_font_find_closest_from_weight_slant (
-				                       GL_BARCODE_FONT_FAMILY,
-						       GL_BARCODE_FONT_WEIGHT,
-						       FALSE, bchar->fsize);
+				(guchar *)GL_BARCODE_FONT_FAMILY,
+				GL_BARCODE_FONT_WEIGHT,
+				FALSE, bchar->fsize);
 			gnome_print_setfont (pi->pc, font);
 
 			gnome_print_setrgbcolor (pi->pc,
@@ -1168,7 +1171,7 @@ draw_barcode_object (PrintInfo      *pi,
 			cstring = g_strdup_printf ("%c", bchar->c);
 			gnome_print_gsave (pi->pc);
 			gnome_print_scale (pi->pc, 1.0, -1.0);
-			gnome_print_show (pi->pc, cstring);
+			gnome_print_show (pi->pc, (guchar *)cstring);
 			gnome_print_grestore (pi->pc);
 			g_free (cstring);
 

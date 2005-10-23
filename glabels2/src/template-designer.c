@@ -24,7 +24,6 @@
 #include "template-designer.h"
 
 #include <glib/gi18n.h>
-#include <math.h>
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-program.h>
 #include <libgnomeui/gnome-druid.h>
@@ -33,6 +32,8 @@
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
+#include <string.h>
+#include <math.h>
 
 #include "prefs.h"
 #include <libglabels/paper.h>
