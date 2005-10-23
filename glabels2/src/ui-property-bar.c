@@ -1267,6 +1267,8 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 
 	color_combo_box_set_preview_relief (COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
 
+	g_object_unref (G_OBJECT (pixbuf));
+
 	return color_combo;
 }
 

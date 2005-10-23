@@ -341,6 +341,10 @@ gl_view_finalize (GObject *object)
 
 	view = GL_VIEW (object);
 
+	if (view->default_font_family) {
+		g_free (view->default_font_family);
+	}
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -735,6 +739,8 @@ draw_bg_fg_layers (glView *view)
 		g_warning ("Unknown template label style");
 		break;
 	}
+
+	gl_template_free (template);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -853,6 +859,7 @@ draw_bg_fg_rounded_rect (glView *view)
 				      NULL);
 
 	gnome_canvas_points_free (points);
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -900,6 +907,8 @@ draw_bg_fg_round (glView *view)
 				      "width_pixels", 2,
 				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -970,6 +979,8 @@ draw_bg_fg_cd (glView *view)
 				      "width_pixels", 2,
 				      "outline_color_rgba", OUTLINE_COLOR,
 				      NULL);
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1107,6 +1118,7 @@ draw_bg_fg_cd_bc (glView *view)
 				      NULL);
 
 	gnome_canvas_points_free (points);
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1229,6 +1241,9 @@ draw_markup_layer (glView *view)
 			break;
 		}
 	}
+
+	gl_template_free (template);
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1282,6 +1297,8 @@ draw_markup_margin (glView           *view,
 		g_warning ("Unknown template label style");
 		break;
 	}
+
+	gl_template_free (template);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1319,6 +1336,8 @@ draw_markup_margin_rect (glView           *view,
 			       "width_pixels", 1,
 			       "outline_color_rgba", MARKUP_COLOR,
 			       NULL);
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1390,6 +1409,7 @@ draw_markup_margin_rounded_rect (glView           *view,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
 	gnome_canvas_points_free (points);
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1429,6 +1449,8 @@ draw_markup_margin_round (glView           *view,
 				      "width_pixels", 1,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1479,6 +1501,8 @@ draw_markup_margin_cd (glView           *view,
 				      "width_pixels", 1,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1601,6 +1625,9 @@ draw_markup_margin_cd_bc (glView           *view,
 				      "width_pixels", 1,
 				      "outline_color_rgba", MARKUP_COLOR,
 				      NULL);
+
+
+	gl_template_free (template);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -99,7 +99,7 @@ gl_pixbuf_cache_free (GHashTable *pixbuf_cache)
 }
 
 /*****************************************************************************/
-/* Add pixbuf to cache explicitly.                                           */
+/* Add pixbuf to cache explicitly (not a reference).                         */
 /*****************************************************************************/
 void
 gl_pixbuf_cache_add_pixbuf (GHashTable *pixbuf_cache,
@@ -120,8 +120,8 @@ gl_pixbuf_cache_add_pixbuf (GHashTable *pixbuf_cache,
 
 	record = g_new0 (CacheRecord, 1);
 	record->key        = g_strdup (name);
-	record->references = 0;
-	record->pixbuf     = pixbuf;
+	record->references = 0; /* Nobody has referenced it yet. */
+	record->pixbuf     = g_object_ref (G_OBJECT (pixbuf));
 
 	g_hash_table_insert (pixbuf_cache, record->key, record);
 
@@ -143,8 +143,9 @@ gl_pixbuf_cache_get_pixbuf (GHashTable *pixbuf_cache,
 	record = g_hash_table_lookup (pixbuf_cache, name);
 
 	if (record != NULL) {
-		gl_debug (DEBUG_PIXBUF_CACHE, "END cached");
 		record->references++;
+		gl_debug (DEBUG_PIXBUF_CACHE, "references=%d", record->references);
+		gl_debug (DEBUG_PIXBUF_CACHE, "END cached");
 		return record->pixbuf;
 	}
 

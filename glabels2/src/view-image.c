@@ -40,7 +40,7 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define DELTA 0.01
+#define MIN_IMAGE_SIZE 0.01
 
 /*========================================================*/
 /* Private types.                                         */
@@ -262,6 +262,8 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	/* Query properties of object. */
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+	w = MAX (w, MIN_IMAGE_SIZE);
+	h = MAX (h, MIN_IMAGE_SIZE);
 	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
 
 	/* Adjust appearance of analogous canvas item. */
@@ -306,6 +308,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 
 	filename = gl_object_editor_get_image (editor);
 	gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+	gl_text_node_free (&filename);
 
 	/* Setting filename may have modified the size. */
 	gl_label_object_get_size (object, &w, &h);

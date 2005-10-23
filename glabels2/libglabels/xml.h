@@ -35,6 +35,17 @@
 
 G_BEGIN_DECLS
 
+/*
+ * Get property functions
+ */
+gchar *  gl_xml_get_prop_string   (xmlNodePtr    node,
+				   const gchar  *property,
+				   const gchar  *default_val);
+
+gchar *  gl_xml_get_prop_i18n_string (xmlNodePtr    node,
+				   const gchar  *property,
+				   const gchar  *default_val);
+
 gdouble  gl_xml_get_prop_double   (xmlNodePtr    node,
 				   const gchar  *property,
 				   gdouble       default_val);
@@ -56,6 +67,13 @@ gdouble  gl_xml_get_prop_length   (xmlNodePtr    node,
 				   gdouble       default_val);
 
 
+/*
+ * Set property functions
+ */
+void     gl_xml_set_prop_string   (xmlNodePtr    node,
+				   const gchar  *property,
+				   const gchar  *val);
+
 void     gl_xml_set_prop_double   (xmlNodePtr    node,
 				   const gchar  *property,
 				   gdouble       val);
@@ -76,6 +94,17 @@ void     gl_xml_set_prop_length   (xmlNodePtr    node,
 				   const gchar  *property,
 				   gdouble       val);
 
+/*
+ * Other node functions
+ */
+gboolean gl_xml_is_node           (xmlNodePtr    node,
+				   const gchar  *name);
+
+gchar *  gl_xml_get_node_content  (xmlNodePtr    node);
+
+/*
+ * Misc functions
+ */
 void     gl_xml_set_default_units (glUnitsType   units);
 
 G_END_DECLS

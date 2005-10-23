@@ -283,16 +283,19 @@ add_image_filters_to_chooser (GtkFileChooser *chooser)
 	/* Individual image filters */
 	formats = gdk_pixbuf_get_formats ();
 	for (it = formats; it != NULL; it = it->next) {
-		char *filter_name;
+		gchar *filter_name;
 		GdkPixbufFormat *format;
 		filter = gtk_file_filter_new ();
+		gchar *description, *name;
 
 		format = (GdkPixbufFormat*) it->data;
 
 		/* Filter name: First description then file extension, eg. "The PNG-Format (*.png)".*/
-		filter_name = g_strdup_printf (_("%s (*.%s)"), 
-					       gdk_pixbuf_format_get_description (format),
-					       gdk_pixbuf_format_get_name (format));
+		description = gdk_pixbuf_format_get_description (format);
+		name = gdk_pixbuf_format_get_name (format);
+		filter_name = g_strdup_printf (_("%s (*.%s)"), description, name);
+		g_free (description);
+		g_free (name);
 		gtk_file_filter_set_name (filter, filter_name);
 		g_free (filter_name);
 

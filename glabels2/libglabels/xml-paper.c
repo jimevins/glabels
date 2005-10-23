@@ -113,7 +113,7 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 		xmlFreeDoc (papers_doc);
 		return papers;
 	}
-	if (!xmlStrEqual (root->name, (xmlChar *)"Glabels-paper-sizes")) {
+	if (!gl_xml_is_node (root, "Glabels-paper-sizes")) {
 		g_warning ("\"%s\" is not a glabels paper file (wrong root node)",
 			   papers_doc->name);
 		xmlFreeDoc (papers_doc);
@@ -122,12 +122,12 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (xmlStrEqual (node->name, (xmlChar *)"Paper-size")) {
+		if (gl_xml_is_node (node, "Paper-size")) {
 			paper = gl_xml_paper_parse_paper_node (node);
 			papers = g_list_append (papers, paper);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
-				if (!xmlStrEqual (node->name,(xmlChar *)"comment")) {
+				if (!gl_xml_is_node (node, "comment")) {
 					g_warning ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -151,34 +151,22 @@ glPaper *
 gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {
 	glPaper               *paper;
-	xmlChar               *id, *name;
+	gchar                 *id, *name;
 	gdouble                width, height;
 
 	LIBXML_TEST_VERSION;
 
-	id   = xmlGetProp (paper_node, (xmlChar *)"id");
+	id   = gl_xml_get_prop_string (paper_node, "id", NULL);
 
-	name = xmlGetProp (paper_node, (xmlChar *)"_name");
-	if (name != NULL) {
-
-		xmlChar *tmp = (xmlChar *)gettext ((char *)name);
-
-		if (tmp != name) {
-			xmlFree (name);
-			name = xmlStrdup (tmp);
-		}
-
-	} else {
-		name = xmlGetProp (paper_node, (xmlChar *)"name");
-	}
+	name = gl_xml_get_prop_i18n_string (paper_node, "name", NULL);
 
 	width  = gl_xml_get_prop_length (paper_node, "width", 0);
 	height = gl_xml_get_prop_length (paper_node, "height", 0);
 
-	paper = gl_paper_new ((gchar *)id, (gchar *)name, width, height);
+	paper = gl_paper_new (id, name, width, height);
 
-	xmlFree (id);
-	xmlFree (name);
+	g_free (id);
+	g_free (name);
 
 	return paper;
 }

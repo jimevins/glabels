@@ -148,7 +148,7 @@ void gl_paper_free (glPaper *paper)
 	if ( paper != NULL ) {
 
 		g_free (paper->id);
-		paper->name = NULL;
+		paper->id = NULL;
 
 		g_free (paper->name);
 		paper->name = NULL;

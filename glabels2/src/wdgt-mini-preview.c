@@ -435,6 +435,8 @@ mini_outline_list_new (GnomeCanvas       *canvas,
 		list = g_list_append (list, item);
 	}
 
+	g_free (origins);
+
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 	return list;
 }

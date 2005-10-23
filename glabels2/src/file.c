@@ -231,6 +231,8 @@ new_response (GtkDialog *dlg,
 		gl_label_set_template (label, template);
 		gl_label_set_rotate_flag (label, rotate_flag);
 
+		gl_template_free (template);
+
 		window =
 			GL_WINDOW (g_object_get_data (G_OBJECT (dlg),
 						      "parent_window"));

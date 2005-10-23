@@ -168,6 +168,11 @@ gl_wdgt_rotate_label_finalize (GObject *object)
 
 	rotate_select = GL_WDGT_ROTATE_LABEL (object);
 
+	if (rotate_select->template) {
+		gl_template_free (rotate_select->template);
+		rotate_select->template = NULL;
+	}
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 

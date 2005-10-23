@@ -219,6 +219,10 @@ gl_view_highlight_finalize (GObject *object)
 
 	gtk_object_destroy (GTK_OBJECT(view_highlight->private->position_group));
 
+	if (view_highlight->private) {
+		g_free (view_highlight->private);
+	}
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");

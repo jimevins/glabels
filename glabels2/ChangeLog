@@ -1,3 +1,37 @@
+2005-10-23  Jim Evins  <evins@snaught.com>
+
+	reviewed by: <delete if not using a buddy>
+
+	* libglabels/xml.h:
+	* libglabels/xml.c: (gl_xml_get_prop_string),
+	(gl_xml_get_prop_i18n_string), (gl_xml_set_prop_string),
+	(gl_xml_is_node), (gl_xml_get_node_content):
+		Added new XML utility functions.
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* src/xml-label.c:
+		Cleanup by using new xml utilities created above.
+	* libglabels/paper.c: (gl_paper_free):
+	* src/file.c: (new_response):
+	* src/object-editor-image-page.c: (add_image_filters_to_chooser):
+	* src/pixbuf-cache.c: (gl_pixbuf_cache_add_pixbuf),
+	(gl_pixbuf_cache_get_pixbuf):
+	* src/ui-property-bar.c:
+	(gl_ui_property_bar_construct_color_combo):
+	* src/view-highlight.c: (gl_view_highlight_finalize):
+	* src/view-image.c: (update_object_from_editor_cb):
+	* src/view.c: (gl_view_finalize), (draw_bg_fg_layers),
+	(draw_bg_fg_rounded_rect), (draw_bg_fg_round), (draw_bg_fg_cd),
+	(draw_bg_fg_cd_bc), (draw_markup_layer), (draw_markup_margin),
+	(draw_markup_margin_rect), (draw_markup_margin_rounded_rect),
+	(draw_markup_margin_round), (draw_markup_margin_cd),
+	(draw_markup_margin_cd_bc):
+	* src/wdgt-mini-preview.c: (mini_outline_list_new):
+	* src/wdgt-rotate-label.c: (gl_wdgt_rotate_label_finalize):
+		Plugged various memory leaks located with valgrind.
+	* src/view-image.c: (update_canvas_item_from_object_cb):
+		Don't allow a width or height of zero when drawing pixbuf.
+
 2005-10-22  Jim Evins  <evins@snaught.com>
 
 	* libglabels/xml-paper.c:
