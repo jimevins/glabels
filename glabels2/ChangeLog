@@ -1,6 +1,12 @@
 2005-10-23  Jim Evins  <evins@snaught.com>
 
-	reviewed by: <delete if not using a buddy>
+	* configure.in:
+	* data/mime/Makefile.am:
+		Added configure options to disable update-mime-database and
+		update-desktop-database as part of the install.  Patch
+		provided by Leonardo Boshell (qhoracio@sourceforge.net).
+
+2005-10-23  Jim Evins  <evins@snaught.com>
 
 	* libglabels/xml.h:
 	* libglabels/xml.c: (gl_xml_get_prop_string),
