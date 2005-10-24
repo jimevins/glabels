@@ -17,6 +17,7 @@
     <Alias name="Avery  L7160"/>
     <Alias name="Avery  J8160"/>
     <Alias name="DECAdry DLW-1731"/>
+    <Alias name="DECAdry OLW-4731"/>
     <Alias name="DECAdry OLW-7131"/>
   </Template>
 
@@ -204,14 +205,14 @@
   <!-- ============================================================ -->
   <!-- Avery 32015: Business Cards                                  -->
   <!-- ============================================================ -->
-  <Template name="Zweckform 32015" size="A4" _description="Business Cards">
+  <Template name="Avery 32015" size="A4" _description="Business Cards">
     <Label-rectangle id="0" width="85mm" height="54mm" round="0mm">
       <Markup-margin size="5mm"/>
       <Layout nx="2" ny="4" x0="17mm" y0="31.5mm" dx="91mm" dy="60mm"/>
     </Label-rectangle>
+    <Alias name="Avery C32015"/>
     <Alias name="Zwekform 32015"/>
   </Template>
-
 
 
 </Glabels-templates>

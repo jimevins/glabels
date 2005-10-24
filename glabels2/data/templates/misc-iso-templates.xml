@@ -7,6 +7,18 @@
   <!-- ******************************************************************** -->
 
   <!-- =================================================================== -->
+  <!-- Sigel LP 800/LP 801/LP 802: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
+  <!-- =================================================================== -->
+  <Template name="Sigel LP 800" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="85.0mm" height="55.0mm" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="15.0mm" y0="10.0mm" dx="95.0mm" dy="55.0mm"/>
+    </Label-rectangle>
+    <Alias name="Sigel LP 801"/>
+    <Alias name="Sigel LP 802"/>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Sigel DP 830/DP 930: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
   <!-- =================================================================== -->
   <Template name="Sigel DP 830/DP 930" size="A4" _description="Business Cards">
@@ -117,6 +129,16 @@
     </Label-rectangle>
   </Template>
  
+  <!-- =================================================================== -->
+  <!-- Dataline 57125: Business Cards, 54.0 x 86.0 mm, 10 per sheet        -->
+  <!-- =================================================================== -->
+  <Template name="Dataline 57125" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="86.00mm" height="54.00mm" round="0">
+      <Markup-margin size="0mm"/>
+      <Layout nx="2" ny="5" x0="16mm" y0="11mm" dx="91mm" dy="55.625mm"/>
+    </Label-rectangle>
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Hema Etiketten: 65 x 38 mm, 21 per sheet                            -->
   <!-- =================================================================== -->

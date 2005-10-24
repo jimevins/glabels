@@ -1,3 +1,13 @@
+2005-10-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Collected all template changes and submissions since last
+		release.
+
 2005-10-23  Jim Evins  <evins@snaught.com>
 
 	* configure.in:

@@ -206,6 +206,17 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 5294 family: Round Labels, 12 per sheet.                      -->
+  <!-- =================================================================== -->
+  <Template name="Avery  5294" size="US-Letter" description="Round Labels">
+    <Label-round id="0" radius="90pt" waste="0pt">
+      <Markup-margin size="7.2pt"/>
+      <Layout nx="3" ny="4" x0="15.12pt" y0="30.6pt" dx="198pt" dy="181.08pt"/>
+    </Label-round>
+    <Alias name="Maco ML-1225"/>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet x -->
   <!-- =================================================================== -->
   <Template name="Avery  6490" size="US-Letter" _description="Diskette Labels">
