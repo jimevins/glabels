@@ -445,6 +445,13 @@ type_changed_cb (GtkWidget               *widget,
 				  "selection-changed",
 				  G_CALLBACK (src_changed_cb), dialog);
 		break;
+	case GL_MERGE_SRC_IS_FIXED:
+		dialog->priv->src_entry = gtk_label_new (_("Fixed"));
+		gtk_misc_set_alignment (GTK_MISC (dialog->priv->src_entry), 0.0, 0.5);
+
+		gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", dialog->priv->saved_src);
+		gl_merge_set_src (dialog->priv->merge, "Fixed");
+		break;
 	default:
 		dialog->priv->src_entry = gtk_label_new (_("N/A"));
 		gtk_misc_set_alignment (GTK_MISC (dialog->priv->src_entry), 0.0, 0.5);

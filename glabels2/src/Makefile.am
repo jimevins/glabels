@@ -144,6 +144,10 @@ glabels_SOURCES = 			\
 	merge-init.h			\
 	merge-text.c			\
 	merge-text.h			\
+	merge-evolution.c		\
+	merge-evolution.h		\
+	merge-vcard.c			\
+	merge-vcard.h			\
 	text-node.c			\
 	text-node.h			\
 	wdgt-print-copies.c		\
@@ -210,6 +214,10 @@ glabels_batch_SOURCES = 		\
 	merge-init.h			\
 	merge-text.c			\
 	merge-text.h			\
+	merge-evolution.c		\
+	merge-evolution.h		\
+	merge-vcard.c			\
+	merge-vcard.h			\
 	text-node.c			\
 	text-node.h			\
 	prefs.c 			\

@@ -1090,12 +1090,13 @@ gl_ui_cmd_help_about (GtkAction *action,
 	GdkPixbuf        *pixbuf = NULL;
 	
 	const gchar *authors[] = {
-		"Jim Evins <evins@snaught.com>",
+		"Jim Evins",
 		" ",
 		_("Glabels includes contributions from:"),
-		"Frederic Ruaudel  <grumz@users.sf.net>",
-		"Wayne Schuller <k_wayne@linuxpower.org>",
-		"Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>",
+		"Frederic Ruaudel",
+		"Wayne Schuller",
+		"Emmanuel Pacaud",
+		"Austin Henry",
 		" ",
 		_("See the file AUTHORS for additional credits,"),
 		_("or visit http://glabels.sourceforge.net/"),
@@ -1103,8 +1104,8 @@ gl_ui_cmd_help_about (GtkAction *action,
 	};
 	
 	const gchar *artists[] = {
-		"Nestor Di <nestordi@usuarios.retecal.es>",
-		"Jim Evins <evins@snaught.com>",
+		"Nestor Di",
+		"Jim Evins",
 		NULL
 	};
 	

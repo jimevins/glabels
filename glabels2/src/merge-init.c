@@ -25,6 +25,10 @@
 
 #include "merge-init.h"
 #include "merge-text.h"
+#ifdef HAVE_LIBEBOOK
+#include "merge-evolution.h"
+#include "merge-vcard.h"
+#endif /* HAVE_LIBEBOOK */
 
 #include "debug.h"
 
@@ -68,5 +72,21 @@ gl_merge_init (void)
 				   GL_MERGE_SRC_IS_FILE,
 				   "delim", '\t',
 				   NULL);
+
+#ifdef HAVE_LIBEBOOK
+
+	gl_merge_register_backend (GL_TYPE_MERGE_EVOLUTION,
+				   "ebook/eds",
+				   _("Data from default Evolution Addressbook"),
+				   GL_MERGE_SRC_IS_FIXED,
+				   NULL);
+
+	gl_merge_register_backend (GL_TYPE_MERGE_VCARD,
+				   "ebook/vcard",
+				   _("Data from a file containing VCards"),
+				   GL_MERGE_SRC_IS_FILE,
+				   NULL);
+
+#endif /* HAVE_LIBEBOOK */
 
 }

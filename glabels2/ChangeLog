@@ -1,6 +1,23 @@
 2005-10-24  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
+	* src/Makefile.am:
+	* src/merge-evolution.c:
+	* src/merge-evolution.h:
+	* src/merge-init.c: (gl_merge_init):
+	* src/merge-properties-dialog.c: (type_changed_cb):
+	* src/merge-vcard.c:
+	* src/merge-vcard.h:
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Added Evolution Data Server and VCard merge backends.  Original patch
+		provided by Austin Henry <ahenry@users.sourceforge.net>.
+	* configure.in:
+		Only support EDS and VCard backends if libebook is installed.  Allow
+		user to disable support, even if installed.
+	
+2005-10-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/avery-us-templates.xml:
 	* data/templates/misc-iso-templates.xml:

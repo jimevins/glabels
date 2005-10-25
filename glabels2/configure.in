@@ -59,6 +59,7 @@ LIBGNOMEPRINT_REQUIRED=2.10.0
 LIBGNOMEPRINTUI_REQUIRED=2.10.0
 LIBGNOMECANVAS_REQUIRED=2.10.0
 LIBGLADE_REQUIRED=2.5.0
+LIBEBOOK_REQUIRED=1.2.0
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
@@ -70,6 +71,25 @@ AC_SUBST(LIBGNOMEPRINT_REQUIRED)
 AC_SUBST(LIBGNOMEPRINTUI_REQUIRED)
 AC_SUBST(LIBGNOMECANVAS_REQUIRED)
 AC_SUBST(LIBGLADE_REQUIRED)
+AC_SUBST(LIBEBOOK_REQUIRED)
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Check for evolution data server
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libebook,
+	    [AC_HELP_STRING([--without-libebook],
+                            [build without Evolution Data Server support])])
+have_libebook=no
+if test "x$with_libebook" != xno; then
+	PKG_CHECK_MODULES(LIBEBOOK, libebook-1.2 >= $LIBEBOOK_REQUIRED,
+			  [have_libebook=yes], [have_libebook=no])
+fi
+
+if test "x$have_libebook" = "xyes"; then
+	AC_DEFINE(HAVE_LIBEBOOK,1,[Define to 1 for EDS support])
+	OPTIONAL_MODULES="$OPTIONAL_MODULES libebook-1.2 >= $LIBEBOOK_REQUIRED"
+fi
 
 
 dnl ---------------------------------------------------------------------------
@@ -85,6 +105,7 @@ libgnomeprint-2.2 >= $LIBGNOMEPRINT_REQUIRED \
 libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED \
 libgnomecanvas-2.0 >= $LIBGNOMECANVAS_REQUIRED \
 libglade-2.0 >= $LIBGLADE_REQUIRED \
+$OPTIONAL_MODULES \
 )
 
 AC_SUBST(GLABELS_CFLAGS)
@@ -190,10 +211,11 @@ dnl ---------------------------------------------------------------------------
 echo "
 Configuration:
 
-	Package:                ${PACKAGE}-${VERSION}:
-        Installation prefix     ${prefix}
-        Source code location:   ${srcdir}
-        Compiler:               ${CC} 
+	Package:                        ${PACKAGE}-${VERSION}:
+        Installation prefix             ${prefix}
+        Source code location:           ${srcdir}
+        Compiler:                       ${CC} 
+	Evolution Data Server support:  ${have_libebook}
 
 "
 
