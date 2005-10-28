@@ -281,7 +281,6 @@ gl_canvas_hacktext_set_arg (GObject *object,
 {
 	GnomeCanvasItem *item;
 	glCanvasHacktext *bp;
-	char *text;
 	GnomeGlyphList * gl;
 	GdkColor color;
 	GnomeFont * font;
@@ -301,7 +300,7 @@ gl_canvas_hacktext_set_arg (GObject *object,
 			bp->priv->glyphlist = NULL;
 		}
 
-		if (text) bp->text = g_value_dup_string (value);
+		bp->text = g_value_dup_string (value);
 
 		gnome_canvas_item_request_update (item);
 		break;

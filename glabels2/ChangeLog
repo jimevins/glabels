@@ -1,3 +1,9 @@
+2005-10-28  Jim Evins  <evins@snaught.com>
+
+	* src/canvas-hacktext.c: (gl_canvas_hacktext_set_arg):
+		Fixed use of uninitialized variable.  Caught by
+		d binderman <dcb314@hotmail.com>.
+
 2005-10-27  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c: (gl_merge_evolution_get_record):
