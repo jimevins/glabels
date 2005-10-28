@@ -431,28 +431,28 @@ gl_merge_evolution_get_record (glMerge *merge)
 	/* get the record key */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("record_key");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_FILE_AS));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FILE_AS));
 
 	record->field_list = g_list_append (record->field_list, field);
 
 	/* get the full name */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("full_name");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_FULL_NAME));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FULL_NAME));
 
 	record->field_list = g_list_append (record->field_list, field);
 
 	/* get the home address */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("home_address");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_ADDRESS_LABEL_HOME));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_HOME));
 
 	record->field_list = g_list_append (record->field_list, field);
 
 	/* get the work address */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("work_address");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_ADDRESS_LABEL_WORK));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_WORK));
 
 	record->field_list = g_list_append (record->field_list, field);
 

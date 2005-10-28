@@ -1,3 +1,11 @@
+2005-10-27  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_record):
+	* src/merge-vcard.c: (gl_merge_vcard_get_record),
+	(parse_next_vcard):
+		Additional cleanup of EDS and vcard backends.  Provided by
+		Austin Henry <ahenry@users.sourceforge.net>.
+
 2005-10-24  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:

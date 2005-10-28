@@ -301,7 +301,7 @@ gl_merge_vcard_get_record (glMerge *merge)
 	merge_vcard = GL_MERGE_VCARD (merge);
 
 	vcard = parse_next_vcard(merge_vcard->private->fp);
-	if (vcard[0] == '\0') {
+	if (vcard == NULL || vcard[0] == '\0') {
 		return NULL; /* EOF */
 	}
 	contact = e_contact_new_from_vcard(vcard);
@@ -319,21 +319,21 @@ gl_merge_vcard_get_record (glMerge *merge)
 	/* get the full name */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("full_name");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_FULL_NAME));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FULL_NAME));
 
 	record->field_list = g_list_append (record->field_list, field);
 
 	/* get the home address */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("home_address");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_ADDRESS_LABEL_HOME));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_HOME));
 
 	record->field_list = g_list_append (record->field_list, field);
 
 	/* get the work address */
 	field = g_new0 (glMergeField, 1);
 	field->key = g_strdup ("work_address");
-	field->value = g_strdup (e_contact_get(contact, E_CONTACT_ADDRESS_LABEL_WORK));
+	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_WORK));
 
 	record->field_list = g_list_append (record->field_list, field);
 
@@ -373,6 +373,11 @@ parse_next_vcard (FILE *fp)
 	char *vcard;
 	char line[512];
 	int size = 2048, cursize = 0;
+
+	/* if no source has been set up, don't try to read from the file */
+	if (!fp) {
+		return NULL;
+	}
 
 	vcard = g_malloc0(size);
 
