@@ -57,11 +57,12 @@ struct _glViewTextPrivate {
 
 	GList           *item_list;
 
+#ifdef EDIT_TEXT_IN_PLACE
 	GnomeCanvasItem *cursor;
 	gboolean         cursor_visible;
 	gboolean         cursor_state;
 	guint            cursor_timeout;
-
+#endif
 };
 
 /*========================================================*/
@@ -217,7 +218,9 @@ gl_view_text_new (glLabelText *object,
 
 	/* Create analogous canvas item. */
 	draw_hacktext (view_text);
+#ifdef EDIT_TEXT_IN_PLACE
 	draw_cursor (view_text);
+#endif
 
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_canvas_item_from_object_cb), view_text);
@@ -226,8 +229,10 @@ gl_view_text_new (glLabelText *object,
 			  G_CALLBACK (item_event_cb), view_text);
 
 	buffer = gl_label_text_get_buffer (object);
+#ifdef EDIT_TEXT_IN_PLACE
 	g_signal_connect (G_OBJECT (buffer), "mark-set",
 			  G_CALLBACK (mark_set_cb), view_text);
+#endif
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -295,7 +300,9 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	/* Adjust appearance of analogous canvas item. */
 	draw_hacktext (view_text);
+#ifdef EDIT_TEXT_IN_PLACE
 	draw_cursor (view_text);
+#endif
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -753,6 +760,7 @@ draw_hacktext (glViewText *view_text)
 	}
 
 	/* clean up */
+	g_free (font_family);
 	gl_color_node_free (&color_node);
 	g_strfreev (line);
 	g_free (text);
@@ -760,6 +768,7 @@ draw_hacktext (glViewText *view_text)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+#ifdef EDIT_TEXT_IN_PLACE
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Draw cursor to item (group).                                   */
 /*--------------------------------------------------------------------------*/
@@ -970,6 +979,8 @@ blink_cb (glViewText *view_text)
 
 	return FALSE;
 }
+
+#endif /* EDIT_TEXT_IN_PLACE */
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Item event callback.                                           */

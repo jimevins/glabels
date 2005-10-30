@@ -212,9 +212,10 @@ gl_label_text_finalize (GObject *object)
 
 	ltext = GL_LABEL_TEXT (object);
 
-	gl_color_node_free (&(ltext->private->color_node));
 	g_object_unref (ltext->private->tag_table);
 	g_object_unref (ltext->private->buffer);
+	g_free (ltext->private->font_family);
+	gl_color_node_free (&(ltext->private->color_node));
 	g_free (ltext->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -449,6 +450,7 @@ set_font_family (glLabelObject *object,
 
 	if (ltext->private->font_family) {
 		if (g_strcasecmp (ltext->private->font_family, good_font_family) == 0) {
+			g_free (good_font_family);
 			gl_debug (DEBUG_LABEL, "END (no change)");
 			return;
 		}

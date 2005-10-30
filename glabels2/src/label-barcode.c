@@ -138,8 +138,9 @@ gl_label_barcode_finalize (GObject *object)
 
 	lbc = GL_LABEL_BARCODE (object);
 
-	gl_color_node_free (&(lbc->private->color_node));
 	gl_text_node_free (&lbc->private->text_node);
+	g_free (lbc->private->id);
+	gl_color_node_free (&(lbc->private->color_node));
 	g_free (lbc->private);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);

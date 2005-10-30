@@ -185,7 +185,9 @@ gl_label_instance_init (glLabel *label)
 	gl_debug (DEBUG_LABEL, "START");
 
 	label->private = g_new0 (glLabelPrivate, 1);
-	label->private->merge = NULL;
+	label->private->template     = NULL;
+	label->private->filename     = NULL;
+	label->private->merge        = NULL;
 	label->private->pixbuf_cache = gl_pixbuf_cache_new ();
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -203,17 +205,16 @@ gl_label_finalize (GObject *object)
 
 	label = GL_LABEL (object);
 
-	gl_template_free (label->private->template);
-
 	for (p = label->objects; p != NULL; p = p_next) {
 		p_next = p->next;	/* NOTE: p will be left dangling */
 		g_object_unref (G_OBJECT(p->data));
 	}
 
+	gl_template_free (label->private->template);
+	g_free (label->private->filename);
 	if (label->private->merge != NULL) {
 		g_object_unref (G_OBJECT(label->private->merge));
 	}
-
 	gl_pixbuf_cache_free (label->private->pixbuf_cache);
 
 	g_free (label->private);

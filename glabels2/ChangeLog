@@ -1,3 +1,15 @@
+2005-10-29  Jim Evins  <evins@snaught.com>
+
+	* src/glabels.c: (main):
+	* src/label-barcode.c: (gl_label_barcode_finalize):
+	* src/label-text.c: (gl_label_text_finalize), (set_font_family):
+	* src/label.c: (gl_label_instance_init), (gl_label_finalize):
+	* src/object-editor.c: (gl_object_editor_finalize):
+		Another pass at valgrinding -- plugged several memory leaks.
+	* src/view-text.c: (gl_view_text_new),
+	(update_canvas_item_from_object_cb), (draw_hacktext):
+		Commented out artifacts of edit-in-place code.
+	
 2005-10-28  Jim Evins  <evins@snaught.com>
 
 	* src/canvas-hacktext.c: (gl_canvas_hacktext_set_arg):

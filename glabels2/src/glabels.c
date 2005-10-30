@@ -153,7 +153,9 @@ main (int argc, char **argv)
 	
 	/* Begin main loop */
 	gtk_main();
-		
+
+	g_object_unref (G_OBJECT (program));
+
 	return 0;
 }
 
