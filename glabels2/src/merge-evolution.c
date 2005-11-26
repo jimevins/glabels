@@ -31,6 +31,7 @@
 #include <libebook/e-book.h>
 
 #include <stdio.h>
+#include <string.h>
 
 #include "debug.h"
 
@@ -44,7 +45,8 @@ struct _glMergeEvolutionPrivate {
 	gchar            *query;
 	EBook            *book;
 	GList            *contacts;
-	GList		 *error_list; /* list of error strings */
+	GList            *fields; /* the fields supported by the addressbook */
+	GList            *error_list; /* list of error strings */
 };
 
 enum {
@@ -90,6 +92,8 @@ static void           gl_merge_evolution_copy            (glMerge          *dst_
 						     glMerge          *src_merge);
 
 /* utility function prototypes go here */
+static void           free_field_list                    (GList *fields);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -176,6 +180,7 @@ gl_merge_evolution_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	merge_evolution = GL_MERGE_EVOLUTION (object);
+	free_field_list(merge_evolution->private->fields);
 	g_free (merge_evolution->private->query);
 	g_free (merge_evolution->private);
 
@@ -246,19 +251,26 @@ static GList *
 gl_merge_evolution_get_key_list (glMerge *merge)
 {
 	glMergeEvolution   *merge_evolution;
-	GList              *key_list;
+	GList              *key_list, *iter;
 	
 	gl_debug (DEBUG_MERGE, "BEGIN");
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
 
-	/* extremely simple approach until I can list the available keys from the
-	 * server, and return them. */
 	key_list = NULL;
-	key_list = g_list_append (key_list, g_strdup ("record_key"));
-	key_list = g_list_append (key_list, g_strdup ("full_name"));
-	key_list = g_list_append (key_list, g_strdup ("home_address"));
-	key_list = g_list_append (key_list, g_strdup ("work_address"));
+	key_list = g_list_prepend (key_list, g_strdup ("record_key"));
+
+	/* for the previously retrieved supported fileds, go through them and find
+	 * their pretty names */
+	for (iter = merge_evolution->private->fields; 
+		 iter != NULL; 
+		 iter = g_list_next(iter)) 
+	{
+		key_list = g_list_prepend (key_list, 
+			g_strdup (e_contact_pretty_name (*(EContactField *)iter->data)));
+	}
+
+	key_list = g_list_reverse (key_list);
 
 	gl_debug (DEBUG_MERGE, "END");
 
@@ -283,8 +295,12 @@ gl_merge_evolution_open (glMerge *merge)
 	glMergeEvolution *merge_evolution;
 	EBookQuery *query;
 	gboolean status;
+	GList *fields, *iter;
+	EContactField *field_id;
 	GError *error;
 	GList **error_list;
+
+	gl_debug (DEBUG_MERGE, "BEGIN");
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
 	error_list = &merge_evolution->private->error_list; 
@@ -320,6 +336,40 @@ gl_merge_evolution_open (glMerge *merge)
 		return;
 	}
 
+	/* fetch the list of fields supported by this address book */
+	status = e_book_get_supported_fields(merge_evolution->private->book,
+										 &fields, &error);
+	if (status == FALSE) {
+		*error_list = g_list_append(*error_list,
+						g_strdup_printf("Couldn't list available fields: %s", 
+							error->message));
+		g_error_free (error);
+		e_book_query_unref(query);
+		g_object_unref(merge_evolution->private->book);
+		merge_evolution->private->book = NULL;
+
+		return;
+	}
+
+	/* generate a list of field_ids, and put that into private->fields */
+	for (iter = fields; iter != NULL; iter = g_list_next(iter)) {
+		field_id = g_new(EContactField, 1);
+		*field_id = e_contact_field_id(iter->data);
+
+		/* above this value, the data aren't strings anymore */
+		if (*field_id >= E_CONTACT_LAST_SIMPLE_STRING) {
+			g_free (field_id);
+			continue;
+		}
+
+		merge_evolution->private->fields = 
+			g_list_prepend(merge_evolution->private->fields, field_id);
+	}
+	free_field_list(fields); /* don't need the list of names anymore */
+
+	gl_debug(DEBUG_MERGE, "Field list length: %d", g_list_length(merge_evolution->private->fields));
+
+	/* finally retrieve the contacts */
 	status = e_book_get_contacts (merge_evolution->private->book,
 								  query,
 								  &merge_evolution->private->contacts,
@@ -330,6 +380,7 @@ gl_merge_evolution_open (glMerge *merge)
 							error->message));
 		g_error_free (error);
 		e_book_query_unref(query);
+		free_field_list(merge_evolution->private->fields);
 		g_object_unref(merge_evolution->private->book);
 		merge_evolution->private->book = NULL;
 
@@ -337,6 +388,9 @@ gl_merge_evolution_open (glMerge *merge)
 	}
 
 	e_book_query_unref(query);
+
+	gl_debug (DEBUG_MERGE, "END");
+
 	return;
 	/* XXX I should probably sort the list by name (or the file-as element)*/
 }
@@ -385,8 +439,9 @@ gl_merge_evolution_get_record (glMerge *merge)
 	glMergeEvolution   *merge_evolution;
 	glMergeRecord *record;
 	glMergeField  *field;
+	EContactField field_id;
 
-	GList *head; 
+	GList *head, *iter; 
 	EContact *contact;
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
@@ -433,28 +488,22 @@ gl_merge_evolution_get_record (glMerge *merge)
 	field->key = g_strdup ("record_key");
 	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FILE_AS));
 
-	record->field_list = g_list_append (record->field_list, field);
+	record->field_list = g_list_prepend (record->field_list, field);
 
-	/* get the full name */
-	field = g_new0 (glMergeField, 1);
-	field->key = g_strdup ("full_name");
-	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FULL_NAME));
+	/* iterate through the supported fields, and add them to the list */
+	for (iter = merge_evolution->private->fields;
+		 iter != NULL;
+		 iter = g_list_next(iter))
+	{
+		field = g_new0 (glMergeField, 1);
+		field_id = *(EContactField *)iter->data;
+		field->key = g_strdup (e_contact_pretty_name (field_id));
+		field->value = g_strdup (e_contact_get_const (contact, field_id));
 
-	record->field_list = g_list_append (record->field_list, field);
+		record->field_list = g_list_prepend (record->field_list, field);
+	}
 
-	/* get the home address */
-	field = g_new0 (glMergeField, 1);
-	field->key = g_strdup ("home_address");
-	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_HOME));
-
-	record->field_list = g_list_append (record->field_list, field);
-
-	/* get the work address */
-	field = g_new0 (glMergeField, 1);
-	field->key = g_strdup ("work_address");
-	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_WORK));
-
-	record->field_list = g_list_append (record->field_list, field);
+	record->field_list = g_list_reverse (record->field_list);
 
 	/* do a destructive read */
 	g_object_unref (contact);
@@ -472,6 +521,10 @@ static void
 gl_merge_evolution_copy (glMerge *dst_merge,
 		    glMerge *src_merge)
 {
+	GList *src_iter, *dst_iter;
+
+	gl_debug (DEBUG_MERGE, "BEGIN");
+
 	glMergeEvolution *dst_merge_evolution;
 	glMergeEvolution *src_merge_evolution;
 
@@ -479,11 +532,43 @@ gl_merge_evolution_copy (glMerge *dst_merge,
 	src_merge_evolution = GL_MERGE_EVOLUTION (src_merge);
 
 	dst_merge_evolution->private->query = g_strdup(src_merge_evolution->private->query);
+
+	dst_merge_evolution->private->fields = g_list_copy(src_merge_evolution->private->fields);
+	for (src_iter = src_merge_evolution->private->fields,
+		 	dst_iter = dst_merge_evolution->private->fields; 
+		 src_iter != NULL && dst_iter != NULL; 
+		 src_iter = g_list_next(src_iter), dst_iter = g_list_next(dst_iter))
+	{
+		dst_iter->data = g_new(EContactField, 1);
+		if (src_iter->data) { /* this better not be null, but... */
+			memcpy(dst_iter->data, src_iter->data, sizeof(EContactField));
+		}
+	}
+
 	/* I don't know that there's a good way to do a deep copy of the various
 	 * libebook structures/objects, so I'm just going to leave them out.  They
 	 * are all regenerated on gl_merge_evolution_open, anyway */
+
+	gl_debug (DEBUG_MERGE, "END");
 }
 
+/*---------------------------------------------------------------------------*/
+/* Free the list of supported fields                                         */
+/*---------------------------------------------------------------------------*/
+static void
+free_field_list (GList *fields)
+{
+	GList *iter;
+
+	for (iter = fields; iter != NULL; iter = g_list_next(iter)) 
+	{
+		if (iter->data) {
+			g_free(iter->data);
+		}
+	}
+	g_list_free(fields);
+	fields = NULL;
+}
 
 
 #endif /* HAVE_LIBEBOOK */

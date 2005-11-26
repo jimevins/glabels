@@ -1,3 +1,12 @@
+2005-11-25  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_finalize),
+	(gl_merge_evolution_get_key_list), (gl_merge_evolution_open),
+	(gl_merge_evolution_get_record), (gl_merge_evolution_copy),
+	(free_field_list):
+		Query EDS for all supported fields.  Patch provided by
+		Austin Henry <ahenry@users.sourceforge.net>.
+
 2005-10-29  Jim Evins  <evins@snaught.com>
 
 	* src/glabels.c: (main):
