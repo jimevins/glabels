@@ -1,3 +1,11 @@
+2005-11-27  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_key_list),
+	(gl_merge_evolution_get_primary_key),
+	(gl_merge_evolution_get_record):
+		Don't create "record_key" pseudo-key.  Don't populate
+		fields with null data.
+
 2005-11-25  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c: (gl_merge_evolution_finalize),

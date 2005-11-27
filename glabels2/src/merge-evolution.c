@@ -257,9 +257,6 @@ gl_merge_evolution_get_key_list (glMerge *merge)
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
 
-	key_list = NULL;
-	key_list = g_list_prepend (key_list, g_strdup ("record_key"));
-
 	/* for the previously retrieved supported fileds, go through them and find
 	 * their pretty names */
 	for (iter = merge_evolution->private->fields; 
@@ -283,7 +280,7 @@ gl_merge_evolution_get_key_list (glMerge *merge)
 static gchar *
 gl_merge_evolution_get_primary_key (glMerge *merge)
 {
-	return g_strdup ("record_key");
+	return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
 
 /*--------------------------------------------------------------------------*/
@@ -483,24 +480,21 @@ gl_merge_evolution_get_record (glMerge *merge)
 	 * into the glMergeRecord structure. When done, free up the resources for
 	 * that contact */
 
-	/* get the record key */
-	field = g_new0 (glMergeField, 1);
-	field->key = g_strdup ("record_key");
-	field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FILE_AS));
-
-	record->field_list = g_list_prepend (record->field_list, field);
-
 	/* iterate through the supported fields, and add them to the list */
 	for (iter = merge_evolution->private->fields;
 		 iter != NULL;
 		 iter = g_list_next(iter))
 	{
-		field = g_new0 (glMergeField, 1);
+		gchar *value;
 		field_id = *(EContactField *)iter->data;
-		field->key = g_strdup (e_contact_pretty_name (field_id));
-		field->value = g_strdup (e_contact_get_const (contact, field_id));
+		value = g_strdup (e_contact_get_const (contact, field_id));
 
-		record->field_list = g_list_prepend (record->field_list, field);
+		if (value) {
+			field = g_new0 (glMergeField, 1);
+			field->key = g_strdup (e_contact_pretty_name (field_id));
+			field->value = value;
+			record->field_list = g_list_prepend (record->field_list, field);
+		}
 	}
 
 	record->field_list = g_list_reverse (record->field_list);
