@@ -425,7 +425,7 @@ mini_outline_list_new (GnomeCanvas       *canvas,
 			}
 			break;
 		default:
-			g_warning ("Unknown label style");
+			g_message ("Unknown label style");
 			return list;
 			break;
 		}

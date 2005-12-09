@@ -177,7 +177,7 @@ postnet_code (const gchar *digits)
 		}
 	}
 	if ((len != 5) && (len != 9) && (len != 11)) {
-		g_warning ("Invalid POSTNET length %d, should be 5(ZIP), 9(ZIP+4), or 11(DPBC)", len);
+		g_message ("Invalid POSTNET length %d, should be 5(ZIP), 9(ZIP+4), or 11(DPBC)", len);
 	}
 
 	/* Create correction character */

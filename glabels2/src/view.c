@@ -655,7 +655,7 @@ draw_label_layer (glView *view)
 		} else {
 			/* Should not happen! */
 			view_object = NULL;
-			g_warning ("Invalid label object type.");
+			g_message ("Invalid label object type.");
 		}
 	}
 }
@@ -736,7 +736,7 @@ draw_bg_fg_layers (glView *view)
 		break;
 
 	default:
-		g_warning ("Unknown template label style");
+		g_message ("Unknown template label style");
 		break;
 	}
 
@@ -1237,7 +1237,7 @@ draw_markup_layer (glView *view)
 			draw_markup_circle (view, markup);
 			break;
 		default:
-			g_warning ("Unknown template markup type");
+			g_message ("Unknown template markup type");
 			break;
 		}
 	}
@@ -1294,7 +1294,7 @@ draw_markup_margin (glView           *view,
 		break;
 
 	default:
-		g_warning ("Unknown template label style");
+		g_message ("Unknown template label style");
 		break;
 	}
 
@@ -1803,7 +1803,7 @@ gl_view_object_create_mode (glView            *view,
 		cursor = gl_view_barcode_get_create_cursor ();
 		break;
 	default:
-		g_warning ("Invalid label object type.");/*Should not happen!*/
+		g_message ("Invalid label object type.");/*Should not happen!*/
 		break;
 	}
 
@@ -3445,12 +3445,12 @@ canvas_event (GnomeCanvas *canvas,
 			break;
 		default:
                         /*Should not happen!*/
-			g_warning ("Invalid label object type.");
+			g_message ("Invalid label object type.");
 			return FALSE;
 	}
 
 	default:
-		g_warning ("Invalid view state.");	/*Should not happen!*/
+		g_message ("Invalid view state.");	/*Should not happen!*/
 		return FALSE;
 
 	}
@@ -3727,7 +3727,7 @@ selection_received_cb (GtkWidget        *widget,
 		} else {
 			/* Should not happen! */
 			view_object = NULL;
-			g_warning ("Invalid label object type.");
+			g_message ("Invalid label object type.");
 		}
 		gl_view_select_object (view, view_object);
 	}

@@ -134,7 +134,7 @@ gl_template_register (const glTemplate  *template)
 		g_free (abs_filename);
 
 	} else {
-		g_warning ("Cannot register new template with unknown page size.");
+		g_message ("Cannot register new template with unknown page size.");
 	}
 
 }
@@ -928,7 +928,7 @@ read_template_files_from_dir (GList       *templates,
 
 	dp = g_dir_open (dirname, 0, &gerror);
 	if (gerror != NULL) {
-	        g_warning ("cannot open data directory: %s", gerror->message );
+	        g_message ("cannot open data directory: %s", gerror->message );
 		return templates;
 	}
 

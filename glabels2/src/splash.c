@@ -71,11 +71,11 @@ gl_splash (void)
 							FALSE, NULL);
 
 	if (!g_file_test (splash_pixmap_file, G_FILE_TEST_EXISTS)) {
-		g_warning ("Could not find %s", SPLASH_PIXMAP_FILE);
+		g_message ("Could not find %s", SPLASH_PIXMAP_FILE);
 	}
 	pixbuf = gdk_pixbuf_new_from_file (splash_pixmap_file, &gerror);
 	if (gerror != NULL) {
-	        g_warning ("cannot open splash pixbuf: %s", gerror->message );
+	        g_message ("cannot open splash pixbuf: %s", gerror->message );
 		gtk_widget_destroy (splash);
 		return;
 	}

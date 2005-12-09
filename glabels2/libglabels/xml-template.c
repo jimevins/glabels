@@ -104,13 +104,13 @@ gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename) {
-		g_warning ("Utf8 filename conversion error");
+		g_message ("Utf8 filename conversion error");
 		return NULL;
 	}
 
 	templates_doc = xmlParseFile (filename);
 	if (!templates_doc) {
-		g_warning ("\"%s\" is not a glabels template file (not XML)",
+		g_message ("\"%s\" is not a glabels template file (not XML)",
 		      filename);
 		return templates;
 	}
@@ -145,12 +145,12 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 
 	root = xmlDocGetRootElement (templates_doc);
 	if (!root || !root->name) {
-		g_warning ("\"%s\" is not a glabels template file (no root node)",
+		g_message ("\"%s\" is not a glabels template file (no root node)",
 			   templates_doc->URL);
 		return templates;
 	}
 	if (!gl_xml_is_node (root, "Glabels-templates")) {
-		g_warning ("\"%s\" is not a glabels template file (wrong root node)",
+		g_message ("\"%s\" is not a glabels template file (wrong root node)",
 		      templates_doc->URL);
 		return templates;
 	}
@@ -163,7 +163,7 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 		} else {
 			if ( !xmlNodeIsText(node) ) {
 				if (!gl_xml_is_node (node,"comment")) {
-					g_warning ("bad node =  \"%s\"",node->name);
+					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
 		}
@@ -207,7 +207,7 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		if (paper == NULL) {
 			/* This should always be an id, but just in case a name
 			   slips by! */
-			g_warning (_("Unknown page size id \"%s\", trying as name"),
+			g_message (_("Unknown page size id \"%s\", trying as name"),
 				   page_size);
 			paper = gl_paper_from_name (page_size);
 			g_free (page_size);
@@ -217,7 +217,7 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			page_width  = paper->width;
 			page_height = paper->height;
 		} else {
-			g_warning (_("Unknown page size id or name \"%s\""),
+			g_message (_("Unknown page size id or name \"%s\""),
 				   page_size);
 		}
 		gl_paper_free (paper);
@@ -242,7 +242,7 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		} else {
 			if (!xmlNodeIsText (node)) {
 				if (!gl_xml_is_node (node,"comment")) {
-					g_warning ("bad node =  \"%s\"",node->name);
+					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
 		}
@@ -299,7 +299,7 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 			xml_parse_markup_circle_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -339,7 +339,7 @@ xml_parse_label_round_node (xmlNodePtr  label_node,
 			xml_parse_markup_circle_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -382,7 +382,7 @@ xml_parse_label_cd_node (xmlNodePtr  label_node,
 			xml_parse_markup_circle_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -417,7 +417,7 @@ xml_parse_layout_node (xmlNodePtr              layout_node,
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -443,7 +443,7 @@ xml_parse_markup_margin_node (xmlNodePtr              markup_node,
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -472,7 +472,7 @@ xml_parse_markup_line_node (xmlNodePtr              markup_node,
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -500,7 +500,7 @@ xml_parse_markup_circle_node (xmlNodePtr              markup_node,
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
-				g_warning ("bad node =  \"%s\"",node->name);
+				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
 	}
@@ -555,14 +555,14 @@ gl_xml_template_write_templates_to_file (GList       *templates,
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename)
-		g_warning (_("Utf8 conversion error."));
+		g_message (_("Utf8 conversion error."));
 	else {
 		xmlSetDocCompressMode (doc, 0);
 		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 		xmlFreeDoc (doc);
 		if (xml_ret == -1) {
 
-			g_warning (_("Problem saving xml file."));
+			g_message (_("Problem saving xml file."));
 
 		}
 		g_free (filename);
@@ -685,7 +685,7 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 		break;
 
 	default:
-		g_warning ("Unknown label style");
+		g_message ("Unknown label style");
 		return;
 		break;
 
@@ -704,7 +704,7 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 			xml_create_markup_circle_node (markup, node, ns);
 			break;
 		default:
-			g_warning ("Unknown markup type");
+			g_message ("Unknown markup type");
 			break;
 		}
 	}

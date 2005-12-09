@@ -73,7 +73,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 	*status = XML_LABEL_OK;
 
 	if (!xmlStrEqual (root->name, (xmlChar *)"Label")) {
-		g_warning (_("Bad root node = \"%s\""), root->name);
+		g_message (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -121,7 +121,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 			} else if (xmlStrEqual (node->name, (xmlChar *)"Merge_Properties")) {
 				xml04_parse_merge_properties (node, label);
 			} else {
-				g_warning (_("bad node =  \"%s\""), node->name);
+				g_message (_("bad node =  \"%s\""), node->name);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ xml04_parse_media_description (xmlNodePtr node,
 
 	template = gl_template_from_name ((gchar *)template_name);
 	if (template == NULL) {
-		g_warning ("Undefined template \"%s\"", template_name);
+		g_message ("Undefined template \"%s\"", template_name);
 		/* Get a default */
 		template = gl_template_from_name (NULL);
 		ret = FALSE;
@@ -260,7 +260,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 					nodes =
 					    g_list_append (nodes, node_text);
 				} else {
-					g_warning ("Unexpected Text Line child: \"%s\"",
+					g_message ("Unexpected Text Line child: \"%s\"",
 						   text_node->name);
 				}
 
@@ -268,7 +268,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 			lines = g_list_append (lines, nodes);
 
 		} else if (!xmlNodeIsText (line_node)) {
-			g_warning ("Unexpected Text child: \"%s\"",
+			g_message ("Unexpected Text child: \"%s\"",
 				   line_node->name);
 		}
 
@@ -462,7 +462,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 		text_node->field_flag = FALSE;
 		text_node->data       = (gchar *)xmlNodeGetContent (child);
 	} else {
-		g_warning ("Unexpected Barcode child: \"%s\"", child->name);
+		g_message ("Unexpected Barcode child: \"%s\"", child->name);
 	}
 	gl_label_barcode_set_data (object, text_node);
 

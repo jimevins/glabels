@@ -1,5 +1,75 @@
 2005-12-08  Jim Evins  <evins@snaught.com>
 
+	* libglabels/paper.c: (read_paper_files_from_dir):
+	* libglabels/template.c: (gl_template_register),
+	(read_template_files_from_dir):
+	* libglabels/xml-paper.c: (gl_xml_paper_read_papers_from_file),
+	(gl_xml_paper_parse_papers_doc):
+	* libglabels/xml-template.c:
+	(gl_xml_template_read_templates_from_file),
+	(gl_xml_template_parse_templates_doc),
+	(gl_xml_template_parse_template_node),
+	(xml_parse_label_rectangle_node), (xml_parse_label_round_node),
+	(xml_parse_label_cd_node), (xml_parse_layout_node),
+	(xml_parse_markup_margin_node), (xml_parse_markup_line_node),
+	(xml_parse_markup_circle_node),
+	(gl_xml_template_write_templates_to_file), (xml_create_label_node):
+	* libglabels/xml.c: (gl_xml_get_prop_length):
+		Re-classified g_warnings to g_messages.
+	* src/Makefile.am:
+	* src/glabels.c: (main):
+	* src/warning-handler.c: (gl_warning_handler_init),
+	(warning_handler):
+	* src/warning-handler.h:
+		Added warning message handler to make sure the user is
+		presented with appropriate non-fatal errors.
+	* src/critical-error-handler.c: (critical_error_handler):
+		Changed exit to abort.
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new), (render_pass1):
+	* src/bc-postnet.c: (postnet_code):
+	* src/bc.c: (id_to_index), (name_to_index):
+	* src/merge.c: (gl_merge_register_backend), (gl_merge_new):
+	* src/object-editor.c: (gl_object_notebook_construct_valist):
+	* src/prefs-dialog.c: (update_locale_page_from_prefs):
+	* src/prefs.c: (gl_prefs_get_units_per_point),
+	(gl_prefs_get_units_precision), (gl_prefs_get_units_step_size),
+	(gl_prefs_get_units_string):
+	* src/print.c: (draw_outline), (clip_to_outline), (clip_punchouts):
+	* src/splash.c: (gl_splash):
+	* src/ui-commands.c: (gl_ui_cmd_help_contents):
+	* src/view-highlight.c: (gl_view_highlight_new),
+	(highlight_resizable_box_construct), (object_changed_cb),
+	(view_scale_changed_cb):
+	* src/view.c: (draw_label_layer), (draw_bg_fg_layers),
+	(draw_markup_layer), (draw_markup_margin),
+	(gl_view_object_create_mode), (canvas_event),
+	(selection_received_cb):
+	* src/wdgt-mini-preview.c: (mini_outline_list_new):
+	* src/wdgt-rotate-label.c: (mini_preview_canvas_update):
+	* src/xml-label-04.c: (gl_xml_label_04_parse),
+	(xml04_parse_media_description), (xml04_parse_text_props),
+	(xml04_parse_barcode_props):
+	* src/xml-label-191.c: (gl_xml_label_191_parse),
+	(xml191_parse_objects), (xml191_parse_object),
+	(xml191_parse_text_props), (xml191_parse_image_props),
+	(xml191_parse_barcode_props), (xml191_parse_data),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_layout),
+	(xml191_parse_markup):
+	* src/xml-label.c: (gl_xml_label_open), (gl_xml_label_open_buffer),
+	(xml_doc_to_label), (xml_parse_label), (xml_parse_objects),
+	(xml_parse_object_text), (xml_parse_object_image),
+	(xml_parse_object_barcode), (xml_parse_data),
+	(xml_parse_toplevel_span), (gl_xml_label_save),
+	(xml_create_objects):
+		Re-classified g_warnings to g_messages.
+	* src/merge-evolution.c: (gl_merge_evolution_open),
+	(gl_merge_evolution_close), (gl_merge_evolution_get_record):
+		Use g_warning to output errors encountered while
+		communicating with the evolution data server
+		instead of embedding them in the data.
+	
+2005-12-08  Jim Evins  <evins@snaught.com>
+
 	* libglabels/libglabels-private.h:
 		Set G_LOG_DOMAIN
 	* libglabels/paper.c: (read_papers):

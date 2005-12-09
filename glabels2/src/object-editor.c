@@ -326,7 +326,7 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 			break;
 
 		default:
-			g_warning ("option = %d", option);
+			g_message ("option = %d", option);
 			g_assert_not_reached ();
 		}
 		

@@ -124,13 +124,13 @@ gl_merge_register_backend (GType              type,
 
 		class = g_type_class_ref (type);
 		if (class == NULL) {
-			g_warning ("%s: unknown object type %d",
+			g_message ("%s: unknown object type %d",
 				   G_STRLOC, type);
 			break;
 		}
 		pspec = g_object_class_find_property (class, pname);
 		if (pspec == NULL) {
-			g_warning ("%s: object class `%s' has no property named `%s'",
+			g_message ("%s: object class `%s' has no property named `%s'",
 				   G_STRLOC, g_type_name (type), pname);
 			break;
 		}
@@ -143,7 +143,7 @@ gl_merge_register_backend (GType              type,
 		g_value_init (&params[n_params].value, pspec->value_type);
 		G_VALUE_COLLECT (&params[n_params].value, args, 0, &error);
 		if (error) {
-			g_warning ("%s: %s", G_STRLOC, error);
+			g_message ("%s: %s", G_STRLOC, error);
 			g_free (error);
 			break;
 		}
@@ -325,7 +325,7 @@ gl_merge_new (gchar *name)
 	}
 
 	if ( (merge == NULL) && (g_strcasecmp (name, "None") != 0)) {
-		g_warning ("Unknown merge backend \"%s\"", name);
+		g_message ("Unknown merge backend \"%s\"", name);
 	}
 
 	gl_debug (DEBUG_MERGE, "END");

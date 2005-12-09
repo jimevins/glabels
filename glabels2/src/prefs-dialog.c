@@ -503,7 +503,7 @@ update_locale_page_from_prefs (glPrefsDialog *dlg)
 			TRUE);
 		break;
 	default:
-		g_warning ("Illegal units");	/* Should not happen */
+		g_message ("Illegal units");	/* Should not happen */
 		break;
 	}
 
@@ -516,7 +516,7 @@ update_locale_page_from_prefs (glPrefsDialog *dlg)
 			GTK_TOGGLE_BUTTON(dlg->priv->page_size_a4_radio),
 			TRUE);
 	} else {
-		g_warning ("Unknown default page size"); /* Shouldn't happen */
+		g_message ("Unknown default page size"); /* Shouldn't happen */
 	}
 
 	g_signal_handlers_unblock_by_func (

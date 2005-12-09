@@ -277,7 +277,7 @@ gl_view_highlight_new (glViewObject         *view_object,
 		break;
 
 	default:
-		g_warning ("Invalid resizable highlight style");
+		g_message ("Invalid resizable highlight style");
 
 	}
 
@@ -369,7 +369,7 @@ highlight_resizable_box_construct (glViewHighlight        *view_highlight,
 		break;
 	default:
 		view_highlight->private->outline = NULL;
-		g_warning ("Invalid resizable highlight style");
+		g_message ("Invalid resizable highlight style");
 	}
 #endif
 
@@ -740,7 +740,7 @@ object_changed_cb (glLabelObject   *object,
 		break;
 
 	default:
-		g_warning ("Invalid resizable highlight style");
+		g_message ("Invalid resizable highlight style");
 
 	}
 
@@ -776,7 +776,7 @@ view_scale_changed_cb (glView          *view,
 		break;
 
 	default:
-		g_warning ("Invalid resizable highlight style");
+		g_message ("Invalid resizable highlight style");
 
 	}
 

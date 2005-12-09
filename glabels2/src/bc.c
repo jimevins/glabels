@@ -172,7 +172,7 @@ id_to_index (const gchar *id)
 		}
 	}
 
-	g_warning( "Unknown barcode id \"%s\"", id );
+	g_message( "Unknown barcode id \"%s\"", id );
 	return 0;
 }
 
@@ -192,7 +192,7 @@ name_to_index (const gchar *name)
 		}
 	}
 
-	g_warning( "Unknown barcode name \"%s\"", name );
+	g_message( "Unknown barcode name \"%s\"", name );
 	return 0;
 }
 

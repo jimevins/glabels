@@ -322,7 +322,7 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 					}
 				}
 				if (i>GL_UNITS_LAST) {
-					g_warning ("Line %d, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
+					g_message ("Line %d, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
 						   xmlGetLineNo (node), node->name, property,
 						   unit);
 				}

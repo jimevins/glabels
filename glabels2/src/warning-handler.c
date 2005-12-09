@@ -3,7 +3,7 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  critical-error-handler.c:  critical error handler
+ *  warning-handler.c:  non-critical error handler
  *
  *  Copyright (C) 2005  Jim Evins <evins@snaught.com>.
  *
@@ -24,7 +24,7 @@
 
 #include <config.h>
 
-#include "critical-error-handler.h"
+#include "warning-handler.h"
 
 #include <glib/gmessages.h>
 #include <glib/gi18n.h>
@@ -32,26 +32,26 @@
 #include <gtk/gtkstock.h>
 #include <stdlib.h>
 
-static void critical_error_handler (const gchar    *log_domain,
-                                    GLogLevelFlags  log_level,
-                                    const gchar    *message,
-                                    gpointer        user_data);
+static void warning_handler (const gchar    *log_domain,
+                             GLogLevelFlags  log_level,
+                             const gchar    *message,
+                             gpointer        user_data);
 
 
 /***************************************************************************/
 /* Initialize error handler.                                               */
 /***************************************************************************/
 void
-gl_critical_error_handler_init (void)
+gl_warning_handler_init (void)
 {
         g_log_set_handler ("LibGlabels",
-                           G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
-                           critical_error_handler,
+                           G_LOG_LEVEL_WARNING,
+                           warning_handler,
                            "libglabels");
 
         g_log_set_handler (NULL,
-                           G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
-                           critical_error_handler,
+                           G_LOG_LEVEL_WARNING,
+                           warning_handler,
                            "glabels");
 }
 
@@ -59,25 +59,21 @@ gl_critical_error_handler_init (void)
 /* PRIVATE.  Actual error handler.                                         */
 /*-------------------------------------------------------------------------*/
 static void
-critical_error_handler (const gchar    *log_domain,
-                        GLogLevelFlags  log_level,
-                        const gchar    *message,
-                        gpointer        user_data)
+warning_handler (const gchar    *log_domain,
+                 GLogLevelFlags  log_level,
+                 const gchar    *message,
+                 gpointer        user_data)
 {
         GtkWidget *dialog;
 
         dialog = gtk_message_dialog_new (NULL,
                                          GTK_DIALOG_MODAL,
                                          GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_NONE,
-                                         _("gLabels Fatal Error!"));
+                                         GTK_BUTTONS_CLOSE,
+                                         _("gLabels Error!"));
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                   message);
-        gtk_dialog_add_button (GTK_DIALOG (dialog),
-                               GTK_STOCK_QUIT, 0);
 
         gtk_dialog_run (GTK_DIALOG (dialog));
-
-        abort ();
 }
 

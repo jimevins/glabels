@@ -173,7 +173,7 @@ gl_xml_label_open (const gchar      *utf8_filename,
 
 	doc = xmlParseFile (filename);
 	if (!doc) {
-		g_warning (_("xmlParseFile error"));
+		g_message (_("xmlParseFile error"));
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -210,7 +210,7 @@ gl_xml_label_open_buffer (const gchar      *buffer,
 
 	doc = xmlParseDoc ((xmlChar *) buffer);
 	if (!doc) {
-		g_warning (_("xmlParseFile error"));
+		g_message (_("xmlParseFile error"));
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -247,7 +247,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 
 	root = xmlDocGetRootElement (doc);
 	if (!root || !root->name) {
-		g_warning (_("No document root"));
+		g_message (_("No document root"));
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -261,25 +261,25 @@ xml_doc_to_label (xmlDocPtr         doc,
 		/* Try compatability mode 0.1 */
 		ns = xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT01_NAME_SPACE);
 		if (ns != NULL)	{
-			g_warning (_("Importing from glabels 0.1 format"));
-			g_warning ("TODO");
+			g_message (_("Importing from glabels 0.1 format"));
+			g_message ("TODO");
 			label = NULL; /* TODO */
 		} else {
 			/* Try compatability mode 0.4 */
 			ns = xmlSearchNsByHref (doc, root,
 						(xmlChar *)COMPAT04_NAME_SPACE);
 			if (ns != NULL)	{
-				g_warning (_("Importing from glabels 0.4 format"));
+				g_message (_("Importing from glabels 0.4 format"));
 				label = gl_xml_label_04_parse (root, status);
 			} else {
 				/* Try compatability mode 1.91 */
 				ns = xmlSearchNsByHref (doc, root,
 							(xmlChar *)COMPAT191_NAME_SPACE);
 				if (ns != NULL)	{
-					g_warning (_("Importing from glabels 1.91 format"));
+					g_message (_("Importing from glabels 1.91 format"));
 					label = gl_xml_label_191_parse (root, status);
 				} else {
-					g_warning (_("bad document, unknown glabels Namespace"));
+					g_message (_("bad document, unknown glabels Namespace"));
 					*status = XML_LABEL_ERROR_OPEN_PARSE;
 					return NULL;
 				}
@@ -308,7 +308,7 @@ xml_parse_label (xmlNodePtr        root,
 	*status = XML_LABEL_OK;
 
 	if (!gl_xml_is_node (root, "Glabels-document")) {
-		g_warning (_("Bad root node = \"%s\""), root->name);
+		g_message (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -345,7 +345,7 @@ xml_parse_label (xmlNodePtr        root,
 			/* Handled in pass 1. */
 		} else {
 			if (!xmlNodeIsText (child_node)) {
-				g_warning (_("bad node in Document node =  \"%s\""),
+				g_message (_("bad node in Document node =  \"%s\""),
 					   child_node->name);
 				g_object_unref (label);
 				*status = XML_LABEL_ERROR_OPEN_PARSE;
@@ -390,7 +390,7 @@ xml_parse_objects (xmlNodePtr  node,
 			xml_parse_object_barcode (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_warning (_("bad node =  \"%s\""), child->name);
+				g_message (_("bad node =  \"%s\""), child->name);
 				break;
 			}
 		}
@@ -455,7 +455,7 @@ xml_parse_object_text (xmlNodePtr  node,
 			break;
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_warning ("Unexpected Object-text child: \"%s\"",
+				g_message ("Unexpected Object-text child: \"%s\"",
 					   child->name);
 			}
 		}
@@ -702,7 +702,7 @@ xml_parse_object_image (xmlNodePtr  node,
 			gl_text_node_free (&filename);
 			xmlFree (string);
 		} else {
-			g_warning ("Missing Object-image src or field attr");
+			g_message ("Missing Object-image src or field attr");
 		}
 	}
 
@@ -793,7 +793,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 			gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
 			gl_text_node_free (&text_node);
 		} else {
-			g_warning ("Missing Object-barcode data or field attr");
+			g_message ("Missing Object-barcode data or field attr");
 		}
 	}
 
@@ -854,7 +854,7 @@ xml_parse_data (xmlNodePtr  node,
 			xml_parse_pixdata (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_warning (_("bad node in Data node =  \"%s\""),
+				g_message (_("bad node in Data node =  \"%s\""),
 					   child->name);
 			}
 		}
@@ -979,7 +979,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 
 		} else if (gl_xml_is_node (child, "Span")) {
 
-			g_warning ("Unexpected rich text (not supported, yet!)");
+			g_message ("Unexpected rich text (not supported, yet!)");
 
 		} else if (gl_xml_is_node (child, "Field")) {
 
@@ -997,7 +997,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 			text_nodes = NULL;
 
 		} else {
-			g_warning ("Unexpected Span child: \"%s\"", child->name);
+			g_message ("Unexpected Span child: \"%s\"", child->name);
 		}
 
 	}
@@ -1030,14 +1030,14 @@ gl_xml_label_save (glLabel          *label,
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename)
-		g_warning (_("Utf8 conversion error."));
+		g_message (_("Utf8 conversion error."));
 	else {
 		xmlSetDocCompressMode (doc, gl_label_get_compression (label));
 		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
 		xmlFreeDoc (doc);
 		if (xml_ret == -1) {
 
-			g_warning (_("Problem saving xml file."));
+			g_message (_("Problem saving xml file."));
 			*status = XML_LABEL_ERROR_SAVE_FILE;
 
 		} else {
@@ -1157,7 +1157,7 @@ xml_create_objects (xmlNodePtr  root,
 		} else if ( GL_IS_LABEL_BARCODE(object) ) {
 			xml_create_object_barcode (node, ns, object);
 		} else {
-			g_warning ("Unknown label object");
+			g_message ("Unknown label object");
 		}
 
 	}

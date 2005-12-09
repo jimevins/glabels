@@ -99,7 +99,7 @@ gl_prefs_get_units_per_point (void)
 	case GL_UNITS_MM:
 		return 0.35277778;	/* mm */
 	default:
-		g_warning ("Illegal units");	/* Should not happen */
+		g_message ("Illegal units");	/* Should not happen */
 		return 1.0;
 	}
 }
@@ -119,7 +119,7 @@ gl_prefs_get_units_precision (void)
 	case GL_UNITS_MM:
 		return 1;	/* mm */
 	default:
-		g_warning ("Illegal units");	/* Should not happen */
+		g_message ("Illegal units");	/* Should not happen */
 		return 1.0;
 	}
 }
@@ -139,7 +139,7 @@ gl_prefs_get_units_step_size (void)
 	case GL_UNITS_MM:
 		return 0.1;	/* mm */
 	default:
-		g_warning ("Illegal units");	/* Should not happen */
+		g_message ("Illegal units");	/* Should not happen */
 		return 1.0;
 	}
 }
@@ -159,7 +159,7 @@ gl_prefs_get_units_string (void)
 	case GL_UNITS_MM:
 		return _("mm");
 	default:
-		g_warning ("Illegal units");	/* Should not happen */
+		g_message ("Illegal units");	/* Should not happen */
 		return _("points");
 	}
 }

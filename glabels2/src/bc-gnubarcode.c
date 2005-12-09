@@ -172,7 +172,7 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 	} else if (g_strcasecmp (id, "PLS") == 0) {
 		flags = BARCODE_PLS;
 	} else {
-		g_warning( "Illegal barcode id %s", id );
+		g_message( "Illegal barcode id %s", id );
 		flags = BARCODE_ANY;
 	}
 
@@ -193,7 +193,7 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 
 	Barcode_Encode (bci, flags);
 	if (!bci->partial || !bci->textinfo) {
-		g_warning ("Barcode Data Invalid");
+		g_message ("Barcode Data Invalid");
 		Barcode_Delete (bci);
 		return NULL;
 	}
@@ -352,7 +352,7 @@ render_pass1 (struct Barcode_Item *bci,
 				continue;
 			}
 			if (sscanf (p, "%lf:%lf:%c", &f1, &f2, &c) != 3) {
-				g_warning ("impossible data: %s", p);
+				g_message ("impossible data: %s", p);
 				continue;
 			}
 			bchar = g_new0 (glBarcodeChar, 1);

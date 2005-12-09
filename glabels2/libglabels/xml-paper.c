@@ -68,13 +68,13 @@ gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename) {
-		g_warning ("Utf8 filename conversion error");
+		g_message ("Utf8 filename conversion error");
 		return NULL;
 	}
 
 	papers_doc = xmlParseFile (filename);
 	if (!papers_doc) {
-		g_warning ("\"%s\" is not a glabels paper file (not XML)",
+		g_message ("\"%s\" is not a glabels paper file (not XML)",
 			   filename);
 		return NULL;
 	}
@@ -108,13 +108,13 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 
 	root = xmlDocGetRootElement (papers_doc);
 	if (!root || !root->name) {
-		g_warning ("\"%s\" is not a glabels paper file (no root node)",
+		g_message ("\"%s\" is not a glabels paper file (no root node)",
 			   papers_doc->name);
 		xmlFreeDoc (papers_doc);
 		return papers;
 	}
 	if (!gl_xml_is_node (root, "Glabels-paper-sizes")) {
-		g_warning ("\"%s\" is not a glabels paper file (wrong root node)",
+		g_message ("\"%s\" is not a glabels paper file (wrong root node)",
 			   papers_doc->name);
 		xmlFreeDoc (papers_doc);
 		return papers;
@@ -128,7 +128,7 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 		} else {
 			if ( !xmlNodeIsText(node) ) {
 				if (!gl_xml_is_node (node, "comment")) {
-					g_warning ("bad node =  \"%s\"",node->name);
+					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
 		}

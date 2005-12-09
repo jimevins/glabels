@@ -91,8 +91,9 @@ main (int argc, char **argv)
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
 				      NULL);
 
-	/* Install graphical handler for critical errors. */
+	/* Install GUI handlers for critical error and warning messages */
 	gl_critical_error_handler_init();
+	gl_warning_handler_init();
 
 	/* Splash screen */
 	gl_splash ();
@@ -102,7 +103,7 @@ main (int argc, char **argv)
 					       ICON_PIXMAP_FILE,  FALSE, NULL);
 	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
 	{
-		g_warning ("Could not find %s", ICON_PIXMAP_FILE);
+		g_message ("Could not find %s", ICON_PIXMAP_FILE);
 	}
 	else
 	{

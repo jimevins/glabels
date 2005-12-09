@@ -128,7 +128,7 @@ gl_xml_label_191_parse (xmlNodePtr        root,
 	*status = XML_LABEL_OK;
 
 	if (!xmlStrEqual (root->name, (xmlChar *)"Document")) {
-		g_warning (_("Bad root node = \"%s\""), root->name);
+		g_message (_("Bad root node = \"%s\""), root->name);
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}
@@ -162,7 +162,7 @@ gl_xml_label_191_parse (xmlNodePtr        root,
 			/* Handled in pass 1. */
 		} else {
 			if (!xmlNodeIsText (node)) {
-				g_warning (_("bad node in Document node =  \"%s\""),
+				g_message (_("bad node in Document node =  \"%s\""),
 					   node->name);
 			}
 		}
@@ -194,7 +194,7 @@ xml191_parse_objects (xmlNodePtr  objects_node,
 			xml191_parse_object (node, label);
 		} else {
 			if (!xmlNodeIsText (node)) {
-				g_warning (_("bad node =  \"%s\""), node->name);
+				g_message (_("bad node =  \"%s\""), node->name);
 			}
 		}
 	}
@@ -231,7 +231,7 @@ xml191_parse_object (xmlNodePtr  object_node,
 	} else if ( xmlStrEqual (string, (xmlChar *)"Barcode") ) {
 		object = xml191_parse_barcode_props (object_node, label);
 	} else {
-		g_warning ("Unknown label object type \"%s\"", string);
+		g_message ("Unknown label object type \"%s\"", string);
 		xmlFree (string);
 		return;
 	}
@@ -326,7 +326,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 					nodes =
 						g_list_append (nodes, node_text);
 				} else if (!xmlNodeIsText (text_node)) {
-					g_warning ("Unexpected Text Line child: \"%s\"",
+					g_message ("Unexpected Text Line child: \"%s\"",
 						   text_node->name);
 				}
 
@@ -334,7 +334,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 			lines = g_list_append (lines, nodes);
 
 		} else if (!xmlNodeIsText (line_node)) {
-			g_warning ("Unexpected Text child: \"%s\"",
+			g_message ("Unexpected Text child: \"%s\"",
 				   line_node->name);
 		}
 
@@ -501,7 +501,7 @@ xml191_parse_image_props (xmlNodePtr  node,
 			filename->field_flag = FALSE;
 			filename->data = (gchar *)xmlGetProp (child, (xmlChar *)"src");
 		} else if (!xmlNodeIsText (child)) {
-			g_warning ("Unexpected Image child: \"%s\"", child->name);
+			g_message ("Unexpected Image child: \"%s\"", child->name);
 		}
 	}
 
@@ -555,7 +555,7 @@ xml191_parse_barcode_props (xmlNodePtr  node,
 			text_node->field_flag = FALSE;
 			text_node->data = (gchar *)xmlNodeGetContent (child);
 		} else if (!xmlNodeIsText (child)) {
-			g_warning ("Unexpected Barcode child: \"%s\"", child->name);
+			g_message ("Unexpected Barcode child: \"%s\"", child->name);
 		}
 	}
 
@@ -620,7 +620,7 @@ xml191_parse_data (xmlNodePtr  node,
 			xml191_parse_pixdata (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
-				g_warning (_("bad node in Data node =  \"%s\""),
+				g_message (_("bad node in Data node =  \"%s\""),
 					   child->name);
 			}
 		}
@@ -696,7 +696,7 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 		if (paper == NULL) {
 			/* This should always be an id, but just in case a name
 			   slips by! */
-			g_warning (_("Unknown page size id \"%s\", trying as name"),
+			g_message (_("Unknown page size id \"%s\", trying as name"),
 				   template->page_size);
 			paper = gl_paper_from_name (template->page_size);
 			g_free (template->page_size);
@@ -706,7 +706,7 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 			page_width  = paper->width;
 			page_height = paper->height;
 		} else {
-			g_warning (_("Unknown page size id or name \"%s\""),
+			g_message (_("Unknown page size id or name \"%s\""),
 				   page_size);
 		}
 		gl_paper_free (paper);
@@ -739,7 +739,7 @@ xml191_parse_sheet (xmlNodePtr sheet_node)
 			xml191_parse_alias (node, template);
 		} else {
 			if (!xmlNodeIsText (node)) {
-				g_warning ("bad node =  \"%s\"", node->name);
+				g_message ("bad node =  \"%s\"", node->name);
 			}
 		}
 	}
@@ -777,7 +777,7 @@ xml191_parse_label (xmlNodePtr  label_node,
 		shape = GL_TEMPLATE_SHAPE_CD;
 	} else {
 		shape = GL_TEMPLATE_SHAPE_RECT;
-		g_warning ("Unknown label style in template");
+		g_message ("Unknown label style in template");
 	}
 	xmlFree (style);
 
@@ -820,7 +820,7 @@ xml191_parse_label (xmlNodePtr  label_node,
 		} else if (xmlStrEqual (node->name, (xmlChar *)"Markup")) {
 			xml191_parse_markup (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			g_message ("bad node =  \"%s\"", node->name);
 		}
 	}
 
@@ -852,7 +852,7 @@ xml191_parse_layout (xmlNodePtr           layout_node,
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			g_message ("bad node =  \"%s\"", node->name);
 		}
 	}
 
@@ -899,7 +899,7 @@ xml191_parse_markup (xmlNodePtr  markup_node,
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			g_warning ("bad node =  \"%s\"", node->name);
+			g_message ("bad node =  \"%s\"", node->name);
 		}
 	}
 

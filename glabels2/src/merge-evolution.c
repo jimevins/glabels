@@ -28,8 +28,9 @@
 
 
 #include "merge-evolution.h"
-#include <libebook/e-book.h>
 
+#include <libebook/e-book.h>
+#include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -46,7 +47,6 @@ struct _glMergeEvolutionPrivate {
 	EBook            *book;
 	GList            *contacts;
 	GList            *fields; /* the fields supported by the addressbook */
-	GList            *error_list; /* list of error strings */
 };
 
 enum {
@@ -295,41 +295,31 @@ gl_merge_evolution_open (glMerge *merge)
 	GList *fields, *iter;
 	EContactField *field_id;
 	GError *error;
-	GList **error_list;
 
 	gl_debug (DEBUG_MERGE, "BEGIN");
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
-	error_list = &merge_evolution->private->error_list; 
 
 	query = e_book_query_from_string(merge_evolution->private->query);
 	if (!query) {
-		merge_evolution->private->error_list = 
-			g_list_append(merge_evolution->private->error_list,
-						  g_strdup("Couldn't construct query"));
-		g_error_free (error);
+		g_warning (_("Couldn't construct query"));
 		return;
 	}
 
 	merge_evolution->private->book = e_book_new_system_addressbook(&error);
 	if (!merge_evolution->private->book) {
-		*error_list = g_list_append(*error_list,
-						g_strdup_printf("Couldn't open addressbook: %s", 
-							error->message));
+		g_warning (_("Couldn't open addressbook: %s"), error->message);
 		e_book_query_unref(query);
 		g_error_free (error);
 		return;
 	}
 
 	if (!e_book_open(merge_evolution->private->book, TRUE, &error)) {
-		*error_list = g_list_append(*error_list,
-						g_strdup_printf("Couldn't open addressbook: %s", 
-							error->message));
+		g_warning (_("Couldn't open addressbook: %s"), error->message);
 		g_error_free (error);
 		e_book_query_unref(query);
 		g_object_unref(merge_evolution->private->book);
 		merge_evolution->private->book = NULL;
-
 		return;
 	}
 
@@ -337,14 +327,11 @@ gl_merge_evolution_open (glMerge *merge)
 	status = e_book_get_supported_fields(merge_evolution->private->book,
 										 &fields, &error);
 	if (status == FALSE) {
-		*error_list = g_list_append(*error_list,
-						g_strdup_printf("Couldn't list available fields: %s", 
-							error->message));
+		g_warning (_("Couldn't list available fields: %s"), error->message);
 		g_error_free (error);
 		e_book_query_unref(query);
 		g_object_unref(merge_evolution->private->book);
 		merge_evolution->private->book = NULL;
-
 		return;
 	}
 
@@ -372,9 +359,7 @@ gl_merge_evolution_open (glMerge *merge)
 								  &merge_evolution->private->contacts,
 								  &error);
 	if (status == FALSE) {
-		*error_list = g_list_append(*error_list,
-						g_strdup_printf("Couldn't get contacts: %s", 
-							error->message));
+		g_warning (_("Couldn't get contacts: %s"), error->message);
 		g_error_free (error);
 		e_book_query_unref(query);
 		free_field_list(merge_evolution->private->fields);
@@ -417,14 +402,6 @@ gl_merge_evolution_close (glMerge *merge)
 	}
 	g_list_free(merge_evolution->private->contacts);
 	merge_evolution->private->contacts = NULL;
-
-	for (iter = merge_evolution->private->error_list; 
-		 iter != NULL; 
-		 iter = g_list_next(iter))
-	{
-		g_free(iter->data);
-	}
-	merge_evolution->private->error_list = NULL;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -442,30 +419,6 @@ gl_merge_evolution_get_record (glMerge *merge)
 	EContact *contact;
 
 	merge_evolution = GL_MERGE_EVOLUTION (merge);
-
-	/* we're in an error state */
-	if (merge_evolution->private->error_list) {
-		head = merge_evolution->private->error_list;
-		char *error_str = head->data;
-
-		/* a yucky hack to make the errors show up in the record list */
-		record = g_new0 (glMergeRecord, 1);
-		record->select_flag = TRUE;
-
-		field = g_new0 (glMergeField, 1);
-		field->key = g_strdup ("full_name");
-		field->value = g_strdup (error_str);
-
-		record->field_list = g_list_append (record->field_list, field);
-
-		/* do a destructive read */
-		g_free (error_str);
-		merge_evolution->private->error_list = 
-			g_list_remove_link (merge_evolution->private->error_list, head);
-		g_list_free_1 (head);
-
-		return record;
-	}
 
 	head = merge_evolution->private->contacts;
 	if (head == NULL) {

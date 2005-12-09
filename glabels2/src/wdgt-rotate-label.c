@@ -350,7 +350,7 @@ mini_preview_canvas_update (GnomeCanvas *canvas,
 		}
 		break;
 	default:
-		g_warning ("Unknown label style");
+		g_message ("Unknown label style");
 		break;
 	}
 

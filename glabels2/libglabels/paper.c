@@ -483,7 +483,7 @@ read_paper_files_from_dir (GList       *papers,
 
 	dp = g_dir_open (dirname, 0, &gerror);
 	if (gerror != NULL) {
-	        g_warning ("cannot open data directory: %s", gerror->message );
+	        g_message ("cannot open data directory: %s", gerror->message );
 		return papers;
 	}
 

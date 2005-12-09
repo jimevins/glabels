@@ -1248,7 +1248,7 @@ draw_outline (PrintInfo *pi,
 		break;
 
 	default:
-		g_warning ("Unknown template label style");
+		g_message ("Unknown template label style");
 		break;
 	}
 
@@ -1318,7 +1318,7 @@ clip_to_outline (PrintInfo *pi,
 		break;
 
 	default:
-		g_warning ("Unknown template label style");
+		g_message ("Unknown template label style");
 		break;
 	}
 
@@ -1361,7 +1361,7 @@ clip_punchouts (PrintInfo *pi,
 		break;
 
 	default:
-		g_warning ("Unknown template label style");
+		g_message ("Unknown template label style");
 		break;
 	}
 
