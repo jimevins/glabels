@@ -176,7 +176,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 					   NULL);
 
 	if (!dialog->priv->gui) {
-		g_warning ("Could not open merge-properties-dialog.glade, reinstall glabels!");
+		g_critical ("Could not open merge-properties-dialog.glade. gLabels may not be installed correctly!");
 		return;
 	}
 

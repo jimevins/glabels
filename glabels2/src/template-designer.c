@@ -344,7 +344,7 @@ gl_template_designer_init (glTemplateDesigner *dlg)
 					NULL);
 
 	if (!dlg->priv->gui) {
-		g_warning ("Could not open template-designer.glade, reinstall glabels!");
+		g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
 		return;
 	}
 

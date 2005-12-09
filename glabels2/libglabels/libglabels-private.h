@@ -33,4 +33,7 @@
 #define GL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
 #define GL_USER_DATA_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)
 
+#undef  G_LOG_DOMAIN
+#define G_LOG_DOMAIN "LibGlabels"
+
 #endif /* __LIBGLABELS_PRIVATE_H__ */

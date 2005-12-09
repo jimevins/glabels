@@ -212,7 +212,7 @@ gl_ui_property_bar_instance_init (glUIPropertyBar *property_bar)
 						 NULL);
 
 	if (!property_bar->priv->gui) {
-		g_warning ("Could not open property-bar.glade, reinstall glabels!");
+		g_critical ("Could not open property-bar.glade. gLabels may not be installed correctly!");
 		return;
 	}
 

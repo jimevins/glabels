@@ -29,6 +29,7 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
 
+#include "critical-error-handler.h"
 #include "splash.h"
 #include "stock.h"
 #include "merge-init.h"
@@ -89,6 +90,9 @@ main (int argc, char **argv)
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
 				      NULL);
+
+	/* Install graphical handler for critical errors. */
+	gl_critical_error_handler_init();
 
 	/* Splash screen */
 	gl_splash ();

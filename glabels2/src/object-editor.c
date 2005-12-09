@@ -152,7 +152,7 @@ gl_object_editor_init (glObjectEditor *editor)
 					   NULL);
 
 	if (!editor->priv->gui) {
-		g_warning ("Could not open object-editor.glade, reinstall glabels!");
+		g_critical ("Could not open object-editor.glade. gLabels may not be installed correctly!");
 		return;
 	}
 

@@ -41,6 +41,8 @@ glabels_SOURCES = 			\
 	glabels.c			\
 	splash.c 			\
 	splash.h 			\
+	critical-error-handler.c	\
+	critical-error-handler.h	\
 	window.c			\
 	window.h			\
 	stock.c				\

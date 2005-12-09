@@ -454,7 +454,7 @@ read_papers (void)
 	g_free (data_dir);
 
 	if (papers == NULL) {
-		g_warning (_("No paper files found!"));
+		g_critical (_("Unable to locate paper size definitions.  Libglabels may not be installed correctly!"));
 	}
 
 	return papers;

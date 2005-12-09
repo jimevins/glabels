@@ -900,7 +900,7 @@ read_templates (void)
 	g_free (data_dir);
 
 	if (templates == NULL) {
-		g_warning (_("No template files found!"));
+		g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
 	}
 
 	return templates;

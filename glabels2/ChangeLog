@@ -1,3 +1,24 @@
+2005-12-08  Jim Evins  <evins@snaught.com>
+
+	* libglabels/libglabels-private.h:
+		Set G_LOG_DOMAIN
+	* libglabels/paper.c: (read_papers):
+	* libglabels/template.c: (read_templates):
+		Made appropriate warnings critical.
+	* src/Makefile.am:
+	* src/critical-error-handler.h:
+	* src/critical-error-handler.c: (gl_critical_error_handler_init),
+	(critical_error_handler):
+		Created critical error handler.
+	* src/glabels.c: (main):
+		Register critical error handler.
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init):
+	* src/object-editor.c: (gl_object_editor_init):
+	* src/prefs-dialog.c: (gl_prefs_dialog_init):
+	* src/template-designer.c: (gl_template_designer_init):
+	* src/ui-property-bar.c: (gl_ui_property_bar_instance_init):
+		Made appropriate warnings critical.
+
 2005-11-27  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c: (gl_merge_evolution_get_key_list),

@@ -171,7 +171,7 @@ gl_prefs_dialog_init (glPrefsDialog *dlg)
 					NULL);
 
 	if (!dlg->priv->gui) {
-		g_warning ("Could not open prefs-dialog.glade, reinstall glabels!");
+		g_critical ("Could not open prefs-dialog.glade. gLabels may not be installed correctly!");
 		return;
 	}
 
