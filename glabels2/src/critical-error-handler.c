@@ -49,7 +49,7 @@ gl_critical_error_handler_init (void)
                            critical_error_handler,
                            "libglabels");
 
-        g_log_set_handler (NULL,
+        g_log_set_handler (G_LOG_DOMAIN,
                            G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
                            critical_error_handler,
                            "glabels");

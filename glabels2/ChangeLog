@@ -1,3 +1,12 @@
+2005-12-20  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+		Define unique G_LOG_DOMAIN for glabels.
+	* src/critical-error-handler.c: (gl_critical_error_handler_init):
+	* src/warning-handler.c: (gl_warning_handler_init),
+	(warning_handler):
+		Register for G_LOG_DOMAIN instead of NULL.
+	
 2005-12-10  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c:

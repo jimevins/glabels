@@ -49,7 +49,7 @@ gl_warning_handler_init (void)
                            warning_handler,
                            "libglabels");
 
-        g_log_set_handler (NULL,
+        g_log_set_handler (G_LOG_DOMAIN,
                            G_LOG_LEVEL_WARNING,
                            warning_handler,
                            "glabels");
@@ -68,12 +68,14 @@ warning_handler (const gchar    *log_domain,
 
         dialog = gtk_message_dialog_new (NULL,
                                          GTK_DIALOG_MODAL,
-                                         GTK_MESSAGE_ERROR,
+                                         GTK_MESSAGE_WARNING,
                                          GTK_BUTTONS_CLOSE,
                                          _("gLabels Error!"));
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                   message);
 
         gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
