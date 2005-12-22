@@ -1,5 +1,10 @@
 2005-12-21  Jim Evins  <evins@snaught.com>
 
+	* glabels.spec.in:
+		Updated example RPM spec file.
+	
+2005-12-21  Jim Evins  <evins@snaught.com>
+
 	* NEWS:
 	* configure.in:
 		Preparation for 2.1.2.
