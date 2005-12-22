@@ -1,3 +1,14 @@
+* gLabels 2.1.2 (unstable) release.  Release date 2005-12-21.
+
+- Updated Italian translation (Daniele Medri)
+- Fixed double entry in property bar's font family combobox
+- Don't allow zero width or height when drawing pixbufs
+- Fixed various memory leaks
+- New configure option to disable update-mime-database and update-desktop-database
+- New merge backend for evolution data server (Austin Henry)
+- New minimal merge backend for VCards using evolution data server API (Austin Henry)
+- New templates and fixes
+
 * gLabels 2.1.1 (unstable) release.  Release date 2005-06-21.
 
 - Added document merge tutorial to help documentation
