@@ -1,3 +1,8 @@
+2005-12-22  Jim Evins  <evins@snaught.com>
+
+	* src/glabels-batch.c: (main):
+		Compile warning free with gcc 4.0.
+
 2005-12-21  Jim Evins  <evins@snaught.com>
 
 	* glabels.spec.in:
