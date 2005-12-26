@@ -20,7 +20,7 @@ INCLUDES = \
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_UI_DIR=\""$(datadir)/glabels/ui/"\" 		\
 	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
-	$(HAVE_FILE_CHOOSER)
+	$(HAVE_FILE_CHOOSER) $(HAVE_FILE_CHOOSER_IN_FILE_ENTRY)
 
 glabels_LDFLAGS = -export-dynamic
 
@@ -153,8 +153,6 @@ glabels_SOURCES = 			\
 	merge-text.h			\
 	text-node.c			\
 	text-node.h			\
-	wdgt-image-select.c		\
-	wdgt-image-select.h		\
 	wdgt-print-copies.c		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\

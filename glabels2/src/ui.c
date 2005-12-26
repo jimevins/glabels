@@ -601,33 +601,6 @@ view_menu_item_toggled_cb (BonoboUIComponent           *ui_component,
 		return;
 	}
 
-	if (s && (strcmp (path, "DrawingToolbarSystem") == 0))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_SYSTEM;
-		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "DrawingToolbarIcon") == 0))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS;
-		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
-	if (s && (strcmp (path, "DrawingToolbarIconText") == 0))
-	{		
-		gl_prefs->drawing_toolbar_buttons_style = GL_TOOLBAR_ICONS_AND_TEXT;
-		set_app_drawing_toolbar_style (ui_component);
-		gl_prefs_model_save_settings (gl_prefs);
-
-		return;
-	}
-
 	if (strcmp (path, "DrawingToolbarTooltips") == 0)
 	{
 		gl_prefs->drawing_toolbar_view_tooltips = s;
@@ -826,21 +799,6 @@ set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
 				       "/commands/DrawingToolbarTooltips",
 				       gl_prefs->drawing_toolbar_visible);
 
-	gl_ui_util_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarSystem",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_SYSTEM);
-
-	gl_ui_util_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarIcon",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS);
-
-	gl_ui_util_set_verb_state (
-		ui_component, 
-		"/commands/DrawingToolbarIconText",
-		gl_prefs->drawing_toolbar_buttons_style == GL_TOOLBAR_ICONS_AND_TEXT);
-
 	gl_ui_util_set_verb_state (ui_component, 
 			"/commands/DrawingToolbarTooltips",
 			gl_prefs->drawing_toolbar_view_tooltips);
@@ -851,49 +809,6 @@ set_app_drawing_toolbar_style (BonoboUIComponent *ui_component)
 		ui_component, "/DrawingToolbar",
 		"tips", gl_prefs->drawing_toolbar_view_tooltips ? "1" : "0",
 		NULL);
-	
-	switch (gl_prefs->drawing_toolbar_buttons_style)
-	{
-		case GL_TOOLBAR_SYSTEM:
-						
-			client = gconf_client_get_default ();
-			if (client == NULL) 
-				goto error;
-
-			labels = gconf_client_get_bool (client, 
-					"/desktop/gnome/interface/toolbar-labels", NULL);
-
-			g_object_unref (G_OBJECT (client));
-			
-			if (labels)
-			{			
-				bonobo_ui_component_set_prop (
-					ui_component, "/DrawingToolbar", "look", "both", NULL);
-			
-			}
-			else
-			{
-				bonobo_ui_component_set_prop (
-					ui_component, "/DrawingToolbar", "look", "icons", NULL);
-			}
-	
-			break;
-			
-		case GL_TOOLBAR_ICONS:
-			bonobo_ui_component_set_prop (
-				ui_component, "/DrawingToolbar", "look", "icon", NULL);
-			
-			break;
-			
-		case GL_TOOLBAR_ICONS_AND_TEXT:
-			bonobo_ui_component_set_prop (
-				ui_component, "/DrawingToolbar", "look", "both", NULL);
-			
-			break;
-		default:
-			goto error;
-			break;
-	}
 	
 	bonobo_ui_component_set_prop (
 			ui_component, "/DrawingToolbar",

@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(glabels, 2.0.0, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_INIT(glabels, 2.0.4, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -39,7 +39,7 @@ dnl 5. If any interfaces have been added since the last public release, then inc
 dnl 6. If any interfaces have been removed since the last public release, then set age
 dnl    to 0.
 LIBGLABELS_C=1
-LIBGLABELS_R=0
+LIBGLABELS_R=2
 LIBGLABELS_A=0
 
 LIBGLABELS_VERSION_INFO=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
@@ -73,7 +73,7 @@ AC_SUBST(LIBGNOMEPRINT_REQUIRED)
 AC_SUBST(LIBGNOMEPRINTUI_REQUIRED)
 AC_SUBST(LIBGNOMECANVAS_REQUIRED)
 AC_SUBST(LIBGLADE_REQUIRED)
-               
+
 
 dnl ---------------------------------------------------------------------------
 dnl - GLABELS prerequisites
@@ -118,6 +118,15 @@ AC_SUBST(HAVE_FILE_CHOOSER)
 
 
 dnl ---------------------------------------------------------------------------
+dnl - Is the new file chooser available for use in file selectors?
+dnl ---------------------------------------------------------------------------
+PKG_CHECK_MODULES(GTK, libgnomeui-2.0 >= 2.6.0,
+                  HAVE_FILE_CHOOSER_IN_FILE_ENTRY="-DHAVE_FILE_CHOOSER_IN_FILE_ENTRY",
+                  HAVE_FILE_CHOOSER_IN_FILE_ENTRY="-UHAVE_FILE_CHOOSER_IN_FILE_ENTRY")
+AC_SUBST(HAVE_FILE_CHOOSER_IN_FILE_ENTRY)
+
+
+dnl ---------------------------------------------------------------------------
 dnl - Is freedesktop mime dbase available?
 dnl ---------------------------------------------------------------------------
 AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
@@ -125,6 +134,16 @@ AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
 
 AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database, no)
 AM_CONDITIONAL(HAVE_NEWER_MIME, test x$UPDATE_DESKTOP_DATABASE != xno)
+
+AC_ARG_ENABLE(update-mimedb, AC_HELP_STRING([--disable-update-mimedb],
+              [disable the update-mime-database after install [default=no]]),,
+              enable_update_mimedb=yes)
+AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
+
+AC_ARG_ENABLE(update-desktopdb, AC_HELP_STRING([--disable-update-desktopdb],
+              [disable the update-desktop-database after install [default=no]]),,
+              enable_update_desktopdb=yes)
+AM_CONDITIONAL(ENABLE_UPDATE_DESKTOPDB, test x$enable_update_desktopdb = xyes)
 
 
 dnl ---------------------------------------------------------------------------

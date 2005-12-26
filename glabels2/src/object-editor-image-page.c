@@ -76,6 +76,13 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	editor->priv->img_key_entry    = glade_xml_get_widget (editor->priv->gui,
 							       "img_key_entry");
 
+#ifdef HAVE_FILE_CHOOSER_IN_FILE_ENTRY
+	/* Use file chooser */
+	g_object_set (G_OBJECT (editor->priv->img_pixmap_entry),
+		      "use_filechooser", TRUE,
+		      NULL);
+#endif
+
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->img_page_vbox);
 

@@ -57,7 +57,8 @@ void gl_print_merge_uncollated (GnomePrintJob    *job,
 void gl_print_batch            (GnomePrintJob    *job,
 				glLabel          *label,
 				gint              n_sheets,
-				gint              n_bcopies,
+				gint              n_copies,
+				gint              first,
 				glPrintFlags     *flags);
 
 G_END_DECLS

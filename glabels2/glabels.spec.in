@@ -2,7 +2,7 @@ Summary: glabels is a GNOME program to create labels and business cards
 Name:      glabels
 Version:   @VERSION@
 Release:   1
-Copyright: GPL
+License: GPL
 Group: Applications/Publishing
 URL: http://glabels.sourceforge.net/
 
@@ -45,7 +45,7 @@ supply stores.
 %makeinstall
 %find_lang %{name}
 
-desktop-file-install --vendor gnome                \
+desktop-file-install --vendor gnome --delete-original \
 	--add-category X-Red-Hat-Base              \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/%{name}.desktop
@@ -55,6 +55,8 @@ desktop-file-install --vendor gnome                \
 %{__rm} -f %{buildroot}%{_datadir}/mime/globs
 %{__rm} -f %{buildroot}%{_datadir}/mime/magic
 %{__rm} -rf %{buildroot}%{_datadir}/mime/application
+%{__rm} -rf %{buildroot}%{_datadir}/mime/aliases
+%{__rm} -rf %{buildroot}%{_datadir}/mime/subclasses
 
 
 %clean

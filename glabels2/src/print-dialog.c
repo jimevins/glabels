@@ -378,7 +378,7 @@ printer_page_new (glPrintDialog *dialog,
 	dialog->priv->printer_select =
 		gnome_printer_selector_new (gnome_print_config_default ());
 	gtk_widget_show (dialog->priv->printer_select);
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(vbox), dialog->priv->printer_select);
+	gtk_box_pack_start (GTK_BOX(vbox), dialog->priv->printer_select, TRUE, TRUE, 0);
 
 	return vbox;
 }

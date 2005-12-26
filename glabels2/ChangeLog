@@ -1,3 +1,314 @@
+2005-12-26  Jim Evins  <evins@snaught.com>
+
+	* glabels.spec.in:
+		Minor fixes to sample RPM spec file.
+	
+2005-12-26  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* configure.in:
+	* glabels.spec.in:
+		Final preparation for 2.0.4 release.
+	
+2005-12-26  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Back-ported recent additions and fixes to template library.
+	
+2005-12-26  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml.c:
+	* src/recent.c:
+	* src/view-barcode.c:
+		Include proper header files to get correct prototypes for
+		several libc and libm functions.
+	
+2005-12-26  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* src/Makefile.am:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_construct), (type_changed_cb):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+		Set "use_filechooser" property of GnomeFileEntrys if the
+		version of GNOME is sufficiently recent ( >= 2.6).  Not
+		only does this give us a consistent file chooser dialog
+		with our other dialogs, it allows us to avoid libgnomeui
+		bug #315549 introduced in GNOME 2.12 which appears
+		to be the root cause of glabels bugs # 1328173 and #1294692.
+	
+2005-12-25  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* data/mime/Makefile.am:
+		Added configure options to disable update-mime-database and
+		update-desktop-database as part of the install.  Patch
+		provided by Leonardo Boshell (qhoracio@sourceforge.net).
+
+2005-07-01  Jim Evins  <evins@snaught.com>
+	* po/it.po:
+		Updated italian translation (Daniele Medri)
+
+2005-06-26  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+		Prepare for 2.0.3.
+
+2005-06-19  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Prepare for 2.0.3.
+
+2005-06-17  Jim Evins  <evins@snaught.com>
+
+	* help/C/figures/merge-ex2-4.png:
+	* help/C/glabels.xml:
+		Fixed spelling error.
+
+2005-06-13  Jim Evins  <evins@snaught.com>
+
+	* help/C/figures/merge-ex1-1.png:
+	* help/C/figures/merge-ex1-2.png:
+	* help/C/figures/merge-ex1-3.png:
+	* help/C/figures/merge-ex1-4.png:
+	* help/C/figures/merge-ex2-1.png:
+	* help/C/figures/merge-ex2-2.png:
+	* help/C/figures/merge-ex2-3.png:
+	* help/C/figures/merge-ex2-4.png:
+		Added figures for document merge tutorial.
+	* help/C/glabels.xml:
+		Added document merge tutorial.
+
+2005-04-25  Jim Evins  <evins@snaught.com>
+
+	* data/templates/misc-iso-templates.xml:
+		Added Fellows 04715 template provided by Steve Saxon.
+	* AUTHORS:
+		Updated acknowledgement for above.
+	
+2005-04-15  Jim Evins  <evins@snaught.com>
+	* po/ru.po:
+		Updated russian translation (Vitaly Lipatov)
+	* data/templates/misc-iso-templates.xml:
+		Added templates for russian business cards provided by Vitaly Lipatov.
+	* AUTHORS:
+		Updated acknowledgements for above.
+
+2005-04-15  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		Added Avery 5388 and 5389 templates provided by Peter L. Berghold.
+	* data/templates/misc-iso-templates.xml:
+		Added Ryman standard CD/DVD template, provided by Dan Clark.
+	* AUTHORS:
+		Added acknowledgements for above.
+	
+2005-02-28  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/misc-iso-templates.xml:
+		Added 'Ednet 45021' template provided by Ali Akcaagac
+		<aliakc@web.de>.
+
+2005-02-14  Jim Evins  <evins@snaught.com>
+
+	* src/print-dialog.c: (printer_page_new):
+		Changed packing style when adding printer selector widget.  This fixes
+		debian Bug#295274.
+
+2005-02-13  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/es.po:
+		Updated Spanish translations. (sergio rivadero)
+	* data/templates/avery-us-templates.xml:
+		Updated templates to use inches instead of points.
+
+2005-02-03  Jim Evins  <evins@snaught.com>
+
+	* po/cs.po:
+		Updated Czech translations. (David Makovský and Zbynek Mrkvick)
+	* po/it.po:
+		Updated Italian translations. (Daniele Medri)
+	* AUTHORS:
+		Updated credits to reflect above translations.
+
+2005-01-22  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+		Final prep for 2.0.2 release.
+
+2005-01-22  Jim Evins  <evins@snaught.com>
+
+	* glabels.spec.in:
+		Added '--remove-original' flag to desktop-file-install, so that there is
+		only one menu entry.
+
+2005-01-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		- Font family entry should not be editable.
+		- img_key_entry should have sensitivity=YES, so that it follows the
+		  sensitivity of img_key_combo.
+		- Barcode key entry should not be editable.
+	
+2005-01-17  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (screen_changed_cb):
+		Don't do anything, if we don't have a screen.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (get_home_scale):
+		Fixed bad call to gtk_widget_has_screen() -- huh?
+
+2005-01-04  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
+		Added templates, submitted by Larry Harriman, Juan Carlos Valero, and
+		Nick Hill.
+
+2004-11-26  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/fr.po:
+		Updated french translations provided by Florent Morel <florent@taket.org>.
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+		Added '#include <config.h>' -- HAVE_*GETTEXT macros were not defined and
+		thus _() strings were not being translated.
+
+2004-11-14  Jim Evins  <evins@snaught.com>
+
+	* src/debug.h:
+	* src/debug.c: (gl_debug_init), (gl_debug):
+		Borrowed from gedit:  use environmental variables to select debug
+		sections.
+	* src/splash.c:
+		Removed unused include of debug.h.
+	* src/glabels.c: (main):
+		Added call to gl_debug_init(), and removed debug clutter from command line
+		options.
+	* src/glabels-batch.c: (main):
+		Added call to gl_debug_init().
+
+2004-11-13  Jim Evins  <evins@snaught.com>
+
+	Drawing and property toolbars were being initialized with the "icons and text"
+	look in Fedora Core 3.  Even though none of the buttons had any text attached to
+	them, the buttons were being sized as if they were.  This led to less real estate
+	for the property editor, leading to Bug #1064630.  The
+	
+	* data/ui/glabels-ui.xml:
+		Added explicit "look" property to both drawing and property toolbars.
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+		Removed drawing_toolbar_button_style configuration parameter.
+	* src/ui.c: (view_menu_item_toggled_cb),
+	(set_app_drawing_toolbar_style):
+		Do not attempt to adjust look property of the drawing toolbar.
+
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/pixmaps/glabels-about-logo.png:
+		Updated about logo.
+	
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/man/glabels.1:
+	* src/glabels-batch.c: (main):
+	* src/print.h:
+	* src/print.c: (gl_print_batch):
+
+		Added option to glabels-batch to select the first label to begin
+		printing on.
+	
+2004-09-26  Jim Evins  <evins@snaught.com>
+
+	* data/desktop/glabels.desktop.in:
+		Point to app icon, "glabels.png"
+	* data/mime/glabels.keys.in:
+		Point at mime icon, "glabels-application-x-glabels.png"
+	* data/pixmaps/Makefile.am:
+		Added glabels_app_icondir.  Renamed icons.
+	* data/pixmaps/glabels.png:
+		New cleaned up app icon.  Deleted glabels-icon.png.
+	* data/pixmaps/glabels-application-x-glabels.png:
+		New mime icon.
+	* data/pixmaps/glabels-splash.png:
+		Renamed glabels-logo to glabels-splash to be more correct about role.
+	* src/glabels.c:
+	* src/template-designer.c:
+		Point at app icon, "glabels.png"
+	* src/splash.c:
+		Point at renamed splash image, "glabels-splash.png"
+
+2004-08-22  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* src/glabels-batch.c: (main):
+		Applied patch with minor mods to allow selecting merge source and
+		crop-marks on glabels-batch's command line.  Original patch provided by
+		José Dapena Paz <jdapena@igalia.com>.
+	
+2004-08-15  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated version to 2.0.2.
+	* data/desktop/glabels.desktop.in:
+		- Added encoding line
+		- Removed period from comment
+		- Fixed Terminal line, changed "0" to "false"
+		- Added semicolen to Categories line
+	* po/ja.po:
+		- Made sure desktop.in comment string above still translated properly
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+		Updated for 2.0.1 release.
+	* configure.in:
+		Updated libglabels versioning, due to fixes to xml-paper and xml-template.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node):
+	* src/xml-label-191.c: (xml191_parse_sheet):
+		Fixed improper use of gettext.
+	
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated version to 2.0.1.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* po/ja.po:
+		Updated 2.0.x translation by Takeshi AIHANA <aihana@gnome.gr.jp>.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	Fixes for Bug #1008181.
+
+	* src/bc.c: (gl_barcode_default_digits):
+		Make a format of zero digits, harmless.
+	* src/xml-label.c: (xml_parse_object_barcode):
+		Set default value of the format property of barcode objects to 10, not
+		zero.  This will prevent crashes when reading pre 2.0.x files.
+
 2004-08-09  Jim Evins  <evins@snaught.com>
 
 	* NEWS:

@@ -280,6 +280,11 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	case GL_MERGE_SRC_IS_FILE:
 		dialog->private->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
+#ifdef HAVE_FILE_CHOOSER_IN_FILE_ENTRY
+		g_object_set (G_OBJECT (dialog->private->src_entry),
+			      "use_filechooser", TRUE,
+			      NULL);
+#endif
 		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(dialog->private->src_entry));
 		gtk_entry_set_text (GTK_ENTRY(wentry), src);
 		g_signal_connect (G_OBJECT (wentry), "changed",
@@ -391,6 +396,11 @@ type_changed_cb (GtkWidget               *widget,
 	case GL_MERGE_SRC_IS_FILE:
 		dialog->private->src_entry =
 			gnome_file_entry_new (NULL, _("Select merge-database source"));
+#ifdef HAVE_FILE_CHOOSER_IN_FILE_ENTRY
+		g_object_set (G_OBJECT (dialog->private->src_entry),
+			      "use_filechooser", TRUE,
+			      NULL);
+#endif
 		wentry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY(dialog->private->src_entry));
 		if (dialog->private->saved_src != NULL) {
 			gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", dialog->private->saved_src);

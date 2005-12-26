@@ -28,18 +28,26 @@ CLEANFILES = $(keys_files) $(xml_files)
 
 
 install-data-hook:
+if ENABLE_UPDATE_MIMEDB
 if HAVE_NEW_MIME
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
 endif
+endif
+if ENABLE_UPDATE_DESKTOPDB
 if HAVE_NEWER_MIME
 	$(UPDATE_DESKTOP_DATABASE) 
+endif
 endif
 
 uninstall-hook:
+if ENABLE_UPDATE_MIMEDB
 if HAVE_NEW_MIME
 	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
 endif
+endif
+if ENABLE_UPDATE_DESKTOPDB
 if HAVE_NEWER_MIME
 	$(UPDATE_DESKTOP_DATABASE) 
+endif
 endif
 

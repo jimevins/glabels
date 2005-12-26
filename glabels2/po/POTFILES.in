@@ -111,8 +111,6 @@ src/merge-text.c
 src/merge-text.h
 src/text-node.c
 src/text-node.h
-src/wdgt-image-select.c
-src/wdgt-image-select.h
 src/wdgt-print-copies.c
 src/wdgt-print-copies.h
 src/wdgt-print-merge.c

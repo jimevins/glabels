@@ -27,11 +27,9 @@
 
 #include "splash.h"
 
-#include "debug.h"
-
 #define SPLASH_PIXMAP gnome_program_locate_file (NULL,\
 						 GNOME_FILE_DOMAIN_APP_PIXMAP,\
-						 "glabels/glabels-logo.png",\
+						 "glabels/glabels-splash.png",\
 						 FALSE, NULL)
 
 #define SPLASH_TIMEOUT 2000

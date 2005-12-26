@@ -7,6 +7,18 @@
   <!-- ******************************************************************** -->
 
   <!-- =================================================================== -->
+  <!-- Sigel LP 800/LP 801/LP 802: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
+  <!-- =================================================================== -->
+  <Template name="Sigel LP 800" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="85.0mm" height="55.0mm" round="0">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="15.0mm" y0="10.0mm" dx="95.0mm" dy="55.0mm"/>
+    </Label-rectangle>
+    <Alias name="Sigel LP 801"/>
+    <Alias name="Sigel LP 802"/>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Sigel DP 830/DP 930: Business Cards, 55.0 x 85.0 mm, 10 per sheet   -->
   <!-- =================================================================== -->
   <Template name="Sigel DP 830/DP 930" size="A4" _description="Business Cards">
@@ -40,10 +52,20 @@
   <!-- =================================================================== -->
   <!-- Ednet BC: Business Cards, 51 x 89 mm, 10 per sheet                  -->
   <!-- =================================================================== -->
-  <Template name="Ednet" size="A4" _description="Business Cards">
+  <Template name="Ednet BC" size="A4" _description="Business Cards">
     <Label-rectangle id="0" width="253" height="145" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Ednet 45021: Inkjet/Laser Labels 70x37mm                            -->
+  <!-- =================================================================== -->
+  <Template name="Ednet 45021" size="A4" description="Inkjet &amp; Laser Labels 70x37mm">
+    <Label-rectangle id="0" width="198.425pt" height="104.882pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="3" ny="8" x0="0pt" y0="0pt" dx="198.425pt" dy="104.882pt"/>
     </Label-rectangle>
   </Template>
 
@@ -65,6 +87,16 @@
       <Markup-margin size="5"/>
       <Layout nx="3" ny="8" x0="0" y0="0" dx="199" dy="105"/>
     </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Herma 5079: CD/DVD Labels, 2 per sheet                              -->
+  <!-- =================================================================== -->
+  <Template name="Herma 5079" size="A4" description="CD/DVD Labels">
+    <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="133.228pt" y0="46.7717pt" dx="346.819pt" dy="419.528pt"/>
+    </Label-cd>
   </Template>
 
   <!-- ===================================================================-->
@@ -97,6 +129,16 @@
     </Label-rectangle>
   </Template>
  
+  <!-- =================================================================== -->
+  <!-- Dataline 57125: Business Cards, 54.0 x 86.0 mm, 10 per sheet        -->
+  <!-- =================================================================== -->
+  <Template name="Dataline 57125" size="A4" _description="Business Cards">
+    <Label-rectangle id="0" width="86.00mm" height="54.00mm" round="0">
+      <Markup-margin size="0mm"/>
+      <Layout nx="2" ny="5" x0="16mm" y0="11mm" dx="91mm" dy="55.625mm"/>
+    </Label-rectangle>
+  </Template>
+
   <!-- =================================================================== -->
   <!-- Hema Etiketten: 65 x 38 mm, 21 per sheet                            -->
   <!-- =================================================================== -->
@@ -315,6 +357,38 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Pressit CD Labels/                                                  -->
+  <!-- =================================================================== -->
+  <Template name="Pressit  50blank" size="A4" _description="CD Labels">
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="1" x0="30.096pt" y0="70.416pt" dx="351pt" dy="351pt"/>
+      <Layout nx="1" ny="1" x0="233.208pt" y0="440.712pt" dx="351pt" dy="351pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Ryman Standard CD/DVD Labels.                                       -->
+  <!-- =================================================================== -->
+  <Template name="Ryman Standard CD/DVD" size="A4" _description="CD/DVD Labels">
+    <Label-cd id="0" radius="165.827pt" hole="58.1102pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="131.811pt" y0="60.6614pt" dx="245.622pt" dy="388.346pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Fellows 04715 CD/DVD Labels (Face only).                            -->
+  <!-- =================================================================== -->
+  <Template name="Fellows 04715" size="A4" description="CD Labels">
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="133.2pt" y0="50.4pt" dx="244.276pt" dy="363.6pt"/>
+    </Label-cd>
+  </Template>
+
+
 
 
   <!-- ******************************************************************** -->
@@ -330,6 +404,28 @@
       <Layout nx="4" ny="4" x0="33" y0="59" dx="59.5" dy="79.5"/>
     </Label-rectangle>
   </Template>
+
+
+
+  <!-- ******************************************************************** -->
+  <!-- Tamplates for A4 and A3 media, size 50 x 90 mm                       -->
+  <!-- ******************************************************************** -->
+  
+  <Template name="Russian A3 5x9" size="A3" description="Business Cards">
+    <Label-rectangle id="0" width="90mm" height="50mm" round="0">
+      <Layout nx="3" ny="8" x0="14mm" y0="10mm" dx="90mm" dy="50mm"/>
+      <Markup-margin size="5pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template name="Russian A4 5x9" size="A4" description="Business Cards">
+    <Label-rectangle id="0" width="50mm" height="90mm" round="0">
+      <Layout nx="4" ny="3" x0="5mm" y0="13mm" dx="50mm" dy="90mm"/>
+      <Markup-margin size="5pt"/>
+    </Label-rectangle>
+  </Template>
+
+
 
 </Glabels-templates>
 

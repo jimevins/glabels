@@ -25,6 +25,8 @@
 #include "recent.h"
 #include "prefs.h"
 
+#include <string.h>
+
 #include "debug.h"
 
 static EggRecentModel *model;

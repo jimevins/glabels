@@ -1,3 +1,39 @@
+* gLabels 2.0.4 release.  Release date 2005-12-26.
+
+- Use filechooser for GnomeFileEntrys in merge properties dialog and
+  object editor image page.  Fixes #1328173 and #1294692.
+- New configure option to disable update-mime-database and update-desktop-database
+- Minor cleanup.
+- New templates and fixes
+
+
+* gLabels 2.0.3 release.  Release date 2005-06-26.
+
+- Added document merge tutorial to help documentation
+- Updated Russian translation (Vitaly Lipatov)
+- Updated Spanish translation (Sergio Rivadero)
+- Updated Czech translation (David Makovský and Zbynek Mrkvick)
+- Updated Italian translation (Daniele Medri)
+- Fixed packing style of printer selection dialog
+- New templates
+
+* gLabels 2.0.2 release.  Release date 2005-01-22.
+
+- Desktop file reconciled with desktop-entry-spec
+- New cleaned-up icon
+- Added option to glabels-batch to allow selection of first label.
+- Added options to glabels-batch to allow selection of merge source and crop marks.
+  (José Dapena Paz)
+- Updated french translation (Florent Morel)
+- Fixed translation problem with object editor labels
+- Minor bug fixes and cleanup
+- New templates
+
+* gLabels 2.0.1 release.  Release date 2004-08-15.
+
+- Fixed crash when reading some labels created with 1.93.x.
+- Updated japanese translations (Takeshi AIHANA)
+- Fixed crash from improperly freeing translation strings.
 
 * gLabels 2.0.0 release.  Release date 2004-08-09.
 
@@ -11,4 +47,5 @@
 - Added option to auto-shrink text during document merge
 - Fixed memory leaks
 - Added format attibute to barcode objects, to allow correct layout of merged labels
+- Fixed mime type registration for GNOME 2.6
 

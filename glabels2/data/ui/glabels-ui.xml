@@ -155,27 +155,6 @@
 			type="toggle" state="0"
 		/>
 
-		<cmd name="DrawingToolbarSystem"
-			id="DrawingToolbarSystem"
-			_label="_Desktop Default"
-			_tip="Set drawing toolbar button style according to desktop default"
-			type="radio" group="drawing_buttons" state="1"
-		/>
-
-		<cmd name="DrawingToolbarIcon"
-			id="DrawingToolbarIcon"
-			_label="_Icon"
-			_tip="Only show icons in the drawing toolbar"
-			type="radio" group="drawing_buttons"
-		/>
-
-		<cmd name="DrawingToolbarIconText"
-			id="DrawingToolbarIconText"
-				_label="Icon and _Text"
-				_tip="Show both icons and texts in the drawing toolbar"
-				type="radio" group="drawing_buttons"
-		/>
-
 		<cmd name="DrawingToolbarTooltips"
 			id="DrawingToolbarTooltips"
 			_label="Show _Tooltips"
@@ -885,6 +864,7 @@
 		behavior="exclusive"
 		in_new_band="1"
 		band_num="2"
+                look="icon"
 	>
 
 		<toolitem name="ToolsArrow"
@@ -952,6 +932,7 @@
 		behavior="exclusive,never vertical"
 		in_new_band="1"
 		placement="bottom"
+                look="icon"
 	>
 
 		<control name="PropFontName"

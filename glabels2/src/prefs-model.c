@@ -58,7 +58,6 @@
 #define PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS     "/main-toolbar-view-tooltips"
 
 #define PREF_DRAWING_TOOLBAR_VISIBLE        "/drawing-toolbar-visible"
-#define PREF_DRAWING_TOOLBAR_BUTTONS_STYLE  "/drawing-toolbar-buttons-style"
 #define PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS  "/drawing-toolbar-view-tooltips"
 
 #define PREF_PROPERTY_TOOLBAR_VISIBLE        "/property-toolbar-visible"
@@ -349,11 +348,6 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 			       prefs_model->drawing_toolbar_visible,
 			       NULL);
 
-	gconf_client_set_int (prefs_model->gconf_client,
-			      BASE_KEY PREF_DRAWING_TOOLBAR_BUTTONS_STYLE,
-			      prefs_model->drawing_toolbar_buttons_style,
-			      NULL);
-
 	gconf_client_set_bool (prefs_model->gconf_client,
 			       BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			       prefs_model->drawing_toolbar_view_tooltips,
@@ -497,11 +491,6 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		get_bool (prefs_model->gconf_client,
 			  BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
 			  TRUE);
-
-	prefs_model->drawing_toolbar_buttons_style =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_DRAWING_TOOLBAR_BUTTONS_STYLE,
-			 GL_TOOLBAR_SYSTEM);
 
 	prefs_model->drawing_toolbar_view_tooltips =
 		get_bool (prefs_model->gconf_client,

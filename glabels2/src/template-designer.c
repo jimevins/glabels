@@ -40,7 +40,7 @@
 /*========================================================*/
 #define ICON_PIXMAP gnome_program_locate_file (NULL,\
                                                GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/glabels-icon.png",\
+                                               "glabels.png",\
                                                FALSE, NULL)
 
 #define EX_RECT_IMAGE gnome_program_locate_file (NULL,\

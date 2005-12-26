@@ -97,6 +97,16 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Zweckform 3474: Address Labels, 70 x 37 mm, 24 per sheet            -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  3474" size="A4" _description="Address Labels">
+    <Label-rectangle id="0" width="70mm" height="37mm" round="0">
+      <Markup-margin size="0"/>
+      <Layout nx="3" ny="8" x0="0" y0="0" dx="70mm" dy="37mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Zweckform 3475: Address Labels, 70 x 30 mm, 24 per sheet            -->
   <!-- =================================================================== -->
   <Template name="Zweckform  3475" size="A4" _description="Address Labels">

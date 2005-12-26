@@ -30,83 +30,76 @@
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
+#include <glib.h>
+
 G_BEGIN_DECLS
 
+/*
+ * Set an environmental var of the same name to turn on
+ * debugging output. Setting GLABELS_DEBUG will turn on all
+ * sections.
+ */
+
 typedef enum {
-	GL_DEBUG_VIEW,
-	GL_DEBUG_ITEM,
-	GL_DEBUG_PRINT,
-	GL_DEBUG_PREFS,
-	GL_DEBUG_FILE,
-	GL_DEBUG_LABEL,
-	GL_DEBUG_TEMPLATE,
-	GL_DEBUG_PAPER,
-	GL_DEBUG_XML,
-	GL_DEBUG_MERGE,
-	GL_DEBUG_UNDO,
-	GL_DEBUG_RECENT,
-	GL_DEBUG_COMMANDS,
-	GL_DEBUG_WINDOW,
-	GL_DEBUG_UI,
-	GL_DEBUG_PROPERTY_BAR,
-	GL_DEBUG_MEDIA_SELECT,
-	GL_DEBUG_MINI_PREVIEW,
-	GL_DEBUG_PIXBUF_CACHE,
-	GL_DEBUG_EDITOR,
-	GL_DEBUG_WDGT,
+	GLABELS_DEBUG_NONE         = 0,
+	GLABELS_DEBUG_VIEW         = 1 << 0,
+	GLABELS_DEBUG_ITEM         = 1 << 1,
+	GLABELS_DEBUG_PRINT        = 1 << 2,
+	GLABELS_DEBUG_PREFS        = 1 << 3,
+	GLABELS_DEBUG_FILE         = 1 << 4,
+	GLABELS_DEBUG_LABEL        = 1 << 5,
+	GLABELS_DEBUG_TEMPLATE     = 1 << 6,
+	GLABELS_DEBUG_PAPER        = 1 << 7,
+	GLABELS_DEBUG_XML          = 1 << 8,
+	GLABELS_DEBUG_MERGE        = 1 << 9,
+	GLABELS_DEBUG_UNDO         = 1 << 10,
+	GLABELS_DEBUG_RECENT       = 1 << 11,
+	GLABELS_DEBUG_COMMANDS     = 1 << 12,
+	GLABELS_DEBUG_WINDOW       = 1 << 13,
+	GLABELS_DEBUG_UI           = 1 << 14,
+	GLABELS_DEBUG_PROPERTY_BAR = 1 << 15,
+	GLABELS_DEBUG_MEDIA_SELECT = 1 << 16,
+	GLABELS_DEBUG_MINI_PREVIEW = 1 << 17,
+	GLABELS_DEBUG_PIXBUF_CACHE = 1 << 18,
+	GLABELS_DEBUG_EDITOR       = 1 << 19,
+	GLABELS_DEBUG_WDGT         = 1 << 20,
 } glDebugSection;
 
-extern gint gl_debug_all;
-extern gint gl_debug_view;
-extern gint gl_debug_item;
-extern gint gl_debug_print;
-extern gint gl_debug_prefs;
-extern gint gl_debug_file;
-extern gint gl_debug_label;
-extern gint gl_debug_template;
-extern gint gl_debug_paper;
-extern gint gl_debug_xml;
-extern gint gl_debug_merge;
-extern gint gl_debug_commands;
-extern gint gl_debug_undo;
-extern gint gl_debug_recent;
-extern gint gl_debug_window;
-extern gint gl_debug_ui;
-extern gint gl_debug_property_bar;
-extern gint gl_debug_media_select;
-extern gint gl_debug_mini_preview;
-extern gint gl_debug_pixbuf_cache;
-extern gint gl_debug_editor;
-extern gint gl_debug_wdgt;
 
 #ifndef __GNUC__
 #define __FUNCTION__   ""
 #endif
 
-#define	DEBUG_VIEW	GL_DEBUG_VIEW,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_ITEM	GL_DEBUG_ITEM,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PRINT	GL_DEBUG_PRINT,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PREFS	GL_DEBUG_PREFS,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_FILE	GL_DEBUG_FILE,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_LABEL	GL_DEBUG_LABEL,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_TEMPLATE	GL_DEBUG_TEMPLATE,__FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PAPER	GL_DEBUG_PAPER,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_XML	GL_DEBUG_XML,     __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_MERGE	GL_DEBUG_MERGE,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_UNDO	GL_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_RECENT	GL_DEBUG_RECENT,  __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_COMMANDS	GL_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_WINDOW    GL_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_UI        GL_DEBUG_UI,      __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PROPERTY_BAR      GL_DEBUG_PROPERTY_BAR,     __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_MEDIA_SELECT	GL_DEBUG_MEDIA_SELECT,     __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_MINI_PREVIEW	GL_DEBUG_MINI_PREVIEW,     __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PIXBUF_CACHE	GL_DEBUG_PIXBUF_CACHE,     __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_EDITOR	GL_DEBUG_EDITOR,  __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_WDGT	GL_DEBUG_WDGT,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_VIEW	GLABELS_DEBUG_VIEW,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_ITEM	GLABELS_DEBUG_ITEM,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PRINT	GLABELS_DEBUG_PRINT,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PREFS	GLABELS_DEBUG_PREFS,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_FILE	GLABELS_DEBUG_FILE,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_LABEL	GLABELS_DEBUG_LABEL,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_TEMPLATE	GLABELS_DEBUG_TEMPLATE,__FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PAPER	GLABELS_DEBUG_PAPER,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_XML	GLABELS_DEBUG_XML,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_MERGE	GLABELS_DEBUG_MERGE,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_UNDO	GLABELS_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_RECENT	GLABELS_DEBUG_RECENT,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_COMMANDS	GLABELS_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_WINDOW    GLABELS_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_UI        GLABELS_DEBUG_UI,      __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PROPERTY_BAR      GLABELS_DEBUG_PROPERTY_BAR,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_MEDIA_SELECT	GLABELS_DEBUG_MEDIA_SELECT,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_MINI_PREVIEW	GLABELS_DEBUG_MINI_PREVIEW,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PIXBUF_CACHE	GLABELS_DEBUG_PIXBUF_CACHE,     __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_EDITOR	GLABELS_DEBUG_EDITOR,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_WDGT	GLABELS_DEBUG_WDGT,    __FILE__, __LINE__, __FUNCTION__
 
-void gl_debug (gint section, gchar *file,
-	       gint line, gchar* function, gchar* format, ...);
+void gl_debug_init (void);
+
+void gl_debug      (glDebugSection  section,
+		    const gchar    *file,
+		    gint            line,
+		    const gchar    *function,
+		    const gchar    *format,
+		    ...);
 
 G_END_DECLS
 
