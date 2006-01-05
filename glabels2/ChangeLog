@@ -1,3 +1,10 @@
+2006-01-05  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.c: (src_changed_cb):
+		Be extra paranoid before calling strcmp().
+	* src/merge.c: (gl_merge_set_src):
+		Don't make (merge == NULL) a critical error.
+
 2005-12-22  Jim Evins  <evins@snaught.com>
 
 	* src/glabels-batch.c: (main):

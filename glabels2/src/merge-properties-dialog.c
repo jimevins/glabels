@@ -486,7 +486,10 @@ src_changed_cb (GtkWidget               *widget,
 
 	gl_debug (DEBUG_MERGE, "orig=\"%s\", new=\"%s\"\n", orig_src, src);
 
-	if (!orig_src || strcmp (src, orig_src)) {
+	if (((orig_src == NULL) && (src != NULL)) ||
+	    ((orig_src != NULL) && (src == NULL)) ||
+	    ((orig_src != NULL) && (src != NULL) && strcmp (src, orig_src)))
+	{
 		gl_merge_set_src (dialog->priv->merge, src);
 		load_tree (dialog->priv->store, dialog->priv->merge);
 	}

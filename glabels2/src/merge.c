@@ -433,19 +433,30 @@ gl_merge_set_src (glMerge *merge,
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	g_return_if_fail (merge && GL_IS_MERGE (merge));
+	if (merge == NULL)
+	{
+		gl_debug (DEBUG_MERGE, "END (NULL)");
+		return;
+	}
 
-	if ( src == NULL) {
+	g_return_if_fail (GL_IS_MERGE (merge));
 
-		if ( merge->private->src != NULL ) {
+	if ( src == NULL)
+	{
+
+		if ( merge->private->src != NULL )
+		{
 			g_free (merge->private->src);
 		}
 		merge->private->src = NULL;
 		merge_free_record_list (&merge->private->record_list);
 
-	} else {
+	}
+	else
+	{
 
-		if ( merge->private->src != NULL ) {
+		if ( merge->private->src != NULL )
+		{
 			g_free(merge->private->src);
 		}
 		merge->private->src = g_strdup (src);
@@ -453,7 +464,8 @@ gl_merge_set_src (glMerge *merge,
 		merge_free_record_list (&merge->private->record_list);
 			
 		merge_open (merge);
-		while ( (record = merge_get_record (merge)) != NULL ) {
+		while ( (record = merge_get_record (merge)) != NULL )
+		{
 			record_list = g_list_append( record_list, record );
 		}
 		merge_close (merge);
