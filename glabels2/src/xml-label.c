@@ -105,6 +105,11 @@ static void           xml_parse_pixdata        (xmlNodePtr        node,
 static void           xml_parse_toplevel_span  (xmlNodePtr        node,
 						glLabelObject    *object);
 
+static void           xml_parse_affine_attrs   (xmlNodePtr        node,
+						glLabelObject    *object);
+
+static void           xml_parse_shadow_attrs   (xmlNodePtr        node,
+						glLabelObject    *object);
 
 static xmlDocPtr      xml_label_to_doc         (glLabel          *label,
 						glXMLLabelStatus *status);
@@ -153,6 +158,12 @@ static void           xml_create_pixdata       (xmlNodePtr        root,
 static void           xml_create_toplevel_span (xmlNodePtr        node,
 						xmlNsPtr          ns,
 						glLabelText      *object_text);
+
+static void           xml_create_affine_attrs  (xmlNodePtr        node,
+						glLabelObject    *object);
+
+static void           xml_create_shadow_attrs  (xmlNodePtr        node,
+						glLabelObject    *object);
 
 
 /****************************************************************************/
@@ -412,7 +423,6 @@ xml_parse_object_text (xmlNodePtr  node,
 	gchar            *string;
 	GtkJustification  just;
 	gboolean          auto_shrink;
-	gdouble           affine[6];
 	xmlNodePtr        child;
 
 	gl_debug (DEBUG_XML, "START");
@@ -440,13 +450,10 @@ xml_parse_object_text (xmlNodePtr  node,
 	gl_label_text_set_auto_shrink (GL_LABEL_TEXT(object), auto_shrink);
 
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	/* Process children */
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
@@ -476,7 +483,6 @@ xml_parse_object_box (xmlNodePtr  node,
 	gdouble       w, h;
 	gdouble       line_width;
 	glColorNode  *line_color_node;
-	gdouble       affine[6];
 	gchar        *string;
 	glColorNode  *fill_color_node;
 
@@ -523,13 +529,10 @@ xml_parse_object_box (xmlNodePtr  node,
 	gl_color_node_free (&fill_color_node);
 	
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -546,7 +549,6 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 	gdouble      w, h;
 	gdouble      line_width;
 	glColorNode *line_color_node;
-	gdouble      affine[6];
 	gchar       *string;
 	glColorNode *fill_color_node;
 
@@ -593,13 +595,10 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -616,7 +615,6 @@ xml_parse_object_line (xmlNodePtr  node,
 	gdouble      dx, dy;
 	gdouble      line_width;
 	glColorNode *line_color_node;
-	gdouble      affine[6];
 	gchar       *string;
 
 	gl_debug (DEBUG_XML, "START");
@@ -649,13 +647,10 @@ xml_parse_object_line (xmlNodePtr  node,
 	gl_color_node_free (&line_color_node);
 
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -672,7 +667,6 @@ xml_parse_object_image (xmlNodePtr  node,
 	gdouble       w, h;
 	gchar        *string;
 	glTextNode   *filename;
-	gdouble       affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -712,13 +706,10 @@ xml_parse_object_image (xmlNodePtr  node,
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -740,7 +731,6 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gboolean            checksum_flag;
 	glColorNode        *color_node;
 	guint               format_digits;
-	gdouble             affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -798,13 +788,10 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	}
 
 	/* affine attrs */
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
-	gl_label_object_set_affine (GL_LABEL_OBJECT(object), affine);
+	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
+
+	/* shadow attrs */
+	xml_parse_shadow_attrs (node, GL_LABEL_OBJECT(object));
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1012,6 +999,64 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse affine attributes.                                       */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_affine_attrs (xmlNodePtr        node,
+			glLabelObject    *object)
+{
+	gdouble           affine[6];
+
+	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
+	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
+	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
+	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
+	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
+	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
+
+	gl_label_object_set_affine (object, affine);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse shadow attributes.                                       */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_shadow_attrs (xmlNodePtr        node,
+			glLabelObject    *object)
+{
+	gboolean         shadow_state;
+	gdouble          shadow_x;
+	gdouble          shadow_y;
+	glColorNode     *shadow_color_node;
+	gdouble          shadow_opacity;
+	gchar           *string;
+
+	shadow_state = gl_xml_get_prop_boolean (node, "shadow", FALSE);
+	gl_label_object_set_shadow_state (object, shadow_state);
+
+	if (shadow_state)
+	{
+		shadow_x = gl_xml_get_prop_length (node, "shadow_x", 0.0);
+		shadow_y = gl_xml_get_prop_length (node, "shadow_y", 0.0);
+		gl_label_object_set_shadow_offset (object, shadow_x, shadow_y);
+		
+		shadow_color_node = gl_color_node_new_default ();
+		string = gl_xml_get_prop_string (node, "shadow_color_field", NULL);
+		if ( string ) {
+			shadow_color_node->field_flag = TRUE;
+			shadow_color_node->key = string;
+		} else {
+			shadow_color_node->color = gl_xml_get_prop_uint (node, "shadow_color", 0);		
+		}
+		gl_label_object_set_shadow_color (object, shadow_color_node);
+		gl_color_node_free (&shadow_color_node);
+
+		shadow_opacity = gl_xml_get_prop_double (node, "shadow_opacity", 1.0);
+		gl_label_object_set_shadow_opacity (object, shadow_opacity);
+	}
+}
+
 /****************************************************************************/
 /* Save label to xml label file.                                            */
 /****************************************************************************/
@@ -1178,7 +1223,6 @@ xml_create_object_text (xmlNodePtr     root,
 	gdouble           w, h;
 	GtkJustification  just;
 	gboolean          auto_shrink;
-	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1203,13 +1247,10 @@ xml_create_object_text (xmlNodePtr     root,
 	gl_xml_set_prop_boolean (node, "auto_shrink", auto_shrink);
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	/* Add children */
 	xml_create_toplevel_span (node, ns, GL_LABEL_TEXT(object));
@@ -1230,7 +1271,6 @@ xml_create_object_box (xmlNodePtr     root,
 	gdouble           w, h;
 	gdouble           line_width;
 	glColorNode      *line_color_node;
-	gdouble           affine[6];
 	glColorNode *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1275,13 +1315,10 @@ xml_create_object_box (xmlNodePtr     root,
 	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1299,7 +1336,6 @@ xml_create_object_ellipse (xmlNodePtr     root,
 	gdouble           w, h;
 	gdouble           line_width;
 	glColorNode      *line_color_node;
-	gdouble           affine[6];
 	glColorNode *fill_color_node;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1345,13 +1381,10 @@ xml_create_object_ellipse (xmlNodePtr     root,
 	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1369,7 +1402,6 @@ xml_create_object_line (xmlNodePtr     root,
 	gdouble           dx, dy;
 	gdouble           line_width;
 	glColorNode      *line_color_node;
-	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1402,13 +1434,10 @@ xml_create_object_line (xmlNodePtr     root,
 
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1425,7 +1454,6 @@ xml_create_object_image (xmlNodePtr     root,
 	gdouble           x, y;
 	gdouble           w, h;
 	glTextNode       *filename;
-	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1451,13 +1479,10 @@ xml_create_object_image (xmlNodePtr     root,
 	gl_text_node_free (&filename);
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1479,7 +1504,6 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gboolean          checksum_flag;
 	glColorNode      *color_node;
 	guint             format_digits;
-	gdouble           affine[6];
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1527,13 +1551,10 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gl_text_node_free (&text_node);
 
 	/* affine attrs */
-	gl_label_object_get_affine (object, affine);
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	xml_create_affine_attrs (node, object);
+
+	/* shadow attrs */
+	xml_create_shadow_attrs (node, object);
 
 	gl_debug (DEBUG_XML, "END");
 }
@@ -1718,3 +1739,63 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	g_free (font_family);
 
 }
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Create affine attributes.                                      */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_affine_attrs (xmlNodePtr        node,
+			 glLabelObject    *object)
+{
+	gdouble           affine[6];
+
+	gl_label_object_get_affine (object, affine);
+
+	gl_xml_set_prop_double (node, "a0", affine[0]);
+	gl_xml_set_prop_double (node, "a1", affine[1]);
+	gl_xml_set_prop_double (node, "a2", affine[2]);
+	gl_xml_set_prop_double (node, "a3", affine[3]);
+	gl_xml_set_prop_double (node, "a4", affine[4]);
+	gl_xml_set_prop_double (node, "a5", affine[5]);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Create shadow attributes.                                      */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_shadow_attrs (xmlNodePtr        node,
+			 glLabelObject    *object)
+{
+	gboolean          shadow_state;
+	gdouble           shadow_x;
+	gdouble           shadow_y;
+	glColorNode      *shadow_color_node;
+	gdouble           shadow_opacity;
+
+	shadow_state = gl_label_object_get_shadow_state (object);
+
+	if (shadow_state)
+	{
+		gl_xml_set_prop_boolean (node, "shadow", shadow_state);
+
+		gl_label_object_get_shadow_offset (object, &shadow_x, &shadow_y);
+		gl_xml_set_prop_length (node, "shadow_x", shadow_x);
+		gl_xml_set_prop_length (node, "shadow_y", shadow_y);
+		
+		shadow_color_node = gl_label_object_get_shadow_color (object);
+		if (shadow_color_node->field_flag)
+		{
+			gl_xml_set_prop_string (node, "shadow_color_field", shadow_color_node->key);
+		}
+		else
+		{
+			gl_xml_set_prop_uint_hex (node, "shadow_color", shadow_color_node->color);
+		}
+		gl_color_node_free (&shadow_color_node);
+
+		shadow_opacity = gl_label_object_get_shadow_opacity (object);
+		gl_xml_set_prop_double (node, "shadow_opacity", shadow_opacity);
+	}
+}
+
+

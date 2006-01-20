@@ -83,7 +83,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 	/* Modify widgets based on configuration */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio), TRUE);
 	gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
-    gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
+	gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
 	gdk_color = gl_color_to_gdk_color (gl_prefs->default_fill_color);
 	color_combo_set_color (COLOR_COMBO(editor->priv->fill_color_combo), gdk_color);
 	g_free (gdk_color);

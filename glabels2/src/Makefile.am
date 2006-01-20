@@ -105,6 +105,7 @@ glabels_SOURCES = 			\
 	object-editor-edit-page.c	\
 	object-editor-bc-page.c		\
 	object-editor-data-page.c	\
+	object-editor-shadow-page.c	\
 	print.c				\
 	print.h				\
 	print-dialog.c			\

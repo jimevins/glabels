@@ -32,6 +32,15 @@
 
 #include "debug.h"
 
+
+/*========================================================*/
+/* Private defines.                                       */
+/*========================================================*/
+
+#define DEFAULT_SHADOW_X_OFFSET (5.0)
+#define DEFAULT_SHADOW_Y_OFFSET (5.0)
+#define DEFAULT_SHADOW_OPACITY  (0.5)
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
@@ -43,6 +52,12 @@ struct _glLabelObjectPrivate {
 	gdouble            affine[6];
 
 	gdouble            aspect_ratio;
+
+	gboolean           shadow_state;
+	gdouble            shadow_x;
+	gdouble            shadow_y;
+	glColorNode       *shadow_color_node;
+	gdouble            shadow_opacity;
 };
 
 enum {
@@ -190,6 +205,12 @@ gl_label_object_instance_init (glLabelObject *object)
 
 	art_affine_identity (object->private->affine);
 
+	object->private->shadow_state = FALSE;
+	object->private->shadow_x = DEFAULT_SHADOW_X_OFFSET;
+	object->private->shadow_y = DEFAULT_SHADOW_Y_OFFSET;
+	object->private->shadow_color_node = gl_color_node_new_default ();
+	object->private->shadow_opacity = DEFAULT_SHADOW_OPACITY;
+
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -242,6 +263,10 @@ gl_label_object_dup (glLabelObject *src_object,
 	glLabelObject    *dst_object;
 	gdouble           x, y, w, h;
 	gdouble           affine[6];
+	gboolean          shadow_state;
+	gdouble           shadow_x, shadow_y;
+	glColorNode      *shadow_color_node;
+	gdouble           shadow_opacity;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -251,13 +276,23 @@ gl_label_object_dup (glLabelObject *src_object,
 
 	gl_label_object_set_parent (dst_object, label);
 
-	gl_label_object_get_position (src_object, &x, &y);
-	gl_label_object_get_size     (src_object, &w, &h);
-	gl_label_object_get_affine   (src_object, affine);
+	gl_label_object_get_position      (src_object, &x, &y);
+	gl_label_object_get_size          (src_object, &w, &h);
+	gl_label_object_get_affine        (src_object, affine);
+	gl_label_object_get_shadow_offset (src_object, &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color   (src_object);
+	shadow_opacity    = gl_label_object_get_shadow_opacity (src_object);
+	shadow_state      = gl_label_object_get_shadow_state   (src_object);
 
 	gl_label_object_set_position (dst_object, x, y);
 	gl_label_object_set_size     (dst_object, w, h);
 	gl_label_object_set_affine   (dst_object, affine);
+	gl_label_object_set_shadow_offset  (dst_object, shadow_x, shadow_y);
+	gl_label_object_set_shadow_color   (dst_object, shadow_color_node);
+	gl_label_object_set_shadow_opacity (dst_object, shadow_opacity);
+	gl_label_object_set_shadow_state   (dst_object, shadow_state);
+
+	gl_color_node_free (&shadow_color_node);
 
 	if ( GL_LABEL_OBJECT_GET_CLASS(src_object)->copy != NULL ) {
 
@@ -1141,6 +1176,147 @@ gl_label_object_get_line_width (glLabelObject     *object)
 	gl_debug (DEBUG_LABEL, "END");
 
 	return ret;
+}
+
+/****************************************************************************/
+/* Set shadow state of object.                                              */
+/****************************************************************************/
+void
+gl_label_object_set_shadow_state (glLabelObject     *object,
+				  gboolean           state)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if (object->private->shadow_state != state)
+	{
+		object->private->shadow_state = state;
+		gl_label_object_emit_changed (object);
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get shadow state of object.                                              */
+/****************************************************************************/
+gboolean
+gl_label_object_get_shadow_state (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	return object->private->shadow_state;
+}
+
+/****************************************************************************/
+/* Set offset of object's shadow.                                           */
+/****************************************************************************/
+void
+gl_label_object_set_shadow_offset (glLabelObject     *object,
+				   gdouble            x,
+				   gdouble            y)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( (x != object->private->shadow_x) || (y != object->private->shadow_y) )
+	{
+		object->private->shadow_x = x;
+		object->private->shadow_y = y;
+
+		gl_label_object_emit_changed (object);
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get offset of object's shadow.                                           */
+/****************************************************************************/
+void
+gl_label_object_get_shadow_offset (glLabelObject     *object,
+				   gdouble           *x,
+				   gdouble           *y)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	*x = object->private->shadow_x;
+	*y = object->private->shadow_y;
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Set color of object's shadow.                                            */
+/****************************************************************************/
+void
+gl_label_object_set_shadow_color (glLabelObject     *object,
+				  glColorNode       *color_node)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( !gl_color_node_equal (object->private->shadow_color_node, color_node ))
+	{
+		gl_color_node_free (&(object->private->shadow_color_node));
+		object->private->shadow_color_node = gl_color_node_dup (color_node);
+		gl_label_object_emit_changed (GL_LABEL_OBJECT(object));
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get color of object's shadow.                                            */
+/****************************************************************************/
+glColorNode*
+gl_label_object_get_shadow_color (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
+
+	return gl_color_node_dup (object->private->shadow_color_node);
+}
+
+/****************************************************************************/
+/* Set opacity of object's shadow.                                          */
+/****************************************************************************/
+void
+gl_label_object_set_shadow_opacity (glLabelObject     *object,
+				    gdouble            alpha)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if (object->private->shadow_opacity != alpha)
+	{
+		object->private->shadow_opacity = alpha;
+		gl_label_object_emit_changed (object);
+	}
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/****************************************************************************/
+/* Get opacity of object's shadow.                                          */
+/****************************************************************************/
+gdouble
+gl_label_object_get_shadow_opacity (glLabelObject     *object)
+{
+	gl_debug (DEBUG_LABEL, "");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+	return object->private->shadow_opacity;
 }
 
 /****************************************************************************/

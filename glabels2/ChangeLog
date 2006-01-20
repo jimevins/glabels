@@ -1,3 +1,23 @@
+2006-01-19  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_key_list):
+		Initialize key_list to NULL.
+	* data/glade/object-editor.glade:
+	* src/Makefile.am:
+	* src/color.c:
+	* src/color.h:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor.c:
+	* src/object-editor.h:
+	* src/xml-label.c:
+		Created infrastructure for shadow support.
+	* src/view-box.c:
+	* src/print.c:
+		Initial shadow support in box object only.
+	
 2006-01-05  Jim Evins  <evins@snaught.com>
 
 	* src/merge-properties-dialog.c: (src_changed_cb):

@@ -47,6 +47,7 @@ typedef enum {
 	GL_OBJECT_EDITOR_EDIT_PAGE,
 	GL_OBJECT_EDITOR_BC_PAGE,
 	GL_OBJECT_EDITOR_DATA_PAGE,
+	GL_OBJECT_EDITOR_SHADOW_PAGE,
 } glObjectEditorOption;
 
 #define GL_TYPE_OBJECT_EDITOR            (gl_object_editor_get_type ())
@@ -258,6 +259,39 @@ void        gl_object_editor_set_data             (glObjectEditor      *editor,
 						   glTextNode          *text_node);
 
 glTextNode *gl_object_editor_get_data             (glObjectEditor      *editor);
+
+
+/*
+ * Shadow Page
+ */
+void        gl_object_editor_set_shadow_state     (glObjectEditor      *editor,
+						   gboolean             state);
+
+void        gl_object_editor_set_shadow_offset    (glObjectEditor      *editor,
+						   gdouble              x,
+						   gdouble              y);
+
+void        gl_object_editor_set_shadow_color     (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
+
+void        gl_object_editor_set_shadow_opacity   (glObjectEditor      *editor,
+						   gdouble              alpha);
+
+void        gl_object_editor_set_max_shadow_offset(glObjectEditor      *editor,
+						   gdouble              x_max,
+						   gdouble              y_max);
+
+
+gboolean    gl_object_editor_get_shadow_state     (glObjectEditor      *editor);
+
+void        gl_object_editor_get_shadow_offset    (glObjectEditor      *editor,
+						   gdouble             *x,
+						   gdouble             *y);
+
+glColorNode* gl_object_editor_get_shadow_color    (glObjectEditor      *editor);
+
+gdouble     gl_object_editor_get_shadow_opacity   (glObjectEditor      *editor);
 
 
 

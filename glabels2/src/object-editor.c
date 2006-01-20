@@ -325,6 +325,11 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 			pages++;
 			break;
 
+		case GL_OBJECT_EDITOR_SHADOW_PAGE:
+			gl_object_editor_prepare_shadow_page (editor);
+			pages++;
+			break;
+
 		default:
 			g_message ("option = %d", option);
 			g_assert_not_reached ();
@@ -380,6 +385,7 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
         GList     *keys;
 	GtkWidget *combo;
 	gboolean   fixed_flag;
+	gboolean   state;
  
         gl_debug (DEBUG_EDITOR, "START");
 
@@ -396,18 +402,21 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 					  merge != NULL);
 	}
  
-	if (editor->priv->text_color_key_combo) {
-		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, merge != NULL);
-	}
- 
-	if (editor->priv->text_color_key_radio) {
+	if (editor->priv->text_page_vbox) {
 		gtk_widget_set_sensitive (editor->priv->text_color_key_radio, merge != NULL);
 		if (merge == NULL) {
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON(editor->priv->text_color_radio), TRUE);
+			gtk_widget_set_sensitive (editor->priv->text_color_combo, TRUE);
+			gtk_widget_set_sensitive (editor->priv->text_color_key_combo, FALSE);
+		} else {
+			state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(editor->priv->text_color_key_radio));
+			gtk_widget_set_sensitive (editor->priv->text_color_combo, !state);
+			gtk_widget_set_sensitive (editor->priv->text_color_key_combo, state);
+						  
 		}
-	}	
-	
+	}
+
 	if (editor->priv->edit_insert_field_button) {
 		gtk_widget_set_sensitive (editor->priv->edit_insert_field_button,
 					  merge != NULL);
@@ -455,122 +464,112 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 					  (merge != NULL) && !fixed_flag);
 	}
 
-	if (editor->priv->fill_key_combo) {
-		gtk_widget_set_sensitive (editor->priv->fill_key_combo, merge != NULL);
-	}
- 
-	if (editor->priv->fill_key_radio) {
+	if (editor->priv->fill_page_vbox) {
 		gtk_widget_set_sensitive (editor->priv->fill_key_radio, merge != NULL);
 		if (merge == NULL) {
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON(editor->priv->fill_color_radio), TRUE);
+			gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
+			gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
+		} else {
+			state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(editor->priv->fill_key_radio));
+			gtk_widget_set_sensitive (editor->priv->fill_color_combo, !state);
+			gtk_widget_set_sensitive (editor->priv->fill_key_combo, state);
+						  
 		}
 	}
-	
-	if (editor->priv->line_key_combo) {
-		gtk_widget_set_sensitive (editor->priv->line_key_combo, merge != NULL);
-	}
- 
-	if (editor->priv->line_key_radio) {
+
+	if (editor->priv->line_page_vbox) {
 		gtk_widget_set_sensitive (editor->priv->line_key_radio, merge != NULL);
 		if (merge == NULL) {
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON(editor->priv->line_color_radio), TRUE);
+			gtk_widget_set_sensitive (editor->priv->line_color_combo, TRUE);
+			gtk_widget_set_sensitive (editor->priv->line_key_combo, FALSE);
+		} else {
+			state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(editor->priv->line_key_radio));
+			gtk_widget_set_sensitive (editor->priv->line_color_combo, !state);
+			gtk_widget_set_sensitive (editor->priv->line_key_combo, state);
+						  
 		}
 	}
-	
-	if (editor->priv->bc_key_combo) {
-		gtk_widget_set_sensitive (editor->priv->bc_key_combo, merge != NULL);
-	}
- 
-	if (editor->priv->bc_key_radio) {
+
+	if (editor->priv->bc_page_vbox) {
 		gtk_widget_set_sensitive (editor->priv->bc_key_radio, merge != NULL);
 		if (merge == NULL) {
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON(editor->priv->bc_color_radio), TRUE);
+			gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);
+			gtk_widget_set_sensitive (editor->priv->bc_key_combo, FALSE);
+		} else {
+			state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(editor->priv->bc_key_radio));
+			gtk_widget_set_sensitive (editor->priv->bc_color_combo, !state);
+			gtk_widget_set_sensitive (editor->priv->bc_key_combo, state);
+						  
 		}
-	}	
-	
+	}
+
+	if (editor->priv->shadow_page_vbox) {
+		gtk_widget_set_sensitive (editor->priv->shadow_key_radio, merge != NULL);
+		if (merge == NULL) {
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON(editor->priv->shadow_color_radio), TRUE);
+			gtk_widget_set_sensitive (editor->priv->shadow_color_combo, TRUE);
+			gtk_widget_set_sensitive (editor->priv->shadow_key_combo, FALSE);
+		} else {
+			state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(editor->priv->shadow_key_radio));
+			gtk_widget_set_sensitive (editor->priv->shadow_color_combo, !state);
+			gtk_widget_set_sensitive (editor->priv->shadow_key_combo, state);
+						  
+		}
+	}
+
         keys = gl_merge_get_key_list (merge);
-        if ( keys != NULL ) {
-
-		combo = editor->priv->img_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-
-		combo = editor->priv->edit_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-
-		combo = editor->priv->data_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-		combo = editor->priv->fill_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-
-		combo = editor->priv->text_color_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-
-		combo = editor->priv->line_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-		combo = editor->priv->bc_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-                gl_merge_free_key_list (&keys);
-        } else {
-
+        if ( keys == NULL ) {
                 keys = g_list_append (keys, "");
+	}
 
-		combo = editor->priv->img_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
+	combo = editor->priv->img_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
 
-		combo = editor->priv->edit_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-		combo = editor->priv->data_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-		combo = editor->priv->fill_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
-		
-		combo = editor->priv->text_color_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
+	combo = editor->priv->edit_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
 
-		combo = editor->priv->line_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
+	combo = editor->priv->data_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
 		
-		combo = editor->priv->bc_key_combo;
-		if (combo) {
-			gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
-		}
+	combo = editor->priv->fill_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
+
+	combo = editor->priv->text_color_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
+
+	combo = editor->priv->line_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
 		
-                g_list_free (keys);
-        }
+	combo = editor->priv->bc_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
+		
+	combo = editor->priv->shadow_key_combo;
+	if (combo) {
+		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	}
+
+	gl_merge_free_key_list (&keys);
  
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -662,6 +661,10 @@ prefs_changed_cb (glObjectEditor *editor)
 		
 	if (editor->priv->pos_x_spin) {
 		position_prefs_changed_cb (editor);
+	}
+
+	if (editor->priv->shadow_x_spin) {
+		shadow_prefs_changed_cb (editor);
 	}
 
 	gl_debug (DEBUG_EDITOR, "END");

@@ -293,6 +293,30 @@ void           gl_label_object_get_i2w_affine        (glLabelObject     *object,
 void           gl_label_object_get_w2i_affine        (glLabelObject     *object,
 						      gdouble           affine[6]);
 
+void           gl_label_object_set_shadow_state      (glLabelObject     *object,
+						      gboolean           state);
+
+void           gl_label_object_set_shadow_offset     (glLabelObject     *object,
+						      gdouble            x,
+						      gdouble            y);
+
+void           gl_label_object_set_shadow_color      (glLabelObject     *object,
+						      glColorNode       *color_node);
+
+void           gl_label_object_set_shadow_opacity    (glLabelObject     *object,
+						      gdouble            alpha);
+
+gboolean       gl_label_object_get_shadow_state      (glLabelObject     *object);
+
+void           gl_label_object_get_shadow_offset     (glLabelObject     *object,
+						      gdouble           *x,
+						      gdouble           *y);
+
+glColorNode*   gl_label_object_get_shadow_color      (glLabelObject     *object);
+
+gdouble        gl_label_object_get_shadow_opacity    (glLabelObject     *object);
+
+
 G_END_DECLS
 
 #endif /* __LABEL_OBJECT_H__ */

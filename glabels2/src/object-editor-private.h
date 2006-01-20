@@ -131,6 +131,24 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *data_digits_label;
 	GtkWidget  *data_digits_spin;
 	gboolean    data_format_fixed_flag;
+
+	GtkWidget  *shadow_page_vbox;
+	GtkWidget  *shadow_enable_check;
+	GtkWidget  *shadow_controls_table;
+	GtkWidget  *shadow_x_spin;
+	GtkWidget  *shadow_y_spin;
+	GtkWidget  *shadow_x_units_label;
+	GtkWidget  *shadow_y_units_label;
+	GtkWidget  *shadow_color_radio;
+	GtkWidget  *shadow_key_radio;
+	GtkWidget  *shadow_color_combo;
+	GtkWidget  *shadow_key_combo;
+	GtkWidget  *shadow_opacity_spin;
+	gdouble     shadow_x;
+	gdouble     shadow_y;
+	gdouble     shadow_x_max;
+	gdouble     shadow_y_max;
+
 };
 
 enum {

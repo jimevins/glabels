@@ -253,7 +253,8 @@ static GList *
 gl_merge_evolution_get_key_list (glMerge *merge)
 {
         glMergeEvolution   *merge_evolution;
-        GList              *key_list, *iter;
+        GList              *key_list = NULL;
+        GList              *iter;
         
         gl_debug (DEBUG_MERGE, "BEGIN");
 

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -111,15 +113,15 @@ static void       draw_text_object            (PrintInfo        *pi,
 
 static void       draw_box_object             (PrintInfo        *pi,
 					       glLabelBox       *object,
-						   glMergeRecord  *record);
+					       glMergeRecord    *record);
 
 static void       draw_line_object            (PrintInfo        *pi,
 					       glLabelLine      *object,
-						   glMergeRecord  *record);						   
+					       glMergeRecord    *record);						   
 
 static void       draw_ellipse_object         (PrintInfo        *pi,
 					       glLabelEllipse   *object,
-						   glMergeRecord  *record);
+					       glMergeRecord    *record);
 
 static void       draw_image_object           (PrintInfo        *pi,
 					       glLabelImage     *object,
@@ -891,6 +893,12 @@ draw_box_object (PrintInfo  *pi,
 	glColorNode *line_color_node;
 	glColorNode *fill_color_node;
 	guint        fill_color;
+	gboolean     shadow_state;
+	gdouble      shadow_x, shadow_y;
+	glColorNode *shadow_color_node;
+	gdouble      shadow_opacity;
+	guint        shadow_line_color;
+	guint        shadow_fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -903,7 +911,41 @@ draw_box_object (PrintInfo  *pi,
 	fill_color = gl_color_node_expand (fill_color_node, record);
 	gl_color_node_free (&line_color_node);
 	gl_color_node_free (&fill_color_node);
+
+	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
+	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
+	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color);
+	shadow_fill_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, fill_color);
+	gl_color_node_free (&shadow_color_node);
 	
+	if (shadow_state)
+	{
+		/* Draw fill shadow */
+		create_rectangle_path (pi->pc, shadow_x, shadow_y, w, h);
+		gnome_print_setrgbcolor (pi->pc,
+					 GL_COLOR_F_RED (shadow_fill_color),
+					 GL_COLOR_F_GREEN (shadow_fill_color),
+					 GL_COLOR_F_BLUE (shadow_fill_color));
+		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_fill_color));
+		gnome_print_fill (pi->pc);
+
+		/* Draw outline shadow */
+		create_rectangle_path (pi->pc, shadow_x, shadow_y, w, h);
+		gnome_print_setrgbcolor (pi->pc,
+					 GL_COLOR_F_RED (shadow_line_color),
+					 GL_COLOR_F_GREEN (shadow_line_color),
+					 GL_COLOR_F_BLUE (shadow_line_color));
+		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
+		gnome_print_setlinewidth (pi->pc, line_width);
+		gnome_print_stroke (pi->pc);
+	}
+
 	/* Paint fill color */
 	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
 	gnome_print_setrgbcolor (pi->pc,
