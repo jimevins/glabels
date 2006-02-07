@@ -208,8 +208,12 @@ gl_view_box_new (glLabelBox *object,
 		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
 	}
 	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
-	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color_node->color);
-	shadow_fill_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, fill_color_node->color);
+	shadow_line_color = gl_color_shadow (shadow_color_node->color,
+					     shadow_opacity,
+					     line_color_node->color);
+	shadow_fill_color = gl_color_shadow (shadow_color_node->color,
+					     shadow_opacity,
+					     fill_color_node->color);
 
 	/* Create analogous canvas items. */
 	view_box->private->shadow_item =
@@ -339,19 +343,23 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
 	}
 	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
-	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color_node->color);
-	shadow_fill_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, fill_color_node->color);
+	shadow_line_color = gl_color_shadow (shadow_color_node->color,
+					     shadow_opacity,
+					     line_color_node->color);
+	shadow_fill_color = gl_color_shadow (shadow_color_node->color,
+					     shadow_opacity,
+					     fill_color_node->color);
 
 	/* Adjust appearance of analogous canvas items. */
 	gnome_canvas_item_set (view_box->private->shadow_item,
-					 "x1", shadow_x,
-					 "y1", shadow_y,
-					 "x2", shadow_x + w + DELTA,
-					 "y2", shadow_y + h + DELTA,
-					 "width_units", line_width,
-					 "outline_color_rgba", shadow_line_color,
-					 "fill_color_rgba", shadow_fill_color,
-					 NULL);
+			       "x1", shadow_x,
+			       "y1", shadow_y,
+			       "x2", shadow_x + w + DELTA,
+			       "y2", shadow_y + h + DELTA,
+			       "width_units", line_width,
+			       "outline_color_rgba", shadow_line_color,
+			       "fill_color_rgba", shadow_fill_color,
+			       NULL);
 
 	if (shadow_state)
 	{
@@ -529,6 +537,8 @@ update_editor_from_label_cb (glLabel        *label,
 					   label_width, label_height);
 	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
 				       label_width, label_height);
+	gl_object_editor_set_max_shadow_offset (GL_OBJECT_EDITOR (editor),
+						label_width, label_height);
 	
 	merge = gl_label_get_merge (label);
 	gl_object_editor_set_key_names (editor, merge);

@@ -1,3 +1,11 @@
+2006-02-06  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-shadow-page.c:
+		Forgot to add this file.
+	* src/view-box.c: (gl_view_box_new),
+	(update_canvas_item_from_object_cb), (update_editor_from_label_cb):
+		Update limits on shadow offset spinbuttons.
+
 2006-01-19  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c: (gl_merge_evolution_get_key_list):
