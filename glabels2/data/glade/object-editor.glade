@@ -1067,7 +1067,7 @@
 				    <widget class="Custom" id="line_color_combo">
 				      <property name="visible">True</property>
 				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">2</property>
+				      <property name="int1">1</property>
 				      <property name="int2">0</property>
 				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
 				    </widget>
@@ -1282,7 +1282,7 @@
 				    <widget class="Custom" id="fill_color_combo">
 				      <property name="visible">True</property>
 				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">2</property>
+				      <property name="int1">0</property>
 				      <property name="int2">0</property>
 				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
 				    </widget>
@@ -1976,7 +1976,7 @@
 				    <widget class="Custom" id="bc_color_combo">
 				      <property name="visible">True</property>
 				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">2</property>
+				      <property name="int1">1</property>
 				      <property name="int2">0</property>
 				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
 				    </widget>
@@ -3205,7 +3205,7 @@
 				    <widget class="Custom" id="shadow_color_combo">
 				      <property name="visible">True</property>
 				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">2</property>
+				      <property name="int1">3</property>
 				      <property name="int2">0</property>
 				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
 				    </widget>

@@ -593,6 +593,12 @@ gl_object_editor_construct_color_combo (gchar *name,
 
 	switch (int1) {
 
+	case 3:
+		cg_name  = "shadow_color_group";
+		color    = GL_COLOR_SHADOW_DEFAULT;
+		no_color = _("Default");
+		break;
+
 	case 2:
 		cg_name  = "text_color_group";
 		color    = gl_prefs->default_text_color;

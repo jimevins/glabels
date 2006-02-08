@@ -40,6 +40,7 @@ typedef struct {
 #define GL_COLOR_NONE                  GL_COLOR_A(0,0,0,0)
 #define GL_COLOR_FILL_MERGE_DEFAULT    GL_COLOR_A(255,255,255,128)
 #define GL_COLOR_MERGE_DEFAULT         GL_COLOR_A(0,0,0,128)
+#define GL_COLOR_SHADOW_DEFAULT        GL_COLOR(0,0,0)
 #define GL_COLOR_SHADOW_MERGE_DEFAULT  GL_COLOR_A(0,0,0,255)
 
 #define GL_COLOR_I_RED(x)   (((x)>>24) & 0xff)

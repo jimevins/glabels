@@ -1,3 +1,12 @@
+2006-02-07  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Fixed color groups of color combos.
+	* src/color.h:
+		Added default shadow color.
+	* src/object-editor.c: (gl_object_editor_construct_color_combo):
+		Added shadow color group.
+
 2006-02-06  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-shadow-page.c:
