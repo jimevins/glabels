@@ -37,8 +37,8 @@
 /* Private defines.                                       */
 /*========================================================*/
 
-#define DEFAULT_SHADOW_X_OFFSET (5.0)
-#define DEFAULT_SHADOW_Y_OFFSET (5.0)
+#define DEFAULT_SHADOW_X_OFFSET (3.6)
+#define DEFAULT_SHADOW_Y_OFFSET (3.6)
 #define DEFAULT_SHADOW_OPACITY  (0.5)
 
 /*========================================================*/

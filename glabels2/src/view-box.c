@@ -3,7 +3,7 @@
  *
  *  view_box.c:  GLabels label box object widget
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -165,18 +165,9 @@ gl_view_box_new (glLabelBox *object,
 		 glView     *view)
 {
 	glViewBox         *view_box;
-	gdouble            line_width;
-	glColorNode       *line_color_node;
-	gdouble            w, h;
-	glColorNode	  *fill_color_node;
-	gboolean           shadow_state;
-	gdouble            shadow_x, shadow_y;
-	glColorNode	  *shadow_color_node;
-	gdouble            shadow_opacity;
-	guint              shadow_line_color;
-	guint              shadow_fill_color;
 
 	gl_debug (DEBUG_VIEW, "START");
+
 	g_return_if_fail (object && GL_IS_LABEL_BOX (object));
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	
@@ -187,67 +178,16 @@ gl_view_box_new (glLabelBox *object,
 				   GL_LABEL_OBJECT(object),
 				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
 
-	/* Query properties of object. */
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	line_width = gl_label_object_get_line_width(GL_LABEL_OBJECT(object));
-	line_color_node = gl_label_object_get_line_color(GL_LABEL_OBJECT(object));
-	if (line_color_node->field_flag)
-	{
-		line_color_node->color = GL_COLOR_MERGE_DEFAULT;
-	}
-	fill_color_node = gl_label_object_get_fill_color(GL_LABEL_OBJECT(object));
-	if (fill_color_node->field_flag)
-	{
-		fill_color_node->color = GL_COLOR_FILL_MERGE_DEFAULT;
-	}
-	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
-	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
-	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
-	if (shadow_color_node->field_flag)
-	{
-		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
-	}
-	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
-	shadow_line_color = gl_color_shadow (shadow_color_node->color,
-					     shadow_opacity,
-					     line_color_node->color);
-	shadow_fill_color = gl_color_shadow (shadow_color_node->color,
-					     shadow_opacity,
-					     fill_color_node->color);
-
 	/* Create analogous canvas items. */
 	view_box->private->shadow_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_box),
 					 gnome_canvas_rect_get_type (),
-					 "x1", shadow_x,
-					 "y1", shadow_y,
-					 "x2", shadow_x + w + DELTA,
-					 "y2", shadow_y + h + DELTA,
-					 "width_units", line_width,
-					 "outline_color_rgba", shadow_line_color,
-					 "fill_color_rgba", shadow_fill_color,
 					 NULL);
-
-	if (!shadow_state)
-	{
-		gnome_canvas_item_hide (view_box->private->shadow_item);
-	}
-
 	view_box->private->object_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_box),
 					 gnome_canvas_rect_get_type (),
-					 "x1", 0.0,
-					 "y1", 0.0,
-					 "x2", w + DELTA,
-					 "y2", h + DELTA,
-					 "width_units", line_width,
-					 "outline_color_rgba", line_color_node->color,
-					 "fill_color_rgba", fill_color_node->color,
 					 NULL);
-
-	gl_color_node_free (&line_color_node);
-	gl_color_node_free (&fill_color_node);
-	gl_color_node_free (&shadow_color_node);
+	update_canvas_item_from_object_cb (GL_LABEL_OBJECT(object), view_box);
 	
 	g_signal_connect (G_OBJECT (object), "changed",
 			  G_CALLBACK (update_canvas_item_from_object_cb), view_box);

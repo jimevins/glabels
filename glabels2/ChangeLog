@@ -1,3 +1,11 @@
+2006-02-15  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.c:
+		Changed default shadow offsets.
+	* src/view-box.c: (gl_view_box_new):
+		Simplified gl_view_box_new() so that is does not duplicate code
+		in update_canvas_item_from_object_cb().
+
 2006-02-07  Jim Evins  <evins@snaught.com>
 
 	* data/glade/object-editor.glade:
