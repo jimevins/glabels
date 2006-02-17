@@ -5,7 +5,7 @@
  *
  *  print.c:  Print module
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1017,6 +1017,12 @@ draw_ellipse_object (PrintInfo      *pi,
 	glColorNode *fill_color_node;
 	guint        line_color;
 	guint        fill_color;
+	gboolean     shadow_state;
+	gdouble      shadow_x, shadow_y;
+	glColorNode *shadow_color_node;
+	gdouble      shadow_opacity;
+	guint        shadow_line_color;
+	guint        shadow_fill_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -1034,6 +1040,40 @@ draw_ellipse_object (PrintInfo      *pi,
 	ry = h / 2.0;
 	x0 = rx;
 	y0 = ry;
+
+	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
+	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
+	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color);
+	shadow_fill_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, fill_color);
+	gl_color_node_free (&shadow_color_node);
+	
+	if (shadow_state)
+	{
+		/* Draw fill shadow */
+		create_ellipse_path (pi->pc, x0+shadow_x, y0+shadow_y, rx, ry);
+		gnome_print_setrgbcolor (pi->pc,
+					 GL_COLOR_F_RED (shadow_fill_color),
+					 GL_COLOR_F_GREEN (shadow_fill_color),
+					 GL_COLOR_F_BLUE (shadow_fill_color));
+		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_fill_color));
+		gnome_print_fill (pi->pc);
+
+		/* Draw outline shadow */
+		create_ellipse_path (pi->pc, x0+shadow_x, y0+shadow_y, rx, ry);
+		gnome_print_setrgbcolor (pi->pc,
+					 GL_COLOR_F_RED (shadow_line_color),
+					 GL_COLOR_F_GREEN (shadow_line_color),
+					 GL_COLOR_F_BLUE (shadow_line_color));
+		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
+		gnome_print_setlinewidth (pi->pc, line_width);
+		gnome_print_stroke (pi->pc);
+	}
 
 	/* Paint fill color */
 	create_ellipse_path (pi->pc, x0, y0, rx, ry);

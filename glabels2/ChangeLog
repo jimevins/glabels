@@ -1,3 +1,14 @@
+2006-02-16  Jim Evins  <evins@snaught.com>
+
+	* src/view-box.c:
+		Comment changes.
+	* src/print.c: (draw_ellipse_object):
+	* src/view-ellipse.c: (gl_view_ellipse_new),
+	(construct_properties_editor), (update_canvas_item_from_object_cb),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb):
+		Added shadow support to ellipse object.
+
 2006-02-15  Jim Evins  <evins@snaught.com>
 
 	* src/label-object.c:
