@@ -1,3 +1,12 @@
+2006-02-18  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_line_object):
+	* src/view-line.c: (gl_view_line_new),
+	(construct_properties_editor), (update_canvas_item_from_object_cb),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb):
+		Added shadow support to line object.
+
 2006-02-16  Jim Evins  <evins@snaught.com>
 
 	* src/view-box.c:

@@ -980,6 +980,11 @@ draw_line_object (PrintInfo   *pi,
 	gdouble      line_width;
 	guint        line_color;
 	glColorNode *line_color_node;
+	gboolean     shadow_state;
+	gdouble      shadow_x, shadow_y;
+	glColorNode *shadow_color_node;
+	gdouble      shadow_opacity;
+	guint        shadow_line_color;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -989,6 +994,30 @@ draw_line_object (PrintInfo   *pi,
 	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 	line_color = gl_color_node_expand (line_color_node, record);
 	gl_color_node_free (&line_color_node);
+
+	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
+	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
+	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color);
+	gl_color_node_free (&shadow_color_node);
+
+	if (shadow_state)
+	{
+		gnome_print_moveto (pi->pc, shadow_x, shadow_y);
+		gnome_print_lineto (pi->pc, shadow_x + w, shadow_y + h);
+		gnome_print_setrgbcolor (pi->pc,
+					 GL_COLOR_F_RED (shadow_line_color),
+					 GL_COLOR_F_GREEN (shadow_line_color),
+					 GL_COLOR_F_BLUE (shadow_line_color));
+		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
+		gnome_print_setlinewidth (pi->pc, line_width);
+		gnome_print_stroke (pi->pc);
+	}
 
 	gnome_print_moveto (pi->pc, 0.0, 0.0);
 	gnome_print_lineto (pi->pc, w, h);
