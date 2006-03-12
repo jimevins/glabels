@@ -747,6 +747,11 @@ draw_text_object (PrintInfo     *pi,
 	ArtDRect         bbox;
 	gdouble          affine[6];
 	gdouble          text_line_spacing;
+	gboolean         shadow_state;
+	gdouble          shadow_x, shadow_y;
+	glColorNode     *shadow_color_node;
+	gdouble          shadow_opacity;
+	guint            shadow_color;
 
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -766,6 +771,17 @@ draw_text_object (PrintInfo     *pi,
 	text_line_spacing =
 		gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
 	auto_shrink = gl_label_text_get_auto_shrink (object);
+
+	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
+	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
+	shadow_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, color);
+	gl_color_node_free (&shadow_color_node);
 
 	text = gl_text_node_lines_expand (lines, record);
 	line = g_strsplit (text, "\n", -1);
@@ -822,6 +838,56 @@ draw_text_object (PrintInfo     *pi,
 				       font_italic_flag,
 				       font_size);
 	gnome_print_setfont (pi->pc, font);
+
+	gnome_print_setrgbcolor (pi->pc,
+				 GL_COLOR_F_RED (shadow_color),
+				 GL_COLOR_F_GREEN (shadow_color),
+				 GL_COLOR_F_BLUE (shadow_color));
+	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_color));
+
+	for (i = 0; line[i] != NULL; i++) {
+
+		glyphlist = gnome_glyphlist_from_text_dumb (font, color,
+							    0.0, 0.0,
+							    (guchar *)line[i]);
+
+		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+		w = bbox.x1;
+		gnome_glyphlist_unref (glyphlist);
+
+		switch (just) {
+		case GTK_JUSTIFY_LEFT:
+			x_offset = GL_LABEL_TEXT_MARGIN;
+			break;
+		case GTK_JUSTIFY_CENTER:
+			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
+			break;
+		case GTK_JUSTIFY_RIGHT:
+			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
+			break;
+		default:
+			x_offset = 0.0;
+			break;	/* shouldn't happen */
+		}
+                x_offset += shadow_x;
+
+		/* Work out the y position to the BOTTOM of the first line */
+		y_offset = GL_LABEL_TEXT_MARGIN +
+			   + gnome_font_get_descender (font)
+	       		   + (i + 1) * font_size * text_line_spacing
+                           + shadow_y;
+
+		/* Remove any text line spacing from the first row. */
+		y_offset -= font_size * (text_line_spacing - 1);
+
+
+		gnome_print_moveto (pi->pc, x_offset, y_offset);
+
+		gnome_print_gsave (pi->pc);
+		gnome_print_scale (pi->pc, 1.0, -1.0);
+		gnome_print_show (pi->pc, (guchar *)line[i]);
+		gnome_print_grestore (pi->pc);
+	}
 
 	gnome_print_setrgbcolor (pi->pc,
 				 GL_COLOR_F_RED (color),

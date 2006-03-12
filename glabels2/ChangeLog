@@ -1,3 +1,12 @@
+2006-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_text_object):
+	* src/view-text.c: (gl_view_text_new),
+	(construct_properties_editor), (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (update_editor_from_label_cb),
+	(draw_hacktext):
+		Added shadow support to text object.
+	
 2006-02-18  Jim Evins  <evins@snaught.com>
 
 	* src/print.c: (draw_line_object):

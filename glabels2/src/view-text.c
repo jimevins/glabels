@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  view_text.c:  GLabels label text object widget
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,7 +57,8 @@
 
 struct _glViewTextPrivate {
 
-	GList           *item_list;
+	GList           *object_item_list;
+	GList           *shadow_item_list;
 
 #ifdef EDIT_TEXT_IN_PLACE
 	GnomeCanvasItem *cursor;
@@ -199,9 +202,10 @@ gl_view_text_new (glLabelText *object,
 		  glView      *view)
 {
 	glViewText         *view_text;
-	GtkMenu            *menu;
-	GtkTextBuffer      *buffer;
 	GnomeCanvasItem    *group;
+#ifdef EDIT_TEXT_IN_PLACE
+	GtkTextBuffer      *buffer;
+#endif
 
 	gl_debug (DEBUG_VIEW, "START");
 	g_return_if_fail (object && GL_IS_LABEL_TEXT (object));
@@ -228,8 +232,8 @@ gl_view_text_new (glLabelText *object,
 	g_signal_connect (G_OBJECT (group), "event",
 			  G_CALLBACK (item_event_cb), view_text);
 
-	buffer = gl_label_text_get_buffer (object);
 #ifdef EDIT_TEXT_IN_PLACE
+	buffer = gl_label_text_get_buffer (object);
 	g_signal_connect (G_OBJECT (buffer), "mark-set",
 			  G_CALLBACK (mark_set_cb), view_text);
 #endif
@@ -260,6 +264,7 @@ construct_properties_editor (glViewObject *view_object)
 				       GL_OBJECT_EDITOR_SIZE_PAGE,
 				       GL_OBJECT_EDITOR_TEXT_PAGE,
 				       GL_OBJECT_EDITOR_EDIT_PAGE,
+				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       0);
 
 	buffer = gl_label_text_get_buffer (GL_LABEL_TEXT(object));
@@ -323,6 +328,11 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	GtkJustification   just;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
+	gboolean           shadow_state;
+	gdouble            shadow_x, shadow_y;
+	glColorNode	  *shadow_color_node;
+	gdouble            shadow_opacity;
+	glMerge	          *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -355,6 +365,19 @@ update_object_from_editor_cb (glObjectEditor *editor,
 
 	gl_color_node_free (&color_node);
 	g_free (font_family);
+
+	shadow_state = gl_object_editor_get_shadow_state (editor);
+	gl_label_object_set_shadow_state (object, shadow_state);
+
+	gl_object_editor_get_shadow_offset (editor, &shadow_x, &shadow_y);
+	gl_label_object_set_shadow_offset (object, shadow_x, shadow_y);
+
+	shadow_color_node = gl_object_editor_get_shadow_color (editor);
+	gl_label_object_set_shadow_color (object, shadow_color_node);
+	gl_color_node_free (&shadow_color_node);
+
+	shadow_opacity = gl_object_editor_get_shadow_opacity (editor);
+	gl_label_object_set_shadow_opacity (object, shadow_opacity);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(object),
 					   update_editor_from_object_cb,
@@ -414,7 +437,11 @@ update_editor_from_object_cb (glLabelObject  *object,
 	GtkJustification   just;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
-	glMerge			   *merge;
+	gboolean           shadow_state;
+	gdouble            shadow_x, shadow_y;
+	glColorNode	  *shadow_color_node;
+	gdouble            shadow_opacity;
+	glMerge		  *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -442,6 +469,19 @@ update_editor_from_object_cb (glLabelObject  *object,
 
 	gl_color_node_free (&color_node);
 	g_free (font_family);
+
+	shadow_state = gl_label_object_get_shadow_state (object);
+	gl_object_editor_set_shadow_state (editor, shadow_state);
+
+	gl_label_object_get_shadow_offset (object, &shadow_x, &shadow_y);
+	gl_object_editor_set_shadow_offset (editor, shadow_x, shadow_y);
+
+	shadow_color_node = gl_label_object_get_shadow_color (object);
+	gl_object_editor_set_shadow_color (editor, (merge != NULL), shadow_color_node);
+	gl_color_node_free (&shadow_color_node);
+
+	shadow_opacity = gl_label_object_get_shadow_opacity (object);
+	gl_object_editor_set_shadow_opacity (editor, shadow_opacity);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -482,6 +522,8 @@ update_editor_from_label_cb (glLabel        *label,
 					   label_width, label_height);
 	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
 				       label_width, label_height);
+	gl_object_editor_set_max_shadow_offset (GL_OBJECT_EDITOR (editor),
+						label_width, label_height);
 
 	merge = gl_label_get_merge (label);
 	gl_object_editor_set_key_names (editor, merge);
@@ -674,6 +716,11 @@ draw_hacktext (glViewText *view_text)
 	gint               i;
 	gchar            **line;
 	GList             *li;
+	gboolean           shadow_state;
+	gdouble            shadow_x, shadow_y;
+	glColorNode	  *shadow_color_node;
+	gdouble            shadow_opacity;
+	guint              shadow_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -695,15 +742,32 @@ draw_hacktext (glViewText *view_text)
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 	line = g_strsplit (text, "\n", -1);
+	shadow_state = gl_label_object_get_shadow_state (GL_LABEL_OBJECT (object));
+	gl_label_object_get_shadow_offset (GL_LABEL_OBJECT (object), &shadow_x, &shadow_y);
+	shadow_color_node = gl_label_object_get_shadow_color (GL_LABEL_OBJECT (object));
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (GL_LABEL_OBJECT (object));
+	shadow_color = gl_color_shadow (shadow_color_node->color,
+					shadow_opacity,
+					color_node->color);
 
 	/* remove previous items from group. */
-	for (li = view_text->private->item_list; li != NULL; li = li->next) {
+	for (li = view_text->private->object_item_list; li != NULL; li = li->next) {
+		gl_debug (DEBUG_VIEW, "in loop");
+		gtk_object_destroy (GTK_OBJECT (li->data));
+	}
+	for (li = view_text->private->shadow_item_list; li != NULL; li = li->next) {
 		gl_debug (DEBUG_VIEW, "in loop");
 		gtk_object_destroy (GTK_OBJECT (li->data));
 	}
 	gl_debug (DEBUG_VIEW, "1");
-	g_list_free (view_text->private->item_list);
-	view_text->private->item_list = NULL;
+	g_list_free (view_text->private->object_item_list);
+	g_list_free (view_text->private->shadow_item_list);
+	view_text->private->object_item_list = NULL;
+	view_text->private->shadow_item_list = NULL;
 	gl_debug (DEBUG_VIEW, "2");
 
 	/* get Gnome Font */
@@ -712,6 +776,56 @@ draw_hacktext (glViewText *view_text)
 							  font_italic_flag,
 							  font_size);
 	art_affine_identity (affine);
+
+	if (shadow_state)
+	{
+		/* render to group, one item per line. */
+		for (i = 0; line[i] != NULL; i++) {
+
+			glyphlist = gnome_glyphlist_from_text_dumb (font,
+								    shadow_color,
+								    0.0, 0.0,
+								    (guchar *)line[i]);
+
+			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+			w = bbox.x1;
+
+			switch (just) {
+			case GTK_JUSTIFY_LEFT:
+				x_offset = GL_LABEL_TEXT_MARGIN;
+				break;
+			case GTK_JUSTIFY_CENTER:
+				x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
+				break;
+			case GTK_JUSTIFY_RIGHT:
+				x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
+				break;
+			default:
+				x_offset = 0.0;
+				break;	/* shouldn't happen */
+			}
+
+			/* Work out the y position to the BOTTOM of the first line */
+			y_offset = GL_LABEL_TEXT_MARGIN +
+				+ gnome_font_get_descender (font)
+				+ (i + 1) * font_size * text_line_spacing;
+
+			/* Remove any text line spacing from the first row. */
+			y_offset -= font_size * (text_line_spacing - 1);
+
+			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
+							gl_canvas_hacktext_get_type (),
+							"x", x_offset + shadow_x,
+							"y", y_offset + shadow_y,
+							"glyphlist", glyphlist, NULL);
+
+			gnome_glyphlist_unref (glyphlist);
+
+			view_text->private->shadow_item_list =
+				g_list_prepend (view_text->private->shadow_item_list, item);
+
+		}
+	}
 
 	/* render to group, one item per line. */
 	for (i = 0; line[i] != NULL; i++) {
@@ -754,8 +868,8 @@ draw_hacktext (glViewText *view_text)
 
 		gnome_glyphlist_unref (glyphlist);
 
-		view_text->private->item_list =
-			g_list_prepend (view_text->private->item_list, item);
+		view_text->private->object_item_list =
+			g_list_prepend (view_text->private->object_item_list, item);
 
 	}
 
