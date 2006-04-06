@@ -1,3 +1,8 @@
+2006-04-05  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+		Fixed potential crash when freeing empty key list.
+
 2006-03-11  Jim Evins  <evins@snaught.com>
 
 	* src/print.c: (draw_text_object):

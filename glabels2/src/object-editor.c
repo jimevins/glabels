@@ -526,7 +526,7 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 
         keys = gl_merge_get_key_list (merge);
         if ( keys == NULL ) {
-                keys = g_list_append (keys, "");
+                keys = g_list_append (keys, g_strdup (""));
 	}
 
 	combo = editor->priv->img_key_combo;
