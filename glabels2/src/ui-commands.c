@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -44,9 +44,9 @@
 #include "debug.h"
 
 #define LOGO_PIXMAP gnome_program_locate_file (NULL,\
-					 GNOME_FILE_DOMAIN_APP_PIXMAP,\
-					 "glabels/glabels-about-logo.png",\
-					 FALSE, NULL)
+                                         GNOME_FILE_DOMAIN_APP_PIXMAP,\
+                                         "glabels/glabels-about-logo.png",\
+                                         FALSE, NULL)
 
 
 /****************************************************************************/
@@ -57,13 +57,13 @@ gl_ui_cmd_file_new (GtkAction *action,
                     glWindow  *window)
 {
         gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_new (window);
+        gl_file_new (window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -71,16 +71,16 @@ gl_ui_cmd_file_new (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_properties (GtkAction *action,
-			   glWindow  *window)
+                           glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_properties (GL_VIEW(window->view)->label, window);
+        gl_file_properties (GL_VIEW(window->view)->label, window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -88,20 +88,20 @@ gl_ui_cmd_file_properties (GtkAction *action,
 /****************************************************************************/
 void
 gl_ui_cmd_file_template_designer (GtkAction *action,
-				  glWindow  *window)
+                                  glWindow  *window)
 {
-	GtkWidget *dialog;
+        GtkWidget *dialog;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	dialog = gl_template_designer_new (GTK_WINDOW(window));
+        dialog = gl_template_designer_new (GTK_WINDOW(window));
 
-	gtk_widget_show (dialog);
+        gtk_widget_show (dialog);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -109,16 +109,16 @@ gl_ui_cmd_file_template_designer (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_open (GtkAction *action,
-		     glWindow  *window)
+                     glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_open (window);
+        gl_file_open (window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -126,26 +126,26 @@ gl_ui_cmd_file_open (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_open_recent (GtkAction *action,
-			    glWindow  *window)
+                            glWindow  *window)
 {
-	EggRecentViewUIManager *recent_view;
-	EggRecentItem          *item;
-	gchar                  *utf8_filename;
+        EggRecentViewUIManager *recent_view;
+        EggRecentItem          *item;
+        gchar                  *utf8_filename;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	recent_view = g_object_get_data (G_OBJECT(window->ui), "recent-view");
-	g_return_if_fail (recent_view && EGG_IS_RECENT_VIEW_UIMANAGER (recent_view));
+        recent_view = g_object_get_data (G_OBJECT(window->ui), "recent-view");
+        g_return_if_fail (recent_view && EGG_IS_RECENT_VIEW_UIMANAGER (recent_view));
 
-	item = egg_recent_view_uimanager_get_item (recent_view, action);
-	utf8_filename = gl_recent_get_filename (item);
+        item = egg_recent_view_uimanager_get_item (recent_view, action);
+        utf8_filename = gl_recent_get_filename (item);
 
-	gl_file_open_recent (utf8_filename, window);
+        gl_file_open_recent (utf8_filename, window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -153,16 +153,16 @@ gl_ui_cmd_file_open_recent (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_save (GtkAction *action,
-		     glWindow  *window)
+                     glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_save (GL_VIEW(window->view)->label, window);
+        gl_file_save (GL_VIEW(window->view)->label, window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -170,16 +170,16 @@ gl_ui_cmd_file_save (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_save_as (GtkAction *action,
-			glWindow  *window)
+                        glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_save_as (GL_VIEW(window->view)->label, window);
+        gl_file_save_as (GL_VIEW(window->view)->label, window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -187,34 +187,34 @@ gl_ui_cmd_file_save_as (GtkAction *action,
 /****************************************************************************/
 void
 gl_ui_cmd_file_print (GtkAction *action,
-		      glWindow  *window)
+                      glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->print_dialog) {
+        if (window->print_dialog) {
 
-		gtk_window_present (GTK_WINDOW(window->print_dialog));
-		gtk_window_set_transient_for (GTK_WINDOW (window->print_dialog),
-					      GTK_WINDOW (window));
+                gtk_window_present (GTK_WINDOW(window->print_dialog));
+                gtk_window_set_transient_for (GTK_WINDOW (window->print_dialog),
+                                              GTK_WINDOW (window));
 
-	} else {
+        } else {
 
-		window->print_dialog =
-			g_object_ref (
-				gl_print_dialog_new (GL_VIEW(window->view)->label,
-						     GTK_WINDOW(window)) );
+                window->print_dialog =
+                        g_object_ref (
+                                gl_print_dialog_new (GL_VIEW(window->view)->label,
+                                                     GTK_WINDOW(window)) );
 
-		g_signal_connect (G_OBJECT(window->print_dialog), "destroy",
-				  G_CALLBACK (gtk_widget_destroyed),
-				  &window->print_dialog);
+                g_signal_connect (G_OBJECT(window->print_dialog), "destroy",
+                                  G_CALLBACK (gtk_widget_destroyed),
+                                  &window->print_dialog);
 
-		gtk_widget_show (GTK_WIDGET (window->print_dialog));
-	}
+                gtk_widget_show (GTK_WIDGET (window->print_dialog));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -222,16 +222,16 @@ gl_ui_cmd_file_print (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_close (GtkAction *action,
-		      glWindow  *window)
+                      glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_close (window);
+        gl_file_close (window);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -239,16 +239,16 @@ gl_ui_cmd_file_close (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_file_quit (GtkAction *action,
-		     glWindow  *window)
+                     glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_file_exit ();
+        gl_file_exit ();
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 
@@ -257,16 +257,16 @@ gl_ui_cmd_file_quit (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_edit_cut (GtkAction *action,
-		    glWindow  *window)
+                    glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_cut (GL_VIEW(window->view)); 
+        gl_view_cut (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -274,16 +274,16 @@ gl_ui_cmd_edit_cut (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_edit_copy (GtkAction *action,
-		     glWindow  *window)
+                     glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_copy (GL_VIEW(window->view)); 
+        gl_view_copy (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -291,16 +291,16 @@ gl_ui_cmd_edit_copy (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_edit_paste (GtkAction *action,
-		      glWindow  *window)
+                      glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_paste (GL_VIEW(window->view)); 
+        gl_view_paste (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 
@@ -309,16 +309,16 @@ gl_ui_cmd_edit_paste (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_edit_delete (GtkAction *action,
-		       glWindow  *window)
+                       glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_delete_selection (GL_VIEW(window->view)); 
+        gl_view_delete_selection (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 
@@ -327,16 +327,16 @@ gl_ui_cmd_edit_delete (GtkAction *action,
 /****************************************************************************/
 void
 gl_ui_cmd_edit_select_all (GtkAction *action,
-			   glWindow  *window)
+                           glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_select_all (GL_VIEW(window->view)); 
+        gl_view_select_all (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -344,16 +344,16 @@ gl_ui_cmd_edit_select_all (GtkAction *action,
 /****************************************************************************/
 void
 gl_ui_cmd_edit_unselect_all (GtkAction *action,
-			     glWindow  *window)
+                             glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gl_view_unselect_all (GL_VIEW(window->view)); 
+        gl_view_unselect_all (GL_VIEW(window->view)); 
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -361,33 +361,33 @@ gl_ui_cmd_edit_unselect_all (GtkAction *action,
 /****************************************************************************/
 void
 gl_ui_cmd_edit_preferences (GtkAction *action,
-			    glWindow  *window)
+                            glWindow  *window)
 {
-	static GtkWidget *dlg = NULL;
+        static GtkWidget *dlg = NULL;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (dlg != NULL)
-	{
-		gtk_window_present (GTK_WINDOW (dlg));
-		gtk_window_set_transient_for (GTK_WINDOW (dlg),	
-					      GTK_WINDOW(window));
+        if (dlg != NULL)
+        {
+                gtk_window_present (GTK_WINDOW (dlg));
+                gtk_window_set_transient_for (GTK_WINDOW (dlg),        
+                                              GTK_WINDOW(window));
 
-	} else {
-		
-		dlg = gl_prefs_dialog_new (GTK_WINDOW(window));
+        } else {
+                
+                dlg = gl_prefs_dialog_new (GTK_WINDOW(window));
 
-		g_signal_connect (G_OBJECT (dlg), "destroy",
-				  G_CALLBACK (gtk_widget_destroyed), &dlg);
-	
-		gtk_widget_show (dlg);
+                g_signal_connect (G_OBJECT (dlg), "destroy",
+                                  G_CALLBACK (gtk_widget_destroyed), &dlg);
+        
+                gtk_widget_show (dlg);
 
-	}
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -395,26 +395,26 @@ gl_ui_cmd_edit_preferences (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_property_bar_toggle (GtkToggleAction *action,
-				    glWindow        *window)
+                                    glWindow        *window)
 {
-	gboolean     state;
+        gboolean     state;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	state =  gtk_toggle_action_get_active (action);
+        state =  gtk_toggle_action_get_active (action);
 
-	gl_prefs->property_toolbar_visible = state;
-	if (state) {
-		gtk_widget_show (GTK_WIDGET (window->property_bar));
-	} else {
-		gtk_widget_hide (GTK_WIDGET (window->property_bar));
-	}
-	gl_prefs_model_save_settings (gl_prefs);
+        gl_prefs->property_toolbar_visible = state;
+        if (state) {
+                gtk_widget_show (GTK_WIDGET (window->property_bar));
+        } else {
+                gtk_widget_hide (GTK_WIDGET (window->property_bar));
+        }
+        gl_prefs_model_save_settings (gl_prefs);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -422,22 +422,22 @@ gl_ui_cmd_view_property_bar_toggle (GtkToggleAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_property_bar_tips_toggle (GtkToggleAction *action,
-					 glWindow        *window)
+                                         glWindow        *window)
 {
-	gboolean     state;
+        gboolean     state;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	state =  gtk_toggle_action_get_active (action);
+        state =  gtk_toggle_action_get_active (action);
 
-	gl_prefs->property_toolbar_view_tooltips = state;
-	gl_ui_property_bar_set_tooltips (window->property_bar, state);
-	gl_prefs_model_save_settings (gl_prefs);
+        gl_prefs->property_toolbar_view_tooltips = state;
+        gl_ui_property_bar_set_tooltips (window->property_bar, state);
+        gl_prefs_model_save_settings (gl_prefs);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -445,26 +445,30 @@ gl_ui_cmd_view_property_bar_tips_toggle (GtkToggleAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_grid_toggle (GtkToggleAction *action,
-			    glWindow        *window)
+                            glWindow        *window)
 {
-	gboolean     state;
+        gboolean     state;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	state =  gtk_toggle_action_get_active (action);
+        state =  gtk_toggle_action_get_active (action);
 
-	gl_prefs->grid_visible = state;
-	if (state) {
-		gl_view_show_grid (GL_VIEW(window->view));
-	} else {
-		gl_view_hide_grid (GL_VIEW(window->view));
-	}
-	gl_prefs_model_save_settings (gl_prefs);
+        if (window->view != NULL)
+        {
+                if (state) {
+                        gl_view_show_grid (GL_VIEW(window->view));
+                } else {
+                        gl_view_hide_grid (GL_VIEW(window->view));
+                }
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_prefs->grid_visible = state;
+        gl_prefs_model_save_settings (gl_prefs);
+
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -472,26 +476,30 @@ gl_ui_cmd_view_grid_toggle (GtkToggleAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_markup_toggle (GtkToggleAction *action,
-			      glWindow        *window)
+                              glWindow        *window)
 {
-	gboolean     state;
+        gboolean     state;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	state =  gtk_toggle_action_get_active (action);
+        state =  gtk_toggle_action_get_active (action);
 
-	gl_prefs->markup_visible = state;
-	if (state) {
-		gl_view_show_markup (GL_VIEW(window->view));
-	} else {
-		gl_view_hide_markup (GL_VIEW(window->view));
-	}
-	gl_prefs_model_save_settings (gl_prefs);
+        if (window->view != NULL)
+        {
+                if (state) {
+                        gl_view_show_markup (GL_VIEW(window->view));
+                } else {
+                        gl_view_hide_markup (GL_VIEW(window->view));
+                }
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_prefs->markup_visible = state;
+        gl_prefs_model_save_settings (gl_prefs);
+
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -499,19 +507,19 @@ gl_ui_cmd_view_markup_toggle (GtkToggleAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_zoomin (GtkAction *action,
-		       glWindow  *window)
+                       glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_zoom_in (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_zoom_in (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -519,19 +527,19 @@ gl_ui_cmd_view_zoomin (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_zoomout (GtkAction *action,
-			glWindow  *window)
+                        glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_zoom_out (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_zoom_out (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -539,19 +547,19 @@ gl_ui_cmd_view_zoomout (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_zoom1to1 (GtkAction *action,
-			 glWindow  *window)
+                         glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_set_zoom (GL_VIEW(window->view), 1.0);
-	}
+        if (window->view != NULL) {
+                gl_view_set_zoom (GL_VIEW(window->view), 1.0);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -559,19 +567,19 @@ gl_ui_cmd_view_zoom1to1 (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_view_zoom_to_fit (GtkAction *action,
-			    glWindow  *window)
+                            glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_zoom_to_fit (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_zoom_to_fit (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -579,18 +587,18 @@ gl_ui_cmd_view_zoom_to_fit (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_arrow_mode (GtkAction *action,
-			      glWindow  *window)
+                              glWindow  *window)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_arrow_mode (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_arrow_mode (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -598,20 +606,20 @@ gl_ui_cmd_objects_arrow_mode (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_text (GtkAction *action,
-			       glWindow  *window)
+                               glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_TEXT);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_TEXT);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -619,20 +627,20 @@ gl_ui_cmd_objects_create_text (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_box (GtkAction *action,
-			      glWindow  *window)
+                              glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_BOX);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_BOX);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -640,20 +648,20 @@ gl_ui_cmd_objects_create_box (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_line (GtkAction *action,
-			       glWindow  *window)
+                               glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_LINE);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_LINE);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -661,20 +669,20 @@ gl_ui_cmd_objects_create_line (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_ellipse (GtkAction *action,
-				  glWindow  *window)
+                                  glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_ELLIPSE);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_ELLIPSE);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -682,20 +690,20 @@ gl_ui_cmd_objects_create_ellipse (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_image (GtkAction *action,
-				glWindow  *window)
+                                glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_IMAGE);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_IMAGE);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -703,20 +711,20 @@ gl_ui_cmd_objects_create_image (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_create_barcode (GtkAction *action,
-				  glWindow  *window)
+                                  glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_object_create_mode (GL_VIEW(window->view),
-					    GL_LABEL_OBJECT_BARCODE);
-	}
+        if (window->view != NULL) {
+                gl_view_object_create_mode (GL_VIEW(window->view),
+                                            GL_LABEL_OBJECT_BARCODE);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -724,19 +732,19 @@ gl_ui_cmd_objects_create_barcode (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_raise (GtkAction *action,
-			 glWindow  *window)
+                         glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_raise_selection (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_raise_selection (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -744,19 +752,19 @@ gl_ui_cmd_objects_raise (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_lower (GtkAction *action,
-			 glWindow  *window)
+                         glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_lower_selection (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_lower_selection (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -764,19 +772,19 @@ gl_ui_cmd_objects_lower (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_rotate_left (GtkAction *action,
-			       glWindow  *window)
+                               glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_rotate_selection_left (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_rotate_selection_left (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -784,19 +792,19 @@ gl_ui_cmd_objects_rotate_left (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_rotate_right (GtkAction *action,
-				glWindow  *window)
+                                glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_rotate_selection_right (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_rotate_selection_right (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -804,19 +812,19 @@ gl_ui_cmd_objects_rotate_right (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_flip_horiz (GtkAction *action,
-			      glWindow  *window)
+                              glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_flip_selection_horiz (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_flip_selection_horiz (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -824,19 +832,19 @@ gl_ui_cmd_objects_flip_horiz (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_flip_vert (GtkAction *action,
-			     glWindow  *window)
+                             glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_flip_selection_vert (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_flip_selection_vert (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -844,19 +852,19 @@ gl_ui_cmd_objects_flip_vert (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_left (GtkAction *action,
-			      glWindow  *window)
+                              glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_left (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_left (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -864,19 +872,19 @@ gl_ui_cmd_objects_align_left (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_right (GtkAction *action,
-			       glWindow  *window)
+                               glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_right (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_right (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -884,19 +892,19 @@ gl_ui_cmd_objects_align_right (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_hcenter (GtkAction *action,
-				 glWindow  *window)
+                                 glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_hcenter (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_hcenter (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -904,19 +912,19 @@ gl_ui_cmd_objects_align_hcenter (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_top (GtkAction *action,
-			     glWindow  *window)
+                             glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_top (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_top (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -924,19 +932,19 @@ gl_ui_cmd_objects_align_top (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_bottom (GtkAction *action,
-				glWindow  *window)
+                                glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_bottom (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_bottom (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -944,19 +952,19 @@ gl_ui_cmd_objects_align_bottom (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_align_vcenter (GtkAction *action,
-				 glWindow  *window)
+                                 glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_align_selection_vcenter (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_align_selection_vcenter (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -964,19 +972,19 @@ gl_ui_cmd_objects_align_vcenter (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_center_horiz (GtkAction *action,
-				glWindow  *window)
+                                glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_center_selection_horiz (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_center_selection_horiz (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -984,19 +992,19 @@ gl_ui_cmd_objects_center_horiz (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_center_vert (GtkAction *action,
-			       glWindow  *window)
+                               glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->view != NULL) {
-		gl_view_center_selection_vert (GL_VIEW(window->view));
-	}
+        if (window->view != NULL) {
+                gl_view_center_selection_vert (GL_VIEW(window->view));
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*****************************************************************************/
@@ -1004,36 +1012,36 @@ gl_ui_cmd_objects_center_vert (GtkAction *action,
 /*****************************************************************************/
 void
 gl_ui_cmd_objects_merge_properties (GtkAction *action,
-				    glWindow  *window)
+                                    glWindow  *window)
 
 {
-	gl_debug (DEBUG_COMMANDS, "START");
-	
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        gl_debug (DEBUG_COMMANDS, "START");
+        
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (window->merge_dialog) {
+        if (window->merge_dialog) {
 
-		gtk_window_present (GTK_WINDOW(window->merge_dialog));
-		gtk_window_set_transient_for (GTK_WINDOW (window->merge_dialog),
-					      GTK_WINDOW (window));
+                gtk_window_present (GTK_WINDOW(window->merge_dialog));
+                gtk_window_set_transient_for (GTK_WINDOW (window->merge_dialog),
+                                              GTK_WINDOW (window));
 
-	} else {
+        } else {
 
-		window->merge_dialog =
-			g_object_ref (
-				gl_merge_properties_dialog_new (GL_VIEW(window->view)->label,
-								GTK_WINDOW(window)) );
+                window->merge_dialog =
+                        g_object_ref (
+                                gl_merge_properties_dialog_new (GL_VIEW(window->view)->label,
+                                                                GTK_WINDOW(window)) );
 
-		g_signal_connect (G_OBJECT(window->merge_dialog), "destroy",
-				  G_CALLBACK (gtk_widget_destroyed),
-				  &window->merge_dialog);
+                g_signal_connect (G_OBJECT(window->merge_dialog), "destroy",
+                                  G_CALLBACK (gtk_widget_destroyed),
+                                  &window->merge_dialog);
 
-		gtk_widget_show (GTK_WIDGET (window->merge_dialog));
+                gtk_widget_show (GTK_WIDGET (window->merge_dialog));
 
-	}
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /****************************************************************************/
@@ -1041,25 +1049,25 @@ gl_ui_cmd_objects_merge_properties (GtkAction *action,
 /****************************************************************************/
 void 
 gl_ui_cmd_help_contents (GtkAction *action,
-			 glWindow  *window)
+                         glWindow  *window)
 {
-	GError *error = NULL;
+        GError *error = NULL;
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	gnome_help_display_with_doc_id (NULL, NULL, "glabels.xml", NULL, &error);
-	
-	if (error != NULL)
-	{
-		g_message (error->message);
+        gnome_help_display_with_doc_id (NULL, NULL, "glabels.xml", NULL, &error);
+        
+        if (error != NULL)
+        {
+                g_message (error->message);
 
-		g_error_free (error);
-	}
+                g_error_free (error);
+        }
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1067,14 +1075,14 @@ gl_ui_cmd_help_contents (GtkAction *action,
 /*--------------------------------------------------------------------------*/
 static void
 activate_url (GtkAboutDialog *about,
-	      const gchar    *url,
-	      gpointer        data)
+              const gchar    *url,
+              gpointer        data)
 {
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	gnome_url_show (url, NULL);
+        gnome_url_show (url, NULL);
 
-	gl_debug (DEBUG_COMMANDS, "END");
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 
 
@@ -1083,99 +1091,99 @@ activate_url (GtkAboutDialog *about,
 /****************************************************************************/
 void 
 gl_ui_cmd_help_about (GtkAction *action,
-		      glWindow  *window)
+                      glWindow  *window)
 {
-	static GtkWidget *about = NULL;
+        static GtkWidget *about = NULL;
 
-	GdkPixbuf        *pixbuf = NULL;
-	
-	const gchar *authors[] = {
-		"Jim Evins",
-		" ",
-		_("Glabels includes contributions from:"),
-		"Frederic Ruaudel",
-		"Wayne Schuller",
-		"Emmanuel Pacaud",
-		"Austin Henry",
-		" ",
-		_("See the file AUTHORS for additional credits,"),
-		_("or visit http://glabels.sourceforge.net/"),
-		NULL
-	};
-	
-	const gchar *artists[] = {
-		"Nestor Di",
-		"Jim Evins",
-		NULL
-	};
-	
-	const gchar *copy_text = "Copyright \xc2\xa9 2001-2005 Jim Evins";
+        GdkPixbuf        *pixbuf = NULL;
+        
+        const gchar *authors[] = {
+                "Jim Evins",
+                " ",
+                _("Glabels includes contributions from:"),
+                "Frederic Ruaudel",
+                "Wayne Schuller",
+                "Emmanuel Pacaud",
+                "Austin Henry",
+                " ",
+                _("See the file AUTHORS for additional credits,"),
+                _("or visit http://glabels.sourceforge.net/"),
+                NULL
+        };
+        
+        const gchar *artists[] = {
+                "Nestor Di",
+                "Jim Evins",
+                NULL
+        };
+        
+        const gchar *copy_text = "Copyright \xc2\xa9 2001-2005 Jim Evins";
 
-	const gchar *about_text = _("A label and business card creation program.\n");
+        const gchar *about_text = _("A label and business card creation program.\n");
 
-	const gchar *url = "http://glabels.sourceforge.net";
+        const gchar *url = "http://glabels.sourceforge.net";
 
-	const gchar *translator_credits = _("translator-credits");
+        const gchar *translator_credits = _("translator-credits");
 
-	const gchar *license = _(
-	      "Glabels is free software; you can redistribute it and/or modify it\n"
-	      "under the terms of the GNU General Public License as published by\n"
-	      "the Free Software Foundation; either version 2 of the License, or\n"
-	      "(at your option) any later version.\n" "\n"
-	      "This program is distributed in the hope that it will be useful, but\n"
-	      "WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-	      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
-	      "the GNU General Public License for more details.\n");
+        const gchar *license = _(
+              "Glabels is free software; you can redistribute it and/or modify it\n"
+              "under the terms of the GNU General Public License as published by\n"
+              "the Free Software Foundation; either version 2 of the License, or\n"
+              "(at your option) any later version.\n" "\n"
+              "This program is distributed in the hope that it will be useful, but\n"
+              "WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+              "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
+              "the GNU General Public License for more details.\n");
 
-	gl_debug (DEBUG_COMMANDS, "START");
+        gl_debug (DEBUG_COMMANDS, "START");
 
-	g_return_if_fail (action && GTK_IS_ACTION(action));
-	g_return_if_fail (window && GL_IS_WINDOW(window));
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
 
-	if (about != NULL)
-	{
+        if (about != NULL)
+        {
 
-		gtk_window_present (GTK_WINDOW (about));
-		gtk_window_set_transient_for (GTK_WINDOW (about),
-					      GTK_WINDOW (window));
+                gtk_window_present (GTK_WINDOW (about));
+                gtk_window_set_transient_for (GTK_WINDOW (about),
+                                              GTK_WINDOW (window));
 
-	} else {
-	
-		pixbuf = gdk_pixbuf_new_from_file ( LOGO_PIXMAP, NULL);
+        } else {
+        
+                pixbuf = gdk_pixbuf_new_from_file ( LOGO_PIXMAP, NULL);
 
-		gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
+                gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
 
-		about = gtk_about_dialog_new ();
-		gtk_about_dialog_set_name      (GTK_ABOUT_DIALOG(about), _("glabels"));
-		gtk_about_dialog_set_version   (GTK_ABOUT_DIALOG(about), VERSION);
-		gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(about), copy_text);
-		gtk_about_dialog_set_comments  (GTK_ABOUT_DIALOG(about), about_text);
-		gtk_about_dialog_set_website   (GTK_ABOUT_DIALOG(about), url);
-		gtk_about_dialog_set_logo      (GTK_ABOUT_DIALOG(about), pixbuf);
+                about = gtk_about_dialog_new ();
+                gtk_about_dialog_set_name      (GTK_ABOUT_DIALOG(about), _("glabels"));
+                gtk_about_dialog_set_version   (GTK_ABOUT_DIALOG(about), VERSION);
+                gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(about), copy_text);
+                gtk_about_dialog_set_comments  (GTK_ABOUT_DIALOG(about), about_text);
+                gtk_about_dialog_set_website   (GTK_ABOUT_DIALOG(about), url);
+                gtk_about_dialog_set_logo      (GTK_ABOUT_DIALOG(about), pixbuf);
 
-		gtk_about_dialog_set_authors   (GTK_ABOUT_DIALOG(about), authors);
-		gtk_about_dialog_set_artists   (GTK_ABOUT_DIALOG(about), artists);
-		gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about),
-							 translator_credits);
-		gtk_about_dialog_set_license   (GTK_ABOUT_DIALOG(about), license);
-	
-		gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+                gtk_about_dialog_set_authors   (GTK_ABOUT_DIALOG(about), authors);
+                gtk_about_dialog_set_artists   (GTK_ABOUT_DIALOG(about), artists);
+                gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about),
+                                                         translator_credits);
+                gtk_about_dialog_set_license   (GTK_ABOUT_DIALOG(about), license);
+        
+                gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
 
-		g_signal_connect (G_OBJECT (about), "response",
-				  G_CALLBACK (gtk_widget_destroy), NULL);
-		g_signal_connect (G_OBJECT (about), "destroy",
-				  G_CALLBACK (gtk_widget_destroyed), &about);
+                g_signal_connect (G_OBJECT (about), "response",
+                                  G_CALLBACK (gtk_widget_destroy), NULL);
+                g_signal_connect (G_OBJECT (about), "destroy",
+                                  G_CALLBACK (gtk_widget_destroyed), &about);
 
-		gtk_window_set_transient_for (GTK_WINDOW (about),
-					      GTK_WINDOW (window));
+                gtk_window_set_transient_for (GTK_WINDOW (about),
+                                              GTK_WINDOW (window));
 
-		gtk_window_present (GTK_WINDOW (about));
+                gtk_window_present (GTK_WINDOW (about));
 
-		if (pixbuf != NULL)
-			g_object_unref (pixbuf);
+                if (pixbuf != NULL)
+                        g_object_unref (pixbuf);
 
-	}
-	
-	gl_debug (DEBUG_COMMANDS, "END");
+        }
+        
+        gl_debug (DEBUG_COMMANDS, "END");
 }
 

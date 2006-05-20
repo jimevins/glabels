@@ -1,3 +1,10 @@
+2006-05-20  Jim Evins  <evins@snaught.com>
+
+	* src/ui-commands.c: (gl_ui_cmd_view_grid_toggle),
+	(gl_ui_cmd_view_markup_toggle):
+		Fixed crash when grid or markup have been toggled off during
+		a previous session.  Bug #1434324.
+
 2006-04-05  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor.c: (gl_object_editor_set_key_names):
