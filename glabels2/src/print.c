@@ -839,55 +839,58 @@ draw_text_object (PrintInfo     *pi,
 				       font_size);
 	gnome_print_setfont (pi->pc, font);
 
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (shadow_color),
-				 GL_COLOR_F_GREEN (shadow_color),
-				 GL_COLOR_F_BLUE (shadow_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_color));
+        if (shadow_state)
+        {
+                gnome_print_setrgbcolor (pi->pc,
+                                         GL_COLOR_F_RED (shadow_color),
+                                         GL_COLOR_F_GREEN (shadow_color),
+                                         GL_COLOR_F_BLUE (shadow_color));
+                gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_color));
 
-	for (i = 0; line[i] != NULL; i++) {
+                for (i = 0; line[i] != NULL; i++) {
 
-		glyphlist = gnome_glyphlist_from_text_dumb (font, color,
-							    0.0, 0.0,
-							    (guchar *)line[i]);
+                        glyphlist = gnome_glyphlist_from_text_dumb (font, color,
+                                                                    0.0, 0.0,
+                                                                    (guchar *)line[i]);
 
-		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-		w = bbox.x1;
-		gnome_glyphlist_unref (glyphlist);
+                        gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+                        w = bbox.x1;
+                        gnome_glyphlist_unref (glyphlist);
 
-		switch (just) {
-		case GTK_JUSTIFY_LEFT:
-			x_offset = GL_LABEL_TEXT_MARGIN;
-			break;
-		case GTK_JUSTIFY_CENTER:
-			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
-			break;
-		case GTK_JUSTIFY_RIGHT:
-			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
-			break;
-		default:
-			x_offset = 0.0;
-			break;	/* shouldn't happen */
-		}
-                x_offset += shadow_x;
+                        switch (just) {
+                        case GTK_JUSTIFY_LEFT:
+                                x_offset = GL_LABEL_TEXT_MARGIN;
+                                break;
+                        case GTK_JUSTIFY_CENTER:
+                                x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
+                                break;
+                        case GTK_JUSTIFY_RIGHT:
+                                x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
+                                break;
+                        default:
+                                x_offset = 0.0;
+                                break;	/* shouldn't happen */
+                        }
+                        x_offset += shadow_x;
 
-		/* Work out the y position to the BOTTOM of the first line */
-		y_offset = GL_LABEL_TEXT_MARGIN +
-			   + gnome_font_get_descender (font)
-	       		   + (i + 1) * font_size * text_line_spacing
-                           + shadow_y;
+                        /* Work out the y position to the BOTTOM of the first line */
+                        y_offset = GL_LABEL_TEXT_MARGIN +
+                                + gnome_font_get_descender (font)
+                                + (i + 1) * font_size * text_line_spacing
+                                + shadow_y;
 
-		/* Remove any text line spacing from the first row. */
-		y_offset -= font_size * (text_line_spacing - 1);
+                        /* Remove any text line spacing from the first row. */
+                        y_offset -= font_size * (text_line_spacing - 1);
 
 
-		gnome_print_moveto (pi->pc, x_offset, y_offset);
+                        gnome_print_moveto (pi->pc, x_offset, y_offset);
 
-		gnome_print_gsave (pi->pc);
-		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, (guchar *)line[i]);
-		gnome_print_grestore (pi->pc);
-	}
+                        gnome_print_gsave (pi->pc);
+                        gnome_print_scale (pi->pc, 1.0, -1.0);
+                        gnome_print_show (pi->pc, (guchar *)line[i]);
+                        gnome_print_grestore (pi->pc);
+                }
+        }
 
 	gnome_print_setrgbcolor (pi->pc,
 				 GL_COLOR_F_RED (color),

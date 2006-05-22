@@ -1,3 +1,8 @@
+2006-05-22  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_text_object):
+		Check shadow state when printing text.
+
 2006-05-20  Jim Evins  <evins@snaught.com>
 
 	* src/ui-commands.c: (gl_ui_cmd_view_grid_toggle),
