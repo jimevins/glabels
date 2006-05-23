@@ -537,25 +537,27 @@ gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
 static void
 draw_barcode (glViewBarcode *view_barcode)
 {
-	glLabelObject    *object;
-	GnomeCanvasItem  *item;
-	glTextNode *text_node;
-	gchar *id;
-	gboolean text_flag;
-	gboolean checksum_flag;
-	glColorNode *color_node;
-	gdouble w, h;
-	glBarcodeLine *line;
-	glBarcodeChar *bchar;
-	glBarcode *gbc;
-	GList *li;
-	GList *item_list = NULL;
+	glLabelObject     *object;
+	GnomeCanvasItem   *item;
+	glTextNode        *text_node;
+	gchar             *id;
+	gboolean           text_flag;
+	gboolean           checksum_flag;
+	glColorNode       *color_node;
+	gdouble            w, h;
+	glBarcodeLine     *line;
+	glBarcodeChar     *bchar;
+	glBarcode         *gbc;
+	GList             *li;
+	GList             *item_list = NULL;
 	GnomeCanvasPoints *points;
-	gchar *digits, *cstring;
-	GnomeFont *font;
-	GnomeGlyphList *glyphlist;
-	gdouble y_offset;
-	guint format_digits;
+	gchar             *digits, *cstring;
+	GnomeFont         *font;
+	GnomeGlyphList    *glyphlist;
+	gdouble            y_offset;
+	guint              format_digits;
+	ArtDRect           bbox;
+	gdouble            affine[6];
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -595,17 +597,40 @@ draw_barcode (glViewBarcode *view_barcode)
 	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, digits);
 	if (gbc == NULL) {
 
-		cstring = _("Invalid barcode data");
+		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
+						gnome_canvas_rect_get_type (),
+						"x1", 0.0,
+						"y1", 0.0,
+						"x2", w,
+						"y2", h,
+						"outline_color_rgba", color_node->color,
+						"width_pixels", 1,
+						NULL);
+		view_barcode->private->item_list =
+			g_list_prepend (view_barcode->private->item_list, item);
+
+		if (digits == NULL || *digits == '\0')
+		{
+			cstring = _("Barcode data empty");
+		}
+		else
+		{
+			cstring = _("Invalid barcode data");
+		}
+
 		glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
 								  color_node->color,
 								  0.0, 0.0,
 								  (guchar *)cstring,
 								  strlen (cstring));
 		y_offset = 10.0 - fabs (gnome_font_get_descender (font));
+		art_affine_identity (affine);
+		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
+
 		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
 						gl_canvas_hacktext_get_type (),
-						"x", 0.0,
-						"y", y_offset,
+						"x", w/2 - bbox.x1/2,
+						"y", h/2 - bbox.y1/2 + y_offset,
 						"glyphlist", glyphlist, NULL);
 
 		gnome_glyphlist_unref (glyphlist);

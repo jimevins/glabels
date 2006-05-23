@@ -193,7 +193,6 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 
 	Barcode_Encode (bci, flags);
 	if (!bci->partial || !bci->textinfo) {
-		g_message ("Barcode Data Invalid");
 		Barcode_Delete (bci);
 		return NULL;
 	}

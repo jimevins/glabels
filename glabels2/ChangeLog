@@ -1,5 +1,19 @@
 2006-05-22  Jim Evins  <evins@snaught.com>
 
+	* src/print.c: (draw_barcode_object):
+		Don't print "Invalid barcode data" if data field is empty.  Patch provided
+		by Darren Warner <warnerd@users.sourceforge.net>.  Fixes Bug #1479839.
+	* AUTHORS:
+		Added acknowledgment for above patch.
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new):
+	* src/bc-postnet.c: (postnet_code):
+		Removed "Invalid barcode data" warnings from stderr.
+	* src/view-barcode.c: (draw_barcode):
+		Draw box around barcode extent if data empty or invalid.  Center a
+		message whether the data is empty or invalid in box.
+
+2006-05-22  Jim Evins  <evins@snaught.com>
+
 	* src/print.c: (draw_text_object):
 		Check shadow state when printing text.
 

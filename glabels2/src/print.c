@@ -1282,6 +1282,16 @@ draw_barcode_object (PrintInfo      *pi,
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 
 	text = gl_text_node_expand (text_node, record);
+
+	if (text == NULL || *text == '\0') {
+
+		g_free(text);
+		gl_text_node_free(&text_node);
+		g_free(id);
+
+		return;
+	}
+
 	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, text);
 	g_free (text);
 	gl_text_node_free (&text_node);
