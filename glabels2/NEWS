@@ -1,3 +1,11 @@
+* gLabels 2.1.3 (unstable) release.  Release date 2005-05-27.
+
+- Don't print "Invalid barcode data" if data field is empty. (Bug #1479839) (Darren Warner)
+- Fixed hangup when grid or markup have been toggled during a previous session. (Bug #1434324)
+- Added shadow attribute to label objects.
+- Fixed color groups in color combo widgets.
+- Fixed several potential crashes.
+
 * gLabels 2.1.2 (unstable) release.  Release date 2005-12-21.
 
 - Updated Italian translation (Daniele Medri)

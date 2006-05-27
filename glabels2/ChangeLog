@@ -1,3 +1,14 @@
+2006-05-27  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* autogen.sh:
+	* configure.in:
+		Preparation for 2.1.3.
+	* acinclude.m4:
+	* omf.make:
+	* xmldocs.make:
+		Removed.
+	
 2006-05-22  Jim Evins  <evins@snaught.com>
 
 	* src/print.c: (draw_barcode_object):
