@@ -1,3 +1,41 @@
+2006-09-12  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.0.dtd:
+	* data/templates/Makefile.am:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-other-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/categories.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+	* data/glade/Makefile.am:
+	* data/glade/new-label-dialog.glade:
+	* data/glade/wdgt-media-select.glade:
+	* data/glade/wdgt-rotate-label.glade:
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-category.c:
+	* libglabels/xml-category.h:
+	* libglabels/xml-template.c:
+		Added support for category meta data.
+	* src/Makefile.am:
+	* src/file.c:
+	* src/mini-preview-pixbuf.c:
+	* src/mini-preview-pixbuf.h:
+	* src/new-label-dialog.c:
+	* src/new-label-dialog.h:
+	* src/wdgt-media-select.c:
+	* src/wdgt-media-select.h:
+	* src/wdgt-rotate-label.c:
+	* src/wdgt-rotate-label.h:
+		New "new label" dialog.
+
 2006-05-27  Jim Evins  <evins@snaught.com>
 
 	* NEWS:

@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  wdgt_rotate_label.h:  label rotate selection widget module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +25,7 @@
 #ifndef __WDGT_ROTATE_LABEL_H__
 #define __WDGT_ROTATE_LABEL_H__
 
-#include "hig.h"
-#include <libglabels/template.h>
+#include <gtk/gtkvbox.h>
 
 G_BEGIN_DECLS
 
@@ -38,37 +39,35 @@ G_BEGIN_DECLS
 #define GL_IS_WDGT_ROTATE_LABEL_CLASS(klass) \
         (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_ROTATE_LABEL))
 
-typedef struct _glWdgtRotateLabel      glWdgtRotateLabel;
-typedef struct _glWdgtRotateLabelClass glWdgtRotateLabelClass;
+typedef struct _glWdgtRotateLabel         glWdgtRotateLabel;
+typedef struct _glWdgtRotateLabelClass    glWdgtRotateLabelClass;
+
+typedef struct _glWdgtRotateLabelPrivate  glWdgtRotateLabelPrivate;
 
 struct _glWdgtRotateLabel {
-	glHigHBox   parent_widget;
+	GtkVBox                    parent_widget;
 
-	GtkWidget  *rotate_check;
-
-	GtkWidget  *canvas;
-
-	glTemplate *template;
+	glWdgtRotateLabelPrivate  *priv;
 };
 
 struct _glWdgtRotateLabelClass {
-	glHigHBoxClass parent_class;
+	GtkVBoxClass parent_class;
 
-	void (*changed) (glWdgtRotateLabel * wdgt_rotate_label,
-			 gpointer user_data);
+	void (*changed) (glWdgtRotateLabel  *wdgt_rotate_label,
+			 gpointer            user_data);
 };
 
-GType     gl_wdgt_rotate_label_get_type  (void) G_GNUC_CONST;
+GType      gl_wdgt_rotate_label_get_type          (void) G_GNUC_CONST;
 
-GtkWidget *gl_wdgt_rotate_label_new      (void);
+GtkWidget *gl_wdgt_rotate_label_new               (void);
 
-gboolean  gl_wdgt_rotate_label_get_state (glWdgtRotateLabel *wdgt_rotate_label);
+gboolean   gl_wdgt_rotate_label_get_state         (glWdgtRotateLabel *rotate_label);
 
-void      gl_wdgt_rotate_label_set_state (glWdgtRotateLabel *wdgt_rotate_label,
-					  gboolean           state);
+void       gl_wdgt_rotate_label_set_state         (glWdgtRotateLabel *rotate_label,
+						   gboolean           state);
 
-void      gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *wdgt_rotate_label,
-						  gchar             *name);
+void       gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_label,
+						   gchar             *name);
 
 G_END_DECLS
 

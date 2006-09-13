@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  wdgt_media_select.h:  media selection widget module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +25,7 @@
 #ifndef __WDGT_MEDIA_SELECT_H__
 #define __WDGT_MEDIA_SELECT_H__
 
-#include "hig.h"
+#include <gtk/gtkvbox.h>
 
 G_BEGIN_DECLS
 
@@ -37,27 +39,21 @@ G_BEGIN_DECLS
 #define GL_IS_WDGT_MEDIA_SELECT_CLASS(klass) \
         (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MEDIA_SELECT))
 
-typedef struct _glWdgtMediaSelect      glWdgtMediaSelect;
-typedef struct _glWdgtMediaSelectClass glWdgtMediaSelectClass;
+typedef struct _glWdgtMediaSelect         glWdgtMediaSelect;
+typedef struct _glWdgtMediaSelectClass    glWdgtMediaSelectClass;
+
+typedef struct _glWdgtMediaSelectPrivate  glWdgtMediaSelectPrivate;
 
 struct _glWdgtMediaSelect {
-	glHigVBox  parent_widget;
+        GtkVBox                    parent_widget;
 
-	GtkWidget *page_size_combo;
-	GtkWidget *template_combo;
-
-	GtkWidget *mini_preview;
-
-	GtkWidget *desc_label;
-	GtkWidget *sheet_size_label;
-	GtkWidget *number_label;
-	GtkWidget *label_size_label;
+        glWdgtMediaSelectPrivate  *priv;
 };
 
 struct _glWdgtMediaSelectClass {
-	glHigVBoxClass parent_class;
+        GtkVBoxClass               parent_class;
 
-	void (*changed) (glWdgtMediaSelect * media_select, gpointer user_data);
+        void (*changed) (glWdgtMediaSelect * media_select, gpointer user_data);
 };
 
 GType      gl_wdgt_media_select_get_type      (void) G_GNUC_CONST;
@@ -67,12 +63,15 @@ GtkWidget *gl_wdgt_media_select_new           (void);
 gchar     *gl_wdgt_media_select_get_name      (glWdgtMediaSelect *media_select);
 
 void       gl_wdgt_media_select_set_name      (glWdgtMediaSelect *media_select,
-					       gchar             *name);
+                                               gchar             *name);
 
-gchar     *gl_wdgt_media_select_get_page_size (glWdgtMediaSelect *media_select);
+void       gl_wdgt_media_select_get_filter_parameters (glWdgtMediaSelect *media_select,
+                                                       gchar            **page_size_id,
+                                                       gchar            **category_id);
 
-void       gl_wdgt_media_select_set_page_size (glWdgtMediaSelect *media_select,
-					       gchar             *page_size_id);
+void       gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
+                                                       const gchar       *page_size_id,
+                                                       const gchar       *category_id);
 
 G_END_DECLS
 

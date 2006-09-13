@@ -397,13 +397,15 @@ gl_paper_lookup_id_from_name (const gchar       *name)
 	glPaper *paper = NULL;
 	gchar   *id = NULL;
 
-	g_return_val_if_fail (name, NULL);
-
-	paper = gl_paper_from_name (name);
-	if ( paper != NULL ) {
-		id = g_strdup (paper->id);
-		gl_paper_free (paper);
-		paper = NULL;
+	if (name != NULL)
+	{
+		paper = gl_paper_from_name (name);
+		if ( paper != NULL )
+		{
+			id = g_strdup (paper->id);
+			gl_paper_free (paper);
+			paper = NULL;
+		}
 	}
 
 	return id;
@@ -424,13 +426,15 @@ gl_paper_lookup_name_from_id (const gchar       *id)
 	glPaper *paper = NULL;
 	gchar   *name = NULL;
 
-	g_return_val_if_fail (id, NULL);
-
-	paper = gl_paper_from_id (id);
-	if ( paper != NULL ) {
-		name = g_strdup (paper->name);
-		gl_paper_free (paper);
-		paper = NULL;
+	if (id != NULL)
+	{
+		paper = gl_paper_from_id (id);
+		if ( paper != NULL )
+		{
+			name = g_strdup (paper->name);
+			gl_paper_free (paper);
+			paper = NULL;
+		}
 	}
 
 	return name;

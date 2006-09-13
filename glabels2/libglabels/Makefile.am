@@ -20,10 +20,14 @@ libglabels_la_SOURCES =		\
 	enums.h			\
 	paper.h			\
 	paper.c			\
+	category.h		\
+	category.c		\
 	template.h		\
 	template.c		\
 	xml-paper.h		\
 	xml-paper.c		\
+	xml-category.h		\
+	xml-category.c		\
 	xml-template.h		\
 	xml-template.c		\
 	xml.h			\
@@ -33,8 +37,10 @@ libglabelsinclude_HEADERS = 	\
 	libglabels.h		\
 	enums.h			\
 	paper.h			\
+	category.h		\
 	template.h		\
 	xml-paper.h		\
+	xml-category.h		\
 	xml-template.h		\
 	xml.h			
 

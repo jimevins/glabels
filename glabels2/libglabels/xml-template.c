@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
  *  xml-template.c:  template xml module
  *
- *  Copyright (C) 2001-2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -47,6 +49,8 @@
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
+static void  xml_parse_meta_node            (xmlNodePtr              label_node,
+					     glTemplate             *template);
 static void  xml_parse_label_rectangle_node (xmlNodePtr              label_node,
 					     glTemplate             *template);
 static void  xml_parse_label_round_node     (xmlNodePtr              label_node,
@@ -64,6 +68,9 @@ static void  xml_parse_markup_circle_node   (xmlNodePtr              markup_node
 static void  xml_parse_alias_node           (xmlNodePtr              alias_node,
 					     glTemplate             *template);
 
+static void  xml_create_meta_node           (const gchar                  *category,
+					     xmlNodePtr                    root,
+					     const xmlNsPtr                ns);
 static void  xml_create_label_node          (const glTemplateLabelType    *label_type,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
@@ -231,7 +238,9 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 
 	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (gl_xml_is_node (node, "Label-rectangle")) {
+		if (gl_xml_is_node (node, "Meta")) {
+			xml_parse_meta_node (node, template);
+		} else if (gl_xml_is_node (node, "Label-rectangle")) {
 			xml_parse_label_rectangle_node (node, template);
 		} else if (gl_xml_is_node (node, "Label-round")) {
 			xml_parse_label_round_node (node, template);
@@ -253,6 +262,24 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	g_free (page_size);
 
 	return template;
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Meta Node.                                 */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_meta_node (xmlNodePtr  meta_node,
+		     glTemplate *template)
+{
+	gchar               *category;
+
+	category = gl_xml_get_prop_string (meta_node, "category", NULL);
+
+	if (category != NULL)
+	{
+		gl_template_add_category (template, category);
+		g_free (category);
+	}
 }
 
 /*--------------------------------------------------------------------------*/
@@ -635,6 +662,21 @@ gl_xml_template_create_template_node (const glTemplate *template,
 			xml_create_alias_node ( p->data, node, ns );
 		}
 	}
+
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Template->Meta Node.                                   */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_meta_node (const gchar      *category,
+		      xmlNodePtr        root,
+		      const xmlNsPtr    ns)
+{
+	xmlNodePtr node;
+
+	node = xmlNewChild (root, ns, (xmlChar *)"Meta", NULL);
+	gl_xml_set_prop_string (node, "category", category);
 
 }
 

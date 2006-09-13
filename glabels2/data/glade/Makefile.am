@@ -7,7 +7,10 @@ glade_DATA = \
 	prefs-dialog.glade		\
 	template-designer.glade		\
 	merge-properties-dialog.glade	\
-	property-bar.glade
+	property-bar.glade		\
+	wdgt-media-select.glade		\
+	wdgt-rotate-label.glade		\
+	new-label-dialog.glade
 
 EXTRA_DIST = $(glade_DATA)
 

@@ -62,6 +62,8 @@ glabels_SOURCES = 			\
 	ui-sidebar.c			\
 	file.h				\
 	file.c				\
+	new-label-dialog.h		\
+	new-label-dialog.c		\
 	recent.h			\
 	recent.c			\
 	prefs.c 			\
@@ -156,6 +158,8 @@ glabels_SOURCES = 			\
 	merge-vcard.h			\
 	text-node.c			\
 	text-node.h			\
+	mini-preview-pixbuf.c		\
+	mini-preview-pixbuf.h		\
 	wdgt-print-copies.c		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\

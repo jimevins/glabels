@@ -63,6 +63,16 @@
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Top-level glabels categories data base                               -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!ELEMENT Glabels-categories (Category*)>
+<!ATTLIST Glabels-categories
+                 xmlns           %STRING_TYPE;           #IMPLIED
+>
+
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Top-level glabels template data base                                 -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
@@ -94,12 +104,22 @@
 >
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Category                                                             -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!ELEMENT Category EMPTY>
+<!ATTLIST Category
+                 id              %STRING_TYPE;           #REQUIRED
+                 name            %STRING_TYPE;           #IMPLIED
+                 _name           %STRING_TYPE;           #IMPLIED
+>
+
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Template Section                                                     -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ENTITY % label_element  "Label-rectangle | Label-round | Label-cd">
 <!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle">
 
-<!ELEMENT Template ((%label_element;)+, Alias*)>
+<!ELEMENT Template (Meta*, (%label_element;)+, Alias*)>
 <!ATTLIST Template
                  name            %STRING_TYPE;           #REQUIRED
                  size            %STRING_TYPE;           #REQUIRED
@@ -107,6 +127,11 @@
                  height          %LENGTH_TYPE;           #IMPLIED
                  description     %STRING_TYPE;           #IMPLIED
                  _description    %STRING_TYPE;           #IMPLIED
+>
+
+<!ELEMENT Meta EMPTY>
+<!ATTLIST Meta
+                 category        %STRING_TYPE;           #REQUIRED
 >
 
 <!ELEMENT Label-rectangle ((%markup_element;)*, Layout+)>

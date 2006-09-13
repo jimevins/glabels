@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
  *  template.h:  template module header file
  *
- *  Copyright (C) 2001-2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -37,7 +39,6 @@ typedef struct _glTemplateLayout    glTemplateLayout;
 typedef struct _glTemplateMarkup    glTemplateMarkup;
 typedef struct _glTemplateOrigin    glTemplateOrigin;
 
-
 /*
  *   Top-level Template Structure
  */
@@ -48,6 +49,9 @@ struct _glTemplate {
 	gchar               *page_size;
 	gdouble              page_width;
 	gdouble              page_height;
+
+        /* List of (gchar *) category ids. */
+	GList               *categories;
 
 	/* List of (glTemplateLabelType *) label type structures.
 	 * Currently glabels only supports a single label type per
@@ -187,7 +191,8 @@ void                 gl_template_register             (const glTemplate    *temp
 /*
  * Known templates query functions
  */
-GList               *gl_template_get_name_list        (const gchar         *page_size);
+GList               *gl_template_get_name_list        (const gchar         *page_size,
+                                                       const gchar         *category);
 
 void                 gl_template_free_name_list       (GList               *names);
 
@@ -200,6 +205,12 @@ glTemplate          *gl_template_from_name            (const gchar         *name
 gchar                     *gl_template_get_name_with_desc   (const glTemplate   *template);
 
 const glTemplateLabelType *gl_template_get_first_label_type (const glTemplate   *template);
+
+gboolean                   gl_template_does_page_size_match (const glTemplate   *template,
+                                                             const gchar        *page_size);
+
+gboolean                   gl_template_does_category_match  (const glTemplate   *template,
+                                                             const gchar        *category);
 
 
 /*
@@ -222,6 +233,9 @@ glTemplate          *gl_template_new                  (const gchar         *name
 						       const gchar         *page_size,
 						       gdouble              page_width,
 						       gdouble              page_height);
+
+void                 gl_template_add_category         (glTemplate          *template,
+						       const gchar         *category);
 
 void                 gl_template_add_label_type       (glTemplate          *template,
 						       glTemplateLabelType *label_type);

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Glabels-categories>
+
+  <Category id="label"    _name="Label"/>
+  <Category id="card"     _name="Card"/>
+  <Category id="cd"       _name="CD/DVD label/insert"/>
+
+</Glabels-categories>

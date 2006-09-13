@@ -14,6 +14,7 @@
   <!-- Avery 5160 family: Address Labels, 1'' x 2_5/8'', 30 per sheet    x -->
   <!-- =================================================================== -->
   <Template name="Avery  5160" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="2.625in" height="1in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="10" x0="0.1875in" y0="0.5in" dx="2.75in" dy="1in"/>
@@ -56,6 +57,7 @@
   <!-- Avery 5161 family: Address Labels, 1'' x 4'', 20 per sheet        x -->
   <!-- =================================================================== -->
   <Template name="Avery  5161" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="4in" height="1in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="10" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="1in"/>
@@ -71,6 +73,7 @@
   <!-- Avery 5162 family: Address Labels, 1_1/3'' x 4'', 14 per sheet    x -->
   <!-- =================================================================== -->
   <Template name="Avery  5162" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="4in" height="1.333333333in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="7"
@@ -96,6 +99,7 @@
   <!-- Avery 6879 family: Address Labels, 1_1/4'' x 3_3/4'', 12 per sheetx -->
   <!-- =================================================================== -->
   <Template name="Avery  6879" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="3.75in" height="1.25in" round="0.0625in" waste="5pt">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="6" x0="0.375in" y0="1.125in" dx="4in" dy="1.5in"/>
@@ -107,6 +111,7 @@
   <!-- Avery 5159 family: Address Labels, 1_1/2'' x 4'', 14 per sheet      -->
   <!-- =================================================================== -->
   <Template name="Avery  5159" size="US-Letter" description="Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="4in" height="1.5in" round="0.0625in" waste="0in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="7" x0="0.15625in" y0="0.25in" dx="4.1875in" dy="1.5in"/>
@@ -117,6 +122,7 @@
   <!-- Avery 5163 family: Shipping Labels, 4'' x 2'', 10 per sheet       x -->
   <!-- =================================================================== -->
   <Template name="Avery  5163" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="4in" height="2in" round="0.125in">
       <Markup-margin size="0.125in"/>
       <Layout nx="2" ny="5" x0="0.1625in" y0="0.5in" dx="4.1875in" dy="2in"/>
@@ -143,6 +149,7 @@
   <!-- Avery 5164 family: Shipping Labels. 4'' x 3_1/3'', 6 per sheet    x -->
   <!-- =================================================================== -->
   <Template name="Avery  5164" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="4in" height="3.333333333in" round="0.125in">
       <Markup-margin size="0.125in"/>
       <Layout nx="2" ny="3" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="3.333333333in"/>
@@ -161,6 +168,7 @@
   <!-- Avery 5168 family:  Shipping Labels 5'' x 3_1/2'', 4 per sheet      -->
   <!-- =================================================================== -->
   <Template name="Avery  5168" size="US-Letter" description="Shipping Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="3.5in" height="5in" round="0.0625in" waste="0in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="2" x0="0.5in" y0="0.5in" dx="4in" dy="5in"/>
@@ -171,6 +179,7 @@
   <!-- Avery 5167 family: Address Labels, 1_3/4'' x 1/2'', 80 per sheet  x -->
   <!-- =================================================================== -->
   <Template name="Avery  5167" size="US-Letter" _description="Return Address Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="1.75in" height="0.5in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="4" ny="20" x0="0.28125in" y0="0.5in" dx="2.0625in" dy="0.5in"/>
@@ -194,6 +203,7 @@
   <!-- Avery 5196 family: Diskette Labels, 2_3/4'' x 2_3/4'', 9 per sheetx -->
   <!-- =================================================================== -->
   <Template name="Avery  5196" size="US-Letter" _description="Diskette Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="2.75in" height="2.75in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="3" x0="0.125in" y0="0.5in" dx="2.75in" dy="3in"/>
@@ -209,6 +219,7 @@
   <!-- Avery 5294 family: Round Labels, 12 per sheet.                      -->
   <!-- =================================================================== -->
   <Template name="Avery  5294" size="US-Letter" description="Round Labels">
+    <Meta category="label"/>
     <Label-round id="0" radius="90pt" waste="0pt">
       <Markup-margin size="7.2pt"/>
       <Layout nx="3" ny="4" x0="15.12pt" y0="30.6pt" dx="198pt" dy="181.08pt"/>
@@ -220,6 +231,7 @@
   <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet x -->
   <!-- =================================================================== -->
   <Template name="Avery  6490" size="US-Letter" _description="Diskette Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="2.6875in" height="2in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="5" x0="0.125in" y0="0.5in" dx="2.78125in" dy="2in"/>
@@ -233,6 +245,7 @@
   <!-- Avery 5366 family: Filing Labels, 2/3'' x 3_7/16'', 30 per sheet  x -->
   <!-- =================================================================== -->
   <Template name="Avery  5366" size="US-Letter" _description="Filing Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="3.4375in" height="0.666666667in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="15" x0="0.53125in" y0="0.5in" dx="4in" dy="0.666666667in"/>
@@ -263,6 +276,7 @@
   <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    x -->
   <!-- =================================================================== -->
   <Template name="Avery  5371" size="US-Letter" _description="Business Cards">
+    <Meta category="card"/>
     <Label-rectangle id="0" width="3.5in" height="2in" round="0">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="5" x0="0.75in" y0="0.5in" dx="3.5in" dy="2in"/>
@@ -313,9 +327,10 @@
   <!-- Avery 5388 family: Index Cards, 5'' x 3'', 3 per sheet              -->
   <!-- =================================================================== -->
   <Template name="Avery  5388" size="US-Letter" description="Index Cards">
+    <Meta category="card"/>
     <Label-rectangle id="0" width="5in" height="3in" round="0pt" waste="0pt">
-      <Layout nx="1" ny="3" x0="1.75in" y0="1in" dx="5in" dy="3in"/>
       <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="3" x0="1.75in" y0="1in" dx="5in" dy="3in"/>
     </Label-rectangle>
     <Alias name="Avery  5386"/>
     <Alias name="Avery  8388"/>
@@ -325,9 +340,10 @@
   <!-- Avery 5389 family: Post Cards, 6'' x 4'', 2 per sheet               -->
   <!-- =================================================================== -->
   <Template name="Avery  5389" size="US-Letter" description="Post cards">
+    <Meta category="card"/>
     <Label-rectangle id="0" width="6in" height="4in" round="0pt" waste="0pt">
-      <Layout nx="1" ny="2" x0="1.25in" y0="1.25in" dx="6in" dy="4.5in"/>
       <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="2" x0="1.25in" y0="1.25in" dx="6in" dy="4.5in"/>
     </Label-rectangle>
   </Template>
 
@@ -335,6 +351,7 @@
   <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     x -->
   <!-- =================================================================== -->
   <Template name="Avery  8373" size="US-Letter" _description="Business Cards">
+    <Meta category="card"/>
     <Label-rectangle id="0" width="3.5in" height="2in" round="0" waste="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="4" x0="0.5in" y0="0.75in" dx="4in" dy="2.5in"/>
@@ -348,6 +365,7 @@
   <!-- Avery 5395 family: Name Badge Labels, 2_1/3'' x 3_3/8'', 8 per sheetx -->
   <!-- =================================================================== -->
   <Template name="Avery  5395" size="US-Letter" _description="Name Badge Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="3.375in" height="2.333333333in" round="0.1875in" waste="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="4" x0="0.6875in" y0="0.583333333in" dx="3.75in" dy="2.5in"/>
@@ -361,7 +379,9 @@
   <!-- =================================================================== -->
   <!-- Avery 5824 family: CD/DVD Labels (face only), 2 per sheet         * -->
   <!-- =================================================================== -->
-  <Template name="Avery  5824" size="US-Letter" description="CD/DVD Labels">
+  <Template name="Avery  5824" size="US-Letter" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="cd"/>
     <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="144pt" y0="36pt" dx="351pt" dy="396pt"/>
@@ -373,6 +393,8 @@
   <!-- =================================================================== -->
   <Template name="Avery  5931-Disc" size="US-Letter"
          _description="CD/DVD Labels (Disc Labels)">
+    <Meta category="label"/>
+    <Meta category="cd"/>
     <Label-cd id="0" radius="2.3125in" hole="0.8125in" waste="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Markup-line x1="0" y1="2.3125in" x2="1.5in" y2="2.3125in"/>
@@ -408,6 +430,8 @@
   <!-- =================================================================== -->
   <Template name="Avery 5931-Spine" size="US-Letter" 
          _description="CD/DVD Labels (Spine Labels)">
+    <Meta category="label"/>
+    <Meta category="cd"/>
     <Label-rectangle id="0" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
       <Layout nx="2" ny="2" x0="0.5in" y0="0.734375in" dx="0.46875in" dy="4.84375in"/>
     </Label-rectangle>
@@ -438,6 +462,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5997-Face" size="US-Letter"
          _description="Video Tape Face Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="220" height="133" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
@@ -450,6 +475,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5997-Spine" size="US-Letter"
         _description="Video Tape Spine Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="414" height="48" round="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
@@ -461,6 +487,7 @@
   <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   x -->
   <!-- =================================================================== -->
   <Template name="Avery  8165" size="US-Letter" _description="Full Sheet Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="8.5in" height="11.in" round="0">
       <Markup-margin size="0.0625in"/>
       <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
@@ -518,6 +545,7 @@
   <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheetx  -->
   <!-- =================================================================== -->
   <Template name="Avery  3274.1" size="US-Letter" _description="Square Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="2.5in" height="2.5in" round="0">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
@@ -529,6 +557,7 @@
   <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet  x -->
   <!-- =================================================================== -->
   <Template name="Avery  3274.2" size="US-Letter" _description="Small Round Labels">
+    <Meta category="label"/>
     <Label-round id="0" radius="0.75in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="4" ny="5" x0="0.5in" y0="0.75in" dx="2in" dy="2in"/>
@@ -541,6 +570,7 @@
   <!-- Avery 3274.3 family: Large round stickers, 2_1/2'', 9 per sheet   x -->
   <!-- =================================================================== -->
   <Template name="Avery  3274.3" size="US-Letter" _description="Large Round Labels">
+    <Meta category="label"/>
     <Label-round id="0" radius="1.25in">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
@@ -553,6 +583,7 @@
   <!-- http://www.avery.com/help/tech_bulletin.jsp?tech_bull_code=152       -->
   <!-- ******************************************************************** -->
   <Template name="Avery LSK-8" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="1.13in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="4" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
@@ -560,12 +591,14 @@
   </Template>
   <!-- the LSK labels can be torn in half down the center -->
   <Template name="Avery LSK-8.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="1" width="1.13in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
     </Label-rectangle>
   </Template>
   <Template name="Avery LSK-5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="2" width="1.75in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="4" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
@@ -573,12 +606,14 @@
   </Template>
   <!-- the LSK labels can be torn in half down the center -->
   <Template name="Avery LSK-5.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="3" width="1.75in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
     </Label-rectangle>
   </Template>
   <Template name="Avery LSK-3" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="4" width="3.13in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>
@@ -586,6 +621,7 @@
   </Template>
   <!-- the LSK labels can be torn in half down the center -->
   <Template name="Avery LSK-3.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
     <Label-rectangle id="5" width="3.13in" height="0.5in" round="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>

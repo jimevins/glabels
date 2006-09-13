@@ -4,6 +4,7 @@ templatesdir = $(datadir)/glabels/templates
 
 templates_DATA = \
 	paper-sizes.xml \
+	categories.xml \
 	avery-us-templates.xml \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \

@@ -1,9 +1,9 @@
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
- *  libglabels.h:  libglabels master header file
+ *  xml-category.h:  category xml module header file
  *
- *  Copyright (C) 2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2006  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -23,16 +23,24 @@
  *  MA 02111-1307, USA
  */
 
-#ifndef __LIBGLABELS_H__
-#define __LIBGLABELS_H__
+#ifndef __XML_CATEGORY_H__
+#define __XML_CATEGORY_H__
 
-#include <libglabels/enums.h>
-#include <libglabels/paper.h>
-#include <libglabels/category.h>
-#include <libglabels/template.h>
-#include <libglabels/xml-paper.h>
-#include <libglabels/xml-category.h>
-#include <libglabels/xml-template.h>
-#include <libglabels/xml.h>
+#include <glib/gtypes.h>
+#include <glib/glist.h>
+#include <libxml/tree.h>
 
-#endif /* __LIBGLABELS_H__ */
+#include "category.h"
+
+G_BEGIN_DECLS
+
+GList       *gl_xml_category_read_categories_from_file (gchar        *utf8_filename);
+
+GList       *gl_xml_category_parse_categories_doc      (xmlDocPtr     categories_doc);
+
+glCategory  *gl_xml_category_parse_category_node       (xmlNodePtr    category_node);
+
+
+G_END_DECLS
+
+#endif /* __XML_CATEGORY_H__ */

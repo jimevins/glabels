@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
  *  template.c:  template module
  *
- *  Copyright (C) 2001-2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -143,22 +145,28 @@ gl_template_register (const glTemplate  *template)
 /* Get a list of valid template names for given page size                    */
 /*****************************************************************************/
 GList *
-gl_template_get_name_list (const gchar *page_size)
+gl_template_get_name_list (const gchar *page_size,
+                           const gchar *category)
 {
 	GList      *p_tmplt, *p_alias;
 	glTemplate *template;
 	gchar      *str;
 	GList      *names = NULL;
 
-	if (!templates) {
+	if (!templates)
+        {
 		gl_template_init ();
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
 		template = (glTemplate *) p_tmplt->data;
-		if (g_strcasecmp (page_size, template->page_size) == 0) {
+		if (gl_template_does_page_size_match (template, page_size) &&
+                    gl_template_does_category_match (template, category))
+                {
 			for (p_alias = template->aliases; p_alias != NULL;
-			     p_alias = p_alias->next) {
+			     p_alias = p_alias->next)
+                        {
 				str = g_strdup_printf("%s: %s",
 						      (gchar *) p_alias->data,
 						      template->description);
@@ -377,6 +385,66 @@ gl_template_new (const gchar         *name,
 }
 
 /*****************************************************************************/
+/* Does page size match given id?                                            */
+/*****************************************************************************/
+gboolean
+gl_template_does_page_size_match (const glTemplate   *template,
+                                  const gchar        *page_size)
+{
+	g_return_if_fail (template);
+
+        /* NULL matches everything. */
+        if (page_size == NULL)
+        {
+                return TRUE;
+        }
+
+        return g_strcasecmp(page_size, template->page_size) == 0;
+}
+
+/*****************************************************************************/
+/* Does category match given id?                                             */
+/*****************************************************************************/
+gboolean
+gl_template_does_category_match  (const glTemplate   *template,
+                                  const gchar        *category)
+{
+        GList *p;
+
+	g_return_if_fail (template);
+
+        /* NULL matches everything. */
+        if (category == NULL)
+        {
+                return TRUE;
+        }
+
+        for ( p=template->categories; p != NULL; p=p->next )
+        {
+                if (g_strcasecmp(category, p->data) == 0)
+                {
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
+/*****************************************************************************/
+/* Add category to category list of template.                                */
+/*****************************************************************************/
+void
+gl_template_add_category (glTemplate          *template,
+                          const gchar         *category)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (category);
+
+	template->categories = g_list_append (template->categories,
+                                              g_strdup (category));
+}
+ 
+/*****************************************************************************/
 /* Add label type structure to label type list of template.                  */
 /*****************************************************************************/
 void
@@ -430,7 +498,7 @@ gl_template_rect_label_type_new  (const gchar         *id,
 
 	return label_type;
 }
-                                                                               
+
 /*****************************************************************************/
 /* Create a new label type structure for a round label.                      */
 /*****************************************************************************/
@@ -609,6 +677,12 @@ gl_template_dup (const glTemplate *orig_template)
 				    orig_template->page_width,
 				    orig_template->page_height);
 
+	for ( p=orig_template->categories; p != NULL; p=p->next ) {
+
+                gl_template_add_category (template, p->data);
+
+	}
+
 	for ( p=orig_template->label_types; p != NULL; p=p->next ) {
 
 		label_type = (glTemplateLabelType *)p->data;
@@ -647,6 +721,15 @@ gl_template_free (glTemplate *template)
 
 		g_free (template->page_size);
 		template->page_size = NULL;
+
+		for ( p=template->categories; p != NULL; p=p->next ) {
+
+			g_free (p->data);
+			p->data = NULL;
+
+		}
+		g_list_free (template->categories);
+		template->categories = NULL;
 
 		for ( p=template->label_types; p != NULL; p=p->next ) {
 
