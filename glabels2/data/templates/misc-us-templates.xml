@@ -11,6 +11,8 @@
   <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
   <!-- =================================================================== -->
   <Template name="Southworth BC" size="US-Letter" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="252" height="144" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="36" y0="36" dx="288" dy="144"/>
@@ -22,6 +24,8 @@
   <!-- =================================================================== -->
   <Template name="Memorex CD Labels" size="US-Letter"
 	 _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="45" dx="0" dy="0"/>
@@ -34,6 +38,8 @@
   <!-- =================================================================== -->
   <Template name="Neato USCD2lbl.NTT" size="US-Letter"
          _description="CD/DVD Labels (face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
@@ -45,6 +51,8 @@
   <!-- =================================================================== -->
   <Template name="Neato USCD2lbl Rectangles" size="US-Letter"
 	 _description="CD Template Rectangles">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="77.04" height="234.36" round="10">
       <Markup-margin size="2.016"/>
       <Layout nx="2" ny="1" x0="51.3" y0="279.72" dx="433.44" dy="0"/>
@@ -56,6 +64,8 @@
   <!-- =================================================================== -->
   <Template name="Neato HandiCD-R" size="US-Letter"
 	 _description="Business Card CD">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="108" width="171" hole="58" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="36.5" y0="54" dx="184.5" dy="234"/>
@@ -67,6 +77,8 @@
   <!-- =================================================================== -->
   <Template name="Stomper PRO CD" size="US-Letter"
          _description="PRO CD Labels 2-up (face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="34" y0="43" dx="0" dy="0"/>
@@ -76,6 +88,8 @@
 
   <Template name="Stomper PRO Zip" size="US-Letter"
          _description="PRO CD Labels 2-up (Face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="168" height="142" round="0">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="407" y0="68" dx="0" dy="142"/>
@@ -85,6 +99,8 @@
 
   <Template name="Stomper PRO Spine" size="US-Letter"
          _description="PRO CD Labels 2-up (CD spine only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="288" height="20" round="0">
       <Markup-margin size="2"/>
       <Layout nx="2" ny="1" x0="18" y0="385" dx="288" dy="0"/>
@@ -96,6 +112,8 @@
   <!-- ===================================================================-->
   <Template name="Meritline Mini-CD" size="US-Letter"
    _description="Mini-CD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="110.5" hole="57.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="2" x0="48.4" y0="47.6" dx="299.5" dy="481.5"/>
@@ -111,6 +129,8 @@
   <!-- ===================================================================-->
   <Template name="Neato Slimline CD Case" size="US-Letter"
          _description="Slimline CD Case (rightside up)">
+    <Meta category="card"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="394.5" height="342.5" round="0">
       <Markup-margin size="7.5"/>
       <Layout nx="1" ny="2" x0="130" y0="41.9" dx="0" dy="363"/>
@@ -118,6 +138,8 @@
   </Template>
   <Template name="Neato Slimline CD Case, spine" size="US-Letter"
          _description="Slimline CD Case (upside down)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="394.5" height="342.5" round="0">
       <Markup-margin size="7.5"/>
       <Layout nx="1" ny="2" x0="96.5" y0="41.9" dx="0" dy="363"/>
@@ -129,6 +151,8 @@
   <!-- =================================================================== -->
   <Template name="Great Gizmos" size="US-Letter"
          _description="CD/DVD Labels (face only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="42.52" dx="0" dy="374.17"/>
@@ -140,6 +164,8 @@
   <!-- =================================================================== -->
   <Template name="Imation-SoniX No.5112 15954" size="US-Letter"
          _description="CD/DVD Labels (Face Only)">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="167.8" hole="18.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="40.5" y0="370" dx="0" dy="0"/>
@@ -150,6 +176,8 @@
   <!-- Netc Label Stock: DLT Labels, (www.netclabels.com), 30 per sheet    -->
   <!-- =================================================================== -->
   <Template name="Netc 749303-70001 " size="US-Letter" _description="DLT Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="162" height="59.4" round="0">
       <Markup-margin size="18"/>
       <Layout nx="3" ny="10" x0="36" y0="45" dx="189" dy="72"/>
@@ -160,6 +188,7 @@
   <!-- Tough-Tags TTLW-2016 Microtube labels, 85 per sheet.                -->
   <!-- =================================================================== -->
   <Template name="Tough-Tags TTLW-2016" size="US-Letter" _description="Microtube labels">
+    <Meta category="label"/>
     <Label-rectangle id="0" width="92.16" height="36" round="5">
       <Markup-margin size="5"/>
       <Layout nx="5" ny="17" x0="68" y0="4.17" dx="100.8" dy="45.3"/>
@@ -170,6 +199,8 @@
   <!-- Kingdom L Cassette Labels, 12 per sheet.                            -->
   <!-- =================================================================== -->
   <Template name="Kingdom L" size="US-Letter" _description="Cassette Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="252pt" height="117pt" round="9pt" x_waste="2.376pt" y_waste="2.376pt">
       <Markup-margin size="9pt"/>
       <Layout nx="2" ny="6" x0="33.12pt" y0="27pt" dx="261pt" dy="126.144pt"/>

@@ -11,6 +11,7 @@
   <!-- =================================================================== -->
   <Template name="Sigel LP 800" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="85.0mm" height="55.0mm" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="15.0mm" y0="10.0mm" dx="95.0mm" dy="55.0mm"/>
@@ -24,6 +25,7 @@
   <!-- =================================================================== -->
   <Template name="Sigel DP 830/DP 930" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="240.9" height="155.9" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="31" dx="269" dy="156"/>
@@ -47,6 +49,7 @@
   <Template name="Agipa 119488" size="A4"
 	 _description="Agipa 119488: Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="255" height="142" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="43" y0="67" dx="255" dy="142"/>
@@ -58,6 +61,7 @@
   <!-- =================================================================== -->
   <Template name="Ednet BC" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="253" height="145" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="40" y0="59" dx="253" dy="145"/>
@@ -80,6 +84,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 4620" size="A4" _description="Mailing Labels-2 columns">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="298" height="105" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="8" x0="0" y0="0" dx="298" dy="105"/>
@@ -91,6 +96,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 4464" size="A4" _description="Mailing Labels-3 columns">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="199" height="105" round="0">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="8" x0="0" y0="0" dx="199" dy="105"/>
@@ -102,7 +108,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 5079" size="A4" description="CD/DVD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="133.228pt" y0="46.7717pt" dx="346.819pt" dy="419.528pt"/>
@@ -114,7 +120,7 @@
   <!-- ===================================================================-->
   <Template name="Neato A4 CD" size="A4" _description="CD/DVD Labels (face only)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="125" y0="68.890" dx="0" dy="360"/>        
@@ -126,6 +132,7 @@
   <!-- =================================================================== -->
   <Template name="DataBecker" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="255" height="142" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="36" y0="69.890" dx="255" dy="142"/>
@@ -137,6 +144,7 @@
   <!-- =================================================================== -->
   <Template name="DataBecker 0491" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="90mm" height="50mm" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="12.5mm" y0="15mm" dx="94.55mm" dy="54mm"/>
@@ -148,6 +156,7 @@
   <!-- =================================================================== -->
   <Template name="Dataline 57125" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="86.00mm" height="54.00mm" round="0">
       <Markup-margin size="0mm"/>
       <Layout nx="2" ny="5" x0="16mm" y0="11mm" dx="91mm" dy="55.625mm"/>
@@ -170,6 +179,7 @@
   <!-- ====================================================== -->
   <Template name="Alpi 02793" size="A4" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="255.118" height="144" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="42.5197" y0="62.3622" dx="255.118" dy="144"/>
@@ -181,6 +191,7 @@
   <!-- =================================================================== -->
   <Template name="APLI 1999" size="A4" _description="Mailing Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="281" height="193" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="4" x0="13" y0="21.890" dx="289" dy="194"/>
@@ -218,6 +229,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 4828" size="A4" _description="Video Labels (face only)">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="223.086" height="131.811" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="6" x0="38.5512" y0="24.9449" dx="295.086" dy="131.811"/>
@@ -230,6 +242,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 8803" size="A4" _description="Diskette Labels (face only)">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="198.425" height="144" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="60.9448" y0="60.9448" dx="270.425" dy="144"/>
@@ -292,6 +305,7 @@
   <!-- =================================================================== -->
   <Template name="Herma 4625" size="A4" _description="Mailing Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="297.638" height="119.905" round="0">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="7" x0="0" y0="0" dx="297.638" dy="119.905"/>
@@ -317,7 +331,7 @@
   <!-- ===================================================================-->
   <Template name="DataBecker 0335" size="A4" _description="CD/DVD Labels Standard Format (face only)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="164.409" hole="58.1102" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="133.228" y0="46.7716" dx="0" dy="419.527"/>
@@ -330,7 +344,7 @@
   <!-- ===================================================================-->
   <Template name="LeLabel 2001.018" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="168.08" hole="54.69" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="128.556" y0="42.52" dx="0" dy="0"/>
@@ -353,7 +367,7 @@
   <!-- ===================================================================-->
   <Template name="MediaLine 760-50475 A4 CD" size="A4" description="CD/DVD Labels (face only)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="133" y0="45" dx="0" dy="422"/>
@@ -365,6 +379,7 @@
   <!-- ===================================================================-->
   <Template name="Encre.com BCV10" size="A4" description="Business Cards">  
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="243.78" height="153.07">  
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="48.19" y0="42.50" dx="255.12" dy="157.32"/>  
@@ -388,7 +403,7 @@
   <Template name="Stomper PRO A4" size="A4"
          _description="PRO CD Labels 2-up (face only)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58" waste="10">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="1" x0="34.5" y0="47" dx="0" dy="0"/>
@@ -401,7 +416,7 @@
   <!-- =================================================================== -->
   <Template name="Pressit  50blank" size="A4" _description="CD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="1" x0="30.096pt" y0="70.416pt" dx="351pt" dy="351pt"/>
@@ -414,7 +429,7 @@
   <!-- =================================================================== -->
   <Template name="Ryman Standard CD/DVD" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="165.827pt" hole="58.1102pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="131.811pt" y0="60.6614pt" dx="245.622pt" dy="388.346pt"/>
@@ -426,7 +441,7 @@
   <!-- =================================================================== -->
   <Template name="Fellows 04715" size="A4" description="CD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="133.2pt" y0="50.4pt" dx="244.276pt" dy="363.6pt"/>
@@ -454,11 +469,12 @@
 
 
   <!-- ******************************************************************** -->
-  <!-- Tamplates for A4 and A3 media, size 50 x 90 mm                       -->
+  <!-- Templates for A4 and A3 media, size 50 x 90 mm                       -->
   <!-- ******************************************************************** -->
   
   <Template name="Russian A3 5x9" size="A3" description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="90mm" height="50mm" round="0">
       <Layout nx="3" ny="8" x0="14mm" y0="10mm" dx="90mm" dy="50mm"/>
       <Markup-margin size="5pt"/>
@@ -467,6 +483,7 @@
 
   <Template name="Russian A4 5x9" size="A4" description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="50mm" height="90mm" round="0">
       <Layout nx="4" ny="3" x0="5mm" y0="13mm" dx="50mm" dy="90mm"/>
       <Markup-margin size="5pt"/>

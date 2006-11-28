@@ -15,6 +15,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5160" size="US-Letter" _description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="2.625in" height="1in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="10" x0="0.1875in" y0="0.5in" dx="2.75in" dy="1in"/>
@@ -51,6 +52,7 @@
     <Alias name="Avery 25160"/>
     <!-- Look alikes -->
     <Alias name="Maco ll5805"/>
+    <Alias name="Worldlabel OL875"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -58,6 +60,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5161" size="US-Letter" _description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="4in" height="1in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="10" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="1in"/>
@@ -67,6 +70,8 @@
     <Alias name="Avery  8161"/>
     <Alias name="Avery  8461"/>
     <Alias name="Avery 18161"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL75"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -74,6 +79,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5162" size="US-Letter" _description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="4in" height="1.333333333in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="7"
@@ -93,6 +99,8 @@
     <Alias name="Avery 15162"/>
     <Alias name="Avery 18162"/>
     <Alias name="Avery 18662"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL100"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -100,6 +108,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  6879" size="US-Letter" _description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="3.75in" height="1.25in" round="0.0625in" waste="5pt">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="6" x0="0.375in" y0="1.125in" dx="4in" dy="1.5in"/>
@@ -112,6 +121,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5159" size="US-Letter" description="Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="4in" height="1.5in" round="0.0625in" waste="0in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="7" x0="0.15625in" y0="0.25in" dx="4.1875in" dy="1.5in"/>
@@ -123,6 +133,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5163" size="US-Letter" _description="Shipping Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="4in" height="2in" round="0.125in">
       <Markup-margin size="0.125in"/>
       <Layout nx="2" ny="5" x0="0.1625in" y0="0.5in" dx="4.1875in" dy="2in"/>
@@ -143,6 +154,8 @@
     <Alias name="Avery 15163"/>
     <Alias name="Avery 18163"/>
     <Alias name="Avery 18663"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL125"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -150,6 +163,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5164" size="US-Letter" _description="Shipping Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="4in" height="3.333333333in" round="0.125in">
       <Markup-margin size="0.125in"/>
       <Layout nx="2" ny="3" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="3.333333333in"/>
@@ -162,6 +176,8 @@
     <Alias name="Avery  8164"/>
     <Alias name="Avery  8254"/>
     <Alias name="Avery  8464"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL150"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -169,6 +185,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5168" size="US-Letter" description="Shipping Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="3.5in" height="5in" round="0.0625in" waste="0in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="2" x0="0.5in" y0="0.5in" dx="4in" dy="5in"/>
@@ -180,6 +197,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5167" size="US-Letter" _description="Return Address Labels">
     <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="1.75in" height="0.5in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="4" ny="20" x0="0.28125in" y0="0.5in" dx="2.0625in" dy="0.5in"/>
@@ -197,6 +215,8 @@
     <Alias name="Avery 15267"/>
     <Alias name="Avery 18167"/>
     <Alias name="Avery 18667"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL25"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -204,6 +224,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5196" size="US-Letter" _description="Diskette Labels">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="2.75in" height="2.75in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="3" x0="0.125in" y0="0.5in" dx="2.75in" dy="3in"/>
@@ -213,6 +234,8 @@
     <Alias name="Avery  5996"/>
     <Alias name="Avery  8196"/>
     <Alias name="Avery  8197"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL225"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -220,6 +243,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5294" size="US-Letter" description="Round Labels">
     <Meta category="label"/>
+    <Meta category="round-label"/>
     <Label-round id="0" radius="90pt" waste="0pt">
       <Markup-margin size="7.2pt"/>
       <Layout nx="3" ny="4" x0="15.12pt" y0="30.6pt" dx="198pt" dy="181.08pt"/>
@@ -232,6 +256,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  6490" size="US-Letter" _description="Diskette Labels">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="2.6875in" height="2in" round="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="5" x0="0.125in" y0="0.5in" dx="2.78125in" dy="2in"/>
@@ -277,6 +302,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5371" size="US-Letter" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="3.5in" height="2in" round="0">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="5" x0="0.75in" y0="0.5in" dx="3.5in" dy="2in"/>
@@ -341,6 +367,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5389" size="US-Letter" description="Post cards">
     <Meta category="card"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="6in" height="4in" round="0pt" waste="0pt">
       <Markup-margin size="0.125in"/>
       <Layout nx="1" ny="2" x0="1.25in" y0="1.25in" dx="6in" dy="4.5in"/>
@@ -352,6 +379,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  8373" size="US-Letter" _description="Business Cards">
     <Meta category="card"/>
+    <Meta category="business-card"/>
     <Label-rectangle id="0" width="3.5in" height="2in" round="0" waste="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="2" ny="4" x0="0.5in" y0="0.75in" dx="4in" dy="2.5in"/>
@@ -381,7 +409,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  5824" size="US-Letter" _description="CD/DVD Labels">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="144pt" y0="36pt" dx="351pt" dy="396pt"/>
@@ -394,7 +422,7 @@
   <Template name="Avery  5931-Disc" size="US-Letter"
          _description="CD/DVD Labels (Disc Labels)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-cd id="0" radius="2.3125in" hole="0.8125in" waste="0.0625in">
       <Markup-margin size="0.0625in"/>
       <Markup-line x1="0" y1="2.3125in" x2="1.5in" y2="2.3125in"/>
@@ -431,7 +459,7 @@
   <Template name="Avery 5931-Spine" size="US-Letter" 
          _description="CD/DVD Labels (Spine Labels)">
     <Meta category="label"/>
-    <Meta category="cd"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
       <Layout nx="2" ny="2" x0="0.5in" y0="0.734375in" dx="0.46875in" dy="4.84375in"/>
     </Label-rectangle>
@@ -463,11 +491,14 @@
   <Template name="Avery  5997-Face" size="US-Letter"
          _description="Video Tape Face Labels">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="220" height="133" round="5">
       <Markup-margin size="5"/>
       <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
     </Label-rectangle>
     <Alias name="Avery  5199-Face"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL1125"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -476,11 +507,14 @@
   <Template name="Avery  5997-Spine" size="US-Letter"
         _description="Video Tape Spine Labels">
     <Meta category="label"/>
+    <Meta category="media"/>
     <Label-rectangle id="0" width="414" height="48" round="5">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
     </Label-rectangle>
     <Alias name="Avery  5199-Spine"/>
+    <!-- Look alikes -->
+    <Alias name="Worldlabel OL1150"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -538,7 +572,9 @@
     <Alias name="Avery 53240"/>
     <Alias name="Avery 75287"/>
     <Alias name="Avery 75299"/>
+    <!-- Look alikes -->
     <Alias name="IP Invent It! #00064-3"/>
+    <Alias name="Worldlabel OL175"/>
   </Template>
 
   <!-- =================================================================== -->
@@ -546,6 +582,8 @@
   <!-- =================================================================== -->
   <Template name="Avery  3274.1" size="US-Letter" _description="Square Labels">
     <Meta category="label"/>
+    <Meta category="square-label"/>
+    <Meta category="rectangle-label"/>
     <Label-rectangle id="0" width="2.5in" height="2.5in" round="0">
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
@@ -558,6 +596,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  3274.2" size="US-Letter" _description="Small Round Labels">
     <Meta category="label"/>
+    <Meta category="round-label"/>
     <Label-round id="0" radius="0.75in">
       <Markup-margin size="0.0625in"/>
       <Layout nx="4" ny="5" x0="0.5in" y0="0.75in" dx="2in" dy="2in"/>
@@ -571,6 +610,7 @@
   <!-- =================================================================== -->
   <Template name="Avery  3274.3" size="US-Letter" _description="Large Round Labels">
     <Meta category="label"/>
+    <Meta category="round-label"/>
     <Label-round id="0" radius="1.25in">
       <Markup-margin size="5"/>
       <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
