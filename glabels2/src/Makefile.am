@@ -1,4 +1,5 @@
 LIB_BARCODE_DIR = ../barcode-0.98
+LIB_IEC16022_DIR = ../iec16022-0.2.1
 
 SUBDIRS= pixmaps stock-pixmaps mygal recent-files
 
@@ -9,6 +10,7 @@ INCLUDES = \
 	-I$(top_builddir) 					\
 	$(GLABELS_CFLAGS) 					\
 	-I$(LIB_BARCODE_DIR)					\
+	-I$(LIB_IEC16022_DIR)					\
 	-DPREFIX=\""$(prefix)"\"                        	\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\
 	-DDATADIR=\""$(datadir)"\"                      	\
@@ -20,19 +22,21 @@ INCLUDES = \
 
 glabels_LDFLAGS = -export-dynamic
 
-glabels_LDADD = 			\
-	$(GLABELS_LIBS)			\
-	../libglabels/libglabels.la	\
-	mygal/libmygal.la		\
-	recent-files/librecent.la	\
-	$(LIB_BARCODE_DIR)/libbarcode.la
+glabels_LDADD = 				\
+	$(GLABELS_LIBS)				\
+	../libglabels/libglabels.la		\
+	mygal/libmygal.la			\
+	recent-files/librecent.la		\
+	$(LIB_BARCODE_DIR)/libbarcode.la 	\
+	$(LIB_IEC16022_DIR)/libiec16022.la
 
 glabels_batch_LDFLAGS = -export-dynamic
 
-glabels_batch_LDADD = 			\
-	$(GLABELS_LIBS)			\
-	../libglabels/libglabels.la	\
-	$(LIB_BARCODE_DIR)/libbarcode.la
+glabels_batch_LDADD = 				\
+	$(GLABELS_LIBS)				\
+	../libglabels/libglabels.la		\
+	$(LIB_BARCODE_DIR)/libbarcode.la	\
+	$(LIB_IEC16022_DIR)/libiec16022.la
 
 BUILT_SOURCES = 			\
 	marshal.c			\
@@ -120,6 +124,8 @@ glabels_SOURCES = 			\
 	bc-gnubarcode.h			\
 	bc-postnet.c			\
 	bc-postnet.h			\
+	bc-iec16022.c			\
+	bc-iec16022.h			\
 	label.c				\
 	label.h				\
 	label-object.c			\
@@ -192,6 +198,8 @@ glabels_batch_SOURCES = 		\
 	bc-gnubarcode.h			\
 	bc-postnet.c			\
 	bc-postnet.h			\
+	bc-iec16022.c			\
+	bc-iec16022.h			\
 	label.c				\
 	label.h				\
 	label-object.c			\
@@ -254,10 +262,15 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.la
+$(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.la \
+		 $(LIB_IEC16022_DIR)/libiec16022.la \
+		 ../libglabels/libglabels.la
 
 $(LIB_BARCODE_DIR)/libbarcode.la:
 	cd $(LIB_BARCODE_DIR); $(MAKE)
+
+$(LIB_IEC16022_DIR)/libiec16022.la:
+	cd $(LIB_IEC16022_DIR); $(MAKE)
 
 ../libglabels/libglabels.la:
 	cd ../libglabels; $(MAKE)

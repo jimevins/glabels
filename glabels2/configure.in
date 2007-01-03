@@ -181,6 +181,7 @@ dnl ---------------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
 barcode-0.98/Makefile
+iec16022-0.2.1/Makefile
 libglabels/Makefile
 libglabels/libglabels.pc
 src/Makefile

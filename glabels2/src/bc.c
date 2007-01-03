@@ -30,6 +30,7 @@
 
 #include "bc-postnet.h"
 #include "bc-gnubarcode.h"
+#include "bc-iec16022.h"
 
 #include "debug.h"
 
@@ -59,7 +60,7 @@ typedef struct {
 /* Private globals.                                       */
 /*========================================================*/
 
-Backend backends[] = {
+static const Backend backends[] = {
 
 	{ "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
@@ -144,6 +145,9 @@ Backend backends[] = {
 
 	{ "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
+
+	{ "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
+	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
 	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
 

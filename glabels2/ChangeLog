@@ -1,3 +1,41 @@
+2007-01-02  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* iec16022-0.2.1/BUGS:
+	* iec16022-0.2.1/CHANGELOG:
+	* iec16022-0.2.1/CREDITS:
+	* iec16022-0.2.1/INSTALL:
+	* iec16022-0.2.1/LICENSE:
+	* iec16022-0.2.1/Makefile.am:
+	* iec16022-0.2.1/Makefile.dist:
+	* iec16022-0.2.1/README:
+	* iec16022-0.2.1/README.glabels:
+	* iec16022-0.2.1/TODO:
+	* iec16022-0.2.1/iec16022.1:
+	* iec16022-0.2.1/iec16022.c:
+	* iec16022-0.2.1/iec16022ecc200.c:
+	* iec16022-0.2.1/iec16022ecc200.h:
+	* iec16022-0.2.1/image.c:
+	* iec16022-0.2.1/image.h:
+	* iec16022-0.2.1/reedsol.c:
+	* iec16022-0.2.1/reedsol.h:
+	* iec16022-0.2.1/test/testsuite-example.bin:
+	* iec16022-0.2.1/test/testsuite-example.eps:
+	* iec16022-0.2.1/test/testsuite-example.hex:
+	* iec16022-0.2.1/test/testsuite-example.png:
+	* iec16022-0.2.1/test/testsuite-example.text:
+	* iec16022-0.2.1/test/testsuite.sh:
+		Include modified copy of iec16022-0.2.1 to provide encoding
+		support for datamatrix 2D barcodes.
+	* src/Makefile.am:
+	* src/bc-iec16022.c:
+	* src/bc-iec16022.h:
+	* src/bc.c:
+		Added initial datamatrix 2D barcode backend to barcode code.
+	* INSTALL:
+	* gtk-doc.make:
+		Automatic updates to later versions of these files.
+
 2006-11-28  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-iso-templates.xml:
