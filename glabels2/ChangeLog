@@ -1,3 +1,18 @@
+2007-01-03  Jim Evins  <evins@snaught.com>
+
+	* src/recent-files/*
+		Removed EggRecent stuff.
+	* configure.in:
+	* src/Makefile.am:
+	* src/file.c:
+	* src/recent.c:
+	* src/recent.h:
+	* src/ui-commands.c:
+	* src/ui-commands.h:
+	* src/ui.c:
+		Ported from EggRecent to GtkRecentManager.
+	
+
 2007-01-02  Jim Evins  <evins@snaught.com>
 
 	* configure.in:

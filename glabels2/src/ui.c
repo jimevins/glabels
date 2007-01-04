@@ -27,8 +27,11 @@
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-view-uimanager.h"
+#include <gtk/gtkrecentchoosermenu.h>
+#include <gtk/gtkmenuitem.h>
+#include <gtk/gtkstock.h>
+#include <gtk/gtktoolbar.h>
+#include <gtk/gtkstatusbar.h>
 #include <string.h>
 
 #include "ui-util.h"
@@ -79,7 +82,7 @@ static void menu_item_select_cb            (GtkMenuItem     *proxy,
 static void menu_item_deselect_cb          (GtkMenuItem     *proxy,
 					    glWindow        *window);
 
-static char *recent_tooltip_func           (EggRecentItem   *item,
+static char *recent_tooltip_func           (GtkRecentInfo   *item,
 					    gpointer         user_data);
 
 
@@ -92,7 +95,7 @@ static GtkActionEntry entries[] = {
 
 	/* Menu entries. */
 	{ "FileMenu",                NULL, N_("_File") },
-	{ "FileRecentsMenu",         NULL, N_("Recent _Files") },
+	{ "FileRecentsMenu",         NULL, N_("Open Recent _Files") },
 	{ "EditMenu",                NULL, N_("_Edit") },
 	{ "ViewMenu",                NULL, N_("_View") },
 	{ "ViewMainToolBarMenu",     NULL, N_("Customize Main Toolbar") },
@@ -511,9 +514,7 @@ static const gchar *ui_info =
 "		<menu action='FileMenu'>"
 "			<menuitem action='FileNew' />"
 "			<menuitem action='FileOpen' />"
-"                       <menu action='FileRecentsMenu'>"
-"			        <placeholder name='FileRecentsPlaceHolder' />"
-"                       </menu>"
+"			<menuitem action='FileRecentsMenu' />"
 "			<separator />"
 "			<menuitem action='FileSave' />"
 "			<menuitem action='FileSaveAs' />"
@@ -762,7 +763,7 @@ gl_ui_new (glWindow *window)
 	GtkUIManager            *ui;
 	GtkActionGroup          *actions;
 	GError                  *error = NULL;
-	EggRecentViewUIManager  *recent_view;
+	GtkWidget               *recent_menu;
 
 	gl_debug (DEBUG_UI, "START");
 
@@ -802,16 +803,13 @@ gl_ui_new (glWindow *window)
 	/* Set view grid and markup visibility according to prefs */
 	set_view_style (ui);
 		
-	/* add an eggRecentView */
-        recent_view  =
-		egg_recent_view_uimanager_new (ui,
-					       "/ui/MenuBar/FileMenu/FileRecentsMenu/FileRecentsPlaceHolder",
-					       G_CALLBACK (gl_ui_cmd_file_open_recent),
-					       window);
-	egg_recent_view_uimanager_show_icons (recent_view, FALSE);
-	egg_recent_view_uimanager_set_tooltip_func (recent_view, recent_tooltip_func, NULL);
-	egg_recent_view_set_model (EGG_RECENT_VIEW (recent_view), gl_recent_get_model ());
-	g_object_set_data (G_OBJECT (ui), "recent-view", recent_view);
+	/* add an Open Recents Submenu */
+        recent_menu  = gl_recent_create_menu ();
+	g_signal_connect (G_OBJECT (recent_menu), "item-activated",
+			  G_CALLBACK (gl_ui_cmd_file_open_recent), window);
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (gtk_ui_manager_get_widget (ui, "/MenuBar/FileMenu/FileRecentsMenu")),
+				   recent_menu);
+
 
 	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
 
@@ -829,12 +827,6 @@ gl_ui_unref (GtkUIManager *ui)
 	GObject *recent_view;
 
 	gl_debug (DEBUG_UI, "START");
-
-	/* Pull out recent view to unreference. */
-	recent_view = g_object_get_data (G_OBJECT(ui), "recent-view");
-	if (recent_view) {
-		g_object_unref (recent_view);
-	}
 
 	g_object_unref(ui);
 
@@ -1189,24 +1181,4 @@ menu_item_deselect_cb (GtkMenuItem *proxy,
 	gtk_statusbar_pop (GTK_STATUSBAR (window->status_bar),
 			   window->menu_tips_context_id);
 }
-
-/*---------------------------------------------------------------------------*/
-/** PRIVATE.  Tooltip function for recent file menu items.                   */
-/*---------------------------------------------------------------------------*/
-static char *
-recent_tooltip_func (EggRecentItem *item, gpointer user_data)
-{
-	char *tip;
-	char *uri_for_display;
-
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
-	g_return_val_if_fail (uri_for_display != NULL, NULL);
-
-	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
-
-	g_free (uri_for_display);
-
-	return tip;
-}
-
 

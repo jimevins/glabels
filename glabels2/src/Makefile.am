@@ -1,7 +1,7 @@
 LIB_BARCODE_DIR = ../barcode-0.98
 LIB_IEC16022_DIR = ../iec16022-0.2.1
 
-SUBDIRS= pixmaps stock-pixmaps mygal recent-files
+SUBDIRS= pixmaps stock-pixmaps mygal
 
 bin_PROGRAMS = glabels glabels-batch
 
@@ -26,7 +26,6 @@ glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
 	mygal/libmygal.la			\
-	recent-files/librecent.la		\
 	$(LIB_BARCODE_DIR)/libbarcode.la 	\
 	$(LIB_IEC16022_DIR)/libiec16022.la
 

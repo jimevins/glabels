@@ -325,7 +325,6 @@ open_response (GtkDialog     *chooser,
 	gchar 		 *filename;
 	GtkWidget        *dialog;
 	gint              ret;
-	EggRecentModel 	 *recent;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -422,7 +421,6 @@ gl_file_open_real (const gchar     *filename,
 	gchar            *abs_filename;
 	glLabel          *label;
 	glXMLLabelStatus  status;
-	EggRecentModel   *recent;
 	gint              ret;
 	GtkWidget        *new_window;
 
@@ -462,7 +460,7 @@ gl_file_open_real (const gchar     *filename,
 			gtk_widget_show_all (new_window);
 		}
 
-		gl_recent_add_uri (abs_filename);
+		gl_recent_add_utf8_filename (abs_filename);
 
 		if (open_path != NULL)
 			g_free (open_path);
@@ -486,7 +484,6 @@ gl_file_save (glLabel   *label,
 	glXMLLabelStatus  status;
 	GError           *error = NULL;
 	gchar            *filename = NULL;
-	EggRecentModel 	 *recent;
 
 	gl_debug (DEBUG_FILE, "");
 
@@ -538,7 +535,7 @@ gl_file_save (glLabel   *label,
 	{
 		gl_debug (DEBUG_FILE, "OK");
 
-		gl_recent_add_uri (filename);
+		gl_recent_add_utf8_filename (filename);
 
 		g_free (filename);
 
@@ -625,7 +622,6 @@ save_as_response (GtkDialog     *chooser,
 	gchar            *raw_filename, *filename, *full_filename;
 	GtkWidget        *dialog;
 	glXMLLabelStatus  status;
-	EggRecentModel   *recent;
 	gboolean         *saved_flag;
 	gboolean          cancel_flag = FALSE;
 
@@ -712,7 +708,7 @@ save_as_response (GtkDialog     *chooser,
 
 					*saved_flag = TRUE;
 
-					gl_recent_add_uri (filename);
+					gl_recent_add_utf8_filename (filename);
 
 					if (save_path != NULL)
 						g_free (save_path);

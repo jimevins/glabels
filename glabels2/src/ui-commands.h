@@ -26,6 +26,7 @@
 #define __COMMANDS_H__
 
 #include <gtk/gtkaction.h>
+#include <gtk/gtkrecentchooser.h>
 #include <gtk/gtktoggleaction.h>
 #include "window.h"
 
@@ -43,8 +44,8 @@ void gl_ui_cmd_file_template_designer   (GtkAction   *action,
 void gl_ui_cmd_file_open                (GtkAction   *action,
 					 glWindow    *window);
 
-void gl_ui_cmd_file_open_recent         (GtkAction   *action,
-					 glWindow    *window);
+void gl_ui_cmd_file_open_recent         (GtkRecentChooser *chooser,
+					 glWindow         *window);
 
 void gl_ui_cmd_file_save                (GtkAction   *action,
 					 glWindow    *window);

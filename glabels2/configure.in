@@ -188,7 +188,6 @@ src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
 src/mygal/Makefile
-src/recent-files/Makefile
 data/Makefile
 data/templates/Makefile
 data/pixmaps/Makefile

@@ -31,8 +31,6 @@
 #include <gtk/gtkaboutdialog.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-url.h>
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-view-uimanager.h"
 
 #include "view.h"
 #include "file.h"
@@ -125,26 +123,30 @@ gl_ui_cmd_file_open (GtkAction *action,
 /** File/Open-Recent command.                                               */
 /****************************************************************************/
 void 
-gl_ui_cmd_file_open_recent (GtkAction *action,
-                            glWindow  *window)
+gl_ui_cmd_file_open_recent (GtkRecentChooser *chooser,
+                            glWindow         *window)
 {
-        EggRecentViewUIManager *recent_view;
-        EggRecentItem          *item;
-        gchar                  *utf8_filename;
+        GtkRecentInfo *item;
+        gchar         *utf8_filename;
 
         gl_debug (DEBUG_COMMANDS, "START");
 
-        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (chooser && GTK_IS_RECENT_CHOOSER(chooser));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        recent_view = g_object_get_data (G_OBJECT(window->ui), "recent-view");
-        g_return_if_fail (recent_view && EGG_IS_RECENT_VIEW_UIMANAGER (recent_view));
+        item = gtk_recent_chooser_get_current_item (chooser);
+        if (!item)
+                return;
 
-        item = egg_recent_view_uimanager_get_item (recent_view, action);
-        utf8_filename = gl_recent_get_filename (item);
+        utf8_filename = gl_recent_get_utf8_filename (item);
 
+        gl_debug (DEBUG_COMMANDS, "Selected %s\n", utf8_filename);
+#if 1
         gl_file_open_recent (utf8_filename, window);
+#endif
 
+        gtk_recent_info_unref (item);
+        
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
