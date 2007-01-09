@@ -1,3 +1,7 @@
+2007-01-08  Jim Evins  <evins@snaught.com>
+	* configure.in:
+		Updated dependencies.  Set version to 2.1.pre4cvs.
+
 2007-01-03  Jim Evins  <evins@snaught.com>
 
 	* src/recent-files/*
