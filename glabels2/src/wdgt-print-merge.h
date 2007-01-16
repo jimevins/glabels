@@ -66,7 +66,8 @@ GtkWidget *gl_wdgt_print_merge_new        (glLabel          *label);
 void       gl_wdgt_print_merge_get_copies (glWdgtPrintMerge *merge,
 					   gint             *n_copies,
 					   gint             *first_label,
-					   gboolean         *collate_flag);
+					   gboolean         *collate_flag,
+					   gint             *n_sheets);
 
 void       gl_wdgt_print_merge_set_copies (glWdgtPrintMerge *merge,
 					   gint              n_copies,

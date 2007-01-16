@@ -8,6 +8,7 @@ glade_DATA = \
 	template-designer.glade		\
 	merge-properties-dialog.glade	\
 	property-bar.glade		\
+	print-custom-widget.glade	\
 	wdgt-media-select.glade		\
 	wdgt-rotate-label.glade		\
 	new-label-dialog.glade

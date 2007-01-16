@@ -219,7 +219,6 @@ gl_window_init (glWindow *window)
 	window->menu_tips_context_id =
 		gtk_statusbar_get_context_id (GTK_STATUSBAR (window->status_bar), "menu_tips");
 
-	window->print_dialog = NULL;
 	window->merge_dialog = NULL;
 	window->context_menu = GTK_MENU (gtk_ui_manager_get_widget (ui, "/ContextMenu"));
 	window->empty_selection_context_menu =

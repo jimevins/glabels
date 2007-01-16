@@ -24,6 +24,7 @@
 
 #include "wdgt-print-merge.h"
 
+#include <math.h>
 #include <glib/gi18n.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkspinbutton.h>
@@ -305,10 +306,11 @@ preview_clicked (glWdgtMiniPreview *mini_preview,
 /* query selected range of labels within sheet or number of sheets.         */
 /****************************************************************************/
 void
-gl_wdgt_print_merge_get_copies (glWdgtPrintMerge * merge,
-				gint * n_copies,
-				gint * first_label,
-				gboolean * collate_flag)
+gl_wdgt_print_merge_get_copies (glWdgtPrintMerge *merge,
+				gint             *n_copies,
+				gint             *first_label,
+				gboolean         *collate_flag,
+				gint             *n_sheets)
 {
 	*n_copies =
 	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
@@ -319,6 +321,8 @@ gl_wdgt_print_merge_get_copies (glWdgtPrintMerge * merge,
 	*collate_flag =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
 					  (merge->collate_check));
+
+	*n_sheets = ceil ( (double)(*first_label - 1 + (*n_copies * merge->n_records))/ (double)merge->labels_per_sheet );
 }
 
 /****************************************************************************/

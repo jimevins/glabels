@@ -1,3 +1,22 @@
+2007-01-15  Jim Evins  <evins@snaught.com>
+
+	* data/glade/Makefile.am:
+	* data/glade/print-custom-widget.glade:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print.c:
+	* src/print.h:
+	* src/template-designer.c: (print_test_cb):
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_copies):
+	* src/wdgt-print-merge.h:
+	* src/window.c: (gl_window_init):
+	* src/window.h:
+		Initial conversion to GtkPrintOperation.
+		Still to do:
+		 - Remove font and other libgnomeprint[ui] from elsewhere
+		 - Add batch initialization of print operation
+
 2007-01-08  Jim Evins  <evins@snaught.com>
 	* configure.in:
 		Updated dependencies.  Set version to 2.1.pre4cvs.

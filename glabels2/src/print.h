@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  print.h:  Print module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,43 +24,46 @@
 #ifndef __PRINT_H__
 #define __PRINT_H__
 
-#include <libgnomeprint/gnome-print-job.h>
+#include <cairo/cairo.h>
 
 #include "label.h"
 
 G_BEGIN_DECLS
 
 typedef struct {
-	gboolean outline;
-	gboolean reverse;
-	gboolean crop_marks;
-} glPrintFlags;
+	gint   i_copy;
+	GList *p_record;
+} glPrintState;
 
-void gl_print_simple           (GnomePrintJob    *job,
-				glLabel          *label,
-				gint              n_sheets,
-				gint              first,
-				gint              last,
-				glPrintFlags     *flags);
+void gl_print_simple_sheet           (glLabel          *label,
+				      cairo_t          *cr,
+				      gint              page,
+				      gint              n_sheets,
+				      gint              first,
+				      gint              last,
+				      gboolean          outline_flag,
+				      gboolean          reverse_flag,
+				      gboolean          crop_marks_flag);
 
-void gl_print_merge_collated   (GnomePrintJob    *job,
-				glLabel          *label,
-				gint              n_copies,
-				gint              first,
-				glPrintFlags     *flags);
+void gl_print_collated_merge_sheet   (glLabel          *label,
+				      cairo_t          *cr,
+				      gint              page,
+				      gint              n_copies,
+				      gint              first,
+				      gboolean          outline_flag,
+				      gboolean          reverse_flag,
+				      gboolean          crop_marks_flag,
+				      glPrintState     *state);
 
-void gl_print_merge_uncollated (GnomePrintJob    *job,
-				glLabel          *label,
-				gint              n_copies,
-				gint              first,
-				glPrintFlags     *flags);
-
-void gl_print_batch            (GnomePrintJob    *job,
-				glLabel          *label,
-				gint              n_sheets,
-				gint              n_copies,
-				gint              first,
-				glPrintFlags     *flags);
+void gl_print_uncollated_merge_sheet (glLabel          *label,
+				      cairo_t          *cr,
+				      gint              page,
+				      gint              n_copies,
+				      gint              first,
+				      gboolean          outline_flag,
+				      gboolean          reverse_flag,
+				      gboolean          crop_marks_flag,
+				      glPrintState     *state);
 
 G_END_DECLS
 

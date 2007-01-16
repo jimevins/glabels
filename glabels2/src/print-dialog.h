@@ -1,11 +1,11 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  print-dialog.h:  Print dialog module header file
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,9 +24,8 @@
 #ifndef __PRINT_DIALOG_H__
 #define __PRINT_DIALOG_H__
 
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkdialog.h>
-#include "view.h"
+#include <gtk/gtkprintoperation.h>
+#include "label.h"
 
 G_BEGIN_DECLS
 
@@ -45,24 +44,23 @@ typedef struct _glPrintDialogPrivate  glPrintDialogPrivate;
 
 struct _glPrintDialog
 {
-	GtkDialog             parent_instance;
+        GtkPrintOperation     parent_instance;
 
-	glPrintDialogPrivate *priv;
+        glPrintDialogPrivate *priv;
 
 };
 
 struct  _glPrintDialogClass
 {
-	GtkDialogClass        parent_class;
+        GtkPrintOperationClass        parent_class;
 };
 
 
-GType      gl_print_dialog_get_type            (void) G_GNUC_CONST;
+GType          gl_print_dialog_get_type            (void) G_GNUC_CONST;
 
-GtkWidget *gl_print_dialog_new                 (glLabel       *label,
-						GtkWindow     *win);
+glPrintDialog *gl_print_dialog_new                 (glLabel       *label);
 
-void       gl_print_dialog_force_outline_flag  (glPrintDialog *dialog);
+void           gl_print_dialog_force_outline_flag  (glPrintDialog *dialog);
 
 G_END_DECLS
 

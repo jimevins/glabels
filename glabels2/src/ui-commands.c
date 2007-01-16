@@ -191,30 +191,19 @@ void
 gl_ui_cmd_file_print (GtkAction *action,
                       glWindow  *window)
 {
+        glPrintDialog *dialog;
+
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->print_dialog) {
+        dialog = gl_print_dialog_new (GL_VIEW(window->view)->label);
 
-                gtk_window_present (GTK_WINDOW(window->print_dialog));
-                gtk_window_set_transient_for (GTK_WINDOW (window->print_dialog),
-                                              GTK_WINDOW (window));
-
-        } else {
-
-                window->print_dialog =
-                        g_object_ref (
-                                gl_print_dialog_new (GL_VIEW(window->view)->label,
-                                                     GTK_WINDOW(window)) );
-
-                g_signal_connect (G_OBJECT(window->print_dialog), "destroy",
-                                  G_CALLBACK (gtk_widget_destroyed),
-                                  &window->print_dialog);
-
-                gtk_widget_show (GTK_WIDGET (window->print_dialog));
-        }
+        gtk_print_operation_run (GTK_PRINT_OPERATION (dialog),
+                                 GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
+                                 GTK_WINDOW (window),
+                                 NULL);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }

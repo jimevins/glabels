@@ -5,7 +5,7 @@
  *
  *  print.c:  Print module
  *
- *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,8 +45,8 @@
 #include "debug.h"
 
 #define ARC_FINE   2  /* Resolution in degrees of large arcs */
-#define ARC_COURSE 5  /* Resolution in degrees of small arcs */
 
+#define FONT_SCALE (72.0/96.0)
 #define TICK_OFFSET  2.25
 #define TICK_LENGTH 18.0
 
@@ -55,37 +55,26 @@
 /*=========================================================================*/
 
 typedef struct _PrintInfo {
-	/* gnome print context */
-	GnomePrintContext *pc;
-
-	/* gnome print configuration */
-	GnomePrintConfig *config;
+        cairo_t    *cr;
 
 	/* gLabels Template */
 	glTemplate *template;
-	gboolean label_rotate_flag;
+	gboolean    label_rotate_flag;
 
 	/* page size */
 	gdouble page_width;
 	gdouble page_height;
 
-	/* page counter */
-	gint sheet;
 } PrintInfo;
 
 
 /*=========================================================================*/
 /* Private function prototypes.                                            */
 /*=========================================================================*/
-static PrintInfo *print_info_new              (GnomePrintJob    *job,
+static PrintInfo *print_info_new              (cairo_t          *cr,
 					       glLabel          *label);
 
 static void       print_info_free             (PrintInfo       **pi);
-
-
-static void       print_page_begin            (PrintInfo        *pi);
-
-static void       print_page_end              (PrintInfo        *pi);
 
 static void       print_crop_marks            (PrintInfo        *pi);
 
@@ -142,77 +131,65 @@ static void       clip_punchouts              (PrintInfo        *pi,
 					       glLabel          *label);
 
 
-static void       create_rectangle_path         (GnomePrintContext *pc,
+static void       create_rounded_rectangle_path (cairo_t           *cr,
 						 gdouble            x0,
 						 gdouble            y0,
 						 gdouble            w,
-						 gdouble            h);
+						 gdouble            h,
+						 gdouble            r);
 
-static void       create_ellipse_path           (GnomePrintContext *pc,
+static void       create_ellipse_path           (cairo_t           *cr,
 						 gdouble            x0,
 						 gdouble            y0,
 						 gdouble            rx,
 						 gdouble            ry);
 
-static void       create_rounded_rectangle_path (GnomePrintContext *pc,
+static void       create_cd_path                (cairo_t           *cr,
 						 gdouble            x0,
 						 gdouble            y0,
 						 gdouble            w,
 						 gdouble            h,
-						 gdouble            r);
-
-static void       create_clipped_circle_path    (GnomePrintContext *pc,
-						 gdouble            x0,
-						 gdouble            y0,
-						 gdouble            w,
-						 gdouble            h,
-						 gdouble            r);
-
-#ifndef NO_ALPHA_HACK
-static guchar *   get_pixels_as_rgb             (const GdkPixbuf   *pixbuf);
-#endif
+						 gdouble            r1,
+                                                 gdouble            r2);
 
 
 /*****************************************************************************/
-/* Simple (no merge data) print command.                                     */
+/* Print simple sheet (no merge data) command.                               */
 /*****************************************************************************/
 void
-gl_print_simple (GnomePrintJob    *job,
-		 glLabel          *label,
-		 gint              n_sheets,
-		 gint              first,
-		 gint              last,
-		 glPrintFlags     *flags)
+gl_print_simple_sheet (glLabel          *label,
+                       cairo_t          *cr,
+                       gint              page,
+                       gint              n_sheets,
+                       gint              first,
+                       gint              last,
+                       gboolean          outline_flag,
+                       gboolean          reverse_flag,
+                       gboolean          crop_marks_flag)
 {
 	PrintInfo                 *pi;
 	const glTemplateLabelType *label_type;
-	gint                       i_sheet, i_label;
+	gint                       i_label;
 	glTemplateOrigin          *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	pi         = print_info_new (job, label);
-	label_type = gl_template_get_first_label_type (pi->template);
+	pi         = print_info_new (cr, label);
 
+	label_type = gl_template_get_first_label_type (pi->template);
 	origins = gl_template_get_origins (label_type);
 
-	for (i_sheet = 0; i_sheet < n_sheets; i_sheet++) {
+        if (crop_marks_flag) {
+                print_crop_marks (pi);
+        }
 
-		print_page_begin (pi);
-		if (flags->crop_marks) {
-			print_crop_marks (pi);
-		}
+        for (i_label = first - 1; i_label < last; i_label++) {
 
-		for (i_label = first - 1; i_label < last; i_label++) {
+                print_label (pi, label,
+                             origins[i_label].x, origins[i_label].y,
+                             NULL, outline_flag, reverse_flag);
 
-			print_label (pi, label,
-				     origins[i_label].x, origins[i_label].y,
-				     NULL, flags->outline, flags->reverse);
-
-		}
-
-		print_page_end (pi);
-	}
+        }
 
 	g_free (origins);
 
@@ -222,20 +199,24 @@ gl_print_simple (GnomePrintJob    *job,
 }
 
 /*****************************************************************************/
-/* Merge print command (collated copies)                                     */
+/* Print collated merge sheet command                                        */
 /*****************************************************************************/
 void
-gl_print_merge_collated (GnomePrintJob    *job,
-			 glLabel          *label,
-			 gint              n_copies,
-			 gint              first,
-			 glPrintFlags     *flags)
+gl_print_collated_merge_sheet   (glLabel          *label,
+                                 cairo_t          *cr,
+                                 gint              page,
+                                 gint              n_copies,
+                                 gint              first,
+                                 gboolean          outline_flag,
+                                 gboolean          reverse_flag,
+                                 gboolean          crop_marks_flag,
+                                 glPrintState     *state)
 {
 	glMerge                   *merge;
 	const GList               *record_list;
 	PrintInfo                 *pi;
 	const glTemplateLabelType *label_type;
-	gint                       i_sheet, i_label, n_labels_per_page, i_copy;
+	gint                       i_label, n_labels_per_page, i_copy;
 	glMergeRecord             *record;
 	GList                     *p;
 	glTemplateOrigin          *origins;
@@ -245,69 +226,88 @@ gl_print_merge_collated (GnomePrintJob    *job,
 	merge = gl_label_get_merge (label);
 	record_list = gl_merge_get_record_list (merge);
 
-	pi = print_info_new (job, label);
+	pi = print_info_new (cr, label);
 	label_type = gl_template_get_first_label_type (pi->template);
 
 	n_labels_per_page = gl_template_get_n_labels (label_type);
 	origins = gl_template_get_origins (label_type);
 
-	i_sheet = 0;
-	i_label = first - 1;
+        if (crop_marks_flag) {
+                print_crop_marks (pi);
+        }
 
-	for ( p=(GList *)record_list; p!=NULL; p=p->next ) {
+        if (page == 0)
+        {
+                state->i_copy  = 0;
+                state->p_record = (GList *)record_list;
+
+                i_label = first - 1;
+        }
+        else
+        {
+                i_label = 0;
+        }
+
+
+	for ( p=(GList *)state->p_record; p!=NULL; p=p->next ) {
 		record = (glMergeRecord *)p->data;
 			
 		if ( record->select_flag ) {
-			for (i_copy = 0; i_copy < n_copies; i_copy++) {
-
-				if ((i_label == 0) || (i_sheet == 0)) {
-					i_sheet++;
-					print_page_begin (pi);
-					if (flags->crop_marks) {
-						print_crop_marks (pi);
-					}
-				}
+			for (i_copy = state->i_copy; i_copy < n_copies; i_copy++) {
 
 				print_label (pi, label,
 					     origins[i_label].x,
 					     origins[i_label].y,
 					     record,
-					     flags->outline, flags->reverse);
+					     outline_flag, reverse_flag);
 
-				i_label = (i_label + 1) % n_labels_per_page;
-				if (i_label == 0) {
-					print_page_end (pi);
-				}
+				i_label++;
+                                if (i_label == n_labels_per_page)
+                                {
+                                        g_free (origins);
+                                        print_info_free (&pi);
+
+                                        state->i_copy = (i_copy+1) % n_copies;
+                                        if (state->i_copy == 0)
+                                        {
+                                                state->p_record = p->next;
+                                        }
+                                        else
+                                        {
+                                                state->p_record = p;
+                                        }
+                                        return;
+                                }
 			}
+                        state->i_copy = 0;
 		}
 	}
 
-	if (i_label != 0) {
-		print_page_end (pi);
-	}
-
-	g_free (origins);
-
-	print_info_free (&pi);
+        g_free (origins);
+        print_info_free (&pi);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*****************************************************************************/
-/* Merge print command (uncollated copies)                                   */
+/* Print uncollated merge sheet command                                      */
 /*****************************************************************************/
 void
-gl_print_merge_uncollated (GnomePrintJob    *job,
-			   glLabel          *label,
-			   gint              n_copies,
-			   gint              first,
-			   glPrintFlags     *flags)
+gl_print_uncollated_merge_sheet (glLabel          *label,
+                                 cairo_t          *cr,
+                                 gint              page,
+                                 gint              n_copies,
+                                 gint              first,
+                                 gboolean          outline_flag,
+                                 gboolean          reverse_flag,
+                                 gboolean          crop_marks_flag,
+                                 glPrintState     *state)
 {
 	glMerge                   *merge;
 	const GList               *record_list;
 	PrintInfo                 *pi;
 	const glTemplateLabelType *label_type;
-	gint                       i_sheet, i_label, n_labels_per_page, i_copy;
+	gint                       i_label, n_labels_per_page, i_copy;
 	glMergeRecord             *record;
 	GList                     *p;
 	glTemplateOrigin          *origins;
@@ -317,56 +317,72 @@ gl_print_merge_uncollated (GnomePrintJob    *job,
 	merge = gl_label_get_merge (label);
 	record_list = gl_merge_get_record_list (merge);
 
-	pi = print_info_new (job, label);
+	pi = print_info_new (cr, label);
 	label_type = gl_template_get_first_label_type (pi->template);
 
 	n_labels_per_page = gl_template_get_n_labels (label_type);
 	origins = gl_template_get_origins (label_type);
 
-	i_sheet = 0;
-	i_label = first - 1;
+        if (crop_marks_flag) {
+                print_crop_marks (pi);
+        }
 
-	for (i_copy = 0; i_copy < n_copies; i_copy++) {
+        if (page == 0)
+        {
+                state->i_copy  = 0;
+                state->p_record = (GList *)record_list;
 
-		for ( p=(GList *)record_list; p!=NULL; p=p->next ) {
+                i_label = first - 1;
+        }
+        else
+        {
+                i_label = 0;
+        }
+
+	for (i_copy = state->i_copy; i_copy < n_copies; i_copy++) {
+
+		for ( p=state->p_record; p!=NULL; p=p->next ) {
 			record = (glMergeRecord *)p->data;
 			
 			if ( record->select_flag ) {
 
-
-				if ((i_label == 0) || (i_sheet == 0)) {
-					i_sheet++;
-					print_page_begin (pi);
-					if (flags->crop_marks) {
-						print_crop_marks (pi);
-					}
-				}
-
-				print_label (pi, label,
+                                print_label (pi, label,
 					     origins[i_label].x,
 					     origins[i_label].y,
 					     record,
-					     flags->outline, flags->reverse);
+					     outline_flag, reverse_flag);
 
-				i_label = (i_label + 1) % n_labels_per_page;
-				if (i_label == 0) {
-					print_page_end (pi);
-				}
+				i_label++;
+                                if (i_label == n_labels_per_page)
+                                {
+                                        g_free (origins);
+                                        print_info_free (&pi);
+
+                                        state->p_record = p->next;
+                                        if (state->p_record == NULL)
+                                        {
+                                                state->p_record = (GList *)record_list;
+                                                state->i_copy = i_copy + 1;
+                                        }
+                                        else
+                                        {
+                                                state->i_copy = i_copy;
+                                        }
+                                        return;
+                                }
 			}
 		}
+                state->p_record = (GList *)record_list;
 
-	}
-	if (i_label != 0) {
-		print_page_end (pi);
 	}
 
 	g_free (origins);
-
 	print_info_free (&pi);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+#ifdef TODO
 /*****************************************************************************/
 /* Batch print.  Call appropriate function above.                            */
 /*****************************************************************************/
@@ -400,12 +416,13 @@ gl_print_batch (GnomePrintJob    *job,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+#endif
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  new print info structure                                        */
 /*---------------------------------------------------------------------------*/
 static PrintInfo *
-print_info_new (GnomePrintJob    *job,
+print_info_new (cairo_t          *cr,
 		glLabel          *label)
 {
 	PrintInfo            *pi = g_new0 (PrintInfo, 1);
@@ -413,7 +430,6 @@ print_info_new (GnomePrintJob    *job,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	g_return_val_if_fail (job && GNOME_IS_PRINT_JOB (job), NULL);
 	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
 	template = gl_label_get_template (label);
@@ -423,28 +439,16 @@ print_info_new (GnomePrintJob    *job,
 	g_return_val_if_fail (template->page_width > 0, NULL);
 	g_return_val_if_fail (template->page_height > 0, NULL);
 
-	pi->pc = gnome_print_job_get_context (job);
-	pi->config = gnome_print_job_get_config (job);
+	pi->cr = cr;
 
 	gl_debug (DEBUG_PRINT,
 		  "setting page size = \"%s\"", template->page_size);
-
-	gnome_print_config_set_length (pi->config,
-				       (guchar *)GNOME_PRINT_KEY_PAPER_WIDTH,
-				       template->page_width,
-				       GNOME_PRINT_PS_UNIT);
-	gnome_print_config_set_length (pi->config,
-				       (guchar *)GNOME_PRINT_KEY_PAPER_HEIGHT,
-				       template->page_height,
-				       GNOME_PRINT_PS_UNIT);
 
 	pi->page_width  = template->page_width;
 	pi->page_height = template->page_height;
 
 	pi->template = template;
 	pi->label_rotate_flag = gl_label_get_rotate_flag (label);
-
-	pi->sheet = 0;
 
 	gl_debug (DEBUG_PRINT, "END");
 
@@ -462,46 +466,8 @@ print_info_free (PrintInfo **pi)
 	gl_template_free ((*pi)->template);
 	(*pi)->template = NULL;
 
-	gnome_print_context_close ((*pi)->pc);
-
 	g_free (*pi);
 	*pi = NULL;
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Begin a new page.                                               */
-/*---------------------------------------------------------------------------*/
-static void
-print_page_begin (PrintInfo *pi)
-{
-	gchar *str;
-
-	gl_debug (DEBUG_PRINT, "START");
-
-	pi->sheet++;
-
-	str = g_strdup_printf ("sheet%02d", pi->sheet);
-	gnome_print_beginpage (pi->pc, (guchar *)str);
-	g_free (str);
-
-	/* Translate and scale, so that our origin is at the upper left. */
-	gnome_print_translate (pi->pc, 0.0, pi->page_height);
-	gnome_print_scale (pi->pc, 1.0, -1.0);
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  End a page.                                                     */
-/*---------------------------------------------------------------------------*/
-static void
-print_page_end (PrintInfo *pi)
-{
-	gl_debug (DEBUG_PRINT, "START");
-
-	gnome_print_showpage (pi->pc);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -529,9 +495,10 @@ print_crop_marks (PrintInfo *pi)
 	page_w = pi->page_width;
 	page_h = pi->page_height;
 
-	gnome_print_setrgbcolor (pi->pc, 0.0, 0.0, 0.0);
-	gnome_print_setopacity (pi->pc, 1.0);
-	gnome_print_setlinewidth (pi->pc, 0.25);
+        cairo_save (pi->cr);
+
+        cairo_set_source_rgba (pi->cr, 0.0, 0.0, 0.0, 1.0);
+	cairo_set_line_width  (pi->cr, 0.25);
 
 	for (p=label_type->layouts; p != NULL; p=p->next) {
 
@@ -559,21 +526,21 @@ print_crop_marks (PrintInfo *pi)
 			y3 = MIN((ymax + TICK_OFFSET), page_h);
 			y4 = MIN((y3 + TICK_LENGTH), page_h);
 
-			gnome_print_moveto (pi->pc, x1, y1);
-			gnome_print_lineto (pi->pc, x1, y2);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x1, y1);
+			cairo_line_to (pi->cr, x1, y2);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x2, y1);
-			gnome_print_lineto (pi->pc, x2, y2);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x2, y1);
+			cairo_line_to (pi->cr, x2, y2);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x1, y3);
-			gnome_print_lineto (pi->pc, x1, y4);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x1, y3);
+			cairo_line_to (pi->cr, x1, y4);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x2, y3);
-			gnome_print_lineto (pi->pc, x2, y4);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x2, y3);
+			cairo_line_to (pi->cr, x2, y4);
+			cairo_stroke  (pi->cr);
 
 		}
 
@@ -588,25 +555,27 @@ print_crop_marks (PrintInfo *pi)
 			x3 = MIN((xmax + TICK_OFFSET), page_w);
 			x4 = MIN((x3 + TICK_LENGTH), page_w);
 
-			gnome_print_moveto (pi->pc, x1, y1);
-			gnome_print_lineto (pi->pc, x2, y1);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x1, y1);
+			cairo_line_to (pi->cr, x2, y1);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x1, y2);
-			gnome_print_lineto (pi->pc, x2, y2);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x1, y2);
+			cairo_line_to (pi->cr, x2, y2);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x3, y1);
-			gnome_print_lineto (pi->pc, x4, y1);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x3, y1);
+			cairo_line_to (pi->cr, x4, y1);
+			cairo_stroke  (pi->cr);
 
-			gnome_print_moveto (pi->pc, x3, y2);
-			gnome_print_lineto (pi->pc, x4, y2);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, x3, y2);
+			cairo_line_to (pi->cr, x4, y2);
+			cairo_stroke  (pi->cr);
 
 		}
 
 	}
+
+        cairo_restore (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -632,19 +601,19 @@ print_label (PrintInfo     *pi,
 
 	gl_label_get_size (label, &width, &height);
 
-	gnome_print_gsave (pi->pc);
+	cairo_save (pi->cr);
 
 	/* Transform coordinate system to be relative to upper corner */
 	/* of the current label */
-	gnome_print_translate (pi->pc, x, y);
+	cairo_translate (pi->cr, x, y);
 	if (gl_label_get_rotate_flag (label)) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
-		gnome_print_rotate (pi->pc, -90.0);
-		gnome_print_translate (pi->pc, -width, 0.0);
+		cairo_rotate (pi->cr, -M_PI/2.0);
+		cairo_translate (pi->cr, -width, 0.0);
 	}
 	if ( reverse_flag ) {
-		gnome_print_translate (pi->pc, width, 0.0);
-		gnome_print_scale (pi->pc, -1.0, 1.0);
+		cairo_translate (pi->cr, width, 0.0);
+		cairo_scale (pi->cr, -1.0, 1.0);
 	}
 
 	clip_to_outline (pi, label);
@@ -652,9 +621,8 @@ print_label (PrintInfo     *pi,
 	if (outline_flag) {
 		draw_outline (pi, label);
 	}
-	clip_punchouts (pi, label);
 
-	gnome_print_grestore (pi->pc);
+	cairo_restore (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -690,17 +658,20 @@ draw_object (PrintInfo     *pi,
 	     glMergeRecord *record)
 {
 	gdouble x0, y0;
-	gdouble affine[6];
+	gdouble a[6];
+        cairo_matrix_t matrix;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_position (object, &x0, &y0);
-	gl_label_object_get_affine (object, affine);
+	gl_label_object_get_affine (object, a);
+        cairo_matrix_init (&matrix, a[0], a[1], a[2], a[3], a[4], a[5]);
 
-	gnome_print_gsave (pi->pc);
+	cairo_save (pi->cr);
 
-	gnome_print_translate (pi->pc, x0, y0);
-	gnome_print_concat (pi->pc, affine);
+	cairo_translate (pi->cr, x0, y0);
+	cairo_transform (pi->cr, &matrix);
+
 
 	if (GL_IS_LABEL_TEXT(object)) {
 		draw_text_object (pi, GL_LABEL_TEXT(object), record);
@@ -716,7 +687,7 @@ draw_object (PrintInfo     *pi,
 		draw_barcode_object (pi, GL_LABEL_BARCODE(object), record);
 	}
 
-	gnome_print_grestore (pi->pc);
+	cairo_restore (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -729,8 +700,6 @@ draw_text_object (PrintInfo     *pi,
 		  glLabelText   *object,
 		  glMergeRecord *record)
 {
-	GnomeFont       *font;
-	gchar          **line;
 	gint             i;
 	gdouble          x_offset, y_offset, w, object_w, object_h;
 	gchar           *text;
@@ -743,7 +712,6 @@ draw_text_object (PrintInfo     *pi,
 	glColorNode     *color_node;
 	GtkJustification just;
 	gboolean         auto_shrink;
-	GnomeGlyphList  *glyphlist;
 	ArtDRect         bbox;
 	gdouble          affine[6];
 	gdouble          text_line_spacing;
@@ -752,6 +720,10 @@ draw_text_object (PrintInfo     *pi,
 	glColorNode     *shadow_color_node;
 	gdouble          shadow_opacity;
 	guint            shadow_color;
+        PangoAlignment   alignment;
+        PangoStyle       style;
+        PangoLayout     *layout;
+        PangoFontDescription *desc;
 
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -784,163 +756,99 @@ draw_text_object (PrintInfo     *pi,
 	gl_color_node_free (&shadow_color_node);
 
 	text = gl_text_node_lines_expand (lines, record);
-	line = g_strsplit (text, "\n", -1);
-	g_free (text);
 
-	art_affine_identity (affine);
+        switch (just) {
+        case GTK_JUSTIFY_LEFT:
+                alignment = PANGO_ALIGN_LEFT;
+                break;
+        case GTK_JUSTIFY_CENTER:
+                alignment = PANGO_ALIGN_CENTER;
+                break;
+        case GTK_JUSTIFY_RIGHT:
+                alignment = PANGO_ALIGN_RIGHT;
+                break;
+        default:
+                alignment = PANGO_ALIGN_LEFT;
+                break;	/* shouldn't happen */
+        }
+
+        style = font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
 
 	if (record && auto_shrink) {
+
 		/* auto shrink text size to keep within text box limits. */
-		for (i = 0; line[i] != NULL; i++) {
 
-			font = gnome_font_find_closest_from_weight_slant (
-				(guchar *)font_family,
-				font_weight,
-				font_italic_flag,
-				font_size);
-			glyphlist = gnome_glyphlist_from_text_dumb (
-				font,
-				color,
-				0.0, 0.0,
-				(guchar *)line[i]);
-			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-			w = bbox.x1;
-			gnome_glyphlist_unref (glyphlist);
+                layout = pango_cairo_create_layout (pi->cr);
 
-			/* If width is too large, iteratively shrink font_size until this
-			   line fits the width, or until the font size is ridiculously
-			   small. */
-			while ( (w > object_w) && (font_size >= 1.0) ) {
+                desc = pango_font_description_new ();
+                pango_font_description_set_family (desc, font_family);
+                pango_font_description_set_weight (desc, font_weight);
+                pango_font_description_set_style  (desc, style);
+                pango_font_description_set_size   (desc, font_size * PANGO_SCALE * FONT_SCALE);
+                pango_layout_set_font_description (layout, desc);
+                pango_font_description_free       (desc);
 
-				font_size -= 0.5;
+                pango_layout_set_text (layout, text, -1);
+                w = pango_layout_get_width (layout) / PANGO_SCALE;
 
-				font = gnome_font_find_closest_from_weight_slant (
-					(guchar *)font_family,
-					font_weight,
-					font_italic_flag,
-					font_size);
-				glyphlist = gnome_glyphlist_from_text_dumb (
-					font,
-					color,
-					0.0, 0.0,
-					(guchar *)line[i]);
-				gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-				w = bbox.x1;
-				gnome_glyphlist_unref (glyphlist);
-			}
-		}
+                g_object_unref (layout);
 
-	}
+                if ( w > object_w )
+                {
+                        /* Scale down. */
+                        font_size *= (object_w-2*GL_LABEL_TEXT_MARGIN)/w;
 
-	font = gnome_font_find_closest_from_weight_slant (
-                                       (guchar *)font_family,
-				       font_weight,
-				       font_italic_flag,
-				       font_size);
-	gnome_print_setfont (pi->pc, font);
+                        /* Round down to nearest 1/2 point */
+                        font_size = (int)(font_size*2.0) / 2.0;
 
-        if (shadow_state)
-        {
-                gnome_print_setrgbcolor (pi->pc,
-                                         GL_COLOR_F_RED (shadow_color),
-                                         GL_COLOR_F_GREEN (shadow_color),
-                                         GL_COLOR_F_BLUE (shadow_color));
-                gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_color));
-
-                for (i = 0; line[i] != NULL; i++) {
-
-                        glyphlist = gnome_glyphlist_from_text_dumb (font, color,
-                                                                    0.0, 0.0,
-                                                                    (guchar *)line[i]);
-
-                        gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-                        w = bbox.x1;
-                        gnome_glyphlist_unref (glyphlist);
-
-                        switch (just) {
-                        case GTK_JUSTIFY_LEFT:
-                                x_offset = GL_LABEL_TEXT_MARGIN;
-                                break;
-                        case GTK_JUSTIFY_CENTER:
-                                x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
-                                break;
-                        case GTK_JUSTIFY_RIGHT:
-                                x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
-                                break;
-                        default:
-                                x_offset = 0.0;
-                                break;	/* shouldn't happen */
+                        /* don't get ridiculously small. */
+                        if (font_size < 1.0)
+                        {
+                                font_size = 1.0;
                         }
-                        x_offset += shadow_x;
-
-                        /* Work out the y position to the BOTTOM of the first line */
-                        y_offset = GL_LABEL_TEXT_MARGIN +
-                                + gnome_font_get_descender (font)
-                                + (i + 1) * font_size * text_line_spacing
-                                + shadow_y;
-
-                        /* Remove any text line spacing from the first row. */
-                        y_offset -= font_size * (text_line_spacing - 1);
-
-
-                        gnome_print_moveto (pi->pc, x_offset, y_offset);
-
-                        gnome_print_gsave (pi->pc);
-                        gnome_print_scale (pi->pc, 1.0, -1.0);
-                        gnome_print_show (pi->pc, (guchar *)line[i]);
-                        gnome_print_grestore (pi->pc);
                 }
         }
 
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (color),
-				 GL_COLOR_F_GREEN (color),
-				 GL_COLOR_F_BLUE (color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (color));
 
-	for (i = 0; line[i] != NULL; i++) {
+        layout = pango_cairo_create_layout (pi->cr);
 
-		glyphlist = gnome_glyphlist_from_text_dumb (font, color,
-							    0.0, 0.0,
-							    (guchar *)line[i]);
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, font_family);
+        pango_font_description_set_weight (desc, font_weight);
+        pango_font_description_set_style  (desc, style);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE * FONT_SCALE);
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
 
-		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-		w = bbox.x1;
-		gnome_glyphlist_unref (glyphlist);
+        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE);
+        pango_layout_set_width (layout, object_w * PANGO_SCALE);
+        pango_layout_set_alignment (layout, alignment);
 
-		switch (just) {
-		case GTK_JUSTIFY_LEFT:
-			x_offset = GL_LABEL_TEXT_MARGIN;
-			break;
-		case GTK_JUSTIFY_CENTER:
-			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
-			break;
-		case GTK_JUSTIFY_RIGHT:
-			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
-			break;
-		default:
-			x_offset = 0.0;
-			break;	/* shouldn't happen */
-		}
+        if (shadow_state)
+        {
+                cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_color),
+                                       GL_COLOR_F_GREEN (shadow_color),
+                                       GL_COLOR_F_BLUE (shadow_color),
+                                       GL_COLOR_F_ALPHA (shadow_color));
 
-		/* Work out the y position to the BOTTOM of the first line */
-		y_offset = GL_LABEL_TEXT_MARGIN +
-			   + gnome_font_get_descender (font)
-	       		   + (i + 1) * font_size * text_line_spacing;
+                cairo_move_to (pi->cr, shadow_x + GL_LABEL_TEXT_MARGIN, shadow_y);
+                pango_cairo_show_layout (pi->cr, layout);
+        }
 
-		/* Remove any text line spacing from the first row. */
-		y_offset -= font_size * (text_line_spacing - 1);
+        cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (color),
+                               GL_COLOR_F_GREEN (color),
+                               GL_COLOR_F_BLUE (color),
+                               GL_COLOR_F_ALPHA (color));
 
+        cairo_move_to (pi->cr, GL_LABEL_TEXT_MARGIN, 0);
+        pango_cairo_show_layout (pi->cr, layout);
 
-		gnome_print_moveto (pi->pc, x_offset, y_offset);
+        g_object_unref (layout);
 
-		gnome_print_gsave (pi->pc);
-		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, (guchar *)line[i]);
-		gnome_print_grestore (pi->pc);
-	}
-
-	g_strfreev (line);
 
 	gl_text_node_lines_free (&lines);
 	g_free (font_family);
@@ -996,43 +904,42 @@ draw_box_object (PrintInfo  *pi,
 	if (shadow_state)
 	{
 		/* Draw fill shadow */
-		create_rectangle_path (pi->pc, shadow_x, shadow_y, w, h);
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (shadow_fill_color),
-					 GL_COLOR_F_GREEN (shadow_fill_color),
-					 GL_COLOR_F_BLUE (shadow_fill_color));
-		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_fill_color));
-		gnome_print_fill (pi->pc);
+		cairo_rectangle (pi->cr, shadow_x, shadow_y, w, h);
+
+		cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_fill_color),
+                                       GL_COLOR_F_GREEN (shadow_fill_color),
+                                       GL_COLOR_F_BLUE (shadow_fill_color),
+                                       GL_COLOR_F_ALPHA (shadow_fill_color));
+		cairo_fill_preserve (pi->cr);
 
 		/* Draw outline shadow */
-		create_rectangle_path (pi->pc, shadow_x, shadow_y, w, h);
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (shadow_line_color),
-					 GL_COLOR_F_GREEN (shadow_line_color),
-					 GL_COLOR_F_BLUE (shadow_line_color));
-		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
-		gnome_print_setlinewidth (pi->pc, line_width);
-		gnome_print_stroke (pi->pc);
+		cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_line_color),
+                                       GL_COLOR_F_GREEN (shadow_line_color),
+                                       GL_COLOR_F_BLUE (shadow_line_color),
+                                       GL_COLOR_F_ALPHA (shadow_line_color));
+		cairo_set_line_width (pi->cr, line_width);
+		cairo_stroke (pi->cr);
 	}
 
 	/* Paint fill color */
-	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (fill_color),
-				 GL_COLOR_F_GREEN (fill_color),
-				 GL_COLOR_F_BLUE (fill_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (fill_color));
-	gnome_print_fill (pi->pc);
+	cairo_rectangle (pi->cr, 0.0, 0.0, w, h);
+        cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (fill_color),
+                               GL_COLOR_F_GREEN (fill_color),
+                               GL_COLOR_F_BLUE (fill_color),
+                               GL_COLOR_F_ALPHA (fill_color));
+	cairo_fill_preserve (pi->cr);
 
 	/* Draw outline */
-	create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (line_color),
-				 GL_COLOR_F_GREEN (line_color),
-				 GL_COLOR_F_BLUE (line_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
-	gnome_print_setlinewidth (pi->pc, line_width);
-	gnome_print_stroke (pi->pc);
+        cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (line_color),
+                               GL_COLOR_F_GREEN (line_color),
+                               GL_COLOR_F_BLUE (line_color),
+                               GL_COLOR_F_ALPHA (line_color));
+        cairo_set_line_width (pi->cr, line_width);
+        cairo_stroke (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1077,26 +984,26 @@ draw_line_object (PrintInfo   *pi,
 
 	if (shadow_state)
 	{
-		gnome_print_moveto (pi->pc, shadow_x, shadow_y);
-		gnome_print_lineto (pi->pc, shadow_x + w, shadow_y + h);
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (shadow_line_color),
-					 GL_COLOR_F_GREEN (shadow_line_color),
-					 GL_COLOR_F_BLUE (shadow_line_color));
-		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
-		gnome_print_setlinewidth (pi->pc, line_width);
-		gnome_print_stroke (pi->pc);
+		cairo_move_to (pi->cr, shadow_x, shadow_y);
+		cairo_line_to (pi->cr, shadow_x + w, shadow_y + h);
+		cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_line_color),
+                                       GL_COLOR_F_GREEN (shadow_line_color),
+                                       GL_COLOR_F_BLUE (shadow_line_color),
+                                       GL_COLOR_F_ALPHA (shadow_line_color));
+		cairo_set_line_width (pi->cr, line_width);
+		cairo_stroke (pi->cr);
 	}
 
-	gnome_print_moveto (pi->pc, 0.0, 0.0);
-	gnome_print_lineto (pi->pc, w, h);
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (line_color),
-				 GL_COLOR_F_GREEN (line_color),
-				 GL_COLOR_F_BLUE (line_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
-	gnome_print_setlinewidth (pi->pc, line_width);
-	gnome_print_stroke (pi->pc);
+	cairo_move_to (pi->cr, 0.0, 0.0);
+	cairo_line_to (pi->cr, w, h);
+	cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (line_color),
+                               GL_COLOR_F_GREEN (line_color),
+                               GL_COLOR_F_BLUE (line_color),
+                               GL_COLOR_F_ALPHA (line_color));
+	cairo_set_line_width (pi->cr, line_width);
+	cairo_stroke (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1154,43 +1061,41 @@ draw_ellipse_object (PrintInfo      *pi,
 	if (shadow_state)
 	{
 		/* Draw fill shadow */
-		create_ellipse_path (pi->pc, x0+shadow_x, y0+shadow_y, rx, ry);
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (shadow_fill_color),
-					 GL_COLOR_F_GREEN (shadow_fill_color),
-					 GL_COLOR_F_BLUE (shadow_fill_color));
-		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_fill_color));
-		gnome_print_fill (pi->pc);
+		create_ellipse_path (pi->cr, x0+shadow_x, y0+shadow_y, rx, ry);
+		cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_fill_color),
+                                       GL_COLOR_F_GREEN (shadow_fill_color),
+                                       GL_COLOR_F_BLUE (shadow_fill_color),
+                                       GL_COLOR_F_ALPHA (shadow_fill_color));
+		cairo_fill_preserve (pi->cr);
 
 		/* Draw outline shadow */
-		create_ellipse_path (pi->pc, x0+shadow_x, y0+shadow_y, rx, ry);
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (shadow_line_color),
-					 GL_COLOR_F_GREEN (shadow_line_color),
-					 GL_COLOR_F_BLUE (shadow_line_color));
-		gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (shadow_line_color));
-		gnome_print_setlinewidth (pi->pc, line_width);
-		gnome_print_stroke (pi->pc);
+		cairo_set_source_rgba (pi->cr,
+                                       GL_COLOR_F_RED (shadow_line_color),
+                                       GL_COLOR_F_GREEN (shadow_line_color),
+                                       GL_COLOR_F_BLUE (shadow_line_color),
+                                       GL_COLOR_F_ALPHA (shadow_line_color));
+		cairo_set_line_width (pi->cr, line_width);
+		cairo_stroke (pi->cr);
 	}
 
 	/* Paint fill color */
-	create_ellipse_path (pi->pc, x0, y0, rx, ry);
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (fill_color),
-				 GL_COLOR_F_GREEN (fill_color),
-				 GL_COLOR_F_BLUE (fill_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (fill_color));
-	gnome_print_fill (pi->pc);
+	create_ellipse_path (pi->cr, x0, y0, rx, ry);
+	cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (fill_color),
+                               GL_COLOR_F_GREEN (fill_color),
+                               GL_COLOR_F_BLUE (fill_color),
+                               GL_COLOR_F_ALPHA (fill_color));
+	cairo_fill_preserve (pi->cr);
 
 	/* Draw outline */
-	create_ellipse_path (pi->pc, x0, y0, rx, ry);
-	gnome_print_setrgbcolor (pi->pc,
-				 GL_COLOR_F_RED (line_color),
-				 GL_COLOR_F_GREEN (line_color),
-				 GL_COLOR_F_BLUE (line_color));
-	gnome_print_setopacity (pi->pc, GL_COLOR_F_ALPHA (line_color));
-	gnome_print_setlinewidth (pi->pc, line_width);
-	gnome_print_stroke (pi->pc);
+	cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (line_color),
+                               GL_COLOR_F_GREEN (line_color),
+                               GL_COLOR_F_BLUE (line_color),
+                               GL_COLOR_F_ALPHA (line_color));
+	cairo_set_line_width (pi->cr, line_width);
+	cairo_stroke (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1205,48 +1110,30 @@ draw_image_object (PrintInfo     *pi,
 {
 	gdouble w, h;
 	const GdkPixbuf *pixbuf;
-	guchar *image_data;
-	gint image_w, image_h, image_stride;
-	gboolean image_alpha_flag;
-	gint ret;
+	gint image_w, image_h;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	gl_label_object_get_size     (GL_LABEL_OBJECT(object), &w, &h);
 
 	pixbuf = gl_label_image_get_pixbuf (object, record);
-	image_data = gdk_pixbuf_get_pixels (pixbuf);
 	image_w = gdk_pixbuf_get_width (pixbuf);
 	image_h = gdk_pixbuf_get_height (pixbuf);
-	image_stride = gdk_pixbuf_get_rowstride(pixbuf);
-	image_alpha_flag = gdk_pixbuf_get_has_alpha(pixbuf);
 
-	gnome_print_gsave (pi->pc);
-	gnome_print_translate (pi->pc, 0.0, h);
-	gnome_print_scale (pi->pc, w, -h);
-	if (image_alpha_flag) {
-#ifndef NO_ALPHA_HACK
-		guchar *image_data2;
+	cairo_save (pi->cr);
+        cairo_rectangle (pi->cr, 0.0, 0.0, w, h);
+        cairo_clip (pi->cr);
+	cairo_scale (pi->cr, w/image_w, h/image_h);
+        gdk_cairo_set_source_pixbuf (pi->cr, (GdkPixbuf *)pixbuf, 0, 0);
+        cairo_paint (pi->cr);
 
-		image_data2 = get_pixels_as_rgb (pixbuf);
-	        ret = gnome_print_rgbimage (pi->pc, image_data2,
-					    image_w, image_h, image_stride);
-		g_free (image_data2);
-#else
-	        ret = gnome_print_rgbaimage (pi->pc, image_data,
-					    image_w, image_h, image_stride);
-#endif
-	} else {
-	        ret = gnome_print_rgbimage (pi->pc, image_data,
-					    image_w, image_h, image_stride);
-	}
-	gnome_print_grestore (pi->pc);
+	cairo_restore (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw box object.                                                */
+/* PRIVATE.  Draw barcode object.                                            */
 /*---------------------------------------------------------------------------*/
 static void
 draw_barcode_object (PrintInfo      *pi,
@@ -1258,7 +1145,8 @@ draw_barcode_object (PrintInfo      *pi,
 	glBarcodeChar      *bchar;
 	GList              *li;
 	gdouble             y_offset;
-	GnomeFont          *font;
+        PangoLayout        *layout;
+        PangoFontDescription *desc;
 	gchar              *text, *cstring;
 	glTextNode         *text_node;
 	gchar              *id;
@@ -1297,73 +1185,60 @@ draw_barcode_object (PrintInfo      *pi,
 	gl_text_node_free (&text_node);
 	g_free (id);
 
+        cairo_set_source_rgba (pi->cr,
+                               GL_COLOR_F_RED (color),
+                               GL_COLOR_F_GREEN (color),
+                               GL_COLOR_F_BLUE (color),
+                               GL_COLOR_F_ALPHA (color));
+
 	if (gbc == NULL) {
 
-		font = gnome_font_find_closest_from_weight_slant (
-			(guchar *)GL_BARCODE_FONT_FAMILY,
-			GL_BARCODE_FONT_WEIGHT,
-			FALSE, 12.0);
-		gnome_print_setfont (pi->pc, font);
+                layout = pango_cairo_create_layout (pi->cr);
 
-		gnome_print_setrgbcolor (pi->pc,
-					 GL_COLOR_F_RED (color),
-					 GL_COLOR_F_GREEN (color),
-					 GL_COLOR_F_BLUE (color));
-		gnome_print_setopacity (pi->pc,
-					GL_COLOR_F_ALPHA (color));
+                desc = pango_font_description_new ();
+                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                pango_font_description_set_size   (desc, 12 * PANGO_SCALE * FONT_SCALE);
+                pango_layout_set_font_description (layout, desc);
+                pango_font_description_free       (desc);
 
-		y_offset = 12.0 - fabs (gnome_font_get_descender (font));
-		gnome_print_moveto (pi->pc, 0.0, y_offset);
+                pango_layout_set_text (layout, _("Invalid barcode data"), -1);
 
-		gnome_print_gsave (pi->pc);
-		gnome_print_scale (pi->pc, 1.0, -1.0);
-		gnome_print_show (pi->pc, (guchar *)_("Invalid barcode data"));
-		gnome_print_grestore (pi->pc);
+                pango_cairo_show_layout (pi->cr, layout);
+
+                g_object_unref (layout);
 
 	} else {
 
 		for (li = gbc->lines; li != NULL; li = li->next) {
 			line = (glBarcodeLine *) li->data;
 
-			gnome_print_moveto (pi->pc, line->x, line->y);
-			gnome_print_lineto (pi->pc, line->x, line->y + line->length);
-			gnome_print_setrgbcolor (pi->pc,
-						 GL_COLOR_F_RED (color),
-						 GL_COLOR_F_GREEN (color),
-						 GL_COLOR_F_BLUE (color));
-			gnome_print_setopacity (pi->pc,
-						GL_COLOR_F_ALPHA (color));
-			gnome_print_setlinewidth (pi->pc, line->width);
-			gnome_print_stroke (pi->pc);
+			cairo_move_to (pi->cr, line->x, line->y);
+			cairo_line_to (pi->cr, line->x, line->y + line->length);
+			cairo_set_line_width (pi->cr, line->width);
+			cairo_stroke (pi->cr);
 		}
 
 		for (li = gbc->chars; li != NULL; li = li->next) {
 			bchar = (glBarcodeChar *) li->data;
 
-			font = gnome_font_find_closest_from_weight_slant (
-				(guchar *)GL_BARCODE_FONT_FAMILY,
-				GL_BARCODE_FONT_WEIGHT,
-				FALSE, bchar->fsize);
-			gnome_print_setfont (pi->pc, font);
+                        layout = pango_cairo_create_layout (pi->cr);
 
-			gnome_print_setrgbcolor (pi->pc,
-						 GL_COLOR_F_RED (color),
-						 GL_COLOR_F_GREEN (color),
-						 GL_COLOR_F_BLUE (color));
-			gnome_print_setopacity (pi->pc,
-						GL_COLOR_F_ALPHA (color));
-
-			y_offset =
-			    bchar->fsize - fabs (gnome_font_get_descender (font));
-
-			gnome_print_moveto (pi->pc, bchar->x, bchar->y+y_offset);
+                        desc = pango_font_description_new ();
+                        pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                        pango_font_description_set_size   (desc, bchar->fsize * PANGO_SCALE * FONT_SCALE);
+                        pango_layout_set_font_description (layout, desc);
+                        pango_font_description_free       (desc);
 
 			cstring = g_strdup_printf ("%c", bchar->c);
-			gnome_print_gsave (pi->pc);
-			gnome_print_scale (pi->pc, 1.0, -1.0);
-			gnome_print_show (pi->pc, (guchar *)cstring);
-			gnome_print_grestore (pi->pc);
+                        pango_layout_set_text (layout, cstring, -1);
 			g_free (cstring);
+
+                        y_offset = 0.2 * bchar->fsize;
+
+			cairo_move_to (pi->cr, bchar->x, bchar->y-y_offset);
+                        pango_cairo_show_layout (pi->cr, layout);
+
+                        g_object_unref (layout);
 
 		}
 
@@ -1389,9 +1264,10 @@ draw_outline (PrintInfo *pi,
 
 	label_type = gl_template_get_first_label_type (pi->template);
 
-	gnome_print_setrgbcolor (pi->pc, 0.0, 0.0, 0.0);
-	gnome_print_setopacity (pi->pc, 1.0);
-	gnome_print_setlinewidth (pi->pc, 0.25);
+        cairo_save (pi->cr);
+
+	cairo_set_source_rgba (pi->cr, 0.0, 0.0, 0.0, 1.0);
+	cairo_set_line_width  (pi->cr, 0.25);
 
 	switch (label_type->shape) {
 
@@ -1400,40 +1276,35 @@ draw_outline (PrintInfo *pi,
 		r = label_type->size.rect.r;
 		if (r == 0.0) {
 			/* simple rectangle */
-			create_rectangle_path (pi->pc, 0.0, 0.0, w, h);
+			cairo_rectangle (pi->cr, 0.0, 0.0, w, h);
 		} else {
 			/* rectangle with rounded corners */
-			create_rounded_rectangle_path (pi->pc, 0.0, 0.0,
+			create_rounded_rectangle_path (pi->cr, 0.0, 0.0,
 						       w, h, r);
 		}
-		gnome_print_stroke (pi->pc);
+		cairo_stroke (pi->cr);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:
 		/* Round style */
 		r1 = label_type->size.round.r;
-		create_ellipse_path (pi->pc, r1, r1, r1, r1);
-		gnome_print_stroke (pi->pc);
+		create_ellipse_path (pi->cr, r1, r1, r1, r1);
+		cairo_stroke (pi->cr);
 		break;
 
 	case GL_TEMPLATE_SHAPE_CD:
+                r1 = label_type->size.cd.r1;
+                r2 = label_type->size.cd.r2;
 		if ((label_type->size.cd.h == 0) && (label_type->size.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
-			r1 = label_type->size.cd.r1;
-			r2 = label_type->size.cd.r2;
-			create_ellipse_path (pi->pc, r1, r1, r1, r1);
-			gnome_print_stroke (pi->pc);
-			create_ellipse_path (pi->pc, r1, r1, r2, r2);
-			gnome_print_stroke (pi->pc);
+                        create_cd_path (pi->cr, r1, r1, 2*r1, 2*r1, r1, r2);
+
+			cairo_stroke (pi->cr);
 		} else {
 			/* Business Card CD style, clipped round label w/ hole */
 			gl_label_get_size (label, &w, &h);
-			r1 = label_type->size.cd.r1;
-			r2 = label_type->size.cd.r2;
-			create_clipped_circle_path (pi->pc, w/2, h/2, w, h, r1);
-			gnome_print_stroke (pi->pc);
-			create_ellipse_path (pi->pc, w/2, h/2, r2, r2);
-			gnome_print_stroke (pi->pc);
+			create_cd_path (pi->cr, w/2, h/2, w, h, r1, r2);
+			cairo_stroke (pi->cr);
 		}
 		break;
 
@@ -1441,6 +1312,8 @@ draw_outline (PrintInfo *pi,
 		g_message ("Unknown template label style");
 		break;
 	}
+
+        cairo_restore (pi->cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
@@ -1454,7 +1327,7 @@ clip_to_outline (PrintInfo *pi,
 {
 	const glTemplateLabelType *label_type;
 	gdouble                    w, h, r;
-	gdouble                    r1;
+	gdouble                    r1, r2;
 	gdouble                    waste, x_waste, y_waste;
 
 	gl_debug (DEBUG_PRINT, "START");
@@ -1470,84 +1343,47 @@ clip_to_outline (PrintInfo *pi,
 		y_waste = label_type->size.rect.y_waste;
 		if (r == 0.0) {
 			/* simple rectangle */
-			create_rectangle_path (pi->pc,
-					       -x_waste, -y_waste,
-					       w+2*x_waste, h+2*y_waste);
+			cairo_rectangle (pi->cr,
+                                         -x_waste, -y_waste,
+                                         w+2*x_waste, h+2*y_waste);
 		} else {
 			/* rectangle with rounded corners */
-			create_rounded_rectangle_path (pi->pc,
+			create_rounded_rectangle_path (pi->cr,
 						       -x_waste, -y_waste,
 						       w+2*x_waste, h+2*y_waste, r);
 		}
-		gnome_print_clip (pi->pc);
+		cairo_clip (pi->cr);
 		break;
 
 	case GL_TEMPLATE_SHAPE_ROUND:
 		r1 = label_type->size.round.r;
 		waste = label_type->size.round.waste;
-		create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
-		gnome_print_clip (pi->pc);
+		create_ellipse_path (pi->cr, r1, r1, r1+waste, r1+waste);
+		cairo_clip (pi->cr);
 		break;
 
 	case GL_TEMPLATE_SHAPE_CD:
 		waste = label_type->size.cd.waste;
+                r1    = label_type->size.cd.r1;
+                r2    = label_type->size.cd.r2;
 		if ((label_type->size.cd.h == 0) && (label_type->size.cd.w == 0)) {
 			/* CD style, round label w/ concentric round hole */
-			r1 = label_type->size.cd.r1;
-			create_ellipse_path (pi->pc, r1, r1, r1+waste, r1+waste);
+                        create_cd_path (pi->cr,
+                                        r1, r1,
+                                        2*(r1+waste), 2*(r1+waste),
+                                        r1+waste,
+                                        r2-waste);
 		} else {
 			/* Business Card CD style, clipped round label w/ hole */
 			gl_label_get_size (label, &w, &h);
-			r1 = label_type->size.cd.r1;
-			create_clipped_circle_path (pi->pc,
-						    w/2, h/2,
-						    w+2*waste, h+2*waste,
-						    r1+waste);
+			create_cd_path (pi->cr,
+                                        w/2, h/2,
+                                        w+2*waste, h+2*waste,
+                                        r1+waste,
+                                        r2-waste);
 		}
-		gnome_print_clip (pi->pc);
-		break;
-
-	default:
-		g_message ("Unknown template label style");
-		break;
-	}
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Clip punchouts.  (Save some ink by not printing in CD holes)    */
-/*                                                                           */
-/* Ideally this would be done in clip_to_outline, but I am not sure how to   */
-/* invert the region for gnome_print_clip, so instead, I will just draw      */
-/* a white circle on top of everything else.                                 */
-/*---------------------------------------------------------------------------*/
-static void
-clip_punchouts (PrintInfo *pi,
-		glLabel   *label)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h, r2;
-	gdouble                    waste;
-
-	gl_debug (DEBUG_PRINT, "START");
-
-	label_type = gl_template_get_first_label_type (pi->template);
-
-	switch (label_type->shape) {
-
-	case GL_TEMPLATE_SHAPE_RECT:
-	case GL_TEMPLATE_SHAPE_ROUND:
-		break;
-
-	case GL_TEMPLATE_SHAPE_CD:
-		gl_label_get_size (label, &w, &h);
-		waste = label_type->size.cd.waste;
-		r2    = label_type->size.cd.r2;
-		create_ellipse_path (pi->pc, w/2, h/2, r2-waste, r2-waste);
-		gnome_print_setrgbcolor (pi->pc, 1.0, 1.0, 1.0);
-		gnome_print_setopacity (pi->pc, 1.0);
-		gnome_print_fill (pi->pc);
+		cairo_set_fill_rule (pi->cr, CAIRO_FILL_RULE_EVEN_ODD);
+		cairo_clip (pi->cr);
 		break;
 
 	default:
@@ -1562,51 +1398,7 @@ clip_punchouts (PrintInfo *pi,
 /* PRIVATE.  Path creation utilities.                                        */
 /*---------------------------------------------------------------------------*/
 static void
-create_rectangle_path (GnomePrintContext *pc,
-		       gdouble            x0,
-		       gdouble            y0,
-		       gdouble            w,
-		       gdouble            h)
-{
-	gl_debug (DEBUG_PRINT, "START");
-
-	gnome_print_newpath (pc);
-	gnome_print_moveto (pc, x0, y0);
-	gnome_print_lineto (pc, x0 + w, y0);
-	gnome_print_lineto (pc, x0 + w, y0 + h);
-	gnome_print_lineto (pc, x0, y0 + h);
-	gnome_print_lineto (pc, x0, y0);
-	gnome_print_closepath (pc);
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-
-static void
-create_ellipse_path (GnomePrintContext *pc,
-		     gdouble            x0,
-		     gdouble            y0,
-		     gdouble            rx,
-		     gdouble            ry)
-{
-	gdouble x, y;
-	gint i_theta;
-
-	gl_debug (DEBUG_PRINT, "START");
-
-	gnome_print_newpath (pc);
-	gnome_print_moveto (pc, x0 + rx, y0);
-	for (i_theta = ARC_FINE; i_theta <= 360; i_theta += ARC_FINE) {
-		x = x0 + rx * cos (i_theta * G_PI / 180.0);
-		y = y0 + ry * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-	gnome_print_closepath (pc);
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-
-static void
-create_rounded_rectangle_path (GnomePrintContext *pc,
+create_rounded_rectangle_path (cairo_t           *cr,
 			       gdouble            x0,
 			       gdouble            y0,
 			       gdouble            w,
@@ -1618,209 +1410,73 @@ create_rounded_rectangle_path (GnomePrintContext *pc,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	gnome_print_newpath (pc);
+	cairo_new_path (cr);
 
-	gnome_print_moveto (pc, x0 + r, y0);
-	for (i_theta = ARC_COURSE; i_theta <= 90; i_theta += ARC_COURSE) {
-		x = x0 + r - r * sin (i_theta * G_PI / 180.0);
-		y = y0 + r - r * cos (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		x = x0 + r - r * cos (i_theta * G_PI / 180.0);
-		y = y0 + (h - r) + r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		x = x0 + (w - r) + r * sin (i_theta * G_PI / 180.0);
-		y = y0 + (h - r) + r * cos (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		x = x0 + (w - r) + r * cos (i_theta * G_PI / 180.0);
-		y = y0 + r - r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-	gnome_print_lineto (pc, x0 + r, y0);
-
-	gnome_print_closepath (pc);
+        cairo_arc_negative (cr, x0+r,   y0+r,   r, 3*M_PI/2, M_PI);
+        cairo_arc_negative (cr, x0+r,   y0+h-r, r, M_PI,     M_PI/2);
+        cairo_arc_negative (cr, x0+w-r, y0+h-r, r, M_PI/2,   0.);
+        cairo_arc_negative (cr, x0+w-r, y0+r,   r, 2*M_PI,   3*M_PI/2);
+	cairo_close_path (cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
 
 static void
-create_clipped_circle_path (GnomePrintContext *pc,
-			    gdouble            x0,
-			    gdouble            y0,
-			    gdouble            w,
-			    gdouble            h,
-			    gdouble            r)
+create_ellipse_path (cairo_t           *cr,
+		     gdouble            x0,
+		     gdouble            y0,
+		     gdouble            rx,
+		     gdouble            ry)
 {
 	gdouble x, y;
-	gdouble theta1, theta2;
-	gint    i_theta;
+	gint i_theta;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	theta1 = (180.0/G_PI) * acos (w / (2.0*r));
-	theta2 = (180.0/G_PI) * asin (h / (2.0*r));
-
-	gnome_print_newpath (pc);
-
-	x = x0 + r * cos (theta1 * G_PI / 180.0);
-	y = y0 + r * sin (theta1 * G_PI / 180.0);
-	gnome_print_moveto (pc, x, y);
-
-	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
-		x = x0 + r * cos (i_theta * G_PI / 180.0);
-		y = y0 + r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
+	cairo_new_path (cr);
+	cairo_move_to (cr, x0 + rx, y0);
+	for (i_theta = ARC_FINE; i_theta <= 360; i_theta += ARC_FINE) {
+		x = x0 + rx * cos (i_theta * G_PI / 180.0);
+		y = y0 + ry * sin (i_theta * G_PI / 180.0);
+		cairo_line_to (cr, x, y);
 	}
-
-	x = x0 + r * cos (theta2 * G_PI / 180.0);
-	y = y0 + r * sin (theta2 * G_PI / 180.0);
-	gnome_print_lineto (pc, x, y);
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		x = x0 + r * cos ((180-theta2) * G_PI / 180.0);
-		y = y0 + r * sin ((180-theta2) * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
-		x = x0 + r * cos (i_theta * G_PI / 180.0);
-		y = y0 + r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	x = x0 + r * cos ((180-theta1) * G_PI / 180.0);
-	y = y0 + r * sin ((180-theta1) * G_PI / 180.0);
-	gnome_print_lineto (pc, x, y);
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		x = x0 + r * cos ((180+theta1) * G_PI / 180.0);
-		y = y0 + r * sin ((180+theta1) * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
-		x = x0 + r * cos (i_theta * G_PI / 180.0);
-		y = y0 + r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	x = x0 + r * cos ((180+theta2) * G_PI / 180.0);
-	y = y0 + r * sin ((180+theta2) * G_PI / 180.0);
-	gnome_print_lineto (pc, x, y);
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		x = x0 + r * cos ((360-theta2) * G_PI / 180.0);
-		y = y0 + r * sin ((360-theta2) * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
-		x = x0 + r * cos (i_theta * G_PI / 180.0);
-		y = y0 + r * sin (i_theta * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		x = x0 + r * cos ((360-theta1) * G_PI / 180.0);
-		y = y0 + r * sin ((360-theta1) * G_PI / 180.0);
-		gnome_print_lineto (pc, x, y);
-	}
-
-	x = x0 + r * cos (theta1 * G_PI / 180.0);
-	y = y0 + r * sin (theta1 * G_PI / 180.0);
-	gnome_print_lineto (pc, x, y);
-
-	gnome_print_closepath (pc);
+	cairo_close_path (cr);
 
 	gl_debug (DEBUG_PRINT, "END");
 }
 
-#ifndef NO_ALPHA_HACK
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Extract a copy of rgba pixels, removing alpha by compositing    */
-/* with a white background.                                                  */
-/*                                                                           */
-/* This is currently needed due to the lousy job gnome-print does in         */
-/* rendering images with alpha channels to PS.  This sacrafices the ability  */
-/* to do compositing of images with other items in the background.           */
-/*---------------------------------------------------------------------------*/
-static guchar *
-get_pixels_as_rgb (const GdkPixbuf *pixbuf)
+static void
+create_cd_path (cairo_t           *cr,
+                gdouble            x0,
+                gdouble            y0,
+                gdouble            w,
+                gdouble            h,
+                gdouble            r1,
+                gdouble            r2)
 {
-	gint             bits_per_sample, channels;
-	gboolean         has_alpha;
-	gint             width, height, rowstride;
-	gulong           bytes;
-	guchar          *buf_src, *buf_dest;
-	guchar          *p_src, *p_dest;
-	gint             ix, iy;
-	guchar           r, g, b, a;
-	gdouble          alpha, beta;
+	gdouble theta1, theta2;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	g_return_val_if_fail (pixbuf && GDK_IS_PIXBUF (pixbuf), NULL);
+        /*
+         * Outer radius.  (may be clipped)
+         */
+	theta1 = acos (w / (2.0*r1));
+	theta2 = asin (h / (2.0*r1));
 
-	/* extract pixels and parameters from pixbuf. */
-	buf_src         = gdk_pixbuf_get_pixels (pixbuf);
-	bits_per_sample = gdk_pixbuf_get_bits_per_sample (pixbuf);
-	channels        = gdk_pixbuf_get_n_channels (pixbuf);
-	has_alpha       = gdk_pixbuf_get_has_alpha (pixbuf);
-	width           = gdk_pixbuf_get_width (pixbuf);
-	height          = gdk_pixbuf_get_height (pixbuf);
-	rowstride       = gdk_pixbuf_get_rowstride (pixbuf);
+	cairo_new_path (cr);
+        cairo_arc (cr, x0, y0, r1, theta1,        theta2);
+        cairo_arc (cr, x0, y0, r1, M_PI-theta2,   M_PI-theta1);
+        cairo_arc (cr, x0, y0, r1, M_PI+theta1,   M_PI+theta2);
+        cairo_arc (cr, x0, y0, r1, 2*M_PI-theta2, 2*M_PI-theta1);
+	cairo_close_path (cr);
 
-	/* validate assumptions about pixbuf. */
-        g_return_val_if_fail (buf_src, NULL);
-        g_return_val_if_fail (bits_per_sample == 8, NULL);
-        g_return_val_if_fail (channels == 4, NULL);
-	g_return_val_if_fail (has_alpha, NULL);
-        g_return_val_if_fail (width > 0, NULL);
-        g_return_val_if_fail (height > 0, NULL);
-        g_return_val_if_fail (rowstride > 0, NULL);
+        /*
+         * Inner radius.  (hole)
+         */
+        cairo_new_sub_path (cr);
+        cairo_arc (cr, x0, y0, r2, 0.0, 2*M_PI);
+	cairo_close_path (cr);
 
-	/* Allocate a destination buffer */
-	bytes = height * rowstride;
-	gl_debug (DEBUG_PRINT, "bytes = %d", bytes);
-	buf_dest = g_try_malloc (bytes);
-	if (!buf_dest) {
-		return NULL;
-	}
-	gl_debug (DEBUG_PRINT, "buf_dest = %x", buf_dest);
-
-	/* Copy pixels, transforming rgba to rgb by compositing with a white bg. */
-	p_src  = buf_src;
-	p_dest = buf_dest;
-	for ( iy=0; iy < height; iy++ ) {
-	
-		p_src  = buf_src + iy*rowstride;
-		p_dest = buf_dest + iy*rowstride;
-
-		for ( ix=0; ix < width; ix++ ) {
-
-			r = *p_src++;
-			g = *p_src++;
-			b = *p_src++;
-			a = *p_src++;
-
-			alpha = a / 255.0;
-			beta  = 1.0 - alpha;
-
-			*p_dest++ = (guchar) (alpha*r + beta*255 + 0.5);
-			*p_dest++ = (guchar) (alpha*g + beta*255 + 0.5);
-			*p_dest++ = (guchar) (alpha*b + beta*255 + 0.5);
-
-		}
-
-	}
-
-	gl_debug (DEBUG_PRINT, "START");
-
-	return buf_dest;
+	gl_debug (DEBUG_PRINT, "END");
 }
-#endif

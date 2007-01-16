@@ -1496,9 +1496,12 @@ print_test_cb (glTemplateDesigner      *dlg)
 	template = build_template (dlg);
 	gl_label_set_template (GL_LABEL(label), template);
 
-	print_dialog = gl_print_dialog_new (GL_LABEL(label), NULL);
+	print_dialog = gl_print_dialog_new (GL_LABEL(label));
 	gl_print_dialog_force_outline_flag (GL_PRINT_DIALOG(print_dialog));
-	gtk_widget_show (print_dialog);
+        gtk_print_operation_run (GTK_PRINT_OPERATION (print_dialog),
+                                 GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
+                                 GTK_WINDOW (dlg),
+                                 NULL);
 
 	gl_template_free (template);
 	g_object_unref (G_OBJECT(label));
