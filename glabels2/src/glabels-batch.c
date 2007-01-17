@@ -26,11 +26,11 @@
 
 #include <glib/gi18n.h>
 #include <libgnome/libgnome.h>
-#include <libgnomeprint/gnome-print-job.h>
 
 #include "merge-init.h"
 #include "xml-label.h"
 #include "print.h"
+#include "print-op.h"
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "util.h"
@@ -41,7 +41,7 @@
 /*============================================*/
 static gboolean help_flag    = FALSE;
 static gboolean version_flag = FALSE;
-static gchar    *output      = "output.ps";
+static gchar    *output      = "output.pdf";
 static gint     n_copies     = 1;
 static gint     n_sheets     = 1;
 static gint     first        = 1;
@@ -56,7 +56,7 @@ static struct poptOption options[] = {
         {"version", 'v', POPT_ARG_NONE, &version_flag, 0,
          N_("print the version of glabels-batch being used"), NULL},
         {"output", 'o', POPT_ARG_STRING, &output, 0,
-         N_("set output filename (default=\"output.ps\")"), N_("filename")},
+         N_("set output filename (default=\"output.pdf\")"), N_("filename")},
         {"sheets", 's', POPT_ARG_INT, &n_sheets, 0,
          N_("number of sheets (default=1)"), N_("sheets")},
         {"copies", 'c', POPT_ARG_INT, &n_copies, 0,
@@ -88,13 +88,11 @@ main (int argc, char **argv)
         gint               rc;
         GSList            *p, *file_list = NULL;
         gint               n_files;
-        GnomePrintJob     *job = NULL;
         gchar             *abs_fn;
-        GnomePrintConfig  *config = NULL;
         glLabel           *label = NULL;
         glMerge           *merge = NULL;
         glXMLLabelStatus   status;
-        glPrintFlags       flags;
+        glPrintOp         *print_op;
 
         bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
         textdomain (GETTEXT_PACKAGE);
@@ -133,10 +131,6 @@ main (int argc, char **argv)
         }
         poptFreeContext (pctx);
 
-        flags.outline = outline_flag;
-        flags.reverse = reverse_flag;
-        flags.crop_marks = crop_marks_flag;
-
         /* initialize components */
         gl_debug_init ();
         gl_merge_init ();
@@ -162,36 +156,27 @@ main (int argc, char **argv)
                                                   (char *)p->data );
                                 }
                         }
-                        if ( job == NULL ) {
-                                job = gnome_print_job_new (NULL);
-                                abs_fn = gl_util_make_absolute ( output );
-                                config = gnome_print_job_get_config (job);
-                                gnome_print_config_set (config,
-                                                        (guchar*)"Printer",
-                                                        (guchar*)"GENERIC");
-                                gnome_print_config_set (config,
-                                                        (guchar*)"Settings.Transport.Backend",
-                                                        (guchar*)"file");
-                                gnome_print_config_set (config,
-                                                        (guchar*)GNOME_PRINT_KEY_OUTPUT_FILENAME,
-                                                        (guchar*)abs_fn);
-                                g_free( abs_fn );
-                        }
+                        abs_fn = gl_util_make_absolute ( output );
+                        print_op = gl_print_op_new_batch (label,
+                                                          abs_fn,
+                                                          n_sheets,
+                                                          n_copies,
+                                                          first,
+                                                          outline_flag,
+                                                          reverse_flag,
+                                                          crop_marks_flag);
 
-                        gl_print_batch (job, label, n_sheets, n_copies, first, &flags);
+                        gtk_print_operation_run (GTK_PRINT_OPERATION (print_op),
+                                                 GTK_PRINT_OPERATION_ACTION_EXPORT,
+                                                 NULL,
+                                                 NULL);
+
                         g_object_unref (label);
                 }
                 else {
                         fprintf ( stderr, _("cannot open glabels file %s\n"),
                                   (char *)p->data );
                 }
-        }
-        if ( job != NULL ) {
-
-                gnome_print_job_close (job);
-                gnome_print_job_print (job);
-
-                g_object_unref (job);
         }
 
         g_slist_free (file_list);

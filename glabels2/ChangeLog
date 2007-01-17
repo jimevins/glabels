@@ -1,3 +1,18 @@
+2007-01-16  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print-op.c:
+	* src/print-op.h:
+	* src/template-designer.c: (print_test_cb):
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/print.c:
+		Renamed PrintDialog to PrintOp.  Added constructor for batch
+		printing.
+	* src/glabels-batch.c: (main):
+		Converted to use new PrintOp object for printing.
+
 2007-01-15  Jim Evins  <evins@snaught.com>
 
 	* data/glade/Makefile.am:

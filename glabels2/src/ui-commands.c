@@ -35,7 +35,7 @@
 #include "view.h"
 #include "file.h"
 #include "template-designer.h"
-#include "print-dialog.h"
+#include "print-op.h"
 #include "prefs.h"
 #include "prefs-dialog.h"
 #include "recent.h"
@@ -191,16 +191,16 @@ void
 gl_ui_cmd_file_print (GtkAction *action,
                       glWindow  *window)
 {
-        glPrintDialog *dialog;
+        glPrintOp *op;
 
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        dialog = gl_print_dialog_new (GL_VIEW(window->view)->label);
+        op = gl_print_op_new (GL_VIEW(window->view)->label);
 
-        gtk_print_operation_run (GTK_PRINT_OPERATION (dialog),
+        gtk_print_operation_run (GTK_PRINT_OPERATION (op),
                                  GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
                                  GTK_WINDOW (window),
                                  NULL);

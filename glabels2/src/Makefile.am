@@ -113,8 +113,8 @@ glabels_SOURCES = 			\
 	object-editor-shadow-page.c	\
 	print.c				\
 	print.h				\
-	print-dialog.c			\
-	print-dialog.h			\
+	print-op.c			\
+	print-op.h			\
 	template-designer.c		\
 	template-designer.h		\
 	bc.c				\
@@ -191,6 +191,8 @@ glabels_batch_SOURCES = 		\
 	glabels-batch.c			\
 	print.c				\
 	print.h				\
+	print-op.c			\
+	print-op.h			\
 	bc.c				\
 	bc.h				\
 	bc-gnubarcode.c			\
@@ -247,6 +249,14 @@ glabels_batch_SOURCES = 		\
 	color.h				\
 	debug.c 			\
 	debug.h 			\
+	wdgt-print-copies.c		\
+	wdgt-print-copies.h		\
+	wdgt-print-merge.c		\
+	wdgt-print-merge.h		\
+	wdgt-mini-preview.c		\
+	wdgt-mini-preview.h		\
+	hig.c				\
+	hig.h				\
 	$(BUILT_SOURCES)
 
 marshal.h: marshal.list $(GLIB_GENMARSHAL)

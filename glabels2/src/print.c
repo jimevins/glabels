@@ -382,42 +382,6 @@ gl_print_uncollated_merge_sheet (glLabel          *label,
 	gl_debug (DEBUG_PRINT, "END");
 }
 
-#ifdef TODO
-/*****************************************************************************/
-/* Batch print.  Call appropriate function above.                            */
-/*****************************************************************************/
-void
-gl_print_batch (GnomePrintJob    *job,
-		glLabel          *label,
-		gint              n_sheets,
-		gint              n_copies,
-		gint              first,
-		glPrintFlags     *flags)
-{
-	glMerge                   *merge;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gint                       n_per_page;
-	
-	gl_debug (DEBUG_PRINT, "START");
-
-	merge = gl_label_get_merge (label);
-	template = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	if ( merge == NULL ) {
-		n_per_page = gl_template_get_n_labels(label_type);
-
-		gl_print_simple (job, label, n_sheets, first, n_per_page, flags);
-	} else {
-		gl_print_merge_collated (job, label, n_copies, first, flags);
-	}
-	gl_template_free (template);
-
-	gl_debug (DEBUG_PRINT, "END");
-}
-#endif
-
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  new print info structure                                        */
 /*---------------------------------------------------------------------------*/

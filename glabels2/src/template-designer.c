@@ -39,7 +39,7 @@
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "wdgt-mini-preview.h"
-#include "print-dialog.h"
+#include "print-op.h"
 
 #include "debug.h"
 
@@ -1489,16 +1489,16 @@ print_test_cb (glTemplateDesigner      *dlg)
 {
 	GObject    *label;
 	glTemplate *template;
-	GtkWidget  *print_dialog;
+	glPrintOp  *print_op;
 
 	label = gl_label_new ();
 
 	template = build_template (dlg);
 	gl_label_set_template (GL_LABEL(label), template);
 
-	print_dialog = gl_print_dialog_new (GL_LABEL(label));
-	gl_print_dialog_force_outline_flag (GL_PRINT_DIALOG(print_dialog));
-        gtk_print_operation_run (GTK_PRINT_OPERATION (print_dialog),
+	print_op = gl_print_op_new (GL_LABEL(label));
+	gl_print_op_force_outline_flag (print_op);
+        gtk_print_operation_run (GTK_PRINT_OPERATION (print_op),
                                  GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
                                  GTK_WINDOW (dlg),
                                  NULL);
