@@ -24,7 +24,7 @@
 #define __WDGT_PRINT_MERGE_H__
 
 #include "label.h"
-#include "hig.h"
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 
@@ -42,7 +42,7 @@ typedef struct _glWdgtPrintMerge      glWdgtPrintMerge;
 typedef struct _glWdgtPrintMergeClass glWdgtPrintMergeClass;
 
 struct _glWdgtPrintMerge {
-	glHigHBox parent_widget;
+	GtkHBox   parent_widget;
 
 	gint      labels_per_sheet;
 	GtkWidget *mini_preview;
@@ -56,7 +56,7 @@ struct _glWdgtPrintMerge {
 };
 
 struct _glWdgtPrintMergeClass {
-	glHigHBoxClass parent_class;
+	GtkHBoxClass parent_class;
 };
 
 GType      gl_wdgt_print_merge_get_type   (void) G_GNUC_CONST;

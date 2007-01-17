@@ -24,7 +24,7 @@
 #define __WDGT_PRINT_COPIES_H__
 
 #include "label.h"
-#include "hig.h"
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 
@@ -42,7 +42,7 @@ typedef struct _glWdgtPrintCopies      glWdgtPrintCopies;
 typedef struct _glWdgtPrintCopiesClass glWdgtPrintCopiesClass;
 
 struct _glWdgtPrintCopies {
-	glHigHBox parent_widget;
+	GtkHBox   parent_widget;
 
 	gint      labels_per_sheet;
 
@@ -57,7 +57,7 @@ struct _glWdgtPrintCopies {
 };
 
 struct _glWdgtPrintCopiesClass {
-	glHigHBoxClass parent_class;
+	GtkHBoxClass parent_class;
 };
 
 GType      gl_wdgt_print_copies_get_type  (void) G_GNUC_CONST;

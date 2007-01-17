@@ -1,3 +1,17 @@
+2007-01-17  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/hig.c:
+		Deleted hig.c.
+	* src/hig.h:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_get_type),
+	(gl_wdgt_print_copies_construct):
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_type),
+	(gl_wdgt_print_merge_construct):
+	* src/wdgt-print-merge.h:
+		Removed all remaining HIG wrapper widgets.
+
 2007-01-16  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:

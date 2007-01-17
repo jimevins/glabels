@@ -29,7 +29,9 @@
 #include <gtk/gtkspinbutton.h>
 #include <gtk/gtkradiobutton.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtkvbox.h>
 
+#include "hig.h"
 #include "wdgt-mini-preview.h"
 #include "marshal.h"
 
@@ -89,7 +91,7 @@ gl_wdgt_print_copies_get_type (void)
 			NULL
 		};
 
-		type = g_type_register_static (GL_TYPE_HIG_HBOX,
+		type = g_type_register_static (GTK_TYPE_HBOX,
 					       "glWdgtPrintCopies", &info, 0);
 	}
 
@@ -174,50 +176,48 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 						    WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
 					   template);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), copies->mini_preview);
+	gtk_box_pack_start (GTK_BOX(whbox), copies->mini_preview, FALSE, FALSE, 0);
 
-	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_INNER);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wvbox);
+	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD1);
+	gtk_box_pack_start (GTK_BOX(whbox), wvbox, FALSE, FALSE, 0);
 
 	/* Sheet controls */
-	whbox1 = gl_hig_hbox_new ();
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox1);
+	whbox1 = gtk_hbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
 	copies->sheets_radio =
 	    gtk_radio_button_new_with_label (radio_group, _("Sheets:"));
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), copies->sheets_radio);
+	gtk_box_pack_start (GTK_BOX(whbox1), copies->sheets_radio, FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (1, 1.0, 10.0, 1.0, 10.0, 10.0);
 	copies->sheets_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						   1.0, 0);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), copies->sheets_spin);
+	gtk_box_pack_start (GTK_BOX(whbox1), copies->sheets_spin, FALSE, FALSE, 0);
 	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
 					      1, copies->labels_per_sheet);
 
 	/* Blank line */
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), gtk_label_new (""));
+	gtk_box_pack_start (GTK_BOX(wvbox), gtk_label_new (""), FALSE, FALSE, 0);
 
 	/* Label controls */
-	whbox1 = gl_hig_hbox_new ();
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox1);
+	whbox1 = gtk_hbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
 	radio_group =
 	    gtk_radio_button_get_group (GTK_RADIO_BUTTON (copies->sheets_radio));
 	copies->labels_radio =
 	    gtk_radio_button_new_with_label (radio_group, _("Labels"));
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), copies->labels_radio);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
-				gtk_label_new (_("from:")));
+	gtk_box_pack_start (GTK_BOX(whbox1), copies->labels_radio, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new (_("from:")), FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (1, 1.0, copies->labels_per_sheet,
 				     1.0, 10.0, 10.0);
 	copies->first_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						  1.0, 0);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), copies->first_spin);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
-				gtk_label_new (_("to:")));
+	gtk_box_pack_start (GTK_BOX(whbox1), copies->first_spin, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new (_("to:")), FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (copies->labels_per_sheet,
 				     1.0, copies->labels_per_sheet,
 				     1.0, 10.0, 10.0);
 	copies->last_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						 1.0, 0);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), copies->last_spin);
+	gtk_box_pack_start (GTK_BOX(whbox1), copies->last_spin, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (copies->first_spin, FALSE);
 	gtk_widget_set_sensitive (copies->last_spin, FALSE);
 

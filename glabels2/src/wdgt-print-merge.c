@@ -30,8 +30,9 @@
 #include <gtk/gtkspinbutton.h>
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtklabel.h>
+#include <gtk/gtkvbox.h>
 
-
+#include "hig.h"
 #include "wdgt-mini-preview.h"
 #include "marshal.h"
 
@@ -92,7 +93,7 @@ gl_wdgt_print_merge_get_type (void)
 			NULL
 		};
 
-		type = g_type_register_static (GL_TYPE_HIG_HBOX,
+		type = g_type_register_static (GTK_TYPE_HBOX,
 					       "glWdgtPrintMerge", &info, 0);
 	}
 
@@ -173,48 +174,48 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 							WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_template( GL_WDGT_MINI_PREVIEW (merge->mini_preview),
 					   template );
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), merge->mini_preview);
+	gtk_box_pack_start (GTK_BOX(whbox), merge->mini_preview, FALSE, FALSE, 0);
 	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
 					      1, 1);
 
-	wvbox = gl_hig_vbox_new (GL_HIG_VBOX_INNER);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox), wvbox);
+	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD1);
+	gtk_box_pack_start (GTK_BOX(whbox), wvbox, FALSE, FALSE, 0);
 
 	/* First Label controls */
-	whbox1 = gl_hig_hbox_new ();
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox1);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
-				gtk_label_new (_("Start on label")));
+	whbox1 = gtk_hbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1),
+				gtk_label_new (_("Start on label")), FALSE, FALSE, 0);
 	adjust =
 	    gtk_adjustment_new (1, 1.0, merge->labels_per_sheet, 1.0, 10.0,
 				10.0);
 	merge->first_spin =
 	    gtk_spin_button_new (GTK_ADJUSTMENT (adjust), 1.0, 0);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), merge->first_spin);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
-				gtk_label_new (_("on 1st sheet")));
+	gtk_box_pack_start (GTK_BOX(whbox1), merge->first_spin, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1),
+				gtk_label_new (_("on 1st sheet")), FALSE, FALSE, 0);
 
 	/* Blank line */
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), gtk_label_new (""));
+	gtk_box_pack_start (GTK_BOX(wvbox), gtk_label_new (""), FALSE, FALSE, 0);
 
 	/* Copy & collate controls*/
-	whbox1 = gl_hig_hbox_new ();
-	gl_hig_vbox_add_widget (GL_HIG_VBOX(wvbox), whbox1);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1),
-				gtk_label_new (_("Copies:")));
+	whbox1 = gtk_hbox_new (FALSE, GL_HIG_PAD2);
+	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1),
+				gtk_label_new (_("Copies:")), FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (1, 1.0, 10.0, 1.0, 10.0, 10.0);
 	merge->copies_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						   1.0, 0);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), merge->copies_spin);
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), gtk_label_new ("    "));
+	gtk_box_pack_start (GTK_BOX(whbox1), merge->copies_spin, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new ("    "), FALSE, FALSE, 0);
 	merge->collate_check = gtk_check_button_new_with_label (_("Collate"));
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), merge->collate_check);
+	gtk_box_pack_start (GTK_BOX(whbox1), merge->collate_check, FALSE, FALSE, 0);
 	pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)nocollate_xpm);
 	merge->collate_image = gtk_image_new_from_pixbuf(pixbuf);
 	gtk_widget_set_sensitive (merge->collate_check, FALSE);
 	gtk_widget_set_sensitive (merge->collate_image, FALSE);
 
-	gl_hig_hbox_add_widget (GL_HIG_HBOX(whbox1), merge->collate_image);
+	gtk_box_pack_start (GTK_BOX(whbox1), merge->collate_image, FALSE, FALSE, 0);
 
 	/* Connect signals to controls */
 	g_signal_connect (G_OBJECT (merge->mini_preview), "clicked",

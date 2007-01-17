@@ -75,7 +75,6 @@ glabels_SOURCES = 			\
 	prefs-model.h 			\
 	prefs-dialog.c 			\
 	prefs-dialog.h 			\
-	hig.c				\
 	hig.h				\
 	view.c				\
 	view.h				\
@@ -255,7 +254,6 @@ glabels_batch_SOURCES = 		\
 	wdgt-print-merge.h		\
 	wdgt-mini-preview.c		\
 	wdgt-mini-preview.h		\
-	hig.c				\
 	hig.h				\
 	$(BUILT_SOURCES)
 
