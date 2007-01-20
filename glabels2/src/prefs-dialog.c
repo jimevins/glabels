@@ -26,7 +26,6 @@
 #include "prefs-dialog.h"
 
 #include <glib/gi18n.h>
-#include <libgnomeprint/gnome-font.h>
 #include <glade/glade-xml.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkstock.h>
@@ -363,10 +362,10 @@ construct_object_page (glPrefsDialog *dlg)
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dlg->priv->text_family_combo));
 
         /* Load family names */
-        family_names = gnome_font_family_list ();
+        family_names = gl_util_get_font_family_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dlg->priv->text_family_combo),
 				       family_names);
-        gnome_font_family_list_free (family_names);
+        gl_util_font_family_list_free (family_names);
                                                                                 
 
 	g_signal_connect_swapped (G_OBJECT(dlg->priv->text_family_combo),
@@ -585,7 +584,7 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
 
 
         /* Make sure we have a valid font family.  if not provide a good default. */
-        family_names = gnome_font_family_list ();
+        family_names = gl_util_get_font_family_list ();
         if (g_list_find_custom (family_names,
 				gl_prefs->default_font_family,
 				(GCompareFunc)g_utf8_collate)) {
@@ -597,7 +596,7 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
                         good_font_family = NULL;
                 }
         }
-        gnome_font_family_list_free (family_names);
+        gl_util_font_family_list_free (family_names);
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dlg->priv->text_family_combo),
 					   good_font_family);
         g_free (good_font_family);
@@ -606,7 +605,7 @@ update_object_page_from_prefs (glPrefsDialog *dlg)
                                    gl_prefs->default_font_size);
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->text_bold_toggle),
-                                      (gl_prefs->default_font_weight == GNOME_FONT_BOLD));
+                                      (gl_prefs->default_font_weight == PANGO_WEIGHT_BOLD));
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->text_italic_toggle),
                                       gl_prefs->default_font_italic_flag);
@@ -725,9 +724,9 @@ update_prefs_from_object_page (glPrefsDialog *dlg)
 
         if (gtk_toggle_button_get_active
             (GTK_TOGGLE_BUTTON (dlg->priv->text_bold_toggle))) {
-                gl_prefs->default_font_weight = GNOME_FONT_BOLD;
+                gl_prefs->default_font_weight = PANGO_WEIGHT_BOLD;
         } else {
-                gl_prefs->default_font_weight = GNOME_FONT_BOOK;
+                gl_prefs->default_font_weight = PANGO_WEIGHT_NORMAL;
         }
 
         gl_prefs->default_font_italic_flag =

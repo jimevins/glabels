@@ -269,10 +269,10 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 	gdouble           w, h;
 	xmlChar          *font_family;
 	gdouble           font_size;
-	GnomeFontWeight   font_weight;
+	PangoWeight       font_weight;
 	gboolean          font_italic_flag;
 	glColorNode      *color_node;
-	GtkJustification  just;
+	PangoAlignment    align;
 	xmlNodePtr        line_node, text_node;
 	glTextNode       *node_text;
 	GList            *nodes;
@@ -296,7 +296,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, (xmlChar *)"justify");
-	just = gl_util_string_to_just ((gchar *)string);
+	align = gl_util_string_to_align ((gchar *)string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
@@ -347,7 +347,7 @@ xml191_parse_text_props (xmlNodePtr  object_node,
 	gl_label_object_set_font_weight (GL_LABEL_OBJECT(object), font_weight);
 	gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object), font_italic_flag);
 	gl_label_object_set_text_color (GL_LABEL_OBJECT(object), color_node);
-	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), just);
+	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align);
 
 	gl_color_node_free (&color_node);
 	gl_text_node_lines_free (&lines);

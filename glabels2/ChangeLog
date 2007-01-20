@@ -1,3 +1,52 @@
+2007-01-19  Jim Evins  <evins@snaught.com>
+
+	* src/label-barcode.h:
+	* src/label-object.c: (gl_label_object_set_font_weight),
+	(gl_label_object_set_text_alignment),
+	(gl_label_object_get_font_weight),
+	(gl_label_object_get_text_alignment):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_instance_init), (copy),
+	(get_size), (set_font_family), (set_font_weight),
+	(set_text_alignment), (get_font_weight), (get_text_alignment):
+	* src/label-text.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family),
+	(gl_object_editor_set_font_weight),
+	(gl_object_editor_get_font_weight),
+	(gl_object_editor_set_text_alignment),
+	(gl_object_editor_get_text_alignment),
+	(gl_object_editor_set_text_color):
+	* src/object-editor.h:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+	* src/print.c: (draw_text_object):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties), (update_text_properties),
+	(font_bold_toggled_cb), (text_align_toggled_cb):
+	* src/ui-sidebar.c:
+	* src/util.c: (gl_util_align_to_string), (gl_util_string_to_align),
+	(gl_util_weight_to_string), (gl_util_string_to_weight),
+	(gl_util_get_font_family_list), (gl_util_font_family_list_free):
+	* src/util.h:
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (draw_hacktext), (draw_cursor):
+	* src/view.c: (gl_view_set_selection_text_alignment),
+	(gl_view_set_default_text_alignment),
+	(gl_view_get_default_text_alignment):
+	* src/view.h:
+	* src/xml-label-04.c: (xml04_parse_text_props):
+	* src/xml-label-191.c: (xml191_parse_text_props):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_parse_toplevel_span), (xml_create_object_text),
+	(xml_create_toplevel_span):
+		Converted all model internals to Pango.  GnomeFont remains in
+	view until GnomeCanvas can be replaced with a cairo-based canvas.
+	
 2007-01-17  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:

@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  label_object.c:  GLabels label object base class
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -707,7 +709,7 @@ gl_label_object_set_font_size (glLabelObject     *object,
 /****************************************************************************/
 void
 gl_label_object_set_font_weight (glLabelObject     *object,
-				 GnomeFontWeight    font_weight)
+				 PangoWeight        font_weight)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -750,7 +752,7 @@ gl_label_object_set_font_italic_flag (glLabelObject     *object,
 /****************************************************************************/
 void
 gl_label_object_set_text_alignment (glLabelObject     *object,
-				    GtkJustification   text_alignment)
+				    PangoAlignment     text_alignment)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -860,14 +862,14 @@ gl_label_object_get_font_size (glLabelObject     *object)
 /****************************************************************************/
 /* Get font weight for all text contained in object.                        */
 /****************************************************************************/
-GnomeFontWeight
+PangoWeight    
 gl_label_object_get_font_weight (glLabelObject     *object)
 {
-	GnomeFontWeight ret = GNOME_FONT_BOOK;
+	PangoWeight     ret = PANGO_WEIGHT_NORMAL;
 
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), GNOME_FONT_BOOK);
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), PANGO_WEIGHT_NORMAL);
 
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight != NULL ) {
 
@@ -908,14 +910,14 @@ gl_label_object_get_font_italic_flag (glLabelObject     *object)
 /****************************************************************************/
 /* Get text alignment for all text contained in object.                     */
 /****************************************************************************/
-GtkJustification
+PangoAlignment
 gl_label_object_get_text_alignment (glLabelObject     *object)
 {
-	GtkJustification ret = GTK_JUSTIFY_LEFT;
+	PangoAlignment ret = PANGO_ALIGN_LEFT;
 
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), GTK_JUSTIFY_LEFT);
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), PANGO_ALIGN_LEFT);
 
 	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment != NULL ) {
 

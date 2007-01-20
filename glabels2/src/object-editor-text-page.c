@@ -32,6 +32,7 @@
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 
@@ -102,10 +103,10 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
 
 	/* Load family names */
-	family_names = gnome_font_family_list ();
+	family_names = gl_util_get_font_family_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->text_family_combo),
 				       family_names);
-	gnome_font_family_list_free (family_names);
+	gl_util_font_family_list_free (family_names);
 
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
@@ -232,7 +233,7 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 					 editor);
 
         /* Make sure we have a valid font family.  if not provide a good default. */
-        family_names = gnome_font_family_list ();
+        family_names = gl_util_get_font_family_list ();
         if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
                 good_font_family = g_strdup (font_family);
         } else {
@@ -242,7 +243,7 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
                         good_font_family = NULL;
                 }
         }
-        gnome_font_family_list_free (family_names);
+        gl_util_font_family_list_free (family_names);
         gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo), good_font_family);
         g_free (good_font_family);
 
@@ -316,7 +317,7 @@ gl_object_editor_get_font_size (glObjectEditor      *editor)
 /*****************************************************************************/
 void
 gl_object_editor_set_font_weight (glObjectEditor      *editor,
-				  GnomeFontWeight      font_weight)
+				  PangoWeight          font_weight)
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -325,7 +326,7 @@ gl_object_editor_set_font_weight (glObjectEditor      *editor,
 					 editor);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_bold_toggle),
-                                      (font_weight == GNOME_FONT_BOLD));
+                                      (font_weight == PANGO_WEIGHT_BOLD));
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_bold_toggle),
 					   gl_object_editor_changed_cb,
@@ -337,18 +338,18 @@ gl_object_editor_set_font_weight (glObjectEditor      *editor,
 /*****************************************************************************/
 /* Query font weight.                                                        */
 /*****************************************************************************/
-GnomeFontWeight
+PangoWeight
 gl_object_editor_get_font_weight (glObjectEditor      *editor)
 {
-	GnomeFontWeight font_weight;
+	PangoWeight font_weight;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
         if (gtk_toggle_button_get_active
 	    (GTK_TOGGLE_BUTTON (editor->priv->text_bold_toggle))) {
-                font_weight = GNOME_FONT_BOLD;
+                font_weight = PANGO_WEIGHT_BOLD;
         } else {
-                font_weight = GNOME_FONT_BOOK;
+                font_weight = PANGO_WEIGHT_NORMAL;
         }
 
 	gl_debug (DEBUG_EDITOR, "END");
@@ -404,7 +405,7 @@ gl_object_editor_get_font_italic_flag (glObjectEditor      *editor)
 /*****************************************************************************/
 void
 gl_object_editor_set_text_alignment (glObjectEditor      *editor,
-				     GtkJustification     just)
+				     PangoAlignment       align)
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -419,11 +420,11 @@ gl_object_editor_set_text_alignment (glObjectEditor      *editor,
 					 editor);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_left_toggle),
-                                      (just == GTK_JUSTIFY_LEFT));
+                                      (align == PANGO_ALIGN_LEFT));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_center_toggle),
-                                      (just == GTK_JUSTIFY_CENTER));
+                                      (align == PANGO_ALIGN_CENTER));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_right_toggle),
-                                      (just == GTK_JUSTIFY_RIGHT));
+                                      (align == PANGO_ALIGN_RIGHT));
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->text_left_toggle),
 					   align_toggle_cb,
@@ -441,31 +442,31 @@ gl_object_editor_set_text_alignment (glObjectEditor      *editor,
 /*****************************************************************************/
 /* Query text alignment.                                                     */
 /*****************************************************************************/
-GtkJustification
+PangoAlignment
 gl_object_editor_get_text_alignment (glObjectEditor      *editor)
 {
-	GtkJustification just;
+	PangoAlignment align;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
         if (gtk_toggle_button_get_active
             (GTK_TOGGLE_BUTTON (editor->priv->text_left_toggle))) {
-                just = GTK_JUSTIFY_LEFT;
+                align = PANGO_ALIGN_LEFT;
         } else
             if (gtk_toggle_button_get_active
                 (GTK_TOGGLE_BUTTON (editor->priv->text_right_toggle))) {
-                just = GTK_JUSTIFY_RIGHT;
+                align = PANGO_ALIGN_RIGHT;
         } else
             if (gtk_toggle_button_get_active
                 (GTK_TOGGLE_BUTTON (editor->priv->text_center_toggle))) {
-                just = GTK_JUSTIFY_CENTER;
+                align = PANGO_ALIGN_CENTER;
         } else {
-                just = GTK_JUSTIFY_LEFT;       /* Should not happen. */
+                align = PANGO_ALIGN_LEFT;       /* Should not happen. */
         }
 
 	gl_debug (DEBUG_EDITOR, "END");
 
-	return just;
+	return align;
 }
 
 /*****************************************************************************/
@@ -517,7 +518,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, TRUE);
 		
 		gl_debug (DEBUG_EDITOR, "color field true 1");
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
+		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo), "");
 		gl_debug (DEBUG_EDITOR, "color field true 2");
 	}
 

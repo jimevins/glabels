@@ -421,7 +421,7 @@ xml_parse_object_text (xmlNodePtr  node,
 	gdouble           x, y;
 	gdouble           w, h;
 	gchar            *string;
-	GtkJustification  just;
+	PangoAlignment    align;
 	gboolean          auto_shrink;
 	xmlNodePtr        child;
 
@@ -441,9 +441,9 @@ xml_parse_object_text (xmlNodePtr  node,
 
 	/* justify attr */
 	string = gl_xml_get_prop_string (node, "justify", NULL);
-	just = gl_util_string_to_just (string);
+	align = gl_util_string_to_align (string);
 	g_free (string);
-	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), just);
+	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align);
 
 	/* auto_shrink attr */
 	auto_shrink = gl_xml_get_prop_boolean (node, "auto_shrink", FALSE);
@@ -899,7 +899,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 {
 	gchar            *font_family;
 	gdouble           font_size;
-	GnomeFontWeight   font_weight;
+	PangoWeight       font_weight;
 	gboolean          font_italic_flag;
 	glColorNode      *color_node;
 	gdouble           text_line_spacing;
@@ -1221,7 +1221,7 @@ xml_create_object_text (xmlNodePtr     root,
 	xmlNodePtr        node;
 	gdouble           x, y;
 	gdouble           w, h;
-	GtkJustification  just;
+	PangoAlignment    align;
 	gboolean          auto_shrink;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1239,8 +1239,8 @@ xml_create_object_text (xmlNodePtr     root,
 	gl_xml_set_prop_length (node, "h", h);
 
 	/* justify attr */
-	just = gl_label_object_get_text_alignment (object);
-	gl_xml_set_prop_string (node, "justify", gl_util_just_to_string (just));
+	align = gl_label_object_get_text_alignment (object);
+	gl_xml_set_prop_string (node, "justify", gl_util_align_to_string (align));
 
 	/* auto_shrink attr */
 	auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
@@ -1675,10 +1675,10 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	xmlNodePtr        node;
 	gchar            *font_family;
 	gdouble           font_size;
-	GnomeFontWeight   font_weight;
+	PangoWeight       font_weight;
 	gboolean          font_italic_flag;
 	glColorNode      *color_node;
-	GtkJustification  just;
+	PangoAlignment    align;
 	gdouble           text_line_spacing;
 	GList            *lines, *p_line, *p_node;
 	glTextNode       *text_node;
@@ -1704,7 +1704,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	}
 	gl_color_node_free (&color_node);
 	
-	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object_text));
+	align = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object_text));
 	gl_xml_set_prop_string (node, "font_family", font_family);
 	gl_xml_set_prop_double (node, "font_size", font_size);
 	gl_xml_set_prop_string (node, "font_weight", gl_util_weight_to_string (font_weight));

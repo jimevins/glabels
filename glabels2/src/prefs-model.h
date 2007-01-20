@@ -23,9 +23,8 @@
 #define __PREFS_MODEL_H__
 
 #include <glib-object.h>
-#include <gtk/gtkenums.h>
 #include <gconf/gconf-client.h>
-#include <libgnomeprint/gnome-font.h>
+#include <pango/pango.h>
 #include <libglabels/enums.h>
 
 G_BEGIN_DECLS
@@ -64,10 +63,10 @@ struct _glPrefsModel {
 	/* Text properties */
 	gchar            *default_font_family;
 	gdouble           default_font_size;
-	GnomeFontWeight   default_font_weight;
+	PangoWeight       default_font_weight;
 	gboolean          default_font_italic_flag;
 	guint             default_text_color;
-	GtkJustification  default_text_alignment;
+	PangoAlignment    default_text_alignment;
 	gdouble           default_text_line_spacing;
 	
 	/* Line properties */

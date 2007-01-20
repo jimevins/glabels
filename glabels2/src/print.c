@@ -29,7 +29,6 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <gtk/gtkenums.h>
 
 #include "label.h"
 #include "label-text.h"
@@ -670,11 +669,10 @@ draw_text_object (PrintInfo     *pi,
 	GList           *lines;
 	gchar           *font_family;
 	gdouble          font_size;
-	GnomeFontWeight  font_weight;
+	PangoWeight      font_weight;
 	gboolean         font_italic_flag;
 	guint            color;
 	glColorNode     *color_node;
-	GtkJustification just;
 	gboolean         auto_shrink;
 	ArtDRect         bbox;
 	gdouble          affine[6];
@@ -703,7 +701,7 @@ draw_text_object (PrintInfo     *pi,
 	color = gl_color_node_expand (color_node, record);
 	gl_color_node_free (&color_node);
 	
-	just = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
+	alignment = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object));
 	text_line_spacing =
 		gl_label_object_get_text_line_spacing (GL_LABEL_OBJECT(object));
 	auto_shrink = gl_label_text_get_auto_shrink (object);
@@ -720,21 +718,6 @@ draw_text_object (PrintInfo     *pi,
 	gl_color_node_free (&shadow_color_node);
 
 	text = gl_text_node_lines_expand (lines, record);
-
-        switch (just) {
-        case GTK_JUSTIFY_LEFT:
-                alignment = PANGO_ALIGN_LEFT;
-                break;
-        case GTK_JUSTIFY_CENTER:
-                alignment = PANGO_ALIGN_CENTER;
-                break;
-        case GTK_JUSTIFY_RIGHT:
-                alignment = PANGO_ALIGN_RIGHT;
-                break;
-        default:
-                alignment = PANGO_ALIGN_LEFT;
-                break;	/* shouldn't happen */
-        }
 
         style = font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
 

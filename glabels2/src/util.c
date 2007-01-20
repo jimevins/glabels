@@ -27,7 +27,6 @@
 #include <string.h>
 #include <glib.h>
 #include <math.h>
-#include <libgnomeprint/gnome-font.h>
 #include <gtk/gtkliststore.h>
 #include <gtk/gtkcellrenderertext.h>
 #include <gtk/gtkcelllayout.h>
@@ -132,65 +131,65 @@ gl_util_fraction (gdouble x)
 }
 
 /****************************************************************************/
-/* Utilities to deal with GTK_JUSTIFICATION types.                          */
+/* Utilities to deal with PangoAlignment types.                             */
 /****************************************************************************/
 const gchar *
-gl_util_just_to_string (GtkJustification just)
+gl_util_align_to_string (PangoAlignment align)
 {
-	switch (just) {
-	case GTK_JUSTIFY_LEFT:
+	switch (align) {
+	case PANGO_ALIGN_LEFT:
 		return "Left";
-	case GTK_JUSTIFY_CENTER:
+	case PANGO_ALIGN_CENTER:
 		return "Center";
-	case GTK_JUSTIFY_RIGHT:
+	case PANGO_ALIGN_RIGHT:
 		return "Right";
 	default:
 		return "?";
 	}
 }
 
-GtkJustification
-gl_util_string_to_just (const gchar *string)
+PangoAlignment
+gl_util_string_to_align (const gchar *string)
 {
 
 	if (g_strcasecmp (string, "Left") == 0) {
-		return GTK_JUSTIFY_LEFT;
+		return PANGO_ALIGN_LEFT;
 	} else if (g_strcasecmp (string, "Center") == 0) {
-		return GTK_JUSTIFY_CENTER;
+		return PANGO_ALIGN_CENTER;
 	} else if (g_strcasecmp (string, "Right") == 0) {
-		return GTK_JUSTIFY_RIGHT;
+		return PANGO_ALIGN_RIGHT;
 	} else {
-		return GTK_JUSTIFY_LEFT;
+		return PANGO_ALIGN_LEFT;
 	}
 
 }
 
 /****************************************************************************/
-/* Utilities to deal with GNOME_FONT_WEIGHT types                           */
+/* Utilities to deal with PangoWeight types                                 */
 /****************************************************************************/
 const gchar *
-gl_util_weight_to_string (GnomeFontWeight weight)
+gl_util_weight_to_string (PangoWeight weight)
 {
 	switch (weight) {
-	case GNOME_FONT_BOOK:
+	case PANGO_WEIGHT_NORMAL:
 		return "Regular";
-	case GNOME_FONT_BOLD:
+	case PANGO_WEIGHT_BOLD:
 		return "Bold";
 	default:
 		return "?";
 	}
 }
 
-GnomeFontWeight
+PangoWeight
 gl_util_string_to_weight (const gchar *string)
 {
 
 	if (g_strcasecmp (string, "Regular") == 0) {
-		return GNOME_FONT_BOOK;
+		return PANGO_WEIGHT_NORMAL;
 	} else if (g_strcasecmp (string, "Bold") == 0) {
-		return GNOME_FONT_BOLD;
+		return PANGO_WEIGHT_BOLD;
 	} else {
-		return GNOME_FONT_BOOK;
+		return PANGO_WEIGHT_NORMAL;
 	}
 
 }
@@ -302,4 +301,53 @@ gl_util_combo_box_add_text_model (GtkComboBox       *combo)
 					"text", 0,
 					NULL);
 }
+
+/****************************************************************************/
+/* Get list of available font families.                                     */
+/****************************************************************************/
+GList  *
+gl_util_get_font_family_list (void)
+{
+	GList                *list = NULL;
+	PangoFontMap         *fontmap;
+	PangoContext         *context;
+	PangoFontFamily     **families;
+	gint                  n;
+	gint                  i;
+	gchar                *name;
+
+	fontmap = pango_cairo_font_map_new ();
+	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+
+	pango_context_list_families (context, &families, &n);
+
+	for ( i=0; i<n; i++ )
+	{
+		name = g_strdup (pango_font_family_get_name (families[i]));
+		list = g_list_append (list, name);
+	}
+
+	g_free (families);
+
+	g_object_unref (context);
+	g_object_unref (fontmap);
+
+	return list;
+}
+
+/****************************************************************************/
+/* Free previosly allocated list of font families.                          */
+/****************************************************************************/
+void    gl_util_font_family_list_free (GList *list)
+{
+        GList *p;
+
+        for (p = list; p != NULL; p = p->next) {
+                g_free (p->data);
+                p->data = NULL;
+        }
+
+        g_list_free (list);
+}
+
 

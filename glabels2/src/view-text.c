@@ -325,7 +325,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
 	glColorNode       *color_node;
-	GtkJustification   just;
+	PangoAlignment     align;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
 	gboolean           shadow_state;
@@ -349,7 +349,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	font_weight = gl_object_editor_get_font_weight (editor);
 	font_italic_flag = gl_object_editor_get_font_italic_flag (editor);
 	color_node = gl_object_editor_get_text_color (editor);
-	just = gl_object_editor_get_text_alignment (editor);
+	align = gl_object_editor_get_text_alignment (editor);
 	text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
 	auto_shrink = gl_object_editor_get_text_auto_shrink (editor);
 
@@ -359,7 +359,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_label_object_set_font_weight (object, font_weight);
 	gl_label_object_set_font_italic_flag (object, font_italic_flag);
 	gl_label_object_set_text_color (object, color_node);
-	gl_label_object_set_text_alignment (object, just);
+	gl_label_object_set_text_alignment (object, align);
 	gl_label_object_set_text_line_spacing (object, text_line_spacing);
 	gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink);
 
@@ -434,7 +434,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	GnomeFontWeight    font_weight;
 	gboolean           font_italic_flag;
 	glColorNode       *color_node;
-	GtkJustification   just;
+	PangoAlignment     align;
 	gdouble            text_line_spacing;
 	gboolean           auto_shrink;
 	gboolean           shadow_state;
@@ -454,7 +454,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	font_weight      = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
 	color_node       = gl_label_object_get_text_color (object);
-	just             = gl_label_object_get_text_alignment (object);
+	align             = gl_label_object_get_text_alignment (object);
 	text_line_spacing = gl_label_object_get_text_line_spacing (object);
 	auto_shrink      = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
 
@@ -463,7 +463,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_object_editor_set_font_weight (editor, font_weight);
 	gl_object_editor_set_font_italic_flag (editor, font_italic_flag);
 	gl_object_editor_set_text_color (editor, (merge != NULL), color_node);
-	gl_object_editor_set_text_alignment (editor, just);
+	gl_object_editor_set_text_alignment (editor, align);
 	gl_object_editor_set_text_line_spacing (editor, text_line_spacing);
 	gl_object_editor_set_text_auto_shrink (editor, auto_shrink);
 
@@ -707,7 +707,7 @@ draw_hacktext (glViewText *view_text)
 	gdouble            font_size;
 	gdouble            text_line_spacing;
 	glColorNode       *color_node;
-	GtkJustification   just;
+	PangoAlignment     align;
 	GnomeFont         *font;
 	GnomeGlyphList    *glyphlist;
 	ArtDRect           bbox;
@@ -737,7 +737,7 @@ draw_hacktext (glViewText *view_text)
 	{
 		color_node->color = GL_COLOR_MERGE_DEFAULT;
 	}
-	just = gl_label_object_get_text_alignment (object);
+	align = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
@@ -790,14 +790,14 @@ draw_hacktext (glViewText *view_text)
 			gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 			w = bbox.x1;
 
-			switch (just) {
-			case GTK_JUSTIFY_LEFT:
+			switch (align) {
+			case PANGO_ALIGN_LEFT:
 				x_offset = GL_LABEL_TEXT_MARGIN;
 				break;
-			case GTK_JUSTIFY_CENTER:
+			case PANGO_ALIGN_CENTER:
 				x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 				break;
-			case GTK_JUSTIFY_RIGHT:
+			case PANGO_ALIGN_RIGHT:
 				x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 				break;
 			default:
@@ -837,14 +837,14 @@ draw_hacktext (glViewText *view_text)
 		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
 		w = bbox.x1;
 
-		switch (just) {
-		case GTK_JUSTIFY_LEFT:
+		switch (align) {
+		case PANGO_ALIGN_LEFT:
 			x_offset = GL_LABEL_TEXT_MARGIN;
 			break;
-		case GTK_JUSTIFY_CENTER:
+		case PANGO_ALIGN_CENTER:
 			x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 			break;
-		case GTK_JUSTIFY_RIGHT:
+		case PANGO_ALIGN_RIGHT:
 			x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 			break;
 		default:
@@ -899,7 +899,7 @@ draw_cursor (glViewText *view_text)
 	gboolean           font_italic_flag;
 	gdouble            font_size;
 	glColorNode       *color_node;
-	GtkJustification   just;
+	PangoAlignment     align;
 	GnomeFont         *font;
 	GnomeGlyphList    *glyphlist;
 	ArtDRect           bbox;
@@ -923,7 +923,7 @@ draw_cursor (glViewText *view_text)
 	font_weight = gl_label_object_get_font_weight (object);
 	font_italic_flag = gl_label_object_get_font_italic_flag (object);
 	color_node = gl_label_object_get_text_color (object);
-	just = gl_label_object_get_text_alignment (object);
+	align = gl_label_object_get_text_alignment (object);
 	buffer = gl_label_text_get_buffer(GL_LABEL_TEXT(object));
 	gtk_text_buffer_get_bounds (buffer, &start, &end);
 	text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
@@ -960,14 +960,14 @@ draw_cursor (glViewText *view_text)
 			gnome_glyphlist_unref (glyphlist);
 			w = bbox.x1;
 
-			switch (just) {
-			case GTK_JUSTIFY_LEFT:
+			switch (align) {
+			case PANGO_ALIGN_LEFT:
 				x_offset = GL_LABEL_TEXT_MARGIN;
 				break;
-			case GTK_JUSTIFY_CENTER:
+			case PANGO_ALIGN_CENTER:
 				x_offset = (object_w - GL_LABEL_TEXT_MARGIN - w) / 2.0;
 				break;
-			case GTK_JUSTIFY_RIGHT:
+			case PANGO_ALIGN_RIGHT:
 				x_offset = object_w - GL_LABEL_TEXT_MARGIN - w;
 				break;
 			default:

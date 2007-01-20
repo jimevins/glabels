@@ -75,9 +75,9 @@
 
 #define DEFAULT_FONT_FAMILY        "Sans"
 #define DEFAULT_FONT_SIZE          14.0
-#define DEFAULT_FONT_WEIGHT_STRING gl_util_weight_to_string (GNOME_FONT_BOOK)
+#define DEFAULT_FONT_WEIGHT_STRING gl_util_weight_to_string (PANGO_WEIGHT_NORMAL)
 #define DEFAULT_FONT_ITALIC_FLAG   FALSE
-#define DEFAULT_TEXT_JUST_STRING   gl_util_just_to_string (GTK_JUSTIFY_LEFT)
+#define DEFAULT_TEXT_ALIGN_STRING  gl_util_align_to_string (PANGO_ALIGN_LEFT)
 #define DEFAULT_TEXT_COLOR         GNOME_CANVAS_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING  1.0
 
@@ -300,7 +300,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 
 	gconf_client_set_string (prefs_model->gconf_client,
 				 BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
-				 gl_util_just_to_string(prefs_model->default_text_alignment),
+				 gl_util_align_to_string(prefs_model->default_text_alignment),
 				 NULL);
 
 	gconf_client_set_float  (prefs_model->gconf_client,
@@ -443,8 +443,8 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	string =
 		get_string (prefs_model->gconf_client,
 			    BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
-			    DEFAULT_TEXT_JUST_STRING);
-	prefs_model->default_text_alignment = gl_util_string_to_just( string );
+			    DEFAULT_TEXT_ALIGN_STRING);
+	prefs_model->default_text_alignment = gl_util_string_to_align( string );
 	g_free( string );
 
 	prefs_model->default_text_line_spacing =

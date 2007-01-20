@@ -26,7 +26,6 @@
 #define __VIEW_H__
 
 #include <gtk/gtkvbox.h>
-#include <gtk/gtkenums.h>
 #include <libgnomecanvas/libgnomecanvas.h>
 #include <libgnomeprint/gnome-font.h>
 
@@ -85,7 +84,7 @@ struct _glView {
 	GnomeFontWeight    default_font_weight;
 	gboolean           default_font_italic_flag;
 	guint              default_text_color;
-	GtkJustification   default_text_alignment;
+	PangoAlignment     default_text_alignment;
 	gdouble            default_text_line_spacing;
 
 	/* Default object line properties */
@@ -227,7 +226,7 @@ void       gl_view_set_selection_font_italic_flag (glView           *view,
 						   gboolean          font_italic_flag);
 
 void       gl_view_set_selection_text_alignment   (glView           *view,
-						   GtkJustification  text_alignment);
+						   PangoAlignment    text_alignment);
 
 void       gl_view_set_selection_text_color       (glView           *view,
 						   glColorNode      *text_color_node);
@@ -287,7 +286,7 @@ void       gl_view_set_default_text_color       (glView            *view,
 						 guint              text_color);
 
 void       gl_view_set_default_text_alignment   (glView            *view,
-						 GtkJustification   text_alignment);
+						 PangoAlignment     text_alignment);
 
 void       gl_view_set_default_line_width       (glView            *view,
 						 gdouble            line_width);
@@ -312,7 +311,7 @@ gboolean         gl_view_get_default_font_italic_flag (glView            *view);
 
 guint            gl_view_get_default_text_color       (glView            *view);
 
-GtkJustification gl_view_get_default_text_alignment   (glView            *view);
+PangoAlignment   gl_view_get_default_text_alignment   (glView            *view);
 
 gdouble          gl_view_get_default_text_line_spacing (glView            *view);
 

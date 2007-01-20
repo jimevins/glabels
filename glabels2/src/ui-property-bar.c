@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /**
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -32,7 +32,6 @@
 #include <gtk/gtkspinbutton.h>
 #include <gtk/gtktoolbar.h>
 #include <gtk/gtktoggletoolbutton.h>
-#include <libgnomeprint/gnome-font.h>
 #include <gtk/gtktooltips.h>
 #include <string.h>
 
@@ -306,7 +305,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 
 	/* Font family entry widget */
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (property_bar->priv->font_family_combo));
-	family_names = gnome_font_family_list ();
+	family_names = gl_util_get_font_family_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
 				       family_names);
 	gtk_widget_set_size_request (property_bar->priv->font_family_combo, 200, -1);
@@ -322,7 +321,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 	} else {
 		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo), 0);
 	}
-	gnome_font_family_list_free (family_names);
+	gl_util_font_family_list_free (family_names);
 
 	g_signal_connect (G_OBJECT (property_bar->priv->font_family_combo),
 			  "changed", G_CALLBACK (font_family_changed_cb), property_bar);
@@ -337,7 +336,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 
 	/* Bold and Italic toggles */
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
-					   (gl_prefs->default_font_weight == GNOME_FONT_BOLD));
+					   (gl_prefs->default_font_weight == PANGO_WEIGHT_BOLD));
 	g_signal_connect (G_OBJECT (property_bar->priv->font_bold_toggle),
 			  "toggled", G_CALLBACK (font_bold_toggled_cb), property_bar);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
@@ -348,15 +347,15 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 
 	/* Text alignment radio group */
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
-					   (gl_prefs->default_text_alignment == GTK_JUSTIFY_LEFT));
+					   (gl_prefs->default_text_alignment == PANGO_ALIGN_LEFT));
 	g_signal_connect (G_OBJECT (property_bar->priv->text_align_left_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
-					   (gl_prefs->default_text_alignment == GTK_JUSTIFY_CENTER));
+					   (gl_prefs->default_text_alignment == PANGO_ALIGN_CENTER));
 	g_signal_connect (G_OBJECT (property_bar->priv->text_align_center_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
-					   (gl_prefs->default_text_alignment == GTK_JUSTIFY_RIGHT));
+					   (gl_prefs->default_text_alignment == PANGO_ALIGN_RIGHT));
 	g_signal_connect (G_OBJECT (property_bar->priv->text_align_right_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
 
@@ -406,7 +405,7 @@ reset_to_default_properties (glView *view,
 	GdkColor  *gdk_color;
 
 	/* Make sure we have a valid font.  if not provide a good default. */
-	family_names = gnome_font_family_list ();
+	family_names = gl_util_get_font_family_list ();
 	if (g_list_find_custom (family_names,
 				view->default_font_family,
 				(GCompareFunc)g_utf8_collate)) {
@@ -421,22 +420,22 @@ reset_to_default_properties (glView *view,
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
 					   good_font_family);
 	g_free (good_font_family);
-	gnome_font_family_list_free (family_names);
+	gl_util_font_family_list_free (family_names);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->font_size_spin),
 				   view->default_font_size);
 
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
-					   (view->default_font_weight == GNOME_FONT_BOLD));
+					   (view->default_font_weight == PANGO_WEIGHT_BOLD));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
 					   view->default_font_italic_flag);
 
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
-					   (view->default_text_alignment == GTK_JUSTIFY_LEFT));
+					   (view->default_text_alignment == PANGO_ALIGN_LEFT));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
-					   (view->default_text_alignment == GTK_JUSTIFY_CENTER));
+					   (view->default_text_alignment == PANGO_ALIGN_CENTER));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
-					   (view->default_text_alignment == GTK_JUSTIFY_RIGHT));
+					   (view->default_text_alignment == PANGO_ALIGN_RIGHT));
 
 	gdk_color = gl_color_to_gdk_color (view->default_text_color);
 	color_combo_set_color (COLOR_COMBO(property_bar->priv->text_color_combo), gdk_color);
@@ -517,20 +516,20 @@ static void
 update_text_properties (glView *view,
 			glUIPropertyBar *property_bar)
 {
-	gboolean can_text, is_first_object;
-	gboolean is_same_font_family, is_same_font_size;
-	gboolean is_same_text_color, is_same_is_italic;
-	gboolean is_same_is_bold, is_same_justification;
-	GList *p;
-	glLabelObject *object;
-	gchar *selection_font_family, *font_family;
-	gdouble selection_font_size, font_size;
-	guint selection_text_color, text_color;
-	glColorNode *text_color_node;
-	gboolean selection_is_italic, is_italic;
-	gboolean selection_is_bold, is_bold;
-	GtkJustification selection_justification, justification;
-	GdkColor *gdk_color;
+	gboolean        can_text, is_first_object;
+	gboolean        is_same_font_family, is_same_font_size;
+	gboolean        is_same_text_color, is_same_is_italic;
+	gboolean        is_same_is_bold, is_same_align;
+	GList          *p;
+	glLabelObject  *object;
+	gchar          *selection_font_family, *font_family;
+	gdouble         selection_font_size, font_size;
+	guint           selection_text_color, text_color;
+	glColorNode    *text_color_node;
+	gboolean        selection_is_italic, is_italic;
+	gboolean        selection_is_bold, is_bold;
+	PangoAlignment  selection_align, align;
+	GdkColor       *gdk_color;
 
 	can_text = gl_view_can_selection_text (view);
 	set_text_items_sensitive (property_bar, can_text);
@@ -540,7 +539,7 @@ update_text_properties (glView *view,
 
 	is_same_is_italic =
 	is_same_is_bold =
-	is_same_justification =
+	is_same_align =
 	is_same_text_color =
 	is_same_font_size =
 	is_same_font_family = TRUE;
@@ -577,15 +576,15 @@ update_text_properties (glView *view,
 		gl_color_node_free (&text_color_node);
 		
 		is_italic = gl_label_object_get_font_italic_flag (object);
-		is_bold = gl_label_object_get_font_weight (object) == GNOME_FONT_BOLD;
-		justification = gl_label_object_get_text_alignment (object);
+		is_bold = gl_label_object_get_font_weight (object) == PANGO_WEIGHT_BOLD;
+		align = gl_label_object_get_text_alignment (object);
 
 		if (is_first_object) {
 			selection_font_size = font_size;
 			selection_text_color = text_color;
 			selection_is_italic = is_italic;
 			selection_is_bold = is_bold;
-			selection_justification = justification;
+			selection_align = align;
 		} else {
 			if (font_size != selection_font_size) 
 				is_same_font_size = FALSE;
@@ -595,8 +594,8 @@ update_text_properties (glView *view,
 				is_same_is_italic = FALSE;
 			if (is_bold != selection_is_bold)
 				is_same_is_bold = FALSE;
-			if (justification != selection_justification)
-				is_same_justification = FALSE;
+			if (align != selection_align)
+				is_same_align = FALSE;
 		}
 		is_first_object = FALSE;
 	}
@@ -637,17 +636,17 @@ update_text_properties (glView *view,
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
 					   selection_is_bold && is_same_is_bold);
 
-	if (is_same_justification) 
-		gl_debug (DEBUG_PROPERTY_BAR, "same justification");
+	if (is_same_align) 
+		gl_debug (DEBUG_PROPERTY_BAR, "same align");
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
-					   (selection_justification == GTK_JUSTIFY_LEFT) &&
-					   is_same_justification);
+					   (selection_align == PANGO_ALIGN_LEFT) &&
+					   is_same_align);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
-					   (selection_justification == GTK_JUSTIFY_CENTER) &&
-					   is_same_justification);
+					   (selection_align == PANGO_ALIGN_CENTER) &&
+					   is_same_align);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
-					   (selection_justification == GTK_JUSTIFY_RIGHT) &&
-					   is_same_justification);
+					   (selection_align == PANGO_ALIGN_RIGHT) &&
+					   is_same_align);
 }
 
 static void
@@ -1112,7 +1111,7 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 		      glUIPropertyBar      *property_bar)
 {
 	gboolean        state;
-	GnomeFontWeight weight;
+	PangoWeight     weight;
 
 
 	if (property_bar->priv->stop_signals)
@@ -1126,7 +1125,7 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 
 	state = gtk_toggle_tool_button_get_active (toggle);
 
-	weight = state ? GNOME_FONT_BOLD : GNOME_FONT_BOOK;
+	weight = state ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL;
 
 	gl_view_set_selection_font_weight (property_bar->priv->view, weight);
 	gl_view_set_default_font_weight   (property_bar->priv->view, weight);
@@ -1187,25 +1186,25 @@ text_align_toggled_cb (GtkToggleToolButton  *toggle,
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio)))
 	{		
 		gl_view_set_selection_text_alignment (property_bar->priv->view,
-						      GTK_JUSTIFY_LEFT);
+						      PANGO_ALIGN_LEFT);
 		gl_view_set_default_text_alignment   (property_bar->priv->view,
-						      GTK_JUSTIFY_LEFT);
+						      PANGO_ALIGN_LEFT);
 	}
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio)))
 	{		
 		gl_view_set_selection_text_alignment (property_bar->priv->view,
-						      GTK_JUSTIFY_CENTER);
+						      PANGO_ALIGN_CENTER);
 		gl_view_set_default_text_alignment   (property_bar->priv->view,
-						      GTK_JUSTIFY_CENTER);
+						      PANGO_ALIGN_CENTER);
 	}
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio)))
 	{
 		gl_view_set_selection_text_alignment (property_bar->priv->view,
-						      GTK_JUSTIFY_RIGHT);
+						      PANGO_ALIGN_RIGHT);
 		gl_view_set_default_text_alignment   (property_bar->priv->view,
-						      GTK_JUSTIFY_RIGHT);
+						      PANGO_ALIGN_RIGHT);
 	}
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),

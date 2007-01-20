@@ -23,9 +23,9 @@
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
-#include <gtk/gtkenums.h>
+#include <glib/glist.h>
 #include <gtk/gtkcombobox.h>
-#include <libgnomeprint/gnome-font.h>
+#include <pango/pango.h>
 
 G_BEGIN_DECLS
 
@@ -36,17 +36,20 @@ gchar              *gl_util_make_absolute         (const gchar       *filename);
 
 gchar              *gl_util_fraction              (gdouble            x);
 
-const gchar        *gl_util_just_to_string        (GtkJustification   just);
-GtkJustification    gl_util_string_to_just        (const gchar       *string);
+const gchar        *gl_util_align_to_string       (PangoAlignment     align);
+PangoAlignment      gl_util_string_to_align       (const gchar       *string);
 
-const gchar        *gl_util_weight_to_string      (GnomeFontWeight    weight);
-GnomeFontWeight     gl_util_string_to_weight      (const gchar       *string);
+const gchar        *gl_util_weight_to_string      (PangoWeight        weight);
+PangoWeight         gl_util_string_to_weight      (const gchar       *string);
 
 void gl_util_combo_box_set_strings     (GtkComboBox       *combo,
 				        GList             *list);
 void gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 					const gchar       *text);
 void gl_util_combo_box_add_text_model  (GtkComboBox       *combo);
+
+GList  *gl_util_get_font_family_list (void);
+void    gl_util_font_family_list_free (GList *list);
 
 G_END_DECLS
 

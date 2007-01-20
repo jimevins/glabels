@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  label_text.c:  GLabels label text object
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +27,9 @@
 #include <glib/gmem.h>
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
-#include <libgnomeprint/gnome-glyphlist.h>
+#include <pango/pango.h>
+
+#include "util.h"
 
 #include "debug.h"
 
@@ -35,12 +39,14 @@
 
 #define DEFAULT_FONT_FAMILY       "Sans"
 #define DEFAULT_FONT_SIZE         14.0
-#define DEFAULT_FONT_WEIGHT       GNOME_FONT_BOOK
+#define DEFAULT_FONT_WEIGHT       PANGO_WEIGHT_NORMAL
 #define DEFAULT_FONT_ITALIC_FLAG  FALSE
-#define DEFAULT_JUST              GTK_JUSTIFY_LEFT
-#define DEFAULT_COLOR             GNOME_CANVAS_COLOR (0,0,0)
+#define DEFAULT_ALIGN             PANGO_ALIGN_LEFT
+#define DEFAULT_COLOR             GL_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING 1.0
 #define DEFAULT_AUTO_SHRINK       FALSE
+
+#define FONT_SCALE (72.0/96.0)
 
 /*========================================================*/
 /* Private types.                                         */
@@ -52,9 +58,9 @@ struct _glLabelTextPrivate {
 
 	gchar           *font_family;
 	gdouble          font_size;
-	GnomeFontWeight  font_weight;
+	PangoWeight      font_weight;
 	gboolean         font_italic_flag;
-	GtkJustification just;
+	PangoAlignment   align;
 	glColorNode     *color_node;
 	gdouble          line_spacing;
 	gboolean         auto_shrink;
@@ -93,13 +99,13 @@ static void set_font_size               (glLabelObject    *object,
 					 gdouble           font_size);
 
 static void set_font_weight             (glLabelObject    *object,
-					 GnomeFontWeight   font_weight);
+					 PangoWeight       font_weight);
 
 static void set_font_italic_flag        (glLabelObject    *object,
 					 gboolean          font_italic_flag);
 
 static void set_text_alignment          (glLabelObject    *object,
-					 GtkJustification  text_alignment);
+					 PangoAlignment    text_alignment);
 
 static void set_text_line_spacing       (glLabelObject    *object,
 					 gdouble           text_line_spacing);
@@ -111,11 +117,11 @@ static gchar          *get_font_family             (glLabelObject    *object);
 
 static gdouble         get_font_size               (glLabelObject    *object);
 
-static GnomeFontWeight get_font_weight             (glLabelObject    *object);
+static PangoWeight     get_font_weight             (glLabelObject    *object);
 
 static gboolean        get_font_italic_flag        (glLabelObject    *object);
 
-static GtkJustification get_text_alignment         (glLabelObject    *object);
+static PangoAlignment  get_text_alignment         (glLabelObject    *object);
 
 static gdouble         get_text_line_spacing       (glLabelObject    *object);
 
@@ -193,7 +199,7 @@ gl_label_text_instance_init (glLabelText *ltext)
 	ltext->private->font_size         = DEFAULT_FONT_SIZE;
 	ltext->private->font_weight       = DEFAULT_FONT_WEIGHT;
 	ltext->private->font_italic_flag  = DEFAULT_FONT_ITALIC_FLAG;
-	ltext->private->just              = DEFAULT_JUST;
+	ltext->private->align              = DEFAULT_ALIGN;
 	ltext->private->color_node        = gl_color_node_new_default ();
 	ltext->private->color_node->color = DEFAULT_COLOR;
 	ltext->private->line_spacing      = DEFAULT_TEXT_LINE_SPACING;
@@ -262,7 +268,7 @@ copy (glLabelObject *dst_object,
 	new_ltext->private->font_weight      = ltext->private->font_weight;
 	new_ltext->private->font_italic_flag = ltext->private->font_italic_flag;
 	set_text_color (dst_object, text_color_node);
-	new_ltext->private->just             = ltext->private->just;
+	new_ltext->private->align             = ltext->private->align;
 	new_ltext->private->line_spacing     = ltext->private->line_spacing;
 	new_ltext->private->auto_shrink      = ltext->private->auto_shrink;
 
@@ -350,16 +356,17 @@ get_size (glLabelObject *object,
 	  gdouble       *w,
 	  gdouble       *h)
 {
-	glLabelText    *ltext = (glLabelText *)object;
-	GnomeFont      *font;
-	GtkTextIter     start, end;
-	gchar          *text;
-	gchar         **line;
-	gint            i;
-	GnomeGlyphList *glyphlist;
-	ArtDRect        bbox;
-	gdouble         affine[6];
-	gdouble         w_parent, h_parent;
+	glLabelText          *ltext = (glLabelText *)object;
+	PangoFontMap         *fontmap;
+	PangoContext         *context;
+	cairo_font_options_t *options;
+        PangoStyle            style;
+        PangoLayout          *layout;
+        PangoFontDescription *desc;
+	GtkTextIter           start, end;
+	gchar                *text;
+	gdouble               w_parent, h_parent;
+	gint                  iw, ih;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -373,49 +380,39 @@ get_size (glLabelObject *object,
 		return;
 	}
 
-	font = gnome_font_find_closest_from_weight_slant (
-		(guchar *)ltext->private->font_family,
-		ltext->private->font_weight,
-		ltext->private->font_italic_flag,
-		ltext->private->font_size);
-
 	gtk_text_buffer_get_bounds (ltext->private->buffer, &start, &end);
 	text = gtk_text_buffer_get_text (ltext->private->buffer,
 					 &start, &end, FALSE);
-	line = g_strsplit (text, "\n", -1);
+
+	
+	fontmap = pango_cairo_font_map_new ();
+	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+	options = cairo_font_options_create ();
+	cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_OFF);
+	pango_cairo_context_set_font_options (context, options);
+	cairo_font_options_destroy (options);
+
+	layout = pango_layout_new (context);
+
+        style = GL_LABEL_TEXT (object)->private->font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
+	desc = pango_font_description_new ();
+	pango_font_description_set_family (desc, GL_LABEL_TEXT (object)->private->font_family);
+	pango_font_description_set_weight (desc, GL_LABEL_TEXT (object)->private->font_weight);
+	pango_font_description_set_style  (desc, style);
+	pango_font_description_set_size   (desc, GL_LABEL_TEXT (object)->private->font_size * PANGO_SCALE * FONT_SCALE);
+	pango_layout_set_font_description (layout, desc);
+	pango_font_description_free       (desc);
+
+	pango_layout_set_text (layout, text, -1);
+	pango_layout_get_size (layout, &iw, &ih);
+	*w = iw / PANGO_SCALE + 2*GL_LABEL_TEXT_MARGIN;
+	*h = ih / PANGO_SCALE;
+
+	g_object_unref (layout);
+	g_object_unref (context);
+	g_object_unref (fontmap);
 	g_free (text);
-
-	art_affine_identity (affine);
-
-	*w = 0.0;
-	*h = 0.0;
-	for (i = 0; line[i] != NULL; i++) {
-
-		glyphlist = gnome_glyphlist_from_text_dumb (font, 0,
-							    0.0, 0.0,
-							    (guchar *)line[i]);
-
-		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-
-		gnome_glyphlist_unref (glyphlist);
-
-		if ( bbox.x1 > *w ) *w = bbox.x1;
-
-		if (i) {
-			*h += ltext->private->line_spacing * ltext->private->font_size;
-		} else {
-			*h += ltext->private->font_size;
-		}
-
-	}
-
-	if ( *h == 0.0 ) *h = ltext->private->font_size;
-
-	*w += 2*GL_LABEL_TEXT_MARGIN;
-	*h += 2*GL_LABEL_TEXT_MARGIN;
-
-
-	g_strfreev (line);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -436,7 +433,7 @@ set_font_family (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 	g_return_if_fail (font_family);
 
-	family_names = gnome_font_family_list ();
+	family_names = gl_util_get_font_family_list ();
 	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
 		good_font_family = g_strdup (font_family);
 	} else {
@@ -446,7 +443,7 @@ set_font_family (glLabelObject *object,
 			good_font_family = g_strdup (font_family);
 		}
 	}
-	gnome_font_family_list_free (family_names);
+	gl_util_font_family_list_free (family_names);
 
 	if (ltext->private->font_family) {
 		if (g_strcasecmp (ltext->private->font_family, good_font_family) == 0) {
@@ -494,7 +491,7 @@ set_font_size (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_font_weight (glLabelObject   *object,
-		 GnomeFontWeight  font_weight)
+		 PangoWeight      font_weight)
 {
 	glLabelText    *ltext = (glLabelText *)object;
 
@@ -540,7 +537,7 @@ set_font_italic_flag (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_text_alignment (glLabelObject    *object,
-		    GtkJustification  text_alignment)
+		    PangoAlignment    text_alignment)
 {
 	glLabelText    *ltext = (glLabelText *)object;
 
@@ -548,9 +545,9 @@ set_text_alignment (glLabelObject    *object,
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
-	if (ltext->private->just != text_alignment) {
+	if (ltext->private->align != text_alignment) {
 
-		ltext->private->just = text_alignment;
+		ltext->private->align = text_alignment;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
 	}
@@ -639,14 +636,14 @@ get_font_size (glLabelObject *object)
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  get font weight method.                                         */
 /*---------------------------------------------------------------------------*/
-static GnomeFontWeight
+static PangoWeight
 get_font_weight (glLabelObject   *object)
 {
 	glLabelText    *ltext = (glLabelText *)object;
 
 	gl_debug (DEBUG_LABEL, "");
 
-	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), GNOME_FONT_BOOK);
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), PANGO_WEIGHT_NORMAL);
 
 	return ltext->private->font_weight;
 }
@@ -669,7 +666,7 @@ get_font_italic_flag (glLabelObject *object)
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  get text alignment method.                                      */
 /*---------------------------------------------------------------------------*/
-static GtkJustification
+static PangoAlignment
 get_text_alignment (glLabelObject    *object)
 {
 	glLabelText    *ltext = (glLabelText *)object;
@@ -678,7 +675,7 @@ get_text_alignment (glLabelObject    *object)
 
 	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), GTK_JUSTIFY_LEFT);
 
-	return ltext->private->just;
+	return ltext->private->align;
 }
 
 /*---------------------------------------------------------------------------*/

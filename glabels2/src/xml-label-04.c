@@ -34,6 +34,7 @@
 #include "label-barcode.h"
 #include <libglabels/xml.h>
 
+#include "util.h"
 #include "debug.h"
 
 static gboolean xml04_parse_media_description (xmlNodePtr node,
@@ -194,10 +195,10 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 {
 	xmlChar         *font_family;
 	gdouble          font_size;
-	GnomeFontWeight  font_weight;
+	PangoWeight      font_weight;
 	gboolean         font_italic_flag;
 	glColorNode     *color_node;
-	GtkJustification just;
+	PangoAlignment   align;
 	xmlNodePtr       line_node, text_node;
 	glTextNode      *node_text;
 	GList           *nodes, *lines;
@@ -214,7 +215,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, (xmlChar *)"justify");
-	just = gl_util_string_to_just (string);
+	align = gl_util_string_to_align (string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
@@ -225,7 +226,7 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	gl_label_object_set_font_weight (GL_LABEL_OBJECT(object), font_weight);
 	gl_label_object_set_font_italic_flag (GL_LABEL_OBJECT(object), font_italic_flag);
 	gl_label_object_set_text_color (GL_LABEL_OBJECT(object), color_node);
-	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), just);
+	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align);
 	
 	gl_color_node_free (&color_node);
 
@@ -282,15 +283,15 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	/* Adjust location.  In 0.4.x, text was anchored at x,y */
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	switch (just) {
-	case GTK_JUSTIFY_LEFT:
+	switch (align) {
+	case PANGO_ALIGN_LEFT:
 		/* nothing */
 		break;
-	case GTK_JUSTIFY_CENTER:
+	case PANGO_ALIGN_CENTER:
 		x -= w/2.0;
 		gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
 		break;
-	case GTK_JUSTIFY_RIGHT:
+	case PANGO_ALIGN_RIGHT:
 		x -= w;
 		gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
 		break;

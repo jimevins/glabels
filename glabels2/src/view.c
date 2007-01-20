@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -2840,7 +2840,7 @@ gl_view_set_selection_font_italic_flag (glView   *view,
 /*****************************************************************************/
 void
 gl_view_set_selection_text_alignment (glView            *view,
-				      GtkJustification   text_alignment)
+				      PangoAlignment     text_alignment)
 {
 	GList         *p;
 	glLabelObject *object;
@@ -3829,7 +3829,7 @@ gl_view_set_default_text_color (glView *view,
 /****************************************************************************/
 void
 gl_view_set_default_text_alignment (glView           *view,
-				    GtkJustification  text_alignment)
+				    PangoAlignment    text_alignment)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3991,12 +3991,12 @@ gl_view_get_default_text_color (glView *view)
 /****************************************************************************/
 /* Get default text alignment.                                              */
 /****************************************************************************/
-GtkJustification
+PangoAlignment
 gl_view_get_default_text_alignment (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_val_if_fail (view && GL_IS_VIEW (view), GTK_JUSTIFY_LEFT);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), PANGO_ALIGN_LEFT);
 
 	gl_debug (DEBUG_VIEW, "END");
 

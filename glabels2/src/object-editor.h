@@ -23,8 +23,6 @@
 #define __OBJECT_EDITOR_H__
 
 #include <gtk/gtkvbox.h>
-#include <gtk/gtkenums.h>
-#include <libgnomeprint/gnome-font.h>
 #include <gtk/gtktextbuffer.h>
 
 #include "text-node.h"
@@ -192,9 +190,9 @@ void        gl_object_editor_set_font_size        (glObjectEditor      *editor,
 gdouble     gl_object_editor_get_font_size        (glObjectEditor      *editor);
 
 void        gl_object_editor_set_font_weight      (glObjectEditor      *editor,
-						   GnomeFontWeight      font_weight);
+						   PangoWeight          font_weight);
 
-GnomeFontWeight gl_object_editor_get_font_weight  (glObjectEditor      *editor);
+PangoWeight gl_object_editor_get_font_weight      (glObjectEditor      *editor);
 
 void        gl_object_editor_set_font_italic_flag (glObjectEditor      *editor,
 						   gboolean             font_italic_flag);
@@ -202,9 +200,9 @@ void        gl_object_editor_set_font_italic_flag (glObjectEditor      *editor,
 gboolean    gl_object_editor_get_font_italic_flag (glObjectEditor      *editor);
 
 void        gl_object_editor_set_text_alignment   (glObjectEditor      *editor,
-						   GtkJustification     text_alignment);
+						   PangoAlignment       text_alignment);
 
-GtkJustification gl_object_editor_get_text_alignment (glObjectEditor      *editor);
+PangoAlignment gl_object_editor_get_text_alignment (glObjectEditor      *editor);
 
 void        gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
 						   gdouble               text_line_spacing);
