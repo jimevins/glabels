@@ -213,10 +213,10 @@ construct_properties_editor (glViewObject *view_object)
 
 	/* Build editor. */
 	editor = gl_object_editor_new (GL_STOCK_LINE, _("Line object properties"),
+				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       GL_OBJECT_EDITOR_POSITION_PAGE,
 				       GL_OBJECT_EDITOR_SIZE_LINE_PAGE,
 				       GL_OBJECT_EDITOR_LINE_PAGE,
-				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       0);
 	
 	/* Update */

@@ -1,3 +1,14 @@
+2007-01-25  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Added dummy page to notebook, to prevent shadow page from
+		becoming the default current page at creation.
+	* src/view-box.c: (construct_properties_editor):
+	* src/view-ellipse.c: (construct_properties_editor):
+	* src/view-line.c: (construct_properties_editor):
+	* src/view-text.c: (construct_properties_editor):
+		Reconciled order of params.
+
 2007-01-19  Jim Evins  <evins@snaught.com>
 
 	* src/label-barcode.h:

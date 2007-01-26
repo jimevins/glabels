@@ -260,11 +260,11 @@ construct_properties_editor (glViewObject *view_object)
 
 	/* Build editor. */
 	editor = gl_object_editor_new (GL_STOCK_TEXT, _("Text object properties"),
+				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       GL_OBJECT_EDITOR_POSITION_PAGE,
 				       GL_OBJECT_EDITOR_SIZE_PAGE,
 				       GL_OBJECT_EDITOR_TEXT_PAGE,
 				       GL_OBJECT_EDITOR_EDIT_PAGE,
-				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       0);
 
 	buffer = gl_label_text_get_buffer (GL_LABEL_TEXT(object));
