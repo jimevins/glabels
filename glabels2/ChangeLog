@@ -1,3 +1,14 @@
+2007-02-03  Jim Evins  <evins@snaught.com>
+
+	* data/glade/template-designer.glade:
+	* src/template-designer.c:
+	* src/template-designer.h:
+		Ported GnomeDruid to GtkAssistant.  Since libglade does not
+		yet support the GtkAssistant and we derive directly from
+		the Assistant, the pages are layed out in a GtkNotebook in
+		the glade description -- we then append each page to the
+		assistant.
+
 2007-01-25  Jim Evins  <evins@snaught.com>
 
 	* data/glade/object-editor.glade:

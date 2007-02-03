@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -23,6 +25,7 @@
 #ifndef __TEMPLATE_DESIGNER_H__
 #define __TEMPLATE_DESIGNER_H__
 
+#include <gtk/gtkassistant.h>
 #include <gtk/gtkwindow.h>
 
 G_BEGIN_DECLS
@@ -42,27 +45,27 @@ typedef struct _glTemplateDesignerPrivate       glTemplateDesignerPrivate;
 
 struct _glTemplateDesigner
 {
-	GtkWindow                  parent_instance;
+        GtkAssistant               parent_instance;
 
-	glTemplateDesignerPrivate *priv;
+        glTemplateDesignerPrivate *priv;
 
 };
 
 struct  _glTemplateDesignerClass
 {
-	GtkWindowClass             parent_class;
+        GtkAssistantClass          parent_class;
 };
 
-GType    	gl_template_designer_get_type 	            (void) G_GNUC_CONST;
+GType           gl_template_designer_get_type               (void) G_GNUC_CONST;
 
-GtkWidget      *gl_template_designer_new	            (GtkWindow *parent);
+GtkWidget      *gl_template_designer_new                    (GtkWindow *parent);
 
 /* Semi-public, for use by libglade: */
 GtkWidget      *gl_template_designer_construct_mini_preview (gchar *name,
-							     gchar *string1,
-							     gchar *string2,
-							     gint   int1,
-							     gint   int2);
+                                                             gchar *string1,
+                                                             gchar *string2,
+                                                             gint   int1,
+                                                             gint   int2);
 
 
 G_END_DECLS

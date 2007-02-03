@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -26,12 +28,10 @@
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-program.h>
-#include <libgnomeui/gnome-druid.h>
-#include <libgnomeui/gnome-druid-page-edge.h>
-#include <libgnomeui/gnome-druid-page-standard.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
+#include <gtk/gtklabel.h>
 #include <string.h>
 #include <math.h>
 
@@ -99,10 +99,7 @@
 
 struct _glTemplateDesignerPrivate
 {
-	GladeXML        *gui;
-	GtkWidget       *druid;
-
-	/* Druid pages */
+	/* Assistant pages */
 	GtkWidget       *start_page;
 	GtkWidget       *name_page;
 	GtkWidget       *pg_size_page;
@@ -205,11 +202,25 @@ struct _glTemplateDesignerPrivate
 
 };
 
+/* Page numbers for traversing GtkAssistant */
+enum {
+        START_PAGE_NUM = 0,
+        NAME_PAGE_NUM,
+        PG_SIZE_PAGE_NUM,
+        SHAPE_PAGE_NUM,
+        RECT_SIZE_PAGE_NUM,
+        ROUND_SIZE_PAGE_NUM,
+        CD_SIZE_PAGE_NUM,
+        NLAYOUTS_PAGE_NUM,
+        LAYOUT_PAGE_NUM,
+        FINISH_PAGE_NUM
+};
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
 
-static GtkWindowClass* parent_class = NULL;
+static GtkAssistantClass* parent_class = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -250,15 +261,14 @@ static void     construct_layout_page             (glTemplateDesigner      *dlg,
 static void     construct_finish_page             (glTemplateDesigner      *dlg,
 						   GdkPixbuf               *logo);
 
-static void     construct_edge_page_boilerplate   (glTemplateDesigner      *dlg,
-						   GnomeDruidPageEdge      *page,
-						   GdkPixbuf               *logo);
-
-static void     construct_page_boilerplate        (glTemplateDesigner      *dlg,
-						   GnomeDruidPageStandard  *page,
-						   GdkPixbuf               *logo);
-
 static void     cancel_cb                         (glTemplateDesigner      *dlg);
+static void     apply_cb                          (glTemplateDesigner      *dlg);
+static void     close_cb                          (glTemplateDesigner      *dlg);
+static void     prepare_cb                        (glTemplateDesigner      *dlg,
+                                                   GtkWidget               *page);
+
+static gint     forward_page_function             (gint                     current_page,
+                                                   gpointer                 data);
 
 static void     name_page_changed_cb              (glTemplateDesigner      *dlg);
 
@@ -277,16 +287,6 @@ static void     layout_page_changed_cb            (glTemplateDesigner      *dlg)
 static void     print_test_cb                     (glTemplateDesigner      *dlg);
 
 static glTemplate *build_template                 (glTemplateDesigner      *dlg);
-
-static gboolean next_cb                           (GnomeDruidPage          *druidpage,
-						   GtkWidget               *widget,
-						   glTemplateDesigner      *dlg);
-
-static gboolean back_cb                           (GnomeDruidPage          *druidpage,
-						   GtkWidget               *widget,
-						   glTemplateDesigner      *dlg);
-
-static void finish_cb                             (glTemplateDesigner      *dlg);
 
 
 /*****************************************************************************/
@@ -313,7 +313,7 @@ gl_template_designer_get_type (void)
 			NULL
       		};
 
-     		type = g_type_register_static (GTK_TYPE_WINDOW,
+     		type = g_type_register_static (GTK_TYPE_ASSISTANT,
 					       "glTemplateDesigner", &info, 0);
     	}
 
@@ -333,41 +333,34 @@ gl_template_designer_class_init (glTemplateDesignerClass *klass)
 }
 
 static void
-gl_template_designer_init (glTemplateDesigner *dlg)
+gl_template_designer_init (glTemplateDesigner *dialog)
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dlg->priv = g_new0 (glTemplateDesignerPrivate, 1);
-
-	dlg->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-					"druid",
-					NULL);
-
-	if (!dlg->priv->gui) {
-		g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-		return;
-	}
+	dialog->priv = g_new0 (glTemplateDesignerPrivate, 1);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
+
+        return;
 }
 
 static void 
 gl_template_designer_finalize (GObject *object)
 {
-	glTemplateDesigner* dlg;
+	glTemplateDesigner* dialog;
 	
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	g_return_if_fail (object != NULL);
 	
-   	dlg = GL_TEMPLATE_DESIGNER (object);
+   	dialog = GL_TEMPLATE_DESIGNER (object);
 
-	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dlg));
-	g_return_if_fail (dlg->priv != NULL);
+	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dialog));
+	g_return_if_fail (dialog->priv != NULL);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
-	g_free (dlg->priv);
+	g_free (dialog->priv);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
@@ -378,753 +371,924 @@ gl_template_designer_finalize (GObject *object)
 GtkWidget*
 gl_template_designer_new (GtkWindow *parent)
 {
-	GtkWidget *dlg;
+	GtkWidget *dialog;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dlg = GTK_WIDGET (g_object_new (GL_TYPE_TEMPLATE_DESIGNER, NULL));
+	dialog = GTK_WIDGET (g_object_new (GL_TYPE_TEMPLATE_DESIGNER, NULL));
 
 	if (parent)
-		gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
+		gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
 	
-	gl_template_designer_construct (GL_TEMPLATE_DESIGNER(dlg));
+	gl_template_designer_construct (GL_TEMPLATE_DESIGNER(dialog));
 
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 
-	return dlg;
+	return dialog;
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Construct composite widget.                                     */
 /*---------------------------------------------------------------------------*/
 static void
-gl_template_designer_construct (glTemplateDesigner *dlg)
+gl_template_designer_construct (glTemplateDesigner *dialog)
 {
 	GdkPixbuf  *logo;
 
-	g_return_if_fail (dlg && GL_IS_TEMPLATE_DESIGNER (dlg));
-	g_return_if_fail (dlg->priv != NULL);
+	g_return_if_fail (dialog && GL_IS_TEMPLATE_DESIGNER (dialog));
+	g_return_if_fail (dialog->priv != NULL);
 
 	/* Initialize units stuff from prefs */
-	dlg->priv->units_string    = gl_prefs_get_units_string ();
-        dlg->priv->units_per_point = gl_prefs_get_units_per_point ();
-        dlg->priv->climb_rate      = gl_prefs_get_units_step_size ();
-        dlg->priv->digits          = gl_prefs_get_units_precision ();
+	dialog->priv->units_string    = gl_prefs_get_units_string ();
+        dialog->priv->units_per_point = gl_prefs_get_units_per_point ();
+        dialog->priv->climb_rate      = gl_prefs_get_units_step_size ();
+        dialog->priv->digits          = gl_prefs_get_units_precision ();
 
-	gtk_window_set_title (GTK_WINDOW(dlg), _("gLabels Template Designer"));
+	gtk_window_set_title (GTK_WINDOW(dialog), _("gLabels Template Designer"));
 
 	logo = gdk_pixbuf_new_from_file (ICON_PIXMAP, NULL);
 
-	dlg->priv->druid = glade_xml_get_widget (dlg->priv->gui, "druid");
-	gtk_container_add (GTK_CONTAINER(dlg), dlg->priv->druid);
+        /* Costruct and append pages (must be same order as PAGE_NUM enums. */
+	construct_start_page (dialog, logo);
+	construct_name_page (dialog, logo);
+	construct_pg_size_page (dialog, logo);
+	construct_shape_page (dialog, logo);
+	construct_rect_size_page (dialog, logo);
+	construct_round_size_page (dialog, logo);
+	construct_cd_size_page (dialog, logo);
+	construct_nlayouts_page (dialog, logo);
+	construct_layout_page (dialog, logo);
+	construct_finish_page (dialog, logo);
 
-	construct_start_page (dlg, logo);
-	construct_name_page (dlg, logo);
-	construct_pg_size_page (dlg, logo);
-	construct_shape_page (dlg, logo);
-	construct_rect_size_page (dlg, logo);
-	construct_round_size_page (dlg, logo);
-	construct_cd_size_page (dlg, logo);
-	construct_nlayouts_page (dlg, logo);
-	construct_layout_page (dlg, logo);
-	construct_finish_page (dlg, logo);
+        gtk_assistant_set_forward_page_func (GTK_ASSISTANT (dialog),
+                                             forward_page_function,
+                                             dialog,
+                                             NULL);
 
-	/* Cancel button */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->druid), "cancel",
-				  G_CALLBACK(cancel_cb), dlg);
+	/* signals */
+	g_signal_connect_swapped (G_OBJECT(dialog), "cancel",
+				  G_CALLBACK(cancel_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog), "apply",
+				  G_CALLBACK(apply_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog), "close",
+				  G_CALLBACK(close_cb), dialog);
+	g_signal_connect (G_OBJECT(dialog), "prepare",
+                          G_CALLBACK(prepare_cb), NULL);
 
-        gtk_widget_show_all (GTK_WIDGET(dlg));   
+        gtk_widget_show_all (GTK_WIDGET(dialog));   
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct start page.                                          */
 /*--------------------------------------------------------------------------*/
 static void
-construct_start_page (glTemplateDesigner      *dlg,
+construct_start_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	dlg->priv->start_page =
-		glade_xml_get_widget (dlg->priv->gui, "start_page");
+	GladeXML        *gui;
 
-	construct_edge_page_boilerplate (dlg,
-					 GNOME_DRUID_PAGE_EDGE(dlg->priv->start_page),
-					 logo);
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "start_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
+
+	dialog->priv->start_page = glade_xml_get_widget (gui, "start_page");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->start_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->start_page,
+                                      _("Welcome"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->start_page,
+                                             logo);
+        gtk_assistant_set_page_type (GTK_ASSISTANT (dialog),
+                                     dialog->priv->start_page,
+                                     GTK_ASSISTANT_PAGE_INTRO);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->start_page,
+                                         TRUE);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct name page.                                           */
 /*--------------------------------------------------------------------------*/
 static void
-construct_name_page (glTemplateDesigner      *dlg,
+construct_name_page (glTemplateDesigner      *dialog,
 		     GdkPixbuf               *logo)
 {
-	dlg->priv->name_page =
-		glade_xml_get_widget (dlg->priv->gui, "name_page");
+	GladeXML        *gui;
 
-	/* Name Page Widgets */
-	dlg->priv->brand_entry =
-		glade_xml_get_widget (dlg->priv->gui, "brand_entry");
-	dlg->priv->part_num_entry =
-		glade_xml_get_widget (dlg->priv->gui, "part_num_entry");
-	dlg->priv->description_entry =
-		glade_xml_get_widget (dlg->priv->gui, "description_entry");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "name_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
+
+	dialog->priv->name_page         = glade_xml_get_widget (gui, "name_page");
+	dialog->priv->brand_entry       = glade_xml_get_widget (gui, "brand_entry");
+	dialog->priv->part_num_entry    = glade_xml_get_widget (gui, "part_num_entry");
+	dialog->priv->description_entry = glade_xml_get_widget (gui, "description_entry");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->name_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->name_page,
+                                      _("Name and Description"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->name_page,
+                                             logo);
 
 	/* Connect a handler that listens for changes in these widgets */
 	/* This controls whether we can progress to the next page. */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->brand_entry), "changed",
-				  G_CALLBACK(name_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->part_num_entry), "changed",
-				  G_CALLBACK(name_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->description_entry), "changed",
-				  G_CALLBACK(name_page_changed_cb), dlg);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->brand_entry), "changed",
+				  G_CALLBACK(name_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->part_num_entry), "changed",
+				  G_CALLBACK(name_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->description_entry), "changed",
+				  G_CALLBACK(name_page_changed_cb), dialog);
 
-	/* Use this same handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->name_page), "prepare",
-			       G_CALLBACK(name_page_changed_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->name_page),
-				    logo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Construct page size page.                                       */
 /*--------------------------------------------------------------------------*/
 static void
-construct_pg_size_page (glTemplateDesigner      *dlg,
+construct_pg_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GList *page_sizes;
-	const gchar *default_page_size_id;
-	gchar       *default_page_size_name;
+	GladeXML        *gui;
+	GList           *page_sizes;
+	const gchar     *default_page_size_id;
+	gchar           *default_page_size_name;
 
-	dlg->priv->pg_size_page =
-		glade_xml_get_widget (dlg->priv->gui, "pg_size_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "pg_size_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Page Size Page Widgets */
-	dlg->priv->pg_size_combo =
-		glade_xml_get_widget (dlg->priv->gui, "pg_size_combo");
-	dlg->priv->pg_w_spin =
-		glade_xml_get_widget (dlg->priv->gui, "pg_w_spin");
-	dlg->priv->pg_h_spin =
-		glade_xml_get_widget (dlg->priv->gui, "pg_h_spin");
-	dlg->priv->pg_w_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "pg_w_units_label");
-	dlg->priv->pg_h_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "pg_h_units_label");
+	dialog->priv->pg_size_page     = glade_xml_get_widget (gui, "pg_size_page");
+	dialog->priv->pg_size_combo    = glade_xml_get_widget (gui, "pg_size_combo");
+	dialog->priv->pg_w_spin        = glade_xml_get_widget (gui, "pg_w_spin");
+	dialog->priv->pg_h_spin        = glade_xml_get_widget (gui, "pg_h_spin");
+	dialog->priv->pg_w_units_label = glade_xml_get_widget (gui, "pg_w_units_label");
+	dialog->priv->pg_h_units_label = glade_xml_get_widget (gui, "pg_h_units_label");
 
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
+	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->pg_size_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->pg_size_page,
+                                      _("Page Size"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->pg_size_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->pg_size_page,
+                                         TRUE);
 
 	/* Load page size combo */
 	page_sizes = gl_paper_get_name_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dlg->priv->pg_size_combo), page_sizes);
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
 	gl_paper_free_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
 	default_page_size_name = gl_paper_lookup_name_from_id (default_page_size_id);
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo), default_page_size_name);
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
 
 	/* Apply units to spinbuttons and units labels. */
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->pg_w_units_label),
-			    dlg->priv->units_string);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->pg_w_spin),
-                                   0.0, MAX_PAGE_DIM_POINTS*dlg->priv->units_per_point);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->pg_h_units_label),
-			    dlg->priv->units_string);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->pg_h_spin),
-                                   0.0, MAX_PAGE_DIM_POINTS*dlg->priv->units_per_point);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->pg_w_units_label),
+			    dialog->priv->units_string);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->pg_w_spin),
+                                   0.0, MAX_PAGE_DIM_POINTS*dialog->priv->units_per_point);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->pg_h_units_label),
+			    dialog->priv->units_string);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->pg_h_spin),
+                                   0.0, MAX_PAGE_DIM_POINTS*dialog->priv->units_per_point);
 
 	/* Connect a handler that listens for changes in these widgets */
 	/* This controls sensitivity of related widgets. */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->pg_size_combo), "changed",
-				  G_CALLBACK(pg_size_page_changed_cb), dlg);
-
-	/* Use this same handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->pg_size_page), "prepare",
-			       G_CALLBACK(pg_size_page_changed_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->pg_size_page),
-				    logo);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->pg_size_combo), "changed",
+				  G_CALLBACK(pg_size_page_changed_cb), dialog);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct shape page.                                          */
 /*--------------------------------------------------------------------------*/
 static void
-construct_shape_page (glTemplateDesigner      *dlg,
+construct_shape_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	dlg->priv->shape_page =
-		glade_xml_get_widget (dlg->priv->gui, "shape_page");
+	GladeXML        *gui;
 
-	/* Shape Page Widgets */
-	dlg->priv->shape_rect_radio =
-		glade_xml_get_widget (dlg->priv->gui, "shape_rect_radio");
-	dlg->priv->shape_round_radio =
-		glade_xml_get_widget (dlg->priv->gui, "shape_round_radio");
-	dlg->priv->shape_cd_radio =
-		glade_xml_get_widget (dlg->priv->gui, "shape_cd_radio");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "shape_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->shape_page),
-				    logo);
+	dialog->priv->shape_page        = glade_xml_get_widget (gui, "shape_page");
+	dialog->priv->shape_rect_radio  = glade_xml_get_widget (gui, "shape_rect_radio");
+	dialog->priv->shape_round_radio = glade_xml_get_widget (gui, "shape_round_radio");
+	dialog->priv->shape_cd_radio    = glade_xml_get_widget (gui, "shape_cd_radio");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->shape_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->shape_page,
+                                      _("Label or Card Shape"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->shape_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->shape_page,
+                                         TRUE);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct rect size page.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-construct_rect_size_page (glTemplateDesigner      *dlg,
+construct_rect_size_page (glTemplateDesigner      *dialog,
 			  GdkPixbuf               *logo)
 {
-	GdkPixbuf *pixbuf;
+	GladeXML        *gui;
+	GdkPixbuf       *pixbuf;
 
-	dlg->priv->rect_size_page =
-		glade_xml_get_widget (dlg->priv->gui, "rect_size_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "rect_size_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Rect Size Page Widgets */
-	dlg->priv->rect_image =
-		glade_xml_get_widget (dlg->priv->gui, "rect_image");
-	dlg->priv->rect_w_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_w_spin");
-	dlg->priv->rect_h_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_h_spin");
-	dlg->priv->rect_r_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_r_spin");
-	dlg->priv->rect_x_waste_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_x_waste_spin");
-	dlg->priv->rect_y_waste_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_y_waste_spin");
-	dlg->priv->rect_margin_spin =
-		glade_xml_get_widget (dlg->priv->gui, "rect_margin_spin");
-	dlg->priv->rect_w_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_w_units_label");
-	dlg->priv->rect_h_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_h_units_label");
-	dlg->priv->rect_r_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_r_units_label");
-	dlg->priv->rect_x_waste_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_x_waste_units_label");
-	dlg->priv->rect_y_waste_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_y_waste_units_label");
-	dlg->priv->rect_margin_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "rect_margin_units_label");
+	dialog->priv->rect_size_page           = glade_xml_get_widget (gui, "rect_size_page");
+	dialog->priv->rect_image               = glade_xml_get_widget (gui, "rect_image");
+	dialog->priv->rect_w_spin              = glade_xml_get_widget (gui, "rect_w_spin");
+	dialog->priv->rect_h_spin              = glade_xml_get_widget (gui, "rect_h_spin");
+	dialog->priv->rect_r_spin              = glade_xml_get_widget (gui, "rect_r_spin");
+	dialog->priv->rect_x_waste_spin        = glade_xml_get_widget (gui, "rect_x_waste_spin");
+	dialog->priv->rect_y_waste_spin        = glade_xml_get_widget (gui, "rect_y_waste_spin");
+	dialog->priv->rect_margin_spin         = glade_xml_get_widget (gui, "rect_margin_spin");
+	dialog->priv->rect_w_units_label       = glade_xml_get_widget (gui, "rect_w_units_label");
+	dialog->priv->rect_h_units_label       = glade_xml_get_widget (gui, "rect_h_units_label");
+	dialog->priv->rect_r_units_label       = glade_xml_get_widget (gui, "rect_r_units_label");
+	dialog->priv->rect_x_waste_units_label = glade_xml_get_widget (gui, "rect_x_waste_units_label");
+	dialog->priv->rect_y_waste_units_label = glade_xml_get_widget (gui, "rect_y_waste_units_label");
+	dialog->priv->rect_margin_units_label  = glade_xml_get_widget (gui, "rect_margin_units_label");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->rect_size_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->rect_size_page,
+                                      _("Label or Card Size"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->rect_size_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->rect_size_page,
+                                         TRUE);
 
 	/* Initialize illustration. */
 	pixbuf = gdk_pixbuf_new_from_file (EX_RECT_IMAGE, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE(dlg->priv->rect_image), pixbuf);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->rect_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_w_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_h_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_r_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_x_waste_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_y_waste_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->rect_margin_units_label),
-			    dlg->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_w_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_h_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_r_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_x_waste_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_y_waste_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->rect_margin_units_label),
+			    dialog->priv->units_string);
 
 	/* Load some realistic defaults. */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin),
-				   DEFAULT_RECT_W * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin),
-				   DEFAULT_RECT_H * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin),
-				   DEFAULT_RECT_R * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin),
-				   DEFAULT_RECT_WASTE * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin),
-				   DEFAULT_RECT_WASTE * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin),
-				   DEFAULT_MARGIN * dlg->priv->units_per_point);
-
-	/* Handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->rect_size_page), "prepare",
-			       G_CALLBACK(rect_size_page_prepare_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->rect_size_page),
-				    logo);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin),
+				   DEFAULT_RECT_W * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin),
+				   DEFAULT_RECT_H * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin),
+				   DEFAULT_RECT_R * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin),
+				   DEFAULT_RECT_WASTE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin),
+				   DEFAULT_RECT_WASTE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),
+				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct round size page.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-construct_round_size_page (glTemplateDesigner      *dlg,
+construct_round_size_page (glTemplateDesigner      *dialog,
 			   GdkPixbuf               *logo)
 {
-	GdkPixbuf *pixbuf;
+	GladeXML        *gui;
+	GdkPixbuf       *pixbuf;
 
-	dlg->priv->round_size_page =
-		glade_xml_get_widget (dlg->priv->gui, "round_size_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "round_size_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Round Size Page Widgets */
-	dlg->priv->round_image =
-		glade_xml_get_widget (dlg->priv->gui, "round_image");
-	dlg->priv->round_r_spin =
-		glade_xml_get_widget (dlg->priv->gui, "round_r_spin");
-	dlg->priv->round_waste_spin =
-		glade_xml_get_widget (dlg->priv->gui, "round_waste_spin");
-	dlg->priv->round_margin_spin =
-		glade_xml_get_widget (dlg->priv->gui, "round_margin_spin");
-	dlg->priv->round_r_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "round_r_units_label");
-	dlg->priv->round_waste_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "round_waste_units_label");
-	dlg->priv->round_margin_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "round_margin_units_label");
+	dialog->priv->round_size_page          = glade_xml_get_widget (gui, "round_size_page");
+	dialog->priv->round_image              = glade_xml_get_widget (gui, "round_image");
+	dialog->priv->round_r_spin             = glade_xml_get_widget (gui, "round_r_spin");
+	dialog->priv->round_waste_spin         = glade_xml_get_widget (gui, "round_waste_spin");
+	dialog->priv->round_margin_spin        = glade_xml_get_widget (gui, "round_margin_spin");
+	dialog->priv->round_r_units_label      = glade_xml_get_widget (gui, "round_r_units_label");
+	dialog->priv->round_waste_units_label  = glade_xml_get_widget (gui, "round_waste_units_label");
+	dialog->priv->round_margin_units_label = glade_xml_get_widget (gui, "round_margin_units_label");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->round_size_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->round_size_page,
+                                      _("Label Size (round)"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->round_size_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->round_size_page,
+                                         TRUE);
 
 	/* Initialize illustration. */
 	pixbuf = gdk_pixbuf_new_from_file (EX_ROUND_IMAGE, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE(dlg->priv->round_image), pixbuf);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->round_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->round_r_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->round_r_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->round_r_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->round_waste_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->round_margin_units_label),
-			    dlg->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->round_r_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->round_r_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->round_r_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->round_waste_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->round_margin_units_label),
+			    dialog->priv->units_string);
 
 	/* Load some realistic defaults. */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin),
-				   DEFAULT_ROUND_R * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin),
-				   DEFAULT_ROUND_WASTE * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin),
-				   DEFAULT_MARGIN * dlg->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin),
+				   DEFAULT_ROUND_R * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin),
+				   DEFAULT_ROUND_WASTE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin),
+				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 
-	/* Handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->round_size_page), "prepare",
-			       G_CALLBACK(round_size_page_prepare_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->round_size_page),
-				    logo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct CD/DVD size page.                                    */
 /*--------------------------------------------------------------------------*/
 static void
-construct_cd_size_page (glTemplateDesigner      *dlg,
+construct_cd_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GdkPixbuf *pixbuf;
+	GladeXML        *gui;
+	GdkPixbuf       *pixbuf;
 
-	dlg->priv->cd_size_page =
-		glade_xml_get_widget (dlg->priv->gui, "cd_size_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "cd_size_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Cd Size Page Widgets */
-	dlg->priv->cd_image =
-		glade_xml_get_widget (dlg->priv->gui, "cd_image");
-	dlg->priv->cd_radius_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_radius_spin");
-	dlg->priv->cd_hole_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_hole_spin");
-	dlg->priv->cd_w_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_w_spin");
-	dlg->priv->cd_h_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_h_spin");
-	dlg->priv->cd_waste_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_waste_spin");
-	dlg->priv->cd_margin_spin =
-		glade_xml_get_widget (dlg->priv->gui, "cd_margin_spin");
-	dlg->priv->cd_radius_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_radius_units_label");
-	dlg->priv->cd_hole_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_hole_units_label");
-	dlg->priv->cd_w_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_w_units_label");
-	dlg->priv->cd_h_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_h_units_label");
-	dlg->priv->cd_waste_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_waste_units_label");
-	dlg->priv->cd_margin_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "cd_margin_units_label");
+	dialog->priv->cd_size_page = glade_xml_get_widget (gui, "cd_size_page");
+	dialog->priv->cd_image     = glade_xml_get_widget (gui, "cd_image");
+	dialog->priv->cd_radius_spin = glade_xml_get_widget (gui, "cd_radius_spin");
+	dialog->priv->cd_hole_spin   = glade_xml_get_widget (gui, "cd_hole_spin");
+	dialog->priv->cd_w_spin      = glade_xml_get_widget (gui, "cd_w_spin");
+	dialog->priv->cd_h_spin      = glade_xml_get_widget (gui, "cd_h_spin");
+	dialog->priv->cd_waste_spin  = glade_xml_get_widget (gui, "cd_waste_spin");
+	dialog->priv->cd_margin_spin = glade_xml_get_widget (gui, "cd_margin_spin");
+	dialog->priv->cd_radius_units_label = glade_xml_get_widget (gui, "cd_radius_units_label");
+	dialog->priv->cd_hole_units_label   = glade_xml_get_widget (gui, "cd_hole_units_label");
+	dialog->priv->cd_w_units_label      = glade_xml_get_widget (gui, "cd_w_units_label");
+	dialog->priv->cd_h_units_label      = glade_xml_get_widget (gui, "cd_h_units_label");
+	dialog->priv->cd_waste_units_label  = glade_xml_get_widget (gui, "cd_waste_units_label");
+	dialog->priv->cd_margin_units_label = glade_xml_get_widget (gui, "cd_margin_units_label");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->cd_size_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->cd_size_page,
+                                      _("Label Size (CD/DVD)"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->cd_size_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->cd_size_page,
+                                         TRUE);
 
 	/* Initialize illustration. */
 	pixbuf = gdk_pixbuf_new_from_file (EX_CD_IMAGE, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE(dlg->priv->cd_image), pixbuf);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->cd_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_radius_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_hole_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_w_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_h_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_h_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_h_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_waste_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->cd_margin_units_label),
-			    dlg->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_radius_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_hole_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_w_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_h_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_waste_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->cd_margin_units_label),
+			    dialog->priv->units_string);
 
 	/* Load some realistic defaults. */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin),
-				   DEFAULT_CD_RADIUS * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin),
-				   DEFAULT_CD_HOLE * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin),
-				   DEFAULT_CD_WASTE * dlg->priv->units_per_point);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin),
-				   DEFAULT_MARGIN * dlg->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin),
+				   DEFAULT_CD_RADIUS * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin),
+				   DEFAULT_CD_HOLE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin),
+				   DEFAULT_CD_WASTE * dialog->priv->units_per_point);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),
+				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 
-	/* Handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->cd_size_page), "prepare",
-			       G_CALLBACK(cd_size_page_prepare_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->cd_size_page),
-				    logo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct number of layouts page.                              */
 /*--------------------------------------------------------------------------*/
 static void
-construct_nlayouts_page (glTemplateDesigner      *dlg,
+construct_nlayouts_page (glTemplateDesigner      *dialog,
 			 GdkPixbuf               *logo)
 {
-	GdkPixbuf *pixbuf;
+	GladeXML        *gui;
+	GdkPixbuf       *pixbuf;
 
-	dlg->priv->nlayouts_page =
-		glade_xml_get_widget (dlg->priv->gui, "nlayouts_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "nlayouts_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Widgets */
-	dlg->priv->nlayouts_image1 =
-		glade_xml_get_widget (dlg->priv->gui, "nlayouts_image1");
-	dlg->priv->nlayouts_image2 =
-		glade_xml_get_widget (dlg->priv->gui, "nlayouts_image2");
-	dlg->priv->nlayouts_spin =
-		glade_xml_get_widget (dlg->priv->gui, "nlayouts_spin");
+	dialog->priv->nlayouts_page   = glade_xml_get_widget (gui, "nlayouts_page");
+	dialog->priv->nlayouts_image1 = glade_xml_get_widget (gui, "nlayouts_image1");
+	dialog->priv->nlayouts_image2 = glade_xml_get_widget (gui, "nlayouts_image2");
+	dialog->priv->nlayouts_spin   = glade_xml_get_widget (gui, "nlayouts_spin");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->nlayouts_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->nlayouts_page,
+                                      _("Number of Layouts"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->nlayouts_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->nlayouts_page,
+                                         TRUE);
 
 	/* Initialize illustrations. */
 	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE1, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE(dlg->priv->nlayouts_image1), pixbuf);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image1), pixbuf);
 	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE2, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE(dlg->priv->nlayouts_image2), pixbuf);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image2), pixbuf);
 
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->nlayouts_page),
-				    logo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct layout page.                                         */
 /*--------------------------------------------------------------------------*/
 static void
-construct_layout_page (glTemplateDesigner      *dlg,
+construct_layout_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
-	dlg->priv->layout_page =
-		glade_xml_get_widget (dlg->priv->gui, "layout_page");
+	GladeXML        *gui;
 
-	/* Page Size Page Widgets */
-	dlg->priv->layout1_head_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_head_label");
-	dlg->priv->layout1_nx_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_nx_spin");
-	dlg->priv->layout1_ny_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_ny_spin");
-	dlg->priv->layout1_x0_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_x0_spin");
-	dlg->priv->layout1_y0_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_y0_spin");
-	dlg->priv->layout1_dx_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_dx_spin");
-	dlg->priv->layout1_dy_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout1_dy_spin");
-	dlg->priv->layout2_head_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_head_label");
-	dlg->priv->layout2_nx_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_nx_spin");
-	dlg->priv->layout2_ny_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_ny_spin");
-	dlg->priv->layout2_x0_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_x0_spin");
-	dlg->priv->layout2_y0_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_y0_spin");
-	dlg->priv->layout2_dx_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_dx_spin");
-	dlg->priv->layout2_dy_spin =
-		glade_xml_get_widget (dlg->priv->gui, "layout2_dy_spin");
-	dlg->priv->layout_x0_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout_x0_units_label");
-	dlg->priv->layout_y0_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout_y0_units_label");
-	dlg->priv->layout_dx_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout_dx_units_label");
-	dlg->priv->layout_dy_units_label =
-		glade_xml_get_widget (dlg->priv->gui, "layout_dy_units_label");
-	dlg->priv->layout_mini_preview =
-		glade_xml_get_widget (dlg->priv->gui, "layout_mini_preview");
-	dlg->priv->layout_test_button =
-		glade_xml_get_widget (dlg->priv->gui, "layout_test_button");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "layout_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
+
+	dialog->priv->layout_page           = glade_xml_get_widget (gui, "layout_page");
+	dialog->priv->layout1_head_label    = glade_xml_get_widget (gui, "layout1_head_label");
+	dialog->priv->layout1_nx_spin       = glade_xml_get_widget (gui, "layout1_nx_spin");
+	dialog->priv->layout1_ny_spin       = glade_xml_get_widget (gui, "layout1_ny_spin");
+	dialog->priv->layout1_x0_spin       = glade_xml_get_widget (gui, "layout1_x0_spin");
+	dialog->priv->layout1_y0_spin       = glade_xml_get_widget (gui, "layout1_y0_spin");
+	dialog->priv->layout1_dx_spin       = glade_xml_get_widget (gui, "layout1_dx_spin");
+	dialog->priv->layout1_dy_spin       = glade_xml_get_widget (gui, "layout1_dy_spin");
+	dialog->priv->layout2_head_label    = glade_xml_get_widget (gui, "layout2_head_label");
+	dialog->priv->layout2_nx_spin       = glade_xml_get_widget (gui, "layout2_nx_spin");
+	dialog->priv->layout2_ny_spin       = glade_xml_get_widget (gui, "layout2_ny_spin");
+	dialog->priv->layout2_x0_spin       = glade_xml_get_widget (gui, "layout2_x0_spin");
+	dialog->priv->layout2_y0_spin       = glade_xml_get_widget (gui, "layout2_y0_spin");
+	dialog->priv->layout2_dx_spin       = glade_xml_get_widget (gui, "layout2_dx_spin");
+	dialog->priv->layout2_dy_spin       = glade_xml_get_widget (gui, "layout2_dy_spin");
+	dialog->priv->layout_x0_units_label = glade_xml_get_widget (gui, "layout_x0_units_label");
+	dialog->priv->layout_y0_units_label = glade_xml_get_widget (gui, "layout_y0_units_label");
+	dialog->priv->layout_dx_units_label = glade_xml_get_widget (gui, "layout_dx_units_label");
+	dialog->priv->layout_dy_units_label = glade_xml_get_widget (gui, "layout_dy_units_label");
+	dialog->priv->layout_mini_preview   = glade_xml_get_widget (gui, "layout_mini_preview");
+	dialog->priv->layout_test_button    = glade_xml_get_widget (gui, "layout_test_button");
+
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->layout_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->layout_page,
+                                      _("Layout(s)"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->layout_page,
+                                             logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->layout_page,
+                                         TRUE);
 
 	/* Apply units to spinbuttons and units labels. */
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout1_x0_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout1_x0_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout2_x0_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout2_x0_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->layout_x0_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout1_y0_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout1_y0_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout2_y0_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout2_y0_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->layout_y0_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout1_dx_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout1_dx_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->layout_dx_units_label),
-			    dlg->priv->units_string);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout1_dy_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout1_dy_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin),
-				    dlg->priv->digits);
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin),
-                                        dlg->priv->climb_rate, 10.0*dlg->priv->climb_rate);
-        gtk_label_set_text (GTK_LABEL(dlg->priv->layout_dy_units_label),
-			    dlg->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->layout_x0_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->layout_y0_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->layout_dx_units_label),
+			    dialog->priv->units_string);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_spin_button_set_digits (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin),
+				    dialog->priv->digits);
+        gtk_spin_button_set_increments (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin),
+                                        dialog->priv->climb_rate, 10.0*dialog->priv->climb_rate);
+        gtk_label_set_text (GTK_LABEL(dialog->priv->layout_dy_units_label),
+			    dialog->priv->units_string);
 
 	/* Connect a handler that listens for changes in these widgets */
 	/* This controls sensitivity of related widgets. */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_nx_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_ny_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_x0_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_y0_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_dx_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout1_dy_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_nx_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_ny_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_x0_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_y0_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_dx_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout2_dy_spin), "changed",
-				  G_CALLBACK(layout_page_changed_cb), dlg);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_nx_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_ny_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_x0_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_y0_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_dx_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout1_dy_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_nx_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_ny_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_x0_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_y0_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_dx_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout2_dy_spin), "changed",
+				  G_CALLBACK(layout_page_changed_cb), dialog);
 
 
 	/* Print button */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->layout_test_button), "clicked",
-				  G_CALLBACK(print_test_cb), dlg);
+	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout_test_button), "clicked",
+				  G_CALLBACK(print_test_cb), dialog);
 
-	/* Handler to prepare the page. */
-	g_signal_connect_data (G_OBJECT(dlg->priv->layout_page), "prepare",
-			       G_CALLBACK(layout_page_prepare_cb), dlg,
-			       NULL, (G_CONNECT_AFTER|G_CONNECT_SWAPPED));
-
-	construct_page_boilerplate (dlg,
-				    GNOME_DRUID_PAGE_STANDARD(dlg->priv->layout_page),
-				    logo);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct finish page.                                         */
 /*--------------------------------------------------------------------------*/
 static void
-construct_finish_page (glTemplateDesigner      *dlg,
+construct_finish_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
+	GladeXML        *gui;
 
-	dlg->priv->finish_page =
-		glade_xml_get_widget (dlg->priv->gui, "finish_page");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
+                             "finish_page", NULL);
+	if (!gui)
+        {
+                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
+                return;
+        }
 
-	/* Accept button */
-	g_signal_connect_swapped (G_OBJECT(dlg->priv->finish_page), "finish",
-				  G_CALLBACK(finish_cb), dlg);
+	dialog->priv->finish_page = glade_xml_get_widget (gui, "finish_page");
 
-	construct_edge_page_boilerplate (dlg,
-					 GNOME_DRUID_PAGE_EDGE(dlg->priv->start_page),
-					 logo);
+        gtk_assistant_append_page (GTK_ASSISTANT (dialog),
+                                   dialog->priv->finish_page);
+
+        gtk_assistant_set_page_title (GTK_ASSISTANT (dialog),
+                                      dialog->priv->finish_page,
+                                      _("Design Completed"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (dialog),
+                                             dialog->priv->finish_page,
+                                             logo);
+        gtk_assistant_set_page_type (GTK_ASSISTANT (dialog),
+                                     dialog->priv->finish_page,
+                                     GTK_ASSISTANT_PAGE_CONFIRM);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                         dialog->priv->finish_page,
+                                         TRUE);
+
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Common construction tasks for start and finish page.           */
+/* PRIVATE.  cancel callback.                                               */
 /*--------------------------------------------------------------------------*/
 static void
-construct_edge_page_boilerplate (glTemplateDesigner      *dlg,
-				 GnomeDruidPageEdge      *page,
-				 GdkPixbuf               *logo)
-{
-	gnome_druid_page_edge_set_logo (page, logo);
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Common construction tasks for all other pages.                 */
-/*--------------------------------------------------------------------------*/
-static void
-construct_page_boilerplate (glTemplateDesigner      *dlg,
-			    GnomeDruidPageStandard  *page,
-			    GdkPixbuf               *logo)
-{
-	gnome_druid_page_standard_set_logo (page, logo);
-
-	g_signal_connect (G_OBJECT(page), "next", G_CALLBACK(next_cb), dlg);
-	g_signal_connect (G_OBJECT(page), "back", G_CALLBACK(back_cb), dlg);
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Cancel druid.                                                  */
-/*--------------------------------------------------------------------------*/
-static void
-cancel_cb (glTemplateDesigner *dlg)
+cancel_cb (glTemplateDesigner *dialog)
 {
                                                                                
-	gtk_widget_destroy (GTK_WIDGET(dlg));
+	gtk_widget_destroy (GTK_WIDGET(dialog));
+
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  apply callback                                                 */
+/*--------------------------------------------------------------------------*/
+static void
+apply_cb (glTemplateDesigner *dialog)
+{
+	glTemplate *template;
+	
+	template = build_template (dialog);
+	gl_template_register (template);
+                                                                               
+}
+                         
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  close callback                                                 */
+/*--------------------------------------------------------------------------*/
+static void
+close_cb (glTemplateDesigner *dialog)
+{
+                                                                               
+	gtk_widget_destroy (GTK_WIDGET(dialog));
 
 }
                          
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  prepare page callback                                          */
+/*--------------------------------------------------------------------------*/
+static void
+prepare_cb (glTemplateDesigner      *dialog,
+            GtkWidget               *page)
+{
+        gint page_num;
+
+        page_num = gtk_assistant_get_current_page (GTK_ASSISTANT (dialog));
+
+        switch (page_num)
+        {
+
+        case NAME_PAGE_NUM:
+                name_page_changed_cb (dialog); /* Use to prepare */
+                break;
+
+        case PG_SIZE_PAGE_NUM:
+                pg_size_page_changed_cb (dialog); /* Use to prepare */
+                break;
+
+        case RECT_SIZE_PAGE_NUM:
+                rect_size_page_prepare_cb (dialog);
+                break;
+
+        case ROUND_SIZE_PAGE_NUM:
+                round_size_page_prepare_cb (dialog);
+                break;
+
+        case CD_SIZE_PAGE_NUM:
+                cd_size_page_prepare_cb (dialog);
+                break;
+
+        case LAYOUT_PAGE_NUM:
+                layout_page_prepare_cb (dialog);
+                break;
+
+        default:
+                /* No preparation needed */
+                break;
+
+        }
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Handle non-linear forward traversal.                           */
+/*--------------------------------------------------------------------------*/
+static gint
+forward_page_function (gint     current_page,
+                       gpointer data)
+{
+        glTemplateDesigner *dialog = GL_TEMPLATE_DESIGNER (data);
+
+        switch (current_page)
+        {
+        case START_PAGE_NUM:
+                return NAME_PAGE_NUM;
+
+        case NAME_PAGE_NUM:
+                return PG_SIZE_PAGE_NUM;
+
+        case PG_SIZE_PAGE_NUM:
+                return SHAPE_PAGE_NUM;
+
+        case SHAPE_PAGE_NUM:
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_rect_radio))) {
+                        return RECT_SIZE_PAGE_NUM;
+		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
+                        return ROUND_SIZE_PAGE_NUM;
+		}
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_cd_radio))) {
+                        return CD_SIZE_PAGE_NUM;
+		}
+                break;
+
+        case RECT_SIZE_PAGE_NUM:
+        case ROUND_SIZE_PAGE_NUM:
+        case CD_SIZE_PAGE_NUM:
+                return NLAYOUTS_PAGE_NUM;
+
+        case NLAYOUTS_PAGE_NUM:
+                return LAYOUT_PAGE_NUM;
+
+        case LAYOUT_PAGE_NUM:
+                return FINISH_PAGE_NUM;
+
+        case FINISH_PAGE_NUM:
+        default:
+                return -1;
+        }
+
+}
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Widget on name page "changed" callback.                        */
 /*--------------------------------------------------------------------------*/
 static void
-name_page_changed_cb (glTemplateDesigner *dlg)
+name_page_changed_cb (glTemplateDesigner *dialog)
 {
 	gchar *brand, *part_num, *desc;
 
-	brand    = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->brand_entry), 0, -1);
-	part_num = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->part_num_entry), 0, -1);
-	desc     = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->description_entry), 0, -1);
+	brand    = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1);
+	part_num = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1);
+	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
-	if (brand && brand[0] && part_num && part_num[0] && desc && desc[0]) {
+	if (brand && brand[0] && part_num && part_num[0] && desc && desc[0])
+        {
 
-		gnome_druid_set_buttons_sensitive (GNOME_DRUID(dlg->priv->druid),
-						   TRUE, TRUE, TRUE, FALSE);
+                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                                 dialog->priv->name_page,
+                                                 TRUE);
+	}
+        else
+        {
 
-	} else {
-
-		gnome_druid_set_buttons_sensitive (GNOME_DRUID(dlg->priv->druid),
-						   TRUE, FALSE, TRUE, FALSE);
-
+                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
+                                                 dialog->priv->name_page,
+                                                 FALSE);
 	}
 
 	g_free (brand);
 	g_free (part_num);
 	g_free (desc);
-
 }
                                                                                
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Widget on page size page "changed" callback.                   */
 /*--------------------------------------------------------------------------*/
 static void
-pg_size_page_changed_cb (glTemplateDesigner *dlg)
+pg_size_page_changed_cb (glTemplateDesigner *dialog)
 {
 	gchar   *page_size_name;
 	glPaper *paper;
 	
 
 	page_size_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
 
 	if (page_size_name && strlen(page_size_name)) {
 
@@ -1132,25 +1296,25 @@ pg_size_page_changed_cb (glTemplateDesigner *dlg)
 	
 
 		if ( g_strcasecmp (paper->id, "Other") == 0 ) {
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_w_spin), TRUE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_h_spin), TRUE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_w_units_label),
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_spin), TRUE);
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_h_spin), TRUE);
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_units_label),
 						  TRUE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_h_units_label),
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_h_units_label),
 						  TRUE);
 
 		} else {
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_w_spin), FALSE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_h_spin), FALSE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_w_units_label),
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_spin), FALSE);
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_h_spin), FALSE);
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_units_label),
 						  FALSE);
-			gtk_widget_set_sensitive (GTK_WIDGET(dlg->priv->pg_h_units_label),
+			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_h_units_label),
 						  FALSE);
 
-			gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin),
-						   paper->width * dlg->priv->units_per_point);
-			gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin),
-						   paper->height * dlg->priv->units_per_point);
+			gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin),
+						   paper->width * dialog->priv->units_per_point);
+			gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin),
+						   paper->height * dialog->priv->units_per_point);
 		}
 
 		gl_paper_free (paper);
@@ -1164,41 +1328,41 @@ pg_size_page_changed_cb (glTemplateDesigner *dlg)
 /* PRIVATE.  Prepare rectangular size page.                                 */
 /*--------------------------------------------------------------------------*/
 static void
-rect_size_page_prepare_cb (glTemplateDesigner *dlg)
+rect_size_page_prepare_cb (glTemplateDesigner *dialog)
 {
 	gdouble max_w, max_h;
 	gdouble w, h, r, x_waste, y_waste, margin;
 
 	/* Limit label size based on already chosen page size. */
-	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin));
-	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin));
+	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
+	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin));
 
-	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
-	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
-	r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin));
-	x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
-	y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
-	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin));
+	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin));
+	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin));
+	r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin));
+	x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin));
+	y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin));
+	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin));
 
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_w_spin),
-                                   dlg->priv->climb_rate, max_w);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_h_spin),
-                                   dlg->priv->climb_rate, max_h);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_r_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_w_spin),
+                                   dialog->priv->climb_rate, max_w);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_h_spin),
+                                   dialog->priv->climb_rate, max_h);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_r_spin),
                                    0.0, MIN(max_w, max_h)/2.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_x_waste_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_x_waste_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_y_waste_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_y_waste_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->rect_margin_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->rect_margin_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin), w);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin), h);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin), r);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin), x_waste);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin), y_waste);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin), margin);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin), w);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin), h);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin), r);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin), x_waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin), y_waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin), margin);
 
 }
 
@@ -1206,29 +1370,29 @@ rect_size_page_prepare_cb (glTemplateDesigner *dlg)
 /* PRIVATE.  Prepare round size page.                                       */
 /*--------------------------------------------------------------------------*/
 static void
-round_size_page_prepare_cb (glTemplateDesigner *dlg)
+round_size_page_prepare_cb (glTemplateDesigner *dialog)
 {
 	gdouble max_w, max_h;
 	gdouble r, waste, margin;
 
 	/* Limit label size based on already chosen page size. */
-	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin));
-	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin));
+	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
+	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin));
 
-	r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin));
-	waste  = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
-	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin));
+	r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
+	waste  = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin));
+	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin));
 
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->round_r_spin),
-                                   dlg->priv->climb_rate, MIN(max_w, max_h)/2.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->round_waste_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->round_r_spin),
+                                   dialog->priv->climb_rate, MIN(max_w, max_h)/2.0);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->round_waste_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->round_margin_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->round_margin_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin), r);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin), waste);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin), margin);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin), r);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin), waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin), margin);
 
 }
 
@@ -1236,41 +1400,41 @@ round_size_page_prepare_cb (glTemplateDesigner *dlg)
 /* PRIVATE.  Prepare cd/dvd size page.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-cd_size_page_prepare_cb (glTemplateDesigner *dlg)
+cd_size_page_prepare_cb (glTemplateDesigner *dialog)
 {
 	gdouble max_w, max_h;
 	gdouble radius, hole, w, h, waste, margin;
 
 	/* Limit label size based on already chosen page size. */
-	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin));
-	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin));
+	max_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
+	max_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin));
 
-	radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin));
-	hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin));
-	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin));
-	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_h_spin));
-	waste  = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin));
-	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin));
+	radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin));
+	hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin));
+	w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin));
+	h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin));
+	waste  = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin));
+	margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin));
 
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_radius_spin),
-                                   dlg->priv->climb_rate, MIN(max_w, max_h)/2.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_hole_spin),
-                                   dlg->priv->climb_rate, MIN(max_w, max_h)/2.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_w_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_radius_spin),
+                                   dialog->priv->climb_rate, MIN(max_w, max_h)/2.0);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_hole_spin),
+                                   dialog->priv->climb_rate, MIN(max_w, max_h)/2.0);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_w_spin),
                                    0.0, max_w);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_h_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_h_spin),
                                    0.0, max_h);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_waste_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_waste_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->cd_margin_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->cd_margin_spin),
                                    0.0, MIN(max_w, max_h)/4.0);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin), radius);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin), hole);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin), w);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_h_spin), h);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin), waste);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin), margin);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin), radius);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin), hole);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin), w);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin), h);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin), waste);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin), margin);
 
 }
 
@@ -1278,7 +1442,7 @@ cd_size_page_prepare_cb (glTemplateDesigner *dlg)
 /* PRIVATE.  Layout page widget changed cb.                                 */
 /*--------------------------------------------------------------------------*/
 static void
-layout_page_prepare_cb (glTemplateDesigner *dlg)
+layout_page_prepare_cb (glTemplateDesigner *dialog)
 {
 	gdouble page_w, page_h;
 	gdouble w, h, x_waste, y_waste;
@@ -1287,195 +1451,195 @@ layout_page_prepare_cb (glTemplateDesigner *dlg)
 	gdouble nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
 
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_nx_spin),
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_nx_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_ny_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_ny_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_x0_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_x0_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_y0_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_y0_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_dx_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_dx_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout1_dy_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_dy_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_nx_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_nx_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_ny_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_ny_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_x0_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_x0_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_y0_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_y0_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_dx_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_dx_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
-	g_signal_handlers_block_by_func (G_OBJECT(dlg->priv->layout2_dy_spin),
+					 G_OBJECT(dialog));
+	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_dy_spin),
 					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dlg));
+					 G_OBJECT(dialog));
 
 	/* Limit ranges based on already chosen page and label sizes. */
-	page_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin));
-	page_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin));
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
-		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
-		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
-		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
-		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
+	page_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
+	page_h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin));
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_rect_radio))) {
+		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin));
+		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin));
 	}
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
-		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin));
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
+		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
 		h = w;
-		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin));
 		y_waste = x_waste;
 	}
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
-		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin));
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_cd_radio))) {
+		w = 2*gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin));
 		h = w;
-		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin));
 		y_waste = x_waste;
 	}
 	max_nx = MAX (floor (page_w/(w + 2*x_waste) + DELTA), 1.0);
 	max_ny = MAX (floor (page_h/(h + 2*y_waste) + DELTA), 1.0);
 
-	nx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_nx_spin));
-	ny_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_ny_spin));
-	x0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_x0_spin));
-	y0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_y0_spin));
-	dx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dx_spin));
-	dy_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dy_spin));
-	nx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_nx_spin));
-	ny_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_ny_spin));
-	x0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_x0_spin));
-	y0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_y0_spin));
-	dx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin));
-	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin));
+	nx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_nx_spin));
+	ny_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_ny_spin));
+	x0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin));
+	y0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin));
+	dx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin));
+	dy_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin));
+	nx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_nx_spin));
+	ny_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_ny_spin));
+	x0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin));
+	y0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin));
+	dx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin));
+	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin));
 
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_nx_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_nx_spin),
                                    1, max_nx);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_ny_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_ny_spin),
                                    1, max_ny);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_x0_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_x0_spin),
                                    x_waste, page_w - w - x_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_y0_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_y0_spin),
                                    y_waste, page_h - h - y_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_dx_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_dx_spin),
                                    w + 2*x_waste, page_w - w - 2*x_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout1_dy_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout1_dy_spin),
                                    h + 2*y_waste, page_h - h - 2*y_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_nx_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_nx_spin),
                                    1, max_nx);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_ny_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_ny_spin),
                                    1, max_ny);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_x0_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_x0_spin),
                                    x_waste, page_w - w - x_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_y0_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_y0_spin),
                                    y_waste, page_h - h - y_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_dx_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_dx_spin),
                                    w + 2*x_waste, page_w - w - 2*x_waste);
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->layout2_dy_spin),
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->layout2_dy_spin),
                                    h + 2*y_waste, page_h - h - 2*y_waste);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_nx_spin), nx_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_ny_spin), ny_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_x0_spin), x0_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_y0_spin), y0_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dx_spin), dx_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dy_spin), dy_1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_nx_spin), nx_2);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_ny_spin), ny_2);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_x0_spin), x0_2);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_y0_spin), y0_2);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin), dx_2);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin), dy_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_nx_spin), nx_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_ny_spin), ny_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin), x0_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin), y0_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin), dx_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin), dy_1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_nx_spin), nx_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_ny_spin), ny_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin), x0_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin), y0_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin), dx_2);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin), dy_2);
 
 	/* Set visibility of layout2 widgets as appropriate. */
-	nlayouts = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->nlayouts_spin));
+	nlayouts = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dialog->priv->nlayouts_spin));
 	if ( nlayouts == 1 ) {
 
-		gtk_widget_hide (dlg->priv->layout1_head_label);
-		gtk_widget_hide (dlg->priv->layout2_head_label);
-		gtk_widget_hide (dlg->priv->layout2_nx_spin);
-		gtk_widget_hide (dlg->priv->layout2_ny_spin);
-		gtk_widget_hide (dlg->priv->layout2_x0_spin);
-		gtk_widget_hide (dlg->priv->layout2_y0_spin);
-		gtk_widget_hide (dlg->priv->layout2_dx_spin);
-		gtk_widget_hide (dlg->priv->layout2_dy_spin);
+		gtk_widget_hide (dialog->priv->layout1_head_label);
+		gtk_widget_hide (dialog->priv->layout2_head_label);
+		gtk_widget_hide (dialog->priv->layout2_nx_spin);
+		gtk_widget_hide (dialog->priv->layout2_ny_spin);
+		gtk_widget_hide (dialog->priv->layout2_x0_spin);
+		gtk_widget_hide (dialog->priv->layout2_y0_spin);
+		gtk_widget_hide (dialog->priv->layout2_dx_spin);
+		gtk_widget_hide (dialog->priv->layout2_dy_spin);
 
 	} else {
 
-		gtk_widget_show (dlg->priv->layout1_head_label);
-		gtk_widget_show (dlg->priv->layout2_head_label);
-		gtk_widget_show (dlg->priv->layout2_nx_spin);
-		gtk_widget_show (dlg->priv->layout2_ny_spin);
-		gtk_widget_show (dlg->priv->layout2_x0_spin);
-		gtk_widget_show (dlg->priv->layout2_y0_spin);
-		gtk_widget_show (dlg->priv->layout2_dx_spin);
-		gtk_widget_show (dlg->priv->layout2_dy_spin);
+		gtk_widget_show (dialog->priv->layout1_head_label);
+		gtk_widget_show (dialog->priv->layout2_head_label);
+		gtk_widget_show (dialog->priv->layout2_nx_spin);
+		gtk_widget_show (dialog->priv->layout2_ny_spin);
+		gtk_widget_show (dialog->priv->layout2_x0_spin);
+		gtk_widget_show (dialog->priv->layout2_y0_spin);
+		gtk_widget_show (dialog->priv->layout2_dx_spin);
+		gtk_widget_show (dialog->priv->layout2_dy_spin);
 
 	}
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_nx_spin),
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_nx_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_ny_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_ny_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_x0_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_x0_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_y0_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_y0_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_dx_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_dx_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout1_dy_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_dy_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_nx_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_nx_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_ny_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_ny_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_x0_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_x0_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_y0_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_y0_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_dx_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_dx_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dlg->priv->layout2_dy_spin),
+					   G_OBJECT(dialog));
+	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_dy_spin),
 					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dlg));
+					   G_OBJECT(dialog));
 
-	layout_page_changed_cb (dlg);
+	layout_page_changed_cb (dialog);
 }
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Layout page widget changed cb.                                 */
 /*--------------------------------------------------------------------------*/
 static void
-layout_page_changed_cb (glTemplateDesigner *dlg)
+layout_page_changed_cb (glTemplateDesigner *dialog)
 {
 	glTemplate *template;
 
-	template = build_template (dlg);
+	template = build_template (dialog);
 
-	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dlg->priv->layout_mini_preview),
+	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
 					   template);
 
 	gl_template_free (template);
@@ -1485,7 +1649,7 @@ layout_page_changed_cb (glTemplateDesigner *dlg)
 /* PRIVATE.  Print test sheet callback.                                     */
 /*--------------------------------------------------------------------------*/
 static void
-print_test_cb (glTemplateDesigner      *dlg)
+print_test_cb (glTemplateDesigner      *dialog)
 {
 	GObject    *label;
 	glTemplate *template;
@@ -1493,14 +1657,14 @@ print_test_cb (glTemplateDesigner      *dlg)
 
 	label = gl_label_new ();
 
-	template = build_template (dlg);
+	template = build_template (dialog);
 	gl_label_set_template (GL_LABEL(label), template);
 
 	print_op = gl_print_op_new (GL_LABEL(label));
 	gl_print_op_force_outline_flag (print_op);
         gtk_print_operation_run (GTK_PRINT_OPERATION (print_op),
                                  GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
-                                 GTK_WINDOW (dlg),
+                                 GTK_WINDOW (dialog),
                                  NULL);
 
 	gl_template_free (template);
@@ -1508,25 +1672,10 @@ print_test_cb (glTemplateDesigner      *dlg)
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Finish druid.                                                  */
-/*--------------------------------------------------------------------------*/
-static void
-finish_cb (glTemplateDesigner *dlg)
-{
-	glTemplate *template;
-	
-	template = build_template (dlg);
-	gl_template_register (template);
-                                                                               
-	gtk_widget_destroy (GTK_WIDGET(dlg));
-
-}
-                         
-/*--------------------------------------------------------------------------*/
-/* Build a template based on current druid settings.                        */
+/* Build a template based on current assistant settings.                    */
 /*--------------------------------------------------------------------------*/
 static glTemplate *
-build_template (glTemplateDesigner      *dlg)
+build_template (glTemplateDesigner      *dialog)
 {
 	gdouble               upp;
 	gchar                *brand, *part_num, *name, *desc;
@@ -1540,65 +1689,65 @@ build_template (glTemplateDesigner      *dlg)
 	gdouble               nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
 	glTemplate           *template;
 
-	upp = dlg->priv->units_per_point;
+	upp = dialog->priv->units_per_point;
 
-	brand    = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->brand_entry), 0, -1);
-	part_num = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->part_num_entry), 0, -1);
+	brand    = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1);
+	part_num = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1);
 	name     = g_strdup_printf ("%s %s", brand, part_num);
-	desc     = gtk_editable_get_chars (GTK_EDITABLE(dlg->priv->description_entry), 0, -1);
+	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
 	page_size_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dlg->priv->pg_size_combo));
+		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
 	paper = gl_paper_from_name (page_size_name);
 	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
-			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_w_spin))
+			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin))
 			/ upp;
 		paper->height =
-			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->pg_h_spin))
+			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin))
 			 / upp;
 	}
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_rect_radio))) {
 		shape = GL_TEMPLATE_SHAPE_RECT;
-		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_w_spin));
-		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_h_spin));
-		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_r_spin));
-		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_x_waste_spin));
-		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_y_waste_spin));
-		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->rect_margin_spin));
+		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin));
+		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin));
+		x_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin));
+		y_waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin));
+		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin));
 	}
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
 		shape = GL_TEMPLATE_SHAPE_ROUND;
-		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_r_spin));
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_waste_spin));
-		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->round_margin_spin));
+		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
+		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin));
+		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin));
 	}
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_cd_radio))) {
 		shape = GL_TEMPLATE_SHAPE_CD;
-		radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_radius_spin));
-		hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_hole_spin));
-		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_w_spin));
-		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_h_spin));
-		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_waste_spin));
-		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->cd_margin_spin));
+		radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin));
+		hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin));
+		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin));
+		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin));
+		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_waste_spin));
+		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin));
 	}
 
-	nlayouts = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->nlayouts_spin));
-	nx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_nx_spin));
-	ny_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_ny_spin));
-	x0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_x0_spin));
-	y0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_y0_spin));
-	dx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dx_spin));
-	dy_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout1_dy_spin));
-	nx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_nx_spin));
-	ny_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_ny_spin));
-	x0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_x0_spin));
-	y0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_y0_spin));
-	dx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dx_spin));
-	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dlg->priv->layout2_dy_spin));
+	nlayouts = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dialog->priv->nlayouts_spin));
+	nx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_nx_spin));
+	ny_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_ny_spin));
+	x0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin));
+	y0_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin));
+	dx_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin));
+	dy_1 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin));
+	nx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_nx_spin));
+	ny_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_ny_spin));
+	x0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin));
+	y0_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin));
+	dx_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin));
+	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin));
 
 
 	template = gl_template_new (name, desc, paper->id, paper->width, paper->height);
@@ -1651,124 +1800,6 @@ build_template (glTemplateDesigner      *dlg)
 	gl_paper_free (paper);
 
 	return template;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Handle non-linear forward traversal.                           */
-/*--------------------------------------------------------------------------*/
-static gboolean
-next_cb (GnomeDruidPage     *druidpage,
-	 GtkWidget          *widget,
-	 glTemplateDesigner *dlg)
-{
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->shape_page ) {
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->rect_size_page));
-			return TRUE;
-		}
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->round_size_page));
-			return TRUE;
-		}
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->cd_size_page));
-			return TRUE;
-		}
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->rect_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->nlayouts_page));
-		return TRUE;
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->round_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->nlayouts_page));
-		return TRUE;
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->cd_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->nlayouts_page));
-		return TRUE;
-
-	}
-
-	/* Default case is linear. */
-	return FALSE;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Handle non-linear reverse traversal.                           */
-/*--------------------------------------------------------------------------*/
-static gboolean
-back_cb (GnomeDruidPage     *druidpage,
-	 GtkWidget          *widget,
-	 glTemplateDesigner *dlg)
-{
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->rect_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->shape_page));
-		return TRUE;
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->round_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->shape_page));
-		return TRUE;
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->cd_size_page ) {
-
-		gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-				      GNOME_DRUID_PAGE(dlg->priv->shape_page));
-		return TRUE;
-
-	}
-
-	if ( GTK_WIDGET(druidpage) == dlg->priv->nlayouts_page ) {
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_rect_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->rect_size_page));
-			return TRUE;
-		}
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_round_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->round_size_page));
-			return TRUE;
-		}
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dlg->priv->shape_cd_radio))) {
-			gnome_druid_set_page (GNOME_DRUID(dlg->priv->druid),
-					      GNOME_DRUID_PAGE(dlg->priv->cd_size_page));
-			return TRUE;
-		}
-
-	}
-
-	/* Default case is linear. */
-	return FALSE;
 }
 
 /*****************************************************************************/
