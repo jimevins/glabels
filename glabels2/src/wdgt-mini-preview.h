@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  wdgt_mini_preview.h:  mini-preview widget module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +25,7 @@
 #ifndef __WDGT_MINI_PREVIEW_H__
 #define __WDGT_MINI_PREVIEW_H__
 
-#include <gtk/gtkhbox.h>
-#include <libgnomecanvas/gnome-canvas.h>
+#include <gtk/gtk.h>
 #include "label.h"
 
 G_BEGIN_DECLS
@@ -39,28 +40,18 @@ G_BEGIN_DECLS
 #define GL_IS_WDGT_MINI_PREVIEW_CLASS(klass) \
         (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MINI_PREVIEW))
 
-typedef struct _glWdgtMiniPreview      glWdgtMiniPreview;
-typedef struct _glWdgtMiniPreviewClass glWdgtMiniPreviewClass;
+typedef struct _glWdgtMiniPreview        glWdgtMiniPreview;
+typedef struct _glWdgtMiniPreviewPrivate glWdgtMiniPreviewPrivate;
+typedef struct _glWdgtMiniPreviewClass   glWdgtMiniPreviewClass;
 
 struct _glWdgtMiniPreview {
-	GtkHBox         parent_widget;
+	GtkDrawingArea            parent_widget;
 
-	gint            height;
-	gint            width;
-
-	GtkWidget       *canvas;
-	GnomeCanvasItem *paper_item;
-	GnomeCanvasItem *shadow_item;
-
-	gint            labels_per_sheet;
-	GList           *label_items;
-
-	gint            highlight_first;
-	gint            highlight_last;
+	glWdgtMiniPreviewPrivate *priv;
 };
 
 struct _glWdgtMiniPreviewClass {
-	GtkHBoxClass    parent_class;
+	GtkDrawingAreaClass       parent_class;
 
 	void (*clicked) (glWdgtMiniPreview *preview,
 			 gint index,
@@ -86,9 +77,6 @@ void       gl_wdgt_mini_preview_set_template      (glWdgtMiniPreview *preview,
 void       gl_wdgt_mini_preview_highlight_range   (glWdgtMiniPreview *preview,
 						   gint               first_label,
 						   gint               last_label);
-
-void       gl_wdgt_mini_preview_set_bg_color      (glWdgtMiniPreview *preview,
-						   guint              color);
 
 G_END_DECLS
 

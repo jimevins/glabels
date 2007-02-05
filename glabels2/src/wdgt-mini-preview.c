@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  wdgt_mini_preview.c:  mini preview widget module
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +26,6 @@
 
 #include "wdgt-mini-preview.h"
 
-#include <libgnomecanvas/gnome-canvas-util.h>
 #include <math.h>
 
 #include "marshal.h"
@@ -32,11 +33,8 @@
 
 #include "debug.h"
 
-#define WDGT_MINI_PREVIEW_MAX_PIXELS 175
 #define SHADOW_X_OFFSET 5
 #define SHADOW_Y_OFFSET 5
-
-#define RES 5 /* Resolution in degrees for Business Card CD outlines */
 
 /*===========================================*/
 /* Private types                             */
@@ -48,12 +46,37 @@ enum {
 	LAST_SIGNAL
 };
 
+typedef struct {
+	gdouble x;
+	gdouble y;
+} LabelCenter;
+
+struct _glWdgtMiniPreviewPrivate {
+
+	gint            height;
+	gint            width;
+
+	glTemplate     *template;
+	gdouble         scale;
+	gdouble         offset_x;
+	gdouble         offset_y;
+	gint            labels_per_sheet;
+	LabelCenter    *centers;
+
+	gint            highlight_first;
+	gint            highlight_last;
+
+	gboolean        dragging;
+	gint            first_i;
+	gint            last_i;
+	gint            prev_i;
+};
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
-static GtkContainerClass *parent_class;
+static GtkDrawingAreaClass *parent_class;
 
 static gint wdgt_mini_preview_signals[LAST_SIGNAL] = { 0 };
 
@@ -61,30 +84,65 @@ static gint wdgt_mini_preview_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_mini_preview_class_init    (glWdgtMiniPreviewClass * class);
-static void gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview * preview);
-static void gl_wdgt_mini_preview_finalize      (GObject * object);
+static void gl_wdgt_mini_preview_class_init    (glWdgtMiniPreviewClass *class);
+static void gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview      *preview);
+static void gl_wdgt_mini_preview_finalize      (GObject                *object);
 
-static void gl_wdgt_mini_preview_construct     (glWdgtMiniPreview * preview,
-						gint height, gint width);
+static void gl_wdgt_mini_preview_construct     (glWdgtMiniPreview      *preview,
+						gint                    height,
+						gint                    width);
 
-static GList *mini_outline_list_new            (GnomeCanvas      *canvas,
-						const glTemplate *template);
-static void mini_outline_list_free             (GList ** list);
+static gboolean expose_event_cb                (GtkWidget              *widget,
+						GdkEventExpose         *event);
+static void style_set_cb                       (GtkWidget              *widget,
+						GtkStyle               *previous_style);
+static gboolean button_press_event_cb          (GtkWidget              *widget,
+						GdkEventButton         *event);
+static gboolean motion_notify_event_cb         (GtkWidget              *widget,
+						GdkEventMotion         *event);
+static gboolean button_release_event_cb        (GtkWidget              *widget,
+						GdkEventButton         *event);
 
-static gint canvas_event_cb                    (GnomeCanvas * canvas,
-						GdkEvent * event,
-						gpointer data);
 
-static GnomeCanvasItem *cdbc_item              (GnomeCanvasGroup *group,
-						gdouble           x1,
-						gdouble           y1,
-						const glTemplate *template);
+static void redraw                             (GtkWidget              *widget);
+static void draw                               (glWdgtMiniPreview      *preview,
+						cairo_t                *cr);
 
-static void style_set_cb                       (GtkWidget        *widget,
-						GtkStyle         *previous_style,
-						gpointer data);
+static void draw_shadow                        (glWdgtMiniPreview      *preview,
+						cairo_t                *cr,
+						gdouble  		     x,
+						gdouble                 y,
+						gdouble                 width,
+						gdouble                 height);
+static void draw_paper                         (glWdgtMiniPreview      *preview,
+						cairo_t                *cr,
+						gdouble                 width,
+						gdouble                 height,
+						gdouble                 line_width);
+static void draw_labels                        (glWdgtMiniPreview      *preview,
+						cairo_t                *cr,
+						const glTemplate       *template,
+						gdouble                 line_width);
+static void create_label_path                  (cairo_t                *cr,
+						const glTemplate       *template,
+						gdouble                 x0,
+						gdouble                 y0);
+static void create_rect_label_path             (cairo_t                *cr,
+						const glTemplate       *template,
+						gdouble                 x0,
+						gdouble                 y0);
+static void create_round_label_path            (cairo_t                *cr,
+						const glTemplate       *template,
+						gdouble                 x0,
+						gdouble                 y0);
+static void create_cd_label_path               (cairo_t                *cr,
+						const glTemplate       *template,
+						gdouble                 x0,
+						gdouble                 y0);
 
+static gint find_closest_label                 (glWdgtMiniPreview      *preview,
+						gdouble                 x,
+						gdouble                 y);
 
 
 
@@ -110,7 +168,7 @@ gl_wdgt_mini_preview_get_type (void)
 			NULL
 		};
 
-		type = g_type_register_static (GTK_TYPE_HBOX,
+		type = g_type_register_static (GTK_TYPE_DRAWING_AREA,
 					       "glWdgtMiniPreview", &info, 0);
 	}
 
@@ -118,17 +176,22 @@ gl_wdgt_mini_preview_get_type (void)
 }
 
 static void
-gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass * class)
+gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
 {
-	GObjectClass *object_class;
+	GObjectClass   *object_class = G_OBJECT_CLASS (class);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	object_class = (GObjectClass *) class;
 
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 
 	object_class->finalize = gl_wdgt_mini_preview_finalize;
+
+	widget_class->expose_event         = expose_event_cb;
+	widget_class->style_set            = style_set_cb;
+	widget_class->button_press_event   = button_press_event_cb;
+	widget_class->motion_notify_event  = motion_notify_event_cb;
+	widget_class->button_release_event = button_release_event_cb;
 
 	wdgt_mini_preview_signals[CLICKED] =
 	    g_signal_new ("clicked",
@@ -152,18 +215,21 @@ gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass * class)
 }
 
 static void
-gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview * preview)
+gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview *preview)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	preview->canvas = NULL;
-	preview->label_items = NULL;
+	preview->priv = g_new0 (glWdgtMiniPreviewPrivate, 1);
+
+	gtk_widget_add_events (GTK_WIDGET (preview),
+			       GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
+			       GDK_POINTER_MOTION_MASK);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
 static void
-gl_wdgt_mini_preview_finalize (GObject * object)
+gl_wdgt_mini_preview_finalize (GObject *object)
 {
 	glWdgtMiniPreview *preview;
 	glWdgtMiniPreviewClass *class;
@@ -174,6 +240,10 @@ gl_wdgt_mini_preview_finalize (GObject * object)
 	g_return_if_fail (GL_IS_WDGT_MINI_PREVIEW (object));
 
 	preview = GL_WDGT_MINI_PREVIEW (object);
+
+	gl_template_free (preview->priv->template);
+	g_free (preview->priv->centers);
+	g_free (preview->priv);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
@@ -201,72 +271,20 @@ gl_wdgt_mini_preview_new (gint height,
 /* Construct composite widget.                                              */
 /*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_mini_preview_construct (glWdgtMiniPreview * preview,
-				gint height,
-				gint width)
+gl_wdgt_mini_preview_construct (glWdgtMiniPreview *preview,
+				gint               height,
+				gint               width)
 {
-	GtkWidget        *whbox;
 	GnomeCanvasGroup *group;
 	GtkStyle         *style;
 	guint             shadow_color;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	whbox = GTK_WIDGET (preview);
+	preview->priv->height = height;
+	preview->priv->width  = width;
 
-	preview->height = height;
-	preview->width  = width;
-
-	/* create canvas */
-	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
-	preview->canvas = gnome_canvas_new_aa ();
-	gtk_widget_pop_colormap ();
-	gtk_box_pack_start (GTK_BOX (whbox), preview->canvas, TRUE, TRUE, 0);
-	gtk_widget_set_size_request (preview->canvas, width, height);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
-					0.0, 0.0, width, height);
-
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (preview->canvas), 1.0);
-	group = gnome_canvas_root (GNOME_CANVAS (preview->canvas));
-
-	/* draw shadow */
-	style = gtk_widget_get_style (GTK_WIDGET(preview));
-	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
-	preview->shadow_item =
-		gnome_canvas_item_new (group,
-				       gnome_canvas_rect_get_type (),
-				       "x1", (gdouble)SHADOW_X_OFFSET,
-				       "y1", (gdouble)SHADOW_Y_OFFSET,
-				       "x2", (gdouble)(SHADOW_X_OFFSET + width),
-				       "y2", (gdouble)(SHADOW_Y_OFFSET + height),
-				       "fill_color_rgba", shadow_color,
-				       NULL);
-
-	/* draw an initial paper outline */
-	preview->paper_item =
-		gnome_canvas_item_new (group,
-				       gnome_canvas_rect_get_type (),
-				       "x1", 0.0,
-				       "y1", 0.0,
-				       "x2", (gdouble)width,
-				       "y2", (gdouble)height,
-				       "width_pixels", 1,
-				       "outline_color", "black",
-				       "fill_color", "white",
-				       NULL);
-
-	/* create empty list of label canvas items */
-	preview->label_items = NULL;
-	preview->labels_per_sheet = 0;
-
-	/* Event handler */
-	g_signal_connect (G_OBJECT (preview->canvas), "event",
-			  G_CALLBACK (canvas_event_cb), preview);
-
-
-	/* Style changed handler */
-	g_signal_connect (G_OBJECT (preview), "style_set",
-			  G_CALLBACK (style_set_cb), NULL);
+	gtk_widget_set_size_request (GTK_WIDGET (preview), width, height);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
@@ -297,285 +315,59 @@ void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 					const glTemplate  *template)
 {
-	gchar      *page_size;
-	gdouble     canvas_scale;
-	gdouble     w, h;
-	gdouble     offset_x, offset_y;
-	gdouble     shadow_x, shadow_y;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	gl_debug (DEBUG_MINI_PREVIEW, "page_size = %s, page_width = %g, page_height = %g",
-		  template->page_size, template->page_width, template->page_height);
-
-	/* get paper size and set scale */
-	w = preview->width - 4 - 2*SHADOW_X_OFFSET;
-	h = preview->height - 4 - 2*SHADOW_Y_OFFSET;
-	if ( (w/template->page_width) > (h/template->page_height) ) {
-		canvas_scale = h / template->page_height;
-	} else {
-		canvas_scale = w / template->page_width;
-	}
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (preview->canvas),
-					  canvas_scale);
-	offset_x = (preview->width/canvas_scale - template->page_width) / 2.0;
-	offset_y = (preview->height/canvas_scale - template->page_height) / 2.0;
-
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (preview->canvas),
-					-offset_x, -offset_y,
-					preview->width/canvas_scale - offset_x,
-					preview->height/canvas_scale - offset_y);
-
-	/* update shadow */
-	shadow_x = SHADOW_X_OFFSET/canvas_scale;
-	shadow_y = SHADOW_Y_OFFSET/canvas_scale;
-	gnome_canvas_item_set (preview->shadow_item,
-			       "x1", shadow_x,
-			       "y1", shadow_y,
-			       "x2", shadow_x + template->page_width,
-			       "y2", shadow_y + template->page_height,
-			       NULL);
-
-	/* update paper outline */
-	gnome_canvas_item_set (preview->paper_item,
-			       "x2", template->page_width,
-			       "y2", template->page_height,
-			       NULL);
-
-	/* update label items */
-	mini_outline_list_free (&preview->label_items);
-	preview->label_items =
-		mini_outline_list_new (GNOME_CANVAS(preview->canvas),
-				       template);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw label outlines and return canvas item list.               */
-/*--------------------------------------------------------------------------*/
-static GList *
-mini_outline_list_new (GnomeCanvas       *canvas,
-		       const glTemplate  *template)
-{
-	GnomeCanvasGroup          *group = NULL;
 	const glTemplateLabelType *label_type;
-	GnomeCanvasItem           *item = NULL;
-	GList                     *list = NULL;
-	gint                       i, n_labels;
 	glTemplateOrigin          *origins;
-	gdouble                    x1, y1, x2, y2, w, h;
+	gdouble                    w, h;
+	gint                       i;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	group = gnome_canvas_root (canvas);
 
 	label_type = gl_template_get_first_label_type (template);
 
-	/* draw mini label outlines */
-	n_labels = gl_template_get_n_labels (label_type);
-	origins  = gl_template_get_origins (label_type);
-	gl_template_get_label_size (label_type, &w, &h);
-	for ( i=0; i < n_labels; i++ ) {
+	/*
+	 * Set template
+	 */
+	gl_template_free (preview->priv->template);
+	preview->priv->template = gl_template_dup (template);
 
-		x1 = origins[i].x;
-		y1 = origins[i].y;
-		x2 = x1 + w;
-		y2 = y1 + h;
-
-		switch (label_type->shape) {
-		case GL_TEMPLATE_SHAPE_RECT:
-			item = gnome_canvas_item_new (group,
-						      gnome_canvas_rect_get_type(),
-						      "x1", x1,
-						      "y1", y1,
-						      "x2", x2,
-						      "y2", y2,
-						      "width_pixels", 1,
-						      "outline_color", "black",
-						      "fill_color", "white",
-						      NULL);
-			break;
-		case GL_TEMPLATE_SHAPE_ROUND:
-			item = gnome_canvas_item_new (group,
-						      gnome_canvas_ellipse_get_type(),
-						      "x1", x1,
-						      "y1", y1,
-						      "x2", x2,
-						      "y2", y2,
-						      "width_pixels", 1,
-						      "outline_color", "black",
-						      "fill_color", "white",
-						      NULL);
-			break;
-		case GL_TEMPLATE_SHAPE_CD:
-			if ( w == h ) {
-				item = gnome_canvas_item_new (group,
-							      gnome_canvas_ellipse_get_type(),
-							      "x1", x1,
-							      "y1", y1,
-							      "x2", x2,
-							      "y2", y2,
-							      "width_pixels", 1,
-							      "outline_color", "black",
-							      "fill_color", "white",
-							      NULL);
-			} else {
-				item = cdbc_item (group, x1, y1, template);
-			}
-			break;
-		default:
-			g_message ("Unknown label style");
-			return list;
-			break;
-		}
-		g_object_set_data (G_OBJECT (item), "i",
-				   GINT_TO_POINTER (i+1));
-		
-		list = g_list_append (list, item);
+	/*
+	 * Set scale and offsets
+	 */
+	w = preview->priv->width - 4 - 2*SHADOW_X_OFFSET;
+	h = preview->priv->height - 4 - 2*SHADOW_Y_OFFSET;
+	if ( (w/template->page_width) > (h/template->page_height) ) {
+		preview->priv->scale = h / template->page_height;
+	} else {
+		preview->priv->scale = w / template->page_width;
 	}
+	preview->priv->offset_x = (preview->priv->width/preview->priv->scale - template->page_width) / 2.0;
+	preview->priv->offset_y = (preview->priv->height/preview->priv->scale - template->page_height) / 2.0;
 
+	/*
+	 * Set labels per sheet
+	 */
+	preview->priv->labels_per_sheet = gl_template_get_n_labels (label_type);
+
+	/*
+	 * Initialize centers
+	 */
+	g_free (preview->priv->centers);
+	preview->priv->centers = g_new0 (LabelCenter, preview->priv->labels_per_sheet);
+	origins = gl_template_get_origins (label_type);
+	gl_template_get_label_size (label_type, &w, &h);
+	for ( i=0; i<preview->priv->labels_per_sheet; i++ )
+	{
+		preview->priv->centers[i].x = origins[i].x + w/2.0;
+		preview->priv->centers[i].y = origins[i].y + h/2.0;
+	}
 	g_free (origins);
 
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-	return list;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw label outlines and return canvas item list.               */
-/*--------------------------------------------------------------------------*/
-static void
-mini_outline_list_free (GList ** list)
-{
-	GnomeCanvasItem *item;
-	GList *p;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	if ( *list != NULL ) {
-
-		for (p = *list; p != NULL; p = p->next) {
-			item = GNOME_CANVAS_ITEM (p->data);
-			gtk_object_destroy (GTK_OBJECT (item));
-		}
-
-		g_list_free (*list);
-		*list = NULL;
-
-	}
+	/*
+	 * Redraw modified preview
+	 */
+	redraw( GTK_WIDGET (preview));
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Canvas event handler, select first and last items.             */
-/*--------------------------------------------------------------------------*/
-static gint
-canvas_event_cb (GnomeCanvas * canvas,
-		 GdkEvent * event,
-		 gpointer data)
-{
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (data);
-	GnomeCanvasItem *item;
-	static gboolean dragging = FALSE;
-	static gint prev_i = 0, first, last;
-	gint i;
-	gdouble x, y;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	switch (event->type) {
-
-	case GDK_BUTTON_PRESS:
-		gnome_canvas_window_to_world (canvas,
-					      event->button.x, event->button.y,
-					      &x, &y);
-		switch (event->button.button) {
-		case 1:
-			/* Get item at cursor and make sure
-			   it's a label object ("i" is valid) */
-			item = gnome_canvas_get_item_at (GNOME_CANVAS (canvas),
-							 x, y);
-			if (item == NULL)
-				break;
-			i = GPOINTER_TO_INT (g_object_get_data
-					     (G_OBJECT (item), "i"));
-			if (i == 0)
-				break;
-			/* Go into dragging mode while remains pressed. */
-			dragging = TRUE;
-			gnome_canvas_item_grab (canvas->root,
-						GDK_POINTER_MOTION_MASK |
-						GDK_BUTTON_RELEASE_MASK |
-						GDK_BUTTON_PRESS_MASK,
-						NULL, event->button.time);
-			g_signal_emit (G_OBJECT(preview),
-				       wdgt_mini_preview_signals[CLICKED],
-				       0, i);
-			first = i;
-			last = i;
-			g_signal_emit (G_OBJECT(preview),
-				       wdgt_mini_preview_signals[PRESSED],
-				       0, first, last);
-			prev_i = i;
-			break;
-
-		default:
-			break;
-		}
-		break;
-
-	case GDK_BUTTON_RELEASE:
-		gnome_canvas_window_to_world (canvas,
-					      event->button.x, event->button.y,
-					      &x, &y);
-		switch (event->button.button) {
-		case 1:
-			/* Exit dragging mode */
-			dragging = FALSE;
-			gnome_canvas_item_ungrab (canvas->root, event->button.time);
-			break;
-
-		default:
-			break;
-		}
-		break;
-
-	case GDK_MOTION_NOTIFY:
-		gnome_canvas_window_to_world (canvas,
-					      event->motion.x, event->motion.y,
-					      &x, &y);
-		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			/* Get item at cursor and
-			   make sure it's a label object ("i" is valid) */
-			item = gnome_canvas_get_item_at (GNOME_CANVAS (canvas),
-							 x, y);
-			if (item == NULL)
-				break;
-			i = GPOINTER_TO_INT (g_object_get_data
-					     (G_OBJECT (item), "i"));
-			if (i == 0)
-				break;
-			if (prev_i != i) {
-				/* Entered into a new item */
-				last = i;
-				g_signal_emit (G_OBJECT(preview),
-					       wdgt_mini_preview_signals[PRESSED],
-					       0,
-					       MIN (first, last),
-					       MAX (first, last));
-				prev_i = i;
-			}
-		}
-		break;
-
-	default:
-		break;
-	}
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-
-	return FALSE;
 }
 
 /****************************************************************************/
@@ -586,172 +378,522 @@ gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview *preview,
 				      gint               first_label,
 				      gint               last_label)
 {
-	GtkStyle         *style;
-	guint             select_color;
-	GnomeCanvasItem  *item = NULL;
-	GList            *p = NULL;
-	gint              i;
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	preview->priv->highlight_first = first_label;
+	preview->priv->highlight_last =  last_label;
+
+	redraw( GTK_WIDGET (preview));
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Expose event handler.                                                    */
+/*--------------------------------------------------------------------------*/
+static gboolean
+expose_event_cb (GtkWidget       *widget,
+		 GdkEventExpose  *event)
+{
+	cairo_t *cr;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	style = gtk_widget_get_style (GTK_WIDGET(preview));
-	select_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
-	gl_debug (DEBUG_MINI_PREVIEW, "select color = 0x%08x", select_color);
+	cr = gdk_cairo_create (widget->window);
 
-	for (p = preview->label_items, i = 1; p != NULL; i++, p = p->next) {
+	cairo_rectangle (cr,
+			event->area.x, event->area.y,
+			event->area.width, event->area.height);
+	cairo_clip (cr);
+	
+	draw (GL_WDGT_MINI_PREVIEW (widget), cr);
 
-		item = GNOME_CANVAS_ITEM (p->data);
+	cairo_destroy (cr);
 
-		if ((i >= first_label) && (i <= last_label)) {
-			gnome_canvas_item_set (item,
-					       "fill_color_rgba", select_color,
-					       NULL);
-		} else {
-			gnome_canvas_item_set (item,
-					       "fill_color", "white", NULL);
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	return FALSE;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Button press event handler                                               */
+/*--------------------------------------------------------------------------*/
+static gboolean
+button_press_event_cb (GtkWidget      *widget,
+		       GdkEventButton *event)
+{
+	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	cairo_t           *cr;
+	gdouble            x, y;
+	gint               i;
+
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if ( event->button == 1 )
+	{
+		cr = gdk_cairo_create (widget->window);
+
+		/* Set transformation. */
+		cairo_identity_matrix (cr);
+		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
+		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+
+		x = event->x;
+		y = event->y;
+		cairo_device_to_user (cr, &x, &y);
+
+		i = find_closest_label (preview, x, y);
+
+		g_signal_emit (G_OBJECT(preview),
+			       wdgt_mini_preview_signals[CLICKED],
+			       0, i);
+
+		preview->priv->first_i = i;
+		preview->priv->last_i  = i;
+		g_signal_emit (G_OBJECT(preview),
+			       wdgt_mini_preview_signals[PRESSED],
+			       0, preview->priv->first_i, preview->priv->last_i);
+
+		preview->priv->dragging = TRUE;
+		preview->priv->prev_i   = i;
+
+		cairo_destroy (cr);
+	}
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	return FALSE;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Motion notify event handler                                              */
+/*--------------------------------------------------------------------------*/
+static gboolean
+motion_notify_event_cb (GtkWidget      *widget,
+			GdkEventMotion *event)
+{
+	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	cairo_t           *cr;
+	gdouble            x, y;
+	gint               i;
+
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if (preview->priv->dragging)
+	{
+		cr = gdk_cairo_create (widget->window);
+
+		/* Set transformation. */
+		cairo_identity_matrix (cr);
+		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
+		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+
+		x = event->x;
+		y = event->y;
+		cairo_device_to_user (cr, &x, &y);
+
+		i = find_closest_label (preview, x, y);
+
+		if ( i != preview->priv->prev_i )
+		{
+			preview->priv->last_i = i;
+
+			g_signal_emit (G_OBJECT(preview),
+				       wdgt_mini_preview_signals[PRESSED],
+				       0,
+				       MIN (preview->priv->first_i, preview->priv->last_i),
+				       MAX (preview->priv->first_i, preview->priv->last_i));
+
+			preview->priv->prev_i = i;
 		}
+		cairo_destroy (cr);
+	}
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	return FALSE;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Button release event handler                                             */
+/*--------------------------------------------------------------------------*/
+static gboolean
+button_release_event_cb (GtkWidget      *widget,
+			 GdkEventButton *event)
+{
+	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if ( event->button == 1 )
+	{
+		preview->priv->dragging = FALSE;
 
 	}
 
-	preview->highlight_first = first_label;
-	preview->highlight_last =  last_label;
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	return FALSE;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Style set handler (updates colors when style/theme changes).             */
+/*--------------------------------------------------------------------------*/
+static void
+style_set_cb (GtkWidget        *widget,
+	      GtkStyle         *previous_style)
+{
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	redraw( widget );
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Refresh colors, if style changed.                              */
+/* Redraw.                                                                  */
 /*--------------------------------------------------------------------------*/
 static void
-style_set_cb (GtkWidget        *widget,
-	      GtkStyle         *previous_style,
-	      gpointer          data)
+redraw (GtkWidget *widget)
 {
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
-	GtkStyle         *style;
-	guint             shadow_color;
+	GdkRegion *region;
+	
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if (widget->window)
+	{
+
+		region = gdk_drawable_get_clip_region (widget->window);
+
+		gdk_window_invalidate_region (widget->window, region, TRUE);
+		gdk_window_process_updates (widget->window, TRUE);
+
+		gdk_region_destroy (region);
+	}
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Find index+1 of label closest to given coordinates.                      */
+/*--------------------------------------------------------------------------*/
+static gint
+find_closest_label (glWdgtMiniPreview      *preview,
+		    gdouble                 x,
+		    gdouble                 y)
+{
+	gint    i;
+	gint    min_i;
+	gdouble dx, dy, d2, min_d2;
+
+	dx = x - preview->priv->centers[0].x;
+	dy = y - preview->priv->centers[0].y;
+	min_d2 = dx*dx + dy*dy;
+	min_i = 0;
+
+	for ( i=1; i<preview->priv->labels_per_sheet; i++ )
+	{
+		dx = x - preview->priv->centers[i].x;
+		dy = y - preview->priv->centers[i].y;
+		d2 = dx*dx + dy*dy;
+
+		if ( d2 < min_d2 )
+		{
+			min_d2 = d2;
+			min_i  = i;
+		}
+	}
+
+	return min_i + 1;
+}
+
+/*--------------------------------------------------------------------------*/
+/* Draw mini preview.                                                       */
+/*--------------------------------------------------------------------------*/
+static void
+draw (glWdgtMiniPreview  *preview,
+      cairo_t            *cr)
+{
+	glTemplate *template = preview->priv->template;
+	gdouble     shadow_x, shadow_y;
+
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if (template)
+	{
+
+		/* Set transformation. */
+		cairo_identity_matrix (cr);
+		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
+		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+
+
+		/* update shadow */
+		shadow_x = SHADOW_X_OFFSET/preview->priv->scale;
+		shadow_y = SHADOW_Y_OFFSET/preview->priv->scale;
+
+		draw_shadow (preview, cr,
+			     shadow_x, shadow_y,
+			     template->page_width, template->page_height);
+
+		draw_paper (preview, cr,
+			    template->page_width, template->page_height,
+			    1.0/preview->priv->scale);
+
+		draw_labels (preview, cr, template, 1.0/preview->priv->scale);
+			     
+	}
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Draw page shadow                                                         */
+/*--------------------------------------------------------------------------*/
+static void
+draw_shadow (glWdgtMiniPreview      *preview,
+	     cairo_t                *cr,
+	     gdouble  		     x,
+	     gdouble                 y,
+	     gdouble                 width,
+	     gdouble                 height)
+{
+	GtkStyle *style;
+	guint     shadow_color;
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	cairo_save (cr);
+
+	cairo_rectangle (cr, x, y, width, height);
 
 	style = gtk_widget_get_style (GTK_WIDGET(preview));
-
 	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
-	gnome_canvas_item_set (preview->shadow_item,
-			       "fill_color_rgba", shadow_color,
-			       NULL);
+	cairo_set_source_rgb (cr,
+			      GL_COLOR_F_RED   (shadow_color),
+			      GL_COLOR_F_GREEN (shadow_color),
+			      GL_COLOR_F_BLUE  (shadow_color));
 
-	gl_wdgt_mini_preview_highlight_range (preview,
-					      preview->highlight_first,
-					      preview->highlight_last);
+        cairo_fill (cr);
+
+        cairo_restore (cr);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw CD business card item (cut-off in w and/or h).            */
+/* Draw page                                                                */
 /*--------------------------------------------------------------------------*/
-static GnomeCanvasItem *
-cdbc_item (GnomeCanvasGroup *group,
-	   gdouble           x1,
-	   gdouble           y1,
-	   const glTemplate *template)
+static void
+draw_paper (glWdgtMiniPreview      *preview,
+	    cairo_t                *cr,
+	    gdouble                 width,
+	    gdouble                 height,
+	    gdouble                 line_width)
 {
-	const glTemplateLabelType *label_type;
-	GnomeCanvasPoints         *points;
-	gint                       i_coords, i_theta;
+	cairo_save (cr);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	cairo_rectangle (cr, 0.0, 0.0, width, height);
+
+	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_fill_preserve (cr);
+
+	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+	cairo_set_line_width (cr, line_width);
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Draw labels                                                              */
+/*--------------------------------------------------------------------------*/
+static void
+draw_labels (glWdgtMiniPreview *preview,
+	     cairo_t           *cr,
+	     const glTemplate  *template,
+	     gdouble            line_width)
+{
+        const glTemplateLabelType *label_type;
+        gint                       i, n_labels;
+        glTemplateOrigin          *origins;
+	GtkStyle                  *style;
+	guint                      highlight_color;
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+        label_type = gl_template_get_first_label_type (template);
+
+        n_labels = gl_template_get_n_labels (label_type);
+        origins  = gl_template_get_origins (label_type);
+
+	style = gtk_widget_get_style (GTK_WIDGET(preview));
+	highlight_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
+
+        for ( i=0; i < n_labels; i++ ) {
+
+		cairo_save (cr);
+
+                create_label_path (cr, template, origins[i].x, origins[i].y);
+
+		if ( ((i+1) >= preview->priv->highlight_first) &&
+		     ((i+1) <= preview->priv->highlight_last) )
+		{
+			cairo_set_source_rgb (cr,
+					      GL_COLOR_F_RED   (highlight_color),
+					      GL_COLOR_F_GREEN (highlight_color),
+					      GL_COLOR_F_BLUE  (highlight_color));
+		}
+		else
+		{
+			cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+		}
+		cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+		cairo_fill_preserve (cr);
+
+		cairo_set_line_width (cr, line_width);
+		cairo_set_source_rgb (cr, 0.5, 0.5, 0.5);
+		cairo_stroke (cr);
+
+		cairo_restore (cr);
+
+        }
+
+        g_free (origins);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Create label path                                                        */
+/*--------------------------------------------------------------------------*/
+static void
+create_label_path (cairo_t           *cr,
+		   const glTemplate  *template,
+		   gdouble            x0,
+		   gdouble            y0)
+{
+        const glTemplateLabelType *label_type;
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+        label_type = gl_template_get_first_label_type (template);
+
+        switch (label_type->shape) {
+
+        case GL_TEMPLATE_SHAPE_RECT:
+                create_rect_label_path (cr, template, x0, y0);
+                break;
+
+        case GL_TEMPLATE_SHAPE_ROUND:
+                create_round_label_path (cr, template, x0, y0);
+                break;
+
+        case GL_TEMPLATE_SHAPE_CD:
+                create_cd_label_path (cr, template, x0, y0);
+                break;
+
+        default:
+                g_message ("Unknown label style");
+                break;
+        }
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Create rectangular label path                                            */
+/*--------------------------------------------------------------------------*/
+static void
+create_rect_label_path (cairo_t           *cr,
+			const glTemplate  *template,
+			gdouble            x0,
+			gdouble            y0)
+{
+        const glTemplateLabelType *label_type;
+        gdouble                    w, h;
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+        label_type = gl_template_get_first_label_type (template);
+        gl_template_get_label_size (label_type, &w, &h);
+
+        cairo_rectangle (cr, x0, y0, w, h);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Create round label path                                                  */
+/*--------------------------------------------------------------------------*/
+static void
+create_round_label_path (cairo_t           *cr,
+			 const glTemplate  *template,
+			 gdouble            x0,
+			 gdouble            y0)
+{
+        const glTemplateLabelType *label_type;
+        gdouble                    w, h;
+
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+        label_type = gl_template_get_first_label_type (template);
+        gl_template_get_label_size (label_type, &w, &h);
+
+        cairo_arc (cr, x0+w/2, y0+h/2, w/2, 0.0, 2*M_PI);
+	cairo_close_path (cr);
+
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* Create cd label path                                                     */
+/*--------------------------------------------------------------------------*/
+static void
+create_cd_label_path (cairo_t           *cr,
+		      const glTemplate  *template,
+		      gdouble            x0,
+		      gdouble            y0)
+{
+        const glTemplateLabelType *label_type;
+        gdouble                    w, h;
+        gdouble                    xc, yc;
+        gdouble                    r1, r2;
 	gdouble                    theta1, theta2;
-	gdouble                    x0, y0, w, h, r;
-	GnomeCanvasItem           *item;
 
-	label_type = gl_template_get_first_label_type (template);
+        gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	gl_template_get_label_size (label_type, &w, &h);
-	r = label_type->size.cd.r1;
-	x0 = x1 + (w/2.0);
-	y0 = y1 + (h/2.0);
+        label_type = gl_template_get_first_label_type (template);
+        gl_template_get_label_size (label_type, &w, &h);
 
-	theta1 = (180.0/G_PI) * acos (w / (2.0*r));
-	theta2 = (180.0/G_PI) * asin (h / (2.0*r));
+        xc = x0 + w/2.0;
+        yc = y0 + h/2.0;
 
-	points = gnome_canvas_points_new (360/RES + 1);
-	i_coords = 0;
+        r1 = label_type->size.cd.r1;
+        r2 = label_type->size.cd.r2;
 
-	points->coords[i_coords++] = x0 + r * cos (theta1 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin (theta1 * G_PI / 180.0);
+	/*
+	 * Outer path (may be clipped)
+	 */
+	theta1 = acos (w / (2.0*r1));
+	theta2 = asin (h / (2.0*r1));
 
-	for ( i_theta = theta1 + RES; i_theta < theta2; i_theta +=RES ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos (theta2 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin (theta2 * G_PI / 180.0);
+	cairo_new_path (cr);
+	cairo_arc (cr, xc, yc, r1, theta1, theta2);
+	cairo_arc (cr, xc, yc, r1, M_PI-theta2, M_PI-theta1);
+	cairo_arc (cr, xc, yc, r1, M_PI+theta1, M_PI+theta2);
+	cairo_arc (cr, xc, yc, r1, 2*M_PI-theta2, 2*M_PI-theta1);
+	cairo_close_path (cr);
 
 
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((180-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((180-theta2) * G_PI / 180.0);
-	}
+        /* Inner path (hole) */
+	cairo_new_sub_path (cr);
+        cairo_arc (cr, xc, yc, r2, 0.0, 2*M_PI);
+	cairo_close_path (cr);
 
-	for ( i_theta = 180-theta2+RES; i_theta < (180-theta1); i_theta +=RES ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos ((180-theta1) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin ((180-theta1) * G_PI / 180.0);
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((180+theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((180+theta1) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 180+theta1+RES; i_theta < (180+theta2); i_theta +=RES ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos ((180+theta2) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin ((180+theta2) * G_PI / 180.0);
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((360-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((360-theta2) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 360-theta2+RES; i_theta < (360-theta1); i_theta +=RES ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((360-theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((360-theta1) * G_PI / 180.0);
-	}
-
-	points->num_points = i_coords / 2;
-
-
-	item = gnome_canvas_item_new (group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "width_pixels", 1,
-				      "outline_color", "black",
-				      "fill_color", "white",
-				      NULL);
-
-	gnome_canvas_points_free (points);
-
-	return item;
-}
-
-/****************************************************************************/
-/* Change/set background color of preview.                                  */
-/****************************************************************************/
-void
-gl_wdgt_mini_preview_set_bg_color (glWdgtMiniPreview *preview,
-				   guint              color)
-{
-	GdkColor *gdk_color;
-
-	gdk_color = gl_color_to_gdk_color (color);
-	gtk_widget_modify_bg (GTK_WIDGET(preview->canvas), GTK_STATE_NORMAL, gdk_color);
-	g_free (gdk_color);
+        gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
