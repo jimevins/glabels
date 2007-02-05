@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
  *  color.h:  various small utilities for dealing with canvas colors
  *
- *  Copyright (C) 2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2002-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,25 +25,35 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
-#include <libgnomecanvas/gnome-canvas.h>
 #include "merge.h"
+#include <gdk/gdkcolor.h>
 
 G_BEGIN_DECLS
 
 typedef struct {
-	gboolean field_flag;
-	guint color;
-	gchar *key;
+        gboolean field_flag;
+        guint color;
+        gchar *key;
 } glColorNode;
 
-#define GL_COLOR(r,g,b)     GNOME_CANVAS_COLOR(r,g,b)
-#define GL_COLOR_A(r,g,b,a) GNOME_CANVAS_COLOR_A(r,g,b,a)
+
+#define GL_COLOR(r,g,b)     (  (((unsigned int) (r) & 0xff) << 24) \
+                             | (((unsigned int) (g) & 0xff) << 16) \
+                             | (((unsigned int) (b) & 0xff) << 8)  \
+                             | 0xff )
+
+#define GL_COLOR_A(r,g,b,a) (  (((unsigned int) (r) & 0xff) << 24) \
+                             | (((unsigned int) (g) & 0xff) << 16) \
+                             | (((unsigned int) (b) & 0xff) << 8)  \
+                             | ( (unsigned int) (a) & 0xff ) )
+
 
 #define GL_COLOR_NONE                  GL_COLOR_A(0,0,0,0)
 #define GL_COLOR_FILL_MERGE_DEFAULT    GL_COLOR_A(255,255,255,128)
 #define GL_COLOR_MERGE_DEFAULT         GL_COLOR_A(0,0,0,128)
 #define GL_COLOR_SHADOW_DEFAULT        GL_COLOR(0,0,0)
 #define GL_COLOR_SHADOW_MERGE_DEFAULT  GL_COLOR_A(0,0,0,255)
+
 
 #define GL_COLOR_I_RED(x)   (((x)>>24) & 0xff)
 #define GL_COLOR_I_GREEN(x) (((x)>>16) & 0xff)
@@ -53,22 +65,26 @@ typedef struct {
 #define GL_COLOR_F_BLUE(x)  ( (((x)>>8)  & 0xff) / 255.0 )
 #define GL_COLOR_F_ALPHA(x) ( ( (x)      & 0xff) / 255.0 )
 
-guint     gl_color_set_opacity (guint color, gdouble opacity);
 
-GdkColor *gl_color_to_gdk_color   (guint     color);
-guint     gl_color_from_gdk_color (GdkColor *gdk_color);
+guint     gl_color_set_opacity            (guint            color,
+					   gdouble          opacity);
 
-guint     gl_color_shadow (guint   base_color,
-			   gdouble opacity,
-			   guint   object_color);
+GdkColor *gl_color_to_gdk_color           (guint            color);
+
+guint     gl_color_from_gdk_color         (GdkColor        *gdk_color);
+
+guint     gl_color_shadow                 (guint            base_color,
+					   gdouble          opacity,
+					   guint            object_color);
+
 
 glColorNode *gl_color_node_new_default    ();
 
 glColorNode *gl_color_node_dup            (glColorNode     *color_node);
 gboolean     gl_color_node_equal          (glColorNode     *color_node1,
-					   glColorNode     *color_node2);
+                                           glColorNode     *color_node2);
 guint        gl_color_node_expand         (glColorNode     *color_node,
-					   glMergeRecord   *record);
+                                           glMergeRecord   *record);
 void         gl_color_node_free           (glColorNode    **color_node);
 
 

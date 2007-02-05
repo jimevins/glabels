@@ -674,8 +674,6 @@ draw_text_object (PrintInfo     *pi,
 	guint            color;
 	glColorNode     *color_node;
 	gboolean         auto_shrink;
-	ArtDRect         bbox;
-	gdouble          affine[6];
 	gdouble          text_line_spacing;
 	gboolean         shadow_state;
 	gdouble          shadow_x, shadow_y;

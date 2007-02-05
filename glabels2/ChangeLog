@@ -1,5 +1,14 @@
 2007-02-04  Jim Evins  <evins@snaught.com>
 
+	* src/color.c:
+	* src/color.h:
+	* src/prefs-model.c:
+	* src/print.c: (draw_text_object):
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_construct):
+		Removed GnomeCanvas artifacts from color.[ch] and related modules.
+
+2007-02-04  Jim Evins  <evins@snaught.com>
+
 	* src/wdgt-mini-preview.c:
 	* src/wdgt-mini-preview.h:
 		Ported widget from GnomeCanvas to Cairo.

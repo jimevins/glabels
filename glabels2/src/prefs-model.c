@@ -78,13 +78,13 @@
 #define DEFAULT_FONT_WEIGHT_STRING gl_util_weight_to_string (PANGO_WEIGHT_NORMAL)
 #define DEFAULT_FONT_ITALIC_FLAG   FALSE
 #define DEFAULT_TEXT_ALIGN_STRING  gl_util_align_to_string (PANGO_ALIGN_LEFT)
-#define DEFAULT_TEXT_COLOR         GNOME_CANVAS_COLOR (0,0,0)
+#define DEFAULT_TEXT_COLOR         GL_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING  1.0
 
 #define DEFAULT_LINE_WIDTH         1.0
-#define DEFAULT_LINE_COLOR         GNOME_CANVAS_COLOR_A (0, 0, 0, 255)
+#define DEFAULT_LINE_COLOR         GL_COLOR_A (0, 0, 0, 255)
 
-#define DEFAULT_FILL_COLOR         GNOME_CANVAS_COLOR_A (0, 255, 0, 255)
+#define DEFAULT_FILL_COLOR         GL_COLOR_A (0, 255, 0, 255)
 
 /*========================================================*/
 /* Private types.                                         */

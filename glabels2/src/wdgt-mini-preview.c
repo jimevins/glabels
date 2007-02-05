@@ -275,10 +275,6 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview *preview,
 				gint               height,
 				gint               width)
 {
-	GnomeCanvasGroup *group;
-	GtkStyle         *style;
-	guint             shadow_color;
-
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	preview->priv->height = height;
