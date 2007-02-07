@@ -39,39 +39,38 @@
 /*============================================*/
 /* Private globals                            */
 /*============================================*/
-static gboolean help_flag    = FALSE;
-static gboolean version_flag = FALSE;
-static gchar    *output      = "output.pdf";
-static gint     n_copies     = 1;
-static gint     n_sheets     = 1;
-static gint     first        = 1;
-static gboolean outline_flag = FALSE;
-static gboolean reverse_flag = FALSE;
-static gboolean crop_marks_flag = FALSE;
-static gchar    *input       = NULL;
+static gboolean help_flag        = FALSE;
+static gboolean version_flag     = FALSE;
+static gchar    *output          = "output.pdf";
+static gint     n_copies         = 1;
+static gint     n_sheets         = 1;
+static gint     first            = 1;
+static gboolean outline_flag     = FALSE;
+static gboolean reverse_flag     = FALSE;
+static gboolean crop_marks_flag  = FALSE;
+static gchar    *input           = NULL;
+static gchar    **remaining_args = NULL;
 
-static struct poptOption options[] = {
-        {"help", '?', POPT_ARG_NONE, &help_flag, 1,
-         N_("print this message"), NULL},
-        {"version", 'v', POPT_ARG_NONE, &version_flag, 0,
-         N_("print the version of glabels-batch being used"), NULL},
-        {"output", 'o', POPT_ARG_STRING, &output, 0,
+static GOptionEntry option_entries[] = {
+        {"output", 'o', 0, G_OPTION_ARG_STRING, &output,
          N_("set output filename (default=\"output.pdf\")"), N_("filename")},
-        {"sheets", 's', POPT_ARG_INT, &n_sheets, 0,
+        {"sheets", 's', 0, G_OPTION_ARG_INT, &n_sheets,
          N_("number of sheets (default=1)"), N_("sheets")},
-        {"copies", 'c', POPT_ARG_INT, &n_copies, 0,
+        {"copies", 'c', 0, G_OPTION_ARG_INT, &n_copies,
          N_("number of copies (default=1)"), N_("copies")},
-        {"first", 'f', POPT_ARG_INT, &first, 0,
+        {"first", 'f', 0, G_OPTION_ARG_INT, &first,
          N_("first label on first sheet (default=1)"), N_("first")},
-        {"outline", 'l', POPT_ARG_NONE, &outline_flag, 0,
+        {"outline", 'l', 0, G_OPTION_ARG_NONE, &outline_flag,
          N_("print outlines (to test printer alignment)"), NULL},
-        {"reverse", 'r', POPT_ARG_NONE, &reverse_flag, 0,
+        {"reverse", 'r', 0, G_OPTION_ARG_NONE, &reverse_flag,
          N_("print in reverse (i.e. a mirror image)"), NULL},
-        {"cropmarks", 'C', POPT_ARG_NONE, &crop_marks_flag, 0,
+        {"cropmarks", 'C', 0, G_OPTION_ARG_NONE, &crop_marks_flag,
          N_("print crop marks"), NULL},
-        {"input", 'i', POPT_ARG_STRING, &input, 0,
+        {"input", 'i', 0, G_OPTION_ARG_STRING, &input,
          N_("input file for merging"), N_("filename")},
-        {NULL, '\0', 0, NULL, 0, NULL, NULL}
+        { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY,
+          &remaining_args, NULL, N_("[FILE...]") },
+        { NULL }
 };
 
 
@@ -82,54 +81,45 @@ static struct poptOption options[] = {
 int
 main (int argc, char **argv)
 {
+	GOptionContext    *option_context;
         GnomeProgram      *program;
-        poptContext        pctx;
-        gchar            **args;
         gint               rc;
-        GSList            *p, *file_list = NULL;
-        gint               n_files;
+        GList             *p, *file_list = NULL;
         gchar             *abs_fn;
         glLabel           *label = NULL;
         glMerge           *merge = NULL;
         glXMLLabelStatus   status;
         glPrintOp         *print_op;
+	gchar	          *utf8_filename;
 
         bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
+
+	option_context = g_option_context_new (_("- batch process gLabels label files"));
+	g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
+
 
         /* Initialize minimal gnome program */
         program = gnome_program_init ("glabels-batch", VERSION,
-                                      LIBGNOME_MODULE, 1, argv,
+                                      LIBGNOME_MODULE, argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, option_context,
                                       GNOME_PROGRAM_STANDARD_PROPERTIES,
                                       NULL);
 
-        /* argument parsing */
-        pctx = poptGetContext (NULL, argc, (const char **)argv, options, 0);
-        poptSetOtherOptionHelp (pctx, _("[OPTION...] GLABELS_FILE...") );
-        if ( (rc = poptGetNextOpt(pctx)) < -1 ) {
-                fprintf (stderr, "%s: %s\n",
-                         poptBadOption (pctx,0), poptStrerror(rc));
-                poptPrintUsage (pctx, stderr, 0);
-                return -1;
-        }
-        if ( version_flag ) {
-                fprintf ( stderr, "glabels-batch %s\n", VERSION );
-                return -1;
-        }
-        if ( help_flag ) {
-                poptPrintHelp (pctx, stderr, 0);
-                return -1;
-        }
-        args = (char **) poptGetArgs (pctx);
-        for (n_files = 0; args && args[n_files]; n_files++) {
-                file_list = g_slist_append (file_list, args[n_files]);
-        }
-        if ( !n_files ) {
-                fprintf ( stderr, _("missing glabels file\n") );
-                poptPrintHelp (pctx, stderr, 0);
-                return -1;
-        }
-        poptFreeContext (pctx);
+        /* create file list */
+	if (remaining_args != NULL) {
+		gint i, num_args;
+
+		num_args = g_strv_length (remaining_args);
+		for (i = 0; i < num_args; ++i) {
+			utf8_filename = g_filename_to_utf8 (remaining_args[i], -1, NULL, NULL, NULL);
+			if (utf8_filename)
+				file_list = g_list_append (file_list, utf8_filename);
+		}
+		g_strfreev (remaining_args);
+		remaining_args = NULL;
+	}
 
         /* initialize components */
         gl_debug_init ();
@@ -179,7 +169,7 @@ main (int argc, char **argv)
                 }
         }
 
-        g_slist_free (file_list);
+        g_list_free (file_list);
 
         return 0;
 }

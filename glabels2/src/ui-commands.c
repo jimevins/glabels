@@ -30,7 +30,6 @@
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkaboutdialog.h>
 #include <libgnome/gnome-help.h>
-#include <libgnome/gnome-url.h>
 
 #include "view.h"
 #include "file.h"
@@ -41,10 +40,6 @@
 #include "recent.h"
 #include "debug.h"
 
-#define LOGO_PIXMAP gnome_program_locate_file (NULL,\
-                                         GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                         "glabels/glabels-about-logo.png",\
-                                         FALSE, NULL)
 
 
 /****************************************************************************/
@@ -1061,21 +1056,6 @@ gl_ui_cmd_help_contents (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
-/*--------------------------------------------------------------------------*/
-/** Private: URL handler.                                                   */
-/*--------------------------------------------------------------------------*/
-static void
-activate_url (GtkAboutDialog *about,
-              const gchar    *url,
-              gpointer        data)
-{
-        gl_debug (DEBUG_COMMANDS, "START");
-
-        gnome_url_show (url, NULL);
-
-        gl_debug (DEBUG_COMMANDS, "END");
-}
-
 
 /****************************************************************************/
 /** Help/About command.                                                     */
@@ -1140,9 +1120,7 @@ gl_ui_cmd_help_about (GtkAction *action,
 
         } else {
         
-                pixbuf = gdk_pixbuf_new_from_file ( LOGO_PIXMAP, NULL);
-
-                gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
+                pixbuf = gdk_pixbuf_new_from_file (GLABELS_PIXMAP_DIR "glabels-splash.png", NULL);
 
                 about = gtk_about_dialog_new ();
                 gtk_about_dialog_set_name      (GTK_ABOUT_DIALOG(about), _("glabels"));

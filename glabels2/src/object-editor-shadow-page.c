@@ -169,8 +169,8 @@ gl_object_editor_set_shadow_state (glObjectEditor      *editor,
 					 shadow_enable_check_toggled_cb,
 					 editor);
 
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (editor->priv->shadow_enable_check),
-				     state);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_enable_check),
+                                      state);
         gtk_widget_set_sensitive (editor->priv->shadow_controls_table, state);
 
 	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->shadow_enable_check),

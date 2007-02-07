@@ -1,3 +1,23 @@
+2007-02-06  Jim Evins  <evins@snaught.com>
+
+Assorted cleanup and removal of deprecated items.
+	
+	* src/splash.c:
+	* src/splash.h:
+	* src/Makefile.am:
+		Removed annoying splash screen.
+	* src/glabels-batch.c: (main):
+	* src/glabels.c: (main):
+		Converted from popt to GOption.
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_set_shadow_state):
+		Removed deprecated method on GtkToggleButton.
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Removed dependency on libgnomui/qnome-url.h.
+	* src/template-designer.c:
+		Removed dependency on libgnome/gnome-program.h.
+	
+
 2007-02-04  Jim Evins  <evins@snaught.com>
 
 	* src/color.c:

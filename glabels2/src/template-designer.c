@@ -27,7 +27,6 @@
 
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/gnome-program.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
@@ -46,35 +45,13 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define ICON_PIXMAP gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels.png",\
-                                               FALSE, NULL)
+#define ICON_PIXMAP        (GLABELS_ICON_DIR "glabels.png")
 
-#define EX_RECT_IMAGE gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/ex-rect-size.png",\
-                                               FALSE, NULL)
-
-#define EX_ROUND_IMAGE gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/ex-round-size.png",\
-                                               FALSE, NULL)
-
-#define EX_CD_IMAGE gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/ex-cd-size.png",\
-                                               FALSE, NULL)
-
-#define EX_NLAYOUTS_IMAGE1 gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/ex-1layout.png",\
-                                               FALSE, NULL)
-
-#define EX_NLAYOUTS_IMAGE2 gnome_program_locate_file (NULL,\
-                                               GNOME_FILE_DOMAIN_APP_PIXMAP,\
-                                               "glabels/ex-2layouts.png",\
-                                               FALSE, NULL)
+#define EX_RECT_IMAGE      (GLABELS_PIXMAP_DIR "ex-rect-size.png")
+#define EX_ROUND_IMAGE     (GLABELS_PIXMAP_DIR "ex-round-size.png")
+#define EX_CD_IMAGE        (GLABELS_PIXMAP_DIR "ex-cd-size.png")
+#define EX_NLAYOUTS_IMAGE1 (GLABELS_PIXMAP_DIR "ex-1layout.png")
+#define EX_NLAYOUTS_IMAGE2 (GLABELS_PIXMAP_DIR "ex-2layouts.png")
 
 #define DEFAULT_MARGIN 9.0
 

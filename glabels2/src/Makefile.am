@@ -8,17 +8,19 @@ bin_PROGRAMS = glabels glabels-batch
 INCLUDES = \
 	-I$(top_srcdir) 					\
 	-I$(top_builddir) 					\
-	$(GLABELS_CFLAGS) 					\
 	-I$(LIB_BARCODE_DIR)					\
 	-I$(LIB_IEC16022_DIR)					\
+	$(GLABELS_CFLAGS) 					\
+	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DPREFIX=\""$(prefix)"\"                        	\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\
 	-DDATADIR=\""$(datadir)"\"                      	\
 	-DLIBDIR=\""$(libdir)"\"                        	\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_GLADE_DIR=\""$(datadir)/glabels/glade/"\"	\
-	-DG_LOG_DOMAIN=\""glabels\""				\
-	$(DISABLE_DEPRECATED_CFLAGS)
+	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"	\
+	-DGLABELS_PIXMAP_DIR=\""$(datadir)/pixmaps/glabels/"\"	\
+	-DG_LOG_DOMAIN=\""glabels\""
 
 glabels_LDFLAGS = -export-dynamic
 
@@ -43,8 +45,6 @@ BUILT_SOURCES = 			\
 
 glabels_SOURCES = 			\
 	glabels.c			\
-	splash.c 			\
-	splash.h 			\
 	warning-handler.c		\
 	warning-handler.h		\
 	critical-error-handler.c	\

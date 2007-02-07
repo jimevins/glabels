@@ -44,7 +44,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define ICON_PIXMAP_FILE "glabels.png"
 
 /*========================================================*/
 /* Private globals                                        */
@@ -70,24 +69,33 @@ void client_die_cb       (GnomeClient        *client,
 int
 main (int argc, char **argv)
 {
-	GValue         value = { 0, };
-    	GnomeProgram  *program;
-	gchar         *icon_file;
-	GnomeClient   *client;
-	poptContext    ctx;
-	char         **args;
-	GList         *file_list = NULL, *p;
-	gint           i;
-	GtkWidget     *win;
-	gchar	      *utf8_filename;
+	gchar **remaining_args = NULL;
+	GOptionEntry option_entries[] = {
+		{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY,
+		  &remaining_args, NULL, N_("[FILE...]") },
+		{ NULL }
+	};
+
+	GOptionContext *option_context;
+    	GnomeProgram   *program;
+	gchar          *icon_file;
+	GnomeClient    *client;
+	GList          *file_list = NULL, *p;
+	GtkWidget      *win;
+	gchar	       *utf8_filename;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	option_context = g_option_context_new (_("- gLabels label designer"));
+	g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
+
+
 	/* Initialize gnome program */
 	program = gnome_program_init ("glabels", VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, option_context,
 				      GNOME_PROGRAM_STANDARD_PROPERTIES,
 				      NULL);
 
@@ -95,21 +103,17 @@ main (int argc, char **argv)
 	gl_critical_error_handler_init();
 	gl_warning_handler_init();
 
-	/* Splash screen */
-	gl_splash ();
-
 	/* Set default icon */
-	icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP,
-					       ICON_PIXMAP_FILE,  FALSE, NULL);
+	icon_file = GLABELS_ICON_DIR "glabels.png";
 	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
 	{
-		g_message ("Could not find %s", ICON_PIXMAP_FILE);
+		g_message ("Could not find %s", icon_file);
 	}
 	else
 	{
 		gnome_window_icon_set_default_from_file (icon_file);
 	}
-	g_free (icon_file);
+
 	
 	/* Initialize subsystems */
 	gl_debug_init ();
@@ -120,6 +124,7 @@ main (int argc, char **argv)
 	gl_merge_init ();
 	gl_recent_init ();
 	
+
 	client = gnome_master_client();
 
 	g_signal_connect (G_OBJECT (client), "save_yourself",
@@ -129,19 +134,21 @@ main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (client), "die",
 			  G_CALLBACK (client_die_cb), NULL);
 
+
 	/* Parse args and build the list of files to be loaded at startup */
-	g_value_init (&value, G_TYPE_POINTER);
-    	g_object_get_property (G_OBJECT (program),
-			       GNOME_PARAM_POPT_CONTEXT, &value);
-    	ctx = g_value_get_pointer (&value);
-    	g_value_unset (&value);
-	args = (char**) poptGetArgs(ctx);
-	for (i = 0; args && args[i]; i++) 
-	{
-		utf8_filename = g_filename_to_utf8 (args[i], -1, NULL, NULL, NULL);
-		if (utf8_filename)
-			file_list = g_list_append (file_list, utf8_filename);
+	if (remaining_args != NULL) {
+		gint i, num_args;
+
+		num_args = g_strv_length (remaining_args);
+		for (i = 0; i < num_args; ++i) {
+			utf8_filename = g_filename_to_utf8 (remaining_args[i], -1, NULL, NULL, NULL);
+			if (utf8_filename)
+				file_list = g_list_append (file_list, utf8_filename);
+		}
+		g_strfreev (remaining_args);
+		remaining_args = NULL;
 	}
+
 
 	/* Open files or create empty top-level window. */
 	for (p = file_list; p; p = p->next) {
