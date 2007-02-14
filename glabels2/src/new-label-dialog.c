@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -54,14 +54,10 @@ struct _glNewLabelDialogPrivate {
 /* Private globals                           */
 /*===========================================*/
 
-static GtkDialogClass* parent_class = NULL;
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void       gl_new_label_dialog_class_init      (glNewLabelDialogClass *klass);
-static void       gl_new_label_dialog_init            (glNewLabelDialog      *dlg);
 static void       gl_new_label_dialog_finalize        (GObject               *object);
 
 static void       gl_new_label_dialog_construct       (glNewLabelDialog      *dialog,
@@ -75,42 +71,16 @@ static void       template_changed_cb                 (glWdgtMediaSelect     *se
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_new_label_dialog_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type)
-    	{
-      		static const GTypeInfo info =
-      		{
-			sizeof (glNewLabelDialogClass),
-        		NULL,		/* base_init */
-        		NULL,		/* base_finalize */
-        		(GClassInitFunc) gl_new_label_dialog_class_init,
-        		NULL,           /* class_finalize */
-        		NULL,           /* class_data */
-        		sizeof (glNewLabelDialog),
-        		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_new_label_dialog_init,
-			NULL
-      		};
-
-     		type = g_type_register_static (GTK_TYPE_DIALOG,
-					       "glNewLabelDialog", &info, 0);
-    	}
-
-	return type;
-}
+G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_DIALOG);
 
 static void
-gl_new_label_dialog_class_init (glNewLabelDialogClass *klass)
+gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_FILE, "");
 	
-  	parent_class = g_type_class_peek_parent (klass);
+  	gl_new_label_dialog_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_new_label_dialog_finalize;  	
 }
@@ -151,20 +121,17 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
 static void 
 gl_new_label_dialog_finalize (GObject *object)
 {
-	glNewLabelDialog* dialog;
+	glNewLabelDialog* dialog = GL_NEW_LABEL_DIALOG (object);;
 	
 	gl_debug (DEBUG_FILE, "START");
 
 	g_return_if_fail (object != NULL);
-	
-   	dialog = GL_NEW_LABEL_DIALOG (object);
-
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
 	g_free (dialog->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_new_label_dialog_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_FILE, "END");
 

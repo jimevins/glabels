@@ -72,15 +72,10 @@ struct _glViewTextPrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static glViewObjectClass *parent_class = NULL;
-
-
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_text_class_init            (glViewTextClass  *klass);
-static void       gl_view_text_instance_init         (glViewText       *view_text);
 static void       gl_view_text_finalize              (GObject          *object);
 
 static GtkWidget *construct_properties_editor        (glViewObject     *view_object);
@@ -127,41 +122,17 @@ static gint       item_event_cb                      (GnomeCanvasItem  *item,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_text_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewTextClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_text_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewText),
-			0,
-			(GInstanceInitFunc) gl_view_text_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,
-					       "glViewText", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glViewText, gl_view_text, GL_TYPE_VIEW_OBJECT);
 
 static void
-gl_view_text_class_init (glViewTextClass *klass)
+gl_view_text_class_init (glViewTextClass *class)
 {
-	GObjectClass      *object_class      = (GObjectClass *) klass;
-	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
+	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
+	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_text_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_text_finalize;
 
@@ -171,11 +142,11 @@ gl_view_text_class_init (glViewTextClass *klass)
 }
 
 static void
-gl_view_text_instance_init (glViewText *view_text)
+gl_view_text_init (glViewText *view_text)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_text->private = g_new0 (glViewTextPrivate, 1);
+	view_text->priv = g_new0 (glViewTextPrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -183,13 +154,15 @@ gl_view_text_instance_init (glViewText *view_text)
 static void
 gl_view_text_finalize (GObject *object)
 {
-	glLabel       *parent;
+        glViewText *view_text = GL_VIEW_TEXT (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_TEXT (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+        g_free (view_text->priv);
+
+	G_OBJECT_CLASS (gl_view_text_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -755,19 +728,19 @@ draw_hacktext (glViewText *view_text)
 					color_node->color);
 
 	/* remove previous items from group. */
-	for (li = view_text->private->object_item_list; li != NULL; li = li->next) {
+	for (li = view_text->priv->object_item_list; li != NULL; li = li->next) {
 		gl_debug (DEBUG_VIEW, "in loop");
 		gtk_object_destroy (GTK_OBJECT (li->data));
 	}
-	for (li = view_text->private->shadow_item_list; li != NULL; li = li->next) {
+	for (li = view_text->priv->shadow_item_list; li != NULL; li = li->next) {
 		gl_debug (DEBUG_VIEW, "in loop");
 		gtk_object_destroy (GTK_OBJECT (li->data));
 	}
 	gl_debug (DEBUG_VIEW, "1");
-	g_list_free (view_text->private->object_item_list);
-	g_list_free (view_text->private->shadow_item_list);
-	view_text->private->object_item_list = NULL;
-	view_text->private->shadow_item_list = NULL;
+	g_list_free (view_text->priv->object_item_list);
+	g_list_free (view_text->priv->shadow_item_list);
+	view_text->priv->object_item_list = NULL;
+	view_text->priv->shadow_item_list = NULL;
 	gl_debug (DEBUG_VIEW, "2");
 
 	/* get Gnome Font */
@@ -821,8 +794,8 @@ draw_hacktext (glViewText *view_text)
 
 			gnome_glyphlist_unref (glyphlist);
 
-			view_text->private->shadow_item_list =
-				g_list_prepend (view_text->private->shadow_item_list, item);
+			view_text->priv->shadow_item_list =
+				g_list_prepend (view_text->priv->shadow_item_list, item);
 
 		}
 	}
@@ -868,8 +841,8 @@ draw_hacktext (glViewText *view_text)
 
 		gnome_glyphlist_unref (glyphlist);
 
-		view_text->private->object_item_list =
-			g_list_prepend (view_text->private->object_item_list, item);
+		view_text->priv->object_item_list =
+			g_list_prepend (view_text->priv->object_item_list, item);
 
 	}
 
@@ -989,10 +962,10 @@ draw_cursor (glViewText *view_text)
 			points->coords[2] = x_offset;
 			points->coords[3] = GL_LABEL_TEXT_MARGIN + (i+1)*font_size;
 			
-			if (view_text->private->cursor) {
-				gtk_object_destroy (GTK_OBJECT (view_text->private->cursor));
+			if (view_text->priv->cursor) {
+				gtk_object_destroy (GTK_OBJECT (view_text->priv->cursor));
 			}
-			view_text->private->cursor =
+			view_text->priv->cursor =
 				gl_view_object_item_new (GL_VIEW_OBJECT(view_text),
 							 gnome_canvas_line_get_type (),
 							 "points", points,
@@ -1001,8 +974,8 @@ draw_cursor (glViewText *view_text)
 							 NULL);
 			gnome_canvas_points_free (points);
 
-			if ( !view_text->private->cursor_visible ) {
-				gnome_canvas_item_hide (view_text->private->cursor);
+			if ( !view_text->priv->cursor_visible ) {
+				gnome_canvas_item_hide (view_text->priv->cursor);
 			}
 
 		}
@@ -1043,11 +1016,11 @@ mark_set_cb (GtkTextBuffer   *textbuffer,
 static void
 blink_start (glViewText *view_text)
 {
-	if ( !view_text->private->cursor_visible ) return;
+	if ( !view_text->priv->cursor_visible ) return;
 
-	view_text->private->cursor_state = TRUE;
-	gnome_canvas_item_show (view_text->private->cursor);
-	view_text->private->cursor_timeout =
+	view_text->priv->cursor_state = TRUE;
+	gnome_canvas_item_show (view_text->priv->cursor);
+	view_text->priv->cursor_timeout =
 		gtk_timeout_add (CURSOR_ON_TIME, (GtkFunction)blink_cb, view_text);
 }
 
@@ -1057,12 +1030,12 @@ blink_start (glViewText *view_text)
 static void
 blink_stop (glViewText *view_text)
 {
-	if ( view_text->private->cursor_timeout ) {
-		gtk_timeout_remove (view_text->private->cursor_timeout);
-		view_text->private->cursor_timeout = 0;
+	if ( view_text->priv->cursor_timeout ) {
+		gtk_timeout_remove (view_text->priv->cursor_timeout);
+		view_text->priv->cursor_timeout = 0;
 	}
 
-	gnome_canvas_item_hide (view_text->private->cursor);
+	gnome_canvas_item_hide (view_text->priv->cursor);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1071,20 +1044,20 @@ blink_stop (glViewText *view_text)
 static gboolean
 blink_cb (glViewText *view_text)
 {
-	if ( view_text->private->cursor_visible ) {
+	if ( view_text->priv->cursor_visible ) {
 
-		view_text->private->cursor_state =
-			!view_text->private->cursor_state;
+		view_text->priv->cursor_state =
+			!view_text->priv->cursor_state;
 
 
-		if ( view_text->private->cursor_state ) {
-			gnome_canvas_item_show (view_text->private->cursor);
-			view_text->private->cursor_timeout =
+		if ( view_text->priv->cursor_state ) {
+			gnome_canvas_item_show (view_text->priv->cursor);
+			view_text->priv->cursor_timeout =
 				gtk_timeout_add (CURSOR_ON_TIME,
 						 (GtkFunction)blink_cb, view_text);
 		} else {
-			gnome_canvas_item_hide (view_text->private->cursor);
-			view_text->private->cursor_timeout =
+			gnome_canvas_item_hide (view_text->priv->cursor);
+			view_text->priv->cursor_timeout =
 				gtk_timeout_add (CURSOR_OFF_TIME,
 						 (GtkFunction)blink_cb, view_text);
 		}

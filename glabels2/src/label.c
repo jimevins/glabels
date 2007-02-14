@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -67,8 +69,6 @@ enum {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint signals[LAST_SIGNAL] = {0};
 
 static guint untitled = 0;
@@ -77,9 +77,7 @@ static guint untitled = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_class_init    (glLabelClass *klass);
-static void gl_label_instance_init (glLabel      *label);
-static void gl_label_finalize      (GObject      *object);
+static void gl_label_finalize      (GObject *object);
 
 static void object_changed_cb      (glLabelObject *object,
 				    glLabel       *label);
@@ -93,40 +91,16 @@ static void object_moved_cb        (glLabelObject *object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabel),
-			0,
-			(GInstanceInitFunc) gl_label_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "glLabel", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabel, gl_label, G_TYPE_OBJECT);
 
 static void
-gl_label_class_init (glLabelClass *klass)
+gl_label_class_init (glLabelClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_LABEL, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_label_finalize;
 
@@ -180,15 +154,16 @@ gl_label_class_init (glLabelClass *klass)
 }
 
 static void
-gl_label_instance_init (glLabel *label)
+gl_label_init (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
-	label->private = g_new0 (glLabelPrivate, 1);
-	label->private->template     = NULL;
-	label->private->filename     = NULL;
-	label->private->merge        = NULL;
-	label->private->pixbuf_cache = gl_pixbuf_cache_new ();
+	label->priv = g_new0 (glLabelPrivate, 1);
+
+	label->priv->template     = NULL;
+	label->priv->filename     = NULL;
+	label->priv->merge        = NULL;
+	label->priv->pixbuf_cache = gl_pixbuf_cache_new ();
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -196,30 +171,28 @@ gl_label_instance_init (glLabel *label)
 static void
 gl_label_finalize (GObject *object)
 {
-	glLabel *label;
+	glLabel *label = GL_LABEL (object);
 	GList   *p, *p_next;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL (object));
 
-	label = GL_LABEL (object);
-
 	for (p = label->objects; p != NULL; p = p_next) {
 		p_next = p->next;	/* NOTE: p will be left dangling */
 		g_object_unref (G_OBJECT(p->data));
 	}
 
-	gl_template_free (label->private->template);
-	g_free (label->private->filename);
-	if (label->private->merge != NULL) {
-		g_object_unref (G_OBJECT(label->private->merge));
+	gl_template_free (label->priv->template);
+	g_free (label->priv->filename);
+	if (label->priv->merge != NULL) {
+		g_object_unref (G_OBJECT(label->priv->merge));
 	}
-	gl_pixbuf_cache_free (label->private->pixbuf_cache);
+	gl_pixbuf_cache_free (label->priv->pixbuf_cache);
 
-	g_free (label->private);
+	g_free (label->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -233,9 +206,9 @@ gl_label_new (void)
 
 	label = g_object_new (gl_label_get_type(), NULL);
 
-	label->private->compression = 9;
+	label->priv->compression = 9;
 
-	label->private->modified_flag = FALSE;
+	label->priv->modified_flag = FALSE;
 
 	gl_debug (DEBUG_LABEL, "END");
 
@@ -258,7 +231,7 @@ gl_label_add_object (glLabel       *label,
 	object->parent = label;
 	label->objects = g_list_append (label->objects, object);
 
-	label->private->modified_flag = TRUE;
+	label->priv->modified_flag = TRUE;
 
 	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
@@ -296,7 +269,7 @@ gl_label_remove_object (glLabel       *label,
 						      G_CALLBACK(object_moved_cb),
 						      label);
 
-		label->private->modified_flag = TRUE;
+		label->priv->modified_flag = TRUE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
@@ -314,9 +287,9 @@ object_changed_cb (glLabelObject *object,
 		   glLabel       *label)
 {
 
-	if ( !label->private->modified_flag ) {
+	if ( !label->priv->modified_flag ) {
 
-		label->private->modified_flag = TRUE;
+		label->priv->modified_flag = TRUE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	}
@@ -334,9 +307,9 @@ object_moved_cb (glLabelObject *object,
 		 glLabel       *label)
 {
 
-	if ( !label->private->modified_flag ) {
+	if ( !label->priv->modified_flag ) {
 
-		label->private->modified_flag = TRUE;
+		label->priv->modified_flag = TRUE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	}
@@ -357,7 +330,7 @@ gl_label_raise_object_to_top (glLabel       *label,
 	label->objects = g_list_remove (label->objects, object);
 	label->objects = g_list_append (label->objects, object);
 
-	label->private->modified_flag = TRUE;
+	label->priv->modified_flag = TRUE;
 
 	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
@@ -378,7 +351,7 @@ gl_label_lower_object_to_bottom (glLabel       *label,
 	label->objects = g_list_remove (label->objects, object);
 	label->objects = g_list_prepend (label->objects, object);
 
-	label->private->modified_flag = TRUE;
+	label->priv->modified_flag = TRUE;
 
 	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
@@ -397,13 +370,13 @@ gl_label_set_template (glLabel    *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	if ((label->private->template == NULL) ||
-	    (g_strcasecmp (template->name, label->private->template->name) != 0)) {
+	if ((label->priv->template == NULL) ||
+	    (g_strcasecmp (template->name, label->priv->template->name) != 0)) {
 
-		gl_template_free (label->private->template);
-		label->private->template = gl_template_dup (template);
+		gl_template_free (label->priv->template);
+		label->priv->template = gl_template_dup (template);
 
-		label->private->modified_flag = TRUE;
+		label->priv->modified_flag = TRUE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 		g_signal_emit (G_OBJECT(label), signals[SIZE_CHANGED], 0);
@@ -425,11 +398,11 @@ gl_label_set_rotate_flag (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	if (rotate_flag != label->private->rotate_flag) {
+	if (rotate_flag != label->priv->rotate_flag) {
 
-		label->private->rotate_flag = rotate_flag;
+		label->priv->rotate_flag = rotate_flag;
 
-		label->private->modified_flag = TRUE;
+		label->priv->modified_flag = TRUE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 		g_signal_emit (G_OBJECT(label), signals[SIZE_CHANGED], 0);
@@ -452,7 +425,7 @@ gl_label_get_template (glLabel *label)
 
 	gl_debug (DEBUG_LABEL, "END");
 
-	return gl_template_dup (label->private->template);
+	return gl_template_dup (label->priv->template);
 }
 
 /****************************************************************************/
@@ -467,7 +440,7 @@ gl_label_get_rotate_flag (glLabel *label)
 
 	gl_debug (DEBUG_LABEL, "END");
 
-	return label->private->rotate_flag;
+	return label->priv->rotate_flag;
 }
 
 /****************************************************************************/
@@ -485,7 +458,7 @@ gl_label_get_size (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	template = label->private->template;
+	template = label->priv->template;
 	if ( !template ) {
 		gl_debug (DEBUG_LABEL, "END -- template NULL");
 		*w = *h = 0;
@@ -493,7 +466,7 @@ gl_label_get_size (glLabel *label,
 	}
 	label_type = gl_template_get_first_label_type (template);
 
-	if (!label->private->rotate_flag) {
+	if (!label->priv->rotate_flag) {
 		gl_template_get_label_size (label_type, w, h);
 	} else {
 		gl_template_get_label_size (label_type, h, w);
@@ -513,12 +486,12 @@ gl_label_set_merge (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	if ( label->private->merge != NULL ) {
-		g_object_unref (G_OBJECT(label->private->merge));
+	if ( label->priv->merge != NULL ) {
+		g_object_unref (G_OBJECT(label->priv->merge));
 	}
-	label->private->merge = gl_merge_dup (merge);
+	label->priv->merge = gl_merge_dup (merge);
 
-	label->private->modified_flag = TRUE;
+	label->priv->modified_flag = TRUE;
 
 	g_signal_emit (G_OBJECT(label), signals[MERGE_CHANGED], 0);
 	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
@@ -539,7 +512,7 @@ gl_label_get_merge (glLabel *label)
 
 	gl_debug (DEBUG_LABEL, "END");
 
-	return gl_merge_dup (label->private->merge);
+	return gl_merge_dup (label->priv->merge);
 }
 
 /****************************************************************************/
@@ -550,7 +523,7 @@ gl_label_get_filename (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "");
 
-	return g_strdup ( label->private->filename );
+	return g_strdup ( label->priv->filename );
 }
 
 /****************************************************************************/
@@ -561,19 +534,19 @@ gl_label_get_short_name (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "");
 
-	if ( label->private->filename == NULL ) {
+	if ( label->priv->filename == NULL ) {
 
-		if ( label->private->untitled_instance == 0 ) {
-			label->private->untitled_instance = ++untitled;
+		if ( label->priv->untitled_instance == 0 ) {
+			label->priv->untitled_instance = ++untitled;
 		}
 
 		return g_strdup_printf ( "%s %d", _("Untitled"),
-					 label->private->untitled_instance );
+					 label->priv->untitled_instance );
 
 	} else {
 		gchar *temp_name, *short_name;
 
-		temp_name = g_path_get_basename ( label->private->filename );
+		temp_name = g_path_get_basename ( label->priv->filename );
 		short_name = gl_util_remove_extension (temp_name);
 		g_free (temp_name);
 
@@ -587,7 +560,7 @@ gl_label_get_short_name (glLabel *label)
 GHashTable *
 gl_label_get_pixbuf_cache (glLabel       *label)
 {
-	return label->private->pixbuf_cache;
+	return label->priv->pixbuf_cache;
 }
 
 /****************************************************************************/
@@ -596,8 +569,8 @@ gl_label_get_pixbuf_cache (glLabel       *label)
 gboolean
 gl_label_is_modified (glLabel *label)
 {
-	gl_debug (DEBUG_LABEL, "return %d", label->private->modified_flag);
-	return label->private->modified_flag;
+	gl_debug (DEBUG_LABEL, "return %d", label->priv->modified_flag);
+	return label->priv->modified_flag;
 }
 
 /****************************************************************************/
@@ -606,8 +579,8 @@ gl_label_is_modified (glLabel *label)
 gboolean
 gl_label_is_untitled (glLabel *label)
 {
-	gl_debug (DEBUG_LABEL, "return %d",(label->private->filename == NULL));
-	return (label->private->filename == NULL);
+	gl_debug (DEBUG_LABEL, "return %d",(label->priv->filename == NULL));
+	return (label->priv->filename == NULL);
 }
 
 /****************************************************************************/
@@ -637,7 +610,7 @@ void
 gl_label_set_filename (glLabel     *label,
 		       const gchar *filename)
 {
-	label->private->filename = g_strdup (filename);
+	label->priv->filename = g_strdup (filename);
 
 	g_signal_emit (G_OBJECT(label), signals[NAME_CHANGED], 0);
 }
@@ -649,9 +622,9 @@ void
 gl_label_clear_modified (glLabel *label)
 {
 
-	if ( label->private->modified_flag ) {
+	if ( label->priv->modified_flag ) {
 
-		label->private->modified_flag = FALSE;
+		label->priv->modified_flag = FALSE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 	}
@@ -675,7 +648,7 @@ gl_label_set_compression (glLabel  *label,
 	}
 
 	gl_debug (DEBUG_LABEL, "actual set %d", compression);
-	label->private->compression = compression;
+	label->priv->compression = compression;
 }
 
 
@@ -685,7 +658,7 @@ gl_label_set_compression (glLabel  *label,
 gint
 gl_label_get_compression (glLabel *label)
 {
-	gl_debug (DEBUG_LABEL, "return %d", label->private->compression);
-	return label->private->compression;
+	gl_debug (DEBUG_LABEL, "return %d", label->priv->compression);
+	return label->priv->compression;
 }
 

@@ -62,7 +62,7 @@ struct _glLabelObject {
 
         glLabel              *parent;
 
-        glLabelObjectPrivate *private;
+        glLabelObjectPrivate *priv;
 };
 
 struct _glLabelObjectClass {

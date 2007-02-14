@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -41,16 +43,12 @@ struct _glLabelLinePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint instance = 0;
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void    gl_label_line_class_init    (glLabelLineClass *klass);
-static void    gl_label_line_instance_init (glLabelLine      *lline);
 static void    gl_label_line_finalize      (GObject          *object);
 
 static void    copy                        (glLabelObject    *dst_object,
@@ -71,39 +69,15 @@ static gdouble get_line_width              (glLabelObject    *object);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_line_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelLineClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_line_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabelLine),
-			0,
-			(GInstanceInitFunc) gl_label_line_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,
-					       "glLabelLine", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabelLine, gl_label_line, GL_TYPE_LABEL_OBJECT);
 
 static void
-gl_label_line_class_init (glLabelLineClass *klass)
+gl_label_line_class_init (glLabelLineClass *class)
 {
-	GObjectClass       *object_class       = (GObjectClass *) klass;
-	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
+	GObjectClass       *object_class       = G_OBJECT_CLASS (class);
+	glLabelObjectClass *label_object_class = GL_LABEL_OBJECT_CLASS (class);
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_line_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy           = copy;
 	label_object_class->set_line_color = set_line_color;
@@ -115,25 +89,23 @@ gl_label_line_class_init (glLabelLineClass *klass)
 }
 
 static void
-gl_label_line_instance_init (glLabelLine *lline)
+gl_label_line_init (glLabelLine *lline)
 {
-	lline->private = g_new0 (glLabelLinePrivate, 1);
-	lline->private->line_color_node = gl_color_node_new_default ();
+	lline->priv = g_new0 (glLabelLinePrivate, 1);
+	lline->priv->line_color_node = gl_color_node_new_default ();
 }
 
 static void
 gl_label_line_finalize (GObject *object)
 {
-	glLabelLine *lline;
+	glLabelLine *lline = GL_LABEL_LINE (object);
 
 	g_return_if_fail (object && GL_IS_LABEL_LINE (object));
 
-	lline = GL_LABEL_LINE (object);
+	gl_color_node_free (&(lline->priv->line_color_node));
+	g_free (lline->priv);
 
-	gl_color_node_free (&(lline->private->line_color_node));
-	g_free (lline->private);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_line_parent_class)->finalize (object);
 }
 
 /*****************************************************************************/
@@ -191,10 +163,10 @@ set_line_color (glLabelObject *object,
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
-	if ( !gl_color_node_equal (lline->private->line_color_node, line_color_node)) {
+	if ( !gl_color_node_equal (lline->priv->line_color_node, line_color_node)) {
 		
-		gl_color_node_free (&(lline->private->line_color_node ));
-		lline->private->line_color_node = gl_color_node_dup (line_color_node);
+		gl_color_node_free (&(lline->priv->line_color_node ));
+		lline->priv->line_color_node = gl_color_node_dup (line_color_node);
 		
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
 	}
@@ -211,8 +183,8 @@ set_line_width (glLabelObject *object,
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
-	if ( lline->private->line_width != line_width ) {
-		lline->private->line_width = line_width;
+	if ( lline->priv->line_width != line_width ) {
+		lline->priv->line_width = line_width;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
 	}
 }
@@ -228,7 +200,7 @@ get_line_width (glLabelObject *object)
 
 	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0.0);
 
-	return lline->private->line_width;
+	return lline->priv->line_width;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -241,5 +213,5 @@ get_line_color (glLabelObject *object)
 
 	g_return_val_if_fail (lline && GL_IS_LABEL_LINE (lline), 0);
 
-	return gl_color_node_dup (lline->private->line_color_node);
+	return gl_color_node_dup (lline->priv->line_color_node);
 }

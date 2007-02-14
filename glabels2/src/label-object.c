@@ -75,8 +75,6 @@ enum {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint signals[LAST_SIGNAL] = {0};
 
 static guint instance = 0;
@@ -85,8 +83,6 @@ static guint instance = 0;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_object_class_init    (glLabelObjectClass *klass);
-static void gl_label_object_instance_init (glLabelObject      *object);
 static void gl_label_object_finalize      (GObject            *object);
 
 static void merge_changed_cb              (glLabel            *label,
@@ -104,50 +100,25 @@ static void get_size                      (glLabelObject      *object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_object_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelObjectClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_object_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabelObject),
-			0,
-			(GInstanceInitFunc) gl_label_object_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "glLabelObject", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabelObject, gl_label_object, G_TYPE_OBJECT);
 
 static void
-gl_label_object_class_init (glLabelObjectClass *klass)
+gl_label_object_class_init (glLabelObjectClass *class)
 {
-	GObjectClass       *gobject_class = (GObjectClass *) klass;
-	glLabelObjectClass *object_class  = (glLabelObjectClass *) klass;
+	GObjectClass       *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_LABEL, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_object_parent_class = g_type_class_peek_parent (class);
 
-	gobject_class->finalize = gl_label_object_finalize;
+	object_class->finalize = gl_label_object_finalize;
 
-	object_class->set_size = set_size;
-	object_class->get_size = get_size;
+	class->set_size = set_size;
+	class->get_size = get_size;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, changed),
 			      NULL, NULL,
@@ -157,7 +128,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 
 	signals[MOVED] =
 		g_signal_new ("moved",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, moved),
 			      NULL, NULL,
@@ -166,7 +137,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
 	signals[FLIP_ROTATE] =
 		g_signal_new ("flip_rotate",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, flip_rotate),
 			      NULL, NULL,
@@ -175,7 +146,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 			      0);
 	signals[TOP] =
 		g_signal_new ("top",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, top),
 			      NULL, NULL,
@@ -185,7 +156,7 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 
 	signals[BOTTOM] =
 		g_signal_new ("bottom",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, bottom),
 			      NULL, NULL,
@@ -197,21 +168,21 @@ gl_label_object_class_init (glLabelObjectClass *klass)
 }
 
 static void
-gl_label_object_instance_init (glLabelObject *object)
+gl_label_object_init (glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
-	object->private = g_new0 (glLabelObjectPrivate, 1);
+	object->priv = g_new0 (glLabelObjectPrivate, 1);
 
-	object->private->name = g_strdup_printf ("object%d", instance++);
+	object->priv->name = g_strdup_printf ("object%d", instance++);
 
-	art_affine_identity (object->private->affine);
+	art_affine_identity (object->priv->affine);
 
-	object->private->shadow_state = FALSE;
-	object->private->shadow_x = DEFAULT_SHADOW_X_OFFSET;
-	object->private->shadow_y = DEFAULT_SHADOW_Y_OFFSET;
-	object->private->shadow_color_node = gl_color_node_new_default ();
-	object->private->shadow_opacity = DEFAULT_SHADOW_OPACITY;
+	object->priv->shadow_state = FALSE;
+	object->priv->shadow_x = DEFAULT_SHADOW_X_OFFSET;
+	object->priv->shadow_y = DEFAULT_SHADOW_Y_OFFSET;
+	object->priv->shadow_color_node = gl_color_node_new_default ();
+	object->priv->shadow_opacity = DEFAULT_SHADOW_OPACITY;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -219,19 +190,20 @@ gl_label_object_instance_init (glLabelObject *object)
 static void
 gl_label_object_finalize (GObject *object)
 {
+        glLabelObject *label_object = GL_LABEL_OBJECT (object);
 	glLabel       *parent;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	parent = GL_LABEL_OBJECT(object)->parent;
-	gl_label_remove_object (parent, GL_LABEL_OBJECT(object));
+	parent = label_object->parent;
+	gl_label_remove_object (parent, label_object);
 
-	g_free (GL_LABEL_OBJECT(object)->private->name);
-	g_free (GL_LABEL_OBJECT(object)->private);
+	g_free (label_object->priv->name);
+	g_free (label_object->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_object_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -380,8 +352,8 @@ gl_label_object_set_name (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	g_free(object->private->name);
-	object->private->name = name;
+	g_free(object->priv->name);
+	object->priv->name = name;
 
 	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
@@ -400,7 +372,7 @@ gl_label_object_get_name (glLabelObject *object)
 
 	gl_debug (DEBUG_LABEL, "END");
 
-	return g_strdup(object->private->name);
+	return g_strdup(object->priv->name);
 }
 
 /*****************************************************************************/
@@ -417,13 +389,13 @@ gl_label_object_set_position (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (x != object->private->x) || (y != object->private->y) ) {
+	if ( (x != object->priv->x) || (y != object->priv->y) ) {
 
-		dx = x - object->private->x;
-		dy = y - object->private->y;
+		dx = x - object->priv->x;
+		dy = y - object->priv->y;
 
-		object->private->x = x;
-		object->private->y = y;
+		object->priv->x = x;
+		object->priv->y = y;
 
 		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
 
@@ -446,12 +418,12 @@ gl_label_object_set_position_relative (glLabelObject *object,
 
 	if ( (dx != 0.0) || (dy != 0.0) ) {
 
-		object->private->x += dx;
-		object->private->y += dy;
+		object->priv->x += dx;
+		object->priv->y += dy;
 
 		gl_debug (DEBUG_LABEL, "       x = %f, y= %f",
-			  object->private->x,
-			  object->private->y);
+			  object->priv->x,
+			  object->priv->y);
 
 		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
 
@@ -472,8 +444,8 @@ gl_label_object_get_position (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	*x = object->private->x;
-	*y = object->private->y;
+	*x = object->priv->x;
+	*y = object->priv->y;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -488,10 +460,10 @@ set_size (glLabelObject *object,
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (object->private->w != w) || (object->private->h != h) ) {
+	if ( (object->priv->w != w) || (object->priv->h != h) ) {
 
-		object->private->w = w;
-		object->private->h = h;
+		object->priv->w = w;
+		object->priv->h = h;
 
 		g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 	}
@@ -514,7 +486,7 @@ gl_label_object_set_size (glLabelObject *object,
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
 
-		object->private->aspect_ratio = h / w;
+		object->priv->aspect_ratio = h / w;
 
 	}
 
@@ -534,13 +506,13 @@ gl_label_object_set_size_honor_aspect (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( h > w*object->private->aspect_ratio ) {
+	if ( h > w*object->priv->aspect_ratio ) {
 
-		h = w * object->private->aspect_ratio;
+		h = w * object->priv->aspect_ratio;
 
 	} else {
 
-		w = h / object->private->aspect_ratio;
+		w = h / object->priv->aspect_ratio;
 
 	}
 
@@ -564,8 +536,8 @@ get_size (glLabelObject *object,
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	*w = object->private->w;
-	*h = object->private->h;
+	*w = object->priv->w;
+	*h = object->priv->h;
 }
 
 /*****************************************************************************/
@@ -632,10 +604,10 @@ gl_label_object_get_extent (glLabelObject *object,
 	art_affine_point (&b4, &a4, affine);
 
 	/* now find the maximum extent of these points in x and y */
-	*x1 = MIN (b1.x, MIN (b2.x, MIN (b3.x, b4.x))) + object->private->x;
-	*y1 = MIN (b1.y, MIN (b2.y, MIN (b3.y, b4.y))) + object->private->y;
-	*x2 = MAX (b1.x, MAX (b2.x, MAX (b3.x, b4.x))) + object->private->x;
-	*y2 = MAX (b1.y, MAX (b2.y, MAX (b3.y, b4.y))) + object->private->y;
+	*x1 = MIN (b1.x, MIN (b2.x, MIN (b3.x, b4.x))) + object->priv->x;
+	*y1 = MIN (b1.y, MIN (b2.y, MIN (b3.y, b4.y))) + object->priv->y;
+	*x2 = MAX (b1.x, MAX (b2.x, MAX (b3.x, b4.x))) + object->priv->x;
+	*y2 = MAX (b1.y, MAX (b2.y, MAX (b3.y, b4.y))) + object->priv->y;
 	
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1191,9 +1163,9 @@ gl_label_object_set_shadow_state (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if (object->private->shadow_state != state)
+	if (object->priv->shadow_state != state)
 	{
-		object->private->shadow_state = state;
+		object->priv->shadow_state = state;
 		gl_label_object_emit_changed (object);
 	}
 
@@ -1210,7 +1182,7 @@ gl_label_object_get_shadow_state (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	return object->private->shadow_state;
+	return object->priv->shadow_state;
 }
 
 /****************************************************************************/
@@ -1225,10 +1197,10 @@ gl_label_object_set_shadow_offset (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (x != object->private->shadow_x) || (y != object->private->shadow_y) )
+	if ( (x != object->priv->shadow_x) || (y != object->priv->shadow_y) )
 	{
-		object->private->shadow_x = x;
-		object->private->shadow_y = y;
+		object->priv->shadow_x = x;
+		object->priv->shadow_y = y;
 
 		gl_label_object_emit_changed (object);
 	}
@@ -1248,8 +1220,8 @@ gl_label_object_get_shadow_offset (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	*x = object->private->shadow_x;
-	*y = object->private->shadow_y;
+	*x = object->priv->shadow_x;
+	*y = object->priv->shadow_y;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1265,10 +1237,10 @@ gl_label_object_set_shadow_color (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( !gl_color_node_equal (object->private->shadow_color_node, color_node ))
+	if ( !gl_color_node_equal (object->priv->shadow_color_node, color_node ))
 	{
-		gl_color_node_free (&(object->private->shadow_color_node));
-		object->private->shadow_color_node = gl_color_node_dup (color_node);
+		gl_color_node_free (&(object->priv->shadow_color_node));
+		object->priv->shadow_color_node = gl_color_node_dup (color_node);
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(object));
 	}
 
@@ -1285,7 +1257,7 @@ gl_label_object_get_shadow_color (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
 
-	return gl_color_node_dup (object->private->shadow_color_node);
+	return gl_color_node_dup (object->priv->shadow_color_node);
 }
 
 /****************************************************************************/
@@ -1299,9 +1271,9 @@ gl_label_object_set_shadow_opacity (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if (object->private->shadow_opacity != alpha)
+	if (object->priv->shadow_opacity != alpha)
 	{
-		object->private->shadow_opacity = alpha;
+		object->priv->shadow_opacity = alpha;
 		gl_label_object_emit_changed (object);
 	}
 
@@ -1318,7 +1290,7 @@ gl_label_object_get_shadow_opacity (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	return object->private->shadow_opacity;
+	return object->priv->shadow_opacity;
 }
 
 /****************************************************************************/
@@ -1334,7 +1306,7 @@ gl_label_object_flip_horiz (glLabelObject *object)
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
 	art_affine_scale (flip_affine, -1.0, 1.0);
-	art_affine_multiply (object->private->affine, object->private->affine, flip_affine);
+	art_affine_multiply (object->priv->affine, object->priv->affine, flip_affine);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1354,7 +1326,7 @@ gl_label_object_flip_vert (glLabelObject *object)
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
 	art_affine_scale (flip_affine, 1.0, -1.0);
-	art_affine_multiply (object->private->affine, object->private->affine, flip_affine);
+	art_affine_multiply (object->priv->affine, object->priv->affine, flip_affine);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1375,7 +1347,7 @@ gl_label_object_rotate (glLabelObject *object,
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
 	art_affine_rotate (rotate_affine, theta_degs);
-	art_affine_multiply (object->private->affine, object->private->affine, rotate_affine);
+	art_affine_multiply (object->priv->affine, object->priv->affine, rotate_affine);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1393,12 +1365,12 @@ gl_label_object_set_affine (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->private->affine[0] = affine[0];
-	object->private->affine[1] = affine[1];
-	object->private->affine[2] = affine[2];
-	object->private->affine[3] = affine[3];
-	object->private->affine[4] = affine[4];
-	object->private->affine[5] = affine[5];
+	object->priv->affine[0] = affine[0];
+	object->priv->affine[1] = affine[1];
+	object->priv->affine[2] = affine[2];
+	object->priv->affine[3] = affine[3];
+	object->priv->affine[4] = affine[4];
+	object->priv->affine[5] = affine[5];
 }
 
 /****************************************************************************/
@@ -1412,12 +1384,12 @@ gl_label_object_get_affine (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	affine[0] = object->private->affine[0];
-	affine[1] = object->private->affine[1];
-	affine[2] = object->private->affine[2];
-	affine[3] = object->private->affine[3];
-	affine[4] = object->private->affine[4];
-	affine[5] = object->private->affine[5];
+	affine[0] = object->priv->affine[0];
+	affine[1] = object->priv->affine[1];
+	affine[2] = object->priv->affine[2];
+	affine[3] = object->priv->affine[3];
+	affine[4] = object->priv->affine[4];
+	affine[5] = object->priv->affine[5];
 }
 
 /****************************************************************************/

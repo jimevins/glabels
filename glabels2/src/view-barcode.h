@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -41,13 +43,13 @@ typedef struct _glViewBarcodeClass     glViewBarcodeClass;
 typedef struct _glViewBarcodePrivate   glViewBarcodePrivate;
 
 struct _glViewBarcode {
-	glViewObject        parent_object;
+	glViewObject           parent_object;
 
-	glViewBarcodePrivate  *private;
+	glViewBarcodePrivate  *priv;
 };
 
 struct _glViewBarcodeClass {
-	glViewObjectClass   parent_class;
+	glViewObjectClass      parent_class;
 };
 
 

@@ -67,13 +67,9 @@ enum {
 	LAST_SIGNAL
 };
 
-typedef void (*glWdgtRotateLabelSignal) (GObject * object, gpointer data);
-
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
-
-static GObjectClass *parent_class;
 
 static gint wdgt_rotate_label_signals[LAST_SIGNAL] = { 0 };
 
@@ -81,8 +77,6 @@ static gint wdgt_rotate_label_signals[LAST_SIGNAL] = { 0 };
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_rotate_label_class_init    (glWdgtRotateLabelClass *class);
-static void gl_wdgt_rotate_label_instance_init (glWdgtRotateLabel      *rotate_label);
 static void gl_wdgt_rotate_label_finalize      (GObject                *object);
 
 static void gl_wdgt_rotate_label_construct     (glWdgtRotateLabel      *rotate_label);
@@ -118,40 +112,15 @@ static gboolean expose_cb                      (GtkWidget              *drawinga
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_wdgt_rotate_label_get_type (void)
-{
-	static GType type = 0;
+G_DEFINE_TYPE (glWdgtRotateLabel, gl_wdgt_rotate_label, GTK_TYPE_VBOX);
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glWdgtRotateLabelClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_wdgt_rotate_label_class_init,
-			NULL,
-			NULL,
-			sizeof (glWdgtRotateLabel),
-			0,
-			(GInstanceInitFunc) gl_wdgt_rotate_label_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_VBOX,
-					       "glWdgtRotateLabel", &info, 0);
-	}
-
-	return type;
-}
 
 static void
 gl_wdgt_rotate_label_class_init (glWdgtRotateLabelClass *class)
 {
-	GObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	object_class = (GObjectClass *) class;
-
-	parent_class = g_type_class_peek_parent (class);
+	gl_wdgt_rotate_label_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_rotate_label_finalize;
 
@@ -167,7 +136,7 @@ gl_wdgt_rotate_label_class_init (glWdgtRotateLabelClass *class)
 }
 
 static void
-gl_wdgt_rotate_label_instance_init (glWdgtRotateLabel *rotate_label)
+gl_wdgt_rotate_label_init (glWdgtRotateLabel *rotate_label)
 {
         rotate_label->priv = g_new0 (glWdgtRotateLabelPrivate, 1);
 
@@ -184,22 +153,18 @@ gl_wdgt_rotate_label_instance_init (glWdgtRotateLabel *rotate_label)
 static void
 gl_wdgt_rotate_label_finalize (GObject *object)
 {
-	glWdgtRotateLabel      *rotate_label;
-	glWdgtRotateLabelClass *class;
+	glWdgtRotateLabel      *rotate_label = GL_WDGT_ROTATE_LABEL (object);
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_ROTATE_LABEL (object));
-
-	rotate_label = GL_WDGT_ROTATE_LABEL (object);
 
 	if (rotate_label->priv->template) {
 		gl_template_free (rotate_label->priv->template);
 		rotate_label->priv->template = NULL;
 	}
-
 	g_free (rotate_label->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_wdgt_rotate_label_parent_class)->finalize (object);
 }
 
 GtkWidget *

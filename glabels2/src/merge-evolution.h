@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -31,7 +33,7 @@ G_BEGIN_DECLS
 /* The following object arguments are available:
  *
  * name               type             description
- * --------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------
  * query              gchar*           The query used to select records
  *
  */
@@ -51,13 +53,13 @@ typedef struct _glMergeEvolutionPrivate   glMergeEvolutionPrivate;
 
 
 struct _glMergeEvolution {
-	glMerge              object;
+	glMerge                   object;
 
-	glMergeEvolutionPrivate  *private;
+	glMergeEvolutionPrivate  *priv;
 };
 
 struct _glMergeEvolutionClass {
-	glMergeClass         parent_class;
+	glMergeClass              parent_class;
 };
 
 

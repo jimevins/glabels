@@ -48,7 +48,7 @@ typedef struct _glLabelTextPrivate   glLabelTextPrivate;
 struct _glLabelText {
 	glLabelObject         object;
 
-	glLabelTextPrivate   *private;
+	glLabelTextPrivate   *priv;
 };
 
 struct _glLabelTextClass {

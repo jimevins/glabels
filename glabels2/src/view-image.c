@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -54,8 +56,6 @@ struct _glViewImagePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static glViewObjectClass *parent_class = NULL;
-
 /* Save state of image file entry */
 static gchar *image_path = NULL;
 
@@ -63,8 +63,6 @@ static gchar *image_path = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_image_class_init          (glViewImageClass *klass);
-static void       gl_view_image_instance_init       (glViewImage      *view_image);
 static void       gl_view_image_finalize            (GObject          *object);
 
 static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
@@ -91,41 +89,17 @@ static void       update_editor_from_label_cb       (glLabel          *label,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_image_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewImageClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_image_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewImage),
-			0,
-			(GInstanceInitFunc) gl_view_image_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,
-					       "glViewImage", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glViewImage, gl_view_image, GL_TYPE_VIEW_OBJECT);
 
 static void
-gl_view_image_class_init (glViewImageClass *klass)
+gl_view_image_class_init (glViewImageClass *class)
 {
-	GObjectClass      *object_class      = (GObjectClass *) klass;
-	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
+	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
+	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_image_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_image_finalize;
 
@@ -135,11 +109,11 @@ gl_view_image_class_init (glViewImageClass *klass)
 }
 
 static void
-gl_view_image_instance_init (glViewImage *view_image)
+gl_view_image_init (glViewImage *view_image)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_image->private = g_new0 (glViewImagePrivate, 1);
+	view_image->priv = g_new0 (glViewImagePrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -147,13 +121,15 @@ gl_view_image_instance_init (glViewImage *view_image)
 static void
 gl_view_image_finalize (GObject *object)
 {
-	glLabel       *parent;
+	glViewImage *view_image = GL_VIEW_IMAGE (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_IMAGE (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	g_free (view_image->priv);
+
+	G_OBJECT_CLASS (gl_view_image_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -185,7 +161,7 @@ gl_view_image_new (glLabelImage *object,
 	pixbuf = gl_label_image_get_pixbuf(object, NULL);
 
 	/* Create analogous canvas item. */
-	view_image->private->item =
+	view_image->priv->item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_image),
 					 gnome_canvas_pixbuf_get_type (),
 					 "x", 0.0,
@@ -267,7 +243,7 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
 
 	/* Adjust appearance of analogous canvas item. */
-	gnome_canvas_item_set (view_image->private->item,
+	gnome_canvas_item_set (view_image->priv->item,
 			       "width_set", TRUE,
 			       "height_set", TRUE,
 			       "width", w,

@@ -57,15 +57,11 @@ struct _glViewEllipsePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static glViewObjectClass *parent_class = NULL;
-
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_ellipse_class_init        (glViewEllipseClass   *klass);
-static void       gl_view_ellipse_instance_init     (glViewEllipse        *view_ellipse);
 static void       gl_view_ellipse_finalize          (GObject              *object);
 
 static GtkWidget *construct_properties_editor       (glViewObject         *view_object);
@@ -92,41 +88,17 @@ static void       update_editor_from_label_cb       (glLabel          *label,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_ellipse_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewEllipseClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_ellipse_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewEllipse),
-			0,
-			(GInstanceInitFunc) gl_view_ellipse_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,
-					       "glViewEllipse", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glViewEllipse, gl_view_ellipse, GL_TYPE_VIEW_OBJECT);
 
 static void
-gl_view_ellipse_class_init (glViewEllipseClass *klass)
+gl_view_ellipse_class_init (glViewEllipseClass *class)
 {
-	GObjectClass      *object_class      = (GObjectClass *) klass;
-	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
+	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
+	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_ellipse_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_ellipse_finalize;
 
@@ -136,11 +108,11 @@ gl_view_ellipse_class_init (glViewEllipseClass *klass)
 }
 
 static void
-gl_view_ellipse_instance_init (glViewEllipse *view_ellipse)
+gl_view_ellipse_init (glViewEllipse *view_ellipse)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_ellipse->private = g_new0 (glViewEllipsePrivate, 1);
+	view_ellipse->priv = g_new0 (glViewEllipsePrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -148,13 +120,15 @@ gl_view_ellipse_instance_init (glViewEllipse *view_ellipse)
 static void
 gl_view_ellipse_finalize (GObject *object)
 {
-	glLabel       *parent;
+        glViewEllipse *view_ellipse = GL_VIEW_ELLIPSE (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_ELLIPSE (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+        g_free (view_ellipse->priv);
+
+	G_OBJECT_CLASS (gl_view_ellipse_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -181,11 +155,11 @@ gl_view_ellipse_new (glLabelEllipse *object,
 				   GL_VIEW_HIGHLIGHT_ELLIPSE_RESIZABLE);
 
 	/* Create analogous canvas items. */
-	view_ellipse->private->shadow_item =
+	view_ellipse->priv->shadow_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_ellipse),
 					 gnome_canvas_ellipse_get_type (),
 					 NULL);
-	view_ellipse->private->object_item =
+	view_ellipse->priv->object_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_ellipse),
 					 gnome_canvas_ellipse_get_type (),
 					 NULL);
@@ -293,7 +267,7 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 					     fill_color_node->color);
 
 	/* Adjust appearance of analogous canvas items. */
-	gnome_canvas_item_set (view_ellipse->private->shadow_item,
+	gnome_canvas_item_set (view_ellipse->priv->shadow_item,
 			       "x1", shadow_x,
 			       "y1", shadow_y,
 			       "x2", shadow_x + w + DELTA,
@@ -305,14 +279,14 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	if (shadow_state)
 	{
-		gnome_canvas_item_show (view_ellipse->private->shadow_item);
+		gnome_canvas_item_show (view_ellipse->priv->shadow_item);
 	}
 	else
 	{
-		gnome_canvas_item_hide (view_ellipse->private->shadow_item);
+		gnome_canvas_item_hide (view_ellipse->priv->shadow_item);
 	}
 
-	gnome_canvas_item_set (view_ellipse->private->object_item,
+	gnome_canvas_item_set (view_ellipse->priv->object_item,
 			       "x2", w + DELTA,
 			       "y2", h + DELTA,
 			       "width_units", line_width,

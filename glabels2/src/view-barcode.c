@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -60,15 +62,11 @@ struct _glViewBarcodePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static glViewObjectClass *parent_class = NULL;
-
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_barcode_class_init            (glViewBarcodeClass  *klass);
-static void       gl_view_barcode_instance_init         (glViewBarcode       *view_bc);
 static void       gl_view_barcode_finalize              (GObject             *object);
 
 static GtkWidget *construct_properties_editor           (glViewObject        *view_object);
@@ -97,41 +95,17 @@ static void       draw_barcode                          (glViewBarcode       *vi
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_barcode_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewBarcodeClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_barcode_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewBarcode),
-			0,
-			(GInstanceInitFunc) gl_view_barcode_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,
-					       "glViewBarcode", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glViewBarcode, gl_view_barcode, GL_TYPE_VIEW_OBJECT);
 
 static void
-gl_view_barcode_class_init (glViewBarcodeClass *klass)
+gl_view_barcode_class_init (glViewBarcodeClass *class)
 {
-	GObjectClass      *object_class      = (GObjectClass *) klass;
-	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
+	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
+	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_barcode_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_barcode_finalize;
 
@@ -141,11 +115,11 @@ gl_view_barcode_class_init (glViewBarcodeClass *klass)
 }
 
 static void
-gl_view_barcode_instance_init (glViewBarcode *view_bc)
+gl_view_barcode_init (glViewBarcode *view_bc)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_bc->private = g_new0 (glViewBarcodePrivate, 1);
+	view_bc->priv = g_new0 (glViewBarcodePrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -153,13 +127,15 @@ gl_view_barcode_instance_init (glViewBarcode *view_bc)
 static void
 gl_view_barcode_finalize (GObject *object)
 {
-	glLabel       *parent;
+	glViewBarcode *view_bc = GL_VIEW_BARCODE (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_BARCODE (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	g_free (view_bc->priv);
+
+	G_OBJECT_CLASS (gl_view_barcode_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -579,13 +555,13 @@ draw_barcode (glViewBarcode *view_barcode)
 	}
 
 	/* remove previous items from group. */
-	for (li = view_barcode->private->item_list; li!=NULL; li = li->next) {
+	for (li = view_barcode->priv->item_list; li!=NULL; li = li->next) {
 		gl_debug (DEBUG_VIEW, "in loop");
 		gtk_object_destroy (GTK_OBJECT (li->data));
 	}
 	gl_debug (DEBUG_VIEW, "1");
-	g_list_free (view_barcode->private->item_list);
-	view_barcode->private->item_list = NULL;
+	g_list_free (view_barcode->priv->item_list);
+	view_barcode->priv->item_list = NULL;
 	gl_debug (DEBUG_VIEW, "2");
 
 	/* get Gnome Font */
@@ -606,8 +582,8 @@ draw_barcode (glViewBarcode *view_barcode)
 						"outline_color_rgba", color_node->color,
 						"width_pixels", 1,
 						NULL);
-		view_barcode->private->item_list =
-			g_list_prepend (view_barcode->private->item_list, item);
+		view_barcode->priv->item_list =
+			g_list_prepend (view_barcode->priv->item_list, item);
 
 		if (digits == NULL || *digits == '\0')
 		{
@@ -635,8 +611,8 @@ draw_barcode (glViewBarcode *view_barcode)
 
 		gnome_glyphlist_unref (glyphlist);
 
-		view_barcode->private->item_list =
-			g_list_prepend (view_barcode->private->item_list, item);
+		view_barcode->priv->item_list =
+			g_list_prepend (view_barcode->priv->item_list, item);
 	} else {
 
 		points = gnome_canvas_points_new (2);
@@ -654,8 +630,8 @@ draw_barcode (glViewBarcode *view_barcode)
 							"width_units", line->width,
 							"fill_color_rgba", color_node->color,
 							NULL);
-			view_barcode->private->item_list =
-				g_list_prepend (view_barcode->private->item_list, item);
+			view_barcode->priv->item_list =
+				g_list_prepend (view_barcode->priv->item_list, item);
 		}
 		gnome_canvas_points_free (points);
 
@@ -683,8 +659,8 @@ draw_barcode (glViewBarcode *view_barcode)
 
 			gnome_glyphlist_unref (glyphlist);
 
-			view_barcode->private->item_list =
-				g_list_prepend (view_barcode->private->item_list, item);
+			view_barcode->priv->item_list =
+				g_list_prepend (view_barcode->priv->item_list, item);
 
 		}
 

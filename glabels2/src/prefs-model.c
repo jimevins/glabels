@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -101,16 +103,12 @@ enum {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint signals[LAST_SIGNAL] = {0};
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void           gl_prefs_model_class_init    (glPrefsModelClass   *klass);
-static void           gl_prefs_model_instance_init (glPrefsModel        *object);
 static void           gl_prefs_model_finalize      (GObject             *object);
 
 static void           notify_cb                    (GConfClient         *client,
@@ -142,40 +140,16 @@ static const gchar   *units_to_string              (glUnitsType          units);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_prefs_model_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glPrefsModelClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_prefs_model_class_init,
-			NULL,
-			NULL,
-			sizeof (glPrefsModel),
-			0,
-			(GInstanceInitFunc) gl_prefs_model_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "glPrefsModel", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glPrefsModel, gl_prefs_model, G_TYPE_OBJECT);
 
 static void
-gl_prefs_model_class_init (glPrefsModelClass *klass)
+gl_prefs_model_class_init (glPrefsModelClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_PREFS, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_prefs_model_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_prefs_model_finalize;
 
@@ -193,7 +167,7 @@ gl_prefs_model_class_init (glPrefsModelClass *klass)
 }
 
 static void
-gl_prefs_model_instance_init (glPrefsModel *prefs_model)
+gl_prefs_model_init (glPrefsModel *prefs_model)
 {
 	gl_debug (DEBUG_PREFS, "START");
 
@@ -217,16 +191,17 @@ gl_prefs_model_instance_init (glPrefsModel *prefs_model)
 static void
 gl_prefs_model_finalize (GObject *object)
 {
+	glPrefsModel *prefs_model = GL_PREFS_MODEL (object);
+
 	gl_debug (DEBUG_PREFS, "START");
 
 	g_return_if_fail (object && GL_IS_PREFS_MODEL (object));
 
-	g_object_unref (G_OBJECT(GL_PREFS_MODEL(object)->gconf_client));
+	g_object_unref (G_OBJECT(prefs_model->gconf_client));
+	g_free (prefs_model->default_page_size);
+	g_free (prefs_model->default_font_family);
 
-	g_free (GL_PREFS_MODEL(object)->default_page_size);
-	g_free (GL_PREFS_MODEL(object)->default_font_family);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_prefs_model_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_PREFS, "END");
 }

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -42,16 +44,12 @@ struct _glLabelBoxPrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint instance = 0;
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void    gl_label_box_class_init    (glLabelBoxClass *klass);
-static void    gl_label_box_instance_init (glLabelBox      *lbox);
 static void    gl_label_box_finalize      (GObject         *object);
 
 static void    copy                       (glLabelObject   *dst_object,
@@ -77,39 +75,15 @@ static gdouble get_line_width             (glLabelObject   *object);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_box_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelBoxClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_box_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabelBox),
-			0,
-			(GInstanceInitFunc) gl_label_box_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,
-					       "glLabelBox", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabelBox, gl_label_box, GL_TYPE_LABEL_OBJECT);
 
 static void
-gl_label_box_class_init (glLabelBoxClass *klass)
+gl_label_box_class_init (glLabelBoxClass *class)
 {
-	GObjectClass       *object_class       = (GObjectClass *) klass;
-	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
+	GObjectClass       *object_class       = G_OBJECT_CLASS (class);
+	glLabelObjectClass *label_object_class = GL_LABEL_OBJECT_CLASS (class);
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_box_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy           = copy;
 	label_object_class->set_fill_color = set_fill_color;
@@ -123,27 +97,25 @@ gl_label_box_class_init (glLabelBoxClass *klass)
 }
 
 static void
-gl_label_box_instance_init (glLabelBox *lbox)
+gl_label_box_init (glLabelBox *lbox)
 {
-	lbox->private = g_new0 (glLabelBoxPrivate, 1);
-	lbox->private->line_color_node = gl_color_node_new_default ();
-	lbox->private->fill_color_node = gl_color_node_new_default ();
+	lbox->priv = g_new0 (glLabelBoxPrivate, 1);
+	lbox->priv->line_color_node = gl_color_node_new_default ();
+	lbox->priv->fill_color_node = gl_color_node_new_default ();
 }
 
 static void
 gl_label_box_finalize (GObject *object)
 {
-	glLabelBox *lbox;
+	glLabelBox *lbox = GL_LABEL_BOX (object);
 
 	g_return_if_fail (object && GL_IS_LABEL_BOX (object));
 
-	lbox = GL_LABEL_BOX (object);
+	gl_color_node_free (&(lbox->priv->fill_color_node));
+	gl_color_node_free (&(lbox->priv->line_color_node));
+	g_free (lbox->priv);
 
-	gl_color_node_free (&(lbox->private->fill_color_node));
-	gl_color_node_free (&(lbox->private->line_color_node));
-	g_free (lbox->private);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_box_parent_class)->finalize (object);
 }
 
 /*****************************************************************************/
@@ -207,10 +179,10 @@ set_fill_color (glLabelObject *object,
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if (!gl_color_node_equal (lbox->private->fill_color_node, fill_color_node)) {
+	if (!gl_color_node_equal (lbox->priv->fill_color_node, fill_color_node)) {
 
-		gl_color_node_free (&(lbox->private->fill_color_node));
-		lbox->private->fill_color_node = gl_color_node_dup (fill_color_node);
+		gl_color_node_free (&(lbox->priv->fill_color_node));
+		lbox->priv->fill_color_node = gl_color_node_dup (fill_color_node);
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}
@@ -228,9 +200,9 @@ set_line_color (glLabelObject *object,
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if ( !gl_color_node_equal (lbox->private->line_color_node, line_color_node )) {
-		gl_color_node_free (&(lbox->private->line_color_node));
-		lbox->private->line_color_node = gl_color_node_dup (line_color_node);
+	if ( !gl_color_node_equal (lbox->priv->line_color_node, line_color_node )) {
+		gl_color_node_free (&(lbox->priv->line_color_node));
+		lbox->priv->line_color_node = gl_color_node_dup (line_color_node);
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}
 }
@@ -246,8 +218,8 @@ set_line_width (glLabelObject *object,
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if ( lbox->private->line_width != line_width ) {
-		lbox->private->line_width = line_width;
+	if ( lbox->priv->line_width != line_width ) {
+		lbox->priv->line_width = line_width;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}
 }
@@ -263,7 +235,7 @@ get_line_width (glLabelObject *object)
 
 	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0.0);
 
-	return lbox->private->line_width;
+	return lbox->priv->line_width;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -276,7 +248,7 @@ get_line_color (glLabelObject *object)
 
 	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
 
-	return gl_color_node_dup (lbox->private->line_color_node);
+	return gl_color_node_dup (lbox->priv->line_color_node);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -289,5 +261,5 @@ get_fill_color (glLabelObject *object)
 
 	g_return_val_if_fail (lbox && GL_IS_LABEL_BOX (lbox), 0);
 
-	return gl_color_node_dup (lbox->private->fill_color_node);
+	return gl_color_node_dup (lbox->priv->fill_color_node);
 }

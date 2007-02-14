@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /**
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -60,14 +60,10 @@ typedef void (*ChangedSignal) (GObject * object, gpointer data);
 
 gint gl_object_editor_signals[LAST_SIGNAL] = { 0 };
 
-static GtkVBoxClass *parent_class = NULL;
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_object_editor_class_init         (glObjectEditorClass  *klass);
-static void gl_object_editor_init               (glObjectEditor       *editor);
 static void gl_object_editor_finalize           (GObject              *object);
 
 static void gl_object_notebook_construct_valist (glObjectEditor       *editor,
@@ -80,42 +76,16 @@ static void prefs_changed_cb                    (glObjectEditor       *editor);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_object_editor_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type)
-    	{
-      		static const GTypeInfo info =
-      		{
-			sizeof (glObjectEditorClass),
-        		NULL,		/* base_init */
-        		NULL,		/* base_finalize */
-        		(GClassInitFunc) gl_object_editor_class_init,
-        		NULL,           /* class_finalize */
-        		NULL,           /* class_data */
-        		sizeof (glObjectEditor),
-        		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_object_editor_init,
-			NULL
-      		};
-
-     		type = g_type_register_static (GTK_TYPE_VBOX,
-					       "glObjectEditor", &info, 0);
-    	}
-
-	return type;
-}
+G_DEFINE_TYPE (glObjectEditor, gl_object_editor, GTK_TYPE_VBOX);
 
 static void
-gl_object_editor_class_init (glObjectEditorClass *klass)
+gl_object_editor_class_init (glObjectEditorClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_EDITOR, "START");
 	
-  	parent_class = g_type_class_peek_parent (klass);
+  	gl_object_editor_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_object_editor_finalize;  	
 
@@ -181,27 +151,23 @@ gl_object_editor_init (glObjectEditor *editor)
 static void 
 gl_object_editor_finalize (GObject *object)
 {
-	glObjectEditor* editor;
+	glObjectEditor* editor = GL_OBJECT_EDITOR (object);;
 	
 	gl_debug (DEBUG_EDITOR, "START");
 	
 	g_return_if_fail (object != NULL);
-	
-   	editor = GL_OBJECT_EDITOR (object);
-
 	g_return_if_fail (GL_IS_OBJECT_EDITOR (editor));
 	g_return_if_fail (editor->priv != NULL);
 
 	if (editor->priv->gui) {
 		g_object_unref (G_OBJECT (editor->priv->gui));
 	}
-
 	g_free (editor->priv);
 
 	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
 					      prefs_changed_cb, editor);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_object_editor_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

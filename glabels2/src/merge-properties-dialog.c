@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -84,14 +84,11 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
-static GtkDialogClass* parent_class = NULL;
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *klass);
-static void gl_merge_properties_dialog_init       (glMergePropertiesDialog      *dlg);
 static void gl_merge_properties_dialog_finalize   (GObject                      *object);
 static void gl_merge_properties_dialog_construct  (glMergePropertiesDialog      *dialog,
 						   glLabel                      *label,
@@ -124,42 +121,16 @@ static void unselect_all_button_clicked_cb        (GtkWidget                    
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_merge_properties_dialog_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type)
-    	{
-      		static const GTypeInfo info =
-      		{
-			sizeof (glMergePropertiesDialogClass),
-        		NULL,		/* base_init */
-        		NULL,		/* base_finalize */
-        		(GClassInitFunc) gl_merge_properties_dialog_class_init,
-        		NULL,           /* class_finalize */
-        		NULL,           /* class_data */
-        		sizeof (glMergePropertiesDialog),
-        		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_merge_properties_dialog_init,
-			NULL
-      		};
-
-     		type = g_type_register_static (GTK_TYPE_DIALOG,
-					       "glMergePropertiesDialog", &info, 0);
-    	}
-
-	return type;
-}
+G_DEFINE_TYPE (glMergePropertiesDialog, gl_merge_properties_dialog, GTK_TYPE_DIALOG);
 
 static void
-gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *klass)
+gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_MERGE, "");
 	
-  	parent_class = g_type_class_peek_parent (klass);
+  	gl_merge_properties_dialog_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_merge_properties_dialog_finalize;  	
 }
@@ -200,25 +171,20 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 static void 
 gl_merge_properties_dialog_finalize (GObject *object)
 {
-	glMergePropertiesDialog* dialog;
+	glMergePropertiesDialog* dialog = GL_MERGE_PROPERTIES_DIALOG (object);
 	
 	gl_debug (DEBUG_MERGE, "START");
 
 	g_return_if_fail (object != NULL);
-	
-   	dialog = GL_MERGE_PROPERTIES_DIALOG (object);
-
 	g_return_if_fail (GL_IS_MERGE_PROPERTIES_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	if (dialog->priv->merge != NULL) {
 		g_object_unref (G_OBJECT (dialog->priv->merge));
 	}
-
 	g_free (dialog->priv);
 
+	G_OBJECT_CLASS (gl_merge_properties_dialog_parent_class)->finalize (object);
 	gl_debug (DEBUG_MERGE, "END");
 }
 

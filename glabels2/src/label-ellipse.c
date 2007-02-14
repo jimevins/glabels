@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -42,16 +44,12 @@ struct _glLabelEllipsePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint instance = 0;
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void    gl_label_ellipse_class_init    (glLabelEllipseClass *klass);
-static void    gl_label_ellipse_instance_init (glLabelEllipse      *lellipse);
 static void    gl_label_ellipse_finalize      (GObject             *object);
 
 static void    copy                           (glLabelObject       *dst_object,
@@ -77,39 +75,15 @@ static gdouble get_line_width                 (glLabelObject       *object);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_ellipse_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelEllipseClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_ellipse_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabelEllipse),
-			0,
-			(GInstanceInitFunc) gl_label_ellipse_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,
-					       "glLabelEllipse", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabelEllipse, gl_label_ellipse, GL_TYPE_LABEL_OBJECT);
 
 static void
-gl_label_ellipse_class_init (glLabelEllipseClass *klass)
+gl_label_ellipse_class_init (glLabelEllipseClass *class)
 {
-	GObjectClass       *object_class       = (GObjectClass *) klass;
-	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
+	GObjectClass       *object_class       = G_OBJECT_CLASS (class);
+	glLabelObjectClass *label_object_class = GL_LABEL_OBJECT_CLASS (class);
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_ellipse_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy           = copy;
 	label_object_class->set_fill_color = set_fill_color;
@@ -123,27 +97,25 @@ gl_label_ellipse_class_init (glLabelEllipseClass *klass)
 }
 
 static void
-gl_label_ellipse_instance_init (glLabelEllipse *lellipse)
+gl_label_ellipse_init (glLabelEllipse *lellipse)
 {
-	lellipse->private = g_new0 (glLabelEllipsePrivate, 1);
-	lellipse->private->fill_color_node = gl_color_node_new_default ();
-	lellipse->private->fill_color_node = gl_color_node_new_default ();
+	lellipse->priv = g_new0 (glLabelEllipsePrivate, 1);
+	lellipse->priv->fill_color_node = gl_color_node_new_default ();
+	lellipse->priv->fill_color_node = gl_color_node_new_default ();
 }
 
 static void
 gl_label_ellipse_finalize (GObject *object)
 {
-	glLabelEllipse *lellipse;
+	glLabelEllipse *lellipse = GL_LABEL_ELLIPSE (object);
 
 	g_return_if_fail (object && GL_IS_LABEL_ELLIPSE (object));
 
-	lellipse = GL_LABEL_ELLIPSE (object);
+	gl_color_node_free (&(lellipse->priv->line_color_node));
+	gl_color_node_free (&(lellipse->priv->fill_color_node));
+	g_free (lellipse->priv);
 
-	gl_color_node_free (&(lellipse->private->line_color_node));
-	gl_color_node_free (&(lellipse->private->fill_color_node));
-	g_free (lellipse->private);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_ellipse_parent_class)->finalize (object);
 }
 
 /*****************************************************************************/
@@ -205,10 +177,10 @@ set_fill_color (glLabelObject *object,
 
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
-	if (!gl_color_node_equal (lellipse->private->fill_color_node, fill_color_node)) {
+	if (!gl_color_node_equal (lellipse->priv->fill_color_node, fill_color_node)) {
 
-		gl_color_node_free (&(lellipse->private->fill_color_node));
-		lellipse->private->fill_color_node = gl_color_node_dup (fill_color_node);
+		gl_color_node_free (&(lellipse->priv->fill_color_node));
+		lellipse->priv->fill_color_node = gl_color_node_dup (fill_color_node);
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
 	}	
@@ -225,10 +197,10 @@ set_line_color (glLabelObject *object,
 
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
-	if ( !gl_color_node_equal (lellipse->private->line_color_node, line_color_node) ) {
+	if ( !gl_color_node_equal (lellipse->priv->line_color_node, line_color_node) ) {
 		
-		gl_color_node_free (&(lellipse->private->line_color_node));
-		lellipse->private->line_color_node = gl_color_node_dup (line_color_node);
+		gl_color_node_free (&(lellipse->priv->line_color_node));
+		lellipse->priv->line_color_node = gl_color_node_dup (line_color_node);
 		
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
 	}
@@ -245,8 +217,8 @@ set_line_width (glLabelObject *object,
 
 	g_return_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse));
 
-	if ( lellipse->private->line_width != line_width ) {
-		lellipse->private->line_width = line_width;
+	if ( lellipse->priv->line_width != line_width ) {
+		lellipse->priv->line_width = line_width;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lellipse));
 	}
 }
@@ -262,7 +234,7 @@ get_line_width (glLabelObject *object)
 
 	g_return_val_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse), 0.0);
 
-	return lellipse->private->line_width;
+	return lellipse->priv->line_width;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -275,7 +247,7 @@ get_line_color (glLabelObject *object)
 
 	g_return_val_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse), 0);
 
-	return gl_color_node_dup (lellipse->private->line_color_node);
+	return gl_color_node_dup (lellipse->priv->line_color_node);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -288,5 +260,5 @@ get_fill_color (glLabelObject *object)
 
 	g_return_val_if_fail (lellipse && GL_IS_LABEL_ELLIPSE (lellipse), 0);
 
-	return gl_color_node_dup (lellipse->private->fill_color_node);
+	return gl_color_node_dup (lellipse->priv->fill_color_node);
 }

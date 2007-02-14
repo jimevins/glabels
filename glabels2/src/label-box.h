@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -43,7 +45,7 @@ typedef struct _glLabelBoxPrivate   glLabelBoxPrivate;
 struct _glLabelBox {
 	glLabelObject         object;
 
-	glLabelBoxPrivate    *private;
+	glLabelBoxPrivate    *priv;
 };
 
 struct _glLabelBoxClass {

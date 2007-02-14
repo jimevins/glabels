@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -56,15 +56,11 @@ struct _glViewObjectPrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void     gl_view_object_class_init    (glViewObjectClass   *klass);
-static void     gl_view_object_instance_init (glViewObject        *view_object);
 static void     gl_view_object_finalize      (GObject             *object);
 
 static void     object_moved_cb              (glLabelObject       *object,
@@ -92,40 +88,16 @@ static gint     item_event_arrow_mode        (GnomeCanvasItem     *item,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_object_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewObjectClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_object_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewObject),
-			0,
-			(GInstanceInitFunc) gl_view_object_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "glViewObject", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glViewObject, gl_view_object, G_TYPE_OBJECT);
 
 static void
-gl_view_object_class_init (glViewObjectClass *klass)
+gl_view_object_class_init (glViewObjectClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_object_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_object_finalize;
 
@@ -133,11 +105,11 @@ gl_view_object_class_init (glViewObjectClass *klass)
 }
 
 static void
-gl_view_object_instance_init (glViewObject *view_object)
+gl_view_object_init (glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_object->private = g_new0 (glViewObjectPrivate, 1);
+	view_object->priv = g_new0 (glViewObjectPrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -145,26 +117,27 @@ gl_view_object_instance_init (glViewObject *view_object)
 static void
 gl_view_object_finalize (GObject *object)
 {
-	glLabel       *parent;
+	glViewObject  *view_object = GL_VIEW_OBJECT (object);
 	glView        *view;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_OBJECT (object));
 
-	view = GL_VIEW_OBJECT(object)->private->view;
+	view = view_object->priv->view;
 	view->object_list = g_list_remove (view->object_list, object);
 	view->selected_object_list =
 		g_list_remove (view->selected_object_list, object);
 
-	g_object_unref (GL_VIEW_OBJECT(object)->private->object);
-	g_object_unref (G_OBJECT(GL_VIEW_OBJECT(object)->private->highlight));
-	gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->group));
-	if (GL_VIEW_OBJECT(object)->private->property_editor) {
-		gtk_object_destroy (GTK_OBJECT(GL_VIEW_OBJECT(object)->private->property_editor));
+	g_object_unref (view_object->priv->object);
+	g_object_unref (G_OBJECT(view_object->priv->highlight));
+	gtk_object_destroy (GTK_OBJECT(view_object->priv->group));
+	if (view_object->priv->property_editor) {
+		gtk_object_destroy (GTK_OBJECT(view_object->priv->property_editor));
 	}
+	g_free (view_object->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_view_object_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -198,7 +171,7 @@ gl_view_object_set_view       (glViewObject *view_object,
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	
-	view_object->private->view = view;
+	view_object->priv->view = view;
 
 	view->object_list = g_list_prepend (view->object_list, view_object);
 
@@ -222,21 +195,21 @@ gl_view_object_set_object     (glViewObject         *view_object,
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 	
-	view_object->private->object = object;
+	view_object->priv->object = object;
 
 	gl_label_object_get_position (GL_LABEL_OBJECT(object), &x, &y);
 	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
 
 	/* create canvas group to contain items representing object */
-	view_object->private->group =
-		gnome_canvas_item_new (view_object->private->view->label_group,
+	view_object->priv->group =
+		gnome_canvas_item_new (view_object->priv->view->label_group,
 				       gnome_canvas_group_get_type (),
 				       "x", x,
 				       "y", y,
 				       NULL);
 
 	/* Create appropriate selection highlight canvas item. */
-	view_object->private->highlight =
+	view_object->priv->highlight =
 		GL_VIEW_HIGHLIGHT (gl_view_highlight_new (view_object, style));
 
 	g_signal_connect (G_OBJECT (object), "moved",
@@ -255,7 +228,7 @@ gl_view_object_set_object     (glViewObject         *view_object,
 			  G_CALLBACK (flip_rotate_object_cb),
 			  view_object);
 
-	g_signal_connect (G_OBJECT (view_object->private->group), "event",
+	g_signal_connect (G_OBJECT (view_object->priv->group), "event",
 			  G_CALLBACK (gl_view_object_item_event_cb),
 			  view_object);
 
@@ -274,7 +247,7 @@ gl_view_object_get_view   (glViewObject *view_object)
 
 	gl_debug (DEBUG_VIEW, "END");
 
-	return view_object->private->view;
+	return view_object->priv->view;
 }
 
 /*****************************************************************************/
@@ -289,7 +262,7 @@ gl_view_object_get_object (glViewObject *view_object)
 	
 	gl_debug (DEBUG_VIEW, "END");
 
-	return view_object->private->object;
+	return view_object->priv->object;
 }
 
 /*****************************************************************************/
@@ -304,7 +277,7 @@ gl_view_object_get_group   (glViewObject *view_object)
 	
 	gl_debug (DEBUG_VIEW, "END");
 
-	return view_object->private->group;
+	return view_object->priv->group;
 }
 
 /*****************************************************************************/
@@ -324,14 +297,14 @@ gl_view_object_item_new (glViewObject *view_object,
 
 	g_return_val_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object), NULL);
 
-	item = gnome_canvas_item_new (GNOME_CANVAS_GROUP(view_object->private->group),
+	item = gnome_canvas_item_new (GNOME_CANVAS_GROUP(view_object->priv->group),
 				      type, NULL);
 	
         va_start (args, first_arg_name);
         gnome_canvas_item_set_valist (item, first_arg_name, args);
         va_end (args);
 
-	gl_label_object_get_affine (view_object->private->object, affine);
+	gl_label_object_get_affine (view_object->priv->object, affine);
 
 	/* Apply a very small rotation, fixes problems with flipped or rotated images */
 	art_affine_rotate (delta_affine, DELTA_DEG);
@@ -353,9 +326,9 @@ gl_view_object_show_highlight     (glViewObject *view_object)
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
-	g_return_if_fail (view_object->private->highlight);
+	g_return_if_fail (view_object->priv->highlight);
 	
-	gl_view_highlight_show (view_object->private->highlight);
+	gl_view_highlight_show (view_object->priv->highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -369,9 +342,9 @@ gl_view_object_hide_highlight   (glViewObject *view_object)
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
-	g_return_if_fail (view_object->private->highlight);
+	g_return_if_fail (view_object->priv->highlight);
 	
-	gl_view_highlight_hide (view_object->private->highlight);
+	gl_view_highlight_hide (view_object->priv->highlight);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -389,23 +362,23 @@ gl_view_object_get_editor (glViewObject *view_object)
 
 	if ( GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_editor != NULL ) {
 
-		if (view_object->private->property_editor == NULL) {
-			view_object->private->property_editor =
+		if (view_object->priv->property_editor == NULL) {
+			view_object->priv->property_editor =
 				GL_VIEW_OBJECT_GET_CLASS(view_object)->construct_editor (view_object);
 		}
-		g_signal_connect (G_OBJECT (view_object->private->property_editor),
+		g_signal_connect (G_OBJECT (view_object->priv->property_editor),
 				  "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
-				  &view_object->private->property_editor);
+				  &view_object->priv->property_editor);
 	
-		gtk_widget_show (view_object->private->property_editor);
+		gtk_widget_show (view_object->priv->property_editor);
 
 	}
 
 
 	gl_debug (DEBUG_VIEW, "END");
 
-	return view_object->private->property_editor;
+	return view_object->priv->property_editor;
 }
 
 
@@ -421,7 +394,7 @@ object_moved_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Adjust location of analogous canvas group. */
-	gnome_canvas_item_move (view_object->private->group, dx, dy);
+	gnome_canvas_item_move (view_object->priv->group, dx, dy);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -436,7 +409,7 @@ raise_object_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* send to top */
-	gnome_canvas_item_raise_to_top (view_object->private->group);
+	gnome_canvas_item_raise_to_top (view_object->priv->group);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -451,7 +424,7 @@ lower_object_cb (glLabelObject *object,
 	gl_debug (DEBUG_VIEW, "START");
 
 	/* Send to bottom */
-	gnome_canvas_item_lower_to_bottom (view_object->private->group);
+	gnome_canvas_item_lower_to_bottom (view_object->priv->group);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -475,7 +448,7 @@ flip_rotate_object_cb (glLabelObject *object,
 	art_affine_rotate (delta_affine, DELTA_DEG);
 	art_affine_multiply (affine, affine, delta_affine);
 	
-	item_list = GNOME_CANVAS_GROUP(view_object->private->group)->item_list;
+	item_list = GNOME_CANVAS_GROUP(view_object->priv->group)->item_list;
 	for ( p=item_list; p != NULL; p=p->next ) {
 		item = GNOME_CANVAS_ITEM(p->data);
 		gnome_canvas_item_affine_absolute (item, affine);
@@ -492,7 +465,7 @@ gl_view_object_select (glViewObject *view_object)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	gl_view_select_object(view_object->private->view, view_object);
+	gl_view_select_object(view_object->priv->view, view_object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 #ifndef __GL_CANVAS_HACKTEXT_H__
 #define __GL_CANVAS_HACKTEXT_H__
 

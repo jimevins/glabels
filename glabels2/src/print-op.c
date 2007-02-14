@@ -85,14 +85,10 @@ struct _glPrintOpPrivate {
 /* Private globals                           */
 /*===========================================*/
 
-static GtkPrintOperationClass* parent_class = NULL;
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void     gl_print_op_class_init    (glPrintOpClass     *klass);
-static void     gl_print_op_init          (glPrintOp          *op);
 static void     gl_print_op_finalize      (GObject            *object);
 
 static void     gl_print_op_construct       (glPrintOp          *op,
@@ -131,43 +127,17 @@ static void     draw_page_cb                  (GtkPrintOperation *operation,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_print_op_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type)
-    	{
-      		static const GTypeInfo info =
-      		{
-			sizeof (glPrintOpClass),
-        		NULL,		/* base_init */
-        		NULL,		/* base_finalize */
-        		(GClassInitFunc) gl_print_op_class_init,
-        		NULL,           /* class_finalize */
-        		NULL,           /* class_data */
-        		sizeof (glPrintOp),
-        		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_print_op_init,
-			NULL
-      		};
-
-     		type = g_type_register_static (GTK_TYPE_PRINT_OPERATION,
-					       "glPrintOp", &info, 0);
-    	}
-
-	return type;
-}
+G_DEFINE_TYPE (glPrintOp, gl_print_op, GTK_TYPE_PRINT_OPERATION);
 
 static void
-gl_print_op_class_init (glPrintOpClass *klass)
+gl_print_op_class_init (glPrintOpClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtkPrintOperationClass *print_class = GTK_PRINT_OPERATION_CLASS (klass);
+	GObjectClass           *object_class = G_OBJECT_CLASS (class);
+	GtkPrintOperationClass *print_class  = GTK_PRINT_OPERATION_CLASS (class);
 
 	gl_debug (DEBUG_PRINT, "");
 	
-  	parent_class = g_type_class_peek_parent (klass);
+  	gl_print_op_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_print_op_finalize;
 }
@@ -190,15 +160,12 @@ gl_print_op_init (glPrintOp *op)
 static void 
 gl_print_op_finalize (GObject *object)
 {
-	glPrintOp* op;
+	glPrintOp* op = GL_PRINT_OP (object);
 	
 	gl_debug (DEBUG_PRINT, "");
 
 	g_return_if_fail (object != NULL);
-	
-   	op = GL_PRINT_OP (object);
-
-	g_return_if_fail (GL_IS_PRINT_OP (op));
+        g_return_if_fail (GL_IS_PRINT_OP (op));
 	g_return_if_fail (op->priv != NULL);
 
 	if (op->priv->label) {
@@ -207,7 +174,7 @@ gl_print_op_finalize (GObject *object)
         g_free (op->priv->filename);
 	g_free (op->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_print_op_parent_class)->finalize (object);
 
 	g_free (op->priv);
 }

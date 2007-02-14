@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -43,8 +45,6 @@ struct _glLabelImagePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static guint instance = 0;
 
 static GdkPixbuf *default_pixbuf = NULL;
@@ -53,8 +53,6 @@ static GdkPixbuf *default_pixbuf = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_image_class_init    (glLabelImageClass *klass);
-static void gl_label_image_instance_init (glLabelImage      *limage);
 static void gl_label_image_finalize      (GObject           *object);
 
 static void copy                         (glLabelObject     *dst_object,
@@ -64,39 +62,15 @@ static void copy                         (glLabelObject     *dst_object,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_label_image_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glLabelImageClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_label_image_class_init,
-			NULL,
-			NULL,
-			sizeof (glLabelImage),
-			0,
-			(GInstanceInitFunc) gl_label_image_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_LABEL_OBJECT,
-					       "glLabelImage", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glLabelImage, gl_label_image, GL_TYPE_LABEL_OBJECT);
 
 static void
-gl_label_image_class_init (glLabelImageClass *klass)
+gl_label_image_class_init (glLabelImageClass *class)
 {
-	GObjectClass       *object_class       = (GObjectClass *) klass;
-	glLabelObjectClass *label_object_class = (glLabelObjectClass *) klass;
+	GObjectClass       *object_class       = G_OBJECT_CLASS (class);
+	glLabelObjectClass *label_object_class = GL_LABEL_OBJECT_CLASS (class);
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_label_image_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy = copy;
 
@@ -104,45 +78,42 @@ gl_label_image_class_init (glLabelImageClass *klass)
 }
 
 static void
-gl_label_image_instance_init (glLabelImage *limage)
+gl_label_image_init (glLabelImage *limage)
 {
 	if ( default_pixbuf == NULL ) {
 		default_pixbuf =
 			gdk_pixbuf_new_from_xpm_data ((const char **)checkerboard_xpm);
 	}
 
-	limage->private = g_new0 (glLabelImagePrivate, 1);
+	limage->priv = g_new0 (glLabelImagePrivate, 1);
 
-	limage->private->filename = g_new0 (glTextNode, 1);
+	limage->priv->filename = g_new0 (glTextNode, 1);
 
-	limage->private->pixbuf = default_pixbuf;
+	limage->priv->pixbuf = default_pixbuf;
 }
 
 static void
 gl_label_image_finalize (GObject *object)
 {
-	glLabelObject *lobject;
-	glLabelImage  *limage;
+	glLabelObject *lobject = GL_LABEL_OBJECT (object);
+	glLabelImage  *limage  = GL_LABEL_IMAGE (object);;
 	GHashTable    *pixbuf_cache;
 
 	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
 
-	lobject = GL_LABEL_OBJECT (object);
-	limage  = GL_LABEL_IMAGE (object);
-
-	if (!limage->private->filename->field_flag) {
+	if (!limage->priv->filename->field_flag) {
 		pixbuf_cache = gl_label_get_pixbuf_cache (lobject->parent);
 		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache,
-					       limage->private->filename->data);
+					       limage->priv->filename->data);
 	}
-	gl_text_node_free (&limage->private->filename);
-	g_free (limage->private);
+	gl_text_node_free (&limage->priv->filename);
+	g_free (limage->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_label_image_parent_class)->finalize (object);
 }
 
 /*****************************************************************************/
-/* NEW label "image" object.                                               */
+/* NEW label "image" object.                                                 */
 /*****************************************************************************/
 GObject *
 gl_label_image_new (glLabel *label)
@@ -178,7 +149,7 @@ copy (glLabelObject *dst_object,
 
 	/* Make sure destination label has data suitably cached. */
 	if ( !filename->field_flag && (filename->data != NULL) ) {
-		pixbuf = limage->private->pixbuf;
+		pixbuf = limage->priv->pixbuf;
 		if ( pixbuf != default_pixbuf ) {
 			pixbuf_cache = gl_label_get_pixbuf_cache (dst_object->parent);
 			gl_pixbuf_cache_add_pixbuf (pixbuf_cache, filename->data, pixbuf);
@@ -209,7 +180,7 @@ gl_label_image_set_filename (glLabelImage *limage,
 	g_return_if_fail (limage && GL_IS_LABEL_IMAGE (limage));
 	g_return_if_fail (filename != NULL);
 
-	old_filename = limage->private->filename;
+	old_filename = limage->priv->filename;
 
 	/* If Unchanged don't do anything */
 	if ( gl_text_node_equal (filename, old_filename ) ) {
@@ -224,29 +195,29 @@ gl_label_image_set_filename (glLabelImage *limage,
 	}
 
 	/* Set new filename. */
-	limage->private->filename = gl_text_node_dup(filename);
+	limage->priv->filename = gl_text_node_dup(filename);
 	gl_text_node_free (&old_filename);
 
 	/* Now set the pixbuf. */
 	if ( filename->field_flag || (filename->data == NULL) ) {
 
-		limage->private->pixbuf = default_pixbuf;
+		limage->priv->pixbuf = default_pixbuf;
 
 	} else {
 
 		pixbuf = gl_pixbuf_cache_get_pixbuf (pixbuf_cache, filename->data);
 
 		if (pixbuf != NULL) {
-			limage->private->pixbuf = pixbuf;
+			limage->priv->pixbuf = pixbuf;
 		} else {
-			limage->private->pixbuf = default_pixbuf;
+			limage->priv->pixbuf = default_pixbuf;
 		}
 	}
 
 	/* Treat current size as a bounding box, scale image to maintain aspect
 	 * ratio while fitting it in this bounding box. */
-	image_w = gdk_pixbuf_get_width (limage->private->pixbuf);
-	image_h = gdk_pixbuf_get_height (limage->private->pixbuf);
+	image_w = gdk_pixbuf_get_width (limage->priv->pixbuf);
+	image_h = gdk_pixbuf_get_height (limage->priv->pixbuf);
 	aspect_ratio = image_h / image_w;
 	gl_label_object_get_size (GL_LABEL_OBJECT(limage), &w, &h);
 	if ( h > w*aspect_ratio ) {
@@ -270,7 +241,7 @@ gl_label_image_get_filename (glLabelImage *limage)
 {
 	g_return_val_if_fail (limage && GL_IS_LABEL_IMAGE (limage), NULL);
 
-	return gl_text_node_dup (limage->private->filename);
+	return gl_text_node_dup (limage->priv->filename);
 }
 
 const GdkPixbuf *
@@ -279,7 +250,7 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 {
 	g_return_val_if_fail (limage && GL_IS_LABEL_IMAGE (limage), NULL);
 
-	if ((record != NULL) && limage->private->filename->field_flag) {
+	if ((record != NULL) && limage->priv->filename->field_flag) {
 
 		GdkPixbuf   *pixbuf = NULL;
 		gchar       *real_filename;
@@ -287,7 +258,7 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 		/* Indirect filename, re-evaluate for given record. */
 
 		real_filename = gl_merge_eval_key (record,
-						   limage->private->filename->data);
+						   limage->priv->filename->data);
 
 		if (real_filename != NULL) {
 			pixbuf = gdk_pixbuf_new_from_file (real_filename, NULL);
@@ -300,7 +271,7 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 
 	}
 
-	return limage->private->pixbuf;
+	return limage->priv->pixbuf;
 
 }
 

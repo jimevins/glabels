@@ -76,16 +76,12 @@ struct _glWdgtMiniPreviewPrivate {
 /* Private globals                           */
 /*===========================================*/
 
-static GtkDrawingAreaClass *parent_class;
-
 static gint wdgt_mini_preview_signals[LAST_SIGNAL] = { 0 };
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_mini_preview_class_init    (glWdgtMiniPreviewClass *class);
-static void gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview      *preview);
 static void gl_wdgt_mini_preview_finalize      (GObject                *object);
 
 static void gl_wdgt_mini_preview_construct     (glWdgtMiniPreview      *preview,
@@ -149,31 +145,8 @@ static gint find_closest_label                 (glWdgtMiniPreview      *preview,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_wdgt_mini_preview_get_type (void)
-{
-	static GType type = 0;
+G_DEFINE_TYPE (glWdgtMiniPreview, gl_wdgt_mini_preview, GTK_TYPE_DRAWING_AREA);
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glWdgtMiniPreviewClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_wdgt_mini_preview_class_init,
-			NULL,
-			NULL,
-			sizeof (glWdgtMiniPreview),
-			0,
-			(GInstanceInitFunc) gl_wdgt_mini_preview_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_DRAWING_AREA,
-					       "glWdgtMiniPreview", &info, 0);
-	}
-
-	return type;
-}
 
 static void
 gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
@@ -183,7 +156,7 @@ gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
+	gl_wdgt_mini_preview_parent_class = gtk_type_class (gtk_hbox_get_type ());
 
 	object_class->finalize = gl_wdgt_mini_preview_finalize;
 
@@ -215,7 +188,7 @@ gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
 }
 
 static void
-gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview *preview)
+gl_wdgt_mini_preview_init (glWdgtMiniPreview *preview)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -231,21 +204,18 @@ gl_wdgt_mini_preview_instance_init (glWdgtMiniPreview *preview)
 static void
 gl_wdgt_mini_preview_finalize (GObject *object)
 {
-	glWdgtMiniPreview *preview;
-	glWdgtMiniPreviewClass *class;
+	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (object);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_MINI_PREVIEW (object));
 
-	preview = GL_WDGT_MINI_PREVIEW (object);
-
 	gl_template_free (preview->priv->template);
 	g_free (preview->priv->centers);
 	g_free (preview->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_wdgt_mini_preview_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }

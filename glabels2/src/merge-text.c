@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -52,15 +54,11 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
-static glMergeClass *parent_class = NULL;
-
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void           gl_merge_text_class_init      (glMergeTextClass *klass);
-static void           gl_merge_text_instance_init   (glMergeText      *object);
 static void           gl_merge_text_finalize        (GObject          *object);
 
 static void           gl_merge_text_set_property    (GObject          *object,
@@ -89,41 +87,17 @@ static void           free_fields                   (GList           **fields);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_merge_text_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glMergeTextClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_merge_text_class_init,
-			NULL,
-			NULL,
-			sizeof (glMergeText),
-			0,
-			(GInstanceInitFunc) gl_merge_text_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_MERGE,
-					       "glMergeText", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glMergeText, gl_merge_text, GL_TYPE_MERGE);
 
 static void
-gl_merge_text_class_init (glMergeTextClass *klass)
+gl_merge_text_class_init (glMergeTextClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
-	glMergeClass *merge_class  = (glMergeClass *) klass;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
+	glMergeClass *merge_class  = GL_MERGE_CLASS (class);
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_merge_text_parent_class = g_type_class_peek_parent (class);
 
 	object_class->set_property = gl_merge_text_set_property;
 	object_class->get_property = gl_merge_text_get_property;
@@ -148,11 +122,11 @@ gl_merge_text_class_init (glMergeTextClass *klass)
 }
 
 static void
-gl_merge_text_instance_init (glMergeText *merge_text)
+gl_merge_text_init (glMergeText *merge_text)
 {
 	gl_debug (DEBUG_MERGE, "START");
 
-	merge_text->private = g_new0 (glMergeTextPrivate, 1);
+	merge_text->priv = g_new0 (glMergeTextPrivate, 1);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -160,11 +134,15 @@ gl_merge_text_instance_init (glMergeText *merge_text)
 static void
 gl_merge_text_finalize (GObject *object)
 {
+	glMergeText *merge_text = GL_MERGE_TEXT (object);
+
 	gl_debug (DEBUG_MERGE, "START");
 
 	g_return_if_fail (object && GL_IS_MERGE_TEXT (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	g_free (merge_text->priv);
+
+	G_OBJECT_CLASS (gl_merge_text_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -185,9 +163,9 @@ gl_merge_text_set_property (GObject      *object,
 	switch (param_id) {
 
 	case ARG_DELIM:
-		merge_text->private->delim = g_value_get_char (value);
+		merge_text->priv->delim = g_value_get_char (value);
 		gl_debug (DEBUG_MERGE, "ARG \"delim\" = \"%c\"",
-			  merge_text->private->delim);
+			  merge_text->priv->delim);
 		break;
 
         default:
@@ -214,7 +192,7 @@ gl_merge_text_get_property (GObject     *object,
 	switch (param_id) {
 
 	case ARG_DELIM:
-		g_value_set_char (value, merge_text->private->delim);
+		g_value_set_char (value, merge_text->priv->delim);
 		break;
 
         default:
@@ -291,7 +269,7 @@ gl_merge_text_open (glMerge *merge)
 	src = gl_merge_get_src (merge);
 
 	if (src != NULL) {
-		merge_text->private->fp = fopen (src, "r");
+		merge_text->priv->fp = fopen (src, "r");
 	}
 
 	g_free (src);
@@ -307,10 +285,10 @@ gl_merge_text_close (glMerge *merge)
 
 	merge_text = GL_MERGE_TEXT (merge);
 
-	if (merge_text->private->fp != NULL) {
+	if (merge_text->priv->fp != NULL) {
 
-		fclose (merge_text->private->fp);
-		merge_text->private->fp = NULL;
+		fclose (merge_text->priv->fp);
+		merge_text->priv->fp = NULL;
 
 	}
 }
@@ -331,8 +309,8 @@ gl_merge_text_get_record (glMerge *merge)
 
 	merge_text = GL_MERGE_TEXT (merge);
 
-	delim = merge_text->private->delim;
-	fp    = merge_text->private->fp;
+	delim = merge_text->priv->delim;
+	fp    = merge_text->priv->fp;
 
 	if (fp == NULL) {
 		return NULL;
@@ -376,7 +354,7 @@ gl_merge_text_copy (glMerge *dst_merge,
 	dst_merge_text = GL_MERGE_TEXT (dst_merge);
 	src_merge_text = GL_MERGE_TEXT (src_merge);
 
-	dst_merge_text->private->delim = src_merge_text->private->delim;
+	dst_merge_text->priv->delim = src_merge_text->priv->delim;
 }
 
 /*---------------------------------------------------------------------------*/

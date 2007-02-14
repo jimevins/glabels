@@ -34,15 +34,15 @@
 
 #include "debug.h"
 
-/*============================================================================*/
-/* Private macros and constants.                                              */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private macros and constants.                                             */
+/*===========================================================================*/
 
 #define DEFAULT_SIDEBAR_WIDTH 340
 
-/*============================================================================*/
-/* Private data types                                                         */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private data types                                                        */
+/*===========================================================================*/
 
 struct _glUISidebarPrivate {
 
@@ -52,18 +52,15 @@ struct _glUISidebarPrivate {
 	GtkWidget           *empty_child;
 };
 
-/*============================================================================*/
-/* Private globals                                                            */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private globals                                                           */
+/*===========================================================================*/
 
-static GtkVBoxClass *parent_class;
 
-/*============================================================================*/
-/* Local function prototypes                                                  */
-/*============================================================================*/
+/*===========================================================================*/
+/* Local function prototypes                                                 */
+/*===========================================================================*/
 
-static void     gl_ui_sidebar_class_init    (glUISidebarClass     *class);
-static void     gl_ui_sidebar_instance_init (glUISidebar          *sidebar);
 static void     gl_ui_sidebar_finalize      (GObject              *object);
 
 static void     gl_ui_sidebar_construct     (glUISidebar          *sidebar);
@@ -76,40 +73,16 @@ static void     selection_changed_cb        (glView               *view,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_ui_sidebar_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glUISidebarClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_ui_sidebar_class_init,
-			NULL,
-			NULL,
-			sizeof (glUISidebar),
-			0,
-			(GInstanceInitFunc) gl_ui_sidebar_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_VBOX,
-					       "glUISidebar", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glUISidebar, gl_ui_sidebar, GTK_TYPE_VBOX);
 
 static void
 gl_ui_sidebar_class_init (glUISidebarClass *class)
 {
-	GObjectClass   *object_class     = (GObjectClass *) class;
+	GObjectClass   *object_class     = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_UI, "START");
 
-	parent_class = g_type_class_peek_parent (class);
+	gl_ui_sidebar_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_ui_sidebar_finalize;
 
@@ -117,7 +90,7 @@ gl_ui_sidebar_class_init (glUISidebarClass *class)
 }
 
 static void
-gl_ui_sidebar_instance_init (glUISidebar *sidebar)
+gl_ui_sidebar_init (glUISidebar *sidebar)
 {
 	gl_debug (DEBUG_UI, "START");
 
@@ -129,22 +102,19 @@ gl_ui_sidebar_instance_init (glUISidebar *sidebar)
 static void
 gl_ui_sidebar_finalize (GObject *object)
 {
-	glUISidebar *sidebar;
+	glUISidebar *sidebar = GL_UI_SIDEBAR (object);
 
 	gl_debug (DEBUG_UI, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_SIDEBAR (object));
 
-	sidebar = GL_UI_SIDEBAR (object);
-
 	if (sidebar->priv->view) {
 		g_object_unref (G_OBJECT(sidebar->priv->view));
 	}
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
 	g_free (sidebar->priv);
+
+	G_OBJECT_CLASS (gl_ui_sidebar_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_UI, "END");
 }

@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /* wdgt-chain-button.h
  * Modified version of gimpchainbutton.h for gLabels:
  *

@@ -83,16 +83,12 @@ typedef void (*glWdgtMediaSelectSignal) (GObject * object, gpointer data);
 /* Private globals                           */
 /*===========================================*/
 
-static GObjectClass *parent_class;
-
 static gint wdgt_media_select_signals[LAST_SIGNAL] = { 0 };
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_media_select_class_init    (glWdgtMediaSelectClass *class);
-static void gl_wdgt_media_select_instance_init (glWdgtMediaSelect      *media_select);
 static void gl_wdgt_media_select_finalize      (GObject                *object);
 
 static void gl_wdgt_media_select_construct     (glWdgtMediaSelect      *media_select);
@@ -114,42 +110,17 @@ static void   load_list                        (GtkListStore           *store,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_wdgt_media_select_get_type (void)
-{
-        static GType type = 0;
+G_DEFINE_TYPE (glWdgtMediaSelect, gl_wdgt_media_select, GTK_TYPE_VBOX);
 
-        if (!type) {
-                static const GTypeInfo info = {
-                        sizeof (glWdgtMediaSelectClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) gl_wdgt_media_select_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (glWdgtMediaSelect),
-                        0,
-                        (GInstanceInitFunc) gl_wdgt_media_select_instance_init,
-                        NULL
-                };
-
-                type = g_type_register_static (GTK_TYPE_VBOX,
-                                               "glWdgtMediaSelect", &info, 0);
-        }
-
-        return type;
-}
 
 static void
 gl_wdgt_media_select_class_init (glWdgtMediaSelectClass *class)
 {
-        GObjectClass *object_class;
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-        object_class = (GObjectClass *) class;
-
-        parent_class = g_type_class_peek_parent (class);
+        gl_wdgt_media_select_parent_class = g_type_class_peek_parent (class);
 
         object_class->finalize = gl_wdgt_media_select_finalize;
 
@@ -166,7 +137,7 @@ gl_wdgt_media_select_class_init (glWdgtMediaSelectClass *class)
 }
 
 static void
-gl_wdgt_media_select_instance_init (glWdgtMediaSelect *media_select)
+gl_wdgt_media_select_init (glWdgtMediaSelect *media_select)
 {
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -187,19 +158,16 @@ gl_wdgt_media_select_instance_init (glWdgtMediaSelect *media_select)
 static void
 gl_wdgt_media_select_finalize (GObject *object)
 {
-        glWdgtMediaSelect *media_select;
-        glWdgtMediaSelectClass *class;
+        glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (object);
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
-        media_select = GL_WDGT_MEDIA_SELECT (object);
-
-        G_OBJECT_CLASS (parent_class)->finalize (object);
-
         g_free (media_select->priv);
+
+        G_OBJECT_CLASS (gl_wdgt_media_select_parent_class)->finalize (object);
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }

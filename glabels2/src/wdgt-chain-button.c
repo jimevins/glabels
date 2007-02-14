@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /* wdgt-chain-button.c
  * Modified version of gimpchainbutton.c for gLabels:
  *
@@ -41,9 +43,6 @@ enum
 };
 
 
-static void  gl_wdgt_chain_button_class_init       (glWdgtChainButtonClass *klass);
-static void  gl_wdgt_chain_button_init             (glWdgtChainButton      *button);
-
 static void      gl_wdgt_chain_button_clicked_callback (GtkWidget          *widget,
 							glWdgtChainButton  *button);
 static gboolean  gl_wdgt_chain_button_draw_lines       (GtkWidget          *widget,
@@ -62,79 +61,53 @@ static const gchar *gl_wdgt_chain_stock_items[] =
 
 static guint gl_wdgt_chain_button_signals[LAST_SIGNAL] = { 0 };
 
-static GtkTableClass *parent_class = NULL;
 
 
-GType
-gl_wdgt_chain_button_get_type (void)
-{
-  static GType type = 0;
+G_DEFINE_TYPE (glWdgtChainButton, gl_wdgt_chain_button, GTK_TYPE_TABLE);
 
-  if (! type)
-    {
-      static const GTypeInfo info =
-      {
-        sizeof (glWdgtChainButtonClass),
-        NULL,           /* base_init      */
-        NULL,           /* base_finalize  */
-        (GClassInitFunc) gl_wdgt_chain_button_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data     */
-        sizeof (glWdgtChainButton),
-        0,              /* n_preallocs    */
-        (GInstanceInitFunc) gl_wdgt_chain_button_init,
-	NULL
-      };
-
-      type = g_type_register_static (GTK_TYPE_TABLE,
-				     "glWdgtChainButton", &info, 0);
-    }
-
-  return type;
-}
 
 static void
-gl_wdgt_chain_button_class_init (glWdgtChainButtonClass *klass)
+gl_wdgt_chain_button_class_init (glWdgtChainButtonClass *class)
 {
-  parent_class = g_type_class_peek_parent (klass);
+	gl_wdgt_chain_button_parent_class = g_type_class_peek_parent (class);
 
-  gl_wdgt_chain_button_signals[TOGGLED] =
-    g_signal_new ("toggled",
-		  G_TYPE_FROM_CLASS (klass),
-		  G_SIGNAL_RUN_FIRST,
-		  G_STRUCT_OFFSET (glWdgtChainButtonClass, toggled),
-		  NULL, NULL,
-		  g_cclosure_marshal_VOID__VOID,
-		  G_TYPE_NONE, 0);
+	gl_wdgt_chain_button_signals[TOGGLED] =
+		g_signal_new ("toggled",
+			      G_TYPE_FROM_CLASS (class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (glWdgtChainButtonClass, toggled),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 
-  klass->toggled = NULL;
+	class->toggled = NULL;
 }
 
 static void
 gl_wdgt_chain_button_init (glWdgtChainButton *button)
 {
-  button->position = GL_WDGT_CHAIN_TOP;
-  button->active   = FALSE;
+	button->position = GL_WDGT_CHAIN_TOP;
+	button->active   = FALSE;
 
-  button->line1    = gtk_drawing_area_new ();
-  button->line2    = gtk_drawing_area_new ();
-  button->image    = gtk_image_new ();
+	button->line1    = gtk_drawing_area_new ();
+	button->line2    = gtk_drawing_area_new ();
+	button->image    = gtk_image_new ();
 
-  button->button   = gtk_button_new ();
+	button->button   = gtk_button_new ();
 
-  gtk_button_set_relief (GTK_BUTTON (button->button), GTK_RELIEF_NONE);
-  gtk_container_add (GTK_CONTAINER (button->button), button->image);
-  gtk_widget_show (button->image);
+	gtk_button_set_relief (GTK_BUTTON (button->button), GTK_RELIEF_NONE);
+	gtk_container_add (GTK_CONTAINER (button->button), button->image);
+	gtk_widget_show (button->image);
 
-  g_signal_connect (button->button, "clicked",
-                    G_CALLBACK (gl_wdgt_chain_button_clicked_callback),
-                    button);
-  g_signal_connect (button->line1, "expose_event",
-                    G_CALLBACK (gl_wdgt_chain_button_draw_lines),
-                    button);
-  g_signal_connect (button->line2, "expose_event",
-                    G_CALLBACK (gl_wdgt_chain_button_draw_lines),
-                    button);
+	g_signal_connect (button->button, "clicked",
+			  G_CALLBACK (gl_wdgt_chain_button_clicked_callback),
+			  button);
+	g_signal_connect (button->line1, "expose_event",
+			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
+			  button);
+	g_signal_connect (button->line2, "expose_event",
+			  G_CALLBACK (gl_wdgt_chain_button_draw_lines),
+			  button);
 }
 
 

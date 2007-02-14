@@ -349,27 +349,27 @@ void
 gl_ui_cmd_edit_preferences (GtkAction *action,
                             glWindow  *window)
 {
-        static GtkWidget *dlg = NULL;
+        static GtkWidget *dialog = NULL;
 
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (dlg != NULL)
+        if (dialog != NULL)
         {
-                gtk_window_present (GTK_WINDOW (dlg));
-                gtk_window_set_transient_for (GTK_WINDOW (dlg),        
+                gtk_window_present (GTK_WINDOW (dialog));
+                gtk_window_set_transient_for (GTK_WINDOW (dialog),        
                                               GTK_WINDOW(window));
 
         } else {
                 
-                dlg = gl_prefs_dialog_new (GTK_WINDOW(window));
+                dialog = gl_prefs_dialog_new (GTK_WINDOW(window));
 
-                g_signal_connect (G_OBJECT (dlg), "destroy",
-                                  G_CALLBACK (gtk_widget_destroyed), &dlg);
+                g_signal_connect (G_OBJECT (dialog), "destroy",
+                                  G_CALLBACK (gtk_widget_destroyed), &dialog);
         
-                gtk_widget_show (dlg);
+                gtk_widget_show (dialog);
 
         }
 

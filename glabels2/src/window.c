@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -42,9 +42,9 @@
 
 #include "debug.h"
 
-/*============================================================================*/
-/* Private macros and constants.                                              */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private macros and constants.                                             */
+/*===========================================================================*/
 
 #define DEFAULT_WINDOW_WIDTH  788
 #define DEFAULT_WINDOW_HEIGHT 600
@@ -52,20 +52,17 @@
 #define CURSOR_INFO_WIDTH     150
 #define ZOOM_INFO_WIDTH        50
 
-/*============================================================================*/
-/* Private globals                                                            */
-/*============================================================================*/
-static GtkWindowClass *parent_class;
+/*===========================================================================*/
+/* Private globals                                                           */
+/*===========================================================================*/
 
 static GList *window_list = NULL;
 
 
-/*============================================================================*/
-/* Local function prototypes                                                  */
-/*============================================================================*/
+/*===========================================================================*/
+/* Local function prototypes                                                 */
+/*===========================================================================*/
 
-static void     gl_window_class_init   (glWindowClass *class);
-static void     gl_window_init         (glWindow      *window);
 static void     gl_window_finalize     (GObject       *object);
 static void     gl_window_destroy      (GtkObject     *gtk_object);
 
@@ -106,41 +103,18 @@ static void     modified_changed_cb    (glLabel       *label,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_window_get_type (void)
-{
-	static GType type = 0;
+G_DEFINE_TYPE (glWindow, gl_window, GTK_TYPE_WINDOW);
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glWindowClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_window_class_init,
-			NULL,
-			NULL,
-			sizeof (glWindow),
-			0,
-			(GInstanceInitFunc) gl_window_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_WINDOW,
-					       "glWindow", &info, 0);
-	}
-
-	return type;
-}
 
 static void
 gl_window_class_init (glWindowClass *class)
 {
-	GObjectClass   *object_class     = (GObjectClass *) class;
-	GtkObjectClass *gtk_object_class = (GtkObjectClass *) class;
+	GObjectClass   *object_class     = G_OBJECT_CLASS (class);
+	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_WINDOW, "START");
 
-	parent_class = g_type_class_peek_parent (class);
+	gl_window_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_window_finalize;
 
@@ -234,16 +208,14 @@ gl_window_init (glWindow *window)
 static void
 gl_window_finalize (GObject *object)
 {
-	glWindow *window;
+	glWindow *window = GL_WINDOW (object);
 
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WINDOW (object));
 
-	window = GL_WINDOW (object);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_window_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -266,8 +238,8 @@ gl_window_destroy (GtkObject *gtk_object)
 		window->ui = NULL;
         }
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy) {
-		GTK_OBJECT_CLASS (parent_class)->destroy (gtk_object);
+	if (GTK_OBJECT_CLASS (gl_window_parent_class)->destroy) {
+		GTK_OBJECT_CLASS (gl_window_parent_class)->destroy (gtk_object);
 	}
 
 	gl_debug (DEBUG_WINDOW, "END");

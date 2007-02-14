@@ -57,15 +57,11 @@ struct _glViewBoxPrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static glViewObjectClass *parent_class = NULL;
-
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_box_class_init            (glViewBoxClass   *klass);
-static void       gl_view_box_instance_init         (glViewBox        *view_box);
 static void       gl_view_box_finalize              (GObject          *object);
 
 static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
@@ -92,41 +88,18 @@ static void       update_editor_from_label_cb       (glLabel          *label,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_view_box_get_type (void)
-{
-	static GType type = 0;
+G_DEFINE_TYPE (glViewBox, gl_view_box, GL_TYPE_VIEW_OBJECT);
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewBoxClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_box_class_init,
-			NULL,
-			NULL,
-			sizeof (glViewBox),
-			0,
-			(GInstanceInitFunc) gl_view_box_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GL_TYPE_VIEW_OBJECT,
-					       "glViewBox", &info, 0);
-	}
-
-	return type;
-}
 
 static void
-gl_view_box_class_init (glViewBoxClass *klass)
+gl_view_box_class_init (glViewBoxClass *class)
 {
-	GObjectClass      *object_class      = (GObjectClass *) klass;
-	glViewObjectClass *view_object_class = (glViewObjectClass *) klass;
+	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
+	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_view_box_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_box_finalize;
 
@@ -136,11 +109,11 @@ gl_view_box_class_init (glViewBoxClass *klass)
 }
 
 static void
-gl_view_box_instance_init (glViewBox *view_box)
+gl_view_box_init (glViewBox *view_box)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_box->private = g_new0 (glViewBoxPrivate, 1);
+	view_box->priv = g_new0 (glViewBoxPrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -148,13 +121,15 @@ gl_view_box_instance_init (glViewBox *view_box)
 static void
 gl_view_box_finalize (GObject *object)
 {
-	glLabel       *parent;
+        glViewBox *view_box = GL_VIEW_BOX (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_BOX (object));
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+        g_free (view_box->priv);
+
+	G_OBJECT_CLASS (gl_view_box_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -181,11 +156,11 @@ gl_view_box_new (glLabelBox *object,
 				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
 
 	/* Create analogous canvas items. */
-	view_box->private->shadow_item =
+	view_box->priv->shadow_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_box),
 					 gnome_canvas_rect_get_type (),
 					 NULL);
-	view_box->private->object_item =
+	view_box->priv->object_item =
 		gl_view_object_item_new (GL_VIEW_OBJECT(view_box),
 					 gnome_canvas_rect_get_type (),
 					 NULL);
@@ -293,7 +268,7 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 					     fill_color_node->color);
 
 	/* Adjust appearance of analogous canvas items. */
-	gnome_canvas_item_set (view_box->private->shadow_item,
+	gnome_canvas_item_set (view_box->priv->shadow_item,
 			       "x1", shadow_x,
 			       "y1", shadow_y,
 			       "x2", shadow_x + w + DELTA,
@@ -305,14 +280,14 @@ update_canvas_item_from_object_cb (glLabelObject *object,
 
 	if (shadow_state)
 	{
-		gnome_canvas_item_show (view_box->private->shadow_item);
+		gnome_canvas_item_show (view_box->priv->shadow_item);
 	}
 	else
 	{
-		gnome_canvas_item_hide (view_box->private->shadow_item);
+		gnome_canvas_item_hide (view_box->priv->shadow_item);
 	}
 
-	gnome_canvas_item_set (view_box->private->object_item,
+	gnome_canvas_item_set (view_box->priv->object_item,
 			       "x2", w + DELTA,
 			       "y2", h + DELTA,
 			       "width_units", line_width,

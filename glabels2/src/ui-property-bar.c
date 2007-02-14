@@ -43,13 +43,13 @@
 
 #include "debug.h"
 
-/*============================================================================*/
-/* Private macros and constants.                                              */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private macros and constants.                                             */
+/*===========================================================================*/
 
-/*============================================================================*/
-/* Private data types                                                         */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private data types                                                        */
+/*===========================================================================*/
 
 struct _glUIPropertyBarPrivate {
 
@@ -83,18 +83,14 @@ struct _glUIPropertyBarPrivate {
 };
 
 
-/*============================================================================*/
-/* Private globals                                                            */
-/*============================================================================*/
+/*===========================================================================*/
+/* Private globals                                                           */
+/*===========================================================================*/
 
-static GtkHBoxClass *parent_class;
+/*===========================================================================*/
+/* Local function prototypes                                                 */
+/*===========================================================================*/
 
-/*============================================================================*/
-/* Local function prototypes                                                  */
-/*============================================================================*/
-
-static void     gl_ui_property_bar_class_init    (glUIPropertyBarClass *class);
-static void     gl_ui_property_bar_instance_init (glUIPropertyBar      *property_bar);
 static void     gl_ui_property_bar_finalize      (GObject              *object);
 
 static void     gl_ui_property_bar_construct     (glUIPropertyBar      *property_bar);
@@ -159,40 +155,16 @@ static void     set_line_width_items_sensitive   (glUIPropertyBar      *property
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_ui_property_bar_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glUIPropertyBarClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_ui_property_bar_class_init,
-			NULL,
-			NULL,
-			sizeof (glUIPropertyBar),
-			0,
-			(GInstanceInitFunc) gl_ui_property_bar_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_HBOX,
-					       "glUIPropertyBar", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glUIPropertyBar, gl_ui_property_bar, GTK_TYPE_HBOX);
 
 static void
 gl_ui_property_bar_class_init (glUIPropertyBarClass *class)
 {
-	GObjectClass   *object_class     = (GObjectClass *) class;
+	GObjectClass   *object_class     = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	parent_class = g_type_class_peek_parent (class);
+	gl_ui_property_bar_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_ui_property_bar_finalize;
 
@@ -200,7 +172,7 @@ gl_ui_property_bar_class_init (glUIPropertyBarClass *class)
 }
 
 static void
-gl_ui_property_bar_instance_init (glUIPropertyBar *property_bar)
+gl_ui_property_bar_init (glUIPropertyBar *property_bar)
 {
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -221,22 +193,19 @@ gl_ui_property_bar_instance_init (glUIPropertyBar *property_bar)
 static void
 gl_ui_property_bar_finalize (GObject *object)
 {
-	glUIPropertyBar *property_bar;
+	glUIPropertyBar *property_bar = GL_UI_PROPERTY_BAR (object);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_PROPERTY_BAR (object));
 
-	property_bar = GL_UI_PROPERTY_BAR (object);
-
 	if (property_bar->priv->view) {
 		g_object_unref (G_OBJECT(property_bar->priv->view));
 	}
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
 	g_free (property_bar->priv);
+
+	G_OBJECT_CLASS (gl_ui_property_bar_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }

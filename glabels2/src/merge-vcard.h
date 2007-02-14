@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -31,7 +33,7 @@ G_BEGIN_DECLS
 /* The following object arguments are available:
  *
  * name               type             description
- * --------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------
  *
  */
 
@@ -52,7 +54,7 @@ typedef struct _glMergeVCardPrivate   glMergeVCardPrivate;
 struct _glMergeVCard {
 	glMerge              object;
 
-	glMergeVCardPrivate  *private;
+	glMergeVCardPrivate *priv;
 };
 
 struct _glMergeVCardClass {

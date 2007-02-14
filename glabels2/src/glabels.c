@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
 /**
  *  (GLABELS) Label and Business Card Creation program for GNOME
@@ -30,7 +30,6 @@
 #include <libgnomeui/gnome-window-icon.h>
 
 #include "critical-error-handler.h"
-#include "splash.h"
 #include "stock.h"
 #include "merge-init.h"
 #include "recent.h"

@@ -1,4 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  gnome-canvas-hacktext.c: Hacktext item type for GnomeCanvas widget
  *                           This is mainly used for gnome-print preview context

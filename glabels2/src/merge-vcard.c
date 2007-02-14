@@ -58,15 +58,11 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
-static glMergeClass *parent_class = NULL;
-
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void           gl_merge_vcard_class_init      (glMergeVCardClass *klass);
-static void           gl_merge_vcard_instance_init   (glMergeVCard      *object);
 static void           gl_merge_vcard_finalize        (GObject          *object);
 
 static void           gl_merge_vcard_set_property    (GObject          *object,
@@ -88,46 +84,22 @@ static void           gl_merge_vcard_copy            (glMerge          *dst_merg
                                                       glMerge          *src_merge);
 static char *         parse_next_vcard               (FILE             *fp);
 
-/* utility function prototypes go here */
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_merge_vcard_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo info = {
-                        sizeof (glMergeVCardClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) gl_merge_vcard_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (glMergeVCard),
-                        0,
-                        (GInstanceInitFunc) gl_merge_vcard_instance_init,
-                        NULL
-                };
-
-                type = g_type_register_static (GL_TYPE_MERGE,
-                                               "glMergeVCard", &info, 0);
-        }
-
-        return type;
-}
+G_DEFINE_TYPE (glMergeVCard, gl_merge_vcard, GL_TYPE_MERGE);
 
 static void
-gl_merge_vcard_class_init (glMergeVCardClass *klass)
+gl_merge_vcard_class_init (glMergeVCardClass *class)
 {
-        GObjectClass *object_class = (GObjectClass *) klass;
-        glMergeClass *merge_class  = (glMergeClass *) klass;
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        glMergeClass *merge_class  = GL_MERGE_CLASS (class);
 
         gl_debug (DEBUG_MERGE, "START");
 
-        parent_class = g_type_class_peek_parent (klass);
+        gl_merge_vcard_parent_class = g_type_class_peek_parent (class);
 
         object_class->set_property = gl_merge_vcard_set_property;
         object_class->get_property = gl_merge_vcard_get_property;
@@ -145,11 +117,11 @@ gl_merge_vcard_class_init (glMergeVCardClass *klass)
 }
 
 static void
-gl_merge_vcard_instance_init (glMergeVCard *merge_vcard)
+gl_merge_vcard_init (glMergeVCard *merge_vcard)
 {
         gl_debug (DEBUG_MERGE, "START");
 
-        merge_vcard->private = g_new0 (glMergeVCardPrivate, 1);
+        merge_vcard->priv = g_new0 (glMergeVCardPrivate, 1);
 
         gl_debug (DEBUG_MERGE, "END");
 }
@@ -157,16 +129,15 @@ gl_merge_vcard_instance_init (glMergeVCard *merge_vcard)
 static void
 gl_merge_vcard_finalize (GObject *object)
 {
-        glMergeVCard *merge_vcard;
+        glMergeVCard *merge_vcard = GL_MERGE_VCARD (object);
 
         gl_debug (DEBUG_MERGE, "START");
 
         g_return_if_fail (object && GL_IS_MERGE_VCARD (object));
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        g_free (merge_vcard->priv);
 
-        merge_vcard = GL_MERGE_VCARD (object);
-        g_free (merge_vcard->private);
+        G_OBJECT_CLASS (gl_merge_vcard_parent_class)->finalize (object);
 
         gl_debug (DEBUG_MERGE, "END");
 }
@@ -263,7 +234,7 @@ gl_merge_vcard_open (glMerge *merge)
         src = gl_merge_get_src (merge);
 
         if (src != NULL) {
-                merge_vcard->private->fp = fopen (src, "r");
+                merge_vcard->priv->fp = fopen (src, "r");
         }
 
         g_free (src);
@@ -281,9 +252,9 @@ gl_merge_vcard_close (glMerge *merge)
 
         merge_vcard = GL_MERGE_VCARD (merge);
 
-        if (merge_vcard->private->fp != NULL) {
-                fclose (merge_vcard->private->fp);
-                merge_vcard->private->fp = NULL;
+        if (merge_vcard->priv->fp != NULL) {
+                fclose (merge_vcard->priv->fp);
+                merge_vcard->priv->fp = NULL;
         }
 }
 
@@ -302,7 +273,7 @@ gl_merge_vcard_get_record (glMerge *merge)
 
         merge_vcard = GL_MERGE_VCARD (merge);
 
-        vcard = parse_next_vcard(merge_vcard->private->fp);
+        vcard = parse_next_vcard(merge_vcard->priv->fp);
         if (vcard == NULL || vcard[0] == '\0') {
                 return NULL; /* EOF */
         }

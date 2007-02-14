@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -44,14 +46,10 @@
 /* Private globals                           */
 /*===========================================*/
 
-static GObjectClass *parent_class;
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_print_copies_class_init    (glWdgtPrintCopiesClass * class);
-static void gl_wdgt_print_copies_instance_init (glWdgtPrintCopies * copies);
 static void gl_wdgt_print_copies_finalize      (GObject * object);
 
 static void gl_wdgt_print_copies_construct     (glWdgtPrintCopies * copies,
@@ -72,46 +70,20 @@ preview_pressed (glWdgtMiniPreview *mini_preview,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_wdgt_print_copies_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glWdgtPrintCopiesClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_wdgt_print_copies_class_init,
-			NULL,
-			NULL,
-			sizeof (glWdgtPrintCopies),
-			0,
-			(GInstanceInitFunc) gl_wdgt_print_copies_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_HBOX,
-					       "glWdgtPrintCopies", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glWdgtPrintCopies, gl_wdgt_print_copies, GTK_TYPE_HBOX);
 
 static void
 gl_wdgt_print_copies_class_init (glWdgtPrintCopiesClass * class)
 {
-	GObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	object_class = (GObjectClass *) class;
-
-	parent_class = g_type_class_peek_parent (class);
+	gl_wdgt_print_copies_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_print_copies_finalize;
 }
 
 static void
-gl_wdgt_print_copies_instance_init (glWdgtPrintCopies * copies)
+gl_wdgt_print_copies_init (glWdgtPrintCopies * copies)
 {
 	copies->labels_per_sheet = 0;
 
@@ -128,15 +100,12 @@ gl_wdgt_print_copies_instance_init (glWdgtPrintCopies * copies)
 static void
 gl_wdgt_print_copies_finalize (GObject * object)
 {
-	glWdgtPrintCopies *copies;
-	glWdgtPrintCopiesClass *class;
+	glWdgtPrintCopies *copies = GL_WDGT_PRINT_COPIES (object);
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_PRINT_COPIES (object));
 
-	copies = GL_WDGT_PRINT_COPIES (object);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_wdgt_print_copies_parent_class)->finalize (object);
 }
 
 GtkWidget *

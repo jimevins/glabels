@@ -64,15 +64,10 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
-static glMergeClass *parent_class = NULL;
-
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void           gl_merge_evolution_class_init      (glMergeEvolutionClass *klass);
-static void           gl_merge_evolution_instance_init   (glMergeEvolution      *object);
 static void           gl_merge_evolution_finalize        (GObject          *object);
 
 static void           gl_merge_evolution_set_property    (GObject          *object,
@@ -100,41 +95,17 @@ static void           free_field_list                    (GList *fields);
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_merge_evolution_get_type (void)
-{
-        static GType type = 0;
-
-        if (!type) {
-                static const GTypeInfo info = {
-                        sizeof (glMergeEvolutionClass),
-                        NULL,
-                        NULL,
-                        (GClassInitFunc) gl_merge_evolution_class_init,
-                        NULL,
-                        NULL,
-                        sizeof (glMergeEvolution),
-                        0,
-                        (GInstanceInitFunc) gl_merge_evolution_instance_init,
-                        NULL
-                };
-
-                type = g_type_register_static (GL_TYPE_MERGE,
-                                               "glMergeEvolution", &info, 0);
-        }
-
-        return type;
-}
+G_DEFINE_TYPE (glMergeEvolution, gl_merge_evolution, GL_TYPE_MERGE);
 
 static void
-gl_merge_evolution_class_init (glMergeEvolutionClass *klass)
+gl_merge_evolution_class_init (glMergeEvolutionClass *class)
 {
-        GObjectClass *object_class = (GObjectClass *) klass;
-        glMergeClass *merge_class  = (glMergeClass *) klass;
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
+        glMergeClass *merge_class  = GL_MERGE_CLASS (class);
 
         gl_debug (DEBUG_MERGE, "START");
 
-        parent_class = g_type_class_peek_parent (klass);
+        gl_merge_evolution_parent_class = g_type_class_peek_parent (class);
 
         object_class->set_property = gl_merge_evolution_set_property;
         object_class->get_property = gl_merge_evolution_get_property;
@@ -160,12 +131,12 @@ gl_merge_evolution_class_init (glMergeEvolutionClass *klass)
 }
 
 static void
-gl_merge_evolution_instance_init (glMergeEvolution *merge_evolution)
+gl_merge_evolution_init (glMergeEvolution *merge_evolution)
 {
         gl_debug (DEBUG_MERGE, "START");
 
-        merge_evolution->private = g_new0 (glMergeEvolutionPrivate, 1);
-        merge_evolution->private->query = g_strdup(DEFAULT_QUERY);
+        merge_evolution->priv = g_new0 (glMergeEvolutionPrivate, 1);
+        merge_evolution->priv->query = g_strdup(DEFAULT_QUERY);
 
         gl_debug (DEBUG_MERGE, "END");
 }
@@ -173,18 +144,17 @@ gl_merge_evolution_instance_init (glMergeEvolution *merge_evolution)
 static void
 gl_merge_evolution_finalize (GObject *object)
 {
-        glMergeEvolution *merge_evolution;
+        glMergeEvolution *merge_evolution = GL_MERGE_EVOLUTION (object);
 
         gl_debug (DEBUG_MERGE, "START");
 
         g_return_if_fail (object && GL_IS_MERGE_EVOLUTION (object));
 
-        G_OBJECT_CLASS (parent_class)->finalize (object);
+        free_field_list(merge_evolution->priv->fields);
+        g_free (merge_evolution->priv->query);
+        g_free (merge_evolution->priv);
 
-        merge_evolution = GL_MERGE_EVOLUTION (object);
-        free_field_list(merge_evolution->private->fields);
-        g_free (merge_evolution->private->query);
-        g_free (merge_evolution->private);
+        G_OBJECT_CLASS (gl_merge_evolution_parent_class)->finalize (object);
 
         gl_debug (DEBUG_MERGE, "END");
 }
@@ -205,10 +175,10 @@ gl_merge_evolution_set_property (GObject      *object,
         switch (param_id) {
 
         case ARG_QUERY:
-                g_free (merge_evolution->private->query);
-                merge_evolution->private->query = g_value_dup_string (value);
+                g_free (merge_evolution->priv->query);
+                merge_evolution->priv->query = g_value_dup_string (value);
                 gl_debug (DEBUG_MERGE, "ARG \"query\" = \"%s\"",
-                          merge_evolution->private->query);
+                          merge_evolution->priv->query);
                 break;
 
         default:
@@ -235,7 +205,7 @@ gl_merge_evolution_get_property (GObject     *object,
         switch (param_id) {
 
         case ARG_QUERY:
-                g_value_set_string (value, merge_evolution->private->query);
+                g_value_set_string (value, merge_evolution->priv->query);
                 break;
 
         default:
@@ -262,7 +232,7 @@ gl_merge_evolution_get_key_list (glMerge *merge)
 
         /* for the previously retrieved supported fileds, go through them and find
          * their pretty names */
-        for (iter = merge_evolution->private->fields; 
+        for (iter = merge_evolution->priv->fields; 
                  iter != NULL; 
                  iter = g_list_next(iter)) 
         {
@@ -303,38 +273,38 @@ gl_merge_evolution_open (glMerge *merge)
 
         merge_evolution = GL_MERGE_EVOLUTION (merge);
 
-        query = e_book_query_from_string(merge_evolution->private->query);
+        query = e_book_query_from_string(merge_evolution->priv->query);
         if (!query) {
                 g_warning (_("Couldn't construct query"));
                 return;
         }
 
-        merge_evolution->private->book = e_book_new_system_addressbook(&error);
-        if (!merge_evolution->private->book) {
+        merge_evolution->priv->book = e_book_new_system_addressbook(&error);
+        if (!merge_evolution->priv->book) {
                 g_warning (_("Couldn't open addressbook: %s"), error->message);
                 e_book_query_unref(query);
                 g_error_free (error);
                 return;
         }
 
-        if (!e_book_open(merge_evolution->private->book, TRUE, &error)) {
+        if (!e_book_open(merge_evolution->priv->book, TRUE, &error)) {
                 g_warning (_("Couldn't open addressbook: %s"), error->message);
                 g_error_free (error);
                 e_book_query_unref(query);
-                g_object_unref(merge_evolution->private->book);
-                merge_evolution->private->book = NULL;
+                g_object_unref(merge_evolution->priv->book);
+                merge_evolution->priv->book = NULL;
                 return;
         }
 
         /* fetch the list of fields supported by this address book */
-        status = e_book_get_supported_fields(merge_evolution->private->book,
+        status = e_book_get_supported_fields(merge_evolution->priv->book,
                                                                                  &fields, &error);
         if (status == FALSE) {
                 g_warning (_("Couldn't list available fields: %s"), error->message);
                 g_error_free (error);
                 e_book_query_unref(query);
-                g_object_unref(merge_evolution->private->book);
-                merge_evolution->private->book = NULL;
+                g_object_unref(merge_evolution->priv->book);
+                merge_evolution->priv->book = NULL;
                 return;
         }
 
@@ -349,25 +319,25 @@ gl_merge_evolution_open (glMerge *merge)
                         continue;
                 }
 
-                merge_evolution->private->fields = 
-                        g_list_prepend(merge_evolution->private->fields, field_id);
+                merge_evolution->priv->fields = 
+                        g_list_prepend(merge_evolution->priv->fields, field_id);
         }
         free_field_list(fields); /* don't need the list of names anymore */
 
-        gl_debug(DEBUG_MERGE, "Field list length: %d", g_list_length(merge_evolution->private->fields));
+        gl_debug(DEBUG_MERGE, "Field list length: %d", g_list_length(merge_evolution->priv->fields));
 
         /* finally retrieve the contacts */
-        status = e_book_get_contacts (merge_evolution->private->book,
+        status = e_book_get_contacts (merge_evolution->priv->book,
                                       query,
-                                      &merge_evolution->private->contacts,
+                                      &merge_evolution->priv->contacts,
                                       &error);
         if (status == FALSE) {
                 g_warning (_("Couldn't get contacts: %s"), error->message);
                 g_error_free (error);
                 e_book_query_unref(query);
-                free_field_list(merge_evolution->private->fields);
-                g_object_unref(merge_evolution->private->book);
-                merge_evolution->private->book = NULL;
+                free_field_list(merge_evolution->priv->fields);
+                g_object_unref(merge_evolution->priv->book);
+                merge_evolution->priv->book = NULL;
 
                 return;
         }
@@ -392,10 +362,10 @@ gl_merge_evolution_close (glMerge *merge)
         merge_evolution = GL_MERGE_EVOLUTION (merge);
 
         /* unref all of the objects created in _open */
-        g_object_unref(merge_evolution->private->book);
-        merge_evolution->private->book = NULL;
+        g_object_unref(merge_evolution->priv->book);
+        merge_evolution->priv->book = NULL;
 
-        for (iter = merge_evolution->private->contacts; 
+        for (iter = merge_evolution->priv->contacts; 
              iter != NULL; 
              iter = g_list_next(iter))
         {
@@ -403,8 +373,8 @@ gl_merge_evolution_close (glMerge *merge)
 
                 g_object_unref(contact);
         }
-        g_list_free(merge_evolution->private->contacts);
-        merge_evolution->private->contacts = NULL;
+        g_list_free(merge_evolution->priv->contacts);
+        merge_evolution->priv->contacts = NULL;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -423,7 +393,7 @@ gl_merge_evolution_get_record (glMerge *merge)
 
         merge_evolution = GL_MERGE_EVOLUTION (merge);
 
-        head = merge_evolution->private->contacts;
+        head = merge_evolution->priv->contacts;
         if (head == NULL) {
                 return NULL; /* past the last record */
         }
@@ -437,7 +407,7 @@ gl_merge_evolution_get_record (glMerge *merge)
          * that contact */
 
         /* iterate through the supported fields, and add them to the list */
-        for (iter = merge_evolution->private->fields;
+        for (iter = merge_evolution->priv->fields;
              iter != NULL;
              iter = g_list_next(iter))
         {
@@ -457,8 +427,8 @@ gl_merge_evolution_get_record (glMerge *merge)
 
         /* do a destructive read */
         g_object_unref (contact);
-        merge_evolution->private->contacts = 
-                g_list_remove_link (merge_evolution->private->contacts, head);
+        merge_evolution->priv->contacts = 
+                g_list_remove_link (merge_evolution->priv->contacts, head);
         g_list_free_1 (head);
 
         return record;
@@ -481,11 +451,11 @@ gl_merge_evolution_copy (glMerge *dst_merge,
         dst_merge_evolution = GL_MERGE_EVOLUTION (dst_merge);
         src_merge_evolution = GL_MERGE_EVOLUTION (src_merge);
 
-        dst_merge_evolution->private->query = g_strdup(src_merge_evolution->private->query);
+        dst_merge_evolution->priv->query = g_strdup(src_merge_evolution->priv->query);
 
-        dst_merge_evolution->private->fields = g_list_copy(src_merge_evolution->private->fields);
-        for (src_iter = src_merge_evolution->private->fields,
-                     dst_iter = dst_merge_evolution->private->fields; 
+        dst_merge_evolution->priv->fields = g_list_copy(src_merge_evolution->priv->fields);
+        for (src_iter = src_merge_evolution->priv->fields,
+                     dst_iter = dst_merge_evolution->priv->fields; 
              src_iter != NULL && dst_iter != NULL; 
              src_iter = g_list_next(src_iter), dst_iter = g_list_next(dst_iter))
         {

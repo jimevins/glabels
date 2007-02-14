@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -62,16 +64,12 @@ typedef struct {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GObjectClass *parent_class = NULL;
-
 static GList *backends = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void           gl_merge_class_init    (glMergeClass   *klass);
-static void           gl_merge_instance_init (glMerge        *object);
 static void           gl_merge_finalize      (GObject        *object);
 
 static void           merge_open             (glMerge        *merge);
@@ -227,40 +225,16 @@ gl_merge_description_to_name (gchar *description)
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_merge_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glMergeClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_merge_class_init,
-			NULL,
-			NULL,
-			sizeof (glMerge),
-			0,
-			(GInstanceInitFunc) gl_merge_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT,
-					       "glMerge", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glMerge, gl_merge, G_TYPE_OBJECT);
 
 static void
-gl_merge_class_init (glMergeClass *klass)
+gl_merge_class_init (glMergeClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	parent_class = g_type_class_peek_parent (klass);
+	gl_merge_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_merge_finalize;
 
@@ -268,11 +242,11 @@ gl_merge_class_init (glMergeClass *klass)
 }
 
 static void
-gl_merge_instance_init (glMerge *merge)
+gl_merge_init (glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "START");
 
-	merge->private = g_new0 (glMergePrivate, 1);
+	merge->priv = g_new0 (glMergePrivate, 1);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -280,17 +254,19 @@ gl_merge_instance_init (glMerge *merge)
 static void
 gl_merge_finalize (GObject *object)
 {
+	glMerge *merge = GL_MERGE (object);
+
 	gl_debug (DEBUG_MERGE, "START");
 
 	g_return_if_fail (object && GL_IS_MERGE (object));
 
-	merge_free_record_list (&GL_MERGE(object)->private->record_list);
-	g_free (GL_MERGE(object)->private->name);
-	g_free (GL_MERGE(object)->private->description);
-	g_free (GL_MERGE(object)->private->src);
-	g_free (GL_MERGE(object)->private);
+	merge_free_record_list (&merge->priv->record_list);
+	g_free (merge->priv->name);
+	g_free (merge->priv->description);
+	g_free (merge->priv->src);
+	g_free (merge->priv);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_merge_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -316,9 +292,9 @@ gl_merge_new (gchar *name)
 							 backend->n_params,
 							 backend->params));
 
-			merge->private->name        = g_strdup (name);
-			merge->private->description = g_strdup (backend->description);
-			merge->private->src_type    = backend->src_type;
+			merge->priv->name        = g_strdup (name);
+			merge->priv->description = g_strdup (backend->description);
+			merge->priv->src_type    = backend->src_type;
 
 			break;
 		}
@@ -351,12 +327,12 @@ gl_merge_dup (glMerge *src_merge)
 	g_return_val_if_fail (GL_IS_MERGE (src_merge), NULL);
 
 	dst_merge = g_object_new (G_OBJECT_TYPE(src_merge), NULL);
-	dst_merge->private->name        = g_strdup (src_merge->private->name);
-	dst_merge->private->description = g_strdup (src_merge->private->description);
-	dst_merge->private->src         = g_strdup (src_merge->private->src);
-	dst_merge->private->src_type    = src_merge->private->src_type;
-	dst_merge->private->record_list 
-		= merge_dup_record_list (src_merge->private->record_list);
+	dst_merge->priv->name        = g_strdup (src_merge->priv->name);
+	dst_merge->priv->description = g_strdup (src_merge->priv->description);
+	dst_merge->priv->src         = g_strdup (src_merge->priv->src);
+	dst_merge->priv->src_type    = src_merge->priv->src_type;
+	dst_merge->priv->record_list 
+		= merge_dup_record_list (src_merge->priv->record_list);
 
 	if ( GL_MERGE_GET_CLASS(src_merge)->copy != NULL ) {
 
@@ -384,7 +360,7 @@ gl_merge_get_name (glMerge *merge)
 
 	g_return_val_if_fail (GL_IS_MERGE (merge), g_strdup("None"));
 
-	return g_strdup(merge->private->name);
+	return g_strdup(merge->priv->name);
 }
 
 /*****************************************************************************/
@@ -401,7 +377,7 @@ gl_merge_get_description (glMerge *merge)
 
 	g_return_val_if_fail (GL_IS_MERGE (merge), g_strdup(_("None")));
 
-	return g_strdup(merge->private->description);
+	return g_strdup(merge->priv->description);
 }
 
 /*****************************************************************************/
@@ -418,7 +394,7 @@ gl_merge_get_src_type (glMerge *merge)
 
 	g_return_val_if_fail (GL_IS_MERGE (merge), GL_MERGE_SRC_IS_FIXED);
 
-	return merge->private->src_type;
+	return merge->priv->src_type;
 }
 
 /*****************************************************************************/
@@ -444,24 +420,24 @@ gl_merge_set_src (glMerge *merge,
 	if ( src == NULL)
 	{
 
-		if ( merge->private->src != NULL )
+		if ( merge->priv->src != NULL )
 		{
-			g_free (merge->private->src);
+			g_free (merge->priv->src);
 		}
-		merge->private->src = NULL;
-		merge_free_record_list (&merge->private->record_list);
+		merge->priv->src = NULL;
+		merge_free_record_list (&merge->priv->record_list);
 
 	}
 	else
 	{
 
-		if ( merge->private->src != NULL )
+		if ( merge->priv->src != NULL )
 		{
-			g_free(merge->private->src);
+			g_free(merge->priv->src);
 		}
-		merge->private->src = g_strdup (src);
+		merge->priv->src = g_strdup (src);
 
-		merge_free_record_list (&merge->private->record_list);
+		merge_free_record_list (&merge->priv->record_list);
 			
 		merge_open (merge);
 		while ( (record = merge_get_record (merge)) != NULL )
@@ -469,7 +445,7 @@ gl_merge_set_src (glMerge *merge,
 			record_list = g_list_append( record_list, record );
 		}
 		merge_close (merge);
-		merge->private->record_list = record_list;
+		merge->priv->record_list = record_list;
 
 	}
 		     
@@ -491,7 +467,7 @@ gl_merge_get_src (glMerge *merge)
 
 	g_return_val_if_fail (GL_IS_MERGE (merge), NULL);
 
-	return g_strdup(merge->private->src);
+	return g_strdup(merge->priv->src);
 }
 
 /*****************************************************************************/
@@ -734,7 +710,7 @@ gl_merge_get_record_list (glMerge *merge)
 	gl_debug (DEBUG_MERGE, "");
 	      
 	if ( merge != NULL ) {
-		return merge->private->record_list;
+		return merge->priv->record_list;
 	} else {
 		return NULL;
 	}
@@ -801,7 +777,7 @@ gl_merge_get_record_count (glMerge *merge)
 	gl_debug (DEBUG_MERGE, "START");
 
 	count = 0;
-	for ( p=merge->private->record_list; p!=NULL; p=p->next ) {
+	for ( p=merge->priv->record_list; p!=NULL; p=p->next ) {
 		record = (glMergeRecord *)p->data;
 
 		if ( record->select_flag ) count ++;

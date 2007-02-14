@@ -197,114 +197,85 @@ enum {
 /* Private globals.                                       */
 /*========================================================*/
 
-static GtkAssistantClass* parent_class = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_template_designer_class_init 	  (glTemplateDesignerClass *klass);
-static void gl_template_designer_init       	  (glTemplateDesigner      *dlg);
 static void gl_template_designer_finalize   	  (GObject                 *object);
-static void gl_template_designer_construct        (glTemplateDesigner      *dlg);
+static void gl_template_designer_construct        (glTemplateDesigner      *dialog);
 
-static void     construct_start_page              (glTemplateDesigner      *dlg,
+static void     construct_start_page              (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_name_page               (glTemplateDesigner      *dlg,
+static void     construct_name_page               (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_pg_size_page            (glTemplateDesigner      *dlg,
+static void     construct_pg_size_page            (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_shape_page              (glTemplateDesigner      *dlg,
+static void     construct_shape_page              (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_rect_size_page          (glTemplateDesigner      *dlg,
+static void     construct_rect_size_page          (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_round_size_page         (glTemplateDesigner      *dlg,
+static void     construct_round_size_page         (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_cd_size_page            (glTemplateDesigner      *dlg,
+static void     construct_cd_size_page            (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_nlayouts_page           (glTemplateDesigner      *dlg,
+static void     construct_nlayouts_page           (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_layout_page             (glTemplateDesigner      *dlg,
+static void     construct_layout_page             (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     construct_finish_page             (glTemplateDesigner      *dlg,
+static void     construct_finish_page             (glTemplateDesigner      *dialog,
 						   GdkPixbuf               *logo);
 
-static void     cancel_cb                         (glTemplateDesigner      *dlg);
-static void     apply_cb                          (glTemplateDesigner      *dlg);
-static void     close_cb                          (glTemplateDesigner      *dlg);
-static void     prepare_cb                        (glTemplateDesigner      *dlg,
+static void     cancel_cb                         (glTemplateDesigner      *dialog);
+static void     apply_cb                          (glTemplateDesigner      *dialog);
+static void     close_cb                          (glTemplateDesigner      *dialog);
+static void     prepare_cb                        (glTemplateDesigner      *dialog,
                                                    GtkWidget               *page);
 
 static gint     forward_page_function             (gint                     current_page,
                                                    gpointer                 data);
 
-static void     name_page_changed_cb              (glTemplateDesigner      *dlg);
+static void     name_page_changed_cb              (glTemplateDesigner      *dialog);
 
-static void     pg_size_page_changed_cb           (glTemplateDesigner      *dlg);
+static void     pg_size_page_changed_cb           (glTemplateDesigner      *dialog);
 
-static void     rect_size_page_prepare_cb         (glTemplateDesigner      *dlg);
+static void     rect_size_page_prepare_cb         (glTemplateDesigner      *dialog);
 
-static void     round_size_page_prepare_cb        (glTemplateDesigner      *dlg);
+static void     round_size_page_prepare_cb        (glTemplateDesigner      *dialog);
 
-static void     cd_size_page_prepare_cb           (glTemplateDesigner      *dlg);
+static void     cd_size_page_prepare_cb           (glTemplateDesigner      *dialog);
 
-static void     layout_page_prepare_cb            (glTemplateDesigner      *dlg);
+static void     layout_page_prepare_cb            (glTemplateDesigner      *dialog);
 
-static void     layout_page_changed_cb            (glTemplateDesigner      *dlg);
+static void     layout_page_changed_cb            (glTemplateDesigner      *dialog);
 
-static void     print_test_cb                     (glTemplateDesigner      *dlg);
+static void     print_test_cb                     (glTemplateDesigner      *dialog);
 
-static glTemplate *build_template                 (glTemplateDesigner      *dlg);
+static glTemplate *build_template                 (glTemplateDesigner      *dialog);
 
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-GType
-gl_template_designer_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type)
-    	{
-      		static const GTypeInfo info =
-      		{
-			sizeof (glTemplateDesignerClass),
-        		NULL,		/* base_init */
-        		NULL,		/* base_finalize */
-        		(GClassInitFunc) gl_template_designer_class_init,
-        		NULL,           /* class_finalize */
-        		NULL,           /* class_data */
-        		sizeof (glTemplateDesigner),
-        		0,              /* n_preallocs */
-        		(GInstanceInitFunc) gl_template_designer_init,
-			NULL
-      		};
-
-     		type = g_type_register_static (GTK_TYPE_ASSISTANT,
-					       "glTemplateDesigner", &info, 0);
-    	}
-
-	return type;
-}
+G_DEFINE_TYPE (glTemplateDesigner, gl_template_designer, GTK_TYPE_ASSISTANT);
 
 static void
-gl_template_designer_class_init (glTemplateDesignerClass *klass)
+gl_template_designer_class_init (glTemplateDesignerClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_TEMPLATE, "");
 	
-  	parent_class = g_type_class_peek_parent (klass);
+  	gl_template_designer_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_template_designer_finalize;  	
 }
@@ -324,20 +295,17 @@ gl_template_designer_init (glTemplateDesigner *dialog)
 static void 
 gl_template_designer_finalize (GObject *object)
 {
-	glTemplateDesigner* dialog;
+	glTemplateDesigner* dialog = GL_TEMPLATE_DESIGNER (object);
 	
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	g_return_if_fail (object != NULL);
-	
-   	dialog = GL_TEMPLATE_DESIGNER (object);
-
 	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
 	g_free (dialog->priv);
+
+	G_OBJECT_CLASS (gl_template_designer_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }

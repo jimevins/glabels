@@ -89,8 +89,6 @@ enum {
 /* Private globals                                                          */
 /*==========================================================================*/
 
-static GtkContainerClass *parent_class;
-
 static guint signals[LAST_SIGNAL] = {0};
 
 /* "CLIPBOARD" selection */
@@ -120,8 +118,6 @@ static gdouble zooms[] = {
 /* Local function prototypes                                                */
 /*==========================================================================*/
 
-static void       gl_view_class_init              (glViewClass *class);
-static void       gl_view_init                    (glView *view);
 static void       gl_view_finalize                (GObject *object);
 
 static void       gl_view_construct               (glView *view);
@@ -215,40 +211,16 @@ static void       selection_received_cb          (GtkWidget         *widget,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_view_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glViewClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_view_class_init,
-			NULL,
-			NULL,
-			sizeof (glView),
-			0,
-			(GInstanceInitFunc) gl_view_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_VBOX,
-					       "glView", &info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (glView, gl_view, GTK_TYPE_VBOX);
 
 static void
 gl_view_class_init (glViewClass *class)
 {
-	GObjectClass *object_class = (GObjectClass *) class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	parent_class = g_type_class_peek_parent (class);
+	gl_view_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_finalize;
 
@@ -332,20 +304,18 @@ gl_view_init (glView *view)
 static void
 gl_view_finalize (GObject *object)
 {
-	glView *view;
+	glView *view = GL_VIEW (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_VIEW (object));
 
-	view = GL_VIEW (object);
-
 	if (view->default_font_family) {
 		g_free (view->default_font_family);
 	}
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_view_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

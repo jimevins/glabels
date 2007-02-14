@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -48,14 +50,10 @@
 /* Private globals                           */
 /*===========================================*/
 
-static GObjectClass *parent_class;
-
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_print_merge_class_init    (glWdgtPrintMergeClass * class);
-static void gl_wdgt_print_merge_instance_init (glWdgtPrintMerge * merge);
 static void gl_wdgt_print_merge_finalize      (GObject * object);
 
 static void gl_wdgt_print_merge_construct     (glWdgtPrintMerge * merge,
@@ -74,46 +72,21 @@ static void spin_cb                           (GtkSpinButton * spinbutton,
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
-GType
-gl_wdgt_print_merge_get_type (void)
-{
-	static GType type = 0;
+G_DEFINE_TYPE (glWdgtPrintMerge, gl_wdgt_print_merge, GTK_TYPE_HBOX);
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (glWdgtPrintMergeClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) gl_wdgt_print_merge_class_init,
-			NULL,
-			NULL,
-			sizeof (glWdgtPrintMerge),
-			0,
-			(GInstanceInitFunc) gl_wdgt_print_merge_instance_init,
-			NULL
-		};
-
-		type = g_type_register_static (GTK_TYPE_HBOX,
-					       "glWdgtPrintMerge", &info, 0);
-	}
-
-	return type;
-}
 
 static void
 gl_wdgt_print_merge_class_init (glWdgtPrintMergeClass * class)
 {
-	GObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	object_class = (GObjectClass *) class;
-
-	parent_class = g_type_class_peek_parent (class);
+	gl_wdgt_print_merge_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_print_merge_finalize;
 }
 
 static void
-gl_wdgt_print_merge_instance_init (glWdgtPrintMerge * merge)
+gl_wdgt_print_merge_init (glWdgtPrintMerge * merge)
 {
 	merge->mini_preview = NULL;
 
@@ -126,15 +99,12 @@ gl_wdgt_print_merge_instance_init (glWdgtPrintMerge * merge)
 static void
 gl_wdgt_print_merge_finalize (GObject * object)
 {
-	glWdgtPrintMerge *merge;
-	glWdgtPrintMergeClass *class;
+	glWdgtPrintMerge *merge = GL_WDGT_PRINT_MERGE (object);
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_PRINT_MERGE (object));
 
-	merge = GL_WDGT_PRINT_MERGE (object);
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_wdgt_print_merge_parent_class)->finalize (object);
 }
 
 GtkWidget *

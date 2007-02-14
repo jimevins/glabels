@@ -1,3 +1,5 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
@@ -49,7 +51,7 @@ typedef struct _glViewHighlightPrivate   glViewHighlightPrivate;
 struct _glViewHighlight {
 	GObject                  parent_object;
 
-	glViewHighlightPrivate  *private;
+	glViewHighlightPrivate  *priv;
 };
 
 struct _glViewHighlightClass {
