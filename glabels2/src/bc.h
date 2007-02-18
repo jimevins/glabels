@@ -26,6 +26,7 @@
 
 #include <glib/gtypes.h>
 #include <glib/glist.h>
+#include <pango/pango.h>
 
 G_BEGIN_DECLS
 
@@ -53,7 +54,7 @@ typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
 
 
 #define GL_BARCODE_FONT_FAMILY      "Sans"
-#define GL_BARCODE_FONT_WEIGHT      GNOME_FONT_BOOK
+#define GL_BARCODE_FONT_WEIGHT      PANGO_WEIGHT_NORMAL
 
 
 glBarcode       *gl_barcode_new              (const gchar    *id,
