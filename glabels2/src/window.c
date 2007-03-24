@@ -208,8 +208,6 @@ gl_window_init (glWindow *window)
 static void
 gl_window_finalize (GObject *object)
 {
-	glWindow *window = GL_WINDOW (object);
-
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (object != NULL);

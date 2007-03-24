@@ -148,7 +148,7 @@ gl_recent_create_menu (void)
 
         recent_filter = gtk_recent_filter_new ();
         gtk_recent_filter_add_mime_type (recent_filter, GLABELS_MIME_TYPE);
-        gtk_recent_chooser_set_filter (recent_menu, recent_filter);
+        gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (recent_menu), recent_filter);
 
         gl_debug (DEBUG_RECENT, "END");
         return recent_menu;

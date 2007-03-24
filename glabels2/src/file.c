@@ -27,6 +27,7 @@
 #include "file.h"
 
 #include <glib/gi18n.h>
+#include <gtk/gtkmain.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkfilechooserdialog.h>
@@ -178,8 +179,6 @@ gl_file_properties (glLabel   *label,
 		    glWindow  *window)
 {
 	GtkWidget    *dialog;
-        glTemplate   *template;
-        gboolean      rotate_flag;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -194,15 +193,13 @@ gl_file_properties (glLabel   *label,
 	g_signal_connect (G_OBJECT(dialog), "response",
 			  G_CALLBACK (properties_response), dialog);
 
-        template = gl_label_get_template (label);
-        rotate_flag = gl_label_get_rotate_flag (label);
-
-        if (template->page_size != NULL) {
+        if (label->template->page_size != NULL) {
                 gl_new_label_dialog_set_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
-                                                            template->page_size,                                                            NULL);
+                                                           label->template->page_size,
+                                                           NULL);
         }
-        if (template->name != NULL) {
-                gchar *template_name = gl_template_get_name_with_desc (template);
+        if (label->template->name != NULL) {
+                gchar *template_name = gl_template_get_name_with_desc (label->template);
                 gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog),
                                                template_name);
                 gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog),
@@ -210,7 +207,7 @@ gl_file_properties (glLabel   *label,
                 g_free (template_name);
         }
         gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog),
-					      rotate_flag);
+					      label->rotate_flag);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_widget_show_all (GTK_WIDGET (dialog));
@@ -228,8 +225,6 @@ properties_response (GtkDialog *dialog,
 {
 	glTemplate *template;
 	glLabel    *label;
-	glWindow   *window;
-	GtkWidget  *new_window;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -324,7 +319,6 @@ open_response (GtkDialog     *chooser,
 	gchar            *raw_filename;
 	gchar 		 *filename;
 	GtkWidget        *dialog;
-	gint              ret;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -421,7 +415,6 @@ gl_file_open_real (const gchar     *filename,
 	gchar            *abs_filename;
 	glLabel          *label;
 	glXMLLabelStatus  status;
-	gint              ret;
 	GtkWidget        *new_window;
 
 	gl_debug (DEBUG_FILE, "START");
@@ -482,7 +475,6 @@ gl_file_save (glLabel   *label,
 	      glWindow  *window)
 {
 	glXMLLabelStatus  status;
-	GError           *error = NULL;
 	gchar            *filename = NULL;
 
 	gl_debug (DEBUG_FILE, "");
@@ -759,10 +751,9 @@ gl_file_close (glWindow *window)
 		label = view->label;
 
 		if (gl_label_is_modified (label))	{
-			GtkWidget *dialog, *w;
+			GtkWidget *dialog;
 			gchar *fname = NULL;
 			gint ret;
-			gboolean exiting;
 
 			fname = gl_label_get_short_name (label);
 			

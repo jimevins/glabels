@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_text.h:  GLabels canvas item wrapper widget
+ *  view_text.h:  GLabels label text object view
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,29 +43,38 @@ typedef struct _glViewTextClass     glViewTextClass;
 typedef struct _glViewTextPrivate   glViewTextPrivate;
 
 struct _glViewText {
-	glViewObject        parent_object;
+	glViewObject       parent_object;
 
-	glViewTextPrivate  *priv;
+	glViewTextPrivate *priv;
 };
 
 struct _glViewTextClass {
-	glViewObjectClass   parent_class;
+	glViewObjectClass  parent_class;
 };
 
 
 GType          gl_view_text_get_type (void) G_GNUC_CONST;
 
 glViewObject  *gl_view_text_new      (glLabelText *object,
-				      glView      *view);
+                                      glView      *view);
 
 
 /* cursor for creating text objects */
 GdkCursor *gl_view_text_get_create_cursor (void);
 
-/* event handler for creating text objects */
-gint gl_view_text_create_event_handler    (GnomeCanvas *canvas,
-					   GdkEvent    *event,
-					   glView      *view);
+/* Object creation handlers. */
+void       gl_view_text_create_button_press_event   (glView *view,
+                                                     gdouble x,
+                                                     gdouble y);
+
+void       gl_view_text_create_motion_event         (glView *view,
+                                                     gdouble x,
+                                                     gdouble y);
+
+void       gl_view_text_create_button_release_event (glView *view,
+                                                     gdouble x,
+                                                     gdouble y);
+
 
 G_END_DECLS
 

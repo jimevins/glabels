@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_text.c:  GLabels label text object widget
+ *  view_barcode.c:  GLabels label barcode object view
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,14 +27,7 @@
 
 #include <glib/gi18n.h>
 #include <glib/gmem.h>
-#include <glib/glist.h>
-#include <gtk/gtkmenu.h>
-#include <libgnomeprint/gnome-glyphlist.h>
-#include <string.h>
-#include <math.h>
 
-#include "canvas-hacktext.h"
-#include "view-highlight.h"
 #include "color.h"
 #include "object-editor.h"
 #include "stock.h"
@@ -53,9 +46,6 @@
 /*========================================================*/
 
 struct _glViewBarcodePrivate {
-
-	GList           *item_list;
-
 };
 
 /*========================================================*/
@@ -67,28 +57,29 @@ struct _glViewBarcodePrivate {
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void       gl_view_barcode_finalize              (GObject             *object);
+static void       gl_view_barcode_finalize          (GObject          *object);
 
-static GtkWidget *construct_properties_editor           (glViewObject        *view_object);
+static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
 
-static void       update_canvas_item_from_object_cb     (glLabelObject       *object,
-							 glViewBarcode       *view_bc);
+static void       update_object_from_editor_cb      (glObjectEditor   *editor,
+						     glLabelObject    *object);
 
-static void       update_object_from_editor_cb          (glObjectEditor      *editor,
-							 glLabelObject       *object);
+static void       update_editor_from_object_cb      (glLabelObject    *object,
+						     glObjectEditor   *editor);
 
-static void       update_editor_from_object_cb          (glLabelObject       *object,
-							 glObjectEditor      *editor);
+static void       update_editor_from_move_cb        (glLabelObject    *object,
+						     gdouble           dx,
+						     gdouble           dy,
+						     glObjectEditor   *editor);
 
-static void       update_editor_from_move_cb            (glLabelObject       *object,
-							 gdouble              dx,
-							 gdouble              dy,
-							 glObjectEditor      *editor);
+static void       update_editor_from_label_cb       (glLabel          *label,
+						     glObjectEditor   *editor);
 
-static void       update_editor_from_label_cb           (glLabel             *label,
-							 glObjectEditor      *editor);
+static gboolean   object_at                         (glViewObject     *view_object,
+                                                     cairo_t          *cr,
+                                                     gdouble           x,
+                                                     gdouble           y);
 
-static void       draw_barcode                          (glViewBarcode       *view_bc);
 
 
 
@@ -96,6 +87,7 @@ static void       draw_barcode                          (glViewBarcode       *vi
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glViewBarcode, gl_view_barcode, GL_TYPE_VIEW_OBJECT);
+
 
 static void
 gl_view_barcode_class_init (glViewBarcodeClass *class)
@@ -110,16 +102,17 @@ gl_view_barcode_class_init (glViewBarcodeClass *class)
 	object_class->finalize = gl_view_barcode_finalize;
 
 	view_object_class->construct_editor = construct_properties_editor;
+	view_object_class->object_at        = object_at;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
 
 static void
-gl_view_barcode_init (glViewBarcode *view_bc)
+gl_view_barcode_init (glViewBarcode *view_barcode)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	view_bc->priv = g_new0 (glViewBarcodePrivate, 1);
+	view_barcode->priv = g_new0 (glViewBarcodePrivate, 1);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -127,13 +120,13 @@ gl_view_barcode_init (glViewBarcode *view_bc)
 static void
 gl_view_barcode_finalize (GObject *object)
 {
-	glViewBarcode *view_bc = GL_VIEW_BARCODE (object);
+        glViewBarcode *view_barcode = GL_VIEW_BARCODE (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_BARCODE (object));
 
-	g_free (view_bc->priv);
+        g_free (view_barcode->priv);
 
 	G_OBJECT_CLASS (gl_view_barcode_parent_class)->finalize (object);
 
@@ -145,35 +138,29 @@ gl_view_barcode_finalize (GObject *object)
 /*****************************************************************************/
 glViewObject *
 gl_view_barcode_new (glLabelBarcode *object,
-		     glView         *view)
+                     glView         *view)
 {
-	glViewBarcode      *view_bc;
-	GtkMenu            *menu;
+	glViewBarcode         *view_barcode;
 
 	gl_debug (DEBUG_VIEW, "START");
-	g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
-	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	g_return_val_if_fail (object && GL_IS_LABEL_BARCODE (object), NULL);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
 	
-	view_bc = g_object_new (gl_view_barcode_get_type(), NULL);
+	view_barcode = g_object_new (gl_view_barcode_get_type(), NULL);
 
-	gl_view_object_set_view (GL_VIEW_OBJECT(view_bc), view);
-	gl_view_object_set_object (GL_VIEW_OBJECT(view_bc),
+	gl_view_object_set_object (GL_VIEW_OBJECT(view_barcode),
 				   GL_LABEL_OBJECT(object),
-				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
-
-	/* Create analogous canvas items. */
-	draw_barcode (view_bc);
-
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_canvas_item_from_object_cb), view_bc);
+				   GL_VIEW_OBJECT_HANDLES_BOX);
+	gl_view_object_set_view (GL_VIEW_OBJECT(view_barcode), view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
-	return GL_VIEW_OBJECT (view_bc);
+	return GL_VIEW_OBJECT (view_barcode);
 }
 
 /*****************************************************************************/
-/* Create a properties editor for a barcode object.                          */
+/* Create a properties dialog for a barcode object.                          */
 /*****************************************************************************/
 static GtkWidget *
 construct_properties_editor (glViewObject *view_object)
@@ -214,21 +201,6 @@ construct_properties_editor (glViewObject *view_object)
 	gl_debug (DEBUG_VIEW, "END");
 
 	return editor;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label object "changed" callback.                                 */
-/*---------------------------------------------------------------------------*/
-static void
-update_canvas_item_from_object_cb (glLabelObject *object,
-				   glViewBarcode *view_bc)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* Adjust appearance of analogous canvas item. */
-	draw_barcode (view_bc);
-
-	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
@@ -348,7 +320,7 @@ update_editor_from_label_cb (glLabel        *label,
 			     glObjectEditor *editor)
 {
 	gdouble            label_width, label_height;
-	glMerge           *merge;
+	glMerge		   	   *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -365,32 +337,56 @@ update_editor_from_label_cb (glLabel        *label,
 }
 
 /*****************************************************************************/
+/* Is object at (x,y)?                                                       */
+/*****************************************************************************/
+static gboolean
+object_at (glViewObject  *view_object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+	glLabelObject    *object;
+        gdouble           w, h;
+
+        object = gl_view_object_get_object (view_object);
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
+}
+
+
+/*****************************************************************************/
 /* Return apropos cursor for create object mode.                             */
 /*****************************************************************************/
 GdkCursor *
 gl_view_barcode_get_create_cursor (void)
 {
-	static GdkCursor *cursor = NULL;
-	GdkPixmap        *pixmap_data, *pixmap_mask;
+	GdkCursor       *cursor = NULL;
+	GdkPixmap       *pixmap_data, *pixmap_mask;
 	GdkColor         fg = { 0, 0, 0, 0 };
 	GdkColor         bg = { 0, 65535, 65535, 65535 };
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	if (!cursor) {
-		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   (gchar *)cursor_barcode_bits,
-							   cursor_barcode_width,
-							   cursor_barcode_height);
-		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   (gchar *)cursor_barcode_mask_bits,
-							   cursor_barcode_mask_width,
-							   cursor_barcode_mask_height);
-		cursor =
-		    gdk_cursor_new_from_pixmap (pixmap_data, pixmap_mask, &fg,
-						&bg, cursor_barcode_x_hot,
-						cursor_barcode_y_hot);
-	}
+        pixmap_data = gdk_bitmap_create_from_data (NULL,
+                                                   (gchar *)cursor_barcode_bits,
+                                                   cursor_barcode_width,
+                                                   cursor_barcode_height);
+        pixmap_mask = gdk_bitmap_create_from_data (NULL,
+                                                   (gchar *)cursor_barcode_mask_bits,
+                                                   cursor_barcode_mask_width,
+                                                   cursor_barcode_mask_height);
+        cursor = gdk_cursor_new_from_pixmap (pixmap_data, pixmap_mask, &fg,
+                                             &bg, cursor_barcode_x_hot,
+                                             cursor_barcode_y_hot);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -398,279 +394,65 @@ gl_view_barcode_get_create_cursor (void)
 }
 
 /*****************************************************************************/
-/* Canvas event handler for creating barcode objects.                            */
+/* Object creation handler: button press event.                              */
 /*****************************************************************************/
-int
-gl_view_barcode_create_event_handler (GnomeCanvas *canvas,
-				      GdkEvent    *event,
-				      glView      *view)
+void
+gl_view_barcode_create_button_press_event   (glView *view,
+                                             gdouble x,
+                                             gdouble y)
 {
-	static gdouble      x0, y0;
-	static gboolean     dragging = FALSE;
-	static glViewObject *view_barcode;
-	static GObject      *object;
-	gdouble             x, y;
-	glTextNode          *text_node;
-	glColorNode         *color_node;
+	GObject             *object;
+        glTextNode          *text_node;
+	glColorNode         *line_color_node;
+        glViewObject        *view_barcode;
 
-	gl_debug (DEBUG_VIEW, "");
+        line_color_node = gl_color_node_new_default ();
+		
+        object = gl_label_barcode_new (view->label);
+        gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+        text_node = gl_text_node_new_from_text ("123456789");
+        gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
+        line_color_node->color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
+        gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
+                                        line_color_node);
 
-	switch (event->type) {
+        gl_color_node_free (&line_color_node);
 
-	case GDK_BUTTON_PRESS:
-		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
-		switch (event->button.button) {
-		case 1:
-			color_node = gl_color_node_new_default ();
-			dragging = TRUE;
-			gnome_canvas_item_grab (canvas->root,
-						GDK_POINTER_MOTION_MASK |
-						GDK_BUTTON_RELEASE_MASK |
-						GDK_BUTTON_PRESS_MASK,
-						NULL, event->button.time);
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-			object = gl_label_barcode_new (view->label);
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						     x, y);
-			text_node = gl_text_node_new_from_text ("123456789");
-			gl_label_barcode_set_data (GL_LABEL_BARCODE(object),
-						   text_node);
-			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-						    "POSTNET",
-						    FALSE,
-						    TRUE,
-						    0);
-			color_node->color = gl_color_set_opacity (
-						      gl_view_get_default_line_color(view),
-                                                      0.5);
-			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-							color_node);
-			view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object),
-							    view);
-			x0 = x;
-			y0 = y;
-			gl_color_node_free (&color_node);
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_BUTTON_RELEASE:
-		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
-		switch (event->button.button) {
-		case 1:
-			color_node = gl_color_node_new_default ();
-			dragging = FALSE;
-			gnome_canvas_item_ungrab (canvas->root, event->button.time);
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						      x, y);
-			gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-						    "POSTNET",
-						    FALSE,
-						    TRUE,
-						    0);
-			color_node->color = gl_view_get_default_line_color(view);
-			gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-							color_node);
-			gl_view_unselect_all (view);
-			gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
-			gl_view_arrow_mode (view);
-			gl_color_node_free (&color_node);
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_MOTION_NOTIFY:
-		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
-		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			gnome_canvas_window_to_world (canvas,
-						      event->motion.x,
-						      event->motion.y, &x, &y);
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						      x, y);
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-
-	default:
-		return FALSE;
-	}
-
+        gl_view_unselect_all (view);
+        view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
+        gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
+			
+        view->create_object = GL_LABEL_OBJECT (object);
+        view->create_x0 = x;
+        view->create_y0 = y;
 }
 
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw barcode to item (group).                                  */
-/*--------------------------------------------------------------------------*/
-static void
-draw_barcode (glViewBarcode *view_barcode)
+/*****************************************************************************/
+/* Object creation handler: motion event.                                    */
+/*****************************************************************************/
+void
+gl_view_barcode_create_motion_event         (glView *view,
+                                             gdouble x,
+                                             gdouble y)
 {
-	glLabelObject     *object;
-	GnomeCanvasItem   *item;
-	glTextNode        *text_node;
-	gchar             *id;
-	gboolean           text_flag;
-	gboolean           checksum_flag;
-	glColorNode       *color_node;
-	gdouble            w, h;
-	glBarcodeLine     *line;
-	glBarcodeChar     *bchar;
-	glBarcode         *gbc;
-	GList             *li;
-	GList             *item_list = NULL;
-	GnomeCanvasPoints *points;
-	gchar             *digits, *cstring;
-	GnomeFont         *font;
-	GnomeGlyphList    *glyphlist;
-	gdouble            y_offset;
-	guint              format_digits;
-	ArtDRect           bbox;
-	gdouble            affine[6];
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* Query label object and properties */
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_barcode));
-	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &checksum_flag, &format_digits);
-	color_node = gl_label_object_get_line_color (object);
-	if (color_node->field_flag)
-	{
-		color_node->color = GL_COLOR_MERGE_DEFAULT;
-	}
-	gl_label_object_get_size (object, &w, &h);
-	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
-	if (text_node->field_flag) {
-		digits = gl_barcode_default_digits (id, format_digits);
-	} else {
-		digits = gl_text_node_expand (text_node, NULL);
-	}
-
-	/* remove previous items from group. */
-	for (li = view_barcode->priv->item_list; li!=NULL; li = li->next) {
-		gl_debug (DEBUG_VIEW, "in loop");
-		gtk_object_destroy (GTK_OBJECT (li->data));
-	}
-	gl_debug (DEBUG_VIEW, "1");
-	g_list_free (view_barcode->priv->item_list);
-	view_barcode->priv->item_list = NULL;
-	gl_debug (DEBUG_VIEW, "2");
-
-	/* get Gnome Font */
-	font = gnome_font_find_closest_from_weight_slant ((guchar *)GL_BARCODE_FONT_FAMILY,
-							  GL_BARCODE_FONT_WEIGHT,
-							  FALSE,
-							  10.0);
-
-	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, digits);
-	if (gbc == NULL) {
-
-		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
-						gnome_canvas_rect_get_type (),
-						"x1", 0.0,
-						"y1", 0.0,
-						"x2", w,
-						"y2", h,
-						"outline_color_rgba", color_node->color,
-						"width_pixels", 1,
-						NULL);
-		view_barcode->priv->item_list =
-			g_list_prepend (view_barcode->priv->item_list, item);
-
-		if (digits == NULL || *digits == '\0')
-		{
-			cstring = _("Barcode data empty");
-		}
-		else
-		{
-			cstring = _("Invalid barcode data");
-		}
-
-		glyphlist = gnome_glyphlist_from_text_sized_dumb (font,
-								  color_node->color,
-								  0.0, 0.0,
-								  (guchar *)cstring,
-								  strlen (cstring));
-		y_offset = 10.0 - fabs (gnome_font_get_descender (font));
-		art_affine_identity (affine);
-		gnome_glyphlist_bbox (glyphlist, affine, 0, &bbox);
-
-		item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
-						gl_canvas_hacktext_get_type (),
-						"x", w/2 - bbox.x1/2,
-						"y", h/2 - bbox.y1/2 + y_offset,
-						"glyphlist", glyphlist, NULL);
-
-		gnome_glyphlist_unref (glyphlist);
-
-		view_barcode->priv->item_list =
-			g_list_prepend (view_barcode->priv->item_list, item);
-	} else {
-
-		points = gnome_canvas_points_new (2);
-		for (li = gbc->lines; li != NULL; li = li->next) {
-			line = (glBarcodeLine *) li->data;
-
-			points->coords[0] = line->x;
-			points->coords[1] = line->y;
-			points->coords[2] = line->x;
-			points->coords[3] = line->y + line->length;
-
-			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
-							gnome_canvas_line_get_type (),
-							"points", points,
-							"width_units", line->width,
-							"fill_color_rgba", color_node->color,
-							NULL);
-			view_barcode->priv->item_list =
-				g_list_prepend (view_barcode->priv->item_list, item);
-		}
-		gnome_canvas_points_free (points);
-
-		for (li = gbc->chars; li != NULL; li = li->next) {
-			bchar = (glBarcodeChar *) li->data;
-
-			font = gnome_font_find_closest_from_weight_slant (
-				(guchar *)GL_BARCODE_FONT_FAMILY,
-				GL_BARCODE_FONT_WEIGHT,
-				FALSE, bchar->fsize);
-			glyphlist = gnome_glyphlist_from_text_sized_dumb (
-				font,
-				color_node->color,
-				0.0, 0.0,
-				(guchar *)&(bchar->c), 1);
-			y_offset =
-			    bchar->fsize - fabs (gnome_font_get_descender (font));
-
-			item = gl_view_object_item_new (GL_VIEW_OBJECT(view_barcode),
-							gl_canvas_hacktext_get_type (),
-							"x", bchar->x,
-							"y", bchar->y + y_offset,
-							"glyphlist", glyphlist,
-							NULL);
-
-			gnome_glyphlist_unref (glyphlist);
-
-			view_barcode->priv->item_list =
-				g_list_prepend (view_barcode->priv->item_list, item);
-
-		}
-
-	}
-
-	/* clean up */
-	gl_color_node_free (&color_node);
-	gl_barcode_free (&gbc);
-	g_free (digits);
-	g_free (id);
-
-	gl_debug (DEBUG_VIEW, "END");
+        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object), x, y);
 }
+
+/*****************************************************************************/
+/* Object creation handler: button relesase event.                           */
+/*****************************************************************************/
+void
+gl_view_barcode_create_button_release_event (glView *view,
+                                             gdouble x,
+                                             gdouble y)
+{
+	glColorNode         *line_color_node;
+
+        line_color_node = gl_color_node_new_default ();
+		
+        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object), x, y);
+        line_color_node->color = gl_view_get_default_line_color(view);
+        gl_label_object_set_line_color (GL_LABEL_OBJECT(view->create_object), line_color_node);
+        gl_color_node_free (&line_color_node);
+}
+

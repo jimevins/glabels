@@ -5,7 +5,7 @@
  *
  *  label_barcode.c:  GLabels label text object
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,17 +24,20 @@
 
 #include "label-barcode.h"
 
+#include <glib/gi18n.h>
 #include <glib/gmem.h>
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
-
-#include "pixmaps/checkerboard.xpm"
+#include <cairo.h>
+#include <pango/pangocairo.h>
 
 #include "debug.h"
 
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
+#define FONT_SCALE (72.0/96.0)
 
 /*========================================================*/
 /* Private types.                                         */
@@ -53,8 +56,6 @@ struct _glLabelBarcodePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static guint instance = 0;
-
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
@@ -72,6 +73,11 @@ static void  set_line_color                 (glLabelObject       *object,
 					     glColorNode         *line_color);
 
 static glColorNode *get_line_color          (glLabelObject       *object);
+
+static void    draw_object                (glLabelObject     *object,
+                                           cairo_t           *cr,
+                                           gboolean           screen_flag,
+                                           glMergeRecord     *record);
 
 
 
@@ -92,6 +98,8 @@ gl_label_barcode_class_init (glLabelBarcodeClass *class)
 	label_object_class->get_size       = get_size;
 	label_object_class->set_line_color = set_line_color;
 	label_object_class->get_line_color = get_line_color;
+        label_object_class->draw_object    = draw_object;
+        label_object_class->draw_shadow    = NULL;
 
 	object_class->finalize = gl_label_barcode_finalize;
 }
@@ -266,8 +274,7 @@ get_size (glLabelObject *object,
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-	(* GL_LABEL_OBJECT_CLASS (gl_label_barcode_parent_class)->get_size) (object, &w_parent, &h_parent);
-
+	gl_label_object_get_raw_size (object, &w_parent, &h_parent);
 
 	if (lbc->priv->text_node->field_flag) {
 		data = gl_barcode_default_digits (lbc->priv->id,
@@ -331,7 +338,138 @@ get_line_color (glLabelObject *object)
 {
 	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
 
-	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
+	g_return_val_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode), NULL);
 
 	return gl_color_node_dup (lbarcode->priv->color_node);
 }
+
+/*****************************************************************************/
+/* Draw object method.                                                       */
+/*****************************************************************************/
+static void
+draw_object (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble             x0, y0;
+        cairo_matrix_t      matrix;
+	glBarcode          *gbc;
+	glBarcodeLine      *line;
+	glBarcodeChar      *bchar;
+	GList              *li;
+	gdouble             y_offset;
+        PangoLayout        *layout;
+        PangoFontDescription *desc;
+	gchar              *text, *cstring;
+	glTextNode         *text_node;
+	gchar              *id;
+	gboolean            text_flag;
+	gboolean            checksum_flag;
+	guint               color;
+	glColorNode        *color_node;
+	guint               format_digits;
+	gdouble             w, h;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_position (object, &x0, &y0);
+        gl_label_object_get_matrix (object, &matrix);
+
+	text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE (object));
+	gl_label_barcode_get_props (GL_LABEL_BARCODE (object),
+				    &id, &text_flag, &checksum_flag, &format_digits);
+					
+	color_node = gl_label_object_get_line_color (object);
+	color = gl_color_node_expand (color_node, record);
+        if (color_node->field_flag && screen_flag)
+        {
+                color = GL_COLOR_MERGE_DEFAULT;
+        }
+	gl_color_node_free (&color_node);
+	
+	gl_label_object_get_size (object, &w, &h);
+
+	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
+        text = gl_text_node_expand (text_node, record);
+	if (text_node->field_flag && screen_flag) {
+		text = gl_barcode_default_digits (id, format_digits);
+	}
+
+	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, text);
+
+        cairo_set_source_rgba (cr,
+                               GL_COLOR_F_RED (color),
+                               GL_COLOR_F_GREEN (color),
+                               GL_COLOR_F_BLUE (color),
+                               GL_COLOR_F_ALPHA (color));
+
+	if (gbc == NULL) {
+
+                layout = pango_cairo_create_layout (cr);
+
+                desc = pango_font_description_new ();
+                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                pango_font_description_set_size   (desc, 12 * PANGO_SCALE * FONT_SCALE);
+                pango_layout_set_font_description (layout, desc);
+                pango_font_description_free       (desc);
+
+                if (text == NULL || *text == '\0')
+                {
+                        pango_layout_set_text (layout, _("Barcode data empty"), -1);
+                }
+                else
+                {
+                        pango_layout_set_text (layout, _("Invalid barcode data"), -1);
+                }
+
+                pango_cairo_show_layout (cr, layout);
+
+                g_object_unref (layout);
+
+	} else {
+
+		for (li = gbc->lines; li != NULL; li = li->next) {
+			line = (glBarcodeLine *) li->data;
+
+			cairo_move_to (cr, line->x, line->y);
+			cairo_line_to (cr, line->x, line->y + line->length);
+			cairo_set_line_width (cr, line->width);
+			cairo_stroke (cr);
+		}
+
+		for (li = gbc->chars; li != NULL; li = li->next) {
+			bchar = (glBarcodeChar *) li->data;
+
+                        layout = pango_cairo_create_layout (cr);
+
+                        desc = pango_font_description_new ();
+                        pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                        pango_font_description_set_size   (desc, bchar->fsize * PANGO_SCALE * FONT_SCALE);
+                        pango_layout_set_font_description (layout, desc);
+                        pango_font_description_free       (desc);
+
+			cstring = g_strdup_printf ("%c", bchar->c);
+                        pango_layout_set_text (layout, cstring, -1);
+			g_free (cstring);
+
+                        y_offset = 0.2 * bchar->fsize;
+
+			cairo_move_to (cr, bchar->x, bchar->y-y_offset);
+                        pango_cairo_show_layout (cr, layout);
+
+                        g_object_unref (layout);
+
+		}
+
+		gl_barcode_free (&gbc);
+
+	}
+
+	g_free (text);
+	gl_text_node_free (&text_node);
+	g_free (id);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+

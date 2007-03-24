@@ -92,8 +92,6 @@ glabels_SOURCES = 			\
 	view-text.h			\
 	view-barcode.c			\
 	view-barcode.h			\
-	view-highlight.c		\
-	view-highlight.h		\
 	merge-properties-dialog.c	\
 	merge-properties-dialog.h	\
 	object-editor.c			\
@@ -144,8 +142,6 @@ glabels_SOURCES = 			\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
-	xml-label-191.c			\
-	xml-label-191.h			\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\
@@ -176,15 +172,20 @@ glabels_SOURCES = 			\
 	wdgt-rotate-label.h		\
 	wdgt-chain-button.c		\
 	wdgt-chain-button.h		\
+	cairo-label-path.c		\
+	cairo-label-path.h		\
+	cairo-markup-path.c		\
+	cairo-markup-path.h		\
+	cairo-ellipse-path.c		\
+	cairo-ellipse-path.h		\
 	util.c				\
 	util.h				\
 	color.c				\
 	color.h				\
-	canvas-hacktext.c		\
-	canvas-hacktext.h		\
 	debug.c 			\
 	debug.h 			\
 	$(BUILT_SOURCES)
+
 
 glabels_batch_SOURCES = 		\
 	glabels-batch.c			\
@@ -220,8 +221,6 @@ glabels_batch_SOURCES = 		\
 	xml-label.h			\
 	xml-label-04.c			\
 	xml-label-04.h			\
-	xml-label-191.c			\
-	xml-label-191.h			\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
 	base64.c			\
@@ -255,6 +254,10 @@ glabels_batch_SOURCES = 		\
 	wdgt-mini-preview.c		\
 	wdgt-mini-preview.h		\
 	hig.h				\
+	cairo-label-path.c		\
+	cairo-label-path.h		\
+	cairo-ellipse-path.c		\
+	cairo-ellipse-path.h		\
 	$(BUILT_SOURCES)
 
 marshal.h: marshal.list $(GLIB_GENMARSHAL)

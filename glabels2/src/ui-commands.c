@@ -136,9 +136,7 @@ gl_ui_cmd_file_open_recent (GtkRecentChooser *chooser,
         utf8_filename = gl_recent_get_utf8_filename (item);
 
         gl_debug (DEBUG_COMMANDS, "Selected %s\n", utf8_filename);
-#if 1
         gl_file_open_recent (utf8_filename, window);
-#endif
 
         gtk_recent_info_unref (item);
         

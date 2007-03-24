@@ -82,10 +82,6 @@ static void menu_item_select_cb            (GtkMenuItem     *proxy,
 static void menu_item_deselect_cb          (GtkMenuItem     *proxy,
 					    glWindow        *window);
 
-static char *recent_tooltip_func           (GtkRecentInfo   *item,
-					    gpointer         user_data);
-
-
 
 /*==========================================================================*/
 /* Private globals                                                          */
@@ -824,8 +820,6 @@ gl_ui_new (glWindow *window)
 void
 gl_ui_unref (GtkUIManager *ui)
 {
-	GObject *recent_view;
-
 	gl_debug (DEBUG_UI, "START");
 
 	g_object_unref(ui);

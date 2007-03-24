@@ -31,9 +31,11 @@
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtktreestore.h>
+#include <gtk/gtktreeselection.h>
 #include <gtk/gtkcellrenderertoggle.h>
 #include <gtk/gtkcellrenderertext.h>
 #include <gtk/gtklabel.h>
+#include <string.h>
 
 #include "label.h"
 #include "merge.h"
@@ -375,7 +377,6 @@ type_changed_cb (GtkWidget               *widget,
 	gchar             *name;
 	gchar             *src;
 	glMergeSrcType     src_type;
-	GtkWidget         *wentry;
 
 	gl_debug (DEBUG_MERGE, "START");
 
@@ -443,7 +444,6 @@ src_changed_cb (GtkWidget               *widget,
 		glMergePropertiesDialog *dialog)
 {
 	gchar     *src, *orig_src;
-	GtkWidget *wentry;
 
 	gl_debug (DEBUG_MERGE, "START");
 

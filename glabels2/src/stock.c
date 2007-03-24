@@ -50,14 +50,14 @@
 /* Local function prototypes                 */
 /*===========================================*/
 
-static add_icons (GtkIconFactory *factory,
-		  const gchar    *stock_id,
-		  const guchar   *inline_24,
-		  const guchar   *inline_16);
+static void add_icons (GtkIconFactory *factory,
+                       const gchar    *stock_id,
+                       const guchar   *inline_24,
+                       const guchar   *inline_16);
 
-static add_button_icon (GtkIconFactory *factory,
-			const gchar    *stock_id,
-			const guchar   *inline_24);
+static void add_button_icon (GtkIconFactory *factory,
+                             const gchar    *stock_id,
+                             const guchar   *inline_24);
 
 
 /****************************************************************************/
@@ -147,10 +147,11 @@ gl_stock_init (void)
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Unpack and associate given icons with stock_id.                */
 /*--------------------------------------------------------------------------*/
-static add_icons (GtkIconFactory *factory,
-		  const gchar    *stock_id,
-		  const guchar   *inline_24,
-		  const guchar   *inline_16)
+static void
+add_icons (GtkIconFactory *factory,
+           const gchar    *stock_id,
+           const guchar   *inline_24,
+           const guchar   *inline_16)
 {
 	GdkPixbuf      *pixbuf;
 	GtkIconSet     *icon_set;
@@ -187,9 +188,10 @@ static add_icons (GtkIconFactory *factory,
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Unpack and associate given button icon with stock_id.          */
 /*--------------------------------------------------------------------------*/
-static add_button_icon (GtkIconFactory *factory,
-			const gchar    *stock_id,
-			const guchar   *inline_24)
+static void
+add_button_icon (GtkIconFactory *factory,
+                 const gchar    *stock_id,
+                 const guchar   *inline_24)
 {
 	GtkIconSet     *icon_set;
 	GdkPixbuf      *pixbuf;

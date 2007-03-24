@@ -39,6 +39,7 @@
 #include <libglabels/template.h>
 #include "wdgt-mini-preview.h"
 #include "print-op.h"
+#include "util.h"
 
 #include "debug.h"
 
@@ -1188,6 +1189,7 @@ forward_page_function (gint     current_page,
                 return -1;
         }
 
+        return -1;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1390,7 +1392,7 @@ static void
 layout_page_prepare_cb (glTemplateDesigner *dialog)
 {
 	gdouble page_w, page_h;
-	gdouble w, h, x_waste, y_waste;
+	gdouble w=0, h=0, x_waste=0, y_waste=0;
 	gint    max_nx, max_ny;
 	gint    nlayouts;
 	gdouble nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
@@ -1627,8 +1629,8 @@ build_template (glTemplateDesigner      *dialog)
 	gchar                *page_size_name;
 	glPaper              *paper;
 	glTemplateLabelShape  shape;
-	glTemplateLabelType  *label_type;
-	gdouble               w, h, r, radius, hole, waste, x_waste, y_waste, margin;
+	glTemplateLabelType  *label_type=NULL;
+	gdouble               w=0, h=0, r=0, radius=0, hole=0, waste=0, x_waste=0, y_waste=0, margin=0;
 	gint                  nlayouts;
 	gdouble               nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble               nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;

@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_box.h:  GLabels canvas item wrapper widget
+ *  view_box.h:  GLabels label box object view
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -62,10 +62,19 @@ glViewObject  *gl_view_box_new      (glLabelBox *object,
 /* cursor for creating box objects */
 GdkCursor *gl_view_box_get_create_cursor (void);
 
-/* event handler for creating box objects */
-gint gl_view_box_create_event_handler    (GnomeCanvas *canvas,
-					  GdkEvent    *event,
-					  glView      *view);
+/* Object creation handlers. */
+void       gl_view_box_create_button_press_event   (glView *view,
+                                                    gdouble x,
+                                                    gdouble y);
+
+void       gl_view_box_create_motion_event         (glView *view,
+                                                    gdouble x,
+                                                    gdouble y);
+
+void       gl_view_box_create_button_release_event (glView *view,
+                                                    gdouble x,
+                                                    gdouble y);
+
 
 G_END_DECLS
 

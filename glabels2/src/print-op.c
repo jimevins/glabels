@@ -133,7 +133,6 @@ static void
 gl_print_op_class_init (glPrintOpClass *class)
 {
 	GObjectClass           *object_class = G_OBJECT_CLASS (class);
-	GtkPrintOperationClass *print_class  = GTK_PRINT_OPERATION_CLASS (class);
 
 	gl_debug (DEBUG_PRINT, "");
 	
@@ -145,8 +144,6 @@ gl_print_op_class_init (glPrintOpClass *class)
 static void
 gl_print_op_init (glPrintOp *op)
 {
-	GtkWidget *pp_button;
-
 	gl_debug (DEBUG_PRINT, "");
 
 	gtk_print_operation_set_use_full_page (GTK_PRINT_OPERATION (op), TRUE);
@@ -270,7 +267,6 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
 {
         glMerge                   *merge = NULL;
-        glTemplate                *template = NULL;
         const glTemplateLabelType *label_type = NULL;
 
 	op->priv->label              = label;
@@ -285,8 +281,7 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
         merge = gl_label_get_merge (label);
 
-        template = gl_label_get_template (label);
-        label_type = gl_template_get_first_label_type (template);
+        label_type = gl_template_get_first_label_type (label->template);
         if (merge == NULL)
         {
                 op->priv->merge_flag = FALSE;
@@ -305,7 +300,6 @@ gl_print_op_construct_batch (glPrintOp      *op,
                 g_object_unref (G_OBJECT(merge));
 
         }
-        gl_template_free (template);
 
         gtk_print_operation_set_export_filename (GTK_PRINT_OPERATION (op),
                                                  filename);
@@ -337,7 +331,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 
 	if (!op->priv->gui) {
 		g_warning ("Could not open print-op.glade, reinstall glabels!");
-		return;
+		return NULL;
 	}
 
 	vbox = glade_xml_get_widget (op->priv->gui, "print_custom_widget_vbox");

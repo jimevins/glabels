@@ -39,6 +39,7 @@
 #include "color.h"
 #include "wdgt-chain-button.h"
 #include "marshal.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 

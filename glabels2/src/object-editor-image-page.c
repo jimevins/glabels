@@ -33,6 +33,7 @@
 #include <math.h>
 
 #include "prefs.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 
@@ -68,8 +69,6 @@ static void add_image_filters_to_chooser        (GtkFileChooser *file_chooser);
 void
 gl_object_editor_prepare_image_page (glObjectEditor *editor)
 {
-	GdkColor      *gdk_color;
-	GtkFileFilter *filter;
 	GtkWidget     *preview;
 
 

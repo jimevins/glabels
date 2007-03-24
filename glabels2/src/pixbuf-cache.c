@@ -109,7 +109,6 @@ gl_pixbuf_cache_add_pixbuf (GHashTable *pixbuf_cache,
 			    GdkPixbuf  *pixbuf)
 {
 	CacheRecord *test_record, *record;
-	gchar       *key;
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 

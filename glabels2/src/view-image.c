@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_image.c:  GLabels label image object widget
+ *  view_image.c:  GLabels label image object view
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 #include <glib/gi18n.h>
 #include <glib/gmem.h>
 
-#include "view-highlight.h"
 #include "color.h"
 #include "object-editor.h"
 #include "stock.h"
@@ -42,22 +41,18 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define MIN_IMAGE_SIZE 0.01
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glViewImagePrivate {
-	GnomeCanvasItem       *item;
 };
 
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
 
-/* Save state of image file entry */
-static gchar *image_path = NULL;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -66,9 +61,6 @@ static gchar *image_path = NULL;
 static void       gl_view_image_finalize            (GObject          *object);
 
 static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
-
-static void       update_canvas_item_from_object_cb (glLabelObject    *object,
-						     glViewImage      *view_image);
 
 static void       update_object_from_editor_cb      (glObjectEditor   *editor,
 						     glLabelObject    *object);
@@ -84,12 +76,18 @@ static void       update_editor_from_move_cb        (glLabelObject    *object,
 static void       update_editor_from_label_cb       (glLabel          *label,
 						     glObjectEditor   *editor);
 
+static gboolean   object_at                         (glViewObject     *view_object,
+                                                     cairo_t          *cr,
+                                                     gdouble           x,
+                                                     gdouble           y);
+
 
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glViewImage, gl_view_image, GL_TYPE_VIEW_OBJECT);
+
 
 static void
 gl_view_image_class_init (glViewImageClass *class)
@@ -104,6 +102,7 @@ gl_view_image_class_init (glViewImageClass *class)
 	object_class->finalize = gl_view_image_finalize;
 
 	view_object_class->construct_editor = construct_properties_editor;
+	view_object_class->object_at        = object_at;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -121,13 +120,13 @@ gl_view_image_init (glViewImage *view_image)
 static void
 gl_view_image_finalize (GObject *object)
 {
-	glViewImage *view_image = GL_VIEW_IMAGE (object);
+        glViewImage *view_image = GL_VIEW_IMAGE (object);
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object && GL_IS_VIEW_IMAGE (object));
 
-	g_free (view_image->priv);
+        g_free (view_image->priv);
 
 	G_OBJECT_CLASS (gl_view_image_parent_class)->finalize (object);
 
@@ -139,42 +138,21 @@ gl_view_image_finalize (GObject *object)
 /*****************************************************************************/
 glViewObject *
 gl_view_image_new (glLabelImage *object,
-		   glView       *view)
+                   glView       *view)
 {
-	glViewImage        *view_image;
-	const GdkPixbuf    *pixbuf;
-	gdouble            w, h;
+	glViewImage         *view_image;
 
 	gl_debug (DEBUG_VIEW, "START");
-	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
-	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	g_return_val_if_fail (object && GL_IS_LABEL_IMAGE (object), NULL);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
 	
 	view_image = g_object_new (gl_view_image_get_type(), NULL);
 
-	gl_view_object_set_view (GL_VIEW_OBJECT(view_image), view);
 	gl_view_object_set_object (GL_VIEW_OBJECT(view_image),
 				   GL_LABEL_OBJECT(object),
-				   GL_VIEW_HIGHLIGHT_BOX_RESIZABLE);
-
-	/* Query properties of object. */
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	pixbuf = gl_label_image_get_pixbuf(object, NULL);
-
-	/* Create analogous canvas item. */
-	view_image->priv->item =
-		gl_view_object_item_new (GL_VIEW_OBJECT(view_image),
-					 gnome_canvas_pixbuf_get_type (),
-					 "x", 0.0,
-					 "y", 0.0,
-					 "width_set", TRUE,
-					 "height_set", TRUE,
-					 "width", w,
-					 "height", h,
-					 "pixbuf", pixbuf,
-					 NULL);
-
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_canvas_item_from_object_cb), view_image);
+				   GL_VIEW_OBJECT_HANDLES_BOX);
+	gl_view_object_set_view (GL_VIEW_OBJECT(view_image), view);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -182,7 +160,7 @@ gl_view_image_new (glLabelImage *object,
 }
 
 /*****************************************************************************/
-/* Create a properties editor for an image object.                           */
+/* Create a properties dialog for a image object.                            */
 /*****************************************************************************/
 static GtkWidget *
 construct_properties_editor (glViewObject *view_object)
@@ -222,36 +200,6 @@ construct_properties_editor (glViewObject *view_object)
 	gl_debug (DEBUG_VIEW, "END");
 
 	return editor;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label object "changed" callback.                                 */
-/*---------------------------------------------------------------------------*/
-static void
-update_canvas_item_from_object_cb (glLabelObject *object,
-				   glViewImage     *view_image)
-{
-	const GdkPixbuf    *pixbuf;
-	gdouble             w, h;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	/* Query properties of object. */
-	gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
-	w = MAX (w, MIN_IMAGE_SIZE);
-	h = MAX (h, MIN_IMAGE_SIZE);
-	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
-
-	/* Adjust appearance of analogous canvas item. */
-	gnome_canvas_item_set (view_image->priv->item,
-			       "width_set", TRUE,
-			       "height_set", TRUE,
-			       "width", w,
-			       "height", h,
-			       "pixbuf", pixbuf,
-			       NULL);
-
-	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
@@ -365,7 +313,7 @@ update_editor_from_label_cb (glLabel        *label,
 			     glObjectEditor *editor)
 {
 	gdouble            label_width, label_height;
-	glMerge           *merge;
+	glMerge		   	   *merge;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -374,7 +322,7 @@ update_editor_from_label_cb (glLabel        *label,
 					   label_width, label_height);
 	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
 				       label_width, label_height);
-
+	
 	merge = gl_label_get_merge (label);
 	gl_object_editor_set_key_names (editor, merge);
 
@@ -382,32 +330,56 @@ update_editor_from_label_cb (glLabel        *label,
 }
 
 /*****************************************************************************/
+/* Is object at (x,y)?                                                       */
+/*****************************************************************************/
+static gboolean
+object_at (glViewObject  *view_object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+	glLabelObject    *object;
+        gdouble           w, h;
+
+        object = gl_view_object_get_object (view_object);
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
+}
+
+
+/*****************************************************************************/
 /* Return apropos cursor for create object mode.                             */
 /*****************************************************************************/
 GdkCursor *
 gl_view_image_get_create_cursor (void)
 {
-	static GdkCursor *cursor = NULL;
-	GdkPixmap        *pixmap_data, *pixmap_mask;
+	GdkCursor       *cursor = NULL;
+	GdkPixmap       *pixmap_data, *pixmap_mask;
 	GdkColor         fg = { 0, 0, 0, 0 };
 	GdkColor         bg = { 0, 65535, 65535, 65535 };
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	if (!cursor) {
-		pixmap_data = gdk_bitmap_create_from_data (NULL,
-							   (gchar *)cursor_image_bits,
-							   cursor_image_width,
-							   cursor_image_height);
-		pixmap_mask = gdk_bitmap_create_from_data (NULL,
-							   (gchar *)cursor_image_mask_bits,
-							   cursor_image_mask_width,
-							   cursor_image_mask_height);
-		cursor =
-		    gdk_cursor_new_from_pixmap (pixmap_data, pixmap_mask, &fg,
-						&bg, cursor_image_x_hot,
-						cursor_image_y_hot);
-	}
+        pixmap_data = gdk_bitmap_create_from_data (NULL,
+                                                   (gchar *)cursor_image_bits,
+                                                   cursor_image_width,
+                                                   cursor_image_height);
+        pixmap_mask = gdk_bitmap_create_from_data (NULL,
+                                                   (gchar *)cursor_image_mask_bits,
+                                                   cursor_image_mask_width,
+                                                   cursor_image_mask_height);
+        cursor = gdk_cursor_new_from_pixmap (pixmap_data, pixmap_mask, &fg,
+                                             &bg, cursor_image_x_hot,
+                                             cursor_image_y_hot);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -415,95 +387,64 @@ gl_view_image_get_create_cursor (void)
 }
 
 /*****************************************************************************/
-/* Canvas event handler for creating image objects.                          */
+/* Object creation handler: button press event.                              */
 /*****************************************************************************/
-int
-gl_view_image_create_event_handler (GnomeCanvas *canvas,
-				      GdkEvent    *event,
-				      glView      *view)
+void
+gl_view_image_create_button_press_event   (glView *view,
+                                           gdouble x,
+                                           gdouble y)
 {
-	static gdouble      x0, y0;
-	static gboolean     dragging = FALSE;
-	static glViewObject *view_image;
-	static GObject      *object;
-	gdouble             x, y, w, h;
+	GObject             *object;
+        glViewObject        *view_image;
 
-	gl_debug (DEBUG_VIEW, "");
+        object = gl_label_image_new (view->label);
+        gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+        gl_label_object_set_size (GL_LABEL_OBJECT(object), 0.0, 0.0);
 
-	switch (event->type) {
-
-	case GDK_BUTTON_PRESS:
-		switch (event->button.button) {
-		case 1:
-			dragging = TRUE;
-			gnome_canvas_item_grab (canvas->root,
-						GDK_POINTER_MOTION_MASK |
-						GDK_BUTTON_RELEASE_MASK |
-						GDK_BUTTON_PRESS_MASK,
-						NULL, event->button.time);
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-			object = gl_label_image_new (view->label);
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						     x, y);
-			gl_label_object_set_size (GL_LABEL_OBJECT(object),
-						  1.0, 1.0);
-			view_image = gl_view_image_new (GL_LABEL_IMAGE(object),
-							view);
-			x0 = x;
-			y0 = y;
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_BUTTON_RELEASE:
-		switch (event->button.button) {
-		case 1:
-			dragging = FALSE;
-			gnome_canvas_item_ungrab (canvas->root, event->button.time);
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-			if ((x0 == x) && (y0 == y)) {
-				x = x0 + 36.0;
-				y = y0 + 36.0;
-			}
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						     MIN (x, x0), MIN (y, y0));
-			w = MAX (x, x0) - MIN (x, x0);
-			h = MAX (y, y0) - MIN (y, y0);
-			gl_label_object_set_size (GL_LABEL_OBJECT(object),
-						  w, h);
-			gl_view_unselect_all (view);
-			gl_view_object_select (GL_VIEW_OBJECT(view_image));
-			gl_view_arrow_mode (view);
-			return TRUE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_MOTION_NOTIFY:
-		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			gnome_canvas_window_to_world (canvas,
-						      event->motion.x,
-						      event->motion.y, &x, &y);
-			gl_label_object_set_position (GL_LABEL_OBJECT(object),
-						     MIN (x, x0), MIN (y, y0));
-			w = MAX (x, x0) - MIN (x, x0);
-			h = MAX (y, y0) - MIN (y, y0);
-			gl_label_object_set_size (GL_LABEL_OBJECT(object),
-						  w, h);
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-
-	default:
-		return FALSE;
-	}
-
+        gl_view_unselect_all (view);
+        view_image = gl_view_image_new (GL_LABEL_IMAGE(object), view);
+        gl_view_object_select (GL_VIEW_OBJECT(view_image));
+			
+        view->create_object = GL_LABEL_OBJECT (object);
+        view->create_x0 = x;
+        view->create_y0 = y;
 }
+
+/*****************************************************************************/
+/* Object creation handler: motion event.                                    */
+/*****************************************************************************/
+void
+gl_view_image_create_motion_event     (glView *view,
+                                       gdouble x,
+                                       gdouble y)
+{
+        gdouble w, h;
+
+        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
+                                      MIN (x, view->create_x0), MIN (y, view->create_y0));
+        w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
+        h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
+        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
+}
+
+/*****************************************************************************/
+/* Object creation handler: button relesase event.                           */
+/*****************************************************************************/
+void
+gl_view_image_create_button_release_event (glView *view,
+                                           gdouble x,
+                                           gdouble y)
+{
+        gdouble              w, h;
+
+        if ((view->create_x0 == x) && (view->create_y0 == y)) {
+                x = view->create_x0 + 36.0;
+                y = view->create_y0 + 36.0;
+        }
+        gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
+                                      MIN (x, view->create_x0), MIN (y, view->create_y0));
+        w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
+        h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
+        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
+}
+

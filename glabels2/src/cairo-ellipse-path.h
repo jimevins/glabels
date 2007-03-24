@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  xml-label-191.h:  GLabels xml label compat module header file
+ *  cairo_ellipse_path.h:  Cairo ellipse path module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,20 +21,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
-#ifndef __XML_LABEL_191_H__
-#define __XML_LABEL_191_H__
 
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+#ifndef __CAIRO_ELLIPSE_PATH_H__
+#define __CAIRO_ELLIPSE_PATH_H__
 
-#include "xml-label.h"
+#include <glib.h>
+#include <cairo.h>
 
 G_BEGIN_DECLS
 
-glLabel      *gl_xml_label_191_parse      (xmlNodePtr        root,
-					   glXMLLabelStatus *status);
+void gl_cairo_ellipse_path (cairo_t  *cr,
+                            gdouble   rx,
+                            gdouble   ry);
+
 
 G_END_DECLS
 
-
-#endif /* __XML_LABEL_191_H__ */
+#endif

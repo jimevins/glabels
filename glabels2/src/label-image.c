@@ -5,7 +5,7 @@
  *
  *  label_image.c:  GLabels label image object
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include <glib/gmem.h>
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
+#include <gdk/gdkcairo.h>
 
 #include "pixmaps/checkerboard.xpm"
 
@@ -45,8 +46,6 @@ struct _glLabelImagePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static guint instance = 0;
-
 static GdkPixbuf *default_pixbuf = NULL;
 
 /*========================================================*/
@@ -57,6 +56,12 @@ static void gl_label_image_finalize      (GObject           *object);
 
 static void copy                         (glLabelObject     *dst_object,
 					  glLabelObject     *src_object);
+
+static void    draw_object               (glLabelObject     *object,
+                                          cairo_t           *cr,
+                                          gboolean           screen_flag,
+                                          glMergeRecord     *record);
+
 
 
 /*****************************************************************************/
@@ -72,7 +77,9 @@ gl_label_image_class_init (glLabelImageClass *class)
 
 	gl_label_image_parent_class = g_type_class_peek_parent (class);
 
-	label_object_class->copy = copy;
+	label_object_class->copy           = copy;
+        label_object_class->draw_object    = draw_object;
+        label_object_class->draw_shadow    = NULL;
 
 	object_class->finalize = gl_label_image_finalize;
 }
@@ -273,6 +280,43 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 
 	return limage->priv->pixbuf;
 
+}
+
+/*****************************************************************************/
+/* Draw object method.                                                       */
+/*****************************************************************************/
+static void
+draw_object (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble          x0, y0;
+	gdouble          w, h;
+	const GdkPixbuf *pixbuf;
+	gint             image_w, image_h;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	gl_label_object_get_size (object, &w, &h);
+        gl_label_object_get_position (object, &x0, &y0);
+
+	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE (object), record);
+	image_w = gdk_pixbuf_get_width (pixbuf);
+	image_h = gdk_pixbuf_get_height (pixbuf);
+
+	cairo_save (cr);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+        cairo_clip (cr);
+
+	cairo_scale (cr, w/image_w, h/image_h);
+        gdk_cairo_set_source_pixbuf (cr, (GdkPixbuf *)pixbuf, 0, 0);
+        cairo_paint (cr);
+
+	cairo_restore (cr);
+
+	gl_debug (DEBUG_LABEL, "END");
 }
 
 

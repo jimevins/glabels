@@ -100,8 +100,6 @@ gl_wdgt_print_copies_init (glWdgtPrintCopies * copies)
 static void
 gl_wdgt_print_copies_finalize (GObject * object)
 {
-	glWdgtPrintCopies *copies = GL_WDGT_PRINT_COPIES (object);
-
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_PRINT_COPIES (object));
 
@@ -127,7 +125,6 @@ static void
 gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 				glLabel           *label)
 {
-	glTemplate                *template;
 	const glTemplateLabelType *label_type;
 	GtkWidget                 *whbox, *wvbox, *whbox1;
 	GSList                    *radio_group = NULL;
@@ -135,8 +132,7 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 
 	whbox = GTK_WIDGET (copies);
 
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+	label_type = gl_template_get_first_label_type (label->template);
 
 	copies->labels_per_sheet = gl_template_get_n_labels (label_type);
 
@@ -144,7 +140,7 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	copies->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 						    WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-					   template);
+					   label->template);
 	gtk_box_pack_start (GTK_BOX(whbox), copies->mini_preview, FALSE, FALSE, 0);
 
 	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD1);
@@ -199,8 +195,6 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 			  G_CALLBACK (first_spin_cb), copies);
 	g_signal_connect (G_OBJECT (copies->last_spin), "changed",
 			  G_CALLBACK (last_spin_cb), copies);
-
-	gl_template_free (template);
 }
 
 /*--------------------------------------------------------------------------*/

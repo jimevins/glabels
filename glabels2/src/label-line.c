@@ -5,7 +5,7 @@
  *
  *  label_line.c:  GLabels label line object
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,8 +43,6 @@ struct _glLabelLinePrivate {
 /* Private globals.                                       */
 /*========================================================*/
 
-static guint instance = 0;
-
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
@@ -63,6 +61,16 @@ static void    set_line_width              (glLabelObject    *object,
 static glColorNode   *get_line_color       (glLabelObject    *object);
 
 static gdouble get_line_width              (glLabelObject    *object);
+
+static void    draw_object                (glLabelObject     *object,
+                                           cairo_t           *cr,
+                                           gboolean           screen_flag,
+                                           glMergeRecord     *record);
+
+static void    draw_shadow                (glLabelObject     *object,
+                                           cairo_t           *cr,
+                                           gboolean           screen_flag,
+                                           glMergeRecord     *record);
 
 
 
@@ -84,6 +92,8 @@ gl_label_line_class_init (glLabelLineClass *class)
 	label_object_class->set_line_width = set_line_width;
 	label_object_class->get_line_color = get_line_color;
 	label_object_class->get_line_width = get_line_width;
+        label_object_class->draw_object    = draw_object;
+        label_object_class->draw_shadow    = draw_shadow;
 
 	object_class->finalize = gl_label_line_finalize;
 }
@@ -215,3 +225,107 @@ get_line_color (glLabelObject *object)
 
 	return gl_color_node_dup (lline->priv->line_color_node);
 }
+
+/*****************************************************************************/
+/* Draw object method.                                                       */
+/*****************************************************************************/
+static void
+draw_object (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble        w, h;
+	gdouble        line_width;
+	glColorNode   *line_color_node;
+        guint          line_color;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+	line_width = gl_label_object_get_line_width (object);
+	
+	line_color_node = gl_label_object_get_line_color (object);
+        line_color = gl_color_node_expand (line_color_node, record);
+        if (line_color_node->field_flag && screen_flag)
+        {
+                line_color = GL_COLOR_MERGE_DEFAULT;
+        }
+
+
+        cairo_move_to (cr, 0.0, 0.0);
+        cairo_line_to (cr, w, h);
+
+
+	/* Draw line */
+        cairo_set_source_rgba (cr,
+                               GL_COLOR_F_RED (line_color),
+                               GL_COLOR_F_GREEN (line_color),
+                               GL_COLOR_F_BLUE (line_color),
+                               GL_COLOR_F_ALPHA (line_color));
+        cairo_set_line_width (cr, line_width);
+        cairo_stroke (cr);
+
+	gl_color_node_free (&line_color_node);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Draw shadow method.                                                       */
+/*****************************************************************************/
+static void
+draw_shadow (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble        w, h;
+	gdouble        line_width;
+	glColorNode   *line_color_node;
+	glColorNode   *shadow_color_node;
+	gdouble        shadow_opacity;
+	guint          shadow_line_color;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+	line_width = gl_label_object_get_line_width (object);
+	
+	line_color_node = gl_label_object_get_line_color (object);
+        if (line_color_node->field_flag)
+        {
+                line_color_node->color = GL_COLOR_MERGE_DEFAULT;
+        }
+
+	shadow_color_node = gl_label_object_get_shadow_color (object);
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (object);
+	shadow_line_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, line_color_node->color);
+
+
+        cairo_move_to (cr, 0.0, 0.0);
+        cairo_line_to (cr, w, h);
+
+
+        /* Draw outline shadow */
+        cairo_set_source_rgba (cr,
+                               GL_COLOR_F_RED (shadow_line_color),
+                               GL_COLOR_F_GREEN (shadow_line_color),
+                               GL_COLOR_F_BLUE (shadow_line_color),
+                               GL_COLOR_F_ALPHA (shadow_line_color));
+        cairo_set_line_width (cr, line_width);
+        cairo_stroke (cr);
+
+
+	gl_color_node_free (&line_color_node);
+	gl_color_node_free (&shadow_color_node);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+

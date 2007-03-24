@@ -1,3 +1,362 @@
+2007-03-23  Jim Evins  <evins@snaught.com>
+
+	Merged all changes from experimental cairo branch to trunk.
+	Trunk no longer depends on libgnomecanvas or libgnomeprint[ui].
+
+2007-03-23  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_class_init),
+	(gl_label_object_get_raw_size), (gl_label_object_get_size):
+		Created "get_raw_size" method.
+	* src/label-barcode.c: (get_size):
+	* src/xml-label.c: (xml_create_object_text),
+	(xml_create_object_barcode):
+		Use new "get_raw_size" method on label-objects when apropos.
+	* src/label-text.h:
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow),
+	(auto_shrink_font_size):
+		Added "auto shrink" functionality back.
+
+2007-03-19  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (draw_object), (draw_shadow):
+		Don't use negative scales in workaround from previous commit.
+	
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label.c:
+		Forgot to remove include of xml-lable-191 in previous commit.
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
+		Workaround for pango Bug #341481.  Render text at device scale,
+		and scale font size accordingly.  Also, don't do any hinting.
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-ellipse-path.c:
+	* src/cairo-ellipse-path.h:
+		Forgot to add these new files during last mass commit.
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/xml-label-191.c:
+	* src/xml-label-191.h:
+		Removed -- Very buggy.  Version 1.91 is a very old "unstable" version,
+		so there is no need to keep compatability.
+	* src/base64.c:
+	* src/bc-iec16022.c:
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/color.c:
+	* src/debug.c:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label-barcode.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/label-image.c:
+	* src/label-line.c:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/label-text.c:
+	* src/label.c:
+	* src/label.h:
+	* src/merge-properties-dialog.c:
+	* src/merge.c:
+	* src/new-label-dialog.c:
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/pixbuf-cache.c:
+	* src/print-op.c:
+	* src/print.c:
+	* src/recent.c:
+	* src/stock.c:
+	* src/template-designer.c:
+	* src/text-node.c:
+	* src/ui-property-bar.c:
+	* src/ui.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/window.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Many changes, including:
+		- Move draw methods from view-*() to label-*().
+		- Use same drawing code for on screen view and printing.
+		- Fix all issues exposed with '-Wall -Werror'.
+
+2007-03-14  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-handle-path.h:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+		Removed cairo-handle-path.[ch] and cairo-object-path.[ch].
+	* src/view-barcode.c: (gl_view_barcode_class_init), (draw_object),
+	(object_at):
+	* src/view-box.c: (gl_view_box_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view-ellipse.c: (gl_view_ellipse_class_init),
+	(create_ellipse_path), (draw_object), (draw_shadow), (object_at):
+	* src/view-image.c: (gl_view_image_class_init), (draw_object),
+	(object_at):
+	* src/view-line.c: (gl_view_line_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view-object.c: (gl_view_object_draw), (gl_view_object_at),
+	(create_handle_path), (gl_view_object_draw_handles),
+	(gl_view_object_handle_at):
+	* src/view-object.h:
+	* src/view-text.c: (gl_view_text_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view.c: (motion_notify_event_cb), (button_press_event_cb):
+		Some restructuring of new code.
+
+2007-03-12  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c:
+	* src/view-barcode.c:
+	* src/view-barcode.h:
+	* src/view.c:
+		Added barcode object support to view.
+
+2007-03-12  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/view-text.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+		Added text object support to view.  Added object_at method to all
+		view_objects.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_image_object_path):
+	* src/view-image.c: (gl_view_image_class_init),
+	(gl_view_image_finalize), (gl_view_image_new),
+	(update_editor_from_label_cb), (draw),
+	(gl_view_image_get_create_cursor),
+	(gl_view_image_create_button_press_event),
+	(gl_view_image_create_motion_event),
+	(gl_view_image_create_button_release_event):
+	* src/view-image.h:
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(selection_received_cb), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added image object support to view.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_line_object_path):
+	* src/view-line.c: (gl_view_line_class_init), (gl_view_line_new),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb), (draw),
+	(gl_view_line_get_create_cursor),
+	(gl_view_line_create_button_press_event),
+	(gl_view_line_create_motion_event),
+	(gl_view_line_create_button_release_event):
+	* src/view-line.h:
+	* src/view-object.c: (gl_view_object_resize_event):
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(selection_received_cb), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added line object support to view.
+	* src/cairo-handle-path.c:
+		Made handles slightly larger.
+
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-label-path.c: (gl_cairo_rect_label_path),
+	(gl_cairo_round_label_path), (gl_cairo_cd_label_path):
+	* src/cairo-markup-path.c: (gl_cairo_markup_margin_rect_path),
+	(gl_cairo_markup_margin_round_path),
+	(gl_cairo_markup_margin_cd_path), (gl_cairo_markup_circle_path):
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_ellipse_object_path):
+	* src/label-object.c: (gl_label_object_rotate):
+	* src/view-box.c:
+	* src/view-box.h:
+	* src/view-ellipse.c: (gl_view_ellipse_class_init),
+	(gl_view_ellipse_new), (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (update_editor_from_label_cb),
+	(draw), (gl_view_ellipse_get_create_cursor),
+	(gl_view_ellipse_create_button_press_event),
+	(gl_view_ellipse_create_motion_event),
+	(gl_view_ellipse_create_button_release_event):
+	* src/view-ellipse.h:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(select_object_real), (selection_received_cb),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+	* src/view.h:
+		Added ellipse object support to view.  Plus other cleanup.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/view-box.h:
+	* src/view-box.c: (gl_view_box_get_create_cursor),
+	(gl_view_box_create_button_press_event),
+	(gl_view_box_create_motion_event),
+	(gl_view_box_create_button_release_event):
+	* src/view-object.c: (gl_view_object_set_view),
+	(gl_view_object_handle_at):
+	* src/view.h:
+	* src/view.c: (gl_view_arrow_mode), (gl_view_object_create_mode),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb), (key_press_event_cb):
+		Added creation code for box object.
+
+2007-03-09  Jim Evins  <evins@snaught.com>
+
+	* src/view-object.c: (gl_view_object_resize_event):
+	* src/view-object.h:
+	* src/view.c: (motion_notify_event_cb):
+		Fix bugs with resizing transformed objects.
+	* src/cairo-handle-path.c: (gl_cairo_handle_path):
+	* src/cairo-object-path.c: (gl_cairo_object_path):
+	* src/cairo-object-path.h:
+	* src/label-object.c: (gl_label_object_init),
+	(gl_label_object_dup), (gl_label_object_get_extent),
+	(gl_label_object_flip_horiz), (gl_label_object_flip_vert),
+	(gl_label_object_rotate), (gl_label_object_set_matrix),
+	(gl_label_object_get_matrix):
+	* src/label-object.h:
+	* src/print.c: (draw_object):
+	* src/view-box.c:
+	* src/view-highlight.c:
+	* src/view-highlight.h:
+	* src/xml-label-191.c: (xml191_parse_object):
+	* src/xml-label.c: (xml_parse_affine_attrs),
+	(xml_create_affine_attrs):
+		Replace libart affine matrices with cairo matrices.
+
+2007-03-08  Jim Evins  <evins@snaught.com>
+
+	* src/view-object.h:
+	* src/view.c: (gl_view_update), (motion_notify_event_cb):
+	* src/view-object.c: (gl_view_object_handle_at),
+	(gl_view_object_resize_event):
+		Added resize code -- still a bit buggy.
+	
+2007-03-07  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-handle-path.h:
+	* src/view-box.c: (gl_view_box_new):
+	* src/view-object.c: (gl_view_object_set_object),
+	(gl_view_object_draw_handles), (gl_view_object_handle_at):
+	* src/view-object.h:
+	* src/view.c: (draw_highlight_layer), (select_object_real),
+	(unselect_object_real), (view_handle_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb),
+	(key_press_event_cb):
+	* src/view.h:
+		Added beginnings of object resize handles.
+
+2007-03-07  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_init), (gl_view_arrow_mode),
+	(gl_view_object_create_mode), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb),
+	(key_press_event_cb):
+		Added move selection support.
+
+2007-03-05  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-object-path.c: (gl_cairo_object_path):
+	* src/view-object.c: (gl_view_object_draw),
+	(gl_view_object_draw_highlight):
+	* src/view.c: (view_object_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Additional refinements to select logic.
+
+2007-03-05  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_init), (gl_view_construct),
+	(label_changed_cb), (draw_layers), (draw_select_region_layer),
+	(gl_view_select_region), (object_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added initial select region support and context menu.
+
+2007-03-04  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* src/Makefile.am:
+	* src/debug.c:
+	* src/debug.h:
+	* src/file.c:
+	* src/label.c:
+	* src/label.h:
+	* src/print-op.c:
+	* src/print.c:
+	* src/ui-commands.c:
+	* src/view-box.c:
+	* src/view-box.h:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view.c:
+	* src/view.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/xml-label.c:
+		Initial port to a raw Cairo canvas.  This removes all remaining
+		dependencies on	libgnomecanvas and libgnomeprint[ui].  Basically
+		the view is becoming a canvas widget in its own right.  Still needs
+		a lot of work.
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/cairo-markup-path.h:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+		New files to support cairo canvas.
+	* src/canvas-hacktext.c:
+	* src/canvas-hacktext.h:
+		Removed.
+
 2007-02-18  Jim Evins  <evins@snaught.com>
 
 	* src/bc.h:

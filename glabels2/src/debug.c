@@ -35,6 +35,7 @@
 #include <glib/gutils.h>
 #include <glib/gmessages.h>
 #include <glib/gstrfuncs.h>
+#include <glib/gmem.h>
 
 glDebugSection debug_flags = GLABELS_DEBUG_NONE;
 
@@ -93,6 +94,8 @@ gl_debug_init (void)
 		debug_flags |= GLABELS_DEBUG_EDITOR;
 	if (g_getenv ("GLABELS_DEBUG_WDGT") != NULL)
 		debug_flags |= GLABELS_DEBUG_WDGT;
+	if (g_getenv ("GLABELS_DEBUG_PATH") != NULL)
+		debug_flags |= GLABELS_DEBUG_PATH;
 }
 
 

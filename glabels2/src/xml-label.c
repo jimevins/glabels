@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <libxml/xinclude.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 
 #include "label.h"
@@ -41,7 +42,6 @@
 #include "label-barcode.h"
 #include "base64.h"
 #include "xml-label-04.h"
-#include "xml-label-191.h"
 #include <libglabels/template.h>
 #include <libglabels/xml-template.h>
 #include <libglabels/xml.h>
@@ -54,7 +54,6 @@
 /*========================================================*/
 #define COMPAT01_NAME_SPACE "http://snaught.com/glabels/0.1/"
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
-#define COMPAT191_NAME_SPACE "http://snaught.com/glabels/1.92/"
 
 /*========================================================*/
 /* Private types.                                         */
@@ -248,7 +247,7 @@ static glLabel *
 xml_doc_to_label (xmlDocPtr         doc,
 		  glXMLLabelStatus *status)
 {
-	xmlNodePtr  root, node;
+	xmlNodePtr  root;
 	xmlNsPtr    ns;
 	glLabel    *label;
 
@@ -285,17 +284,9 @@ xml_doc_to_label (xmlDocPtr         doc,
 				g_message (_("Importing from glabels 0.4 format"));
 				label = gl_xml_label_04_parse (root, status);
 			} else {
-				/* Try compatability mode 1.91 */
-				ns = xmlSearchNsByHref (doc, root,
-							(xmlChar *)COMPAT191_NAME_SPACE);
-				if (ns != NULL)	{
-					g_message (_("Importing from glabels 1.91 format"));
-					label = gl_xml_label_191_parse (root, status);
-				} else {
-					g_message (_("bad document, unknown glabels Namespace"));
-					*status = XML_LABEL_ERROR_OPEN_PARSE;
-					return NULL;
-				}
+                                g_message (_("bad document, unknown glabels Namespace"));
+                                *status = XML_LABEL_ERROR_OPEN_PARSE;
+                                return NULL;
 			}
 		}
 	}
@@ -805,7 +796,6 @@ static void
 xml_parse_merge_fields (xmlNodePtr  node,
 			glLabel    *label)
 {
-	xmlNodePtr  child;
 	gchar      *string;
 	glMerge    *merge;
 
@@ -1008,16 +998,19 @@ static void
 xml_parse_affine_attrs (xmlNodePtr        node,
 			glLabelObject    *object)
 {
-	gdouble           affine[6];
+	gdouble           a[6];
+        cairo_matrix_t    matrix;
 
-	affine[0] = gl_xml_get_prop_double (node, "a0", 0.0);
-	affine[1] = gl_xml_get_prop_double (node, "a1", 0.0);
-	affine[2] = gl_xml_get_prop_double (node, "a2", 0.0);
-	affine[3] = gl_xml_get_prop_double (node, "a3", 0.0);
-	affine[4] = gl_xml_get_prop_double (node, "a4", 0.0);
-	affine[5] = gl_xml_get_prop_double (node, "a5", 0.0);
+	a[0] = gl_xml_get_prop_double (node, "a0", 0.0);
+	a[1] = gl_xml_get_prop_double (node, "a1", 0.0);
+	a[2] = gl_xml_get_prop_double (node, "a2", 0.0);
+	a[3] = gl_xml_get_prop_double (node, "a3", 0.0);
+	a[4] = gl_xml_get_prop_double (node, "a4", 0.0);
+	a[5] = gl_xml_get_prop_double (node, "a5", 0.0);
 
-	gl_label_object_set_affine (object, affine);
+        cairo_matrix_init (&matrix, a[0], a[1], a[2], a[3], a[4], a[5]);
+
+	gl_label_object_set_matrix (object, &matrix);
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1108,20 +1101,20 @@ gl_xml_label_save_buffer (glLabel          *label,
 {
 	xmlDocPtr  doc;
 	gint       size;
-	gchar     *buffer;
+	guchar    *buffer;
 
 	gl_debug (DEBUG_XML, "START");
 
 	doc = xml_label_to_doc (label, status);
 
-	xmlDocDumpMemory (doc, (xmlChar **)&buffer, &size);
+	xmlDocDumpMemory (doc, &buffer, &size);
 	xmlFreeDoc (doc);
 
 	gl_label_clear_modified (label);
 
 	gl_debug (DEBUG_XML, "END");
 
-	return buffer;
+	return (gchar *)buffer;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1133,7 +1126,6 @@ xml_label_to_doc (glLabel          *label,
 {
 	xmlDocPtr   doc;
 	xmlNsPtr    ns;
-	glTemplate *template;
 	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1146,8 +1138,7 @@ xml_label_to_doc (glLabel          *label,
 	ns = xmlNewNs (doc->xmlRootNode, (xmlChar *)GL_XML_NAME_SPACE, NULL);
 	xmlSetNs (doc->xmlRootNode, ns);
 
-	template = gl_label_get_template (label);
-	gl_xml_template_create_template_node (template, doc->xmlRootNode, ns);
+	gl_xml_template_create_template_node (label->template, doc->xmlRootNode, ns);
 
 	xml_create_objects (doc->xmlRootNode, ns, label);
 
@@ -1175,17 +1166,14 @@ xml_create_objects (xmlNodePtr  root,
 		    glLabel    *label)
 {
 	xmlNodePtr     node;
-	gboolean       rotate_flag;
 	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_XML, "START");
 
-	rotate_flag = gl_label_get_rotate_flag (label);
-
 	node = xmlNewChild (root, ns, (xmlChar *)"Objects", NULL);
 	gl_xml_set_prop_string (node, "id", "0");
-	gl_xml_set_prop_boolean (node, "rotate", rotate_flag);
+	gl_xml_set_prop_boolean (node, "rotate", label->rotate_flag);
 
 	for (p = label->objects; p != NULL; p = p->next) {
 
@@ -1236,7 +1224,7 @@ xml_create_object_text (xmlNodePtr     root,
 	gl_xml_set_prop_length (node, "y", y);
 
 	/* size attrs */
-	gl_label_text_get_box ( GL_LABEL_TEXT(object), &w, &h);
+	gl_label_object_get_raw_size ( object, &w, &h);
 	gl_xml_set_prop_length (node, "w", w);
 	gl_xml_set_prop_length (node, "h", h);
 
@@ -1517,7 +1505,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gl_xml_set_prop_length (node, "y", y);
 
 	/* size attrs */
-	gl_label_object_get_size (object, &w, &h);
+	gl_label_object_get_raw_size (object, &w, &h);
 	gl_xml_set_prop_length (node, "w", w);
 	gl_xml_set_prop_length (node, "h", h);
 
@@ -1569,9 +1557,8 @@ xml_create_merge_fields (xmlNodePtr  root,
 			 xmlNsPtr    ns,
 			 glLabel    *label)
 {
-	xmlNodePtr  node, child;
+	xmlNodePtr  node;
 	gchar      *string;
-	GList      *p;
 	glMerge    *merge;
 
 	gl_debug (DEBUG_XML, "START");
@@ -1749,16 +1736,16 @@ static void
 xml_create_affine_attrs (xmlNodePtr        node,
 			 glLabelObject    *object)
 {
-	gdouble           affine[6];
+        cairo_matrix_t matrix;
 
-	gl_label_object_get_affine (object, affine);
+	gl_label_object_get_matrix (object, &matrix);
 
-	gl_xml_set_prop_double (node, "a0", affine[0]);
-	gl_xml_set_prop_double (node, "a1", affine[1]);
-	gl_xml_set_prop_double (node, "a2", affine[2]);
-	gl_xml_set_prop_double (node, "a3", affine[3]);
-	gl_xml_set_prop_double (node, "a4", affine[4]);
-	gl_xml_set_prop_double (node, "a5", affine[5]);
+	gl_xml_set_prop_double (node, "a0", matrix.xx);
+	gl_xml_set_prop_double (node, "a1", matrix.yx);
+	gl_xml_set_prop_double (node, "a2", matrix.xy);
+	gl_xml_set_prop_double (node, "a3", matrix.yy);
+	gl_xml_set_prop_double (node, "a4", matrix.x0);
+	gl_xml_set_prop_double (node, "a5", matrix.y0);
 }
 
 /*--------------------------------------------------------------------------*/

@@ -39,8 +39,6 @@
 /*============================================*/
 /* Private globals                            */
 /*============================================*/
-static gboolean help_flag        = FALSE;
-static gboolean version_flag     = FALSE;
 static gchar    *output          = "output.pdf";
 static gint     n_copies         = 1;
 static gint     n_sheets         = 1;
@@ -83,7 +81,6 @@ main (int argc, char **argv)
 {
 	GOptionContext    *option_context;
         GnomeProgram      *program;
-        gint               rc;
         GList             *p, *file_list = NULL;
         gchar             *abs_fn;
         glLabel           *label = NULL;

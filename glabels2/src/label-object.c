@@ -28,7 +28,7 @@
 #include <glib/gmem.h>
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
-#include <libart_lgpl/libart.h>
+#include <math.h>
 
 #include "marshal.h"
 
@@ -51,7 +51,7 @@ struct _glLabelObjectPrivate {
 	gchar             *name;
 	gdouble            x, y;
 	gdouble            w, h;
-	gdouble            affine[6];
+        cairo_matrix_t     matrix;
 
 	gdouble            aspect_ratio;
 
@@ -92,9 +92,6 @@ static void set_size                      (glLabelObject      *object,
 					   gdouble             w,
 					   gdouble             h);
 
-static void get_size                      (glLabelObject      *object,
-					   gdouble            *w,
-					   gdouble            *h);
 
 
 /*****************************************************************************/
@@ -114,7 +111,6 @@ gl_label_object_class_init (glLabelObjectClass *class)
 	object_class->finalize = gl_label_object_finalize;
 
 	class->set_size = set_size;
-	class->get_size = get_size;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
@@ -176,7 +172,7 @@ gl_label_object_init (glLabelObject *object)
 
 	object->priv->name = g_strdup_printf ("object%d", instance++);
 
-	art_affine_identity (object->priv->affine);
+	cairo_matrix_init_identity (&object->priv->matrix);
 
 	object->priv->shadow_state = FALSE;
 	object->priv->shadow_x = DEFAULT_SHADOW_X_OFFSET;
@@ -236,7 +232,7 @@ gl_label_object_dup (glLabelObject *src_object,
 {
 	glLabelObject    *dst_object;
 	gdouble           x, y, w, h;
-	gdouble           affine[6];
+        cairo_matrix_t    matrix;
 	gboolean          shadow_state;
 	gdouble           shadow_x, shadow_y;
 	glColorNode      *shadow_color_node;
@@ -244,7 +240,7 @@ gl_label_object_dup (glLabelObject *src_object,
 
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_if_fail (src_object && GL_IS_LABEL_OBJECT (src_object));
+	g_return_val_if_fail (src_object && GL_IS_LABEL_OBJECT (src_object), NULL);
 
 	dst_object = g_object_new (G_OBJECT_TYPE(src_object), NULL);
 
@@ -252,7 +248,7 @@ gl_label_object_dup (glLabelObject *src_object,
 
 	gl_label_object_get_position      (src_object, &x, &y);
 	gl_label_object_get_size          (src_object, &w, &h);
-	gl_label_object_get_affine        (src_object, affine);
+	gl_label_object_get_matrix        (src_object, &matrix);
 	gl_label_object_get_shadow_offset (src_object, &shadow_x, &shadow_y);
 	shadow_color_node = gl_label_object_get_shadow_color   (src_object);
 	shadow_opacity    = gl_label_object_get_shadow_opacity (src_object);
@@ -260,7 +256,7 @@ gl_label_object_dup (glLabelObject *src_object,
 
 	gl_label_object_set_position (dst_object, x, y);
 	gl_label_object_set_size     (dst_object, w, h);
-	gl_label_object_set_affine   (dst_object, affine);
+	gl_label_object_set_matrix   (dst_object, &matrix);
 	gl_label_object_set_shadow_offset  (dst_object, shadow_x, shadow_y);
 	gl_label_object_set_shadow_color   (dst_object, shadow_color_node);
 	gl_label_object_set_shadow_opacity (dst_object, shadow_opacity);
@@ -334,7 +330,7 @@ gl_label_object_get_parent (glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
 
 	gl_debug (DEBUG_LABEL, "END");
 
@@ -368,7 +364,7 @@ gl_label_object_get_name (glLabelObject *object)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
 
 	gl_debug (DEBUG_LABEL, "END");
 
@@ -526,13 +522,13 @@ gl_label_object_set_size_honor_aspect (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Default get size method.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-get_size (glLabelObject *object,
-	  gdouble       *w,
-	  gdouble       *h)
+/*****************************************************************************/
+/* Get raw size method (don't let object content adjust size).               */
+/*****************************************************************************/
+void
+gl_label_object_get_raw_size (glLabelObject *object,
+                              gdouble       *w,
+                              gdouble       *h)
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
@@ -559,7 +555,7 @@ gl_label_object_get_size (glLabelObject *object,
 
 	} else {
 
-		get_size (object, w, h);
+		gl_label_object_get_raw_size (object, w, h);
 
 	}
 
@@ -577,8 +573,8 @@ gl_label_object_get_extent (glLabelObject *object,
 			    gdouble       *y2)
 {
 	gdouble  w, h;
-	ArtPoint a1, a2, a3, a4, b1, b2, b3, b4;
-	gdouble  affine[6];
+	gdouble xa1, ya1, xa2, ya2, xa3, ya3, xa4, ya4;
+        cairo_matrix_t matrix;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -587,28 +583,28 @@ gl_label_object_get_extent (glLabelObject *object,
 	gl_label_object_get_size (object, &w, &h);
 
 	/* setup untransformed corners of bounding box */
-	a1.x = 0.0;
-	a1.y = 0.0;
-	a2.x = w;
-	a2.y = 0.0;
-	a3.x = w;
-	a3.y = h;
-	a4.x = 0.0;
-	a4.y = h;
+	xa1 = 0.0;
+	ya1 = 0.0;
+	xa2 = w;
+	ya2 = 0.0;
+	xa3 = w;
+	ya3 = h;
+	xa4 = 0.0;
+	ya4 = h;
 
 	/* transform these points */
-	gl_label_object_get_affine (object, affine);
-	art_affine_point (&b1, &a1, affine);
-	art_affine_point (&b2, &a2, affine);
-	art_affine_point (&b3, &a3, affine);
-	art_affine_point (&b4, &a4, affine);
+	gl_label_object_get_matrix (object, &matrix);
+        cairo_matrix_transform_point (&matrix, &xa1, &ya1);
+        cairo_matrix_transform_point (&matrix, &xa2, &ya2);
+        cairo_matrix_transform_point (&matrix, &xa3, &ya3);
+        cairo_matrix_transform_point (&matrix, &xa4, &ya4);
 
 	/* now find the maximum extent of these points in x and y */
-	*x1 = MIN (b1.x, MIN (b2.x, MIN (b3.x, b4.x))) + object->priv->x;
-	*y1 = MIN (b1.y, MIN (b2.y, MIN (b3.y, b4.y))) + object->priv->y;
-	*x2 = MAX (b1.x, MAX (b2.x, MAX (b3.x, b4.x))) + object->priv->x;
-	*y2 = MAX (b1.y, MAX (b2.y, MAX (b3.y, b4.y))) + object->priv->y;
-	
+	*x1 = MIN (xa1, MIN (xa2, MIN (xa3, xa4))) + object->priv->x;
+	*y1 = MIN (ya1, MIN (ya2, MIN (ya3, ya4))) + object->priv->y;
+	*x2 = MAX (xa1, MAX (xa2, MAX (xa3, xa4))) + object->priv->x;
+	*y2 = MAX (ya1, MAX (ya2, MAX (ya3, ya4))) + object->priv->y;
+
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -1299,14 +1295,14 @@ gl_label_object_get_shadow_opacity (glLabelObject     *object)
 void
 gl_label_object_flip_horiz (glLabelObject *object)
 {
-	gdouble flip_affine[6];
+        cairo_matrix_t flip_matrix;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	art_affine_scale (flip_affine, -1.0, 1.0);
-	art_affine_multiply (object->priv->affine, object->priv->affine, flip_affine);
+        cairo_matrix_init_scale (&flip_matrix, -1.0, 1.0);
+        cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &flip_matrix);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1319,14 +1315,14 @@ gl_label_object_flip_horiz (glLabelObject *object)
 void
 gl_label_object_flip_vert (glLabelObject *object)
 {
-	gdouble flip_affine[6];
+        cairo_matrix_t flip_matrix;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	art_affine_scale (flip_affine, 1.0, -1.0);
-	art_affine_multiply (object->priv->affine, object->priv->affine, flip_affine);
+        cairo_matrix_init_scale (&flip_matrix, 1.0, -1.0);
+        cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &flip_matrix);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1340,14 +1336,14 @@ void
 gl_label_object_rotate (glLabelObject *object,
 			gdouble        theta_degs)
 {
-	gdouble rotate_affine[6];
+        cairo_matrix_t rotate_matrix;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	art_affine_rotate (rotate_affine, theta_degs);
-	art_affine_multiply (object->priv->affine, object->priv->affine, rotate_affine);
+        cairo_matrix_init_rotate (&rotate_matrix, theta_degs*(G_PI/180.));
+        cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &rotate_matrix);
 
 	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
@@ -1358,75 +1354,28 @@ gl_label_object_rotate (glLabelObject *object,
 /* Set raw affine                                                           */
 /****************************************************************************/
 void
-gl_label_object_set_affine (glLabelObject *object,
-			    gdouble        affine[6])
+gl_label_object_set_matrix (glLabelObject  *object,
+                            cairo_matrix_t *matrix)
 {
 	gl_debug (DEBUG_LABEL, "");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->priv->affine[0] = affine[0];
-	object->priv->affine[1] = affine[1];
-	object->priv->affine[2] = affine[2];
-	object->priv->affine[3] = affine[3];
-	object->priv->affine[4] = affine[4];
-	object->priv->affine[5] = affine[5];
+        object->priv->matrix = *matrix;
 }
 
 /****************************************************************************/
 /* Get raw affine                                                           */
 /****************************************************************************/
 void
-gl_label_object_get_affine (glLabelObject *object,
-			    gdouble        affine[6])
+gl_label_object_get_matrix (glLabelObject  *object,
+                            cairo_matrix_t *matrix)
 {
 	gl_debug (DEBUG_LABEL, "");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	affine[0] = object->priv->affine[0];
-	affine[1] = object->priv->affine[1];
-	affine[2] = object->priv->affine[2];
-	affine[3] = object->priv->affine[3];
-	affine[4] = object->priv->affine[4];
-	affine[5] = object->priv->affine[5];
-}
-
-/****************************************************************************/
-/* Get i2w affine, i.e. applied affine + translation.                       */
-/****************************************************************************/
-void
-gl_label_object_get_i2w_affine (glLabelObject *object,
-				gdouble        affine[6])
-{
-	gdouble x, y;
-	gdouble translation[6];
-
-	gl_debug (DEBUG_LABEL, "");
-
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	gl_label_object_get_affine (object, affine);
-	gl_label_object_get_position (object, &x, &y);
-
-	art_affine_translate (translation, x, y);
-	art_affine_multiply (affine, affine, translation);
-}
-
-/****************************************************************************/
-/* Get w2i affine, i.e. inverse of applied affine + translation.            */
-/****************************************************************************/
-void
-gl_label_object_get_w2i_affine (glLabelObject *object,
-				gdouble        affine[6])
-{
-	gdouble i2w[6];
-	gl_debug (DEBUG_LABEL, "");
-
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	gl_label_object_get_i2w_affine (object, i2w);
-	art_affine_invert (affine, i2w);
+        *matrix = object->priv->matrix;
 }
 
 /****************************************************************************/
@@ -1476,3 +1425,68 @@ merge_changed_cb (glLabel       *label,
 {
 	gl_label_object_emit_changed (object);
 }
+
+/*****************************************************************************/
+/* Draw object                                                               */
+/*****************************************************************************/
+void
+gl_label_object_draw (glLabelObject *object,
+                      cairo_t       *cr,
+                      gboolean       screen_flag,
+                      glMergeRecord *record)
+
+{
+        gdouble        x0, y0;
+        cairo_matrix_t matrix;
+	gboolean       shadow_state;
+	gdouble        shadow_x, shadow_y;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        gl_label_object_get_position (object, &x0, &y0);
+        gl_label_object_get_matrix (object, &matrix);
+
+        cairo_save (cr);
+        cairo_translate (cr, x0, y0);
+
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_shadow != NULL ) {
+
+                shadow_state = gl_label_object_get_shadow_state (object);
+
+                if ( shadow_state )
+                {
+                        gl_label_object_get_shadow_offset (object, &shadow_x, &shadow_y);
+
+                        cairo_save (cr);
+                        cairo_translate (cr, shadow_x, shadow_y);
+                        cairo_transform (cr, &matrix);
+
+                        GL_LABEL_OBJECT_GET_CLASS(object)->draw_shadow (object,
+                                                                        cr,
+                                                                        screen_flag,
+                                                                        record);
+
+                        cairo_restore (cr);
+                }
+        }
+
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL ) {
+
+                cairo_save (cr);
+                cairo_transform (cr, &matrix);
+
+                GL_LABEL_OBJECT_GET_CLASS(object)->draw_object (object,
+                                                                cr,
+                                                                screen_flag,
+                                                                record);
+
+                cairo_restore (cr);
+        }
+
+        cairo_restore (cr);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+

@@ -88,8 +88,6 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 static void
 gl_new_label_dialog_init (glNewLabelDialog *dialog)
 {
-	GtkWidget *pp_button;
-
 	gl_debug (DEBUG_FILE, "START");
 
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));

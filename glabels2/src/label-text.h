@@ -63,9 +63,6 @@ void           gl_label_text_set_lines    (glLabelText      *ltext,
 					   GList            *lines);
 GtkTextBuffer *gl_label_text_get_buffer   (glLabelText      *ltext);
 GList         *gl_label_text_get_lines    (glLabelText      *ltext);
-void           gl_label_text_get_box      (glLabelText      *ltext,
-					   gdouble          *w,
-					   gdouble          *h);
 
 void           gl_label_text_set_auto_shrink (glLabelText      *ltext,
 					      gboolean          auto_shrink);

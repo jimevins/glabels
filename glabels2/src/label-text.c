@@ -28,6 +28,7 @@
 #include <glib/gstrfuncs.h>
 #include <glib/gmessages.h>
 #include <pango/pango.h>
+#include <math.h>
 
 #include "util.h"
 
@@ -45,8 +46,6 @@
 #define DEFAULT_COLOR             GL_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING 1.0
 #define DEFAULT_AUTO_SHRINK       FALSE
-
-#define FONT_SCALE (72.0/96.0)
 
 /*========================================================*/
 /* Private types.                                         */
@@ -69,8 +68,6 @@ struct _glLabelTextPrivate {
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
-
-static guint instance = 0;
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -117,11 +114,30 @@ static PangoWeight     get_font_weight             (glLabelObject    *object);
 
 static gboolean        get_font_italic_flag        (glLabelObject    *object);
 
-static PangoAlignment  get_text_alignment         (glLabelObject    *object);
+static PangoAlignment  get_text_alignment          (glLabelObject    *object);
 
 static gdouble         get_text_line_spacing       (glLabelObject    *object);
 
 static glColorNode*    get_text_color              (glLabelObject    *object);
+
+static void            draw_object                 (glLabelObject    *object,
+                                                    cairo_t          *cr,
+                                                    gboolean          screen_flag,
+                                                    glMergeRecord    *record);
+
+static void            draw_shadow                 (glLabelObject    *object,
+                                                    cairo_t          *cr,
+                                                    gboolean          screen_flag,
+                                                    glMergeRecord    *record);
+
+static gdouble         auto_shrink_font_size       (cairo_t          *cr,
+                                                    gchar            *family,
+                                                    gdouble           size,
+                                                    PangoWeight       weight,
+                                                    PangoStyle        style,
+                                                    gchar            *text,
+                                                    gdouble           width);
+
 
 
 /*****************************************************************************/
@@ -137,24 +153,26 @@ gl_label_text_class_init (glLabelTextClass *class)
 
 	gl_label_text_parent_class = g_type_class_peek_parent (class);
 
-	label_object_class->copy                 = copy;
+	label_object_class->copy                  = copy;
 
-	label_object_class->get_size             = get_size;
+	label_object_class->get_size              = get_size;
 
-	label_object_class->set_font_family      = set_font_family;
-	label_object_class->set_font_size        = set_font_size;
-	label_object_class->set_font_weight      = set_font_weight;
-	label_object_class->set_font_italic_flag = set_font_italic_flag;
-	label_object_class->set_text_alignment   = set_text_alignment;
+	label_object_class->set_font_family       = set_font_family;
+	label_object_class->set_font_size         = set_font_size;
+	label_object_class->set_font_weight       = set_font_weight;
+	label_object_class->set_font_italic_flag  = set_font_italic_flag;
+	label_object_class->set_text_alignment    = set_text_alignment;
 	label_object_class->set_text_line_spacing = set_text_line_spacing;
-	label_object_class->set_text_color       = set_text_color;
-	label_object_class->get_font_family      = get_font_family;
-	label_object_class->get_font_size        = get_font_size;
-	label_object_class->get_font_weight      = get_font_weight;
-	label_object_class->get_font_italic_flag = get_font_italic_flag;
-	label_object_class->get_text_alignment   = get_text_alignment;
+	label_object_class->set_text_color        = set_text_color;
+	label_object_class->get_font_family       = get_font_family;
+	label_object_class->get_font_size         = get_font_size;
+	label_object_class->get_font_weight       = get_font_weight;
+	label_object_class->get_font_italic_flag  = get_font_italic_flag;
+	label_object_class->get_text_alignment    = get_text_alignment;
 	label_object_class->get_text_line_spacing = get_text_line_spacing;
-	label_object_class->get_text_color       = get_text_color;
+	label_object_class->get_text_color        = get_text_color;
+        label_object_class->draw_object           = draw_object;
+        label_object_class->draw_shadow           = draw_shadow;
 
 	object_class->finalize = gl_label_text_finalize;
 }
@@ -298,17 +316,6 @@ gl_label_text_get_lines (glLabelText *ltext)
 	return lines;
 }
 
-void
-gl_label_text_get_box (glLabelText *ltext,
-		       gdouble     *w,
-		       gdouble     *h)
-{
-	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
-
-	/* peek at the parent size. */
-	(* GL_LABEL_OBJECT_CLASS (gl_label_text_parent_class)->get_size) (GL_LABEL_OBJECT(ltext), w, h);
-}
-
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  text buffer "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
@@ -342,7 +349,7 @@ get_size (glLabelObject *object,
 
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
-	(* GL_LABEL_OBJECT_CLASS (gl_label_text_parent_class)->get_size) (object, &w_parent, &h_parent);
+	gl_label_object_get_raw_size (object, &w_parent, &h_parent);
 
 	if ( (w_parent != 0.0) || (h_parent != 0.0) ) {
 		*w = w_parent;
@@ -359,6 +366,7 @@ get_size (glLabelObject *object,
 	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
 	options = cairo_font_options_create ();
 	cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_OFF);
+        cairo_font_options_set_hint_style (options, CAIRO_HINT_STYLE_NONE);
 	pango_cairo_context_set_font_options (context, options);
 	cairo_font_options_destroy (options);
 
@@ -370,7 +378,7 @@ get_size (glLabelObject *object,
 	pango_font_description_set_family (desc, GL_LABEL_TEXT (object)->priv->font_family);
 	pango_font_description_set_weight (desc, GL_LABEL_TEXT (object)->priv->font_weight);
 	pango_font_description_set_style  (desc, style);
-	pango_font_description_set_size   (desc, GL_LABEL_TEXT (object)->priv->font_size * PANGO_SCALE * FONT_SCALE);
+	pango_font_description_set_size   (desc, GL_LABEL_TEXT (object)->priv->font_size * PANGO_SCALE);
 	pango_layout_set_font_description (layout, desc);
 	pango_font_description_free       (desc);
 
@@ -700,7 +708,7 @@ gl_label_text_set_auto_shrink (glLabelText      *ltext,
 }
 
 /*****************************************************************************/
-/* Query auto shrink flag.
+/* Query auto shrink flag.                                                   */
 /*****************************************************************************/
 gboolean
 gl_label_text_get_auto_shrink (glLabelText      *ltext)
@@ -711,3 +719,348 @@ gl_label_text_get_auto_shrink (glLabelText      *ltext)
 
 	return ltext->priv->auto_shrink;
 }
+
+/*****************************************************************************/
+/* Draw object method.                                                       */
+/*****************************************************************************/
+static void
+draw_object (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble          x0, y0;
+        cairo_matrix_t   matrix;
+	gdouble          object_w, object_h;
+	gdouble          raw_w, raw_h;
+	gchar           *text;
+	GList           *lines;
+	gchar           *font_family;
+	gdouble          font_size;
+	PangoWeight      font_weight;
+	gboolean         font_italic_flag;
+	glColorNode     *color_node;
+        gboolean         auto_shrink;
+	guint            color;
+	gdouble          text_line_spacing;
+        PangoAlignment   alignment;
+        PangoStyle       style;
+        PangoLayout     *layout;
+        PangoFontDescription *desc;
+        gdouble          scale_x, scale_y;
+        cairo_font_options_t *font_options;
+        PangoContext         *context;
+
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_position (object, &x0, &y0);
+        gl_label_object_get_matrix (object, &matrix);
+
+	gl_label_object_get_size (object, &object_w, &object_h);
+	gl_label_object_get_raw_size (object, &raw_w, &raw_h);
+	lines = gl_label_text_get_lines (GL_LABEL_TEXT (object));
+	font_family = gl_label_object_get_font_family (object);
+	font_size = gl_label_object_get_font_size (object);
+	font_weight = gl_label_object_get_font_weight (object);
+	font_italic_flag = gl_label_object_get_font_italic_flag (object);
+
+	color_node = gl_label_object_get_text_color (object);
+	color = gl_color_node_expand (color_node, record);
+        if (color_node->field_flag && screen_flag)
+        {
+                color = GL_COLOR_MERGE_DEFAULT;
+        }
+	gl_color_node_free (&color_node);
+	
+	alignment = gl_label_object_get_text_alignment (object);
+	text_line_spacing =
+		gl_label_object_get_text_line_spacing (object);
+        auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
+
+	text = gl_text_node_lines_expand (lines, record);
+
+        style = font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
+
+        if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
+        {
+                font_size = auto_shrink_font_size (cr,
+                                                   font_family,
+                                                   font_size,
+                                                   font_weight,
+                                                   style,
+                                                   text,
+                                                   object_w);
+                g_print ("Autosize new size = %g\n", font_size);
+        }
+
+
+        /*
+         * Workaround for pango Bug#341481.
+         * Render font at device scale and scale font size accordingly.
+         */
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        scale_x = fabs (scale_x);
+        scale_y = fabs (scale_y);
+        cairo_save (cr);
+        cairo_scale (cr, scale_x, scale_y);
+
+        layout = pango_cairo_create_layout (cr);
+
+        font_options = cairo_font_options_create ();
+        cairo_font_options_set_hint_metrics (font_options, CAIRO_HINT_METRICS_OFF);
+        cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
+        context = pango_layout_get_context (layout);
+        pango_cairo_context_set_font_options (context, font_options);
+        cairo_font_options_destroy (font_options);
+
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, font_family);
+        pango_font_description_set_weight (desc, font_weight);
+        pango_font_description_set_style  (desc, style);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE / scale_x);
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
+
+        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE / scale_x);
+        if (raw_w == 0.0)
+        {
+                pango_layout_set_width (layout, -1);
+        }
+        else
+        {
+                pango_layout_set_width (layout, object_w * PANGO_SCALE / scale_x);
+        }
+        pango_layout_set_wrap (layout, PANGO_WRAP_CHAR);
+        pango_layout_set_alignment (layout, alignment);
+
+
+        cairo_set_source_rgba (cr,
+                               GL_COLOR_F_RED (color),
+                               GL_COLOR_F_GREEN (color),
+                               GL_COLOR_F_BLUE (color),
+                               GL_COLOR_F_ALPHA (color));
+
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
+        pango_cairo_show_layout (cr, layout);
+
+        cairo_restore (cr);
+
+        g_object_unref (layout);
+
+
+	gl_text_node_lines_free (&lines);
+	g_free (font_family);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Draw shadow method.                                                       */
+/*****************************************************************************/
+static void
+draw_shadow (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble          x0, y0;
+        cairo_matrix_t   matrix;
+	gdouble          object_w, object_h;
+	gdouble          raw_w, raw_h;
+	gchar           *text;
+	GList           *lines;
+	gchar           *font_family;
+	gdouble          font_size;
+	PangoWeight      font_weight;
+	gboolean         font_italic_flag;
+        gboolean         auto_shrink;
+	guint            color;
+	glColorNode     *color_node;
+	gdouble          text_line_spacing;
+	glColorNode     *shadow_color_node;
+	gdouble          shadow_opacity;
+	guint            shadow_color;
+        PangoAlignment   alignment;
+        PangoStyle       style;
+        PangoLayout     *layout;
+        PangoFontDescription *desc;
+        gdouble          scale_x, scale_y;
+        cairo_font_options_t *font_options;
+        PangoContext         *context;
+
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_position (object, &x0, &y0);
+        gl_label_object_get_matrix (object, &matrix);
+
+	gl_label_object_get_size (object, &object_w, &object_h);
+	gl_label_object_get_raw_size (object, &raw_w, &raw_h);
+	lines = gl_label_text_get_lines (GL_LABEL_TEXT (object));
+	font_family = gl_label_object_get_font_family (object);
+	font_size = gl_label_object_get_font_size (object);
+	font_weight = gl_label_object_get_font_weight (object);
+	font_italic_flag = gl_label_object_get_font_italic_flag (object);
+
+	color_node = gl_label_object_get_text_color (object);
+	color = gl_color_node_expand (color_node, record);
+	gl_color_node_free (&color_node);
+	
+	alignment = gl_label_object_get_text_alignment (object);
+	text_line_spacing =
+		gl_label_object_get_text_line_spacing (object);
+        auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
+
+	shadow_color_node = gl_label_object_get_shadow_color (object);
+	if (shadow_color_node->field_flag)
+	{
+		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+	}
+	shadow_opacity = gl_label_object_get_shadow_opacity (object);
+	shadow_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, color);
+	gl_color_node_free (&shadow_color_node);
+
+	text = gl_text_node_lines_expand (lines, record);
+
+        style = font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
+
+        if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
+        {
+                font_size = auto_shrink_font_size (cr,
+                                                   font_family,
+                                                   font_size,
+                                                   font_weight,
+                                                   style,
+                                                   text,
+                                                   object_w);
+        }
+
+
+        /*
+         * Workaround for pango Bug#341481.
+         * Render font at device scale and scale font size accordingly.
+         */
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        scale_x = fabs (scale_x);
+        scale_y = fabs (scale_y);
+        cairo_save (cr);
+        cairo_scale (cr, scale_x, scale_y);
+
+        layout = pango_cairo_create_layout (cr);
+
+        font_options = cairo_font_options_create ();
+        cairo_font_options_set_hint_metrics (font_options, CAIRO_HINT_METRICS_OFF);
+        cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
+        context = pango_layout_get_context (layout);
+        pango_cairo_context_set_font_options (context, font_options);
+        cairo_font_options_destroy (font_options);
+
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, font_family);
+        pango_font_description_set_weight (desc, font_weight);
+        pango_font_description_set_style  (desc, style);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE / scale_x);
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
+
+        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE / scale_x);
+        if (raw_w == 0.0)
+        {
+                pango_layout_set_width (layout, -1);
+        }
+        else
+        {
+                pango_layout_set_width (layout, object_w * PANGO_SCALE / scale_x);
+        }
+        pango_layout_set_wrap (layout, PANGO_WRAP_CHAR);
+        pango_layout_set_alignment (layout, alignment);
+
+        cairo_set_source_rgba (cr,
+                               GL_COLOR_F_RED (shadow_color),
+                               GL_COLOR_F_GREEN (shadow_color),
+                               GL_COLOR_F_BLUE (shadow_color),
+                               GL_COLOR_F_ALPHA (shadow_color));
+
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
+        pango_cairo_show_layout (cr, layout);
+
+
+        cairo_restore (cr);
+
+        g_object_unref (layout);
+
+	gl_text_node_lines_free (&lines);
+	g_free (font_family);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+/*****************************************************************************/
+/* Automatically shrink text size to fit within horizontal width.            */
+/*****************************************************************************/
+static gdouble
+auto_shrink_font_size (cairo_t     *cr,
+                       gchar       *family,
+                       gdouble      size,
+                       PangoWeight  weight,
+                       PangoStyle   style,
+                       gchar       *text,
+                       gdouble      width)
+{
+        PangoLayout          *layout;
+        PangoFontDescription *desc;
+        gint                  iw, ih;
+        gdouble               layout_width;
+        gdouble               new_size;
+
+        layout = pango_cairo_create_layout (cr);
+
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, family);
+        pango_font_description_set_weight (desc, weight);
+        pango_font_description_set_style  (desc, style);
+        pango_font_description_set_size   (desc, size * PANGO_SCALE);
+        
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
+
+        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_width (layout, -1);
+        pango_layout_get_size (layout, &iw, &ih);
+        layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
+
+        g_object_unref (layout);
+
+        g_print ("Object w = %g, layout w = %g\n", width, layout_width);
+
+        if ( layout_width > width )
+        {
+                /* Scale down. */
+                new_size = size * (width-2*GL_LABEL_TEXT_MARGIN)/layout_width;
+
+                /* Round down to nearest 1/2 point */
+                new_size = (int)(new_size*2.0) / 2.0;
+
+                /* don't get ridiculously small. */
+                if (new_size < 1.0)
+                {
+                        new_size = 1.0;
+                }
+        }
+        else
+        {
+                new_size = size;
+        }
+
+        return new_size;
+}
+

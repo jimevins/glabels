@@ -5,7 +5,7 @@
  *
  *  label.h:  GLabels label module header file
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include <libglabels/template.h>
 #include "merge.h"
 #include "pixbuf-cache.h"
+#include <cairo.h>
 
 G_BEGIN_DECLS
 
@@ -46,6 +47,9 @@ typedef struct _glLabelPrivate   glLabelPrivate;
 #include "label-object.h"
 struct _glLabel {
 	GObject         object;
+
+        glTemplate     *template;
+        gboolean        rotate_flag;
 
 	GList          *objects;
 
@@ -92,11 +96,6 @@ void          gl_label_set_template            (glLabel       *label,
 void          gl_label_set_rotate_flag         (glLabel       *label,
 						gboolean       rotate_flag);
 
-
-glTemplate   *gl_label_get_template            (glLabel       *label);
-
-gboolean      gl_label_get_rotate_flag         (glLabel       *label);
-
 void          gl_label_get_size                (glLabel       *label,
 						gdouble       *w,
 						gdouble       *h);
@@ -132,6 +131,11 @@ void          gl_label_set_compression         (glLabel       *label,
 						gint           compression);
 
 gint          gl_label_get_compression         (glLabel       *label);
+
+void          gl_label_draw                    (glLabel       *label,
+                                                cairo_t       *cr,
+                                                gboolean       screen_flag,
+                                                glMergeRecord *record);
 
 G_END_DECLS
 

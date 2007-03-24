@@ -28,6 +28,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include <glib/gmessages.h>
 
 #include "iec16022ecc200.h"
@@ -71,9 +72,9 @@ gl_barcode_iec16022_new (const gchar    *id,
         i_width  = 0;
         i_height = 0;
 
-        grid = iec16022ecc200 (&i_width, &i_height, NULL,
-                               strlen (digits), (char *)digits,
-                               NULL, NULL, NULL);
+        grid = (gchar *)iec16022ecc200 (&i_width, &i_height, NULL,
+                                        strlen (digits), (unsigned char *)digits,
+                                        NULL, NULL, NULL);
 
         /* now render with our custom back-end,
            to create appropriate intermdediate format */

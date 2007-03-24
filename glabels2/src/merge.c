@@ -123,7 +123,7 @@ gl_merge_register_backend (GType              type,
 		class = g_type_class_ref (type);
 		if (class == NULL) {
 			g_message ("%s: unknown object type %d",
-				   G_STRLOC, type);
+				   G_STRLOC, (int)type);
 			break;
 		}
 		pspec = g_object_class_find_property (class, pname);

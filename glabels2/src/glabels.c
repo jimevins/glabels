@@ -29,6 +29,7 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
 
+#include "warning-handler.h"
 #include "critical-error-handler.h"
 #include "stock.h"
 #include "merge-init.h"

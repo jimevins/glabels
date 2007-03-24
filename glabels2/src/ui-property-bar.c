@@ -514,6 +514,11 @@ update_text_properties (glView *view,
 	is_same_font_family = TRUE;
 	selection_font_family = NULL;
 	selection_font_size = -1;
+        selection_align = PANGO_ALIGN_LEFT;
+        selection_is_italic = TRUE;
+        selection_is_bold = TRUE;
+        selection_text_color = 0;
+        
 	is_first_object = TRUE;
 	
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
@@ -638,6 +643,7 @@ update_fill_color (glView *view,
 
 	is_same_fill_color = TRUE;
 	is_first_object = TRUE;
+        selection_fill_color = 0;
 	
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 
@@ -693,6 +699,7 @@ update_line_color (glView *view,
 
 	is_same_line_color = TRUE;
 	is_first_object = TRUE;
+        selection_line_color = 0;
 	
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 
@@ -746,6 +753,7 @@ update_line_width (glView *view,
 
 	is_same_line_width = TRUE;
 	is_first_object = TRUE;
+        selection_line_width = 0;
 	
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 

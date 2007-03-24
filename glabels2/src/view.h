@@ -5,7 +5,7 @@
  *
  *  view.h:  GLabels View module header file
  *
- *  Copyright (C) 2001-2005  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,14 +26,20 @@
 #define __VIEW_H__
 
 #include <gtk/gtkvbox.h>
-#include <libgnomecanvas/libgnomecanvas.h>
-#include <libgnomeprint/gnome-font.h>
 
 #include "label-object.h"
 
 typedef enum {
-	GL_VIEW_STATE_ARROW,
-	GL_VIEW_STATE_OBJECT_CREATE
+	GL_VIEW_MODE_ARROW,
+	GL_VIEW_MODE_OBJECT_CREATE
+} glViewMode;
+
+typedef enum {
+        GL_VIEW_IDLE = 0,
+        GL_VIEW_ARROW_SELECT_REGION,
+        GL_VIEW_ARROW_MOVE,
+        GL_VIEW_ARROW_RESIZE,
+        GL_VIEW_CREATE_DRAG,
 } glViewState;
 
 #define GL_TYPE_VIEW            (gl_view_get_type ())
@@ -49,39 +55,59 @@ typedef struct _glViewClass glViewClass;
 #include "color.h"
 
 struct _glView {
-	GtkVBox           parent_widget;
+	GtkVBox            parent_widget;
 
-	glLabel          *label;
+	glLabel           *label;
 
-	GtkWidget        *canvas;
-	gdouble           zoom;
-	gboolean          zoom_to_fit_flag;
-	gdouble           home_scale;
+	GtkWidget         *canvas;
+	gdouble            zoom;
+	gboolean           zoom_to_fit_flag;
+	gdouble            home_scale;
+        gdouble            x0, y0;
+        gdouble            w, h;
 
-	GnomeCanvasGroup *bg_group;              /* Background layer */
-	GnomeCanvasGroup *grid_group;            /* Grid layer */
-	GnomeCanvasGroup *markup_group;          /* Markup layer */
-	GnomeCanvasGroup *label_group;           /* Label layer (user objects) */
-	GnomeCanvasGroup *fg_group;              /* Foreground layer */
-	GnomeCanvasGroup *highlight_group;       /* Highlight layer */
+        gboolean           grid_visible;
+	gdouble            grid_spacing;
 
-	gdouble           grid_spacing;
+        gboolean           markup_visible;
 
-	glViewState       state;
-	glLabelObjectType create_type;
+	glViewMode         mode;
+	glLabelObjectType  create_type;
+        glViewState        state;
+
+        /* GL_VIEW_ARROW_MOVE state */
+        gdouble            move_last_x;
+        gdouble            move_last_y;
+
+        /* GL_VIEW_ARROW_SELECT_REGION state */
+        gboolean           select_region_visible;
+        gdouble            select_region_x1;
+        gdouble            select_region_y1;
+        gdouble            select_region_x2;
+        gdouble            select_region_y2;
+
+        /* GL_VIEW_ARROW_RESIZE state */
+        glViewObject      *resize_object;
+        glViewObjectHandle resize_handle;
+        gboolean           resize_honor_aspect;
+
+        /* GL_VIEW_CREATE_DRAG state */
+        glLabelObject     *create_object;
+        gdouble            create_x0;
+        gdouble            create_y0;
 
 	GList             *object_list;           /* glViewObjects */
 	GList             *selected_object_list;  /* glViewObjects */
 
 	/* Clipboard selection stuff */
-	gint              have_selection;
+	gint               have_selection;
 	glLabel           *selection_data;
 	GtkWidget         *invisible;
 
 	/* Default object text properties */
 	gchar             *default_font_family;
 	gdouble            default_font_size;
-	GnomeFontWeight    default_font_weight;
+	PangoWeight        default_font_weight;
 	gboolean           default_font_italic_flag;
 	guint              default_text_color;
 	PangoAlignment     default_text_alignment;
@@ -92,7 +118,8 @@ struct _glView {
 	guint              default_line_color;
 	
 	/* Default object fill properties */
-	guint             default_fill_color;
+	guint              default_fill_color;
+
 };
 
 struct _glViewClass {
@@ -128,6 +155,8 @@ GType      gl_view_get_type                (void) G_GNUC_CONST;
 
 GtkWidget *gl_view_new                     (glLabel           *label);
 
+
+void       gl_view_update                  (glView            *view);
 
 void       gl_view_show_grid               (glView            *view);
 
@@ -217,7 +246,7 @@ void       gl_view_set_selection_font_size        (glView           *view,
 						   gdouble           font_size);
 
 void       gl_view_set_selection_font_weight      (glView           *view,
-						   GnomeFontWeight   font_weight);
+						   PangoWeight      font_weight);
 
 void       gl_view_set_selection_text_line_spacing (glView           *view,
 						   gdouble           text_line_spacing);
@@ -277,7 +306,7 @@ void       gl_view_set_default_font_size        (glView            *view,
 						 gdouble            font_size);
 
 void       gl_view_set_default_font_weight      (glView            *view,
-						 GnomeFontWeight    font_weight);
+						 PangoWeight        font_weight);
 
 void       gl_view_set_default_font_italic_flag (glView            *view,
 					         gboolean           font_italic_flag);
@@ -305,7 +334,7 @@ gchar           *gl_view_get_default_font_family      (glView            *view);
 
 gdouble          gl_view_get_default_font_size        (glView            *view);
 
-GnomeFontWeight  gl_view_get_default_font_weight      (glView            *view);
+PangoWeight      gl_view_get_default_font_weight      (glView            *view);
 
 gboolean         gl_view_get_default_font_italic_flag (glView            *view);
 

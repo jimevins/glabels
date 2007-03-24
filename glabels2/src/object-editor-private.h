@@ -184,6 +184,8 @@ void gl_object_editor_prepare_bc_page           (glObjectEditor        *editor);
 
 void gl_object_editor_prepare_data_page         (glObjectEditor        *editor);
 
+void gl_object_editor_prepare_shadow_page       (glObjectEditor        *editor);
+
 
 void gl_object_editor_changed_cb                (glObjectEditor        *editor);
 void gl_object_editor_size_changed_cb           (glObjectEditor        *editor);
@@ -191,6 +193,7 @@ void gl_object_editor_size_changed_cb           (glObjectEditor        *editor);
 void lsize_prefs_changed_cb                     (glObjectEditor        *editor);
 void size_prefs_changed_cb                      (glObjectEditor        *editor);
 void position_prefs_changed_cb                  (glObjectEditor        *editor);
+void shadow_prefs_changed_cb                    (glObjectEditor        *editor);
 
 G_END_DECLS
 

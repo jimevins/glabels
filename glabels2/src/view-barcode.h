@@ -3,9 +3,9 @@
 /*
  *  (GLABELS) Label and Business Card Creation program for GNOME
  *
- *  view_barcode.h:  GLabels canvas item wrapper widget
+ *  view_barcode.h:  GLabels label barcode object view
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,29 +43,38 @@ typedef struct _glViewBarcodeClass     glViewBarcodeClass;
 typedef struct _glViewBarcodePrivate   glViewBarcodePrivate;
 
 struct _glViewBarcode {
-	glViewObject           parent_object;
+	glViewObject              parent_object;
 
-	glViewBarcodePrivate  *priv;
+	glViewBarcodePrivate     *priv;
 };
 
 struct _glViewBarcodeClass {
-	glViewObjectClass      parent_class;
+	glViewObjectClass         parent_class;
 };
 
 
 GType          gl_view_barcode_get_type (void) G_GNUC_CONST;
 
 glViewObject  *gl_view_barcode_new      (glLabelBarcode *object,
-					 glView     *view);
+                                         glView         *view);
 
 
 /* cursor for creating barcode objects */
 GdkCursor *gl_view_barcode_get_create_cursor (void);
 
-/* event handler for creating barcode objects */
-gint gl_view_barcode_create_event_handler    (GnomeCanvas *canvas,
-					      GdkEvent    *event,
-					      glView      *view);
+/* Object creation handlers. */
+void       gl_view_barcode_create_button_press_event   (glView *view,
+                                                        gdouble x,
+                                                        gdouble y);
+
+void       gl_view_barcode_create_motion_event         (glView *view,
+                                                        gdouble x,
+                                                        gdouble y);
+
+void       gl_view_barcode_create_button_release_event (glView *view,
+                                                        gdouble x,
+                                                        gdouble y);
+
 
 G_END_DECLS
 

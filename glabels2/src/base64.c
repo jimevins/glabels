@@ -35,6 +35,7 @@
 #include "base64.h"
 
 #include <glib/gmem.h>
+#include <ctype.h>
 #include <string.h>
 
 /*========================================================*/

@@ -5,7 +5,7 @@
  *
  *  view.c:  GLabels View module
  *
- *  Copyright (C) 2001-2005  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,12 +28,16 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtkscrolledwindow.h>
+#include <gtk/gtklayout.h>
 #include <gtk/gtkselection.h>
 #include <gtk/gtkinvisible.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <math.h>
 
+#include "label.h"
+#include "cairo-label-path.h"
+#include "cairo-markup-path.h"
 #include "view-object.h"
 #include "view-box.h"
 #include "view-ellipse.h"
@@ -118,95 +122,98 @@ static gdouble zooms[] = {
 /* Local function prototypes                                                */
 /*==========================================================================*/
 
-static void       gl_view_finalize                (GObject *object);
+static void       gl_view_finalize                (GObject        *object);
 
-static void       gl_view_construct               (glView *view);
-static GtkWidget *gl_view_construct_canvas        (glView *view);
-static void       gl_view_construct_selection     (glView *view);
+static void       gl_view_construct               (glView         *view,
+                                                   glLabel        *label);
 
-static gdouble    get_home_scale                  (glView *view);
+static gdouble    get_home_scale                  (glView         *view);
 
-static void       draw_layers                     (glView *view);
+static gboolean   expose_cb                       (glView         *view,
+                                                   GdkEventExpose *event);
 
-static void       label_resized_cb                (glLabel *label,
-						   glView *view);
+static void       realize_cb                      (glView         *view);
 
-static void       draw_label_layer                (glView *view);
+static void       size_allocate_cb                (glView         *view,
+                                                   GtkAllocation  *allocation);
 
-static void       draw_highlight_layer            (glView *view);
+static void       screen_changed_cb               (glView         *view);
 
-static void       draw_bg_fg_layers               (glView *view);
-static void       draw_bg_fg_rect                 (glView *view);
-static void       draw_bg_fg_rounded_rect         (glView *view);
-static void       draw_bg_fg_round                (glView *view);
-static void       draw_bg_fg_cd                   (glView *view);
-static void       draw_bg_fg_cd_bc                (glView *view);
+static void       label_changed_cb                (glView         *view);
 
-static void       draw_grid_layer                 (glView *view);
+static void       label_resized_cb                (glView         *view);
 
-static void       draw_markup_layer               (glView *view);
+static void       draw_layers                     (glView         *view,
+                                                   cairo_t        *cr);
 
-static void       draw_markup_margin              (glView *view,
-						   glTemplateMarkup *margin);
-static void       draw_markup_margin_rect         (glView *view,
-						   glTemplateMarkup *margin);
-static void       draw_markup_margin_rounded_rect (glView *view,
-						   glTemplateMarkup *margin);
-static void       draw_markup_margin_round        (glView *view,
-						   glTemplateMarkup *margin);
-static void       draw_markup_margin_cd           (glView *view,
-						   glTemplateMarkup *margin);
-static void       draw_markup_margin_cd_bc        (glView *view,
-						   glTemplateMarkup *margin);
+static void       draw_bg_layer                   (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_grid_layer                 (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_markup_layer               (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_objects_layer              (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_fg_layer                   (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_highlight_layer            (glView         *view,
+                                                   cairo_t        *cr);
+static void       draw_select_region_layer        (glView         *view,
+                                                   cairo_t        *cr);
 
-static void       draw_markup_line                (glView *view,
-						   glTemplateMarkup *line);
+static void       select_object_real              (glView         *view,
+						   glViewObject   *view_object);
+static void       unselect_object_real            (glView         *view,
+						   glViewObject   *view_object);
 
-static void       draw_markup_circle              (glView *view,
-						   glTemplateMarkup *circle);
+static glViewObject *view_view_object_at          (glView         *view,
+                                                   cairo_t        *cr,
+						   gdouble         x,
+                                                   gdouble         y);
 
+static void       set_zoom_real                   (glView         *view,
+						   gdouble         zoom,
+						   gboolean        scale_to_fit_flag);
 
-static void       select_object_real              (glView *view,
-						   glViewObject *view_object);
-static void       unselect_object_real            (glView *view,
-						   glViewObject *view_object);
+static void       selection_clear_cb              (GtkWidget         *widget,
+                                                   GdkEventSelection *event,
+                                                   glView            *view);
 
-static gboolean   object_at                       (glView *view,
-						   gdouble x, gdouble y);
+static void       selection_get_cb                (GtkWidget         *widget,
+                                                   GtkSelectionData  *selection_data,
+                                                   guint              info,
+                                                   guint              time,
+                                                   glView            *view);
 
-static gboolean   is_item_member_of_group         (glView          *view,
-						   GnomeCanvasItem *item,
-						   GnomeCanvasItem *group);
+static void       selection_received_cb           (GtkWidget         *widget,
+                                                   GtkSelectionData  *selection_data,
+                                                   guint              time,
+                                                   glView            *view);
 
-static void       set_zoom_real                   (glView          *view,
-						   gdouble          zoom,
-						   gboolean         scale_to_fit_flag);
+static gboolean   focus_in_event_cb               (glView            *view,
+                                                   GdkEventFocus     *event);
 
-static void       size_allocate_cb                (glView          *view);
+static gboolean   focus_out_event_cb              (glView            *view,
+                                                   GdkEventFocus     *event);
 
-static void       screen_changed_cb               (glView          *view);
+static gboolean   enter_notify_event_cb           (glView            *view,
+                                                   GdkEventCrossing  *event);
 
-static int        canvas_event                    (GnomeCanvas *canvas,
-						   GdkEvent    *event,
-						   glView      *view);
-static int        canvas_event_arrow_mode         (GnomeCanvas *canvas,
-						   GdkEvent    *event,
-						   glView      *view);
+static gboolean   leave_notify_event_cb           (glView            *view,
+                                                   GdkEventCrossing  *event);
 
-static void       selection_clear_cb             (GtkWidget         *widget,
-						  GdkEventSelection *event,
-						  glView            *view);
+static gboolean   motion_notify_event_cb          (glView            *view,
+                                                   GdkEventMotion    *event);
 
-static void       selection_get_cb               (GtkWidget         *widget,
-						  GtkSelectionData  *selection_data,
-						  guint             info,
-						  guint             time,
-						  glView           *view);
+static gboolean   button_press_event_cb           (glView            *view,
+                                                   GdkEventButton    *event);
 
-static void       selection_received_cb          (GtkWidget         *widget,
-						  GtkSelectionData  *selection_data,
-						  guint             time,
-						  glView           *view);
+static gboolean   button_release_event_cb         (glView            *view,
+                                                   GdkEventButton    *event);
+
+static gboolean   key_press_event_cb              (glView            *view,
+                                                   GdkEventKey       *event);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -290,13 +297,106 @@ gl_view_class_init (glViewClass *class)
 static void
 gl_view_init (glView *view)
 {
+	GtkWidget *wscroll;
+	GdkColor  *bg_color;
+
 	gl_debug (DEBUG_VIEW, "START");
 
-	view->label = NULL;
+	view->label                = NULL;
+	view->grid_visible         = TRUE;
+	view->grid_spacing         = 9;
+	view->markup_visible       = TRUE;
+	view->default_font_family  = NULL;
+	view->mode                 = GL_VIEW_MODE_ARROW;
+	view->object_list          = NULL;
+	view->selected_object_list = NULL;
+	view->zoom                 = 1.0;
+	view->home_scale           = get_home_scale (view);
 
-	view->grid_spacing = 9;
+        /*
+         * Canvas
+         */
+        view->canvas = gtk_layout_new (NULL, NULL);
+        wscroll = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+	gtk_box_pack_start (GTK_BOX (view), wscroll, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (wscroll), view->canvas);
 
-	view->default_font_family = NULL;
+	bg_color = gl_color_to_gdk_color (BG_COLOR);
+	gtk_widget_modify_bg (GTK_WIDGET (view->canvas), GTK_STATE_NORMAL, bg_color);
+	g_free (bg_color);
+
+        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->canvas), GTK_CAN_FOCUS);
+
+        gtk_widget_add_events (GTK_WIDGET (view->canvas),
+                               (GDK_FOCUS_CHANGE_MASK   |
+                                GDK_ENTER_NOTIFY_MASK   |
+                                GDK_LEAVE_NOTIFY_MASK   |
+                                GDK_POINTER_MOTION_MASK |
+                                GDK_BUTTON_PRESS_MASK   |
+                                GDK_BUTTON_RELEASE_MASK |
+                                GDK_KEY_PRESS_MASK));
+
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "expose-event",
+				  G_CALLBACK (expose_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "realize",
+				  G_CALLBACK (realize_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "size-allocate",
+				  G_CALLBACK (size_allocate_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "screen-changed",
+				  G_CALLBACK (screen_changed_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "focus-in-event",
+				  G_CALLBACK (focus_in_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "focus-out-event",
+				  G_CALLBACK (focus_out_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "enter-notify-event",
+				  G_CALLBACK (enter_notify_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "leave-notify-event",
+				  G_CALLBACK (leave_notify_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "motion-notify-event",
+				  G_CALLBACK (motion_notify_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "button-press-event",
+				  G_CALLBACK (button_press_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "button-release-event",
+				  G_CALLBACK (button_release_event_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->canvas), "key-press-event",
+				  G_CALLBACK (key_press_event_cb), view);
+
+        /*
+         * Clipboard
+         */
+	view->have_selection       = FALSE;
+	view->selection_data       = NULL;
+	view->invisible            = gtk_invisible_new ();
+	if (!clipboard_atom) {
+		clipboard_atom = gdk_atom_intern ("GLABELS_CLIPBOARD", FALSE);
+	}
+	gtk_selection_add_target (view->invisible,
+				  clipboard_atom, GDK_SELECTION_TYPE_STRING, 1);
+	g_signal_connect (G_OBJECT (view->invisible),
+			  "selection_clear_event",
+			  G_CALLBACK (selection_clear_cb), view);
+	g_signal_connect (G_OBJECT (view->invisible), "selection_get",
+			  G_CALLBACK (selection_get_cb), view);
+	g_signal_connect (G_OBJECT (view->invisible),
+			  "selection_received",
+			  G_CALLBACK (selection_received_cb), view);
+
+        /*
+         * Defaults from preferences
+         */
+	gl_view_set_default_font_family       (view, gl_prefs->default_font_family);
+	gl_view_set_default_font_size         (view, gl_prefs->default_font_size);
+	gl_view_set_default_font_weight       (view, gl_prefs->default_font_weight);
+	gl_view_set_default_font_italic_flag  (view, gl_prefs->default_font_italic_flag);
+	gl_view_set_default_text_color        (view, gl_prefs->default_text_color);
+	gl_view_set_default_text_alignment    (view, gl_prefs->default_text_alignment);
+	gl_view_set_default_text_line_spacing (view, gl_prefs->default_text_line_spacing);
+	gl_view_set_default_line_width        (view, gl_prefs->default_line_width);
+	gl_view_set_default_line_color        (view, gl_prefs->default_line_color);
+	gl_view_set_default_fill_color        (view, gl_prefs->default_fill_color);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -333,9 +433,8 @@ gl_view_new (glLabel *label)
 	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
 	view = g_object_new (GL_TYPE_VIEW, NULL);
-	view->label = label;
 
-	gl_view_construct (view);
+	gl_view_construct (view, label);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -346,95 +445,46 @@ gl_view_new (glLabel *label)
 /* PRIVATE.  Construct composite widget.                                     */
 /*---------------------------------------------------------------------------*/
 static void
-gl_view_construct (glView *view)
+gl_view_construct (glView  *view,
+                   glLabel *label)
 {
-	GtkWidget *wvbox;
-	GtkWidget *wscroll;
+        GList            *p_obj;
+        glLabelObject    *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
 
-	wvbox = GTK_WIDGET (view);
+	view->label = label;
 
-	view->state = GL_VIEW_STATE_ARROW;
-	view->object_list = NULL;
+        for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next)
+        {
+                object = GL_LABEL_OBJECT (p_obj->data);
 
-	gl_view_construct_canvas (view);
-	wscroll = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (wscroll),
-					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX (wvbox), wscroll, TRUE, TRUE, 0);
-	gtk_container_add (GTK_CONTAINER (wscroll), view->canvas);
+                if (GL_IS_LABEL_BOX (object)) {
+                        gl_view_box_new (GL_LABEL_BOX(object), view);
+                } else if (GL_IS_LABEL_ELLIPSE (object)) {
+                        gl_view_ellipse_new (GL_LABEL_ELLIPSE(object), view);
+                } else if (GL_IS_LABEL_LINE (object)) {
+                        gl_view_line_new (GL_LABEL_LINE(object), view);
+                } else if (GL_IS_LABEL_IMAGE (object)) {
+                        gl_view_image_new (GL_LABEL_IMAGE(object), view);
+                } else if (GL_IS_LABEL_TEXT (object)) {
+                        gl_view_text_new (GL_LABEL_TEXT(object), view);
+                } else if (GL_IS_LABEL_BARCODE (object)) {
+                        gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
+                } else {
+                        /* Should not happen! */
+                        g_message ("Invalid label object type.");
+                }
+        }
 
-	gl_view_construct_selection (view);
-
-	gl_view_set_default_font_family      (view, gl_prefs->default_font_family);
-	gl_view_set_default_font_size        (view, gl_prefs->default_font_size);
-	gl_view_set_default_font_weight      (view, gl_prefs->default_font_weight);
-	gl_view_set_default_font_italic_flag (view, gl_prefs->default_font_italic_flag);
-	gl_view_set_default_text_color       (view, gl_prefs->default_text_color);
-	gl_view_set_default_text_alignment   (view, gl_prefs->default_text_alignment);
-	gl_view_set_default_text_line_spacing (view, gl_prefs->default_text_line_spacing);
-	gl_view_set_default_line_width       (view, gl_prefs->default_line_width);
-	gl_view_set_default_line_color       (view, gl_prefs->default_line_color);
-	gl_view_set_default_fill_color       (view, gl_prefs->default_fill_color);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Create canvas w/ a background in the shape of the label/card.   */
-/*---------------------------------------------------------------------------*/
-static GtkWidget *
-gl_view_construct_canvas (glView *view)
-{
-	glLabel   *label;
-	gdouble    label_width;
-	gdouble    label_height;
-	GdkColor  *bg_color;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-	g_return_val_if_fail (view->label && GL_IS_LABEL (view->label), NULL);
-
-	label = view->label;
-
-	gtk_widget_push_colormap (gdk_rgb_get_colormap ());
-	view->canvas = gnome_canvas_new_aa ();
-	gtk_widget_pop_colormap ();
-
-	bg_color = gl_color_to_gdk_color (BG_COLOR);
-	gtk_widget_modify_bg (GTK_WIDGET(view->canvas), GTK_STATE_NORMAL, bg_color);
-	g_free (bg_color);
-
-	gl_label_get_size (label, &label_width, &label_height);
-	gl_debug (DEBUG_VIEW, "Label size: w=%lf, h=%lf",
-		  label_width, label_height);
-
-	view->zoom = 1.0;
-	view->home_scale = get_home_scale (view);
-	gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas), view->home_scale);
-
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
-					0.0, 0.0, label_width, label_height);
-
-	draw_layers (view);
-
-	g_signal_connect (G_OBJECT (view->canvas), "event",
-			  G_CALLBACK (canvas_event), view);
-
-	g_signal_connect_swapped (G_OBJECT (view->canvas), "size-allocate",
-				  G_CALLBACK (size_allocate_cb), view);
-
-	g_signal_connect_swapped (G_OBJECT (view->canvas), "screen-changed",
-				  G_CALLBACK (screen_changed_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->label), "changed",
+                                  G_CALLBACK (label_changed_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->label), "size_changed",
+                                  G_CALLBACK (label_resized_cb), view);
 
 	gl_debug (DEBUG_VIEW, "END");
-
-	return view->canvas;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -451,6 +501,8 @@ get_home_scale (glView *view)
 	gdouble    x_pixels_per_mm;
 	gdouble    y_pixels_per_mm;
 	gdouble    scale;
+
+	if (view->canvas == NULL) return 1.0;
 
 	if (!gtk_widget_has_screen (GTK_WIDGET (view->canvas))) return 1.0;
 
@@ -487,693 +539,289 @@ get_home_scale (glView *view)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Create clipboard selection targets.                             */
+/* PRIVATE.  Update canvas.                                                  */
 /*---------------------------------------------------------------------------*/
-static void
-gl_view_construct_selection (glView *view)
+void
+gl_view_update (glView  *view)
 {
+ 	GtkWidget *widget;
+	GdkRegion *region;
+	
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (GL_IS_VIEW (view));
+	widget = GTK_WIDGET (view->canvas);
 
-	view->have_selection = FALSE;
-	view->selection_data = NULL;
-	view->invisible = gtk_invisible_new ();
+	if (!widget->window) return;
 
-	view->selected_object_list = NULL;
+	region = gdk_drawable_get_clip_region (widget->window);
+	/* redraw the cairo canvas completely by exposing it */
+	gdk_window_invalidate_region (widget->window, region, TRUE);
 
-	if (!clipboard_atom) {
-		clipboard_atom = gdk_atom_intern ("GLABELS_CLIPBOARD", FALSE);
-	}
-
-	gtk_selection_add_target (view->invisible,
-				  clipboard_atom, GDK_SELECTION_TYPE_STRING, 1);
-
-	g_signal_connect (G_OBJECT (view->invisible),
-			  "selection_clear_event",
-			  G_CALLBACK (selection_clear_cb), view);
-
-	g_signal_connect (G_OBJECT (view->invisible), "selection_get",
-			  G_CALLBACK (selection_get_cb), view);
-
-	g_signal_connect (G_OBJECT (view->invisible),
-			  "selection_received",
-			  G_CALLBACK (selection_received_cb), view);
+	gdk_region_destroy (region);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Expose handler.                                                 */
+/*---------------------------------------------------------------------------*/
+static gboolean
+expose_cb (glView         *view,
+           GdkEventExpose *event)
+{
+	cairo_t *cr;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	/* get a cairo_t */
+	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+
+	cairo_rectangle (cr,
+			event->area.x, event->area.y,
+			event->area.width, event->area.height);
+	cairo_clip (cr);
+	
+	draw_layers (view, cr);
+
+	cairo_destroy (cr);
+
+	gl_debug (DEBUG_VIEW, "END");
+
+	return FALSE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Realize handler.                                                */
+/*---------------------------------------------------------------------------*/
+static void
+realize_cb (glView  *view)
+{
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Size allocation changed callback.                                */
+/*---------------------------------------------------------------------------*/
+static void
+size_allocate_cb (glView         *view,
+                  GtkAllocation  *allocation)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+        GTK_LAYOUT (view->canvas)->hadjustment->page_size = allocation->width;
+        GTK_LAYOUT (view->canvas)->hadjustment->page_increment = allocation->width / 2;
+ 
+        GTK_LAYOUT (view->canvas)->vadjustment->page_size = allocation->height;
+        GTK_LAYOUT (view->canvas)->vadjustment->page_increment = allocation->height / 2;
+
+        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->hadjustment, "changed");
+        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->vadjustment, "changed");
+
+	if (view->zoom_to_fit_flag) {
+		/* Maintain best fit zoom */
+		gl_view_zoom_to_fit (view);
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Screen changed callback.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+screen_changed_cb (glView *view)
+{
+	gl_debug (DEBUG_VIEW, "START");
+
+	if (gtk_widget_has_screen (GTK_WIDGET (view->canvas))) {
+
+		view->home_scale = get_home_scale (view);
+
+		if (view->zoom_to_fit_flag) {
+			/* Maintain best fit zoom */
+			gl_view_zoom_to_fit (view);
+		}
+	}
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Handle label changed event.                                     */
+/*---------------------------------------------------------------------------*/
+static void
+label_changed_cb (glView  *view)
+{
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	gl_debug (DEBUG_VIEW, "START");
+
+        gl_view_update (view);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Handle label resize event.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+label_resized_cb (glView  *view)
+{
+	g_return_if_fail (view && GL_IS_VIEW (view));
+
+	gl_debug (DEBUG_VIEW, "START");
+
+        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->hadjustment, "changed");
+        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->vadjustment, "changed");
+
+        gl_view_update (view);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create, draw and order layers.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-draw_layers (glView *view)
+draw_layers (glView  *view,
+             cairo_t *cr)
 {
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	draw_bg_fg_layers (view);
-	draw_grid_layer (view);
-	draw_markup_layer (view);
-	draw_highlight_layer (view); /* Must be done before label layer */
-	draw_label_layer (view);
-
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->highlight_group));
-
-	g_signal_connect (G_OBJECT (view->label), "size_changed",
-			  G_CALLBACK (label_resized_cb), view);
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Handle label resize event.   .                                  */
-/*---------------------------------------------------------------------------*/
-static void
-label_resized_cb (glLabel *label,
-		  glView  *view)
-{
-	gdouble label_width;
-	gdouble label_height;
-
-	g_return_if_fail (label && GL_IS_LABEL (label));
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	gl_label_get_size (label, &label_width, &label_height);
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (view->canvas),
-					0.0, 0.0, label_width, label_height);
-
-	gtk_object_destroy (GTK_OBJECT (view->bg_group));
-	gtk_object_destroy (GTK_OBJECT (view->grid_group));
-	gtk_object_destroy (GTK_OBJECT (view->markup_group));
-	gtk_object_destroy (GTK_OBJECT (view->fg_group));
-
-	draw_bg_fg_layers (view);
-	draw_grid_layer (view);
-	draw_markup_layer (view);
-
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->label_group));
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->fg_group));
-	gnome_canvas_item_raise_to_top (GNOME_CANVAS_ITEM(view->highlight_group));
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw label layer.                                               */
-/*---------------------------------------------------------------------------*/
-static void
-draw_label_layer (glView *view)
-{
-	GnomeCanvasGroup *group;
-	glLabel          *label;
-	GList            *p_obj;
-	glLabelObject    *object;
-	glViewObject     *view_object;
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-	view->label_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
-
-	label = view->label;
-
-	for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next) {
-		object = (glLabelObject *) p_obj->data;
-
-		if (GL_IS_LABEL_BOX (object)) {
-			view_object = gl_view_box_new (GL_LABEL_BOX(object),
-						       view);
-		} else if (GL_IS_LABEL_ELLIPSE (object)) {
-			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object),
-							   view);
-		} else if (GL_IS_LABEL_LINE (object)) {
-			view_object = gl_view_line_new (GL_LABEL_LINE(object),
-							view);
-		} else if (GL_IS_LABEL_IMAGE (object)) {
-			view_object = gl_view_image_new (GL_LABEL_IMAGE(object),
-							 view);
-		} else if (GL_IS_LABEL_TEXT (object)) {
-			view_object = gl_view_text_new (GL_LABEL_TEXT(object),
-							view);
-		} else if (GL_IS_LABEL_BARCODE (object)) {
-			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object),
-							   view);
-		} else {
-			/* Should not happen! */
-			view_object = NULL;
-			g_message ("Invalid label object type.");
-		}
-	}
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Create highlight layer.                                         */
-/*---------------------------------------------------------------------------*/
-static void
-draw_highlight_layer (glView *view)
-{
-	GnomeCanvasGroup *group;
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-	view->highlight_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw background and foreground outlines.                        */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_layers (glView *view)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	GnomeCanvasGroup          *group;
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-	view->bg_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
-	view->fg_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	switch (label_type->shape) {
-
-	case GL_TEMPLATE_SHAPE_RECT:
-		if (label_type->size.rect.r == 0.0) {
-			/* Square corners. */
-			draw_bg_fg_rect (view);
-		} else {
-			/* Rounded corners. */
-			draw_bg_fg_rounded_rect (view);
-		}
-		break;
-
-	case GL_TEMPLATE_SHAPE_ROUND:
-		draw_bg_fg_round (view);
-		break;
-
-	case GL_TEMPLATE_SHAPE_CD:
-		if ((label_type->size.cd.w == 0.0) && (label_type->size.cd.h == 0.0) ) {
-			draw_bg_fg_cd (view);
-		} else {
-			draw_bg_fg_cd_bc (view);
-		}
-		break;
-
-	default:
-		g_message ("Unknown template label style");
-		break;
-	}
-
-	gl_template_free (template);
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw simple recangular background.                              */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_rect (glView *view)
-{
-	glLabel          *label;
-	gdouble           w;
-	gdouble           h;
-	GnomeCanvasItem  *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label = view->label;
-
-	gl_label_get_size (label, &w, &h);
-
-	/* Background */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_rect_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", w,
-				      "y2", h,
-				      "fill_color_rgba", PAPER_COLOR,
-				      NULL);
-
-	/* Foreground */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_rect_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", w,
-				      "y2", h,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw rounded recangular background.                             */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_rounded_rect (glView *view)
-{
-	glLabel                   *label;
-	GnomeCanvasPoints         *points;
-	gint                       i_coords;
-	gint                       i_theta;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    r;
-	gdouble                    w;
-	gdouble                    h;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	gl_label_get_size (label, &w, &h);
-	r = label_type->size.rect.r;
-
-	points = gnome_canvas_points_new (4 * (1 + 90 / ARC_COURSE));
-	i_coords = 0;
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-		    r - r * sin (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-		    r - r * cos (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-		    r - r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-		    (h - r) + r * sin (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-		    (w - r) + r * sin (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-		    (h - r) + r * cos (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-		    (w - r) + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-		    r - r * sin (i_theta * G_PI / 180.0);
-	}
-
-	/* Background */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "fill_color_rgba", PAPER_COLOR,
-				      NULL);
-
-	/* Foreground */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-
-	gnome_canvas_points_free (points);
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw round background.                                          */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_round (glView *view)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    r;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	r = label_type->size.round.r;
-
-	/* Background */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", 2.0*r,
-				      "y2", 2.0*r,
-				      "fill_color_rgba", PAPER_COLOR,
-				      NULL);
-
-	/* Foreground */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", 2.0*r,
-				      "y2", 2.0*r,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw CD style background, circular w/ concentric hole.          */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_cd (glView *view)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    r1;
-	gdouble                    r2;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
-
-	/* Background */
-	/* outer circle */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", 2.0*r1,
-				      "y2", 2.0*r1,
-				      "fill_color_rgba", PAPER_COLOR,
-				      NULL);
-	/* hole */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", r1 - r2,
-				      "y1", r1 - r2,
-				      "x2", r1 + r2,
-				      "y2", r1 + r2,
-				      "fill_color_rgba", GRID_COLOR,
-				      NULL);
-
-	/* Foreground */
-	/* outer circle */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", 0.0,
-				      "y1", 0.0,
-				      "x2", 2.0*r1,
-				      "y2", 2.0*r1,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-	/* hole */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", r1 - r2,
-				      "y1", r1 - r2,
-				      "x2", r1 + r2,
-				      "y2", r1 + r2,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw Business Card CD style background, CD w/ chopped ends.     */
-/*---------------------------------------------------------------------------*/
-static void
-draw_bg_fg_cd_bc (glView *view)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	GnomeCanvasPoints         *points;
-	gint                       i_coords;
-	gint                       i_theta;
-	gdouble                    theta1;
-	gdouble                    theta2;
-	gdouble                    x0, y0;
+	gdouble                    scale;
 	gdouble                    w, h;
-	gdouble                    r1, r2;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
+        gint                       canvas_w, canvas_h;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+	gl_debug (DEBUG_VIEW, "START");
 
-	gl_label_get_size (label, &w, &h);
-	x0 = w/2.0;
-	y0 = h/2.0;
+        scale = view->zoom * view->home_scale;
 
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
+        gl_label_get_size (view->label, &w, &h);
 
-	theta1 = (180.0/G_PI) * acos (w / (2.0*r1));
-	theta2 = (180.0/G_PI) * asin (h / (2.0*r1));
+        scale = view->home_scale * view->zoom;
+        gtk_layout_set_size (GTK_LAYOUT (view->canvas), w*scale+8, h*scale+8);
 
-	points = gnome_canvas_points_new (360/ARC_FINE + 1);
-	i_coords = 0;
+        gdk_drawable_get_size (GTK_LAYOUT (view->canvas)->bin_window, &canvas_w, &canvas_h);
 
-	points->coords[i_coords++] = x0 + r1 * cos (theta1 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r1 * sin (theta1 * G_PI / 180.0);
+        view->x0 = (canvas_w/scale - w) / 2.0;
+        view->y0 = (canvas_h/scale - h) / 2.0;
+        view->w  = w;
+        view->h  = h;
 
-	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
-	}
+        cairo_save (cr);
 
-	points->coords[i_coords++] = x0 + r1 * cos (theta2 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r1 * sin (theta2 * G_PI / 180.0);
+        cairo_scale (cr, scale, scale);
+        cairo_translate (cr, view->x0, view->y0);
 
+	draw_bg_layer (view, cr);
+	draw_grid_layer (view, cr);
+	draw_markup_layer (view, cr);
+	draw_objects_layer (view, cr);
+	draw_fg_layer (view, cr);
+	draw_highlight_layer (view, cr);
+        draw_select_region_layer (view, cr);
 
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r1 * cos ((180-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin ((180-theta2) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r1 * cos ((180-theta1) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r1 * sin ((180-theta1) * G_PI / 180.0);
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r1 * cos ((180+theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin ((180+theta1) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r1 * cos ((180+theta2) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r1 * sin ((180+theta2) * G_PI / 180.0);
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r1 * cos ((360-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin ((360-theta2) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r1 * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin (i_theta * G_PI / 180.0);
-	}
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r1 * cos ((360-theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r1 * sin ((360-theta1) * G_PI / 180.0);
-	}
-
-	points->num_points = i_coords / 2;
-
-	/* Background */
-	/* outer circle */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "fill_color_rgba", PAPER_COLOR,
-				      NULL);
-	/* hole */
-	item = gnome_canvas_item_new (view->bg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", x0 - r2,
-				      "y1", y0 - r2,
-				      "x2", x0 + r2,
-				      "y2", y0 + r2,
-				      "fill_color_rgba", GRID_COLOR,
-				      NULL);
-
-	/* Foreground */
-	/* outer circle */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-	/* hole */
-	item = gnome_canvas_item_new (view->fg_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", x0 - r2,
-				      "y1", y0 - r2,
-				      "x2", x0 + r2,
-				      "y2", y0 + r2,
-				      "width_pixels", 2,
-				      "outline_color_rgba", OUTLINE_COLOR,
-				      NULL);
-
-	gnome_canvas_points_free (points);
-	gl_template_free (template);
+        cairo_restore (cr);
 
 	gl_debug (DEBUG_VIEW, "END");
+
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw background                                                 */
+/*---------------------------------------------------------------------------*/
+static void
+draw_bg_layer (glView  *view,
+               cairo_t *cr)
+{
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
+
+        gl_cairo_label_path (cr, view->label, FALSE);
+
+        cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+        cairo_fill (cr);
 }
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw grid lines.                                                */
 /*---------------------------------------------------------------------------*/
 static void
-draw_grid_layer (glView *view)
+draw_grid_layer (glView  *view,
+                 cairo_t *cr)
 {
 	gdouble                    w, h;
 	gdouble                    x, y;
 	gdouble                    x0, y0;
-	GnomeCanvasPoints         *points;
-	GnomeCanvasItem           *item;
-	GnomeCanvasGroup          *group;
-	glTemplate                *template;
-	const glTemplateLabelType *template_type;
+	const glTemplateLabelType *label_type;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL(view->label));
 
-	gl_label_get_size (view->label, &w, &h);
-	template = gl_label_get_template (view->label);
-	template_type = gl_template_get_first_label_type (template);
+        if (view->grid_visible)
+        {
+
+                label_type = gl_template_get_first_label_type (view->label->template);
+
+                gl_label_get_size (view->label, &w, &h);
 	
-	if (template_type->shape == GL_TEMPLATE_SHAPE_RECT) {
-		x0 = 0.0;
-		y0 = 0.0;
-	} else {
-		/* for round labels, adjust grid to line up with center of label. */
-		x0 = fmod (w/2.0, view->grid_spacing);
-		y0 = fmod (h/2.0, view->grid_spacing);
-	}
+                if (label_type->shape == GL_TEMPLATE_SHAPE_RECT) {
+                        x0 = 0.0;
+                        y0 = 0.0;
+                } else {
+                        /* round labels, adjust grid to line up with center of label. */
+                        x0 = fmod (w/2.0, view->grid_spacing);
+                        y0 = fmod (h/2.0, view->grid_spacing);
+                }
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-	view->grid_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
-	points = gnome_canvas_points_new (2);
 
-	points->coords[1] = 0.0;
-	points->coords[3] = h;
-	for ( x=x0+view->grid_spacing; x < w; x += view->grid_spacing ) {
-		points->coords[0] = points->coords[2] = x;
-		item = gnome_canvas_item_new (view->grid_group,
-					      gnome_canvas_line_get_type (),
-					      "points", points,
-					      "width_pixels", 1,
-					      "fill_color_rgba", GRID_COLOR,
-					      NULL);
-	}
+                cairo_save (cr);
 
-	points->coords[0] = 0.0;
-	points->coords[2] = w;
-	for ( y=y0+view->grid_spacing; y < h; y += view->grid_spacing ) {
-		points->coords[1] = points->coords[3] = y;
-		item = gnome_canvas_item_new (view->grid_group,
-					      gnome_canvas_line_get_type (),
-					      "points", points,
-					      "width_pixels", 1,
-					      "fill_color_rgba", GRID_COLOR,
-					      NULL);
-	}
+                cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
+                cairo_set_line_width (cr, 1.0/(view->home_scale * view->zoom));
+                cairo_set_source_rgb (cr, 0.753, 0.753, 0.753);
 
-	gnome_canvas_points_free (points);
-	gl_template_free (template);
+                for ( x=x0+view->grid_spacing; x < w; x += view->grid_spacing )
+                {
+                        cairo_move_to (cr, x, 0);
+                        cairo_line_to (cr, x, h);
+                        cairo_stroke (cr);
+                }
+
+                for ( y=y0+view->grid_spacing; y < h; y += view->grid_spacing )
+                {
+                        cairo_move_to (cr, 0, y);
+                        cairo_line_to (cr, w, y);
+                        cairo_stroke (cr);
+                }
+
+                cairo_restore (cr);
+
+        }
 
 	gl_debug (DEBUG_VIEW, "END");
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw markup lines.                                              */
+/* PRIVATE.  Draw markup layer.                                              */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_layer (glView *view)
+draw_markup_layer (glView  *view,
+                   cairo_t *cr)
 {
-	GnomeCanvasGroup          *group;
 	glLabel                   *label;
-	glTemplate                *template;
 	const glTemplateLabelType *label_type;
 	GList                     *p;
 	glTemplateMarkup          *markup;
@@ -1181,481 +829,112 @@ draw_markup_layer (glView *view)
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	group = gnome_canvas_root (GNOME_CANVAS (view->canvas));
-	view->markup_group = GNOME_CANVAS_GROUP(
-		gnome_canvas_item_new (group,
-				       gnome_canvas_group_get_type (),
-				       "x", 0.0,
-				       "y", 0.0,
-				       NULL));
+        if (view->markup_visible)
+        {
 
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+                label      = view->label;
+                label_type = gl_template_get_first_label_type (label->template);
 
-	for ( p=label_type->markups; p != NULL; p=p->next ) {
-		markup = (glTemplateMarkup *)p->data;
+                cairo_save (cr);
 
-		switch (markup->type) {
-		case GL_TEMPLATE_MARKUP_MARGIN:
-			draw_markup_margin (view, markup);
-			break;
-		case GL_TEMPLATE_MARKUP_LINE:
-			draw_markup_line (view, markup);
-			break;
-		case GL_TEMPLATE_MARKUP_CIRCLE:
-			draw_markup_circle (view, markup);
-			break;
-		default:
-			g_message ("Unknown template markup type");
-			break;
-		}
-	}
+                cairo_set_line_width (cr, 1.0/(view->home_scale * view->zoom));
+                cairo_set_source_rgb (cr, 0.94, 0.39, 0.39);
 
-	gl_template_free (template);
+                for ( p=label_type->markups; p != NULL; p=p->next )
+                {
+                        markup = (glTemplateMarkup *)p->data;
+
+                        gl_cairo_markup_path (cr, markup, label);
+                }
+
+                cairo_stroke (cr);
+
+                cairo_restore (cr);
+        }
 
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw margin markup.                                             */
+/* PRIVATE.  Draw objects layer.                                             */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin (glView           *view,
-		    glTemplateMarkup *markup)
+draw_objects_layer (glView  *view,
+                    cairo_t *cr)
 {
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
+        gl_label_draw (view->label, cr, TRUE, NULL);
+}
 
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw foreground                                                 */
+/*---------------------------------------------------------------------------*/
+static void
+draw_fg_layer (glView  *view,
+               cairo_t *cr)
+{
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+        gl_cairo_label_path (cr, view->label, FALSE);
 
-	switch (label_type->shape) {
-
-	case GL_TEMPLATE_SHAPE_RECT:
-		if (label_type->size.rect.r == 0.0) {
-			/* Square corners. */
-			draw_markup_margin_rect (view, markup);
-		} else {
-			if ( markup->data.margin.size < label_type->size.rect.r) {
-				/* Rounded corners. */
-				draw_markup_margin_rounded_rect (view, markup);
-			} else {
-				/* Square corners. */
-				draw_markup_margin_rect (view, markup);
-			}
-		}
-		break;
-
-	case GL_TEMPLATE_SHAPE_ROUND:
-		draw_markup_margin_round (view, markup);
-		break;
-
-	case GL_TEMPLATE_SHAPE_CD:
-		if ((label_type->size.cd.w == 0.0) && (label_type->size.cd.h == 0.0) ) {
-			draw_markup_margin_cd (view, markup);
-		} else {
-			draw_markup_margin_cd_bc (view, markup);
-		}
-		break;
-
-	default:
-		g_message ("Unknown template label style");
-		break;
-	}
-
-	gl_template_free (template);
+        cairo_set_line_width (cr, 3.0/(view->home_scale * view->zoom));
+        cairo_set_source_rgb (cr, 0.68, 0.85, 0.90);
+        cairo_stroke (cr);
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw simple recangular margin.                                  */
+/* PRIVATE.  Create highlight layer.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_rect (glView           *view,
-			 glTemplateMarkup *markup)
+draw_highlight_layer (glView  *view,
+                      cairo_t *cr)
 {
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h, m;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
+	GList            *p_obj;
+	glViewObject     *view_object;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+        cairo_save (cr);
 
-	gl_label_get_size (label, &w, &h);
-	m = markup->data.margin.size;
+        cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
-	/* Bounding box @ margin */
-	gnome_canvas_item_new (view->markup_group,
-			       gnome_canvas_rect_get_type (),
-			       "x1", m,
-			       "y1", m,
-			       "x2", w - m,
-			       "y2", h - m,
-			       "width_pixels", 1,
-			       "outline_color_rgba", MARKUP_COLOR,
-			       NULL);
+	for (p_obj = view->selected_object_list; p_obj != NULL; p_obj = p_obj->next)
+        {
+		view_object = GL_VIEW_OBJECT (p_obj->data);
 
-	gl_template_free (template);
+                gl_view_object_draw_handles (view_object, cr);
+	}
 
-	gl_debug (DEBUG_VIEW, "END");
+        cairo_restore (cr);
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw rounded recangular markup.                                 */
+/* PRIVATE.  Draw select region layer.                                       */
 /*---------------------------------------------------------------------------*/
 static void
-draw_markup_margin_rounded_rect (glView           *view,
-				 glTemplateMarkup *markup)
+draw_select_region_layer (glView  *view,
+                          cairo_t *cr)
 {
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	GnomeCanvasPoints         *points;
-	gint                       i_coords;
-	gint                       i_theta;
-	gdouble                    r, w, h, m;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	gl_label_get_size (label, &w, &h);
-	r = label_type->size.rect.r;
-	m = markup->data.margin.size;
-
-	r = r - m;
-	w = w - 2 * m;
-	h = h - 2 * m;
-
-	/* rectangle with rounded corners */
-	points = gnome_canvas_points_new (4 * (1 + 90 / ARC_COURSE));
-	i_coords = 0;
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-			m + r - r * sin (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-			m + r - r * cos (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-			m + r - r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-			m + (h - r) + r * sin (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-			m + (w - r) + r * sin (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-			m + (h - r) + r * cos (i_theta * G_PI / 180.0);
-	}
-	for (i_theta = 0; i_theta <= 90; i_theta += ARC_COURSE) {
-		points->coords[i_coords++] =
-			m + (w - r) + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] =
-			m + r - r * sin (i_theta * G_PI / 180.0);
-	}
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-	gnome_canvas_points_free (points);
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw round margin.                                              */
-/*---------------------------------------------------------------------------*/
-static void
-draw_markup_margin_round (glView           *view,
-			  glTemplateMarkup *markup)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    r, m;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	r = label_type->size.round.r;
-	m = markup->data.margin.size;
-
-	/* Margin outline */
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", m,
-				      "y1", m,
-				      "x2", 2.0*r - m,
-				      "y2", 2.0*r - m,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw CD margins.                                                */
-/*---------------------------------------------------------------------------*/
-static void
-draw_markup_margin_cd (glView           *view,
-		       glTemplateMarkup *markup)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    m, r1, r2;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
-	m  = markup->data.margin.size;
-
-	/* outer margin */
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", m,
-				      "y1", m,
-				      "x2", 2.0*r1 - m,
-				      "y2", 2.0*r1 - m,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-	/* inner margin */
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", r1 - r2 - m,
-				      "y1", r1 - r2 - m,
-				      "x2", r1 + r2 + m,
-				      "y2", r1 + r2 + m,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw Business Card CD margins.                                  */
-/*---------------------------------------------------------------------------*/
-static void
-draw_markup_margin_cd_bc (glView           *view,
-			  glTemplateMarkup *markup)
-{
-	glLabel                   *label;
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
-	gdouble                    m, r1, r2;
-	GnomeCanvasPoints         *points;
-	gint                       i_coords;
-	gint                       i_theta;
-	gdouble                    theta1, theta2;
-	gdouble                    x0, y0;
-	gdouble                    w, h, r;
-	GnomeCanvasItem           *item;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
-
-	label      = view->label;
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
-
-	gl_label_get_size (label, &w, &h);
-	x0 = w/2.0;
-	y0 = h/2.0;
-
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
-	m  = markup->data.margin.size;
-
-	/* outer margin */
-	r = r1 - m;
-	theta1 = (180.0/G_PI) * acos (w / (2.0*r1));
-	theta2 = (180.0/G_PI) * asin (h / (2.0*r1));
-
-	points = gnome_canvas_points_new (360/ARC_FINE + 1);
-	i_coords = 0;
-
-	points->coords[i_coords++] = x0 + r * cos (theta1 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin (theta1 * G_PI / 180.0);
-
-	for ( i_theta = theta1 + ARC_FINE; i_theta < theta2; i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos (theta2 * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin (theta2 * G_PI / 180.0);
-
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((180-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((180-theta2) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 180-theta2+ARC_FINE; i_theta < (180-theta1); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos ((180-theta1) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin ((180-theta1) * G_PI / 180.0);
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((180+theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((180+theta1) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 180+theta1+ARC_FINE; i_theta < (180+theta2); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	points->coords[i_coords++] = x0 + r * cos ((180+theta2) * G_PI / 180.0);
-	points->coords[i_coords++] = y0 + r * sin ((180+theta2) * G_PI / 180.0);
-
-	if ( fabs (theta2 - 90.0) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((360-theta2) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((360-theta2) * G_PI / 180.0);
-	}
-
-	for ( i_theta = 360-theta2+ARC_FINE; i_theta < (360-theta1); i_theta +=ARC_FINE ) {
-		points->coords[i_coords++] = x0 + r * cos (i_theta * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin (i_theta * G_PI / 180.0);
-	}
-
-	if ( fabs (theta1) > GNOME_CANVAS_EPSILON ) {
-		points->coords[i_coords++] = x0 + r * cos ((360-theta1) * G_PI / 180.0);
-		points->coords[i_coords++] = y0 + r * sin ((360-theta1) * G_PI / 180.0);
-	}
-
-	points->num_points = i_coords / 2;
-
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_polygon_get_type (),
-				      "points", points,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-
-	gnome_canvas_points_free (points);
-
-	/* inner margin */
-	item = gnome_canvas_item_new (view->markup_group,
-				      gnome_canvas_ellipse_get_type (),
-				      "x1", x0 - r2 - m,
-				      "y1", y0 - r2 - m,
-				      "x2", x0 + r2 + m,
-				      "y2", y0 + r2 + m,
-				      "width_pixels", 1,
-				      "outline_color_rgba", MARKUP_COLOR,
-				      NULL);
-
-
-	gl_template_free (template);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw line markup.                                               */
-/*---------------------------------------------------------------------------*/
-static void
-draw_markup_line (glView           *view,
-		  glTemplateMarkup *markup)
-{
-	GnomeCanvasPoints *points;
-
-	gl_debug (DEBUG_VIEW, "START");
+        gdouble x1, y1;
+        gdouble w, h;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	points = gnome_canvas_points_new (2);
-	points->coords[0] = markup->data.line.x1;
-	points->coords[1] = markup->data.line.y1;
-	points->coords[2] = markup->data.line.x2;
-	points->coords[3] = markup->data.line.y2;
+        if (view->select_region_visible)
+        {
+                x1 = MIN (view->select_region_x1, view->select_region_x2);
+                y1 = MIN (view->select_region_y1, view->select_region_y2);
+                w  = fabs (view->select_region_x2 - view->select_region_x1);
+                h  = fabs (view->select_region_y2 - view->select_region_y1);
 
-	gnome_canvas_item_new (view->markup_group,
-			       gnome_canvas_line_get_type (),
-			       "points", points,
-			       "width_pixels", 1,
-			       "fill_color_rgba", MARKUP_COLOR,
-			       NULL);
+                cairo_rectangle (cr, x1, y1, w, h);
 
-	gnome_canvas_points_free (points);
+                cairo_set_source_rgba (cr, 0.75, 0.75, 1.0, 0.5);
+                cairo_fill_preserve (cr);
 
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Draw circle markup.                                             */
-/*---------------------------------------------------------------------------*/
-static void
-draw_markup_circle (glView           *view,
-		    glTemplateMarkup *markup)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	/* Circle outline */
-	gnome_canvas_item_new (view->markup_group,
-			       gnome_canvas_ellipse_get_type (),
-			       "x1", markup->data.circle.x0 - markup->data.circle.r,
-			       "y1", markup->data.circle.y0 - markup->data.circle.r,
-			       "x2", markup->data.circle.x0 + markup->data.circle.r,
-			       "y2", markup->data.circle.y0 + markup->data.circle.r,
-			       "width_pixels", 1,
-			       "outline_color_rgba", MARKUP_COLOR,
-			       NULL);
-
-	gl_debug (DEBUG_VIEW, "END");
+                cairo_set_line_width (cr, 3.0/(view->home_scale * view->zoom));
+                cairo_set_source_rgba (cr, 0, 0, 1.0, 0.5);
+                cairo_stroke (cr);
+        }
 }
 
 /*****************************************************************************/
@@ -1666,7 +945,8 @@ gl_view_show_grid (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->grid_group));
+        view->grid_visible = TRUE;
+        gl_view_update (view);
 }
 
 /*****************************************************************************/
@@ -1677,7 +957,8 @@ gl_view_hide_grid (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->grid_group));
+        view->grid_visible = FALSE;
+        gl_view_update (view);
 }
 
 /*****************************************************************************/
@@ -1690,9 +971,7 @@ gl_view_set_grid_spacing (glView  *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	view->grid_spacing = spacing;
-
-	gtk_object_destroy (GTK_OBJECT(view->grid_group));
-	draw_grid_layer (view);
+        gl_view_update (view);
 }
 
 /*****************************************************************************/
@@ -1703,7 +982,8 @@ gl_view_show_markup (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	gnome_canvas_item_show (GNOME_CANVAS_ITEM(view->markup_group));
+        view->markup_visible = TRUE;
+        gl_view_update (view);
 }
 
 /*****************************************************************************/
@@ -1714,7 +994,8 @@ gl_view_hide_markup (glView *view)
 {
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	gnome_canvas_item_hide (GNOME_CANVAS_ITEM(view->markup_group));
+        view->markup_visible = FALSE;
+        gl_view_update (view);
 }
 
 /*****************************************************************************/
@@ -1723,19 +1004,18 @@ gl_view_hide_markup (glView *view)
 void
 gl_view_arrow_mode (glView *view)
 {
-	static GdkCursor *cursor = NULL;
+	GdkCursor *cursor;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	if (!cursor) {
-		cursor = gdk_cursor_new (GDK_LEFT_PTR);
-	}
-
+        cursor = gdk_cursor_new (GDK_LEFT_PTR);
 	gdk_window_set_cursor (view->canvas->window, cursor);
+        gdk_cursor_unref (cursor);
 
-	view->state = GL_VIEW_STATE_ARROW;
+	view->mode = GL_VIEW_MODE_ARROW;
+        view->state = GL_VIEW_IDLE;
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1747,13 +1027,14 @@ void
 gl_view_object_create_mode (glView            *view,
 			    glLabelObjectType  type)
 {
-	GdkCursor *cursor;
+	GdkCursor *cursor = NULL;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	switch (type) {
+	switch (type)
+        {
 	case GL_LABEL_OBJECT_BOX:
 		cursor = gl_view_box_get_create_cursor ();
 		break;
@@ -1778,8 +1059,10 @@ gl_view_object_create_mode (glView            *view,
 	}
 
 	gdk_window_set_cursor (view->canvas->window, cursor);
+        gdk_cursor_unref (cursor);
 
-	view->state = GL_VIEW_STATE_OBJECT_CREATE;
+	view->mode = GL_VIEW_MODE_OBJECT_CREATE;
+        view->state = GL_VIEW_IDLE;
 	view->create_type = type;
 
 	gl_debug (DEBUG_VIEW, "END");
@@ -1885,13 +1168,19 @@ gl_view_select_region (glView  *view,
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
+        gdouble        r_x1, r_y1;
+        gdouble        r_x2, r_y2;
 	gdouble        i_x1, i_y1;
 	gdouble        i_x2, i_y2;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail ((x1 <= x2) && (y1 <= y2));
+
+        r_x1 = MIN (x1, x2);
+        r_y1 = MIN (y1, y2);
+        r_x2 = MAX (x1, x2);
+        r_y2 = MAX (y1, y2);
 
 	for (p = view->object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT(p->data);
@@ -1900,8 +1189,8 @@ gl_view_select_region (glView  *view,
 			object = gl_view_object_get_object (view_object);
 
 			gl_label_object_get_extent (object, &i_x1, &i_y1, &i_x2, &i_y2);
-			if ((i_x1 >= x1) && (i_x2 <= x2) && (i_y1 >= y1)
-			    && (i_y2 <= y2)) {
+			if ((i_x1 >= r_x1) && (i_x2 <= r_x2) && (i_y1 >= r_y1)
+			    && (i_y2 <= r_y2)) {
 				select_object_real (view, view_object);
 			}
 
@@ -1927,10 +1216,11 @@ select_object_real (glView       *view,
 
 	if (!gl_view_is_object_selected (view, view_object)) {
 		view->selected_object_list =
-		    g_list_prepend (view->selected_object_list, view_object);
+		    g_list_append (view->selected_object_list, view_object);
 	}
-	gl_view_object_show_highlight (view_object);
 	gtk_widget_grab_focus (GTK_WIDGET (view->canvas));
+
+        gl_view_update (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1947,10 +1237,10 @@ unselect_object_real (glView       *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
 
-	gl_view_object_hide_highlight (view_object);
-
 	view->selected_object_list =
 	    g_list_remove (view->selected_object_list, view_object);
+
+        gl_view_update (view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -1958,51 +1248,60 @@ unselect_object_real (glView       *view,
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Return object at (x,y).                                          */
 /*---------------------------------------------------------------------------*/
-static gboolean
-object_at (glView  *view,
-	   gdouble  x,
-	   gdouble  y)
+static glViewObject *
+view_view_object_at (glView  *view,
+                     cairo_t *cr,
+                     gdouble  x,
+                     gdouble  y)
 {
-	GnomeCanvasItem *item;
-	GList           *p;
+	GList            *p_obj;
+	glViewObject     *view_object;
 
-	gl_debug (DEBUG_VIEW, "");
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
 
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+	for (p_obj = g_list_last (view->object_list); p_obj != NULL; p_obj = p_obj->prev)
+        {
 
-	item = gnome_canvas_get_item_at (GNOME_CANVAS (view->canvas), x, y);
+		view_object = GL_VIEW_OBJECT (p_obj->data);
 
-	/* No item is at x, y */
-	if (item == NULL)
-		return FALSE;
+                if (gl_view_object_at (view_object, cr, x, y))
+                {
+                        return view_object;
+                }
 
-	/* ignore items not in label or highlight layers, e.g. background items */
-	if (!is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->label_group)) &&
-	    !is_item_member_of_group(view, item, GNOME_CANVAS_ITEM(view->highlight_group)))
-		return FALSE;
+	}
 
-	return TRUE;
+        return NULL;
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Is the item a child (or grandchild, etc.) of group.             */
+/* PRIVATE. Return object handle at (x,y).                                   */
 /*---------------------------------------------------------------------------*/
-static gboolean
-is_item_member_of_group (glView          *view,
-			 GnomeCanvasItem *item,
-			 GnomeCanvasItem *group)
+static glViewObject *
+view_handle_at (glView             *view,
+                cairo_t            *cr,
+                gdouble             x,
+                gdouble             y,
+                glViewObjectHandle *handle)
 {
-	GnomeCanvasItem *parent;
-	GnomeCanvasItem *root_group;
+	GList            *p_obj;
+	glViewObject     *view_object;
 
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
 
-	root_group = GNOME_CANVAS_ITEM(gnome_canvas_root (GNOME_CANVAS (view->canvas)));
+	for (p_obj = g_list_last (view->selected_object_list); p_obj != NULL; p_obj = p_obj->prev)
+        {
 
-	for ( parent=item->parent; parent && (parent!=root_group); parent=parent->parent) {
-		if (parent == group) return TRUE;
+		view_object = GL_VIEW_OBJECT (p_obj->data);
+
+                if ((*handle = gl_view_object_handle_at (view_object, cr, x, y)))
+                {
+                        return view_object;
+                }
+
 	}
-	return FALSE;
+
+        return NULL;
 }
 
 /*****************************************************************************/
@@ -2095,7 +1394,7 @@ gl_view_get_editor (glView *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
 
 	if (!gl_view_is_selection_empty (view)) {
 
@@ -2761,8 +2060,8 @@ gl_view_set_selection_font_size (glView  *view,
 /* Set font weight for all text contained in selected objects.               */
 /*****************************************************************************/
 void
-gl_view_set_selection_font_weight (glView          *view,
-				   GnomeFontWeight  font_weight)
+gl_view_set_selection_font_weight (glView      *view,
+				   PangoWeight  font_weight)
 {
 	GList         *p;
 	glLabelObject *object;
@@ -3048,8 +2347,6 @@ gl_view_copy (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	glTemplate    *template;
-	gboolean       rotate_flag;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3060,12 +2357,9 @@ gl_view_copy (glView *view)
 		if ( view->selection_data ) {
 			g_object_unref (view->selection_data);
 		}
-		template = gl_label_get_template (view->label);
-		rotate_flag = gl_label_get_rotate_flag (view->label);
 		view->selection_data = GL_LABEL(gl_label_new ());
-		gl_label_set_template (view->selection_data, template);
-		gl_label_set_rotate_flag (view->selection_data, rotate_flag);
-		gl_template_free (template);
+		gl_label_set_template (view->selection_data, view->label->template);
+		gl_label_set_rotate_flag (view->selection_data, view->label->rotate_flag);
 
 		for (p = view->selected_object_list; p != NULL; p = p->next) {
 
@@ -3224,7 +2518,7 @@ gl_view_set_zoom (glView  *view,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Set canvas scale.                                               *
+/* PRIVATE.  Set canvas scale.                                               */
 /*---------------------------------------------------------------------------*/
 static void
 set_zoom_real (glView   *view,
@@ -3246,8 +2540,8 @@ set_zoom_real (glView   *view,
 
 		view->zoom = zoom;
 		view->zoom_to_fit_flag = zoom_to_fit_flag;
-		gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-						  zoom*view->home_scale);
+
+                gl_view_update (view);
 
 		g_signal_emit (G_OBJECT(view), signals[ZOOM_CHANGED], 0, zoom);
 
@@ -3256,51 +2550,6 @@ set_zoom_real (glView   *view,
 	gl_debug (DEBUG_VIEW, "END");
 
 }
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Size allocation changed callback.                                */
-/*---------------------------------------------------------------------------*/
-static void
-size_allocate_cb (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	if (view->zoom_to_fit_flag) {
-		/* Maintain best fit zoom */
-		gl_view_zoom_to_fit (view);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Screen changed callback.                                         */
-/*---------------------------------------------------------------------------*/
-static void
-screen_changed_cb (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	if (gtk_widget_has_screen (GTK_WIDGET (view->canvas))) {
-
-		view->home_scale = get_home_scale (view);
-
-		gnome_canvas_set_pixels_per_unit (GNOME_CANVAS (view->canvas),
-						  view->zoom * view->home_scale);
-
-		if (view->zoom_to_fit_flag) {
-			/* Maintain best fit zoom */
-			gl_view_zoom_to_fit (view);
-		}
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
 
 
 /*****************************************************************************/
@@ -3340,254 +2589,6 @@ gl_view_is_zoom_min (glView *view)
 	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
 	return view->zoom <= zooms[N_ZOOMS-1];
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Canvas event handler.                                           */
-/*---------------------------------------------------------------------------*/
-static int
-canvas_event (GnomeCanvas *canvas,
-	      GdkEvent    *event,
-	      glView      *view)
-{
-	gdouble x, y;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	/* emit pointer signals regardless of state */
-	switch (event->type) {
-	case GDK_MOTION_NOTIFY:
-		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
-		gnome_canvas_window_to_world (canvas,
-					      event->motion.x,
-					      event->motion.y, &x, &y);
-		g_signal_emit (G_OBJECT(view), signals[POINTER_MOVED], 0, x, y);
-		break; /* fall through */
-
-	case GDK_LEAVE_NOTIFY:
-		gl_debug (DEBUG_VIEW, "LEAVEW_NOTIFY");
-		g_signal_emit (G_OBJECT(view), signals[POINTER_EXIT], 0);
-		break; /* fall through */
-
-	default:
-		break; /* fall through */
-	}
-
-
-	switch (view->state) {
-
-	case GL_VIEW_STATE_ARROW:
-		return canvas_event_arrow_mode (canvas, event, view);
-
-	case GL_VIEW_STATE_OBJECT_CREATE:
-		switch (view->create_type) {
-		case GL_LABEL_OBJECT_BOX:
-			return gl_view_box_create_event_handler (canvas,
-								 event,
-								 view);
-			break;
-		case GL_LABEL_OBJECT_ELLIPSE:
-			return gl_view_ellipse_create_event_handler (canvas,
-								     event,
-								     view);
-			break;
-		case GL_LABEL_OBJECT_LINE:
-			return gl_view_line_create_event_handler (canvas,
-								  event,
-								  view);
-			break;
-		case GL_LABEL_OBJECT_IMAGE:
-			return gl_view_image_create_event_handler (canvas,
-								   event,
-								   view);
-			break;
-		case GL_LABEL_OBJECT_TEXT:
-			return gl_view_text_create_event_handler (canvas,
-								  event,
-								  view);
-			break;
-		case GL_LABEL_OBJECT_BARCODE:
-			return gl_view_barcode_create_event_handler (canvas,
-								     event,
-								     view);
-			break;
-		default:
-                        /*Should not happen!*/
-			g_message ("Invalid label object type.");
-			return FALSE;
-	}
-
-	default:
-		g_message ("Invalid view state.");	/*Should not happen!*/
-		return FALSE;
-
-	}
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Canvas event handler (arrow mode)                               */
-/*---------------------------------------------------------------------------*/
-static int
-canvas_event_arrow_mode (GnomeCanvas *canvas,
-			 GdkEvent    *event,
-			 glView      *view)
-{
-	static gdouble          x0, y0;
-	static gboolean         dragging = FALSE;
-	static GnomeCanvasItem *item;
-	gdouble                 x, y;
-	gdouble                 x1, y1;
-	gdouble                 x2, y2;
-	GnomeCanvasGroup       *group;
-	GdkCursor              *cursor;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	switch (event->type) {
-
-	case GDK_BUTTON_PRESS:
-		gl_debug (DEBUG_VIEW, "BUTTON_PRESS");
-		gtk_widget_grab_focus (GTK_WIDGET(canvas));
-		switch (event->button.button) {
-		case 1:
-			gnome_canvas_window_to_world (canvas,
-						      event->button.x,
-						      event->button.y, &x, &y);
-
-			if (!object_at (view, x, y)) {
-				if (!(event->button.state & GDK_CONTROL_MASK)) {
-					gl_view_unselect_all (view);
-				}
-
-				dragging = TRUE;
-				gnome_canvas_item_grab (canvas->root,
-							GDK_POINTER_MOTION_MASK |
-							GDK_BUTTON_RELEASE_MASK |
-							GDK_BUTTON_PRESS_MASK,
-							NULL, event->button.time);
-				group =
-				    gnome_canvas_root (GNOME_CANVAS
-						       (view->canvas));
-				item =
-				    gnome_canvas_item_new (group,
-							   gnome_canvas_rect_get_type (),
-							   "x1", x-DELTA,
-							   "y1", y-DELTA,
-							   "x2", x+DELTA,
-							   "y2", y+DELTA,
-							   "width_pixels", 2,
-							   "outline_color_rgba",
-							   SEL_LINE_COLOR,
-							   "fill_color_rgba",
-							   SEL_FILL_COLOR,
-							   NULL);
-				x0 = x;
-				y0 = y;
-
-			}
-			return FALSE;
-		case 3:
-			/* activate context menu. */
-			g_signal_emit (G_OBJECT (view),
-				       signals[CONTEXT_MENU_ACTIVATE], 0,
-				       event->button.button, event->button.time);
-			return FALSE;
-		default:
-			return FALSE;
-		}
-
-	case GDK_BUTTON_RELEASE:
-		gl_debug (DEBUG_VIEW, "BUTTON_RELEASE");
-		switch (event->button.button) {
-		case 1:
-			if (dragging) {
-				dragging = FALSE;
-				gnome_canvas_item_ungrab (canvas->root,
-							  event->button.time);
-				gnome_canvas_window_to_world (canvas,
-							      event->button.x,
-							      event->button.y,
-							      &x, &y);
-				x1 = MIN (x, x0);
-				y1 = MIN (y, y0);
-				x2 = MAX (x, x0);
-				y2 = MAX (y, y0);
-				gl_view_select_region (view, x1, y1, x2, y2);
-				gtk_object_destroy (GTK_OBJECT (item));
-				return TRUE;
-			}
-			return FALSE;
-
-		default:
-			return FALSE;
-		}
-
-	case GDK_MOTION_NOTIFY:
-		gl_debug (DEBUG_VIEW, "MOTION_NOTIFY");
-		gnome_canvas_window_to_world (canvas,
-					      event->motion.x,
-					      event->motion.y, &x, &y);
-		if (dragging && (event->motion.state & GDK_BUTTON1_MASK)) {
-			gl_debug (DEBUG_VIEW,
-				  "Dragging: (x0=%g, y0=%g), (x=%g, y=%g)", x0, y0, x, y);
-			gnome_canvas_item_set (item,
-					       "x1", MIN (x, x0) - DELTA,
-					       "y1", MIN (y, y0) - DELTA,
-					       "x2", MAX (x, x0) + DELTA,
-					       "y2", MAX (y, y0) + DELTA,
-					       NULL);
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-
-	case GDK_KEY_PRESS:
-		gl_debug (DEBUG_VIEW, "KEY_PRESS");
-		if (!dragging) {
-			switch (event->key.keyval) {
-			case GDK_Left:
-			case GDK_KP_Left:
-				gl_view_move_selection (view,
-							-1.0 / (view->zoom), 0.0);
-				break;
-			case GDK_Up:
-			case GDK_KP_Up:
-				gl_view_move_selection (view,
-							0.0, -1.0 / (view->zoom));
-				break;
-			case GDK_Right:
-			case GDK_KP_Right:
-				gl_view_move_selection (view,
-							1.0 / (view->zoom), 0.0);
-				break;
-			case GDK_Down:
-			case GDK_KP_Down:
-				gl_view_move_selection (view,
-							0.0, 1.0 / (view->zoom));
-				break;
-			case GDK_Delete:
-			case GDK_KP_Delete:
-				gl_view_delete_selection (view);
-				cursor = gdk_cursor_new (GDK_LEFT_PTR);
-				gdk_window_set_cursor (view->canvas->window,
-						       cursor);
-				gdk_cursor_unref (cursor);
-				break;
-			default:
-				return FALSE;
-			}
-		}
-		return TRUE;	/* We handled this or we were dragging. */
-
-	default:
-		gl_debug (DEBUG_VIEW, "default");
-		return FALSE;
-	}
-
 }
 
 /*---------------------------------------------------------------------------*/
@@ -3747,8 +2748,8 @@ gl_view_set_default_font_size (glView  *view,
 /* Set default font weight.                                                 */
 /****************************************************************************/
 void
-gl_view_set_default_font_weight (glView          *view,
-				 GnomeFontWeight  font_weight)
+gl_view_set_default_font_weight (glView      *view,
+				 PangoWeight  font_weight)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -3913,12 +2914,12 @@ gl_view_get_default_font_size (glView *view)
 /****************************************************************************/
 /* Get default font weight.                                                 */
 /****************************************************************************/
-GnomeFontWeight
+PangoWeight
 gl_view_get_default_font_weight (glView *view)
 {
 	gl_debug (DEBUG_VIEW, "START");
 
-	g_return_val_if_fail (view && GL_IS_VIEW (view), GNOME_FONT_BOOK);
+	g_return_val_if_fail (view && GL_IS_VIEW (view), PANGO_WEIGHT_NORMAL);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -4036,3 +3037,484 @@ gl_view_get_default_fill_color (glView *view)
 
 	return view->default_fill_color;
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Focus in event handler.                                         */
+/*---------------------------------------------------------------------------*/
+static gboolean
+focus_in_event_cb (glView            *view,
+                   GdkEventFocus     *event)
+{
+        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->canvas), GTK_HAS_FOCUS);
+
+        return FALSE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Focus out event handler.                                        */
+/*---------------------------------------------------------------------------*/
+static gboolean
+focus_out_event_cb (glView            *view,
+                    GdkEventFocus     *event)
+{
+        GTK_WIDGET_UNSET_FLAGS (GTK_WIDGET (view->canvas), GTK_HAS_FOCUS);
+
+        return FALSE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Enter notify event handler.                                     */
+/*---------------------------------------------------------------------------*/
+static gboolean
+enter_notify_event_cb (glView            *view,
+                       GdkEventCrossing  *event)
+{
+        gtk_widget_grab_focus(GTK_WIDGET (view->canvas));
+
+        return FALSE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Leave notify event handler.                                     */
+/*---------------------------------------------------------------------------*/
+static gboolean
+leave_notify_event_cb (glView            *view,
+                       GdkEventCrossing  *event)
+{
+
+        g_signal_emit (G_OBJECT(view), signals[POINTER_EXIT], 0);
+
+        return FALSE;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Motion notify event handler.                                    */
+/*---------------------------------------------------------------------------*/
+static gboolean
+motion_notify_event_cb (glView            *view,
+                        GdkEventMotion    *event)
+{
+        gboolean            return_value = FALSE;
+	cairo_t            *cr;
+        gdouble             scale;
+        gdouble             x, y;
+        GdkCursor          *cursor;
+        glViewObjectHandle  handle;
+
+	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+
+        /*
+         * Translate to label coordinates
+         */
+        scale = view->zoom * view->home_scale;
+        cairo_scale (cr, scale, scale);
+        cairo_translate (cr, view->x0, view->y0);
+
+        x = event->x;
+        y = event->y;
+        cairo_device_to_user (cr, &x, &y);
+
+        /*
+         * Emit signal regardless of mode
+         */
+        g_signal_emit (G_OBJECT(view), signals[POINTER_MOVED], 0, x, y);
+
+        /*
+         * Handle event as appropriate for mode
+         */
+        switch (view->mode)
+        {
+
+        case GL_VIEW_MODE_ARROW:
+                switch (view->state)
+                {
+
+                case GL_VIEW_IDLE:
+                        if (view_handle_at (view, cr, event->x, event->y, &handle))
+                        {
+                                cursor = gdk_cursor_new (GDK_CROSSHAIR);
+                        }
+                        else if (view_view_object_at (view, cr, event->x, event->y))
+                        {
+                                cursor = gdk_cursor_new (GDK_FLEUR);
+                        }
+                        else
+                        {
+                                cursor = gdk_cursor_new (GDK_LEFT_PTR);
+                        }
+                        gdk_window_set_cursor (view->canvas->window, cursor);
+                        gdk_cursor_unref (cursor);
+                        break;
+
+                case GL_VIEW_ARROW_SELECT_REGION:
+                        view->select_region_x2 = x;
+                        view->select_region_y2 = y;
+                        gl_view_update (view);
+                        break;
+
+                case GL_VIEW_ARROW_MOVE:
+                        gl_view_move_selection (view,
+                                                (x - view->move_last_x),
+                                                (y - view->move_last_y));
+                        view->move_last_x = x;
+                        view->move_last_y = y;
+                        break;
+
+                case GL_VIEW_ARROW_RESIZE:
+                        gl_view_object_resize_event (view->resize_object,
+                                                     view->resize_handle,
+                                                     view->resize_honor_aspect,
+                                                     cr,
+                                                     event->x,
+                                                     event->y);
+                        break;
+
+                default:
+                        g_message ("Invalid arrow state.");      /*Should not happen!*/
+                }
+                return_value = TRUE;
+                break;
+
+
+        case GL_VIEW_MODE_OBJECT_CREATE:
+                if (view->state != GL_VIEW_IDLE)
+                {
+                        switch (view->create_type)
+                        {
+                        case GL_LABEL_OBJECT_BOX:
+                                gl_view_box_create_motion_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_ELLIPSE:
+                                gl_view_ellipse_create_motion_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_LINE: 
+                                gl_view_line_create_motion_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_IMAGE:
+                                gl_view_image_create_motion_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_TEXT:
+                                gl_view_text_create_motion_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_BARCODE:
+                                gl_view_barcode_create_motion_event (view, x, y);
+                                break;
+                        default:
+                                g_message ("Invalid create type.");   /*Should not happen!*/
+                        }
+                }
+                break;
+
+
+        default:
+                g_message ("Invalid view mode.");      /*Should not happen!*/
+
+        }
+
+	cairo_destroy (cr);
+
+        return return_value;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Button press event handler.                                     */
+/*---------------------------------------------------------------------------*/
+static gboolean
+button_press_event_cb (glView            *view,
+                       GdkEventButton    *event)
+{
+        gboolean            return_value = FALSE;
+	cairo_t            *cr;
+        gdouble             scale;
+        gdouble             x, y;
+        glViewObject       *view_object;
+        glViewObjectHandle  handle;
+
+	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+
+        /*
+         * Translate to label coordinates
+         */
+        scale = view->zoom * view->home_scale;
+        cairo_scale (cr, scale, scale);
+        cairo_translate (cr, view->x0, view->y0);
+
+        x = event->x;
+        y = event->y;
+        cairo_device_to_user (cr, &x, &y);
+
+        switch (event->button)
+        {
+
+        case 1:
+                /*
+                 * Handle event as appropriate for mode
+                 */
+                switch (view->mode)
+                {
+                case GL_VIEW_MODE_ARROW:
+                        if ((view_object = view_handle_at (view, cr, event->x, event->y, &handle)))
+                        {
+                                view->resize_object = view_object;
+                                view->resize_handle = handle;
+                                view->resize_honor_aspect = event->state & GDK_CONTROL_MASK;
+
+                                view->state = GL_VIEW_ARROW_RESIZE;
+                        }
+                        else if ((view_object = view_view_object_at (view, cr, event->x, event->y)))
+                        {
+                                if (event->state & GDK_CONTROL_MASK)
+                                {
+                                        if (gl_view_is_object_selected (view, view_object))
+                                        {
+                                                /* Un-selecting a selected item */
+                                                gl_view_unselect_object (view, view_object);
+                                        } else {
+                                                /* Add to current selection */
+                                                gl_view_select_object (view, view_object);
+                                        }
+                                }
+                                else
+                                {
+                                        if (!gl_view_is_object_selected (view, view_object))
+                                        {
+                                                /* remove any selections before adding */
+                                                gl_view_unselect_all (view);
+                                                /* Add to current selection */
+                                                gl_view_select_object (view, view_object);
+                                        }
+                                }
+                                view->move_last_x = x;
+                                view->move_last_y = y;
+
+                                view->state = GL_VIEW_ARROW_MOVE;
+                        }
+                        else
+                        {
+                                if (!(event->state & GDK_CONTROL_MASK))
+                                {
+                                        gl_view_unselect_all (view);
+                                }
+
+                                view->select_region_visible = TRUE;
+                                view->select_region_x1 = x;
+                                view->select_region_y1 = y;
+                                view->select_region_x2 = x;
+                                view->select_region_y2 = y;
+                                gl_view_update (view);
+
+                                view->state = GL_VIEW_ARROW_SELECT_REGION;
+                        }
+
+
+                        return_value = TRUE;
+                        break;
+
+                case GL_VIEW_MODE_OBJECT_CREATE:
+                        switch (view->create_type)
+                        {
+                        case GL_LABEL_OBJECT_BOX:
+                                gl_view_box_create_button_press_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_ELLIPSE:
+                                gl_view_ellipse_create_button_press_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_LINE:
+                                gl_view_line_create_button_press_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_IMAGE:
+                                gl_view_image_create_button_press_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_TEXT:
+                                gl_view_text_create_button_press_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_BARCODE:
+                                gl_view_barcode_create_button_press_event (view, x, y);
+                                break;
+                        default:
+                                g_message ("Invalid create type.");   /*Should not happen!*/
+                        }
+                        view->state = GL_VIEW_CREATE_DRAG;
+                        return_value = TRUE;
+                        break;
+
+                default:
+                        g_message ("Invalid view mode.");      /*Should not happen!*/
+                }
+                break;
+
+        case 3:
+                g_signal_emit (G_OBJECT (view),
+                               signals[CONTEXT_MENU_ACTIVATE], 0,
+                               event->button, event->time);
+                return_value = TRUE;
+                break;
+
+        }
+
+	cairo_destroy (cr);
+
+        return return_value;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Button release event handler.                                   */
+/*---------------------------------------------------------------------------*/
+static gboolean
+button_release_event_cb (glView            *view,
+                         GdkEventButton    *event)
+{
+        gboolean     return_value = FALSE;
+	cairo_t     *cr;
+        gdouble      scale;
+        gdouble      x, y;
+        GdkCursor   *cursor;
+
+	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+
+        /*
+         * Translate to label coordinates
+         */
+        scale = view->zoom * view->home_scale;
+        cairo_scale (cr, scale, scale);
+        cairo_translate (cr, view->x0, view->y0);
+
+        x = event->x;
+        y = event->y;
+        cairo_device_to_user (cr, &x, &y);
+
+        switch (event->button)
+        {
+
+        case 1:
+                /*
+                 * Handle event as appropriate for mode
+                 */
+                switch (view->mode)
+                {
+                case GL_VIEW_MODE_ARROW:
+                        switch (view->state)
+                        {
+                        case GL_VIEW_ARROW_RESIZE:
+                                view->resize_object = NULL;
+
+                                view->state = GL_VIEW_IDLE;
+                                break;
+
+                        case GL_VIEW_ARROW_SELECT_REGION:
+                                view->select_region_visible = FALSE;
+                                view->select_region_x2 = x;
+                                view->select_region_y2 = y;
+
+                                gl_view_select_region (view,
+                                                       view->select_region_x1,
+                                                       view->select_region_y1,
+                                                       view->select_region_x2,
+                                                       view->select_region_y2);
+
+                                gl_view_update (view);
+
+                                view->state = GL_VIEW_IDLE;
+                                break;
+
+                        default:
+                                view->state = GL_VIEW_IDLE;
+                                break;
+                                
+                        }
+
+                        return_value = TRUE;
+                        break;
+
+
+                case GL_VIEW_MODE_OBJECT_CREATE:
+                        switch (view->create_type)
+                        {
+                        case GL_LABEL_OBJECT_BOX:
+                                gl_view_box_create_button_release_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_ELLIPSE:
+                                gl_view_ellipse_create_button_release_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_LINE:
+                                gl_view_line_create_button_release_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_IMAGE:
+                                gl_view_image_create_button_release_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_TEXT:
+                                gl_view_text_create_button_release_event (view, x, y);
+                                break;
+                        case GL_LABEL_OBJECT_BARCODE:
+                                gl_view_barcode_create_button_release_event (view, x, y);
+                                break;
+                        default:
+                                g_message ("Invalid create type.");   /*Should not happen!*/
+                        }
+                        view->mode = GL_VIEW_MODE_ARROW;
+                        view->state = GL_VIEW_IDLE;
+                        cursor = gdk_cursor_new (GDK_LEFT_PTR);
+                        gdk_window_set_cursor (view->canvas->window, cursor);
+                        gdk_cursor_unref (cursor);
+                        break;
+
+
+                default:
+                        g_message ("Invalid view mode.");      /*Should not happen!*/
+                }
+
+        }
+
+	cairo_destroy (cr);
+
+        return return_value;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Key press event handler.                                        */
+/*---------------------------------------------------------------------------*/
+static gboolean
+key_press_event_cb (glView            *view,
+                    GdkEventKey       *event)
+{
+        GdkCursor *cursor;
+
+        gl_debug (DEBUG_VIEW, "");
+
+        if ( (view->mode == GL_VIEW_MODE_ARROW) &&
+             (view->state == GL_VIEW_IDLE) )
+        {
+                switch (event->keyval) {
+
+                case GDK_Left:
+                case GDK_KP_Left:
+                        gl_view_move_selection (view, -1.0 / (view->zoom), 0.0);
+                        break;
+                case GDK_Up:
+                case GDK_KP_Up:
+                        gl_view_move_selection (view, 0.0, -1.0 / (view->zoom));
+                        break;
+                case GDK_Right:
+                case GDK_KP_Right:
+                        gl_view_move_selection (view, 1.0 / (view->zoom), 0.0);
+                        break;
+                case GDK_Down:
+                case GDK_KP_Down:
+                        gl_view_move_selection (view, 0.0, 1.0 / (view->zoom));
+                        break;
+                case GDK_Delete:
+                case GDK_KP_Delete:
+                        gl_view_delete_selection (view);
+                        cursor = gdk_cursor_new (GDK_LEFT_PTR);
+                        gdk_window_set_cursor (GTK_WIDGET (view->canvas)->window
+, cursor);
+                        gdk_cursor_unref (cursor);
+                        break;
+                default:
+                        return FALSE;
+ 
+               }
+        }
+        return TRUE;    /* We handled this or we were dragging. */
+}
+

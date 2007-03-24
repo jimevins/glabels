@@ -33,6 +33,7 @@
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 
@@ -63,9 +64,6 @@ static void insert_button_cb (glObjectEditor  *editor);
 void
 gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 {
-	GList        *family_names = NULL;
-	GtkWidget    *label;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */

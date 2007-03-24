@@ -5,7 +5,7 @@
  *
  *  view_object.h:  GLabels canvas item wrapper widget
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,26 @@
 #include <glib-object.h>
 #include "label-object.h"
 
+typedef enum {
+	GL_VIEW_OBJECT_HANDLES_BOX,
+	GL_VIEW_OBJECT_HANDLES_LINE,
+} glViewObjectHandlesStyle;
+
+typedef enum {
+        GL_VIEW_OBJECT_HANDLE_NONE = 0,
+	GL_VIEW_OBJECT_HANDLE_N,
+	GL_VIEW_OBJECT_HANDLE_E,
+	GL_VIEW_OBJECT_HANDLE_W,
+	GL_VIEW_OBJECT_HANDLE_S,
+	GL_VIEW_OBJECT_HANDLE_NW,
+	GL_VIEW_OBJECT_HANDLE_NE,
+	GL_VIEW_OBJECT_HANDLE_SE,
+	GL_VIEW_OBJECT_HANDLE_SW,
+	GL_VIEW_OBJECT_HANDLE_P1,
+	GL_VIEW_OBJECT_HANDLE_P2,
+} glViewObjectHandle;
+
+
 #define GL_TYPE_VIEW_OBJECT              (gl_view_object_get_type ())
 #define GL_VIEW_OBJECT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_OBJECT, glViewObject))
 #define GL_VIEW_OBJECT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_OBJECT, glViewObjectClass))
@@ -42,7 +62,8 @@ typedef struct _glViewObjectPrivate   glViewObjectPrivate;
 
 
 #include "view.h"
-#include "view-highlight.h"
+
+#include "cairo.h"
 
 struct _glViewObject {
 	GObject               parent_object;
@@ -58,46 +79,58 @@ struct _glViewObjectClass {
 	 */
 
 	GtkWidget * (*construct_editor) (glViewObject *view_object);
+
+        gboolean    (*object_at)        (glViewObject *view_object,
+                                         cairo_t      *cr,
+                                         gdouble       x_device,
+                                         gdouble       y_device);
 };
+
+
 
 
 G_BEGIN_DECLS
 
-GType            gl_view_object_get_type          (void) G_GNUC_CONST;
+GType              gl_view_object_get_type          (void) G_GNUC_CONST;
 
-GObject         *gl_view_object_new               (void);
-
-
-void             gl_view_object_set_view          (glViewObject         *view_object,
-						   glView               *view);
-
-void             gl_view_object_set_object        (glViewObject         *view_object,
-						   glLabelObject        *object,
-						   glViewHighlightStyle  style);
-
-glView          *gl_view_object_get_view          (glViewObject         *view_object);
-
-glLabelObject   *gl_view_object_get_object        (glViewObject         *view_object);
-
-GnomeCanvasItem *gl_view_object_get_group         (glViewObject         *view_object);
-
-GnomeCanvasItem *gl_view_object_item_new          (glViewObject         *view_object,
-						   GType                 type,
-						   const gchar          *first_arg_name,
-						   ...);
-
-void             gl_view_object_show_highlight    (glViewObject         *view_object);
-
-void             gl_view_object_hide_highlight    (glViewObject         *view_object);
-
-GtkWidget       *gl_view_object_get_editor        (glViewObject         *view_object);
-
-void             gl_view_object_select            (glViewObject         *view_object);
+GObject           *gl_view_object_new               (void);
 
 
-gint             gl_view_object_item_event_cb     (GnomeCanvasItem      *item,
-						   GdkEvent             *event,
-						   glViewObject         *view_object);
+void               gl_view_object_set_view          (glViewObject             *view_object,
+                                                     glView                   *view);
+
+void               gl_view_object_set_object        (glViewObject             *view_object,
+                                                     glLabelObject            *object,
+                                                     glViewObjectHandlesStyle  style);
+
+gboolean           gl_view_object_at                (glViewObject             *view_object,
+                                                     cairo_t                  *cr,
+                                                     gdouble                   x,
+                                                     gdouble                   y);
+
+void               gl_view_object_draw_handles      (glViewObject             *view_object,
+                                                     cairo_t                  *cr);
+
+glViewObjectHandle gl_view_object_handle_at         (glViewObject             *view_object,
+                                                     cairo_t                  *cr,
+                                                     gdouble                   x,
+                                                     gdouble                   y);
+
+glView            *gl_view_object_get_view          (glViewObject             *view_object);
+
+glLabelObject     *gl_view_object_get_object        (glViewObject             *view_object);
+
+GtkWidget         *gl_view_object_get_editor        (glViewObject             *view_object);
+
+void               gl_view_object_select            (glViewObject             *view_object);
+
+void               gl_view_object_resize_event      (glViewObject             *view_object,
+                                                     glViewObjectHandle        handle,
+                                                     gboolean                  honor_aspect,
+                                                     cairo_t                  *cr,
+                                                     gdouble                   x,
+                                                     gdouble                   y);
+
 
 G_END_DECLS
 

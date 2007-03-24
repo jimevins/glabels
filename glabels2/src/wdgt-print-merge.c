@@ -99,8 +99,6 @@ gl_wdgt_print_merge_init (glWdgtPrintMerge * merge)
 static void
 gl_wdgt_print_merge_finalize (GObject * object)
 {
-	glWdgtPrintMerge *merge = GL_WDGT_PRINT_MERGE (object);
-
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_PRINT_MERGE (object));
 
@@ -126,7 +124,6 @@ static void
 gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 			       glLabel * label)
 {
-	glTemplate                *template;
 	const glTemplateLabelType *label_type;
 	GtkWidget                 *whbox, *wvbox, *whbox1;
 	GtkObject                 *adjust;
@@ -134,8 +131,7 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 
 	whbox = GTK_WIDGET (merge);
 
-	template   = gl_label_get_template (label);
-	label_type = gl_template_get_first_label_type (template);
+	label_type = gl_template_get_first_label_type (label->template);
 
 	merge->labels_per_sheet = gl_template_get_n_labels (label_type);
 
@@ -143,7 +139,7 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	merge->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
 							WDGT_MINI_PREVIEW_WIDTH);
 	gl_wdgt_mini_preview_set_template( GL_WDGT_MINI_PREVIEW (merge->mini_preview),
-					   template );
+					   label->template );
 	gtk_box_pack_start (GTK_BOX(whbox), merge->mini_preview, FALSE, FALSE, 0);
 	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
 					      1, 1);
@@ -196,8 +192,6 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 			  G_CALLBACK (spin_cb), merge);
 	g_signal_connect (G_OBJECT (merge->first_spin), "changed",
 			  G_CALLBACK (spin_cb), merge);
-
-	gl_template_free (template);
 }
 
 /*--------------------------------------------------------------------------*/

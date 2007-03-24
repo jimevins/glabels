@@ -5,7 +5,7 @@
  *
  *  label.c:  GLabels label module
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -42,9 +42,6 @@
 /*========================================================*/
 
 struct _glLabelPrivate {
-
-        glTemplate  *template;
-        gboolean     rotate_flag;
 
 	gchar       *filename;
 	gint         compression;
@@ -158,9 +155,12 @@ gl_label_init (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
+	label->template     = NULL;
+	label->rotate_flag  = FALSE;
+        label->objects      = NULL;
+
 	label->priv = g_new0 (glLabelPrivate, 1);
 
-	label->priv->template     = NULL;
 	label->priv->filename     = NULL;
 	label->priv->merge        = NULL;
 	label->priv->pixbuf_cache = gl_pixbuf_cache_new ();
@@ -183,7 +183,7 @@ gl_label_finalize (GObject *object)
 		g_object_unref (G_OBJECT(p->data));
 	}
 
-	gl_template_free (label->priv->template);
+	gl_template_free (label->template);
 	g_free (label->priv->filename);
 	if (label->priv->merge != NULL) {
 		g_object_unref (G_OBJECT(label->priv->merge));
@@ -370,11 +370,11 @@ gl_label_set_template (glLabel    *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	if ((label->priv->template == NULL) ||
-	    (g_strcasecmp (template->name, label->priv->template->name) != 0)) {
+	if ((label->template == NULL) ||
+	    (g_strcasecmp (template->name, label->template->name) != 0)) {
 
-		gl_template_free (label->priv->template);
-		label->priv->template = gl_template_dup (template);
+		gl_template_free (label->template);
+		label->template = gl_template_dup (template);
 
 		label->priv->modified_flag = TRUE;
 
@@ -398,9 +398,9 @@ gl_label_set_rotate_flag (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	if (rotate_flag != label->priv->rotate_flag) {
+	if (rotate_flag != label->rotate_flag) {
 
-		label->priv->rotate_flag = rotate_flag;
+		label->rotate_flag = rotate_flag;
 
 		label->priv->modified_flag = TRUE;
 
@@ -411,36 +411,6 @@ gl_label_set_rotate_flag (glLabel *label,
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
-}
-
-/****************************************************************************/
-/* Get template.                                                            */
-/****************************************************************************/
-glTemplate *
-gl_label_get_template (glLabel *label)
-{
-	gl_debug (DEBUG_LABEL, "START");
-
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	gl_debug (DEBUG_LABEL, "END");
-
-	return gl_template_dup (label->priv->template);
-}
-
-/****************************************************************************/
-/* Get rotate flag.                                                         */
-/****************************************************************************/
-gboolean
-gl_label_get_rotate_flag (glLabel *label)
-{
-	gl_debug (DEBUG_LABEL, "START");
-
-	g_return_if_fail (label && GL_IS_LABEL (label));
-
-	gl_debug (DEBUG_LABEL, "END");
-
-	return label->priv->rotate_flag;
 }
 
 /****************************************************************************/
@@ -458,7 +428,7 @@ gl_label_get_size (glLabel *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	template = label->priv->template;
+	template = label->template;
 	if ( !template ) {
 		gl_debug (DEBUG_LABEL, "END -- template NULL");
 		*w = *h = 0;
@@ -466,7 +436,7 @@ gl_label_get_size (glLabel *label,
 	}
 	label_type = gl_template_get_first_label_type (template);
 
-	if (!label->priv->rotate_flag) {
+	if (!label->rotate_flag) {
 		gl_template_get_label_size (label_type, w, h);
 	} else {
 		gl_template_get_label_size (label_type, h, w);
@@ -508,7 +478,7 @@ gl_label_get_merge (glLabel *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
-	g_return_if_fail (label && GL_IS_LABEL (label));
+	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
 	gl_debug (DEBUG_LABEL, "END");
 
@@ -662,3 +632,25 @@ gl_label_get_compression (glLabel *label)
 	return label->priv->compression;
 }
 
+
+/****************************************************************************/
+/* Draw label.                                                              */
+/****************************************************************************/
+void
+gl_label_draw (glLabel       *label,
+               cairo_t       *cr,
+               gboolean       screen_flag,
+               glMergeRecord *record)
+{
+	GList            *p_obj;
+	glLabelObject    *object;
+
+	g_return_if_fail (label && GL_IS_LABEL (label));
+
+	for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next)
+        {
+		object = GL_LABEL_OBJECT (p_obj->data);
+
+                gl_label_object_draw (object, cr, screen_flag, record);
+	}
+}

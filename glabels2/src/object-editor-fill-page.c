@@ -33,6 +33,7 @@
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 

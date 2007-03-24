@@ -33,6 +33,7 @@
 #include <math.h>
 
 #include "prefs.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 
@@ -64,8 +65,6 @@ static void data_radio_toggled_cb                (glObjectEditor        *editor)
 void
 gl_object_editor_prepare_data_page (glObjectEditor *editor)
 {
-	GdkColor     *gdk_color;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */

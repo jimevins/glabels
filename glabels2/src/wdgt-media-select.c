@@ -98,9 +98,6 @@ static void filter_changed_cb                  (GtkComboBox            *combo,
 static void template_selection_changed_cb      (GtkTreeSelection       *selection,
                                                 gpointer                user_data);
 
-static void details_update                     (glWdgtMediaSelect      *media_select,
-                                                gchar                  *name);
-
 static gchar *get_layout_desc                  (const glTemplate       *template);
 static gchar *get_label_size_desc              (const glTemplate       *template);
 static void   load_list                        (GtkListStore           *store,
@@ -195,18 +192,14 @@ static void
 gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
         GtkWidget         *hbox;
-        GtkWidget         *preview_vbox;
         GList             *page_sizes = NULL;
         GList             *categories = NULL;
         GList             *template_names = NULL;
         const gchar       *page_size_id;
         gchar             *page_size_name;
-        gchar             *name;
         GtkCellRenderer   *renderer;
         GtkTreeViewColumn *column;
         GtkTreeSelection  *selection;
-        GtkTreeIter        iter;
-        GtkTreeModel      *model;        
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -296,8 +289,6 @@ filter_changed_cb (GtkComboBox *combo,
         gchar             *category_name, *category_id;
         GList             *template_names;
         GtkTreeSelection  *selection;
-        GtkTreeIter        iter;
-        GtkTreeModel      *model;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -342,8 +333,6 @@ static void
 template_selection_changed_cb (GtkTreeSelection       *selection,
                                gpointer                user_data)
 {
-        glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
-
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
         /* Emit our "changed" signal */
@@ -495,7 +484,6 @@ get_layout_desc (const glTemplate *template)
 {
         const glTemplateLabelType *label_type;
         gint                       n_labels;
-        glTemplateLayout          *layout;
         gchar                     *string;
 
         label_type = gl_template_get_first_label_type (template);
@@ -613,7 +601,7 @@ load_list (GtkListStore           *store,
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);
                         description = g_strdup_printf ("<b>%s</b>\n%s\n%s",
-                                                       p->data,
+                                                       (gchar *)p->data,
                                                        size,
                                                        layout);
                         g_free (size);

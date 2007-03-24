@@ -27,6 +27,7 @@
 
 #include <glib-object.h>
 #include <pango/pango.h>
+#include <cairo.h>
 
 G_BEGIN_DECLS
 
@@ -134,6 +135,20 @@ struct _glLabelObjectClass {
                                                    glLabelObject     *src_object);
 
         /*
+         * Draw methods
+         */
+        void        (*draw_shadow)      (glLabelObject *object,
+                                         cairo_t       *cr,
+                                         gboolean       screen_flag,
+                                         glMergeRecord *record);
+
+        void        (*draw_object)      (glLabelObject *object,
+                                         cairo_t       *cr,
+                                         gboolean       screen_flag,
+                                         glMergeRecord *record);
+
+
+        /*
          * Signals
          */
         void (*changed)     (glLabelObject     *object,
@@ -198,6 +213,10 @@ void           gl_label_object_set_size_honor_aspect (glLabelObject     *object,
                                                       gdouble            h);
 
 void           gl_label_object_get_size              (glLabelObject     *object,
+                                                      gdouble           *w,
+                                                      gdouble           *h);
+
+void           gl_label_object_get_raw_size          (glLabelObject     *object,
                                                       gdouble           *w,
                                                       gdouble           *h);
 
@@ -282,17 +301,11 @@ void           gl_label_object_flip_vert             (glLabelObject     *object)
 void           gl_label_object_rotate                (glLabelObject     *object,
                                                       gdouble            theta_degs);
 
-void           gl_label_object_set_affine            (glLabelObject     *object,
-                                                      gdouble           affine[6]);
+void           gl_label_object_set_matrix            (glLabelObject     *object,
+                                                      cairo_matrix_t    *matrix);
 
-void           gl_label_object_get_affine            (glLabelObject     *object,
-                                                      gdouble           affine[6]);
-
-void           gl_label_object_get_i2w_affine        (glLabelObject     *object,
-                                                      gdouble           affine[6]);
-
-void           gl_label_object_get_w2i_affine        (glLabelObject     *object,
-                                                      gdouble           affine[6]);
+void           gl_label_object_get_matrix            (glLabelObject     *object,
+                                                      cairo_matrix_t    *matrix);
 
 void           gl_label_object_set_shadow_state      (glLabelObject     *object,
                                                       gboolean           state);
@@ -316,6 +329,13 @@ void           gl_label_object_get_shadow_offset     (glLabelObject     *object,
 glColorNode*   gl_label_object_get_shadow_color      (glLabelObject     *object);
 
 gdouble        gl_label_object_get_shadow_opacity    (glLabelObject     *object);
+
+void           gl_label_object_draw                  (glLabelObject     *object,
+                                                      cairo_t           *cr,
+                                                      gboolean           screen_flag,
+                                                      glMergeRecord     *record);
+
+
 
 
 G_END_DECLS

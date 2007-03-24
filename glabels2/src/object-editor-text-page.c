@@ -480,7 +480,6 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 				 glColorNode         *text_color_node)
 {
 	GdkColor *gdk_color;
-	gint pos;
 
 	gl_debug (DEBUG_EDITOR, "START");
 

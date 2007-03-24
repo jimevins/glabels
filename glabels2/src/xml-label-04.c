@@ -67,7 +67,6 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 {
 	glLabel       *label;
 	xmlNodePtr    node;
-	xmlNsPtr      ns;
 	GObject       *object;
 	gboolean      rotate_flag;
 
@@ -212,12 +211,12 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	font_family = xmlGetProp (object_node, (xmlChar *)"font_family");
 	font_size = gl_xml_get_prop_double (object_node, "font_size", 0);
 	string = xmlGetProp (object_node, (xmlChar *)"font_weight");
-	font_weight = gl_util_string_to_weight (string);
+	font_weight = gl_util_string_to_weight ((gchar *)string);
 	xmlFree (string);
 	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, (xmlChar *)"justify");
-	align = gl_util_string_to_align (string);
+	align = gl_util_string_to_align ((gchar *)string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
@@ -484,7 +483,6 @@ xml04_parse_merge_properties (xmlNodePtr node,
 			      glLabel    *label)
 {
 	glMerge               *merge;
-	xmlNodePtr             child;
 	xmlChar               *string;
 
 	gl_debug (DEBUG_XML, "START");

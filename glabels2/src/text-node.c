@@ -60,7 +60,7 @@ gl_text_node_expand (glTextNode    *text_node,
 			if (text != NULL) {
 				return text;
 			} else {
-				return g_strdup_printf ("");
+				return g_strdup_printf ("%s", "");
 			}
 		}
 	} else {
@@ -292,10 +292,11 @@ gl_text_node_lines_dup (GList *src_lines)
 	GList      *p_line, *line, *p_node;
 	glTextNode *node;
 
-	for (p_line = src_lines; p_line != NULL; p_line = p_line->next) {
+	for (p_line = src_lines; p_line != NULL; p_line = p_line->next)
+        {
 		line = NULL;
-		for (p_node = (GList *) p_line->data; p_node != NULL;
-		     p_node = p_node->next) {
+		for (p_node = (GList *) p_line->data; p_node != NULL; p_node = p_node->next)
+                {
 			node = gl_text_node_dup ((glTextNode *)p_node->data);
 			line = g_list_append (line, node);
 		}
@@ -312,11 +313,15 @@ void
 gl_text_node_lines_free (GList **lines)
 {
 	GList *p_line, *p_node;
+        glTextNode     *text_node;
 
-	for (p_line = *lines; p_line != NULL; p_line = p_line->next) {
-		for (p_node = (GList *) p_line->data; p_node != NULL;
-		     p_node = p_node->next) {
-			gl_text_node_free ( (glTextNode **) &(p_node->data) );
+	for (p_line = *lines; p_line != NULL; p_line = p_line->next)
+        {
+		for (p_node = (GList *) p_line->data; p_node != NULL; p_node = p_node->next)
+                {
+                        text_node = (glTextNode *)p_node->data;
+                        p_node->data = NULL;
+			gl_text_node_free ( &text_node );
 		}
 		g_list_free ((GList *) p_line->data);
 		p_line->data = NULL;
