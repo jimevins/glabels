@@ -61,6 +61,7 @@ static void update_preview_cb                   (GtkFileChooser *file_chooser,
 						 gpointer        data);
 static void add_image_filters_to_chooser        (GtkFileChooser *file_chooser);
 
+static void img_selection_changed_cb (glObjectEditor *editor);
 
 
 /*--------------------------------------------------------------------------*/
@@ -102,7 +103,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	/* Connect signals */
 	g_signal_connect_swapped (G_OBJECT (editor->priv->img_file_button),
 				  "selection-changed",
-				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_CALLBACK (img_selection_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->img_key_combo),
 				  "changed",
@@ -158,6 +159,12 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_combo),
 					 G_CALLBACK (gl_object_editor_changed_cb),
 					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_radio),
+					 G_CALLBACK (img_radio_toggled_cb),
+					 editor);
+	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_radio),
+					 G_CALLBACK (img_radio_toggled_cb),
+					 editor);
 
         gtk_widget_set_sensitive (editor->priv->img_key_radio, merge_flag);
  
@@ -192,6 +199,12 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_combo),
 					   G_CALLBACK (gl_object_editor_changed_cb),
 					   editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_radio),
+                                           G_CALLBACK (img_radio_toggled_cb),
+                                           editor);
+	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_radio),
+                                           G_CALLBACK (img_radio_toggled_cb),
+                                           editor);
                                                                                 
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -331,3 +344,25 @@ add_image_filters_to_chooser (GtkFileChooser *chooser)
 	}
 	g_slist_free (filters);
 }
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE. Selection changed callback.                                     */
+/*--------------------------------------------------------------------------*/
+static void
+img_selection_changed_cb (glObjectEditor *editor)
+{
+        gchar *filename;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+        filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER(editor->priv->img_file_button));
+        if (filename != NULL)
+        {
+                /* Emit our "changed" signal */
+                g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        }
+        g_free (filename);
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+

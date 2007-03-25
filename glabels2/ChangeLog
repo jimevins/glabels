@@ -1,3 +1,16 @@
+2007-03-24  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page),
+	(gl_object_editor_set_image), (img_selection_changed_cb):
+		Workaround for GtkFileChooserButton bug # 327243.  This the root
+		cause for gLabels bug # 1192884.  I have actually observed 3 delayed
+		"selection-changed" signals -- the first 2 return NULL -- this is
+		what caused the image to reset to the default followed by setting
+		it back to the original image, trying to fit it into a new bounding
+		box.  This sequence of events is much more evident with the new
+		cairo rendering.
+
 2007-03-23  Jim Evins  <evins@snaught.com>
 
 	Merged all changes from experimental cairo branch to trunk.
