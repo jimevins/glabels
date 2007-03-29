@@ -208,8 +208,6 @@ gl_ui_cmd_file_print (GtkAction *action,
         {
                 gl_print_op_free_settings (window->print_settings);
                 window->print_settings = gl_print_op_get_settings (op);
-
-                g_object_unref (op);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
