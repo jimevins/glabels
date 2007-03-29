@@ -1,3 +1,15 @@
+2007-03-28  Jim Evins  <evins@snaught.com>
+
+	* src/print-op.c: (gl_print_op_construct),
+	(gl_print_op_get_settings), (gl_print_op_set_settings),
+	(gl_print_op_free_settings), (create_custom_widget_cb):
+	* src/print-op.h:
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/window.c: (gl_window_init):
+	* src/window.h:
+		Save print settings and custom settings between print operations
+		on the same window.
+
 2007-03-24  Jim Evins  <evins@snaught.com>
 
 	* src/object-editor-image-page.c:

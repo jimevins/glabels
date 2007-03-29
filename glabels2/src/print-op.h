@@ -56,23 +56,32 @@ struct  _glPrintOpClass
 };
 
 
-GType          gl_print_op_get_type           (void) G_GNUC_CONST;
+typedef struct _glPrintOpSettings glPrintOpSettings;
 
-glPrintOp     *gl_print_op_new                (glLabel       *label);
 
-void           gl_print_op_force_outline_flag (glPrintOp *print_op);
 
+GType              gl_print_op_get_type           (void) G_GNUC_CONST;
+
+glPrintOp         *gl_print_op_new                (glLabel           *label);
+
+void               gl_print_op_force_outline_flag (glPrintOp         *print_op);
+
+glPrintOpSettings *gl_print_op_get_settings          (glPrintOp         *print_op);
+void               gl_print_op_set_settings          (glPrintOp         *print_op,
+                                                      glPrintOpSettings *settings);
+void               gl_print_op_free_settings         (glPrintOpSettings *settings);
+                                          
 /*
  * Batch print operation
  */
-glPrintOp     *gl_print_op_new_batch          (glLabel       *label,
-                                               gchar         *filename,
-                                               gint           n_sheets,
-                                               gint           n_copies,
-                                               gint           first,
-                                               gboolean       outline_flag,
-                                               gboolean       reverse_flag,
-                                               gboolean       crop_marks_flag);
+glPrintOp         *gl_print_op_new_batch          (glLabel           *label,
+                                                   gchar             *filename,
+                                                   gint               n_sheets,
+                                                   gint               n_copies,
+                                                   gint               first,
+                                                   gboolean           outline_flag,
+                                                   gboolean           reverse_flag,
+                                                   gboolean           crop_marks_flag);
 
 G_END_DECLS
 

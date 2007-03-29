@@ -33,6 +33,7 @@
 #include "label.h"
 #include "ui-property-bar.h"
 #include "ui-sidebar.h"
+#include "print-op.h"
 #include "merge-properties-dialog.h"
 
 G_BEGIN_DECLS
@@ -70,6 +71,7 @@ struct _glWindow {
 
 	guint                    menu_tips_context_id;
 
+        glPrintOpSettings       *print_settings;
 	glMergePropertiesDialog *merge_dialog;
 	GtkMenu                 *context_menu;
 	GtkMenu                 *empty_selection_context_menu;

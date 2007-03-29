@@ -80,6 +80,23 @@ struct _glPrintOpPrivate {
         glPrintState state;
 };
 
+typedef struct _glPrintOpSettings
+{
+
+        GtkPrintSettings *gtk_settings;
+
+        gboolean          outline_flag;
+        gboolean          reverse_flag;
+        gboolean          crop_marks_flag;
+        gboolean          collate_flag;
+
+        gint              first;
+        gint              last;
+        gint              n_sheets;
+        gint              n_copies;
+        
+};
+
 
 /*===========================================*/
 /* Private globals                           */
@@ -200,8 +217,17 @@ static void
 gl_print_op_construct (glPrintOp      *op,
                        glLabel        *label)
 {
+        const glTemplateLabelType *label_type;
+
 	op->priv->label              = label;
 	op->priv->force_outline_flag = FALSE;
+
+        label_type = gl_template_get_first_label_type (label->template);
+
+        op->priv->n_sheets           = 1;
+        op->priv->first              = 1;
+        op->priv->last               = gl_template_get_n_labels (label_type);
+        op->priv->n_copies           = 1;
 
 	gtk_print_operation_set_custom_tab_label ( GTK_PRINT_OPERATION (op),
 						   _("Labels"));
@@ -249,6 +275,79 @@ gl_print_op_new_batch (glLabel       *label,
                                          crop_marks_flag);
 
 	return op;
+}
+
+/*****************************************************************************/
+/* Get print operation settings.                                             */
+/*****************************************************************************/
+glPrintOpSettings *
+gl_print_op_get_settings (glPrintOp         *print_op)
+{
+        glPrintOpSettings *settings;
+
+        settings = g_new0 (glPrintOpSettings, 1);
+
+        if ( settings )
+        {
+                settings->gtk_settings =
+                        gtk_print_operation_get_print_settings (GTK_PRINT_OPERATION (print_op));
+
+                settings->outline_flag     = print_op->priv->outline_flag;
+                settings->reverse_flag     = print_op->priv->reverse_flag;
+                settings->crop_marks_flag  = print_op->priv->crop_marks_flag;
+                settings->collate_flag     = print_op->priv->collate_flag;
+
+                settings->first            = print_op->priv->first;
+                settings->last             = print_op->priv->last;
+                settings->n_sheets         = print_op->priv->n_sheets;
+                settings->n_copies         = print_op->priv->n_copies;
+        }
+
+        return settings;
+}
+
+/*****************************************************************************/
+/* Set print operation settings.                                             */
+/*****************************************************************************/
+void
+gl_print_op_set_settings (glPrintOp         *print_op,
+                          glPrintOpSettings *settings)
+{
+
+        if ( settings )
+        {
+                gtk_print_operation_set_print_settings (GTK_PRINT_OPERATION (print_op),
+                                                        settings->gtk_settings);
+
+                print_op->priv->outline_flag     = settings->outline_flag;
+                print_op->priv->reverse_flag     = settings->reverse_flag;
+                print_op->priv->crop_marks_flag  = settings->crop_marks_flag;
+                print_op->priv->collate_flag     = settings->collate_flag;
+
+                print_op->priv->first            = settings->first;
+                print_op->priv->last             = settings->last;
+                print_op->priv->n_sheets         = settings->n_sheets;
+                print_op->priv->n_copies         = settings->n_copies;
+        }
+
+ }
+
+/*****************************************************************************/
+/* Free print operation settings structure.                                  */
+/*****************************************************************************/
+void
+gl_print_op_free_settings(glPrintOpSettings *settings)
+{
+        
+        if ( settings )
+        {
+                if ( settings->gtk_settings )
+                {
+                        g_object_unref (settings->gtk_settings);
+                }
+
+                g_free (settings);
+        }
 }
 
 /*--------------------------------------------------------------------------*/
@@ -366,14 +465,22 @@ create_custom_widget_cb (GtkPrintOperation *operation,
         merge = gl_label_get_merge (op->priv->label);
 	if (merge == NULL) {
 
+                gl_wdgt_print_copies_set_range (GL_WDGT_PRINT_COPIES (op->priv->copies),
+                                                op->priv->n_sheets,
+                                                op->priv->first,
+                                                op->priv->last);
+
 		gtk_widget_show_all (op->priv->simple_frame);
 		gtk_widget_hide_all (op->priv->merge_frame);
 
 	} else {
 
 		gint n_records = gl_merge_get_record_count( merge );
-		gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE(op->priv->prmerge),
-						1, 1, n_records, FALSE);
+                gl_wdgt_print_merge_set_copies (GL_WDGT_PRINT_MERGE (op->priv->prmerge),
+                                                op->priv->n_copies,
+                                                op->priv->first,
+                                                n_records,
+                                                op->priv->collate_flag);
 		g_object_unref (G_OBJECT(merge));
 
 		gtk_widget_hide_all (op->priv->simple_frame);
@@ -390,6 +497,14 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                 gtk_widget_set_sensitive (op->priv->reverse_check, FALSE);
                 gtk_widget_set_sensitive (op->priv->crop_marks_check, FALSE);
         }
+
+        /* --- Set options --- */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->outline_check),
+                                      op->priv->outline_flag);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->reverse_check),
+                                      op->priv->reverse_flag);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->crop_marks_check),
+                                      op->priv->crop_marks_flag);
 
 	return G_OBJECT (vbox);
 }
