@@ -1,3 +1,9 @@
+2007-03-30  Jim Evins  <evins@snaught.com>
+
+	* src/label-box.c: (draw_shadow):
+	* src/label-ellipse.c: (draw_shadow):
+		Added missing shadow fill.
+	
 2007-03-28  Jim Evins  <evins@snaught.com>
 
 	* src/ui-commands.c: (gl_ui_cmd_file_print):

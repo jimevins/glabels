@@ -397,6 +397,7 @@ draw_shadow (glLabelObject *object,
                                GL_COLOR_F_GREEN (shadow_fill_color),
                                GL_COLOR_F_BLUE (shadow_fill_color),
                                GL_COLOR_F_ALPHA (shadow_fill_color));
+        cairo_fill_preserve (cr);
 
         /* Draw outline shadow */
         cairo_set_source_rgba (cr,
