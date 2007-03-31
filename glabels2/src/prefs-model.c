@@ -500,7 +500,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	prefs_model->max_recents =
 		get_int (prefs_model->gconf_client,
 			 BASE_KEY PREF_MAX_RECENTS,
-			 4);
+			 -1);
 
 
 	/* Proof read the default page size -- it must be a valid id. */

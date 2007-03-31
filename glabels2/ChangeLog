@@ -1,5 +1,11 @@
 2007-03-30  Jim Evins  <evins@snaught.com>
 
+	* src/prefs-model.c: (gl_prefs_model_load_settings):
+		Default to an unlimited list of recent documents, since this parameter
+		seems to be pre-filter anyway.
+
+2007-03-30  Jim Evins  <evins@snaught.com>
+
 	* src/label-box.c: (draw_shadow):
 	* src/label-ellipse.c: (draw_shadow):
 		Added missing shadow fill.
