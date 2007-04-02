@@ -1,3 +1,13 @@
+2007-04-01  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (gl_label_text_init), (copy),
+	(gl_label_text_set_lines), (buffer_changed_cb), (get_size),
+	(set_font_family), (set_font_size), (set_font_weight),
+	(set_font_italic_flag), (set_text_alignment),
+	(set_text_line_spacing):
+		Cache object size, so that expensive extent calculations are only done
+		when needed.
+
 2007-03-30  Jim Evins  <evins@snaught.com>
 
 	* src/prefs-model.c: (gl_prefs_model_load_settings):

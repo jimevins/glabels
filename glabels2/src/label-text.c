@@ -63,6 +63,10 @@ struct _glLabelTextPrivate {
 	glColorNode     *color_node;
 	gdouble          line_spacing;
 	gboolean         auto_shrink;
+
+        gboolean         size_changed;
+        gdouble          w;
+        gdouble          h;
 };
 
 /*========================================================*/
@@ -189,11 +193,13 @@ gl_label_text_init (glLabelText *ltext)
 	ltext->priv->font_size         = DEFAULT_FONT_SIZE;
 	ltext->priv->font_weight       = DEFAULT_FONT_WEIGHT;
 	ltext->priv->font_italic_flag  = DEFAULT_FONT_ITALIC_FLAG;
-	ltext->priv->align              = DEFAULT_ALIGN;
+	ltext->priv->align             = DEFAULT_ALIGN;
 	ltext->priv->color_node        = gl_color_node_new_default ();
 	ltext->priv->color_node->color = DEFAULT_COLOR;
 	ltext->priv->line_spacing      = DEFAULT_TEXT_LINE_SPACING;
 	ltext->priv->auto_shrink       = DEFAULT_AUTO_SHRINK;
+
+        ltext->priv->size_changed      = TRUE;
 
 	g_signal_connect (G_OBJECT(ltext->priv->buffer), "changed",
 			  G_CALLBACK(buffer_changed_cb), ltext);
@@ -256,9 +262,13 @@ copy (glLabelObject *dst_object,
 	new_ltext->priv->font_weight      = ltext->priv->font_weight;
 	new_ltext->priv->font_italic_flag = ltext->priv->font_italic_flag;
 	set_text_color (dst_object, text_color_node);
-	new_ltext->priv->align             = ltext->priv->align;
+	new_ltext->priv->align            = ltext->priv->align;
 	new_ltext->priv->line_spacing     = ltext->priv->line_spacing;
 	new_ltext->priv->auto_shrink      = ltext->priv->auto_shrink;
+
+        new_ltext->priv->size_changed     = ltext->priv->size_changed;
+        new_ltext->priv->w                = ltext->priv->w;
+        new_ltext->priv->h                = ltext->priv->h;
 
 	gl_color_node_free (&text_color_node);
 	gl_text_node_lines_free (&lines);
@@ -283,6 +293,8 @@ gl_label_text_set_lines (glLabelText *ltext,
 	text = gl_text_node_lines_expand (lines, NULL);
 	gtk_text_buffer_set_text (ltext->priv->buffer, text, -1);
 	g_free (text);
+
+        ltext->priv->size_changed = TRUE;
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -322,6 +334,8 @@ gl_label_text_get_lines (glLabelText *ltext)
 void buffer_changed_cb (GtkTextBuffer *textbuffer,
 			glLabelText   *ltext)
 {
+        ltext->priv->size_changed = TRUE;
+
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 }
 
@@ -357,6 +371,13 @@ get_size (glLabelObject *object,
 		return;
 	}
 
+        if (!ltext->priv->size_changed)
+        {
+                *w = ltext->priv->w;
+                *h = ltext->priv->h;
+		return;
+        }
+
 	gtk_text_buffer_get_bounds (ltext->priv->buffer, &start, &end);
 	text = gtk_text_buffer_get_text (ltext->priv->buffer,
 					 &start, &end, FALSE);
@@ -384,8 +405,9 @@ get_size (glLabelObject *object,
 
 	pango_layout_set_text (layout, text, -1);
 	pango_layout_get_size (layout, &iw, &ih);
-	*w = iw / PANGO_SCALE + 2*GL_LABEL_TEXT_MARGIN;
-	*h = ih / PANGO_SCALE;
+	*w = ltext->priv->w = iw / PANGO_SCALE + 2*GL_LABEL_TEXT_MARGIN;
+	*h = ltext->priv->h = ih / PANGO_SCALE;
+        ltext->priv->size_changed = FALSE;
 
 	g_object_unref (layout);
 	g_object_unref (context);
@@ -436,6 +458,8 @@ set_font_family (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "new font family = %s", ltext->priv->font_family);
 
+        ltext->priv->size_changed = TRUE;
+
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -455,6 +479,8 @@ set_font_size (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
 	if (ltext->priv->font_size != font_size) {
+
+                ltext->priv->size_changed = TRUE;
 
 		ltext->priv->font_size = font_size;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
@@ -479,6 +505,8 @@ set_font_weight (glLabelObject   *object,
 
 	if (ltext->priv->font_weight != font_weight) {
 
+                ltext->priv->size_changed = TRUE;
+
 		ltext->priv->font_weight = font_weight;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
@@ -501,6 +529,8 @@ set_font_italic_flag (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
 	if (ltext->priv->font_italic_flag != font_italic_flag) {
+
+                ltext->priv->size_changed = TRUE;
 
 		ltext->priv->font_italic_flag = font_italic_flag;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
@@ -525,6 +555,8 @@ set_text_alignment (glLabelObject    *object,
 
 	if (ltext->priv->align != text_alignment) {
 
+                ltext->priv->size_changed = TRUE;
+
 		ltext->priv->align = text_alignment;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
@@ -547,6 +579,8 @@ set_text_line_spacing (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 
 	if (ltext->priv->line_spacing != line_spacing) {
+
+                ltext->priv->size_changed = TRUE;
 
 		ltext->priv->line_spacing = line_spacing;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
