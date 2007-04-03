@@ -404,6 +404,9 @@ construct_start_page (glTemplateDesigner      *dialog,
 
 	dialog->priv->start_page = glade_xml_get_widget (gui, "start_page");
 
+        g_object_unref (gui);
+
+
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->start_page);
 
@@ -442,6 +445,9 @@ construct_name_page (glTemplateDesigner      *dialog,
 	dialog->priv->brand_entry       = glade_xml_get_widget (gui, "brand_entry");
 	dialog->priv->part_num_entry    = glade_xml_get_widget (gui, "part_num_entry");
 	dialog->priv->description_entry = glade_xml_get_widget (gui, "description_entry");
+
+        g_object_unref (gui);
+
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->name_page);
@@ -490,6 +496,9 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 	dialog->priv->pg_h_spin        = glade_xml_get_widget (gui, "pg_h_spin");
 	dialog->priv->pg_w_units_label = glade_xml_get_widget (gui, "pg_w_units_label");
 	dialog->priv->pg_h_units_label = glade_xml_get_widget (gui, "pg_h_units_label");
+
+        g_object_unref (gui);
+
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
 
@@ -561,6 +570,9 @@ construct_shape_page (glTemplateDesigner      *dialog,
 	dialog->priv->shape_round_radio = glade_xml_get_widget (gui, "shape_round_radio");
 	dialog->priv->shape_cd_radio    = glade_xml_get_widget (gui, "shape_cd_radio");
 
+        g_object_unref (gui);
+
+
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->shape_page);
 
@@ -607,6 +619,9 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
 	dialog->priv->rect_x_waste_units_label = glade_xml_get_widget (gui, "rect_x_waste_units_label");
 	dialog->priv->rect_y_waste_units_label = glade_xml_get_widget (gui, "rect_y_waste_units_label");
 	dialog->priv->rect_margin_units_label  = glade_xml_get_widget (gui, "rect_margin_units_label");
+
+        g_object_unref (gui);
+
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->rect_size_page);
@@ -705,6 +720,9 @@ construct_round_size_page (glTemplateDesigner      *dialog,
 	dialog->priv->round_waste_units_label  = glade_xml_get_widget (gui, "round_waste_units_label");
 	dialog->priv->round_margin_units_label = glade_xml_get_widget (gui, "round_margin_units_label");
 
+        g_object_unref (gui);
+
+
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->round_size_page);
 
@@ -784,6 +802,9 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
 	dialog->priv->cd_h_units_label      = glade_xml_get_widget (gui, "cd_h_units_label");
 	dialog->priv->cd_waste_units_label  = glade_xml_get_widget (gui, "cd_waste_units_label");
 	dialog->priv->cd_margin_units_label = glade_xml_get_widget (gui, "cd_margin_units_label");
+
+        g_object_unref (gui);
+
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->cd_size_page);
@@ -875,6 +896,9 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
 	dialog->priv->nlayouts_image2 = glade_xml_get_widget (gui, "nlayouts_image2");
 	dialog->priv->nlayouts_spin   = glade_xml_get_widget (gui, "nlayouts_spin");
 
+        g_object_unref (gui);
+
+
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->nlayouts_page);
 
@@ -934,6 +958,9 @@ construct_layout_page (glTemplateDesigner      *dialog,
 	dialog->priv->layout_dy_units_label = glade_xml_get_widget (gui, "layout_dy_units_label");
 	dialog->priv->layout_mini_preview   = glade_xml_get_widget (gui, "layout_mini_preview");
 	dialog->priv->layout_test_button    = glade_xml_get_widget (gui, "layout_test_button");
+
+        g_object_unref (gui);
+
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->layout_page);
@@ -1042,6 +1069,9 @@ construct_finish_page (glTemplateDesigner      *dialog,
         }
 
 	dialog->priv->finish_page = glade_xml_get_widget (gui, "finish_page");
+
+        g_object_unref (gui);
+
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->finish_page);

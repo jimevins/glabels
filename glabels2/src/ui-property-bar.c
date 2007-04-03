@@ -55,8 +55,6 @@ struct _glUIPropertyBarPrivate {
 
 	glView     *view;
 
-	GladeXML   *gui;
-
 	GtkWidget  *tool_bar;
 
 	/* Font selection */
@@ -178,15 +176,6 @@ gl_ui_property_bar_init (glUIPropertyBar *property_bar)
 
 	property_bar->priv = g_new0 (glUIPropertyBarPrivate, 1);
 
-	property_bar->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "property-bar.glade",
-						 "property_toolbar",
-						 NULL);
-
-	if (!property_bar->priv->gui) {
-		g_critical ("Could not open property-bar.glade. gLabels may not be installed correctly!");
-		return;
-	}
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
 
@@ -235,6 +224,7 @@ gl_ui_property_bar_new (void)
 static void
 gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 {
+	GladeXML   *gui;
 	GList      *family_names = NULL;
 	GList      *family_node;
 	GdkColor   *gdk_color;
@@ -243,32 +233,41 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 
 	property_bar->priv->stop_signals = TRUE;
 
-	property_bar->priv->tool_bar = glade_xml_get_widget (property_bar->priv->gui,
-							     "property_toolbar");
+	gui = glade_xml_new (GLABELS_GLADE_DIR "property-bar.glade",
+                             "property_toolbar", NULL);
+
+	if (!gui) {
+		g_critical ("Could not open property-bar.glade. gLabels may not be installed correctly!");
+		return;
+	}
+
+	property_bar->priv->tool_bar = glade_xml_get_widget (gui, "property_toolbar");
 	gtk_container_add (GTK_CONTAINER (property_bar), property_bar->priv->tool_bar);
 
 	property_bar->priv->font_family_combo =
-		glade_xml_get_widget (property_bar->priv->gui, "font_family_combo");
+		glade_xml_get_widget (gui, "font_family_combo");
 	property_bar->priv->font_size_spin =
-		glade_xml_get_widget (property_bar->priv->gui, "font_size_spin");
+		glade_xml_get_widget (gui, "font_size_spin");
 	property_bar->priv->font_bold_toggle =
-		glade_xml_get_widget (property_bar->priv->gui, "font_bold_toggle");
+		glade_xml_get_widget (gui, "font_bold_toggle");
 	property_bar->priv->font_italic_toggle =
-		glade_xml_get_widget (property_bar->priv->gui, "font_italic_toggle");
+		glade_xml_get_widget (gui, "font_italic_toggle");
 	property_bar->priv->text_align_left_radio =
-		glade_xml_get_widget (property_bar->priv->gui, "text_align_left_radio");
+		glade_xml_get_widget (gui, "text_align_left_radio");
 	property_bar->priv->text_align_center_radio =
-		glade_xml_get_widget (property_bar->priv->gui, "text_align_center_radio");
+		glade_xml_get_widget (gui, "text_align_center_radio");
 	property_bar->priv->text_align_right_radio =
-		glade_xml_get_widget (property_bar->priv->gui, "text_align_right_radio");
+		glade_xml_get_widget (gui, "text_align_right_radio");
 	property_bar->priv->text_color_combo =
-		glade_xml_get_widget (property_bar->priv->gui, "text_color_combo");
+		glade_xml_get_widget (gui, "text_color_combo");
 	property_bar->priv->fill_color_combo =
-		glade_xml_get_widget (property_bar->priv->gui, "fill_color_combo");
+		glade_xml_get_widget (gui, "fill_color_combo");
 	property_bar->priv->line_color_combo =
-		glade_xml_get_widget (property_bar->priv->gui, "line_color_combo");
+		glade_xml_get_widget (gui, "line_color_combo");
 	property_bar->priv->line_width_spin =
-		glade_xml_get_widget (property_bar->priv->gui, "line_width_spin");
+		glade_xml_get_widget (gui, "line_width_spin");
+
+        g_object_unref (gui);
 
 	set_doc_items_sensitive (property_bar, FALSE);
 

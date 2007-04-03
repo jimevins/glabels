@@ -172,6 +172,9 @@ gl_prefs_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+	if (dialog->priv->gui) {
+		g_object_unref (G_OBJECT (dialog->priv->gui));
+	}
 	g_free (dialog->priv);
 
 	G_OBJECT_CLASS (gl_prefs_dialog_parent_class)->finalize (object);

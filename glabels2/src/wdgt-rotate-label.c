@@ -54,8 +54,6 @@
 
 struct _glWdgtRotateLabelPrivate {
 
-        GladeXML     *gui;
-
         GtkWidget    *rotate_check;
         GtkWidget    *rotate_drawingarea;
 
@@ -139,15 +137,6 @@ static void
 gl_wdgt_rotate_label_init (glWdgtRotateLabel *rotate_label)
 {
         rotate_label->priv = g_new0 (glWdgtRotateLabelPrivate, 1);
-
-        rotate_label->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "wdgt-rotate-label.glade",
-                                           "rotate_hbox",
-                                           NULL);
-
-        if (!rotate_label->priv->gui) {
-                g_critical ("Could not open wdgt-media-select.glade. gLabels may not be installed correctly!");
-                return;
-        }
 }
 
 static void
@@ -185,18 +174,28 @@ gl_wdgt_rotate_label_new (void)
 static void
 gl_wdgt_rotate_label_construct (glWdgtRotateLabel *rotate_label)
 {
+        GladeXML  *gui;
 	GtkWidget *hbox;
 
         g_return_if_fail (GL_IS_WDGT_ROTATE_LABEL (rotate_label));
         g_return_if_fail (rotate_label->priv != NULL);
 
-        hbox = glade_xml_get_widget (rotate_label->priv->gui, "rotate_hbox");
+        gui = glade_xml_new (GLABELS_GLADE_DIR "wdgt-rotate-label.glade",
+                             "rotate_hbox", NULL);
+
+        if (!gui) {
+                g_critical ("Could not open wdgt-media-select.glade. gLabels may not be installed correctly!");
+                return;
+        }
+
+        hbox = glade_xml_get_widget (gui, "rotate_hbox");
         gtk_container_add (GTK_CONTAINER (rotate_label), hbox);
 
-        rotate_label->priv->rotate_check =
-                glade_xml_get_widget (rotate_label->priv->gui, "rotate_check");
-        rotate_label->priv->rotate_drawingarea =
-                glade_xml_get_widget (rotate_label->priv->gui, "rotate_drawingarea");
+        rotate_label->priv->rotate_check       = glade_xml_get_widget (gui, "rotate_check");
+        rotate_label->priv->rotate_drawingarea = glade_xml_get_widget (gui, "rotate_drawingarea");
+
+        g_object_unref (gui);
+
 
 	gtk_widget_set_size_request (rotate_label->priv->rotate_drawingarea,
                                      MINI_PREVIEW_CANVAS_PIXELS,

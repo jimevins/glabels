@@ -63,8 +63,6 @@ enum {
 
 struct _glWdgtMediaSelectPrivate {
 
-        GladeXML     *gui;
-
         GtkWidget    *page_size_combo;
         GtkWidget    *category_combo;
 
@@ -140,15 +138,6 @@ gl_wdgt_media_select_init (glWdgtMediaSelect *media_select)
 
         media_select->priv = g_new0 (glWdgtMediaSelectPrivate, 1);
 
-        media_select->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "wdgt-media-select.glade",
-                                           "wdgt_media_select_hbox",
-                                           NULL);
-
-        if (!media_select->priv->gui) {
-                g_critical ("Could not open wdgt-media-select.glade. gLabels may not be installed correctly!");
-                return;
-        }
-
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
@@ -162,6 +151,7 @@ gl_wdgt_media_select_finalize (GObject *object)
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
+        g_object_unref (media_select->priv->template_store);
         g_free (media_select->priv);
 
         G_OBJECT_CLASS (gl_wdgt_media_select_parent_class)->finalize (object);
@@ -191,6 +181,7 @@ gl_wdgt_media_select_new (void)
 static void
 gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
+        GladeXML          *gui;
         GtkWidget         *hbox;
         GList             *page_sizes = NULL;
         GList             *categories = NULL;
@@ -206,16 +197,25 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (media_select));
         g_return_if_fail (media_select->priv != NULL);
 
-        hbox = glade_xml_get_widget (media_select->priv->gui,
-                                     "wdgt_media_select_hbox");
+        gui = glade_xml_new (GLABELS_GLADE_DIR "wdgt-media-select.glade",
+                             "wdgt_media_select_hbox", NULL);
+
+        if (!gui) {
+                g_critical ("Could not open wdgt-media-select.glade. gLabels may not be installed correctly!");
+                return;
+        }
+
+        hbox = glade_xml_get_widget (gui, "wdgt_media_select_hbox");
         gtk_container_add (GTK_CONTAINER (media_select), hbox);
 
         media_select->priv->page_size_combo =
-                glade_xml_get_widget (media_select->priv->gui, "page_size_combo");
+                glade_xml_get_widget (gui, "page_size_combo");
         media_select->priv->category_combo =
-                glade_xml_get_widget (media_select->priv->gui, "category_combo");
+                glade_xml_get_widget (gui, "category_combo");
         media_select->priv->template_treeview =
-                glade_xml_get_widget (media_select->priv->gui, "template_treeview");
+                glade_xml_get_widget (gui, "template_treeview");
+
+        g_object_unref (gui);
 
         page_size_id = gl_prefs_get_page_size ();
         page_size_name = gl_paper_lookup_name_from_id (page_size_id);

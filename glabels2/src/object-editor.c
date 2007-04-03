@@ -160,9 +160,6 @@ gl_object_editor_finalize (GObject *object)
 	g_return_if_fail (GL_IS_OBJECT_EDITOR (editor));
 	g_return_if_fail (editor->priv != NULL);
 
-	if (editor->priv->gui) {
-		g_object_unref (G_OBJECT (editor->priv->gui));
-	}
 	g_free (editor->priv);
 
 	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
@@ -211,6 +208,10 @@ gl_object_editor_new (gchar                *image,
 	va_start (args, first_option);
 	gl_object_notebook_construct_valist (editor, first_option, args);
 	va_end (args);
+
+	if (editor->priv->gui) {
+		g_object_unref (G_OBJECT (editor->priv->gui));
+	}
 
 	gl_debug (DEBUG_EDITOR, "END");
 
