@@ -55,6 +55,8 @@ struct _glUIPropertyBarPrivate {
 
 	glView     *view;
 
+	GladeXML   *gui;
+
 	GtkWidget  *tool_bar;
 
 	/* Font selection */
@@ -192,6 +194,10 @@ gl_ui_property_bar_finalize (GObject *object)
 	if (property_bar->priv->view) {
 		g_object_unref (G_OBJECT(property_bar->priv->view));
 	}
+        if (property_bar->priv->gui)
+        {
+                g_object_unref (G_OBJECT(property_bar->priv->gui));
+        }
 	g_free (property_bar->priv);
 
 	G_OBJECT_CLASS (gl_ui_property_bar_parent_class)->finalize (object);
@@ -267,7 +273,8 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 	property_bar->priv->line_width_spin =
 		glade_xml_get_widget (gui, "line_width_spin");
 
-        g_object_unref (gui);
+        /* Save reference to gui tree so we don't lose tooltips */
+        property_bar->priv->gui = gui;
 
 	set_doc_items_sensitive (property_bar, FALSE);
 

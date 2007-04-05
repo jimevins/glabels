@@ -1,3 +1,9 @@
+2007-04-04  Jim Evins  <evins@snaught.com>
+
+	* src/ui-property-bar.c: (gl_ui_property_bar_finalize),
+	(gl_ui_property_bar_construct):
+		Save copy of GladeXML tree so that we don't lose tooltips.
+
 2007-04-02  Jim Evins  <evins@snaught.com>
 
 	* src/merge-properties-dialog.c:
