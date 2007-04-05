@@ -1,5 +1,14 @@
 2007-04-04  Jim Evins  <evins@snaught.com>
 
+	* src/mini-preview-pixbuf.c: (gl_mini_preview_pixbuf_new),
+	(draw_paper), (draw_label_outlines), (draw_rect_label_outline),
+	(draw_round_label_outline), (draw_cd_label_outline):
+	* src/wdgt-media-select.c: (load_list):
+	* src/wdgt-rotate-label.c: (draw_cd_label_outline):
+		Cosmetic enhancments to mini previews.
+
+2007-04-04  Jim Evins  <evins@snaught.com>
+
 	* src/ui-property-bar.c: (gl_ui_property_bar_finalize),
 	(gl_ui_property_bar_construct):
 		Save copy of GladeXML tree so that we don't lose tooltips.

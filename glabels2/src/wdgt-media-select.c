@@ -596,7 +596,7 @@ load_list (GtkListStore           *store,
 
                         template = gl_template_from_name (p->data);
 
-                        pixbuf = gl_mini_preview_pixbuf_new (template, 64, 64);
+                        pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
 
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);

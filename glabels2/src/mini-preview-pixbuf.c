@@ -110,7 +110,7 @@ gl_mini_preview_pixbuf_new (glTemplate *template,
         cairo_paint (cr);
 	cairo_restore (cr);
 
-	cairo_set_antialias (cr, CAIRO_ANTIALIAS_DEFAULT);
+	cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
 
 	/* Set scale and offset */
 	w = width - 1;
@@ -149,8 +149,9 @@ draw_paper (cairo_t           *cr,
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
+        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 	cairo_rectangle (cr, 0.0, 0.0, template->page_width, template->page_height);
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	cairo_set_source_rgb (cr, 0.95, 0.95, 0.95);
 	cairo_fill_preserve (cr);
 	cairo_set_line_width (cr, 1/scale);
 	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
@@ -177,7 +178,6 @@ draw_label_outlines (cairo_t           *cr,
 	cairo_save (cr);
 
 	cairo_set_line_width (cr, 1.0/scale);
-	cairo_set_source_rgb (cr, 0.5, 0.5, 0.5);
 
 	label_type = gl_template_get_first_label_type (template);
 
@@ -254,10 +254,17 @@ draw_rect_label_outline (cairo_t           *cr,
 
 	cairo_save (cr);
 
+        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
+
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);
 
 	cairo_rectangle (cr, x0, y0, w, h);
+
+	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_fill_preserve (cr);
+
+	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
 	cairo_stroke (cr);
 
 	cairo_restore (cr);
@@ -281,10 +288,17 @@ draw_round_label_outline (cairo_t           *cr,
 
 	cairo_save (cr);
 
+        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
+
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);
 
 	cairo_arc (cr, x0+w/2, y0+h/2, w/2, 0.0, 2*M_PI);
+
+	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_fill_preserve (cr);
+
+	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
 	cairo_stroke (cr);
 
 	cairo_restore (cr);
@@ -305,10 +319,14 @@ draw_cd_label_outline (cairo_t           *cr,
 	gdouble                    w, h;
 	gdouble                    xc, yc;
 	gdouble                    r1, r2;
+        gdouble                    theta1, theta2;
+
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
+
+        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
 
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);
@@ -319,31 +337,27 @@ draw_cd_label_outline (cairo_t           *cr,
 	r1 = label_type->size.cd.r1;
 	r2 = label_type->size.cd.r2;
 
-	if ( w == h )
-	{
-		/* Simple CD */
-		cairo_arc (cr, xc, yc, r1, 0.0, 2*M_PI);
-		cairo_stroke (cr);
-	}
-	else
-	{
-		/* Credit Card CD (One or both dimensions trucated) */
-		gdouble theta1, theta2;
+        theta1 = acos (w / (2.0*r1));
+        theta2 = asin (h / (2.0*r1));
 
-		theta1 = acos (w / (2.0*r1));
-		theta2 = asin (h / (2.0*r1));
-
-		cairo_new_path (cr);
-		cairo_arc (cr, xc, yc, r1, theta1, theta2);
-		cairo_arc (cr, xc, yc, r1, M_PI-theta2, M_PI-theta1);
-		cairo_arc (cr, xc, yc, r1, M_PI+theta1, M_PI+theta2);
-		cairo_arc (cr, xc, yc, r1, 2*M_PI-theta2, 2*M_PI-theta1);
-		cairo_close_path (cr);
-		cairo_stroke (cr);
-	}
+        /* Outer radius, may be clipped in the case of business card CDs. */
+        /* Do as a series of 4 arcs, to account for clipping. */
+        cairo_new_path (cr);
+        cairo_arc (cr, xc, yc, r1, theta1, theta2);
+        cairo_arc (cr, xc, yc, r1, M_PI-theta2, M_PI-theta1);
+        cairo_arc (cr, xc, yc, r1, M_PI+theta1, M_PI+theta2);
+        cairo_arc (cr, xc, yc, r1, 2*M_PI-theta2, 2*M_PI-theta1);
+        cairo_close_path (cr);
 
 	/* Hole */
+        cairo_new_sub_path (cr);
 	cairo_arc (cr, xc, yc, r2, 0.0, 2*M_PI);
+
+	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+        cairo_fill_preserve (cr);
+
+	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
 	cairo_stroke (cr);
 	
 	cairo_restore (cr);

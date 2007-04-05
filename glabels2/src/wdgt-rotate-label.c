@@ -399,6 +399,7 @@ draw_cd_label_outline (cairo_t           *cr,
 	const glTemplateLabelType *label_type;
 	gdouble                    w, h;
 	gdouble                    r1, r2;
+        gdouble                    theta1, theta2;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -410,30 +411,27 @@ draw_cd_label_outline (cairo_t           *cr,
 	r1 = label_type->size.cd.r1;
 	r2 = label_type->size.cd.r2;
 
-	if ( w == h )
-	{
-		/* Simple CD */
-		cairo_arc (cr, 0.0, 0.0, r1, 0.0, 2*M_PI);
-	}
-	else
-	{
-		/* Credit Card CD (One or both dimensions trucated) */
-		gdouble theta1, theta2;
+        /* Outer radius, may be clipped in the case of business card CDs. */
+        /* Do as a series of 4 arcs, to account for clipping. */
+        theta1 = acos (w / (2.0*r1));
+        theta2 = asin (h / (2.0*r1));
 
-		theta1 = acos (w / (2.0*r1));
-		theta2 = asin (h / (2.0*r1));
+        cairo_new_path (cr);
+        cairo_arc (cr, 0.0, 0.0, r1, theta1, theta2);
+        cairo_arc (cr, 0.0, 0.0, r1, M_PI-theta2, M_PI-theta1);
+        cairo_arc (cr, 0.0, 0.0, r1, M_PI+theta1, M_PI+theta2);
+        cairo_arc (cr, 0.0, 0.0, r1, 2*M_PI-theta2, 2*M_PI-theta1);
+        cairo_close_path (cr);
 
-		cairo_new_path (cr);
-		cairo_arc (cr, 0.0, 0.0, r1, theta1, theta2);
-		cairo_arc (cr, 0.0, 0.0, r1, M_PI-theta2, M_PI-theta1);
-		cairo_arc (cr, 0.0, 0.0, r1, M_PI+theta1, M_PI+theta2);
-		cairo_arc (cr, 0.0, 0.0, r1, 2*M_PI-theta2, 2*M_PI-theta1);
-		cairo_close_path (cr);
-	}
+	/* Hole */
+        cairo_new_sub_path (cr);
+	cairo_arc (cr, 0.0, 0.0, r2, 0.0, 2*M_PI);
+	
 	cairo_set_source_rgb (cr,
 			      GL_COLOR_F_RED(fill_color),
 			      GL_COLOR_F_GREEN(fill_color),
 			      GL_COLOR_F_BLUE(fill_color));
+        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_fill_preserve (cr);
 
 	cairo_set_source_rgb (cr,
@@ -442,10 +440,6 @@ draw_cd_label_outline (cairo_t           *cr,
 			      GL_COLOR_F_BLUE(line_color));
 	cairo_stroke (cr);
 
-	/* Hole */
-	cairo_arc (cr, 0.0, 0.0, r2, 0.0, 2*M_PI);
-	cairo_stroke (cr);
-	
 	cairo_restore (cr);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
