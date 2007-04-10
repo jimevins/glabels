@@ -149,7 +149,6 @@ draw_paper (cairo_t           *cr,
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
-        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 	cairo_rectangle (cr, 0.0, 0.0, template->page_width, template->page_height);
 	cairo_set_source_rgb (cr, 0.95, 0.95, 0.95);
 	cairo_fill_preserve (cr);
@@ -254,8 +253,6 @@ draw_rect_label_outline (cairo_t           *cr,
 
 	cairo_save (cr);
 
-        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
-
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);
 
@@ -287,8 +284,6 @@ draw_round_label_outline (cairo_t           *cr,
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
-
-        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
 
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);
@@ -325,8 +320,6 @@ draw_cd_label_outline (cairo_t           *cr,
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
-
-        //cairo_set_antialias (cr, CAIRO_ANTIALIAS_GRAY);
 
 	label_type = gl_template_get_first_label_type (template);
 	gl_template_get_label_size (label_type, &w, &h);

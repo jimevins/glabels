@@ -36,6 +36,7 @@
 #include "recent.h"
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
+#include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
 #include "debug.h"
 #include "window.h"
@@ -121,6 +122,7 @@ main (int argc, char **argv)
 	gl_paper_init ();
 	gl_prefs_init ();
 	gl_template_init ();
+	gl_mini_preview_pixbuf_cache_init ();
 	gl_merge_init ();
 	gl_recent_init ();
 	

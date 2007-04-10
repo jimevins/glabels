@@ -199,12 +199,8 @@ gl_file_properties (glLabel   *label,
                                                            NULL);
         }
         if (label->template->name != NULL) {
-                gchar *template_name = gl_template_get_name_with_desc (label->template);
                 gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog),
-                                               template_name);
-                gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog),
-						       template_name);
-                g_free (template_name);
+                                                       label->template->name);
         }
         gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog),
 					      label->rotate_flag);

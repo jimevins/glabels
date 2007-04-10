@@ -141,12 +141,42 @@ gl_template_register (const glTemplate  *template)
 
 }
 
-/*****************************************************************************/
-/* Get a list of valid template names for given page size                    */
-/*****************************************************************************/
+/*********************************************************************************/
+/* Get a list of valid names of unique templates for given page size             */
+/*********************************************************************************/
 GList *
-gl_template_get_name_list (const gchar *page_size,
-                           const gchar *category)
+gl_template_get_name_list_unique (const gchar *page_size,
+                                  const gchar *category)
+{
+	GList      *p_tmplt;
+	glTemplate *template;
+	GList      *names = NULL;
+
+	if (!templates)
+        {
+		gl_template_init ();
+	}
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template = (glTemplate *) p_tmplt->data;
+		if (gl_template_does_page_size_match (template, page_size) &&
+                    gl_template_does_category_match (template, category))
+                {
+                        names = g_list_insert_sorted (names, g_strdup (template->name),
+                                                      (GCompareFunc)g_strcasecmp);
+		}
+	}
+
+	return names;
+}
+
+/*********************************************************************************/
+/* Get a list of all valid template names for given page size (includes aliases) */
+/*********************************************************************************/
+GList *
+gl_template_get_name_list_all (const gchar *page_size,
+                               const gchar *category)
 {
 	GList      *p_tmplt, *p_alias;
 	glTemplate *template;
@@ -167,9 +197,7 @@ gl_template_get_name_list (const gchar *page_size,
 			for (p_alias = template->aliases; p_alias != NULL;
 			     p_alias = p_alias->next)
                         {
-				str = g_strdup_printf("%s: %s",
-						      (gchar *) p_alias->data,
-						      template->description);
+				str = g_strdup ((gchar *) p_alias->data);
 				names = g_list_insert_sorted (names, str,
 							     (GCompareFunc)g_strcasecmp);
 			}
@@ -202,8 +230,7 @@ glTemplate *
 gl_template_from_name (const gchar *name)
 {
 	GList       *p_tmplt, *p_alias;
-	glTemplate  *template, *new_template;
-	gchar      **split_name;
+	glTemplate  *template;
 
 	if (!templates) {
 		gl_template_init ();
@@ -214,43 +241,19 @@ gl_template_from_name (const gchar *name)
 		return gl_template_dup ((glTemplate *) templates->data);
 	}
 
-	/* Strip off any descriptions */
-	split_name = g_strsplit (name, ":", 2);
-
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
 		template = (glTemplate *) p_tmplt->data;
 		for (p_alias = template->aliases; p_alias != NULL;
 		     p_alias = p_alias->next) {
-			if (g_strcasecmp (p_alias->data, split_name[0]) == 0) {
+			if (g_strcasecmp (p_alias->data, name) == 0) {
 
-				new_template = gl_template_dup (template);
-
-				/* Use the real name */
-				g_free (new_template->name);
-				new_template->name = g_strdup (split_name[0]);
-
-				g_strfreev (split_name);
-
-				return new_template;
+				return gl_template_dup (template);
 			}
 		}
 	}
 
-	g_strfreev (split_name);
-
 	/* No matching template has been found so return the first template */
 	return gl_template_dup ((glTemplate *) templates->data);
-}
-
-/*****************************************************************************/
-/* Get name and format with description.                                     */
-/*****************************************************************************/
-gchar *
-gl_template_get_name_with_desc (const glTemplate  *template)
-{
-	g_return_val_if_fail (template, NULL);
-
-	return g_strdup_printf("%s: %s", template->name, template->description);
 }
 
 /*****************************************************************************/

@@ -191,7 +191,10 @@ void                 gl_template_register             (const glTemplate    *temp
 /*
  * Known templates query functions
  */
-GList               *gl_template_get_name_list        (const gchar         *page_size,
+GList               *gl_template_get_name_list_unique (const gchar         *page_size,
+                                                       const gchar         *category);
+
+GList               *gl_template_get_name_list_all    (const gchar         *page_size,
                                                        const gchar         *category);
 
 void                 gl_template_free_name_list       (GList               *names);
@@ -202,8 +205,6 @@ glTemplate          *gl_template_from_name            (const gchar         *name
 /* 
  * Template query functions
  */
-gchar                     *gl_template_get_name_with_desc   (const glTemplate   *template);
-
 const glTemplateLabelType *gl_template_get_first_label_type (const glTemplate   *template);
 
 gboolean                   gl_template_does_page_size_match (const glTemplate   *template,

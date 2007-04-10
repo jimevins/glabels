@@ -1,3 +1,27 @@
+2007-04-10  Jim Evins  <evins@snaught.com>
+
+	* libglabels/template.h:
+	* libglabels/template.c: (gl_template_get_name_list_unique),
+	(gl_template_get_name_list_all), (gl_template_from_name):
+		Modified libglabels to allow you to get a list of all template names
+		including all aliases or just a list of primary names of each unique
+		template.
+	* src/Makefile.am:
+	* src/file.c: (gl_file_properties):
+	* src/glabels.c: (main):
+	* src/mini-preview-pixbuf-cache.h:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_construct),
+	(filter_changed_cb), (load_list):
+		Added mini-preview pixbuf cache, so that only one mini-preview is
+		needed for a unique template and gets reused for all aliases.  These
+		pixbufs will also live for the life of the program so they are not
+		rebuilt everytime a new label dialog is invoked.
+	* src/mini-preview-pixbuf.c: (draw_paper),
+	(draw_rect_label_outline), (draw_round_label_outline),
+	(draw_cd_label_outline):
+		Removed some comment artifacts.
+
 2007-04-04  Jim Evins  <evins@snaught.com>
 
 	* src/mini-preview-pixbuf.c: (gl_mini_preview_pixbuf_new),

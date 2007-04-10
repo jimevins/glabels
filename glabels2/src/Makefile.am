@@ -160,6 +160,8 @@ glabels_SOURCES = 			\
 	text-node.h			\
 	mini-preview-pixbuf.c		\
 	mini-preview-pixbuf.h		\
+	mini-preview-pixbuf-cache.c	\
+	mini-preview-pixbuf-cache.h	\
 	wdgt-print-copies.c		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\

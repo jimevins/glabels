@@ -37,7 +37,7 @@
 #include <gtk/gtkstock.h>
 #include <string.h>
 
-#include "mini-preview-pixbuf.h"
+#include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
 #include "util.h"
 #include "color.h"
@@ -257,7 +257,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->template_treeview), column);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-        template_names = gl_template_get_name_list (page_size_id, NULL);
+        template_names = gl_template_get_name_list_all (page_size_id, NULL);
         load_list (media_select->priv->template_store, selection, template_names);
         gl_template_free_name_list (template_names);
 
@@ -305,7 +305,7 @@ filter_changed_cb (GtkComboBox *combo,
                 category_id = gl_category_lookup_id_from_name (category_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_id = \"%s\"", page_size_id);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
-                template_names = gl_template_get_name_list (page_size_id, category_id);
+                template_names = gl_template_get_name_list_all (page_size_id, category_id);
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
                 g_signal_handlers_block_by_func (G_OBJECT (selection),
                                                  template_selection_changed_cb,
@@ -596,12 +596,13 @@ load_list (GtkListStore           *store,
 
                         template = gl_template_from_name (p->data);
 
-                        pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
+                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (template->name);
 
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);
-                        description = g_strdup_printf ("<b>%s</b>\n%s\n%s",
+                        description = g_strdup_printf ("<b>%s: %s</b>\n%s\n%s",
                                                        (gchar *)p->data,
+                                                       template->description,
                                                        size,
                                                        layout);
                         g_free (size);
