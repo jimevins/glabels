@@ -44,13 +44,16 @@
 /*===========================================*/
 
 static void gl_cairo_rect_label_path             (cairo_t                *cr,
-                                                  glLabel                *label,
+                                                  glTemplate             *template,
+                                                  gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 static void gl_cairo_round_label_path            (cairo_t                *cr,
-                                                  glLabel                *label,
+                                                  glTemplate             *template,
+                                                  gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 static void gl_cairo_cd_label_path               (cairo_t                *cr,
-                                                  glLabel                *label,
+                                                  glTemplate             *template,
+                                                  gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 
 
@@ -59,27 +62,28 @@ static void gl_cairo_cd_label_path               (cairo_t                *cr,
 /*--------------------------------------------------------------------------*/
 void
 gl_cairo_label_path (cairo_t           *cr,
-                     glLabel           *label,
+                     glTemplate        *template,
+                     gboolean           rotate_flag,
                      gboolean           waste_flag)
 {
         const glTemplateLabelType *label_type;
 
         gl_debug (DEBUG_PATH, "START");
 
-        label_type = gl_template_get_first_label_type (label->template);
+        label_type = gl_template_get_first_label_type (template);
 
         switch (label_type->shape) {
 
         case GL_TEMPLATE_SHAPE_RECT:
-                gl_cairo_rect_label_path (cr, label, waste_flag);
+                gl_cairo_rect_label_path (cr, template, rotate_flag, waste_flag);
                 break;
 
         case GL_TEMPLATE_SHAPE_ROUND:
-                gl_cairo_round_label_path (cr, label, waste_flag);
+                gl_cairo_round_label_path (cr, template, rotate_flag, waste_flag);
                 break;
 
         case GL_TEMPLATE_SHAPE_CD:
-                gl_cairo_cd_label_path (cr, label, waste_flag);
+                gl_cairo_cd_label_path (cr, template, rotate_flag, waste_flag);
                 break;
 
         default:
@@ -95,7 +99,8 @@ gl_cairo_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_rect_label_path (cairo_t           *cr,
-                          glLabel           *label,
+                          glTemplate        *template,
+                          gboolean           rotate_flag,
                           gboolean           waste_flag)
 {
         const glTemplateLabelType *label_type;
@@ -104,20 +109,31 @@ gl_cairo_rect_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        label_type = gl_template_get_first_label_type (label->template);
-        gl_label_get_size (label, &w, &h);
+        label_type = gl_template_get_first_label_type (template);
         r = label_type->size.rect.r;
 
-        if (waste_flag)
+        x_waste = 0.0;
+        y_waste = 0.0;
+
+        if (rotate_flag)
         {
-                x_waste = label_type->size.rect.x_waste;
-                y_waste = label_type->size.rect.x_waste;
+                gl_template_get_label_size (label_type, &h, &w);
+                if (waste_flag)
+                {
+                        x_waste = label_type->size.rect.y_waste;
+                        y_waste = label_type->size.rect.x_waste;
+                }
         }
         else
         {
-                x_waste = 0.0;
-                y_waste = 0.0;
+                gl_template_get_label_size (label_type, &w, &h);
+                if (waste_flag)
+                {
+                        x_waste = label_type->size.rect.x_waste;
+                        y_waste = label_type->size.rect.y_waste;
+                }
         }
+
 
         if ( r == 0.0 )
         {
@@ -141,7 +157,8 @@ gl_cairo_rect_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_round_label_path (cairo_t           *cr,
-                           glLabel           *label,
+                           glTemplate        *template,
+                           gboolean           rotate_flag,
                            gboolean           waste_flag)
 {
         const glTemplateLabelType *label_type;
@@ -150,9 +167,17 @@ gl_cairo_round_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        label_type = gl_template_get_first_label_type (label->template);
-        gl_label_get_size (label, &w, &h);
+        label_type = gl_template_get_first_label_type (template);
         
+        if (rotate_flag)
+        {
+                gl_template_get_label_size (label_type, &h, &w);
+        }
+        else
+        {
+                gl_template_get_label_size (label_type, &w, &h);
+        }
+
         if (waste_flag)
         {
                 waste = label_type->size.round.waste;
@@ -173,7 +198,8 @@ gl_cairo_round_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_cd_label_path (cairo_t           *cr,
-                        glLabel           *label,
+                        glTemplate        *template,
+                        gboolean           rotate_flag,
                         gboolean           waste_flag)
 {
         const glTemplateLabelType *label_type;
@@ -185,8 +211,16 @@ gl_cairo_cd_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        label_type = gl_template_get_first_label_type (label->template);
-        gl_label_get_size (label, &w, &h);
+        label_type = gl_template_get_first_label_type (template);
+
+        if (rotate_flag)
+        {
+                gl_template_get_label_size (label_type, &h, &w);
+        }
+        else
+        {
+                gl_template_get_label_size (label_type, &w, &h);
+        }
 
         xc = w/2.0;
         yc = h/2.0;

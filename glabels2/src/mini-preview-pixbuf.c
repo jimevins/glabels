@@ -25,6 +25,7 @@
 #include <config.h>
 
 #include "mini-preview-pixbuf.h"
+#include "cairo-label-path.h"
 
 #include <cairo.h>
 #include <math.h>
@@ -46,30 +47,15 @@
 /*===========================================*/
 
 static void draw_paper                (cairo_t           *cr,
-				       const glTemplate  *template,
+				       glTemplate        *template,
 				       gdouble            scale);
 
 static void draw_label_outlines       (cairo_t           *cr,
-				       const glTemplate  *template,
+				       glTemplate        *template,
 				       gdouble            scale);
 
 static void draw_label_outline        (cairo_t           *cr,
-				       const glTemplate  *template,
-				       gdouble            x0,
-				       gdouble            y0);
-
-static void draw_rect_label_outline   (cairo_t           *cr,
-				       const glTemplate  *template,
-				       gdouble            x0,
-				       gdouble            y0);
-
-static void draw_round_label_outline  (cairo_t           *cr,
-				       const glTemplate  *template,
-				       gdouble            x0,
-				       gdouble            y0);
-
-static void draw_cd_label_outline     (cairo_t           *cr,
-				       const glTemplate  *template,
+				       glTemplate        *template,
 				       gdouble            x0,
 				       gdouble            y0);
 
@@ -143,7 +129,7 @@ gl_mini_preview_pixbuf_new (glTemplate *template,
 /*--------------------------------------------------------------------------*/
 static void
 draw_paper (cairo_t           *cr,
-	    const glTemplate  *template,
+	    glTemplate        *template,
 	    gdouble            scale)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
@@ -165,7 +151,7 @@ draw_paper (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 draw_label_outlines (cairo_t           *cr,
-		     const glTemplate  *template,
+		     glTemplate        *template,
 		     gdouble            scale)
 {
 	const glTemplateLabelType *label_type;
@@ -201,150 +187,17 @@ draw_label_outlines (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 draw_label_outline (cairo_t           *cr,
-		    const glTemplate  *template,
+		    glTemplate        *template,
 		    gdouble            x0,
 		    gdouble            y0)
 {
-	const glTemplateLabelType *label_type;
-
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	cairo_save (cr);
 
-	label_type = gl_template_get_first_label_type (template);
+        cairo_translate (cr, x0, y0);
 
-	switch (label_type->shape) {
-
-	case GL_TEMPLATE_SHAPE_RECT:
-		draw_rect_label_outline (cr, template, x0, y0);
-		break;
-
-	case GL_TEMPLATE_SHAPE_ROUND:
-		draw_round_label_outline (cr, template, x0, y0);
-		break;
-
-	case GL_TEMPLATE_SHAPE_CD:
-		draw_cd_label_outline (cr, template, x0, y0);
-		break;
-
-	default:
-		g_message ("Unknown label style");
-		break;
-	}
-
-	cairo_restore (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw rectangular label outline.                                */
-/*--------------------------------------------------------------------------*/
-static void
-draw_rect_label_outline (cairo_t           *cr,
-			 const glTemplate  *template,
-			 gdouble            x0,
-			 gdouble            y0)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	cairo_rectangle (cr, x0, y0, w, h);
-
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-        cairo_fill_preserve (cr);
-
-	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
-	cairo_stroke (cr);
-
-	cairo_restore (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw round label outline.                                      */
-/*--------------------------------------------------------------------------*/
-static void
-draw_round_label_outline (cairo_t           *cr,
-			  const glTemplate  *template,
-			  gdouble            x0,
-			  gdouble            y0)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	cairo_arc (cr, x0+w/2, y0+h/2, w/2, 0.0, 2*M_PI);
-
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-        cairo_fill_preserve (cr);
-
-	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
-	cairo_stroke (cr);
-
-	cairo_restore (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw cd label outline.                                         */
-/*--------------------------------------------------------------------------*/
-static void
-draw_cd_label_outline (cairo_t           *cr,
-		       const glTemplate  *template,
-		       gdouble            x0,
-		       gdouble            y0)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-	gdouble                    xc, yc;
-	gdouble                    r1, r2;
-        gdouble                    theta1, theta2;
-
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	xc = x0 + w/2.0;
-	yc = y0 + h/2.0;
-
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
-
-        theta1 = acos (w / (2.0*r1));
-        theta2 = asin (h / (2.0*r1));
-
-        /* Outer radius, may be clipped in the case of business card CDs. */
-        /* Do as a series of 4 arcs, to account for clipping. */
-        cairo_new_path (cr);
-        cairo_arc (cr, xc, yc, r1, theta1, theta2);
-        cairo_arc (cr, xc, yc, r1, M_PI-theta2, M_PI-theta1);
-        cairo_arc (cr, xc, yc, r1, M_PI+theta1, M_PI+theta2);
-        cairo_arc (cr, xc, yc, r1, 2*M_PI-theta2, 2*M_PI-theta1);
-        cairo_close_path (cr);
-
-	/* Hole */
-        cairo_new_sub_path (cr);
-	cairo_arc (cr, xc, yc, r2, 0.0, 2*M_PI);
+        gl_cairo_label_path (cr, template, FALSE, FALSE);
 
 	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
@@ -352,11 +205,9 @@ draw_cd_label_outline (cairo_t           *cr,
 
 	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
 	cairo_stroke (cr);
-	
+
 	cairo_restore (cr);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
-
-
 

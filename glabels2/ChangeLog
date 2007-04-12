@@ -1,3 +1,18 @@
+2007-04-11  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-label-path.c: (gl_cairo_label_path),
+	(gl_cairo_rect_label_path), (gl_cairo_round_label_path),
+	(gl_cairo_cd_label_path):
+	* src/cairo-label-path.h:
+	* src/mini-preview-pixbuf.c: (draw_paper), (draw_label_outlines),
+	(draw_label_outline):
+	* src/print.c: (draw_outline), (clip_to_outline):
+	* src/view.c: (draw_bg_layer), (draw_fg_layer):
+	* src/wdgt-mini-preview.c: (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Modified to universally use gl_cairo_label_path() to create paths
+		for labels.  Added shadow to mini preview in rotate widget.
+
 2007-04-10  Jim Evins  <evins@snaught.com>
 
 	* libglabels/template.h:

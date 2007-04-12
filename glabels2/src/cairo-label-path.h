@@ -26,12 +26,13 @@
 #define __CAIRO_LABEL_PATH_H__
 
 #include <cairo.h>
-#include "label.h"
+#include <libglabels/template.h>
 
 G_BEGIN_DECLS
 
 void gl_cairo_label_path (cairo_t                *cr,
-                          glLabel                *label,
+                          glTemplate             *template,
+                          gboolean                rotate_flag,
                           gboolean                waste_flag);
 
 G_END_DECLS

@@ -746,7 +746,7 @@ draw_bg_layer (glView  *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-        gl_cairo_label_path (cr, view->label, FALSE);
+        gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
 
         cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
@@ -874,7 +874,7 @@ draw_fg_layer (glView  *view,
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-        gl_cairo_label_path (cr, view->label, FALSE);
+        gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
 
         cairo_set_line_width (cr, 3.0/(view->home_scale * view->zoom));
         cairo_set_source_rgb (cr, 0.68, 0.85, 0.90);

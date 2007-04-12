@@ -36,6 +36,7 @@
 #include "marshal.h"
 #include "color.h"
 #include <libglabels/template.h>
+#include "cairo-label-path.h"
 
 #include "debug.h"
 
@@ -47,6 +48,10 @@
 
 #define LINE_COLOR             GL_COLOR(0,0,0)
 #define FILL_COLOR             GL_COLOR(255,255,255)
+
+#define SHADOW_X_OFFSET 3
+#define SHADOW_Y_OFFSET 3
+
 
 /*===========================================*/
 /* Private types                             */
@@ -85,22 +90,6 @@ static void entry_changed_cb                   (GtkToggleButton        *toggle,
 static void drawingarea_update                 (GtkDrawingArea         *drawing_area,
 						glTemplate             *template,
 						gboolean                rotate_flag);
-
-static void draw_rect_label_outline            (cairo_t                *cr,
-						const glTemplate       *template,
-						guint                   line_color,
-						guint                   fill_color);
-
-static void draw_round_label_outline           (cairo_t                *cr,
-						const glTemplate       *template,
-						guint                   line_color,
-						guint                   fill_color);
-
-
-static void draw_cd_label_outline              (cairo_t                *cr,
-						const glTemplate       *template,
-						guint                   line_color,
-						guint                   fill_color);
 
 static gboolean expose_cb                      (GtkWidget              *drawingarea,
 						GdkEventExpose         *event,
@@ -243,7 +232,7 @@ drawingarea_update (GtkDrawingArea *drawing_area,
 	const glTemplateLabelType *label_type;
 	gdouble                    m, m_canvas, w, h, scale;
 	GtkStyle                  *style;
-	guint                      line_color, fill_color;
+	guint                      line_color, fill_color, shadow_color;
 	cairo_t                   *cr;
 
 	if (!GTK_WIDGET_DRAWABLE (GTK_WIDGET (drawing_area)))
@@ -261,172 +250,59 @@ drawingarea_update (GtkDrawingArea *drawing_area,
 
 	label_type = gl_template_get_first_label_type (template);
 
-	gl_template_get_label_size (label_type, &w, &h);
+        if (rotate_flag)
+        {
+                gl_template_get_label_size (label_type, &h, &w);
+        }
+        else
+        {
+                gl_template_get_label_size (label_type, &w, &h);
+        }
 	m = MAX (w, h);
 	scale = MINI_PREVIEW_MAX_PIXELS / m;
 	m_canvas = MINI_PREVIEW_CANVAS_PIXELS / scale;
+
+        style = gtk_widget_get_style (GTK_WIDGET (drawing_area));
 
 	/* Adjust sensitivity (should the canvas be grayed?) */
 	if (w != h) {
 		line_color = LINE_COLOR;
 		fill_color = FILL_COLOR;
 	} else {
-		style = gtk_widget_get_style (GTK_WIDGET (drawing_area));
 		line_color = gl_color_from_gdk_color (&style->text[GTK_STATE_INSENSITIVE]);
 		fill_color = gl_color_from_gdk_color (&style->base[GTK_STATE_INSENSITIVE]);
 	}
+
+	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
+
 
 	cr = gdk_cairo_create (GTK_WIDGET (drawing_area)->window);
   
 	cairo_identity_matrix (cr);
 	cairo_translate (cr, MINI_PREVIEW_CANVAS_PIXELS/2, MINI_PREVIEW_CANVAS_PIXELS/2);
         cairo_scale (cr, scale, scale);
-	if (rotate_flag)
-	{
-		cairo_rotate (cr, M_PI/2.0);
-	}
+        cairo_translate (cr, -w/2.0, -h/2.0);
 
-	cairo_set_line_width (cr, 1.0/scale);
-
-	switch (label_type->shape) {
-
-	case GL_TEMPLATE_SHAPE_RECT:
-		draw_rect_label_outline (cr, template, line_color, fill_color);
-		break;
-
-	case GL_TEMPLATE_SHAPE_ROUND:
-		draw_round_label_outline (cr, template, line_color, fill_color);
-		break;
-
-	case GL_TEMPLATE_SHAPE_CD:
-		draw_cd_label_outline (cr, template, line_color, fill_color);
-		break;
-
-	default:
-		g_message ("Unknown label style");
-		break;
-	}
-
-	cairo_destroy (cr);
-
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw rectangular label outline.                                */
-/*--------------------------------------------------------------------------*/
-static void
-draw_rect_label_outline (cairo_t           *cr,
-			 const glTemplate  *template,
-			 guint              line_color,
-			 guint              fill_color)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	cairo_rectangle (cr, -w/2.0, -h/2.0, w, h);
+        /*
+         * Shadow
+         */
+        cairo_save (cr);
+        cairo_translate (cr, SHADOW_X_OFFSET/scale, SHADOW_Y_OFFSET/scale);
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
 	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(fill_color),
-			      GL_COLOR_F_GREEN(fill_color),
-			      GL_COLOR_F_BLUE(fill_color));
-	cairo_fill_preserve (cr);
+			      GL_COLOR_F_RED(shadow_color),
+			      GL_COLOR_F_GREEN(shadow_color),
+			      GL_COLOR_F_BLUE(shadow_color));
+        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+	cairo_fill (cr);
+        cairo_restore (cr);
 
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(line_color),
-			      GL_COLOR_F_GREEN(line_color),
-			      GL_COLOR_F_BLUE(line_color));
-	cairo_stroke (cr);
+        /*
+         * Label + outline
+         */
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
-	cairo_restore (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw round label outline.                                      */
-/*--------------------------------------------------------------------------*/
-static void
-draw_round_label_outline (cairo_t           *cr,
-			  const glTemplate  *template,
-			  guint              line_color,
-			  guint              fill_color)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	cairo_arc (cr, 0.0, 0.0, w/2, 0.0, 2*M_PI);
-
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(fill_color),
-			      GL_COLOR_F_GREEN(fill_color),
-			      GL_COLOR_F_BLUE(fill_color));
-	cairo_fill_preserve (cr);
-
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(line_color),
-			      GL_COLOR_F_GREEN(line_color),
-			      GL_COLOR_F_BLUE(line_color));
-	cairo_stroke (cr);
-
-	cairo_restore (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw cd label outline.                                         */
-/*--------------------------------------------------------------------------*/
-static void
-draw_cd_label_outline (cairo_t           *cr,
-		       const glTemplate  *template,
-		       guint              line_color,
-		       guint              fill_color)
-{
-	const glTemplateLabelType *label_type;
-	gdouble                    w, h;
-	gdouble                    r1, r2;
-        gdouble                    theta1, theta2;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cairo_save (cr);
-
-	label_type = gl_template_get_first_label_type (template);
-	gl_template_get_label_size (label_type, &w, &h);
-
-	r1 = label_type->size.cd.r1;
-	r2 = label_type->size.cd.r2;
-
-        /* Outer radius, may be clipped in the case of business card CDs. */
-        /* Do as a series of 4 arcs, to account for clipping. */
-        theta1 = acos (w / (2.0*r1));
-        theta2 = asin (h / (2.0*r1));
-
-        cairo_new_path (cr);
-        cairo_arc (cr, 0.0, 0.0, r1, theta1, theta2);
-        cairo_arc (cr, 0.0, 0.0, r1, M_PI-theta2, M_PI-theta1);
-        cairo_arc (cr, 0.0, 0.0, r1, M_PI+theta1, M_PI+theta2);
-        cairo_arc (cr, 0.0, 0.0, r1, 2*M_PI-theta2, 2*M_PI-theta1);
-        cairo_close_path (cr);
-
-	/* Hole */
-        cairo_new_sub_path (cr);
-	cairo_arc (cr, 0.0, 0.0, r2, 0.0, 2*M_PI);
-	
 	cairo_set_source_rgb (cr,
 			      GL_COLOR_F_RED(fill_color),
 			      GL_COLOR_F_GREEN(fill_color),
@@ -434,19 +310,20 @@ draw_cd_label_outline (cairo_t           *cr,
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_fill_preserve (cr);
 
+	cairo_set_line_width (cr, 1.0/scale);
 	cairo_set_source_rgb (cr,
 			      GL_COLOR_F_RED(line_color),
 			      GL_COLOR_F_GREEN(line_color),
 			      GL_COLOR_F_BLUE(line_color));
 	cairo_stroke (cr);
 
-	cairo_restore (cr);
 
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	cairo_destroy (cr);
+
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Draw cd label outline.                                         */
+/* PRIVATE.  Expose handler.                                                */
 /*--------------------------------------------------------------------------*/
 static gboolean
 expose_cb (GtkWidget *drawingarea, GdkEventExpose *event, gpointer user_data)

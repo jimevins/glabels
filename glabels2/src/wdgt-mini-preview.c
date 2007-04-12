@@ -28,6 +28,7 @@
 
 #include <math.h>
 
+#include "cairo-label-path.h"
 #include "marshal.h"
 #include "color.h"
 
@@ -117,24 +118,8 @@ static void draw_paper                         (glWdgtMiniPreview      *preview,
 						gdouble                 line_width);
 static void draw_labels                        (glWdgtMiniPreview      *preview,
 						cairo_t                *cr,
-						const glTemplate       *template,
+						glTemplate             *template,
 						gdouble                 line_width);
-static void create_label_path                  (cairo_t                *cr,
-						const glTemplate       *template,
-						gdouble                 x0,
-						gdouble                 y0);
-static void create_rect_label_path             (cairo_t                *cr,
-						const glTemplate       *template,
-						gdouble                 x0,
-						gdouble                 y0);
-static void create_round_label_path            (cairo_t                *cr,
-						const glTemplate       *template,
-						gdouble                 x0,
-						gdouble                 y0);
-static void create_cd_label_path               (cairo_t                *cr,
-						const glTemplate       *template,
-						gdouble                 x0,
-						gdouble                 y0);
 
 static gint find_closest_label                 (glWdgtMiniPreview      *preview,
 						gdouble                 x,
@@ -680,7 +665,7 @@ draw_paper (glWdgtMiniPreview      *preview,
 static void
 draw_labels (glWdgtMiniPreview *preview,
 	     cairo_t           *cr,
-	     const glTemplate  *template,
+	     glTemplate        *template,
 	     gdouble            line_width)
 {
         const glTemplateLabelType *label_type;
@@ -703,7 +688,8 @@ draw_labels (glWdgtMiniPreview *preview,
 
 		cairo_save (cr);
 
-                create_label_path (cr, template, origins[i].x, origins[i].y);
+                cairo_translate (cr, origins[i].x, origins[i].y);
+                gl_cairo_label_path (cr, template, FALSE, FALSE);
 
 		if ( ((i+1) >= preview->priv->highlight_first) &&
 		     ((i+1) <= preview->priv->highlight_last) )
@@ -729,136 +715,6 @@ draw_labels (glWdgtMiniPreview *preview,
         }
 
         g_free (origins);
-
-        gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* Create label path                                                        */
-/*--------------------------------------------------------------------------*/
-static void
-create_label_path (cairo_t           *cr,
-		   const glTemplate  *template,
-		   gdouble            x0,
-		   gdouble            y0)
-{
-        const glTemplateLabelType *label_type;
-
-        gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-        label_type = gl_template_get_first_label_type (template);
-
-        switch (label_type->shape) {
-
-        case GL_TEMPLATE_SHAPE_RECT:
-                create_rect_label_path (cr, template, x0, y0);
-                break;
-
-        case GL_TEMPLATE_SHAPE_ROUND:
-                create_round_label_path (cr, template, x0, y0);
-                break;
-
-        case GL_TEMPLATE_SHAPE_CD:
-                create_cd_label_path (cr, template, x0, y0);
-                break;
-
-        default:
-                g_message ("Unknown label style");
-                break;
-        }
-
-        gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* Create rectangular label path                                            */
-/*--------------------------------------------------------------------------*/
-static void
-create_rect_label_path (cairo_t           *cr,
-			const glTemplate  *template,
-			gdouble            x0,
-			gdouble            y0)
-{
-        const glTemplateLabelType *label_type;
-        gdouble                    w, h;
-
-        gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-        label_type = gl_template_get_first_label_type (template);
-        gl_template_get_label_size (label_type, &w, &h);
-
-        cairo_rectangle (cr, x0, y0, w, h);
-
-        gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* Create round label path                                                  */
-/*--------------------------------------------------------------------------*/
-static void
-create_round_label_path (cairo_t           *cr,
-			 const glTemplate  *template,
-			 gdouble            x0,
-			 gdouble            y0)
-{
-        const glTemplateLabelType *label_type;
-        gdouble                    w, h;
-
-        gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-        label_type = gl_template_get_first_label_type (template);
-        gl_template_get_label_size (label_type, &w, &h);
-
-        cairo_arc (cr, x0+w/2, y0+h/2, w/2, 0.0, 2*M_PI);
-	cairo_close_path (cr);
-
-        gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* Create cd label path                                                     */
-/*--------------------------------------------------------------------------*/
-static void
-create_cd_label_path (cairo_t           *cr,
-		      const glTemplate  *template,
-		      gdouble            x0,
-		      gdouble            y0)
-{
-        const glTemplateLabelType *label_type;
-        gdouble                    w, h;
-        gdouble                    xc, yc;
-        gdouble                    r1, r2;
-	gdouble                    theta1, theta2;
-
-        gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-        label_type = gl_template_get_first_label_type (template);
-        gl_template_get_label_size (label_type, &w, &h);
-
-        xc = x0 + w/2.0;
-        yc = y0 + h/2.0;
-
-        r1 = label_type->size.cd.r1;
-        r2 = label_type->size.cd.r2;
-
-	/*
-	 * Outer path (may be clipped)
-	 */
-	theta1 = acos (w / (2.0*r1));
-	theta2 = asin (h / (2.0*r1));
-
-	cairo_new_path (cr);
-	cairo_arc (cr, xc, yc, r1, theta1, theta2);
-	cairo_arc (cr, xc, yc, r1, M_PI-theta2, M_PI-theta1);
-	cairo_arc (cr, xc, yc, r1, M_PI+theta1, M_PI+theta2);
-	cairo_arc (cr, xc, yc, r1, 2*M_PI-theta2, 2*M_PI-theta1);
-	cairo_close_path (cr);
-
-
-        /* Inner path (hole) */
-	cairo_new_sub_path (cr);
-        cairo_arc (cr, xc, yc, r2, 0.0, 2*M_PI);
-	cairo_close_path (cr);
 
         gl_debug (DEBUG_MINI_PREVIEW, "END");
 }

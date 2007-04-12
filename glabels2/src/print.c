@@ -535,7 +535,7 @@ draw_outline (PrintInfo *pi,
 	cairo_set_source_rgba (pi->cr, 0.0, 0.0, 0.0, 1.0);
 	cairo_set_line_width  (pi->cr, 0.25);
 
-        gl_cairo_label_path (pi->cr, label, FALSE);
+        gl_cairo_label_path (pi->cr, label->template, FALSE, FALSE);
 
         cairo_stroke (pi->cr);
 
@@ -553,7 +553,7 @@ clip_to_outline (PrintInfo *pi,
 {
 	gl_debug (DEBUG_PRINT, "START");
 
-        gl_cairo_label_path (pi->cr, label, TRUE);
+        gl_cairo_label_path (pi->cr, label->template, FALSE, TRUE);
 
         cairo_set_fill_rule (pi->cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_clip (pi->cr);
