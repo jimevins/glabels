@@ -553,11 +553,15 @@ gl_view_update (glView  *view)
 
 	if (!widget->window) return;
 
-	region = gdk_drawable_get_clip_region (widget->window);
-	/* redraw the cairo canvas completely by exposing it */
-	gdk_window_invalidate_region (widget->window, region, TRUE);
+        if ( !view->update_scheduled_flag )
+        {
+                view->update_scheduled_flag = TRUE;
 
-	gdk_region_destroy (region);
+                region = gdk_drawable_get_clip_region (widget->window);
+                /* redraw the cairo canvas completely by exposing it */
+                gdk_window_invalidate_region (widget->window, region, TRUE);
+                gdk_region_destroy (region);
+        }
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -572,6 +576,8 @@ expose_cb (glView         *view,
 	cairo_t *cr;
 
 	gl_debug (DEBUG_VIEW, "START");
+
+        view->update_scheduled_flag = FALSE;
 
 	/* get a cairo_t */
 	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
@@ -3213,6 +3219,21 @@ motion_notify_event_cb (glView            *view,
 
 	cairo_destroy (cr);
 
+        /*
+         * FIXME: we re-establish grabs here if the grab has been lost.  We seem to be
+         *        losing grabs when we emit signals that lead to the manipulation of
+         *        the GtkUIManager.  Needs more investigation
+         */
+        if (view->grabbed_flag && !gdk_pointer_is_grabbed ())
+        {
+                gdk_pointer_grab (GTK_LAYOUT (view->canvas)->bin_window,
+                                  FALSE,
+                                  (GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK),
+                                  NULL,
+                                  NULL,
+                                  event->time);
+        }
+
         return return_value;
 }
 
@@ -3341,6 +3362,14 @@ button_press_event_cb (glView            *view,
                 default:
                         g_message ("Invalid view mode.");      /*Should not happen!*/
                 }
+
+                view->grabbed_flag = TRUE;
+                gdk_pointer_grab (GTK_LAYOUT (view->canvas)->bin_window,
+                                  FALSE,
+                                  (GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK),
+                                  NULL,
+                                  NULL,
+                                  event->time);
                 break;
 
         case 3:
@@ -3387,6 +3416,8 @@ button_release_event_cb (glView            *view,
         {
 
         case 1:
+                view->grabbed_flag = FALSE;
+                gdk_pointer_ungrab (event->time);
                 /*
                  * Handle event as appropriate for mode
                  */

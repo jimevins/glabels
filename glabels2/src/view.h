@@ -66,6 +66,7 @@ struct _glView {
         gdouble            x0, y0;
         gdouble            w, h;
 
+        gboolean           update_scheduled_flag;
         gboolean           grid_visible;
 	gdouble            grid_spacing;
 
@@ -74,6 +75,7 @@ struct _glView {
 	glViewMode         mode;
 	glLabelObjectType  create_type;
         glViewState        state;
+        gboolean           grabbed_flag;
 
         /* GL_VIEW_ARROW_MOVE state */
         gdouble            move_last_x;

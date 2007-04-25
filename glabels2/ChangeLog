@@ -1,3 +1,12 @@
+2007-04-25  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_update), (expose_cb),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+		- Try not to let updates get backed up.
+		- Grab pointer when doing any drag operations.
+
 2007-04-11  Jim Evins  <evins@snaught.com>
 
 	* src/cairo-label-path.c: (gl_cairo_label_path),
