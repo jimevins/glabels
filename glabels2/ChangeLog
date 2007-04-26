@@ -1,5 +1,10 @@
 2007-04-25  Jim Evins  <evins@snaught.com>
 
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
+		Scale text down.  Cairo seems to render text too large.
+
+2007-04-25  Jim Evins  <evins@snaught.com>
+
 	* src/view.h:
 	* src/view.c: (gl_view_update), (expose_cb),
 	(motion_notify_event_cb), (button_press_event_cb),
