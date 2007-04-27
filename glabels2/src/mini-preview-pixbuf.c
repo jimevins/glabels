@@ -33,6 +33,18 @@
 #include "debug.h"
 
 /*===========================================*/
+/* Private macros and constants.             */
+/*===========================================*/
+
+#define PAPER_RGB_ARGS          0.95,  0.95,  0.95
+#define PAPER_OUTLINE_RGB_ARGS  0.0,   0.0,   0.0
+#define LABEL_RGB_ARGS          1.0,   1.0,   1.0
+#define LABEL_OUTLINE_RGB_ARGS  0.25,  0.25,  0.25
+
+#define PAPER_OUTLINE_WIDTH_PIXELS  1.0
+#define LABEL_OUTLINE_WIDTH_PIXELS  1.0
+
+/*===========================================*/
 /* Private types                             */
 /*===========================================*/
 
@@ -136,10 +148,10 @@ draw_paper (cairo_t           *cr,
 
 	cairo_save (cr);
 	cairo_rectangle (cr, 0.0, 0.0, template->page_width, template->page_height);
-	cairo_set_source_rgb (cr, 0.95, 0.95, 0.95);
+	cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
 	cairo_fill_preserve (cr);
-	cairo_set_line_width (cr, 1/scale);
-	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+	cairo_set_line_width (cr, PAPER_OUTLINE_WIDTH_PIXELS/scale);
+	cairo_set_source_rgb (cr, PAPER_OUTLINE_RGB_ARGS);
 	cairo_stroke (cr);
 	cairo_restore (cr);
 
@@ -162,7 +174,7 @@ draw_label_outlines (cairo_t           *cr,
 
 	cairo_save (cr);
 
-	cairo_set_line_width (cr, 1.0/scale);
+	cairo_set_line_width (cr, LABEL_OUTLINE_WIDTH_PIXELS/scale);
 
 	label_type = gl_template_get_first_label_type (template);
 
@@ -199,11 +211,11 @@ draw_label_outline (cairo_t           *cr,
 
         gl_cairo_label_path (cr, template, FALSE, FALSE);
 
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	cairo_set_source_rgb (cr, LABEL_RGB_ARGS);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_fill_preserve (cr);
 
-	cairo_set_source_rgb (cr, 0.25, 0.25, 0.25);
+	cairo_set_source_rgb (cr, LABEL_OUTLINE_RGB_ARGS);
 	cairo_stroke (cr);
 
 	cairo_restore (cr);

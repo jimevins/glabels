@@ -33,6 +33,10 @@
 /* Private constants and macros.                          */
 /*========================================================*/
 
+#define HANDLE_FILL_RGBA_ARGS      0.0,   0.75,  0.0,   0.4
+#define HANDLE_OUTLINE_RGBA_ARGS   0.0,   0.0,   0.0,   0.8
+
+#define HANDLE_OUTLINE_WIDTH_PIXELS   1.0
 #define HANDLE_PIXELS 7
 
 /*========================================================*/
@@ -396,11 +400,11 @@ gl_view_object_draw_handles (glViewObject *view_object,
                 break;
         }
 
-        cairo_set_source_rgba (cr, 0, 0.75, 0, 0.4);
+        cairo_set_source_rgba (cr, HANDLE_FILL_RGBA_ARGS);
         cairo_fill_preserve (cr);
                                
-        cairo_set_line_width (cr, 1/scale);
-        cairo_set_source_rgba (cr, 0, 0, 0, 0.8);
+        cairo_set_line_width (cr, HANDLE_OUTLINE_WIDTH_PIXELS/scale);
+        cairo_set_source_rgba (cr, HANDLE_OUTLINE_RGBA_ARGS);
         cairo_stroke (cr);
 
         cairo_restore (cr);

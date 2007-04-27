@@ -40,6 +40,10 @@
 /* Private macros and constants.             */
 /*===========================================*/
 
+#define OUTLINE_RGB_ARGS          0.0,   0.0,   0.0
+
+#define OUTLINE_WIDTH 0.25
+
 #define TICK_OFFSET  2.25
 #define TICK_LENGTH 18.0
 
@@ -391,8 +395,8 @@ print_crop_marks (PrintInfo *pi)
 
         cairo_save (pi->cr);
 
-        cairo_set_source_rgba (pi->cr, 0.0, 0.0, 0.0, 1.0);
-	cairo_set_line_width  (pi->cr, 0.25);
+        cairo_set_source_rgb (pi->cr, OUTLINE_RGB_ARGS);
+	cairo_set_line_width (pi->cr, OUTLINE_WIDTH);
 
 	for (p=label_type->layouts; p != NULL; p=p->next) {
 
@@ -532,8 +536,8 @@ draw_outline (PrintInfo *pi,
 
         cairo_save (pi->cr);
 
-	cairo_set_source_rgba (pi->cr, 0.0, 0.0, 0.0, 1.0);
-	cairo_set_line_width  (pi->cr, 0.25);
+	cairo_set_source_rgb (pi->cr, OUTLINE_RGB_ARGS);
+	cairo_set_line_width (pi->cr, OUTLINE_WIDTH);
 
         gl_cairo_label_path (pi->cr, label->template, FALSE, FALSE);
 

@@ -57,22 +57,22 @@
 /*==========================================================================*/
 
 #define BG_COLOR        GL_COLOR (192, 192, 192)
-#define OUTLINE_COLOR   GL_COLOR (173, 216, 230)
-#define PAPER_COLOR     GL_COLOR (255, 255, 255)
-#define GRID_COLOR      BG_COLOR
-#define MARKUP_COLOR    GL_COLOR (240, 100, 100)
 
-#define SEL_LINE_COLOR  GL_COLOR_A (0, 0, 255, 128)
-#define SEL_FILL_COLOR  GL_COLOR_A (192, 192, 255, 128)
+#define PAPER_RGB_ARGS          1.0,   1.0,   1.0
+#define GRID_RGB_ARGS           0.753, 0.753, 0.753
+#define MARKUP_RGB_ARGS         0.94,  0.39,  0.39
+#define OUTLINE_RGB_ARGS        0.68,  0.85,  0.90
+#define SELECT_LINE_RGBA_ARGS   0.0,   0.0,   1.0,   0.5
+#define SELECT_FILL_RGBA_ARGS   0.75,  0.75,  1.0,   0.5
 
-#define ARC_FINE         2 /* Resolution in degrees of large arcs */
-#define ARC_COURSE       5 /* Resolution in degrees of small arcs */
+#define GRID_LINE_WIDTH_PIXELS    1.0
+#define MARKUP_LINE_WIDTH_PIXELS  1.0
+#define OUTLINE_WIDTH_PIXELS      3.0
+#define SELECT_LINE_WIDTH_PIXELS  3.0
 
 #define ZOOMTOFIT_PAD   16
 
 #define POINTS_PER_MM    2.83464566929
-
-#define DELTA 0.01
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -754,7 +754,7 @@ draw_bg_layer (glView  *view,
 
         gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
 
-        cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+        cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_fill (cr);
 }
@@ -796,8 +796,8 @@ draw_grid_layer (glView  *view,
                 cairo_save (cr);
 
                 cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
-                cairo_set_line_width (cr, 1.0/(view->home_scale * view->zoom));
-                cairo_set_source_rgb (cr, 0.753, 0.753, 0.753);
+                cairo_set_line_width (cr, GRID_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
+                cairo_set_source_rgb (cr, GRID_RGB_ARGS);
 
                 for ( x=x0+view->grid_spacing; x < w; x += view->grid_spacing )
                 {
@@ -843,8 +843,8 @@ draw_markup_layer (glView  *view,
 
                 cairo_save (cr);
 
-                cairo_set_line_width (cr, 1.0/(view->home_scale * view->zoom));
-                cairo_set_source_rgb (cr, 0.94, 0.39, 0.39);
+                cairo_set_line_width (cr, MARKUP_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
+                cairo_set_source_rgb (cr, MARKUP_RGB_ARGS);
 
                 for ( p=label_type->markups; p != NULL; p=p->next )
                 {
@@ -882,8 +882,8 @@ draw_fg_layer (glView  *view,
 
         gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
 
-        cairo_set_line_width (cr, 3.0/(view->home_scale * view->zoom));
-        cairo_set_source_rgb (cr, 0.68, 0.85, 0.90);
+        cairo_set_line_width (cr, OUTLINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
+        cairo_set_source_rgb (cr, OUTLINE_RGB_ARGS);
         cairo_stroke (cr);
 }
 
@@ -934,11 +934,11 @@ draw_select_region_layer (glView  *view,
 
                 cairo_rectangle (cr, x1, y1, w, h);
 
-                cairo_set_source_rgba (cr, 0.75, 0.75, 1.0, 0.5);
+                cairo_set_source_rgba (cr, SELECT_FILL_RGBA_ARGS);
                 cairo_fill_preserve (cr);
 
-                cairo_set_line_width (cr, 3.0/(view->home_scale * view->zoom));
-                cairo_set_source_rgba (cr, 0, 0, 1.0, 0.5);
+                cairo_set_line_width (cr, SELECT_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
+                cairo_set_source_rgba (cr, SELECT_LINE_RGBA_ARGS);
                 cairo_stroke (cr);
         }
 }

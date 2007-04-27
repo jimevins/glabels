@@ -34,6 +34,14 @@
 
 #include "debug.h"
 
+/*===========================================*/
+/* Private macros and constants.             */
+/*===========================================*/
+
+#define PAPER_RGB_ARGS          1.0,   1.0,   1.0
+#define PAPER_OUTLINE_RGB_ARGS  0.0,   0.0,   0.0
+#define LABEL_OUTLINE_RGB_ARGS  0.5,   0.5,   0.5
+
 #define SHADOW_X_OFFSET 5
 #define SHADOW_Y_OFFSET 5
 
@@ -647,10 +655,10 @@ draw_paper (glWdgtMiniPreview      *preview,
 
 	cairo_rectangle (cr, 0.0, 0.0, width, height);
 
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+	cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
         cairo_fill_preserve (cr);
 
-	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+	cairo_set_source_rgb (cr, PAPER_OUTLINE_RGB_ARGS);
 	cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 
@@ -701,13 +709,13 @@ draw_labels (glWdgtMiniPreview *preview,
 		}
 		else
 		{
-			cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+			cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
 		}
 		cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 		cairo_fill_preserve (cr);
 
 		cairo_set_line_width (cr, line_width);
-		cairo_set_source_rgb (cr, 0.5, 0.5, 0.5);
+		cairo_set_source_rgb (cr, LABEL_OUTLINE_RGB_ARGS);
 		cairo_stroke (cr);
 
 		cairo_restore (cr);

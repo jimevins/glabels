@@ -49,6 +49,8 @@
 #define LINE_COLOR             GL_COLOR(0,0,0)
 #define FILL_COLOR             GL_COLOR(255,255,255)
 
+#define LINE_WIDTH_PIXELS    1.0
+
 #define SHADOW_X_OFFSET 3
 #define SHADOW_Y_OFFSET 3
 
@@ -310,7 +312,7 @@ drawingarea_update (GtkDrawingArea *drawing_area,
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_fill_preserve (cr);
 
-	cairo_set_line_width (cr, 1.0/scale);
+	cairo_set_line_width (cr, LINE_WIDTH_PIXELS/scale);
 	cairo_set_source_rgb (cr,
 			      GL_COLOR_F_RED(line_color),
 			      GL_COLOR_F_GREEN(line_color),

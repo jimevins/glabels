@@ -1,3 +1,15 @@
+2007-04-26  Jim Evins  <evins@snaught.com>
+
+	* src/mini-preview-pixbuf.c: (draw_paper), (draw_label_outlines),
+	(draw_label_outline):
+	* src/print.c: (print_crop_marks), (draw_outline):
+	* src/view-object.c: (gl_view_object_draw_handles):
+	* src/view.c: (draw_bg_layer), (draw_grid_layer),
+	(draw_markup_layer), (draw_fg_layer), (draw_select_region_layer):
+	* src/wdgt-mini-preview.c: (draw_paper), (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Added defines for various magic numbers.
+
 2007-04-25  Jim Evins  <evins@snaught.com>
 
 	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
