@@ -567,13 +567,11 @@ gl_label_object_get_size (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_object_get_extent (glLabelObject *object,
-			    gdouble       *x1,
-			    gdouble       *y1,
-			    gdouble       *x2,
-			    gdouble       *y2)
+                            glLabelRegion *region)
 {
-	gdouble  w, h;
-	gdouble xa1, ya1, xa2, ya2, xa3, ya3, xa4, ya4;
+	gdouble        w, h;
+        gdouble        line_w;
+	gdouble        xa1, ya1, xa2, ya2, xa3, ya3, xa4, ya4;
         cairo_matrix_t matrix;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -581,16 +579,17 @@ gl_label_object_get_extent (glLabelObject *object,
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
 	gl_label_object_get_size (object, &w, &h);
+        line_w = gl_label_object_get_line_width (object);
 
-	/* setup untransformed corners of bounding box */
-	xa1 = 0.0;
-	ya1 = 0.0;
-	xa2 = w;
-	ya2 = 0.0;
-	xa3 = w;
-	ya3 = h;
-	xa4 = 0.0;
-	ya4 = h;
+	/* setup untransformed corners of bounding box, account for line width */
+	xa1 =   - line_w/2;
+	ya1 =   - line_w/2;
+	xa2 = w + line_w/2;
+	ya2 =   - line_w/2;
+	xa3 = w + line_w/2;
+	ya3 = h + line_w/2;
+	xa4 =   - line_w/2;
+	ya4 = h + line_w/2;
 
 	/* transform these points */
 	gl_label_object_get_matrix (object, &matrix);
@@ -600,10 +599,10 @@ gl_label_object_get_extent (glLabelObject *object,
         cairo_matrix_transform_point (&matrix, &xa4, &ya4);
 
 	/* now find the maximum extent of these points in x and y */
-	*x1 = MIN (xa1, MIN (xa2, MIN (xa3, xa4))) + object->priv->x;
-	*y1 = MIN (ya1, MIN (ya2, MIN (ya3, ya4))) + object->priv->y;
-	*x2 = MAX (xa1, MAX (xa2, MAX (xa3, xa4))) + object->priv->x;
-	*y2 = MAX (ya1, MAX (ya2, MAX (ya3, ya4))) + object->priv->y;
+	region->x1 = MIN (xa1, MIN (xa2, MIN (xa3, xa4))) + object->priv->x;
+	region->y1 = MIN (ya1, MIN (ya2, MIN (ya3, ya4))) + object->priv->y;
+	region->x2 = MAX (xa1, MAX (xa2, MAX (xa3, xa4))) + object->priv->x;
+	region->y2 = MAX (ya1, MAX (ya2, MAX (ya3, ya4))) + object->priv->y;
 
 	gl_debug (DEBUG_LABEL, "END");
 }

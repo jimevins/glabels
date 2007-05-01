@@ -1,3 +1,25 @@
+2007-04-30  Jim Evins  <evins@snaught.com>
+
+	* src/label.h:
+		Added glLabelRegion structure type.
+	* src/label-object.c: (gl_label_object_get_extent):
+	* src/label-object.h:
+		Modified gl_label_object_get_extent() to fill in a glLabelRegion struct.
+	* src/view.h:
+	* src/view.c: (gl_view_update_region), (draw_select_region_layer),
+	(gl_view_select_region), (gl_view_align_selection_left),
+	(gl_view_align_selection_right), (gl_view_align_selection_hcenter),
+	(gl_view_align_selection_top), (gl_view_align_selection_bottom),
+	(gl_view_align_selection_vcenter),
+	(gl_view_center_selection_horiz), (gl_view_center_selection_vert),
+	(gl_view_move_selection), (gl_view_can_selection_text),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+		- Reconcile with new gl_label_object_get_extent() API.
+		- Use glLabelRegion for view->select_region.
+		- Added gl_view_update_region() to clip updates to region.
+		- Use gl_view_update_region() during manipulation of view->select_region.
+
 2007-04-26  Jim Evins  <evins@snaught.com>
 
 	* src/mini-preview-pixbuf.c: (draw_paper), (draw_label_outlines),

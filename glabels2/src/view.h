@@ -83,10 +83,7 @@ struct _glView {
 
         /* GL_VIEW_ARROW_SELECT_REGION state */
         gboolean           select_region_visible;
-        gdouble            select_region_x1;
-        gdouble            select_region_y1;
-        gdouble            select_region_x2;
-        gdouble            select_region_y2;
+        glLabelRegion      select_region;
 
         /* GL_VIEW_ARROW_RESIZE state */
         glViewObject      *resize_object;
@@ -160,6 +157,10 @@ GtkWidget *gl_view_new                     (glLabel           *label);
 
 void       gl_view_update                  (glView            *view);
 
+void       gl_view_update_region           (glView            *view,
+                                            cairo_t           *cr,
+                                            glLabelRegion     *region);
+
 void       gl_view_show_grid               (glView            *view);
 
 void       gl_view_hide_grid               (glView            *view);
@@ -188,10 +189,7 @@ void       gl_view_select_all              (glView            *view);
 void       gl_view_unselect_all            (glView            *view);
 
 void       gl_view_select_region           (glView            *view,
-					    gdouble            x1,
-					    gdouble            y1,
-					    gdouble            x2,
-					    gdouble            y2);
+                                            glLabelRegion     *region);
 
 gboolean   gl_view_is_object_selected      (glView            *view,
 					    glViewObject      *view_object);

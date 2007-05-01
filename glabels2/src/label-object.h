@@ -221,11 +221,7 @@ void           gl_label_object_get_raw_size          (glLabelObject     *object,
                                                       gdouble           *h);
 
 void           gl_label_object_get_extent            (glLabelObject     *object,
-                                                      gdouble           *x1,
-                                                      gdouble           *y1,
-                                                      gdouble           *x2,
-                                                      gdouble           *y2);
-
+                                                      glLabelRegion     *region);
 
 gboolean       gl_label_object_can_text              (glLabelObject     *object);
 

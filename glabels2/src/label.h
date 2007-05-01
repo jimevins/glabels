@@ -33,6 +33,13 @@
 
 G_BEGIN_DECLS
 
+typedef struct {
+        gdouble x1;
+        gdouble y1;
+        gdouble x2;
+        gdouble y2;
+} glLabelRegion;
+
 #define GL_TYPE_LABEL            (gl_label_get_type ())
 #define GL_LABEL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL, glLabel))
 #define GL_LABEL_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL, glLabelClass))

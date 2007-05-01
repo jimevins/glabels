@@ -539,7 +539,7 @@ get_home_scale (glView *view)
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Update canvas.                                                  */
+/* Schedule canvas update.                                                   */
 /*---------------------------------------------------------------------------*/
 void
 gl_view_update (glView  *view)
@@ -562,6 +562,42 @@ gl_view_update (glView  *view)
                 gdk_window_invalidate_region (widget->window, region, TRUE);
                 gdk_region_destroy (region);
         }
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* Schedule canvas region update.                                            */
+/*---------------------------------------------------------------------------*/
+void
+gl_view_update_region (glView        *view,
+                       cairo_t       *cr,
+                       glLabelRegion *region)
+{
+ 	GtkWidget    *widget;
+	GdkRectangle  rect;
+        gdouble       x, y, w, h;
+
+	gl_debug (DEBUG_VIEW, "START");
+
+	widget = GTK_WIDGET (view->canvas);
+
+	if (!widget->window) return;
+
+        x = MIN (region->x1, region->x2);
+        y = MIN (region->y1, region->y2);
+        w = fabs (region->x2 - region->x1);
+        h = fabs (region->y2 - region->y1);
+
+        cairo_user_to_device (cr, &x, &y);
+        cairo_user_to_device_distance (cr, &w, &h);
+
+        rect.x      = x - 3;
+        rect.y      = y - 3;
+        rect.width  = w + 6;
+        rect.height = h + 6;
+
+        gdk_window_invalidate_rect (widget->window, &rect, TRUE);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -927,10 +963,10 @@ draw_select_region_layer (glView  *view,
 
         if (view->select_region_visible)
         {
-                x1 = MIN (view->select_region_x1, view->select_region_x2);
-                y1 = MIN (view->select_region_y1, view->select_region_y2);
-                w  = fabs (view->select_region_x2 - view->select_region_x1);
-                h  = fabs (view->select_region_y2 - view->select_region_y1);
+                x1 = MIN (view->select_region.x1, view->select_region.x2);
+                y1 = MIN (view->select_region.y1, view->select_region.y2);
+                w  = fabs (view->select_region.x2 - view->select_region.x1);
+                h  = fabs (view->select_region.y2 - view->select_region.y1);
 
                 cairo_rectangle (cr, x1, y1, w, h);
 
@@ -1165,38 +1201,39 @@ gl_view_unselect_all (glView *view)
 /* Select all objects within given rectangular region (adding to selection). */
 /*****************************************************************************/
 void
-gl_view_select_region (glView  *view,
-		       gdouble  x1,
-		       gdouble  y1,
-		       gdouble  x2,
-		       gdouble  y2)
+gl_view_select_region (glView        *view,
+                       glLabelRegion *region)
 {
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
         gdouble        r_x1, r_y1;
         gdouble        r_x2, r_y2;
-	gdouble        i_x1, i_y1;
-	gdouble        i_x2, i_y2;
+        glLabelRegion  obj_extent;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-        r_x1 = MIN (x1, x2);
-        r_y1 = MIN (y1, y2);
-        r_x2 = MAX (x1, x2);
-        r_y2 = MAX (y1, y2);
+        r_x1 = MIN (region->x1, region->x2);
+        r_y1 = MIN (region->y1, region->y2);
+        r_x2 = MAX (region->x1, region->x2);
+        r_y2 = MAX (region->y1, region->y2);
 
-	for (p = view->object_list; p != NULL; p = p->next) {
+	for (p = view->object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT(p->data);
-		if (!gl_view_is_object_selected (view, view_object)) {
+		if (!gl_view_is_object_selected (view, view_object))
+                {
 
 			object = gl_view_object_get_object (view_object);
 
-			gl_label_object_get_extent (object, &i_x1, &i_y1, &i_x2, &i_y2);
-			if ((i_x1 >= r_x1) && (i_x2 <= r_x2) && (i_y1 >= r_y1)
-			    && (i_y2 <= r_y2)) {
+			gl_label_object_get_extent (object, &obj_extent);
+			if ((obj_extent.x1 >= r_x1) &&
+                            (obj_extent.x2 <= r_x2) &&
+                            (obj_extent.y1 >= r_y1) &&
+                            (obj_extent.y2 <= r_y2))
+                        {
 				select_object_real (view, view_object);
 			}
 
@@ -1585,7 +1622,8 @@ gl_view_align_selection_left (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dx, x1min, x1, y1, x2, y2;
+	gdouble        dx, x1_min;
+        glLabelRegion  obj_extent;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1598,20 +1636,23 @@ gl_view_align_selection_left (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1min, &y1, &x2, &y2);
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+        x1_min = obj_extent.x1;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		if ( x1 < x1min ) x1min = x1;
+		gl_label_object_get_extent (object, &obj_extent);
+		if ( obj_extent.x1 < x1_min ) x1_min = obj_extent.x1;
 	}
 
 	/* now adjust the object positions to line up the left edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dx = x1min - x1;
+		gl_label_object_get_extent (object, &obj_extent);
+		dx = x1_min - obj_extent.x1;
 		gl_label_object_set_position_relative (object, dx, 0.0);
 	}
 
@@ -1628,10 +1669,8 @@ gl_view_align_selection_right (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dx;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
-	gdouble        x2max;
+	gdouble        dx, x2_max;
+        glLabelRegion  obj_extent;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1644,20 +1683,23 @@ gl_view_align_selection_right (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1, &y1, &x2max, &y2);
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+        x2_max = obj_extent.x2;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		if ( x2 > x2max ) x2max = x2;
+		gl_label_object_get_extent (object, &obj_extent);
+		if ( obj_extent.x2 > x2_max ) x2_max = obj_extent.x2;
 	}
 
 	/* now adjust the object positions to line up the right edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dx = x2max - x2;
+		gl_label_object_get_extent (object, &obj_extent);
+		dx = x2_max - obj_extent.x2;
 		gl_label_object_set_position_relative (object, dx, 0.0);
 	}
 
@@ -1676,8 +1718,7 @@ gl_view_align_selection_hcenter (glView *view)
 	gdouble        dx;
 	gdouble        dxmin;
 	gdouble        xsum, xavg;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
+        glLabelRegion  obj_extent;
 	gdouble        xcenter;
 	gint           n;
 
@@ -1691,11 +1732,12 @@ gl_view_align_selection_hcenter (glView *view)
 	/* find average center of objects */
 	xsum = 0.0;
 	n = 0;
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		xsum += (x1 + x2) / 2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		xsum += (obj_extent.x1 + obj_extent.x2) / 2.0;
 		n++;
 	}
 	xavg = xsum / n;
@@ -1704,17 +1746,19 @@ gl_view_align_selection_hcenter (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-	dxmin = fabs (xavg - (x1 + x2)/2.0);
-	xcenter = (x1 + x2)/2.0;
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+	dxmin = fabs (xavg - (obj_extent.x1 + obj_extent.x2)/2.0);
+	xcenter = (obj_extent.x1 + obj_extent.x2)/2.0;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dx = fabs (xavg - (x1 + x2)/2.0);
-		if ( dx < dxmin ) {
+		gl_label_object_get_extent (object, &obj_extent);
+		dx = fabs (xavg - (obj_extent.x1 + obj_extent.x2)/2.0);
+		if ( dx < dxmin )
+                {
 			dxmin = dx;
-			xcenter = (x1 + x2)/2.0;
+			xcenter = (obj_extent.x1 + obj_extent.x2)/2.0;
 		}
 	}
 
@@ -1722,8 +1766,8 @@ gl_view_align_selection_hcenter (glView *view)
 	for (p = view->selected_object_list; p != NULL; p = p->next) {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dx = xcenter - (x1 + x2)/2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		dx = xcenter - (obj_extent.x1 + obj_extent.x2)/2.0;
 		gl_label_object_set_position_relative (object, dx, 0.0);
 	}
 
@@ -1739,10 +1783,8 @@ gl_view_align_selection_top (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
-	gdouble        y1min;
+	gdouble        dy, y1_min;
+        glLabelRegion  obj_extent;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1755,20 +1797,23 @@ gl_view_align_selection_top (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1, &y1min, &x2, &y2);
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+        y1_min = obj_extent.y1;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		if ( y1 < y1min ) y1min = y1;
+		gl_label_object_get_extent (object, &obj_extent);
+		if ( obj_extent.y1 < y1_min ) y1_min = obj_extent.y1;
 	}
 
 	/* now adjust the object positions to line up the top edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dy = y1min - y1;
+		gl_label_object_get_extent (object, &obj_extent);
+		dy = y1_min - obj_extent.y1;
 		gl_label_object_set_position_relative (object, 0.0, dy);
 	}
 
@@ -1784,10 +1829,8 @@ gl_view_align_selection_bottom (glView *view)
 	GList         *p;
 	glViewObject  *view_object;
 	glLabelObject *object;
-	gdouble        dy;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
-	gdouble        y2max;
+	gdouble        dy, y2_max;
+        glLabelRegion  obj_extent;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1800,20 +1843,23 @@ gl_view_align_selection_bottom (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2max);
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+        y2_max = obj_extent.y2;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		if ( y2 > y2max ) y2max = y2;
+		gl_label_object_get_extent (object, &obj_extent);
+		if ( obj_extent.y2 > y2_max ) y2_max = obj_extent.y2;
 	}
 
 	/* now adjust the object positions to line up the bottom edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dy = y2max - y2;
+		gl_label_object_get_extent (object, &obj_extent);
+		dy = y2_max - obj_extent.y2;
 		gl_label_object_set_position_relative (object, 0.0, dy);
 	}
 
@@ -1832,8 +1878,7 @@ gl_view_align_selection_vcenter (glView *view)
 	gdouble        dy;
 	gdouble        dymin;
 	gdouble        ysum, yavg;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
+        glLabelRegion  obj_extent;
 	gdouble        ycenter;
 	gint           n;
 
@@ -1847,11 +1892,12 @@ gl_view_align_selection_vcenter (glView *view)
 	/* find average center of objects */
 	ysum = 0.0;
 	n = 0;
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		ysum += (y1 + y2) / 2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		ysum += (obj_extent.y1 + obj_extent.y2) / 2.0;
 		n++;
 	}
 	yavg = ysum / n;
@@ -1860,26 +1906,29 @@ gl_view_align_selection_vcenter (glView *view)
 	p = view->selected_object_list;
 	view_object = GL_VIEW_OBJECT (p->data);
 	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-	dymin = fabs (yavg - (y1 + y2)/2.0);
-	ycenter = (y1 + y2)/2.0;
-	for (p = p->next; p != NULL; p = p->next) {
+	gl_label_object_get_extent (object, &obj_extent);
+	dymin = fabs (yavg - (obj_extent.y1 + obj_extent.y2)/2.0);
+	ycenter = (obj_extent.y1 + obj_extent.y2)/2.0;
+	for (p = p->next; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dy = fabs (yavg - (y1 + y2)/2.0);
-		if ( dy < dymin ) {
+		gl_label_object_get_extent (object, &obj_extent);
+		dy = fabs (yavg - (obj_extent.y1 + obj_extent.y2)/2.0);
+		if ( dy < dymin )
+                {
 			dymin = dy;
-			ycenter = (y1 + y2)/2.0;
+			ycenter = (obj_extent.y1 + obj_extent.y2)/2.0;
 		}
 	}
 
 	/* now adjust the object positions to line up this center */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		dy = ycenter - (y1 + y2)/2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		dy = ycenter - (obj_extent.y1 + obj_extent.y2)/2.0;
 		gl_label_object_set_position_relative (object, 0.0, dy);
 	}
 
@@ -1898,8 +1947,7 @@ gl_view_center_selection_horiz (glView *view)
 	gdouble        dx;
 	gdouble        x_label_center;
 	gdouble        x_obj_center;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
+	glLabelRegion  obj_extent;
 	gdouble        w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -1912,11 +1960,12 @@ gl_view_center_selection_horiz (glView *view)
 	x_label_center = w / 2.0;
 
 	/* adjust the object positions */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		x_obj_center = (x1 + x2) / 2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		x_obj_center = (obj_extent.x1 + obj_extent.x2) / 2.0;
 		dx = x_label_center - x_obj_center;
 		gl_label_object_set_position_relative (object, dx, 0.0);
 	}
@@ -1937,8 +1986,7 @@ gl_view_center_selection_vert (glView *view)
 	gdouble        dy;
 	gdouble        y_label_center;
 	gdouble        y_obj_center;
-	gdouble        x1, y1;
-	gdouble        x2, y2;
+	glLabelRegion  obj_extent;
 	gdouble        w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
@@ -1951,11 +1999,12 @@ gl_view_center_selection_vert (glView *view)
 	y_label_center = h / 2.0;
 
 	/* adjust the object positions */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 		view_object = GL_VIEW_OBJECT (p->data);
 		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &x1, &y1, &x2, &y2);
-		y_obj_center = (y1 + y2) / 2.0;
+		gl_label_object_get_extent (object, &obj_extent);
+		y_obj_center = (obj_extent.y1 + obj_extent.y2) / 2.0;
 		dy = y_label_center - y_obj_center;
 		gl_label_object_set_position_relative (object, 0.0, dy);
 	}
@@ -1979,7 +2028,8 @@ gl_view_move_selection (glView  *view,
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
 		gl_label_object_set_position_relative (object, dx, dy);
@@ -2002,10 +2052,12 @@ gl_view_can_selection_text (glView *view)
 
 	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
 
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		if (gl_label_object_can_text (object)) {
+		if (gl_label_object_can_text (object))
+                {
 			return TRUE;
 		}
 
@@ -3153,9 +3205,10 @@ motion_notify_event_cb (glView            *view,
                         break;
 
                 case GL_VIEW_ARROW_SELECT_REGION:
-                        view->select_region_x2 = x;
-                        view->select_region_y2 = y;
-                        gl_view_update (view);
+                        gl_view_update_region (view, cr, &view->select_region);
+                        view->select_region.x2 = x;
+                        view->select_region.y2 = y;
+                        gl_view_update_region (view, cr, &view->select_region);
                         break;
 
                 case GL_VIEW_ARROW_MOVE:
@@ -3318,11 +3371,10 @@ button_press_event_cb (glView            *view,
                                 }
 
                                 view->select_region_visible = TRUE;
-                                view->select_region_x1 = x;
-                                view->select_region_y1 = y;
-                                view->select_region_x2 = x;
-                                view->select_region_y2 = y;
-                                gl_view_update (view);
+                                view->select_region.x1 = x;
+                                view->select_region.y1 = y;
+                                view->select_region.x2 = x;
+                                view->select_region.y2 = y;
 
                                 view->state = GL_VIEW_ARROW_SELECT_REGION;
                         }
@@ -3433,17 +3485,13 @@ button_release_event_cb (glView            *view,
                                 break;
 
                         case GL_VIEW_ARROW_SELECT_REGION:
+                                gl_view_update_region (view, cr, &view->select_region);
+
                                 view->select_region_visible = FALSE;
-                                view->select_region_x2 = x;
-                                view->select_region_y2 = y;
+                                view->select_region.x2 = x;
+                                view->select_region.y2 = y;
 
-                                gl_view_select_region (view,
-                                                       view->select_region_x1,
-                                                       view->select_region_y1,
-                                                       view->select_region_x2,
-                                                       view->select_region_y2);
-
-                                gl_view_update (view);
+                                gl_view_select_region (view, &view->select_region);
 
                                 view->state = GL_VIEW_IDLE;
                                 break;
