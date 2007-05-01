@@ -259,11 +259,7 @@ draw_object (glLabelObject *object,
 
 
 	/* Draw line */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (line_color),
-                               GL_COLOR_F_GREEN (line_color),
-                               GL_COLOR_F_BLUE (line_color),
-                               GL_COLOR_F_ALPHA (line_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (line_color));
         cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 
@@ -314,11 +310,7 @@ draw_shadow (glLabelObject *object,
 
 
         /* Draw outline shadow */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (shadow_line_color),
-                               GL_COLOR_F_GREEN (shadow_line_color),
-                               GL_COLOR_F_BLUE (shadow_line_color),
-                               GL_COLOR_F_ALPHA (shadow_line_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_line_color));
         cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 

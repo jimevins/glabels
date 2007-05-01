@@ -398,11 +398,7 @@ draw_object (glLabelObject *object,
 
 	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, text);
 
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (color),
-                               GL_COLOR_F_GREEN (color),
-                               GL_COLOR_F_BLUE (color),
-                               GL_COLOR_F_ALPHA (color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
 
 	if (gbc == NULL) {
 

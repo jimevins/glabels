@@ -627,10 +627,7 @@ draw_shadow (glWdgtMiniPreview      *preview,
 
 	style = gtk_widget_get_style (GTK_WIDGET(preview));
 	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED   (shadow_color),
-			      GL_COLOR_F_GREEN (shadow_color),
-			      GL_COLOR_F_BLUE  (shadow_color));
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (shadow_color));
 
         cairo_fill (cr);
 
@@ -702,10 +699,7 @@ draw_labels (glWdgtMiniPreview *preview,
 		if ( ((i+1) >= preview->priv->highlight_first) &&
 		     ((i+1) <= preview->priv->highlight_last) )
 		{
-			cairo_set_source_rgb (cr,
-					      GL_COLOR_F_RED   (highlight_color),
-					      GL_COLOR_F_GREEN (highlight_color),
-					      GL_COLOR_F_BLUE  (highlight_color));
+			cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (highlight_color));
 		}
 		else
 		{

@@ -1,5 +1,19 @@
 2007-04-30  Jim Evins  <evins@snaught.com>
 
+	* src/color.h:
+	* src/color.c: (gl_color_shadow), (gl_color_node_new_default),
+	(gl_color_node_equal), (gl_color_node_expand):
+	* src/label-barcode.c: (draw_object):
+	* src/label-box.c: (draw_object), (draw_shadow):
+	* src/label-ellipse.c: (draw_object), (draw_shadow):
+	* src/label-line.c: (draw_object), (draw_shadow):
+	* src/label-text.c: (draw_object), (draw_shadow):
+	* src/wdgt-mini-preview.c: (draw_shadow), (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Some cleanup to color related code.
+
+2007-04-30  Jim Evins  <evins@snaught.com>
+
 	* src/label.h:
 		Added glLabelRegion structure type.
 	* src/label-object.c: (gl_label_object_get_extent):

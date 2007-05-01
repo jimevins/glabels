@@ -42,7 +42,23 @@ gl_color_set_opacity (guint   color,
 }
 
 /*****************************************************************************/
-/* Convert canvas color into a GdkColor                                      */
+/* Resolve actual shadow color by adjusting opacity.                         */
+/*****************************************************************************/
+guint
+gl_color_shadow (guint   base_color,
+                 gdouble opacity,
+                 guint   object_color)
+{
+        guint color;
+
+        color = gl_color_set_opacity (base_color,
+                                      opacity * GL_COLOR_F_ALPHA (object_color));
+
+        return color;
+}
+
+/*****************************************************************************/
+/* Convert gLabels color into a GdkColor                                     */
 /*****************************************************************************/
 GdkColor *
 gl_color_to_gdk_color (guint color)
@@ -59,7 +75,7 @@ gl_color_to_gdk_color (guint color)
 }
 
 /*****************************************************************************/
-/* Convert GdkColor into a canvas color                                      */
+/* Convert GdkColor into a gLabels color                                     */
 /*****************************************************************************/
 guint
 gl_color_from_gdk_color (GdkColor *gdk_color)
@@ -73,27 +89,11 @@ gl_color_from_gdk_color (GdkColor *gdk_color)
         return color;
 }
 
-/*****************************************************************************/
-/* Resolve actual shadow color by adjusting opacity.                         */
-/*****************************************************************************/
-guint
-gl_color_shadow (guint   base_color,
-                 gdouble opacity,
-                 guint   object_color)
-{
-        guint color;
-
-        color = gl_color_set_opacity (base_color,
-                                      opacity * GL_COLOR_F_ALPHA (object_color));
-
-        return color;
-}
-
 /****************************************************************************/
 /* Create a single color node with default color.                           */
 /****************************************************************************/
 glColorNode *
-gl_color_node_new_default ()
+gl_color_node_new_default (void)
 {
         glColorNode* color_node;
         
@@ -137,32 +137,42 @@ gl_color_node_dup (glColorNode *src)
 /****************************************************************************/
 gboolean
 gl_color_node_equal (glColorNode     *color_node1,
-                    glColorNode     *color_node2)
+                     glColorNode     *color_node2)
 {
         /* First take care of the case of either or both being NULL. */
-        if ( color_node1 == NULL ) {
+        if ( color_node1 == NULL )
+        {
                 return ( color_node2 == NULL );
-        } else {
-                if ( color_node2 == NULL ) {
+        }
+        else
+        {
+                if ( color_node2 == NULL )
+                {
                         return FALSE;
                 }
         }
 
         /* Bail if field flags differ. */
-        if ( color_node1->field_flag != color_node2->field_flag ) {
+        if ( color_node1->field_flag != color_node2->field_flag )
+        {
                 return FALSE;
         }
 
         /* Now take care of the case of either or both color fields being different. */
-        if ( color_node1->color != color_node2->color ){
+        if ( color_node1->color != color_node2->color )
+        {
                 return FALSE;
         }
         
         /* Then take care of the case of either or both key fields being NULL. */
-        if ( color_node1->key == NULL ) {
+        if ( color_node1->key == NULL )
+        {
                 return ( color_node2->key == NULL );
-        } else {
-                if ( color_node2->key == NULL ) {
+        }
+        else
+        {
+                if ( color_node2->key == NULL )
+                {
                         return FALSE;
                 }
         }
@@ -176,18 +186,23 @@ gl_color_node_equal (glColorNode     *color_node1,
 /****************************************************************************/
 guint
 gl_color_node_expand (glColorNode    *color_node,
-                     glMergeRecord *record)
+                      glMergeRecord  *record)
 {
-        gchar* text;
+        gchar    *text;
         GdkColor *gdk_color;
-        guint color;
+        guint     color;
 
-        if (color_node->field_flag) {
-                if (record == NULL) {
+        if (color_node->field_flag)
+        {
+                if (record == NULL)
+                {
                         return GL_COLOR_NONE;
-                } else {
+                }
+                else
+                {
                         text = gl_merge_eval_key (record, color_node->key);
-                        if (text != NULL) {
+                        if (text != NULL)
+                        {
                                 gdk_color = g_new0 (GdkColor, 1);
                                 if (gdk_color_parse (text, gdk_color))
                                 {
@@ -200,11 +215,15 @@ gl_color_node_expand (glColorNode    *color_node,
                                         g_free (gdk_color);
                                         return GL_COLOR_NONE;
                                 }
-                        } else {
+                        }
+                        else
+                        {
                                 return GL_COLOR_NONE;
                         }
                 }
-        } else {
+        }
+        else
+        {
                 return color_node->color;
         }
 }

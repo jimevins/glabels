@@ -292,10 +292,7 @@ drawingarea_update (GtkDrawingArea *drawing_area,
         cairo_translate (cr, SHADOW_X_OFFSET/scale, SHADOW_Y_OFFSET/scale);
         gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(shadow_color),
-			      GL_COLOR_F_GREEN(shadow_color),
-			      GL_COLOR_F_BLUE(shadow_color));
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (shadow_color));
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_fill (cr);
         cairo_restore (cr);
@@ -305,18 +302,12 @@ drawingarea_update (GtkDrawingArea *drawing_area,
          */
         gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(fill_color),
-			      GL_COLOR_F_GREEN(fill_color),
-			      GL_COLOR_F_BLUE(fill_color));
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (fill_color));
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 	cairo_fill_preserve (cr);
 
 	cairo_set_line_width (cr, LINE_WIDTH_PIXELS/scale);
-	cairo_set_source_rgb (cr,
-			      GL_COLOR_F_RED(line_color),
-			      GL_COLOR_F_GREEN(line_color),
-			      GL_COLOR_F_BLUE(line_color));
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (line_color));
 	cairo_stroke (cr);
 
 

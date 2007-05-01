@@ -315,19 +315,11 @@ draw_object (glLabelObject *object,
         cairo_rectangle (cr, 0.0, 0.0, w, h);
 
 	/* Paint fill color */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (fill_color),
-                               GL_COLOR_F_GREEN (fill_color),
-                               GL_COLOR_F_BLUE (fill_color),
-                               GL_COLOR_F_ALPHA (fill_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (fill_color));
 	cairo_fill_preserve (cr);
 
 	/* Draw outline */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (line_color),
-                               GL_COLOR_F_GREEN (line_color),
-                               GL_COLOR_F_BLUE (line_color),
-                               GL_COLOR_F_ALPHA (line_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (line_color));
         cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 
@@ -392,19 +384,11 @@ draw_shadow (glLabelObject *object,
 
 
         /* Draw fill shadow */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (shadow_fill_color),
-                               GL_COLOR_F_GREEN (shadow_fill_color),
-                               GL_COLOR_F_BLUE (shadow_fill_color),
-                               GL_COLOR_F_ALPHA (shadow_fill_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_fill_color));
         cairo_fill_preserve (cr);
 
         /* Draw outline shadow */
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (shadow_line_color),
-                               GL_COLOR_F_GREEN (shadow_line_color),
-                               GL_COLOR_F_BLUE (shadow_line_color),
-                               GL_COLOR_F_ALPHA (shadow_line_color));
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_line_color));
         cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 

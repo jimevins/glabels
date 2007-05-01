@@ -881,12 +881,7 @@ draw_object (glLabelObject *object,
         pango_layout_set_alignment (layout, alignment);
 
 
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (color),
-                               GL_COLOR_F_GREEN (color),
-                               GL_COLOR_F_BLUE (color),
-                               GL_COLOR_F_ALPHA (color));
-
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
         cairo_move_to (cr, GL_LABEL_TEXT_MARGIN/scale_x, 0);
         pango_cairo_show_layout (cr, layout);
 
@@ -1026,12 +1021,7 @@ draw_shadow (glLabelObject *object,
         pango_layout_set_wrap (layout, PANGO_WRAP_CHAR);
         pango_layout_set_alignment (layout, alignment);
 
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED (shadow_color),
-                               GL_COLOR_F_GREEN (shadow_color),
-                               GL_COLOR_F_BLUE (shadow_color),
-                               GL_COLOR_F_ALPHA (shadow_color));
-
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_color));
         cairo_move_to (cr, GL_LABEL_TEXT_MARGIN/scale_x, 0);
         pango_cairo_show_layout (cr, layout);
 
