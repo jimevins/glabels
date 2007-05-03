@@ -1,3 +1,9 @@
+2007-05-03  Jim Evins  <evins@snaught.com>
+
+	* src/label-image.c: (gl_label_image_init), (draw_object):
+		Scale default pixbuf up, to prevent bluring.  Use cairo_fill to
+		render image.
+
 2007-05-02  Jim Evins  <evins@snaught.com>
 
 	* src/view.c: (draw_select_region_layer), (motion_notify_event_cb),

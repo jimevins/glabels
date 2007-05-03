@@ -87,9 +87,13 @@ gl_label_image_class_init (glLabelImageClass *class)
 static void
 gl_label_image_init (glLabelImage *limage)
 {
+        GdkPixbuf *pixbuf;
+
 	if ( default_pixbuf == NULL ) {
-		default_pixbuf =
-			gdk_pixbuf_new_from_xpm_data ((const char **)checkerboard_xpm);
+		pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)checkerboard_xpm);
+                default_pixbuf =
+                        gdk_pixbuf_scale_simple (pixbuf, 128, 128, GDK_INTERP_NEAREST);
+                g_object_unref (pixbuf);
 	}
 
 	limage->priv = g_new0 (glLabelImagePrivate, 1);
@@ -308,11 +312,10 @@ draw_object (glLabelObject *object,
 	cairo_save (cr);
 
         cairo_rectangle (cr, 0.0, 0.0, w, h);
-        cairo_clip (cr);
 
 	cairo_scale (cr, w/image_w, h/image_h);
         gdk_cairo_set_source_pixbuf (cr, (GdkPixbuf *)pixbuf, 0, 0);
-        cairo_paint (cr);
+        cairo_fill (cr);
 
 	cairo_restore (cr);
 
