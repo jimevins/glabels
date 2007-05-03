@@ -1,3 +1,10 @@
+2007-05-02  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (draw_select_region_layer), (motion_notify_event_cb),
+	(button_release_event_cb):
+		Removed attempt at rendering optimization by clipping the updates
+		to areas affected -- this actually seemed to hurt update performance.
+
 2007-04-30  Jim Evins  <evins@snaught.com>
 
 	* src/color.h:

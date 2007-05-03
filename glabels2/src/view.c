@@ -968,6 +968,10 @@ draw_select_region_layer (glView  *view,
                 w  = fabs (view->select_region.x2 - view->select_region.x1);
                 h  = fabs (view->select_region.y2 - view->select_region.y1);
 
+                cairo_save (cr);
+
+                cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
+
                 cairo_rectangle (cr, x1, y1, w, h);
 
                 cairo_set_source_rgba (cr, SELECT_FILL_RGBA_ARGS);
@@ -976,6 +980,8 @@ draw_select_region_layer (glView  *view,
                 cairo_set_line_width (cr, SELECT_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
                 cairo_set_source_rgba (cr, SELECT_LINE_RGBA_ARGS);
                 cairo_stroke (cr);
+
+                cairo_restore (cr);
         }
 }
 
@@ -3205,10 +3211,16 @@ motion_notify_event_cb (glView            *view,
                         break;
 
                 case GL_VIEW_ARROW_SELECT_REGION:
+#ifdef CLIP_UPDATES                                
                         gl_view_update_region (view, cr, &view->select_region);
+#endif
                         view->select_region.x2 = x;
                         view->select_region.y2 = y;
+#ifdef CLIP_UPDATES                                
                         gl_view_update_region (view, cr, &view->select_region);
+#else
+                        gl_view_update (view);
+#endif
                         break;
 
                 case GL_VIEW_ARROW_MOVE:
@@ -3485,7 +3497,11 @@ button_release_event_cb (glView            *view,
                                 break;
 
                         case GL_VIEW_ARROW_SELECT_REGION:
+#ifdef CLIP_UPDATES                                
                                 gl_view_update_region (view, cr, &view->select_region);
+#else
+                                gl_view_update (view);
+#endif
 
                                 view->select_region_visible = FALSE;
                                 view->select_region.x2 = x;
