@@ -38,6 +38,7 @@
 #include <libglabels/paper.h>
 #include <libglabels/template.h>
 #include "wdgt-mini-preview.h"
+#include "mini-preview-pixbuf-cache.h"
 #include "print-op.h"
 #include "util.h"
 
@@ -1112,7 +1113,7 @@ apply_cb (glTemplateDesigner *dialog)
 	
 	template = build_template (dialog);
 	gl_template_register (template);
-                                                                               
+        gl_mini_preview_pixbuf_cache_add_by_name (template->name);
 }
                          
 /*--------------------------------------------------------------------------*/
