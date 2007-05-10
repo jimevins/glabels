@@ -68,6 +68,9 @@ struct _glWdgtMediaSelectPrivate {
 
         GtkWidget    *template_treeview;
         GtkListStore *template_store;
+
+        /* Prevent recursion */
+	gboolean    stop_signals;
 };
 
 enum {
@@ -293,6 +296,8 @@ filter_changed_cb (GtkComboBox *combo,
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
 
+	media_select->priv->stop_signals = TRUE;
+
         /* Update template selections for new page size */
         page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo));
         category_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->category_combo));
@@ -307,13 +312,7 @@ filter_changed_cb (GtkComboBox *combo,
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
                 template_names = gl_template_get_name_list_all (page_size_id, category_id);
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-                g_signal_handlers_block_by_func (G_OBJECT (selection),
-                                                 template_selection_changed_cb,
-                                                 media_select);
                 load_list (media_select->priv->template_store, selection, template_names);
-                g_signal_handlers_unblock_by_func (G_OBJECT (selection),
-                                                   template_selection_changed_cb,
-                                                   media_select);
                 gl_template_free_name_list (template_names);
                 g_free (page_size_id);
 
@@ -322,6 +321,9 @@ filter_changed_cb (GtkComboBox *combo,
                                wdgt_media_select_signals[CHANGED], 0);
         }
         g_free (page_size_name);
+
+
+	media_select->priv->stop_signals = FALSE;
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
@@ -333,6 +335,10 @@ static void
 template_selection_changed_cb (GtkTreeSelection       *selection,
                                gpointer                user_data)
 {
+        glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
+
+	if (media_select->priv->stop_signals) return;
+
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
         /* Emit our "changed" signal */

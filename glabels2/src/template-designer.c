@@ -179,6 +179,8 @@ struct _glTemplateDesignerPrivate
 	gdouble          climb_rate;
 	gint             digits;
 
+        /* Prevent recursion */
+	gboolean    stop_signals;
 };
 
 /* Page numbers for traversing GtkAssistant */
@@ -1417,7 +1419,7 @@ cd_size_page_prepare_cb (glTemplateDesigner *dialog)
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Layout page widget changed cb.                                 */
+/* PRIVATE.  Prepare Layout page cb.                                        */
 /*--------------------------------------------------------------------------*/
 static void
 layout_page_prepare_cb (glTemplateDesigner *dialog)
@@ -1428,43 +1430,11 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 	gint    nlayouts;
 	gdouble nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
+	glTemplate *template;
 
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_nx_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_ny_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_x0_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_y0_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_dx_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout1_dy_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_nx_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_ny_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_x0_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_y0_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_dx_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (G_OBJECT(dialog->priv->layout2_dy_spin),
-					 G_CALLBACK(layout_page_changed_cb),
-					 G_OBJECT(dialog));
+	if (dialog->priv->stop_signals) return;
+	dialog->priv->stop_signals = TRUE;
+
 
 	/* Limit ranges based on already chosen page and label sizes. */
 	page_w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin));
@@ -1543,8 +1513,8 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 
 	/* Set visibility of layout2 widgets as appropriate. */
 	nlayouts = gtk_spin_button_get_value (GTK_SPIN_BUTTON (dialog->priv->nlayouts_spin));
-	if ( nlayouts == 1 ) {
-
+	if ( nlayouts == 1 )
+        {
 		gtk_widget_hide (dialog->priv->layout1_head_label);
 		gtk_widget_hide (dialog->priv->layout2_head_label);
 		gtk_widget_hide (dialog->priv->layout2_nx_spin);
@@ -1553,9 +1523,9 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 		gtk_widget_hide (dialog->priv->layout2_y0_spin);
 		gtk_widget_hide (dialog->priv->layout2_dx_spin);
 		gtk_widget_hide (dialog->priv->layout2_dy_spin);
-
-	} else {
-
+	}
+        else
+        {
 		gtk_widget_show (dialog->priv->layout1_head_label);
 		gtk_widget_show (dialog->priv->layout2_head_label);
 		gtk_widget_show (dialog->priv->layout2_nx_spin);
@@ -1564,47 +1534,15 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 		gtk_widget_show (dialog->priv->layout2_y0_spin);
 		gtk_widget_show (dialog->priv->layout2_dx_spin);
 		gtk_widget_show (dialog->priv->layout2_dy_spin);
-
 	}
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_nx_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_ny_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_x0_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_y0_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_dx_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout1_dy_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_nx_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_ny_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_x0_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_y0_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_dx_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (G_OBJECT(dialog->priv->layout2_dy_spin),
-					   G_CALLBACK(layout_page_changed_cb),
-					   G_OBJECT(dialog));
+	template = build_template (dialog);
+	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
+					   template);
+	gl_template_free (template);
 
-	layout_page_changed_cb (dialog);
+
+	dialog->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1615,12 +1553,17 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 {
 	glTemplate *template;
 
+	if (dialog->priv->stop_signals) return;
+	dialog->priv->stop_signals = TRUE;
+
 	template = build_template (dialog);
 
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
 					   template);
 
 	gl_template_free (template);
+
+	dialog->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/

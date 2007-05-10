@@ -163,7 +163,9 @@ style_changed_cb (glObjectEditor       *editor)
 	const gchar    *id;
 	gchar          *ex_string = NULL;
 	guint           digits;
-                                                                                
+
+        if (editor->priv->stop_signals) return;
+
         style_string =
 		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
                                                                                 
@@ -229,18 +231,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
  
 	gl_debug (DEBUG_EDITOR, "START");
 
-        g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_style_combo),
-                                         G_CALLBACK (style_changed_cb),
-                                         editor);
-        g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_text_check),
-                                         G_CALLBACK (gl_object_editor_changed_cb),
-                                         editor);
-        g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_cs_check),
-                                         G_CALLBACK (gl_object_editor_changed_cb),
-                                         editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_digits_spin),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
         style_string = gl_barcode_id_to_name (id);
  
@@ -285,18 +276,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 					  !editor->priv->data_format_fixed_flag);
 	}
  
-        g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_style_combo),
-					   G_CALLBACK (style_changed_cb),
-					   editor);
-        g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_text_check),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
-        g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_cs_check),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_digits_spin),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
+        editor->priv->stop_signals = FALSE;
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -346,12 +326,7 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_color_combo),
-					 gl_object_editor_changed_cb,
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->bc_key_combo),
-					 gl_object_editor_changed_cb,
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
 	gtk_widget_set_sensitive (editor->priv->bc_key_radio, merge_flag);
 
@@ -383,12 +358,7 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 						   color_node->key);
 	}	
 	
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_color_combo),
-					   gl_object_editor_changed_cb,
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->bc_key_combo),
-					   gl_object_editor_changed_cb,
-					   editor);
+        editor->priv->stop_signals = FALSE;
 	
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -436,7 +406,9 @@ gl_object_editor_get_bc_color (glObjectEditor      *editor)
 static void
 bc_radio_toggled_cb (glObjectEditor *editor)
 {
-    gl_debug (DEBUG_EDITOR, "START");
+        if (editor->priv->stop_signals) return;
+
+        gl_debug (DEBUG_EDITOR, "START");
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_color_radio))) {
                 gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);

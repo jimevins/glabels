@@ -122,12 +122,7 @@ gl_object_editor_set_lsize (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					 gl_object_editor_changed_cb,
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_theta_spin),
-					 gl_object_editor_changed_cb,
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
 	/* save a copy in internal units */
 	editor->priv->dx = dx;
@@ -147,12 +142,7 @@ gl_object_editor_set_lsize (glObjectEditor      *editor,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_theta_spin),
 				   theta);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					   gl_object_editor_changed_cb,
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_theta_spin),
-					   gl_object_editor_changed_cb,
-					   editor);
+        editor->priv->stop_signals = FALSE;
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -169,9 +159,7 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					 gl_object_editor_changed_cb,
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
 	/* save a copy in internal units */
 	editor->priv->dx_max = dx_max;
@@ -189,9 +177,7 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 				   0.0, 2.0*LENGTH (dx_max, dy_max));
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					   gl_object_editor_changed_cb,
-					   editor);
+        editor->priv->stop_signals = FALSE;
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -244,16 +230,12 @@ lsize_prefs_changed_cb (glObjectEditor *editor)
         digits = gl_prefs_get_units_precision ();
 
 	/* Update characteristics of r_spin */
-	g_signal_handlers_block_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					 gl_object_editor_changed_cb,
-					 editor);
+        editor->priv->stop_signals = TRUE;
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
 				    digits);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
 					climb_rate, 10.0*climb_rate);
-	g_signal_handlers_unblock_by_func (G_OBJECT(editor->priv->lsize_r_spin),
-					   gl_object_editor_changed_cb,
-					   editor);
+        editor->priv->stop_signals = FALSE;
 
 	/* Update r_units_label */
 	gtk_label_set_text (GTK_LABEL(editor->priv->lsize_r_units_label),

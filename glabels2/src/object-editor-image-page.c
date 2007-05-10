@@ -127,6 +127,8 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 static void
 img_radio_toggled_cb (glObjectEditor *editor)
 {
+        if (editor->priv->stop_signals) return;
+
         gl_debug (DEBUG_WDGT, "START");
  
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->img_file_radio))) {
@@ -153,18 +155,7 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 {
         gl_debug (DEBUG_EDITOR, "START");
  
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_button),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_combo),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_file_radio),
-					 G_CALLBACK (img_radio_toggled_cb),
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->img_key_radio),
-					 G_CALLBACK (img_radio_toggled_cb),
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
         gtk_widget_set_sensitive (editor->priv->img_key_radio, merge_flag);
  
@@ -193,18 +184,7 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 						   text_node->data);
         }
                                                                                 
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_button),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_combo),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_file_radio),
-                                           G_CALLBACK (img_radio_toggled_cb),
-                                           editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->img_key_radio),
-                                           G_CALLBACK (img_radio_toggled_cb),
-                                           editor);
+        editor->priv->stop_signals = FALSE;
                                                                                 
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -245,28 +225,28 @@ gl_object_editor_get_image (glObjectEditor      *editor)
 static void
 update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
 {
-  GtkWidget *preview;
-  char *filename;
-  GdkPixbuf *pixbuf;
-  gboolean have_preview;
+        GtkWidget *preview;
+        char *filename;
+        GdkPixbuf *pixbuf;
+        gboolean have_preview;
 
-  preview = GTK_WIDGET (data);
-  filename = gtk_file_chooser_get_preview_filename (file_chooser);
+        preview = GTK_WIDGET (data);
+        filename = gtk_file_chooser_get_preview_filename (file_chooser);
 
-  if (filename) {
-	  pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
-	  have_preview = (pixbuf != NULL);
-	  g_free (filename);
+        if (filename) {
+                pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
+                have_preview = (pixbuf != NULL);
+                g_free (filename);
 
-	  gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
-	  if (pixbuf)
-		  gdk_pixbuf_unref (pixbuf);
+                gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
+                if (pixbuf)
+                        gdk_pixbuf_unref (pixbuf);
 
-	  gtk_file_chooser_set_preview_widget_active (file_chooser,
-						      have_preview);
-  } else {
-	  gtk_file_chooser_set_preview_widget_active (file_chooser, FALSE);
-  }
+                gtk_file_chooser_set_preview_widget_active (file_chooser,
+                                                            have_preview);
+        } else {
+                gtk_file_chooser_set_preview_widget_active (file_chooser, FALSE);
+        }
 }
 
 /*--------------------------------------------------------------------------*/
@@ -352,6 +332,8 @@ static void
 img_selection_changed_cb (glObjectEditor *editor)
 {
         gchar *filename;
+
+        if (editor->priv->stop_signals) return;
 
 	gl_debug (DEBUG_EDITOR, "START");
 

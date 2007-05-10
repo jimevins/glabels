@@ -81,6 +81,9 @@ struct _glPrefsDialogPrivate
 
 	/* Default fill properties */
 	GtkWidget       *fill_color_combo;
+
+        /* Prevent recursion */
+	gboolean    stop_signals;
 };
 
 /*========================================================*/
@@ -140,7 +143,8 @@ gl_prefs_dialog_init (glPrefsDialog *dialog)
 					"prefs_notebook",
 					NULL);
 
-	if (!dialog->priv->gui) {
+	if (!dialog->priv->gui)
+        {
 		g_critical ("Could not open prefs-dialog.glade. gLabels may not be installed correctly!");
 		return;
 	}
@@ -172,7 +176,8 @@ gl_prefs_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-	if (dialog->priv->gui) {
+	if (dialog->priv->gui)
+        {
 		g_object_unref (G_OBJECT (dialog->priv->gui));
 	}
 	g_free (dialog->priv);
@@ -401,25 +406,29 @@ static void
 align_toggle_cb (GtkToggleButton *toggle,
                  glPrefsDialog   *dialog)
 {
-        if (gtk_toggle_button_get_active (toggle)) {
+        if (gtk_toggle_button_get_active (toggle))
+        {
   
-                if (GTK_WIDGET (toggle) == GTK_WIDGET (dialog->priv->text_left_toggle)) {
+                if (GTK_WIDGET (toggle) == GTK_WIDGET (dialog->priv->text_left_toggle))
+                {
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (dialog->priv->text_center_toggle),
                                                       FALSE);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (dialog->priv->text_right_toggle),
                                                       FALSE);
-                } else if (GTK_WIDGET (toggle) ==
-                           GTK_WIDGET (dialog->priv->text_center_toggle)) {
+                }
+                else if (GTK_WIDGET (toggle) == GTK_WIDGET (dialog->priv->text_center_toggle))
+                {
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (dialog->priv->text_left_toggle),
                                                       FALSE);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (dialog->priv->text_right_toggle),
                                                       FALSE);
-                } else if (GTK_WIDGET (toggle) ==
-                           GTK_WIDGET (dialog->priv->text_right_toggle)) {
+                }
+                else if (GTK_WIDGET (toggle) == GTK_WIDGET (dialog->priv->text_right_toggle))
+                {
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                                       (dialog->priv->text_left_toggle),
                                                       FALSE);
@@ -440,21 +449,7 @@ align_toggle_cb (GtkToggleButton *toggle,
 static void
 update_locale_page_from_prefs (glPrefsDialog *dialog)
 {
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->units_points_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->units_inches_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->units_mm_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->page_size_us_letter_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->page_size_a4_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
+	dialog->priv->stop_signals = TRUE;
 
 	switch (gl_prefs->units) {
 	case GL_UNITS_POINT:
@@ -477,33 +472,22 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 		break;
 	}
 
-	if ( g_strcasecmp(gl_prefs->default_page_size, US_LETTER_ID) == 0) {
+	if ( g_strcasecmp(gl_prefs->default_page_size, US_LETTER_ID) == 0)
+        {
 		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio),
-			TRUE);
-	} else if ( g_strcasecmp(gl_prefs->default_page_size, A4_ID) == 0) {
+			GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio), TRUE);
+	}
+        else if ( g_strcasecmp(gl_prefs->default_page_size, A4_ID) == 0)
+        {
 		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio),
-			TRUE);
-	} else {
+			GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio), TRUE);
+	}
+        else
+        {
 		g_message ("Unknown default page size"); /* Shouldn't happen */
 	}
 
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->units_points_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->units_inches_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->units_mm_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->page_size_us_letter_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->page_size_a4_radio),
-		G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
+	dialog->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -516,54 +500,25 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
         gchar    *good_font_family;
 	GdkColor *gdk_color;
  
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_family_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_size_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_bold_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_italic_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_left_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_center_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_right_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->text_line_spacing_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->line_width_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->line_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_block_by_func (
-		G_OBJECT(dialog->priv->fill_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
+	dialog->priv->stop_signals = TRUE;
 
 
         /* Make sure we have a valid font family.  if not provide a good default. */
         family_names = gl_util_get_font_family_list ();
         if (g_list_find_custom (family_names,
 				gl_prefs->default_font_family,
-				(GCompareFunc)g_utf8_collate)) {
+				(GCompareFunc)g_utf8_collate))
+        {
                 good_font_family = g_strdup (gl_prefs->default_font_family);
-        } else {
-                if (family_names != NULL) {
+        }
+        else
+        {
+                if (family_names != NULL)
+                {
                         good_font_family = g_strdup (family_names->data); /* 1st entry */
-                } else {
+                }
+                else
+                {
                         good_font_family = NULL;
                 }
         }
@@ -608,42 +563,7 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
         g_free (gdk_color);
 
 
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_family_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_size_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_bold_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_italic_toggle),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_left_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_center_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_right_toggle),
-		G_CALLBACK(align_toggle_cb), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->text_line_spacing_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->line_width_spin),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->line_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
-	g_signal_handlers_unblock_by_func (
-		G_OBJECT(dialog->priv->fill_color_combo),
-		G_CALLBACK(update_prefs_from_object_page), G_OBJECT(dialog));
+	dialog->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -652,25 +572,32 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
 static void
 update_prefs_from_locale_page (glPrefsDialog *dialog)
 {
+	if (dialog->priv->stop_signals) return;
+
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dialog->priv->units_points_radio))) {
+		    GTK_TOGGLE_BUTTON(dialog->priv->units_points_radio)))
+        {
 		gl_prefs->units = GL_UNITS_POINT;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dialog->priv->units_inches_radio))) {
+		    GTK_TOGGLE_BUTTON(dialog->priv->units_inches_radio)))
+        {
 		gl_prefs->units = GL_UNITS_INCH;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dialog->priv->units_mm_radio))) {
+		    GTK_TOGGLE_BUTTON(dialog->priv->units_mm_radio)))
+        {
 		gl_prefs->units = GL_UNITS_MM;
 	}
 
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio))) {
+		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio)))
+        {
 		gl_prefs->default_page_size = US_LETTER_ID;
 	}
 	if (gtk_toggle_button_get_active (
-		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio))) {
+		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio)))
+        {
 		gl_prefs->default_page_size = A4_ID;
 	}
 
@@ -686,6 +613,7 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
 	GdkColor *gdk_color;
 	gboolean  is_default;
 
+	if (dialog->priv->stop_signals) return;
 
         g_free (gl_prefs->default_font_family);
         gl_prefs->default_font_family =
@@ -694,9 +622,12 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
                 gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->text_size_spin));
 
         if (gtk_toggle_button_get_active
-            (GTK_TOGGLE_BUTTON (dialog->priv->text_bold_toggle))) {
+            (GTK_TOGGLE_BUTTON (dialog->priv->text_bold_toggle)))
+        {
                 gl_prefs->default_font_weight = PANGO_WEIGHT_BOLD;
-        } else {
+        }
+        else
+        {
                 gl_prefs->default_font_weight = PANGO_WEIGHT_NORMAL;
         }
 
@@ -706,22 +637,28 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
 
         gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->text_color_combo),
                                            &is_default);
-        if (!is_default) {
+        if (!is_default)
+        {
                 gl_prefs->default_text_color = gl_color_from_gdk_color (gdk_color);
         }
 
         if (gtk_toggle_button_get_active
-            (GTK_TOGGLE_BUTTON (dialog->priv->text_left_toggle))) {
+            (GTK_TOGGLE_BUTTON (dialog->priv->text_left_toggle)))
+        {
                 gl_prefs->default_text_alignment = GTK_JUSTIFY_LEFT;
-        } else
-            if (gtk_toggle_button_get_active
-                (GTK_TOGGLE_BUTTON (dialog->priv->text_right_toggle))) {
+        }
+        else if (gtk_toggle_button_get_active
+                 (GTK_TOGGLE_BUTTON (dialog->priv->text_right_toggle)))
+        {
                 gl_prefs->default_text_alignment = GTK_JUSTIFY_RIGHT;
-        } else
-            if (gtk_toggle_button_get_active
-                (GTK_TOGGLE_BUTTON (dialog->priv->text_center_toggle))) {
+        }
+        else if (gtk_toggle_button_get_active
+                 (GTK_TOGGLE_BUTTON (dialog->priv->text_center_toggle)))
+        {
                 gl_prefs->default_text_alignment = GTK_JUSTIFY_CENTER;
-        } else {
+        }
+        else
+        {
 		/* Should not happen. */
                 gl_prefs->default_text_alignment = GTK_JUSTIFY_LEFT;
         }
@@ -735,14 +672,16 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
 
         gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->line_color_combo),
                                            &is_default);
-        if (!is_default) {
+        if (!is_default)
+        {
                 gl_prefs->default_line_color = gl_color_from_gdk_color (gdk_color);
         }
 
 
         gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->fill_color_combo),
                                            &is_default);
-        if (!is_default) {
+        if (!is_default)
+        {
                 gl_prefs->default_fill_color = gl_color_from_gdk_color (gdk_color);
         }
 

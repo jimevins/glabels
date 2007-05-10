@@ -111,6 +111,8 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 static void
 data_radio_toggled_cb (glObjectEditor *editor)
 {
+        if (editor->priv->stop_signals) return;
+
         gl_debug (DEBUG_WDGT, "START");
  
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
@@ -149,12 +151,7 @@ gl_object_editor_set_data (glObjectEditor      *editor,
  
         gl_debug (DEBUG_EDITOR, "START");
  
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_text_entry),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT (editor->priv->data_key_combo),
-					 G_CALLBACK (gl_object_editor_changed_cb),
-					 editor);
+        editor->priv->stop_signals = TRUE;
 
         gtk_widget_set_sensitive (editor->priv->data_key_radio, merge_flag);
  
@@ -198,12 +195,7 @@ gl_object_editor_set_data (glObjectEditor      *editor,
         }
                                                                                 
 
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_text_entry),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT (editor->priv->data_key_combo),
-					   G_CALLBACK (gl_object_editor_changed_cb),
-					   editor);
+        editor->priv->stop_signals = FALSE;
 
         gl_debug (DEBUG_EDITOR, "END");
 }

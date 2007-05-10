@@ -1,3 +1,24 @@
+2007-05-09  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	* src/object-editor-size-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/template-designer.c:
+	* src/ui-property-bar.c:
+	* src/wdgt-media-select.c:
+		Replaced signal block/unblock pairs with simple flags.  This reduces
+		some code clutter, hopefully making it easier to read.
+
 2007-05-05  Jim Evins  <evins@snaught.com>
 
 	* src/template-designer.c: (apply_cb):

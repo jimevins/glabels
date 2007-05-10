@@ -78,8 +78,8 @@ struct _glUIPropertyBarPrivate {
 	/* Line width */
 	GtkWidget  *line_width_spin;
 
+        /* Prevent recursion */
 	gboolean    stop_signals;
-
 };
 
 
@@ -191,7 +191,8 @@ gl_ui_property_bar_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_PROPERTY_BAR (object));
 
-	if (property_bar->priv->view) {
+	if (property_bar->priv->view)
+        {
 		g_object_unref (G_OBJECT(property_bar->priv->view));
 	}
         if (property_bar->priv->gui)
@@ -242,7 +243,8 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 	gui = glade_xml_new (GLABELS_GLADE_DIR "property-bar.glade",
                              "property_toolbar", NULL);
 
-	if (!gui) {
+	if (!gui)
+        {
 		g_critical ("Could not open property-bar.glade. gLabels may not be installed correctly!");
 		return;
 	}
@@ -289,11 +291,14 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 	family_node = g_list_find_custom (family_names,
 					  gl_prefs->default_font_family,
 					  (GCompareFunc)g_utf8_collate);
-	if (family_node) {
+	if (family_node)
+        {
 		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
 					  g_list_position (family_names,
 							   family_node));
-	} else {
+	}
+        else
+        {
 		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo), 0);
 	}
 	gl_util_font_family_list_free (family_names);
@@ -383,12 +388,18 @@ reset_to_default_properties (glView *view,
 	family_names = gl_util_get_font_family_list ();
 	if (g_list_find_custom (family_names,
 				view->default_font_family,
-				(GCompareFunc)g_utf8_collate)) {
+				(GCompareFunc)g_utf8_collate))
+        {
 		good_font_family = g_strdup (view->default_font_family);
-	} else {
-		if (family_names != NULL) {
+	}
+        else
+        {
+		if (family_names != NULL)
+                {
 			good_font_family = g_strdup (family_names->data); /* 1st entry */
-		} else {
+		}
+                else
+                {
 			good_font_family = NULL;
 		}
 	}
@@ -475,9 +486,12 @@ gl_ui_property_bar_set_tooltips (glUIPropertyBar *property_bar,
 	data = gtk_tooltips_data_get (property_bar->priv->font_size_spin);
 	g_return_if_fail (data);
 
-	if (state) {
+	if (state)
+        {
 		gtk_tooltips_enable (data->tooltips);
-	} else {
+	}
+        else
+        {
 		gtk_tooltips_disable (data->tooltips);
 	}
 
@@ -527,30 +541,41 @@ update_text_properties (glView *view,
         
 	is_first_object = TRUE;
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
 		if (!gl_label_object_can_text (object)) 
 			continue;
 
 		font_family = gl_label_object_get_font_family (object);
-		if (font_family != NULL) {
+		if (font_family != NULL)
+                {
 			if (selection_font_family == NULL)
+                        {
 				selection_font_family = g_strdup (font_family);
+                        }
 			else 
-				if (strcmp (font_family, selection_font_family) != 0) 
+                        {
+				if (strcmp (font_family, selection_font_family) != 0)
+                                {
 					is_same_font_family = FALSE;
+                                }
+                        }
 			g_free (font_family);
 		}	
 
 		font_size = gl_label_object_get_font_size (object);
 		
 		text_color_node = gl_label_object_get_text_color (object);
-		if (text_color_node->field_flag) {
+		if (text_color_node->field_flag)
+                {
 			/* If a merge field is set we use the default color for merged color*/
 			text_color = GL_COLOR_MERGE_DEFAULT;
 			
-		} else {
+		}
+                else
+                {
 			text_color = text_color_node->color;
 		}
 		gl_color_node_free (&text_color_node);
@@ -559,13 +584,16 @@ update_text_properties (glView *view,
 		is_bold = gl_label_object_get_font_weight (object) == PANGO_WEIGHT_BOLD;
 		align = gl_label_object_get_text_alignment (object);
 
-		if (is_first_object) {
+		if (is_first_object)
+                {
 			selection_font_size = font_size;
 			selection_text_color = text_color;
 			selection_is_italic = is_italic;
 			selection_is_bold = is_bold;
 			selection_align = align;
-		} else {
+		}
+                else
+                {
 			if (font_size != selection_font_size) 
 				is_same_font_size = FALSE;
 			if (text_color != selection_text_color)
@@ -587,16 +615,20 @@ update_text_properties (glView *view,
 					   is_same_font_family?selection_font_family:"");
 	g_free (selection_font_family);
 
-	if (is_same_font_size) {
+	if (is_same_font_size)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same font size = %g", 
 			  selection_font_size);
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (property_bar->priv->font_size_spin),
 					   selection_font_size);
-	} else {
+	}
+        else
+        {
 		gtk_entry_set_text (GTK_ENTRY (property_bar->priv->font_size_spin), "");
 	}
 
-	if (is_same_text_color) {
+	if (is_same_text_color)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same text color = %08x", selection_text_color);
 		gdk_color = gl_color_to_gdk_color (selection_text_color);
 		color_combo_set_color (COLOR_COMBO (property_bar->priv->text_color_combo),
@@ -604,15 +636,19 @@ update_text_properties (glView *view,
 		g_free (gdk_color);
 	}
 
-	if (is_same_is_italic)  
+	if (is_same_is_italic)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same italic flag = %d", 
 			  selection_is_italic);
+        }
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
 					   selection_is_italic && is_same_is_italic);
 
-	if (is_same_is_bold)  
+	if (is_same_is_bold)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same bold flag = %d",
 			  selection_is_bold);
+        }
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
 					   selection_is_bold && is_same_is_bold);
 
@@ -651,32 +687,42 @@ update_fill_color (glView *view,
 	is_first_object = TRUE;
         selection_fill_color = 0;
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
 		if (!gl_label_object_can_fill (object)) 
 			continue;
 
 		fill_color_node = gl_label_object_get_fill_color (object);
-		if (fill_color_node->field_flag) {
+		if (fill_color_node->field_flag)
+                {
 			/* If a merge field is set we use the default color for merged color*/
 			fill_color = GL_COLOR_FILL_MERGE_DEFAULT;
 			
-		} else {
+		}
+                else
+                {
 			fill_color = fill_color_node->color;
 		}
 		gl_color_node_free (&fill_color_node);
 
-		if (is_first_object) {
+		if (is_first_object)
+                {
 			selection_fill_color = fill_color;
-		} else {
+		}
+                else
+                {
 			if (fill_color != selection_fill_color)
+                        {
 				is_same_fill_color = FALSE;
+                        }
 		}
 		is_first_object = FALSE;
 	}
 
-	if (is_same_fill_color) {
+	if (is_same_fill_color)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same fill color = %08x", selection_fill_color);
 		gdk_color = gl_color_to_gdk_color (selection_fill_color);
 		color_combo_set_color (COLOR_COMBO (property_bar->priv->fill_color_combo),
@@ -707,32 +753,42 @@ update_line_color (glView *view,
 	is_first_object = TRUE;
         selection_line_color = 0;
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
 		if (!gl_label_object_can_line_color (object)) 
 			continue;
 
 		line_color_node = gl_label_object_get_line_color (object);
-		if (line_color_node->field_flag) {
+		if (line_color_node->field_flag)
+                {
 			/* If a merge field is set we use the default color for merged color*/
 			line_color = GL_COLOR_MERGE_DEFAULT;
 			
-		} else {
+		}
+                else
+                {
 			line_color = line_color_node->color;
 		}
 		gl_color_node_free (&line_color_node);
 
-		if (is_first_object) {
+		if (is_first_object)
+                {
 			selection_line_color = line_color;
-		} else {
+		}
+                else
+                {
 			if (line_color != selection_line_color)
+                        {
 				is_same_line_color = FALSE;
+                        }
 		}
 		is_first_object = FALSE;
 	}
 
-	if (is_same_line_color) {
+	if (is_same_line_color)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line color = %08x", selection_line_color);
 		gdk_color = gl_color_to_gdk_color (selection_line_color);
 		color_combo_set_color (COLOR_COMBO (property_bar->priv->line_color_combo),
@@ -761,7 +817,8 @@ update_line_width (glView *view,
 	is_first_object = TRUE;
         selection_line_width = 0;
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
+	for (p = view->selected_object_list; p != NULL; p = p->next)
+        {
 
 		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
 		if (!gl_label_object_can_line_width (object)) 
@@ -769,20 +826,28 @@ update_line_width (glView *view,
 
 		line_width = gl_label_object_get_line_width (object);
 
-		if (is_first_object) {
+		if (is_first_object)
+                {
 			selection_line_width = line_width;
-		} else {
+		}
+                else
+                {
 			if (line_width != selection_line_width)
+                        {
 				is_same_line_width = FALSE;
+                        }
 		}
 		is_first_object = FALSE;
 	}
 
-	if (is_same_line_width) {
+	if (is_same_line_width)
+        {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line width = %g", selection_line_width);
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (property_bar->priv->line_width_spin),
 					   selection_line_width);
-	} else {
+	}
+        else
+        {
 		gtk_entry_set_text (GTK_ENTRY (property_bar->priv->line_width_spin), "");
 	}
 }
@@ -792,31 +857,31 @@ selection_changed_cb (glUIPropertyBar *property_bar)
 {
 	glView *view = property_bar->priv->view;
 	
-	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
 
+	if (property_bar->priv->stop_signals) return;
 	property_bar->priv->stop_signals = TRUE;
 
-	if (gl_view_is_selection_empty (view)) {
+	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
+	if (gl_view_is_selection_empty (view))
+        {
 		/* No selection: make all controls active. */
 		reset_to_default_properties (view, property_bar);
 		set_doc_items_sensitive (property_bar, TRUE);
-
-	} else {
-
+	}
+        else
+        {
 		update_text_properties (view, property_bar);
 		update_fill_color (view, property_bar);
 		update_line_color (view, property_bar);
 		update_line_width (view, property_bar);
-
 	}
 
-	property_bar->priv->stop_signals = FALSE;
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -828,17 +893,14 @@ font_family_changed_cb (GtkComboBox     *combo,
 {
 	gchar *font_family;
 
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
-
 	font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
-	if ( strlen(font_family) ) {
+	if ( strlen(font_family) )
+        {
 		gl_view_set_selection_font_family (property_bar->priv->view,
 						   font_family);
 		gl_view_set_default_font_family   (property_bar->priv->view,
@@ -846,11 +908,9 @@ font_family_changed_cb (GtkComboBox     *combo,
 	}
 	g_free (font_family);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -862,14 +922,10 @@ font_size_changed_cb (GtkSpinButton        *spin,
 {
 	gdouble font_size;
 
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
 
 	font_size = gtk_spin_button_get_value (spin);
 
@@ -878,11 +934,9 @@ font_size_changed_cb (GtkSpinButton        *spin,
 	gl_view_set_default_font_size   (property_bar->priv->view,
 					 font_size);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -898,16 +952,12 @@ text_color_changed_cb (ColorCombo           *cc,
 {
 	glColorNode *text_color_node;
 
-	if (property_bar->priv->stop_signals)
-		return;
-
 	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
 
-	gl_debug (DEBUG_PROPERTY_BAR, "START");
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
+	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	text_color_node = gl_color_node_new_default ();
 	text_color_node->color = gl_color_from_gdk_color (gdk_color);
@@ -915,29 +965,27 @@ text_color_changed_cb (ColorCombo           *cc,
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
 		  text_color_node->color, custom, by_user, is_default);
 
-	if (is_default) {
+	if (is_default)
+        {
 		text_color_node->color = gl_prefs->default_text_color;
 		gl_view_set_selection_text_color (property_bar->priv->view,
 						  text_color_node);
 		gl_view_set_default_text_color   (property_bar->priv->view,
 						  gl_prefs->default_text_color);
-
-	} else {
-
+	}
+        else
+        {
 		gl_view_set_selection_text_color (property_bar->priv->view,
 						  text_color_node);
 		gl_view_set_default_text_color   (property_bar->priv->view,
 						  text_color_node->color);
-
 	}
 
 	gl_color_node_free (&text_color_node);
 	
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -953,16 +1001,12 @@ fill_color_changed_cb (ColorCombo           *cc,
 {
 	glColorNode *fill_color_node;
 
-	if (property_bar->priv->stop_signals)
-		return;
-
 	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
 
-	gl_debug (DEBUG_PROPERTY_BAR, "START");
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
+	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	fill_color_node = gl_color_node_new_default ();
 
@@ -971,29 +1015,27 @@ fill_color_changed_cb (ColorCombo           *cc,
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
 		  fill_color_node->color, custom, by_user, is_default);
 
-	if (is_default) {
+	if (is_default)
+        {
 
 		fill_color_node->color = GL_COLOR_NONE;
 		gl_view_set_selection_fill_color (property_bar->priv->view,
 						  fill_color_node);
 		gl_view_set_default_fill_color   (property_bar->priv->view,
 						  fill_color_node->color);
-
-	} else {
-
+	}
+        else
+        {
 		gl_view_set_selection_fill_color (property_bar->priv->view,
 						  fill_color_node);
 		gl_view_set_default_fill_color   (property_bar->priv->view,
 						  fill_color_node->color);
-
 	}
 	gl_color_node_free (&fill_color_node);
 	
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1009,16 +1051,12 @@ line_color_changed_cb (ColorCombo           *cc,
 {
 	glColorNode *line_color_node;
 
-	if (property_bar->priv->stop_signals)
-		return;
-
 	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
 
-	gl_debug (DEBUG_PROPERTY_BAR, "START");
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
+	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	line_color_node = gl_color_node_new_default ();
 	line_color_node->color = gl_color_from_gdk_color (gdk_color);
@@ -1026,28 +1064,26 @@ line_color_changed_cb (ColorCombo           *cc,
 	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
 		  line_color_node->color, custom, by_user, is_default);
 
-	if (is_default) {
+	if (is_default)
+        {
 		line_color_node->color = GL_COLOR_NONE;
 		gl_view_set_selection_line_color (property_bar->priv->view,
 						  line_color_node);
 		gl_view_set_default_line_color   (property_bar->priv->view,
 						  line_color_node->color);
-
-	} else {
-
+	}
+        else
+        {
 		gl_view_set_selection_line_color (property_bar->priv->view,
 						  line_color_node);
 		gl_view_set_default_line_color   (property_bar->priv->view,
 						  line_color_node->color);
-
 	}
 	gl_color_node_free (&line_color_node);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1059,31 +1095,24 @@ line_width_changed_cb (GtkSpinButton        *spin,
 {
 	gdouble line_width;
 
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	if (property_bar->priv->view) {
-
-		g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-						 selection_changed_cb,
-						 property_bar);
-
+	if (property_bar->priv->view)
+        {
 		line_width = gtk_spin_button_get_value (spin);
 
 		gl_view_set_selection_line_width (property_bar->priv->view,
 						  line_width);
 		gl_view_set_default_line_width   (property_bar->priv->view,
 						  line_width);
-
-		g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-						   selection_changed_cb,
-						   property_bar);
-
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -1097,14 +1126,10 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 	PangoWeight     weight;
 
 
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
 
 	state = gtk_toggle_tool_button_get_active (toggle);
 
@@ -1113,11 +1138,9 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 	gl_view_set_selection_font_weight (property_bar->priv->view, weight);
 	gl_view_set_default_font_weight   (property_bar->priv->view, weight);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 						  
 /*---------------------------------------------------------------------------*/
@@ -1129,25 +1152,19 @@ font_italic_toggled_cb (GtkToggleToolButton  *toggle,
 {
 	gboolean state;
 
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
 
 	state = gtk_toggle_tool_button_get_active (toggle);
 
 	gl_view_set_selection_font_italic_flag (property_bar->priv->view, state);
 	gl_view_set_default_font_italic_flag   (property_bar->priv->view, state);
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 						  
 /*---------------------------------------------------------------------------*/
@@ -1157,14 +1174,10 @@ static void
 text_align_toggled_cb (GtkToggleToolButton  *toggle,
 		       glUIPropertyBar      *property_bar)
 {
-	if (property_bar->priv->stop_signals)
-		return;
+	if (property_bar->priv->stop_signals) return;
+	property_bar->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
-	g_signal_handlers_block_by_func (G_OBJECT(property_bar->priv->view->label),
-					 selection_changed_cb,
-					 property_bar);
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio)))
 	{		
@@ -1190,11 +1203,9 @@ text_align_toggled_cb (GtkToggleToolButton  *toggle,
 						      PANGO_ALIGN_RIGHT);
 	}
 
-	g_signal_handlers_unblock_by_func (G_OBJECT(property_bar->priv->view->label),
-					   selection_changed_cb,
-					   property_bar);
-
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
+
+	property_bar->priv->stop_signals = FALSE;
 }
 
 

@@ -321,6 +321,8 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 void
 gl_object_editor_changed_cb (glObjectEditor *editor)
 {
+        if (editor->priv->stop_signals) return;
+
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Emit our "changed" signal */
@@ -335,6 +337,8 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 void
 gl_object_editor_size_changed_cb (glObjectEditor *editor)
 {
+        if (editor->priv->stop_signals) return;
+
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Emit our "size_changed" signal */
