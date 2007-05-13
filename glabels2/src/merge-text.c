@@ -81,6 +81,7 @@ static void           gl_merge_text_copy            (glMerge          *dst_merge
 
 static GList         *parse_line                    (FILE             *fp,
 						     gchar             delim);
+static gchar         *parse_field                   (gchar            *raw_field);
 static void           free_fields                   (GList           **fields);
 
 
@@ -358,7 +359,24 @@ gl_merge_text_copy (glMerge *dst_merge,
 }
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Parse line (quoted values may span multiple lines).             */
+/* PRIVATE.  Parse line.                                                     */
+/*                                                                           */
+/* Attempt to be a robust parser of various CSV (and similar) formats.       */
+/*                                                                           */
+/* Split into fields, accounting for:                                        */
+/*   - delimeters may be embedded in quoted text (")                         */
+/*   - delimeters may be "escaped" by a leading backslash (\)                */
+/*   - quotes may be embedded in quoted text as two adjacent quotes ("")     */
+/*   - quotes may be "escaped" either within or outside of quoted text.      */
+/*   - newlines may be embedded in quoted text, allowing a field to span     */
+/*     more than one line.                                                   */
+/*                                                                           */
+/* This function does not do any parsing of the individual fields, other     */
+/* than to correctly interpet delimeters.  Actual parsing of the individual  */
+/* fields is done in parse_field().                                          */
+/*                                                                           */
+/* Returns a list of fields.  A blank line is considered a line with one     */
+/* empty field.  Returns empty (NULL) when done.                             */
 /*---------------------------------------------------------------------------*/
 static GList *
 parse_line (FILE  *fp,
@@ -367,9 +385,8 @@ parse_line (FILE  *fp,
 	GList *list = NULL;
 	GString *string;
 	gint c;
-	enum { BEGIN, NORMAL, NORMAL_ESCAPED,
-	       QUOTED, QUOTED_ESCAPED, QUOTED_QUOTE1,
-	       DONE } state;
+	enum { BEGIN, NORMAL, QUOTED, QUOTED_QUOTE1,
+               NORMAL_ESCAPED, QUOTED_ESCAPED, DONE } state;
 
 	state = BEGIN;
 	string = g_string_new( "" );
@@ -379,167 +396,139 @@ parse_line (FILE  *fp,
 		switch (state) {
 
 		case BEGIN:
+                        if ( c == delim )
+                        {
+                                /* first field is empty. */
+                                list = g_list_append (list, g_strdup (""));
+				state = NORMAL;
+                                break;
+                        }
 			switch (c) {
-			case '\\':
-				state = NORMAL_ESCAPED;
-				break;
 			case '"':
+                                string = g_string_append_c (string, c);
 				state = QUOTED;
 				break;
-			case '\r':
-				/* Strip CR. */
-				state = NORMAL;
+			case '\\':
+                                string = g_string_append_c (string, c);
+				state = NORMAL_ESCAPED;
 				break;
 			case '\n':
 				/* treat as one empty field. */
-				list = g_list_append (list,
-						      g_strdup (""));
+				list = g_list_append (list, g_strdup (""));
 				state = DONE;
 				break;
 			case EOF:
+                                /* end of file, no more lines. */
 				state = DONE;
 				break;
 			default:
-				if ( c != delim ) {
-					string = g_string_append_c (string, c);
-				} else {
-					list = g_list_append (list,
-						      g_strdup (string->str));
-					string = g_string_assign( string, "" );
-				}
+                                string = g_string_append_c (string, c);
 				state = NORMAL;
 				break;
 			}
 			break;
 
 		case NORMAL:
+                        if ( c == delim )
+                        {
+                                list = g_list_append (list, parse_field (string->str));
+                                string = g_string_assign( string, "" );
+                                state = NORMAL;
+                                break;
+                        }
 			switch (c) {
-			case '\\':
-				state = NORMAL_ESCAPED;
-				break;
 			case '"':
+                                string = g_string_append_c (string, c);
 				state = QUOTED;
 				break;
-			case '\r':
-				/* Strip CR. */
+			case '\\':
+                                string = g_string_append_c (string, c);
+				state = NORMAL_ESCAPED;
 				break;
 			case '\n':
 			case EOF:
-				list = g_list_append (list,
-						      g_strdup (string->str));
+				list = g_list_append (list, parse_field (string->str));
 				state = DONE;
 				break;
 			default:
-				if ( c != delim ) {
-					string = g_string_append_c (string, c);
-				} else {
-					list = g_list_append (list,
-						      g_strdup (string->str));
-					string = g_string_assign( string, "" );
-				}
-				break;
-			}
-			break;
-
-		case NORMAL_ESCAPED:
-			switch (c) {
-			case 'n':
-				string = g_string_append_c (string, '\n');
-				state = NORMAL;
-				break;
-			case 't':
-				string = g_string_append_c (string, '\t');
-				state = NORMAL;
-				break;
-			case '\r':
-				/* Strip CR, stay ESCAPED. */
-				break;
-			case EOF:
-				state = DONE;
-				break;
-			default:
-				string = g_string_append_c (string, c);
-				state = NORMAL;
+                                string = g_string_append_c (string, c);
+                                state = NORMAL;
 				break;
 			}
 			break;
 
 		case QUOTED:
 			switch (c) {
-			case '\\':
-				state = QUOTED_ESCAPED;
-				break;
 			case '"':
+                                string = g_string_append_c (string, c);
 				state = QUOTED_QUOTE1;
 				break;
-			case '\r':
-				/* Strip CR. */
+			case '\\':
+                                string = g_string_append_c (string, c);
+				state = QUOTED_ESCAPED;
 				break;
 			case EOF:
 				/* File ended mid way through quoted item */
-				list = g_list_append (list,
-						      g_strdup (string->str));
+				list = g_list_append (list, parse_field (string->str));
 				state = DONE;
 				break;
 			default:
 				string = g_string_append_c (string, c);
-				break;
-			}
-			break;
-
-		case QUOTED_ESCAPED:
-			switch (c) {
-			case 'n':
-				string = g_string_append_c (string, '\n');
-				state = QUOTED;
-				break;
-			case 't':
-				string = g_string_append_c (string, '\t');
-				state = QUOTED;
-				break;
-			case '\r':
-				/* Strip CR, stay ESCAPED. */
-				break;
-			case EOF:
-				/* File ended mid way through quoted item */
-				list = g_list_append (list,
-						      g_strdup (string->str));
-				state = DONE;
-				break;
-			default:
-				string = g_string_append_c (string, c);
-				state = QUOTED;
 				break;
 			}
 			break;
 
 		case QUOTED_QUOTE1:
+                        if ( c == delim )
+                        {
+                                list = g_list_append (list, parse_field (string->str));
+                                string = g_string_assign( string, "" );
+                                state = NORMAL;
+                                break;
+                        }
 			switch (c) {
 			case '"':
 				/* insert quotes in string, stay quoted. */
 				string = g_string_append_c (string, c);
 				state = QUOTED;
 				break;
-			case '\r':
-				/* Strip CR, return to NORMAL. */
-				state = NORMAL;
-				break;
 			case '\n':
 			case EOF:
 				/* line or file ended after quoted item */
-				list = g_list_append (list,
-						      g_strdup (string->str));
+				list = g_list_append (list, parse_field (string->str));
 				state = DONE;
 				break;
 			default:
-				if ( c != delim ) {
-					string = g_string_append_c (string, c);
-				} else {
-					list = g_list_append (list,
-						      g_strdup (string->str));
-					string = g_string_assign( string, "" );
-				}
+                                string = g_string_append_c (string, c);
 				state = NORMAL;
+				break;
+			}
+			break;
+
+		case NORMAL_ESCAPED:
+			switch (c) {
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list, parse_field (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				state = NORMAL;
+				break;
+			}
+			break;
+
+		case QUOTED_ESCAPED:
+			switch (c) {
+			case EOF:
+				/* File ended mid way through quoted item */
+				list = g_list_append (list, parse_field (string->str));
+				state = DONE;
+				break;
+			default:
+				string = g_string_append_c (string, c);
+				state = QUOTED;
 				break;
 			}
 			break;
@@ -553,6 +542,137 @@ parse_line (FILE  *fp,
 	g_string_free( string, TRUE );
 
 	return list;
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Parse field.                                                    */
+/*                                                                           */
+/*  - Strip leading and trailing white space, unless quoted.                 */
+/*  - Strip CR, unless escaped.                                              */
+/*  - Expand '\n' and '\t' into newline and tab characters.                  */
+/*  - Remove quotes, unless escaped (\" anywhere or "" within quotes)        */
+/*---------------------------------------------------------------------------*/
+static gchar *
+parse_field (gchar  *raw_field)
+{
+	GString *string;
+        gchar   *pass1_field, *c, *field;
+	enum { NORMAL, NORMAL_ESCAPED, QUOTED, QUOTED_ESCAPED, QUOTED_QUOTE1} state;
+
+
+        /*
+         * Pass 1: remove leading and trailing spaces.
+         */
+        pass1_field = g_strdup (raw_field);
+        g_strstrip (pass1_field);
+
+        /*
+         * Pass 2: resolve quoting and escaping.
+         */
+	state = NORMAL;
+	string = g_string_new( "" );
+        for ( c=pass1_field; *c != 0; c++ )
+        {
+		switch (state) {
+
+		case NORMAL:
+			switch (*c) {
+			case '\\':
+				state = NORMAL_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			default:
+                                string = g_string_append_c (string, *c);
+				break;
+			}
+			break;
+
+		case NORMAL_ESCAPED:
+			switch (*c) {
+			case 'n':
+				string = g_string_append_c (string, '\n');
+				state = NORMAL;
+				break;
+			case 't':
+				string = g_string_append_c (string, '\t');
+				state = NORMAL;
+				break;
+			default:
+				string = g_string_append_c (string, *c);
+				state = NORMAL;
+				break;
+			}
+			break;
+
+		case QUOTED:
+			switch (*c) {
+			case '\\':
+				state = QUOTED_ESCAPED;
+				break;
+			case '"':
+				state = QUOTED_QUOTE1;
+				break;
+			case '\r':
+				/* Strip CR. */
+				break;
+			default:
+				string = g_string_append_c (string, *c);
+				break;
+			}
+			break;
+
+		case QUOTED_ESCAPED:
+			switch (*c) {
+			case 'n':
+				string = g_string_append_c (string, '\n');
+				state = QUOTED;
+				break;
+			case 't':
+				string = g_string_append_c (string, '\t');
+				state = QUOTED;
+				break;
+			default:
+				string = g_string_append_c (string, *c);
+				state = QUOTED;
+				break;
+			}
+			break;
+
+		case QUOTED_QUOTE1:
+			switch (*c) {
+			case '"':
+				/* insert quotes in string, stay quoted. */
+				string = g_string_append_c (string, *c);
+				state = QUOTED;
+				break;
+			case '\r':
+				/* Strip CR, return to QUOTED. */
+				state = QUOTED;
+				break;
+			default:
+                                string = g_string_append_c (string, *c);
+				state = NORMAL;
+				break;
+			}
+			break;
+
+		default:
+			g_assert_not_reached();
+			break;
+		}
+
+	}
+
+        field = g_strdup (string->str);
+	g_string_free( string, TRUE );
+        g_free (pass1_field);
+
+	return field;
 }
 
 /*---------------------------------------------------------------------------*/
