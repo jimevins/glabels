@@ -2,8 +2,6 @@
 Development plan
 ----------------
 This development plan sets a specific set of milestones for future versions of glabels.
-At this time (just prior to releasing 2.0.0) these milestones are somewhat nebulous and
-subject to change.
 
 
 Goals for 2.0.x:
@@ -13,12 +11,9 @@ Goals for 2.0.x:
 		-  Translations
 
 
-Possible Goals for 2.1.x (next development branch):
+Possible Goals for 2.1.x (current development branch):
 
-		-  Undo, Redo capability (possibly backport to 2.0.x)
-
-		-  Editing text in-place (may not be all that necessary with the new
-		   object editor sidebar.
+		-  Undo, Redo capability
 
 		-  Make text items rich.  I.e. allow multiple characteristics
 		   to exist within a single object.
@@ -26,31 +21,47 @@ Possible Goals for 2.1.x (next development branch):
 		-  Text effects.  (follow contour, non-rectangular text boxes,
 	           ...)
 
-		-  Object shadows.  This is very important for text that
-		   overlays photographs, so that it stands out against
-		   varying backgrounds.
-
-		-  Possible technology upgrades:
-
-			o Pango.  This is a must to support rich text items.
-
-			o Cairo-based canvas.  Either someone elses or home-grown.
-
-			o Cairo print rendering.
-
-
 		-  Ability to select/unselect individual records during a merge-print.
 
 		-  Add additional "merge" backends.  Candidates include:
-			vCard
 			generic XML
 			freedb (CDDB) for CD labels
 			gnome-db
 
-		-  Add facility for tweaking output (origin).  This should really be
-		   part of the underlying print system but is currently difficult to
-		   accomplish, so I may want to add the hack. (candidate to backport
-		   to 2.0.x)
+		-  Printer calibration tool: a facility for tweaking output origin and
+		   scale.  This should really be part of the underlying print system but
+		   currently is not, so I may want to add the hack.
+
+		-  Adjustable grid spacing.  Spacing of visible grid should be user
+		   adjustable.  This grid spacing should be an integral multiple of
+		   a finer invisible grid.  There should be a "snap to grid" toggle,
+		   that causes all posistioning and sizing performed on the canvas
+		   to snap to the closest grid.  The possible grid spacing should be
+		   appropriate for the current units selected (e.g. .1 points, .01 mm,
+		   1/64 inch, 0.001 inch).
+
+		-  Handle namespace collisions better in template designer.  Ask to
+		   override existing templates, or perhaps automatically suffix the
+		   name when duplicate.  Allow for management of custom templates
+		   (i.e. delete, rename, edit).
+
+Completed Goals for 2.1.x:
+
+		-  Object shadows.  This is very important for text that
+		   overlays photographs, so that it stands out against
+		   varying backgrounds.
+
+		-  Technology upgrades:
+
+			o Pango.  This is a must to support rich text items.
+
+			o Cairo-based canvas.
+
+			o Cairo print rendering.
+
+			o GtkPrint.
+
+			o GtkRecentManager.
 
 
 
