@@ -114,6 +114,11 @@ gl_barcode_postnet_new (const gchar    *id,
 			return NULL;
 		}
 	}
+	if ( (g_strcasecmp (id, "CEPNET") == 0) ) {
+		if (!is_length_valid (digits, 8)) {
+			return NULL;
+		}
+	}
 
 	/* First get code string */
 	code = postnet_code (digits);

@@ -6,33 +6,23 @@ Jim Evins <evins@snaught.com>
 Acknowledgments
 ===============
 
-The GNU Barcode Library provides a large chunk of the barcode functionality
+- The GNU Barcode Library provides a large chunk of the barcode functionality
 and is distributed with glabels.  See ./barcode-0.98/README for more
 information.  The author:
 
 	Alessandro Rubini <rubini@gnu.org>
 
+- The iec16022 library provides encoding for 2D barcodes.  See
+iec16022-0.2.1/README for more information.
 
-I borrowed the hacktext canvas item from libgnomeprint to render text that
-is faithful to the final printed product.  Original authors of the hacktext
-canvas item:
-
-	Federico Mena <federico@nuclecu.unam.mx>,
-	Raph Levien <raph@acm.org>,
-	Lauris Kaplinski <lauris@helixcode.com>
-
-Glabels includes modified versions of several widgets from the GAL library.
+- Glabels includes modified versions of several widgets from the GAL library.
 These are copyright:
 
 	* Copyright 2000, 2001, Ximian, Inc.
 	* Copyright 2000, Michael Levy
 	* Copyright 2001, Almer S. Tigelaar
 
-Glabels includes gnome-recent objects.  The author:
-
-	James Willcox <jwillcox@cs.indiana.edu>
-
-Glabels includes a modified version of the gimpchainbutton widget from the
+- Glabels includes a modified version of the gimpchainbutton widget from the
 gimp, as well as several stock icons from the gimp's default theme.
 These are copyright:
 
@@ -53,6 +43,7 @@ Glabels includes contributions from:
 	José Dapena Paz <jdapena@igalia.com>
 	Akkana <akkana@shallowsky.com>
 	Dag Wieers <dag@wieers.com>
+	Mário Meyer <mario@meyer.eti.br>
 
 Translations:
 

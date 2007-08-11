@@ -1,3 +1,14 @@
+2007-08-10  Jim Evins  <evins@snaught.com>
+
+	* src/bc-postnet.c: (gl_barcode_postnet_new):
+	* src/bc.c:
+		Added support for Brazilian CEPNet barcodes.  This is simply an
+		instance of the US POSTNET format with 8 digits.  Patch supplied
+		by Mário Meyer in bug # 1768792.
+	* AUTHORS:
+		Updated acknowledgments to reflect above patch and recent shuffling
+		of underlying technology.
+
 2007-05-13  Jim Evins  <evins@snaught.com>
 
 	* src/merge-text.c: (parse_line), (parse_field):

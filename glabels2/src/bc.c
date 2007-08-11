@@ -76,6 +76,9 @@ static const Backend backends[] = {
 	{ "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
+	{ "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
+	  FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
+
 	{ "EAN", N_("EAN (any)"), gl_barcode_gnubarcode_new,
 	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
 
