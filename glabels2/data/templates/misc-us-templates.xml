@@ -40,7 +40,7 @@
          _description="CD/DVD Labels (face only)">
     <Meta category="label"/>
     <Meta category="media"/>
-    <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
+    <Label-cd id="0" radius="166.5" hole="58.5" waste="9">
       <Markup-margin size="5"/>
       <Layout nx="1" ny="2" x0="139.5" y0="49.5" dx="0" dy="360"/>
     </Label-cd>

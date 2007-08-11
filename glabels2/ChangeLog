@@ -1,3 +1,14 @@
+2007-08-11  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/misc-us-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Caught up with backlog of template submissions.
+
 2007-08-10  Jim Evins  <evins@snaught.com>
 
 	* src/bc-postnet.c: (gl_barcode_postnet_new):

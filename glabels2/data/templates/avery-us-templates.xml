@@ -518,6 +518,17 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 6570 family: ID Labels.                                       -->
+  <!-- =================================================================== -->
+  <Template name="Avery  6570" size="US-Letter" _description="ID Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="126pt" height="90pt" round="4.464pt" x_waste="6.768pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="4" ny="8" x0="36pt" y0="36pt" dx="139.536pt" dy="90pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   x -->
   <!-- =================================================================== -->
   <Template name="Avery  8165" size="US-Letter" _description="Full Sheet Labels">
@@ -575,6 +586,18 @@
     <!-- Look alikes -->
     <Alias name="IP Invent It! #00064-3"/>
     <Alias name="Worldlabel OL175"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8960 family: CD/DVD Labels.                                   -->
+  <!-- =================================================================== -->
+  <Template name="Avery  8960" size="US-Letter" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="166.5pt" hole="14.1732pt" waste="9.07087pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="138.898pt" y0="50.1732pt" dx="351.142pt" dy="360pt"/>
+    </Label-cd>
   </Template>
 
   <!-- =================================================================== -->

@@ -7,6 +7,18 @@
   <!-- ******************************************************************** -->
 
   <!-- =================================================================== -->
+  <!-- Avery L6015 family: CD/DVD Labels, 2 per sheet                      -->
+  <!-- =================================================================== -->
+  <Template name="Avery L6015" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="165.827pt" hole="58.1102pt" waste="9.07087pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="131.811pt" y0="60.6614pt" dx="349.795pt" dy="392.4pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
   <!-- =================================================================== -->
   <Template name="Avery   7160" size="A4" _description="Mailing labels">
@@ -129,6 +141,18 @@
       <Layout nx="2" ny="4" x0="17mm" y0="5mm" dx="104.5mm" dy="72mm"/> 
     </Label-rectangle>
     <Alias name="Avery  L7664"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery L7676 family: CD/DVD Labels, 2 per sheet                      -->
+  <!-- =================================================================== -->
+  <Template name="Avery L7676" size="A4" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="165.827pt" hole="24.9449pt" waste="5.66929pt">
+      <Markup-margin size="5.66929pt"/>
+      <Layout nx="1" ny="2" x0="131.811pt" y0="62.3622pt" dx="342.992pt" dy="388.346pt"/>
+    </Label-cd>
   </Template>
 
   <!-- =================================================================== -->

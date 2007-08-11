@@ -206,7 +206,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4760: File Labels, 192 x 38 mm, 7 per sheet               -->
   <!-- =================================================================== -->
-  <Template name="Zweckform  4760" size="A4" description="File Back Labels">
+  <Template name="Zweckform  4760" size="A4" _description="File Back Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="544.252pt" height="107.717pt" round="5.66929pt" waste="0pt">
       <Markup-margin size="9pt"/>
@@ -214,6 +214,17 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Zweckform 3348: Adress Labels.                                      -->
+  <!-- =================================================================== -->
+  <Template name="Zweckform  3348" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="189.921pt" height="107.717pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="3" ny="7" x0="5.66929pt" y0="56.6929pt" dx="198.425pt" dy="107.717pt"/>
+    </Label-rectangle>
+  </Template>
 
 </Glabels-templates>
 

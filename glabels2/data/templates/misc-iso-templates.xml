@@ -152,6 +152,28 @@
   </Template>
  
   <!-- =================================================================== -->
+  <!-- DATA BECKER 0526 Address Labels.                                    -->
+  <!-- =================================================================== -->
+  <Template name="Databecker 0526" size="A4" _description="Address Labels">
+    <Label-rectangle id="0" width="198.425pt" height="102.047pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="3" ny="8" x0="3.93386e-16pt" y0="15.5906pt" dx="198.425pt" dy="102.047pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- DATA BECKER 0598 Address Labels.                                    -->
+  <!-- =================================================================== -->
+  <Template name="Databecker 0598" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="274.961pt" height="119.906pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="2" ny="6" x0="23.2441pt" y0="65.1968pt" dx="274.961pt" dy="119.906pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Dataline 57125: Business Cards, 54.0 x 86.0 mm, 10 per sheet        -->
   <!-- =================================================================== -->
   <Template name="Dataline 57125" size="A4" _description="Business Cards">
@@ -448,6 +470,30 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Staples EU Business Cards Supreme.                                  -->
+  <!-- =================================================================== -->
+  <Template name="Staples EU BC Supreme" size="A4" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="240.945pt" height="155.906pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9.07087pt"/>
+      <Layout nx="1" ny="5" x0="42.5197pt" y0="28.3465pt" dx="240.945pt" dy="155.906pt"/>
+      <Layout nx="1" ny="5" x0="311.811pt" y0="28.3465pt" dx="240.945pt" dy="155.906pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- DECAdry OCC 3342 Business Cards.                                    -->
+  <!-- =================================================================== -->
+  <Template name="DECAdry OCC 3342" size="A4" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="240.945pt" height="153.071pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="2" ny="5" x0="42.5197pt" y0="38.2677pt" dx="269.291pt" dy="153.071pt"/>
+    </Label-rectangle>
+  </Template>
 
 
 
@@ -476,8 +522,8 @@
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="90mm" height="50mm" round="0">
-      <Layout nx="3" ny="8" x0="14mm" y0="10mm" dx="90mm" dy="50mm"/>
       <Markup-margin size="5pt"/>
+      <Layout nx="3" ny="8" x0="14mm" y0="10mm" dx="90mm" dy="50mm"/>
     </Label-rectangle>
   </Template>
 
@@ -485,8 +531,8 @@
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="50mm" height="90mm" round="0">
-      <Layout nx="4" ny="3" x0="5mm" y0="13mm" dx="50mm" dy="90mm"/>
       <Markup-margin size="5pt"/>
+      <Layout nx="4" ny="3" x0="5mm" y0="13mm" dx="50mm" dy="90mm"/>
     </Label-rectangle>
   </Template>
 
