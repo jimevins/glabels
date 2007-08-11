@@ -1,5 +1,19 @@
 2007-08-11  Jim Evins  <evins@snaught.com>
 
+	* po/POTFILES.in:
+		Updated file list.
+	* configure.in:
+	* po/eo.po:
+		Added Esperanto translation.  Provided by Antonio C.
+		Codazzi "la Filozofo" <f_sophia@libero.it>.
+	* po/fr.po:
+		Updated French translation. Provided by Claude Paroz
+		<claude@2xlibre.net>.
+	* AUTHORS:
+		Updated to reflect above translations.
+
+2007-08-11  Jim Evins  <evins@snaught.com>
+
 	* AUTHORS:
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/avery-us-templates.xml:

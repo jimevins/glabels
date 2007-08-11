@@ -2,8 +2,6 @@
 
 src/glabels.c
 src/glabels-batch.c
-src/splash.c
-src/splash.h
 src/window.c
 src/window.h
 src/stock.c
@@ -28,7 +26,6 @@ src/prefs-model.c
 src/prefs-model.h
 src/prefs-dialog.c
 src/prefs-dialog.h
-src/hig.c
 src/hig.h
 src/view.c
 src/view.h
@@ -46,8 +43,6 @@ src/view-text.c
 src/view-text.h
 src/view-barcode.c
 src/view-barcode.h
-src/view-highlight.c
-src/view-highlight.h
 src/object-editor.c
 src/object-editor.h
 src/object-editor-private.h
@@ -65,8 +60,7 @@ src/merge-properties-dialog.c
 src/merge-properties-dialog.h
 src/print.c
 src/print.h
-src/print-dialog.c
-src/print-dialog.h
+src/print-op.c
 src/template-designer.c
 src/template-designer.h
 src/bc.c
@@ -95,8 +89,6 @@ src/xml-label.c
 src/xml-label.h
 src/xml-label-04.c
 src/xml-label-04.h
-src/xml-label-191.c
-src/xml-label-191.h
 src/pixbuf-cache.c
 src/pixbuf-cache.h
 src/base64.c
@@ -107,6 +99,7 @@ src/merge-init.c
 src/merge-init.h
 src/merge-text.c
 src/merge-text.h
+src/merge-evolution.c
 src/text-node.c
 src/text-node.h
 src/wdgt-print-copies.c
@@ -125,8 +118,6 @@ src/util.c
 src/util.h
 src/color.c
 src/color.h
-src/canvas-hacktext.c
-src/canvas-hacktext.h
 src/debug.c
 src/debug.h
 src/mygal/color-group.c
@@ -140,7 +131,10 @@ src/mygal/mygal-combo-box.c
 src/mygal/mygal-combo-box.h
 src/mygal/widget-color-combo.c
 src/mygal/widget-color-combo.h
+src/critical-error-handler.c
+src/warning-handler.c
 
+libglabels/category.c
 libglabels/template.c
 libglabels/template.h
 libglabels/paper.c
@@ -152,14 +146,21 @@ libglabels/xml-paper.h
 libglabels/xml.c
 libglabels/xml.h
 
-data/glade/prefs-dialog.glade
+data/glade/merge-properties-dialog.glade
+data/glade/new-label-dialog.glade
 data/glade/object-editor.glade
+data/glade/prefs-dialog.glade
+data/glade/print-custom-widget.glade
+data/glade/property-bar.glade
 data/glade/template-designer.glade
+data/glade/wdgt-media-select.glade
+data/glade/wdgt-rotate-label.glade
 
 data/templates/paper-sizes.xml
 data/templates/avery-us-templates.xml
 data/templates/avery-iso-templates.xml
 data/templates/avery-other-templates.xml
+data/templates/categories.xml
 data/templates/zweckform-iso-templates.xml
 data/templates/misc-us-templates.xml
 data/templates/misc-iso-templates.xml
@@ -169,3 +170,5 @@ data/desktop/glabels.desktop.in
 
 data/mime/glabels.keys.in
 data/mime/glabels.xml.in
+
+barcode-0.98/compat/getopt.c

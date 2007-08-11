@@ -1,0 +1,2438 @@
+# translation of eo.po to
+# Italian translation of glabels.
+# Copyright (C) 2003 THE glabels'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the glabels package.
+#
+# Esperanto special letters: ĉŝĝĥĵŭ -- 2244
+# Antonio C. Codazzi "la Filozofo" <f_sophia@libero.it>, 2007.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: eo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-06-19 20:43-0400\n"
+"PO-Revision-Date: 2007-06-06 16:48+0200\n"
+"Last-Translator: Antonio C. Codazzi <f_sophia@libero.it>\n"
+"Language-Team:  Esperanto <eo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: src/glabels.c:116
+msgid "Could not initialize Bonobo!\n"
+msgstr "Estas neeble prepari Bonobon!\n"
+
+#: src/glabels-batch.c:52
+msgid "print this message"
+msgstr "presu tiun ĉi mesaĝon"
+
+#: src/glabels-batch.c:54
+msgid "print the version of glabels-batch being used"
+msgstr "presu version de uzata staplo de glabels"
+
+#: src/glabels-batch.c:56
+msgid "set output filename (default=\"output.ps\")"
+msgstr "agordu dosiernomon de eligo (defaŭlte \"output.ps\")"
+
+#: src/glabels-batch.c:56 src/glabels-batch.c:70
+msgid "filename"
+msgstr "dosiernomo"
+
+#: src/glabels-batch.c:58
+msgid "number of sheets (default=1)"
+msgstr "nombro da folioj (defaŭlte 1)"
+
+#: src/glabels-batch.c:58
+msgid "sheets"
+msgstr "folioj"
+
+#: src/glabels-batch.c:60
+msgid "number of copies (default=1)"
+msgstr "nombro da ekzempleroj (defaŭlte 1)"
+
+#: src/glabels-batch.c:60
+msgid "copies"
+msgstr "ekzempleroj"
+
+#: src/glabels-batch.c:62
+msgid "first label on first sheet (default=1)"
+msgstr "unua etikedo de unua folio (defaŭlte 1)"
+
+#: src/glabels-batch.c:62
+msgid "first"
+msgstr "unua"
+
+#: src/glabels-batch.c:64 src/print-dialog.c:336
+msgid "print outlines (to test printer alignment)"
+msgstr "presu konturojn (por testi alliniĝon de la printilo)"
+
+#: src/glabels-batch.c:66 src/print-dialog.c:344
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "presu inverse (ekz. iun spegulitan bildon)"
+
+#: src/glabels-batch.c:68 src/print-dialog.c:351
+msgid "print crop marks"
+msgstr "presu liniojn de tranĉo"
+
+#: src/glabels-batch.c:70
+msgid "input file for merging"
+msgstr "eniga dosiero por kunfandi"
+
+#: src/glabels-batch.c:107
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr "[OPTION...] GLABELS_FILE..."
+
+#: src/glabels-batch.c:127
+#, c-format
+msgid "missing glabels file\n"
+msgstr "mankanta dosero de glabels\n"
+
+#: src/glabels-batch.c:158
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "estas neeble kunfandi dokumentojn kun dosiero de glabels %s\n"
+
+#: src/glabels-batch.c:182
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "estas neeble malfermi dosieron de glabels %s\n"
+
+#: src/window.c:244
+msgid "(none) - gLabels"
+msgstr "(nenio) - gLabels"
+
+#: src/window.c:414
+msgid "(modified)"
+msgstr "(modifita)"
+
+#: src/stock.c:65 data/ui/glabels-ui.xml.h:162
+msgid "_Select Mode"
+msgstr "Modu_so de Elektado"
+
+#: src/stock.c:66 data/ui/glabels-ui.xml.h:163
+msgid "_Text"
+msgstr "_Teksto"
+
+#: src/stock.c:67 data/ui/glabels-ui.xml.h:148
+msgid "_Line"
+msgstr "_Linio"
+
+#: src/stock.c:68 data/ui/glabels-ui.xml.h:130
+msgid "_Box"
+msgstr "_Fako"
+
+#: src/stock.c:69 data/ui/glabels-ui.xml.h:141
+msgid "_Ellipse"
+msgstr "_Elipso"
+
+#: src/stock.c:70 data/ui/glabels-ui.xml.h:146
+msgid "_Image"
+msgstr "_Bildo"
+
+#: src/stock.c:71 data/ui/glabels-ui.xml.h:11
+msgid "Bar_code"
+msgstr "Strek_kodo"
+
+#: src/stock.c:72
+msgid "_Merge Properties"
+msgstr "Ecoj de Ku_nfando"
+
+#: src/stock.c:73
+msgid "Object _Properties"
+msgstr "Ecoj de _Objekto"
+
+#: src/stock.c:74 data/ui/glabels-ui.xml.h:13
+msgid "Bring to _Front"
+msgstr "Portu _Fronten"
+
+#: src/stock.c:75 data/ui/glabels-ui.xml.h:109
+msgid "Send to _Back"
+msgstr "_Sendu Malantaŭen"
+
+#: src/stock.c:76 data/ui/glabels-ui.xml.h:96
+msgid "Rotate _Left"
+msgstr "Turnu _Maldekstren"
+
+#: src/stock.c:77 data/ui/glabels-ui.xml.h:97
+msgid "Rotate _Right"
+msgstr "Turnu _Dekstren"
+
+#: src/stock.c:78 data/ui/glabels-ui.xml.h:52
+msgid "Flip _Horizontally"
+msgstr "Renversu _Horizontale"
+
+#: src/stock.c:79 data/ui/glabels-ui.xml.h:53
+msgid "Flip _Vertically"
+msgstr "Renversu _Vertikale"
+
+#: src/stock.c:80 data/ui/glabels-ui.xml.h:147
+msgid "_Lefts"
+msgstr "_Maldekstre"
+
+#: src/stock.c:81 data/ui/glabels-ui.xml.h:159
+msgid "_Rights"
+msgstr "_Dekstre"
+
+#: src/stock.c:82 data/ui/glabels-ui.xml.h:131
+msgid "_Centers"
+msgstr "_Centre"
+
+#: src/stock.c:83 data/ui/glabels-ui.xml.h:164
+msgid "_Tops"
+msgstr "_Supre"
+
+#: src/stock.c:84
+msgid "Bottoms"
+msgstr "Sube"
+
+#: src/stock.c:85
+msgid "Centers"
+msgstr "Centre"
+
+#: src/stock.c:86 src/stock.c:87 data/ui/glabels-ui.xml.h:62
+msgid "Label Ce_nter"
+msgstr "Ce_ntrita Etikedo"
+
+#: src/stock.c:88 data/ui/glabels-ui.xml.h:51
+msgid "Fill color"
+msgstr "Koloro de plenigo"
+
+#: src/stock.c:89 data/ui/glabels-ui.xml.h:64
+msgid "Line color"
+msgstr "Koloro de linio"
+
+#: src/stock.c:90 src/stock.c:92
+msgid "Linked"
+msgstr "Kunligita"
+
+#: src/stock.c:91 src/stock.c:93
+msgid "Not Linked"
+msgstr "Neniu Kunligo"
+
+#: src/ui-property-bar.c:345 src/object-editor.c:499
+msgid "Default"
+msgstr "Defaŭlto"
+
+#: src/ui-property-bar.c:360 src/object-editor.c:512
+msgid "No fill"
+msgstr "Neniu Plenigo"
+
+#: src/ui-property-bar.c:375 src/object-editor.c:505
+msgid "No line"
+msgstr "Neniu Linio"
+
+#: src/ui-sidebar.c:180
+msgid "Object properties"
+msgstr "Ecoj de objekto"
+
+#: src/commands.c:385
+msgid ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 2 of the License, or (at your option) any later "
+"version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details.\n"
+msgstr ""
+
+#: src/commands.c:399
+msgid "See the file AUTHORS for additional credits,"
+msgstr "Vidigu la dosieron nomitan AUTHORS por pluaj informoj,"
+
+#: src/commands.c:400
+msgid "or visit http://glabels.sourceforge.net/"
+msgstr "aŭ vizitu http://glabels.sourceforge.net/"
+
+#: src/commands.c:409
+msgid " "
+msgstr " "
+
+#: src/commands.c:424
+msgid "glabels"
+msgstr "glabels"
+
+#: src/file.c:100
+msgid "New Label or Card"
+msgstr "Nova Etikedo aŭ Karto"
+
+#: src/file.c:132 src/file.c:304
+msgid "Media Type"
+msgstr "Speco de plurmedio"
+
+#: src/file.c:138 src/file.c:310
+msgid "Label orientation"
+msgstr "Orientado de etikedo"
+
+#: src/file.c:269
+msgid "Label properties"
+msgstr "Ecoj de etikedo"
+
+#: src/file.c:452 src/file.c:870
+msgid "All files"
+msgstr "Ĉiuj dosieroj"
+
+#: src/file.c:457 src/file.c:875
+msgid "gLabels documents"
+msgstr "Dokumentoj de gLabels"
+
+#: src/file.c:505 src/file.c:617 src/file.c:934 src/file.c:1130
+msgid "Empty file name selection"
+msgstr "Elektado de nomon de vakua dosiero"
+
+#: src/file.c:506 src/file.c:520 src/file.c:618 src/file.c:632
+msgid "Please select a file or supply a valid file name"
+msgstr "Bonvolu indiki dosieron aŭ validan dosiernomon"
+
+#: src/file.c:519 src/file.c:631
+msgid "File does not exist"
+msgstr "la dosiero ne ekzistas"
+
+#: src/file.c:563 data/ui/glabels-ui.xml.h:74
+msgid "Open"
+msgstr "Malfermu"
+
+#: src/file.c:565
+msgid "Open label"
+msgstr "Malfermu etikedon"
+
+#: src/file.c:707
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "Estas neeble malfermi dosieron \"%s\""
+
+#: src/file.c:715
+msgid "Not a supported file format"
+msgstr "La formato de dosiero ne estas subtenita"
+
+#: src/file.c:797 src/file.c:979 src/file.c:1174
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "estas neeble konservi dosieron \"%s\""
+
+#: src/file.c:805 src/file.c:987 src/file.c:1182
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Eraro dum konservado. la dosiero ankoraŭ ne estas konservita."
+
+#: src/file.c:848 src/file.c:1048
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "Konservu \"%s\" kiel"
+
+#: src/file.c:935 src/file.c:1131
+msgid "Please supply a valid file name"
+msgstr "Bonvolu indiki validan dosiernomon"
+
+#: src/file.c:952 src/file.c:1147
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Ĉu mi devas anstataŭigi dosieron \"%s\"?"
+
+#: src/file.c:960 src/file.c:1155
+msgid "File already exists."
+msgstr "La dosiero jam ekzistas."
+
+#: src/file.c:1271
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Ĉu mi devas konservi la modifojn de la dokumento \"%s\" antaŭ ol fermi?"
+
+#: src/file.c:1279
+msgid "Your changes will be lost if you don't save them."
+msgstr "La modifoj estos perditaj se oni ne konservas ilin."
+
+#: src/file.c:1282
+msgid "Close without saving"
+msgstr "fermu sen konservi"
+
+#. Should not happen
+#: src/prefs.c:156 src/prefs.c:163 data/glade/prefs-dialog.glade.h:23
+#: data/glade/object-editor.glade.h:37
+msgid "points"
+msgstr "punktoj"
+
+#: src/prefs.c:158 data/glade/object-editor.glade.h:36
+#: data/glade/template-designer.glade.h:74
+msgid "inches"
+msgstr "coloj"
+
+#: src/prefs.c:160
+msgid "mm"
+msgstr "mm"
+
+#: src/prefs-dialog.c:248 data/glade/prefs-dialog.glade.h:22
+msgid "gLabels Preferences"
+msgstr "Agordoj de gLabels"
+
+#.
+#. * Submenu: Order
+#.
+#: src/view.c:3574 data/ui/glabels-ui.xml.h:154
+msgid "_Order"
+msgstr "_Ordo"
+
+#.
+#. * Submenu: Rotate/Flip
+#.
+#: src/view.c:3595 data/ui/glabels-ui.xml.h:160
+msgid "_Rotate/Flip"
+msgstr "_Rotacio/Renverso"
+
+#.
+#. * Submenu: Align Horizontally
+#.
+#: src/view.c:3628
+msgid "Align _Horizontally"
+msgstr "Laŭlinnigu _Horizontale"
+
+#.
+#. * Submenu: Align Vertically
+#.
+#: src/view.c:3667
+msgid "Align _Vertically"
+msgstr "Laŭlinnigu _Verticale"
+
+#: src/view.c:3728 data/ui/glabels-ui.xml.h:137
+msgid "_Delete"
+msgstr "_Forigu"
+
+#. Build editor.
+#: src/view-box.c:224
+msgid "Box object properties"
+msgstr "Ecoj de Fako"
+
+#. Build editor.
+#: src/view-ellipse.c:224
+msgid "Ellipse object properties"
+msgstr "Ecoj de Elipso"
+
+#. Build editor.
+#: src/view-line.c:224
+msgid "Line object properties"
+msgstr "Ecoj de Linio"
+
+#. Build editor.
+#: src/view-image.c:223
+msgid "Image object properties"
+msgstr "Ecoj de Bildo"
+
+#. Build editor.
+#: src/view-text.c:251
+msgid "Text object properties"
+msgstr "Ecoj de Teksto"
+
+#: src/view-text.c:563 data/glade/object-editor.glade.h:28
+msgid "Text"
+msgstr "Teksto"
+
+#. Build editor.
+#: src/view-barcode.c:210
+msgid "Barcode object properties"
+msgstr "Ecoj de Strekkodo"
+
+#: src/view-barcode.c:580 src/print.c:1089
+msgid "Invalid barcode data"
+msgstr "Nevalida strekkodo"
+
+#: src/merge-properties-dialog.c:231
+msgid "Merge Properties"
+msgstr "Ecoj de Kunfando"
+
+#. ---- Source section ----
+#: src/merge-properties-dialog.c:237
+msgid "Source"
+msgstr "Fonto"
+
+#: src/merge-properties-dialog.c:245
+msgid "Format:"
+msgstr "Formato:"
+
+#. Location line
+#: src/merge-properties-dialog.c:273
+msgid "Location:"
+msgstr "Lokiĝo:"
+
+#: src/merge-properties-dialog.c:282 src/merge-properties-dialog.c:393
+msgid "Select merge-database source"
+msgstr "Elektu fonton de kunfand-datumbazo"
+
+#: src/merge-properties-dialog.c:289 src/merge-properties-dialog.c:404
+msgid "N/A"
+msgstr "N/A"
+
+#. ---- Sample Fields section ----
+#: src/merge-properties-dialog.c:300
+msgid "Record selection/preview:"
+msgstr "Elektado/Antaŭmontro de rikordo:"
+
+#: src/merge-properties-dialog.c:326
+msgid "Select"
+msgstr "Elektu"
+
+#: src/merge-properties-dialog.c:334
+msgid "Record/Field"
+msgstr "Rikordo/Kampo"
+
+#: src/merge-properties-dialog.c:342 data/glade/object-editor.glade.h:9
+msgid "Data"
+msgstr "Datumoj"
+
+#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:81
+msgid "Print"
+msgstr "Presu"
+
+#: src/print-dialog.c:281
+msgid "_Job"
+msgstr "_Laboro"
+
+#: src/print-dialog.c:286
+msgid "P_rinter"
+msgstr "P_rintilo"
+
+#. ----------- Add simple-copies widget ------------
+#: src/print-dialog.c:314
+msgid "Copies"
+msgstr "Ekzempleroj"
+
+#. ------- Add merge control widget ------------
+#: src/print-dialog.c:322
+msgid "Document merge control"
+msgstr "Kontrolo de kunfando de dokumento"
+
+#. ----------- Add custom print options area ------------
+#: src/print-dialog.c:330
+msgid "Options"
+msgstr "Opcioj"
+
+#: src/print-dialog.c:553 src/print-dialog.c:592
+msgid "Print preview"
+msgstr "Antaŭmontro de presado"
+
+#: src/template-designer.c:409 data/glade/template-designer.glade.h:73
+msgid "gLabels Template Designer"
+msgstr "Desegnilo de modeloj por gLabels"
+
+#: src/bc.c:60
+msgid "POSTNET (any)"
+msgstr "POSTNET (iu ajn)"
+
+#: src/bc.c:63
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (nur ZIP/CAP)"
+
+#: src/bc.c:66
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP/CAP+4)"
+
+#: src/bc.c:69
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: src/bc.c:72
+msgid "EAN (any)"
+msgstr "EAN (iu ajn)"
+
+#: src/bc.c:75
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: src/bc.c:78
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: src/bc.c:81
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: src/bc.c:84
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: src/bc.c:87
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: src/bc.c:90
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: src/bc.c:93
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A aŭ UPC-E)"
+
+#: src/bc.c:96
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: src/bc.c:99
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: src/bc.c:102
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: src/bc.c:105
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: src/bc.c:108
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: src/bc.c:111
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: src/bc.c:114
+msgid "ISBN"
+msgstr "ISBN"
+
+#: src/bc.c:117
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: src/bc.c:120
+msgid "Code 39"
+msgstr "Kodo 39"
+
+#: src/bc.c:123
+msgid "Code 128"
+msgstr "Kodo 128"
+
+#: src/bc.c:126
+msgid "Code 128C"
+msgstr "Kodo 128C"
+
+#: src/bc.c:129
+msgid "Code 128B"
+msgstr "Kodo 128B"
+
+#: src/bc.c:132
+msgid "Interleaved 2 of 5"
+msgstr "Interleaved 2 of 5"
+
+#: src/bc.c:135
+msgid "Codabar"
+msgstr "Codabar"
+
+#: src/bc.c:138
+msgid "MSI"
+msgstr "MSI"
+
+#: src/bc.c:141
+msgid "Plessey"
+msgstr "Plessey"
+
+#: src/label.c:569
+msgid "Untitled"
+msgstr "Sen nomo"
+
+#: src/xml-label.c:176 src/xml-label.c:213
+msgid "xmlParseFile error"
+msgstr "Eraro de xml-dosiero de sintaksa analizo"
+
+#: src/xml-label.c:250
+msgid "No document root"
+msgstr "Neniu radika dokumento"
+
+#: src/xml-label.c:264
+msgid "Importing from glabels 0.1 format"
+msgstr "Importante el formato de glabels 0.1"
+
+#: src/xml-label.c:272
+msgid "Importing from glabels 0.4 format"
+msgstr "Importante el formato de glabels 0.4"
+
+#: src/xml-label.c:279
+msgid "Importing from glabels 1.91 format"
+msgstr "Importante el formato de glabels 1.91"
+
+#: src/xml-label.c:282
+msgid "bad document, unknown glabels Namespace"
+msgstr "Nekorekta dokumento, nekonata Nomospaco de glabels"
+
+#: src/xml-label.c:311 src/xml-label-04.c:75 src/xml-label-191.c:131
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "Nekorekta radika nodo = \"%s\""
+
+#: src/xml-label.c:348 src/xml-label-191.c:165
+#, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "nekorekta nodo en nodo de Dokumeto = \"%s\""
+
+#: src/xml-label.c:393 src/xml-label-04.c:123 src/xml-label-191.c:197
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "nekorekta nodo = \"%s\""
+
+#: src/xml-label.c:796 src/xml-label-191.c:605
+#, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "nekorekta nodo en nodo de Datumoj = \"%s\""
+
+#: src/xml-label.c:962 libglabels/xml-template.c:535
+msgid "Utf8 conversion error."
+msgstr "eraro de konvertado en Utf8."
+
+#: src/xml-label.c:969 libglabels/xml-template.c:542
+msgid "Problem saving xml file."
+msgstr "Problemo laŭ konservo de xml-dosiero"
+
+#. This should always be an id, but just in case a name
+#. slips by!
+#: src/xml-label-191.c:680 libglabels/xml-template.c:199
+#, c-format
+msgid "Unknown page size id \"%s\", trying as name"
+msgstr "Nekonata id \"%s\" de grando de paĝo, provante kiel nomo"
+
+#: src/xml-label-191.c:690 libglabels/xml-template.c:209
+#, c-format
+msgid "Unknown page size id or name \"%s\""
+msgstr "Nekonata id de (paĝo)grando aŭ de nomo \"%s\""
+
+#: src/merge.c:172 src/merge.c:213 src/merge.c:399 src/merge.c:402
+msgid "None"
+msgstr "Nenio"
+
+#: src/merge-init.c:53
+msgid "Text file with comma delimeters (CSV)"
+msgstr "Teksta dosiero kun komo kiel disigilo (CSV)"
+
+#: src/merge-init.c:60
+msgid "Text file with colon delimeters"
+msgstr "Teksta dosiero kun komo kiel disigilo"
+
+#: src/merge-init.c:67
+msgid "Text file with tab delimeters"
+msgstr "Teksta dosiero kun TAB kiel disigilo"
+
+#: src/wdgt-image-select.c:201 data/glade/object-editor.glade.h:11
+msgid "File:"
+msgstr "Dosiero:"
+
+#: src/wdgt-image-select.c:245 data/glade/object-editor.glade.h:16
+msgid "Key:"
+msgstr "Ŝlosilo:"
+
+#: src/wdgt-print-copies.c:179
+msgid "Sheets:"
+msgstr "Folioj:"
+
+#: src/wdgt-print-copies.c:197
+msgid "Labels"
+msgstr "Etikedoj"
+
+#: src/wdgt-print-copies.c:200
+msgid "from:"
+msgstr "de:"
+
+#: src/wdgt-print-copies.c:207
+msgid "to:"
+msgstr "ĝis:"
+
+#: src/wdgt-print-merge.c:178
+msgid "Start on label"
+msgstr "Starto en etikedo"
+
+#: src/wdgt-print-merge.c:186
+msgid "on 1st sheet"
+msgstr "en 1a folio"
+
+#: src/wdgt-print-merge.c:195
+msgid "Copies:"
+msgstr "Ekzempleroj:"
+
+#: src/wdgt-print-merge.c:201
+msgid "Collate"
+msgstr "Laŭkajere"
+
+#: src/wdgt-media-select.c:269 data/glade/template-designer.glade.h:29
+msgid "Description:"
+msgstr "Priskribo:"
+
+#: src/wdgt-media-select.c:279 data/glade/template-designer.glade.h:53
+msgid "Page size:"
+msgstr "Grando de paĝo:"
+
+#: src/wdgt-media-select.c:290
+msgid "Label size:"
+msgstr "Grando de etikedo:"
+
+#: src/wdgt-media-select.c:301
+msgid "Layout:"
+msgstr "Aspekto:"
+
+#: src/wdgt-media-select.c:578
+#, c-format
+msgid "%d x %d  (%d per sheet)"
+msgstr "%d x %d  (%d por folio)"
+
+#: src/wdgt-media-select.c:582
+#, c-format
+msgid "%d per sheet"
+msgstr "%d por folio"
+
+#: src/wdgt-media-select.c:614
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
+
+#: src/wdgt-media-select.c:619
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
+
+#: src/wdgt-media-select.c:630 src/wdgt-media-select.c:644
+#, c-format
+msgid "%s %s diameter"
+msgstr "%s %s diametro"
+
+#: src/wdgt-media-select.c:634 src/wdgt-media-select.c:648
+#, c-format
+msgid "%.5g %s diameter"
+msgstr "%.5g %s diametro"
+
+#: src/wdgt-rotate-label.c:193
+msgid "Rotate"
+msgstr "Rotacio"
+
+#. This is the default custom color
+#: src/mygal/color-palette.c:396
+msgid "custom"
+msgstr "personigita"
+
+#. "Custom" color - we'll pop up a GnomeColorPicker
+#: src/mygal/color-palette.c:438
+msgid "Custom Color:"
+msgstr "Personigita Koloro:"
+
+#: src/mygal/color-palette.c:446
+msgid "Choose Custom Color"
+msgstr "Elektu personigitan koloron"
+
+#: src/mygal/color-palette.c:579
+msgid "black"
+msgstr "nigro"
+
+#: src/mygal/color-palette.c:580
+msgid "light brown"
+msgstr "hela bruna koloro"
+
+#: src/mygal/color-palette.c:581
+msgid "brown gold"
+msgstr "malhela oro"
+
+#: src/mygal/color-palette.c:582
+msgid "dark green #2"
+msgstr "malhela verdo #2"
+
+#: src/mygal/color-palette.c:583
+msgid "navy"
+msgstr "mararmea bluo"
+
+#: src/mygal/color-palette.c:584 src/mygal/color-palette.c:640
+msgid "dark blue"
+msgstr "malhela bluo"
+
+#: src/mygal/color-palette.c:585
+msgid "purple #2"
+msgstr "viola koloro #2"
+
+#: src/mygal/color-palette.c:586
+msgid "very dark gray"
+msgstr "tre malhela grizo"
+
+#: src/mygal/color-palette.c:589 src/mygal/color-palette.c:645
+msgid "dark red"
+msgstr "malhela ruĝo"
+
+#: src/mygal/color-palette.c:590
+msgid "red-orange"
+msgstr "ruĝ-oranĝo"
+
+#: src/mygal/color-palette.c:591
+msgid "gold"
+msgstr "oro"
+
+#: src/mygal/color-palette.c:592
+msgid "dark green"
+msgstr "malhela verdo"
+
+#: src/mygal/color-palette.c:593 src/mygal/color-palette.c:646
+msgid "dull blue"
+msgstr "nebrila bluo"
+
+#: src/mygal/color-palette.c:594 src/mygal/color-palette.c:647
+msgid "blue"
+msgstr "bluo"
+
+#: src/mygal/color-palette.c:595
+msgid "dull purple"
+msgstr "nebrila violo"
+
+#: src/mygal/color-palette.c:596
+msgid "dark grey"
+msgstr "malhela grizo"
+
+#: src/mygal/color-palette.c:599
+msgid "red"
+msgstr "ruĝo"
+
+#: src/mygal/color-palette.c:600
+msgid "orange"
+msgstr "oranĝa koloro"
+
+#: src/mygal/color-palette.c:601
+msgid "lime"
+msgstr "limeta koloro"
+
+#: src/mygal/color-palette.c:602
+msgid "dull green"
+msgstr "nebrila verdo"
+
+#: src/mygal/color-palette.c:603
+msgid "dull blue #2"
+msgstr "nebrila bluo #2"
+
+#: src/mygal/color-palette.c:604
+msgid "sky blue #2"
+msgstr "ĉielbluo #2"
+
+#: src/mygal/color-palette.c:605 src/mygal/color-palette.c:644
+msgid "purple"
+msgstr "violo"
+
+#: src/mygal/color-palette.c:606
+msgid "gray"
+msgstr "grizo"
+
+#: src/mygal/color-palette.c:609 src/mygal/color-palette.c:641
+msgid "magenta"
+msgstr "intense karmezina"
+
+#: src/mygal/color-palette.c:610
+msgid "bright orange"
+msgstr "brila oranĝo"
+
+#: src/mygal/color-palette.c:611 src/mygal/color-palette.c:642
+msgid "yellow"
+msgstr "flavo"
+
+#: src/mygal/color-palette.c:612
+msgid "green"
+msgstr "verdo"
+
+#: src/mygal/color-palette.c:613 src/mygal/color-palette.c:643
+msgid "cyan"
+msgstr "cejano"
+
+#: src/mygal/color-palette.c:614
+msgid "bright blue"
+msgstr "brila bluo"
+
+#: src/mygal/color-palette.c:615 src/mygal/color-palette.c:632
+msgid "red purple"
+msgstr "ruĝ-violo"
+
+#: src/mygal/color-palette.c:616
+msgid "light grey"
+msgstr "hela grizo"
+
+#: src/mygal/color-palette.c:619 src/mygal/color-palette.c:636
+msgid "pink"
+msgstr "rozkoloro"
+
+#: src/mygal/color-palette.c:620
+msgid "light orange"
+msgstr "hela oranĝo"
+
+#: src/mygal/color-palette.c:621 src/mygal/color-palette.c:633
+msgid "light yellow"
+msgstr "hela flavo"
+
+#: src/mygal/color-palette.c:622
+msgid "light green"
+msgstr "hela verdo"
+
+#: src/mygal/color-palette.c:623
+msgid "light cyan"
+msgstr "hela cejano"
+
+#: src/mygal/color-palette.c:624 src/mygal/color-palette.c:634
+msgid "light blue"
+msgstr "hela bluo"
+
+#: src/mygal/color-palette.c:625 src/mygal/color-palette.c:638
+msgid "light purple"
+msgstr "hela violo"
+
+#: src/mygal/color-palette.c:626
+msgid "white"
+msgstr "blanko"
+
+#: src/mygal/color-palette.c:631
+msgid "purplish blue"
+msgstr "viol-bluo"
+
+#: src/mygal/color-palette.c:635
+msgid "dark purple"
+msgstr "malhela violo"
+
+#: src/mygal/color-palette.c:637
+msgid "sky blue"
+msgstr "ĉielbluo"
+
+#: libglabels/template.c:848
+#, c-format
+msgid "Generic %s full page"
+msgstr "Ĝenerala %s plena paĝo"
+
+#: libglabels/template.c:897
+msgid "No template files found!"
+msgstr "Neniu modelo estis trovita!"
+
+#. Create and append an "Other" entry.
+#: libglabels/paper.c:67
+msgid "Other"
+msgstr "Aliaĵoj"
+
+#: libglabels/paper.c:361
+msgid "No paper files found!"
+msgstr "Neniu papera dosiero estis trovita!!"
+
+#: data/ui/glabels-ui.xml.h:1
+msgid "About glabels"
+msgstr "Pri glabels"
+
+#: data/ui/glabels-ui.xml.h:2
+msgid "About..."
+msgstr "Pri..."
+
+#: data/ui/glabels-ui.xml.h:3
+msgid "Align _Horizontal"
+msgstr "Laŭlinnigu _Horizontale"
+
+#: data/ui/glabels-ui.xml.h:4
+msgid "Align _Vertical"
+msgstr "Laŭlinnigu _Verticale"
+
+#: data/ui/glabels-ui.xml.h:5
+msgid "Align objects to bottoms"
+msgstr "Laŭlinnigu objektojn sube"
+
+#: data/ui/glabels-ui.xml.h:6
+msgid "Align objects to horizontal centers"
+msgstr "Laŭlinnigu objektojn laŭ horizontala centro"
+
+#: data/ui/glabels-ui.xml.h:7
+msgid "Align objects to left edges"
+msgstr "Laŭlinnigu objektojn laŭ maldekstra rando"
+
+#: data/ui/glabels-ui.xml.h:8
+msgid "Align objects to right edges"
+msgstr "Laŭlinnigu objektojn laŭ dekstra rando"
+
+#: data/ui/glabels-ui.xml.h:9
+msgid "Align objects to tops"
+msgstr "Laŭlinnigu objektojn supre"
+
+#: data/ui/glabels-ui.xml.h:10
+msgid "Align objects to vertical centers"
+msgstr "Laŭliniigu objektojn laŭ verticala centro"
+
+#: data/ui/glabels-ui.xml.h:12
+msgid "Bold"
+msgstr "Dika"
+
+#: data/ui/glabels-ui.xml.h:14
+msgid "Center align"
+msgstr "Laŭliniiĝu centre"
+
+#: data/ui/glabels-ui.xml.h:15
+msgid "Center objects to horizontal label center"
+msgstr "Centrigu objektojn laŭ horizontala centro de etikedo"
+
+#: data/ui/glabels-ui.xml.h:16
+msgid "Center objects to vertical label center"
+msgstr "Centrigu objektojn laŭ vertikala centro de etikedo"
+
+#: data/ui/glabels-ui.xml.h:17
+msgid "Change the visibility of markup lines in the current window"
+msgstr "Ŝangu videblecon de linioj de demarkacio en nuna fenestro"
+
+#: data/ui/glabels-ui.xml.h:18
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "Ŝangu videblecon de la ilarstango de desegno en nuna fenestro"
+
+#: data/ui/glabels-ui.xml.h:19
+msgid "Change the visibility of the grid in the current window"
+msgstr "Ŝangu videblecon de la krado en nuna fenestro"
+
+#: data/ui/glabels-ui.xml.h:20
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "Ŝangu videblecon de la ĉefa ilarstango en nuna fenestro"
+
+#: data/ui/glabels-ui.xml.h:21
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "Ŝangu videblecon de ilarstango de ecoj en nuna fenestro"
+
+#: data/ui/glabels-ui.xml.h:22
+msgid "Close"
+msgstr "Fermu"
+
+#: data/ui/glabels-ui.xml.h:23
+msgid "Close the current file"
+msgstr "Fermu la nunan dosieron"
+
+#: data/ui/glabels-ui.xml.h:24
+msgid "Configure the application"
+msgstr "Agordu la programon"
+
+#: data/ui/glabels-ui.xml.h:25
+msgid "Contents"
+msgstr "Entenoj"
+
+#: data/ui/glabels-ui.xml.h:26
+msgid "Copy"
+msgstr "Kopiu"
+
+#: data/ui/glabels-ui.xml.h:27
+msgid "Copy the selection"
+msgstr "Kopiu la elektaĵon"
+
+#: data/ui/glabels-ui.xml.h:28
+msgid "Create a custom template"
+msgstr "Kreu personigitan modelon"
+
+#: data/ui/glabels-ui.xml.h:29
+msgid "Create a new document"
+msgstr "Kreu novan dokumenton"
+
+#: data/ui/glabels-ui.xml.h:30
+msgid "Create barcode object"
+msgstr "Keu strekkodan objekton"
+
+#: data/ui/glabels-ui.xml.h:31
+msgid "Create box/rectangle object"
+msgstr "Kreu objekton de areo/rektangulo"
+
+#: data/ui/glabels-ui.xml.h:32
+msgid "Create ellipse/circle object"
+msgstr "Kreu objekton de elipse/circlo"
+
+#: data/ui/glabels-ui.xml.h:33
+msgid "Create image object"
+msgstr "Kreu bildan objekton"
+
+#: data/ui/glabels-ui.xml.h:34
+msgid "Create line object"
+msgstr "Kreu linian objekton"
+
+#: data/ui/glabels-ui.xml.h:35
+msgid "Create text object"
+msgstr "Kreu tekstan objekton"
+
+#: data/ui/glabels-ui.xml.h:36
+msgid "Cu_t"
+msgstr "El_tondu"
+
+#: data/ui/glabels-ui.xml.h:37
+msgid "Customize"
+msgstr "Personigu"
+
+#: data/ui/glabels-ui.xml.h:38
+msgid "Customize Drawing Toolbar"
+msgstr "Personigu ilarstangon de desegno"
+
+#: data/ui/glabels-ui.xml.h:39
+msgid "Customize Main Toolbar"
+msgstr "Personigu ĉefan ilarstangon"
+
+#: data/ui/glabels-ui.xml.h:40
+msgid "Customize Property Toolbar"
+msgstr "Personigu ilarstangon de ecoj"
+
+#: data/ui/glabels-ui.xml.h:41
+msgid "Customize toolbars"
+msgstr "Personigu ilarstangojn"
+
+#: data/ui/glabels-ui.xml.h:42
+msgid "Cut"
+msgstr "Eltondu"
+
+#: data/ui/glabels-ui.xml.h:43
+msgid "Cut the selection"
+msgstr "Eltondu elektaĵon"
+
+#: data/ui/glabels-ui.xml.h:44
+msgid "Decrease magnification"
+msgstr "Malpliigu zomon"
+
+#: data/ui/glabels-ui.xml.h:45
+msgid "Delete"
+msgstr "Forigu"
+
+#: data/ui/glabels-ui.xml.h:46
+msgid "Delete the selected objects"
+msgstr "Forigu elektitajn objektojn"
+
+#: data/ui/glabels-ui.xml.h:47
+msgid "Drawing toolbar"
+msgstr "Ilarstango de desegno"
+
+#: data/ui/glabels-ui.xml.h:48
+msgid "Dump XML"
+msgstr "Ŝutu XML"
+
+#: data/ui/glabels-ui.xml.h:49
+msgid "Dump the UI Xml description"
+msgstr "Ŝutu priskribon de UI xml"
+
+#: data/ui/glabels-ui.xml.h:50
+msgid "Edit merge properties"
+msgstr "Redaktu ecojn de kunfando"
+
+#: data/ui/glabels-ui.xml.h:54
+msgid "Flip object horizontally"
+msgstr "Renversu objekton horizontale"
+
+#: data/ui/glabels-ui.xml.h:55
+msgid "Flip object vertically"
+msgstr "Renversu objekton vertikale"
+
+#: data/ui/glabels-ui.xml.h:56
+msgid "Font name"
+msgstr "Nomo de tiparo"
+
+#: data/ui/glabels-ui.xml.h:57
+msgid "Font selector"
+msgstr "Elektilo de tiparo"
+
+#: data/ui/glabels-ui.xml.h:58
+msgid "Font size"
+msgstr "Tipargrando"
+
+#: data/ui/glabels-ui.xml.h:59
+msgid "Icon and _Text"
+msgstr "Ikono kaj _Teksto"
+
+#: data/ui/glabels-ui.xml.h:60
+msgid "Increase magnification"
+msgstr "Pliigu zomon"
+
+#: data/ui/glabels-ui.xml.h:61
+msgid "Italic"
+msgstr "Kursivo"
+
+#: data/ui/glabels-ui.xml.h:63
+msgid "Left align"
+msgstr "Laŭliniigu maldekstren"
+
+#: data/ui/glabels-ui.xml.h:65
+msgid "Line width"
+msgstr "Larĝo de linio"
+
+#: data/ui/glabels-ui.xml.h:66
+msgid "Lower object to bottom"
+msgstr "Subentiru objekton ĝis la fundo"
+
+#: data/ui/glabels-ui.xml.h:67
+msgid "M_arkup"
+msgstr "M_arkado"
+
+#: data/ui/glabels-ui.xml.h:68
+msgid "Main toolbar"
+msgstr "Ĉefa ilarstango"
+
+#: data/ui/glabels-ui.xml.h:69
+msgid "Markup"
+msgstr "Markaĵoj"
+
+#: data/ui/glabels-ui.xml.h:70
+msgid "Modify document properties"
+msgstr "Radaktu ecojn de dokumento"
+
+#: data/ui/glabels-ui.xml.h:71
+msgid "New"
+msgstr "Nova"
+
+#: data/ui/glabels-ui.xml.h:72
+msgid "Object property editor"
+msgstr "Redaktilo de ecoj por objekto"
+
+#: data/ui/glabels-ui.xml.h:73
+msgid "Only show icons in the main toolbar"
+msgstr "Videbligu nur ikonojn en ĉefa ilarstango"
+
+#: data/ui/glabels-ui.xml.h:75
+msgid "Open a file"
+msgstr "Malfermu iun dosieron"
+
+#: data/ui/glabels-ui.xml.h:76
+msgid "Open the glabels manual"
+msgstr "Malfermu manlibron de glabels"
+
+#: data/ui/glabels-ui.xml.h:77
+msgid "Paste"
+msgstr "Enmetu"
+
+#: data/ui/glabels-ui.xml.h:78
+msgid "Paste the clipboard"
+msgstr "Enmetu la poŝon"
+
+#: data/ui/glabels-ui.xml.h:79
+msgid "Pr_eferences..."
+msgstr "A_gordoj..."
+
+#: data/ui/glabels-ui.xml.h:80
+msgid "Preferences"
+msgstr "Agordoj"
+
+#: data/ui/glabels-ui.xml.h:82
+msgid "Print the current file"
+msgstr "Presu la nunan dosieron"
+
+#: data/ui/glabels-ui.xml.h:83
+msgid "Proper_ties..."
+msgstr "E_coj..."
+
+#: data/ui/glabels-ui.xml.h:84
+msgid "Properties"
+msgstr "Ecoj"
+
+#: data/ui/glabels-ui.xml.h:85
+msgid "Property toolbar"
+msgstr "Ilarstango de ecoj"
+
+#: data/ui/glabels-ui.xml.h:86
+msgid "Quit"
+msgstr "Eliro"
+
+#: data/ui/glabels-ui.xml.h:87
+msgid "Quit the program"
+msgstr "Eliru el programo"
+
+#: data/ui/glabels-ui.xml.h:88
+msgid "Raise object to top"
+msgstr "Suprentiru objekton ĝis la pinto"
+
+#: data/ui/glabels-ui.xml.h:89
+msgid "Recent _Files"
+msgstr "Fre_ŝaj Dosieroj"
+
+#: data/ui/glabels-ui.xml.h:90
+msgid "Redo"
+msgstr "Refaru"
+
+#: data/ui/glabels-ui.xml.h:91
+msgid "Redo the undone action"
+msgstr "Refaru la lastan malfaritan agon"
+
+#: data/ui/glabels-ui.xml.h:92
+msgid "Remove all selections"
+msgstr "Formovu ĉiujn elektaĵojn"
+
+#: data/ui/glabels-ui.xml.h:94
+#, no-c-format
+msgid "Restore scale to 100%"
+msgstr "Reen 100%"
+
+#: data/ui/glabels-ui.xml.h:95
+msgid "Right align"
+msgstr "laŭliniigu dekstren"
+
+#: data/ui/glabels-ui.xml.h:98
+msgid "Rotate object 90 clockwise"
+msgstr "Turnu la objekton je 90° dekstroĝire"
+
+#: data/ui/glabels-ui.xml.h:99
+msgid "Rotate object 90 counter-clockwise"
+msgstr "Turnu la objekton je 90° kontraŭmontrile"
+
+#: data/ui/glabels-ui.xml.h:100
+msgid "Save"
+msgstr "Konservu"
+
+#: data/ui/glabels-ui.xml.h:101
+msgid "Save As"
+msgstr "Konservu kiel"
+
+#: data/ui/glabels-ui.xml.h:102
+msgid "Save _As..."
+msgstr "Konservu kiel..."
+
+#: data/ui/glabels-ui.xml.h:103
+msgid "Save the current file"
+msgstr "Konservu la nunan dosieron"
+
+#: data/ui/glabels-ui.xml.h:104
+msgid "Save the current file with a different name"
+msgstr "Konservu la nunan dosieron per alia nomo"
+
+#: data/ui/glabels-ui.xml.h:105
+msgid "Select All"
+msgstr "Elektu Ĉion"
+
+#: data/ui/glabels-ui.xml.h:106
+msgid "Select _All"
+msgstr "Elektu _Ĉion"
+
+#: data/ui/glabels-ui.xml.h:107
+msgid "Select all objects"
+msgstr "Elektu ĉiujn objektojn"
+
+#: data/ui/glabels-ui.xml.h:108
+msgid "Select, move and modify objects"
+msgstr "Elektu, movu kaj redaktu objektojn"
+
+#: data/ui/glabels-ui.xml.h:110
+msgid "Set main toolbar button style according to desktop default"
+msgstr "Agordu butonstilon de ĉefa ilarstango laŭ defaŭlto de labortablo"
+
+#: data/ui/glabels-ui.xml.h:111
+msgid "Show _Tooltips"
+msgstr "Mon_tru Sugestojn"
+
+#: data/ui/glabels-ui.xml.h:112
+msgid "Show both icons and texts in the main toolbar"
+msgstr "Vidigu kaj ikonojn kaj tekstojn en la ĉefa ilarstango"
+
+#: data/ui/glabels-ui.xml.h:113
+msgid "Show tooltips in the drawing toolbar"
+msgstr "Vidigu sugestojn en la ilarstango de desegno"
+
+#: data/ui/glabels-ui.xml.h:114
+msgid "Show tooltips in the main toolbar"
+msgstr "Vidigu sugestojn en la ĉefa ilarstango"
+
+#: data/ui/glabels-ui.xml.h:115
+msgid "Show tooltips in the property toolbar"
+msgstr "Vidigu sugestojn en la ilarstango de ecoj"
+
+#: data/ui/glabels-ui.xml.h:116
+msgid "Template Designer"
+msgstr "Desegnilo de Modeloj"
+
+#: data/ui/glabels-ui.xml.h:117
+msgid "Template _Designer..."
+msgstr "_Desegnilo de Modeloj..."
+
+#: data/ui/glabels-ui.xml.h:118
+msgid "Text color"
+msgstr "Koloro de teksto"
+
+#: data/ui/glabels-ui.xml.h:119
+msgid "U_n-select All"
+msgstr "Malelektu Ĉio_n"
+
+#: data/ui/glabels-ui.xml.h:120
+msgid "Un-select All"
+msgstr "Malelektu Ĉion"
+
+#: data/ui/glabels-ui.xml.h:121
+msgid "Undo"
+msgstr "Malfaru"
+
+#: data/ui/glabels-ui.xml.h:122
+msgid "Undo the last action"
+msgstr "Nuligu lastan agon"
+
+#: data/ui/glabels-ui.xml.h:123
+msgid "Zoom _1:1"
+msgstr "Zomo je _1:1"
+
+#: data/ui/glabels-ui.xml.h:124
+msgid "Zoom _In"
+msgstr "_Zomo"
+
+#: data/ui/glabels-ui.xml.h:125
+msgid "Zoom _Out"
+msgstr "_Malzomo"
+
+#: data/ui/glabels-ui.xml.h:126
+msgid "Zoom to _fit"
+msgstr "Alĝustigu"
+
+#: data/ui/glabels-ui.xml.h:127
+msgid "Zoom to fit window"
+msgstr "Alĝustigu al la fenestro"
+
+#: data/ui/glabels-ui.xml.h:128
+msgid "_About..."
+msgstr "_Pri..."
+
+#: data/ui/glabels-ui.xml.h:129
+msgid "_Bottoms"
+msgstr "Su_be"
+
+#: data/ui/glabels-ui.xml.h:132
+msgid "_Close"
+msgstr "_Fermu"
+
+#: data/ui/glabels-ui.xml.h:133
+msgid "_Contents"
+msgstr "_Entenoj"
+
+#: data/ui/glabels-ui.xml.h:134
+msgid "_Copy"
+msgstr "_Kopiu"
+
+#: data/ui/glabels-ui.xml.h:135
+msgid "_Create Object"
+msgstr "_Kreu Objekton"
+
+#: data/ui/glabels-ui.xml.h:136
+msgid "_Debug"
+msgstr "_Sencimigo"
+
+#: data/ui/glabels-ui.xml.h:138
+msgid "_Desktop Default"
+msgstr "Defaŭlto por Labortabulo"
+
+#: data/ui/glabels-ui.xml.h:139
+msgid "_Drawing Toolbar"
+msgstr "Ilarstango de _Desegno"
+
+#: data/ui/glabels-ui.xml.h:140
+msgid "_Edit"
+msgstr "R_edaktu"
+
+#: data/ui/glabels-ui.xml.h:142
+msgid "_File"
+msgstr "_Dosiero"
+
+#: data/ui/glabels-ui.xml.h:143
+msgid "_Grid"
+msgstr "_Krado"
+
+#: data/ui/glabels-ui.xml.h:144
+msgid "_Help"
+msgstr "_Helpilo"
+
+#: data/ui/glabels-ui.xml.h:145
+msgid "_Icon"
+msgstr "_Ikono"
+
+#: data/ui/glabels-ui.xml.h:149
+msgid "_Main Toolbar"
+msgstr "_Ĉefa Ilarstango"
+
+#: data/ui/glabels-ui.xml.h:150
+msgid "_Merge Properties..."
+msgstr "_Kunfandu Ecojn..."
+
+#: data/ui/glabels-ui.xml.h:151
+msgid "_New"
+msgstr "_Nova"
+
+#: data/ui/glabels-ui.xml.h:152
+msgid "_Objects"
+msgstr "_Objektoj"
+
+#: data/ui/glabels-ui.xml.h:153
+msgid "_Open..."
+msgstr "M_alfermu..."
+
+#: data/ui/glabels-ui.xml.h:155
+msgid "_Paste"
+msgstr "_Enmetu"
+
+#: data/ui/glabels-ui.xml.h:156
+msgid "_Print..."
+msgstr "_Presu..."
+
+#: data/ui/glabels-ui.xml.h:157
+msgid "_Property Toolbar"
+msgstr "Ilarstango de Eco_j"
+
+#: data/ui/glabels-ui.xml.h:158
+msgid "_Quit"
+msgstr "_Eliro"
+
+#: data/ui/glabels-ui.xml.h:161
+msgid "_Save"
+msgstr "_Konservu"
+
+#: data/ui/glabels-ui.xml.h:165
+msgid "_View"
+msgstr "_Videbligo"
+
+#: data/glade/prefs-dialog.glade.h:1
+msgid "   "
+msgstr "   "
+
+#: data/glade/prefs-dialog.glade.h:2 data/glade/object-editor.glade.h:1
+#: data/glade/template-designer.glade.h:5
+msgid "*"
+msgstr "*"
+
+#: data/glade/prefs-dialog.glade.h:3
+msgid "<span weight=\"bold\">Default page size</span>"
+msgstr "<span weight=\"bold\">Defaŭlta grando de paĝo</span>"
+
+#: data/glade/prefs-dialog.glade.h:4
+msgid "<span weight=\"bold\">Fill</span>"
+msgstr "<span weight=\"bold\">Plenigo</span>"
+
+#: data/glade/prefs-dialog.glade.h:5
+msgid "<span weight=\"bold\">Line</span>"
+msgstr "<span weight=\"bold\">Linio</span>"
+
+#: data/glade/prefs-dialog.glade.h:6
+msgid "<span weight=\"bold\">Text</span>"
+msgstr "<span weight=\"bold\">Teksto</span>"
+
+#: data/glade/prefs-dialog.glade.h:7
+msgid "<span weight=\"bold\">Units</span>"
+msgstr "<span weight=\"bold\">Unitoj</span>"
+
+#: data/glade/prefs-dialog.glade.h:8 data/glade/object-editor.glade.h:4
+msgid "Alignment:"
+msgstr "Alliniĝo:"
+
+#: data/glade/prefs-dialog.glade.h:9 data/glade/object-editor.glade.h:8
+msgid "Color:"
+msgstr "Koloro:"
+
+#: data/glade/prefs-dialog.glade.h:10
+msgid "Font:"
+msgstr "Tiparo:"
+
+#: data/glade/prefs-dialog.glade.h:11
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: data/glade/prefs-dialog.glade.h:12
+msgid "Inches"
+msgstr "Coloj"
+
+#: data/glade/prefs-dialog.glade.h:13 data/glade/object-editor.glade.h:19
+msgid "Line Spacing:"
+msgstr "Interspaco:"
+
+#: data/glade/prefs-dialog.glade.h:14
+msgid "Locale"
+msgstr "Nacia"
+
+#: data/glade/prefs-dialog.glade.h:15
+msgid "Millimeters"
+msgstr "Milimetroj"
+
+#: data/glade/prefs-dialog.glade.h:16
+msgid "Object defaults"
+msgstr "Defaŭltoj de objekto"
+
+#: data/glade/prefs-dialog.glade.h:17
+msgid "Points"
+msgstr "Punktoj"
+
+#: data/glade/prefs-dialog.glade.h:18
+msgid "Select default properties for new objects."
+msgstr "Elektu defaŭltajn ecojn por novaj objektoj."
+
+#: data/glade/prefs-dialog.glade.h:19
+msgid "Select locale specific behavior."
+msgstr "Elektu nacian specifan agmanieron."
+
+#. Most popular (at top of list)
+#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:29
+msgid "US Letter"
+msgstr "US·Letero"
+
+#: data/glade/prefs-dialog.glade.h:21 data/glade/object-editor.glade.h:29
+#: data/glade/template-designer.glade.h:72
+msgid "Width:"
+msgstr "Larĝo:"
+
+#: data/glade/object-editor.glade.h:2
+msgid "00000000000 00000"
+msgstr "00000000000 00000"
+
+#: data/glade/object-editor.glade.h:3
+msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Xxx ecoj de objekto</span>"
+
+#: data/glade/object-editor.glade.h:5
+msgid "Allow merge to automatically shrink text"
+msgstr ""
+
+#: data/glade/object-editor.glade.h:6
+msgid "Angle:"
+msgstr "Angulo:"
+
+#: data/glade/object-editor.glade.h:7
+msgid "Checksum"
+msgstr "Kontrolsumo"
+
+#: data/glade/object-editor.glade.h:10
+msgid "Family:"
+msgstr "Familio:"
+
+#: data/glade/object-editor.glade.h:12
+msgid "Fill"
+msgstr "Plenigo"
+
+#: data/glade/object-editor.glade.h:13 data/glade/template-designer.glade.h:33
+msgid "Height:"
+msgstr "Alto:"
+
+#: data/glade/object-editor.glade.h:14
+msgid "Image"
+msgstr "Bildo"
+
+#: data/glade/object-editor.glade.h:15
+msgid "Insert merge field"
+msgstr "Enigu campon de kunfando"
+
+#: data/glade/object-editor.glade.h:17
+msgid "Length:"
+msgstr "Longo:"
+
+#: data/glade/object-editor.glade.h:18
+msgid "Line"
+msgstr "Linio"
+
+#: data/glade/object-editor.glade.h:20
+msgid "Literal:"
+msgstr "Literalo:"
+
+#: data/glade/object-editor.glade.h:21
+msgid "Load image"
+msgstr "Ŝargu bildon"
+
+#: data/glade/object-editor.glade.h:22
+msgid "Position"
+msgstr "Lokiĝo"
+
+#: data/glade/object-editor.glade.h:23
+msgid "Reset image size"
+msgstr "Restarigu grandon de bildo"
+
+#: data/glade/object-editor.glade.h:24
+msgid "Size"
+msgstr "Grando"
+
+#: data/glade/object-editor.glade.h:25
+msgid "Size:"
+msgstr "Grando:"
+
+#: data/glade/object-editor.glade.h:26
+msgid "Style"
+msgstr "Stilo"
+
+#: data/glade/object-editor.glade.h:27
+msgid "Style:"
+msgstr "Stilo:"
+
+#: data/glade/object-editor.glade.h:30
+msgid "X:"
+msgstr "X:"
+
+#: data/glade/object-editor.glade.h:31
+msgid "Y:"
+msgstr "Y:"
+
+#: data/glade/object-editor.glade.h:32
+msgid "degrees"
+msgstr "gradoj"
+
+#: data/glade/object-editor.glade.h:33
+msgid "dialog1"
+msgstr "fenestr1"
+
+#: data/glade/object-editor.glade.h:34
+msgid "digits:"
+msgstr "ciferoj:"
+
+#: data/glade/object-editor.glade.h:35
+msgid "format:"
+msgstr "formato:"
+
+#: data/glade/template-designer.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: data/glade/template-designer.glade.h:2
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr "(es., \"Etichette di spedizione,\" \"Vizitkartoj,\" ...)"
+
+#: data/glade/template-designer.glade.h:3
+msgid "(e.g., 8163A)"
+msgstr "(es. 8163A)"
+
+#: data/glade/template-designer.glade.h:4
+msgid "(e.g., Avery, Acme, ...)"
+msgstr "(es. Avery, Acme, ...)"
+
+#: data/glade/template-designer.glade.h:6
+msgid "1. Outer radius:"
+msgstr "1. Ekstera radiuso:"
+
+#: data/glade/template-designer.glade.h:7
+msgid "1. Radius:"
+msgstr "1. Radiuso:"
+
+#: data/glade/template-designer.glade.h:8
+msgid "1. Width:"
+msgstr "1. Larĝo:"
+
+#: data/glade/template-designer.glade.h:9
+msgid "2. Height:"
+msgstr "2. Alto:"
+
+#: data/glade/template-designer.glade.h:10
+msgid "2. Inner radius:"
+msgstr "2. Interna radiuso:"
+
+#: data/glade/template-designer.glade.h:11
+msgid "2. Waste (overprint allowed):"
+msgstr "2. Forĵetaĵo (surskrivebla):"
+
+#: data/glade/template-designer.glade.h:12
+msgid "3. Clipping width:"
+msgstr ""
+
+#: data/glade/template-designer.glade.h:13
+msgid "3. Margin"
+msgstr "3. Marĝeno"
+
+#: data/glade/template-designer.glade.h:14
+msgid "3. Round (radius of corner):"
+msgstr "3. Rondo (radiuso de angulo):"
+
+#: data/glade/template-designer.glade.h:15
+msgid "4. Clipping height:"
+msgstr ""
+
+#: data/glade/template-designer.glade.h:16
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. Horiz. forĵetaĵo (surskrivebla):"
+
+#: data/glade/template-designer.glade.h:17
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. Vert. forĵetaĵo (surskrivebla):"
+
+#: data/glade/template-designer.glade.h:18
+msgid "5. Waste (overprint allowed):"
+msgstr "5. Forĵetaĵo (surskrivebla):"
+
+#: data/glade/template-designer.glade.h:19
+msgid "6. Margin"
+msgstr "6. Marĝeno"
+
+#: data/glade/template-designer.glade.h:20
+msgid "Brand/Manufacturer:"
+msgstr "Marca/Produttore:"
+
+#: data/glade/template-designer.glade.h:21
+msgid "CD/DVD (including credit card CDs)"
+msgstr "KD/DVD"
+
+#: data/glade/template-designer.glade.h:22
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+"Gratulojn!\n"
+"\n"
+"Vi finis Desegnilon de Modelojn por gLabels.\n"
+"Se vi volas konservi tiun ĉi projekton, alklaku sur \"Apliku\".\n"
+"\n"
+"Male, alklaku sur \"Nuligu\" por nuligi\n"
+"vian projekton tutan aŭ \"Retroen\" por ankoraŭ redakti tiun ĉi desegnon."
+
+#: data/glade/template-designer.glade.h:30
+msgid "Design Completed"
+msgstr "Fino de Projektado"
+
+#: data/glade/template-designer.glade.h:31
+msgid "Distance from left edge (x0):"
+msgstr "Distanco el maldekstra rando (x0):"
+
+#: data/glade/template-designer.glade.h:32
+msgid "Distance from top edge (y0):"
+msgstr "Distanco el supra rando (y0):"
+
+#: data/glade/template-designer.glade.h:34
+msgid "Horizontal pitch (dx):"
+msgstr "Horizontala kvanto (dx):"
+
+#: data/glade/template-designer.glade.h:35
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+
+#: data/glade/template-designer.glade.h:40
+msgid "Label Size (CD/DVD)"
+msgstr "Grando de etikedo (KD/DVD)"
+
+#: data/glade/template-designer.glade.h:41
+msgid "Label Size (Round)"
+msgstr "Grando de etikedo (Ronda)"
+
+#: data/glade/template-designer.glade.h:42
+msgid "Label or Card Shape"
+msgstr "Formo de etikedo aŭ de karto"
+
+#: data/glade/template-designer.glade.h:43
+msgid "Label or Card Size (Rectangular)"
+msgstr "Formo de etikedo aŭ de karto (Rektangula)"
+
+#: data/glade/template-designer.glade.h:44
+msgid "Layout #1"
+msgstr "Aspekto #1"
+
+#: data/glade/template-designer.glade.h:45
+msgid "Layout #2"
+msgstr "Aspekto #2"
+
+#: data/glade/template-designer.glade.h:46
+msgid "Layout(s)"
+msgstr "Aspekto(j)"
+
+#: data/glade/template-designer.glade.h:47
+msgid "Name and Description"
+msgstr "Nomo kaj Priskribo"
+
+#: data/glade/template-designer.glade.h:48
+msgid "Number across (nx):"
+msgstr "Numero transverse (nx):"
+
+#: data/glade/template-designer.glade.h:49
+msgid "Number down (ny):"
+msgstr "Numero sube (ny):"
+
+#: data/glade/template-designer.glade.h:50
+msgid "Number of Layouts"
+msgstr "Nombro da Aspektoj"
+
+#: data/glade/template-designer.glade.h:51
+msgid "Number of layouts:"
+msgstr "Nombro da aspektoj:"
+
+#: data/glade/template-designer.glade.h:52
+msgid "Page Size"
+msgstr "Grando de paĝo"
+
+#: data/glade/template-designer.glade.h:54
+msgid "Part #:"
+msgstr "Parto #:"
+
+#: data/glade/template-designer.glade.h:55
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr ""
+
+#: data/glade/template-designer.glade.h:56
+msgid "Please enter the following layout information."
+msgstr "Bonvolu enmeti menditajn informojn."
+
+#: data/glade/template-designer.glade.h:57
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr ""
+"Bonvolu enmeti menditajn parametrojn de grando por unu etikedo en "
+"la modelo."
+
+#: data/glade/template-designer.glade.h:58
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Bonvolu enmeti menditajn parametrojn de grando por unu etikedo aŭ karto en "
+"la modelo."
+
+#: data/glade/template-designer.glade.h:59
+msgid "Please select the basic shape of the labels or cards."
+msgstr ""
+
+#: data/glade/template-designer.glade.h:60
+msgid "Please select the page size of the template stationery."
+msgstr "Bonvolu elekti grandon de paĝo por modelo de skribvaroj."
+
+#: data/glade/template-designer.glade.h:61
+msgid "Print test sheet"
+msgstr "Presu paĝon de elprovo"
+
+#: data/glade/template-designer.glade.h:62
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "Rektangula aŭ kvadra (ankaŭ kun rondaj anguloj)"
+
+#: data/glade/template-designer.glade.h:63
+msgid "Round"
+msgstr "Ronda"
+
+#: data/glade/template-designer.glade.h:64
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+"Modeloj necesas\n"
+"du aspektojn."
+
+#: data/glade/template-designer.glade.h:66
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+"Modeloj necesas nur \n"
+"unu aspekton."
+
+#: data/glade/template-designer.glade.h:68
+msgid "Vertical pitch (dy):"
+msgstr "Vertikala kvanto (dy):"
+
+#: data/glade/template-designer.glade.h:69
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+"Bonvenon! Tiu ĉi estas Desegnilo de Modeloj por gLabels.\n"
+"\n"
+"Tio helpos vin por krei personigitan modelon por gLabels."
+
+#. Other ISO A series sizes
+#: data/templates/paper-sizes.xml.h:2
+msgid "A0"
+msgstr "A0"
+
+#: data/templates/paper-sizes.xml.h:3
+msgid "A1"
+msgstr "A1"
+
+#: data/templates/paper-sizes.xml.h:4
+msgid "A10"
+msgstr "A10"
+
+#: data/templates/paper-sizes.xml.h:5
+msgid "A2"
+msgstr "A2"
+
+#: data/templates/paper-sizes.xml.h:6
+msgid "A3"
+msgstr "A3"
+
+#: data/templates/paper-sizes.xml.h:7
+msgid "A4"
+msgstr "A4"
+
+#: data/templates/paper-sizes.xml.h:8
+msgid "A5"
+msgstr "A5"
+
+#: data/templates/paper-sizes.xml.h:9
+msgid "A6"
+msgstr "A6"
+
+#: data/templates/paper-sizes.xml.h:10
+msgid "A7"
+msgstr "A7"
+
+#: data/templates/paper-sizes.xml.h:11
+msgid "A8"
+msgstr "A8"
+
+#: data/templates/paper-sizes.xml.h:12
+msgid "A9"
+msgstr "A9"
+
+#. ISO B series sizes
+#: data/templates/paper-sizes.xml.h:14
+msgid "B0"
+msgstr "B0"
+
+#: data/templates/paper-sizes.xml.h:15
+msgid "B1"
+msgstr "B1"
+
+#: data/templates/paper-sizes.xml.h:16
+msgid "B10"
+msgstr "B10"
+
+#: data/templates/paper-sizes.xml.h:17
+msgid "B2"
+msgstr "B2"
+
+#: data/templates/paper-sizes.xml.h:18
+msgid "B3"
+msgstr "B3"
+
+#: data/templates/paper-sizes.xml.h:19
+msgid "B4"
+msgstr "B4"
+
+#: data/templates/paper-sizes.xml.h:20
+msgid "B5"
+msgstr "B5"
+
+#: data/templates/paper-sizes.xml.h:21
+msgid "B6"
+msgstr "B6"
+
+#: data/templates/paper-sizes.xml.h:22
+msgid "B7"
+msgstr "B7"
+
+#: data/templates/paper-sizes.xml.h:23
+msgid "B8"
+msgstr "B8"
+
+#: data/templates/paper-sizes.xml.h:24
+msgid "B9"
+msgstr "B9"
+
+#: data/templates/paper-sizes.xml.h:25
+msgid "US Executive"
+msgstr "US Executive"
+
+#. Other US paper sizes
+#: data/templates/paper-sizes.xml.h:27
+msgid "US Legal"
+msgstr "US Legal"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:2
+#: data/templates/zweckform-iso-templates.xml.h:2
+msgid "Address Labels"
+msgstr "Etikedo por adreso"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. ======================================================
+#: data/templates/avery-us-templates.xml.h:4
+#: data/templates/avery-iso-templates.xml.h:4
+#: data/templates/zweckform-iso-templates.xml.h:6
+#: data/templates/misc-us-templates.xml.h:3
+#: data/templates/misc-iso-templates.xml.h:17
+msgid "Business Cards"
+msgstr "Vizitkartoj"
+
+#: data/templates/avery-us-templates.xml.h:5
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "Etikedoj por KD/DVD (Etikedoj por diskoj)"
+
+#: data/templates/avery-us-templates.xml.h:6
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "Etikedoj por KD/DVD (Etikedoj por diskoj)"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:8
+msgid "Diskette Labels"
+msgstr "Etikedoj por disketoj"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:10
+msgid "Filing Labels"
+msgstr ""
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:12
+msgid "Full Sheet Labels"
+msgstr "Paĝo plena da ekikedoj"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:14
+msgid "Large Round Labels"
+msgstr "Grandaj rondigitaj etikedoj"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:16
+msgid "Name Badge Labels"
+msgstr "Nomŝildetoj"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:18
+msgid "Return Address Labels"
+msgstr "Etikedoj por adreso de sendinto"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:20
+msgid "Shipping Labels"
+msgstr "Etikedoj por ekspedo"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:22
+msgid "Small Round Labels"
+msgstr "Malgrandaj rondigitaj etikedoj"
+
+#. ===================================================================
+#: data/templates/avery-us-templates.xml.h:24
+msgid "Square Labels"
+msgstr "Kvardaj etikedoj"
+
+#: data/templates/avery-us-templates.xml.h:25
+msgid "Video Tape Face Labels"
+msgstr "Etikedoj por videokasedo (faco)"
+
+#: data/templates/avery-us-templates.xml.h:26
+msgid "Video Tape Spine Labels"
+msgstr "Etikedoj por videokasedo (dorso)"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:2
+msgid "Address labels"
+msgstr "Etikedoj por adreso"
+
+#. ===============================================================
+#: data/templates/avery-iso-templates.xml.h:6
+msgid "CD Booklet"
+msgstr "CD Booklet"
+
+#. ===============================================================
+#: data/templates/avery-iso-templates.xml.h:8
+msgid "CD Inlet"
+msgstr "CD Inlet"
+
+#. ===============================================================
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:10
+#: data/templates/zweckform-iso-templates.xml.h:8
+#: data/templates/misc-us-templates.xml.h:5
+#: data/templates/misc-iso-templates.xml.h:21
+msgid "CD/DVD Labels"
+msgstr "Etikedoj por KD/DVD"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:12
+msgid "Diskette labels"
+msgstr "Etikedoj por disketoj"
+
+#. ===============================================================
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:14
+#: data/templates/zweckform-iso-templates.xml.h:14
+#: data/templates/misc-iso-templates.xml.h:35
+msgid "Mailing Labels"
+msgstr "Etikedoj por poŝto"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:16
+msgid "Mailing labels"
+msgstr "Etikedoj por poŝto"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:18
+msgid "Mini Address Labels"
+msgstr "Eta etikedoj por adreso"
+
+#. ===================================================================
+#: data/templates/avery-iso-templates.xml.h:20
+msgid "Shipping labels"
+msgstr "Etikedo por ekspedo"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:4
+msgid "Allround Labels"
+msgstr "Plenrondaj etikedoj"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:10
+msgid "Correction and Cover-up Labels"
+msgstr "Etikedoj por korektado kaj kovrado"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:12
+msgid "Lever Arch File Labels"
+msgstr "Levilaj arkaj etikedoj por dosieroj"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:16
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:18
+msgid "Rectangular Copier Labels"
+msgstr "Rektangulaj etikedoj por kopiado"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:20
+#: data/templates/misc-iso-templates.xml.h:44
+msgid "Rectangular Labels"
+msgstr "Rektangulaj Etikedoj"
+
+#. ===================================================================
+#: data/templates/zweckform-iso-templates.xml.h:22
+msgid "Video Labels (back)"
+msgstr "Etikedo por Video (retro)"
+
+#: data/templates/misc-us-templates.xml.h:1
+msgid "Business Card CD"
+msgstr "Vizitkarto KD"
+
+#: data/templates/misc-us-templates.xml.h:4
+msgid "CD Template Rectangles"
+msgstr "Modelaj Rektanguloj por KD"
+
+#: data/templates/misc-us-templates.xml.h:6
+msgid "CD/DVD Labels (Face Only)"
+msgstr "Etikedoj por KD/DVD (nur faco)"
+
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:7
+#: data/templates/misc-iso-templates.xml.h:23
+msgid "CD/DVD Labels (face only)"
+msgstr "Etikedoj por KD/DVD (nur faco)"
+
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:9
+msgid "Cassette Labels"
+msgstr "Etikedoj por kasedoj"
+
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:11
+msgid "DLT Labels"
+msgstr "Etikedoj DLT"
+
+#. ===================================================================
+#: data/templates/misc-us-templates.xml.h:13
+msgid "Microtube labels"
+msgstr "Mikrotubaj etikedoj"
+
+#: data/templates/misc-us-templates.xml.h:14
+msgid "Mini-CD Labels"
+msgstr "Etikedoj por Mini-KD"
+
+#: data/templates/misc-us-templates.xml.h:15
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "Etikedoj por PRO CD (nur KD-dorso)"
+
+#: data/templates/misc-us-templates.xml.h:16
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "Etikedoj por PRO CD (nur faco)"
+
+#: data/templates/misc-us-templates.xml.h:17
+#: data/templates/misc-iso-templates.xml.h:42
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "Etikedoj por PRO CD (nur faco)"
+
+#: data/templates/misc-us-templates.xml.h:18
+msgid "Slimline CD Case (rightside up)"
+msgstr "Subtila KD-ujo (dekstrosupra)"
+
+#: data/templates/misc-us-templates.xml.h:19
+msgid "Slimline CD Case (upside down)"
+msgstr "Subtila KD-ujo (kaposuba)"
+
+#: data/templates/misc-iso-templates.xml.h:1
+msgid "Agipa 119488: Business Cards"
+msgstr "Agipa 119488: Vizitkartoj"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:3
+msgid "Allround Labels --24"
+msgstr "Plenrondaj etikedoj --24"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:5
+msgid "Allround Labels --44"
+msgstr "Plenrondaj etikedoj --44"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:7
+msgid "Allround Labels --64"
+msgstr "Plenrondaj etikedoj --64"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:9
+msgid "Allround Labels --65"
+msgstr "Plenrondaj etikedoj --65"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:11
+msgid "Arch File Labels"
+msgstr "Arkaj etikedoj por dosieroj"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:13
+msgid "Arch File Labels (large)"
+msgstr "Arkaj etikedoj por dosieroj (grandaj)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:15
+msgid "Arch File Labels (small)"
+msgstr "Arkaj etikedoj por dosieroj (etaj)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:19
+msgid "CD Labels"
+msgstr "Etikedoj por KD"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:25
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "Etikedoj kun standarta formato por KD/DVD (nur faco)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:27
+msgid "Diskette Labels (face only)"
+msgstr "Etikedoj por disketoj (nur faco)"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:29
+msgid "EPSON Photo Stickers 16"
+msgstr "EPSON Photo Stickers 16"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:31
+msgid "Etiketten"
+msgstr "Etiketten"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:33
+msgid "Fridge Magnet Stickers"
+msgstr "Magnetaĵoj por fridujo"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:37
+msgid "Mailing Labels --14"
+msgstr "Etikedo por poŝto --14"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:39
+msgid "Mailing Labels-2 columns"
+msgstr "Etikedo por poŝto kun 2 kolumnoj"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:41
+msgid "Mailing Labels-3 columns"
+msgstr "Etikedo por poŝto kun 3 kolumnoj"
+
+#. ===================================================================
+#: data/templates/misc-iso-templates.xml.h:46
+msgid "Video Labels (face only)"
+msgstr "Etikedoj por video (nur frontispico)"
+
+#: data/desktop/glabels.desktop.in.h:1
+msgid "Create labels, business cards and media covers"
+msgstr "Kreu etikedojn, vizitkartojn kaj kovrilojn de plurmediaĵoj"
+
+#: data/desktop/glabels.desktop.in.h:2
+msgid "gLabels Label Designer"
+msgstr "gLabels Designer di etichetta"
+
+#: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "Dosiero de Projekto de gLabels"
+
