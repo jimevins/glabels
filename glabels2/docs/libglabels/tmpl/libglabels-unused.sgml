@@ -4,3 +4,19 @@
 </para>
 
 
+<!-- ##### FUNCTION gl_template_get_name_list ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_get_name_with_desc ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+

@@ -16,6 +16,9 @@ template files and document files.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION gl_xml_template_read_templates_from_file ##### -->
 <para>
 

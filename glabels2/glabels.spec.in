@@ -13,15 +13,11 @@ Prefix: %{_prefix}
 BuildRequires: gtk2-devel >= @GTK_REQUIRED@
 BuildRequires: libxml2-devel >= @LIBXML_REQUIRED@
 BuildRequires: libgnomeui-devel >= @LIBGNOMEUI_REQUIRED@
-BuildRequires: libgnomecanvas-devel >= @LIBGNOMECANVAS_REQUIRED@
-BuildRequires: libgnomeprintui22-devel >= @LIBGNOMEPRINT_REQUIRED@
 BuildRequires: libglade2-devel >= @LIBGLADE_REQUIRED@
 
 Requires: gtk2 >= @GTK_REQUIRED@
 Requires: libxml2 >= @LIBXML_REQUIRED@
 Requires: libgnomeui >= @LIBGNOMEUI_REQUIRED@
-Requires: libgnomecanvas >= @LIBGNOMECANVAS_REQUIRED@
-Requires: libgnomeprintui22 >= @LIBGNOMEPRINT_REQUIRED@
 Requires: libglade2 >= @LIBGLADE_REQUIRED@
 
 %description
@@ -52,6 +48,7 @@ desktop-file-install --vendor gnome --delete-original \
 %{__rm} -f %{buildroot}%{_datadir}/mime/XMLnamespaces
 %{__rm} -f %{buildroot}%{_datadir}/mime/globs
 %{__rm} -f %{buildroot}%{_datadir}/mime/magic
+%{__rm} -f %{buildroot}%{_datadir}/mime/mime.cache
 %{__rm} -rf %{buildroot}%{_datadir}/mime/application
 %{__rm} -rf %{buildroot}%{_datadir}/mime/aliases
 %{__rm} -rf %{buildroot}%{_datadir}/mime/subclasses

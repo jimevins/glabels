@@ -1,3 +1,13 @@
+2007-08-16  Jim Evins  <evins@snaught.com>
+
+	* Makefile.am:
+		Include subdir iec16022-0.2.1.
+	* NEWS:
+	* configure.in:
+	* glabels.spec.in:
+		Preparation for 2.1.4.
+	
+
 2007-08-11  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:

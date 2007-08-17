@@ -18,6 +18,9 @@ These functions are basically wrappers to functions from libxml2.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION gl_xml_get_prop_double ##### -->
 <para>
 

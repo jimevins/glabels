@@ -1,6 +1,7 @@
-47% symbol docs coverage.
-36 symbols documented.
-41 not documented.
+52% symbol docs coverage.
+46 symbols documented.
+1 symbols incomplete.
+43 not documented.
 
 
 glPaper
@@ -11,6 +12,7 @@ glTemplateLayout
 glTemplateMarkup
 glTemplateMarkupType
 glTemplateOrigin
+glUnitsType (GL_UNITS_POINT, GL_UNITS_INCH, GL_UNITS_MM, GL_UNITS_CM, GL_UNITS_PICA, GL_UNITS_FIRST, GL_UNITS_LAST)
 gl_template_add_alias
 gl_template_add_label_type
 gl_template_add_layout
@@ -23,8 +25,6 @@ gl_template_from_name
 gl_template_get_first_label_type
 gl_template_get_label_size
 gl_template_get_n_labels
-gl_template_get_name_list
-gl_template_get_name_with_desc
 gl_template_get_origins
 gl_template_init
 gl_template_label_type_dup
@@ -45,3 +45,8 @@ gl_template_register
 gl_template_round_label_type_new
 gl_xml_template_create_templates_doc
 
+
+libglabels:Long_Description
+libglabels:Short_Description
+template:Long_Description
+template:Short_Description

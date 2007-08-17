@@ -14,6 +14,9 @@ template
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT glTemplate ##### -->
 <para>
 
@@ -24,6 +27,7 @@ template
 @page_size: 
 @page_width: 
 @page_height: 
+@categories: 
 @label_types: 
 @aliases: 
 
@@ -97,15 +101,6 @@ template
 @template: 
 
 
-<!-- ##### FUNCTION gl_template_get_name_list ##### -->
-<para>
-
-</para>
-
-@page_size: 
-@Returns: 
-
-
 <!-- ##### FUNCTION gl_template_free_name_list ##### -->
 <para>
 
@@ -120,15 +115,6 @@ template
 </para>
 
 @name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION gl_template_get_name_with_desc ##### -->
-<para>
-
-</para>
-
-@template: 
 @Returns: 
 
 
