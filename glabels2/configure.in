@@ -39,9 +39,9 @@ dnl    increment current, and set revision to 0.
 dnl 5. If any interfaces have been added since the last public release, then increment age.
 dnl 6. If any interfaces have been removed since the last public release, then set age
 dnl    to 0.
-LIBGLABELS_C=3
+LIBGLABELS_C=4
 LIBGLABELS_R=0
-LIBGLABELS_A=1
+LIBGLABELS_A=0
 
 LIBGLABELS_VERSION_INFO=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
 AC_SUBST(LIBGLABELS_VERSION_INFO)
