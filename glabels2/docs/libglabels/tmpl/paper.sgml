@@ -1,0 +1,159 @@
+<!-- ##### SECTION Title ##### -->
+Paper Definitions
+
+<!-- ##### SECTION Short_Description ##### -->
+Paper size definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a structure for representing a paper size definition
+and related functions.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT glPaper ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@width: 
+@height: 
+
+<!-- ##### FUNCTION gl_paper_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gl_paper_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@width: 
+@height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_free ##### -->
+<para>
+
+</para>
+
+@paper: 
+
+
+<!-- ##### FUNCTION gl_paper_get_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_free_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+
+<!-- ##### FUNCTION gl_paper_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION gl_paper_is_id_known ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_is_id_other ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_paper_print_known_papers ##### -->
+<para>
+
+</para>
+
+
+

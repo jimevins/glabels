@@ -1,0 +1,136 @@
+<!-- ##### SECTION Title ##### -->
+XML Helper Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+Functions to help format and parse glabels XML properties
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a number of "helper" functions for formatting and
+parsing various types of properties for tags in glabels XML file formats.
+</para>
+<para>
+These functions are basically wrappers to functions from libxml2.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gl_xml_get_prop_double ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_get_prop_boolean ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_get_prop_int ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_get_prop_uint ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_get_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_xml_set_prop_double ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION gl_xml_set_prop_boolean ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION gl_xml_set_prop_int ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION gl_xml_set_prop_uint_hex ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION gl_xml_set_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION gl_xml_set_default_units ##### -->
+<para>
+
+</para>
+
+@units: 
+
+

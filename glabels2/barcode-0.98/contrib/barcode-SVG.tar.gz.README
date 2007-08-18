@@ -1,0 +1,24 @@
+
+[readme written by GNU-barcode maintainer]
+
+This is a stripped version of what you can find at:
+	http://www.onefour.net/barcode/SVG/barcode097-SVG.tar.gz
+
+It's by David J. Humphreys, it's GPL code and the original tarball
+(as per the previous URL) contains:
+
+-rwxr--r-- david/david     243 2002-01-02 04:18:00 Makefile
+-rwxr--r-- david/david    1284 2002-01-08 00:26:42 main.c
+-rwxr--r-- david/david   37796 2002-01-02 04:33:00 screen1.png
+-rwxr--r-- david/david    5503 2002-01-08 00:30:00 svg.c
+-rwxr--r-- david/david    2499 2002-01-02 03:37:00 test1.svg
+-rwxr--r-- david/david    2499 2002-01-02 03:44:00 test2.svg
+-rwxr--r-- david/david    2499 2002-01-02 03:49:00 test3.svg
+-rwxr--r-- david/david   34185 2002-01-02 04:41:00 test4.png
+-rwxr--r-- david/david    1834 2002-01-02 04:19:00 test4.svg
+-rwxr--r-- david/david   92713 2002-01-02 04:36:00 transformation.png
+-rwxr--r-- david/david     586 2002-01-02 04:11:00 transformation.svg
+
+Here I only included Makefile, main.c, svg.c, after converting
+newlines to unix-style and changing permissions.
+

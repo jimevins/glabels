@@ -1,0 +1,374 @@
+<!-- ##### SECTION Title ##### -->
+template
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT glTemplate ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@categories: 
+@label_types: 
+@aliases: 
+
+<!-- ##### STRUCT glTemplateLabelType ##### -->
+<para>
+
+</para>
+
+@id: 
+@layouts: 
+@markups: 
+@shape: 
+
+<!-- ##### STRUCT glTemplateLayout ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+
+<!-- ##### STRUCT glTemplateMarkup ##### -->
+<para>
+
+</para>
+
+@type: 
+
+<!-- ##### STRUCT glTemplateOrigin ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+
+<!-- ##### ENUM glTemplateLabelShape ##### -->
+<para>
+
+</para>
+
+@GL_TEMPLATE_SHAPE_RECT: 
+@GL_TEMPLATE_SHAPE_ROUND: 
+@GL_TEMPLATE_SHAPE_CD: 
+
+<!-- ##### ENUM glTemplateMarkupType ##### -->
+<para>
+
+</para>
+
+@GL_TEMPLATE_MARKUP_MARGIN: 
+@GL_TEMPLATE_MARKUP_LINE: 
+@GL_TEMPLATE_MARKUP_CIRCLE: 
+
+<!-- ##### FUNCTION gl_template_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gl_template_register ##### -->
+<para>
+
+</para>
+
+@template: 
+
+
+<!-- ##### FUNCTION gl_template_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION gl_template_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_get_first_label_type ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_get_label_size ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@w: 
+@h: 
+
+
+<!-- ##### FUNCTION gl_template_get_n_labels ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_get_origins ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_add_label_type ##### -->
+<para>
+
+</para>
+
+@template: 
+@label_type: 
+
+
+<!-- ##### FUNCTION gl_template_add_alias ##### -->
+<para>
+
+</para>
+
+@template: 
+@alias: 
+
+
+<!-- ##### FUNCTION gl_template_rect_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_round_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r: 
+@waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_cd_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_add_layout ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@layout: 
+
+
+<!-- ##### FUNCTION gl_template_add_markup ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@markup: 
+
+
+<!-- ##### FUNCTION gl_template_layout_new ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_markup_margin_new ##### -->
+<para>
+
+</para>
+
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_markup_line_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@x2: 
+@y2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_markup_circle_new ##### -->
+<para>
+
+</para>
+
+@x0: 
+@y0: 
+@r: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_free ##### -->
+<para>
+
+</para>
+
+@template: 
+
+
+<!-- ##### FUNCTION gl_template_label_type_dup ##### -->
+<para>
+
+</para>
+
+@orig_ltype: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_label_type_free ##### -->
+<para>
+
+</para>
+
+@ltype: 
+
+
+<!-- ##### FUNCTION gl_template_layout_dup ##### -->
+<para>
+
+</para>
+
+@orig_layout: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_layout_free ##### -->
+<para>
+
+</para>
+
+@layout: 
+
+
+<!-- ##### FUNCTION gl_template_markup_dup ##### -->
+<para>
+
+</para>
+
+@orig_markup: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gl_template_markup_free ##### -->
+<para>
+
+</para>
+
+@markup: 
+
+
+<!-- ##### FUNCTION gl_template_print_known_templates ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gl_template_print_aliases ##### -->
+<para>
+
+</para>
+
+@template: 
+
+
