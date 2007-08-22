@@ -478,6 +478,14 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 		gtk_widget_show_all (op->priv->merge_frame);
 	}
 
+        /* --- Set options --- */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->outline_check),
+                                      op->priv->outline_flag);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->reverse_check),
+                                      op->priv->reverse_flag);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->crop_marks_check),
+                                      op->priv->crop_marks_flag);
+
         /* --- Do we need to force the outline flag --- */
         if (op->priv->force_outline_flag)
         {
@@ -488,14 +496,6 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                 gtk_widget_set_sensitive (op->priv->reverse_check, FALSE);
                 gtk_widget_set_sensitive (op->priv->crop_marks_check, FALSE);
         }
-
-        /* --- Set options --- */
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->outline_check),
-                                      op->priv->outline_flag);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->reverse_check),
-                                      op->priv->reverse_flag);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->crop_marks_check),
-                                      op->priv->crop_marks_flag);
 
 	return G_OBJECT (vbox);
 }

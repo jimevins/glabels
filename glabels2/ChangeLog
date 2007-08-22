@@ -1,5 +1,10 @@
 2007-08-21  Jim Evins  <evins@snaught.com>
 
+	* src/print-op.c: (create_custom_widget_cb):
+		Fix problem with force_outline_flag -- don't override with default.
+
+2007-08-21  Jim Evins  <evins@snaught.com>
+
 	* data/dtd/glabels-2.0.dtd:
 	* libglabels/template.c:
 	* libglabels/template.h:
