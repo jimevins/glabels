@@ -117,7 +117,7 @@
 <!-- Template Section                                                     -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ENTITY % label_element  "Label-rectangle | Label-round | Label-cd">
-<!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle">
+<!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle | Markup-rect">
 
 <!ELEMENT Template (Meta*, (%label_element;)+, Alias*)>
 <!ATTLIST Template
@@ -180,6 +180,15 @@
                  x0              %LENGTH_TYPE;           #REQUIRED
                  y0              %LENGTH_TYPE;           #REQUIRED
                  radius          %LENGTH_TYPE;           #REQUIRED
+>
+
+<!ELEMENT Markup-rect EMPTY>
+<!ATTLIST Markup-rect
+                 x1              %LENGTH_TYPE;           #REQUIRED
+                 y1              %LENGTH_TYPE;           #REQUIRED
+                 w               %LENGTH_TYPE;           #REQUIRED
+                 h               %LENGTH_TYPE;           #REQUIRED
+                 r               %LENGTH_TYPE;           #REQUIRED
 >
 
 <!ELEMENT Layout EMPTY>

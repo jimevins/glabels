@@ -661,6 +661,30 @@ gl_template_markup_circle_new (gdouble x0,
 	return markup;
 }
 
+/*****************************************************************************/
+/* Create new markup rect structure.                                         */
+/*****************************************************************************/
+glTemplateMarkup *
+gl_template_markup_rect_new (gdouble x1,
+			     gdouble y1,
+			     gdouble w,
+			     gdouble h,
+                             gdouble r)
+{
+	glTemplateMarkup *markup;
+
+	markup = g_new0 (glTemplateMarkup, 1);
+
+	markup->type             = GL_TEMPLATE_MARKUP_RECT;
+	markup->data.rect.x1     = x1;
+	markup->data.rect.y1     = y1;
+	markup->data.rect.w      = w;
+	markup->data.rect.h      = h;
+	markup->data.rect.r      = r;
+
+	return markup;
+}
+
 
 /*****************************************************************************/
 /* Copy a template.                                                          */

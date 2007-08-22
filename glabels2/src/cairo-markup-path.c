@@ -65,6 +65,9 @@ static void       gl_cairo_markup_line_path           (cairo_t                *c
 static void       gl_cairo_markup_circle_path         (cairo_t                *cr,
                                                        const glTemplateMarkup *markup);
 
+static void       gl_cairo_markup_rect_path           (cairo_t                *cr,
+                                                       const glTemplateMarkup *markup);
+
 
 /*--------------------------------------------------------------------------*/
 /* Create markup path                                                       */
@@ -85,6 +88,9 @@ gl_cairo_markup_path (cairo_t                *cr,
                 break;
         case GL_TEMPLATE_MARKUP_CIRCLE:
                 gl_cairo_markup_circle_path (cr, markup);
+                break;
+        case GL_TEMPLATE_MARKUP_RECT:
+                gl_cairo_markup_rect_path (cr, markup);
                 break;
         default:
                 g_message ("Unknown template markup type");
@@ -271,6 +277,38 @@ gl_cairo_markup_circle_path (cairo_t                *cr,
                    markup->data.circle.r,
                    0.0, 2*G_PI);
         cairo_close_path (cr);
+
+	gl_debug (DEBUG_PATH, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw rect markup.                                               */
+/*---------------------------------------------------------------------------*/
+static void
+gl_cairo_markup_rect_path (cairo_t                *cr,
+                           const glTemplateMarkup *markup)
+{
+        gdouble x1 = markup->data.rect.x1;
+        gdouble y1 = markup->data.rect.y1;
+        gdouble w  = markup->data.rect.w;
+        gdouble h  = markup->data.rect.h;
+        gdouble r  = markup->data.rect.r;
+
+	gl_debug (DEBUG_PATH, "START");
+
+        if ( r == 0.0 )
+        {
+                cairo_rectangle (cr, x1, y1, w, h);
+        }
+        else
+        {
+                cairo_new_path (cr);
+                cairo_arc_negative (cr, x1+r,   y1+r,   r, 3*G_PI/2, G_PI);
+                cairo_arc_negative (cr, x1+r,   y1+h-r, r, G_PI,     G_PI/2);
+                cairo_arc_negative (cr, x1+w-r, y1+h-r, r, G_PI/2,   0.);
+                cairo_arc_negative (cr, x1+w-r, y1+r,   r, 2*G_PI,   3*G_PI/2);
+                cairo_close_path (cr);
+        }
 
 	gl_debug (DEBUG_PATH, "END");
 }

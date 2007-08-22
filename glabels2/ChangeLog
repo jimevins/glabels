@@ -1,5 +1,14 @@
 2007-08-21  Jim Evins  <evins@snaught.com>
 
+	* data/dtd/glabels-2.0.dtd:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+	* src/cairo-markup-path.c:
+		Added "Markup-rect" element to template format.
+
+2007-08-21  Jim Evins  <evins@snaught.com>
+
 	* configure.in:
 		Changed version to 2.1.pre5svn.
 	* src/view.c: (draw_markup_layer):

@@ -138,6 +138,7 @@ typedef enum {
 	GL_TEMPLATE_MARKUP_MARGIN,
 	GL_TEMPLATE_MARKUP_LINE,
 	GL_TEMPLATE_MARKUP_CIRCLE,
+	GL_TEMPLATE_MARKUP_RECT,
 } glTemplateMarkupType;
 
 
@@ -164,6 +165,12 @@ struct _glTemplateMarkup {
 			gdouble                r;      /* Radius of circle */
 		} circle;
 		
+		struct {
+			gdouble                x1, y1; /* Upper left corner */
+			gdouble                w, h;   /* Width and height. */
+                        gdouble                r;      /* Radius of corners. */
+		} rect;
+
 	} data;
 
 };
@@ -285,6 +292,12 @@ glTemplateMarkup    *gl_template_markup_line_new      (gdouble              x1,
 glTemplateMarkup    *gl_template_markup_circle_new    (gdouble              x0,
 						       gdouble              y0,
 						       gdouble              r);
+
+glTemplateMarkup    *gl_template_markup_rect_new      (gdouble              x1,
+						       gdouble              y1,
+						       gdouble              w,
+						       gdouble              h,
+                                                       gdouble              r);
 
 glTemplate          *gl_template_dup                  (const glTemplate    *orig);
 

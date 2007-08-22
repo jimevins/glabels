@@ -65,6 +65,8 @@ static void  xml_parse_markup_line_node     (xmlNodePtr              markup_node
 					     glTemplateLabelType    *label_type);
 static void  xml_parse_markup_circle_node   (xmlNodePtr              markup_node,
 					     glTemplateLabelType    *label_type);
+static void  xml_parse_markup_rect_node     (xmlNodePtr              markup_node,
+					     glTemplateLabelType    *label_type);
 static void  xml_parse_alias_node           (xmlNodePtr              alias_node,
 					     glTemplate             *template);
 
@@ -84,6 +86,9 @@ static void  xml_create_markup_line_node    (const glTemplateMarkup       *line,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_markup_circle_node  (const glTemplateMarkup       *circle,
+					     xmlNodePtr                    root,
+					     const xmlNsPtr                ns);
+static void  xml_create_markup_rect_node    (const glTemplateMarkup       *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_alias_node          (const gchar                  *name,
@@ -324,6 +329,8 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 			xml_parse_markup_line_node (node, label_type);
 		} else if (gl_xml_is_node (node, "Markup-circle")) {
 			xml_parse_markup_circle_node (node, label_type);
+		} else if (gl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -364,6 +371,8 @@ xml_parse_label_round_node (xmlNodePtr  label_node,
 			xml_parse_markup_line_node (node, label_type);
 		} else if (gl_xml_is_node (node, "Markup-circle")) {
 			xml_parse_markup_circle_node (node, label_type);
+		} else if (gl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -407,6 +416,8 @@ xml_parse_label_cd_node (xmlNodePtr  label_node,
 			xml_parse_markup_line_node (node, label_type);
 		} else if (gl_xml_is_node (node, "Markup-circle")) {
 			xml_parse_markup_circle_node (node, label_type);
+		} else if (gl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, label_type);
 		} else if (!xmlNodeIsText (node)) {
 			if (!gl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -522,6 +533,36 @@ xml_parse_markup_circle_node (xmlNodePtr              markup_node,
 
 	gl_template_add_markup (label_type,
 				gl_template_markup_circle_new (x0, y0, r));
+
+	for (node = markup_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (!xmlNodeIsText (node)) {
+			if (!gl_xml_is_node (node, "comment")) {
+				g_message ("bad node =  \"%s\"",node->name);
+			}
+		}
+	}
+
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label->Markup-rect Node.                   */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_markup_rect_node (xmlNodePtr              markup_node,
+			    glTemplateLabelType    *label_type)
+{
+	gdouble     x1, y1, w, h, r;
+	xmlNodePtr  node;
+
+	x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
+	y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
+	w  = gl_xml_get_prop_length (markup_node, "w", 0);
+	h  = gl_xml_get_prop_length (markup_node, "h", 0);
+	r  = gl_xml_get_prop_length (markup_node, "r", 0);
+
+	gl_template_add_markup (label_type,
+				gl_template_markup_rect_new (x1, y1, w, h, r));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -745,6 +786,9 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 		case GL_TEMPLATE_MARKUP_CIRCLE:
 			xml_create_markup_circle_node (markup, node, ns);
 			break;
+		case GL_TEMPLATE_MARKUP_RECT:
+			xml_create_markup_rect_node (markup, node, ns);
+			break;
 		default:
 			g_message ("Unknown markup type");
 			break;
@@ -828,6 +872,26 @@ xml_create_markup_circle_node (const glTemplateMarkup *markup,
 	gl_xml_set_prop_length (node, "x0",     markup->data.circle.x0);
 	gl_xml_set_prop_length (node, "y0",     markup->data.circle.y0);
 	gl_xml_set_prop_length (node, "radius", markup->data.circle.r);
+
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Template->Label->Markup-rect Node.                     */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_markup_rect_node (const glTemplateMarkup *markup,
+			     xmlNodePtr              root,
+			     const xmlNsPtr          ns)
+{
+	xmlNodePtr  node;
+
+	node = xmlNewChild(root, ns, (xmlChar *)"Markup-rect", NULL);
+
+	gl_xml_set_prop_length (node, "x1", markup->data.rect.x1);
+	gl_xml_set_prop_length (node, "y1", markup->data.rect.y1);
+	gl_xml_set_prop_length (node, "w",  markup->data.rect.w);
+	gl_xml_set_prop_length (node, "h",  markup->data.rect.h);
+	gl_xml_set_prop_length (node, "r",  markup->data.rect.r);
 
 }
 
