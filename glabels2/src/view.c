@@ -887,9 +887,9 @@ draw_markup_layer (glView  *view,
                         markup = (glTemplateMarkup *)p->data;
 
                         gl_cairo_markup_path (cr, markup, label);
-                }
 
-                cairo_stroke (cr);
+                        cairo_stroke (cr);
+                }
 
                 cairo_restore (cr);
         }

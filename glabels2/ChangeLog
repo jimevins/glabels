@@ -1,3 +1,11 @@
+2007-08-21  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Changed version to 2.1.pre5svn.
+	* src/view.c: (draw_markup_layer):
+		Do a stroke for each markup path, otherwise multiple markups
+		get connected.
+
 2007-08-17  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
