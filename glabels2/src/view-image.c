@@ -397,14 +397,12 @@ gl_view_image_create_button_press_event   (glView *view,
 	GObject             *object;
         glViewObject        *view_image;
 
+        gl_view_unselect_all (view);
+
         object = gl_label_image_new (view->label);
         gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
         gl_label_object_set_size (GL_LABEL_OBJECT(object), 0.0, 0.0);
 
-        gl_view_unselect_all (view);
-        view_image = gl_view_image_new (GL_LABEL_IMAGE(object), view);
-        gl_view_object_select (GL_VIEW_OBJECT(view_image));
-			
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
         view->create_y0 = y;

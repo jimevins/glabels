@@ -59,6 +59,7 @@ enum {
 	MODIFIED_CHANGED,
 	MERGE_CHANGED,
 	SIZE_CHANGED,
+        OBJECT_ADDED,
 	LAST_SIGNAL
 };
 
@@ -146,6 +147,15 @@ gl_label_class_init (glLabelClass *class)
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
+	signals[OBJECT_ADDED] =
+		g_signal_new ("object_added",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelClass, object_added),
+			      NULL, NULL,
+			      gl_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1, G_TYPE_OBJECT);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -226,15 +236,16 @@ gl_label_add_object (glLabel       *label,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
-	g_return_if_fail (GL_IS_LABEL_OBJECT (object));
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
 	object->parent = label;
-	label->objects = g_list_append (label->objects, object);
+	label->objects = g_list_append (label->objects, g_object_ref (object));
 
 	label->priv->modified_flag = TRUE;
 
-	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
+	g_signal_emit (G_OBJECT(label), signals[OBJECT_ADDED], 0, object);
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+	g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 
 	g_signal_connect (G_OBJECT(object), "changed",
 			  G_CALLBACK(object_changed_cb), label);
@@ -271,8 +282,8 @@ gl_label_remove_object (glLabel       *label,
 
 		label->priv->modified_flag = TRUE;
 
-		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
+		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
 
 	}
 

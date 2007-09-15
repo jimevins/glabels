@@ -76,6 +76,10 @@ struct _glLabelClass {
 
 	void (*size_changed)     (glLabel *label, gpointer user_data);
 
+	void (*object_added)     (glLabel       *label,
+                                  glLabelObject *object,
+                                  gpointer       user_data);
+
 };
 
 

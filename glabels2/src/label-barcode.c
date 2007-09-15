@@ -109,6 +109,7 @@ gl_label_barcode_init (glLabelBarcode *lbc)
 {
 	lbc->priv = g_new0 (glLabelBarcodePrivate, 1);
 	lbc->priv->color_node = gl_color_node_new_default ();
+	lbc->priv->text_node  = gl_text_node_new_from_text ("");
 }
 
 static void
@@ -127,7 +128,7 @@ gl_label_barcode_finalize (GObject *object)
 }
 
 /*****************************************************************************/
-/* NEW label "text" object.                                               */
+/* NEW label "barcode" object.                                               */
 /*****************************************************************************/
 GObject *
 gl_label_barcode_new (glLabel *label)

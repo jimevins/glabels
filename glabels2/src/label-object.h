@@ -167,6 +167,10 @@ struct _glLabelObjectClass {
 
         void (*bottom)      (glLabelObject     *object,
                              gpointer           user_data);
+
+        void (*removed)     (glLabelObject     *object,
+                             gpointer            user_data);
+
 };
 
 GType          gl_label_object_get_type              (void) G_GNUC_CONST;
@@ -185,6 +189,8 @@ void           gl_label_object_set_parent            (glLabelObject     *object,
 
 glLabel       *gl_label_object_get_parent            (glLabelObject     *object);
 
+
+void           gl_label_object_remove                (glLabelObject     *object);
 
 void           gl_label_object_set_name              (glLabelObject     *object,
                                                       gchar             *name);

@@ -502,6 +502,8 @@ gl_view_text_create_button_press_event   (glView *view,
 	gchar               *family;
 	glColorNode         *color_node;
 
+        gl_view_unselect_all (view);
+
         object = gl_label_text_new (view->label);
         color_node = gl_color_node_new_default ();
         gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
@@ -527,10 +529,6 @@ gl_view_text_create_button_press_event   (glView *view,
         view_text = gl_view_text_new (GL_LABEL_TEXT(object), view);
         gl_color_node_free (&color_node);
 
-        gl_view_unselect_all (view);
-        view_text = gl_view_text_new (GL_LABEL_TEXT(object), view);
-        gl_view_object_select (GL_VIEW_OBJECT(view_text));
-			
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
         view->create_y0 = y;

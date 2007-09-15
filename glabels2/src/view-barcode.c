@@ -406,6 +406,8 @@ gl_view_barcode_create_button_press_event   (glView *view,
 	glColorNode         *line_color_node;
         glViewObject        *view_barcode;
 
+        gl_view_unselect_all (view);
+
         line_color_node = gl_color_node_new_default ();
 		
         object = gl_label_barcode_new (view->label);
@@ -418,10 +420,6 @@ gl_view_barcode_create_button_press_event   (glView *view,
 
         gl_color_node_free (&line_color_node);
 
-        gl_view_unselect_all (view);
-        view_barcode = gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
-        gl_view_object_select (GL_VIEW_OBJECT(view_barcode));
-			
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
         view->create_y0 = y;

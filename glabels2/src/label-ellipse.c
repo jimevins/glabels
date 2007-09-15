@@ -118,7 +118,7 @@ static void
 gl_label_ellipse_init (glLabelEllipse *lellipse)
 {
 	lellipse->priv = g_new0 (glLabelEllipsePrivate, 1);
-	lellipse->priv->fill_color_node = gl_color_node_new_default ();
+	lellipse->priv->line_color_node = gl_color_node_new_default ();
 	lellipse->priv->fill_color_node = gl_color_node_new_default ();
 }
 

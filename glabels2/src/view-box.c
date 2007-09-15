@@ -444,6 +444,8 @@ gl_view_box_create_button_press_event   (glView *view,
 	glColorNode         *line_color_node;
         glViewObject        *view_box;
 
+        gl_view_unselect_all (view);
+
         fill_color_node = gl_color_node_new_default ();
         line_color_node = gl_color_node_new_default ();
 		
@@ -461,10 +463,6 @@ gl_view_box_create_button_press_event   (glView *view,
 
         gl_color_node_free (&fill_color_node);
         gl_color_node_free (&line_color_node);
-
-        gl_view_unselect_all (view);
-        view_box = gl_view_box_new (GL_LABEL_BOX(object), view);
-        gl_view_object_select (GL_VIEW_OBJECT(view_box));
 			
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;

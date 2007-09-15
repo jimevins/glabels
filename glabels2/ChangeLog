@@ -1,3 +1,22 @@
+2007-09-14  Jim Evins  <evins@snaught.com>
+
+	* src/marshal.list:
+	* src/label.c:
+	* src/label.h:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/label-barcode.c:
+	* src/label-ellipse.c:
+	* src/view.c:
+	* src/view-object.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+		Better separation of model from view.
+
 2007-08-21  Jim Evins  <evins@snaught.com>
 
 	* src/print-op.c: (create_custom_widget_cb):

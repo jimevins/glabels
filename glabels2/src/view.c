@@ -143,6 +143,9 @@ static void       label_changed_cb                (glView         *view);
 
 static void       label_resized_cb                (glView         *view);
 
+static void       label_object_added_cb           (glView         *view,
+                                                   glLabelObject  *object);
+
 static void       draw_layers                     (glView         *view,
                                                    cairo_t        *cr);
 
@@ -483,6 +486,8 @@ gl_view_construct (glView  *view,
                                   G_CALLBACK (label_changed_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->label), "size_changed",
                                   G_CALLBACK (label_resized_cb), view);
+	g_signal_connect_swapped (G_OBJECT (view->label), "object_added",
+                                  G_CALLBACK (label_object_added_cb), view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -728,6 +733,39 @@ label_resized_cb (glView  *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Handle new label object.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+label_object_added_cb (glView         *view,
+                       glLabelObject  *object)
+{
+        glViewObject *view_object;
+
+	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        if (GL_IS_LABEL_BOX (object)) {
+                view_object = gl_view_box_new (GL_LABEL_BOX(object), view);
+        } else if (GL_IS_LABEL_ELLIPSE (object)) {
+                view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object), view);
+        } else if (GL_IS_LABEL_LINE (object)) {
+                view_object = gl_view_line_new (GL_LABEL_LINE(object), view);
+        } else if (GL_IS_LABEL_IMAGE (object)) {
+                view_object = gl_view_image_new (GL_LABEL_IMAGE(object), view);
+        } else if (GL_IS_LABEL_TEXT (object)) {
+                view_object = gl_view_text_new (GL_LABEL_TEXT(object), view);
+        } else if (GL_IS_LABEL_BARCODE (object)) {
+                view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
+        } else {
+                /* Should not happen! */
+                view_object = NULL;
+                g_message ("Invalid label object type.");
+        }
+
+        gl_view_select_object (view, view_object);
+}
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create, draw and order layers.                                  */
@@ -1411,9 +1449,11 @@ gl_view_is_selection_atomic (glView *view)
 void
 gl_view_delete_selection (glView *view)
 {
-	GList *object_list;
-	GList *p;
-	GList *p_next;
+	GList         *object_list;
+	GList         *p;
+	GList         *p_next;
+	glViewObject  *view_object;
+	glLabelObject *object;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -1425,9 +1465,12 @@ gl_view_delete_selection (glView *view)
 
 	for (p = object_list; p != NULL; p = p_next) {
 		p_next = p->next;
-		g_object_unref (G_OBJECT (p->data));
-		object_list = g_list_delete_link (object_list, p);
+		view_object = GL_VIEW_OBJECT (p->data);
+		object = gl_view_object_get_object (view_object);
+                gl_label_object_remove (object);
 	}
+
+        g_list_free (object_list);
 
 	gl_debug (DEBUG_VIEW, "END");
 }

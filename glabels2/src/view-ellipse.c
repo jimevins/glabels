@@ -139,7 +139,7 @@ gl_view_ellipse_finalize (GObject *object)
 /*****************************************************************************/
 glViewObject *
 gl_view_ellipse_new (glLabelEllipse *object,
-                     glView     *view)
+                     glView         *view)
 {
 	glViewEllipse         *view_ellipse;
 
@@ -444,6 +444,8 @@ gl_view_ellipse_create_button_press_event   (glView *view,
 	glColorNode         *line_color_node;
         glViewObject        *view_ellipse;
 
+        gl_view_unselect_all (view);
+
         fill_color_node = gl_color_node_new_default ();
         line_color_node = gl_color_node_new_default ();
 		
@@ -462,10 +464,6 @@ gl_view_ellipse_create_button_press_event   (glView *view,
         gl_color_node_free (&fill_color_node);
         gl_color_node_free (&line_color_node);
 
-        gl_view_unselect_all (view);
-        view_ellipse = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object), view);
-        gl_view_object_select (GL_VIEW_OBJECT(view_ellipse));
-			
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
         view->create_y0 = y;

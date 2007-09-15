@@ -68,6 +68,7 @@ enum {
 	FLIP_ROTATE,
 	TOP,
 	BOTTOM,
+        REMOVED,
 	LAST_SIGNAL
 };
 
@@ -159,6 +160,15 @@ gl_label_object_class_init (glLabelObjectClass *class)
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
+	signals[REMOVED] =
+		g_signal_new ("removed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (glLabelObjectClass, removed),
+			      NULL, NULL,
+			      gl_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -192,9 +202,6 @@ gl_label_object_finalize (GObject *object)
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	parent = label_object->parent;
-	gl_label_remove_object (parent, label_object);
 
 	g_free (label_object->priv->name);
 	g_free (label_object->priv);
@@ -335,6 +342,34 @@ gl_label_object_get_parent (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 
 	return object->parent;
+}
+
+/*****************************************************************************/
+/* Set remove object from parent.                                            */
+/*****************************************************************************/
+void
+gl_label_object_remove (glLabelObject *object)
+{
+	glLabel *parent;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	parent = object->parent;
+	if ( parent != NULL ) {
+		g_signal_handlers_disconnect_by_func (parent,
+						      G_CALLBACK(merge_changed_cb),
+						      object);
+		gl_label_remove_object (parent, object);
+
+                g_signal_emit (G_OBJECT(object), signals[REMOVED], 0);
+
+                g_object_unref (G_OBJECT(object));
+	}
+
+
+	gl_debug (DEBUG_LABEL, "END");
 }
 
 /*****************************************************************************/

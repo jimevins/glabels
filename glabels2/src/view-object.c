@@ -64,6 +64,15 @@ struct _glViewObjectPrivate {
 
 static void     gl_view_object_finalize      (GObject             *object);
 
+static void     object_removed_cb            (glViewObject        *view_object,
+                                              glLabelObject       *object);
+
+static void     object_top_cb                (glViewObject        *view_object,
+                                              glLabelObject       *object);
+
+static void     object_bottom_cb             (glViewObject        *view_object,
+                                              glLabelObject       *object);
+
 
 
 
@@ -178,8 +187,79 @@ gl_view_object_set_object     (glViewObject            *view_object,
 	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 	
-	view_object->priv->object = object;
+	view_object->priv->object = g_object_ref (G_OBJECT (object));
 	view_object->priv->handles_style = style;
+
+	g_signal_connect_swapped (G_OBJECT (object), "removed",
+				  G_CALLBACK (object_removed_cb), view_object);
+	g_signal_connect_swapped (G_OBJECT (object), "top",
+				  G_CALLBACK (object_top_cb), view_object);
+	g_signal_connect_swapped (G_OBJECT (object), "bottom",
+				  G_CALLBACK (object_bottom_cb), view_object);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Handle object "removed" signal.                                 */
+/*---------------------------------------------------------------------------*/
+static void
+object_removed_cb (glViewObject  *view_object,
+                   glLabelObject *object)
+{
+        glView *view;
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        view = gl_view_object_get_view (view_object);
+        view->object_list = g_list_remove (view->object_list, view_object);
+        g_object_unref (G_OBJECT (view_object));
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Handle object "top" signal.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+object_top_cb (glViewObject  *view_object,
+               glLabelObject *object)
+{
+        glView *view;
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        view = gl_view_object_get_view (view_object);
+
+	/* Move to end of list, representing front most object */
+        view->object_list = g_list_remove (view->object_list, view_object);
+        view->object_list = g_list_append (view->object_list, view_object);
+
+	gl_debug (DEBUG_VIEW, "END");
+}
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. Handle object "removed" signal.                                  */
+/*---------------------------------------------------------------------------*/
+static void
+object_bottom_cb (glViewObject  *view_object,
+                  glLabelObject *object)
+{
+        glView *view;
+	gl_debug (DEBUG_VIEW, "START");
+
+	g_return_if_fail (view_object && GL_IS_VIEW_OBJECT (view_object));
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        view = gl_view_object_get_view (view_object);
+
+	/* Move to front of list, representing rear most object */
+        view->object_list = g_list_remove (view->object_list, view_object);
+        view->object_list = g_list_prepend (view->object_list, view_object);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
