@@ -50,45 +50,45 @@
 /* Local function prototypes                 */
 /*===========================================*/
 static void  xml_parse_meta_node            (xmlNodePtr              label_node,
-					     glTemplate             *template);
+					     lglTemplate            *template);
 static void  xml_parse_label_rectangle_node (xmlNodePtr              label_node,
-					     glTemplate             *template);
+					     lglTemplate            *template);
 static void  xml_parse_label_round_node     (xmlNodePtr              label_node,
-					     glTemplate             *template);
+					     lglTemplate            *template);
 static void  xml_parse_label_cd_node        (xmlNodePtr              label_node,
-					     glTemplate             *template);
+					     lglTemplate            *template);
 static void  xml_parse_layout_node          (xmlNodePtr              layout_node,
-					     glTemplateLabelType    *label_type);
+					     lglTemplateFrame       *frame);
 static void  xml_parse_markup_margin_node   (xmlNodePtr              markup_node,
-					     glTemplateLabelType    *label_type);
+					     lglTemplateFrame       *frame);
 static void  xml_parse_markup_line_node     (xmlNodePtr              markup_node,
-					     glTemplateLabelType    *label_type);
+					     lglTemplateFrame       *frame);
 static void  xml_parse_markup_circle_node   (xmlNodePtr              markup_node,
-					     glTemplateLabelType    *label_type);
+					     lglTemplateFrame       *frame);
 static void  xml_parse_markup_rect_node     (xmlNodePtr              markup_node,
-					     glTemplateLabelType    *label_type);
+					     lglTemplateFrame       *frame);
 static void  xml_parse_alias_node           (xmlNodePtr              alias_node,
-					     glTemplate             *template);
+					     lglTemplate            *template);
 
 static void  xml_create_meta_node           (const gchar                  *category,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_label_node          (const glTemplateLabelType    *label_type,
+static void  xml_create_label_node          (const lglTemplateFrame       *frame,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_layout_node         (const glTemplateLayout       *layout,
+static void  xml_create_layout_node         (const lglTemplateLayout      *layout,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_markup_margin_node  (const glTemplateMarkup       *margin,
+static void  xml_create_markup_margin_node  (const lglTemplateMarkup      *margin,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_markup_line_node    (const glTemplateMarkup       *line,
+static void  xml_create_markup_line_node    (const lglTemplateMarkup      *line,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_markup_circle_node  (const glTemplateMarkup       *circle,
+static void  xml_create_markup_circle_node  (const lglTemplateMarkup      *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_markup_rect_node    (const glTemplateMarkup       *circle,
+static void  xml_create_markup_rect_node    (const lglTemplateMarkup      *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_alias_node          (const gchar                  *name,
@@ -97,16 +97,16 @@ static void  xml_create_alias_node          (const gchar                  *name,
 
 
 /**
- * gl_xml_template_read_templates_from_file:
+ * lgl_xml_template_read_templates_from_file:
  * @utf8_filename:       Filename of papers file (name encoded as UTF-8)
  *
  * Read glabels templates from template file.
  *
- * Returns: a list of #glTemplate structures.
+ * Returns: a list of #lglTemplate structures.
  *
  */
 GList *
-gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
+lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 {
 	gchar      *filename;
 	xmlDocPtr   templates_doc;
@@ -127,7 +127,7 @@ gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 		return templates;
 	}
 
-	templates = gl_xml_template_parse_templates_doc (templates_doc);
+	templates = lgl_xml_template_parse_templates_doc (templates_doc);
 
 	g_free (filename);
 	xmlFreeDoc (templates_doc);
@@ -137,21 +137,21 @@ gl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 
 
 /**
- * gl_xml_template_parse_templates_doc:
+ * lgl_xml_template_parse_templates_doc:
  * @templates_doc:  libxml #xmlDocPtr tree, representing template file.
  *
  * Read glabels templates from a libxml #xmlDocPtr tree.
  *
- * Returns: a list of #glTemplate structures.
+ * Returns: a list of #lglTemplate structures.
  *
  */
 GList *
-gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
+lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 {
 	
-	GList      *templates = NULL;
-	xmlNodePtr  root, node;
-	glTemplate *template;
+	GList       *templates = NULL;
+	xmlNodePtr   root, node;
+	lglTemplate *template;
 
 	LIBXML_TEST_VERSION;
 
@@ -161,7 +161,7 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 			   templates_doc->URL);
 		return templates;
 	}
-	if (!gl_xml_is_node (root, "Glabels-templates")) {
+	if (!lgl_xml_is_node (root, "Glabels-templates")) {
 		g_message ("\"%s\" is not a glabels template file (wrong root node)",
 		      templates_doc->URL);
 		return templates;
@@ -169,12 +169,12 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (gl_xml_is_node (node, "Template")) {
-			template = gl_xml_template_parse_template_node (node);
+		if (lgl_xml_is_node (node, "Template")) {
+			template = lgl_xml_template_parse_template_node (node);
 			templates = g_list_append (templates, template);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
-				if (!gl_xml_is_node (node,"comment")) {
+				if (!lgl_xml_is_node (node,"comment")) {
 					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -186,42 +186,42 @@ gl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 
 
 /**
- * gl_xml_template_parse_template_node:
+ * lgl_xml_template_parse_template_node:
  * @template_node:  libxml #xmlNodePtr template node from a #xmlDocPtr tree.
  *
  * Read a single glabels template from a libxml #xmlNodePtr node.
  *
- * Returns: a pointer to a newly created #glTemplate structure.
+ * Returns: a pointer to a newly created #lglTemplate structure.
  *
  */
-glTemplate *
-gl_xml_template_parse_template_node (const xmlNodePtr template_node)
+lglTemplate *
+lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 {
 	gchar                 *name;
 	gchar                 *description;
 	gchar                 *page_size;
 	gdouble                page_width, page_height;
-	glPaper               *paper = NULL;
-	glTemplate            *template;
+	lglPaper               *paper = NULL;
+	lglTemplate           *template;
 	xmlNodePtr             node;
 
-	name = gl_xml_get_prop_string (template_node, "name", NULL);
-	description = gl_xml_get_prop_i18n_string (template_node, "description", NULL);
-	page_size = gl_xml_get_prop_string (template_node, "size", NULL);
+	name = lgl_xml_get_prop_string (template_node, "name", NULL);
+	description = lgl_xml_get_prop_i18n_string (template_node, "description", NULL);
+	page_size = lgl_xml_get_prop_string (template_node, "size", NULL);
 
-	if (gl_paper_is_id_other (page_size)) {
+	if (lgl_paper_is_id_other (page_size)) {
 
-		page_width = gl_xml_get_prop_length (template_node, "width", 0);
-		page_height = gl_xml_get_prop_length (template_node, "height", 0);
+		page_width = lgl_xml_get_prop_length (template_node, "width", 0);
+		page_height = lgl_xml_get_prop_length (template_node, "height", 0);
 
 	} else {
-		paper = gl_paper_from_id (page_size);
+		paper = lgl_paper_from_id (page_size);
 		if (paper == NULL) {
 			/* This should always be an id, but just in case a name
 			   slips by! */
 			g_message (_("Unknown page size id \"%s\", trying as name"),
 				   page_size);
-			paper = gl_paper_from_name (page_size);
+			paper = lgl_paper_from_name (page_size);
 			g_free (page_size);
 			page_size = g_strdup (paper->id);
 		}
@@ -232,30 +232,30 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			g_message (_("Unknown page size id or name \"%s\""),
 				   page_size);
 		}
-		gl_paper_free (paper);
+		lgl_paper_free (paper);
 		paper = NULL;
 	}
 
-	template = gl_template_new (name,
+	template = lgl_template_new (name,
 				    description,
 				    page_size,
 				    page_width, page_height);
 
 	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (gl_xml_is_node (node, "Meta")) {
+		if (lgl_xml_is_node (node, "Meta")) {
 			xml_parse_meta_node (node, template);
-		} else if (gl_xml_is_node (node, "Label-rectangle")) {
+		} else if (lgl_xml_is_node (node, "Label-rectangle")) {
 			xml_parse_label_rectangle_node (node, template);
-		} else if (gl_xml_is_node (node, "Label-round")) {
+		} else if (lgl_xml_is_node (node, "Label-round")) {
 			xml_parse_label_round_node (node, template);
-		} else if (gl_xml_is_node (node, "Label-cd")) {
+		} else if (lgl_xml_is_node (node, "Label-cd")) {
 			xml_parse_label_cd_node (node, template);
-		} else if (gl_xml_is_node (node, "Alias")) {
+		} else if (lgl_xml_is_node (node, "Alias")) {
 			xml_parse_alias_node (node, template);
 		} else {
 			if (!xmlNodeIsText (node)) {
-				if (!gl_xml_is_node (node,"comment")) {
+				if (!lgl_xml_is_node (node,"comment")) {
 					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -273,16 +273,16 @@ gl_xml_template_parse_template_node (const xmlNodePtr template_node)
 /* PRIVATE.  Parse XML Template->Meta Node.                                 */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_meta_node (xmlNodePtr  meta_node,
-		     glTemplate *template)
+xml_parse_meta_node (xmlNodePtr   meta_node,
+		     lglTemplate *template)
 {
 	gchar               *category;
 
-	category = gl_xml_get_prop_string (meta_node, "category", NULL);
+	category = lgl_xml_get_prop_string (meta_node, "category", NULL);
 
 	if (category != NULL)
 	{
-		gl_template_add_category (template, category);
+		lgl_template_add_category (template, category);
 		g_free (category);
 	}
 }
@@ -291,48 +291,48 @@ xml_parse_meta_node (xmlNodePtr  meta_node,
 /* PRIVATE.  Parse XML Template->Label-rectangle Node.                      */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_label_rectangle_node (xmlNodePtr  label_node,
-				glTemplate *template)
+xml_parse_label_rectangle_node (xmlNodePtr   label_node,
+				lglTemplate *template)
 {
 	gchar               *id;
 	gchar               *tmp;
 	gdouble              x_waste, y_waste;
 	gdouble              w, h, r;
-	glTemplateLabelType *label_type;
+	lglTemplateFrame    *frame;
 	xmlNodePtr           node;
 
-	id      = gl_xml_get_prop_string (label_node, "id", NULL);
+	id      = lgl_xml_get_prop_string (label_node, "id", NULL);
 
-	if (tmp = gl_xml_get_prop_string (label_node, "waste", NULL)) {
+	if ((tmp = lgl_xml_get_prop_string (label_node, "waste", NULL))) {
 		/* Handle single "waste" property. */
-		x_waste = y_waste = gl_xml_get_prop_length (label_node, "waste", 0);
+		x_waste = y_waste = lgl_xml_get_prop_length (label_node, "waste", 0);
 		g_free (tmp);
 	} else {
-		x_waste = gl_xml_get_prop_length (label_node, "x_waste", 0);
-		y_waste = gl_xml_get_prop_length (label_node, "y_waste", 0);
+		x_waste = lgl_xml_get_prop_length (label_node, "x_waste", 0);
+		y_waste = lgl_xml_get_prop_length (label_node, "y_waste", 0);
 	}
 
-	w       = gl_xml_get_prop_length (label_node, "width", 0);
-	h       = gl_xml_get_prop_length (label_node, "height", 0);
-	r       = gl_xml_get_prop_length (label_node, "round", 0);
+	w       = lgl_xml_get_prop_length (label_node, "width", 0);
+	h       = lgl_xml_get_prop_length (label_node, "height", 0);
+	r       = lgl_xml_get_prop_length (label_node, "round", 0);
 
-	label_type = gl_template_rect_label_type_new ((gchar *)id, w, h, r, x_waste, y_waste);
-	gl_template_add_label_type (template, label_type);
+	frame = lgl_template_frame_rect_new ((gchar *)id, w, h, r, x_waste, y_waste);
+	lgl_template_add_frame (template, frame);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (gl_xml_is_node (node, "Layout")) {
-			xml_parse_layout_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-margin")) {
-			xml_parse_markup_margin_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-line")) {
-			xml_parse_markup_line_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-circle")) {
-			xml_parse_markup_circle_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-rect")) {
-			xml_parse_markup_rect_node (node, label_type);
+		if (lgl_xml_is_node (node, "Layout")) {
+			xml_parse_layout_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-margin")) {
+			xml_parse_markup_margin_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-line")) {
+			xml_parse_markup_line_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-circle")) {
+			xml_parse_markup_circle_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -345,36 +345,36 @@ xml_parse_label_rectangle_node (xmlNodePtr  label_node,
 /* PRIVATE.  Parse XML Template->Label-round Node.                          */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_label_round_node (xmlNodePtr  label_node,
-			    glTemplate *template)
+xml_parse_label_round_node (xmlNodePtr   label_node,
+			    lglTemplate *template)
 {
 	gchar               *id;
 	gdouble              waste;
 	gdouble              r;
-	glTemplateLabelType *label_type;
+	lglTemplateFrame    *frame;
 	xmlNodePtr           node;
 
-	id    = gl_xml_get_prop_string (label_node, "id", NULL);
-	waste = gl_xml_get_prop_length (label_node, "waste", 0);
-	r     = gl_xml_get_prop_length (label_node, "radius", 0);
+	id    = lgl_xml_get_prop_string (label_node, "id", NULL);
+	waste = lgl_xml_get_prop_length (label_node, "waste", 0);
+	r     = lgl_xml_get_prop_length (label_node, "radius", 0);
 
-	label_type = gl_template_round_label_type_new ((gchar *)id, r, waste);
-	gl_template_add_label_type (template, label_type);
+	frame = lgl_template_frame_round_new ((gchar *)id, r, waste);
+	lgl_template_add_frame (template, frame);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (gl_xml_is_node (node, "Layout")) {
-			xml_parse_layout_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-margin")) {
-			xml_parse_markup_margin_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-line")) {
-			xml_parse_markup_line_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-circle")) {
-			xml_parse_markup_circle_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-rect")) {
-			xml_parse_markup_rect_node (node, label_type);
+		if (lgl_xml_is_node (node, "Layout")) {
+			xml_parse_layout_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-margin")) {
+			xml_parse_markup_margin_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-line")) {
+			xml_parse_markup_line_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-circle")) {
+			xml_parse_markup_circle_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -387,39 +387,39 @@ xml_parse_label_round_node (xmlNodePtr  label_node,
 /* PRIVATE.  Parse XML Template->Label-cd Node.                             */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_label_cd_node (xmlNodePtr  label_node,
-			 glTemplate *template)
+xml_parse_label_cd_node (xmlNodePtr   label_node,
+			 lglTemplate *template)
 {
 	gchar               *id;
 	gdouble              waste;
 	gdouble              r1, r2, w, h;
-	glTemplateLabelType *label_type;
+	lglTemplateFrame    *frame;
 	xmlNodePtr           node;
 
-	id    = gl_xml_get_prop_string (label_node, "id", NULL);
-	waste = gl_xml_get_prop_length (label_node, "waste", 0);
-	r1    = gl_xml_get_prop_length (label_node, "radius", 0);
-	r2    = gl_xml_get_prop_length (label_node, "hole", 0);
-	w     = gl_xml_get_prop_length (label_node, "width", 0);
-	h     = gl_xml_get_prop_length (label_node, "height", 0);
+	id    = lgl_xml_get_prop_string (label_node, "id", NULL);
+	waste = lgl_xml_get_prop_length (label_node, "waste", 0);
+	r1    = lgl_xml_get_prop_length (label_node, "radius", 0);
+	r2    = lgl_xml_get_prop_length (label_node, "hole", 0);
+	w     = lgl_xml_get_prop_length (label_node, "width", 0);
+	h     = lgl_xml_get_prop_length (label_node, "height", 0);
 
-	label_type = gl_template_cd_label_type_new ((gchar *)id, r1, r2, w, h, waste);
-	gl_template_add_label_type (template, label_type);
+	frame = lgl_template_frame_cd_new ((gchar *)id, r1, r2, w, h, waste);
+	lgl_template_add_frame (template, frame);
 
 	for (node = label_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
-		if (gl_xml_is_node (node, "Layout")) {
-			xml_parse_layout_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-margin")) {
-			xml_parse_markup_margin_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-line")) {
-			xml_parse_markup_line_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-circle")) {
-			xml_parse_markup_circle_node (node, label_type);
-		} else if (gl_xml_is_node (node, "Markup-rect")) {
-			xml_parse_markup_rect_node (node, label_type);
+		if (lgl_xml_is_node (node, "Layout")) {
+			xml_parse_layout_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-margin")) {
+			xml_parse_markup_margin_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-line")) {
+			xml_parse_markup_line_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-circle")) {
+			xml_parse_markup_circle_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -432,29 +432,28 @@ xml_parse_label_cd_node (xmlNodePtr  label_node,
 /* PRIVATE.  Parse XML Template->Label->Layout Node.                        */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_layout_node (xmlNodePtr              layout_node,
-		       glTemplateLabelType    *label_type)
+xml_parse_layout_node (xmlNodePtr          layout_node,
+		       lglTemplateFrame   *frame)
 {
 	gint        nx, ny;
 	gdouble     x0, y0, dx, dy;
 	xmlNodePtr  node;
 
-	nx = gl_xml_get_prop_int (layout_node, "nx", 1);
-	ny = gl_xml_get_prop_int (layout_node, "ny", 1);
+	nx = lgl_xml_get_prop_int (layout_node, "nx", 1);
+	ny = lgl_xml_get_prop_int (layout_node, "ny", 1);
 
-	x0 = gl_xml_get_prop_length (layout_node, "x0", 0);
-	y0 = gl_xml_get_prop_length (layout_node, "y0", 0);
+	x0 = lgl_xml_get_prop_length (layout_node, "x0", 0);
+	y0 = lgl_xml_get_prop_length (layout_node, "y0", 0);
 
-	dx = gl_xml_get_prop_length (layout_node, "dx", 0);
-	dy = gl_xml_get_prop_length (layout_node, "dy", 0);
+	dx = lgl_xml_get_prop_length (layout_node, "dx", 0);
+	dy = lgl_xml_get_prop_length (layout_node, "dy", 0);
 
-	gl_template_add_layout (label_type,
-				gl_template_layout_new (nx, ny, x0, y0, dx, dy));
+	lgl_template_add_layout (frame, lgl_template_layout_new (nx, ny, x0, y0, dx, dy));
 
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -466,21 +465,20 @@ xml_parse_layout_node (xmlNodePtr              layout_node,
 /* PRIVATE.  Parse XML Template->Label->Markup-margin Node.                 */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup_margin_node (xmlNodePtr              markup_node,
-			      glTemplateLabelType    *label_type)
+xml_parse_markup_margin_node (xmlNodePtr          markup_node,
+			      lglTemplateFrame   *frame)
 {
 	gdouble     size;
 	xmlNodePtr  node;
 
-	size = gl_xml_get_prop_length (markup_node, "size", 0);
+	size = lgl_xml_get_prop_length (markup_node, "size", 0);
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_margin_new (size));
+	lgl_template_add_markup (frame, lgl_template_markup_margin_new (size));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -492,24 +490,23 @@ xml_parse_markup_margin_node (xmlNodePtr              markup_node,
 /* PRIVATE.  Parse XML Template->Label->Markup-line Node.                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup_line_node (xmlNodePtr              markup_node,
-			    glTemplateLabelType    *label_type)
+xml_parse_markup_line_node (xmlNodePtr          markup_node,
+			    lglTemplateFrame   *frame)
 {
 	gdouble     x1, y1, x2, y2;
 	xmlNodePtr  node;
 
-	x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
-	y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
-	x2 = gl_xml_get_prop_length (markup_node, "x2", 0);
-	y2 = gl_xml_get_prop_length (markup_node, "y2", 0);
+	x1 = lgl_xml_get_prop_length (markup_node, "x1", 0);
+	y1 = lgl_xml_get_prop_length (markup_node, "y1", 0);
+	x2 = lgl_xml_get_prop_length (markup_node, "x2", 0);
+	y2 = lgl_xml_get_prop_length (markup_node, "y2", 0);
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_line_new (x1, y1, x2, y2));
+	lgl_template_add_markup (frame, lgl_template_markup_line_new (x1, y1, x2, y2));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -521,23 +518,22 @@ xml_parse_markup_line_node (xmlNodePtr              markup_node,
 /* PRIVATE.  Parse XML Template->Label->Markup-circle Node.                 */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup_circle_node (xmlNodePtr              markup_node,
-			      glTemplateLabelType    *label_type)
+xml_parse_markup_circle_node (xmlNodePtr          markup_node,
+			      lglTemplateFrame   *frame)
 {
 	gdouble     x0, y0, r;
 	xmlNodePtr  node;
 
-	x0 = gl_xml_get_prop_length (markup_node, "x0", 0);
-	y0 = gl_xml_get_prop_length (markup_node, "y0", 0);
-	r  = gl_xml_get_prop_length (markup_node, "radius", 0);
+	x0 = lgl_xml_get_prop_length (markup_node, "x0", 0);
+	y0 = lgl_xml_get_prop_length (markup_node, "y0", 0);
+	r  = lgl_xml_get_prop_length (markup_node, "radius", 0);
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_circle_new (x0, y0, r));
+	lgl_template_add_markup (frame, lgl_template_markup_circle_new (x0, y0, r));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -549,25 +545,24 @@ xml_parse_markup_circle_node (xmlNodePtr              markup_node,
 /* PRIVATE.  Parse XML Template->Label->Markup-rect Node.                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_markup_rect_node (xmlNodePtr              markup_node,
-			    glTemplateLabelType    *label_type)
+xml_parse_markup_rect_node (xmlNodePtr          markup_node,
+			    lglTemplateFrame   *frame)
 {
 	gdouble     x1, y1, w, h, r;
 	xmlNodePtr  node;
 
-	x1 = gl_xml_get_prop_length (markup_node, "x1", 0);
-	y1 = gl_xml_get_prop_length (markup_node, "y1", 0);
-	w  = gl_xml_get_prop_length (markup_node, "w", 0);
-	h  = gl_xml_get_prop_length (markup_node, "h", 0);
-	r  = gl_xml_get_prop_length (markup_node, "r", 0);
+	x1 = lgl_xml_get_prop_length (markup_node, "x1", 0);
+	y1 = lgl_xml_get_prop_length (markup_node, "y1", 0);
+	w  = lgl_xml_get_prop_length (markup_node, "w", 0);
+	h  = lgl_xml_get_prop_length (markup_node, "h", 0);
+	r  = lgl_xml_get_prop_length (markup_node, "r", 0);
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_rect_new (x1, y1, w, h, r));
+	lgl_template_add_markup (frame, lgl_template_markup_rect_new (x1, y1, w, h, r));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
 		if (!xmlNodeIsText (node)) {
-			if (!gl_xml_is_node (node, "comment")) {
+			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
 			}
 		}
@@ -579,46 +574,46 @@ xml_parse_markup_rect_node (xmlNodePtr              markup_node,
 /* PRIVATE.  Parse XML Template->Alias Node.                                */
 /*--------------------------------------------------------------------------*/
 static void
-xml_parse_alias_node (xmlNodePtr  alias_node,
-		      glTemplate *template)
+xml_parse_alias_node (xmlNodePtr   alias_node,
+		      lglTemplate *template)
 {
 	gchar       *name;
 
-	name = gl_xml_get_prop_string (alias_node, "name", NULL);
+	name = lgl_xml_get_prop_string (alias_node, "name", NULL);
 
-	gl_template_add_alias (template, (gchar *)name);
+	lgl_template_add_alias (template, (gchar *)name);
 
 	g_free (name);
 }
 
 /**
- * gl_xml_template_write_templates_to_file:
- * @templates:      List of #glTemplate structures
+ * lgl_xml_template_write_templates_to_file:
+ * @templates:      List of #lglTemplate structures
  * @utf8_filename:  Filename of templates file (name encoded as UTF-8)
  *
- * Write a list of #glTemplate structures to a glabels XML template file.
+ * Write a list of #lglTemplate structures to a glabels XML template file.
  *
  */
 void
-gl_xml_template_write_templates_to_file (GList       *templates,
-					 const gchar *utf8_filename)
+lgl_xml_template_write_templates_to_file (GList       *templates,
+                                          const gchar *utf8_filename)
 {
 	xmlDocPtr    doc;
 	xmlNsPtr     ns;
 	gint         xml_ret;
 	GList       *p;
-	glTemplate  *template;
+	lglTemplate *template;
 	gchar       *filename;
 
 	doc = xmlNewDoc ((xmlChar *)"1.0");
 	doc->xmlRootNode = xmlNewDocNode (doc, NULL, (xmlChar *)"Glabels-templates", NULL);
 
-	ns = xmlNewNs (doc->xmlRootNode, (xmlChar *)GL_XML_NAME_SPACE, NULL);
+	ns = xmlNewNs (doc->xmlRootNode, (xmlChar *)LGL_XML_NAME_SPACE, NULL);
 	xmlSetNs (doc->xmlRootNode, ns);
 
 	for (p=templates; p!=NULL; p=p->next) {
-		template = (glTemplate *)p->data;
-		gl_xml_template_create_template_node (template, doc->xmlRootNode, ns);
+		template = (lglTemplate *)p->data;
+		lgl_xml_template_create_template_node (template, doc->xmlRootNode, ns);
 	}
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
@@ -640,62 +635,65 @@ gl_xml_template_write_templates_to_file (GList       *templates,
 
 
 /**
- * gl_xml_template_write_template_to_file:
- * @template:       #glTemplate structure to be written
+ * lgl_xml_template_write_template_to_file:
+ * @template:       #lglTemplate structure to be written
  * @utf8_filename:  Filename of templates file (name encoded as UTF-8)
  *
- * Write a single #glTemplate structures to a glabels XML template file.
+ * Write a single #lglTemplate structures to a glabels XML template file.
  *
  */
 void
-gl_xml_template_write_template_to_file (const glTemplate  *template,
-					const gchar       *utf8_filename)
+lgl_xml_template_write_template_to_file (const lglTemplate  *template,
+                                         const gchar        *utf8_filename)
 {
 	GList     *templates = NULL;
 
 	templates = g_list_append (templates, (gpointer)template);
 
-	gl_xml_template_write_templates_to_file (templates, utf8_filename);
+	lgl_xml_template_write_templates_to_file (templates, utf8_filename);
 
 	g_list_free (templates);
 }
 
 
 /**
- * gl_xml_template_create_template_node:
- * @template:       #glTemplate structure to be written
+ * lgl_xml_template_create_template_node:
+ * @template:       #lglTemplate structure to be written
  * @root:           parent node to receive new child node
  * @ns:             a libxml #xmlNsPtr
  *
- * Add a single #glTemplate child node to given #xmlNodePtr.
+ * Add a single #lglTemplate child node to given #xmlNodePtr.
  *
  */
 void
-gl_xml_template_create_template_node (const glTemplate *template,
-				      xmlNodePtr        root,
-				      const xmlNsPtr    ns)
+lgl_xml_template_create_template_node (const lglTemplate *template,
+                                       xmlNodePtr         root,
+                                       const xmlNsPtr     ns)
 {
-	xmlNodePtr              node;
-	GList                  *p;
-	glTemplateLabelType    *label_type;
+	xmlNodePtr          node;
+	GList              *p;
+	lglTemplateFrame   *frame;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Template", NULL);
 
-	gl_xml_set_prop_string (node, "name", template->name);
+	lgl_xml_set_prop_string (node, "name", template->name);
 
-	gl_xml_set_prop_string (node, "size", template->page_size);
+	lgl_xml_set_prop_string (node, "size", template->page_size);
 	if (xmlStrEqual ((xmlChar *)template->page_size, (xmlChar *)"Other")) {
 
-		gl_xml_set_prop_length (node, "width", template->page_width);
-		gl_xml_set_prop_length (node, "height", template->page_height);
+		lgl_xml_set_prop_length (node, "width", template->page_width);
+		lgl_xml_set_prop_length (node, "height", template->page_height);
 
 	}
 
-	gl_xml_set_prop_string (node, "description", template->description);
+	lgl_xml_set_prop_string (node, "description", template->description);
 
-	for ( p=template->label_types; p != NULL; p=p->next ) {
-		label_type = (glTemplateLabelType *)p->data;
-		xml_create_label_node (label_type, node, ns);
+	for ( p=template->categories; p != NULL; p=p->next ) {
+                xml_create_meta_node ( p->data, node, ns );
+	}
+	for ( p=template->frames; p != NULL; p=p->next ) {
+		frame = (lglTemplateFrame *)p->data;
+		xml_create_label_node (frame, node, ns);
 	}
 
 	for ( p=template->aliases; p != NULL; p=p->next ) {
@@ -717,7 +715,7 @@ xml_create_meta_node (const gchar      *category,
 	xmlNodePtr node;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Meta", NULL);
-	gl_xml_set_prop_string (node, "category", category);
+	lgl_xml_set_prop_string (node, "category", category);
 
 }
 
@@ -725,46 +723,46 @@ xml_create_meta_node (const gchar      *category,
 /* PRIVATE.  Add XML Template->Label Node.                                  */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_label_node (const glTemplateLabelType  *label_type,
-		       xmlNodePtr                  root,
-		       const xmlNsPtr              ns)
+xml_create_label_node (const lglTemplateFrame  *frame,
+		       xmlNodePtr               root,
+		       const xmlNsPtr           ns)
 {
 	xmlNodePtr        node;
 	GList            *p;
-	glTemplateMarkup *markup;
-	glTemplateLayout *layout;
+	lglTemplateMarkup *markup;
+	lglTemplateLayout *layout;
 
-	switch (label_type->shape) {
+	switch (frame->shape) {
 
-	case GL_TEMPLATE_SHAPE_RECT:
+	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
 		node = xmlNewChild(root, ns, (xmlChar *)"Label-rectangle", NULL);
-		gl_xml_set_prop_string (node, "id",      label_type->id);
-		gl_xml_set_prop_length (node, "width",   label_type->size.rect.w);
-		gl_xml_set_prop_length (node, "height",  label_type->size.rect.h);
-		gl_xml_set_prop_length (node, "round",   label_type->size.rect.r);
-		gl_xml_set_prop_length (node, "x_waste", label_type->size.rect.x_waste);
-		gl_xml_set_prop_length (node, "y_waste", label_type->size.rect.y_waste);
+		lgl_xml_set_prop_string (node, "id",      frame->all.id);
+		lgl_xml_set_prop_length (node, "width",   frame->rect.w);
+		lgl_xml_set_prop_length (node, "height",  frame->rect.h);
+		lgl_xml_set_prop_length (node, "round",   frame->rect.r);
+		lgl_xml_set_prop_length (node, "x_waste", frame->rect.x_waste);
+		lgl_xml_set_prop_length (node, "y_waste", frame->rect.y_waste);
 		break;
 
-	case GL_TEMPLATE_SHAPE_ROUND:
+	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
 		node = xmlNewChild(root, ns, (xmlChar *)"Label-round", NULL);
-		gl_xml_set_prop_string (node, "id",      label_type->id);
-		gl_xml_set_prop_length (node, "radius",  label_type->size.round.r);
-		gl_xml_set_prop_length (node, "waste",   label_type->size.round.waste);
+		lgl_xml_set_prop_string (node, "id",      frame->all.id);
+		lgl_xml_set_prop_length (node, "radius",  frame->round.r);
+		lgl_xml_set_prop_length (node, "waste",   frame->round.waste);
 		break;
 
-	case GL_TEMPLATE_SHAPE_CD:
+	case LGL_TEMPLATE_FRAME_SHAPE_CD:
 		node = xmlNewChild(root, ns, (xmlChar *)"Label-cd", NULL);
-		gl_xml_set_prop_string (node, "id",     label_type->id);
-		gl_xml_set_prop_length (node, "radius", label_type->size.cd.r1);
-		gl_xml_set_prop_length (node, "hole",   label_type->size.cd.r2);
-		if (label_type->size.cd.w != 0.0) {
-			gl_xml_set_prop_length (node, "width",  label_type->size.cd.w);
+		lgl_xml_set_prop_string (node, "id",     frame->all.id);
+		lgl_xml_set_prop_length (node, "radius", frame->cd.r1);
+		lgl_xml_set_prop_length (node, "hole",   frame->cd.r2);
+		if (frame->cd.w != 0.0) {
+			lgl_xml_set_prop_length (node, "width",  frame->cd.w);
 		}
-		if (label_type->size.cd.h != 0.0) {
-			gl_xml_set_prop_length (node, "height", label_type->size.cd.h);
+		if (frame->cd.h != 0.0) {
+			lgl_xml_set_prop_length (node, "height", frame->cd.h);
 		}
-		gl_xml_set_prop_length (node, "waste",  label_type->size.cd.waste);
+		lgl_xml_set_prop_length (node, "waste",  frame->cd.waste);
 		break;
 
 	default:
@@ -774,19 +772,19 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 
 	}
 
-	for ( p=label_type->markups; p != NULL; p=p->next ) {
-		markup = (glTemplateMarkup *)p->data;
+	for ( p=frame->all.markups; p != NULL; p=p->next ) {
+		markup = (lglTemplateMarkup *)p->data;
 		switch (markup->type) {
-		case GL_TEMPLATE_MARKUP_MARGIN:
+		case LGL_TEMPLATE_MARKUP_MARGIN:
 			xml_create_markup_margin_node (markup, node, ns);
 			break;
-		case GL_TEMPLATE_MARKUP_LINE:
+		case LGL_TEMPLATE_MARKUP_LINE:
 			xml_create_markup_line_node (markup, node, ns);
 			break;
-		case GL_TEMPLATE_MARKUP_CIRCLE:
+		case LGL_TEMPLATE_MARKUP_CIRCLE:
 			xml_create_markup_circle_node (markup, node, ns);
 			break;
-		case GL_TEMPLATE_MARKUP_RECT:
+		case LGL_TEMPLATE_MARKUP_RECT:
 			xml_create_markup_rect_node (markup, node, ns);
 			break;
 		default:
@@ -795,8 +793,8 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 		}
 	}
 
-	for ( p=label_type->layouts; p != NULL; p=p->next ) {
-		layout = (glTemplateLayout *)p->data;
+	for ( p=frame->all.layouts; p != NULL; p=p->next ) {
+		layout = (lglTemplateLayout *)p->data;
 		xml_create_layout_node (layout, node, ns);
 	}
 
@@ -806,19 +804,19 @@ xml_create_label_node (const glTemplateLabelType  *label_type,
 /* PRIVATE.  Add XML Template->Label->Layout Node.                          */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_layout_node (const glTemplateLayout *layout,
-			xmlNodePtr              root,
-			const xmlNsPtr          ns)
+xml_create_layout_node (const lglTemplateLayout *layout,
+			xmlNodePtr               root,
+			const xmlNsPtr           ns)
 {
 	xmlNodePtr  node;
 
 	node = xmlNewChild(root, ns, (xmlChar *)"Layout", NULL);
-	gl_xml_set_prop_int (node, "nx", layout->nx);
-	gl_xml_set_prop_int (node, "ny", layout->ny);
-	gl_xml_set_prop_length (node, "x0", layout->x0);
-	gl_xml_set_prop_length (node, "y0", layout->y0);
-	gl_xml_set_prop_length (node, "dx", layout->dx);
-	gl_xml_set_prop_length (node, "dy", layout->dy);
+	lgl_xml_set_prop_int (node, "nx", layout->nx);
+	lgl_xml_set_prop_int (node, "ny", layout->ny);
+	lgl_xml_set_prop_length (node, "x0", layout->x0);
+	lgl_xml_set_prop_length (node, "y0", layout->y0);
+	lgl_xml_set_prop_length (node, "dx", layout->dx);
+	lgl_xml_set_prop_length (node, "dy", layout->dy);
 
 }
 
@@ -826,15 +824,15 @@ xml_create_layout_node (const glTemplateLayout *layout,
 /* PRIVATE.  Add XML Template->Label->Markup-margin Node.                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_markup_margin_node (const glTemplateMarkup  *markup,
-			       xmlNodePtr               root,
-			       const xmlNsPtr           ns)
+xml_create_markup_margin_node (const lglTemplateMarkup  *markup,
+			       xmlNodePtr                root,
+			       const xmlNsPtr            ns)
 {
 	xmlNodePtr  node;
 
 	node = xmlNewChild(root, ns, (xmlChar *)"Markup-margin", NULL);
 
-	gl_xml_set_prop_length (node, "size", markup->data.margin.size);
+	lgl_xml_set_prop_length (node, "size", markup->margin.size);
 
 }
 
@@ -842,18 +840,18 @@ xml_create_markup_margin_node (const glTemplateMarkup  *markup,
 /* PRIVATE.  Add XML Template->Label->Markup-line Node.                     */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_markup_line_node (const glTemplateMarkup *markup,
-			     xmlNodePtr              root,
-			     const xmlNsPtr          ns)
+xml_create_markup_line_node (const lglTemplateMarkup *markup,
+			     xmlNodePtr               root,
+			     const xmlNsPtr           ns)
 {
 	xmlNodePtr  node;
 
 	node = xmlNewChild(root, ns, (xmlChar *)"Markup-line", NULL);
 
-	gl_xml_set_prop_length (node, "x1", markup->data.line.x1);
-	gl_xml_set_prop_length (node, "y1", markup->data.line.y1);
-	gl_xml_set_prop_length (node, "x2", markup->data.line.x2);
-	gl_xml_set_prop_length (node, "y2", markup->data.line.y2);
+	lgl_xml_set_prop_length (node, "x1", markup->line.x1);
+	lgl_xml_set_prop_length (node, "y1", markup->line.y1);
+	lgl_xml_set_prop_length (node, "x2", markup->line.x2);
+	lgl_xml_set_prop_length (node, "y2", markup->line.y2);
 
 }
 
@@ -861,17 +859,17 @@ xml_create_markup_line_node (const glTemplateMarkup *markup,
 /* PRIVATE.  Add XML Template->Label->Markup-circle Node.                   */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_markup_circle_node (const glTemplateMarkup *markup,
-			       xmlNodePtr              root,
-			       const xmlNsPtr          ns)
+xml_create_markup_circle_node (const lglTemplateMarkup *markup,
+			       xmlNodePtr               root,
+			       const xmlNsPtr           ns)
 {
 	xmlNodePtr  node;
 
 	node = xmlNewChild(root, ns, (xmlChar *)"Markup-circle", NULL);
 
-	gl_xml_set_prop_length (node, "x0",     markup->data.circle.x0);
-	gl_xml_set_prop_length (node, "y0",     markup->data.circle.y0);
-	gl_xml_set_prop_length (node, "radius", markup->data.circle.r);
+	lgl_xml_set_prop_length (node, "x0",     markup->circle.x0);
+	lgl_xml_set_prop_length (node, "y0",     markup->circle.y0);
+	lgl_xml_set_prop_length (node, "radius", markup->circle.r);
 
 }
 
@@ -879,19 +877,19 @@ xml_create_markup_circle_node (const glTemplateMarkup *markup,
 /* PRIVATE.  Add XML Template->Label->Markup-rect Node.                     */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_markup_rect_node (const glTemplateMarkup *markup,
-			     xmlNodePtr              root,
-			     const xmlNsPtr          ns)
+xml_create_markup_rect_node (const lglTemplateMarkup *markup,
+			     xmlNodePtr               root,
+			     const xmlNsPtr           ns)
 {
 	xmlNodePtr  node;
 
 	node = xmlNewChild(root, ns, (xmlChar *)"Markup-rect", NULL);
 
-	gl_xml_set_prop_length (node, "x1", markup->data.rect.x1);
-	gl_xml_set_prop_length (node, "y1", markup->data.rect.y1);
-	gl_xml_set_prop_length (node, "w",  markup->data.rect.w);
-	gl_xml_set_prop_length (node, "h",  markup->data.rect.h);
-	gl_xml_set_prop_length (node, "r",  markup->data.rect.r);
+	lgl_xml_set_prop_length (node, "x1", markup->rect.x1);
+	lgl_xml_set_prop_length (node, "y1", markup->rect.y1);
+	lgl_xml_set_prop_length (node, "w",  markup->rect.w);
+	lgl_xml_set_prop_length (node, "h",  markup->rect.h);
+	lgl_xml_set_prop_length (node, "r",  markup->rect.r);
 
 }
 
@@ -906,7 +904,7 @@ xml_create_alias_node (const gchar      *name,
 	xmlNodePtr node;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Alias", NULL);
-	gl_xml_set_prop_string (node, "name", name);
+	lgl_xml_set_prop_string (node, "name", name);
 
 }
 

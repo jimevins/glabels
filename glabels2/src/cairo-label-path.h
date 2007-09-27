@@ -31,7 +31,7 @@
 G_BEGIN_DECLS
 
 void gl_cairo_label_path (cairo_t                *cr,
-                          glTemplate             *template,
+                          lglTemplate            *template,
                           gboolean                rotate_flag,
                           gboolean                waste_flag);
 

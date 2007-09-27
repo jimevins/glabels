@@ -404,7 +404,6 @@ gl_view_barcode_create_button_press_event   (glView *view,
 	GObject             *object;
         glTextNode          *text_node;
 	glColorNode         *line_color_node;
-        glViewObject        *view_barcode;
 
         gl_view_unselect_all (view);
 

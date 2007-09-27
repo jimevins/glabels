@@ -425,7 +425,6 @@ gl_view_line_create_button_press_event   (glView *view,
 {
 	GObject             *object;
 	glColorNode         *line_color_node;
-        glViewObject        *view_line;
 
         gl_view_unselect_all (view);
 

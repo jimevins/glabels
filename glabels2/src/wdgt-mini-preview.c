@@ -65,7 +65,7 @@ struct _glWdgtMiniPreviewPrivate {
 	gint            height;
 	gint            width;
 
-	glTemplate     *template;
+	lglTemplate    *template;
 	gdouble         scale;
 	gdouble         offset_x;
 	gdouble         offset_y;
@@ -126,7 +126,7 @@ static void draw_paper                         (glWdgtMiniPreview      *preview,
 						gdouble                 line_width);
 static void draw_labels                        (glWdgtMiniPreview      *preview,
 						cairo_t                *cr,
-						glTemplate             *template,
+						lglTemplate            *template,
 						gdouble                 line_width);
 
 static gint find_closest_label                 (glWdgtMiniPreview      *preview,
@@ -204,7 +204,7 @@ gl_wdgt_mini_preview_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_WDGT_MINI_PREVIEW (object));
 
-	gl_template_free (preview->priv->template);
+	lgl_template_free (preview->priv->template);
 	g_free (preview->priv->centers);
 	g_free (preview->priv);
 
@@ -254,16 +254,16 @@ gl_wdgt_mini_preview_construct (glWdgtMiniPreview *preview,
 void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 					     const gchar       *name)
 {
-	glTemplate *template;
+	lglTemplate *template;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	/* Fetch template */
-	template = gl_template_from_name (name);
+	template = lgl_template_from_name (name);
 
 	gl_wdgt_mini_preview_set_template (preview, template);
 
-	gl_template_free (template);
+	lgl_template_free (template);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
@@ -272,22 +272,22 @@ void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 /* Set label for mini-preview to determine geometry.                        */
 /****************************************************************************/
 void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
-					const glTemplate  *template)
+					const lglTemplate *template)
 {
-	const glTemplateLabelType *label_type;
-	glTemplateOrigin          *origins;
+	const lglTemplateFrame    *frame;
+	lglTemplateOrigin         *origins;
 	gdouble                    w, h;
 	gint                       i;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	label_type = gl_template_get_first_label_type (template);
+	frame = lgl_template_get_first_frame (template);
 
 	/*
 	 * Set template
 	 */
-	gl_template_free (preview->priv->template);
-	preview->priv->template = gl_template_dup (template);
+	lgl_template_free (preview->priv->template);
+	preview->priv->template = lgl_template_dup (template);
 
 	/*
 	 * Set scale and offsets
@@ -305,15 +305,15 @@ void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 	/*
 	 * Set labels per sheet
 	 */
-	preview->priv->labels_per_sheet = gl_template_get_n_labels (label_type);
+	preview->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/*
 	 * Initialize centers
 	 */
 	g_free (preview->priv->centers);
 	preview->priv->centers = g_new0 (LabelCenter, preview->priv->labels_per_sheet);
-	origins = gl_template_get_origins (label_type);
-	gl_template_get_label_size (label_type, &w, &h);
+	origins = lgl_template_frame_get_origins (frame);
+	lgl_template_frame_get_size (frame, &w, &h);
 	for ( i=0; i<preview->priv->labels_per_sheet; i++ )
 	{
 		preview->priv->centers[i].x = origins[i].x + w/2.0;
@@ -570,8 +570,8 @@ static void
 draw (glWdgtMiniPreview  *preview,
       cairo_t            *cr)
 {
-	glTemplate *template = preview->priv->template;
-	gdouble     shadow_x, shadow_y;
+	lglTemplate *template = preview->priv->template;
+	gdouble      shadow_x, shadow_y;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -670,21 +670,21 @@ draw_paper (glWdgtMiniPreview      *preview,
 static void
 draw_labels (glWdgtMiniPreview *preview,
 	     cairo_t           *cr,
-	     glTemplate        *template,
+	     lglTemplate       *template,
 	     gdouble            line_width)
 {
-        const glTemplateLabelType *label_type;
+        const lglTemplateFrame    *frame;
         gint                       i, n_labels;
-        glTemplateOrigin          *origins;
+        lglTemplateOrigin         *origins;
 	GtkStyle                  *style;
 	guint                      highlight_color;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-        label_type = gl_template_get_first_label_type (template);
+        frame = lgl_template_get_first_frame (template);
 
-        n_labels = gl_template_get_n_labels (label_type);
-        origins  = gl_template_get_origins (label_type);
+        n_labels = lgl_template_frame_get_n_labels (frame);
+        origins  = lgl_template_frame_get_origins (frame);
 
 	style = gtk_widget_get_style (GTK_WIDGET(preview));
 	highlight_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);

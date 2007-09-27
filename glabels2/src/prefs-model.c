@@ -72,7 +72,7 @@
 #define PREF_MAX_RECENTS                    "/max-recents"
 
 /* Default values */
-#define DEFAULT_UNITS_STRING       units_to_string (GL_UNITS_INCH)
+#define DEFAULT_UNITS_STRING       units_to_string (LGL_UNITS_INCH)
 #define DEFAULT_PAGE_SIZE          "US-Letter"
 
 #define DEFAULT_FONT_FAMILY        "Sans"
@@ -132,8 +132,8 @@ static gdouble        get_float                    (GConfClient         *client,
 						    const gchar         *key,
 						    gdouble              def);
 
-static glUnitsType    string_to_units              (const gchar         *string);
-static const gchar   *units_to_string              (glUnitsType          units);
+static lglUnitsType   string_to_units              (const gchar         *string);
+static const gchar   *units_to_string              (lglUnitsType         units);
 
 
 
@@ -369,8 +369,8 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 void
 gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 {
-	gchar   *string;
-	glPaper *paper;
+	gchar    *string;
+	lglPaper *paper;
 
 	gl_debug (DEBUG_PREFS, "START");
 	
@@ -506,11 +506,11 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	/* Proof read the default page size -- it must be a valid id. */
 	/* (For compatability with older versions.) */
 	/* Note: paper module must be initialized for this to work. */
-	paper = gl_paper_from_id (prefs_model->default_page_size);
+	paper = lgl_paper_from_id (prefs_model->default_page_size);
 	if ( paper == NULL ) {
 		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
 	} else {
-		gl_paper_free (paper);
+		lgl_paper_free (paper);
 		paper = NULL;
 	}
 
@@ -648,35 +648,35 @@ get_float (GConfClient *client,
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Utilities to deal with units.                                   */
 /*---------------------------------------------------------------------------*/
-static glUnitsType
+static lglUnitsType
 string_to_units (const gchar *string)
 {
-	glUnitsType units;
+	lglUnitsType units;
 
 	if (g_strcasecmp (string, "Points") == 0) {
-		units = GL_UNITS_POINT;
+		units = LGL_UNITS_POINT;
 	} else if (g_strcasecmp (string, "Inches") == 0) {
-		units = GL_UNITS_INCH;
+		units = LGL_UNITS_INCH;
 	} else if (g_strcasecmp (string, "Millimeters") == 0) {
-		units = GL_UNITS_MM;
+		units = LGL_UNITS_MM;
 	} else {
-		units = GL_UNITS_INCH;
+		units = LGL_UNITS_INCH;
 	}
 
 	return units;
 }
 
 static const
-gchar *units_to_string (glUnitsType units)
+gchar *units_to_string (lglUnitsType units)
 {
 	switch (units) {
-	case GL_UNITS_POINT:
+	case LGL_UNITS_POINT:
 		return "Points";
 		break;
-	case GL_UNITS_INCH:
+	case LGL_UNITS_INCH:
 		return "Inches";
 		break;
-	case GL_UNITS_MM:
+	case LGL_UNITS_MM:
 		return "Millimeters";
 		break;
 	default:

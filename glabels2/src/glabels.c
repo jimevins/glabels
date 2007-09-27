@@ -119,9 +119,8 @@ main (int argc, char **argv)
 	/* Initialize subsystems */
 	gl_debug_init ();
 	gl_stock_init ();
-	gl_paper_init ();
+	lgl_init ();
 	gl_prefs_init ();
-	gl_template_init ();
 	gl_mini_preview_pixbuf_cache_init ();
 	gl_merge_init ();
 	gl_recent_init ();

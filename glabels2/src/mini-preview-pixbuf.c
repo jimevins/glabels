@@ -59,15 +59,15 @@
 /*===========================================*/
 
 static void draw_paper                (cairo_t           *cr,
-				       glTemplate        *template,
+				       lglTemplate       *template,
 				       gdouble            scale);
 
 static void draw_label_outlines       (cairo_t           *cr,
-				       glTemplate        *template,
+				       lglTemplate       *template,
 				       gdouble            scale);
 
 static void draw_label_outline        (cairo_t           *cr,
-				       glTemplate        *template,
+				       lglTemplate       *template,
 				       gdouble            x0,
 				       gdouble            y0);
 
@@ -78,9 +78,9 @@ static void draw_label_outline        (cairo_t           *cr,
 /* Create new pixbuf with mini preview of template                          */
 /****************************************************************************/
 GdkPixbuf *
-gl_mini_preview_pixbuf_new (glTemplate *template,
-			    gint        width,
-			    gint        height)
+gl_mini_preview_pixbuf_new (lglTemplate *template,
+			    gint         width,
+			    gint         height)
 {
 	cairo_surface_t   *surface;
 	cairo_t           *cr;
@@ -141,7 +141,7 @@ gl_mini_preview_pixbuf_new (glTemplate *template,
 /*--------------------------------------------------------------------------*/
 static void
 draw_paper (cairo_t           *cr,
-	    glTemplate        *template,
+	    lglTemplate       *template,
 	    gdouble            scale)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
@@ -163,12 +163,12 @@ draw_paper (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 draw_label_outlines (cairo_t           *cr,
-		     glTemplate        *template,
+		     lglTemplate       *template,
 		     gdouble            scale)
 {
-	const glTemplateLabelType *label_type;
-	gint                       i, n_labels;
-	glTemplateOrigin          *origins;
+	const lglTemplateFrame *frame;
+	gint                    i, n_labels;
+	lglTemplateOrigin      *origins;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -176,10 +176,10 @@ draw_label_outlines (cairo_t           *cr,
 
 	cairo_set_line_width (cr, LABEL_OUTLINE_WIDTH_PIXELS/scale);
 
-	label_type = gl_template_get_first_label_type (template);
+	frame = lgl_template_get_first_frame (template);
 
-	n_labels = gl_template_get_n_labels (label_type);
-	origins  = gl_template_get_origins (label_type);
+	n_labels = lgl_template_frame_get_n_labels (frame);
+	origins  = lgl_template_frame_get_origins (frame);
 
 	for ( i=0; i < n_labels; i++ ) {
 
@@ -199,7 +199,7 @@ draw_label_outlines (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 draw_label_outline (cairo_t           *cr,
-		    glTemplate        *template,
+		    lglTemplate       *template,
 		    gdouble            x0,
 		    gdouble            y0)
 {

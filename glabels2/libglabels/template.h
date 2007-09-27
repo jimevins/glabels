@@ -33,16 +33,28 @@
 
 G_BEGIN_DECLS
 
-typedef struct _glTemplate          glTemplate;
-typedef struct _glTemplateLabelType glTemplateLabelType;
-typedef struct _glTemplateLayout    glTemplateLayout;
-typedef struct _glTemplateMarkup    glTemplateMarkup;
-typedef struct _glTemplateOrigin    glTemplateOrigin;
+typedef struct _lglTemplate                lglTemplate;
+
+typedef union  _lglTemplateFrame           lglTemplateFrame;
+typedef struct _lglTemplateFrameAll        lglTemplateFrameAll;
+typedef struct _lglTemplateFrameRect       lglTemplateFrameRect;
+typedef struct _lglTemplateFrameRound      lglTemplateFrameRound;
+typedef struct _lglTemplateFrameCD         lglTemplateFrameCD;
+
+typedef struct _lglTemplateLayout          lglTemplateLayout;
+
+typedef union  _lglTemplateMarkup          lglTemplateMarkup;
+typedef struct _lglTemplateMarkupMargin    lglTemplateMarkupMargin;
+typedef struct _lglTemplateMarkupLine      lglTemplateMarkupLine;
+typedef struct _lglTemplateMarkupCircle    lglTemplateMarkupCircle;
+typedef struct _lglTemplateMarkupRect      lglTemplateMarkupRect;
+
+typedef struct _lglTemplateOrigin          lglTemplateOrigin;
 
 /*
  *   Top-level Template Structure
  */
-struct _glTemplate {
+struct _lglTemplate {
 
 	gchar               *name;
 	gchar               *description;
@@ -53,10 +65,10 @@ struct _glTemplate {
         /* List of (gchar *) category ids. */
 	GList               *categories;
 
-	/* List of (glTemplateLabelType *) label type structures.
-	 * Currently glabels only supports a single label type per
+	/* List of (lglTemplateFrame *) label frame structures.
+	 * Currently glabels only supports a single label frame per
 	 * template. */
-	GList               *label_types;
+	GList               *frames;
 
 	/* List of (gchar *) aliases. */
 	GList               *aliases;
@@ -65,59 +77,92 @@ struct _glTemplate {
 
 
 /*
- *   Possible Label Shapes
+ *   Possible Frame Shapes
  */
 typedef enum {
-	GL_TEMPLATE_SHAPE_RECT,
-	GL_TEMPLATE_SHAPE_ROUND,
-	GL_TEMPLATE_SHAPE_CD,
-} glTemplateLabelShape;
+	LGL_TEMPLATE_FRAME_SHAPE_RECT,
+	LGL_TEMPLATE_FRAME_SHAPE_ROUND,
+	LGL_TEMPLATE_FRAME_SHAPE_CD,
+} lglTemplateFrameShape;
 
 
 /*
- *   Label Type Structure
+ *   Frame Structure
  */
-struct _glTemplateLabelType{
+struct _lglTemplateFrameAll {
+
+        /* Begin Common Fields */
+	lglTemplateFrameShape shape;
 
 	gchar                *id;       /* Id, currently always "0" */
-	GList                *layouts;  /* List of glTemplateLayouts */
-	GList                *markups;  /* List of glTemplateMarkups */
+	GList                *layouts;  /* List of lglTemplateLayouts */
+	GList                *markups;  /* List of lglTemplateMarkups */
+        /* End Common Fields */
+};
 
-	glTemplateLabelShape  shape;
+struct _lglTemplateFrameRect {
 
-	union {
+        /* Begin Common Fields */
+	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_RECT. */
 
-		struct {
-			gdouble        w;        /* Width */
-			gdouble        h;        /* Height */
-			gdouble        r;        /* Corner radius */
-			gdouble        x_waste;  /* Amount of horiz overprint allowed. */
-			gdouble        y_waste;  /* Amount of vert overprint allowed. */
-		} rect;
+	gchar                *id;       /* Id, currently always "0" */
+	GList                *layouts;  /* List of lglTemplateLayouts */
+	GList                *markups;  /* List of lglTemplateMarkups */
+        /* End Common Fields */
 
-		struct {
-			gdouble        r;      /* Radius */
-			gdouble        waste;  /* Amount of overprint allowed. */
+        gdouble               w;        /* Width */
+        gdouble               h;        /* Height */
+        gdouble               r;        /* Corner radius */
+        gdouble               x_waste;  /* Amount of horiz overprint allowed. */
+        gdouble               y_waste;  /* Amount of vert overprint allowed. */
+};
 
-		} round;
+struct _lglTemplateFrameRound {
 
-		struct {
-			gdouble        r1;     /* Outer radius */
-			gdouble        r2;     /* Inner radius (hole) */
-			gdouble        w;      /* Clip width, business card CDs */
-			gdouble        h;      /* Clip height, business card CDs */
-			gdouble        waste;  /* Amount of overprint allowed. */
-		} cd;
+        /* Begin Common Fields */
+	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ROUND. */
 
-	} size;
+	gchar                *id;       /* Id, currently always "0" */
+	GList                *layouts;  /* List of lglTemplateLayouts */
+	GList                *markups;  /* List of lglTemplateMarkups */
+        /* End Common Fields */
 
+        gdouble               r;      /* Radius */
+        gdouble               waste;  /* Amount of overprint allowed. */
+};
+
+struct _lglTemplateFrameCD {
+
+        /* Begin Common Fields */
+	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_CD. */
+
+	gchar                *id;       /* Id, currently always "0" */
+	GList                *layouts;  /* List of lglTemplateLayouts */
+	GList                *markups;  /* List of lglTemplateMarkups */
+        /* End Common Fields */
+
+        gdouble               r1;     /* Outer radius */
+        gdouble               r2;     /* Inner radius (hole) */
+        gdouble               w;      /* Clip width, business card CDs */
+        gdouble               h;      /* Clip height, business card CDs */
+        gdouble               waste;  /* Amount of overprint allowed. */
+};
+
+union _lglTemplateFrame{
+
+	lglTemplateFrameShape shape;
+
+	lglTemplateFrameAll   all;
+	lglTemplateFrameRect  rect;
+	lglTemplateFrameRound round;
+	lglTemplateFrameCD    cd;
 };
 
 
 /*
  *   Label Layout Structure
  */
-struct _glTemplateLayout {
+struct _lglTemplateLayout {
 
 	gint                  nx;  /* Number of labels across */
 	gint                  ny;  /* Number of labels up and down */
@@ -135,51 +180,63 @@ struct _glTemplateLayout {
  * Possible Markup Types
  */
 typedef enum {
-	GL_TEMPLATE_MARKUP_MARGIN,
-	GL_TEMPLATE_MARKUP_LINE,
-	GL_TEMPLATE_MARKUP_CIRCLE,
-	GL_TEMPLATE_MARKUP_RECT,
-} glTemplateMarkupType;
+	LGL_TEMPLATE_MARKUP_MARGIN,
+	LGL_TEMPLATE_MARKUP_LINE,
+	LGL_TEMPLATE_MARKUP_CIRCLE,
+	LGL_TEMPLATE_MARKUP_RECT,
+} lglTemplateMarkupType;
 
 
 /*
  *   Label Markup Structure (Helpful lines drawn in glabels to help locate objects)
  */
-struct _glTemplateMarkup {
+struct _lglTemplateMarkupMargin {
 
-	glTemplateMarkupType   type;
+	lglTemplateMarkupType  type;  /* Always LGL_TEMPLATE_MARKUP_MARGIN */
 
-	union {
+        gdouble                size;  /* Margin size */
+};
 
-		struct {
-			gdouble                size;  /* Margin size */
-		} margin;
+struct _lglTemplateMarkupLine {
 
-		struct {
-			gdouble                x1, y1; /* 1st endpoint */
-			gdouble                x2, y2; /* 2nd endpoint */
-		} line;
+	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_LINE */
 
-		struct {
-			gdouble                x0, y0; /* Center of circle */
-			gdouble                r;      /* Radius of circle */
-		} circle;
-		
-		struct {
-			gdouble                x1, y1; /* Upper left corner */
-			gdouble                w, h;   /* Width and height. */
-                        gdouble                r;      /* Radius of corners. */
-		} rect;
+        gdouble                x1, y1; /* 1st endpoint */
+        gdouble                x2, y2; /* 2nd endpoint */
+};
 
-	} data;
+struct _lglTemplateMarkupCircle {
 
+	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_CIRCLE */
+
+        gdouble                x0, y0; /* Center of circle */
+        gdouble                r;      /* Radius of circle */
+};
+
+struct _lglTemplateMarkupRect {
+
+	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_RECT */
+
+        gdouble                x1, y1; /* Upper left corner */
+        gdouble                w, h;   /* Width and height. */
+        gdouble                r;      /* Radius of corners. */
+};
+
+union _lglTemplateMarkup {
+
+	lglTemplateMarkupType   type;
+
+	lglTemplateMarkupMargin margin;
+	lglTemplateMarkupLine   line;
+	lglTemplateMarkupCircle circle;
+	lglTemplateMarkupRect   rect;
 };
 
 
 /*
  *  Origin coordinates
  */
-struct _glTemplateOrigin {
+struct _lglTemplateOrigin {
 
 	gdouble               x, y; /* Label origin relative to upper 
 				     * upper left hand corner of paper */
@@ -191,133 +248,133 @@ struct _glTemplateOrigin {
 /*
  * Module Initialization
  */
-void                 gl_template_init                 (void);
+void                 lgl_template_init                  (void);
 
-void                 gl_template_register             (const glTemplate    *template);
+void                 lgl_template_register              (const lglTemplate    *template);
 
 /*
  * Known templates query functions
  */
-GList               *gl_template_get_name_list_unique (const gchar         *page_size,
-                                                       const gchar         *category);
+GList               *lgl_template_get_name_list_unique (const gchar         *page_size,
+                                                        const gchar         *category);
 
-GList               *gl_template_get_name_list_all    (const gchar         *page_size,
-                                                       const gchar         *category);
+GList               *lgl_template_get_name_list_all    (const gchar         *page_size,
+                                                        const gchar         *category);
 
-void                 gl_template_free_name_list       (GList               *names);
+void                 lgl_template_free_name_list       (GList               *names);
 
-glTemplate          *gl_template_from_name            (const gchar         *name);
+lglTemplate         *lgl_template_from_name            (const gchar         *name);
 
 
 /* 
  * Template query functions
  */
-const glTemplateLabelType *gl_template_get_first_label_type (const glTemplate   *template);
+const lglTemplateFrame    *lgl_template_get_first_frame      (const lglTemplate   *template);
 
-gboolean                   gl_template_does_page_size_match (const glTemplate   *template,
-                                                             const gchar        *page_size);
+gboolean                   lgl_template_does_page_size_match (const lglTemplate   *template,
+                                                              const gchar         *page_size);
 
-gboolean                   gl_template_does_category_match  (const glTemplate   *template,
-                                                             const gchar        *category);
+gboolean                   lgl_template_does_category_match  (const lglTemplate   *template,
+                                                              const gchar         *category);
 
 
 /*
- * Label Type query functions
+ * Frame query functions
  */
-void                 gl_template_get_label_size  (const glTemplateLabelType *label_type,
-						  gdouble                   *w,
-						  gdouble                   *h);
+void                 lgl_template_frame_get_size       (const lglTemplateFrame    *frame,
+                                                        gdouble                   *w,
+                                                        gdouble                   *h);
 
-gint                 gl_template_get_n_labels    (const glTemplateLabelType *label_type);
+gint                 lgl_template_frame_get_n_labels   (const lglTemplateFrame    *frame);
 
-glTemplateOrigin    *gl_template_get_origins     (const glTemplateLabelType *label_type);
+lglTemplateOrigin   *lgl_template_frame_get_origins    (const lglTemplateFrame    *frame);
 
 
 /*
  * Template Construction
  */
-glTemplate          *gl_template_new                  (const gchar         *name,
-						       const gchar         *description,
-						       const gchar         *page_size,
-						       gdouble              page_width,
-						       gdouble              page_height);
+lglTemplate         *lgl_template_new                  (const gchar          *name,
+                                                        const gchar          *description,
+                                                        const gchar          *page_size,
+                                                        gdouble               page_width,
+                                                        gdouble               page_height);
 
-void                 gl_template_add_category         (glTemplate          *template,
-						       const gchar         *category);
+void                 lgl_template_add_category         (lglTemplate          *template,
+                                                        const gchar          *category);
 
-void                 gl_template_add_label_type       (glTemplate          *template,
-						       glTemplateLabelType *label_type);
+void                 lgl_template_add_frame            (lglTemplate          *template,
+                                                        lglTemplateFrame     *frame);
 
-void                 gl_template_add_alias            (glTemplate          *template,
-						       const gchar         *alias);
+void                 lgl_template_add_alias            (lglTemplate          *template,
+                                                        const gchar          *alias);
 
-glTemplateLabelType *gl_template_rect_label_type_new  (const gchar         *id,
-						       gdouble              w,
-						       gdouble              h,
-						       gdouble              r,
-						       gdouble              x_waste,
-						       gdouble              y_waste);
+lglTemplateFrame    *lgl_template_frame_rect_new       (const gchar          *id,
+                                                        gdouble               w,
+                                                        gdouble               h,
+                                                        gdouble               r,
+                                                        gdouble               x_waste,
+                                                        gdouble               y_waste);
 
-glTemplateLabelType *gl_template_round_label_type_new (const gchar         *id,
-						       gdouble              r,
-						       gdouble              waste);
+lglTemplateFrame    *lgl_template_frame_round_new      (const gchar          *id,
+                                                        gdouble               r,
+                                                        gdouble               waste);
 
-glTemplateLabelType *gl_template_cd_label_type_new    (const gchar         *id,
-						       gdouble              r1,
-						       gdouble              r2,
-						       gdouble              w,
-						       gdouble              h,
-						       gdouble              waste);
+lglTemplateFrame    *lgl_template_frame_cd_new         (const gchar          *id,
+                                                        gdouble               r1,
+                                                        gdouble               r2,
+                                                        gdouble               w,
+                                                        gdouble               h,
+                                                        gdouble               waste);
 
-void                 gl_template_add_layout           (glTemplateLabelType *label_type,
-						       glTemplateLayout    *layout);
+void                 lgl_template_add_layout           (lglTemplateFrame     *frame,
+                                                        lglTemplateLayout    *layout);
 
-void                 gl_template_add_markup           (glTemplateLabelType *label_type,
-						       glTemplateMarkup    *markup);
+void                 lgl_template_add_markup           (lglTemplateFrame     *frame,
+                                                        lglTemplateMarkup    *markup);
 
-glTemplateLayout    *gl_template_layout_new           (gint                 nx,
-						       gint                 ny,
-						       gdouble              x0,
-						       gdouble              y0,
-						       gdouble              dx,
-						       gdouble              dy);
+lglTemplateLayout   *lgl_template_layout_new           (gint                  nx,
+                                                        gint                  ny,
+                                                        gdouble               x0,
+                                                        gdouble               y0,
+                                                        gdouble               dx,
+                                                        gdouble               dy);
 
-glTemplateMarkup    *gl_template_markup_margin_new    (gdouble              size);
+lglTemplateMarkup   *lgl_template_markup_margin_new    (gdouble               size);
 
-glTemplateMarkup    *gl_template_markup_line_new      (gdouble              x1,
-						       gdouble              y1,
-						       gdouble              x2,
-						       gdouble              y2);
+lglTemplateMarkup   *lgl_template_markup_line_new      (gdouble               x1,
+                                                        gdouble               y1,
+                                                        gdouble               x2,
+                                                        gdouble               y2);
 
-glTemplateMarkup    *gl_template_markup_circle_new    (gdouble              x0,
-						       gdouble              y0,
-						       gdouble              r);
+lglTemplateMarkup   *lgl_template_markup_circle_new    (gdouble               x0,
+                                                        gdouble               y0,
+                                                        gdouble               r);
 
-glTemplateMarkup    *gl_template_markup_rect_new      (gdouble              x1,
-						       gdouble              y1,
-						       gdouble              w,
-						       gdouble              h,
-                                                       gdouble              r);
+lglTemplateMarkup   *lgl_template_markup_rect_new      (gdouble               x1,
+                                                        gdouble               y1,
+                                                        gdouble               w,
+                                                        gdouble               h,
+                                                        gdouble               r);
 
-glTemplate          *gl_template_dup                  (const glTemplate    *orig);
+lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig);
 
-void                 gl_template_free                 (glTemplate          *template);
+void                 lgl_template_free                 (lglTemplate          *template);
 
-glTemplateLabelType *gl_template_label_type_dup       (const glTemplateLabelType *orig_ltype);
-void                 gl_template_label_type_free      (glTemplateLabelType       *ltype);
+lglTemplateFrame    *lgl_template_frame_dup            (const lglTemplateFrame     *orig_frame);
+void                 lgl_template_frame_free           (lglTemplateFrame           *frame);
 
-glTemplateLayout    *gl_template_layout_dup           (const glTemplateLayout    *orig_layout);
-void                 gl_template_layout_free          (glTemplateLayout          *layout);
+lglTemplateLayout   *lgl_template_layout_dup           (const lglTemplateLayout    *orig_layout);
+void                 lgl_template_layout_free          (lglTemplateLayout          *layout);
 
-glTemplateMarkup    *gl_template_markup_dup           (const glTemplateMarkup    *orig_markup);
-void                 gl_template_markup_free          (glTemplateMarkup          *markup);
+lglTemplateMarkup   *lgl_template_markup_dup           (const lglTemplateMarkup    *orig_markup);
+void                 lgl_template_markup_free          (lglTemplateMarkup          *markup);
 
 
 /*
  * Debugging functions
  */
-void                 gl_template_print_known_templates (void);
-void                 gl_template_print_aliases         (const glTemplate    *template);
+void                 lgl_template_print_known_templates (void);
+void                 lgl_template_print_aliases         (const lglTemplate    *template);
 
 
 G_END_DECLS

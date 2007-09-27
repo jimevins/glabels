@@ -121,8 +121,7 @@ main (int argc, char **argv)
         /* initialize components */
         gl_debug_init ();
         gl_merge_init ();
-        gl_paper_init ();
-        gl_template_init ();
+        lgl_init ();
 
         /* now print the files */
         for (p = file_list; p; p = p->next) {

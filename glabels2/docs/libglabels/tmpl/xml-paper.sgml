@@ -18,7 +18,7 @@ XML paper definition files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION gl_xml_paper_read_papers_from_file ##### -->
+<!-- ##### FUNCTION lgl_xml_paper_read_papers_from_file ##### -->
 <para>
 
 </para>
@@ -27,7 +27,7 @@ XML paper definition files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_paper_parse_papers_doc ##### -->
+<!-- ##### FUNCTION lgl_xml_paper_parse_papers_doc ##### -->
 <para>
 
 </para>
@@ -36,7 +36,7 @@ XML paper definition files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_paper_parse_paper_node ##### -->
+<!-- ##### FUNCTION lgl_xml_paper_parse_paper_node ##### -->
 <para>
 
 </para>

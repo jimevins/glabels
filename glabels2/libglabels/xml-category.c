@@ -49,16 +49,16 @@
 
 
 /**
- * gl_xml_category_read_categories_from_file:
+ * lgl_xml_category_read_categories_from_file:
  * @utf8_filename:       Filename of categories file (name encoded as UTF-8)
  *
  * Read category definitions from a file.
  *
- * Returns: a list of #glCategory structures.
+ * Returns: a list of #lglCategory structures.
  *
  */
 GList *
-gl_xml_category_read_categories_from_file (gchar *utf8_filename)
+lgl_xml_category_read_categories_from_file (gchar *utf8_filename)
 {
 	gchar      *filename;
 	GList      *categories;
@@ -79,7 +79,7 @@ gl_xml_category_read_categories_from_file (gchar *utf8_filename)
 		return NULL;
 	}
 
-	categories = gl_xml_category_parse_categories_doc (categories_doc);
+	categories = lgl_xml_category_parse_categories_doc (categories_doc);
 
 	g_free (filename);
 	xmlFreeDoc (categories_doc);
@@ -89,21 +89,21 @@ gl_xml_category_read_categories_from_file (gchar *utf8_filename)
 
 
 /**
- * gl_xml_category_parse_categories_doc:
+ * lgl_xml_category_parse_categories_doc:
  * @categories_doc:  libxml #xmlDocPtr tree, representing a categories
  * definition file.
  *
  * Read category definitions from a libxml #xmlDocPtr tree.
  *
- * Returns: a list of #glCategory structures.
+ * Returns: a list of #lglCategory structures.
  *
  */
 GList *
-gl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
+lgl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 {
-	GList      *categories = NULL;
-	xmlNodePtr  root, node;
-	glCategory *category;
+	GList       *categories = NULL;
+	xmlNodePtr   root, node;
+	lglCategory *category;
 
 	LIBXML_TEST_VERSION;
 
@@ -114,7 +114,7 @@ gl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 		xmlFreeDoc (categories_doc);
 		return categories;
 	}
-	if (!gl_xml_is_node (root, "Glabels-categories")) {
+	if (!lgl_xml_is_node (root, "Glabels-categories")) {
 		g_message ("\"%s\" is not a glabels category file (wrong root node)",
 			   categories_doc->name);
 		xmlFreeDoc (categories_doc);
@@ -123,12 +123,12 @@ gl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (gl_xml_is_node (node, "Category")) {
-			category = gl_xml_category_parse_category_node (node);
+		if (lgl_xml_is_node (node, "Category")) {
+			category = lgl_xml_category_parse_category_node (node);
 			categories = g_list_append (categories, category);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
-				if (!gl_xml_is_node (node, "comment")) {
+				if (!lgl_xml_is_node (node, "comment")) {
 					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -140,26 +140,26 @@ gl_xml_category_parse_categories_doc (xmlDocPtr  categories_doc)
 
 
 /**
- * gl_xml_category_parse_category_node:
+ * lgl_xml_category_parse_category_node:
  * @category_node:  libxml #xmlNodePtr category node from a #xmlDocPtr tree.
  *
  * Read a single category definition from a libxml #xmlNodePtr node.
  *
- * Returns: a pointer to a newly created #glCategory structure.
+ * Returns: a pointer to a newly created #lglCategory structure.
  *
  */
-glCategory *
-gl_xml_category_parse_category_node (xmlNodePtr category_node)
+lglCategory *
+lgl_xml_category_parse_category_node (xmlNodePtr category_node)
 {
-	glCategory            *category;
+	lglCategory           *category;
 	gchar                 *id, *name;
 
 	LIBXML_TEST_VERSION;
 
-	id   = gl_xml_get_prop_string (category_node, "id", NULL);
-	name = gl_xml_get_prop_i18n_string (category_node, "name", NULL);
+	id   = lgl_xml_get_prop_string (category_node, "id", NULL);
+	name = lgl_xml_get_prop_i18n_string (category_node, "name", NULL);
 
-	category = gl_category_new (id, name);
+	category = lgl_category_new (id, name);
 
 	g_free (id);
 	g_free (name);

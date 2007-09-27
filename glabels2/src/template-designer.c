@@ -264,7 +264,7 @@ static void     layout_page_changed_cb            (glTemplateDesigner      *dial
 
 static void     print_test_cb                     (glTemplateDesigner      *dialog);
 
-static glTemplate *build_template                 (glTemplateDesigner      *dialog);
+static lglTemplate *build_template                (glTemplateDesigner      *dialog);
 
 
 /*****************************************************************************/
@@ -519,11 +519,11 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
                                          TRUE);
 
 	/* Load page size combo */
-	page_sizes = gl_paper_get_name_list ();
+	page_sizes = lgl_paper_get_name_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
-	gl_paper_free_name_list (page_sizes);
+	lgl_paper_free_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
-	default_page_size_name = gl_paper_lookup_name_from_id (default_page_size_id);
+	default_page_size_name = lgl_paper_lookup_name_from_id (default_page_size_id);
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
 
@@ -1111,10 +1111,10 @@ cancel_cb (glTemplateDesigner *dialog)
 static void
 apply_cb (glTemplateDesigner *dialog)
 {
-	glTemplate *template;
+	lglTemplate *template;
 	
 	template = build_template (dialog);
-	gl_template_register (template);
+	lgl_template_register (template);
         gl_mini_preview_pixbuf_cache_add_by_name (template->name);
 }
                          
@@ -1263,8 +1263,8 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 static void
 pg_size_page_changed_cb (glTemplateDesigner *dialog)
 {
-	gchar   *page_size_name;
-	glPaper *paper;
+	gchar    *page_size_name;
+	lglPaper *paper;
 	
 
 	page_size_name =
@@ -1272,7 +1272,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 
 	if (page_size_name && strlen(page_size_name)) {
 
-		paper = gl_paper_from_name (page_size_name);
+		paper = lgl_paper_from_name (page_size_name);
 	
 
 		if ( g_strcasecmp (paper->id, "Other") == 0 ) {
@@ -1297,7 +1297,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 						   paper->height * dialog->priv->units_per_point);
 		}
 
-		gl_paper_free (paper);
+		lgl_paper_free (paper);
 	}
 
 	g_free (page_size_name);
@@ -1430,7 +1430,7 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 	gint    nlayouts;
 	gdouble nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
-	glTemplate *template;
+	lglTemplate *template;
 
 	if (dialog->priv->stop_signals) return;
 	dialog->priv->stop_signals = TRUE;
@@ -1539,7 +1539,7 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 	template = build_template (dialog);
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
 					   template);
-	gl_template_free (template);
+	lgl_template_free (template);
 
 
 	dialog->priv->stop_signals = FALSE;
@@ -1551,7 +1551,7 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 static void
 layout_page_changed_cb (glTemplateDesigner *dialog)
 {
-	glTemplate *template;
+	lglTemplate *template;
 
 	if (dialog->priv->stop_signals) return;
 	dialog->priv->stop_signals = TRUE;
@@ -1561,7 +1561,7 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
 					   template);
 
-	gl_template_free (template);
+	lgl_template_free (template);
 
 	dialog->priv->stop_signals = FALSE;
 }
@@ -1572,9 +1572,9 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 static void
 print_test_cb (glTemplateDesigner      *dialog)
 {
-	GObject    *label;
-	glTemplate *template;
-	glPrintOp  *print_op;
+	GObject     *label;
+	lglTemplate *template;
+	glPrintOp   *print_op;
 
 	label = gl_label_new ();
 
@@ -1588,27 +1588,27 @@ print_test_cb (glTemplateDesigner      *dialog)
                                  GTK_WINDOW (dialog),
                                  NULL);
 
-	gl_template_free (template);
+	lgl_template_free (template);
 	g_object_unref (G_OBJECT(label));
 }
 
 /*--------------------------------------------------------------------------*/
 /* Build a template based on current assistant settings.                    */
 /*--------------------------------------------------------------------------*/
-static glTemplate *
+static lglTemplate *
 build_template (glTemplateDesigner      *dialog)
 {
 	gdouble               upp;
 	gchar                *brand, *part_num, *name, *desc;
 	gchar                *page_size_name;
-	glPaper              *paper;
-	glTemplateLabelShape  shape;
-	glTemplateLabelType  *label_type=NULL;
+	lglPaper             *paper;
+	lglTemplateFrameShape shape;
+	lglTemplateFrame     *frame=NULL;
 	gdouble               w=0, h=0, r=0, radius=0, hole=0, waste=0, x_waste=0, y_waste=0, margin=0;
 	gint                  nlayouts;
 	gdouble               nx_1, ny_1, x0_1, y0_1, dx_1, dy_1;
 	gdouble               nx_2, ny_2, x0_2, y0_2, dx_2, dy_2;
-	glTemplate           *template;
+	lglTemplate          *template;
 
 	upp = dialog->priv->units_per_point;
 
@@ -1619,7 +1619,7 @@ build_template (glTemplateDesigner      *dialog)
 
 	page_size_name =
 		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
-	paper = gl_paper_from_name (page_size_name);
+	paper = lgl_paper_from_name (page_size_name);
 	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
 			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin))
@@ -1630,7 +1630,7 @@ build_template (glTemplateDesigner      *dialog)
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_rect_radio))) {
-		shape = GL_TEMPLATE_SHAPE_RECT;
+		shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin));
 		h = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin));
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin));
@@ -1640,14 +1640,14 @@ build_template (glTemplateDesigner      *dialog)
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_round_radio))) {
-		shape = GL_TEMPLATE_SHAPE_ROUND;
+		shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
 		r = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin));
 		waste = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin));
 		margin = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin));
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(dialog->priv->shape_cd_radio))) {
-		shape = GL_TEMPLATE_SHAPE_CD;
+		shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
 		radius = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin));
 		hole = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin));
 		w = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin));
@@ -1671,41 +1671,38 @@ build_template (glTemplateDesigner      *dialog)
 	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin));
 
 
-	template = gl_template_new (name, desc, paper->id, paper->width, paper->height);
+	template = lgl_template_new (name, desc, paper->id, paper->width, paper->height);
 
 	switch (shape) {
-	case GL_TEMPLATE_SHAPE_RECT:
-		label_type =
-			gl_template_rect_label_type_new ("0",
-							 w/upp, h/upp, r/upp,
-							 x_waste/upp, y_waste/upp);
+	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+		frame = lgl_template_frame_rect_new ("0",
+                                                    w/upp, h/upp, r/upp,
+                                                    x_waste/upp, y_waste/upp);
 		break;
-	case GL_TEMPLATE_SHAPE_ROUND:
-		label_type =
-			gl_template_round_label_type_new ("0", r/upp, waste/upp);
+	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+		frame = lgl_template_frame_round_new ("0", r/upp, waste/upp);
 		break;
-	case GL_TEMPLATE_SHAPE_CD:
-		label_type =
-			gl_template_cd_label_type_new ("0",
-						       radius/upp, hole/upp,
-						       w/upp, h/upp,
-						       waste/upp);
+	case LGL_TEMPLATE_FRAME_SHAPE_CD:
+		frame = lgl_template_frame_cd_new ("0",
+                                                  radius/upp, hole/upp,
+                                                  w/upp, h/upp,
+                                                  waste/upp);
 		break;
 	}
-	gl_template_add_label_type (template, label_type);
+	lgl_template_add_frame (template, frame);
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_margin_new (margin/upp));
+	lgl_template_add_markup (frame,
+				lgl_template_markup_margin_new (margin/upp));
 
-	gl_template_add_layout (label_type,
-				gl_template_layout_new (nx_1, ny_1,
+	lgl_template_add_layout (frame,
+				lgl_template_layout_new (nx_1, ny_1,
 							x0_1/upp,
 							y0_1/upp,
 							dx_1/upp,
 							dy_1/upp));
 	if (nlayouts > 1) {
-		gl_template_add_layout (label_type,
-					gl_template_layout_new (nx_2, ny_2,
+		lgl_template_add_layout (frame,
+					lgl_template_layout_new (nx_2, ny_2,
 								x0_2/upp,
 								y0_2/upp,
 								dx_2/upp,
@@ -1718,7 +1715,7 @@ build_template (glTemplateDesigner      *dialog)
 	g_free (desc);
 
 	g_free (page_size_name);
-	gl_paper_free (paper);
+	lgl_paper_free (paper);
 
 	return template;
 }

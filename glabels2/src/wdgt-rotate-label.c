@@ -64,7 +64,7 @@ struct _glWdgtRotateLabelPrivate {
         GtkWidget    *rotate_check;
         GtkWidget    *rotate_drawingarea;
 
-	glTemplate   *template;
+	lglTemplate  *template;
 };
 
 enum {
@@ -90,7 +90,7 @@ static void entry_changed_cb                   (GtkToggleButton        *toggle,
 						gpointer                user_data);
 
 static void drawingarea_update                 (GtkDrawingArea         *drawing_area,
-						glTemplate             *template,
+						lglTemplate            *template,
 						gboolean                rotate_flag);
 
 static gboolean expose_cb                      (GtkWidget              *drawingarea,
@@ -139,7 +139,7 @@ gl_wdgt_rotate_label_finalize (GObject *object)
 	g_return_if_fail (GL_IS_WDGT_ROTATE_LABEL (object));
 
 	if (rotate_label->priv->template) {
-		gl_template_free (rotate_label->priv->template);
+		lgl_template_free (rotate_label->priv->template);
 		rotate_label->priv->template = NULL;
 	}
 	g_free (rotate_label->priv);
@@ -228,10 +228,10 @@ entry_changed_cb (GtkToggleButton *toggle,
 /*--------------------------------------------------------------------------*/
 static void
 drawingarea_update (GtkDrawingArea *drawing_area,
-		    glTemplate     *template,
+		    lglTemplate    *template,
 		    gboolean        rotate_flag)
 {
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	gdouble                    m, m_canvas, w, h, scale;
 	GtkStyle                  *style;
 	guint                      line_color, fill_color, shadow_color;
@@ -250,15 +250,15 @@ drawingarea_update (GtkDrawingArea *drawing_area,
 		return;
 	}
 
-	label_type = gl_template_get_first_label_type (template);
+	frame = lgl_template_get_first_frame (template);
 
         if (rotate_flag)
         {
-                gl_template_get_label_size (label_type, &h, &w);
+                lgl_template_frame_get_size (frame, &h, &w);
         }
         else
         {
-                gl_template_get_label_size (label_type, &w, &h);
+                lgl_template_frame_get_size (frame, &w, &h);
         }
 	m = MAX (w, h);
 	scale = MINI_PREVIEW_MAX_PIXELS / m;
@@ -359,8 +359,8 @@ void
 gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_label,
 					gchar             *name)
 {
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
+	lglTemplate               *template;
+	const lglTemplateFrame    *frame;
 	gdouble                    raw_w, raw_h;
 
 	if (name == NULL)
@@ -376,11 +376,11 @@ gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_label,
 	}
 	else
 	{
-		template   = gl_template_from_name (name);
-		label_type = gl_template_get_first_label_type (template);
+		template   = lgl_template_from_name (name);
+		frame = lgl_template_get_first_frame (template);
 
 		rotate_label->priv->template = template;
-		gl_template_get_label_size (label_type, &raw_w, &raw_h);
+		lgl_template_frame_get_size (frame, &raw_w, &raw_h);
 
 		gtk_widget_set_sensitive (rotate_label->priv->rotate_check,
 					  (raw_w != raw_h));

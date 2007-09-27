@@ -17,20 +17,16 @@ This section defines enumerations used to interact with libglabels.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### ENUM glUnitsType ##### -->
+<!-- ##### ENUM lglUnitsType ##### -->
 <para>
-Enumerations for the units of length supported by libglabels.  Internally
-all lengths are in points.  Externally libglabels supports points ("pt"),
-inches ("in"), millimeters ("mm"), centimeters ("cm"), and picas ("pc").
-These units are identical to the absolute length units supported in
-the CSS2 Specification (Section 4.3.2).
+
 </para>
 
-@GL_UNITS_POINT: 
-@GL_UNITS_INCH: 
-@GL_UNITS_MM: 
-@GL_UNITS_CM: 
-@GL_UNITS_PICA: 
-@GL_UNITS_FIRST: 
-@GL_UNITS_LAST: 
+@LGL_UNITS_POINT: 
+@LGL_UNITS_INCH: 
+@LGL_UNITS_MM: 
+@LGL_UNITS_CM: 
+@LGL_UNITS_PICA: 
+@LGL_UNITS_FIRST: 
+@LGL_UNITS_LAST: 
 

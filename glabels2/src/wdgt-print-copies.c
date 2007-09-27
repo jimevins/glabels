@@ -125,16 +125,16 @@ static void
 gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 				glLabel           *label)
 {
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	GtkWidget                 *whbox, *wvbox, *whbox1;
 	GSList                    *radio_group = NULL;
 	GtkObject                 *adjust;
 
 	whbox = GTK_WIDGET (copies);
 
-	label_type = gl_template_get_first_label_type (label->template);
+	frame = lgl_template_get_first_frame (label->template);
 
-	copies->labels_per_sheet = gl_template_get_n_labels (label_type);
+	copies->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/* mini_preview canvas */
 	copies->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,

@@ -34,11 +34,11 @@
 
 G_BEGIN_DECLS
 
-GList       *gl_xml_category_read_categories_from_file (gchar        *utf8_filename);
+GList       *lgl_xml_category_read_categories_from_file (gchar        *utf8_filename);
 
-GList       *gl_xml_category_parse_categories_doc      (xmlDocPtr     categories_doc);
+GList       *lgl_xml_category_parse_categories_doc      (xmlDocPtr     categories_doc);
 
-glCategory  *gl_xml_category_parse_category_node       (xmlNodePtr    category_node);
+lglCategory *lgl_xml_category_parse_category_node       (xmlNodePtr    category_node);
 
 
 G_END_DECLS

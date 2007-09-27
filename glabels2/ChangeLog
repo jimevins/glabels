@@ -1,3 +1,76 @@
+2007-09-27  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/init.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* docs/libglabels/tmpl/xml.sgml:
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/enums.h:
+	* libglabels/init.c:
+	* libglabels/init.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-category.c:
+	* libglabels/xml-category.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-paper.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml-template.h:
+	* libglabels/xml.c:
+	* libglabels/xml.h:
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/cairo-markup-path.h:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label-object.c:
+	* src/label.c:
+	* src/label.h:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/mini-preview-pixbuf.c:
+	* src/mini-preview-pixbuf.h:
+	* src/prefs-dialog.c:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/prefs.h:
+	* src/print-op.c:
+	* src/print.c:
+	* src/template-designer.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Major cleanup of libglabels API -- this breaks API compatibility with older
+		development and stable versions -- as far as I know, there are currently
+		no external users of this library yet.
+	
 2007-09-14  Jim Evins  <evins@snaught.com>
 
 	* src/marshal.list:

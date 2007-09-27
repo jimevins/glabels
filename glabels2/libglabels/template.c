@@ -34,6 +34,8 @@
 #include <glib/gdir.h>
 #include <glib/gmessages.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "libglabels-private.h"
 #include "xml.h"
@@ -55,21 +57,22 @@ static GList *templates = NULL;
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static glTemplate *template_full_page           (const gchar            *page_size);
+static lglTemplate *template_full_page           (const gchar            *page_size);
 
-static GList      *read_templates               (void);
+static GList       *read_templates               (void);
 
-static GList      *read_template_files_from_dir (GList                  *templates,
-						 const gchar            *dirname);
-static gint        compare_origins              (gconstpointer           a,
-						 gconstpointer           b,
-						 gpointer                user_data);
+static GList       *read_template_files_from_dir (GList                  *templates,
+                                                  const gchar            *dirname);
+
+static gint         compare_origins              (gconstpointer           a,
+                                                  gconstpointer           b,
+                                                  gpointer                user_data);
 
 /*****************************************************************************/
 /* Initialize module.                                                        */
 /*****************************************************************************/
 void
-gl_template_init (void)
+lgl_template_init (void)
 {
 	GList *page_sizes, *p;
 
@@ -79,31 +82,31 @@ gl_template_init (void)
 
 	templates = read_templates ();
 
-	page_sizes = gl_paper_get_id_list ();
+	page_sizes = lgl_paper_get_id_list ();
 	for ( p=page_sizes; p != NULL; p=p->next ) {
-		if ( !gl_paper_is_id_other (p->data) ) {
+		if ( !lgl_paper_is_id_other (p->data) ) {
 			templates = g_list_append (templates,
 						   template_full_page (p->data));
 		}
 	}
-	gl_paper_free_id_list (page_sizes);
+	lgl_paper_free_id_list (page_sizes);
 }
 
 /*****************************************************************************/
 /* Register template: if not in current list, add it.                        */
 /*****************************************************************************/
 void
-gl_template_register (const glTemplate  *template)
+lgl_template_register (const lglTemplate  *template)
 {
-	GList      *p_tmplt, *pa1;
-	glTemplate *template1;
+	GList       *p_tmplt, *pa1;
+	lglTemplate *template1;
 
 	if (!templates) {
-		gl_template_init ();
+		lgl_template_init ();
 	}
 
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
-		template1 = (glTemplate *) p_tmplt->data;
+		template1 = (lglTemplate *) p_tmplt->data;
 
 		for (pa1=template1->aliases; pa1!=NULL; pa1=pa1->next) {
 			
@@ -118,19 +121,19 @@ gl_template_register (const glTemplate  *template)
 
 	}
 
-	if (gl_paper_is_id_known (template->page_size)) {
+	if (lgl_paper_is_id_known (template->page_size)) {
 
 		gchar *dir, *filename, *abs_filename;
 
 		templates = g_list_append (templates,
-					   gl_template_dup (template));
+					   lgl_template_dup (template));
 
 		/* FIXME: make sure filename is unique */
-		dir = GL_USER_DATA_DIR;
+		dir = LGL_USER_DATA_DIR;
 		mkdir (dir, 0775); /* Try to make sure directory exists. */
 		filename = g_strconcat (template->name, ".template", NULL);
 		abs_filename = g_build_filename (dir, filename, NULL);
-		gl_xml_template_write_template_to_file (template, abs_filename);
+		lgl_xml_template_write_template_to_file (template, abs_filename);
 		g_free (dir);
 		g_free (filename);
 		g_free (abs_filename);
@@ -145,23 +148,23 @@ gl_template_register (const glTemplate  *template)
 /* Get a list of valid names of unique templates for given page size             */
 /*********************************************************************************/
 GList *
-gl_template_get_name_list_unique (const gchar *page_size,
-                                  const gchar *category)
+lgl_template_get_name_list_unique (const gchar *page_size,
+                                   const gchar *category)
 {
-	GList      *p_tmplt;
-	glTemplate *template;
-	GList      *names = NULL;
+	GList       *p_tmplt;
+	lglTemplate *template;
+	GList       *names = NULL;
 
 	if (!templates)
         {
-		gl_template_init ();
+		lgl_template_init ();
 	}
 
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (glTemplate *) p_tmplt->data;
-		if (gl_template_does_page_size_match (template, page_size) &&
-                    gl_template_does_category_match (template, category))
+		template = (lglTemplate *) p_tmplt->data;
+		if (lgl_template_does_page_size_match (template, page_size) &&
+                    lgl_template_does_category_match (template, category))
                 {
                         names = g_list_insert_sorted (names, g_strdup (template->name),
                                                       (GCompareFunc)g_strcasecmp);
@@ -175,24 +178,24 @@ gl_template_get_name_list_unique (const gchar *page_size,
 /* Get a list of all valid template names for given page size (includes aliases) */
 /*********************************************************************************/
 GList *
-gl_template_get_name_list_all (const gchar *page_size,
-                               const gchar *category)
+lgl_template_get_name_list_all (const gchar *page_size,
+                                const gchar *category)
 {
-	GList      *p_tmplt, *p_alias;
-	glTemplate *template;
-	gchar      *str;
-	GList      *names = NULL;
+	GList       *p_tmplt, *p_alias;
+	lglTemplate *template;
+	gchar       *str;
+	GList       *names = NULL;
 
 	if (!templates)
         {
-		gl_template_init ();
+		lgl_template_init ();
 	}
 
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
-		template = (glTemplate *) p_tmplt->data;
-		if (gl_template_does_page_size_match (template, page_size) &&
-                    gl_template_does_category_match (template, category))
+		template = (lglTemplate *) p_tmplt->data;
+		if (lgl_template_does_page_size_match (template, page_size) &&
+                    lgl_template_does_category_match (template, category))
                 {
 			for (p_alias = template->aliases; p_alias != NULL;
 			     p_alias = p_alias->next)
@@ -211,7 +214,7 @@ gl_template_get_name_list_all (const gchar *page_size,
 /* Free a list of template names.                                            */
 /*****************************************************************************/
 void
-gl_template_free_name_list (GList *names)
+lgl_template_free_name_list (GList *names)
 {
 	GList *p_name;
 
@@ -226,76 +229,76 @@ gl_template_free_name_list (GList *names)
 /*****************************************************************************/
 /* Return a template structure from a name.                                  */
 /*****************************************************************************/
-glTemplate *
-gl_template_from_name (const gchar *name)
+lglTemplate *
+lgl_template_from_name (const gchar *name)
 {
-	GList       *p_tmplt, *p_alias;
-	glTemplate  *template;
+	GList        *p_tmplt, *p_alias;
+	lglTemplate  *template;
 
 	if (!templates) {
-		gl_template_init ();
+		lgl_template_init ();
 	}
 
 	if (name == NULL) {
 		/* If no name, return first template as a default */
-		return gl_template_dup ((glTemplate *) templates->data);
+		return lgl_template_dup ((lglTemplate *) templates->data);
 	}
 
 	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
-		template = (glTemplate *) p_tmplt->data;
+		template = (lglTemplate *) p_tmplt->data;
 		for (p_alias = template->aliases; p_alias != NULL;
 		     p_alias = p_alias->next) {
 			if (g_strcasecmp (p_alias->data, name) == 0) {
 
-				return gl_template_dup (template);
+				return lgl_template_dup (template);
 			}
 		}
 	}
 
 	/* No matching template has been found so return the first template */
-	return gl_template_dup ((glTemplate *) templates->data);
+	return lgl_template_dup ((lglTemplate *) templates->data);
 }
 
 /*****************************************************************************/
 /* Get first label type in template.                                         */
 /*****************************************************************************/
-const glTemplateLabelType *
-gl_template_get_first_label_type (const glTemplate *template)
+const lglTemplateFrame *
+lgl_template_get_first_frame (const lglTemplate *template)
 {
 	g_return_val_if_fail (template, NULL);
 
-	return (glTemplateLabelType *)template->label_types->data;
+	return (lglTemplateFrame *)template->frames->data;
 }
 
 /****************************************************************************/
 /* Get raw label size (width and height).                                   */
 /****************************************************************************/
 void
-gl_template_get_label_size (const glTemplateLabelType *label_type,
-			    gdouble                   *w,
-			    gdouble                   *h)
+lgl_template_frame_get_size (const lglTemplateFrame *frame,
+                             gdouble                *w,
+                             gdouble                *h)
 {
-	g_return_if_fail (label_type);
+	g_return_if_fail (frame);
 
-	switch (label_type->shape) {
-	case GL_TEMPLATE_SHAPE_RECT:
-		*w = label_type->size.rect.w;
-		*h = label_type->size.rect.h;
+	switch (frame->shape) {
+	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+		*w = frame->rect.w;
+		*h = frame->rect.h;
 		break;
-	case GL_TEMPLATE_SHAPE_ROUND:
-		*w = 2.0 * label_type->size.round.r;
-		*h = 2.0 * label_type->size.round.r;
+	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+		*w = 2.0 * frame->round.r;
+		*h = 2.0 * frame->round.r;
 		break;
-	case GL_TEMPLATE_SHAPE_CD:
-		if (label_type->size.cd.w == 0.0) {
-			*w = 2.0 * label_type->size.cd.r1;
+	case LGL_TEMPLATE_FRAME_SHAPE_CD:
+		if (frame->cd.w == 0.0) {
+			*w = 2.0 * frame->cd.r1;
 		} else {
-			*w = label_type->size.cd.w;
+			*w = frame->cd.w;
 		}
-		if (label_type->size.cd.h == 0.0) {
-			*h = 2.0 * label_type->size.cd.r1;
+		if (frame->cd.h == 0.0) {
+			*h = 2.0 * frame->cd.r1;
 		} else {
-			*h = label_type->size.cd.h;
+			*h = frame->cd.h;
 		}
 		break;
 	default:
@@ -309,16 +312,16 @@ gl_template_get_label_size (const glTemplateLabelType *label_type,
 /* Get total number of labels per sheet of a label type.                    */
 /****************************************************************************/
 gint
-gl_template_get_n_labels (const glTemplateLabelType *label_type)
+lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 {
-	gint              n_labels = 0;
-	GList            *p;
-	glTemplateLayout *layout;
+	gint               n_labels = 0;
+	GList             *p;
+	lglTemplateLayout *layout;
 
-	g_return_val_if_fail (label_type, 0);
+	g_return_val_if_fail (frame, 0);
 
-	for ( p=label_type->layouts; p != NULL; p=p->next ) {
-		layout = (glTemplateLayout *)p->data;
+	for ( p=frame->all.layouts; p != NULL; p=p->next ) {
+		layout = (lglTemplateLayout *)p->data;
 
 		n_labels += layout->nx * layout->ny;
 	}
@@ -329,22 +332,22 @@ gl_template_get_n_labels (const glTemplateLabelType *label_type)
 /****************************************************************************/
 /* Get array of origins of individual labels.                               */
 /****************************************************************************/
-glTemplateOrigin *
-gl_template_get_origins (const glTemplateLabelType *label_type)
+lglTemplateOrigin *
+lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 {
-	gint              i_label, n_labels, ix, iy;
-	glTemplateOrigin *origins;
-	GList            *p;
-	glTemplateLayout *layout;
+	gint               i_label, n_labels, ix, iy;
+	lglTemplateOrigin *origins;
+	GList             *p;
+	lglTemplateLayout *layout;
 
-	g_return_val_if_fail (label_type, NULL);
+	g_return_val_if_fail (frame, NULL);
 
-	n_labels = gl_template_get_n_labels (label_type);
-	origins = g_new0 (glTemplateOrigin, n_labels);
+	n_labels = lgl_template_frame_get_n_labels (frame);
+	origins = g_new0 (lglTemplateOrigin, n_labels);
 
 	i_label = 0;
-	for ( p=label_type->layouts; p != NULL; p=p->next ) {
-		layout = (glTemplateLayout *)p->data;
+	for ( p=frame->all.layouts; p != NULL; p=p->next ) {
+		layout = (lglTemplateLayout *)p->data;
 
 		for (iy = 0; iy < layout->ny; iy++) {
 			for (ix = 0; ix < layout->nx; ix++, i_label++) {
@@ -354,7 +357,7 @@ gl_template_get_origins (const glTemplateLabelType *label_type)
 		}
 	}
 
-	g_qsort_with_data (origins, n_labels, sizeof(glTemplateOrigin),
+	g_qsort_with_data (origins, n_labels, sizeof(lglTemplateOrigin),
 			   compare_origins, NULL);
 
 	return origins;
@@ -363,16 +366,16 @@ gl_template_get_origins (const glTemplateLabelType *label_type)
 /*****************************************************************************/
 /* Create a new template with given properties.                              */
 /*****************************************************************************/
-glTemplate *
-gl_template_new (const gchar         *name,
-		 const gchar         *description,
-		 const gchar         *page_size,
-		 gdouble              page_width,
-		 gdouble              page_height)
+lglTemplate *
+lgl_template_new (const gchar         *name,
+                  const gchar         *description,
+                  const gchar         *page_size,
+                  gdouble              page_width,
+                  gdouble              page_height)
 {
-	glTemplate *template;
+	lglTemplate *template;
 
-	template = g_new0 (glTemplate,1);
+	template = g_new0 (lglTemplate,1);
 
 	template->name        = g_strdup (name);
 	template->description = g_strdup (description);
@@ -391,10 +394,10 @@ gl_template_new (const gchar         *name,
 /* Does page size match given id?                                            */
 /*****************************************************************************/
 gboolean
-gl_template_does_page_size_match (const glTemplate   *template,
-                                  const gchar        *page_size)
+lgl_template_does_page_size_match (const lglTemplate  *template,
+                                   const gchar        *page_size)
 {
-	g_return_if_fail (template);
+	g_return_val_if_fail (template, FALSE);
 
         /* NULL matches everything. */
         if (page_size == NULL)
@@ -409,12 +412,12 @@ gl_template_does_page_size_match (const glTemplate   *template,
 /* Does category match given id?                                             */
 /*****************************************************************************/
 gboolean
-gl_template_does_category_match  (const glTemplate   *template,
-                                  const gchar        *category)
+lgl_template_does_category_match  (const lglTemplate  *template,
+                                   const gchar        *category)
 {
         GList *p;
 
-	g_return_if_fail (template);
+	g_return_val_if_fail (template, FALSE);
 
         /* NULL matches everything. */
         if (category == NULL)
@@ -437,8 +440,8 @@ gl_template_does_category_match  (const glTemplate   *template,
 /* Add category to category list of template.                                */
 /*****************************************************************************/
 void
-gl_template_add_category (glTemplate          *template,
-                          const gchar         *category)
+lgl_template_add_category (lglTemplate         *template,
+                           const gchar         *category)
 {
 	g_return_if_fail (template);
 	g_return_if_fail (category);
@@ -451,22 +454,21 @@ gl_template_add_category (glTemplate          *template,
 /* Add label type structure to label type list of template.                  */
 /*****************************************************************************/
 void
-gl_template_add_label_type (glTemplate          *template,
-			    glTemplateLabelType *label_type)
+lgl_template_add_frame (lglTemplate      *template,
+                        lglTemplateFrame *frame)
 {
 	g_return_if_fail (template);
-	g_return_if_fail (label_type);
+	g_return_if_fail (frame);
 
-	template->label_types = g_list_append (template->label_types,
-					       label_type);
+	template->frames = g_list_append (template->frames, frame);
 }
  
 /*****************************************************************************/
 /* Add alias to alias list of template.                                      */
 /*****************************************************************************/
 void
-gl_template_add_alias (glTemplate          *template,
-		       const gchar         *alias)
+lgl_template_add_alias (lglTemplate         *template,
+                        const gchar         *alias)
 {
 	g_return_if_fail (template);
 	g_return_if_fail (alias);
@@ -478,120 +480,118 @@ gl_template_add_alias (glTemplate          *template,
 /*****************************************************************************/
 /* Create a new label type structure for a rectangular label.                */
 /*****************************************************************************/
-glTemplateLabelType *
-gl_template_rect_label_type_new  (const gchar         *id,
-				  gdouble              w,
-				  gdouble              h,
-				  gdouble              r,
-				  gdouble              x_waste,
-				  gdouble              y_waste)
+lglTemplateFrame *
+lgl_template_frame_rect_new  (const gchar         *id,
+                              gdouble              w,
+                              gdouble              h,
+                              gdouble              r,
+                              gdouble              x_waste,
+                              gdouble              y_waste)
 {
-	glTemplateLabelType *label_type;
+	lglTemplateFrame *frame;
 
-	label_type = g_new0 (glTemplateLabelType, 1);
+	frame = g_new0 (lglTemplateFrame, 1);
 
-	label_type->id    = g_strdup (id);
-	label_type->shape = GL_TEMPLATE_SHAPE_RECT;
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
+	frame->rect.id = g_strdup (id);
 
-	label_type->size.rect.w = w;
-	label_type->size.rect.h = h;
-	label_type->size.rect.r = r;
-	label_type->size.rect.x_waste = x_waste;
-	label_type->size.rect.y_waste = y_waste;
+	frame->rect.w = w;
+	frame->rect.h = h;
+	frame->rect.r = r;
+	frame->rect.x_waste = x_waste;
+	frame->rect.y_waste = y_waste;
 
-	return label_type;
+	return frame;
 }
 
 /*****************************************************************************/
 /* Create a new label type structure for a round label.                      */
 /*****************************************************************************/
-glTemplateLabelType *
-gl_template_round_label_type_new (const gchar         *id,
-				  gdouble              r,
-				  gdouble              waste)
+lglTemplateFrame *
+lgl_template_frame_round_new (const gchar         *id,
+                              gdouble              r,
+                              gdouble              waste)
 {
-	glTemplateLabelType *label_type;
+	lglTemplateFrame *frame;
 
-	label_type = g_new0 (glTemplateLabelType, 1);
+	frame = g_new0 (lglTemplateFrame, 1);
 
-	label_type->id    = g_strdup (id);
-	label_type->shape = GL_TEMPLATE_SHAPE_ROUND;
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
+	frame->round.id = g_strdup (id);
 
-	label_type->size.round.r = r;
-	label_type->size.round.waste = waste;
+	frame->round.r = r;
+	frame->round.waste = waste;
 
-	return label_type;
+	return frame;
 }
                                                                                
 /*****************************************************************************/
 /* Create a new label type structure for a CD/DVD label.                     */
 /*****************************************************************************/
-glTemplateLabelType *
-gl_template_cd_label_type_new (const gchar         *id,
-			       gdouble              r1,
-			       gdouble              r2,
-			       gdouble              w,
-			       gdouble              h,
-			       gdouble              waste)
+lglTemplateFrame *
+lgl_template_frame_cd_new (const gchar         *id,
+                           gdouble              r1,
+                           gdouble              r2,
+                           gdouble              w,
+                           gdouble              h,
+                           gdouble              waste)
 {
-	glTemplateLabelType *label_type;
+	lglTemplateFrame *frame;
 
-	label_type = g_new0 (glTemplateLabelType, 1);
+	frame = g_new0 (lglTemplateFrame, 1);
 
-	label_type->id    = g_strdup (id);
-	label_type->shape = GL_TEMPLATE_SHAPE_CD;
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
+	frame->cd.id = g_strdup (id);
 
-	label_type->size.cd.r1 = r1;
-	label_type->size.cd.r2 = r2;
-	label_type->size.cd.w  = w;
-	label_type->size.cd.h  = h;
-	label_type->size.cd.waste = waste;
+	frame->cd.r1 = r1;
+	frame->cd.r2 = r2;
+	frame->cd.w  = w;
+	frame->cd.h  = h;
+	frame->cd.waste = waste;
 
-	return label_type;
+	return frame;
 }
 
 /*****************************************************************************/
 /* Add a layout to a label type.                                             */
 /*****************************************************************************/
 void
-gl_template_add_layout (glTemplateLabelType *label_type,
-			glTemplateLayout    *layout)
+lgl_template_add_layout (lglTemplateFrame   *frame,
+                         lglTemplateLayout  *layout)
 {
-	g_return_if_fail (label_type);
+	g_return_if_fail (frame);
 	g_return_if_fail (layout);
 
-	label_type->layouts = g_list_append (label_type->layouts,
-					     layout);
+	frame->all.layouts = g_list_append (frame->all.layouts, layout);
 }
  
 /*****************************************************************************/
 /* Add a markup item to a label type.                                        */
 /*****************************************************************************/
 void
-gl_template_add_markup (glTemplateLabelType *label_type,
-			glTemplateMarkup    *markup)
+lgl_template_add_markup (lglTemplateFrame   *frame,
+                         lglTemplateMarkup  *markup)
 {
-	g_return_if_fail (label_type);
+	g_return_if_fail (frame);
 	g_return_if_fail (markup);
 
-	label_type->markups = g_list_append (label_type->markups,
-					     markup);
+	frame->all.markups = g_list_append (frame->all.markups, markup);
 }
  
 /*****************************************************************************/
 /* Create new layout structure.                                              */
 /*****************************************************************************/
-glTemplateLayout *
-gl_template_layout_new (gint    nx,
-			gint    ny,
-			gdouble x0,
-			gdouble y0,
-			gdouble dx,
-			gdouble dy)
+lglTemplateLayout *
+lgl_template_layout_new (gint    nx,
+                         gint    ny,
+                         gdouble x0,
+                         gdouble y0,
+                         gdouble dx,
+                         gdouble dy)
 {
-	glTemplateLayout *layout;
+	lglTemplateLayout *layout;
 
-	layout = g_new0 (glTemplateLayout, 1);
+	layout = g_new0 (lglTemplateLayout, 1);
 
 	layout->nx = nx;
 	layout->ny = ny;
@@ -606,15 +606,15 @@ gl_template_layout_new (gint    nx,
 /*****************************************************************************/
 /* Create new margin markup structure.                                       */
 /*****************************************************************************/
-glTemplateMarkup *
-gl_template_markup_margin_new (gdouble size)
+lglTemplateMarkup *
+lgl_template_markup_margin_new (gdouble size)
 {
-	glTemplateMarkup *markup;
+	lglTemplateMarkup *markup;
 
-	markup = g_new0 (glTemplateMarkup, 1);
+	markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type             = GL_TEMPLATE_MARKUP_MARGIN;
-	markup->data.margin.size = size;
+	markup->type        = LGL_TEMPLATE_MARKUP_MARGIN;
+	markup->margin.size = size;
 
 	return markup;
 }
@@ -622,21 +622,21 @@ gl_template_markup_margin_new (gdouble size)
 /*****************************************************************************/
 /* Create new markup line structure.                                         */
 /*****************************************************************************/
-glTemplateMarkup *
-gl_template_markup_line_new (gdouble x1,
-			     gdouble y1,
-			     gdouble x2,
-			     gdouble y2)
+lglTemplateMarkup *
+lgl_template_markup_line_new (gdouble x1,
+                              gdouble y1,
+                              gdouble x2,
+                              gdouble y2)
 {
-	glTemplateMarkup *markup;
+	lglTemplateMarkup *markup;
 
-	markup = g_new0 (glTemplateMarkup, 1);
+	markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type             = GL_TEMPLATE_MARKUP_LINE;
-	markup->data.line.x1     = x1;
-	markup->data.line.y1     = y1;
-	markup->data.line.x2     = x2;
-	markup->data.line.y2     = y2;
+	markup->type        = LGL_TEMPLATE_MARKUP_LINE;
+	markup->line.x1     = x1;
+	markup->line.y1     = y1;
+	markup->line.x2     = x2;
+	markup->line.y2     = y2;
 
 	return markup;
 }
@@ -644,19 +644,19 @@ gl_template_markup_line_new (gdouble x1,
 /*****************************************************************************/
 /* Create new markup circle structure.                                       */
 /*****************************************************************************/
-glTemplateMarkup *
-gl_template_markup_circle_new (gdouble x0,
-			       gdouble y0,
-			       gdouble r)
+lglTemplateMarkup *
+lgl_template_markup_circle_new (gdouble x0,
+                                gdouble y0,
+                                gdouble r)
 {
-	glTemplateMarkup *markup;
+	lglTemplateMarkup *markup;
 
-	markup = g_new0 (glTemplateMarkup, 1);
+	markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type             = GL_TEMPLATE_MARKUP_CIRCLE;
-	markup->data.circle.x0   = x0;
-	markup->data.circle.y0   = y0;
-	markup->data.circle.r    = r;
+	markup->type        = LGL_TEMPLATE_MARKUP_CIRCLE;
+	markup->circle.x0   = x0;
+	markup->circle.y0   = y0;
+	markup->circle.r    = r;
 
 	return markup;
 }
@@ -664,23 +664,23 @@ gl_template_markup_circle_new (gdouble x0,
 /*****************************************************************************/
 /* Create new markup rect structure.                                         */
 /*****************************************************************************/
-glTemplateMarkup *
-gl_template_markup_rect_new (gdouble x1,
-			     gdouble y1,
-			     gdouble w,
-			     gdouble h,
-                             gdouble r)
+lglTemplateMarkup *
+lgl_template_markup_rect_new (gdouble x1,
+                              gdouble y1,
+                              gdouble w,
+                              gdouble h,
+                              gdouble r)
 {
-	glTemplateMarkup *markup;
+	lglTemplateMarkup *markup;
 
-	markup = g_new0 (glTemplateMarkup, 1);
+	markup = g_new0 (lglTemplateMarkup, 1);
 
-	markup->type             = GL_TEMPLATE_MARKUP_RECT;
-	markup->data.rect.x1     = x1;
-	markup->data.rect.y1     = y1;
-	markup->data.rect.w      = w;
-	markup->data.rect.h      = h;
-	markup->data.rect.r      = r;
+	markup->type        = LGL_TEMPLATE_MARKUP_RECT;
+	markup->rect.x1     = x1;
+	markup->rect.y1     = y1;
+	markup->rect.w      = w;
+	markup->rect.h      = h;
+	markup->rect.r      = r;
 
 	return markup;
 }
@@ -689,39 +689,38 @@ gl_template_markup_rect_new (gdouble x1,
 /*****************************************************************************/
 /* Copy a template.                                                          */
 /*****************************************************************************/
-glTemplate *
-gl_template_dup (const glTemplate *orig_template)
+lglTemplate *
+lgl_template_dup (const lglTemplate *orig_template)
 {
-	glTemplate          *template;
+	lglTemplate         *template;
 	GList               *p;
-	glTemplateLabelType *label_type;
+	lglTemplateFrame    *frame;
 
 	g_return_val_if_fail (orig_template, NULL);
 
-	template = gl_template_new (orig_template->name,
-				    orig_template->description,
-				    orig_template->page_size,
-				    orig_template->page_width,
-				    orig_template->page_height);
+	template = lgl_template_new (orig_template->name,
+                                     orig_template->description,
+                                     orig_template->page_size,
+                                     orig_template->page_width,
+                                     orig_template->page_height);
 
 	for ( p=orig_template->categories; p != NULL; p=p->next ) {
 
-                gl_template_add_category (template, p->data);
+                lgl_template_add_category (template, p->data);
 
 	}
 
-	for ( p=orig_template->label_types; p != NULL; p=p->next ) {
+	for ( p=orig_template->frames; p != NULL; p=p->next ) {
 
-		label_type = (glTemplateLabelType *)p->data;
+		frame = (lglTemplateFrame *)p->data;
 
-		gl_template_add_label_type (template,
-					    gl_template_label_type_dup (label_type));
+		lgl_template_add_frame (template, lgl_template_frame_dup (frame));
 	}
 
 	for ( p=orig_template->aliases; p != NULL; p=p->next ) {
 
 		if (g_strcasecmp (template->name, p->data) != 0) {
-			gl_template_add_alias (template, p->data);
+			lgl_template_add_alias (template, p->data);
 		}
 
 	}
@@ -733,10 +732,10 @@ gl_template_dup (const glTemplate *orig_template)
 /* Free up a template.                                                       */
 /*****************************************************************************/
 void
-gl_template_free (glTemplate *template)
+lgl_template_free (lglTemplate *template)
 {
-	GList               *p;
-	glTemplateLabelType *label_type;
+	GList            *p;
+	lglTemplateFrame *frame;
 
 	if ( template != NULL ) {
 
@@ -758,15 +757,15 @@ gl_template_free (glTemplate *template)
 		g_list_free (template->categories);
 		template->categories = NULL;
 
-		for ( p=template->label_types; p != NULL; p=p->next ) {
+		for ( p=template->frames; p != NULL; p=p->next ) {
 
-			label_type = (glTemplateLabelType *)p->data;
+			frame = (lglTemplateFrame *)p->data;
 
-			gl_template_label_type_free (label_type);
+			lgl_template_frame_free (frame);
 			p->data = NULL;
 		}
-		g_list_free (template->label_types);
-		template->label_types = NULL;
+		g_list_free (template->frames);
+		template->frames = NULL;
 
 		for ( p=template->aliases; p != NULL; p=p->next ) {
 
@@ -786,43 +785,43 @@ gl_template_free (glTemplate *template)
 /*****************************************************************************/
 /* Copy a template label type.                                               */
 /*****************************************************************************/
-glTemplateLabelType *
-gl_template_label_type_dup (const glTemplateLabelType *orig_label_type)
+lglTemplateFrame *
+lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 {
-	glTemplateLabelType *label_type;
+	lglTemplateFrame    *frame;
 	GList               *p;
-	glTemplateLayout    *layout;
-	glTemplateMarkup    *markup;
+	lglTemplateLayout   *layout;
+	lglTemplateMarkup   *markup;
 
-	g_return_val_if_fail (orig_label_type, NULL);
+	g_return_val_if_fail (orig_frame, NULL);
 
-	switch (orig_label_type->shape) {
+	switch (orig_frame->shape) {
 
-	case GL_TEMPLATE_SHAPE_RECT:
-		label_type =
-			gl_template_rect_label_type_new (orig_label_type->id,
-							 orig_label_type->size.rect.w,
-							 orig_label_type->size.rect.h,
-							 orig_label_type->size.rect.r,
-							 orig_label_type->size.rect.x_waste,
-							 orig_label_type->size.rect.y_waste);
+	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+		frame =
+			lgl_template_frame_rect_new (orig_frame->all.id,
+                                                     orig_frame->rect.w,
+                                                     orig_frame->rect.h,
+                                                     orig_frame->rect.r,
+                                                     orig_frame->rect.x_waste,
+                                                     orig_frame->rect.y_waste);
 		break;
 
-	case GL_TEMPLATE_SHAPE_ROUND:
-		label_type =
-			gl_template_round_label_type_new (orig_label_type->id,
-							  orig_label_type->size.round.r,
-							  orig_label_type->size.round.waste);
+	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+		frame =
+			lgl_template_frame_round_new (orig_frame->all.id,
+                                                      orig_frame->round.r,
+                                                      orig_frame->round.waste);
 		break;
 
-	case GL_TEMPLATE_SHAPE_CD:
-		label_type =
-			gl_template_cd_label_type_new (orig_label_type->id,
-						       orig_label_type->size.cd.r1,
-						       orig_label_type->size.cd.r2,
-						       orig_label_type->size.cd.w,
-						       orig_label_type->size.cd.h,
-						       orig_label_type->size.cd.waste);
+	case LGL_TEMPLATE_FRAME_SHAPE_CD:
+		frame =
+			lgl_template_frame_cd_new (orig_frame->all.id,
+                                                   orig_frame->cd.r1,
+                                                   orig_frame->cd.r2,
+                                                   orig_frame->cd.w,
+                                                   orig_frame->cd.h,
+                                                   orig_frame->cd.waste);
 		break;
 
 	default:
@@ -830,61 +829,59 @@ gl_template_label_type_dup (const glTemplateLabelType *orig_label_type)
 		break;
 	}
 
-	for ( p=orig_label_type->layouts; p != NULL; p=p->next ) {
+	for ( p=orig_frame->all.layouts; p != NULL; p=p->next ) {
 
-		layout = (glTemplateLayout *)p->data;
+		layout = (lglTemplateLayout *)p->data;
 
-		gl_template_add_layout (label_type,
-					gl_template_layout_dup (layout));
+		lgl_template_add_layout (frame, lgl_template_layout_dup (layout));
 	}
 
-	for ( p=orig_label_type->markups; p != NULL; p=p->next ) {
+	for ( p=orig_frame->all.markups; p != NULL; p=p->next ) {
 
-		markup = (glTemplateMarkup *)p->data;
+		markup = (lglTemplateMarkup *)p->data;
 
-		gl_template_add_markup (label_type,
-					gl_template_markup_dup (markup));
+		lgl_template_add_markup (frame, lgl_template_markup_dup (markup));
 	}
 
-	return label_type;
+	return frame;
 }
 
 /*****************************************************************************/
 /* Free up a template label type.                                            */
 /*****************************************************************************/
 void
-gl_template_label_type_free (glTemplateLabelType *label_type)
+lgl_template_frame_free (lglTemplateFrame *frame)
 {
-	GList               *p;
-	glTemplateLayout    *layout;
-	glTemplateMarkup    *markup;
+	GList                *p;
+	lglTemplateLayout    *layout;
+	lglTemplateMarkup    *markup;
 
-	if ( label_type != NULL ) {
+	if ( frame != NULL ) {
 
-		g_free (label_type->id);
-		label_type->id = NULL;
+		g_free (frame->all.id);
+		frame->all.id = NULL;
 
-		for ( p=label_type->layouts; p != NULL; p=p->next ) {
+		for ( p=frame->all.layouts; p != NULL; p=p->next ) {
 
-			layout = (glTemplateLayout *)p->data;
+			layout = (lglTemplateLayout *)p->data;
 
-			gl_template_layout_free (layout);
+			lgl_template_layout_free (layout);
 			p->data = NULL;
 		}
-		g_list_free (label_type->layouts);
-		label_type->layouts = NULL;
+		g_list_free (frame->all.layouts);
+		frame->all.layouts = NULL;
 
-		for ( p=label_type->markups; p != NULL; p=p->next ) {
+		for ( p=frame->all.markups; p != NULL; p=p->next ) {
 
-			markup = (glTemplateMarkup *)p->data;
+			markup = (lglTemplateMarkup *)p->data;
 
-			gl_template_markup_free (markup);
+			lgl_template_markup_free (markup);
 			p->data = NULL;
 		}
-		g_list_free (label_type->markups);
-		label_type->markups = NULL;
+		g_list_free (frame->all.markups);
+		frame->all.markups = NULL;
 
-		g_free (label_type);
+		g_free (frame);
 
 	}
 
@@ -893,14 +890,14 @@ gl_template_label_type_free (glTemplateLabelType *label_type)
 /*****************************************************************************/
 /* Duplicate layout structure.                                               */
 /*****************************************************************************/
-glTemplateLayout *
-gl_template_layout_dup (const glTemplateLayout *orig_layout)
+lglTemplateLayout *
+lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 {
-	glTemplateLayout *layout;
+	lglTemplateLayout *layout;
 
 	g_return_val_if_fail (orig_layout, NULL);
 
-	layout = g_new0 (glTemplateLayout, 1);
+	layout = g_new0 (lglTemplateLayout, 1);
 
 	/* copy contents */
 	*layout = *orig_layout;
@@ -912,7 +909,7 @@ gl_template_layout_dup (const glTemplateLayout *orig_layout)
 /* Free layout structure.                                                    */
 /*****************************************************************************/
 void
-gl_template_layout_free (glTemplateLayout *layout)
+lgl_template_layout_free (lglTemplateLayout *layout)
 {
 	g_free (layout);
 }
@@ -920,14 +917,14 @@ gl_template_layout_free (glTemplateLayout *layout)
 /*****************************************************************************/
 /* Duplicate markup structure.                                               */
 /*****************************************************************************/
-glTemplateMarkup *
-gl_template_markup_dup (const glTemplateMarkup *orig_markup)
+lglTemplateMarkup *
+lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 {
-	glTemplateMarkup *markup;
+	lglTemplateMarkup *markup;
 
 	g_return_val_if_fail (orig_markup, NULL);
 
-	markup = g_new0 (glTemplateMarkup, 1);
+	markup = g_new0 (lglTemplateMarkup, 1);
 
 	*markup = *orig_markup;
 
@@ -938,7 +935,7 @@ gl_template_markup_dup (const glTemplateMarkup *orig_markup)
 /* Free markup structure.                                                    */
 /*****************************************************************************/
 void
-gl_template_markup_free (glTemplateMarkup *markup)
+lgl_template_markup_free (lglTemplateMarkup *markup)
 {
 	g_free (markup);
 }
@@ -946,47 +943,45 @@ gl_template_markup_free (glTemplateMarkup *markup)
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Make a template for a full page of the given page size.        */
 /*--------------------------------------------------------------------------*/
-static glTemplate *
+static lglTemplate *
 template_full_page (const gchar *page_size)
 {
-	glPaper               *paper = NULL;
-	glTemplate            *template = NULL;
-	glTemplateLabelType   *label_type = NULL;
+	lglPaper              *paper = NULL;
+	lglTemplate           *template = NULL;
+	lglTemplateFrame      *frame = NULL;
 	gchar                 *name;
 
 	g_return_val_if_fail (page_size, NULL);
 
-	paper = gl_paper_from_id (page_size);
+	paper = lgl_paper_from_id (page_size);
 	if ( paper == NULL ) {
 		return NULL;
 	}
 
 	name         = g_strdup_printf (_("Generic %s full page"), page_size);
 
-	template = gl_template_new (name,
-				    FULL_PAGE,
-				    page_size,
-				    paper->width,
-				    paper->height);
+	template = lgl_template_new (name,
+                                     FULL_PAGE,
+                                     page_size,
+                                     paper->width,
+                                     paper->height);
 
 
-	label_type = gl_template_rect_label_type_new ("0",
-						      paper->width,
-						      paper->height,
-						      0.0,
-						      0.0,
-						      0.0);
-	gl_template_add_label_type (template, label_type);
+	frame = lgl_template_frame_rect_new ("0",
+                                             paper->width,
+                                             paper->height,
+                                             0.0,
+                                             0.0,
+                                             0.0);
+	lgl_template_add_frame (template, frame);
 
-	gl_template_add_layout (label_type,
-				gl_template_layout_new (1, 1, 0., 0., 0., 0.));
+	lgl_template_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
 
-	gl_template_add_markup (label_type,
-				gl_template_markup_margin_new (9.0));
+	lgl_template_add_markup (frame, lgl_template_markup_margin_new (9.0));
 
 	g_free (name);
 	name = NULL;
-	gl_paper_free (paper);
+	lgl_paper_free (paper);
 	paper = NULL;
 
 	return template;
@@ -1001,11 +996,11 @@ read_templates (void)
 	gchar *data_dir;
 	GList *templates = NULL;
 
-	data_dir = GL_SYSTEM_DATA_DIR;
+	data_dir = LGL_SYSTEM_DATA_DIR;
 	templates = read_template_files_from_dir (templates, data_dir);
 	g_free (data_dir);
 
-	data_dir = GL_USER_DATA_DIR;
+	data_dir = LGL_USER_DATA_DIR;
 	templates = read_template_files_from_dir (templates, data_dir);
 	g_free (data_dir);
 
@@ -1052,7 +1047,7 @@ read_template_files_from_dir (GList       *templates,
 
 			full_filename = g_build_filename (dirname, filename, NULL);
 			new_templates =
-				gl_xml_template_read_templates_from_file (full_filename);
+				lgl_xml_template_read_templates_from_file (full_filename);
 			g_free (full_filename);
 
 			templates = g_list_concat (templates, new_templates);
@@ -1074,7 +1069,7 @@ compare_origins (gconstpointer a,
 		 gconstpointer b,
 		 gpointer      user_data)
 {
-	const glTemplateOrigin *a_origin = a, *b_origin = b;
+	const lglTemplateOrigin *a_origin = a, *b_origin = b;
 
 	if ( a_origin->y < b_origin->y ) {
 		return -1;
@@ -1095,14 +1090,14 @@ compare_origins (gconstpointer a,
 /* Print all known templates (for debugging purposes).                       */
 /*****************************************************************************/
 void
-gl_template_print_known_templates (void)
+lgl_template_print_known_templates (void)
 {
-	GList      *p;
-	glTemplate *template;
+	GList       *p;
+	lglTemplate *template;
 
 	g_print ("%s():\n", __FUNCTION__);
 	for (p=templates; p!=NULL; p=p->next) {
-		template = (glTemplate *)p->data;
+		template = (lglTemplate *)p->data;
 
 		g_print("TEMPLATE name=\"%s\", description=\"%s\"\n",
 			template->name, template->description);
@@ -1116,14 +1111,14 @@ gl_template_print_known_templates (void)
 /* Print all aliases of a template (for debugging purposes).                 */
 /*****************************************************************************/
 void
-gl_template_print_aliases (const glTemplate *template)
+lgl_template_print_aliases (const lglTemplate *template)
 {
 	GList *p;
 
 	g_print ("%s():\n", __FUNCTION__);
 	for (p=template->aliases; p!=NULL; p=p->next) {
 		
-		g_print("Alias = \"%s\"\n", p->data);
+		g_print("Alias = \"%s\"\n", (gchar *)p->data);
 
 	}
 	g_print ("\n");

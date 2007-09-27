@@ -99,8 +99,8 @@ static void filter_changed_cb                  (GtkComboBox            *combo,
 static void template_selection_changed_cb      (GtkTreeSelection       *selection,
                                                 gpointer                user_data);
 
-static gchar *get_layout_desc                  (const glTemplate       *template);
-static gchar *get_label_size_desc              (const glTemplate       *template);
+static gchar *get_layout_desc                  (const lglTemplate      *template);
+static gchar *get_label_size_desc              (const lglTemplate      *template);
 static void   load_list                        (GtkListStore           *store,
                                                 GtkTreeSelection       *selection,
                                                 GList                  *list);
@@ -221,25 +221,25 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_object_unref (gui);
 
         page_size_id = gl_prefs_get_page_size ();
-        page_size_name = gl_paper_lookup_name_from_id (page_size_id);
+        page_size_name = lgl_paper_lookup_name_from_id (page_size_id);
 
         /* Page size selection control */
         gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->page_size_combo));
-        page_sizes = gl_paper_get_name_list ();
+        page_sizes = lgl_paper_get_name_list ();
         page_sizes = g_list_prepend (page_sizes, g_strdup (_("Any")));
         gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->page_size_combo), page_sizes);
-        gl_paper_free_name_list (page_sizes);
+        lgl_paper_free_name_list (page_sizes);
         gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
                                            page_size_name);
 
         /* Category selection control */
         gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->category_combo));
-        categories = gl_category_get_name_list ();
+        categories = lgl_category_get_name_list ();
         categories = g_list_prepend (categories, g_strdup (_("Any")));
         gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->category_combo), categories);
         gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->category_combo),
                                            _("Any"));
-        gl_category_free_name_list (categories);
+        lgl_category_free_name_list (categories);
 
         /* Actual selection control */
         media_select->priv->template_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
@@ -260,9 +260,9 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->template_treeview), column);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-        template_names = gl_template_get_name_list_all (page_size_id, NULL);
+        template_names = lgl_template_get_name_list_all (page_size_id, NULL);
         load_list (media_select->priv->template_store, selection, template_names);
-        gl_template_free_name_list (template_names);
+        lgl_template_free_name_list (template_names);
 
         /* Connect signals to controls */
         g_signal_connect (G_OBJECT (media_select->priv->page_size_combo), "changed",
@@ -306,14 +306,14 @@ filter_changed_cb (GtkComboBox *combo,
         {
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = \"%s\"", page_size_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_name = \"%s\"", category_name);
-                page_size_id = gl_paper_lookup_id_from_name (page_size_name);
-                category_id = gl_category_lookup_id_from_name (category_name);
+                page_size_id = lgl_paper_lookup_id_from_name (page_size_name);
+                category_id = lgl_category_lookup_id_from_name (category_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_id = \"%s\"", page_size_id);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
-                template_names = gl_template_get_name_list_all (page_size_id, category_id);
+                template_names = lgl_template_get_name_list_all (page_size_id, category_id);
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
                 load_list (media_select->priv->template_store, selection, template_names);
-                gl_template_free_name_list (template_names);
+                lgl_template_free_name_list (template_names);
                 g_free (page_size_id);
 
                 /* Emit our "changed" signal */
@@ -435,12 +435,12 @@ gl_wdgt_media_select_get_filter_parameters (glWdgtMediaSelect *media_select,
         page_size_name =
                 gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo));
 
-        *page_size_id = gl_paper_lookup_id_from_name (page_size_name);
+        *page_size_id = lgl_paper_lookup_id_from_name (page_size_name);
 
         category_name =
                 gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->category_combo));
 
-        *category_id = gl_category_lookup_id_from_name (category_name);
+        *category_id = lgl_category_lookup_id_from_name (category_name);
 
         g_free (page_size_name);
         g_free (category_name);
@@ -459,7 +459,7 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-        page_size_name = gl_paper_lookup_name_from_id (page_size_id);
+        page_size_name = lgl_paper_lookup_name_from_id (page_size_id);
         if (page_size_name == NULL)
         {
                 page_size_name = g_strdup (_("Any"));
@@ -468,7 +468,7 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
         gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
                                            page_size_name);
 
-        category_name = gl_category_lookup_name_from_id (category_id);
+        category_name = lgl_category_lookup_name_from_id (category_id);
         if (category_name == NULL)
         {
                 category_name = g_strdup (_("Any"));
@@ -486,15 +486,15 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
 /* PRIVATE.  Get a description of the layout and number of labels.          */
 /*--------------------------------------------------------------------------*/
 static gchar *
-get_layout_desc (const glTemplate *template)
+get_layout_desc (const lglTemplate *template)
 {
-        const glTemplateLabelType *label_type;
-        gint                       n_labels;
-        gchar                     *string;
+        const lglTemplateFrame *frame;
+        gint                    n_labels;
+        gchar                  *string;
 
-        label_type = gl_template_get_first_label_type (template);
+        frame = lgl_template_get_first_frame (template);
 
-        n_labels = gl_template_get_n_labels (label_type);
+        n_labels = lgl_template_frame_get_n_labels (frame);
 
         string = g_strdup_printf (_("%d per sheet"), n_labels);
 
@@ -505,63 +505,63 @@ get_layout_desc (const glTemplate *template)
 /* PRIVATE.  Get label size description.                                    */ 
 /*--------------------------------------------------------------------------*/
 static gchar *
-get_label_size_desc (const glTemplate *template)
+get_label_size_desc (const lglTemplate *template)
 {
-        glUnitsType                units;
+        lglUnitsType               units;
         const gchar               *units_string;
         gdouble                    units_per_point;
-        const glTemplateLabelType *label_type;
+        const lglTemplateFrame    *frame;
         gchar                     *string = NULL;
 
         units           = gl_prefs_get_units ();
         units_string    = gl_prefs_get_units_string ();
         units_per_point = gl_prefs_get_units_per_point ();
 
-        label_type = gl_template_get_first_label_type (template);
+        frame = lgl_template_get_first_frame (template);
 
-        switch (label_type->shape) {
-        case GL_TEMPLATE_SHAPE_RECT:
-                if ( units == GL_UNITS_INCH ) {
+        switch (frame->shape) {
+        case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                if ( units == LGL_UNITS_INCH ) {
                         gchar *xstr, *ystr;
 
-                        xstr = gl_util_fraction (label_type->size.rect.w*units_per_point);
-                        ystr = gl_util_fraction (label_type->size.rect.h*units_per_point);
+                        xstr = gl_util_fraction (frame->rect.w*units_per_point);
+                        ystr = gl_util_fraction (frame->rect.h*units_per_point);
                         string = g_strdup_printf (_("%s x %s %s"),
                                                   xstr, ystr, units_string);
                         g_free (xstr);
                         g_free (ystr);
                 } else {
                         string = g_strdup_printf (_("%.5g x %.5g %s"),
-                                                  label_type->size.rect.w*units_per_point,
-                                                  label_type->size.rect.h*units_per_point,
+                                                  frame->rect.w*units_per_point,
+                                                  frame->rect.h*units_per_point,
                                                   units_string);
                 }
                 break;
-        case GL_TEMPLATE_SHAPE_ROUND:
-                if ( units == GL_UNITS_INCH ) {
+        case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                if ( units == LGL_UNITS_INCH ) {
                         gchar *dstr;
 
-                        dstr = gl_util_fraction (2.0*label_type->size.round.r*units_per_point);
+                        dstr = gl_util_fraction (2.0*frame->round.r*units_per_point);
                         string = g_strdup_printf (_("%s %s diameter"),
                                                   dstr, units_string);
                         g_free (dstr);
                 } else {
                         string = g_strdup_printf (_("%.5g %s diameter"),
-                                                  2.0*label_type->size.round.r*units_per_point,
+                                                  2.0*frame->round.r*units_per_point,
                                                   units_string);
                 }
                 break;
-        case GL_TEMPLATE_SHAPE_CD:
-                if ( units == GL_UNITS_INCH ) {
+        case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                if ( units == LGL_UNITS_INCH ) {
                         gchar *dstr;
 
-                        dstr = gl_util_fraction (2.0*label_type->size.cd.r1*units_per_point);
+                        dstr = gl_util_fraction (2.0*frame->cd.r1*units_per_point);
                         string = g_strdup_printf (_("%s %s diameter"),
                                                   dstr, units_string);
                         g_free (dstr);
                 } else {
                         string = g_strdup_printf (_("%.5g %s diameter"),
-                                                  2.0*label_type->size.cd.r1*units_per_point,
+                                                  2.0*frame->cd.r1*units_per_point,
                                                   units_string);
                 }
                 break;
@@ -582,7 +582,7 @@ load_list (GtkListStore           *store,
 {
         GList       *p;
         GtkTreeIter  iter;
-        glTemplate  *template;
+        lglTemplate *template;
         GdkPixbuf   *pixbuf;
         gchar       *size;
         gchar       *layout;
@@ -600,7 +600,7 @@ load_list (GtkListStore           *store,
 
                         gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
 
-                        template = gl_template_from_name (p->data);
+                        template = lgl_template_from_name (p->data);
 
                         pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (template->name);
 
@@ -614,7 +614,7 @@ load_list (GtkListStore           *store,
                         g_free (size);
                         g_free (layout);
 
-                        gl_template_free (template);
+                        lgl_template_free (template);
 
                         gtk_list_store_append (store, &iter);
                         gtk_list_store_set (store, &iter,

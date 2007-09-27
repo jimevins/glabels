@@ -21,7 +21,14 @@ These functions are basically wrappers to functions from libxml2.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION gl_xml_get_prop_double ##### -->
+<!-- ##### MACRO LGL_XML_NAME_SPACE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lgl_xml_get_prop_string ##### -->
 <para>
 
 </para>
@@ -32,7 +39,7 @@ These functions are basically wrappers to functions from libxml2.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_get_prop_boolean ##### -->
+<!-- ##### FUNCTION lgl_xml_get_prop_i18n_string ##### -->
 <para>
 
 </para>
@@ -43,7 +50,7 @@ These functions are basically wrappers to functions from libxml2.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_get_prop_int ##### -->
+<!-- ##### FUNCTION lgl_xml_get_prop_double ##### -->
 <para>
 
 </para>
@@ -54,7 +61,7 @@ These functions are basically wrappers to functions from libxml2.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_get_prop_uint ##### -->
+<!-- ##### FUNCTION lgl_xml_get_prop_boolean ##### -->
 <para>
 
 </para>
@@ -65,7 +72,7 @@ These functions are basically wrappers to functions from libxml2.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_get_prop_length ##### -->
+<!-- ##### FUNCTION lgl_xml_get_prop_int ##### -->
 <para>
 
 </para>
@@ -76,7 +83,29 @@ These functions are basically wrappers to functions from libxml2.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_set_prop_double ##### -->
+<!-- ##### FUNCTION lgl_xml_get_prop_uint ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_get_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_set_prop_string ##### -->
 <para>
 
 </para>
@@ -86,7 +115,7 @@ These functions are basically wrappers to functions from libxml2.
 @val: 
 
 
-<!-- ##### FUNCTION gl_xml_set_prop_boolean ##### -->
+<!-- ##### FUNCTION lgl_xml_set_prop_double ##### -->
 <para>
 
 </para>
@@ -96,7 +125,7 @@ These functions are basically wrappers to functions from libxml2.
 @val: 
 
 
-<!-- ##### FUNCTION gl_xml_set_prop_int ##### -->
+<!-- ##### FUNCTION lgl_xml_set_prop_boolean ##### -->
 <para>
 
 </para>
@@ -106,7 +135,7 @@ These functions are basically wrappers to functions from libxml2.
 @val: 
 
 
-<!-- ##### FUNCTION gl_xml_set_prop_uint_hex ##### -->
+<!-- ##### FUNCTION lgl_xml_set_prop_int ##### -->
 <para>
 
 </para>
@@ -116,7 +145,7 @@ These functions are basically wrappers to functions from libxml2.
 @val: 
 
 
-<!-- ##### FUNCTION gl_xml_set_prop_length ##### -->
+<!-- ##### FUNCTION lgl_xml_set_prop_uint_hex ##### -->
 <para>
 
 </para>
@@ -126,7 +155,36 @@ These functions are basically wrappers to functions from libxml2.
 @val: 
 
 
-<!-- ##### FUNCTION gl_xml_set_default_units ##### -->
+<!-- ##### FUNCTION lgl_xml_set_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+
+<!-- ##### FUNCTION lgl_xml_is_node ##### -->
+<para>
+
+</para>
+
+@node: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_get_node_content ##### -->
+<para>
+
+</para>
+
+@node: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_set_default_units ##### -->
 <para>
 
 </para>

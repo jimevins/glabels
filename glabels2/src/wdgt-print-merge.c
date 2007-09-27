@@ -124,16 +124,16 @@ static void
 gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 			       glLabel * label)
 {
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	GtkWidget                 *whbox, *wvbox, *whbox1;
 	GtkObject                 *adjust;
 	GdkPixbuf                 *pixbuf;
 
 	whbox = GTK_WIDGET (merge);
 
-	label_type = gl_template_get_first_label_type (label->template);
+	frame = lgl_template_get_first_frame (label->template);
 
-	merge->labels_per_sheet = gl_template_get_n_labels (label_type);
+	merge->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/* mini_preview canvas */
 	merge->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,

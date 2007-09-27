@@ -193,7 +193,7 @@ gl_label_finalize (GObject *object)
 		g_object_unref (G_OBJECT(p->data));
 	}
 
-	gl_template_free (label->template);
+	lgl_template_free (label->template);
 	g_free (label->priv->filename);
 	if (label->priv->merge != NULL) {
 		g_object_unref (G_OBJECT(label->priv->merge));
@@ -374,8 +374,8 @@ gl_label_lower_object_to_bottom (glLabel       *label,
 /* set template.                                                            */
 /****************************************************************************/
 extern void
-gl_label_set_template (glLabel    *label,
-		       glTemplate *template)
+gl_label_set_template (glLabel     *label,
+		       lglTemplate *template)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -384,8 +384,8 @@ gl_label_set_template (glLabel    *label,
 	if ((label->template == NULL) ||
 	    (g_strcasecmp (template->name, label->template->name) != 0)) {
 
-		gl_template_free (label->template);
-		label->template = gl_template_dup (template);
+		lgl_template_free (label->template);
+		label->template = lgl_template_dup (template);
 
 		label->priv->modified_flag = TRUE;
 
@@ -432,8 +432,8 @@ gl_label_get_size (glLabel *label,
 		   gdouble *w,
 		   gdouble *h)
 {
-	glTemplate                *template;
-	const glTemplateLabelType *label_type;
+	lglTemplate            *template;
+	const lglTemplateFrame *frame;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -445,12 +445,12 @@ gl_label_get_size (glLabel *label,
 		*w = *h = 0;
 		return;
 	}
-	label_type = gl_template_get_first_label_type (template);
+	frame = lgl_template_get_first_frame (template);
 
 	if (!label->rotate_flag) {
-		gl_template_get_label_size (label_type, w, h);
+		lgl_template_frame_get_size (frame, w, h);
 	} else {
-		gl_template_get_label_size (label_type, h, w);
+		lgl_template_frame_get_size (frame, h, w);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");

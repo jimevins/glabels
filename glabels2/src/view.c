@@ -843,7 +843,7 @@ draw_grid_layer (glView  *view,
 	gdouble                    w, h;
 	gdouble                    x, y;
 	gdouble                    x0, y0;
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -853,11 +853,11 @@ draw_grid_layer (glView  *view,
         if (view->grid_visible)
         {
 
-                label_type = gl_template_get_first_label_type (view->label->template);
+                frame = lgl_template_get_first_frame (view->label->template);
 
                 gl_label_get_size (view->label, &w, &h);
 	
-                if (label_type->shape == GL_TEMPLATE_SHAPE_RECT) {
+                if (frame->shape == LGL_TEMPLATE_FRAME_SHAPE_RECT) {
                         x0 = 0.0;
                         y0 = 0.0;
                 } else {
@@ -902,9 +902,9 @@ draw_markup_layer (glView  *view,
                    cairo_t *cr)
 {
 	glLabel                   *label;
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	GList                     *p;
-	glTemplateMarkup          *markup;
+	lglTemplateMarkup         *markup;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
@@ -913,16 +913,16 @@ draw_markup_layer (glView  *view,
         {
 
                 label      = view->label;
-                label_type = gl_template_get_first_label_type (label->template);
+                frame = lgl_template_get_first_frame (label->template);
 
                 cairo_save (cr);
 
                 cairo_set_line_width (cr, MARKUP_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
                 cairo_set_source_rgb (cr, MARKUP_RGB_ARGS);
 
-                for ( p=label_type->markups; p != NULL; p=p->next )
+                for ( p=frame->all.markups; p != NULL; p=p->next )
                 {
-                        markup = (glTemplateMarkup *)p->data;
+                        markup = (lglTemplateMarkup *)p->data;
 
                         gl_cairo_markup_path (cr, markup, label);
 

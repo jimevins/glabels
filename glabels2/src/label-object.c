@@ -197,7 +197,6 @@ static void
 gl_label_object_finalize (GObject *object)
 {
         glLabelObject *label_object = GL_LABEL_OBJECT (object);
-	glLabel       *parent;
 
 	gl_debug (DEBUG_LABEL, "START");
 

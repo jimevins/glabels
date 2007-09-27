@@ -62,16 +62,16 @@ static GList *read_category_files_from_dir (GList       *categories,
 
 
 /**
- * gl_category_init:
+ * lgl_category_init:
  *
  * Initialize libglabels category module by reading all category definition
  * files located in system and user template directories.
+ *
+ * The end user would typically call lgl_init() instead.
  */
 void
-gl_category_init (void)
+lgl_category_init (void)
 {
-	glCategory *other;
-
 	if (categories) {
 		return; /* Already initialized. */
 	}
@@ -81,23 +81,23 @@ gl_category_init (void)
 
 
 /**
- * gl_category_new:
+ * lgl_category_new:
  * @id:     Id of category definition. (E.g. label, card, etc.)  Should be
  *          unique.
  * @name:   Localized name of category.
  *
- * Allocates and constructs a new #glCategory structure.
+ * Allocates and constructs a new #lglCategory structure.
  *
- * Returns: a pointer to a newly allocated #glCategory structure.
+ * Returns: a pointer to a newly allocated #lglCategory structure.
  *
  */
-glCategory *
-gl_category_new (gchar             *id,
-                 gchar             *name)
+lglCategory *
+lgl_category_new (gchar             *id,
+                  gchar             *name)
 {
-	glCategory *category;
+	lglCategory *category;
 
-	category         = g_new0 (glCategory,1);
+	category         = g_new0 (lglCategory,1);
 	category->id     = g_strdup (id);
 	category->name   = g_strdup (name);
 
@@ -106,21 +106,21 @@ gl_category_new (gchar             *id,
 
 
 /**
- * gl_category_dup:
- * @orig:  #glCategory structure to be duplicated.
+ * lgl_category_dup:
+ * @orig:  #lglCategory structure to be duplicated.
  *
- * Duplicates an existing #glCategory structure.
+ * Duplicates an existing #lglCategory structure.
  *
- * Returns: a pointer to a newly allocated #glCategory structure.
+ * Returns: a pointer to a newly allocated #lglCategory structure.
  *
  */
-glCategory *gl_category_dup (const glCategory *orig)
+lglCategory *lgl_category_dup (const lglCategory *orig)
 {
-	glCategory       *category;
+	lglCategory       *category;
 
 	g_return_val_if_fail (orig, NULL);
 
-	category = g_new0 (glCategory,1);
+	category = g_new0 (lglCategory,1);
 
 	category->id     = g_strdup (orig->id);
 	category->name   = g_strdup (orig->name);
@@ -130,13 +130,13 @@ glCategory *gl_category_dup (const glCategory *orig)
 
 
 /**
- * gl_category_free:
- * @category:  pointer to #glCategory structure to be freed.
+ * lgl_category_free:
+ * @category:  pointer to #lglCategory structure to be freed.
  *
- * Free all memory associated with an existing #glCategory structure.
+ * Free all memory associated with an existing #lglCategory structure.
  *
  */
-void gl_category_free (glCategory *category)
+void lgl_category_free (lglCategory *category)
 {
 
 	if ( category != NULL ) {
@@ -154,26 +154,26 @@ void gl_category_free (glCategory *category)
 
 
 /**
- * gl_category_get_name_list:
+ * lgl_category_get_name_list:
  *
- * Get a list of all localized category names known to libglabels.
+ * Get a list of all localized category names known to liblglabels.
  *
  * Returns: a list of localized category names.
  *
  */
 GList *
-gl_category_get_name_list (void)
+lgl_category_get_name_list (void)
 {
 	GList           *names = NULL;
 	GList           *p;
-	glCategory      *category;
+	lglCategory     *category;
 
 	if (!categories) {
-		gl_category_init ();
+		lgl_category_init ();
 	}
 
 	for ( p=categories; p != NULL; p=p->next ) {
-		category = (glCategory *)p->data;
+		category = (lglCategory *)p->data;
 		names = g_list_append (names, g_strdup (category->name));
 	}
 
@@ -182,15 +182,15 @@ gl_category_get_name_list (void)
 
 
 /**
- * gl_category_free_name_list:
+ * lgl_category_free_name_list:
  * @names: List of localized category name strings to be freed.
  *
  * Free up all storage associated with a name list obtained with
- * gl_category_get_name_list().
+ * lgl_category_get_name_list().
  *
  */
 void
-gl_category_free_name_list (GList *names)
+lgl_category_free_name_list (GList *names)
 {
 	GList *p;
 
@@ -204,33 +204,33 @@ gl_category_free_name_list (GList *names)
 
 
 /**
- * gl_category_from_id:
+ * lgl_category_from_id:
  * @id: category id string
  *
  * Lookup category definition from id string.
  *
- * Returns: pointer to a newly allocated #glCategory structure.
+ * Returns: pointer to a newly allocated #lglCategory structure.
  *
  */
-glCategory *
-gl_category_from_id (const gchar *id)
+lglCategory *
+lgl_category_from_id (const gchar *id)
 {
-	GList       *p;
-	glCategory  *category;
+	GList        *p;
+	lglCategory  *category;
 
 	if (!categories) {
-		gl_category_init ();
+		lgl_category_init ();
 	}
 
 	if (id == NULL) {
 		/* If no id, return first category as a default */
-		return gl_category_dup ((glCategory *) categories->data);
+		return lgl_category_dup ((lglCategory *) categories->data);
 	}
 
 	for (p = categories; p != NULL; p = p->next) {
-		category = (glCategory *) p->data;
+		category = (lglCategory *) p->data;
 		if (g_strcasecmp (category->id, id) == 0) {
-			return gl_category_dup (category);
+			return lgl_category_dup (category);
 		}
 	}
 
@@ -239,33 +239,33 @@ gl_category_from_id (const gchar *id)
 
 
 /**
- * gl_category_from_name:
+ * lgl_category_from_name:
  * @name: localized category name string
  *
  * Lookup category definition from localized category name string.
  *
- * Returns: pointer to a newly allocated #glCategory structure.
+ * Returns: pointer to a newly allocated #lglCategory structure.
  *
  */
-glCategory *
-gl_category_from_name (const gchar *name)
+lglCategory *
+lgl_category_from_name (const gchar *name)
 {
-	GList       *p;
-	glCategory  *category;
+	GList        *p;
+	lglCategory  *category;
 
 	if (!categories) {
-		gl_category_init ();
+		lgl_category_init ();
 	}
 
 	if (name == NULL) {
 		/* If no name, return first category as a default */
-		return gl_category_dup ((glCategory *) categories->data);
+		return lgl_category_dup ((lglCategory *) categories->data);
 	}
 
 	for (p = categories; p != NULL; p = p->next) {
-		category = (glCategory *) p->data;
+		category = (lglCategory *) p->data;
 		if (g_strcasecmp (category->name, name) == 0) {
-			return gl_category_dup (category);
+			return lgl_category_dup (category);
 		}
 	}
 
@@ -274,7 +274,7 @@ gl_category_from_name (const gchar *name)
 
 
 /**
- * gl_category_lookup_id_from_name:
+ * lgl_category_lookup_id_from_name:
  * @name: localized category name stringp
  *
  * Lookup category name string from localized category name string.
@@ -283,18 +283,18 @@ gl_category_from_name (const gchar *name)
  *
  */
 gchar *
-gl_category_lookup_id_from_name (const gchar       *name)
+lgl_category_lookup_id_from_name (const gchar       *name)
 {
-	glCategory *category = NULL;
-	gchar      *id = NULL;
+	lglCategory *category = NULL;
+	gchar       *id = NULL;
 
         if (name != NULL)
         {
-                category = gl_category_from_name (name);
+                category = lgl_category_from_name (name);
                 if ( category != NULL )
                 {
                         id = g_strdup (category->id);
-                        gl_category_free (category);
+                        lgl_category_free (category);
                         category = NULL;
                 }
         }
@@ -303,7 +303,7 @@ gl_category_lookup_id_from_name (const gchar       *name)
 }
 
 /**
- * gl_category_lookup_name_from_id:
+ * lgl_category_lookup_name_from_id:
  * @id: category id string
  *
  * Lookup localized category name string from category id string.
@@ -312,18 +312,18 @@ gl_category_lookup_id_from_name (const gchar       *name)
  *
  */
 gchar *
-gl_category_lookup_name_from_id (const gchar       *id)
+lgl_category_lookup_name_from_id (const gchar       *id)
 {
-	glCategory *category = NULL;
-	gchar      *name = NULL;
+	lglCategory *category = NULL;
+	gchar       *name = NULL;
 
         if (id != NULL)
         {
-                category = gl_category_from_id (id);
+                category = lgl_category_from_id (id);
                 if ( category != NULL )
                 {
                         name = g_strdup (category->name);
-                        gl_category_free (category);
+                        lgl_category_free (category);
                         category = NULL;
                 }
         }
@@ -340,11 +340,11 @@ read_categories (void)
 	gchar *data_dir;
 	GList *categories = NULL;
 
-	data_dir = GL_SYSTEM_DATA_DIR;
+	data_dir = LGL_SYSTEM_DATA_DIR;
 	categories = read_category_files_from_dir (categories, data_dir);
 	g_free (data_dir);
 
-	data_dir = GL_USER_DATA_DIR;
+	data_dir = LGL_USER_DATA_DIR;
 	categories = read_category_files_from_dir (categories, data_dir);
 	g_free (data_dir);
 
@@ -394,7 +394,7 @@ read_category_files_from_dir (GList       *categories,
 				full_filename =
 				    g_build_filename (dirname, filename, NULL);
 				new_categories =
-				    gl_xml_category_read_categories_from_file (full_filename);
+				    lgl_xml_category_read_categories_from_file (full_filename);
 				g_free (full_filename);
 
 				categories = g_list_concat (categories, new_categories);

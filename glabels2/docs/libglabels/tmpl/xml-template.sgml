@@ -19,7 +19,7 @@ template files and document files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION gl_xml_template_read_templates_from_file ##### -->
+<!-- ##### FUNCTION lgl_xml_template_read_templates_from_file ##### -->
 <para>
 
 </para>
@@ -28,7 +28,7 @@ template files and document files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_template_parse_templates_doc ##### -->
+<!-- ##### FUNCTION lgl_xml_template_parse_templates_doc ##### -->
 <para>
 
 </para>
@@ -37,7 +37,7 @@ template files and document files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_template_parse_template_node ##### -->
+<!-- ##### FUNCTION lgl_xml_template_parse_template_node ##### -->
 <para>
 
 </para>
@@ -46,7 +46,7 @@ template files and document files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_template_write_templates_to_file ##### -->
+<!-- ##### FUNCTION lgl_xml_template_write_templates_to_file ##### -->
 <para>
 
 </para>
@@ -55,7 +55,7 @@ template files and document files.
 @utf8_filename: 
 
 
-<!-- ##### FUNCTION gl_xml_template_write_template_to_file ##### -->
+<!-- ##### FUNCTION lgl_xml_template_write_template_to_file ##### -->
 <para>
 
 </para>
@@ -64,7 +64,7 @@ template files and document files.
 @utf8_filename: 
 
 
-<!-- ##### FUNCTION gl_xml_template_create_templates_doc ##### -->
+<!-- ##### FUNCTION lgl_xml_template_create_templates_doc ##### -->
 <para>
 
 </para>
@@ -73,7 +73,7 @@ template files and document files.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_xml_template_create_template_node ##### -->
+<!-- ##### FUNCTION lgl_xml_template_create_template_node ##### -->
 <para>
 
 </para>

@@ -72,7 +72,7 @@ void       gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 						   const gchar       *name);
 
 void       gl_wdgt_mini_preview_set_template      (glWdgtMiniPreview *preview,
-						   const glTemplate  *template);
+						   const lglTemplate *template);
 
 void       gl_wdgt_mini_preview_highlight_range   (glWdgtMiniPreview *preview,
 						   gint               first_label,

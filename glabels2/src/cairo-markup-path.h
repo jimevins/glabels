@@ -31,9 +31,9 @@
 
 G_BEGIN_DECLS
 
-void gl_cairo_markup_path (cairo_t                *cr,
-                           const glTemplateMarkup *markup,
-                           glLabel                *label);
+void gl_cairo_markup_path (cairo_t                 *cr,
+                           const lglTemplateMarkup *markup,
+                           glLabel                 *label);
 
 G_END_DECLS
 

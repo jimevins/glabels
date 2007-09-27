@@ -395,7 +395,6 @@ gl_view_image_create_button_press_event   (glView *view,
                                            gdouble y)
 {
 	GObject             *object;
-        glViewObject        *view_image;
 
         gl_view_unselect_all (view);
 

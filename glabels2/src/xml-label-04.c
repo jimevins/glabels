@@ -82,7 +82,7 @@ glLabel      *gl_xml_label_04_parse      (xmlNodePtr       root,
 
 	label = GL_LABEL (gl_label_new ());
 
-	rotate_flag = gl_xml_get_prop_boolean (root, "rotate", FALSE);
+	rotate_flag = lgl_xml_get_prop_boolean (root, "rotate", FALSE);
 	gl_label_set_rotate_flag (label, rotate_flag);
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
@@ -140,19 +140,19 @@ static gboolean
 xml04_parse_media_description (xmlNodePtr node,
 			       glLabel    *label)
 {
-	xmlChar    *template_name;
-	glTemplate *template;
-	gboolean   ret;
+	xmlChar     *template_name;
+	lglTemplate *template;
+	gboolean     ret;
 
 	gl_debug (DEBUG_XML, "START");
 
 	template_name = xmlNodeGetContent (node);
 
-	template = gl_template_from_name ((gchar *)template_name);
+	template = lgl_template_from_name ((gchar *)template_name);
 	if (template == NULL) {
 		g_message ("Undefined template \"%s\"", template_name);
 		/* Get a default */
-		template = gl_template_from_name (NULL);
+		template = lgl_template_from_name (NULL);
 		ret = FALSE;
 	} else {
 		ret = TRUE;
@@ -160,7 +160,7 @@ xml04_parse_media_description (xmlNodePtr node,
 
 	gl_label_set_template (label, template);
 
-	gl_template_free (template);
+	lgl_template_free (template);
 	xmlFree (template_name);
 
 	gl_debug (DEBUG_XML, "END");
@@ -179,8 +179,8 @@ xml04_parse_object (xmlNodePtr    object_node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	x = gl_xml_get_prop_double (object_node, "x", 0);
-	y = gl_xml_get_prop_double (object_node, "y", 0);
+	x = lgl_xml_get_prop_double (object_node, "x", 0);
+	y = lgl_xml_get_prop_double (object_node, "y", 0);
 
 	gl_label_object_set_position (object, x, y);
 
@@ -209,18 +209,18 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	gl_debug (DEBUG_XML, "START");
 
 	font_family = xmlGetProp (object_node, (xmlChar *)"font_family");
-	font_size = gl_xml_get_prop_double (object_node, "font_size", 0);
+	font_size = lgl_xml_get_prop_double (object_node, "font_size", 0);
 	string = xmlGetProp (object_node, (xmlChar *)"font_weight");
 	font_weight = gl_util_string_to_weight ((gchar *)string);
 	xmlFree (string);
-	font_italic_flag = gl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
+	font_italic_flag = lgl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, (xmlChar *)"justify");
 	align = gl_util_string_to_align ((gchar *)string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();
-	color_node->color = gl_xml_get_prop_uint (object_node, "color", 0);
+	color_node->color = lgl_xml_get_prop_uint (object_node, "color", 0);
 
 	gl_label_object_set_font_family (GL_LABEL_OBJECT(object), (gchar *)font_family);
 	gl_label_object_set_font_size (GL_LABEL_OBJECT(object), font_size);
@@ -317,16 +317,16 @@ xml04_parse_box_props (xmlNodePtr    node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = lgl_xml_get_prop_double (node, "w", 0);
+	h = lgl_xml_get_prop_double (node, "h", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 0);
+	line_width = lgl_xml_get_prop_double (node, "line_width", 0);
 
 	line_color_node = gl_color_node_new_default ();
-	line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);
+	line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);
 	
 	fill_color_node = gl_color_node_new_default ();
-	fill_color_node->color = gl_xml_get_prop_uint (node, "fill_color", 0);
+	fill_color_node->color = lgl_xml_get_prop_uint (node, "fill_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
@@ -350,13 +350,13 @@ xml04_parse_line_props (xmlNodePtr    node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	w = gl_xml_get_prop_double (node, "dx", 0);
-	h = gl_xml_get_prop_double (node, "dy", 0);
+	w = lgl_xml_get_prop_double (node, "dx", 0);
+	h = lgl_xml_get_prop_double (node, "dy", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 0);
+	line_width = lgl_xml_get_prop_double (node, "line_width", 0);
 
 	line_color_node = gl_color_node_new_default ();
-	line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);
+	line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
@@ -380,16 +380,16 @@ xml04_parse_ellipse_props (xmlNodePtr     node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = lgl_xml_get_prop_double (node, "w", 0);
+	h = lgl_xml_get_prop_double (node, "h", 0);
 
-	line_width = gl_xml_get_prop_double (node, "line_width", 0);
+	line_width = lgl_xml_get_prop_double (node, "line_width", 0);
 
 	line_color_node = gl_color_node_new_default ();
-	line_color_node->color = gl_xml_get_prop_uint (node, "line_color", 0);
+	line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);
 	
 	fill_color_node = gl_color_node_new_default ();
-	fill_color_node->color = gl_xml_get_prop_uint (node, "fill_color", 0);
+	fill_color_node->color = lgl_xml_get_prop_uint (node, "fill_color", 0);
 
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
@@ -419,8 +419,8 @@ xml04_parse_image_props (xmlNodePtr    node,
 	gl_label_image_set_filename (object, filename);
 	gl_text_node_free (&filename);
 
-	w = gl_xml_get_prop_double (node, "w", 0);
-	h = gl_xml_get_prop_double (node, "h", 0);
+	w = lgl_xml_get_prop_double (node, "w", 0);
+	h = lgl_xml_get_prop_double (node, "h", 0);
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
 
 	gl_debug (DEBUG_XML, "END");
@@ -443,12 +443,12 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 	gl_debug (DEBUG_XML, "START");
 
 	color_node = gl_color_node_new_default ();
-	color_node->color = gl_xml_get_prop_uint (node, "color", 0);
+	color_node->color = lgl_xml_get_prop_uint (node, "color", 0);
 
 	id = xmlGetProp (node, (xmlChar *)"style");
 
-	text_flag = gl_xml_get_prop_boolean (node, "text", FALSE);
-	scale =	gl_xml_get_prop_double (node, "scale", 1.0);
+	text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
+	scale =	lgl_xml_get_prop_double (node, "scale", 1.0);
 	if (scale == 0.0) {
 		scale = 0.5; /* Set to a valid value */
 	}

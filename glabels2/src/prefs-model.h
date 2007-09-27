@@ -57,7 +57,7 @@ struct _glPrefsModel {
 	GConfClient      *gconf_client;
 
 	/* Units */
-	glUnitsType       units;
+	lglUnitsType      units;
 
 	/* Page size */
 	gchar            *default_page_size;

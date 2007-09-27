@@ -452,17 +452,17 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 	dialog->priv->stop_signals = TRUE;
 
 	switch (gl_prefs->units) {
-	case GL_UNITS_POINT:
+	case LGL_UNITS_POINT:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dialog->priv->units_points_radio),
 			TRUE);
 		break;
-	case GL_UNITS_INCH:
+	case LGL_UNITS_INCH:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dialog->priv->units_inches_radio),
 			TRUE);
 		break;
-	case GL_UNITS_MM:
+	case LGL_UNITS_MM:
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dialog->priv->units_mm_radio),
 			TRUE);
@@ -577,17 +577,17 @@ update_prefs_from_locale_page (glPrefsDialog *dialog)
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dialog->priv->units_points_radio)))
         {
-		gl_prefs->units = GL_UNITS_POINT;
+		gl_prefs->units = LGL_UNITS_POINT;
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dialog->priv->units_inches_radio)))
         {
-		gl_prefs->units = GL_UNITS_INCH;
+		gl_prefs->units = LGL_UNITS_INCH;
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dialog->priv->units_mm_radio)))
         {
-		gl_prefs->units = GL_UNITS_MM;
+		gl_prefs->units = LGL_UNITS_MM;
 	}
 
 	if (gtk_toggle_button_get_active (

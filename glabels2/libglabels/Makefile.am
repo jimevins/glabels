@@ -17,6 +17,8 @@ libglabelsincludedir=$(includedir)/libglabels
 
 libglabels_la_SOURCES =		\
 	libglabels-private.h	\
+	init.h			\
+	init.c			\
 	enums.h			\
 	paper.h			\
 	paper.c			\

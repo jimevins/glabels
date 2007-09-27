@@ -56,15 +56,17 @@ static GList *read_paper_files_from_dir (GList       *papers,
 					 const gchar *dirname);
 
 /**
- * gl_paper_init:
+ * lgl_paper_init:
  *
  * Initialize libglabels paper module by reading all paper definition
  * files located in system and user template directories.
+ *
+ * The end user would typically call lgl_init() instead.
  */
 void
-gl_paper_init (void)
+lgl_paper_init (void)
 {
-	glPaper *other;
+	lglPaper *other;
 
 	if (papers) {
 		return; /* Already initialized. */
@@ -73,33 +75,33 @@ gl_paper_init (void)
 	papers = read_papers ();
 
 	/* Create and append an "Other" entry. */
-	other = gl_paper_new ("Other", _("Other"), 0.0, 0.0);
+	other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0);
 	papers = g_list_append (papers, other);
 }
 
 
 /**
- * gl_paper_new:
+ * lgl_paper_new:
  * @id:     Id of paper definition. (E.g. US-Letter, A4, etc.)  Should be
  *          unique.
  * @name:   Localized name of paper.
  * @width:  Width of paper in points.
  * @height: Height of paper in points.
  *
- * Allocates and constructs a new #glPaper structure.
+ * Allocates and constructs a new #lglPaper structure.
  *
- * Returns: a pointer to a newly allocated #glPaper structure.
+ * Returns: a pointer to a newly allocated #lglPaper structure.
  *
  */
-glPaper *
-gl_paper_new (gchar             *id,
-	      gchar             *name,
-	      gdouble            width,
-	      gdouble            height)
+lglPaper *
+lgl_paper_new (gchar             *id,
+	       gchar             *name,
+	       gdouble            width,
+	       gdouble            height)
 {
-	glPaper *paper;
+	lglPaper *paper;
 
-	paper         = g_new0 (glPaper,1);
+	paper         = g_new0 (lglPaper,1);
 	paper->id     = g_strdup (id);
 	paper->name   = g_strdup (name);
 	paper->width  = width;
@@ -110,21 +112,21 @@ gl_paper_new (gchar             *id,
 
 
 /**
- * gl_paper_dup:
- * @orig:  #glPaper structure to be duplicated.
+ * lgl_paper_dup:
+ * @orig:  #lglPaper structure to be duplicated.
  *
- * Duplicates an existing #glPaper structure.
+ * Duplicates an existing #lglPaper structure.
  *
- * Returns: a pointer to a newly allocated #glPaper structure.
+ * Returns: a pointer to a newly allocated #lglPaper structure.
  *
  */
-glPaper *gl_paper_dup (const glPaper *orig)
+lglPaper *lgl_paper_dup (const lglPaper *orig)
 {
-	glPaper       *paper;
+	lglPaper       *paper;
 
 	g_return_val_if_fail (orig, NULL);
 
-	paper = g_new0 (glPaper,1);
+	paper = g_new0 (lglPaper,1);
 
 	paper->id     = g_strdup (orig->id);
 	paper->name   = g_strdup (orig->name);
@@ -136,13 +138,13 @@ glPaper *gl_paper_dup (const glPaper *orig)
 
 
 /**
- * gl_paper_free:
- * @paper:  pointer to #glPaper structure to be freed.
+ * lgl_paper_free:
+ * @paper:  pointer to #lglPaper structure to be freed.
  *
- * Free all memory associated with an existing #glPaper structure.
+ * Free all memory associated with an existing #lglPaper structure.
  *
  */
-void gl_paper_free (glPaper *paper)
+void lgl_paper_free (lglPaper *paper)
 {
 
 	if ( paper != NULL ) {
@@ -160,7 +162,7 @@ void gl_paper_free (glPaper *paper)
 
 
 /**
- * gl_paper_get_id_list:
+ * lgl_paper_get_id_list:
  *
  * Get a list of all paper ids known to libglabels.
  *
@@ -168,18 +170,18 @@ void gl_paper_free (glPaper *paper)
  *
  */
 GList *
-gl_paper_get_id_list (void)
+lgl_paper_get_id_list (void)
 {
 	GList           *ids = NULL;
 	GList           *p;
-	glPaper         *paper;
+	lglPaper        *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	for ( p=papers; p != NULL; p=p->next ) {
-		paper = (glPaper *)p->data;
+		paper = (lglPaper *)p->data;
 		ids = g_list_append (ids, g_strdup (paper->id));
 	}
 
@@ -187,15 +189,15 @@ gl_paper_get_id_list (void)
 }
 
 /**
- * gl_paper_free_id_list:
+ * lgl_paper_free_id_list:
  * @ids: List of id strings to be freed.
  *
  * Free up all storage associated with an id list obtained with
- * gl_paper_get_id_list().
+ * lgl_paper_get_id_list().
  *
  */
 void
-gl_paper_free_id_list (GList *ids)
+lgl_paper_free_id_list (GList *ids)
 {
 	GList *p;
 
@@ -209,7 +211,7 @@ gl_paper_free_id_list (GList *ids)
 
 
 /**
- * gl_paper_get_name_list:
+ * lgl_paper_get_name_list:
  *
  * Get a list of all localized paper names known to libglabels.
  *
@@ -217,18 +219,18 @@ gl_paper_free_id_list (GList *ids)
  *
  */
 GList *
-gl_paper_get_name_list (void)
+lgl_paper_get_name_list (void)
 {
 	GList           *names = NULL;
 	GList           *p;
-	glPaper         *paper;
+	lglPaper        *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	for ( p=papers; p != NULL; p=p->next ) {
-		paper = (glPaper *)p->data;
+		paper = (lglPaper *)p->data;
 		names = g_list_append (names, g_strdup (paper->name));
 	}
 
@@ -237,15 +239,15 @@ gl_paper_get_name_list (void)
 
 
 /**
- * gl_paper_free_name_list:
+ * lgl_paper_free_name_list:
  * @names: List of localized paper name strings to be freed.
  *
  * Free up all storage associated with a name list obtained with
- * gl_paper_get_name_list().
+ * lgl_paper_get_name_list().
  *
  */
 void
-gl_paper_free_name_list (GList *names)
+lgl_paper_free_name_list (GList *names)
 {
 	GList *p;
 
@@ -259,7 +261,7 @@ gl_paper_free_name_list (GList *names)
 
 
 /**
- * gl_paper_is_id_known:
+ * lgl_paper_is_id_known:
  * @id: paper id to test
  *
  * Determine if given paper id is known to libglabels.
@@ -268,13 +270,13 @@ gl_paper_free_name_list (GList *names)
  *
  */
 gboolean
-gl_paper_is_id_known (const gchar *id)
+lgl_paper_is_id_known (const gchar *id)
 {
 	GList       *p;
-	glPaper     *paper;
+	lglPaper    *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	if (id == NULL) {
@@ -282,7 +284,7 @@ gl_paper_is_id_known (const gchar *id)
 	}
 
 	for (p = papers; p != NULL; p = p->next) {
-		paper = (glPaper *) p->data;
+		paper = (lglPaper *) p->data;
 		if (g_strcasecmp (paper->id, id) == 0) {
 			return TRUE;
 		}
@@ -293,7 +295,7 @@ gl_paper_is_id_known (const gchar *id)
 
 
 /**
- * gl_paper_is_id_other:
+ * lgl_paper_is_id_other:
  * @id: paper id to test
  *
  * Determine if given paper id is the special id "Other."
@@ -302,7 +304,7 @@ gl_paper_is_id_known (const gchar *id)
  *
  */
 gboolean
-gl_paper_is_id_other (const gchar *id)
+lgl_paper_is_id_other (const gchar *id)
 {
 	if (id == NULL) {
 		return FALSE;
@@ -313,33 +315,33 @@ gl_paper_is_id_other (const gchar *id)
 
 
 /**
- * gl_paper_from_id:
+ * lgl_paper_from_id:
  * @id: paper id string
  *
  * Lookup paper definition from id string.
  *
- * Returns: pointer to a newly allocated #glPaper structure.
+ * Returns: pointer to a newly allocated #lglPaper structure.
  *
  */
-glPaper *
-gl_paper_from_id (const gchar *id)
+lglPaper *
+lgl_paper_from_id (const gchar *id)
 {
 	GList       *p;
-	glPaper     *paper;
+	lglPaper    *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	if (id == NULL) {
 		/* If no id, return first paper as a default */
-		return gl_paper_dup ((glPaper *) papers->data);
+		return lgl_paper_dup ((lglPaper *) papers->data);
 	}
 
 	for (p = papers; p != NULL; p = p->next) {
-		paper = (glPaper *) p->data;
+		paper = (lglPaper *) p->data;
 		if (g_strcasecmp (paper->id, id) == 0) {
-			return gl_paper_dup (paper);
+			return lgl_paper_dup (paper);
 		}
 	}
 
@@ -348,33 +350,33 @@ gl_paper_from_id (const gchar *id)
 
 
 /**
- * gl_paper_from_name:
+ * lgl_paper_from_name:
  * @name: localized paper name string
  *
  * Lookup paper definition from localized paper name string.
  *
- * Returns: pointer to a newly allocated #glPaper structure.
+ * Returns: pointer to a newly allocated #lglPaper structure.
  *
  */
-glPaper *
-gl_paper_from_name (const gchar *name)
+lglPaper *
+lgl_paper_from_name (const gchar *name)
 {
 	GList       *p;
-	glPaper     *paper;
+	lglPaper    *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	if (name == NULL) {
 		/* If no name, return first paper as a default */
-		return gl_paper_dup ((glPaper *) papers->data);
+		return lgl_paper_dup ((lglPaper *) papers->data);
 	}
 
 	for (p = papers; p != NULL; p = p->next) {
-		paper = (glPaper *) p->data;
+		paper = (lglPaper *) p->data;
 		if (g_strcasecmp (paper->name, name) == 0) {
-			return gl_paper_dup (paper);
+			return lgl_paper_dup (paper);
 		}
 	}
 
@@ -383,7 +385,7 @@ gl_paper_from_name (const gchar *name)
 
 
 /**
- * gl_paper_lookup_id_from_name:
+ * lgl_paper_lookup_id_from_name:
  * @name: localized paper name stringp
  *
  * Lookup paper name string from localized paper name string.
@@ -392,18 +394,18 @@ gl_paper_from_name (const gchar *name)
  *
  */
 gchar *
-gl_paper_lookup_id_from_name (const gchar       *name)
+lgl_paper_lookup_id_from_name (const gchar       *name)
 {
-	glPaper *paper = NULL;
-	gchar   *id = NULL;
+	lglPaper *paper = NULL;
+	gchar    *id = NULL;
 
 	if (name != NULL)
 	{
-		paper = gl_paper_from_name (name);
+		paper = lgl_paper_from_name (name);
 		if ( paper != NULL )
 		{
 			id = g_strdup (paper->id);
-			gl_paper_free (paper);
+			lgl_paper_free (paper);
 			paper = NULL;
 		}
 	}
@@ -412,7 +414,7 @@ gl_paper_lookup_id_from_name (const gchar       *name)
 }
 
 /**
- * gl_paper_lookup_name_from_id:
+ * lgl_paper_lookup_name_from_id:
  * @id: paper id string
  *
  * Lookup localized paper name string from paper id string.
@@ -421,18 +423,18 @@ gl_paper_lookup_id_from_name (const gchar       *name)
  *
  */
 gchar *
-gl_paper_lookup_name_from_id (const gchar       *id)
+lgl_paper_lookup_name_from_id (const gchar       *id)
 {
-	glPaper *paper = NULL;
-	gchar   *name = NULL;
+	lglPaper *paper = NULL;
+	gchar    *name = NULL;
 
 	if (id != NULL)
 	{
-		paper = gl_paper_from_id (id);
+		paper = lgl_paper_from_id (id);
 		if ( paper != NULL )
 		{
 			name = g_strdup (paper->name);
-			gl_paper_free (paper);
+			lgl_paper_free (paper);
 			paper = NULL;
 		}
 	}
@@ -449,11 +451,11 @@ read_papers (void)
 	gchar *data_dir;
 	GList *papers = NULL;
 
-	data_dir = GL_SYSTEM_DATA_DIR;
+	data_dir = LGL_SYSTEM_DATA_DIR;
 	papers = read_paper_files_from_dir (papers, data_dir);
 	g_free (data_dir);
 
-	data_dir = GL_USER_DATA_DIR;
+	data_dir = LGL_USER_DATA_DIR;
 	papers = read_paper_files_from_dir (papers, data_dir);
 	g_free (data_dir);
 
@@ -503,7 +505,7 @@ read_paper_files_from_dir (GList       *papers,
 				full_filename =
 				    g_build_filename (dirname, filename, NULL);
 				new_papers =
-				    gl_xml_paper_read_papers_from_file (full_filename);
+				    lgl_xml_paper_read_papers_from_file (full_filename);
 				g_free (full_filename);
 
 				papers = g_list_concat (papers, new_papers);
@@ -522,25 +524,25 @@ read_paper_files_from_dir (GList       *papers,
 
 
 /**
- * gl_paper_print_known_papers:
+ * lgl_paper_print_known_papers:
  *
  * For debugging purposes: print a list of all paper definitions known to
  * libglabels.
  *
  */
 void
-gl_paper_print_known_papers (void)
+lgl_paper_print_known_papers (void)
 {
 	GList       *p;
-	glPaper     *paper;
+	lglPaper    *paper;
 
 	if (!papers) {
-		gl_paper_init ();
+		lgl_paper_init ();
 	}
 
 	g_print ("%s():\n", __FUNCTION__);
 	for (p = papers; p != NULL; p = p->next) {
-		paper = (glPaper *) p->data;
+		paper = (lglPaper *) p->data;
 
 		g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
 			 paper->id, paper->name, paper->width, paper->height);

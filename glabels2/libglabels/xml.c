@@ -62,23 +62,23 @@ static UnitTableEntry unit_table[] = {
 	/* These names are identical to the absolute length units supported in
 	   the CSS2 Specification (Section 4.3.2) */
 
-	/* This table must be sorted exactly as the enumerations in glUnitsType */
+	/* This table must be sorted exactly as the enumerations in lglUnitsType */
 
-	/* [GL_UNITS_POINT] */   {(xmlChar *)"pt",      POINTS_PER_POINT},
-	/* [GL_UNITS_INCH]  */   {(xmlChar *)"in",      POINTS_PER_INCH},
-	/* [GL_UNITS_MM]    */   {(xmlChar *)"mm",      POINTS_PER_MM},
-	/* [GL_UNITS_CM]    */   {(xmlChar *)"cm",      POINTS_PER_CM},
-	/* [GL_UNITS_PICA]  */   {(xmlChar *)"pc",      POINTS_PER_PICA},
+	/* [LGL_UNITS_POINT] */   {(xmlChar *)"pt",      POINTS_PER_POINT},
+	/* [LGL_UNITS_INCH]  */   {(xmlChar *)"in",      POINTS_PER_INCH},
+	/* [LGL_UNITS_MM]    */   {(xmlChar *)"mm",      POINTS_PER_MM},
+	/* [LGL_UNITS_CM]    */   {(xmlChar *)"cm",      POINTS_PER_CM},
+	/* [LGL_UNITS_PICA]  */   {(xmlChar *)"pc",      POINTS_PER_PICA},
 
 };
 
-static glUnitsType  default_units        = GL_UNITS_POINT;
+static lglUnitsType  default_units        = LGL_UNITS_POINT;
 
 
 /****************************************************************************/
 
 /**
- * gl_xml_get_prop_string:
+ * lgl_xml_get_prop_string:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -90,9 +90,9 @@ static glUnitsType  default_units        = GL_UNITS_POINT;
  *
  */
 gchar *
-gl_xml_get_prop_string (xmlNodePtr   node,
-			const gchar *property,
-			const gchar *default_val)
+lgl_xml_get_prop_string (xmlNodePtr   node,
+			 const gchar *property,
+			 const gchar *default_val)
 {
 	gchar   *val;
 	xmlChar *string;
@@ -113,7 +113,7 @@ gl_xml_get_prop_string (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_i18n_string:
+ * lgl_xml_get_prop_i18n_string:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -125,9 +125,9 @@ gl_xml_get_prop_string (xmlNodePtr   node,
  *
  */
 gchar *
-gl_xml_get_prop_i18n_string (xmlNodePtr   node,
-			     const gchar *property,
-			     const gchar *default_val)
+lgl_xml_get_prop_i18n_string (xmlNodePtr   node,
+			      const gchar *property,
+			      const gchar *default_val)
 {
 	gchar   *_property;
 	gchar   *val;
@@ -161,7 +161,7 @@ gl_xml_get_prop_i18n_string (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_double:
+ * lgl_xml_get_prop_double:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -172,9 +172,9 @@ gl_xml_get_prop_i18n_string (xmlNodePtr   node,
  *
  */
 gdouble
-gl_xml_get_prop_double (xmlNodePtr   node,
-			const gchar *property,
-			gdouble      default_val)
+lgl_xml_get_prop_double (xmlNodePtr   node,
+			 const gchar *property,
+			 gdouble      default_val)
 {
 	gdouble  val;
 	xmlChar *string;
@@ -191,7 +191,7 @@ gl_xml_get_prop_double (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_boolean:
+ * lgl_xml_get_prop_boolean:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -202,7 +202,7 @@ gl_xml_get_prop_double (xmlNodePtr   node,
  *
  */
 gboolean
-gl_xml_get_prop_boolean (xmlNodePtr   node,
+lgl_xml_get_prop_boolean (xmlNodePtr   node,
 			 const gchar *property,
 			 gboolean     default_val)
 {
@@ -222,7 +222,7 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_int:
+ * lgl_xml_get_prop_int:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -233,9 +233,9 @@ gl_xml_get_prop_boolean (xmlNodePtr   node,
  *
  */
 gint
-gl_xml_get_prop_int (xmlNodePtr   node,
-		     const gchar *property,
-		     gint         default_val)
+lgl_xml_get_prop_int (xmlNodePtr   node,
+		      const gchar *property,
+		      gint         default_val)
 {
 	gint     val;
 	xmlChar *string;
@@ -252,7 +252,7 @@ gl_xml_get_prop_int (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_uint:
+ * lgl_xml_get_prop_uint:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -263,9 +263,9 @@ gl_xml_get_prop_int (xmlNodePtr   node,
  *
  */
 guint
-gl_xml_get_prop_uint (xmlNodePtr   node,
-		      const gchar *property,
-		      guint        default_val)
+lgl_xml_get_prop_uint (xmlNodePtr   node,
+		       const gchar *property,
+		       guint        default_val)
 {
 	guint    val;
 	xmlChar *string;
@@ -282,7 +282,7 @@ gl_xml_get_prop_uint (xmlNodePtr   node,
 
 
 /**
- * gl_xml_get_prop_length:
+ * lgl_xml_get_prop_length:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @default_val: a default value to return if property not found
@@ -298,9 +298,9 @@ gl_xml_get_prop_uint (xmlNodePtr   node,
  *
  */
 gdouble
-gl_xml_get_prop_length (xmlNodePtr   node,
-			const gchar *property,
-			gdouble      default_val)
+lgl_xml_get_prop_length (xmlNodePtr   node,
+			 const gchar *property,
+			 gdouble      default_val)
 {
 	gdouble  val;
 	xmlChar *string;
@@ -315,14 +315,14 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 		if (unit != string) {
 			unit = (xmlChar *)g_strchug ((gchar *)unit);
 			if (strlen ((char *)unit) > 0 ) {
-				for (i=GL_UNITS_FIRST; i<=GL_UNITS_LAST; i++) {
+				for (i=LGL_UNITS_FIRST; i<=LGL_UNITS_LAST; i++) {
 					if (xmlStrcasecmp (unit, unit_table[i].name) == 0) {
 						val *= unit_table[i].points_per_unit;
 						break;
 					}
 				}
-				if (i>GL_UNITS_LAST) {
-					g_message ("Line %d, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
+				if (i>LGL_UNITS_LAST) {
+					g_message ("Line %ld, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
 						   xmlGetLineNo (node), node->name, property,
 						   unit);
 				}
@@ -341,7 +341,7 @@ gl_xml_get_prop_length (xmlNodePtr   node,
 
 
 /**
- * gl_xml_set_prop_string:
+ * lgl_xml_set_prop_string:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the value to set
@@ -350,9 +350,9 @@ gl_xml_get_prop_length (xmlNodePtr   node,
  *
  */
 void
-gl_xml_set_prop_string (xmlNodePtr    node,
-			const gchar  *property,
-			const gchar  *val)
+lgl_xml_set_prop_string (xmlNodePtr    node,
+			 const gchar  *property,
+			 const gchar  *val)
 {
 	if (val != NULL) {
 		xmlSetProp (node, (xmlChar *)property, (xmlChar *)val);
@@ -361,7 +361,7 @@ gl_xml_set_prop_string (xmlNodePtr    node,
 
 
 /**
- * gl_xml_set_prop_double:
+ * lgl_xml_set_prop_double:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the value to set
@@ -370,9 +370,9 @@ gl_xml_set_prop_string (xmlNodePtr    node,
  *
  */
 void
-gl_xml_set_prop_double (xmlNodePtr    node,
-			const gchar  *property,
-			gdouble       val)
+lgl_xml_set_prop_double (xmlNodePtr    node,
+			 const gchar  *property,
+			 gdouble       val)
 {
 	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
 
@@ -384,7 +384,7 @@ gl_xml_set_prop_double (xmlNodePtr    node,
 
 
 /**
- * gl_xml_set_prop_boolean:
+ * lgl_xml_set_prop_boolean:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the value to set
@@ -393,15 +393,15 @@ gl_xml_set_prop_double (xmlNodePtr    node,
  *
  */
 void
-gl_xml_set_prop_boolean (xmlNodePtr    node,
-			 const gchar  *property,
-			 gboolean      val)
+lgl_xml_set_prop_boolean (xmlNodePtr    node,
+			  const gchar  *property,
+			  gboolean      val)
 {
 	xmlSetProp (node, (xmlChar *)property, (xmlChar *)(val ? "True" : "False"));
 }
 
 /**
- * gl_xml_set_prop_int:
+ * lgl_xml_set_prop_int:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the value to set
@@ -410,9 +410,9 @@ gl_xml_set_prop_boolean (xmlNodePtr    node,
  *
  */
 void
-gl_xml_set_prop_int (xmlNodePtr    node,
-		     const gchar  *property,
-		     gint          val)
+lgl_xml_set_prop_int (xmlNodePtr    node,
+		      const gchar  *property,
+		      gint          val)
 {
 	gchar  *string;
 
@@ -422,7 +422,7 @@ gl_xml_set_prop_int (xmlNodePtr    node,
 }
 
 /**
- * gl_xml_set_prop_uint_hex:
+ * lgl_xml_set_prop_uint_hex:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the value to set
@@ -431,9 +431,9 @@ gl_xml_set_prop_int (xmlNodePtr    node,
  *
  */
 void
-gl_xml_set_prop_uint_hex (xmlNodePtr    node,
-			  const gchar  *property,
-			  guint         val)
+lgl_xml_set_prop_uint_hex (xmlNodePtr    node,
+			   const gchar  *property,
+			   guint         val)
 {
 	gchar  *string;
 
@@ -443,7 +443,7 @@ gl_xml_set_prop_uint_hex (xmlNodePtr    node,
 }
 
 /**
- * gl_xml_set_prop_length:
+ * lgl_xml_set_prop_length:
  * @node:        the libxml2 #xmlNodePtr of the node
  * @property:    the property name
  * @val:         the length to set in internal units (points)
@@ -451,13 +451,13 @@ gl_xml_set_prop_uint_hex (xmlNodePtr    node,
  * Set a property from a length, performing any necessary conversion.
  * Length properties are formatted as a number followed by a units string.
  * The units of the formatted property is determined by the most recent call to
- * gl_xml_set_default_units().
+ * lgl_xml_set_default_units().
  *
  */
 void
-gl_xml_set_prop_length (xmlNodePtr    node,
-			const gchar  *property,
-			gdouble       val)
+lgl_xml_set_prop_length (xmlNodePtr    node,
+			 const gchar  *property,
+			 gdouble       val)
 {
 	gchar  *string, buffer[G_ASCII_DTOSTR_BUF_SIZE];
 	gchar  *string_unit;
@@ -474,9 +474,9 @@ gl_xml_set_prop_length (xmlNodePtr    node,
 }
 
 /**
- * gl_xml_is_node
+ * lgl_xml_is_node
  * @node:        the libxml2 #xmlNodePtr of the node
- * @property:    the node name
+ * @name    :    the node name
  *
  * Test if a node name matches given name.
  *
@@ -484,15 +484,15 @@ gl_xml_set_prop_length (xmlNodePtr    node,
  *
  */
 gboolean
-gl_xml_is_node (xmlNodePtr   node,
-		const gchar *name)
+lgl_xml_is_node (xmlNodePtr   node,
+		 const gchar *name)
 {
 	return xmlStrEqual (node->name, (xmlChar *)name);
 }
 
 
 /**
- * gl_xml_get_node_content
+ * lgl_xml_get_node_content
  * @node:        the libxml2 #xmlNodePtr of the node
  *
  * Get the content of a node.
@@ -501,7 +501,7 @@ gl_xml_is_node (xmlNodePtr   node,
  *          be freed with g_free().
  */
 gchar *
-gl_xml_get_node_content (xmlNodePtr   node)
+lgl_xml_get_node_content (xmlNodePtr   node)
 {
 	xmlChar *xml_content;
 	gchar   *g_content;
@@ -521,17 +521,17 @@ gl_xml_get_node_content (xmlNodePtr   node)
 
 
 /**
- * gl_xml_set_default_units:
- * @units:       default units selection (#glUnitsType)
+ * lgl_xml_set_default_units:
+ * @units:       default units selection (#lglUnitsType)
  *
  * Set the default units when formatting lengths.  See
- * gl_xml_set_prop_length().
+ * lgl_xml_set_prop_length().
  *
  */
 void
-gl_xml_set_default_units (glUnitsType   units)
+lgl_xml_set_default_units (lglUnitsType   units)
 {
-	g_return_if_fail ((units >= GL_UNITS_FIRST) && (units <= GL_UNITS_LAST));
+	g_return_if_fail ((units >= LGL_UNITS_FIRST) && (units <= LGL_UNITS_LAST));
 
 	default_units = units;
 }

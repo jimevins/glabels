@@ -36,44 +36,44 @@ G_BEGIN_DECLS
 /*
  *   Template class
  */
-typedef struct _glCategory glCategory;
+typedef struct _lglCategory lglCategory;
 
-struct _glCategory {
-	gchar               *id;     /* Unique ID of paper definition */
-	gchar               *name;   /* Localized name of paper */
+struct _lglCategory {
+	gchar               *id;     /* Unique ID of category */
+	gchar               *name;   /* Localized name of category */
 };
 
 
 /*
  * Module initialization
  */
-void              gl_category_init                (void);
+void              lgl_category_init                (void);
 
 
 /*
  * Category construction
  */
-glCategory       *gl_category_new                 (gchar            *id,
-                                                   gchar            *name);
+lglCategory      *lgl_category_new                 (gchar            *id,
+                                                    gchar            *name);
 
-glCategory       *gl_category_dup                 (const glCategory *orig);
-void              gl_category_free                (glCategory       *category);
+lglCategory      *lgl_category_dup                 (const lglCategory *orig);
+void              lgl_category_free                (lglCategory       *category);
 
 
 /*
  * Known category name lists
  */
-GList            *gl_category_get_name_list       (void);
-void              gl_category_free_name_list      (GList            *names);
+GList            *lgl_category_get_name_list       (void);
+void              lgl_category_free_name_list      (GList            *names);
 
 
 /*
  * Query functions
  */
-glCategory       *gl_category_from_name           (const gchar      *name);
-glCategory       *gl_category_from_id             (const gchar      *id);
-gchar            *gl_category_lookup_id_from_name (const gchar      *name);
-gchar            *gl_category_lookup_name_from_id (const gchar      *id);
+lglCategory      *lgl_category_from_name           (const gchar      *name);
+lglCategory      *lgl_category_from_id             (const gchar      *id);
+gchar            *lgl_category_lookup_id_from_name (const gchar      *name);
+gchar            *lgl_category_lookup_name_from_id (const gchar      *id);
 
 G_END_DECLS
 

@@ -1,9 +1,9 @@
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
- *  libglabels.h:  libglabels master header file
+ *  init.h:  initialization module header file
  *
- *  Copyright (C) 2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2007  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -23,17 +23,20 @@
  *  MA 02111-1307, USA
  */
 
-#ifndef __LIBGLABELS_H__
-#define __LIBGLABELS_H__
+#ifndef __INIT_H__
+#define __INIT_H__
 
-#include <libglabels/init.h>
-#include <libglabels/enums.h>
-#include <libglabels/paper.h>
-#include <libglabels/category.h>
-#include <libglabels/template.h>
-#include <libglabels/xml-paper.h>
-#include <libglabels/xml-category.h>
-#include <libglabels/xml-template.h>
-#include <libglabels/xml.h>
+#include <glib/gtypes.h>
 
-#endif /* __LIBGLABELS_H__ */
+G_BEGIN_DECLS
+
+
+/*
+ * Module initialization
+ */
+void                 lgl_init (void);
+
+
+G_END_DECLS
+
+#endif

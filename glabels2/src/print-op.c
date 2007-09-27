@@ -215,16 +215,16 @@ static void
 gl_print_op_construct (glPrintOp      *op,
                        glLabel        *label)
 {
-        const glTemplateLabelType *label_type;
+        const lglTemplateFrame *frame;
 
 	op->priv->label              = label;
 	op->priv->force_outline_flag = FALSE;
 
-        label_type = gl_template_get_first_label_type (label->template);
+        frame = lgl_template_get_first_frame (label->template);
 
         op->priv->n_sheets           = 1;
         op->priv->first              = 1;
-        op->priv->last               = gl_template_get_n_labels (label_type);
+        op->priv->last               = lgl_template_frame_get_n_labels (frame);
         op->priv->n_copies           = 1;
 
 	gtk_print_operation_set_custom_tab_label ( GTK_PRINT_OPERATION (op),
@@ -363,8 +363,8 @@ gl_print_op_construct_batch (glPrintOp      *op,
                              gboolean        crop_marks_flag)
 
 {
-        glMerge                   *merge = NULL;
-        const glTemplateLabelType *label_type = NULL;
+        glMerge                *merge = NULL;
+        const lglTemplateFrame *frame = NULL;
 
 	op->priv->label              = label;
 	op->priv->force_outline_flag = FALSE;
@@ -378,12 +378,12 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
         merge = gl_label_get_merge (label);
 
-        label_type = gl_template_get_first_label_type (label->template);
+        frame = lgl_template_get_first_frame (label->template);
         if (merge == NULL)
         {
                 op->priv->merge_flag = FALSE;
 
-                op->priv->last = gl_template_get_n_labels (label_type);
+                op->priv->last = lgl_template_frame_get_n_labels (frame);
 
         }
         else
@@ -392,7 +392,7 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
                 op->priv->n_sheets =
                         ceil ((double)(first-1 + n_copies * gl_merge_get_record_count(merge))
-                              / gl_template_get_n_labels (label_type));;
+                              / lgl_template_frame_get_n_labels (frame));;
 
                 g_object_unref (G_OBJECT(merge));
 

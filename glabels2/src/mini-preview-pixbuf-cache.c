@@ -59,12 +59,12 @@ gl_mini_preview_pixbuf_cache_init (void)
 
 	mini_preview_pixbuf_cache = g_hash_table_new (g_str_hash, g_str_equal);
 
-        names = gl_template_get_name_list_unique (NULL, NULL);
+        names = lgl_template_get_name_list_unique (NULL, NULL);
         for ( p=names; p != NULL; p=p->next )
         {
                 gl_mini_preview_pixbuf_cache_add_by_name ((gchar *)p->data);
         }
-        gl_template_free_name_list (names);
+        lgl_template_free_name_list (names);
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END pixbuf_cache=%p", mini_preview_pixbuf_cache);
 }
@@ -75,14 +75,14 @@ gl_mini_preview_pixbuf_cache_init (void)
 void
 gl_mini_preview_pixbuf_cache_add_by_name (gchar      *name)
 {
-        glTemplate *template;
-        GdkPixbuf  *pixbuf;
+        lglTemplate *template;
+        GdkPixbuf   *pixbuf;
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
-        template = gl_template_from_name (name);
+        template = lgl_template_from_name (name);
         pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
-        gl_template_free (template);
+        lgl_template_free (template);
 
         g_hash_table_insert (mini_preview_pixbuf_cache, g_strdup (name), pixbuf);
 

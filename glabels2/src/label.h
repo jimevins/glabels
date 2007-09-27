@@ -55,7 +55,7 @@ typedef struct _glLabelPrivate   glLabelPrivate;
 struct _glLabel {
 	GObject         object;
 
-        glTemplate     *template;
+        lglTemplate    *template;
         gboolean        rotate_flag;
 
 	GList          *objects;
@@ -102,7 +102,7 @@ void          gl_label_lower_object_to_bottom  (glLabel       *label,
 
 
 void          gl_label_set_template            (glLabel       *label,
-						glTemplate    *template);
+						lglTemplate   *template);
 
 void          gl_label_set_rotate_flag         (glLabel       *label,
 						gboolean       rotate_flag);

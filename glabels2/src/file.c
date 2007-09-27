@@ -119,10 +119,10 @@ new_response (GtkDialog *dialog,
 	      gint       response,
 	      gpointer   user_data)
 {
-	glTemplate *template;
-	glLabel    *label;
-	glWindow   *window;
-	GtkWidget  *new_window;
+	lglTemplate *template;
+	glLabel     *label;
+	glWindow    *window;
+	GtkWidget   *new_window;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -142,13 +142,13 @@ new_response (GtkDialog *dialog,
 		rotate_flag =
 			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		template = gl_template_from_name (sheet_name);
+		template = lgl_template_from_name (sheet_name);
 
 		label = GL_LABEL(gl_label_new ());
 		gl_label_set_template (label, template);
 		gl_label_set_rotate_flag (label, rotate_flag);
 
-		gl_template_free (template);
+		lgl_template_free (template);
 
 		window =
 			GL_WINDOW (g_object_get_data (G_OBJECT (dialog),
@@ -219,8 +219,8 @@ properties_response (GtkDialog *dialog,
 	      gint       response,
 	      gpointer   user_data)
 {
-	glTemplate *template;
-	glLabel    *label;
+	lglTemplate *template;
+	glLabel     *label;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -240,7 +240,7 @@ properties_response (GtkDialog *dialog,
 		rotate_flag =
 			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		template = gl_template_from_name (sheet_name);
+		template = lgl_template_from_name (sheet_name);
 
                 label = GL_LABEL(g_object_get_data (G_OBJECT (dialog), "label"));
                 gl_label_set_template (label, template);

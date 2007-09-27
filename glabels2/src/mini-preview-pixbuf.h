@@ -31,9 +31,9 @@
 
 G_BEGIN_DECLS
 
-GdkPixbuf *gl_mini_preview_pixbuf_new (glTemplate *template,
-				       gint        width,
-				       gint        height);
+GdkPixbuf *gl_mini_preview_pixbuf_new (lglTemplate *template,
+				       gint         width,
+				       gint         height);
 
 G_END_DECLS
 

@@ -1,8 +1,652 @@
+<!-- ##### SECTION ./tmpl/libglabels.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/libglabels.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/libglabels.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/libglabels.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/libglabels.sgml:Title ##### -->
+libglabels
+
+
 <!-- ##### MACRO GL_XML_NAME_SPACE ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### STRUCT glCategory ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+
+<!-- ##### STRUCT glPaper ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@width: 
+@height: 
+
+<!-- ##### STRUCT glTemplate ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@categories: 
+@frames: 
+@aliases: 
+
+<!-- ##### UNION glTemplateFrame ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT glTemplateFrameAll ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+
+<!-- ##### STRUCT glTemplateFrameCD ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+
+<!-- ##### STRUCT glTemplateFrameRect ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+
+<!-- ##### STRUCT glTemplateFrameRound ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@r: 
+@waste: 
+
+<!-- ##### ENUM glTemplateFrameShape ##### -->
+<para>
+
+</para>
+
+@GL_TEMPLATE_FRAME_SHAPE_RECT: 
+@GL_TEMPLATE_FRAME_SHAPE_ROUND: 
+@GL_TEMPLATE_FRAME_SHAPE_CD: 
+
+<!-- ##### ENUM glTemplateLabelShape ##### -->
+<para>
+
+</para>
+
+@GL_TEMPLATE_SHAPE_RECT: 
+@GL_TEMPLATE_SHAPE_ROUND: 
+@GL_TEMPLATE_SHAPE_CD: 
+
+<!-- ##### STRUCT glTemplateLabelType ##### -->
+<para>
+
+</para>
+
+@id: 
+@layouts: 
+@markups: 
+@shape: 
+
+<!-- ##### STRUCT glTemplateLayout ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+
+<!-- ##### UNION glTemplateMarkup ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT glTemplateMarkupCircle ##### -->
+<para>
+
+</para>
+
+@type: 
+@x0: 
+@y0: 
+@r: 
+
+<!-- ##### STRUCT glTemplateMarkupLine ##### -->
+<para>
+
+</para>
+
+@type: 
+@x1: 
+@y1: 
+@x2: 
+@y2: 
+
+<!-- ##### STRUCT glTemplateMarkupMargin ##### -->
+<para>
+
+</para>
+
+@type: 
+@size: 
+
+<!-- ##### STRUCT glTemplateMarkupRect ##### -->
+<para>
+
+</para>
+
+@type: 
+@x1: 
+@y1: 
+@w: 
+@h: 
+@r: 
+
+<!-- ##### ENUM glTemplateMarkupType ##### -->
+<para>
+
+</para>
+
+@GL_TEMPLATE_MARKUP_MARGIN: 
+@GL_TEMPLATE_MARKUP_LINE: 
+@GL_TEMPLATE_MARKUP_CIRCLE: 
+@GL_TEMPLATE_MARKUP_RECT: 
+
+<!-- ##### STRUCT glTemplateOrigin ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+
+<!-- ##### ENUM glUnitsType ##### -->
+<para>
+Enumerations for the units of length supported by libglabels.  Internally
+all lengths are in points.  Externally libglabels supports points ("pt"),
+inches ("in"), millimeters ("mm"), centimeters ("cm"), and picas ("pc").
+These units are identical to the absolute length units supported in
+the CSS2 Specification (Section 4.3.2).
+</para>
+
+@GL_UNITS_POINT: 
+@GL_UNITS_INCH: 
+@GL_UNITS_MM: 
+@GL_UNITS_CM: 
+@GL_UNITS_PICA: 
+@GL_UNITS_FIRST: 
+@GL_UNITS_LAST: 
+
+<!-- ##### FUNCTION gl_category_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_free ##### -->
+<para>
+
+</para>
+
+@category: 
+
+<!-- ##### FUNCTION gl_category_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION gl_category_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gl_category_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_category_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_free ##### -->
+<para>
+
+</para>
+
+@paper: 
+
+<!-- ##### FUNCTION gl_paper_free_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+<!-- ##### FUNCTION gl_paper_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION gl_paper_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_get_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gl_paper_is_id_known ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_is_id_other ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@width: 
+@height: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_paper_print_known_papers ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gl_template_add_alias ##### -->
+<para>
+
+</para>
+
+@template: 
+@alias: 
+
+<!-- ##### FUNCTION gl_template_add_category ##### -->
+<para>
+
+</para>
+
+@template: 
+@category: 
+
+<!-- ##### FUNCTION gl_template_add_frame ##### -->
+<para>
+
+</para>
+
+@template: 
+@frame: 
+
+<!-- ##### FUNCTION gl_template_add_label_type ##### -->
+<para>
+
+</para>
+
+@template: 
+@label_type: 
+
+<!-- ##### FUNCTION gl_template_add_layout ##### -->
+<para>
+
+</para>
+
+@frame: 
+@layout: 
+
+<!-- ##### FUNCTION gl_template_add_markup ##### -->
+<para>
+
+</para>
+
+@frame: 
+@markup: 
+
+<!-- ##### FUNCTION gl_template_cd_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_does_category_match ##### -->
+<para>
+
+</para>
+
+@template: 
+@category: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_does_page_size_match ##### -->
+<para>
+
+</para>
+
+@template: 
+@page_size: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_cd_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_dup ##### -->
+<para>
+
+</para>
+
+@orig_frame: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_free ##### -->
+<para>
+
+</para>
+
+@frame: 
+
+<!-- ##### FUNCTION gl_template_frame_get_n_labels ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_get_origins ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_get_size ##### -->
+<para>
+
+</para>
+
+@frame: 
+@w: 
+@h: 
+
+<!-- ##### FUNCTION gl_template_frame_rect_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_frame_round_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r: 
+@waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_free ##### -->
+<para>
+
+</para>
+
+@template: 
+
+<!-- ##### FUNCTION gl_template_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION gl_template_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_get_first_frame ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_get_first_label_type ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_get_label_size ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@w: 
+@h: 
+
+<!-- ##### FUNCTION gl_template_get_n_labels ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@Returns: 
 
 <!-- ##### FUNCTION gl_template_get_name_list ##### -->
 <para>
@@ -12,6 +656,24 @@
 @page_size: 
 @Returns: 
 
+<!-- ##### FUNCTION gl_template_get_name_list_all ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_get_name_list_unique ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
 <!-- ##### FUNCTION gl_template_get_name_with_desc ##### -->
 <para>
 
@@ -19,4 +681,425 @@
 
 @template: 
 @Returns: 
+
+<!-- ##### FUNCTION gl_template_get_origins ##### -->
+<para>
+
+</para>
+
+@label_type: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gl_template_label_type_dup ##### -->
+<para>
+
+</para>
+
+@orig_ltype: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_label_type_free ##### -->
+<para>
+
+</para>
+
+@ltype: 
+
+<!-- ##### FUNCTION gl_template_layout_dup ##### -->
+<para>
+
+</para>
+
+@orig_layout: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_layout_free ##### -->
+<para>
+
+</para>
+
+@layout: 
+
+<!-- ##### FUNCTION gl_template_layout_new ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_markup_circle_new ##### -->
+<para>
+
+</para>
+
+@x0: 
+@y0: 
+@r: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_markup_dup ##### -->
+<para>
+
+</para>
+
+@orig_markup: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_markup_free ##### -->
+<para>
+
+</para>
+
+@markup: 
+
+<!-- ##### FUNCTION gl_template_markup_line_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@x2: 
+@y2: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_markup_margin_new ##### -->
+<para>
+
+</para>
+
+@size: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_markup_rect_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@w: 
+@h: 
+@r: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_print_aliases ##### -->
+<para>
+
+</para>
+
+@template: 
+
+<!-- ##### FUNCTION gl_template_print_known_templates ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gl_template_rect_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_template_register ##### -->
+<para>
+
+</para>
+
+@template: 
+
+<!-- ##### FUNCTION gl_template_round_label_type_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r: 
+@waste: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_category_parse_categories_doc ##### -->
+<para>
+
+</para>
+
+@categories_doc: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_category_parse_category_node ##### -->
+<para>
+
+</para>
+
+@category_node: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_category_read_categories_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_node_content ##### -->
+<para>
+
+</para>
+
+@node: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_boolean ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_double ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_i18n_string ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_int ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_string ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_get_prop_uint ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@default_val: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_is_node ##### -->
+<para>
+
+</para>
+
+@node: 
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_paper_parse_paper_node ##### -->
+<para>
+
+</para>
+
+@paper_node: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_paper_parse_papers_doc ##### -->
+<para>
+
+</para>
+
+@papers_doc: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_paper_read_papers_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_set_default_units ##### -->
+<para>
+
+</para>
+
+@units: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_boolean ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_double ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_int ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_length ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_string ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_set_prop_uint_hex ##### -->
+<para>
+
+</para>
+
+@node: 
+@property: 
+@val: 
+
+<!-- ##### FUNCTION gl_xml_template_create_template_node ##### -->
+<para>
+
+</para>
+
+@template: 
+@root: 
+@ns: 
+
+<!-- ##### FUNCTION gl_xml_template_create_templates_doc ##### -->
+<para>
+
+</para>
+
+@templates: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_template_parse_template_node ##### -->
+<para>
+
+</para>
+
+@template_node: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_template_parse_templates_doc ##### -->
+<para>
+
+</para>
+
+@templates_doc: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_template_read_templates_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+<!-- ##### FUNCTION gl_xml_template_write_template_to_file ##### -->
+<para>
+
+</para>
+
+@template: 
+@utf8_filename: 
+
+<!-- ##### FUNCTION gl_xml_template_write_templates_to_file ##### -->
+<para>
+
+</para>
+
+@templates: 
+@utf8_filename: 
 

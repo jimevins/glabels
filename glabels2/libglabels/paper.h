@@ -33,11 +33,11 @@ G_BEGIN_DECLS
 
 
 /*
- *   glPaper structure
+ *   lglPaper structure
  */
-typedef struct _glPaper glPaper;
+typedef struct _lglPaper lglPaper;
 
-struct _glPaper {
+struct _lglPaper {
 	gchar               *id;     /* Unique ID of paper definition */
 	gchar               *name;   /* Localized name of paper */
 	gdouble              width;  /* Width (in points) */
@@ -48,53 +48,53 @@ struct _glPaper {
 /*
  * Module initialization
  */
-void                 gl_paper_init                (void);
+void                 lgl_paper_init                (void);
 
 
 /*
  * Paper construction
  */
-glPaper             *gl_paper_new                 (gchar           *id,
-						   gchar           *name,
-						   gdouble          width,
-						   gdouble          height);
+lglPaper            *lgl_paper_new                 (gchar           *id,
+						    gchar           *name,
+						    gdouble          width,
+						    gdouble          height);
 
-glPaper             *gl_paper_dup                 (const glPaper   *orig);
+lglPaper             *lgl_paper_dup                (const lglPaper   *orig);
 
-void                 gl_paper_free                (glPaper         *paper);
+void                 lgl_paper_free                (lglPaper         *paper);
 
 
 /*
  * ID lists
  */
-GList               *gl_paper_get_id_list         (void);
-void                 gl_paper_free_id_list        (GList           *ids);
+GList               *lgl_paper_get_id_list         (void);
+void                 lgl_paper_free_id_list        (GList           *ids);
 
 
 /*
  * Name lists
  */
-GList               *gl_paper_get_name_list       (void);
-void                 gl_paper_free_name_list      (GList           *names);
+GList               *lgl_paper_get_name_list       (void);
+void                 lgl_paper_free_name_list      (GList           *names);
 
 
 /*
  * Query functions
  */
-gboolean             gl_paper_is_id_known         (const gchar     *id);
-gboolean             gl_paper_is_id_other         (const gchar     *id);
+gboolean             lgl_paper_is_id_known         (const gchar     *id);
+gboolean             lgl_paper_is_id_other         (const gchar     *id);
 
-glPaper             *gl_paper_from_id             (const gchar     *id);
-glPaper             *gl_paper_from_name           (const gchar     *name);
+lglPaper            *lgl_paper_from_id             (const gchar     *id);
+lglPaper            *lgl_paper_from_name           (const gchar     *name);
 
-gchar               *gl_paper_lookup_id_from_name (const gchar     *name);
-gchar               *gl_paper_lookup_name_from_id (const gchar     *id);
+gchar               *lgl_paper_lookup_id_from_name (const gchar     *name);
+gchar               *lgl_paper_lookup_name_from_id (const gchar     *id);
 
 
 /*
  * Debugging
  */
-void                 gl_paper_print_known_papers  (void);
+void                 lgl_paper_print_known_papers  (void);
 
 
 G_END_DECLS

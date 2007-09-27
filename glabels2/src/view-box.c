@@ -442,7 +442,6 @@ gl_view_box_create_button_press_event   (glView *view,
 	GObject             *object;
 	glColorNode         *fill_color_node;
 	glColorNode         *line_color_node;
-        glViewObject        *view_box;
 
         gl_view_unselect_all (view);
 

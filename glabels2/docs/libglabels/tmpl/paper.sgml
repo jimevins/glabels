@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-Paper Definitions
+Paper Sizes
 
 <!-- ##### SECTION Short_Description ##### -->
 Paper size definitions
@@ -18,7 +18,7 @@ and related functions.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### STRUCT glPaper ##### -->
+<!-- ##### STRUCT lglPaper ##### -->
 <para>
 
 </para>
@@ -28,14 +28,14 @@ and related functions.
 @width: 
 @height: 
 
-<!-- ##### FUNCTION gl_paper_init ##### -->
+<!-- ##### FUNCTION lgl_paper_init ##### -->
 <para>
 
 </para>
 
 
 
-<!-- ##### FUNCTION gl_paper_new ##### -->
+<!-- ##### FUNCTION lgl_paper_new ##### -->
 <para>
 
 </para>
@@ -47,7 +47,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_dup ##### -->
+<!-- ##### FUNCTION lgl_paper_dup ##### -->
 <para>
 
 </para>
@@ -56,7 +56,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_free ##### -->
+<!-- ##### FUNCTION lgl_paper_free ##### -->
 <para>
 
 </para>
@@ -64,7 +64,7 @@ and related functions.
 @paper: 
 
 
-<!-- ##### FUNCTION gl_paper_get_id_list ##### -->
+<!-- ##### FUNCTION lgl_paper_get_id_list ##### -->
 <para>
 
 </para>
@@ -72,7 +72,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_free_id_list ##### -->
+<!-- ##### FUNCTION lgl_paper_free_id_list ##### -->
 <para>
 
 </para>
@@ -80,7 +80,7 @@ and related functions.
 @ids: 
 
 
-<!-- ##### FUNCTION gl_paper_get_name_list ##### -->
+<!-- ##### FUNCTION lgl_paper_get_name_list ##### -->
 <para>
 
 </para>
@@ -88,7 +88,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_free_name_list ##### -->
+<!-- ##### FUNCTION lgl_paper_free_name_list ##### -->
 <para>
 
 </para>
@@ -96,7 +96,7 @@ and related functions.
 @names: 
 
 
-<!-- ##### FUNCTION gl_paper_is_id_known ##### -->
+<!-- ##### FUNCTION lgl_paper_is_id_known ##### -->
 <para>
 
 </para>
@@ -105,7 +105,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_is_id_other ##### -->
+<!-- ##### FUNCTION lgl_paper_is_id_other ##### -->
 <para>
 
 </para>
@@ -114,7 +114,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_from_id ##### -->
+<!-- ##### FUNCTION lgl_paper_from_id ##### -->
 <para>
 
 </para>
@@ -123,7 +123,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_from_name ##### -->
+<!-- ##### FUNCTION lgl_paper_from_name ##### -->
 <para>
 
 </para>
@@ -132,7 +132,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_lookup_id_from_name ##### -->
+<!-- ##### FUNCTION lgl_paper_lookup_id_from_name ##### -->
 <para>
 
 </para>
@@ -141,7 +141,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_lookup_name_from_id ##### -->
+<!-- ##### FUNCTION lgl_paper_lookup_name_from_id ##### -->
 <para>
 
 </para>
@@ -150,7 +150,7 @@ and related functions.
 @Returns: 
 
 
-<!-- ##### FUNCTION gl_paper_print_known_papers ##### -->
+<!-- ##### FUNCTION lgl_paper_print_known_papers ##### -->
 <para>
 
 </para>

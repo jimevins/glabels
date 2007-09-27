@@ -34,11 +34,11 @@
 
 G_BEGIN_DECLS
 
-GList       *gl_xml_paper_read_papers_from_file (gchar        *utf8_filename);
+GList       *lgl_xml_paper_read_papers_from_file (gchar        *utf8_filename);
 
-GList       *gl_xml_paper_parse_papers_doc      (xmlDocPtr     papers_doc);
+GList       *lgl_xml_paper_parse_papers_doc      (xmlDocPtr     papers_doc);
 
-glPaper     *gl_xml_paper_parse_paper_node      (xmlNodePtr    paper_node);
+lglPaper    *lgl_xml_paper_parse_paper_node      (xmlNodePtr    paper_node);
 
 
 G_END_DECLS

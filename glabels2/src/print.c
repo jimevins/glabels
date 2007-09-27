@@ -55,8 +55,8 @@ typedef struct _PrintInfo {
         cairo_t    *cr;
 
 	/* gLabels Template */
-	glTemplate *template;
-	gboolean    label_rotate_flag;
+	lglTemplate *template;
+	gboolean     label_rotate_flag;
 
 	/* page size */
 	gdouble page_width;
@@ -106,17 +106,17 @@ gl_print_simple_sheet (glLabel          *label,
                        gboolean          reverse_flag,
                        gboolean          crop_marks_flag)
 {
-	PrintInfo                 *pi;
-	const glTemplateLabelType *label_type;
-	gint                       i_label;
-	glTemplateOrigin          *origins;
+	PrintInfo              *pi;
+	const lglTemplateFrame *frame;
+	gint                    i_label;
+	lglTemplateOrigin      *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	pi         = print_info_new (cr, label);
 
-	label_type = gl_template_get_first_label_type (pi->template);
-	origins = gl_template_get_origins (label_type);
+	frame = lgl_template_get_first_frame (pi->template);
+	origins = lgl_template_frame_get_origins (frame);
 
         if (crop_marks_flag) {
                 print_crop_marks (pi);
@@ -154,11 +154,11 @@ gl_print_collated_merge_sheet   (glLabel          *label,
 	glMerge                   *merge;
 	const GList               *record_list;
 	PrintInfo                 *pi;
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	gint                       i_label, n_labels_per_page, i_copy;
 	glMergeRecord             *record;
 	GList                     *p;
-	glTemplateOrigin          *origins;
+	lglTemplateOrigin         *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -166,10 +166,10 @@ gl_print_collated_merge_sheet   (glLabel          *label,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (cr, label);
-	label_type = gl_template_get_first_label_type (pi->template);
+	frame = lgl_template_get_first_frame (pi->template);
 
-	n_labels_per_page = gl_template_get_n_labels (label_type);
-	origins = gl_template_get_origins (label_type);
+	n_labels_per_page = lgl_template_frame_get_n_labels (frame);
+	origins = lgl_template_frame_get_origins (frame);
 
         if (crop_marks_flag) {
                 print_crop_marks (pi);
@@ -245,11 +245,11 @@ gl_print_uncollated_merge_sheet (glLabel          *label,
 	glMerge                   *merge;
 	const GList               *record_list;
 	PrintInfo                 *pi;
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	gint                       i_label, n_labels_per_page, i_copy;
 	glMergeRecord             *record;
 	GList                     *p;
-	glTemplateOrigin          *origins;
+	lglTemplateOrigin         *origins;
 
 	gl_debug (DEBUG_PRINT, "START");
 
@@ -257,10 +257,10 @@ gl_print_uncollated_merge_sheet (glLabel          *label,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (cr, label);
-	label_type = gl_template_get_first_label_type (pi->template);
+	frame = lgl_template_get_first_frame (pi->template);
 
-	n_labels_per_page = gl_template_get_n_labels (label_type);
-	origins = gl_template_get_origins (label_type);
+	n_labels_per_page = lgl_template_frame_get_n_labels (frame);
+	origins = lgl_template_frame_get_origins (frame);
 
         if (crop_marks_flag) {
                 print_crop_marks (pi);
@@ -376,19 +376,19 @@ print_info_free (PrintInfo **pi)
 static void
 print_crop_marks (PrintInfo *pi)
 {
-	const glTemplateLabelType *label_type;
+	const lglTemplateFrame    *frame;
 	gdouble                    w, h, page_w, page_h;
 	GList                     *p;
-	glTemplateLayout          *layout;
+	lglTemplateLayout         *layout;
 	gdouble                    xmin, ymin, xmax, ymax, dx, dy;
 	gdouble                    x1, y1, x2, y2, x3, y3, x4, y4;
 	gint                       ix, iy, nx, ny;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	label_type = gl_template_get_first_label_type (pi->template);
+	frame = lgl_template_get_first_frame (pi->template);
 
-	gl_template_get_label_size (label_type, &w, &h);
+	lgl_template_frame_get_size (frame, &w, &h);
 
 	page_w = pi->page_width;
 	page_h = pi->page_height;
@@ -398,9 +398,9 @@ print_crop_marks (PrintInfo *pi)
         cairo_set_source_rgb (pi->cr, OUTLINE_RGB_ARGS);
 	cairo_set_line_width (pi->cr, OUTLINE_WIDTH);
 
-	for (p=label_type->layouts; p != NULL; p=p->next) {
+	for (p=frame->all.layouts; p != NULL; p=p->next) {
 
-		layout = (glTemplateLayout *)p->data;
+		layout = (lglTemplateLayout *)p->data;
 
 		xmin = layout->x0;
 		ymin = layout->y0;
@@ -490,12 +490,12 @@ print_label (PrintInfo     *pi,
 	     gboolean       outline_flag,
 	     gboolean       reverse_flag)
 {
-	const glTemplateLabelType *label_type;
-	gdouble                    width, height;
+	const lglTemplateFrame *frame;
+	gdouble                 width, height;
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	label_type = gl_template_get_first_label_type (pi->template);
+	frame = lgl_template_get_first_frame (pi->template);
 
 	gl_label_get_size (label, &width, &height);
 

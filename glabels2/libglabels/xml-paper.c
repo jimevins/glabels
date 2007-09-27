@@ -49,16 +49,16 @@
 
 
 /**
- * gl_xml_paper_read_papers_from_file:
+ * lgl_xml_paper_read_papers_from_file:
  * @utf8_filename:       Filename of papers file (name encoded as UTF-8)
  *
  * Read paper definitions from a file.
  *
- * Returns: a list of #glPaper structures.
+ * Returns: a list of #lglPaper structures.
  *
  */
 GList *
-gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
+lgl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 {
 	gchar      *filename;
 	GList      *papers;
@@ -79,7 +79,7 @@ gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 		return NULL;
 	}
 
-	papers = gl_xml_paper_parse_papers_doc (papers_doc);
+	papers = lgl_xml_paper_parse_papers_doc (papers_doc);
 
 	g_free (filename);
 	xmlFreeDoc (papers_doc);
@@ -89,20 +89,20 @@ gl_xml_paper_read_papers_from_file (gchar *utf8_filename)
 
 
 /**
- * gl_xml_paper_parse_papers_doc:
+ * lgl_xml_paper_parse_papers_doc:
  * @papers_doc:  libxml #xmlDocPtr tree, representing a papers definition file.
  *
  * Read paper definitions from a libxml #xmlDocPtr tree.
  *
- * Returns: a list of #glPaper structures.
+ * Returns: a list of #lglPaper structures.
  *
  */
 GList *
-gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
+lgl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 {
 	GList      *papers = NULL;
 	xmlNodePtr  root, node;
-	glPaper    *paper;
+	lglPaper   *paper;
 
 	LIBXML_TEST_VERSION;
 
@@ -113,7 +113,7 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 		xmlFreeDoc (papers_doc);
 		return papers;
 	}
-	if (!gl_xml_is_node (root, "Glabels-paper-sizes")) {
+	if (!lgl_xml_is_node (root, "Glabels-paper-sizes")) {
 		g_message ("\"%s\" is not a glabels paper file (wrong root node)",
 			   papers_doc->name);
 		xmlFreeDoc (papers_doc);
@@ -122,12 +122,12 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
-		if (gl_xml_is_node (node, "Paper-size")) {
-			paper = gl_xml_paper_parse_paper_node (node);
+		if (lgl_xml_is_node (node, "Paper-size")) {
+			paper = lgl_xml_paper_parse_paper_node (node);
 			papers = g_list_append (papers, paper);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
-				if (!gl_xml_is_node (node, "comment")) {
+				if (!lgl_xml_is_node (node, "comment")) {
 					g_message ("bad node =  \"%s\"",node->name);
 				}
 			}
@@ -139,31 +139,31 @@ gl_xml_paper_parse_papers_doc (xmlDocPtr  papers_doc)
 
 
 /**
- * gl_xml_paper_parse_paper_node:
+ * lgl_xml_paper_parse_paper_node:
  * @paper_node:  libxml #xmlNodePtr paper node from a #xmlDocPtr tree.
  *
  * Read a single paper definition from a libxml #xmlNodePtr node.
  *
- * Returns: a pointer to a newly created #glPaper structure.
+ * Returns: a pointer to a newly created #lglPaper structure.
  *
  */
-glPaper *
-gl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
+lglPaper *
+lgl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {
-	glPaper               *paper;
+	lglPaper              *paper;
 	gchar                 *id, *name;
 	gdouble                width, height;
 
 	LIBXML_TEST_VERSION;
 
-	id   = gl_xml_get_prop_string (paper_node, "id", NULL);
+	id   = lgl_xml_get_prop_string (paper_node, "id", NULL);
 
-	name = gl_xml_get_prop_i18n_string (paper_node, "name", NULL);
+	name = lgl_xml_get_prop_i18n_string (paper_node, "name", NULL);
 
-	width  = gl_xml_get_prop_length (paper_node, "width", 0);
-	height = gl_xml_get_prop_length (paper_node, "height", 0);
+	width  = lgl_xml_get_prop_length (paper_node, "width", 0);
+	height = lgl_xml_get_prop_length (paper_node, "height", 0);
 
-	paper = gl_paper_new (id, name, width, height);
+	paper = lgl_paper_new (id, name, width, height);
 
 	g_free (id);
 	g_free (name);
