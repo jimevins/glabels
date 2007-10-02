@@ -45,12 +45,6 @@ struct _lglCategory {
 
 
 /*
- * Module initialization
- */
-void              lgl_category_init                (void);
-
-
-/*
  * Category construction
  */
 lglCategory      *lgl_category_new                 (gchar            *id,

@@ -1,0 +1,107 @@
+<!-- ##### SECTION Title ##### -->
+Categories
+
+<!-- ##### SECTION Short_Description ##### -->
+Template category definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a structure for representing categories of stationary and related
+functions.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT lglCategory ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+
+<!-- ##### FUNCTION lgl_category_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_free ##### -->
+<para>
+
+</para>
+
+@category: 
+
+
+<!-- ##### FUNCTION lgl_category_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION lgl_category_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+

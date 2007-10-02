@@ -36,4 +36,9 @@
 #undef  G_LOG_DOMAIN
 #define G_LOG_DOMAIN "LibGlabels"
 
+void lgl_template_init (void);
+void lgl_paper_init (void);
+void lgl_category_init (void);
+
+
 #endif /* __LIBGLABELS_PRIVATE_H__ */

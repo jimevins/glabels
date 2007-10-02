@@ -1,0 +1,235 @@
+<!-- ##### SECTION Title ##### -->
+The lglTemplate Structure
+
+<!-- ##### SECTION Short_Description ##### -->
+How templates are represented in memory
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a set of structures that represent a template in memory.  It also
+describes functions for querying such structures.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT lglTemplate ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@categories: 
+@frames: 
+@aliases: 
+
+<!-- ##### ENUM lglTemplateFrameShape ##### -->
+<para>
+
+</para>
+
+@LGL_TEMPLATE_FRAME_SHAPE_RECT: 
+@LGL_TEMPLATE_FRAME_SHAPE_ROUND: 
+@LGL_TEMPLATE_FRAME_SHAPE_CD: 
+
+<!-- ##### UNION lglTemplateFrame ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT lglTemplateFrameAll ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+
+<!-- ##### STRUCT lglTemplateFrameRect ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+
+<!-- ##### STRUCT lglTemplateFrameRound ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@r: 
+@waste: 
+
+<!-- ##### STRUCT lglTemplateFrameCD ##### -->
+<para>
+
+</para>
+
+@shape: 
+@id: 
+@layouts: 
+@markups: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+
+<!-- ##### STRUCT lglTemplateLayout ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+
+<!-- ##### ENUM lglTemplateMarkupType ##### -->
+<para>
+
+</para>
+
+@LGL_TEMPLATE_MARKUP_MARGIN: 
+@LGL_TEMPLATE_MARKUP_LINE: 
+@LGL_TEMPLATE_MARKUP_CIRCLE: 
+@LGL_TEMPLATE_MARKUP_RECT: 
+
+<!-- ##### UNION lglTemplateMarkup ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT lglTemplateMarkupMargin ##### -->
+<para>
+
+</para>
+
+@type: 
+@size: 
+
+<!-- ##### STRUCT lglTemplateMarkupLine ##### -->
+<para>
+
+</para>
+
+@type: 
+@x1: 
+@y1: 
+@x2: 
+@y2: 
+
+<!-- ##### STRUCT lglTemplateMarkupCircle ##### -->
+<para>
+
+</para>
+
+@type: 
+@x0: 
+@y0: 
+@r: 
+
+<!-- ##### STRUCT lglTemplateMarkupRect ##### -->
+<para>
+
+</para>
+
+@type: 
+@x1: 
+@y1: 
+@w: 
+@h: 
+@r: 
+
+<!-- ##### STRUCT lglTemplateOrigin ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+
+<!-- ##### FUNCTION lgl_template_get_first_frame ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_does_page_size_match ##### -->
+<para>
+
+</para>
+
+@template: 
+@page_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_does_category_match ##### -->
+<para>
+
+</para>
+
+@template: 
+@category: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_get_size ##### -->
+<para>
+
+</para>
+
+@frame: 
+@w: 
+@h: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_get_n_labels ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_get_origins ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+

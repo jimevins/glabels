@@ -47,10 +47,12 @@
 /**
  * lgl_init:
  *
- * Initialize all libglabels subsystems.  This function reads in all files
- * containing paper definitions, category definitions, and templates to build
- * its template data base. This function will search both system and user template
- * directories for these files.
+ * Initialize all libglabels subsystems.  An application should call lgl_init() once
+ * before calling any other libglabels functions.
+ *
+ * This function reads in all files containing paper definitions, category definitions,
+ * and templates to build its template data base. This function will search both system
+ * and user template directories for these files.
  */
 void
 lgl_init (void)

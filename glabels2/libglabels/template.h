@@ -246,10 +246,8 @@ struct _lglTemplateOrigin {
 
 
 /*
- * Module Initialization
+ * Template registration
  */
-void                 lgl_template_init                  (void);
-
 void                 lgl_template_register              (const lglTemplate    *template);
 
 /*
@@ -326,10 +324,10 @@ lglTemplateFrame    *lgl_template_frame_cd_new         (const gchar          *id
                                                         gdouble               h,
                                                         gdouble               waste);
 
-void                 lgl_template_add_layout           (lglTemplateFrame     *frame,
+void                 lgl_template_frame_add_layout     (lglTemplateFrame     *frame,
                                                         lglTemplateLayout    *layout);
 
-void                 lgl_template_add_markup           (lglTemplateFrame     *frame,
+void                 lgl_template_frame_add_markup     (lglTemplateFrame     *frame,
                                                         lglTemplateMarkup    *markup);
 
 lglTemplateLayout   *lgl_template_layout_new           (gint                  nx,
@@ -356,7 +354,7 @@ lglTemplateMarkup   *lgl_template_markup_rect_new      (gdouble               x1
                                                         gdouble               h,
                                                         gdouble               r);
 
-lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig);
+lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig_template);
 
 void                 lgl_template_free                 (lglTemplate          *template);
 

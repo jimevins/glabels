@@ -8,21 +8,27 @@
     <title>LibGlabels Reference Manual</title>
   </bookinfo>
 
-  <chapter>
+  <part>
     <title>Basic LibGlabels Usage</title>
     <xi:include href="xml/init.xml"/>
-    <xi:include href="xml/template.xml"/>
+    <chapter>
+      <title>Templates</title>
+      <xi:include href="xml/template-struct.xml"/>
+      <xi:include href="xml/template-db.xml"/>
+      <xi:include href="xml/template-construction.xml"/>
+      <xi:include href="xml/template-misc.xml"/>
+    </chapter>
     <xi:include href="xml/paper.xml"/>
     <xi:include href="xml/category.xml"/>
     <xi:include href="xml/enums.xml"/>
-  </chapter>
+  </part>
 
-  <chapter>
+  <part>
     <title>Working Directly With LibGlabels XML</title>
     <xi:include href="xml/xml-paper.xml"/>
     <xi:include href="xml/xml-category.xml"/>
     <xi:include href="xml/xml-template.xml"/>
     <xi:include href="xml/xml.xml"/>
-  </chapter>
+  </part>
 
 </book>

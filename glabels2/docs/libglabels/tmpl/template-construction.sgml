@@ -1,0 +1,243 @@
+<!-- ##### SECTION Title ##### -->
+Construction Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+Functions to help create new templates
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a set of functions for constructing new template structures.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_template_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@description: 
+@page_size: 
+@page_width: 
+@page_height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_dup ##### -->
+<para>
+
+</para>
+
+@orig_template: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_free ##### -->
+<para>
+
+</para>
+
+@template: 
+
+
+<!-- ##### FUNCTION lgl_template_add_category ##### -->
+<para>
+
+</para>
+
+@template: 
+@category: 
+
+
+<!-- ##### FUNCTION lgl_template_add_frame ##### -->
+<para>
+
+</para>
+
+@template: 
+@frame: 
+
+
+<!-- ##### FUNCTION lgl_template_add_alias ##### -->
+<para>
+
+</para>
+
+@template: 
+@alias: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_rect_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@w: 
+@h: 
+@r: 
+@x_waste: 
+@y_waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_round_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r: 
+@waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_cd_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@r1: 
+@r2: 
+@w: 
+@h: 
+@waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_dup ##### -->
+<para>
+
+</para>
+
+@orig_frame: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_free ##### -->
+<para>
+
+</para>
+
+@frame: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_add_layout ##### -->
+<para>
+
+</para>
+
+@frame: 
+@layout: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_add_markup ##### -->
+<para>
+
+</para>
+
+@frame: 
+@markup: 
+
+
+<!-- ##### FUNCTION lgl_template_layout_new ##### -->
+<para>
+
+</para>
+
+@nx: 
+@ny: 
+@x0: 
+@y0: 
+@dx: 
+@dy: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_layout_dup ##### -->
+<para>
+
+</para>
+
+@orig_layout: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_layout_free ##### -->
+<para>
+
+</para>
+
+@layout: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_margin_new ##### -->
+<para>
+
+</para>
+
+@size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_line_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@x2: 
+@y2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_circle_new ##### -->
+<para>
+
+</para>
+
+@x0: 
+@y0: 
+@r: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_rect_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@w: 
+@h: 
+@r: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_dup ##### -->
+<para>
+
+</para>
+
+@orig_markup: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_free ##### -->
+<para>
+
+</para>
+
+@markup: 
+
+

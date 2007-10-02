@@ -1,7 +1,7 @@
-55% symbol docs coverage.
-71 symbols documented.
+85% symbol docs coverage.
+111 symbols documented.
 0 symbols incomplete.
-57 not documented.
+19 not documented.
 
 
 LGL_XML_NAME_SPACE
@@ -23,43 +23,5 @@ lglTemplateMarkupRect
 lglTemplateMarkupType
 lglTemplateOrigin
 lglUnitsType
-lgl_template_add_alias
-lgl_template_add_category
-lgl_template_add_frame
-lgl_template_add_layout
-lgl_template_add_markup
-lgl_template_does_category_match
-lgl_template_does_page_size_match
-lgl_template_dup
-lgl_template_frame_cd_new
-lgl_template_frame_dup
-lgl_template_frame_free
-lgl_template_frame_get_n_labels
-lgl_template_frame_get_origins
-lgl_template_frame_get_size
-lgl_template_frame_rect_new
-lgl_template_frame_round_new
-lgl_template_free
-lgl_template_free_name_list
-lgl_template_from_name
-lgl_template_get_first_frame
-lgl_template_get_name_list_all
-lgl_template_get_name_list_unique
-lgl_template_init
-lgl_template_layout_dup
-lgl_template_layout_free
-lgl_template_layout_new
-lgl_template_markup_circle_new
-lgl_template_markup_dup
-lgl_template_markup_free
-lgl_template_markup_line_new
-lgl_template_markup_margin_new
-lgl_template_markup_rect_new
-lgl_template_new
-lgl_template_print_aliases
-lgl_template_print_known_templates
-lgl_template_register
-lgl_xml_template_create_templates_doc
 
 
-init:Long_Description

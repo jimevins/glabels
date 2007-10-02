@@ -46,8 +46,6 @@ void         lgl_xml_template_write_templates_to_file  (GList             *templ
 void         lgl_xml_template_write_template_to_file   (const lglTemplate *template,
 							const gchar       *utf8_filename);
 
-xmlDocPtr    lgl_xml_template_create_templates_doc     (GList             *templates);
-
 void         lgl_xml_template_create_template_node     (const lglTemplate *template,
 							xmlNodePtr         root,
 							const xmlNsPtr     ns);

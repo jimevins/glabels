@@ -1,0 +1,65 @@
+<!-- ##### SECTION Title ##### -->
+Database
+
+<!-- ##### SECTION Short_Description ##### -->
+Database of pre-defined templates
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a set of functions to locate pre-defined templates and add templates
+to the LibGlabels template database.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_template_get_name_list_unique ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_get_name_list_all ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION lgl_template_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_register ##### -->
+<para>
+
+</para>
+
+@template: 
+
+

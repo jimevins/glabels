@@ -68,9 +68,14 @@ static gint         compare_origins              (gconstpointer           a,
                                                   gconstpointer           b,
                                                   gpointer                user_data);
 
-/*****************************************************************************/
-/* Initialize module.                                                        */
-/*****************************************************************************/
+/**
+ * lgl_template_init:
+ *
+ * Initialize libglabels template module by reading all paper definition
+ * files located in system and user template directories.
+ *
+ * The end user would typically call lgl_init() instead.
+ */
 void
 lgl_template_init (void)
 {
@@ -92,9 +97,13 @@ lgl_template_init (void)
 	lgl_paper_free_id_list (page_sizes);
 }
 
-/*****************************************************************************/
-/* Register template: if not in current list, add it.                        */
-/*****************************************************************************/
+/**
+ * lgl_template_register:
+ * @template:  Pointer to a template structure to add to database.
+ *
+ * Register a template.  This function adds a template to the template database.
+ * The template will be stored in an individual XML file in the user template directory.
+ */
 void
 lgl_template_register (const lglTemplate  *template)
 {
@@ -144,9 +153,21 @@ lgl_template_register (const lglTemplate  *template)
 
 }
 
-/*********************************************************************************/
-/* Get a list of valid names of unique templates for given page size             */
-/*********************************************************************************/
+/**
+ * lgl_template_get_name_list_unique:
+ * @page_size: If non NULL, limit results to given page size.
+ * @category: If non NULL, limit results to given template category.
+ *
+ * Get a list of valid names of unique templates in the template database.  Results
+ * can be filtered by page size and/or template category.  A list of valid page sizes
+ * can be obtained using lgl_paper_get_id_list().  A list of valid template categories
+ * can be obtained using lgl_category_get_id_list().
+ *
+ * This function differs from lgl_template_get_name_list_all(), because it does not
+ * return multiple names for the same template.
+ *
+ * Returns: a list of template names.
+ */
 GList *
 lgl_template_get_name_list_unique (const gchar *page_size,
                                    const gchar *category)
@@ -174,9 +195,21 @@ lgl_template_get_name_list_unique (const gchar *page_size,
 	return names;
 }
 
-/*********************************************************************************/
-/* Get a list of all valid template names for given page size (includes aliases) */
-/*********************************************************************************/
+/**
+ * lgl_template_get_name_list_all:
+ * @page_size: If non NULL, limit results to given page size.
+ * @category: If non NULL, limit results to given template category.
+ *
+ * Get a list of valid names and aliases of unique templates in the template database.
+ * Results can be filtered by page size and/or template category.  A list of valid page
+ * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
+ * categories can be obtained using lgl_category_get_id_list().
+ *
+ * This function differs from lgl_template_get_name_list_unique(), because it will
+ * return multiple names for the same template.
+ *
+ * Returns: a list of template names and aliases.
+ */
 GList *
 lgl_template_get_name_list_all (const gchar *page_size,
                                 const gchar *category)
@@ -210,9 +243,14 @@ lgl_template_get_name_list_all (const gchar *page_size,
 	return names;
 }
 
-/*****************************************************************************/
-/* Free a list of template names.                                            */
-/*****************************************************************************/
+/**
+ * lgl_template_free_name_list:
+ * @names: List of template name strings to be freed.
+ *
+ * Free up all storage associated with a list of template names obtained with
+ * lgl_template_get_name_list_all() or lgl_template_get_name_list_unique().
+ *
+ */
 void
 lgl_template_free_name_list (GList *names)
 {
@@ -226,9 +264,15 @@ lgl_template_free_name_list (GList *names)
 	g_list_free (names);
 }
 
-/*****************************************************************************/
-/* Return a template structure from a name.                                  */
-/*****************************************************************************/
+/**
+ * lgl_template_from_name:
+ * @name: name string
+ *
+ * Lookup template in template database from name string.
+ *
+ * Returns: pointer to a newly allocated #lglTemplate structure.
+ *
+ */
 lglTemplate *
 lgl_template_from_name (const gchar *name)
 {
@@ -259,9 +303,19 @@ lgl_template_from_name (const gchar *name)
 	return lgl_template_dup ((lglTemplate *) templates->data);
 }
 
-/*****************************************************************************/
-/* Get first label type in template.                                         */
-/*****************************************************************************/
+/**
+ * lgl_template_get_first_frame:
+ * @template: #lglTemplate structure to query
+ *
+ * Lookup first #lglTemplateFrame in the given #lglTemplate.  The returned
+ * value is simply a pointer to the given frame within the template and should
+ * not be freed.
+ *
+ * Note: glabels currently only supports a single frame per template.
+ *
+ * Returns: pointer to #lglTemplateFrame structure.
+ *
+ */
 const lglTemplateFrame *
 lgl_template_get_first_frame (const lglTemplate *template)
 {
@@ -270,9 +324,15 @@ lgl_template_get_first_frame (const lglTemplate *template)
 	return (lglTemplateFrame *)template->frames->data;
 }
 
-/****************************************************************************/
-/* Get raw label size (width and height).                                   */
-/****************************************************************************/
+/**
+ * lgl_template_frame_get_size:
+ * @frame: #lglTemplateFrame structure to query
+ * @w: pointer to location to receive width of frame
+ * @h: pointer to location to receive height of frame
+ *
+ * Get size (width and height) of given #lglTemplateFrame in points.
+ *
+ */
 void
 lgl_template_frame_get_size (const lglTemplateFrame *frame,
                              gdouble                *w,
@@ -308,9 +368,15 @@ lgl_template_frame_get_size (const lglTemplateFrame *frame,
 	}
 }
 
-/****************************************************************************/
-/* Get total number of labels per sheet of a label type.                    */
-/****************************************************************************/
+/**
+ * lgl_template_frame_get_n_labels:
+ * @frame: #lglTemplateFrame structure to query
+ *
+ * Get total number of labels per sheet corresponding to the given frame.
+ *
+ * Returns: number of labels per sheet.
+ *
+ */
 gint
 lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 {
@@ -329,9 +395,17 @@ lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 	return n_labels;
 }
 
-/****************************************************************************/
-/* Get array of origins of individual labels.                               */
-/****************************************************************************/
+/**
+ * lgl_template_frame_get_origins:
+ * @frame: #lglTemplateFrame structure to query
+ *
+ * Get an array of label origins for the given frame.  These origins represent the
+ * upper left hand corner of each label on a page corresponding to the given frame.
+ * The array should be freed using g_free().
+ *
+ * Returns: A newly allocated array of #lglTemplateOrigin structures.
+ *
+ */
 lglTemplateOrigin *
 lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 {
@@ -363,9 +437,22 @@ lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 	return origins;
 }
 
-/*****************************************************************************/
-/* Create a new template with given properties.                              */
-/*****************************************************************************/
+/**
+ * lgl_template_new:
+ *   @name:         Template name
+ *   @description:  Template descriptions
+ *   @page_size:    Page size id
+ *   @page_width:   Page width in points, set to zero unless page_size="Other"
+ *   @page_height:  Page height in points, set to zero unless page_size="Other"
+ *
+ * Create a new template structure, with the given top-level attributes.  The
+ * created template will have no initial aliases, categories, or frames
+ * associated with it.  See lgl_template_add_alias(), lgl_template_add_category(),
+ * and lgl_template_add_frame() to add these.
+ *
+ * Returns: pointer to a newly allocated #lglTemplate structure.
+ *
+ */
 lglTemplate *
 lgl_template_new (const gchar         *name,
                   const gchar         *description,
@@ -390,9 +477,16 @@ lgl_template_new (const gchar         *name,
 	return template;
 }
 
-/*****************************************************************************/
-/* Does page size match given id?                                            */
-/*****************************************************************************/
+/**
+ * lgl_template_does_page_size_match:
+ *   @template:  Pointer to template structure to test
+ *   @page_size: Page size ID string
+ *
+ * This function tests if the page size of the template matches the given ID.
+ *
+ * Returns:  TRUE if the template matches the given page size ID.
+ *
+ */
 gboolean
 lgl_template_does_page_size_match (const lglTemplate  *template,
                                    const gchar        *page_size)
@@ -408,9 +502,16 @@ lgl_template_does_page_size_match (const lglTemplate  *template,
         return g_strcasecmp(page_size, template->page_size) == 0;
 }
 
-/*****************************************************************************/
-/* Does category match given id?                                             */
-/*****************************************************************************/
+/**
+ * lgl_template_does_category_match:
+ *   @template:  Pointer to template structure to test
+ *   @category:  Category ID string
+ *
+ * This function tests if the given template belongs to the given category ID.
+ *
+ * Returns:  TRUE if the template matches the given category ID.
+ *
+ */
 gboolean
 lgl_template_does_category_match  (const lglTemplate  *template,
                                    const gchar        *category)
@@ -436,9 +537,36 @@ lgl_template_does_category_match  (const lglTemplate  *template,
         return FALSE;
 }
 
-/*****************************************************************************/
-/* Add category to category list of template.                                */
-/*****************************************************************************/
+/**
+ * lgl_template_add_frame:
+ *   @template:  Pointer to template structure
+ *   @frame:     Pointer to frame structure
+ *
+ * This function adds the given frame structure to the template.  Once added,
+ * the frame structure belongs to the given template; do not attempt to free
+ * it.
+ *
+ * Note: Currently glabels only supports a single frame per template.
+ *
+ */
+void
+lgl_template_add_frame (lglTemplate      *template,
+                        lglTemplateFrame *frame)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (frame);
+
+	template->frames = g_list_append (template->frames, frame);
+}
+ 
+/**
+ * lgl_template_add_category:
+ *   @template:  Pointer to template structure
+ *   @category:  Category ID string
+ *
+ * This function adds the given category ID to a templates category list.
+ *
+ */
 void
 lgl_template_add_category (lglTemplate         *template,
                            const gchar         *category)
@@ -450,22 +578,14 @@ lgl_template_add_category (lglTemplate         *template,
                                               g_strdup (category));
 }
  
-/*****************************************************************************/
-/* Add label type structure to label type list of template.                  */
-/*****************************************************************************/
-void
-lgl_template_add_frame (lglTemplate      *template,
-                        lglTemplateFrame *frame)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (frame);
-
-	template->frames = g_list_append (template->frames, frame);
-}
- 
-/*****************************************************************************/
-/* Add alias to alias list of template.                                      */
-/*****************************************************************************/
+/**
+ * lgl_template_add_alias:
+ *   @template:  Pointer to template structure
+ *   @alias:     Alias string
+ *
+ * This function adds the given alias to a templates list of aliases.
+ *
+ */
 void
 lgl_template_add_alias (lglTemplate         *template,
                         const gchar         *alias)
@@ -477,9 +597,20 @@ lgl_template_add_alias (lglTemplate         *template,
 					   g_strdup (alias));
 }
  
-/*****************************************************************************/
-/* Create a new label type structure for a rectangular label.                */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_rect_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @w:       width of frame in points.
+ *   @h:       height of frame in points.
+ *   @r:       radius of rounded corners in points.  (Should be 0 for square corners.)
+ *   @x_waste: Amount of overprint to allow in the horizontal direction.
+ *   @y_waste: Amount of overprint to allow in the vertical direction.
+ *
+ * This function creates a new template frame for a rectangular label or card.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
 lglTemplateFrame *
 lgl_template_frame_rect_new  (const gchar         *id,
                               gdouble              w,
@@ -504,9 +635,17 @@ lgl_template_frame_rect_new  (const gchar         *id,
 	return frame;
 }
 
-/*****************************************************************************/
-/* Create a new label type structure for a round label.                      */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_round_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @r:       radius of label in points.
+ *   @waste:   Amount of overprint to allow.
+ *
+ * This function creates a new template frame for a round label.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
 lglTemplateFrame *
 lgl_template_frame_round_new (const gchar         *id,
                               gdouble              r,
@@ -525,9 +664,20 @@ lgl_template_frame_round_new (const gchar         *id,
 	return frame;
 }
                                                                                
-/*****************************************************************************/
-/* Create a new label type structure for a CD/DVD label.                     */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_cd_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @r1:      outer radius of label in points.
+ *   @r2:      radius of center hole in points.
+ *   @w:       clip width of frame in points for business card CDs.  Should be 0 for no clipping.
+ *   @h:       clip height of frame in points for business card CDs.  Should be 0 for no clipping.
+ *   @waste:   Amount of overprint to allow.
+ *
+ * This function creates a new template frame for a CD/DVD label.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
 lglTemplateFrame *
 lgl_template_frame_cd_new (const gchar         *id,
                            gdouble              r1,
@@ -552,12 +702,17 @@ lgl_template_frame_cd_new (const gchar         *id,
 	return frame;
 }
 
-/*****************************************************************************/
-/* Add a layout to a label type.                                             */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_add_layout:
+ *   @frame:  Pointer to template frame to add layout to.
+ *   @layout: Pointer to layout structure to add to frame.
+ *
+ * This function adds a layout structure to the given template frame.
+ *
+ */
 void
-lgl_template_add_layout (lglTemplateFrame   *frame,
-                         lglTemplateLayout  *layout)
+lgl_template_frame_add_layout (lglTemplateFrame   *frame,
+                               lglTemplateLayout  *layout)
 {
 	g_return_if_fail (frame);
 	g_return_if_fail (layout);
@@ -565,12 +720,17 @@ lgl_template_add_layout (lglTemplateFrame   *frame,
 	frame->all.layouts = g_list_append (frame->all.layouts, layout);
 }
  
-/*****************************************************************************/
-/* Add a markup item to a label type.                                        */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_add_markup:
+ *   @frame:  Pointer to template frame to add markup to.
+ *   @markup: Pointer to markup structure to add to frame.
+ *
+ * This function adds a markup structure to the given template frame.
+ *
+ */
 void
-lgl_template_add_markup (lglTemplateFrame   *frame,
-                         lglTemplateMarkup  *markup)
+lgl_template_frame_add_markup (lglTemplateFrame   *frame,
+                               lglTemplateMarkup  *markup)
 {
 	g_return_if_fail (frame);
 	g_return_if_fail (markup);
@@ -578,9 +738,20 @@ lgl_template_add_markup (lglTemplateFrame   *frame,
 	frame->all.markups = g_list_append (frame->all.markups, markup);
 }
  
-/*****************************************************************************/
-/* Create new layout structure.                                              */
-/*****************************************************************************/
+/**
+ * lgl_template_layout_new:
+ *   @nx:  Number of labels across.
+ *   @ny:  Number of labels down.
+ *   @x0:  X coordinate of the top-left corner of the top-left label in the layout in points.
+ *   @y0:  Y coordinate of the top-left corner of the top-left label in the layout in points.
+ *   @dx:  Horizontal pitch in points.  This is the distance from left-edge to left-edge.
+ *   @dy:  Vertical pitch in points.  This is the distance from top-edge to top-edge.
+ *
+ * This function creates a new layout structure with the given parameters.
+ *
+ * Returns: a newly allocated #lglTemplateLayout structure.
+ *
+ */
 lglTemplateLayout *
 lgl_template_layout_new (gint    nx,
                          gint    ny,
@@ -603,9 +774,15 @@ lgl_template_layout_new (gint    nx,
 	return layout;
 }
 
-/*****************************************************************************/
-/* Create new margin markup structure.                                       */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_margin_new:
+ *   @size: margin size in points.
+ *
+ * This function creates a new margin markup structure.
+ *
+ * Returns: a newly allocated #lglTemplateMarkup structure.
+ *
+ */
 lglTemplateMarkup *
 lgl_template_markup_margin_new (gdouble size)
 {
@@ -619,9 +796,18 @@ lgl_template_markup_margin_new (gdouble size)
 	return markup;
 }
 
-/*****************************************************************************/
-/* Create new markup line structure.                                         */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_line_new:
+ *   @x1: x coordinate of first endpoint.
+ *   @y1: y coordinate of first endpoint.
+ *   @x2: x coordinate of second endpoint.
+ *   @y2: y coordinate of second endpoint.
+ *
+ * This function creates a new line markup structure.
+ *
+ * Returns: a newly allocated #lglTemplateMarkup structure.
+ *
+ */
 lglTemplateMarkup *
 lgl_template_markup_line_new (gdouble x1,
                               gdouble y1,
@@ -641,9 +827,17 @@ lgl_template_markup_line_new (gdouble x1,
 	return markup;
 }
 
-/*****************************************************************************/
-/* Create new markup circle structure.                                       */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_circle_new:
+ *   @x0: x coordinate of center of circle.
+ *   @y0: y coordinate of center of circle.
+ *   @r:  radius of circle.
+ *
+ * This function creates a new circle markup structure.
+ *
+ * Returns: a newly allocated #lglTemplateMarkup structure.
+ *
+ */
 lglTemplateMarkup *
 lgl_template_markup_circle_new (gdouble x0,
                                 gdouble y0,
@@ -661,9 +855,19 @@ lgl_template_markup_circle_new (gdouble x0,
 	return markup;
 }
 
-/*****************************************************************************/
-/* Create new markup rect structure.                                         */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_rect_new:
+ *   @x1: x coordinate of top-left corner of rectangle.
+ *   @y1: y coordinate of top-left corner of rectangle.
+ *   @w:  width of rectangle.
+ *   @h:  height of rectangle.
+ *   @r:  radius of rounded corner.
+ *
+ * This function creates a new rectangle markup structure.
+ *
+ * Returns: a newly allocated #lglTemplateMarkup structure.
+ *
+ */
 lglTemplateMarkup *
 lgl_template_markup_rect_new (gdouble x1,
                               gdouble y1,
@@ -686,9 +890,15 @@ lgl_template_markup_rect_new (gdouble x1,
 }
 
 
-/*****************************************************************************/
-/* Copy a template.                                                          */
-/*****************************************************************************/
+/**
+ * lgl_template_dup:
+ *   @orig_template: Template to duplicate.
+ *
+ * This function duplicates a template structure.
+ *
+ * Returns:  a newly allocated #lglTemplate structure.
+ *
+ */
 lglTemplate *
 lgl_template_dup (const lglTemplate *orig_template)
 {
@@ -728,9 +938,13 @@ lgl_template_dup (const lglTemplate *orig_template)
 	return template;
 }
 
-/*****************************************************************************/
-/* Free up a template.                                                       */
-/*****************************************************************************/
+/**
+ * lgl_template_free:
+ *   @template: Template to free.
+ *
+ * This function frees all memory associated with given template structure.
+ *
+ */
 void
 lgl_template_free (lglTemplate *template)
 {
@@ -782,9 +996,15 @@ lgl_template_free (lglTemplate *template)
 
 }
 
-/*****************************************************************************/
-/* Copy a template label type.                                               */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_dup:
+ *   @orig_frame: Frame to duplicate.
+ *
+ * This function duplicates a template frame structure.
+ *
+ * Returns:  a newly allocated #lglTemplateFrame structure.
+ *
+ */
 lglTemplateFrame *
 lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 {
@@ -846,9 +1066,13 @@ lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 	return frame;
 }
 
-/*****************************************************************************/
-/* Free up a template label type.                                            */
-/*****************************************************************************/
+/**
+ * lgl_template_frame_free:
+ *   @frame: Frame to free.
+ *
+ * This function frees all memory associated with given template frame structure.
+ *
+ */
 void
 lgl_template_frame_free (lglTemplateFrame *frame)
 {
@@ -887,9 +1111,15 @@ lgl_template_frame_free (lglTemplateFrame *frame)
 
 }
 
-/*****************************************************************************/
-/* Duplicate layout structure.                                               */
-/*****************************************************************************/
+/**
+ * lgl_template_layout_dup:
+ *   @orig_layout: Layout to duplicate.
+ *
+ * This function duplicates a template layout structure.
+ *
+ * Returns:  a newly allocated #lglTemplateLayout structure.
+ *
+ */
 lglTemplateLayout *
 lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 {
@@ -905,18 +1135,28 @@ lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 	return layout;
 }
 
-/*****************************************************************************/
-/* Free layout structure.                                                    */
-/*****************************************************************************/
+/**
+ * lgl_template_layout_free:
+ *   @layout: Layout to free.
+ *
+ * This function frees all memory associated with given template layout structure.
+ *
+ */
 void
 lgl_template_layout_free (lglTemplateLayout *layout)
 {
 	g_free (layout);
 }
 
-/*****************************************************************************/
-/* Duplicate markup structure.                                               */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_dup:
+ *   @orig_markup: Markup to duplicate.
+ *
+ * This function duplicates a template markup structure.
+ *
+ * Returns:  a newly allocated #lglTemplateMarkup structure.
+ *
+ */
 lglTemplateMarkup *
 lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 {
@@ -931,9 +1171,13 @@ lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 	return markup;
 }
 
-/*****************************************************************************/
-/* Free markup structure.                                                    */
-/*****************************************************************************/
+/**
+ * lgl_template_markup_free:
+ *   @markup: Markup to free.
+ *
+ * This function frees all memory associated with given template markup structure.
+ *
+ */
 void
 lgl_template_markup_free (lglTemplateMarkup *markup)
 {
@@ -1086,9 +1330,12 @@ compare_origins (gconstpointer a,
 	}
 }
 
-/*****************************************************************************/
-/* Print all known templates (for debugging purposes).                       */
-/*****************************************************************************/
+/**
+ * lgl_template_print_known_templates:
+ *
+ * Print all known templates (for debugging purposes).
+ *
+ */
 void
 lgl_template_print_known_templates (void)
 {
@@ -1107,9 +1354,13 @@ lgl_template_print_known_templates (void)
 
 }
 
-/*****************************************************************************/
-/* Print all aliases of a template (for debugging purposes).                 */
-/*****************************************************************************/
+/**
+ * lgl_template_print_aliases:
+ *   @template: template
+ *
+ * Print all aliases of a template (for debugging purposes).
+ *
+ */
 void
 lgl_template_print_aliases (const lglTemplate *template)
 {

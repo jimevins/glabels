@@ -1,12 +1,12 @@
 <!-- ##### SECTION Title ##### -->
-Initialization
+Miscellaneous Functions
 
 <!-- ##### SECTION Short_Description ##### -->
-Initialization of the LibGlabels library.
+Miscellaneous template functions
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-This section describes the LibGlabels initialization function.
+This section describes miscellaneous template functions.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -17,10 +17,18 @@ This section describes the LibGlabels initialization function.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### FUNCTION lgl_init ##### -->
+<!-- ##### FUNCTION lgl_template_print_known_templates ##### -->
 <para>
 
 </para>
 
+
+
+<!-- ##### FUNCTION lgl_template_print_aliases ##### -->
+<para>
+
+</para>
+
+@template: 
 
 

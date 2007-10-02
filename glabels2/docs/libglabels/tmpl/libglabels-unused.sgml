@@ -22,6 +22,79 @@
 libglabels
 
 
+<!-- ##### SECTION ./tmpl/template.sgml:Long_Description ##### -->
+<para>
+This section describes a set of structures representing stationary templates and related
+functions.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template.sgml:Short_Description ##### -->
+Template definitions
+
+
+<!-- ##### SECTION ./tmpl/template.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template.sgml:Title ##### -->
+Templates
+
+
+<!-- ##### SECTION ./tmpl/template2.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template2.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template2.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template2.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template2.sgml:Title ##### -->
+template2
+
+
+<!-- ##### SECTION ./tmpl/template3.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template3.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template3.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template3.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template3.sgml:Title ##### -->
+template3
+
+
 <!-- ##### MACRO GL_XML_NAME_SPACE ##### -->
 <para>
 
@@ -1102,4 +1175,46 @@ the CSS2 Specification (Section 4.3.2).
 
 @templates: 
 @utf8_filename: 
+
+<!-- ##### FUNCTION lgl_category_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_paper_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_template_add_layout ##### -->
+<para>
+
+</para>
+
+@frame: 
+@layout: 
+
+<!-- ##### FUNCTION lgl_template_add_markup ##### -->
+<para>
+
+</para>
+
+@frame: 
+@markup: 
+
+<!-- ##### FUNCTION lgl_template_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_xml_template_create_templates_doc ##### -->
+<para>
+
+</para>
+
+@templates: 
+@Returns: 
 

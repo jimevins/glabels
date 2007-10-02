@@ -46,12 +46,6 @@ struct _lglPaper {
 
 
 /*
- * Module initialization
- */
-void                 lgl_paper_init                (void);
-
-
-/*
  * Paper construction
  */
 lglPaper            *lgl_paper_new                 (gchar           *id,

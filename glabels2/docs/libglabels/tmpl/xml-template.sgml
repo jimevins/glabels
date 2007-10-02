@@ -64,15 +64,6 @@ template files and document files.
 @utf8_filename: 
 
 
-<!-- ##### FUNCTION lgl_xml_template_create_templates_doc ##### -->
-<para>
-
-</para>
-
-@templates: 
-@Returns: 
-
-
 <!-- ##### FUNCTION lgl_xml_template_create_template_node ##### -->
 <para>
 
