@@ -1053,14 +1053,14 @@ lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 
 		layout = (lglTemplateLayout *)p->data;
 
-		lgl_template_add_layout (frame, lgl_template_layout_dup (layout));
+		lgl_template_frame_add_layout (frame, lgl_template_layout_dup (layout));
 	}
 
 	for ( p=orig_frame->all.markups; p != NULL; p=p->next ) {
 
 		markup = (lglTemplateMarkup *)p->data;
 
-		lgl_template_add_markup (frame, lgl_template_markup_dup (markup));
+		lgl_template_frame_add_markup (frame, lgl_template_markup_dup (markup));
 	}
 
 	return frame;
@@ -1219,9 +1219,9 @@ template_full_page (const gchar *page_size)
                                              0.0);
 	lgl_template_add_frame (template, frame);
 
-	lgl_template_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
+	lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
 
-	lgl_template_add_markup (frame, lgl_template_markup_margin_new (9.0));
+	lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (9.0));
 
 	g_free (name);
 	name = NULL;

@@ -1691,22 +1691,22 @@ build_template (glTemplateDesigner      *dialog)
 	}
 	lgl_template_add_frame (template, frame);
 
-	lgl_template_add_markup (frame,
-				lgl_template_markup_margin_new (margin/upp));
+	lgl_template_frame_add_markup (frame,
+                                       lgl_template_markup_margin_new (margin/upp));
 
-	lgl_template_add_layout (frame,
-				lgl_template_layout_new (nx_1, ny_1,
-							x0_1/upp,
-							y0_1/upp,
-							dx_1/upp,
-							dy_1/upp));
+	lgl_template_frame_add_layout (frame,
+                                       lgl_template_layout_new (nx_1, ny_1,
+                                                                x0_1/upp,
+                                                                y0_1/upp,
+                                                                dx_1/upp,
+                                                                dy_1/upp));
 	if (nlayouts > 1) {
-		lgl_template_add_layout (frame,
-					lgl_template_layout_new (nx_2, ny_2,
-								x0_2/upp,
-								y0_2/upp,
-								dx_2/upp,
-								dy_2/upp));
+		lgl_template_frame_add_layout (frame,
+                                               lgl_template_layout_new (nx_2, ny_2,
+                                                                        x0_2/upp,
+                                                                        y0_2/upp,
+                                                                        dx_2/upp,
+                                                                        dy_2/upp));
 	}
 
 	g_free (brand);

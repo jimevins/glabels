@@ -448,7 +448,7 @@ xml_parse_layout_node (xmlNodePtr          layout_node,
 	dx = lgl_xml_get_prop_length (layout_node, "dx", 0);
 	dy = lgl_xml_get_prop_length (layout_node, "dy", 0);
 
-	lgl_template_add_layout (frame, lgl_template_layout_new (nx, ny, x0, y0, dx, dy));
+	lgl_template_frame_add_layout (frame, lgl_template_layout_new (nx, ny, x0, y0, dx, dy));
 
 	for (node = layout_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -473,7 +473,7 @@ xml_parse_markup_margin_node (xmlNodePtr          markup_node,
 
 	size = lgl_xml_get_prop_length (markup_node, "size", 0);
 
-	lgl_template_add_markup (frame, lgl_template_markup_margin_new (size));
+	lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (size));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -501,7 +501,7 @@ xml_parse_markup_line_node (xmlNodePtr          markup_node,
 	x2 = lgl_xml_get_prop_length (markup_node, "x2", 0);
 	y2 = lgl_xml_get_prop_length (markup_node, "y2", 0);
 
-	lgl_template_add_markup (frame, lgl_template_markup_line_new (x1, y1, x2, y2));
+	lgl_template_frame_add_markup (frame, lgl_template_markup_line_new (x1, y1, x2, y2));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -528,7 +528,7 @@ xml_parse_markup_circle_node (xmlNodePtr          markup_node,
 	y0 = lgl_xml_get_prop_length (markup_node, "y0", 0);
 	r  = lgl_xml_get_prop_length (markup_node, "radius", 0);
 
-	lgl_template_add_markup (frame, lgl_template_markup_circle_new (x0, y0, r));
+	lgl_template_frame_add_markup (frame, lgl_template_markup_circle_new (x0, y0, r));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -557,7 +557,7 @@ xml_parse_markup_rect_node (xmlNodePtr          markup_node,
 	h  = lgl_xml_get_prop_length (markup_node, "h", 0);
 	r  = lgl_xml_get_prop_length (markup_node, "r", 0);
 
-	lgl_template_add_markup (frame, lgl_template_markup_rect_new (x1, y1, w, h, r));
+	lgl_template_frame_add_markup (frame, lgl_template_markup_rect_new (x1, y1, w, h, r));
 
 	for (node = markup_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
