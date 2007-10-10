@@ -267,7 +267,7 @@ gl_merge_evolution_open (glMerge *merge)
         gboolean status;
         GList *fields, *iter;
         EContactField *field_id;
-        GError *error;
+        GError *error = NULL;
 
         gl_debug (DEBUG_MERGE, "BEGIN");
 
@@ -281,15 +281,23 @@ gl_merge_evolution_open (glMerge *merge)
 
         merge_evolution->priv->book = e_book_new_system_addressbook(&error);
         if (!merge_evolution->priv->book) {
-                g_warning (_("Couldn't open addressbook: %s"), error->message);
+                g_warning (_("Couldn't open addressbook."));
+                if (error)
+                {
+                        g_warning ("e_book_new_system_addressbook: %s", error->message);
+                        g_error_free (error);
+                }
                 e_book_query_unref(query);
-                g_error_free (error);
                 return;
         }
 
-        if (!e_book_open(merge_evolution->priv->book, TRUE, &error)) {
-                g_warning (_("Couldn't open addressbook: %s"), error->message);
-                g_error_free (error);
+        if (!e_book_open(merge_evolution->priv->book, FALSE, &error)) {
+                g_warning (_("Couldn't open addressbook."));
+                if (error)
+                {
+                        g_warning ("e_book_open: %s", error->message);
+                        g_error_free (error);
+                }
                 e_book_query_unref(query);
                 g_object_unref(merge_evolution->priv->book);
                 merge_evolution->priv->book = NULL;
@@ -297,11 +305,14 @@ gl_merge_evolution_open (glMerge *merge)
         }
 
         /* fetch the list of fields supported by this address book */
-        status = e_book_get_supported_fields(merge_evolution->priv->book,
-                                                                                 &fields, &error);
+        status = e_book_get_supported_fields(merge_evolution->priv->book, &fields, &error);
         if (status == FALSE) {
-                g_warning (_("Couldn't list available fields: %s"), error->message);
-                g_error_free (error);
+                g_warning (_("Couldn't list available fields."));
+                if (error)
+                {
+                        g_warning ("e_book_get_supported_fields: %s", error->message);
+                        g_error_free (error);
+                }
                 e_book_query_unref(query);
                 g_object_unref(merge_evolution->priv->book);
                 merge_evolution->priv->book = NULL;
@@ -332,8 +343,12 @@ gl_merge_evolution_open (glMerge *merge)
                                       &merge_evolution->priv->contacts,
                                       &error);
         if (status == FALSE) {
-                g_warning (_("Couldn't get contacts: %s"), error->message);
-                g_error_free (error);
+                g_warning (_("Couldn't get contacts."));
+                if (error)
+                {
+                        g_warning ("e_book_get_contacts: %s", error->message);
+                        g_error_free (error);
+                }
                 e_book_query_unref(query);
                 free_field_list(merge_evolution->priv->fields);
                 g_object_unref(merge_evolution->priv->book);

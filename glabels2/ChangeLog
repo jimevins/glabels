@@ -1,3 +1,9 @@
+2007-10-09  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c:
+		Create address book if it does not exist.  Also, be more robust about handling
+		error conditions -- don't just assume GError has been set.
+
 2007-10-08  Jim Evins  <evins@snaught.com>
 
 	* libglabels/template.c:
