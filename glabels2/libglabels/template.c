@@ -119,7 +119,7 @@ lgl_template_register (const lglTemplate  *template)
 
 		for (pa1=template1->aliases; pa1!=NULL; pa1=pa1->next) {
 			
-			if (g_strcasecmp (template->name, pa1->data) == 0) {
+			if (g_utf8_collate (template->name, pa1->data) == 0) {
 
 				/* FIXME: make sure templates are really identical */
 				/*        if not, apply hash to name to make unique. */
@@ -188,7 +188,7 @@ lgl_template_get_name_list_unique (const gchar *page_size,
                     lgl_template_does_category_match (template, category))
                 {
                         names = g_list_insert_sorted (names, g_strdup (template->name),
-                                                      (GCompareFunc)g_strcasecmp);
+                                                      (GCompareFunc)g_utf8_collate);
 		}
 	}
 
@@ -235,7 +235,7 @@ lgl_template_get_name_list_all (const gchar *page_size,
                         {
 				str = g_strdup ((gchar *) p_alias->data);
 				names = g_list_insert_sorted (names, str,
-							     (GCompareFunc)g_strcasecmp);
+							     (GCompareFunc)g_utf8_collate);
 			}
 		}
 	}
@@ -292,7 +292,7 @@ lgl_template_from_name (const gchar *name)
 		template = (lglTemplate *) p_tmplt->data;
 		for (p_alias = template->aliases; p_alias != NULL;
 		     p_alias = p_alias->next) {
-			if (g_strcasecmp (p_alias->data, name) == 0) {
+			if (g_utf8_collate (p_alias->data, name) == 0) {
 
 				return lgl_template_dup (template);
 			}
@@ -499,7 +499,7 @@ lgl_template_does_page_size_match (const lglTemplate  *template,
                 return TRUE;
         }
 
-        return g_strcasecmp(page_size, template->page_size) == 0;
+        return g_ascii_strcasecmp(page_size, template->page_size) == 0;
 }
 
 /**
@@ -528,7 +528,7 @@ lgl_template_does_category_match  (const lglTemplate  *template,
 
         for ( p=template->categories; p != NULL; p=p->next )
         {
-                if (g_strcasecmp(category, p->data) == 0)
+                if (g_ascii_strcasecmp(category, p->data) == 0)
                 {
                         return TRUE;
                 }
@@ -929,7 +929,7 @@ lgl_template_dup (const lglTemplate *orig_template)
 
 	for ( p=orig_template->aliases; p != NULL; p=p->next ) {
 
-		if (g_strcasecmp (template->name, p->data) != 0) {
+		if (g_utf8_collate (template->name, p->data) != 0) {
 			lgl_template_add_alias (template, p->data);
 		}
 
@@ -1286,8 +1286,8 @@ read_template_files_from_dir (GList       *templates,
 		extension = strrchr (filename, '.');
 		extension2 = strrchr (filename, '-');
 
-		if ( (extension && (g_strcasecmp (extension, ".template") == 0)) ||
-		     (extension2 && (g_strcasecmp (extension2, "-templates.xml") == 0)) ) {
+		if ( (extension && (g_ascii_strcasecmp (extension, ".template") == 0)) ||
+		     (extension2 && (g_ascii_strcasecmp (extension2, "-templates.xml") == 0)) ) {
 
 			full_filename = g_build_filename (dirname, filename, NULL);
 			new_templates =

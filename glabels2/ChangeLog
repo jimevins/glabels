@@ -1,3 +1,9 @@
+2007-10-11  Jim Evins  <evins@snaught.com>
+	* configure.in:
+		Extended checks for deprecated symbols.
+	* libglabels/template.c:
+		Removed g_strcasecmp references, which are deprecated.
+
 2007-10-09  Jim Evins  <evins@snaught.com>
 
 	* src/merge-evolution.c:
