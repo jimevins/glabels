@@ -250,7 +250,7 @@ drawingarea_update (GtkDrawingArea *drawing_area,
 		return;
 	}
 
-	frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         if (rotate_flag)
         {
@@ -377,7 +377,7 @@ gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_label,
 	else
 	{
 		template   = lgl_template_from_name (name);
-		frame = lgl_template_get_first_frame (template);
+                frame = (lglTemplateFrame *)template->frames->data;
 
 		rotate_label->priv->template = template;
 		lgl_template_frame_get_size (frame, &raw_w, &raw_h);

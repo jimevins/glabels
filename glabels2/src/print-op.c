@@ -220,7 +220,7 @@ gl_print_op_construct (glPrintOp      *op,
 	op->priv->label              = label;
 	op->priv->force_outline_flag = FALSE;
 
-        frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
         op->priv->n_sheets           = 1;
         op->priv->first              = 1;
@@ -378,7 +378,7 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
         merge = gl_label_get_merge (label);
 
-        frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
         if (merge == NULL)
         {
                 op->priv->merge_flag = FALSE;

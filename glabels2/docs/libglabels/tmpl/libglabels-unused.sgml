@@ -1204,6 +1204,14 @@ the CSS2 Specification (Section 4.3.2).
 @frame: 
 @markup: 
 
+<!-- ##### FUNCTION lgl_template_get_first_frame ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
 <!-- ##### FUNCTION lgl_template_init ##### -->
 <para>
 

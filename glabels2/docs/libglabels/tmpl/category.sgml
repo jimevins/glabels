@@ -20,11 +20,11 @@ functions.
 
 <!-- ##### STRUCT lglCategory ##### -->
 <para>
-
+This structure defines a category.
 </para>
 
-@id: 
-@name: 
+@id: Category ID.
+@name: Localized category name.
 
 <!-- ##### FUNCTION lgl_category_new ##### -->
 <para>
@@ -53,22 +53,6 @@ functions.
 @category: 
 
 
-<!-- ##### FUNCTION lgl_category_get_name_list ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_category_free_name_list ##### -->
-<para>
-
-</para>
-
-@names: 
-
-
 <!-- ##### FUNCTION lgl_category_from_name ##### -->
 <para>
 
@@ -85,6 +69,22 @@ functions.
 
 @id: 
 @Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
 
 
 <!-- ##### FUNCTION lgl_category_lookup_id_from_name ##### -->

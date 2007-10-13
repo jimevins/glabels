@@ -112,7 +112,7 @@ gl_cairo_markup_margin_path (cairo_t                *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
         switch (frame->shape) {
 
@@ -149,7 +149,7 @@ gl_cairo_markup_margin_rect_path (cairo_t                 *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
         m = markup->margin.size;
 
@@ -188,7 +188,7 @@ gl_cairo_markup_margin_round_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "START");
 
-	frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
 	r = frame->round.r;
 	m = markup->margin.size;
@@ -215,7 +215,7 @@ gl_cairo_markup_margin_cd_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "START");
 
-	frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
         gl_label_get_size (label, &w, &h);
         xc = w/2.0;

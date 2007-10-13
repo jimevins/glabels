@@ -445,7 +445,7 @@ gl_label_get_size (glLabel *label,
 		*w = *h = 0;
 		return;
 	}
-	frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
 	if (!label->rotate_flag) {
 		lgl_template_frame_get_size (frame, w, h);

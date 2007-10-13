@@ -267,8 +267,6 @@ lglTemplate         *lgl_template_from_name            (const gchar         *nam
 /* 
  * Template query functions
  */
-const lglTemplateFrame    *lgl_template_get_first_frame      (const lglTemplate   *template);
-
 gboolean                   lgl_template_does_page_size_match (const lglTemplate   *template,
                                                               const gchar         *page_size);
 

@@ -19,14 +19,15 @@ This section defines enumerations used to interact with libglabels.
 
 <!-- ##### ENUM lglUnitsType ##### -->
 <para>
-
+This enumeration defines a set of units of distance supported by the libglabels XML distance
+attributes.
 </para>
 
-@LGL_UNITS_POINT: 
-@LGL_UNITS_INCH: 
-@LGL_UNITS_MM: 
-@LGL_UNITS_CM: 
-@LGL_UNITS_PICA: 
-@LGL_UNITS_FIRST: 
-@LGL_UNITS_LAST: 
+@LGL_UNITS_POINT: Points.  Encoded as "pt" in XML distance attributes.
+@LGL_UNITS_INCH: Inches.  Encoded as "in" in XML distance attributes.
+@LGL_UNITS_MM: Millmeters.  Encoded as "mm" in XML distance attributes.
+@LGL_UNITS_CM: Centimeters.  Encoded as "cm" in XML distance attributes.
+@LGL_UNITS_PICA: Picas.  Encoded as "pc" in XML distance attributes.
+@LGL_UNITS_FIRST: First enumeration.  Used for generic iteration through supported units..
+@LGL_UNITS_LAST: Last enumeration.  Used for generic iteration through supported units.
 

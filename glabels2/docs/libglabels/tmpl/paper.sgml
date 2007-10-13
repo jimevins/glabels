@@ -20,13 +20,13 @@ and related functions.
 
 <!-- ##### STRUCT lglPaper ##### -->
 <para>
-
+This structure defines a paper (page) size.
 </para>
 
-@id: 
-@name: 
-@width: 
-@height: 
+@id: Paper size ID.
+@name: Localized paper size name.
+@width: Width of paper in points.
+@height: Height of paper in points.
 
 <!-- ##### FUNCTION lgl_paper_new ##### -->
 <para>
@@ -55,6 +55,24 @@ and related functions.
 </para>
 
 @paper: 
+
+
+<!-- ##### FUNCTION lgl_paper_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_paper_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lgl_paper_get_id_list ##### -->
@@ -104,24 +122,6 @@ and related functions.
 </para>
 
 @id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_from_id ##### -->
-<para>
-
-</para>
-
-@id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_from_name ##### -->
-<para>
-
-</para>
-
-@name: 
 @Returns: 
 
 

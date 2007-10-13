@@ -281,7 +281,7 @@ void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
 	/*
 	 * Set template
@@ -681,7 +681,7 @@ draw_labels (glWdgtMiniPreview *preview,
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         n_labels = lgl_template_frame_get_n_labels (frame);
         origins  = lgl_template_frame_get_origins (frame);

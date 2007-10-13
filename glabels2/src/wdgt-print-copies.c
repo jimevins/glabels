@@ -132,7 +132,7 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 
 	whbox = GTK_WIDGET (copies);
 
-	frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
 	copies->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 

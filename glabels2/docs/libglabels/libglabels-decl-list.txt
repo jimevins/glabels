@@ -60,7 +60,6 @@ lgl_template_get_name_list_unique
 lgl_template_get_name_list_all
 lgl_template_free_name_list
 lgl_template_from_name
-lgl_template_get_first_frame
 lgl_template_does_page_size_match
 lgl_template_does_category_match
 lgl_template_frame_get_size

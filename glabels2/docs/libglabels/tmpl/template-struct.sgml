@@ -7,7 +7,7 @@ How templates are represented in memory
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 This section describes a set of structures that represent a template in memory.  It also
-describes functions for querying such structures.
+describes functions to help interpret these structures.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -20,170 +20,176 @@ describes functions for querying such structures.
 
 <!-- ##### STRUCT lglTemplate ##### -->
 <para>
-
+This is the main structure of a libglabels template.  A template represents a single sheet
+of peel-off labels or cards.
 </para>
 
-@name: 
-@description: 
-@page_size: 
-@page_width: 
-@page_height: 
-@categories: 
-@frames: 
-@aliases: 
+@name: The primary name of the template.  Usually a manufacturer followed by a part number.
+@description: A description of the template.  E.g. "Mailing labels."
+@page_size: A page size ID.  E.g. "US-Letter" or "A4."
+@page_width: Page width in points.  Used only if page_size is "Other."
+@page_height: Page height in points.  Used only if page_size is "Other."
+@categories: A list of category IDs associated with this template.
+@frames: A list of (#lglTemplateFrame *) structures.  GLabels currently only supports one frame
+per template -- future versions may support multiple frames per template.
+@aliases: A list of alternate names for this template.  Often a single template can be used for
+multiple products.
 
 <!-- ##### ENUM lglTemplateFrameShape ##### -->
 <para>
-
+This enumeration defines frame types that are supported by libglabels
 </para>
 
-@LGL_TEMPLATE_FRAME_SHAPE_RECT: 
-@LGL_TEMPLATE_FRAME_SHAPE_ROUND: 
-@LGL_TEMPLATE_FRAME_SHAPE_CD: 
+@LGL_TEMPLATE_FRAME_SHAPE_RECT: A rectangular frame.  (May have rounded corners.)
+@LGL_TEMPLATE_FRAME_SHAPE_ROUND: A round frame.
+@LGL_TEMPLATE_FRAME_SHAPE_CD: A CD or DVD frame.  (Includes credit-card style CDs.)
 
 <!-- ##### UNION lglTemplateFrame ##### -->
 <para>
-
+A union of all possible frame structures.  The type of structure is indicated by the shape
+member, which overlays the first field of all other member structures.
 </para>
 
 
 <!-- ##### STRUCT lglTemplateFrameAll ##### -->
 <para>
-
+This structure is composed of a set of fields common to all frame structures.  All frame types
+can be cast to this structure.
 </para>
 
-@shape: 
-@id: 
-@layouts: 
-@markups: 
+@shape: The shape of the frame.
+@id: Reserved for future use.  Should always be zero.
+@layouts: A list of (#lglTemplateLayout *) structures.  Typically a frame will have a single
+layout, representing a simple grid of labels or cards.  If the layout of labels or cards is
+more complex, multiple (#lglTemplateLayout *) structures may be needed.
+@markups: A list of (#lglTemplateMarkup *) structures, which represent non-printing markup lines.
 
 <!-- ##### STRUCT lglTemplateFrameRect ##### -->
 <para>
-
+This structure defines the frame for a rectangular label or card.
 </para>
 
-@shape: 
-@id: 
-@layouts: 
-@markups: 
-@w: 
-@h: 
-@r: 
-@x_waste: 
-@y_waste: 
+@shape: Common field.  Always #LGL_TEMPLATE_FRAME_SHAPE_RECT for #lglTemplateFrameRect.
+@id: Common field.  See #lglTemplateFrameAll.
+@layouts:  Common field.  See #lglTemplateFrameAll.
+@markups:  Common field.  See #lglTemplateFrameAll.
+@w: Width of label or card in points.
+@h: Height of label or card in points.
+@r: Radius of corners in points.
+@x_waste: Amount of horizontal over-print to allow in points.
+@y_waste: Amount of vertical over-print to allow in points.
 
 <!-- ##### STRUCT lglTemplateFrameRound ##### -->
 <para>
-
+This structure defines the frame for a round label or card.
 </para>
 
-@shape: 
-@id: 
-@layouts: 
-@markups: 
-@r: 
-@waste: 
+@shape: Common field.  Always #LGL_TEMPLATE_FRAME_SHAPE_ROUND for #lglTemplateFrameRound.
+@id: Common field.  See #lglTemplateFrameAll.
+@layouts: Common field.  See #lglTemplateFrameAll.
+@markups: Common field.  See #lglTemplateFrameAll.
+@r: Radius of label or card in points.
+@waste: Amount of over-print to allow in points.
 
 <!-- ##### STRUCT lglTemplateFrameCD ##### -->
 <para>
-
+This structure defines the frame for a CD or DVD label.  This structure also supports
+credit-card CD labels.
 </para>
 
-@shape: 
-@id: 
-@layouts: 
-@markups: 
-@r1: 
-@r2: 
-@w: 
-@h: 
-@waste: 
+@shape: Common field.  Always #LGL_TEMPLATE_FRAME_SHAPE_CD for #lglTemplateFrameCD.
+@id: Common field.  See #lglTemplateFrameAll.
+@layouts: Common field.  See #lglTemplateFrameAll.
+@markups: Common field.  See #lglTemplateFrameAll.
+@r1: Outer radius of label in points.
+@r2: Radius of center hole in points.
+@w: Clip width in points.  Used for credit-card CD labels.  This field is ignored if zero.
+@h: Clip height in points.  Used for credit-card CD labels.  This field is ignored if zero.
+@waste: Amount of over-print to allow in points.
 
 <!-- ##### STRUCT lglTemplateLayout ##### -->
 <para>
-
+This structure defines a simple grid layout of labels or cards.
 </para>
 
-@nx: 
-@ny: 
-@x0: 
-@y0: 
-@dx: 
-@dy: 
+@nx: Number of labels or cards across in the grid (horizontal).
+@ny: Number of labels or cards down in the grid (vertical).
+@x0: Distance (in points) from the left edge of page to the left edge of the left column of
+cards or labels in the layout.
+@y0: Distance (in points) from the top edge of page to the top edge of the top row of
+cards or labels in the layout.
+@dx: Horizontal pitch of grid in points.  This is the distance from left edge to left edge
+(not the gap between labels or cards).
+@dy: Vertical pitch of grid in points.  This is the distance from top edge to top edge
+(not the gap between labels or cards).
 
 <!-- ##### ENUM lglTemplateMarkupType ##### -->
 <para>
-
+This enumeration defines markup types that are supported by libglabels
 </para>
 
-@LGL_TEMPLATE_MARKUP_MARGIN: 
-@LGL_TEMPLATE_MARKUP_LINE: 
-@LGL_TEMPLATE_MARKUP_CIRCLE: 
-@LGL_TEMPLATE_MARKUP_RECT: 
+@LGL_TEMPLATE_MARKUP_MARGIN: A margin line around perimeter of label or card.
+@LGL_TEMPLATE_MARKUP_LINE: A simple line segment.
+@LGL_TEMPLATE_MARKUP_CIRCLE: A circle.
+@LGL_TEMPLATE_MARKUP_RECT: A rectangle.  Possibly with rounded corners.
 
 <!-- ##### UNION lglTemplateMarkup ##### -->
 <para>
-
+A union of all possible markup structures.  The type of structure is indicated by the type
+member, which overlays the first field of all other member structures.
 </para>
 
 
 <!-- ##### STRUCT lglTemplateMarkupMargin ##### -->
 <para>
-
+This structure defines a simple margin markup around the perimeter of a label or card.
 </para>
 
-@type: 
-@size: 
+@type: Common field.  Always #LGL_TEMPLATE_MARKUP_MARGIN for #lglTemplateMarkupMargin.
+@size: Distance of margin from edge of label or card.
 
 <!-- ##### STRUCT lglTemplateMarkupLine ##### -->
 <para>
-
+This structure defines a simple line segment markup.
 </para>
 
-@type: 
-@x1: 
-@y1: 
-@x2: 
-@y2: 
+@type: Common field.  Always #LGL_TEMPLATE_MARKUP_LINE for #lglTemplateMarkupLine.
+@x1: Distance (in points) of first endpoint from left edge of label or card.
+@y1: Distance (in points) of first endpoint from top edge of label or card.
+@x2: Distance (in points) of second endpoint from left edge of label or card.
+@y2: Distance (in points) of second endpoint from top edge of label or card.
 
 <!-- ##### STRUCT lglTemplateMarkupCircle ##### -->
 <para>
-
+This structure defines a simple circle markup.
 </para>
 
-@type: 
-@x0: 
-@y0: 
-@r: 
+@type: Common field.  Always #LGL_TEMPLATE_MARKUP_CIRCLE for #lglTemplateMarkupCircle.
+@x0: Distance (in points) of vertex from left edge of label or card.
+@y0: Distance (in points) of vertex from top edge of label or card.
+@r: Radius of circle in points.
 
 <!-- ##### STRUCT lglTemplateMarkupRect ##### -->
 <para>
-
+This structure defines a simple rectangle markup.  The rectangle can have rounded corners.
 </para>
 
-@type: 
-@x1: 
-@y1: 
-@w: 
-@h: 
-@r: 
+@type: Common field.  Always #LGL_TEMPLATE_MARKUP_RECT for #lglTemplateMarkupRect.
+@x1: Distance (in points) of left edge of markup from left edge of label or card.
+@y1: Distance (in points) of top edge of markup from top edge of label or card.
+@w: Width of rectangle in points.
+@h: Height of rectangle in points.
+@r: Radius of corners in points.  Should be zero for sharp corners.
 
 <!-- ##### STRUCT lglTemplateOrigin ##### -->
 <para>
-
+This structure represents the cartesian coordinates of the origin of a label or card on the page.
+The orign is the upper left corner of the extent of the label or card.  These coordinates are
+relative to the upper left corner of the page.
 </para>
 
-@x: 
-@y: 
-
-<!-- ##### FUNCTION lgl_template_get_first_frame ##### -->
-<para>
-
-</para>
-
-@template: 
-@Returns: 
-
+@x: Distance in points from top edge of page.
+@y: Distance in points from left edge of page.
 
 <!-- ##### FUNCTION lgl_template_does_page_size_match ##### -->
 <para>

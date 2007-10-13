@@ -115,7 +115,7 @@ gl_print_simple_sheet (glLabel          *label,
 
 	pi         = print_info_new (cr, label);
 
-	frame = lgl_template_get_first_frame (pi->template);
+        frame = (lglTemplateFrame *)pi->template->frames->data;
 	origins = lgl_template_frame_get_origins (frame);
 
         if (crop_marks_flag) {
@@ -166,7 +166,7 @@ gl_print_collated_merge_sheet   (glLabel          *label,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (cr, label);
-	frame = lgl_template_get_first_frame (pi->template);
+        frame = (lglTemplateFrame *)pi->template->frames->data;
 
 	n_labels_per_page = lgl_template_frame_get_n_labels (frame);
 	origins = lgl_template_frame_get_origins (frame);
@@ -257,7 +257,7 @@ gl_print_uncollated_merge_sheet (glLabel          *label,
 	record_list = gl_merge_get_record_list (merge);
 
 	pi = print_info_new (cr, label);
-	frame = lgl_template_get_first_frame (pi->template);
+        frame = (lglTemplateFrame *)pi->template->frames->data;
 
 	n_labels_per_page = lgl_template_frame_get_n_labels (frame);
 	origins = lgl_template_frame_get_origins (frame);
@@ -386,7 +386,7 @@ print_crop_marks (PrintInfo *pi)
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	frame = lgl_template_get_first_frame (pi->template);
+        frame = (lglTemplateFrame *)pi->template->frames->data;
 
 	lgl_template_frame_get_size (frame, &w, &h);
 
@@ -495,7 +495,7 @@ print_label (PrintInfo     *pi,
 
 	gl_debug (DEBUG_PRINT, "START");
 
-	frame = lgl_template_get_first_frame (pi->template);
+        frame = (lglTemplateFrame *)pi->template->frames->data;
 
 	gl_label_get_size (label, &width, &height);
 

@@ -176,7 +176,7 @@ draw_label_outlines (cairo_t           *cr,
 
 	cairo_set_line_width (cr, LABEL_OUTLINE_WIDTH_PIXELS/scale);
 
-	frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
 	n_labels = lgl_template_frame_get_n_labels (frame);
 	origins  = lgl_template_frame_get_origins (frame);

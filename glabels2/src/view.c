@@ -853,7 +853,7 @@ draw_grid_layer (glView  *view,
         if (view->grid_visible)
         {
 
-                frame = lgl_template_get_first_frame (view->label->template);
+                frame = (lglTemplateFrame *)view->label->template->frames->data;
 
                 gl_label_get_size (view->label, &w, &h);
 	
@@ -913,7 +913,7 @@ draw_markup_layer (glView  *view,
         {
 
                 label      = view->label;
-                frame = lgl_template_get_first_frame (label->template);
+                frame = (lglTemplateFrame *)view->label->template->frames->data;
 
                 cairo_save (cr);
 

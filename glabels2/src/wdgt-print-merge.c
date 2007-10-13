@@ -131,7 +131,7 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 
 	whbox = GTK_WIDGET (merge);
 
-	frame = lgl_template_get_first_frame (label->template);
+        frame = (lglTemplateFrame *)label->template->frames->data;
 
 	merge->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 

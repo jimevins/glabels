@@ -1,3 +1,31 @@
+2007-10-12  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+	* libglabels/init.c:
+	* libglabels/template.c:
+	* libglabels/template.h:
+		Another pass at fleshing out the libglabels documentation.
+	* src/cairo-label-path.c:
+	* src/cairo-markup-path.c:
+	* src/label.c:
+	* src/mini-preview-pixbuf.c:
+	* src/print-op.c:
+	* src/print.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+		Removed lgl_template_get_first_frame() from libglabels API and all references.
+
 2007-10-11  Jim Evins  <evins@snaught.com>
 	* configure.in:
 		Extended checks for deprecated symbols.

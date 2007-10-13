@@ -1,27 +1,9 @@
-85% symbol docs coverage.
-111 symbols documented.
+99% symbol docs coverage.
+128 symbols documented.
 0 symbols incomplete.
-19 not documented.
+1 not documented.
 
 
 LGL_XML_NAME_SPACE
-lglCategory
-lglPaper
-lglTemplate
-lglTemplateFrame
-lglTemplateFrameAll
-lglTemplateFrameCD
-lglTemplateFrameRect
-lglTemplateFrameRound
-lglTemplateFrameShape
-lglTemplateLayout
-lglTemplateMarkup
-lglTemplateMarkupCircle
-lglTemplateMarkupLine
-lglTemplateMarkupMargin
-lglTemplateMarkupRect
-lglTemplateMarkupType
-lglTemplateOrigin
-lglUnitsType
 
 

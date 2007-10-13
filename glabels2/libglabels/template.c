@@ -200,7 +200,7 @@ lgl_template_get_name_list_unique (const gchar *page_size,
  * @page_size: If non NULL, limit results to given page size.
  * @category: If non NULL, limit results to given template category.
  *
- * Get a list of valid names and aliases of unique templates in the template database.
+ * Get a list of all valid names and aliases of templates in the template database.
  * Results can be filtered by page size and/or template category.  A list of valid page
  * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
  * categories can be obtained using lgl_category_get_id_list().
@@ -304,27 +304,6 @@ lgl_template_from_name (const gchar *name)
 }
 
 /**
- * lgl_template_get_first_frame:
- * @template: #lglTemplate structure to query
- *
- * Lookup first #lglTemplateFrame in the given #lglTemplate.  The returned
- * value is simply a pointer to the given frame within the template and should
- * not be freed.
- *
- * Note: glabels currently only supports a single frame per template.
- *
- * Returns: pointer to #lglTemplateFrame structure.
- *
- */
-const lglTemplateFrame *
-lgl_template_get_first_frame (const lglTemplate *template)
-{
-	g_return_val_if_fail (template, NULL);
-
-	return (lglTemplateFrame *)template->frames->data;
-}
-
-/**
  * lgl_template_frame_get_size:
  * @frame: #lglTemplateFrame structure to query
  * @w: pointer to location to receive width of frame
@@ -401,6 +380,7 @@ lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
  *
  * Get an array of label origins for the given frame.  These origins represent the
  * upper left hand corner of each label on a page corresponding to the given frame.
+ * The origins will be ordered geometrically left to right and then top to bottom.
  * The array should be freed using g_free().
  *
  * Returns: A newly allocated array of #lglTemplateOrigin structures.

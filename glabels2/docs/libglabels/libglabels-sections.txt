@@ -17,16 +17,20 @@ lglPaper
 lgl_paper_new
 lgl_paper_dup
 lgl_paper_free
+lgl_paper_from_id
+lgl_paper_from_name
+<SUBSECTION List Functions>
 lgl_paper_get_id_list
 lgl_paper_free_id_list
 lgl_paper_get_name_list
 lgl_paper_free_name_list
+<SUBSECTION Query Functions>
 lgl_paper_is_id_known
 lgl_paper_is_id_other
-lgl_paper_from_id
-lgl_paper_from_name
+<SUBSECTION Conversion Functions>
 lgl_paper_lookup_id_from_name
 lgl_paper_lookup_name_from_id
+<SUBSECTION Debug Functions>
 lgl_paper_print_known_papers
 </SECTION>
 
@@ -37,10 +41,12 @@ lglCategory
 lgl_category_new
 lgl_category_dup
 lgl_category_free
-lgl_category_get_name_list
-lgl_category_free_name_list
 lgl_category_from_name
 lgl_category_from_id
+<SUBSECTION List Functions>
+lgl_category_get_name_list
+lgl_category_free_name_list
+<SUBSECTION Conversion Functions>
 lgl_category_lookup_id_from_name
 lgl_category_lookup_name_from_id
 </SECTION>
@@ -49,23 +55,28 @@ lgl_category_lookup_name_from_id
 <FILE>template-struct</FILE>
 <INCLUDE>libglabels/template.h</INCLUDE>
 lglTemplate
+<SUBSECTION Frame Structure>
 lglTemplateFrameShape
 lglTemplateFrame
 lglTemplateFrameAll
 lglTemplateFrameRect
 lglTemplateFrameRound
 lglTemplateFrameCD
+<SUBSECTION Layout Structure>
 lglTemplateLayout
+<SUBSECTION Markup Structure>
 lglTemplateMarkupType
 lglTemplateMarkup
 lglTemplateMarkupMargin
 lglTemplateMarkupLine
 lglTemplateMarkupCircle
 lglTemplateMarkupRect
+<SUBSECTION Origin Structure>
 lglTemplateOrigin
-lgl_template_get_first_frame
+<SUBSECTION Template Query Functions>
 lgl_template_does_page_size_match
 lgl_template_does_category_match
+<SUBSECTION Frame Frame Query Functions>
 lgl_template_frame_get_size
 lgl_template_frame_get_n_labels
 lgl_template_frame_get_origins
@@ -77,7 +88,9 @@ lgl_template_frame_get_origins
 lgl_template_get_name_list_unique
 lgl_template_get_name_list_all
 lgl_template_free_name_list
+<SUBSECTION Locate Template Functions>
 lgl_template_from_name
+<SUBSECTION Template Registration Functions>
 lgl_template_register
 </SECTION>
 
@@ -90,6 +103,7 @@ lgl_template_free
 lgl_template_add_category
 lgl_template_add_frame
 lgl_template_add_alias
+<SUBSECTION Frame Functions>
 lgl_template_frame_rect_new
 lgl_template_frame_round_new
 lgl_template_frame_cd_new
@@ -97,9 +111,11 @@ lgl_template_frame_dup
 lgl_template_frame_free
 lgl_template_frame_add_layout
 lgl_template_frame_add_markup
+<SUBSECTION Layout Functions>
 lgl_template_layout_new
 lgl_template_layout_dup
 lgl_template_layout_free
+<SUBSECTION Markup Functions>
 lgl_template_markup_margin_new
 lgl_template_markup_line_new
 lgl_template_markup_circle_new
@@ -147,6 +163,7 @@ lgl_xml_template_create_template_node
 <FILE>xml</FILE>
 <INCLUDE>libglabels/xml.h</INCLUDE>
 LGL_XML_NAME_SPACE
+<SUBSECTION Get Property Functions>
 lgl_xml_get_prop_string
 lgl_xml_get_prop_i18n_string
 lgl_xml_get_prop_double
@@ -154,14 +171,17 @@ lgl_xml_get_prop_boolean
 lgl_xml_get_prop_int
 lgl_xml_get_prop_uint
 lgl_xml_get_prop_length
+<SUBSECTION Set Property Functions>
 lgl_xml_set_prop_string
 lgl_xml_set_prop_double
 lgl_xml_set_prop_boolean
 lgl_xml_set_prop_int
 lgl_xml_set_prop_uint_hex
 lgl_xml_set_prop_length
+<SUBSECTION Misc Functions>
 lgl_xml_is_node
 lgl_xml_get_node_content
+<SUBSECTION Configuration Functions>
 lgl_xml_set_default_units
 </SECTION>
 

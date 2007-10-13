@@ -492,7 +492,7 @@ get_layout_desc (const lglTemplate *template)
         gint                    n_labels;
         gchar                  *string;
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         n_labels = lgl_template_frame_get_n_labels (frame);
 
@@ -517,7 +517,7 @@ get_label_size_desc (const lglTemplate *template)
         units_string    = gl_prefs_get_units_string ();
         units_per_point = gl_prefs_get_units_per_point ();
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         switch (frame->shape) {
         case LGL_TEMPLATE_FRAME_SHAPE_RECT:

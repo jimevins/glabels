@@ -70,7 +70,7 @@ gl_cairo_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         switch (frame->shape) {
 
@@ -109,7 +109,7 @@ gl_cairo_rect_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
         r = frame->rect.r;
 
         x_waste = 0.0;
@@ -167,7 +167,7 @@ gl_cairo_round_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
         
         if (rotate_flag)
         {
@@ -211,7 +211,7 @@ gl_cairo_cd_label_path (cairo_t           *cr,
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = lgl_template_get_first_frame (template);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         if (rotate_flag)
         {
