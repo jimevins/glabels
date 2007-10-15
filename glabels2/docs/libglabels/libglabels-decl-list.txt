@@ -116,6 +116,8 @@ lglCategory
 lgl_category_new
 lgl_category_dup
 lgl_category_free
+lgl_category_get_id_list
+lgl_category_free_id_list
 lgl_category_get_name_list
 lgl_category_free_name_list
 lgl_category_from_name

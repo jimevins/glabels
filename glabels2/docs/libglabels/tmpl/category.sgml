@@ -71,6 +71,22 @@ This structure defines a category.
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_category_get_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_free_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+
 <!-- ##### FUNCTION lgl_category_get_name_list ##### -->
 <para>
 

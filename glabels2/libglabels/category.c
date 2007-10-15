@@ -154,6 +154,55 @@ void lgl_category_free (lglCategory *category)
 
 
 /**
+ * lgl_category_get_id_list:
+ *
+ * Get a list of all category ids known to libglabels.
+ *
+ * Returns: a list of category ids.
+ *
+ */
+GList *
+lgl_category_get_id_list (void)
+{
+	GList           *ids = NULL;
+	GList           *p;
+	lglCategory     *category;
+
+	if (!categories) {
+		lgl_category_init ();
+	}
+
+	for ( p=categories; p != NULL; p=p->next ) {
+		category = (lglCategory *)p->data;
+		ids = g_list_append (ids, g_strdup (category->id));
+	}
+
+	return ids;
+}
+
+/**
+ * lgl_category_free_id_list:
+ * @ids: List of id strings to be freed.
+ *
+ * Free up all storage associated with an id list obtained with
+ * lgl_category_get_id_list().
+ *
+ */
+void
+lgl_category_free_id_list (GList *ids)
+{
+	GList *p;
+
+	for (p = ids; p != NULL; p = p->next) {
+		g_free (p->data);
+		p->data = NULL;
+	}
+
+	g_list_free (ids);
+}
+
+
+/**
  * lgl_category_get_name_list:
  *
  * Get a list of all localized category names known to liblglabels.

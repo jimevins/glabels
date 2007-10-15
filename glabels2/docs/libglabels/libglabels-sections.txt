@@ -44,6 +44,8 @@ lgl_category_free
 lgl_category_from_name
 lgl_category_from_id
 <SUBSECTION List Functions>
+lgl_category_get_id_list
+lgl_category_free_id_list
 lgl_category_get_name_list
 lgl_category_free_name_list
 <SUBSECTION Conversion Functions>

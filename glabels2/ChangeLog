@@ -1,3 +1,14 @@
+2007-10-14  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* libglabels/category.c:
+	* libglabels/category.h:
+		Added lgl_category_get_id_list() and lgl_category_free_id_list() to have
+	parity with paper functions.
+
 2007-10-12  Jim Evins  <evins@snaught.com>
 
 	* docs/libglabels/libglabels-decl-list.txt:

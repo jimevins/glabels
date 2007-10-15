@@ -55,6 +55,13 @@ void              lgl_category_free                (lglCategory       *category)
 
 
 /*
+ * ID lists
+ */
+GList               *lgl_category_get_id_list      (void);
+void                 lgl_category_free_id_list     (GList           *ids);
+
+
+/*
  * Known category name lists
  */
 GList            *lgl_category_get_name_list       (void);
