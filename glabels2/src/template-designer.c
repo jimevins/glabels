@@ -1112,10 +1112,13 @@ static void
 apply_cb (glTemplateDesigner *dialog)
 {
 	lglTemplate *template;
+        gchar       *name;
 	
 	template = build_template (dialog);
 	lgl_template_register (template);
-        gl_mini_preview_pixbuf_cache_add_by_name (template->name);
+        name = lgl_template_get_name (template);
+        gl_mini_preview_pixbuf_cache_add_by_name (name);
+        g_free (name);
 }
                          
 /*--------------------------------------------------------------------------*/
@@ -1599,7 +1602,7 @@ static lglTemplate *
 build_template (glTemplateDesigner      *dialog)
 {
 	gdouble               upp;
-	gchar                *brand, *part_num, *name, *desc;
+	gchar                *brand, *part_num, *desc;
 	gchar                *page_size_name;
 	lglPaper             *paper;
 	lglTemplateFrameShape shape;
@@ -1614,7 +1617,6 @@ build_template (glTemplateDesigner      *dialog)
 
 	brand    = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1);
 	part_num = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1);
-	name     = g_strdup_printf ("%s %s", brand, part_num);
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
 	page_size_name =
@@ -1671,7 +1673,7 @@ build_template (glTemplateDesigner      *dialog)
 	dy_2 = gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin));
 
 
-	template = lgl_template_new (name, desc, paper->id, paper->width, paper->height);
+	template = lgl_template_new (brand, part_num, desc, paper->id, paper->width, paper->height);
 
 	switch (shape) {
 	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
@@ -1711,7 +1713,6 @@ build_template (glTemplateDesigner      *dialog)
 
 	g_free (brand);
 	g_free (part_num);
-	g_free (name);
 	g_free (desc);
 
 	g_free (page_size_name);

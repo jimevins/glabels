@@ -23,6 +23,7 @@ to the LibGlabels template database.
 
 </para>
 
+@brand: 
 @page_size: 
 @category: 
 @Returns: 
@@ -33,6 +34,7 @@ to the LibGlabels template database.
 
 </para>
 
+@brand: 
 @page_size: 
 @category: 
 @Returns: 
@@ -44,6 +46,24 @@ to the LibGlabels template database.
 </para>
 
 @names: 
+
+
+<!-- ##### FUNCTION lgl_template_get_brand_list ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_free_brand_list ##### -->
+<para>
+
+</para>
+
+@brands: 
 
 
 <!-- ##### FUNCTION lgl_template_from_name ##### -->

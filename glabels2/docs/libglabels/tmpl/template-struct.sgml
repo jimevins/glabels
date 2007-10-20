@@ -24,16 +24,26 @@ This is the main structure of a libglabels template.  A template represents a si
 of peel-off labels or cards.
 </para>
 
-@name: The primary name of the template.  Usually a manufacturer followed by a part number.
+@brand: Brand name of label or card.  E.g. "Avery."
+@part: Part name or number of label or card.  E.g. "8160."
 @description: A description of the template.  E.g. "Mailing labels."
 @page_size: A page size ID.  E.g. "US-Letter" or "A4."
 @page_width: Page width in points.  Used only if page_size is "Other."
 @page_height: Page height in points.  Used only if page_size is "Other."
+@aliases: A list of alternate names for this template.  Often a single template can be used for
+multiple products.
 @categories: A list of category IDs associated with this template.
 @frames: A list of (#lglTemplateFrame *) structures.  GLabels currently only supports one frame
 per template -- future versions may support multiple frames per template.
-@aliases: A list of alternate names for this template.  Often a single template can be used for
-multiple products.
+
+<!-- ##### STRUCT lglTemplateAlias ##### -->
+<para>
+This structure defines an alias for the parent template structure.  An alias is used for
+different products that can use the same template.
+</para>
+
+@brand: Brand name of label or card.  E.g. "Avery."
+@part: Part name or number of label or card.  E.g. "8160."
 
 <!-- ##### ENUM lglTemplateFrameShape ##### -->
 <para>
@@ -190,6 +200,35 @@ relative to the upper left corner of the page.
 
 @x: Distance in points from top edge of page.
 @y: Distance in points from left edge of page.
+
+<!-- ##### FUNCTION lgl_template_get_name ##### -->
+<para>
+
+</para>
+
+@template: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_do_templates_match ##### -->
+<para>
+
+</para>
+
+@template1: 
+@template2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_does_brand_match ##### -->
+<para>
+
+</para>
+
+@template: 
+@brand: 
+@Returns: 
+
 
 <!-- ##### FUNCTION lgl_template_does_page_size_match ##### -->
 <para>

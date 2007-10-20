@@ -57,6 +57,8 @@ lgl_category_lookup_name_from_id
 <FILE>template-struct</FILE>
 <INCLUDE>libglabels/template.h</INCLUDE>
 lglTemplate
+<SUBSECTION Alias Structure>
+lglTemplateAlias
 <SUBSECTION Frame Structure>
 lglTemplateFrameShape
 lglTemplateFrame
@@ -76,6 +78,9 @@ lglTemplateMarkupRect
 <SUBSECTION Origin Structure>
 lglTemplateOrigin
 <SUBSECTION Template Query Functions>
+lgl_template_get_name
+lgl_template_do_templates_match
+lgl_template_does_brand_match
 lgl_template_does_page_size_match
 lgl_template_does_category_match
 <SUBSECTION Frame Frame Query Functions>
@@ -90,6 +95,8 @@ lgl_template_frame_get_origins
 lgl_template_get_name_list_unique
 lgl_template_get_name_list_all
 lgl_template_free_name_list
+lgl_template_get_brand_list
+lgl_template_free_brand_list
 <SUBSECTION Locate Template Functions>
 lgl_template_from_name
 <SUBSECTION Template Registration Functions>
@@ -105,6 +112,10 @@ lgl_template_free
 lgl_template_add_category
 lgl_template_add_frame
 lgl_template_add_alias
+<SUBSECTION Alias Functions>
+lgl_template_alias_new
+lgl_template_alias_dup
+lgl_template_alias_free
 <SUBSECTION Frame Functions>
 lgl_template_frame_rect_new
 lgl_template_frame_round_new

@@ -380,9 +380,10 @@ gl_label_set_template (glLabel     *label,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
+	g_return_if_fail (template);
 
 	if ((label->template == NULL) ||
-	    (g_strcasecmp (template->name, label->template->name) != 0)) {
+            !lgl_template_do_templates_match (template, label->template)) {
 
 		lgl_template_free (label->template);
 		label->template = lgl_template_dup (template);

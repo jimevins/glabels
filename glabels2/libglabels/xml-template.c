@@ -91,7 +91,7 @@ static void  xml_create_markup_circle_node  (const lglTemplateMarkup      *circl
 static void  xml_create_markup_rect_node    (const lglTemplateMarkup      *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
-static void  xml_create_alias_node          (const gchar                  *name,
+static void  xml_create_alias_node          (const lglTemplateAlias       *alias,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 
@@ -197,6 +197,8 @@ lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 lglTemplate *
 lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 {
+	gchar                 *brand;
+        gchar                 *part;
 	gchar                 *name;
 	gchar                 *description;
 	gchar                 *page_size;
@@ -204,8 +206,29 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	lglPaper               *paper = NULL;
 	lglTemplate           *template;
 	xmlNodePtr             node;
+        gchar                **v;
 
-	name = lgl_xml_get_prop_string (template_node, "name", NULL);
+	brand = lgl_xml_get_prop_string (template_node, "brand", NULL);
+	part  = lgl_xml_get_prop_string (template_node, "part", NULL);
+        if (!brand || !part)
+        {
+                name = lgl_xml_get_prop_string (template_node, "name", NULL);
+                if (name)
+                {
+			g_message (_("Missing required \"brand\" or \"part\" attribute, trying deprecated name."));
+                        v = g_strsplit (name, " ", 2);
+                        brand = g_strdup (v[0]);
+                        part  = g_strdup (v[1]);
+                        g_free (name);
+                        g_strfreev (v);
+                        
+                }
+                else
+                {
+			g_message (_("Name attribute also missing."));
+                }
+        }
+
 	description = lgl_xml_get_prop_i18n_string (template_node, "description", NULL);
 	page_size = lgl_xml_get_prop_string (template_node, "size", NULL);
 
@@ -236,10 +259,8 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		paper = NULL;
 	}
 
-	template = lgl_template_new (name,
-				    description,
-				    page_size,
-				    page_width, page_height);
+	template = lgl_template_new (brand, part, description,
+                                     page_size, page_width, page_height);
 
 	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -262,7 +283,8 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		}
 	}
 
-	g_free (name);
+	g_free (brand);
+	g_free (part);
 	g_free (description);
 	g_free (page_size);
 
@@ -577,13 +599,37 @@ static void
 xml_parse_alias_node (xmlNodePtr   alias_node,
 		      lglTemplate *template)
 {
-	gchar       *name;
+	gchar             *brand;
+	gchar             *part;
+	gchar             *name;
+        gchar            **v;
+        lglTemplateAlias  *alias;
 
-	name = lgl_xml_get_prop_string (alias_node, "name", NULL);
+	brand = lgl_xml_get_prop_string (alias_node, "brand", NULL);
+	part  = lgl_xml_get_prop_string (alias_node, "part", NULL);
+        if (!brand || !part)
+        {
+                name = lgl_xml_get_prop_string (alias_node, "name", NULL);
+                if (name)
+                {
+			g_message (_("Missing required \"brand\" or \"part\" attribute, trying deprecated name."));
+                        v = g_strsplit (name, " ", 2);
+                        brand = g_strdup (v[0]);
+                        part  = g_strdup (v[1]);
+                        g_free (name);
+                        g_strfreev (v);
+                        
+                }
+                else
+                {
+			g_message (_("Name attribute also missing."));
+                }
+        }
 
-	lgl_template_add_alias (template, (gchar *)name);
+	lgl_template_add_alias (template, lgl_template_alias_new (brand, part));
 
-	g_free (name);
+	g_free (brand);
+	g_free (part);
 }
 
 /**
@@ -672,14 +718,17 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 {
 	xmlNodePtr          node;
 	GList              *p;
+	lglTemplateAlias   *alias;
 	lglTemplateFrame   *frame;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Template", NULL);
 
-	lgl_xml_set_prop_string (node, "name", template->name);
+	lgl_xml_set_prop_string (node, "brand", template->part);
+	lgl_xml_set_prop_string (node, "part", template->part);
 
 	lgl_xml_set_prop_string (node, "size", template->page_size);
-	if (xmlStrEqual ((xmlChar *)template->page_size, (xmlChar *)"Other")) {
+	if (xmlStrEqual ((xmlChar *)template->page_size, (xmlChar *)"Other"))
+        {
 
 		lgl_xml_set_prop_length (node, "width", template->page_width);
 		lgl_xml_set_prop_length (node, "height", template->page_height);
@@ -688,18 +737,22 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 
 	lgl_xml_set_prop_string (node, "description", template->description);
 
-	for ( p=template->categories; p != NULL; p=p->next ) {
+	for ( p=template->aliases; p != NULL; p=p->next ) {
+                alias = (lglTemplateAlias *)p->data;
+		if ( !(xmlStrEqual ((xmlChar *)template->brand, (xmlChar *)alias->brand) &&
+                       xmlStrEqual ((xmlChar *)template->part, (xmlChar *)alias->part)) )
+                {
+			xml_create_alias_node ( alias, node, ns );
+		}
+	}
+	for ( p=template->categories; p != NULL; p=p->next )
+        {
                 xml_create_meta_node ( p->data, node, ns );
 	}
-	for ( p=template->frames; p != NULL; p=p->next ) {
+	for ( p=template->frames; p != NULL; p=p->next )
+        {
 		frame = (lglTemplateFrame *)p->data;
 		xml_create_label_node (frame, node, ns);
-	}
-
-	for ( p=template->aliases; p != NULL; p=p->next ) {
-		if (!xmlStrEqual ((xmlChar *)template->name, (xmlChar *)p->data)) {
-			xml_create_alias_node ( p->data, node, ns );
-		}
 	}
 
 }
@@ -897,14 +950,16 @@ xml_create_markup_rect_node (const lglTemplateMarkup *markup,
 /* PRIVATE.  Add XML Template->Alias Node.                                  */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_alias_node (const gchar      *name,
-		       xmlNodePtr        root,
-		       const xmlNsPtr    ns)
+xml_create_alias_node (const lglTemplateAlias *alias,
+		       xmlNodePtr              root,
+		       const xmlNsPtr          ns)
 {
 	xmlNodePtr node;
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Alias", NULL);
-	lgl_xml_set_prop_string (node, "name", name);
+
+	lgl_xml_set_prop_string (node, "brand", alias->brand);
+	lgl_xml_set_prop_string (node, "part",  alias->part);
 
 }
 

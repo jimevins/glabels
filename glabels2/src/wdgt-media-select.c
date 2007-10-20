@@ -260,7 +260,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->template_treeview), column);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-        template_names = lgl_template_get_name_list_all (page_size_id, NULL);
+        template_names = lgl_template_get_name_list_all (NULL, page_size_id, NULL);
         load_list (media_select->priv->template_store, selection, template_names);
         lgl_template_free_name_list (template_names);
 
@@ -310,7 +310,7 @@ filter_changed_cb (GtkComboBox *combo,
                 category_id = lgl_category_lookup_id_from_name (category_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_id = \"%s\"", page_size_id);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
-                template_names = lgl_template_get_name_list_all (page_size_id, category_id);
+                template_names = lgl_template_get_name_list_all (NULL, page_size_id, category_id);
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
                 load_list (media_select->priv->template_store, selection, template_names);
                 lgl_template_free_name_list (template_names);
@@ -587,6 +587,7 @@ load_list (GtkListStore           *store,
         gchar       *size;
         gchar       *layout;
         gchar       *description;
+        gchar       *name;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -601,8 +602,10 @@ load_list (GtkListStore           *store,
                         gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
 
                         template = lgl_template_from_name (p->data);
-
-                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (template->name);
+                        
+                        name = lgl_template_get_name (template);
+                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (name);
+                        g_free (name);
 
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);

@@ -179,6 +179,7 @@ gl_file_properties (glLabel   *label,
 		    glWindow  *window)
 {
 	GtkWidget    *dialog;
+        gchar        *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -198,10 +199,12 @@ gl_file_properties (glLabel   *label,
                                                            label->template->page_size,
                                                            NULL);
         }
-        if (label->template->name != NULL) {
-                gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog),
-                                                       label->template->name);
+        name = lgl_template_get_name (label->template);
+        if (name != NULL) {
+                gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog), name);
         }
+        g_free (name);
+
         gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog),
 					      label->rotate_flag);
 

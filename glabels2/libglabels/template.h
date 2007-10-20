@@ -35,6 +35,8 @@ G_BEGIN_DECLS
 
 typedef struct _lglTemplate                lglTemplate;
 
+typedef struct _lglTemplateAlias           lglTemplateAlias;
+
 typedef union  _lglTemplateFrame           lglTemplateFrame;
 typedef struct _lglTemplateFrameAll        lglTemplateFrameAll;
 typedef struct _lglTemplateFrameRect       lglTemplateFrameRect;
@@ -56,11 +58,15 @@ typedef struct _lglTemplateOrigin          lglTemplateOrigin;
  */
 struct _lglTemplate {
 
-	gchar               *name;
+	gchar               *brand;
+        gchar               *part;
 	gchar               *description;
 	gchar               *page_size;
 	gdouble              page_width;
 	gdouble              page_height;
+
+	/* List of (lglTemplateAlias *) aliase structures. */
+	GList               *aliases;
 
         /* List of (gchar *) category ids. */
 	GList               *categories;
@@ -70,11 +76,18 @@ struct _lglTemplate {
 	 * template. */
 	GList               *frames;
 
-	/* List of (gchar *) aliases. */
-	GList               *aliases;
-
 };
 
+
+/*
+ *   Top-level Template Structure
+ */
+struct _lglTemplateAlias {
+
+	gchar               *brand;
+        gchar               *part;
+
+};
 
 /*
  *   Possible Frame Shapes
@@ -253,10 +266,17 @@ void                 lgl_template_register              (const lglTemplate    *t
 /*
  * Known templates query functions
  */
-GList               *lgl_template_get_name_list_unique (const gchar         *page_size,
+GList               *lgl_template_get_brand_list       (const gchar         *page_size,
                                                         const gchar         *category);
 
-GList               *lgl_template_get_name_list_all    (const gchar         *page_size,
+void                 lgl_template_free_brand_list      (GList               *brands);
+
+GList               *lgl_template_get_name_list_unique (const gchar         *brand,
+                                                        const gchar         *page_size,
+                                                        const gchar         *category);
+
+GList               *lgl_template_get_name_list_all    (const gchar         *brand,
+                                                        const gchar         *page_size,
                                                         const gchar         *category);
 
 void                 lgl_template_free_name_list       (GList               *names);
@@ -267,6 +287,14 @@ lglTemplate         *lgl_template_from_name            (const gchar         *nam
 /* 
  * Template query functions
  */
+gchar                     *lgl_template_get_name             (const lglTemplate   *template);
+
+gboolean                   lgl_template_do_templates_match   (const lglTemplate   *template1,
+                                                              const lglTemplate   *template2);
+
+gboolean                   lgl_template_does_brand_match     (const lglTemplate   *template,
+                                                              const gchar         *brand);
+
 gboolean                   lgl_template_does_page_size_match (const lglTemplate   *template,
                                                               const gchar         *page_size);
 
@@ -289,11 +317,15 @@ lglTemplateOrigin   *lgl_template_frame_get_origins    (const lglTemplateFrame  
 /*
  * Template Construction
  */
-lglTemplate         *lgl_template_new                  (const gchar          *name,
+lglTemplate         *lgl_template_new                  (const gchar          *brand,
+                                                        const gchar          *part,
                                                         const gchar          *description,
                                                         const gchar          *page_size,
                                                         gdouble               page_width,
                                                         gdouble               page_height);
+
+void                 lgl_template_add_alias            (lglTemplate          *template,
+                                                        lglTemplateAlias     *alias);
 
 void                 lgl_template_add_category         (lglTemplate          *template,
                                                         const gchar          *category);
@@ -301,15 +333,15 @@ void                 lgl_template_add_category         (lglTemplate          *te
 void                 lgl_template_add_frame            (lglTemplate          *template,
                                                         lglTemplateFrame     *frame);
 
-void                 lgl_template_add_alias            (lglTemplate          *template,
-                                                        const gchar          *alias);
-
 lglTemplateFrame    *lgl_template_frame_rect_new       (const gchar          *id,
                                                         gdouble               w,
                                                         gdouble               h,
                                                         gdouble               r,
                                                         gdouble               x_waste,
                                                         gdouble               y_waste);
+
+lglTemplateAlias    *lgl_template_alias_new            (const gchar          *brand,
+                                                        const gchar          *part);
 
 lglTemplateFrame    *lgl_template_frame_round_new      (const gchar          *id,
                                                         gdouble               r,
@@ -355,6 +387,9 @@ lglTemplateMarkup   *lgl_template_markup_rect_new      (gdouble               x1
 lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig_template);
 
 void                 lgl_template_free                 (lglTemplate          *template);
+
+lglTemplateAlias    *lgl_template_alias_dup            (const lglTemplateAlias     *orig_alias);
+void                 lgl_template_alias_free           (lglTemplateAlias           *alias);
 
 lglTemplateFrame    *lgl_template_frame_dup            (const lglTemplateFrame     *orig_frame);
 void                 lgl_template_frame_free           (lglTemplateFrame           *frame);

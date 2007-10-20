@@ -22,6 +22,7 @@
                                 POSTNET-5  |
                                 POSTNET-9  |
                                 POSTNET-11 |
+                                CEPNET     |
                                 EAN        |
                                 EAN-8      |
                                 EAN-8+2    |
@@ -45,7 +46,8 @@
                                 I25        |
                                 CBR        |
                                 MSI        |
-                                PLS)"
+                                PLS        |
+				IEC16022)"
                                -->
 
 <!-- Data encoding method -->
@@ -121,7 +123,9 @@
 
 <!ELEMENT Template (Meta*, (%label_element;)+, Alias*)>
 <!ATTLIST Template
-                 name            %STRING_TYPE;           #REQUIRED
+                 brand           %STRING_TYPE;           #REQUIRED
+                 part            %STRING_TYPE;           #REQUIRED
+                 name            %STRING_TYPE;           #IMPLIED
                  size            %STRING_TYPE;           #REQUIRED
                  width           %LENGTH_TYPE;           #IMPLIED
                  height          %LENGTH_TYPE;           #IMPLIED

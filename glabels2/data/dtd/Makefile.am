@@ -3,7 +3,7 @@
 dtddir = $(datadir)/glabels/dtd
 
 dtd_DATA = \
-	glabels-2.0.dtd
+	glabels-2.2.dtd
 
 EXTRA_DIST = $(dtd_DATA)
 

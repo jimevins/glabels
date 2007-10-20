@@ -22,7 +22,8 @@ This section describes a set of functions for constructing new template structur
 
 </para>
 
-@name: 
+@brand: 
+@part: 
 @description: 
 @page_size: 
 @page_width: 
@@ -71,6 +72,33 @@ This section describes a set of functions for constructing new template structur
 </para>
 
 @template: 
+@alias: 
+
+
+<!-- ##### FUNCTION lgl_template_alias_new ##### -->
+<para>
+
+</para>
+
+@brand: 
+@part: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_alias_dup ##### -->
+<para>
+
+</para>
+
+@orig_alias: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_alias_free ##### -->
+<para>
+
+</para>
+
 @alias: 
 
 

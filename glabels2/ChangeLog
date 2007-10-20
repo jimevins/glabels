@@ -1,3 +1,29 @@
+2007-10-20  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/Makefile.am:
+	* data/dtd/glabels-2.0.dtd:
+	* data/dtd/glabels-2.2.dtd:
+		Rename glabels-2.0.dtd to glabels-2.2.dtd.  Added brand and part attributes to
+		template node.
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml.h:
+		Added brand and part attributes to template and alias structures and nodes.
+	* src/file.c:
+	* src/label.c:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/template-designer.c:
+	* src/wdgt-media-select.c:
+		Use modified libglabels API.
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/template-construction.sgml:
+	* docs/libglabels/tmpl/template-db.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+		Update libglabels documentation to reflect above modifications.
+
 2007-10-14  Jim Evins  <evins@snaught.com>
 
 	* docs/libglabels/libglabels-decl-list.txt:

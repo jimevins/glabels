@@ -31,7 +31,7 @@
 
 #include "enums.h"
 
-#define LGL_XML_NAME_SPACE "http://snaught.com/glabels/2.0/"
+#define LGL_XML_NAME_SPACE "http://snaught.com/glabels/2.2/"
 
 G_BEGIN_DECLS
 

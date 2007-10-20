@@ -42,7 +42,7 @@
 #include "xml-template.h"
 #include "paper.h"
 
-#define FULL_PAGE "Full-page"
+#define EQUAL(s1,s2) (!g_utf8_collate (s1, s2))
 
 /*===========================================*/
 /* Private types                             */
@@ -107,19 +107,23 @@ lgl_template_init (void)
 void
 lgl_template_register (const lglTemplate  *template)
 {
-	GList       *p_tmplt, *pa1;
-	lglTemplate *template1;
+	GList            *p_tmplt1, *p_a1;
+	lglTemplate      *template1;
+        lglTemplateAlias *alias1;
 
 	if (!templates) {
 		lgl_template_init ();
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
-		template1 = (lglTemplate *) p_tmplt->data;
+	for (p_tmplt1 = templates; p_tmplt1 != NULL; p_tmplt1 = p_tmplt1->next) {
+		template1 = (lglTemplate *) p_tmplt1->data;
 
-		for (pa1=template1->aliases; pa1!=NULL; pa1=pa1->next) {
-			
-			if (g_utf8_collate (template->name, pa1->data) == 0) {
+		for (p_a1=template1->aliases; p_a1!=NULL; p_a1=p_a1->next) {
+			alias1 = (lglTemplateAlias *) p_a1->data;
+
+			if ( EQUAL (template->brand, alias1->brand) &&
+                             EQUAL (template->part, alias1->part) )
+                        {
 
 				/* FIXME: make sure templates are really identical */
 				/*        if not, apply hash to name to make unique. */
@@ -140,7 +144,7 @@ lgl_template_register (const lglTemplate  *template)
 		/* FIXME: make sure filename is unique */
 		dir = LGL_USER_DATA_DIR;
 		mkdir (dir, 0775); /* Try to make sure directory exists. */
-		filename = g_strconcat (template->name, ".template", NULL);
+		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
 		abs_filename = g_build_filename (dir, filename, NULL);
 		lgl_xml_template_write_template_to_file (template, abs_filename);
 		g_free (dir);
@@ -154,70 +158,25 @@ lgl_template_register (const lglTemplate  *template)
 }
 
 /**
- * lgl_template_get_name_list_unique:
+ * lgl_template_get_brand_list:
  * @page_size: If non NULL, limit results to given page size.
  * @category: If non NULL, limit results to given template category.
  *
- * Get a list of valid names of unique templates in the template database.  Results
- * can be filtered by page size and/or template category.  A list of valid page sizes
- * can be obtained using lgl_paper_get_id_list().  A list of valid template categories
- * can be obtained using lgl_category_get_id_list().
- *
- * This function differs from lgl_template_get_name_list_all(), because it does not
- * return multiple names for the same template.
- *
- * Returns: a list of template names.
- */
-GList *
-lgl_template_get_name_list_unique (const gchar *page_size,
-                                   const gchar *category)
-{
-	GList       *p_tmplt;
-	lglTemplate *template;
-	GList       *names = NULL;
-
-	if (!templates)
-        {
-		lgl_template_init ();
-	}
-
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_page_size_match (template, page_size) &&
-                    lgl_template_does_category_match (template, category))
-                {
-                        names = g_list_insert_sorted (names, g_strdup (template->name),
-                                                      (GCompareFunc)g_utf8_collate);
-		}
-	}
-
-	return names;
-}
-
-/**
- * lgl_template_get_name_list_all:
- * @page_size: If non NULL, limit results to given page size.
- * @category: If non NULL, limit results to given template category.
- *
- * Get a list of all valid names and aliases of templates in the template database.
+ * Get a list of all valid brands of templates in the template database.
  * Results can be filtered by page size and/or template category.  A list of valid page
  * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
  * categories can be obtained using lgl_category_get_id_list().
  *
- * This function differs from lgl_template_get_name_list_unique(), because it will
- * return multiple names for the same template.
- *
- * Returns: a list of template names and aliases.
+ * Returns: a list of brands
  */
 GList *
-lgl_template_get_name_list_all (const gchar *page_size,
-                                const gchar *category)
+lgl_template_get_brand_list (const gchar *page_size,
+                             const gchar *category)
 {
-	GList       *p_tmplt, *p_alias;
-	lglTemplate *template;
-	gchar       *str;
-	GList       *names = NULL;
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template;
+	lglTemplateAlias *alias;
+	GList            *brands = NULL;
 
 	if (!templates)
         {
@@ -233,15 +192,149 @@ lgl_template_get_name_list_all (const gchar *page_size,
 			for (p_alias = template->aliases; p_alias != NULL;
 			     p_alias = p_alias->next)
                         {
-				str = g_strdup ((gchar *) p_alias->data);
-				names = g_list_insert_sorted (names, str,
-							     (GCompareFunc)g_utf8_collate);
+                                alias = (lglTemplateAlias *)p_alias->data;
+
+                                if ( !g_list_find_custom (brands, alias->brand,
+                                                          (GCompareFunc)g_utf8_collate) )
+                                {
+                                        brands = g_list_insert_sorted (brands,
+                                                                       g_strdup (alias->brand),
+                                                                       (GCompareFunc)g_utf8_collate);
+                                }
+			}
+		}
+	}
+
+	return brands;
+}
+
+/**
+ * lgl_template_free_brand_list:
+ * @brands: List of template brand strings to be freed.
+ *
+ * Free up all storage associated with a list of template names obtained with
+ * lgl_template_get_brand_list().
+ *
+ */
+void
+lgl_template_free_brand_list (GList *brands)
+{
+	GList *p_brand;
+
+	for (p_brand = brands; p_brand != NULL; p_brand = p_brand->next)
+        {
+		g_free (p_brand->data);
+		p_brand->data = NULL;
+	}
+
+	g_list_free (brands);
+}
+
+
+/**
+ * lgl_template_get_name_list_unique:
+ * @brand:     If non NULL, limit results to given brand
+ * @page_size: If non NULL, limit results to given page size.
+ * @category: If non NULL, limit results to given template category.
+ *
+ * Get a list of valid names of unique templates in the template database.  Results
+ * can be filtered by page size and/or template category.  A list of valid page sizes
+ * can be obtained using lgl_paper_get_id_list().  A list of valid template categories
+ * can be obtained using lgl_category_get_id_list().
+ *
+ * This function differs from lgl_template_get_name_list_all(), because it does not
+ * return multiple names for the same template.
+ *
+ * Returns: a list of template names.
+ */
+GList *
+lgl_template_get_name_list_unique (const gchar *brand,
+                                   const gchar *page_size,
+                                   const gchar *category)
+{
+	GList       *p_tmplt;
+	lglTemplate *template;
+        gchar       *name;
+	GList       *names = NULL;
+
+	if (!templates)
+        {
+		lgl_template_init ();
+	}
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template = (lglTemplate *) p_tmplt->data;
+
+                if (lgl_template_does_brand_match (template, brand) &&
+                    lgl_template_does_page_size_match (template, page_size) &&
+                    lgl_template_does_category_match (template, category))
+                {
+                        name = g_strdup_printf ("%s %s", template->brand, template->part);
+                        names = g_list_insert_sorted (names, name,
+                                                      (GCompareFunc)g_utf8_collate);
+                }
+	}
+
+	return names;
+}
+
+/**
+ * lgl_template_get_name_list_all:
+ * @brand:     If non NULL, limit results to given brand
+ * @page_size: If non NULL, limit results to given page size.
+ * @category: If non NULL, limit results to given template category.
+ *
+ * Get a list of all valid names and aliases of templates in the template database.
+ * Results can be filtered by page size and/or template category.  A list of valid page
+ * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
+ * categories can be obtained using lgl_category_get_id_list().
+ *
+ * This function differs from lgl_template_get_name_list_unique(), because it will
+ * return multiple names for the same template.
+ *
+ * Returns: a list of template names and aliases.
+ */
+GList *
+lgl_template_get_name_list_all (const gchar *brand,
+                                const gchar *page_size,
+                                const gchar *category)
+{
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template;
+	lglTemplateAlias *alias;
+        gchar            *name;
+	GList            *names = NULL;
+
+	if (!templates)
+        {
+		lgl_template_init ();
+	}
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template = (lglTemplate *) p_tmplt->data;
+		if (lgl_template_does_page_size_match (template, page_size) &&
+                    lgl_template_does_category_match (template, category))
+                {
+			for (p_alias = template->aliases; p_alias != NULL;
+			     p_alias = p_alias->next)
+                        {
+                                alias = (lglTemplateAlias *)p_alias->data;
+
+                                if ( !brand || EQUAL( alias->brand, brand) )
+                                {
+                                        name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+                                        names = g_list_insert_sorted (names, name,
+                                                                      (GCompareFunc)g_utf8_collate);
+                                }
 			}
 		}
 	}
 
 	return names;
 }
+
 
 /**
  * lgl_template_free_name_list:
@@ -256,7 +349,8 @@ lgl_template_free_name_list (GList *names)
 {
 	GList *p_name;
 
-	for (p_name = names; p_name != NULL; p_name = p_name->next) {
+	for (p_name = names; p_name != NULL; p_name = p_name->next)
+        {
 		g_free (p_name->data);
 		p_name->data = NULL;
 	}
@@ -276,26 +370,35 @@ lgl_template_free_name_list (GList *names)
 lglTemplate *
 lgl_template_from_name (const gchar *name)
 {
-	GList        *p_tmplt, *p_alias;
-	lglTemplate  *template;
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template;
+        lglTemplateAlias *alias;
+        gchar            *candidate_name;
 
-	if (!templates) {
+	if (!templates)
+        {
 		lgl_template_init ();
 	}
 
-	if (name == NULL) {
+	if (name == NULL)
+        {
 		/* If no name, return first template as a default */
 		return lgl_template_dup ((lglTemplate *) templates->data);
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next) {
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
 		template = (lglTemplate *) p_tmplt->data;
-		for (p_alias = template->aliases; p_alias != NULL;
-		     p_alias = p_alias->next) {
-			if (g_utf8_collate (p_alias->data, name) == 0) {
+		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
 
+			if ( EQUAL (candidate_name, name) ) {
+                                g_free (candidate_name);
 				return lgl_template_dup (template);
 			}
+                        g_free (candidate_name);
 		}
 	}
 
@@ -419,7 +522,8 @@ lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 
 /**
  * lgl_template_new:
- *   @name:         Template name
+ *   @brand:        Template brand
+ *   @part:         Template part name/number
  *   @description:  Template descriptions
  *   @page_size:    Page size id
  *   @page_width:   Page width in points, set to zero unless page_size="Other"
@@ -434,17 +538,20 @@ lgl_template_frame_get_origins (const lglTemplateFrame *frame)
  *
  */
 lglTemplate *
-lgl_template_new (const gchar         *name,
+lgl_template_new (const gchar         *brand,
+                  const gchar         *part,
                   const gchar         *description,
                   const gchar         *page_size,
                   gdouble              page_width,
                   gdouble              page_height)
 {
-	lglTemplate *template;
+	lglTemplate      *template;
+	lglTemplateAlias *alias;
 
 	template = g_new0 (lglTemplate,1);
 
-	template->name        = g_strdup (name);
+	template->brand       = g_strdup (brand);
+	template->part        = g_strdup (part);
 	template->description = g_strdup (description);
 	template->page_size   = g_strdup (page_size);
 	template->page_width  = page_width;
@@ -452,9 +559,75 @@ lgl_template_new (const gchar         *name,
 
 	/* Always include primary name in alias list. */
 	template->aliases = NULL;
-	template->aliases = g_list_append (template->aliases, g_strdup (name));
+        alias = lgl_template_alias_new (brand, part);
+        lgl_template_add_alias (template, alias);
 
 	return template;
+}
+
+/**
+ * lgl_template_get_name:
+ *   @template:  Pointer to template structure to test
+ *
+ * This function returns the name of the given template.  The name is the concetenation
+ * of the brand and part name/number.
+ *
+ * Returns:  A pointer to a newly allocated name string.  Should be freed with g_free().
+ *
+ */
+gchar *
+lgl_template_get_name (const lglTemplate  *template)
+{
+	g_return_val_if_fail (template, NULL);
+
+        return g_strdup_printf ("%s %s", template->brand, template->part);
+}
+
+/**
+ * lgl_template_do_templates_match:
+ *   @template1:  Pointer to 1st template structure to test
+ *   @template2:  Pointer to 2nd template structure to test
+ *
+ * This function tests if the given templates match.  This is a simple test that only tests
+ * the brand and part name/number. It does not test if they are actually identical.
+ *
+ * Returns:  TRUE if the two template matche.
+ *
+ */
+gboolean
+lgl_template_do_templates_match (const lglTemplate  *template1,
+                                 const lglTemplate  *template2)
+{
+	g_return_val_if_fail (template1, FALSE);
+	g_return_val_if_fail (template2, FALSE);
+
+        return (EQUAL (template1->brand, template2->brand) &&
+                EQUAL (template1->part, template2->part));
+}
+
+/**
+ * lgl_template_does_brand_match:
+ *   @template:  Pointer to template structure to test
+ *   @brand:     Brand string
+ *
+ * This function tests if the brand of the template matches the given brand.
+ *
+ * Returns:  TRUE if the template matches the given brand.
+ *
+ */
+gboolean
+lgl_template_does_brand_match (const lglTemplate  *template,
+                               const gchar        *brand)
+{
+	g_return_val_if_fail (template, FALSE);
+
+        /* NULL matches everything. */
+        if (brand == NULL)
+        {
+                return TRUE;
+        }
+
+        return EQUAL (template->brand, brand);
 }
 
 /**
@@ -518,6 +691,48 @@ lgl_template_does_category_match  (const lglTemplate  *template,
 }
 
 /**
+ * lgl_template_alias_new:
+ *   @brand:        Alias brand
+ *   @part:         Alias part name/number
+ *
+ * Create a new template alias structure, with the given brand and part number.
+ *
+ * Returns: pointer to a newly allocated #lglTemplateAlias structure.
+ *
+ */
+lglTemplateAlias *
+lgl_template_alias_new (const gchar         *brand,
+                        const gchar         *part)
+{
+	lglTemplateAlias *alias;
+
+	alias = g_new0 (lglTemplateAlias,1);
+
+	alias->brand       = g_strdup (brand);
+	alias->part        = g_strdup (part);
+
+	return alias;
+}
+
+/**
+ * lgl_template_add_alias:
+ *   @template:  Pointer to template structure
+ *   @alias:     Alias string
+ *
+ * This function adds the given alias to a templates list of aliases.
+ *
+ */
+void
+lgl_template_add_alias (lglTemplate         *template,
+                        lglTemplateAlias    *alias)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (alias);
+
+	template->aliases = g_list_append (template->aliases, alias);
+}
+ 
+/**
  * lgl_template_add_frame:
  *   @template:  Pointer to template structure
  *   @frame:     Pointer to frame structure
@@ -556,25 +771,6 @@ lgl_template_add_category (lglTemplate         *template,
 
 	template->categories = g_list_append (template->categories,
                                               g_strdup (category));
-}
- 
-/**
- * lgl_template_add_alias:
- *   @template:  Pointer to template structure
- *   @alias:     Alias string
- *
- * This function adds the given alias to a templates list of aliases.
- *
- */
-void
-lgl_template_add_alias (lglTemplate         *template,
-                        const gchar         *alias)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (alias);
-
-	template->aliases = g_list_append (template->aliases,
-					   g_strdup (alias));
 }
  
 /**
@@ -883,36 +1079,41 @@ lglTemplate *
 lgl_template_dup (const lglTemplate *orig_template)
 {
 	lglTemplate         *template;
+	lglTemplateAlias    *alias;
 	GList               *p;
 	lglTemplateFrame    *frame;
 
 	g_return_val_if_fail (orig_template, NULL);
 
-	template = lgl_template_new (orig_template->name,
+	template = lgl_template_new (orig_template->brand,
+                                     orig_template->part,
                                      orig_template->description,
                                      orig_template->page_size,
                                      orig_template->page_width,
                                      orig_template->page_height);
 
-	for ( p=orig_template->categories; p != NULL; p=p->next ) {
+	for ( p=orig_template->aliases; p != NULL; p=p->next )
+        {
+                alias = (lglTemplateAlias *)p->data;
 
-                lgl_template_add_category (template, p->data);
+		if ( !(EQUAL (template->brand, alias->brand) &&
+                       EQUAL (template->part, alias->part)) )
+                {
+			lgl_template_add_alias (template, lgl_template_alias_dup (alias));
+		}
 
 	}
 
-	for ( p=orig_template->frames; p != NULL; p=p->next ) {
+	for ( p=orig_template->categories; p != NULL; p=p->next )
+        {
+                lgl_template_add_category (template, p->data);
+	}
 
+	for ( p=orig_template->frames; p != NULL; p=p->next )
+        {
 		frame = (lglTemplateFrame *)p->data;
 
 		lgl_template_add_frame (template, lgl_template_frame_dup (frame));
-	}
-
-	for ( p=orig_template->aliases; p != NULL; p=p->next ) {
-
-		if (g_utf8_collate (template->name, p->data) != 0) {
-			lgl_template_add_alias (template, p->data);
-		}
-
 	}
 
 	return template;
@@ -933,14 +1134,26 @@ lgl_template_free (lglTemplate *template)
 
 	if ( template != NULL ) {
 
-		g_free (template->name);
-		template->name = NULL;
+		g_free (template->brand);
+		template->brand = NULL;
+
+		g_free (template->part);
+		template->part = NULL;
 
 		g_free (template->description);
 		template->description = NULL;
 
 		g_free (template->page_size);
 		template->page_size = NULL;
+
+		for ( p=template->aliases; p != NULL; p=p->next ) {
+
+			lgl_template_alias_free (p->data);
+			p->data = NULL;
+
+		}
+		g_list_free (template->aliases);
+		template->aliases = NULL;
 
 		for ( p=template->categories; p != NULL; p=p->next ) {
 
@@ -961,19 +1174,50 @@ lgl_template_free (lglTemplate *template)
 		g_list_free (template->frames);
 		template->frames = NULL;
 
-		for ( p=template->aliases; p != NULL; p=p->next ) {
-
-			g_free (p->data);
-			p->data = NULL;
-
-		}
-		g_list_free (template->aliases);
-		template->aliases = NULL;
-
 		g_free (template);
 
 	}
 
+}
+
+/**
+ * lgl_template_alias_dup:
+ *   @orig_alias: Alias to duplicate.
+ *
+ * This function duplicates a template alias structure.
+ *
+ * Returns:  a newly allocated #lglTemplateAlias structure.
+ *
+ */
+lglTemplateAlias *
+lgl_template_alias_dup (const lglTemplateAlias *orig_alias)
+{
+	g_return_val_if_fail (orig_alias, NULL);
+
+	return lgl_template_alias_new (orig_alias->brand, orig_alias->part);
+}
+
+/**
+ * lgl_template_alias_free:
+ *   @alias: Alias to free.
+ *
+ * This function frees all memory associated with given template alias structure.
+ *
+ */
+void
+lgl_template_alias_free (lglTemplateAlias *alias)
+{
+
+	if ( alias != NULL )
+        {
+		g_free (alias->brand);
+		alias->brand = NULL;
+
+		g_free (alias->part);
+		alias->part = NULL;
+
+		g_free (alias);
+	}
 }
 
 /**
@@ -1173,7 +1417,8 @@ template_full_page (const gchar *page_size)
 	lglPaper              *paper = NULL;
 	lglTemplate           *template = NULL;
 	lglTemplateFrame      *frame = NULL;
-	gchar                 *name;
+        gchar                 *part;
+        gchar                 *desc;
 
 	g_return_val_if_fail (page_size, NULL);
 
@@ -1182,13 +1427,11 @@ template_full_page (const gchar *page_size)
 		return NULL;
 	}
 
-	name         = g_strdup_printf (_("Generic %s full page"), page_size);
+	part = g_strdup_printf ("%s-Full-Page", paper->id);
+	desc = g_strdup_printf (_("Generic %s full page template"), paper->name);
 
-	template = lgl_template_new (name,
-                                     FULL_PAGE,
-                                     page_size,
-                                     paper->width,
-                                     paper->height);
+	template = lgl_template_new ("Generic", part, desc,
+                                     page_size, paper->width, paper->height);
 
 
 	frame = lgl_template_frame_rect_new ("0",
@@ -1203,8 +1446,8 @@ template_full_page (const gchar *page_size)
 
 	lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (9.0));
 
-	g_free (name);
-	name = NULL;
+	g_free (desc);
+	desc = NULL;
 	lgl_paper_free (paper);
 	paper = NULL;
 
@@ -1323,11 +1566,12 @@ lgl_template_print_known_templates (void)
 	lglTemplate *template;
 
 	g_print ("%s():\n", __FUNCTION__);
-	for (p=templates; p!=NULL; p=p->next) {
+	for (p=templates; p!=NULL; p=p->next)
+        {
 		template = (lglTemplate *)p->data;
 
-		g_print("TEMPLATE name=\"%s\", description=\"%s\"\n",
-			template->name, template->description);
+		g_print("TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
+			template->brand, template->part, template->description);
 
 	}
 	g_print ("\n");
@@ -1344,12 +1588,15 @@ lgl_template_print_known_templates (void)
 void
 lgl_template_print_aliases (const lglTemplate *template)
 {
-	GList *p;
+	GList            *p;
+        lglTemplateAlias *alias;
 
 	g_print ("%s():\n", __FUNCTION__);
-	for (p=template->aliases; p!=NULL; p=p->next) {
+	for (p=template->aliases; p!=NULL; p=p->next)
+        {
+                alias = (lglTemplateAlias *)p->data;
 		
-		g_print("Alias = \"%s\"\n", (gchar *)p->data);
+		g_print("Alias: brand=\"%s\", part=\"%s\"\n", alias->brand, alias->part);
 
 	}
 	g_print ("\n");
