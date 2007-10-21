@@ -1,0 +1,388 @@
+/* GLABELS.CSS */
+
+
+/* -------------- Global --------------- */
+body {
+  font-family : Verdana, Verdana, Arial, Helvetica, sans-serif;
+  font-size : 77%;
+  background-color : #EEEAE4;
+  color : #000000;
+  margin : 0;
+}
+
+
+/****************************************/
+/* Basic layout.                        */
+/****************************************/
+
+/* -------------- Title --------------- */
+#title {
+  padding: 0;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width: 150px;
+  height: 60px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: url("/images/glabels-title-140.png") top center no-repeat;
+}
+
+/* -------------- Navigation --------------- */
+#nav {
+  padding: 0;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 150px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#nav ul {
+  margin: 0;
+  padding: 0;
+  background-color: #EEEAE4;
+}
+
+#nav li {
+  font-weight: bold;
+  margin: 0;
+  list-style: none;
+  padding: 0 0 1px 0;
+  line-height: 1.0;
+}
+
+#nav span {
+  line-height: 1.0;
+  color: #333333;
+  display: block;
+  border: solid 1px #DDD9D4;
+  margin: 0;
+  border-top-color: #FFFFFF;
+  border-left-color: #FFFFFF;
+  background: #F3F0EC;
+  padding: 5px 10px 5px 0.5em;
+}
+
+#nav :link, #nav :visited {
+  line-height: 1.0;
+  color: #993333;
+  display: block;
+  text-decoration: none;
+  border: solid 1px #EEEAE4;
+  margin: 0;
+  padding: 5px 10px 5px 0.5em;
+  background: transparent url(/images/button-bg.png) top right repeat-y;
+}
+
+#nav :link:hover, #nav :visited:hover {
+  color: #FF0000;
+  border: solid 1px #DDD9D4;
+  border-top-color: #FFFFFF;
+  border-left-color: #FFFFFF;
+  background: #F3F0EC;
+}
+
+#nav :link:active, #nav :visited:active {
+  background: #FFFFFF;
+}
+
+/* -------------- Sourceforge link --------------- */
+#sflink {
+  padding: 0;
+  position: absolute;
+  top: 350px;
+  left: 0;
+  width: 150px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+/* -------------- Main flow --------------- */
+#main { 
+  font-size: 0.9em;
+  position: absolute;
+  top:0px;
+  left: 160px;
+  width: auto;
+  min-width: 440px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 20px;
+  padding-right: 20px;
+  background-color : #EEEAE4;
+}
+
+.tlcorner, .trcorner, .blcorner, .brcorner {
+        background-color : #EEEAE4;
+	width: 19px;
+	height: 19px;
+}
+
+.tlcorner, .blcorner { float: left; left: 0px; }
+.trcorner, .brcorner { float: right; right: 0px; }
+.tlcorner, .trcorner { top: 0px; }
+.blcorner, .brcorner { bottom: 0px; margin-top: -19px; top: -18px;}
+
+.tlcorner { background: #EEEAE4 url("/images/corner-tl.png") no-repeat left top; }
+.trcorner { background: #EEEAE4 url("/images/corner-tr.png") no-repeat right top; }
+.blcorner { background: #EEEAE4 url("/images/corner-bl.png") no-repeat left bottom; }
+.brcorner { background: #EEEAE4 url("/images/corner-br.png") no-repeat right bottom; }
+
+/* -------------- Main content --------------- */
+#content {
+	padding: 24px;
+	border: 1px solid #aaa;
+	background-color : #FFFFFF;
+}
+
+/* -------------- Footer --------------- */
+#footer {
+  padding: 0;
+  margin-top:    20px;
+  margin-right:  10px;
+  margin-left:   10px;
+  margin-bottom: 70px;
+  font-weight:400;
+}
+
+#copy {
+  top: 2px;
+  text-align: left;
+  float: left;
+  padding-right: 10px;
+  color : #666666;
+}
+
+#copy>a:link {
+  color : #003366;
+}
+
+#copy>a:visited {
+  color : #003366;
+}
+
+#copy>a:hover {
+  color : #666666;
+}
+
+#w3clinks {
+  top: 2px;
+  right: 0px;
+  float: right;
+  text-align: right;
+  padding-left: 20px;
+}
+
+
+/****************************************/
+/* Special content.                     */
+/****************************************/
+
+/* -------------- News --------------- */
+.newsitem {
+	margin:20px 0px 10px 0px;
+        font-family : Verdana, Arial, Helvetica, sans-serif;
+        font-size : 10pt;
+	text-align: left;
+	color:#000000;
+}
+
+.newsdate {
+	margin:0px 0px 3px 0px;
+	font-size:14px;
+	text-align: left;
+	color:#993333;
+}
+
+.newstitle {
+	margin:3px 0px 6px 0px;
+	padding:0px;
+	font-size:16px;
+	line-height:20px;
+	font-weight:900;
+	color:#000000;
+}
+
+/* -------------- Pre-formatted code box --------------- */
+.codebox {
+	margin:0px 0px 16px 0px;
+	padding:5px 5px 5px 5px;
+	border-style:solid;
+	border-color:#000000;
+	border-width:1px;
+	background-color:#FFFFF0;
+	font:11px/14px courier, monospace;
+	white-space: pre;
+}
+
+/* -------------- Newest/latest item --------------- */
+.latest {
+  font-family : Verdana, Arial, Helvetica, sans-serif;
+  font-weight:900;
+}
+
+.latest>a:link {
+  color : #FF0000;
+}
+
+.latest>a:visited {
+  color : #FF0000;
+}
+
+.latest>a:hover {
+  color : #666666;
+}
+
+/* -------------- Top level headers --------------- */
+h1 {
+  padding-left: 70px;
+  padding-top:6px;
+  margin-top:15px;
+  line-height: 58px;
+  font-size:28px;
+  text-align: left;
+  font-weight:900;
+  color:#333399;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #999999;
+}
+
+h1.about {
+  background: url(/tango-icons/dialog-information.png) top left no-repeat;
+}
+
+h1.news {
+  background: url(/tango-icons/internet-news-reader.png) top left no-repeat;
+}
+
+h1.screenshots {
+  background: url(/tango-icons/emblem-photos.png) top left no-repeat;
+}
+
+h1.download {
+  background: url(/tango-icons/package-x-generic.png) top left no-repeat;
+}
+
+h1.development {
+  background: url(/tango-icons/applications-development.png) top left no-repeat;
+}
+
+h1.doc {
+  background: url(/tango-icons/help-browser.png) top left no-repeat;
+}
+
+h1.contact {
+  background: url(/tango-icons/system-users.png) top left no-repeat;
+}
+
+h1.links {
+  background: url(/tango-icons/applications-internet.png) top left no-repeat;
+}
+
+
+/****************************************/
+/* Basic tags.                          */
+/****************************************/
+
+h2 {
+	margin:28px 0px 4px 0px;
+	padding:0px;
+	font-size:18px;
+	line-height:20px;
+	font-weight:900;
+}
+
+h3 {
+	margin:16px 0px 4px 0px;
+	padding:0px;
+	font-size:14px;
+	line-height:20px;
+	font-weight:900;
+}
+
+h4 {
+	margin:16px 0px 6px 0px;
+	padding:0px;
+	font-size:12px;
+	line-height:20px;
+	font-weight:900;
+}
+
+h5 {
+	margin:16px 0px 6px 0px;
+	padding:0px;
+	font-size:10px;
+	line-height:20px;
+	font-weight:900;
+}
+
+
+p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-family : Verdana, Arial, Helvetica, sans-serif;
+  font-size : 10pt;
+  text-align: left;
+}
+
+a:link {
+  color : #006699;
+}
+
+a:visited {
+  color : #006699;
+}
+
+a:hover {
+  color : #000000;
+}
+
+td {
+  font-family : Verdana, Arial, Helvetica, sans-serif;
+  font-size : 10pt;
+}
+
+li {
+  font-family : Verdana, Arial, Helvetica, sans-serif;
+  font-size : 10pt;
+  color : #000000;
+}
+
+
+
+/****************************************/
+/* Modifying classes.                   */
+/****************************************/
+
+.noborder {
+	border:0;
+}
+
+.center {
+	text-align: center;
+}
+
+/****************************************/
+/* FAQ                                  */
+/****************************************/
+div.faqtoc {
+	margin:0px 0px 16px 0px;
+	padding:5px 5px 5px 5px;
+	border-style:solid;
+	border-color:#000000;
+	border-width:1px;
+	background-color:#FFFFF0;
+}
+
+.faqtocline { list-style: none; }
+
+div.faqanswer {
+	margin-left:4em;
+}
