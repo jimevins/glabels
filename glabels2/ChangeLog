@@ -1,5 +1,11 @@
 2007-10-21  Jim Evins  <evins@snaught.com>
 
+	* data/glade/wdgt-media-select.glade:
+	* src/wdgt-media-select.c:
+		Added brand to filter settings.
+
+2007-10-21  Jim Evins  <evins@snaught.com>
+
 	* data/dtd/glabels-2.2.dtd:
 		Forgot to replace Alias name attribute with brand and part attributes.
 	* data/templates/avery-iso-templates.xml:

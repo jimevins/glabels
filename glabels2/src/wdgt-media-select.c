@@ -63,6 +63,7 @@ enum {
 
 struct _glWdgtMediaSelectPrivate {
 
+        GtkWidget    *brand_combo;
         GtkWidget    *page_size_combo;
         GtkWidget    *category_combo;
 
@@ -186,6 +187,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
         GladeXML          *gui;
         GtkWidget         *hbox;
+        GList             *brands = NULL;
         GList             *page_sizes = NULL;
         GList             *categories = NULL;
         GList             *template_names = NULL;
@@ -211,6 +213,8 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         hbox = glade_xml_get_widget (gui, "wdgt_media_select_hbox");
         gtk_container_add (GTK_CONTAINER (media_select), hbox);
 
+        media_select->priv->brand_combo =
+                glade_xml_get_widget (gui, "brand_combo");
         media_select->priv->page_size_combo =
                 glade_xml_get_widget (gui, "page_size_combo");
         media_select->priv->category_combo =
@@ -222,6 +226,15 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 
         page_size_id = gl_prefs_get_page_size ();
         page_size_name = lgl_paper_lookup_name_from_id (page_size_id);
+
+        /* Brand selection control */
+        gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->brand_combo));
+        brands = lgl_template_get_brand_list (NULL, NULL);
+        brands = g_list_prepend (brands, g_strdup (_("Any")));
+        gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->brand_combo), brands);
+        lgl_template_free_brand_list (brands);
+        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->brand_combo),
+                                           _("Any"));
 
         /* Page size selection control */
         gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->page_size_combo));
@@ -265,6 +278,9 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         lgl_template_free_name_list (template_names);
 
         /* Connect signals to controls */
+        g_signal_connect (G_OBJECT (media_select->priv->brand_combo), "changed",
+                          G_CALLBACK (filter_changed_cb),
+                          media_select);
         g_signal_connect (G_OBJECT (media_select->priv->page_size_combo), "changed",
                           G_CALLBACK (filter_changed_cb),
                           media_select);
@@ -288,6 +304,7 @@ filter_changed_cb (GtkComboBox *combo,
                    gpointer     user_data)
 {
         glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
+        gchar             *brand;
         gchar             *page_size_name, *page_size_id;
         gchar             *category_name, *category_id;
         GList             *template_names;
@@ -298,29 +315,40 @@ filter_changed_cb (GtkComboBox *combo,
 
 	media_select->priv->stop_signals = TRUE;
 
-        /* Update template selections for new page size */
+        /* Update template selections for new filter settings */
+        brand = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->brand_combo));
         page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo));
         category_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (media_select->priv->category_combo));
-        if ( page_size_name && strlen(page_size_name) &&
+        if ( brand && strlen(brand) &&
+             page_size_name && strlen(page_size_name) &&
              category_name && strlen(category_name) )
         {
+                gl_debug (DEBUG_MEDIA_SELECT, "brand = \"%s\"", brand);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = \"%s\"", page_size_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_name = \"%s\"", category_name);
+                if (!g_utf8_collate (brand, _("Any")))
+                {
+                        g_free (brand);
+                        brand = NULL;
+                }
                 page_size_id = lgl_paper_lookup_id_from_name (page_size_name);
                 category_id = lgl_category_lookup_id_from_name (category_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_id = \"%s\"", page_size_id);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
-                template_names = lgl_template_get_name_list_all (NULL, page_size_id, category_id);
+                template_names = lgl_template_get_name_list_all (brand, page_size_id, category_id);
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
                 load_list (media_select->priv->template_store, selection, template_names);
                 lgl_template_free_name_list (template_names);
                 g_free (page_size_id);
+                g_free (category_id);
 
                 /* Emit our "changed" signal */
                 g_signal_emit (G_OBJECT (user_data),
                                wdgt_media_select_signals[CHANGED], 0);
         }
+        g_free (brand);
         g_free (page_size_name);
+        g_free (category_name);
 
 
 	media_select->priv->stop_signals = FALSE;
@@ -639,7 +667,7 @@ load_list (GtkListStore           *store,
         {
                 gchar *text = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n%s",
                                                _("No match."),
-                                               _("Try selecting a different page size or category."));
+                                               _("Try selecting a different brand, page size or category."));
                 gtk_list_store_append (store, &iter);
                 gtk_list_store_set (store, &iter,
                                     NAME_COLUMN, "empty",
