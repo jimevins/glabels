@@ -1,5 +1,10 @@
 2007-10-20  Jim Evins  <evins@snaught.com>
 
+	* src/stock-pixmaps/*.png
+		Updated icons to use Tango color palette.
+	
+2007-10-20  Jim Evins  <evins@snaught.com>
+
 	* data/dtd/Makefile.am:
 	* data/dtd/glabels-2.0.dtd:
 	* data/dtd/glabels-2.2.dtd:
