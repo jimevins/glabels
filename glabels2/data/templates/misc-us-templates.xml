@@ -10,7 +10,7 @@
   <!-- =================================================================== -->
   <!-- Southworth BC: Business Cards, 2'' x 3_1/2'', 10 per sheet          -->
   <!-- =================================================================== -->
-  <Template name="Southworth BC" size="US-Letter" _description="Business Cards">
+  <Template brand="Southworth" part="BC" size="US-Letter" _description="Business Cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="252" height="144" round="0">
@@ -22,8 +22,7 @@
   <!-- =================================================================== -->
   <!-- Memorex CD Labels                                                 * -->
   <!-- =================================================================== -->
-  <Template name="Memorex CD Labels" size="US-Letter"
-	 _description="CD/DVD Labels">
+  <Template brand="Memorex" part="CD Labels" size="US-Letter" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
@@ -36,7 +35,7 @@
   <!-- =================================================================== -->
   <!-- Neato USCD2lbl.NTT: CD/DVD Labels (face only), 2 per sheet          -->
   <!-- =================================================================== -->
-  <Template name="Neato USCD2lbl.NTT" size="US-Letter"
+  <Template brand="Neato" part="USCD2lbl.NTT" size="US-Letter"
          _description="CD/DVD Labels (face only)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -49,7 +48,7 @@
   <!-- =================================================================== -->
   <!-- Neato USCD2lbl.NTT: CD/DVD Labels (rectangles), 2 per sheet         -->
   <!-- =================================================================== -->
-  <Template name="Neato USCD2lbl Rectangles" size="US-Letter"
+  <Template brand="Neato" part="USCD2lbl Rectangles" size="US-Letter"
 	 _description="CD Template Rectangles">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -62,7 +61,7 @@
   <!-- =================================================================== -->
   <!-- Neato CLP-192328/26: HandiCD-R 50MB, 3" x 2_1/8'', 9 per sheet      -->
   <!-- =================================================================== -->
-  <Template name="Neato HandiCD-R" size="US-Letter"
+  <Template brand="Neato" part="HandiCD-R" size="US-Letter"
 	 _description="Business Card CD">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -75,7 +74,7 @@
   <!-- =================================================================== -->
   <!-- CD STOMPER PRO CD Label Refills, (Face Only)                      * -->
   <!-- =================================================================== -->
-  <Template name="Stomper PRO CD" size="US-Letter"
+  <Template brand="Stomper" part="PRO CD" size="US-Letter"
          _description="PRO CD Labels 2-up (face only)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -86,7 +85,7 @@
     </Label-cd>
   </Template>
 
-  <Template name="Stomper PRO Zip" size="US-Letter"
+  <Template brand="Stomper" part="PRO Zip" size="US-Letter"
          _description="PRO CD Labels 2-up (Face only)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -97,7 +96,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template name="Stomper PRO Spine" size="US-Letter"
+  <Template brand="Stomper" part="PRO Spine" size="US-Letter"
          _description="PRO CD Labels 2-up (CD spine only)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -110,8 +109,7 @@
   <!-- ===================================================================-->
   <!-- Meritline Mini CD/DVD Labels (face only), 5 per sheet              -->
   <!-- ===================================================================-->
-  <Template name="Meritline Mini-CD" size="US-Letter"
-   _description="Mini-CD Labels">
+  <Template brand="Meritline" part="Mini-CD" size="US-Letter" _description="Mini-CD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="110.5" hole="57.5" waste="5">
@@ -127,7 +125,7 @@
   <!-- To write text on spine, use "upside down" template, "rotated",     -->
   <!-- spine is bottom margin, print label sheet BOTTOM FIRST.            -->
   <!-- ===================================================================-->
-  <Template name="Neato Slimline CD Case" size="US-Letter"
+  <Template brand="Neato" part="Slimline CD Case" size="US-Letter"
          _description="Slimline CD Case (rightside up)">
     <Meta category="card"/>
     <Meta category="media"/>
@@ -136,7 +134,7 @@
       <Layout nx="1" ny="2" x0="130" y0="41.9" dx="0" dy="363"/>
     </Label-rectangle>
   </Template>
-  <Template name="Neato Slimline CD Case, spine" size="US-Letter"
+  <Template brand="Neato" part="Slimline CD Case, spine" size="US-Letter"
          _description="Slimline CD Case (upside down)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -149,8 +147,8 @@
   <!-- =================================================================== -->
   <!-- Great Gizmos : CD/DVD Labels (face only), 2 per sheet             * -->
   <!-- =================================================================== -->
-  <Template name="Great Gizmos" size="US-Letter"
-         _description="CD/DVD Labels (face only)">
+  <Template brand="Great Gizmos" part="CD/DVD" size="US-Letter"
+          _description="CD/DVD Labels (face only)">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
@@ -162,7 +160,7 @@
   <!-- =================================================================== -->
   <!-- Imation-SoniX CD/DVD Labels  (Face Only)                          * -->
   <!-- =================================================================== -->
-  <Template name="Imation-SoniX No.5112 15954" size="US-Letter"
+  <Template brand="Imation-SoniX" part="No.5112 15954" size="US-Letter"
          _description="CD/DVD Labels (Face Only)">
     <Meta category="label"/>
     <Meta category="media"/>
@@ -175,7 +173,7 @@
   <!-- =================================================================== -->
   <!-- Netc Label Stock: DLT Labels, (www.netclabels.com), 30 per sheet    -->
   <!-- =================================================================== -->
-  <Template name="Netc 749303-70001 " size="US-Letter" _description="DLT Labels">
+  <Template brand="Netc" part="749303-70001 " size="US-Letter" _description="DLT Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-rectangle id="0" width="162" height="59.4" round="0">
@@ -187,7 +185,7 @@
   <!-- =================================================================== -->
   <!-- Tough-Tags TTLW-2016 Microtube labels, 85 per sheet.                -->
   <!-- =================================================================== -->
-  <Template name="Tough-Tags TTLW-2016" size="US-Letter" _description="Microtube labels">
+  <Template brand="Tough-Tags" part="TTLW-2016" size="US-Letter" _description="Microtube labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="92.16" height="36" round="5">
       <Markup-margin size="5"/>
@@ -198,7 +196,7 @@
   <!-- =================================================================== -->
   <!-- Kingdom L Cassette Labels, 12 per sheet.                            -->
   <!-- =================================================================== -->
-  <Template name="Kingdom L" size="US-Letter" _description="Cassette Labels">
+  <Template brand="Kingdom" part="L" size="US-Letter" _description="Cassette Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-rectangle id="0" width="252pt" height="117pt" round="9pt" x_waste="2.376pt" y_waste="2.376pt">

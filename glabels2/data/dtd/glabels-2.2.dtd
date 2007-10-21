@@ -207,7 +207,9 @@
 
 <!ELEMENT Alias EMPTY>
 <!ATTLIST Alias
-                 name            %STRING_TYPE;           #REQUIRED
+                 brand           %STRING_TYPE;           #REQUIRED
+                 part            %STRING_TYPE;           #REQUIRED
+                 name            %STRING_TYPE;           #IMPLIED
 >
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->

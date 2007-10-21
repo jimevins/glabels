@@ -9,7 +9,7 @@
   <!-- =================================================================== -->
   <!-- OfficeMax 86112: Multi-Purpose Labels, 2'' x 4'', 3 per sheet       -->
   <!-- =================================================================== -->
-  <Template name="OfficeMax 86112" size="Other" width="297pt" height="450pt"
+  <Template brand="OfficeMax" part="86112" size="Other" width="297pt" height="450pt"
             description="Multi-Purpose Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="288pt" height="144pt" round="9pt" waste="0pt">
@@ -21,7 +21,7 @@
   <!-- =================================================================== -->
   <!-- Dymo 99102 Large Address labels.                                    -->
   <!-- =================================================================== -->
-  <Template name="Dymo 99012" size="Other" width="102.047pt" height="252.283pt" _description="Large Address Labels">
+  <Template brand="Dymo" part="99012" size="Other" width="102.047pt" height="252.283pt" _description="Large Address Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="102.047pt" height="252.283pt" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="0pt"/>
