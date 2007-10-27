@@ -58,39 +58,6 @@ lglPaper             *lgl_paper_dup                (const lglPaper   *orig);
 void                 lgl_paper_free                (lglPaper         *paper);
 
 
-/*
- * ID lists
- */
-GList               *lgl_paper_get_id_list         (void);
-void                 lgl_paper_free_id_list        (GList           *ids);
-
-
-/*
- * Name lists
- */
-GList               *lgl_paper_get_name_list       (void);
-void                 lgl_paper_free_name_list      (GList           *names);
-
-
-/*
- * Query functions
- */
-gboolean             lgl_paper_is_id_known         (const gchar     *id);
-gboolean             lgl_paper_is_id_other         (const gchar     *id);
-
-lglPaper            *lgl_paper_from_id             (const gchar     *id);
-lglPaper            *lgl_paper_from_name           (const gchar     *name);
-
-gchar               *lgl_paper_lookup_id_from_name (const gchar     *name);
-gchar               *lgl_paper_lookup_name_from_id (const gchar     *id);
-
-
-/*
- * Debugging
- */
-void                 lgl_paper_print_known_papers  (void);
-
-
 G_END_DECLS
 
 #endif

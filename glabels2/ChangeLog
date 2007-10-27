@@ -1,3 +1,48 @@
+2007-10-26  Jim Evins  <evins@snaught.com>
+
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/db.c:
+	* libglabels/db.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+		Another pass at screwing with the libglabels API.  Moved all
+		database related stuff to db.[ch].
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/init.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template-construction.sgml:
+	* docs/libglabels/tmpl/template-db.sgml:
+	* docs/libglabels/tmpl/template-misc.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+		Updated documentation to reflect above changes to libglabels API.
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/prefs-model.c:
+	* src/print.c:
+	* src/template-designer.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-rotate-label.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Reconciled usage with above libglabels API changes.
+
 2007-10-21  Jim Evins  <evins@snaught.com>
 
 	* data/glade/wdgt-media-select.glade:

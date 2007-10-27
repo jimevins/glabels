@@ -35,8 +35,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include <libglabels/paper.h>
-#include <libglabels/template.h>
+#include <libglabels/db.h>
 #include "wdgt-mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"
 #include "print-op.h"
@@ -519,11 +518,11 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
                                          TRUE);
 
 	/* Load page size combo */
-	page_sizes = lgl_paper_get_name_list ();
+	page_sizes = lgl_db_get_paper_name_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
-	lgl_paper_free_name_list (page_sizes);
+	lgl_db_free_paper_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
-	default_page_size_name = lgl_paper_lookup_name_from_id (default_page_size_id);
+	default_page_size_name = lgl_db_lookup_paper_name_from_id (default_page_size_id);
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
 
@@ -1115,7 +1114,7 @@ apply_cb (glTemplateDesigner *dialog)
         gchar       *name;
 	
 	template = build_template (dialog);
-	lgl_template_register (template);
+	lgl_db_register_template (template);
         name = lgl_template_get_name (template);
         gl_mini_preview_pixbuf_cache_add_by_name (name);
         g_free (name);
@@ -1275,7 +1274,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 
 	if (page_size_name && strlen(page_size_name)) {
 
-		paper = lgl_paper_from_name (page_size_name);
+		paper = lgl_db_lookup_paper_from_name (page_size_name);
 	
 
 		if ( g_strcasecmp (paper->id, "Other") == 0 ) {
@@ -1621,7 +1620,7 @@ build_template (glTemplateDesigner      *dialog)
 
 	page_size_name =
 		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
-	paper = lgl_paper_from_name (page_size_name);
+	paper = lgl_db_lookup_paper_from_name (page_size_name);
 	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
 			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin))

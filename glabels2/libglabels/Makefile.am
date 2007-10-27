@@ -17,8 +17,8 @@ libglabelsincludedir=$(includedir)/libglabels
 
 libglabels_la_SOURCES =		\
 	libglabels-private.h	\
-	init.h			\
-	init.c			\
+	db.h			\
+	db.c			\
 	enums.h			\
 	paper.h			\
 	paper.c			\
@@ -37,6 +37,7 @@ libglabels_la_SOURCES =		\
 
 libglabelsinclude_HEADERS = 	\
 	libglabels.h		\
+	db.h                    \
 	enums.h			\
 	paper.h			\
 	category.h		\

@@ -31,380 +31,408 @@
 #include <glib/gi18n.h>
 #include <glib/gmem.h>
 #include <glib/gstrfuncs.h>
-#include <glib/gdir.h>
+#include <glib/gqsort.h>
 #include <glib/gmessages.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
 #include "libglabels-private.h"
-#include "xml.h"
-#include "xml-template.h"
-#include "paper.h"
 
-#define EQUAL(s1,s2) (!g_utf8_collate (s1, s2))
+#include "paper.h"
 
 /*===========================================*/
 /* Private types                             */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
-static GList *templates = NULL;
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
-static lglTemplate *template_full_page           (const gchar            *page_size);
-
-static GList       *read_templates               (void);
-
-static GList       *read_template_files_from_dir (GList                  *templates,
-                                                  const gchar            *dirname);
 
 static gint         compare_origins              (gconstpointer           a,
                                                   gconstpointer           b,
                                                   gpointer                user_data);
 
-/**
- * lgl_template_init:
- *
- * Initialize libglabels template module by reading all paper definition
- * files located in system and user template directories.
- *
- * The end user would typically call lgl_init() instead.
- */
-void
-lgl_template_init (void)
-{
-	GList *page_sizes, *p;
-
-	if (templates) {
-		return; /* Already initialized */
-	}
-
-	templates = read_templates ();
-
-	page_sizes = lgl_paper_get_id_list ();
-	for ( p=page_sizes; p != NULL; p=p->next ) {
-		if ( !lgl_paper_is_id_other (p->data) ) {
-			templates = g_list_append (templates,
-						   template_full_page (p->data));
-		}
-	}
-	lgl_paper_free_id_list (page_sizes);
-}
+/*===========================================*/
+/* Functions.                                */
+/*===========================================*/
 
 /**
- * lgl_template_register:
- * @template:  Pointer to a template structure to add to database.
+ * lgl_template_new:
+ *   @brand:        Template brand
+ *   @part:         Template part name/number
+ *   @description:  Template descriptions
+ *   @paper_id:     Page size id
+ *   @page_width:   Page width in points, set to zero unless paper_id="Other"
+ *   @page_height:  Page height in points, set to zero unless paper_id="Other"
  *
- * Register a template.  This function adds a template to the template database.
- * The template will be stored in an individual XML file in the user template directory.
- */
-void
-lgl_template_register (const lglTemplate  *template)
-{
-	GList            *p_tmplt1, *p_a1;
-	lglTemplate      *template1;
-        lglTemplateAlias *alias1;
-
-	if (!templates) {
-		lgl_template_init ();
-	}
-
-	for (p_tmplt1 = templates; p_tmplt1 != NULL; p_tmplt1 = p_tmplt1->next) {
-		template1 = (lglTemplate *) p_tmplt1->data;
-
-		for (p_a1=template1->aliases; p_a1!=NULL; p_a1=p_a1->next) {
-			alias1 = (lglTemplateAlias *) p_a1->data;
-
-			if ( EQUAL (template->brand, alias1->brand) &&
-                             EQUAL (template->part, alias1->part) )
-                        {
-
-				/* FIXME: make sure templates are really identical */
-				/*        if not, apply hash to name to make unique. */
-				return;
-			}
-				
-		}
-
-	}
-
-	if (lgl_paper_is_id_known (template->page_size)) {
-
-		gchar *dir, *filename, *abs_filename;
-
-		templates = g_list_append (templates,
-					   lgl_template_dup (template));
-
-		/* FIXME: make sure filename is unique */
-		dir = LGL_USER_DATA_DIR;
-		mkdir (dir, 0775); /* Try to make sure directory exists. */
-		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
-		abs_filename = g_build_filename (dir, filename, NULL);
-		lgl_xml_template_write_template_to_file (template, abs_filename);
-		g_free (dir);
-		g_free (filename);
-		g_free (abs_filename);
-
-	} else {
-		g_message ("Cannot register new template with unknown page size.");
-	}
-
-}
-
-/**
- * lgl_template_get_brand_list:
- * @page_size: If non NULL, limit results to given page size.
- * @category: If non NULL, limit results to given template category.
- *
- * Get a list of all valid brands of templates in the template database.
- * Results can be filtered by page size and/or template category.  A list of valid page
- * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
- * categories can be obtained using lgl_category_get_id_list().
- *
- * Returns: a list of brands
- */
-GList *
-lgl_template_get_brand_list (const gchar *page_size,
-                             const gchar *category)
-{
-	GList            *p_tmplt, *p_alias;
-	lglTemplate      *template;
-	lglTemplateAlias *alias;
-	GList            *brands = NULL;
-
-	if (!templates)
-        {
-		lgl_template_init ();
-	}
-
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_page_size_match (template, page_size) &&
-                    lgl_template_does_category_match (template, category))
-                {
-			for (p_alias = template->aliases; p_alias != NULL;
-			     p_alias = p_alias->next)
-                        {
-                                alias = (lglTemplateAlias *)p_alias->data;
-
-                                if ( !g_list_find_custom (brands, alias->brand,
-                                                          (GCompareFunc)g_utf8_collate) )
-                                {
-                                        brands = g_list_insert_sorted (brands,
-                                                                       g_strdup (alias->brand),
-                                                                       (GCompareFunc)g_utf8_collate);
-                                }
-			}
-		}
-	}
-
-	return brands;
-}
-
-/**
- * lgl_template_free_brand_list:
- * @brands: List of template brand strings to be freed.
- *
- * Free up all storage associated with a list of template names obtained with
- * lgl_template_get_brand_list().
- *
- */
-void
-lgl_template_free_brand_list (GList *brands)
-{
-	GList *p_brand;
-
-	for (p_brand = brands; p_brand != NULL; p_brand = p_brand->next)
-        {
-		g_free (p_brand->data);
-		p_brand->data = NULL;
-	}
-
-	g_list_free (brands);
-}
-
-
-/**
- * lgl_template_get_name_list_unique:
- * @brand:     If non NULL, limit results to given brand
- * @page_size: If non NULL, limit results to given page size.
- * @category: If non NULL, limit results to given template category.
- *
- * Get a list of valid names of unique templates in the template database.  Results
- * can be filtered by page size and/or template category.  A list of valid page sizes
- * can be obtained using lgl_paper_get_id_list().  A list of valid template categories
- * can be obtained using lgl_category_get_id_list().
- *
- * This function differs from lgl_template_get_name_list_all(), because it does not
- * return multiple names for the same template.
- *
- * Returns: a list of template names.
- */
-GList *
-lgl_template_get_name_list_unique (const gchar *brand,
-                                   const gchar *page_size,
-                                   const gchar *category)
-{
-	GList       *p_tmplt;
-	lglTemplate *template;
-        gchar       *name;
-	GList       *names = NULL;
-
-	if (!templates)
-        {
-		lgl_template_init ();
-	}
-
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-
-                if (lgl_template_does_brand_match (template, brand) &&
-                    lgl_template_does_page_size_match (template, page_size) &&
-                    lgl_template_does_category_match (template, category))
-                {
-                        name = g_strdup_printf ("%s %s", template->brand, template->part);
-                        names = g_list_insert_sorted (names, name,
-                                                      (GCompareFunc)g_utf8_collate);
-                }
-	}
-
-	return names;
-}
-
-/**
- * lgl_template_get_name_list_all:
- * @brand:     If non NULL, limit results to given brand
- * @page_size: If non NULL, limit results to given page size.
- * @category: If non NULL, limit results to given template category.
- *
- * Get a list of all valid names and aliases of templates in the template database.
- * Results can be filtered by page size and/or template category.  A list of valid page
- * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
- * categories can be obtained using lgl_category_get_id_list().
- *
- * This function differs from lgl_template_get_name_list_unique(), because it will
- * return multiple names for the same template.
- *
- * Returns: a list of template names and aliases.
- */
-GList *
-lgl_template_get_name_list_all (const gchar *brand,
-                                const gchar *page_size,
-                                const gchar *category)
-{
-	GList            *p_tmplt, *p_alias;
-	lglTemplate      *template;
-	lglTemplateAlias *alias;
-        gchar            *name;
-	GList            *names = NULL;
-
-	if (!templates)
-        {
-		lgl_template_init ();
-	}
-
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-		if (lgl_template_does_page_size_match (template, page_size) &&
-                    lgl_template_does_category_match (template, category))
-                {
-			for (p_alias = template->aliases; p_alias != NULL;
-			     p_alias = p_alias->next)
-                        {
-                                alias = (lglTemplateAlias *)p_alias->data;
-
-                                if ( !brand || EQUAL( alias->brand, brand) )
-                                {
-                                        name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-                                        names = g_list_insert_sorted (names, name,
-                                                                      (GCompareFunc)g_utf8_collate);
-                                }
-			}
-		}
-	}
-
-	return names;
-}
-
-
-/**
- * lgl_template_free_name_list:
- * @names: List of template name strings to be freed.
- *
- * Free up all storage associated with a list of template names obtained with
- * lgl_template_get_name_list_all() or lgl_template_get_name_list_unique().
- *
- */
-void
-lgl_template_free_name_list (GList *names)
-{
-	GList *p_name;
-
-	for (p_name = names; p_name != NULL; p_name = p_name->next)
-        {
-		g_free (p_name->data);
-		p_name->data = NULL;
-	}
-
-	g_list_free (names);
-}
-
-/**
- * lgl_template_from_name:
- * @name: name string
- *
- * Lookup template in template database from name string.
+ * Create a new template structure, with the given top-level attributes.  The
+ * created template will have no initial aliases, categories, or frames
+ * associated with it.  See lgl_template_add_alias(), lgl_template_add_category(),
+ * and lgl_template_add_frame() to add these.
  *
  * Returns: pointer to a newly allocated #lglTemplate structure.
  *
  */
 lglTemplate *
-lgl_template_from_name (const gchar *name)
+lgl_template_new (const gchar         *brand,
+                  const gchar         *part,
+                  const gchar         *description,
+                  const gchar         *paper_id,
+                  gdouble              page_width,
+                  gdouble              page_height)
 {
-	GList            *p_tmplt, *p_alias;
 	lglTemplate      *template;
-        lglTemplateAlias *alias;
-        gchar            *candidate_name;
+	lglTemplateAlias *alias;
 
-	if (!templates)
-        {
-		lgl_template_init ();
-	}
+	template = g_new0 (lglTemplate,1);
 
-	if (name == NULL)
-        {
-		/* If no name, return first template as a default */
-		return lgl_template_dup ((lglTemplate *) templates->data);
-	}
+	template->brand       = g_strdup (brand);
+	template->part        = g_strdup (part);
+	template->description = g_strdup (description);
+	template->paper_id    = g_strdup (paper_id);
+	template->page_width  = page_width;
+	template->page_height = page_height;
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
-        {
-		template = (lglTemplate *) p_tmplt->data;
-		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+	/* Always include primary name in alias list. */
+	template->aliases = NULL;
+        alias = lgl_template_alias_new (brand, part);
+        lgl_template_add_alias (template, alias);
 
-			if ( EQUAL (candidate_name, name) ) {
-                                g_free (candidate_name);
-				return lgl_template_dup (template);
-			}
-                        g_free (candidate_name);
-		}
-	}
-
-	/* No matching template has been found so return the first template */
-	return lgl_template_dup ((lglTemplate *) templates->data);
+	return template;
 }
+
+
+/**
+ * lgl_template_get_name:
+ *   @template:  Pointer to template structure to test
+ *
+ * This function returns the name of the given template.  The name is the concetenation
+ * of the brand and part name/number.
+ *
+ * Returns:  A pointer to a newly allocated name string.  Should be freed with g_free().
+ *
+ */
+gchar *
+lgl_template_get_name (const lglTemplate  *template)
+{
+	g_return_val_if_fail (template, NULL);
+
+        return g_strdup_printf ("%s %s", template->brand, template->part);
+}
+
+
+/**
+ * lgl_template_do_templates_match:
+ *   @template1:  Pointer to 1st template structure to test
+ *   @template2:  Pointer to 2nd template structure to test
+ *
+ * This function tests if the given templates match.  This is a simple test that only tests
+ * the brand and part name/number. It does not test if they are actually identical.
+ *
+ * Returns:  TRUE if the two template matche.
+ *
+ */
+gboolean
+lgl_template_do_templates_match (const lglTemplate  *template1,
+                                 const lglTemplate  *template2)
+{
+	g_return_val_if_fail (template1, FALSE);
+	g_return_val_if_fail (template2, FALSE);
+
+        return (UTF8_EQUAL (template1->brand, template2->brand) &&
+                UTF8_EQUAL (template1->part, template2->part));
+}
+
+
+/**
+ * lgl_template_does_brand_match:
+ *   @template:  Pointer to template structure to test
+ *   @brand:     Brand string
+ *
+ * This function tests if the brand of the template matches the given brand.
+ *
+ * Returns:  TRUE if the template matches the given brand.
+ *
+ */
+gboolean
+lgl_template_does_brand_match (const lglTemplate  *template,
+                               const gchar        *brand)
+{
+	g_return_val_if_fail (template, FALSE);
+
+        /* NULL matches everything. */
+        if (brand == NULL)
+        {
+                return TRUE;
+        }
+
+        return UTF8_EQUAL (template->brand, brand);
+}
+
+
+/**
+ * lgl_template_does_page_size_match:
+ *   @template:  Pointer to template structure to test
+ *   @paper_id:  Page size ID string
+ *
+ * This function tests if the page size of the template matches the given ID.
+ *
+ * Returns:  TRUE if the template matches the given page size ID.
+ *
+ */
+gboolean
+lgl_template_does_page_size_match (const lglTemplate  *template,
+                                   const gchar        *paper_id)
+{
+	g_return_val_if_fail (template, FALSE);
+
+        /* NULL matches everything. */
+        if (paper_id == NULL)
+        {
+                return TRUE;
+        }
+
+        return ASCII_EQUAL(paper_id, template->paper_id);
+}
+
+
+/**
+ * lgl_template_does_category_match:
+ *   @template:     Pointer to template structure to test
+ *   @category_id:  Category ID string
+ *
+ * This function tests if the given template belongs to the given category ID.
+ *
+ * Returns:  TRUE if the template matches the given category ID.
+ *
+ */
+gboolean
+lgl_template_does_category_match  (const lglTemplate  *template,
+                                   const gchar        *category_id)
+{
+        GList *p;
+
+	g_return_val_if_fail (template, FALSE);
+
+        /* NULL matches everything. */
+        if (category_id == NULL)
+        {
+                return TRUE;
+        }
+
+        for ( p=template->category_ids; p != NULL; p=p->next )
+        {
+                if (ASCII_EQUAL(category_id, p->data))
+                {
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
+
+/**
+ * lgl_template_alias_new:
+ *   @brand:        Alias brand
+ *   @part:         Alias part name/number
+ *
+ * Create a new template alias structure, with the given brand and part number.
+ *
+ * Returns: pointer to a newly allocated #lglTemplateAlias structure.
+ *
+ */
+lglTemplateAlias *
+lgl_template_alias_new (const gchar         *brand,
+                        const gchar         *part)
+{
+	lglTemplateAlias *alias;
+
+	alias = g_new0 (lglTemplateAlias,1);
+
+	alias->brand       = g_strdup (brand);
+	alias->part        = g_strdup (part);
+
+	return alias;
+}
+
+
+/**
+ * lgl_template_add_alias:
+ *   @template:  Pointer to template structure
+ *   @alias:     Alias string
+ *
+ * This function adds the given alias to a templates list of aliases.
+ *
+ */
+void
+lgl_template_add_alias (lglTemplate         *template,
+                        lglTemplateAlias    *alias)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (alias);
+
+	template->aliases = g_list_append (template->aliases, alias);
+}
+ 
+
+/**
+ * lgl_template_add_frame:
+ *   @template:  Pointer to template structure
+ *   @frame:     Pointer to frame structure
+ *
+ * This function adds the given frame structure to the template.  Once added,
+ * the frame structure belongs to the given template; do not attempt to free
+ * it.
+ *
+ * Note: Currently glabels only supports a single frame per template.
+ *
+ */
+void
+lgl_template_add_frame (lglTemplate      *template,
+                        lglTemplateFrame *frame)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (frame);
+
+	template->frames = g_list_append (template->frames, frame);
+}
+
+ 
+/**
+ * lgl_template_add_category:
+ *   @template:     Pointer to template structure
+ *   @category_id:  Category ID string
+ *
+ * This function adds the given category ID to a templates category list.
+ *
+ */
+void
+lgl_template_add_category (lglTemplate         *template,
+                           const gchar         *category_id)
+{
+	g_return_if_fail (template);
+	g_return_if_fail (category_id);
+
+	template->category_ids = g_list_append (template->category_ids,
+                                                g_strdup (category_id));
+}
+
+ 
+/**
+ * lgl_template_frame_rect_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @w:       width of frame in points.
+ *   @h:       height of frame in points.
+ *   @r:       radius of rounded corners in points.  (Should be 0 for square corners.)
+ *   @x_waste: Amount of overprint to allow in the horizontal direction.
+ *   @y_waste: Amount of overprint to allow in the vertical direction.
+ *
+ * This function creates a new template frame for a rectangular label or card.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
+lglTemplateFrame *
+lgl_template_frame_rect_new  (const gchar         *id,
+                              gdouble              w,
+                              gdouble              h,
+                              gdouble              r,
+                              gdouble              x_waste,
+                              gdouble              y_waste)
+{
+	lglTemplateFrame *frame;
+
+	frame = g_new0 (lglTemplateFrame, 1);
+
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
+	frame->rect.id = g_strdup (id);
+
+	frame->rect.w = w;
+	frame->rect.h = h;
+	frame->rect.r = r;
+	frame->rect.x_waste = x_waste;
+	frame->rect.y_waste = y_waste;
+
+	return frame;
+}
+
+
+/**
+ * lgl_template_frame_round_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @r:       radius of label in points.
+ *   @waste:   Amount of overprint to allow.
+ *
+ * This function creates a new template frame for a round label.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
+lglTemplateFrame *
+lgl_template_frame_round_new (const gchar         *id,
+                              gdouble              r,
+                              gdouble              waste)
+{
+	lglTemplateFrame *frame;
+
+	frame = g_new0 (lglTemplateFrame, 1);
+
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
+	frame->round.id = g_strdup (id);
+
+	frame->round.r = r;
+	frame->round.waste = waste;
+
+	return frame;
+}
+
+                                                                               
+/**
+ * lgl_template_frame_cd_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @r1:      outer radius of label in points.
+ *   @r2:      radius of center hole in points.
+ *   @w:       clip width of frame in points for business card CDs.  Should be 0 for no clipping.
+ *   @h:       clip height of frame in points for business card CDs.  Should be 0 for no clipping.
+ *   @waste:   Amount of overprint to allow.
+ *
+ * This function creates a new template frame for a CD/DVD label.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
+lglTemplateFrame *
+lgl_template_frame_cd_new (const gchar         *id,
+                           gdouble              r1,
+                           gdouble              r2,
+                           gdouble              w,
+                           gdouble              h,
+                           gdouble              waste)
+{
+	lglTemplateFrame *frame;
+
+	frame = g_new0 (lglTemplateFrame, 1);
+
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
+	frame->cd.id = g_strdup (id);
+
+	frame->cd.r1 = r1;
+	frame->cd.r2 = r2;
+	frame->cd.w  = w;
+	frame->cd.h  = h;
+	frame->cd.waste = waste;
+
+	return frame;
+}
+
 
 /**
  * lgl_template_frame_get_size:
@@ -450,6 +478,7 @@ lgl_template_frame_get_size (const lglTemplateFrame *frame,
 	}
 }
 
+
 /**
  * lgl_template_frame_get_n_labels:
  * @frame: #lglTemplateFrame structure to query
@@ -476,6 +505,7 @@ lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 
 	return n_labels;
 }
+
 
 /**
  * lgl_template_frame_get_origins:
@@ -520,363 +550,6 @@ lgl_template_frame_get_origins (const lglTemplateFrame *frame)
 	return origins;
 }
 
-/**
- * lgl_template_new:
- *   @brand:        Template brand
- *   @part:         Template part name/number
- *   @description:  Template descriptions
- *   @page_size:    Page size id
- *   @page_width:   Page width in points, set to zero unless page_size="Other"
- *   @page_height:  Page height in points, set to zero unless page_size="Other"
- *
- * Create a new template structure, with the given top-level attributes.  The
- * created template will have no initial aliases, categories, or frames
- * associated with it.  See lgl_template_add_alias(), lgl_template_add_category(),
- * and lgl_template_add_frame() to add these.
- *
- * Returns: pointer to a newly allocated #lglTemplate structure.
- *
- */
-lglTemplate *
-lgl_template_new (const gchar         *brand,
-                  const gchar         *part,
-                  const gchar         *description,
-                  const gchar         *page_size,
-                  gdouble              page_width,
-                  gdouble              page_height)
-{
-	lglTemplate      *template;
-	lglTemplateAlias *alias;
-
-	template = g_new0 (lglTemplate,1);
-
-	template->brand       = g_strdup (brand);
-	template->part        = g_strdup (part);
-	template->description = g_strdup (description);
-	template->page_size   = g_strdup (page_size);
-	template->page_width  = page_width;
-	template->page_height = page_height;
-
-	/* Always include primary name in alias list. */
-	template->aliases = NULL;
-        alias = lgl_template_alias_new (brand, part);
-        lgl_template_add_alias (template, alias);
-
-	return template;
-}
-
-/**
- * lgl_template_get_name:
- *   @template:  Pointer to template structure to test
- *
- * This function returns the name of the given template.  The name is the concetenation
- * of the brand and part name/number.
- *
- * Returns:  A pointer to a newly allocated name string.  Should be freed with g_free().
- *
- */
-gchar *
-lgl_template_get_name (const lglTemplate  *template)
-{
-	g_return_val_if_fail (template, NULL);
-
-        return g_strdup_printf ("%s %s", template->brand, template->part);
-}
-
-/**
- * lgl_template_do_templates_match:
- *   @template1:  Pointer to 1st template structure to test
- *   @template2:  Pointer to 2nd template structure to test
- *
- * This function tests if the given templates match.  This is a simple test that only tests
- * the brand and part name/number. It does not test if they are actually identical.
- *
- * Returns:  TRUE if the two template matche.
- *
- */
-gboolean
-lgl_template_do_templates_match (const lglTemplate  *template1,
-                                 const lglTemplate  *template2)
-{
-	g_return_val_if_fail (template1, FALSE);
-	g_return_val_if_fail (template2, FALSE);
-
-        return (EQUAL (template1->brand, template2->brand) &&
-                EQUAL (template1->part, template2->part));
-}
-
-/**
- * lgl_template_does_brand_match:
- *   @template:  Pointer to template structure to test
- *   @brand:     Brand string
- *
- * This function tests if the brand of the template matches the given brand.
- *
- * Returns:  TRUE if the template matches the given brand.
- *
- */
-gboolean
-lgl_template_does_brand_match (const lglTemplate  *template,
-                               const gchar        *brand)
-{
-	g_return_val_if_fail (template, FALSE);
-
-        /* NULL matches everything. */
-        if (brand == NULL)
-        {
-                return TRUE;
-        }
-
-        return EQUAL (template->brand, brand);
-}
-
-/**
- * lgl_template_does_page_size_match:
- *   @template:  Pointer to template structure to test
- *   @page_size: Page size ID string
- *
- * This function tests if the page size of the template matches the given ID.
- *
- * Returns:  TRUE if the template matches the given page size ID.
- *
- */
-gboolean
-lgl_template_does_page_size_match (const lglTemplate  *template,
-                                   const gchar        *page_size)
-{
-	g_return_val_if_fail (template, FALSE);
-
-        /* NULL matches everything. */
-        if (page_size == NULL)
-        {
-                return TRUE;
-        }
-
-        return g_ascii_strcasecmp(page_size, template->page_size) == 0;
-}
-
-/**
- * lgl_template_does_category_match:
- *   @template:  Pointer to template structure to test
- *   @category:  Category ID string
- *
- * This function tests if the given template belongs to the given category ID.
- *
- * Returns:  TRUE if the template matches the given category ID.
- *
- */
-gboolean
-lgl_template_does_category_match  (const lglTemplate  *template,
-                                   const gchar        *category)
-{
-        GList *p;
-
-	g_return_val_if_fail (template, FALSE);
-
-        /* NULL matches everything. */
-        if (category == NULL)
-        {
-                return TRUE;
-        }
-
-        for ( p=template->categories; p != NULL; p=p->next )
-        {
-                if (g_ascii_strcasecmp(category, p->data) == 0)
-                {
-                        return TRUE;
-                }
-        }
-
-        return FALSE;
-}
-
-/**
- * lgl_template_alias_new:
- *   @brand:        Alias brand
- *   @part:         Alias part name/number
- *
- * Create a new template alias structure, with the given brand and part number.
- *
- * Returns: pointer to a newly allocated #lglTemplateAlias structure.
- *
- */
-lglTemplateAlias *
-lgl_template_alias_new (const gchar         *brand,
-                        const gchar         *part)
-{
-	lglTemplateAlias *alias;
-
-	alias = g_new0 (lglTemplateAlias,1);
-
-	alias->brand       = g_strdup (brand);
-	alias->part        = g_strdup (part);
-
-	return alias;
-}
-
-/**
- * lgl_template_add_alias:
- *   @template:  Pointer to template structure
- *   @alias:     Alias string
- *
- * This function adds the given alias to a templates list of aliases.
- *
- */
-void
-lgl_template_add_alias (lglTemplate         *template,
-                        lglTemplateAlias    *alias)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (alias);
-
-	template->aliases = g_list_append (template->aliases, alias);
-}
- 
-/**
- * lgl_template_add_frame:
- *   @template:  Pointer to template structure
- *   @frame:     Pointer to frame structure
- *
- * This function adds the given frame structure to the template.  Once added,
- * the frame structure belongs to the given template; do not attempt to free
- * it.
- *
- * Note: Currently glabels only supports a single frame per template.
- *
- */
-void
-lgl_template_add_frame (lglTemplate      *template,
-                        lglTemplateFrame *frame)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (frame);
-
-	template->frames = g_list_append (template->frames, frame);
-}
- 
-/**
- * lgl_template_add_category:
- *   @template:  Pointer to template structure
- *   @category:  Category ID string
- *
- * This function adds the given category ID to a templates category list.
- *
- */
-void
-lgl_template_add_category (lglTemplate         *template,
-                           const gchar         *category)
-{
-	g_return_if_fail (template);
-	g_return_if_fail (category);
-
-	template->categories = g_list_append (template->categories,
-                                              g_strdup (category));
-}
- 
-/**
- * lgl_template_frame_rect_new:
- *   @id:      ID of frame.  (This should currently always be "0").
- *   @w:       width of frame in points.
- *   @h:       height of frame in points.
- *   @r:       radius of rounded corners in points.  (Should be 0 for square corners.)
- *   @x_waste: Amount of overprint to allow in the horizontal direction.
- *   @y_waste: Amount of overprint to allow in the vertical direction.
- *
- * This function creates a new template frame for a rectangular label or card.
- *
- * Returns: Pointer to newly allocated #lglTemplateFrame structure.
- *
- */
-lglTemplateFrame *
-lgl_template_frame_rect_new  (const gchar         *id,
-                              gdouble              w,
-                              gdouble              h,
-                              gdouble              r,
-                              gdouble              x_waste,
-                              gdouble              y_waste)
-{
-	lglTemplateFrame *frame;
-
-	frame = g_new0 (lglTemplateFrame, 1);
-
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_RECT;
-	frame->rect.id = g_strdup (id);
-
-	frame->rect.w = w;
-	frame->rect.h = h;
-	frame->rect.r = r;
-	frame->rect.x_waste = x_waste;
-	frame->rect.y_waste = y_waste;
-
-	return frame;
-}
-
-/**
- * lgl_template_frame_round_new:
- *   @id:      ID of frame.  (This should currently always be "0").
- *   @r:       radius of label in points.
- *   @waste:   Amount of overprint to allow.
- *
- * This function creates a new template frame for a round label.
- *
- * Returns: Pointer to newly allocated #lglTemplateFrame structure.
- *
- */
-lglTemplateFrame *
-lgl_template_frame_round_new (const gchar         *id,
-                              gdouble              r,
-                              gdouble              waste)
-{
-	lglTemplateFrame *frame;
-
-	frame = g_new0 (lglTemplateFrame, 1);
-
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ROUND;
-	frame->round.id = g_strdup (id);
-
-	frame->round.r = r;
-	frame->round.waste = waste;
-
-	return frame;
-}
-                                                                               
-/**
- * lgl_template_frame_cd_new:
- *   @id:      ID of frame.  (This should currently always be "0").
- *   @r1:      outer radius of label in points.
- *   @r2:      radius of center hole in points.
- *   @w:       clip width of frame in points for business card CDs.  Should be 0 for no clipping.
- *   @h:       clip height of frame in points for business card CDs.  Should be 0 for no clipping.
- *   @waste:   Amount of overprint to allow.
- *
- * This function creates a new template frame for a CD/DVD label.
- *
- * Returns: Pointer to newly allocated #lglTemplateFrame structure.
- *
- */
-lglTemplateFrame *
-lgl_template_frame_cd_new (const gchar         *id,
-                           gdouble              r1,
-                           gdouble              r2,
-                           gdouble              w,
-                           gdouble              h,
-                           gdouble              waste)
-{
-	lglTemplateFrame *frame;
-
-	frame = g_new0 (lglTemplateFrame, 1);
-
-	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_CD;
-	frame->cd.id = g_strdup (id);
-
-	frame->cd.r1 = r1;
-	frame->cd.r2 = r2;
-	frame->cd.w  = w;
-	frame->cd.h  = h;
-	frame->cd.waste = waste;
-
-	return frame;
-}
 
 /**
  * lgl_template_frame_add_layout:
@@ -896,6 +569,7 @@ lgl_template_frame_add_layout (lglTemplateFrame   *frame,
 	frame->all.layouts = g_list_append (frame->all.layouts, layout);
 }
  
+
 /**
  * lgl_template_frame_add_markup:
  *   @frame:  Pointer to template frame to add markup to.
@@ -914,6 +588,7 @@ lgl_template_frame_add_markup (lglTemplateFrame   *frame,
 	frame->all.markups = g_list_append (frame->all.markups, markup);
 }
  
+
 /**
  * lgl_template_layout_new:
  *   @nx:  Number of labels across.
@@ -950,6 +625,7 @@ lgl_template_layout_new (gint    nx,
 	return layout;
 }
 
+
 /**
  * lgl_template_markup_margin_new:
  *   @size: margin size in points.
@@ -971,6 +647,7 @@ lgl_template_markup_margin_new (gdouble size)
 
 	return markup;
 }
+
 
 /**
  * lgl_template_markup_line_new:
@@ -1003,6 +680,7 @@ lgl_template_markup_line_new (gdouble x1,
 	return markup;
 }
 
+
 /**
  * lgl_template_markup_circle_new:
  *   @x0: x coordinate of center of circle.
@@ -1030,6 +708,7 @@ lgl_template_markup_circle_new (gdouble x0,
 
 	return markup;
 }
+
 
 /**
  * lgl_template_markup_rect_new:
@@ -1088,7 +767,7 @@ lgl_template_dup (const lglTemplate *orig_template)
 	template = lgl_template_new (orig_template->brand,
                                      orig_template->part,
                                      orig_template->description,
-                                     orig_template->page_size,
+                                     orig_template->paper_id,
                                      orig_template->page_width,
                                      orig_template->page_height);
 
@@ -1096,15 +775,15 @@ lgl_template_dup (const lglTemplate *orig_template)
         {
                 alias = (lglTemplateAlias *)p->data;
 
-		if ( !(EQUAL (template->brand, alias->brand) &&
-                       EQUAL (template->part, alias->part)) )
+		if ( !(UTF8_EQUAL (template->brand, alias->brand) &&
+                       UTF8_EQUAL (template->part, alias->part)) )
                 {
 			lgl_template_add_alias (template, lgl_template_alias_dup (alias));
 		}
 
 	}
 
-	for ( p=orig_template->categories; p != NULL; p=p->next )
+	for ( p=orig_template->category_ids; p != NULL; p=p->next )
         {
                 lgl_template_add_category (template, p->data);
 	}
@@ -1118,6 +797,7 @@ lgl_template_dup (const lglTemplate *orig_template)
 
 	return template;
 }
+
 
 /**
  * lgl_template_free:
@@ -1143,8 +823,8 @@ lgl_template_free (lglTemplate *template)
 		g_free (template->description);
 		template->description = NULL;
 
-		g_free (template->page_size);
-		template->page_size = NULL;
+		g_free (template->paper_id);
+		template->paper_id = NULL;
 
 		for ( p=template->aliases; p != NULL; p=p->next ) {
 
@@ -1155,14 +835,14 @@ lgl_template_free (lglTemplate *template)
 		g_list_free (template->aliases);
 		template->aliases = NULL;
 
-		for ( p=template->categories; p != NULL; p=p->next ) {
+		for ( p=template->category_ids; p != NULL; p=p->next ) {
 
 			g_free (p->data);
 			p->data = NULL;
 
 		}
-		g_list_free (template->categories);
-		template->categories = NULL;
+		g_list_free (template->category_ids);
+		template->category_ids = NULL;
 
 		for ( p=template->frames; p != NULL; p=p->next ) {
 
@@ -1180,6 +860,7 @@ lgl_template_free (lglTemplate *template)
 
 }
 
+
 /**
  * lgl_template_alias_dup:
  *   @orig_alias: Alias to duplicate.
@@ -1196,6 +877,7 @@ lgl_template_alias_dup (const lglTemplateAlias *orig_alias)
 
 	return lgl_template_alias_new (orig_alias->brand, orig_alias->part);
 }
+
 
 /**
  * lgl_template_alias_free:
@@ -1219,6 +901,7 @@ lgl_template_alias_free (lglTemplateAlias *alias)
 		g_free (alias);
 	}
 }
+
 
 /**
  * lgl_template_frame_dup:
@@ -1290,6 +973,7 @@ lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
 	return frame;
 }
 
+
 /**
  * lgl_template_frame_free:
  *   @frame: Frame to free.
@@ -1335,6 +1019,7 @@ lgl_template_frame_free (lglTemplateFrame *frame)
 
 }
 
+
 /**
  * lgl_template_layout_dup:
  *   @orig_layout: Layout to duplicate.
@@ -1359,6 +1044,7 @@ lgl_template_layout_dup (const lglTemplateLayout *orig_layout)
 	return layout;
 }
 
+
 /**
  * lgl_template_layout_free:
  *   @layout: Layout to free.
@@ -1371,6 +1057,7 @@ lgl_template_layout_free (lglTemplateLayout *layout)
 {
 	g_free (layout);
 }
+
 
 /**
  * lgl_template_markup_dup:
@@ -1395,6 +1082,7 @@ lgl_template_markup_dup (const lglTemplateMarkup *orig_markup)
 	return markup;
 }
 
+
 /**
  * lgl_template_markup_free:
  *   @markup: Markup to free.
@@ -1408,129 +1096,7 @@ lgl_template_markup_free (lglTemplateMarkup *markup)
 	g_free (markup);
 }
 
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Make a template for a full page of the given page size.        */
-/*--------------------------------------------------------------------------*/
-static lglTemplate *
-template_full_page (const gchar *page_size)
-{
-	lglPaper              *paper = NULL;
-	lglTemplate           *template = NULL;
-	lglTemplateFrame      *frame = NULL;
-        gchar                 *part;
-        gchar                 *desc;
 
-	g_return_val_if_fail (page_size, NULL);
-
-	paper = lgl_paper_from_id (page_size);
-	if ( paper == NULL ) {
-		return NULL;
-	}
-
-	part = g_strdup_printf ("%s-Full-Page", paper->id);
-	desc = g_strdup_printf (_("Generic %s full page template"), paper->name);
-
-	template = lgl_template_new ("Generic", part, desc,
-                                     page_size, paper->width, paper->height);
-
-
-	frame = lgl_template_frame_rect_new ("0",
-                                             paper->width,
-                                             paper->height,
-                                             0.0,
-                                             0.0,
-                                             0.0);
-	lgl_template_add_frame (template, frame);
-
-	lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0., 0., 0., 0.));
-
-	lgl_template_frame_add_markup (frame, lgl_template_markup_margin_new (9.0));
-
-	g_free (desc);
-	desc = NULL;
-	lgl_paper_free (paper);
-	paper = NULL;
-
-	return template;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Read templates from various  files.                            */
-/*--------------------------------------------------------------------------*/
-static GList *
-read_templates (void)
-{
-	gchar *data_dir;
-	GList *templates = NULL;
-
-	data_dir = LGL_SYSTEM_DATA_DIR;
-	templates = read_template_files_from_dir (templates, data_dir);
-	g_free (data_dir);
-
-	data_dir = LGL_USER_DATA_DIR;
-	templates = read_template_files_from_dir (templates, data_dir);
-	g_free (data_dir);
-
-	if (templates == NULL) {
-		g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
-	}
-
-	return templates;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Read all template files from given directory.  Append to list. */
-/*--------------------------------------------------------------------------*/
-static GList *
-read_template_files_from_dir (GList       *templates,
-			      const gchar *dirname)
-{
-	GDir        *dp;
-	const gchar *filename, *extension, *extension2;
-	gchar       *full_filename = NULL;
-	GError      *gerror = NULL;
-	GList       *new_templates = NULL;
-
-	if (dirname == NULL)
-		return templates;
-
-	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
-		return templates;
-	}
-
-	dp = g_dir_open (dirname, 0, &gerror);
-	if (gerror != NULL) {
-	        g_message ("cannot open data directory: %s", gerror->message );
-		return templates;
-	}
-
-	while ((filename = g_dir_read_name (dp)) != NULL) {
-
-		extension = strrchr (filename, '.');
-		extension2 = strrchr (filename, '-');
-
-		if ( (extension && (g_ascii_strcasecmp (extension, ".template") == 0)) ||
-		     (extension2 && (g_ascii_strcasecmp (extension2, "-templates.xml") == 0)) ) {
-
-			full_filename = g_build_filename (dirname, filename, NULL);
-			new_templates =
-				lgl_xml_template_read_templates_from_file (full_filename);
-			g_free (full_filename);
-
-			templates = g_list_concat (templates, new_templates);
-			new_templates = NULL;
-		}
-
-	}
-
-	g_dir_close (dp);
-
-	return templates;
-}
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Sort origins comparison function, first by y then by x.        */
-/*--------------------------------------------------------------------------*/
 static gint
 compare_origins (gconstpointer a,
 		 gconstpointer b,
@@ -1551,55 +1117,5 @@ compare_origins (gconstpointer a,
 			return 0; /* hopefully 2 labels won't have the same origin */
 		}
 	}
-}
-
-/**
- * lgl_template_print_known_templates:
- *
- * Print all known templates (for debugging purposes).
- *
- */
-void
-lgl_template_print_known_templates (void)
-{
-	GList       *p;
-	lglTemplate *template;
-
-	g_print ("%s():\n", __FUNCTION__);
-	for (p=templates; p!=NULL; p=p->next)
-        {
-		template = (lglTemplate *)p->data;
-
-		g_print("TEMPLATE brand=\"%s\", part=\"%s\", description=\"%s\"\n",
-			template->brand, template->part, template->description);
-
-	}
-	g_print ("\n");
-
-}
-
-/**
- * lgl_template_print_aliases:
- *   @template: template
- *
- * Print all aliases of a template (for debugging purposes).
- *
- */
-void
-lgl_template_print_aliases (const lglTemplate *template)
-{
-	GList            *p;
-        lglTemplateAlias *alias;
-
-	g_print ("%s():\n", __FUNCTION__);
-	for (p=template->aliases; p!=NULL; p=p->next)
-        {
-                alias = (lglTemplateAlias *)p->data;
-		
-		g_print("Alias: brand=\"%s\", part=\"%s\"\n", alias->brand, alias->part);
-
-	}
-	g_print ("\n");
-
 }
 

@@ -26,6 +26,8 @@
 #include "mini-preview-pixbuf-cache.h"
 #include "mini-preview-pixbuf.h"
 
+#include "libglabels/db.h"
+
 #include <glib/gmem.h>
 #include <glib/ghash.h>
 
@@ -59,13 +61,13 @@ gl_mini_preview_pixbuf_cache_init (void)
 
 	mini_preview_pixbuf_cache = g_hash_table_new (g_str_hash, g_str_equal);
 
-        names = lgl_template_get_name_list_unique (NULL, NULL, NULL);
+        names = lgl_db_get_template_name_list_unique (NULL, NULL, NULL);
         for ( p=names; p != NULL; p=p->next )
         {
                 gl_debug (DEBUG_PIXBUF_CACHE, "name = \"%s\"", p->data);
                 gl_mini_preview_pixbuf_cache_add_by_name ((gchar *)p->data);
         }
-        lgl_template_free_name_list (names);
+        lgl_db_free_template_name_list (names);
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END pixbuf_cache=%p", mini_preview_pixbuf_cache);
 }
@@ -81,7 +83,7 @@ gl_mini_preview_pixbuf_cache_add_by_name (gchar      *name)
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
-        template = lgl_template_from_name (name);
+        template = lgl_db_lookup_template_from_name (name);
         pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
         lgl_template_free (template);
 

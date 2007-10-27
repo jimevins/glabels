@@ -335,14 +335,14 @@ print_info_new (cairo_t          *cr,
 	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
 	g_return_val_if_fail (label->template, NULL);
-	g_return_val_if_fail (label->template->page_size, NULL);
+	g_return_val_if_fail (label->template->paper_id, NULL);
 	g_return_val_if_fail (label->template->page_width > 0, NULL);
 	g_return_val_if_fail (label->template->page_height > 0, NULL);
 
 	pi->cr = cr;
 
 	gl_debug (DEBUG_PRINT,
-		  "setting page size = \"%s\"", label->template->page_size);
+		  "setting page size = \"%s\"", label->template->paper_id);
 
 	pi->page_width  = label->template->page_width;
 	pi->page_height = label->template->page_height;

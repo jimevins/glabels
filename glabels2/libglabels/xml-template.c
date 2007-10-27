@@ -35,7 +35,7 @@
 
 #include "libglabels-private.h"
 
-#include "paper.h"
+#include "db.h"
 #include "xml.h"
 
 /*===========================================*/
@@ -201,7 +201,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
         gchar                 *part;
 	gchar                 *name;
 	gchar                 *description;
-	gchar                 *page_size;
+	gchar                 *paper_id;
 	gdouble                page_width, page_height;
 	lglPaper               *paper = NULL;
 	lglTemplate           *template;
@@ -230,37 +230,37 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
         }
 
 	description = lgl_xml_get_prop_i18n_string (template_node, "description", NULL);
-	page_size = lgl_xml_get_prop_string (template_node, "size", NULL);
+	paper_id = lgl_xml_get_prop_string (template_node, "size", NULL);
 
-	if (lgl_paper_is_id_other (page_size)) {
+	if (lgl_db_is_paper_id_other (paper_id)) {
 
 		page_width = lgl_xml_get_prop_length (template_node, "width", 0);
 		page_height = lgl_xml_get_prop_length (template_node, "height", 0);
 
 	} else {
-		paper = lgl_paper_from_id (page_size);
+		paper = lgl_db_lookup_paper_from_id (paper_id);
 		if (paper == NULL) {
 			/* This should always be an id, but just in case a name
 			   slips by! */
 			g_message (_("Unknown page size id \"%s\", trying as name"),
-				   page_size);
-			paper = lgl_paper_from_name (page_size);
-			g_free (page_size);
-			page_size = g_strdup (paper->id);
+				   paper_id);
+			paper = lgl_db_lookup_paper_from_name (paper_id);
+			g_free (paper_id);
+			paper_id = g_strdup (paper->id);
 		}
 		if (paper != NULL) {
 			page_width  = paper->width;
 			page_height = paper->height;
 		} else {
 			g_message (_("Unknown page size id or name \"%s\""),
-				   page_size);
+				   paper_id);
 		}
 		lgl_paper_free (paper);
 		paper = NULL;
 	}
 
 	template = lgl_template_new (brand, part, description,
-                                     page_size, page_width, page_height);
+                                     paper_id, page_width, page_height);
 
 	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -286,7 +286,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	g_free (brand);
 	g_free (part);
 	g_free (description);
-	g_free (page_size);
+	g_free (paper_id);
 
 	return template;
 }
@@ -603,7 +603,6 @@ xml_parse_alias_node (xmlNodePtr   alias_node,
 	gchar             *part;
 	gchar             *name;
         gchar            **v;
-        lglTemplateAlias  *alias;
 
 	brand = lgl_xml_get_prop_string (alias_node, "brand", NULL);
 	part  = lgl_xml_get_prop_string (alias_node, "part", NULL);
@@ -726,8 +725,8 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 	lgl_xml_set_prop_string (node, "brand", template->part);
 	lgl_xml_set_prop_string (node, "part", template->part);
 
-	lgl_xml_set_prop_string (node, "size", template->page_size);
-	if (xmlStrEqual ((xmlChar *)template->page_size, (xmlChar *)"Other"))
+	lgl_xml_set_prop_string (node, "size", template->paper_id);
+	if (xmlStrEqual ((xmlChar *)template->paper_id, (xmlChar *)"Other"))
         {
 
 		lgl_xml_set_prop_length (node, "width", template->page_width);
@@ -745,7 +744,7 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 			xml_create_alias_node ( alias, node, ns );
 		}
 	}
-	for ( p=template->categories; p != NULL; p=p->next )
+	for ( p=template->category_ids; p != NULL; p=p->next )
         {
                 xml_create_meta_node ( p->data, node, ns );
 	}

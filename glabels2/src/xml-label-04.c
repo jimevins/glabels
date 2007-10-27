@@ -34,6 +34,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
+#include <libglabels/db.h>
 #include <libglabels/xml.h>
 
 #include "util.h"
@@ -148,11 +149,11 @@ xml04_parse_media_description (xmlNodePtr node,
 
 	template_name = xmlNodeGetContent (node);
 
-	template = lgl_template_from_name ((gchar *)template_name);
+	template = lgl_db_lookup_template_from_name ((gchar *)template_name);
 	if (template == NULL) {
 		g_message ("Undefined template \"%s\"", template_name);
 		/* Get a default */
-		template = lgl_template_from_name (NULL);
+		template = lgl_db_lookup_template_from_name (NULL);
 		ret = FALSE;
 	} else {
 		ret = TRUE;

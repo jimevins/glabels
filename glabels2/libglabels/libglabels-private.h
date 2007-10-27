@@ -28,6 +28,7 @@
 
 #include <glib/gutils.h>
 #include <glib/gfileutils.h>
+#include <glib/gunicode.h>
 
 /* Data system and user data directories.  (must free w/ g_free()) */
 #define LGL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
@@ -36,9 +37,8 @@
 #undef  G_LOG_DOMAIN
 #define G_LOG_DOMAIN "LibGlabels"
 
-void lgl_template_init (void);
-void lgl_paper_init (void);
-void lgl_category_init (void);
+#define UTF8_EQUAL(s1,s2) (!g_utf8_collate (s1, s2))
+#define ASCII_EQUAL(s1,s2) (!g_ascii_strcasecmp (s1, s2))
 
 
 #endif /* __LIBGLABELS_PRIVATE_H__ */

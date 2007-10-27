@@ -1,3 +1,27 @@
+<!-- ##### SECTION ./tmpl/init.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/init.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/init.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/init.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/init.sgml:Title ##### -->
+init
+
+
 <!-- ##### SECTION ./tmpl/libglabels.sgml:Long_Description ##### -->
 <para>
 
@@ -22,29 +46,77 @@
 libglabels
 
 
-<!-- ##### SECTION ./tmpl/template.sgml:Long_Description ##### -->
+<!-- ##### SECTION ./tmpl/template-construction.sgml:Long_Description ##### -->
 <para>
-This section describes a set of structures representing stationary templates and related
-functions.
+This section describes a set of functions for constructing new template structures.
 </para>
 
 
-<!-- ##### SECTION ./tmpl/template.sgml:See_Also ##### -->
+<!-- ##### SECTION ./tmpl/template-construction.sgml:See_Also ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/template.sgml:Short_Description ##### -->
-Template definitions
+<!-- ##### SECTION ./tmpl/template-construction.sgml:Short_Description ##### -->
+Functions to help create new templates
 
 
-<!-- ##### SECTION ./tmpl/template.sgml:Stability_Level ##### -->
+<!-- ##### SECTION ./tmpl/template-construction.sgml:Stability_Level ##### -->
 
 
 
-<!-- ##### SECTION ./tmpl/template.sgml:Title ##### -->
-Templates
+<!-- ##### SECTION ./tmpl/template-construction.sgml:Title ##### -->
+Construction Functions
+
+
+<!-- ##### SECTION ./tmpl/template-db.sgml:Long_Description ##### -->
+<para>
+This section describes a set of functions to locate pre-defined templates and add templates
+to the LibGlabels template database.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template-db.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template-db.sgml:Short_Description ##### -->
+Database of pre-defined templates
+
+
+<!-- ##### SECTION ./tmpl/template-db.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template-db.sgml:Title ##### -->
+Database
+
+
+<!-- ##### SECTION ./tmpl/template-misc.sgml:Long_Description ##### -->
+<para>
+This section describes miscellaneous template functions.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template-misc.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/template-misc.sgml:Short_Description ##### -->
+Miscellaneous template functions
+
+
+<!-- ##### SECTION ./tmpl/template-misc.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/template-misc.sgml:Title ##### -->
+Miscellaneous Functions
 
 
 <!-- ##### SECTION ./tmpl/template2.sgml:Long_Description ##### -->
@@ -1176,13 +1248,161 @@ the CSS2 Specification (Section 4.3.2).
 @templates: 
 @utf8_filename: 
 
+<!-- ##### FUNCTION lgl_category_free_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+<!-- ##### FUNCTION lgl_category_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION lgl_category_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_category_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_category_get_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION lgl_category_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
 <!-- ##### FUNCTION lgl_category_init ##### -->
 <para>
 
 </para>
 
 
+<!-- ##### FUNCTION lgl_category_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_category_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_paper_free_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+<!-- ##### FUNCTION lgl_paper_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION lgl_paper_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_get_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_get_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
 <!-- ##### FUNCTION lgl_paper_init ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_paper_is_id_known ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_is_id_other ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_lookup_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_lookup_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_paper_print_known_papers ##### -->
 <para>
 
 </para>
@@ -1204,6 +1424,37 @@ the CSS2 Specification (Section 4.3.2).
 @frame: 
 @markup: 
 
+<!-- ##### FUNCTION lgl_template_free_brand_list ##### -->
+<para>
+
+</para>
+
+@brands: 
+
+<!-- ##### FUNCTION lgl_template_free_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+<!-- ##### FUNCTION lgl_template_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_template_get_brand_list ##### -->
+<para>
+
+</para>
+
+@page_size: 
+@category: 
+@Returns: 
+
 <!-- ##### FUNCTION lgl_template_get_first_frame ##### -->
 <para>
 
@@ -1212,11 +1463,51 @@ the CSS2 Specification (Section 4.3.2).
 @template: 
 @Returns: 
 
+<!-- ##### FUNCTION lgl_template_get_name_list_all ##### -->
+<para>
+
+</para>
+
+@brand: 
+@page_size: 
+@category: 
+@Returns: 
+
+<!-- ##### FUNCTION lgl_template_get_name_list_unique ##### -->
+<para>
+
+</para>
+
+@brand: 
+@page_size: 
+@category: 
+@Returns: 
+
 <!-- ##### FUNCTION lgl_template_init ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION lgl_template_print_aliases ##### -->
+<para>
+
+</para>
+
+@template: 
+
+<!-- ##### FUNCTION lgl_template_print_known_templates ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION lgl_template_register ##### -->
+<para>
+
+</para>
+
+@template: 
 
 <!-- ##### FUNCTION lgl_xml_template_create_templates_doc ##### -->
 <para>

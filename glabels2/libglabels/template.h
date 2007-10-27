@@ -61,7 +61,7 @@ struct _lglTemplate {
 	gchar               *brand;
         gchar               *part;
 	gchar               *description;
-	gchar               *page_size;
+	gchar               *paper_id;
 	gdouble              page_width;
 	gdouble              page_height;
 
@@ -69,7 +69,7 @@ struct _lglTemplate {
 	GList               *aliases;
 
         /* List of (gchar *) category ids. */
-	GList               *categories;
+	GList               *category_ids;
 
 	/* List of (lglTemplateFrame *) label frame structures.
 	 * Currently glabels only supports a single label frame per
@@ -258,32 +258,6 @@ struct _lglTemplateOrigin {
 
 
 
-/*
- * Template registration
- */
-void                 lgl_template_register              (const lglTemplate    *template);
-
-/*
- * Known templates query functions
- */
-GList               *lgl_template_get_brand_list       (const gchar         *page_size,
-                                                        const gchar         *category);
-
-void                 lgl_template_free_brand_list      (GList               *brands);
-
-GList               *lgl_template_get_name_list_unique (const gchar         *brand,
-                                                        const gchar         *page_size,
-                                                        const gchar         *category);
-
-GList               *lgl_template_get_name_list_all    (const gchar         *brand,
-                                                        const gchar         *page_size,
-                                                        const gchar         *category);
-
-void                 lgl_template_free_name_list       (GList               *names);
-
-lglTemplate         *lgl_template_from_name            (const gchar         *name);
-
-
 /* 
  * Template query functions
  */
@@ -296,10 +270,10 @@ gboolean                   lgl_template_does_brand_match     (const lglTemplate 
                                                               const gchar         *brand);
 
 gboolean                   lgl_template_does_page_size_match (const lglTemplate   *template,
-                                                              const gchar         *page_size);
+                                                              const gchar         *paper_id);
 
 gboolean                   lgl_template_does_category_match  (const lglTemplate   *template,
-                                                              const gchar         *category);
+                                                              const gchar         *category_id);
 
 
 /*
@@ -320,7 +294,7 @@ lglTemplateOrigin   *lgl_template_frame_get_origins    (const lglTemplateFrame  
 lglTemplate         *lgl_template_new                  (const gchar          *brand,
                                                         const gchar          *part,
                                                         const gchar          *description,
-                                                        const gchar          *page_size,
+                                                        const gchar          *paper_id,
                                                         gdouble               page_width,
                                                         gdouble               page_height);
 
@@ -328,7 +302,7 @@ void                 lgl_template_add_alias            (lglTemplate          *te
                                                         lglTemplateAlias     *alias);
 
 void                 lgl_template_add_category         (lglTemplate          *template,
-                                                        const gchar          *category);
+                                                        const gchar          *category_id);
 
 void                 lgl_template_add_frame            (lglTemplate          *template,
                                                         lglTemplateFrame     *frame);
@@ -399,13 +373,6 @@ void                 lgl_template_layout_free          (lglTemplateLayout       
 
 lglTemplateMarkup   *lgl_template_markup_dup           (const lglTemplateMarkup    *orig_markup);
 void                 lgl_template_markup_free          (lglTemplateMarkup          *markup);
-
-
-/*
- * Debugging functions
- */
-void                 lgl_template_print_known_templates (void);
-void                 lgl_template_print_aliases         (const lglTemplate    *template);
 
 
 G_END_DECLS

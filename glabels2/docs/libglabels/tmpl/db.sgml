@@ -1,0 +1,284 @@
+<!-- ##### SECTION Title ##### -->
+Database
+
+<!-- ##### SECTION Short_Description ##### -->
+Database of pre-defined templates
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a set of functions to locate and add templates and related information in
+the LibGlabels template database.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_db_init ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lgl_db_get_paper_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_paper_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+
+<!-- ##### FUNCTION lgl_db_get_paper_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_paper_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_paper_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_paper_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_paper_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_paper_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_is_paper_id_known ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_is_paper_id_other ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_get_category_id_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_category_id_list ##### -->
+<para>
+
+</para>
+
+@ids: 
+
+
+<!-- ##### FUNCTION lgl_db_get_category_name_list ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_category_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_category_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_category_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_category_id_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_category_name_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_is_category_id_known ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_get_brand_list ##### -->
+<para>
+
+</para>
+
+@paper_id: 
+@category_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_brand_list ##### -->
+<para>
+
+</para>
+
+@brands: 
+
+
+<!-- ##### FUNCTION lgl_db_register_template ##### -->
+<para>
+
+</para>
+
+@template: 
+
+
+<!-- ##### FUNCTION lgl_db_get_template_name_list_unique ##### -->
+<para>
+
+</para>
+
+@brand: 
+@paper_id: 
+@category_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_get_template_name_list_all ##### -->
+<para>
+
+</para>
+
+@brand: 
+@paper_id: 
+@category_id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_free_template_name_list ##### -->
+<para>
+
+</para>
+
+@names: 
+
+
+<!-- ##### FUNCTION lgl_db_lookup_template_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_print_known_papers ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lgl_db_print_known_categories ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lgl_db_print_known_templates ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lgl_db_print_aliases ##### -->
+<para>
+
+</para>
+
+@template: 
+
+

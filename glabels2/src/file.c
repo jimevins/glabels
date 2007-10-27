@@ -39,6 +39,7 @@
 #include "util.h"
 #include "window.h"
 #include "new-label-dialog.h"
+#include "libglabels/libglabels.h"
 #include "debug.h"
 
 /*===========================================*/
@@ -142,7 +143,7 @@ new_response (GtkDialog *dialog,
 		rotate_flag =
 			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		template = lgl_template_from_name (sheet_name);
+		template = lgl_db_lookup_template_from_name (sheet_name);
 
 		label = GL_LABEL(gl_label_new ());
 		gl_label_set_template (label, template);
@@ -194,9 +195,9 @@ gl_file_properties (glLabel   *label,
 	g_signal_connect (G_OBJECT(dialog), "response",
 			  G_CALLBACK (properties_response), dialog);
 
-        if (label->template->page_size != NULL) {
+        if (label->template->paper_id != NULL) {
                 gl_new_label_dialog_set_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
-                                                           label->template->page_size,
+                                                           label->template->paper_id,
                                                            NULL);
         }
         name = lgl_template_get_name (label->template);
@@ -243,7 +244,7 @@ properties_response (GtkDialog *dialog,
 		rotate_flag =
 			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		template = lgl_template_from_name (sheet_name);
+		template = lgl_db_lookup_template_from_name (sheet_name);
 
                 label = GL_LABEL(g_object_get_data (G_OBJECT (dialog), "label"));
                 gl_label_set_template (label, template);

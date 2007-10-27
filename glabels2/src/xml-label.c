@@ -42,7 +42,7 @@
 #include "label-barcode.h"
 #include "base64.h"
 #include "xml-label-04.h"
-#include <libglabels/template.h>
+#include <libglabels/db.h>
 #include <libglabels/xml-template.h>
 #include <libglabels/xml.h>
 #include "util.h"
@@ -54,6 +54,7 @@
 /*========================================================*/
 #define COMPAT01_NAME_SPACE "http://snaught.com/glabels/0.1/"
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
+#define COMPAT20_NAME_SPACE "http://snaught.com/glabels/2.0/"
 
 /*========================================================*/
 /* Private types.                                         */
@@ -265,6 +266,10 @@ xml_doc_to_label (xmlDocPtr         doc,
 	}
 
 	ns = xmlSearchNsByHref (doc, root, (xmlChar *)LGL_XML_NAME_SPACE);
+        if (ns == NULL) {
+ 		/* Try compatability mode 2.0 */
+                ns = xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT20_NAME_SPACE);
+        }
 	if (ns != NULL) {
 		label = xml_parse_label (root, status);
 		if (label)
@@ -338,7 +343,7 @@ xml_parse_label (xmlNodePtr        root,
 				*status = XML_LABEL_UNKNOWN_MEDIA;
 				return NULL;
 			}
-			lgl_template_register (template);
+			lgl_db_register_template (template);
 			gl_label_set_template (label, template);
 			lgl_template_free (template);
 		} else if (lgl_xml_is_node (child_node, "Objects")) {

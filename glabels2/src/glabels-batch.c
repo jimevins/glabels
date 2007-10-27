@@ -31,8 +31,7 @@
 #include "xml-label.h"
 #include "print.h"
 #include "print-op.h"
-#include <libglabels/paper.h>
-#include <libglabels/template.h>
+#include <libglabels/db.h>
 #include "util.h"
 #include "debug.h"
 
@@ -121,7 +120,7 @@ main (int argc, char **argv)
         /* initialize components */
         gl_debug_init ();
         gl_merge_init ();
-        lgl_init ();
+        lgl_db_init ();
 
         /* now print the files */
         for (p = file_list; p; p = p->next) {

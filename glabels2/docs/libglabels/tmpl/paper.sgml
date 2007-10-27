@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-Paper Sizes
+The lglPaper Structure
 
 <!-- ##### SECTION Short_Description ##### -->
 Paper size definitions
@@ -55,98 +55,5 @@ This structure defines a paper (page) size.
 </para>
 
 @paper: 
-
-
-<!-- ##### FUNCTION lgl_paper_from_id ##### -->
-<para>
-
-</para>
-
-@id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_from_name ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_get_id_list ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_free_id_list ##### -->
-<para>
-
-</para>
-
-@ids: 
-
-
-<!-- ##### FUNCTION lgl_paper_get_name_list ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_free_name_list ##### -->
-<para>
-
-</para>
-
-@names: 
-
-
-<!-- ##### FUNCTION lgl_paper_is_id_known ##### -->
-<para>
-
-</para>
-
-@id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_is_id_other ##### -->
-<para>
-
-</para>
-
-@id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_lookup_id_from_name ##### -->
-<para>
-
-</para>
-
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_lookup_name_from_id ##### -->
-<para>
-
-</para>
-
-@id: 
-@Returns: 
-
-
-<!-- ##### FUNCTION lgl_paper_print_known_papers ##### -->
-<para>
-
-</para>
-
 
 

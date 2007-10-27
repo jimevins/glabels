@@ -28,6 +28,7 @@
 
 #include <math.h>
 
+#include "libglabels/db.h"
 #include "cairo-label-path.h"
 #include "marshal.h"
 #include "color.h"
@@ -259,7 +260,7 @@ void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	/* Fetch template */
-	template = lgl_template_from_name (name);
+	template = lgl_db_lookup_template_from_name (name);
 
 	gl_wdgt_mini_preview_set_template (preview, template);
 

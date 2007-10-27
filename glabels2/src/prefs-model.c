@@ -25,7 +25,7 @@
 
 #include "prefs-model.h"
 
-#include <libglabels/paper.h>
+#include <libglabels/db.h>
 
 #include "marshal.h"
 #include "util.h"
@@ -506,7 +506,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	/* Proof read the default page size -- it must be a valid id. */
 	/* (For compatability with older versions.) */
 	/* Note: paper module must be initialized for this to work. */
-	paper = lgl_paper_from_id (prefs_model->default_page_size);
+	paper = lgl_db_lookup_paper_from_id (prefs_model->default_page_size);
 	if ( paper == NULL ) {
 		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
 	} else {

@@ -34,8 +34,7 @@
 #include "stock.h"
 #include "merge-init.h"
 #include "recent.h"
-#include <libglabels/paper.h>
-#include <libglabels/template.h>
+#include <libglabels/db.h>
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
 #include "debug.h"
@@ -119,7 +118,7 @@ main (int argc, char **argv)
 	/* Initialize subsystems */
 	gl_debug_init ();
 	gl_stock_init ();
-	lgl_init ();
+	lgl_db_init ();
 	gl_prefs_init ();
 	gl_mini_preview_pixbuf_cache_init ();
 	gl_merge_init ();

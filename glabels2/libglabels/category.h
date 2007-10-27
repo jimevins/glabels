@@ -54,28 +54,6 @@ lglCategory      *lgl_category_dup                 (const lglCategory *orig);
 void              lgl_category_free                (lglCategory       *category);
 
 
-/*
- * ID lists
- */
-GList               *lgl_category_get_id_list      (void);
-void                 lgl_category_free_id_list     (GList           *ids);
-
-
-/*
- * Known category name lists
- */
-GList            *lgl_category_get_name_list       (void);
-void              lgl_category_free_name_list      (GList            *names);
-
-
-/*
- * Query functions
- */
-lglCategory      *lgl_category_from_name           (const gchar      *name);
-lglCategory      *lgl_category_from_id             (const gchar      *id);
-gchar            *lgl_category_lookup_id_from_name (const gchar      *name);
-gchar            *lgl_category_lookup_name_from_id (const gchar      *id);
-
 G_END_DECLS
 
 #endif

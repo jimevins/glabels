@@ -35,7 +35,7 @@
 
 #include "marshal.h"
 #include "color.h"
-#include <libglabels/template.h>
+#include <libglabels/db.h>
 #include "cairo-label-path.h"
 
 #include "debug.h"
@@ -376,7 +376,7 @@ gl_wdgt_rotate_label_set_template_name (glWdgtRotateLabel *rotate_label,
 	}
 	else
 	{
-		template   = lgl_template_from_name (name);
+		template = lgl_db_lookup_template_from_name (name);
                 frame = (lglTemplateFrame *)template->frames->data;
 
 		rotate_label->priv->template = template;
