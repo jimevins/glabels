@@ -104,6 +104,12 @@ gl_mini_preview_pixbuf_cache_get_pixbuf (gchar      *name)
 
 	pixbuf = g_hash_table_lookup (mini_preview_pixbuf_cache, name);
 
+        if (!pixbuf)
+        {
+                gl_mini_preview_pixbuf_cache_add_by_name (name);
+                pixbuf = g_hash_table_lookup (mini_preview_pixbuf_cache, name);
+        }
+
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 
 	return g_object_ref (pixbuf);

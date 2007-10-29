@@ -1,3 +1,10 @@
+2007-10-28  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-template.c:
+		Remove any leading white space from part #s when parsing old names.
+	* src/mini-preview-pixbuf-cache.c:
+		If name isn't in cache add it.
+
 2007-10-26  Jim Evins  <evins@snaught.com>
 
 	* libglabels/Makefile.am:

@@ -215,17 +215,16 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
                 name = lgl_xml_get_prop_string (template_node, "name", NULL);
                 if (name)
                 {
-			g_message (_("Missing required \"brand\" or \"part\" attribute, trying deprecated name."));
                         v = g_strsplit (name, " ", 2);
                         brand = g_strdup (v[0]);
-                        part  = g_strdup (v[1]);
+                        part  = g_strchug (g_strdup (v[1]));
                         g_free (name);
                         g_strfreev (v);
                         
                 }
                 else
                 {
-			g_message (_("Name attribute also missing."));
+			g_message (_("Missing name or brand/part attributes."));
                 }
         }
 
