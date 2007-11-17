@@ -40,10 +40,10 @@ GList       *lgl_xml_template_parse_templates_doc      (const xmlDocPtr    templ
 lglTemplate *lgl_xml_template_parse_template_node      (const xmlNodePtr   template_node);
 
 
-void         lgl_xml_template_write_templates_to_file  (GList             *templates,
+gint         lgl_xml_template_write_templates_to_file  (GList             *templates,
 							const gchar       *utf8_filename);
 
-void         lgl_xml_template_write_template_to_file   (const lglTemplate *template,
+gint         lgl_xml_template_write_template_to_file   (const lglTemplate *template,
 							const gchar       *utf8_filename);
 
 void         lgl_xml_template_create_template_node     (const lglTemplate *template,

@@ -1,3 +1,21 @@
+2007-11-16  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c:
+	* libglabels/db.h:
+		Added return codes to lgl_db_register_template().  Added lgl_db_does_template_exist()
+		function.  Automatically create "User defined" category and add to all user
+		registered templates.
+	* libglabels/xml-template.c:
+	* libglabels/xml-template.h:
+		Return number of bytes written from lgl_xml_template_write_templates_to_file() and
+		lgl_xml_template_write_template_to_file().
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+		Update documentation to reflect above changes.
+
 2007-10-28  Jim Evins  <evins@snaught.com>
 
 	* libglabels/xml-template.c:

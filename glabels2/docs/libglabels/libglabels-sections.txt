@@ -1,6 +1,8 @@
 <SECTION>
 <FILE>db</FILE>
 <INCLUDE>libglabels/db.h</INCLUDE>
+lglDbRegStatus
+<SUBSECTION Init Functions>
 lgl_db_init
 <SUBSECTION Paper Functions>
 lgl_db_get_paper_id_list
@@ -28,6 +30,7 @@ lgl_db_get_brand_list
 lgl_db_free_brand_list
 <SUBSECTION Template Functions>
 lgl_db_register_template
+lgl_db_does_template_exist
 lgl_db_get_template_name_list_unique
 lgl_db_get_template_name_list_all
 lgl_db_free_template_name_list

@@ -18,6 +18,16 @@ the LibGlabels template database.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### ENUM lglDbRegStatus ##### -->
+<para>
+This enumeration defines a set of possible return values for lgl_db_register_template().
+</para>
+
+@LGL_DB_REG_OK: Registration successful.
+@LGL_DB_REG_BAD_PAPER_ID:  Registration failed because paper id is unknown.
+@LGL_DB_REG_BRAND_PART_EXISTS: Registration failed because template with same brand and part name/number already exists.
+@LGL_DB_REG_FILE_WRITE_ERROR: Registration failed because an error while writing to disk.
+
 <!-- ##### FUNCTION lgl_db_init ##### -->
 <para>
 
@@ -212,6 +222,17 @@ the LibGlabels template database.
 </para>
 
 @template: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_does_template_exist ##### -->
+<para>
+
+</para>
+
+@brand: 
+@part: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lgl_db_get_template_name_list_unique ##### -->

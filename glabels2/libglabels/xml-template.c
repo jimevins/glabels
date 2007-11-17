@@ -637,14 +637,16 @@ xml_parse_alias_node (xmlNodePtr   alias_node,
  *
  * Write a list of #lglTemplate structures to a glabels XML template file.
  *
+ * Returns: the number of bytes written or -1 in case of failure
+ *
  */
-void
+gint
 lgl_xml_template_write_templates_to_file (GList       *templates,
                                           const gchar *utf8_filename)
 {
 	xmlDocPtr    doc;
 	xmlNsPtr     ns;
-	gint         xml_ret;
+	gint         bytes_written;
 	GList       *p;
 	lglTemplate *template;
 	gchar       *filename;
@@ -662,17 +664,17 @@ lgl_xml_template_write_templates_to_file (GList       *templates,
 
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename)
+        {
 		g_message (_("Utf8 conversion error."));
-	else {
+                return -1;
+        }
+	else
+        {
 		xmlSetDocCompressMode (doc, 0);
-		xml_ret = xmlSaveFormatFile (filename, doc, TRUE);
+		bytes_written = xmlSaveFormatFile (filename, doc, TRUE);
 		xmlFreeDoc (doc);
-		if (xml_ret == -1) {
-
-			g_message (_("Problem saving xml file."));
-
-		}
 		g_free (filename);
+                return bytes_written;
 	}
 
 }
@@ -685,18 +687,23 @@ lgl_xml_template_write_templates_to_file (GList       *templates,
  *
  * Write a single #lglTemplate structures to a glabels XML template file.
  *
+ * Returns: the number of bytes written or -1 in case of failure
+ *
  */
-void
+gint
 lgl_xml_template_write_template_to_file (const lglTemplate  *template,
                                          const gchar        *utf8_filename)
 {
 	GList     *templates = NULL;
+	gint       bytes_written;
 
 	templates = g_list_append (templates, (gpointer)template);
 
-	lgl_xml_template_write_templates_to_file (templates, utf8_filename);
+	bytes_written = lgl_xml_template_write_templates_to_file (templates, utf8_filename);
 
 	g_list_free (templates);
+
+        return bytes_written;
 }
 
 

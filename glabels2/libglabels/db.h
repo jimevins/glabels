@@ -37,6 +37,14 @@
 
 G_BEGIN_DECLS
 
+typedef enum
+{
+        LGL_DB_REG_OK                =  0,
+        LGL_DB_REG_BAD_PAPER_ID      = -1,
+        LGL_DB_REG_BRAND_PART_EXISTS = -2,
+        LGL_DB_REG_FILE_WRITE_ERROR  = -3
+} lglDbRegStatus;
+
 /*
  * Module initialization
  */
@@ -102,7 +110,10 @@ void           lgl_db_free_brand_list                (GList               *brand
 /*
  * Templates
  */
-void           lgl_db_register_template              (const lglTemplate   *template);
+lglDbRegStatus lgl_db_register_template              (const lglTemplate   *template);
+
+gboolean       lgl_db_does_template_exist            (const gchar         *brand,
+                                                      const gchar         *part);
 
 GList         *lgl_db_get_template_name_list_unique  (const gchar         *brand,
                                                       const gchar         *paper_id,

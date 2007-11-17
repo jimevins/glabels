@@ -84,8 +84,8 @@ static lglTemplate *template_full_page (const gchar *page_size);
  * lgl_db_init:
  *
  * Initialize all libglabels subsystems.  It is not necessary for an application to call
- * lgl_init(), because libglabels will initialize on demand.  An application programmer may
- * choose to call lgl_init() at startup to minimize the impact of the first libglabels call
+ * lgl_db_init(), because libglabels will initialize on demand.  An application programmer may
+ * choose to call lgl_db_init() at startup to minimize the impact of the first libglabels call
  * on GUI response time.
  *
  * This function initializes its paper definitions, category definitions, and its template
@@ -95,9 +95,10 @@ static lglTemplate *template_full_page (const gchar *page_size);
 void
 lgl_db_init (void)
 {
-	lglPaper *other;
-        GList    *page_sizes;
-        GList    *p;
+	lglPaper    *paper_other;
+        lglCategory *category_user_defined;
+        GList       *page_sizes;
+        GList       *p;
 
         /*
          * Paper definitions
@@ -108,8 +109,8 @@ lgl_db_init (void)
                 papers = read_papers ();
 
                 /* Create and append an "Other" entry. */
-                other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0);
-                papers = g_list_append (papers, other);
+                paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0);
+                papers = g_list_append (papers, paper_other);
 
 	}
 
@@ -119,6 +120,10 @@ lgl_db_init (void)
 	if (!categories)
         {
                 categories = read_categories ();
+
+                /* Create and append a "User defined" entry. */
+                category_user_defined = lgl_category_new ("user-defined", _("User defined"));
+                categories = g_list_append (categories, category_user_defined);
 	}
 
         /*
@@ -185,7 +190,7 @@ lgl_db_get_paper_id_list (void)
  * @ids: List of id strings to be freed.
  *
  * Free up all storage associated with an id list obtained with
- * lgl_paper_get_id_list().
+ * lgl_db_get_paper_id_list().
  *
  */
 void
@@ -238,7 +243,7 @@ lgl_db_get_paper_name_list (void)
  * @names: List of localized paper name strings to be freed.
  *
  * Free up all storage associated with a name list obtained with
- * lgl_paper_get_name_list().
+ * lgl_db_get_paper_name_list().
  *
  */
 void
@@ -598,7 +603,7 @@ lgl_db_get_category_id_list (void)
  * @ids: List of id strings to be freed.
  *
  * Free up all storage associated with an id list obtained with
- * lgl_category_get_id_list().
+ * lgl_db_get_category_id_list().
  *
  */
 void
@@ -651,7 +656,7 @@ lgl_db_get_category_name_list (void)
  * @names: List of localized category name strings to be freed.
  *
  * Free up all storage associated with a name list obtained with
- * lgl_category_get_name_list().
+ * lgl_db_get_category_name_list().
  *
  */
 void
@@ -963,8 +968,8 @@ lgl_db_print_known_categories (void)
  *
  * Get a list of all valid brands of templates in the template database.
  * Results can be filtered by page size and/or template category.  A list of valid page
- * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
- * categories can be obtained using lgl_category_get_id_list().
+ * sizes can be obtained using lgl_db_get_paper_id_list().  A list of valid template
+ * categories can be obtained using lgl_db_get_category_id_list().
  *
  * Returns: a list of brands
  */
@@ -1042,64 +1047,103 @@ lgl_db_free_brand_list (GList *brands)
  *
  * Register a template.  This function adds a template to the template database.
  * The template will be stored in an individual XML file in the user template directory.
+ *
+ * Returns: Status of registration attempt (#lglDbRegStatus)
  */
-void
+lglDbRegStatus
 lgl_db_register_template (const lglTemplate *template)
 {
-	GList            *p_tmplt1, *p_a1;
-	lglTemplate      *template1;
-        lglTemplateAlias *alias1;
+        lglTemplate *template_copy;
+        gchar       *dir, *filename, *abs_filename;
+        gint         bytes_written;
 
 	if (!templates)
         {
 		lgl_db_init ();
 	}
 
-	for (p_tmplt1 = templates; p_tmplt1 != NULL; p_tmplt1 = p_tmplt1->next)
+        if (lgl_db_does_template_exist (template->brand, template->part))
         {
-		template1 = (lglTemplate *) p_tmplt1->data;
-
-		for (p_a1=template1->aliases; p_a1!=NULL; p_a1=p_a1->next)
-                {
-			alias1 = (lglTemplateAlias *) p_a1->data;
-
-			if ( UTF8_EQUAL (template->brand, alias1->brand) &&
-                             UTF8_EQUAL (template->part, alias1->part) )
-                        {
-
-				/* FIXME: make sure templates are really identical */
-				/*        if not, apply hash to name to make unique. */
-				return;
-			}
-				
-		}
-
-	}
+                return LGL_DB_REG_BRAND_PART_EXISTS;
+        }
 
 	if (lgl_db_is_paper_id_known (template->paper_id))
         {
+                template_copy = lgl_template_dup (template);
+                lgl_template_add_category (template_copy, "user-defined");
 
-		gchar *dir, *filename, *abs_filename;
-
-		templates = g_list_append (templates,
-					   lgl_template_dup (template));
-
-		/* FIXME: make sure filename is unique */
 		dir = LGL_USER_DATA_DIR;
 		mkdir (dir, 0775); /* Try to make sure directory exists. */
 		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
 		abs_filename = g_build_filename (dir, filename, NULL);
-		lgl_xml_template_write_template_to_file (template, abs_filename);
+		bytes_written = lgl_xml_template_write_template_to_file (template_copy, abs_filename);
 		g_free (dir);
 		g_free (filename);
 		g_free (abs_filename);
 
+                if (bytes_written > 0)
+                {
+                        templates = g_list_append (templates, template_copy);
+                        return LGL_DB_REG_OK;
+                }
+                else
+                {
+                        lgl_template_free (template_copy);
+                        return LGL_DB_REG_FILE_WRITE_ERROR;
+                }
 	}
         else
         {
 		g_message ("Cannot register new template with unknown page size.");
+                return LGL_DB_REG_BAD_PAPER_ID;
 	}
 
+}
+
+
+/**
+ * lgl_db_does_template_exist:
+ * @brand: Brand name.
+ * @part:  Part name/number.
+ *
+ * This function tests whether a template with the given brand and part name/number exists.
+ *
+ * Returns:  TRUE if such a template exists in the database.
+ */
+gboolean
+lgl_db_does_template_exist (const gchar *brand,
+                            const gchar *part)
+{
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template;
+        lglTemplateAlias *alias;
+
+	if (!templates)
+        {
+		lgl_db_init ();
+	}
+
+	if ((brand == NULL) || (part == NULL))
+        {
+		return FALSE;
+	}
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template = (lglTemplate *) p_tmplt->data;
+		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+
+			if ( UTF8_EQUAL (brand, alias->brand) &&
+                             UTF8_EQUAL (part, alias->part) )
+                        {
+				return TRUE;
+			}
+		}
+	}
+
+	return FALSE;
 }
 
 
@@ -1111,8 +1155,8 @@ lgl_db_register_template (const lglTemplate *template)
  *
  * Get a list of valid names of unique templates in the template database.  Results
  * can be filtered by page size and/or template category.  A list of valid page sizes
- * can be obtained using lgl_paper_get_id_list().  A list of valid template categories
- * can be obtained using lgl_category_get_id_list().
+ * can be obtained using lgl_db_get_paper_id_list().  A list of valid template categories
+ * can be obtained using lgl_db_get_category_id_list().
  *
  * This function differs from lgl_db_get_template_name_list_all(), because it does not
  * return multiple names for the same template.
@@ -1160,8 +1204,8 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
  *
  * Get a list of all valid names and aliases of templates in the template database.
  * Results can be filtered by page size and/or template category.  A list of valid page
- * sizes can be obtained using lgl_paper_get_id_list().  A list of valid template
- * categories can be obtained using lgl_category_get_id_list().
+ * sizes can be obtained using lgl_db_get_paper_id_list().  A list of valid template
+ * categories can be obtained using lgl_db_get_category_id_list().
  *
  * This function differs from lgl_db_get_template_name_list_unique(), because it will
  * return multiple names for the same template.
@@ -1214,7 +1258,7 @@ lgl_db_get_template_name_list_all (const gchar *brand,
  * @names: List of template name strings to be freed.
  *
  * Free up all storage associated with a list of template names obtained with
- * lgl_get_template_name_list_all() or lgl_get_template_name_list_unique().
+ * lgl_db_get_template_name_list_all() or lgl_db_get_template_name_list_unique().
  *
  */
 void
