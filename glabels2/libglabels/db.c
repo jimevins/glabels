@@ -1069,20 +1069,19 @@ lgl_db_register_template (const lglTemplate *template)
 
 	if (lgl_db_is_paper_id_known (template->paper_id))
         {
-                template_copy = lgl_template_dup (template);
-                lgl_template_add_category (template_copy, "user-defined");
-
 		dir = LGL_USER_DATA_DIR;
 		mkdir (dir, 0775); /* Try to make sure directory exists. */
 		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
 		abs_filename = g_build_filename (dir, filename, NULL);
-		bytes_written = lgl_xml_template_write_template_to_file (template_copy, abs_filename);
+		bytes_written = lgl_xml_template_write_template_to_file (template, abs_filename);
 		g_free (dir);
 		g_free (filename);
 		g_free (abs_filename);
 
                 if (bytes_written > 0)
                 {
+                        template_copy = lgl_template_dup (template);
+                        lgl_template_add_category (template_copy, "user-defined");
                         templates = g_list_append (templates, template_copy);
                         return LGL_DB_REG_OK;
                 }
@@ -1328,14 +1327,27 @@ lgl_db_lookup_template_from_name (const gchar *name)
 static GList *
 read_templates (void)
 {
-	gchar *data_dir;
-	GList *templates = NULL;
+	gchar       *data_dir;
+	GList       *templates = NULL;
+        GList       *p;
+        lglTemplate *template;
 
-	data_dir = LGL_SYSTEM_DATA_DIR;
+        /*
+         * User defined templates.  Add to user-defined category.
+         */
+	data_dir = LGL_USER_DATA_DIR;
 	templates = read_template_files_from_dir (templates, data_dir);
 	g_free (data_dir);
+        for ( p=templates; p != NULL; p=p->next )
+        {
+                template = (lglTemplate *)p->data;
+                lgl_template_add_category (template, "user-defined");
+        }
 
-	data_dir = LGL_USER_DATA_DIR;
+        /*
+         * System templates.
+         */
+	data_dir = LGL_SYSTEM_DATA_DIR;
 	templates = read_template_files_from_dir (templates, data_dir);
 	g_free (data_dir);
 

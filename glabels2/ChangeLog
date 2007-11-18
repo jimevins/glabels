@@ -1,3 +1,14 @@
+2007-11-18  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c: (lgl_db_register_template), (read_templates):
+		When registering a new template, don't add to "User defined" category before
+		writing to file.  Add to "User defined" category when reading from "~/.glabels"
+		directory instead.  This will allow legacy templates (and manually created
+		templates) to be automatically added to the "user defined" category.
+	* libglabels/xml-template.c:
+	(lgl_xml_template_create_template_node):
+		Fixed typo/bug causing brand to be wrong.
+	
 2007-11-16  Jim Evins  <evins@snaught.com>
 
 	* libglabels/db.c:

@@ -728,7 +728,7 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 
 	node = xmlNewChild (root, ns, (xmlChar *)"Template", NULL);
 
-	lgl_xml_set_prop_string (node, "brand", template->part);
+	lgl_xml_set_prop_string (node, "brand", template->brand);
 	lgl_xml_set_prop_string (node, "part", template->part);
 
 	lgl_xml_set_prop_string (node, "size", template->paper_id);
