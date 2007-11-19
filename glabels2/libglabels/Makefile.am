@@ -33,7 +33,9 @@ libglabels_la_SOURCES =		\
 	xml-template.h		\
 	xml-template.c		\
 	xml.h			\
-	xml.c			
+	xml.c			\
+	str.h			\
+	str.c
 
 libglabelsinclude_HEADERS = 	\
 	libglabels.h		\

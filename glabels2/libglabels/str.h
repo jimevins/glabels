@@ -1,9 +1,11 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+
 /*
  *  (LIBGLABELS) Template library for GLABELS
  *
- *  libglabels-private.h:  libglabels private header file
+ *  str.h:  libGLabels string utilities header file
  *
- *  Copyright (C) 2004  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2007  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of the LIBGLABELS library.
  *
@@ -23,24 +25,17 @@
  *  MA 02111-1307, USA
  */
 
-#ifndef __LIBGLABELS_PRIVATE_H__
-#define __LIBGLABELS_PRIVATE_H__
+#ifndef __STR_H__
+#define __STR_H__
 
-#include <glib/gutils.h>
-#include <glib/gfileutils.h>
-#include <glib/gunicode.h>
+#include <glib.h>
 
-#include "str.h"
+G_BEGIN_DECLS
 
-/* Data system and user data directories.  (must free w/ g_free()) */
-#define LGL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
-#define LGL_USER_DATA_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)
+gint  lgl_str_utf8_casecmp (const gchar *s1,
+			    const gchar *s2);
 
-#undef  G_LOG_DOMAIN
-#define G_LOG_DOMAIN "LibGlabels"
-
-#define UTF8_EQUAL(s1,s2) (!lgl_str_utf8_casecmp (s1, s2))
-#define ASCII_EQUAL(s1,s2) (!g_ascii_strcasecmp (s1, s2))
+G_END_DECLS
 
 
-#endif /* __LIBGLABELS_PRIVATE_H__ */
+#endif /* __STR_H__ */

@@ -999,11 +999,11 @@ lgl_db_get_brand_list (const gchar *paper_id,
                                 alias = (lglTemplateAlias *)p_alias->data;
 
                                 if ( !g_list_find_custom (brands, alias->brand,
-                                                          (GCompareFunc)g_utf8_collate) )
+                                                          (GCompareFunc)lgl_str_utf8_casecmp) )
                                 {
                                         brands = g_list_insert_sorted (brands,
                                                                        g_strdup (alias->brand),
-                                                                       (GCompareFunc)g_utf8_collate);
+                                                                       (GCompareFunc)lgl_str_utf8_casecmp);
                                 }
 			}
 		}

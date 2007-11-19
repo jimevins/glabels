@@ -1,5 +1,17 @@
 2007-11-18  Jim Evins  <evins@snaught.com>
 
+	* libglabels/Makefile.am:
+	* libglabels/str.h:
+	* libglabels/str.c:
+		Added lgl_str_utf8_casecmp().
+	* libglabels/libglabels-private.h:
+		Use lgl_str_utf8_casecmp() for UTF8_EQUAL macro -- do case insensitive comparisons.
+	* libglabels/db.c: (lgl_db_get_brand_list):
+		Use lgl_str_utf8_casecmp() to determine if we have seen brand before when building
+		brand list.
+
+2007-11-18  Jim Evins  <evins@snaught.com>
+
 	* data/glade/template-designer.glade:
 	* src/template-designer.c:
 		Don't advance past name page, if brand and part match an existing template.
