@@ -92,6 +92,7 @@ struct _glTemplateDesignerPrivate
 	/* Name page controls */
 	GtkWidget       *brand_entry;
 	GtkWidget       *part_num_entry;
+        GtkWidget       *name_warning_label;
 	GtkWidget       *description_entry;
 
 	/* Page size page controls */
@@ -443,10 +444,11 @@ construct_name_page (glTemplateDesigner      *dialog,
                 return;
         }
 
-	dialog->priv->name_page         = glade_xml_get_widget (gui, "name_page");
-	dialog->priv->brand_entry       = glade_xml_get_widget (gui, "brand_entry");
-	dialog->priv->part_num_entry    = glade_xml_get_widget (gui, "part_num_entry");
-	dialog->priv->description_entry = glade_xml_get_widget (gui, "description_entry");
+	dialog->priv->name_page          = glade_xml_get_widget (gui, "name_page");
+	dialog->priv->brand_entry        = glade_xml_get_widget (gui, "brand_entry");
+	dialog->priv->part_num_entry     = glade_xml_get_widget (gui, "part_num_entry");
+	dialog->priv->name_warning_label = glade_xml_get_widget (gui, "name_warning_label");
+	dialog->priv->description_entry  = glade_xml_get_widget (gui, "description_entry");
 
         g_object_unref (gui);
 
@@ -1235,11 +1237,24 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 {
 	gchar *brand, *part_num, *desc;
 
-	brand    = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1);
-	part_num = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1);
+	brand    = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1));
+	part_num = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1));
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
-	if (brand && brand[0] && part_num && part_num[0] && desc && desc[0])
+
+	if (brand && brand[0] && part_num && part_num[0] &&
+            lgl_db_does_template_exist (brand, part_num))
+        {
+                gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label),
+                                    _("<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"));
+        }
+        else
+        {
+                gtk_label_set_text (GTK_LABEL (dialog->priv->name_warning_label), "");
+        }
+
+	if (brand && brand[0] && part_num && part_num[0] && desc && desc[0] &&
+            !lgl_db_does_template_exist (brand, part_num))
         {
 
                 gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
@@ -1614,8 +1629,8 @@ build_template (glTemplateDesigner      *dialog)
 
 	upp = dialog->priv->units_per_point;
 
-	brand    = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1);
-	part_num = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1);
+	brand    = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1));
+	part_num = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1));
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
 	page_size_name =

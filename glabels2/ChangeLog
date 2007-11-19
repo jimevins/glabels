@@ -1,5 +1,11 @@
 2007-11-18  Jim Evins  <evins@snaught.com>
 
+	* data/glade/template-designer.glade:
+	* src/template-designer.c:
+		Don't advance past name page, if brand and part match an existing template.
+
+2007-11-18  Jim Evins  <evins@snaught.com>
+
 	* libglabels/db.c: (lgl_db_register_template), (read_templates):
 		When registering a new template, don't add to "User defined" category before
 		writing to file.  Add to "User defined" category when reading from "~/.glabels"
