@@ -92,6 +92,7 @@ struct _glTemplateDesignerPrivate
 	/* Name page controls */
 	GtkWidget       *brand_entry;
 	GtkWidget       *part_num_entry;
+        GtkWidget       *name_warning_image;
         GtkWidget       *name_warning_label;
 	GtkWidget       *description_entry;
 
@@ -447,6 +448,7 @@ construct_name_page (glTemplateDesigner      *dialog,
 	dialog->priv->name_page          = glade_xml_get_widget (gui, "name_page");
 	dialog->priv->brand_entry        = glade_xml_get_widget (gui, "brand_entry");
 	dialog->priv->part_num_entry     = glade_xml_get_widget (gui, "part_num_entry");
+	dialog->priv->name_warning_image = glade_xml_get_widget (gui, "name_warning_image");
 	dialog->priv->name_warning_label = glade_xml_get_widget (gui, "name_warning_label");
 	dialog->priv->description_entry  = glade_xml_get_widget (gui, "description_entry");
 
@@ -1245,11 +1247,14 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 	if (brand && brand[0] && part_num && part_num[0] &&
             lgl_db_does_template_exist (brand, part_num))
         {
+                gtk_image_set_from_stock (GTK_IMAGE (dialog->priv->name_warning_image),
+                                          GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_BUTTON);
                 gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label),
                                     _("<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"));
         }
         else
         {
+                gtk_image_clear (GTK_IMAGE (dialog->priv->name_warning_image));
                 gtk_label_set_text (GTK_LABEL (dialog->priv->name_warning_label), "");
         }
 
