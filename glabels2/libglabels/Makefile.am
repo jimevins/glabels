@@ -47,7 +47,8 @@ libglabelsinclude_HEADERS = 	\
 	xml-paper.h		\
 	xml-category.h		\
 	xml-template.h		\
-	xml.h			
+	xml.h			\
+	str.h			
 
 EXTRA_DIST =			\
 	libglabels.pc.in

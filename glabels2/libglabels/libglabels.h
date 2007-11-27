@@ -31,6 +31,7 @@
 #include <libglabels/category.h>
 #include <libglabels/template.h>
 #include <libglabels/enums.h>
+#include <libglabels/str.h>
 #include <libglabels/xml-paper.h>
 #include <libglabels/xml-category.h>
 #include <libglabels/xml-template.h>

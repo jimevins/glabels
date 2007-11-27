@@ -593,12 +593,14 @@ update_prefs_from_locale_page (glPrefsDialog *dialog)
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio)))
         {
-		gl_prefs->default_page_size = US_LETTER_ID;
+		g_free (gl_prefs->default_page_size);
+		gl_prefs->default_page_size = g_strdup (US_LETTER_ID);
 	}
 	if (gtk_toggle_button_get_active (
 		    GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio)))
         {
-		gl_prefs->default_page_size = A4_ID;
+		g_free (gl_prefs->default_page_size);
+		gl_prefs->default_page_size = g_strdup (A4_ID);
 	}
 
 	gl_prefs_model_save_settings (gl_prefs);

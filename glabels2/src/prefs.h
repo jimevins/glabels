@@ -48,6 +48,8 @@ gdouble       gl_prefs_get_units_step_size (void);
 
 gint          gl_prefs_get_units_precision (void);
 
+void          gl_prefs_add_recent_template (const gchar *name);
+
 G_END_DECLS
 
 #endif /* __PREFS_H__ */

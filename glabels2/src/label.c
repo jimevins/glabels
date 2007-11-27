@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 
 #include "marshal.h"
+#include "prefs.h"
 #include "util.h"
 
 #include "debug.h"
@@ -377,6 +378,8 @@ extern void
 gl_label_set_template (glLabel     *label,
 		       lglTemplate *template)
 {
+        gchar *name;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
@@ -394,6 +397,9 @@ gl_label_set_template (glLabel     *label,
 		g_signal_emit (G_OBJECT(label), signals[SIZE_CHANGED], 0);
 		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
 
+                name = lgl_template_get_name (template);
+                gl_prefs_add_recent_template (name);
+                g_free (name);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
