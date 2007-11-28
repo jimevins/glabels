@@ -28,6 +28,7 @@
 
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
+#include <gtk/gtknotebook.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtktreeview.h>
 #include <gtk/gtktreeselection.h>
@@ -61,12 +62,21 @@ enum {
 
 struct _glWdgtMediaSelectPrivate {
 
+        GtkWidget    *notebook;
+        guint         current_page_num;
+
+        gint          recent_page_num;
+        GtkWidget    *recent_tab_vbox;
+        GtkWidget    *recent_treeview;
+        GtkListStore *recent_store;
+
+        gint          search_all_page_num;
+        GtkWidget    *search_all_tab_vbox;
         GtkWidget    *brand_combo;
         GtkWidget    *page_size_combo;
         GtkWidget    *category_combo;
-
-        GtkWidget    *template_treeview;
-        GtkListStore *template_store;
+        GtkWidget    *search_all_treeview;
+        GtkListStore *search_all_store;
 
         /* Prevent recursion */
 	gboolean    stop_signals;
@@ -95,12 +105,19 @@ static void gl_wdgt_media_select_construct     (glWdgtMediaSelect      *media_se
 
 static void filter_changed_cb                  (GtkComboBox            *combo,
                                                 gpointer                user_data);
-static void template_selection_changed_cb      (GtkTreeSelection       *selection,
+static void selection_changed_cb               (GtkTreeSelection       *selection,
+                                                gpointer                user_data);
+static void page_changed_cb                    (GtkNotebook            *notebook,
+                                                GtkNotebookPage        *page,
+                                                guint                   page_num,
                                                 gpointer                user_data);
 
 static gchar *get_layout_desc                  (const lglTemplate      *template);
 static gchar *get_label_size_desc              (const lglTemplate      *template);
-static void   load_list                        (GtkListStore           *store,
+static void   load_recent_list                 (GtkListStore           *store,
+                                                GtkTreeSelection       *selection,
+                                                GSList                 *list);
+static void   load_search_all_list             (GtkListStore           *store,
                                                 GtkTreeSelection       *selection,
                                                 GList                  *list);
 
@@ -153,7 +170,7 @@ gl_wdgt_media_select_finalize (GObject *object)
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
-        g_object_unref (media_select->priv->template_store);
+        g_object_unref (media_select->priv->search_all_store);
         g_free (media_select->priv);
 
         G_OBJECT_CLASS (gl_wdgt_media_select_parent_class)->finalize (object);
@@ -188,12 +205,13 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         GList             *brands = NULL;
         GList             *page_sizes = NULL;
         GList             *categories = NULL;
-        GList             *template_names = NULL;
+        GList             *search_all_names = NULL;
         const gchar       *page_size_id;
         gchar             *page_size_name;
         GtkCellRenderer   *renderer;
         GtkTreeViewColumn *column;
-        GtkTreeSelection  *selection;
+        GtkTreeSelection  *recent_selection;
+        GtkTreeSelection  *search_all_selection;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -211,16 +229,54 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         hbox = glade_xml_get_widget (gui, "wdgt_media_select_hbox");
         gtk_container_add (GTK_CONTAINER (media_select), hbox);
 
+        media_select->priv->notebook =
+                glade_xml_get_widget (gui, "notebook");
+
+        media_select->priv->recent_tab_vbox =
+                glade_xml_get_widget (gui, "recent_tab_vbox");
+        media_select->priv->recent_treeview =
+                glade_xml_get_widget (gui, "recent_treeview");
+
+        media_select->priv->search_all_tab_vbox =
+                glade_xml_get_widget (gui, "search_all_tab_vbox");
         media_select->priv->brand_combo =
                 glade_xml_get_widget (gui, "brand_combo");
         media_select->priv->page_size_combo =
                 glade_xml_get_widget (gui, "page_size_combo");
         media_select->priv->category_combo =
                 glade_xml_get_widget (gui, "category_combo");
-        media_select->priv->template_treeview =
-                glade_xml_get_widget (gui, "template_treeview");
+        media_select->priv->search_all_treeview =
+                glade_xml_get_widget (gui, "search_all_treeview");
 
         g_object_unref (gui);
+
+        media_select->priv->recent_page_num =
+                gtk_notebook_page_num (GTK_NOTEBOOK (media_select->priv->notebook),
+                                       media_select->priv->recent_tab_vbox);
+        media_select->priv->search_all_page_num =
+                gtk_notebook_page_num (GTK_NOTEBOOK (media_select->priv->notebook),
+                                       media_select->priv->search_all_tab_vbox);
+
+        /* Recent templates treeview */
+        media_select->priv->recent_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (media_select->priv->recent_treeview),
+                                 GTK_TREE_MODEL (media_select->priv->recent_store));
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+                                                           "pixbuf", PREVIEW_COLUMN,
+                                                           "stock-id", PREVIEW_COLUMN_STOCK,
+                                                           "stock-size", PREVIEW_COLUMN_STOCK_SIZE,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->recent_treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+                                                           "markup", DESCRIPTION_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->recent_treeview), column);
+        recent_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->recent_treeview));
+        load_recent_list (media_select->priv->recent_store, recent_selection, gl_prefs->recent_templates);
 
         page_size_id = gl_prefs_get_page_size ();
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
@@ -252,10 +308,10 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
                                            _("Any"));
         lgl_db_free_category_name_list (categories);
 
-        /* Actual selection control */
-        media_select->priv->template_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
-        gtk_tree_view_set_model (GTK_TREE_VIEW (media_select->priv->template_treeview),
-                                 GTK_TREE_MODEL (media_select->priv->template_store));
+        /* Search all treeview */
+        media_select->priv->search_all_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (media_select->priv->search_all_treeview),
+                                 GTK_TREE_MODEL (media_select->priv->search_all_store));
         renderer = gtk_cell_renderer_pixbuf_new ();
         column = gtk_tree_view_column_new_with_attributes ("", renderer,
                                                            "pixbuf", PREVIEW_COLUMN,
@@ -263,17 +319,17 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
                                                            "stock-size", PREVIEW_COLUMN_STOCK_SIZE,
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->template_treeview), column);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->search_all_treeview), column);
         renderer = gtk_cell_renderer_text_new ();
         column = gtk_tree_view_column_new_with_attributes ("", renderer,
                                                            "markup", DESCRIPTION_COLUMN,
                                                            NULL);
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->template_treeview), column);
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-        template_names = lgl_db_get_template_name_list_all (NULL, page_size_id, NULL);
-        load_list (media_select->priv->template_store, selection, template_names);
-        lgl_db_free_template_name_list (template_names);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->search_all_treeview), column);
+        search_all_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->search_all_treeview));
+        search_all_names = lgl_db_get_template_name_list_all (NULL, page_size_id, NULL);
+        load_search_all_list (media_select->priv->search_all_store, search_all_selection, search_all_names);
+        lgl_db_free_template_name_list (search_all_names);
 
         /* Connect signals to controls */
         g_signal_connect (G_OBJECT (media_select->priv->brand_combo), "changed",
@@ -285,8 +341,14 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_signal_connect (G_OBJECT (media_select->priv->category_combo), "changed",
                           G_CALLBACK (filter_changed_cb),
                           media_select);
-        g_signal_connect (G_OBJECT (selection), "changed",
-                          G_CALLBACK (template_selection_changed_cb),
+        g_signal_connect (G_OBJECT (recent_selection), "changed",
+                          G_CALLBACK (selection_changed_cb),
+                          media_select);
+        g_signal_connect (G_OBJECT (search_all_selection), "changed",
+                          G_CALLBACK (selection_changed_cb),
+                          media_select);
+        g_signal_connect (G_OBJECT (media_select->priv->notebook), "switch-page",
+                          G_CALLBACK (page_changed_cb),
                           media_select);
 
         g_free (page_size_name);
@@ -305,7 +367,7 @@ filter_changed_cb (GtkComboBox *combo,
         gchar             *brand;
         gchar             *page_size_name, *page_size_id;
         gchar             *category_name, *category_id;
-        GList             *template_names;
+        GList             *search_all_names;
         GtkTreeSelection  *selection;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
@@ -333,10 +395,10 @@ filter_changed_cb (GtkComboBox *combo,
                 category_id = lgl_db_lookup_category_id_from_name (category_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_id = \"%s\"", page_size_id);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_id = \"%s\"", category_id);
-                template_names = lgl_db_get_template_name_list_all (brand, page_size_id, category_id);
-                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
-                load_list (media_select->priv->template_store, selection, template_names);
-                lgl_db_free_template_name_list (template_names);
+                search_all_names = lgl_db_get_template_name_list_all (brand, page_size_id, category_id);
+                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->search_all_treeview));
+                load_search_all_list (media_select->priv->search_all_store, selection, search_all_names);
+                lgl_db_free_template_name_list (search_all_names);
                 g_free (page_size_id);
                 g_free (category_id);
 
@@ -358,8 +420,8 @@ filter_changed_cb (GtkComboBox *combo,
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-template_selection_changed_cb (GtkTreeSelection       *selection,
-                               gpointer                user_data)
+selection_changed_cb (GtkTreeSelection       *selection,
+                      gpointer                user_data)
 {
         glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
 
@@ -374,19 +436,62 @@ template_selection_changed_cb (GtkTreeSelection       *selection,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  modify widget due to change in selection                       */
+/*--------------------------------------------------------------------------*/
+static void
+page_changed_cb (GtkNotebook            *notebook,
+                 GtkNotebookPage        *page,
+                 guint                   page_num,
+                 gpointer                user_data)
+{
+        glWdgtMediaSelect *media_select = GL_WDGT_MEDIA_SELECT (user_data);
+
+	if (media_select->priv->stop_signals) return;
+
+        gl_debug (DEBUG_MEDIA_SELECT, "START");
+
+        /*
+         * Store new current page, because this signal is emitted before the actual page change.
+         */
+	media_select->priv->current_page_num = page_num;
+
+        /* Emit our "changed" signal */
+        g_signal_emit (G_OBJECT (user_data),
+                       wdgt_media_select_signals[CHANGED], 0);
+
+        gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
 /****************************************************************************/
 /* query selected label template name.                                      */
 /****************************************************************************/
 gchar *
 gl_wdgt_media_select_get_name (glWdgtMediaSelect *media_select)
 {
+        gint               page_num;
         GtkTreeSelection  *selection;
         GtkTreeIter        iter;
         GtkTreeModel      *model;        
         gchar             *name;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
+
+        page_num = media_select->priv->current_page_num;
+        if (page_num == media_select->priv->recent_page_num)
+        {
+                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->recent_treeview));
+        }
+        else if (page_num == media_select->priv->search_all_page_num)
+        {
+                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->search_all_treeview));
+        }
+        else
+        {
+                g_print ("notebook page = %d\n", page_num);
+                g_assert_not_reached ();
+        }
+
         if (gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
         {
                 name = NULL;
@@ -417,10 +522,10 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->template_treeview));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->search_all_treeview));
         g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
 
-        model = GTK_TREE_MODEL (media_select->priv->template_store);
+        model = GTK_TREE_MODEL (media_select->priv->search_all_store);
 
         for ( flag = gtk_tree_model_get_iter_first (model, &iter);
               flag;
@@ -431,7 +536,7 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
                 {
                         gtk_tree_selection_select_iter (selection, &iter);
                         path = gtk_tree_model_get_path (model, &iter);
-                        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (media_select->priv->template_treeview),
+                        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (media_select->priv->search_all_treeview),
                                                       path,
                                                       NULL,
                                                       TRUE, 0.5, 0.0);
@@ -602,9 +707,93 @@ get_label_size_desc (const lglTemplate *template)
 /* PRIVATE.  Load list store from template name list.                       */
 /*--------------------------------------------------------------------------*/
 static void
-load_list (GtkListStore           *store,
-           GtkTreeSelection       *selection,
-           GList                  *list)
+load_recent_list (GtkListStore           *store,
+                  GtkTreeSelection       *selection,
+                  GSList                  *list)
+{
+        GSList      *p;
+        GtkTreeIter  iter;
+        lglTemplate *template;
+        GdkPixbuf   *pixbuf;
+        gchar       *size;
+        gchar       *layout;
+        gchar       *description;
+        gchar       *name;
+
+        gl_debug (DEBUG_MEDIA_SELECT, "START");
+
+        gtk_list_store_clear (store);
+
+        if (list)
+        {
+
+                for ( p=list; p!=NULL; p=p->next )
+                {
+
+                        gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
+
+                        template = lgl_db_lookup_template_from_name (p->data);
+                        
+                        name = lgl_template_get_name (template);
+                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (name);
+                        g_free (name);
+
+                        size = get_label_size_desc (template);
+                        layout = get_layout_desc (template);
+                        description = g_strdup_printf ("<b>%s: %s</b>\n%s\n%s",
+                                                       (gchar *)p->data,
+                                                       template->description,
+                                                       size,
+                                                       layout);
+                        g_free (size);
+                        g_free (layout);
+
+                        lgl_template_free (template);
+
+                        gtk_list_store_append (store, &iter);
+                        gtk_list_store_set (store, &iter,
+                                            NAME_COLUMN, p->data,
+                                            PREVIEW_COLUMN, pixbuf,
+                                            DESCRIPTION_COLUMN, description,
+                                            -1);
+
+                        g_object_unref (G_OBJECT (pixbuf));
+                        g_free (description);
+                }
+
+                gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+                gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+                gtk_tree_selection_select_iter (selection, &iter);
+
+        }
+        else
+        {
+                gchar *text = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n%s",
+                                               _("No recent templates found."),
+                                               _("Try selecting a template from the \"Search all templates\" page."));
+                gtk_list_store_append (store, &iter);
+                gtk_list_store_set (store, &iter,
+                                    NAME_COLUMN, "empty",
+                                    PREVIEW_COLUMN_STOCK, GTK_STOCK_DIALOG_WARNING,
+                                    PREVIEW_COLUMN_STOCK_SIZE, GTK_ICON_SIZE_DIALOG,
+                                    DESCRIPTION_COLUMN, text,
+                                    -1);
+                g_free (text);
+
+                gtk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
+
+        }
+
+        gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Load list store from template name list.                       */
+/*--------------------------------------------------------------------------*/
+static void
+load_search_all_list (GtkListStore           *store,
+                      GtkTreeSelection       *selection,
+                      GList                  *list)
 {
         GList       *p;
         GtkTreeIter  iter;
