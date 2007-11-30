@@ -1,3 +1,15 @@
+2007-11-29  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.h:
+	* libglabels/db.c:
+		Added lgl_db_does_template_name_exist().
+		In lgl_db_lookup_template_from_name() substitute brand/part of new template from
+		requested alias.
+	* src/prefs-model.c:
+		Proof read recent templates -- make sure they still exist.
+	* src/wdgt-media-select.c:
+		Default to "search all templates" tab if no recent templates found.
+
 2007-11-28  Jim Evins  <evins@snaught.com>
 
 	* data/glade/wdgt-media-select.glade:

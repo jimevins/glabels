@@ -385,7 +385,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 {
 	gchar    *string;
 	lglPaper *paper;
-        GSList   *p;
+        GSList   *p, *p_next;
 
 	gl_debug (DEBUG_PREFS, "START");
 	
@@ -538,7 +538,6 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 
 	/* Proof read the default page size -- it must be a valid id. */
 	/* (For compatability with older versions.) */
-	/* Note: paper module must be initialized for this to work. */
 	paper = lgl_db_lookup_paper_from_id (prefs_model->default_page_size);
 	if ( paper == NULL ) {
 		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
@@ -546,6 +545,19 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		lgl_paper_free (paper);
 		paper = NULL;
 	}
+
+        /* Proof read the recent templates list.  Make sure the template names */
+        /* are valid.  Remove from list if not. */
+        for (p=prefs_model->recent_templates; p != NULL; p=p_next)
+        {
+                p_next = p->next;
+
+                if ( !lgl_db_does_template_name_exist (p->data) )
+                {
+                        g_free (p->data);
+                        prefs_model->recent_templates = g_slist_delete_link (prefs_model->recent_templates, p);
+                }
+        }
 
 	gl_debug (DEBUG_PREFS, "max_recents = %d", prefs_model->max_recents);
 

@@ -115,6 +115,8 @@ lglDbRegStatus lgl_db_register_template              (const lglTemplate   *templ
 gboolean       lgl_db_does_template_exist            (const gchar         *brand,
                                                       const gchar         *part);
 
+gboolean       lgl_db_does_template_name_exist       (const gchar         *name);
+
 GList         *lgl_db_get_template_name_list_unique  (const gchar         *brand,
                                                       const gchar         *paper_id,
                                                       const gchar         *category_id);

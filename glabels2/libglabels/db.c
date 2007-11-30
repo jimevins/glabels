@@ -1147,6 +1147,53 @@ lgl_db_does_template_exist (const gchar *brand,
 
 
 /**
+ * lgl_db_does_template_name_exist:
+ * @name: name string
+ *
+ * This function test whether a template with the given name exists.
+ *
+ * Returns: TRUE if such a template exists in the database.
+ *
+ */
+gboolean
+lgl_db_does_template_name_exist (const gchar *name)
+{
+	GList            *p_tmplt, *p_alias;
+        lglTemplate      *template;
+        lglTemplateAlias *alias;
+        gchar            *candidate_name;
+
+	if (!templates)
+        {
+		lgl_db_init ();
+	}
+
+	if (name == NULL)
+        {
+		return FALSE;
+	}
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template = (lglTemplate *) p_tmplt->data;
+		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+
+			if ( UTF8_EQUAL (candidate_name, name) ) {
+                                g_free (candidate_name);
+                                return TRUE;
+			}
+                        g_free (candidate_name);
+		}
+	}
+
+	return FALSE;
+}
+
+
+/**
  * lgl_db_get_template_name_list_unique:
  * @brand:     If non NULL, limit results to given brand
  * @paper_id: If non NULL, limit results to given page size.
@@ -1291,6 +1338,7 @@ lgl_db_lookup_template_from_name (const gchar *name)
 	lglTemplate      *template;
         lglTemplateAlias *alias;
         gchar            *candidate_name;
+	lglTemplate      *new_template;
 
 	if (!templates)
         {
@@ -1313,7 +1361,10 @@ lgl_db_lookup_template_from_name (const gchar *name)
 
 			if ( UTF8_EQUAL (candidate_name, name) ) {
                                 g_free (candidate_name);
-				return lgl_template_dup (template);
+				new_template = lgl_template_dup (template);
+                                new_template->brand = g_strdup (alias->brand);
+                                new_template->part = g_strdup (alias->part);
+                                return new_template;
 			}
                         g_free (candidate_name);
 		}

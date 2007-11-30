@@ -353,6 +353,18 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 
         g_free (page_size_name);
 
+        gtk_widget_show_all (GTK_WIDGET (media_select));
+        if ( gl_prefs->recent_templates )
+        {
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (media_select->priv->notebook),
+                                               media_select->priv->recent_page_num);
+        }
+        else
+        {
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (media_select->priv->notebook),
+                                               media_select->priv->search_all_page_num);
+        }
+
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
