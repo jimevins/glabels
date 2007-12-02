@@ -7,7 +7,7 @@
 
 
 
-      <h2>gLabels in the news</h2>
+      <h2>gLabels in the News</h2>
       <ul>
       <li><?a("http://www.linux.com/articles/37044","linux.com:: gLabels: Ready for prime time");?></li>
       </ul>
