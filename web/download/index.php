@@ -21,8 +21,9 @@ gLabels is designed to run on <i>GNOME 2.2+</i>, but more specifically it requir
   <li>LIBGLADE-2.0.x</li>
 </ul>
 <p>
-Note: to compile gLabels on RPM based systems, you will need the development RPMs (e.g., gnome-print-devel)
-installed for each of these libraries. 
+Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel)
+installed for each of these libraries and their dependencies.
+Just having the base library packages installed is not enough.
 </p>
 
 
@@ -94,7 +95,7 @@ Just having the base library packages installed is not enough.
 
 <h2>Subversion:</h2>
 <p>
-gLabels2 can be checked out through subversion with
+The latest bleading-edge version of gLabels can be checked out through subversion with
 the following command.
 </p>
 <div class="codebox">$  svn co https://glabels.svn.sourceforge.net/svnroot/glabels/trunk/glabels2

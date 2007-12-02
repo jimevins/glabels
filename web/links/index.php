@@ -7,6 +7,13 @@
 
 
 
+      <h2>gLabels in the news</h2>
+      <ul>
+      <li><?a("http://www.linux.com/articles/37044","linux.com:: gLabels: Ready for prime time");?></li>
+      </ul>
+
+
+
       <h2>gLabels Project Links</h2>
       <ul>
         <li><?a("http://sourceforge.net/projects/glabels","gLabels Sourceforge Project Page");?></li>
