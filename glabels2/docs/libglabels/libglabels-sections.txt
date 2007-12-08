@@ -31,6 +31,7 @@ lgl_db_free_brand_list
 <SUBSECTION Template Functions>
 lgl_db_register_template
 lgl_db_does_template_exist
+lgl_db_does_template_name_exist
 lgl_db_get_template_name_list_unique
 lgl_db_get_template_name_list_all
 lgl_db_free_template_name_list
@@ -127,12 +128,6 @@ lgl_category_free
 </SECTION>
 
 <SECTION>
-<FILE>enums</FILE>
-<INCLUDE>libglabels/enums.h</INCLUDE>
-lglUnitsType
-</SECTION>
-
-<SECTION>
 <FILE>xml-paper</FILE>
 <INCLUDE>libglabels/xml-paper.h</INCLUDE>
 lgl_xml_paper_read_papers_from_file
@@ -156,7 +151,6 @@ lgl_xml_template_parse_templates_doc
 lgl_xml_template_parse_template_node
 lgl_xml_template_write_templates_to_file
 lgl_xml_template_write_template_to_file
-lgl_xml_template_create_templates_doc
 lgl_xml_template_create_template_node
 </SECTION>
 
@@ -184,5 +178,17 @@ lgl_xml_is_node
 lgl_xml_get_node_content
 <SUBSECTION Configuration Functions>
 lgl_xml_set_default_units
+</SECTION>
+
+<SECTION>
+<FILE>enums</FILE>
+<INCLUDE>libglabels/enums.h</INCLUDE>
+lglUnitsType
+</SECTION>
+
+<SECTION>
+<FILE>str</FILE>
+<INCLUDE>libglabels/str.h</INCLUDE>
+lgl_str_utf8_casecmp
 </SECTION>
 

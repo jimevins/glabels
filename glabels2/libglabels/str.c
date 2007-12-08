@@ -48,6 +48,20 @@
 /* Functions.                                */
 /*===========================================*/
 
+/**
+ * lgl_str_utf8_casecmp:
+ * @s1: string to compare with s2.
+ * @s2: string to compare with s1.
+ *
+ * Compare two UTF-8 strings, ignoring the case of characters.
+ *
+ * This function should be used only on strings that are known to be encoded
+ * in UTF-8 or a compatible UTF-8 subset.
+ *
+ * Returns: 0 if the strings match, a negative value if s1 < s2,
+ *          or a positive value if s1 > s2.
+ *
+ */
 gint
 lgl_str_utf8_casecmp (const gchar *s1,
                       const gchar *s2)

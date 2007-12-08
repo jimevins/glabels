@@ -235,6 +235,15 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_db_does_template_name_exist ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lgl_db_get_template_name_list_unique ##### -->
 <para>
 

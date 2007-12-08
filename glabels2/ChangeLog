@@ -1,3 +1,14 @@
+2007-12-08  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/str.sgml:
+	* libglabels/str.c:
+		Documentation cleanup for libglabels.
+
 2007-11-29  Jim Evins  <evins@snaught.com>
 
 	* libglabels/db.h:
