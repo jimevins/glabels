@@ -1,0 +1,93 @@
+
+NETWORK LINKS
+=============
+
+This is GNU-barcode. The latest release can be downloaded from ftp.gnu.org
+and mirrors:
+	ftp://ftp.gnu.org/pub/gnu/barcode/
+
+It is also available from my own ftp/http server
+	ftp://ar.linux.it/pub/barcode/
+	http://ar.linux.it/pub/barcode/ (same as above).
+	
+The current source tree is available by anonymous CVS. See
+	http://ar.linux.it/software/#cvs
+
+Plesae note that ar.linux.it/pub/barcode also includes CVS snapshots,
+semi-atumatically taken when I commit stuff to CVS. Note that CVS
+snapshots include "CVS/" directories, so you can then "cvs update" for
+further updates.
+
+The documentation is online at:
+	http://ar.linux.it/software/barcode
+
+The MS-Windows port is maintained at:
+	http://gnuwin32.sourceforge.net/packages/barcode.htm
+
+It as also been included in the FreeBSD ports tree in the "graphics" section.
+This means /usr/ports/graphics/barcode. It's thus available from:
+	http://www.freebsd.org/ports/graphics.html
+
+GLabels, at http://snaught.com/glabels/, uses barcode internally, too.
+
+DESCRIPTION
+===========
+
+The package is meant to solve most needs in barcode creation with a
+conventional printer. It can create printouts for the conventional
+product tagging standards: UPC-A, UPC-E, EAN-13, EAN-8, ISBN, as well
+as a few other formats. Ouput is generated as either Postscript or
+Encapsulated Postscript (other back-ends may be added if needed).
+
+The package is released as both a library and a command-line frontend,
+so that you can include barcode-generation into your application.  The
+program is released in the hope that is proves useful but without any
+warranty, according to the GPL Licence (see ./COPYING).
+
+If you're specifically interested in making an ISBN (Bookland EAN)
+symbol, you might try to get "bookland.py" by Judah Milgram
+(http://www.cgpp.com/bookland/, whose version 0.92 is also included in
+the directory "bookland" within this package, for your convenience).
+While my main target is flexibility his main target is strict
+adherence to the standards. Bookland is free software like the barcode
+library and will probabily have its role in the GNU project.
+Bookland.py is a self-documenting program, you'll enjoy browsing its
+source code.
+
+Other contributed patches and/or software are available in the
+contrib/ directory.
+
+Please take the "no-warranty" disclaimer seriously: even though I
+spent reasonable efforts to make sure the output is useable in
+production you should verify it suits your needs as a faulty bar can
+cost you a bundle, and you'll be on your own. It's up to you to verify
+that the symbol is valid (and, obviously, I'd like to know about any
+problem you encounter). [This paragraph copied verbatim from bookland.py]
+
+
+ACKNOWLEDGMENTS
+===============
+
+I would like to thank both Judah Milgram and Michele Comitini
+(mcm@glisco.it) for their help with this tool, as well as Jim Westveer
+for introducing me to Debian packaging. Several encodings have been
+implemented by Leonid A. Broukhis (leob@mailcom.com).
+
+
+MAILING LISTS
+=============
+
+There is a mailing list where development is coordinated, called
+barcode@lists.linux.it . To get subscribed you should
+	echo subscribe | mail barcode-request@lists.linux.it
+or anything equivalent.
+
+To receive notification of CVS commit messages, please subscribe to
+barcode-commit@ar.linux.it, by issuing:
+	echo subscribe | mail barcode-commit-request@ar.linux.it
+
+(if you guess, "ar" or "arcana" is my own server, while lists.linux.it
+is the mail server of the italian association of gnu/linux users).
+
+/alessandro (rubini@gnu.org)
+

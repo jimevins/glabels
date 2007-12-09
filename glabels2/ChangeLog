@@ -1,0 +1,3845 @@
+2007-12-08  Jim Evins  <evins@snaught.com>
+
+	* TODO:
+		More prep for 2.1.5/2.2.0.
+
+2007-12-08  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* README:
+	* TODO:
+	* configure.in:
+		Preparation for 2.1.5.
+
+2007-12-08  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/str.sgml:
+	* libglabels/str.c:
+		Documentation cleanup for libglabels.
+
+2007-11-29  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.h:
+	* libglabels/db.c:
+		Added lgl_db_does_template_name_exist().
+		In lgl_db_lookup_template_from_name() substitute brand/part of new template from
+		requested alias.
+	* src/prefs-model.c:
+		Proof read recent templates -- make sure they still exist.
+	* src/wdgt-media-select.c:
+		Default to "search all templates" tab if no recent templates found.
+
+2007-11-28  Jim Evins  <evins@snaught.com>
+
+	* data/glade/wdgt-media-select.glade:
+	* src/wdgt-media-select.c:
+		Added tabbed notebook to allow selection of recent template versus searching the
+		entire database.
+	
+
+2007-11-26  Jim Evins  <evins@snaught.com>
+
+	* libglabels/Makefile.am:
+	* libglabels/libglabels.h:
+		Make str.h public.
+	* src/label.c:
+	* src/prefs-dialog.c:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/prefs.h:
+		Added tracking of recently used templates.
+
+2007-11-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/template-designer.glade:
+	* src/template-designer.c:
+		Added warning icon when match brand and part match an existing template.
+
+2007-11-18  Jim Evins  <evins@snaught.com>
+
+	* libglabels/Makefile.am:
+	* libglabels/str.h:
+	* libglabels/str.c:
+		Added lgl_str_utf8_casecmp().
+	* libglabels/libglabels-private.h:
+		Use lgl_str_utf8_casecmp() for UTF8_EQUAL macro -- do case insensitive comparisons.
+	* libglabels/db.c: (lgl_db_get_brand_list):
+		Use lgl_str_utf8_casecmp() to determine if we have seen brand before when building
+		brand list.
+
+2007-11-18  Jim Evins  <evins@snaught.com>
+
+	* data/glade/template-designer.glade:
+	* src/template-designer.c:
+		Don't advance past name page, if brand and part match an existing template.
+
+2007-11-18  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c: (lgl_db_register_template), (read_templates):
+		When registering a new template, don't add to "User defined" category before
+		writing to file.  Add to "User defined" category when reading from "~/.glabels"
+		directory instead.  This will allow legacy templates (and manually created
+		templates) to be automatically added to the "user defined" category.
+	* libglabels/xml-template.c:
+	(lgl_xml_template_create_template_node):
+		Fixed typo/bug causing brand to be wrong.
+	
+2007-11-16  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c:
+	* libglabels/db.h:
+		Added return codes to lgl_db_register_template().  Added lgl_db_does_template_exist()
+		function.  Automatically create "User defined" category and add to all user
+		registered templates.
+	* libglabels/xml-template.c:
+	* libglabels/xml-template.h:
+		Return number of bytes written from lgl_xml_template_write_templates_to_file() and
+		lgl_xml_template_write_template_to_file().
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+		Update documentation to reflect above changes.
+
+2007-10-28  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-template.c:
+		Remove any leading white space from part #s when parsing old names.
+	* src/mini-preview-pixbuf-cache.c:
+		If name isn't in cache add it.
+
+2007-10-26  Jim Evins  <evins@snaught.com>
+
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/db.c:
+	* libglabels/db.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+		Another pass at screwing with the libglabels API.  Moved all
+		database related stuff to db.[ch].
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* docs/libglabels/tmpl/db.sgml:
+	* docs/libglabels/tmpl/init.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template-construction.sgml:
+	* docs/libglabels/tmpl/template-db.sgml:
+	* docs/libglabels/tmpl/template-misc.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+		Updated documentation to reflect above changes to libglabels API.
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/prefs-model.c:
+	* src/print.c:
+	* src/template-designer.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-rotate-label.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Reconciled usage with above libglabels API changes.
+
+2007-10-21  Jim Evins  <evins@snaught.com>
+
+	* data/glade/wdgt-media-select.glade:
+	* src/wdgt-media-select.c:
+		Added brand to filter settings.
+
+2007-10-21  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.2.dtd:
+		Forgot to replace Alias name attribute with brand and part attributes.
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-other-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/misc-us-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Replaced all name attributes with brand/part attribute pairs.
+
+2007-10-20  Jim Evins  <evins@snaught.com>
+
+	* src/stock-pixmaps/*.png
+		Updated icons to use Tango color palette.
+	
+2007-10-20  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/Makefile.am:
+	* data/dtd/glabels-2.0.dtd:
+	* data/dtd/glabels-2.2.dtd:
+		Rename glabels-2.0.dtd to glabels-2.2.dtd.  Added brand and part attributes to
+		template node.
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml.h:
+		Added brand and part attributes to template and alias structures and nodes.
+	* src/file.c:
+	* src/label.c:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/template-designer.c:
+	* src/wdgt-media-select.c:
+		Use modified libglabels API.
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/template-construction.sgml:
+	* docs/libglabels/tmpl/template-db.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+		Update libglabels documentation to reflect above modifications.
+
+2007-10-14  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* libglabels/category.c:
+	* libglabels/category.h:
+		Added lgl_category_get_id_list() and lgl_category_free_id_list() to have
+	parity with paper functions.
+
+2007-10-12  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+	* libglabels/init.c:
+	* libglabels/template.c:
+	* libglabels/template.h:
+		Another pass at fleshing out the libglabels documentation.
+	* src/cairo-label-path.c:
+	* src/cairo-markup-path.c:
+	* src/label.c:
+	* src/mini-preview-pixbuf.c:
+	* src/print-op.c:
+	* src/print.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+		Removed lgl_template_get_first_frame() from libglabels API and all references.
+
+2007-10-11  Jim Evins  <evins@snaught.com>
+	* configure.in:
+		Extended checks for deprecated symbols.
+	* libglabels/template.c:
+		Removed g_strcasecmp references, which are deprecated.
+
+2007-10-09  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c:
+		Create address book if it does not exist.  Also, be more robust about handling
+		error conditions -- don't just assume GError has been set.
+
+2007-10-08  Jim Evins  <evins@snaught.com>
+
+	* libglabels/template.c:
+	* libglabels/xml-template.c:
+	* src/template-designer.c:
+		Missed some symbols with libglabels API work.
+
+2007-10-01  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/category.sgml:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/init.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template-construction.sgml:
+	* docs/libglabels/tmpl/template-db.sgml:
+	* docs/libglabels/tmpl/template-misc.sgml:
+	* docs/libglabels/tmpl/template-struct.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+	* docs/libglabels/tmpl/xml-category.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* libglabels/category.h:
+	* libglabels/init.c:
+	* libglabels/libglabels-private.h:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.h:
+		Basic documentation framework for libglabels updated.  This still needs some
+		fleshing out.
+	
+2007-09-27  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/init.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* docs/libglabels/tmpl/xml.sgml:
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/enums.h:
+	* libglabels/init.c:
+	* libglabels/init.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-category.c:
+	* libglabels/xml-category.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-paper.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml-template.h:
+	* libglabels/xml.c:
+	* libglabels/xml.h:
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/cairo-markup-path.h:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label-object.c:
+	* src/label.c:
+	* src/label.h:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/mini-preview-pixbuf.c:
+	* src/mini-preview-pixbuf.h:
+	* src/prefs-dialog.c:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/prefs.h:
+	* src/print-op.c:
+	* src/print.c:
+	* src/template-designer.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Major cleanup of libglabels API -- this breaks API compatibility with older
+		development and stable versions -- as far as I know, there are currently
+		no external users of this library yet.
+	
+2007-09-14  Jim Evins  <evins@snaught.com>
+
+	* src/marshal.list:
+	* src/label.c:
+	* src/label.h:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/label-barcode.c:
+	* src/label-ellipse.c:
+	* src/view.c:
+	* src/view-object.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+		Better separation of model from view.
+
+2007-08-21  Jim Evins  <evins@snaught.com>
+
+	* src/print-op.c: (create_custom_widget_cb):
+		Fix problem with force_outline_flag -- don't override with default.
+
+2007-08-21  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.0.dtd:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-template.c:
+	* src/cairo-markup-path.c:
+		Added "Markup-rect" element to template format.
+
+2007-08-21  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Changed version to 2.1.pre5svn.
+	* src/view.c: (draw_markup_layer):
+		Do a stroke for each markup path, otherwise multiple markups
+		get connected.
+
+2007-08-17  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Bump libglabels revision numbers for 2.1.4 release.
+
+2007-08-16  Jim Evins  <evins@snaught.com>
+
+	* Makefile.am:
+		Include subdir iec16022-0.2.1.
+	* NEWS:
+	* configure.in:
+	* glabels.spec.in:
+		Preparation for 2.1.4.
+	
+
+2007-08-11  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
+		Updated file list.
+	* configure.in:
+	* po/eo.po:
+		Added Esperanto translation.  Provided by Antonio C.
+		Codazzi "la Filozofo" <f_sophia@libero.it>.
+	* po/fr.po:
+		Updated French translation. Provided by Claude Paroz
+		<claude@2xlibre.net>.
+	* AUTHORS:
+		Updated to reflect above translations.
+
+2007-08-11  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/misc-us-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Caught up with backlog of template submissions.
+
+2007-08-10  Jim Evins  <evins@snaught.com>
+
+	* src/bc-postnet.c: (gl_barcode_postnet_new):
+	* src/bc.c:
+		Added support for Brazilian CEPNet barcodes.  This is simply an
+		instance of the US POSTNET format with 8 digits.  Patch supplied
+		by Mário Meyer in bug # 1768792.
+	* AUTHORS:
+		Updated acknowledgments to reflect above patch and recent shuffling
+		of underlying technology.
+
+2007-05-13  Jim Evins  <evins@snaught.com>
+
+	* src/merge-text.c: (parse_line), (parse_field):
+		Remove leading and trailing spaces from CSV fields, unless quoted.
+
+2007-05-09  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	* src/object-editor-size-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/template-designer.c:
+	* src/ui-property-bar.c:
+	* src/wdgt-media-select.c:
+		Replaced signal block/unblock pairs with simple flags.  This reduces
+		some code clutter, hopefully making it easier to read.
+
+2007-05-05  Jim Evins  <evins@snaught.com>
+
+	* src/template-designer.c: (apply_cb):
+		Add new template to mini-preview pixbuf cache.
+
+2007-05-03  Jim Evins  <evins@snaught.com>
+
+	* src/label-image.c: (gl_label_image_init), (draw_object):
+		Scale default pixbuf up, to prevent bluring.  Use cairo_fill to
+		render image.
+
+2007-05-02  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (draw_select_region_layer), (motion_notify_event_cb),
+	(button_release_event_cb):
+		Removed attempt at rendering optimization by clipping the updates
+		to areas affected -- this actually seemed to hurt update performance.
+
+2007-04-30  Jim Evins  <evins@snaught.com>
+
+	* src/color.h:
+	* src/color.c: (gl_color_shadow), (gl_color_node_new_default),
+	(gl_color_node_equal), (gl_color_node_expand):
+	* src/label-barcode.c: (draw_object):
+	* src/label-box.c: (draw_object), (draw_shadow):
+	* src/label-ellipse.c: (draw_object), (draw_shadow):
+	* src/label-line.c: (draw_object), (draw_shadow):
+	* src/label-text.c: (draw_object), (draw_shadow):
+	* src/wdgt-mini-preview.c: (draw_shadow), (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Some cleanup to color related code.
+
+2007-04-30  Jim Evins  <evins@snaught.com>
+
+	* src/label.h:
+		Added glLabelRegion structure type.
+	* src/label-object.c: (gl_label_object_get_extent):
+	* src/label-object.h:
+		Modified gl_label_object_get_extent() to fill in a glLabelRegion struct.
+	* src/view.h:
+	* src/view.c: (gl_view_update_region), (draw_select_region_layer),
+	(gl_view_select_region), (gl_view_align_selection_left),
+	(gl_view_align_selection_right), (gl_view_align_selection_hcenter),
+	(gl_view_align_selection_top), (gl_view_align_selection_bottom),
+	(gl_view_align_selection_vcenter),
+	(gl_view_center_selection_horiz), (gl_view_center_selection_vert),
+	(gl_view_move_selection), (gl_view_can_selection_text),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+		- Reconcile with new gl_label_object_get_extent() API.
+		- Use glLabelRegion for view->select_region.
+		- Added gl_view_update_region() to clip updates to region.
+		- Use gl_view_update_region() during manipulation of view->select_region.
+
+2007-04-26  Jim Evins  <evins@snaught.com>
+
+	* src/mini-preview-pixbuf.c: (draw_paper), (draw_label_outlines),
+	(draw_label_outline):
+	* src/print.c: (print_crop_marks), (draw_outline):
+	* src/view-object.c: (gl_view_object_draw_handles):
+	* src/view.c: (draw_bg_layer), (draw_grid_layer),
+	(draw_markup_layer), (draw_fg_layer), (draw_select_region_layer):
+	* src/wdgt-mini-preview.c: (draw_paper), (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Added defines for various magic numbers.
+
+2007-04-25  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
+		Scale text down.  Cairo seems to render text too large.
+
+2007-04-25  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_update), (expose_cb),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+		- Try not to let updates get backed up.
+		- Grab pointer when doing any drag operations.
+
+2007-04-11  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-label-path.c: (gl_cairo_label_path),
+	(gl_cairo_rect_label_path), (gl_cairo_round_label_path),
+	(gl_cairo_cd_label_path):
+	* src/cairo-label-path.h:
+	* src/mini-preview-pixbuf.c: (draw_paper), (draw_label_outlines),
+	(draw_label_outline):
+	* src/print.c: (draw_outline), (clip_to_outline):
+	* src/view.c: (draw_bg_layer), (draw_fg_layer):
+	* src/wdgt-mini-preview.c: (draw_labels):
+	* src/wdgt-rotate-label.c: (drawingarea_update):
+		Modified to universally use gl_cairo_label_path() to create paths
+		for labels.  Added shadow to mini preview in rotate widget.
+
+2007-04-10  Jim Evins  <evins@snaught.com>
+
+	* libglabels/template.h:
+	* libglabels/template.c: (gl_template_get_name_list_unique),
+	(gl_template_get_name_list_all), (gl_template_from_name):
+		Modified libglabels to allow you to get a list of all template names
+		including all aliases or just a list of primary names of each unique
+		template.
+	* src/Makefile.am:
+	* src/file.c: (gl_file_properties):
+	* src/glabels.c: (main):
+	* src/mini-preview-pixbuf-cache.h:
+	* src/mini-preview-pixbuf-cache.c:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_construct),
+	(filter_changed_cb), (load_list):
+		Added mini-preview pixbuf cache, so that only one mini-preview is
+		needed for a unique template and gets reused for all aliases.  These
+		pixbufs will also live for the life of the program so they are not
+		rebuilt everytime a new label dialog is invoked.
+	* src/mini-preview-pixbuf.c: (draw_paper),
+	(draw_rect_label_outline), (draw_round_label_outline),
+	(draw_cd_label_outline):
+		Removed some comment artifacts.
+
+2007-04-04  Jim Evins  <evins@snaught.com>
+
+	* src/mini-preview-pixbuf.c: (gl_mini_preview_pixbuf_new),
+	(draw_paper), (draw_label_outlines), (draw_rect_label_outline),
+	(draw_round_label_outline), (draw_cd_label_outline):
+	* src/wdgt-media-select.c: (load_list):
+	* src/wdgt-rotate-label.c: (draw_cd_label_outline):
+		Cosmetic enhancments to mini previews.
+
+2007-04-04  Jim Evins  <evins@snaught.com>
+
+	* src/ui-property-bar.c: (gl_ui_property_bar_finalize),
+	(gl_ui_property_bar_construct):
+		Save copy of GladeXML tree so that we don't lose tooltips.
+
+2007-04-02  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.c:
+	* src/new-label-dialog.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/print-op.c:
+	* src/template-designer.c:
+	* src/ui-property-bar.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-rotate-label.c:
+		Fixed several memory leaks.
+
+2007-04-01  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (gl_label_text_init), (copy),
+	(gl_label_text_set_lines), (buffer_changed_cb), (get_size),
+	(set_font_family), (set_font_size), (set_font_weight),
+	(set_font_italic_flag), (set_text_alignment),
+	(set_text_line_spacing):
+		Cache object size, so that expensive extent calculations are only done
+		when needed.
+
+2007-03-30  Jim Evins  <evins@snaught.com>
+
+	* src/prefs-model.c: (gl_prefs_model_load_settings):
+		Default to an unlimited list of recent documents, since this parameter
+		seems to be pre-filter anyway.
+
+2007-03-30  Jim Evins  <evins@snaught.com>
+
+	* src/label-box.c: (draw_shadow):
+	* src/label-ellipse.c: (draw_shadow):
+		Added missing shadow fill.
+	
+2007-03-28  Jim Evins  <evins@snaught.com>
+
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+		Unreferencing the print operation sometimes crashes.  Just don't do it
+		right now.
+
+2007-03-28  Jim Evins  <evins@snaught.com>
+
+	* src/print-op.c: (gl_print_op_construct),
+	(gl_print_op_get_settings), (gl_print_op_set_settings),
+	(gl_print_op_free_settings), (create_custom_widget_cb):
+	* src/print-op.h:
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/window.c: (gl_window_init):
+	* src/window.h:
+		Save print settings and custom settings between print operations
+		on the same window.
+
+2007-03-24  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page),
+	(gl_object_editor_set_image), (img_selection_changed_cb):
+		Workaround for GtkFileChooserButton bug # 327243.  This the root
+		cause for gLabels bug # 1192884.  I have actually observed 3 delayed
+		"selection-changed" signals -- the first 2 return NULL -- this is
+		what caused the image to reset to the default followed by setting
+		it back to the original image, trying to fit it into a new bounding
+		box.  This sequence of events is much more evident with the new
+		cairo rendering.
+
+2007-03-23  Jim Evins  <evins@snaught.com>
+
+	Merged all changes from experimental cairo branch to trunk.
+	Trunk no longer depends on libgnomecanvas or libgnomeprint[ui].
+
+2007-03-23  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_class_init),
+	(gl_label_object_get_raw_size), (gl_label_object_get_size):
+		Created "get_raw_size" method.
+	* src/label-barcode.c: (get_size):
+	* src/xml-label.c: (xml_create_object_text),
+	(xml_create_object_barcode):
+		Use new "get_raw_size" method on label-objects when apropos.
+	* src/label-text.h:
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow),
+	(auto_shrink_font_size):
+		Added "auto shrink" functionality back.
+
+2007-03-19  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (draw_object), (draw_shadow):
+		Don't use negative scales in workaround from previous commit.
+	
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label.c:
+		Forgot to remove include of xml-lable-191 in previous commit.
+	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
+		Workaround for pango Bug #341481.  Render text at device scale,
+		and scale font size accordingly.  Also, don't do any hinting.
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-ellipse-path.c:
+	* src/cairo-ellipse-path.h:
+		Forgot to add these new files during last mass commit.
+
+2007-03-18  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/xml-label-191.c:
+	* src/xml-label-191.h:
+		Removed -- Very buggy.  Version 1.91 is a very old "unstable" version,
+		so there is no need to keep compatability.
+	* src/base64.c:
+	* src/bc-iec16022.c:
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/color.c:
+	* src/debug.c:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label-barcode.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/label-image.c:
+	* src/label-line.c:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/label-text.c:
+	* src/label.c:
+	* src/label.h:
+	* src/merge-properties-dialog.c:
+	* src/merge.c:
+	* src/new-label-dialog.c:
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/pixbuf-cache.c:
+	* src/print-op.c:
+	* src/print.c:
+	* src/recent.c:
+	* src/stock.c:
+	* src/template-designer.c:
+	* src/text-node.c:
+	* src/ui-property-bar.c:
+	* src/ui.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/window.c:
+	* src/xml-label-04.c:
+	* src/xml-label.c:
+		Many changes, including:
+		- Move draw methods from view-*() to label-*().
+		- Use same drawing code for on screen view and printing.
+		- Fix all issues exposed with '-Wall -Werror'.
+
+2007-03-14  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-handle-path.h:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+		Removed cairo-handle-path.[ch] and cairo-object-path.[ch].
+	* src/view-barcode.c: (gl_view_barcode_class_init), (draw_object),
+	(object_at):
+	* src/view-box.c: (gl_view_box_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view-ellipse.c: (gl_view_ellipse_class_init),
+	(create_ellipse_path), (draw_object), (draw_shadow), (object_at):
+	* src/view-image.c: (gl_view_image_class_init), (draw_object),
+	(object_at):
+	* src/view-line.c: (gl_view_line_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view-object.c: (gl_view_object_draw), (gl_view_object_at),
+	(create_handle_path), (gl_view_object_draw_handles),
+	(gl_view_object_handle_at):
+	* src/view-object.h:
+	* src/view-text.c: (gl_view_text_class_init), (draw_object),
+	(draw_shadow), (object_at):
+	* src/view.c: (motion_notify_event_cb), (button_press_event_cb):
+		Some restructuring of new code.
+
+2007-03-12  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c:
+	* src/view-barcode.c:
+	* src/view-barcode.h:
+	* src/view.c:
+		Added barcode object support to view.
+
+2007-03-12  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/view-text.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+		Added text object support to view.  Added object_at method to all
+		view_objects.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_image_object_path):
+	* src/view-image.c: (gl_view_image_class_init),
+	(gl_view_image_finalize), (gl_view_image_new),
+	(update_editor_from_label_cb), (draw),
+	(gl_view_image_get_create_cursor),
+	(gl_view_image_create_button_press_event),
+	(gl_view_image_create_motion_event),
+	(gl_view_image_create_button_release_event):
+	* src/view-image.h:
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(selection_received_cb), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added image object support to view.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_line_object_path):
+	* src/view-line.c: (gl_view_line_class_init), (gl_view_line_new),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb), (draw),
+	(gl_view_line_get_create_cursor),
+	(gl_view_line_create_button_press_event),
+	(gl_view_line_create_motion_event),
+	(gl_view_line_create_button_release_event):
+	* src/view-line.h:
+	* src/view-object.c: (gl_view_object_resize_event):
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(selection_received_cb), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added line object support to view.
+	* src/cairo-handle-path.c:
+		Made handles slightly larger.
+
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-label-path.c: (gl_cairo_rect_label_path),
+	(gl_cairo_round_label_path), (gl_cairo_cd_label_path):
+	* src/cairo-markup-path.c: (gl_cairo_markup_margin_rect_path),
+	(gl_cairo_markup_margin_round_path),
+	(gl_cairo_markup_margin_cd_path), (gl_cairo_markup_circle_path):
+	* src/cairo-object-path.c: (gl_cairo_object_path),
+	(gl_cairo_ellipse_object_path):
+	* src/label-object.c: (gl_label_object_rotate):
+	* src/view-box.c:
+	* src/view-box.h:
+	* src/view-ellipse.c: (gl_view_ellipse_class_init),
+	(gl_view_ellipse_new), (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (update_editor_from_label_cb),
+	(draw), (gl_view_ellipse_get_create_cursor),
+	(gl_view_ellipse_create_button_press_event),
+	(gl_view_ellipse_create_motion_event),
+	(gl_view_ellipse_create_button_release_event):
+	* src/view-ellipse.h:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view.c: (gl_view_construct), (gl_view_object_create_mode),
+	(select_object_real), (selection_received_cb),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb):
+	* src/view.h:
+		Added ellipse object support to view.  Plus other cleanup.
+
+2007-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/view-box.h:
+	* src/view-box.c: (gl_view_box_get_create_cursor),
+	(gl_view_box_create_button_press_event),
+	(gl_view_box_create_motion_event),
+	(gl_view_box_create_button_release_event):
+	* src/view-object.c: (gl_view_object_set_view),
+	(gl_view_object_handle_at):
+	* src/view.h:
+	* src/view.c: (gl_view_arrow_mode), (gl_view_object_create_mode),
+	(motion_notify_event_cb), (button_press_event_cb),
+	(button_release_event_cb), (key_press_event_cb):
+		Added creation code for box object.
+
+2007-03-09  Jim Evins  <evins@snaught.com>
+
+	* src/view-object.c: (gl_view_object_resize_event):
+	* src/view-object.h:
+	* src/view.c: (motion_notify_event_cb):
+		Fix bugs with resizing transformed objects.
+	* src/cairo-handle-path.c: (gl_cairo_handle_path):
+	* src/cairo-object-path.c: (gl_cairo_object_path):
+	* src/cairo-object-path.h:
+	* src/label-object.c: (gl_label_object_init),
+	(gl_label_object_dup), (gl_label_object_get_extent),
+	(gl_label_object_flip_horiz), (gl_label_object_flip_vert),
+	(gl_label_object_rotate), (gl_label_object_set_matrix),
+	(gl_label_object_get_matrix):
+	* src/label-object.h:
+	* src/print.c: (draw_object):
+	* src/view-box.c:
+	* src/view-highlight.c:
+	* src/view-highlight.h:
+	* src/xml-label-191.c: (xml191_parse_object):
+	* src/xml-label.c: (xml_parse_affine_attrs),
+	(xml_create_affine_attrs):
+		Replace libart affine matrices with cairo matrices.
+
+2007-03-08  Jim Evins  <evins@snaught.com>
+
+	* src/view-object.h:
+	* src/view.c: (gl_view_update), (motion_notify_event_cb):
+	* src/view-object.c: (gl_view_object_handle_at),
+	(gl_view_object_resize_event):
+		Added resize code -- still a bit buggy.
+	
+2007-03-07  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/cairo-handle-path.c:
+	* src/cairo-handle-path.h:
+	* src/view-box.c: (gl_view_box_new):
+	* src/view-object.c: (gl_view_object_set_object),
+	(gl_view_object_draw_handles), (gl_view_object_handle_at):
+	* src/view-object.h:
+	* src/view.c: (draw_highlight_layer), (select_object_real),
+	(unselect_object_real), (view_handle_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb),
+	(key_press_event_cb):
+	* src/view.h:
+		Added beginnings of object resize handles.
+
+2007-03-07  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_init), (gl_view_arrow_mode),
+	(gl_view_object_create_mode), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb),
+	(key_press_event_cb):
+		Added move selection support.
+
+2007-03-05  Jim Evins  <evins@snaught.com>
+
+	* src/cairo-object-path.c: (gl_cairo_object_path):
+	* src/view-object.c: (gl_view_object_draw),
+	(gl_view_object_draw_highlight):
+	* src/view.c: (view_object_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Additional refinements to select logic.
+
+2007-03-05  Jim Evins  <evins@snaught.com>
+
+	* src/view.h:
+	* src/view.c: (gl_view_init), (gl_view_construct),
+	(label_changed_cb), (draw_layers), (draw_select_region_layer),
+	(gl_view_select_region), (object_at), (motion_notify_event_cb),
+	(button_press_event_cb), (button_release_event_cb):
+		Added initial select region support and context menu.
+
+2007-03-04  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* src/Makefile.am:
+	* src/debug.c:
+	* src/debug.h:
+	* src/file.c:
+	* src/label.c:
+	* src/label.h:
+	* src/print-op.c:
+	* src/print.c:
+	* src/ui-commands.c:
+	* src/view-box.c:
+	* src/view-box.h:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view.c:
+	* src/view.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/xml-label.c:
+		Initial port to a raw Cairo canvas.  This removes all remaining
+		dependencies on	libgnomecanvas and libgnomeprint[ui].  Basically
+		the view is becoming a canvas widget in its own right.  Still needs
+		a lot of work.
+	* src/cairo-label-path.c:
+	* src/cairo-label-path.h:
+	* src/cairo-markup-path.c:
+	* src/cairo-markup-path.h:
+	* src/cairo-object-path.c:
+	* src/cairo-object-path.h:
+		New files to support cairo canvas.
+	* src/canvas-hacktext.c:
+	* src/canvas-hacktext.h:
+		Removed.
+
+2007-02-18  Jim Evins  <evins@snaught.com>
+
+	* src/bc.h:
+		GNOME_FONT_BOOK changed to PANGO_WEIGHT_NORMAL.
+
+2007-02-14  Jim Evins  <evins@snaught.com>
+
+	* src/base64.c:
+	* src/base64.h:
+	* src/bc-gnubarcode.c:
+	* src/bc-gnubarcode.h:
+	* src/bc-postnet.c:
+	* src/bc-postnet.h:
+	* src/bc.c:
+	* src/bc.h:
+	* src/canvas-hacktext.c:
+	* src/canvas-hacktext.h:
+	* src/debug.c:
+	* src/debug.h:
+	* src/file.c:
+	* src/file.h:
+	* src/glabels.c:
+	* src/hig.h:
+	* src/label-barcode.c:
+	* src/label-barcode.h:
+	* src/label-box.c:
+	* src/label-box.h:
+	* src/label-ellipse.c:
+	* src/label-ellipse.h:
+	* src/label-image.c:
+	* src/label-image.h:
+	* src/label-line.c:
+	* src/label-line.h:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/label-text.c:
+	* src/label-text.h:
+	* src/label.c:
+	* src/label.h:
+	* src/merge-evolution.c:
+	* src/merge-evolution.h:
+	* src/merge-init.c:
+	* src/merge-init.h:
+	* src/merge-properties-dialog.c:
+	* src/merge-properties-dialog.h:
+	* src/merge-text.c:
+	* src/merge-text.h:
+	* src/merge-vcard.c:
+	* src/merge-vcard.h:
+	* src/merge.c:
+	* src/merge.h:
+	* src/mini-preview-pixbuf.h:
+	* src/new-label-dialog.c:
+	* src/new-label-dialog.h:
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-size-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/object-editor.h:
+	* src/pixbuf-cache.c:
+	* src/pixbuf-cache.h:
+	* src/prefs-dialog.c:
+	* src/prefs-dialog.h:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/prefs.h:
+	* src/print-op.c:
+	* src/stock.c:
+	* src/stock.h:
+	* src/template-designer.c:
+	* src/text-node.c:
+	* src/text-node.h:
+	* src/ui-commands.c:
+	* src/ui-commands.h:
+	* src/ui-property-bar.c:
+	* src/ui-property-bar.h:
+	* src/ui-sidebar.c:
+	* src/ui-sidebar.h:
+	* src/ui-util.c:
+	* src/ui-util.h:
+	* src/ui.c:
+	* src/ui.h:
+	* src/util.c:
+	* src/util.h:
+	* src/view-barcode.c:
+	* src/view-barcode.h:
+	* src/view-box.c:
+	* src/view-box.h:
+	* src/view-ellipse.c:
+	* src/view-ellipse.h:
+	* src/view-highlight.c:
+	* src/view-highlight.h:
+	* src/view-image.c:
+	* src/view-image.h:
+	* src/view-line.c:
+	* src/view-line.h:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view-text.c:
+	* src/view-text.h:
+	* src/view.c:
+	* src/view.h:
+	* src/wdgt-chain-button.c:
+	* src/wdgt-chain-button.h:
+	* src/wdgt-media-select.c:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.c:
+	* src/window.h:
+	* src/xml-label-04.c:
+	* src/xml-label-04.h:
+	* src/xml-label-191.c:
+	* src/xml-label-191.h:
+	* src/xml-label.c:
+	* src/xml-label.h:
+
+	Assorted superficial cleanup.  Including:
+	- Use G_DEFINE_TYPE for all objects.
+	- Reconcile style of all class initializer functions
+	- Reconcile style of all finalize functions
+	- Add emacs mode line to all source files
+		
+2007-02-06  Jim Evins  <evins@snaught.com>
+
+Assorted cleanup and removal of deprecated items.
+	
+	* src/splash.c:
+	* src/splash.h:
+	* src/Makefile.am:
+		Removed annoying splash screen.
+	* src/glabels-batch.c: (main):
+	* src/glabels.c: (main):
+		Converted from popt to GOption.
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_set_shadow_state):
+		Removed deprecated method on GtkToggleButton.
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Removed dependency on libgnomui/qnome-url.h.
+	* src/template-designer.c:
+		Removed dependency on libgnome/gnome-program.h.
+	
+
+2007-02-04  Jim Evins  <evins@snaught.com>
+
+	* src/color.c:
+	* src/color.h:
+	* src/prefs-model.c:
+	* src/print.c: (draw_text_object):
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_construct):
+		Removed GnomeCanvas artifacts from color.[ch] and related modules.
+
+2007-02-04  Jim Evins  <evins@snaught.com>
+
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+		Ported widget from GnomeCanvas to Cairo.
+
+2007-02-03  Jim Evins  <evins@snaught.com>
+
+	* data/glade/template-designer.glade:
+	* src/template-designer.c:
+	* src/template-designer.h:
+		Ported GnomeDruid to GtkAssistant.  Since libglade does not
+		yet support the GtkAssistant and we derive directly from
+		the Assistant, the pages are layed out in a GtkNotebook in
+		the glade description -- we then append each page to the
+		assistant.
+
+2007-01-25  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Added dummy page to notebook, to prevent shadow page from
+		becoming the default current page at creation.
+	* src/view-box.c: (construct_properties_editor):
+	* src/view-ellipse.c: (construct_properties_editor):
+	* src/view-line.c: (construct_properties_editor):
+	* src/view-text.c: (construct_properties_editor):
+		Reconciled order of params.
+
+2007-01-19  Jim Evins  <evins@snaught.com>
+
+	* src/label-barcode.h:
+	* src/label-object.c: (gl_label_object_set_font_weight),
+	(gl_label_object_set_text_alignment),
+	(gl_label_object_get_font_weight),
+	(gl_label_object_get_text_alignment):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_instance_init), (copy),
+	(get_size), (set_font_family), (set_font_weight),
+	(set_text_alignment), (get_font_weight), (get_text_alignment):
+	* src/label-text.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family),
+	(gl_object_editor_set_font_weight),
+	(gl_object_editor_get_font_weight),
+	(gl_object_editor_set_text_alignment),
+	(gl_object_editor_get_text_alignment),
+	(gl_object_editor_set_text_color):
+	* src/object-editor.h:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+	* src/print.c: (draw_text_object):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties), (update_text_properties),
+	(font_bold_toggled_cb), (text_align_toggled_cb):
+	* src/ui-sidebar.c:
+	* src/util.c: (gl_util_align_to_string), (gl_util_string_to_align),
+	(gl_util_weight_to_string), (gl_util_string_to_weight),
+	(gl_util_get_font_family_list), (gl_util_font_family_list_free):
+	* src/util.h:
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (draw_hacktext), (draw_cursor):
+	* src/view.c: (gl_view_set_selection_text_alignment),
+	(gl_view_set_default_text_alignment),
+	(gl_view_get_default_text_alignment):
+	* src/view.h:
+	* src/xml-label-04.c: (xml04_parse_text_props):
+	* src/xml-label-191.c: (xml191_parse_text_props):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_parse_toplevel_span), (xml_create_object_text),
+	(xml_create_toplevel_span):
+		Converted all model internals to Pango.  GnomeFont remains in
+	view until GnomeCanvas can be replaced with a cairo-based canvas.
+	
+2007-01-17  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/hig.c:
+		Deleted hig.c.
+	* src/hig.h:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_get_type),
+	(gl_wdgt_print_copies_construct):
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_type),
+	(gl_wdgt_print_merge_construct):
+	* src/wdgt-print-merge.h:
+		Removed all remaining HIG wrapper widgets.
+
+2007-01-16  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print-op.c:
+	* src/print-op.h:
+	* src/template-designer.c: (print_test_cb):
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/print.c:
+		Renamed PrintDialog to PrintOp.  Added constructor for batch
+		printing.
+	* src/glabels-batch.c: (main):
+		Converted to use new PrintOp object for printing.
+
+2007-01-15  Jim Evins  <evins@snaught.com>
+
+	* data/glade/Makefile.am:
+	* data/glade/print-custom-widget.glade:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print.c:
+	* src/print.h:
+	* src/template-designer.c: (print_test_cb):
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_copies):
+	* src/wdgt-print-merge.h:
+	* src/window.c: (gl_window_init):
+	* src/window.h:
+		Initial conversion to GtkPrintOperation.
+		Still to do:
+		 - Remove font and other libgnomeprint[ui] from elsewhere
+		 - Add batch initialization of print operation
+
+2007-01-08  Jim Evins  <evins@snaught.com>
+	* configure.in:
+		Updated dependencies.  Set version to 2.1.pre4cvs.
+
+2007-01-03  Jim Evins  <evins@snaught.com>
+
+	* src/recent-files/*
+		Removed EggRecent stuff.
+	* configure.in:
+	* src/Makefile.am:
+	* src/file.c:
+	* src/recent.c:
+	* src/recent.h:
+	* src/ui-commands.c:
+	* src/ui-commands.h:
+	* src/ui.c:
+		Ported from EggRecent to GtkRecentManager.
+	
+
+2007-01-02  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* iec16022-0.2.1/BUGS:
+	* iec16022-0.2.1/CHANGELOG:
+	* iec16022-0.2.1/CREDITS:
+	* iec16022-0.2.1/INSTALL:
+	* iec16022-0.2.1/LICENSE:
+	* iec16022-0.2.1/Makefile.am:
+	* iec16022-0.2.1/Makefile.dist:
+	* iec16022-0.2.1/README:
+	* iec16022-0.2.1/README.glabels:
+	* iec16022-0.2.1/TODO:
+	* iec16022-0.2.1/iec16022.1:
+	* iec16022-0.2.1/iec16022.c:
+	* iec16022-0.2.1/iec16022ecc200.c:
+	* iec16022-0.2.1/iec16022ecc200.h:
+	* iec16022-0.2.1/image.c:
+	* iec16022-0.2.1/image.h:
+	* iec16022-0.2.1/reedsol.c:
+	* iec16022-0.2.1/reedsol.h:
+	* iec16022-0.2.1/test/testsuite-example.bin:
+	* iec16022-0.2.1/test/testsuite-example.eps:
+	* iec16022-0.2.1/test/testsuite-example.hex:
+	* iec16022-0.2.1/test/testsuite-example.png:
+	* iec16022-0.2.1/test/testsuite-example.text:
+	* iec16022-0.2.1/test/testsuite.sh:
+		Include modified copy of iec16022-0.2.1 to provide encoding
+		support for datamatrix 2D barcodes.
+	* src/Makefile.am:
+	* src/bc-iec16022.c:
+	* src/bc-iec16022.h:
+	* src/bc.c:
+		Added initial datamatrix 2D barcode backend to barcode code.
+	* INSTALL:
+	* gtk-doc.make:
+		Automatic updates to later versions of these files.
+
+2006-11-28  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/categories.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		More categorization.
+	
+2006-09-12  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.0.dtd:
+	* data/templates/Makefile.am:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-other-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/categories.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+	* data/glade/Makefile.am:
+	* data/glade/new-label-dialog.glade:
+	* data/glade/wdgt-media-select.glade:
+	* data/glade/wdgt-rotate-label.glade:
+	* libglabels/Makefile.am:
+	* libglabels/category.c:
+	* libglabels/category.h:
+	* libglabels/libglabels.h:
+	* libglabels/paper.c:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-category.c:
+	* libglabels/xml-category.h:
+	* libglabels/xml-template.c:
+		Added support for category meta data.
+	* src/Makefile.am:
+	* src/file.c:
+	* src/mini-preview-pixbuf.c:
+	* src/mini-preview-pixbuf.h:
+	* src/new-label-dialog.c:
+	* src/new-label-dialog.h:
+	* src/wdgt-media-select.c:
+	* src/wdgt-media-select.h:
+	* src/wdgt-rotate-label.c:
+	* src/wdgt-rotate-label.h:
+		New "new label" dialog.
+
+2006-05-27  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* autogen.sh:
+	* configure.in:
+		Preparation for 2.1.3.
+	* acinclude.m4:
+	* omf.make:
+	* xmldocs.make:
+		Removed.
+	
+2006-05-22  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_barcode_object):
+		Don't print "Invalid barcode data" if data field is empty.  Patch provided
+		by Darren Warner <warnerd@users.sourceforge.net>.  Fixes Bug #1479839.
+	* AUTHORS:
+		Added acknowledgment for above patch.
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new):
+	* src/bc-postnet.c: (postnet_code):
+		Removed "Invalid barcode data" warnings from stderr.
+	* src/view-barcode.c: (draw_barcode):
+		Draw box around barcode extent if data empty or invalid.  Center a
+		message whether the data is empty or invalid in box.
+
+2006-05-22  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_text_object):
+		Check shadow state when printing text.
+
+2006-05-20  Jim Evins  <evins@snaught.com>
+
+	* src/ui-commands.c: (gl_ui_cmd_view_grid_toggle),
+	(gl_ui_cmd_view_markup_toggle):
+		Fixed crash when grid or markup have been toggled off during
+		a previous session.  Bug #1434324.
+
+2006-04-05  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+		Fixed potential crash when freeing empty key list.
+
+2006-03-11  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_text_object):
+	* src/view-text.c: (gl_view_text_new),
+	(construct_properties_editor), (update_object_from_editor_cb),
+	(update_editor_from_object_cb), (update_editor_from_label_cb),
+	(draw_hacktext):
+		Added shadow support to text object.
+	
+2006-02-18  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (draw_line_object):
+	* src/view-line.c: (gl_view_line_new),
+	(construct_properties_editor), (update_canvas_item_from_object_cb),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb):
+		Added shadow support to line object.
+
+2006-02-16  Jim Evins  <evins@snaught.com>
+
+	* src/view-box.c:
+		Comment changes.
+	* src/print.c: (draw_ellipse_object):
+	* src/view-ellipse.c: (gl_view_ellipse_new),
+	(construct_properties_editor), (update_canvas_item_from_object_cb),
+	(update_object_from_editor_cb), (update_editor_from_object_cb),
+	(update_editor_from_label_cb):
+		Added shadow support to ellipse object.
+
+2006-02-15  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.c:
+		Changed default shadow offsets.
+	* src/view-box.c: (gl_view_box_new):
+		Simplified gl_view_box_new() so that is does not duplicate code
+		in update_canvas_item_from_object_cb().
+
+2006-02-07  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Fixed color groups of color combos.
+	* src/color.h:
+		Added default shadow color.
+	* src/object-editor.c: (gl_object_editor_construct_color_combo):
+		Added shadow color group.
+
+2006-02-06  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-shadow-page.c:
+		Forgot to add this file.
+	* src/view-box.c: (gl_view_box_new),
+	(update_canvas_item_from_object_cb), (update_editor_from_label_cb):
+		Update limits on shadow offset spinbuttons.
+
+2006-01-19  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_key_list):
+		Initialize key_list to NULL.
+	* data/glade/object-editor.glade:
+	* src/Makefile.am:
+	* src/color.c:
+	* src/color.h:
+	* src/label-object.c:
+	* src/label-object.h:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor.c:
+	* src/object-editor.h:
+	* src/xml-label.c:
+		Created infrastructure for shadow support.
+	* src/view-box.c:
+	* src/print.c:
+		Initial shadow support in box object only.
+	
+2006-01-05  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.c: (src_changed_cb):
+		Be extra paranoid before calling strcmp().
+	* src/merge.c: (gl_merge_set_src):
+		Don't make (merge == NULL) a critical error.
+
+2005-12-22  Jim Evins  <evins@snaught.com>
+
+	* src/glabels-batch.c: (main):
+		Compile warning free with gcc 4.0.
+
+2005-12-21  Jim Evins  <evins@snaught.com>
+
+	* glabels.spec.in:
+		Updated example RPM spec file.
+	
+2005-12-21  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* configure.in:
+		Preparation for 2.1.2.
+	
+2005-12-20  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+		Define unique G_LOG_DOMAIN for glabels.
+	* src/critical-error-handler.c: (gl_critical_error_handler_init):
+	* src/warning-handler.c: (gl_warning_handler_init),
+	(warning_handler):
+		Register for G_LOG_DOMAIN instead of NULL.
+	
+2005-12-10  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c:
+	* src/merge-vcard.c:
+		Fixed indentation.
+
+2005-12-08  Jim Evins  <evins@snaught.com>
+
+	* libglabels/paper.c: (read_paper_files_from_dir):
+	* libglabels/template.c: (gl_template_register),
+	(read_template_files_from_dir):
+	* libglabels/xml-paper.c: (gl_xml_paper_read_papers_from_file),
+	(gl_xml_paper_parse_papers_doc):
+	* libglabels/xml-template.c:
+	(gl_xml_template_read_templates_from_file),
+	(gl_xml_template_parse_templates_doc),
+	(gl_xml_template_parse_template_node),
+	(xml_parse_label_rectangle_node), (xml_parse_label_round_node),
+	(xml_parse_label_cd_node), (xml_parse_layout_node),
+	(xml_parse_markup_margin_node), (xml_parse_markup_line_node),
+	(xml_parse_markup_circle_node),
+	(gl_xml_template_write_templates_to_file), (xml_create_label_node):
+	* libglabels/xml.c: (gl_xml_get_prop_length):
+		Re-classified g_warnings to g_messages.
+	* src/Makefile.am:
+	* src/glabels.c: (main):
+	* src/warning-handler.c: (gl_warning_handler_init),
+	(warning_handler):
+	* src/warning-handler.h:
+		Added warning message handler to make sure the user is
+		presented with appropriate non-fatal errors.
+	* src/critical-error-handler.c: (critical_error_handler):
+		Changed exit to abort.
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new), (render_pass1):
+	* src/bc-postnet.c: (postnet_code):
+	* src/bc.c: (id_to_index), (name_to_index):
+	* src/merge.c: (gl_merge_register_backend), (gl_merge_new):
+	* src/object-editor.c: (gl_object_notebook_construct_valist):
+	* src/prefs-dialog.c: (update_locale_page_from_prefs):
+	* src/prefs.c: (gl_prefs_get_units_per_point),
+	(gl_prefs_get_units_precision), (gl_prefs_get_units_step_size),
+	(gl_prefs_get_units_string):
+	* src/print.c: (draw_outline), (clip_to_outline), (clip_punchouts):
+	* src/splash.c: (gl_splash):
+	* src/ui-commands.c: (gl_ui_cmd_help_contents):
+	* src/view-highlight.c: (gl_view_highlight_new),
+	(highlight_resizable_box_construct), (object_changed_cb),
+	(view_scale_changed_cb):
+	* src/view.c: (draw_label_layer), (draw_bg_fg_layers),
+	(draw_markup_layer), (draw_markup_margin),
+	(gl_view_object_create_mode), (canvas_event),
+	(selection_received_cb):
+	* src/wdgt-mini-preview.c: (mini_outline_list_new):
+	* src/wdgt-rotate-label.c: (mini_preview_canvas_update):
+	* src/xml-label-04.c: (gl_xml_label_04_parse),
+	(xml04_parse_media_description), (xml04_parse_text_props),
+	(xml04_parse_barcode_props):
+	* src/xml-label-191.c: (gl_xml_label_191_parse),
+	(xml191_parse_objects), (xml191_parse_object),
+	(xml191_parse_text_props), (xml191_parse_image_props),
+	(xml191_parse_barcode_props), (xml191_parse_data),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_layout),
+	(xml191_parse_markup):
+	* src/xml-label.c: (gl_xml_label_open), (gl_xml_label_open_buffer),
+	(xml_doc_to_label), (xml_parse_label), (xml_parse_objects),
+	(xml_parse_object_text), (xml_parse_object_image),
+	(xml_parse_object_barcode), (xml_parse_data),
+	(xml_parse_toplevel_span), (gl_xml_label_save),
+	(xml_create_objects):
+		Re-classified g_warnings to g_messages.
+	* src/merge-evolution.c: (gl_merge_evolution_open),
+	(gl_merge_evolution_close), (gl_merge_evolution_get_record):
+		Use g_warning to output errors encountered while
+		communicating with the evolution data server
+		instead of embedding them in the data.
+	
+2005-12-08  Jim Evins  <evins@snaught.com>
+
+	* libglabels/libglabels-private.h:
+		Set G_LOG_DOMAIN
+	* libglabels/paper.c: (read_papers):
+	* libglabels/template.c: (read_templates):
+		Made appropriate warnings critical.
+	* src/Makefile.am:
+	* src/critical-error-handler.h:
+	* src/critical-error-handler.c: (gl_critical_error_handler_init),
+	(critical_error_handler):
+		Created critical error handler.
+	* src/glabels.c: (main):
+		Register critical error handler.
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init):
+	* src/object-editor.c: (gl_object_editor_init):
+	* src/prefs-dialog.c: (gl_prefs_dialog_init):
+	* src/template-designer.c: (gl_template_designer_init):
+	* src/ui-property-bar.c: (gl_ui_property_bar_instance_init):
+		Made appropriate warnings critical.
+
+2005-11-27  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_key_list),
+	(gl_merge_evolution_get_primary_key),
+	(gl_merge_evolution_get_record):
+		Don't create "record_key" pseudo-key.  Don't populate
+		fields with null data.
+
+2005-11-25  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_finalize),
+	(gl_merge_evolution_get_key_list), (gl_merge_evolution_open),
+	(gl_merge_evolution_get_record), (gl_merge_evolution_copy),
+	(free_field_list):
+		Query EDS for all supported fields.  Patch provided by
+		Austin Henry <ahenry@users.sourceforge.net>.
+
+2005-10-29  Jim Evins  <evins@snaught.com>
+
+	* src/glabels.c: (main):
+	* src/label-barcode.c: (gl_label_barcode_finalize):
+	* src/label-text.c: (gl_label_text_finalize), (set_font_family):
+	* src/label.c: (gl_label_instance_init), (gl_label_finalize):
+	* src/object-editor.c: (gl_object_editor_finalize):
+		Another pass at valgrinding -- plugged several memory leaks.
+	* src/view-text.c: (gl_view_text_new),
+	(update_canvas_item_from_object_cb), (draw_hacktext):
+		Commented out artifacts of edit-in-place code.
+	
+2005-10-28  Jim Evins  <evins@snaught.com>
+
+	* src/canvas-hacktext.c: (gl_canvas_hacktext_set_arg):
+		Fixed use of uninitialized variable.  Caught by
+		d binderman <dcb314@hotmail.com>.
+
+2005-10-27  Jim Evins  <evins@snaught.com>
+
+	* src/merge-evolution.c: (gl_merge_evolution_get_record):
+	* src/merge-vcard.c: (gl_merge_vcard_get_record),
+	(parse_next_vcard):
+		Additional cleanup of EDS and vcard backends.  Provided by
+		Austin Henry <ahenry@users.sourceforge.net>.
+
+2005-10-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* src/Makefile.am:
+	* src/merge-evolution.c:
+	* src/merge-evolution.h:
+	* src/merge-init.c: (gl_merge_init):
+	* src/merge-properties-dialog.c: (type_changed_cb):
+	* src/merge-vcard.c:
+	* src/merge-vcard.h:
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Added Evolution Data Server and VCard merge backends.  Original patch
+		provided by Austin Henry <ahenry@users.sourceforge.net>.
+	* configure.in:
+		Only support EDS and VCard backends if libebook is installed.  Allow
+		user to disable support, even if installed.
+	
+2005-10-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Collected all template changes and submissions since last
+		release.
+
+2005-10-23  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* data/mime/Makefile.am:
+		Added configure options to disable update-mime-database and
+		update-desktop-database as part of the install.  Patch
+		provided by Leonardo Boshell (qhoracio@sourceforge.net).
+
+2005-10-23  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml.h:
+	* libglabels/xml.c: (gl_xml_get_prop_string),
+	(gl_xml_get_prop_i18n_string), (gl_xml_set_prop_string),
+	(gl_xml_is_node), (gl_xml_get_node_content):
+		Added new XML utility functions.
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* src/xml-label.c:
+		Cleanup by using new xml utilities created above.
+	* libglabels/paper.c: (gl_paper_free):
+	* src/file.c: (new_response):
+	* src/object-editor-image-page.c: (add_image_filters_to_chooser):
+	* src/pixbuf-cache.c: (gl_pixbuf_cache_add_pixbuf),
+	(gl_pixbuf_cache_get_pixbuf):
+	* src/ui-property-bar.c:
+	(gl_ui_property_bar_construct_color_combo):
+	* src/view-highlight.c: (gl_view_highlight_finalize):
+	* src/view-image.c: (update_object_from_editor_cb):
+	* src/view.c: (gl_view_finalize), (draw_bg_fg_layers),
+	(draw_bg_fg_rounded_rect), (draw_bg_fg_round), (draw_bg_fg_cd),
+	(draw_bg_fg_cd_bc), (draw_markup_layer), (draw_markup_margin),
+	(draw_markup_margin_rect), (draw_markup_margin_rounded_rect),
+	(draw_markup_margin_round), (draw_markup_margin_cd),
+	(draw_markup_margin_cd_bc):
+	* src/wdgt-mini-preview.c: (mini_outline_list_new):
+	* src/wdgt-rotate-label.c: (gl_wdgt_rotate_label_finalize):
+		Plugged various memory leaks located with valgrind.
+	* src/view-image.c: (update_canvas_item_from_object_cb):
+		Don't allow a width or height of zero when drawing pixbuf.
+
+2005-10-22  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* src/base64.c:
+	* src/bc-gnubarcode.c:
+	* src/canvas-hacktext.c:
+	* src/label-text.c:
+	* src/object-editor-data-page.c:
+	* src/print-dialog.c:
+	* src/print.c:
+	* src/recent.c:
+	* src/template-designer.c:
+	* src/text-node.c:
+	* src/ui-property-bar.c:
+	* src/ui.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-media-select.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Modified to compile warning free with gcc-4.0.  Mostly
+		casting to change signedness of characters.  Did not
+		attack gnu-barcode library yet.
+
+2005-10-22  Jim Evins <evins@snaught.com>
+
+	* src/glabels.c: (main):
+	* src/splash.c: (gl_splash):
+		Removed some small memory leaks.
+	* gtk-doc.make:
+		Added.
+	
+2005-09-19  Jim Evins  <evins@snaught.com>
+
+	* data/glade/property-bar.glade:
+		Remove items from font_family_combo.  This prevents the
+		double entry after adding text model and list of fonts.
+	* src/ui-property-bar.c: (reset_to_default_properties):
+		Free font_family_list.
+
+2005-07-01  Jim Evins  <evins@snaught.com>
+
+	* po/it.po:
+		Updated italian translation (Daniele Medri)
+
+2005-06-26  Jim Evins  <evins@snaught.com>
+
+	* docs/libglabels/libglabels-decl-list.txt:
+		Somehow never got checked in before.
+	* docs/libglabels/libglabels.types:
+		Removed -- don't need it afterall.
+
+2005-06-20  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+		Final prep for 2.1.1 release.
+
+2005-06-20  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Final preps for 2.1.1 release.
+	* docs/libglabels/libglabels.types:
+		Somehow never got checked in before.
+	* po/POTFILES.in:
+		Bring up-to-date with recent reorg of ui code.
+		
+
+2005-06-19  Jim Evins  <evins@snaught.com>
+
+	* src/template-designer.c: (construct_layout_page):
+		Removed attempt to match background color of mini preview widget to
+		background.
+
+2005-06-17  Jim Evins  <evins@snaught.com>
+
+	* help/C/figures/merge-ex2-4.png:
+	* help/C/glabels.xml:
+		Fixed spelling error.
+
+2005-06-13  Jim Evins  <evins@snaught.com>
+
+	* help/C/figures/merge-ex1-1.png:
+	* help/C/figures/merge-ex1-2.png:
+	* help/C/figures/merge-ex1-3.png:
+	* help/C/figures/merge-ex1-4.png:
+	* help/C/figures/merge-ex2-1.png:
+	* help/C/figures/merge-ex2-2.png:
+	* help/C/figures/merge-ex2-3.png:
+	* help/C/figures/merge-ex2-4.png:
+		Added figures for document merge tutorial.
+	* help/C/glabels.xml:
+		Added document merge tutorial.
+
+2005-05-19  Jim Evins  <evins@snaught.com>
+
+	* data/glade/merge-properties-dialog.glade:
+		Fixed irregular spacing.
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_construct):
+		Set outer padding and remove separator.
+
+2005-05-18  Jim Evins  <evins@snaught.com>
+
+	* src/hig.h:
+	* src/hig.c:
+		Removed glHigDialog class.
+	* src/file.c: (gl_file_new), (create_new_dialog_widgets),
+	(gl_file_properties), (create_properties_dialog_widgets):
+	* src/prefs-dialog.h:
+	* src/prefs-dialog.c: (gl_prefs_dialog_get_type),
+	(gl_prefs_dialog_init), (gl_prefs_dialog_construct):
+	* src/print-dialog.h:
+	* src/prefs-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_get_type),
+	(gl_print_dialog_init), (gl_print_dialog_construct):
+		Replaced all instances of glHigDialog with GtkDialog.
+	
+2005-05-17  Jim Evins  <evins@snaught.com>
+
+	* src/hig.h:
+	* src/hig.c:
+		Removed HigAlert class since it is obsoleted by the GtkMessageDialog class.
+	* src/file.c: (open_response), (gl_file_open_real), (gl_file_save),
+	(save_as_response), (gl_file_close):
+		Replaced all instances of HigAlert widgets with GtkMessageDialog widgets.
+
+2005-05-15  Jim Evins  <evins@snaught.com>
+
+	* src/ui-commands.h:
+	* src/ui-util.c:
+	* src/ui-util.h:
+	* src/ui.c:
+	* src/ui.h:
+	* src/view.c:
+	* src/window.c:
+	* src/window.h:
+		A little code reformatting -- no functional changes.
+	
+2005-05-14  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+		Removed obsolete macros.
+	* src/marshal.list:
+		Added marshalling template to support new view signal: "context_menu_activate."
+	* src/view.h:
+	* src/view.c: (gl_view_class_init), (gl_view_construct),
+	(canvas_event_arrow_mode):
+		- Removed hardcoded context menus and added new signal "context_menu_activate"
+		to push this up to the uimanager.
+		- Removed merge properties and print dialogs so that they can be managed with
+		the window by the uimanager.
+	* src/merge-properties-dialog.h:
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_new),
+	(gl_merge_properties_dialog_construct):
+		Changed calling convention of gl_merge_properties_dialog_new() to use
+		glLabel and GtkWindow instead of view to make more consistent with other
+		dialogs.
+	* src/print-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_new),
+	(gl_print_dialog_construct):
+		Removed last artifact of libbonoboui.
+	* src/ui-commands.c: (gl_ui_cmd_file_print),
+	(gl_ui_cmd_objects_merge_properties), (gl_ui_cmd_help_about):
+		Reconciled style for launching dialogs.
+	* src/ui.c: (gl_ui_new):
+		Added context menus to ui manager.
+	* src/view-object.c: (item_event_arrow_mode):
+		No longer try to select objects with right-click.
+	* src/window.h:
+	* src/window.c: (gl_window_init), (gl_window_set_label),
+	(context_menu_activate_cb):
+		Context menus and all dialogs are now managed in a consistent way in window
+		by the ui manager.
+
+2005-05-11  Jim Evins  <evins@snaught.com>
+
+	* src/window.h:
+	* src/window.c: (gl_window_init), (gl_window_destroy):
+	* src/ui.c: (gl_ui_new), (gl_ui_unref), (recent_tooltip_func):
+	* src/ui-commands.c: (gl_ui_cmd_file_open_recent):
+		Moved management of recent_view back from window.c to ui.c -- it just feels
+		better there.
+	
+2005-05-10  Jim Evins  <evins@snaught.com>
+
+	* src/window.h:
+	* src/window.c: (gl_window_init):
+	* src/ui.h:
+	* src/ui.c: (gl_ui_new), (connect_proxy_cb), (disconnect_proxy_cb),
+	(menu_item_select_cb), (menu_item_deselect_cb):
+		Added GtkStatusbar which displays menu tooltips.
+	
+2005-05-09  Jim Evins  <evins@snaught.com>
+
+	Replaced libbonoboui with GtkUIManager for creation of basic user interface menus
+	and toolbars.
+
+	* configure.in:
+	* glabels.spec.in:
+		Removed dependencies on libbonoboui.
+	* data/Makefile.am:
+	* data/ui/Makefile.am:
+	* data/ui/glabels-ui.xml:
+		Removed data/ui directory.
+	* data/glade/Makefile.am:
+	* data/property-bar.glade:
+		Added glade description of property-bar for new libglade implementation
+		of glUIPropertyBar.
+	* src/Makefile.am:
+	* src/commands.h:
+	* src/commands.c:
+	* src/tools.h:
+	* src/tools.c:
+	* src/ui-commands.h:
+	* src/ui-commands.c:
+		Replaced commands.[ch] and tools.[ch] with the single ui-commands.[ch] module
+		since the distinction between "commands" and "tools" is no longer that clear.
+	* src/file.h:
+	* src/file.c:
+		Modified to expect glWindow instead of GtkWindow.  gl_file_open_recent()
+		no longer has knowledge of eggRecent*.
+	* src/glabels.c: (main):
+		Removed libbonobo initialization and replaced bonobo_main loop with gtk_main
+		loop.
+	* src/object-editor.c: (gl_object_editor_init):
+		Make sure notebook does not respond to a "show_all" on the parent.
+	* src/recent-files/Makefile.am:
+	* src/recent-files/*.[ch]
+		Updated from latest version of libegg which now has a view based on
+		GtkUIManager.  Removed unused bonobo and gtk views.
+	* src/ui-property-bar.h:
+	* src/ui-property-bar.c:
+		New implementation based on libglade.
+	* src/ui-sidebar.h:
+	* src/ui-sidebar.c:
+		Sidebar is now simply a GtkWidget and does not expect to be a part of
+		a libbonoboui interface.
+	* src/ui-util.h:
+	* src/ui-util.c:
+	* src/ui.h:
+	* src/ui.c:
+		Converted for use with GtkUIManager.
+	* src/window.h:
+	* src/window.c:
+		Now derived from GtkWindow instead of BonoboWindow and uses GtkUIManager
+		to create menus and toolbars.
+
+2005-04-25  Jim Evins  <evins@snaught.com>
+
+	* data/templates/misc-iso-templates.xml:
+		Added Fellows 04715 template provided by Steve Saxon.
+	* AUTHORS:
+		Updated acknowledgement for above.
+
+2005-04-23  Jim Evins  <evins@snaught.com>
+
+	* src/util.c: (gl_util_combo_box_set_strings):
+		Make sure to clear model before loading a new list of strings.
+	* src/wdgt-media-select.h:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_instance_init),
+	(gl_wdgt_media_select_construct), (page_size_combo_changed_cb),
+	(template_combo_changed_cb), (prefs_changed_cb),
+	(gl_wdgt_media_select_get_name), (gl_wdgt_media_select_set_name),
+	(gl_wdgt_media_select_get_page_size),
+	(gl_wdgt_media_select_set_page_size):
+		Replaced the deprecated	GtkCombo widget with the new
+		GtkComboBox.
+
+2005-04-21  Jim Evins  <evins@snaught.com>
+
+	* data/glade/template-designer.glade:
+	* src/template-designer.c: (construct_pg_size_page),
+	(pg_size_page_changed_cb), (build_template):
+		Replaced the deprecated	GtkCombo widget with the new
+		GtkComboBox.
+
+2005-04-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/prefs-dialog.glade:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+		Replaced the deprecated	GtkCombo widget with the new
+		GtkComboBox.
+	
+2005-04-19  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page),
+	(style_changed_cb), (gl_object_editor_set_bc_style),
+	(gl_object_editor_get_bc_style), (gl_object_editor_set_bc_color),
+	(gl_object_editor_get_bc_color):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page), (gl_object_editor_set_data),
+	(gl_object_editor_get_data):
+	* src/object-editor-edit-page.c:
+	(gl_object_editor_prepare_edit_page), (insert_button_cb):
+	* src/object-editor-fill-page.c:
+	(gl_object_editor_prepare_fill_page),
+	(gl_object_editor_set_fill_color),
+	(gl_object_editor_get_fill_color):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page),
+	(gl_object_editor_set_image), (gl_object_editor_get_image):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page),
+	(gl_object_editor_set_line_color),
+	(gl_object_editor_get_line_color):
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family),
+	(gl_object_editor_get_font_family),
+	(gl_object_editor_set_text_color),
+	(gl_object_editor_get_text_color):
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/ui-sidebar.c:
+		In the object editor: replaced all instances of the deprecated
+		GtkCombo widget with the new GtkComboBox.
+
+2005-04-18  Jim Evins  <evins@snaught.com>
+
+	* src/stock.c:
+		Neglected to save this one in previous checkin to support
+		header cleanup.
+	
+2005-04-17  Jim Evins  <evins@snaught.com>
+
+	* libglabels/libglabels-private.h:
+	* libglabels/paper.c:
+	* libglabels/paper.h:
+	* libglabels/template.c:
+	* libglabels/template.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-paper.h:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* libglabels/xml.h:
+	* src/base64.c:
+	* src/base64.h:
+	* src/bc-gnubarcode.c:
+	* src/bc-postnet.c:
+	* src/bc.c:
+	* src/bc.h:
+	* src/commands.c:
+	* src/debug.c:
+	* src/debug.h:
+	* src/file.c:
+	* src/file.h:
+	* src/hig.c:
+	* src/hig.h:
+	* src/label-barcode.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/label-image.c:
+	* src/label-image.h:
+	* src/label-line.c:
+	* src/label-object.c:
+	* src/label-text.c:
+	* src/label-text.h:
+	* src/label.c:
+	* src/merge-properties-dialog.c:
+	* src/object-editor-bc-page.c:
+	* src/object-editor-data-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-image-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-private.h:
+	* src/object-editor-size-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/object-editor.h:
+	* src/pixbuf-cache.h:
+	* src/prefs-dialog.c:
+	* src/prefs-dialog.h:
+	* src/prefs-model.c:
+	* src/prefs-model.h:
+	* src/prefs.c:
+	* src/print-dialog.c:
+	* src/print-dialog.h:
+	* src/print.c:
+	* src/print.h:
+	* src/recent.c:
+	* src/recent.h:
+	* src/splash.c:
+	* src/splash.h:
+	* src/stock.h:
+	* src/template-designer.c:
+	* src/template-designer.h:
+	* src/text-node.h:
+	* src/tools.c:
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct):
+	* src/ui-sidebar.c:
+	* src/ui-util.c:
+	* src/ui.c:
+	* src/util.c:
+	* src/util.h:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-highlight.c:
+	* src/view-highlight.h:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-object.c:
+	* src/view-object.h:
+	* src/view-text.c:
+	* src/view.c:
+	* src/view.h:
+	* src/wdgt-chain-button.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-media-select.h:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.c:
+	* src/wdgt-rotate-label.h:
+	* src/window.c:
+	* src/window.h:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Cleanup of header files:
+		- all header files are now stand-alone, verified by including
+		  first in corresponding "c" files
+		- replaced blanket includes of gnome, gtk, and glib with
+		  targetted includes
+	
+2005-04-16  Jim Evins  <evins@snaught.com>
+
+	* data/glade/Makefile.am:
+	* data/glade/merge-properties-dialog.glade:
+		Added merge properties dialog glade description file.
+	* src/merge-properties-dialog.h:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_get_type),
+	(gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_finalize),
+	(gl_merge_properties_dialog_new),
+	(gl_merge_properties_dialog_construct), (type_changed_cb),
+	(src_changed_cb), (response_cb), (load_tree),
+	(record_select_toggled_cb), (select_all_button_clicked_cb),
+	(unselect_all_button_clicked_cb):
+		Modified merge properties dialog to use libglade.  Added
+		"select all" and "unselect all" buttons.
+	* src/merge-text.c: (parse_line):
+		Handle empty lines better.
+	* src/merge.c: (gl_merge_eval_key):
+		Evaluate the key whether the record is selected or not.
+	* src/util.h:
+	* src/util.c: (gl_util_combo_box_add_text_model):
+		Since libglade does not use the gtk_combo_box_new_text()
+		constructor for GtkComboBoxes, a utility function was created
+		to add an appropriate text model to a GtkComboBox.
+	* src/view.c: (gl_view_edit_merge_props):
+		Removed unnecessary "show all's".
+
+2005-04-15  Jim Evins  <evins@snaught.com>
+
+	* po/ru.po:
+		Updated russian translation (Vitaly Lipatov)
+	* data/templates/misc-iso-templates.xml:
+		Added templates for russian business cards provided by Vitaly Lipatov.
+	* AUTHORS:
+		Updated acknowledgements for above.
+
+2005-04-15  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		Added Avery 5388 and 5389 templates provided by Peter L. Berghold.
+	* data/templates/misc-iso-templates.xml:
+		Added Ryman standard CD/DVD template, provided by Dan Clark.
+	* AUTHORS:
+		Added acknowledgements for above.
+	
+2005-04-10  Jim Evins <evins@snaught.com>
+
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node),
+	(xml_parse_label_rectangle_node), (xml_parse_label_round_node),
+	(xml_parse_label_cd_node), (xml_parse_alias_node):
+	* libglabels/xml.c: (gl_xml_get_prop_double),
+	(gl_xml_get_prop_boolean), (gl_xml_get_prop_int),
+	(gl_xml_get_prop_uint), (gl_xml_get_prop_length):
+	* src/xml-label-04.c: (xml04_parse_media_description),
+	(xml04_parse_text_props), (xml04_parse_barcode_props),
+	(xml04_parse_merge_properties):
+	* src/xml-label-191.c: (xml191_parse_object),
+	(xml191_parse_text_props), (xml191_parse_barcode_props),
+	(xml191_parse_merge_fields), (xml191_parse_pixdata),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_markup),
+	(xml191_parse_alias):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_parse_object_barcode), (xml_parse_merge_fields),
+	(xml_parse_pixdata), (xml_parse_toplevel_span):
+		Make sure to use xmlFree for anything obtained from libxml
+		in case libxml and glib use different memory management
+		space.
+
+2005-04-08  Jim Evins <evins@snaught.com>
+
+	* src/util.h:
+	* src/util.c: (gl_util_combo_box_set_strings), (search_text_func),
+	(gl_util_combo_box_set_active_text):
+		Added utility functions to simplify working with GtkComboBox
+		widgets in GTK-2.6.
+	* src/ui-property-bar.h:
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties), (update_text_properties),
+	(font_family_changed_cb):
+		Replaced deprecated GtkCombo with GtkComboBox.
+	
+	
+2005-04-03  Jim Evins <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/wdgt-image-select.h:
+	* src/wdgt-image-select.c:
+		Removed obsolete wdgt-image-select.[ch] files.
+	* libglabels/paper.c: (gl_paper_dup):
+		Fixed rename of parameter introduced during documentation
+		updates.
+	* data/glade/object-editor.glade:
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page), (img_radio_toggled_cb),
+	(gl_object_editor_set_image), (gl_object_editor_get_image),
+	(update_preview_cb), (add_image_filters_to_chooser):
+	* src/object-editor-private.h:
+		Replaced deprecated GnomePixmapEntry with
+		GtkFileChooserButton.
+
+2005-04-02  Jim Evins <evins@snaught.com>
+
+	* src/mygal/mygal-combo-box.c: (deactivate_arrow),
+	(mygal_combo_box_popup_hide_unconditional),
+	(mygal_combo_box_popup_hide), (mygal_combo_box_popup_display),
+	(mygal_combo_toggle_pressed), (mygal_combo_box_init),
+	(mygal_combo_popup_tear_off), (mygal_combo_set_tearoff_state),
+	(mygal_combo_tearoff_bg_copy), (mygal_combo_popup_reparent),
+	(cb_tearable_button_release), (mygal_combo_box_set_tearable):
+		Renamed all internal gtk_combo functions to mygal_combo
+		to prevent namespace confusion.
+
+2005-04-02  Jim Evins <evins@snaught.com>
+
+	* src/mygal/color-palette.c: (color_palette_change_custom_color),
+	(cust_color_set), (color_palette_setup):
+	* src/mygal/color-palette.h:
+		Replaced deprecated GnomeColorPicker with GtkColorButton.
+
+2005-04-02  Jim Evins <evins@snaught.com>
+
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* libglabels/enums.h:
+	* libglabels/paper.c: (gl_paper_dup):
+	* libglabels/paper.h:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+		More documentation updates for libglabels.
+	
+2005-03-23  Jim Evins  <evins@snaught.com>
+
+	* INSTALL:
+		Automatically updated.
+	* Makefile.am:
+	* autogen.sh:
+	* configure.in:
+	* docs/Makefile.am:
+	* docs/libglabels/Makefile.am:
+	* docs/libglabels/libglabels-docs.sgml:
+	* docs/libglabels/libglabels-sections.txt:
+	* docs/libglabels/libglabels-undocumented.txt:
+	* docs/libglabels/tmpl/enums.sgml:
+	* docs/libglabels/tmpl/libglabels-unused.sgml:
+	* docs/libglabels/tmpl/libglabels.sgml:
+	* docs/libglabels/tmpl/paper.sgml:
+	* docs/libglabels/tmpl/template.sgml:
+	* docs/libglabels/tmpl/xml-paper.sgml:
+	* docs/libglabels/tmpl/xml-template.sgml:
+	* docs/libglabels/tmpl/xml.sgml:
+		Added basic gtk-doc stuff to support documenting libglabels
+		API.
+	* libglabels/xml.c:
+		Updated function comments with gtk-doc markup.
+	* missing:
+		Removed.
+
+2005-03-22  Jim Evins  <evins@snaught.com>
+
+	Since the development version now requires gtk-2.6/gnome-2.10, I
+	have made a first pass at removing deprecations.
+
+	* configure.in:
+	* libglabels/Makefile.am:
+	* src/Makefile.am:
+		Added configure option to turn on X_DISABLE_DEPRECATED flags.
+		Also removed all remnants of HAVE_FILECHOOSER.
+	* src/file.c: (gl_file_open_real):
+		Removed code for old GtkFileSelection.
+	* libglabels/libglabels-private.h:
+	* libglabels/paper.c:
+	* libglabels/template.c:
+	* libglabels/xml-paper.c:
+	* libglabels/xml-template.c:
+	* libglabels/xml.c:
+	* src/bc.c:
+	* src/file.c:
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label.c:
+	* src/merge-init.c:
+	* src/merge-properties-dialog.c:
+	* src/merge.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/prefs.c:
+	* src/print-dialog.c:
+	* src/print.c:
+	* src/stock.c:
+	* src/template-designer.c:
+	* src/ui-property-bar.c:
+	* src/ui-sidebar.c:
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+	* src/view.c:
+	* src/wdgt-image-select.c:
+	* src/wdgt-media-select.c:
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-rotate-label.c:
+	* src/window.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+	* src/xml-label.c:
+		Added '#include <glib/gi18n.h>" where needed.
+		Removed any unused '#include <gnome.h>"s.
+
+2005-03-22  Jim Evins  <evins@snaught.com>
+
+	* src/commands.c: (activate_url), (gl_cmd_help_about):
+		Replaced GnomeAbout with GtkAboutDialog.  Therefore the
+		development version of glabels now depends on GTK 2.6 and
+		GNOME 2.10.
+	* configure.in:
+		Updated library dependencies.
+
+2005-02-28  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/misc-iso-templates.xml:
+		Added 'Ednet 45021' template provided by Ali Akcaagac
+		<aliakc@web.de>.
+
+2005-02-14  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		Updated templates to use inches instead of points.
+	* src/print-dialog.c: (printer_page_new):
+		Changed packing style when adding printer selector widget.  This fixes
+		debian Bug#295274.
+
+2005-02-13  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/es.po:
+		Updated spanish translations. (sergio rivadero)
+
+2005-02-05  Jim Evins  <evins@snaught.com>
+
+	Some cleanup to libglabels.
+	
+	* configure.in:
+		Updated version to 2.1.1cvs.  Added generation of libglabels.pc.
+	* libglabels/libglabels.pc.in
+		Created.
+	* libglabels/enums.h
+		Created.  Currently only contains glUnitsType which provides enumerations
+		for all possible units of distance.
+	* libglabels/Makefile.am:
+		Incorporated new files enums.h and libglabels.pc[.in].
+	* libglabels/libglabels.h:
+		Include enums.h.
+	* libglabels/template.h:
+	* libglabels/template.c: (gl_template_layout_new):
+		Changed parameters nx and ny to gint from gdouble.
+	* libglabels/xml.h:
+	* libglabels/xml.c: (gl_xml_get_prop_length),
+	(gl_xml_set_prop_length), (gl_xml_set_default_units):
+		Added support for different output units.
+	* src/prefs-dialog.c: (update_locale_page_from_prefs),
+	(update_prefs_from_locale_page):
+	* src/prefs-model.c: (string_to_units), (units_to_string):
+	* src/prefs-model.h:
+	* src/prefs.c: (gl_prefs_get_units_per_point),
+	(gl_prefs_get_units_precision), (gl_prefs_get_units_step_size),
+	(gl_prefs_get_units_string):
+	* src/prefs.h:
+	* src/wdgt-media-select.c: (details_update), (get_label_size_desc):
+		Reconciled all length enumerations with the new enumerations provided
+		in libglabels/enums.h.
+
+2005-02-03  Jim Evins  <evins@snaught.com>
+
+	* po/cs.po:
+		Updated Czech translations. (David Makovský and Zbynek Mrkvick)
+	* po/it.po:
+		Updated Italian translations. (Daniele Medri)
+	* AUTHORS:
+		Updated credits to reflect above translations.
+
+
+2005-01-22  Jim Evins  <evins@snaught.com>
+
+	* MESSAGE-OF-DOOM:
+		Added.
+	* Makefile.am:
+		Added MESSAGE-OF-DOOM to EXTRA_DIST.
+	* NEWS:
+		Final prep for 2.1.0.
+	* configure.in:
+		Set version to 2.1.0.  Output MESSAGE-OF-DOOM.
+	* glabels.spec.in:
+		Added '--remove-original' flag to desktop-file-install, so that there is
+		only one menu entry.
+	
+2005-01-20  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		- Font family entry should not be editable.
+		- img_key_entry should have sensitivity=YES, so that it follows the
+		  sensitivity of img_key_combo.
+	
+2005-01-19  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+		Give credit to Frederic Ruaudel for the color merge patches.
+
+2005-01-18  Frederic Ruaudel  <grumz@users.sf.net>
+ 
+ 	Add support to merge color for all other color attribute (Feature 
+ 	Requests item #1008635. If the data is invalid, the color used is transparent 
+ 	(GL_COLOR_NONE). The format	for color in merge data file are those accepted 
+ 	by gdk_color_parse() these include name for a color from rgb.txt, such as 
+ 	DarkSlateGray, or a hex specification such as #305050. File format has been 
+ 	changed but backward compatibility is preserved for all format. For
+	box/ellipse/line, keep attribute "line_color" for static color or replace by
+	"line_color_field" for merge data. For text/barcode objects, keep attribute
+	"color" for static color or replace by "color_field" for merge data. In the
+	edit canvas window, merged color are represented by half-transparent black
+	line/area.
+ 
+ 	* data/dtd/glabels-2.0.dtd:
+ 		Added line_color_field to line_attrs. Added color_field to 
+ 		Object-barcode and Span.
+ 	* data/glade/object-editor.glade:
+ 		Modify the layout of the editor to add merge possibility to color options
+ 	* src/color.c:
+ 		Fix a copy/paste error in a comment
+ 	* src/color.h:
+ 		Add default color for merge color representation in the editor canvas.
+ 	* src/label-barcode.c:
+ 	* src/object-editor-bc-page.c:
+ 	* src/view-barcode.c:
+ 		Add merge color support for barcode color.
+ 	* src/label-box.c:
+ 	* src/view-box.c:
+ 		Add merge color support for box border color.
+ 	* src/label-ellipse.c:
+ 	* src/view-ellipse.c:
+ 		Add merge color support for ellipse border color.
+ 	* src/label-line.c:
+ 	* src/view-line.c:
+ 		Add merge color support for line color.
+ 	* src/label-object.c:
+ 	* src/label-object.h:
+ 	* src/object-editor.c:
+ 	* src/object-editor.h:
+ 	* src/ui-property-bar.c:
+ 	* src/view.c:
+ 	* src/view.h:
+ 	* src/xml-label-04.c:
+ 	* src/xml-label-191.c:
+ 		Add support for merging to other color attribute.
+ 	* src/label-text.c:
+ 	* src/object-editor-text-page.c:
+ 	* src/view-text.c:
+ 		Add merge color support for text color.
+ 	* src/object-editor-fill-page.c:
+ 		Change a blocked handler that didn't match the good widget. Fix the type
+ 		of some debug message.
+ 	* src/object-editor-line-page.c:
+ 		Add merging support to line color option.
+ 	* src/object-editor-private.h:
+ 		Add variables for new widget.
+ 	* src/print.c:
+ 		Modify the draw functions to get merge data if needed.
+ 	* src/window.c:
+ 		Change the default size of the window in order to see all widget in the
+ 		"text style tab" of the editor.
+ 	* src/xml-label.c:
+ 		Modify the parser to record/retreive the field value for objects that need
+ 		"color" attribute. For box/ellipse/line, keep attribute "line_color" for 
+ 		static color or replace by "line_color_field" for merge data. For 
+ 		text/barcode objects, keep attribute "color" for static color or replace 
+ 		by "color_field" for merge data.
+ 	
+2005-01-17  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (screen_changed_cb):
+		Don't do anything if we don't have a screen.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (get_home_scale):
+		Fixed bad call to gtk_widget_has_screen() -- huh?.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* data/dtd/glabels-2.0.dtd:
+		Added fill_color_field to fill_attrs.  Also added xmlns attribute to all
+		top-level elements.
+
+2005-01-06  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Set entries for fill and data field key dropdowns to NOT editable.
+	* src/view-box.c: (construct_properties_editor):
+	* src/view-ellipse.c: (construct_properties_editor):
+		Update object editor when label's merge property has changed.
+	* src/xml-label.c: (xml_parse_object_ellipse):
+		Completed the merge color support for the ellipse item.
+
+2005-01-06  Frederic Ruaudel  <grumz@users.sf.net>
+
+	Add support to merge color for object that have a "Fill color" attribute (Feature 
+	Requests item #1008635. If the data is invalid, the color used is transparent 
+	(GL_COLOR_NONE). The format	for color in merge data file are those accepted 
+	by gdk_color_parse() these include name for a color from rgb.txt, such as 
+	DarkSlateGray, or a hex specification such as #305050. File format has been 
+	changed but backward compatibility is preserved for all format. For box/ellipse, 
+	keep attribute "fill_color" for static	color or replace by "fill_color_field" 
+	for merge data.
+
+	* data/glade/object-editor.glade:
+		Modify "Fill" tab to add the merge key combo and convert the labels into 
+		radio button.
+	* src/color.h:
+	* src/color.c:
+		Add "glColorNode" structure and associated functions to manage it. This 
+		structure is equivalent for color than the "glTextNode". It holds the color
+		and the key field.
+	* src/label-object.h:
+	* src/label-object.c:
+	* src/label-box.c:
+	* src/label-ellipse.c:
+	* src/ui-property-bar.c:
+	* src/view.h:
+	* src/view.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/xml-label-04.c:
+	* src/xml-label-191.c:
+		Change functions of objects that have a "fill color" attribute to use the 
+		new "glColorNode" structure. Use barcode code as example.
+	* src/Makefile.am:
+		Add the color.[ch] file to glabels_batch binary that now need support for 
+		"glColorNode".
+	* src/object-editor.h:
+	* src/object-editor.c:
+	* src/object-editor-fill-page.c:
+		Manage the new widget of the editor's "Fill" tab : key combo and radio button
+		to choose between static color or merge key. Use barcode code as example.
+	* src/object-editor-private.h:
+		Add new widget in the "_glObjectEditorPrivate" structure.
+	* src/print.c:
+		Modify the draw functions to get merge data if needed.
+	* src/xml-label.c:
+		Modify the parser to record/retreive the field value for objects that need
+		"Fill color" attribute. For box/ellipse, put attribute "fill_color" for static
+		color or "fill_color_field" for merge data.		
+	
+2005-01-04  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
+		Added templates, submitted by Larry Harriman, Juan Carlos Valero, and
+		Nick Hill.
+
+2004-11-26  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* po/fr.po:
+		Updated french translations provided by Florent Morel <florent@taket.org>.
+	* src/view-barcode.c:
+	* src/view-box.c:
+	* src/view-ellipse.c:
+	* src/view-image.c:
+	* src/view-line.c:
+	* src/view-text.c:
+		Added '#include <config.h>' -- HAVE_*GETTEXT macros were not defined and
+		thus _() strings were not being translated.
+
+2004-11-14  Jim Evins  <evins@snaught.com>
+
+	* src/debug.h:
+	* src/debug.c: (gl_debug_init), (gl_debug):
+		Borrowed from gedit:  use environmental variables to select debug
+		sections.
+	* src/splash.c:
+		Removed unused include of debug.h.
+	* src/glabels.c: (main):
+		Added call to gl_debug_init(), and removed debug clutter from command line
+		options.
+	* src/glabels-batch.c: (main):
+		Added call to gl_debug_init().
+
+2004-11-13  Jim Evins  <evins@snaught.com>
+
+	Drawing and property toolbars were being initialized with the "icons and text"
+	look in Fedora Core 3.  Even though none of the buttons had any text attached to
+	them, the buttons were being sized as if they were.  This led to less real estate
+	for the property editor, leading to Bug #1064630.  The
+	
+	* data/ui/glabels-ui.xml:
+		Added explicit "look" property to both drawing and property toolbars.
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+		Removed drawing_toolbar_button_style configuration parameter.
+	* src/ui.c: (view_menu_item_toggled_cb),
+	(set_app_drawing_toolbar_style):
+		Do not attempt to adjust look property of the drawing toolbar.
+
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/pixmaps/glabels-about-logo.png:
+		Updated about logo.
+	
+2004-10-28  Jim Evins  <evins@snaught.com>
+
+	* data/man/glabels.1:
+	* src/glabels-batch.c: (main):
+	* src/print.h:
+	* src/print.c: (gl_print_batch):
+
+		Added option to glabels-batch to select the first label to begin
+		printing on.
+
+2004-09-26  Jim Evins  <evins@snaught.com>
+
+	* data/desktop/glabels.desktop.in:
+		Point to app icon, "glabels.png"
+	* data/mime/glabels.keys.in:
+		Point at mime icon, "glabels-application-x-glabels.png"
+	* data/pixmaps/Makefile.am:
+		Added glabels_app_icondir.  Renamed icons.
+	* data/pixmaps/glabels.png:
+		New cleaned up app icon.  Deleted glabels-icon.png.
+	* data/pixmaps/glabels-application-x-glabels.png:
+		New mime icon.
+	* data/pixmaps/glabels-splash.png:
+		Renamed glabels-logo to glabels-splash to be more correct about role.
+	* src/glabels.c:
+	* src/template-designer.c:
+		Point at app icon, "glabels.png"
+	* src/splash.c:
+		Point at renamed splash image, "glabels-splash.png"
+
+2004-08-22  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* src/glabels-batch.c: (main):
+		Applied patch with minor mods to allow selecting merge source and
+		crop-marks on glabels-batch's command line.  Original patch provided by
+		José Dapena Paz <jdapena@igalia.com>.
+	
+2004-08-15  Jim Evins  <evins@snaught.com>
+
+	* data/desktop/glabels.desktop.in:
+		- Added encoding line
+		- Removed period from comment
+		- Fixed Terminal line, changed "0" to "false"
+		- Added semicolen to Categories line
+	* po/ja.po:
+		- Made sure desktop.in comment string above still translated properly
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* libglabels/xml-paper.c: (gl_xml_paper_parse_paper_node):
+	* libglabels/xml-template.c: (gl_xml_template_parse_template_node):
+	* src/xml-label-191.c: (xml191_parse_sheet):
+		Fixed improper freeing of gettext strings.  Merged from 2.0.1.
+	* configure.in:
+		Reconciled libglabels versioning with 2.0.1.
+	
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated version to 2.1cvs.
+	
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	* po/ja.po:
+		Updated 2.0.x translation by Takeshi AIHANA <aihana@gnome.gr.jp>.
+
+2004-08-14  Jim Evins  <evins@snaught.com>
+
+	Fixes for Bug #1008181.
+
+	* src/bc.c: (gl_barcode_default_digits):
+		Make a format of zero digits, harmless.
+	* src/xml-label.c: (xml_parse_object_barcode):
+		Set default value of the format property of barcode objects to 10, not
+		zero.  This will prevent crashes when reading pre 2.0.x files.
+
+2004-08-09  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* TODO:
+	* help/C/glabels-C.omf:
+	* help/C/glabels.xml:
+		Brought documentation up-to-date for 2.0.0 release.
+	
+2004-08-09  Jim Evins  <evins@snaught.com>
+
+	These are hopefully the final preparations for 2.0.0.
+
+	* data/mime/Makefile.am:
+		Include glabels.xml in EXTRA_DIST.
+	* configure.in:
+		- Updated comment style.
+		- Added LIBGLABELS_VERSION_INFO macro, updated Current.
+		- Added package and version info to configuration printout
+		- Update version to 2.0.0
+	* libglabels/Makefile.am:
+		Use the new LIBGLABELS_VERSION_INFO macro.
+
+2004-08-09  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* glabels.spec.in:
+		Cleanup of required library macros.
+
+2004-08-08  Jim Evins  <evins@snaught.com>
+
+	* glabels.spec.in:
+		- Updated URL
+		- More specific of what to install in /usr/bin and /usr/lib
+		- Remove built mime registration files from staging directory
+
+2004-08-08  Jim Evins  <evins@snaught.com>
+
+	* data/mime/Makefile.am:
+		Fixed typo:  key_files should have been keys_files.
+
+2004-08-08  Jim Evins  <evins@snaught.com>
+
+	Reorganization of runtime data files.  Also added registration of mimetype with
+	new freedesktop.org mime database if available.
+	
+	* data/*
+		Moved files to appropriate subdirectories, creating local Makefile.am
+		in each subdirectory.
+		- Moved paper-sizes.xml and *-templates.xml to templates subdirectory.
+		  These are now installed at $datadir/glabels/templates.
+		- Moved glabels.1 to man subdirectory.
+		- Moved glabels-2.0.dtd to dtd subdirectory.
+		- Moved glabels.desktop.in to desktop subdirectory.
+		- Moved glabels.keys.in and glabels.mime to mime subdirectory.
+	* data/pixmaps/*
+		Moved "./pixmaps" to "./data/pixmaps"
+	* data/ui/*
+		Moved src/glabels-ui.xml to data/ui directory. Created Makefile.am.
+	* data/glade/*
+		Moved libglade files from src to data/glade. Created Makefile.am.
+	* Makefile.am:
+		Removed pixmaps from SUBDIRS.
+	* configure.in:
+		- Removed pixmaps from makefiles.
+		- Added makefiles for new subdirs of data.
+		- Added tests for freedesktop.org mime database.
+	* glabels.spec.in:
+		- Added tests for freedesktop.org mime database for post install and
+		  post un-install actions.
+	* libglabels/Makefile.am:
+		Moved system template files to $(datadir)/glabels/templates.
+	* libglabels/libglabels-private.h:
+		Moved system template files to $(datadir)/glabels/templates.
+	* po/POTFILES.in:
+		- Accounted for movement of ui and libglade files.
+		- Added missing .in files.
+		- Reorganized by directory.
+	* src/Makefile.am:
+		Accounted for movement of ui and libglade files.
+	* data/mime/glabels.xml.in:
+		New file for registering with freedesktop.org mime database.
+
+2004-08-07  Jim Evins  <evins@snaught.com>
+
+	* src/recent-files/*:
+		Re-synced to latest libegg/recent-files.
+	
+2004-08-07  Jim Evins  <evins@snaught.com>
+
+	* Makefile.am:
+	* configure.in:
+	* help/*
+		Renamed "./doc" directory to "./help" which contains user documentation,
+		to be more consistent with other GNOME applications.
+	
+
+2004-07-26  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init):
+		Corrected button order of merge properties dialog.
+
+2004-07-18  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+	* src/bc.c: (gl_barcode_default_digits), (gl_barcode_can_freeform),
+	(gl_barcode_get_prefered_n):
+	* src/bc.h:
+	* src/label-barcode.c: (copy), (gl_label_barcode_set_props),
+	(gl_label_barcode_get_props), (get_size):
+	* src/label-barcode.h:
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page),
+	(style_changed_cb), (gl_object_editor_set_bc_style),
+	(gl_object_editor_get_bc_style):
+	* src/object-editor-data-page.c: (data_radio_toggled_cb),
+	(gl_object_editor_set_data), (gl_object_editor_get_data):
+	* src/object-editor-private.h:
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/print.c: (draw_barcode_object):
+	* src/view-barcode.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_barcode_create_event_handler), (draw_barcode):
+	* src/xml-label-04.c: (xml04_parse_barcode_props):
+	* src/xml-label-191.c: (xml191_parse_barcode_props):
+	* src/xml-label.c: (xml_parse_object_barcode),
+	(xml_create_object_barcode):
+		Added "format" attribute to barcode objects.  This attribute is used
+		to properly format freeform barcodes barcodes prior to merge data is
+		applied, so that barcodes can be accurately layed out.  This addresses
+		remaining issues of feature request #824787.  Also added an example of
+		the format in the object editor.
+
+2004-07-12  Jim Evins  <evins@snaught.com>
+
+	Various code cleanups.
+
+	* src/label-barcode.c:
+		Removed unneeded include of gnome-glyphlist.h.
+	
+	* src/label-text.c: (get_size):
+		Fixed memory leak: unref glyphlists when done with them.
+	
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page):
+	* src/object-editor-lsize-page.c:
+	(gl_object_editor_prepare_lsize_page):
+	* src/object-editor-position-page.c:
+	(gl_object_editor_prepare_position_page):
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page):
+		Removed unneeded size groups, originally intended to keep widgets aligned.
+		Now use tables to lay these out in object-editor.glade.
+	
+	* src/print.c: (draw_text_object):
+		Fixed memory leak: unref glyphlists when done with them.
+
+	* src/view-barcode.c: (draw_barcode):
+		Fixed memory leak: unref glyphlists when done with them.
+
+	* src/view-text.c: (update_object_from_editor_cb), (draw_hacktext):
+		- Removed unneeded cast of gl_object_editor_get_text_line_spacing()s
+		  return value.
+		- Fixed memory leak: unref glyphlists when done with them.
+
+2004-07-11  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+	* src/label-text.c: (gl_label_text_instance_init), (copy),
+	(gl_label_text_set_auto_shrink), (gl_label_text_get_auto_shrink):
+	* src/label-text.h:
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_text_auto_shrink),
+	(gl_object_editor_get_text_auto_shrink):
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/print.c: (draw_text_object):
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_create_object_text):
+		Added option to allow document merge to auto shrink text size to fit
+		within the text box.  The code in print.c that actually shrinks the
+		text is loosely based on a patch submitted by Mark Harrison
+		<mark.harrison@velocitynet.com.au>.  This addresses feature request
+		#661421.
+	
+2004-07-11  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+	* libglabels/template.c: (gl_template_rect_label_type_new),
+	(gl_template_round_label_type_new),
+	(gl_template_cd_label_type_new), (gl_template_label_type_dup),
+	(template_full_page):
+	* libglabels/template.h:
+	* libglabels/xml-template.c: (xml_parse_label_rectangle_node),
+	(xml_create_label_node):
+	* pixmaps/ex-rect-size.png:
+	* src/print.c: (clip_to_outline), (clip_punchouts):
+	* src/template-designer.c: (construct_rect_size_page),
+	(rect_size_page_prepare_cb), (layout_page_prepare_cb),
+	(build_template):
+	* src/template-designer.glade:
+	* src/xml-label-191.c: (xml191_parse_label):
+		Modifications to allow separate horizontal (x_waste) and vertical (y_waste)
+		properties for rectangular labels.  Templates remain backwards compatible,
+		but this breaks the libglabels API (I don't know of anyone outside of
+		glabels using libglabels at this time -- what can I say, the program is
+		is still "unstable").  This addresses the suggestion in Feature Request
+		#976313.
+
+2004-07-05  Jim Evins  <evins@snaught.com>
+	* src/print.c: (print_crop_marks), (draw_outline):
+		Changed crop marks and label outlines to black, instead of 25% gray.
+		This addresses debian Bug #257460.
+
+2004-07-05  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-fill-page.c: (gl_object_editor_set_fill_color):
+	* src/object-editor-line-page.c: (gl_object_editor_set_line_color):
+		Preserve "is_default" of fill and line color_combos when creating from
+		existing objects.
+
+2004-07-02  Jim Evins  <evins@snaught.com>
+
+	* data/glabels.1:
+		Created man page.  Based on page submitted by Matthew J. Lockner, however
+		it has been severely edited.
+	
+	* data/avery-other-templates.xml
+	* data/misc-other-templates.xml:
+		Started new files for predefined templates with non-standard sheet sizes.
+		These have been initially populated with the Avery 06141 and
+		OfficeMax #86112, both provided by Matthew J. Lockner.
+	
+	* data/Makefile.am:
+		Install above manpage and template files.
+	
+	* glabels.spec.in:
+		Make sure we install man pages.
+	
+	* src/glabels-batch.c:
+		Changed short form of help option to '-?' to be consistent with glabels.
+	
+	* AUTHORS:
+		Added acknowledgement for above labels.
+
+2004-07-02  Jim Evins  <evins@snaught.com>
+
+	* src/glabels.c: (main), (save_session_cb):
+		- Now include libbonoboui.h, recent.h, and file.h to provide missing
+		  prototypes.
+		- save_session_cb() now returns gboolean.
+		- Minor formatting changes.
+
+	* src/window.h:
+	* src/window.c:
+		- Now include file.h to provide missing prototype.
+		- gl_window_get_type() now returns GType, not guint.  I believe this may
+		  ultimately be cause of the segfault reported in Bug #982287, since
+		  GType is actually a gulong, which may not be compatible on other
+		  architectures (64bit) -- I cannot personally test this at this time.
+		  I was sloppy in several other xxx_get_type() functions which also
+		  returned guint -- see next group of files:
+	
+	* src/window.c: (gl_window_get_type):
+	* src/canvas-hacktext.c: (gl_canvas_hacktext_get_type):
+	* src/canvas-hacktext.h:
+	* src/hig.c: (gl_hig_alert_get_type), (gl_hig_dialog_get_type),
+	(gl_hig_category_get_type), (gl_hig_vbox_get_type),
+	(gl_hig_hbox_get_type):
+	* src/hig.h:
+	* src/label-barcode.c: (gl_label_barcode_get_type):
+	* src/label-barcode.h:
+	* src/label-box.c: (gl_label_box_get_type):
+	* src/label-box.h:
+	* src/label-ellipse.c: (gl_label_ellipse_get_type):
+	* src/label-ellipse.h:
+	* src/label-image.c: (gl_label_image_get_type):
+	* src/label-image.h:
+	* src/label-line.c: (gl_label_line_get_type):
+	* src/label-line.h:
+	* src/label-object.c: (gl_label_object_get_type):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_get_type):
+	* src/label-text.h:
+	* src/label.c: (gl_label_get_type):
+	* src/label.h:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_get_type):
+	* src/merge-properties-dialog.h:
+	* src/merge-text.c: (gl_merge_text_get_type):
+	* src/merge-text.h:
+	* src/merge.c: (gl_merge_get_type):
+	* src/merge.h:
+	* src/object-editor.c: (gl_object_editor_get_type):
+	* src/prefs-dialog.c: (gl_prefs_dialog_get_type):
+	* src/prefs-dialog.h:
+	* src/prefs-model.c: (gl_prefs_model_get_type):
+	* src/prefs-model.h:
+	* src/print-dialog.c: (gl_print_dialog_get_type):
+	* src/print-dialog.h:
+	* src/template-designer.c: (gl_template_designer_get_type):
+	* src/template-designer.h:
+	* src/ui-property-bar.c: (gl_ui_property_bar_get_type):
+	* src/ui-property-bar.h:
+	* src/ui-sidebar.c: (gl_ui_sidebar_get_type):
+	* src/ui-sidebar.h:
+	* src/view-barcode.c: (gl_view_barcode_get_type):
+	* src/view-barcode.h:
+	* src/view-box.c: (gl_view_box_get_type):
+	* src/view-box.h:
+	* src/view-ellipse.c: (gl_view_ellipse_get_type):
+	* src/view-ellipse.h:
+	* src/view-highlight.c: (gl_view_highlight_get_type):
+	* src/view-highlight.h:
+	* src/view-image.c: (gl_view_image_get_type):
+	* src/view-image.h:
+	* src/view-line.c: (gl_view_line_get_type):
+	* src/view-line.h:
+	* src/view-object.c: (gl_view_object_get_type):
+	* src/view-object.h:
+	* src/view-text.c: (gl_view_text_get_type):
+	* src/view-text.h:
+	* src/view.c: (gl_view_get_type):
+	* src/view.h:
+	* src/wdgt-chain-button.c: (gl_wdgt_chain_button_get_type):
+	* src/wdgt-image-select.c: (gl_wdgt_image_select_get_type):
+	* src/wdgt-image-select.h:
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_get_type):
+	* src/wdgt-media-select.h:
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_get_type):
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_get_type):
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_get_type):
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.c: (gl_wdgt_rotate_label_get_type):
+	* src/wdgt-rotate-label.h:
+		- Made sure all xxx_get_type functions returned GType, not guint.  This
+		  was the case in hig.[ch], window.[ch], ui-property-bar.[ch],
+		  ui-sidebar.[ch], view.[ch], wdgt-image-select.[ch],
+		  wdgt-media-select.[ch], wdgt-mini-preview.[ch], wdgt-print-copies.[ch],
+		  wdt-print-merge.[ch], and wdgt-rotate-label.[ch].  See separate
+		  window.[ch] details above for more info.
+		- Reconciled various coding style differences in all xxx_get_type()
+		  functions:
+			* All prototypes include G_GNUC_CONST.
+			* All prototypes specify the return value as GType, not GtkType
+			  or guint.
+			* Info structures are all declared as "static const."
+			* Generalized the names of type and info variables.
+			* Miscelaneous formatting.
+
+2004-06-08  Jim Evins  <evins@snaught.com>
+
+	* src/label.c:
+	* src/label.h:
+	* src/xml-label.c:
+	* AUTHORS:
+		Don't touch compression of original file -- still defaults to 9 for
+		new files.  Original patch provided by Javier Donaire Segarra
+		(#912252 in patch tracker).
+
+2004-05-05  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+		Broke DTD previously when adding new barcode types that contain a
+		plus sign (+).  Simply changed the BC_STYLE_TYPE entity to "CDATA"
+		to avoid the problem.
+	* data/avery-iso-templates.xml:
+	* data/zweckform-iso-templates.xml:
+	* AUTHORS:
+		Added templates for Avery 7165, Zweckform 3688, 4732, and 6021.  Templates
+		provided by Frank Altpeter.
+	* libglabels/xml-template.c: (xml_create_label_node):
+		Reordered markup and layout sub-nodes so that resulting templates will
+		validate against DTD.
+
+2004-03-13  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-size-page.c: (gl_object_editor_prepare_size_page):
+		Changed spin callback signals from "value-changed" back to "changed."
+		This was accidentally introduced in a previous revision, and can cause
+		size changes just by selecting the size tab.
+
+2004-03-06  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (draw_grid_layer):
+		For round labels (round and cd) adjust grid so that it lines up with
+		center of label.  Also, no longer draw box around label in the grid layer,
+		it is hidden by he fg layer anyway.  Feature suggested by
+		nemolivier@free.fr.  Although the grid is aligned with the center of the
+		label, the coordinate system is still relative to the upper left corner
+		of the rectangle containing the label.
+
+2004-02-25  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Changed version to 2.0pre1cvs
+	
+	* libglabels/xml-template.c: (gl_xml_template_parse_templates_doc):
+		Removed extra xmlFreeDoc() calls upon error.  Also print the doc->URL
+		instead of doc->name fields when errors encountered.
+
+2004-02-21  Jim Evins  <evins@snaught.com>
+
+	* data/avery-iso-templates.xml:
+		Added aliases for Avery 8651.  Patch provided by Wayne Schuller.
+	
+	* glabels.spec.in:
+		Added libglabels library and include file to installed files.
+		
+	* configure.in:
+		Final prep for 1.93.3.
+
+2004-02-20  Jim Evins  <evins@snaught.com>
+
+	* src/glabels-batch.c: (main):
+		Changed key for setting output filename to GNOME_PRINT_KEY_OUTPUT_FILENAME
+		as suggested by Javier Donaire Segarra.  This addresses bug #901063.
+
+2004-02-16  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		If gtk+ >= 2.3.2 then define HAVE_FILE_CHOOSER.
+	
+	* src/Makefile.am:
+		Added HAVE_FILE_CHOOSER to INCLUDES.
+	
+	* src/file.c: (gl_file_open), (open_response), (gl_file_open_real),
+	(gl_file_save_as), (save_as_response):
+		Ported to use GtkFileChooserDialog if HAVE_FILE_CHOOSER is defined.
+
+2004-02-16  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label-04.c: (xml04_parse_image_props):
+	* src/xml-label-191.c: (xml191_parse_image_props):
+	* src/xml-label.c: (xml_parse_object_image):
+		Delay setting image size until after image has been applied to new
+		object.
+	
+2004-02-15  Jim Evins  <evins@snaught.com>
+
+	* src/label-barcode.c: (gl_label_barcode_set_data),
+	(gl_label_barcode_set_props):
+		Don't emit "changed" signal, if no change actually made for these
+		methods.  Reduces number of unnecessary redraws of barcodes.
+	
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_set_position),
+	(gl_label_object_set_position_relative), (set_size),
+	(gl_label_object_set_size),
+	(gl_label_object_set_size_honor_aspect):
+		Don't emit "changed" signal, if no change actually made for these
+		methods.
+
+2004-02-15  Jim Evins  <evins@snaught.com>
+
+	* data/glabels-2.0.dtd:
+		Added specific subtypes for various barcode types.
+	
+	* src/bc.h:
+	* src/bc.c: (id_to_index), (name_to_index), (gl_barcode_new),
+	(gl_barcode_get_styles_list), (gl_barcode_default_digits),
+	(gl_barcode_can_text), (gl_barcode_text_optional),
+	(gl_barcode_can_csum), (gl_barcode_csum_optional),
+	(gl_barcode_id_to_name), (gl_barcode_name_to_id):
+		Changed API to use a string id, rather than a fixed enumeration.  Id and
+		name are separate strings.  Added entries to backend table for specific
+		subtypes for various barcode types.
+	
+	* src/bc-postnet.h:
+	* src/bc-postnet.c: (gl_barcode_postnet_new), (postnet_code),
+	(is_length_valid):
+		Modified to conform to above API.  Now more stringent with data length
+		for various subtypes.
+	
+	* src/bc-gnubarcode.h:
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new),
+	(is_length_valid), (is_length1_valid), (is_length2_valid):
+		Modified to conform to above API.  Now more stringent with data length
+		for various subtypes.
+
+	* src/label-barcode.h:
+	* src/label-barcode.c: (copy), (gl_label_barcode_set_props),
+	(gl_label_barcode_get_props), (get_size):
+		Modified to use above API for storing barcode type.
+	
+	* src/object-editor.h:
+	* src/object-editor-bc-page.c: (style_changed_cb),
+	(gl_object_editor_set_bc_style), (gl_object_editor_get_bc_style):
+		Modified to use above API for storing barcode type.
+	
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page), (aspect_toggle_cb),
+	(w_spin_cb), (h_spin_cb), (size_reset_cb):
+		Added debug markers.
+	
+	* src/object-editor.glade:
+		Made barcode style combo's text entry  non-editable.
+	
+	* src/print.c: (draw_barcode_object):
+		Modified to use above API for barcode type.
+
+	* src/view-barcode.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_barcode_create_event_handler), (draw_barcode):
+		Modified to use above API for barcode type.
+	
+	* src/xml-label-04.c: (xml04_parse_barcode_props):
+	* src/xml-label-191.c: (xml191_parse_barcode_props):
+	* src/xml-label.c: (xml_parse_object_barcode),
+	(xml_create_object_barcode):
+		Modified to use above API for barcode type.
+
+2004-02-07  Jim Evins  <evins@snaught.com>
+
+	* src/stock-pixmaps/Makefile.am:
+	* src/stock-pixmaps/stock_hchain_24.png:
+	* src/stock-pixmaps/stock_hchain_broken_24.png:
+	* src/stock-pixmaps/stock_vchain_24.png:
+	* src/stock-pixmaps/stock_vchain_broken_24.png:
+		Added chain pixmaps borrowed from the gimp's default theme.
+
+	* src/stock.h:
+	* src/stock.c: (gl_stock_init), (add_button_icon):
+		Added above pixmaps to stock icon sets.  Created add_button_icon() to
+		add these pixmaps sized as GTK_ICON_SIZE_BUTTON.
+	
+	* src/wdgt-chain-button.h
+	* src/wdgt-chain-button.c
+	* src/Makefile.am:
+	* po/POTFILES.in:
+		Added this Modified version of gimpchainbutton widget, borrowed from
+		the gimp.
+	
+	* AUTHORS:
+		Added acknowledgements of the above borrowing from the gimp.
+	
+	* src/object-editor-size-page.c: (aspect_toggle_cb), (w_spin_cb),
+	(h_spin_cb):
+	* src/object-editor.c: (gl_object_editor_construct_chain_button):
+	* src/object-editor.glade:
+		Replaced the keep aspect ratio check box with the above chain-button
+		widget.
+	
+	* src/text-node.c: (gl_text_node_equal):
+	* src/text-node.h:
+		Added function gl_text_node_equal() to compare text_nodes.
+	
+	* src/label-image.c: (gl_label_image_set_filename):
+		Replaced incomplete text_node comparison code with invocation of
+		gl_text_node_equal.  This fixed the problem of not being able to
+		resize an image using the object_editor if the aspect ratio is not
+		locked.
+
+2004-02-04  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+		Track "changed" signal of pixmap entry's GtkEntry rather than its
+		"activate" signal -- this catches all changes to the entry rather than
+		just changes resulting from a browse, so one can easily pull previous
+		entries from the history. (This change is marked below on 2004-02-03,
+		but somehow never got checked in.)
+
+	* src/view-highlight.c: (sl_resize_event_handler),
+	(sr_resize_event_handler), (st_resize_event_handler),
+	(sb_resize_event_handler):
+		Side resize handles will now confirm the actual resize that the object
+		accepted before adjusting position parameters.  Previously some interesting
+		things happened when resizing a barcode to its minimum size.
+
+2004-02-03  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+		Track "changed" signal of pixmap entry's GtkEntry rather than its
+		"activate" signal -- this catches all changes to the entry rather than
+		just changes resulting from a browse, so one can easily pull previous
+		entries from the history.
+	
+	* src/view-highlight.c: (tl_resize_event_handler),
+	(tr_resize_event_handler), (bl_resize_event_handler),
+	(br_resize_event_handler):
+		Allow control key to be dropped while dragging a corner resize handle
+		without losing the aspect ratio lock.
+
+2004-02-02  Jim Evins  <evins@snaught.com>
+
+	* src/label-image.c: (gl_label_image_set_filename):
+		When setting a new filename adjust size such that the aspect ratio of
+		the image is preserved using the current size as a bounding box.
+		
+	* src/view-image.c: (update_object_from_editor_cb):
+		When updating object from editor, feed back possible size changes to
+		editor as a result of a possible change in image.
+	
+	* src/object-editor-size-page.c: (size_reset_cb):
+		Fixed typo when blocking spin handlers.  If the base size is larger than
+		the max size, treat max size as a bounding box while keeping aspect
+		ratio.
+		
+
+2004-02-02  Jim Evins  <evins@snaught.com>
+
+	* src/label-object.h:
+	* src/label-object.c: (gl_label_object_set_size),
+	(gl_label_object_set_size_honor_aspect):
+		Added gl_label_object_set_size_honor_aspect() which will maintain the
+		current aspect ratio by modifying the supplied w or h apropriately.
+	
+	* src/view-highlight.c: (tl_resize_event_handler),
+	(tr_resize_event_handler), (bl_resize_event_handler),
+	(br_resize_event_handler):
+		Corner handles will now maintain the current aspect ratio if the
+		control key is pressed while resizing.  This addresses feature
+		request #816603.
+       
+
+2004-01-31  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/avery-us-templates.xml:
+		Added entries for "LSK-3," "LSK-5," and "LSK-8."  Submitted by JBadger.
+	
+	* libglabels/template.c: (read_template_files_from_dir):
+		Corrected problem with testing for extensions.
+	
+	* src/object-editor.glade:
+		Corrected grouping of radio buttons in barcode data page.
+
+	* src/print.c: (draw_barcode_object):
+	* src/view-barcode.c: (draw_barcode):
+		Corrected problem with calculation of y_offset for locating characters.
+
+2004-01-24  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/avery-us-templates.xml:
+		Added Avery 5824, submitted by Fred Bacon.
+	
+2004-01-20  Jim Evins  <evins@snaught.com>
+
+	Catching up on a couple of backlogged user template submissions.
+
+	* data/avery-iso-templates.xml:
+		Added "DECAdry OLW-4731" and "DECAdry DLW-1731" aliases for Avery 7160.
+		Suggested by Linas Jakucionis.
+	
+	* data/zweckform-iso-templates.xml:
+		Added Zweckform 4760, submitted by Thomas Vill.
+
+	* AUTHORS:
+		Updated to reflect above submissions.
+
+2004-01-06  Jim Evins  <evins@snaught.com>
+
+	Split-out template.[ch], paper.[ch], xml-template.[ch], xml-paper.[ch], and
+	xml.[ch] into a separate library called libglabels, to facilitate third
+	party use of glabels template files.  This was suggested by Wayne Schuller.
+	Once split-out, some modifications to the structures and functions to
+	make a cleaner more useful API, hopefully.  Rather extensive changes have
+	propogated to other modules.
+
+	* src/paper.h:
+	* src/paper.c:
+	* src/template.h:
+	* src/template.c:
+	* src/xml-paper.h:
+	* src/xml-paper.c:
+	* src/xml-template.h:
+	* src/xml-template.c:
+	* src/xml.h:
+	* src/xml.c:
+		These files have been moved to libglabels/.  API cleanup performed.
+
+	* libglabels/libglabels.h:
+	* libglabels/libglabels-private.h:
+	* libglabels/Makefile.am:
+		These files have been added to finish out libglabels.
+	
+	* Makefile.am:
+	* configure.in:
+	* glabels.spec.in:
+	* po/POTFILES.in:
+	* src/Makefile.am:
+		Modified to reflect new sets of files in src/ and libglabels/.
+
+	* COPYING.LIBGLABELS:
+	* COPYING-DOCS:
+		Added copy of the LGPL for libglabels, and a copy the GFDL for
+		documentation.
+	
+	* src/glabels-batch.c:
+	* src/glabels.c:
+	* src/label.c: (gl_label_finalize), (gl_label_set_template),
+	(gl_label_get_size):
+	* src/label.h:
+	* src/prefs-model.c: (gl_prefs_model_load_settings):
+	* src/print-dialog.c:
+	* src/print.c: (gl_print_simple), (gl_print_merge_collated),
+	(gl_print_merge_uncollated), (gl_print_batch), (print_info_free),
+	(print_crop_marks), (print_label), (draw_outline),
+	(clip_to_outline), (clip_punchouts):
+	* src/template-designer.c: (construct_pg_size_page),
+	(pg_size_page_changed_cb), (layout_page_changed_cb),
+	(print_test_cb), (build_template):
+	* src/util.c: (gl_util_fraction):
+	* src/util.h:
+	* src/view.c: (draw_bg_fg_layers), (draw_bg_fg_rect),
+	(draw_bg_fg_rounded_rect), (draw_bg_fg_round), (draw_bg_fg_cd),
+	(draw_bg_fg_cd_bc), (draw_markup_layer), (draw_markup_margin),
+	(draw_markup_margin_rect), (draw_markup_margin_rounded_rect),
+	(draw_markup_margin_round), (draw_markup_margin_cd),
+	(draw_markup_margin_cd_bc), (draw_markup_line),
+	(draw_markup_circle), (gl_view_copy):
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_construct),
+	(page_size_entry_changed_cb), (details_update), (get_layout_desc),
+	(get_label_size_desc):
+	* src/wdgt-mini-preview.c:
+	(gl_wdgt_mini_preview_set_label_by_name), (mini_outline_list_new),
+	(cdbc_item):
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_construct):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_construct):
+	* src/wdgt-rotate-label.c: (mini_preview_canvas_update),
+	(gl_wdgt_rotate_label_set_template_name), (cdbc_item):
+	* src/wdgt-rotate-label.h:
+	* src/xml-label-04.c: (xml04_parse_media_description):
+	* src/xml-label-191.c: (gl_xml_label_191_parse),
+	(xml191_parse_sheet), (xml191_parse_label), (xml191_parse_layout),
+	(xml191_parse_markup), (xml191_parse_alias):
+	* src/xml-label.c: (xml_doc_to_label), (xml_parse_label),
+	(xml_label_to_doc):
+		Various changes to accomodate new libglabels API.
+	
+2004-01-03  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Release 1.93.2.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+		Added acknowledgement of contributions by Wayne Schuller.
+	
+	* src/commands.c: (gl_cmd_file_print):
+		Create extra reference to print dialog, so that it can be properly re-used.
+	
+	* src/mygal/mygal-combo-box.h:
+	* src/mygal/mygal-combo-box.c:
+	(mygal_combo_box_popup_hide_unconditional),
+	(mygal_combo_box_popup_display), (mygal_combo_box_set_display),
+	(gtk_combo_set_tearoff_state), (mygal_combo_box_construct),
+	(mygal_combo_box_set_arrow_relief), (mygal_combo_box_set_title),
+	(mygal_combo_box_set_tearable):
+		Changed all occurances of GTK_IS_COMBO_BOX to MYGAL_IS_COMBO_BOX, to
+		complete the rename of this widget to prevent namespace collisions
+		with Gtk+-2.3.
+	
+	* src/prefs-dialog.glade:
+		Fixed alignment of Fill/Color widgets.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
+	* data/avery-iso-templates.xml:
+		Added user submitted templates.
+		Avery 8435A & 8435B, submitted by Ludger Solbach.
+
+	* doc/C/glabels.xml:
+		Added minimal documentation, noting the new template designer.
+
+2004-01-03  Jim Evins  <evins@snaught.com>
+
+	* pixmaps/ex-rect-size.png:
+	* pixmaps/ex-round-size.png:
+	* pixmaps/ex-cd-size.png:
+	* pixmaps/Makefile.am:
+		Added ex-rect-size.png, ex-round-size.png, and ex-cd-size.png image
+		files to be used as illustrations/examples in the template-designer.
+
+	* src/template-designer.c: (construct_rect_size_page),
+	(construct_round_size_page), (construct_cd_size_page),
+	(construct_nlayouts_page), (rect_size_page_prepare_cb),
+	(round_size_page_prepare_cb), (cd_size_page_prepare_cb),
+	(layout_page_prepare_cb), (build_template):
+	* src/template-designer.glade:
+		Added illustrations for rectangle, round, and cd label size pages.
+		Added margin spinboxes to these pages, and now add a margin markup
+		to the constructed template.  Added realistic default values for
+		some of the size spinboxes.  Cleaned up the code for setting spinbox
+		ranges on the layouts page.
+
+2004-01-02  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-size-page.c: (h_spin_cb):
+		Fixed cut-n-paste error in h_spin_cb that loaded h from
+		the wrong spinbutton.
+
+	* src/object-editor.h:
+	* src/object-editor.c: (gl_object_editor_class_init),
+	(gl_object_editor_changed_cb), (gl_object_editor_size_changed_cb):
+	* src/object-editor-private.h:
+	* src/object-editor-size-page.c: (w_spin_cb), (h_spin_cb),
+	(size_reset_cb):
+		Added "size_changed" signal.
+		
+	* src/view-text.c: (construct_properties_editor),
+	(update_object_from_editor_cb),
+	(update_object_from_editor_size_cb):
+		Track size changes from object editor separately from other
+		properties.  This is so the default size (0,0) of a text
+		object is not modified unintentionally.
+
+2003-12-30  Wayne Schuller  <k_wayne@linuxpower.org>
+
+	Added feature: line spacing - allows you to comfortably space a text box to
+	fit a label perfectly.
+
+	* data/glabels-2.0.dtd:
+	* src/label-object.c: (gl_label_object_set_text_line_spacing),
+	(gl_label_object_get_text_alignment),
+	(gl_label_object_get_text_line_spacing):
+	* src/label-object.h:
+	* src/label-text.c: (gl_label_text_class_init),
+	(gl_label_text_instance_init), (copy), (get_size),
+	(set_text_line_spacing), (get_text_alignment),
+	(get_text_line_spacing):
+	* src/object-editor-private.h:
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_text_line_spacing),
+	(gl_object_editor_get_text_line_spacing):
+	* src/object-editor.glade:
+	* src/object-editor.h:
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs), (update_prefs_from_object_page):
+	* src/prefs-dialog.glade:
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings), (get_float):
+	* src/prefs-model.h:
+	* src/print.c: (draw_text_object):
+	* src/ui-sidebar.c:
+	* src/view-text.c: (update_object_from_editor_cb),
+	(update_editor_from_object_cb),
+	(gl_view_text_create_event_handler), (draw_hacktext):
+	* src/view.c: (gl_view_construct),
+	(gl_view_set_selection_text_line_spacing),
+	(gl_view_set_default_text_line_spacing),
+	(gl_view_get_default_text_line_spacing):
+	* src/view.h:
+	* src/xml-label.c: (xml_parse_toplevel_span),
+	(xml_create_toplevel_span):
+
+2003-12-30  Jim Evins  <evins@snaught.com>
+
+	* src/template-designer.c:
+	* src/template-designer.h:
+	* src/template-designer.glade:
+		New template designer assistant.
+	
+	* po/POTFILES.in:
+	* src/Makefile.am:
+		Added entries for src/template-designer.* files.
+	
+	* pixmaps/ex-1layout.png
+	* pixmaps/ex-2layouts.png
+	* pixmaps/Makefile.am:
+		Added the new image files ex-*.png used as illustrations in the
+		template designer assistant.
+	
+	* src/print-dialog.h:
+	* src/print-dialog.c: (gl_print_dialog_finalize),
+	(gl_print_dialog_new), (gl_print_dialog_construct),
+	(gl_print_dialog_force_outline_flag):
+		Changed first argument of gl_print_dialog_new() from glView to glLabel,
+		to support printing from the template designer assistant which does not
+		have a full-fledged view.  Nothing else from the view object was being
+		used by the dialog anyway.
+
+		Added the gl_print_dialog_force_outline_flag() method, for better
+		integration with the template designer assistant.
+		
+
+	* src/commands.h:
+	* src/commands.c: (gl_cmd_file_template_designer),
+	(gl_cmd_file_print):
+		Modified print command to provide label instead of view to dialog.
+		Added the gl_cmd_file_template_designer() command to invoke the
+		template designer assistant.
+	
+	* src/ui.c:
+	* src/glabels-ui.xml:
+		Added support for template designer assistant.
+	
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_set_template),
+	(gl_wdgt_mini_preview_set_bg_color):
+		Preview is now centered in canvas.  Added
+		gl_wdgt_mini_preview_set_bg_color() to allow the template designer
+		assistant to match the background color with its own.
+	
+	* src/print.c: (clip_to_outline):
+		Fixed really stupid bug when adding waste to clip region of rectangular
+		labels/cards.  Each side of the clip region needs to be extended by
+		twice the waste margin, as well as negatively offset by the waste
+		margin.
+
+2003-12-28  Jim Evins  <evins@snaught.com>
+
+	* src/prefs-dialog.c: (update_object_page_from_prefs):
+		Block intermediary function align_toggle_cb() instead of
+		update_prefs_from_object_page() for the three alignment
+		widgets.
+
+2003-12-28  Wayne Schuller  <k_wayne@linuxpower.org>
+
+	* src/file.c: (gl_file_new), (gl_file_properties):
+		Swap button order and set default for higificatory pleasure.
+
+2003-12-27  Jim Evins  <evins@snaught.com>
+
+	* barcode-0.98/Makefile.am:
+		One last time:  removed doc/Makefile and po/Makefile.in.in from
+		EXTRA_DIST files.
+	
+2003-12-27  Jim Evins  <evins@snaught.com>
+
+	* barcode-0.98/Makefile.am:
+		Removed config.stat entry from EXTRA_DIST files.
+	
+	* barcode-0.98/Makefile.in:
+		Removed.
+
+2003-12-27  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated to work with latest gnome-common package from CVS.
+		Removed recursive configuration of barcode-0.98.
+
+	* acconfig.h:
+	* macros/*:
+		Removed.
+	
+	* Makefile.am:
+		Added barcode-0.98/ as a SUBDIR, and removed dist-hook.
+	
+	* barcode-0.98/Makefile.in:
+	* barcode-0.98/configure.in:
+	* barcode-0.98/Makefile.am:
+	* barcode-0.98/README.glabels:
+		Modified to ignore the barcode package's build system, and build
+		as a part of glabels.
+		Renamed Makefile.in to Makefile.in.dist.
+		Renamed configure.in to configure.in.dist.
+		Added barcode-0.98/Makefile.am and barcode-0.98/README.glabels.
+	
+	* src/Makefile.am:
+	* src/mygal/Makefile.am:
+	* src/recent-files/Makefile.am:
+		In order to build against the GNOME 2.5 platform, 
+		all use of *_DISABLE_DEPRECATED compile-time flags has been removed.
+	
+	* src/mygal/Makefile.am:
+	* src/mygal/mygal-combo-box.c:
+	* src/mygal/mygal-combo-box.h:
+	* src/mygal/widget-color-combo.c:
+	* src/mygal/widget-color-combo.h:
+	* po/POTFILES.in:
+		In order to build against the GNOME 2.5 platform, 
+		Renamed gtk_combo_box widget to mygal_combo_box, to prevent namespace
+		collisions with the real gtk_combo_box widget, now a part of gtk.
+	
+2003-12-26  Jim Evins  <evins@snaught.com>
+
+	* src/paper.c:
+	* src/template.c:
+	* src/util.c:
+	* src/util.h:
+		Moved local versions of get_home_data_dir() in paper.c and
+		template.c to util package.  Cleaned up formatting in
+		util.[ch].
+
+	* src/template.c:
+		In gl_template_register() save a copy of the template in
+		~/.glabels if the template is not known.  Still need to
+		handle duplicate filename case and duplicate name but
+		different template case.
+	
+	* src/xml-label.c:
+	* src/xml.h:
+		Moved local definition of NAME_SPACE macro from xml-label.c
+		to xml.h.
+	
+	* src/xml-template.c:
+	* src/xml-template.h:
+		Added function gl_xml_template_write_template_to_file(), used
+		in gl_template_register().
