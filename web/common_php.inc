@@ -111,7 +111,7 @@
   #-------------------------------------------------------
   function a_sfdownload($file)
   {
-      print "<a href=\"http://prdownloads.sourceforge.net/glabels/$file?download\">$file</a>";
+      print "<a href=\"http://downloads.sourceforge.net/glabels/$file\">$file</a>";
   }
 
   #-------------------------------------------------------
