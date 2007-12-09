@@ -4,14 +4,14 @@ Development plan
 This development plan sets a specific set of milestones for future versions of glabels.
 
 
-Goals for 2.0.x:
+Goals for 2.2.x:
 
 		-  Bugfixes
 
 		-  Translations
 
 
-Possible Goals for 2.1.x (current development branch):
+Possible Goals for 2.3.x (current development branch):
 
 		-  Undo, Redo capability
 
@@ -40,28 +40,6 @@ Possible Goals for 2.1.x (current development branch):
 		   appropriate for the current units selected (e.g. .1 points, .01 mm,
 		   1/64 inch, 0.001 inch).
 
-		-  Handle namespace collisions better in template designer.  Ask to
-		   override existing templates, or perhaps automatically suffix the
-		   name when duplicate.  Allow for management of custom templates
+		-  Allow for management of custom templates
 		   (i.e. delete, rename, edit).
-
-Completed Goals for 2.1.x:
-
-		-  Object shadows.  This is very important for text that
-		   overlays photographs, so that it stands out against
-		   varying backgrounds.
-
-		-  Technology upgrades:
-
-			o Pango.  This is a must to support rich text items.
-
-			o Cairo-based canvas.
-
-			o Cairo print rendering.
-
-			o GtkPrint.
-
-			o GtkRecentManager.
-
-
 

@@ -1,3 +1,9 @@
+* gLabels 2.1.5 (unstable) release.  Release date 2007-12-09.
+- New label dialog now allows selection of recently used templates
+- Store brand and part number as separate fields in templates
+- Major cleanup of libglabels API and documentation
+- Minor bug fixes (and probably some new bugs).
+
 * gLabels 2.1.4 (unstable) release.  Release date 2007-08-17.
 
 - Added categorization of templates and an updated New Label dialog.

@@ -1,5 +1,13 @@
 2007-12-08  Jim Evins  <evins@snaught.com>
 
+	* NEWS:
+	* README:
+	* TODO:
+	* configure.in:
+		Preparation for 2.1.5.
+
+2007-12-08  Jim Evins  <evins@snaught.com>
+
 	* docs/libglabels/libglabels-decl-list.txt:
 	* docs/libglabels/libglabels-docs.sgml:
 	* docs/libglabels/libglabels-sections.txt:
