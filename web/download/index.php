@@ -10,7 +10,7 @@
 
 <h2>System Requirements</h2>
 <p>
-gLabels is designed to run on <i>GNOME 2.2+</i>, but more specifically it requires the following libraries. 
+gLabels is designed to run on <i>GNOME 2.2+</i>, but more specifically it requires the following libraries or newer.
 </p>
 <ul>
   <li>GTK+-2.0.x</li>
@@ -21,7 +21,7 @@ gLabels is designed to run on <i>GNOME 2.2+</i>, but more specifically it requir
   <li>LIBGLADE-2.0.x</li>
 </ul>
 <p>
-Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel)
+Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel or gtk2-dev)
 installed for each of these libraries and their dependencies.
 Just having the base library packages installed is not enough.
 </p>
@@ -65,7 +65,7 @@ their associated repositories, including the following repositories:
 
 <h2>System Requirements</h2>
 <p>
-The development version of gLabels is designed to run on <i>GNOME 2.16</i>, but more specifically it requires the following libraries. 
+The development version of gLabels is designed to run on <i>GNOME 2.16+</i>, but more specifically it requires the following libraries or newer.
 </p>
 <ul>
   <li>GTK+-2.10.x</li>
@@ -74,7 +74,7 @@ The development version of gLabels is designed to run on <i>GNOME 2.16</i>, but 
   <li>LIBGLADE-2.6.x</li>
 </ul>
 <p>
-Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel)
+Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel or gtk2-dev)
 installed for each of these libraries and their dependencies.
 Just having the base library packages installed is not enough.
 </p>
@@ -84,9 +84,10 @@ Just having the base library packages installed is not enough.
 <ul>
   <li>
     <div class="latest">
-      <?a_sfdownload("glabels-2.1.4.tar.gz");?> (latest version)
+      <?a_sfdownload("glabels-2.1.5.tar.gz");?> (latest version)
     </div>
   </li>
+  <li><?a_sfdownload("glabels-2.1.4.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.1.3.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.1.2.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.1.1.tar.gz");?></li>

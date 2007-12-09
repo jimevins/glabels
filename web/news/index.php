@@ -8,6 +8,32 @@
 
 
 <div class="newsitem">
+<div class="newsdate">9 December 2007</div>
+<div class="newstitle">Release 2.1.5 (Unstable)</div>
+<p>
+This is hopefully the final development release before 2.2.  Please download
+and test.
+</p>
+<p>
+Changes/fixes since 2.1.4 include
+</p>
+<ul>
+<li>New label dialog now allows selection of recently used templates</li>
+<li>Store brand and part number as separate fields in templates</li>
+<li>Major cleanup of libglabels API and documentation</li>
+<li>Minor bug fixes (and probably some new bugs).</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">17 August 2007</div>
 <div class="newstitle">Release 2.1.4 (Unstable)</div>
 <p>
