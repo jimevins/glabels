@@ -27,6 +27,7 @@ Possible Goals for 2.3.x (current development branch):
 			generic XML
 			freedb (CDDB) for CD labels
 			gnome-db
+			ADIF for generating QSL-cards
 
 		-  Printer calibration tool: a facility for tweaking output origin and
 		   scale.  This should really be part of the underlying print system but
