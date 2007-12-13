@@ -1,3 +1,8 @@
+2007-12-12  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+		More templates and aliases.
+
 2007-12-08  Jim Evins  <evins@snaught.com>
 
 	* TODO:
