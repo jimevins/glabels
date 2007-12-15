@@ -24,15 +24,17 @@
 #ifndef __MINI_PREVIEW_PIXBUF_CACHE_H__
 #define __MINI_PREVIEW_PIXBUF_CACHE_H__
 
+#include <libglabels/template.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
 
-void        gl_mini_preview_pixbuf_cache_init           (void);
+void        gl_mini_preview_pixbuf_cache_init            (void);
 
-void        gl_mini_preview_pixbuf_cache_add_by_name    (gchar      *name);
+void        gl_mini_preview_pixbuf_cache_add_by_name     (gchar      *name);
+void        gl_mini_preview_pixbuf_cache_add_by_template (lglTemplate *template);
 
-GdkPixbuf  *gl_mini_preview_pixbuf_cache_get_pixbuf     (gchar      *name);
+GdkPixbuf  *gl_mini_preview_pixbuf_cache_get_pixbuf      (gchar      *name);
 
 
 G_END_DECLS

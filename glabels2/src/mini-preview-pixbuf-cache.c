@@ -54,8 +54,9 @@ static GHashTable *mini_preview_pixbuf_cache = NULL;
 void
 gl_mini_preview_pixbuf_cache_init (void)
 {
-        GList      *names = NULL;
-        GList      *p;
+        GList       *names = NULL;
+        GList       *p;
+        lglTemplate *template;
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
@@ -65,11 +66,42 @@ gl_mini_preview_pixbuf_cache_init (void)
         for ( p=names; p != NULL; p=p->next )
         {
                 gl_debug (DEBUG_PIXBUF_CACHE, "name = \"%s\"", p->data);
-                gl_mini_preview_pixbuf_cache_add_by_name ((gchar *)p->data);
+
+                template = lgl_db_lookup_template_from_name (p->data);
+                gl_mini_preview_pixbuf_cache_add_by_template (template);
+                lgl_template_free (template);
         }
         lgl_db_free_template_name_list (names);
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END pixbuf_cache=%p", mini_preview_pixbuf_cache);
+}
+
+/*****************************************************************************/
+/* Add pixbuf to cache by template.                                          */
+/*****************************************************************************/
+void
+gl_mini_preview_pixbuf_cache_add_by_template (lglTemplate *template)
+{
+        GdkPixbuf        *pixbuf;
+        GList            *p;
+        lglTemplateAlias *alias;
+        gchar            *name;
+
+	gl_debug (DEBUG_PIXBUF_CACHE, "START");
+
+        pixbuf = gl_mini_preview_pixbuf_new (template, 72, 72);
+
+        for ( p=template->aliases; p != NULL; p=p->next )
+        {
+                alias = (lglTemplateAlias *)p->data;
+
+                name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+                g_hash_table_insert (mini_preview_pixbuf_cache, name, g_object_ref (pixbuf));
+        }
+
+        g_object_unref (pixbuf);
+
+	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
 
 /*****************************************************************************/

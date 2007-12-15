@@ -33,6 +33,7 @@
 #include <glib/gstrfuncs.h>
 #include <glib/gdir.h>
 #include <glib/gmessages.h>
+#include <glib/ghash.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -56,9 +57,14 @@ static GList *papers     = NULL;
 static GList *categories = NULL;
 static GList *templates  = NULL;
 
+static GHashTable *template_cache = NULL;
+
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
+
+static void   init_template_cache          (void);
+static void   add_to_template_cache        (lglTemplate *template);
 
 static GList *read_papers                  (void);
 static GList *read_paper_files_from_dir    (GList       *papers,
@@ -72,7 +78,7 @@ static GList *read_templates               (void);
 static GList *read_template_files_from_dir (GList       *templates,
                                             const gchar *dirname);
 
-static lglTemplate *template_full_page (const gchar *page_size);
+static lglTemplate *template_full_page     (const gchar *page_size);
 
 
 
@@ -146,6 +152,7 @@ lgl_db_init (void)
                 }
                 lgl_db_free_paper_id_list (page_sizes);
 
+                init_template_cache ();
 	}
 }
 
@@ -1083,6 +1090,7 @@ lgl_db_register_template (const lglTemplate *template)
                         template_copy = lgl_template_dup (template);
                         lgl_template_add_category (template_copy, "user-defined");
                         templates = g_list_append (templates, template_copy);
+                        add_to_template_cache (template_copy);
                         return LGL_DB_REG_OK;
                 }
                 else
@@ -1334,7 +1342,7 @@ lgl_db_free_template_name_list (GList *names)
 lglTemplate *
 lgl_db_lookup_template_from_name (const gchar *name)
 {
-	GList            *p_tmplt, *p_alias;
+	GList            *p_alias;
 	lglTemplate      *template;
         lglTemplateAlias *alias;
         gchar            *candidate_name;
@@ -1351,27 +1359,72 @@ lgl_db_lookup_template_from_name (const gchar *name)
 		return lgl_template_dup ((lglTemplate *) templates->data);
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        template = g_hash_table_lookup (template_cache, name);
+
+        if (template)
         {
-		template = (lglTemplate *) p_tmplt->data;
-		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
+                for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
                 {
                         alias = (lglTemplateAlias *)p_alias->data;
                         candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
 
-			if ( UTF8_EQUAL (candidate_name, name) ) {
+                        if ( UTF8_EQUAL (candidate_name, name) )
+                        {
                                 g_free (candidate_name);
-				new_template = lgl_template_dup (template);
+                                new_template = lgl_template_dup (template);
                                 new_template->brand = g_strdup (alias->brand);
                                 new_template->part = g_strdup (alias->part);
                                 return new_template;
-			}
+                        }
+
                         g_free (candidate_name);
-		}
-	}
+                }
+        }
 
 	/* No matching template has been found so return the first template */
 	return lgl_template_dup ((lglTemplate *) templates->data);
+}
+
+
+static void
+init_template_cache (void)
+{
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template;
+        lglTemplateAlias *alias;
+        gchar            *name;
+
+        template_cache = g_hash_table_new (g_str_hash, g_str_equal);
+
+        for ( p_tmplt=templates; p_tmplt != NULL; p_tmplt=p_tmplt->next )
+        {
+		template = (lglTemplate *) p_tmplt->data;
+
+                for ( p_alias=template->aliases; p_alias != NULL; p_alias=p_alias->next )
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+                        name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+
+                        g_hash_table_insert (template_cache, name, template);
+                }
+        }
+}
+
+
+static void
+add_to_template_cache (lglTemplate *template)
+{
+	GList            *p_alias;
+        lglTemplateAlias *alias;
+        gchar            *name;
+
+        for ( p_alias=template->aliases; p_alias != NULL; p_alias=p_alias->next )
+        {
+                alias = (lglTemplateAlias *)p_alias->data;
+                name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+
+                g_hash_table_insert (template_cache, name, template);
+        }
 }
 
 

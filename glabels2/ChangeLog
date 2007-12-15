@@ -1,3 +1,13 @@
+2007-12-14  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c:
+		Optimize template search by name by using a GHashTable.
+	* src/mini-preview-pixbuf-cache.c:
+	* src/mini-preview-pixbuf-cache.h:
+		Store one pixbuf per template, but use a key for each alias.
+	* src/wdgt-media-select.c:
+		Optimize loading of tree data, thus optimizing the "new label" dialog.
+
 2007-12-12  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-us-templates.xml:

@@ -730,7 +730,6 @@ load_recent_list (GtkListStore           *store,
         gchar       *size;
         gchar       *layout;
         gchar       *description;
-        gchar       *name;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -745,10 +744,7 @@ load_recent_list (GtkListStore           *store,
                         gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
 
                         template = lgl_db_lookup_template_from_name (p->data);
-                        
-                        name = lgl_template_get_name (template);
-                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (name);
-                        g_free (name);
+                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (p->data);
 
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);
@@ -814,7 +810,6 @@ load_search_all_list (GtkListStore           *store,
         gchar       *size;
         gchar       *layout;
         gchar       *description;
-        gchar       *name;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -829,10 +824,7 @@ load_search_all_list (GtkListStore           *store,
                         gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
 
                         template = lgl_db_lookup_template_from_name (p->data);
-                        
-                        name = lgl_template_get_name (template);
-                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (name);
-                        g_free (name);
+                        pixbuf = gl_mini_preview_pixbuf_cache_get_pixbuf (p->data);
 
                         size = get_label_size_desc (template);
                         layout = get_layout_desc (template);
