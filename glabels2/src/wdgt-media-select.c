@@ -170,6 +170,7 @@ gl_wdgt_media_select_finalize (GObject *object)
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
+        g_object_unref (media_select->priv->recent_store);
         g_object_unref (media_select->priv->search_all_store);
         g_free (media_select->priv);
 

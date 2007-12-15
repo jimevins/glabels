@@ -1,3 +1,10 @@
+2007-12-15  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c: (lgl_db_lookup_template_from_name):
+	* src/object-editor.c: (gl_object_editor_finalize):
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_finalize):
+		Fixed several small memory leaks.
+
 2007-12-14  Jim Evins  <evins@snaught.com>
 
 	* libglabels/db.c:

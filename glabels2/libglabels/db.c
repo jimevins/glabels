@@ -1372,7 +1372,9 @@ lgl_db_lookup_template_from_name (const gchar *name)
                         {
                                 g_free (candidate_name);
                                 new_template = lgl_template_dup (template);
+                                g_free (new_template->brand);
                                 new_template->brand = g_strdup (alias->brand);
+                                g_free (new_template->part);
                                 new_template->part = g_strdup (alias->part);
                                 return new_template;
                         }

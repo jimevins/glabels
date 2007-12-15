@@ -160,6 +160,7 @@ gl_object_editor_finalize (GObject *object)
 	g_return_if_fail (GL_IS_OBJECT_EDITOR (editor));
 	g_return_if_fail (editor->priv != NULL);
 
+        g_object_unref (editor->priv->gui);
 	g_free (editor->priv);
 
 	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
