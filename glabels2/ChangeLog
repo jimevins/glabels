@@ -1,5 +1,13 @@
 2007-12-15  Jim Evins  <evins@snaught.com>
 
+	* data/glade/object-editor.glade:
+		Removed any GtkTable that contained a GtkComboBox because the size of
+		the combo box was not constrained properly.  This sacrifices the nice
+		orderly labels for combo boxes that don't extend beyond the edge of the
+		window.
+
+2007-12-15  Jim Evins  <evins@snaught.com>
+
 	* libglabels/db.c: (lgl_db_lookup_template_from_name):
 	* src/object-editor.c: (gl_object_editor_finalize):
 	* src/wdgt-media-select.c: (gl_wdgt_media_select_finalize):
