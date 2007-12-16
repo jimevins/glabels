@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "2.0">
-  <!ENTITY manrevision "2.0">
-  <!ENTITY date "December 2003">
+  <!ENTITY appversion "2.2">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "December 2007">
   <!ENTITY app "<application>gLabels</application>">
   <!-- Information about the entities
        The legal.xml file contains legal information, there is no need to edit the file. 
@@ -31,7 +31,7 @@
     <title>&app; Manual V&manrevision;</title>       
 
     <copyright> 
-      <year>2003</year> 
+      <year>2003-2007</year> 
       <holder>Jim Evins</holder> 
     </copyright> 
 
@@ -302,8 +302,8 @@
         <application>&app;</application>. The application creates a separate
         application window for each open file.</para>
 
-      <para>The application records the paths and filenames of the four
-        most recent files that you edited and displays the files as menu
+      <para>The application records the paths and filenames of the
+        most recent files that you have edited and displays the files as menu
         items on the <menuchoice>
         <guimenu>File</guimenu><guisubmenu>Recent Files</guisubmenu>
         </menuchoice> menu.</para>
@@ -426,12 +426,12 @@
         following print options:</para>
 		
       <sect3 id="print-dialog-job">
-	<title>Job Tabbed Section</title>
+	<title>The Labels Tab of the Print Dialog</title>
 
 	<variablelist>
 
 	  <varlistentry>
-            <term><guilabel>Copies (Simple only)</guilabel></term>
+            <term><guilabel>Print control (Simple)</guilabel></term>
 	    <listitem> 
 
 	      <para>For simple labels or cards (no document merge), the job
@@ -462,7 +462,7 @@
 	  </varlistentry>
 
 	  <varlistentry>
-            <term><guilabel>Document Merge Control (Document merge only)</guilabel></term>
+            <term><guilabel>Print control (Merge)</guilabel></term>
 	    <listitem> 
 
 	      <para>For labels or cards using the document merge (also known
@@ -528,39 +528,6 @@
 	</variablelist>
       </sect3>
 		
-      <sect3 id="print-dialog-printer">
-	<title>Printer Tabbed Section</title>
-	<variablelist>
-	  <varlistentry> <term><guilabel>Printer</guilabel> </term> 
-	    <listitem> 
-	      <para>Use this drop-down list box to select the printer to
-                which you want to print the file.</para>
-	    </listitem>
-	  </varlistentry>
-	  <varlistentry> <term><guilabel>Settings</guilabel> </term> 
-	    <listitem> 
-	      <para>Use this drop-down list box to select the printer settings.
-                To configure the printer, click
-                <guibutton>Configure</guibutton>.</para>
-	    </listitem>
-	  </varlistentry>
-	  <varlistentry> <term><guilabel>Location</guilabel> </term> 
-	    <listitem> 
-	      <para>Use this drop-down list box to select the print
-                destination. To print the file to a printer, choose
-                <guilabel>lpr</guilabel>. To print the file to a print file,
-                choose <guilabel>File</guilabel>. If you select
-                <guilabel>File</guilabel>, type the name of the output file
-                in the text box provided. To print a file to a location of
-                your choice, choose <guilabel>Custom</guilabel>. Type the
-                location you want in the <guilabel>Custom</guilabel> text
-                box.</para>
-	    </listitem>
-	  </varlistentry>
-	</variablelist>
-      </sect3>
-		
-
     </sect2>
 
 <!-- ============= To Create New Objects ========= -->
@@ -920,6 +887,14 @@
       </sect3>
 
 
+      <sect3 id="object-editor-shadow">
+	<title>Shadow Tabbed Section (All except image and barcode objects)</title>
+
+	<para>This section contains controls to add a shadow to an object.</para>
+
+      </sect3>
+
+
     </sect2>
 
 <!-- ============= Other Manipulations of Objects ========= -->
@@ -1018,13 +993,14 @@
       <para>The first step to performing a document merge is to prepare
         a source document that contains your merge data.  This data could
         be mailing addresses or any other data that you wish to create
-        unique labels or cards for.  Currently only a simple back-end
-        for text files exists -- others are planned.  The currently
+        unique labels or cards for.  Currently back-ends only exist for
+        text files and the evolution data server -- others are planned.  The currently
         supported text-file format is very simple:  each line is a record;
         fields are delimited by commas (CSV), tabs, or colons; and newlines
         can be embedded into fields by using the "\n" entity.  This file
         could be created using any text editor or could be created by
-        another program or script.</para>
+        another program or script.  A common way of creating CSV files is
+	to export them from a spreadsheet program.</para>
 
       <para>A label must then be configured to "point at" this data file.
         To configure the merge properties of a document, choose
@@ -1415,7 +1391,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
       <!-- ==== Figure ==== -->
       <figure id="merge-ex2-3-fig"> 
-	<title>Printing name tags</title> 
+	<title>Printing address labels</title> 
 	<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
@@ -1433,7 +1409,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
       <!-- ==== Figure ==== -->
       <figure id="merge-ex2-4-fig"> 
-	<title>Name tags preview</title> 
+	<title>Address labels preview</title> 
 	<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
@@ -1474,7 +1450,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
     <para>The format for these files is defined in the DTD:
       <ulink url="http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt"
-       type="http">glabels-2.0.dtd</ulink>. (This DTD also describes other
+       type="http">glabels-2.2.dtd</ulink>. (This DTD also describes other
        XML formats used by glabels.)</para>
 
     <sect2 id="template-assumptions">
@@ -1552,10 +1528,17 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 	  </thead>
 	  <tbody>
 	    <row valign="top">
-	      <entry><para>name</para></entry>
+	      <entry><para>brand</para></entry>
 	      <entry>
-                <para>Name or part # of stationary product.
-                  E.g. "Avery 8160"</para>
+                <para>Brand or manufacturer of stationary product.
+                  E.g. "Avery"</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>part</para></entry>
+	      <entry>
+                <para>Part number or name of stationary product.
+                  E.g. "8160"</para>
               </entry>
 	    </row>
 	    <row valign="top">
@@ -1923,6 +1906,61 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
     </sect2>
 
+    <sect2 id="template-markup-rect-node">
+      <title>Markup-rect Node</title>
+
+      <para>A <emphasis>Markup-rect</emphasis> describes a markup rectangle.
+        </para>
+
+      <informaltable frame="topbot">
+	<tgroup cols="2">
+	  <colspec colname="col1"/>
+	  <colspec colname="col2"/>
+	  <thead>
+	    <row valign="top">
+	      <entry colname="col1" colsep="0" valign="top">
+                <para>Property</para>
+              </entry>
+	      <entry colname="col2" valign="top">
+                <para>Description</para>
+              </entry>
+	    </row>
+	  </thead>
+	  <tbody>
+	    <row valign="top">
+	      <entry><para>x1</para></entry>
+	      <entry>
+                <para>x coordinate of upper left corner of rectangle.</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>y1</para></entry>
+	      <entry>
+                <para>y coordinate of upper left corner of rectangle.</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>w</para></entry>
+	      <entry>
+                <para>Width of rectangle.</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>h</para></entry>
+	      <entry>
+                <para>Height of rectangle.</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>r</para></entry>
+	      <entry><para>Radius of rounded corners of rectangle.</para></entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+
+    </sect2>
+
     <sect2 id="template-layout-node">
       <title>Layout Node</title>
 
@@ -2026,10 +2064,15 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 	  </thead>
 	  <tbody>
 	    <row valign="top">
-	      <entry><para>name</para></entry>
+	      <entry><para>brand</para></entry>
 	      <entry>
-                <para>The name or part # of a product with the same size and
-                  layout characteristics.</para>
+                <para>The brand or manufacturer of the equivalent product.</para>
+              </entry>
+	    </row>
+	    <row valign="top">
+	      <entry><para>part</para></entry>
+	      <entry>
+                <para>The part number or name of the equivalent product.</para>
               </entry>
 	    </row>
 	  </tbody>

@@ -1,3 +1,12 @@
+2007-12-16  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated version to 2.pre2.
+	* help/C/glabels.xml:
+		Updated documentation.
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Updated copyright string.
+
 2007-12-15  Jim Evins  <evins@snaught.com>
 
 	* data/glade/object-editor.glade:
