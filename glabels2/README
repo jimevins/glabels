@@ -1,25 +1,12 @@
 Copyright
 =========
 
-   gLabels - a GNOME-based label and business card creation program
-
    Copyright (C) 2001-2007 Jim Evins
 
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+   gLabels contains components copyrighted by others -- see th 'AUTHORS' file in
+   this directory.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-   For more details see the file COPYING.
+   For license information see the 'COPYING.README_FIRST' file in this directory.
 
 
 
