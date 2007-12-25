@@ -1,5 +1,10 @@
 2007-12-25  Jim Evins  <evins@snaught.com>
 
+	* glabels.spec.in:
+		Fix spec file.
+	
+2007-12-25  Jim Evins  <evins@snaught.com>
+
 	* MESSAGE-OF-DOOM:
 		Removed for 2.2 stable branch.
 	* Makefile.am:

@@ -71,7 +71,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(-, root, root)
-%doc README COPYING COPYING-DOCS COPYING.LIBGLABELS ChangeLog NEWS AUTHORS INSTALL
+%doc README COPYING.README_FIRST COPYING COPYING-DOCS COPYING-LIBGLABELS ChangeLog NEWS AUTHORS INSTALL
 %doc %{_datadir}/gnome/help/glabels/
 %{_bindir}/glabels
 %{_bindir}/glabels-batch
