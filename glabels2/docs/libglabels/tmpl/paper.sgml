@@ -1,0 +1,59 @@
+<!-- ##### SECTION Title ##### -->
+The lglPaper Structure
+
+<!-- ##### SECTION Short_Description ##### -->
+Paper size definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a structure for representing a paper size definition
+and related functions.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT lglPaper ##### -->
+<para>
+This structure defines a paper (page) size.
+</para>
+
+@id: Paper size ID.
+@name: Localized paper size name.
+@width: Width of paper in points.
+@height: Height of paper in points.
+
+<!-- ##### FUNCTION lgl_paper_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@width: 
+@height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_paper_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_paper_free ##### -->
+<para>
+
+</para>
+
+@paper: 
+
+

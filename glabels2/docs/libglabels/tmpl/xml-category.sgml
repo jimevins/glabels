@@ -1,0 +1,47 @@
+<!-- ##### SECTION Title ##### -->
+XML Category Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+Functions to parse glabels XML category definition files
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a number of functions for parsing glabels
+XML category definition files.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_xml_category_read_categories_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_category_parse_categories_doc ##### -->
+<para>
+
+</para>
+
+@categories_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_category_parse_category_node ##### -->
+<para>
+
+</para>
+
+@category_node: 
+@Returns: 
+
+

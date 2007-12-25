@@ -1,0 +1,55 @@
+<!-- ##### SECTION Title ##### -->
+The lglCategory Structure
+
+<!-- ##### SECTION Short_Description ##### -->
+Template category definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a structure for representing a category of stationary and related
+functions.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT lglCategory ##### -->
+<para>
+This structure defines a category.
+</para>
+
+@id: Category ID.
+@name: Localized category name.
+
+<!-- ##### FUNCTION lgl_category_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_category_free ##### -->
+<para>
+
+</para>
+
+@category: 
+
+

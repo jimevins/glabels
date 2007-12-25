@@ -1,0 +1,5 @@
+
+The input file is "doc.barcode". I preprocess this file to
+build both a "barcode.texinfo" file and manual pages.
+
+The intermediat

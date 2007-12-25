@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Glabels-paper-sizes>
+
+  <!-- Most popular (at top of list) -->
+  <Paper-size id="US-Letter"    _name="US Letter"    width="8.5in" height="11in"/>
+  <Paper-size id="A4"           _name="A4"           width="210mm" height="297mm"/>
+
+  <!-- Other US paper sizes -->
+  <Paper-size id="US-Legal"     _name="US Legal"     width="8.5in" height="14in"/>
+  <Paper-size id="US-Executive" _name="US Executive" width="7.25in" height="10.5in"/>
+
+  <!-- Other ISO A series sizes -->
+  <Paper-size id="A0"           _name="A0"           width="841mm" height="1189mm"/>
+  <Paper-size id="A1"           _name="A1"           width="594mm" height="841mm"/>
+  <Paper-size id="A2"           _name="A2"           width="420mm" height="594mm"/>
+  <Paper-size id="A3"           _name="A3"           width="297mm" height="420mm"/>
+  <Paper-size id="A5"           _name="A5"           width="148mm" height="210mm"/>
+  <Paper-size id="A6"           _name="A6"           width="105mm" height="148mm"/>
+  <Paper-size id="A7"           _name="A7"           width="74mm"  height="105mm"/>
+  <Paper-size id="A8"           _name="A8"           width="52mm"  height="74mm"/>
+  <Paper-size id="A9"           _name="A9"           width="37mm"  height="52mm"/>
+  <Paper-size id="A10"          _name="A10"          width="26mm"  height="37mm"/>
+
+  <!-- ISO B series sizes -->
+  <Paper-size id="B0"           _name="B0"           width="1000mm" height="1414mm"/>
+  <Paper-size id="B1"           _name="B1"           width="707mm"  height="1000mm"/>
+  <Paper-size id="B2"           _name="B2"           width="500mm"  height="707mm"/>
+  <Paper-size id="B3"           _name="B3"           width="353mm"  height="500mm"/>
+  <Paper-size id="B4"           _name="B4"           width="250mm"  height="353mm"/>
+  <Paper-size id="B5"           _name="B5"           width="176mm"  height="250mm"/>
+  <Paper-size id="B6"           _name="B6"           width="125mm"  height="176mm"/>
+  <Paper-size id="B7"           _name="B7"           width="88mm"   height="125mm"/>
+  <Paper-size id="B8"           _name="B8"           width="62mm"   height="88mm"/>
+  <Paper-size id="B9"           _name="B9"           width="44mm"   height="62mm"/>
+  <Paper-size id="B10"          _name="B10"          width="31mm"   height="44mm"/>
+
+</Glabels-paper-sizes>

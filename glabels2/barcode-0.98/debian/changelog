@@ -1,0 +1,27 @@
+barcode (0.98) unstable; urgency=low
+
+  * New upstream release 
+
+ -- Alessandro Rubini <rubini@gnu.org>  Fri,  1 Mar 2002 23:04:14 +0100
+
+barcode (0.96) unstable; urgency=low
+
+  * New upstream release 
+
+ -- Alessandro Rubini <rubini@gnu.org>  Wed,  8 Nov 2000 18:29:18 +0200
+
+barcode (0.95) unstable; urgency=low
+
+  * New upstream release 
+
+ -- Alessandro Rubini <rubini@gnu.org>  Thu,  3 Feb 2000 21:16:59 +0200
+
+barcode (0.94) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Alessandro Rubini <rubini@gnu.org>  Sun, 24 Oct 1999 01:10:23 +0200
+
+Local variables:
+mode: debian-changelog
+End:
