@@ -15,9 +15,10 @@ SUBDIRS = \
 
 EXTRA_DIST = \
 	README \
+	COPYING.README_FIRST \
 	COPYING \
 	COPYING-DOCS \
-	COPYING.LIBGLABELS \
+	COPYING-LIBGLABELS \
 	AUTHORS \
 	ChangeLog \
 	INSTALL \
@@ -27,6 +28,4 @@ EXTRA_DIST = \
 	intltool-merge.in \
 	intltool-update.in \
 	glabels.spec.in \
-	glabels.spec \
-	MESSAGE-OF-DOOM
-
+	glabels.spec
