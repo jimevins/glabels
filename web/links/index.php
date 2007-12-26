@@ -21,7 +21,7 @@
 	<li><?a("http://gnomefiles.org/app.php?soft_id=254", "gLabels GNOME Files Page");?></li>
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-devel","gLabels Developers Mail List");?></li>
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-templates","gLabels Templates Mail List");?></li>
-	<li><?a("http://packages.debian.org/unstable/gnome/glabels.html","Debian gLabels Information Page");?></li>
+	<li><?a("http://packages.debian.org/etch/glabels","Debian gLabels Information Page");?></li>
       </ul>
 
 
@@ -31,6 +31,7 @@
 	<li><?a_host("www.gtk.org");?></li>
         <li><?a_host("www.gnome.org");?></li>
 	<li><?a("http://arcana.linux.it/software/barcode/barcode.html","Alessandro Rubini's GNU-Barcode library");?></li>
+	<li><?a("http://www.datenfreihafen.org/projects/iec16022.html","IEC16022 Library");?></li>
       </ul>
 
 
@@ -40,6 +41,7 @@
         <li><?a("http://www.kbarcode.net","Kbarcode");?> (barcode and label printing application for KDE 3)</li>
 	<li><?a("http://www.red-bean.com/labelnation/","Label Nation");?> (another program for making labels)</li>
 	<li><?a("http://oplnk.net/~ajackson/software/maillabels/","PostScript::MailLabels");?> (a perl module for creating mail labels)</li>
+        <li><?a("http://qlabels.p34.net","QLabels");?> (gLabels clone using Qt4)</li>
 
       </ul>
 

@@ -7,6 +7,25 @@
 
 
 
+<h2>Stable/2.2.x</h2>
+
+<table>
+  <tr valign="top">
+    <td><a href="220-screenshot-new.png"><?img("220-screenshot-new-thumb.png","New label dialog");?></a></td>
+    <td><a href="220-screenshot-main.png"><?img("220-screenshot-main-thumb.png","Main editing window");?></a></td>
+  </tr>
+</table>
+
+<table>
+  <tr valign="top">
+    <td><a href="220-screenshot-print.png"><?img("220-screenshot-print-thumb.png","Print dialog");?></a></td>
+    <td><a href="220-screenshot-preview.png"><?img("220-screenshot-preview-thumb.png","Print preview window");?></a></td>
+  </tr>
+</table>
+
+
+
+
 <h2>Unstable/1.93.x</h2>
 
 <table>

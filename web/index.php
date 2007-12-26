@@ -20,6 +20,51 @@ you'll find at most office supply stores. gLabels is free software and is distri
 
 
 <div class="newsitem">
+<div class="newsdate">26 December 2007</div>
+<div class="newstitle">Release 2.2.0 (Stable)</div>
+<p>
+<i>After two years in the making, it's finally here...</i>
+</p>
+<p>
+<i>A new stable release</i>.  The underlying technology has been largely overhauled from the 2.0.x branch.
+The libgnomeprint library has been completely replaced with Cairo and the new GtkPrintOperation API.
+One side effect of print rendering with Cairo is that image compositing now works at full resolution.
+Cairo has also replaced GnomeCanvas in the main display and drawing interface.
+Many other deprecated dependencies have been replaced as well.  Because of this, this version requires at least Gnome 2.16.
+</p>
+<p>
+Changes/fixes since 2.0.4 include
+</p>
+<ul>
+
+<li>Migrated from EggRecent to GtkRecentManager</li>
+<li>Migrated from libgnomeprint to GtkPrintOperation and Cairo.</li>
+<li>Migrated from libgnomeprint to Pango for text layout.</li>
+<li>Migrated GnomeDruid to GtkAssistant for template designer.</li>
+<li>Migrated from GnomeCanvas to Cairo.</li>
+<li>Removed all deprecated widgets as of Gnome-2.16/Gtk-2.10.</li>
+<li>Added categorization of templates and an updated New Label dialog.</li>
+<li>New label dialog now allows selection of recently used templates</li>
+<li>Removed splash screen.</li>
+<li>Added initial support for datamatrix 2D barcodes.</li>
+<li>Added support for Brazilian CEPNet barcodes.</li>
+<li>Added shadow attribute to label objects.</li>
+<li>New merge backend for evolution data server</li>
+<li>Various bug fixes.</li>
+<li>New templates.</li>
+
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">9 December 2007</div>
 <div class="newstitle">Release 2.1.5 (Unstable)</div>
 <p>
@@ -35,9 +80,6 @@ Changes/fixes since 2.1.4 include
 <li>Major cleanup of libglabels API and documentation</li>
 <li>Minor bug fixes (and probably some new bugs).</li>
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 
@@ -122,9 +164,6 @@ Changes/fixes since 2.0.3 include
 <li>New templates and fixes</li>
 
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 

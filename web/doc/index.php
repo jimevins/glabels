@@ -19,7 +19,7 @@ for possible inclusion in future releases of gLabels.
 <ul>
   <li>
     <div class="latest">
-      <?a("templates-2.0/","Designing Custom Templates for gLabels 2.0.x");?>
+      <?a("templates-2.2/","Designing Custom Templates for gLabels 2.2.x");?>
     </div>
   </li>
 

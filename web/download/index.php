@@ -10,15 +10,13 @@
 
 <h2>System Requirements</h2>
 <p>
-gLabels is designed to run on <i>GNOME 2.2+</i>, but more specifically it requires the following libraries or newer.
+gLabels is designed to run on <i>GNOME 2.16+</i>, but more specifically it requires the following libraries or newer.
 </p>
 <ul>
-  <li>GTK+-2.0.x</li>
-  <li>LIBGNOME[UI]-2.0.x</li>
-  <li>LIBXML-2.4.x</li>
-  <li>LIBGNOMEPRINT[UI]-2.2.x</li>
-  <li>LIBGNOMECANVAS-2.0.x</li>
-  <li>LIBGLADE-2.0.x</li>
+  <li>GTK+-2.10.x</li>
+  <li>LIBGNOME[UI]-2.16.x</li>
+  <li>LIBXML-2.6.x</li>
+  <li>LIBGLADE-2.6.x</li>
 </ul>
 <p>
 Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel or gtk2-dev)
@@ -31,13 +29,9 @@ Just having the base library packages installed is not enough.
 <ul>
   <li>
     <div class="latest">
-      <?a_sfdownload("glabels-2.0.4.tar.gz");?> (latest version)
+      <?a_sfdownload("glabels-2.2.0.tar.gz");?> (latest version)
     </div>
   </li>
-  <li><?a_sfdownload("glabels-2.0.3.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.0.2.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.0.1.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.0.0.tar.gz");?></li>
 </ul>
 
 
@@ -82,16 +76,12 @@ Just having the base library packages installed is not enough.
 
 <h2>Source:</h2>
 <ul>
+
   <li>
     <div class="latest">
-      <?a_sfdownload("glabels-2.1.5.tar.gz");?> (latest version)
+	  <i>No post 2.2.x development version available yet.</i>
     </div>
   </li>
-  <li><?a_sfdownload("glabels-2.1.4.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.1.3.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.1.2.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.1.1.tar.gz");?></li>
-  <li><?a_sfdownload("glabels-2.1.0.tar.gz");?></li>
 </ul>
 
 <h2>Subversion:</h2>
@@ -114,9 +104,7 @@ More information can be found at the <?a("http://sourceforge.net/svn/?group_id=4
 
 
 
-<h2><?a("/source/","Older versions ...");?></h2>
-
-
+<h2><?a("http://sourceforge.net/project/showfiles.php?group_id=46122", "Older versions ...");?></h2>
 
 
 
