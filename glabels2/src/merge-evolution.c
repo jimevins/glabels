@@ -37,6 +37,7 @@
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
+#include <libglabels/str.h>
 
 #include "debug.h"
 
@@ -273,9 +274,9 @@ static gint sort_contact_by_file_as(gconstpointer *a, gconstpointer *b)
   EContact *contact_b = E_CONTACT(b);
 
   // Extract file_as for each contact and compare...
-  char *a_file_as = e_contact_get (contact_a, E_CONTACT_FILE_AS);
-  char *b_file_as = e_contact_get (contact_b, E_CONTACT_FILE_AS);
-  int res = strcmp(a_file_as, b_file_as);
+  gchar *a_file_as = e_contact_get (contact_a, E_CONTACT_FILE_AS);
+  gchar *b_file_as = e_contact_get (contact_b, E_CONTACT_FILE_AS);
+  gint res = lgl_str_utf8_casecmp(a_file_as, b_file_as);
 
   gl_debug(DEBUG_MERGE, "Sort comparing contacts '%s' and '%s' = %d", a_file_as, b_file_as, res);
 
