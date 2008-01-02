@@ -1,5 +1,10 @@
 2008-01-01  Jim Evins  <evins@snaught.com>
 
+	* src/util.c:
+		Sort font lists alphabetically.
+
+2008-01-01  Jim Evins  <evins@snaught.com>
+
 	* src/merge-evolution.c:
 		Do a case-insensitive sort.
 

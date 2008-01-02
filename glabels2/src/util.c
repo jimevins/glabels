@@ -32,6 +32,7 @@
 #include <gtk/gtkliststore.h>
 #include <gtk/gtkcellrenderertext.h>
 #include <gtk/gtkcelllayout.h>
+#include <libglabels/str.h>
 
 #define FRAC_EPSILON 0.00005
 
@@ -326,7 +327,8 @@ gl_util_get_font_family_list (void)
 	for ( i=0; i<n; i++ )
 	{
 		name = g_strdup (pango_font_family_get_name (families[i]));
-		list = g_list_append (list, name);
+		list = g_list_insert_sorted (list, name,
+                                             (GCompareFunc)lgl_str_utf8_casecmp);
 	}
 
 	g_free (families);
