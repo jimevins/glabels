@@ -8,6 +8,8 @@
  *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
  *  and
  *  Copyright (C) 2005  Austin Henry <ahenry@users.sourceforge.net>
+ *  and
+ *  Copyright (C) 2007  Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -256,6 +258,34 @@ gl_merge_evolution_get_primary_key (glMerge *merge)
         return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
 
+/* Sort compare function for sorting contacts by file-as element
+ * by Peter Cherriman (PJC)
+ * called by GList* g_list_sort(GList *list, sort_contact_by_file_as);
+ */
+static gint sort_contact_by_file_as(gconstpointer *a, gconstpointer *b)
+{
+  /* 
+   * Returns : 	negative value if a < b; zero if a = b; positive value if a > b 
+   */
+
+  // Check and cast a and b to EContact
+  EContact *contact_a = E_CONTACT(a);
+  EContact *contact_b = E_CONTACT(b);
+
+  // Extract file_as for each contact and compare...
+  char *a_file_as = e_contact_get (contact_a, E_CONTACT_FILE_AS);
+  char *b_file_as = e_contact_get (contact_b, E_CONTACT_FILE_AS);
+  int res = strcmp(a_file_as, b_file_as);
+
+  gl_debug(DEBUG_MERGE, "Sort comparing contacts '%s' and '%s' = %d", a_file_as, b_file_as, res);
+
+  // free file_as strings created earlier....
+  g_free (a_file_as);
+  g_free (b_file_as);
+
+  return res;
+}
+
 /*--------------------------------------------------------------------------*/
 /* Open merge source.                                                       */
 /*--------------------------------------------------------------------------*/
@@ -359,10 +389,16 @@ gl_merge_evolution_open (glMerge *merge)
 
         e_book_query_unref(query);
 
+	/* Sort contacts using file-as element.... 
+         * by Peter Cherriman (PJC)
+         */
+        gl_debug (DEBUG_MERGE, "Starting sort");
+        merge_evolution->priv->contacts = g_list_sort(merge_evolution->priv->contacts, (GCompareFunc)sort_contact_by_file_as);
+        gl_debug (DEBUG_MERGE, "Ended sort");
+
         gl_debug (DEBUG_MERGE, "END");
 
         return;
-        /* XXX I should probably sort the list by name (or the file-as element)*/
 }
 
 /*--------------------------------------------------------------------------*/
