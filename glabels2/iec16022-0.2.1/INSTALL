@@ -1,0 +1,8 @@
+To install this software you need the following libraries installed:
+- libpopt
+- zlib
+
+Installing iec16022 is really simple. Just do a 'make' and 'make install'.
+
+In standard configuration the binary will be installed in /usr/local/bin. You
+can change the prefix and DESTDIR in the Makefile.

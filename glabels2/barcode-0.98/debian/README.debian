@@ -1,0 +1,9 @@
+The Debian Package barcode
+----------------------------
+
+This Debian package is integrated in the upstream release of GNU
+barcode, maintained by Alessandro Rubini (rubini@gnu.org,
+rubini@prosa.it).  Since I have no extended experience with Debian
+packages, I'm willing to accept any fixes that seem fit, as well as a
+real Debian maintainer for the Debian package.
+

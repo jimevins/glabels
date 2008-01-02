@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omf>
+  <resource>
+    <creator>
+	Jim Evins (evins@snaught.com)
+    </creator>
+    <title>
+      gLabels
+    </title>
+    <date>2004-08-09</date>
+    <subject category="GNOME|Applications|Publishing" />
+    <description>
+	User manual for the gLabels label and business card creation program
+    </description>
+    <type>
+      user's guide
+    </type>
+    <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML V4.1.2//EN"/>
+    <identifier url="glabels.xml"/>
+    <language code="C"/>
+  </resource>
+</omf>
