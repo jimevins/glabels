@@ -1,8 +1,29 @@
+* gLabels 2.2.0 (stable) release.  Release date 2007-12-26
+
+- Migrated from EggRecent to GtkRecentManager
+- Migrated from libgnomeprint to GtkPrintOperation and Cairo.
+- Migrated from libgnomeprint to Pango for text layout.
+- Migrated GnomeDruid to GtkAssistant for template designer.
+- Migrated from GnomeCanvas to Cairo.
+- Removed all deprecated widgets as of Gnome-2.16/Gtk-2.10.
+- Added categorization of templates and an updated New Label dialog.
+- New label dialog now allows selection of recently used templates
+- Removed splash screen.
+- Added initial support for datamatrix 2D barcodes.
+- Added support for Brazilian CEPNet barcodes.
+- Added shadow attribute to label objects.
+- New merge backend for evolution data server (Austin Henry)
+- Various bug fixes.
+- New templates.
+
+
 * gLabels 2.1.5 (unstable) release.  Release date 2007-12-09.
+
 - New label dialog now allows selection of recently used templates
 - Store brand and part number as separate fields in templates
 - Major cleanup of libglabels API and documentation
 - Minor bug fixes (and probably some new bugs).
+
 
 * gLabels 2.1.4 (unstable) release.  Release date 2007-08-17.
 
@@ -16,7 +37,7 @@
 - Removed splash screen.
 - Added support for Brazilian CEPNet barcodes.
 - Updated French translation (Claude Paroz)
-- New Experanto translation (Antonio C. Codazzi)
+- New Esperanto translation (Antonio C. Codazzi)
 - Minor bug fixes (and probably some new bugs).
 - New templates.
 

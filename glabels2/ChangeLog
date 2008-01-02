@@ -1,3 +1,11 @@
+2008-01-01  Jim Evins  <evins@snaught.com>
+
+	* NEWS:
+	* configure.in:
+	* glabels.spec.in:
+		Reconcile with 2.2 branch.
+	
+
 2007-12-21  Jim Evins  <evins@snaught.com>
 
 	* COPYING.LIBGLABELS:
