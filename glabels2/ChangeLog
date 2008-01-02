@@ -1,5 +1,14 @@
 2008-01-01  Jim Evins  <evins@snaught.com>
 
+	* src/merge-evolution.c:
+		Sort evolution by "file_under" field.  Original patch provided
+		by Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk> in
+		Patch #1860423.
+	* AUTHORS:
+		Added acknowledgement for above patch.
+
+2008-01-01  Jim Evins  <evins@snaught.com>
+
 	* NEWS:
 	* configure.in:
 	* glabels.spec.in:
