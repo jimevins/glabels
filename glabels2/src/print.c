@@ -504,6 +504,12 @@ print_label (PrintInfo     *pi,
 	/* Transform coordinate system to be relative to upper corner */
 	/* of the current label */
 	cairo_translate (pi->cr, x, y);
+
+	clip_to_outline (pi, label);
+
+	cairo_save (pi->cr);
+
+        /* Special transformations. */
 	if (label->rotate_flag) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
 		cairo_rotate (pi->cr, -M_PI/2.0);
@@ -514,13 +520,15 @@ print_label (PrintInfo     *pi,
 		cairo_scale (pi->cr, -1.0, 1.0);
 	}
 
-	clip_to_outline (pi, label);
         gl_label_draw (label, pi->cr, FALSE, record);
+
+	cairo_restore (pi->cr); /* From special transformations. */
+
 	if (outline_flag) {
 		draw_outline (pi, label);
 	}
 
-	cairo_restore (pi->cr);
+	cairo_restore (pi->cr); /* From translation. */
 
 	gl_debug (DEBUG_PRINT, "END");
 }
