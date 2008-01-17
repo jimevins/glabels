@@ -1,3 +1,9 @@
+2008-01-16  Jim Evins  <evins@snaught.com>
+
+	* src/print.c: (print_label):
+		Bug #1872568.  Don't apply special transforms (rotate and
+		mirror) to clipping region or outline.
+
 2008-01-01  Jim Evins  <evins@snaught.com>
 
 	* src/util.c:
