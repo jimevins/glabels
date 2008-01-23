@@ -1,3 +1,10 @@
+* gLabels 2.2.1 (stable) release.  Release date 2008-01-23
+
+- Sort font lists alphabetically.
+- Sort evolution records by "file_under" field.
+- Fixed clipping bug when rotating labels.
+
+
 * gLabels 2.2.0 (stable) release.  Release date 2007-12-26
 
 - Migrated from EggRecent to GtkRecentManager
