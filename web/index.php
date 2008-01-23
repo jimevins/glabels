@@ -20,6 +20,27 @@ you'll find at most office supply stores. gLabels is free software and is distri
 
 
 <div class="newsitem">
+<div class="newsdate">23 January 2008</div>
+<div class="newstitle">Release 2.2.1 (Stable)</div>
+<p>
+Changes/fixes since 2.2.0 include
+</p>
+<ul>
+<li>Font lists are now sorted alphabetically.</li>
+<li>Evolution records are now sorted by the "file_under" field.</li>
+<li>Fixed clipping bug when rotating labels.</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">26 December 2007</div>
 <div class="newstitle">Release 2.2.0 (Stable)</div>
 <p>
@@ -54,9 +75,6 @@ Changes/fixes since 2.0.4 include
 <li>New templates.</li>
 
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 
