@@ -1,0 +1,23 @@
+
+	Possible enhancements that I'd like to add
+
+* verbose mode, printing position information to stderr
+
+* document how a new encoding standard can be added
+
+* add Barcode_String, which has been contributed
+
+* EAN128 (as agreed with Dani Pardo)
+
+* Postnet and associated encoding-specific bar definitions
+
+* Use texinfo 4 with images
+
+* shrink the bars to account for ink spreading
+
+	Currently, small barcodes don't get rendered well. While
+	version 0.91 and later subtracts 0.15 points from the size of
+	the bars (I found that this makes good results for small
+	bars), a smart alghorithm to shrink the bars is needed to get
+	lighter prints at small sizes without loosing readability.
+

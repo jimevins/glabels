@@ -1,0 +1,31 @@
+
+Installing on generic Unix systems
+----------------------------------
+
+The package includes both a library and a standalone program.
+To install everything try
+
+	./configure && make && make install
+
+To uninstall, try
+
+	make uninstall
+
+You may have problems compiling the package on non-GNUish systems,
+because the tool currently uses both gmake and gawk features, and I have
+no access to non-gnu systems. If your operating system isn't able to
+compile barcode and you are willing to help porting, feel free to call me.
+
+
+Installing on Debian/GNU systems
+--------------------------------
+
+The suggested installation here includes creation of a Debian package:
+
+	debian/rules binary
+
+Then, just install using dpkg:
+
+	dpkg -i ../barcode-0.98_*.deb
+
+(the "*" here will represent your architecture: "i386", "alpha", "sparc", ...)
