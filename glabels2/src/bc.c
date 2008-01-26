@@ -134,7 +134,7 @@ static const Backend backends[] = {
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "Code128C", N_("Code 128C"), gl_barcode_gnubarcode_new,
-	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
+	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 	{ "Code128B", N_("Code 128B"), gl_barcode_gnubarcode_new,
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
