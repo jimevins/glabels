@@ -290,6 +290,7 @@ get_size (glLabelObject *object,
 			      w_parent,
 			      h_parent,
 			      data);
+	g_free (data);
 
 	if ( gbc == NULL ) {
 		/* Try again with default digits. */
@@ -301,13 +302,22 @@ get_size (glLabelObject *object,
 				      w_parent,
 				      h_parent,
 				      data);
+                g_free (data);
 	}
 
-	*w = gbc->width;
-	*h = gbc->height;
+        if ( gbc != NULL )
+        {
+                *w = gbc->width;
+                *h = gbc->height;
+        }
+        else
+        {
+                /* If we still can't render, just set a default size. */
+                *w = 144;
+                *h = 72;
+        }
 
 	gl_barcode_free (&gbc);
-	g_free (data);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
