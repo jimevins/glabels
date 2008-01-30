@@ -32,6 +32,7 @@
 #include <ctype.h>
 #include <gtk/gtktogglebutton.h>
 
+#include <libglabels/db.h>
 #include "print.h"
 #include "label.h"
 
@@ -119,6 +120,9 @@ static void     gl_print_op_construct_batch (glPrintOp          *op,
                                              gboolean            reverse_flag,
                                              gboolean            crop_marks_flag);
 
+
+static void     set_page_size                 (glPrintOp         *op,
+                                               glLabel           *label);
 
 static GObject *create_custom_widget_cb       (GtkPrintOperation *operation,
                                                gpointer           user_data);
@@ -226,6 +230,8 @@ gl_print_op_construct (glPrintOp      *op,
         op->priv->first              = 1;
         op->priv->last               = lgl_template_frame_get_n_labels (frame);
         op->priv->n_copies           = 1;
+
+        set_page_size (op, label);
 
 	gtk_print_operation_set_custom_tab_label ( GTK_PRINT_OPERATION (op),
 						   _("Labels"));
@@ -349,7 +355,7 @@ gl_print_op_free_settings(glPrintOpSettings *settings)
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Construct op.                                              */
+/* PRIVATE.  Construct op.                                                  */
 /*--------------------------------------------------------------------------*/
 static void
 gl_print_op_construct_batch (glPrintOp      *op,
@@ -398,6 +404,8 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
         }
 
+        set_page_size (op, label);
+
         gtk_print_operation_set_export_filename (GTK_PRINT_OPERATION (op),
                                                  filename);
 
@@ -406,6 +414,42 @@ gl_print_op_construct_batch (glPrintOp      *op,
 
 	g_signal_connect (G_OBJECT (op), "draw-page",
 			  G_CALLBACK (draw_page_cb), label);
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Set page size.                                                 */
+/*--------------------------------------------------------------------------*/
+static void
+set_page_size (glPrintOp  *op,
+               glLabel    *label)
+{
+        GtkPaperSize *psize;
+        GtkPageSetup *su;
+        gchar        *name;
+
+        name = lgl_db_lookup_paper_name_from_id (label->template->paper_id);
+
+        if (lgl_db_is_paper_id_other (label->template->paper_id))
+        {
+                psize = gtk_paper_size_new_custom (label->template->paper_id,
+                                                   name,
+                                                   label->template->page_width,
+                                                   label->template->page_height,
+                                                   GTK_UNIT_POINTS);
+        }
+        else
+        {
+                /* Use default size. */
+                return;
+        }
+        g_free (name);
+
+        su = gtk_page_setup_new ();
+        gtk_page_setup_set_paper_size (su, psize);
+        gtk_print_operation_set_default_page_setup (GTK_PRINT_OPERATION (op), su);
+        g_object_unref (su);
+
+        gtk_paper_size_free (psize);
 }
 
 /*--------------------------------------------------------------------------*/

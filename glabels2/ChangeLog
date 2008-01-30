@@ -1,3 +1,9 @@
+2008-01-29  Jim Evins  <evins@snaught.com>
+
+	* src/print-op.c: (gl_print_op_construct),
+	(gl_print_op_construct_batch), (set_page_size):
+		Explicitly set page size for "other" page sizes.
+
 2008-01-25  Jim Evins  <evins@snaught.com>
 
 	* src/bc.c:
