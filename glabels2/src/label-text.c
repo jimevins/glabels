@@ -393,7 +393,6 @@ get_size (glLabelObject *object,
 	fontmap = pango_cairo_font_map_new ();
 	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
 	options = cairo_font_options_create ();
-	cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_OFF);
         cairo_font_options_set_hint_style (options, CAIRO_HINT_STYLE_NONE);
 	pango_cairo_context_set_font_options (context, options);
 	cairo_font_options_destroy (options);
@@ -853,7 +852,6 @@ draw_object (glLabelObject *object,
         layout = pango_cairo_create_layout (cr);
 
         font_options = cairo_font_options_create ();
-        cairo_font_options_set_hint_metrics (font_options, CAIRO_HINT_METRICS_OFF);
         cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
         context = pango_layout_get_context (layout);
         pango_cairo_context_set_font_options (context, font_options);
@@ -994,7 +992,6 @@ draw_shadow (glLabelObject *object,
         layout = pango_cairo_create_layout (cr);
 
         font_options = cairo_font_options_create ();
-        cairo_font_options_set_hint_metrics (font_options, CAIRO_HINT_METRICS_OFF);
         cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
         context = pango_layout_get_context (layout);
         pango_cairo_context_set_font_options (context, font_options);
