@@ -1,3 +1,9 @@
+2008-01-31  Jim Evins  <evins@snaught.com>
+
+	* src/label-barcode.c: (draw_object):
+		Fixed rendering problem when "Invalid data" is displayed when text
+		object is lower in stacking order.
+
 2008-01-30  Jim Evins  <evins@snaught.com>
 
 	* src/label-text.c: (get_size), (draw_object), (draw_shadow):
