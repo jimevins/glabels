@@ -430,6 +430,7 @@ draw_object (glLabelObject *object,
                         pango_layout_set_text (layout, _("Invalid barcode data"), -1);
                 }
 
+                cairo_move_to (cr, 0, 0);
                 pango_cairo_show_layout (cr, layout);
 
                 g_object_unref (layout);
