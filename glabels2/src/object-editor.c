@@ -38,6 +38,7 @@
 #include "mygal/widget-color-combo.h"
 #include "color.h"
 #include "wdgt-chain-button.h"
+#include "wdgt-merge-menu.h"
 #include "marshal.h"
 #include "util.h"
 
@@ -357,19 +358,12 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 {
         GList     *keys;
 	GtkWidget *combo;
+	GtkWidget *menu;
 	gboolean   fixed_flag;
 	gboolean   state;
  
         gl_debug (DEBUG_EDITOR, "START");
 
-	if (editor->priv->edit_key_label) {
-		gtk_widget_set_sensitive (editor->priv->edit_key_label, merge != NULL);
-	}
- 
-	if (editor->priv->edit_key_combo) {
-		gtk_widget_set_sensitive (editor->priv->edit_key_combo, merge != NULL);
-	}
- 
 	if (editor->priv->text_auto_shrink_check) {
 		gtk_widget_set_sensitive (editor->priv->text_auto_shrink_check,
 					  merge != NULL);
@@ -507,9 +501,9 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
 	}
 
-	combo = editor->priv->edit_key_combo;
-	if (combo) {
-		gl_util_combo_box_set_strings (GTK_COMBO_BOX (combo), keys);
+	menu = editor->priv->edit_insert_field_menu;
+	if (menu) {
+		gl_wdgt_merge_menu_set_fields (GL_WDGT_MERGE_MENU(menu), keys);
 	}
 
 	combo = editor->priv->data_key_combo;

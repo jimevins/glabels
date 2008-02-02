@@ -66,6 +66,7 @@ typedef enum {
 	GLABELS_DEBUG_EDITOR       = 1 << 19,
 	GLABELS_DEBUG_WDGT         = 1 << 20,
         GLABELS_DEBUG_PATH         = 1 << 21,
+	GLABELS_DEBUG_MERGE_MENU   = 1 << 22,
 } glDebugSection;
 
 
@@ -95,6 +96,7 @@ typedef enum {
 #define	DEBUG_EDITOR	GLABELS_DEBUG_EDITOR, __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_WDGT	GLABELS_DEBUG_WDGT,   __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_PATH      GLABELS_DEBUG_PATH,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_MERGE_MENU      GLABELS_DEBUG_MERGE_MENU,   __FILE__, __LINE__, __FUNCTION__
 
 void gl_debug_init (void);
 

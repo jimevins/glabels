@@ -110,9 +110,8 @@ struct _glObjectEditorPrivate {
 
 	GtkWidget  *edit_page_vbox;
 	GtkWidget  *edit_text_view;
-	GtkWidget  *edit_key_label;
-	GtkWidget  *edit_key_combo;
 	GtkWidget  *edit_insert_field_button;
+        GtkWidget  *edit_insert_field_menu;
 
 	GtkWidget  *bc_page_vbox;
 	GtkWidget  *bc_style_combo;

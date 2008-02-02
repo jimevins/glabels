@@ -174,6 +174,8 @@ glabels_SOURCES = 			\
 	wdgt-rotate-label.h		\
 	wdgt-chain-button.c		\
 	wdgt-chain-button.h		\
+	wdgt-merge-menu.c		\
+	wdgt-merge-menu.h		\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-markup-path.c		\

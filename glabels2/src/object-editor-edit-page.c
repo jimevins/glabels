@@ -33,6 +33,7 @@
 #include "prefs.h"
 #include "mygal/widget-color-combo.h"
 #include "color.h"
+#include "wdgt-merge-menu.h"
 #include "util.h"
 
 #include "object-editor-private.h"
@@ -57,6 +58,8 @@
 
 static void insert_button_cb (glObjectEditor  *editor);
 
+static void field_selected_cb (glObjectEditor *editor, gchar *field);
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare size page.                                             */
@@ -71,14 +74,10 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 		glade_xml_get_widget (editor->priv->gui, "edit_page_vbox");
 	editor->priv->edit_text_view =
 		glade_xml_get_widget (editor->priv->gui, "edit_text_view");
-	editor->priv->edit_key_label =
-		glade_xml_get_widget (editor->priv->gui, "edit_key_label");
-	editor->priv->edit_key_combo =
-		glade_xml_get_widget (editor->priv->gui, "edit_key_combo");
 	editor->priv->edit_insert_field_button =
 		glade_xml_get_widget (editor->priv->gui, "edit_insert_field_button");
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->edit_key_combo));
+	editor->priv->edit_insert_field_menu = gl_wdgt_merge_menu_new ();
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->edit_page_vbox);
@@ -88,32 +87,50 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 				  "clicked",
 				  G_CALLBACK (insert_button_cb),
 				  G_OBJECT (editor));
+	g_signal_connect_swapped (G_OBJECT (editor->priv->edit_insert_field_menu),
+				  "field_selected",
+				  G_CALLBACK (field_selected_cb),
+				  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Alignment togglebutton callback.                               */
+/* PRIVATE.  Menu item activated callback.                                  */
+/*--------------------------------------------------------------------------*/
+static void
+field_selected_cb (glObjectEditor *editor, gchar *field)
+{
+        GtkTextBuffer *buffer;
+        gchar *field_string;
+ 
+        gl_debug (DEBUG_EDITOR, "START");
+ 
+        g_print( "Field activated: \"%s\"\n", field );
+
+        field_string = g_strdup_printf ("${%s}", field);
+        gl_debug (DEBUG_WDGT, "Inserting %s", field_string);
+ 
+        buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (editor->priv->edit_text_view));
+        gtk_text_buffer_insert_at_cursor (buffer, field_string, -1);
+ 
+        g_free (field_string);
+ 
+        gl_debug (DEBUG_EDITOR, "END");
+}
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Insert button callback.                                        */
 /*--------------------------------------------------------------------------*/
 static void
 insert_button_cb (glObjectEditor  *editor)
 {
-        GtkTextBuffer *buffer;
-        gchar *key, *field;
- 
         gl_debug (DEBUG_EDITOR, "START");
  
-	key = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->edit_key_combo));
-        field = g_strdup_printf ("${%s}", key);
-        gl_debug (DEBUG_WDGT, "Inserting %s", field);
- 
-        buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (editor->priv->edit_text_view));
-        gtk_text_buffer_insert_at_cursor (buffer, field, -1);
- 
-        g_free (field);
-        g_free (key);
- 
- 
+        gtk_widget_show_all (editor->priv->edit_insert_field_menu);
+        gtk_menu_popup (GTK_MENU (editor->priv->edit_insert_field_menu),
+                        NULL, NULL, NULL, NULL, 1, gtk_get_current_event_time ());
+
         gl_debug (DEBUG_EDITOR, "END");
 }
 

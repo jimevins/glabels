@@ -1,3 +1,22 @@
+2008-02-02  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/wdgt-merge-menu.c:
+	* src/wdgt-merge-menu.h:
+	* src/debug.c: (gl_debug_init):
+	* src/debug.h:
+	* src/marshal.list:
+		New merge menu widget.
+	* data/glade/object-editor.glade:
+	* src/object-editor-private.h:
+	* src/object-editor.c: (gl_object_editor_set_key_names):
+	* src/object-editor-edit-page.c:
+	(gl_object_editor_prepare_edit_page), (field_selected_cb),
+	(insert_button_cb):
+		Simplified UI for inserting fields into text objects by launching
+		a merge menu and directly inserting fields from the menu.  No more
+		selecting field in combobox, then pressing insert button.
+
 2008-01-31  Jim Evins  <evins@snaught.com>
 
 	* src/label-barcode.c: (draw_object):
