@@ -106,8 +106,6 @@ field_selected_cb (glObjectEditor *editor, gchar *field)
  
         gl_debug (DEBUG_EDITOR, "START");
  
-        g_print( "Field activated: \"%s\"\n", field );
-
         field_string = g_strdup_printf ("${%s}", field);
         gl_debug (DEBUG_WDGT, "Inserting %s", field_string);
  

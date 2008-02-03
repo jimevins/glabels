@@ -159,25 +159,30 @@ gl_object_editor_set_max_lsize (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+        if (editor->priv->lsize_page_vbox)
+        {
 
-	/* save a copy in internal units */
-	editor->priv->dx_max = dx_max;
-	editor->priv->dy_max = dy_max;
+                editor->priv->stop_signals = TRUE;
 
-	/* convert internal units to displayed units */
-	gl_debug (DEBUG_EDITOR, "internal dx_max,dy_max = %g, %g", dx_max, dy_max);
-	dx_max *= editor->priv->units_per_point;
-	dy_max *= editor->priv->units_per_point;
-	gl_debug (DEBUG_EDITOR, "display dx_max,dy_max = %g, %g", dx_max, dy_max);
+                /* save a copy in internal units */
+                editor->priv->dx_max = dx_max;
+                editor->priv->dy_max = dy_max;
 
-	/* Set widget values */
-	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
-				   0.0, 2.0*LENGTH (dx_max, dy_max));
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
+                /* convert internal units to displayed units */
+                gl_debug (DEBUG_EDITOR, "internal dx_max,dy_max = %g, %g", dx_max, dy_max);
+                dx_max *= editor->priv->units_per_point;
+                dy_max *= editor->priv->units_per_point;
+                gl_debug (DEBUG_EDITOR, "display dx_max,dy_max = %g, %g", dx_max, dy_max);
 
-        editor->priv->stop_signals = FALSE;
+                /* Set widget values */
+                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin));
+                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin),
+                                           0.0, 2.0*LENGTH (dx_max, dy_max));
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->lsize_r_spin), tmp);
+
+                editor->priv->stop_signals = FALSE;
+
+        }
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

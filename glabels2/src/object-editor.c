@@ -69,10 +69,14 @@ gint gl_object_editor_signals[LAST_SIGNAL] = { 0 };
 static void gl_object_editor_finalize           (GObject              *object);
 
 static void gl_object_notebook_construct_valist (glObjectEditor       *editor,
+                                                 glLabel              *label,
 						 glObjectEditorOption  first_option,
 						 va_list               args);
 
 static void prefs_changed_cb                    (glObjectEditor       *editor);
+
+static void label_changed_cb                    (glLabel              *label,
+                                                 glObjectEditor       *editor);
 
 
 /*****************************************************************************/
@@ -161,11 +165,13 @@ gl_object_editor_finalize (GObject *object)
 	g_return_if_fail (GL_IS_OBJECT_EDITOR (editor));
 	g_return_if_fail (editor->priv != NULL);
 
-        g_object_unref (editor->priv->gui);
-	g_free (editor->priv);
-
 	g_signal_handlers_disconnect_by_func (G_OBJECT(gl_prefs),
 					      prefs_changed_cb, editor);
+	g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->label),
+					      label_changed_cb, editor);
+
+        g_object_unref (editor->priv->gui);
+	g_free (editor->priv);
 
 	G_OBJECT_CLASS (gl_object_editor_parent_class)->finalize (object);
 
@@ -177,7 +183,8 @@ gl_object_editor_finalize (GObject *object)
 /*****************************************************************************/
 GtkWidget*
 gl_object_editor_new (gchar                *image,
-		      gchar                *label,
+		      gchar                *title,
+                      glLabel              *label,
 		      glObjectEditorOption  first_option, ...)
 {
 	glObjectEditor *editor;
@@ -193,11 +200,11 @@ gl_object_editor_new (gchar                *image,
 					  GTK_ICON_SIZE_LARGE_TOOLBAR);
 	}
 
-	if (label) {
+	if (title) {
 		gchar *s;
 
 		s = g_strdup_printf ("<span weight=\"bold\">%s</span>",
-				     label);
+				     title);
 		gtk_label_set_text (GTK_LABEL(editor->priv->title_label), s);
 		g_free (s);
 
@@ -208,12 +215,8 @@ gl_object_editor_new (gchar                *image,
 	gtk_notebook_set_homogeneous_tabs (GTK_NOTEBOOK(editor->priv->notebook), TRUE);
 
 	va_start (args, first_option);
-	gl_object_notebook_construct_valist (editor, first_option, args);
+	gl_object_notebook_construct_valist (editor, label, first_option, args);
 	va_end (args);
-
-	if (editor->priv->gui) {
-		g_object_unref (G_OBJECT (editor->priv->gui));
-	}
 
 	gl_debug (DEBUG_EDITOR, "END");
 
@@ -225,6 +228,7 @@ gl_object_editor_new (gchar                *image,
 /*--------------------------------------------------------------------------*/
 static void
 gl_object_notebook_construct_valist (glObjectEditor       *editor,
+                                     glLabel              *label,
 				     glObjectEditorOption  first_option,
 				     va_list               args)
 {
@@ -232,6 +236,8 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 	gint pages = 0;
 
 	gl_debug (DEBUG_EDITOR, "START");
+
+        editor->priv->label = label;
 
 	option = first_option;
 
@@ -313,6 +319,16 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 	g_signal_connect_swapped (G_OBJECT (gl_prefs), "changed",
 				  G_CALLBACK (prefs_changed_cb),
 				  editor);
+        if (label)
+        {
+                label_changed_cb (label, editor);
+                g_signal_connect (G_OBJECT (label), "size_changed",
+                                  G_CALLBACK (label_changed_cb),
+                                  editor);
+                g_signal_connect (G_OBJECT (label), "merge_changed",
+                                  G_CALLBACK (label_changed_cb),
+                                  editor);
+        }
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -642,3 +658,32 @@ prefs_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE. label "changed" callback.                                        */
+/*---------------------------------------------------------------------------*/
+static void
+label_changed_cb (glLabel        *label,
+                  glObjectEditor *editor)
+{
+	gdouble   label_width, label_height;
+	glMerge	 *merge;
+
+	gl_debug (DEBUG_EDITOR, "START");
+
+	gl_label_get_size (label, &label_width, &label_height);
+	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
+					   label_width, label_height);
+	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
+	gl_object_editor_set_max_lsize (GL_OBJECT_EDITOR (editor),
+				       label_width, label_height);
+	gl_object_editor_set_max_shadow_offset (GL_OBJECT_EDITOR (editor),
+						label_width, label_height);
+	
+	merge = gl_label_get_merge (label);
+	gl_object_editor_set_key_names (editor, merge);
+
+	gl_debug (DEBUG_EDITOR, "END");
+}
+

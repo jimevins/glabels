@@ -124,7 +124,8 @@ gl_view_object_finalize (GObject *object)
 
 	g_object_unref (view_object->priv->object);
 	if (view_object->priv->property_editor) {
-		gtk_object_destroy (GTK_OBJECT(view_object->priv->property_editor));
+                gl_debug (DEBUG_VIEW, "Destroy editor");
+		g_object_unref (G_OBJECT(view_object->priv->property_editor));
 	}
 	g_free (view_object->priv);
 
