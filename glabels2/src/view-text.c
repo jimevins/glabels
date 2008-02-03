@@ -75,9 +75,6 @@ static void       update_editor_from_move_cb        (glLabelObject    *object,
 						     gdouble           dy,
 						     glObjectEditor   *editor);
 
-static void       update_editor_from_label_cb       (glLabel          *label,
-						     glObjectEditor   *editor);
-
 static gboolean   object_at                         (glViewObject     *view_object,
                                                      cairo_t          *cr,
                                                      gdouble           x,
@@ -179,6 +176,7 @@ construct_properties_editor (glViewObject *view_object)
 
 	/* Build editor. */
 	editor = gl_object_editor_new (GL_STOCK_TEXT, _("Text object properties"),
+                                       object->parent,
 				       GL_OBJECT_EDITOR_SHADOW_PAGE,
 				       GL_OBJECT_EDITOR_POSITION_PAGE,
 				       GL_OBJECT_EDITOR_SIZE_PAGE,
@@ -190,7 +188,6 @@ construct_properties_editor (glViewObject *view_object)
 	gl_object_editor_set_text_buffer (GL_OBJECT_EDITOR(editor), buffer);
 	
 	/* Update */
-	update_editor_from_label_cb (object->parent, GL_OBJECT_EDITOR(editor));
 	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
 	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
 
@@ -203,10 +200,6 @@ construct_properties_editor (glViewObject *view_object)
 			  G_CALLBACK (update_editor_from_object_cb), editor);
 	g_signal_connect (G_OBJECT (object), "moved",
 			  G_CALLBACK (update_editor_from_move_cb), editor);
-	g_signal_connect (G_OBJECT (object->parent), "size_changed",
-			  G_CALLBACK (update_editor_from_label_cb), editor);			  
-	g_signal_connect (G_OBJECT (object->parent), "merge_changed",
-			  G_CALLBACK (update_editor_from_label_cb), editor);
 
 	gl_debug (DEBUG_VIEW, "END");
 
@@ -405,31 +398,6 @@ update_editor_from_move_cb (glLabelObject    *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label "changed" callback.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-update_editor_from_label_cb (glLabel        *label,
-			     glObjectEditor *editor)
-{
-	gdouble            label_width, label_height;
-	glMerge		   	   *merge;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_label_get_size (label, &label_width, &label_height);
-	gl_object_editor_set_max_position (GL_OBJECT_EDITOR (editor),
-					   label_width, label_height);
-	gl_object_editor_set_max_size (GL_OBJECT_EDITOR (editor),
-				       label_width, label_height);
-	gl_object_editor_set_max_shadow_offset (GL_OBJECT_EDITOR (editor),
-						label_width, label_height);
-	
-	merge = gl_label_get_merge (label);
-	gl_object_editor_set_key_names (editor, merge);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
 
 /*****************************************************************************/
 /* Is object at (x,y)?                                                       */
@@ -526,7 +494,6 @@ gl_view_text_create_button_press_event   (glView *view,
         g_free (family);
         lines = gl_text_node_lines_new_from_text (_("Text"));
         gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
-        view_text = gl_view_text_new (GL_LABEL_TEXT(object), view);
         gl_color_node_free (&color_node);
 
         view->create_object = GL_LABEL_OBJECT (object);

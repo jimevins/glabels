@@ -28,6 +28,7 @@
 #include <gtk/gtktextbuffer.h>
 
 #include "text-node.h"
+#include "label.h"
 #include "merge.h"
 #include "bc.h"
 #include "color.h"
@@ -85,7 +86,8 @@ struct  _glObjectEditorClass
 GtkType     gl_object_editor_get_type             (void) G_GNUC_CONST;
 
 GtkWidget  *gl_object_editor_new                  (gchar               *image,
-						   gchar               *label,
+						   gchar               *title,
+                                                   glLabel             *label,
 						   glObjectEditorOption first_option, ...);
 
 void        gl_object_editor_set_key_names        (glObjectEditor      *editor,

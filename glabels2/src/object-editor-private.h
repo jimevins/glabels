@@ -34,6 +34,8 @@ struct _glObjectEditorPrivate {
 	GladeXML   *gui;
 	GtkWidget  *editor_vbox;
 
+        glLabel    *label;
+
 	gdouble     units_per_point;
 
 	GtkWidget  *title_image;

@@ -281,29 +281,34 @@ gl_object_editor_set_max_shadow_offset (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+        if (editor->priv->shadow_page_vbox)
+        {
 
-	/* save a copy in internal units */
-	editor->priv->shadow_x_max = x_max;
-	editor->priv->shadow_y_max = y_max;
+                editor->priv->stop_signals = TRUE;
 
-	/* convert internal units to displayed units */
-	gl_debug (DEBUG_EDITOR, "internal x_max,y_max = %g, %g", x_max, y_max);
-	x_max *= editor->priv->units_per_point;
-	y_max *= editor->priv->units_per_point;
-	gl_debug (DEBUG_EDITOR, "display x_max,y_max = %g, %g", x_max, y_max);
+                /* save a copy in internal units */
+                editor->priv->shadow_x_max = x_max;
+                editor->priv->shadow_y_max = y_max;
 
-	/* Set widget values */
-	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin));
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin),
-				   -x_max, x_max);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), tmp);
-	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin));
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin),
-				   -y_max, y_max);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), tmp);
+                /* convert internal units to displayed units */
+                gl_debug (DEBUG_EDITOR, "internal x_max,y_max = %g, %g", x_max, y_max);
+                x_max *= editor->priv->units_per_point;
+                y_max *= editor->priv->units_per_point;
+                gl_debug (DEBUG_EDITOR, "display x_max,y_max = %g, %g", x_max, y_max);
 
-        editor->priv->stop_signals = FALSE;
+                /* Set widget values */
+                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin));
+                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin),
+                                           -x_max, x_max);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_x_spin), tmp);
+                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin));
+                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin),
+                                           -y_max, y_max);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->shadow_y_spin), tmp);
+
+                editor->priv->stop_signals = FALSE;
+
+        }
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

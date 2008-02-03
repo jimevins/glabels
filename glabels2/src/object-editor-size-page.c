@@ -328,29 +328,34 @@ gl_object_editor_set_max_size (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-        editor->priv->stop_signals = TRUE;
+        if (editor->priv->size_page_vbox)
+        {
 
-	/* save a copy in internal units */
-	editor->priv->w_max = w_max;
-	editor->priv->h_max = h_max;
+                editor->priv->stop_signals = TRUE;
 
-	/* convert internal units to displayed units */
-	gl_debug (DEBUG_EDITOR, "internal w_max,h_max = %g, %g", w_max, h_max);
-	w_max *= editor->priv->units_per_point;
-	h_max *= editor->priv->units_per_point;
-	gl_debug (DEBUG_EDITOR, "display w_max,h_max = %g, %g", w_max, h_max);
+                /* save a copy in internal units */
+                editor->priv->w_max = w_max;
+                editor->priv->h_max = h_max;
 
-	/* Set widget values */
-	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
-				   0.0, 2.0*w_max);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin), tmp);
-	tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
-				   0.0, 2.0*h_max);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin), tmp);
+                /* convert internal units to displayed units */
+                gl_debug (DEBUG_EDITOR, "internal w_max,h_max = %g, %g", w_max, h_max);
+                w_max *= editor->priv->units_per_point;
+                h_max *= editor->priv->units_per_point;
+                gl_debug (DEBUG_EDITOR, "display w_max,h_max = %g, %g", w_max, h_max);
 
-        editor->priv->stop_signals = FALSE;
+                /* Set widget values */
+                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin));
+                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_w_spin),
+                                           0.0, 2.0*w_max);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_w_spin), tmp);
+                tmp = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin));
+                gtk_spin_button_set_range (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
+                                           0.0, 2.0*h_max);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin), tmp);
+
+                editor->priv->stop_signals = FALSE;
+
+        }
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

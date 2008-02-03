@@ -150,6 +150,7 @@ gl_ui_sidebar_construct (glUISidebar       *sidebar)
 
 	sidebar->priv->empty_child = gl_object_editor_new (GL_STOCK_PROPERTIES,
 							   _("Object properties"),
+                                                           NULL,
 							   GL_OBJECT_EDITOR_EMPTY,
 							   NULL);
 
