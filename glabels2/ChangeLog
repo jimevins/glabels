@@ -1,5 +1,10 @@
 2008-02-03  Jim Evins  <evins@snaught.com>
 
+	* src/label-image.c: (gl_label_image_class_init), (set_size):
+		Enforce minimum size for images.
+
+2008-02-03  Jim Evins  <evins@snaught.com>
+
 	* src/object-editor-lsize-page.c: (gl_object_editor_set_max_lsize):
 	* src/object-editor-private.h:
 	* src/object-editor-shadow-page.c:
