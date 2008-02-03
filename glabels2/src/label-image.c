@@ -33,6 +33,10 @@
 
 #include "debug.h"
 
+
+#define MIN_IMAGE_SIZE 1.0
+
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
@@ -57,6 +61,10 @@ static void gl_label_image_finalize      (GObject           *object);
 static void copy                         (glLabelObject     *dst_object,
 					  glLabelObject     *src_object);
 
+static void set_size                      (glLabelObject      *object,
+					   gdouble             w,
+					   gdouble             h);
+
 static void    draw_object               (glLabelObject     *object,
                                           cairo_t           *cr,
                                           gboolean           screen_flag,
@@ -78,6 +86,7 @@ gl_label_image_class_init (glLabelImageClass *class)
 	gl_label_image_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy           = copy;
+	label_object_class->set_size       = set_size;
         label_object_class->draw_object    = draw_object;
         label_object_class->draw_shadow    = NULL;
 
@@ -171,6 +180,30 @@ copy (glLabelObject *dst_object,
 	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Set size method.                                                */
+/*---------------------------------------------------------------------------*/
+static void
+set_size (glLabelObject *object,
+	  gdouble        w,
+	  gdouble        h)
+{
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        if (w < MIN_IMAGE_SIZE)
+        {
+                w = MIN_IMAGE_SIZE;
+        }
+
+        if (h < MIN_IMAGE_SIZE)
+        {
+                h = MIN_IMAGE_SIZE;
+        }
+
+	GL_LABEL_OBJECT_CLASS (gl_label_image_parent_class)->set_size (object, w, h);
 }
 
 

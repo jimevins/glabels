@@ -1,3 +1,36 @@
+2008-02-03  Jim Evins  <evins@snaught.com>
+
+	* src/label-image.c: (gl_label_image_class_init), (set_size):
+		Enforce minimum size for images.
+
+2008-02-03  Jim Evins  <evins@snaught.com>
+
+	* src/object-editor-edit-page.c: (field_selected_cb):
+	* src/object-editor-lsize-page.c: (gl_object_editor_set_max_lsize):
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_set_max_shadow_offset):
+	* src/object-editor-size-page.c: (gl_object_editor_set_max_size):
+	* src/object-editor.c: (gl_object_editor_finalize),
+	(gl_object_editor_new), (gl_object_notebook_construct_valist),
+	(label_changed_cb):
+	* src/object-editor.h:
+	* src/ui-sidebar.c: (gl_ui_sidebar_construct):
+	* src/view-barcode.c: (construct_properties_editor):
+	* src/view-box.c: (construct_properties_editor):
+	* src/view-ellipse.c: (construct_properties_editor):
+	* src/view-image.c: (construct_properties_editor):
+	* src/view-line.c: (construct_properties_editor):
+	* src/view-object.c: (gl_view_object_finalize):
+	* src/view-text.c: (construct_properties_editor),
+		Move update_editor_from_label callback from individual view objects
+		to the object editor, so that signals can be disconnected when
+		object editor is finalized.
+	* src/view-text.c: (gl_view_text_create_button_press_event):
+		Fixed bug that caused multiple view objects to be created for a
+		single text object.  This bug would manifest itself as a crash
+		when deleting multi-object selections which included text objects.
+	
 2008-02-02  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:
