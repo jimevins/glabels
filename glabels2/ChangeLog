@@ -1,3 +1,11 @@
+2008-02-04  Jim Evins  <evins@snaught.com>
+
+	* src/view-image.c: (update_object_from_editor_cb):
+		Bug #1886438.  Don't update the image size unless it is actually
+		triggered by a change in image source.  The result of this bug
+		was that any attempt to edit the size spinboxes, immediately
+		reset the size.
+	
 2008-02-03  Jim Evins  <evins@snaught.com>
 
 	* src/label-image.c: (gl_label_image_class_init), (set_size):
