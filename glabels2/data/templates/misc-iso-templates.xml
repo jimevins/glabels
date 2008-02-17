@@ -494,6 +494,17 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Connect KF10647 Mailing Labels..                                    -->
+  <!-- =================================================================== -->
+  <Template brand="Connect" part="KF10647" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="198.425pt" height="104.882pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="3" ny="8" x0="7.86772e-17pt" y0="11.3386pt" dx="198.425pt" dy="104.882pt"/>
+    </Label-rectangle>
+  </Template>
 
 
   <!-- ******************************************************************** -->
