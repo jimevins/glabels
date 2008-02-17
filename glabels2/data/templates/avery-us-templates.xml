@@ -104,6 +104,17 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 5305 family: Tent Cards, 2_1/2'' x 8_1/2'', 2 per sheet       -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5305" size="US-Letter" _description="Tent Cards">
+    <Meta category="card"/>
+    <Label-rectangle id="0" width="612pt" height="180pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="27pt"/>
+      <Layout nx="1" ny="2" x0="0pt" y0="216pt" dx="0pt" dy="360pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 6879 family: Address Labels, 1_1/4'' x 3_3/4'', 12 per sheetx -->
   <!-- =================================================================== -->
   <Template brand="Avery" part="6879" size="US-Letter" _description="Address Labels">

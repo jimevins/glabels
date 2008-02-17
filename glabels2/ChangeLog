@@ -1,3 +1,12 @@
+2008-02-16  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
+		Caught up on user submitted templates.
+
 2008-02-04  Jim Evins  <evins@snaught.com>
 
 	* src/view-image.c: (update_object_from_editor_cb):

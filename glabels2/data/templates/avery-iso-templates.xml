@@ -19,6 +19,17 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 6121 family: Allround labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6121" size="A4" _description="Allround labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="107.928pt" height="60.12pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="8.496pt"/>
+      <Layout nx="5" ny="13" x0="26.928pt" y0="29.736pt" dx="107.928pt" dy="60.12pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Avery 7160 family: Mailing labels, 63.5 x 38.1 mm, 21 per sheet     -->
   <!-- =================================================================== -->
   <Template brand="Avery" part="7160" size="A4" _description="Mailing labels">

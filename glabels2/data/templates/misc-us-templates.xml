@@ -205,6 +205,19 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- OfficeMax OM99060 Mailing Labels.                                   -->
+  <!-- =================================================================== -->
+  <Template brand="OfficeMax" part="OM99060" size="US-Letter" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="203.76pt" height="72pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="12.024pt"/>
+      <Layout nx="3" ny="10" x0="0pt" y0="36pt" dx="203.76pt" dy="72pt"/>
+    </Label-rectangle>
+  </Template>
+
+
 </Glabels-templates>
 
 
