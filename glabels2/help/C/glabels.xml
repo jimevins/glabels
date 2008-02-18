@@ -1491,13 +1491,13 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
     <sect2 id="template-example">
       <title>Example Template</title>
       <programlisting>
-  &lt;Template name="Avery 8160" size="US-Letter" description="Mailing Labels"&gt;
-    &lt;Label-rectangle id="0" width="189" height="72" round="5"&gt;
-      &lt;Markup-margin size="5"/&gt;
-      &lt;Layout nx="3" ny="10" x0="11.25" y0="36" dx="200" dy="72"/&gt;
+  &lt;Template brand="Avery" part="8160" size="US-Letter" description="Mailing Labels"&gt;
+    &lt;Label-rectangle id="0" width="189pt" height="72pt" round="5pt"&gt;
+      &lt;Markup-margin size="5pt"/&gt;
+      &lt;Layout nx="3" ny="10" x0="11.25pt" y0="36pt" dx="200pt" dy="72pt"/&gt;
     &lt;/Label-rectangle&gt;
-    &lt;Alias name="Avery 5160"/&gt;
-    &lt;Alias name="Avery 6233"/&gt;
+    &lt;Alias brand="Avery" part="5160"/&gt;
+    &lt;Alias brand="Avery" part="6233"/&gt;
   &lt;/Template&gt;
       </programlisting>
     </sect2>
