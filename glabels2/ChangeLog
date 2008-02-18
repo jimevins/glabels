@@ -1,3 +1,8 @@
+2008-02-18  Jim Evins  <evins@snaught.com>
+
+	* help/C/glabels.xml:
+		Fixed example template.
+
 2008-02-16  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
