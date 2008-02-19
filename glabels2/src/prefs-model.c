@@ -26,6 +26,7 @@
 #include "prefs-model.h"
 
 #include <libglabels/db.h>
+#include <libglabels/xml.h>
 
 #include "marshal.h"
 #include "util.h"
@@ -247,6 +248,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 				 BASE_KEY PREF_UNITS,
 				 units_to_string(prefs_model->units),
 				 NULL);
+        lgl_xml_set_default_units (prefs_model->units);
 
 	/* Default page size */
 	gconf_client_set_string (prefs_model->gconf_client,
@@ -399,6 +401,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 			    DEFAULT_UNITS_STRING);
 	prefs_model->units = string_to_units( string );
 	g_free( string );
+        lgl_xml_set_default_units (prefs_model->units);
 
 
 	/* Page size */
