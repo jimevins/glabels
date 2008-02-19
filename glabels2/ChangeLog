@@ -1,5 +1,11 @@
 2008-02-18  Jim Evins  <evins@snaught.com>
 
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+		Set default units for file output.
+
+2008-02-18  Jim Evins  <evins@snaught.com>
+
 	* help/C/glabels.xml:
 		Fixed example template.
 
