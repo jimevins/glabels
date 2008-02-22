@@ -1,3 +1,16 @@
+* gLabels 2.2.2 (stable) release.  Release date 2008-02-22
+
+- Fixed crash when creating Code128C barcode (Bug #1766425).
+- Explicitely set page size when printing "other" page size.
+- Fixed rendering bug with bitmap fonts.
+- Fixed rendering problem when displaying "Invalid barcode data".
+- Fixed crash when deleting multi-object selections.
+- Enforce minimum size for images to prevent rendering of images of zero size.
+- Fixed problem with image size spinboxes (Bug #1886438).
+- Fixed template example in documentation.
+- Use default units when writing xml files.
+- New templates.
+
 * gLabels 2.2.1 (stable) release.  Release date 2008-01-23
 
 - Sort font lists alphabetically.
