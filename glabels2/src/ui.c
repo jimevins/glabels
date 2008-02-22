@@ -711,7 +711,7 @@ static gchar* doc_verbs [] = {
 };
 
 static gchar* doc_modified_verbs [] = {
-	"/ui/MenuBar/FileMenu/Save",
+	"/ui/MenuBar/FileMenu/FileSave",
 
 	NULL
 };
