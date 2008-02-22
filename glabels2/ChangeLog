@@ -1,3 +1,9 @@
+2008-02-21  Jim Evins  <evins@snaught.com>
+
+	* src/ui.c:
+		Fixed typo that prevented "Save" from being deactivated when
+		document is not modified.
+	
 2008-02-18  Jim Evins  <evins@snaught.com>
 
 	* src/prefs-model.c: (gl_prefs_model_save_settings),
