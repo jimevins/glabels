@@ -1,0 +1,170 @@
+gLabels Author
+==============
+
+Jim Evins <evins@snaught.com>
+
+Acknowledgments
+===============
+
+- The GNU Barcode Library provides a large chunk of the barcode functionality
+and is distributed with glabels.  See ./barcode-0.98/README for more
+information.  The author:
+
+	Alessandro Rubini <rubini@gnu.org>
+
+- The iec16022 library provides encoding for 2D barcodes.  See
+iec16022-0.2.1/README for more information.
+
+- Glabels includes modified versions of several widgets from the GAL library.
+These are copyright:
+
+	* Copyright 2000, 2001, Ximian, Inc.
+	* Copyright 2000, Michael Levy
+	* Copyright 2001, Almer S. Tigelaar
+
+- Glabels includes a modified version of the gimpchainbutton widget from the
+gimp, as well as several stock icons from the gimp's default theme.
+These are copyright:
+
+	 * Copyright (C) 1995-1997 Peter Mattis and Spencer Kimball
+	 * Copyright (C) 1999-2000 Sven Neumann <sven@gimp.org>
+
+Glabels includes contributions from:
+	Frederic Ruaudel  <grumz@users.sf.net>
+	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
+	Wayne Schuller <k_wayne@linuxpower.org>
+	Austin Henry  <ahenry@users.sourceforge.net> -- EDS and vcard backends
+	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
+                                                      that first appeared in
+                                                      0.4.3:
+	Darren Warner <warnerd@users.sourceforge.net>
+	Javier Donaire Segarra <jyuyu@users.sourceforge.net>
+	Alessandro Zummo <azummo@towertech.it>
+	José Dapena Paz <jdapena@igalia.com>
+	Akkana <akkana@shallowsky.com>
+	Dag Wieers <dag@wieers.com>
+	Mário Meyer <mario@meyer.eti.br>
+	Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk>
+
+Translations:
+
+	Olivier Berger <oberger@april.org> -- French (original)
+	Florent Morel <florent@taket.org> -- French (2.0.2)
+	Claude Paroz <claude@2xlibre.net> -- French (2.1.4)
+	Marcus Bauer <m@7n7.de> -- German (original)
+	Christian Neumair <christian-neumair@web.de> -- German (1.89.1)
+	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
+	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
+	Víctor Moral <victor@pasmao.net> -- Spanish translations
+	sergio rivadero <sergiorivadero@argentina.com> -- Spanish Translations (2.0.3)
+	Vitaly Lipatov <lav@altlinux.ru> -- Russian translations
+	Shell, Hin-lik Hung <shell@home.shellhung.org> -- Chinese Translations
+	Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl> -- Polish Translations
+	David Makovský (Yakeen) <yakeen@sannyas-on.net> -- Czech Translations
+	Zbynek Mrkvicka <zbynek@oachot.cz> -- Czech Translations (2.0.3)
+	Mancio <mancio_and@yahoo.it> -- Italian Translations
+	Daniele Medri <daniele.medri@libero.it> -- Italian Translations (2.0.3)
+	Antonio C. Codazzi "la Filozofo" <f_sophia@libero.it> -- Esperanto
+
+The following people have submitted label templates or information about
+particular products (I apologize if I have missed anybody):
+
+	Hap
+	Olivier Berger
+	Marcus Bauer
+	Jochen Hein
+	Jonathan Buzzard
+	Jeff Davis
+	Ludger Solbach
+	Darren Ross
+	George Mitchell
+	Douglas Bollinger
+	Tim Jackson
+	John Stoffel
+	Dany De Bontridder
+	Andy Longton
+	Bostjan Muller
+	John Helms
+	no-exit
+	Mozilla from marela
+	Holger
+	Bill Tihen
+	Dan Gray
+	Keith Hudson
+	Tamas Bondar
+	George Mitchell
+	Erich Pfennig
+	Gwen Patton
+	Miek Gieben
+	Joerg Schmitz-Linneweber
+	David Makovský
+	Oliver Schwank
+	Akkana
+	Ted Poe
+	hans-helmut.belter
+	Uli Wachowitz
+	Stephan Hegel
+	Holger Reinmann
+	Michael Wojciechowski
+	Jim Mueller
+	Mark Fullalove
+	Zamiel Al'Shaitan
+	Philip Paeps
+	Bryan Fields
+	Martin Klaffenboeck
+	Lauri Ampuja
+	Allan Wind
+	Mark S Burgunder
+	Christian Holländer
+	Marvin P. Dickens
+	Julien BLACHE
+	James D Strandboge
+	Linas Jakucionis
+	Henrik Brix Andersen
+	Nigel Titley
+	Sean 'Shaleh' Perry
+	Anthony Brockman
+	Thorsten Hirsch
+	John Ross
+	Mike Machado
+	Rob Elshire
+	Niels
+        Ernst W. Winter
+	regis rampnoux	
+	Sven Salzwedel
+	Dick Middleton
+	Ian Peake
+	Wayne Schuller
+	Thomas Vill
+	Fred Bacon
+	JBadger
+	Frank Altpeter
+	Matthew J. Lockner
+	Larry Harriman
+	Juan Carlos Valero
+	Nick Hill
+	Ali Akcaagac
+	Dan Clark
+	Peter L. Berghold
+	Vitaly Lipatov
+	Steve Saxon
+	Roman Kreisel
+	Steve Reppucci
+	Lionel CONS
+	Richard Lance
+	Anand Kumria
+	Alexandre Sauvé
+	Ironblade
+	Matthias Mailänder
+	Bernhard Walle
+	Stephen Hilliard
+	Alessandro Zummo
+	Herbert Straub
+	Dennis Böckmann
+	Anon
+	D. Leitner
+	Georg Ostertag
+	Manuel Siggen
+	David Huber
+
+And many others for their many helpful suggestions and bug reports -- thanks.

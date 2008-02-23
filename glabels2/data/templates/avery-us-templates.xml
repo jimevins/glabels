@@ -1,0 +1,776 @@
+<?xml version="1.0"?>
+<Glabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+  <!--                                                                      -->
+  <!-- Avery US-Letter products (and look-alikes)                           -->
+  <!--                                                                      -->
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+
+  <!-- =================================================================== -->
+  <!-- Avery 5160 family: Address Labels, 1'' x 2_5/8'', 30 per sheet    x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5160" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="2.625in" height="1in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="10" x0="0.1875in" y0="0.5in" dx="2.75in" dy="1in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5260"/>
+    <Alias brand="Avery" part="5510"/>
+    <Alias brand="Avery" part="5520"/>
+    <Alias brand="Avery" part="5560"/>
+    <Alias brand="Avery" part="5810"/>
+    <Alias brand="Avery" part="5920"/>
+    <Alias brand="Avery" part="5960"/>
+    <Alias brand="Avery" part="5970"/>
+    <Alias brand="Avery" part="5971"/>
+    <Alias brand="Avery" part="5972"/>
+    <Alias brand="Avery" part="5979"/>
+    <Alias brand="Avery" part="5980"/>
+    <Alias brand="Avery" part="6231"/>
+    <Alias brand="Avery" part="6233"/>
+    <Alias brand="Avery" part="6245"/>
+    <Alias brand="Avery" part="6460"/>
+    <Alias brand="Avery" part="6498"/>
+    <Alias brand="Avery" part="8160"/>
+    <Alias brand="Avery" part="8250"/>
+    <Alias brand="Avery" part="8460"/>
+    <Alias brand="Avery" part="8560"/>
+    <Alias brand="Avery" part="8620"/>
+    <Alias brand="Avery" part="8660"/>
+    <Alias brand="Avery" part="8810"/>
+    <Alias brand="Avery" part="8920"/>
+    <Alias brand="Avery" part="8930"/>
+    <Alias brand="Avery" part="15160"/>
+    <Alias brand="Avery" part="18160"/>
+    <Alias brand="Avery" part="18660"/>
+    <Alias brand="Avery" part="25160"/>
+    <!-- Look alikes -->
+    <Alias brand="Maco" part="ll5805"/>
+    <Alias brand="Worldlabel" part="OL875"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5161 family: Address Labels, 1'' x 4'', 20 per sheet        x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5161" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="1in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="10" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="1in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5261"/>
+    <Alias brand="Avery" part="5961"/>
+    <Alias brand="Avery" part="8161"/>
+    <Alias brand="Avery" part="8461"/>
+    <Alias brand="Avery" part="18161"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL75"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5162 family: Address Labels, 1_1/3'' x 4'', 14 per sheet    x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5162" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="1.333333333in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="7"
+              x0="0.15625in" y0="0.833333333in" dx="4.1875in" dy="1.333333333in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5262"/>
+    <Alias brand="Avery" part="5512"/>
+    <Alias brand="Avery" part="5522"/>
+    <Alias brand="Avery" part="5922"/>
+    <Alias brand="Avery" part="5962"/>
+    <Alias brand="Avery" part="8162"/>
+    <Alias brand="Avery" part="8252"/>
+    <Alias brand="Avery" part="8462"/>
+    <Alias brand="Avery" part="8662"/>
+    <Alias brand="Avery" part="8922"/>
+    <Alias brand="Avery" part="8932"/>
+    <Alias brand="Avery" part="15162"/>
+    <Alias brand="Avery" part="18162"/>
+    <Alias brand="Avery" part="18662"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL100"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5305 family: Tent Cards, 2_1/2'' x 8_1/2'', 2 per sheet       -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5305" size="US-Letter" _description="Tent Cards">
+    <Meta category="card"/>
+    <Label-rectangle id="0" width="612pt" height="180pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="27pt"/>
+      <Layout nx="1" ny="2" x0="0pt" y0="216pt" dx="0pt" dy="360pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 6879 family: Address Labels, 1_1/4'' x 3_3/4'', 12 per sheetx -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6879" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="3.75in" height="1.25in" round="0.0625in" waste="5pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="6" x0="0.375in" y0="1.125in" dx="4in" dy="1.5in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="8769"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5159 family: Address Labels, 1_1/2'' x 4'', 14 per sheet      -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5159" size="US-Letter" description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="1.5in" round="0.0625in" waste="0in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="7" x0="0.15625in" y0="0.25in" dx="4.1875in" dy="1.5in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5163 family: Shipping Labels, 4'' x 2'', 10 per sheet       x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5163" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="2in" round="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="5" x0="0.1625in" y0="0.5in" dx="4.1875in" dy="2in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5263"/>
+    <Alias brand="Avery" part="5513"/>
+    <Alias brand="Avery" part="5523"/>
+    <Alias brand="Avery" part="5795"/>
+    <Alias brand="Avery" part="5923"/>
+    <Alias brand="Avery" part="5963"/>
+    <Alias brand="Avery" part="5978"/>
+    <Alias brand="Avery" part="8163"/>
+    <Alias brand="Avery" part="8253"/>
+    <Alias brand="Avery" part="8463"/>
+    <Alias brand="Avery" part="8663"/>
+    <Alias brand="Avery" part="8763"/>
+    <Alias brand="Avery" part="8923"/>
+    <Alias brand="Avery" part="15163"/>
+    <Alias brand="Avery" part="18163"/>
+    <Alias brand="Avery" part="18663"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL125"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5164 family: Shipping Labels. 4'' x 3_1/3'', 6 per sheet    x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5164" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="3.333333333in" round="0.125in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="2" ny="3" x0="0.15625in" y0="0.5in" dx="4.1875in" dy="3.333333333in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5264"/>
+    <Alias brand="Avery" part="5514"/>
+    <Alias brand="Avery" part="5524"/>
+    <Alias brand="Avery" part="6464"/>
+    <Alias brand="Avery" part="6499"/>
+    <Alias brand="Avery" part="8164"/>
+    <Alias brand="Avery" part="8254"/>
+    <Alias brand="Avery" part="8464"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL150"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5168 family:  Shipping Labels 5'' x 3_1/2'', 4 per sheet      -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5168" size="US-Letter" description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="3.5in" height="5in" round="0.0625in" waste="0in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="2" x0="0.5in" y0="0.5in" dx="4in" dy="5in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5167 family: Address Labels, 1_3/4'' x 1/2'', 80 per sheet  x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5167" size="US-Letter" _description="Return Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="1.75in" height="0.5in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="4" ny="20" x0="0.28125in" y0="0.5in" dx="2.0625in" dy="0.5in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5267"/>
+    <Alias brand="Avery" part="5667"/>
+    <Alias brand="Avery" part="5927"/>
+    <Alias brand="Avery" part="6467"/>
+    <Alias brand="Avery" part="6504"/>
+    <Alias brand="Avery" part="8167"/>
+    <Alias brand="Avery" part="8567"/>
+    <Alias brand="Avery" part="8667"/>
+    <Alias brand="Avery" part="8927"/>
+    <Alias brand="Avery" part="15167"/>
+    <Alias brand="Avery" part="15267"/>
+    <Alias brand="Avery" part="18167"/>
+    <Alias brand="Avery" part="18667"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL25"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5196 family: Diskette Labels, 2_3/4'' x 2_3/4'', 9 per sheetx -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5196" size="US-Letter" _description="Diskette Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="2.75in" height="2.75in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="3" x0="0.125in" y0="0.5in" dx="2.75in" dy="3in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5096"/>
+    <Alias brand="Avery" part="5896"/>
+    <Alias brand="Avery" part="5996"/>
+    <Alias brand="Avery" part="8196"/>
+    <Alias brand="Avery" part="8197"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL225"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5197 family: Mailing Labels                                   -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5197" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4in" height="1.5in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="6" x0="0.1875in" y0="1in" dx="4.125in" dy="1.5in"/>
+    </Label-rectangle>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL250"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5193 family: Round Labels                                     -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5193" size="US-Letter" description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="0.8125in" waste="0pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="4" ny="6" x0="0.4157in" y0="0.549in" dx="2.0145in" dy="1.6554in"/>
+    </Label-round>
+    <Alias brand="Avery" part="5293"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL325"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5194 family: Round Labels, 12 per sheet.                      -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5194" size="US-Letter" description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="1.25in" waste="0pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="4" x0="0.21in" y0="0.425in" dx="2.75in" dy="2.515in"/>
+    </Label-round>
+    <Alias brand="Avery" part="5294"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL350"/>
+    <Alias brand="Maco" part="ML-1225"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5195 family: Round Labels                                     -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5195" size="US-Letter" description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="1.65625in" waste="0pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="3" x0="0.6406in" y0="0.4844in" dx="3.9063in" dy="3.3594in"/>
+    </Label-round>
+    <Alias brand="Avery" part="5295"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL375"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5663 family: Mailing Labels                                   -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5663" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="4.25in" height="2in" round="0in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="5" x0="0in" y0="0.5in" dx="4.25in" dy="2in"/>
+    </Label-rectangle>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL625"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 6490 family: Diskette Labels, 2_11/16'' x 2'', 15 per sheet x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6490" size="US-Letter" _description="Diskette Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="2.6875in" height="2in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="5" x0="0.125in" y0="0.5in" dx="2.78125in" dy="2in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="6501"/>
+    <Alias brand="Avery" part="6861"/>
+    <Alias brand="Avery" part="8096"/>
+  </Template> 
+
+  <!-- =================================================================== -->
+  <!-- Avery 5366 family: Filing Labels, 2/3'' x 3_7/16'', 30 per sheet  x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5366" size="US-Letter" _description="Filing Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="3.4375in" height="0.666666667in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="15" x0="0.53125in" y0="0.5in" dx="4in" dy="0.666666667in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5066"/>
+    <Alias brand="Avery" part="5166"/>
+    <Alias brand="Avery" part="5266"/>
+    <Alias brand="Avery" part="5268"/>
+    <Alias brand="Avery" part="5368"/>
+    <Alias brand="Avery" part="5378"/>
+    <Alias brand="Avery" part="5666"/>
+    <Alias brand="Avery" part="5766"/>
+    <Alias brand="Avery" part="5866"/>
+    <Alias brand="Avery" part="5966"/>
+    <Alias brand="Avery" part="6368"/>
+    <Alias brand="Avery" part="6466"/>
+    <Alias brand="Avery" part="6468"/>
+    <Alias brand="Avery" part="6500"/>
+    <Alias brand="Avery" part="6505"/>
+    <Alias brand="Avery" part="6865"/>
+    <Alias brand="Avery" part="8066"/>
+    <Alias brand="Avery" part="8166"/>
+    <Alias brand="Avery" part="8366"/>
+    <Alias brand="Avery" part="8478"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL200"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5371 family: Business Cards, 2'' x 3_1/2'', 10 per sheet    x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5371" size="US-Letter" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="3.5in" height="2in" round="0">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="5" x0="0.75in" y0="0.5in" dx="3.5in" dy="2in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5372"/>
+    <Alias brand="Avery" part="5376"/>
+    <Alias brand="Avery" part="5377"/>
+    <Alias brand="Avery" part="5871"/>
+    <Alias brand="Avery" part="5872"/>
+    <Alias brand="Avery" part="5873"/>
+    <Alias brand="Avery" part="5876"/>
+    <Alias brand="Avery" part="5877"/>
+    <Alias brand="Avery" part="5878"/>
+    <Alias brand="Avery" part="5911"/>
+    <Alias brand="Avery" part="6235"/>
+    <Alias brand="Avery" part="8271"/>
+    <Alias brand="Avery" part="8371"/>
+    <Alias brand="Avery" part="8372"/>
+    <Alias brand="Avery" part="8374"/>
+    <Alias brand="Avery" part="8376"/>
+    <Alias brand="Avery" part="8377"/>
+    <Alias brand="Avery" part="8379"/>
+    <Alias brand="Avery" part="8471"/>
+    <Alias brand="Avery" part="8476"/>
+    <Alias brand="Avery" part="8571"/>
+    <Alias brand="Avery" part="8871"/>
+    <Alias brand="Avery" part="8872"/>
+    <Alias brand="Avery" part="8873"/>
+    <Alias brand="Avery" part="8876"/>
+    <Alias brand="Avery" part="8877"/>
+    <Alias brand="Avery" part="8878"/>
+    <Alias brand="Avery" part="8879"/>
+    <Alias brand="Avery" part="25371"/>
+    <Alias brand="Avery" part="26550"/>
+    <Alias brand="Avery" part="26551"/>
+    <Alias brand="Avery" part="27870"/>
+    <Alias brand="Avery" part="27876"/>
+    <Alias brand="Avery" part="27871"/>
+    <Alias brand="Avery" part="27881"/>
+    <Alias brand="Avery" part="27882"/>
+    <Alias brand="Avery" part="28371"/>
+    <Alias brand="Avery" part="28373"/>
+    <Alias brand="Avery" part="28876"/>
+    <Alias brand="Avery" part="28877"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5388 family: Index Cards, 5'' x 3'', 3 per sheet              -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5388" size="US-Letter" description="Index Cards">
+    <Meta category="card"/>
+    <Label-rectangle id="0" width="5in" height="3in" round="0pt" waste="0pt">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="3" x0="1.75in" y0="1in" dx="5in" dy="3in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5386"/>
+    <Alias brand="Avery" part="8388"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5389 family: Post Cards, 6'' x 4'', 2 per sheet               -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5389" size="US-Letter" description="Post cards">
+    <Meta category="card"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="6in" height="4in" round="0pt" waste="0pt">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="2" x0="1.25in" y0="1.25in" dx="6in" dy="4.5in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8373 family: Business Cards, 2'' x 3_1/2'', 8 per sheet     x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="8373" size="US-Letter" _description="Business Cards">
+    <Meta category="card"/>
+    <Meta category="business-card"/>
+    <Label-rectangle id="0" width="3.5in" height="2in" round="0" waste="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="4" x0="0.5in" y0="0.75in" dx="4in" dy="2.5in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="3612"/>
+    <Alias brand="Avery" part="5881"/>
+    <Alias brand="Avery" part="28373"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5395 family: Name Badge Labels, 2_1/3'' x 3_3/8'', 8 per sheetx -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5395" size="US-Letter" _description="Name Badge Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="3.375in" height="2.333333333in" round="0.1875in" waste="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="4" x0="0.6875in" y0="0.583333333in" dx="3.75in" dy="2.5in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5095"/>
+    <Alias brand="Avery" part="5895"/>
+    <Alias brand="Avery" part="8395"/>
+    <Alias brand="Avery" part="15395"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5824 family: CD/DVD Labels (face only), 2 per sheet         * -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5824" size="US-Letter" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="144pt" y0="36pt" dx="351pt" dy="396pt"/>
+    </Label-cd>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL1200"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5931 family: CD/DVD Labels (face only), 2 per sheet         x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5931-Disc" size="US-Letter"
+         _description="CD/DVD Labels (Disc Labels)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="2.3125in" hole="0.8125in" waste="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Markup-line x1="0" y1="2.3125in" x2="1.5in" y2="2.3125in"/>
+      <Markup-line x1="3.125in" y1="2.3125in" x2="4.625in" y2="2.3125in"/>
+      <Markup-line x1="2.3125in" y1="0" x2="2.3125in" y2="1.5in"/>
+      <Markup-line x1="2.3125in" y1="3.125in" x2="2.3125in" y2="4.625in"/>
+      <Layout nx="1" ny="2" x0="1.9375in" y0="0.6875in" dx="0" dy="5in"/>
+    </Label-cd>
+    <Alias brand="Avery" part="5691-Disc"/>
+    <Alias brand="Avery" part="5692-Disc"/>
+    <Alias brand="Avery" part="5694-Disc"/>
+    <Alias brand="Avery" part="5698-Disc"/>
+    <Alias brand="Avery" part="6692-Disc"/>
+    <Alias brand="Avery" part="8536-Disc"/>
+    <Alias brand="Avery" part="8691-Disc"/>
+    <Alias brand="Avery" part="8692-Disc"/>
+    <Alias brand="Avery" part="8694-Disc"/>
+    <Alias brand="Avery" part="8695-Disc"/>
+    <Alias brand="Avery" part="8699-Disc"/>
+    <Alias brand="Avery" part="8831-Disc"/>
+    <Alias brand="Avery" part="8832-Disc"/>
+    <Alias brand="Avery" part="8842-Disc"/>
+    <Alias brand="Avery" part="8844-Disc"/>
+    <Alias brand="Avery" part="8846-Disc"/>
+    <Alias brand="Avery" part="8847-Disc"/>
+    <Alias brand="Avery" part="8931-Disc"/>
+    <Alias brand="Avery" part="8941-Disc"/>
+    <Alias brand="Avery" part="8942-Disc"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL5075"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5931 family: CD/DVD Labels (spine only), 4 per sheet        x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5931-Spine" size="US-Letter" 
+         _description="CD/DVD Labels (Spine Labels)">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="0.21875in" height="4.6875in" round="0.0625in" waste="0.0625in">
+      <Layout nx="2" ny="2" x0="0.5in" y0="0.734375in" dx="0.46875in" dy="4.84375in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5691-Spine"/>
+    <Alias brand="Avery" part="5692-Spine"/>
+    <Alias brand="Avery" part="5694-Spine"/>
+    <Alias brand="Avery" part="5698-Spine"/>
+    <Alias brand="Avery" part="6692-Spine"/>
+    <Alias brand="Avery" part="8536-Spine"/>
+    <Alias brand="Avery" part="8691-Spine"/>
+    <Alias brand="Avery" part="8692-Spine"/>
+    <Alias brand="Avery" part="8694-Spine"/>
+    <Alias brand="Avery" part="8695-Spine"/>
+    <Alias brand="Avery" part="8699-Spine"/>
+    <Alias brand="Avery" part="8831-Spine"/>
+    <Alias brand="Avery" part="8832-Spine"/>
+    <Alias brand="Avery" part="8842-Spine"/>
+    <Alias brand="Avery" part="8844-Spine"/>
+    <Alias brand="Avery" part="8846-Spine"/>
+    <Alias brand="Avery" part="8847-Spine"/>
+    <Alias brand="Avery" part="8931-Spine"/>
+    <Alias brand="Avery" part="8941-Spine"/>
+    <Alias brand="Avery" part="8942-Spine"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997face family: VCR Labels, 1_7/8'' x 3_1/16'', 10 per sheet -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5997-Face" size="US-Letter"
+         _description="Video Tape Face Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="220" height="133" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="5" x0="80" y0="60.5" dx="236" dy="133"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5199-Face"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL1125"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 5997spine family: VCR Labels, 2/3'' x 5_3/4'',15 per sheet    -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5997-Spine" size="US-Letter"
+        _description="Video Tape Spine Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="414" height="48" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="15" x0="99" y0="36" dx="0" dy="48"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="5199-Spine"/>
+    <!-- Look alikes -->
+    <Alias brand="Worldlabel" part="OL1150"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 6570 family: ID Labels.                                       -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6570" size="US-Letter" _description="ID Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="126pt" height="90pt" round="4.464pt" x_waste="6.768pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="4" ny="8" x0="36pt" y0="36pt" dx="139.536pt" dy="90pt"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8165 family: Full-page label, 8_1/2'' x 11'', 1 per sheet   x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="8165" size="US-Letter" _description="Full Sheet Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="8.5in" height="11.in" round="0">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="3114"/>
+    <Alias brand="Avery" part="3121"/>
+    <Alias brand="Avery" part="3123"/>
+    <Alias brand="Avery" part="3131"/>
+    <Alias brand="Avery" part="3132"/>
+    <Alias brand="Avery" part="3133"/>
+    <Alias brand="Avery" part="3141"/>
+    <Alias brand="Avery" part="3142"/>
+    <Alias brand="Avery" part="3145"/>
+    <Alias brand="Avery" part="3245"/>
+    <Alias brand="Avery" part="3246"/>
+    <Alias brand="Avery" part="3247"/>
+    <Alias brand="Avery" part="3255"/>
+    <Alias brand="Avery" part="3267"/>
+    <Alias brand="Avery" part="3270"/>
+    <Alias brand="Avery" part="3271"/>
+    <Alias brand="Avery" part="3272"/>
+    <Alias brand="Avery" part="3275"/>
+    <Alias brand="Avery" part="3276"/>
+    <Alias brand="Avery" part="3277"/>
+    <Alias brand="Avery" part="3614"/>
+    <Alias brand="Avery" part="3625"/>
+    <Alias brand="Avery" part="3641"/>
+    <Alias brand="Avery" part="3651"/>
+    <Alias brand="Avery" part="5165"/>
+    <Alias brand="Avery" part="5177"/>
+    <Alias brand="Avery" part="5182"/>
+    <Alias brand="Avery" part="5265"/>
+    <Alias brand="Avery" part="5277"/>
+    <Alias brand="Avery" part="5282"/>
+    <Alias brand="Avery" part="5884"/>
+    <Alias brand="Avery" part="5975"/>
+    <Alias brand="Avery" part="6465"/>
+    <Alias brand="Avery" part="6503"/>
+    <Alias brand="Avery" part="8255"/>
+    <Alias brand="Avery" part="8314"/>
+    <Alias brand="Avery" part="8324"/>
+    <Alias brand="Avery" part="8384"/>
+    <Alias brand="Avery" part="8465"/>
+    <Alias brand="Avery" part="8665"/>
+    <Alias brand="Avery" part="53205"/>
+    <Alias brand="Avery" part="53211"/>
+    <Alias brand="Avery" part="53230"/>
+    <Alias brand="Avery" part="53240"/>
+    <Alias brand="Avery" part="75287"/>
+    <Alias brand="Avery" part="75299"/>
+    <!-- Look alikes -->
+    <Alias brand="IP Invent It!" part="#00064-3"/>
+    <Alias brand="Worldlabel" part="OL175"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 8960 family: CD/DVD Labels.                                   -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="8960" size="US-Letter" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="166.5pt" hole="14.1732pt" waste="9.07087pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="138.898pt" y0="50.1732pt" dx="351.142pt" dy="360pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.1 family: Square stickers, 2_1/2'' x 2_1/2, 9 per sheetx  -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="3274.1" size="US-Letter" _description="Square Labels">
+    <Meta category="label"/>
+    <Meta category="square-label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="2.5in" height="2.5in" round="0">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="3111"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.2 family: Small round stickers, 1_1/2'', 20 per sheet  x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="3274.2" size="US-Letter" _description="Small Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="0.75in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="4" ny="5" x0="0.5in" y0="0.75in" dx="2in" dy="2in"/>
+    </Label-round>
+    <Alias brand="Avery" part="3112"/>
+    <Alias brand="Avery" part="8293"/>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- Avery 3274.3 family: Large round stickers, 2_1/2'', 9 per sheet   x -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="3274.3" size="US-Letter" _description="Large Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="1.25in">
+      <Markup-margin size="5"/>
+      <Layout nx="3" ny="3" x0="0.3125in" y0="1.25in" dx="2.6875in" dy="3in"/>
+    </Label-round>
+  </Template>
+
+
+  <!-- ******************************************************************** -->
+  <!-- Avery labels in tech builitin 152 				    -->
+  <!-- http://www.avery.com/help/tech_bulletin.jsp?tech_bull_code=152       -->
+  <!-- ******************************************************************** -->
+  <Template brand="Avery" part="LSK-8" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="1.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template brand="Avery" part="LSK-8.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="1" width="1.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="2.13in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <Template brand="Avery" part="LSK-5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="2" width="1.75in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="4" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template brand="Avery" part="LSK-5.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="3" width="1.75in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.3in" dx="2.05in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <Template brand="Avery" part="LSK-3" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="4" width="3.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="2" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+  <!-- the LSK labels can be torn in half down the center -->
+  <Template brand="Avery" part="LSK-3.5" size="US-Letter" description="Divider Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="5" width="3.13in" height="0.5in" round="5">
+      <Markup-margin size="5"/>
+      <Layout nx="1" ny="20" x0="0.5in" y0="0.5in" dx="4.38in" dy="0.5in"/>
+    </Label-rectangle>
+  </Template>
+
+</Glabels-templates>
+
+
+
+

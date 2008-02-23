@@ -1,0 +1,44 @@
+Copyright
+=========
+
+   Copyright (C) 2001-2007 Jim Evins
+
+   gLabels contains components copyrighted by others -- see th 'AUTHORS' file in
+   this directory.
+
+   For license information see the 'COPYING.README_FIRST' file in this directory.
+
+
+
+What is gLabels
+===============
+
+gLabels is a small stand-alone program for creating labels and business
+cards using a laser or ink-jet printer.
+
+
+
+System Requirements
+===================
+
+GTK+-2.10.x
+LIBGNOME[UI]-2.16.x
+LIBXML-2.6.x
+LIBGLADE-2.6.x
+
+All of these libraries are available as part of Gnome 2.16
+
+
+
+Author and Acknowledgments:
+===========================
+
+See the AUTHORS file.
+
+
+
+Website
+=======
+
+http://glabels.sourceforge.net/
+
