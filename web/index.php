@@ -20,6 +20,33 @@ you'll find at most office supply stores. gLabels is free software and is distri
 
 
 <div class="newsitem">
+<div class="newsdate">22 February 2008</div>
+<div class="newstitle">Release 2.2.2, "Walt Whitman High" (Stable)</div>
+<p>
+Changes/fixes since 2.2.1 include
+</p>
+<ul>
+<li>Fixed crash when creating Code128C barcode (Bug #1766425).</li>
+<li>Explicitely set page size when printing "other" page size.</li>
+<li>Fixed rendering bug with bitmap fonts.</li>
+<li>Fixed rendering problem when displaying "Invalid barcode data".</li>
+<li>Fixed crash when deleting multi-object selections.</li>
+<li>Enforce minimum size for images to prevent rendering of images of zero size.</li>
+<li>Fixed problem with image size spinboxes (Bug #1886438).</li>
+<li>Fixed template example in documentation.</li>
+<li>Use default units when writing xml files.</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">23 January 2008</div>
 <div class="newstitle">Release 2.2.1 (Stable)</div>
 <p>
@@ -30,9 +57,6 @@ Changes/fixes since 2.2.0 include
 <li>Evolution records are now sorted by the "file_under" field.</li>
 <li>Fixed clipping bug when rotating labels.</li>
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 
