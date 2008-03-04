@@ -1,3 +1,9 @@
+2008-03-03  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* ko.po:
+		Added korean translation provided by xein@naver.com.
+	
 2008-02-21  Jim Evins  <evins@snaught.com>
 
 	* src/ui.c:
