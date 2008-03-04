@@ -163,7 +163,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
 dnl Add the languages here.
-ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl cs it eo"
+ALL_LINGUAS="fr de ja pt_BR es ru zh_TW.Big5 pl cs it eo ko"
 AM_GLIB_GNU_GETTEXT
 
 
