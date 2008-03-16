@@ -905,6 +905,7 @@ draw_markup_layer (glView  *view,
 	const lglTemplateFrame    *frame;
 	GList                     *p;
 	lglTemplateMarkup         *markup;
+        gdouble                    width, height;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
@@ -916,6 +917,13 @@ draw_markup_layer (glView  *view,
                 frame = (lglTemplateFrame *)view->label->template->frames->data;
 
                 cairo_save (cr);
+
+                if (label->rotate_flag)
+                {
+                        lgl_template_frame_get_size (frame, &width, &height);
+                        cairo_rotate (cr, -M_PI/2.0);
+                        cairo_translate (cr, -width, 0.0);
+                }
 
                 cairo_set_line_width (cr, MARKUP_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
                 cairo_set_source_rgb (cr, MARKUP_RGB_ARGS);
