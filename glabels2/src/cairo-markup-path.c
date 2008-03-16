@@ -153,7 +153,7 @@ gl_cairo_markup_margin_rect_path (cairo_t                 *cr,
 
         m = markup->margin.size;
 
-        gl_label_get_size (label, &w, &h);
+        lgl_template_frame_get_size (frame, &w, &h);
 	w = w - 2*m;
 	h = h - 2*m;
         r = MAX (frame->rect.r - m, 0.0);
@@ -217,7 +217,7 @@ gl_cairo_markup_margin_cd_path (cairo_t                 *cr,
 
         frame = (lglTemplateFrame *)label->template->frames->data;
 
-        gl_label_get_size (label, &w, &h);
+        lgl_template_frame_get_size (frame, &w, &h);
         xc = w/2.0;
         yc = h/2.0;
 

@@ -1,3 +1,13 @@
+2008-03-15  Jim Evins  <evins@snaught.com>
+
+	* data/templates/Makefile.am:
+	* data/templates/brother-other-templates.xml:
+		Added brother templates.
+	* src/cairo-markup-path.c: (gl_cairo_markup_margin_rect_path),
+	(gl_cairo_markup_margin_cd_path):
+	* src/view.c: (draw_markup_layer):
+		Fixed markup drawing errors when label is rotated.
+
 2008-03-03  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
