@@ -249,7 +249,6 @@ xml_doc_to_label (xmlDocPtr         doc,
 		  glXMLLabelStatus *status)
 {
 	xmlNodePtr  root;
-	xmlNsPtr    ns;
 	glLabel    *label;
 
 	gl_debug (DEBUG_XML, "START");
@@ -265,36 +264,36 @@ xml_doc_to_label (xmlDocPtr         doc,
 		return NULL;
 	}
 
-	ns = xmlSearchNsByHref (doc, root, (xmlChar *)LGL_XML_NAME_SPACE);
-        if (ns == NULL) {
- 		/* Try compatability mode 2.0 */
-                ns = xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT20_NAME_SPACE);
+        /* Try compatability mode 0.1 */
+        if (xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT01_NAME_SPACE))
+	{
+                g_message (_("Importing from glabels 0.1 format"));
+                g_message ("TODO");
+                label = NULL; /* TODO */
+                return label;
         }
-	if (ns != NULL) {
-		label = xml_parse_label (root, status);
-		if (label)
-			gl_label_set_compression (label, xmlGetDocCompressMode (doc));
-	} else {
-		/* Try compatability mode 0.1 */
-		ns = xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT01_NAME_SPACE);
-		if (ns != NULL)	{
-			g_message (_("Importing from glabels 0.1 format"));
-			g_message ("TODO");
-			label = NULL; /* TODO */
-		} else {
-			/* Try compatability mode 0.4 */
-			ns = xmlSearchNsByHref (doc, root,
-						(xmlChar *)COMPAT04_NAME_SPACE);
-			if (ns != NULL)	{
-				g_message (_("Importing from glabels 0.4 format"));
-				label = gl_xml_label_04_parse (root, status);
-			} else {
-                                g_message (_("bad document, unknown glabels Namespace"));
-                                *status = XML_LABEL_ERROR_OPEN_PARSE;
-                                return NULL;
-			}
-		}
-	}
+
+        /* Try compatability mode 0.4 */
+        if (xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT04_NAME_SPACE))
+	{
+                g_message (_("Importing from glabels 0.4 format"));
+                label = gl_xml_label_04_parse (root, status);
+                return label;
+        }
+
+        /* Test for current namespaces. */
+        if ( !xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT20_NAME_SPACE) &&
+             !xmlSearchNsByHref (doc, root, (xmlChar *)LGL_XML_NAME_SPACE) )
+        {
+                g_message (_("Unknown glabels Namespace -- Using %s"),
+                           LGL_XML_NAME_SPACE);
+        }
+
+        label = xml_parse_label (root, status);
+        if (label)
+        {
+                gl_label_set_compression (label, xmlGetDocCompressMode (doc));
+        }
 
 	gl_debug (DEBUG_XML, "END");
 

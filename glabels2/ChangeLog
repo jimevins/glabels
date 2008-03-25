@@ -1,3 +1,9 @@
+2008-03-24  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label.c: (xml_doc_to_label):
+		Bug #1872584.  Don't refuse to parse label file if namespace is
+		unrecognized -- it may be from a newer version of glabels.
+	
 2008-03-15  Jim Evins  <evins@snaught.com>
 
 	* data/templates/Makefile.am:
