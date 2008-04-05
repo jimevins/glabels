@@ -1,3 +1,15 @@
+2008-04-04  Jim Evins  <evins@snaught.com>
+
+	* data/templates/brother-other-templates.xml:
+		Added categories to existing templates.
+	* data/templates/misc-other-templates.xml:
+		Moved dymo templates to their own file.
+	* data/templates/Makefile.am:
+	* data/templates/dymo-other-templates.xml:
+		Additional dymo templates provided by Harald Welte <laforge@gnumonks.org>.
+	* AUTHORS:
+		Acknowledgement for above templates.
+
 2008-03-24  Jim Evins  <evins@snaught.com>
 
 	* src/xml-label.c: (xml_doc_to_label):
