@@ -10,6 +10,7 @@ templates_DATA = \
 	avery-other-templates.xml \
 	zweckform-iso-templates.xml \
 	brother-other-templates.xml \
+	dymo-other-templates.xml \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
 	misc-other-templates.xml
