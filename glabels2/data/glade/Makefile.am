@@ -10,7 +10,6 @@ glade_DATA = \
 	property-bar.glade		\
 	print-custom-widget.glade	\
 	wdgt-media-select.glade		\
-	wdgt-rotate-label.glade		\
 	new-label-dialog.glade
 
 EXTRA_DIST = $(glade_DATA)

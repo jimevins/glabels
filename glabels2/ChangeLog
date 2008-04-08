@@ -1,3 +1,15 @@
+2008-04-07  Jim Evins  <evins@snaught.com>
+
+	* src/wdgt-rotate-label.h:
+	* src/wdgt-rotate-label.c: (gl_wdgt_rotate_label_init),
+	(gl_wdgt_rotate_label_new), (toggled_cb), (create_pixbuf),
+	(gl_wdgt_rotate_label_get_state), (gl_wdgt_rotate_label_set_state),
+	(gl_wdgt_rotate_label_set_template_name):
+		Modified wdgt-rotate-label to better indicate the rotation choices.
+	* data/glade/Makefile.am:
+	* data/glade/wdgt-rotate-label.glade:
+		Deleted wdgt-rotate-label.glade.
+
 2008-04-04  Jim Evins  <evins@snaught.com>
 
 	* data/templates/brother-other-templates.xml:

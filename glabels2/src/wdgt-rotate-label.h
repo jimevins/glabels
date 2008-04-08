@@ -25,7 +25,7 @@
 #ifndef __WDGT_ROTATE_LABEL_H__
 #define __WDGT_ROTATE_LABEL_H__
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtkhbox.h>
 
 G_BEGIN_DECLS
 
@@ -45,13 +45,13 @@ typedef struct _glWdgtRotateLabelClass    glWdgtRotateLabelClass;
 typedef struct _glWdgtRotateLabelPrivate  glWdgtRotateLabelPrivate;
 
 struct _glWdgtRotateLabel {
-	GtkVBox                    parent_widget;
+	GtkHBox                    parent_widget;
 
 	glWdgtRotateLabelPrivate  *priv;
 };
 
 struct _glWdgtRotateLabelClass {
-	GtkVBoxClass parent_class;
+	GtkHBoxClass parent_class;
 
 	void (*changed) (glWdgtRotateLabel  *wdgt_rotate_label,
 			 gpointer            user_data);
