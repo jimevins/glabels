@@ -1516,6 +1516,7 @@
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <property name="group">img_file_radio</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -1648,6 +1649,7 @@
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
+			  <property name="group">data_literal_radio</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>

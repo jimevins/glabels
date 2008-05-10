@@ -1,3 +1,9 @@
+2008-05-09  Jim Evins  <evins@snaught.com>
+
+	* data/glade/object-editor.glade:
+		Bug #1959135.  A couple of radio buttons somehow became
+		ungrouped.
+
 2008-04-04  Jim Evins  <evins@snaught.com>
 
 	* data/templates/brother-other-templates.xml:
