@@ -116,6 +116,18 @@ AC_SUBST(LIBGLABELS_LIBS)
 
 
 dnl ---------------------------------------------------------------------------
+dnl - MYGAL prerequisites
+dnl ---------------------------------------------------------------------------
+PKG_CHECK_MODULES(MYGAL, \
+gtk+-2.0 >= $GTK_REQUIRED \
+libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED \
+)
+
+AC_SUBST(MYGAL_CFLAGS)
+AC_SUBST(MYGAL_LIBS)
+
+
+dnl ---------------------------------------------------------------------------
 dnl - Enable deprecation testing
 dnl ---------------------------------------------------------------------------
 AC_ARG_ENABLE(deprecations,
