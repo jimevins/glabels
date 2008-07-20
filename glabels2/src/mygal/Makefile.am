@@ -1,6 +1,9 @@
 INCLUDES = \
-	$(GLABELS_CFLAGS)
+	$(MYGAL_CFLAGS)
 
+
+libmygal_la_LDFLAGS=\
+        $(MYGAL_LIBS)
 
 noinst_LTLIBRARIES = libmygal.la
 
