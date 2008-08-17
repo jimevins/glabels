@@ -151,7 +151,7 @@ lglPaper *
 lgl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 {
 	lglPaper              *paper;
-	gchar                 *id, *name;
+	gchar                 *id, *name, *pwg_size;
 	gdouble                width, height;
 
 	LIBXML_TEST_VERSION;
@@ -163,10 +163,13 @@ lgl_xml_paper_parse_paper_node (xmlNodePtr paper_node)
 	width  = lgl_xml_get_prop_length (paper_node, "width", 0);
 	height = lgl_xml_get_prop_length (paper_node, "height", 0);
 
-	paper = lgl_paper_new (id, name, width, height);
+	pwg_size = lgl_xml_get_prop_string (paper_node, "pwg_size", NULL);
+
+	paper = lgl_paper_new (id, name, width, height, pwg_size);
 
 	g_free (id);
 	g_free (name);
+	g_free (pwg_size);
 
 	return paper;
 }

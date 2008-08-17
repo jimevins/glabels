@@ -425,24 +425,39 @@ set_page_size (glPrintOp  *op,
 {
         GtkPaperSize *psize;
         GtkPageSetup *su;
-        gchar        *name;
+        lglPaper     *paper;
 
-        name = lgl_db_lookup_paper_name_from_id (label->template->paper_id);
+	gl_debug (DEBUG_PRINT, "begin");
 
-        if (lgl_db_is_paper_id_other (label->template->paper_id))
+        paper = lgl_db_lookup_paper_from_id (label->template->paper_id);
+
+        if (!paper)
         {
-                psize = gtk_paper_size_new_custom (label->template->paper_id,
-                                                   name,
+                const gchar *name;
+
+                name = gtk_paper_size_get_default ();
+                psize = gtk_paper_size_new (name);
+
+                gl_debug (DEBUG_PRINT, "Using default size = \"%s\"", name);
+        }
+        else if (lgl_db_is_paper_id_other (paper->id))
+        {
+                psize = gtk_paper_size_new_custom (paper->id,
+                                                   paper->name,
                                                    label->template->page_width,
                                                    label->template->page_height,
                                                    GTK_UNIT_POINTS);
+                gl_debug (DEBUG_PRINT, "Using custom size = %g x %g points",
+                          label->template->page_width,
+                          label->template->page_height);
+
         }
         else
         {
-                /* Use default size. */
-                return;
+                psize = gtk_paper_size_new (paper->pwg_size);
+                gl_debug (DEBUG_PRINT, "Using PWG size \"%s\"", paper->pwg_size);
         }
-        g_free (name);
+        lgl_paper_free (paper);
 
         su = gtk_page_setup_new ();
         gtk_page_setup_set_paper_size (su, psize);
@@ -450,6 +465,8 @@ set_page_size (glPrintOp  *op,
         g_object_unref (su);
 
         gtk_paper_size_free (psize);
+
+	gl_debug (DEBUG_PRINT, "end");
 }
 
 /*--------------------------------------------------------------------------*/

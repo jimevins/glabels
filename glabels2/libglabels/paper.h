@@ -38,10 +38,11 @@ G_BEGIN_DECLS
 typedef struct _lglPaper lglPaper;
 
 struct _lglPaper {
-	gchar               *id;     /* Unique ID of paper definition */
-	gchar               *name;   /* Localized name of paper */
-	gdouble              width;  /* Width (in points) */
-	gdouble              height; /* Height (in points) */
+	gchar               *id;       /* Unique ID of paper definition */
+	gchar               *name;     /* Localized name of paper */
+	gdouble              width;    /* Width (in points) */
+	gdouble              height;   /* Height (in points) */
+	gchar               *pwg_size; /* PWG 5101.1-2002 size name */
 };
 
 
@@ -51,7 +52,8 @@ struct _lglPaper {
 lglPaper            *lgl_paper_new                 (gchar           *id,
 						    gchar           *name,
 						    gdouble          width,
-						    gdouble          height);
+						    gdouble          height,
+						    gchar           *pwg_size);
 
 lglPaper             *lgl_paper_dup                (const lglPaper   *orig);
 

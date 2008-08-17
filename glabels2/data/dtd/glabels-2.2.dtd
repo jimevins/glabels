@@ -101,6 +101,7 @@
                  id              %STRING_TYPE;           #REQUIRED
                  name            %STRING_TYPE;           #IMPLIED
                  _name           %STRING_TYPE;           #IMPLIED
+                 pwg_size        %STRING_TYPE;           #REQUIRED
                  width           %LENGTH_TYPE;           #REQUIRED
                  height          %LENGTH_TYPE;           #REQUIRED
 >
