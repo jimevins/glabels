@@ -55,11 +55,12 @@
 
 /**
  * lgl_paper_new:
- * @id:     Id of paper definition. (E.g. US-Letter, A4, etc.)  Should be
- *          unique.
- * @name:   Localized name of paper.
- * @width:  Width of paper in points.
- * @height: Height of paper in points.
+ * @id:       Id of paper definition. (E.g. US-Letter, A4, etc.)  Should be
+ *            unique.
+ * @name:     Localized name of paper.
+ * @width:    Width of paper in points.
+ * @height:   Height of paper in points.
+ * @pwg_size: PWG 5101.1-2002 size name.
  *
  * Allocates and constructs a new #lglPaper structure.
  *
@@ -70,15 +71,18 @@ lglPaper *
 lgl_paper_new (gchar             *id,
 	       gchar             *name,
 	       gdouble            width,
-	       gdouble            height)
+	       gdouble            height,
+	       gchar             *pwg_size)
 {
 	lglPaper *paper;
 
-	paper         = g_new0 (lglPaper,1);
-	paper->id     = g_strdup (id);
-	paper->name   = g_strdup (name);
-	paper->width  = width;
-	paper->height = height;
+	paper           = g_new0 (lglPaper,1);
+
+	paper->id       = g_strdup (id);
+	paper->name     = g_strdup (name);
+	paper->width    = width;
+	paper->height   = height;
+	paper->pwg_size = g_strdup (pwg_size);
 
 	return paper;
 }
@@ -101,10 +105,11 @@ lglPaper *lgl_paper_dup (const lglPaper *orig)
 
 	paper = g_new0 (lglPaper,1);
 
-	paper->id     = g_strdup (orig->id);
-	paper->name   = g_strdup (orig->name);
-	paper->width  = orig->width;
-	paper->height = orig->height;
+	paper->id       = g_strdup (orig->id);
+	paper->name     = g_strdup (orig->name);
+	paper->width    = orig->width;
+	paper->height   = orig->height;
+	paper->pwg_size = g_strdup (orig->pwg_size);
 
 	return paper;
 }
@@ -127,6 +132,9 @@ void lgl_paper_free (lglPaper *paper)
 
 		g_free (paper->name);
 		paper->name = NULL;
+
+		g_free (paper->pwg_size);
+		paper->pwg_size = NULL;
 
 		g_free (paper);
 	}

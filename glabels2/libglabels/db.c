@@ -115,7 +115,7 @@ lgl_db_init (void)
                 papers = read_papers ();
 
                 /* Create and append an "Other" entry. */
-                paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0);
+                paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0, NULL);
                 papers = g_list_append (papers, paper_other);
 
 	}
