@@ -1,0 +1,13 @@
+
+The purpose of this program is to read a (scanned) image containing a
+barcode. The image is then interpreted and the barcode is decoded.
+The decoded string is outputted to stdout.
+ 
+Currently, only Code-128 is supported.
+
+The program is GPL'd and it's the work of Tuukka Toivonen.
+
+The home page for this and other programs by Tuukka is 
+	http://www.ee.oulu.fi/~tuukkat/releases.html
+while a bare ls-like listing of all packages is at
+	http://www.ee.oulu.fi/~tuukkat/rel/

@@ -1,0 +1,194 @@
+<SECTION>
+<FILE>db</FILE>
+<INCLUDE>libglabels/db.h</INCLUDE>
+lglDbRegStatus
+<SUBSECTION Init Functions>
+lgl_db_init
+<SUBSECTION Paper Functions>
+lgl_db_get_paper_id_list
+lgl_db_free_paper_id_list
+lgl_db_get_paper_name_list
+lgl_db_free_paper_name_list
+lgl_db_lookup_paper_from_id
+lgl_db_lookup_paper_from_name
+lgl_db_lookup_paper_id_from_name
+lgl_db_lookup_paper_name_from_id
+lgl_db_is_paper_id_known
+lgl_db_is_paper_id_other
+<SUBSECTION Category Functions>
+lgl_db_get_category_id_list
+lgl_db_free_category_id_list
+lgl_db_get_category_name_list
+lgl_db_free_category_name_list
+lgl_db_lookup_category_from_id
+lgl_db_lookup_category_from_name
+lgl_db_lookup_category_id_from_name
+lgl_db_lookup_category_name_from_id
+lgl_db_is_category_id_known
+<SUBSECTION Brand Functions>
+lgl_db_get_brand_list
+lgl_db_free_brand_list
+<SUBSECTION Template Functions>
+lgl_db_register_template
+lgl_db_does_template_exist
+lgl_db_does_template_name_exist
+lgl_db_get_template_name_list_unique
+lgl_db_get_template_name_list_all
+lgl_db_free_template_name_list
+lgl_db_lookup_template_from_name
+<SUBSECTION Debugging Functions>
+lgl_db_print_known_papers
+lgl_db_print_known_categories
+lgl_db_print_known_templates
+lgl_db_print_aliases
+</SECTION>
+
+<SECTION>
+<FILE>template</FILE>
+<INCLUDE>libglabels/template.h</INCLUDE>
+lglTemplate
+<SUBSECTION Alias Structure>
+lglTemplateAlias
+<SUBSECTION Frame Structure>
+lglTemplateFrameShape
+lglTemplateFrame
+lglTemplateFrameAll
+lglTemplateFrameRect
+lglTemplateFrameRound
+lglTemplateFrameCD
+<SUBSECTION Layout Structure>
+lglTemplateLayout
+<SUBSECTION Markup Structure>
+lglTemplateMarkupType
+lglTemplateMarkup
+lglTemplateMarkupMargin
+lglTemplateMarkupLine
+lglTemplateMarkupCircle
+lglTemplateMarkupRect
+<SUBSECTION Origin Structure>
+lglTemplateOrigin
+<SUBSECTION Template Functions>
+lgl_template_new
+lgl_template_dup
+lgl_template_free
+lgl_template_add_category
+lgl_template_add_frame
+lgl_template_add_alias
+<SUBSECTION Template Query Functions>
+lgl_template_get_name
+lgl_template_do_templates_match
+lgl_template_does_brand_match
+lgl_template_does_page_size_match
+lgl_template_does_category_match
+<SUBSECTION Alias Functions>
+lgl_template_alias_new
+lgl_template_alias_dup
+lgl_template_alias_free
+<SUBSECTION Frame Functions>
+lgl_template_frame_rect_new
+lgl_template_frame_round_new
+lgl_template_frame_cd_new
+lgl_template_frame_dup
+lgl_template_frame_free
+lgl_template_frame_add_layout
+lgl_template_frame_add_markup
+<SUBSECTION Frame Frame Query Functions>
+lgl_template_frame_get_size
+lgl_template_frame_get_n_labels
+lgl_template_frame_get_origins
+<SUBSECTION Layout Functions>
+lgl_template_layout_new
+lgl_template_layout_dup
+lgl_template_layout_free
+<SUBSECTION Markup Functions>
+lgl_template_markup_margin_new
+lgl_template_markup_line_new
+lgl_template_markup_circle_new
+lgl_template_markup_rect_new
+lgl_template_markup_dup
+lgl_template_markup_free
+</SECTION>
+
+<SECTION>
+<FILE>paper</FILE>
+<INCLUDE>libglabels/paper.h</INCLUDE>
+lglPaper
+lgl_paper_new
+lgl_paper_dup
+lgl_paper_free
+</SECTION>
+
+<SECTION>
+<FILE>category</FILE>
+<INCLUDE>libglabels/category.h</INCLUDE>
+lglCategory
+lgl_category_new
+lgl_category_dup
+lgl_category_free
+</SECTION>
+
+<SECTION>
+<FILE>xml-paper</FILE>
+<INCLUDE>libglabels/xml-paper.h</INCLUDE>
+lgl_xml_paper_read_papers_from_file
+lgl_xml_paper_parse_papers_doc
+lgl_xml_paper_parse_paper_node
+</SECTION>
+
+<SECTION>
+<FILE>xml-category</FILE>
+<INCLUDE>libglabels/xml-category.h</INCLUDE>
+lgl_xml_category_read_categories_from_file
+lgl_xml_category_parse_categories_doc
+lgl_xml_category_parse_category_node
+</SECTION>
+
+<SECTION>
+<FILE>xml-template</FILE>
+<INCLUDE>libglabels/xml-templates.h</INCLUDE>
+lgl_xml_template_read_templates_from_file
+lgl_xml_template_parse_templates_doc
+lgl_xml_template_parse_template_node
+lgl_xml_template_write_templates_to_file
+lgl_xml_template_write_template_to_file
+lgl_xml_template_create_template_node
+</SECTION>
+
+<SECTION>
+<FILE>xml</FILE>
+<INCLUDE>libglabels/xml.h</INCLUDE>
+LGL_XML_NAME_SPACE
+<SUBSECTION Get Property Functions>
+lgl_xml_get_prop_string
+lgl_xml_get_prop_i18n_string
+lgl_xml_get_prop_double
+lgl_xml_get_prop_boolean
+lgl_xml_get_prop_int
+lgl_xml_get_prop_uint
+lgl_xml_get_prop_length
+<SUBSECTION Set Property Functions>
+lgl_xml_set_prop_string
+lgl_xml_set_prop_double
+lgl_xml_set_prop_boolean
+lgl_xml_set_prop_int
+lgl_xml_set_prop_uint_hex
+lgl_xml_set_prop_length
+<SUBSECTION Misc Functions>
+lgl_xml_is_node
+lgl_xml_get_node_content
+<SUBSECTION Configuration Functions>
+lgl_xml_set_default_units
+</SECTION>
+
+<SECTION>
+<FILE>enums</FILE>
+<INCLUDE>libglabels/enums.h</INCLUDE>
+lglUnitsType
+</SECTION>
+
+<SECTION>
+<FILE>str</FILE>
+<INCLUDE>libglabels/str.h</INCLUDE>
+lgl_str_utf8_casecmp
+</SECTION>
+

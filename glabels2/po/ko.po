@@ -1,0 +1,2543 @@
+# gLabels 한국어 번역 파일입니다.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels 2.3. pre0svn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-15 18:13-0400\n"
+"PO-Revision-Date: 2008-02-26 10:59+0900\n"
+"Last-Translator: YunSeok Choi <xein@naver.com>\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/glabels.c:55
+msgid "Show view debugging messages."
+msgstr "보기의 디버깅 메시지를 보이기"
+
+#: src/glabels.c:58
+msgid "Show item debugging messages."
+msgstr "아이템 디버깅 메시지를 보이기"
+
+#: src/glabels.c:61
+msgid "Show printing debugging messages."
+msgstr "인쇄 디버깅 메시지를 보이기"
+
+#: src/glabels.c:64
+msgid "Show prefs debugging messages."
+msgstr "Prefs 디버깅 메시지를 보이기"
+
+#: src/glabels.c:67
+msgid "Show file debugging messages."
+msgstr "파일 디버깅 메시지를 보이기"
+
+#: src/glabels.c:70
+msgid "Show document debugging messages."
+msgstr "문서 디버깅 메시지를 보이기"
+
+#: src/glabels.c:73
+msgid "Show template debugging messages."
+msgstr "Template 디버깅 메시지를 보이기"
+
+#: src/glabels.c:76
+msgid "Show paper debugging messages."
+msgstr "Paper 디버깅 메시지를 보이기"
+
+#: src/glabels.c:79
+msgid "Show xml debugging messages."
+msgstr "XML 디버깅 메시지를 보이기"
+
+#: src/glabels.c:82
+msgid "Show document merge debugging messages."
+msgstr "Document 여백 디버깅 메시지를 보이기"
+
+#: src/glabels.c:85
+msgid "Show commands debugging messages."
+msgstr "Command 디버깅 메시지를 보이기"
+
+#: src/glabels.c:88
+msgid "Show undo debugging messages."
+msgstr "Undo 디버깅 메시지를 보이기"
+
+#: src/glabels.c:91
+msgid "Show recent debugging messages."
+msgstr "최근의 디버깅 메시지를 보이기"
+
+#: src/glabels.c:94
+msgid "Show window debugging messages."
+msgstr "윈도우 디버깅 메시지를 보이기"
+
+#: src/glabels.c:97
+msgid "Show ui debugging messages."
+msgstr "GUI 디버깅 메시지를 보이기"
+
+#: src/glabels.c:100
+msgid "Show property_bar debugging messages."
+msgstr "속성도구 디버깅 메시지를 보이기"
+
+#: src/glabels.c:103
+msgid "Show media select widget debugging messages."
+msgstr "선택 제품 미디어 디버깅 메시지를 보이기"
+
+#: src/glabels.c:106
+msgid "Show mini preview widget debugging messages."
+msgstr "제품 작게 미리보기 디버깅 메시지를 보이기"
+
+#: src/glabels.c:109
+msgid "Show pixbuf cache debugging messages."
+msgstr "pixbuf cache 디버깅 메시지를 보이기"
+
+#: src/glabels.c:112
+msgid "Show widget debugging messages."
+msgstr "제품 디버깅 메시지를 보이기"
+
+#: src/glabels.c:115
+msgid "Show object editor debugging messages."
+msgstr "개채 편집기 디버깅 메시지를 보이기"
+
+#: src/glabels.c:118
+msgid "Turn on all debugging messages."
+msgstr "모든 디버깅 메시지 켜기"
+
+#: src/glabels.c:187
+msgid "Could not initialize Bonobo!\n"
+msgstr "Bonobo 초기화 할 수 없음！\n"
+
+#: src/glabels-batch.c:48
+msgid "print this message"
+msgstr "이 메시지를 인쇄"
+
+#: src/glabels-batch.c:50
+msgid "print the version of glabels-batch being used"
+msgstr "gLabel-batch 버전 인쇄"
+
+#: src/glabels-batch.c:52
+msgid "set output filename (default=\"output.ps\")"
+msgstr "출력 파일이름 지정 (기본 = \"output.ps\")"
+
+#: src/glabels-batch.c:52
+msgid "filename"
+msgstr "파일이름"
+
+#: src/glabels-batch.c:54
+msgid "number of sheets (default=1)"
+msgstr "용지 수(기본= 1)"
+
+#: src/glabels-batch.c:54
+msgid "sheets"
+msgstr "용지"
+
+#: src/glabels-batch.c:56
+msgid "number of copies (default=1)"
+msgstr "복사 수(기본= 1)"
+
+#: src/glabels-batch.c:56
+msgid "copies"
+msgstr "복사"
+
+#: src/glabels-batch.c:58
+#: src/print-dialog.c:336
+msgid "print outlines (to test printer alignment)"
+msgstr "외곽선 인쇄 (프린터 정렬 테스트)"
+
+#: src/glabels-batch.c:60
+#: src/print-dialog.c:344
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "거꾸로 인쇄 (거울 효과)"
+
+#: src/glabels-batch.c:96
+msgid "[OPTION...] GLABELS_FILE..."
+msgstr "[옵션...] gLabels 파일..."
+
+#: src/glabels-batch.c:116
+#, c-format
+msgid "missing glabels file\n"
+msgstr "gLabel 파일이 보이지 않음\n"
+
+#: src/glabels-batch.c:157
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "gLabel 파일  %s 을(를) 열 수 없습니다.\n"
+
+#: src/window.c:244
+msgid "(none) - gLabels"
+msgstr "(없음) - gLabels"
+
+#: src/window.c:414
+msgid "(modified)"
+msgstr "(수정됨)"
+
+#: src/stock.c:65
+#: data/ui/glabels-ui.xml.h:165
+msgid "_Select Mode"
+msgstr "모드 선택(_S)"
+
+#: src/stock.c:66
+#: data/ui/glabels-ui.xml.h:166
+msgid "_Text"
+msgstr "글자(_T)"
+
+#: src/stock.c:67
+#: data/ui/glabels-ui.xml.h:151
+msgid "_Line"
+msgstr "선(_L)"
+
+#: src/stock.c:68
+#: data/ui/glabels-ui.xml.h:133
+msgid "_Box"
+msgstr "사각형(_B)"
+
+#: src/stock.c:69
+#: data/ui/glabels-ui.xml.h:144
+msgid "_Ellipse"
+msgstr "타원(_E)"
+
+#: src/stock.c:70
+#: data/ui/glabels-ui.xml.h:149
+msgid "_Image"
+msgstr "그림(_I)"
+
+#: src/stock.c:71
+#: data/ui/glabels-ui.xml.h:11
+msgid "Bar_code"
+msgstr "바코드(_C)"
+
+#: src/stock.c:72
+msgid "_Merge Properties"
+msgstr "여백 속성(_M)"
+
+#: src/stock.c:73
+msgid "Object _Properties"
+msgstr "항목 속성(_P)"
+
+#: src/stock.c:74
+#: data/ui/glabels-ui.xml.h:13
+msgid "Bring to _Front"
+msgstr "앞으로 내기(_F)"
+
+#: src/stock.c:75
+#: data/ui/glabels-ui.xml.h:110
+msgid "Send to _Back"
+msgstr "뒤로 보내기(_B)"
+
+#: src/stock.c:76
+#: data/ui/glabels-ui.xml.h:97
+msgid "Rotate _Left"
+msgstr "왼쪽으로 회전(_L)"
+
+#: src/stock.c:77
+#: data/ui/glabels-ui.xml.h:98
+msgid "Rotate _Right"
+msgstr "오른쪽으로 회전(_R)"
+
+#: src/stock.c:78
+#: data/ui/glabels-ui.xml.h:52
+msgid "Flip _Horizontally"
+msgstr "수직 뒤집기(_H)"
+
+#: src/stock.c:79
+#: data/ui/glabels-ui.xml.h:53
+msgid "Flip _Vertically"
+msgstr "수평 뒤집기(_V)"
+
+#: src/stock.c:80
+#: data/ui/glabels-ui.xml.h:150
+msgid "_Lefts"
+msgstr "좌측(_L)"
+
+#: src/stock.c:81
+#: data/ui/glabels-ui.xml.h:162
+msgid "_Rights"
+msgstr "우측(_R)"
+
+#: src/stock.c:82
+#: data/ui/glabels-ui.xml.h:134
+msgid "_Centers"
+msgstr "중앙(_C)"
+
+#: src/stock.c:83
+#: data/ui/glabels-ui.xml.h:167
+msgid "_Tops"
+msgstr "상위(_T)"
+
+#: src/stock.c:84
+msgid "Bottoms"
+msgstr "하위"
+
+#: src/stock.c:85
+msgid "Centers"
+msgstr "중앙"
+
+#: src/stock.c:86
+#: src/stock.c:87
+#: data/ui/glabels-ui.xml.h:62
+msgid "Label Ce_nter"
+msgstr "라벨 중앙(_N)"
+
+#: src/stock.c:88
+#: data/ui/glabels-ui.xml.h:51
+msgid "Fill color"
+msgstr "색 채우기"
+
+#: src/stock.c:89
+#: data/ui/glabels-ui.xml.h:64
+msgid "Line color"
+msgstr "선 색상"
+
+#: src/stock.c:90
+#: src/stock.c:92
+msgid "Linked"
+msgstr "연결"
+
+#: src/stock.c:91
+#: src/stock.c:93
+msgid "Not Linked"
+msgstr "연결되지 않음"
+
+#: src/ui-property-bar.c:345
+#: src/object-editor.c:499
+msgid "Default"
+msgstr "기본"
+
+#: src/ui-property-bar.c:360
+#: src/object-editor.c:512
+msgid "No fill"
+msgstr "채우기 없음"
+
+#: src/ui-property-bar.c:375
+#: src/object-editor.c:505
+msgid "No line"
+msgstr "선 없음"
+
+#: src/ui-sidebar.c:180
+msgid "Object properties"
+msgstr "항목 속성"
+
+#: src/commands.c:385
+msgid ""
+"A label and business card creation program for GNOME.\n"
+" \n"
+"Glabels is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.\n"
+" \n"
+"This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+msgstr ""
+"GNOME 에서 Label과 명함을 제작하는 프로그램입니다.\n"
+"\n"
+"Glabels는 자유소프트웨어 입니다; 여러분은 이 프로그램을 GNU(General Public License)에 따라 자유롭게 수정 배포 할 수 있습니다. 이 프로그램은 GNU의 Ver.2 를 따르고 있습니다. \n"
+"\n"
+"이 프로그램은 어떠한 저작권료 없이 사용되어 질 수 있습니다.(번역주 : 번역자는 GNU를 깊이 알지 못합니다. 이 부분의 번역에 지적하고픈 부분이 있다면 번역 자료와 함께 연락주십시오. xein@naver.com)\n"
+
+#: src/commands.c:399
+msgid "See the file AUTHORS for additional credits,"
+msgstr "참여 제작자 AUTHORS 파일을 보세요."
+
+#: src/commands.c:400
+msgid "or visit http://glabels.sourceforge.net/"
+msgstr "또는 이곳을 방문 하세요. http://glabels.sourceforge.net/"
+
+#: src/commands.c:409
+msgid " "
+msgstr " "
+
+#: src/commands.c:424
+msgid "glabels"
+msgstr "gLabels"
+
+#: src/file.c:100
+msgid "New Label or Card"
+msgstr "새 라벨 또는 카드"
+
+#: src/file.c:132
+#: src/file.c:304
+msgid "Media Type"
+msgstr "매체 형식"
+
+#: src/file.c:138
+#: src/file.c:310
+msgid "Label orientation"
+msgstr "라벨의 방향"
+
+#: src/file.c:269
+msgid "Label properties"
+msgstr "라벨 속성"
+
+#: src/file.c:452
+#: src/file.c:870
+msgid "All files"
+msgstr "모든 파일"
+
+#: src/file.c:457
+#: src/file.c:875
+msgid "gLabels documents"
+msgstr "gLabels 문서"
+
+#: src/file.c:505
+#: src/file.c:617
+#: src/file.c:934
+#: src/file.c:1130
+msgid "Empty file name selection"
+msgstr "비어있는 파일 이름"
+
+#: src/file.c:506
+#: src/file.c:520
+#: src/file.c:618
+#: src/file.c:632
+msgid "Please select a file or supply a valid file name"
+msgstr "지원하는 파일을 선택하세요."
+
+#: src/file.c:519
+#: src/file.c:631
+msgid "File does not exist"
+msgstr "파일이 없습니다."
+
+#: src/file.c:563
+#: data/ui/glabels-ui.xml.h:75
+msgid "Open"
+msgstr "열기"
+
+#: src/file.c:565
+msgid "Open label"
+msgstr "라벨 열기"
+
+#: src/file.c:707
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "\"%s\" 파일을 열 수 없습니다."
+
+#: src/file.c:715
+msgid "Not a supported file format"
+msgstr "지원되지 않는 파일 형식"
+
+#: src/file.c:797
+#: src/file.c:979
+#: src/file.c:1174
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "\"%s\" 파일을 저장할 수 없습니다."
+
+#: src/file.c:805
+#: src/file.c:987
+#: src/file.c:1182
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "저장하는데 오류가 발생했습니다. 파일을 저장하지 못했습니다."
+
+#: src/file.c:848
+#: src/file.c:1048
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "\"%s\" 이름으로 저장"
+
+#: src/file.c:935
+#: src/file.c:1131
+msgid "Please supply a valid file name"
+msgstr "유효한 파일이름이 필요합니다."
+
+#: src/file.c:952
+#: src/file.c:1147
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "\"%s\"파일이름으로 덮어쓰시겠습니까?"
+
+#: src/file.c:960
+#: src/file.c:1155
+msgid "File already exists."
+msgstr "파일이름이 존재합니다."
+
+#: src/file.c:1271
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "닫기전에 바뀐부분을 \"%s\"이름으로 저장하시겠습니까?"
+
+#: src/file.c:1279
+msgid "Your changes will be lost if you don't save them."
+msgstr "저장하지 않으면, 바뀐부분을 잃어버리게 됩니다."
+
+#: src/file.c:1282
+msgid "Close without saving"
+msgstr "저장없이 닫기"
+
+#. Should not happen
+#: src/prefs.c:156
+#: src/prefs.c:163
+#: data/glade/prefs-dialog.glade.h:23
+#: data/glade/object-editor.glade.h:37
+msgid "points"
+msgstr "포인트"
+
+#: src/prefs.c:158
+#: data/glade/object-editor.glade.h:36
+#: data/glade/template-designer.glade.h:74
+msgid "inches"
+msgstr "[인치]"
+
+#: src/prefs.c:160
+msgid "mm"
+msgstr "[밀리미터]"
+
+#: src/prefs-dialog.c:248
+#: data/glade/prefs-dialog.glade.h:22
+msgid "gLabels Preferences"
+msgstr "gLabels 환경설정"
+
+#.
+#. * Submenu: Order
+#.
+#: src/view.c:3570
+#: data/ui/glabels-ui.xml.h:157
+msgid "_Order"
+msgstr "순서(_O)"
+
+#.
+#. * Submenu: Rotate/Flip
+#.
+#: src/view.c:3591
+#: data/ui/glabels-ui.xml.h:163
+msgid "_Rotate/Flip"
+msgstr "회전/뒤집기(_R)"
+
+#.
+#. * Submenu: Align Horizontally
+#.
+#: src/view.c:3624
+msgid "Align _Horizontally"
+msgstr "가로로 정렬(_H)"
+
+#.
+#. * Submenu: Align Vertically
+#.
+#: src/view.c:3663
+msgid "Align _Vertically"
+msgstr "세로로 정렬(_V)"
+
+#: src/view.c:3724
+#: data/ui/glabels-ui.xml.h:140
+msgid "_Delete"
+msgstr "삭제(_D)"
+
+#. Build editor.
+#: src/view-box.c:223
+msgid "Box object properties"
+msgstr "사각형 개체 속성"
+
+#. Build editor.
+#: src/view-ellipse.c:223
+msgid "Ellipse object properties"
+msgstr "타원 개체 속성"
+
+#. Build editor.
+#: src/view-line.c:223
+msgid "Line object properties"
+msgstr "선 개체 속성"
+
+#. Build editor.
+#: src/view-image.c:222
+msgid "Image object properties"
+msgstr "그림 개체 속성"
+
+#. Build editor.
+#: src/view-text.c:250
+msgid "Text object properties"
+msgstr "글자 개체 속성"
+
+#: src/view-text.c:562
+#: data/glade/object-editor.glade.h:28
+msgid "Text"
+msgstr "글자"
+
+#. Build editor.
+#: src/view-barcode.c:209
+msgid "Barcode object properties"
+msgstr "바코드 개체 속성"
+
+#: src/view-barcode.c:579
+#: src/print.c:1088
+msgid "Invalid barcode data"
+msgstr "잘못된 바코드 데이터"
+
+#: src/merge-properties-dialog.c:231
+msgid "Merge Properties"
+msgstr "여백 속성"
+
+#. ---- Source section ----
+#: src/merge-properties-dialog.c:237
+msgid "Source"
+msgstr "소스"
+
+#: src/merge-properties-dialog.c:245
+msgid "Format:"
+msgstr "서식:"
+
+#. Location line
+#: src/merge-properties-dialog.c:273
+msgid "Location:"
+msgstr "장소:"
+
+#: src/merge-properties-dialog.c:282
+#: src/merge-properties-dialog.c:393
+msgid "Select merge-database source"
+msgstr "병합 데이터베이스 소스 선택"
+
+#: src/merge-properties-dialog.c:289
+#: src/merge-properties-dialog.c:404
+msgid "N/A"
+msgstr "N/A"
+
+#. ---- Sample Fields section ----
+#: src/merge-properties-dialog.c:300
+msgid "Record selection/preview:"
+msgstr "선택 기록/미리보기:"
+
+#: src/merge-properties-dialog.c:326
+msgid "Select"
+msgstr "선택"
+
+#: src/merge-properties-dialog.c:334
+msgid "Record/Field"
+msgstr "기록/범위"
+
+#: src/merge-properties-dialog.c:342
+#: data/glade/object-editor.glade.h:9
+msgid "Data"
+msgstr "데이터"
+
+#: src/print-dialog.c:266
+#: data/ui/glabels-ui.xml.h:82
+msgid "Print"
+msgstr "인쇄"
+
+#: src/print-dialog.c:281
+msgid "_Job"
+msgstr "작업(_J)"
+
+#: src/print-dialog.c:286
+msgid "P_rinter"
+msgstr "프린터(_R)"
+
+#. ----------- Add simple-copies widget ------------
+#: src/print-dialog.c:314
+msgid "Copies"
+msgstr "매수"
+
+#. ------- Add merge control widget ------------
+#: src/print-dialog.c:322
+msgid "Document merge control"
+msgstr "문서 여백 제어"
+
+#. ----------- Add custom print options area ------------
+#: src/print-dialog.c:330
+msgid "Options"
+msgstr "옵션"
+
+#: src/print-dialog.c:351
+msgid "print crop marks"
+msgstr "자르기 표시 인쇄"
+
+#: src/print-dialog.c:553
+#: src/print-dialog.c:592
+msgid "Print preview"
+msgstr "인쇄 미리보기"
+
+#: src/template-designer.c:409
+#: data/glade/template-designer.glade.h:73
+msgid "gLabels Template Designer"
+msgstr "gLabels 서식 디자이너"
+
+#: src/bc.c:60
+msgid "POSTNET (any)"
+msgstr "POSTNET (임의)"
+
+#: src/bc.c:63
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (ZIP만)"
+
+#: src/bc.c:66
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: src/bc.c:69
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: src/bc.c:72
+msgid "EAN (any)"
+msgstr "EAN (임의)"
+
+#: src/bc.c:75
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: src/bc.c:78
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: src/bc.c:81
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: src/bc.c:84
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: src/bc.c:87
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: src/bc.c:90
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: src/bc.c:93
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A 또는 UPC-E)"
+
+#: src/bc.c:96
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: src/bc.c:99
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: src/bc.c:102
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: src/bc.c:105
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: src/bc.c:108
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: src/bc.c:111
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: src/bc.c:114
+msgid "ISBN"
+msgstr "ISBN"
+
+#: src/bc.c:117
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: src/bc.c:120
+msgid "Code 39"
+msgstr "Code 39"
+
+#: src/bc.c:123
+msgid "Code 128"
+msgstr "Code 128"
+
+#: src/bc.c:126
+msgid "Code 128C"
+msgstr "Code 128C"
+
+#: src/bc.c:129
+msgid "Code 128B"
+msgstr "Code 128B"
+
+#: src/bc.c:132
+msgid "Interleaved 2 of 5"
+msgstr "Interleaved 2 of 5"
+
+#: src/bc.c:135
+msgid "Codabar"
+msgstr "Codabar"
+
+#: src/bc.c:138
+msgid "MSI"
+msgstr "MSI"
+
+#: src/bc.c:141
+msgid "Plessey"
+msgstr "Plessey"
+
+#: src/label.c:569
+msgid "Untitled"
+msgstr "제목없음"
+
+#: src/xml-label.c:176
+#: src/xml-label.c:213
+msgid "xmlParseFile error"
+msgstr "xmlParse파일 오류"
+
+#: src/xml-label.c:250
+msgid "No document root"
+msgstr "root 문서가 아님"
+
+#: src/xml-label.c:264
+msgid "Importing from glabels 0.1 format"
+msgstr "gLabels 0.1로 부터 가져오기"
+
+#: src/xml-label.c:272
+msgid "Importing from glabels 0.4 format"
+msgstr "gLabels 0.4로 부터 가져오기"
+
+#: src/xml-label.c:279
+msgid "Importing from glabels 1.91 format"
+msgstr "gLabels 1.91로 부터 가져오기"
+
+#: src/xml-label.c:282
+msgid "bad document, unknown glabels Namespace"
+msgstr "잘못된 문서, 알 수 없는 Glabels 이름공간"
+
+#: src/xml-label.c:311
+#: src/xml-label-04.c:75
+#: src/xml-label-191.c:131
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "잘못된 Root 노드 = \"%s\""
+
+#: src/xml-label.c:348
+#: src/xml-label-191.c:165
+#, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "문서 노드 내의 잘못된 노드 = \"%s\""
+
+#: src/xml-label.c:393
+#: src/xml-label-04.c:123
+#: src/xml-label-191.c:197
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "잘못된 노드 = \"%s\""
+
+#: src/xml-label.c:796
+#: src/xml-label-191.c:605
+#, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "데이터 노드 내의 잘못된 노드 = \"%s\""
+
+#: src/xml-label.c:962
+#: libglabels/xml-template.c:535
+msgid "Utf8 conversion error."
+msgstr "Utf8 변환 에러"
+
+#: src/xml-label.c:969
+#: libglabels/xml-template.c:542
+msgid "Problem saving xml file."
+msgstr "XML 파일 저장에 문제가 있습니다."
+
+#. This should always be an id, but just in case a name
+#. slips by!
+#: src/xml-label-191.c:680
+#: libglabels/xml-template.c:199
+#, c-format
+msgid "Unknown page size id \"%s\", trying as name"
+msgstr "알 수 없는 용지 크기 ID \"%s\"。名前として扱います。"
+
+#: src/xml-label-191.c:690
+#: libglabels/xml-template.c:209
+#, c-format
+msgid "Unknown page size id or name \"%s\""
+msgstr "알 수 없는 용지 크기 ID 또는 이름 \"%s\""
+
+#: src/merge.c:172
+#: src/merge.c:213
+#: src/merge.c:399
+#: src/merge.c:402
+msgid "None"
+msgstr "없음"
+
+#: src/merge-init.c:53
+msgid "Text file with comma delimeters (CSV)"
+msgstr "콤마로 구분된 텍스트파일(CSV)"
+
+#: src/merge-init.c:60
+msgid "Text file with colon delimeters"
+msgstr "콜론으로 구분된 텍스트 파일"
+
+#: src/merge-init.c:67
+msgid "Text file with tab delimeters"
+msgstr "텝으로 구분된 텍스트 파일"
+
+#: src/wdgt-image-select.c:201
+#: data/glade/object-editor.glade.h:11
+msgid "File:"
+msgstr "파일:"
+
+#: src/wdgt-image-select.c:245
+#: data/glade/object-editor.glade.h:16
+msgid "Key:"
+msgstr "키:"
+
+#: src/wdgt-print-copies.c:179
+msgid "Sheets:"
+msgstr "용지:"
+
+#: src/wdgt-print-copies.c:197
+msgid "Labels"
+msgstr "라벨"
+
+#: src/wdgt-print-copies.c:200
+msgid "from:"
+msgstr "부터:"
+
+#: src/wdgt-print-copies.c:207
+msgid "to:"
+msgstr "에게:"
+
+#: src/wdgt-print-merge.c:178
+msgid "Start on label"
+msgstr "라벨의 시작"
+
+#: src/wdgt-print-merge.c:186
+msgid "on 1st sheet"
+msgstr "첫번째 용지에서"
+
+#: src/wdgt-print-merge.c:195
+msgid "Copies:"
+msgstr "매수:"
+
+#: src/wdgt-print-merge.c:201
+msgid "Collate"
+msgstr "제본"
+
+#: src/wdgt-media-select.c:269
+#: data/glade/template-designer.glade.h:29
+msgid "Description:"
+msgstr "설명:"
+
+#: src/wdgt-media-select.c:279
+#: data/glade/template-designer.glade.h:53
+msgid "Page size:"
+msgstr "용지 크기:"
+
+#: src/wdgt-media-select.c:290
+msgid "Label size:"
+msgstr "라벨 크기:"
+
+#: src/wdgt-media-select.c:301
+msgid "Layout:"
+msgstr "배치:"
+
+#: src/wdgt-media-select.c:578
+#, c-format
+msgid "%d x %d  (%d per sheet)"
+msgstr "%d x %d  (용지의 %d)"
+
+#: src/wdgt-media-select.c:582
+#, c-format
+msgid "%d per sheet"
+msgstr "용지의 %d"
+
+#: src/wdgt-media-select.c:614
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
+
+#: src/wdgt-media-select.c:619
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
+
+#: src/wdgt-media-select.c:630
+#: src/wdgt-media-select.c:644
+#, c-format
+msgid "%s %s diameter"
+msgstr "지름 %s %s"
+
+#: src/wdgt-media-select.c:634
+#: src/wdgt-media-select.c:648
+#, c-format
+msgid "%.5g %s diameter"
+msgstr "지름 %.5g %s"
+
+#: src/wdgt-rotate-label.c:193
+msgid "Rotate"
+msgstr "회전"
+
+#. This is the default custom color
+#: src/mygal/color-palette.c:396
+msgid "custom"
+msgstr "임의의"
+
+#. "Custom" color - we'll pop up a GnomeColorPicker
+#: src/mygal/color-palette.c:438
+msgid "Custom Color:"
+msgstr "임의의 색상:"
+
+#: src/mygal/color-palette.c:446
+msgid "Choose Custom Color"
+msgstr "임의의 색상 선택"
+
+#: src/mygal/color-palette.c:579
+msgid "black"
+msgstr "검은색"
+
+#: src/mygal/color-palette.c:580
+msgid "light brown"
+msgstr "밝은 갈색"
+
+#: src/mygal/color-palette.c:581
+msgid "brown gold"
+msgstr "고동색"
+
+#: src/mygal/color-palette.c:582
+msgid "dark green #2"
+msgstr "어두운 녹색 #2"
+
+#: src/mygal/color-palette.c:583
+msgid "navy"
+msgstr "남색"
+
+#: src/mygal/color-palette.c:584
+#: src/mygal/color-palette.c:640
+msgid "dark blue"
+msgstr "어두운 파랑색"
+
+#: src/mygal/color-palette.c:585
+msgid "purple #2"
+msgstr "자주색 #2"
+
+#: src/mygal/color-palette.c:586
+msgid "very dark gray"
+msgstr "매우 어두운 회색"
+
+#: src/mygal/color-palette.c:589
+#: src/mygal/color-palette.c:645
+msgid "dark red"
+msgstr "어두운 빨강색"
+
+#: src/mygal/color-palette.c:590
+msgid "red-orange"
+msgstr "적오렌지색"
+
+#: src/mygal/color-palette.c:591
+msgid "gold"
+msgstr "금색"
+
+#: src/mygal/color-palette.c:592
+msgid "dark green"
+msgstr "어두운 녹색"
+
+#: src/mygal/color-palette.c:593
+#: src/mygal/color-palette.c:646
+msgid "dull blue"
+msgstr "탁한 파랑색"
+
+#: src/mygal/color-palette.c:594
+#: src/mygal/color-palette.c:647
+msgid "blue"
+msgstr "파랑색"
+
+#: src/mygal/color-palette.c:595
+msgid "dull purple"
+msgstr "탁한 자주색"
+
+#: src/mygal/color-palette.c:596
+msgid "dark grey"
+msgstr "어두운 회색"
+
+#: src/mygal/color-palette.c:599
+msgid "red"
+msgstr "빨강색"
+
+#: src/mygal/color-palette.c:600
+msgid "orange"
+msgstr "오렌지색"
+
+#: src/mygal/color-palette.c:601
+msgid "lime"
+msgstr "라임색"
+
+#: src/mygal/color-palette.c:602
+msgid "dull green"
+msgstr "탁한 녹색"
+
+#: src/mygal/color-palette.c:603
+msgid "dull blue #2"
+msgstr "탁한 파랑색#2"
+
+#: src/mygal/color-palette.c:604
+msgid "sky blue #2"
+msgstr "하늘색 #2"
+
+#: src/mygal/color-palette.c:605
+#: src/mygal/color-palette.c:644
+msgid "purple"
+msgstr "자주색"
+
+#: src/mygal/color-palette.c:606
+msgid "gray"
+msgstr "회색"
+
+#: src/mygal/color-palette.c:609
+#: src/mygal/color-palette.c:641
+msgid "magenta"
+msgstr "마젠타색"
+
+#: src/mygal/color-palette.c:610
+msgid "bright orange"
+msgstr "밝은 오렌지색"
+
+#: src/mygal/color-palette.c:611
+#: src/mygal/color-palette.c:642
+msgid "yellow"
+msgstr "노랑색"
+
+#: src/mygal/color-palette.c:612
+msgid "green"
+msgstr "녹색"
+
+#: src/mygal/color-palette.c:613
+#: src/mygal/color-palette.c:643
+msgid "cyan"
+msgstr "청록색"
+
+#: src/mygal/color-palette.c:614
+msgid "bright blue"
+msgstr "밝은 파랑색"
+
+#: src/mygal/color-palette.c:615
+#: src/mygal/color-palette.c:632
+msgid "red purple"
+msgstr "빨간 자주색"
+
+#: src/mygal/color-palette.c:616
+msgid "light grey"
+msgstr "가벼운 회색"
+
+#: src/mygal/color-palette.c:619
+#: src/mygal/color-palette.c:636
+msgid "pink"
+msgstr "분홍색"
+
+#: src/mygal/color-palette.c:620
+msgid "light orange"
+msgstr "가벼운 오렌지색"
+
+#: src/mygal/color-palette.c:621
+#: src/mygal/color-palette.c:633
+msgid "light yellow"
+msgstr "가벼운 노랑색"
+
+#: src/mygal/color-palette.c:622
+msgid "light green"
+msgstr "가벼운 녹색"
+
+#: src/mygal/color-palette.c:623
+msgid "light cyan"
+msgstr "가벼운 청록색"
+
+#: src/mygal/color-palette.c:624
+#: src/mygal/color-palette.c:634
+msgid "light blue"
+msgstr "가벼운 바랑색"
+
+#: src/mygal/color-palette.c:625
+#: src/mygal/color-palette.c:638
+msgid "light purple"
+msgstr "가벼운 자주색"
+
+#: src/mygal/color-palette.c:626
+msgid "white"
+msgstr "흰색"
+
+#: src/mygal/color-palette.c:631
+msgid "purplish blue"
+msgstr "자주빛 파랑색"
+
+#: src/mygal/color-palette.c:635
+msgid "dark purple"
+msgstr "어두운 자주색"
+
+#: src/mygal/color-palette.c:637
+msgid "sky blue"
+msgstr "하늘색"
+
+#: libglabels/template.c:848
+#, c-format
+msgid "Generic %s full page"
+msgstr "Generic %s 전면에 걸친"
+
+#: libglabels/template.c:897
+msgid "No template files found!"
+msgstr "서식파일을 찾을 수 없음!"
+
+#. Create and append an "Other" entry.
+#: libglabels/paper.c:67
+msgid "Other"
+msgstr "직접지정"
+
+#: libglabels/paper.c:361
+msgid "No paper files found!"
+msgstr "용지 파일을 찾을 수 없음!"
+
+#: data/ui/glabels-ui.xml.h:1
+msgid "About glabels"
+msgstr "gLabels에 대해"
+
+#: data/ui/glabels-ui.xml.h:2
+msgid "About..."
+msgstr "정보..."
+
+#: data/ui/glabels-ui.xml.h:3
+msgid "Align _Horizontal"
+msgstr "세로로 정렬(_H)"
+
+#: data/ui/glabels-ui.xml.h:4
+msgid "Align _Vertical"
+msgstr "가로로 정렬(_V)"
+
+#: data/ui/glabels-ui.xml.h:5
+msgid "Align objects to bottoms"
+msgstr "개체 아래로 정렬"
+
+#: data/ui/glabels-ui.xml.h:6
+msgid "Align objects to horizontal centers"
+msgstr "개체 세로 중앙으로 정렬"
+
+#: data/ui/glabels-ui.xml.h:7
+msgid "Align objects to left edges"
+msgstr "개체 좌측 가장자리로 정렬"
+
+#: data/ui/glabels-ui.xml.h:8
+msgid "Align objects to right edges"
+msgstr "개체 우측 가장자리로 정렬"
+
+#: data/ui/glabels-ui.xml.h:9
+msgid "Align objects to tops"
+msgstr "개체 상위로 정렬"
+
+#: data/ui/glabels-ui.xml.h:10
+msgid "Align objects to vertical centers"
+msgstr "개체 수평 중앙으로 정렬"
+
+#: data/ui/glabels-ui.xml.h:12
+msgid "Bold"
+msgstr "굵게"
+
+#: data/ui/glabels-ui.xml.h:14
+msgid "Center align"
+msgstr "중앙 정렬"
+
+#: data/ui/glabels-ui.xml.h:15
+msgid "Center objects to horizontal label center"
+msgstr "중앙 개체를 수직라벨 중앙으로"
+
+#: data/ui/glabels-ui.xml.h:16
+msgid "Center objects to vertical label center"
+msgstr "중앙 개체를 수평라벨 중상으로"
+
+#: data/ui/glabels-ui.xml.h:17
+msgid "Change the visibility of markup lines in the current window"
+msgstr "현재 윈도우의 보이는 마크업 선 변경"
+
+#: data/ui/glabels-ui.xml.h:18
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "현재 윈도우의 보이는 그리기 도구 변경"
+
+#: data/ui/glabels-ui.xml.h:19
+msgid "Change the visibility of the grid in the current window"
+msgstr "현재 윈도우의 보이는 그리드 변경"
+
+#: data/ui/glabels-ui.xml.h:20
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "현재 윈도우의 보이는 주 도구 변경"
+
+#: data/ui/glabels-ui.xml.h:21
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "현재 윈도우의 보이는 속성 도구 변경"
+
+#: data/ui/glabels-ui.xml.h:22
+msgid "Close"
+msgstr "닫기"
+
+#: data/ui/glabels-ui.xml.h:23
+msgid "Close the current file"
+msgstr "현재 파일을 닫기"
+
+#: data/ui/glabels-ui.xml.h:24
+msgid "Configure the application"
+msgstr "gLabel 구성"
+
+#: data/ui/glabels-ui.xml.h:25
+msgid "Contents"
+msgstr "목차"
+
+#: data/ui/glabels-ui.xml.h:26
+msgid "Copy"
+msgstr "복사"
+
+#: data/ui/glabels-ui.xml.h:27
+msgid "Copy the selection"
+msgstr "선택 복사"
+
+#: data/ui/glabels-ui.xml.h:28
+msgid "Create a custom template"
+msgstr "임의의 서식 만들기"
+
+#: data/ui/glabels-ui.xml.h:29
+msgid "Create a new document"
+msgstr "새로운 문서 만들기"
+
+#: data/ui/glabels-ui.xml.h:30
+msgid "Create barcode object"
+msgstr "바코드 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:31
+msgid "Create box/rectangle object"
+msgstr "사각형/직사각형 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:32
+msgid "Create ellipse/circle object"
+msgstr "타원/원형 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:33
+msgid "Create image object"
+msgstr "그림 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:34
+msgid "Create line object"
+msgstr "선 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:35
+msgid "Create text object"
+msgstr "글자 개체 만들기"
+
+#: data/ui/glabels-ui.xml.h:36
+msgid "Cu_t"
+msgstr "자르기(_T)"
+
+#: data/ui/glabels-ui.xml.h:37
+msgid "Customize"
+msgstr "커스터마이즈"
+
+#: data/ui/glabels-ui.xml.h:38
+msgid "Customize Drawing Toolbar"
+msgstr "그리기 도구 커스터마이즈"
+
+#: data/ui/glabels-ui.xml.h:39
+msgid "Customize Main Toolbar"
+msgstr "주 도구 커스터마이즈"
+
+#: data/ui/glabels-ui.xml.h:40
+msgid "Customize Property Toolbar"
+msgstr "속성 도구 커스터마이즈"
+
+#: data/ui/glabels-ui.xml.h:41
+msgid "Customize toolbars"
+msgstr "도구 커스터마이즈"
+
+#: data/ui/glabels-ui.xml.h:42
+msgid "Cut"
+msgstr "잘라내기"
+
+#: data/ui/glabels-ui.xml.h:43
+msgid "Cut the selection"
+msgstr "선택한것 잘라내기"
+
+#: data/ui/glabels-ui.xml.h:44
+msgid "Decrease magnification"
+msgstr "확대 감소"
+
+#: data/ui/glabels-ui.xml.h:45
+msgid "Delete"
+msgstr "삭제"
+
+#: data/ui/glabels-ui.xml.h:46
+msgid "Delete the selected objects"
+msgstr "선택한 개체 삭제"
+
+#: data/ui/glabels-ui.xml.h:47
+msgid "Drawing toolbar"
+msgstr "그리기 도구"
+
+#: data/ui/glabels-ui.xml.h:48
+msgid "Dump XML"
+msgstr "XML 덤프"
+
+#: data/ui/glabels-ui.xml.h:49
+msgid "Dump the GUI Xml description"
+msgstr "GUI의 XML설명 덤프"
+
+#: data/ui/glabels-ui.xml.h:50
+msgid "Edit merge properties"
+msgstr "여백 속성 편집"
+
+#: data/ui/glabels-ui.xml.h:54
+msgid "Flip object horizontally"
+msgstr "수직 개체 뒤집기"
+
+#: data/ui/glabels-ui.xml.h:55
+msgid "Flip object vertically"
+msgstr "수평 개체 뒤집기"
+
+#: data/ui/glabels-ui.xml.h:56
+msgid "Font name"
+msgstr "글꼴"
+
+#: data/ui/glabels-ui.xml.h:57
+msgid "Font selector"
+msgstr "글꼴 선택기"
+
+#: data/ui/glabels-ui.xml.h:58
+msgid "Font size"
+msgstr "글꼴 크기"
+
+#: data/ui/glabels-ui.xml.h:59
+msgid "Icon and _Text"
+msgstr "아이콘과 글자(_T)"
+
+#: data/ui/glabels-ui.xml.h:60
+msgid "Increase magnification"
+msgstr "상승 확대"
+
+#: data/ui/glabels-ui.xml.h:61
+msgid "Italic"
+msgstr "이탤릭"
+
+#: data/ui/glabels-ui.xml.h:63
+msgid "Left align"
+msgstr "왼쪽 정렬"
+
+#: data/ui/glabels-ui.xml.h:65
+msgid "Line width"
+msgstr "선 넓이"
+
+#: data/ui/glabels-ui.xml.h:66
+msgid "Lower object to bottom"
+msgstr "개체를 하단으로 내리기"
+
+#: data/ui/glabels-ui.xml.h:67
+msgid "M_arkup"
+msgstr "마크업(_A)"
+
+#: data/ui/glabels-ui.xml.h:68
+msgid "Main toolbar"
+msgstr "주 도구"
+
+#: data/ui/glabels-ui.xml.h:69
+msgid "Markup"
+msgstr "마크업"
+
+#: data/ui/glabels-ui.xml.h:70
+msgid "Modify document properties"
+msgstr "문서 속성 고치기"
+
+#: data/ui/glabels-ui.xml.h:71
+msgid "New"
+msgstr "새로 만들기"
+
+#: data/ui/glabels-ui.xml.h:72
+msgid "Object property editor"
+msgstr "항목 속성 편집기"
+
+#: data/ui/glabels-ui.xml.h:73
+msgid "Only show icons in the drawing toolbar"
+msgstr "그리기 도구에서 아이콘만 보이기"
+
+#: data/ui/glabels-ui.xml.h:74
+msgid "Only show icons in the main toolbar"
+msgstr "주 도구에서 아이콘만 보이기"
+
+#: data/ui/glabels-ui.xml.h:76
+msgid "Open a file"
+msgstr "파일 열기"
+
+#: data/ui/glabels-ui.xml.h:77
+msgid "Open the glabels manual"
+msgstr "gLabeles 메뉴얼 열기"
+
+#: data/ui/glabels-ui.xml.h:78
+msgid "Paste"
+msgstr "붙이기"
+
+#: data/ui/glabels-ui.xml.h:79
+msgid "Paste the clipboard"
+msgstr "클립보드에 붙이기"
+
+#: data/ui/glabels-ui.xml.h:80
+msgid "Pr_eferences..."
+msgstr "속성(_E)..."
+
+#: data/ui/glabels-ui.xml.h:81
+msgid "Preferences"
+msgstr "설정"
+
+#: data/ui/glabels-ui.xml.h:83
+msgid "Print the current file"
+msgstr "현재 파일을 인쇄"
+
+#: data/ui/glabels-ui.xml.h:84
+msgid "Proper_ties..."
+msgstr "속성(_T)..."
+
+#: data/ui/glabels-ui.xml.h:85
+msgid "Properties"
+msgstr "속성"
+
+#: data/ui/glabels-ui.xml.h:86
+msgid "Property toolbar"
+msgstr "속성 도구"
+
+#: data/ui/glabels-ui.xml.h:87
+msgid "Quit"
+msgstr "종료"
+
+#: data/ui/glabels-ui.xml.h:88
+msgid "Quit the program"
+msgstr "gLabels을 종료"
+
+#: data/ui/glabels-ui.xml.h:89
+msgid "Raise object to top"
+msgstr "개체를 상위로 올리기"
+
+#: data/ui/glabels-ui.xml.h:90
+msgid "Recent _Files"
+msgstr "최근의 파일(_F)"
+
+#: data/ui/glabels-ui.xml.h:91
+msgid "Redo"
+msgstr "재실행"
+
+#: data/ui/glabels-ui.xml.h:92
+msgid "Redo the undone action"
+msgstr "재실행 할것 없음"
+
+#: data/ui/glabels-ui.xml.h:93
+msgid "Remove all selections"
+msgstr "모든 선택사항 삭제"
+
+#: data/ui/glabels-ui.xml.h:95
+#, no-c-format
+msgid "Restore scale to 100%"
+msgstr "100%크기로 복구"
+
+#: data/ui/glabels-ui.xml.h:96
+msgid "Right align"
+msgstr "오른쪽으로 정렬"
+
+#: data/ui/glabels-ui.xml.h:99
+msgid "Rotate object 90 clockwise"
+msgstr "90° 시계방향으로 회전"
+
+#: data/ui/glabels-ui.xml.h:100
+msgid "Rotate object 90 counter-clockwise"
+msgstr "90° 반시계방향으로 회전"
+
+#: data/ui/glabels-ui.xml.h:101
+msgid "Save"
+msgstr "저장"
+
+#: data/ui/glabels-ui.xml.h:102
+msgid "Save As"
+msgstr "다른 이름으로 저장"
+
+#: data/ui/glabels-ui.xml.h:103
+msgid "Save _As..."
+msgstr "다른 이름으로 저장(_A)..."
+
+#: data/ui/glabels-ui.xml.h:104
+msgid "Save the current file"
+msgstr "현재 파일이름으로 저장"
+
+#: data/ui/glabels-ui.xml.h:105
+msgid "Save the current file with a different name"
+msgstr "현재파일을 다른이름으로 저장"
+
+#: data/ui/glabels-ui.xml.h:106
+msgid "Select All"
+msgstr "모두 선택"
+
+#: data/ui/glabels-ui.xml.h:107
+msgid "Select _All"
+msgstr "모두 선택(_A)"
+
+#: data/ui/glabels-ui.xml.h:108
+msgid "Select all objects"
+msgstr "모든 개체 선택"
+
+#: data/ui/glabels-ui.xml.h:109
+msgid "Select, move and modify objects"
+msgstr "선택, 개체 이동과 수정"
+
+#: data/ui/glabels-ui.xml.h:111
+msgid "Set drawing toolbar button style according to desktop default"
+msgstr "기본 데스크탑 모양에 따라 그리기 도구 버튼 모양을 지정"
+
+#: data/ui/glabels-ui.xml.h:112
+msgid "Set main toolbar button style according to desktop default"
+msgstr "기본 데스크탑 모양에 따라 주 도구 버튼 모양을 지정"
+
+#: data/ui/glabels-ui.xml.h:113
+msgid "Show _Tooltips"
+msgstr "팁 보기(_T)"
+
+#: data/ui/glabels-ui.xml.h:114
+msgid "Show both icons and texts in the drawing toolbar"
+msgstr "그리기 도구에 아이콘과 글자 보이기"
+
+#: data/ui/glabels-ui.xml.h:115
+msgid "Show both icons and texts in the main toolbar"
+msgstr "주 도구에 아이콘 과 글자 보이기"
+
+#: data/ui/glabels-ui.xml.h:116
+msgid "Show tooltips in the drawing toolbar"
+msgstr "그리기 도구에 팁 보이기"
+
+#: data/ui/glabels-ui.xml.h:117
+msgid "Show tooltips in the main toolbar"
+msgstr "주 도구에 팁 보이기"
+
+#: data/ui/glabels-ui.xml.h:118
+msgid "Show tooltips in the property toolbar"
+msgstr "속성 도구에 팁 보이기"
+
+#: data/ui/glabels-ui.xml.h:119
+msgid "Template Designer"
+msgstr "서식 디자이너"
+
+#: data/ui/glabels-ui.xml.h:120
+msgid "Template _Designer..."
+msgstr "서식 디자이너(_D)..."
+
+#: data/ui/glabels-ui.xml.h:121
+msgid "Text color"
+msgstr "글자 색상"
+
+#: data/ui/glabels-ui.xml.h:122
+msgid "U_n-select All"
+msgstr "모든 선택 해제(_N)"
+
+#: data/ui/glabels-ui.xml.h:123
+msgid "Un-select All"
+msgstr "모든 선택 해제"
+
+#: data/ui/glabels-ui.xml.h:124
+msgid "Undo"
+msgstr "되돌리기"
+
+#: data/ui/glabels-ui.xml.h:125
+msgid "Undo the last action"
+msgstr "마지막 동작으로 되돌리기"
+
+#: data/ui/glabels-ui.xml.h:126
+msgid "Zoom _1:1"
+msgstr "1:1로 확대(_1)"
+
+#: data/ui/glabels-ui.xml.h:127
+msgid "Zoom _In"
+msgstr "확대(_I)"
+
+#: data/ui/glabels-ui.xml.h:128
+msgid "Zoom _Out"
+msgstr "축소(_O)"
+
+#: data/ui/glabels-ui.xml.h:129
+msgid "Zoom to _fit"
+msgstr "맞춰서 확대(_F)"
+
+#: data/ui/glabels-ui.xml.h:130
+msgid "Zoom to fit window"
+msgstr "윈도우에 맞춰서 확대"
+
+#: data/ui/glabels-ui.xml.h:131
+msgid "_About..."
+msgstr "...에 대해(_A)"
+
+#: data/ui/glabels-ui.xml.h:132
+msgid "_Bottoms"
+msgstr "아래(_B)"
+
+#: data/ui/glabels-ui.xml.h:135
+msgid "_Close"
+msgstr "닫기(_C)"
+
+#: data/ui/glabels-ui.xml.h:136
+msgid "_Contents"
+msgstr "목차(_C)"
+
+#: data/ui/glabels-ui.xml.h:137
+msgid "_Copy"
+msgstr "복사(_C)"
+
+#: data/ui/glabels-ui.xml.h:138
+msgid "_Create Object"
+msgstr "항목 만들기(_C)"
+
+#: data/ui/glabels-ui.xml.h:139
+msgid "_Debug"
+msgstr "디버그(_D)"
+
+#: data/ui/glabels-ui.xml.h:141
+msgid "_Desktop Default"
+msgstr "기본 데스크탑(_D)"
+
+#: data/ui/glabels-ui.xml.h:142
+msgid "_Drawing Toolbar"
+msgstr "그리기 도구(_D)"
+
+#: data/ui/glabels-ui.xml.h:143
+msgid "_Edit"
+msgstr "편집(_E)"
+
+#: data/ui/glabels-ui.xml.h:145
+msgid "_File"
+msgstr "파일(_F)"
+
+#: data/ui/glabels-ui.xml.h:146
+msgid "_Grid"
+msgstr "그리드(_G)"
+
+#: data/ui/glabels-ui.xml.h:147
+msgid "_Help"
+msgstr "도움말(_H)"
+
+#: data/ui/glabels-ui.xml.h:148
+msgid "_Icon"
+msgstr "아이콘(_I)"
+
+#: data/ui/glabels-ui.xml.h:152
+msgid "_Main Toolbar"
+msgstr "주 도구(_M)"
+
+#: data/ui/glabels-ui.xml.h:153
+msgid "_Merge Properties..."
+msgstr "여백 속성(_M)..."
+
+#: data/ui/glabels-ui.xml.h:154
+msgid "_New"
+msgstr "새로 만들기(_N)"
+
+#: data/ui/glabels-ui.xml.h:155
+msgid "_Objects"
+msgstr "항목(_O)"
+
+#: data/ui/glabels-ui.xml.h:156
+msgid "_Open..."
+msgstr "열기(_O)..."
+
+#: data/ui/glabels-ui.xml.h:158
+msgid "_Paste"
+msgstr "붙이기(_P)"
+
+#: data/ui/glabels-ui.xml.h:159
+msgid "_Print..."
+msgstr "인쇄(_P)..."
+
+#: data/ui/glabels-ui.xml.h:160
+msgid "_Property Toolbar"
+msgstr "속성 도구(_P)"
+
+#: data/ui/glabels-ui.xml.h:161
+msgid "_Quit"
+msgstr "종료(_Q)"
+
+#: data/ui/glabels-ui.xml.h:164
+msgid "_Save"
+msgstr "저장(_S)"
+
+#: data/ui/glabels-ui.xml.h:168
+msgid "_View"
+msgstr "보기(_V)"
+
+#: data/glade/prefs-dialog.glade.h:1
+msgid "   "
+msgstr "   "
+
+#: data/glade/prefs-dialog.glade.h:2
+#: data/glade/object-editor.glade.h:1
+#: data/glade/template-designer.glade.h:5
+msgid "*"
+msgstr "*"
+
+#: data/glade/prefs-dialog.glade.h:3
+msgid "<span weight=\"bold\">Default page size</span>"
+msgstr "<span weight=\"bold\">기본 용지 크기</span>"
+
+#: data/glade/prefs-dialog.glade.h:4
+msgid "<span weight=\"bold\">Fill</span>"
+msgstr "<span weight=\"bold\">채우기</span>"
+
+#: data/glade/prefs-dialog.glade.h:5
+msgid "<span weight=\"bold\">Line</span>"
+msgstr "<span weight=\"bold\">선</span>"
+
+#: data/glade/prefs-dialog.glade.h:6
+msgid "<span weight=\"bold\">Text</span>"
+msgstr "<span weight=\"bold\">글자</span>"
+
+#: data/glade/prefs-dialog.glade.h:7
+msgid "<span weight=\"bold\">Units</span>"
+msgstr "<span weight=\"bold\">유닛</span>"
+
+#: data/glade/prefs-dialog.glade.h:8
+#: data/glade/object-editor.glade.h:4
+msgid "Alignment:"
+msgstr "위치:"
+
+#: data/glade/prefs-dialog.glade.h:9
+#: data/glade/object-editor.glade.h:8
+msgid "Color:"
+msgstr "색상:"
+
+#: data/glade/prefs-dialog.glade.h:10
+msgid "Font:"
+msgstr "글꼴:"
+
+#: data/glade/prefs-dialog.glade.h:11
+msgid "ISO A4"
+msgstr "ISO A4 용지"
+
+#: data/glade/prefs-dialog.glade.h:12
+msgid "Inches"
+msgstr "인치"
+
+#: data/glade/prefs-dialog.glade.h:13
+#: data/glade/object-editor.glade.h:19
+msgid "Line Spacing:"
+msgstr "행간:"
+
+#: data/glade/prefs-dialog.glade.h:14
+msgid "Locale"
+msgstr "로케일"
+
+#: data/glade/prefs-dialog.glade.h:15
+msgid "Millimeters"
+msgstr "밀리미터"
+
+#: data/glade/prefs-dialog.glade.h:16
+msgid "Object defaults"
+msgstr "기본 항목"
+
+#: data/glade/prefs-dialog.glade.h:17
+msgid "Points"
+msgstr "포인트"
+
+#: data/glade/prefs-dialog.glade.h:18
+msgid "Select default properties for new objects."
+msgstr "새 개체의 기본 속성을 선택"
+
+#: data/glade/prefs-dialog.glade.h:19
+msgid "Select locale specific behavior."
+msgstr "구체적인 로케일을 선택"
+
+#: data/glade/prefs-dialog.glade.h:20
+#: data/templates/paper-sizes.xml.h:25
+msgid "US Letter"
+msgstr "US Letter"
+
+#: data/glade/prefs-dialog.glade.h:21
+#: data/glade/object-editor.glade.h:29
+#: data/glade/template-designer.glade.h:72
+msgid "Width:"
+msgstr "넓이:"
+
+#: data/glade/object-editor.glade.h:2
+msgid "00000000000 00000"
+msgstr "00000000000 00000"
+
+#: data/glade/object-editor.glade.h:3
+msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Xxx 개체 속성</span>"
+
+#: data/glade/object-editor.glade.h:5
+msgid "Allow merge to automatically shrink text"
+msgstr "자동으로 축소한 글자에 병합"
+
+#: data/glade/object-editor.glade.h:6
+msgid "Angle:"
+msgstr "각도:"
+
+#: data/glade/object-editor.glade.h:7
+msgid "Checksum"
+msgstr "체크섬"
+
+#: data/glade/object-editor.glade.h:10
+msgid "Family:"
+msgstr "패밀리:"
+
+#: data/glade/object-editor.glade.h:12
+msgid "Fill"
+msgstr "채우기"
+
+#: data/glade/object-editor.glade.h:13
+#: data/glade/template-designer.glade.h:33
+msgid "Height:"
+msgstr "높이:"
+
+#: data/glade/object-editor.glade.h:14
+msgid "Image"
+msgstr "그림"
+
+#: data/glade/object-editor.glade.h:15
+msgid "Insert merge field"
+msgstr "병합 필드 삽입"
+
+#: data/glade/object-editor.glade.h:17
+msgid "Length:"
+msgstr "길이:"
+
+#: data/glade/object-editor.glade.h:18
+msgid "Line"
+msgstr "선"
+
+#: data/glade/object-editor.glade.h:20
+msgid "Literal:"
+msgstr "Literal:"
+
+#: data/glade/object-editor.glade.h:21
+msgid "Load image"
+msgstr "그림 불러옴"
+
+#: data/glade/object-editor.glade.h:22
+msgid "Position"
+msgstr "위치"
+
+#: data/glade/object-editor.glade.h:23
+msgid "Reset image size"
+msgstr "그림크기 재설정"
+
+#: data/glade/object-editor.glade.h:24
+msgid "Size"
+msgstr "크기"
+
+#: data/glade/object-editor.glade.h:25
+msgid "Size:"
+msgstr "크기:"
+
+#: data/glade/object-editor.glade.h:26
+msgid "Style"
+msgstr "모양"
+
+#: data/glade/object-editor.glade.h:27
+msgid "Style:"
+msgstr "모양:"
+
+#: data/glade/object-editor.glade.h:30
+msgid "X:"
+msgstr "X:"
+
+#: data/glade/object-editor.glade.h:31
+msgid "Y:"
+msgstr "Y:"
+
+#: data/glade/object-editor.glade.h:32
+msgid "degrees"
+msgstr "degrees"
+
+#: data/glade/object-editor.glade.h:33
+msgid "dialog1"
+msgstr "dialog1"
+
+#: data/glade/object-editor.glade.h:34
+msgid "digits:"
+msgstr "digits:"
+
+#: data/glade/object-editor.glade.h:35
+msgid "format:"
+msgstr "서식:"
+
+#: data/glade/template-designer.glade.h:1
+msgid "  "
+msgstr "  "
+
+#: data/glade/template-designer.glade.h:2
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr "(예: \"주소라벨\", \"명함\", ...)"
+
+#: data/glade/template-designer.glade.h:3
+msgid "(e.g., 8163A)"
+msgstr "(예: 8163A)"
+
+#: data/glade/template-designer.glade.h:4
+msgid "(e.g., Avery, Acme, ...)"
+msgstr "(예: Avery, Acme, ...)"
+
+#: data/glade/template-designer.glade.h:6
+msgid "1. Outer radius:"
+msgstr "1. 바깥 반지름:"
+
+#: data/glade/template-designer.glade.h:7
+msgid "1. Radius:"
+msgstr "1. 반지름:"
+
+#: data/glade/template-designer.glade.h:8
+msgid "1. Width:"
+msgstr "1. 넓이:"
+
+#: data/glade/template-designer.glade.h:9
+msgid "2. Height:"
+msgstr "2. 높이:"
+
+#: data/glade/template-designer.glade.h:10
+msgid "2. Inner radius:"
+msgstr "2. 안쪽 반지름:"
+
+#: data/glade/template-designer.glade.h:11
+msgid "2. Waste (overprint allowed):"
+msgstr "2. 여백 (겹친 인쇄 허용):"
+
+#: data/glade/template-designer.glade.h:12
+msgid "3. Clipping width:"
+msgstr "3. 오려내기 넓이:"
+
+#: data/glade/template-designer.glade.h:13
+msgid "3. Margin"
+msgstr "3. 여백"
+
+#: data/glade/template-designer.glade.h:14
+msgid "3. Round (radius of corner):"
+msgstr "3. 둥글기 (귀퉁이 각도):"
+
+#: data/glade/template-designer.glade.h:15
+msgid "4. Clipping height:"
+msgstr "4. 오려내기 높이:"
+
+#: data/glade/template-designer.glade.h:16
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. 좌우 여백 (겹친 인쇄 허용):"
+
+#: data/glade/template-designer.glade.h:17
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. 아래위 여백 (겹친 인쇄 허용):"
+
+#: data/glade/template-designer.glade.h:18
+msgid "5. Waste (overprint allowed):"
+msgstr "5. 여백 (겹친 인쇄 허용):"
+
+#: data/glade/template-designer.glade.h:19
+msgid "6. Margin"
+msgstr "6. 라벨 내 여백"
+
+#: data/glade/template-designer.glade.h:20
+msgid "Brand/Manufacturer:"
+msgstr "상표/제조업체:"
+
+#: data/glade/template-designer.glade.h:21
+msgid "CD/DVD (including credit card CDs)"
+msgstr "CD/DVD (credit card CD 포함)"
+
+#: data/glade/template-designer.glade.h:22
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+"축하드립니다！\n"
+"\n"
+"gLabels 서식문서 디자이너로 서식 만들기를 마쳤습니다.\n"
+"새로 만든 서식을 저장하기 원한다면  \"적용\" 을 누르세요.\n"
+"\n"
+"\"취소\"를 누르면 만든것을 버리게 됩니다.\n"
+"또는 \"뒤로\"를 선택하여 만든것을 편집 할 수 있습니다."
+
+#: data/glade/template-designer.glade.h:30
+msgid "Design Completed"
+msgstr "서식 디자인 완료됨"
+
+#: data/glade/template-designer.glade.h:31
+msgid "Distance from left edge (x0):"
+msgstr "왼쪽 가장자리 부터  (x0):"
+
+#: data/glade/template-designer.glade.h:32
+msgid "Distance from top edge (y0):"
+msgstr "위쪽 가장자리 부터 (y0):"
+
+#: data/glade/template-designer.glade.h:34
+msgid "Horizontal pitch (dx):"
+msgstr "수평 pitch (dx):"
+
+#: data/glade/template-designer.glade.h:35
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+"서식을 얼마나 포함합니까?\n"
+"\n"
+"레이아웃 서식 개수 지정을 통해 두개 이내의 레이아웃을 만들 수 있습니다.\n"
+"보통은 아래 첫번째 예제처럼 한개의 레이아웃을 필요로 하지만,\n"
+"어떤것은 두번째 예제처럼 두개의 레이아웃을 필요로 하는것도 있습니다."
+
+#: data/glade/template-designer.glade.h:40
+msgid "Label Size (CD/DVD)"
+msgstr "라벨 크기(CD/DVD)"
+
+#: data/glade/template-designer.glade.h:41
+msgid "Label Size (Round)"
+msgstr "라벨 크기 (둥글기)"
+
+#: data/glade/template-designer.glade.h:42
+msgid "Label or Card Shape"
+msgstr "라벨 또는 카드 외형"
+
+#: data/glade/template-designer.glade.h:43
+msgid "Label or Card Size (Rectangular)"
+msgstr "라벨 또는 카드 크기(직사각형)"
+
+#: data/glade/template-designer.glade.h:44
+msgid "Layout #1"
+msgstr "레이아웃 #1:"
+
+#: data/glade/template-designer.glade.h:45
+msgid "Layout #2"
+msgstr "레이아웃 #2:"
+
+#: data/glade/template-designer.glade.h:46
+msgid "Layout(s)"
+msgstr "레이아웃"
+
+#: data/glade/template-designer.glade.h:47
+msgid "Name and Description"
+msgstr "이름과 설명"
+
+#: data/glade/template-designer.glade.h:48
+msgid "Number across (nx):"
+msgstr "가로 개수 (nx):"
+
+#: data/glade/template-designer.glade.h:49
+msgid "Number down (ny):"
+msgstr "세로 개수 (ny):"
+
+#: data/glade/template-designer.glade.h:50
+msgid "Number of Layouts"
+msgstr "레이아웃 선택"
+
+#: data/glade/template-designer.glade.h:51
+msgid "Number of layouts:"
+msgstr "레이아웃 선택:"
+
+#: data/glade/template-designer.glade.h:52
+msgid "Page Size"
+msgstr "용지 크기"
+
+#: data/glade/template-designer.glade.h:54
+msgid "Part #:"
+msgstr "라벨분류:"
+
+#: data/glade/template-designer.glade.h:55
+msgid "Please enter the following identifying information about the template stationery."
+msgstr "입력 상자에 기본 서식 정보를 입력하세요."
+
+#: data/glade/template-designer.glade.h:56
+msgid "Please enter the following layout information."
+msgstr "레이아웃 정보를 입력하세요."
+
+#: data/glade/template-designer.glade.h:57
+msgid "Please enter the following size parameters of a single label in your template."
+msgstr "라벨서식의 치수를 입력하세요."
+
+#: data/glade/template-designer.glade.h:58
+msgid "Please enter the following size parameters of a single label or card in your template."
+msgstr "라벨서식 또는 카드서식의 치수를 입력하세요."
+
+#: data/glade/template-designer.glade.h:59
+msgid "Please select the basic shape of the labels or cards."
+msgstr "라벨 또는 카드의 기본 형태를 선택하세요."
+
+#: data/glade/template-designer.glade.h:60
+msgid "Please select the page size of the template stationery."
+msgstr "서식 용지의 크기 선택"
+
+#: data/glade/template-designer.glade.h:61
+msgid "Print test sheet"
+msgstr "용지 테스트 인쇄"
+
+#: data/glade/template-designer.glade.h:62
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "직사각형 또는 정사각형(마무리를 둥글게 만들 수 있음)"
+
+#: data/glade/template-designer.glade.h:63
+msgid "Round"
+msgstr "둥근형"
+
+#: data/glade/template-designer.glade.h:64
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+"2. 두개의 레이아웃\n"
+"서식 필요"
+
+#: data/glade/template-designer.glade.h:66
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+"1. 한개의 레이아웃\n"
+"서식 필요"
+
+#: data/glade/template-designer.glade.h:68
+msgid "Vertical pitch (dy):"
+msgstr "수직 pitch (dy):"
+
+#: data/glade/template-designer.glade.h:69
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+"gLabels 서식 제작기에 어서오세요.\n"
+"\n"
+"차근차근 gLabels의 사용자 서식을 쉽게 만들 수 있게 도와드립니다. "
+
+#: data/templates/paper-sizes.xml.h:1
+msgid "A0"
+msgstr "A0용지"
+
+#: data/templates/paper-sizes.xml.h:2
+msgid "A1"
+msgstr "A1용지"
+
+#: data/templates/paper-sizes.xml.h:3
+msgid "A10"
+msgstr "A10용지"
+
+#: data/templates/paper-sizes.xml.h:4
+msgid "A2"
+msgstr "A2용지"
+
+#: data/templates/paper-sizes.xml.h:5
+msgid "A3"
+msgstr "A3용지"
+
+#: data/templates/paper-sizes.xml.h:6
+msgid "A4"
+msgstr "A4용지"
+
+#: data/templates/paper-sizes.xml.h:7
+msgid "A5"
+msgstr "A5용지"
+
+#: data/templates/paper-sizes.xml.h:8
+msgid "A6"
+msgstr "A6용지"
+
+#: data/templates/paper-sizes.xml.h:9
+msgid "A7"
+msgstr "A7용지"
+
+#: data/templates/paper-sizes.xml.h:10
+msgid "A8"
+msgstr "A8용지"
+
+#: data/templates/paper-sizes.xml.h:11
+msgid "A9"
+msgstr "A9용지"
+
+#: data/templates/paper-sizes.xml.h:12
+msgid "B0"
+msgstr "B0용지"
+
+#: data/templates/paper-sizes.xml.h:13
+msgid "B1"
+msgstr "B1용지"
+
+#: data/templates/paper-sizes.xml.h:14
+msgid "B10"
+msgstr "B10용지"
+
+#: data/templates/paper-sizes.xml.h:15
+msgid "B2"
+msgstr "B2용지"
+
+#: data/templates/paper-sizes.xml.h:16
+msgid "B3"
+msgstr "B3용지"
+
+#: data/templates/paper-sizes.xml.h:17
+msgid "B4"
+msgstr "B4용지"
+
+#: data/templates/paper-sizes.xml.h:18
+msgid "B5"
+msgstr "B5용지"
+
+#: data/templates/paper-sizes.xml.h:19
+msgid "B6"
+msgstr "B6용지"
+
+#: data/templates/paper-sizes.xml.h:20
+msgid "B7"
+msgstr "B7용지"
+
+#: data/templates/paper-sizes.xml.h:21
+msgid "B8"
+msgstr "B8용지"
+
+#: data/templates/paper-sizes.xml.h:22
+msgid "B9"
+msgstr "B9용지"
+
+#: data/templates/paper-sizes.xml.h:23
+msgid "US Executive"
+msgstr "US Executive"
+
+#: data/templates/paper-sizes.xml.h:24
+msgid "US Legal"
+msgstr "US Legal"
+
+#: data/templates/avery-us-templates.xml.h:1
+#: data/templates/zweckform-iso-templates.xml.h:1
+msgid "Address Labels"
+msgstr "주소 라벨"
+
+#: data/templates/avery-us-templates.xml.h:2
+#: data/templates/avery-iso-templates.xml.h:2
+#: data/templates/zweckform-iso-templates.xml.h:3
+#: data/templates/misc-us-templates.xml.h:2
+#: data/templates/misc-iso-templates.xml.h:9
+msgid "Business Cards"
+msgstr "명함"
+
+#: data/templates/avery-us-templates.xml.h:3
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "CD/DVD 라벨 (Disc 라벨)"
+
+#: data/templates/avery-us-templates.xml.h:4
+msgid "Diskette Labels"
+msgstr "디스크 라벨"
+
+#: data/templates/avery-us-templates.xml.h:5
+msgid "Filing Labels"
+msgstr "출원 라벨"
+
+#: data/templates/avery-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "Full Sheet 라벨"
+
+#: data/templates/avery-us-templates.xml.h:7
+msgid "Large Round Labels"
+msgstr "큰 원형 라벨"
+
+#: data/templates/avery-us-templates.xml.h:8
+msgid "Name Badge Labels"
+msgstr "Name Badge 라벨"
+
+#: data/templates/avery-us-templates.xml.h:9
+msgid "Return Address Labels"
+msgstr "반송 주소용 라벨"
+
+#: data/templates/avery-us-templates.xml.h:10
+msgid "Shipping Labels"
+msgstr "출하 라벨"
+
+#: data/templates/avery-us-templates.xml.h:11
+msgid "Small Round Labels"
+msgstr "작은 원형 라벨"
+
+#: data/templates/avery-us-templates.xml.h:12
+msgid "Square Labels"
+msgstr "구형 라벨"
+
+#: data/templates/avery-us-templates.xml.h:13
+msgid "Video Tape Face Labels"
+msgstr "비디오 테입 앞면 라벨"
+
+#: data/templates/avery-us-templates.xml.h:14
+msgid "Video Tape Spine Labels"
+msgstr "비디오 테입 옆면 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:1
+msgid "Address labels"
+msgstr "주소 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:3
+msgid "CD Booklet"
+msgstr "CD Booklet"
+
+#: data/templates/avery-iso-templates.xml.h:4
+msgid "CD Inlet"
+msgstr "CD Inlet"
+
+#: data/templates/avery-iso-templates.xml.h:5
+#: data/templates/zweckform-iso-templates.xml.h:4
+#: data/templates/misc-us-templates.xml.h:4
+#: data/templates/misc-iso-templates.xml.h:10
+msgid "CD/DVD Labels"
+msgstr "CD/DVD 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:6
+msgid "Diskette labels"
+msgstr "디스크 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:7
+#: data/templates/zweckform-iso-templates.xml.h:7
+#: data/templates/misc-iso-templates.xml.h:17
+msgid "Mailing Labels"
+msgstr "봉투 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:8
+msgid "Mailing labels"
+msgstr "봉투 라벨"
+
+#: data/templates/avery-iso-templates.xml.h:9
+msgid "Mini Address Labels"
+msgstr "작은 주소라벨"
+
+#: data/templates/avery-iso-templates.xml.h:10
+msgid "Shipping labels"
+msgstr "출하 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:2
+msgid "Allround Labels"
+msgstr "Allround 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:5
+msgid "Correction and Cover-up Labels"
+msgstr "수집 과 Cover-up 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:6
+msgid "Lever Arch File Labels"
+msgstr "Lever Arch 파일 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:8
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten Etiketten (70mm x 50.8mm)"
+
+#: data/templates/zweckform-iso-templates.xml.h:9
+msgid "Rectangular Copier Labels"
+msgstr "분류표기 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:10
+#: data/templates/misc-iso-templates.xml.h:22
+msgid "Rectangular Labels"
+msgstr "직사각형 라벨"
+
+#: data/templates/zweckform-iso-templates.xml.h:11
+msgid "Video Labels (back)"
+msgstr "비디오 라벨 (뒤)"
+
+#: data/templates/misc-us-templates.xml.h:1
+msgid "Business Card CD"
+msgstr "명함 CD"
+
+#: data/templates/misc-us-templates.xml.h:3
+msgid "CD Template Rectangles"
+msgstr "CD 서식 (직사각형)"
+
+#: data/templates/misc-us-templates.xml.h:5
+msgid "CD/DVD Labels (Face Only)"
+msgstr "CD/DVD 라벨 (표지만)"
+
+#: data/templates/misc-us-templates.xml.h:6
+#: data/templates/misc-iso-templates.xml.h:11
+msgid "CD/DVD Labels (face only)"
+msgstr "CD/DVD 라벨 (표지만)"
+
+#: data/templates/misc-us-templates.xml.h:7
+msgid "DLT Labels"
+msgstr "DLT 라벨"
+
+#: data/templates/misc-us-templates.xml.h:8
+msgid "Microtube labels"
+msgstr "Microtube 라벨"
+
+#: data/templates/misc-us-templates.xml.h:9
+msgid "Mini-CD Labels"
+msgstr "Mini-CD 라벨"
+
+#: data/templates/misc-us-templates.xml.h:10
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "PRO CD 라벨 2-up (CD 세로표지 전용)"
+
+#: data/templates/misc-us-templates.xml.h:11
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "PRO CD 라벨 2-up (표지만)"
+
+#: data/templates/misc-us-templates.xml.h:12
+#: data/templates/misc-iso-templates.xml.h:21
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "PRO CD 라벨 2-up (표지만)"
+
+#: data/templates/misc-us-templates.xml.h:13
+msgid "Slimline CD Case (rightside up)"
+msgstr "Slimline CD 케이스 (우측옆)"
+
+#: data/templates/misc-us-templates.xml.h:14
+msgid "Slimline CD Case (upside down)"
+msgstr "Slimline CD 케이스(상위)"
+
+#: data/templates/misc-iso-templates.xml.h:1
+msgid "Agipa 119488: Business Cards"
+msgstr "Agipa 119488: 명함"
+
+#: data/templates/misc-iso-templates.xml.h:2
+msgid "Allround Labels --24"
+msgstr "Allround 라벨 --24"
+
+#: data/templates/misc-iso-templates.xml.h:3
+msgid "Allround Labels --44"
+msgstr "Allround 라벨 --44"
+
+#: data/templates/misc-iso-templates.xml.h:4
+msgid "Allround Labels --64"
+msgstr "Allround 라벨 --64"
+
+#: data/templates/misc-iso-templates.xml.h:5
+msgid "Allround Labels --65"
+msgstr "Allround 라벨 --65"
+
+#: data/templates/misc-iso-templates.xml.h:6
+msgid "Arch File Labels"
+msgstr "Arch 파일 라벨"
+
+#: data/templates/misc-iso-templates.xml.h:7
+msgid "Arch File Labels (large)"
+msgstr "Arch 파일 라벨 (큰것)"
+
+#: data/templates/misc-iso-templates.xml.h:8
+msgid "Arch File Labels (small)"
+msgstr "Arch 파일 라벨 (작은것)"
+
+#: data/templates/misc-iso-templates.xml.h:12
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "기본 CD/DVD 라벨 (표지만)"
+
+#: data/templates/misc-iso-templates.xml.h:13
+msgid "Diskette Labels (face only)"
+msgstr "디스켓 라벨 (표지만)"
+
+#: data/templates/misc-iso-templates.xml.h:14
+msgid "EPSON Photo Stickers 16"
+msgstr "EPSON 포토 스티커 16"
+
+#: data/templates/misc-iso-templates.xml.h:15
+msgid "Etiketten"
+msgstr "Etiketten"
+
+#: data/templates/misc-iso-templates.xml.h:16
+msgid "Fridge Magnet Stickers"
+msgstr "Fridge Magnet 스티커"
+
+#: data/templates/misc-iso-templates.xml.h:18
+msgid "Mailing Labels --14"
+msgstr "봉투 라벨 --14"
+
+#: data/templates/misc-iso-templates.xml.h:19
+msgid "Mailing Labels-2 columns"
+msgstr "주소 라벨 (2형)"
+
+#: data/templates/misc-iso-templates.xml.h:20
+msgid "Mailing Labels-3 columns"
+msgstr "주소라벨 (3형)"
+
+#: data/templates/misc-iso-templates.xml.h:23
+msgid "Video Labels (face only)"
+msgstr "비디오 라벨 (표지만)"
+
+#: data/desktop/glabels.desktop.in.h:1
+msgid "Create labels, business cards and media covers"
+msgstr "라벨, 명함 그리고 미디어 커버 만들기"
+
+#: data/desktop/glabels.desktop.in.h:2
+msgid "gLabels Label Designer"
+msgstr "gLabels 라벨 디자이너"
+
+#: data/mime/glabels.keys.in.h:1
+#: data/mime/glabels.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "gLabels 프로젝트 파일"
+

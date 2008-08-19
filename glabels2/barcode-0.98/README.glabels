@@ -1,0 +1,7 @@
+The following changes have been made to the stock barcode-0.98 distribution
+to facilitate compilation with glabels:
+
+	Makefile.in renamed to Makefile.in.dist
+	configure.in renamed to configure.in.dist
+	added Makefile.am, which is configured from ../configure.in
+

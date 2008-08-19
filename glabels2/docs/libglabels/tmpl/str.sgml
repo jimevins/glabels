@@ -1,0 +1,30 @@
+<!-- ##### SECTION Title ##### -->
+String Utility Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+String utility functions provided by libglabels
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section defines string utility functions used by libglabels and of
+possible use to a user of libglabels.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_str_utf8_casecmp ##### -->
+<para>
+
+</para>
+
+@s1: 
+@s2: 
+@Returns: 
+
+
