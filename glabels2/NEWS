@@ -1,3 +1,16 @@
+* gLabels 2.2.3 (stable) release.  Release date 2008-08-17
+
+- Explicitely set page size when printing -- don't let print back-end use
+  a default size (Bug #2049431).
+- Sets more appropriate object size limits for any aspect ratio (Bug #1993550).
+- Fixed crash of glabels-batch (Bug #1968653).
+- Fixed bug with barcode and image merge radio buttons (Bug #1959135).
+- Will now attempt to parse newer namespaces (Bug #1872584).
+- Fixed drawing errors when drawing markup on rotated labels.
+- New korean translation (xein@navir.com).
+- New templates.
+
+
 * gLabels 2.2.2 (stable) release.  Release date 2008-02-22
 
 - Fixed crash when creating Code128C barcode (Bug #1766425).
