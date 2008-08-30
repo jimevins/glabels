@@ -277,8 +277,8 @@ gl_file_open (glWindow  *window)
 	chooser = gtk_file_chooser_dialog_new ("Open label",
 					       GTK_WINDOW (window),
 					       GTK_FILE_CHOOSER_ACTION_OPEN,
-					       GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					       GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					       NULL);
 
 	/* Recover state of open dialog */
@@ -559,8 +559,8 @@ gl_file_save_as (glLabel   *label,
 	chooser = gtk_file_chooser_dialog_new (title,
 					       GTK_WINDOW (window),
 					       GTK_FILE_CHOOSER_ACTION_SAVE,
-					       GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					       GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
 					       NULL);
 
 	gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);

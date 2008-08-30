@@ -1,3 +1,9 @@
+2008-08-29  Jim Evins  <evins@snaught.com>
+
+	* src/file.c: (gl_file_open), (gl_file_save_as):
+		Bug #2069668.  Corrected button order in Open and "Save as"
+		dialogs.
+
 2008-08-17  Jim Evins  <evins@snaught.com>
 
 	* data/dtd/glabels-2.2.dtd:
