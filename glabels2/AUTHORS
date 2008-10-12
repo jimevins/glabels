@@ -15,13 +15,6 @@ information.  The author:
 - The iec16022 library provides encoding for 2D barcodes.  See
 iec16022-0.2.1/README for more information.
 
-- Glabels includes modified versions of several widgets from the GAL library.
-These are copyright:
-
-	* Copyright 2000, 2001, Ximian, Inc.
-	* Copyright 2000, Michael Levy
-	* Copyright 2001, Almer S. Tigelaar
-
 - Glabels includes a modified version of the gimpchainbutton widget from the
 gimp, as well as several stock icons from the gimp's default theme.
 These are copyright:

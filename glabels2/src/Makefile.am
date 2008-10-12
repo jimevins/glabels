@@ -1,7 +1,7 @@
 LIB_BARCODE_DIR = ../barcode-0.98
 LIB_IEC16022_DIR = ../iec16022-0.2.1
 
-SUBDIRS= pixmaps stock-pixmaps mygal
+SUBDIRS= pixmaps stock-pixmaps
 
 bin_PROGRAMS = glabels glabels-batch
 
@@ -27,7 +27,6 @@ glabels_LDFLAGS = -export-dynamic
 glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
-	mygal/libmygal.la			\
 	$(LIB_BARCODE_DIR)/libbarcode.la 	\
 	$(LIB_IEC16022_DIR)/libiec16022.la
 
@@ -176,6 +175,14 @@ glabels_SOURCES = 			\
 	wdgt-chain-button.h		\
 	wdgt-merge-menu.c		\
 	wdgt-merge-menu.h		\
+	color-combo.c			\
+	color-combo.h			\
+	color-combo-menu.c		\
+	color-combo-menu.h		\
+	color-combo-color-menu-item.c	\
+	color-combo-color-menu-item.h	\
+	color-combo-history.c		\
+	color-combo-history.h		\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-markup-path.c		\

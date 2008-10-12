@@ -1,3 +1,45 @@
+2008-10-12  Jim Evins  <evins@snaught.com>
+
+	* src/mygal/Makefile.am:
+	* src/mygal/color-group.c:
+	* src/mygal/color-group.h:
+	* src/mygal/color-palette.c:
+	* src/mygal/color-palette.h:
+	* src/mygal/e-colors.c:
+	* src/mygal/e-colors.h:
+	* src/mygal/e-marshal.list:
+	* src/mygal/e-util.h:
+	* src/mygal/mygal-combo-box.c:
+	* src/mygal/mygal-combo-box.h:
+	* src/mygal/widget-color-combo.c:
+	* src/mygal/widget-color-combo.h:
+	* AUTHORS:
+	* configure.in:
+		Deleted mygal.
+	* src/color-combo.c:
+	* src/color-combo.h:
+	* src/color-combo-color-menu-item.c:
+	* src/color-combo-color-menu-item.h:
+	* src/color-combo-history.c:
+	* src/color-combo-history.h:
+	* src/color-combo-menu.c:
+	* src/color-combo-menu.h:
+	* src/marshal.list:
+	* src/util.c:
+	* src/util.h:
+	* src/Makefile.am:
+		Created new glColorCombo widget.
+	* src/object-editor-bc-page.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-fill-page.c:
+	* src/object-editor-line-page.c:
+	* src/object-editor-shadow-page.c:
+	* src/object-editor-text-page.c:
+	* src/object-editor.c:
+	* src/prefs-dialog.c:
+	* src/ui-property-bar.c:
+		Replaced use of mygal color combo with new glColorCombo widget.
+
 2008-08-29  Jim Evins  <evins@snaught.com>
 
 	* src/file.c: (gl_file_open), (gl_file_save_as):

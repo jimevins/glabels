@@ -36,7 +36,7 @@
 #include <string.h>
 
 #include "util.h"
-#include "mygal/widget-color-combo.h"
+#include "color-combo.h"
 #include "stock-pixmaps/stockpixbufs.h"
 #include "prefs.h"
 #include "color.h"
@@ -103,24 +103,18 @@ static void     font_family_changed_cb           (GtkComboBox          *combo,
 static void     font_size_changed_cb             (GtkSpinButton        *spin,
 						  glUIPropertyBar      *property_bar);
 
-static void     text_color_changed_cb            (ColorCombo           *cc,
-						  GdkColor             *gdk_color,
-						  gboolean              custom,
-						  gboolean              by_user,
+static void     text_color_changed_cb            (glColorCombo         *cc,
+                                                  guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *property_bar);
 
-static void     fill_color_changed_cb            (ColorCombo           *cc,
-						  GdkColor             *gdk_color,
-						  gboolean              custom,
-						  gboolean              by_user,
+static void     fill_color_changed_cb            (glColorCombo         *cc,
+                                                  guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *property_bar);
 
-static void     line_color_changed_cb            (ColorCombo           *cc,
-						  GdkColor             *gdk_color,
-						  gboolean              custom,
-						  gboolean              by_user,
+static void     line_color_changed_cb            (glColorCombo         *cc,
+                                                  guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *property_bar);
 
@@ -234,7 +228,6 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 	GladeXML   *gui;
 	GList      *family_names = NULL;
 	GList      *family_node;
-	GdkColor   *gdk_color;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -340,25 +333,19 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
 
 	/* Text color widget */
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_text_color);
-	color_combo_set_color (COLOR_COMBO (property_bar->priv->text_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->text_color_combo), gl_prefs->default_text_color);
 	g_signal_connect (G_OBJECT (property_bar->priv->text_color_combo),
 			  "color_changed",
 			  G_CALLBACK (text_color_changed_cb), property_bar);
 
 	/* Fill color widget */
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_fill_color);
-	color_combo_set_color (COLOR_COMBO (property_bar->priv->fill_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->fill_color_combo), gl_prefs->default_fill_color);
 	g_signal_connect (G_OBJECT (property_bar->priv->fill_color_combo),
 			  "color_changed",
 			  G_CALLBACK (fill_color_changed_cb), property_bar);
 
 	/* Line color widget */
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
-	color_combo_set_color (COLOR_COMBO (property_bar->priv->line_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->line_color_combo), gl_prefs->default_line_color);
 	g_signal_connect (G_OBJECT (property_bar->priv->line_color_combo),
 			  "color_changed",
 			  G_CALLBACK (line_color_changed_cb), property_bar);
@@ -382,7 +369,6 @@ reset_to_default_properties (glView *view,
 {
 	GList     *family_names;
 	gchar     *good_font_family;
-	GdkColor  *gdk_color;
 
 	/* Make sure we have a valid font.  if not provide a good default. */
 	family_names = gl_util_get_font_family_list ();
@@ -423,17 +409,11 @@ reset_to_default_properties (glView *view,
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
 					   (view->default_text_alignment == PANGO_ALIGN_RIGHT));
 
-	gdk_color = gl_color_to_gdk_color (view->default_text_color);
-	color_combo_set_color (COLOR_COMBO(property_bar->priv->text_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->text_color_combo), view->default_text_color);
 
-	gdk_color = gl_color_to_gdk_color (view->default_fill_color);
-	color_combo_set_color (COLOR_COMBO(property_bar->priv->fill_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->fill_color_combo), view->default_fill_color);
 
-	gdk_color = gl_color_to_gdk_color (view->default_line_color);
-	color_combo_set_color (COLOR_COMBO(property_bar->priv->line_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->line_color_combo), view->default_line_color);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->line_width_spin),
 				   view->default_line_width);
@@ -518,7 +498,6 @@ update_text_properties (glView *view,
 	gboolean        selection_is_italic, is_italic;
 	gboolean        selection_is_bold, is_bold;
 	PangoAlignment  selection_align, align;
-	GdkColor       *gdk_color;
 
 	can_text = gl_view_can_selection_text (view);
 	set_text_items_sensitive (property_bar, can_text);
@@ -630,10 +609,8 @@ update_text_properties (glView *view,
 	if (is_same_text_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same text color = %08x", selection_text_color);
-		gdk_color = gl_color_to_gdk_color (selection_text_color);
-		color_combo_set_color (COLOR_COMBO (property_bar->priv->text_color_combo),
-				       gdk_color);
-		g_free (gdk_color);
+		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->text_color_combo),
+                                          selection_text_color);
 	}
 
 	if (is_same_is_italic)
@@ -674,7 +651,6 @@ update_fill_color (glView *view,
 	GList *p;
 	glLabelObject *object;
 	guint selection_fill_color, fill_color;
-	GdkColor *gdk_color;
 	glColorNode *fill_color_node;
 
 	can = gl_view_can_selection_fill (view);
@@ -724,10 +700,8 @@ update_fill_color (glView *view,
 	if (is_same_fill_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same fill color = %08x", selection_fill_color);
-		gdk_color = gl_color_to_gdk_color (selection_fill_color);
-		color_combo_set_color (COLOR_COMBO (property_bar->priv->fill_color_combo),
-				       gdk_color);
-		g_free (gdk_color);
+		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->fill_color_combo),
+                                          selection_fill_color);
 	}
 }
 
@@ -741,7 +715,6 @@ update_line_color (glView *view,
 	glLabelObject *object;
 	guint selection_line_color, line_color;
 	glColorNode *line_color_node;
-	GdkColor *gdk_color;
 
 	can = gl_view_can_selection_line_color (view);
 	set_line_color_items_sensitive (property_bar, can);
@@ -790,10 +763,8 @@ update_line_color (glView *view,
 	if (is_same_line_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line color = %08x", selection_line_color);
-		gdk_color = gl_color_to_gdk_color (selection_line_color);
-		color_combo_set_color (COLOR_COMBO (property_bar->priv->line_color_combo),
-				       gdk_color);
-		g_free (gdk_color);
+		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->line_color_combo),
+                                          selection_line_color);
 	}
 }
 
@@ -943,10 +914,8 @@ font_size_changed_cb (GtkSpinButton        *spin,
 /* PRIVATE.  Text color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-text_color_changed_cb (ColorCombo           *cc,
-		       GdkColor             *gdk_color,
-		       gboolean              custom,
-		       gboolean              by_user,
+text_color_changed_cb (glColorCombo         *cc,
+                       guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
@@ -960,10 +929,10 @@ text_color_changed_cb (ColorCombo           *cc,
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	text_color_node = gl_color_node_new_default ();
-	text_color_node->color = gl_color_from_gdk_color (gdk_color);
+	text_color_node->color = color;
 	
-	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  text_color_node->color, custom, by_user, is_default);
+	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Is_default=%d",
+		  color, is_default);
 
 	if (is_default)
         {
@@ -992,10 +961,8 @@ text_color_changed_cb (ColorCombo           *cc,
 /* PRIVATE.  Fill color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-fill_color_changed_cb (ColorCombo           *cc,
-		       GdkColor             *gdk_color,
-		       gboolean              custom,
-		       gboolean              by_user,
+fill_color_changed_cb (glColorCombo         *cc,
+                       guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
@@ -1010,10 +977,10 @@ fill_color_changed_cb (ColorCombo           *cc,
 
 	fill_color_node = gl_color_node_new_default ();
 
-	fill_color_node->color = gl_color_from_gdk_color (gdk_color);
+	fill_color_node->color = color;
 
-	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  fill_color_node->color, custom, by_user, is_default);
+	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Is_default=%d",
+		  color, is_default);
 
 	if (is_default)
         {
@@ -1042,10 +1009,8 @@ fill_color_changed_cb (ColorCombo           *cc,
 /* PRIVATE.  Line color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-line_color_changed_cb (ColorCombo           *cc,
-		       GdkColor             *gdk_color,
-		       gboolean              custom,
-		       gboolean              by_user,
+line_color_changed_cb (glColorCombo         *cc,
+                       guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *property_bar)
 {
@@ -1059,10 +1024,10 @@ line_color_changed_cb (ColorCombo           *cc,
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	line_color_node = gl_color_node_new_default ();
-	line_color_node->color = gl_color_from_gdk_color (gdk_color);
+	line_color_node->color = color;
 
-	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Custom=%d, By_User=%d, Is_default=%d",
-		  line_color_node->color, custom, by_user, is_default);
+	gl_debug (DEBUG_PROPERTY_BAR, "Color=%08x, Is_default=%d",
+		  color, is_default);
 
 	if (is_default)
         {
@@ -1220,24 +1185,19 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 					  gint   int2)
 {
 	GtkWidget  *color_combo;
-	ColorGroup *cg;
-	gchar      *cg_name;
 	guint       color;
-	GdkColor   *gdk_color;
 	gchar      *no_color;
 	GdkPixbuf  *pixbuf = NULL;
 
 	switch (int1) {
 
 	case 0:
-		cg_name  = "text_color_group";
 		color    = gl_prefs->default_text_color;
 		no_color = _("Default");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
 		break;
 
 	case 2:
-		cg_name  = "line_color_group";
 		color    = gl_prefs->default_line_color;
 		no_color = _("No line");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
@@ -1245,7 +1205,6 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 
 	case 1:
 	default:
-		cg_name  = "fill_color_group";
 		color    = gl_prefs->default_fill_color;
 		no_color = _("No fill");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
@@ -1253,12 +1212,10 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 
 	}
 
-	cg = color_group_fetch (cg_name, NULL);
-        gdk_color = gl_color_to_gdk_color (color);
-	color_combo = color_combo_new (pixbuf, no_color, gdk_color, cg);
-        g_free (gdk_color);
+	color_combo = gl_color_combo_new (pixbuf, no_color, color, color);
 
-	color_combo_box_set_preview_relief (COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
+	gl_color_combo_set_relief (GL_COLOR_COMBO(color_combo),
+                                   GTK_RELIEF_NONE);
 
 	g_object_unref (G_OBJECT (pixbuf));
 

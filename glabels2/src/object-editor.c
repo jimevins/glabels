@@ -35,7 +35,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "mygal/widget-color-combo.h"
+#include "color-combo.h"
 #include "color.h"
 #include "wdgt-chain-button.h"
 #include "wdgt-merge-menu.h"
@@ -568,47 +568,37 @@ gl_object_editor_construct_color_combo (gchar *name,
 					gint   int2)
 {
 	GtkWidget  *color_combo;
-	ColorGroup *cg;
-	gchar      *cg_name;
 	guint       color;
-	GdkColor   *gdk_color;
 	gchar      *no_color;
 
 	switch (int1) {
 
 	case 3:
-		cg_name  = "shadow_color_group";
 		color    = GL_COLOR_SHADOW_DEFAULT;
 		no_color = _("Default");
 		break;
 
 	case 2:
-		cg_name  = "text_color_group";
 		color    = gl_prefs->default_text_color;
 		no_color = _("Default");
 		break;
 
 	case 1:
-		cg_name  = "line_color_group";
 		color    = gl_prefs->default_line_color;
 		no_color = _("No line");
 		break;
 
 	case 0:
 	default:
-		cg_name  = "fill_color_group";
 		color    = gl_prefs->default_fill_color;
 		no_color = _("No fill");
 		break;
 
 	}
 
-	cg = color_group_fetch (cg_name, NULL);
-        gdk_color = gl_color_to_gdk_color (color);
-	color_combo = color_combo_new (NULL, no_color, gdk_color, cg);
-        g_free (gdk_color);
+	color_combo = gl_color_combo_new (NULL, no_color, color, color);
 
-	color_combo_box_set_preview_relief (COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
+	gl_color_combo_set_relief (GL_COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
 
 	return color_combo;
 }

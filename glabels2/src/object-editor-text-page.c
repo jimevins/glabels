@@ -32,7 +32,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "mygal/widget-color-combo.h"
+#include "color-combo.h"
 #include "color.h"
 #include "util.h"
 
@@ -448,8 +448,6 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 				 gboolean             merge_flag,
 				 glColorNode         *text_color_node)
 {
-	GdkColor *gdk_color;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
         editor->priv->stop_signals = TRUE;
@@ -460,13 +458,12 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 
 	if ( text_color_node->color == GL_COLOR_NONE ) {
 
-		color_combo_set_color_to_default (COLOR_COMBO(editor->priv->text_color_combo));
+		gl_color_combo_set_to_default (GL_COLOR_COMBO(editor->priv->text_color_combo));
 
 	} else {
 		
-        gdk_color = gl_color_to_gdk_color (text_color_node->color);
-        color_combo_set_color (COLOR_COMBO(editor->priv->text_color_combo), gdk_color);
-        g_free (gdk_color);
+                gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->text_color_combo),
+                                          text_color_node->color);
 	}
 	
 	if (!text_color_node->field_flag) {
@@ -498,7 +495,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 glColorNode*
 gl_object_editor_get_text_color (glObjectEditor      *editor)
 {
-	GdkColor    *gdk_color;
+	guint        color;
 	glColorNode *color_node;
 	gboolean     is_default;
 
@@ -514,13 +511,13 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
     } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;
-		gdk_color = color_combo_get_color (COLOR_COMBO(editor->priv->text_color_combo),
-                                           &is_default);
+		color = gl_color_combo_get_color (GL_COLOR_COMBO(editor->priv->text_color_combo),
+                                                  &is_default);
 
         if (is_default) {
                 color_node->color = gl_prefs->default_text_color;
         } else {
-                color_node->color = gl_color_from_gdk_color (gdk_color);
+                color_node->color = color;
         }
 	}      
 

@@ -34,7 +34,7 @@
 
 #include "prefs.h"
 #include "hig.h"
-#include "mygal/widget-color-combo.h"
+#include "color-combo.h"
 #include "color.h"
 #include "util.h"
 
@@ -498,7 +498,6 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
 {
         GList    *family_names;
         gchar    *good_font_family;
-	GdkColor *gdk_color;
  
 	dialog->priv->stop_signals = TRUE;
 
@@ -536,9 +535,8 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->text_italic_toggle),
                                       gl_prefs->default_font_italic_flag);
  
-        gdk_color = gl_color_to_gdk_color (gl_prefs->default_text_color);
-        color_combo_set_color (COLOR_COMBO(dialog->priv->text_color_combo), gdk_color);
-        g_free (gdk_color);
+        gl_color_combo_set_color (GL_COLOR_COMBO(dialog->priv->text_color_combo),
+                                  gl_prefs->default_text_color);
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->text_left_toggle),
                                  (gl_prefs->default_text_alignment == GTK_JUSTIFY_LEFT));
@@ -553,14 +551,12 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->line_width_spin),
                                    gl_prefs->default_line_width);
  
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
-        color_combo_set_color (COLOR_COMBO(dialog->priv->line_color_combo), gdk_color);
-        g_free (gdk_color);
+        gl_color_combo_set_color (GL_COLOR_COMBO(dialog->priv->line_color_combo),
+                gl_prefs->default_line_color);
 
 
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_fill_color);
-        color_combo_set_color (COLOR_COMBO(dialog->priv->fill_color_combo), gdk_color);
-        g_free (gdk_color);
+        gl_color_combo_set_color (GL_COLOR_COMBO(dialog->priv->fill_color_combo),
+                                  gl_prefs->default_fill_color);
 
 
 	dialog->priv->stop_signals = FALSE;
@@ -612,7 +608,7 @@ update_prefs_from_locale_page (glPrefsDialog *dialog)
 static void
 update_prefs_from_object_page (glPrefsDialog *dialog)
 {
-	GdkColor *gdk_color;
+	guint     color;
 	gboolean  is_default;
 
 	if (dialog->priv->stop_signals) return;
@@ -637,11 +633,11 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
                 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
                                               (dialog->priv->text_italic_toggle));
 
-        gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->text_color_combo),
-                                           &is_default);
+        color = gl_color_combo_get_color (GL_COLOR_COMBO(dialog->priv->text_color_combo),
+                                          &is_default);
         if (!is_default)
         {
-                gl_prefs->default_text_color = gl_color_from_gdk_color (gdk_color);
+                gl_prefs->default_text_color = color;
         }
 
         if (gtk_toggle_button_get_active
@@ -672,19 +668,19 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
         gl_prefs->default_line_width =
                 gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->line_width_spin));
 
-        gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->line_color_combo),
-                                           &is_default);
+        color = gl_color_combo_get_color (GL_COLOR_COMBO(dialog->priv->line_color_combo),
+                                          &is_default);
         if (!is_default)
         {
-                gl_prefs->default_line_color = gl_color_from_gdk_color (gdk_color);
+                gl_prefs->default_line_color = color;
         }
 
 
-        gdk_color = color_combo_get_color (COLOR_COMBO(dialog->priv->fill_color_combo),
-                                           &is_default);
+        color = gl_color_combo_get_color (GL_COLOR_COMBO(dialog->priv->fill_color_combo),
+                                          &is_default);
         if (!is_default)
         {
-                gl_prefs->default_fill_color = gl_color_from_gdk_color (gdk_color);
+                gl_prefs->default_fill_color = color;
         }
 
 	gl_prefs_model_save_settings (gl_prefs);

@@ -33,7 +33,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "mygal/widget-color-combo.h"
+#include "color-combo.h"
 #include "color.h"
 #include "util.h"
 
@@ -65,8 +65,6 @@ static void line_radio_toggled_cb               (glObjectEditor        *editor);
 void
 gl_object_editor_prepare_line_page (glObjectEditor *editor)
 {
-	GdkColor     *gdk_color;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
@@ -91,9 +89,8 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
     gtk_widget_set_sensitive (editor->priv->line_key_combo, FALSE);	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->line_width_spin),
 				   gl_prefs->default_line_width);
-	gdk_color = gl_color_to_gdk_color (gl_prefs->default_line_color);
-	color_combo_set_color (COLOR_COMBO(editor->priv->line_color_combo), gdk_color);
-	g_free (gdk_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->line_color_combo),
+                                  gl_prefs->default_line_color);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->line_page_vbox);
@@ -168,8 +165,6 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
 				 gboolean             merge_flag,
 				 glColorNode         *color_node)
 {
-	GdkColor *gdk_color;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
         editor->priv->stop_signals = TRUE;
@@ -179,14 +174,12 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
 
 	if ( color_node->color == GL_COLOR_NONE ) {
 
-		color_combo_set_color_to_default (COLOR_COMBO(editor->priv->line_color_combo));
+		gl_color_combo_set_to_default (GL_COLOR_COMBO(editor->priv->line_color_combo));
 
 	} else {
 
-		gdk_color = gl_color_to_gdk_color (color_node->color);
-		color_combo_set_color (COLOR_COMBO(editor->priv->line_color_combo),
-					   gdk_color);
-		g_free (gdk_color);
+		gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->line_color_combo),
+					   color_node->color);
 
 	}	
 	
@@ -217,7 +210,7 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
 glColorNode*
 gl_object_editor_get_line_color (glObjectEditor      *editor)
 {
-        GdkColor    *gdk_color;
+        guint        color;
         gboolean     is_default;
 	glColorNode *color_node;
  
@@ -229,15 +222,15 @@ gl_object_editor_get_line_color (glObjectEditor      *editor)
 		color_node->field_flag = TRUE;
 		color_node->key = 
 			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->line_key_combo));
-    } else {
+        } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;
-		gdk_color = color_combo_get_color (COLOR_COMBO(editor->priv->line_color_combo),
-                                           &is_default);
+		color = gl_color_combo_get_color (GL_COLOR_COMBO(editor->priv->line_color_combo),
+                                                  &is_default);
 
 		if (!is_default) {
-        	color_node->color = gl_color_from_gdk_color (gdk_color);
-        }
+                        color_node->color = color;
+                }
 	}
 	
 	gl_debug (DEBUG_EDITOR, "END");
