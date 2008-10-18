@@ -25,13 +25,13 @@
 #define __OBJECT_EDITOR_PRIVATE_H__
 
 #include <gtk/gtkwidget.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 
 G_BEGIN_DECLS
 
 struct _glObjectEditorPrivate {
 
-	GladeXML   *gui;
+	GtkBuilder *gui;
 	GtkWidget  *editor_vbox;
 
         glLabel    *label;
@@ -57,6 +57,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *size_h_spin;
 	GtkWidget  *size_w_units_label;
 	GtkWidget  *size_h_units_label;
+	GtkWidget  *size_aspect_vbox;
 	GtkWidget  *size_aspect_checkbutton;
 	GtkWidget  *size_reset_image_button;
 	gdouble     size_aspect_ratio;
@@ -77,6 +78,7 @@ struct _glObjectEditorPrivate {
 	gdouble     dy_max;
 
 	GtkWidget  *fill_page_vbox;
+	GtkWidget  *fill_color_hbox;
 	GtkWidget  *fill_color_combo;
 	GtkWidget  *fill_key_combo;
 	GtkWidget  *fill_key_radio;
@@ -85,6 +87,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *line_page_vbox;
 	GtkWidget  *line_width_spin;
 	GtkWidget  *line_color_radio;
+	GtkWidget  *line_color_hbox;
 	GtkWidget  *line_color_combo;
 	GtkWidget  *line_key_radio;
 	GtkWidget  *line_key_combo;
@@ -101,6 +104,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_bold_toggle;
 	GtkWidget  *text_italic_toggle;
 	GtkWidget  *text_color_radio;
+	GtkWidget  *text_color_hbox;
 	GtkWidget  *text_color_combo;
 	GtkWidget  *text_color_key_radio;
 	GtkWidget  *text_color_key_combo;
@@ -120,6 +124,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *bc_text_check;
 	GtkWidget  *bc_cs_check;
 	GtkWidget  *bc_color_radio;
+	GtkWidget  *bc_color_hbox;
 	GtkWidget  *bc_color_combo;
 	GtkWidget  *bc_key_radio;
 	GtkWidget  *bc_key_combo;
@@ -144,6 +149,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *shadow_y_units_label;
 	GtkWidget  *shadow_color_radio;
 	GtkWidget  *shadow_key_radio;
+	GtkWidget  *shadow_color_hbox;
 	GtkWidget  *shadow_color_combo;
 	GtkWidget  *shadow_key_combo;
 	GtkWidget  *shadow_opacity_spin;

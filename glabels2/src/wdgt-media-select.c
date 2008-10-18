@@ -27,7 +27,7 @@
 #include "wdgt-media-select.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtknotebook.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtktreeview.h>
@@ -61,6 +61,8 @@ enum {
 };
 
 struct _glWdgtMediaSelectPrivate {
+
+        GtkBuilder   *gui;
 
         GtkWidget    *notebook;
         guint         current_page_num;
@@ -170,6 +172,10 @@ gl_wdgt_media_select_finalize (GObject *object)
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
+        if (media_select->priv->gui)
+        {
+                g_object_unref (media_select->priv->gui);
+        }
         g_object_unref (media_select->priv->recent_store);
         g_object_unref (media_select->priv->search_all_store);
         g_free (media_select->priv);
@@ -201,7 +207,8 @@ gl_wdgt_media_select_new (void)
 static void
 gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
-        GladeXML          *gui;
+        GtkBuilder        *gui;
+        GError            *error = NULL;
         GtkWidget         *hbox;
         GList             *brands = NULL;
         GList             *page_sizes = NULL;
@@ -219,37 +226,32 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (media_select));
         g_return_if_fail (media_select->priv != NULL);
 
-        gui = glade_xml_new (GLABELS_GLADE_DIR "wdgt-media-select.glade",
-                             "wdgt_media_select_hbox", NULL);
+        gui = gtk_builder_new ();
+        gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "wdgt-media-select.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        if (!gui) {
-                g_critical ("Could not open wdgt-media-select.glade. gLabels may not be installed correctly!");
-                return;
-        }
+        gl_util_get_builder_widgets (gui,
+                                     "wdgt_media_select_hbox", &hbox,
+                                     "notebook",               &media_select->priv->notebook,
 
-        hbox = glade_xml_get_widget (gui, "wdgt_media_select_hbox");
+                                     "recent_tab_vbox",        &media_select->priv->recent_tab_vbox,
+
+                                     "recent_treeview",        &media_select->priv->recent_treeview,
+                                     "search_all_tab_vbox",    &media_select->priv->search_all_tab_vbox,
+                                     "brand_combo",            &media_select->priv->brand_combo,
+                                     "page_size_combo",        &media_select->priv->page_size_combo,
+                                     "category_combo",         &media_select->priv->category_combo,
+                                     "search_all_treeview",    &media_select->priv->search_all_treeview,
+                                     NULL);
+
         gtk_container_add (GTK_CONTAINER (media_select), hbox);
-
-        media_select->priv->notebook =
-                glade_xml_get_widget (gui, "notebook");
-
-        media_select->priv->recent_tab_vbox =
-                glade_xml_get_widget (gui, "recent_tab_vbox");
-        media_select->priv->recent_treeview =
-                glade_xml_get_widget (gui, "recent_treeview");
-
-        media_select->priv->search_all_tab_vbox =
-                glade_xml_get_widget (gui, "search_all_tab_vbox");
-        media_select->priv->brand_combo =
-                glade_xml_get_widget (gui, "brand_combo");
-        media_select->priv->page_size_combo =
-                glade_xml_get_widget (gui, "page_size_combo");
-        media_select->priv->category_combo =
-                glade_xml_get_widget (gui, "category_combo");
-        media_select->priv->search_all_treeview =
-                glade_xml_get_widget (gui, "search_all_treeview");
-
-        g_object_unref (gui);
+        media_select->priv->gui = gui;
 
         media_select->priv->recent_page_num =
                 gtk_notebook_page_num (GTK_NOTEBOOK (media_select->priv->notebook),

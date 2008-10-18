@@ -26,7 +26,7 @@
 #include "print-op.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
@@ -48,6 +48,8 @@
 struct _glPrintOpPrivate {
 
 	glLabel   *label;
+
+        GtkBuilder *gui;
 
 	GtkWidget *simple_frame;
 	GtkWidget *copies_vbox;
@@ -186,6 +188,9 @@ gl_print_op_finalize (GObject *object)
 
 	if (op->priv->label) {
 		g_object_unref (G_OBJECT(op->priv->label));
+	}
+	if (op->priv->gui) {
+		g_object_unref (G_OBJECT(op->priv->gui));
 	}
         g_free (op->priv->filename);
 	g_free (op->priv);
@@ -476,43 +481,48 @@ static GObject *
 create_custom_widget_cb (GtkPrintOperation *operation,
 			 gpointer           user_data)
 {
-	GladeXML      *gui;
+	GtkBuilder    *gui;
+        GError        *error = NULL;
 	glPrintOp     *op = GL_PRINT_OP (operation);
 	glLabel       *label  = GL_LABEL (user_data);
 	GtkWidget     *vbox;
         glMerge       *merge = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "print-custom-widget.glade",
-                             "print_custom_widget_vbox", NULL);
-
-	if (!gui) {
-		g_warning ("Could not open print-op.glade, reinstall glabels!");
-		return NULL;
+	gui = gtk_builder_new ();
+        gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "print-custom-widget.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
 	}
 
-	vbox = glade_xml_get_widget (gui, "print_custom_widget_vbox");
+        gl_util_get_builder_widgets (gui,
+                                     "print_custom_widget_vbox", &vbox,
+                                     "simple_frame",             &op->priv->simple_frame,
+                                     "copies_vbox",              &op->priv->copies_vbox,
+                                     "merge_frame",              &op->priv->merge_frame,
+                                     "prmerge_vbox",             &op->priv->prmerge_vbox,
+                                     "outline_check",            &op->priv->outline_check,
+                                     "reverse_check",            &op->priv->reverse_check,
+                                     "crop_marks_check",         &op->priv->crop_marks_check,
+                                     NULL);
 
 	/* ----- Simple print control ----- */
-	op->priv->simple_frame = glade_xml_get_widget (gui, "simple_frame");
-	op->priv->copies_vbox  = glade_xml_get_widget (gui, "copies_vbox");
 	op->priv->copies = gl_wdgt_print_copies_new (label);
 	gtk_box_pack_start (GTK_BOX(op->priv->copies_vbox),
 			    op->priv->copies, FALSE, FALSE, 0);
 
 	/* ----- Merge print control ----- */
-	op->priv->merge_frame  = glade_xml_get_widget (gui, "merge_frame");
-	op->priv->prmerge_vbox = glade_xml_get_widget (gui, "prmerge_vbox");
 	op->priv->prmerge = gl_wdgt_print_merge_new (label);
 	gtk_box_pack_start (GTK_BOX(op->priv->prmerge_vbox),
 			    op->priv->prmerge, FALSE, FALSE, 0);
 
-	/* ----- Options ----------------- */
-	op->priv->outline_check    = glade_xml_get_widget (gui, "outline_check");
-	op->priv->reverse_check    = glade_xml_get_widget (gui, "reverse_check");
-	op->priv->crop_marks_check = glade_xml_get_widget (gui, "crop_marks_check");
 
-        g_object_unref (gui);
+        op->priv->gui = gui;
 
+        
         /* ---- Activate either simple or merge print control widgets. ---- */
         merge = gl_label_get_merge (op->priv->label);
 	if (merge == NULL) {

@@ -26,7 +26,7 @@
 #include "new-label-dialog.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtkstock.h>
 
@@ -42,8 +42,10 @@
 
 struct _glNewLabelDialogPrivate {
 
-	GtkWidget *media_select;
-	GtkWidget *rotate_label;
+        GtkBuilder *gui;
+
+	GtkWidget  *media_select;
+	GtkWidget  *rotate_label;
 
 };
 
@@ -116,6 +118,10 @@ gl_new_label_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+        if (dialog->priv->gui)
+        {
+                g_object_unref (dialog->priv->gui);
+        }
 	g_free (dialog->priv);
 
 	G_OBJECT_CLASS (gl_new_label_dialog_parent_class)->finalize (object);
@@ -148,29 +154,33 @@ static void
 gl_new_label_dialog_construct (glNewLabelDialog   *dialog,
 			       GtkWindow          *win)
 {
-        GladeXML  *gui;
-	GtkWidget *vbox, *media_select_vbox, *rotate_label_vbox;
-	gchar     *name;
+        GtkBuilder *gui;
+        GError     *error = NULL;
+	GtkWidget  *vbox, *media_select_vbox, *rotate_label_vbox;
+	gchar      *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), win);
 
-        gui = glade_xml_new (GLABELS_GLADE_DIR "new-label-dialog.glade",
-                             "new_label_dialog_vbox", NULL);
+        gui = gtk_builder_new ();
+        gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "new-label-dialog.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        if (!gui) {
-                g_critical ("Could not open new-label-dialog.glade. gLabels may not be installed correctly!");
-                return;
-        }
+        gl_util_get_builder_widgets (gui,
+                                     "new_label_dialog_vbox", &vbox,
+                                     "media_select_vbox",     &media_select_vbox,
+                                     "rotate_label_vbox",     &rotate_label_vbox,
+                                     NULL);
 
-        vbox = glade_xml_get_widget (gui, "new_label_dialog_vbox");
 	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
-
-        media_select_vbox = glade_xml_get_widget (gui, "media_select_vbox");
-        rotate_label_vbox = glade_xml_get_widget (gui, "rotate_label_vbox");
-
-        g_object_unref (gui);
+        dialog->priv->gui = gui;
 
 	dialog->priv->media_select = gl_wdgt_media_select_new ();
 	gtk_box_pack_start (GTK_BOX (media_select_vbox),

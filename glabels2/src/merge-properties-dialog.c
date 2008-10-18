@@ -26,7 +26,7 @@
 #include "merge-properties-dialog.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtkfilechooserbutton.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkstock.h>
@@ -52,6 +52,8 @@ struct _glMergePropertiesDialogPrivate {
 
 	glLabel      *label;
 	glMerge      *merge;
+
+        GtkBuilder   *gui;
 
 	GtkWidget    *type_combo;
 	GtkWidget    *location_vbox;
@@ -173,6 +175,9 @@ gl_merge_properties_dialog_finalize (GObject *object)
 	if (dialog->priv->merge != NULL) {
 		g_object_unref (G_OBJECT (dialog->priv->merge));
 	}
+	if (dialog->priv->gui != NULL) {
+		g_object_unref (G_OBJECT (dialog->priv->gui));
+	}
 	g_free (dialog->priv);
 
 	G_OBJECT_CLASS (gl_merge_properties_dialog_parent_class)->finalize (object);
@@ -208,7 +213,8 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 				      glLabel                 *label,
 				      GtkWindow               *window)
 {
-	GladeXML          *gui;
+	GtkBuilder        *gui;
+        GError            *error = NULL;
 	gchar             *description;
 	glMergeSrcType     src_type;
 	gchar             *src;
@@ -229,25 +235,27 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
 	}
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "merge-properties-dialog.glade",
-                             "merge_properties_vbox", NULL);
-
-	if (!gui) {
-		g_critical ("Could not open merge-properties-dialog.glade. gLabels may not be installed correctly!");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "merge-properties-dialog.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
 		return;
 	}
 
-	vbox = glade_xml_get_widget (gui, "merge_properties_vbox");
+        gl_util_get_builder_widgets (gui,
+                                     "merge_properties_vbox", &vbox,
+                                     "type_combo",            &dialog->priv->type_combo,
+                                     "location_vbox",         &dialog->priv->location_vbox,
+                                     "treeview",              &dialog->priv->treeview,
+                                     "select_all_button",     &dialog->priv->select_all_button,
+                                     "unselect_all_button",   &dialog->priv->unselect_all_button,
+                                     NULL);
+
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), vbox);
-
-	dialog->priv->type_combo    = glade_xml_get_widget (gui, "type_combo");
-	dialog->priv->location_vbox = glade_xml_get_widget (gui, "location_vbox");
-	dialog->priv->treeview      = glade_xml_get_widget (gui, "treeview");
-
-	dialog->priv->select_all_button   = glade_xml_get_widget (gui, "select_all_button");
-	dialog->priv->unselect_all_button = glade_xml_get_widget (gui, "unselect_all_button");
-
-        g_object_unref (gui);
+        dialog->priv->gui = gui;
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
 

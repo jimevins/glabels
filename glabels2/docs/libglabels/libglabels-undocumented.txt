@@ -1,9 +1,10 @@
 99% symbol docs coverage.
 141 symbols documented.
-0 symbols incomplete.
+1 symbols incomplete.
 1 not documented.
 
 
 LGL_XML_NAME_SPACE
+lglPaper (pwg_size)
 
 

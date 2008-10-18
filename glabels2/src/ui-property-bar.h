@@ -5,7 +5,7 @@
  *
  *  ui-property-bar.h:  Property toolbar header file
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2003-2008  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -61,10 +61,10 @@ GType        gl_ui_property_bar_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gl_ui_property_bar_new               (void);
 
-void         gl_ui_property_bar_set_view          (glUIPropertyBar *property_bar,
+void         gl_ui_property_bar_set_view          (glUIPropertyBar *this,
 						   glView          *view);
 
-void         gl_ui_property_bar_set_tooltips      (glUIPropertyBar *property_bar,
+void         gl_ui_property_bar_set_tooltips      (glUIPropertyBar *this,
 						   gboolean         state);
 
 

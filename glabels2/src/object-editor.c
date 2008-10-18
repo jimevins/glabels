@@ -26,7 +26,7 @@
 #include "object-editor.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtknotebook.h>
 #include <gtk/gtkcombobox.h>
@@ -119,31 +119,33 @@ gl_object_editor_class_init (glObjectEditorClass *class)
 static void
 gl_object_editor_init (glObjectEditor *editor)
 {
+        GError *error = NULL;
+
 	gl_debug (DEBUG_EDITOR, "START");
 	
 	editor->priv = g_new0 (glObjectEditorPrivate, 1);
 
-	editor->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "object-editor.glade",
-					   "editor_vbox",
-					   NULL);
+        editor->priv->gui = gtk_builder_new ();
 
-	if (!editor->priv->gui) {
-		g_critical ("Could not open object-editor.glade. gLabels may not be installed correctly!");
+	gtk_builder_add_from_file (editor->priv->gui,
+                                   GLABELS_BUILDER_DIR "object-editor.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
 		return;
 	}
 
-	editor->priv->editor_vbox = glade_xml_get_widget (editor->priv->gui,
-							  "editor_vbox");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "editor_vbox", &editor->priv->editor_vbox,
+                                     "title_image", &editor->priv->title_image,
+                                     "title_label", &editor->priv->title_label,
+                                     "notebook",    &editor->priv->notebook,
+                                     NULL);
+
 	gtk_box_pack_start (GTK_BOX(editor),
 			    editor->priv->editor_vbox,
 			    FALSE, FALSE, 0);
-
-	editor->priv->title_image = glade_xml_get_widget (editor->priv->gui,
-							  "title_image");
-	editor->priv->title_label = glade_xml_get_widget (editor->priv->gui,
-							  "title_label");
-	editor->priv->notebook    = glade_xml_get_widget (editor->priv->gui,
-							  "notebook");
 
 	gtk_widget_show_all (GTK_WIDGET(editor));
 
@@ -557,69 +559,6 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
         gl_debug (DEBUG_EDITOR, "END");
 }
 
-/*****************************************************************************/
-/* Construct color combo "Custom widget".                                    */
-/*****************************************************************************/
-GtkWidget *
-gl_object_editor_construct_color_combo (gchar *name,
-					gchar *string1,
-					gchar *string2,
-					gint   int1,
-					gint   int2)
-{
-	GtkWidget  *color_combo;
-	guint       color;
-	gchar      *no_color;
-
-	switch (int1) {
-
-	case 3:
-		color    = GL_COLOR_SHADOW_DEFAULT;
-		no_color = _("Default");
-		break;
-
-	case 2:
-		color    = gl_prefs->default_text_color;
-		no_color = _("Default");
-		break;
-
-	case 1:
-		color    = gl_prefs->default_line_color;
-		no_color = _("No line");
-		break;
-
-	case 0:
-	default:
-		color    = gl_prefs->default_fill_color;
-		no_color = _("No fill");
-		break;
-
-	}
-
-	color_combo = gl_color_combo_new (NULL, no_color, color, color);
-
-	gl_color_combo_set_relief (GL_COLOR_COMBO(color_combo), GTK_RELIEF_NORMAL);
-
-	return color_combo;
-}
-
-/*****************************************************************************/
-/* Construct chain button "Custom widget".                                   */
-/*****************************************************************************/
-GtkWidget *
-gl_object_editor_construct_chain_button (gchar *name,
-					 gchar *string1,
-					 gchar *string2,
-					 gint   int1,
-					 gint   int2)
-{
-	GtkWidget  *chain_button;
-
-	chain_button = gl_wdgt_chain_button_new (GL_WDGT_CHAIN_RIGHT);
-	gl_wdgt_chain_button_set_active (GL_WDGT_CHAIN_BUTTON(chain_button), TRUE);
-
-	return chain_button;
-}
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Prefs changed callback.  Update units related items.            */

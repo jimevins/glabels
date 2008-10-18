@@ -68,18 +68,21 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->line_page_vbox   = glade_xml_get_widget (editor->priv->gui,
-							       "line_page_vbox");
-	editor->priv->line_width_spin  = glade_xml_get_widget (editor->priv->gui,
-							       "line_width_spin");
-	editor->priv->line_color_combo = glade_xml_get_widget (editor->priv->gui,
-							       "line_color_combo");
-	editor->priv->line_key_combo = glade_xml_get_widget (editor->priv->gui,
-							       	"line_key_combo");	
-	editor->priv->line_key_radio = glade_xml_get_widget (editor->priv->gui,
-							       	"line_key_radio");	
-	editor->priv->line_color_radio = glade_xml_get_widget (editor->priv->gui,
-							       	"line_color_radio");	
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "line_page_vbox",   &editor->priv->line_page_vbox,
+                                     "line_width_spin",  &editor->priv->line_width_spin,
+                                     "line_color_hbox",  &editor->priv->line_color_hbox,
+                                     "line_key_combo",   &editor->priv->line_key_combo,
+                                     "line_key_radio",   &editor->priv->line_key_radio,
+                                     "line_color_radio", &editor->priv->line_color_radio,
+                                     NULL);
+
+	editor->priv->line_color_combo = gl_color_combo_new (NULL,
+                                                             _("No Line"),
+                                                             GL_COLOR_NO_LINE,
+                                                             gl_prefs->default_line_color);
+        gtk_container_add (GTK_CONTAINER (editor->priv->line_color_hbox),
+                           editor->priv->line_color_combo);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->line_key_combo));
 

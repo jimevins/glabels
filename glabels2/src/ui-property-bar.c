@@ -5,7 +5,7 @@
  *
  *  property-bar.c:  gLabels property bar
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2003-2008  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 #include "ui-property-bar.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
 #include <gtk/gtktoolbar.h>
@@ -43,9 +43,11 @@
 
 #include "debug.h"
 
+
 /*===========================================================================*/
 /* Private macros and constants.                                             */
 /*===========================================================================*/
+
 
 /*===========================================================================*/
 /* Private data types                                                        */
@@ -55,7 +57,7 @@ struct _glUIPropertyBarPrivate {
 
 	glView     *view;
 
-	GladeXML   *gui;
+	GtkBuilder *gui;
 
 	GtkWidget  *tool_bar;
 
@@ -71,9 +73,12 @@ struct _glUIPropertyBarPrivate {
 	GtkWidget  *text_align_right_radio;
 
 	/* Color combos */
+        GtkWidget  *text_color_eventbox;
 	GtkWidget  *text_color_combo;
 	GtkWidget  *fill_color_combo;
+        GtkWidget  *fill_color_eventbox;
 	GtkWidget  *line_color_combo;
+        GtkWidget  *line_color_eventbox;
 
 	/* Line width */
 	GtkWidget  *line_width_spin;
@@ -87,69 +92,72 @@ struct _glUIPropertyBarPrivate {
 /* Private globals                                                           */
 /*===========================================================================*/
 
+
 /*===========================================================================*/
 /* Local function prototypes                                                 */
 /*===========================================================================*/
 
 static void     gl_ui_property_bar_finalize      (GObject              *object);
 
-static void     gl_ui_property_bar_construct     (glUIPropertyBar      *property_bar);
+static void     gl_ui_property_bar_construct     (glUIPropertyBar      *this);
 
-static void     selection_changed_cb             (glUIPropertyBar      *property_bar);
+static void     selection_changed_cb             (glUIPropertyBar      *this);
 
 static void     font_family_changed_cb           (GtkComboBox          *combo,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     font_size_changed_cb             (GtkSpinButton        *spin,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     text_color_changed_cb            (glColorCombo         *cc,
                                                   guint                 color,
 						  gboolean              is_default,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     fill_color_changed_cb            (glColorCombo         *cc,
                                                   guint                 color,
 						  gboolean              is_default,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     line_color_changed_cb            (glColorCombo         *cc,
                                                   guint                 color,
 						  gboolean              is_default,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     line_width_changed_cb            (GtkSpinButton        *spin,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 
 static void     font_bold_toggled_cb             (GtkToggleToolButton  *toggle,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 						  
 static void     font_italic_toggled_cb           (GtkToggleToolButton  *toggle,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 						  
 static void     text_align_toggled_cb            (GtkToggleToolButton  *toggle,
-						  glUIPropertyBar      *property_bar);
+						  glUIPropertyBar      *this);
 						  
-static void     set_doc_items_sensitive          (glUIPropertyBar      *property_bar,
+static void     set_doc_items_sensitive          (glUIPropertyBar      *this,
 						  gboolean              state);
 
-static void     set_text_items_sensitive         (glUIPropertyBar      *property_bar,
+static void     set_text_items_sensitive         (glUIPropertyBar      *this,
 						  gboolean              state);
 
-static void     set_fill_items_sensitive         (glUIPropertyBar      *property_bar,
+static void     set_fill_items_sensitive         (glUIPropertyBar      *this,
 						  gboolean              state);
 
-static void     set_line_color_items_sensitive   (glUIPropertyBar      *property_bar,
+static void     set_line_color_items_sensitive   (glUIPropertyBar      *this,
 						  gboolean              state);
 
-static void     set_line_width_items_sensitive   (glUIPropertyBar      *property_bar,
+static void     set_line_width_items_sensitive   (glUIPropertyBar      *this,
 						  gboolean              state);
 
-
+
+
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
 G_DEFINE_TYPE (glUIPropertyBar, gl_ui_property_bar, GTK_TYPE_HBOX);
+
 
 static void
 gl_ui_property_bar_class_init (glUIPropertyBarClass *class)
@@ -165,40 +173,43 @@ gl_ui_property_bar_class_init (glUIPropertyBarClass *class)
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
 
+
 static void
-gl_ui_property_bar_init (glUIPropertyBar *property_bar)
+gl_ui_property_bar_init (glUIPropertyBar *this)
 {
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	property_bar->priv = g_new0 (glUIPropertyBarPrivate, 1);
+	this->priv = g_new0 (glUIPropertyBarPrivate, 1);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
 
+
 static void
 gl_ui_property_bar_finalize (GObject *object)
 {
-	glUIPropertyBar *property_bar = GL_UI_PROPERTY_BAR (object);
+	glUIPropertyBar *this = GL_UI_PROPERTY_BAR (object);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_PROPERTY_BAR (object));
 
-	if (property_bar->priv->view)
+	if (this->priv->view)
         {
-		g_object_unref (G_OBJECT(property_bar->priv->view));
+		g_object_unref (G_OBJECT(this->priv->view));
 	}
-        if (property_bar->priv->gui)
+        if (this->priv->gui)
         {
-                g_object_unref (G_OBJECT(property_bar->priv->gui));
+                g_object_unref (G_OBJECT(this->priv->gui));
         }
-	g_free (property_bar->priv);
+	g_free (this->priv);
 
 	G_OBJECT_CLASS (gl_ui_property_bar_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
+
 
 /****************************************************************************/
 /* Create a NEW property_bar.                                               */
@@ -206,79 +217,110 @@ gl_ui_property_bar_finalize (GObject *object)
 GtkWidget *
 gl_ui_property_bar_new (void)
 {
-	glUIPropertyBar *property_bar;
+	glUIPropertyBar *this;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	property_bar = g_object_new (GL_TYPE_UI_PROPERTY_BAR, NULL);
+	this = g_object_new (GL_TYPE_UI_PROPERTY_BAR, NULL);
 
-	gl_ui_property_bar_construct (property_bar);
+	gl_ui_property_bar_construct (this);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	return GTK_WIDGET (property_bar);
+	return GTK_WIDGET (this);
 }
+
 
 /******************************************************************************/
 /* Initialize property toolbar.                                               */
 /******************************************************************************/
 static void
-gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
+gl_ui_property_bar_construct (glUIPropertyBar   *this)
 {
-	GladeXML   *gui;
+	GtkBuilder *gui;
+        GError     *error = NULL;
 	GList      *family_names = NULL;
 	GList      *family_node;
+	GdkPixbuf  *pixbuf = NULL;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	property_bar->priv->stop_signals = TRUE;
+	this->priv->stop_signals = TRUE;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "property-bar.glade",
-                             "property_toolbar", NULL);
-
-	if (!gui)
-        {
-		g_critical ("Could not open property-bar.glade. gLabels may not be installed correctly!");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "property-bar.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
 		return;
 	}
 
-	property_bar->priv->tool_bar = glade_xml_get_widget (gui, "property_toolbar");
-	gtk_container_add (GTK_CONTAINER (property_bar), property_bar->priv->tool_bar);
+        gl_util_get_builder_widgets (gui,
+                                     "property_toolbar",        &this->priv->tool_bar,
+                                     "font_family_combo",       &this->priv->font_family_combo,
+                                     "font_size_spin",          &this->priv->font_size_spin,
+                                     "font_bold_toggle",        &this->priv->font_bold_toggle,
+                                     "font_italic_toggle",      &this->priv->font_italic_toggle,
+                                     "text_align_left_radio",   &this->priv->text_align_left_radio,
+                                     "text_align_center_radio", &this->priv->text_align_center_radio,
+                                     "text_align_right_radio",  &this->priv->text_align_right_radio,
+                                     "text_color_eventbox",     &this->priv->text_color_eventbox,
+                                     "fill_color_eventbox",     &this->priv->fill_color_eventbox,
+                                     "line_color_eventbox",     &this->priv->line_color_eventbox,
+                                     "line_width_spin",         &this->priv->line_width_spin,
+                                     NULL);
 
-	property_bar->priv->font_family_combo =
-		glade_xml_get_widget (gui, "font_family_combo");
-	property_bar->priv->font_size_spin =
-		glade_xml_get_widget (gui, "font_size_spin");
-	property_bar->priv->font_bold_toggle =
-		glade_xml_get_widget (gui, "font_bold_toggle");
-	property_bar->priv->font_italic_toggle =
-		glade_xml_get_widget (gui, "font_italic_toggle");
-	property_bar->priv->text_align_left_radio =
-		glade_xml_get_widget (gui, "text_align_left_radio");
-	property_bar->priv->text_align_center_radio =
-		glade_xml_get_widget (gui, "text_align_center_radio");
-	property_bar->priv->text_align_right_radio =
-		glade_xml_get_widget (gui, "text_align_right_radio");
-	property_bar->priv->text_color_combo =
-		glade_xml_get_widget (gui, "text_color_combo");
-	property_bar->priv->fill_color_combo =
-		glade_xml_get_widget (gui, "fill_color_combo");
-	property_bar->priv->line_color_combo =
-		glade_xml_get_widget (gui, "line_color_combo");
-	property_bar->priv->line_width_spin =
-		glade_xml_get_widget (gui, "line_width_spin");
+	gtk_container_add (GTK_CONTAINER (this), this->priv->tool_bar);
+
+        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
+        this->priv->text_color_combo =
+                gl_color_combo_new (pixbuf,
+                                    _("Default"),
+                                    GL_COLOR_TEXT_DEFAULT,
+                                    gl_prefs->default_text_color);
+	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->text_color_combo),
+                                   GTK_RELIEF_NONE);
+	g_object_unref (G_OBJECT (pixbuf));
+        gtk_container_add (GTK_CONTAINER (this->priv->text_color_eventbox),
+                           this->priv->text_color_combo);
+
+        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
+        this->priv->fill_color_combo =
+                gl_color_combo_new (pixbuf,
+                                    _("No Fill"),
+                                    GL_COLOR_NO_FILL,
+                                    gl_prefs->default_fill_color);
+	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->fill_color_combo),
+                                   GTK_RELIEF_NONE);
+	g_object_unref (G_OBJECT (pixbuf));
+        gtk_container_add (GTK_CONTAINER (this->priv->fill_color_eventbox),
+                           this->priv->fill_color_combo);
+
+        pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
+        this->priv->line_color_combo =
+                gl_color_combo_new (pixbuf,
+                                    _("No Line"),
+                                    GL_COLOR_NO_LINE,
+                                    gl_prefs->default_line_color);
+	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->line_color_combo),
+                                   GTK_RELIEF_NONE);
+	g_object_unref (G_OBJECT (pixbuf));
+        gtk_container_add (GTK_CONTAINER (this->priv->line_color_eventbox),
+                           this->priv->line_color_combo);
 
         /* Save reference to gui tree so we don't lose tooltips */
-        property_bar->priv->gui = gui;
+        this->priv->gui = gui;
 
-	set_doc_items_sensitive (property_bar, FALSE);
+	set_doc_items_sensitive (this, FALSE);
 
 	/* Font family entry widget */
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (property_bar->priv->font_family_combo));
+	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (this->priv->font_family_combo));
 	family_names = gl_util_get_font_family_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
+	gl_util_combo_box_set_strings (GTK_COMBO_BOX (this->priv->font_family_combo),
 				       family_names);
-	gtk_widget_set_size_request (property_bar->priv->font_family_combo, 200, -1);
+	gtk_widget_set_size_request (this->priv->font_family_combo, 200, -1);
 
 	/* Make sure we have a valid font.  if not provide a good default. */
 	family_node = g_list_find_custom (family_names,
@@ -286,86 +328,87 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
 					  (GCompareFunc)g_utf8_collate);
 	if (family_node)
         {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
+		gtk_combo_box_set_active (GTK_COMBO_BOX (this->priv->font_family_combo),
 					  g_list_position (family_names,
 							   family_node));
 	}
         else
         {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo), 0);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (this->priv->font_family_combo), 0);
 	}
 	gl_util_font_family_list_free (family_names);
 
-	g_signal_connect (G_OBJECT (property_bar->priv->font_family_combo),
-			  "changed", G_CALLBACK (font_family_changed_cb), property_bar);
+	g_signal_connect (G_OBJECT (this->priv->font_family_combo),
+			  "changed", G_CALLBACK (font_family_changed_cb), this);
 
 	/* Font size entry widget */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->font_size_spin),
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->font_size_spin),
 				   gl_prefs->default_font_size);
 
-	g_signal_connect (G_OBJECT (property_bar->priv->font_size_spin),
-			  "changed", G_CALLBACK (font_size_changed_cb), property_bar);
+	g_signal_connect (G_OBJECT (this->priv->font_size_spin),
+			  "changed", G_CALLBACK (font_size_changed_cb), this);
 
 
 	/* Bold and Italic toggles */
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_bold_toggle),
 					   (gl_prefs->default_font_weight == PANGO_WEIGHT_BOLD));
-	g_signal_connect (G_OBJECT (property_bar->priv->font_bold_toggle),
-			  "toggled", G_CALLBACK (font_bold_toggled_cb), property_bar);
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
+	g_signal_connect (G_OBJECT (this->priv->font_bold_toggle),
+			  "toggled", G_CALLBACK (font_bold_toggled_cb), this);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_italic_toggle),
 					   gl_prefs->default_font_italic_flag);
-	g_signal_connect (G_OBJECT (property_bar->priv->font_italic_toggle),
-			  "toggled", G_CALLBACK (font_italic_toggled_cb), property_bar);
+	g_signal_connect (G_OBJECT (this->priv->font_italic_toggle),
+			  "toggled", G_CALLBACK (font_italic_toggled_cb), this);
 
 
 	/* Text alignment radio group */
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio),
 					   (gl_prefs->default_text_alignment == PANGO_ALIGN_LEFT));
-	g_signal_connect (G_OBJECT (property_bar->priv->text_align_left_radio),
-			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
+	g_signal_connect (G_OBJECT (this->priv->text_align_left_radio),
+			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio),
 					   (gl_prefs->default_text_alignment == PANGO_ALIGN_CENTER));
-	g_signal_connect (G_OBJECT (property_bar->priv->text_align_center_radio),
-			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
+	g_signal_connect (G_OBJECT (this->priv->text_align_center_radio),
+			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (gl_prefs->default_text_alignment == PANGO_ALIGN_RIGHT));
-	g_signal_connect (G_OBJECT (property_bar->priv->text_align_right_radio),
-			  "toggled", G_CALLBACK (text_align_toggled_cb), property_bar);
+	g_signal_connect (G_OBJECT (this->priv->text_align_right_radio),
+			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 
 	/* Text color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->text_color_combo), gl_prefs->default_text_color);
-	g_signal_connect (G_OBJECT (property_bar->priv->text_color_combo),
+	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->text_color_combo), gl_prefs->default_text_color);
+	g_signal_connect (G_OBJECT (this->priv->text_color_combo),
 			  "color_changed",
-			  G_CALLBACK (text_color_changed_cb), property_bar);
+			  G_CALLBACK (text_color_changed_cb), this);
 
 	/* Fill color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->fill_color_combo), gl_prefs->default_fill_color);
-	g_signal_connect (G_OBJECT (property_bar->priv->fill_color_combo),
+	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->fill_color_combo), gl_prefs->default_fill_color);
+	g_signal_connect (G_OBJECT (this->priv->fill_color_combo),
 			  "color_changed",
-			  G_CALLBACK (fill_color_changed_cb), property_bar);
+			  G_CALLBACK (fill_color_changed_cb), this);
 
 	/* Line color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->line_color_combo), gl_prefs->default_line_color);
-	g_signal_connect (G_OBJECT (property_bar->priv->line_color_combo),
+	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->line_color_combo), gl_prefs->default_line_color);
+	g_signal_connect (G_OBJECT (this->priv->line_color_combo),
 			  "color_changed",
-			  G_CALLBACK (line_color_changed_cb), property_bar);
+			  G_CALLBACK (line_color_changed_cb), this);
 
 	/* Line width entry widget */
-	g_signal_connect (G_OBJECT (property_bar->priv->line_width_spin),
+	g_signal_connect (G_OBJECT (this->priv->line_width_spin),
 			  "changed",
-			  G_CALLBACK (line_width_changed_cb), property_bar);
+			  G_CALLBACK (line_width_changed_cb), this);
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
+
 
 /****************************************************************************/
 /* Fill widgets with default values.                                        */
 /****************************************************************************/
 static void
 reset_to_default_properties (glView *view,
-			     glUIPropertyBar *property_bar)
+			     glUIPropertyBar *this)
 {
 	GList     *family_names;
 	gchar     *good_font_family;
@@ -389,41 +432,42 @@ reset_to_default_properties (glView *view,
 			good_font_family = NULL;
 		}
 	}
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (this->priv->font_family_combo),
 					   good_font_family);
 	g_free (good_font_family);
 	gl_util_font_family_list_free (family_names);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->font_size_spin),
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->font_size_spin),
 				   view->default_font_size);
 
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_bold_toggle),
 					   (view->default_font_weight == PANGO_WEIGHT_BOLD));
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_italic_toggle),
 					   view->default_font_italic_flag);
 
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio),
 					   (view->default_text_alignment == PANGO_ALIGN_LEFT));
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio),
 					   (view->default_text_alignment == PANGO_ALIGN_CENTER));
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (view->default_text_alignment == PANGO_ALIGN_RIGHT));
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->text_color_combo), view->default_text_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->text_color_combo), view->default_text_color);
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->fill_color_combo), view->default_fill_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->fill_color_combo), view->default_fill_color);
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(property_bar->priv->line_color_combo), view->default_line_color);
+	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->line_color_combo), view->default_line_color);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->line_width_spin),
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->line_width_spin),
 				   view->default_line_width);
 }
+
 
 /****************************************************************************/
 /* Set view associated with property_bar.                                   */
 /****************************************************************************/
 void
-gl_ui_property_bar_set_view (glUIPropertyBar *property_bar,
+gl_ui_property_bar_set_view (glUIPropertyBar *this,
 			     glView          *view)
 {
 	glLabel   *label;
@@ -434,36 +478,37 @@ gl_ui_property_bar_set_view (glUIPropertyBar *property_bar,
 	label = view->label;
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	set_doc_items_sensitive (property_bar, TRUE);
+	set_doc_items_sensitive (this, TRUE);
 
-	property_bar->priv->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
+	this->priv->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
 
-	reset_to_default_properties (view, property_bar);
+	reset_to_default_properties (view, this);
 
 	g_signal_connect_swapped (G_OBJECT(view), "selection_changed",
-				  G_CALLBACK(selection_changed_cb), property_bar);
+				  G_CALLBACK(selection_changed_cb), this);
 
 	g_signal_connect_swapped (G_OBJECT(view->label), "changed",
-				  G_CALLBACK(selection_changed_cb), property_bar);
+				  G_CALLBACK(selection_changed_cb), this);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
+
 
 /****************************************************************************/
 /** Set visiblity of property bar's tooltips.                               */
 /****************************************************************************/
 void
-gl_ui_property_bar_set_tooltips (glUIPropertyBar *property_bar,
+gl_ui_property_bar_set_tooltips (glUIPropertyBar *this,
 				 gboolean         state)
 {
 	GtkTooltipsData *data;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR(property_bar));
+	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR(this));
 
-	/* HACK: peek into one of our widgets to get the tooltips group created by libglade. */
-	data = gtk_tooltips_data_get (property_bar->priv->font_size_spin);
+	/* HACK: peek into one of our widgets to get the tooltips group created by builder. */
+	data = gtk_tooltips_data_get (this->priv->font_size_spin);
 	g_return_if_fail (data);
 
 	if (state)
@@ -478,12 +523,13 @@ gl_ui_property_bar_set_tooltips (glUIPropertyBar *property_bar,
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  View "selection state changed" callback.                        */
 /*---------------------------------------------------------------------------*/
 static void
 update_text_properties (glView *view,
-			glUIPropertyBar *property_bar)
+			glUIPropertyBar *this)
 {
 	gboolean        can_text, is_first_object;
 	gboolean        is_same_font_family, is_same_font_size;
@@ -500,7 +546,7 @@ update_text_properties (glView *view,
 	PangoAlignment  selection_align, align;
 
 	can_text = gl_view_can_selection_text (view);
-	set_text_items_sensitive (property_bar, can_text);
+	set_text_items_sensitive (this, can_text);
 
 	if (!can_text) 
 		return;
@@ -590,7 +636,7 @@ update_text_properties (glView *view,
 	if (is_same_font_family && (selection_font_family != NULL)) 
 		gl_debug (DEBUG_PROPERTY_BAR, "same font family = %s", 
 			  selection_font_family);
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
+	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (this->priv->font_family_combo),
 					   is_same_font_family?selection_font_family:"");
 	g_free (selection_font_family);
 
@@ -598,18 +644,18 @@ update_text_properties (glView *view,
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same font size = %g", 
 			  selection_font_size);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (property_bar->priv->font_size_spin),
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (this->priv->font_size_spin),
 					   selection_font_size);
 	}
         else
         {
-		gtk_entry_set_text (GTK_ENTRY (property_bar->priv->font_size_spin), "");
+		gtk_entry_set_text (GTK_ENTRY (this->priv->font_size_spin), "");
 	}
 
 	if (is_same_text_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same text color = %08x", selection_text_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->text_color_combo),
+		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->text_color_combo),
                                           selection_text_color);
 	}
 
@@ -618,7 +664,7 @@ update_text_properties (glView *view,
 		gl_debug (DEBUG_PROPERTY_BAR, "same italic flag = %d", 
 			  selection_is_italic);
         }
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_italic_toggle),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_italic_toggle),
 					   selection_is_italic && is_same_is_italic);
 
 	if (is_same_is_bold)
@@ -626,25 +672,26 @@ update_text_properties (glView *view,
 		gl_debug (DEBUG_PROPERTY_BAR, "same bold flag = %d",
 			  selection_is_bold);
         }
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->font_bold_toggle),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_bold_toggle),
 					   selection_is_bold && is_same_is_bold);
 
 	if (is_same_align) 
 		gl_debug (DEBUG_PROPERTY_BAR, "same align");
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio),
 					   (selection_align == PANGO_ALIGN_LEFT) &&
 					   is_same_align);
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio),
 					   (selection_align == PANGO_ALIGN_CENTER) &&
 					   is_same_align);
-	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio),
+	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (selection_align == PANGO_ALIGN_RIGHT) &&
 					   is_same_align);
 }
 
+
 static void
 update_fill_color (glView *view,
-		   glUIPropertyBar *property_bar)
+		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_fill_color;
@@ -654,7 +701,7 @@ update_fill_color (glView *view,
 	glColorNode *fill_color_node;
 
 	can = gl_view_can_selection_fill (view);
-	set_fill_items_sensitive (property_bar, can);
+	set_fill_items_sensitive (this, can);
 
 	if (!can) 
 		return;
@@ -700,14 +747,15 @@ update_fill_color (glView *view,
 	if (is_same_fill_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same fill color = %08x", selection_fill_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->fill_color_combo),
+		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->fill_color_combo),
                                           selection_fill_color);
 	}
 }
 
+
 static void
 update_line_color (glView *view,
-		   glUIPropertyBar *property_bar)
+		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_line_color;
@@ -717,7 +765,7 @@ update_line_color (glView *view,
 	glColorNode *line_color_node;
 
 	can = gl_view_can_selection_line_color (view);
-	set_line_color_items_sensitive (property_bar, can);
+	set_line_color_items_sensitive (this, can);
 
 	if (!can) 
 		return;
@@ -763,14 +811,15 @@ update_line_color (glView *view,
 	if (is_same_line_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line color = %08x", selection_line_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (property_bar->priv->line_color_combo),
+		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->line_color_combo),
                                           selection_line_color);
 	}
 }
 
+
 static void
 update_line_width (glView *view,
-		   glUIPropertyBar *property_bar)
+		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_line_width;
@@ -779,7 +828,7 @@ update_line_width (glView *view,
 	gdouble selection_line_width, line_width;
 
 	can = gl_view_can_selection_line_width (view);
-	set_line_width_items_sensitive (property_bar, can);
+	set_line_width_items_sensitive (this, can);
 
 	if (!can) 
 		return;
@@ -814,101 +863,105 @@ update_line_width (glView *view,
 	if (is_same_line_width)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line width = %g", selection_line_width);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (property_bar->priv->line_width_spin),
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (this->priv->line_width_spin),
 					   selection_line_width);
 	}
         else
         {
-		gtk_entry_set_text (GTK_ENTRY (property_bar->priv->line_width_spin), "");
+		gtk_entry_set_text (GTK_ENTRY (this->priv->line_width_spin), "");
 	}
 }
 
+
 static void 
-selection_changed_cb (glUIPropertyBar *property_bar)
+selection_changed_cb (glUIPropertyBar *this)
 {
-	glView *view = property_bar->priv->view;
+	glView *view = this->priv->view;
 	
 	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
+	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR (this));
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	if (gl_view_is_selection_empty (view))
         {
 		/* No selection: make all controls active. */
-		reset_to_default_properties (view, property_bar);
-		set_doc_items_sensitive (property_bar, TRUE);
+		reset_to_default_properties (view, this);
+		set_doc_items_sensitive (this, TRUE);
 	}
         else
         {
-		update_text_properties (view, property_bar);
-		update_fill_color (view, property_bar);
-		update_line_color (view, property_bar);
-		update_line_width (view, property_bar);
+		update_text_properties (view, this);
+		update_fill_color (view, this);
+		update_line_color (view, this);
+		update_line_width (view, this);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Font family entry changed.                                     */
 /*--------------------------------------------------------------------------*/
 static void
 font_family_changed_cb (GtkComboBox     *combo,
-			glUIPropertyBar *property_bar)
+			glUIPropertyBar *this)
 {
 	gchar *font_family;
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
 	if ( strlen(font_family) )
         {
-		gl_view_set_selection_font_family (property_bar->priv->view,
+		gl_view_set_selection_font_family (this->priv->view,
 						   font_family);
-		gl_view_set_default_font_family   (property_bar->priv->view,
+		gl_view_set_default_font_family   (this->priv->view,
 						   font_family);
 	}
 	g_free (font_family);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Font size spin button changed.                                 */
 /*--------------------------------------------------------------------------*/
 static void
 font_size_changed_cb (GtkSpinButton        *spin,
-		      glUIPropertyBar      *property_bar)
+		      glUIPropertyBar      *this)
 {
 	gdouble font_size;
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	font_size = gtk_spin_button_get_value (spin);
 
-	gl_view_set_selection_font_size (property_bar->priv->view,
+	gl_view_set_selection_font_size (this->priv->view,
 					 font_size);
-	gl_view_set_default_font_size   (property_bar->priv->view,
+	gl_view_set_default_font_size   (this->priv->view,
 					 font_size);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Text color combo changed.                                      */
@@ -917,14 +970,14 @@ static void
 text_color_changed_cb (glColorCombo         *cc,
                        guint                 color,
 		       gboolean              is_default,
-		       glUIPropertyBar      *property_bar)
+		       glUIPropertyBar      *this)
 {
 	glColorNode *text_color_node;
 
-	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
+	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR (this));
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -937,16 +990,16 @@ text_color_changed_cb (glColorCombo         *cc,
 	if (is_default)
         {
 		text_color_node->color = gl_prefs->default_text_color;
-		gl_view_set_selection_text_color (property_bar->priv->view,
+		gl_view_set_selection_text_color (this->priv->view,
 						  text_color_node);
-		gl_view_set_default_text_color   (property_bar->priv->view,
+		gl_view_set_default_text_color   (this->priv->view,
 						  gl_prefs->default_text_color);
 	}
         else
         {
-		gl_view_set_selection_text_color (property_bar->priv->view,
+		gl_view_set_selection_text_color (this->priv->view,
 						  text_color_node);
-		gl_view_set_default_text_color   (property_bar->priv->view,
+		gl_view_set_default_text_color   (this->priv->view,
 						  text_color_node->color);
 	}
 
@@ -954,8 +1007,9 @@ text_color_changed_cb (glColorCombo         *cc,
 	
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Fill color combo changed.                                      */
@@ -964,14 +1018,14 @@ static void
 fill_color_changed_cb (glColorCombo         *cc,
                        guint                 color,
 		       gboolean              is_default,
-		       glUIPropertyBar      *property_bar)
+		       glUIPropertyBar      *this)
 {
 	glColorNode *fill_color_node;
 
-	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
+	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR (this));
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -986,24 +1040,25 @@ fill_color_changed_cb (glColorCombo         *cc,
         {
 
 		fill_color_node->color = GL_COLOR_NONE;
-		gl_view_set_selection_fill_color (property_bar->priv->view,
+		gl_view_set_selection_fill_color (this->priv->view,
 						  fill_color_node);
-		gl_view_set_default_fill_color   (property_bar->priv->view,
+		gl_view_set_default_fill_color   (this->priv->view,
 						  fill_color_node->color);
 	}
         else
         {
-		gl_view_set_selection_fill_color (property_bar->priv->view,
+		gl_view_set_selection_fill_color (this->priv->view,
 						  fill_color_node);
-		gl_view_set_default_fill_color   (property_bar->priv->view,
+		gl_view_set_default_fill_color   (this->priv->view,
 						  fill_color_node->color);
 	}
 	gl_color_node_free (&fill_color_node);
 	
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Line color combo changed.                                      */
@@ -1012,14 +1067,14 @@ static void
 line_color_changed_cb (glColorCombo         *cc,
                        guint                 color,
 		       gboolean              is_default,
-		       glUIPropertyBar      *property_bar)
+		       glUIPropertyBar      *this)
 {
 	glColorNode *line_color_node;
 
-	g_return_if_fail (property_bar && GL_IS_UI_PROPERTY_BAR (property_bar));
+	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR (this));
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -1032,67 +1087,69 @@ line_color_changed_cb (glColorCombo         *cc,
 	if (is_default)
         {
 		line_color_node->color = GL_COLOR_NONE;
-		gl_view_set_selection_line_color (property_bar->priv->view,
+		gl_view_set_selection_line_color (this->priv->view,
 						  line_color_node);
-		gl_view_set_default_line_color   (property_bar->priv->view,
+		gl_view_set_default_line_color   (this->priv->view,
 						  line_color_node->color);
 	}
         else
         {
-		gl_view_set_selection_line_color (property_bar->priv->view,
+		gl_view_set_selection_line_color (this->priv->view,
 						  line_color_node);
-		gl_view_set_default_line_color   (property_bar->priv->view,
+		gl_view_set_default_line_color   (this->priv->view,
 						  line_color_node->color);
 	}
 	gl_color_node_free (&line_color_node);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Line width spin button changed.                                */
 /*--------------------------------------------------------------------------*/
 static void
 line_width_changed_cb (GtkSpinButton        *spin,
-		       glUIPropertyBar      *property_bar)
+		       glUIPropertyBar      *this)
 {
 	gdouble line_width;
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	if (property_bar->priv->view)
+	if (this->priv->view)
         {
 		line_width = gtk_spin_button_get_value (spin);
 
-		gl_view_set_selection_line_width (property_bar->priv->view,
+		gl_view_set_selection_line_width (this->priv->view,
 						  line_width);
-		gl_view_set_default_line_width   (property_bar->priv->view,
+		gl_view_set_default_line_width   (this->priv->view,
 						  line_width);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Font bold toggled callback.                                     */
 /*---------------------------------------------------------------------------*/
 static void
 font_bold_toggled_cb (GtkToggleToolButton  *toggle,
-		      glUIPropertyBar      *property_bar)
+		      glUIPropertyBar      *this)
 {
 	gboolean        state;
 	PangoWeight     weight;
 
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
@@ -1100,193 +1157,151 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 
 	weight = state ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL;
 
-	gl_view_set_selection_font_weight (property_bar->priv->view, weight);
-	gl_view_set_default_font_weight   (property_bar->priv->view, weight);
+	gl_view_set_selection_font_weight (this->priv->view, weight);
+	gl_view_set_default_font_weight   (this->priv->view, weight);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
 						  
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Font italic toggled callback.                                   */
 /*---------------------------------------------------------------------------*/
 static void
 font_italic_toggled_cb (GtkToggleToolButton  *toggle,
-			glUIPropertyBar      *property_bar)
+			glUIPropertyBar      *this)
 {
 	gboolean state;
 
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	state = gtk_toggle_tool_button_get_active (toggle);
 
-	gl_view_set_selection_font_italic_flag (property_bar->priv->view, state);
-	gl_view_set_default_font_italic_flag   (property_bar->priv->view, state);
+	gl_view_set_selection_font_italic_flag (this->priv->view, state);
+	gl_view_set_default_font_italic_flag   (this->priv->view, state);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
 						  
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Text align toggled callback.                                    */
 /*---------------------------------------------------------------------------*/
 static void
 text_align_toggled_cb (GtkToggleToolButton  *toggle,
-		       glUIPropertyBar      *property_bar)
+		       glUIPropertyBar      *this)
 {
-	if (property_bar->priv->stop_signals) return;
-	property_bar->priv->stop_signals = TRUE;
+	if (this->priv->stop_signals) return;
+	this->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_left_radio)))
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio)))
 	{		
-		gl_view_set_selection_text_alignment (property_bar->priv->view,
+		gl_view_set_selection_text_alignment (this->priv->view,
 						      PANGO_ALIGN_LEFT);
-		gl_view_set_default_text_alignment   (property_bar->priv->view,
+		gl_view_set_default_text_alignment   (this->priv->view,
 						      PANGO_ALIGN_LEFT);
 	}
 
-	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_center_radio)))
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio)))
 	{		
-		gl_view_set_selection_text_alignment (property_bar->priv->view,
+		gl_view_set_selection_text_alignment (this->priv->view,
 						      PANGO_ALIGN_CENTER);
-		gl_view_set_default_text_alignment   (property_bar->priv->view,
+		gl_view_set_default_text_alignment   (this->priv->view,
 						      PANGO_ALIGN_CENTER);
 	}
 
-	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (property_bar->priv->text_align_right_radio)))
+	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio)))
 	{
-		gl_view_set_selection_text_alignment (property_bar->priv->view,
+		gl_view_set_selection_text_alignment (this->priv->view,
 						      PANGO_ALIGN_RIGHT);
-		gl_view_set_default_text_alignment   (property_bar->priv->view,
+		gl_view_set_default_text_alignment   (this->priv->view,
 						      PANGO_ALIGN_RIGHT);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
-	property_bar->priv->stop_signals = FALSE;
+	this->priv->stop_signals = FALSE;
 }
 
-
-/*****************************************************************************/
-/* Construct color combo "Custom widget".                                    */
-/*****************************************************************************/
-GtkWidget *
-gl_ui_property_bar_construct_color_combo (gchar *name,
-					  gchar *string1,
-					  gchar *string2,
-					  gint   int1,
-					  gint   int2)
-{
-	GtkWidget  *color_combo;
-	guint       color;
-	gchar      *no_color;
-	GdkPixbuf  *pixbuf = NULL;
-
-	switch (int1) {
-
-	case 0:
-		color    = gl_prefs->default_text_color;
-		no_color = _("Default");
-		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
-		break;
-
-	case 2:
-		color    = gl_prefs->default_line_color;
-		no_color = _("No line");
-		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
-		break;
-
-	case 1:
-	default:
-		color    = gl_prefs->default_fill_color;
-		no_color = _("No fill");
-		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
-		break;
-
-	}
-
-	color_combo = gl_color_combo_new (pixbuf, no_color, color, color);
-
-	gl_color_combo_set_relief (GL_COLOR_COMBO(color_combo),
-                                   GTK_RELIEF_NONE);
-
-	g_object_unref (G_OBJECT (pixbuf));
-
-	return color_combo;
-}
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of doc controls.                                */
 /*---------------------------------------------------------------------------*/
 static void
-set_doc_items_sensitive (glUIPropertyBar      *property_bar,
+set_doc_items_sensitive (glUIPropertyBar      *this,
 			 gboolean              state)
 {
-	gtk_widget_set_sensitive (property_bar->priv->font_family_combo,       state);
-	gtk_widget_set_sensitive (property_bar->priv->font_size_spin,          state);
-	gtk_widget_set_sensitive (property_bar->priv->font_bold_toggle,        state);
-	gtk_widget_set_sensitive (property_bar->priv->font_italic_toggle,      state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_left_radio,   state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_center_radio, state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (property_bar->priv->text_color_combo,        state);
-	gtk_widget_set_sensitive (property_bar->priv->fill_color_combo,        state);
-	gtk_widget_set_sensitive (property_bar->priv->line_color_combo,        state);
-	gtk_widget_set_sensitive (property_bar->priv->line_width_spin,         state);
+	gtk_widget_set_sensitive (this->priv->font_family_combo,       state);
+	gtk_widget_set_sensitive (this->priv->font_size_spin,          state);
+	gtk_widget_set_sensitive (this->priv->font_bold_toggle,        state);
+	gtk_widget_set_sensitive (this->priv->font_italic_toggle,      state);
+	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
+	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
+	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
+	gtk_widget_set_sensitive (this->priv->text_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->fill_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->line_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->line_width_spin,         state);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of text related controls.                       */
 /*---------------------------------------------------------------------------*/
 static void
-set_text_items_sensitive (glUIPropertyBar      *property_bar,
+set_text_items_sensitive (glUIPropertyBar      *this,
 			  gboolean              state)
 {
-	gtk_widget_set_sensitive (property_bar->priv->font_family_combo,       state);
-	gtk_widget_set_sensitive (property_bar->priv->font_size_spin,          state);
-	gtk_widget_set_sensitive (property_bar->priv->font_bold_toggle,        state);
-	gtk_widget_set_sensitive (property_bar->priv->font_italic_toggle,      state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_left_radio,   state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_center_radio, state);
-	gtk_widget_set_sensitive (property_bar->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (property_bar->priv->text_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->font_family_combo,       state);
+	gtk_widget_set_sensitive (this->priv->font_size_spin,          state);
+	gtk_widget_set_sensitive (this->priv->font_bold_toggle,        state);
+	gtk_widget_set_sensitive (this->priv->font_italic_toggle,      state);
+	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
+	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
+	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
+	gtk_widget_set_sensitive (this->priv->text_color_combo,        state);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of fill related controls.                       */
 /*---------------------------------------------------------------------------*/
 static void
-set_fill_items_sensitive (glUIPropertyBar      *property_bar,
+set_fill_items_sensitive (glUIPropertyBar      *this,
 			  gboolean              state)
 {
-	gtk_widget_set_sensitive (property_bar->priv->fill_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->fill_color_combo,        state);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of line color related controls.                 */
 /*---------------------------------------------------------------------------*/
 static void
-set_line_color_items_sensitive (glUIPropertyBar      *property_bar,
+set_line_color_items_sensitive (glUIPropertyBar      *this,
 				gboolean              state)
 {
-	gtk_widget_set_sensitive (property_bar->priv->line_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->line_color_combo,        state);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set sensitivity of line width related controls.                 */
 /*---------------------------------------------------------------------------*/
 static void
-set_line_width_items_sensitive (glUIPropertyBar      *property_bar,
+set_line_width_items_sensitive (glUIPropertyBar      *this,
 				gboolean              state)
 {
-	gtk_widget_set_sensitive (property_bar->priv->line_width_spin,         state);
+	gtk_widget_set_sensitive (this->priv->line_width_spin,         state);
 }
 
 

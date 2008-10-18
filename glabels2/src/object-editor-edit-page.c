@@ -69,12 +69,11 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->edit_page_vbox =
-		glade_xml_get_widget (editor->priv->gui, "edit_page_vbox");
-	editor->priv->edit_text_view =
-		glade_xml_get_widget (editor->priv->gui, "edit_text_view");
-	editor->priv->edit_insert_field_button =
-		glade_xml_get_widget (editor->priv->gui, "edit_insert_field_button");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "edit_page_vbox",           &editor->priv->edit_page_vbox,
+                                     "edit_text_view",           &editor->priv->edit_text_view,
+                                     "edit_insert_field_button", &editor->priv->edit_insert_field_button,
+                                     NULL);
 
 	editor->priv->edit_insert_field_menu = gl_wdgt_merge_menu_new ();
 

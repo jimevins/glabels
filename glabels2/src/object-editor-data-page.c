@@ -68,16 +68,13 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->data_page_vbox     = glade_xml_get_widget (editor->priv->gui,
-								 "data_page_vbox");
-	editor->priv->data_literal_radio = glade_xml_get_widget (editor->priv->gui,
-								 "data_literal_radio");
-	editor->priv->data_key_radio     = glade_xml_get_widget (editor->priv->gui,
-								 "data_key_radio");
-	editor->priv->data_text_entry    = glade_xml_get_widget (editor->priv->gui,
-								 "data_text_entry");
-	editor->priv->data_key_combo     = glade_xml_get_widget (editor->priv->gui,
-								 "data_key_combo");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "data_page_vbox",     &editor->priv->data_page_vbox,
+                                     "data_literal_radio", &editor->priv->data_literal_radio,
+                                     "data_key_radio",     &editor->priv->data_key_radio,
+                                     "data_text_entry",    &editor->priv->data_text_entry,
+                                     "data_key_combo",     &editor->priv->data_key_combo,
+                                     NULL);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->data_key_combo));
 

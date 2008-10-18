@@ -17,6 +17,7 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -684,24 +685,13 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox7">
+			    <widget class="GtkHBox" id="text_color_hbox">
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">12</property>
 
 			      <child>
-				<widget class="Custom" id="text_color_combo">
-				  <property name="visible">True</property>
-				  <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				  <property name="int1">2</property>
-				  <property name="int2">0</property>
-				  <property name="last_modification_time">Sun, 23 Nov 2003 15:42:02 GMT</property>
-				</widget>
-				<packing>
-				  <property name="padding">0</property>
-				  <property name="expand">False</property>
-				  <property name="fill">False</property>
-				</packing>
+				<placeholder/>
 			      </child>
 			    </widget>
 			    <packing>
@@ -1052,24 +1042,13 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox10">
+			    <widget class="GtkHBox" id="line_color_hbox">
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">12</property>
 
 			      <child>
-				<widget class="Custom" id="line_color_combo">
-				  <property name="visible">True</property>
-				  <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				  <property name="int1">1</property>
-				  <property name="int2">0</property>
-				  <property name="last_modification_time">Sun, 23 Nov 2003 15:42:41 GMT</property>
-				</widget>
-				<packing>
-				  <property name="padding">0</property>
-				  <property name="expand">False</property>
-				  <property name="fill">False</property>
-				</packing>
+				<placeholder/>
 			      </child>
 			    </widget>
 			    <packing>
@@ -1198,24 +1177,13 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox11">
+			    <widget class="GtkHBox" id="fill_color_hbox">
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">12</property>
 
 			      <child>
-				<widget class="Custom" id="fill_color_combo">
-				  <property name="visible">True</property>
-				  <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				  <property name="int1">0</property>
-				  <property name="int2">0</property>
-				  <property name="last_modification_time">Sun, 23 Nov 2003 15:43:12 GMT</property>
-				</widget>
-				<packing>
-				  <property name="padding">0</property>
-				  <property name="expand">False</property>
-				  <property name="fill">False</property>
-				</packing>
+				<placeholder/>
 			      </child>
 			    </widget>
 			    <packing>

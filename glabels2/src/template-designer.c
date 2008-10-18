@@ -26,7 +26,7 @@
 #include "template-designer.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
@@ -77,6 +77,18 @@
 
 struct _glTemplateDesignerPrivate
 {
+
+        GtkBuilder      *start_page_gui;
+        GtkBuilder      *name_page_gui;
+        GtkBuilder      *pg_size_page_gui;
+        GtkBuilder      *shape_page_gui;
+        GtkBuilder      *rect_size_page_gui;
+        GtkBuilder      *round_size_page_gui;
+        GtkBuilder      *cd_size_page_gui;
+        GtkBuilder      *nlayouts_page_gui;
+        GtkBuilder      *layout_page_gui;
+        GtkBuilder      *finish_page_gui;
+
 	/* Assistant pages */
 	GtkWidget       *start_page;
 	GtkWidget       *name_page;
@@ -171,6 +183,7 @@ struct _glTemplateDesignerPrivate
 	GtkWidget       *layout_y0_units_label;
 	GtkWidget       *layout_dx_units_label;
 	GtkWidget       *layout_dy_units_label;
+	GtkWidget       *mini_preview_vbox;
 	GtkWidget       *layout_mini_preview;
 	GtkWidget       *layout_test_button;
 
@@ -278,8 +291,6 @@ gl_template_designer_class_init (glTemplateDesignerClass *class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	gl_debug (DEBUG_TEMPLATE, "");
-	
   	gl_template_designer_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_template_designer_finalize;  	
@@ -308,6 +319,46 @@ gl_template_designer_finalize (GObject *object)
 	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+        if (dialog->priv->start_page_gui)
+        {
+                g_object_unref (dialog->priv->start_page_gui);
+        }
+        if (dialog->priv->name_page_gui)
+        {
+                g_object_unref (dialog->priv->name_page_gui);
+        }
+        if (dialog->priv->pg_size_page_gui)
+        {
+                g_object_unref (dialog->priv->pg_size_page_gui);
+        }
+        if (dialog->priv->shape_page_gui)
+        {
+                g_object_unref (dialog->priv->shape_page_gui);
+        }
+        if (dialog->priv->rect_size_page_gui)
+        {
+                g_object_unref (dialog->priv->rect_size_page_gui);
+        }
+        if (dialog->priv->round_size_page_gui)
+        {
+                g_object_unref (dialog->priv->round_size_page_gui);
+        }
+        if (dialog->priv->cd_size_page_gui)
+        {
+                g_object_unref (dialog->priv->cd_size_page_gui);
+        }
+        if (dialog->priv->nlayouts_page_gui)
+        {
+                g_object_unref (dialog->priv->nlayouts_page_gui);
+        }
+        if (dialog->priv->layout_page_gui)
+        {
+                g_object_unref (dialog->priv->layout_page_gui);
+        }
+        if (dialog->priv->finish_page_gui)
+        {
+                g_object_unref (dialog->priv->finish_page_gui);
+        }
 	g_free (dialog->priv);
 
 	G_OBJECT_CLASS (gl_template_designer_parent_class)->finalize (object);
@@ -345,6 +396,8 @@ static void
 gl_template_designer_construct (glTemplateDesigner *dialog)
 {
 	GdkPixbuf  *logo;
+
+	gl_debug (DEBUG_TEMPLATE, "START");
 
 	g_return_if_fail (dialog && GL_IS_TEMPLATE_DESIGNER (dialog));
 	g_return_if_fail (dialog->priv != NULL);
@@ -387,6 +440,8 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
                           G_CALLBACK(prepare_cb), NULL);
 
         gtk_widget_show_all (GTK_WIDGET(dialog));   
+
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -396,19 +451,26 @@ static void
 construct_start_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "start_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->start_page = glade_xml_get_widget (gui, "start_page");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-start-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "start_page", &dialog->priv->start_page,
+                                     NULL);
+
+        dialog->priv->start_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -426,6 +488,8 @@ construct_start_page (glTemplateDesigner      *dialog,
         gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
                                          dialog->priv->start_page,
                                          TRUE);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -435,24 +499,31 @@ static void
 construct_name_page (glTemplateDesigner      *dialog,
 		     GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder        *gui;
+        GError            *error = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "name_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->name_page          = glade_xml_get_widget (gui, "name_page");
-	dialog->priv->brand_entry        = glade_xml_get_widget (gui, "brand_entry");
-	dialog->priv->part_num_entry     = glade_xml_get_widget (gui, "part_num_entry");
-	dialog->priv->name_warning_image = glade_xml_get_widget (gui, "name_warning_image");
-	dialog->priv->name_warning_label = glade_xml_get_widget (gui, "name_warning_label");
-	dialog->priv->description_entry  = glade_xml_get_widget (gui, "description_entry");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-name-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "name_page",          &dialog->priv->name_page,
+                                     "brand_entry",        &dialog->priv->brand_entry,
+                                     "part_num_entry",     &dialog->priv->part_num_entry,
+                                     "name_warning_image", &dialog->priv->name_warning_image,
+                                     "name_warning_label", &dialog->priv->name_warning_label,
+                                     "description_entry",  &dialog->priv->description_entry,
+                                     NULL);
+
+        dialog->priv->name_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -474,6 +545,7 @@ construct_name_page (glTemplateDesigner      *dialog,
 	g_signal_connect_swapped (G_OBJECT(dialog->priv->description_entry), "changed",
 				  G_CALLBACK(name_page_changed_cb), dialog);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -483,27 +555,34 @@ static void
 construct_pg_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 	GList           *page_sizes;
 	const gchar     *default_page_size_id;
 	gchar           *default_page_size_name;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "pg_size_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->pg_size_page     = glade_xml_get_widget (gui, "pg_size_page");
-	dialog->priv->pg_size_combo    = glade_xml_get_widget (gui, "pg_size_combo");
-	dialog->priv->pg_w_spin        = glade_xml_get_widget (gui, "pg_w_spin");
-	dialog->priv->pg_h_spin        = glade_xml_get_widget (gui, "pg_h_spin");
-	dialog->priv->pg_w_units_label = glade_xml_get_widget (gui, "pg_w_units_label");
-	dialog->priv->pg_h_units_label = glade_xml_get_widget (gui, "pg_h_units_label");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-pg-size-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "pg_size_page",     &dialog->priv->pg_size_page,
+                                     "pg_size_combo",    &dialog->priv->pg_size_combo,
+                                     "pg_w_spin",        &dialog->priv->pg_w_spin,
+                                     "pg_h_spin",        &dialog->priv->pg_h_spin,
+                                     "pg_w_units_label", &dialog->priv->pg_w_units_label,
+                                     "pg_h_units_label", &dialog->priv->pg_h_units_label,
+                                     NULL);
+
+        dialog->priv->pg_size_page_gui = gui;
 
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
@@ -552,6 +631,8 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 	/* This controls sensitivity of related widgets. */
 	g_signal_connect_swapped (G_OBJECT(dialog->priv->pg_size_combo), "changed",
 				  G_CALLBACK(pg_size_page_changed_cb), dialog);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -561,22 +642,29 @@ static void
 construct_shape_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "shape_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->shape_page        = glade_xml_get_widget (gui, "shape_page");
-	dialog->priv->shape_rect_radio  = glade_xml_get_widget (gui, "shape_rect_radio");
-	dialog->priv->shape_round_radio = glade_xml_get_widget (gui, "shape_round_radio");
-	dialog->priv->shape_cd_radio    = glade_xml_get_widget (gui, "shape_cd_radio");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-shape-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "shape_page",        &dialog->priv->shape_page,
+                                     "shape_rect_radio",  &dialog->priv->shape_rect_radio,
+                                     "shape_round_radio", &dialog->priv->shape_round_radio,
+                                     "shape_cd_radio",    &dialog->priv->shape_cd_radio,
+                                     NULL);
+
+        dialog->priv->shape_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -591,6 +679,8 @@ construct_shape_page (glTemplateDesigner      *dialog,
         gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
                                          dialog->priv->shape_page,
                                          TRUE);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -600,33 +690,41 @@ static void
 construct_rect_size_page (glTemplateDesigner      *dialog,
 			  GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "rect_size_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->rect_size_page           = glade_xml_get_widget (gui, "rect_size_page");
-	dialog->priv->rect_image               = glade_xml_get_widget (gui, "rect_image");
-	dialog->priv->rect_w_spin              = glade_xml_get_widget (gui, "rect_w_spin");
-	dialog->priv->rect_h_spin              = glade_xml_get_widget (gui, "rect_h_spin");
-	dialog->priv->rect_r_spin              = glade_xml_get_widget (gui, "rect_r_spin");
-	dialog->priv->rect_x_waste_spin        = glade_xml_get_widget (gui, "rect_x_waste_spin");
-	dialog->priv->rect_y_waste_spin        = glade_xml_get_widget (gui, "rect_y_waste_spin");
-	dialog->priv->rect_margin_spin         = glade_xml_get_widget (gui, "rect_margin_spin");
-	dialog->priv->rect_w_units_label       = glade_xml_get_widget (gui, "rect_w_units_label");
-	dialog->priv->rect_h_units_label       = glade_xml_get_widget (gui, "rect_h_units_label");
-	dialog->priv->rect_r_units_label       = glade_xml_get_widget (gui, "rect_r_units_label");
-	dialog->priv->rect_x_waste_units_label = glade_xml_get_widget (gui, "rect_x_waste_units_label");
-	dialog->priv->rect_y_waste_units_label = glade_xml_get_widget (gui, "rect_y_waste_units_label");
-	dialog->priv->rect_margin_units_label  = glade_xml_get_widget (gui, "rect_margin_units_label");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-rect-size-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+
+        gl_util_get_builder_widgets (gui,
+                                     "rect_size_page",           &dialog->priv->rect_size_page,
+                                     "rect_image",               &dialog->priv->rect_image,
+                                     "rect_w_spin",              &dialog->priv->rect_w_spin,
+                                     "rect_h_spin",              &dialog->priv->rect_h_spin,
+                                     "rect_r_spin",              &dialog->priv->rect_r_spin,
+                                     "rect_x_waste_spin",        &dialog->priv->rect_x_waste_spin,
+                                     "rect_y_waste_spin",        &dialog->priv->rect_y_waste_spin,
+                                     "rect_margin_spin",         &dialog->priv->rect_margin_spin,
+                                     "rect_w_units_label",       &dialog->priv->rect_w_units_label,
+                                     "rect_h_units_label",       &dialog->priv->rect_h_units_label,
+                                     "rect_r_units_label",       &dialog->priv->rect_r_units_label,
+                                     "rect_x_waste_units_label", &dialog->priv->rect_x_waste_units_label,
+                                     "rect_y_waste_units_label", &dialog->priv->rect_y_waste_units_label,
+                                     "rect_margin_units_label",  &dialog->priv->rect_margin_units_label,
+                                     NULL);
+
+        dialog->priv->rect_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -697,6 +795,8 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
 				   DEFAULT_RECT_WASTE * dialog->priv->units_per_point);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),
 				   DEFAULT_MARGIN * dialog->priv->units_per_point);
+
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -706,27 +806,34 @@ static void
 construct_round_size_page (glTemplateDesigner      *dialog,
 			   GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "round_size_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->round_size_page          = glade_xml_get_widget (gui, "round_size_page");
-	dialog->priv->round_image              = glade_xml_get_widget (gui, "round_image");
-	dialog->priv->round_r_spin             = glade_xml_get_widget (gui, "round_r_spin");
-	dialog->priv->round_waste_spin         = glade_xml_get_widget (gui, "round_waste_spin");
-	dialog->priv->round_margin_spin        = glade_xml_get_widget (gui, "round_margin_spin");
-	dialog->priv->round_r_units_label      = glade_xml_get_widget (gui, "round_r_units_label");
-	dialog->priv->round_waste_units_label  = glade_xml_get_widget (gui, "round_waste_units_label");
-	dialog->priv->round_margin_units_label = glade_xml_get_widget (gui, "round_margin_units_label");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-round-size-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "round_size_page",          &dialog->priv->round_size_page,
+                                     "round_image",              &dialog->priv->round_image,
+                                     "round_r_spin",             &dialog->priv->round_r_spin,
+                                     "round_waste_spin",         &dialog->priv->round_waste_spin,
+                                     "round_margin_spin",        &dialog->priv->round_margin_spin,
+                                     "round_r_units_label",      &dialog->priv->round_r_units_label,
+                                     "round_waste_units_label",  &dialog->priv->round_waste_units_label,
+                                     "round_margin_units_label", &dialog->priv->round_margin_units_label,
+                                     NULL);
+
+        dialog->priv->round_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -774,6 +881,7 @@ construct_round_size_page (glTemplateDesigner      *dialog,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin),
 				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -783,33 +891,40 @@ static void
 construct_cd_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "cd_size_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->cd_size_page = glade_xml_get_widget (gui, "cd_size_page");
-	dialog->priv->cd_image     = glade_xml_get_widget (gui, "cd_image");
-	dialog->priv->cd_radius_spin = glade_xml_get_widget (gui, "cd_radius_spin");
-	dialog->priv->cd_hole_spin   = glade_xml_get_widget (gui, "cd_hole_spin");
-	dialog->priv->cd_w_spin      = glade_xml_get_widget (gui, "cd_w_spin");
-	dialog->priv->cd_h_spin      = glade_xml_get_widget (gui, "cd_h_spin");
-	dialog->priv->cd_waste_spin  = glade_xml_get_widget (gui, "cd_waste_spin");
-	dialog->priv->cd_margin_spin = glade_xml_get_widget (gui, "cd_margin_spin");
-	dialog->priv->cd_radius_units_label = glade_xml_get_widget (gui, "cd_radius_units_label");
-	dialog->priv->cd_hole_units_label   = glade_xml_get_widget (gui, "cd_hole_units_label");
-	dialog->priv->cd_w_units_label      = glade_xml_get_widget (gui, "cd_w_units_label");
-	dialog->priv->cd_h_units_label      = glade_xml_get_widget (gui, "cd_h_units_label");
-	dialog->priv->cd_waste_units_label  = glade_xml_get_widget (gui, "cd_waste_units_label");
-	dialog->priv->cd_margin_units_label = glade_xml_get_widget (gui, "cd_margin_units_label");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-cd-size-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "cd_size_page",          &dialog->priv->cd_size_page,
+                                     "cd_image",              &dialog->priv->cd_image,
+                                     "cd_radius_spin",        &dialog->priv->cd_radius_spin,
+                                     "cd_hole_spin",          &dialog->priv->cd_hole_spin,
+                                     "cd_w_spin",             &dialog->priv->cd_w_spin,
+                                     "cd_h_spin",             &dialog->priv->cd_h_spin,
+                                     "cd_waste_spin",         &dialog->priv->cd_waste_spin,
+                                     "cd_margin_spin",        &dialog->priv->cd_margin_spin,
+                                     "cd_radius_units_label", &dialog->priv->cd_radius_units_label,
+                                     "cd_hole_units_label",   &dialog->priv->cd_hole_units_label,
+                                     "cd_w_units_label",      &dialog->priv->cd_w_units_label,
+                                     "cd_h_units_label",      &dialog->priv->cd_h_units_label,
+                                     "cd_waste_units_label",  &dialog->priv->cd_waste_units_label,
+                                     "cd_margin_units_label", &dialog->priv->cd_margin_units_label,
+                                     NULL);
+
+        dialog->priv->cd_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -877,6 +992,7 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),
 				   DEFAULT_MARGIN * dialog->priv->units_per_point);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -886,23 +1002,30 @@ static void
 construct_nlayouts_page (glTemplateDesigner      *dialog,
 			 GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "nlayouts_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->nlayouts_page   = glade_xml_get_widget (gui, "nlayouts_page");
-	dialog->priv->nlayouts_image1 = glade_xml_get_widget (gui, "nlayouts_image1");
-	dialog->priv->nlayouts_image2 = glade_xml_get_widget (gui, "nlayouts_image2");
-	dialog->priv->nlayouts_spin   = glade_xml_get_widget (gui, "nlayouts_spin");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-nlayouts-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "nlayouts_page",   &dialog->priv->nlayouts_page,
+                                     "nlayouts_image1", &dialog->priv->nlayouts_image1,
+                                     "nlayouts_image2", &dialog->priv->nlayouts_image2,
+                                     "nlayouts_spin",   &dialog->priv->nlayouts_spin,
+                                     NULL);
+
+        dialog->priv->nlayouts_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -924,6 +1047,7 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
 	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE2, NULL);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image2), pixbuf);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -933,40 +1057,50 @@ static void
 construct_layout_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "layout_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->layout_page           = glade_xml_get_widget (gui, "layout_page");
-	dialog->priv->layout1_head_label    = glade_xml_get_widget (gui, "layout1_head_label");
-	dialog->priv->layout1_nx_spin       = glade_xml_get_widget (gui, "layout1_nx_spin");
-	dialog->priv->layout1_ny_spin       = glade_xml_get_widget (gui, "layout1_ny_spin");
-	dialog->priv->layout1_x0_spin       = glade_xml_get_widget (gui, "layout1_x0_spin");
-	dialog->priv->layout1_y0_spin       = glade_xml_get_widget (gui, "layout1_y0_spin");
-	dialog->priv->layout1_dx_spin       = glade_xml_get_widget (gui, "layout1_dx_spin");
-	dialog->priv->layout1_dy_spin       = glade_xml_get_widget (gui, "layout1_dy_spin");
-	dialog->priv->layout2_head_label    = glade_xml_get_widget (gui, "layout2_head_label");
-	dialog->priv->layout2_nx_spin       = glade_xml_get_widget (gui, "layout2_nx_spin");
-	dialog->priv->layout2_ny_spin       = glade_xml_get_widget (gui, "layout2_ny_spin");
-	dialog->priv->layout2_x0_spin       = glade_xml_get_widget (gui, "layout2_x0_spin");
-	dialog->priv->layout2_y0_spin       = glade_xml_get_widget (gui, "layout2_y0_spin");
-	dialog->priv->layout2_dx_spin       = glade_xml_get_widget (gui, "layout2_dx_spin");
-	dialog->priv->layout2_dy_spin       = glade_xml_get_widget (gui, "layout2_dy_spin");
-	dialog->priv->layout_x0_units_label = glade_xml_get_widget (gui, "layout_x0_units_label");
-	dialog->priv->layout_y0_units_label = glade_xml_get_widget (gui, "layout_y0_units_label");
-	dialog->priv->layout_dx_units_label = glade_xml_get_widget (gui, "layout_dx_units_label");
-	dialog->priv->layout_dy_units_label = glade_xml_get_widget (gui, "layout_dy_units_label");
-	dialog->priv->layout_mini_preview   = glade_xml_get_widget (gui, "layout_mini_preview");
-	dialog->priv->layout_test_button    = glade_xml_get_widget (gui, "layout_test_button");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-layout-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "layout_page",           &dialog->priv->layout_page,
+                                     "layout1_head_label",    &dialog->priv->layout1_head_label,
+                                     "layout1_nx_spin",       &dialog->priv->layout1_nx_spin,
+                                     "layout1_ny_spin",       &dialog->priv->layout1_ny_spin,
+                                     "layout1_x0_spin",       &dialog->priv->layout1_x0_spin,
+                                     "layout1_y0_spin",       &dialog->priv->layout1_y0_spin,
+                                     "layout1_dx_spin",       &dialog->priv->layout1_dx_spin,
+                                     "layout1_dy_spin",       &dialog->priv->layout1_dy_spin,
+                                     "layout2_head_label",    &dialog->priv->layout2_head_label,
+                                     "layout2_nx_spin",       &dialog->priv->layout2_nx_spin,
+                                     "layout2_ny_spin",       &dialog->priv->layout2_ny_spin,
+                                     "layout2_x0_spin",       &dialog->priv->layout2_x0_spin,
+                                     "layout2_y0_spin",       &dialog->priv->layout2_y0_spin,
+                                     "layout2_dx_spin",       &dialog->priv->layout2_dx_spin,
+                                     "layout2_dy_spin",       &dialog->priv->layout2_dy_spin,
+                                     "layout_x0_units_label", &dialog->priv->layout_x0_units_label,
+                                     "layout_y0_units_label", &dialog->priv->layout_y0_units_label,
+                                     "layout_dx_units_label", &dialog->priv->layout_dx_units_label,
+                                     "layout_dy_units_label", &dialog->priv->layout_dy_units_label,
+                                     "mini_preview_vbox",     &dialog->priv->mini_preview_vbox,
+                                     "layout_test_button",    &dialog->priv->layout_test_button,
+                                     NULL);
 
+        dialog->priv->layout_page_gui = gui;
+
+        dialog->priv->layout_mini_preview = gl_wdgt_mini_preview_new (175, 200);
+        gtk_container_add (GTK_CONTAINER (dialog->priv->mini_preview_vbox),
+                           dialog->priv->layout_mini_preview);
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->layout_page);
@@ -1055,6 +1189,7 @@ construct_layout_page (glTemplateDesigner      *dialog,
 	g_signal_connect_swapped (G_OBJECT(dialog->priv->layout_test_button), "clicked",
 				  G_CALLBACK(print_test_cb), dialog);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1064,19 +1199,26 @@ static void
 construct_finish_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
-	GladeXML        *gui;
+	GtkBuilder      *gui;
+        GError          *error = NULL;
 
-	gui = glade_xml_new (GLABELS_GLADE_DIR "template-designer.glade",
-                             "finish_page", NULL);
-	if (!gui)
-        {
-                g_critical ("Could not open template-designer.glade. gLabels may not be installed correctly!");
-                return;
-        }
+	gl_debug (DEBUG_TEMPLATE, "START");
 
-	dialog->priv->finish_page = glade_xml_get_widget (gui, "finish_page");
+        gui = gtk_builder_new ();
+	gtk_builder_add_from_file (gui,
+                                   GLABELS_BUILDER_DIR "template-designer-finish-page.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
-        g_object_unref (gui);
+        gl_util_get_builder_widgets (gui,
+                                     "finish_page", &dialog->priv->finish_page,
+                                     NULL);
+
+        dialog->priv->finish_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -1095,6 +1237,7 @@ construct_finish_page (glTemplateDesigner      *dialog,
                                          dialog->priv->finish_page,
                                          TRUE);
 
+	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
 /*--------------------------------------------------------------------------*/
@@ -1738,21 +1881,5 @@ build_template (glTemplateDesigner      *dialog)
 	lgl_paper_free (paper);
 
 	return template;
-}
-
-/*****************************************************************************/
-/* Construct mini preview widget.                                            */
-/*****************************************************************************/
-GtkWidget *
-gl_template_designer_construct_mini_preview (gchar *name,
-					     gchar *string1,
-					     gchar *string2,
-					     gint   int1,
-					     gint   int2)
-{
-	gint width  = int1;
-	gint height = int2;
-
-	return gl_wdgt_mini_preview_new (height, width);
 }
 

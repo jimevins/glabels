@@ -67,18 +67,21 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->fill_page_vbox   = glade_xml_get_widget (editor->priv->gui,
-							       "fill_page_vbox");
-	editor->priv->fill_color_combo = glade_xml_get_widget (editor->priv->gui,
-							       "fill_color_combo");
-	editor->priv->fill_key_combo = glade_xml_get_widget (editor->priv->gui,
-							       	"fill_key_combo");	
-	editor->priv->fill_key_radio = glade_xml_get_widget (editor->priv->gui,
-							       	"fill_key_radio");	
-	editor->priv->fill_color_radio = glade_xml_get_widget (editor->priv->gui,
-							       	"fill_color_radio");	
-
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "fill_page_vbox",   &editor->priv->fill_page_vbox,
+                                     "fill_color_hbox",  &editor->priv->fill_color_hbox,
+                                     "fill_key_combo",   &editor->priv->fill_key_combo,
+                                     "fill_key_radio",   &editor->priv->fill_key_radio,
+                                     "fill_color_radio", &editor->priv->fill_color_radio,
+                                     NULL);
 	
+	editor->priv->fill_color_combo = gl_color_combo_new (NULL,
+                                                             _("No Fill"),
+                                                             GL_COLOR_NO_FILL,
+                                                             gl_prefs->default_fill_color);
+        gtk_container_add (GTK_CONTAINER (editor->priv->fill_color_hbox),
+                           editor->priv->fill_color_combo);
+
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
 
 	/* Modify widgets based on configuration */

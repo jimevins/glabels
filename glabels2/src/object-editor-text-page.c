@@ -72,34 +72,29 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->text_page_vbox =
-		glade_xml_get_widget (editor->priv->gui, "text_page_vbox");
-	editor->priv->text_family_combo =
-		glade_xml_get_widget (editor->priv->gui, "text_family_combo");
-	editor->priv->text_size_spin =
-		glade_xml_get_widget (editor->priv->gui, "text_size_spin");
-	editor->priv->text_bold_toggle =
-		glade_xml_get_widget (editor->priv->gui, "text_bold_toggle");
-	editor->priv->text_italic_toggle =
-		glade_xml_get_widget (editor->priv->gui, "text_italic_toggle");
-	editor->priv->text_color_combo =
-		glade_xml_get_widget (editor->priv->gui, "text_color_combo");
-	editor->priv->text_color_radio =
-		glade_xml_get_widget (editor->priv->gui, "text_color_radio");
-	editor->priv->text_color_key_radio =
-		glade_xml_get_widget (editor->priv->gui, "text_color_key_radio");
-	editor->priv->text_color_key_combo =
-		glade_xml_get_widget (editor->priv->gui, "text_color_key_combo");
-	editor->priv->text_left_toggle =
-		glade_xml_get_widget (editor->priv->gui, "text_left_toggle");
-	editor->priv->text_center_toggle =
-		glade_xml_get_widget (editor->priv->gui, "text_center_toggle");
-	editor->priv->text_right_toggle =
-		glade_xml_get_widget (editor->priv->gui, "text_right_toggle");
-	editor->priv->text_line_spacing_spin =
-		glade_xml_get_widget (editor->priv->gui, "text_line_spacing_spin");
-	editor->priv->text_auto_shrink_check =
-		glade_xml_get_widget (editor->priv->gui, "text_auto_shrink_check");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "text_page_vbox",         &editor->priv->text_page_vbox,
+                                     "text_family_combo",      &editor->priv->text_family_combo,
+                                     "text_size_spin",         &editor->priv->text_size_spin,
+                                     "text_bold_toggle",       &editor->priv->text_bold_toggle,
+                                     "text_italic_toggle",     &editor->priv->text_italic_toggle,
+                                     "text_color_hbox",        &editor->priv->text_color_hbox,
+                                     "text_color_radio",       &editor->priv->text_color_radio,
+                                     "text_color_key_radio",   &editor->priv->text_color_key_radio,
+                                     "text_color_key_combo",   &editor->priv->text_color_key_combo,
+                                     "text_left_toggle",       &editor->priv->text_left_toggle,
+                                     "text_center_toggle",     &editor->priv->text_center_toggle,
+                                     "text_right_toggle",      &editor->priv->text_right_toggle,
+                                     "text_line_spacing_spin", &editor->priv->text_line_spacing_spin,
+                                     "text_auto_shrink_check", &editor->priv->text_auto_shrink_check,
+                                     NULL);
+
+	editor->priv->text_color_combo = gl_color_combo_new (NULL,
+                                                             _("Default"),
+                                                             GL_COLOR_TEXT_DEFAULT,
+                                                             gl_prefs->default_text_color);
+        gtk_container_add (GTK_CONTAINER (editor->priv->text_color_hbox),
+                           editor->priv->text_color_combo);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_family_combo));
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
@@ -113,7 +108,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
 	gtk_widget_set_sensitive (editor->priv->text_color_combo, TRUE);
-    gtk_widget_set_sensitive (editor->priv->text_color_key_combo, FALSE);
+        gtk_widget_set_sensitive (editor->priv->text_color_key_combo, FALSE);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->text_page_vbox);

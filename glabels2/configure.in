@@ -21,6 +21,7 @@ AC_HEADER_STDC
 GNOME_COMPILE_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+AC_PATH_PROG(GTK_BUILDER_CONVERT, gtk-builder-convert)
 
 GTK_DOC_CHECK(1.0)
 
@@ -55,7 +56,6 @@ GTK_REQUIRED=2.10.0
 LIBGNOME_REQUIRED=2.16.0
 LIBGNOMEUI_REQUIRED=2.16.0
 LIBXML_REQUIRED=2.6.0
-LIBGLADE_REQUIRED=2.6.0
 LIBEBOOK_REQUIRED=1.8.0
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
@@ -64,7 +64,6 @@ AC_SUBST(GTK_REQUIRED)
 AC_SUBST(LIBGNOME_REQUIRED)
 AC_SUBST(LIBGNOMEUI_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
-AC_SUBST(LIBGLADE_REQUIRED)
 AC_SUBST(LIBEBOOK_REQUIRED)
 
 
@@ -95,7 +94,6 @@ gtk+-2.0 >= $GTK_REQUIRED \
 libgnome-2.0 >= $LIBGNOME_REQUIRED \
 libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
-libglade-2.0 >= $LIBGLADE_REQUIRED \
 $OPTIONAL_MODULES \
 )
 
@@ -130,7 +128,7 @@ if test "x$enable_deprecations" = "xyes"; then
 -DGTK_DISABLE_DEPRECATED \
 -DGDK_PIXBUF_DISABLE_DEPRECATED \
 -DGNOME_DISABLE_DEPRECATED \
--DLIBGLADE_DISABLE_DEPRECATED"
+"
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
 
@@ -183,7 +181,7 @@ data/Makefile
 data/templates/Makefile
 data/pixmaps/Makefile
 data/mime/Makefile
-data/glade/Makefile
+data/builder/Makefile
 data/desktop/Makefile
 data/dtd/Makefile
 data/man/Makefile

@@ -3305,12 +3305,14 @@ two layouts.</property>
 		      <property name="spacing">6</property>
 
 		      <child>
-			<widget class="Custom" id="layout_mini_preview">
+			<widget class="GtkVBox" id="mini_preview_vbox">
 			  <property name="visible">True</property>
-			  <property name="creation_function">gl_template_designer_construct_mini_preview</property>
-			  <property name="int1">175</property>
-			  <property name="int2">200</property>
-			  <property name="last_modification_time">Mon, 29 Dec 2003 21:27:10 GMT</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>

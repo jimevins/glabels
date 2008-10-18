@@ -45,6 +45,12 @@ G_BEGIN_DECLS
 
 
 #define GL_COLOR_NONE                  GL_COLOR_A(0,0,0,0)
+#define GL_COLOR_BLACK                 GL_COLOR_A(0,0,0,255)
+
+#define GL_COLOR_TEXT_DEFAULT          GL_COLOR_BLACK
+#define GL_COLOR_BC_DEFAULT            GL_COLOR_BLACK
+#define GL_COLOR_NO_LINE               GL_COLOR_NONE
+#define GL_COLOR_NO_FILL               GL_COLOR_NONE
 #define GL_COLOR_FILL_MERGE_DEFAULT    GL_COLOR_A(255,255,255,128)
 #define GL_COLOR_MERGE_DEFAULT         GL_COLOR_A(0,0,0,128)
 #define GL_COLOR_SHADOW_DEFAULT        GL_COLOR(0,0,0)

@@ -66,16 +66,13 @@ gl_object_editor_prepare_position_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->pos_page_vbox = glade_xml_get_widget (editor->priv->gui,
-							      "pos_page_vbox");
-	editor->priv->pos_x_spin    = glade_xml_get_widget (editor->priv->gui,
-							      "pos_x_spin");
-	editor->priv->pos_y_spin    = glade_xml_get_widget (editor->priv->gui,
-							      "pos_y_spin");
-	editor->priv->pos_x_units_label = glade_xml_get_widget (editor->priv->gui,
-								  "pos_x_units_label");
-	editor->priv->pos_y_units_label = glade_xml_get_widget (editor->priv->gui,
-								  "pos_y_units_label");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "pos_page_vbox",     &editor->priv->pos_page_vbox,
+                                     "pos_x_spin",        &editor->priv->pos_x_spin,
+                                     "pos_y_spin",        &editor->priv->pos_y_spin,
+                                     "pos_x_units_label", &editor->priv->pos_x_units_label,
+                                     "pos_y_units_label", &editor->priv->pos_y_units_label,
+                                     NULL);
 
 	/* Get configuration information */
 	units_string = gl_prefs_get_units_string ();

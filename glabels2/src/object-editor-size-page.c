@@ -73,20 +73,23 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->size_page_vbox =
-		glade_xml_get_widget (editor->priv->gui, "size_page_vbox");
-	editor->priv->size_w_spin =
-		glade_xml_get_widget (editor->priv->gui, "size_w_spin");
-	editor->priv->size_h_spin =
-		glade_xml_get_widget (editor->priv->gui, "size_h_spin");
-	editor->priv->size_w_units_label =
-		glade_xml_get_widget (editor->priv->gui, "size_w_units_label");
-	editor->priv->size_h_units_label =
-		glade_xml_get_widget (editor->priv->gui, "size_h_units_label");
-	editor->priv->size_aspect_checkbutton =
-		glade_xml_get_widget (editor->priv->gui, "size_aspect_checkbutton");
-	editor->priv->size_reset_image_button =
-		glade_xml_get_widget (editor->priv->gui, "size_reset_image_button");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "size_page_vbox",          &editor->priv->size_page_vbox,
+                                     "size_w_spin",             &editor->priv->size_w_spin,
+                                     "size_h_spin",             &editor->priv->size_h_spin,
+                                     "size_w_units_label",      &editor->priv->size_w_units_label,
+                                     "size_h_units_label",      &editor->priv->size_h_units_label,
+                                     "size_aspect_vbox",        &editor->priv->size_aspect_vbox,
+                                     "size_reset_image_button", &editor->priv->size_reset_image_button,
+                                     NULL);
+
+	editor->priv->size_aspect_checkbutton = gl_wdgt_chain_button_new (GL_WDGT_CHAIN_RIGHT);
+	gl_wdgt_chain_button_set_active (GL_WDGT_CHAIN_BUTTON(editor->priv->size_aspect_checkbutton),
+                                         TRUE);
+        gtk_box_pack_start (GTK_BOX (editor->priv->size_aspect_vbox),
+                            editor->priv->size_aspect_checkbutton,
+                            FALSE, FALSE, 0);
+
 
 	/* Get configuration information */
 	units_string = gl_prefs_get_units_string ();

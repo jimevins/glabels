@@ -26,7 +26,7 @@
 #include "prefs-dialog.h"
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
+#include <gtk/gtkbuilder.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkstock.h>
 #include <gtk/gtkcombobox.h>
@@ -53,7 +53,7 @@
 
 struct _glPrefsDialogPrivate
 {
-	GladeXML   *gui;
+	GtkBuilder      *gui;
 
 	/* Units properties */
 	GtkWidget	*units_points_radio;
@@ -69,6 +69,7 @@ struct _glPrefsDialogPrivate
 	GtkWidget       *text_size_spin;
 	GtkWidget       *text_bold_toggle;
 	GtkWidget       *text_italic_toggle;
+	GtkWidget       *text_color_hbox;
 	GtkWidget       *text_color_combo;
 	GtkWidget       *text_left_toggle;
 	GtkWidget       *text_center_toggle;
@@ -77,9 +78,11 @@ struct _glPrefsDialogPrivate
 
 	/* Default line properties */
 	GtkWidget       *line_width_spin;
+	GtkWidget       *line_color_hbox;
 	GtkWidget       *line_color_combo;
 
 	/* Default fill properties */
+	GtkWidget       *fill_color_hbox;
 	GtkWidget       *fill_color_combo;
 
         /* Prevent recursion */
@@ -135,17 +138,19 @@ gl_prefs_dialog_class_init (glPrefsDialogClass *class)
 static void
 gl_prefs_dialog_init (glPrefsDialog *dialog)
 {
+        GError *error = NULL;
+
 	gl_debug (DEBUG_PREFS, "START");
 
 	dialog->priv = g_new0 (glPrefsDialogPrivate, 1);
 
-	dialog->priv->gui = glade_xml_new (GLABELS_GLADE_DIR "prefs-dialog.glade",
-					"prefs_notebook",
-					NULL);
-
-	if (!dialog->priv->gui)
-        {
-		g_critical ("Could not open prefs-dialog.glade. gLabels may not be installed correctly!");
+        dialog->priv->gui = gtk_builder_new ();
+	gtk_builder_add_from_file (dialog->priv->gui,
+                                   GLABELS_BUILDER_DIR "prefs-dialog.builder",
+                                   &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
 		return;
 	}
 
@@ -222,7 +227,9 @@ gl_prefs_dialog_construct (glPrefsDialog *dialog)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-	notebook = glade_xml_get_widget (dialog->priv->gui, "prefs_notebook");
+        gl_util_get_builder_widgets (dialog->priv->gui,
+                                     "prefs_notebook", &notebook,
+                                     NULL);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, FALSE, FALSE, 0);
 
 	construct_locale_page (dialog);
@@ -268,20 +275,13 @@ static void
 construct_locale_page (glPrefsDialog *dialog)
 {
 
-	dialog->priv->units_points_radio =
-		glade_xml_get_widget (dialog->priv->gui, "units_points_radio");
-
-	dialog->priv->units_inches_radio =
-		glade_xml_get_widget (dialog->priv->gui, "units_inches_radio");
-
-	dialog->priv->units_mm_radio =
-		glade_xml_get_widget (dialog->priv->gui, "units_mm_radio");
-
-	dialog->priv->page_size_us_letter_radio =
-		glade_xml_get_widget (dialog->priv->gui, "page_size_us_letter_radio");
-
-	dialog->priv->page_size_a4_radio =
-		glade_xml_get_widget (dialog->priv->gui, "page_size_a4_radio");
+        gl_util_get_builder_widgets (dialog->priv->gui,
+                                     "units_points_radio",        &dialog->priv->units_points_radio,
+                                     "units_inches_radio",        &dialog->priv->units_inches_radio,
+                                     "units_mm_radio",            &dialog->priv->units_mm_radio,
+                                     "page_size_us_letter_radio", &dialog->priv->page_size_us_letter_radio,
+                                     "page_size_a4_radio",        &dialog->priv->page_size_a4_radio,
+                                     NULL);
 
 	g_signal_connect_swapped (
 		G_OBJECT(dialog->priv->units_points_radio),
@@ -308,34 +308,39 @@ construct_object_page (glPrefsDialog *dialog)
 {
         GList    *family_names;
 
-	dialog->priv->text_family_combo =
-		glade_xml_get_widget (dialog->priv->gui, "text_family_combo");
-	dialog->priv->text_size_spin =
-		glade_xml_get_widget (dialog->priv->gui, "text_size_spin");
-	dialog->priv->text_bold_toggle =
-		glade_xml_get_widget (dialog->priv->gui, "text_bold_toggle");
-	dialog->priv->text_italic_toggle =
-		glade_xml_get_widget (dialog->priv->gui, "text_italic_toggle");
-	dialog->priv->text_color_combo =
-		glade_xml_get_widget (dialog->priv->gui, "text_color_combo");
-	dialog->priv->text_left_toggle =
-		glade_xml_get_widget (dialog->priv->gui, "text_left_toggle");
-	dialog->priv->text_center_toggle =
-		glade_xml_get_widget (dialog->priv->gui, "text_center_toggle");
-	dialog->priv->text_right_toggle =
-		glade_xml_get_widget (dialog->priv->gui, "text_right_toggle");
-	dialog->priv->text_line_spacing_spin =
-		glade_xml_get_widget (dialog->priv->gui, "text_line_spacing_spin");
-
-	dialog->priv->line_width_spin =
-		glade_xml_get_widget (dialog->priv->gui, "line_width_spin");
-	dialog->priv->line_color_combo =
-		glade_xml_get_widget (dialog->priv->gui, "line_color_combo");
-
-	dialog->priv->fill_color_combo =
-		glade_xml_get_widget (dialog->priv->gui, "fill_color_combo");
+        gl_util_get_builder_widgets (dialog->priv->gui,
+                                     "text_family_combo",      &dialog->priv->text_family_combo,
+                                     "text_size_spin",         &dialog->priv->text_size_spin,
+                                     "text_bold_toggle",       &dialog->priv->text_bold_toggle,
+                                     "text_italic_toggle",     &dialog->priv->text_italic_toggle,
+                                     "text_color_hbox",        &dialog->priv->text_color_hbox,
+                                     "text_left_toggle",       &dialog->priv->text_left_toggle,
+                                     "text_center_toggle",     &dialog->priv->text_center_toggle,
+                                     "text_right_toggle",      &dialog->priv->text_right_toggle,
+                                     "text_line_spacing_spin", &dialog->priv->text_line_spacing_spin,
+                                     "line_width_spin",        &dialog->priv->line_width_spin,
+                                     "line_color_hbox",        &dialog->priv->line_color_hbox,
+                                     "fill_color_hbox",        &dialog->priv->fill_color_hbox,
+                                     NULL);
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->text_family_combo));
+
+	dialog->priv->text_color_combo = gl_color_combo_new (NULL, _("Default"),
+                                                             GL_COLOR_TEXT_DEFAULT,
+                                                             gl_prefs->default_text_color);
+	dialog->priv->line_color_combo = gl_color_combo_new (NULL, _("No Line"),
+                                                             GL_COLOR_NO_LINE,
+                                                             gl_prefs->default_line_color);
+	dialog->priv->fill_color_combo = gl_color_combo_new (NULL, _("No Fill"),
+                                                             GL_COLOR_NO_FILL,
+                                                             gl_prefs->default_fill_color);
+
+        gtk_container_add (GTK_CONTAINER (dialog->priv->text_color_hbox),
+                           dialog->priv->text_color_combo);
+        gtk_container_add (GTK_CONTAINER (dialog->priv->line_color_hbox),
+                           dialog->priv->line_color_combo);
+        gtk_container_add (GTK_CONTAINER (dialog->priv->fill_color_hbox),
+                           dialog->priv->fill_color_combo);
 
         /* Load family names */
         family_names = gl_util_get_font_family_list ();

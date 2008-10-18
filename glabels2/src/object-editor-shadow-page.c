@@ -74,30 +74,27 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->shadow_page_vbox
-		= glade_xml_get_widget (editor->priv->gui, "shadow_page_vbox");
-	editor->priv->shadow_enable_check
-		= glade_xml_get_widget (editor->priv->gui, "shadow_enable_check");
-	editor->priv->shadow_controls_table
-		= glade_xml_get_widget (editor->priv->gui, "shadow_controls_table");
-	editor->priv->shadow_x_spin
-		= glade_xml_get_widget (editor->priv->gui, "shadow_x_spin");
-	editor->priv->shadow_y_spin
-		= glade_xml_get_widget (editor->priv->gui, "shadow_y_spin");
-	editor->priv->shadow_x_units_label
-		= glade_xml_get_widget (editor->priv->gui, "shadow_x_units_label");
-	editor->priv->shadow_y_units_label
-		= glade_xml_get_widget (editor->priv->gui, "shadow_y_units_label");
-	editor->priv->shadow_color_radio
-		= glade_xml_get_widget (editor->priv->gui, "shadow_color_radio");	
-	editor->priv->shadow_key_radio
-		= glade_xml_get_widget (editor->priv->gui, "shadow_key_radio");	
-	editor->priv->shadow_color_combo
-		= glade_xml_get_widget (editor->priv->gui, "shadow_color_combo");
-	editor->priv->shadow_key_combo
-		= glade_xml_get_widget (editor->priv->gui, "shadow_key_combo");	
-	editor->priv->shadow_opacity_spin
-		= glade_xml_get_widget (editor->priv->gui, "shadow_opacity_spin");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "shadow_page_vbox",      &editor->priv->shadow_page_vbox,
+                                     "shadow_enable_check",   &editor->priv->shadow_enable_check,
+                                     "shadow_controls_table", &editor->priv->shadow_controls_table,
+                                     "shadow_x_spin",         &editor->priv->shadow_x_spin,
+                                     "shadow_y_spin",         &editor->priv->shadow_y_spin,
+                                     "shadow_x_units_label",  &editor->priv->shadow_x_units_label,
+                                     "shadow_y_units_label",  &editor->priv->shadow_y_units_label,
+                                     "shadow_color_radio",    &editor->priv->shadow_color_radio,
+                                     "shadow_key_radio",      &editor->priv->shadow_key_radio,
+                                     "shadow_color_hbox",     &editor->priv->shadow_color_hbox,
+                                     "shadow_key_combo",      &editor->priv->shadow_key_combo,
+                                     "shadow_opacity_spin",   &editor->priv->shadow_opacity_spin,
+                                     NULL);
+
+	editor->priv->shadow_color_combo = gl_color_combo_new (NULL,
+                                                               _("Default"),
+                                                               GL_COLOR_SHADOW_DEFAULT,
+                                                               GL_COLOR_SHADOW_DEFAULT);
+        gtk_container_add (GTK_CONTAINER (editor->priv->shadow_color_hbox),
+                           editor->priv->shadow_color_combo);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->shadow_key_combo));
 

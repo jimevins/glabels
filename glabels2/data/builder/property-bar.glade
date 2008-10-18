@@ -17,6 +17,7 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
 
   <child>
     <widget class="GtkToolbar" id="property_toolbar">
@@ -237,21 +238,14 @@
 	  <property name="is_important">False</property>
 
 	  <child>
-	    <widget class="GtkEventBox" id="eventbox2">
+	    <widget class="GtkEventBox" id="text_color_eventbox">
 	      <property name="visible">True</property>
 	      <property name="tooltip" translatable="yes">Text Color</property>
 	      <property name="visible_window">True</property>
 	      <property name="above_child">False</property>
 
 	      <child>
-		<widget class="Custom" id="text_color_combo">
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">Text color</property>
-		  <property name="creation_function">gl_ui_property_bar_construct_color_combo</property>
-		  <property name="int1">0</property>
-		  <property name="int2">0</property>
-		  <property name="last_modification_time">Sun, 01 May 2005 15:21:11 GMT</property>
-		</widget>
+		<placeholder/>
 	      </child>
 	    </widget>
 	  </child>
@@ -270,21 +264,14 @@
 	  <property name="is_important">False</property>
 
 	  <child>
-	    <widget class="GtkEventBox" id="eventbox3">
+	    <widget class="GtkEventBox" id="fill_color_eventbox">
 	      <property name="visible">True</property>
 	      <property name="tooltip" translatable="yes">Fill color</property>
 	      <property name="visible_window">True</property>
 	      <property name="above_child">False</property>
 
 	      <child>
-		<widget class="Custom" id="fill_color_combo">
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">Fill color</property>
-		  <property name="creation_function">gl_ui_property_bar_construct_color_combo</property>
-		  <property name="int1">1</property>
-		  <property name="int2">0</property>
-		  <property name="last_modification_time">Sun, 01 May 2005 15:21:18 GMT</property>
-		</widget>
+		<placeholder/>
 	      </child>
 	    </widget>
 	  </child>
@@ -303,21 +290,14 @@
 	  <property name="is_important">False</property>
 
 	  <child>
-	    <widget class="GtkEventBox" id="eventbox4">
+	    <widget class="GtkEventBox" id="line_color_eventbox">
 	      <property name="visible">True</property>
 	      <property name="tooltip" translatable="yes">Line color</property>
 	      <property name="visible_window">True</property>
 	      <property name="above_child">False</property>
 
 	      <child>
-		<widget class="Custom" id="line_color_combo">
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">Line color</property>
-		  <property name="creation_function">gl_ui_property_bar_construct_color_combo</property>
-		  <property name="int1">2</property>
-		  <property name="int2">0</property>
-		  <property name="last_modification_time">Sun, 01 May 2005 15:21:24 GMT</property>
-		</widget>
+		<placeholder/>
 	      </child>
 	    </widget>
 	  </child>

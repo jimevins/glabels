@@ -424,3 +424,35 @@ gl_util_cairo_convert_to_pixbuf (cairo_surface_t *surface)
 
 	return pixbuf;
 }
+
+
+/****************************************************************************/
+/* Get widgets from GtkBuilder "en masse."                                  */
+/****************************************************************************/
+void gl_util_get_builder_widgets (GtkBuilder *builder,
+                                  gchar      *first_name,
+                                  ...)
+{
+        va_list     args;
+        gchar      *name;
+        GtkWidget **p_widget;
+
+        va_start (args, first_name);
+
+        for ( name = first_name; name; name = va_arg (args, gchar *) )
+        {
+                p_widget = va_arg (args, GtkWidget **);
+
+                *p_widget = GTK_WIDGET (gtk_builder_get_object (builder, name));
+
+                if (!*p_widget)
+                {
+                        g_critical ("Could not load widget \"%s\".\n\ngLabels may not be installed correctly!",
+                                    name);
+                        break;
+                }
+        }
+
+        va_end (args);
+}
+

@@ -76,16 +76,13 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->img_page_vbox    = glade_xml_get_widget (editor->priv->gui,
-							       "img_page_vbox");
-	editor->priv->img_file_radio   = glade_xml_get_widget (editor->priv->gui,
-							       "img_file_radio");
-	editor->priv->img_key_radio    = glade_xml_get_widget (editor->priv->gui,
-							       "img_key_radio");
-	editor->priv->img_file_button  = glade_xml_get_widget (editor->priv->gui,
-							       "img_file_button");
-	editor->priv->img_key_combo    = glade_xml_get_widget (editor->priv->gui,
-							       "img_key_combo");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "img_page_vbox",   &editor->priv->img_page_vbox,
+                                     "img_file_radio",  &editor->priv->img_file_radio,
+                                     "img_key_radio",   &editor->priv->img_key_radio,
+                                     "img_file_button", &editor->priv->img_file_button,
+                                     "img_key_combo",   &editor->priv->img_key_combo,
+                                     NULL);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->img_key_combo));
 

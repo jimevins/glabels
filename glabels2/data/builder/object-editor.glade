@@ -537,24 +537,13 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkHBox" id="hbox43">
+				<widget class="GtkHBox" id="text_color_hbox">
 				  <property name="visible">True</property>
 				  <property name="homogeneous">False</property>
 				  <property name="spacing">12</property>
 
 				  <child>
-				    <widget class="Custom" id="text_color_combo">
-				      <property name="visible">True</property>
-				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">2</property>
-				      <property name="int2">0</property>
-				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
-				    </widget>
-				    <packing>
-				      <property name="padding">0</property>
-				      <property name="expand">False</property>
-				      <property name="fill">False</property>
-				    </packing>
+				    <placeholder/>
 				  </child>
 				</widget>
 				<packing>
@@ -1062,24 +1051,13 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkHBox" id="hbox39">
+				<widget class="GtkHBox" id="line_color_hbox">
 				  <property name="visible">True</property>
 				  <property name="homogeneous">False</property>
 				  <property name="spacing">12</property>
 
 				  <child>
-				    <widget class="Custom" id="line_color_combo">
-				      <property name="visible">True</property>
-				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">1</property>
-				      <property name="int2">0</property>
-				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
-				    </widget>
-				    <packing>
-				      <property name="padding">0</property>
-				      <property name="expand">False</property>
-				      <property name="fill">False</property>
-				    </packing>
+				    <placeholder/>
 				  </child>
 				</widget>
 				<packing>
@@ -1268,24 +1246,13 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkHBox" id="hbox51">
+				<widget class="GtkHBox" id="fill_color_hbox">
 				  <property name="visible">True</property>
 				  <property name="homogeneous">False</property>
 				  <property name="spacing">12</property>
 
 				  <child>
-				    <widget class="Custom" id="fill_color_combo">
-				      <property name="visible">True</property>
-				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">0</property>
-				      <property name="int2">0</property>
-				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
-				    </widget>
-				    <packing>
-				      <property name="padding">0</property>
-				      <property name="expand">False</property>
-				      <property name="fill">False</property>
-				    </packing>
+				    <placeholder/>
 				  </child>
 				</widget>
 				<packing>
@@ -2001,24 +1968,13 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkHBox" id="hbox47">
+				<widget class="GtkHBox" id="bc_color_hbox">
 				  <property name="visible">True</property>
 				  <property name="homogeneous">False</property>
 				  <property name="spacing">12</property>
 
 				  <child>
-				    <widget class="Custom" id="bc_color_combo">
-				      <property name="visible">True</property>
-				      <property name="creation_function">gl_object_editor_construct_color_combo</property>
-				      <property name="int1">1</property>
-				      <property name="int2">0</property>
-				      <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
-				    </widget>
-				    <packing>
-				      <property name="padding">0</property>
-				      <property name="expand">False</property>
-				      <property name="fill">False</property>
-				    </packing>
+				    <placeholder/>
 				  </child>
 				</widget>
 				<packing>
@@ -2362,19 +2318,20 @@
 		      </child>
 
 		      <child>
-			<widget class="Custom" id="size_aspect_checkbutton">
+			<widget class="GtkVBox" id="size_aspect_vbox">
 			  <property name="visible">True</property>
-			  <property name="creation_function">gl_object_editor_construct_chain_button</property>
-			  <property name="int1">0</property>
-			  <property name="int2">0</property>
-			  <property name="last_modification_time">Sat, 07 Feb 2004 02:56:47 GMT</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="left_attach">2</property>
 			  <property name="right_attach">3</property>
 			  <property name="top_attach">0</property>
 			  <property name="bottom_attach">2</property>
-			  <property name="x_options"></property>
 			  <property name="y_options">fill</property>
 			</packing>
 		      </child>
@@ -3136,30 +3093,19 @@
 				  </child>
 
 				  <child>
-				    <widget class="GtkHBox" id="hbox58">
+				    <widget class="GtkHBox" id="shadow_color_hbox">
 				      <property name="visible">True</property>
 				      <property name="homogeneous">False</property>
 				      <property name="spacing">12</property>
 
 				      <child>
-					<widget class="Custom" id="shadow_color_combo">
-					  <property name="visible">True</property>
-					  <property name="creation_function">gl_object_editor_construct_color_combo</property>
-					  <property name="int1">3</property>
-					  <property name="int2">0</property>
-					  <property name="last_modification_time">Sun, 16 Nov 2003 06:52:23 GMT</property>
-					</widget>
-					<packing>
-					  <property name="padding">0</property>
-					  <property name="expand">False</property>
-					  <property name="fill">False</property>
-					</packing>
+					<placeholder/>
 				      </child>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
-				      <property name="expand">True</property>
-				      <property name="fill">True</property>
+				      <property name="expand">False</property>
+				      <property name="fill">False</property>
 				    </packing>
 				  </child>
 				</widget>

@@ -60,13 +60,6 @@ GType           gl_template_designer_get_type               (void) G_GNUC_CONST;
 
 GtkWidget      *gl_template_designer_new                    (GtkWindow *parent);
 
-/* Semi-public, for use by libglade: */
-GtkWidget      *gl_template_designer_construct_mini_preview (gchar *name,
-                                                             gchar *string1,
-                                                             gchar *string2,
-                                                             gint   int1,
-                                                             gint   int2);
-
 
 G_END_DECLS
 

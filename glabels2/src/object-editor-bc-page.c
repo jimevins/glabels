@@ -72,32 +72,29 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-	editor->priv->bc_page_vbox =
-		glade_xml_get_widget (editor->priv->gui, "bc_page_vbox");
-	editor->priv->bc_style_combo =
-		glade_xml_get_widget (editor->priv->gui, "bc_style_combo");
-	editor->priv->bc_text_check =
-		glade_xml_get_widget (editor->priv->gui, "bc_text_check");
-	editor->priv->bc_cs_check =
-		glade_xml_get_widget (editor->priv->gui, "bc_cs_check");
-	editor->priv->bc_color_combo =
-		glade_xml_get_widget (editor->priv->gui, "bc_color_combo");
-	editor->priv->bc_key_combo = 
-		glade_xml_get_widget (editor->priv->gui, "bc_key_combo");	
-	editor->priv->bc_key_radio = 
-		glade_xml_get_widget (editor->priv->gui, "bc_key_radio");	
-	editor->priv->bc_color_radio = 
-		glade_xml_get_widget (editor->priv->gui, "bc_color_radio");	
-	editor->priv->data_format_label =
-		glade_xml_get_widget (editor->priv->gui, "data_format_label");
-	editor->priv->data_ex_label =
-		glade_xml_get_widget (editor->priv->gui, "data_ex_label");
-	editor->priv->data_digits_label =
-		glade_xml_get_widget (editor->priv->gui, "data_digits_label");
-	editor->priv->data_digits_spin =
-		glade_xml_get_widget (editor->priv->gui, "data_digits_spin");
+        gl_util_get_builder_widgets (editor->priv->gui,
+                                     "bc_page_vbox",      &editor->priv->bc_page_vbox,
+                                     "bc_style_combo",    &editor->priv->bc_style_combo,
+                                     "bc_text_check",     &editor->priv->bc_text_check,
+                                     "bc_cs_check",       &editor->priv->bc_cs_check,
+                                     "bc_color_hbox",     &editor->priv->bc_color_hbox,
+                                     "bc_key_combo",      &editor->priv->bc_key_combo,
+                                     "bc_key_radio",      &editor->priv->bc_key_radio,
+                                     "bc_color_radio",    &editor->priv->bc_color_radio,
+                                     "data_format_label", &editor->priv->data_format_label,
+                                     "data_ex_label",     &editor->priv->data_ex_label,
+                                     "data_digits_label", &editor->priv->data_digits_label,
+                                     "data_digits_spin",  &editor->priv->data_digits_spin,
+                                     NULL);
 
 	editor->priv->data_format_fixed_flag = FALSE;
+
+	editor->priv->bc_color_combo = gl_color_combo_new (NULL,
+                                                           _("Default"),
+                                                           GL_COLOR_BC_DEFAULT,
+                                                           gl_prefs->default_line_color);
+        gtk_container_add (GTK_CONTAINER (editor->priv->bc_color_hbox),
+                           editor->priv->bc_color_combo);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));

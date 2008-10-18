@@ -5,7 +5,7 @@
  *
  *  util.h:  various small utility functions
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2008  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 #include <glib/glist.h>
 #include <gtk/gtkcombobox.h>
 #include <pango/pango.h>
+#include <gtk/gtkbuilder.h>
 
 G_BEGIN_DECLS
 
@@ -54,6 +55,10 @@ GList  *gl_util_get_font_family_list (void);
 void    gl_util_font_family_list_free (GList *list);
 
 GdkPixbuf *gl_util_cairo_convert_to_pixbuf (cairo_surface_t *surface);
+
+void gl_util_get_builder_widgets (GtkBuilder *builder,
+                                  gchar      *first_name,
+                                  ...);
 
 G_END_DECLS
 

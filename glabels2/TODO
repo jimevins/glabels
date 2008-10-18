@@ -24,9 +24,10 @@ Possible Goals for 2.3.x (current development branch):
 		-  Ability to select/unselect individual records during a merge-print.
 
 		-  Add additional "merge" backends.  Candidates include:
+			gnome-db
+			internal database stored in glabels file
 			generic XML
 			freedb (CDDB) for CD labels
-			gnome-db
 			ADIF for generating QSL-cards
 
 		-  Printer calibration tool: a facility for tweaking output origin and
