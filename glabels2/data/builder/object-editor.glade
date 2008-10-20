@@ -524,7 +524,7 @@
 				  <property name="label" translatable="yes"></property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -573,7 +573,7 @@
 				  <property name="label" translatable="yes">Key:</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1034,11 +1034,10 @@
 			      <child>
 				<widget class="GtkRadioButton" id="line_color_radio">
 				  <property name="visible">True</property>
-				  <property name="can_focus">True</property>
 				  <property name="label" translatable="yes"></property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1083,11 +1082,10 @@
 			      <child>
 				<widget class="GtkRadioButton" id="line_key_radio">
 				  <property name="visible">True</property>
-				  <property name="can_focus">True</property>
 				  <property name="label" translatable="yes">Key:</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1229,12 +1227,11 @@
 			      <child>
 				<widget class="GtkRadioButton" id="fill_color_radio">
 				  <property name="visible">True</property>
-				  <property name="can_focus">True</property>
 				  <property name="label" translatable="yes"></property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
-				  <property name="active">False</property>
+				  <property name="focus_on_click">False</property>
+				  <property name="active">True</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
 				</widget>
@@ -1278,11 +1275,10 @@
 			      <child>
 				<widget class="GtkRadioButton" id="fill_key_radio">
 				  <property name="visible">True</property>
-				  <property name="can_focus">True</property>
 				  <property name="label" translatable="yes">Key:</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1391,7 +1387,7 @@
 			  <property name="label" translatable="yes">File:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="focus_on_click">True</property>
+			  <property name="focus_on_click">False</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1441,7 +1437,7 @@
 			  <property name="label" translatable="yes">Key:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="focus_on_click">True</property>
+			  <property name="focus_on_click">False</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -1955,7 +1951,7 @@
 				  <property name="label" translatable="yes"></property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -2004,7 +2000,7 @@
 				  <property name="label" translatable="yes">Key:</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				  <property name="focus_on_click">True</property>
+				  <property name="focus_on_click">False</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -2332,7 +2328,8 @@
 			  <property name="right_attach">3</property>
 			  <property name="top_attach">0</property>
 			  <property name="bottom_attach">2</property>
-			  <property name="y_options">fill</property>
+			  <property name="x_options">fill</property>
+			  <property name="y_options"></property>
 			</packing>
 		      </child>
 		    </widget>
@@ -3080,7 +3077,7 @@
 				      <property name="label" translatable="yes"></property>
 				      <property name="use_underline">True</property>
 				      <property name="relief">GTK_RELIEF_NORMAL</property>
-				      <property name="focus_on_click">True</property>
+				      <property name="focus_on_click">False</property>
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
@@ -3129,7 +3126,7 @@
 				      <property name="label" translatable="yes">Key:</property>
 				      <property name="use_underline">True</property>
 				      <property name="relief">GTK_RELIEF_NORMAL</property>
-				      <property name="focus_on_click">True</property>
+				      <property name="focus_on_click">False</property>
 				      <property name="active">False</property>
 				      <property name="inconsistent">False</property>
 				      <property name="draw_indicator">True</property>
