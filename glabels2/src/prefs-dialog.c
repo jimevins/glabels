@@ -346,7 +346,6 @@ construct_object_page (glPrefsDialog *dialog)
         family_names = gl_util_get_font_family_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->text_family_combo),
 				       family_names);
-        gl_util_font_family_list_free (family_names);
                                                                                 
 
 	g_signal_connect_swapped (G_OBJECT(dialog->priv->text_family_combo),
@@ -526,7 +525,6 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
                         good_font_family = NULL;
                 }
         }
-        gl_util_font_family_list_free (family_names);
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->text_family_combo),
 					   good_font_family);
         g_free (good_font_family);

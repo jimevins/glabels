@@ -103,7 +103,6 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	family_names = gl_util_get_font_family_list ();
 	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->text_family_combo),
 				       family_names);
-	gl_util_font_family_list_free (family_names);
 
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
@@ -223,26 +222,34 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 				  const gchar         *font_family)
 {
         GList    *family_names;
+	gchar    *old_font_family;
 	gchar    *good_font_family;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
         editor->priv->stop_signals = TRUE;
 
-        /* Make sure we have a valid font family.  if not provide a good default. */
-        family_names = gl_util_get_font_family_list ();
-        if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
-                good_font_family = g_strdup (font_family);
-        } else {
-                if (family_names != NULL) {
-                        good_font_family = g_strdup (family_names->data); /* 1st entry */
+	old_font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo));
+
+        if ( !old_font_family || g_utf8_collate( old_font_family, font_family ) )
+        {
+
+                /* Make sure we have a valid font family.  if not provide a good default. */
+                family_names = gl_util_get_font_family_list ();
+                if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
+                        good_font_family = g_strdup (font_family);
                 } else {
-                        good_font_family = NULL;
+                        if (family_names != NULL) {
+                                good_font_family = g_strdup (family_names->data); /* 1st entry */
+                        } else {
+                                good_font_family = NULL;
+                        }
                 }
+                gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo), good_font_family);
+                g_free (good_font_family);
         }
-        gl_util_font_family_list_free (family_names);
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo), good_font_family);
-        g_free (good_font_family);
+
+        g_free (old_font_family);
 
         editor->priv->stop_signals = FALSE;
 
