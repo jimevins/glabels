@@ -1,3 +1,20 @@
+2008-10-23  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (set_font_family):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family):
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties):
+	* src/util.c: (gl_util_get_font_family_list):
+	* src/util.h:
+		Bug #1902275 and Bug #2186214.  Cache font list so that it is not re-created everytime
+		the list is requested.
+	* src/object-editor-text-page.c: (gl_object_editor_set_font_family):
+		Don't change font-family if it hasn't actually changed.
+
 2008-08-29  Jim Evins  <evins@snaught.com>
 
 	* src/file.c: (gl_file_open), (gl_file_save_as):

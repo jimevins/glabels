@@ -450,7 +450,6 @@ set_font_family (glLabelObject *object,
 			good_font_family = g_strdup (font_family);
 		}
 	}
-	gl_util_font_family_list_free (family_names);
 
 	if (ltext->priv->font_family) {
 		if (g_strcasecmp (ltext->priv->font_family, good_font_family) == 0) {

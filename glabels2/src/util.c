@@ -305,13 +305,14 @@ gl_util_combo_box_add_text_model (GtkComboBox       *combo)
 					NULL);
 }
 
+
 /****************************************************************************/
 /* Get list of available font families.                                     */
 /****************************************************************************/
 GList  *
 gl_util_get_font_family_list (void)
 {
-	GList                *list = NULL;
+	static GList         *list = NULL;
 	PangoFontMap         *fontmap;
 	PangoContext         *context;
 	PangoFontFamily     **families;
@@ -319,39 +320,26 @@ gl_util_get_font_family_list (void)
 	gint                  i;
 	gchar                *name;
 
-	fontmap = pango_cairo_font_map_new ();
-	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+        if ( !list )
+        {
+                fontmap = pango_cairo_font_map_new ();
+                context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
 
-	pango_context_list_families (context, &families, &n);
+                pango_context_list_families (context, &families, &n);
 
-	for ( i=0; i<n; i++ )
-	{
-		name = g_strdup (pango_font_family_get_name (families[i]));
-		list = g_list_insert_sorted (list, name,
-                                             (GCompareFunc)lgl_str_utf8_casecmp);
-	}
+                for ( i=0; i<n; i++ )
+                {
+                        name = g_strdup (pango_font_family_get_name (families[i]));
+                        list = g_list_insert_sorted (list, name,
+                                                     (GCompareFunc)lgl_str_utf8_casecmp);
+                }
 
-	g_free (families);
+                g_free (families);
 
-	g_object_unref (context);
-	g_object_unref (fontmap);
+                g_object_unref (context);
+                g_object_unref (fontmap);
+        }
 
 	return list;
 }
-
-/****************************************************************************/
-/* Free previosly allocated list of font families.                          */
-/****************************************************************************/
-void    gl_util_font_family_list_free (GList *list)
-{
-        GList *p;
-
-        for (p = list; p != NULL; p = p->next) {
-                g_free (p->data);
-                p->data = NULL;
-        }
-
-        g_list_free (list);
-}
-
 

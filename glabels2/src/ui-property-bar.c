@@ -301,7 +301,6 @@ gl_ui_property_bar_construct (glUIPropertyBar   *property_bar)
         {
 		gtk_combo_box_set_active (GTK_COMBO_BOX (property_bar->priv->font_family_combo), 0);
 	}
-	gl_util_font_family_list_free (family_names);
 
 	g_signal_connect (G_OBJECT (property_bar->priv->font_family_combo),
 			  "changed", G_CALLBACK (font_family_changed_cb), property_bar);
@@ -406,7 +405,6 @@ reset_to_default_properties (glView *view,
 	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (property_bar->priv->font_family_combo),
 					   good_font_family);
 	g_free (good_font_family);
-	gl_util_font_family_list_free (family_names);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(property_bar->priv->font_size_spin),
 				   view->default_font_size);
