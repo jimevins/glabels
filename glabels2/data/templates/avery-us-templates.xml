@@ -718,6 +718,25 @@
     </Label-round>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Avery 5526 family: Shipping Labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5526" size="US-Letter" description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="8.5in" height="5.5in" round="0in" x_waste="0in" y_waste="0in">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="0in" y0="0in" dx="0in" dy="5.5in"/>
+    </Label-rectangle>
+    <!-- Look alikes -->
+    <Alias brand="Avery" part="5126"/>
+    <Alias brand="Avery" part="8126"/>
+    <Alias brand="Avery" part="15516"/>
+    <Alias brand="Avery" part="18126"/>
+    <Alias brand="ULine" part="S-5044"/>
+  </Template>
+
 
   <!-- ******************************************************************** -->
   <!-- Avery labels in tech builitin 152 				    -->
