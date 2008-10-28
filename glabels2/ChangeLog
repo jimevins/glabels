@@ -1,3 +1,12 @@
+2008-10-27  Jim Evins  <evins@snaught.com>
+
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Caught up on user submitted templates.
+	* AUTHORS:
+		Acknowledgements for above templates.
+
 2008-10-23  Jim Evins  <evins@snaught.com>
 
 	* src/label-text.c: (set_font_family):

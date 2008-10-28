@@ -200,6 +200,7 @@
     </Label-rectangle>
     <Alias brand="DECAdry" part="SCW-2090"/>
     <Alias brand="DECAdry" part="OCB-3327"/>
+    <Alias brand="DECAdry" part="OCC-3342"/>
     <Alias brand="DECAdry" part="DAW-327"/>
   </Template>
 
