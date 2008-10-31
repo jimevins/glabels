@@ -20,6 +20,33 @@ you'll find at most office supply stores. gLabels is free software and is distri
 
 
 <div class="newsitem">
+<div class="newsdate">19 August 2008</div>
+<div class="newstitle">Release 2.2.3 (Stable)</div>
+<p>
+Changes/fixes since 2.2.2 include
+</p>
+<ul>
+<li>Explicitely set page size when printing -- don't let print back-end use
+  a default size (Bug #2049431).</l>
+<li>Sets more appropriate object size limits for any aspect ratio (Bug #1993550).</li>
+<li>Fixed crash of glabels-batch (Bug #1968653).</li>
+<li>Fixed bug with barcode and image merge radio buttons (Bug #1959135).</li>
+<li>Will now attempt to parse newer namespaces (Bug #1872584).</li>
+<li>Fixed drawing errors when drawing markup on rotated labels.</li>
+<li>New korean translation (xein@navir.com).</li>
+<li>New templates.</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">22 February 2008</div>
 <div class="newstitle">Release 2.2.2, "Walt Whitman High" (Stable)</div>
 <p>
@@ -36,9 +63,6 @@ Changes/fixes since 2.2.1 include
 <li>Fixed template example in documentation.</li>
 <li>Use default units when writing xml files.</li>
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 

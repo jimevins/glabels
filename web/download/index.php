@@ -29,9 +29,10 @@ Just having the base library packages installed is not enough.
 <ul>
   <li>
     <div class="latest">
-      <?a_sfdownload("glabels-2.2.2.tar.gz");?> (latest version)
+      <?a_sfdownload("glabels-2.2.3.tar.gz");?> (latest version)
     </div>
   </li>
+  <li><?a_sfdownload("glabels-2.2.2.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.2.1.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.2.0.tar.gz");?></li>
 </ul>
