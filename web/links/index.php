@@ -9,6 +9,7 @@
 
       <h2>gLabels in the News</h2>
       <ul>
+      <li><?a("http://openoffice.blogs.com/openoffice/2008/07/if-you-use-linux-you-must-try-glabels.html","OpenOffice.org Training, Tips, and Ideas:: If you use Linux, you MUST try gLabels");?></li>
       <li><?a("http://www.linux.com/articles/37044","linux.com:: gLabels: Ready for prime time");?></li>
       </ul>
 
