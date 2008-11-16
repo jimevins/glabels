@@ -33,6 +33,7 @@
 #include "print-op.h"
 #include <libglabels/db.h>
 #include "util.h"
+#include "prefs.h"
 #include "debug.h"
 
 /*============================================*/

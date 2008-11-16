@@ -465,7 +465,6 @@ gl_view_text_create_button_press_event   (glView *view,
                                           gdouble y)
 {
 	GObject             *object;
-        glViewObject        *view_text;
 	GList               *lines;
 	gchar               *family;
 	glColorNode         *color_node;

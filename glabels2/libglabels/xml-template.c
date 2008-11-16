@@ -251,6 +251,8 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			page_width  = paper->width;
 			page_height = paper->height;
 		} else {
+			page_width  = 612;
+			page_height = 792;
 			g_message (_("Unknown page size id or name \"%s\""),
 				   paper_id);
 		}
