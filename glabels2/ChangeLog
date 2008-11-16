@@ -1,3 +1,12 @@
+2008-11-15  Jim Evins  <evins@snaught.com>
+
+	* libglabels/db.c: (lgl_db_register_template):
+	* libglabels/xml-template.c:
+	(lgl_xml_template_parse_template_node):
+	* src/glabels-batch.c:
+	* src/view-text.c: (gl_view_text_create_button_press_event):
+		Fixed several issues such as possible use of uninitialized variables found with "-O1 -Wall".
+
 2008-11-09  Jim Evins  <evins@snaught.com>
 
 	* data/templates/misc-iso-templates.xml:

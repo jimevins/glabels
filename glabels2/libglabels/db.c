@@ -1095,7 +1095,6 @@ lgl_db_register_template (const lglTemplate *template)
                 }
                 else
                 {
-                        lgl_template_free (template_copy);
                         return LGL_DB_REG_FILE_WRITE_ERROR;
                 }
 	}
