@@ -775,6 +775,7 @@ gl_ui_new (glWindow *window)
 			  G_CALLBACK (disconnect_proxy_cb), window);
 
 	actions = gtk_action_group_new ("Actions");
+        gtk_action_group_set_translation_domain (actions, NULL);
 	gtk_action_group_add_actions (actions, entries, n_entries, GTK_WINDOW (window));
 	gtk_action_group_add_toggle_actions (actions, 
 					     toggle_entries, n_toggle_entries, 
