@@ -1,5 +1,12 @@
 2008-12-14  Jim Evins  <evins@snaught.com>
 
+	* src/ui.c: (gl_ui_new):
+		Bug #2395628.  Fixed i18n for application shell.
+	* po/POTFILES.in:
+		Bug #2395628.  Reconciled POTFILES.in with current files.
+	
+2008-12-14  Jim Evins  <evins@snaught.com>
+
 	* configure.in:
 		Bug #2316013.  Added PKG_PROG_PKG_CONFIG.
 	
