@@ -135,16 +135,26 @@ src/critical-error-handler.c
 src/warning-handler.c
 
 libglabels/category.c
-libglabels/template.c
-libglabels/template.h
+libglabels/category.h
+libglabels/db.c
+libglabels/db.h
+libglabels/enums.h
+libglabels/libglabels.h
+libglabels/libglabels-private.h
 libglabels/paper.c
 libglabels/paper.h
-libglabels/xml-template.c
-libglabels/xml-template.h
-libglabels/xml-paper.c
-libglabels/xml-paper.h
+libglabels/str.c
+libglabels/str.h
+libglabels/template.c
+libglabels/template.h
 libglabels/xml.c
 libglabels/xml.h
+libglabels/xml-category.c
+libglabels/xml-category.h
+libglabels/xml-paper.c
+libglabels/xml-paper.h
+libglabels/xml-template.c
+libglabels/xml-template.h
 
 data/glade/merge-properties-dialog.glade
 data/glade/new-label-dialog.glade
@@ -157,14 +167,16 @@ data/glade/wdgt-media-select.glade
 data/glade/wdgt-rotate-label.glade
 
 data/templates/paper-sizes.xml
-data/templates/avery-us-templates.xml
+data/templates/categories.xml
 data/templates/avery-iso-templates.xml
 data/templates/avery-other-templates.xml
-data/templates/categories.xml
-data/templates/zweckform-iso-templates.xml
-data/templates/misc-us-templates.xml
+data/templates/avery-us-templates.xml
+data/templates/brother-other-templates.xml
+data/templates/dymo-other-templates.xml
 data/templates/misc-iso-templates.xml
 data/templates/misc-other-templates.xml
+data/templates/misc-us-templates.xml
+data/templates/zweckform-iso-templates.xml
 
 data/desktop/glabels.desktop.in
 
