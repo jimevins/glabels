@@ -2791,31 +2791,6 @@ selection_received_cb (GtkWidget        *widget,
 		newobject = gl_label_object_dup (object, view->label);
 
 		gl_debug (DEBUG_VIEW, "object pasted");
-
-		if (GL_IS_LABEL_BOX (newobject)) {
-			view_object = gl_view_box_new (GL_LABEL_BOX(newobject),
-						       view);
-		} else if (GL_IS_LABEL_ELLIPSE (newobject)) {
-			view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(newobject),
-							   view);
-		} else if (GL_IS_LABEL_LINE (newobject)) {
-			view_object = gl_view_line_new (GL_LABEL_LINE(newobject),
-							view);
-		} else if (GL_IS_LABEL_IMAGE (newobject)) {
-			view_object = gl_view_image_new (GL_LABEL_IMAGE(newobject),
-							 view);
-		} else if (GL_IS_LABEL_TEXT (newobject)) {
-			view_object = gl_view_text_new (GL_LABEL_TEXT(newobject),
-							view);
-		} else if (GL_IS_LABEL_BARCODE (newobject)) {
-			view_object = gl_view_barcode_new (GL_LABEL_BARCODE(newobject),
-							   view);
-		} else {
-			/* Should not happen! */
-			view_object = NULL;
-			g_message ("Invalid label object type.");
-		}
-		gl_view_select_object (view, view_object);
 	}
 	g_object_unref (label);
 
