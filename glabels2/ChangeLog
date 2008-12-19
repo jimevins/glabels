@@ -1,3 +1,10 @@
+2008-12-18  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (selection_received_cb):
+		Fixed paste bug that caused a duplicate phantom view_object to be created for
+		each new label_object.  This is because the view now (as of r673) the view
+		monitiors the label for new objects and creates view_objects automatically.
+
 2008-12-14  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:
