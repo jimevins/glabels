@@ -1,3 +1,8 @@
+2008-12-20  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Updated prerequisite library versions required.
+	
 2008-12-18  Jim Evins  <evins@snaught.com>
 
 	* src/view.c: (selection_received_cb):
