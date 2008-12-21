@@ -62,13 +62,12 @@ their associated repositories, including the following repositories:
 
 <h2>System Requirements</h2>
 <p>
-The development version of gLabels is designed to run on <i>GNOME 2.16+</i>, but more specifically it requires the following libraries or newer.
+The development version of gLabels is designed to run on <i>GNOME 2.22+</i>, but more specifically it requires the following libraries or newer.
 </p>
 <ul>
-  <li>GTK+-2.10.x</li>
-  <li>LIBGNOME[UI]-2.16.x</li>
-  <li>LIBXML-2.6.x</li>
-  <li>LIBGLADE-2.6.x</li>
+  <li>GTK+-2.12.x</li>
+  <li>LIBGNOME[UI]-2.22.x</li>
+  <li>LIBXML-2.7.x</li>
 </ul>
 <p>
 Note: to compile gLabels on most GNU/Linux systems, you will need the development packages (e.g., gtk2-devel or gtk2-dev)
