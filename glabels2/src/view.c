@@ -3220,7 +3220,8 @@ motion_notify_event_cb (glView            *view,
                 {
 
                 case GL_VIEW_IDLE:
-                        if (view_handle_at (view, cr, event->x, event->y, &handle))
+                        if ( gl_view_is_selection_atomic (view) &&
+                             view_handle_at (view, cr, event->x, event->y, &handle) )
                         {
                                 cursor = gdk_cursor_new (GDK_CROSSHAIR);
                         }
@@ -3365,7 +3366,8 @@ button_press_event_cb (glView            *view,
                 switch (view->mode)
                 {
                 case GL_VIEW_MODE_ARROW:
-                        if ((view_object = view_handle_at (view, cr, event->x, event->y, &handle)))
+                        if ( gl_view_is_selection_atomic (view) &&
+                             (view_object = view_handle_at (view, cr, event->x, event->y, &handle)) )
                         {
                                 view->resize_object = view_object;
                                 view->resize_handle = handle;

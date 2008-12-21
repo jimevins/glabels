@@ -1,3 +1,8 @@
+2008-12-21  Jim Evins  <evins@snaught.com>
+
+	* src/view.c: (motion_notify_event_cb), (button_press_event_cb):
+		Don't check for handles on aggregate selections.
+
 2008-12-18  Jim Evins  <evins@snaught.com>
 
 	* src/view.c: (selection_received_cb):
