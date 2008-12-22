@@ -8,6 +8,30 @@
 
 
 <div class="newsitem">
+<div class="newsdate">22 December 2008</div>
+<div class="newstitle">Release 2.2.4 (Stable)</div>
+<p>
+Changes/fixes since 2.2.3 include
+</p>
+<ul>
+<li>Corrected button order in "Open" and "Save as" dialogs.</li>
+<li>Fixed performance problem when large number of fonts are installed.</li>
+<li>Corrected several i18n problems.</li>
+<li>Fixed "paste" bug that created phantom object views.</li>
+<li>Fixed performacne problem when many objects are selected.</li>
+<li>New templates.</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">19 August 2008</div>
 <div class="newstitle">Release 2.2.3 (Stable)</div>
 <p>
@@ -24,9 +48,6 @@ Changes/fixes since 2.2.2 include
 <li>New korean translation (xein@navir.com).</li>
 <li>New templates.</li>
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 
