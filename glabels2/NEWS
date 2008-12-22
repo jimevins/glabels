@@ -1,3 +1,13 @@
+* gLabels 2.2.4 (stable) release.  Release date 2008-12-22
+
+- Corrected button order in "Open" and "Save as" dialogs.
+- Fixed performance problem when large number of fonts are installed.
+- Corrected several i18n problems.
+- Fixed "paste" bug that created phantom object views.
+- Fixed performacne problem when many objects are selected.
+- New templates.
+
+
 * gLabels 2.2.3 (stable) release.  Release date 2008-08-17
 
 - Explicitely set page size when printing -- don't let print back-end use
