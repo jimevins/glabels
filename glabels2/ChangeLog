@@ -1,5 +1,13 @@
 2008-12-21  Jim Evins  <evins@snaught.com>
 
+	* data/templates/avery-us-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+		A couple of recent template submissions.
+	* AUTHORS:
+		Acknowledgements for above templates.
+
+2008-12-21  Jim Evins  <evins@snaught.com>
+
 	* src/view.c: (motion_notify_event_cb), (button_press_event_cb):
 		Don't check for handles on aggregate selections.
 

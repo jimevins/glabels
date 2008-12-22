@@ -567,6 +567,19 @@
     </Label-cd>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Bruna 241301.  Mailing Labels.                                      -->
+  <!-- =================================================================== -->
+  <Template brand="Bruna" part="241301" size="A4" description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="198.425pt" height="102.047pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="3" ny="8" x0="0pt" y0="0pt" dx="198.425pt" dy="102.047pt"/>
+    </Label-rectangle>
+  </Template>
+
+
 
   <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
