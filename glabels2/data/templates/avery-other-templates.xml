@@ -10,7 +10,7 @@
   <!-- Avery 06141 family: File Folder Labels, 5/8'' x 2_3/4'', 7 per sheet-->
   <!-- =================================================================== -->
   <Template brand="Avery" part="06141" size="Other" width="207pt" height="351pt"
-            description="File Folder Labels">
+            _description="File Folder Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="198pt" height="45pt" round="4.5pt" waste="0pt">
       <Markup-margin size="4.5pt"/>

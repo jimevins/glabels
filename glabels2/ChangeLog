@@ -1,5 +1,16 @@
 2008-12-27  Jim Evins  <evins@snaught.com>
 
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/avery-other-templates.xml:
+	* data/templates/avery-us-templates.xml:
+	* data/templates/brother-other-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-other-templates.xml:
+	* data/templates/zweckform-iso-templates.xml:
+		Make sure all descriptions are marked as translatable.
+
+2008-12-27  Jim Evins  <evins@snaught.com>
+
 	* de.po:
 		Updated german translation (Mario Blättermann)
 	* AUTHORS:
