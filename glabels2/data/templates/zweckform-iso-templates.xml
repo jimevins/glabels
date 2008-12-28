@@ -66,7 +66,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 3688: Ordnerruecken Labels                                -->
   <!-- =================================================================== -->
-  <Template brand="Zweckform" part="3688" size="A4" description="File Back Labels">
+  <Template brand="Zweckform" part="3688" size="A4" _description="File Back Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="544.252pt" height="172.913pt" round="0pt" waste="0pt">
       <Markup-margin size="9.07087pt"/>
@@ -77,7 +77,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 4732: Multi-purpose Stick+Lift labels                     -->
   <!-- =================================================================== -->
-  <Template brand="Zweckform" part="4732" size="A4" description="Multi-purpose Stick+Lift Labels">
+  <Template brand="Zweckform" part="4732" size="A4" _description="Multi-purpose Stick+Lift Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="102.047pt" height="48.189pt" round="5.66929pt" waste="0pt">
       <Markup-margin size="5.66929pt"/>
@@ -180,7 +180,7 @@
   <!-- =================================================================== -->
   <!-- Zweckform 6021: Allround Labels                                     -->
   <!-- =================================================================== -->
-  <Template brand="Zweckform" part="6021" size="A4" description="Allround Labels">
+  <Template brand="Zweckform" part="6021" size="A4" _description="Allround Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="130.392pt" height="47.9055pt" round="0pt" waste="0pt">
       <Markup-margin size="5pt"/>

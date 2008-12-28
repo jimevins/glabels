@@ -104,7 +104,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7165 family: Address labels                                   -->
   <!-- =================================================================== -->
-  <Template brand="Avery" part="7165" size="A4" description="Address Labels">
+  <Template brand="Avery" part="7165" size="A4" _description="Address Labels">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="280.8pt" height="191.991pt" round="0pt" waste="0pt">
@@ -144,7 +144,7 @@
   <!-- =================================================================== -->
   <!-- Avery 7664 family: Diskette Labels, 70mm x 71.9 mm, 8 per sheet     -->
   <!-- =================================================================== -->
-  <Template brand="Avery" part="7664" size="A4" description="Diskette Labels">
+  <Template brand="Avery" part="7664" size="A4" _description="Diskette Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-rectangle id="0" width="70mm" height="71.9mm" round="2.5mm">

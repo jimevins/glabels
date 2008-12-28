@@ -71,7 +71,7 @@
   <!-- =================================================================== -->
   <!-- Ednet 45021: Inkjet/Laser Labels 70x37mm                            -->
   <!-- =================================================================== -->
-  <Template brand="Ednet" part="45021" size="A4" description="Inkjet/Laser Labels 70x37mm">
+  <Template brand="Ednet" part="45021" size="A4" _description="Inkjet/Laser Labels 70x37mm">
     <Meta category="label"/>
     <Label-rectangle id="0" width="198.425pt" height="104.882pt" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="0pt"/>
@@ -106,7 +106,7 @@
   <!-- =================================================================== -->
   <!-- Herma 5079: CD/DVD Labels, 2 per sheet                              -->
   <!-- =================================================================== -->
-  <Template brand="Herma" part="5079" size="A4" description="CD/DVD Labels">
+  <Template brand="Herma" part="5079" size="A4" _description="CD/DVD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="164.409pt" hole="58.1102pt" waste="9pt">
@@ -223,7 +223,7 @@
   <!-- =================================================================== -->
   <!-- APLI 01293:  General Labels.                                        -->
   <!-- =================================================================== -->
-  <Template brand="Apli" part="01293" size="A4" description="General Labels">
+  <Template brand="Apli" part="01293" size="A4" _description="General Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="198.425pt" height="94.3937pt" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="0pt"/>
@@ -399,7 +399,7 @@
   <!-- ===================================================================-->
   <!-- Media Line CD/DVD Labels (face only), 2 per sheet                  -->
   <!-- ===================================================================-->
-  <Template brand="MediaLine" part="760-50475 A4 CD" size="A4" description="CD/DVD Labels (face only)">
+  <Template brand="MediaLine" part="760-50475 A4 CD" size="A4" _description="CD/DVD Labels (face only)">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="166.5" hole="58.5" waste="5">
@@ -411,7 +411,7 @@
   <!-- ===================================================================-->
   <!-- Encre.com Business Cards, 10 per sheet                             -->
   <!-- ===================================================================-->
-  <Template brand="Encre.com" part="BCV10" size="A4" description="Business Cards">  
+  <Template brand="Encre.com" part="BCV10" size="A4" _description="Business Cards">  
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="243.78" height="153.07">  
@@ -472,7 +472,7 @@
   <!-- =================================================================== -->
   <!-- Fellows 04715 CD/DVD Labels (Face only).                            -->
   <!-- =================================================================== -->
-  <Template brand="Fellows" part="04715" size="A4" description="CD Labels">
+  <Template brand="Fellows" part="04715" size="A4" _description="CD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="166.5pt" hole="58.5pt" waste="9pt">
@@ -509,7 +509,7 @@
   <!-- =================================================================== -->
   <!-- DECAdry DLW-1786: Mailing Labels.                                   -->
   <!-- =================================================================== -->
-  <Template brand="DECAdry" part="DLW-1786" size="A4" description="Mailing Labels">
+  <Template brand="DECAdry" part="DLW-1786" size="A4" _description="Mailing Labels">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="105mm" height="39mm" round="0mm" x_waste="0mm" y_waste="0mm">
@@ -522,7 +522,7 @@
   <!-- =================================================================== -->
   <!-- DECAdry DLW-1787: Mailing Labels.                                   -->
   <!-- =================================================================== -->
-  <Template brand="DECAdry" part="DLW-1787" size="A4" description="Mailing Labels">
+  <Template brand="DECAdry" part="DLW-1787" size="A4" _description="Mailing Labels">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="70mm" height="35mm" round="0mm" x_waste="0mm" y_waste="0mm">
@@ -547,7 +547,7 @@
   <!-- =================================================================== -->
   <!-- Poundland 30 Labels.                                                -->
   <!-- =================================================================== -->
-  <Template brand="Poundland" part="30" size="A4" description="Labels">
+  <Template brand="Poundland" part="30" size="A4" _description="Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="184.252pt" height="72pt" round="8.50394pt" x_waste="4.25197pt" y_waste="0pt">
       <Markup-margin size="7.08661pt"/>
@@ -558,7 +558,7 @@
   <!-- =================================================================== -->
   <!-- Sanwa LB-CDRJP.  CD Labels.                                         -->
   <!-- =================================================================== -->
-  <Template brand="Sanwa" part="LB-CDRJP" size="A4" description="CD Labels">
+  <Template brand="Sanwa" part="LB-CDRJP" size="A4" _description="CD Labels">
     <Meta category="label"/>
     <Meta category="media"/>
     <Label-cd id="0" radius="167.244pt" hole="34.0pt" waste="9pt">
@@ -570,7 +570,7 @@
   <!-- =================================================================== -->
   <!-- Bruna 241301.  Mailing Labels.                                      -->
   <!-- =================================================================== -->
-  <Template brand="Bruna" part="241301" size="A4" description="Mailing Labels">
+  <Template brand="Bruna" part="241301" size="A4" _description="Mailing Labels">
     <Meta category="label"/>
     <Meta category="mail"/>
     <Label-rectangle id="0" width="198.425pt" height="102.047pt" round="0pt" x_waste="0pt" y_waste="0pt">
@@ -602,7 +602,7 @@
   <!-- Templates for A4 and A3 media, size 50 x 90 mm                       -->
   <!-- ******************************************************************** -->
   
-  <Template brand="Russian" part="A3 5x9" size="A3" description="Business Cards">
+  <Template brand="Russian" part="A3 5x9" size="A3" _description="Business Cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="90mm" height="50mm" round="0">
@@ -611,7 +611,7 @@
     </Label-rectangle>
   </Template>
 
-  <Template brand="Russian" part="A4 5x9" size="A4" description="Business Cards">
+  <Template brand="Russian" part="A4 5x9" size="A4" _description="Business Cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="50mm" height="90mm" round="0">
