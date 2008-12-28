@@ -1,3 +1,15 @@
+2008-12-27  Jim Evins  <evins@snaught.com>
+
+	* de.po:
+		Updated german translation (Mario Blättermann)
+	* AUTHORS:
+		Updated credits to reflect above translation.
+	* data/glade/object-editor.glade:
+	* data/glade/prefs-dialog.glade:
+	* data/glade/template-designer.glade:
+		Removed "translatable" attribute from whitespace strings,
+		which are used only to help layout.
+
 2008-12-22  Jim Evins  <evins@snaught.com>
 
 	* NEWS:
