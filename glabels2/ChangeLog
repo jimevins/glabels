@@ -1,3 +1,8 @@
+2009-01-02  Jim Evins  <evins@snaught.com>
+
+	* COPYING.README_FIRST:
+		Fixed typo.
+	
 2008-12-27  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-iso-templates.xml:
