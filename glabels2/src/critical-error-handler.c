@@ -72,7 +72,7 @@ critical_error_handler (const gchar    *log_domain,
                                          GTK_BUTTONS_NONE,
                                          _("gLabels Fatal Error!"));
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                  message);
+                                                  "%s", message);
         gtk_dialog_add_button (GTK_DIALOG (dialog),
                                GTK_STOCK_QUIT, 0);
 

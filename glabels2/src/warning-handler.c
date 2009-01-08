@@ -72,7 +72,7 @@ warning_handler (const gchar    *log_domain,
                                          GTK_BUTTONS_CLOSE,
                                          _("gLabels Error!"));
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                  message);
+                                                  "%s", message);
 
         gtk_dialog_run (GTK_DIALOG (dialog));
 
