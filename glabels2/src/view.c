@@ -2768,7 +2768,6 @@ selection_received_cb (GtkWidget        *widget,
 	glXMLLabelStatus  status;
 	GList            *p, *p_next;
 	glLabelObject    *object, *newobject;
-	glViewObject     *view_object;
 
 	gl_debug (DEBUG_VIEW, "START");
 

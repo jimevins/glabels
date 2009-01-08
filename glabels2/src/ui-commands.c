@@ -1058,7 +1058,7 @@ gl_ui_cmd_help_contents (GtkAction *action,
         
         if (error != NULL)
         {
-                g_message (error->message);
+                g_message ("%s", error->message);
 
                 g_error_free (error);
         }
