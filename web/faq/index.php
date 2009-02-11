@@ -11,7 +11,7 @@
 <div class="faqtoc">
 <ul class="faqtoc">
 
-  <li class="faqtocline">1. <?a("#S1", "Common Problems.");?></li>
+  <li class="faqtocline">1. <?a("#S1", "Common Problems.");?>
 
   <ul class="faqtoc">
 
@@ -19,7 +19,9 @@
 
   </ul>
 
-  <li class="faqtocline">2. <?a("#S2", "Obsolete Problems (problems with older versions of gLabels).");?></li>
+  </li>
+
+  <li class="faqtocline">2. <?a("#S2", "Obsolete Problems (problems with older versions of gLabels).");?>
 
   <ul class="faqtoc">
 
@@ -28,13 +30,15 @@
 
   </ul>
 
+  </li>
+
 </ul>
 </div>
 
-<a name="S1"/>
+<a id="S1"/>
 <h2>1. Common Problems.</h2>
 
-<a name="Q1.1"/>
+<a id="Q1.1"/>
 <h3>1.1 How can I instruct glabels to not print blank address lines when doing a document merge?</h3>
 <div class="faqanswer">
 <p>
@@ -63,10 +67,10 @@ Printing this label results in the following output.
 </div>
 
 
-<a name="S2"/>
+<a id="S2"/>
 <h2>2. Obsolete Problems (problems with older versions of gLabels).</h2>
 
-<a name="Q2.1"/>
+<a id="Q2.1"/>
 <h3>2.1 I cannot edit text.  What's wrong? (2.0.x)</h3>
 <div class="faqanswer">
 <p>
@@ -91,7 +95,7 @@ suitable for backport into the 2.0.x branch..
 </div>
 
 
-<a name="Q2.2"/>
+<a id="Q2.2"/>
 <h3>2.2 Why don't transparent images print correctly? (1.92.1 - 2.1.3)</h3>
 <div class="faqanswer">
 <p>

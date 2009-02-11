@@ -1,6 +1,9 @@
 <?php
   header("Content-Type: text/html; charser=utf-8");
+  print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+ ?>
 
+<?php
   #-------------------------------------------------------
   # Globals
   #-------------------------------------------------------
@@ -148,7 +151,6 @@
     $tabs["$root/contact/"]     = "contact";
     $tabs["$root/links/"]       = "links";
 
-    print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"

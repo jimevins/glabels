@@ -39,7 +39,7 @@ Changes/fixes since 2.2.2 include
 </p>
 <ul>
 <li>Explicitely set page size when printing -- don't let print back-end use
-  a default size (Bug #2049431).</l>
+  a default size (Bug #2049431).</li>
 <li>Sets more appropriate object size limits for any aspect ratio (Bug #1993550).</li>
 <li>Fixed crash of glabels-batch (Bug #1968653).</li>
 <li>Fixed bug with barcode and image merge radio buttons (Bug #1959135).</li>

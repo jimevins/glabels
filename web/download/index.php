@@ -46,6 +46,7 @@ Just having the base library packages installed is not enough.
 <p>
 gLabels is currently available for most popular GNU/Linux distributions through
 their associated repositories, including the following repositories:
+</p>
 <ul>
   <li>Debian</li>
   <li>Fedora Extras</li>

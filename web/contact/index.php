@@ -13,7 +13,7 @@ the problem more directly (please submit all bugs to the tracker as well).
 <p>Please consult the following checklist when reporting a bug.
 </p>
 <ol>
-  <li>Verify that you are not experiencing a known bug or limitation by consulting the <?a("/faq/", "gLabels FAQ");?>.
+  <li>Verify that you are not experiencing a known bug or limitation by consulting the <?a("/faq/", "gLabels FAQ");?>.</li>
   <li>Verify that the bug is not a duplicate of an existing bug by searching the tracker.  If you have additional information
       on an existing bug, please add your information to the existing bug.  If you
       are not using the latest version of glabels, you should also look for closed
