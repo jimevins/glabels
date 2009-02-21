@@ -152,7 +152,7 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	copies->sheets_radio =
 	    gtk_radio_button_new_with_label (radio_group, _("Sheets:"));
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->sheets_radio, FALSE, FALSE, 0);
-	adjust = gtk_adjustment_new (1, 1.0, 10.0, 1.0, 10.0, 10.0);
+	adjust = gtk_adjustment_new (1, 1.0, 10.0, 1.0, 10.0, 0.0);
 	copies->sheets_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						   1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->sheets_spin, FALSE, FALSE, 0);
@@ -172,14 +172,14 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->labels_radio, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new (_("from:")), FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (1, 1.0, copies->labels_per_sheet,
-				     1.0, 10.0, 10.0);
+				     1.0, 10.0, 0.0);
 	copies->first_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						  1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->first_spin, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new (_("to:")), FALSE, FALSE, 0);
 	adjust = gtk_adjustment_new (copies->labels_per_sheet,
 				     1.0, copies->labels_per_sheet,
-				     1.0, 10.0, 10.0);
+				     1.0, 10.0, 0.0);
 	copies->last_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						 1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->last_spin, FALSE, FALSE, 0);

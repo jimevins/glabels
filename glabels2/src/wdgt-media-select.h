@@ -31,13 +31,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_MEDIA_SELECT (gl_wdgt_media_select_get_type ())
 #define GL_WDGT_MEDIA_SELECT(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_MEDIA_SELECT, glWdgtMediaSelect ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_MEDIA_SELECT, glWdgtMediaSelect ))
 #define GL_WDGT_MEDIA_SELECT_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MEDIA_SELECT, glWdgtMediaSelectClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MEDIA_SELECT, glWdgtMediaSelectClass))
 #define GL_IS_WDGT_MEDIA_SELECT(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_MEDIA_SELECT))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_MEDIA_SELECT))
 #define GL_IS_WDGT_MEDIA_SELECT_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MEDIA_SELECT))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MEDIA_SELECT))
 
 typedef struct _glWdgtMediaSelect         glWdgtMediaSelect;
 typedef struct _glWdgtMediaSelectClass    glWdgtMediaSelectClass;

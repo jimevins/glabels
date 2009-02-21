@@ -28,13 +28,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_COLOR_COMBO_MENU (gl_color_combo_menu_get_type ())
 #define GL_COLOR_COMBO_MENU(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_COLOR_COMBO_MENU, glColorComboMenu ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_COLOR_COMBO_MENU, glColorComboMenu ))
 #define GL_COLOR_COMBO_MENU_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_COLOR_COMBO_MENU, glColorComboMenuClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_COLOR_COMBO_MENU, glColorComboMenuClass))
 #define GL_IS_COLOR_COMBO_MENU(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_COLOR_COMBO_MENU))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_COLOR_COMBO_MENU))
 #define GL_IS_COLOR_COMBO_MENU_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_COLOR_COMBO_MENU))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_COLOR_COMBO_MENU))
 
 typedef struct _glColorComboMenu        glColorComboMenu;
 typedef struct _glColorComboMenuPrivate glColorComboMenuPrivate;

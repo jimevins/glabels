@@ -43,10 +43,14 @@ typedef enum {
 } glViewState;
 
 #define GL_TYPE_VIEW            (gl_view_get_type ())
-#define GL_VIEW(obj)            (GTK_CHECK_CAST((obj), GL_TYPE_VIEW, glView ))
-#define GL_VIEW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW, glViewClass))
-#define GL_IS_VIEW(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_VIEW))
-#define GL_IS_VIEW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW))
+#define GL_VIEW(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_VIEW, glView ))
+#define GL_VIEW_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW, glViewClass))
+#define GL_IS_VIEW(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW))
+#define GL_IS_VIEW_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW))
 
 typedef struct _glView      glView;
 typedef struct _glViewClass glViewClass;

@@ -40,13 +40,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WINDOW (gl_window_get_type ())
 #define GL_WINDOW(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WINDOW, glWindow ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WINDOW, glWindow ))
 #define GL_WINDOW_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WINDOW, glWindowClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WINDOW, glWindowClass))
 #define GL_IS_WINDOW(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WINDOW))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WINDOW))
 #define GL_IS_WINDOW_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WINDOW))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WINDOW))
 
 typedef struct _glWindow      glWindow;
 typedef struct _glWindowClass glWindowClass;

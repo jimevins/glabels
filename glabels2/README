@@ -21,10 +21,9 @@ cards using a laser or ink-jet printer.
 System Requirements
 ===================
 
-GTK+-2.10.x
-LIBGNOME[UI]-2.16.x
-LIBXML-2.6.x
-LIBGLADE-2.6.x
+GLIB+-2.18.x
+GTK+-2.14.x
+LIBXML-2.7.x
 
 All of these libraries are available as part of Gnome 2.16
 

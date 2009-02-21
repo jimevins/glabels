@@ -5,7 +5,7 @@
  *
  *  ui-commands.c:  GLabels UI commands module
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkaboutdialog.h>
-#include <libgnome/gnome-help.h>
 
 #include "view.h"
 #include "file.h"
@@ -430,7 +429,7 @@ gl_ui_cmd_view_property_bar_tips_toggle (GtkToggleAction *action,
         state =  gtk_toggle_action_get_active (action);
 
         gl_prefs->property_toolbar_view_tooltips = state;
-        gl_ui_property_bar_set_tooltips (window->property_bar, state);
+        gtk_widget_set_has_tooltip (GTK_WIDGET (window->property_bar), state);
         gl_prefs_model_save_settings (gl_prefs);
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -1054,7 +1053,10 @@ gl_ui_cmd_help_contents (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        gnome_help_display_with_doc_id (NULL, NULL, "glabels.xml", NULL, &error);
+        gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (window)),
+                      "ghelp:glabels",
+                      GDK_CURRENT_TIME, 
+                      &error);
         
         if (error != NULL)
         {
@@ -1098,7 +1100,7 @@ gl_ui_cmd_help_about (GtkAction *action,
                 NULL
         };
         
-        const gchar *copy_text = "Copyright \xc2\xa9 2001-2007 Jim Evins";
+        const gchar *copy_text = "Copyright \xc2\xa9 2001-2009 Jim Evins";
 
         const gchar *about_text = _("A label and business card creation program.\n");
 

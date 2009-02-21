@@ -31,11 +31,16 @@
 G_BEGIN_DECLS
 
 #define GL_TYPE_MERGE_PROPERTIES_DIALOG            (gl_merge_properties_dialog_get_type ())
-#define GL_MERGE_PROPERTIES_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialog))
-#define GL_MERGE_PROPERTIES_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
-#define GL_IS_MERGE_PROPERTIES_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG))
-#define GL_IS_MERGE_PROPERTIES_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG))
-#define GL_MERGE_PROPERTIES_DIALOG_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
+#define GL_MERGE_PROPERTIES_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialog))
+#define GL_MERGE_PROPERTIES_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
+#define GL_IS_MERGE_PROPERTIES_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG))
+#define GL_IS_MERGE_PROPERTIES_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG))
+#define GL_MERGE_PROPERTIES_DIALOG_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
 
 
 typedef struct _glMergePropertiesDialog         glMergePropertiesDialog;

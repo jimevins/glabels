@@ -89,7 +89,7 @@ gl_object_editor_prepare_lsize_page (glObjectEditor       *editor)
 	/* Modify widgets based on configuration */
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin), digits);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
-					climb_rate, 10.0*climb_rate);
+					climb_rate, 0);
 	gtk_label_set_text (GTK_LABEL(editor->priv->lsize_r_units_label), units_string);
 
 	/* Un-hide */
@@ -237,7 +237,7 @@ lsize_prefs_changed_cb (glObjectEditor *editor)
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
 				    digits);
 	gtk_spin_button_set_increments (GTK_SPIN_BUTTON(editor->priv->lsize_r_spin),
-					climb_rate, 10.0*climb_rate);
+					climb_rate, 0);
         editor->priv->stop_signals = FALSE;
 
 	/* Update r_units_label */

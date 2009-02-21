@@ -31,13 +31,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_ROTATE_LABEL (gl_wdgt_rotate_label_get_type ())
 #define GL_WDGT_ROTATE_LABEL(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_ROTATE_LABEL, glWdgtRotateLabel ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_ROTATE_LABEL, glWdgtRotateLabel ))
 #define GL_WDGT_ROTATE_LABEL_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_ROTATE_LABEL, glWdgtRotateLabelClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_ROTATE_LABEL, glWdgtRotateLabelClass))
 #define GL_IS_WDGT_ROTATE_LABEL(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_ROTATE_LABEL))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_ROTATE_LABEL))
 #define GL_IS_WDGT_ROTATE_LABEL_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_ROTATE_LABEL))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_ROTATE_LABEL))
 
 typedef struct _glWdgtRotateLabel         glWdgtRotateLabel;
 typedef struct _glWdgtRotateLabelClass    glWdgtRotateLabelClass;

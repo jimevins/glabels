@@ -29,13 +29,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM (gl_color_combo_color_menu_item_get_type ())
 #define GL_COLOR_COMBO_COLOR_MENU_ITEM(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM, glColorComboColorMenuItem ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM, glColorComboColorMenuItem ))
 #define GL_COLOR_COMBO_COLOR_MENU_ITEM_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM, glColorComboColorMenuItemClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM, glColorComboColorMenuItemClass))
 #define GL_IS_COLOR_COMBO_COLOR_MENU_ITEM(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM))
 #define GL_IS_COLOR_COMBO_COLOR_MENU_ITEM_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM))
 
 typedef struct _glColorComboColorMenuItem        glColorComboColorMenuItem;
 typedef struct _glColorComboColorMenuItemPrivate glColorComboColorMenuItemPrivate;

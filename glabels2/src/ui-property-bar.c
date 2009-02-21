@@ -492,36 +492,6 @@ gl_ui_property_bar_set_view (glUIPropertyBar *this,
 }
 
 
-/****************************************************************************/
-/** Set visiblity of property bar's tooltips.                               */
-/****************************************************************************/
-void
-gl_ui_property_bar_set_tooltips (glUIPropertyBar *this,
-				 gboolean         state)
-{
-	GtkTooltipsData *data;
-
-	gl_debug (DEBUG_PROPERTY_BAR, "START");
-
-	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR(this));
-
-	/* HACK: peek into one of our widgets to get the tooltips group created by builder. */
-	data = gtk_tooltips_data_get (this->priv->font_size_spin);
-	g_return_if_fail (data);
-
-	if (state)
-        {
-		gtk_tooltips_enable (data->tooltips);
-	}
-        else
-        {
-		gtk_tooltips_disable (data->tooltips);
-	}
-
-	gl_debug (DEBUG_PROPERTY_BAR, "END");
-}
-
-
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  View "selection state changed" callback.                        */
 /*---------------------------------------------------------------------------*/

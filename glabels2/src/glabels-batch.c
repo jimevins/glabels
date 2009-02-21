@@ -25,7 +25,6 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include <libgnome/libgnome.h>
 
 #include "merge-init.h"
 #include "xml-label.h"
@@ -80,7 +79,6 @@ int
 main (int argc, char **argv)
 {
 	GOptionContext    *option_context;
-        GnomeProgram      *program;
         GList             *p, *file_list = NULL;
         gchar             *abs_fn;
         glLabel           *label = NULL;
@@ -88,6 +86,7 @@ main (int argc, char **argv)
         glXMLLabelStatus   status;
         glPrintOp         *print_op;
 	gchar	          *utf8_filename;
+        GError            *error = NULL;
 
         bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -98,11 +97,15 @@ main (int argc, char **argv)
 
 
         /* Initialize minimal gnome program */
-        program = gnome_program_init ("glabels-batch", VERSION,
-                                      LIBGNOME_MODULE, argc, argv,
-				      GNOME_PARAM_GOPTION_CONTEXT, option_context,
-                                      GNOME_PROGRAM_STANDARD_PROPERTIES,
-                                      NULL);
+        gtk_init (&argc, &argv);
+        if (!g_option_context_parse (option_context, &argc, &argv, &error))
+	{
+	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+			error->message, argv[0]);
+		g_error_free (error);
+		return 1;
+	}
+
 
         /* create file list */
 	if (remaining_args != NULL) {

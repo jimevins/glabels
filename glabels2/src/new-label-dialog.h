@@ -30,11 +30,16 @@
 G_BEGIN_DECLS
 
 #define GL_TYPE_NEW_LABEL_DIALOG            (gl_new_label_dialog_get_type ())
-#define GL_NEW_LABEL_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialog))
-#define GL_NEW_LABEL_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
-#define GL_IS_NEW_LABEL_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_NEW_LABEL_DIALOG))
-#define GL_IS_NEW_LABEL_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_NEW_LABEL_DIALOG))
-#define GL_NEW_LABEL_DIALOG_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
+#define GL_NEW_LABEL_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialog))
+#define GL_NEW_LABEL_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
+#define GL_IS_NEW_LABEL_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_NEW_LABEL_DIALOG))
+#define GL_IS_NEW_LABEL_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_NEW_LABEL_DIALOG))
+#define GL_NEW_LABEL_DIALOG_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
 
 
 typedef struct _glNewLabelDialog         glNewLabelDialog;

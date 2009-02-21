@@ -32,13 +32,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_MINI_PREVIEW (gl_wdgt_mini_preview_get_type ())
 #define GL_WDGT_MINI_PREVIEW(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_MINI_PREVIEW, glWdgtMiniPreview ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_MINI_PREVIEW, glWdgtMiniPreview ))
 #define GL_WDGT_MINI_PREVIEW_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MINI_PREVIEW, glWdgtMiniPreviewClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MINI_PREVIEW, glWdgtMiniPreviewClass))
 #define GL_IS_WDGT_MINI_PREVIEW(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_MINI_PREVIEW))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_MINI_PREVIEW))
 #define GL_IS_WDGT_MINI_PREVIEW_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MINI_PREVIEW))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MINI_PREVIEW))
 
 typedef struct _glWdgtMiniPreview        glWdgtMiniPreview;
 typedef struct _glWdgtMiniPreviewPrivate glWdgtMiniPreviewPrivate;

@@ -150,7 +150,7 @@ gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	gl_wdgt_mini_preview_parent_class = gtk_type_class (gtk_hbox_get_type ());
+	gl_wdgt_mini_preview_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_wdgt_mini_preview_finalize;
 

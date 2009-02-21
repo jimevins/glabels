@@ -52,18 +52,14 @@ AC_SUBST(LIBGLABELS_VERSION_INFO)
 dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
-GLIB_REQUIRED=2.16.0
-GTK_REQUIRED=2.12.0
-LIBGNOME_REQUIRED=2.22.0
-LIBGNOMEUI_REQUIRED=2.22.0
+GLIB_REQUIRED=2.18.0
+GTK_REQUIRED=2.14.0
 LIBXML_REQUIRED=2.7.0
-LIBEBOOK_REQUIRED=2.22.0
+LIBEBOOK_REQUIRED=2.24.0
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
-AC_SUBST(LIBGNOME_REQUIRED)
-AC_SUBST(LIBGNOMEUI_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
 AC_SUBST(LIBEBOOK_REQUIRED)
 
@@ -92,8 +88,6 @@ dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 gtk+-2.0 >= $GTK_REQUIRED \
-libgnome-2.0 >= $LIBGNOME_REQUIRED \
-libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
 $OPTIONAL_MODULES \
 )
@@ -128,7 +122,6 @@ if test "x$enable_deprecations" = "xyes"; then
 -DGDK_DISABLE_DEPRECATED \
 -DGTK_DISABLE_DEPRECATED \
 -DGDK_PIXBUF_DISABLE_DEPRECATED \
--DGNOME_DISABLE_DEPRECATED \
 "
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi

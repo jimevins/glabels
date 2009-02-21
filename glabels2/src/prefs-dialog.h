@@ -31,11 +31,16 @@
 G_BEGIN_DECLS
 
 #define GL_TYPE_PREFS_DIALOG            (gl_prefs_dialog_get_type ())
-#define GL_PREFS_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialog))
-#define GL_PREFS_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
-#define GL_IS_PREFS_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_PREFS_DIALOG))
-#define GL_IS_PREFS_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_PREFS_DIALOG))
-#define GL_PREFS_DIALOG_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
+#define GL_PREFS_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialog))
+#define GL_PREFS_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
+#define GL_IS_PREFS_DIALOG(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_PREFS_DIALOG))
+#define GL_IS_PREFS_DIALOG_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_PREFS_DIALOG))
+#define GL_PREFS_DIALOG_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
 
 
 typedef struct _glPrefsDialog 		glPrefsDialog;

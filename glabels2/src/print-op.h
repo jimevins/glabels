@@ -30,11 +30,16 @@
 G_BEGIN_DECLS
 
 #define GL_TYPE_PRINT_OP            (gl_print_op_get_type ())
-#define GL_PRINT_OP(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_PRINT_OP, glPrintOp))
-#define GL_PRINT_OP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_PRINT_OP, glPrintOpClass))
-#define GL_IS_PRINT_OP(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_PRINT_OP))
-#define GL_IS_PRINT_OP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_PRINT_OP))
-#define GL_PRINT_OP_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_PRINT_OP, glPrintOpClass))
+#define GL_PRINT_OP(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_PRINT_OP, glPrintOp))
+#define GL_PRINT_OP_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_PRINT_OP, glPrintOpClass))
+#define GL_IS_PRINT_OP(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_PRINT_OP))
+#define GL_IS_PRINT_OP_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_PRINT_OP))
+#define GL_PRINT_OP_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_PRINT_OP, glPrintOpClass))
 
 
 typedef struct _glPrintOp         glPrintOp;

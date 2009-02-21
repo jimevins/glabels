@@ -25,9 +25,6 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
-#include <libgnomeui/gnome-window-icon.h>
 
 #include "warning-handler.h"
 #include "critical-error-handler.h"
@@ -41,27 +38,21 @@
 #include "window.h"
 #include "file.h"
 
+
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private globals                                        */
 /*========================================================*/
 
+
 /*========================================================*/
 /* Local function prototypes                              */
 /*========================================================*/
-gboolean save_session_cb (GnomeClient        *client,
-			  gint                phase,
-			  GnomeRestartStyle   save_style,
-			  gint                shutdown,
-			  GnomeInteractStyle  interact_style,
-			  gint                fast,
-			  gpointer            client_data);
 
-void client_die_cb       (GnomeClient        *client,
-			  gpointer            client_data);
 
 /****************************************************************************/
 /* main program                                                             */
@@ -77,12 +68,11 @@ main (int argc, char **argv)
 	};
 
 	GOptionContext *option_context;
-    	GnomeProgram   *program;
 	gchar          *icon_file;
-	GnomeClient    *client;
 	GList          *file_list = NULL, *p;
 	GtkWidget      *win;
 	gchar	       *utf8_filename;
+        GError         *error = NULL;
 
 	bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -92,12 +82,16 @@ main (int argc, char **argv)
 	g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
 
-	/* Initialize gnome program */
-	program = gnome_program_init ("glabels", VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_GOPTION_CONTEXT, option_context,
-				      GNOME_PROGRAM_STANDARD_PROPERTIES,
-				      NULL);
+	/* Initialize program */
+        gtk_init( &argc, &argv );
+        if (!g_option_context_parse (option_context, &argc, &argv, &error))
+	{
+	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+			error->message, argv[0]);
+		g_error_free (error);
+		return 1;
+	}
+
 
 	/* Install GUI handlers for critical error and warning messages */
 	gl_critical_error_handler_init();
@@ -111,7 +105,7 @@ main (int argc, char **argv)
 	}
 	else
 	{
-		gnome_window_icon_set_default_from_file (icon_file);
+		gtk_window_set_default_icon_from_file (icon_file, NULL);
 	}
 
 	
@@ -124,16 +118,6 @@ main (int argc, char **argv)
 	gl_merge_init ();
 	gl_recent_init ();
 	
-
-	client = gnome_master_client();
-
-	g_signal_connect (G_OBJECT (client), "save_yourself",
-			  G_CALLBACK (save_session_cb),
-			  (gpointer)argv[0]);
-
-	g_signal_connect (G_OBJECT (client), "die",
-			  G_CALLBACK (client_die_cb), NULL);
-
 
 	/* Parse args and build the list of files to be loaded at startup */
 	if (remaining_args != NULL) {
@@ -166,53 +150,6 @@ main (int argc, char **argv)
 	/* Begin main loop */
 	gtk_main();
 
-	g_object_unref (G_OBJECT (program));
-
 	return 0;
 }
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Save session" callback.                                        */
-/*---------------------------------------------------------------------------*/
-gboolean save_session_cb (GnomeClient        *client,
-			  gint                phase,
-			  GnomeRestartStyle   save_style,
-			  gint                shutdown,
-			  GnomeInteractStyle  interact_style,
-			  gint                fast,
-			  gpointer            client_data)
-{
-	gchar       *argv[128];
-	gint         argc;
-	const GList *window_list;
-	GList       *p;
-	glWindow    *window;
-	glLabel     *label;
-
-	argv[0] = (gchar *)client_data;
-	argc = 1;
-
-	window_list = gl_window_get_window_list();
-	for ( p=(GList *)window_list; p != NULL; p=p->next ) {
-		window = GL_WINDOW(p->data);
-		if ( !gl_window_is_empty (window) ) {
-			label = GL_VIEW(window->view)->label;
-			argv[argc++] = gl_label_get_filename (label);
-		}
-	}
-	gnome_client_set_clone_command(client, argc, argv);
-	gnome_client_set_restart_command(client, argc, argv);
-	
-	return TRUE;
-}
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  "Die" callback.                                                 */
-/*---------------------------------------------------------------------------*/
-void client_die_cb (GnomeClient *client,
-		    gpointer     client_data)
-{
-	gl_file_exit ();
-}
-
 

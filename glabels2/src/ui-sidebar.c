@@ -154,7 +154,7 @@ gl_ui_sidebar_construct (glUISidebar       *sidebar)
 							   GL_OBJECT_EDITOR_EMPTY,
 							   NULL);
 
-	sidebar->priv->child = gtk_widget_ref (sidebar->priv->empty_child);
+	sidebar->priv->child = g_object_ref (sidebar->priv->empty_child);
 	gtk_widget_show (sidebar->priv->child);
 	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->priv->child);
 
@@ -200,11 +200,11 @@ selection_changed_cb (glView      *view,
 
 	if (gl_view_is_selection_empty (view) || !gl_view_is_selection_atomic (view)) {
 
-		sidebar->priv->child = gtk_widget_ref (sidebar->priv->empty_child);
+		sidebar->priv->child = g_object_ref (sidebar->priv->empty_child);
 		
 	} else {
 
-		sidebar->priv->child = gtk_widget_ref (gl_view_get_editor (view));
+		sidebar->priv->child = g_object_ref (gl_view_get_editor (view));
 
 	}
 

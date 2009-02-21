@@ -33,13 +33,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_UI_PROPERTY_BAR (gl_ui_property_bar_get_type ())
 #define GL_UI_PROPERTY_BAR(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_UI_PROPERTY_BAR, glUIPropertyBar ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_UI_PROPERTY_BAR, glUIPropertyBar ))
 #define GL_UI_PROPERTY_BAR_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_UI_PROPERTY_BAR, glUIPropertyBarClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_UI_PROPERTY_BAR, glUIPropertyBarClass))
 #define GL_IS_UI_PROPERTY_BAR(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_UI_PROPERTY_BAR))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_UI_PROPERTY_BAR))
 #define GL_IS_UI_PROPERTY_BAR_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_PROPERTY_BAR))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_PROPERTY_BAR))
 
 typedef struct _glUIPropertyBar        glUIPropertyBar;
 typedef struct _glUIPropertyBarClass   glUIPropertyBarClass;
@@ -63,10 +63,6 @@ GtkWidget   *gl_ui_property_bar_new               (void);
 
 void         gl_ui_property_bar_set_view          (glUIPropertyBar *this,
 						   glView          *view);
-
-void         gl_ui_property_bar_set_tooltips      (glUIPropertyBar *this,
-						   gboolean         state);
-
 
 
 G_END_DECLS

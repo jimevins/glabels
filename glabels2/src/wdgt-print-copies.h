@@ -32,13 +32,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_PRINT_COPIES (gl_wdgt_print_copies_get_type ())
 #define GL_WDGT_PRINT_COPIES(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_PRINT_COPIES, glWdgtPrintCopies ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_PRINT_COPIES, glWdgtPrintCopies ))
 #define GL_WDGT_PRINT_COPIES_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_PRINT_COPIES, glWdgtPrintCopiesClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_PRINT_COPIES, glWdgtPrintCopiesClass))
 #define GL_IS_WDGT_PRINT_COPIES(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_PRINT_COPIES))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_PRINT_COPIES))
 #define GL_IS_WDGT_PRINT_COPIES_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_PRINT_COPIES))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_PRINT_COPIES))
 
 typedef struct _glWdgtPrintCopies      glWdgtPrintCopies;
 typedef struct _glWdgtPrintCopiesClass glWdgtPrintCopiesClass;

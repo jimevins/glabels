@@ -32,13 +32,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_PRINT_MERGE (gl_wdgt_print_merge_get_type ())
 #define GL_WDGT_PRINT_MERGE(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_PRINT_MERGE, glWdgtPrintMerge ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_PRINT_MERGE, glWdgtPrintMerge ))
 #define GL_WDGT_PRINT_MERGE_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_PRINT_MERGE, glWdgtPrintMergeClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_PRINT_MERGE, glWdgtPrintMergeClass))
 #define GL_IS_WDGT_PRINT_MERGE(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_PRINT_MERGE))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_PRINT_MERGE))
 #define GL_IS_WDGT_PRINT_MERGE_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_PRINT_MERGE))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_PRINT_MERGE))
 
 typedef struct _glWdgtPrintMerge      glWdgtPrintMerge;
 typedef struct _glWdgtPrintMergeClass glWdgtPrintMergeClass;

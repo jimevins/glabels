@@ -52,11 +52,16 @@ typedef enum {
 } glObjectEditorOption;
 
 #define GL_TYPE_OBJECT_EDITOR            (gl_object_editor_get_type ())
-#define GL_OBJECT_EDITOR(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditor))
-#define GL_OBJECT_EDITOR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
-#define GL_IS_OBJECT_EDITOR(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_OBJECT_EDITOR))
-#define GL_IS_OBJECT_EDITOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_OBJECT_EDITOR))
-#define GL_OBJECT_EDITOR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
+#define GL_OBJECT_EDITOR(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditor))
+#define GL_OBJECT_EDITOR_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
+#define GL_IS_OBJECT_EDITOR(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_OBJECT_EDITOR))
+#define GL_IS_OBJECT_EDITOR_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_OBJECT_EDITOR))
+#define GL_OBJECT_EDITOR_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
 
 
 typedef struct _glObjectEditor         glObjectEditor;
@@ -83,7 +88,7 @@ struct  _glObjectEditorClass
 
 
 
-GtkType     gl_object_editor_get_type             (void) G_GNUC_CONST;
+GType       gl_object_editor_get_type             (void) G_GNUC_CONST;
 
 GtkWidget  *gl_object_editor_new                  (gchar               *image,
 						   gchar               *title,

@@ -30,12 +30,17 @@
 
 G_BEGIN_DECLS
 
-#define GL_TYPE_TEMPLATE_DESIGNER            (gl_template_designer_get_type ())
-#define GL_TEMPLATE_DESIGNER(obj)            (GTK_CHECK_CAST ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesigner))
-#define GL_TEMPLATE_DESIGNER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
-#define GL_IS_TEMPLATE_DESIGNER(obj)         (GTK_CHECK_TYPE ((obj), GL_TYPE_TEMPLATE_DESIGNER))
-#define GL_IS_TEMPLATE_DESIGNER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_TEMPLATE_DESIGNER))
-#define GL_TEMPLATE_DESIGNER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
+#define GL_TYPE_TEMPLATE_DESIGNER (gl_template_designer_get_type ())
+#define GL_TEMPLATE_DESIGNER(obj) \
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesigner))
+#define GL_TEMPLATE_DESIGNER_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
+#define GL_IS_TEMPLATE_DESIGNER(obj) \
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_TEMPLATE_DESIGNER))
+#define GL_IS_TEMPLATE_DESIGNER_CLASS(klass) \
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_TEMPLATE_DESIGNER))
+#define GL_TEMPLATE_DESIGNER_GET_CLASS(obj) \
+        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
 
 
 typedef struct _glTemplateDesigner              glTemplateDesigner;

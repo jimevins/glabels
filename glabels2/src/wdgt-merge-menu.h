@@ -31,13 +31,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_WDGT_MERGE_MENU (gl_wdgt_merge_menu_get_type ())
 #define GL_WDGT_MERGE_MENU(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_WDGT_MERGE_MENU, glWdgtMergeMenu ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_WDGT_MERGE_MENU, glWdgtMergeMenu ))
 #define GL_WDGT_MERGE_MENU_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MERGE_MENU, glWdgtMergeMenuClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_WDGT_MERGE_MENU, glWdgtMergeMenuClass))
 #define GL_IS_WDGT_MERGE_MENU(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_WDGT_MERGE_MENU))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_WDGT_MERGE_MENU))
 #define GL_IS_WDGT_MERGE_MENU_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MERGE_MENU))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_WDGT_MERGE_MENU))
 
 
 typedef struct _glWdgtMergeMenu         glWdgtMergeMenu;

@@ -33,13 +33,13 @@ G_BEGIN_DECLS
 
 #define GL_TYPE_UI_SIDEBAR (gl_ui_sidebar_get_type ())
 #define GL_UI_SIDEBAR(obj) \
-        (GTK_CHECK_CAST((obj), GL_TYPE_UI_SIDEBAR, glUISidebar ))
+        (G_TYPE_CHECK_INSTANCE_CAST((obj), GL_TYPE_UI_SIDEBAR, glUISidebar ))
 #define GL_UI_SIDEBAR_CLASS(klass) \
-        (GTK_CHECK_CLASS_CAST ((klass), GL_TYPE_UI_SIDEBAR, glUISidebarClass))
+        (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_UI_SIDEBAR, glUISidebarClass))
 #define GL_IS_UI_SIDEBAR(obj) \
-        (GTK_CHECK_TYPE ((obj), GL_TYPE_UI_SIDEBAR))
+        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_UI_SIDEBAR))
 #define GL_IS_UI_SIDEBAR_CLASS(klass) \
-        (GTK_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_SIDEBAR))
+        (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_UI_SIDEBAR))
 
 typedef struct _glUISidebar        glUISidebar;
 typedef struct _glUISidebarClass   glUISidebarClass;

@@ -29,6 +29,7 @@
 #include <gtk/gtklabel.h>
 #include <gtk/gtkimage.h>
 #include "color.h"
+#include "util.h"
 
 
 /*===========================================*/

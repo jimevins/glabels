@@ -1,3 +1,46 @@
+2009-02-21  JimEvins  <evins@snaught.com>
+
+	* README:
+	* configure.in:
+	* data/builder/object-editor.glade:
+	* data/builder/prefs-dialog.glade:
+	* data/builder/property-bar.glade:
+	* data/builder/template-designer.glade:
+	* gtk-doc.make:
+	* src/color-combo-color-menu-item.c:
+	* src/color-combo-color-menu-item.h:
+	* src/color-combo-menu.h:
+	* src/glabels-batch.c: (main):
+	* src/glabels.c: (main):
+	* src/merge-properties-dialog.h:
+	* src/new-label-dialog.h:
+	* src/object-editor-lsize-page.c:
+	(gl_object_editor_prepare_lsize_page), (lsize_prefs_changed_cb):
+	* src/object-editor.h:
+	* src/prefs-dialog.h:
+	* src/print-op.h:
+	* src/template-designer.h:
+	* src/ui-commands.c: (gl_ui_cmd_view_property_bar_tips_toggle),
+	(gl_ui_cmd_help_contents), (gl_ui_cmd_help_about):
+	* src/ui-property-bar.c:
+	* src/ui-property-bar.h:
+	* src/ui-sidebar.c: (gl_ui_sidebar_construct),
+	(selection_changed_cb):
+	* src/ui-sidebar.h:
+	* src/view.h:
+	* src/wdgt-media-select.h:
+	* src/wdgt-merge-menu.h:
+	* src/wdgt-mini-preview.c: (gl_wdgt_mini_preview_class_init):
+	* src/wdgt-mini-preview.h:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_construct):
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_construct):
+	* src/wdgt-print-merge.h:
+	* src/wdgt-rotate-label.h:
+	* src/window.h:
+		Removed final dependencies on libgnome and libgnomeui.
+		Removed all currently deprecated symbols as of GTK 2.14.
+	
 2009-01-07  Jim Evins  <evins@snaught.com>
 
 	* src/critical-error-handler.c: (critical_error_handler):
