@@ -81,15 +81,12 @@ struct _glPrefsModel {
 	/* User Interface/Main Toolbar */
 	gboolean	  main_toolbar_visible;
 	glToolbarSetting  main_toolbar_buttons_style; 
-	gboolean	  main_toolbar_view_tooltips;
 
 	/* User Interface/Drawing Toolbar */
 	gboolean          drawing_toolbar_visible;
-	gboolean	  drawing_toolbar_view_tooltips;
 
 	/* User Interface/Property Toolbar */
 	gboolean          property_toolbar_visible;
-	gboolean	  property_toolbar_view_tooltips;
 
 	/* View properties */
 	gboolean          grid_visible;

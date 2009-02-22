@@ -1,5 +1,17 @@
 2009-02-21  JimEvins  <evins@snaught.com>
 
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/prefs-model.h:
+	* src/ui-commands.c:
+	* src/ui-property-bar.c:
+	* src/ui.c: (view_ui_item_toggled_cb),
+	(set_app_main_toolbar_style), (set_app_drawing_toolbar_style):
+		Removed tooltip toggling capability, which wasn't working
+		anyway.
+
+2009-02-21  JimEvins  <evins@snaught.com>
+
 	* README:
 	* configure.in:
 	* data/builder/object-editor.glade:

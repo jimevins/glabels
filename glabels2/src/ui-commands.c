@@ -412,28 +412,6 @@ gl_ui_cmd_view_property_bar_toggle (GtkToggleAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
-/*****************************************************************************/
-/** View/Property-bar-tooltips-toggle command.                               */
-/*****************************************************************************/
-void
-gl_ui_cmd_view_property_bar_tips_toggle (GtkToggleAction *action,
-                                         glWindow        *window)
-{
-        gboolean     state;
-
-        gl_debug (DEBUG_COMMANDS, "START");
-
-        g_return_if_fail (action && GTK_IS_TOGGLE_ACTION(action));
-        g_return_if_fail (window && GL_IS_WINDOW(window));
-
-        state =  gtk_toggle_action_get_active (action);
-
-        gl_prefs->property_toolbar_view_tooltips = state;
-        gtk_widget_set_has_tooltip (GTK_WIDGET (window->property_bar), state);
-        gl_prefs_model_save_settings (gl_prefs);
-
-        gl_debug (DEBUG_COMMANDS, "END");
-}
 
 /*****************************************************************************/
 /** View/Grid-toggle command.                                                */

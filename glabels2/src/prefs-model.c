@@ -59,13 +59,10 @@
 
 #define PREF_MAIN_TOOLBAR_VISIBLE           "/main-toolbar-visible"
 #define PREF_MAIN_TOOLBAR_BUTTONS_STYLE     "/main-toolbar-buttons-style"
-#define PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS     "/main-toolbar-view-tooltips"
 
 #define PREF_DRAWING_TOOLBAR_VISIBLE        "/drawing-toolbar-visible"
-#define PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS  "/drawing-toolbar-view-tooltips"
 
 #define PREF_PROPERTY_TOOLBAR_VISIBLE        "/property-toolbar-visible"
-#define PREF_PROPERTY_TOOLBAR_VIEW_TOOLTIPS  "/property-toolbar-view-tooltips"
 
 #define PREF_GRID_VISIBLE                   "/grid-visible"
 #define PREF_MARKUP_VISIBLE                 "/markup-visible"
@@ -318,31 +315,16 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 			      prefs_model->main_toolbar_buttons_style,
 			      NULL);
 
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS,
-			       prefs_model->main_toolbar_view_tooltips,
-			       NULL);
-
 	/* Drawing Toolbar */
 	gconf_client_set_bool (prefs_model->gconf_client,
 			       BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
 			       prefs_model->drawing_toolbar_visible,
 			       NULL);
 
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
-			       prefs_model->drawing_toolbar_view_tooltips,
-			       NULL);
-
 	/* Property Toolbar */
 	gconf_client_set_bool (prefs_model->gconf_client,
 			       BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
 			       prefs_model->property_toolbar_visible,
-			       NULL);
-
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_PROPERTY_TOOLBAR_VIEW_TOOLTIPS,
-			       prefs_model->property_toolbar_view_tooltips,
 			       NULL);
 
 	/* View properties */
@@ -477,20 +459,10 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 			 BASE_KEY PREF_MAIN_TOOLBAR_BUTTONS_STYLE,
 			 GL_TOOLBAR_SYSTEM);
 
-	prefs_model->main_toolbar_view_tooltips =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_MAIN_TOOLBAR_VIEW_TOOLTIPS,
-			  TRUE);
-
 	/* User Inferface/Drawing Toolbar */
 	prefs_model->drawing_toolbar_visible =
 		get_bool (prefs_model->gconf_client,
 			  BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
-			  TRUE);
-
-	prefs_model->drawing_toolbar_view_tooltips =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_DRAWING_TOOLBAR_VIEW_TOOLTIPS,
 			  TRUE);
 
 	/* User Inferface/Property Toolbar */
@@ -498,12 +470,6 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		get_bool (prefs_model->gconf_client,
 			  BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
 			  TRUE);
-
-	prefs_model->property_toolbar_view_tooltips =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_PROPERTY_TOOLBAR_VIEW_TOOLTIPS,
-			  TRUE);
-
 
 	/* View properties */
 	prefs_model->grid_visible =

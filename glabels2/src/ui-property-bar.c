@@ -32,7 +32,6 @@
 #include <gtk/gtkspinbutton.h>
 #include <gtk/gtktoolbar.h>
 #include <gtk/gtktoggletoolbutton.h>
-#include <gtk/gtktooltips.h>
 #include <string.h>
 
 #include "util.h"

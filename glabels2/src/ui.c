@@ -439,14 +439,6 @@ static GtkToggleActionEntry toggle_entries[] = {
 	  G_CALLBACK (gl_ui_cmd_view_property_bar_toggle),
 	  TRUE },
 
-	{ "ViewPropertyToolBarToolTips",
-	  NULL,
-	  N_("Show tooltips"),
-	  NULL,
-	  N_("Show tooltips for property toolbar"),
-	  G_CALLBACK (gl_ui_cmd_view_property_bar_tips_toggle),
-	  TRUE },
-
 	{ "ViewGrid",
 	  NULL,
 	  N_("Grid"),
@@ -481,22 +473,6 @@ static GtkToggleActionEntry ui_toggle_entries[] = {
 	  N_("Drawing toolbar"),
 	  NULL,
 	  N_("Change the visibility of the drawing toolbar in the current window"),
-	  G_CALLBACK (view_ui_item_toggled_cb),
-	  TRUE },
-
-	{ "ViewMainToolBarToolTips",
-	  NULL,
-	  N_("Show tooltips"),
-	  NULL,
-	  N_("Show tooltips for main toolbar"),
-	  G_CALLBACK (view_ui_item_toggled_cb),
-	  TRUE },
-
-	{ "ViewDrawingToolBarToolTips",
-	  NULL,
-	  N_("Show tooltips"),
-	  NULL,
-	  N_("Show tooltips for drawing toolbar"),
 	  G_CALLBACK (view_ui_item_toggled_cb),
 	  TRUE },
 
@@ -538,16 +514,6 @@ static const gchar *ui_info =
 "			<menuitem action='ViewMainToolBar' />"
 "			<menuitem action='ViewDrawingToolBar' />"
 "			<menuitem action='ViewPropertyToolBar' />"
-"			<separator />"
-"			<menu action='ViewMainToolBarMenu'>"
-"				<menuitem action='ViewMainToolBarToolTips' />"
-"			</menu>"
-"			<menu action='ViewDrawingToolBarMenu'>"
-"				<menuitem action='ViewDrawingToolBarToolTips' />"
-"			</menu>"
-"			<menu action='ViewPropertyToolBarMenu'>"
-"				<menuitem action='ViewPropertyToolBarToolTips' />"
-"			</menu>"
 "			<separator />"
 "			<menuitem action='ViewGrid' />"
 "			<menuitem action='ViewMarkup' />"
@@ -982,23 +948,9 @@ view_ui_item_toggled_cb (GtkToggleAction *action,
 		gl_prefs_model_save_settings (gl_prefs);
 	}
 
-	if (strcmp (name, "ViewMainToolBarToolTips") == 0)
-	{
-		gl_prefs->main_toolbar_view_tooltips = state;
-		set_app_main_toolbar_style (ui);
-		gl_prefs_model_save_settings (gl_prefs);
-	}
-
 	if (strcmp (name, "ViewDrawingToolBar") == 0)
 	{
 		gl_prefs->drawing_toolbar_visible = state;
-		set_app_drawing_toolbar_style (ui);
-		gl_prefs_model_save_settings (gl_prefs);
-	}
-
-	if (strcmp (name, "ViewDrawingToolBarToolTips") == 0)
-	{
-		gl_prefs->drawing_toolbar_view_tooltips = state;
 		set_app_drawing_toolbar_style (ui);
 		gl_prefs_model_save_settings (gl_prefs);
 	}
@@ -1022,17 +974,7 @@ set_app_main_toolbar_style (GtkUIManager *ui)
 	gl_ui_util_set_verb_state (ui, "/ui/ViewMenu/ViewMainToolBar",
 				   gl_prefs->main_toolbar_visible);
 
-	gl_ui_util_set_verb_sensitive (ui, "/ui/ViewMenu/ViewMainToolBarToolTips",
-				       gl_prefs->main_toolbar_visible);
-
-	gl_ui_util_set_verb_state (ui, "/ui/ViewMenu/ViewMainToolBarToolTips",
-				   gl_prefs->main_toolbar_view_tooltips);
-
-	
 	toolbar = gtk_ui_manager_get_widget (ui, "/MainToolBar");
-
-	gtk_toolbar_set_tooltips (GTK_TOOLBAR (toolbar),
-				  gl_prefs->main_toolbar_view_tooltips);
 
 	if (gl_prefs->main_toolbar_visible) {
 		gtk_widget_show_all (toolbar);
@@ -1060,17 +1002,7 @@ set_app_drawing_toolbar_style (GtkUIManager *ui)
 	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewDrawingToolBar",
 				   gl_prefs->drawing_toolbar_visible);
 
-	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewDrawingToolBarToolTips",
-				       gl_prefs->drawing_toolbar_visible);
-
-	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenuDrawingToolBarToolTips",
-				   gl_prefs->drawing_toolbar_view_tooltips);
-
-	
 	toolbar = gtk_ui_manager_get_widget (ui, "/DrawingToolBar");
-
-	gtk_toolbar_set_tooltips (GTK_TOOLBAR (toolbar),
-				  gl_prefs->drawing_toolbar_view_tooltips);
 
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
 
