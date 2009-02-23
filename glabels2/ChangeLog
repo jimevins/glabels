@@ -1,3 +1,13 @@
+2009-02-22  Jim Evins  <evins@snaught.com>
+
+	* src/merge-properties-dialog.h:
+	* src/new-label-dialog.h:
+	* src/object-editor.h:
+	* src/prefs-dialog.h:
+	* src/print-op.h:
+	* src/template-designer.h:
+		Corrected cut&paste errors.
+	
 2009-02-21  JimEvins  <evins@snaught.com>
 
 	* src/prefs-model.c: (gl_prefs_model_save_settings),

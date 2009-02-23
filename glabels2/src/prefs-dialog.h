@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 #define GL_IS_PREFS_DIALOG_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_PREFS_DIALOG))
 #define GL_PREFS_DIALOG_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_PREFS_DIALOG, glPrefsDialogClass))
 
 
 typedef struct _glPrefsDialog 		glPrefsDialog;

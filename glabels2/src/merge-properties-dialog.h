@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 #define GL_IS_MERGE_PROPERTIES_DIALOG_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_MERGE_PROPERTIES_DIALOG))
 #define GL_MERGE_PROPERTIES_DIALOG_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_MERGE_PROPERTIES_DIALOG, glMergePropertiesDialogClass))
 
 
 typedef struct _glMergePropertiesDialog         glMergePropertiesDialog;

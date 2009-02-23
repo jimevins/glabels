@@ -61,7 +61,7 @@ typedef enum {
 #define GL_IS_OBJECT_EDITOR_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_OBJECT_EDITOR))
 #define GL_OBJECT_EDITOR_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_OBJECT_EDITOR, glObjectEditorClass))
 
 
 typedef struct _glObjectEditor         glObjectEditor;

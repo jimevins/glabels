@@ -40,7 +40,7 @@ G_BEGIN_DECLS
 #define GL_IS_TEMPLATE_DESIGNER_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_TEMPLATE_DESIGNER))
 #define GL_TEMPLATE_DESIGNER_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_TEMPLATE_DESIGNER, glTemplateDesignerClass))
 
 
 typedef struct _glTemplateDesigner              glTemplateDesigner;

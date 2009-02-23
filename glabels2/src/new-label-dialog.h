@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 #define GL_IS_NEW_LABEL_DIALOG_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_NEW_LABEL_DIALOG))
 #define GL_NEW_LABEL_DIALOG_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_NEW_LABEL_DIALOG, glNewLabelDialogClass))
 
 
 typedef struct _glNewLabelDialog         glNewLabelDialog;

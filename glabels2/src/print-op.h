@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 #define GL_IS_PRINT_OP_CLASS(klass) \
         (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_PRINT_OP))
 #define GL_PRINT_OP_GET_CLASS(obj) \
-        (G_TYPE_CHECK_GET_CLASS ((obj), GL_TYPE_PRINT_OP, glPrintOpClass))
+        (G_TYPE_INSTANCE_GET_CLASS ((obj), GL_TYPE_PRINT_OP, glPrintOpClass))
 
 
 typedef struct _glPrintOp         glPrintOp;
