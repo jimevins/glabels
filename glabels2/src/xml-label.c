@@ -27,6 +27,7 @@
 #include "xml-label.h"
 
 #include <glib/gi18n.h>
+#include <glib/gbase64.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xinclude.h>
@@ -40,7 +41,6 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
-#include "base64.h"
 #include "xml-label-04.h"
 #include <libglabels/db.h>
 #include <libglabels/xml-template.h>
@@ -866,7 +866,7 @@ xml_parse_pixdata (xmlNodePtr  node,
 	name = lgl_xml_get_prop_string (node, "name", NULL);
 	base64 = lgl_xml_get_node_content (node);
 
-	stream = gl_base64_decode ((gchar *)base64, &stream_length);
+	stream = g_base64_decode ((gchar *)base64, &stream_length);
 	pixdata = g_new0 (GdkPixdata, 1);
 	ret = gdk_pixdata_deserialize (pixdata, stream_length, stream, NULL);
 
@@ -1640,7 +1640,7 @@ xml_create_pixdata (xmlNodePtr  root,
 		pixdata = g_new0 (GdkPixdata, 1);
 		gdk_pixdata_from_pixbuf (pixdata, pixbuf, FALSE);
 		stream = gdk_pixdata_serialize (pixdata, &stream_length);
-		base64 = gl_base64_encode (stream, stream_length);
+		base64 = g_base64_encode (stream, stream_length);
 
 		node = xmlNewChild (root, ns, (xmlChar *)"Pixdata", (xmlChar *)base64);
 		lgl_xml_set_prop_string (node, "name", name);

@@ -1,3 +1,12 @@
+2009-02-28  Jim Evins  <evins@snaught.com>
+
+	reviewed by: <delete if not using a buddy>
+
+	* src/Makefile.am:
+	* src/base64.c:
+	* src/base64.h:
+	* src/xml-label.c: (xml_parse_pixdata), (xml_create_pixdata):
+
 2009-02-22  Jim Evins  <evins@snaught.com>
 
 	* src/merge-properties-dialog.h:
