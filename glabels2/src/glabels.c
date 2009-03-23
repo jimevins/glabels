@@ -78,7 +78,9 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	option_context = g_option_context_new (_("- gLabels label designer"));
+	option_context = g_option_context_new (NULL);
+        g_option_context_set_summary (option_context,
+                                      _("Launch gLabels label and business card designer."));
 	g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
 

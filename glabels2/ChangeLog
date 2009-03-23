@@ -1,11 +1,17 @@
-2009-02-28  Jim Evins  <evins@snaught.com>
+2009-03-23  Jim Evins  <evins@snaught.com>
 
-	reviewed by: <delete if not using a buddy>
+	* src/glabels-batch.c: (main):
+	* src/glabels.c: (main):
+		Tidy up help option output.		
+	
+2009-02-28  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:
 	* src/base64.c:
 	* src/base64.h:
+		Deleted base64 module.
 	* src/xml-label.c: (xml_parse_pixdata), (xml_create_pixdata):
+		Use base64 encode/decode from glib.
 
 2009-02-22  Jim Evins  <evins@snaught.com>
 
