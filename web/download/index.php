@@ -50,9 +50,9 @@ their associated repositories, including the following repositories:
 <ul>
   <li>Debian</li>
   <li>Fedora Extras</li>
-  <li>Ubuntu Universe</li>
+  <li><?a("http://www.getdeb.net/app/gLabels","Getdeb for Ubuntu (and derived) GNU/Linux distributions");?></li>
 </ul>
-
+<p></p>
 
 
 

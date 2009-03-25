@@ -24,6 +24,7 @@
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-devel","gLabels Developers Mail List");?></li>
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-templates","gLabels Templates Mail List");?></li>
 	<li><?a("http://packages.debian.org/etch/glabels","Debian gLabels Information Page");?></li>
+	<li><?a("http://www.getdeb.net/app/gLabels","Getdeb package for Ubuntu (and derived) GNU/Linux distributions");?></li>
       </ul>
 
 
