@@ -9,10 +9,11 @@
 
       <h2>gLabels in the News</h2>
       <ul>
+      <li><?a("http://blog.worldlabel.com/2009/printing-labels-in-ubuntu.html","blog.worldlabel.com:: Printing Labels in Ubuntu");?></li>
+      <li><?a("http://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html","blog.worldlabel.com:: gLabels - EZ label creator for Linux");?></li>
       <li><?a("http://www.linux.com/feature/153788","linux.com:: Three applications for making disc labels");?></li>
       <li><?a("http://openoffice.blogs.com/openoffice/2008/07/if-you-use-linux-you-must-try-glabels.html","OpenOffice.org Training, Tips, and Ideas:: If you use Linux, you MUST try gLabels");?></li>
       <li><?a("http://www.linux.com/articles/37044","linux.com:: gLabels: Ready for prime time");?></li>
-      <li><?a("http://blog.worldlabel.com/2009/printing-labels-in-ubuntu.html","worldlabel.com:: Printing Labels in Ubuntu");?></li>
       </ul>
 
 
