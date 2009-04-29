@@ -327,7 +327,10 @@ color_combo_new (GdkPixbuf *icon, char const *no_color_label,
 
 	cc = g_object_new (COLOR_COMBO_TYPE, NULL);
 
-        cc->default_color = default_color;
+	if ( default_color )
+	{
+		cc->default_color = gdk_color_copy (default_color);
+	}
 
 	color_combo_construct (cc, icon, no_color_label, color_group);
 

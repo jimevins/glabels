@@ -1220,7 +1220,6 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 	GtkWidget  *color_combo;
 	ColorGroup *cg;
 	gchar      *cg_name;
-	guint       color;
 	GdkColor   *gdk_color;
 	gchar      *no_color;
 	GdkPixbuf  *pixbuf = NULL;
@@ -1229,14 +1228,14 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 
 	case 0:
 		cg_name  = "text_color_group";
-		color    = gl_prefs->default_text_color;
+                gdk_color = gl_color_to_gdk_color (gl_prefs->default_text_color);
 		no_color = _("Default");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
 		break;
 
 	case 2:
 		cg_name  = "line_color_group";
-		color    = gl_prefs->default_line_color;
+                gdk_color = NULL;
 		no_color = _("No line");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
 		break;
@@ -1244,7 +1243,7 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 	case 1:
 	default:
 		cg_name  = "fill_color_group";
-		color    = gl_prefs->default_fill_color;
+                gdk_color = NULL;
 		no_color = _("No fill");
 		pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
 		break;
@@ -1252,7 +1251,6 @@ gl_ui_property_bar_construct_color_combo (gchar *name,
 	}
 
 	cg = color_group_fetch (cg_name, NULL);
-        gdk_color = gl_color_to_gdk_color (color);
 	color_combo = color_combo_new (pixbuf, no_color, gdk_color, cg);
         g_free (gdk_color);
 

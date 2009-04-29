@@ -1,3 +1,12 @@
+2009-04-29  Jim Evins  <evins@purple>
+
+	* src/color.c: (gl_color_to_gdk_color), (gl_color_from_gdk_color):
+	* src/mygal/widget-color-combo.c: (color_combo_new):
+	* src/object-editor.c: (gl_object_editor_construct_color_combo):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct_color_combo):
+		Bug #2760830.  Display correct preview color in color combos when default
+		color selected.
+
 2009-04-28  Jim Evins  <evins@purple>
 
 	* data/glade/object-editor.glade:
