@@ -639,7 +639,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 0 100 1 10 10</property>
+		      <property name="adjustment">1 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -699,7 +699,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 0 100 1 10 10</property>
+		      <property name="adjustment">1 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -1193,7 +1193,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1214,7 +1214,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1235,7 +1235,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1256,7 +1256,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1305,7 +1305,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1354,7 +1354,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1592,7 +1592,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1613,7 +1613,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -1746,7 +1746,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2012,7 +2012,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2033,7 +2033,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2054,7 +2054,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2075,7 +2075,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2096,7 +2096,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2313,7 +2313,7 @@ This dialog will assist you in the creation of a custom gLabels template.</prope
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -2580,7 +2580,7 @@ two layouts.</property>
 		  <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		  <property name="snap_to_ticks">False</property>
 		  <property name="wrap">False</property>
-		  <property name="adjustment">1 1 2 1 1 1</property>
+		  <property name="adjustment">1 1 2 1 1 0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -3018,7 +3018,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 1 100 1 10 10</property>
+		      <property name="adjustment">1 1 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3039,7 +3039,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 1 100 1 10 10</property>
+		      <property name="adjustment">1 1 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3060,7 +3060,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 1 100 1 10 10</property>
+		      <property name="adjustment">1 1 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -3081,7 +3081,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 1 100 1 10 10</property>
+		      <property name="adjustment">1 1 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -3102,7 +3102,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3123,7 +3123,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -3144,7 +3144,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3165,7 +3165,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -3186,7 +3186,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3207,7 +3207,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -3228,7 +3228,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
@@ -3249,7 +3249,7 @@ two layouts.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">0 0 100 1 10 10</property>
+		      <property name="adjustment">0 0 100 1 10 0</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>

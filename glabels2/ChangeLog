@@ -1,3 +1,15 @@
+2009-04-28  Jim Evins  <evins@purple>
+
+	* data/glade/object-editor.glade:
+	* data/glade/prefs-dialog.glade:
+	* data/glade/property-bar.glade:
+	* data/glade/template-designer.glade:
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_construct),
+	(first_spin_cb), (last_spin_cb):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_construct):
+		Zero out adjustment->page_size for all spinbuttons.  With gtk-2.14 this causes
+		many warning and with gtk-2.16 this actually breaks the spinbuttons.
+
 2009-01-07  Jim Evins  <evins@snaught.com>
 
 	* src/critical-error-handler.c: (critical_error_handler):

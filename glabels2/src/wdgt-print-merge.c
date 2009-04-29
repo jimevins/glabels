@@ -151,12 +151,9 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	whbox1 = gtk_hbox_new (FALSE, GL_HIG_PAD2);
 	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1),
-				gtk_label_new (_("Start on label")), FALSE, FALSE, 0);
-	adjust =
-	    gtk_adjustment_new (1, 1.0, merge->labels_per_sheet, 1.0, 10.0,
-				10.0);
-	merge->first_spin =
-	    gtk_spin_button_new (GTK_ADJUSTMENT (adjust), 1.0, 0);
+                            gtk_label_new (_("Start on label")), FALSE, FALSE, 0);
+	adjust = gtk_adjustment_new (1, 1.0, merge->labels_per_sheet, 1.0, 10.0, 0.0);
+	merge->first_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust), 1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), merge->first_spin, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1),
 				gtk_label_new (_("on 1st sheet")), FALSE, FALSE, 0);
@@ -169,9 +166,8 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	gtk_box_pack_start (GTK_BOX(wvbox), whbox1, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1),
 				gtk_label_new (_("Copies:")), FALSE, FALSE, 0);
-	adjust = gtk_adjustment_new (1, 1.0, 10.0, 1.0, 10.0, 10.0);
-	merge->copies_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
-						   1.0, 0);
+	adjust = gtk_adjustment_new (1, 1.0, 100.0, 1.0, 10.0, 0.0);
+	merge->copies_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust), 1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), merge->copies_spin, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), gtk_label_new ("    "), FALSE, FALSE, 0);
 	merge->collate_check = gtk_check_button_new_with_label (_("Collate"));
