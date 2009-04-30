@@ -1,5 +1,10 @@
 2009-04-29  Jim Evins  <evins@purple>
 
+	* po/de.po:
+		Updated german translation (Mario Blättermann).
+
+2009-04-29  Jim Evins  <evins@purple>
+
 	* src/color.c: (gl_color_to_gdk_color), (gl_color_from_gdk_color):
 	* src/mygal/widget-color-combo.c: (color_combo_new):
 	* src/object-editor.c: (gl_object_editor_construct_color_combo):
