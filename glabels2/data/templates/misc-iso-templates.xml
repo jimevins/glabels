@@ -470,6 +470,18 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Ryman 0215016061 CD/DVD Labels.                                     -->
+  <!-- =================================================================== -->
+  <Template brand="Ryman" part="0215016061" size="A4" description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="165.827pt" hole="24.0945pt" waste="8.50394pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="1" ny="2" x0="131.811pt" y0="60.6614pt" dx="348.661pt" dy="388.346pt"/>
+    </Label-cd>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Fellows 04715 CD/DVD Labels (Face only).                            -->
   <!-- =================================================================== -->
   <Template brand="Fellows" part="04715" size="A4" _description="CD Labels">
