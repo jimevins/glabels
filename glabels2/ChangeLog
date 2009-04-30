@@ -1,5 +1,14 @@
 2009-04-29  Jim Evins  <evins@purple>
 
+	* NEWS:
+	* configure.in:
+	* docs/libglabels/libglabels-decl-list.txt:
+	* gtk-doc.make:
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+		Prepare for 2.2.5 release.
+
+2009-04-29  Jim Evins  <evins@purple>
+
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/misc-iso-templates.xml:
 	* data/templates/misc-us-templates.xml:

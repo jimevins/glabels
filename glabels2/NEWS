@@ -1,3 +1,11 @@
+* gLabels 2.2.5 (stable) release.  Release date 2009-04-30
+
+- Fixed spinbutton/adjustment bugs that made glabels unusable with Gtk 2.16.
+- Fixed default preview colors in color combos.
+- Updated german translation (Mario Blättermann).
+- New templates.
+
+
 * gLabels 2.2.4 (stable) release.  Release date 2008-12-22
 
 - Corrected button order in "Open" and "Save as" dialogs.
