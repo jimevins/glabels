@@ -220,7 +220,7 @@
   <!-- =================================================================== -->
   <!-- Online Labels OL1025 Round Labels.                                  -->
   <!-- =================================================================== -->
-  <Template brand="Online Labels" part="OL1025" size="US-Letter" description="Round Labels">
+  <Template brand="Online Labels" part="OL1025" size="US-Letter" _description="Round Labels">
     <Meta category="label"/>
     <Meta category="round-label"/>
     <Label-round id="0" radius="0.5in" waste="0.062in">

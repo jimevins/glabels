@@ -3,6 +3,13 @@
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/misc-iso-templates.xml:
 	* data/templates/misc-us-templates.xml:
+		Make sure new descriptions are marked translatable.
+
+2009-04-29  Jim Evins  <evins@purple>
+
+	* data/templates/avery-iso-templates.xml:
+	* data/templates/misc-iso-templates.xml:
+	* data/templates/misc-us-templates.xml:
 		Caught up on user submitted templates.
 	* AUTHORS:
 		Acknowledgements for above templates.
