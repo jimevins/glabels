@@ -92,8 +92,6 @@ src/xml-label-04.c
 src/xml-label-04.h
 src/pixbuf-cache.c
 src/pixbuf-cache.h
-src/base64.c
-src/base64.h
 src/merge.c
 src/merge.h
 src/merge-init.c

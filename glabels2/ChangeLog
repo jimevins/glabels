@@ -1,3 +1,9 @@
+2009-04-29  Jim Evins  <evins@purple>
+
+	* po/POTFILES.in:
+	* po/de.po:
+		Updated german translation (Mario Blättermann).
+
 2009-03-23  Jim Evins  <evins@snaught.com>
 
 	* src/glabels-batch.c: (main):
