@@ -1,3 +1,10 @@
+2009-05-01  Jim Evins  <evins@purple>
+
+	* AUTHORS:
+	* configure.in:
+	* po/ca.po:
+		Added catalan translation (David Planella).
+	
 2009-04-29  Jim Evins  <evins@purple>
 
 	* NEWS:
