@@ -1,11 +1,22 @@
-2009-05-01  Jim Evins  <evins@purple>
+2009-05-17  Jim Evins  <evins@snaught.com>
+
+	* Makefile.am:
+	* configure.in:
+	* help/C/glabels-C.omf:
+	* help/C/glabels.xml:
+	* help/Makefile.am:
+	* po/de.po:
+		Updated german translation, gnome-doc-utils support and
+		german translation of glabels manual (Mario Blättermann).
+
+2009-05-01  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
 	* configure.in:
 	* po/ca.po:
 		Added catalan translation (David Planella).
 	
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/misc-iso-templates.xml:
@@ -14,7 +25,7 @@
 	* AUTHORS:
 		Acknowledgements for above templates.
 
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:
 	* po/de.po:
