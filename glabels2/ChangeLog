@@ -1,5 +1,11 @@
 2009-05-17  Jim Evins  <evins@snaught.com>
 
+	* help/de/de.po:
+	* help/glabels.omf.in:
+		Adding missing files from last checkin.
+
+2009-05-17  Jim Evins  <evins@snaught.com>
+
 	* Makefile.am:
 	* configure.in:
 	* help/C/glabels-C.omf:
