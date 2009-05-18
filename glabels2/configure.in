@@ -5,6 +5,7 @@ AC_PREREQ(2.52)
 AC_INIT(glabels, 2.2.5, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
 AC_CONFIG_SRCDIR(src/glabels.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+GNOME_DOC_INIT
 
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
@@ -225,4 +226,3 @@ Configuration:
 "
 
 dnl cat ${srcdir}/MESSAGE-OF-DOOM
-

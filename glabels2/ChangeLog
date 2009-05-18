@@ -1,11 +1,24 @@
-2009-05-01  Jim Evins  <evins@purple>
+2009-05-17  Jim Evins  <evins@snaught.com>
+
+	* Makefile.am:
+	* configure.in:
+	* help/C/glabels-C.omf:
+	* help/C/glabels.xml:
+	* help/Makefile.am:
+	* help/de/de.po:
+	* help/glabels.omf.in:
+	* po/de.po:
+		Updated german translation, gnome-doc-utils support and
+		german translation of glabels manual (Mario Blättermann).
+
+2009-05-01  Jim Evins  <evins@snaught.com>
 
 	* AUTHORS:
 	* configure.in:
 	* po/ca.po:
 		Added catalan translation (David Planella).
 	
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* NEWS:
 	* configure.in:
@@ -14,14 +27,14 @@
 	* src/ui-commands.c: (gl_ui_cmd_help_about):
 		Prepare for 2.2.5 release.
 
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/misc-iso-templates.xml:
 	* data/templates/misc-us-templates.xml:
 		Make sure new descriptions are marked translatable.
 
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* data/templates/avery-iso-templates.xml:
 	* data/templates/misc-iso-templates.xml:
@@ -30,12 +43,12 @@
 	* AUTHORS:
 		Acknowledgements for above templates.
 
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* po/de.po:
 		Updated german translation (Mario Blättermann).
 
-2009-04-29  Jim Evins  <evins@purple>
+2009-04-29  Jim Evins  <evins@snaught.com>
 
 	* src/color.c: (gl_color_to_gdk_color), (gl_color_from_gdk_color):
 	* src/mygal/widget-color-combo.c: (color_combo_new):
@@ -44,7 +57,7 @@
 		Bug #2760830.  Display correct preview color in color combos when default
 		color selected.
 
-2009-04-28  Jim Evins  <evins@purple>
+2009-04-28  Jim Evins  <evins@snaught.com>
 
 	* data/glade/object-editor.glade:
 	* data/glade/prefs-dialog.glade:
