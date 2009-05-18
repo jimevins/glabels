@@ -27,6 +27,7 @@
 
 #include <libglabels/db.h>
 #include <libglabels/xml.h>
+#include <gtk/gtkpapersize.h>
 
 #include "marshal.h"
 #include "util.h"
@@ -76,8 +77,11 @@
 #define PREF_MAX_RECENT_TEMPLATES           "/max-recent-templates"
 
 /* Default values */
-#define DEFAULT_UNITS_STRING       units_to_string (LGL_UNITS_INCH)
-#define DEFAULT_PAGE_SIZE          "US-Letter"
+#define DEFAULT_UNITS_STRING_US    units_to_string (LGL_UNITS_INCH)
+#define DEFAULT_PAGE_SIZE_US       "US-Letter"
+
+#define DEFAULT_UNITS_STRING_METRIC units_to_string (LGL_UNITS_MM)
+#define DEFAULT_PAGE_SIZE_METRIC   "A4"
 
 #define DEFAULT_FONT_FAMILY        "Sans"
 #define DEFAULT_FONT_SIZE          14.0
@@ -385,6 +389,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 void
 gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 {
+        const gchar *pgsize, *default_units_string, *default_page_size;
 	gchar    *string;
 	lglPaper *paper;
         GSList   *p, *p_next;
@@ -394,11 +399,24 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	g_return_if_fail (prefs_model && GL_IS_PREFS_MODEL(prefs_model));
 	g_return_if_fail (prefs_model->gconf_client != NULL);
 
+        /* Make educated guess about locale defaults. */
+        pgsize = gtk_paper_size_get_default ();
+        if ( strcmp (pgsize,GTK_PAPER_NAME_LETTER) == 0 )
+        {
+                default_units_string = DEFAULT_UNITS_STRING_US;
+                default_page_size    = DEFAULT_PAGE_SIZE_US;
+        }
+        else
+        {
+                default_units_string = DEFAULT_UNITS_STRING_METRIC;
+                default_page_size    = DEFAULT_PAGE_SIZE_METRIC;
+        }
+
 	/* Units */
 	string =
 		get_string (prefs_model->gconf_client,
 			    BASE_KEY PREF_UNITS,
-			    DEFAULT_UNITS_STRING);
+			    default_units_string);
 	prefs_model->units = string_to_units( string );
 	g_free( string );
         lgl_xml_set_default_units (prefs_model->units);
@@ -409,7 +427,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	prefs_model->default_page_size =
 		get_string (prefs_model->gconf_client,
 			    BASE_KEY PREF_DEFAULT_PAGE_SIZE,
-			    DEFAULT_PAGE_SIZE);
+			    default_page_size);
 
 	/* Text properties */
         g_free (prefs_model->default_font_family);
@@ -543,7 +561,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	/* (For compatability with older versions.) */
 	paper = lgl_db_lookup_paper_from_id (prefs_model->default_page_size);
 	if ( paper == NULL ) {
-		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE);
+		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE_US);
 	} else {
 		lgl_paper_free (paper);
 		paper = NULL;

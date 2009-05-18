@@ -1,3 +1,9 @@
+2009-05-18  Jim Evins  <evins@snaught.com>
+
+	* src/prefs-model.c: (gl_prefs_model_load_settings):
+		Make an educated guess at locale settings when run for the
+		first time.
+
 2009-05-17  Jim Evins  <evins@snaught.com>
 
 	* Makefile.am:
