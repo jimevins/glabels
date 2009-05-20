@@ -1,3 +1,11 @@
+2009-05-19  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* po/zh_CN.po:
+		New Chinese translation (Careon <zzbusagain@yahoo.com.cn>).
+	* AUTHORS:
+		Added above translation to acknowledgements.
+
 2009-05-18  Jim Evins  <evins@snaught.com>
 
 	* src/prefs-model.c: (gl_prefs_model_load_settings):
