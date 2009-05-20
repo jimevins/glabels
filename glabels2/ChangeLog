@@ -1,3 +1,9 @@
+2009-05-19  Jim Evins  <evins@purple>
+
+	* configure.in:
+	* po/LINGUAS:
+		Moved translation list from configure.in to po/LINGUAS.
+
 2009-05-19  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
