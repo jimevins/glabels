@@ -1,6 +1,12 @@
 2009-05-19  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
+	* po/LINGUAS:
+		Moved translation list from configure.in to po/LINGUAS.
+
+2009-05-19  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
 	* po/zh_CN.po:
 		New Chinese translation (Careon <zzbusagain@yahoo.com.cn>).
 	* AUTHORS:
