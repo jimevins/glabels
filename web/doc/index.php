@@ -7,6 +7,18 @@
 
 
 
+<h2>Installing gLabels from source</h2>
+<p>
+The easiest way to install glabels is to use you distribution's package repository.  However, if the version
+offered by your distribution is not the latest stable version, you may wish to install it manually from
+source.
+</p>
+<ul>
+  <li><?a("install-src/","Installing gLabels from Source");?></li>
+</ul>
+
+
+
 <h2>Customizing</h2>
 <p>
 gLabels knows about a small universe of label/card stationery. You may create new templates by using the <i>Template Designer</i> under the <i>File</i> menu.
@@ -17,12 +29,7 @@ If for some reason you wish to manually create templates, please read the approp
 for possible inclusion in future releases of gLabels. 
 </p>
 <ul>
-  <li>
-    <div class="latest">
-      <?a("templates-2.2/","Designing Custom Templates for gLabels 2.2.x");?>
-    </div>
-  </li>
-
+  <li><?a("templates-2.2/","Designing Custom Templates for gLabels 2.2.x");?></li>
 </ul>
 
 

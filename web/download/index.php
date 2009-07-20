@@ -7,7 +7,6 @@
 
 
 
-
 <h2>System Requirements</h2>
 <p>
 gLabels is designed to run on <i>GNOME 2.16+</i>, but more specifically it requires the following libraries or newer.
@@ -30,9 +29,10 @@ Just having the base library packages installed is not enough.
 <ul>
   <li>
     <div class="latest">
-      <?a_sfdownload("glabels-2.2.4.tar.gz");?> (latest version)
+      <?a_sfdownload("glabels-2.2.5.tar.gz");?> (latest version)
     </div>
   </li>
+  <li><?a_sfdownload("glabels-2.2.4.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.2.3.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.2.2.tar.gz");?></li>
   <li><?a_sfdownload("glabels-2.2.1.tar.gz");?></li>
@@ -45,16 +45,19 @@ Just having the base library packages installed is not enough.
 
 <h2>Third party packages</h2>
 <p>
-gLabels is currently available for most popular GNU/Linux distributions through
-their associated repositories, including the following repositories:
+If you are not up to <?a("/doc/install-src/", "building and installing gLabels from source");?>, you may be able to use a third party package.  gLabels is currently available for many popular GNU/Linux and BSD distributions through
+their associated repositories, including the following distributions and repositories:
 </p>
 <ul>
-  <li>Debian</li>
-  <li>Fedora Extras</li>
-  <li><?a("http://www.getdeb.net/app/gLabels","Getdeb for Ubuntu (and derived) GNU/Linux distributions");?></li>
+	  <li>Debian</li>
+	  <li>Fedora</li>
+	  <li>Ubuntu</li>
+	  <li>Gentoo</li>
+	  <li><?a("http://www.getdeb.net/app/gLabels","Getdeb for Ubuntu (and derived) GNU/Linux distributions");?></li>
 </ul>
-<p></p>
-
+<p>
+Some of these packages are more up to date than others.  If you experience bugs or problems with a third party package that is not based on the most recent stable version, please contact the package maintainer and urge them to update as soon as possible.
+</p>
 
 
 
@@ -95,6 +98,12 @@ The latest bleading-edge version of gLabels can be checked out through subversio
 the following command.
 </p>
 <div class="codebox">$  svn co https://glabels.svn.sourceforge.net/svnroot/glabels/trunk/glabels2
+</div>
+<p>
+The latest snapshot of the gLabels stable branch also can be checked out through subversion with
+the following command.
+</p>
+<div class="codebox">$  svn co https://glabels.svn.sourceforge.net/svnroot/glabels/branches/glabels-2_2/glabels2
 </div>
 <p>
 More information can be found at the <?a("http://sourceforge.net/svn/?group_id=46122","gLabels subversion page at Sourceforge");?>.

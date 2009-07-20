@@ -8,6 +8,32 @@
 
 
 <div class="newsitem">
+<div class="newsdate">30 April 2009</div>
+<div class="newstitle">Release 2.2.5 (Stable)</div>
+<p>
+Packagers:  please update to this version as soon as possible.  This release fixes a set of problems
+that made glabels unusable on the latest distributions which use Gnome 2.26/Gtk 2.16.
+</p>
+<p>
+Changes/fixes since 2.2.4 include
+</p>
+<ul>
+<li>Fixed spinbutton/adjustment bugs that made glabels unusable with Gtk 2.16.</li>
+<li>Fixed default preview colors in color combos.</li>
+<li>Updated german translation (Mario Blättermann).</li>
+<li>New templates.</li>
+</ul>
+<p>
+<?a("/download/","Download here");?>.
+</p>
+</div>
+
+
+
+
+
+
+<div class="newsitem">
 <div class="newsdate">22 December 2008</div>
 <div class="newstitle">Release 2.2.4 (Stable)</div>
 <p>
@@ -21,9 +47,6 @@ Changes/fixes since 2.2.3 include
 <li>Fixed performacne problem when many objects are selected.</li>
 <li>New templates.</li>
 </ul>
-<p>
-<?a("/download/","Download here");?>.
-</p>
 </div>
 
 

@@ -22,6 +22,7 @@
       <ul>
         <li><?a("http://sourceforge.net/projects/glabels","gLabels Sourceforge Project Page");?></li>
         <li><?a("http://freshmeat.net/projects/glabels","gLabels Freshmeat Project Page");?></li>
+        <li><?a("http://www.ohloh.net/p/glabels","gLabels Ohloh Project Page");?></li>
 	<li><?a("http://gnomefiles.org/app.php?soft_id=254", "gLabels GNOME Files Page");?></li>
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-devel","gLabels Developers Mail List");?></li>
 	<li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-templates","gLabels Templates Mail List");?></li>
