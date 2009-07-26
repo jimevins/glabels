@@ -1,4 +1,10 @@
-2009-05-19  Jim Evins  <evins@purple>
+2009-07-25  Jim Evins  <evins@snaught.com>
+
+	* src/xml-label.c: (gl_xml_label_open):
+		Relax limits when parsing file.  Allows large embedded image
+		files.
+
+2009-05-19  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
 	* po/LINGUAS:
