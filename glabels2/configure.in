@@ -159,12 +159,21 @@ AM_GLIB_GNU_GETTEXT
 
 
 dnl ---------------------------------------------------------------------------
+dnl - Misc.
+dnl ---------------------------------------------------------------------------
+
+dnl Setup for libqrencode compilation
+AC_DEFINE(__STATIC, static, [Static attribute, needed to compile libqrencode])
+
+
+dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.
 dnl ---------------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
 barcode-0.98/Makefile
 iec16022-0.2.1/Makefile
+qrencode-3.1.0/Makefile
 libglabels/Makefile
 libglabels/libglabels.pc
 src/Makefile

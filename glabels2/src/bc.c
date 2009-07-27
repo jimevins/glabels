@@ -33,6 +33,7 @@
 #include "bc-postnet.h"
 #include "bc-gnubarcode.h"
 #include "bc-iec16022.h"
+#include "bc-iec18004.h"
 
 #include "debug.h"
 
@@ -152,6 +153,9 @@ static const Backend backends[] = {
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
 	{ "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
+	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
+
+	{ "IEC18004", N_("IEC18004 (QRCode)"), gl_barcode_iec18004_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
 	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}

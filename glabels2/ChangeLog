@@ -1,3 +1,18 @@
+2009-07-26  Jim Evins  <evins@snaught.com>
+
+	* AUTHORS:
+	* COPYING.README_FIRST:
+	* Makefile.am:
+	* configure.in:
+	* qrencode-3.1.0/*
+		Added 3rd party qrencode library.
+	* src/Makefile.am:
+	* src/bc-iec18004.c: (gl_barcode_iec18004_new), (render_iec18004):
+	* src/bc-iec18004.h:
+	* src/bc.c:
+		Added IEC18004 (QRCode) 2 dimensional barcode backend.
+		Patch provided by Daniel Mueller <daniel@danm.de>.
+
 2009-07-25  Jim Evins  <evins@snaught.com>
 
 	* src/xml-label.c: (gl_xml_label_open):

@@ -15,6 +15,9 @@ information.  The author:
 - The iec16022 library provides encoding for 2D barcodes.  See
 iec16022-0.2.1/README for more information.
 
+- The qrencode library provides encoding for 2D barcodes.  See
+qrencode-3.1.0/README for more information.
+
 - Glabels includes a modified version of the gimpchainbutton widget from the
 gimp, as well as several stock icons from the gimp's default theme.
 These are copyright:
@@ -29,7 +32,7 @@ Glabels includes contributions from:
 	Austin Henry  <ahenry@users.sourceforge.net> -- EDS and vcard backends
 	nestor di <nestordi@usuarios.retecal.es>  --  excellent splash screen
                                                       that first appeared in
-                                                      0.4.3:
+                                                      0.4.3
 	Darren Warner <warnerd@users.sourceforge.net>
 	Javier Donaire Segarra <jyuyu@users.sourceforge.net>
 	Alessandro Zummo <azummo@towertech.it>
@@ -38,6 +41,7 @@ Glabels includes contributions from:
 	Dag Wieers <dag@wieers.com>
 	Mário Meyer <mario@meyer.eti.br>
 	Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk>
+	Daniel Mueller <daniel@danm.de>
 
 Translations:
 

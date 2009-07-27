@@ -1,5 +1,6 @@
 LIB_BARCODE_DIR = ../barcode-0.98
 LIB_IEC16022_DIR = ../iec16022-0.2.1
+LIB_QRENCODE_DIR = ../qrencode-3.1.0
 
 SUBDIRS= pixmaps stock-pixmaps
 
@@ -10,6 +11,7 @@ INCLUDES = \
 	-I$(top_builddir) 					\
 	-I$(LIB_BARCODE_DIR)					\
 	-I$(LIB_IEC16022_DIR)					\
+	-I$(LIB_QRENCODE_DIR)					\
 	$(GLABELS_CFLAGS) 					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DPREFIX=\""$(prefix)"\"                        	\
@@ -28,7 +30,8 @@ glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
 	$(LIB_BARCODE_DIR)/libbarcode.la 	\
-	$(LIB_IEC16022_DIR)/libiec16022.la
+	$(LIB_IEC16022_DIR)/libiec16022.la	\
+	$(LIB_QRENCODE_DIR)/libqrencode.la
 
 glabels_batch_LDFLAGS = -export-dynamic
 
@@ -36,7 +39,8 @@ glabels_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
 	$(LIB_BARCODE_DIR)/libbarcode.la	\
-	$(LIB_IEC16022_DIR)/libiec16022.la
+	$(LIB_IEC16022_DIR)/libiec16022.la	\
+	$(LIB_QRENCODE_DIR)/libqrencode.la
 
 BUILT_SOURCES = 			\
 	marshal.c			\
@@ -121,6 +125,8 @@ glabels_SOURCES = 			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
 	bc-iec16022.h			\
+	bc-iec18004.c			\
+	bc-iec18004.h			\
 	label.c				\
 	label.h				\
 	label-object.c			\
@@ -210,6 +216,8 @@ glabels_batch_SOURCES = 		\
 	bc-postnet.h			\
 	bc-iec16022.c			\
 	bc-iec16022.h			\
+	bc-iec18004.c			\
+	bc-iec18004.h			\
 	label.c				\
 	label.h				\
 	label-object.c			\
@@ -288,6 +296,9 @@ $(LIB_BARCODE_DIR)/libbarcode.la:
 
 $(LIB_IEC16022_DIR)/libiec16022.la:
 	cd $(LIB_IEC16022_DIR); $(MAKE)
+
+$(LIB_QRENCODE_DIR)/libqrencode.la:
+	cd $(LIB_QRENCODE_DIR); $(MAKE)
 
 ../libglabels/libglabels.la:
 	cd ../libglabels; $(MAKE)
