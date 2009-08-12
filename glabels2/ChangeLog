@@ -1,3 +1,12 @@
+2009-08-12  Jim Evins  <evins@snaught.com>
+
+	* src/label-text.c: (buffer_changed_cb), (draw_object),
+	(draw_shadow), (draw_text_real):
+	* src/label-text.h:
+		Moved common code from draw_object() and draw_shadow() to
+		draw_text_real().  Also cleaned up formatting and updated
+		license notification to GPL3+.
+
 2009-07-29  Alexandre Prokoudine  <alexandre.prokoudine@gmail.com>
 
 	* po/ru.po: Updated and fixed Russian translation
