@@ -1,3 +1,11 @@
+2009-08-13  Jim Evins  <evins@snaught.com>
+
+	* src/color-combo-color-menu-item.c:
+	(gl_color_combo_color_menu_item_init),
+	(gl_color_combo_color_menu_item_new),
+	(gl_color_combo_color_menu_item_set_color):
+		Explicitly request size of menu item and enlarge color swatch.
+
 2009-08-12  Jim Evins  <evins@snaught.com>
 
 	* src/label-text.c: (buffer_changed_cb), (draw_object),

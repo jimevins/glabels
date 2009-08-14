@@ -36,6 +36,9 @@
 /* Private macros and constants.             */
 /*===========================================*/
 
+#define SIZE 20
+#define PAD   5
+
 
 /*===========================================*/
 /* Private types                             */
@@ -62,6 +65,7 @@ static GdkPixbuf *
 create_color_pixbuf (gdouble         w,
                      gdouble         h,
                      guint           color);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -91,6 +95,8 @@ static void
 gl_color_combo_color_menu_item_init (glColorComboColorMenuItem *this)
 {
 	this->priv = g_new0 (glColorComboColorMenuItemPrivate, 1);
+
+        gtk_widget_set_size_request (GTK_MENU_ITEM (this), SIZE + 2*PAD, SIZE + 2*PAD);
 }
 
 
@@ -126,7 +132,7 @@ gl_color_combo_color_menu_item_new (gint         id,
 
         this->priv->id = id;
 
-        pixbuf = create_color_pixbuf (16, 16, color);
+        pixbuf = create_color_pixbuf (SIZE, SIZE, color);
         gtk_container_add (GTK_CONTAINER (this),
                            gtk_image_new_from_pixbuf (pixbuf));
 
@@ -149,7 +155,7 @@ gl_color_combo_color_menu_item_set_color(glColorComboColorMenuItem *this,
 
         this->priv->id = id;
 
-        pixbuf = create_color_pixbuf (16, 16, color);
+        pixbuf = create_color_pixbuf (SIZE, SIZE, color);
         gtk_image_set_from_pixbuf (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (this))),
                                    pixbuf);
 
