@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-image-page.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -39,17 +36,21 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -63,7 +64,7 @@ static void add_image_filters_to_chooser        (GtkFileChooser *file_chooser);
 
 static void img_selection_changed_cb (glObjectEditor *editor);
 
-
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare image page.                                             */
 /*--------------------------------------------------------------------------*/
@@ -76,7 +77,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "img_page_vbox",   &editor->priv->img_page_vbox,
                                      "img_file_radio",  &editor->priv->img_file_radio,
                                      "img_key_radio",   &editor->priv->img_key_radio,
@@ -118,6 +119,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  image radio callback.                                          */
 /*--------------------------------------------------------------------------*/
@@ -141,6 +143,7 @@ img_radio_toggled_cb (glObjectEditor *editor)
  
         gl_debug (DEBUG_WDGT, "END");
 }
+
 
 /*****************************************************************************/
 /* Set image.                                                                */
@@ -186,6 +189,7 @@ gl_object_editor_set_image (glObjectEditor      *editor,
         gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query image.                                                              */
 /*****************************************************************************/
@@ -216,6 +220,7 @@ gl_object_editor_get_image (glObjectEditor      *editor)
         return text_node;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Update preview image.                                          */
 /*--------------------------------------------------------------------------*/
@@ -245,6 +250,7 @@ update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
                 gtk_file_chooser_set_preview_widget_active (file_chooser, FALSE);
         }
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add filters to file chooser.                                   */
@@ -322,6 +328,7 @@ add_image_filters_to_chooser (GtkFileChooser *chooser)
 	g_slist_free (filters);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Selection changed callback.                                     */
 /*--------------------------------------------------------------------------*/
@@ -345,3 +352,13 @@ img_selection_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

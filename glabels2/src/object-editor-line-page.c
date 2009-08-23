@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-line-page.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -41,24 +38,28 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 static void line_radio_toggled_cb               (glObjectEditor        *editor);
 
-
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare line page.                                             */
 /*--------------------------------------------------------------------------*/
@@ -68,7 +69,7 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "line_page_vbox",   &editor->priv->line_page_vbox,
                                      "line_width_spin",  &editor->priv->line_width_spin,
                                      "line_color_hbox",  &editor->priv->line_color_hbox,
@@ -123,6 +124,7 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Set line width.                                                           */
 /*****************************************************************************/
@@ -143,6 +145,7 @@ gl_object_editor_set_line_width (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query line width.                                                         */
 /*****************************************************************************/
@@ -159,6 +162,7 @@ gl_object_editor_get_line_width (glObjectEditor      *editor)
 
 	return w;
 }
+
 
 /*****************************************************************************/
 /* Set line color.                                                           */
@@ -207,6 +211,7 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query line color.                                                         */
 /*****************************************************************************/
@@ -241,6 +246,7 @@ gl_object_editor_get_line_color (glObjectEditor      *editor)
 	return color_node;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  line color radio callback.                                     */
 /*--------------------------------------------------------------------------*/
@@ -265,3 +271,14 @@ line_radio_toggled_cb (glObjectEditor *editor)
  
         gl_debug (DEBUG_EDITOR, "END");
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

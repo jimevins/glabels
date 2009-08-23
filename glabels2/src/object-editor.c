@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
-/**
- *  (GLABELS) Label and Business Card Creation program for GNOME
+/*
+ *  object-editor.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -46,9 +43,11 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
@@ -56,11 +55,13 @@
 
 typedef void (*ChangedSignal) (GObject * object, gpointer data);
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
 gint gl_object_editor_signals[LAST_SIGNAL] = { 0 };
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -78,11 +79,11 @@ static void prefs_changed_cb                    (glObjectEditor       *editor);
 static void label_changed_cb                    (glLabel              *label,
                                                  glObjectEditor       *editor);
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glObjectEditor, gl_object_editor, GTK_TYPE_VBOX);
+
 
 static void
 gl_object_editor_class_init (glObjectEditorClass *class)
@@ -116,27 +117,36 @@ gl_object_editor_class_init (glObjectEditorClass *class)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 static void
 gl_object_editor_init (glObjectEditor *editor)
 {
-        GError *error = NULL;
+        static gchar *object_ids[] = { "editor_vbox",
+                                       "adjustment1",  "adjustment2",  "adjustment3",
+                                       "adjustment4",  "adjustment5",  "adjustment6",
+                                       "adjustment7",  "adjustment8",  "adjustment9",
+                                       "adjustment10", "adjustment11", "adjustment12",
+                                       "adjustment13",
+                                       NULL };
+        GError       *error = NULL;
 
 	gl_debug (DEBUG_EDITOR, "START");
 	
 	editor->priv = g_new0 (glObjectEditorPrivate, 1);
 
-        editor->priv->gui = gtk_builder_new ();
+        editor->priv->builder = gtk_builder_new ();
 
-	gtk_builder_add_from_file (editor->priv->gui,
-                                   GLABELS_BUILDER_DIR "object-editor.builder",
-                                   &error);
+        gtk_builder_add_objects_from_file (editor->priv->builder,
+                                           GLABELS_BUILDER_DIR "object-editor.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
 		return;
 	}
 
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "editor_vbox", &editor->priv->editor_vbox,
                                      "title_image", &editor->priv->title_image,
                                      "title_label", &editor->priv->title_label,
@@ -156,6 +166,7 @@ gl_object_editor_init (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 static void 
 gl_object_editor_finalize (GObject *object)
 {
@@ -172,13 +183,14 @@ gl_object_editor_finalize (GObject *object)
 	g_signal_handlers_disconnect_by_func (G_OBJECT(editor->priv->label),
 					      label_changed_cb, editor);
 
-        g_object_unref (editor->priv->gui);
+        g_object_unref (editor->priv->builder);
 	g_free (editor->priv);
 
 	G_OBJECT_CLASS (gl_object_editor_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* NEW object editor.                                                      */
@@ -224,6 +236,7 @@ gl_object_editor_new (gchar                *image,
 
 	return GTK_WIDGET(editor);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct notebook.                                            */
@@ -335,6 +348,7 @@ gl_object_notebook_construct_valist (glObjectEditor       *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Widget changed callback.  Emit our "changed" signal.            */
 /*--------------------------------------------------------------------------*/
@@ -351,6 +365,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Widget size changed callback.  Emit our "size-changed" signal.  */
 /*--------------------------------------------------------------------------*/
@@ -366,6 +381,7 @@ gl_object_editor_size_changed_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* Set possible key names from merge object.                                 */
@@ -588,6 +604,7 @@ prefs_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label "changed" callback.                                        */
 /*---------------------------------------------------------------------------*/
@@ -616,3 +633,13 @@ label_changed_cb (glLabel        *label,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  new-label-dialog.c
+ *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
  *
- *  new-label-dialog.c:  New label dialog module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2006  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "new-label-dialog.h"
@@ -36,13 +33,14 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
 struct _glNewLabelDialogPrivate {
 
-        GtkBuilder *gui;
+        GtkBuilder *builder;
 
 	GtkWidget  *media_select;
 	GtkWidget  *rotate_label;
@@ -53,6 +51,7 @@ struct _glNewLabelDialogPrivate {
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -67,11 +66,11 @@ static void       template_changed_cb                 (glWdgtMediaSelect     *se
 						       gpointer               data);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_DIALOG);
+
 
 static void
 gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
@@ -84,6 +83,7 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 
   	object_class->finalize = gl_new_label_dialog_finalize;  	
 }
+
 
 static void
 gl_new_label_dialog_init (glNewLabelDialog *dialog)
@@ -107,6 +107,7 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
 	gl_debug (DEBUG_FILE, "END");
 }
 
+
 static void 
 gl_new_label_dialog_finalize (GObject *object)
 {
@@ -118,9 +119,9 @@ gl_new_label_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-        if (dialog->priv->gui)
+        if (dialog->priv->builder)
         {
-                g_object_unref (dialog->priv->gui);
+                g_object_unref (dialog->priv->builder);
         }
 	g_free (dialog->priv);
 
@@ -129,6 +130,7 @@ gl_new_label_dialog_finalize (GObject *object)
 	gl_debug (DEBUG_FILE, "END");
 
 }
+
 
 /*****************************************************************************/
 /* NEW object properties dialog.                                             */
@@ -147,6 +149,7 @@ gl_new_label_dialog_new (GtkWindow    *win)
 	return dialog;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct dialog.                                              */
 /*--------------------------------------------------------------------------*/
@@ -154,33 +157,35 @@ static void
 gl_new_label_dialog_construct (glNewLabelDialog   *dialog,
 			       GtkWindow          *win)
 {
-        GtkBuilder *gui;
-        GError     *error = NULL;
-	GtkWidget  *vbox, *media_select_vbox, *rotate_label_vbox;
-	gchar      *name;
+        GtkBuilder   *builder;
+        static gchar *object_ids[] = { "new_label_dialog_vbox", NULL };
+        GError       *error = NULL;
+	GtkWidget    *vbox, *media_select_vbox, *rotate_label_vbox;
+	gchar        *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), win);
 
-        gui = gtk_builder_new ();
-        gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "new-label-dialog.builder",
-                                   &error);
+        builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (builder,
+                                           GLABELS_BUILDER_DIR "new-label-dialog.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
 		return;
 	}
 
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (builder,
                                      "new_label_dialog_vbox", &vbox,
                                      "media_select_vbox",     &media_select_vbox,
                                      "rotate_label_vbox",     &rotate_label_vbox,
                                      NULL);
 
 	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
-        dialog->priv->gui = gui;
+        dialog->priv->builder = builder;
 
 	dialog->priv->media_select = gl_wdgt_media_select_new ();
 	gtk_box_pack_start (GTK_BOX (media_select_vbox),
@@ -200,6 +205,7 @@ gl_new_label_dialog_construct (glNewLabelDialog   *dialog,
 
 	gl_debug (DEBUG_FILE, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  New template changed callback.                                  */
@@ -227,6 +233,7 @@ template_changed_cb (glWdgtMediaSelect *select,
 	gl_debug (DEBUG_FILE, "END");
 }
 
+
 /*****************************************************************************/
 /* Get template name.                                                        */
 /*****************************************************************************/
@@ -240,6 +247,7 @@ gl_new_label_dialog_get_template_name (glNewLabelDialog *dialog)
 	return name;
 }
 
+
 /*****************************************************************************/
 /* Set template name.                                                        */
 /*****************************************************************************/
@@ -249,6 +257,7 @@ gl_new_label_dialog_set_template_name (glNewLabelDialog *dialog,
 {
 	gl_wdgt_media_select_set_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select), name);
 }
+
 
 /*****************************************************************************/
 /* Get current filter parameters.                                            */
@@ -263,6 +272,7 @@ gl_new_label_dialog_get_filter_parameters (glNewLabelDialog *dialog,
 		page_size_id, category_id);
 }
 
+
 /*****************************************************************************/
 /* Set current filter parameters.                                            */
 /*****************************************************************************/
@@ -276,6 +286,7 @@ gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *dialog,
 		page_size_id, category_id);
 }
 
+
 /*****************************************************************************/
 /* Get rotate state.                                                         */
 /*****************************************************************************/
@@ -285,6 +296,7 @@ gl_new_label_dialog_get_rotate_state (glNewLabelDialog *dialog)
 	return gl_wdgt_rotate_label_get_state (
 		GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label));
 }
+
 
 /*****************************************************************************/
 /* Set rotate state.                                                         */
@@ -297,3 +309,13 @@ gl_new_label_dialog_set_rotate_state (glNewLabelDialog *dialog,
 		GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label), state);
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

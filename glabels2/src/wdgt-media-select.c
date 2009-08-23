@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  wdgt-media-select.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  wdgt_media_select.c:  media selection widget module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2006  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -62,7 +58,7 @@ enum {
 
 struct _glWdgtMediaSelectPrivate {
 
-        GtkBuilder   *gui;
+        GtkBuilder   *builder;
 
         GtkWidget    *notebook;
         guint         current_page_num;
@@ -91,11 +87,13 @@ enum {
 
 typedef void (*glWdgtMediaSelectSignal) (GObject * object, gpointer data);
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
 static gint wdgt_media_select_signals[LAST_SIGNAL] = { 0 };
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -122,7 +120,8 @@ static void   load_recent_list                 (GtkListStore           *store,
 static void   load_search_all_list             (GtkListStore           *store,
                                                 GtkTreeSelection       *selection,
                                                 GList                  *list);
-
+
+
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
@@ -152,6 +151,7 @@ gl_wdgt_media_select_class_init (glWdgtMediaSelectClass *class)
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 static void
 gl_wdgt_media_select_init (glWdgtMediaSelect *media_select)
 {
@@ -161,6 +161,7 @@ gl_wdgt_media_select_init (glWdgtMediaSelect *media_select)
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
+
 
 static void
 gl_wdgt_media_select_finalize (GObject *object)
@@ -172,9 +173,9 @@ gl_wdgt_media_select_finalize (GObject *object)
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (object));
 
-        if (media_select->priv->gui)
+        if (media_select->priv->builder)
         {
-                g_object_unref (media_select->priv->gui);
+                g_object_unref (media_select->priv->builder);
         }
         g_object_unref (media_select->priv->recent_store);
         g_object_unref (media_select->priv->search_all_store);
@@ -184,6 +185,7 @@ gl_wdgt_media_select_finalize (GObject *object)
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
+
 
 GtkWidget *
 gl_wdgt_media_select_new (void)
@@ -201,13 +203,15 @@ gl_wdgt_media_select_new (void)
         return GTK_WIDGET (media_select);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct composite widget.                                    */
 /*--------------------------------------------------------------------------*/
 static void
 gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 {
-        GtkBuilder        *gui;
+        GtkBuilder        *builder;
+        static gchar      *object_ids[] = { "wdgt_media_select_hbox", NULL };
         GError            *error = NULL;
         GtkWidget         *hbox;
         GList             *brands = NULL;
@@ -226,17 +230,18 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_return_if_fail (GL_IS_WDGT_MEDIA_SELECT (media_select));
         g_return_if_fail (media_select->priv != NULL);
 
-        gui = gtk_builder_new ();
-        gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "wdgt-media-select.builder",
-                                   &error);
+        builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (builder,
+                                           GLABELS_BUILDER_DIR "wdgt-media-select.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
 		return;
 	}
 
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (builder,
                                      "wdgt_media_select_hbox", &hbox,
                                      "notebook",               &media_select->priv->notebook,
 
@@ -251,7 +256,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
                                      NULL);
 
         gtk_container_add (GTK_CONTAINER (media_select), hbox);
-        media_select->priv->gui = gui;
+        media_select->priv->builder = builder;
 
         media_select->priv->recent_page_num =
                 gtk_notebook_page_num (GTK_NOTEBOOK (media_select->priv->notebook),
@@ -371,6 +376,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
@@ -431,6 +437,7 @@ filter_changed_cb (GtkComboBox *combo,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
@@ -450,6 +457,7 @@ selection_changed_cb (GtkTreeSelection       *selection,
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  modify widget due to change in selection                       */
@@ -477,6 +485,7 @@ page_changed_cb (GtkNotebook            *notebook,
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
+
 
 /****************************************************************************/
 /* query selected label template name.                                      */
@@ -521,6 +530,7 @@ gl_wdgt_media_select_get_name (glWdgtMediaSelect *media_select)
         return name;
 }
 
+
 /****************************************************************************/
 /* set selected label template name.                                        */
 /****************************************************************************/
@@ -563,6 +573,7 @@ gl_wdgt_media_select_set_name (glWdgtMediaSelect *media_select,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 /****************************************************************************/
 /* query current filter parameters.                                         */
 /****************************************************************************/
@@ -591,6 +602,7 @@ gl_wdgt_media_select_get_filter_parameters (glWdgtMediaSelect *media_select,
         g_free (page_size_name);
         g_free (category_name);
 }
+
 
 /****************************************************************************/
 /* set filter parameters.                                                   */
@@ -628,6 +640,7 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Get a description of the layout and number of labels.          */
 /*--------------------------------------------------------------------------*/
@@ -646,6 +659,7 @@ get_layout_desc (const lglTemplate *template)
 
         return string;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Get label size description.                                    */ 
@@ -717,6 +731,7 @@ get_label_size_desc (const lglTemplate *template)
 
         return string;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Load list store from template name list.                       */
@@ -798,6 +813,7 @@ load_recent_list (GtkListStore           *store,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Load list store from template name list.                       */
 /*--------------------------------------------------------------------------*/
@@ -878,3 +894,13 @@ load_search_all_list (GtkListStore           *store,
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

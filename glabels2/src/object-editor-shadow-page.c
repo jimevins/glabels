@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-shadow-page.c
+ *  Copyright (C) 2006-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2006  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -41,17 +38,21 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -74,7 +75,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "shadow_page_vbox",      &editor->priv->shadow_page_vbox,
                                      "shadow_enable_check",   &editor->priv->shadow_enable_check,
                                      "shadow_controls_table", &editor->priv->shadow_controls_table,
@@ -154,6 +155,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Set shadow parameters.                                                    */
 /*****************************************************************************/
@@ -173,6 +175,7 @@ gl_object_editor_set_shadow_state (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 void
 gl_object_editor_set_shadow_offset (glObjectEditor      *editor,
@@ -201,6 +204,7 @@ gl_object_editor_set_shadow_offset (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 void
 gl_object_editor_set_shadow_color (glObjectEditor      *editor,
@@ -244,6 +248,7 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 void
 gl_object_editor_set_shadow_opacity (glObjectEditor      *editor,
@@ -306,6 +311,7 @@ gl_object_editor_set_max_shadow_offset (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query shadow parameters.                                                  */
 /*****************************************************************************/
@@ -322,6 +328,7 @@ gl_object_editor_get_shadow_state (glObjectEditor      *editor)
 
 	return state;
 }
+
 
 void
 gl_object_editor_get_shadow_offset (glObjectEditor      *editor,
@@ -344,6 +351,7 @@ gl_object_editor_get_shadow_offset (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 glColorNode*
 gl_object_editor_get_shadow_color (glObjectEditor      *editor)
@@ -375,6 +383,7 @@ gl_object_editor_get_shadow_color (glObjectEditor      *editor)
 
 	return color_node;
 }
+
 
 gdouble
 gl_object_editor_get_shadow_opacity (glObjectEditor      *editor)
@@ -438,6 +447,7 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  shadow enable check callback.                                  */
 /*--------------------------------------------------------------------------*/
@@ -485,3 +495,14 @@ shadow_color_radio_toggled_cb (glObjectEditor *editor)
  
         gl_debug (DEBUG_EDITOR, "END");
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

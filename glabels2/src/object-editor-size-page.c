@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-size-page.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -37,17 +34,21 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -73,7 +74,7 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "size_page_vbox",          &editor->priv->size_page_vbox,
                                      "size_w_spin",             &editor->priv->size_w_spin,
                                      "size_h_spin",             &editor->priv->size_h_spin,
@@ -137,6 +138,7 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Maintain aspect ratio checkbox callback.                       */
 /*--------------------------------------------------------------------------*/
@@ -163,6 +165,7 @@ aspect_toggle_cb (glObjectEditor *editor)
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  W spin button changed callback.                                */
@@ -198,6 +201,7 @@ w_spin_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  H spin button changed callback.                                */
 /*--------------------------------------------------------------------------*/
@@ -231,6 +235,7 @@ h_spin_cb (glObjectEditor *editor)
                                                                                 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Reset image size callback.                                     */
@@ -286,6 +291,7 @@ size_reset_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Set size.                                                                 */
 /*****************************************************************************/
@@ -319,6 +325,7 @@ gl_object_editor_set_size (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* Set maximum size.                                                         */
@@ -366,6 +373,7 @@ gl_object_editor_set_max_size (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Set base or natural size of image.                                        */
 /*****************************************************************************/
@@ -380,6 +388,7 @@ gl_object_editor_set_base_size    (glObjectEditor      *editor,
 	editor->priv->w_base = w_base;
 	editor->priv->h_base = h_base;
 }
+
 
 /*****************************************************************************/
 /* Query size.                                                               */
@@ -406,6 +415,7 @@ gl_object_editor_get_size (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* PRIVATE. Prefs changed callback.  Update units related items.            */
@@ -454,3 +464,13 @@ size_prefs_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

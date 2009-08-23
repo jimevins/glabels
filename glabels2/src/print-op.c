@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  print-op.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  print-op.c:  Print operation module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "print-op.h"
@@ -41,6 +38,7 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
@@ -49,7 +47,7 @@ struct _glPrintOpPrivate {
 
 	glLabel   *label;
 
-        GtkBuilder *gui;
+        GtkBuilder *builder;
 
 	GtkWidget *simple_frame;
 	GtkWidget *copies_vbox;
@@ -103,6 +101,7 @@ struct _glPrintOpSettings
 /* Private globals                           */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
@@ -143,12 +142,11 @@ static void     draw_page_cb                  (GtkPrintOperation *operation,
                                                gpointer           user_data);
 
 
-
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glPrintOp, gl_print_op, GTK_TYPE_PRINT_OPERATION);
+
 
 static void
 gl_print_op_class_init (glPrintOpClass *class)
@@ -161,6 +159,7 @@ gl_print_op_class_init (glPrintOpClass *class)
 
   	object_class->finalize = gl_print_op_finalize;
 }
+
 
 static void
 gl_print_op_init (glPrintOp *op)
@@ -175,10 +174,11 @@ gl_print_op_init (glPrintOp *op)
 
 }
 
+
 static void 
 gl_print_op_finalize (GObject *object)
 {
-	glPrintOp* op = GL_PRINT_OP (object);
+	glPrintOp *op = GL_PRINT_OP (object);
 	
 	gl_debug (DEBUG_PRINT, "");
 
@@ -189,8 +189,8 @@ gl_print_op_finalize (GObject *object)
 	if (op->priv->label) {
 		g_object_unref (G_OBJECT(op->priv->label));
 	}
-	if (op->priv->gui) {
-		g_object_unref (G_OBJECT(op->priv->gui));
+	if (op->priv->builder) {
+		g_object_unref (G_OBJECT(op->priv->builder));
 	}
         g_free (op->priv->filename);
 	g_free (op->priv);
@@ -199,6 +199,7 @@ gl_print_op_finalize (GObject *object)
 
 	g_free (op->priv);
 }
+
 
 /*****************************************************************************/
 /* NEW print op.                                                         */
@@ -216,6 +217,7 @@ gl_print_op_new (glLabel      *label)
 
 	return op;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct op.                                              */
@@ -254,6 +256,7 @@ gl_print_op_construct (glPrintOp      *op,
 			  G_CALLBACK (draw_page_cb), label);
 }
 
+
 /*****************************************************************************/
 /* NEW batch print operation.                                                */
 /*****************************************************************************/
@@ -286,6 +289,7 @@ gl_print_op_new_batch (glLabel       *label,
 	return op;
 }
 
+
 /*****************************************************************************/
 /* Get print operation settings.                                             */
 /*****************************************************************************/
@@ -315,6 +319,7 @@ gl_print_op_get_settings (glPrintOp         *print_op)
         return settings;
 }
 
+
 /*****************************************************************************/
 /* Set print operation settings.                                             */
 /*****************************************************************************/
@@ -339,7 +344,8 @@ gl_print_op_set_settings (glPrintOp         *print_op,
                 print_op->priv->n_copies         = settings->n_copies;
         }
 
- }
+}
+
 
 /*****************************************************************************/
 /* Free print operation settings structure.                                  */
@@ -358,6 +364,7 @@ gl_print_op_free_settings(glPrintOpSettings *settings)
                 g_free (settings);
         }
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct op.                                                  */
@@ -421,6 +428,7 @@ gl_print_op_construct_batch (glPrintOp      *op,
 			  G_CALLBACK (draw_page_cb), label);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Set page size.                                                 */
 /*--------------------------------------------------------------------------*/
@@ -474,6 +482,7 @@ set_page_size (glPrintOp  *op,
 	gl_debug (DEBUG_PRINT, "end");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  "Create custom widget" callback                                */
 /*--------------------------------------------------------------------------*/
@@ -481,24 +490,26 @@ static GObject *
 create_custom_widget_cb (GtkPrintOperation *operation,
 			 gpointer           user_data)
 {
-	GtkBuilder    *gui;
+	GtkBuilder    *builder;
+        static gchar  *object_ids[] = { "print_custom_widget_vbox", NULL };
         GError        *error = NULL;
 	glPrintOp     *op = GL_PRINT_OP (operation);
 	glLabel       *label  = GL_LABEL (user_data);
 	GtkWidget     *vbox;
         glMerge       *merge = NULL;
 
-	gui = gtk_builder_new ();
-        gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "print-custom-widget.builder",
-                                   &error);
+	builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (builder,
+                                           GLABELS_BUILDER_DIR "print-custom-widget.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
 		return;
 	}
 
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (builder,
                                      "print_custom_widget_vbox", &vbox,
                                      "simple_frame",             &op->priv->simple_frame,
                                      "copies_vbox",              &op->priv->copies_vbox,
@@ -520,7 +531,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 			    op->priv->prmerge, FALSE, FALSE, 0);
 
 
-        op->priv->gui = gui;
+        op->priv->builder = builder;
 
         
         /* ---- Activate either simple or merge print control widgets. ---- */
@@ -571,6 +582,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	return G_OBJECT (vbox);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  "Custom widget apply" callback                                 */
 /*--------------------------------------------------------------------------*/
@@ -618,6 +630,7 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  "Begin print" callback                                         */
 /*--------------------------------------------------------------------------*/
@@ -631,6 +644,7 @@ begin_print_cb (GtkPrintOperation *operation,
         gtk_print_operation_set_n_pages (operation, op->priv->n_sheets);
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  "Draw page" callback.                                          */
@@ -698,3 +712,12 @@ gl_print_op_force_outline_flag (glPrintOp *op)
 }
 
 
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

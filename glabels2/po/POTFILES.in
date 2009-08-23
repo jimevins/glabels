@@ -151,14 +151,14 @@ libglabels/xml-paper.h
 libglabels/xml-template.c
 libglabels/xml-template.h
 
-data/builder/merge-properties-dialog.glade
-data/builder/new-label-dialog.glade
-data/builder/object-editor.glade
-data/builder/prefs-dialog.glade
-data/builder/print-custom-widget.glade
-data/builder/property-bar.glade
-data/builder/template-designer.glade
-data/builder/wdgt-media-select.glade
+data/builder/merge-properties-dialog.builder
+data/builder/new-label-dialog.builder
+data/builder/object-editor.builder
+data/builder/prefs-dialog.builder
+data/builder/print-custom-widget.builder
+data/builder/property-bar.builder
+data/builder/template-designer.builder
+data/builder/wdgt-media-select.builder
 
 data/templates/paper-sizes.xml
 data/templates/categories.xml

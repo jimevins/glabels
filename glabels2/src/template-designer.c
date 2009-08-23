@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  template-designer.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  template-designer.c:  Template designer module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "template-designer.h"
@@ -42,6 +39,7 @@
 #include "util.h"
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -71,23 +69,14 @@
 #define DELTA 0.01
 #define MAX_PAGE_DIM_POINTS 5000.0
 
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glTemplateDesignerPrivate
 {
-
-        GtkBuilder      *start_page_gui;
-        GtkBuilder      *name_page_gui;
-        GtkBuilder      *pg_size_page_gui;
-        GtkBuilder      *shape_page_gui;
-        GtkBuilder      *rect_size_page_gui;
-        GtkBuilder      *round_size_page_gui;
-        GtkBuilder      *cd_size_page_gui;
-        GtkBuilder      *nlayouts_page_gui;
-        GtkBuilder      *layout_page_gui;
-        GtkBuilder      *finish_page_gui;
+        GtkBuilder      *builder;
 
 	/* Assistant pages */
 	GtkWidget       *start_page;
@@ -211,6 +200,7 @@ enum {
         FINISH_PAGE_NUM
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
@@ -280,11 +270,12 @@ static void     print_test_cb                     (glTemplateDesigner      *dial
 
 static lglTemplate *build_template                (glTemplateDesigner      *dialog);
 
-
+
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glTemplateDesigner, gl_template_designer, GTK_TYPE_ASSISTANT);
+
 
 static void
 gl_template_designer_class_init (glTemplateDesignerClass *class)
@@ -296,17 +287,54 @@ gl_template_designer_class_init (glTemplateDesignerClass *class)
   	object_class->finalize = gl_template_designer_finalize;  	
 }
 
+
 static void
 gl_template_designer_init (glTemplateDesigner *dialog)
 {
+	GtkBuilder        *gui;
+        static gchar      *object_ids[] = { "start_page",
+                                            "name_page",
+                                            "pg_size_page",
+                                            "shape_page",
+                                            "rect_size_page",
+                                            "round_size_page",
+                                            "cd_size_page",
+                                            "nlayouts_page",
+                                            "layout_page",
+                                            "finish_page",
+                                            "adjustment1",  "adjustment2",  "adjustment3",
+                                            "adjustment4",  "adjustment5",  "adjustment6",
+                                            "adjustment7",  "adjustment8",  "adjustment9",
+                                            "adjustment10", "adjustment11", "adjustment12",
+                                            "adjustment13", "adjustment14", "adjustment15",
+                                            "adjustment16", "adjustment17", "adjustment18",
+                                            "adjustment19", "adjustment20", "adjustment21",
+                                            "adjustment22", "adjustment23", "adjustment24",
+                                            "adjustment25", "adjustment26", "adjustment27",
+                                            "adjustment28", "adjustment29", "adjustment30",
+                                            NULL };
+        GError            *error = NULL;
+
 	gl_debug (DEBUG_TEMPLATE, "START");
 
 	dialog->priv = g_new0 (glTemplateDesignerPrivate, 1);
+
+        dialog->priv->builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (dialog->priv->builder,
+                                           GLABELS_BUILDER_DIR "template-designer.builder",
+                                           object_ids,
+                                           &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 
         return;
 }
+
 
 static void 
 gl_template_designer_finalize (GObject *object)
@@ -319,45 +347,9 @@ gl_template_designer_finalize (GObject *object)
 	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-        if (dialog->priv->start_page_gui)
+        if (dialog->priv->builder)
         {
-                g_object_unref (dialog->priv->start_page_gui);
-        }
-        if (dialog->priv->name_page_gui)
-        {
-                g_object_unref (dialog->priv->name_page_gui);
-        }
-        if (dialog->priv->pg_size_page_gui)
-        {
-                g_object_unref (dialog->priv->pg_size_page_gui);
-        }
-        if (dialog->priv->shape_page_gui)
-        {
-                g_object_unref (dialog->priv->shape_page_gui);
-        }
-        if (dialog->priv->rect_size_page_gui)
-        {
-                g_object_unref (dialog->priv->rect_size_page_gui);
-        }
-        if (dialog->priv->round_size_page_gui)
-        {
-                g_object_unref (dialog->priv->round_size_page_gui);
-        }
-        if (dialog->priv->cd_size_page_gui)
-        {
-                g_object_unref (dialog->priv->cd_size_page_gui);
-        }
-        if (dialog->priv->nlayouts_page_gui)
-        {
-                g_object_unref (dialog->priv->nlayouts_page_gui);
-        }
-        if (dialog->priv->layout_page_gui)
-        {
-                g_object_unref (dialog->priv->layout_page_gui);
-        }
-        if (dialog->priv->finish_page_gui)
-        {
-                g_object_unref (dialog->priv->finish_page_gui);
+                g_object_unref (dialog->priv->builder);
         }
 	g_free (dialog->priv);
 
@@ -365,6 +357,7 @@ gl_template_designer_finalize (GObject *object)
 
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
+
 
 /*****************************************************************************/
 /* NEW preferences dialog.                                                   */
@@ -388,6 +381,7 @@ gl_template_designer_new (GtkWindow *parent)
 
 	return dialog;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Construct composite widget.                                     */
@@ -444,6 +438,7 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct start page.                                          */
 /*--------------------------------------------------------------------------*/
@@ -451,27 +446,11 @@ static void
 construct_start_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
-
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-start-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "start_page", &dialog->priv->start_page,
                                      NULL);
-
-        dialog->priv->start_page_gui = gui;
-
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->start_page);
@@ -492,6 +471,7 @@ construct_start_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct name page.                                           */
 /*--------------------------------------------------------------------------*/
@@ -499,22 +479,9 @@ static void
 construct_name_page (glTemplateDesigner      *dialog,
 		     GdkPixbuf               *logo)
 {
-	GtkBuilder        *gui;
-        GError            *error = NULL;
-
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-name-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "name_page",          &dialog->priv->name_page,
                                      "brand_entry",        &dialog->priv->brand_entry,
                                      "part_num_entry",     &dialog->priv->part_num_entry,
@@ -522,8 +489,6 @@ construct_name_page (glTemplateDesigner      *dialog,
                                      "name_warning_label", &dialog->priv->name_warning_label,
                                      "description_entry",  &dialog->priv->description_entry,
                                      NULL);
-
-        dialog->priv->name_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -548,6 +513,7 @@ construct_name_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE. Construct page size page.                                       */
 /*--------------------------------------------------------------------------*/
@@ -555,25 +521,13 @@ static void
 construct_pg_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
 	GList           *page_sizes;
 	const gchar     *default_page_size_id;
 	gchar           *default_page_size_name;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-pg-size-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "pg_size_page",     &dialog->priv->pg_size_page,
                                      "pg_size_combo",    &dialog->priv->pg_size_combo,
                                      "pg_w_spin",        &dialog->priv->pg_w_spin,
@@ -581,8 +535,6 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
                                      "pg_w_units_label", &dialog->priv->pg_w_units_label,
                                      "pg_h_units_label", &dialog->priv->pg_h_units_label,
                                      NULL);
-
-        dialog->priv->pg_size_page_gui = gui;
 
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
@@ -635,6 +587,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct shape page.                                          */
 /*--------------------------------------------------------------------------*/
@@ -642,29 +595,14 @@ static void
 construct_shape_page (glTemplateDesigner      *dialog,
 		      GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
-
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-shape-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "shape_page",        &dialog->priv->shape_page,
                                      "shape_rect_radio",  &dialog->priv->shape_rect_radio,
                                      "shape_round_radio", &dialog->priv->shape_round_radio,
                                      "shape_cd_radio",    &dialog->priv->shape_cd_radio,
                                      NULL);
-
-        dialog->priv->shape_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -683,6 +621,7 @@ construct_shape_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct rect size page.                                      */
 /*--------------------------------------------------------------------------*/
@@ -690,24 +629,11 @@ static void
 construct_rect_size_page (glTemplateDesigner      *dialog,
 			  GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-rect-size-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "rect_size_page",           &dialog->priv->rect_size_page,
                                      "rect_image",               &dialog->priv->rect_image,
                                      "rect_w_spin",              &dialog->priv->rect_w_spin,
@@ -723,8 +649,6 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
                                      "rect_y_waste_units_label", &dialog->priv->rect_y_waste_units_label,
                                      "rect_margin_units_label",  &dialog->priv->rect_margin_units_label,
                                      NULL);
-
-        dialog->priv->rect_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -799,6 +723,7 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct round size page.                                     */
 /*--------------------------------------------------------------------------*/
@@ -806,23 +731,11 @@ static void
 construct_round_size_page (glTemplateDesigner      *dialog,
 			   GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-round-size-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "round_size_page",          &dialog->priv->round_size_page,
                                      "round_image",              &dialog->priv->round_image,
                                      "round_r_spin",             &dialog->priv->round_r_spin,
@@ -832,8 +745,6 @@ construct_round_size_page (glTemplateDesigner      *dialog,
                                      "round_waste_units_label",  &dialog->priv->round_waste_units_label,
                                      "round_margin_units_label", &dialog->priv->round_margin_units_label,
                                      NULL);
-
-        dialog->priv->round_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -884,6 +795,7 @@ construct_round_size_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct CD/DVD size page.                                    */
 /*--------------------------------------------------------------------------*/
@@ -891,23 +803,11 @@ static void
 construct_cd_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-cd-size-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "cd_size_page",          &dialog->priv->cd_size_page,
                                      "cd_image",              &dialog->priv->cd_image,
                                      "cd_radius_spin",        &dialog->priv->cd_radius_spin,
@@ -923,8 +823,6 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
                                      "cd_waste_units_label",  &dialog->priv->cd_waste_units_label,
                                      "cd_margin_units_label", &dialog->priv->cd_margin_units_label,
                                      NULL);
-
-        dialog->priv->cd_size_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -995,6 +893,7 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct number of layouts page.                              */
 /*--------------------------------------------------------------------------*/
@@ -1002,30 +901,16 @@ static void
 construct_nlayouts_page (glTemplateDesigner      *dialog,
 			 GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-nlayouts-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "nlayouts_page",   &dialog->priv->nlayouts_page,
                                      "nlayouts_image1", &dialog->priv->nlayouts_image1,
                                      "nlayouts_image2", &dialog->priv->nlayouts_image2,
                                      "nlayouts_spin",   &dialog->priv->nlayouts_spin,
                                      NULL);
-
-        dialog->priv->nlayouts_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -1041,6 +926,10 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
                                          dialog->priv->nlayouts_page,
                                          TRUE);
 
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (dialog->priv->nlayouts_spin),
+                                   1, 2);
+
+
 	/* Initialize illustrations. */
 	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE1, NULL);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image1), pixbuf);
@@ -1050,6 +939,7 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct layout page.                                         */
 /*--------------------------------------------------------------------------*/
@@ -1057,22 +947,9 @@ static void
 construct_layout_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
-
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-layout-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "layout_page",           &dialog->priv->layout_page,
                                      "layout1_head_label",    &dialog->priv->layout1_head_label,
                                      "layout1_nx_spin",       &dialog->priv->layout1_nx_spin,
@@ -1095,8 +972,6 @@ construct_layout_page (glTemplateDesigner      *dialog,
                                      "mini_preview_vbox",     &dialog->priv->mini_preview_vbox,
                                      "layout_test_button",    &dialog->priv->layout_test_button,
                                      NULL);
-
-        dialog->priv->layout_page_gui = gui;
 
         dialog->priv->layout_mini_preview = gl_wdgt_mini_preview_new (175, 200);
         gtk_container_add (GTK_CONTAINER (dialog->priv->mini_preview_vbox),
@@ -1192,6 +1067,7 @@ construct_layout_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Construct finish page.                                         */
 /*--------------------------------------------------------------------------*/
@@ -1199,26 +1075,11 @@ static void
 construct_finish_page (glTemplateDesigner      *dialog,
 		       GdkPixbuf               *logo)
 {
-	GtkBuilder      *gui;
-        GError          *error = NULL;
-
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "template-designer-finish-page.builder",
-                                   &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "finish_page", &dialog->priv->finish_page,
                                      NULL);
-
-        dialog->priv->finish_page_gui = gui;
 
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
@@ -1240,6 +1101,7 @@ construct_finish_page (glTemplateDesigner      *dialog,
 	gl_debug (DEBUG_TEMPLATE, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  cancel callback.                                               */
 /*--------------------------------------------------------------------------*/
@@ -1250,6 +1112,7 @@ cancel_cb (glTemplateDesigner *dialog)
 	gtk_widget_destroy (GTK_WIDGET(dialog));
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  apply callback                                                 */
@@ -1266,6 +1129,7 @@ apply_cb (glTemplateDesigner *dialog)
         gl_mini_preview_pixbuf_cache_add_by_name (name);
         g_free (name);
 }
+
                          
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  close callback                                                 */
@@ -1277,6 +1141,7 @@ close_cb (glTemplateDesigner *dialog)
 	gtk_widget_destroy (GTK_WIDGET(dialog));
 
 }
+
                          
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  prepare page callback                                          */
@@ -1322,6 +1187,7 @@ prepare_cb (glTemplateDesigner      *dialog,
 
         }
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Handle non-linear forward traversal.                           */
@@ -1374,6 +1240,7 @@ forward_page_function (gint     current_page,
         return -1;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Widget on name page "changed" callback.                        */
 /*--------------------------------------------------------------------------*/
@@ -1422,6 +1289,7 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 	g_free (desc);
 }
                                                                                
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Widget on page size page "changed" callback.                   */
 /*--------------------------------------------------------------------------*/
@@ -1469,6 +1337,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 
 }
                                                                                
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare rectangular size page.                                 */
 /*--------------------------------------------------------------------------*/
@@ -1511,6 +1380,7 @@ rect_size_page_prepare_cb (glTemplateDesigner *dialog)
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare round size page.                                       */
 /*--------------------------------------------------------------------------*/
@@ -1540,6 +1410,7 @@ round_size_page_prepare_cb (glTemplateDesigner *dialog)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin), margin);
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare cd/dvd size page.                                      */
@@ -1582,6 +1453,7 @@ cd_size_page_prepare_cb (glTemplateDesigner *dialog)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin), margin);
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Prepare Layout page cb.                                        */
@@ -1710,6 +1582,7 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 	dialog->priv->stop_signals = FALSE;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Layout page widget changed cb.                                 */
 /*--------------------------------------------------------------------------*/
@@ -1730,6 +1603,7 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 
 	dialog->priv->stop_signals = FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Print test sheet callback.                                     */
@@ -1756,6 +1630,7 @@ print_test_cb (glTemplateDesigner      *dialog)
 	lgl_template_free (template);
 	g_object_unref (G_OBJECT(label));
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Build a template based on current assistant settings.                    */
@@ -1883,3 +1758,13 @@ build_template (glTemplateDesigner      *dialog)
 	return template;
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

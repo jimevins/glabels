@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-text-page.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -40,17 +37,21 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -72,7 +73,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "text_page_vbox",         &editor->priv->text_page_vbox,
                                      "text_family_combo",      &editor->priv->text_family_combo,
                                      "text_size_spin",         &editor->priv->text_size_spin,
@@ -172,6 +173,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Alignment togglebutton callback.                               */
 /*--------------------------------------------------------------------------*/
@@ -213,6 +215,7 @@ align_toggle_cb (GtkToggleButton *toggle,
         }
 
 }
+
 
 /*****************************************************************************/
 /* Set font family.                                                          */
@@ -256,6 +259,7 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query font family.                                                        */
 /*****************************************************************************/
@@ -272,6 +276,7 @@ gl_object_editor_get_font_family (glObjectEditor      *editor)
 
 	return font_family;
 }
+
 
 /*****************************************************************************/
 /* Set font size.                                                            */
@@ -292,6 +297,7 @@ gl_object_editor_set_font_size (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query font size.                                                          */
 /*****************************************************************************/
@@ -309,6 +315,7 @@ gl_object_editor_get_font_size (glObjectEditor      *editor)
 
 	return font_size;
 }
+
 
 /*****************************************************************************/
 /* Set font weight.                                                          */
@@ -328,6 +335,7 @@ gl_object_editor_set_font_weight (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* Query font weight.                                                        */
@@ -351,6 +359,7 @@ gl_object_editor_get_font_weight (glObjectEditor      *editor)
 	return font_weight;
 }
 
+
 /*****************************************************************************/
 /* Set font italic flag.                                                     */
 /*****************************************************************************/
@@ -370,6 +379,7 @@ gl_object_editor_set_font_italic_flag (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query font italic flag.                                                   */
 /*****************************************************************************/
@@ -388,6 +398,7 @@ gl_object_editor_get_font_italic_flag (glObjectEditor      *editor)
 
 	return italic_flag;
 }
+
 
 /*****************************************************************************/
 /* Set text alignment.                                                       */
@@ -411,6 +422,7 @@ gl_object_editor_set_text_alignment (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* Query text alignment.                                                     */
@@ -441,6 +453,7 @@ gl_object_editor_get_text_alignment (glObjectEditor      *editor)
 
 	return align;
 }
+
 
 /*****************************************************************************/
 /* Set text color.                                                           */
@@ -491,6 +504,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query text color.                                                         */
 /*****************************************************************************/
@@ -510,17 +524,17 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
 		color_node->color = gl_prefs->default_text_color;
 		color_node->key = 
 			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
-    } else {
+        } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;
 		color = gl_color_combo_get_color (GL_COLOR_COMBO(editor->priv->text_color_combo),
                                                   &is_default);
 
-        if (is_default) {
-                color_node->color = gl_prefs->default_text_color;
-        } else {
-                color_node->color = color;
-        }
+                if (is_default) {
+                        color_node->color = gl_prefs->default_text_color;
+                } else {
+                        color_node->color = color;
+                }
 	}      
 
 	gl_debug (DEBUG_EDITOR, "END");
@@ -548,6 +562,7 @@ gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query text line spacing.                                                  */
 /*****************************************************************************/
@@ -565,6 +580,7 @@ gl_object_editor_get_text_line_spacing (glObjectEditor      *editor)
 
 	return text_line_spacing;
 }
+
 
 /*****************************************************************************/
 /* Set auto shrink checkbox.                                                 */
@@ -585,6 +601,7 @@ gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query auto shrink checkbox.                                               */
 /*****************************************************************************/
@@ -601,6 +618,7 @@ gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor)
 
 	return auto_shrink;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  color radio callback.                                           */
@@ -626,3 +644,14 @@ text_radio_toggled_cb (glObjectEditor *editor)
  
         gl_debug (DEBUG_EDITOR, "END");
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

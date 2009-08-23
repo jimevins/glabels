@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  object-editor-bc-page.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  object-editor.c:  object properties editor module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "object-editor.h"
@@ -41,17 +38,21 @@
 
 #include "debug.h"
 
+
 /*===========================================*/
 /* Private macros                            */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Private data types                        */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -72,7 +73,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->gui,
+        gl_util_get_builder_widgets (editor->priv->builder,
                                      "bc_page_vbox",      &editor->priv->bc_page_vbox,
                                      "bc_style_combo",    &editor->priv->bc_style_combo,
                                      "bc_text_check",     &editor->priv->bc_text_check,
@@ -150,6 +151,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Callback for when style has changed.                           */
 /*--------------------------------------------------------------------------*/
@@ -213,6 +215,7 @@ style_changed_cb (glObjectEditor       *editor)
         g_free (ex_string);
 }
                                                                                 
+
 /*****************************************************************************/
 /* Set barcode style.                                                        */
 /*****************************************************************************/
@@ -278,6 +281,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query barcode style.                                                      */
 /*****************************************************************************/
@@ -310,6 +314,7 @@ gl_object_editor_get_bc_style (glObjectEditor      *editor,
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
+
 
 /*****************************************************************************/
 /* Set bc color.                                                             */
@@ -356,6 +361,7 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 	gl_debug (DEBUG_EDITOR, "END");
 }
 
+
 /*****************************************************************************/
 /* Query bc color.                                                           */
 /*****************************************************************************/
@@ -393,6 +399,7 @@ gl_object_editor_get_bc_color (glObjectEditor      *editor)
 	return color_node;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  barcode color radio callback.                                  */
 /*--------------------------------------------------------------------------*/
@@ -417,3 +424,14 @@ bc_radio_toggled_cb (glObjectEditor *editor)
  
     gl_debug (DEBUG_EDITOR, "END");
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

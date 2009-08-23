@@ -1,3 +1,71 @@
+2009-08-23  Jim Evins  <evins@snaught.com>
+
+	* data/builder/Makefile.am:
+	* data/builder/merge-properties-dialog.builder:
+	* data/builder/merge-properties-dialog.glade:
+	* data/builder/new-label-dialog.builder:
+	* data/builder/new-label-dialog.glade:
+	* data/builder/object-editor.builder:
+	* data/builder/object-editor.glade:
+	* data/builder/prefs-dialog.builder:
+	* data/builder/prefs-dialog.glade:
+	* data/builder/print-custom-widget.builder:
+	* data/builder/print-custom-widget.glade:
+	* data/builder/property-bar.builder:
+	* data/builder/property-bar.glade:
+	* data/builder/template-designer.builder:
+	* data/builder/template-designer.glade:
+	* data/builder/wdgt-media-select.builder:
+	* data/builder/wdgt-media-select.glade:
+	* po/POTFILES.in:
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_finalize),
+	(gl_merge_properties_dialog_construct):
+	* src/new-label-dialog.c: (gl_new_label_dialog_finalize),
+	(gl_new_label_dialog_construct):
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page):
+	* src/object-editor-edit-page.c:
+	(gl_object_editor_prepare_edit_page):
+	* src/object-editor-fill-page.c:
+	(gl_object_editor_prepare_fill_page):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page):
+	* src/object-editor-lsize-page.c:
+	(gl_object_editor_prepare_lsize_page):
+	* src/object-editor-position-page.c:
+	(gl_object_editor_prepare_position_page):
+	* src/object-editor-private.h:
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_prepare_shadow_page):
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page):
+	* src/object-editor.c: (gl_object_editor_init),
+	(gl_object_editor_finalize):
+	* src/prefs-dialog.c: (gl_prefs_dialog_init),
+	(gl_prefs_dialog_finalize), (gl_prefs_dialog_construct),
+	(construct_locale_page), (construct_object_page):
+	* src/print-op.c: (gl_print_op_finalize),
+	(gl_print_op_set_settings), (create_custom_widget_cb):
+	* src/template-designer.c: (gl_template_designer_init),
+	(gl_template_designer_finalize), (construct_start_page),
+	(construct_name_page), (construct_pg_size_page),
+	(construct_shape_page), (construct_rect_size_page),
+	(construct_round_size_page), (construct_cd_size_page),
+	(construct_nlayouts_page), (construct_layout_page),
+	(construct_finish_page):
+	* src/ui-property-bar.c: (gl_ui_property_bar_finalize),
+	(gl_ui_property_bar_construct):
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_finalize),
+	(gl_wdgt_media_select_construct):
+		Builder files no longer built from glade files.  Also did some
+		cleanup on formatting and update license notifications to GPL3+.
+
 2009-08-13  Jim Evins  <evins@snaught.com>
 
 	* src/color-combo-color-menu-item.c:

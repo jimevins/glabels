@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  prefs-dialog.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  prefs-dialog.c:  Preferences dialog module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "prefs-dialog.h"
@@ -40,6 +37,7 @@
 
 #include "debug.h"
 
+
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
@@ -47,13 +45,14 @@
 #define US_LETTER_ID "US-Letter"
 #define A4_ID        "A4"
 
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glPrefsDialogPrivate
 {
-	GtkBuilder      *gui;
+	GtkBuilder      *builder;
 
 	/* Units properties */
 	GtkWidget	*units_points_radio;
@@ -89,6 +88,7 @@ struct _glPrefsDialogPrivate
 	gboolean    stop_signals;
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
@@ -117,11 +117,12 @@ static void update_object_page_from_prefs (glPrefsDialog      *dialog);
 static void update_prefs_from_locale_page (glPrefsDialog      *dialog);
 static void update_prefs_from_object_page (glPrefsDialog      *dialog);
 
-
+
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glPrefsDialog, gl_prefs_dialog, GTK_TYPE_DIALOG);
+
 
 static void
 gl_prefs_dialog_class_init (glPrefsDialogClass *class)
@@ -135,19 +136,24 @@ gl_prefs_dialog_class_init (glPrefsDialogClass *class)
   	object_class->finalize = gl_prefs_dialog_finalize;  	
 }
 
+
 static void
 gl_prefs_dialog_init (glPrefsDialog *dialog)
 {
+        static gchar *object_ids[] = { "prefs_notebook",
+                                       "adjustment1",  "adjustment2",  "adjustment3",
+                                       NULL };
         GError *error = NULL;
 
 	gl_debug (DEBUG_PREFS, "START");
 
 	dialog->priv = g_new0 (glPrefsDialogPrivate, 1);
 
-        dialog->priv->gui = gtk_builder_new ();
-	gtk_builder_add_from_file (dialog->priv->gui,
-                                   GLABELS_BUILDER_DIR "prefs-dialog.builder",
-                                   &error);
+        dialog->priv->builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (dialog->priv->builder,
+                                           GLABELS_BUILDER_DIR "prefs-dialog.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
@@ -170,6 +176,7 @@ gl_prefs_dialog_init (glPrefsDialog *dialog)
 	gl_debug (DEBUG_PREFS, "END");
 }
 
+
 static void 
 gl_prefs_dialog_finalize (GObject *object)
 {
@@ -181,9 +188,9 @@ gl_prefs_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-	if (dialog->priv->gui)
+	if (dialog->priv->builder)
         {
-		g_object_unref (G_OBJECT (dialog->priv->gui));
+		g_object_unref (G_OBJECT (dialog->priv->builder));
 	}
 	g_free (dialog->priv);
 
@@ -191,6 +198,7 @@ gl_prefs_dialog_finalize (GObject *object)
 
 	gl_debug (DEBUG_PREFS, "END");
 }
+
 
 /*****************************************************************************/
 /* NEW preferences dialog.                                                   */
@@ -216,6 +224,7 @@ gl_prefs_dialog_new (GtkWindow *parent)
 	return dialog;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Construct composite widget.                                     */
 /*---------------------------------------------------------------------------*/
@@ -227,7 +236,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dialog)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-        gl_util_get_builder_widgets (dialog->priv->gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "prefs_notebook", &notebook,
                                      NULL);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, FALSE, FALSE, 0);
@@ -240,6 +249,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dialog)
 
         gtk_widget_show_all (GTK_DIALOG (dialog)->vbox);   
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  "Response" callback.                                            */
@@ -268,6 +278,7 @@ response_cb (glPrefsDialog *dialog,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Build Locale Properties Notebook Tab                           */
 /*--------------------------------------------------------------------------*/
@@ -275,7 +286,7 @@ static void
 construct_locale_page (glPrefsDialog *dialog)
 {
 
-        gl_util_get_builder_widgets (dialog->priv->gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "units_points_radio",        &dialog->priv->units_points_radio,
                                      "units_inches_radio",        &dialog->priv->units_inches_radio,
                                      "units_mm_radio",            &dialog->priv->units_mm_radio,
@@ -300,6 +311,7 @@ construct_locale_page (glPrefsDialog *dialog)
 		"toggled", G_CALLBACK(update_prefs_from_locale_page), G_OBJECT(dialog));
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Build Default Object Properties Notebook Tab                   */
 /*--------------------------------------------------------------------------*/
@@ -308,7 +320,7 @@ construct_object_page (glPrefsDialog *dialog)
 {
         GList    *family_names;
 
-        gl_util_get_builder_widgets (dialog->priv->gui,
+        gl_util_get_builder_widgets (dialog->priv->builder,
                                      "text_family_combo",      &dialog->priv->text_family_combo,
                                      "text_size_spin",         &dialog->priv->text_size_spin,
                                      "text_bold_toggle",       &dialog->priv->text_bold_toggle,
@@ -494,6 +506,7 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 	dialog->priv->stop_signals = FALSE;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Update object page widgets from current prefs.                 */
 /*--------------------------------------------------------------------------*/
@@ -565,6 +578,7 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
 	dialog->priv->stop_signals = FALSE;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Update prefs from current state of locale page widgets.        */
 /*--------------------------------------------------------------------------*/
@@ -604,6 +618,7 @@ update_prefs_from_locale_page (glPrefsDialog *dialog)
 
 	gl_prefs_model_save_settings (gl_prefs);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Update prefs from current state of object page widgets.        */
@@ -690,4 +705,12 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
 }
 
 
-	
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

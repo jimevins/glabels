@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
-/**
- *  (GLABELS) Label and Business Card Creation program for GNOME
+/*
+ *  ui-property-bar.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  property-bar.c:  gLabels property bar
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003-2008  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -56,7 +52,7 @@ struct _glUIPropertyBarPrivate {
 
 	glView     *view;
 
-	GtkBuilder *gui;
+	GtkBuilder *builder;
 
 	GtkWidget  *tool_bar;
 
@@ -151,7 +147,6 @@ static void     set_line_width_items_sensitive   (glUIPropertyBar      *this,
 						  gboolean              state);
 
 
-
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
@@ -198,9 +193,9 @@ gl_ui_property_bar_finalize (GObject *object)
         {
 		g_object_unref (G_OBJECT(this->priv->view));
 	}
-        if (this->priv->gui)
+        if (this->priv->builder)
         {
-                g_object_unref (G_OBJECT(this->priv->gui));
+                g_object_unref (G_OBJECT(this->priv->builder));
         }
 	g_free (this->priv);
 
@@ -236,27 +231,31 @@ gl_ui_property_bar_new (void)
 static void
 gl_ui_property_bar_construct (glUIPropertyBar   *this)
 {
-	GtkBuilder *gui;
-        GError     *error = NULL;
-	GList      *family_names = NULL;
-	GList      *family_node;
-	GdkPixbuf  *pixbuf = NULL;
+	GtkBuilder    *builder;
+        static gchar  *object_ids[] = { "property_toolbar",
+                                        "adjustment1", "adjustment2",
+                                        NULL };
+        GError        *error = NULL;
+	GList         *family_names = NULL;
+	GList         *family_node;
+	GdkPixbuf     *pixbuf = NULL;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
 	this->priv->stop_signals = TRUE;
 
-        gui = gtk_builder_new ();
-	gtk_builder_add_from_file (gui,
-                                   GLABELS_BUILDER_DIR "property-bar.builder",
-                                   &error);
+        builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (builder,
+                                           GLABELS_BUILDER_DIR "property-bar.builder",
+                                           object_ids,
+                                           &error);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
 		return;
 	}
 
-        gl_util_get_builder_widgets (gui,
+        gl_util_get_builder_widgets (builder,
                                      "property_toolbar",        &this->priv->tool_bar,
                                      "font_family_combo",       &this->priv->font_family_combo,
                                      "font_size_spin",          &this->priv->font_size_spin,
@@ -310,7 +309,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                            this->priv->line_color_combo);
 
         /* Save reference to gui tree so we don't lose tooltips */
-        this->priv->gui = gui;
+        this->priv->builder = builder;
 
 	set_doc_items_sensitive (this, FALSE);
 
@@ -1272,3 +1271,12 @@ set_line_width_items_sensitive (glUIPropertyBar      *this,
 }
 
 
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */
