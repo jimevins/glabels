@@ -151,30 +151,28 @@ libglabels/xml-paper.h
 libglabels/xml-template.c
 libglabels/xml-template.h
 
-data/builder/merge-properties-dialog.builder
-data/builder/new-label-dialog.builder
-data/builder/object-editor.builder
-data/builder/prefs-dialog.builder
-data/builder/print-custom-widget.builder
-data/builder/property-bar.builder
-data/builder/template-designer.builder
-data/builder/wdgt-media-select.builder
+[type: gettext/glade]data/builder/merge-properties-dialog.builder
+[type: gettext/glade]data/builder/new-label-dialog.builder
+[type: gettext/glade]data/builder/object-editor.builder
+[type: gettext/glade]data/builder/prefs-dialog.builder
+[type: gettext/glade]data/builder/print-custom-widget.builder
+[type: gettext/glade]data/builder/property-bar.builder
+[type: gettext/glade]data/builder/template-designer.builder
+[type: gettext/glade]data/builder/wdgt-media-select.builder
 
-data/templates/paper-sizes.xml
-data/templates/categories.xml
-data/templates/avery-us-templates.xml
-data/templates/avery-iso-templates.xml
-data/templates/avery-other-templates.xml
-data/templates/brother-other-templates.xml
-data/templates/dymo-other-templates.xml
-data/templates/misc-us-templates.xml
-data/templates/misc-iso-templates.xml
-data/templates/misc-other-templates.xml
-data/templates/zweckform-iso-templates.xml
+[type: gettext/xml]data/templates/paper-sizes.xml
+[type: gettext/xml]data/templates/categories.xml
+[type: gettext/xml]data/templates/avery-us-templates.xml
+[type: gettext/xml]data/templates/avery-iso-templates.xml
+[type: gettext/xml]data/templates/avery-other-templates.xml
+[type: gettext/xml]data/templates/brother-other-templates.xml
+[type: gettext/xml]data/templates/dymo-other-templates.xml
+[type: gettext/xml]data/templates/misc-us-templates.xml
+[type: gettext/xml]data/templates/misc-iso-templates.xml
+[type: gettext/xml]data/templates/misc-other-templates.xml
+[type: gettext/xml]data/templates/zweckform-iso-templates.xml
 
-data/desktop/glabels.desktop.in
+[type: gettext/ini]data/desktop/glabels.desktop.in
 
-data/mime/glabels.keys.in
-data/mime/glabels.xml.in
-
-barcode-0.98/compat/getopt.c
+[type: gettext/keys]data/mime/glabels.keys.in
+[type: gettext/xml]data/mime/glabels.xml.in

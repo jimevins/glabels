@@ -1,3 +1,9 @@
+2009-08-26  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
+		Explicitely mark file types.  Removed unneeded file from
+		libbarcode.
+
 2009-08-23  Jim Evins  <evins@snaught.com>
 
 	* data/builder/Makefile.am:
