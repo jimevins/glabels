@@ -1,5 +1,10 @@
 2009-08-31  Jim Evins  <evins@snaught.com>
 
+	* po/fr.po:
+		Updated french translation (Claude Paroz)
+
+2009-08-31  Jim Evins  <evins@snaught.com>
+
 	* data/builder/property-bar.builder:
 		Make sure event box does not obscure tool bar background.
 	* src/Makefile.am:
