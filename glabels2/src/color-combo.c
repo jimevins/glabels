@@ -1,6 +1,6 @@
 /*
  *  color-combo.c
- *  Copyright (C) 2008  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2008-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -26,15 +26,17 @@
 #include <glib/gi18n.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkvbox.h>
-#include <gtk/gtkimage.h>
+#include "color-swatch.h"
 #include <gtk/gtkarrow.h>
 #include "marshal.h"
-#include "util.h"
 #include "color.h"
 
 
 #define IMAGE_W 24
 #define IMAGE_H 24
+
+#define SWATCH_H 5
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -48,10 +50,9 @@ struct _glColorComboPrivate {
 
         guint       default_color;
 
-        GdkPixbuf  *icon;
-
         GtkWidget  *button;
-        GtkWidget  *button_image;
+        GtkWidget  *button_vbox;
+        GtkWidget  *swatch;
         GtkWidget  *dropdown_button;
 
         GtkWidget  *menu;
@@ -135,17 +136,16 @@ gl_color_combo_class_init (glColorComboClass *class)
 static void
 gl_color_combo_init (glColorCombo *this)
 {
-        GtkWidget *button_vbox;
         GtkWidget *arrow;
 
         gtk_box_set_spacing (GTK_BOX (this), 0);
 
         this->priv = g_new0 (glColorComboPrivate, 1);
 
+        this->priv->button_vbox = gtk_vbox_new (FALSE, 0);
+
         this->priv->button = gtk_button_new ();
-        this->priv->button_image = gtk_image_new ();
-        gtk_button_set_image (GTK_BUTTON (this->priv->button),
-                              this->priv->button_image);
+        gtk_container_add (GTK_CONTAINER (this->priv->button), this->priv->button_vbox);
         gtk_button_set_focus_on_click (GTK_BUTTON (this->priv->button), FALSE);
         g_signal_connect_swapped (this->priv->button, "clicked",
                           G_CALLBACK(button_clicked_cb), this);
@@ -175,11 +175,6 @@ gl_color_combo_finalize (GObject *object)
         g_return_if_fail (object && IS_GL_COLOR_COMBO (object));
         this = GL_COLOR_COMBO (object);
 
-        if (this->priv->icon)
-        {
-                g_object_unref (this->priv->icon);
-        }
-
         g_free (this->priv);
 
         G_OBJECT_CLASS (gl_color_combo_parent_class)->finalize (object);
@@ -196,14 +191,10 @@ gl_color_combo_new (GdkPixbuf    *icon,
                     guint         color)
 {
         glColorCombo *this;
-        GtkWidget    *separator_menuitem;
+        GdkPixbuf    *pixbuf;
+        GtkWidget    *wimage;
 
         this = g_object_new (TYPE_GL_COLOR_COMBO, NULL);
-
-        if (icon)
-        {
-                this->priv->icon = g_object_ref (icon);
-        }
 
         if (!default_label)
         {
@@ -213,12 +204,24 @@ gl_color_combo_new (GdkPixbuf    *icon,
         this->priv->default_color = default_color;
         this->priv->color = color;
 
+        if (icon)
+        {
+                pixbuf = gdk_pixbuf_new_subpixbuf (icon, 0, 0, IMAGE_W, IMAGE_H-SWATCH_H);
+                wimage = gtk_image_new_from_pixbuf (pixbuf);
+                g_object_unref (G_OBJECT (pixbuf));
+                gtk_box_pack_start (GTK_BOX (this->priv->button_vbox), wimage, FALSE, FALSE, 0);
+
+                this->priv->swatch = gl_color_swatch_new (IMAGE_W, SWATCH_H, color);
+        }
+        else
+        {
+                this->priv->swatch = gl_color_swatch_new (IMAGE_W, IMAGE_H, color);
+        }
+        gtk_box_pack_start (GTK_BOX (this->priv->button_vbox), this->priv->swatch, FALSE, FALSE, 0);
+
         this->priv->menu = gl_color_combo_menu_new (default_label,
                                                     color);
         gtk_widget_show_all (this->priv->menu);
-
-        gtk_image_set_from_pixbuf (GTK_IMAGE (this->priv->button_image),
-                                   create_pixbuf (this, IMAGE_W, IMAGE_H));
 
         g_signal_connect (this->priv->menu, "color_changed",
                           G_CALLBACK (menu_color_changed_cb), this);
@@ -236,8 +239,7 @@ gl_color_combo_set_color (glColorCombo  *this,
 {
         this->priv->color = color;
 
-        gtk_image_set_from_pixbuf (GTK_IMAGE (this->priv->button_image),
-                                   create_pixbuf (this, IMAGE_W, IMAGE_H));
+        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch), color);
 }
 
 
@@ -286,74 +288,6 @@ button_clicked_cb( glColorCombo *this )
         g_signal_emit (this, signals[COLOR_CHANGED], 0,
                        this->priv->color,
                        this->priv->is_default_flag);
-}
-
-
-/*****************************************************************************/
-/* Create new pixbuf with color preview.                                     */
-/*****************************************************************************/
-static GdkPixbuf *
-create_pixbuf (glColorCombo   *this,
-               gdouble         w,
-               gdouble         h)
-{
-        cairo_surface_t   *surface;
-        cairo_t           *cr;
-        gdouble            image_w, image_h;
-        gdouble            swatch_h;
-        GdkPixbuf         *pixbuf;
-
-        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
-
-        cr = cairo_create (surface);
-
-        cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
-
-        cairo_save (cr);
-        cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-        cairo_paint (cr);
-        cairo_restore (cr);
-
-        if (this->priv->icon)
-        {
-                image_w = gdk_pixbuf_get_width (this->priv->icon);
-                image_h = gdk_pixbuf_get_height (this->priv->icon);
-
-                cairo_save (cr);
-
-                cairo_rectangle (cr, 0, 0, w, h);
-                cairo_scale (cr, w/image_w, h/image_h);
-                gdk_cairo_set_source_pixbuf (cr, this->priv->icon, 0, 0);
-                cairo_fill (cr);
-
-                cairo_restore (cr);
-
-                swatch_h = h/5 + 1;
-        }
-        else
-        {
-                swatch_h = h;
-        }
-
-        cairo_rectangle( cr, 1, h-swatch_h+1, w-2, swatch_h-2 );
-
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED   (this->priv->color),
-                               GL_COLOR_F_GREEN (this->priv->color),
-                               GL_COLOR_F_BLUE  (this->priv->color),
-                               GL_COLOR_F_ALPHA (this->priv->color));
-        cairo_fill_preserve( cr );
-
-        cairo_set_line_width (cr, 1.0);
-        cairo_set_source_rgb (cr, 0.5, 0.5, 0.5);
-        cairo_stroke (cr);
-
-        cairo_destroy( cr );
-
-        pixbuf = gl_util_cairo_convert_to_pixbuf (surface);
-        cairo_surface_destroy (surface);
-
-        return pixbuf;
 }
 
 
@@ -443,8 +377,7 @@ menu_color_changed_cb (glColorComboMenu     *object,
         }
         this->priv->is_default_flag = is_default;
 
-        gtk_image_set_from_pixbuf (GTK_IMAGE (this->priv->button_image),
-                                   create_pixbuf (this, IMAGE_W, IMAGE_H));
+        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch), color);
 
         g_signal_emit (this, signals[COLOR_CHANGED], 0,
                        this->priv->color,

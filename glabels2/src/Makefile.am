@@ -187,6 +187,8 @@ glabels_SOURCES = 			\
 	color-combo-color-menu-item.h	\
 	color-combo-history.c		\
 	color-combo-history.h		\
+	color-swatch.c			\
+	color-swatch.h			\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-markup-path.c		\

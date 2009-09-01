@@ -1,3 +1,20 @@
+2009-08-31  Jim Evins  <evins@snaught.com>
+
+	* data/builder/property-bar.builder:
+		Make sure event box does not obscure tool bar background.
+	* src/Makefile.am:
+	* src/color-swatch.c:
+	* src/color-swatch.h:
+		New color swatch widget.
+	* src/color-combo-color-menu-item.c:
+	(gl_color_combo_color_menu_item_init),
+	(gl_color_combo_color_menu_item_new),
+	(gl_color_combo_color_menu_item_set_color):
+	* src/color-combo.c: (gl_color_combo_init),
+	(gl_color_combo_finalize), (gl_color_combo_new),
+	(gl_color_combo_set_color), (menu_color_changed_cb):
+		Updated to use new color swatch widget.
+
 2009-08-26  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:

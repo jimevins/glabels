@@ -27,9 +27,9 @@
 #include <gtk/gtkmenuitem.h>
 #include <gtk/gtkseparatormenuitem.h>
 #include <gtk/gtklabel.h>
-#include <gtk/gtkimage.h>
+#include "color-swatch.h"
 #include "color.h"
-#include "util.h"
+
 
 
 /*===========================================*/
@@ -37,7 +37,6 @@
 /*===========================================*/
 
 #define SIZE 20
-#define PAD   5
 
 
 /*===========================================*/
@@ -46,7 +45,9 @@
 
 struct _glColorComboColorMenuItemPrivate {
 
-        gint id;
+        gint       id;
+
+        GtkWidget *swatch;
 };
 
 
@@ -95,8 +96,6 @@ static void
 gl_color_combo_color_menu_item_init (glColorComboColorMenuItem *this)
 {
 	this->priv = g_new0 (glColorComboColorMenuItemPrivate, 1);
-
-        gtk_widget_set_size_request (GTK_MENU_ITEM (this), SIZE + 2*PAD, SIZE + 2*PAD);
 }
 
 
@@ -126,15 +125,13 @@ gl_color_combo_color_menu_item_new (gint         id,
                                     const gchar *tip)
 {
 	glColorComboColorMenuItem *this;
-        GdkPixbuf                 *pixbuf;
 
 	this = g_object_new (GL_TYPE_COLOR_COMBO_COLOR_MENU_ITEM, NULL);
 
         this->priv->id = id;
 
-        pixbuf = create_color_pixbuf (SIZE, SIZE, color);
-        gtk_container_add (GTK_CONTAINER (this),
-                           gtk_image_new_from_pixbuf (pixbuf));
+        this->priv->swatch = gl_color_swatch_new (SIZE, SIZE, color);
+        gtk_container_add (GTK_CONTAINER (this), this->priv->swatch);
 
         gtk_widget_set_tooltip_text (GTK_WIDGET (this), tip);
 
@@ -151,60 +148,11 @@ gl_color_combo_color_menu_item_set_color(glColorComboColorMenuItem *this,
                                          guint                      color,
                                          const gchar               *tip)
 {
-        GdkPixbuf                 *pixbuf;
-
         this->priv->id = id;
 
-        pixbuf = create_color_pixbuf (SIZE, SIZE, color);
-        gtk_image_set_from_pixbuf (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (this))),
-                                   pixbuf);
+        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch), color);
 
         gtk_widget_set_tooltip_text (GTK_WIDGET (this), tip);
- }
-
-
-/*****************************************************************************/
-/* Create new pixbuf with color preview.                                     */
-/*****************************************************************************/
-static GdkPixbuf *
-create_color_pixbuf (gdouble         w,
-                     gdouble         h,
-                     guint           color)
-{
-        cairo_surface_t   *surface;
-        cairo_t           *cr;
-        GdkPixbuf         *pixbuf;
-
-        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, w, h);
-
-        cr = cairo_create (surface);
-
-        cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
-
-        cairo_save (cr);
-        cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-        cairo_paint (cr);
-        cairo_restore (cr);
-
-        cairo_rectangle( cr, 2, 2, w-3, h-3 );
-
-        cairo_set_source_rgba (cr,
-                               GL_COLOR_F_RED   (color),
-                               GL_COLOR_F_GREEN (color),
-                               GL_COLOR_F_BLUE  (color),
-                               GL_COLOR_F_ALPHA (color));
-        cairo_fill_preserve( cr );
-
-        cairo_set_line_width (cr, 1.0);
-        cairo_set_source_rgb (cr, 0.5, 0.5, 0.5);
-        cairo_stroke (cr);
-
-        cairo_destroy( cr );
-
-        pixbuf = gl_util_cairo_convert_to_pixbuf (surface);
-        cairo_surface_destroy (surface);
-
-        return pixbuf;
 }
 
 

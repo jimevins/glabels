@@ -146,6 +146,7 @@
               <object class="GtkEventBox" id="text_color_eventbox">
                 <property name="visible">True</property>
                 <property name="tooltip_text" translatable="yes">Text color</property>
+                <property name="visible_window">False</property>
                 <child>
                   <placeholder/>
                 </child>
@@ -163,6 +164,7 @@
               <object class="GtkEventBox" id="fill_color_eventbox">
                 <property name="visible">True</property>
                 <property name="tooltip_text" translatable="yes">Fill color</property>
+                <property name="visible_window">False</property>
                 <child>
                   <placeholder/>
                 </child>
@@ -180,6 +182,7 @@
               <object class="GtkEventBox" id="line_color_eventbox">
                 <property name="visible">True</property>
                 <property name="tooltip_text" translatable="yes">Line color</property>
+                <property name="visible_window">False</property>
                 <child>
                   <placeholder/>
                 </child>
