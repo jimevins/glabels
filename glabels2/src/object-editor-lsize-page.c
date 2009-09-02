@@ -28,6 +28,7 @@
 #include <math.h>
 
 #include "prefs.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 

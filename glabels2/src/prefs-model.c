@@ -28,6 +28,8 @@
 #include <libglabels/db.h>
 #include <libglabels/xml.h>
 #include <gtk/gtkpapersize.h>
+#include <string.h>
+#include <glib/gstrfuncs.h>
 
 #include "marshal.h"
 #include "util.h"
@@ -685,11 +687,11 @@ string_to_units (const gchar *string)
 {
 	lglUnitsType units;
 
-	if (g_strcasecmp (string, "Points") == 0) {
+	if (g_ascii_strcasecmp (string, "Points") == 0) {
 		units = LGL_UNITS_POINT;
-	} else if (g_strcasecmp (string, "Inches") == 0) {
+	} else if (g_ascii_strcasecmp (string, "Inches") == 0) {
 		units = LGL_UNITS_INCH;
-	} else if (g_strcasecmp (string, "Millimeters") == 0) {
+	} else if (g_ascii_strcasecmp (string, "Millimeters") == 0) {
 		units = LGL_UNITS_MM;
 	} else {
 		units = LGL_UNITS_INCH;

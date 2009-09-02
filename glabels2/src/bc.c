@@ -180,7 +180,7 @@ id_to_index (const gchar *id)
 	}
 
 	for (i=0; backends[i].id != NULL; i++) {
-		if (g_strcasecmp (id, backends[i].id) == 0) {
+		if (g_ascii_strcasecmp (id, backends[i].id) == 0) {
 			return i;
 		}
 	}
@@ -200,7 +200,7 @@ name_to_index (const gchar *name)
 	g_return_val_if_fail (name!=NULL, 0);
 
 	for (i=0; backends[i].id != NULL; i++) {
-		if (g_strcasecmp (name, backends[i].name) == 0) {
+		if (strcmp (name, backends[i].name) == 0) {
 			return i;
 		}
 	}

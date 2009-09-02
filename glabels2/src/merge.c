@@ -29,6 +29,8 @@
 #include <gobject/gvaluecollector.h>
 #include <string.h>
 
+#include <libglabels/str.h>
+
 #include "debug.h"
 
 /*========================================================*/
@@ -208,13 +210,13 @@ gl_merge_description_to_name (gchar *description)
 	GList   *p;
 	Backend *backend;
 
-	if (g_strcasecmp(description, _("None")) == 0) {
+	if (lgl_str_utf8_casecmp(description, _("None")) == 0) {
 		return g_strdup("None");
 	}
 
 	for ( p=backends; p!=NULL; p=p->next) {
 		backend = (Backend *)p->data;
-		if (g_strcasecmp(description, backend->description) == 0) {
+		if (lgl_str_utf8_casecmp(description, backend->description) == 0) {
 			return g_strdup(backend->name);
 		}
 	}

@@ -488,12 +488,12 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 		break;
 	}
 
-	if ( g_strcasecmp(gl_prefs->default_page_size, US_LETTER_ID) == 0)
+	if ( g_ascii_strcasecmp(gl_prefs->default_page_size, US_LETTER_ID) == 0)
         {
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dialog->priv->page_size_us_letter_radio), TRUE);
 	}
-        else if ( g_strcasecmp(gl_prefs->default_page_size, A4_ID) == 0)
+        else if ( g_ascii_strcasecmp(gl_prefs->default_page_size, A4_ID) == 0)
         {
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON(dialog->priv->page_size_a4_radio), TRUE);

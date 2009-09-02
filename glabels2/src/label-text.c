@@ -27,6 +27,7 @@
 #include <glib/gmessages.h>
 #include <pango/pango.h>
 #include <math.h>
+#include <string.h>
 
 #include "util.h"
 
@@ -478,7 +479,7 @@ set_font_family (glLabelObject *object,
 	}
 
 	if (ltext->priv->font_family) {
-		if (g_strcasecmp (ltext->priv->font_family, good_font_family) == 0) {
+		if (strcmp (ltext->priv->font_family, good_font_family) == 0) {
 			g_free (good_font_family);
 			gl_debug (DEBUG_LABEL, "END (no change)");
 			return;

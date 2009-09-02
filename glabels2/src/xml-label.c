@@ -855,7 +855,7 @@ xml_parse_pixdata (xmlNodePtr  node,
 {
 	gchar      *name, *base64;
 	guchar     *stream;
-	guint       stream_length;
+	gsize       stream_length;
 	gboolean    ret;
 	GdkPixdata *pixdata;
 	GdkPixbuf  *pixbuf;

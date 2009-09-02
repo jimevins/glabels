@@ -27,8 +27,7 @@
 #include "ui-commands.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkaboutdialog.h>
+#include <gtk/gtk.h>
 
 #include "view.h"
 #include "file.h"
@@ -1113,15 +1112,15 @@ gl_ui_cmd_help_about (GtkAction *action,
                 pixbuf = gdk_pixbuf_new_from_file (GLABELS_PIXMAP_DIR "glabels-splash.png", NULL);
 
                 about = gtk_about_dialog_new ();
-                gtk_about_dialog_set_name      (GTK_ABOUT_DIALOG(about), _("glabels"));
-                gtk_about_dialog_set_version   (GTK_ABOUT_DIALOG(about), VERSION);
-                gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG(about), copy_text);
-                gtk_about_dialog_set_comments  (GTK_ABOUT_DIALOG(about), about_text);
-                gtk_about_dialog_set_website   (GTK_ABOUT_DIALOG(about), url);
-                gtk_about_dialog_set_logo      (GTK_ABOUT_DIALOG(about), pixbuf);
+                gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(about), _("glabels"));
+                gtk_about_dialog_set_version      (GTK_ABOUT_DIALOG(about), VERSION);
+                gtk_about_dialog_set_copyright    (GTK_ABOUT_DIALOG(about), copy_text);
+                gtk_about_dialog_set_comments     (GTK_ABOUT_DIALOG(about), about_text);
+                gtk_about_dialog_set_website      (GTK_ABOUT_DIALOG(about), url);
+                gtk_about_dialog_set_logo         (GTK_ABOUT_DIALOG(about), pixbuf);
 
-                gtk_about_dialog_set_authors   (GTK_ABOUT_DIALOG(about), authors);
-                gtk_about_dialog_set_artists   (GTK_ABOUT_DIALOG(about), artists);
+                gtk_about_dialog_set_authors      (GTK_ABOUT_DIALOG(about), authors);
+                gtk_about_dialog_set_artists      (GTK_ABOUT_DIALOG(about), artists);
                 gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about),
                                                          translator_credits);
                 gtk_about_dialog_set_license   (GTK_ABOUT_DIALOG(about), license);

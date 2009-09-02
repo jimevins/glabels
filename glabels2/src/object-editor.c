@@ -226,8 +226,6 @@ gl_object_editor_new (gchar                *image,
 					  
 	}
 
-	gtk_notebook_set_homogeneous_tabs (GTK_NOTEBOOK(editor->priv->notebook), TRUE);
-
 	va_start (args, first_option);
 	gl_object_notebook_construct_valist (editor, label, first_option, args);
 	va_end (args);

@@ -83,95 +83,95 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 	gint                 flags;
 
 	/* Assign type flag.  Pre-filter by length for subtypes. */
-	if (g_strcasecmp (id, "EAN") == 0) {
+	if (g_ascii_strcasecmp (id, "EAN") == 0) {
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-8") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-8") == 0) {
 		if (!is_length_valid (digits, 7, 8)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-8+2") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-8+2") == 0) {
 		if (!is_length1_valid (digits, 7, 8) || !is_length2_valid (digits, 2, 2)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-8+5") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-8+5") == 0) {
 		if (!is_length1_valid (digits, 7, 8) || !is_length2_valid (digits, 5, 5)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-13") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-13") == 0) {
 		if (!is_length_valid (digits, 12, 13)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-13+2") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-13+2") == 0) {
 		if (!is_length1_valid (digits, 12,13) || !is_length2_valid (digits, 2,2)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "EAN-13+5") == 0) {
+	} else if (g_ascii_strcasecmp (id, "EAN-13+5") == 0) {
 		if (!is_length1_valid (digits, 12,13) || !is_length2_valid (digits, 5,5)) {
 			return NULL;
 		}
 		flags = BARCODE_EAN;
-	} else if (g_strcasecmp (id, "UPC") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC") == 0) {
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-A") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-A") == 0) {
 		if (!is_length_valid (digits, 11, 12)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-A+2") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-A+2") == 0) {
 		if (!is_length1_valid (digits, 11,12) || !is_length2_valid (digits, 2,2)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-A+5") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-A+5") == 0) {
 		if (!is_length1_valid (digits, 11,12) || !is_length2_valid (digits, 5,5)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-E") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-E") == 0) {
 		if (!is_length_valid (digits, 6, 8)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-E+2") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-E+2") == 0) {
 		if (!is_length1_valid (digits, 6, 8) || !is_length2_valid (digits, 2,2)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "UPC-E+5") == 0) {
+	} else if (g_ascii_strcasecmp (id, "UPC-E+5") == 0) {
 		if (!is_length1_valid (digits, 6, 8) || !is_length2_valid (digits, 5,5)) {
 			return NULL;
 		}
 		flags = BARCODE_UPC;
-	} else if (g_strcasecmp (id, "ISBN") == 0) {
+	} else if (g_ascii_strcasecmp (id, "ISBN") == 0) {
 		if (!is_length_valid (digits, 9, 10)) {
 			return NULL;
 		}
 		flags = BARCODE_ISBN;
-	} else if (g_strcasecmp (id, "ISBN+5") == 0) {
+	} else if (g_ascii_strcasecmp (id, "ISBN+5") == 0) {
 		if (!is_length1_valid (digits, 9, 10) || !is_length2_valid (digits, 5,5)) {
 			return NULL;
 		}
 		flags = BARCODE_ISBN;
-	} else if (g_strcasecmp (id, "Code39") == 0) {
+	} else if (g_ascii_strcasecmp (id, "Code39") == 0) {
 		flags = BARCODE_39;
-	} else if (g_strcasecmp (id, "Code128") == 0) {
+	} else if (g_ascii_strcasecmp (id, "Code128") == 0) {
 		flags = BARCODE_128;
-	} else if (g_strcasecmp (id, "Code128C") == 0) {
+	} else if (g_ascii_strcasecmp (id, "Code128C") == 0) {
 		flags = BARCODE_128C;
-	} else if (g_strcasecmp (id, "Code128B") == 0) {
+	} else if (g_ascii_strcasecmp (id, "Code128B") == 0) {
 		flags = BARCODE_128B;
-	} else if (g_strcasecmp (id, "I25") == 0) {
+	} else if (g_ascii_strcasecmp (id, "I25") == 0) {
 		flags = BARCODE_I25;
-	} else if (g_strcasecmp (id, "CBR") == 0) {
+	} else if (g_ascii_strcasecmp (id, "CBR") == 0) {
 		flags = BARCODE_CBR;
-	} else if (g_strcasecmp (id, "MSI") == 0) {
+	} else if (g_ascii_strcasecmp (id, "MSI") == 0) {
 		flags = BARCODE_MSI;
-	} else if (g_strcasecmp (id, "PLS") == 0) {
+	} else if (g_ascii_strcasecmp (id, "PLS") == 0) {
 		flags = BARCODE_PLS;
 	} else {
 		g_message( "Illegal barcode id %s", id );

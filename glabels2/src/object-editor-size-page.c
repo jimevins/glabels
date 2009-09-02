@@ -29,6 +29,7 @@
 
 #include "prefs.h"
 #include "wdgt-chain-button.h"
+#include "util.h"
 
 #include "object-editor-private.h"
 

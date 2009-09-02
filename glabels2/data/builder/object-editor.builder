@@ -1333,7 +1333,6 @@
                   </object>
                   <packing>
                     <property name="position">6</property>
-                    <property name="tab_expand">True</property>
                   </packing>
                 </child>
                 <child type="tab">

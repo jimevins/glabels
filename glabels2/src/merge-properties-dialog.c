@@ -342,7 +342,7 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	gtk_tree_view_column_set_clickable (column, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->priv->treeview), column);
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_object_set (GTK_OBJECT (renderer), "yalign", 0.0, NULL);
+	g_object_set (G_OBJECT (renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes (_("Record/Field"), renderer,
 							   "text", RECORD_FIELD_COLUMN,
 							   NULL);
@@ -350,7 +350,7 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->priv->treeview), column);
 	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (dialog->priv->treeview), column);
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_object_set (GTK_OBJECT (renderer), "yalign", 0.0, NULL);
+	g_object_set (G_OBJECT (renderer), "yalign", 0.0, NULL);
 	column = gtk_tree_view_column_new_with_attributes (_("Data"), renderer,
 							   "text", VALUE_COLUMN,
 							   NULL);

@@ -92,29 +92,29 @@ gl_barcode_postnet_new (const gchar    *id,
 	gdouble        x;
 
 	/* Validate code length for all subtypes. */
-	if ( (g_strcasecmp (id, "POSTNET") == 0) ) {
+	if ( (g_ascii_strcasecmp (id, "POSTNET") == 0) ) {
 		if (!is_length_valid (digits, 5) &&
 		    !is_length_valid (digits, 9) &&
 		    !is_length_valid (digits, 11)) {
 			return NULL;
 		}
 	}
-	if ( (g_strcasecmp (id, "POSTNET-5") == 0) ) {
+	if ( (g_ascii_strcasecmp (id, "POSTNET-5") == 0) ) {
 		if (!is_length_valid (digits, 5)) {
 			return NULL;
 		}
 	}
-	if ( (g_strcasecmp (id, "POSTNET-9") == 0) ) {
+	if ( (g_ascii_strcasecmp (id, "POSTNET-9") == 0) ) {
 		if (!is_length_valid (digits, 9)) {
 			return NULL;
 		}
 	}
-	if ( (g_strcasecmp (id, "POSTNET-11") == 0) ) {
+	if ( (g_ascii_strcasecmp (id, "POSTNET-11") == 0) ) {
 		if (!is_length_valid (digits, 11)) {
 			return NULL;
 		}
 	}
-	if ( (g_strcasecmp (id, "CEPNET") == 0) ) {
+	if ( (g_ascii_strcasecmp (id, "CEPNET") == 0) ) {
 		if (!is_length_valid (digits, 8)) {
 			return NULL;
 		}

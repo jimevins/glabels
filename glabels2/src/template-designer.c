@@ -291,7 +291,6 @@ gl_template_designer_class_init (glTemplateDesignerClass *class)
 static void
 gl_template_designer_init (glTemplateDesigner *dialog)
 {
-	GtkBuilder        *gui;
         static gchar      *object_ids[] = { "start_page",
                                             "name_page",
                                             "pg_size_page",
@@ -1308,7 +1307,7 @@ pg_size_page_changed_cb (glTemplateDesigner *dialog)
 		paper = lgl_db_lookup_paper_from_name (page_size_name);
 	
 
-		if ( g_strcasecmp (paper->id, "Other") == 0 ) {
+		if ( g_ascii_strcasecmp (paper->id, "Other") == 0 ) {
 			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_spin), TRUE);
 			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_h_spin), TRUE);
 			gtk_widget_set_sensitive (GTK_WIDGET(dialog->priv->pg_w_units_label),
@@ -1659,7 +1658,7 @@ build_template (glTemplateDesigner      *dialog)
 	page_size_name =
 		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
 	paper = lgl_db_lookup_paper_from_name (page_size_name);
-	if ( g_strcasecmp (paper->id, "Other") == 0 ) {
+	if ( g_ascii_strcasecmp (paper->id, "Other") == 0 ) {
 		paper->width =
 			gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin))
 			/ upp;

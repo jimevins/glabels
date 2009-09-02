@@ -1,3 +1,31 @@
+2009-09-01  Jim Evins  <evins@snaught.com>
+
+	* data/builder/object-editor.builder:
+		Fixed errant expansion of tab.
+	* src/bc-gnubarcode.c: (gl_barcode_gnubarcode_new):
+	* src/bc-postnet.c: (gl_barcode_postnet_new):
+	* src/bc.c: (id_to_index), (name_to_index):
+	* src/label-barcode.c: (gl_label_barcode_set_props):
+	* src/label-text.c: (set_font_family):
+	* src/merge-properties-dialog.c:
+	(gl_merge_properties_dialog_construct):
+	* src/merge.c: (gl_merge_description_to_name):
+	* src/new-label-dialog.c:
+	* src/object-editor-edit-page.c:
+	* src/object-editor-image-page.c: (update_preview_cb):
+	* src/object-editor-lsize-page.c:
+	* src/object-editor-position-page.c:
+	* src/object-editor-size-page.c:
+	* src/object-editor.c: (gl_object_editor_new):
+	* src/prefs-dialog.c: (update_locale_page_from_prefs):
+	* src/prefs-model.c: (string_to_units):
+	* src/print-op.c: (create_custom_widget_cb):
+	* src/template-designer.c: (gl_template_designer_init),
+	(pg_size_page_changed_cb), (build_template):
+	* src/ui-commands.c: (gl_ui_cmd_help_about):
+	* src/xml-label.c: (xml_parse_pixdata):
+		Fixed various deprecations as of Gtk-2.16.
+
 2009-08-31  Jim Evins  <evins@snaught.com>
 
 	* po/fr.po:

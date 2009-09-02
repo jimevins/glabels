@@ -32,6 +32,7 @@
 #include <libglabels/db.h>
 #include "print.h"
 #include "label.h"
+#include "util.h"
 
 #include "wdgt-print-copies.h"
 #include "wdgt-print-merge.h"
@@ -506,7 +507,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
-		return;
+		return NULL;
 	}
 
         gl_util_get_builder_widgets (builder,
