@@ -1,0 +1,447 @@
+2009.06.06 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Backported from the main trunk.
+	* Makefile.am:
+	  - Dependency check was incorrect because of misconfiguration.
+	* Version 3.1.0 has been released.
+
+2009.05.30 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrinput.c:
+	  - padlen check was wrong in QRinput_appendPaddingBit().
+	* tests/test_qrinput.c:
+	  - Stop printing bstream->data.
+	  - test_padding2() has been added.
+
+2009.05.21 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrinput.c:
+	  - 'padding' was not initialize.
+
+2009.05.20 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrenc.c, qrinput.c, qrencode.c:
+	  - Some compile warnings cleared.
+	* qrencode.c, tests/test_qrencode.c:
+	  - NULL check of an input arg has been added to
+	    QRcode_encodeString8bit().
+	  - NULL check test and empty string test have been added for
+	    QRcode_encodeString8bit().
+	* qrinput.h, qrencode_inner.h, split.c:
+	  - Copyright year updates.
+	* split.[ch]:
+	  - Split_splitStringToQRinput() set errno EINVAL if input string is
+	    NULL or empty.
+	  - Documentation improved.
+	* qrenc.c:
+	  - perror() is now used to show the details of some errors.
+	* qrencode.[ch]:
+	  - Some functions now set errno appropriately.
+	  - Typo fixes.
+
+2009.05.20 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* tests/create_frame_pattern.c, tests/Makefile.am:
+	  - New test tool "create_frame_pattern" has been added.
+	* tests/test_qrspec.c:
+	  - test_alignment1() has been replaced with test_newframe().
+	    test_newframe() compares newly created frames with frame pattern
+		data created by create_frame_pattern.
+	* tests/frame, tests/Makefile.am:
+	  - Pattern file "frame" has been added to EXTRA_DIST.
+	* mask.c:
+	  - Very small improvement. Unnecessary malloc()s are reduced.
+	* tests/test_qrencode.c:
+	  - Two new tests have been added.
+	* split.c:
+	  - NULL check and string length check have been added.
+	* qrspec.c, tests/test_qrinput.c:
+	  - Forgotten padding bits bug has been fixed. (enbugged at 2009.5.18)
+	  - New test for the bug above has been added.
+	* qrspec.[ch], qrencode_inner.h:
+	  - Some function becomes __STATIC and their declarations have been
+	    moved to qrencode_inner.h.
+	* tests/prof_qrencode.c:
+	  - Now liberates all heap at the end of the program.
+
+2009.05.19 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.c, qrencode_inner.h:
+	  - calloc() is now used to initialize rsblock.
+	  - Number of malloc()s in RSblock_initBlock() has been integrated to
+	    one malloc() in QRraw_new().
+	* rscode.c:
+	  - A very small code improvement. 
+	* qrinput.[ch]:
+	  - More return value checks.
+	  - Code cleanups.
+	* tests/common.h, tests/test_{split,monkey,qrinput}.c:
+	  - Tests improved.
+	* qrspec.[ch], tests/test_qrspec.c:
+	  - Code cleanups.
+	  - QRspec_rs{Data,Ecc}Length() have been added.
+	* tests/view_qrcode.c:
+	  - Code cleanups.
+	  - Disabled mask setting in structured mode.
+	* tests/common.h:
+	  - assert_nothing() has been added.
+	* qrinput.c, qrencode.c, tests/test_*.c:
+	  - Various *_free() now allow NULL pointer. (nothing performed)
+	* qrspec.[ch]:
+	  - Alignment pattern is now put by QRspec_putAlignmentPattern().
+	    QRspec_getAlignmentPattern() and QRspec_freeAlignment() have been
+		removed.
+
+2009.05.18 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.c:
+	  - More return value checks.
+	* bitstream.c:
+	  - BitStream_free() allows NULL pointer (nothing performed).
+	* qrinput.c:
+	  - QRinput_List_freeEntry() and QRinput_free() allow NULL pointer.
+	  - QRinput_createPaddingBit() has been replaced with
+	    QRinput_appendPaddingBit().
+	  - QRinput_convertData() now sets errno to EINVAL when input is too
+	    large.
+	  - More return value checks. Mainly for ENOMEM error.
+
+2009.05.16 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.h:
+	  - Indent improvement.
+	* Makefile.am:
+	  - qrencode.spec has been added to EXTRA_DIST.
+
+2009.05.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrinput.c, qrencode.c, qrspe.c:
+	  - More return value checks. Mainly for ENOMEM error.
+	* qrspec.[ch], qrencode.c, tests/test_qrspec.c:
+	  - QRspec_getEccSpec() now accepts an int array instead to return
+	    multiple values instead of returning dynamic allocated array.
+	* mask.c, rscode.c:
+	  - More return value checks from malloc().
+	* configure.ac:
+	  - Added "--enable-mudflap" option.
+	* rscode.[ch]:
+	  - Added free_rs_cache() for debug purpose.
+	* tests/test_{monkey,qrencode,rs}.c:
+	  - Call free_rs_cache() at the end of the tests.
+	* qrencode.c:
+	  - QRraw_new() and RSblock_init() have been improved.
+	  - Eliminated unnecessary calls of init_rs().
+	* autogen.sh, configure.ac:
+	  - Darwin workarounds.
+	* tests/common.h, tests/test_bitstream.c:
+	  - New tests have been added.
+
+2009.05.12 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* bitstream.c:
+	  - BitStream_toByte() had returned non-NULL for an empty BitStream.
+	* tests/test_bitstream.c:
+	  - test_null() has been added.
+	* qrinput.c:
+	  - A possible memory leak has been eliminated. It happend when a wrong
+	    version number was given.
+	* tests/test_qriput.c:
+	  - Memory leaks have been eliminated.
+
+2009.05.01 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped vertion to 3.1.0.
+
+2009.04.30 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* bistream.[ch]:
+	  - Internal representation of BitStream has been changed from
+	    NUL-terminated string to unsigned char array.
+	* tests/common.h, tests/test_{bitstream,qrinput}.c:
+	  - Some test sequences have been updated (see above).
+
+2009.03.25 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* configure.ac:
+	  - "--without-tests" has become default setting.
+	* bitstream.[ch]:
+	  - Now functions strictly check return value from malloc() and return
+	    error if it fails.
+
+2008.10.31 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* tests/commo.h:
+	  - __FUNCTION__ has been replaced with __func__, to follow the C99
+	    standard.
+	  - The way of variadic macros has been changed, to follow the C99
+	    standard.
+
+2008.10.11 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode_inner.h:
+	  - Now this header is called only by test programs.
+	* qrencode.c, qrencode_inner.h:
+	  - Some definitions and declares written in qrencode_inner.h have been
+	    moved into qrencode.c:
+	  - QRraw_*() have been declared as __STATIC.
+	* mask.[ch], qrencode.c, qrencode_inner.h:
+	  - Mask_makeMask() now requires QRecLevel.
+	  - QRencode_writeFormatInformation() has been renamed and moved to
+	    Mask_writeFormatInformation(), and become __STATIC.
+	* tests/*.c:
+	  - Unneeded #include "qrencode_inner.h" have been removed.
+
+2008.10.11 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* autogen.sh:
+	  - Darwin workaround.
+	* configure.ac:
+	  - Now config.h offers "__STATIC" macro becomes "static" when
+	    "--without-tests" is specified. This macro is useful for functions
+		called from test programs but not from other library codes.
+	* qrinput.c:
+	  - Very little performance improvement.
+	* mask.c:
+	  - Code cleanups.
+
+2008.09.12 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* tests/view_qrcode.c:
+	  - Unused variable 'pitch' has been removed from draw_QRcode().
+
+2008.06.03 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Merged to the main trunk.
+
+2008.06.01 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrenc.c:
+	  - Now it does not show the full usage when unrecognized options are
+	    given.
+	  - When "--help" is given, it displays the long usage.
+	* Version 3.0.3 has been released.
+
+2008.05.26 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrenc.c, tests/view_qrcode.c:
+	  - getopt_long_only() has been replaced with getopt_long() which is
+	    widely available. (Thanks to Gavan Fantom)
+	  - Now it accepts long options.
+	* qrencode.1.in:
+	  - followed the above changes.
+	* Bumped version to 3.0.3.
+
+2008.05.18 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrspec.c:
+	  - The bit order of "Version information" has been corrected.
+	    (Thanks to Paul Janssesn)
+	* configure.ac, Makefile.am:
+	  - The "--without-tests" has been added to the configure script.
+	* qrencode.spec.in:
+	  - Uses "--without-tests".
+	* Version 3.0.2 has been released.
+
+2008.05.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* various files:
+	  - Some compile-time warnings/erros with g++ have been fixed.
+	    (Thanks to wangsai)
+
+2008.05.09 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrenc.c:
+	  - Now qrencode writes an image file in binary mode for non-POSIX
+	    platform, such as MS-Windows. (bug report from Paul Janssens)
+	* Makefile.am:
+	  - tests/test_all.sh has been added.
+	* tests/test_all.sh:
+	  - Now it exits immediately if any test fails.
+	* Version 3.0.1 has been released.
+
+2008.05.01 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.spec.in:
+	  - Added the man page to the files section.
+
+2008.04.30 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Version 3.0.0 has been released.
+
+2008.04.23 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Version 3.0.0rc3 has been released.
+	  - This will probably be the final release candidate, if all goes well.
+
+2008.04.23 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* split.c:
+	  - Split_identifyMode() now uses isdigit() and isalnum() macros.
+	* qrinput.c:
+	  - Error checks have been improved.
+	* qrenc.c, tests/view_qrcode.c:
+	  - Return value checks have been added.
+	  - Structured-append encode with version 0 now returns error.
+	* qrencode.[ch]:
+	  - QRencode_encodeStructuredInput() -> QRencode_encodeInputStructured()
+	    (for consistency with other QRencode_encode*Structured() functions)
+	* mask.c:
+	  - A code block never called has been eliminated.
+
+2008.04.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Version 3.0.0rc2 has been released.
+
+2008.04.20 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.h:
+	  - QR_MODE_NUL has been added to QRencodeMode. Basically it is used
+	    only by Split_identifyMode().
+	* qrinput.[ch], split.c:
+	  - QRinput_identifyMode() has been moved to split.c, changed to static
+	    and now needs a hint.
+	* split.c:
+	  - Auto-splitting has been improved.
+	* qrinput.c:
+	  - A memory leak has been fixed.
+	* configure.ac:
+	  - The "--enable-gprof" and "--enable-gcov" options have been added.
+	* Makefile.am:
+	  - man1_MANS has been moved into the "if BUILD_TOOLS - endif" block.
+
+2008.04.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Version 3.0.0rc1 has been released.
+
+2008.04.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 3.0.0.
+	* qrencode.[ch]:
+	  - QRcode_encodeInput() has changed the API. Previously it takes a
+	    QRinput, version and level, but now it takes only a QRinput, because
+	    QRinput holds the version and level in it. From 3.0.0, you should
+	    set them by calling QRinput_setVersion() and
+	    QRinput_setErrorCorrectionLevel(), or use QRinput_new2() to
+	    instantiate a QRinput object.
+
+2008.04.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrspe.c:
+	  - NULL check has been added.
+	* split.[ch]:
+	  - API changed.
+	* qrencode.c:
+	  - Arguments (version and level) are now checked in QRcode_encodeMask().
+	    Internal functions trust the arguments are valid.
+	  - Error checks improved.
+	* qrinput.c:
+	  - Error checks improved.
+	* qrencode.h:
+	  - Documentation improvements.
+
+2008.04.13 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.c, qrencode_innter.h, tests/view_qrcode.c:
+	  - Changed API of QRcode_encodeMask().
+	* qrencode.[ch], qrinput.[ch], split.[ch]:
+	  - Some functions now set errno appropriately.
+
+2008.04.09 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.h, qrinput.c:
+	  - QRinput_Struct_insertStructuredAppendHeaders() and
+	    QRinput_insertStructuredAppendHeader now returns error, when the
+	    input contains too many structured inputs.
+	* qrencode.c:
+	  - QRcode_encodeInputToStructured() now returns NULL when
+	    QRinput_splitQRinputToStruct() fails.
+	* tests/view_qrcode.c:
+	  - Segmentation fault bug has been fixed. (see previous memo)
+
+2008.04.08 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrinput.c:
+	  - Fixed a bug in QRinput_estimateBitStreamSizeOfEntry(). It could
+	    overestimate the size.
+	* rscode.c:
+	  - Optimized the order of the parameters equality test in init_rs().
+	* qrspec.c, qrspec.h:
+	  - Added QRspec_clearCache().
+	* tests/test_estimatebit.c:
+	  - Bug fixed in test_numbit3().
+
+2008.04.07 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 2.1.0.
+	* Structured append is now supported (patches from Yusuke Mihara):
+	  - Two new types, QRcode_List and QRinput_Struct, have been added.
+	  - Following functions have been added:
+	    - QRcode_encodeStructuredInput()
+	    - QRcode_encodeStringStructured()
+	    - QRcode_encodeString8bitStructured()
+	  - Some functions to handle structured append symbols have been added.
+	    See Doxygen-ized descriptions for the details.
+	* qrenc.c:
+	  - "-S" option has been added for structured append.
+	* split.h:
+	  - "extern" was dropped.
+	* qrinput.h, qrencode.h:
+	  - Moved declarations of QRinput_{get,set}{Version,ErrorCorrectionLevel}
+	    from qrinput.h to qrencode.h. Now they are publicly accessible.
+	* qrencode.h, qrinput.h, qrinput.c:
+	  - Added QRinput_new2().
+	  - QRinput_newEntry(), QRinput_freeEntry have been renamed to
+	    QRinput_List_newEntry(), QRinput_List_freeEntry().
+	* split.c:
+	  - Bug fix: Split_eat8() now eats at least 1 byte. Previously it could
+	    produce a 0-length input entry.
+
+2008.01.23 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.1.in, Makefile.am, configure.ac:
+	  - Manpage of qrencode has been added.
+	* qrenc.c, tests/view_qrcode.c:
+	  - Usage message has been updated.
+
+2008.01.18 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* split.c:
+	  - Bug fixes.
+	* tests/test_split.c:
+	  - Followed recent API changes.
+	  - Added new test "test_toupper()".
+	* qrenc.c, tests/view_qrcode.c:
+	  - Source-level compatibility has been improved.
+	  - view_qrcode now accepts stdin like qrencode.
+	  - Usage message has been updated/fixed.
+	* Copyright year has been updated.
+
+2008.01.16 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrinput.c, split.c:
+	  - Case-sensitive mode becomes now default mode.
+	  - Alphabet-Numeric mode now encodes only upper-case alphabet and
+	    numeric characters. If "-i" option is given, split.c converts
+	    lower-case characters to upper-case characters at first.
+	* qrenc.c, tests/view_qrcode.c:
+	  - Case-sensitive mode becomes now default mode.
+	  - Option "-i" has been added.
+
+2007.12.14 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* tests/test_qrencode.c:
+	  - New test has been added.
+	* tests/view_qrcode.c:
+	  - Options supported.
+	  - Default mask is now -1 (auto).
+
+2007.12.13 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.[ch]:
+	  - QRcode_writeFormatInformation now returns a number of dark modules.
+	* mask.c:
+	  - The mask evaluation function now writes format information before
+	    evaluation. (Philippe Delcroix)
+	* split.[ch]:
+	  - Case-sensitive mode has been added to QRcode_encodeString().
+	  - "-8" option has been added to qrenc.c.
+	  - "-c" now encodes in improved case-sensitive mode.
+	* tests/test_{split,qrencode}.c:
+	  - test_split*() have been moved to test_split.c.
+
+2007.12.10 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 2.0.0.
+	* Merged to main trunk.
+	* mask.[ch], split.[ch]:
+	  - Masking functions and splitString functions are separated from
+	    qrencode.c.
+	* mqrspec.[ch]:
+	  - Specification of Micro QR code has been added, but not used yet.
+
+2007.03.24 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 1.0.2.
+
+2007.03.24 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode.c (QRcode_splitStringToQRinput):
+	  - a small bug fix. (Thanks to NANKI Haruo)
+	* qrencode.h:
+	  - "extern "C"" barrier has been added for C++.
+	* test/view_qrcode.c:
+	  - a typo fix.
+
+2006.12.27 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 1.0.1.
+
+2006.12.27 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrenc.c, qrencode.[ch]:
+	  - Added force 8-bit encoding mode.
+	* Makefile.am :
+	  - Automake/Autoconf files have been added to dist-package.
+
+2006.12.17 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* qrencode_inner.h, qrencode.c:
+	  - Removed unused member variable "b2" from QRRawCode.
+	* configure.ac, Makefile.am, acinclude.m4:
+	  - Better configuration of libpng. (now uses pkg-config correctly)
+
+2006.12.02 Kentaro FUKUCHI <fukuchi@megaui.net>
+	* Bumped version to 1.0.0.
