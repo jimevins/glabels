@@ -1,3 +1,23 @@
+2009-09-02  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/wdgt-mini-preview.c:
+	* src/wdgt-mini-preview.h:
+	* src/mini-preview.h:
+	* src/mini-preview.c:
+		- Renamed WdgtMiniPreview to MiniPreview.
+		- Style cleanup.
+		- Modified to draw to parent window to be effectively transparent.
+		- Updated license notification to gpl3+.
+	* src/template-designer.c: (construct_layout_page),
+	(layout_page_prepare_cb), (layout_page_changed_cb):
+	* src/wdgt-print-copies.c: (gl_wdgt_print_copies_construct),
+	(sheets_radio_cb), (first_spin_cb), (last_spin_cb),
+	(preview_pressed):
+	* src/wdgt-print-merge.c: (gl_wdgt_print_merge_construct),
+	(spin_cb), (preview_clicked), (gl_wdgt_print_merge_set_copies):
+		- Reconciled with rename above.
+
 2009-09-01  Jim Evins  <evins@snaught.com>
 
 	* data/builder/object-editor.builder:

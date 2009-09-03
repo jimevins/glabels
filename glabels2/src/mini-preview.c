@@ -1,30 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  mini-preview.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  wdgt_mini_preview.c:  mini preview widget module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
 
-#include "wdgt-mini-preview.h"
+#include "mini-preview.h"
 
 #include <math.h>
 
@@ -34,6 +30,7 @@
 #include "color.h"
 
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private macros and constants.             */
@@ -45,6 +42,7 @@
 
 #define SHADOW_X_OFFSET 5
 #define SHADOW_Y_OFFSET 5
+
 
 /*===========================================*/
 /* Private types                             */
@@ -61,7 +59,9 @@ typedef struct {
 	gdouble y;
 } LabelCenter;
 
-struct _glWdgtMiniPreviewPrivate {
+struct _glMiniPreviewPrivate {
+
+        GtkWidget      *canvas;
 
 	gint            height;
 	gint            width;
@@ -82,26 +82,24 @@ struct _glWdgtMiniPreviewPrivate {
 	gint            prev_i;
 };
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
-static gint wdgt_mini_preview_signals[LAST_SIGNAL] = { 0 };
+static gint mini_preview_signals[LAST_SIGNAL] = { 0 };
+
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_wdgt_mini_preview_finalize      (GObject                *object);
+static void     gl_mini_preview_finalize       (GObject                *object);
 
-static void gl_wdgt_mini_preview_construct     (glWdgtMiniPreview      *preview,
+static void     gl_mini_preview_construct      (glMiniPreview          *this,
 						gint                    height,
 						gint                    width);
 
-static gboolean expose_event_cb                (GtkWidget              *widget,
-						GdkEventExpose         *event);
-static void style_set_cb                       (GtkWidget              *widget,
-						GtkStyle               *previous_style);
 static gboolean button_press_event_cb          (GtkWidget              *widget,
 						GdkEventButton         *event);
 static gboolean motion_notify_event_cb         (GtkWidget              *widget,
@@ -110,70 +108,77 @@ static gboolean button_release_event_cb        (GtkWidget              *widget,
 						GdkEventButton         *event);
 
 
-static void redraw                             (GtkWidget              *widget);
-static void draw                               (glWdgtMiniPreview      *preview,
+static gboolean expose_event_cb                (GtkWidget              *widget,
+						GdkEventExpose         *event,
+                                                glMiniPreview          *this);
+static void     style_set_cb                   (GtkWidget              *widget,
+						GtkStyle               *previous_style,
+                                                glMiniPreview          *this);
+
+static void     redraw                         (glMiniPreview          *this);
+static void     draw                           (glMiniPreview          *this,
 						cairo_t                *cr);
 
-static void draw_shadow                        (glWdgtMiniPreview      *preview,
+static void     draw_shadow                    (glMiniPreview          *this,
 						cairo_t                *cr,
-						gdouble  		     x,
+						gdouble  	        x,
 						gdouble                 y,
 						gdouble                 width,
 						gdouble                 height);
-static void draw_paper                         (glWdgtMiniPreview      *preview,
+static void     draw_paper                     (glMiniPreview          *this,
 						cairo_t                *cr,
 						gdouble                 width,
 						gdouble                 height,
 						gdouble                 line_width);
-static void draw_labels                        (glWdgtMiniPreview      *preview,
+static void     draw_labels                    (glMiniPreview          *this,
 						cairo_t                *cr,
 						lglTemplate            *template,
 						gdouble                 line_width);
 
-static gint find_closest_label                 (glWdgtMiniPreview      *preview,
+static gint     find_closest_label             (glMiniPreview          *this,
 						gdouble                 x,
 						gdouble                 y);
 
 
-
 /****************************************************************************/
-/* Boilerplate Object stuff.                                                */
+/* Object infrastructure.                                                   */
 /****************************************************************************/
-G_DEFINE_TYPE (glWdgtMiniPreview, gl_wdgt_mini_preview, GTK_TYPE_DRAWING_AREA);
+G_DEFINE_TYPE (glMiniPreview, gl_mini_preview, GTK_TYPE_EVENT_BOX);
 
 
+/*****************************************************************************/
+/* Class Init Function.                                                      */
+/*****************************************************************************/
 static void
-gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
+gl_mini_preview_class_init (glMiniPreviewClass *class)
 {
 	GObjectClass   *object_class = G_OBJECT_CLASS (class);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	gl_wdgt_mini_preview_parent_class = g_type_class_peek_parent (class);
+	gl_mini_preview_parent_class = g_type_class_peek_parent (class);
 
-	object_class->finalize = gl_wdgt_mini_preview_finalize;
+	object_class->finalize = gl_mini_preview_finalize;
 
-	widget_class->expose_event         = expose_event_cb;
-	widget_class->style_set            = style_set_cb;
 	widget_class->button_press_event   = button_press_event_cb;
 	widget_class->motion_notify_event  = motion_notify_event_cb;
 	widget_class->button_release_event = button_release_event_cb;
 
-	wdgt_mini_preview_signals[CLICKED] =
+	mini_preview_signals[CLICKED] =
 	    g_signal_new ("clicked",
 			  G_OBJECT_CLASS_TYPE(object_class),
 			  G_SIGNAL_RUN_LAST,
-			  G_STRUCT_OFFSET (glWdgtMiniPreviewClass, clicked),
+			  G_STRUCT_OFFSET (glMiniPreviewClass, clicked),
 			  NULL, NULL,
 			  gl_marshal_VOID__INT,
 			  G_TYPE_NONE, 1, G_TYPE_INT);
 
-	wdgt_mini_preview_signals[PRESSED] =
+	mini_preview_signals[PRESSED] =
 	    g_signal_new ("pressed",
 			  G_OBJECT_CLASS_TYPE(object_class),
 			  G_SIGNAL_RUN_LAST,
-			  G_STRUCT_OFFSET (glWdgtMiniPreviewClass, pressed),
+			  G_STRUCT_OFFSET (glMiniPreviewClass, pressed),
 			  NULL, NULL,
 			  gl_marshal_VOID__INT_INT,
 			  G_TYPE_NONE, 2, G_TYPE_INT, G_TYPE_INT);
@@ -181,79 +186,105 @@ gl_wdgt_mini_preview_class_init (glWdgtMiniPreviewClass *class)
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
+/*****************************************************************************/
+/* Object Instance Init Function.                                            */
+/*****************************************************************************/
 static void
-gl_wdgt_mini_preview_init (glWdgtMiniPreview *preview)
+gl_mini_preview_init (glMiniPreview *this)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	preview->priv = g_new0 (glWdgtMiniPreviewPrivate, 1);
+	this->priv = g_new0 (glMiniPreviewPrivate, 1);
 
-	gtk_widget_add_events (GTK_WIDGET (preview),
+	gtk_widget_add_events (GTK_WIDGET (this),
 			       GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
 			       GDK_POINTER_MOTION_MASK);
+
+        gtk_event_box_set_visible_window (GTK_EVENT_BOX (this), FALSE);
+
+        this->priv->canvas = gtk_drawing_area_new ();
+        GTK_WIDGET_SET_FLAGS (this->priv->canvas, GTK_NO_WINDOW);
+        gtk_container_add (GTK_CONTAINER (this), this->priv->canvas);
+
+        g_signal_connect (G_OBJECT (this->priv->canvas), "expose-event",
+                          G_CALLBACK (expose_event_cb), this);
+        g_signal_connect (G_OBJECT (this->priv->canvas), "style-set",
+                          G_CALLBACK (style_set_cb), this);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
+/*****************************************************************************/
+/* Finalize Method.                                                          */
+/*****************************************************************************/
 static void
-gl_wdgt_mini_preview_finalize (GObject *object)
+gl_mini_preview_finalize (GObject *object)
 {
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (object);
+	glMiniPreview *this = GL_MINI_PREVIEW (object);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GL_IS_WDGT_MINI_PREVIEW (object));
+	g_return_if_fail (GL_IS_MINI_PREVIEW (object));
 
-	lgl_template_free (preview->priv->template);
-	g_free (preview->priv->centers);
-	g_free (preview->priv);
+	lgl_template_free (this->priv->template);
+	g_free (this->priv->centers);
+	g_free (this->priv);
 
-	G_OBJECT_CLASS (gl_wdgt_mini_preview_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gl_mini_preview_parent_class)->finalize (object);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
+/*****************************************************************************/
+/** New Object Generator.                                                    */
+/*****************************************************************************/
 GtkWidget *
-gl_wdgt_mini_preview_new (gint height,
-			  gint width)
+gl_mini_preview_new (gint height,
+                     gint width)
 {
-	glWdgtMiniPreview *preview;
+	glMiniPreview *this;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	preview = g_object_new (gl_wdgt_mini_preview_get_type (), NULL);
+	this = g_object_new (gl_mini_preview_get_type (), NULL);
 
-	gl_wdgt_mini_preview_construct (preview, height, width);
+	gl_mini_preview_construct (this, height, width);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 
-	return GTK_WIDGET (preview);
+	return GTK_WIDGET (this);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Construct composite widget.                                              */
 /*--------------------------------------------------------------------------*/
 static void
-gl_wdgt_mini_preview_construct (glWdgtMiniPreview *preview,
-				gint               height,
-				gint               width)
+gl_mini_preview_construct (glMiniPreview *this,
+                           gint           height,
+                           gint           width)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	preview->priv->height = height;
-	preview->priv->width  = width;
+	this->priv->height = height;
+	this->priv->width  = width;
 
-	gtk_widget_set_size_request (GTK_WIDGET (preview), width, height);
+	gtk_widget_set_size_request (GTK_WIDGET (this->priv->canvas), width, height);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
 /****************************************************************************/
 /* Set label for mini-preview to determine geometry.                        */
 /****************************************************************************/
-void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
-					     const gchar       *name)
+void
+gl_mini_preview_set_label_by_name (glMiniPreview *this,
+                                   const gchar   *name)
 {
 	lglTemplate *template;
 
@@ -262,18 +293,20 @@ void gl_wdgt_mini_preview_set_label_by_name (glWdgtMiniPreview *preview,
 	/* Fetch template */
 	template = lgl_db_lookup_template_from_name (name);
 
-	gl_wdgt_mini_preview_set_template (preview, template);
+	gl_mini_preview_set_template (this, template);
 
 	lgl_template_free (template);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
 /****************************************************************************/
 /* Set label for mini-preview to determine geometry.                        */
 /****************************************************************************/
-void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
-					const lglTemplate *template)
+void
+gl_mini_preview_set_template (glMiniPreview     *this,
+                              const lglTemplate *template)
 {
 	const lglTemplateFrame    *frame;
 	lglTemplateOrigin         *origins;
@@ -287,93 +320,68 @@ void gl_wdgt_mini_preview_set_template (glWdgtMiniPreview *preview,
 	/*
 	 * Set template
 	 */
-	lgl_template_free (preview->priv->template);
-	preview->priv->template = lgl_template_dup (template);
+	lgl_template_free (this->priv->template);
+	this->priv->template = lgl_template_dup (template);
 
 	/*
 	 * Set scale and offsets
 	 */
-	w = preview->priv->width - 4 - 2*SHADOW_X_OFFSET;
-	h = preview->priv->height - 4 - 2*SHADOW_Y_OFFSET;
+	w = this->priv->width - 4 - 2*SHADOW_X_OFFSET;
+	h = this->priv->height - 4 - 2*SHADOW_Y_OFFSET;
 	if ( (w/template->page_width) > (h/template->page_height) ) {
-		preview->priv->scale = h / template->page_height;
+		this->priv->scale = h / template->page_height;
 	} else {
-		preview->priv->scale = w / template->page_width;
+		this->priv->scale = w / template->page_width;
 	}
-	preview->priv->offset_x = (preview->priv->width/preview->priv->scale - template->page_width) / 2.0;
-	preview->priv->offset_y = (preview->priv->height/preview->priv->scale - template->page_height) / 2.0;
+	this->priv->offset_x = (this->priv->width/this->priv->scale - template->page_width) / 2.0;
+	this->priv->offset_y = (this->priv->height/this->priv->scale - template->page_height) / 2.0;
 
 	/*
 	 * Set labels per sheet
 	 */
-	preview->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
+	this->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/*
 	 * Initialize centers
 	 */
-	g_free (preview->priv->centers);
-	preview->priv->centers = g_new0 (LabelCenter, preview->priv->labels_per_sheet);
+	g_free (this->priv->centers);
+	this->priv->centers = g_new0 (LabelCenter, this->priv->labels_per_sheet);
 	origins = lgl_template_frame_get_origins (frame);
 	lgl_template_frame_get_size (frame, &w, &h);
-	for ( i=0; i<preview->priv->labels_per_sheet; i++ )
+	for ( i=0; i<this->priv->labels_per_sheet; i++ )
 	{
-		preview->priv->centers[i].x = origins[i].x + w/2.0;
-		preview->priv->centers[i].y = origins[i].y + h/2.0;
+		this->priv->centers[i].x = origins[i].x + w/2.0;
+		this->priv->centers[i].y = origins[i].y + h/2.0;
 	}
 	g_free (origins);
 
 	/*
 	 * Redraw modified preview
 	 */
-	redraw( GTK_WIDGET (preview));
+	redraw (this);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
+
 
 /****************************************************************************/
 /* Highlight given label outlines.                                          */
 /****************************************************************************/
 void
-gl_wdgt_mini_preview_highlight_range (glWdgtMiniPreview *preview,
-				      gint               first_label,
-				      gint               last_label)
+gl_mini_preview_highlight_range (glMiniPreview *this,
+                                 gint           first_label,
+                                 gint           last_label)
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	preview->priv->highlight_first = first_label;
-	preview->priv->highlight_last =  last_label;
+	this->priv->highlight_first = first_label;
+	this->priv->highlight_last =  last_label;
 
-	redraw( GTK_WIDGET (preview));
+	redraw (this);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
-
-/*--------------------------------------------------------------------------*/
-/* Expose event handler.                                                    */
-/*--------------------------------------------------------------------------*/
-static gboolean
-expose_event_cb (GtkWidget       *widget,
-		 GdkEventExpose  *event)
-{
-	cairo_t *cr;
-
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	cr = gdk_cairo_create (widget->window);
-
-	cairo_rectangle (cr,
-			event->area.x, event->area.y,
-			event->area.width, event->area.height);
-	cairo_clip (cr);
-	
-	draw (GL_WDGT_MINI_PREVIEW (widget), cr);
-
-	cairo_destroy (cr);
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-	return FALSE;
-}
 
 /*--------------------------------------------------------------------------*/
 /* Button press event handler                                               */
@@ -382,7 +390,7 @@ static gboolean
 button_press_event_cb (GtkWidget      *widget,
 		       GdkEventButton *event)
 {
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	glMiniPreview     *this = GL_MINI_PREVIEW (widget);
 	cairo_t           *cr;
 	gdouble            x, y;
 	gint               i;
@@ -391,31 +399,30 @@ button_press_event_cb (GtkWidget      *widget,
 
 	if ( event->button == 1 )
 	{
-		cr = gdk_cairo_create (widget->window);
+		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
 
 		/* Set transformation. */
-		cairo_identity_matrix (cr);
-		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
-		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+		cairo_scale (cr, this->priv->scale, this->priv->scale);
+		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
 
 		x = event->x;
 		y = event->y;
 		cairo_device_to_user (cr, &x, &y);
 
-		i = find_closest_label (preview, x, y);
+		i = find_closest_label (this, x, y);
 
-		g_signal_emit (G_OBJECT(preview),
-			       wdgt_mini_preview_signals[CLICKED],
+		g_signal_emit (G_OBJECT(this),
+			       mini_preview_signals[CLICKED],
 			       0, i);
 
-		preview->priv->first_i = i;
-		preview->priv->last_i  = i;
-		g_signal_emit (G_OBJECT(preview),
-			       wdgt_mini_preview_signals[PRESSED],
-			       0, preview->priv->first_i, preview->priv->last_i);
+		this->priv->first_i = i;
+		this->priv->last_i  = i;
+		g_signal_emit (G_OBJECT(this),
+			       mini_preview_signals[PRESSED],
+			       0, this->priv->first_i, this->priv->last_i);
 
-		preview->priv->dragging = TRUE;
-		preview->priv->prev_i   = i;
+		this->priv->dragging = TRUE;
+		this->priv->prev_i   = i;
 
 		cairo_destroy (cr);
 	}
@@ -423,6 +430,7 @@ button_press_event_cb (GtkWidget      *widget,
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 	return FALSE;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Motion notify event handler                                              */
@@ -431,39 +439,38 @@ static gboolean
 motion_notify_event_cb (GtkWidget      *widget,
 			GdkEventMotion *event)
 {
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	glMiniPreview *this = GL_MINI_PREVIEW (widget);
 	cairo_t           *cr;
 	gdouble            x, y;
 	gint               i;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	if (preview->priv->dragging)
+	if (this->priv->dragging)
 	{
-		cr = gdk_cairo_create (widget->window);
+		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
 
 		/* Set transformation. */
-		cairo_identity_matrix (cr);
-		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
-		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+		cairo_scale (cr, this->priv->scale, this->priv->scale);
+		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
 
 		x = event->x;
 		y = event->y;
 		cairo_device_to_user (cr, &x, &y);
 
-		i = find_closest_label (preview, x, y);
+		i = find_closest_label (this, x, y);
 
-		if ( i != preview->priv->prev_i )
+		if ( i != this->priv->prev_i )
 		{
-			preview->priv->last_i = i;
+			this->priv->last_i = i;
 
-			g_signal_emit (G_OBJECT(preview),
-				       wdgt_mini_preview_signals[PRESSED],
+			g_signal_emit (G_OBJECT(this),
+				       mini_preview_signals[PRESSED],
 				       0,
-				       MIN (preview->priv->first_i, preview->priv->last_i),
-				       MAX (preview->priv->first_i, preview->priv->last_i));
+				       MIN (this->priv->first_i, this->priv->last_i),
+				       MAX (this->priv->first_i, this->priv->last_i));
 
-			preview->priv->prev_i = i;
+			this->priv->prev_i = i;
 		}
 		cairo_destroy (cr);
 	}
@@ -472,6 +479,7 @@ motion_notify_event_cb (GtkWidget      *widget,
 	return FALSE;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Button release event handler                                             */
 /*--------------------------------------------------------------------------*/
@@ -479,13 +487,13 @@ static gboolean
 button_release_event_cb (GtkWidget      *widget,
 			 GdkEventButton *event)
 {
-	glWdgtMiniPreview *preview = GL_WDGT_MINI_PREVIEW (widget);
+	glMiniPreview *this = GL_MINI_PREVIEW (widget);
 	
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	if ( event->button == 1 )
 	{
-		preview->priv->dragging = FALSE;
+		this->priv->dragging = FALSE;
 
 	}
 
@@ -493,65 +501,28 @@ button_release_event_cb (GtkWidget      *widget,
 	return FALSE;
 }
 
-/*--------------------------------------------------------------------------*/
-/* Style set handler (updates colors when style/theme changes).             */
-/*--------------------------------------------------------------------------*/
-static void
-style_set_cb (GtkWidget        *widget,
-	      GtkStyle         *previous_style)
-{
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	redraw( widget );
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
-
-/*--------------------------------------------------------------------------*/
-/* Redraw.                                                                  */
-/*--------------------------------------------------------------------------*/
-static void
-redraw (GtkWidget *widget)
-{
-	GdkRegion *region;
-	
-	gl_debug (DEBUG_MINI_PREVIEW, "START");
-
-	if (widget->window)
-	{
-
-		region = gdk_drawable_get_clip_region (widget->window);
-
-		gdk_window_invalidate_region (widget->window, region, TRUE);
-		gdk_window_process_updates (widget->window, TRUE);
-
-		gdk_region_destroy (region);
-	}
-
-	gl_debug (DEBUG_MINI_PREVIEW, "END");
-}
 
 /*--------------------------------------------------------------------------*/
 /* Find index+1 of label closest to given coordinates.                      */
 /*--------------------------------------------------------------------------*/
 static gint
-find_closest_label (glWdgtMiniPreview      *preview,
-		    gdouble                 x,
-		    gdouble                 y)
+find_closest_label (glMiniPreview      *this,
+		    gdouble             x,
+		    gdouble             y)
 {
 	gint    i;
 	gint    min_i;
 	gdouble dx, dy, d2, min_d2;
 
-	dx = x - preview->priv->centers[0].x;
-	dy = y - preview->priv->centers[0].y;
+	dx = x - this->priv->centers[0].x;
+	dy = y - this->priv->centers[0].y;
 	min_d2 = dx*dx + dy*dy;
 	min_i = 0;
 
-	for ( i=1; i<preview->priv->labels_per_sheet; i++ )
+	for ( i=1; i<this->priv->labels_per_sheet; i++ )
 	{
-		dx = x - preview->priv->centers[i].x;
-		dy = y - preview->priv->centers[i].y;
+		dx = x - this->priv->centers[i].x;
+		dy = y - this->priv->centers[i].y;
 		d2 = dx*dx + dy*dy;
 
 		if ( d2 < min_d2 )
@@ -564,14 +535,85 @@ find_closest_label (glWdgtMiniPreview      *preview,
 	return min_i + 1;
 }
 
+
+/*--------------------------------------------------------------------------*/
+/* Expose event handler.                                                    */
+/*--------------------------------------------------------------------------*/
+static gboolean
+expose_event_cb (GtkWidget       *widget,
+		 GdkEventExpose  *event,
+                 glMiniPreview   *this)
+{
+	cairo_t       *cr;
+
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	cr = gdk_cairo_create (widget->window);
+
+	cairo_rectangle (cr,
+			event->area.x, event->area.y,
+			event->area.width, event->area.height);
+	cairo_clip (cr);
+        cairo_translate (cr, widget->allocation.x, widget->allocation.y);
+	
+	draw (this, cr);
+
+	cairo_destroy (cr);
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+	return FALSE;
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Style set handler (updates colors when style/theme changes).             */
+/*--------------------------------------------------------------------------*/
+static void
+style_set_cb (GtkWidget        *widget,
+	      GtkStyle         *previous_style,
+              glMiniPreview    *this)
+{
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	redraw (this);
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Redraw.                                                                  */
+/*--------------------------------------------------------------------------*/
+static void
+redraw (glMiniPreview      *this)
+{
+	GdkRegion *region;
+	
+	gl_debug (DEBUG_MINI_PREVIEW, "START");
+
+	if (GTK_WIDGET (this->priv->canvas)->window)
+	{
+
+		region = gdk_drawable_get_clip_region (GTK_WIDGET (this->priv->canvas)->window);
+
+		gdk_window_invalidate_region (GTK_WIDGET (this->priv->canvas)->window, region, TRUE);
+		gdk_window_process_updates (GTK_WIDGET (this->priv->canvas)->window, TRUE);
+
+		gdk_region_destroy (region);
+	}
+
+	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
 /*--------------------------------------------------------------------------*/
 /* Draw mini preview.                                                       */
 /*--------------------------------------------------------------------------*/
 static void
-draw (glWdgtMiniPreview  *preview,
-      cairo_t            *cr)
+draw (glMiniPreview  *this,
+      cairo_t        *cr)
 {
-	lglTemplate *template = preview->priv->template;
+	lglTemplate *template = this->priv->template;
 	gdouble      shadow_x, shadow_y;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
@@ -580,24 +622,23 @@ draw (glWdgtMiniPreview  *preview,
 	{
 
 		/* Set transformation. */
-		cairo_identity_matrix (cr);
-		cairo_scale (cr, preview->priv->scale, preview->priv->scale);
-		cairo_translate (cr, preview->priv->offset_x, preview->priv->offset_y);
+		cairo_scale (cr, this->priv->scale, this->priv->scale);
+		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
 
 
 		/* update shadow */
-		shadow_x = SHADOW_X_OFFSET/preview->priv->scale;
-		shadow_y = SHADOW_Y_OFFSET/preview->priv->scale;
+		shadow_x = SHADOW_X_OFFSET/this->priv->scale;
+		shadow_y = SHADOW_Y_OFFSET/this->priv->scale;
 
-		draw_shadow (preview, cr,
+		draw_shadow (this, cr,
 			     shadow_x, shadow_y,
 			     template->page_width, template->page_height);
 
-		draw_paper (preview, cr,
+		draw_paper (this, cr,
 			    template->page_width, template->page_height,
-			    1.0/preview->priv->scale);
+			    1.0/this->priv->scale);
 
-		draw_labels (preview, cr, template, 1.0/preview->priv->scale);
+		draw_labels (this, cr, template, 1.0/this->priv->scale);
 			     
 	}
 
@@ -610,12 +651,12 @@ draw (glWdgtMiniPreview  *preview,
 /* Draw page shadow                                                         */
 /*--------------------------------------------------------------------------*/
 static void
-draw_shadow (glWdgtMiniPreview      *preview,
-	     cairo_t                *cr,
-	     gdouble  		     x,
-	     gdouble                 y,
-	     gdouble                 width,
-	     gdouble                 height)
+draw_shadow (glMiniPreview      *this,
+	     cairo_t            *cr,
+	     gdouble             x,
+	     gdouble             y,
+	     gdouble             width,
+	     gdouble             height)
 {
 	GtkStyle *style;
 	guint     shadow_color;
@@ -626,7 +667,7 @@ draw_shadow (glWdgtMiniPreview      *preview,
 
 	cairo_rectangle (cr, x, y, width, height);
 
-	style = gtk_widget_get_style (GTK_WIDGET(preview));
+	style = gtk_widget_get_style (GTK_WIDGET(this));
 	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
 	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (shadow_color));
 
@@ -637,15 +678,16 @@ draw_shadow (glWdgtMiniPreview      *preview,
         gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Draw page                                                                */
 /*--------------------------------------------------------------------------*/
 static void
-draw_paper (glWdgtMiniPreview      *preview,
-	    cairo_t                *cr,
-	    gdouble                 width,
-	    gdouble                 height,
-	    gdouble                 line_width)
+draw_paper (glMiniPreview      *this,
+	    cairo_t            *cr,
+	    gdouble             width,
+	    gdouble             height,
+	    gdouble             line_width)
 {
 	cairo_save (cr);
 
@@ -665,14 +707,15 @@ draw_paper (glWdgtMiniPreview      *preview,
         gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Draw labels                                                              */
 /*--------------------------------------------------------------------------*/
 static void
-draw_labels (glWdgtMiniPreview *preview,
-	     cairo_t           *cr,
-	     lglTemplate       *template,
-	     gdouble            line_width)
+draw_labels (glMiniPreview *this,
+	     cairo_t       *cr,
+	     lglTemplate   *template,
+	     gdouble        line_width)
 {
         const lglTemplateFrame    *frame;
         gint                       i, n_labels;
@@ -687,7 +730,7 @@ draw_labels (glWdgtMiniPreview *preview,
         n_labels = lgl_template_frame_get_n_labels (frame);
         origins  = lgl_template_frame_get_origins (frame);
 
-	style = gtk_widget_get_style (GTK_WIDGET(preview));
+	style = gtk_widget_get_style (GTK_WIDGET(this));
 	highlight_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
 
         for ( i=0; i < n_labels; i++ ) {
@@ -697,8 +740,8 @@ draw_labels (glWdgtMiniPreview *preview,
                 cairo_translate (cr, origins[i].x, origins[i].y);
                 gl_cairo_label_path (cr, template, FALSE, FALSE);
 
-		if ( ((i+1) >= preview->priv->highlight_first) &&
-		     ((i+1) <= preview->priv->highlight_last) )
+		if ( ((i+1) >= this->priv->highlight_first) &&
+		     ((i+1) <= this->priv->highlight_last) )
 		{
 			cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (highlight_color));
 		}
@@ -722,3 +765,13 @@ draw_labels (glWdgtMiniPreview *preview,
         gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

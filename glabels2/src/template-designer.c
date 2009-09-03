@@ -33,7 +33,7 @@
 
 #include "prefs.h"
 #include <libglabels/db.h>
-#include "wdgt-mini-preview.h"
+#include "mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"
 #include "print-op.h"
 #include "util.h"
@@ -972,7 +972,7 @@ construct_layout_page (glTemplateDesigner      *dialog,
                                      "layout_test_button",    &dialog->priv->layout_test_button,
                                      NULL);
 
-        dialog->priv->layout_mini_preview = gl_wdgt_mini_preview_new (175, 200);
+        dialog->priv->layout_mini_preview = gl_mini_preview_new (175, 200);
         gtk_container_add (GTK_CONTAINER (dialog->priv->mini_preview_vbox),
                            dialog->priv->layout_mini_preview);
 
@@ -1573,8 +1573,8 @@ layout_page_prepare_cb (glTemplateDesigner *dialog)
 	}
 
 	template = build_template (dialog);
-	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
-					   template);
+	gl_mini_preview_set_template (GL_MINI_PREVIEW(dialog->priv->layout_mini_preview),
+                                      template);
 	lgl_template_free (template);
 
 
@@ -1595,8 +1595,8 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 
 	template = build_template (dialog);
 
-	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(dialog->priv->layout_mini_preview),
-					   template);
+	gl_mini_preview_set_template (GL_MINI_PREVIEW(dialog->priv->layout_mini_preview),
+                                      template);
 
 	lgl_template_free (template);
 

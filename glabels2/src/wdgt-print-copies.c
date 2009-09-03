@@ -34,13 +34,13 @@
 #include <gtk/gtkvbox.h>
 
 #include "hig.h"
-#include "wdgt-mini-preview.h"
+#include "mini-preview.h"
 #include "marshal.h"
 
 #include "debug.h"
 
-#define WDGT_MINI_PREVIEW_HEIGHT 175
-#define WDGT_MINI_PREVIEW_WIDTH  150
+#define MINI_PREVIEW_HEIGHT 175
+#define MINI_PREVIEW_WIDTH  150
 
 /*===========================================*/
 /* Private globals                           */
@@ -63,7 +63,7 @@ static void last_spin_cb                       (GtkSpinButton * spinbutton,
 						gpointer user_data);
 
 static void
-preview_pressed (glWdgtMiniPreview *mini_preview,
+preview_pressed (glMiniPreview *mini_preview,
 		 gint first, gint last, gpointer user_data);
 
 
@@ -137,10 +137,10 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	copies->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/* mini_preview canvas */
-	copies->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
-						    WDGT_MINI_PREVIEW_WIDTH);
-	gl_wdgt_mini_preview_set_template (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-					   label->template);
+	copies->mini_preview = gl_mini_preview_new (MINI_PREVIEW_HEIGHT,
+						    MINI_PREVIEW_WIDTH);
+	gl_mini_preview_set_template (GL_MINI_PREVIEW(copies->mini_preview),
+                                      label->template);
 	gtk_box_pack_start (GTK_BOX(whbox), copies->mini_preview, FALSE, FALSE, 0);
 
 	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD1);
@@ -156,8 +156,8 @@ gl_wdgt_print_copies_construct (glWdgtPrintCopies *copies,
 	copies->sheets_spin = gtk_spin_button_new (GTK_ADJUSTMENT (adjust),
 						   1.0, 0);
 	gtk_box_pack_start (GTK_BOX(whbox1), copies->sheets_spin, FALSE, FALSE, 0);
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-					      1, copies->labels_per_sheet);
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW(copies->mini_preview),
+                                         1, copies->labels_per_sheet);
 
 	/* Blank line */
 	gtk_box_pack_start (GTK_BOX(wvbox), gtk_label_new (""), FALSE, FALSE, 0);
@@ -213,8 +213,8 @@ sheets_radio_cb (GtkToggleButton * togglebutton,
 		gtk_widget_set_sensitive (copies->first_spin, FALSE);
 		gtk_widget_set_sensitive (copies->last_spin, FALSE);
 
-		gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
-					1, copies->labels_per_sheet);
+		gl_mini_preview_highlight_range (GL_MINI_PREVIEW(copies->mini_preview),
+                                                 1, copies->labels_per_sheet);
 
 	} else {
 
@@ -228,7 +228,7 @@ sheets_radio_cb (GtkToggleButton * togglebutton,
 		last =
 		    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 						      (copies->last_spin));
-		gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
+		gl_mini_preview_highlight_range (GL_MINI_PREVIEW(copies->mini_preview),
 						 first, last);
 
 	}
@@ -254,7 +254,7 @@ first_spin_cb (GtkSpinButton * spinbutton,
 	gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (copies->last_spin))->
 	    lower = first;
 
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW(copies->mini_preview),
 					 first, last);
 }
 
@@ -278,7 +278,7 @@ last_spin_cb (GtkSpinButton * spinbutton,
 	gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (copies->first_spin))->
 	    upper = last;
 
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(copies->mini_preview),
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW(copies->mini_preview),
 					 first, last);
 }
 
@@ -286,7 +286,7 @@ last_spin_cb (GtkSpinButton * spinbutton,
 /* PRIVATE.  Canvas event handler, select first and last items.             */
 /*--------------------------------------------------------------------------*/
 static void
-preview_pressed (glWdgtMiniPreview *mini_preview,
+preview_pressed (glMiniPreview *mini_preview,
 		 gint first,
 		 gint last,
 		 gpointer user_data)

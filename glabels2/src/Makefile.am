@@ -171,8 +171,8 @@ glabels_SOURCES = 			\
 	wdgt-print-merge.h		\
 	wdgt-media-select.c		\
 	wdgt-media-select.h		\
-	wdgt-mini-preview.c		\
-	wdgt-mini-preview.h		\
+	mini-preview.c			\
+	mini-preview.h			\
 	wdgt-rotate-label.c		\
 	wdgt-rotate-label.h		\
 	wdgt-chain-button.c		\
@@ -268,8 +268,8 @@ glabels_batch_SOURCES = 		\
 	wdgt-print-copies.h		\
 	wdgt-print-merge.c		\
 	wdgt-print-merge.h		\
-	wdgt-mini-preview.c		\
-	wdgt-mini-preview.h		\
+	mini-preview.c			\
+	mini-preview.h			\
 	hig.h				\
 	cairo-label-path.c		\
 	cairo-label-path.h		\

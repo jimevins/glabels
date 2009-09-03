@@ -35,7 +35,7 @@
 #include <gtk/gtkvbox.h>
 
 #include "hig.h"
-#include "wdgt-mini-preview.h"
+#include "mini-preview.h"
 #include "marshal.h"
 
 #include "pixmaps/collate.xpm"
@@ -43,8 +43,8 @@
 
 #include "debug.h"
 
-#define WDGT_MINI_PREVIEW_HEIGHT 175
-#define WDGT_MINI_PREVIEW_WIDTH  150
+#define MINI_PREVIEW_HEIGHT 175
+#define MINI_PREVIEW_WIDTH  150
 
 /*===========================================*/
 /* Private globals                           */
@@ -59,7 +59,7 @@ static void gl_wdgt_print_merge_finalize      (GObject * object);
 static void gl_wdgt_print_merge_construct     (glWdgtPrintMerge * merge,
 					       glLabel * label);
 
-static void preview_clicked                   (glWdgtMiniPreview *mini_preview,
+static void preview_clicked                   (glMiniPreview *mini_preview,
 					       gint i_label,
 					       gpointer user_data);
 
@@ -136,13 +136,13 @@ gl_wdgt_print_merge_construct (glWdgtPrintMerge * merge,
 	merge->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	/* mini_preview canvas */
-	merge->mini_preview = gl_wdgt_mini_preview_new (WDGT_MINI_PREVIEW_HEIGHT,
-							WDGT_MINI_PREVIEW_WIDTH);
-	gl_wdgt_mini_preview_set_template( GL_WDGT_MINI_PREVIEW (merge->mini_preview),
-					   label->template );
+	merge->mini_preview = gl_mini_preview_new (MINI_PREVIEW_HEIGHT,
+                                                   MINI_PREVIEW_WIDTH);
+	gl_mini_preview_set_template( GL_MINI_PREVIEW (merge->mini_preview),
+                                      label->template );
 	gtk_box_pack_start (GTK_BOX(whbox), merge->mini_preview, FALSE, FALSE, 0);
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
-					      1, 1);
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW(merge->mini_preview),
+                                         1, 1);
 
 	wvbox = gtk_vbox_new (FALSE, GL_HIG_PAD1);
 	gtk_box_pack_start (GTK_BOX(whbox), wvbox, FALSE, FALSE, 0);
@@ -236,7 +236,7 @@ spin_cb (GtkSpinButton * spinbutton,
 	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 					      (merge->copies_spin));
 	last = first + (n_copies * merge->n_records) - 1;
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW(merge->mini_preview),
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW(merge->mini_preview),
 					 first, last );
 
 	gtk_widget_set_sensitive (merge->collate_check, (n_copies > 1));
@@ -247,7 +247,7 @@ spin_cb (GtkSpinButton * spinbutton,
 /* PRIVATE.  Canvas event handler, select first and last items.             */
 /*--------------------------------------------------------------------------*/
 static void
-preview_clicked (glWdgtMiniPreview *mini_preview,
+preview_clicked (glMiniPreview *mini_preview,
 		 gint first,
 		 gpointer user_data)
 {
@@ -261,7 +261,7 @@ preview_clicked (glWdgtMiniPreview *mini_preview,
 	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 					      (merge->copies_spin));
 	last = first + (n_copies * merge->n_records) - 1;
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW (merge->mini_preview),
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW (merge->mini_preview),
 					 first, last);
 
 }
@@ -311,6 +311,6 @@ gl_wdgt_print_merge_set_copies (glWdgtPrintMerge * merge,
 				      collate_flag);
 
 	last_label = first_label + (n_copies * n_records) - 1;
-	gl_wdgt_mini_preview_highlight_range (GL_WDGT_MINI_PREVIEW (merge->mini_preview),
+	gl_mini_preview_highlight_range (GL_MINI_PREVIEW (merge->mini_preview),
 					 first_label, last_label );
 }
