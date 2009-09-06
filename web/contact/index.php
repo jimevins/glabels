@@ -64,6 +64,16 @@ Feature requests should be submitted to the
     </ul>
   </li>
 </ul>
+
+<ul>
+  <li>Automated commit list: glabels-commit@lists.sourceforge.net
+    <ul>
+      <li><?a("http://lists.sourceforge.net/lists/listinfo/glabels-commit","Join");?></li>
+      <li><?a("http://sourceforge.net/mailarchive/forum.php?forum=glabels-commit","Archives");?></li>
+    </ul>
+  </li>
+</ul>
+
   
 
 <h2>Want to help?</h2>
