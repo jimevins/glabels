@@ -180,6 +180,7 @@ gl_color_button_finalize (GObject *object)
         g_return_if_fail (object && IS_GL_COLOR_BUTTON (object));
         this = GL_COLOR_BUTTON (object);
 
+        g_object_ref_sink (this->priv->menu);
         g_free (this->priv);
 
         G_OBJECT_CLASS (gl_color_button_parent_class)->finalize (object);

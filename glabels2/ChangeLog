@@ -1,5 +1,10 @@
 2009-09-06  Jim Evins  <evins@snaught.com>
 
+	* src/color-button.c: (gl_color_button_finalize):
+		Unreference menu in finalize.
+
+2009-09-06  Jim Evins  <evins@snaught.com>
+
 	Some major refinements to the glColorCombo family of widgets.
 	
 	* src/Makefile.am:
