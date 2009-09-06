@@ -1,6 +1,6 @@
 /*
  *  color-combo.h
- *  Copyright (C) 2008  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2008-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -22,7 +22,7 @@
 #define __GL_COLOR_COMBO_H__
 
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtktogglebutton.h>
 
 
 G_BEGIN_DECLS
@@ -41,13 +41,13 @@ typedef struct _glColorComboClass     glColorComboClass;
 
 
 struct _glColorCombo {
-        GtkHBox                        parent;
+        GtkToggleButton                parent;
 
         glColorComboPrivate           *priv;
 };
 
 struct _glColorComboClass {
-        GtkHBoxClass                   parent_class;
+        GtkToggleButtonClass           parent_class;
 
         /*
          * Signals
@@ -62,8 +62,7 @@ struct _glColorComboClass {
 
 GType            gl_color_combo_get_type          (void) G_GNUC_CONST;
 
-GtkWidget       *gl_color_combo_new               (GdkPixbuf     *icon,
-                                                   const gchar   *default_label,
+GtkWidget       *gl_color_combo_new               (const gchar   *default_label,
                                                    guint          default_color,
                                                    guint          color);
 

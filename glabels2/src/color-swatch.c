@@ -92,6 +92,8 @@ gl_color_swatch_class_init (glColorSwatchClass *class)
 static void
 gl_color_swatch_init (glColorSwatch *this)
 {
+        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (this), GTK_NO_WINDOW);
+
 	this->priv = g_new0 (glColorSwatchPrivate, 1);
 }
 
@@ -179,6 +181,8 @@ expose_event_cb (GtkWidget      *widget,
 			event->area.x, event->area.y,
 			event->area.width, event->area.height);
 	cairo_clip (cr);
+
+        cairo_translate (cr, widget->allocation.x, widget->allocation.y);
 
 	draw_swatch (GL_COLOR_SWATCH (widget), cr);
 

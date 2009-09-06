@@ -26,6 +26,7 @@
 #include <gtk/gtkbuilder.h>
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkstock.h>
+#include <gtk/gtkbox.h>
 #include <gtk/gtkcombobox.h>
 #include <gtk/gtkspinbutton.h>
 
@@ -337,22 +338,25 @@ construct_object_page (glPrefsDialog *dialog)
 
 	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->text_family_combo));
 
-	dialog->priv->text_color_combo = gl_color_combo_new (NULL, _("Default"),
+	dialog->priv->text_color_combo = gl_color_combo_new (_("Default"),
                                                              GL_COLOR_TEXT_DEFAULT,
                                                              gl_prefs->default_text_color);
-	dialog->priv->line_color_combo = gl_color_combo_new (NULL, _("No Line"),
+	dialog->priv->line_color_combo = gl_color_combo_new (_("No Line"),
                                                              GL_COLOR_NO_LINE,
                                                              gl_prefs->default_line_color);
-	dialog->priv->fill_color_combo = gl_color_combo_new (NULL, _("No Fill"),
+	dialog->priv->fill_color_combo = gl_color_combo_new (_("No Fill"),
                                                              GL_COLOR_NO_FILL,
                                                              gl_prefs->default_fill_color);
 
-        gtk_container_add (GTK_CONTAINER (dialog->priv->text_color_hbox),
-                           dialog->priv->text_color_combo);
-        gtk_container_add (GTK_CONTAINER (dialog->priv->line_color_hbox),
-                           dialog->priv->line_color_combo);
-        gtk_container_add (GTK_CONTAINER (dialog->priv->fill_color_hbox),
-                           dialog->priv->fill_color_combo);
+        gtk_box_pack_start (GTK_BOX (dialog->priv->text_color_hbox),
+                            dialog->priv->text_color_combo,
+                            FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (dialog->priv->line_color_hbox),
+                            dialog->priv->line_color_combo,
+                            FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_CONTAINER (dialog->priv->fill_color_hbox),
+                            dialog->priv->fill_color_combo,
+                            FALSE, FALSE, 0);
 
         /* Load family names */
         family_names = gl_util_get_font_family_list ();

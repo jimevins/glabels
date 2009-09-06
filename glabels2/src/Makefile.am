@@ -181,6 +181,8 @@ glabels_SOURCES = 			\
 	wdgt-merge-menu.h		\
 	color-combo.c			\
 	color-combo.h			\
+	color-button.c			\
+	color-button.h			\
 	color-combo-menu.c		\
 	color-combo-menu.h		\
 	color-combo-color-menu-item.c	\

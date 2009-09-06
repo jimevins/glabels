@@ -31,7 +31,7 @@
 #include <string.h>
 
 #include "util.h"
-#include "color-combo.h"
+#include "color-button.h"
 #include "stock-pixmaps/stockpixbufs.h"
 #include "prefs.h"
 #include "color.h"
@@ -69,10 +69,10 @@ struct _glUIPropertyBarPrivate {
 
 	/* Color combos */
         GtkWidget  *text_color_eventbox;
-	GtkWidget  *text_color_combo;
-	GtkWidget  *fill_color_combo;
+	GtkWidget  *text_color_button;
+	GtkWidget  *fill_color_button;
         GtkWidget  *fill_color_eventbox;
-	GtkWidget  *line_color_combo;
+	GtkWidget  *line_color_button;
         GtkWidget  *line_color_eventbox;
 
 	/* Line width */
@@ -104,17 +104,17 @@ static void     font_family_changed_cb           (GtkComboBox          *combo,
 static void     font_size_changed_cb             (GtkSpinButton        *spin,
 						  glUIPropertyBar      *this);
 
-static void     text_color_changed_cb            (glColorCombo         *cc,
+static void     text_color_changed_cb            (glColorButton        *cc,
                                                   guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *this);
 
-static void     fill_color_changed_cb            (glColorCombo         *cc,
+static void     fill_color_changed_cb            (glColorButton        *cc,
                                                   guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *this);
 
-static void     line_color_changed_cb            (glColorCombo         *cc,
+static void     line_color_changed_cb            (glColorButton        *cc,
                                                   guint                 color,
 						  gboolean              is_default,
 						  glUIPropertyBar      *this);
@@ -273,40 +273,40 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 	gtk_container_add (GTK_CONTAINER (this), this->priv->tool_bar);
 
         pixbuf = gdk_pixbuf_new_from_inline (-1, stock_text_24, FALSE, NULL);
-        this->priv->text_color_combo =
-                gl_color_combo_new (pixbuf,
-                                    _("Default"),
-                                    GL_COLOR_TEXT_DEFAULT,
-                                    gl_prefs->default_text_color);
-	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->text_color_combo),
-                                   GTK_RELIEF_NONE);
+        this->priv->text_color_button =
+                gl_color_button_new (pixbuf,
+                                     _("Default"),
+                                     GL_COLOR_TEXT_DEFAULT,
+                                     gl_prefs->default_text_color);
+        gl_color_button_set_relief (GL_COLOR_BUTTON(this->priv->text_color_button),
+                                    GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->text_color_eventbox),
-                           this->priv->text_color_combo);
+                           this->priv->text_color_button);
 
         pixbuf = gdk_pixbuf_new_from_inline (-1, stock_bucket_fill_24, FALSE, NULL);
-        this->priv->fill_color_combo =
-                gl_color_combo_new (pixbuf,
-                                    _("No Fill"),
-                                    GL_COLOR_NO_FILL,
-                                    gl_prefs->default_fill_color);
-	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->fill_color_combo),
-                                   GTK_RELIEF_NONE);
+        this->priv->fill_color_button =
+                gl_color_button_new (pixbuf,
+                                     _("No Fill"),
+                                     GL_COLOR_NO_FILL,
+                                     gl_prefs->default_fill_color);
+        gl_color_button_set_relief (GL_COLOR_BUTTON(this->priv->fill_color_button),
+                                    GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->fill_color_eventbox),
-                           this->priv->fill_color_combo);
+                           this->priv->fill_color_button);
 
         pixbuf = gdk_pixbuf_new_from_inline (-1, stock_pencil_24, FALSE, NULL);
-        this->priv->line_color_combo =
-                gl_color_combo_new (pixbuf,
-                                    _("No Line"),
-                                    GL_COLOR_NO_LINE,
-                                    gl_prefs->default_line_color);
-	gl_color_combo_set_relief (GL_COLOR_COMBO(this->priv->line_color_combo),
-                                   GTK_RELIEF_NONE);
+        this->priv->line_color_button =
+                gl_color_button_new (pixbuf,
+                                     _("No Line"),
+                                     GL_COLOR_NO_LINE,
+                                     gl_prefs->default_line_color);
+	gl_color_button_set_relief (GL_COLOR_BUTTON(this->priv->line_color_button),
+                                    GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
         gtk_container_add (GTK_CONTAINER (this->priv->line_color_eventbox),
-                           this->priv->line_color_combo);
+                           this->priv->line_color_button);
 
         /* Save reference to gui tree so we don't lose tooltips */
         this->priv->builder = builder;
@@ -372,20 +372,20 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 
 	/* Text color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->text_color_combo), gl_prefs->default_text_color);
-	g_signal_connect (G_OBJECT (this->priv->text_color_combo),
+	gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->text_color_button), gl_prefs->default_text_color);
+	g_signal_connect (G_OBJECT (this->priv->text_color_button),
 			  "color_changed",
 			  G_CALLBACK (text_color_changed_cb), this);
 
 	/* Fill color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->fill_color_combo), gl_prefs->default_fill_color);
-	g_signal_connect (G_OBJECT (this->priv->fill_color_combo),
+	gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->fill_color_button), gl_prefs->default_fill_color);
+	g_signal_connect (G_OBJECT (this->priv->fill_color_button),
 			  "color_changed",
 			  G_CALLBACK (fill_color_changed_cb), this);
 
 	/* Line color widget */
-	gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->line_color_combo), gl_prefs->default_line_color);
-	g_signal_connect (G_OBJECT (this->priv->line_color_combo),
+	gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->line_color_button), gl_prefs->default_line_color);
+	g_signal_connect (G_OBJECT (this->priv->line_color_button),
 			  "color_changed",
 			  G_CALLBACK (line_color_changed_cb), this);
 
@@ -448,11 +448,11 @@ reset_to_default_properties (glView *view,
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
 					   (view->default_text_alignment == PANGO_ALIGN_RIGHT));
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->text_color_combo), view->default_text_color);
+	gl_color_button_set_color (GL_COLOR_BUTTON(this->priv->text_color_button), view->default_text_color);
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->fill_color_combo), view->default_fill_color);
+	gl_color_button_set_color (GL_COLOR_BUTTON(this->priv->fill_color_button), view->default_fill_color);
 
-	gl_color_combo_set_color (GL_COLOR_COMBO(this->priv->line_color_combo), view->default_line_color);
+	gl_color_button_set_color (GL_COLOR_BUTTON(this->priv->line_color_button), view->default_line_color);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->line_width_spin),
 				   view->default_line_width);
@@ -621,7 +621,7 @@ update_text_properties (glView *view,
 	if (is_same_text_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same text color = %08x", selection_text_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->text_color_combo),
+		gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->text_color_button),
                                           selection_text_color);
 	}
 
@@ -713,7 +713,7 @@ update_fill_color (glView *view,
 	if (is_same_fill_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same fill color = %08x", selection_fill_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->fill_color_combo),
+		gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->fill_color_button),
                                           selection_fill_color);
 	}
 }
@@ -777,7 +777,7 @@ update_line_color (glView *view,
 	if (is_same_line_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line color = %08x", selection_line_color);
-		gl_color_combo_set_color (GL_COLOR_COMBO (this->priv->line_color_combo),
+		gl_color_button_set_color (GL_COLOR_BUTTON (this->priv->line_color_button),
                                           selection_line_color);
 	}
 }
@@ -933,7 +933,7 @@ font_size_changed_cb (GtkSpinButton        *spin,
 /* PRIVATE.  Text color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-text_color_changed_cb (glColorCombo         *cc,
+text_color_changed_cb (glColorButton        *cc,
                        guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *this)
@@ -981,7 +981,7 @@ text_color_changed_cb (glColorCombo         *cc,
 /* PRIVATE.  Fill color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-fill_color_changed_cb (glColorCombo         *cc,
+fill_color_changed_cb (glColorButton        *cc,
                        guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *this)
@@ -1030,7 +1030,7 @@ fill_color_changed_cb (glColorCombo         *cc,
 /* PRIVATE.  Line color combo changed.                                      */
 /*--------------------------------------------------------------------------*/
 static void
-line_color_changed_cb (glColorCombo         *cc,
+line_color_changed_cb (glColorButton        *cc,
                        guint                 color,
 		       gboolean              is_default,
 		       glUIPropertyBar      *this)
@@ -1213,9 +1213,9 @@ set_doc_items_sensitive (glUIPropertyBar      *this,
 	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
 	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
 	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (this->priv->text_color_combo,        state);
-	gtk_widget_set_sensitive (this->priv->fill_color_combo,        state);
-	gtk_widget_set_sensitive (this->priv->line_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->text_color_button,       state);
+	gtk_widget_set_sensitive (this->priv->fill_color_button,       state);
+	gtk_widget_set_sensitive (this->priv->line_color_button,       state);
 	gtk_widget_set_sensitive (this->priv->line_width_spin,         state);
 }
 
@@ -1234,7 +1234,7 @@ set_text_items_sensitive (glUIPropertyBar      *this,
 	gtk_widget_set_sensitive (this->priv->text_align_left_radio,   state);
 	gtk_widget_set_sensitive (this->priv->text_align_center_radio, state);
 	gtk_widget_set_sensitive (this->priv->text_align_right_radio,  state);
-	gtk_widget_set_sensitive (this->priv->text_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->text_color_button,       state);
 }
 
 
@@ -1245,7 +1245,7 @@ static void
 set_fill_items_sensitive (glUIPropertyBar      *this,
 			  gboolean              state)
 {
-	gtk_widget_set_sensitive (this->priv->fill_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->fill_color_button,       state);
 }
 
 
@@ -1256,7 +1256,7 @@ static void
 set_line_color_items_sensitive (glUIPropertyBar      *this,
 				gboolean              state)
 {
-	gtk_widget_set_sensitive (this->priv->line_color_combo,        state);
+	gtk_widget_set_sensitive (this->priv->line_color_button,       state);
 }
 
 

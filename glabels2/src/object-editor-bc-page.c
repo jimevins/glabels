@@ -90,12 +90,12 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 
 	editor->priv->data_format_fixed_flag = FALSE;
 
-	editor->priv->bc_color_combo = gl_color_combo_new (NULL,
-                                                           _("Default"),
+	editor->priv->bc_color_combo = gl_color_combo_new (_("Default"),
                                                            GL_COLOR_BC_DEFAULT,
                                                            gl_prefs->default_line_color);
-        gtk_container_add (GTK_CONTAINER (editor->priv->bc_color_hbox),
-                           editor->priv->bc_color_combo);
+        gtk_box_pack_start (GTK_BOX (editor->priv->bc_color_hbox),
+                            editor->priv->bc_color_combo,
+                            FALSE, FALSE, 0);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));

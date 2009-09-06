@@ -1,3 +1,45 @@
+2009-09-06  Jim Evins  <evins@snaught.com>
+
+	Some major refinements to the glColorCombo family of widgets.
+	
+	* src/Makefile.am:
+	* src/color-button.c:
+	* src/color-button.h:
+		New widget: glColorButton.  This widget is a button that applies
+		the currently selected color with a ColorCombo type dropdown button
+		to change that selected color.  This is basically the old
+		glColorCombo widget.
+	* src/color-combo.c: (gl_color_combo_init),
+	(gl_color_combo_finalize), (gl_color_combo_new),
+	(button_press_event_cb), (menu_color_changed_cb),
+	(menu_selection_done_cb):
+	* src/color-combo.h:
+		The glColorCombo widget has been modified to be a single button
+		that is only used to change the selected color.
+	* src/color-swatch.c: (gl_color_swatch_init), (expose_event_cb):
+		Draw on parent containers window to allow an effective
+		transparency.
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page):
+	* src/object-editor-fill-page.c:
+	(gl_object_editor_prepare_fill_page):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page):
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_prepare_shadow_page):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page):
+	* src/prefs-dialog.c: (construct_object_page):
+		Change how ColorCombos are packed so that they don't
+		expand to fill hbox.
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties), (update_text_properties),
+	(update_fill_color), (update_line_color), (text_color_changed_cb),
+	(fill_color_changed_cb), (line_color_changed_cb),
+	(set_doc_items_sensitive), (set_text_items_sensitive),
+	(set_fill_items_sensitive), (set_line_color_items_sensitive):
+		The property bar now uses the new glColorButton instead of
+		glColorCombo.
+	
 2009-09-02  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:

@@ -90,8 +90,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
                                      "shadow_opacity_spin",   &editor->priv->shadow_opacity_spin,
                                      NULL);
 
-	editor->priv->shadow_color_combo = gl_color_combo_new (NULL,
-                                                               _("Default"),
+	editor->priv->shadow_color_combo = gl_color_combo_new (_("Default"),
                                                                GL_COLOR_SHADOW_DEFAULT,
                                                                GL_COLOR_SHADOW_DEFAULT);
         gtk_container_add (GTK_CONTAINER (editor->priv->shadow_color_hbox),

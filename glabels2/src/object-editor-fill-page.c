@@ -76,12 +76,12 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
                                      "fill_color_radio", &editor->priv->fill_color_radio,
                                      NULL);
 	
-	editor->priv->fill_color_combo = gl_color_combo_new (NULL,
-                                                             _("No Fill"),
+	editor->priv->fill_color_combo = gl_color_combo_new (_("No Fill"),
                                                              GL_COLOR_NO_FILL,
                                                              gl_prefs->default_fill_color);
-        gtk_container_add (GTK_CONTAINER (editor->priv->fill_color_hbox),
-                           editor->priv->fill_color_combo);
+        gtk_box_pack_start (GTK_BOX (editor->priv->fill_color_hbox),
+                            editor->priv->fill_color_combo,
+                            FALSE, FALSE, 0);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
 

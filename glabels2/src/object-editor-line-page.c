@@ -78,12 +78,12 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
                                      "line_color_radio", &editor->priv->line_color_radio,
                                      NULL);
 
-	editor->priv->line_color_combo = gl_color_combo_new (NULL,
-                                                             _("No Line"),
+	editor->priv->line_color_combo = gl_color_combo_new (_("No Line"),
                                                              GL_COLOR_NO_LINE,
                                                              gl_prefs->default_line_color);
-        gtk_container_add (GTK_CONTAINER (editor->priv->line_color_hbox),
-                           editor->priv->line_color_combo);
+        gtk_box_pack_start (GTK_BOX (editor->priv->line_color_hbox),
+                            editor->priv->line_color_combo,
+                            FALSE, FALSE, 0);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->line_key_combo));
 

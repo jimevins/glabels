@@ -90,12 +90,12 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                                      "text_auto_shrink_check", &editor->priv->text_auto_shrink_check,
                                      NULL);
 
-	editor->priv->text_color_combo = gl_color_combo_new (NULL,
-                                                             _("Default"),
+	editor->priv->text_color_combo = gl_color_combo_new (_("Default"),
                                                              GL_COLOR_TEXT_DEFAULT,
                                                              gl_prefs->default_text_color);
-        gtk_container_add (GTK_CONTAINER (editor->priv->text_color_hbox),
-                           editor->priv->text_color_combo);
+        gtk_box_pack_start (GTK_BOX (editor->priv->text_color_hbox),
+                            editor->priv->text_color_combo,
+                            FALSE, FALSE, 0);
 
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_family_combo));
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
