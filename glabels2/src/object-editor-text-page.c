@@ -31,6 +31,8 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
+#include "font-combo.h"
+#include "font-util.h"
 #include "util.h"
 
 #include "object-editor-private.h"
@@ -75,7 +77,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	/* Extract widgets from XML tree. */
         gl_util_get_builder_widgets (editor->priv->builder,
                                      "text_page_vbox",         &editor->priv->text_page_vbox,
-                                     "text_family_combo",      &editor->priv->text_family_combo,
+                                     "text_family_hbox",       &editor->priv->text_family_hbox,
                                      "text_size_spin",         &editor->priv->text_size_spin,
                                      "text_bold_toggle",       &editor->priv->text_bold_toggle,
                                      "text_italic_toggle",     &editor->priv->text_italic_toggle,
@@ -90,6 +92,11 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                                      "text_auto_shrink_check", &editor->priv->text_auto_shrink_check,
                                      NULL);
 
+	editor->priv->text_family_combo = gl_font_combo_new ("Sans");
+        gtk_box_pack_start (GTK_BOX (editor->priv->text_family_hbox),
+                            editor->priv->text_family_combo,
+                            TRUE, TRUE, 0);
+
 	editor->priv->text_color_combo = gl_color_combo_new (_("Default"),
                                                              GL_COLOR_TEXT_DEFAULT,
                                                              gl_prefs->default_text_color);
@@ -97,13 +104,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                             editor->priv->text_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_family_combo));
 	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
-
-	/* Load family names */
-	family_names = gl_util_get_font_family_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->text_family_combo),
-				       family_names);
 
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
@@ -232,13 +233,13 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 
         editor->priv->stop_signals = TRUE;
 
-	old_font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo));
+	old_font_family = gl_font_combo_get_family (GL_FONT_COMBO (editor->priv->text_family_combo));
 
         if ( !old_font_family || g_utf8_collate( old_font_family, font_family ) )
         {
 
                 /* Make sure we have a valid font family.  if not provide a good default. */
-                family_names = gl_util_get_font_family_list ();
+                family_names = gl_font_util_get_all_families ();
                 if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
                         good_font_family = g_strdup (font_family);
                 } else {
@@ -248,7 +249,7 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
                                 good_font_family = NULL;
                         }
                 }
-                gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo), good_font_family);
+                gl_font_combo_set_family (GL_FONT_COMBO (editor->priv->text_family_combo), good_font_family);
                 g_free (good_font_family);
         }
 
@@ -270,7 +271,7 @@ gl_object_editor_get_font_family (glObjectEditor      *editor)
 
 	gl_debug (DEBUG_EDITOR, "START");
 
-	font_family = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_family_combo));
+	font_family = gl_font_combo_get_family (GL_FONT_COMBO (editor->priv->text_family_combo));
 
 	gl_debug (DEBUG_EDITOR, "END");
 

@@ -34,6 +34,8 @@
 #include "hig.h"
 #include "color-combo.h"
 #include "color.h"
+#include "font-combo.h"
+#include "font-util.h"
 #include "util.h"
 
 #include "debug.h"
@@ -65,6 +67,7 @@ struct _glPrefsDialogPrivate
 	GtkWidget	*page_size_a4_radio;
 
 	/* Default text properties */
+	GtkWidget       *text_family_hbox;
 	GtkWidget       *text_family_combo;
 	GtkWidget       *text_size_spin;
 	GtkWidget       *text_bold_toggle;
@@ -322,7 +325,7 @@ construct_object_page (glPrefsDialog *dialog)
         GList    *family_names;
 
         gl_util_get_builder_widgets (dialog->priv->builder,
-                                     "text_family_combo",      &dialog->priv->text_family_combo,
+                                     "text_family_hbox",       &dialog->priv->text_family_hbox,
                                      "text_size_spin",         &dialog->priv->text_size_spin,
                                      "text_bold_toggle",       &dialog->priv->text_bold_toggle,
                                      "text_italic_toggle",     &dialog->priv->text_italic_toggle,
@@ -336,7 +339,7 @@ construct_object_page (glPrefsDialog *dialog)
                                      "fill_color_hbox",        &dialog->priv->fill_color_hbox,
                                      NULL);
 
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->text_family_combo));
+        dialog->priv->text_family_combo = gl_font_combo_new ("Sans");
 
 	dialog->priv->text_color_combo = gl_color_combo_new (_("Default"),
                                                              GL_COLOR_TEXT_DEFAULT,
@@ -348,21 +351,18 @@ construct_object_page (glPrefsDialog *dialog)
                                                              GL_COLOR_NO_FILL,
                                                              gl_prefs->default_fill_color);
 
+        gtk_box_pack_start (GTK_BOX (dialog->priv->text_family_hbox),
+                            dialog->priv->text_family_combo,
+                            FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (dialog->priv->text_color_hbox),
                             dialog->priv->text_color_combo,
                             FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (dialog->priv->line_color_hbox),
                             dialog->priv->line_color_combo,
                             FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_CONTAINER (dialog->priv->fill_color_hbox),
+        gtk_box_pack_start (GTK_BOX (dialog->priv->fill_color_hbox),
                             dialog->priv->fill_color_combo,
                             FALSE, FALSE, 0);
-
-        /* Load family names */
-        family_names = gl_util_get_font_family_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->text_family_combo),
-				       family_names);
-                                                                                
 
 	g_signal_connect_swapped (G_OBJECT(dialog->priv->text_family_combo),
 				  "changed",
@@ -517,15 +517,15 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 static void
 update_object_page_from_prefs (glPrefsDialog *dialog)
 {
-        GList    *family_names;
-        gchar    *good_font_family;
+        const GList *family_names;
+        gchar       *good_font_family;
  
 	dialog->priv->stop_signals = TRUE;
 
 
         /* Make sure we have a valid font family.  if not provide a good default. */
-        family_names = gl_util_get_font_family_list ();
-        if (g_list_find_custom (family_names,
+        family_names = gl_font_util_get_all_families ();
+        if (g_list_find_custom ((GList *)family_names,
 				gl_prefs->default_font_family,
 				(GCompareFunc)g_utf8_collate))
         {
@@ -542,8 +542,8 @@ update_object_page_from_prefs (glPrefsDialog *dialog)
                         good_font_family = NULL;
                 }
         }
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->text_family_combo),
-					   good_font_family);
+	gl_font_combo_set_family (GL_FONT_COMBO (dialog->priv->text_family_combo),
+                                  good_font_family);
         g_free (good_font_family);
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->text_size_spin),
@@ -637,7 +637,7 @@ update_prefs_from_object_page (glPrefsDialog *dialog)
 
         g_free (gl_prefs->default_font_family);
         gl_prefs->default_font_family =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (dialog->priv->text_family_combo));
+		gl_font_combo_get_family (GL_FONT_COMBO (dialog->priv->text_family_combo));
         gl_prefs->default_font_size =
                 gtk_spin_button_get_value (GTK_SPIN_BUTTON(dialog->priv->text_size_spin));
 

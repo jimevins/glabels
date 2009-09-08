@@ -51,8 +51,6 @@ void gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 					const gchar       *text);
 void gl_util_combo_box_add_text_model  (GtkComboBox       *combo);
 
-GList  *gl_util_get_font_family_list (void);
-
 GdkPixbuf *gl_util_cairo_convert_to_pixbuf (cairo_surface_t *surface);
 
 void gl_util_get_builder_widgets (GtkBuilder *builder,

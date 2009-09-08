@@ -1,6 +1,6 @@
 /*
- *  color-combo.c
- *  Copyright (C) 2008-2009  Jim Evins <evins@snaught.com>.
+ *  font-combo.c
+ *  Copyright (C) 2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -20,40 +20,33 @@
 
 #include <config.h>
 
-#include "color-combo.h"
+#include "font-combo.h"
 
-#include "color-combo-menu.h"
+#include "font-combo-menu.h"
 #include <glib/gi18n.h>
 #include <gtk/gtkhbox.h>
-#include "color-swatch.h"
+#include <gtk/gtklabel.h>
 #include <gtk/gtkarrow.h>
 #include "marshal.h"
-#include "color.h"
 
-
-#define IMAGE_W 24
-#define IMAGE_H 24
 
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_COLOR_COMBO Private fields */
-struct _glColorComboPrivate {
+/** GL_FONT_COMBO Private fields */
+struct _glFontComboPrivate {
 
-        guint       color;
-        gboolean    is_default_flag;
+        gchar      *font_family;
 
-        guint       default_color;
-
-        GtkWidget  *swatch;
+        GtkWidget  *label;
 
         GtkWidget  *menu;
 };
 
 enum {
-        COLOR_CHANGED,
+        CHANGED,
         LAST_SIGNAL
 };
 
@@ -69,54 +62,50 @@ static guint signals[LAST_SIGNAL] = {0};
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_color_combo_finalize      (GObject             *object);
+static void gl_font_combo_finalize      (GObject             *object);
 
 static gboolean
 button_press_event_cb (GtkWidget      *widget,
                        GdkEventButton *event,
-                       glColorCombo   *this);
+                       glFontCombo    *this);
 
 static void
-menu_color_changed_cb (glColorComboMenu   *object,
-                       guint               color,
-                       gboolean            is_default,
-                       glColorCombo       *this);
+menu_font_changed_cb   (glFontComboMenu  *menu,
+                        glFontCombo      *this);
 
 static void
-menu_selection_done_cb (GtkMenuShell      *object,
-                        glColorCombo      *this);
+menu_selection_done_cb (GtkMenuShell     *object,
+                        glFontCombo      *this);
 
 
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glColorCombo, gl_color_combo, GTK_TYPE_TOGGLE_BUTTON);
+G_DEFINE_TYPE (glFontCombo, gl_font_combo, GTK_TYPE_TOGGLE_BUTTON);
 
 
 /*****************************************************************************/
 /* Class Init Function.                                                      */
 /*****************************************************************************/
 static void
-gl_color_combo_class_init (glColorComboClass *class)
+gl_font_combo_class_init (glFontComboClass *class)
 {
-        GObjectClass       *gobject_class = (GObjectClass *) class;
-        GtkWidgetClass     *widget_class  = (GtkWidgetClass *) class;
-        glColorComboClass  *object_class  = (glColorComboClass *) class;
+        GObjectClass      *gobject_class = (GObjectClass *) class;
+        GtkWidgetClass    *widget_class  = (GtkWidgetClass *) class;
+        glFontComboClass  *object_class  = (glFontComboClass *) class;
 
-        gl_color_combo_parent_class = g_type_class_peek_parent (class);
+        gl_font_combo_parent_class = g_type_class_peek_parent (class);
 
-        gobject_class->finalize = gl_color_combo_finalize;
+        gobject_class->finalize = gl_font_combo_finalize;
 
-        signals[COLOR_CHANGED] =
-                g_signal_new ("color_changed",
+        signals[CHANGED] =
+                g_signal_new ("changed",
                               G_OBJECT_CLASS_TYPE (gobject_class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (glColorComboClass, color_changed),
+                              G_STRUCT_OFFSET (glFontComboClass, changed),
                               NULL, NULL,
-                              gl_marshal_VOID__UINT_BOOLEAN,
-                              G_TYPE_NONE,
-                              2, G_TYPE_POINTER, G_TYPE_BOOLEAN);
-
+                              gl_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
 }
 
 
@@ -124,18 +113,20 @@ gl_color_combo_class_init (glColorComboClass *class)
 /* Object Instance Init Function.                                            */
 /*****************************************************************************/
 static void
-gl_color_combo_init (glColorCombo *this)
+gl_font_combo_init (glFontCombo *this)
 {
         GtkWidget *hbox;
         GtkWidget *arrow;
 
-        this->priv = g_new0 (glColorComboPrivate, 1);
+        this->priv = g_new0 (glFontComboPrivate, 1);
 
         hbox = gtk_hbox_new (FALSE, 3);
         gtk_container_add (GTK_CONTAINER (this), hbox);
         
-        this->priv->swatch = gl_color_swatch_new (IMAGE_W, IMAGE_H, GL_COLOR_NONE);
-        gtk_box_pack_start (GTK_BOX (hbox), this->priv->swatch, TRUE, TRUE, 0);
+        this->priv->label = gtk_label_new ("");
+        gtk_misc_set_alignment (GTK_MISC (this->priv->label), 0.0, 0.5);
+	gtk_widget_set_size_request (this->priv->label, 180, -1);
+        gtk_box_pack_start (GTK_BOX (hbox), this->priv->label, TRUE, TRUE, 0);
 
         arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_IN);
         gtk_box_pack_end (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
@@ -149,17 +140,18 @@ gl_color_combo_init (glColorCombo *this)
 /* Finalize Method.                                                          */
 /*****************************************************************************/
 static void
-gl_color_combo_finalize (GObject *object)
+gl_font_combo_finalize (GObject *object)
 {
-        glColorCombo    *this;
+        glFontCombo    *this;
 
-        g_return_if_fail (object && IS_GL_COLOR_COMBO (object));
-        this = GL_COLOR_COMBO (object);
+        g_return_if_fail (object && IS_GL_FONT_COMBO (object));
+        this = GL_FONT_COMBO (object);
 
+        g_free (this->priv->font_family);
         g_object_ref_sink (this->priv->menu);
         g_free (this->priv);
 
-        G_OBJECT_CLASS (gl_color_combo_parent_class)->finalize (object);
+        G_OBJECT_CLASS (gl_font_combo_parent_class)->finalize (object);
 }
 
 
@@ -167,32 +159,22 @@ gl_color_combo_finalize (GObject *object)
 /** New Object Generator.                                                    */
 /*****************************************************************************/
 GtkWidget *
-gl_color_combo_new (const gchar  *default_label,
-                    guint         default_color,
-                    guint         color)
+gl_font_combo_new (const gchar  *font_family)
 {
-        glColorCombo *this;
-        GdkPixbuf    *pixbuf;
-        GtkWidget    *wimage;
+        glFontCombo  *this;
 
-        this = g_object_new (TYPE_GL_COLOR_COMBO, NULL);
+        this = g_object_new (TYPE_GL_FONT_COMBO, NULL);
 
-        if (!default_label)
-        {
-                default_label = _("Default Color");
-        }
+        this->priv->font_family = g_strdup (font_family);
 
-        this->priv->default_color = default_color;
-        this->priv->color = color;
+        gtk_label_set_text (GTK_LABEL (this->priv->label), font_family);
 
-        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch), color);
+        this->priv->menu = gl_font_combo_menu_new ();
 
-        this->priv->menu = gl_color_combo_menu_new (default_label,
-                                                    color);
         gtk_widget_show_all (this->priv->menu);
 
-        g_signal_connect (this->priv->menu, "color_changed",
-                          G_CALLBACK (menu_color_changed_cb), this);
+        g_signal_connect (this->priv->menu, "font_changed",
+                          G_CALLBACK (menu_font_changed_cb), this);
         g_signal_connect (this->priv->menu, "selection_done",
                           G_CALLBACK (menu_selection_done_cb), this);
 
@@ -201,40 +183,37 @@ gl_color_combo_new (const gchar  *default_label,
 
 
 /*****************************************************************************/
-/* Set color.                                                                */
+/** Set relief style.                                                        */
 /*****************************************************************************/
 void
-gl_color_combo_set_color (glColorCombo  *this,
-                          guint          color)
+gl_font_combo_set_relief( glFontCombo    *this,
+                          GtkReliefStyle  relief )
 {
-        this->priv->color = color;
-
-        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch), color);
+        gtk_button_set_relief (GTK_BUTTON (this), relief);
 }
 
 
 /*****************************************************************************/
-/* Set to default color.                                                     */
+/* Set font family.                                                          */
 /*****************************************************************************/
 void
-gl_color_combo_set_to_default (glColorCombo  *this)
+gl_font_combo_set_family (glFontCombo  *this,
+                          const gchar  *font_family)
 {
-        gl_color_combo_set_color (this, this->priv->default_color);
+
+        this->priv->font_family = g_strdup (font_family);
+
+        gtk_label_set_text (GTK_LABEL (this->priv->label), font_family);
 }
 
-/*****************************************************************************/
-/* Get color.                                                                */
-/*****************************************************************************/
-guint
-gl_color_combo_get_color (glColorCombo  *this,
-                          gboolean      *is_default)
-{
-        if (is_default)
-        {
-                *is_default = this->priv->is_default_flag;
-        }
 
-        return this->priv->color;
+/*****************************************************************************/
+/* Get font family.                                                          */
+/*****************************************************************************/
+gchar *
+gl_font_combo_get_family (glFontCombo  *this)
+{
+        return g_strdup (this->priv->font_family);
 }
 
 
@@ -248,7 +227,7 @@ menu_position_function (GtkMenu  *menu,
                         gboolean *push_in,
                         gpointer  user_data)
 {
-        glColorCombo *this = GL_COLOR_COMBO (user_data);
+        glFontCombo *this = GL_FONT_COMBO (user_data);
         gint          x1, y1;
         gint          menu_h, menu_w;
 
@@ -284,7 +263,7 @@ menu_position_function (GtkMenu  *menu,
 static gboolean
 button_press_event_cb (GtkWidget      *widget,
                        GdkEventButton *event,
-                       glColorCombo   *this)
+                       glFontCombo   *this)
 {
         switch (event->button)
         {
@@ -308,39 +287,26 @@ button_press_event_cb (GtkWidget      *widget,
 
 
 /*****************************************************************************/
-/* Menu "color changed" callback.                                            */
+/* Menu "font changed" callback.                                             */
 /*****************************************************************************/
 static void
-menu_color_changed_cb (glColorComboMenu     *object,
-                       guint                 color,
-                       gboolean              is_default,
-                       glColorCombo         *this)
+menu_font_changed_cb (glFontComboMenu     *menu,
+                      glFontCombo         *this)
 {
-        if (is_default)
-        {
-                this->priv->color = this->priv->default_color;
-        }
-        else
-        {
-                this->priv->color = color;
-        }
-        this->priv->is_default_flag = is_default;
+        this->priv->font_family = gl_font_combo_menu_get_family (menu);
 
-        gl_color_swatch_set_color (GL_COLOR_SWATCH (this->priv->swatch),
-                                   this->priv->color);
+        gtk_label_set_text (GTK_LABEL (this->priv->label), this->priv->font_family);
 
-        g_signal_emit (this, signals[COLOR_CHANGED], 0,
-                       this->priv->color,
-                       this->priv->is_default_flag);
+        g_signal_emit (this, signals[CHANGED], 0);
 }
 
 
 /*****************************************************************************/
-/* Menu "color changed" callback.                                            */
+/* Menu "selection done" callback.                                           */
 /*****************************************************************************/
 static void
 menu_selection_done_cb (GtkMenuShell         *object,
-                        glColorCombo         *this)
+                        glFontCombo         *this)
 {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this), FALSE);
 }

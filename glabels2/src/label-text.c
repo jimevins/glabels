@@ -29,7 +29,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "util.h"
+#include "font-util.h"
 
 #include "debug.h"
 
@@ -467,7 +467,7 @@ set_font_family (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 	g_return_if_fail (font_family);
 
-	family_names = gl_util_get_font_family_list ();
+	family_names = gl_font_util_get_all_families ();
 	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
 		good_font_family = g_strdup (font_family);
 	} else {

@@ -46,6 +46,7 @@ G_BEGIN_DECLS
 
 #define GL_COLOR_NONE                  GL_COLOR_A(0,0,0,0)
 #define GL_COLOR_BLACK                 GL_COLOR_A(0,0,0,255)
+#define GL_COLOR_WHITE                 GL_COLOR_A(255,255,255,255)
 
 #define GL_COLOR_TEXT_DEFAULT          GL_COLOR_BLACK
 #define GL_COLOR_BC_DEFAULT            GL_COLOR_BLACK

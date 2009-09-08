@@ -310,8 +310,11 @@
                                 <property name="visible">True</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkComboBox" id="text_family_combo">
+                                  <object class="GtkHBox" id="text_family_hbox">
                                     <property name="visible">True</property>
+                                    <child>
+                                      <placeholder/>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="position">0</property>

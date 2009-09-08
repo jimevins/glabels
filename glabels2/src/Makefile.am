@@ -181,8 +181,8 @@ glabels_SOURCES = 			\
 	wdgt-merge-menu.h		\
 	color-combo.c			\
 	color-combo.h			\
-	color-button.c			\
-	color-button.h			\
+	color-combo-button.c		\
+	color-combo-button.h		\
 	color-combo-menu.c		\
 	color-combo-menu.h		\
 	color-combo-color-menu-item.c	\
@@ -191,6 +191,16 @@ glabels_SOURCES = 			\
 	color-combo-history.h		\
 	color-swatch.c			\
 	color-swatch.h			\
+	font-combo.c			\
+	font-combo.h			\
+	font-combo-menu.c		\
+	font-combo-menu.h		\
+	font-combo-menu-item.c		\
+	font-combo-menu-item.h		\
+	font-sample.c			\
+	font-sample.h			\
+	font-util.c			\
+	font-util.h			\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-markup-path.c		\
@@ -260,6 +270,8 @@ glabels_batch_SOURCES = 		\
 	prefs.h 			\
 	prefs-model.c 			\
 	prefs-model.h 			\
+	font-util.c			\
+	font-util.h			\
 	util.c				\
 	util.h				\
 	color.c				\

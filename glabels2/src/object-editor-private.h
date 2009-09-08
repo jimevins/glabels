@@ -96,6 +96,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *img_key_combo;
 
 	GtkWidget  *text_page_vbox;
+	GtkWidget  *text_family_hbox;
 	GtkWidget  *text_family_combo;
 	GtkWidget  *text_size_spin;
 	GtkWidget  *text_bold_toggle;

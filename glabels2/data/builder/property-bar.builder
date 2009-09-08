@@ -14,14 +14,12 @@
           <object class="GtkToolItem" id="toolitem1">
             <property name="visible">True</property>
             <child>
-              <object class="GtkEventBox" id="eventbox1">
+              <object class="GtkEventBox" id="font_family_eventbox">
                 <property name="visible">True</property>
+                <property name="tooltip_markup">Font family</property>
+                <property name="visible_window">False</property>
                 <child>
-                  <object class="GtkComboBox" id="font_family_combo">
-                    <property name="visible">True</property>
-                    <property name="tooltip_text" translatable="yes">Font family</property>
-                    <property name="focus_on_click">False</property>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
             </child>

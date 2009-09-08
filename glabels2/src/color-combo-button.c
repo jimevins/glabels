@@ -1,5 +1,5 @@
 /*
- *  color-button.c
+ *  color-combo-button.c
  *  Copyright (C) 2008-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
@@ -20,7 +20,7 @@
 
 #include <config.h>
 
-#include "color-button.h"
+#include "color-combo-button.h"
 
 #include "color-combo-menu.h"
 #include <glib/gi18n.h>
@@ -42,8 +42,8 @@
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_COLOR_BUTTON Private fields */
-struct _glColorButtonPrivate {
+/** GL_COLOR_COMBO_BUTTON Private fields */
+struct _glColorComboButtonPrivate {
 
         guint       color;
         gboolean    is_default_flag;
@@ -76,57 +76,52 @@ static guint signals[LAST_SIGNAL] = {0};
 /*========================================================*/
 
 static void
-gl_color_button_finalize (GObject *object);
+gl_color_combo_button_finalize (GObject *object);
 
 static void
-button_clicked_cb (glColorButton *this);
-
-static GdkPixbuf *
-create_pixbuf (glColorButton   *this,
-               gdouble         w,
-               gdouble         h);
+button_clicked_cb (glColorComboButton *this);
 
 static gboolean
-dropdown_button_press_event_cb (GtkWidget      *widget,
-                                GdkEventButton *event,
-                                glColorButton  *this);
+dropdown_button_press_event_cb (GtkWidget          *widget,
+                                GdkEventButton     *event,
+                                glColorComboButton *this);
 
 static void
-menu_color_changed_cb (glColorComboMenu        *object,
-                       guint                    color,
-                       gboolean                 is_default,
-                       glColorButton           *this);
+menu_color_changed_cb (glColorComboMenu            *object,
+                       guint                        color,
+                       gboolean                     is_default,
+                       glColorComboButton          *this);
 
 static void
-menu_selection_done_cb (GtkMenuShell           *object,
-                        glColorButton          *this);
+menu_selection_done_cb (GtkMenuShell               *object,
+                        glColorComboButton         *this);
 
 
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glColorButton, gl_color_button, GTK_TYPE_HBOX);
+G_DEFINE_TYPE (glColorComboButton, gl_color_combo_button, GTK_TYPE_HBOX);
 
 
 /*****************************************************************************/
 /* Class Init Function.                                                      */
 /*****************************************************************************/
 static void
-gl_color_button_class_init (glColorButtonClass *class)
+gl_color_combo_button_class_init (glColorComboButtonClass *class)
 {
-        GObjectClass        *gobject_class = (GObjectClass *) class;
-        GtkWidgetClass      *widget_class  = (GtkWidgetClass *) class;
-        glColorButtonClass  *object_class  = (glColorButtonClass *) class;
+        GObjectClass            *gobject_class = (GObjectClass *) class;
+        GtkWidgetClass          *widget_class  = (GtkWidgetClass *) class;
+        glColorComboButtonClass *object_class  = (glColorComboButtonClass *) class;
 
-        gl_color_button_parent_class = g_type_class_peek_parent (class);
+        gl_color_combo_button_parent_class = g_type_class_peek_parent (class);
 
-        gobject_class->finalize = gl_color_button_finalize;
+        gobject_class->finalize = gl_color_combo_button_finalize;
 
         signals[COLOR_CHANGED] =
                 g_signal_new ("color_changed",
                               G_OBJECT_CLASS_TYPE (gobject_class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (glColorButtonClass, color_changed),
+                              G_STRUCT_OFFSET (glColorComboButtonClass, color_changed),
                               NULL, NULL,
                               gl_marshal_VOID__UINT_BOOLEAN,
                               G_TYPE_NONE,
@@ -139,13 +134,13 @@ gl_color_button_class_init (glColorButtonClass *class)
 /* Object Instance Init Function.                                            */
 /*****************************************************************************/
 static void
-gl_color_button_init (glColorButton *this)
+gl_color_combo_button_init (glColorComboButton *this)
 {
         GtkWidget *arrow;
 
         gtk_box_set_spacing (GTK_BOX (this), 0);
 
-        this->priv = g_new0 (glColorButtonPrivate, 1);
+        this->priv = g_new0 (glColorComboButtonPrivate, 1);
 
         this->priv->button_vbox = gtk_vbox_new (FALSE, 0);
 
@@ -173,17 +168,17 @@ gl_color_button_init (glColorButton *this)
 /* Finalize Method.                                                          */
 /*****************************************************************************/
 static void
-gl_color_button_finalize (GObject *object)
+gl_color_combo_button_finalize (GObject *object)
 {
-        glColorButton    *this;
+        glColorComboButton    *this;
 
-        g_return_if_fail (object && IS_GL_COLOR_BUTTON (object));
-        this = GL_COLOR_BUTTON (object);
+        g_return_if_fail (object && IS_GL_COLOR_COMBO_BUTTON (object));
+        this = GL_COLOR_COMBO_BUTTON (object);
 
         g_object_ref_sink (this->priv->menu);
         g_free (this->priv);
 
-        G_OBJECT_CLASS (gl_color_button_parent_class)->finalize (object);
+        G_OBJECT_CLASS (gl_color_combo_button_parent_class)->finalize (object);
 }
 
 
@@ -191,16 +186,16 @@ gl_color_button_finalize (GObject *object)
 /** New Object Generator.                                                    */
 /*****************************************************************************/
 GtkWidget *
-gl_color_button_new (GdkPixbuf    *icon,
-                     const gchar  *default_label,
-                     guint         default_color,
-                     guint         color)
+gl_color_combo_button_new (GdkPixbuf    *icon,
+                           const gchar  *default_label,
+                           guint         default_color,
+                           guint         color)
 {
-        glColorButton *this;
-        GdkPixbuf     *pixbuf;
-        GtkWidget     *wimage;
+        glColorComboButton *this;
+        GdkPixbuf          *pixbuf;
+        GtkWidget          *wimage;
 
-        this = g_object_new (TYPE_GL_COLOR_BUTTON, NULL);
+        this = g_object_new (TYPE_GL_COLOR_COMBO_BUTTON, NULL);
 
         if (!default_label)
         {
@@ -241,8 +236,8 @@ gl_color_button_new (GdkPixbuf    *icon,
 /* Set color.                                                                */
 /*****************************************************************************/
 void
-gl_color_button_set_color (glColorButton  *this,
-                           guint           color)
+gl_color_combo_button_set_color (glColorComboButton  *this,
+                                 guint                color)
 {
         this->priv->color = color;
 
@@ -254,17 +249,17 @@ gl_color_button_set_color (glColorButton  *this,
 /* Set to default color.                                                     */
 /*****************************************************************************/
 void
-gl_color_button_set_to_default (glColorButton  *this)
+gl_color_combo_button_set_to_default (glColorComboButton  *this)
 {
-        gl_color_button_set_color (this, this->priv->default_color);
+        gl_color_combo_button_set_color (this, this->priv->default_color);
 }
 
 /*****************************************************************************/
 /* Get color.                                                                */
 /*****************************************************************************/
 guint
-gl_color_button_get_color (glColorButton  *this,
-                           gboolean       *is_default)
+gl_color_combo_button_get_color (glColorComboButton  *this,
+                                 gboolean            *is_default)
 {
         if (is_default)
         {
@@ -279,8 +274,8 @@ gl_color_button_get_color (glColorButton  *this,
 /** Set relief style.                                                        */
 /*****************************************************************************/
 void
-gl_color_button_set_relief( glColorButton  *this,
-                           GtkReliefStyle   relief )
+gl_color_combo_button_set_relief( glColorComboButton  *this,
+                                  GtkReliefStyle       relief )
 {
         gtk_button_set_relief (GTK_BUTTON (this->priv->button), relief);
 }
@@ -290,7 +285,7 @@ gl_color_button_set_relief( glColorButton  *this,
 /* Color button "clicked" callback.                                          */
 /*****************************************************************************/
 static void
-button_clicked_cb( glColorButton *this )
+button_clicked_cb( glColorComboButton *this )
 {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this->priv->button),
                                       FALSE);
@@ -311,9 +306,9 @@ menu_position_function (GtkMenu  *menu,
                         gboolean *push_in,
                         gpointer  user_data)
 {
-        glColorButton *this = GL_COLOR_BUTTON (user_data);
-        gint           x1, y1;
-        gint           menu_h, menu_w;
+        glColorComboButton *this = GL_COLOR_COMBO_BUTTON (user_data);
+        gint                x1, y1;
+        gint                menu_h, menu_w;
 
         gdk_window_get_origin (GTK_WIDGET (this)->window, &x1, &y1);
         *x = x1 + GTK_WIDGET (this)->allocation.x;
@@ -345,9 +340,9 @@ menu_position_function (GtkMenu  *menu,
 /* Dropdown button "button_press_event" callback.                            */
 /*****************************************************************************/
 static gboolean
-dropdown_button_press_event_cb (GtkWidget      *widget,
-                                GdkEventButton *event,
-                                glColorButton  *this)
+dropdown_button_press_event_cb (GtkWidget          *widget,
+                                GdkEventButton     *event,
+                                glColorComboButton *this)
 {
         switch (event->button)
         {
@@ -378,13 +373,13 @@ dropdown_button_press_event_cb (GtkWidget      *widget,
 
 
 /*****************************************************************************/
-/* Menu "color changed" callback.                                          */
+/* Menu "color changed" callback.                                            */
 /*****************************************************************************/
 static void
-menu_color_changed_cb (glColorComboMenu     *object,
-                       guint                 color,
-                       gboolean              is_default,
-                       glColorButton         *this)
+menu_color_changed_cb (glColorComboMenu   *object,
+                       guint               color,
+                       gboolean            is_default,
+                       glColorComboButton *this)
 {
         if (is_default)
         {
@@ -409,8 +404,8 @@ menu_color_changed_cb (glColorComboMenu     *object,
 /* Menu "color changed" callback.                                            */
 /*****************************************************************************/
 static void
-menu_selection_done_cb (GtkMenuShell         *object,
-                        glColorButton        *this)
+menu_selection_done_cb (GtkMenuShell       *object,
+                        glColorComboButton *this)
 {
         g_signal_handlers_block_by_func (G_OBJECT (this->priv->button),
                                          button_clicked_cb, this);
