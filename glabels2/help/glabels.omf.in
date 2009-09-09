@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <omf>
   <resource>
-    <subject category="Applications|Office" />
+    <subject category="Applications|Office"/>
     <type>
 	manual
     </type>

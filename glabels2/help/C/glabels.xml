@@ -31,7 +31,7 @@
     <title>&app; Manual V&manrevision;</title>       
 	<abstract role="description">
       	<para> 
-        User manual for the gLabels label and business card creation program
+        User manual for the &app; label and business card creation program
       	</para>
     </abstract>
     <copyright> 
@@ -95,13 +95,13 @@
       </revision> 
     </revhistory> 
 
-    <releaseinfo>This manual describes version &appversion; of gLabels.
+    <releaseinfo>This manual describes version &appversion; of &app;.
     </releaseinfo> 
     <legalnotice> 
       <title>Feedback</title> 
       <para>To report a bug or make a suggestion regarding the &app; application or
       this manual, follow the directions in the <ulink url="http://glabels.sourceforge.net/contact/"
-	  type="http">gLabels Contact Page</ulink>. 
+	  type="http">&app; Contact Page</ulink>. 
       </para>
 <!-- Translators may also add here feedback address for translations -->
     </legalnotice> 
@@ -149,7 +149,7 @@
 
     <sect2 id="glabels-start">
     <title>To Start &app;</title>
-    <para>You can start <application>&app;</application> in the following ways:
+    <para>You can start &app; in the following ways:
     </para> 
     <variablelist>
     	<varlistentry>
@@ -174,7 +174,7 @@
 
     <sect2 id="glabels-when-start">
     <title>When You Start &app;</title>
-    <para>When you start <application>&app;</application>, the following window is displayed.</para>
+    <para>When you start &app;, the following window is displayed.</para>
 
     <!-- ==== Figure ==== -->
       <figure id="mainwindow-fig"> 
@@ -200,7 +200,7 @@
 	<listitem>
 	    <para>The menus on the menubar contain all of the commands you
               need to create and edit labels and business cards in 
-	      <application>&app;</application>.</para>
+	      &app;.</para>
 	</listitem>
 	</varlistentry>
 	<varlistentry>
@@ -211,21 +211,21 @@
 	</listitem>
 	</varlistentry>
 	<varlistentry>
-	<term>Drawing toolbar. </term>
+	<term>Drawing toolbar.</term>
 	<listitem>
 	    <para>The drawing toolbar contains a subset of commands for
-              editing the current glabels document.</para>
+              editing the current &app; document.</para>
 	</listitem>
 	</varlistentry>
 	<varlistentry>
-	<term>Display area. </term>
+	<term>Display area.</term>
 	<listitem>
 	    <para>The display area is the main drawing interface to
-              <application>&app;</application>.</para>
+              &app;.</para>
 	</listitem>
 	</varlistentry>
 	<varlistentry>
-	<term>Object sidebar. </term>
+	<term>Object sidebar.</term>
 	<listitem>
 	    <para>The object sidebar provides an interface for viewing and
               editing all properties of an individual object. </para>
@@ -243,7 +243,7 @@
 	<term>Statusbar. </term>
 	<listitem>
 	    <para>The statusbar displays information about current
-              <application>&app;</application> activity and contextual
+              &app; activity and contextual
               information about the menu items. </para>
 	</listitem>
 	</varlistentry>
@@ -270,7 +270,7 @@
 	to display the <guilabel>New Label or Card</guilabel> dialog. Select
         the media type and orientation for the new document,
 	then click <guibutton>OK</guibutton>. A new document is
-	displayed in the display area of the <application>&app;</application>
+	displayed in the display area of the &app;
         window. </para>
 
       <para>If your particular media type is missing from this dialog,
@@ -287,10 +287,10 @@
 	</menuchoice> to display the <guilabel>Open File</guilabel> dialog.
         Select the file that you want to open, then click
         <guibutton>OK</guibutton>. The file is displayed in the display area
-        of the <application>&app;</application> window. </para>
+        of the &app; window. </para>
 
       <para>You can also open multiple files in
-        <application>&app;</application>. The application creates a separate
+        &app;. The application creates a separate
         application window for each open file.</para>
 
       <para>The application records the paths and filenames of the
@@ -305,7 +305,7 @@
     <sect2 id="glabels-run-from-cmd-line"> 
       <title>To Open Multiple Files from a Command Line</title>
 
-      <para>You can run <application>&app;</application> from a command line
+      <para>You can run &app; from a command line
 	and open a single file or multiple files. To open multiple files from
         a command line, type the following command, then press
         <keycap>Return</keycap>:</para>
@@ -315,7 +315,7 @@
       </command></para>
 
       <para>When the application starts, the files that you specify are
-	displayed in separate <application>&app;</application> windows.</para>
+	displayed in separate &app; windows.</para>
 
     </sect2>
 
@@ -386,15 +386,15 @@
         window.  If the current document is modified, a confirmation dialog
         will be presented, allowing you to save the document or cancel
         the command.  If the window being closed is the only open window,
-        <application>&app;</application> will exit.</para>
+        &app; will exit.</para>
 
     </sect2>
 
 <!-- ============= To Quit ========= -->
     <sect2 id="glabels-quit"> 
-      <title>To Quit <application>&app;</application></title>
+      <title>To Quit &app;</title>
 
-      <para>To quit <application>&app;</application>, choose
+      <para>To quit &app;, choose
         <menuchoice> <guimenu>File</guimenu>
         <guimenuitem>Quit</guimenuitem> </menuchoice>. This is equivalent
         to closing all open windows.  See
@@ -738,8 +738,8 @@
           </term>
 	  <listitem>
 	    <para>Pastes objects from the clipboard into the current document.
-              <application>&app;</application> can only paste objects from
-              another <application>&app;</application> document.</para>
+              &app; can only paste objects from
+              another &app; document.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -810,7 +810,7 @@
 	<title>Data Tabbed Section (Barcode objecs)</title>
 
 	<para>This section contains a text entry to enter literal barcode
-          data.  Alternatively, a document merge key can be used to
+          data. Alternatively, a document merge key can be used to
           provide this data at print time.</para>
 
       </sect3>
@@ -1007,7 +1007,7 @@
         See <xref linkend="glabels-object-properties" /> for more information
         on using merge data for these object types.</para>
 
-      <para>Now that your label is configured, gLabels will print a unique
+      <para>Now that your label is configured, &app; will print a unique
         label for each record in your source document -- substituting fields
         from each record for field keys in the all text, barcode, and
         image objects.</para>
@@ -1055,7 +1055,7 @@
 	  <term> 
 	    <guilabel>Units</guilabel> </term> 
 	  <listitem> 
-	    <para>Use this radio button group to specify your prefered units.
+	    <para>Use this radio button group to specify your preferred units.
               Select one of the following options:</para>
 	    <itemizedlist> 
 	      <listitem> 
@@ -1082,7 +1082,7 @@
 	  <term> 
 	    <guilabel>Default page size</guilabel> </term> 
 	  <listitem> 
-	    <para>Use this radio button group to specify your prefered page size.
+	    <para>Use this radio button group to specify your preferred page size.
               This will make it quicker for you to locate media types when creating a new
               label or card.</para>
 	    <itemizedlist> 
@@ -1183,7 +1183,7 @@
     <para>Document Merge (sometimes called "Mail Merge") is a powerful
       feature that allows a unique label or card to be printed for each
       record in an external data source.  It is however, the most mis-understood
-      feature of <application>glabels</application>.  The following examples
+      feature of &app;.  The following examples
       will step through a couple of common tasks using the document merge
       feature.</para>
 
@@ -1204,7 +1204,7 @@ Name,Department,SN
 "Montgomery Scott",Engineering,SE-197-54T
       </programlisting>
 
-      <para>In <application>glabels</application> we have created a new glabels
+      <para>In &app; we have created a new &app;
         document using the Avery 5395 "Name Badge Labels" template.  Next we use the
         <menuchoice> <guimenu>Objects</guimenu>
         <guimenuitem>Merge Properties</guimenuitem> </menuchoice> menu item to display
@@ -1235,7 +1235,7 @@ Name,Department,SN
         selections in this dialog we click <guibutton>OK</guibutton> to accept the
         changes.</para>
 
-      <para>Now we start adding objects to our glabels document as shown.</para>
+      <para>Now we start adding objects to our &app; document as shown.</para>
 
       <!-- ==== Figure ==== -->
       <figure id="merge-ex1-2-fig"> 
@@ -1321,7 +1321,7 @@ McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
 Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
       </programlisting>
 
-      <para>In <application>glabels</application> we have created a new glabels
+      <para>In &app; we have created a new &app;
         document using the Avery 5512 "Address Labels" template.  Next we use the
         <menuchoice> <guimenu>Objects</guimenu>
         <guimenuitem>Merge Properties</guimenuitem> </menuchoice> menu item to display
@@ -1353,7 +1353,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
         selections in this dialog we click <guibutton>OK</guibutton> to accept the
         changes.</para>
 
-      <para>Now we start adding objects to our glabels document as shown.</para>
+      <para>Now we start adding objects to our &app; document as shown.</para>
 
       <!-- ==== Figure ==== -->
       <figure id="merge-ex2-2-fig"> 
@@ -1372,7 +1372,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
         all of our merge fields organized on multiple lines as a mailing address.
         Notice that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each
         located with no other text on their own lines.  When
-        <application>glabels</application> encounters a field as the only text on
+        &app; encounters a field as the only text on
         a line, it will not expand the line if the field is empty.</para>
 
       <para>Now we can print our address labels by selecting the
@@ -1430,7 +1430,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
       <filename>${prefix}/share/glabels/</filename>,
       where <filename>${prefix}</filename> is usually something like
       <filename>/usr/local</filename> or <filename>/usr</filename> depending
-      on the configuration option <filename>prefix</filename>.  gLabels will
+      on the configuration option <filename>prefix</filename>.  &app; will
       use all files of the form <filename>*-templates.xml</filename>
       or <filename>*.template</filename>, that it finds in
       <filename>${prefix}/share/glabels/</filename> and
@@ -1442,7 +1442,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
     <para>The format for these files is defined in the DTD:
       <ulink url="http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt"
        type="http">glabels-2.2.dtd</ulink>. (This DTD also describes other
-       XML formats used by glabels.)</para>
+       XML formats used by &app;.)</para>
 
     <sect2 id="template-assumptions">
       <title>Assumptions/caveats</title>
@@ -2108,7 +2108,7 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
     <para>
       To report a bug or make a suggestion regarding this application or
       this manual, follow the directions at the
-      <ulink url="http://glabels.sourceforge.net/contact/" type="http">gLabels Contact Page</ulink>.
+      <ulink url="http://glabels.sourceforge.net/contact/" type="http">&app; Contact Page</ulink>.
     </para>
 
     <para> This program is distributed under the terms of the GNU
