@@ -23,6 +23,7 @@
 #include "font-combo.h"
 
 #include "font-combo-menu.h"
+#include "font-util.h"
 #include <glib/gi18n.h>
 #include <gtk/gtkhbox.h>
 #include <gtk/gtklabel.h>
@@ -91,8 +92,6 @@ static void
 gl_font_combo_class_init (glFontComboClass *class)
 {
         GObjectClass      *gobject_class = (GObjectClass *) class;
-        GtkWidgetClass    *widget_class  = (GtkWidgetClass *) class;
-        glFontComboClass  *object_class  = (glFontComboClass *) class;
 
         gl_font_combo_parent_class = g_type_class_peek_parent (class);
 
@@ -165,9 +164,9 @@ gl_font_combo_new (const gchar  *font_family)
 
         this = g_object_new (TYPE_GL_FONT_COMBO, NULL);
 
-        this->priv->font_family = g_strdup (font_family);
+        this->priv->font_family = gl_font_util_validate_family (font_family);
 
-        gtk_label_set_text (GTK_LABEL (this->priv->label), font_family);
+        gtk_label_set_text (GTK_LABEL (this->priv->label), this->priv->font_family);
 
         this->priv->menu = gl_font_combo_menu_new ();
 
@@ -201,9 +200,9 @@ gl_font_combo_set_family (glFontCombo  *this,
                           const gchar  *font_family)
 {
 
-        this->priv->font_family = g_strdup (font_family);
+        this->priv->font_family = gl_font_util_validate_family (font_family);
 
-        gtk_label_set_text (GTK_LABEL (this->priv->label), font_family);
+        gtk_label_set_text (GTK_LABEL (this->priv->label), this->priv->font_family);
 }
 
 

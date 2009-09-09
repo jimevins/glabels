@@ -100,8 +100,6 @@ static void
 gl_color_combo_class_init (glColorComboClass *class)
 {
         GObjectClass       *gobject_class = (GObjectClass *) class;
-        GtkWidgetClass     *widget_class  = (GtkWidgetClass *) class;
-        glColorComboClass  *object_class  = (glColorComboClass *) class;
 
         gl_color_combo_parent_class = g_type_class_peek_parent (class);
 
@@ -172,8 +170,6 @@ gl_color_combo_new (const gchar  *default_label,
                     guint         color)
 {
         glColorCombo *this;
-        GdkPixbuf    *pixbuf;
-        GtkWidget    *wimage;
 
         this = g_object_new (TYPE_GL_COLOR_COMBO, NULL);
 

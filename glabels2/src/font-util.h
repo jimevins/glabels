@@ -29,6 +29,8 @@ const GList *gl_font_util_get_all_families          (void);
 const GList *gl_font_util_get_proportional_families (void);
 const GList *gl_font_util_get_fixed_width_families  (void);
 
+gchar       *gl_font_util_validate_family           (const gchar *family);
+
 G_END_DECLS
 
 #endif /* __FONT_UTIL_H__ */

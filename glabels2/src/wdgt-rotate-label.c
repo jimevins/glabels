@@ -215,7 +215,6 @@ create_pixbuf (lglTemplate    *template,
         cairo_surface_t           *surface;
 	const lglTemplateFrame    *frame;
 	gdouble                    m, m_canvas, w, h, scale;
-	GtkStyle                  *style;
 	cairo_t                   *cr;
 
         /* Create pixbuf and cairo context. */

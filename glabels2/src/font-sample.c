@@ -56,6 +56,9 @@ struct _glFontSamplePrivate {
 
 static void       gl_font_sample_finalize     (GObject        *object);
 
+static void       style_set_cb                (GtkWidget      *widget,
+                                               GtkStyle       *previous_style);
+
 static void       redraw                      (glFontSample   *this);
 
 static gboolean   expose_event_cb             (GtkWidget      *widget,
@@ -86,6 +89,7 @@ gl_font_sample_class_init (glFontSampleClass *class)
 	gobject_class->finalize    = gl_font_sample_finalize;
 
         widget_class->expose_event = expose_event_cb;
+        widget_class->style_set    = style_set_cb;
 }
 
 
@@ -142,6 +146,17 @@ gl_font_sample_new (gint         w,
 }
 
 
+/*--------------------------------------------------------------------------*/
+/* Style set handler (updates colors when style/theme changes).             */
+/*--------------------------------------------------------------------------*/
+static void
+style_set_cb (GtkWidget        *widget,
+              GtkStyle         *previous_style)
+{
+        redraw (GL_FONT_SAMPLE (widget));
+}
+
+
 /*****************************************************************************/
 /* Request redraw.                                                           */
 /*****************************************************************************/
@@ -193,7 +208,6 @@ static void
 draw_sample (glFontSample *this,
              cairo_t       *cr)
 {
-        GdkPixbuf            *pixbuf;
         GtkStyle             *style;
         gdouble               w, h;
         guint                 fill_color, line_color;
@@ -211,7 +225,7 @@ draw_sample (glFontSample *this,
         style = gtk_widget_get_style (GTK_WIDGET (this));
         if ( GTK_WIDGET_IS_SENSITIVE (GTK_WIDGET (this)) )
         {
-                fill_color = GL_COLOR_WHITE;
+                fill_color = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
                 line_color = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);
         }
         else

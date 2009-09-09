@@ -62,11 +62,6 @@ struct _glColorComboColorMenuItemPrivate {
 
 static void gl_color_combo_color_menu_item_finalize    (GObject                *object);
 
-static GdkPixbuf *
-create_color_pixbuf (gdouble         w,
-                     gdouble         h,
-                     guint           color);
-
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -81,7 +76,6 @@ static void
 gl_color_combo_color_menu_item_class_init (glColorComboColorMenuItemClass *class)
 {
 	GObjectClass   *gobject_class = G_OBJECT_CLASS (class);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
         gl_color_combo_color_menu_item_parent_class = g_type_class_peek_parent (class);
 

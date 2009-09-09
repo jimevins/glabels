@@ -322,8 +322,6 @@ construct_locale_page (glPrefsDialog *dialog)
 static void
 construct_object_page (glPrefsDialog *dialog)
 {
-        GList    *family_names;
-
         gl_util_get_builder_widgets (dialog->priv->builder,
                                      "text_family_hbox",       &dialog->priv->text_family_hbox,
                                      "text_size_spin",         &dialog->priv->text_size_spin,
@@ -517,34 +515,11 @@ update_locale_page_from_prefs (glPrefsDialog *dialog)
 static void
 update_object_page_from_prefs (glPrefsDialog *dialog)
 {
-        const GList *family_names;
-        gchar       *good_font_family;
  
 	dialog->priv->stop_signals = TRUE;
 
-
-        /* Make sure we have a valid font family.  if not provide a good default. */
-        family_names = gl_font_util_get_all_families ();
-        if (g_list_find_custom ((GList *)family_names,
-				gl_prefs->default_font_family,
-				(GCompareFunc)g_utf8_collate))
-        {
-                good_font_family = g_strdup (gl_prefs->default_font_family);
-        }
-        else
-        {
-                if (family_names != NULL)
-                {
-                        good_font_family = g_strdup (family_names->data); /* 1st entry */
-                }
-                else
-                {
-                        good_font_family = NULL;
-                }
-        }
 	gl_font_combo_set_family (GL_FONT_COMBO (dialog->priv->text_family_combo),
-                                  good_font_family);
-        g_free (good_font_family);
+                                  gl_prefs->default_font_family);
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->text_size_spin),
                                    gl_prefs->default_font_size);

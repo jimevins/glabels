@@ -110,8 +110,6 @@ static void
 gl_color_combo_button_class_init (glColorComboButtonClass *class)
 {
         GObjectClass            *gobject_class = (GObjectClass *) class;
-        GtkWidgetClass          *widget_class  = (GtkWidgetClass *) class;
-        glColorComboButtonClass *object_class  = (glColorComboButtonClass *) class;
 
         gl_color_combo_button_parent_class = g_type_class_peek_parent (class);
 

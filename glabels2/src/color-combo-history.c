@@ -65,7 +65,6 @@ static void
 gl_color_combo_history_class_init (glColorComboHistoryClass *class)
 {
         GObjectClass              *gobject_class = (GObjectClass *) class;
-        glColorComboHistoryClass  *object_class  = (glColorComboHistoryClass *) class;
 
         gl_color_combo_history_parent_class = g_type_class_peek_parent (class);
 

@@ -70,8 +70,6 @@ static void text_radio_toggled_cb              (glObjectEditor        *editor);
 void
 gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 {
-	GList        *family_names = NULL;
-
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
@@ -225,9 +223,7 @@ void
 gl_object_editor_set_font_family (glObjectEditor      *editor,
 				  const gchar         *font_family)
 {
-        GList    *family_names;
 	gchar    *old_font_family;
-	gchar    *good_font_family;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -237,20 +233,8 @@ gl_object_editor_set_font_family (glObjectEditor      *editor,
 
         if ( !old_font_family || g_utf8_collate( old_font_family, font_family ) )
         {
-
-                /* Make sure we have a valid font family.  if not provide a good default. */
-                family_names = gl_font_util_get_all_families ();
-                if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
-                        good_font_family = g_strdup (font_family);
-                } else {
-                        if (family_names != NULL) {
-                                good_font_family = g_strdup (family_names->data); /* 1st entry */
-                        } else {
-                                good_font_family = NULL;
-                        }
-                }
-                gl_font_combo_set_family (GL_FONT_COMBO (editor->priv->text_family_combo), good_font_family);
-                g_free (good_font_family);
+                gl_font_combo_set_family (GL_FONT_COMBO (editor->priv->text_family_combo),
+                                          font_family);
         }
 
         g_free (old_font_family);

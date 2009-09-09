@@ -53,6 +53,9 @@ struct _glColorSwatchPrivate {
 
 static void       gl_color_swatch_finalize    (GObject        *object);
 
+static void       style_set_cb                (GtkWidget      *widget,
+                                               GtkStyle       *previous_style);
+
 static void       redraw                      (glColorSwatch  *this);
 
 static gboolean   expose_event_cb             (GtkWidget      *widget,
@@ -83,6 +86,7 @@ gl_color_swatch_class_init (glColorSwatchClass *class)
 	gobject_class->finalize    = gl_color_swatch_finalize;
 
         widget_class->expose_event = expose_event_cb;
+        widget_class->style_set    = style_set_cb;
 }
 
 
@@ -148,6 +152,17 @@ gl_color_swatch_set_color (glColorSwatch *this,
 }
 
 
+/*--------------------------------------------------------------------------*/
+/* Style set handler (updates colors when style/theme changes).             */
+/*--------------------------------------------------------------------------*/
+static void
+style_set_cb (GtkWidget        *widget,
+              GtkStyle         *previous_style)
+{
+        redraw (GL_COLOR_SWATCH (widget));
+}
+
+
 /*****************************************************************************/
 /* Request redraw.                                                           */
 /*****************************************************************************/
@@ -199,7 +214,6 @@ static void
 draw_swatch (glColorSwatch *this,
              cairo_t       *cr)
 {
-        GdkPixbuf *pixbuf;
         GtkStyle  *style;
         gdouble    w, h;
         guint      fill_color, line_color;

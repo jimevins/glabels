@@ -337,6 +337,8 @@ map_event_cb (GtkWidget    *widget,
         glColorComboMenu *this = GL_COLOR_COMBO_MENU (widget);
 
         load_custom_color_history (this);
+
+        return FALSE;
 }
 
 

@@ -22,6 +22,7 @@
 
 #include "font-combo-menu-item.h"
 
+#include "font-sample.h"
 #include "marshal.h"
 #include <glib/gi18n.h>
 #include <gtk/gtkmenuitem.h>
@@ -75,7 +76,6 @@ static void
 gl_font_combo_menu_item_class_init (glFontComboMenuItemClass *class)
 {
 	GObjectClass   *gobject_class = G_OBJECT_CLASS (class);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
         gl_font_combo_menu_item_parent_class = g_type_class_peek_parent (class);
 

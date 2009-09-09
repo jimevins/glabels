@@ -459,7 +459,6 @@ set_font_family (glLabelObject *object,
 		 const gchar   *font_family)
 {
 	glLabelText    *ltext = (glLabelText *)object;
-	GList          *family_names;
 	gchar          *good_font_family;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -467,16 +466,7 @@ set_font_family (glLabelObject *object,
 	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
 	g_return_if_fail (font_family);
 
-	family_names = gl_font_util_get_all_families ();
-	if (g_list_find_custom (family_names, font_family, (GCompareFunc)g_utf8_collate)) {
-		good_font_family = g_strdup (font_family);
-	} else {
-		if (family_names != NULL) {
-			good_font_family = g_strdup (family_names->data); /* 1st entry */
-		} else {
-			good_font_family = g_strdup (font_family);
-		}
-	}
+        good_font_family = gl_font_util_validate_family (font_family);
 
 	if (ltext->priv->font_family) {
 		if (strcmp (ltext->priv->font_family, good_font_family) == 0) {

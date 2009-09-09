@@ -1,3 +1,37 @@
+2009-09-08  Jim Evins  <evins@snaught.com>
+
+	* src/font-util.c: (gl_font_util_validate_family):
+	* src/font-util.h:
+		Added gl_font_util_validate_family().
+	* src/font-combo.c: (gl_font_combo_class_init),
+	(gl_font_combo_new), (gl_font_combo_set_family):
+		Use gl_font_util_validate_family() when setting family.
+	* src/label-text.c: (set_font_family):
+	* src/prefs-dialog.c: (construct_object_page),
+	(update_object_page_from_prefs):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct),
+	(reset_to_default_properties):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_font_family):
+		Removed code obsoleted by the addition of gl_font_util_validate_family().
+	* src/color-swatch.c: (gl_color_swatch_class_init), (style_set_cb),
+	(draw_swatch):
+	* src/font-sample.c: (gl_font_sample_class_init), (style_set_cb),
+	(draw_sample):
+		Added handler for style_set event.
+	* src/color-combo-button.c: (gl_color_combo_button_class_init):
+	* src/color-combo-color-menu-item.c:
+	(gl_color_combo_color_menu_item_class_init):
+	* src/color-combo-history.c: (gl_color_combo_history_class_init):
+	* src/color-combo-menu.c: (map_event_cb):
+	* src/color-combo.c: (gl_color_combo_class_init),
+	(gl_color_combo_new):
+	* src/font-combo-menu-item.c: (gl_font_combo_menu_item_class_init):
+	* src/font-combo-menu.c: (gl_font_combo_menu_class_init):
+	* src/wdgt-rotate-label.c: (create_pixbuf):
+		Various cleanups -- mostly removing unused variables.
+
 2009-09-07  Jim Evins  <evins@snaught.com>
 
 	Created new glFontCombo widget family subsystem + minor refinements to glColorCombo

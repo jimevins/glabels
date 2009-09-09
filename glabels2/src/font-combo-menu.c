@@ -83,7 +83,6 @@ static void
 gl_font_combo_menu_class_init (glFontComboMenuClass *class)
 {
 	GObjectClass   *gobject_class = G_OBJECT_CLASS (class);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
         gl_font_combo_menu_parent_class = g_type_class_peek_parent (class);
 

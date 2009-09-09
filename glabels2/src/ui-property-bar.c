@@ -237,8 +237,6 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                                         "adjustment1", "adjustment2",
                                         NULL };
         GError        *error = NULL;
-	GList         *family_names = NULL;
-	GList         *family_node;
 	GdkPixbuf     *pixbuf = NULL;
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
@@ -391,34 +389,12 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 /* Fill widgets with default values.                                        */
 /****************************************************************************/
 static void
-reset_to_default_properties (glView *view,
+reset_to_default_properties (glView          *view,
 			     glUIPropertyBar *this)
 {
-	GList     *family_names;
-	gchar     *good_font_family;
 
-	/* Make sure we have a valid font.  if not provide a good default. */
-	family_names = gl_font_util_get_all_families ();
-	if (g_list_find_custom (family_names,
-				view->default_font_family,
-				(GCompareFunc)g_utf8_collate))
-        {
-		good_font_family = g_strdup (view->default_font_family);
-	}
-        else
-        {
-		if (family_names != NULL)
-                {
-			good_font_family = g_strdup (family_names->data); /* 1st entry */
-		}
-                else
-                {
-			good_font_family = NULL;
-		}
-	}
 	gl_font_combo_set_family (GL_FONT_COMBO (this->priv->font_family_combo),
-                                  good_font_family);
-	g_free (good_font_family);
+                                  view->default_font_family);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->font_size_spin),
 				   view->default_font_size);
