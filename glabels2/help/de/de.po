@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels2\n"
-"POT-Creation-Date: 2008-12-23 09:45+0100\n"
-"PO-Revision-Date: 2009-09-06 18:51+0100\n"
+"POT-Creation-Date: 2009-09-09 21:01+0200\n"
+"PO-Revision-Date: 2009-09-09 21:13+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,128 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: ../C/legal.xml:2(para)
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:185(None)
+msgid ""
+"@@image: 'figures/main-window-empty.png'; md5=0ca03656fde7f33222bb6f016fdf79c4"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:437(None)
+msgid ""
+"@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:469(None)
+msgid "@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:780(None)
+msgid ""
+"@@image: 'figures/object-editor-sidebar.png'; "
+"md5=08e152bad535a2b3d1ff7ed73de5b483"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1221(None)
+msgid "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1246(None)
+msgid "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1274(None)
+msgid "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1292(None)
+msgid "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1338(None)
+msgid "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1364(None)
+msgid "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1389(None)
+msgid "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1407(None)
+msgid "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1643(None)
+msgid ""
+"@@image: 'figures/glabels-template-label.png'; "
+"md5=b7db4090373462b8d45feb22d4cd5646"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:1764(None)
+msgid ""
+"@@image: 'figures/glabels-template-cd.png'; "
+"md5=145b49a5380de63ffa9451d2bbb81934"
+msgstr "translated"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/glabels.xml:2026(None)
+msgid ""
+"@@image: 'figures/glabels-template-layout.png'; "
+"md5=a8adcff0584be1f0275bc2a169a580df"
+msgstr "translated"
+
+#: ../C/glabels.xml:31(title)
+msgid "<application>gLabels</application> Manual V2.2"
+msgstr "<application>gLabels</application>-Handbuch V2.2"
+
+#: ../C/glabels.xml:33(para)
+msgid ""
+"User manual for the <application>gLabels</application> label and business "
+"card creation program"
+msgstr ""
+"Benutzerhandbuch für <application>gLabels</application>, einem Programm zum "
+"Erstellen von Etiketten und Visitenkarten"
+
+#: ../C/glabels.xml:38(year)
+msgid "2003-2007"
+msgstr "2003-2007"
+
+#: ../C/glabels.xml:39(holder) ../C/glabels.xml:42(publishername)
+#: ../C/glabels.xml:93(para)
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+#: ../C/glabels.xml:2(para)
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document under "
 "the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
@@ -31,7 +152,7 @@ msgstr ""
 "<ulink type=\"help\" url=\"ghelp:fdl\">Link</ulink> oder in der mit diesem "
 "Handbuch gelieferten Datei COPYING-DOCS."
 
-#: ../C/legal.xml:12(para)
+#: ../C/glabels.xml:12(para)
 msgid ""
 "This manual is part of a collection of GNOME manuals distributed under the "
 "GFDL. If you want to distribute this manual separately from the collection, "
@@ -44,7 +165,7 @@ msgstr ""
 "der Lizenz zum Handbuch hinzufügen, wie es in Abschnitt 6 der Lizenz "
 "beschrieben ist."
 
-#: ../C/legal.xml:19(para)
+#: ../C/glabels.xml:19(para)
 msgid ""
 "Many of the names used by companies to distinguish their products and "
 "services are claimed as trademarks. Where those names appear in any GNOME "
@@ -59,7 +180,7 @@ msgstr ""
 "großen Anfangsbuchstaben geschrieben, wenn das GNOME-Dokumentationsprojekt "
 "auf diese Warenzeichen hingewiesen wird."
 
-#: ../C/legal.xml:35(para)
+#: ../C/glabels.xml:35(para)
 msgid ""
 "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
 "EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
@@ -87,7 +208,7 @@ msgstr ""
 "EINES DOKUMENTS ODER EINER VERÄNDERTEN VERSION DES DOKUMENTS IST NICHT "
 "GESTATTET AUßER UNTER BEACHTUNG DIESES HAFTUNGSAUSSCHLUSSES UND"
 
-#: ../C/legal.xml:55(para)
+#: ../C/glabels.xml:55(para)
 msgid ""
 "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
 "NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
@@ -113,7 +234,7 @@ msgstr ""
 "AUCH WENN DIE OBEN GENANNTEN PARTEIEN ÜBER DIE MÖGLICHKEIT SOLCHER SCHÄDEN "
 "INFORMIERT WAREN."
 
-#: ../C/legal.xml:28(para)
+#: ../C/glabels.xml:28(para)
 msgid ""
 "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
 "OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
@@ -123,168 +244,61 @@ msgstr ""
 "BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE ZUR VERFÜGUNG GESTELLT MIT DEM "
 "WEITERGEHENDEN VERSTÄNDNIS, DASS: <placeholder-1/>"
 
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:194(None)
-msgid ""
-"@@image: 'figures/main-window-empty.png'; md5=0ca03656fde7f33222bb6f016fdf79c4"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:446(None)
-msgid ""
-"@@image: 'figures/print-copies.png'; md5=45f2eae7cd262a36ed6b20a254b94447"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:478(None)
-msgid "@@image: 'figures/print-merge.png'; md5=df81b305a7e76484df98034c1c035604"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:789(None)
-msgid ""
-"@@image: 'figures/object-editor-sidebar.png'; "
-"md5=08e152bad535a2b3d1ff7ed73de5b483"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1230(None)
-msgid "@@image: 'figures/merge-ex1-1.png'; md5=731c7bcd2ff66d18300e87f1c3d9ec0e"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1255(None)
-msgid "@@image: 'figures/merge-ex1-2.png'; md5=27ed61afe77cda96c208fcda51990c89"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1283(None)
-msgid "@@image: 'figures/merge-ex1-3.png'; md5=8f686530b1196b04595be50a9f8d4728"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1301(None)
-msgid "@@image: 'figures/merge-ex1-4.png'; md5=9cec0c679929cc904f81f435cd3bd060"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1347(None)
-msgid "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1373(None)
-msgid "@@image: 'figures/merge-ex2-2.png'; md5=2912c145fd9caac56ad7cf8c4437636b"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1398(None)
-msgid "@@image: 'figures/merge-ex2-3.png'; md5=59a1dc5ff94656877a6220f73fe25b3c"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1416(None)
-msgid "@@image: 'figures/merge-ex2-4.png'; md5=67391b05421901a36d276736c1f664dd"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1652(None)
-msgid ""
-"@@image: 'figures/glabels-template-label.png'; "
-"md5=b7db4090373462b8d45feb22d4cd5646"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:1773(None)
-msgid ""
-"@@image: 'figures/glabels-template-cd.png'; "
-"md5=145b49a5380de63ffa9451d2bbb81934"
-msgstr "translated"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/glabels.xml:2035(None)
-msgid ""
-"@@image: 'figures/glabels-template-layout.png'; "
-"md5=a8adcff0584be1f0275bc2a169a580df"
-msgstr "translated"
-
-#: ../C/glabels.xml:31(title)
-msgid "<application>gLabels</application> Manual V2.2"
-msgstr "<application>gLabels</application>-Handbuch V2.2"
-
-#: ../C/glabels.xml:34(year)
-msgid "2003-2007"
-msgstr "2003-2007"
-
-#: ../C/glabels.xml:35(holder) ../C/glabels.xml:51(publishername)
-#: ../C/glabels.xml:102(para)
-msgid "Jim Evins"
-msgstr "Jim Evins"
-
-#: ../C/glabels.xml:61(firstname)
+#: ../C/glabels.xml:52(firstname)
 msgid "Jim"
 msgstr "Jim"
 
-#: ../C/glabels.xml:62(surname)
+#: ../C/glabels.xml:53(surname)
 msgid "Evins"
 msgstr "Evins"
 
-#: ../C/glabels.xml:96(revnumber)
+#: ../C/glabels.xml:87(revnumber)
 msgid "gLabels Manual V2.2"
 msgstr "gLabels-Handbuch V2.2"
 
-#: ../C/glabels.xml:99(para)
+#: ../C/glabels.xml:88(date)
+msgid "December 2007"
+msgstr "Dezember 2007"
+
+#: ../C/glabels.xml:90(para)
 msgid "Jim Evins <email>evins@snaught.com</email>"
 msgstr "Jim Evins <email>evins@snaught.com</email>"
 
-#: ../C/glabels.xml:107(releaseinfo)
-msgid "This manual describes version 2.2 of gLabels."
-msgstr "Dieses Handbuch beschreibt Version 2.2 von gLabels."
+#: ../C/glabels.xml:98(releaseinfo)
+msgid "This manual describes version 2.2 of <application>gLabels</application>."
+msgstr ""
+"Dieses Handbuch beschreibt Version 2.2 von <application>gLabels</application>."
 
-#: ../C/glabels.xml:110(title)
+#: ../C/glabels.xml:101(title)
 msgid "Feedback"
 msgstr "Rückmeldungen"
 
-#: ../C/glabels.xml:111(para)
+#: ../C/glabels.xml:102(para)
 msgid ""
 "To report a bug or make a suggestion regarding the <application>gLabels</"
 "application> application or this manual, follow the directions in the <ulink "
-"url=\"http://glabels.sourceforge.net/contact/\" type=\"http\">gLabels Contact "
-"Page</ulink>."
+"url=\"http://glabels.sourceforge.net/contact/\" type=\"http"
+"\"><application>gLabels</application> Contact Page</ulink>."
 msgstr ""
 "Um einen Fehler zu melden oder einen Vorschlag zur Anwendung "
 "<application>gLabels</application> oder zu diesem Handbuch zu machen, folgen "
 "Sie den Anweisungen auf der <ulink url=\"http://glabels.sourceforge.net/"
-"contact/\" type=\"http\">gLabels-Kontaktseite</ulink>."
+"contact/\" type=\"http\"><application>gLabels</application>-Kontaktseite</"
+"ulink>."
 
-#: ../C/glabels.xml:120(primary)
+#: ../C/glabels.xml:111(primary)
 msgid "gLabels"
 msgstr "gLabels"
 
-#: ../C/glabels.xml:123(primary)
+#: ../C/glabels.xml:114(primary)
 msgid "glabels"
 msgstr "glabels"
 
-#: ../C/glabels.xml:134(title)
+#: ../C/glabels.xml:125(title)
 msgid "Introduction"
 msgstr "Einführung"
 
-#: ../C/glabels.xml:136(para)
+#: ../C/glabels.xml:127(para)
 msgid ""
 "The <application>gLabels</application> application is a lightweight program "
 "for creating labels and business cards for the <systemitem>GNOME desktop</"
@@ -299,26 +313,24 @@ msgstr ""
 "selbstklebenden) Etiketten sowie Visitenkarten entworfen, so wie Sie sie in "
 "den meisten Schreibwarengeschäften finden."
 
-#: ../C/glabels.xml:157(title)
+#: ../C/glabels.xml:148(title)
 msgid "Getting Started"
 msgstr "Erste Schritte"
 
-#: ../C/glabels.xml:160(title)
+#: ../C/glabels.xml:151(title)
 msgid "To Start <application>gLabels</application>"
 msgstr "<application>gLabels</application> starten"
 
-#: ../C/glabels.xml:161(para)
-msgid ""
-"You can start <application><application>gLabels</application></application> "
-"in the following ways:"
+#: ../C/glabels.xml:152(para)
+msgid "You can start <application>gLabels</application> in the following ways:"
 msgstr ""
 "Sie können <application>gLabels</application> auf folgende Arten starten:"
 
-#: ../C/glabels.xml:165(term)
+#: ../C/glabels.xml:156(term)
 msgid "<guimenu>Applications</guimenu> menu"
 msgstr "Menü <guimenu>Anwendungen</guimenu>"
 
-#: ../C/glabels.xml:167(para)
+#: ../C/glabels.xml:158(para)
 msgid ""
 "Choose <menuchoice><guisubmenu>Office</guisubmenu><guimenuitem>gLabels</"
 "guimenuitem></menuchoice>."
@@ -326,58 +338,57 @@ msgstr ""
 "Wählen Sie <menuchoice><guisubmenu>Büroanwendungen</"
 "guisubmenu><guimenuitem>gLabels</guimenuitem></menuchoice>."
 
-#: ../C/glabels.xml:175(term)
+#: ../C/glabels.xml:166(term)
 msgid "Command line"
 msgstr "Befehlszeile"
 
-#: ../C/glabels.xml:177(para)
+#: ../C/glabels.xml:168(para)
 msgid "Type <command>glabels</command>, then press <keycap>Return</keycap>:"
 msgstr ""
 "Geben Sie <command>glabels</command> ein, und drücken Sie dann die "
 "<keycap>Eingabetaste</keycap>."
 
-#: ../C/glabels.xml:185(title)
+#: ../C/glabels.xml:176(title)
 msgid "When You Start <application>gLabels</application>"
 msgstr "Beim Start von <application>gLabels</application>"
 
-#: ../C/glabels.xml:186(para)
+#: ../C/glabels.xml:177(para)
 msgid ""
-"When you start <application><application>gLabels</application></application>, "
-"the following window is displayed."
+"When you start <application>gLabels</application>, the following window is "
+"displayed."
 msgstr ""
-"Wenn Sie <application>gLabels</application> starten, wird folgendes Fenster "
-"angezeigt."
+"Nach dem Start von <application>gLabels</application> erscheint folgendes "
+"Fenster:"
 
-#: ../C/glabels.xml:190(title)
+#: ../C/glabels.xml:181(title)
 msgid "<application>gLabels</application> Start Up Window"
 msgstr "<application>gLabels</application>-Startfenster"
 
 #. for example, the items on the menubar and on the toolbar. This section is optional.
-#: ../C/glabels.xml:204(para)
+#: ../C/glabels.xml:195(para)
 msgid ""
 "The <application>gLabels</application> window contains the following elements:"
 msgstr ""
 "Das <application>gLabels</application>-Fenster enthält folgende Elemente:"
 
-#: ../C/glabels.xml:208(term)
+#: ../C/glabels.xml:199(term)
 msgid "Menubar."
 msgstr "Menüleiste."
 
-#: ../C/glabels.xml:210(para)
+#: ../C/glabels.xml:201(para)
 msgid ""
 "The menus on the menubar contain all of the commands you need to create and "
-"edit labels and business cards in <application><application>gLabels</"
-"application></application>."
+"edit labels and business cards in <application>gLabels</application>."
 msgstr ""
 "Die Menüs in der Menüleiste enthalten alle Befehle, die Sie zum Erstellen und "
 "Bearbeiten von Etiketten und Visitenkarten in <application>gLabels</"
 "application> benötigen."
 
-#: ../C/glabels.xml:216(term)
+#: ../C/glabels.xml:207(term)
 msgid "Main toolbar."
 msgstr "Haupt-Werkzeugleiste."
 
-#: ../C/glabels.xml:218(para)
+#: ../C/glabels.xml:209(para)
 msgid ""
 "The main toolbar contains a subset of common File and Edit commands that you "
 "can access from the menubar."
@@ -385,35 +396,35 @@ msgstr ""
 "Die Haupt-Werkzeugleiste enthält eine Auswahl der Befehle, die Sie über die "
 "Menüleiste in den Menüs »Datei« und »Bearbeiten« erreichen."
 
-#: ../C/glabels.xml:223(term)
+#: ../C/glabels.xml:214(term)
 msgid "Drawing toolbar."
 msgstr "Zeichenwerkzeugleiste."
 
-#: ../C/glabels.xml:225(para)
+#: ../C/glabels.xml:216(para)
 msgid ""
 "The drawing toolbar contains a subset of commands for editing the current "
-"glabels document."
+"<application>gLabels</application> document."
 msgstr ""
 "Die Zeichenwerkzeugleiste enthält eine Auswahl von Befehlen zum Bearbeiten "
-"des aktuellen gLabels-Dokuments."
+"des aktuellen <application>gLabels</application>-Dokuments."
 
-#: ../C/glabels.xml:230(term)
+#: ../C/glabels.xml:221(term)
 msgid "Display area."
 msgstr "Anzeigebereich."
 
-#: ../C/glabels.xml:232(para)
+#: ../C/glabels.xml:223(para)
 msgid ""
-"The display area is the main drawing interface to "
-"<application><application>gLabels</application></application>."
+"The display area is the main drawing interface to <application>gLabels</"
+"application>."
 msgstr ""
 "Der Anzeigebereich ist die Zeichenfläche für <application>gLabels</"
 "application>."
 
-#: ../C/glabels.xml:237(term)
+#: ../C/glabels.xml:228(term)
 msgid "Object sidebar."
 msgstr "Objekt-Seitenleiste."
 
-#: ../C/glabels.xml:239(para)
+#: ../C/glabels.xml:230(para)
 msgid ""
 "The object sidebar provides an interface for viewing and editing all "
 "properties of an individual object."
@@ -421,11 +432,11 @@ msgstr ""
 "Die Objekt-Seitenleiste stellt eine Schnittstelle zum Betrachten und "
 "Bearbeiten der Eigenschaften eines bestimmten Objekts zur Verfügung."
 
-#: ../C/glabels.xml:244(term)
+#: ../C/glabels.xml:235(term)
 msgid "Properties toolbar."
 msgstr "Eingenschaften-Werkzeugleiste."
 
-#: ../C/glabels.xml:246(para)
+#: ../C/glabels.xml:237(para)
 msgid ""
 "The properties toolbar contains a set of tools to manipulate the properties "
 "of selected objects and set default properties for new objects."
@@ -434,46 +445,45 @@ msgstr ""
 "Manipulieren der Eigenschaften ausgewählter Objekte sowie zum Setzen der "
 "Standardeigenschaften für neue Objekte."
 
-#: ../C/glabels.xml:252(term)
+#: ../C/glabels.xml:243(term)
 msgid "Statusbar."
 msgstr "Statusleiste."
 
-#: ../C/glabels.xml:254(para)
+#: ../C/glabels.xml:245(para)
 msgid ""
-"The statusbar displays information about current "
-"<application><application>gLabels</application></application> activity and "
-"contextual information about the menu items."
+"The statusbar displays information about current <application>gLabels</"
+"application> activity and contextual information about the menu items."
 msgstr ""
 "In der Statusleiste werden Informationen über die aktuelle "
 "<application>gLabels</application>-Aktivität und Kontextinformationen über "
 "die Menüpunkte angezeigt."
 
-#: ../C/glabels.xml:270(title)
+#: ../C/glabels.xml:261(title)
 msgid "Usage"
 msgstr "Benutzung"
 
-#: ../C/glabels.xml:274(title)
+#: ../C/glabels.xml:265(title)
 msgid "To Create a New Label or Card"
 msgstr "Erstellen eines neuen Etiketts oder einer neuen Karte"
 
-#: ../C/glabels.xml:276(para)
+#: ../C/glabels.xml:267(para)
 msgid ""
 "To create a new label or business card, choose <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>New</guimenuitem></menuchoice> to display the "
 "<guilabel>New Label or Card</guilabel> dialog. Select the media type and "
 "orientation for the new document, then click <guibutton>OK</guibutton>. A new "
-"document is displayed in the display area of the "
-"<application><application>gLabels</application></application> window."
+"document is displayed in the display area of the <application>gLabels</"
+"application> window."
 msgstr ""
 "Um ein neues Etikett oder eine neue Visitenkarte anzulegen, wählen Sie "
 "<menuchoice><guimenu>Datei</guimenu><guimenuitem>Neu</guimenuitem></"
 "menuchoice>, um den Dialog <guilabel>Neues Etikett oder neue Karte</guilabel> "
 "anzuzeigen. Wählen Sie den Medientyp und die Ausrichtung für das neue "
 "Dokument aus und klicken Sie anschließend auf <guibutton>OK</guibutton>. Ein "
-"neues Dokument erscheint im Anzeigebereich des "
-"<application><application>gLabels</application></application>-Fensters."
+"neues Dokument erscheint im Anzeigebereich des <application>gLabels</"
+"application>-Fensters."
 
-#: ../C/glabels.xml:285(para)
+#: ../C/glabels.xml:276(para)
 msgid ""
 "If your particular media type is missing from this dialog, see <xref linkend="
 "\"glabels-create-template\"/>"
@@ -481,35 +491,33 @@ msgstr ""
 "Falls Ihr spezieller Medientyp in diesem Dialog nicht angezeigt wird, siehe "
 "<xref linkend=\"glabels-create-template\"/>."
 
-#: ../C/glabels.xml:292(title)
+#: ../C/glabels.xml:283(title)
 msgid "To Open a File"
 msgstr "Öffnen einer Datei"
 
-#: ../C/glabels.xml:294(para)
+#: ../C/glabels.xml:285(para)
 msgid ""
 "To open a file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</"
 "guimenuitem></menuchoice> to display the <guilabel>Open File</guilabel> "
 "dialog. Select the file that you want to open, then click <guibutton>OK</"
 "guibutton>. The file is displayed in the display area of the "
-"<application><application>gLabels</application></application> window."
+"<application>gLabels</application> window."
 msgstr ""
 "Um eine Datei zu öffnen, wählen Sie <menuchoice><guimenu>Datei</"
 "guimenu><guimenuitem>Öffnen</guimenuitem></menuchoice>, um den Dialog "
 "<guilabel>Datei öffnen</guilabel> anzuzeigen. Wählen Sie die gewünschte Datei "
 "aus und klicken Sie dann auf <guibutton>Öffnen</guibutton>. Die Datei wird im "
-"Anzeigebereich des <application><application>gLabels</application></"
-"application>-Fensters geöffnet."
+"Anzeigebereich des <application>gLabels</application>-Fensters geöffnet."
 
-#: ../C/glabels.xml:301(para)
+#: ../C/glabels.xml:292(para)
 msgid ""
-"You can also open multiple files in <application><application>gLabels</"
-"application></application>. The application creates a separate application "
-"window for each open file."
+"You can also open multiple files in <application>gLabels</application>. The "
+"application creates a separate application window for each open file."
 msgstr ""
 "Sie können in <application>gLabels</application> auch mehrere Dateien öffnen. "
 "Die Anwendung erzeugt ein separates Fenster für jede geöffnete Datei."
 
-#: ../C/glabels.xml:305(para)
+#: ../C/glabels.xml:296(para)
 msgid ""
 "The application records the paths and filenames of the most recent files that "
 "you have edited and displays the files as menu items on the "
@@ -521,48 +529,46 @@ msgstr ""
 "<menuchoice><guimenu>Datei</guimenu><guisubmenu>Zuletzt benutzt</guisubmenu></"
 "menuchoice> angezeigt."
 
-#: ../C/glabels.xml:315(title)
+#: ../C/glabels.xml:306(title)
 msgid "To Open Multiple Files from a Command Line"
 msgstr "Öffnen mehrerer Dateien aus einer Befehlszeile"
 
-#: ../C/glabels.xml:317(para)
+#: ../C/glabels.xml:308(para)
 msgid ""
-"You can run <application><application>gLabels</application></application> "
-"from a command line and open a single file or multiple files. To open "
-"multiple files from a command line, type the following command, then press "
-"<keycap>Return</keycap>:"
+"You can run <application>gLabels</application> from a command line and open a "
+"single file or multiple files. To open multiple files from a command line, "
+"type the following command, then press <keycap>Return</keycap>:"
 msgstr ""
 "Sie können <application>gLabels</application> aus einer Befehlszeile starten "
 "und eine Datei oder mehrere Dateien öffnen. Um mehrere Dateien aus einer "
 "Befehlszeile zu öffnen, geben Sie den folgenden Befehl ein und drücken dann "
 "die <keycap>Eingabetaste</keycap>:"
 
-#: ../C/glabels.xml:323(replaceable)
+#: ../C/glabels.xml:314(replaceable)
 msgid "file1.glabels file2.glabels file3.glabels"
 msgstr "Datei1.glabels Datei2.glabels Datei3.glabels"
 
-#: ../C/glabels.xml:322(command)
+#: ../C/glabels.xml:313(command)
 msgid "glabels <placeholder-1/>"
 msgstr "glabels <placeholder-1/>"
 
-#: ../C/glabels.xml:326(para)
+#: ../C/glabels.xml:317(para)
 msgid ""
 "When the application starts, the files that you specify are displayed in "
-"separate <application><application>gLabels</application></application> "
-"windows."
+"separate <application>gLabels</application> windows."
 msgstr ""
 "Wenn die Anwendung startet, werden die von Ihnen angegebenen Dateien in "
 "separaten <application>gLabels</application>-Fenstern angezeigt."
 
-#: ../C/glabels.xml:333(title)
+#: ../C/glabels.xml:324(title)
 msgid "To Save a File"
 msgstr "Speichern einer Datei"
 
-#: ../C/glabels.xml:335(para)
+#: ../C/glabels.xml:326(para)
 msgid "You can save files in the following ways:"
 msgstr "Sie können Dateien auf folgende Arten speichern:"
 
-#: ../C/glabels.xml:340(para)
+#: ../C/glabels.xml:331(para)
 msgid ""
 "To save changes to an existing file, choose <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Save</guimenuitem></menuchoice>."
@@ -571,7 +577,7 @@ msgstr ""
 "<menuchoice><guimenu>Datei</guimenu><guimenuitem>Speichern</guimenuitem></"
 "menuchoice>."
 
-#: ../C/glabels.xml:347(para)
+#: ../C/glabels.xml:338(para)
 msgid ""
 "To save a new file or to save an existing file under a new filename, choose "
 "<menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></"
@@ -584,11 +590,11 @@ msgstr ""
 "einen Namen für die Datei im Dialogfeld <guilabel>Speichern unter</guilabel> "
 "ein und klicken Sie anschließend auf <guibutton>OK</guibutton>. "
 
-#: ../C/glabels.xml:360(title)
+#: ../C/glabels.xml:351(title)
 msgid "To Change Label Properties"
 msgstr "Ändern der Eigenschaften eines Etiketts"
 
-#: ../C/glabels.xml:362(para)
+#: ../C/glabels.xml:353(para)
 msgid ""
 "To change the media type and/or orientation of a label, choose "
 "<menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></"
@@ -602,11 +608,11 @@ msgstr ""
 "anzuzeigen. Wählen Sie den neuen Medientyp für das Dokument aus und klicken "
 "Sie anschließend auf <guibutton>OK</guibutton>."
 
-#: ../C/glabels.xml:373(title)
+#: ../C/glabels.xml:364(title)
 msgid "To Create a Custom Template"
 msgstr "Erstellen einer benutzerdefinierten Vorlage"
 
-#: ../C/glabels.xml:375(para)
+#: ../C/glabels.xml:366(para)
 msgid ""
 "To create a new custom template, choose <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Template Designer ...</guimenuitem></menuchoice> to "
@@ -621,7 +627,7 @@ msgstr ""
 "benutzerdefinierten Vorlage für die meisten Typen von Etiketten oder "
 "Visitenkarten, die Ihnen in Schreibwarengeschäften begegnen könnten."
 
-#: ../C/glabels.xml:382(para)
+#: ../C/glabels.xml:373(para)
 msgid ""
 "If you prefer, you can create your templates manually. For this option see "
 "<xref linkend=\"glabels-manual-create-template\"/>"
@@ -630,48 +636,47 @@ msgstr ""
 "Weitere Informationen hierzu finden Sie in <xref linkend=\"glabels-manual-"
 "create-template\"/>."
 
-#: ../C/glabels.xml:390(title)
+#: ../C/glabels.xml:381(title)
 msgid "To Close a File"
 msgstr "Schließen einer Datei"
 
-#: ../C/glabels.xml:392(para)
+#: ../C/glabels.xml:383(para)
 msgid ""
 "To close the current document, choose <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Close</guimenuitem></menuchoice> to close the "
 "application window. If the current document is modified, a confirmation "
 "dialog will be presented, allowing you to save the document or cancel the "
 "command. If the window being closed is the only open window, "
-"<application><application>gLabels</application></application> will exit."
+"<application>gLabels</application> will exit."
 msgstr ""
 "Um das aktuelle Dokument zu schließen, wählen Sie <menuchoice><guimenu>Datei</"
 "guimenu><guimenuitem>Schließen</guimenuitem></menuchoice>, um das "
 "Anwendungsfenster zu schließen. Falls das aktuelle Dokument bearbeitet wurde, "
 "wird ein Bestätigungsdialog geöffnet, in welchem Sie das Dokument speichern "
 "oder den Vorgang abbrechen können. Falls das zu schließende Fenster das "
-"einzige offene Fenster ist, wird <application><application>gLabels</"
-"application></application> dadurch beendet."
+"einzige offene Fenster ist, wird <application>gLabels</application> dadurch "
+"beendet."
 
-#: ../C/glabels.xml:404(title)
-msgid "To Quit <application><application>gLabels</application></application>"
-msgstr "<application><application>gLabels</application></application> beenden"
+#: ../C/glabels.xml:395(title)
+msgid "To Quit <application>gLabels</application>"
+msgstr "<application>gLabels</application> beenden"
 
-#: ../C/glabels.xml:406(para)
+#: ../C/glabels.xml:397(para)
 msgid ""
-"To quit <application><application>gLabels</application></application>, choose "
-"<menuchoice><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></"
-"menuchoice>. This is equivalent to closing all open windows. See <xref "
-"linkend=\"glabels-close-file\"/>."
+"To quit <application>gLabels</application>, choose <menuchoice><guimenu>File</"
+"guimenu><guimenuitem>Quit</guimenuitem></menuchoice>. This is equivalent to "
+"closing all open windows. See <xref linkend=\"glabels-close-file\"/>."
 msgstr ""
-"Um <application><application>gLabels</application></application> zu beenden, "
-"wählen Sie <menuchoice><guimenu>Datei</guimenu><guimenuitem>Beenden</"
-"guimenuitem></menuchoice>. Dadurch werden alle offenen Fenster geschlossen. "
-"Siehe <xref linkend=\"glabels-close-file\"/>."
+"Um <application>gLabels</application> zu beenden, wählen Sie "
+"<menuchoice><guimenu>Datei</guimenu><guimenuitem>Beenden</guimenuitem></"
+"menuchoice>. Dadurch werden alle offenen Fenster geschlossen. Siehe <xref "
+"linkend=\"glabels-close-file\"/>."
 
-#: ../C/glabels.xml:416(title)
+#: ../C/glabels.xml:407(title)
 msgid "To Print Labels or Cards"
 msgstr "Drucken von Etiketten oder Karten"
 
-#: ../C/glabels.xml:418(para)
+#: ../C/glabels.xml:409(para)
 msgid ""
 "To print labels or cards, choose <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Print</guimenuitem></menuchoice> to display the "
@@ -687,7 +692,7 @@ msgstr ""
 "Vorschau auf die Druckergebnisse zu erhalten, klicken Sie auf "
 "<guilabel>Druckvorschau</guilabel>."
 
-#: ../C/glabels.xml:425(para)
+#: ../C/glabels.xml:416(para)
 msgid ""
 "The <guilabel>Print</guilabel> dialog allows you to specify the following "
 "print options:"
@@ -695,15 +700,15 @@ msgstr ""
 "Im Dialog <guilabel>Drucken</guilabel> können Sie die folgenden Optionen zum "
 "Drucken festlegen:"
 
-#: ../C/glabels.xml:429(title)
+#: ../C/glabels.xml:420(title)
 msgid "The Labels Tab of the Print Dialog"
 msgstr "Der Reiter »Etiketten« des Druckdialogs"
 
-#: ../C/glabels.xml:434(guilabel)
+#: ../C/glabels.xml:425(guilabel)
 msgid "Print control (Simple)"
 msgstr "Drucksteuerung (einfach)"
 
-#: ../C/glabels.xml:437(para)
+#: ../C/glabels.xml:428(para)
 msgid ""
 "For simple labels or cards (no document merge), the job tabbed section "
 "contains the following copy controls."
@@ -711,12 +716,12 @@ msgstr ""
 "Für einfache Etiketten oder Karten (keine Dokumentmischung) enthält der "
 "Reiter »Labels« die folgenden Einstellmöglichkeiten."
 
-#: ../C/glabels.xml:442(title)
+#: ../C/glabels.xml:433(title)
 msgid "Print Copy Controls"
 msgstr "Angeben der Kopien"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:453(para)
+#: ../C/glabels.xml:444(para)
 msgid ""
 "The number of copies of the label can be selected by choosing the number of "
 "full sheets to print, or a specific subset of labels on a single sheet."
@@ -725,7 +730,7 @@ msgstr ""
 "zu druckenden Seiten oder eine Teilmenge von Etiketten auf einer einzelnen "
 "Seite auswählen."
 
-#: ../C/glabels.xml:457(para)
+#: ../C/glabels.xml:448(para)
 msgid ""
 "The mini-preview can also be used to graphically select the subset of labels "
 "by clicking the first label on the mini-preview and dragging to the last "
@@ -735,11 +740,11 @@ msgstr ""
 "Etiketten grafisch auszuwählen, indem Sie auf das erste Etikett klicken und "
 "es auf das letzte Etikett ziehen."
 
-#: ../C/glabels.xml:465(guilabel)
+#: ../C/glabels.xml:456(guilabel)
 msgid "Print control (Merge)"
 msgstr "Drucksteuerung (Mischen)"
 
-#: ../C/glabels.xml:468(para)
+#: ../C/glabels.xml:459(para)
 msgid ""
 "For labels or cards using the document merge (also known as \"mail merge\") "
 "capability, the job tabbed section contains the following merge controls "
@@ -749,12 +754,12 @@ msgstr ""
 "dieser Reiter die folgenden Einstellungen zur Mischung von Dokumenten "
 "anstelle der Festlegung der Kopien."
 
-#: ../C/glabels.xml:474(title)
+#: ../C/glabels.xml:465(title)
 msgid "Print Document Merge Controls"
 msgstr "Steuerung der Einmischung von Dokumenten"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:485(para)
+#: ../C/glabels.xml:476(para)
 msgid ""
 "The total number of labels or cards printed is the product of the number of "
 "records in the merge source and the number of copies selected. If multiple "
@@ -769,7 +774,7 @@ msgstr ""
 "oder nicht zusammengefasst (eine Kopie jedes Datensatzes wird immer vor der "
 "nächsten Kopie gedruckt)."
 
-#: ../C/glabels.xml:492(para)
+#: ../C/glabels.xml:483(para)
 msgid ""
 "Printing can begin on any label on the first sheet. This can be selected with "
 "the <guilabel>Start on label</guilabel> spinbutton."
@@ -778,7 +783,7 @@ msgstr ""
 "Dies können Sie im Einstellfeld <guilabel>Start bei Etikett</guilabel> "
 "auswählen."
 
-#: ../C/glabels.xml:496(para)
+#: ../C/glabels.xml:487(para)
 msgid ""
 "The mini-preview can also be used to graphically select this first label, by "
 "clicking on the desired label in the mini-preview."
@@ -786,19 +791,19 @@ msgstr ""
 "In der verkleinerten Vorschau können Sie das erste Etikett grafisch "
 "auswählen, indem Sie das gewünschte Etikett anklicken."
 
-#: ../C/glabels.xml:503(guilabel)
+#: ../C/glabels.xml:494(guilabel)
 msgid "Options"
 msgstr "Optionen"
 
-#: ../C/glabels.xml:505(para)
+#: ../C/glabels.xml:496(para)
 msgid "The following options can also be selected."
 msgstr "Die folgenden Optionen können ebenfalls gewählt werden."
 
-#: ../C/glabels.xml:508(guilabel)
+#: ../C/glabels.xml:499(guilabel)
 msgid "print outlines"
 msgstr "Begrenzungen drucken"
 
-#: ../C/glabels.xml:509(para)
+#: ../C/glabels.xml:500(para)
 msgid ""
 "Print outlines of labels. This option is useful for dry-runs, to test printer "
 "alignment."
@@ -806,11 +811,11 @@ msgstr ""
 "Begrenzungen der Etiketten drucken. Diese Option ist nützlich, wenn Sie die "
 "Lage des Papiers im Drucker prüfen wollen."
 
-#: ../C/glabels.xml:513(guilabel)
+#: ../C/glabels.xml:504(guilabel)
 msgid "print in reverse"
 msgstr "Spiegelbildlich drucken"
 
-#: ../C/glabels.xml:514(para)
+#: ../C/glabels.xml:505(para)
 msgid ""
 "Prints the labels as mirror images. This option is useful for printing on "
 "clear labels that will be viewed from the reverse side (e.g. in a car window)."
@@ -819,11 +824,11 @@ msgstr ""
 "Drucken durchsichtiger Aufkleber, die von der Rückseite aus betrachtet werden "
 "(z.B. hinter Autoscheiben)."
 
-#: ../C/glabels.xml:519(guilabel)
+#: ../C/glabels.xml:510(guilabel)
 msgid "print crop marks"
 msgstr "Schnitt"
 
-#: ../C/glabels.xml:520(para)
+#: ../C/glabels.xml:511(para)
 msgid ""
 "Prints crop marks along the edge of the sheet. This option is useful for "
 "printing on blank stock, to be cut after printing. This option does not work "
@@ -833,11 +838,11 @@ msgstr ""
 "Drucken auf Papier, das erst nach dem Druck beschnitten werden soll. Diese "
 "Option funktioniert eventuell nicht mit allen Vorlagen."
 
-#: ../C/glabels.xml:535(title)
+#: ../C/glabels.xml:526(title)
 msgid "To Create New Objects"
 msgstr "Erstellen neuer Objekte"
 
-#: ../C/glabels.xml:537(para)
+#: ../C/glabels.xml:528(para)
 msgid ""
 "Objects are created by choosing the appropriate selection under the "
 "<menuchoice><guimenu>Objects</guimenu><guimenuitem>Create Object</"
@@ -858,17 +863,17 @@ msgstr ""
 "guimenuitem></menuchoice>. Dadurch wird der Mauszeiger im Anzeigebereich "
 "wieder in den vorgegebenen Auswahlzeiger geändert."
 
-#: ../C/glabels.xml:547(para)
+#: ../C/glabels.xml:538(para)
 msgid "The following describes the object creation mode for each object type:"
 msgstr ""
 "Nachfolgend wird der Modus zur Erstellung der Objekte für jeden Objekttyp "
 "beschrieben:"
 
-#: ../C/glabels.xml:553(term) ../C/glabels.xml:1122(guilabel)
+#: ../C/glabels.xml:544(term) ../C/glabels.xml:1113(guilabel)
 msgid "Text"
 msgstr "Text"
 
-#: ../C/glabels.xml:555(para)
+#: ../C/glabels.xml:546(para)
 msgid ""
 "Click the desired location of the upper left corner of the text object. New "
 "text objects are initialized with the string \"Text.\" To change this text, "
@@ -879,11 +884,11 @@ msgstr ""
 "diesen Text oder andere Eigenschaften ändern können, finden Sie in <xref "
 "linkend=\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:563(term)
+#: ../C/glabels.xml:554(term)
 msgid "Box"
 msgstr "Rechteck"
 
-#: ../C/glabels.xml:565(para)
+#: ../C/glabels.xml:556(para)
 msgid ""
 "Click the desired location of the upper left corner of the box object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -896,11 +901,11 @@ msgstr ""
 "Sie die Eigenschaften des Rechteckobjekts ändern können, finden Sie in <xref "
 "linkend=\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:574(term) ../C/glabels.xml:1148(guilabel)
+#: ../C/glabels.xml:565(term) ../C/glabels.xml:1139(guilabel)
 msgid "Line"
 msgstr "Linie"
 
-#: ../C/glabels.xml:576(para)
+#: ../C/glabels.xml:567(para)
 msgid ""
 "Click the desired location of one end of the line object and drag to the "
 "desired location of the other end. If you simply click in a single location, "
@@ -913,11 +918,11 @@ msgstr ""
 "Eigenschaften des Linienobjekts ändern können, finden Sie in <xref linkend="
 "\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:585(term)
+#: ../C/glabels.xml:576(term)
 msgid "Ellipse"
 msgstr "Ellipse"
 
-#: ../C/glabels.xml:587(para)
+#: ../C/glabels.xml:578(para)
 msgid ""
 "Click the desired location of the upper left corner of the ellipse object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -930,11 +935,11 @@ msgstr ""
 "Eigenschaften des Ellipsenobjekts ändern können, finden Sie in <xref linkend="
 "\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:596(term)
+#: ../C/glabels.xml:587(term)
 msgid "Image"
 msgstr "Image"
 
-#: ../C/glabels.xml:598(para)
+#: ../C/glabels.xml:589(para)
 msgid ""
 "Click the desired location of the upper left corner of the image object and "
 "drag to the desired location of the lower right corner. If you simply click "
@@ -950,11 +955,11 @@ msgstr ""
 "andere Eigenschaften des Bildobjekts ändern können, finden Sie in <xref "
 "linkend=\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:609(term)
+#: ../C/glabels.xml:600(term)
 msgid "Barcode"
 msgstr "Strichcode"
 
-#: ../C/glabels.xml:611(para)
+#: ../C/glabels.xml:602(para)
 msgid ""
 "Click the desired location of the upper left corner of the barcode object. "
 "New barcode objects are initialized to a POSTNET barcode with representative "
@@ -967,11 +972,11 @@ msgstr ""
 "Sie die Eigenschaften des Strichcodeobjekts ändern können, finden Sie in "
 "<xref linkend=\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:626(title)
+#: ../C/glabels.xml:617(title)
 msgid "To Select Objects"
 msgstr "Auswählen von Objekten"
 
-#: ../C/glabels.xml:628(para)
+#: ../C/glabels.xml:619(para)
 msgid ""
 "A prerequisite for performing operations on objects is the selection of "
 "individual objects or groups of objects. The display area must be in the "
@@ -989,11 +994,11 @@ msgstr ""
 "guimenuitem></menuchoice> aktiviert oder über das entsprechende Objekt in der "
 "<guilabel>Zeichenwerkzeugleiste</guilabel>."
 
-#: ../C/glabels.xml:641(term)
+#: ../C/glabels.xml:632(term)
 msgid "Selecting a single object"
 msgstr "Auswahl eines einzelnen Objekts"
 
-#: ../C/glabels.xml:643(para)
+#: ../C/glabels.xml:634(para)
 msgid ""
 "A single object can be selected simply by clicking on the desired object in "
 "the display area. Once selected the object will be highlighted with a set of "
@@ -1003,11 +1008,11 @@ msgstr ""
 "Anzeigebereich anklicken. Nach dem Anklicken wird das Objekt durch "
 "Anfasspunkte zur Größenänderung hervorgehoben."
 
-#: ../C/glabels.xml:651(term)
+#: ../C/glabels.xml:642(term)
 msgid "Aggregate object selections"
 msgstr "Auswahl mehrerer Objekte"
 
-#: ../C/glabels.xml:653(para)
+#: ../C/glabels.xml:644(para)
 msgid ""
 "Multiple objects can be selected by first selecting the first object as above "
 "and then by holding the <keycap>Ctrl</keycap> key while selecting additional "
@@ -1027,11 +1032,11 @@ msgstr ""
 "Alle Objekte in einer zusammenhängenden Objektauswahl werden hervorgehoben "
 "dargestellt."
 
-#: ../C/glabels.xml:667(term)
+#: ../C/glabels.xml:658(term)
 msgid "Area selections"
 msgstr "Bereichsauswahl"
 
-#: ../C/glabels.xml:669(para)
+#: ../C/glabels.xml:660(para)
 msgid ""
 "Multiple objects can also be selected by clicking an empty area and dragging "
 "to form a rectangular area. When released, all objects contained in the area "
@@ -1045,11 +1050,11 @@ msgstr ""
 "Bereichsauswahl kann zum Hinzufügen einer vorhandenen Auswahl benutzt werden, "
 "wenn Sie bei der Auswahl die <keycap>Strg</keycap>-Taste gedrückt halten."
 
-#: ../C/glabels.xml:679(term)
+#: ../C/glabels.xml:670(term)
 msgid "Unselecting objects"
 msgstr "Auswahl von Objekten aufheben"
 
-#: ../C/glabels.xml:681(para)
+#: ../C/glabels.xml:672(para)
 msgid ""
 "Individual objects can be removed from an existing selection by holding the "
 "<keycap>Ctrl</keycap> key while clicking on a previously selected object. An "
@@ -1065,11 +1070,11 @@ msgstr ""
 "Markierungen löschen</guimenuitem></menuchoice> wählen. Sobald ein Objekt "
 "nicht mehr ausgewählt ist, wird es nicht mehr hervorgehoben dargestellt."
 
-#: ../C/glabels.xml:698(title)
+#: ../C/glabels.xml:689(title)
 msgid "Clipboard Commands"
 msgstr "Befehle für die Zwischenablage"
 
-#: ../C/glabels.xml:700(para)
+#: ../C/glabels.xml:691(para)
 msgid ""
 "Object selections can be manipulated using the standard clipboard operations "
 "<guimenuitem>Cut</guimenuitem>, <guimenuitem>Copy</guimenuitem>, "
@@ -1080,20 +1085,20 @@ msgstr ""
 "<guimenuitem>Einfügen</guimenuitem> und <guimenuitem>Löschen</guimenuitem> "
 "manipuliert werden."
 
-#: ../C/glabels.xml:711(keycap) ../C/glabels.xml:727(keycap)
-#: ../C/glabels.xml:743(keycap)
+#: ../C/glabels.xml:702(keycap) ../C/glabels.xml:718(keycap)
+#: ../C/glabels.xml:734(keycap)
 msgid "Ctrl"
 msgstr "Strg"
 
-#: ../C/glabels.xml:711(keycap)
+#: ../C/glabels.xml:702(keycap)
 msgid "X"
 msgstr "X"
 
-#: ../C/glabels.xml:713(guimenuitem)
+#: ../C/glabels.xml:704(guimenuitem)
 msgid "Cut"
 msgstr "Ausschneiden"
 
-#: ../C/glabels.xml:717(para)
+#: ../C/glabels.xml:708(para)
 msgid ""
 "Moves selected objects to the clipboard. The objects are then available for "
 "pasting back into the current document or another document."
@@ -1102,15 +1107,15 @@ msgstr ""
 "dann verfügbar, um später in das aktuelle Dokument oder ein anderes Dokument "
 "eingefügt zu werden."
 
-#: ../C/glabels.xml:727(keycap)
+#: ../C/glabels.xml:718(keycap)
 msgid "C"
 msgstr "C"
 
-#: ../C/glabels.xml:729(guimenuitem)
+#: ../C/glabels.xml:720(guimenuitem)
 msgid "Copy"
 msgstr "Kopieren"
 
-#: ../C/glabels.xml:733(para)
+#: ../C/glabels.xml:724(para)
 msgid ""
 "Copies selected objects to the clipboard without deleting them. The objects "
 "are then available for pasting back into the current document or another "
@@ -1120,40 +1125,39 @@ msgstr ""
 "entfernen. Diese Objekte sind dann verfügbar, um später in das aktuelle "
 "Dokument oder ein anderes Dokument eingefügt zu werden."
 
-#: ../C/glabels.xml:743(keycap)
+#: ../C/glabels.xml:734(keycap)
 msgid "V"
 msgstr "V"
 
-#: ../C/glabels.xml:745(guimenuitem)
+#: ../C/glabels.xml:736(guimenuitem)
 msgid "Paste"
 msgstr "Einfügen"
 
-#: ../C/glabels.xml:749(para)
+#: ../C/glabels.xml:740(para)
 msgid ""
 "Pastes objects from the clipboard into the current document. "
-"<application><application>gLabels</application></application> can only paste "
-"objects from another <application><application>gLabels</application></"
-"application> document."
+"<application>gLabels</application> can only paste objects from another "
+"<application>gLabels</application> document."
 msgstr ""
 "Fügt Objekte aus der Zwischenablage in das aktuelle Dokument ein. "
 "<application>gLabels</application> kann nur Objekte aus anderen "
 "<application>gLabels</application>-Dokumenten einfügen."
 
-#: ../C/glabels.xml:759(keycap) ../C/glabels.xml:761(guimenuitem)
+#: ../C/glabels.xml:750(keycap) ../C/glabels.xml:752(guimenuitem)
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../C/glabels.xml:765(para)
+#: ../C/glabels.xml:756(para)
 msgid "Deletes selected objects without placing them on the clipboard."
 msgstr ""
 "Entfernt die ausgewählten Objekte, ohne sie in die Zwischenablage zu "
 "verschieben."
 
-#: ../C/glabels.xml:776(title)
+#: ../C/glabels.xml:767(title)
 msgid "To Edit Object Properties"
 msgstr "Bearbeiten der Objekteigenschaften"
 
-#: ../C/glabels.xml:778(para)
+#: ../C/glabels.xml:769(para)
 msgid ""
 "Most object properties can be modified through the object editor sidebar, "
 "illustrated below. To use the object editor, a single object must first be "
@@ -1164,12 +1168,12 @@ msgstr ""
 "zunächst ein einzelnes Objekt ausgewählt werden. Siehe <xref linkend="
 "\"glabels-select-objects\"/>."
 
-#: ../C/glabels.xml:785(title)
+#: ../C/glabels.xml:776(title)
 msgid "Object Editor Sidebar"
 msgstr "Objekteditor-Seitenleiste"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:796(para)
+#: ../C/glabels.xml:787(para)
 msgid ""
 "The object editor will contain a subset of the following tabbed sections, "
 "depending on object type:"
@@ -1177,11 +1181,11 @@ msgstr ""
 "Der Objekteditor bietet eine Auswahl der folgenden Reiter, abhängig vom "
 "Objekttyp:"
 
-#: ../C/glabels.xml:800(title)
+#: ../C/glabels.xml:791(title)
 msgid "Text Tabbed Section (Text objects)"
 msgstr "Text-Reiter (Textobjekte)"
 
-#: ../C/glabels.xml:802(para)
+#: ../C/glabels.xml:793(para)
 msgid ""
 "This section contains a small editor for changing the content of a text "
 "object. It also contains a dropdown menu of available document merge keys, "
@@ -1191,11 +1195,11 @@ msgstr ""
 "Textobjekts. Weiterhin ist ein Ausklappmenü mit den verfügbaren Schlüsseln "
 "zur Dokumentmischung enthalten, die in den Text eingefügt werden können."
 
-#: ../C/glabels.xml:809(title)
+#: ../C/glabels.xml:800(title)
 msgid "Image Tabbed Section (Image objecs)"
 msgstr "Bild-Reiter (Bild-Objekte)"
 
-#: ../C/glabels.xml:811(para)
+#: ../C/glabels.xml:802(para)
 msgid ""
 "This section contains a file entry with preview to select image files. The "
 "browse button can be used to easily locate image files. Alternatively, a "
@@ -1207,11 +1211,11 @@ msgstr ""
 "anstelle eines Dateinamens angeben, der bei der Ausgabe des Dokuments ersetzt "
 "wird."
 
-#: ../C/glabels.xml:819(title)
+#: ../C/glabels.xml:810(title)
 msgid "Data Tabbed Section (Barcode objecs)"
 msgstr "Daten-Reiter (Strichcode-Objekte)"
 
-#: ../C/glabels.xml:821(para)
+#: ../C/glabels.xml:812(para)
 msgid ""
 "This section contains a text entry to enter literal barcode data. "
 "Alternatively, a document merge key can be used to provide this data at print "
@@ -1221,11 +1225,11 @@ msgstr ""
 "Alternativ kann hier ein Schlüssel zur Dokumentmischung eingetragen werden, "
 "der beim Druck für die Bereitstellung der richtigen Daten sorgt."
 
-#: ../C/glabels.xml:828(title)
+#: ../C/glabels.xml:819(title)
 msgid "Style Tabbed Section (Text objects)"
 msgstr "Stil-Reiter (Text-Objekte)"
 
-#: ../C/glabels.xml:830(para)
+#: ../C/glabels.xml:821(para)
 msgid ""
 "This section contains controls to select text properties, including font "
 "family, font size, font weight, color, and text justification."
@@ -1234,11 +1238,11 @@ msgstr ""
 "Schriftfamilie, Schriftgröße, Schriftstärke, Schriftfarbe und Ausrichtung des "
 "Texts."
 
-#: ../C/glabels.xml:837(title)
+#: ../C/glabels.xml:828(title)
 msgid "Style Tabbed Section (Barcode objecs)"
 msgstr "Stil-Reiter (Strichcode-Objekte)"
 
-#: ../C/glabels.xml:839(para)
+#: ../C/glabels.xml:830(para)
 msgid ""
 "This section contains controls to select barcode properties, including "
 "barcode style, color, whether to print text, and whether to include a "
@@ -1248,11 +1252,11 @@ msgstr ""
 "Strichcodes, wie Stil, Farbe, Drucken von Text oder Beinhalten einer "
 "Prüfsumme."
 
-#: ../C/glabels.xml:846(title)
+#: ../C/glabels.xml:837(title)
 msgid "Line Tabbed Section"
 msgstr "Linie-Reiter"
 
-#: ../C/glabels.xml:848(para)
+#: ../C/glabels.xml:839(para)
 msgid ""
 "This section contains controls to select properties of lines and outlines. "
 "These properties include line width and color."
@@ -1260,11 +1264,11 @@ msgstr ""
 "Dieser Abschnitt enthält Einstellmöglichkeiten für die Auswahl von "
 "Eigenschaften von Linien und Begrenzungen, wie Linienbreite und -farbe."
 
-#: ../C/glabels.xml:854(title)
+#: ../C/glabels.xml:845(title)
 msgid "Fill Tabbed Section"
 msgstr "Füllung-Reiter"
 
-#: ../C/glabels.xml:856(para)
+#: ../C/glabels.xml:847(para)
 msgid ""
 "This section contains controls to select fill properties of box and ellipse "
 "objects. Currently the only fill property is fill color."
@@ -1273,11 +1277,11 @@ msgstr ""
 "Füllungseigenschaften von Rechteck- und Ellipsenobjekten. Derzeit ist nur die "
 "Einstellung der Füllungsfarbe möglich."
 
-#: ../C/glabels.xml:863(title)
+#: ../C/glabels.xml:854(title)
 msgid "Size Tabbed Section (All except line objects)"
 msgstr "Reiter »Größe« (alle außer Linienobjekte)"
 
-#: ../C/glabels.xml:865(para)
+#: ../C/glabels.xml:856(para)
 msgid ""
 "This section contains controls to select the width and height of an object. A "
 "checkbox is provided, so that the current aspect ratio can be locked while "
@@ -1290,11 +1294,11 @@ msgstr ""
 "bleibt. Für Bildobjekte gibt es außerdem einen Knopf zum Zurücksetzen des "
 "Bildes auf Originalgröße, wobei eine Auflösung von 72 dpi angenommen wird."
 
-#: ../C/glabels.xml:874(title)
+#: ../C/glabels.xml:865(title)
 msgid "Size Tabbed Section (Line objects)"
 msgstr "Reiter »Größe« (Linienobjekte)"
 
-#: ../C/glabels.xml:876(para)
+#: ../C/glabels.xml:867(para)
 msgid ""
 "This section contains controls to select the length and angle of a line "
 "object."
@@ -1302,39 +1306,39 @@ msgstr ""
 "Dieser Abschnitt enthält Einstellmöglichkeiten für die Länge und den Winkel "
 "eines Linienobjekts."
 
-#: ../C/glabels.xml:882(title)
+#: ../C/glabels.xml:873(title)
 msgid "Position Tabbed Section"
 msgstr "Reiter »Position«"
 
-#: ../C/glabels.xml:884(para)
+#: ../C/glabels.xml:875(para)
 msgid "This section contains controls to change the position of an object."
 msgstr ""
 "Dieser Abschnitt beschreibt die Möglichkeiten zur Positionierung eines "
 "Objekts."
 
-#: ../C/glabels.xml:891(title)
+#: ../C/glabels.xml:882(title)
 msgid "Shadow Tabbed Section (All except image and barcode objects)"
 msgstr "Reiter »Schattierung« (alle außer Bild- und Strichcodeobjekten)"
 
-#: ../C/glabels.xml:893(para)
+#: ../C/glabels.xml:884(para)
 msgid "This section contains controls to add a shadow to an object."
 msgstr ""
 "Dieser Abschnitt enthält Einstellmöglichkeiten für die Schattierung eines "
 "Objekts."
 
-#: ../C/glabels.xml:902(title)
+#: ../C/glabels.xml:893(title)
 msgid "Other Manipulations of Objects"
 msgstr "Andere Manipulationen von Objekten"
 
-#: ../C/glabels.xml:904(para)
+#: ../C/glabels.xml:895(para)
 msgid "Objects can also be manipulated in the following ways."
 msgstr "Objekte können auf die folgenden Arten manipuliert werden."
 
-#: ../C/glabels.xml:907(title)
+#: ../C/glabels.xml:898(title)
 msgid "Moving and Resizing Objects"
 msgstr "Verschieben und Größenänderung von Objekten"
 
-#: ../C/glabels.xml:909(para)
+#: ../C/glabels.xml:900(para)
 msgid ""
 "Objects can be moved by simply clicking on a selected object and dragging the "
 "object to its new location. If the object is part of an aggregate selection, "
@@ -1351,7 +1355,7 @@ msgstr ""
 "erzeugt, die dieses Objekt enthält. Siehe <xref linkend=\"glabels-select-"
 "objects\"/>."
 
-#: ../C/glabels.xml:917(para)
+#: ../C/glabels.xml:908(para)
 msgid ""
 "A selected object can be resized by clicking one of its resize handle and "
 "dragging it to obtain the new size."
@@ -1360,11 +1364,11 @@ msgstr ""
 "einen der Größenänderungs-Anfasspunkte klicken und diesen ziehen, um die "
 "gewünschte Größe zu erreichen."
 
-#: ../C/glabels.xml:923(title)
+#: ../C/glabels.xml:914(title)
 msgid "Changing Stacking Order"
 msgstr "Ändern der Reihenfolge der Ebenen"
 
-#: ../C/glabels.xml:925(para)
+#: ../C/glabels.xml:916(para)
 msgid ""
 "Stacking order refers to relative position in the z-axis of objects. That is "
 "when objects overlap, which object will appear on top of the other. By "
@@ -1391,11 +1395,11 @@ msgstr ""
 "durch einen Klick mit der rechten Maustaste auf den Ansichtsbereich "
 "verfügbar, falls sich dort eine nicht leere Auswahl befindet."
 
-#: ../C/glabels.xml:943(title)
+#: ../C/glabels.xml:934(title)
 msgid "Rotating and Flipping Objects"
 msgstr "Drehen und Spiegeln von Objekten"
 
-#: ../C/glabels.xml:945(para)
+#: ../C/glabels.xml:936(para)
 msgid ""
 "Objects can be rotated 90 degrees in either direction, or flipped "
 "horizontally or vertically, by choosing the appropriate menuitem in the "
@@ -1410,11 +1414,11 @@ msgstr ""
 "mit der rechten Maustaste in eine nicht leere Auswahl im Ansichtsbereich "
 "klicken."
 
-#: ../C/glabels.xml:955(title)
+#: ../C/glabels.xml:946(title)
 msgid "Aligning Objects"
 msgstr "Ausrichten von Objekten"
 
-#: ../C/glabels.xml:957(para)
+#: ../C/glabels.xml:948(para)
 msgid ""
 "Objects can be aligned horizontally or vertically, relative to one another, "
 "or relative to the center line of the label, by choosing the appropriate "
@@ -1432,11 +1436,11 @@ msgstr ""
 "wenn Sie mit der rechten Maustaste in eine nicht leere Auswahl im "
 "Ansichtsbereich klicken."
 
-#: ../C/glabels.xml:970(title)
+#: ../C/glabels.xml:961(title)
 msgid "Using the Property Bar"
 msgstr "Verwendung der Eigenschaftsleiste"
 
-#: ../C/glabels.xml:972(para)
+#: ../C/glabels.xml:963(para)
 msgid ""
 "The property bar can be used to change some common properties of objects en-"
 "masse. These properties include font family, font size, font weight, text "
@@ -1450,11 +1454,11 @@ msgstr ""
 "Linien oder Begrenzungen sowie Linienbreiten. Die Eigenschaftsleiste regelt "
 "auch die Vorgaben für diese Eigenschaften, wenn neue Objekte erzeugt werden."
 
-#: ../C/glabels.xml:987(title)
+#: ../C/glabels.xml:978(title)
 msgid "Performing a Document Merge"
 msgstr "Ausführung einer Dokumentmischung"
 
-#: ../C/glabels.xml:989(para)
+#: ../C/glabels.xml:980(para)
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
@@ -1464,7 +1468,7 @@ msgstr ""
 "ein einzelnes Etikett oder eine einzelne Karte für jeden Datensatz aus einer "
 "externen Datenquelle zu erstellen."
 
-#: ../C/glabels.xml:993(para)
+#: ../C/glabels.xml:984(para)
 msgid ""
 "The first step to performing a document merge is to prepare a source document "
 "that contains your merge data. This data could be mailing addresses or any "
@@ -1490,7 +1494,7 @@ msgstr ""
 "erstellt werden. Ein üblicher Weg der Erstellung ist der Export einer CSV-"
 "Datei aus einer Tabellenkalkulation."
 
-#: ../C/glabels.xml:1005(para)
+#: ../C/glabels.xml:996(para)
 msgid ""
 "A label must then be configured to \"point at\" this data file. To configure "
 "the merge properties of a document, choose <menuchoice><guimenu>Objects</"
@@ -1506,7 +1510,7 @@ msgstr ""
 "wird geöffnet. In diesem Dialog wählen Sie das genaue Dateiformat und den "
 "Dateinamen (den Ort) der einzumischenden Daten aus."
 
-#: ../C/glabels.xml:1013(para)
+#: ../C/glabels.xml:1004(para)
 msgid ""
 "Finally, once the label has been configured for a data file, field keys can "
 "be inserted into text objects and used as source or data for barcode objects "
@@ -1520,18 +1524,19 @@ msgstr ""
 "Weitere Informationen über die Verwendung der Mischdaten für diese "
 "Objekttypen finden Sie in <xref linkend=\"glabels-object-properties\"/>."
 
-#: ../C/glabels.xml:1019(para)
+#: ../C/glabels.xml:1010(para)
 msgid ""
-"Now that your label is configured, gLabels will print a unique label for each "
-"record in your source document -- substituting fields from each record for "
-"field keys in the all text, barcode, and image objects."
+"Now that your label is configured, <application>gLabels</application> will "
+"print a unique label for each record in your source document -- substituting "
+"fields from each record for field keys in the all text, barcode, and image "
+"objects."
 msgstr ""
 "Da Ihr Etikett nun konfiguriert ist, druckt <application>gLabels</"
 "application> genau ein Etikett für jeden Datensatz des Quelldokuments, wobei "
 "alle Text-, Bild- und Strichcode-Objekte durch die Einträge der Felder jedes "
 "Datensatzes ersetzt werden."
 
-#: ../C/glabels.xml:1024(para)
+#: ../C/glabels.xml:1015(para)
 msgid ""
 "See <xref linkend=\"glabels-merge-tutorial\"/> for a detailed tutorial on the "
 "document merge feature."
@@ -1539,11 +1544,11 @@ msgstr ""
 "In <xref linkend=\"glabels-merge-tutorial\"/> finden Sie eine ausführliche "
 "Anleitung für dieses Funktionsmerkmal."
 
-#: ../C/glabels.xml:1039(title)
+#: ../C/glabels.xml:1030(title)
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../C/glabels.xml:1040(para)
+#: ../C/glabels.xml:1031(para)
 msgid ""
 "To configure <application>gLabels</application>, choose "
 "<menuchoice><guimenu>Settings</guimenu><guimenuitem>Preferences</"
@@ -1555,57 +1560,57 @@ msgstr ""
 "guimenuitem></menuchoice>. Der Dialog <guilabel>Einstellungen</guilabel> "
 "enthält die folgenden Reiter:"
 
-#: ../C/glabels.xml:1061(title)
+#: ../C/glabels.xml:1052(title)
 msgid "Locale"
 msgstr "Lokale Einstellungen"
 
-#: ../C/glabels.xml:1065(guilabel)
+#: ../C/glabels.xml:1056(guilabel)
 msgid "Units"
 msgstr "Einheiten"
 
-#: ../C/glabels.xml:1067(para)
+#: ../C/glabels.xml:1058(para)
 msgid ""
-"Use this radio button group to specify your prefered units. Select one of the "
-"following options:"
+"Use this radio button group to specify your preferred units. Select one of "
+"the following options:"
 msgstr ""
 "Verwenden Sie diese Radioknöpfe, um Ihre bevorzugten Maßeinheiten "
 "festzulegen. Wählen Sie aus den folgenden Optionen:"
 
-#: ../C/glabels.xml:1072(guilabel)
+#: ../C/glabels.xml:1063(guilabel)
 msgid "Points"
 msgstr "Punkte"
 
-#: ../C/glabels.xml:1073(para)
+#: ../C/glabels.xml:1064(para)
 msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
 msgstr "Punkte verwenden (1 Punkt = 1/72 Zoll = 0.352778 mm)."
 
-#: ../C/glabels.xml:1077(guilabel)
+#: ../C/glabels.xml:1068(guilabel)
 msgid "Inches"
 msgstr "Zoll"
 
-#: ../C/glabels.xml:1078(para)
+#: ../C/glabels.xml:1069(para)
 msgid "Use inches."
 msgstr "Zoll verwenden."
 
-#: ../C/glabels.xml:1082(guilabel)
+#: ../C/glabels.xml:1073(guilabel)
 msgid "Millimeters"
 msgstr "Millimeter"
 
-#: ../C/glabels.xml:1083(para)
+#: ../C/glabels.xml:1074(para)
 msgid "Use millimeters."
 msgstr "Millimeter verwenden."
 
-#: ../C/glabels.xml:1086(para)
+#: ../C/glabels.xml:1077(para)
 msgid "Default: <guilabel>Inches</guilabel>."
 msgstr "Standard: <guilabel>Zoll</guilabel>."
 
-#: ../C/glabels.xml:1092(guilabel)
+#: ../C/glabels.xml:1083(guilabel)
 msgid "Default page size"
 msgstr "Vorgegebene Seitengröße"
 
-#: ../C/glabels.xml:1094(para)
+#: ../C/glabels.xml:1085(para)
 msgid ""
-"Use this radio button group to specify your prefered page size. This will "
+"Use this radio button group to specify your preferred page size. This will "
 "make it quicker for you to locate media types when creating a new label or "
 "card."
 msgstr ""
@@ -1613,31 +1618,31 @@ msgstr ""
 "Dadurch lassen sich beim Erstellen neuer Etiketten oder Visitenkarten die "
 "entsprechenden Papiertypen schneller finden."
 
-#: ../C/glabels.xml:1100(guilabel)
+#: ../C/glabels.xml:1091(guilabel)
 msgid "US Letter"
 msgstr "US-Letter"
 
-#: ../C/glabels.xml:1101(para)
+#: ../C/glabels.xml:1092(para)
 msgid "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
 msgstr "Die meisten Ihrer Medien haben das US-Letter-Format (8.5 x 11 inches)."
 
-#: ../C/glabels.xml:1105(guilabel)
+#: ../C/glabels.xml:1096(guilabel)
 msgid "ISO A4"
 msgstr "ISO A4"
 
-#: ../C/glabels.xml:1106(para)
+#: ../C/glabels.xml:1097(para)
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
 msgstr "Die meisten Ihrer Medien haben das ISO-A4-Format (210 x 297 mm)."
 
-#: ../C/glabels.xml:1109(para)
+#: ../C/glabels.xml:1100(para)
 msgid "Default: <guilabel>US Letter</guilabel>."
 msgstr "Standard: <guilabel>US-Letter</guilabel>."
 
-#: ../C/glabels.xml:1118(title)
+#: ../C/glabels.xml:1109(title)
 msgid "Object defaults"
 msgstr "Objekt-Voreinstellungen"
 
-#: ../C/glabels.xml:1124(para)
+#: ../C/glabels.xml:1115(para)
 msgid ""
 "Use these controls to set the default properties of new text objects. These "
 "properties are"
@@ -1645,11 +1650,11 @@ msgstr ""
 "Verwenden Sie diese Einstellmöglichkeiten, um die Standardeigenschaften neuer "
 "Textobjekte festzulegen. Diese Eigenschaften sind"
 
-#: ../C/glabels.xml:1129(guilabel)
+#: ../C/glabels.xml:1120(guilabel)
 msgid "Font"
 msgstr "Schrift"
 
-#: ../C/glabels.xml:1130(para)
+#: ../C/glabels.xml:1121(para)
 msgid ""
 "These controls are used to select font family and font size, and whether the "
 "font should bold or in italics."
@@ -1658,20 +1663,20 @@ msgstr ""
 "festzulegen, sowie um anzugeben, ob die Schrift fett oder kursiv dargestellt "
 "werden soll."
 
-#: ../C/glabels.xml:1135(guilabel) ../C/glabels.xml:1160(guilabel)
-#: ../C/glabels.xml:1175(guilabel)
+#: ../C/glabels.xml:1126(guilabel) ../C/glabels.xml:1151(guilabel)
+#: ../C/glabels.xml:1166(guilabel)
 msgid "Color"
 msgstr "Farbe"
 
-#: ../C/glabels.xml:1136(para)
+#: ../C/glabels.xml:1127(para)
 msgid "This control selects the default text color."
 msgstr "Diese Einstellung wählt die Standard-Textfarbe aus."
 
-#: ../C/glabels.xml:1140(guilabel)
+#: ../C/glabels.xml:1131(guilabel)
 msgid "Alignment"
 msgstr "Ausrichtung"
 
-#: ../C/glabels.xml:1141(para)
+#: ../C/glabels.xml:1132(para)
 msgid ""
 "These controls are used to select the default text alignment (left, center or "
 "right)."
@@ -1679,7 +1684,7 @@ msgstr ""
 "Mit diesen Einstellungen wählen Sie die vorgegebene Textausrichtung (links, "
 "mittig oder rechts)."
 
-#: ../C/glabels.xml:1150(para)
+#: ../C/glabels.xml:1141(para)
 msgid ""
 "Use these controls to set the default properties of lines and outlines of new "
 "objects. These properties are"
@@ -1687,23 +1692,23 @@ msgstr ""
 "Verwenden sie diese Einstellmöglichkeiten, um die Standardeigenschaften von "
 "Begrenzungen und neuen Objekten festzulegen. Diese Eigenschaften sind"
 
-#: ../C/glabels.xml:1155(guilabel)
+#: ../C/glabels.xml:1146(guilabel)
 msgid "Width"
 msgstr "Breite"
 
-#: ../C/glabels.xml:1156(para)
+#: ../C/glabels.xml:1147(para)
 msgid "This control selects the default line width."
 msgstr "Diese Einstellung wählt die Standard-Linienbreite aus."
 
-#: ../C/glabels.xml:1161(para)
+#: ../C/glabels.xml:1152(para)
 msgid "This control selects the default line color."
 msgstr "Diese Einstellung wählt die Standard-Linienfarbe aus."
 
-#: ../C/glabels.xml:1168(guilabel)
+#: ../C/glabels.xml:1159(guilabel)
 msgid "Fill"
 msgstr "Füllen"
 
-#: ../C/glabels.xml:1170(para)
+#: ../C/glabels.xml:1161(para)
 msgid ""
 "Use these controls to set the default fill properties of new objects. These "
 "properties are"
@@ -1711,34 +1716,34 @@ msgstr ""
 "Verwenden Sie diese Einstellmöglichkeiten zum Angeben der "
 "Füllungseigenschaften eines neuen Objekts. Diese Eigenschaften sind"
 
-#: ../C/glabels.xml:1176(para)
+#: ../C/glabels.xml:1167(para)
 msgid "This control selects the default fill color."
 msgstr "Diese Einstellung wählt die Standard-Füllfarbe aus."
 
-#: ../C/glabels.xml:1190(title)
+#: ../C/glabels.xml:1181(title)
 msgid "Document Merge Tutorial"
 msgstr "Anleitung zur Dokumentmischung"
 
-#: ../C/glabels.xml:1192(para)
+#: ../C/glabels.xml:1183(para)
 msgid ""
 "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that "
 "allows a unique label or card to be printed for each record in an external "
 "data source. It is however, the most mis-understood feature of "
-"<application>glabels</application>. The following examples will step through "
+"<application>gLabels</application>. The following examples will step through "
 "a couple of common tasks using the document merge feature."
 msgstr ""
 "Dokumentmischung ist ein mächtiges Funktionsmerkmal, das es Ihnen ermöglicht, "
 "ein einzelnes Etikett oder eine einzelne Karte für jeden Datensatz aus einer "
 "externen Datenquelle zu erstellen. Es ist allerdings die am häufigsten "
-"missverstandene Funktion in <application>glabels</application>. Die folgenden "
+"missverstandene Funktion in <application>gLabels</application>. Die folgenden "
 "Beispiele führen Sie schrittweise durch viele der Aufgaben, die Sie mit der "
 "Dokumentmischung ausführen können."
 
-#: ../C/glabels.xml:1200(title)
+#: ../C/glabels.xml:1191(title)
 msgid "Example 1: Name Tags"
 msgstr "Beispiel 1: Namensschilder"
 
-#: ../C/glabels.xml:1202(para)
+#: ../C/glabels.xml:1193(para)
 msgid ""
 "In this example we are organizing an orientation party for the new crew "
 "members of our ship. We have a list of freshman crew members that we created "
@@ -1752,7 +1757,7 @@ msgstr ""
 "Datei exportiert. Sie könnten diese Datei auch in einem Texteditor erstellen, "
 "aber schließlich leben wir im 23. Jahrhundert..."
 
-#: ../C/glabels.xml:1208(programlisting)
+#: ../C/glabels.xml:1199(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -1771,14 +1776,15 @@ msgstr ""
 "\"Montgomery Scott\",Engineering,SE-197-54T\n"
 "      "
 
-#: ../C/glabels.xml:1216(para)
+#: ../C/glabels.xml:1207(para)
 msgid ""
-"In <application>glabels</application> we have created a new glabels document "
-"using the Avery 5395 \"Name Badge Labels\" template. Next we use the "
-"<menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</"
-"guimenuitem></menuchoice> menu item to display the <guilabel>merge "
-"properties</guilabel> dialog. We use this dialog to select the source type "
-"(in our case CSV) and the merge source (filename) as shown."
+"In <application>gLabels</application> we have created a new "
+"<application>gLabels</application> document using the Avery 5395 \"Name Badge "
+"Labels\" template. Next we use the <menuchoice><guimenu>Objects</"
+"guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to "
+"display the <guilabel>merge properties</guilabel> dialog. We use this dialog "
+"to select the source type (in our case CSV) and the merge source (filename) "
+"as shown."
 msgstr ""
 "In <application>glabels</application> haben Sie ein neues Dokument unter "
 "Verwendung der Dokumentvorlage »Avery 5395 Namensschild-Etiketten« erzeugt. "
@@ -1788,12 +1794,12 @@ msgstr ""
 "gezeigt die Datenquelle aus, in diesem Fall CSV, sowie die Mischquelle "
 "(Dateiname)."
 
-#: ../C/glabels.xml:1226(title) ../C/glabels.xml:1343(title)
+#: ../C/glabels.xml:1217(title) ../C/glabels.xml:1334(title)
 msgid "Merge properties dialog"
 msgstr "Mischeinstellungen-Dialog"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1237(para)
+#: ../C/glabels.xml:1228(para)
 msgid ""
 "Before applying the merge source, we uncheck the first record since it is "
 "only column headers from our original <application>gnumeric</application> "
@@ -1806,7 +1812,7 @@ msgstr ""
 "erste Etikett verschwendet. Weiterhin können Sie alle anderen Datensätze "
 "entfernen, die Sie nicht für ein Etikett verwenden wollen."
 
-#: ../C/glabels.xml:1242(para) ../C/glabels.xml:1360(para)
+#: ../C/glabels.xml:1233(para) ../C/glabels.xml:1351(para)
 msgid ""
 "We can also view each record in more detail by clicking on the appropriate "
 "expander (the little triangles) as shown. Once we are satisfied with the "
@@ -1817,18 +1823,20 @@ msgstr ""
 "Dreiecke klicken. Sobald Sie mit der Auswahl zufrieden sind, klicken Sie auf "
 "<guibutton>OK</guibutton>, um die Änderungen anzuwenden."
 
-#: ../C/glabels.xml:1247(para) ../C/glabels.xml:1365(para)
-msgid "Now we start adding objects to our glabels document as shown."
+#: ../C/glabels.xml:1238(para) ../C/glabels.xml:1356(para)
+msgid ""
+"Now we start adding objects to our <application>gLabels</application> "
+"document as shown."
 msgstr ""
-"Nun beginnen wir mit dem Hinzufügen von Objekten zu unserem gLabels-Dokument, "
-"wie gezeigt."
+"Nun beginnen wir mit dem Hinzufügen von Objekten zu unserem "
+"<application>gLabels</application>-Dokument, wie gezeigt."
 
-#: ../C/glabels.xml:1251(title) ../C/glabels.xml:1369(title)
+#: ../C/glabels.xml:1242(title) ../C/glabels.xml:1360(title)
 msgid "Adding objects"
 msgstr "Hinzufügen von Objekten"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1262(para)
+#: ../C/glabels.xml:1253(para)
 msgid ""
 "In this example we have added three text objects and a barcode object. The "
 "first text object contains only simple literal text (\"Hello, my name is\"). "
@@ -1851,7 +1859,7 @@ msgstr ""
 "das Feld (oder den Schlüssel) »3« zu verwenden, das die Sternenflotten-"
 "Seriennummer des Mannschaftsmitglieds enthält."
 
-#: ../C/glabels.xml:1272(para)
+#: ../C/glabels.xml:1263(para)
 msgid ""
 "Now we can print our name tags by selecting the <menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Print</guimenuitem></menuchoice> menu item. This will "
@@ -1861,12 +1869,12 @@ msgstr ""
 "<menuchoice><guimenu>Datei</guimenu><guimenuitem>Drucken</guimenuitem></"
 "menuchoice> wählen. Der unten angezeigte Druckdialog wird geöffnet."
 
-#: ../C/glabels.xml:1279(title)
+#: ../C/glabels.xml:1270(title)
 msgid "Printing name tags"
 msgstr "Drucken der Namensschilder"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1290(para) ../C/glabels.xml:1405(para)
+#: ../C/glabels.xml:1281(para) ../C/glabels.xml:1396(para)
 msgid ""
 "Just to make sure our labels are going to look okay, we select the "
 "<guilabel>Print outlines</guilabel> option and click <guibutton>Print "
@@ -1877,12 +1885,12 @@ msgstr ""
 "<guibutton>Druckvorschau</guibutton>. Der Druckvorschaudialog wird geöffnet, "
 "wie unten angezeigt."
 
-#: ../C/glabels.xml:1297(title)
+#: ../C/glabels.xml:1288(title)
 msgid "Name tags preview"
 msgstr "Vorschau der Namensschilder"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1308(para)
+#: ../C/glabels.xml:1299(para)
 msgid ""
 "Everything looks good, so we can now load up our printer with the appropriate "
 "label stock, print our name tags and start beaming our guests aboard."
@@ -1890,11 +1898,11 @@ msgstr ""
 "Alles sieht gut aus, also können wir jetzt den Drucker mit den entsprechenden "
 "Etiketten bestücken, die Namensschilder drucken und die Gäste an Bord beamen."
 
-#: ../C/glabels.xml:1315(title)
+#: ../C/glabels.xml:1306(title)
 msgid "Example 2: Address Labels"
 msgstr "Beispiel 2: Adressetiketten"
 
-#: ../C/glabels.xml:1317(para)
+#: ../C/glabels.xml:1308(para)
 msgid ""
 "In this example we are going to throw a party and need to print mailing "
 "address labels for our invitations. We have a list of our closest friends "
@@ -1908,7 +1916,7 @@ msgstr ""
 "Datei exportiert haben. Es ist zu beachten, dass nicht jeder einen zweiten "
 "Vornamen oder eine zweizeilige Adresse hat."
 
-#: ../C/glabels.xml:1323(programlisting)
+#: ../C/glabels.xml:1314(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -1931,14 +1939,15 @@ msgstr ""
 "Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
 "      "
 
-#: ../C/glabels.xml:1333(para)
+#: ../C/glabels.xml:1324(para)
 msgid ""
-"In <application>glabels</application> we have created a new glabels document "
-"using the Avery 5512 \"Address Labels\" template. Next we use the "
-"<menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</"
-"guimenuitem></menuchoice> menu item to display the <guilabel>merge "
-"properties</guilabel> dialog. We use this dialog to select the source type "
-"(in our case CSV) and the merge source (filename) as shown."
+"In <application>gLabels</application> we have created a new "
+"<application>gLabels</application> document using the Avery 5512 \"Address "
+"Labels\" template. Next we use the <menuchoice><guimenu>Objects</"
+"guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to "
+"display the <guilabel>merge properties</guilabel> dialog. We use this dialog "
+"to select the source type (in our case CSV) and the merge source (filename) "
+"as shown."
 msgstr ""
 "In <application>glabels</application> haben Sie ein neues Dokument unter "
 "Verwendung der Dokumentvorlage »Avery 5512 Adressetiketten« erzeugt. Zunächst "
@@ -1949,7 +1958,7 @@ msgstr ""
 "(Dateiname)."
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1354(para)
+#: ../C/glabels.xml:1345(para)
 msgid ""
 "Before applying the merge source, we uncheck the first record since it is "
 "only column headers from our original <application>gnumeric</application> "
@@ -1965,12 +1974,12 @@ msgstr ""
 "entfernen, die Sie nicht für ein Etikett verwenden wollen."
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1380(para)
+#: ../C/glabels.xml:1371(para)
 msgid ""
 "In this example we have a single text object. This text object contains all "
 "of our merge fields organized on multiple lines as a mailing address. Notice "
 "that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each located "
-"with no other text on their own lines. When <application>glabels</"
+"with no other text on their own lines. When <application>gLabels</"
 "application> encounters a field as the only text on a line, it will not "
 "expand the line if the field is empty."
 msgstr ""
@@ -1981,7 +1990,7 @@ msgstr ""
 "Wenn <application>glabels</application> ein solches Feld als »nur Text« in "
 "einer Zeile erkennt, wird die Zeile nicht expandiert, falls das Feld leer ist."
 
-#: ../C/glabels.xml:1387(para)
+#: ../C/glabels.xml:1378(para)
 msgid ""
 "Now we can print our address labels by selecting the "
 "<menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></"
@@ -1991,16 +2000,16 @@ msgstr ""
 "<menuchoice><guimenu>Datei</guimenu><guimenuitem>Drucken</guimenuitem></"
 "menuchoice> wählen. Der unten angezeigte Druckdialog wird geöffnet."
 
-#: ../C/glabels.xml:1394(title)
+#: ../C/glabels.xml:1385(title)
 msgid "Printing address labels"
 msgstr "Adressetiketten drucken"
 
-#: ../C/glabels.xml:1412(title)
+#: ../C/glabels.xml:1403(title)
 msgid "Address labels preview"
 msgstr "Adressetiketten-Vorschau"
 
 #. ==== End of Figure ====
-#: ../C/glabels.xml:1423(para)
+#: ../C/glabels.xml:1414(para)
 msgid ""
 "Everything looks good, so we can now load up our printer with the appropriate "
 "label stock, print our address labels and start mailing our party invitations."
@@ -2009,21 +2018,21 @@ msgstr ""
 "Etiketten bestücken, die Adressetiketten drucken und die Einladungen zur "
 "Party versenden."
 
-#: ../C/glabels.xml:1436(title)
+#: ../C/glabels.xml:1427(title)
 msgid "Manually Creating New Templates"
 msgstr "Manuelles Erstellen neuer Vorlagen"
 
-#: ../C/glabels.xml:1438(para)
+#: ../C/glabels.xml:1429(para)
 msgid ""
 "Predefined templates are defined by XML files located in <filename>${prefix}/"
 "share/glabels/</filename>, where <filename>${prefix}</filename> is usually "
 "something like <filename>/usr/local</filename> or <filename>/usr</filename> "
-"depending on the configuration option <filename>prefix</filename>. gLabels "
-"will use all files of the form <filename>*-templates.xml</filename> or "
-"<filename>*.template</filename>, that it finds in <filename>${prefix}/share/"
-"glabels/</filename> and <filename>${HOME}/.glabels/</filename>. Additional "
-"templates can be added by creating additional <filename>*.template</filename> "
-"files in either of these directories."
+"depending on the configuration option <filename>prefix</filename>. "
+"<application>gLabels</application> will use all files of the form <filename>*-"
+"templates.xml</filename> or <filename>*.template</filename>, that it finds in "
+"<filename>${prefix}/share/glabels/</filename> and <filename>${HOME}/.glabels/"
+"</filename>. Additional templates can be added by creating additional "
+"<filename>*.template</filename> files in either of these directories."
 msgstr ""
 "Vordefinierte Vorlagen sind als XML-Dateien verfügbar, die in <filename>"
 "${prefix}/share/glabels/</filename> gespeichert sind, wobei <filename>"
@@ -2036,22 +2045,23 @@ msgstr ""
 "können unter Verwendung der Dateiendung <filename>*.template</filename> in "
 "einem dieser Ordner gespeichert werden."
 
-#: ../C/glabels.xml:1451(para)
+#: ../C/glabels.xml:1442(para)
 msgid ""
 "The format for these files is defined in the DTD: <ulink url=\"http://glabels."
 "sourceforge.net/doc/glabels-2.0.dtd.txt\" type=\"http\">glabels-2.2.dtd</"
-"ulink>. (This DTD also describes other XML formats used by glabels.)"
+"ulink>. (This DTD also describes other XML formats used by "
+"<application>gLabels</application>.)"
 msgstr ""
 "Das Format dieser Dateien ist in einer DTD definiert: <ulink url=\"http://"
 "glabels.sourceforge.net/doc/glabels-2.0.dtd.txt\" type=\"http\">glabels-2.2."
 "dtd</ulink>. Diese DTD beschreibt außerdem weitere von gLabels benutzte XML-"
 "Formate."
 
-#: ../C/glabels.xml:1457(title)
+#: ../C/glabels.xml:1448(title)
 msgid "Assumptions/caveats"
 msgstr "Voraussetzungen"
 
-#: ../C/glabels.xml:1460(para)
+#: ../C/glabels.xml:1451(para)
 msgid ""
 "A sheet contains only one size of label or card (if a sheet contains more "
 "than one size of item, it can be split into multiple templates for multiple "
@@ -2061,7 +2071,7 @@ msgstr ""
 "mehrere Größen enthält, kann sie für das Drucken in mehreren Durchläufen über "
 "mehrere Vorlagen verteilt werden."
 
-#: ../C/glabels.xml:1465(para)
+#: ../C/glabels.xml:1456(para)
 msgid ""
 "Distances can be expressed in units of <emphasis>pt</emphasis>, <emphasis>in</"
 "emphasis>, <emphasis>mm</emphasis>, <emphasis>cm</emphasis>, or <emphasis>pc</"
@@ -2077,11 +2087,11 @@ msgstr ""
 "werden, nimmt der Rechner Punkt an. ein Punkt (<emphasis>pt</emphasis>) "
 "entspricht = 1/72 <emphasis>in</emphasis> = 0.352778 <emphasis>mm</emphasis>."
 
-#: ../C/glabels.xml:1478(title)
+#: ../C/glabels.xml:1469(title)
 msgid "Template Files"
 msgstr "Vorlagedateien"
 
-#: ../C/glabels.xml:1480(programlisting)
+#: ../C/glabels.xml:1471(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -2102,11 +2112,11 @@ msgstr ""
 "&lt;/Glabels-templates&gt;\n"
 "      "
 
-#: ../C/glabels.xml:1492(title)
+#: ../C/glabels.xml:1483(title)
 msgid "Example Template"
 msgstr "Beispielvorlage"
 
-#: ../C/glabels.xml:1493(programlisting)
+#: ../C/glabels.xml:1484(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -2131,11 +2141,11 @@ msgstr ""
 "  &lt;/Template&gt;\n"
 "      "
 
-#: ../C/glabels.xml:1506(title)
+#: ../C/glabels.xml:1497(title)
 msgid "Template Node"
 msgstr "Knoten »Template«"
 
-#: ../C/glabels.xml:1508(para)
+#: ../C/glabels.xml:1499(para)
 msgid ""
 "A <emphasis>Template</emphasis> node describes a single stationary product. "
 "It must contain one instance of any type of Label node (<emphasis>Label-"
@@ -2149,59 +2159,59 @@ msgstr ""
 "emphasis>) enthalten. Auf diesen Knoten können einer, mehrere oder kein "
 "<emphasis>Alias</emphasis>-Knoten folgen."
 
-#: ../C/glabels.xml:1522(para) ../C/glabels.xml:1597(para)
-#: ../C/glabels.xml:1674(para) ../C/glabels.xml:1719(para)
-#: ../C/glabels.xml:1795(para) ../C/glabels.xml:1828(para)
-#: ../C/glabels.xml:1879(para) ../C/glabels.xml:1922(para)
-#: ../C/glabels.xml:1981(para) ../C/glabels.xml:2058(para)
+#: ../C/glabels.xml:1513(para) ../C/glabels.xml:1588(para)
+#: ../C/glabels.xml:1665(para) ../C/glabels.xml:1710(para)
+#: ../C/glabels.xml:1786(para) ../C/glabels.xml:1819(para)
+#: ../C/glabels.xml:1870(para) ../C/glabels.xml:1913(para)
+#: ../C/glabels.xml:1972(para) ../C/glabels.xml:2049(para)
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: ../C/glabels.xml:1525(para) ../C/glabels.xml:1600(para)
-#: ../C/glabels.xml:1677(para) ../C/glabels.xml:1722(para)
-#: ../C/glabels.xml:1798(para) ../C/glabels.xml:1831(para)
-#: ../C/glabels.xml:1882(para) ../C/glabels.xml:1925(para)
-#: ../C/glabels.xml:1984(para) ../C/glabels.xml:2061(para)
+#: ../C/glabels.xml:1516(para) ../C/glabels.xml:1591(para)
+#: ../C/glabels.xml:1668(para) ../C/glabels.xml:1713(para)
+#: ../C/glabels.xml:1789(para) ../C/glabels.xml:1822(para)
+#: ../C/glabels.xml:1873(para) ../C/glabels.xml:1916(para)
+#: ../C/glabels.xml:1975(para) ../C/glabels.xml:2052(para)
 msgid "Description"
 msgstr "Beschreibung"
 
-#: ../C/glabels.xml:1531(para) ../C/glabels.xml:2067(para)
+#: ../C/glabels.xml:1522(para) ../C/glabels.xml:2058(para)
 msgid "brand"
 msgstr "brand"
 
-#: ../C/glabels.xml:1533(para)
+#: ../C/glabels.xml:1524(para)
 msgid "Brand or manufacturer of stationary product. E.g. \"Avery\""
 msgstr "Marke oder Hersteller des Produkts, z.B. »Avery«"
 
-#: ../C/glabels.xml:1538(para) ../C/glabels.xml:2073(para)
+#: ../C/glabels.xml:1529(para) ../C/glabels.xml:2064(para)
 msgid "part"
 msgstr "part"
 
-#: ../C/glabels.xml:1540(para)
+#: ../C/glabels.xml:1531(para)
 msgid "Part number or name of stationary product. E.g. \"8160\""
 msgstr "Bestellnummer oder Name des Produkts, z.B. »8160«"
 
-#: ../C/glabels.xml:1545(para) ../C/glabels.xml:1804(para)
+#: ../C/glabels.xml:1536(para) ../C/glabels.xml:1795(para)
 msgid "size"
 msgstr "size"
 
-#: ../C/glabels.xml:1547(para)
+#: ../C/glabels.xml:1538(para)
 msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
 msgstr "Größe des Papiers, z.B.  »US-Letter«, »A4«, …"
 
-#: ../C/glabels.xml:1551(para)
+#: ../C/glabels.xml:1542(para)
 msgid "description"
 msgstr "description"
 
-#: ../C/glabels.xml:1553(para)
+#: ../C/glabels.xml:1544(para)
 msgid "Description of stationary product. E.g, \"Mailing Labels.\""
 msgstr "Beschreibung des Produkts, z.B. »Mailing Labels«."
 
-#: ../C/glabels.xml:1558(para)
+#: ../C/glabels.xml:1549(para)
 msgid "_description"
 msgstr "_description"
 
-#: ../C/glabels.xml:1560(para)
+#: ../C/glabels.xml:1551(para)
 msgid ""
 "Translatable description of stationary product. E.g, \"Mailing Labels."
 "\" (Only useful for predefined templates)"
@@ -2209,29 +2219,29 @@ msgstr ""
 "Übersetzbare Beschreibung des Produkts, z.B. »Mailing Labels« (nur sinnvoll "
 "für vordefinierte Vorlagen)"
 
-#: ../C/glabels.xml:1566(para) ../C/glabels.xml:1612(para)
-#: ../C/glabels.xml:1742(para)
+#: ../C/glabels.xml:1557(para) ../C/glabels.xml:1603(para)
+#: ../C/glabels.xml:1733(para)
 msgid "width"
 msgstr "width"
 
-#: ../C/glabels.xml:1568(para)
+#: ../C/glabels.xml:1559(para)
 msgid "Page width. Only valid if size=\"Other\""
 msgstr "Seitenbreite. Nur gültig, wenn als Größe »Other« festgelegt ist."
 
-#: ../C/glabels.xml:1572(para) ../C/glabels.xml:1616(para)
-#: ../C/glabels.xml:1749(para)
+#: ../C/glabels.xml:1563(para) ../C/glabels.xml:1607(para)
+#: ../C/glabels.xml:1740(para)
 msgid "height"
 msgstr "height"
 
-#: ../C/glabels.xml:1574(para)
+#: ../C/glabels.xml:1565(para)
 msgid "Page height. Only valid if size=\"Other\""
 msgstr "Seitenhöhe. Nur gültig, wenn als Größe »Other« festgelegt ist."
 
-#: ../C/glabels.xml:1584(title)
+#: ../C/glabels.xml:1575(title)
 msgid "Label-rectangle Node"
 msgstr "Knoten »Label-rectangle«"
 
-#: ../C/glabels.xml:1586(para)
+#: ../C/glabels.xml:1577(para)
 msgid ""
 "A <emphasis>Label-rectangle</emphasis> node describes the dimensions of a "
 "single label or business card that is rectangular in shape (may have rounded "
@@ -2241,29 +2251,29 @@ msgstr ""
 "eines einzelnen Etiketts oder einer einzelnen Karte in rechteckiger Form, "
 "wobei abgerundete Ecken möglich sind."
 
-#: ../C/glabels.xml:1606(para) ../C/glabels.xml:1683(para)
-#: ../C/glabels.xml:1728(para)
+#: ../C/glabels.xml:1597(para) ../C/glabels.xml:1674(para)
+#: ../C/glabels.xml:1719(para)
 msgid "id"
 msgstr "id"
 
-#: ../C/glabels.xml:1608(para) ../C/glabels.xml:1685(para)
-#: ../C/glabels.xml:1730(para)
+#: ../C/glabels.xml:1599(para) ../C/glabels.xml:1676(para)
+#: ../C/glabels.xml:1721(para)
 msgid "Reserved for future use. Should always be 0."
 msgstr "Für zukünftige Verwendung reserviert. Sollte immer 0 sein."
 
-#: ../C/glabels.xml:1613(para)
+#: ../C/glabels.xml:1604(para)
 msgid "Width of label/card"
 msgstr "Breite des Etiketts oder der Karte"
 
-#: ../C/glabels.xml:1617(para)
+#: ../C/glabels.xml:1608(para)
 msgid "Height of label/card"
 msgstr "Höhe des Etiketts oder der Karte"
 
-#: ../C/glabels.xml:1620(para)
+#: ../C/glabels.xml:1611(para)
 msgid "round"
 msgstr "round"
 
-#: ../C/glabels.xml:1622(para)
+#: ../C/glabels.xml:1613(para)
 msgid ""
 "Radius of corners. For items with square edges (business cards), the radius "
 "should be 0."
@@ -2271,11 +2281,11 @@ msgstr ""
 "Radius der Ecken. Für Objekte mit nicht abgerundeten Ecken (Visitenkarten) "
 "sollte der Radius 0 sein."
 
-#: ../C/glabels.xml:1627(para)
+#: ../C/glabels.xml:1618(para)
 msgid "x_waste"
 msgstr "x_waste"
 
-#: ../C/glabels.xml:1629(para)
+#: ../C/glabels.xml:1620(para)
 msgid ""
 "Amount of horizontal waste (over-print) to allow. This is useful for "
 "minimizing alignment problems when using non-white backgrounds (e.g. images)."
@@ -2283,11 +2293,11 @@ msgstr ""
 "Erlaubte Breite des horizontalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: ../C/glabels.xml:1635(para)
+#: ../C/glabels.xml:1626(para)
 msgid "y_waste"
 msgstr "y_waste"
 
-#: ../C/glabels.xml:1637(para)
+#: ../C/glabels.xml:1628(para)
 msgid ""
 "Amount of vertical waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -2295,15 +2305,15 @@ msgstr ""
 "Erlaubte Breite des vertikalen Überdruckens. Dies minimiert "
 "Ausrichtungsprobleme auf anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: ../C/glabels.xml:1648(title)
+#: ../C/glabels.xml:1639(title)
 msgid "Label-rectangle Parameters"
 msgstr "Parameter zu Label-rectangle "
 
-#: ../C/glabels.xml:1662(title)
+#: ../C/glabels.xml:1653(title)
 msgid "Label-round Node"
 msgstr "Knoten »Label-round«"
 
-#: ../C/glabels.xml:1664(para)
+#: ../C/glabels.xml:1655(para)
 msgid ""
 "A <emphasis>Label-round</emphasis> node describes the dimensions of a simple "
 "round label (not a CD)."
@@ -2311,20 +2321,20 @@ msgstr ""
 "Ein <emphasis>Label-round</emphasis>-Knoten beschreibt die Abmessungen eines "
 "einfachen Rundetiketts (nicht einer CD)."
 
-#: ../C/glabels.xml:1689(para) ../C/glabels.xml:1734(para)
-#: ../C/glabels.xml:1900(para)
+#: ../C/glabels.xml:1680(para) ../C/glabels.xml:1725(para)
+#: ../C/glabels.xml:1891(para)
 msgid "radius"
 msgstr "radius"
 
-#: ../C/glabels.xml:1690(para)
+#: ../C/glabels.xml:1681(para)
 msgid "Radius (1/2 diameter) of label"
 msgstr "Radius (halber Durchmesser) des Etiketts"
 
-#: ../C/glabels.xml:1693(para) ../C/glabels.xml:1756(para)
+#: ../C/glabels.xml:1684(para) ../C/glabels.xml:1747(para)
 msgid "waste"
 msgstr "waste"
 
-#: ../C/glabels.xml:1695(para) ../C/glabels.xml:1758(para)
+#: ../C/glabels.xml:1686(para) ../C/glabels.xml:1749(para)
 msgid ""
 "Amount of waste (over-print) to allow. This is useful for minimizing "
 "alignment problems when using non-white backgrounds (e.g. images)."
@@ -2332,11 +2342,11 @@ msgstr ""
 "Erlaubte Breite des Überdruckens. Dies minimiert Ausrichtungsprobleme auf "
 "anderen als weißen Hintergründen (z.B. Bilder)."
 
-#: ../C/glabels.xml:1707(title)
+#: ../C/glabels.xml:1698(title)
 msgid "Label-cd Node"
 msgstr "Knoten »Label-cd«"
 
-#: ../C/glabels.xml:1709(para)
+#: ../C/glabels.xml:1700(para)
 msgid ""
 "A <emphasis>Label-cd</emphasis> node describes the dimensions of a CD, DVD, "
 "or business card CD."
@@ -2344,19 +2354,19 @@ msgstr ""
 "Ein <emphasis>Label-cd</emphasis>-Knoten beschreibt die Abmessungen einer CD, "
 "DVD oder Visitenkarten-CD."
 
-#: ../C/glabels.xml:1735(para)
+#: ../C/glabels.xml:1726(para)
 msgid "Outer radius of label"
 msgstr "Äußerer Radius des Etiketts"
 
-#: ../C/glabels.xml:1738(para)
+#: ../C/glabels.xml:1729(para)
 msgid "hole"
 msgstr "hole"
 
-#: ../C/glabels.xml:1739(para)
+#: ../C/glabels.xml:1730(para)
 msgid "Radius of concentric hole"
 msgstr "Radius des Mittellochs"
 
-#: ../C/glabels.xml:1744(para)
+#: ../C/glabels.xml:1735(para)
 msgid ""
 "If present, the label is clipped to the given width. (Useful for \"business "
 "card CDs\")."
@@ -2364,7 +2374,7 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Größe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: ../C/glabels.xml:1751(para)
+#: ../C/glabels.xml:1742(para)
 msgid ""
 "If present, the label is clipped to the given height. (Useful for \"business "
 "card CDs\")."
@@ -2372,15 +2382,15 @@ msgstr ""
 "Falls vorhanden, wird das Etikett auf die angegebene Höhe begrenzt (nützlich "
 "für »Visitenkarten-CDs«)"
 
-#: ../C/glabels.xml:1769(title)
+#: ../C/glabels.xml:1760(title)
 msgid "CD Label Parameters"
 msgstr "CD-Label-Parameter"
 
-#: ../C/glabels.xml:1783(title)
+#: ../C/glabels.xml:1774(title)
 msgid "Markup-margin Node"
 msgstr "Knoten »Markup-margin«"
 
-#: ../C/glabels.xml:1785(para)
+#: ../C/glabels.xml:1776(para)
 msgid ""
 "A <emphasis>Markup-margin</emphasis> describes a margin along all edges of a "
 "label."
@@ -2388,7 +2398,7 @@ msgstr ""
 "Ein <emphasis>Markup-margin</emphasis>-Knoten beschreibt die Ränder entlang "
 "der Seiten eines Etiketts."
 
-#: ../C/glabels.xml:1806(para)
+#: ../C/glabels.xml:1797(para)
 msgid ""
 "Size of the margin. I.e. the distance of the margin line from the edge of the "
 "card/label."
@@ -2396,124 +2406,124 @@ msgstr ""
 "Randbreite. Die Breite des Bereichs zwischen der Randlinie und dem Rand des "
 "Etiketts/der Karte."
 
-#: ../C/glabels.xml:1817(title)
+#: ../C/glabels.xml:1808(title)
 msgid "Markup-line Node"
 msgstr "Knoten »Markup-line«"
 
-#: ../C/glabels.xml:1819(para)
+#: ../C/glabels.xml:1810(para)
 msgid "A <emphasis>Markup-line</emphasis> describes a markup line."
 msgstr ""
 "Ein <emphasis>Markup-line</emphasis>-Knoten beschreibt eine Markierungslinie."
 
-#: ../C/glabels.xml:1837(para) ../C/glabels.xml:1931(para)
+#: ../C/glabels.xml:1828(para) ../C/glabels.xml:1922(para)
 msgid "x1"
 msgstr "x1"
 
-#: ../C/glabels.xml:1839(para)
+#: ../C/glabels.xml:1830(para)
 msgid "x coordinate of 1st endpoint of the line segment."
 msgstr "x-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: ../C/glabels.xml:1843(para) ../C/glabels.xml:1937(para)
+#: ../C/glabels.xml:1834(para) ../C/glabels.xml:1928(para)
 msgid "y1"
 msgstr "y1"
 
-#: ../C/glabels.xml:1845(para)
+#: ../C/glabels.xml:1836(para)
 msgid "y coordinate of 1st endpoint of the line segment."
 msgstr "y-Koordinate des Anfangspunkts des Linienabschnitts."
 
-#: ../C/glabels.xml:1849(para)
+#: ../C/glabels.xml:1840(para)
 msgid "x2"
 msgstr "x2"
 
-#: ../C/glabels.xml:1851(para)
+#: ../C/glabels.xml:1842(para)
 msgid "x coordinate of 2nd endpoint of the line segment."
 msgstr "x-Koordinate des Endpunkts des Linienabschnitts."
 
-#: ../C/glabels.xml:1855(para)
+#: ../C/glabels.xml:1846(para)
 msgid "y2"
 msgstr "y2"
 
-#: ../C/glabels.xml:1857(para)
+#: ../C/glabels.xml:1848(para)
 msgid "y coordinate of 2nd endpoint of the line segment."
 msgstr "y-Koordinate des Endpunkts des Linienabschnitts."
 
-#: ../C/glabels.xml:1867(title)
+#: ../C/glabels.xml:1858(title)
 msgid "Markup-circle Node"
 msgstr "Knoten »Markup-circle«"
 
-#: ../C/glabels.xml:1869(para)
+#: ../C/glabels.xml:1860(para)
 msgid "A <emphasis>Markup-circle</emphasis> describes a markup circle."
 msgstr ""
 "Ein <emphasis>Markup-circle</emphasis>-Knoten beschreibt einen "
 "Markierungskreis."
 
-#: ../C/glabels.xml:1888(para) ../C/glabels.xml:2004(para)
+#: ../C/glabels.xml:1879(para) ../C/glabels.xml:1995(para)
 msgid "x0"
 msgstr "x0"
 
-#: ../C/glabels.xml:1890(para)
+#: ../C/glabels.xml:1881(para)
 msgid "x coordinate of circle origin (center)."
 msgstr "x-Koordinate des Kreismittelpunkts."
 
-#: ../C/glabels.xml:1894(para) ../C/glabels.xml:2011(para)
+#: ../C/glabels.xml:1885(para) ../C/glabels.xml:2002(para)
 msgid "y0"
 msgstr "y0"
 
-#: ../C/glabels.xml:1896(para)
+#: ../C/glabels.xml:1887(para)
 msgid "y coordinate of circle origin (center)."
 msgstr "y-Koordinate des Kreismittelpunkts."
 
-#: ../C/glabels.xml:1901(para)
+#: ../C/glabels.xml:1892(para)
 msgid "Radius of circle."
 msgstr "Radius des Kreises."
 
-#: ../C/glabels.xml:1910(title)
+#: ../C/glabels.xml:1901(title)
 msgid "Markup-rect Node"
 msgstr "Knoten »Markup-rect«"
 
-#: ../C/glabels.xml:1912(para)
+#: ../C/glabels.xml:1903(para)
 msgid "A <emphasis>Markup-rect</emphasis> describes a markup rectangle."
 msgstr ""
 "Ein <emphasis>Markup-rect</emphasis>-Knoten beschreibt ein "
 "Markierungsrechteck."
 
-#: ../C/glabels.xml:1933(para)
+#: ../C/glabels.xml:1924(para)
 msgid "x coordinate of upper left corner of rectangle."
 msgstr "x-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: ../C/glabels.xml:1939(para)
+#: ../C/glabels.xml:1930(para)
 msgid "y coordinate of upper left corner of rectangle."
 msgstr "y-Koordinate der oberen linken Ecke des Rechtecks."
 
-#: ../C/glabels.xml:1943(para)
+#: ../C/glabels.xml:1934(para)
 msgid "w"
 msgstr "w"
 
-#: ../C/glabels.xml:1945(para)
+#: ../C/glabels.xml:1936(para)
 msgid "Width of rectangle."
 msgstr "Breite des Rechtecks."
 
-#: ../C/glabels.xml:1949(para)
+#: ../C/glabels.xml:1940(para)
 msgid "h"
 msgstr "h"
 
-#: ../C/glabels.xml:1951(para)
+#: ../C/glabels.xml:1942(para)
 msgid "Height of rectangle."
 msgstr "Höhe des Rechtecks."
 
-#: ../C/glabels.xml:1955(para)
+#: ../C/glabels.xml:1946(para)
 msgid "r"
 msgstr "r"
 
-#: ../C/glabels.xml:1956(para)
+#: ../C/glabels.xml:1947(para)
 msgid "Radius of rounded corners of rectangle."
 msgstr "Radius der abgerundeten Ecken des Rechtecks."
 
-#: ../C/glabels.xml:1965(title)
+#: ../C/glabels.xml:1956(title)
 msgid "Layout Node"
 msgstr "Knoten »Layout«"
 
-#: ../C/glabels.xml:1967(para)
+#: ../C/glabels.xml:1958(para)
 msgid ""
 "A label node may contain multiple <emphasis>Layout</emphasis> children. If "
 "labels are arranged in a simple grid pattern, only one layout is needed. "
@@ -2529,23 +2539,23 @@ msgstr ""
 "ein einzelnes Etikett immer auch als ein Raster aus Etiketten betrachtet "
 "werden kann."
 
-#: ../C/glabels.xml:1990(para)
+#: ../C/glabels.xml:1981(para)
 msgid "nx"
 msgstr "nx"
 
-#: ../C/glabels.xml:1992(para)
+#: ../C/glabels.xml:1983(para)
 msgid "Number of labels/cards across in the grid (horizontal)"
 msgstr "Anzahl der Etiketten/Karten im Raster in horizontaler Richtung"
 
-#: ../C/glabels.xml:1997(para)
+#: ../C/glabels.xml:1988(para)
 msgid "ny"
 msgstr "ny"
 
-#: ../C/glabels.xml:1999(para)
+#: ../C/glabels.xml:1990(para)
 msgid "Number of labels/cards up and down in the grid (vertical)"
 msgstr "Anzahl der Etiketten/Karten im Raster in vertikaler Richtung"
 
-#: ../C/glabels.xml:2006(para)
+#: ../C/glabels.xml:1997(para)
 msgid ""
 "Distance from left edge of sheet to the left edge of the left column of cards/"
 "labels in the layout."
@@ -2553,7 +2563,7 @@ msgstr ""
 "Abstand von linken Rand des Papiers zum linken Rand der linken Reihe der "
 "Karten/Etiketten im Layout."
 
-#: ../C/glabels.xml:2013(para)
+#: ../C/glabels.xml:2004(para)
 msgid ""
 "Distance from the top edge of sheet to the top edge of the top row of labels/"
 "cards in the layout."
@@ -2561,31 +2571,31 @@ msgstr ""
 "Abstand von oberen Rand des Papiers zum oberen Rand der oberen Reihe der "
 "Karten/Etiketten im Layout."
 
-#: ../C/glabels.xml:2018(para)
+#: ../C/glabels.xml:2009(para)
 msgid "dx"
 msgstr "dx"
 
-#: ../C/glabels.xml:2019(para)
+#: ../C/glabels.xml:2010(para)
 msgid "Horizontal pitch of grid."
 msgstr "Horizontaler Rasterabstand des Zeichengitters."
 
-#: ../C/glabels.xml:2022(para)
+#: ../C/glabels.xml:2013(para)
 msgid "dy"
 msgstr "dy"
 
-#: ../C/glabels.xml:2023(para)
+#: ../C/glabels.xml:2014(para)
 msgid "Vertical pitch of grid."
 msgstr "Vertikaler Rasterabstand des Zeichengitters."
 
-#: ../C/glabels.xml:2031(title)
+#: ../C/glabels.xml:2022(title)
 msgid "Layout Parameters"
 msgstr "Layout-Parameter"
 
-#: ../C/glabels.xml:2045(title)
+#: ../C/glabels.xml:2036(title)
 msgid "Alias Node"
 msgstr "Knoten »Alias«"
 
-#: ../C/glabels.xml:2047(para)
+#: ../C/glabels.xml:2038(para)
 msgid ""
 "An <emphasis>Alias</emphasis> node provides the name of a product with the "
 "same size and layout characteristics as the parent template."
@@ -2593,19 +2603,19 @@ msgstr ""
 "Ein <emphasis>Alias</emphasis>-Knoten beschreibt den Namen eines Produkts mit "
 "der gleichen Größe und dem gleichen Layout einer anderen Vorlage."
 
-#: ../C/glabels.xml:2069(para)
+#: ../C/glabels.xml:2060(para)
 msgid "The brand or manufacturer of the equivalent product."
 msgstr "Die Marke oder der Hersteller des entsprechenden Produkts."
 
-#: ../C/glabels.xml:2075(para)
+#: ../C/glabels.xml:2066(para)
 msgid "The part number or name of the equivalent product."
 msgstr "Die Bestellnummer oder der Name des entsprechenden Produkts."
 
-#: ../C/glabels.xml:2111(title)
+#: ../C/glabels.xml:2102(title)
 msgid "About <application>gLabels</application>"
 msgstr "Info zu <application>gLabels</application>"
 
-#: ../C/glabels.xml:2112(para)
+#: ../C/glabels.xml:2103(para)
 msgid ""
 "<application>gLabels</application> was written by Jim Evins "
 "(<email>evins@snaught.com</email>). To find more information about "
@@ -2617,18 +2627,19 @@ msgstr ""
 "application> finden Sie auf der <ulink url=\"http://glabels.sourceforge.net\" "
 "type=\"http\">gLabels-Webseite</ulink>."
 
-#: ../C/glabels.xml:2117(para)
+#: ../C/glabels.xml:2108(para)
 msgid ""
 "To report a bug or make a suggestion regarding this application or this "
 "manual, follow the directions at the <ulink url=\"http://glabels.sourceforge."
-"net/contact/\" type=\"http\">gLabels Contact Page</ulink>."
+"net/contact/\" type=\"http\"><application>gLabels</application> Contact Page</"
+"ulink>."
 msgstr ""
 "Um einen Fehler zu melden oder einen Vorschlag zu dieser Anwendung oder zu "
 "diesem Handbuch zu machen, folgen Sie den Anweisungen auf der <ulink url="
-"\"http://glabels.sourceforge.net/contact/\" type=\"http\">gLabels-"
-"Kontaktseite</ulink>."
+"\"http://glabels.sourceforge.net/contact/\" type=\"http"
+"\"><application>gLabels</application>-Kontaktseite</ulink>."
 
-#: ../C/glabels.xml:2123(para)
+#: ../C/glabels.xml:2114(para)
 msgid ""
 "This program is distributed under the terms of the GNU General Public license "
 "as published by the Free Software Foundation; either version 2 of the "
@@ -2644,7 +2655,7 @@ msgstr ""
 "diesem <ulink url=\"ghelp:gpl\" type=\"help\">Link</ulink>, oder in der Datei "
 "COPYING, die im Quellcode dieses Programms enthalten ist."
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: ../C/glabels.xml:0(None)
 msgid "translator-credits"
 msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009"
