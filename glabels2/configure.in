@@ -202,7 +202,6 @@ data/dtd/Makefile
 data/man/Makefile
 po/Makefile.in
 help/Makefile
-help/C/Makefile
 docs/Makefile
 docs/libglabels/Makefile
 glabels.spec

@@ -1,3 +1,10 @@
+2009-09-09  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+		Deleted help/C/Makefile.am.  Fixes "make dist".
+	* help/Makefile.am:
+		Removed trailing whitespace.
+
 2009-09-09  Alexandre Prokoudine  <alexandre.prokoudine@gmail.com>
 
         * po/ru.po: Updated Russian translation
