@@ -292,10 +292,10 @@ glabels_batch_SOURCES = 		\
 	$(BUILT_SOURCES)
 
 marshal.h: marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --header --prefix=gl_marshal > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gl_marshal > $@
 
 marshal.c: marshal.list $(GLIB_GENMARSHAL)
-	echo "#include \"marshal.h\"" > $@ && \
+	$(AM_V_GEN) echo "#include \"marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gl_marshal >> $@
 
 EXTRA_DIST = \

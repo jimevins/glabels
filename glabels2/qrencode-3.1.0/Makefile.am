@@ -3,6 +3,7 @@ INCLUDES = \
 
 QR_ENCODE_FILES =		\
 	qrencode.c		\
+	qrencode.h		\
 	qrencode_inner.h	\
 	qrinput.c		\
 	qrinput.h		\
@@ -26,7 +27,7 @@ EXTRA_DIST = 			\
 	acinclude.m4		\
 	autogen.sh 		\
 	configure.ac.dist	\
-	Changelog		\
+	ChangeLog		\
 	COPYING			\
 	Doxyfile 		\
 	libqrencode.pc.in	\

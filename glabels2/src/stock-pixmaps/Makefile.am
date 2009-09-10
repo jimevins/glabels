@@ -88,7 +88,7 @@ noinst_DATA = stockpixbufs.h
 CLEANFILES = $(noinst_DATA)
 
 stockpixbufs.h: $(IMAGES)
-	gdk-pixbuf-csource						  \
+	$(AM_V_GEN) $(GDK_PIXBUF_CSOURCE)						  \
 	   --raw --build-list $(VARIABLES1) > $(srcdir)/stockpixbufs.h || \
            ( rm -f $(srcdir)/stockpixbufs.h && false )
 

@@ -12,7 +12,7 @@ DOC_FIGURES = figures/glabels-template-cd.png      	\
 	      figures/merge-ex1-1.png			\
 	      figures/merge-ex1-2.png			\
 	      figures/merge-ex1-3.png			\
-	      figures/merge-ex1-4.png			\	
+	      figures/merge-ex1-4.png			\
 	      figures/merge-ex2-1.png			\
 	      figures/merge-ex2-2.png			\
 	      figures/merge-ex2-3.png			\

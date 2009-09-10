@@ -1,3 +1,14 @@
+2009-09-09  Jim Evins  <evins@snaught.com>
+
+	* configure.in:
+	* Makefile.am:
+	* src/Makefile.am:
+	* src/stock-pixmaps/Makefile.am:
+	* qrencode-3.1.0/Makefile.am
+	* data/desktop/glabels.desktop.in:
+	* docs/libglabels/libglabels-decl-list.txt:
+		Various build system fixes and cleanup.
+
 2009-09-08  Jim Evins  <evins@snaught.com>
 
 	* src/font-util.c: (gl_font_util_validate_family):

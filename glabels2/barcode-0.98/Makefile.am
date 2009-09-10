@@ -14,7 +14,7 @@ BC_FILES =		\
 	codabar.c	\
 	ps.c		\
 	pcl.c		\
-	barcode.h	
+	barcode.h
 
 noinst_LTLIBRARIES = libbarcode.la
 
