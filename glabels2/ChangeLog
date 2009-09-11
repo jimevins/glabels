@@ -1,3 +1,20 @@
+2009-09-10  Jim Evins  <evins@snaught.com>
+
+	* src/Makefile.am:
+	* src/mini-label-preview.c:
+	* src/mini-label-preview.h:
+		Created new glMiniLabelPreview widget to support glRotateLabelButton.
+	* src/rotate-label-button.c:
+	* src/rotate-label-button.h:
+		Renamed glWdgtRotateLabel to glRotateLabelButton.
+	* src/new-label-dialog.c: (gl_new_label_dialog_construct),
+	(template_changed_cb), (gl_new_label_dialog_get_rotate_state),
+	(gl_new_label_dialog_set_rotate_state):
+		Propogated above renaming.
+	* src/mini-preview.c: (gl_mini_preview_set_template), (draw),
+	(draw_shadow), (draw_paper), (draw_labels):
+		Use GtkStyle for colors instead of hardcoded ones.
+
 2009-09-09  Jim Evins  <evins@snaught.com>
 
 	* configure.in:

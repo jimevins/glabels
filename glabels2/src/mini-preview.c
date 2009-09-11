@@ -36,12 +36,8 @@
 /* Private macros and constants.             */
 /*===========================================*/
 
-#define PAPER_RGB_ARGS          1.0,   1.0,   1.0
-#define PAPER_OUTLINE_RGB_ARGS  0.0,   0.0,   0.0
-#define LABEL_OUTLINE_RGB_ARGS  0.5,   0.5,   0.5
-
-#define SHADOW_X_OFFSET 5
-#define SHADOW_Y_OFFSET 5
+#define MARGIN
+#define SHADOW_OFFSET 3
 
 
 /*===========================================*/
@@ -326,8 +322,8 @@ gl_mini_preview_set_template (glMiniPreview     *this,
 	/*
 	 * Set scale and offsets
 	 */
-	w = this->priv->width - 4 - 2*SHADOW_X_OFFSET;
-	h = this->priv->height - 4 - 2*SHADOW_Y_OFFSET;
+	w = this->priv->width - 2*MARGIN - 2*SHADOW_OFFSET;
+	h = this->priv->height - 2*MARGIN - 2*SHADOW_OFFSET;
 	if ( (w/template->page_width) > (h/template->page_height) ) {
 		this->priv->scale = h / template->page_height;
 	} else {
@@ -627,8 +623,8 @@ draw (glMiniPreview  *this,
 
 
 		/* update shadow */
-		shadow_x = SHADOW_X_OFFSET/this->priv->scale;
-		shadow_y = SHADOW_Y_OFFSET/this->priv->scale;
+		shadow_x = SHADOW_OFFSET/this->priv->scale;
+		shadow_y = SHADOW_OFFSET/this->priv->scale;
 
 		draw_shadow (this, cr,
 			     shadow_x, shadow_y,
@@ -668,7 +664,7 @@ draw_shadow (glMiniPreview      *this,
 	cairo_rectangle (cr, x, y, width, height);
 
 	style = gtk_widget_get_style (GTK_WIDGET(this));
-	shadow_color = gl_color_from_gdk_color (&style->bg[GTK_STATE_ACTIVE]);
+	shadow_color = gl_color_from_gdk_color (&style->dark[GTK_STATE_NORMAL]);
 	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (shadow_color));
 
         cairo_fill (cr);
@@ -689,16 +685,23 @@ draw_paper (glMiniPreview      *this,
 	    gdouble             height,
 	    gdouble             line_width)
 {
-	cairo_save (cr);
+	GtkStyle                  *style;
+	guint                      paper_color, outline_color;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
+	cairo_save (cr);
+
+	style = gtk_widget_get_style (GTK_WIDGET(this));
+	paper_color   = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
+	outline_color = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);
+
 	cairo_rectangle (cr, 0.0, 0.0, width, height);
 
-	cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (paper_color));
         cairo_fill_preserve (cr);
 
-	cairo_set_source_rgb (cr, PAPER_OUTLINE_RGB_ARGS);
+	cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (outline_color));
 	cairo_set_line_width (cr, line_width);
         cairo_stroke (cr);
 
@@ -721,7 +724,7 @@ draw_labels (glMiniPreview *this,
         gint                       i, n_labels;
         lglTemplateOrigin         *origins;
 	GtkStyle                  *style;
-	guint                      highlight_color;
+	guint                      highlight_color, paper_color, outline_color;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -732,6 +735,8 @@ draw_labels (glMiniPreview *this,
 
 	style = gtk_widget_get_style (GTK_WIDGET(this));
 	highlight_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
+	paper_color     = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
+	outline_color   = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);
 
         for ( i=0; i < n_labels; i++ ) {
 
@@ -747,13 +752,13 @@ draw_labels (glMiniPreview *this,
 		}
 		else
 		{
-			cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
+			cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (paper_color));
 		}
 		cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
 		cairo_fill_preserve (cr);
 
 		cairo_set_line_width (cr, line_width);
-		cairo_set_source_rgb (cr, LABEL_OUTLINE_RGB_ARGS);
+		cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (outline_color));
 		cairo_stroke (cr);
 
 		cairo_restore (cr);

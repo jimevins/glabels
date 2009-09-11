@@ -29,7 +29,7 @@
 
 #include "hig.h"
 #include "wdgt-media-select.h"
-#include "wdgt-rotate-label.h"
+#include "rotate-label-button.h"
 #include "util.h"
 
 #include "debug.h"
@@ -192,14 +192,14 @@ gl_new_label_dialog_construct (glNewLabelDialog   *dialog,
 	gtk_box_pack_start (GTK_BOX (media_select_vbox),
 			    dialog->priv->media_select, FALSE, FALSE, 0);
 
-	dialog->priv->rotate_label = gl_wdgt_rotate_label_new ();
+	dialog->priv->rotate_label = gl_rotate_label_button_new ();
 	gtk_box_pack_start (GTK_BOX (rotate_label_vbox),
 			    dialog->priv->rotate_label, FALSE, FALSE, 0);
 
 	/* Sync template name from media select with rotate widget. */
 	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select));
-	gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label),
-						name);
+	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
+                                              name);
 
 	g_signal_connect (G_OBJECT (dialog->priv->media_select), "changed",
 			  G_CALLBACK (template_changed_cb), dialog);
@@ -222,8 +222,8 @@ template_changed_cb (glWdgtMediaSelect *select,
 
 	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (select));
 
-	gl_wdgt_rotate_label_set_template_name (GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label),
-						name);
+	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
+                                                  name);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GTK_RESPONSE_OK,
@@ -294,8 +294,8 @@ gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *dialog,
 gboolean
 gl_new_label_dialog_get_rotate_state (glNewLabelDialog *dialog)
 {
-	return gl_wdgt_rotate_label_get_state (
-		GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label));
+	return gl_rotate_label_button_get_state (
+		GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label));
 }
 
 
@@ -306,8 +306,8 @@ void
 gl_new_label_dialog_set_rotate_state (glNewLabelDialog *dialog,
 				      gboolean          state)
 {
-	gl_wdgt_rotate_label_set_state (
-		GL_WDGT_ROTATE_LABEL (dialog->priv->rotate_label), state);
+	gl_rotate_label_button_set_state (
+		GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label), state);
 }
 
 

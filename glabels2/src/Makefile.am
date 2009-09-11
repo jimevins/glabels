@@ -173,8 +173,10 @@ glabels_SOURCES = 			\
 	wdgt-media-select.h		\
 	mini-preview.c			\
 	mini-preview.h			\
-	wdgt-rotate-label.c		\
-	wdgt-rotate-label.h		\
+	mini-label-preview.c		\
+	mini-label-preview.h		\
+	rotate-label-button.c		\
+	rotate-label-button.h		\
 	wdgt-chain-button.c		\
 	wdgt-chain-button.h		\
 	wdgt-merge-menu.c		\
