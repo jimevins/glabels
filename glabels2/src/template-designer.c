@@ -35,7 +35,7 @@
 #include <libglabels/db.h>
 #include "mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"
-#include "print-op.h"
+#include "print-op-dialog.h"
 #include "util.h"
 
 #include "debug.h"
@@ -1610,17 +1610,17 @@ layout_page_changed_cb (glTemplateDesigner *dialog)
 static void
 print_test_cb (glTemplateDesigner      *dialog)
 {
-	GObject     *label;
-	lglTemplate *template;
-	glPrintOp   *print_op;
+	GObject           *label;
+	lglTemplate       *template;
+	glPrintOpDialog   *print_op;
 
 	label = gl_label_new ();
 
 	template = build_template (dialog);
 	gl_label_set_template (GL_LABEL(label), template);
 
-	print_op = gl_print_op_new (GL_LABEL(label));
-	gl_print_op_force_outline_flag (print_op);
+	print_op = gl_print_op_dialog_new (GL_LABEL(label));
+	gl_print_op_force_outline (GL_PRINT_OP (print_op));
         gtk_print_operation_run (GTK_PRINT_OPERATION (print_op),
                                  GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
                                  GTK_WINDOW (dialog),

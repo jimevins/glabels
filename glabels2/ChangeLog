@@ -1,3 +1,40 @@
+2009-09-13  Jim Evins  <evins@snaught.com>
+
+	Refactored print operation subsystem.
+	
+	* src/print-op.c:
+	* src/print-op.h:
+		Basic GtkPrintOperation based class.  Does not instantiate
+		custom widgets, so it can be used by glabels-batch without
+		the additional overhead.
+	* src/print-op-dialog.c:
+	* src/print-op-dialog.h:
+		New object derived from glPrintOp.  This one is intended
+		to be used as a dialog and installs custom widgets.
+		glWdgtPrintCopies and glWdgtPrintMerge have been merged
+		into this object.
+	* src/wdgt-print-copies.c:
+	* src/wdgt-print-copies.h:
+	* src/wdgt-print-merge.c:
+	* src/wdgt-print-merge.h:
+		Deleted.
+	* src/Makefile.am:
+		Modified to reflect above additions and deletions.
+	* src/mini-preview.c: (gl_mini_preview_construct),
+	(gl_mini_preview_set_template), (set_transform_and_get_scale),
+	(button_press_event_cb), (motion_notify_event_cb), (draw):
+		Now scales with allocation.
+	* src/glabels-batch.c: (main):
+	* src/template-designer.c: (print_test_cb):
+	* src/ui-commands.c: (gl_ui_cmd_file_print):
+		Use above modifications.
+	* data/builder/print-op-dialog-custom-widget.builder:
+		New builder file for glPrintOpDialog custom widgets.
+	* data/builder/print-custom-widget.builder:
+		Deleted.
+	* data/builder/Makefile.am:
+		Modified to reflect above addition and deletion.
+
 2009-09-10  Jim Evins  <evins@snaught.com>
 
 	* src/Makefile.am:

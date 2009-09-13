@@ -115,6 +115,8 @@ glabels_SOURCES = 			\
 	print.h				\
 	print-op.c			\
 	print-op.h			\
+	print-op-dialog.c		\
+	print-op-dialog.h		\
 	template-designer.c		\
 	template-designer.h		\
 	bc.c				\
@@ -165,10 +167,6 @@ glabels_SOURCES = 			\
 	mini-preview-pixbuf.h		\
 	mini-preview-pixbuf-cache.c	\
 	mini-preview-pixbuf-cache.h	\
-	wdgt-print-copies.c		\
-	wdgt-print-copies.h		\
-	wdgt-print-merge.c		\
-	wdgt-print-merge.h		\
 	wdgt-media-select.c		\
 	wdgt-media-select.h		\
 	mini-preview.c			\
@@ -280,12 +278,6 @@ glabels_batch_SOURCES = 		\
 	color.h				\
 	debug.c 			\
 	debug.h 			\
-	wdgt-print-copies.c		\
-	wdgt-print-copies.h		\
-	wdgt-print-merge.c		\
-	wdgt-print-merge.h		\
-	mini-preview.c			\
-	mini-preview.h			\
 	hig.h				\
 	cairo-label-path.c		\
 	cairo-label-path.h		\

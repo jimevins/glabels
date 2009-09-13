@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  glabels-batch.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  glabels.c: main program module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -32,6 +28,7 @@
 #include "print-op.h"
 #include <libglabels/db.h>
 #include "util.h"
+#include <math.h>
 #include "prefs.h"
 #include "debug.h"
 
@@ -83,6 +80,7 @@ main (int argc, char **argv)
         gchar             *abs_fn;
         glLabel           *label = NULL;
         glMerge           *merge = NULL;
+        lglTemplateFrame  *frame;
         glXMLLabelStatus   status;
         glPrintOp         *print_op;
 	gchar	          *utf8_filename;
@@ -137,8 +135,8 @@ main (int argc, char **argv)
 
                 if ( status == XML_LABEL_OK ) {
 
+                        merge = gl_label_get_merge (label);
                         if (input != NULL) {
-                                merge = gl_label_get_merge (label);
                                 if (merge != NULL) {
                                         gl_merge_set_src(merge, input);
                                         gl_label_set_merge(label, merge);
@@ -149,15 +147,27 @@ main (int argc, char **argv)
                                 }
                         }
                         abs_fn = gl_util_make_absolute ( output );
-                        print_op = gl_print_op_new_batch (label,
-                                                          abs_fn,
-                                                          n_sheets,
-                                                          n_copies,
-                                                          first,
-                                                          outline_flag,
-                                                          reverse_flag,
-                                                          crop_marks_flag);
+                        frame = (lglTemplateFrame *)label->template->frames->data;
 
+                        print_op = gl_print_op_new (label);
+                        gl_print_op_set_filename        (print_op, abs_fn);
+                        gl_print_op_set_n_copies        (print_op, n_copies);
+                        gl_print_op_set_first           (print_op, first);
+                        gl_print_op_set_outline_flag    (print_op, outline_flag);
+                        gl_print_op_set_reverse_flag    (print_op, reverse_flag);
+                        gl_print_op_set_crop_marks_flag (print_op, crop_marks_flag);
+                        if (merge)
+                        {
+                                gl_print_op_set_n_sheets (print_op,
+                                                          ceil ((double)(first-1 + n_copies * gl_merge_get_record_count(merge))
+                                                                / lgl_template_frame_get_n_labels (frame)));
+                        }
+                        else
+                        {
+                                gl_print_op_set_n_sheets (print_op, n_sheets);
+                                gl_print_op_set_last     (print_op,
+                                                          lgl_template_frame_get_n_labels (frame));
+                        }
                         gtk_print_operation_run (GTK_PRINT_OPERATION (print_op),
                                                  GTK_PRINT_OPERATION_ACTION_EXPORT,
                                                  NULL,
@@ -176,3 +186,14 @@ main (int argc, char **argv)
         return 0;
 }
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

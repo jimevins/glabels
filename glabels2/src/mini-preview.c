@@ -36,7 +36,7 @@
 /* Private macros and constants.             */
 /*===========================================*/
 
-#define MARGIN
+#define MARGIN 2
 #define SHADOW_OFFSET 3
 
 
@@ -59,13 +59,7 @@ struct _glMiniPreviewPrivate {
 
         GtkWidget      *canvas;
 
-	gint            height;
-	gint            width;
-
 	lglTemplate    *template;
-	gdouble         scale;
-	gdouble         offset_x;
-	gdouble         offset_y;
 	gint            labels_per_sheet;
 	LabelCenter    *centers;
 
@@ -134,6 +128,9 @@ static void     draw_labels                    (glMiniPreview          *this,
 static gint     find_closest_label             (glMiniPreview          *this,
 						gdouble                 x,
 						gdouble                 y);
+
+static gdouble  set_transform_and_get_scale    (glMiniPreview          *this,
+						cairo_t                *cr);
 
 
 /****************************************************************************/
@@ -266,9 +263,6 @@ gl_mini_preview_construct (glMiniPreview *this,
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	this->priv->height = height;
-	this->priv->width  = width;
-
 	gtk_widget_set_size_request (GTK_WIDGET (this->priv->canvas), width, height);
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
@@ -320,19 +314,6 @@ gl_mini_preview_set_template (glMiniPreview     *this,
 	this->priv->template = lgl_template_dup (template);
 
 	/*
-	 * Set scale and offsets
-	 */
-	w = this->priv->width - 2*MARGIN - 2*SHADOW_OFFSET;
-	h = this->priv->height - 2*MARGIN - 2*SHADOW_OFFSET;
-	if ( (w/template->page_width) > (h/template->page_height) ) {
-		this->priv->scale = h / template->page_height;
-	} else {
-		this->priv->scale = w / template->page_width;
-	}
-	this->priv->offset_x = (this->priv->width/this->priv->scale - template->page_width) / 2.0;
-	this->priv->offset_y = (this->priv->height/this->priv->scale - template->page_height) / 2.0;
-
-	/*
 	 * Set labels per sheet
 	 */
 	this->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
@@ -380,6 +361,39 @@ gl_mini_preview_highlight_range (glMiniPreview *this,
 
 
 /*--------------------------------------------------------------------------*/
+/* Set transformation and return scale.                                     */
+/*--------------------------------------------------------------------------*/
+static gdouble
+set_transform_and_get_scale (glMiniPreview *this,
+                             cairo_t       *cr)
+{
+	lglTemplate *template = this->priv->template;
+        gdouble      w, h;
+        gdouble      w1, h1;
+        gdouble      scale;
+        gdouble      offset_x, offset_y;
+
+        /* Establish scale and origin. */
+        w = GTK_WIDGET (this)->allocation.width;
+        h = GTK_WIDGET (this)->allocation.height;
+
+        /* establish scale. */
+        scale = MIN( (w - 2*MARGIN - 2*SHADOW_OFFSET)/template->page_width,
+                     (h - 2*MARGIN - 2*SHADOW_OFFSET)/template->page_height );
+
+        /* Find offset to center preview. */
+        offset_x = (w/scale - template->page_width) / 2.0;
+        offset_y = (h/scale - template->page_height) / 2.0;
+
+        /* Set transformation. */
+        cairo_scale (cr, scale, scale);
+        cairo_translate (cr, offset_x, offset_y);
+
+        return scale;
+}
+
+
+/*--------------------------------------------------------------------------*/
 /* Button press event handler                                               */
 /*--------------------------------------------------------------------------*/
 static gboolean
@@ -388,6 +402,7 @@ button_press_event_cb (GtkWidget      *widget,
 {
 	glMiniPreview     *this = GL_MINI_PREVIEW (widget);
 	cairo_t           *cr;
+        gdouble            scale;
 	gdouble            x, y;
 	gint               i;
 
@@ -397,9 +412,7 @@ button_press_event_cb (GtkWidget      *widget,
 	{
 		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
 
-		/* Set transformation. */
-		cairo_scale (cr, this->priv->scale, this->priv->scale);
-		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
+                scale = set_transform_and_get_scale (this, cr);
 
 		x = event->x;
 		y = event->y;
@@ -437,6 +450,7 @@ motion_notify_event_cb (GtkWidget      *widget,
 {
 	glMiniPreview *this = GL_MINI_PREVIEW (widget);
 	cairo_t           *cr;
+        gdouble            scale;
 	gdouble            x, y;
 	gint               i;
 
@@ -446,9 +460,7 @@ motion_notify_event_cb (GtkWidget      *widget,
 	{
 		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
 
-		/* Set transformation. */
-		cairo_scale (cr, this->priv->scale, this->priv->scale);
-		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
+                scale = set_transform_and_get_scale (this, cr);
 
 		x = event->x;
 		y = event->y;
@@ -610,21 +622,20 @@ draw (glMiniPreview  *this,
       cairo_t        *cr)
 {
 	lglTemplate *template = this->priv->template;
+        gdouble      scale;
 	gdouble      shadow_x, shadow_y;
+
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	if (template)
 	{
 
-		/* Set transformation. */
-		cairo_scale (cr, this->priv->scale, this->priv->scale);
-		cairo_translate (cr, this->priv->offset_x, this->priv->offset_y);
-
+                scale = set_transform_and_get_scale (this, cr);
 
 		/* update shadow */
-		shadow_x = SHADOW_OFFSET/this->priv->scale;
-		shadow_y = SHADOW_OFFSET/this->priv->scale;
+		shadow_x = SHADOW_OFFSET/scale;
+		shadow_y = SHADOW_OFFSET/scale;
 
 		draw_shadow (this, cr,
 			     shadow_x, shadow_y,
@@ -632,9 +643,9 @@ draw (glMiniPreview  *this,
 
 		draw_paper (this, cr,
 			    template->page_width, template->page_height,
-			    1.0/this->priv->scale);
+			    1.0/scale);
 
-		draw_labels (this, cr, template, 1.0/this->priv->scale);
+		draw_labels (this, cr, template, 1.0/scale);
 			     
 	}
 
