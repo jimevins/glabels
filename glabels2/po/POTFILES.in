@@ -123,16 +123,10 @@ src/font-sample.c
 src/font-sample.h
 src/font-util.c
 src/font-util.h
-src/wdgt-print-copies.c
-src/wdgt-print-copies.h
-src/wdgt-print-merge.c
-src/wdgt-print-merge.h
 src/wdgt-media-select.c
 src/wdgt-media-select.h
 src/mini-preview.c
 src/mini-preview.h
-src/wdgt-rotate-label.c
-src/wdgt-rotate-label.h
 src/wdgt-chain-button.c
 src/wdgt-chain-button.h
 src/util.c
@@ -172,7 +166,6 @@ libglabels/xml-template.h
 [type: gettext/glade]data/builder/print-custom-widget.builder
 [type: gettext/glade]data/builder/property-bar.builder
 [type: gettext/glade]data/builder/template-designer.builder
-[type: gettext/glade]data/builder/wdgt-media-select.builder
 
 [type: gettext/xml]data/templates/paper-sizes.xml
 [type: gettext/xml]data/templates/categories.xml
