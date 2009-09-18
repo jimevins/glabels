@@ -22,7 +22,7 @@
 #define __GL_FONT_COMBO_H__
 
 
-#include <gtk/gtktogglebutton.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

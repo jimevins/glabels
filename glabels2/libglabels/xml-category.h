@@ -26,8 +26,7 @@
 #ifndef __XML_CATEGORY_H__
 #define __XML_CATEGORY_H__
 
-#include <glib/gtypes.h>
-#include <glib/glist.h>
+#include <glib.h>
 #include <libxml/tree.h>
 
 #include "category.h"

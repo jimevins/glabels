@@ -22,13 +22,12 @@
 
 #include "color-combo-color-menu-item.h"
 
-#include "marshal.h"
 #include <glib/gi18n.h>
-#include <gtk/gtkmenuitem.h>
-#include <gtk/gtkseparatormenuitem.h>
-#include <gtk/gtklabel.h>
+#include <gtk/gtk.h>
+
 #include "color-swatch.h"
 #include "color.h"
+#include "marshal.h"
 
 
 

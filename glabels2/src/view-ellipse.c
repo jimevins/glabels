@@ -1,32 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  view-ellipse.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  view_ellipse.c:  GLabels label ellipse object view
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "view-ellipse.h"
 
 #include <glib/gi18n.h>
-#include <glib/gmem.h>
+#include <glib.h>
 #include <math.h>
 
 #include "cairo-ellipse-path.h"
@@ -39,9 +36,11 @@
 
 #include "debug.h"
 
+
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -49,6 +48,7 @@
 
 struct _glViewEllipsePrivate {
 };
+
 
 /*========================================================*/
 /* Private globals.                                       */
@@ -80,7 +80,6 @@ static gboolean   object_at                         (glViewObject     *view_obje
                                                      gdouble           y);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
@@ -105,6 +104,7 @@ gl_view_ellipse_class_init (glViewEllipseClass *class)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 static void
 gl_view_ellipse_init (glViewEllipse *view_ellipse)
 {
@@ -114,6 +114,7 @@ gl_view_ellipse_init (glViewEllipse *view_ellipse)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 static void
 gl_view_ellipse_finalize (GObject *object)
@@ -130,6 +131,7 @@ gl_view_ellipse_finalize (GObject *object)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* NEW ellipse object view.                                                  */
@@ -156,6 +158,7 @@ gl_view_ellipse_new (glLabelEllipse *object,
 
 	return GL_VIEW_OBJECT (view_ellipse);
 }
+
 
 /*****************************************************************************/
 /* Create a properties dialog for a ellipse object.                          */
@@ -197,6 +200,7 @@ construct_properties_editor (glViewObject *view_object)
 
 	return editor;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  editor "changed" callback.                                      */
@@ -264,6 +268,7 @@ update_object_from_editor_cb (glObjectEditor *editor,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
@@ -314,6 +319,7 @@ update_editor_from_object_cb (glLabelObject  *object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. label object "moved" callback.                                   */
 /*---------------------------------------------------------------------------*/
@@ -332,6 +338,7 @@ update_editor_from_move_cb (glLabelObject    *object,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Is object at (x,y)?                                                       */
@@ -398,6 +405,7 @@ gl_view_ellipse_get_create_cursor (void)
 	return cursor;
 }
 
+
 /*****************************************************************************/
 /* Object creation handler: button press event.                              */
 /*****************************************************************************/
@@ -435,6 +443,7 @@ gl_view_ellipse_create_button_press_event   (glView *view,
         view->create_y0 = y;
 }
 
+
 /*****************************************************************************/
 /* Object creation handler: motion event.                                    */
 /*****************************************************************************/
@@ -451,6 +460,7 @@ gl_view_ellipse_create_motion_event     (glView *view,
         h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
         gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
 }
+
 
 /*****************************************************************************/
 /* Object creation handler: button relesase event.                           */
@@ -484,3 +494,13 @@ gl_view_ellipse_create_button_release_event (glView *view,
         gl_color_node_free (&line_color_node);
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

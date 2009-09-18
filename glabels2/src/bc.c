@@ -1,34 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  bc.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  bc.c:  GLabels barcode module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "bc.h"
 
+#include <glib.h>
 #include <glib/gi18n.h>
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
 
 #include "bc-postnet.h"
 #include "bc-gnubarcode.h"
@@ -37,9 +32,11 @@
 
 #include "debug.h"
 
+
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -162,11 +159,12 @@ static const Backend backends[] = {
 
 };
 
+
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-
+
 /*---------------------------------------------------------------------------*/
 /* Convert id to index into above table.                                     */
 /*---------------------------------------------------------------------------*/
@@ -189,6 +187,7 @@ id_to_index (const gchar *id)
 	return 0;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Convert name to index into above table.                                   */
 /*---------------------------------------------------------------------------*/
@@ -208,6 +207,7 @@ name_to_index (const gchar *name)
 	g_message( "Unknown barcode name \"%s\"", name );
 	return 0;
 }
+
 
 /*****************************************************************************/
 /* Call appropriate barcode backend to create barcode in intermediate format.*/
@@ -235,6 +235,7 @@ gl_barcode_new (const gchar    *id,
 
 	return gbc;
 }
+
 
 /*****************************************************************************/
 /* Free previously created barcode.                                          */
@@ -265,6 +266,7 @@ gl_barcode_free (glBarcode **gbc)
 	}
 }
 
+
 /*****************************************************************************/
 /* Get a list of names for valid barcode styles.                             */
 /*****************************************************************************/
@@ -280,6 +282,7 @@ gl_barcode_get_styles_list  (void)
 
 	return list;
 }
+
 
 /*****************************************************************************/
 /* Free up a previously allocated list of style names.                       */
@@ -320,6 +323,7 @@ gl_barcode_default_digits (const gchar *id,
 	}
 }
 
+
 /*****************************************************************************/
 /* Query text capabilities.                                                  */
 /*****************************************************************************/
@@ -329,11 +333,13 @@ gl_barcode_can_text (const gchar *id)
 	return backends[id_to_index (id)].can_text;
 }
 
+
 gboolean
 gl_barcode_text_optional (const gchar *id)
 {
 	return backends[id_to_index (id)].text_optional;
 }
+
 
 /*****************************************************************************/
 /* Query checksum capabilities.                                              */
@@ -343,6 +349,7 @@ gl_barcode_can_csum (const gchar *id)
 {
 	return backends[id_to_index (id)].can_checksum;
 }
+
 
 gboolean
 gl_barcode_csum_optional (const gchar *id)
@@ -360,6 +367,7 @@ gl_barcode_can_freeform     (const gchar    *id)
 	return backends[id_to_index (id)].can_freeform;
 }
 
+
 /*****************************************************************************/
 /* Query prefered number of digits of input.                                 */
 /*****************************************************************************/
@@ -369,6 +377,7 @@ gl_barcode_get_prefered_n (const gchar    *id)
 	return backends[id_to_index (id)].prefered_n;
 }
 
+
 /*****************************************************************************/
 /* Convert style to text.                                                    */
 /*****************************************************************************/
@@ -377,6 +386,7 @@ gl_barcode_id_to_name (const gchar *id)
 {
 	return backends[id_to_index (id)].name;
 }
+
 
 /*****************************************************************************/
 /* Convert name to style.                                                    */
@@ -388,3 +398,14 @@ gl_barcode_name_to_id (const gchar *name)
 
 	return backends[name_to_index (name)].id;
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

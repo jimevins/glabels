@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label.c:  GLabels label module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -28,15 +24,17 @@
 
 #include <glib/gi18n.h>
 
-#include "marshal.h"
 #include "prefs.h"
 #include "util.h"
+#include "marshal.h"
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -64,6 +62,7 @@ enum {
 	LAST_SIGNAL
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
@@ -71,6 +70,7 @@ enum {
 static guint signals[LAST_SIGNAL] = {0};
 
 static guint untitled = 0;
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -86,11 +86,12 @@ static void object_moved_cb        (glLabelObject *object,
 				    gdouble        y,
 				    glLabel       *label);
 
-
+
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabel, gl_label, G_TYPE_OBJECT);
+
 
 static void
 gl_label_class_init (glLabelClass *class)
@@ -161,6 +162,7 @@ gl_label_class_init (glLabelClass *class)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 static void
 gl_label_init (glLabel *label)
 {
@@ -178,6 +180,7 @@ gl_label_init (glLabel *label)
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 static void
 gl_label_finalize (GObject *object)
@@ -207,6 +210,7 @@ gl_label_finalize (GObject *object)
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 GObject *
 gl_label_new (void)
@@ -257,6 +261,7 @@ gl_label_add_object (glLabel       *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Remove object from label.                                                 */
 /*****************************************************************************/
@@ -291,6 +296,7 @@ gl_label_remove_object (glLabel       *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Object changed callback.                                        */
 /*---------------------------------------------------------------------------*/
@@ -308,6 +314,7 @@ object_changed_cb (glLabelObject *object,
 
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Object moved callback.                                          */
@@ -328,6 +335,7 @@ object_moved_cb (glLabelObject *object,
 
 	g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
 }
+
 
 /****************************************************************************/
 /* Bring label object to front/top.                                         */
@@ -350,6 +358,7 @@ gl_label_raise_object_to_top (glLabel       *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Send label object to rear/bottom.                                        */
 /****************************************************************************/
@@ -370,6 +379,7 @@ gl_label_lower_object_to_bottom (glLabel       *label,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* set template.                                                            */
@@ -405,6 +415,7 @@ gl_label_set_template (glLabel     *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* set rotate flag.                                                         */
 /****************************************************************************/
@@ -430,6 +441,7 @@ gl_label_set_rotate_flag (glLabel *label,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Get label size.                                                          */
@@ -463,6 +475,7 @@ gl_label_get_size (glLabel *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* set merge information structure.                                         */
 /****************************************************************************/
@@ -488,6 +501,7 @@ gl_label_set_merge (glLabel *label,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Get merge information structure.                                         */
 /****************************************************************************/
@@ -503,6 +517,7 @@ gl_label_get_merge (glLabel *label)
 	return gl_merge_dup (label->priv->merge);
 }
 
+
 /****************************************************************************/
 /* return filename.                                                         */
 /****************************************************************************/
@@ -513,6 +528,7 @@ gl_label_get_filename (glLabel *label)
 
 	return g_strdup ( label->priv->filename );
 }
+
 
 /****************************************************************************/
 /* return short filename.                                                   */
@@ -542,6 +558,7 @@ gl_label_get_short_name (glLabel *label)
 	}
 }
 
+
 /****************************************************************************/
 /* Get pixbuf cache.                                                        */
 /****************************************************************************/
@@ -550,6 +567,7 @@ gl_label_get_pixbuf_cache (glLabel       *label)
 {
 	return label->priv->pixbuf_cache;
 }
+
 
 /****************************************************************************/
 /* Is label modified?                                                       */
@@ -561,6 +579,7 @@ gl_label_is_modified (glLabel *label)
 	return label->priv->modified_flag;
 }
 
+
 /****************************************************************************/
 /* Is label untitled?                                                       */
 /****************************************************************************/
@@ -570,6 +589,7 @@ gl_label_is_untitled (glLabel *label)
 	gl_debug (DEBUG_LABEL, "return %d",(label->priv->filename == NULL));
 	return (label->priv->filename == NULL);
 }
+
 
 /****************************************************************************/
 /* Can undo?                                                                */
@@ -602,6 +622,7 @@ gl_label_set_filename (glLabel     *label,
 
 	g_signal_emit (G_OBJECT(label), signals[NAME_CHANGED], 0);
 }
+
 
 /****************************************************************************/
 /* Clear modified flag.                                                     */
@@ -672,3 +693,15 @@ gl_label_draw (glLabel       *label,
                 gl_label_object_draw (object, cr, screen_flag, record);
 	}
 }
+
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -21,8 +21,7 @@
 #ifndef __OBJECT_EDITOR_PRIVATE_H__
 #define __OBJECT_EDITOR_PRIVATE_H__
 
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkbuilder.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

@@ -22,7 +22,7 @@
 #define __MINI_LABEL_PREVIEW_H__
 
 
-#include <gtk/gtkdrawingarea.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

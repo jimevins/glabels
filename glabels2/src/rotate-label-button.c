@@ -23,12 +23,11 @@
 #include "rotate-label-button.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkradiobutton.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 #include <math.h>
+
+#include <libglabels/libglabels.h>
 #include "mini-label-preview.h"
-#include <libglabels/db.h>
 #include "hig.h"
 #include "marshal.h"
 

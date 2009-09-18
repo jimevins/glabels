@@ -28,8 +28,7 @@
 #ifndef __DB_H__
 #define __DB_H__
 
-#include <glib/gtypes.h>
-#include <glib/glist.h>
+#include <glib.h>
 
 #include "paper.h"
 #include "category.h"

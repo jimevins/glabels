@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
-/**
- *  (GLABELS) Label and Business Card Creation program for GNOME
+/*
+ *  ui-sidebar.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  ui-sidebar.c:  Object property sidebar
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -34,11 +30,13 @@
 
 #include "debug.h"
 
+
 /*===========================================================================*/
 /* Private macros and constants.                                             */
 /*===========================================================================*/
 
 #define DEFAULT_SIDEBAR_WIDTH 340
+
 
 /*===========================================================================*/
 /* Private data types                                                        */
@@ -69,11 +67,11 @@ static void     selection_changed_cb        (glView               *view,
 					     glUISidebar          *sidebar);
 
 
-
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
 G_DEFINE_TYPE (glUISidebar, gl_ui_sidebar, GTK_TYPE_VBOX);
+
 
 static void
 gl_ui_sidebar_class_init (glUISidebarClass *class)
@@ -89,6 +87,7 @@ gl_ui_sidebar_class_init (glUISidebarClass *class)
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 static void
 gl_ui_sidebar_init (glUISidebar *sidebar)
 {
@@ -98,6 +97,7 @@ gl_ui_sidebar_init (glUISidebar *sidebar)
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 static void
 gl_ui_sidebar_finalize (GObject *object)
@@ -119,6 +119,7 @@ gl_ui_sidebar_finalize (GObject *object)
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /****************************************************************************/
 /* Create a NEW sidebar.                                                    */
 /****************************************************************************/
@@ -139,6 +140,7 @@ gl_ui_sidebar_new (void)
 
 	return GTK_WIDGET(sidebar);
 }
+
 
 /******************************************************************************/
 /* Initialize property toolbar.                                               */
@@ -163,6 +165,7 @@ gl_ui_sidebar_construct (glUISidebar       *sidebar)
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /****************************************************************************/
 /* Set view associated with sidebar.                                        */
 /****************************************************************************/
@@ -183,6 +186,7 @@ gl_ui_sidebar_set_view (glUISidebar *sidebar,
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  View "selection state changed" callback.                        */
@@ -215,3 +219,13 @@ selection_changed_cb (glView      *view,
 	gl_debug (DEBUG_UI, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

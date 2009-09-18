@@ -23,25 +23,18 @@
 #include "wdgt-media-select.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
-#include <gtk/gtknotebook.h>
-#include <gtk/gtkcombobox.h>
-#include <gtk/gtktreeview.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtkliststore.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkcellrendererpixbuf.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
+#include <libglabels/libglabels.h>
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
 #include "util.h"
 #include "color.h"
 #include "marshal.h"
-#include <libglabels/db.h>
 
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private types                             */

@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  file.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  file.c:  FILE menu dialog module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -27,11 +23,7 @@
 #include "file.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkfilechooserdialog.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #include "xml-label.h"
@@ -40,7 +32,9 @@
 #include "window.h"
 #include "new-label-dialog.h"
 #include "libglabels/libglabels.h"
+
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private globals                           */
@@ -55,6 +49,7 @@ static gboolean rotate_flag = FALSE;
 /* Saved state of file selectors */
 static gchar *open_path = NULL;
 static gchar *save_path = NULL;
+
 
 /*===========================================*/
 /* Local function prototypes.                */
@@ -74,7 +69,7 @@ static void save_as_response                 (GtkDialog         *chooser,
 					      gint               response,
 					      glLabel           *label);
 
-
+
 /*****************************************************************************/
 /* "New" menu callback.                                                      */
 /*****************************************************************************/
@@ -111,6 +106,7 @@ gl_file_new (glWindow  *window)
 
 	gl_debug (DEBUG_FILE, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  New "ok" button callback.                                       */
@@ -172,6 +168,7 @@ new_response (GtkDialog *dialog,
 	gl_debug (DEBUG_FILE, "END");
 }
 
+
 /*****************************************************************************/
 /* "Properties" menu callback.                                               */
 /*****************************************************************************/
@@ -214,6 +211,7 @@ gl_file_properties (glLabel   *label,
 
 	gl_debug (DEBUG_FILE, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Properties "ok" button callback.                                */
@@ -261,6 +259,7 @@ properties_response (GtkDialog *dialog,
 	gl_debug (DEBUG_FILE, "END");
 }
 
+
 /*****************************************************************************/
 /* "Open" menu callback.                                                     */
 /*****************************************************************************/
@@ -307,6 +306,7 @@ gl_file_open (glWindow  *window)
 
 	gl_debug (DEBUG_FILE, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Open "response" callback.                                       */
@@ -405,6 +405,7 @@ gl_file_open_recent (const gchar     *filename,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Open a file.                                                    */
 /*---------------------------------------------------------------------------*/
@@ -466,6 +467,7 @@ gl_file_open_real (const gchar     *filename,
 
 	}
 }
+
 
 /*****************************************************************************/
 /* "Save" menu callback.                                                     */
@@ -535,6 +537,7 @@ gl_file_save (glLabel   *label,
 	}
 }
 
+
 /*****************************************************************************/
 /* "Save As" menu callback.                                                  */
 /*****************************************************************************/
@@ -602,6 +605,7 @@ gl_file_save_as (glLabel   *label,
 	/* Return flag as set by one of the above callbacks, TRUE = saved */
 	return saved_flag;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  "Save As" ok button callback.                                   */
@@ -821,6 +825,7 @@ gl_file_close (glWindow *window)
 	return close;
 }
 
+
 /*****************************************************************************/
 /* "Exit" menu callback.                                                     */
 /*****************************************************************************/
@@ -842,3 +847,14 @@ gl_file_exit (void)
 
 	gl_debug (DEBUG_FILE, "END");
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -1,34 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label-line.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label_line.c:  GLabels label line object
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "label-line.h"
 
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
+#include <glib.h>
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -39,28 +34,30 @@ struct _glLabelLinePrivate {
 	glColorNode     *line_color_node;
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void    gl_label_line_finalize      (GObject          *object);
+static void    gl_label_line_finalize     (GObject           *object);
 
-static void    copy                        (glLabelObject    *dst_object,
-					    glLabelObject    *src_object);
+static void    copy                       (glLabelObject     *dst_object,
+					   glLabelObject     *src_object);
 
-static void    set_line_color              (glLabelObject    *object,
-					    glColorNode      *line_color_node);
+static void    set_line_color             (glLabelObject     *object,
+					   glColorNode       *line_color_node);
 
-static void    set_line_width              (glLabelObject    *object,
-					    gdouble           line_width);
+static void    set_line_width             (glLabelObject     *object,
+					   gdouble            line_width);
 
-static glColorNode   *get_line_color       (glLabelObject    *object);
+static glColorNode   *get_line_color      (glLabelObject     *object);
 
-static gdouble get_line_width              (glLabelObject    *object);
+static gdouble get_line_width             (glLabelObject     *object);
 
 static void    draw_object                (glLabelObject     *object,
                                            cairo_t           *cr,
@@ -73,11 +70,11 @@ static void    draw_shadow                (glLabelObject     *object,
                                            glMergeRecord     *record);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabelLine, gl_label_line, GL_TYPE_LABEL_OBJECT);
+
 
 static void
 gl_label_line_class_init (glLabelLineClass *class)
@@ -98,12 +95,14 @@ gl_label_line_class_init (glLabelLineClass *class)
 	object_class->finalize = gl_label_line_finalize;
 }
 
+
 static void
 gl_label_line_init (glLabelLine *lline)
 {
 	lline->priv = g_new0 (glLabelLinePrivate, 1);
 	lline->priv->line_color_node = gl_color_node_new_default ();
 }
+
 
 static void
 gl_label_line_finalize (GObject *object)
@@ -117,6 +116,7 @@ gl_label_line_finalize (GObject *object)
 
 	G_OBJECT_CLASS (gl_label_line_parent_class)->finalize (object);
 }
+
 
 /*****************************************************************************/
 /* NEW label "line" object.                                               */
@@ -132,6 +132,7 @@ gl_label_line_new (glLabel *label)
 
 	return G_OBJECT (lline);
 }
+
 
 /*****************************************************************************/
 /* Copy object contents.                                                     */
@@ -182,6 +183,7 @@ set_line_color (glLabelObject *object,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set line width method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -213,6 +215,7 @@ get_line_width (glLabelObject *object)
 	return lline->priv->line_width;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line width method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -225,6 +228,7 @@ get_line_color (glLabelObject *object)
 
 	return gl_color_node_dup (lline->priv->line_color_node);
 }
+
 
 /*****************************************************************************/
 /* Draw object method.                                                       */
@@ -267,6 +271,7 @@ draw_object (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Draw shadow method.                                                       */
@@ -321,3 +326,14 @@ draw_shadow (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

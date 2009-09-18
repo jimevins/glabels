@@ -28,8 +28,7 @@
 #ifndef __TEMPLATE_H__
 #define __TEMPLATE_H__
 
-#include <glib/gtypes.h>
-#include <glib/glist.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 

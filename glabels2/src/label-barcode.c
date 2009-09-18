@@ -1,43 +1,40 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label-barcode.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label_barcode.c:  GLabels label text object
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <config.h>
 
 #include "label-barcode.h"
 
+#include <glib.h>
 #include <glib/gi18n.h>
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
-#include <cairo.h>
 #include <pango/pangocairo.h>
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
 
 #define FONT_SCALE (72.0/96.0)
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -52,9 +49,11 @@ struct _glLabelBarcodePrivate {
 	guint           format_digits;
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -80,11 +79,11 @@ static void    draw_object                (glLabelObject     *object,
                                            glMergeRecord     *record);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabelBarcode, gl_label_barcode, GL_TYPE_LABEL_OBJECT);
+
 
 static void
 gl_label_barcode_class_init (glLabelBarcodeClass *class)
@@ -104,6 +103,7 @@ gl_label_barcode_class_init (glLabelBarcodeClass *class)
 	object_class->finalize = gl_label_barcode_finalize;
 }
 
+
 static void
 gl_label_barcode_init (glLabelBarcode *lbc)
 {
@@ -111,6 +111,7 @@ gl_label_barcode_init (glLabelBarcode *lbc)
 	lbc->priv->color_node = gl_color_node_new_default ();
 	lbc->priv->text_node  = gl_text_node_new_from_text ("");
 }
+
 
 static void
 gl_label_barcode_finalize (GObject *object)
@@ -127,6 +128,7 @@ gl_label_barcode_finalize (GObject *object)
 	G_OBJECT_CLASS (gl_label_barcode_parent_class)->finalize (object);
 }
 
+
 /*****************************************************************************/
 /* NEW label "barcode" object.                                               */
 /*****************************************************************************/
@@ -141,6 +143,7 @@ gl_label_barcode_new (glLabel *label)
 
 	return G_OBJECT (lbc);
 }
+
 
 /*****************************************************************************/
 /* Copy object contents.                                                     */
@@ -202,6 +205,7 @@ gl_label_barcode_set_data (glLabelBarcode *lbc,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 void
 gl_label_barcode_set_props (glLabelBarcode *lbc,
 			    gchar          *id,
@@ -243,6 +247,7 @@ gl_label_barcode_get_data (glLabelBarcode *lbc)
 	return gl_text_node_dup (lbc->priv->text_node);
 }
 
+
 void
 gl_label_barcode_get_props (glLabelBarcode *lbc,
 			    gchar          **id,
@@ -257,6 +262,7 @@ gl_label_barcode_get_props (glLabelBarcode *lbc,
 	*checksum_flag    = lbc->priv->checksum_flag;
 	*format_digits    = lbc->priv->format_digits;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get object size method.                                         */
@@ -322,6 +328,7 @@ get_size (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set line color method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -341,6 +348,7 @@ set_line_color (glLabelObject *object,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line color method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -353,6 +361,7 @@ get_line_color (glLabelObject *object)
 
 	return gl_color_node_dup (lbarcode->priv->color_node);
 }
+
 
 /*****************************************************************************/
 /* Draw object method.                                                       */
@@ -481,3 +490,14 @@ draw_object (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

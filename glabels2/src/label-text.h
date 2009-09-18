@@ -1,6 +1,6 @@
 /*
  *  label-text.h
- *  Copyright (C) 2008  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -21,7 +21,7 @@
 #ifndef __LABEL_TEXT_H__
 #define __LABEL_TEXT_H__
 
-#include <gtk/gtktextbuffer.h>
+#include <gtk/gtk.h>
 #include "text-node.h"
 #include "label-object.h"
 

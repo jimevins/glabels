@@ -21,7 +21,7 @@
 #ifndef __FONT_COMBO_MENU_H__
 #define __FONT_COMBO_MENU_H__
 
-#include <gtk/gtkmenu.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

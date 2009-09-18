@@ -23,8 +23,7 @@
 #include "object-editor.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkspinbutton.h>
+#include <gtk/gtk.h>
 #include <math.h>
 
 #include "prefs.h"

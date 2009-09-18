@@ -22,10 +22,10 @@
 
 #include "mini-label-preview.h"
 
-#include <libglabels/db.h>
-#include "marshal.h"
+#include <libglabels/libglabels.h>
 #include "cairo-label-path.h"
 #include "color.h"
+#include "marshal.h"
 
 
 /*===========================================*/

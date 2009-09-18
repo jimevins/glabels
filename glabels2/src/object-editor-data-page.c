@@ -23,9 +23,7 @@
 #include "object-editor.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkeditable.h>
-#include <gtk/gtkcombobox.h>
-#include <gtk/gtktogglebutton.h>
+#include <gtk/gtk.h>
 #include <string.h>
 #include <math.h>
 

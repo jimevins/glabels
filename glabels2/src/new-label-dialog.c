@@ -23,9 +23,7 @@
 #include "new-label-dialog.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 
 #include "hig.h"
 #include "wdgt-media-select.h"

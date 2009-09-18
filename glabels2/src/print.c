@@ -1,26 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  print.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  print.c:  Print module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "print.h"
@@ -30,11 +27,12 @@
 #include <time.h>
 #include <ctype.h>
 
+#include <libglabels/libglabels.h>
 #include "label.h"
-#include <libglabels/template.h>
 #include "cairo-label-path.h"
 
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private macros and constants.             */
@@ -46,6 +44,7 @@
 
 #define TICK_OFFSET  2.25
 #define TICK_LENGTH 18.0
+
 
 /*=========================================================================*/
 /* Private types.                                                          */
@@ -91,7 +90,6 @@ static void       clip_to_outline             (PrintInfo        *pi,
 					       glLabel          *label);
 
 
-
 /*****************************************************************************/
 /* Print simple sheet (no merge data) command.                               */
 /*****************************************************************************/
@@ -136,6 +134,7 @@ gl_print_simple_sheet (glLabel          *label,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+
 
 /*****************************************************************************/
 /* Print collated merge sheet command                                        */
@@ -227,6 +226,7 @@ gl_print_collated_merge_sheet   (glLabel          *label,
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+
 
 /*****************************************************************************/
 /* Print uncollated merge sheet command                                      */
@@ -321,6 +321,7 @@ gl_print_uncollated_merge_sheet (glLabel          *label,
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  new print info structure                                        */
 /*---------------------------------------------------------------------------*/
@@ -355,6 +356,7 @@ print_info_new (cairo_t          *cr,
 	return pi;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  free print info structure                                       */
 /*---------------------------------------------------------------------------*/
@@ -369,6 +371,7 @@ print_info_free (PrintInfo **pi)
 
 	gl_debug (DEBUG_PRINT, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Print crop tick marks.                                          */
@@ -478,6 +481,7 @@ print_crop_marks (PrintInfo *pi)
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Print i'th label.                                               */
 /*---------------------------------------------------------------------------*/
@@ -533,6 +537,7 @@ print_label (PrintInfo     *pi,
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw outline.                                                   */
 /*---------------------------------------------------------------------------*/
@@ -556,6 +561,7 @@ draw_outline (PrintInfo *pi,
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Clip to outline.                                                */
 /*---------------------------------------------------------------------------*/
@@ -573,3 +579,15 @@ clip_to_outline (PrintInfo *pi,
 	gl_debug (DEBUG_PRINT, "END");
 }
 
+
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
- *
- *  ui-commands.c:  GLabels UI commands module
- *
+ *  ui-commands.c
  *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  This program is free software; you can redistribute it and/or modify
+ *  This file is part of gLabels.
+ *
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -39,7 +35,6 @@
 #include "debug.h"
 
 
-
 /****************************************************************************/
 /** File/New command.                                                       */
 /****************************************************************************/
@@ -57,6 +52,7 @@ gl_ui_cmd_file_new (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** File/Properties command.                                                */
 /****************************************************************************/
@@ -73,6 +69,7 @@ gl_ui_cmd_file_properties (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** File/Template-Designer command.                                         */
@@ -95,6 +92,7 @@ gl_ui_cmd_file_template_designer (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** File/Open command.                                                      */
 /****************************************************************************/
@@ -111,6 +109,7 @@ gl_ui_cmd_file_open (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** File/Open-Recent command.                                               */
@@ -141,6 +140,7 @@ gl_ui_cmd_file_open_recent (GtkRecentChooser *chooser,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** File/Save command.                                                      */
 /****************************************************************************/
@@ -158,6 +158,7 @@ gl_ui_cmd_file_save (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** File/Save-as command.                                                   */
 /****************************************************************************/
@@ -174,6 +175,7 @@ gl_ui_cmd_file_save_as (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** File/Print command.                                                     */
@@ -211,6 +213,7 @@ gl_ui_cmd_file_print (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** File/Close command.                                                     */
 /****************************************************************************/
@@ -227,6 +230,7 @@ gl_ui_cmd_file_close (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** File/Quit command.                                                      */
@@ -263,6 +267,7 @@ gl_ui_cmd_edit_cut (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** Edit/Copy command.                                                      */
 /****************************************************************************/
@@ -279,6 +284,7 @@ gl_ui_cmd_edit_copy (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** Edit/Paste command.                                                     */
@@ -333,6 +339,7 @@ gl_ui_cmd_edit_select_all (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /****************************************************************************/
 /** Edit/Unselect-all command.                                              */
 /****************************************************************************/
@@ -349,6 +356,7 @@ gl_ui_cmd_edit_unselect_all (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** Edit/Preferences command.                                               */
@@ -383,6 +391,7 @@ gl_ui_cmd_edit_preferences (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** View/Property-bar-toggle command.                                        */
@@ -443,6 +452,7 @@ gl_ui_cmd_view_grid_toggle (GtkToggleAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** View/Markup-toggle command.                                              */
 /*****************************************************************************/
@@ -474,6 +484,7 @@ gl_ui_cmd_view_markup_toggle (GtkToggleAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** View/Zoom-in command.                                                    */
 /*****************************************************************************/
@@ -493,6 +504,7 @@ gl_ui_cmd_view_zoomin (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** View/Zoom-out command.                                                   */
@@ -514,6 +526,7 @@ gl_ui_cmd_view_zoomout (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** View/Zoom-1:1 command.                                                   */
 /*****************************************************************************/
@@ -533,6 +546,7 @@ gl_ui_cmd_view_zoom1to1 (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** View/Zoom-to-fit command.                                                */
@@ -554,6 +568,7 @@ gl_ui_cmd_view_zoom_to_fit (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Arrow-mode command.                                              */
 /*****************************************************************************/
@@ -572,6 +587,7 @@ gl_ui_cmd_objects_arrow_mode (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Create-text object command.                                      */
@@ -594,6 +610,7 @@ gl_ui_cmd_objects_create_text (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Create-box object command.                                       */
 /*****************************************************************************/
@@ -614,6 +631,7 @@ gl_ui_cmd_objects_create_box (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Create-line object command.                                      */
@@ -636,6 +654,7 @@ gl_ui_cmd_objects_create_line (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Create-ellipse object command.                                   */
 /*****************************************************************************/
@@ -656,6 +675,7 @@ gl_ui_cmd_objects_create_ellipse (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Create-image object command.                                     */
@@ -678,6 +698,7 @@ gl_ui_cmd_objects_create_image (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Create-barcode object command.                                   */
 /*****************************************************************************/
@@ -699,6 +720,7 @@ gl_ui_cmd_objects_create_barcode (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Raise command.                                                   */
 /*****************************************************************************/
@@ -718,6 +740,7 @@ gl_ui_cmd_objects_raise (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Lower command.                                                   */
@@ -739,6 +762,7 @@ gl_ui_cmd_objects_lower (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Rotate-left-90-degrees command.                                  */
 /*****************************************************************************/
@@ -758,6 +782,7 @@ gl_ui_cmd_objects_rotate_left (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Rotate-right-90-degrees command.                                 */
@@ -779,6 +804,7 @@ gl_ui_cmd_objects_rotate_right (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Flip-horizontally command.                                       */
 /*****************************************************************************/
@@ -798,6 +824,7 @@ gl_ui_cmd_objects_flip_horiz (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Flip-vertically command.                                         */
@@ -819,6 +846,7 @@ gl_ui_cmd_objects_flip_vert (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Align-left command.                                              */
 /*****************************************************************************/
@@ -838,6 +866,7 @@ gl_ui_cmd_objects_align_left (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Align-right command.                                             */
@@ -859,6 +888,7 @@ gl_ui_cmd_objects_align_right (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Align-horizontal-center command.                                 */
 /*****************************************************************************/
@@ -878,6 +908,7 @@ gl_ui_cmd_objects_align_hcenter (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Align-top command.                                               */
@@ -899,6 +930,7 @@ gl_ui_cmd_objects_align_top (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Align-bottom command.                                            */
 /*****************************************************************************/
@@ -918,6 +950,7 @@ gl_ui_cmd_objects_align_bottom (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Align-vertical center command.                                   */
@@ -939,6 +972,7 @@ gl_ui_cmd_objects_align_vcenter (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Center-horizontally command.                                     */
 /*****************************************************************************/
@@ -959,6 +993,7 @@ gl_ui_cmd_objects_center_horiz (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
 /*****************************************************************************/
 /** Objects/Center-vertically command.                                       */
 /*****************************************************************************/
@@ -978,6 +1013,7 @@ gl_ui_cmd_objects_center_vert (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /*****************************************************************************/
 /** Objects/Edit- merge-properties command.                                  */
@@ -1015,6 +1051,7 @@ gl_ui_cmd_objects_merge_properties (GtkAction *action,
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
+
 
 /****************************************************************************/
 /** Help/Contents command.                                                  */
@@ -1086,14 +1123,15 @@ gl_ui_cmd_help_about (GtkAction *action,
         const gchar *translator_credits = _("translator-credits");
 
         const gchar *license = _(
-              "Glabels is free software; you can redistribute it and/or modify it\n"
-              "under the terms of the GNU General Public License as published by\n"
-              "the Free Software Foundation; either version 2 of the License, or\n"
-              "(at your option) any later version.\n" "\n"
-              "This program is distributed in the hope that it will be useful, but\n"
-              "WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-              "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
-              "the GNU General Public License for more details.\n");
+                "gLabels is free software: you can redistribute it and/or modify\n"
+                "it under the terms of the GNU General Public License as published by\n"
+                "the Free Software Foundation, either version 3 of the License, or\n"
+                "(at your option) any later version.\n"
+                "\n"
+                "gLabels is distributed in the hope that it will be useful,\n"
+                "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+                "GNU General Public License for more details.\n");
 
         gl_debug (DEBUG_COMMANDS, "START");
 
@@ -1145,3 +1183,13 @@ gl_ui_cmd_help_about (GtkAction *action,
         gl_debug (DEBUG_COMMANDS, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

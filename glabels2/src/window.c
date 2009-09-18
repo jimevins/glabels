@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  window.c
+ *  Copyright (C) 2002-2009  Jim Evins <evins@snaught.com>.
  *
- *  window.c:  a gLabels app window
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2002  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -27,11 +23,7 @@
 #include "window.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtkstatusbar.h>
+#include <gtk/gtk.h>
 
 #include "ui.h"
 #include "ui-commands.h"
@@ -42,6 +34,7 @@
 
 #include "debug.h"
 
+
 /*===========================================================================*/
 /* Private macros and constants.                                             */
 /*===========================================================================*/
@@ -51,6 +44,7 @@
 
 #define CURSOR_INFO_WIDTH     150
 #define ZOOM_INFO_WIDTH        50
+
 
 /*===========================================================================*/
 /* Private globals                                                           */
@@ -99,7 +93,7 @@ static void     name_changed_cb        (glLabel       *label,
 static void     modified_changed_cb    (glLabel       *label,
 					glWindow      *window);
 
-
+
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
@@ -122,6 +116,7 @@ gl_window_class_init (glWindowClass *class)
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
 
 static void
 gl_window_init (glWindow *window)
@@ -206,6 +201,7 @@ gl_window_init (glWindow *window)
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 static void
 gl_window_finalize (GObject *object)
 {
@@ -218,6 +214,7 @@ gl_window_finalize (GObject *object)
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
 
 static void
 gl_window_destroy (GtkObject *gtk_object)
@@ -267,6 +264,7 @@ gl_window_new (void)
 	return GTK_WIDGET(window);
 }
 
+
 /****************************************************************************/
 /** Create a glabels window from a label.                                   */
 /****************************************************************************/
@@ -285,6 +283,7 @@ gl_window_new_from_label (glLabel *label)
 
 	return GTK_WIDGET(window);
 }
+
 
 /****************************************************************************/
 /** Create a glabels window from a glabels file.                            */
@@ -312,6 +311,7 @@ gl_window_new_from_file (const gchar *filename)
 	return GTK_WIDGET(window);
 }
 
+
 /****************************************************************************/
 /** Is window empty?                                                        */
 /****************************************************************************/
@@ -323,6 +323,7 @@ gl_window_is_empty (glWindow    *window)
 	gl_debug (DEBUG_WINDOW, "return %d", (window->view == NULL) );
 	return ( window->view == NULL );
 }
+
 
 /****************************************************************************/
 /** Create view from label and place in window.                             */
@@ -400,6 +401,7 @@ gl_window_set_label (glWindow    *window,
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 /****************************************************************************/
 /** Return list of glabels windows.                                         */
 /****************************************************************************/
@@ -409,6 +411,7 @@ gl_window_get_window_list (void)
 	gl_debug (DEBUG_WINDOW, "");
 	return window_list;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Set window title based on name and state of label.             */
@@ -442,6 +445,7 @@ set_window_title (glWindow *window,
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 /*-------------------------------------------------------------------------*/
 /** PRIVATE.  Window "delete-event" callback.                              */
 /*-------------------------------------------------------------------------*/
@@ -461,6 +465,7 @@ window_delete_event_cb (glWindow      *window,
 	return TRUE;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View "selection state changed" callback.                       */
 /*---------------------------------------------------------------------------*/
@@ -477,6 +482,7 @@ selection_changed_cb (glView   *view,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View "context menu activate" callback.                         */
@@ -507,6 +513,7 @@ context_menu_activate_cb (glView       *view,
         gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View "zoom state changed" callback.                            */
 /*---------------------------------------------------------------------------*/
@@ -530,6 +537,7 @@ zoom_changed_cb (glView   *view,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View "pointer moved" callback.                                 */
@@ -561,6 +569,7 @@ pointer_moved_cb (glView   *view,
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View "pointer exit" callback.                                  */
 /*---------------------------------------------------------------------------*/
@@ -578,6 +587,7 @@ pointer_exit_cb (glView   *view,
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Label "name changed" callback.                                 */
 /*---------------------------------------------------------------------------*/
@@ -594,6 +604,7 @@ name_changed_cb (glLabel  *label,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Label "modified state changed" callback.                       */
@@ -614,3 +625,13 @@ modified_changed_cb (glLabel  *label,
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

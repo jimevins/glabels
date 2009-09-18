@@ -22,13 +22,14 @@
 
 #include <glib/gi18n.h>
 
+#include <math.h>
+
+#include <libglabels/libglabels.h>
 #include "merge-init.h"
 #include "xml-label.h"
 #include "print.h"
 #include "print-op.h"
-#include <libglabels/db.h>
 #include "util.h"
-#include <math.h>
 #include "prefs.h"
 #include "debug.h"
 

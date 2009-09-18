@@ -1,29 +1,25 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
- *
- *  merge_evolution.c:  evolution merge backend module
- *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  merge-evolution.h
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *  and
  *  Copyright (C) 2005  Austin Henry <ahenry@users.sourceforge.net>
  *  and
  *  Copyright (C) 2007  Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk>
  *
- *  This program is free software; you can redistribute it and/or modify
+ *  This file is part of gLabels.
+ *
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -37,11 +33,13 @@
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <string.h>
-#include <libglabels/str.h>
+
+#include <libglabels/libglabels.h>
 
 #include "debug.h"
 
 #define DEFAULT_QUERY "(exists \"full_name\")"
+
 
 /*===========================================*/
 /* Private types                             */
@@ -62,6 +60,7 @@ enum {
         ARG_0,
         ARG_QUERY,
 };
+
 
 /*===========================================*/
 /* Private globals                           */
@@ -94,7 +93,7 @@ static void           gl_merge_evolution_copy            (glMerge          *dst_
 /* utility function prototypes go here */
 static void           free_field_list                    (GList *fields);
 
-
+
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
@@ -133,6 +132,7 @@ gl_merge_evolution_class_init (glMergeEvolutionClass *class)
         gl_debug (DEBUG_MERGE, "END");
 }
 
+
 static void
 gl_merge_evolution_init (glMergeEvolution *merge_evolution)
 {
@@ -143,6 +143,7 @@ gl_merge_evolution_init (glMergeEvolution *merge_evolution)
 
         gl_debug (DEBUG_MERGE, "END");
 }
+
 
 static void
 gl_merge_evolution_finalize (GObject *object)
@@ -161,6 +162,7 @@ gl_merge_evolution_finalize (GObject *object)
 
         gl_debug (DEBUG_MERGE, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Set argument.                                                            */
@@ -192,6 +194,7 @@ gl_merge_evolution_set_property (GObject      *object,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Get argument.                                                            */
 /*--------------------------------------------------------------------------*/
@@ -218,6 +221,7 @@ gl_merge_evolution_get_property (GObject     *object,
         }
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get key list.                                                            */
@@ -250,6 +254,7 @@ gl_merge_evolution_get_key_list (glMerge *merge)
         return key_list;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
@@ -258,6 +263,7 @@ gl_merge_evolution_get_primary_key (glMerge *merge)
 {
         return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
+
 
 /* Sort compare function for sorting contacts by file-as element
  * by Peter Cherriman (PJC)
@@ -286,6 +292,7 @@ static gint sort_contact_by_file_as(gconstpointer *a, gconstpointer *b)
 
   return res;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Open merge source.                                                       */
@@ -402,6 +409,7 @@ gl_merge_evolution_open (glMerge *merge)
         return;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Close merge source.                                                      */
 /*--------------------------------------------------------------------------*/
@@ -428,6 +436,7 @@ gl_merge_evolution_close (glMerge *merge)
         g_list_free(merge_evolution->priv->contacts);
         merge_evolution->priv->contacts = NULL;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get next record from merge source, NULL if no records left (i.e EOF)     */
@@ -486,6 +495,7 @@ gl_merge_evolution_get_record (glMerge *merge)
         return record;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Copy merge_evolution specific fields.                                     */
 /*---------------------------------------------------------------------------*/
@@ -524,6 +534,7 @@ gl_merge_evolution_copy (glMerge *dst_merge,
         gl_debug (DEBUG_MERGE, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Free the list of supported fields                                         */
 /*---------------------------------------------------------------------------*/
@@ -544,3 +555,14 @@ free_field_list (GList *fields)
 
 
 #endif /* HAVE_LIBEBOOK */
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

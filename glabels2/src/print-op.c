@@ -23,12 +23,12 @@
 #include "print-op.h"
 
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <gtk/gtktogglebutton.h>
 
-#include <libglabels/db.h>
+#include <libglabels/libglabels.h>
 #include "print.h"
 #include "label.h"
 
@@ -312,7 +312,7 @@ gl_print_op_set_crop_marks_flag (glPrintOp *op,
 gchar *
 gl_print_op_get_filename (glPrintOp *op)
 {
-        gchar *filename;
+        gchar *filename = NULL;
 
         g_object_get (G_OBJECT (op),
                       "export_filename", filename,

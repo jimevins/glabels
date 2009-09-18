@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  xml-label.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label.c:  GLabels xml label module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -27,12 +23,13 @@
 #include "xml-label.h"
 
 #include <glib/gi18n.h>
-#include <glib/gbase64.h>
+#include <glib.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xinclude.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 
+#include <libglabels/libglabels.h>
 #include "label.h"
 #include "label-object.h"
 #include "label-text.h"
@@ -42,12 +39,10 @@
 #include "label-image.h"
 #include "label-barcode.h"
 #include "xml-label-04.h"
-#include <libglabels/db.h>
-#include <libglabels/xml-template.h>
-#include <libglabels/xml.h>
 #include "util.h"
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -56,13 +51,16 @@
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
 #define COMPAT20_NAME_SPACE "http://snaught.com/glabels/2.0/"
 
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -209,6 +207,7 @@ gl_xml_label_open (const gchar      *utf8_filename,
 	return label;
 }
 
+
 /****************************************************************************/
 /* Read label from xml buffer.                                              */
 /****************************************************************************/
@@ -240,6 +239,7 @@ gl_xml_label_open_buffer (const gchar      *buffer,
 
 	return label;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse xml doc structure and create label.                      */
@@ -299,6 +299,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 
 	return label;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse xml root node and create label.                          */
@@ -367,6 +368,7 @@ xml_parse_label (xmlNodePtr        root,
 	return label;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse Objects node.                                            */
 /*--------------------------------------------------------------------------*/
@@ -406,6 +408,7 @@ xml_parse_objects (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-text Node                            */
@@ -467,6 +470,7 @@ xml_parse_object_text (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-box Node                             */
@@ -534,6 +538,7 @@ xml_parse_object_box (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-ellipse Node                         */
 /*--------------------------------------------------------------------------*/
@@ -600,6 +605,7 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-line Node                            */
 /*--------------------------------------------------------------------------*/
@@ -651,6 +657,7 @@ xml_parse_object_line (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-image Node                           */
@@ -710,6 +717,7 @@ xml_parse_object_image (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Objects->Object-barcode Node                         */
@@ -793,6 +801,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML merge fields tag.                                    */
 /*--------------------------------------------------------------------------*/
@@ -820,6 +829,7 @@ xml_parse_merge_fields (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML data tag.                                            */
 /*--------------------------------------------------------------------------*/
@@ -845,6 +855,7 @@ xml_parse_data (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML pixbuf data tag.                                     */
@@ -885,6 +896,7 @@ xml_parse_pixdata (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse top-level Span tag.                                      */
@@ -995,6 +1007,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse affine attributes.                                       */
 /*--------------------------------------------------------------------------*/
@@ -1016,6 +1029,7 @@ xml_parse_affine_attrs (xmlNodePtr        node,
 
 	gl_label_object_set_matrix (object, &matrix);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse shadow attributes.                                       */
@@ -1055,6 +1069,7 @@ xml_parse_shadow_attrs (xmlNodePtr        node,
 		gl_label_object_set_shadow_opacity (object, shadow_opacity);
 	}
 }
+
 
 /****************************************************************************/
 /* Save label to xml label file.                                            */
@@ -1096,6 +1111,7 @@ gl_xml_label_save (glLabel          *label,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /****************************************************************************/
 /* Save label to xml buffer.                                                */
 /****************************************************************************/
@@ -1120,6 +1136,7 @@ gl_xml_label_save_buffer (glLabel          *label,
 
 	return (gchar *)buffer;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Convert label to xml doc structure.                            */
@@ -1160,6 +1177,7 @@ xml_label_to_doc (glLabel          *label,
 	*status = XML_LABEL_OK;
 	return doc;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects Node                                           */
@@ -1203,6 +1221,7 @@ xml_create_objects (xmlNodePtr  root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-text Node                              */
@@ -1251,6 +1270,7 @@ xml_create_object_text (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-box Node                               */
@@ -1316,6 +1336,7 @@ xml_create_object_box (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-ellipse Node                           */
@@ -1383,6 +1404,7 @@ xml_create_object_ellipse (xmlNodePtr     root,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-line Node                              */
 /*--------------------------------------------------------------------------*/
@@ -1436,6 +1458,7 @@ xml_create_object_line (xmlNodePtr     root,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-image Node                             */
 /*--------------------------------------------------------------------------*/
@@ -1480,6 +1503,7 @@ xml_create_object_image (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Objects->Object-barcode Node                           */
@@ -1553,6 +1577,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Label Merge Fields Node                                */
 /*--------------------------------------------------------------------------*/
@@ -1584,6 +1609,7 @@ xml_create_merge_fields (xmlNodePtr  root,
 	gl_debug (DEBUG_XML, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Label Data Node                                        */
 /*--------------------------------------------------------------------------*/
@@ -1612,6 +1638,7 @@ xml_create_data (xmlNodePtr  root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Label Data Pixbuf Node                                 */
@@ -1656,6 +1683,7 @@ xml_create_pixdata (xmlNodePtr  root,
 
 	gl_debug (DEBUG_XML, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Create top-level Span node.                                    */
@@ -1733,6 +1761,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Create affine attributes.                                      */
 /*--------------------------------------------------------------------------*/
@@ -1751,6 +1780,7 @@ xml_create_affine_attrs (xmlNodePtr        node,
 	lgl_xml_set_prop_double (node, "a4", matrix.x0);
 	lgl_xml_set_prop_double (node, "a5", matrix.y0);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Create shadow attributes.                                      */
@@ -1792,3 +1822,12 @@ xml_create_shadow_attrs (xmlNodePtr        node,
 }
 
 
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

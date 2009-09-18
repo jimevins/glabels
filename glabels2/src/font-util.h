@@ -21,7 +21,7 @@
 #ifndef __FONT_UTIL_H__
 #define __FONT_UTIL_H__
 
-#include <glib/glist.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 

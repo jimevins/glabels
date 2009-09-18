@@ -22,8 +22,8 @@
 
 #include "color-swatch.h"
 
-#include "marshal.h"
 #include "color.h"
+#include "marshal.h"
 
 
 /*===========================================*/

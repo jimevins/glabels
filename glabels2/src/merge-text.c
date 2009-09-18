@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  merge-text.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  merge_text.c:  text-file merge backend module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -31,6 +27,7 @@
 #include "debug.h"
 
 #define LINE_BUF_LEN 1024
+
 
 /*===========================================*/
 /* Private types                             */
@@ -49,6 +46,7 @@ enum {
 	ARG_0,
 	ARG_DELIM,
 };
+
 
 /*===========================================*/
 /* Private globals                           */
@@ -84,11 +82,12 @@ static GList         *parse_line                    (FILE             *fp,
 static gchar         *parse_field                   (gchar            *raw_field);
 static void           free_fields                   (GList           **fields);
 
-
+
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glMergeText, gl_merge_text, GL_TYPE_MERGE);
+
 
 static void
 gl_merge_text_class_init (glMergeTextClass *class)
@@ -122,6 +121,7 @@ gl_merge_text_class_init (glMergeTextClass *class)
 	gl_debug (DEBUG_MERGE, "END");
 }
 
+
 static void
 gl_merge_text_init (glMergeText *merge_text)
 {
@@ -131,6 +131,7 @@ gl_merge_text_init (glMergeText *merge_text)
 
 	gl_debug (DEBUG_MERGE, "END");
 }
+
 
 static void
 gl_merge_text_finalize (GObject *object)
@@ -147,6 +148,7 @@ gl_merge_text_finalize (GObject *object)
 
 	gl_debug (DEBUG_MERGE, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Set argument.                                                            */
@@ -177,6 +179,7 @@ gl_merge_text_set_property (GObject      *object,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Get argument.                                                            */
 /*--------------------------------------------------------------------------*/
@@ -203,6 +206,7 @@ gl_merge_text_get_property (GObject     *object,
         }
 
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get key list.                                                            */
@@ -246,6 +250,7 @@ gl_merge_text_get_key_list (glMerge *merge)
 	return key_list;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
@@ -255,6 +260,7 @@ gl_merge_text_get_primary_key (glMerge *merge)
 	/* For now, let's always assume the first column is the primary key. */
 	return g_strdup ("1");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Open merge source.                                                       */
@@ -276,6 +282,7 @@ gl_merge_text_open (glMerge *merge)
 	g_free (src);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Close merge source.                                                      */
 /*--------------------------------------------------------------------------*/
@@ -293,6 +300,7 @@ gl_merge_text_close (glMerge *merge)
 
 	}
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get next record from merge source, NULL if no records left (i.e EOF)     */
@@ -342,6 +350,7 @@ gl_merge_text_get_record (glMerge *merge)
 	return record;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Copy merge_text specific fields.                                          */
 /*---------------------------------------------------------------------------*/
@@ -357,6 +366,7 @@ gl_merge_text_copy (glMerge *dst_merge,
 
 	dst_merge_text->priv->delim = src_merge_text->priv->delim;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Parse line.                                                     */
@@ -544,6 +554,7 @@ parse_line (FILE  *fp,
 	return list;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Parse field.                                                    */
 /*                                                                           */
@@ -675,6 +686,7 @@ parse_field (gchar  *raw_field)
 	return field;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Free list of fields.                                                      */
 /*---------------------------------------------------------------------------*/
@@ -692,3 +704,13 @@ free_fields (GList ** list)
 	*list = NULL;
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

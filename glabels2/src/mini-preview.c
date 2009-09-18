@@ -369,7 +369,6 @@ set_transform_and_get_scale (glMiniPreview *this,
 {
 	lglTemplate *template = this->priv->template;
         gdouble      w, h;
-        gdouble      w1, h1;
         gdouble      scale;
         gdouble      offset_x, offset_y;
 

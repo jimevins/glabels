@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  util.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  util.c:  various small utility functions
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -29,14 +25,13 @@
 #include <string.h>
 #include <glib.h>
 #include <math.h>
-#include <gtk/gtkliststore.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkcelllayout.h>
-#include <libglabels/str.h>
+#include <gtk/gtk.h>
+
+#include <libglabels/libglabels.h>
 
 #define FRAC_EPSILON 0.00005
 
-
+
 /****************************************************************************/
 /* Append ".glabels" extension to filename if needed.                       */
 /****************************************************************************/
@@ -60,6 +55,7 @@ gl_util_add_extension (const gchar *orig_filename)
 	return new_filename;
 }
 
+
 /****************************************************************************/
 /* Remove ".glabels" extension from filename if needed.                     */
 /****************************************************************************/
@@ -80,6 +76,7 @@ gl_util_remove_extension (const gchar *orig_filename)
 	return new_filename;
 }
 
+
 /****************************************************************************/
 /* Make sure we have an absolute path to filename.                          */
 /****************************************************************************/
@@ -98,6 +95,7 @@ gl_util_make_absolute (const gchar *filename)
 
 	return absolute_filename;
 }
+
 
 /****************************************************************************/
 /* Create fractional representation of number, if possible.                 */
@@ -133,6 +131,7 @@ gl_util_fraction (gdouble x)
 	}
 }
 
+
 /****************************************************************************/
 /* Utilities to deal with PangoAlignment types.                             */
 /****************************************************************************/
@@ -151,6 +150,7 @@ gl_util_align_to_string (PangoAlignment align)
 	}
 }
 
+
 PangoAlignment
 gl_util_string_to_align (const gchar *string)
 {
@@ -166,6 +166,7 @@ gl_util_string_to_align (const gchar *string)
 	}
 
 }
+
 
 /****************************************************************************/
 /* Utilities to deal with PangoWeight types                                 */
@@ -183,6 +184,7 @@ gl_util_weight_to_string (PangoWeight weight)
 	}
 }
 
+
 PangoWeight
 gl_util_string_to_weight (const gchar *string)
 {
@@ -196,6 +198,7 @@ gl_util_string_to_weight (const gchar *string)
 	}
 
 }
+
 
 /****************************************************************************/
 /* Convienience function to set strings in a text combo_box from a GList    */
@@ -218,6 +221,7 @@ gl_util_combo_box_set_strings (GtkComboBox       *combo,
 		}
 	}
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  gl_util_combo_box_set_active_text support.                      */
@@ -249,6 +253,7 @@ search_text_func (GtkTreeModel *model,
   
   return FALSE;
 }
+
 
 /****************************************************************************/
 /* Convienience function to set active text in a text combo_box from text   */
@@ -283,6 +288,7 @@ gl_util_combo_box_set_active_text (GtkComboBox       *combo,
 
 }
 
+
 /****************************************************************************/
 /* Convienience function to add a simple text model to an existing          */
 /* combo_box.  This is needed since combo_boxes created with glade do not   */
@@ -304,7 +310,6 @@ gl_util_combo_box_add_text_model (GtkComboBox       *combo)
 					"text", 0,
 					NULL);
 }
-
 
 
 /****************************************************************************/
@@ -337,3 +342,13 @@ void gl_util_get_builder_widgets (GtkBuilder *builder,
         va_end (args);
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

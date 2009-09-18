@@ -23,10 +23,7 @@
 #include "ui-property-bar.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
-#include <gtk/gtkspinbutton.h>
-#include <gtk/gtktoolbar.h>
-#include <gtk/gtktoggletoolbutton.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #include "util.h"

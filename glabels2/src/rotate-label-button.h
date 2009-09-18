@@ -21,7 +21,7 @@
 #ifndef __ROTATE_LABEL_BUTTON_H__
 #define __ROTATE_LABEL_BUTTON_H__
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

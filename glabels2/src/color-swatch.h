@@ -22,7 +22,7 @@
 #define __COLOR_SWATCH_H__
 
 
-#include <gtk/gtkdrawingarea.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

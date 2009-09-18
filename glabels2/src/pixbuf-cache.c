@@ -1,31 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  pixbuf-cache.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  pixbuf-cache.c:  GLabels pixbuf cache module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "pixbuf-cache.h"
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -37,9 +35,11 @@ typedef struct {
 	GdkPixbuf *pixbuf;
 } CacheRecord;
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -51,7 +51,7 @@ static void  add_name_to_list (gpointer key,
 			       gpointer val,
 			       gpointer user_data);
 
-
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Destroy cache record.                                           */
 /*---------------------------------------------------------------------------*/
@@ -66,6 +66,7 @@ record_destroy (gpointer val)
 	g_object_unref (record->pixbuf);
 	g_free (record);
 }
+
 
 /*****************************************************************************/
 /* Create a new hash table to keep track of cached pixbufs.                  */
@@ -87,6 +88,7 @@ gl_pixbuf_cache_new (void)
 	return pixbuf_cache;
 }
 
+
 /*****************************************************************************/
 /* Free up previously allocated hash table and its contents.                 */
 /*****************************************************************************/
@@ -99,6 +101,7 @@ gl_pixbuf_cache_free (GHashTable *pixbuf_cache)
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
+
 
 /*****************************************************************************/
 /* Add pixbuf to cache explicitly (not a reference).                         */
@@ -128,6 +131,7 @@ gl_pixbuf_cache_add_pixbuf (GHashTable *pixbuf_cache,
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
+
 
 /*****************************************************************************/
 /* Get pixbuf.  If not in cache, read it and add to cache.                   */
@@ -166,6 +170,7 @@ gl_pixbuf_cache_get_pixbuf (GHashTable *pixbuf_cache,
 	return pixbuf;
 }
 
+
 /*****************************************************************************/
 /* Remove pixbuf, but only if no references left.                            */
 /*****************************************************************************/
@@ -194,6 +199,7 @@ gl_pixbuf_cache_remove_pixbuf (GHashTable *pixbuf_cache,
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Add a name to a GList while iterating over cache.               */
 /*---------------------------------------------------------------------------*/
@@ -214,6 +220,7 @@ add_name_to_list (gpointer key,
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
 
+
 /*****************************************************************************/
 /* Return a list of names for all pixbufs in the cache.                      */
 /*****************************************************************************/
@@ -230,6 +237,7 @@ gl_pixbuf_cache_get_name_list (GHashTable *pixbuf_cache)
 
 	return name_list;
 }
+
 
 /*****************************************************************************/
 /* Free up a list of pixbuf names.                                           */
@@ -252,3 +260,13 @@ gl_pixbuf_cache_free_name_list (GList *name_list)
 }
 
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

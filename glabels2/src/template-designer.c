@@ -23,16 +23,12 @@
 #include "template-designer.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
-#include <gtk/gtktogglebutton.h>
-#include <gtk/gtkcombobox.h>
-#include <gtk/gtkspinbutton.h>
-#include <gtk/gtklabel.h>
+#include <gtk/gtk.h>
 #include <string.h>
 #include <math.h>
 
+#include <libglabels/libglabels.h>
 #include "prefs.h"
-#include <libglabels/db.h>
 #include "mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"
 #include "print-op-dialog.h"

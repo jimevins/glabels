@@ -1,27 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
- *
- *  merge_vcard.c:  vcard merge backend module
- *
- *  Copyright (C) 2001  Jim Evins <evins@snaught.com>.
+ *  merge-vcard.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *  and
  *  Copyright (C) 2005  Austin Henry <ahenry@users.sourceforge.net>
  *
- *  This program is free software; you can redistribute it and/or modify
+ *  This file is part of gLabels.
+ *
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -30,13 +26,14 @@
 
 
 #include "merge-vcard.h"
-#include <libebook/e-contact.h>
 
+#include <libebook/e-contact.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private types                             */
@@ -53,6 +50,7 @@ enum {
 enum {
         ARG_0,
 };
+
 
 /*===========================================*/
 /* Private globals                           */
@@ -85,11 +83,11 @@ static void           gl_merge_vcard_copy            (glMerge          *dst_merg
 static char *         parse_next_vcard               (FILE             *fp);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glMergeVCard, gl_merge_vcard, GL_TYPE_MERGE);
+
 
 static void
 gl_merge_vcard_class_init (glMergeVCardClass *class)
@@ -116,6 +114,7 @@ gl_merge_vcard_class_init (glMergeVCardClass *class)
         gl_debug (DEBUG_MERGE, "END");
 }
 
+
 static void
 gl_merge_vcard_init (glMergeVCard *merge_vcard)
 {
@@ -125,6 +124,7 @@ gl_merge_vcard_init (glMergeVCard *merge_vcard)
 
         gl_debug (DEBUG_MERGE, "END");
 }
+
 
 static void
 gl_merge_vcard_finalize (GObject *object)
@@ -141,6 +141,7 @@ gl_merge_vcard_finalize (GObject *object)
 
         gl_debug (DEBUG_MERGE, "END");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Set argument.                                                            */
@@ -161,6 +162,7 @@ gl_merge_vcard_set_property (GObject      *object,
                 break;
         }
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get argument.                                                            */
@@ -183,7 +185,7 @@ gl_merge_vcard_get_property (GObject     *object,
 
 }
 
-/* TODO */
+
 /*--------------------------------------------------------------------------*/
 /* Get key list.                                                            */
 /*--------------------------------------------------------------------------*/
@@ -209,7 +211,7 @@ gl_merge_vcard_get_key_list (glMerge *merge)
         return key_list;
 }
 
-/* TODO? */
+
 /*--------------------------------------------------------------------------*/
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
@@ -219,6 +221,7 @@ gl_merge_vcard_get_primary_key (glMerge *merge)
         /* For now, let's always assume the full name is the primary key. */
         return g_strdup ("full_name");
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Open merge source.                                                       */
@@ -242,6 +245,7 @@ gl_merge_vcard_open (glMerge *merge)
         return;
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Close merge source.                                                      */
 /*--------------------------------------------------------------------------*/
@@ -257,6 +261,7 @@ gl_merge_vcard_close (glMerge *merge)
                 merge_vcard->priv->fp = NULL;
         }
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Get next record from merge source, NULL if no records left (i.e EOF)     */
@@ -317,6 +322,7 @@ gl_merge_vcard_get_record (glMerge *merge)
         return record;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Copy merge_vcard specific fields.                                         */
 /*---------------------------------------------------------------------------*/
@@ -330,6 +336,7 @@ gl_merge_vcard_copy (glMerge *dst_merge,
         dst_merge_vcard = GL_MERGE_VCARD (dst_merge);
         src_merge_vcard = GL_MERGE_VCARD (src_merge);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE: pull out a full VCard from the open file                         */
@@ -381,3 +388,14 @@ parse_next_vcard (FILE *fp)
 
 
 #endif /* HAVE_LIBEBOOK */
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

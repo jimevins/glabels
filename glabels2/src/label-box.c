@@ -1,34 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label-box.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label_box.c:  GLabels label box object
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "label-box.h"
 
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
+#include <glib.h>
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -40,9 +35,11 @@ struct _glLabelBoxPrivate {
 	glColorNode      *fill_color_node;
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -79,13 +76,11 @@ static void    draw_shadow                (glLabelObject     *object,
                                            glMergeRecord     *record);
 
 
-
-
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabelBox, gl_label_box, GL_TYPE_LABEL_OBJECT);
+
 
 static void
 gl_label_box_class_init (glLabelBoxClass *class)
@@ -108,6 +103,7 @@ gl_label_box_class_init (glLabelBoxClass *class)
 	object_class->finalize = gl_label_box_finalize;
 }
 
+
 static void
 gl_label_box_init (glLabelBox *lbox)
 {
@@ -115,6 +111,7 @@ gl_label_box_init (glLabelBox *lbox)
 	lbox->priv->line_color_node = gl_color_node_new_default ();
 	lbox->priv->fill_color_node = gl_color_node_new_default ();
 }
+
 
 static void
 gl_label_box_finalize (GObject *object)
@@ -130,6 +127,7 @@ gl_label_box_finalize (GObject *object)
 	G_OBJECT_CLASS (gl_label_box_parent_class)->finalize (object);
 }
 
+
 /*****************************************************************************/
 /* NEW label "box" object.                                                   */
 /*****************************************************************************/
@@ -144,6 +142,7 @@ gl_label_box_new (glLabel *label)
 
 	return G_OBJECT (lbox);
 }
+
 
 /*****************************************************************************/
 /* Copy object contents.                                                     */
@@ -201,6 +200,7 @@ set_fill_color (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set line color method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -218,6 +218,7 @@ set_line_color (glLabelObject *object,
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set line width method.                                          */
@@ -250,6 +251,7 @@ get_line_width (glLabelObject *object)
 	return lbox->priv->line_width;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line color method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -263,6 +265,7 @@ get_line_color (glLabelObject *object)
 	return gl_color_node_dup (lbox->priv->line_color_node);
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Get line width method.                                          */
 /*---------------------------------------------------------------------------*/
@@ -275,6 +278,7 @@ get_fill_color (glLabelObject *object)
 
 	return gl_color_node_dup (lbox->priv->fill_color_node);
 }
+
 
 /*****************************************************************************/
 /* Draw object method.                                                       */
@@ -328,6 +332,7 @@ draw_object (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Draw shadow method.                                                       */
@@ -400,3 +405,14 @@ draw_shadow (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -23,15 +23,7 @@
 #include "merge-properties-dialog.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
-#include <gtk/gtkfilechooserbutton.h>
-#include <gtk/gtkcombobox.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktreestore.h>
-#include <gtk/gtktreeselection.h>
-#include <gtk/gtkcellrenderertoggle.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtklabel.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #include "label.h"

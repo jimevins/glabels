@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  view.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  view.c:  GLabels View module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -27,10 +23,7 @@
 #include "view.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtklayout.h>
-#include <gtk/gtkselection.h>
-#include <gtk/gtkinvisible.h>
+#include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
 #include <math.h>
@@ -51,6 +44,7 @@
 #include "marshal.h"
 
 #include "debug.h"
+
 
 /*==========================================================================*/
 /* Private macros and constants.                                            */
@@ -73,6 +67,7 @@
 #define ZOOMTOFIT_PAD   16
 
 #define POINTS_PER_MM    2.83464566929
+
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -217,11 +212,12 @@ static gboolean   button_release_event_cb         (glView            *view,
 static gboolean   key_press_event_cb              (glView            *view,
                                                    GdkEventKey       *event);
 
-
+
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
 /****************************************************************************/
 G_DEFINE_TYPE (glView, gl_view, GTK_TYPE_VBOX);
+
 
 static void
 gl_view_class_init (glViewClass *class)
@@ -296,6 +292,7 @@ gl_view_class_init (glViewClass *class)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 static void
 gl_view_init (glView *view)
@@ -404,6 +401,7 @@ gl_view_init (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 static void
 gl_view_finalize (GObject *object)
 {
@@ -422,6 +420,7 @@ gl_view_finalize (GObject *object)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /****************************************************************************/
 /* NEW view object.                                                         */
@@ -443,6 +442,7 @@ gl_view_new (glLabel *label)
 
 	return GTK_WIDGET (view);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Construct composite widget.                                     */
@@ -491,6 +491,7 @@ gl_view_construct (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIAVTE.  Calculate 1:1 scale for screen.                                 */
@@ -543,6 +544,7 @@ get_home_scale (glView *view)
 	return scale;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* Schedule canvas update.                                                   */
 /*---------------------------------------------------------------------------*/
@@ -570,6 +572,7 @@ gl_view_update (glView  *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* Schedule canvas region update.                                            */
@@ -607,6 +610,7 @@ gl_view_update_region (glView        *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Expose handler.                                                 */
 /*---------------------------------------------------------------------------*/
@@ -637,6 +641,7 @@ expose_cb (glView         *view,
 	return FALSE;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Realize handler.                                                */
 /*---------------------------------------------------------------------------*/
@@ -649,6 +654,7 @@ realize_cb (glView  *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Size allocation changed callback.                                */
@@ -677,7 +683,6 @@ size_allocate_cb (glView         *view,
 }
 
 
-
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Screen changed callback.                                         */
 /*---------------------------------------------------------------------------*/
@@ -698,6 +703,7 @@ screen_changed_cb (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Handle label changed event.                                     */
@@ -767,6 +773,7 @@ label_object_added_cb (glView         *view,
         gl_view_select_object (view, view_object);
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create, draw and order layers.                                  */
 /*---------------------------------------------------------------------------*/
@@ -816,6 +823,7 @@ draw_layers (glView  *view,
 
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw background                                                 */
 /*---------------------------------------------------------------------------*/
@@ -832,6 +840,7 @@ draw_bg_layer (glView  *view,
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_fill (cr);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw grid lines.                                                */
@@ -894,6 +903,7 @@ draw_grid_layer (glView  *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw markup layer.                                              */
 /*---------------------------------------------------------------------------*/
@@ -942,6 +952,7 @@ draw_markup_layer (glView  *view,
 
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw objects layer.                                             */
 /*---------------------------------------------------------------------------*/
@@ -951,6 +962,7 @@ draw_objects_layer (glView  *view,
 {
         gl_label_draw (view->label, cr, TRUE, NULL);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw foreground                                                 */
@@ -968,6 +980,7 @@ draw_fg_layer (glView  *view,
         cairo_set_source_rgb (cr, OUTLINE_RGB_ARGS);
         cairo_stroke (cr);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create highlight layer.                                         */
@@ -994,6 +1007,7 @@ draw_highlight_layer (glView  *view,
 
         cairo_restore (cr);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw select region layer.                                       */
@@ -1031,6 +1045,7 @@ draw_select_region_layer (glView  *view,
         }
 }
 
+
 /*****************************************************************************/
 /* Show grid.                                                                */
 /*****************************************************************************/
@@ -1043,6 +1058,7 @@ gl_view_show_grid (glView *view)
         gl_view_update (view);
 }
 
+
 /*****************************************************************************/
 /* Hide grid.                                                                */
 /*****************************************************************************/
@@ -1054,6 +1070,7 @@ gl_view_hide_grid (glView *view)
         view->grid_visible = FALSE;
         gl_view_update (view);
 }
+
 
 /*****************************************************************************/
 /* Set grid spacing.                                                         */
@@ -1068,6 +1085,7 @@ gl_view_set_grid_spacing (glView  *view,
         gl_view_update (view);
 }
 
+
 /*****************************************************************************/
 /* Show markup.                                                              */
 /*****************************************************************************/
@@ -1080,6 +1098,7 @@ gl_view_show_markup (glView *view)
         gl_view_update (view);
 }
 
+
 /*****************************************************************************/
 /* Hide markup.                                                              */
 /*****************************************************************************/
@@ -1091,6 +1110,7 @@ gl_view_hide_markup (glView *view)
         view->markup_visible = FALSE;
         gl_view_update (view);
 }
+
 
 /*****************************************************************************/
 /* Set arrow mode.                                                           */
@@ -1113,6 +1133,7 @@ gl_view_arrow_mode (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Set create text object mode.                                              */
@@ -1162,6 +1183,7 @@ gl_view_object_create_mode (glView            *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Select given object (adding to current selection).                        */
 /*****************************************************************************/
@@ -1180,6 +1202,7 @@ gl_view_select_object (glView       *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Unselect given object (removing from current selection).                  */
 /*****************************************************************************/
@@ -1197,6 +1220,7 @@ gl_view_unselect_object (glView       *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Select all items.                                                         */
@@ -1226,6 +1250,7 @@ gl_view_select_all (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Remove all selections                                                     */
 /*****************************************************************************/
@@ -1248,6 +1273,7 @@ gl_view_unselect_all (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Select all objects within given rectangular region (adding to selection). */
@@ -1297,6 +1323,7 @@ gl_view_select_region (glView        *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Select an object.                                                */
 /*---------------------------------------------------------------------------*/
@@ -1320,6 +1347,7 @@ select_object_real (glView       *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Un-select object.                                               */
 /*---------------------------------------------------------------------------*/
@@ -1339,6 +1367,7 @@ unselect_object_real (glView       *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Return object at (x,y).                                          */
@@ -1368,6 +1397,7 @@ view_view_object_at (glView  *view,
 
         return NULL;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Return object handle at (x,y).                                   */
@@ -1399,6 +1429,7 @@ view_handle_at (glView             *view,
         return NULL;
 }
 
+
 /*****************************************************************************/
 /* Is the object in our current selection?                                   */
 /*****************************************************************************/
@@ -1417,6 +1448,7 @@ gl_view_is_object_selected (glView       *view,
 	return TRUE;
 }
 
+
 /*****************************************************************************/
 /* Is our current selection empty?                                           */
 /*****************************************************************************/
@@ -1434,6 +1466,7 @@ gl_view_is_selection_empty (glView *view)
 	}
 }
 
+
 /*****************************************************************************/
 /* Is our current selection atomic?  I.e. only one item selected.            */
 /*****************************************************************************/
@@ -1450,6 +1483,7 @@ gl_view_is_selection_atomic (glView *view)
 		return TRUE;
 	return FALSE;
 }
+
 
 /*****************************************************************************/
 /* Delete selected objects. (Bypass clipboard)                               */
@@ -1483,6 +1517,7 @@ gl_view_delete_selection (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Get object property editor of first selected object.                      */
 /*****************************************************************************/
@@ -1508,6 +1543,7 @@ gl_view_get_editor (glView *view)
 	return editor;
 }
 
+
 /*****************************************************************************/
 /* Raise selected items to top.                                              */
 /*****************************************************************************/
@@ -1531,6 +1567,7 @@ gl_view_raise_selection (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Lower selected items to bottom.                                           */
 /*****************************************************************************/
@@ -1553,6 +1590,7 @@ gl_view_lower_selection (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Rotate selected objects by given angle.                                   */
@@ -1578,6 +1616,7 @@ gl_view_rotate_selection (glView *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Rotate selected objects 90 degrees left.                                  */
 /*****************************************************************************/
@@ -1600,6 +1639,7 @@ gl_view_rotate_selection_left (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Rotate selected objects 90 degrees right.                                 */
@@ -1624,6 +1664,7 @@ gl_view_rotate_selection_right (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Flip selected objects horizontally.                                       */
 /*****************************************************************************/
@@ -1647,6 +1688,7 @@ gl_view_flip_selection_horiz (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Flip selected objects vertically.                                         */
 /*****************************************************************************/
@@ -1669,6 +1711,7 @@ gl_view_flip_selection_vert (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Align selected objects to left most edge.                                 */
@@ -1763,6 +1806,7 @@ gl_view_align_selection_right (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Align selected objects to horizontal center of objects.                   */
 /*****************************************************************************/
@@ -1831,6 +1875,7 @@ gl_view_align_selection_hcenter (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Align selected objects to top most edge.                                  */
 /*****************************************************************************/
@@ -1877,6 +1922,7 @@ gl_view_align_selection_top (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Align selected objects to bottom most edge.                               */
 /*****************************************************************************/
@@ -1922,6 +1968,7 @@ gl_view_align_selection_bottom (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Align selected objects to viertical center of objects.                    */
@@ -1991,6 +2038,7 @@ gl_view_align_selection_vcenter (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Center selected objects to in center of label.                            */
@@ -2096,6 +2144,7 @@ gl_view_move_selection (glView  *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Can text properties be set for selection?                                 */
 /*****************************************************************************/
@@ -2123,6 +2172,7 @@ gl_view_can_selection_text (glView *view)
 	return FALSE;
 }
 
+
 /*****************************************************************************/
 /* Set font family for all text contained in selected objects.               */
 /*****************************************************************************/
@@ -2146,6 +2196,7 @@ gl_view_set_selection_font_family (glView      *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Set font size for all text contained in selected objects.                 */
@@ -2171,6 +2222,7 @@ gl_view_set_selection_font_size (glView  *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Set font weight for all text contained in selected objects.               */
 /*****************************************************************************/
@@ -2194,6 +2246,7 @@ gl_view_set_selection_font_weight (glView      *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Set font italic flag for all text contained in selected objects.          */
@@ -2219,6 +2272,7 @@ gl_view_set_selection_font_italic_flag (glView   *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Set text alignment for all text contained in selected objects.            */
 /*****************************************************************************/
@@ -2243,6 +2297,7 @@ gl_view_set_selection_text_alignment (glView            *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Set text line spacing for all text contained in selected objects.         */
 /*****************************************************************************/
@@ -2266,6 +2321,8 @@ gl_view_set_selection_text_line_spacing (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
+
 /*****************************************************************************/
 /* Set text color for all text contained in selected objects.                */
 /*****************************************************************************/
@@ -2289,6 +2346,7 @@ gl_view_set_selection_text_color (glView      *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Can fill properties be set for selection?                                 */
@@ -2315,6 +2373,7 @@ gl_view_can_selection_fill (glView *view)
 	return FALSE;
 }
 
+
 /*****************************************************************************/
 /* Set fill color for all selected objects.                                  */
 /*****************************************************************************/
@@ -2338,6 +2397,7 @@ gl_view_set_selection_fill_color (glView      *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Can line color properties be set for selection?                           */
@@ -2364,6 +2424,7 @@ gl_view_can_selection_line_color (glView *view)
 	return FALSE;
 }
 
+
 /*****************************************************************************/
 /* Set line color for all selected objects.                                  */
 /*****************************************************************************/
@@ -2387,6 +2448,7 @@ gl_view_set_selection_line_color (glView      *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Can line width properties be set for selection?                           */
@@ -2413,6 +2475,7 @@ gl_view_can_selection_line_width (glView *view)
 	return FALSE;
 }
 
+
 /*****************************************************************************/
 /* Set line width for all selected objects.                                  */
 /*****************************************************************************/
@@ -2437,6 +2500,7 @@ gl_view_set_selection_line_width (glView  *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* "Cut" selected items and place in clipboard selections.                   */
 /*****************************************************************************/
@@ -2452,6 +2516,7 @@ gl_view_cut (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* "Copy" selected items to clipboard selections.                            */
@@ -2494,6 +2559,7 @@ gl_view_copy (glView *view)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* "Paste" from private clipboard selection.                                 */
 /*****************************************************************************/
@@ -2510,6 +2576,7 @@ gl_view_paste (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Zoom in one "notch"                                                       */
@@ -2542,6 +2609,7 @@ gl_view_zoom_in (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Zoom out one "notch"                                                      */
@@ -2577,6 +2645,7 @@ gl_view_zoom_out (glView *view)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Set zoom to best fit.                                                     */
@@ -2618,6 +2687,7 @@ gl_view_zoom_to_fit (glView *view)
 	set_zoom_real (view, scale/view->home_scale, TRUE);
 }
 
+
 /*****************************************************************************/
 /* Set current zoom factor to explicit value.                                */
 /*****************************************************************************/
@@ -2631,6 +2701,7 @@ gl_view_set_zoom (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Set canvas scale.                                               */
@@ -2680,6 +2751,7 @@ gl_view_get_zoom (glView *view)
 	return view->zoom;
 }
 
+
 /*****************************************************************************/
 /* Is this the maximum zoom level.                                           */
 /*****************************************************************************/
@@ -2693,6 +2765,7 @@ gl_view_is_zoom_max (glView *view)
 	return view->zoom >= zooms[0];
 }
 
+
 /*****************************************************************************/
 /* Is this the minimum zoom level.                                           */
 /*****************************************************************************/
@@ -2705,6 +2778,7 @@ gl_view_is_zoom_min (glView *view)
 
 	return view->zoom <= zooms[N_ZOOMS-1];
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Handle "selection-clear" signal.                                */
@@ -2724,6 +2798,7 @@ selection_clear_cb (GtkWidget         *widget,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Handle "selection-get" signal.                                  */
@@ -2754,6 +2829,7 @@ selection_get_cb (GtkWidget        *widget,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Handle "selection-received" signal.  (Result of Paste)          */
@@ -2795,6 +2871,7 @@ selection_received_cb (GtkWidget        *widget,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /****************************************************************************/
 /* Set default font family.                                                 */
@@ -2899,6 +2976,7 @@ gl_view_set_default_text_alignment (glView           *view,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /****************************************************************************/
 /* Set default text line spacing.                                           */
 /****************************************************************************/
@@ -2965,7 +3043,6 @@ gl_view_set_default_fill_color (glView *view,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
-
 
 
 /****************************************************************************/
@@ -3063,6 +3140,7 @@ gl_view_get_default_text_alignment (glView *view)
 	return view->default_text_alignment;
 }
 
+
 /****************************************************************************/
 /* Get default text line spacing.                                           */
 /****************************************************************************/
@@ -3077,7 +3155,6 @@ gl_view_get_default_text_line_spacing (glView *view)
 
 	return view->default_text_line_spacing;
 }
-
 
 
 /****************************************************************************/
@@ -3127,6 +3204,7 @@ gl_view_get_default_fill_color (glView *view)
 	return view->default_fill_color;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Focus in event handler.                                         */
 /*---------------------------------------------------------------------------*/
@@ -3138,6 +3216,7 @@ focus_in_event_cb (glView            *view,
 
         return FALSE;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Focus out event handler.                                        */
@@ -3151,6 +3230,7 @@ focus_out_event_cb (glView            *view,
         return FALSE;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Enter notify event handler.                                     */
 /*---------------------------------------------------------------------------*/
@@ -3162,6 +3242,7 @@ enter_notify_event_cb (glView            *view,
 
         return FALSE;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Leave notify event handler.                                     */
@@ -3175,6 +3256,7 @@ leave_notify_event_cb (glView            *view,
 
         return FALSE;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Motion notify event handler.                                    */
@@ -3328,6 +3410,7 @@ motion_notify_event_cb (glView            *view,
         return return_value;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Button press event handler.                                     */
 /*---------------------------------------------------------------------------*/
@@ -3477,6 +3560,7 @@ button_press_event_cb (glView            *view,
         return return_value;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Button release event handler.                                   */
 /*---------------------------------------------------------------------------*/
@@ -3592,6 +3676,7 @@ button_release_event_cb (glView            *view,
         return return_value;
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Key press event handler.                                        */
 /*---------------------------------------------------------------------------*/
@@ -3640,3 +3725,13 @@ key_press_event_cb (glView            *view,
         return TRUE;    /* We handled this or we were dragging. */
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

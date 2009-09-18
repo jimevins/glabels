@@ -1,25 +1,21 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  cairo-markup-path.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  cairo_markup_path.c:  Cairo markup path module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
@@ -27,17 +23,19 @@
 #include "cairo-markup-path.h"
 
 #include <math.h>
-#include <glib.h>
 
 #include "debug.h"
+
 
 /*===========================================*/
 /* Private types                             */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -68,7 +66,7 @@ static void       gl_cairo_markup_circle_path         (cairo_t                 *
 static void       gl_cairo_markup_rect_path           (cairo_t                 *cr,
                                                        const lglTemplateMarkup *markup);
 
-
+
 /*--------------------------------------------------------------------------*/
 /* Create markup path                                                       */
 /*--------------------------------------------------------------------------*/
@@ -99,6 +97,7 @@ gl_cairo_markup_path (cairo_t                 *cr,
 
         gl_debug (DEBUG_PATH, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw margin markup.                                             */
@@ -135,6 +134,7 @@ gl_cairo_markup_margin_path (cairo_t                *cr,
 
         gl_debug (DEBUG_PATH, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw simple recangular margin.                                  */
@@ -175,6 +175,7 @@ gl_cairo_markup_margin_rect_path (cairo_t                 *cr,
         gl_debug (DEBUG_PATH, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw round margin.                                              */
 /*---------------------------------------------------------------------------*/
@@ -198,6 +199,7 @@ gl_cairo_markup_margin_round_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw CD margins.                                                */
@@ -248,6 +250,7 @@ gl_cairo_markup_margin_cd_path (cairo_t                 *cr,
 	gl_debug (DEBUG_PATH, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw line markup.                                               */
 /*---------------------------------------------------------------------------*/
@@ -262,6 +265,7 @@ gl_cairo_markup_line_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw circle markup.                                             */
@@ -280,6 +284,7 @@ gl_cairo_markup_circle_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Draw rect markup.                                               */
@@ -313,3 +318,13 @@ gl_cairo_markup_rect_path (cairo_t                 *cr,
 	gl_debug (DEBUG_PATH, "END");
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

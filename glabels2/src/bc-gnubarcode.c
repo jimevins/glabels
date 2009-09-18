@@ -1,52 +1,41 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  bc-gnubarcode.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  bc-gnubarcode.c:  front-end to GNU-barcode-library module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
- *
- *  Some of this code is borrowed from the postscript renderer (ps.c)
- *  from the GNU barcode library:
- *
- *     Copyright (C) 1999 Alessaandro Rubini (rubini@gnu.org)
- *     Copyright (C) 1999 Prosa Srl. (prosa@prosa.it)
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <config.h>
 
 #include "bc-gnubarcode.h"
 
+#include <glib.h>
 #include <ctype.h>
 #include <string.h>
-#include <glib/gstring.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
-
-#include "barcode.h"
+#include <barcode.h> /* GNU Barcode */
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
 #define SHRINK_AMOUNT 0.15	/* shrink bars to account for ink spreading */
 #define FONT_SCALE    0.95	/* Shrink fonts just a hair */
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -66,7 +55,7 @@ static gboolean   is_length2_valid (const gchar         *digits,
 				    gint                 n1,
 				    gint                 n2);
 
-
+
 /*****************************************************************************/
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
@@ -207,6 +196,7 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 	return gbc;
 }
 
+
 /*--------------------------------------------------------------------------
  * PRIVATE.  Render to glBarcode intermediate representation of barcode.
  *
@@ -287,15 +277,7 @@ render_pass1 (struct Barcode_Item *bci,
 	/* If too small (5 + text), reduce the scale factor and center */
 	i = 5 + 10 * ((bci->flags & BARCODE_NO_ASCII)==0);
 	if (bci->height < i * scalef ) {
-#if 0
-		double scaleg = ((double)bci->height) / i;
-		int wid = bci->width * scaleg / scalef;
-		bci->xoff += (bci->width - wid)/2;
-		bci->width = wid;
-		scalef = scaleg;
-#else
 		bci->height = i * scalef;
-#endif
 	}
 
 	gbc = g_new0 (glBarcode, 1);
@@ -374,12 +356,9 @@ render_pass1 (struct Barcode_Item *bci,
 	gbc->height = bci->height + 2.0 * bci->margin;
 	gbc->width = bci->width + 2.0 * bci->margin;
 
-#if 0
-	g_print ("w=%f, h=%f\n", gbc->width, gbc->height);
-#endif
-
 	return gbc;
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Validate specific length of string (for subtypes).                       */
@@ -405,6 +384,7 @@ is_length_valid (const gchar *digits,
 	return (i >= n1) && (i <= n2);
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* Validate specific length of string (for subtypes).                       */
 /*--------------------------------------------------------------------------*/
@@ -428,6 +408,7 @@ is_length1_valid (const gchar *digits,
 
 	return (i >= n1) && (i <= n2);
 }
+
 
 /*--------------------------------------------------------------------------*/
 /* Validate specific length of second string (for subtypes).                */
@@ -457,3 +438,13 @@ is_length2_valid (const gchar *digits,
 	return (i >= n1) && (i <= n2);
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

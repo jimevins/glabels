@@ -22,13 +22,13 @@
 
 #include "color-combo.h"
 
-#include "color-combo-menu.h"
 #include <glib/gi18n.h>
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
+
+#include "color-combo-menu.h"
 #include "color-swatch.h"
-#include <gtk/gtkarrow.h>
-#include "marshal.h"
 #include "color.h"
+#include "marshal.h"
 
 
 #define IMAGE_W 24

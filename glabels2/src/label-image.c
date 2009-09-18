@@ -1,33 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label-image.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label_image.c:  GLabels label image object
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <config.h>
 
 #include "label-image.h"
 
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
-#include <gdk/gdkcairo.h>
+#include <glib.h>
+#include <gdk/gdk.h>
 
 #include "pixmaps/checkerboard.xpm"
 
@@ -46,11 +42,13 @@ struct _glLabelImagePrivate {
 	GdkPixbuf        *pixbuf;
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
 
 static GdkPixbuf *default_pixbuf = NULL;
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -61,21 +59,21 @@ static void gl_label_image_finalize      (GObject           *object);
 static void copy                         (glLabelObject     *dst_object,
 					  glLabelObject     *src_object);
 
-static void set_size                      (glLabelObject      *object,
-					   gdouble             w,
-					   gdouble             h);
+static void set_size                     (glLabelObject     *object,
+                                          gdouble            w,
+                                          gdouble            h);
 
-static void    draw_object               (glLabelObject     *object,
+static void draw_object                  (glLabelObject     *object,
                                           cairo_t           *cr,
                                           gboolean           screen_flag,
                                           glMergeRecord     *record);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabelImage, gl_label_image, GL_TYPE_LABEL_OBJECT);
+
 
 static void
 gl_label_image_class_init (glLabelImageClass *class)
@@ -92,6 +90,7 @@ gl_label_image_class_init (glLabelImageClass *class)
 
 	object_class->finalize = gl_label_image_finalize;
 }
+
 
 static void
 gl_label_image_init (glLabelImage *limage)
@@ -111,6 +110,7 @@ gl_label_image_init (glLabelImage *limage)
 
 	limage->priv->pixbuf = default_pixbuf;
 }
+
 
 static void
 gl_label_image_finalize (GObject *object)
@@ -132,6 +132,7 @@ gl_label_image_finalize (GObject *object)
 	G_OBJECT_CLASS (gl_label_image_parent_class)->finalize (object);
 }
 
+
 /*****************************************************************************/
 /* NEW label "image" object.                                                 */
 /*****************************************************************************/
@@ -146,6 +147,7 @@ gl_label_image_new (glLabel *label)
 
 	return G_OBJECT (limage);
 }
+
 
 /*****************************************************************************/
 /* Copy object contents.                                                     */
@@ -288,6 +290,7 @@ gl_label_image_get_filename (glLabelImage *limage)
 	return gl_text_node_dup (limage->priv->filename);
 }
 
+
 const GdkPixbuf *
 gl_label_image_get_pixbuf (glLabelImage  *limage,
 			   glMergeRecord *record)
@@ -318,6 +321,7 @@ gl_label_image_get_pixbuf (glLabelImage  *limage,
 	return limage->priv->pixbuf;
 
 }
+
 
 /*****************************************************************************/
 /* Draw object method.                                                       */
@@ -357,3 +361,12 @@ draw_object (glLabelObject *object,
 
 
 
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

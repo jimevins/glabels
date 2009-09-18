@@ -21,7 +21,7 @@
 #ifndef __PRINT_OP_H__
 #define __PRINT_OP_H__
 
-#include <gtk/gtkprintoperation.h>
+#include <gtk/gtk.h>
 #include "label.h"
 
 G_BEGIN_DECLS

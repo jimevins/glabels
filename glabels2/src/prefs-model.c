@@ -1,41 +1,38 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  prefs-model.h
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  prefs-model.c:  Application preferences model module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2003  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "prefs-model.h"
 
-#include <libglabels/db.h>
-#include <libglabels/xml.h>
-#include <gtk/gtkpapersize.h>
+#include <glib.h>
+#include <gtk/gtk.h>
 #include <string.h>
-#include <glib/gstrfuncs.h>
 
+#include <libglabels/libglabels.h>
 #include "marshal.h"
 #include "util.h"
 #include "color.h"
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -95,6 +92,7 @@
 
 #define DEFAULT_FILL_COLOR         GL_COLOR_A (0, 255, 0, 255)
 
+
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
@@ -105,12 +103,12 @@ enum {
 };
 
 
-
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
 
 static guint signals[LAST_SIGNAL] = {0};
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -143,11 +141,11 @@ static lglUnitsType   string_to_units              (const gchar         *string)
 static const gchar   *units_to_string              (lglUnitsType         units);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glPrefsModel, gl_prefs_model, G_TYPE_OBJECT);
+
 
 static void
 gl_prefs_model_class_init (glPrefsModelClass *class)
@@ -173,6 +171,7 @@ gl_prefs_model_class_init (glPrefsModelClass *class)
 	gl_debug (DEBUG_PREFS, "END");
 }
 
+
 static void
 gl_prefs_model_init (glPrefsModel *prefs_model)
 {
@@ -195,6 +194,7 @@ gl_prefs_model_init (glPrefsModel *prefs_model)
 	gl_debug (DEBUG_PREFS, "END");
 }
 
+
 static void
 gl_prefs_model_finalize (GObject *object)
 {
@@ -213,6 +213,7 @@ gl_prefs_model_finalize (GObject *object)
 	gl_debug (DEBUG_PREFS, "END");
 }
 
+
 /*****************************************************************************/
 /* New prefs_model object.                                                   */
 /*****************************************************************************/
@@ -229,7 +230,6 @@ gl_prefs_model_new (void)
 
 	return prefs_model;
 }
-
 
 
 /*****************************************************************************/
@@ -366,6 +366,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 	
 	gl_debug (DEBUG_PREFS, "END");
 }
+
 
 /*****************************************************************************/
 /* Load all settings.                                                        */
@@ -556,6 +557,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 	gl_debug (DEBUG_PREFS, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Key changed callback.                                           */
 /*---------------------------------------------------------------------------*/
@@ -569,6 +571,7 @@ notify_cb (GConfClient  *client,
 
 	gl_prefs_model_load_settings (prefs_model);
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Utilities to get values with defaults.                          */
@@ -592,6 +595,7 @@ get_string (GConfClient *client,
 
 	}
 }
+
 
 static gboolean
 get_bool (GConfClient *client,
@@ -622,6 +626,7 @@ get_bool (GConfClient *client,
 	}
 }
 
+
 static gint
 get_int (GConfClient *client,
 	 const gchar *key,
@@ -651,6 +656,7 @@ get_int (GConfClient *client,
 	}
 }
 
+
 static gdouble
 get_float (GConfClient *client,
 	   const gchar *key,
@@ -679,6 +685,7 @@ get_float (GConfClient *client,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Utilities to deal with units.                                   */
 /*---------------------------------------------------------------------------*/
@@ -700,6 +707,7 @@ string_to_units (const gchar *string)
 	return units;
 }
 
+
 static const
 gchar *units_to_string (lglUnitsType units)
 {
@@ -720,3 +728,14 @@ gchar *units_to_string (lglUnitsType units)
 }
 
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

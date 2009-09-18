@@ -22,7 +22,7 @@
 #define __GL_COLOR_COMBO_BUTTON_H__
 
 
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

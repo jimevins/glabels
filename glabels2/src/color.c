@@ -1,31 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  color.c
+ *  Copyright (C) 2002-2009  Jim Evins <evins@snaught.com>.
  *
- *  color.c:  various small utilities for dealing with canvas colors
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2002-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "color.h"
 
 #include <string.h>
+
 
 /*****************************************************************************/
 /* Apply given opacity to given color.                                       */
@@ -40,6 +38,7 @@ gl_color_set_opacity (guint   color,
 
         return new_color;
 }
+
 
 /*****************************************************************************/
 /* Resolve actual shadow color by adjusting opacity.                         */
@@ -56,6 +55,7 @@ gl_color_shadow (guint   base_color,
 
         return color;
 }
+
 
 /*****************************************************************************/
 /* Convert gLabels color into a GdkColor                                     */
@@ -74,6 +74,7 @@ gl_color_to_gdk_color (guint color)
         return gdk_color;
 }
 
+
 /*****************************************************************************/
 /* Convert GdkColor into a gLabels color                                     */
 /*****************************************************************************/
@@ -88,6 +89,7 @@ gl_color_from_gdk_color (GdkColor *gdk_color)
 
         return color;
 }
+
 
 /****************************************************************************/
 /* Create a single color node with default color.                           */
@@ -105,6 +107,7 @@ gl_color_node_new_default (void)
 
         return color_node;
 }
+
 
 /****************************************************************************/
 /* Copy a single color node.                                                 */
@@ -131,6 +134,7 @@ gl_color_node_dup (glColorNode *src)
 
         return dst;
 }
+
 
 /****************************************************************************/
 /* Compare 2 color nodes for equality.                                       */
@@ -181,6 +185,7 @@ gl_color_node_equal (glColorNode     *color_node1,
         return (strcmp (color_node1->key, color_node2->key) == 0);
 }
 
+
 /****************************************************************************/
 /* Expand single node into representative color.                            */
 /****************************************************************************/
@@ -228,6 +233,7 @@ gl_color_node_expand (glColorNode    *color_node,
         }
 }
 
+
 /****************************************************************************/
 /* Free a single color node.                                                */
 /****************************************************************************/
@@ -241,3 +247,14 @@ gl_color_node_free (glColorNode **color_node)
         g_free (*color_node);
         *color_node = NULL;
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

@@ -1,33 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  view-object.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  view_object.c:  GLabels label object base class
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 
 #include "view-object.h"
 
 #include <glib.h>
 
 #include "debug.h"
+
 
 /*========================================================*/
 /* Private constants and macros.                          */
@@ -38,6 +34,7 @@
 
 #define HANDLE_OUTLINE_WIDTH_PIXELS   1.0
 #define HANDLE_PIXELS 7
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -52,6 +49,7 @@ struct _glViewObjectPrivate {
 
 	GtkWidget                  *property_editor;
 };
+
 
 /*========================================================*/
 /* Private globals.                                       */
@@ -74,14 +72,11 @@ static void     object_bottom_cb             (glViewObject        *view_object,
                                               glLabelObject       *object);
 
 
-
-
-
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glViewObject, gl_view_object, G_TYPE_OBJECT);
+
 
 static void
 gl_view_object_class_init (glViewObjectClass *class)
@@ -97,6 +92,7 @@ gl_view_object_class_init (glViewObjectClass *class)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 static void
 gl_view_object_init (glViewObject *view_object)
 {
@@ -106,6 +102,7 @@ gl_view_object_init (glViewObject *view_object)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 static void
 gl_view_object_finalize (GObject *object)
@@ -134,6 +131,7 @@ gl_view_object_finalize (GObject *object)
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* NEW object view.                                                          */
 /*****************************************************************************/
@@ -150,6 +148,7 @@ gl_view_object_new (void)
 
 	return G_OBJECT (view_object);
 }
+
 
 /*****************************************************************************/
 /* Set parent view to which this object view belongs.                        */
@@ -174,6 +173,7 @@ gl_view_object_set_view       (glViewObject *view_object,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Set Label object to follow.                                               */
@@ -201,6 +201,7 @@ gl_view_object_set_object     (glViewObject            *view_object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Handle object "removed" signal.                                 */
 /*---------------------------------------------------------------------------*/
@@ -220,6 +221,7 @@ object_removed_cb (glViewObject  *view_object,
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Handle object "top" signal.                                      */
@@ -243,6 +245,7 @@ object_top_cb (glViewObject  *view_object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /* PRIVATE. Handle object "removed" signal.                                  */
 /*---------------------------------------------------------------------------*/
@@ -265,6 +268,7 @@ object_bottom_cb (glViewObject  *view_object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Return parent view associated with this view.                             */
 /*****************************************************************************/
@@ -280,6 +284,7 @@ gl_view_object_get_view   (glViewObject *view_object)
 	return view_object->priv->view;
 }
 
+
 /*****************************************************************************/
 /* Return label object that we are following.                                */
 /*****************************************************************************/
@@ -294,6 +299,7 @@ gl_view_object_get_object (glViewObject *view_object)
 
 	return view_object->priv->object;
 }
+
 
 /*****************************************************************************/
 /* Get property editor.                                                      */
@@ -339,6 +345,7 @@ gl_view_object_select (glViewObject *view_object)
 
 	gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Is object at (x,y)?                                                       */
@@ -400,6 +407,7 @@ create_handle_path (cairo_t                *cr,
 
         gl_debug (DEBUG_VIEW, "END");
 }
+
 
 /*****************************************************************************/
 /* Draw object handles                                                       */
@@ -493,6 +501,7 @@ gl_view_object_draw_handles (glViewObject *view_object,
 	gl_debug (DEBUG_VIEW, "END");
 }
 
+
 /*****************************************************************************/
 /* Is there an object handle at (x,y).                                       */
 /*****************************************************************************/
@@ -583,6 +592,7 @@ gl_view_object_handle_at (glViewObject *view_object,
 
         return handle;
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Resize object.                                                  */
@@ -763,3 +773,14 @@ gl_view_object_resize_event (glViewObject       *view_object,
         cairo_device_to_user (cr, &x0, &y0);
         gl_label_object_set_position (object, x0, y0);
 }
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

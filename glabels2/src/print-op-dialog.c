@@ -23,12 +23,10 @@
 #include "print-op-dialog.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkbuilder.h>
+#include <gtk/gtk.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <gtk/gtktogglebutton.h>
-#include <gtk/gtkspinbutton.h>
 
 #include "mini-preview.h"
 #include "label.h"

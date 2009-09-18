@@ -1,33 +1,28 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  label-object.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  label_object.c:  GLabels label object base class
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2007  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "label-object.h"
 
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
+#include <glib.h>
 #include <math.h>
 
 #include "marshal.h"
@@ -42,6 +37,7 @@
 #define DEFAULT_SHADOW_X_OFFSET (3.6)
 #define DEFAULT_SHADOW_Y_OFFSET (3.6)
 #define DEFAULT_SHADOW_OPACITY  (0.5)
+
 
 /*========================================================*/
 /* Private types.                                         */
@@ -72,6 +68,7 @@ enum {
 	LAST_SIGNAL
 };
 
+
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
@@ -79,6 +76,7 @@ enum {
 static guint signals[LAST_SIGNAL] = {0};
 
 static guint instance = 0;
+
 
 /*========================================================*/
 /* Private function prototypes.                           */
@@ -94,11 +92,11 @@ static void set_size                      (glLabelObject      *object,
 					   gdouble             h);
 
 
-
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
 G_DEFINE_TYPE (glLabelObject, gl_label_object, G_TYPE_OBJECT);
+
 
 static void
 gl_label_object_class_init (glLabelObjectClass *class)
@@ -173,6 +171,7 @@ gl_label_object_class_init (glLabelObjectClass *class)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 static void
 gl_label_object_init (glLabelObject *object)
 {
@@ -193,6 +192,7 @@ gl_label_object_init (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 static void
 gl_label_object_finalize (GObject *object)
 {
@@ -209,6 +209,7 @@ gl_label_object_finalize (GObject *object)
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* New label object.                                                         */
@@ -228,6 +229,7 @@ gl_label_object_new (glLabel *label)
 
 	return G_OBJECT (object);
 }
+
 
 /*****************************************************************************/
 /* Duplicate object.                                                         */
@@ -282,6 +284,7 @@ gl_label_object_dup (glLabelObject *src_object,
 	return dst_object;
 }
 
+
 /*****************************************************************************/
 /* Emit "changed" signal (for derived objects).                              */
 /*****************************************************************************/
@@ -296,6 +299,7 @@ gl_label_object_emit_changed (glLabelObject *object)
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Set parent label of object.                                               */
@@ -328,6 +332,7 @@ gl_label_object_set_parent (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Get parent label of object.                                               */
 /*****************************************************************************/
@@ -342,6 +347,7 @@ gl_label_object_get_parent (glLabelObject *object)
 
 	return object->parent;
 }
+
 
 /*****************************************************************************/
 /* Set remove object from parent.                                            */
@@ -371,6 +377,7 @@ gl_label_object_remove (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Set name of object.                                                       */
 /*****************************************************************************/
@@ -390,6 +397,7 @@ gl_label_object_set_name (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Get name of object.                                                       */
 /*****************************************************************************/
@@ -404,6 +412,7 @@ gl_label_object_get_name (glLabelObject *object)
 
 	return g_strdup(object->priv->name);
 }
+
 
 /*****************************************************************************/
 /* Set position of object.                                                   */
@@ -434,6 +443,7 @@ gl_label_object_set_position (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Set position of object relative to old position.                          */
 /*****************************************************************************/
@@ -462,6 +472,7 @@ gl_label_object_set_position_relative (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Get position of object.                                                   */
 /*****************************************************************************/
@@ -479,6 +490,7 @@ gl_label_object_get_position (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Default set size method.                                        */
@@ -498,6 +510,7 @@ set_size (glLabelObject *object,
 		g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 	}
 }
+
 
 /*****************************************************************************/
 /* Set size of object.                                                       */
@@ -523,6 +536,7 @@ gl_label_object_set_size (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Set size of object honoring current aspect ratio.                         */
@@ -556,6 +570,7 @@ gl_label_object_set_size_honor_aspect (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Get raw size method (don't let object content adjust size).               */
 /*****************************************************************************/
@@ -569,6 +584,7 @@ gl_label_object_get_raw_size (glLabelObject *object,
 	*w = object->priv->w;
 	*h = object->priv->h;
 }
+
 
 /*****************************************************************************/
 /* Get size of object.                                                       */
@@ -595,6 +611,7 @@ gl_label_object_get_size (glLabelObject *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Get extent of object.                                                     */
@@ -641,6 +658,7 @@ gl_label_object_get_extent (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*****************************************************************************/
 /* Can text properties be set for this object?                               */
 /*****************************************************************************/
@@ -663,6 +681,7 @@ gl_label_object_can_text (glLabelObject     *object)
 
 }
 
+
 /*****************************************************************************/
 /* Set font family for all text contained in object.                         */
 /*****************************************************************************/
@@ -683,6 +702,7 @@ gl_label_object_set_font_family (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Set font size for all text contained in object.                          */
@@ -705,6 +725,7 @@ gl_label_object_set_font_size (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Set font weight for all text contained in object.                        */
 /****************************************************************************/
@@ -725,6 +746,7 @@ gl_label_object_set_font_weight (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Set font italic flag for all text contained in object.                   */
@@ -748,6 +770,7 @@ gl_label_object_set_font_italic_flag (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Set text alignment for all text contained in object.                     */
 /****************************************************************************/
@@ -770,6 +793,7 @@ gl_label_object_set_text_alignment (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Set text line spacing for all text contained in object.                  */
 /****************************************************************************/
@@ -791,6 +815,7 @@ gl_label_object_set_text_line_spacing (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Set text color for all text contained in object.                         */
 /****************************************************************************/
@@ -811,6 +836,7 @@ gl_label_object_set_text_color (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /*****************************************************************************/
 /* Get font family for all text contained in object.                         */
@@ -836,6 +862,7 @@ gl_label_object_get_font_family (glLabelObject     *object)
 	return ret;
 }
 
+
 /****************************************************************************/
 /* Get font size for all text contained in object.                          */
 /****************************************************************************/
@@ -859,6 +886,7 @@ gl_label_object_get_font_size (glLabelObject     *object)
 
 	return ret;
 }
+
 
 /****************************************************************************/
 /* Get font weight for all text contained in object.                        */
@@ -884,6 +912,7 @@ gl_label_object_get_font_weight (glLabelObject     *object)
 	return ret;
 }
 
+
 /****************************************************************************/
 /* Get font italic flag for all text contained in object.                   */
 /****************************************************************************/
@@ -907,6 +936,7 @@ gl_label_object_get_font_italic_flag (glLabelObject     *object)
 
 	return ret;
 }
+
 
 /****************************************************************************/
 /* Get text alignment for all text contained in object.                     */
@@ -932,6 +962,7 @@ gl_label_object_get_text_alignment (glLabelObject     *object)
 	return ret;
 }
 
+
 /****************************************************************************/
 /* Get text line spacing for all text contained in object.                  */
 /****************************************************************************/
@@ -955,6 +986,7 @@ gl_label_object_get_text_line_spacing (glLabelObject     *object)
 
 	return ret;
 }
+
 
 /****************************************************************************/
 /* Get text color for all text contained in object.                         */
@@ -980,6 +1012,7 @@ gl_label_object_get_text_color (glLabelObject     *object)
 	return ret;
 }
 
+
 /*****************************************************************************/
 /* Can fill properties be set for this object?                               */
 /*****************************************************************************/
@@ -1002,6 +1035,7 @@ gl_label_object_can_fill (glLabelObject     *object)
 
 }
 
+
 /****************************************************************************/
 /* Set fill color for object.                                               */
 /****************************************************************************/
@@ -1022,6 +1056,7 @@ gl_label_object_set_fill_color (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Get fill color for object.                                               */
@@ -1047,6 +1082,7 @@ gl_label_object_get_fill_color (glLabelObject     *object)
 	return ret;
 }
 
+
 /*****************************************************************************/
 /* Can line color property be set for this object?                           */
 /*****************************************************************************/
@@ -1069,6 +1105,7 @@ gl_label_object_can_line_color (glLabelObject     *object)
 
 }
 
+
 /****************************************************************************/
 /* Set line color for object.                                               */
 /****************************************************************************/
@@ -1089,6 +1126,7 @@ gl_label_object_set_line_color (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Get line color for object.                                               */
@@ -1114,6 +1152,7 @@ gl_label_object_get_line_color (glLabelObject     *object)
 	return ret;
 }
 
+
 /*****************************************************************************/
 /* Can line width property be set for this object?                           */
 /*****************************************************************************/
@@ -1136,6 +1175,7 @@ gl_label_object_can_line_width (glLabelObject     *object)
 
 }
 
+
 /****************************************************************************/
 /* Set line width for object.                                               */
 /****************************************************************************/
@@ -1156,6 +1196,7 @@ gl_label_object_set_line_width (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Get line width for object.                                               */
@@ -1181,6 +1222,7 @@ gl_label_object_get_line_width (glLabelObject     *object)
 	return ret;
 }
 
+
 /****************************************************************************/
 /* Set shadow state of object.                                              */
 /****************************************************************************/
@@ -1201,6 +1243,7 @@ gl_label_object_set_shadow_state (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Get shadow state of object.                                              */
 /****************************************************************************/
@@ -1213,6 +1256,7 @@ gl_label_object_get_shadow_state (glLabelObject     *object)
 
 	return object->priv->shadow_state;
 }
+
 
 /****************************************************************************/
 /* Set offset of object's shadow.                                           */
@@ -1237,6 +1281,7 @@ gl_label_object_set_shadow_offset (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Get offset of object's shadow.                                           */
 /****************************************************************************/
@@ -1254,6 +1299,7 @@ gl_label_object_get_shadow_offset (glLabelObject     *object,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Set color of object's shadow.                                            */
@@ -1276,6 +1322,7 @@ gl_label_object_set_shadow_color (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Get color of object's shadow.                                            */
 /****************************************************************************/
@@ -1288,6 +1335,7 @@ gl_label_object_get_shadow_color (glLabelObject     *object)
 
 	return gl_color_node_dup (object->priv->shadow_color_node);
 }
+
 
 /****************************************************************************/
 /* Set opacity of object's shadow.                                          */
@@ -1309,6 +1357,7 @@ gl_label_object_set_shadow_opacity (glLabelObject     *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Get opacity of object's shadow.                                          */
 /****************************************************************************/
@@ -1321,6 +1370,7 @@ gl_label_object_get_shadow_opacity (glLabelObject     *object)
 
 	return object->priv->shadow_opacity;
 }
+
 
 /****************************************************************************/
 /* Flip object horizontally.                                                */
@@ -1342,6 +1392,7 @@ gl_label_object_flip_horiz (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Flip object vertically.                                                  */
 /****************************************************************************/
@@ -1361,6 +1412,7 @@ gl_label_object_flip_vert (glLabelObject *object)
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
 
 /****************************************************************************/
 /* Rotate object.                                                           */
@@ -1383,6 +1435,7 @@ gl_label_object_rotate (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Set raw affine                                                           */
 /****************************************************************************/
@@ -1397,6 +1450,7 @@ gl_label_object_set_matrix (glLabelObject  *object,
         object->priv->matrix = *matrix;
 }
 
+
 /****************************************************************************/
 /* Get raw affine                                                           */
 /****************************************************************************/
@@ -1410,6 +1464,7 @@ gl_label_object_get_matrix (glLabelObject  *object,
 
         *matrix = object->priv->matrix;
 }
+
 
 /****************************************************************************/
 /* Bring label object to front/top.                                         */
@@ -1430,6 +1485,7 @@ gl_label_object_raise_to_top (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /****************************************************************************/
 /* Send label object to rear/bottom.                                        */
 /****************************************************************************/
@@ -1449,6 +1505,7 @@ gl_label_object_lower_to_bottom (glLabelObject *object)
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Label's merge data changed callback.                           */
 /*--------------------------------------------------------------------------*/
@@ -1458,6 +1515,7 @@ merge_changed_cb (glLabel       *label,
 {
 	gl_label_object_emit_changed (object);
 }
+
 
 /*****************************************************************************/
 /* Draw object                                                               */
@@ -1523,3 +1581,14 @@ gl_label_object_draw (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "END");
 }
 
+
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

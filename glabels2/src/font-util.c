@@ -22,10 +22,11 @@
 
 #include "font-util.h"
 
+#include <glib.h>
 #include <pango/pango.h>
 #include <pango/pangocairo.h>
-#include <glib/gstrfuncs.h>
-#include <libglabels/str.h>
+
+#include <libglabels/libglabels.h>
 
 
 /****************************************************************************/

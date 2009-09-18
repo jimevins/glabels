@@ -22,9 +22,7 @@
 
 #include "label-text.h"
 
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gmessages.h>
+#include <glib.h>
 #include <pango/pango.h>
 #include <math.h>
 #include <string.h>

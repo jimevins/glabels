@@ -1,37 +1,30 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (GLABELS) Label and Business Card Creation program for GNOME
+ *  ui.c
+ *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
- *  ui.c:  GLabels ui module
+ *  This file is part of gLabels.
  *
- *  Copyright (C) 2001-2002  Jim Evins <evins@snaught.com>.
- *
- *  This program is free software; you can redistribute it and/or modify
+ *  gLabels is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  gLabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "ui.h"
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include <gtk/gtkrecentchoosermenu.h>
-#include <gtk/gtkmenuitem.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktoolbar.h>
-#include <gtk/gtkstatusbar.h>
+#include <gtk/gtk.h>
 #include <string.h>
 
 #include "ui-util.h"
@@ -44,9 +37,11 @@
 
 #include "debug.h"
 
+
 /*==========================================================================*/
 /* Private macros and constants.                                            */
 /*==========================================================================*/
+
 
 /*==========================================================================*/
 /* Private types.                                                           */
@@ -781,6 +776,7 @@ gl_ui_new (glWindow *window)
 	return ui;
 }
 
+
 /*****************************************************************************/
 /** Unref wrapper.                                                           */
 /*****************************************************************************/
@@ -793,6 +789,7 @@ gl_ui_unref (GtkUIManager *ui)
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*****************************************************************************/
 /** Update all verbs of given UI component.                                  */
@@ -836,6 +833,7 @@ gl_ui_update_all (GtkUIManager *ui,
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /*****************************************************************************/
 /** Update all verbs of given UI component to "no document" state.           */
 /*****************************************************************************/
@@ -848,6 +846,7 @@ gl_ui_update_nodoc (GtkUIManager *ui)
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*****************************************************************************/
 /** Update label modified verbs of given UI component.                       */
@@ -864,6 +863,7 @@ gl_ui_update_modified_verbs (GtkUIManager *ui,
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*****************************************************************************/
 /** Update verbs associated with selection state of given UI component.      */
@@ -887,6 +887,7 @@ gl_ui_update_selection_verbs (GtkUIManager *ui,
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /*****************************************************************************/
 /** Update verbs associated with zoom level of given UI component.           */
 /*****************************************************************************/
@@ -903,6 +904,7 @@ gl_ui_update_zoom_verbs (GtkUIManager *ui,
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*****************************************************************************/
 /** Update undo/redo verbs of given UI component.                            */
@@ -921,6 +923,7 @@ gl_ui_update_undo_redo_verbs (GtkUIManager *ui,
 
 	gl_debug (DEBUG_UI, "END");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  View menu item toggled callback.                               */
@@ -957,6 +960,7 @@ view_ui_item_toggled_cb (GtkToggleAction *action,
 
 	gl_debug (DEBUG_UI, "");
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Set main toolbar style.                                        */
@@ -1015,6 +1019,7 @@ set_app_drawing_toolbar_style (GtkUIManager *ui)
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Set visibility of grid and markup.                             */
 /*---------------------------------------------------------------------------*/
@@ -1034,6 +1039,7 @@ set_view_style (GtkUIManager *ui)
 	gl_debug (DEBUG_UI, "END");
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Connect proxy callback.                                        */
 /*---------------------------------------------------------------------------*/
@@ -1052,6 +1058,7 @@ connect_proxy_cb (GtkUIManager *ui,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Disconnect proxy callback.                                     */
 /*---------------------------------------------------------------------------*/
@@ -1069,6 +1076,7 @@ disconnect_proxy_cb (GtkUIManager *ui,
 			(proxy, G_CALLBACK (menu_item_deselect_cb), window);
 	}
 }
+
 
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Menu item select callback.                                     */
@@ -1095,6 +1103,7 @@ menu_item_select_cb (GtkMenuItem *proxy,
 	}
 }
 
+
 /*---------------------------------------------------------------------------*/
 /** PRIVATE.  Menu item deselect callback.                                   */
 /*---------------------------------------------------------------------------*/
@@ -1109,3 +1118,13 @@ menu_item_deselect_cb (GtkMenuItem *proxy,
 			   window->menu_tips_context_id);
 }
 
+
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */

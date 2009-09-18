@@ -20,7 +20,6 @@
 
 #include <config.h>
 
-
 #include "color-combo-history.h"
 
 #include "color.h"

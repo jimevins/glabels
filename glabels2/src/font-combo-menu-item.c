@@ -22,13 +22,11 @@
 
 #include "font-combo-menu-item.h"
 
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
 #include "font-sample.h"
 #include "marshal.h"
-#include <glib/gi18n.h>
-#include <gtk/gtkmenuitem.h>
-#include <gtk/gtkseparatormenuitem.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtklabel.h>
 
 
 

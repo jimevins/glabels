@@ -22,7 +22,7 @@
 #define __FONT_COMBO_MENU_ITEM_H__
 
 
-#include <gtk/gtkmenuitem.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

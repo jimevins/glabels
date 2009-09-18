@@ -26,7 +26,7 @@
 #ifndef __XML_H__
 #define __XML_H__
 
-#include <glib/gtypes.h>
+#include <glib.h>
 #include <libxml/tree.h>
 
 #include "enums.h"
