@@ -1,3 +1,9 @@
+2009-09-17  Jim Evins  <evins@snaught.com>
+
+	* src/stock.c: (add_icons), (add_button_icon):
+		Use proper free function for GtkIconSource (gtk_icon_source_free() not g_free()).
+		Patch provided by Christian Persch <chpe@gnome.org>.
+
 2009-09-09  Jim Evins  <evins@snaught.com>
 
 	* configure.in:
