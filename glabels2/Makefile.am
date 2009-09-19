@@ -14,6 +14,7 @@ SUBDIRS = \
 	libglabels \
 	src \
 	data \
+	templates \
 	help \
 	docs
 
@@ -22,6 +23,7 @@ EXTRA_DIST = \
 	COPYING \
 	COPYING-DOCS \
 	COPYING-LIBGLABELS \
+	COPYING-TEMPLATES \
 	AUTHORS \
 	ChangeLog \
 	INSTALL \

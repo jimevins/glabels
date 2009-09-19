@@ -1,5 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
+dtddir = $(datadir)/glabels/dtd
+
+dtd_DATA = \
+	glabels-2.2.dtd
+
 templatesdir = $(datadir)/glabels/templates
 
 templates_DATA = \
@@ -15,5 +20,6 @@ templates_DATA = \
 	misc-iso-templates.xml \
 	misc-other-templates.xml
 
-EXTRA_DIST = $(templates_DATA)
+EXTRA_DIST = $(templates_DATA) $(dtd_DATA)
+
 

@@ -184,13 +184,12 @@ src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
 data/Makefile
-data/templates/Makefile
 data/pixmaps/Makefile
 data/mime/Makefile
 data/builder/Makefile
 data/desktop/Makefile
-data/dtd/Makefile
 data/man/Makefile
+templates/Makefile
 po/Makefile.in
 help/Makefile
 docs/Makefile

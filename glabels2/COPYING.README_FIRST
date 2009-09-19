@@ -1,21 +1,42 @@
-   The gLabels official distribution is an aggregate of several components.
-   Each component is licensed as follows
+The gLabels official distribution is an aggregate of several components.
+Each component is licensed as follows
+
+
+GLABELS:
 
    The gLabels application core, and other portions of the official gLabels
    distribution not explicitly licensed otherwise, are licensed under
-   the GNU GENERAL PUBLIC LICENSE (GPL); either version 2 of the License, or
+   the GNU GENERAL PUBLIC LICENSE (GPL); either version 3 of the License, or
    (at your option) any later version -- see the 'COPYING' file in this
    directory for details.
 
+
+LIBGLABELS:
+
    The libglabels library, located in the "libglabels/" subdirectory, is
    licensed under the GNU LESSER GENERAL PUBLIC LICENSE (LGPL); either
-   version 2 of the License, or (at your option) any later version -- see
+   version 3 of the License, or (at your option) any later version -- see
    the 'COPYING-LIBGLABELS' in this directory for details.
+
+
+DOCUMENTATION:
 
    The gLabels and libglabels documentation, located in the "docs/" and "help/"
    subdirectories, is licensed under the GNU FREE DOCUMENTATION LICENSE (GFDL)
    with no Invariant Sections; either version 1.1 or (at your option) any
    later version -- see 'COPYING-DOCS' in this directory for details.
+
+
+TEMPLATE DATABASE:
+
+   The XML files in the "templates/" subdirectory constitute the glabels
+   label database.  No copyright is claimed on the facts contained within
+   the database.  However, to clear up any ambiguity, the files themselves
+   are licensed using the MIT/X license -- see 'COPYING-TEMPLATES' in this
+   directory for details.
+
+
+3RD PARTY COMPONENTS:
 
    The "barcode-0.98/" and "iec16022-0.2.1/" subdirectories contain 3rd party
    libraries, each licensed under the GNU GENERAL PUBLIC LICENSE (GPL); either
@@ -26,8 +47,4 @@
    licensed under the GNU LESSER GENERAL PUBLIC LICENSE (LGPL); either
    version 2.1 of the License, or (at your option) any later version -- see the
    'COPYING' file in this subdirectory for details.
-
-   The XML files in the "data/templates/" subdirectory constitute the glabels
-   label database.  This database is a simple collection of facts so it is
-   therefore considered to be public domain and can be used for any purpose.
 

@@ -1,5 +1,36 @@
 2009-09-19  Jim Evins  <evins@snaught.com>
 
+	* COPYING:
+		Updated to GPL3 text.
+	* COPYING-LIBGLABELS:
+		Updated to LGPL3 text.
+	* COPYING-TEMPLATES:
+		New MIT/X license file for templates subdirectory.
+	* COPYING.README_FIRST:
+		Updated licensing information.
+	* templates/Makefile.am:
+	* templates/avery-iso-templates.xml:
+	* templates/avery-other-templates.xml:
+	* templates/avery-us-templates.xml:
+	* templates/brother-other-templates.xml:
+	* templates/categories.xml:
+	* templates/dymo-other-templates.xml:
+	* templates/glabels-2.2.dtd:
+	* templates/misc-iso-templates.xml:
+	* templates/misc-other-templates.xml:
+	* templates/misc-us-templates.xml:
+	* templates/paper-sizes.xml:
+	* templates/zweckform-iso-templates.xml:
+		- Added MIT/X license notice to database files.
+		- Moved from data subdirectory.
+	* configure.in:
+	* po/POTFILES.in:
+	* Makefile.am:
+	* data/Makefile.am:
+		Updated to reflect above move.
+
+2009-09-19  Jim Evins  <evins@snaught.com>
+
 	* libglabels/category.c:
 	* libglabels/category.h:
 	* libglabels/db.c:

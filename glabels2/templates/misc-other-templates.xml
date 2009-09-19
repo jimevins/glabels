@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<!--
+  misc-other-templates.xml
+  This file is a part of the glabels template database.
+ 
+  Copyright (c) 2001-2009 Jim Evins
+ 
+  Permission is hereby granted, free of charge, to any person
+  obtaining a copy of this software and associated documentation
+  files (the "Software"), to deal in the Software without
+  restriction, including without limitation the rights to use,
+  copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following
+  conditions:
+ 
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+ 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<Glabels-templates>
+
+
+  <!-- =================================================================== -->
+  <!-- OfficeMax 86112: Multi-Purpose Labels, 2'' x 4'', 3 per sheet       -->
+  <!-- =================================================================== -->
+  <Template brand="OfficeMax" part="86112" size="Other" width="297pt" height="450pt"
+            _description="Multi-Purpose Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="288pt" height="144pt" round="9pt" waste="0pt">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="3" x0="4.5pt" y0="3.6pt" dx="288pt" dy="148.5pt"/>
+    </Label-rectangle>
+  </Template>
+
+
+
+</Glabels-templates>
