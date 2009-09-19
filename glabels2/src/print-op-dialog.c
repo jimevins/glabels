@@ -113,6 +113,11 @@ static void     preview_pressed_cb            (glMiniPreview     *preview,
                                                gint               last,
                                                glPrintOpDialog   *op);
 
+static void     preview_released_cb           (glMiniPreview     *preview,
+                                               gint               first,
+                                               gint               last,
+                                               glPrintOpDialog   *op);
+
 static void     merge_spin_cb                 (GtkSpinButton     *spinbutton,
                                                glPrintOpDialog   *op);
 
@@ -121,6 +126,9 @@ static void     merge_collate_check_cb        (GtkToggleButton   *togglebutton,
 
 static void     preview_clicked_cb            (glMiniPreview     *preview,
                                                gint               first,
+                                               glPrintOpDialog   *op);
+
+static void     option_toggled_cb             (GtkToggleButton   *togglebutton,
                                                glPrintOpDialog   *op);
 
 
@@ -275,6 +283,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
         /* ---- Install preview. ---- */
         op->priv->preview = gl_mini_preview_new (MINI_PREVIEW_MIN_HEIGHT, MINI_PREVIEW_MIN_WIDTH);
         gl_mini_preview_set_template (GL_MINI_PREVIEW(op->priv->preview), label->template);
+        gl_mini_preview_set_label (GL_MINI_PREVIEW(op->priv->preview), label);
         gtk_box_pack_start (GTK_BOX(hbox), op->priv->preview, TRUE, TRUE, 0);
         gtk_widget_show_all (op->priv->preview);
 
@@ -303,8 +312,12 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                            op->priv->labels_per_sheet);
 
                 /* Update preview. */
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview),
-                                                 1, op->priv->labels_per_sheet);
+                gl_mini_preview_set_page     (GL_MINI_PREVIEW (op->priv->preview), 0);
+                gl_mini_preview_set_n_sheets (GL_MINI_PREVIEW (op->priv->preview),
+                                              gl_print_op_get_n_sheets (GL_PRINT_OP(op)));
+                gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview), 1);
+                gl_mini_preview_set_last     (GL_MINI_PREVIEW (op->priv->preview),
+                                              op->priv->labels_per_sheet);
 
 		gtk_widget_show_all (op->priv->simple_frame);
 		gtk_widget_hide_all (op->priv->merge_frame);
@@ -317,6 +330,8 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                   G_CALLBACK (simple_last_spin_cb), op);
                 g_signal_connect (G_OBJECT (op->priv->preview), "pressed",
                                   G_CALLBACK (preview_pressed_cb), op);
+                g_signal_connect (G_OBJECT (op->priv->preview), "released",
+                                  G_CALLBACK (preview_released_cb), op);
 
 	} else {
 
@@ -341,19 +356,24 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 
                 if ( gl_print_op_get_collate_flag (GL_PRINT_OP(op)) )
                 {
-                        pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)collate_xpm);
+                        pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)nocollate_xpm);
                 }
                 else
                 {
-                        pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)nocollate_xpm);
+                        pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)collate_xpm);
                 }
 
                 gtk_image_set_from_pixbuf (GTK_IMAGE (op->priv->merge_collate_image), pixbuf);
 
                 /* Update preview. */
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview),
-                                                 gl_print_op_get_first (GL_PRINT_OP(op)),
-                                                 gl_print_op_get_first (GL_PRINT_OP(op)) + op->priv->n_records - 1);
+                gl_mini_preview_set_page     (GL_MINI_PREVIEW (op->priv->preview), 0);
+                gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview),
+                                              gl_print_op_get_first (GL_PRINT_OP(op)));
+                gl_mini_preview_set_n_copies (GL_MINI_PREVIEW (op->priv->preview),
+                                              gl_print_op_get_n_copies (GL_PRINT_OP(op)));
+                gl_mini_preview_set_collate_flag (GL_MINI_PREVIEW (op->priv->preview),
+                                                  gl_print_op_get_collate_flag (GL_PRINT_OP(op)));
+
 
 		gtk_widget_hide_all (op->priv->simple_frame);
 		gtk_widget_show_all (op->priv->merge_frame);
@@ -366,6 +386,10 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                   G_CALLBACK (merge_collate_check_cb), op);
                 g_signal_connect (G_OBJECT (op->priv->preview), "clicked",
                                   G_CALLBACK (preview_clicked_cb), op);
+                g_signal_connect (G_OBJECT (op->priv->preview), "pressed",
+                                  G_CALLBACK (preview_pressed_cb), op);
+                g_signal_connect (G_OBJECT (op->priv->preview), "released",
+                                  G_CALLBACK (preview_released_cb), op);
 
 		g_object_unref (G_OBJECT(merge));
 
@@ -389,6 +413,13 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                 gtk_widget_set_sensitive (op->priv->reverse_check, FALSE);
                 gtk_widget_set_sensitive (op->priv->crop_marks_check, FALSE);
         }
+
+        g_signal_connect (G_OBJECT (op->priv->outline_check), "toggled",
+                          G_CALLBACK (option_toggled_cb), op);
+        g_signal_connect (G_OBJECT (op->priv->reverse_check), "toggled",
+                          G_CALLBACK (option_toggled_cb), op);
+        g_signal_connect (G_OBJECT (op->priv->crop_marks_check), "toggled",
+                          G_CALLBACK (option_toggled_cb), op);
 
 	return G_OBJECT (hbox);
 }
@@ -483,8 +514,11 @@ simple_sheets_radio_cb (GtkToggleButton   *togglebutton,
                 gtk_spin_button_set_value (GTK_SPIN_BUTTON (op->priv->simple_last_spin),
                                            op->priv->labels_per_sheet);
 
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview),
-                                                 1, op->priv->labels_per_sheet);
+                gl_mini_preview_set_n_sheets (GL_MINI_PREVIEW (op->priv->preview),
+                                              gl_print_op_get_n_sheets (GL_PRINT_OP(op)));
+                gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview), 1);
+                gl_mini_preview_set_last     (GL_MINI_PREVIEW (op->priv->preview),
+                                              op->priv->labels_per_sheet);
 
         } else {
 
@@ -497,7 +531,10 @@ simple_sheets_radio_cb (GtkToggleButton   *togglebutton,
                 first = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (op->priv->simple_first_spin));
                 last  = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (op->priv->simple_last_spin));
 
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
+                gl_mini_preview_set_n_sheets (GL_MINI_PREVIEW (op->priv->preview), 1);
+                gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview), first);
+                gl_mini_preview_set_last     (GL_MINI_PREVIEW (op->priv->preview), last);
+
         }
 }
 
@@ -519,7 +556,8 @@ simple_first_spin_cb (GtkSpinButton     *spinbutton,
                                    first, op->priv->labels_per_sheet);
 
         /* Update preview. */
-        gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
+        gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview), first);
+        gl_mini_preview_set_last     (GL_MINI_PREVIEW (op->priv->preview), last);
 
 }
 
@@ -541,7 +579,8 @@ simple_last_spin_cb (GtkSpinButton     *spinbutton,
                                    1, last);
 
         /* Update preview. */
-        gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
+        gl_mini_preview_set_first    (GL_MINI_PREVIEW (op->priv->preview), first);
+        gl_mini_preview_set_last     (GL_MINI_PREVIEW (op->priv->preview), last);
 
 }
 
@@ -582,10 +621,25 @@ preview_pressed_cb (glMiniPreview     *preview,
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op->priv->simple_labels_radio), TRUE);
                 }
 
-                /* Update preview. */
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
-
         }
+
+        gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
+
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Preview "pressed" callback                                     */
+/*--------------------------------------------------------------------------*/
+static void
+preview_released_cb (glMiniPreview     *preview,
+                     gint               first,
+                     gint               last,
+                     glPrintOpDialog   *op)
+{
+
+        gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), 0, 0);
+
 }
 
 
@@ -594,16 +648,16 @@ preview_pressed_cb (glMiniPreview     *preview,
 /*--------------------------------------------------------------------------*/
 static void
 merge_spin_cb (GtkSpinButton     *spinbutton,
-                     glPrintOpDialog   *op)
+               glPrintOpDialog   *op)
 {
-        gint first, last, n_copies;
+        gint first, n_copies;
 
         first = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (op->priv->merge_first_spin));
 
         n_copies = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (op->priv->merge_copies_spin));
-        last = first + (n_copies * op->priv->n_records) - 1;
 
-        gl_mini_preview_highlight_range (GL_MINI_PREVIEW(op->priv->preview), first, last );
+        gl_mini_preview_set_first (GL_MINI_PREVIEW(op->priv->preview), first);
+        gl_mini_preview_set_n_copies (GL_MINI_PREVIEW(op->priv->preview), n_copies);
 
         gtk_widget_set_sensitive (op->priv->merge_collate_check, (n_copies > 1));
         gtk_widget_set_sensitive (op->priv->merge_collate_image, (n_copies > 1));
@@ -621,11 +675,13 @@ merge_collate_check_cb (GtkToggleButton   *togglebutton,
 
         if ( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (op->priv->merge_collate_check)) )
         {
-                pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)collate_xpm);
+                pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)nocollate_xpm);
+                gl_mini_preview_set_collate_flag (GL_MINI_PREVIEW (op->priv->preview), TRUE);
         }
         else
         {
-                pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)nocollate_xpm);
+                pixbuf = gdk_pixbuf_new_from_xpm_data ( (const char **)collate_xpm);
+                gl_mini_preview_set_collate_flag (GL_MINI_PREVIEW (op->priv->preview), FALSE);
         }
 
         gtk_image_set_from_pixbuf (GTK_IMAGE (op->priv->merge_collate_image), pixbuf);
@@ -641,7 +697,6 @@ preview_clicked_cb (glMiniPreview     *preview,
                     glPrintOpDialog   *op)
 {
         gint n_copies;
-        gint last;
 
         if ( op->priv->merge_flag )
         {
@@ -653,12 +708,27 @@ preview_clicked_cb (glMiniPreview     *preview,
                 gtk_widget_set_sensitive (op->priv->merge_collate_check, (n_copies > 1));
                 gtk_widget_set_sensitive (op->priv->merge_collate_image, (n_copies > 1));
 
-
-                /* Update preview. */
-                last = first + (n_copies * op->priv->n_records) - 1;
-                gl_mini_preview_highlight_range (GL_MINI_PREVIEW (op->priv->preview), first, last);
-
         }
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Option checkbox "toggled" callback                             */
+/*--------------------------------------------------------------------------*/
+static void
+option_toggled_cb (GtkToggleButton   *togglebutton,
+                   glPrintOpDialog   *op)
+{
+        gboolean flag;
+
+        flag = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (op->priv->outline_check));
+        gl_mini_preview_set_outline_flag (GL_MINI_PREVIEW (op->priv->preview), flag);
+
+        flag = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (op->priv->reverse_check));
+        gl_mini_preview_set_reverse_flag (GL_MINI_PREVIEW (op->priv->preview), flag);
+
+        flag = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (op->priv->crop_marks_check));
+        gl_mini_preview_set_crop_marks_flag (GL_MINI_PREVIEW (op->priv->preview), flag);
 }
 
 

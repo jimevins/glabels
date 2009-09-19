@@ -51,31 +51,64 @@ struct _glMiniPreview {
 struct _glMiniPreviewClass {
 	GtkEventBoxClass      parent_class;
 
-	void (*clicked) (glMiniPreview *this,
-			 gint           index,
-			 gpointer       user_data);
+	void (*clicked)  (glMiniPreview *this,
+                          gint           index,
+                          gpointer       user_data);
 
-	void (*pressed) (glMiniPreview *this,
-			 gint           index1,
-			 gint           index2,
-			 gpointer       user_data);
+	void (*pressed)  (glMiniPreview *this,
+                          gint           index1,
+                          gint           index2,
+                          gpointer       user_data);
+
+	void (*released) (glMiniPreview *this,
+                          gint           index1,
+                          gint           index2,
+                          gpointer       user_data);
+
 };
 
 
-GType      gl_mini_preview_get_type          (void) G_GNUC_CONST;
+GType      gl_mini_preview_get_type            (void) G_GNUC_CONST;
 
-GtkWidget *gl_mini_preview_new               (gint               height,
-                                              gint               width);
+GtkWidget *gl_mini_preview_new                 (gint               height,
+                                                gint               width);
 
-void       gl_mini_preview_set_label_by_name (glMiniPreview     *this,
-                                              const gchar       *name);
+void       gl_mini_preview_set_by_name         (glMiniPreview     *this,
+                                                const gchar       *name);
 
-void       gl_mini_preview_set_template      (glMiniPreview     *this,
-                                              const lglTemplate *template);
+void       gl_mini_preview_set_template        (glMiniPreview     *this,
+                                                const lglTemplate *template);
 
-void       gl_mini_preview_highlight_range   (glMiniPreview     *this,
-                                              gint               first_label,
-                                              gint               last_label);
+void       gl_mini_preview_highlight_range     (glMiniPreview     *this,
+                                                gint               first_label,
+                                                gint               last_label);
+
+
+/*
+ * If label is set, the preview will be rich.
+ */
+void       gl_mini_preview_set_label           (glMiniPreview     *this,
+                                                glLabel           *label);
+
+void       gl_mini_preview_set_page            (glMiniPreview     *this,
+                                                gint               n_sheets);
+void       gl_mini_preview_set_n_sheets        (glMiniPreview     *this,
+                                                gint               n_sheets);
+void       gl_mini_preview_set_n_copies        (glMiniPreview     *this,
+                                                gint               n_copies);
+void       gl_mini_preview_set_first           (glMiniPreview     *this,
+                                                gint               first);
+void       gl_mini_preview_set_last            (glMiniPreview     *this,
+                                                gint               last);
+void       gl_mini_preview_set_collate_flag    (glMiniPreview     *this,
+                                                gboolean           collate_flag);
+void       gl_mini_preview_set_outline_flag    (glMiniPreview     *this,
+                                                gboolean           outline_flag);
+void       gl_mini_preview_set_reverse_flag    (glMiniPreview     *this,
+                                                gboolean           reverse_flag);
+void       gl_mini_preview_set_crop_marks_flag (glMiniPreview     *this,
+                                                gboolean           crop_marks_flag);
+
 
 G_END_DECLS
 

@@ -28,6 +28,7 @@
 #include "cairo-label-path.h"
 #include "marshal.h"
 #include "color.h"
+#include "print.h"
 
 #include "debug.h"
 
@@ -47,6 +48,7 @@
 enum {
 	CLICKED,
 	PRESSED,
+	RELEASED,
 	LAST_SIGNAL
 };
 
@@ -70,6 +72,19 @@ struct _glMiniPreviewPrivate {
 	gint            first_i;
 	gint            last_i;
 	gint            prev_i;
+
+        gboolean        update_scheduled_flag;
+
+        glLabel        *label;
+        gint            page;
+        gint            n_sheets;
+        gint            n_copies;
+        gint            first;
+        gint            last;
+        gboolean        collate_flag;
+        gboolean        outline_flag;
+        gboolean        reverse_flag;
+        gboolean        crop_marks_flag;
 };
 
 
@@ -124,6 +139,9 @@ static void     draw_labels                    (glMiniPreview          *this,
 						cairo_t                *cr,
 						lglTemplate            *template,
 						gdouble                 line_width);
+static void     draw_rich_preview              (glMiniPreview          *this,
+						cairo_t                *cr);
+
 
 static gint     find_closest_label             (glMiniPreview          *this,
 						gdouble                 x,
@@ -176,6 +194,15 @@ gl_mini_preview_class_init (glMiniPreviewClass *class)
 			  gl_marshal_VOID__INT_INT,
 			  G_TYPE_NONE, 2, G_TYPE_INT, G_TYPE_INT);
 
+	mini_preview_signals[RELEASED] =
+	    g_signal_new ("released",
+			  G_OBJECT_CLASS_TYPE(object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (glMiniPreviewClass, released),
+			  NULL, NULL,
+			  gl_marshal_VOID__INT_INT,
+			  G_TYPE_NONE, 2, G_TYPE_INT, G_TYPE_INT);
+
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 }
 
@@ -222,6 +249,10 @@ gl_mini_preview_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_MINI_PREVIEW (object));
 
+        if (this->priv->label)
+        {
+                g_object_unref (this->priv->label);
+        }
 	lgl_template_free (this->priv->template);
 	g_free (this->priv->centers);
 	g_free (this->priv);
@@ -270,11 +301,11 @@ gl_mini_preview_construct (glMiniPreview *this,
 
 
 /****************************************************************************/
-/* Set label for mini-preview to determine geometry.                        */
+/* Set template for mini-preview to determine geometry.                     */
 /****************************************************************************/
 void
-gl_mini_preview_set_label_by_name (glMiniPreview *this,
-                                   const gchar   *name)
+gl_mini_preview_set_by_name (glMiniPreview *this,
+                             const gchar   *name)
 {
 	lglTemplate *template;
 
@@ -292,7 +323,7 @@ gl_mini_preview_set_label_by_name (glMiniPreview *this,
 
 
 /****************************************************************************/
-/* Set label for mini-preview to determine geometry.                        */
+/* Set template for mini-preview to determine geometry.                     */
 /****************************************************************************/
 void
 gl_mini_preview_set_template (glMiniPreview     *this,
@@ -351,12 +382,169 @@ gl_mini_preview_highlight_range (glMiniPreview *this,
 {
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	this->priv->highlight_first = first_label;
-	this->priv->highlight_last =  last_label;
+        if ( (first_label != this->priv->highlight_first) ||
+             (last_label  != this->priv->highlight_last) )
+        {
 
-	redraw (this);
+                this->priv->highlight_first = first_label;
+                this->priv->highlight_last =  last_label;
+
+                redraw (this);
+
+        }
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set label.                                                               */
+/****************************************************************************/
+void
+gl_mini_preview_set_label (glMiniPreview     *this,
+                           glLabel           *label)
+{
+        if ( this->priv->label )
+        {
+                g_object_unref (this->priv->label);
+        }
+        this->priv->label = g_object_ref (label);
+        redraw (this);
+}
+
+
+/****************************************************************************/
+/* Set page number.                                                         */
+/****************************************************************************/
+void
+gl_mini_preview_set_page (glMiniPreview     *this,
+                          gint               page)
+{
+        if ( page != this->priv->page )
+        {
+                this->priv->page = page;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set number of sheets.                                                    */
+/****************************************************************************/
+void
+gl_mini_preview_set_n_sheets (glMiniPreview     *this,
+                              gint               n_sheets)
+{
+        if ( n_sheets != this->priv->n_sheets )
+        {
+                this->priv->n_sheets = n_sheets;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set number of copies (merge only).                                       */
+/****************************************************************************/
+void
+gl_mini_preview_set_n_copies (glMiniPreview     *this,
+                              gint               n_copies)
+{
+        if ( n_copies != this->priv->n_copies )
+        {
+                this->priv->n_copies = n_copies;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set first label number on first sheet.                                   */
+/****************************************************************************/
+void
+gl_mini_preview_set_first (glMiniPreview     *this,
+                           gint               first)
+{
+        if ( first != this->priv->first )
+        {
+                this->priv->first = first;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set last label number on first sheet (non-merge only).                   */
+/****************************************************************************/
+void
+gl_mini_preview_set_last (glMiniPreview     *this,
+                          gint               last)
+{
+        if ( last != this->priv->last )
+        {
+                this->priv->last = last;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set collate flag (merge only).                                           */
+/****************************************************************************/
+void
+gl_mini_preview_set_collate_flag (glMiniPreview     *this,
+                                  gboolean           collate_flag)
+{
+        if ( collate_flag != this->priv->collate_flag )
+        {
+                this->priv->collate_flag = collate_flag;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set outline flag.                                                        */
+/****************************************************************************/
+void
+gl_mini_preview_set_outline_flag (glMiniPreview     *this,
+                                  gboolean           outline_flag)
+{
+        if ( outline_flag != this->priv->outline_flag )
+        {
+                this->priv->outline_flag = outline_flag;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set reverse flag.                                                        */
+/****************************************************************************/
+void
+gl_mini_preview_set_reverse_flag (glMiniPreview     *this,
+                                  gboolean           reverse_flag)
+{
+        if ( reverse_flag != this->priv->reverse_flag )
+        {
+                this->priv->reverse_flag = reverse_flag;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set crop marks flag.                                                     */
+/****************************************************************************/
+void
+gl_mini_preview_set_crop_marks_flag (glMiniPreview     *this,
+                                     gboolean           crop_marks_flag)
+{
+        if ( crop_marks_flag != this->priv->crop_marks_flag )
+        {
+                this->priv->crop_marks_flag = crop_marks_flag;
+                redraw (this);
+        }
 }
 
 
@@ -504,6 +692,10 @@ button_release_event_cb (GtkWidget      *widget,
 
 	}
 
+        g_signal_emit (G_OBJECT(this),
+                       mini_preview_signals[RELEASED],
+                       0, this->priv->first_i, this->priv->last_i);
+
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
 	return FALSE;
 }
@@ -555,6 +747,8 @@ expose_event_cb (GtkWidget       *widget,
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
+        this->priv->update_scheduled_flag = FALSE;
+
 	cr = gdk_cairo_create (widget->window);
 
 	cairo_rectangle (cr,
@@ -601,12 +795,14 @@ redraw (glMiniPreview      *this)
 	if (GTK_WIDGET (this->priv->canvas)->window)
 	{
 
-		region = gdk_drawable_get_clip_region (GTK_WIDGET (this->priv->canvas)->window);
+                if ( !this->priv->update_scheduled_flag )
+                {
+                        this->priv->update_scheduled_flag = TRUE;
 
-		gdk_window_invalidate_region (GTK_WIDGET (this->priv->canvas)->window, region, TRUE);
-		gdk_window_process_updates (GTK_WIDGET (this->priv->canvas)->window, TRUE);
-
-		gdk_region_destroy (region);
+                        region = gdk_drawable_get_clip_region (GTK_WIDGET (this->priv->canvas)->window);
+                        gdk_window_invalidate_region (GTK_WIDGET (this->priv->canvas)->window, region, TRUE);
+                        gdk_region_destroy (region);
+                }
 	}
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
@@ -645,6 +841,11 @@ draw (glMiniPreview  *this,
 			    1.0/scale);
 
 		draw_labels (this, cr, template, 1.0/scale);
+
+                if (this->priv->label)
+                {
+                        draw_rich_preview (this, cr);
+                }
 			     
 	}
 
@@ -734,7 +935,8 @@ draw_labels (glMiniPreview *this,
         gint                       i, n_labels;
         lglTemplateOrigin         *origins;
 	GtkStyle                  *style;
-	guint                      highlight_color, paper_color, outline_color;
+	guint                      base_color;
+        guint                      highlight_color, paper_color, outline_color;
 
         gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -744,9 +946,19 @@ draw_labels (glMiniPreview *this,
         origins  = lgl_template_frame_get_origins (frame);
 
 	style = gtk_widget_get_style (GTK_WIDGET(this));
-	highlight_color = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
+	base_color      = gl_color_from_gdk_color (&style->base[GTK_STATE_SELECTED]);
+
 	paper_color     = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
-	outline_color   = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);
+        highlight_color = gl_color_set_opacity (base_color, 0.10);
+        if (this->priv->label)
+        {
+                /* Outlines are more subtle when doing a rich preview. */
+                outline_color   = gl_color_set_opacity (base_color, 0.05);
+        }
+        else
+        {
+                outline_color   = gl_color_set_opacity (base_color, 1.00);
+        }
 
         for ( i=0; i < n_labels; i++ ) {
 
@@ -758,17 +970,13 @@ draw_labels (glMiniPreview *this,
 		if ( ((i+1) >= this->priv->highlight_first) &&
 		     ((i+1) <= this->priv->highlight_last) )
 		{
-			cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (highlight_color));
+			cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (highlight_color));
+                        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+                        cairo_fill_preserve (cr);
 		}
-		else
-		{
-			cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (paper_color));
-		}
-		cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
-		cairo_fill_preserve (cr);
 
 		cairo_set_line_width (cr, line_width);
-		cairo_set_source_rgb (cr, GL_COLOR_RGB_ARGS (outline_color));
+		cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (outline_color));
 		cairo_stroke (cr);
 
 		cairo_restore (cr);
@@ -778,6 +986,68 @@ draw_labels (glMiniPreview *this,
         g_free (origins);
 
         gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Draw rich preview using print renderers.                                 */
+/*--------------------------------------------------------------------------*/
+static void
+draw_rich_preview (glMiniPreview          *this,
+                   cairo_t                *cr)
+{
+        glMerge      *merge;
+        glPrintState  state;
+
+        merge = gl_label_get_merge (this->priv->label);
+
+        if (!merge)
+        {
+                gl_print_simple_sheet (this->priv->label,
+                                       cr,
+                                       this->priv->page,
+                                       this->priv->n_sheets,
+                                       this->priv->first,
+                                       this->priv->last,
+                                       this->priv->outline_flag,
+                                       this->priv->reverse_flag,
+                                       this->priv->crop_marks_flag);
+        }
+        else
+        {
+                /* FIXME: maybe the renderers should be more self contained.
+                 *        This will only work for the first page, since
+                 *        previous pages must be rendered to establish
+                 *        state.
+                 */
+                state.i_copy = 0;
+                state.p_record = (GList *)gl_merge_get_record_list (merge);
+
+                if (this->priv->collate_flag)
+                {
+                        gl_print_collated_merge_sheet (this->priv->label,
+                                                       cr,
+                                                       this->priv->page,
+                                                       this->priv->n_copies,
+                                                       this->priv->first,
+                                                       this->priv->outline_flag,
+                                                       this->priv->reverse_flag,
+                                                       this->priv->crop_marks_flag,
+                                                       &state);
+                }
+                else
+                {
+                        gl_print_uncollated_merge_sheet (this->priv->label,
+                                                         cr,
+                                                         this->priv->page,
+                                                         this->priv->n_copies,
+                                                         this->priv->first,
+                                                         this->priv->outline_flag,
+                                                         this->priv->reverse_flag,
+                                                         this->priv->crop_marks_flag,
+                                                         &state);
+                }
+        }
 }
 
 

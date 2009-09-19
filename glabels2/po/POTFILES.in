@@ -165,6 +165,7 @@ libglabels/xml-template.h
 [type: gettext/glade]data/builder/prefs-dialog.builder
 [type: gettext/glade]data/builder/property-bar.builder
 [type: gettext/glade]data/builder/template-designer.builder
+[type: gettext/glade]data/builder/print-op-dialog-custom-widget.builder
 
 [type: gettext/xml]data/templates/paper-sizes.xml
 [type: gettext/xml]data/templates/categories.xml

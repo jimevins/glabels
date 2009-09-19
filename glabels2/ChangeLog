@@ -1,3 +1,27 @@
+2009-09-18  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
+		Added missing file.
+	* src/mini-preview.h:
+	* src/mini-preview.c: (gl_mini_preview_class_init),
+	(gl_mini_preview_finalize), (gl_mini_preview_set_by_name),
+	(gl_mini_preview_highlight_range), (gl_mini_preview_set_label),
+	(gl_mini_preview_set_page), (gl_mini_preview_set_n_sheets),
+	(gl_mini_preview_set_n_copies), (gl_mini_preview_set_first),
+	(gl_mini_preview_set_last), (gl_mini_preview_set_collate_flag),
+	(gl_mini_preview_set_outline_flag),
+	(gl_mini_preview_set_reverse_flag),
+	(gl_mini_preview_set_crop_marks_flag), (button_release_event_cb),
+	(expose_event_cb), (redraw), (draw), (draw_labels),
+	(draw_rich_preview):
+		Added rich preview capability to mini preview.
+	* src/print-op-dialog.c: (create_custom_widget_cb),
+	(simple_sheets_radio_cb), (simple_first_spin_cb),
+	(simple_last_spin_cb), (preview_pressed_cb), (preview_released_cb),
+	(merge_spin_cb), (merge_collate_check_cb), (preview_clicked_cb),
+	(option_toggled_cb):
+		Use new rich preview capability of mini preview in print dialog.
+
 2009-09-17  Jim Evins  <evins@snaught.com>
 
 	* src/stock.c: (add_icons), (add_button_icon):
