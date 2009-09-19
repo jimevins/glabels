@@ -1,39 +1,29 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-
 /*
- *  (LIBGLABELS) Template library for GLABELS
+ *  db.c
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
- *  db.c:  template db module
+ *  This file is part of libglabels.
  *
- *  Copyright (C) 2003-2007  Jim Evins <evins@snaught.com>.
+ *  libglabels is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  *
- *  This file is part of the LIBGLABELS library.
- *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
- *
- *  This library is distributed in the hope that it will be useful,
+ *  libglabels is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, write to the Free
- *  Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
- *  MA 02111-1307, USA
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config.h>
 
 #include "db.h"
 
 #include <glib/gi18n.h>
-#include <glib/gmem.h>
-#include <glib/gstrfuncs.h>
-#include <glib/gdir.h>
-#include <glib/gmessages.h>
-#include <glib/ghash.h>
+#include <glib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -49,6 +39,7 @@
 /* Private types                             */
 /*===========================================*/
 
+
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
@@ -58,6 +49,7 @@ static GList *categories = NULL;
 static GList *templates  = NULL;
 
 static GHashTable *template_cache = NULL;
+
 
 /*===========================================*/
 /* Local function prototypes                 */
@@ -79,7 +71,6 @@ static GList *read_template_files_from_dir (GList       *templates,
                                             const gchar *dirname);
 
 static lglTemplate *template_full_page     (const gchar *page_size);
-
 
 
 /*===========================================*/
@@ -155,7 +146,6 @@ lgl_db_init (void)
                 init_template_cache ();
 	}
 }
-
 
 
 /*===========================================*/
@@ -442,6 +432,7 @@ lgl_db_is_paper_id_known (const gchar *id)
 
 	return FALSE;
 }
+
 
 /**
  * lgl_db_is_paper_id_other:
@@ -963,7 +954,6 @@ lgl_db_print_known_categories (void)
 }
 
 
-
 /*===========================================*/
 /* Brand db functions.                       */
 /*===========================================*/
@@ -1041,7 +1031,6 @@ lgl_db_free_brand_list (GList *brands)
 
 	g_list_free (brands);
 }
-
 
 
 /*===========================================*/
@@ -1587,6 +1576,7 @@ lgl_db_print_known_templates (void)
 
 }
 
+
 /**
  * lgl_db_print_aliases:
  *   @template: template
@@ -1613,3 +1603,12 @@ lgl_db_print_aliases (const lglTemplate *template)
 }
 
 
+
+/*
+ * Local Variables:       -- emacs
+ * mode: C                -- emacs
+ * c-basic-offset: 8      -- emacs
+ * tab-width: 8           -- emacs
+ * indent-tabs-mode: nil  -- emacs
+ * End:                   -- emacs
+ */
