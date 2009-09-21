@@ -7,7 +7,6 @@ builder_DATA = \
 	print-op-dialog-custom-widget.builder	\
 	wdgt-media-select.builder	\
 	merge-properties-dialog.builder	\
-	new-label-dialog.builder	\
 	template-designer.builder	\
 	prefs-dialog.builder		\
 	object-editor.builder

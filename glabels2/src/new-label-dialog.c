@@ -39,8 +39,6 @@
 
 struct _glNewLabelDialogPrivate {
 
-        GtkBuilder *builder;
-
 	GtkWidget  *media_select;
 	GtkWidget  *rotate_label;
 
@@ -58,9 +56,6 @@ struct _glNewLabelDialogPrivate {
 
 static void       gl_new_label_dialog_finalize        (GObject               *object);
 
-static void       gl_new_label_dialog_construct       (glNewLabelDialog      *dialog,
-						       GtkWindow             *win);
-
 static void       template_changed_cb                 (glWdgtMediaSelect     *select,
 						       gpointer               data);
 
@@ -71,6 +66,9 @@ static void       template_changed_cb                 (glWdgtMediaSelect     *se
 G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_DIALOG);
 
 
+/*****************************************************************************/
+/* Class Init Function.                                                      */
+/*****************************************************************************/
 static void
 gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 {
@@ -84,29 +82,69 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 }
 
 
+/*****************************************************************************/
+/* Object Instance Init Function.                                            */
+/*****************************************************************************/
 static void
 gl_new_label_dialog_init (glNewLabelDialog *dialog)
 {
+	GtkWidget    *label;
+	GtkWidget    *frame;
+	gchar        *name;
+
 	gl_debug (DEBUG_FILE, "START");
 
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));
 
 	dialog->priv = g_new0 (glNewLabelDialogPrivate, 1);
 
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), GL_HIG_PAD1);
 
-	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
-	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OK, GTK_RESPONSE_OK,
-				NULL);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                GTK_STOCK_OK, GTK_RESPONSE_OK,
+                                NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+
+
+        label = gtk_label_new (_("<b>Media type</b>"));
+        gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+        frame = gtk_frame_new ("");
+        gtk_frame_set_label_widget (GTK_FRAME (frame), label);
+        gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), frame, FALSE, FALSE, GL_HIG_PAD1);
+
+	dialog->priv->media_select = gl_wdgt_media_select_new ();
+        gtk_container_add (GTK_CONTAINER (frame), dialog->priv->media_select);
+
+        label = gtk_label_new (_("<b>Label orientation</b>"));
+        gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+        frame = gtk_frame_new ("");
+        gtk_frame_set_label_widget (GTK_FRAME (frame), label);
+        gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), frame, FALSE, FALSE, 0);
+
+	dialog->priv->rotate_label = gl_rotate_label_button_new ();
+        gtk_container_add (GTK_CONTAINER (frame), dialog->priv->rotate_label);
+
+	/* Sync template name from media select with rotate widget. */
+	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select));
+	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
+                                                  name);
+
+	g_signal_connect (G_OBJECT (dialog->priv->media_select), "changed",
+			  G_CALLBACK (template_changed_cb), dialog);
 
 	gl_debug (DEBUG_FILE, "END");
 }
 
 
+/*****************************************************************************/
+/* Finalize Function.                                                        */
+/*****************************************************************************/
 static void 
 gl_new_label_dialog_finalize (GObject *object)
 {
@@ -118,10 +156,6 @@ gl_new_label_dialog_finalize (GObject *object)
 	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-        if (dialog->priv->builder)
-        {
-                g_object_unref (dialog->priv->builder);
-        }
 	g_free (dialog->priv);
 
 	G_OBJECT_CLASS (gl_new_label_dialog_parent_class)->finalize (object);
@@ -143,66 +177,9 @@ gl_new_label_dialog_new (GtkWindow    *win)
 
 	dialog = GTK_WIDGET (g_object_new (GL_TYPE_NEW_LABEL_DIALOG, NULL));
 
-	gl_new_label_dialog_construct (GL_NEW_LABEL_DIALOG(dialog), win);
-
-	return dialog;
-}
-
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Construct dialog.                                              */
-/*--------------------------------------------------------------------------*/
-static void
-gl_new_label_dialog_construct (glNewLabelDialog   *dialog,
-			       GtkWindow          *win)
-{
-        GtkBuilder   *builder;
-        static gchar *object_ids[] = { "new_label_dialog_vbox", NULL };
-        GError       *error = NULL;
-	GtkWidget    *vbox, *media_select_vbox, *rotate_label_vbox;
-	gchar        *name;
-
-	gl_debug (DEBUG_FILE, "START");
-
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), win);
 
-        builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "new-label-dialog.builder",
-                                           object_ids,
-                                           &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (builder,
-                                     "new_label_dialog_vbox", &vbox,
-                                     "media_select_vbox",     &media_select_vbox,
-                                     "rotate_label_vbox",     &rotate_label_vbox,
-                                     NULL);
-
-	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
-        dialog->priv->builder = builder;
-
-	dialog->priv->media_select = gl_wdgt_media_select_new ();
-	gtk_box_pack_start (GTK_BOX (media_select_vbox),
-			    dialog->priv->media_select, FALSE, FALSE, 0);
-
-	dialog->priv->rotate_label = gl_rotate_label_button_new ();
-	gtk_box_pack_start (GTK_BOX (rotate_label_vbox),
-			    dialog->priv->rotate_label, FALSE, FALSE, 0);
-
-	/* Sync template name from media select with rotate widget. */
-	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select));
-	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
-                                              name);
-
-	g_signal_connect (G_OBJECT (dialog->priv->media_select), "changed",
-			  G_CALLBACK (template_changed_cb), dialog);
-
-	gl_debug (DEBUG_FILE, "END");
+	return dialog;
 }
 
 

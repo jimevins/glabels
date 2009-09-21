@@ -1,3 +1,18 @@
+2009-09-21  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
+	* data/builder/Makefile.am:
+	* data/builder/new-label-dialog.builder:
+		Removed trivial builder file for new label dialog.
+	* data/builder/wdgt-media-select.builder:
+		Changed focus behavior of widgets.
+	* src/new-label-dialog.c: (gl_new_label_dialog_init),
+	(gl_new_label_dialog_construct):
+		- Removed use of trivial builder file -- populate explicitely.
+		- Moved population code to init.
+		- OK button now has default focus.
+		- Some formatting cleanup.
+
 2009-09-19  Jim Evins  <evins@snaught.com>
 
 	* COPYING:

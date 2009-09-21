@@ -11,7 +11,6 @@
         <child>
           <object class="GtkNotebook" id="notebook">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <property name="border_width">12</property>
             <child>
               <object class="GtkVBox" id="recent_tab_vbox">
@@ -29,7 +28,6 @@
                     <child>
                       <object class="GtkTreeView" id="recent_treeview">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="headers_visible">False</property>
                       </object>
                     </child>
@@ -75,6 +73,7 @@
                         <child>
                           <object class="GtkComboBox" id="brand_combo">
                             <property name="visible">True</property>
+                            <property name="focus_on_click">False</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -106,6 +105,7 @@
                         <child>
                           <object class="GtkComboBox" id="page_size_combo">
                             <property name="visible">True</property>
+                            <property name="focus_on_click">False</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -136,6 +136,7 @@
                         <child>
                           <object class="GtkComboBox" id="category_combo">
                             <property name="visible">True</property>
+                            <property name="focus_on_click">False</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -167,7 +168,6 @@
                     <child>
                       <object class="GtkTreeView" id="search_all_treeview">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="headers_visible">False</property>
                       </object>
                     </child>
