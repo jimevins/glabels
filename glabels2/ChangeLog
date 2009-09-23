@@ -1,3 +1,13 @@
+2009-09-22  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
+		Include all (src/*.[ch]) source files.
+	* data/builder/merge-properties-dialog.builder:
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_construct), (type_changed_cb):
+		- OK button now has default focus.
+		- Some formatting cleanup.
+
 2009-09-21  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:

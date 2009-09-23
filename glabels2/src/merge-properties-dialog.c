@@ -55,6 +55,8 @@ struct _glMergePropertiesDialogPrivate {
 	GtkWidget    *select_all_button;
 	GtkWidget    *unselect_all_button;
 
+        GtkWidget    *ok_button;
+
 	gchar        *saved_src;
 
 };
@@ -117,6 +119,9 @@ static void unselect_all_button_clicked_cb        (GtkWidget                    
 G_DEFINE_TYPE (glMergePropertiesDialog, gl_merge_properties_dialog, GTK_TYPE_DIALOG);
 
 
+/*****************************************************************************/
+/* Class Init Function.                                                      */
+/*****************************************************************************/
 static void
 gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *class)
 {
@@ -130,31 +135,64 @@ gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *class)
 }
 
 
+/*****************************************************************************/
+/* Object Instance Init Function.                                            */
+/*****************************************************************************/
 static void
 gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 {
+	GtkBuilder        *builder;
+        static gchar      *object_ids[] = { "merge_properties_vbox", NULL };
+        GError            *error = NULL;
+	GtkWidget         *vbox;
+
 	gl_debug (DEBUG_MERGE, "START");
 
 	dialog->priv = g_new0 (glMergePropertiesDialogPrivate, 1);
 
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
+	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD1);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OK, GTK_RESPONSE_OK,
-				NULL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	dialog->priv->ok_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                                         GTK_STOCK_OK, GTK_RESPONSE_OK);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
-	g_signal_connect(G_OBJECT (dialog), "response",
-			 G_CALLBACK (response_cb), NULL);
+        builder = gtk_builder_new ();
+        gtk_builder_add_objects_from_file (builder,
+                                           GLABELS_BUILDER_DIR "merge-properties-dialog.builder",
+                                           object_ids,
+                                           &error);
+	if (error) {
+		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+                g_error_free (error);
+		return;
+	}
+
+        gl_util_get_builder_widgets (builder,
+                                     "merge_properties_vbox", &vbox,
+                                     "type_combo",            &dialog->priv->type_combo,
+                                     "location_vbox",         &dialog->priv->location_vbox,
+                                     "treeview",              &dialog->priv->treeview,
+                                     "select_all_button",     &dialog->priv->select_all_button,
+                                     "unselect_all_button",   &dialog->priv->unselect_all_button,
+                                     NULL);
+
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), vbox);
+        dialog->priv->builder = builder;
+
+	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
 
 
 	gl_debug (DEBUG_MERGE, "END");
 }
 
 
+/*****************************************************************************/
+/* Finalize Function.                                                        */
+/*****************************************************************************/
 static void 
 gl_merge_properties_dialog_finalize (GObject *object)
 {
@@ -209,15 +247,11 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 				      glLabel                 *label,
 				      GtkWindow               *window)
 {
-	GtkBuilder        *builder;
-        static gchar      *object_ids[] = { "merge_properties_vbox", NULL };
-        GError            *error = NULL;
 	gchar             *description;
 	glMergeSrcType     src_type;
 	gchar             *src;
 	gchar             *name, *title;
 	GList             *texts;
-	GtkWidget         *vbox;
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection  *selection;
@@ -231,31 +265,6 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 		gtk_window_set_transient_for (GTK_WINDOW(dialog), GTK_WINDOW(window));
 		gtk_window_set_destroy_with_parent (GTK_WINDOW(dialog), TRUE);
 	}
-
-        builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "merge-properties-dialog.builder",
-                                           object_ids,
-                                           &error);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
-                g_error_free (error);
-		return;
-	}
-
-        gl_util_get_builder_widgets (builder,
-                                     "merge_properties_vbox", &vbox,
-                                     "type_combo",            &dialog->priv->type_combo,
-                                     "location_vbox",         &dialog->priv->location_vbox,
-                                     "treeview",              &dialog->priv->treeview,
-                                     "select_all_button",     &dialog->priv->select_all_button,
-                                     "unselect_all_button",   &dialog->priv->unselect_all_button,
-                                     NULL);
-
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), vbox);
-        dialog->priv->builder = builder;
-
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
 
 	dialog->priv->label = label;
 
@@ -296,6 +305,8 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 						     GTK_FILE_CHOOSER_ACTION_OPEN);
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (dialog->priv->src_entry),
 					       src);
+                gtk_file_chooser_button_set_focus_on_click (GTK_FILE_CHOOSER_BUTTON (dialog->priv->src_entry),
+                                                            FALSE);
 		g_signal_connect (G_OBJECT (dialog->priv->src_entry),
 				  "selection-changed",
 				  G_CALLBACK (src_changed_cb), dialog);
@@ -331,7 +342,6 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 							   "active", SELECT_COLUMN,
 							   "visible", IS_RECORD_COLUMN,
 							   NULL);
-	gtk_tree_view_column_set_clickable (column, TRUE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->priv->treeview), column);
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (G_OBJECT (renderer), "yalign", 0.0, NULL);
@@ -362,6 +372,12 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 	g_free (description);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+        gtk_widget_grab_focus (dialog->priv->ok_button);
+        gtk_widget_grab_default (dialog->priv->ok_button);
+
+	g_signal_connect(G_OBJECT (dialog), "response",
+			 G_CALLBACK (response_cb), NULL);
 
 	gl_debug (DEBUG_MERGE, "END");
 }
@@ -403,6 +419,8 @@ type_changed_cb (GtkWidget               *widget,
 		dialog->priv->src_entry =
 			gtk_file_chooser_button_new (_("Select merge-database source"),
 						     GTK_FILE_CHOOSER_ACTION_OPEN);
+                gtk_file_chooser_button_set_focus_on_click (GTK_FILE_CHOOSER_BUTTON (dialog->priv->src_entry),
+                                                            FALSE);
 		if (dialog->priv->saved_src != NULL) {
 			gl_debug (DEBUG_MERGE, "Setting src = \"%s\"", dialog->priv->saved_src);
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (dialog->priv->src_entry),
