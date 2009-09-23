@@ -32,7 +32,8 @@
 #include "mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"
 #include "print-op-dialog.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "debug.h"
 
@@ -443,7 +444,7 @@ construct_start_page (glTemplateDesigner      *dialog,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "start_page", &dialog->priv->start_page,
                                      NULL);
 
@@ -476,7 +477,7 @@ construct_name_page (glTemplateDesigner      *dialog,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "name_page",          &dialog->priv->name_page,
                                      "brand_entry",        &dialog->priv->brand_entry,
                                      "part_num_entry",     &dialog->priv->part_num_entry,
@@ -522,7 +523,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "pg_size_page",     &dialog->priv->pg_size_page,
                                      "pg_size_combo",    &dialog->priv->pg_size_combo,
                                      "pg_w_spin",        &dialog->priv->pg_w_spin,
@@ -532,7 +533,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
                                      NULL);
 
 
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
+	gl_combo_util_add_text_model (GTK_COMBO_BOX (dialog->priv->pg_size_combo));
 
         gtk_assistant_append_page (GTK_ASSISTANT (dialog),
                                    dialog->priv->pg_size_page);
@@ -549,11 +550,11 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 
 	/* Load page size combo */
 	page_sizes = lgl_db_get_paper_name_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
+	gl_combo_util_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
 	lgl_db_free_paper_name_list (page_sizes);
 	default_page_size_id = gl_prefs_get_page_size ();
 	default_page_size_name = lgl_db_lookup_paper_name_from_id (default_page_size_id);
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
+	gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
 
 	/* Apply units to spinbuttons and units labels. */
@@ -592,7 +593,7 @@ construct_shape_page (glTemplateDesigner      *dialog,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "shape_page",        &dialog->priv->shape_page,
                                      "shape_rect_radio",  &dialog->priv->shape_rect_radio,
                                      "shape_round_radio", &dialog->priv->shape_round_radio,
@@ -628,7 +629,7 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "rect_size_page",           &dialog->priv->rect_size_page,
                                      "rect_image",               &dialog->priv->rect_image,
                                      "rect_w_spin",              &dialog->priv->rect_w_spin,
@@ -730,7 +731,7 @@ construct_round_size_page (glTemplateDesigner      *dialog,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "round_size_page",          &dialog->priv->round_size_page,
                                      "round_image",              &dialog->priv->round_image,
                                      "round_r_spin",             &dialog->priv->round_r_spin,
@@ -802,7 +803,7 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "cd_size_page",          &dialog->priv->cd_size_page,
                                      "cd_image",              &dialog->priv->cd_image,
                                      "cd_radius_spin",        &dialog->priv->cd_radius_spin,
@@ -900,7 +901,7 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
 
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "nlayouts_page",   &dialog->priv->nlayouts_page,
                                      "nlayouts_image1", &dialog->priv->nlayouts_image1,
                                      "nlayouts_image2", &dialog->priv->nlayouts_image2,
@@ -944,7 +945,7 @@ construct_layout_page (glTemplateDesigner      *dialog,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "layout_page",           &dialog->priv->layout_page,
                                      "layout1_head_label",    &dialog->priv->layout1_head_label,
                                      "layout1_nx_spin",       &dialog->priv->layout1_nx_spin,
@@ -1072,7 +1073,7 @@ construct_finish_page (glTemplateDesigner      *dialog,
 {
 	gl_debug (DEBUG_TEMPLATE, "START");
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "finish_page", &dialog->priv->finish_page,
                                      NULL);
 

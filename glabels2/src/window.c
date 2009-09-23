@@ -27,7 +27,7 @@
 
 #include "ui.h"
 #include "ui-commands.h"
-#include "util.h"
+#include "file-util.h"
 #include "xml-label.h"
 #include "prefs.h"
 #include "file.h"
@@ -300,7 +300,7 @@ gl_window_new_from_file (const gchar *filename)
 
 	window = GL_WINDOW (gl_window_new ());
 
-	abs_filename = gl_util_make_absolute (filename);
+	abs_filename = gl_file_util_make_absolute (filename);
 	label = gl_xml_label_open (abs_filename, &status);
 	g_free (abs_filename);
 

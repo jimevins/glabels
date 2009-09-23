@@ -39,7 +39,7 @@
 #include "label-image.h"
 #include "label-barcode.h"
 #include "xml-label-04.h"
-#include "util.h"
+#include "str-util.h"
 
 #include "debug.h"
 
@@ -441,7 +441,7 @@ xml_parse_object_text (xmlNodePtr  node,
 
 	/* justify attr */
 	string = lgl_xml_get_prop_string (node, "justify", NULL);
-	align = gl_util_string_to_align (string);
+	align = gl_str_util_string_to_align (string);
 	g_free (string);
 	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align);
 
@@ -929,7 +929,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 
 	/* Font weight attr */
 	string = lgl_xml_get_prop_string (node, "font_weight", NULL);
-	font_weight = gl_util_string_to_weight (string);
+	font_weight = gl_str_util_string_to_weight (string);
 	g_free (string);
 	gl_label_object_set_font_weight (object, font_weight);
 
@@ -1253,7 +1253,7 @@ xml_create_object_text (xmlNodePtr     root,
 
 	/* justify attr */
 	align = gl_label_object_get_text_alignment (object);
-	lgl_xml_set_prop_string (node, "justify", gl_util_align_to_string (align));
+	lgl_xml_set_prop_string (node, "justify", gl_str_util_align_to_string (align));
 
 	/* auto_shrink attr */
 	auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
@@ -1728,7 +1728,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	align = gl_label_object_get_text_alignment (GL_LABEL_OBJECT(object_text));
 	lgl_xml_set_prop_string (node, "font_family", font_family);
 	lgl_xml_set_prop_double (node, "font_size", font_size);
-	lgl_xml_set_prop_string (node, "font_weight", gl_util_weight_to_string (font_weight));
+	lgl_xml_set_prop_string (node, "font_weight", gl_str_util_weight_to_string (font_weight));
 	lgl_xml_set_prop_boolean (node, "font_italic", font_italic_flag);
 	
 	lgl_xml_set_prop_double (node, "line_spacing", text_line_spacing);

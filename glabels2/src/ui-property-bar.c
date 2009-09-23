@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#include "util.h"
+#include "builder-util.h"
 #include "font-combo.h"
 #include "color-combo-button.h"
 #include "stock-pixmaps/stockpixbufs.h"
@@ -251,7 +251,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 		return;
 	}
 
-        gl_util_get_builder_widgets (builder,
+        gl_builder_util_get_widgets (builder,
                                      "property_toolbar",        &this->priv->tool_bar,
                                      "font_family_eventbox",    &this->priv->font_family_eventbox,
                                      "font_size_spin",          &this->priv->font_size_spin,

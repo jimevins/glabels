@@ -29,7 +29,8 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -70,7 +71,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "bc_page_vbox",      &editor->priv->bc_page_vbox,
                                      "bc_style_combo",    &editor->priv->bc_style_combo,
                                      "bc_text_check",     &editor->priv->bc_text_check,
@@ -94,13 +95,13 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
                             editor->priv->bc_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));
 
 	/* Load barcode styles */
 	styles = gl_barcode_get_styles_list ();
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo),
-				       styles);
+	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo),
+                                   styles);
 	gl_barcode_free_styles_list (styles);
 
 	/* Modify widgets */
@@ -232,8 +233,8 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 
         style_string = gl_barcode_id_to_name (id);
  
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo),
-					   style_string);
+	gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo),
+                                       style_string);
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check),
                                       text_flag);
@@ -349,8 +350,8 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
 		
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo),
-						   color_node->key);
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo),
+                                               color_node->key);
 	}	
 	
         editor->priv->stop_signals = FALSE;

@@ -29,7 +29,7 @@
 #include "prefs.h"
 #include "color.h"
 #include "wdgt-merge-menu.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -69,7 +69,7 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "edit_page_vbox",           &editor->priv->edit_page_vbox,
                                      "edit_text_view",           &editor->priv->edit_text_view,
                                      "edit_insert_field_button", &editor->priv->edit_insert_field_button,

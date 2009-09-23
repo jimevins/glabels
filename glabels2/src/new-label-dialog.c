@@ -28,7 +28,6 @@
 #include "hig.h"
 #include "wdgt-media-select.h"
 #include "rotate-label-button.h"
-#include "util.h"
 
 #include "debug.h"
 

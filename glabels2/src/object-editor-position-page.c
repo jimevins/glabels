@@ -27,7 +27,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -67,7 +67,7 @@ gl_object_editor_prepare_position_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "pos_page_vbox",     &editor->priv->pos_page_vbox,
                                      "pos_x_spin",        &editor->priv->pos_x_spin,
                                      "pos_y_spin",        &editor->priv->pos_y_spin,

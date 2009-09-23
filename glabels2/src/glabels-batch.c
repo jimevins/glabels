@@ -29,7 +29,7 @@
 #include "xml-label.h"
 #include "print.h"
 #include "print-op.h"
-#include "util.h"
+#include "file-util.h"
 #include "prefs.h"
 #include "debug.h"
 
@@ -147,7 +147,7 @@ main (int argc, char **argv)
                                                   (char *)p->data );
                                 }
                         }
-                        abs_fn = gl_util_make_absolute ( output );
+                        abs_fn = gl_file_util_make_absolute ( output );
                         frame = (lglTemplateFrame *)label->template->frames->data;
 
                         print_op = gl_print_op_new (label);

@@ -10,6 +10,8 @@ src/bc-iec18004.c
 src/bc-iec18004.h
 src/bc-postnet.c
 src/bc-postnet.h
+src/builder-util.c
+src/builder-util.h
 src/cairo-ellipse-path.c
 src/cairo-ellipse-path.h
 src/cairo-label-path.c
@@ -30,12 +32,16 @@ src/color-combo-menu.h
 src/color.h
 src/color-swatch.c
 src/color-swatch.h
+src/combo-util.c
+src/combo-util.h
 src/critical-error-handler.c
 src/critical-error-handler.h
 src/debug.c
 src/debug.h
 src/file.c
 src/file.h
+src/file-util.c
+src/file-util.h
 src/font-combo.c
 src/font-combo.h
 src/font-combo-menu.c
@@ -123,6 +129,8 @@ src/rotate-label-button.c
 src/rotate-label-button.h
 src/stock.c
 src/stock.h
+src/str-util.c
+src/str-util.h
 src/template-designer.c
 src/template-designer.h
 src/text-node.c
@@ -137,8 +145,6 @@ src/ui-sidebar.c
 src/ui-sidebar.h
 src/ui-util.c
 src/ui-util.h
-src/util.c
-src/util.h
 src/view-barcode.c
 src/view-barcode.h
 src/view-box.c

@@ -28,7 +28,7 @@
 
 #include "xml-label.h"
 #include "recent.h"
-#include "util.h"
+#include "file-util.h"
 #include "window.h"
 #include "new-label-dialog.h"
 #include "libglabels/libglabels.h"
@@ -420,7 +420,7 @@ gl_file_open_real (const gchar     *filename,
 
 	gl_debug (DEBUG_FILE, "START");
 
-	abs_filename = gl_util_make_absolute (filename);
+	abs_filename = gl_file_util_make_absolute (filename);
 	label = gl_xml_label_open (abs_filename, &status);
 	if (!label) {
 		GtkWidget *dialog;
@@ -651,7 +651,7 @@ save_as_response (GtkDialog     *chooser,
 
 		} else {
 
-			full_filename = gl_util_add_extension (raw_filename);
+			full_filename = gl_file_util_add_extension (raw_filename);
 
 			filename = g_filename_to_utf8 (full_filename, -1,
 						       NULL, NULL, NULL);

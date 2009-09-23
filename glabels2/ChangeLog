@@ -1,6 +1,78 @@
 2009-09-22  Jim Evins  <evins@snaught.com>
 
 	* po/POTFILES.in:
+	* src/Makefile.am:
+	* src/builder-util.c:
+	* src/builder-util.h:
+	* src/combo-util.c:
+	* src/combo-util.h:
+	* src/file-util.c:
+	* src/file-util.h:
+	* src/str-util.c:
+	* src/str-util.h:
+		Split "catch all" util module into separate modules for different
+		domains of utilities.
+	* src/file.c: (gl_file_open_real), (save_as_response):
+	* src/glabels-batch.c: (main):
+	* src/label.c: (gl_label_get_short_name):
+	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),
+	(gl_merge_properties_dialog_construct):
+	* src/new-label-dialog.c:
+	* src/object-editor-bc-page.c: (gl_object_editor_prepare_bc_page),
+	(gl_object_editor_set_bc_style), (gl_object_editor_set_bc_color):
+	* src/object-editor-data-page.c:
+	(gl_object_editor_prepare_data_page), (gl_object_editor_set_data):
+	* src/object-editor-edit-page.c:
+	(gl_object_editor_prepare_edit_page):
+	* src/object-editor-fill-page.c:
+	(gl_object_editor_prepare_fill_page),
+	(gl_object_editor_set_fill_color):
+	* src/object-editor-image-page.c:
+	(gl_object_editor_prepare_image_page),
+	(gl_object_editor_set_image):
+	* src/object-editor-line-page.c:
+	(gl_object_editor_prepare_line_page),
+	(gl_object_editor_set_line_color):
+	* src/object-editor-lsize-page.c:
+	(gl_object_editor_prepare_lsize_page):
+	* src/object-editor-position-page.c:
+	(gl_object_editor_prepare_position_page):
+	* src/object-editor-shadow-page.c:
+	(gl_object_editor_prepare_shadow_page),
+	(gl_object_editor_set_shadow_color):
+	* src/object-editor-size-page.c:
+	(gl_object_editor_prepare_size_page):
+	* src/object-editor-text-page.c:
+	(gl_object_editor_prepare_text_page),
+	(gl_object_editor_set_text_color):
+	* src/object-editor.c: (gl_object_editor_init),
+	(gl_object_editor_set_key_names):
+	* src/prefs-dialog.c: (gl_prefs_dialog_construct),
+	(construct_locale_page), (construct_object_page):
+	* src/prefs-model.c: (gl_prefs_model_save_settings),
+	(gl_prefs_model_load_settings):
+	* src/print-op-dialog.c: (create_custom_widget_cb):
+	* src/template-designer.c: (construct_start_page),
+	(construct_name_page), (construct_pg_size_page),
+	(construct_shape_page), (construct_rect_size_page),
+	(construct_round_size_page), (construct_cd_size_page),
+	(construct_nlayouts_page), (construct_layout_page),
+	(construct_finish_page):
+	* src/ui-property-bar.c: (gl_ui_property_bar_construct):
+	* src/wdgt-media-select.c: (gl_wdgt_media_select_construct),
+	(gl_wdgt_media_select_set_filter_parameters),
+	(get_label_size_desc):
+	* src/window.c: (gl_window_new_from_file):
+	* src/xml-label-04.c: (xml04_parse_text_props):
+	* src/xml-label.c: (xml_parse_object_text),
+	(xml_parse_toplevel_span), (xml_create_object_text),
+	(xml_create_toplevel_span):
+		Reconciled all references to old utils module with new domain
+		specific utilities modules.
+
+2009-09-22  Jim Evins  <evins@snaught.com>
+
+	* po/POTFILES.in:
 		Include all (src/*.[ch]) source files.
 	* data/builder/merge-properties-dialog.builder:
 	* src/merge-properties-dialog.c: (gl_merge_properties_dialog_init),

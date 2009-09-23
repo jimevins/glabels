@@ -31,7 +31,7 @@
 #include "color.h"
 #include "font-combo.h"
 #include "font-util.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "debug.h"
 
@@ -235,7 +235,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dialog)
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "prefs_notebook", &notebook,
                                      NULL);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, FALSE, FALSE, 0);
@@ -285,7 +285,7 @@ static void
 construct_locale_page (glPrefsDialog *dialog)
 {
 
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "units_points_radio",        &dialog->priv->units_points_radio,
                                      "units_inches_radio",        &dialog->priv->units_inches_radio,
                                      "units_mm_radio",            &dialog->priv->units_mm_radio,
@@ -317,7 +317,7 @@ construct_locale_page (glPrefsDialog *dialog)
 static void
 construct_object_page (glPrefsDialog *dialog)
 {
-        gl_util_get_builder_widgets (dialog->priv->builder,
+        gl_builder_util_get_widgets (dialog->priv->builder,
                                      "text_family_hbox",       &dialog->priv->text_family_hbox,
                                      "text_size_spin",         &dialog->priv->text_size_spin,
                                      "text_bold_toggle",       &dialog->priv->text_bold_toggle,

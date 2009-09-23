@@ -29,7 +29,9 @@
 #include <libglabels/libglabels.h>
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
-#include "util.h"
+#include "str-util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 #include "color.h"
 #include "marshal.h"
 
@@ -234,7 +236,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
 		return;
 	}
 
-        gl_util_get_builder_widgets (builder,
+        gl_builder_util_get_widgets (builder,
                                      "wdgt_media_select_hbox", &hbox,
                                      "notebook",               &media_select->priv->notebook,
 
@@ -283,30 +285,30 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
 
         /* Brand selection control */
-        gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->brand_combo));
+        gl_combo_util_add_text_model (GTK_COMBO_BOX (media_select->priv->brand_combo));
         brands = lgl_db_get_brand_list (NULL, NULL);
         brands = g_list_prepend (brands, g_strdup (_("Any")));
-        gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->brand_combo), brands);
+        gl_combo_util_set_strings (GTK_COMBO_BOX (media_select->priv->brand_combo), brands);
         lgl_db_free_brand_list (brands);
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->brand_combo),
-                                           _("Any"));
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (media_select->priv->brand_combo),
+                                       _("Any"));
 
         /* Page size selection control */
-        gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->page_size_combo));
+        gl_combo_util_add_text_model (GTK_COMBO_BOX (media_select->priv->page_size_combo));
         page_sizes = lgl_db_get_paper_name_list ();
         page_sizes = g_list_prepend (page_sizes, g_strdup (_("Any")));
-        gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->page_size_combo), page_sizes);
+        gl_combo_util_set_strings (GTK_COMBO_BOX (media_select->priv->page_size_combo), page_sizes);
         lgl_db_free_paper_name_list (page_sizes);
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
-                                           page_size_name);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
+                                       page_size_name);
 
         /* Category selection control */
-        gl_util_combo_box_add_text_model (GTK_COMBO_BOX (media_select->priv->category_combo));
+        gl_combo_util_add_text_model (GTK_COMBO_BOX (media_select->priv->category_combo));
         categories = lgl_db_get_category_name_list ();
         categories = g_list_prepend (categories, g_strdup (_("Any")));
-        gl_util_combo_box_set_strings (GTK_COMBO_BOX (media_select->priv->category_combo), categories);
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->category_combo),
-                                           _("Any"));
+        gl_combo_util_set_strings (GTK_COMBO_BOX (media_select->priv->category_combo), categories);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (media_select->priv->category_combo),
+                                       _("Any"));
         lgl_db_free_category_name_list (categories);
 
         /* Search all treeview */
@@ -616,8 +618,8 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
                 page_size_name = g_strdup (_("Any"));
         }
 
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
-                                           page_size_name);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (media_select->priv->page_size_combo),
+                                       page_size_name);
 
         category_name = lgl_db_lookup_category_name_from_id (category_id);
         if (category_name == NULL)
@@ -625,8 +627,8 @@ gl_wdgt_media_select_set_filter_parameters (glWdgtMediaSelect *media_select,
                 category_name = g_strdup (_("Any"));
         }
 
-        gl_util_combo_box_set_active_text (GTK_COMBO_BOX (media_select->priv->category_combo),
-                                           category_name);
+        gl_combo_util_set_active_text (GTK_COMBO_BOX (media_select->priv->category_combo),
+                                       category_name);
         g_free (page_size_name);
         g_free (category_name);
 
@@ -677,8 +679,8 @@ get_label_size_desc (const lglTemplate *template)
                 if ( units == LGL_UNITS_INCH ) {
                         gchar *xstr, *ystr;
 
-                        xstr = gl_util_fraction (frame->rect.w*units_per_point);
-                        ystr = gl_util_fraction (frame->rect.h*units_per_point);
+                        xstr = gl_str_util_fraction_to_string (frame->rect.w*units_per_point);
+                        ystr = gl_str_util_fraction_to_string (frame->rect.h*units_per_point);
                         string = g_strdup_printf (_("%s x %s %s"),
                                                   xstr, ystr, units_string);
                         g_free (xstr);
@@ -694,7 +696,7 @@ get_label_size_desc (const lglTemplate *template)
                 if ( units == LGL_UNITS_INCH ) {
                         gchar *dstr;
 
-                        dstr = gl_util_fraction (2.0*frame->round.r*units_per_point);
+                        dstr = gl_str_util_fraction_to_string (2.0*frame->round.r*units_per_point);
                         string = g_strdup_printf (_("%s %s diameter"),
                                                   dstr, units_string);
                         g_free (dstr);
@@ -708,7 +710,7 @@ get_label_size_desc (const lglTemplate *template)
                 if ( units == LGL_UNITS_INCH ) {
                         gchar *dstr;
 
-                        dstr = gl_util_fraction (2.0*frame->cd.r1*units_per_point);
+                        dstr = gl_str_util_fraction_to_string (2.0*frame->cd.r1*units_per_point);
                         string = g_strdup_printf (_("%s %s diameter"),
                                                   dstr, units_string);
                         g_free (dstr);

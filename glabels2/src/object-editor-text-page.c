@@ -31,7 +31,8 @@
 #include "color.h"
 #include "font-combo.h"
 #include "font-util.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -71,7 +72,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "text_page_vbox",         &editor->priv->text_page_vbox,
                                      "text_family_hbox",       &editor->priv->text_family_hbox,
                                      "text_size_spin",         &editor->priv->text_size_spin,
@@ -100,7 +101,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                             editor->priv->text_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
 
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
@@ -465,21 +466,20 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 	}
 	
 	if (!text_color_node->field_flag) {
+		gl_debug (DEBUG_EDITOR, "color field false");
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->text_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, TRUE);
-		gl_debug (DEBUG_EDITOR, "color field false 0");
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, FALSE);
 		
 	} else {
+		gl_debug (DEBUG_EDITOR, "color field true");
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->text_color_key_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, TRUE);
 		
-		gl_debug (DEBUG_EDITOR, "color field true 1");
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo), "");
-		gl_debug (DEBUG_EDITOR, "color field true 2");
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo), "");
 	}
 
         editor->priv->stop_signals = FALSE;

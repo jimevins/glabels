@@ -28,7 +28,7 @@
 
 #include <libglabels/libglabels.h>
 #include "marshal.h"
-#include "util.h"
+#include "str-util.h"
 #include "color.h"
 
 #include "debug.h"
@@ -81,9 +81,9 @@
 
 #define DEFAULT_FONT_FAMILY        "Sans"
 #define DEFAULT_FONT_SIZE          14.0
-#define DEFAULT_FONT_WEIGHT_STRING gl_util_weight_to_string (PANGO_WEIGHT_NORMAL)
+#define DEFAULT_FONT_WEIGHT_STRING gl_str_util_weight_to_string (PANGO_WEIGHT_NORMAL)
 #define DEFAULT_FONT_ITALIC_FLAG   FALSE
-#define DEFAULT_TEXT_ALIGN_STRING  gl_util_align_to_string (PANGO_ALIGN_LEFT)
+#define DEFAULT_TEXT_ALIGN_STRING  gl_str_util_align_to_string (PANGO_ALIGN_LEFT)
 #define DEFAULT_TEXT_COLOR         GL_COLOR (0,0,0)
 #define DEFAULT_TEXT_LINE_SPACING  1.0
 
@@ -273,7 +273,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 
 	gconf_client_set_string (prefs_model->gconf_client,
 				 BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
-				 gl_util_weight_to_string(prefs_model->default_font_weight),
+				 gl_str_util_weight_to_string(prefs_model->default_font_weight),
 				 NULL);
 
 	gconf_client_set_int    (prefs_model->gconf_client,
@@ -283,7 +283,7 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 
 	gconf_client_set_string (prefs_model->gconf_client,
 				 BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
-				 gl_util_align_to_string(prefs_model->default_text_alignment),
+				 gl_str_util_align_to_string(prefs_model->default_text_alignment),
 				 NULL);
 
 	gconf_client_set_float  (prefs_model->gconf_client,
@@ -430,7 +430,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		get_string (prefs_model->gconf_client,
 			    BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
 			    DEFAULT_FONT_WEIGHT_STRING);
-	prefs_model->default_font_weight = gl_util_string_to_weight( string );
+	prefs_model->default_font_weight = gl_str_util_string_to_weight( string );
 	g_free( string );
 
 	prefs_model->default_text_color =
@@ -442,7 +442,7 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		get_string (prefs_model->gconf_client,
 			    BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
 			    DEFAULT_TEXT_ALIGN_STRING);
-	prefs_model->default_text_alignment = gl_util_string_to_align( string );
+	prefs_model->default_text_alignment = gl_str_util_string_to_align( string );
 	g_free( string );
 
 	prefs_model->default_text_line_spacing =

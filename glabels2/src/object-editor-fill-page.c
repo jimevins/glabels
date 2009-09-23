@@ -29,7 +29,8 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -67,7 +68,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "fill_page_vbox",   &editor->priv->fill_page_vbox,
                                      "fill_color_hbox",  &editor->priv->fill_color_hbox,
                                      "fill_key_combo",   &editor->priv->fill_key_combo,
@@ -82,7 +83,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
                             editor->priv->fill_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
 
 	/* Modify widgets based on configuration */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio), TRUE);
@@ -152,8 +153,8 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->fill_key_combo, TRUE);
 		
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo),
-						   color_node->key);
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo),
+                                               color_node->key);
 	}
 	
         editor->priv->stop_signals = FALSE;

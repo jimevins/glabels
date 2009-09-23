@@ -30,7 +30,7 @@
 
 #include "mini-preview.h"
 #include "label.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "pixmaps/collate.xpm"
 #include "pixmaps/nocollate.xpm"
@@ -260,7 +260,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 		return NULL;
 	}
 
-        gl_util_get_builder_widgets (builder,
+        gl_builder_util_get_widgets (builder,
                                      "print_custom_widget_hbox", &hbox,
                                      "simple_frame",             &op->priv->simple_frame,
                                      "simple_sheets_radio",      &op->priv->simple_sheets_radio,

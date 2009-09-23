@@ -68,6 +68,8 @@ glabels_SOURCES = 			\
 	ui-sidebar.c			\
 	file.h				\
 	file.c				\
+	file-util.h			\
+	file-util.c			\
 	new-label-dialog.h		\
 	new-label-dialog.c		\
 	recent.h			\
@@ -207,8 +209,12 @@ glabels_SOURCES = 			\
 	cairo-markup-path.h		\
 	cairo-ellipse-path.c		\
 	cairo-ellipse-path.h		\
-	util.c				\
-	util.h				\
+	combo-util.c			\
+	combo-util.h			\
+	builder-util.c			\
+	builder-util.h			\
+	str-util.c			\
+	str-util.h			\
 	color.c				\
 	color.h				\
 	debug.c 			\
@@ -218,6 +224,8 @@ glabels_SOURCES = 			\
 
 glabels_batch_SOURCES = 		\
 	glabels-batch.c			\
+	file-util.h			\
+	file-util.c			\
 	print.c				\
 	print.h				\
 	print-op.c			\
@@ -272,8 +280,8 @@ glabels_batch_SOURCES = 		\
 	prefs-model.h 			\
 	font-util.c			\
 	font-util.h			\
-	util.c				\
-	util.h				\
+	str-util.c			\
+	str-util.h			\
 	color.c				\
 	color.h				\
 	debug.c 			\

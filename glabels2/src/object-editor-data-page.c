@@ -28,7 +28,8 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -66,7 +67,7 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "data_page_vbox",     &editor->priv->data_page_vbox,
                                      "data_literal_radio", &editor->priv->data_literal_radio,
                                      "data_key_radio",     &editor->priv->data_key_radio,
@@ -74,7 +75,7 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
                                      "data_key_combo",     &editor->priv->data_key_combo,
                                      NULL);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->data_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->data_key_combo));
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->data_page_vbox);
@@ -187,8 +188,8 @@ gl_object_editor_set_data (glObjectEditor      *editor,
 					  !editor->priv->data_format_fixed_flag);
                                                                                 
 
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo),
-						   text_node->data);
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo),
+                                               text_node->data);
         }
                                                                                 
 

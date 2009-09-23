@@ -25,7 +25,7 @@
 #include <glib/gi18n.h>
 
 #include "prefs.h"
-#include "util.h"
+#include "file-util.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -551,7 +551,7 @@ gl_label_get_short_name (glLabel *label)
 		gchar *temp_name, *short_name;
 
 		temp_name = g_path_get_basename ( label->priv->filename );
-		short_name = gl_util_remove_extension (temp_name);
+		short_name = gl_file_util_remove_extension (temp_name);
 		g_free (temp_name);
 
 		return short_name;

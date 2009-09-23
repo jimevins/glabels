@@ -28,7 +28,8 @@
 
 #include "label.h"
 #include "merge.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 #include "hig.h"
 
 #include "debug.h"
@@ -171,7 +172,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 		return;
 	}
 
-        gl_util_get_builder_widgets (builder,
+        gl_builder_util_get_widgets (builder,
                                      "merge_properties_vbox", &vbox,
                                      "type_combo",            &dialog->priv->type_combo,
                                      "location_vbox",         &dialog->priv->location_vbox,
@@ -183,7 +184,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), vbox);
         dialog->priv->builder = builder;
 
-	gl_util_combo_box_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
+	gl_combo_util_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));
 
 
 	gl_debug (DEBUG_MERGE, "END");
@@ -289,11 +290,11 @@ gl_merge_properties_dialog_construct (glMergePropertiesDialog *dialog,
 			gl_debug (DEBUG_MERGE, "    \"%s\"", p->data);
 		}
 	}
-	gl_util_combo_box_set_strings (GTK_COMBO_BOX (dialog->priv->type_combo),
-				       texts);
+	gl_combo_util_set_strings (GTK_COMBO_BOX (dialog->priv->type_combo),
+                                   texts);
 	gl_merge_free_descriptions (&texts);
-	gl_util_combo_box_set_active_text (GTK_COMBO_BOX (dialog->priv->type_combo),
-					   description);
+	gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->type_combo),
+                                       description);
 	g_signal_connect (G_OBJECT (dialog->priv->type_combo), "changed",
 			  G_CALLBACK (type_changed_cb), dialog);
 

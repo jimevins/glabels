@@ -27,7 +27,8 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -74,7 +75,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "img_page_vbox",   &editor->priv->img_page_vbox,
                                      "img_file_radio",  &editor->priv->img_file_radio,
                                      "img_key_radio",   &editor->priv->img_key_radio,
@@ -82,7 +83,7 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
                                      "img_key_combo",   &editor->priv->img_key_combo,
                                      NULL);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->img_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->img_key_combo));
 
 	/* Modify file button properties. */
 	add_image_filters_to_chooser (GTK_FILE_CHOOSER (editor->priv->img_file_button));
@@ -177,8 +178,8 @@ gl_object_editor_set_image (glObjectEditor      *editor,
                 gtk_widget_set_sensitive (editor->priv->img_file_button, FALSE);
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, TRUE);
                                                                                 
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo),
-						   text_node->data);
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo),
+                                               text_node->data);
         }
                                                                                 
         editor->priv->stop_signals = FALSE;

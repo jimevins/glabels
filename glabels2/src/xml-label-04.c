@@ -31,7 +31,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
-#include "util.h"
+#include "str-util.h"
 
 #include "debug.h"
 
@@ -211,12 +211,12 @@ xml04_parse_text_props (xmlNodePtr    object_node,
 	font_family = xmlGetProp (object_node, (xmlChar *)"font_family");
 	font_size = lgl_xml_get_prop_double (object_node, "font_size", 0);
 	string = xmlGetProp (object_node, (xmlChar *)"font_weight");
-	font_weight = gl_util_string_to_weight ((gchar *)string);
+	font_weight = gl_str_util_string_to_weight ((gchar *)string);
 	xmlFree (string);
 	font_italic_flag = lgl_xml_get_prop_boolean (object_node, "font_italic", FALSE);
 
 	string = xmlGetProp (object_node, (xmlChar *)"justify");
-	align = gl_util_string_to_align ((gchar *)string);
+	align = gl_str_util_string_to_align ((gchar *)string);
 	xmlFree (string);
 
 	color_node = gl_color_node_new_default ();

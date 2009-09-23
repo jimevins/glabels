@@ -27,7 +27,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -72,7 +72,7 @@ gl_object_editor_prepare_lsize_page (glObjectEditor       *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "lsize_page_vbox",     &editor->priv->lsize_page_vbox,
                                      "lsize_r_spin",        &editor->priv->lsize_r_spin,
                                      "lsize_theta_spin",    &editor->priv->lsize_theta_spin,

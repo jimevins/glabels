@@ -28,7 +28,7 @@
 
 #include "prefs.h"
 #include "wdgt-chain-button.h"
-#include "util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -74,7 +74,7 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "size_page_vbox",          &editor->priv->size_page_vbox,
                                      "size_w_spin",             &editor->priv->size_w_spin,
                                      "size_h_spin",             &editor->priv->size_h_spin,

@@ -29,7 +29,8 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
-#include "util.h"
+#include "combo-util.h"
+#include "builder-util.h"
 
 #include "object-editor-private.h"
 
@@ -72,7 +73,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
 	/* Extract widgets from XML tree. */
-        gl_util_get_builder_widgets (editor->priv->builder,
+        gl_builder_util_get_widgets (editor->priv->builder,
                                      "shadow_page_vbox",      &editor->priv->shadow_page_vbox,
                                      "shadow_enable_check",   &editor->priv->shadow_enable_check,
                                      "shadow_controls_table", &editor->priv->shadow_controls_table,
@@ -93,7 +94,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
         gtk_container_add (GTK_CONTAINER (editor->priv->shadow_color_hbox),
                            editor->priv->shadow_color_combo);
 
-	gl_util_combo_box_add_text_model ( GTK_COMBO_BOX(editor->priv->shadow_key_combo));
+	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->shadow_key_combo));
 
 	/* Get configuration information */
 	units_string = gl_prefs_get_units_string ();
@@ -236,8 +237,8 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->shadow_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->shadow_key_combo, TRUE);
 		
-		gl_util_combo_box_set_active_text (GTK_COMBO_BOX (editor->priv->shadow_key_combo),
-						   color_node->key);
+		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->shadow_key_combo),
+                                               color_node->key);
 	}
 	
         editor->priv->stop_signals = FALSE;
