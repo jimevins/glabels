@@ -1,6 +1,6 @@
-LIB_BARCODE_DIR = ../barcode-0.98
-LIB_IEC16022_DIR = ../iec16022-0.2.1
-LIB_QRENCODE_DIR = ../qrencode-3.1.0
+LIB_BARCODE_DIR  = ../bc-backends/barcode-0.98
+LIB_IEC16022_DIR = ../bc-backends/iec16022-0.2.1
+LIB_QRENCODE_DIR = ../bc-backends/qrencode-3.1.0
 
 SUBDIRS= pixmaps stock-pixmaps
 
