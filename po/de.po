@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 18:07+0200\n"
+"POT-Creation-Date: 2009-09-29 19:53+0200\n"
 "PO-Revision-Date: 2009-09-20 18:09+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -16,23 +16,382 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/glabels.c:62 ../src/glabels-batch.c:67
-msgid "[FILE...]"
-msgstr "[DATEI...]"
+#: ../src/bc.c:65
+msgid "POSTNET (any)"
+msgstr "POSTNET (allgemein)"
 
-#: ../src/glabels.c:79
-msgid "Launch gLabels label and business card designer."
-msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
+#: ../src/bc.c:68
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (nur ZIP)"
 
-#: ../src/glabels.c:87 ../src/glabels-batch.c:104
+#: ../src/bc.c:71
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: ../src/bc.c:74
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc.c:77
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:80
+msgid "EAN (any)"
+msgstr "EAN (any)"
+
+#: ../src/bc.c:83
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc.c:86
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc.c:89
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc.c:92
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc.c:95
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc.c:98
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc.c:101
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A oder UPC-E)"
+
+#: ../src/bc.c:104
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc.c:107
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc.c:110
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc.c:113
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc.c:116
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc.c:119
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc.c:122
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc.c:125
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc.c:128
+msgid "Code 39"
+msgstr "Code 39"
+
+#: ../src/bc.c:131
+msgid "Code 128"
+msgstr "Code 128"
+
+#: ../src/bc.c:134
+msgid "Code 128C"
+msgstr "Code 128C"
+
+#: ../src/bc.c:137
+msgid "Code 128B"
+msgstr "Code 128B"
+
+#: ../src/bc.c:140
+msgid "Interleaved 2 of 5"
+msgstr "Interleaved 2 of 5"
+
+#: ../src/bc.c:143
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc.c:146
+msgid "MSI"
+msgstr "MSI"
+
+#: ../src/bc.c:149
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:152
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:155
+msgid "IEC18004 (QRCode)"
+msgstr "IEC18004 (QRCode)"
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+msgid "Default Color"
+msgstr "Standardfarbe"
+
+#: ../src/color-combo-menu.c:83
+msgid "Dark Red"
+msgstr "Dunkelrot"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr "Braun"
+
+#: ../src/color-combo-menu.c:85
+msgid "Dark Goldenrod"
+msgstr "Dunkle Goldrute"
+
+#: ../src/color-combo-menu.c:86
+msgid "Dark Green"
+msgstr "Dunkles Grün"
+
+#: ../src/color-combo-menu.c:87
+msgid "Dark Cyan"
+msgstr "Dunkles Cyan-Blau"
+
+#: ../src/color-combo-menu.c:88
+msgid "Navy Blue"
+msgstr "Marineblau"
+
+#: ../src/color-combo-menu.c:89
+msgid "Dark Violet"
+msgstr "Dunkles Violett"
+
+#: ../src/color-combo-menu.c:91
+msgid "Red"
+msgstr "Rot"
+
+#: ../src/color-combo-menu.c:92
+msgid "Orange"
+msgstr "Orange"
+
+#: ../src/color-combo-menu.c:93
+msgid "Dark Yellow"
+msgstr "Dunkles Gelb"
+
+#: ../src/color-combo-menu.c:94
+msgid "Medium green"
+msgstr "Mittelgrün"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr "Türkis"
+
+#: ../src/color-combo-menu.c:96
+msgid "Blue"
+msgstr "Blau"
+
+#: ../src/color-combo-menu.c:97
+msgid "Purple"
+msgstr "Purpur"
+
+#: ../src/color-combo-menu.c:99
+msgid "Salmon"
+msgstr "Lachs"
+
+#: ../src/color-combo-menu.c:100
+msgid "Gold"
+msgstr "Gold"
+
+#: ../src/color-combo-menu.c:101
+msgid "Yellow"
+msgstr "Gelb"
+
+#: ../src/color-combo-menu.c:102
+msgid "Green"
+msgstr "Grün"
+
+#: ../src/color-combo-menu.c:103
+msgid "Cyan"
+msgstr "Cyan-Blau"
+
+#: ../src/color-combo-menu.c:104
+msgid "SkyBlue"
+msgstr "Himmelblau"
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr "Violett"
+
+#: ../src/color-combo-menu.c:107
+msgid "Pink"
+msgstr "Pink"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr "Khaki"
+
+#: ../src/color-combo-menu.c:109
+msgid "Light Yellow"
+msgstr "Helles Gelb"
+
+#: ../src/color-combo-menu.c:110
+msgid "Light Green"
+msgstr "Helles Grün"
+
+#: ../src/color-combo-menu.c:111
+msgid "Light Cyan"
+msgstr "Helles Cyan-Blau"
+
+#: ../src/color-combo-menu.c:112
+msgid "Slate Gray"
+msgstr "Schiefergrau"
+
+#: ../src/color-combo-menu.c:113
+msgid "Thistle"
+msgstr "Distel"
+
+#: ../src/color-combo-menu.c:115
+msgid "White"
+msgstr "Weiß"
+
+#: ../src/color-combo-menu.c:116
 #, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+msgid "10% Gray"
+msgstr "10% Grau"
+
+#: ../src/color-combo-menu.c:117
+#, c-format
+msgid "25% Gray"
+msgstr "25% Grau"
+
+#: ../src/color-combo-menu.c:118
+#, c-format
+msgid "40% Gray"
+msgstr "40% Grau"
+
+#: ../src/color-combo-menu.c:119
+#, c-format
+msgid "50% Gray"
+msgstr "50% Grau"
+
+#: ../src/color-combo-menu.c:120
+#, c-format
+msgid "60% Gray"
+msgstr "60% Grau"
+
+#: ../src/color-combo-menu.c:121
+msgid "Black"
+msgstr "Schwarz"
+
+#: ../src/color-combo-menu.c:249 ../src/color-combo-menu.c:368
+msgid "Custom Color"
+msgstr "Benutzerdefinierte Farbe"
+
+#: ../src/color-combo-menu.c:314
+#, c-format
+msgid "Custom Color #%u"
+msgstr "Benutzerdefinierte Farbe #%u"
+
+#: ../src/critical-error-handler.c:70
+msgid "gLabels Fatal Error!"
+msgstr "Schwerwiegender Fehler in gLabels!"
+
+#: ../src/file.c:86
+msgid "New Label or Card"
+msgstr "Neues Etikett oder neue Karte"
+
+#: ../src/file.c:188
+msgid "Label properties"
+msgstr "Etiketten-Eigenschaften"
+
+#: ../src/file.c:291 ../src/file.c:581
+msgid "All files"
+msgstr "Alle Dateien"
+
+#: ../src/file.c:296 ../src/file.c:586
+msgid "gLabels documents"
+msgstr "gLabels-Dokumente"
+
+#: ../src/file.c:343 ../src/file.c:644
+msgid "Empty file name selection"
+msgstr "Auswahl des Dateinamens ist leer"
+
+#: ../src/file.c:346 ../src/file.c:362
+msgid "Please select a file or supply a valid file name"
 msgstr ""
-"%s\n"
-"Rufen Sie %s --help« auf, um eine vollständige Liste der verfügbaren "
-"Befehlszeilenoptionen zu sehen.\n"
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+
+#: ../src/file.c:359
+msgid "File does not exist"
+msgstr "Datei existiert nicht"
+
+#: ../src/file.c:434
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "Datei »%s« konnte nicht geöffnet werden"
+
+#: ../src/file.c:437
+msgid "Not a supported file format"
+msgstr "Kein unterstütztes Dateiformat"
+
+#: ../src/file.c:515 ../src/file.c:694
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "Datei »%s« konnte nicht gespeichert werden"
+
+#: ../src/file.c:519 ../src/file.c:698
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Fehler während des Speicherns. Datei wurde noch nicht gespeichert."
+
+#: ../src/file.c:559
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "»%s« speichern unter"
+
+#: ../src/file.c:647
+msgid "Please supply a valid file name"
+msgstr "Bitte geben Sie einen gültigen Dateinamen an"
+
+#: ../src/file.c:668
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Datei »%s« überschreiben?"
+
+#: ../src/file.c:672
+msgid "File already exists."
+msgstr "Datei existiert bereits."
+
+#: ../src/file.c:768
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
+
+#: ../src/file.c:772
+msgid "Your changes will be lost if you don't save them."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+
+#: ../src/file.c:775
+msgid "Close without saving"
+msgstr "Schließen, ohne zu speichern"
+
+#: ../src/font-combo-menu.c:127
+msgid "Proportional fonts"
+msgstr "Proportionale Schriften"
+
+#: ../src/font-combo-menu.c:142
+msgid "Fixed-width fonts"
+msgstr "Dicktengleiche Schriften"
+
+#: ../src/font-combo-menu.c:157
+msgid "All fonts"
+msgstr "Alle Schriften"
 
 #: ../src/glabels-batch.c:51
 msgid "set output filename (default=\"output.pdf\")"
@@ -85,9 +444,23 @@ msgstr "Schnittmarken drucken"
 msgid "input file for merging"
 msgstr "Eingabedatei zum Mischen"
 
+#: ../src/glabels-batch.c:67 ../src/glabels.c:62
+msgid "[FILE...]"
+msgstr "[DATEI...]"
+
 #: ../src/glabels-batch.c:96
 msgid "Print files created with gLabels."
 msgstr "Mit gLabels erstellte Dateien drucken."
+
+#: ../src/glabels-batch.c:104 ../src/glabels.c:87
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Rufen Sie %s --help« auf, um eine vollständige Liste der verfügbaren "
+"Befehlszeilenoptionen zu sehen.\n"
 
 #: ../src/glabels-batch.c:146
 #, c-format
@@ -100,13 +473,162 @@ msgstr ""
 msgid "cannot open glabels file %s\n"
 msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
 
-#: ../src/window.c:256
-msgid "(none) - gLabels"
-msgstr "(Unbenannt) - gLabels"
+#: ../src/glabels.c:79
+msgid "Launch gLabels label and business card designer."
+msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
 
-#: ../src/window.c:435
-msgid "(modified)"
-msgstr "(geändert)"
+#: ../src/label-barcode.c:435
+msgid "Barcode data empty"
+msgstr "Strichcode-Daten sind leer"
+
+#: ../src/label-barcode.c:439
+msgid "Invalid barcode data"
+msgstr "Ungültige Strichcode-Daten"
+
+#: ../src/label.c:547
+msgid "Untitled"
+msgstr "Unbenannt"
+
+#: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
+msgid "None"
+msgstr "Keine"
+
+#: ../src/merge-evolution.c:316
+msgid "Couldn't construct query"
+msgstr "Abfrage konnte nicht erstellt werden"
+
+#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
+msgid "Couldn't open addressbook."
+msgstr "Adressbuch konnte nicht geöffnet werden"
+
+#: ../src/merge-evolution.c:348
+msgid "Couldn't list available fields."
+msgstr "Verfügbare Felder konnten nicht aufgelistet werden."
+
+#: ../src/merge-evolution.c:384
+msgid "Couldn't get contacts."
+msgstr "Kontakte konnten nicht geholt werden."
+
+#: ../src/merge-init.c:57
+msgid "Text file with comma delimeters (CSV)"
+msgstr "Textdatei mit Kommata als Trennern (CSV)"
+
+#: ../src/merge-init.c:64
+msgid "Text file with colon delimeters"
+msgstr "Textdatei mit Semikola als Trennern"
+
+#: ../src/merge-init.c:71
+msgid "Text file with tab delimeters"
+msgstr "Textdatei mit Tabulatoren als Trennern"
+
+#: ../src/merge-init.c:80
+msgid "Data from default Evolution Addressbook"
+msgstr "Daten aus dem vorgegebenen Evolution-Adressbuch"
+
+#: ../src/merge-init.c:86
+msgid "Data from a file containing VCards"
+msgstr "Daten aus einer Datei, die VCards enthält"
+
+#: ../src/merge-properties-dialog.c:279
+msgid "Merge Properties"
+msgstr "Mischeinstellungen"
+
+#: ../src/merge-properties-dialog.c:305 ../src/merge-properties-dialog.c:421
+msgid "Select merge-database source"
+msgstr "Wählen Sie die einzumischende Datenquelle"
+
+#: ../src/merge-properties-dialog.c:316 ../src/merge-properties-dialog.c:443
+msgid "N/A"
+msgstr "Nicht verfügbar"
+
+#: ../src/merge-properties-dialog.c:342
+msgid "Select"
+msgstr "Markieren"
+
+#: ../src/merge-properties-dialog.c:349
+msgid "Record/Field"
+msgstr "Feld"
+
+#: ../src/merge-properties-dialog.c:357
+#: ../data/builder/object-editor.builder.h:10
+msgid "Data"
+msgstr "Wert"
+
+#: ../src/merge-properties-dialog.c:436
+msgid "Fixed"
+msgstr "Fixiert"
+
+#: ../src/new-label-dialog.c:112
+msgid "<b>Media type</b>"
+msgstr "<b>Medientyp</b>"
+
+#: ../src/new-label-dialog.c:122
+msgid "<b>Label orientation</b>"
+msgstr "<b>Ausrichtung des Etiketts</b>"
+
+#: ../src/object-editor-bc-page.c:91 ../src/object-editor-shadow-page.c:91
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:337
+#: ../src/ui-property-bar.c:278
+msgid "Default"
+msgstr "Standard"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:343
+#: ../src/ui-property-bar.c:290
+msgid "No Fill"
+msgstr "Keine Füllung"
+
+#: ../src/object-editor-image-page.c:270
+msgid "All Files"
+msgstr "Alle Dateien"
+
+#: ../src/object-editor-image-page.c:275
+msgid "All Images"
+msgstr "Alle Bilder"
+
+#: ../src/object-editor-image-page.c:290
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:340
+#: ../src/ui-property-bar.c:302
+msgid "No Line"
+msgstr "Keine Linie"
+
+#. Should not happen
+#: ../src/prefs.c:156 ../src/prefs.c:163
+#: ../data/builder/object-editor.builder.h:42
+#: ../data/builder/prefs-dialog.builder.h:22
+msgid "points"
+msgstr "Punkte"
+
+#: ../src/prefs.c:158 ../data/builder/object-editor.builder.h:41
+#: ../data/builder/template-designer.builder.h:64
+msgid "inches"
+msgstr "Zoll"
+
+#: ../src/prefs.c:160
+msgid "mm"
+msgstr "mm"
+
+#: ../src/prefs-dialog.c:172 ../data/builder/prefs-dialog.builder.h:21
+msgid "gLabels Preferences"
+msgstr "gLabels-Einstellungen"
+
+#. ===================================================================
+#: ../src/print-op.c:203 ../src/print-op-dialog.c:217
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:6
+#: ../templates/misc-iso-templates.xml.h:34
+msgid "Labels"
+msgstr "Labels"
+
+#: ../src/rotate-label-button.c:122
+msgid "Normal"
+msgstr "Normal"
+
+#: ../src/rotate-label-button.c:133
+msgid "Rotated"
+msgstr "Gedreht"
 
 #: ../src/stock.c:70
 msgid "_Select Mode"
@@ -211,6 +733,58 @@ msgstr "Verknüpft"
 #: ../src/stock.c:96 ../src/stock.c:98
 msgid "Not Linked"
 msgstr "Nicht verknüpft"
+
+#: ../src/template-designer.c:401
+msgid "gLabels Template Designer"
+msgstr "gLabels Vorlagen-Designer"
+
+#: ../src/template-designer.c:456
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: ../src/template-designer.c:495
+msgid "Name and Description"
+msgstr "Name und Beschreibung"
+
+#: ../src/template-designer.c:543
+msgid "Page Size"
+msgstr "Seitenformat"
+
+#: ../src/template-designer.c:609
+msgid "Label or Card Shape"
+msgstr "Form des neuen Etiketts oder der neuen Karte"
+
+#: ../src/template-designer.c:655
+msgid "Label or Card Size"
+msgstr "Größe des neuen Etiketts oder der neuen Karte"
+
+#: ../src/template-designer.c:751
+msgid "Label Size (round)"
+msgstr "Etikettengröße (rund)"
+
+#: ../src/template-designer.c:829
+msgid "Label Size (CD/DVD)"
+msgstr "Etikettengröße (CD/DVD)"
+
+#: ../src/template-designer.c:917
+msgid "Number of Layouts"
+msgstr "Anzahl der Layouts"
+
+#: ../src/template-designer.c:981
+msgid "Layout(s)"
+msgstr "Layout(s)"
+
+#: ../src/template-designer.c:1086
+msgid "Design Completed"
+msgstr "Design ist komplett"
+
+#: ../src/template-designer.c:1259
+msgid ""
+"<span foreground='red' weight='bold'>Brand and part# match an existing "
+"template!</span>"
+msgstr ""
+"<span foreground='red' weight='bold'>Für diese Marke und Nummer wurde eine "
+"Vorlage gefunden!</span>"
 
 #. Menu entries.
 #: ../src/ui.c:88
@@ -635,7 +1209,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:433
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:439
 msgid "Grid"
@@ -643,7 +1218,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:441
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:447
 msgid "Markup"
@@ -672,26 +1248,6 @@ msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr ""
 "Die Sichtbarkeit der Zeichenwerkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
-
-#: ../src/ui-property-bar.c:278 ../src/prefs-dialog.c:337
-#: ../src/object-editor-bc-page.c:90 ../src/object-editor-text-page.c:96
-#: ../src/object-editor-shadow-page.c:90
-msgid "Default"
-msgstr "Standard"
-
-#: ../src/ui-property-bar.c:290 ../src/prefs-dialog.c:343
-#: ../src/object-editor-fill-page.c:78
-msgid "No Fill"
-msgstr "Keine Füllung"
-
-#: ../src/ui-property-bar.c:302 ../src/prefs-dialog.c:340
-#: ../src/object-editor-line-page.c:78
-msgid "No Line"
-msgstr "Keine Linie"
-
-#: ../src/ui-sidebar.c:154
-msgid "Object properties"
-msgstr "Objekteigenschaften"
 
 #: ../src/ui-commands.c:1100
 msgid "Glabels includes contributions from:"
@@ -740,102 +1296,14 @@ msgstr ""
 msgid "glabels"
 msgstr "glabels"
 
-#: ../src/file.c:86
-msgid "New Label or Card"
-msgstr "Neues Etikett oder neue Karte"
+#: ../src/ui-sidebar.c:154
+msgid "Object properties"
+msgstr "Objekteigenschaften"
 
-#: ../src/file.c:188
-msgid "Label properties"
-msgstr "Etiketten-Eigenschaften"
-
-#: ../src/file.c:291 ../src/file.c:581
-msgid "All files"
-msgstr "Alle Dateien"
-
-#: ../src/file.c:296 ../src/file.c:586
-msgid "gLabels documents"
-msgstr "gLabels-Dokumente"
-
-#: ../src/file.c:343 ../src/file.c:644
-msgid "Empty file name selection"
-msgstr "Auswahl des Dateinamens ist leer"
-
-#: ../src/file.c:346 ../src/file.c:362
-msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
-
-#: ../src/file.c:359
-msgid "File does not exist"
-msgstr "Datei existiert nicht"
-
-#: ../src/file.c:434
-#, c-format
-msgid "Could not open file \"%s\""
-msgstr "Datei »%s« konnte nicht geöffnet werden"
-
-#: ../src/file.c:437
-msgid "Not a supported file format"
-msgstr "Kein unterstütztes Dateiformat"
-
-#: ../src/file.c:515 ../src/file.c:694
-#, c-format
-msgid "Could not save file \"%s\""
-msgstr "Datei »%s« konnte nicht gespeichert werden"
-
-#: ../src/file.c:519 ../src/file.c:698
-msgid "Error encountered during save.  The file is still not saved."
-msgstr "Fehler während des Speicherns. Datei wurde noch nicht gespeichert."
-
-#: ../src/file.c:559
-#, c-format
-msgid "Save \"%s\" as"
-msgstr "»%s« speichern unter"
-
-#: ../src/file.c:647
-msgid "Please supply a valid file name"
-msgstr "Bitte geben Sie einen gültigen Dateinamen an"
-
-#: ../src/file.c:668
-#, c-format
-msgid "Overwrite file \"%s\"?"
-msgstr "Datei »%s« überschreiben?"
-
-#: ../src/file.c:672
-msgid "File already exists."
-msgstr "Datei existiert bereits."
-
-#: ../src/file.c:768
-#, c-format
-msgid "Save changes to document \"%s\" before closing?"
-msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
-
-#: ../src/file.c:772
-msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
-
-#: ../src/file.c:775
-msgid "Close without saving"
-msgstr "Schließen, ohne zu speichern"
-
-#. Should not happen
-#: ../src/prefs.c:156 ../src/prefs.c:163
-#: ../data/builder/object-editor.builder.h:42
-#: ../data/builder/prefs-dialog.builder.h:22
-msgid "points"
-msgstr "Punkte"
-
-#: ../src/prefs.c:158 ../data/builder/object-editor.builder.h:41
-#: ../data/builder/template-designer.builder.h:64
-msgid "inches"
-msgstr "Zoll"
-
-#: ../src/prefs.c:160
-msgid "mm"
-msgstr "mm"
-
-#: ../src/prefs-dialog.c:172 ../data/builder/prefs-dialog.builder.h:21
-msgid "gLabels Preferences"
-msgstr "gLabels-Einstellungen"
+#. Build editor.
+#: ../src/view-barcode.c:176
+msgid "Barcode object properties"
+msgstr "Eigenschaften des Strichcode-Objekts"
 
 #. Build editor.
 #: ../src/view-box.c:176
@@ -848,261 +1316,91 @@ msgid "Ellipse object properties"
 msgstr "Eigenschaften des Ellipsen-Objekts"
 
 #. Build editor.
-#: ../src/view-line.c:176
-msgid "Line object properties"
-msgstr "Eigenschaften des Linien-Objekts"
-
-#. Build editor.
 #: ../src/view-image.c:176
 msgid "Image object properties"
 msgstr "Eigenschaften des Bild-Objekts"
+
+#. Build editor.
+#: ../src/view-line.c:176
+msgid "Line object properties"
+msgstr "Eigenschaften des Linien-Objekts"
 
 #. Build editor.
 #: ../src/view-text.c:180
 msgid "Text object properties"
 msgstr "Eigenschaften des Text-Objekts"
 
-#. Build editor.
-#: ../src/view-barcode.c:176
-msgid "Barcode object properties"
-msgstr "Eigenschaften des Strichcode-Objekts"
+#: ../src/warning-handler.c:69
+msgid "gLabels Error!"
+msgstr "gLabels-Fehler!"
 
-#: ../src/object-editor-image-page.c:269
-msgid "All Files"
-msgstr "Alle Dateien"
+#: ../src/wdgt-media-select.c:290 ../src/wdgt-media-select.c:294
+#: ../src/wdgt-media-select.c:299 ../src/wdgt-media-select.c:308
+#: ../src/wdgt-media-select.c:311 ../src/wdgt-media-select.c:405
+#: ../src/wdgt-media-select.c:618 ../src/wdgt-media-select.c:627
+msgid "Any"
+msgstr "Beliebig"
 
-#: ../src/object-editor-image-page.c:274
-msgid "All Images"
-msgstr "Alle Bilder"
-
-#: ../src/object-editor-image-page.c:289
+#: ../src/wdgt-media-select.c:653
 #, c-format
-msgid "%s (*.%s)"
-msgstr "%s (*.%s)"
+msgid "%d per sheet"
+msgstr "%d pro Seite"
 
-#: ../src/merge-properties-dialog.c:269
-msgid "Merge Properties"
-msgstr "Mischeinstellungen"
+#: ../src/wdgt-media-select.c:684
+#, c-format
+msgid "%s x %s %s"
+msgstr "%s x %s %s"
 
-#: ../src/merge-properties-dialog.c:295 ../src/merge-properties-dialog.c:404
-msgid "Select merge-database source"
-msgstr "Wählen Sie die einzumischende Datenquelle"
+#: ../src/wdgt-media-select.c:689
+#, c-format
+msgid "%.5g x %.5g %s"
+msgstr "%.5g x %.5g %s"
 
-#: ../src/merge-properties-dialog.c:304 ../src/merge-properties-dialog.c:424
-msgid "N/A"
-msgstr "Nicht verfügbar"
+#: ../src/wdgt-media-select.c:700 ../src/wdgt-media-select.c:714
+#, c-format
+msgid "%s %s diameter"
+msgstr "%s %s Durchmesser"
 
-#: ../src/merge-properties-dialog.c:330
-msgid "Select"
-msgstr "Markieren"
+#: ../src/wdgt-media-select.c:704 ../src/wdgt-media-select.c:718
+#, c-format
+msgid "%.5g %s diameter"
+msgstr "%.5g %s Durchmesser"
 
-#: ../src/merge-properties-dialog.c:338
-msgid "Record/Field"
-msgstr "Feld"
+#: ../src/wdgt-media-select.c:793
+msgid "No recent templates found."
+msgstr "Keine zuletzt benutzten Vorlagen gefunden."
 
-#: ../src/merge-properties-dialog.c:346
-#: ../data/builder/object-editor.builder.h:10
-msgid "Data"
-msgstr "Wert"
-
-#: ../src/merge-properties-dialog.c:417
-msgid "Fixed"
-msgstr "Fixiert"
-
-#. ===================================================================
-#: ../src/print-op.c:203
-#: ../data/builder/print-op-dialog-custom-widget.builder.h:6
-#: ../templates/misc-iso-templates.xml.h:34
-msgid "Labels"
-msgstr "Labels"
-
-#: ../src/template-designer.c:400
-msgid "gLabels Template Designer"
-msgstr "gLabels Vorlagen-Designer"
-
-#: ../src/template-designer.c:455
-msgid "Welcome"
-msgstr "Willkommen"
-
-#: ../src/template-designer.c:494
-msgid "Name and Description"
-msgstr "Name und Beschreibung"
-
-#: ../src/template-designer.c:542
-msgid "Page Size"
-msgstr "Seitenformat"
-
-#: ../src/template-designer.c:608
-msgid "Label or Card Shape"
-msgstr "Form des neuen Etiketts oder der neuen Karte"
-
-#: ../src/template-designer.c:654
-msgid "Label or Card Size"
-msgstr "Größe des neuen Etiketts oder der neuen Karte"
-
-#: ../src/template-designer.c:750
-msgid "Label Size (round)"
-msgstr "Etikettengröße (rund)"
-
-#: ../src/template-designer.c:828
-msgid "Label Size (CD/DVD)"
-msgstr "Etikettengröße (CD/DVD)"
-
-#: ../src/template-designer.c:916
-msgid "Number of Layouts"
-msgstr "Anzahl der Layouts"
-
-#: ../src/template-designer.c:980
-msgid "Layout(s)"
-msgstr "Layout(s)"
-
-#: ../src/template-designer.c:1085
-msgid "Design Completed"
-msgstr "Design ist komplett"
-
-#: ../src/template-designer.c:1258
-msgid ""
-"<span foreground='red' weight='bold'>Brand and part# match an existing "
-"template!</span>"
+#: ../src/wdgt-media-select.c:794
+msgid "Try selecting a template from the \"Search all templates\" page."
 msgstr ""
-"<span foreground='red' weight='bold'>Für diese Marke und Nummer wurde eine "
-"Vorlage gefunden!</span>"
+"Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
 
-#: ../src/bc.c:65
-msgid "POSTNET (any)"
-msgstr "POSTNET (allgemein)"
+#: ../src/wdgt-media-select.c:874
+msgid "No match."
+msgstr "Keine Treffer."
 
-#: ../src/bc.c:68
-msgid "POSTNET-5 (ZIP only)"
-msgstr "POSTNET-5 (nur ZIP)"
+#: ../src/wdgt-media-select.c:875
+msgid "Try selecting a different brand, page size or category."
+msgstr ""
+"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
-#: ../src/bc.c:71
-msgid "POSTNET-9 (ZIP+4)"
-msgstr "POSTNET-9 (ZIP+4)"
+#: ../src/window.c:256
+msgid "(none) - gLabels"
+msgstr "(Unbenannt) - gLabels"
 
-#: ../src/bc.c:74
-msgid "POSTNET-11 (DPBC)"
-msgstr "POSTNET-11 (DPBC)"
+#: ../src/window.c:435
+msgid "(modified)"
+msgstr "(geändert)"
 
-#: ../src/bc.c:77
-msgid "CEPNET"
-msgstr "CEPNET"
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:320
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "Fehlerhafter root node = »%s«"
 
-#: ../src/bc.c:80
-msgid "EAN (any)"
-msgstr "EAN (any)"
-
-#: ../src/bc.c:83
-msgid "EAN-8"
-msgstr "EAN-8"
-
-#: ../src/bc.c:86
-msgid "EAN-8 +2"
-msgstr "EAN-8 +2"
-
-#: ../src/bc.c:89
-msgid "EAN-8 +5"
-msgstr "EAN-8 +5"
-
-#: ../src/bc.c:92
-msgid "EAN-13"
-msgstr "EAN-13"
-
-#: ../src/bc.c:95
-msgid "EAN-13 +2"
-msgstr "EAN-13 +2"
-
-#: ../src/bc.c:98
-msgid "EAN-13 +5"
-msgstr "EAN-13 +5"
-
-#: ../src/bc.c:101
-msgid "UPC (UPC-A or UPC-E)"
-msgstr "UPC (UPC-A oder UPC-E)"
-
-#: ../src/bc.c:104
-msgid "UPC-A"
-msgstr "UPC-A"
-
-#: ../src/bc.c:107
-msgid "UPC-A +2"
-msgstr "UPC-A +2"
-
-#: ../src/bc.c:110
-msgid "UPC-A +5"
-msgstr "UPC-A +5"
-
-#: ../src/bc.c:113
-msgid "UPC-E"
-msgstr "UPC-E"
-
-#: ../src/bc.c:116
-msgid "UPC-E +2"
-msgstr "UPC-E +2"
-
-#: ../src/bc.c:119
-msgid "UPC-E +5"
-msgstr "UPC-E +5"
-
-#: ../src/bc.c:122
-msgid "ISBN"
-msgstr "ISBN"
-
-#: ../src/bc.c:125
-msgid "ISBN +5"
-msgstr "ISBN +5"
-
-#: ../src/bc.c:128
-msgid "Code 39"
-msgstr "Code 39"
-
-#: ../src/bc.c:131
-msgid "Code 128"
-msgstr "Code 128"
-
-#: ../src/bc.c:134
-msgid "Code 128C"
-msgstr "Code 128C"
-
-#: ../src/bc.c:137
-msgid "Code 128B"
-msgstr "Code 128B"
-
-#: ../src/bc.c:140
-msgid "Interleaved 2 of 5"
-msgstr "Interleaved 2 of 5"
-
-#: ../src/bc.c:143
-msgid "Codabar"
-msgstr "Codabar"
-
-#: ../src/bc.c:146
-msgid "MSI"
-msgstr "MSI"
-
-#: ../src/bc.c:149
-msgid "Plessey"
-msgstr "Plessey"
-
-#: ../src/bc.c:152
-msgid "IEC16022 (DataMatrix)"
-msgstr "IEC16022 (DataMatrix)"
-
-#: ../src/bc.c:155
-msgid "IEC18004 (QRCode)"
-msgstr "IEC18004 (QRCode)"
-
-#: ../src/label.c:547
-msgid "Untitled"
-msgstr "Unbenannt"
-
-#: ../src/label-barcode.c:435
-msgid "Barcode data empty"
-msgstr "Strichcode-Daten sind leer"
-
-#: ../src/label-barcode.c:439
-msgid "Invalid barcode data"
-msgstr "Ungültige Strichcode-Daten"
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:403
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "fehlerhafter node =  »%s«"
 
 #: ../src/xml-label.c:187 ../src/xml-label.c:225
 msgid "xmlParseFile error"
@@ -1125,20 +1423,10 @@ msgstr "Aus dem glabels 0.4-Format wird importiert"
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Unbekannter glabels-Namensraum -- %s wird verwendet"
 
-#: ../src/xml-label.c:320 ../src/xml-label-04.c:75
-#, c-format
-msgid "Bad root node = \"%s\""
-msgstr "Fehlerhafter root node = »%s«"
-
 #: ../src/xml-label.c:357
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "Ungültiger Node im Dokument-Node = »%s«"
-
-#: ../src/xml-label.c:403 ../src/xml-label-04.c:123
-#, c-format
-msgid "bad node =  \"%s\""
-msgstr "fehlerhafter node =  »%s«"
 
 #: ../src/xml-label.c:850
 #, c-format
@@ -1152,274 +1440,6 @@ msgstr "Fehler in der UTF8-Umwandlung."
 #: ../src/xml-label.c:1099
 msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der xml-Datei."
-
-#: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
-msgid "None"
-msgstr "Keine"
-
-#: ../src/merge-init.c:57
-msgid "Text file with comma delimeters (CSV)"
-msgstr "Textdatei mit Kommata als Trennern (CSV)"
-
-#: ../src/merge-init.c:64
-msgid "Text file with colon delimeters"
-msgstr "Textdatei mit Semikola als Trennern"
-
-#: ../src/merge-init.c:71
-msgid "Text file with tab delimeters"
-msgstr "Textdatei mit Tabulatoren als Trennern"
-
-#: ../src/merge-init.c:80
-msgid "Data from default Evolution Addressbook"
-msgstr "Daten aus dem vorgegebenen Evolution-Adressbuch"
-
-#: ../src/merge-init.c:86
-msgid "Data from a file containing VCards"
-msgstr "Daten aus einer Datei, die VCards enthält"
-
-#: ../src/merge-evolution.c:316
-msgid "Couldn't construct query"
-msgstr "Abfrage konnte nicht erstellt werden"
-
-#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
-msgid "Couldn't open addressbook."
-msgstr "Adressbuch konnte nicht geöffnet werden"
-
-#: ../src/merge-evolution.c:348
-msgid "Couldn't list available fields."
-msgstr "Verfügbare Felder konnten nicht aufgelistet werden."
-
-#: ../src/merge-evolution.c:384
-msgid "Couldn't get contacts."
-msgstr "Kontakte konnten nicht geholt werden."
-
-#: ../src/color-combo.c:178 ../src/color-combo-button.c:198
-msgid "Default Color"
-msgstr "Standardfarbe"
-
-#: ../src/color-combo-menu.c:83
-msgid "Dark Red"
-msgstr "Dunkelrot"
-
-#: ../src/color-combo-menu.c:84
-msgid "Brown"
-msgstr "Braun"
-
-#: ../src/color-combo-menu.c:85
-msgid "Dark Goldenrod"
-msgstr "Dunkle Goldrute"
-
-#: ../src/color-combo-menu.c:86
-msgid "Dark Green"
-msgstr "Dunkles Grün"
-
-#: ../src/color-combo-menu.c:87
-msgid "Dark Cyan"
-msgstr "Dunkles Cyan-Blau"
-
-#: ../src/color-combo-menu.c:88
-msgid "Navy Blue"
-msgstr "Marineblau"
-
-#: ../src/color-combo-menu.c:89
-msgid "Dark Violet"
-msgstr "Dunkles Violett"
-
-#: ../src/color-combo-menu.c:91
-msgid "Red"
-msgstr "Rot"
-
-#: ../src/color-combo-menu.c:92
-msgid "Orange"
-msgstr "Orange"
-
-#: ../src/color-combo-menu.c:93
-msgid "Dark Yellow"
-msgstr "Dunkles Gelb"
-
-#: ../src/color-combo-menu.c:94
-msgid "Medium green"
-msgstr "Mittelgrün"
-
-#: ../src/color-combo-menu.c:95
-msgid "Turquoise"
-msgstr "Türkis"
-
-#: ../src/color-combo-menu.c:96
-msgid "Blue"
-msgstr "Blau"
-
-#: ../src/color-combo-menu.c:97
-msgid "Purple"
-msgstr "Purpur"
-
-#: ../src/color-combo-menu.c:99
-msgid "Salmon"
-msgstr "Lachs"
-
-#: ../src/color-combo-menu.c:100
-msgid "Gold"
-msgstr "Gold"
-
-#: ../src/color-combo-menu.c:101
-msgid "Yellow"
-msgstr "Gelb"
-
-#: ../src/color-combo-menu.c:102
-msgid "Green"
-msgstr "Grün"
-
-#: ../src/color-combo-menu.c:103
-msgid "Cyan"
-msgstr "Cyan-Blau"
-
-#: ../src/color-combo-menu.c:104
-msgid "SkyBlue"
-msgstr "Himmelblau"
-
-#: ../src/color-combo-menu.c:105
-msgid "Violet"
-msgstr "Violett"
-
-#: ../src/color-combo-menu.c:107
-msgid "Pink"
-msgstr "Pink"
-
-#: ../src/color-combo-menu.c:108
-msgid "Khaki"
-msgstr "Khaki"
-
-#: ../src/color-combo-menu.c:109
-msgid "Light Yellow"
-msgstr "Helles Gelb"
-
-#: ../src/color-combo-menu.c:110
-msgid "Light Green"
-msgstr "Helles Grün"
-
-#: ../src/color-combo-menu.c:111
-msgid "Light Cyan"
-msgstr "Helles Cyan-Blau"
-
-#: ../src/color-combo-menu.c:112
-msgid "Slate Gray"
-msgstr "Schiefergrau"
-
-#: ../src/color-combo-menu.c:113
-msgid "Thistle"
-msgstr "Distel"
-
-#: ../src/color-combo-menu.c:115
-msgid "White"
-msgstr "Weiß"
-
-#: ../src/color-combo-menu.c:116
-#, c-format
-msgid "10% Gray"
-msgstr "10% Grau"
-
-#: ../src/color-combo-menu.c:117
-#, c-format
-msgid "25% Gray"
-msgstr "25% Grau"
-
-#: ../src/color-combo-menu.c:118
-#, c-format
-msgid "40% Gray"
-msgstr "40% Grau"
-
-#: ../src/color-combo-menu.c:119
-#, c-format
-msgid "50% Gray"
-msgstr "50% Grau"
-
-#: ../src/color-combo-menu.c:120
-#, c-format
-msgid "60% Gray"
-msgstr "60% Grau"
-
-#: ../src/color-combo-menu.c:121
-msgid "Black"
-msgstr "Schwarz"
-
-#: ../src/color-combo-menu.c:249 ../src/color-combo-menu.c:368
-msgid "Custom Color"
-msgstr "Benutzerdefinierte Farbe"
-
-#: ../src/color-combo-menu.c:314
-#, c-format
-msgid "Custom Color #%u"
-msgstr "Benutzerdefinierte Farbe #%u"
-
-#: ../src/font-combo-menu.c:127
-msgid "Proportional fonts"
-msgstr "Proportionale Schriften"
-
-#: ../src/font-combo-menu.c:142
-msgid "Fixed-width fonts"
-msgstr "Dicktengleiche Schriften"
-
-#: ../src/font-combo-menu.c:157
-msgid "All fonts"
-msgstr "Alle Schriften"
-
-#: ../src/wdgt-media-select.c:288 ../src/wdgt-media-select.c:292
-#: ../src/wdgt-media-select.c:297 ../src/wdgt-media-select.c:306
-#: ../src/wdgt-media-select.c:309 ../src/wdgt-media-select.c:403
-#: ../src/wdgt-media-select.c:616 ../src/wdgt-media-select.c:625
-msgid "Any"
-msgstr "Beliebig"
-
-#: ../src/wdgt-media-select.c:651
-#, c-format
-msgid "%d per sheet"
-msgstr "%d pro Seite"
-
-#: ../src/wdgt-media-select.c:682
-#, c-format
-msgid "%s x %s %s"
-msgstr "%s x %s %s"
-
-#: ../src/wdgt-media-select.c:687
-#, c-format
-msgid "%.5g x %.5g %s"
-msgstr "%.5g x %.5g %s"
-
-#: ../src/wdgt-media-select.c:698 ../src/wdgt-media-select.c:712
-#, c-format
-msgid "%s %s diameter"
-msgstr "%s %s Durchmesser"
-
-#: ../src/wdgt-media-select.c:702 ../src/wdgt-media-select.c:716
-#, c-format
-msgid "%.5g %s diameter"
-msgstr "%.5g %s Durchmesser"
-
-#: ../src/wdgt-media-select.c:791
-msgid "No recent templates found."
-msgstr "Keine zuletzt benutzten Vorlagen gefunden."
-
-#: ../src/wdgt-media-select.c:792
-msgid "Try selecting a template from the \"Search all templates\" page."
-msgstr ""
-"Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
-
-#: ../src/wdgt-media-select.c:872
-msgid "No match."
-msgstr "Keine Treffer."
-
-#: ../src/wdgt-media-select.c:873
-msgid "Try selecting a different brand, page size or category."
-msgstr ""
-"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
-
-#: ../src/critical-error-handler.c:70
-msgid "gLabels Fatal Error!"
-msgstr "Schwerwiegender Fehler in gLabels!"
-
-#: ../src/warning-handler.c:69
-msgid "gLabels Error!"
-msgstr "gLabels-Fehler!"
 
 #. Create and append an "Other" entry.
 #: ../libglabels/db.c:109
@@ -1518,19 +1538,6 @@ msgstr "Alles markieren"
 #: ../data/builder/merge-properties-dialog.builder.h:6
 msgid "Unselect all"
 msgstr "Markierung aufheben"
-
-#: ../data/builder/merge-properties-dialog.builder.h:7
-#: ../data/builder/object-editor.builder.h:38
-msgid "dialog1"
-msgstr "dialog1"
-
-#: ../data/builder/new-label-dialog.builder.h:1
-msgid "<b>Label orientation</b>"
-msgstr "<b>Ausrichtung des Etiketts</b>"
-
-#: ../data/builder/new-label-dialog.builder.h:2
-msgid "<b>Media type</b>"
-msgstr "<b>Medientyp</b>"
 
 #: ../data/builder/object-editor.builder.h:2
 #, no-c-format
@@ -1666,6 +1673,10 @@ msgstr "Y:"
 #: ../data/builder/object-editor.builder.h:37
 msgid "degrees"
 msgstr "Grad"
+
+#: ../data/builder/object-editor.builder.h:38
+msgid "dialog1"
+msgstr "dialog1"
 
 #: ../data/builder/object-editor.builder.h:39
 msgid "digits:"
@@ -1941,7 +1952,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/builder/template-designer.builder.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2669,12 +2681,6 @@ msgstr "Video-Etiketten (Rückseite)"
 
 #~ msgid "Search all templates"
 #~ msgstr "Alle Vorlagen durchsuchen"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Rotated"
-#~ msgstr "Gedreht"
 
 #~ msgid "<b>Print control (Simple)</b>"
 #~ msgstr "<b>Drucksteuerung (Einfach)</b>"
