@@ -71,8 +71,8 @@ src/label-object.c
 src/label-object.h
 src/label-text.c
 src/label-text.h
-src/marshal.c
-src/marshal.h
+#src/marshal.c
+#src/marshal.h
 src/merge.c
 src/merge-evolution.c
 src/merge-evolution.h
