@@ -177,7 +177,7 @@ add_icons (GtkIconFactory *factory,
 		gtk_icon_source_set_size_wildcarded (icon_source, FALSE);
 		gtk_icon_source_set_size (icon_source, GTK_ICON_SIZE_MENU);
 		gtk_icon_set_add_source (icon_set, icon_source);
-		g_free (icon_source);
+		gtk_icon_source_free (icon_source);
 	}
 
 	/* Now associate icon set with stock id */
@@ -206,7 +206,7 @@ add_button_icon (GtkIconFactory *factory,
 	gtk_icon_source_set_size_wildcarded (icon_source, FALSE);
 	gtk_icon_source_set_size (icon_source, GTK_ICON_SIZE_BUTTON);
 	gtk_icon_set_add_source (icon_set, icon_source);
-	g_free (icon_source);
+	gtk_icon_source_free (icon_source);
 
 	/* Now associate icon set with stock id */
 	gtk_icon_factory_add (factory, stock_id, icon_set);
