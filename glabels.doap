@@ -1,0 +1,19 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">glabels</name>
+  <shortdesc xml:lang="en">gLabels label designer</shortdesc>
+  <homepage rdf:resource="http://glabels.sourceforge.net" />
+  <mailing-list rdf:resource="https://lists.sourceforge.net/lists/listinfo/glabels-devel" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#productivity" />
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Jim Evins</foaf:name>
+      <gnome:userid>jimevins</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+</Project>
