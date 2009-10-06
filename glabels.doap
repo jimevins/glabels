@@ -13,7 +13,17 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>Jim Evins</foaf:name>
+      <foaf:mbox rdf:resource="mailto:evins@snaught.com" />
       <gnome:userid>jimevins</gnome:userid>
     </foaf:Person>
   </maintainer>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Mario Blättermann</foaf:name>
+      <foaf:mbox rdf:resource="mailto:mariobl@gnome.org" />
+      <gnome:userid>mariobl</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+
 </Project>

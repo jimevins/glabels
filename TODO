@@ -1,47 +1,71 @@
 
 Development plan
 ----------------
-This development plan sets a specific set of milestones for future versions of glabels.
+This development plan sets a specific set of milestones for future versions
+of glabels.
 
 
 Goals for 2.2.x:
 
-		-  Bugfixes
+	-  Bugfixes
 
-		-  Translations
+	-  Translations
 
 
-Possible Goals for 2.3.x (current development branch):
+Goals for 2.3.x (current development branch for 3.0):
 
-		-  Undo, Redo capability
+	-  Migrate to Gnome 3.0 platform
 
-		-  Make text items rich.  I.e. allow multiple characteristics
-		   to exist within a single object.
+	-  Remove deprecations from Gnome 2.0 platform
 
-		-  Text effects.  (follow contour, non-rectangular text boxes,
-	           ...)
+	-  New color combo selector widget family
 
-		-  Ability to select/unselect individual records during a merge-print.
+	-  New font selector widget family
 
-		-  Add additional "merge" backends.  Candidates include:
-			gnome-db
-			internal database stored in glabels file
-			generic XML
-			freedb (CDDB) for CD labels
-			ADIF for generating QSL-cards
+	-  Ability to select/unselect individual records during a
+	   merge-print.
 
-		-  Printer calibration tool: a facility for tweaking output origin and
-		   scale.  This should really be part of the underlying print system but
-		   currently is not, so I may want to add the hack.
+	-  Improve documentation and translation maintainance
 
-		-  Adjustable grid spacing.  Spacing of visible grid should be user
-		   adjustable.  This grid spacing should be an integral multiple of
-		   a finer invisible grid.  There should be a "snap to grid" toggle,
-		   that causes all posistioning and sizing performed on the canvas
-		   to snap to the closest grid.  The possible grid spacing should be
-		   appropriate for the current units selected (e.g. .1 points, .01 mm,
-		   1/64 inch, 0.001 inch).
+	-  Code cleanup
 
-		-  Allow for management of custom templates
-		   (i.e. delete, rename, edit).
+
+Possible Goals for future branches:
+
+	-  Make text items rich.  I.e. allow multiple characteristics
+	   to exist within a single object.  Basically each text object
+	   will be a mini word processor.  The bounding box for the object
+	   will act like a page, where lines wrap on the word boundary.
+
+	-  Undo, Redo capability
+
+	-  Text effects.  (follow contour, non-rectangular text boxes,
+	   ...)
+
+	-  Add additional "merge" backends.  Candidates include:
+		gnome-db
+		internal database stored in glabels file
+		generic XML
+		freedb (CDDB) for CD labels
+		ADIF for generating QSL-cards
+
+	-  Printer calibration tool: a facility for tweaking output
+	   origin and scale.  This should really be part of the
+	   underlying print system but currently is not, so we may
+	   want to add the hack.
+
+	-  Adjustable grid spacing.  Spacing of visible grid should
+	   be user adjustable.  This grid spacing should be an
+	   integral multiple of a finer invisible grid.  There should
+	   be a "snap to grid" toggle, that causes all posistioning
+	   and sizing performed on the canvas to snap to the closest
+	   grid.  The possible grid spacing should be appropriate
+	   for the current units selected (e.g. .1 points, .01 mm,
+	   1/64 inch, 0.001 inch).
+
+	-  Allow for management of custom templates
+	   (i.e. delete, rename, edit).
+
+	-  See https://sourceforge.net/tracker/?atid=445119&group_id=46122&func=browse
+	   for additional ideas.
 
