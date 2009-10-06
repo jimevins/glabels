@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: \n" 
 "POT-Creation-Date: 2009-05-17 14:09+0800\n" 
-"PO-Revision-Date: 2009-05-19 20:16-0400\n"
+"PO-Revision-Date: 2009-10-05 20:26-0400\n"
 "Last-Translator: Careon <zzbusagain@yahoo.com.cn>\n" 
 "Language-Team: Careon <zzbusagain@yahoo.com.cn>\n" 
 "MIME-Version: 1.0\n" 
@@ -1302,28 +1302,28 @@ msgstr "白色"
 
 #: ../src/color-combo-menu.c:119
 #, c-format
-msgid "10% Gray"
-msgstr "10% 灰色"
+msgid "10%% Gray"
+msgstr "10%% 灰色"
 
 #: ../src/color-combo-menu.c:120
 #, c-format
-msgid "25% Gray"
-msgstr "25% 灰色"
+msgid "25%% Gray"
+msgstr "25%% 灰色"
 
 #: ../src/color-combo-menu.c:121
 #, c-format
-msgid "40% Gray"
-msgstr "40% 灰色"
+msgid "40%% Gray"
+msgstr "40%% 灰色"
 
 #: ../src/color-combo-menu.c:122
 #, c-format
-msgid "50% Gray"
-msgstr "50% 灰色"
+msgid "50%% Gray"
+msgstr "50%% 灰色"
 
 #: ../src/color-combo-menu.c:123
 #, c-format
-msgid "60% Gray"
-msgstr "60% 灰色"
+msgid "60%% Gray"
+msgstr "60%% 灰色"
 
 #: ../src/color-combo-menu.c:124
 msgid "Black"
