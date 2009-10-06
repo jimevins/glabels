@@ -6,15 +6,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-10 17:00+0200\n"
-"PO-Revision-Date: 2009-05-10 17:09+0100\n"
+"Project-Id-Version: glabels_2_2\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2009-10-06 17:41+0000\n"
+"PO-Revision-Date: 2009-10-06 20:52+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
 
 #: ../src/glabels.c:75 ../src/glabels-batch.c:70
 msgid "[FILE...]"
@@ -1329,7 +1332,7 @@ msgstr "Dunkles Grün"
 
 #: ../src/mygal/color-palette.c:586 ../src/mygal/color-palette.c:639
 msgid "dull blue"
-msgstr ""
+msgstr "Mittelblau"
 
 #: ../src/mygal/color-palette.c:587 ../src/mygal/color-palette.c:640
 msgid "blue"
@@ -1337,7 +1340,7 @@ msgstr "Blau"
 
 #: ../src/mygal/color-palette.c:588
 msgid "dull purple"
-msgstr ""
+msgstr "Mittleres Purpur"
 
 #: ../src/mygal/color-palette.c:589
 msgid "dark grey"
