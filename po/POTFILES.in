@@ -1,5 +1,6 @@
 # List of source files containing translatable strings.
 
+bc-backends/barcode-0.98/compat/getopt.c
 src/bc.c
 src/bc-gnubarcode.c
 src/bc-gnubarcode.h
