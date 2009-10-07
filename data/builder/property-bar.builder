@@ -16,7 +16,7 @@
             <child>
               <object class="GtkEventBox" id="font_family_eventbox">
                 <property name="visible">True</property>
-                <property name="tooltip_markup">Font family</property>
+                <property name="tooltip_text" translatable="yes">Font family</property>
                 <property name="visible_window">False</property>
                 <child>
                   <placeholder/>

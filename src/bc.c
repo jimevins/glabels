@@ -199,7 +199,7 @@ name_to_index (const gchar *name)
 	g_return_val_if_fail (name!=NULL, 0);
 
 	for (i=0; backends[i].id != NULL; i++) {
-		if (strcmp (name, backends[i].name) == 0) {
+		if (strcmp (name, gettext (backends[i].name)) == 0) {
 			return i;
 		}
 	}
@@ -277,7 +277,7 @@ gl_barcode_get_styles_list  (void)
 	GList *list = NULL;
 
 	for (i=0; backends[i].id != NULL; i++) {
-		list = g_list_append (list, g_strdup (backends[i].name));
+		list = g_list_append (list, g_strdup (gettext (backends[i].name)));
 	}
 
 	return list;
@@ -384,7 +384,7 @@ gl_barcode_get_prefered_n (const gchar    *id)
 const gchar *
 gl_barcode_id_to_name (const gchar *id)
 {
-	return backends[id_to_index (id)].name;
+	return gettext (backends[id_to_index (id)].name);
 }
 
 
