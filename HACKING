@@ -1,8 +1,11 @@
 ===============================================================================
 
+Developers:
+===========
+
 Do NOT commit to this module without permission from a maintainer;
-see the MAINTAINERS file for who they are.  You should discuss all
-changes on the gLabels developers mail list:
+see the MAINTAINERS file for who they are.  You should also discuss any
+changes on the gLabels developers mail list first:
 
     glabels-devel@lists.sourceforge.net
 
@@ -14,7 +17,25 @@ The list is moderated for first time posters.
 
 See below for additional guidelines.
 
+
+Translators:
+============
+
+Translation commits are always welcome. Please recognize any rules from
+your local team of the GNOME Translation Project. You may add or change
+the following files:
+
+/po/*.po
+/po/LINGUAS
+/help/*/*.po
+/help/Makefile.am
+
+Please don't edit the file POTFILES.in without approval from a
+maintainer.
+
+
 ===============================================================================
+
 
 ROADMAP
 =======
