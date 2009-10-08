@@ -2,7 +2,6 @@
 
 SUBDIRS = \
 	po \
-	bc-backends \
 	libglabels \
 	src \
 	data \

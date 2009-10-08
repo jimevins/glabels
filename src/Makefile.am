@@ -1,6 +1,3 @@
-LIB_BARCODE_DIR  = ../bc-backends/barcode-0.98
-LIB_IEC16022_DIR = ../bc-backends/iec16022-0.2.1
-LIB_QRENCODE_DIR = ../bc-backends/qrencode-3.1.0
 
 SUBDIRS= pixmaps stock-pixmaps
 
@@ -9,10 +6,10 @@ bin_PROGRAMS = glabels glabels-batch
 INCLUDES = \
 	-I$(top_srcdir) 					\
 	-I$(top_builddir) 					\
-	-I$(LIB_BARCODE_DIR)					\
-	-I$(LIB_IEC16022_DIR)					\
-	-I$(LIB_QRENCODE_DIR)					\
 	$(GLABELS_CFLAGS) 					\
+	$(LIBBARCODE_CFLAGS)					\
+	$(LIBQRENCODE_CFLAGS)					\
+	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DPREFIX=\""$(prefix)"\"                        	\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\
@@ -20,7 +17,7 @@ INCLUDES = \
 	-DLIBDIR=\""$(libdir)"\"                        	\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_BUILDER_DIR=\""$(datadir)/glabels/builder/"\"	\
-	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"	\
+	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"		\
 	-DGLABELS_PIXMAP_DIR=\""$(datadir)/pixmaps/glabels/"\"	\
 	-DG_LOG_DOMAIN=\""glabels\""
 
@@ -29,18 +26,18 @@ glabels_LDFLAGS = -export-dynamic
 glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
-	$(LIB_BARCODE_DIR)/libbarcode.la 	\
-	$(LIB_IEC16022_DIR)/libiec16022.la	\
-	$(LIB_QRENCODE_DIR)/libqrencode.la
+	$(LIBBARCODE_LIBS)		 	\
+	$(LIBQRENCODE_LIBS)			\
+	$(LIBIEC16022_LIBS)
 
 glabels_batch_LDFLAGS = -export-dynamic
 
 glabels_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
-	$(LIB_BARCODE_DIR)/libbarcode.la	\
-	$(LIB_IEC16022_DIR)/libiec16022.la	\
-	$(LIB_QRENCODE_DIR)/libqrencode.la
+	$(LIBBARCODE_LIBS)		 	\
+	$(LIBQRENCODE_LIBS)			\
+	$(LIBIEC16022_LIBS)
 
 BUILT_SOURCES = 			\
 	marshal.c			\
@@ -305,18 +302,7 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): $(LIB_BARCODE_DIR)/libbarcode.la \
-		 $(LIB_IEC16022_DIR)/libiec16022.la \
-		 ../libglabels/libglabels.la
-
-$(LIB_BARCODE_DIR)/libbarcode.la:
-	cd $(LIB_BARCODE_DIR); $(MAKE)
-
-$(LIB_IEC16022_DIR)/libiec16022.la:
-	cd $(LIB_IEC16022_DIR); $(MAKE)
-
-$(LIB_QRENCODE_DIR)/libqrencode.la:
-	cd $(LIB_QRENCODE_DIR); $(MAKE)
+$(bin_PROGRAMS): ../libglabels/libglabels.la
 
 ../libglabels/libglabels.la:
 	cd ../libglabels; $(MAKE)

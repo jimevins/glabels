@@ -20,6 +20,8 @@
 
 #include <config.h>
 
+#ifdef HAVE_LIBBARCODE
+
 #include "bc-gnubarcode.h"
 
 #include <glib.h>
@@ -437,6 +439,8 @@ is_length2_valid (const gchar *digits,
 
 	return (i >= n1) && (i <= n2);
 }
+
+#endif /* HAVE_LIBBARCODE */
 
 
 

@@ -34,18 +34,3 @@ TEMPLATE DATABASE:
    the database.  However, to clear up any ambiguity, the files themselves
    are licensed using the MIT/X license -- see 'COPYING-TEMPLATES' in this
    directory for details.
-
-
-3RD PARTY COMPONENTS:
-
-   The "bc-backends/barcode-0.98/" and "bc-backends/iec16022-0.2.1/"
-   subdirectories contain 3rd party libraries, each licensed under the
-   GNU GENERAL PUBLIC LICENSE (GPL); either version 2 of the License,
-   or (at your option) any later version -- see the 'LICENSE' or 'COPYING'
-   file in each of these directories for details.
-
-   The "bc-backends/qrencode-3.1.0/" subdirectory contains a 3rd party
-   library, it is licensed under the GNU LESSER GENERAL PUBLIC LICENSE (LGPL);
-   either version 2.1 of the License, or (at your option) any later
-   version -- see the 'COPYING' file in this subdirectory for details.
-

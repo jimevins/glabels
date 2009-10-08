@@ -1,9 +1,0 @@
-- Fix compiler warnings.
-- Test on 64bit, powerpc, arm, etc. Anyone?
-- Test stamp feature. Anyone?
-- Use autotools
-
-Some things to think about:
----------------------------
-- Use libpng?
-- Merge iec16022 in barcode?

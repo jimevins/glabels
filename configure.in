@@ -59,12 +59,14 @@ dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 GLIB_REQUIRED=2.20.0
 GTK_REQUIRED=2.16.0
+GCONF_REQUIRED=2.26.0
 LIBXML_REQUIRED=2.7.0
 LIBEBOOK_REQUIRED=2.26.0
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
+AC_SUBST(GCONF_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
 AC_SUBST(LIBEBOOK_REQUIRED)
 
@@ -93,6 +95,7 @@ dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(GLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
 gtk+-2.0 >= $GTK_REQUIRED \
+gconf-2.0 >= $GCONF_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
 $OPTIONAL_MODULES \
 )
@@ -106,11 +109,73 @@ dnl - LIBGLABELS more modest prerequisites
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(LIBGLABELS, \
 glib-2.0 >= $GLIB_REQUIRED \
+gconf-2.0 >= $GCONF_REQUIRED \
 libxml-2.0 >= $LIBXML_REQUIRED \
 )
 
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Check for GNU Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libbarcode,
+	    [AC_HELP_STRING([--without-libbarcode],
+                            [build without GNU Barcode support])])
+have_libbarcode=no
+if test "x$with_libbarcode" != xno; then
+   AC_CHECK_LIB(barcode, Barcode_Create,
+		[have_libbarcode=yes], [have_libbarcode=no])
+fi
+
+if test "x$have_libbarcode" = "xyes"; then
+	AC_DEFINE(HAVE_LIBBARCODE,1,[Define to 1 for GNU Barcode support])
+	LIBBARCODE_CFLAGS=""
+	LIBBARCODE_LIBS="-lbarcode"
+	AC_SUBST(LIBBARCODE_CFLAGS)
+	AC_SUBST(LIBBARCODE_LIBS)
+fi
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Check for QRencode Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libqrencode,
+	    [AC_HELP_STRING([--without-libqrencode],
+                            [build without QRencode support])])
+have_libqrencode=no
+if test "x$with_libqrencode" != xno; then
+	PKG_CHECK_MODULES(LIBQRENCODE, libqrencode >= 3.1.0,
+			  [have_libqrencode=yes], [have_libqrencode=no])
+fi
+
+if test "x$have_libqrencode" = "xyes"; then
+	AC_DEFINE(HAVE_LIBQRENCODE,1,[Define to 1 for QRencode support])
+	AC_SUBST(LIBQRENCODE_CFLAGS)
+	AC_SUBST(LIBQRENCODE_LIBS)
+fi
+
+
+dnl ---------------------------------------------------------------------------
+dnl - Check for IEC16022 Barcode backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libiec16022,
+	    [AC_HELP_STRING([--without-libiec16022],
+                            [build without Iec16022 support])])
+have_libiec16022=no
+if test "x$with_libiec16022" != xno; then
+   	AC_CHECK_LIB(iec16022, iec16022ecc200,
+		    [have_libiec16022=yes], [have_libiec16022=no])
+fi
+
+if test "x$have_libiec16022" = "xyes"; then
+	AC_DEFINE(HAVE_LIBIEC16022,1,[Define to 1 for IEC16022 support])
+	LIBIEC16022_CFLAGS=""
+	LIBIEC16022_LIBS="-liec16022"
+	AC_SUBST(LIBIEC16022_CFLAGS)
+	AC_SUBST(LIBIEC16022_LIBS)
+fi
 
 
 dnl ---------------------------------------------------------------------------
@@ -163,22 +228,10 @@ AM_GLIB_GNU_GETTEXT
 
 
 dnl ---------------------------------------------------------------------------
-dnl - Misc.
-dnl ---------------------------------------------------------------------------
-
-dnl Setup for libqrencode compilation
-AC_DEFINE(__STATIC, static, [Static attribute, needed to compile libqrencode])
-
-
-dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.
 dnl ---------------------------------------------------------------------------
 AC_OUTPUT([
 Makefile
-bc-backends/Makefile
-bc-backends/barcode-0.98/Makefile
-bc-backends/iec16022-0.2.1/Makefile
-bc-backends/qrencode-3.1.0/Makefile
 libglabels/Makefile
 libglabels/libglabels.pc
 src/Makefile
@@ -205,11 +258,16 @@ dnl ---------------------------------------------------------------------------
 echo "
 Configuration:
 
-	Package:                        ${PACKAGE}-${VERSION}:
-        Installation prefix             ${prefix}
-        Source code location:           ${srcdir}
-        Compiler:                       ${CC} 
-	Evolution Data Server support:  ${have_libebook}
+	Package........................: ${PACKAGE}-${VERSION}:
+        Installation prefix............: ${prefix}
+        Source code location...........: ${srcdir}
+        Compiler.......................: ${CC} 
+
+	Evolution Data Server support..: ${have_libebook}
+
+	GNU Barcode support............: ${have_libbarcode}
+	QRencode Barcode support.......: ${have_libqrencode}
+	IEC16022 Barcode support.......: ${have_libiec16022}
 
 "
 

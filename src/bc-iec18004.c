@@ -20,6 +20,8 @@
 
 #include <config.h>
 
+#ifdef HAVE_LIBQRENCODE
+
 #include "bc-iec18004.h"
 
 #include <glib.h>
@@ -152,6 +154,8 @@ render_iec18004 (const gchar *grid,
 
         return gbc;
 }
+
+#endif /* HAVE_LIBQRENCODE */
 
 
 

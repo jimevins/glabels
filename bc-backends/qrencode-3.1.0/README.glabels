@@ -1,8 +1,0 @@
-The following changes have been made to the stock qrencode-3.1.0 distribution
-to facilitate compilation with glabels:
-
-	Makefile.am renamed to Makefile.am.dist
-	Makefile.in renamed to Makefile.in.dist
-	configure.ac renamed to configure.ac.dist
-	added Makefile.am, which is configured from ../configure.in
-

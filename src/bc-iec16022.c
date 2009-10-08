@@ -20,6 +20,8 @@
 
 #include <config.h>
 
+#ifdef HAVE_LIBIEC16022
+
 #include "bc-iec16022.h"
 
 #include <glib.h>
@@ -143,6 +145,8 @@ render_iec16022 (const gchar *grid,
 
         return gbc;
 }
+
+#endif /* HAVE_LIBIEC16022 */
 
 
 

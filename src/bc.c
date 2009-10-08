@@ -74,6 +74,8 @@ static const Backend backends[] = {
 	{ "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
+#ifdef HAVE_LIBBARCODE
+
 	{ "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
 
@@ -149,11 +151,21 @@ static const Backend backends[] = {
 	{ "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
+#endif /* HAVE_LIBBARCODE */
+
+#ifdef HAVE_LIBIEC16022
+
 	{ "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
+#endif /* HAVE_LIBIEC16022 */
+
+#ifdef HAVE_LIBQRENCODE
+
 	{ "IEC18004", N_("IEC18004 (QRCode)"), gl_barcode_iec18004_new,
 	  FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
+
+#endif /* HAVE_LIBQRENCODE */
 
 	{ NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
 

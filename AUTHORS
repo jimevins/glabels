@@ -6,26 +6,16 @@ Jim Evins <evins@snaught.com>
 Acknowledgments
 ===============
 
-- The GNU Barcode Library provides a large chunk of the barcode functionality
-and is distributed with glabels.  See ./barcode-0.98/README for more
-information.  The author:
-
-	Alessandro Rubini <rubini@gnu.org>
-
-- The iec16022 library provides encoding for 2D barcodes.  See
-iec16022-0.2.1/README for more information.
-
-- The qrencode library provides encoding for 2D barcodes.  See
-qrencode-3.1.0/README for more information.
-
-- Glabels includes a modified version of the gimpchainbutton widget from the
+Glabels includes a modified version of the gimpchainbutton widget from the
 gimp, as well as several stock icons from the gimp's default theme.
 These are copyright:
 
 	 * Copyright (C) 1995-1997 Peter Mattis and Spencer Kimball
 	 * Copyright (C) 1999-2000 Sven Neumann <sven@gimp.org>
 
+
 Glabels includes contributions from:
+
 	Frederic Ruaudel  <grumz@users.sf.net>
 	Emmanuel Pacaud <emmanuel.pacaud@univ-poitiers.fr>
 	Wayne Schuller <k_wayne@linuxpower.org>
@@ -43,28 +33,11 @@ Glabels includes contributions from:
 	Peter Cherriman <glabels-devel2712@bubieyehyeh.me.uk>
 	Daniel Mueller <daniel@danm.de>
 
+
 Translations:
 
-	Olivier Berger <oberger@april.org> -- French (original)
-	Florent Morel <florent@taket.org> -- French (2.0.2)
-	Claude Paroz <claude@2xlibre.net> -- French (2.1.4)
-	Marcus Bauer <m@7n7.de> -- German (original)
-	Christian Neumair <christian-neumair@web.de> -- German (1.89.1)
-	Mario Blättermann <mario.blaettermann@t-online.de> -- German (2.2.5)
-	Takeshi AIHANA <aihana@gnome.gr.jp> -- Japanese
-	Paulo Rogério Ormenese <pormenese@uol.com.br> -- Brazilian Portuguese
-	Víctor Moral <victor@pasmao.net> -- Spanish
-	sergio rivadero <sergiorivadero@argentina.com> -- Spanish (2.0.3)
-	Vitaly Lipatov <lav@altlinux.ru> -- Russian
-	Shell, Hin-lik Hung <shell@home.shellhung.org> -- Chinese (TW)
-	Arkadiusz Lipiec <A.Lipiec@elka.pw.edu.pl> -- Polish
-	David Makovský (Yakeen) <yakeen@sannyas-on.net> -- Czech
-	Zbynek Mrkvicka <zbynek@oachot.cz> -- Czech (2.0.3)
-	Mancio <mancio_and@yahoo.it> -- Italian
-	Daniele Medri <daniele.medri@libero.it> -- Italian (2.0.3)
-	Antonio C. Codazzi "la Filozofo" <f_sophia@libero.it> -- Esperanto
-	David Planella <david.planella@gmail.com> -- Catalan
-	Careon <zzbusagain@yahoo.com.cn> -- Chinese (CN)
+	See individual po files for credits.
+
 
 The following people have submitted label templates or information about
 particular products (I apologize if I have missed anybody):

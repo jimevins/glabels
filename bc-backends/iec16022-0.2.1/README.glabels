@@ -1,6 +1,0 @@
-The following changes have been made to the stock iec16022 0.2.1 distribution
-to facilitate compilation with glabels:
-
-	Makefile renamed to Makefile.dist
-	added Makefile.am, which is configured from ../configure.in
-
