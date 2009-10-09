@@ -367,7 +367,7 @@ custom_menu_item_activate_cb (glColorComboMenu *this)
 
         custom_dialog = gtk_color_selection_dialog_new (_("Custom Color"));
 
-        colorsel = GTK_COLOR_SELECTION_DIALOG (custom_dialog)->colorsel;
+        colorsel = gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (custom_dialog));
         color.red   = GL_COLOR_F_RED   (this->priv->color) * 65535;
         color.green = GL_COLOR_F_GREEN (this->priv->color) * 65535;
         color.blue  = GL_COLOR_F_BLUE  (this->priv->color) * 65535;

@@ -87,7 +87,8 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 static void
 gl_new_label_dialog_init (glNewLabelDialog *dialog)
 {
-	GtkWidget    *label;
+	GtkWidget    *vbox;
+        GtkWidget    *label;
 	GtkWidget    *frame;
 	gchar        *name;
 
@@ -108,13 +109,14 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
+        vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
         label = gtk_label_new (_("<b>Media type</b>"));
         gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
         frame = gtk_frame_new ("");
         gtk_frame_set_label_widget (GTK_FRAME (frame), label);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), frame, FALSE, FALSE, GL_HIG_PAD1);
+	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, GL_HIG_PAD1);
 
 	dialog->priv->media_select = gl_wdgt_media_select_new ();
         gtk_container_add (GTK_CONTAINER (frame), dialog->priv->media_select);
@@ -124,7 +126,7 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
         frame = gtk_frame_new ("");
         gtk_frame_set_label_widget (GTK_FRAME (frame), label);
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-	gtk_box_pack_start (GTK_BOX( GTK_DIALOG (dialog)->vbox), frame, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
 
 	dialog->priv->rotate_label = gl_rotate_label_button_new ();
         gtk_container_add (GTK_CONTAINER (frame), dialog->priv->rotate_label);

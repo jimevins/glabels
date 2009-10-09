@@ -146,12 +146,15 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
         static gchar      *object_ids[] = { "merge_properties_vbox", NULL };
         GError            *error = NULL;
 	GtkWidget         *vbox;
+	GtkWidget         *merge_properties_vbox;
 
 	gl_debug (DEBUG_MERGE, "START");
 
 	dialog->priv = g_new0 (glMergePropertiesDialogPrivate, 1);
 
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD1);
+        vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+
+ 	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD1);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_button (GTK_DIALOG (dialog),
@@ -173,7 +176,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	}
 
         gl_builder_util_get_widgets (builder,
-                                     "merge_properties_vbox", &vbox,
+                                     "merge_properties_vbox", &merge_properties_vbox,
                                      "type_combo",            &dialog->priv->type_combo,
                                      "location_vbox",         &dialog->priv->location_vbox,
                                      "treeview",              &dialog->priv->treeview,
@@ -181,7 +184,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
                                      "unselect_all_button",   &dialog->priv->unselect_all_button,
                                      NULL);
 
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), vbox);
+	gtk_container_add (GTK_CONTAINER (vbox), merge_properties_vbox);
         dialog->priv->builder = builder;
 
 	gl_combo_util_add_text_model (GTK_COMBO_BOX (dialog->priv->type_combo));

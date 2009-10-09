@@ -230,15 +230,18 @@ gl_prefs_dialog_new (GtkWindow *parent)
 static void
 gl_prefs_dialog_construct (glPrefsDialog *dialog)
 {
+        GtkWidget *vbox;
 	GtkWidget *notebook;
 
 	g_return_if_fail (GL_IS_PREFS_DIALOG (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+        vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+
         gl_builder_util_get_widgets (dialog->priv->builder,
                                      "prefs_notebook", &notebook,
                                      NULL);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), notebook, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), notebook, FALSE, FALSE, 0);
 
 	construct_locale_page (dialog);
 	construct_object_page (dialog);
@@ -246,7 +249,7 @@ gl_prefs_dialog_construct (glPrefsDialog *dialog)
 	update_locale_page_from_prefs (dialog);
 	update_object_page_from_prefs (dialog);
 
-        gtk_widget_show_all (GTK_DIALOG (dialog)->vbox);   
+        gtk_widget_show_all (vbox);   
 }
 
 

@@ -22,6 +22,8 @@
 
 #include "combo-util.h"
 
+#include <string.h>
+
 #include <libglabels/libglabels.h>
 
 
