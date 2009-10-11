@@ -165,14 +165,12 @@ AC_ARG_WITH(libiec16022,
                             [build without Iec16022 support])])
 have_libiec16022=no
 if test "x$with_libiec16022" != xno; then
-   	AC_CHECK_LIB(iec16022, iec16022ecc200,
-		    [have_libiec16022=yes], [have_libiec16022=no])
+	PKG_CHECK_MODULES(LIBIEC16022, libiec16022 >= 0.2.3,
+			  [have_libiec16022=yes], [have_libiec16022=no])
 fi
 
 if test "x$have_libiec16022" = "xyes"; then
 	AC_DEFINE(HAVE_LIBIEC16022,1,[Define to 1 for IEC16022 support])
-	LIBIEC16022_CFLAGS=""
-	LIBIEC16022_LIBS="-liec16022"
 	AC_SUBST(LIBIEC16022_CFLAGS)
 	AC_SUBST(LIBIEC16022_LIBS)
 fi
@@ -258,16 +256,16 @@ dnl ---------------------------------------------------------------------------
 echo "
 Configuration:
 
-	Package........................: ${PACKAGE}-${VERSION}:
-        Installation prefix............: ${prefix}
-        Source code location...........: ${srcdir}
-        Compiler.......................: ${CC} 
+        Package ........................ : ${PACKAGE}-${VERSION}
+        Installation prefix ............ : ${prefix}
+        Source code location ........... : ${srcdir}
+        Compiler ....................... : ${CC} 
 
-	Evolution Data Server support..: ${have_libebook}
+        Evolution Data Server support .. : ${have_libebook}
 
-	GNU Barcode support............: ${have_libbarcode}
-	QRencode Barcode support.......: ${have_libqrencode}
-	IEC16022 Barcode support.......: ${have_libiec16022}
+        GNU Barcode support ............ : ${have_libbarcode}
+        QR code Barcode support ........ : ${have_libqrencode}
+        IEC16022 Barcode support ....... : ${have_libiec16022}
 
 "
 
