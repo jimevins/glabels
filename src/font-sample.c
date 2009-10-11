@@ -163,13 +163,16 @@ style_set_cb (GtkWidget        *widget,
 static void
 redraw (glFontSample  *this)
 {
+        GdkWindow *window;
 	GdkRegion *region;
 
-        if (GTK_WIDGET_REALIZED (GTK_WIDGET (this)))
+        window = gtk_widget_get_window (GTK_WIDGET (this));
+
+        if (window)
         {
                 /* redraw the cairo canvas forcing an expose event */
-                region = gdk_drawable_get_clip_region (GTK_WIDGET (this)->window);
-                gdk_window_invalidate_region (GTK_WIDGET (this)->window, region, TRUE);
+                region = gdk_drawable_get_clip_region (window);
+                gdk_window_invalidate_region (window, region, TRUE);
                 gdk_region_destroy (region);
         }
 }
@@ -182,9 +185,12 @@ static gboolean
 expose_event_cb (GtkWidget      *widget,
                  GdkEventExpose *event)
 {
-	cairo_t *cr;
+        GdkWindow *window;
+	cairo_t   *cr;
 
-	cr = gdk_cairo_create (widget->window);
+        window = gtk_widget_get_window (widget);
+
+	cr = gdk_cairo_create (window);
 
 	cairo_rectangle (cr,
 			event->area.x, event->area.y,

@@ -551,22 +551,22 @@ get_home_scale (glView *view)
 void
 gl_view_update (glView  *view)
 {
- 	GtkWidget *widget;
+        GdkWindow *window;
 	GdkRegion *region;
 	
 	gl_debug (DEBUG_VIEW, "START");
 
-	widget = GTK_WIDGET (view->canvas);
-
-	if (!widget->window) return;
+        window = gtk_widget_get_window (GTK_WIDGET (view->canvas));
+        
+	if (!window) return;
 
         if ( !view->update_scheduled_flag )
         {
                 view->update_scheduled_flag = TRUE;
 
-                region = gdk_drawable_get_clip_region (widget->window);
+                region = gdk_drawable_get_clip_region (window);
                 /* redraw the cairo canvas completely by exposing it */
-                gdk_window_invalidate_region (widget->window, region, TRUE);
+                gdk_window_invalidate_region (window, region, TRUE);
                 gdk_region_destroy (region);
         }
 
@@ -582,15 +582,15 @@ gl_view_update_region (glView        *view,
                        cairo_t       *cr,
                        glLabelRegion *region)
 {
- 	GtkWidget    *widget;
+        GdkWindow    *window;
 	GdkRectangle  rect;
         gdouble       x, y, w, h;
 
 	gl_debug (DEBUG_VIEW, "START");
 
-	widget = GTK_WIDGET (view->canvas);
+	window = gtk_widget_get_window (GTK_WIDGET (view->canvas));
 
-	if (!widget->window) return;
+	if (!window) return;
 
         x = MIN (region->x1, region->x2);
         y = MIN (region->y1, region->y2);
@@ -605,7 +605,7 @@ gl_view_update_region (glView        *view,
         rect.width  = w + 6;
         rect.height = h + 6;
 
-        gdk_window_invalidate_rect (widget->window, &rect, TRUE);
+        gdk_window_invalidate_rect (window, &rect, TRUE);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -618,14 +618,15 @@ static gboolean
 expose_cb (glView         *view,
            GdkEventExpose *event)
 {
-	cairo_t *cr;
+        GdkWindow *bin_window;
+	cairo_t   *cr;
 
 	gl_debug (DEBUG_VIEW, "START");
 
         view->update_scheduled_flag = FALSE;
 
-	/* get a cairo_t */
-	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+	cr = gdk_cairo_create (bin_window);
 
 	cairo_rectangle (cr,
 			event->area.x, event->area.y,
@@ -663,16 +664,22 @@ static void
 size_allocate_cb (glView         *view,
                   GtkAllocation  *allocation)
 {
+        GtkAdjustment *hadjustment;
+        GtkAdjustment *vadjustment;
+
 	gl_debug (DEBUG_VIEW, "START");
 
-        GTK_LAYOUT (view->canvas)->hadjustment->page_size = allocation->width;
-        GTK_LAYOUT (view->canvas)->hadjustment->page_increment = allocation->width / 2;
- 
-        GTK_LAYOUT (view->canvas)->vadjustment->page_size = allocation->height;
-        GTK_LAYOUT (view->canvas)->vadjustment->page_increment = allocation->height / 2;
+        hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT (view->canvas));
+        vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT (view->canvas));
 
-        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->hadjustment, "changed");
-        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->vadjustment, "changed");
+        gtk_adjustment_set_page_size( hadjustment, allocation->width);
+        gtk_adjustment_set_page_increment( hadjustment, allocation->width / 2);
+
+        gtk_adjustment_set_page_size( vadjustment, allocation->height);
+        gtk_adjustment_set_page_increment( vadjustment, allocation->height / 2);
+
+        g_signal_emit_by_name (hadjustment, "changed");
+        g_signal_emit_by_name (vadjustment, "changed");
 
 	if (view->zoom_to_fit_flag) {
 		/* Maintain best fit zoom */
@@ -727,12 +734,18 @@ label_changed_cb (glView  *view)
 static void
 label_resized_cb (glView  *view)
 {
+        GtkAdjustment *hadjustment;
+        GtkAdjustment *vadjustment;
+
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
 	gl_debug (DEBUG_VIEW, "START");
 
-        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->hadjustment, "changed");
-        g_signal_emit_by_name (GTK_LAYOUT (view->canvas)->vadjustment, "changed");
+        hadjustment = gtk_layout_get_hadjustment(GTK_LAYOUT (view->canvas));
+        vadjustment = gtk_layout_get_vadjustment(GTK_LAYOUT (view->canvas));
+
+        g_signal_emit_by_name (hadjustment, "changed");
+        g_signal_emit_by_name (vadjustment, "changed");
 
         gl_view_update (view);
 
@@ -781,6 +794,7 @@ static void
 draw_layers (glView  *view,
              cairo_t *cr)
 {
+        GdkWindow                 *bin_window;
 	gdouble                    scale;
 	gdouble                    w, h;
         gint                       canvas_w, canvas_h;
@@ -790,6 +804,8 @@ draw_layers (glView  *view,
 
 	gl_debug (DEBUG_VIEW, "START");
 
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+
         scale = view->zoom * view->home_scale;
 
         gl_label_get_size (view->label, &w, &h);
@@ -797,7 +813,7 @@ draw_layers (glView  *view,
         scale = view->home_scale * view->zoom;
         gtk_layout_set_size (GTK_LAYOUT (view->canvas), w*scale+8, h*scale+8);
 
-        gdk_drawable_get_size (GTK_LAYOUT (view->canvas)->bin_window, &canvas_w, &canvas_h);
+        gdk_drawable_get_size (bin_window, &canvas_w, &canvas_h);
 
         view->x0 = (canvas_w/scale - w) / 2.0;
         view->y0 = (canvas_h/scale - h) / 2.0;
@@ -1118,14 +1134,17 @@ gl_view_hide_markup (glView *view)
 void
 gl_view_arrow_mode (glView *view)
 {
+        GdkWindow *window;
 	GdkCursor *cursor;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
+        window = gtk_widget_get_window (view->canvas);
+
         cursor = gdk_cursor_new (GDK_LEFT_PTR);
-	gdk_window_set_cursor (view->canvas->window, cursor);
+	gdk_window_set_cursor (window, cursor);
         gdk_cursor_unref (cursor);
 
 	view->mode = GL_VIEW_MODE_ARROW;
@@ -1142,11 +1161,14 @@ void
 gl_view_object_create_mode (glView            *view,
 			    glLabelObjectType  type)
 {
+        GdkWindow *window;
 	GdkCursor *cursor = NULL;
 
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
+
+        window = gtk_widget_get_window (view->canvas);
 
 	switch (type)
         {
@@ -1173,7 +1195,7 @@ gl_view_object_create_mode (glView            *view,
 		break;
 	}
 
-	gdk_window_set_cursor (view->canvas->window, cursor);
+	gdk_window_set_cursor (window, cursor);
         gdk_cursor_unref (cursor);
 
 	view->mode = GL_VIEW_MODE_OBJECT_CREATE;
@@ -2805,7 +2827,7 @@ selection_clear_cb (GtkWidget         *widget,
 /*---------------------------------------------------------------------------*/
 static void
 selection_get_cb (GtkWidget        *widget,
-		  GtkSelectionData *selection_data,
+		  GtkSelectionData *sd,
 		  guint             info,
 		  guint             time,
 		  glView           *view)
@@ -2821,7 +2843,7 @@ selection_get_cb (GtkWidget        *widget,
 
 		buffer = gl_xml_label_save_buffer (view->selection_data,
 						   &status);
-		gtk_selection_data_set (selection_data,
+		gtk_selection_data_set (sd,
 					GDK_SELECTION_TYPE_STRING, 8,
 					(guchar *)buffer, strlen (buffer));
 		g_free (buffer);
@@ -2836,7 +2858,7 @@ selection_get_cb (GtkWidget        *widget,
 /*---------------------------------------------------------------------------*/
 static void
 selection_received_cb (GtkWidget        *widget,
-		       GtkSelectionData *selection_data,
+		       GtkSelectionData *sd,
 		       guint             time,
 		       glView           *view)
 {
@@ -2849,17 +2871,20 @@ selection_received_cb (GtkWidget        *widget,
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
-	if (selection_data->length < 0) {
+	if (gtk_selection_data_get_length (sd) < 0)
+        {
 		return;
 	}
-	if (selection_data->type != GDK_SELECTION_TYPE_STRING) {
+	if (gtk_selection_data_get_data_type (sd) != GDK_SELECTION_TYPE_STRING)
+        {
 		return;
 	}
 
 	gl_view_unselect_all (view);
 
-	label = gl_xml_label_open_buffer ((gchar *)selection_data->data, &status);
-	for (p = label->objects; p != NULL; p = p_next) {
+	label = gl_xml_label_open_buffer ((gchar *)gtk_selection_data_get_data (sd), &status);
+	for (p = label->objects; p != NULL; p = p_next)
+        {
 		p_next = p->next;
 
 		object = (glLabelObject *) p->data;
@@ -3266,13 +3291,18 @@ motion_notify_event_cb (glView            *view,
                         GdkEventMotion    *event)
 {
         gboolean            return_value = FALSE;
+        GdkWindow          *bin_window;
+        GdkWindow          *window;
 	cairo_t            *cr;
         gdouble             scale;
         gdouble             x, y;
         GdkCursor          *cursor;
         glViewObjectHandle  handle;
 
-	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+        window = gtk_widget_get_window (view->canvas);
+
+	cr = gdk_cairo_create (bin_window);
 
         /*
          * Translate to label coordinates
@@ -3314,7 +3344,7 @@ motion_notify_event_cb (glView            *view,
                         {
                                 cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         }
-                        gdk_window_set_cursor (view->canvas->window, cursor);
+                        gdk_window_set_cursor (window, cursor);
                         gdk_cursor_unref (cursor);
                         break;
 
@@ -3399,7 +3429,7 @@ motion_notify_event_cb (glView            *view,
          */
         if (view->grabbed_flag && !gdk_pointer_is_grabbed ())
         {
-                gdk_pointer_grab (GTK_LAYOUT (view->canvas)->bin_window,
+                gdk_pointer_grab (bin_window,
                                   FALSE,
                                   (GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK),
                                   NULL,
@@ -3419,13 +3449,16 @@ button_press_event_cb (glView            *view,
                        GdkEventButton    *event)
 {
         gboolean            return_value = FALSE;
+        GdkWindow          *bin_window;
 	cairo_t            *cr;
         gdouble             scale;
         gdouble             x, y;
         glViewObject       *view_object;
         glViewObjectHandle  handle;
 
-	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+
+	cr = gdk_cairo_create (bin_window);
 
         /*
          * Translate to label coordinates
@@ -3538,7 +3571,7 @@ button_press_event_cb (glView            *view,
                 }
 
                 view->grabbed_flag = TRUE;
-                gdk_pointer_grab (GTK_LAYOUT (view->canvas)->bin_window,
+                gdk_pointer_grab (bin_window,
                                   FALSE,
                                   (GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK),
                                   NULL,
@@ -3569,12 +3602,17 @@ button_release_event_cb (glView            *view,
                          GdkEventButton    *event)
 {
         gboolean     return_value = FALSE;
+        GdkWindow   *bin_window;
+        GdkWindow   *window;
 	cairo_t     *cr;
         gdouble      scale;
         gdouble      x, y;
         GdkCursor   *cursor;
 
-	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
+        bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
+        window = gtk_widget_get_window (view->canvas);
+
+	cr = gdk_cairo_create (bin_window);
 
         /*
          * Translate to label coordinates
@@ -3660,7 +3698,7 @@ button_release_event_cb (glView            *view,
                         view->mode = GL_VIEW_MODE_ARROW;
                         view->state = GL_VIEW_IDLE;
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
-                        gdk_window_set_cursor (view->canvas->window, cursor);
+                        gdk_window_set_cursor (window, cursor);
                         gdk_cursor_unref (cursor);
                         break;
 
@@ -3684,9 +3722,12 @@ static gboolean
 key_press_event_cb (glView            *view,
                     GdkEventKey       *event)
 {
+        GdkWindow *window;
         GdkCursor *cursor;
 
         gl_debug (DEBUG_VIEW, "");
+
+        window = gtk_widget_get_window (view->canvas);
 
         if ( (view->mode == GL_VIEW_MODE_ARROW) &&
              (view->state == GL_VIEW_IDLE) )
@@ -3713,8 +3754,7 @@ key_press_event_cb (glView            *view,
                 case GDK_KP_Delete:
                         gl_view_delete_selection (view);
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
-                        gdk_window_set_cursor (GTK_WIDGET (view->canvas)->window
-, cursor);
+                        gdk_window_set_cursor (window, cursor);
                         gdk_cursor_unref (cursor);
                         break;
                 default:

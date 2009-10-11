@@ -307,8 +307,8 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
       points[2] = buf;
     }
 
-  gtk_paint_polygon (widget->style,
-		     widget->window,
+  gtk_paint_polygon (gtk_widget_get_style (widget),
+		     gtk_widget_get_window (widget),
 		     GTK_STATE_NORMAL,
 		     shadow,
 		     &eevent->area,

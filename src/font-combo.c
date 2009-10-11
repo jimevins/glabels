@@ -225,11 +225,14 @@ menu_position_function (GtkMenu  *menu,
                         gboolean *push_in,
                         gpointer  user_data)
 {
-        glFontCombo *this = GL_FONT_COMBO (user_data);
+        glFontCombo  *this = GL_FONT_COMBO (user_data);
+        GdkWindow    *window;
         gint          x1, y1;
         gint          menu_h, menu_w;
 
-        gdk_window_get_origin (GTK_WIDGET (this)->window, &x1, &y1);
+        window = gtk_widget_get_window (GTK_WIDGET (this));
+
+        gdk_window_get_origin (window, &x1, &y1);
         *x = x1 + GTK_WIDGET (this)->allocation.x;
         *y = y1 + GTK_WIDGET (this)->allocation.y +
                 GTK_WIDGET (this)->allocation.height;

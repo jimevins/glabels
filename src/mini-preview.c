@@ -588,6 +588,7 @@ button_press_event_cb (GtkWidget      *widget,
 		       GdkEventButton *event)
 {
 	glMiniPreview     *this = GL_MINI_PREVIEW (widget);
+        GdkWindow         *window;
 	cairo_t           *cr;
         gdouble            scale;
 	gdouble            x, y;
@@ -597,7 +598,10 @@ button_press_event_cb (GtkWidget      *widget,
 
 	if ( event->button == 1 )
 	{
-		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
+
+                window = gtk_widget_get_window (this->priv->canvas);
+
+		cr = gdk_cairo_create (window);
 
                 scale = set_transform_and_get_scale (this, cr);
 
@@ -636,16 +640,19 @@ motion_notify_event_cb (GtkWidget      *widget,
 			GdkEventMotion *event)
 {
 	glMiniPreview *this = GL_MINI_PREVIEW (widget);
-	cairo_t           *cr;
-        gdouble            scale;
-	gdouble            x, y;
-	gint               i;
+        GdkWindow     *window;
+	cairo_t       *cr;
+        gdouble        scale;
+	gdouble        x, y;
+	gint           i;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
 	if (this->priv->dragging)
 	{
-		cr = gdk_cairo_create (GTK_WIDGET (this->priv->canvas)->window);
+                window = gtk_widget_get_window (this->priv->canvas);
+
+		cr = gdk_cairo_create (window);
 
                 scale = set_transform_and_get_scale (this, cr);
 
@@ -743,13 +750,16 @@ expose_event_cb (GtkWidget       *widget,
 		 GdkEventExpose  *event,
                  glMiniPreview   *this)
 {
+        GdkWindow     *window;
 	cairo_t       *cr;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
         this->priv->update_scheduled_flag = FALSE;
 
-	cr = gdk_cairo_create (widget->window);
+        window = gtk_widget_get_window (widget);
+
+	cr = gdk_cairo_create (window);
 
 	cairo_rectangle (cr,
 			event->area.x, event->area.y,
@@ -788,19 +798,22 @@ style_set_cb (GtkWidget        *widget,
 static void
 redraw (glMiniPreview      *this)
 {
+        GdkWindow *window;
 	GdkRegion *region;
 	
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
-	if (GTK_WIDGET (this->priv->canvas)->window)
+        window = gtk_widget_get_window (this->priv->canvas);
+
+	if (window)
 	{
 
                 if ( !this->priv->update_scheduled_flag )
                 {
                         this->priv->update_scheduled_flag = TRUE;
 
-                        region = gdk_drawable_get_clip_region (GTK_WIDGET (this->priv->canvas)->window);
-                        gdk_window_invalidate_region (GTK_WIDGET (this->priv->canvas)->window, region, TRUE);
+                        region = gdk_drawable_get_clip_region (window);
+                        gdk_window_invalidate_region (window, region, TRUE);
                         gdk_region_destroy (region);
                 }
 	}
