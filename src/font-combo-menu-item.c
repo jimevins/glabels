@@ -119,7 +119,24 @@ gl_font_combo_menu_item_new (gchar *font_family)
         GtkWidget           *hbox;
         GtkWidget           *sample;
         GtkWidget           *label;
-        gchar               *markup;
+        PangoLanguage       *language;
+        gchar               *tip;
+
+        /*
+         * Allow text samples to be localized.
+         *
+         * FIXME: if we could extract enough meta information from the fonts
+         * themselves, perhaps rather than setting these globally for the
+         * current locale, they could be unique to each font family.
+         */
+        const char          *short_sample_text    = C_("Short sample text", "Aa");
+        const char          *lower_case_text      = C_("Lower case sample text",
+                                                       "abcdefghijklmnopqrstuvwxyz");
+        const char          *upper_case_text      = C_("Upper case sample text",
+                                                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        const char          *numbers_special_text = C_("Numbers and special characters sample text",
+                                                       "0123456789 .:,;(*!?)");
+        const char          *sample_text;
 
 	this = g_object_new (GL_TYPE_FONT_COMBO_MENU_ITEM, NULL);
 
@@ -128,16 +145,23 @@ gl_font_combo_menu_item_new (gchar *font_family)
         hbox = gtk_hbox_new (FALSE, 6);
         gtk_container_add (GTK_CONTAINER (this), hbox);
 
-        sample = gl_font_sample_new (SAMPLE_W, SAMPLE_H, "Aa", font_family);
+        sample = gl_font_sample_new (SAMPLE_W, SAMPLE_H, short_sample_text, font_family);
         gtk_box_pack_start (GTK_BOX (hbox), sample, FALSE, FALSE, 0);
 
         label = gtk_label_new (font_family);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-        markup = g_strdup_printf ("<span font_family=\"%s\" size=\"x-large\">ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789</span>",
-                                  font_family);
-        gtk_widget_set_tooltip_markup (GTK_WIDGET (this), markup);
-        g_free (markup);
+        language = pango_language_get_default ();
+        sample_text = pango_language_get_sample_string (language);
+        tip = g_strdup_printf ("%s:\n\n<span font_family=\"%s\" size=\"x-large\">%s\n%s\n%s\n\n%s</span>",
+                               _("Sample text"),
+                               font_family,
+                               lower_case_text,
+                               upper_case_text,
+                               numbers_special_text,
+                               sample_text);
+        gtk_widget_set_tooltip_markup (GTK_WIDGET (this), tip);
+        g_free (tip);
 
 	return GTK_WIDGET (this);
 }
