@@ -1,9 +1,9 @@
 Copyright
 =========
 
-   Copyright (C) 2001-2007 Jim Evins
+   Copyright (C) 2001-2009 Jim Evins
 
-   gLabels contains components copyrighted by others -- see th 'AUTHORS' file in
+   gLabels contains components copyrighted by others -- see the 'AUTHORS' file in
    this directory.
 
    For license information see the 'COPYING.README_FIRST' file in this directory.
@@ -26,6 +26,18 @@ GTK+-2.14.x
 LIBXML-2.7.x
 
 All of these libraries are available as part of Gnome 2.16
+
+
+Optional Merge Backends
+=======================
+Evolution Data Server 2.28.0+
+
+
+Optional Barcode Backends
+=========================
+GNU Barcode 0.98+ (http://www.gnu.org/software/barcode/barcode.html)
+QREncode 3.1.0+ (http://megaui.net/fukuchi/works/qrencode/index.en.html)
+IEC16022 0.2.4+ (http://datenfreihafen.org/projects/iec16022.html)
 
 
 

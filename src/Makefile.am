@@ -7,6 +7,7 @@ INCLUDES = \
 	-I$(top_srcdir) 					\
 	-I$(top_builddir) 					\
 	$(GLABELS_CFLAGS) 					\
+	$(LIBEBOOK_CFLAGS)					\
 	$(LIBBARCODE_CFLAGS)					\
 	$(LIBQRENCODE_CFLAGS)					\
 	$(LIBIEC16022_CFLAGS)					\
@@ -26,6 +27,7 @@ glabels_LDFLAGS = -export-dynamic
 glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
+	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
 	$(LIBIEC16022_LIBS)
@@ -35,6 +37,7 @@ glabels_batch_LDFLAGS = -export-dynamic
 glabels_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/libglabels.la		\
+	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
 	$(LIBIEC16022_LIBS)
