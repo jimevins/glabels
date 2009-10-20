@@ -86,12 +86,12 @@
                         <property name="visible">True</property>
                         <property name="spacing">12</property>
                         <child>
-                          <object class="GtkButton" id="edit_insert_field_button">
-                            <property name="label" translatable="yes">Insert merge field</property>
+                          <object class="GtkVBox" id="edit_insert_field_vbox">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="fill">False</property>

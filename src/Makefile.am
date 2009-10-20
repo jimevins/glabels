@@ -179,8 +179,10 @@ glabels_SOURCES = 			\
 	rotate-label-button.h		\
 	wdgt-chain-button.c		\
 	wdgt-chain-button.h		\
-	wdgt-merge-menu.c		\
-	wdgt-merge-menu.h		\
+	field-button.c			\
+	field-button.h			\
+	field-button-menu.c		\
+	field-button-menu.h		\
 	color-combo.c			\
 	color-combo.h			\
 	color-combo-button.c		\

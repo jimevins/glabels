@@ -38,6 +38,10 @@ src/critical-error-handler.c
 src/critical-error-handler.h
 src/debug.c
 src/debug.h
+src/field-button.c
+src/field-button.h
+src/field-button-menu.c
+src/field-button-menu.h
 src/file.c
 src/file.h
 src/file-util.c
@@ -167,8 +171,6 @@ src/wdgt-chain-button.c
 src/wdgt-chain-button.h
 src/wdgt-media-select.c
 src/wdgt-media-select.h
-src/wdgt-merge-menu.c
-src/wdgt-merge-menu.h
 src/window.c
 src/window.h
 src/xml-label-04.c

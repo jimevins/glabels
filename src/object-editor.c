@@ -30,7 +30,7 @@
 #include "color-combo.h"
 #include "color.h"
 #include "wdgt-chain-button.h"
-#include "wdgt-merge-menu.h"
+#include "field-button.h"
 #include "marshal.h"
 #include "combo-util.h"
 #include "builder-util.h"
@@ -386,7 +386,7 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 {
         GList     *keys;
 	GtkWidget *combo;
-	GtkWidget *menu;
+	GtkWidget *button;
 	gboolean   fixed_flag;
 	gboolean   state;
  
@@ -529,9 +529,9 @@ gl_object_editor_set_key_names (glObjectEditor      *editor,
 		gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
 	}
 
-	menu = editor->priv->edit_insert_field_menu;
-	if (menu) {
-		gl_wdgt_merge_menu_set_fields (GL_WDGT_MERGE_MENU(menu), keys);
+	button = editor->priv->edit_insert_field_button;
+	if (button) {
+		gl_field_button_set_keys (GL_FIELD_BUTTON(button), keys);
 	}
 
 	combo = editor->priv->data_key_combo;

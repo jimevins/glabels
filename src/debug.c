@@ -91,8 +91,8 @@ gl_debug_init (void)
 		debug_flags |= GLABELS_DEBUG_WDGT;
 	if (g_getenv ("GLABELS_DEBUG_PATH") != NULL)
 		debug_flags |= GLABELS_DEBUG_PATH;
-	if (g_getenv ("GLABELS_DEBUG_MERGE_MENU") != NULL)
-		debug_flags |= GLABELS_DEBUG_MERGE_MENU;
+	if (g_getenv ("GLABELS_DEBUG_FIELD_BUTTON") != NULL)
+		debug_flags |= GLABELS_DEBUG_FIELD_BUTTON;
 }
 
 
