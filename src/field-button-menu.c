@@ -93,11 +93,11 @@ gl_field_button_menu_class_init (glFieldButtonMenuClass *class)
 
 
 static void
-gl_field_button_menu_init (glFieldButtonMenu *merge_menu)
+gl_field_button_menu_init (glFieldButtonMenu *this)
 {
         gl_debug (DEBUG_FIELD_BUTTON, "START");
 
-        merge_menu->priv = g_new0 (glFieldButtonMenuPrivate, 1);
+        this->priv = g_new0 (glFieldButtonMenuPrivate, 1);
 
         gl_debug (DEBUG_FIELD_BUTTON, "END");
 }
@@ -106,24 +106,24 @@ gl_field_button_menu_init (glFieldButtonMenu *merge_menu)
 static void
 gl_field_button_menu_finalize (GObject *object)
 {
-        glFieldButtonMenu *merge_menu = GL_FIELD_BUTTON_MENU (object);
+        glFieldButtonMenu *this = GL_FIELD_BUTTON_MENU (object);
         GList           *p;
         GtkWidget       *menu_item;
-        gchar           *field;
+        gchar           *key;
 
         gl_debug (DEBUG_FIELD_BUTTON, "START");
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_FIELD_BUTTON_MENU (object));
 
-        for ( p = merge_menu->priv->menu_items; p != NULL; p = p->next )
+        for ( p = this->priv->menu_items; p != NULL; p = p->next )
         {
                 menu_item = GTK_WIDGET (p->data);
-                field = g_object_get_data (G_OBJECT (menu_item), "field");
-                g_free (field);
+                key = g_object_get_data (G_OBJECT (menu_item), "key");
+                g_free (key);
         }
-        g_list_free (merge_menu->priv->menu_items);
-        g_free (merge_menu->priv);
+        g_list_free (this->priv->menu_items);
+        g_free (this->priv);
 
         G_OBJECT_CLASS (gl_field_button_menu_parent_class)->finalize (object);
 
@@ -134,15 +134,15 @@ gl_field_button_menu_finalize (GObject *object)
 GtkWidget *
 gl_field_button_menu_new (void)
 {
-        glFieldButtonMenu *merge_menu;
+        glFieldButtonMenu *this;
 
         gl_debug (DEBUG_FIELD_BUTTON, "START");
 
-        merge_menu = g_object_new (gl_field_button_menu_get_type (), NULL);
+        this = g_object_new (gl_field_button_menu_get_type (), NULL);
 
         gl_debug (DEBUG_FIELD_BUTTON, "END");
 
-        return GTK_WIDGET (merge_menu);
+        return GTK_WIDGET (this);
 }
 
 
@@ -151,7 +151,7 @@ gl_field_button_menu_new (void)
 /*--------------------------------------------------------------------------*/
 static void
 activate_cb (GtkMenuItem       *menu_item,
-             glFieldButtonMenu *merge_menu)
+             glFieldButtonMenu *this)
 {
         gchar *key;
 
@@ -160,7 +160,7 @@ activate_cb (GtkMenuItem       *menu_item,
         key = g_object_get_data (G_OBJECT (menu_item), "key");
         gl_debug (DEBUG_FIELD_BUTTON, "Key activated: \"%s\"\n", key );
 
-        g_signal_emit (G_OBJECT (merge_menu), signals[KEY_SELECTED], 0, key);
+        g_signal_emit (G_OBJECT (this), signals[KEY_SELECTED], 0, key);
 
         gl_debug (DEBUG_FIELD_BUTTON, "END");
 }
@@ -170,7 +170,7 @@ activate_cb (GtkMenuItem       *menu_item,
 /* set key names.                                                           */
 /****************************************************************************/
 void
-gl_field_button_menu_set_keys (glFieldButtonMenu *merge_menu,
+gl_field_button_menu_set_keys (glFieldButtonMenu *this,
                                GList             *key_list)
 {
         GList     *p;
@@ -182,15 +182,15 @@ gl_field_button_menu_set_keys (glFieldButtonMenu *merge_menu,
         /*
          * Remove all old menu items.
          */
-        for ( p = merge_menu->priv->menu_items; p != NULL; p = p->next )
+        for ( p = this->priv->menu_items; p != NULL; p = p->next )
         {
                 menu_item = GTK_WIDGET (p->data);
                 key = g_object_get_data (G_OBJECT (menu_item), "key");
                 g_free (key);
                 gtk_widget_destroy (menu_item);
         }
-        g_list_free (merge_menu->priv->menu_items);
-        merge_menu->priv->menu_items = NULL;
+        g_list_free (this->priv->menu_items);
+        this->priv->menu_items = NULL;
 
         /*
          * Add new menu items.
@@ -201,10 +201,10 @@ gl_field_button_menu_set_keys (glFieldButtonMenu *merge_menu,
                 menu_item = gtk_menu_item_new_with_label (p->data);
                 g_object_set_data (G_OBJECT (menu_item), "key", g_strdup (p->data));
                 g_signal_connect (G_OBJECT (menu_item), "activate", 
-                                  G_CALLBACK (activate_cb), merge_menu);
-                gtk_menu_shell_append (GTK_MENU_SHELL (merge_menu), menu_item);
-                merge_menu->priv->menu_items =
-                        g_list_append (merge_menu->priv->menu_items, menu_item);
+                                  G_CALLBACK (activate_cb), this);
+                gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
+                this->priv->menu_items =
+                        g_list_append (this->priv->menu_items, menu_item);
         }
 
         gl_debug (DEBUG_FIELD_BUTTON, "END");

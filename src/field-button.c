@@ -199,9 +199,9 @@ menu_position_function (GtkMenu  *menu,
                         gpointer  user_data)
 {
         glFieldButton  *this = GL_FIELD_BUTTON (user_data);
-        GdkWindow    *window;
-        gint          x1, y1;
-        gint          menu_h, menu_w;
+        GdkWindow      *window;
+        gint            x1, y1;
+        gint            menu_h, menu_w;
 
         window = gtk_widget_get_window (GTK_WIDGET (this));
 
@@ -237,7 +237,7 @@ menu_position_function (GtkMenu  *menu,
 static gboolean
 button_press_event_cb (GtkWidget      *widget,
                        GdkEventButton *event,
-                       glFieldButton   *this)
+                       glFieldButton  *this)
 {
         switch (event->button)
         {
@@ -277,7 +277,7 @@ menu_key_selected_cb (glFieldButtonMenu     *menu,
 /*****************************************************************************/
 static void
 menu_selection_done_cb (GtkMenuShell         *object,
-                        glFieldButton         *this)
+                        glFieldButton        *this)
 {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this), FALSE);
 }

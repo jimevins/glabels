@@ -62,7 +62,7 @@ GType      gl_field_button_menu_get_type    (void) G_GNUC_CONST;
 
 GtkWidget *gl_field_button_menu_new         (void);
 
-void       gl_field_button_menu_set_keys    (glFieldButtonMenu *merge_menu,
+void       gl_field_button_menu_set_keys    (glFieldButtonMenu *this,
                                              GList             *key_list);
 
 
