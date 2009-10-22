@@ -29,6 +29,7 @@
 
 #include "debug.h"
 
+#define MAX_MENU_ROWS 25
 
 /*===========================================*/
 /* Private types                             */
@@ -176,6 +177,7 @@ gl_field_button_menu_set_keys (glFieldButtonMenu *this,
         GList     *p;
         GtkWidget *menu_item;
         gchar     *key;
+        gint       i, i_row, i_col;
 
         gl_debug (DEBUG_FIELD_BUTTON, "START");
 
@@ -187,24 +189,34 @@ gl_field_button_menu_set_keys (glFieldButtonMenu *this,
                 menu_item = GTK_WIDGET (p->data);
                 key = g_object_get_data (G_OBJECT (menu_item), "key");
                 g_free (key);
-                gtk_widget_destroy (menu_item);
+                gtk_container_remove (GTK_CONTAINER (this), menu_item);
         }
         g_list_free (this->priv->menu_items);
         this->priv->menu_items = NULL;
+        gtk_widget_unrealize (GTK_WIDGET (this)); /* Start over with new Gdk resources. */
 
         /*
          * Add new menu items.
          */
-        for ( p = key_list; p != NULL; p = p->next )
+        for ( p = key_list, i = 0; p != NULL; p = p->next, i++ )
         {
-                gl_debug (DEBUG_FIELD_BUTTON, "Adding key: %s", p->data);
-                menu_item = gtk_menu_item_new_with_label (p->data);
-                g_object_set_data (G_OBJECT (menu_item), "key", g_strdup (p->data));
-                g_signal_connect (G_OBJECT (menu_item), "activate", 
-                                  G_CALLBACK (activate_cb), this);
-                gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
-                this->priv->menu_items =
-                        g_list_append (this->priv->menu_items, menu_item);
+                if ( p->data && strlen (p->data) )
+                {
+
+                        gl_debug (DEBUG_FIELD_BUTTON, "Adding key: %s", p->data);
+
+                        menu_item = gtk_menu_item_new_with_label (p->data);
+                        gtk_widget_show (menu_item);
+                        g_object_set_data (G_OBJECT (menu_item), "key", g_strdup (p->data));
+                        g_signal_connect (G_OBJECT (menu_item), "activate", 
+                                          G_CALLBACK (activate_cb), this);
+                        this->priv->menu_items =
+                                g_list_append (this->priv->menu_items, menu_item);
+
+                        i_row = i % MAX_MENU_ROWS;
+                        i_col = i / MAX_MENU_ROWS;
+                        gtk_menu_attach (GTK_MENU (this), menu_item, i_col, i_col+1, i_row, i_row+1);
+                }
         }
 
         gl_debug (DEBUG_FIELD_BUTTON, "END");
