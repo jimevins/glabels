@@ -52,6 +52,10 @@ src/font-combo-menu.c
 src/font-combo-menu.h
 src/font-combo-menu-item.c
 src/font-combo-menu-item.h
+src/font-history.c
+src/font-history.h
+src/font-history-model.c
+src/font-history-model.h
 src/font-sample.c
 src/font-sample.h
 src/font-util.c

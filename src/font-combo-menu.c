@@ -27,6 +27,7 @@
 
 #include "font-combo-menu-item.h"
 #include "font-util.h"
+#include "font-history.h"
 #include "marshal.h"
 
 
@@ -41,7 +42,10 @@
 
 struct _glFontComboMenuPrivate {
 
-        gchar *font_family;
+        gchar     *font_family;
+
+        GtkWidget *recent_menu_item;
+        GtkWidget *recent_sub_menu;
 
 };
 
@@ -63,10 +67,16 @@ static guint signals[LAST_SIGNAL] = {0};
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void gl_font_combo_menu_finalize (GObject        *object);
+static void       gl_font_combo_menu_finalize (GObject             *object);
 
-static void menu_item_activate_cb (glFontComboMenuItem *item,
-                                   glFontComboMenu     *this);
+static void       menu_item_activate_cb       (glFontComboMenuItem *item,
+                                               glFontComboMenu     *this);
+
+static GtkWidget *new_font_sub_menu           (glFontComboMenu     *this,
+                                               const GList         *list);
+
+static void       font_history_changed_cb     (glFontComboMenu     *this);
+
 
 
 /****************************************************************************/
@@ -124,50 +134,52 @@ gl_font_combo_menu_init (glFontComboMenu *this)
         menu_item = gtk_separator_menu_item_new ();
         gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
 
+
+        menu_item = gtk_menu_item_new_with_label (_("Recent fonts"));
+        gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
+
+        list = gl_font_history_model_get_family_list (gl_font_history);
+        sub_menu = new_font_sub_menu (this, list);
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
+        gtk_widget_set_sensitive (menu_item, list != NULL);
+
+        this->priv->recent_menu_item = menu_item;
+        this->priv->recent_sub_menu  = sub_menu;
+
+        menu_item = gtk_separator_menu_item_new ();
+        gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
+
+
         menu_item = gtk_menu_item_new_with_label (_("Proportional fonts"));
         gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
 
-        sub_menu = gtk_menu_new ();
-        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
-
         list = gl_font_util_get_proportional_families ();
-        for ( p = (GList *)list; p != NULL; p = p->next )
-        {
-                menu_item = gl_font_combo_menu_item_new (p->data);
-                gtk_menu_shell_append (GTK_MENU_SHELL (sub_menu), menu_item);
-                g_signal_connect (menu_item, "activate",
-                                  G_CALLBACK (menu_item_activate_cb), this);
-        }
+        sub_menu = new_font_sub_menu (this, list);
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
+        gtk_widget_set_sensitive (menu_item, list != NULL);
 
         menu_item = gtk_menu_item_new_with_label (_("Fixed-width fonts"));
         gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
 
-        sub_menu = gtk_menu_new ();
-        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
-
         list = gl_font_util_get_fixed_width_families ();
-        for ( p = (GList *)list; p != NULL; p = p->next )
-        {
-                menu_item = gl_font_combo_menu_item_new (p->data);
-                gtk_menu_shell_append (GTK_MENU_SHELL (sub_menu), menu_item);
-                g_signal_connect (menu_item, "activate",
-                                  G_CALLBACK (menu_item_activate_cb), this);
-        }
+        sub_menu = new_font_sub_menu (this, list);
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
+        gtk_widget_set_sensitive (menu_item, list != NULL);
 
         menu_item = gtk_menu_item_new_with_label (_("All fonts"));
         gtk_menu_shell_append (GTK_MENU_SHELL (this), menu_item);
 
-        sub_menu = gtk_menu_new ();
-        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
-
         list = gl_font_util_get_all_families ();
-        for ( p = (GList *)list; p != NULL; p = p->next )
-        {
-                menu_item = gl_font_combo_menu_item_new (p->data);
-                gtk_menu_shell_append (GTK_MENU_SHELL (sub_menu), menu_item);
-                g_signal_connect (menu_item, "activate",
-                                  G_CALLBACK (menu_item_activate_cb), this);
-        }
+        sub_menu = new_font_sub_menu (this, list);
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_item), sub_menu);
+        gtk_widget_set_sensitive (menu_item, list != NULL);
+
+
+        gtk_widget_show_all (GTK_WIDGET (this));
+
+
+        g_signal_connect_swapped (gl_font_history, "changed",
+                                  G_CALLBACK (font_history_changed_cb), this);
 
 }
 
@@ -224,6 +236,62 @@ gchar *
 gl_font_combo_menu_get_family (glFontComboMenu *this)
 {
         return g_strdup (this->priv->font_family);
+}
+
+
+/*****************************************************************************/
+/* Create a new font sub menu from font list.                                */
+/*****************************************************************************/
+static GtkWidget *
+new_font_sub_menu (glFontComboMenu *this,
+                   const GList     *list)
+{
+        GtkWidget   *menu;
+        GtkWidget   *menu_item;
+        GList       *p;
+
+        menu = gtk_menu_new ();
+
+        for ( p = (GList *)list; p != NULL; p = p->next )
+        {
+                menu_item = gl_font_combo_menu_item_new (p->data);
+                gtk_widget_show_all (menu_item);
+                gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+                g_signal_connect (menu_item, "activate",
+                                  G_CALLBACK (menu_item_activate_cb), this);
+        }
+
+        gtk_widget_show (menu);
+        return menu;
+}
+
+
+/*****************************************************************************/
+/* Font history changed callback.                                            */
+/*****************************************************************************/
+static void
+font_history_changed_cb (glFontComboMenu     *this)
+{
+        const GList *list;
+
+        /*
+         * Remove old sub menu
+         */
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (this->priv->recent_menu_item),
+                                   NULL);
+
+        /*
+         * Build new sub menu
+         */
+        list = gl_font_history_model_get_family_list (gl_font_history);
+        this->priv->recent_sub_menu = new_font_sub_menu (this, list);
+
+        /*
+         * Attach to top-level menu item
+         */
+        gtk_menu_item_set_submenu (GTK_MENU_ITEM (this->priv->recent_menu_item),
+                                   this->priv->recent_sub_menu);
+        gtk_widget_set_sensitive (this->priv->recent_menu_item, list != NULL);
 }
 
 

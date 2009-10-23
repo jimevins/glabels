@@ -30,6 +30,7 @@
 #include "recent.h"
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
+#include "font-history.h"
 #include "debug.h"
 #include "window.h"
 #include "file.h"
@@ -115,6 +116,7 @@ main (int argc, char **argv)
 	gl_mini_preview_pixbuf_cache_init ();
 	gl_merge_init ();
 	gl_recent_init ();
+        gl_font_history_init ();
 	
 
 	/* Parse args and build the list of files to be loaded at startup */

@@ -28,6 +28,7 @@
 #include <string.h>
 
 #include "font-util.h"
+#include "font-history.h"
 
 #include "debug.h"
 
@@ -216,6 +217,8 @@ gl_label_text_init (glLabelText *ltext)
 	ltext->priv->auto_shrink       = DEFAULT_AUTO_SHRINK;
 
         ltext->priv->size_changed      = TRUE;
+
+        gl_font_history_model_add_family (gl_font_history, DEFAULT_FONT_FAMILY);
 
 	g_signal_connect (G_OBJECT(ltext->priv->buffer), "changed",
 			  G_CALLBACK(buffer_changed_cb), ltext);
@@ -480,6 +483,8 @@ set_font_family (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "new font family = %s", ltext->priv->font_family);
 
         ltext->priv->size_changed = TRUE;
+
+        gl_font_history_model_add_family (gl_font_history, ltext->priv->font_family);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 

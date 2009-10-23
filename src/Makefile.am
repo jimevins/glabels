@@ -205,6 +205,10 @@ glabels_SOURCES = 			\
 	font-sample.h			\
 	font-util.c			\
 	font-util.h			\
+	font-history.c			\
+	font-history.h			\
+	font-history-model.c		\
+	font-history-model.h		\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-markup-path.c		\
@@ -282,6 +286,10 @@ glabels_batch_SOURCES = 		\
 	prefs-model.h 			\
 	font-util.c			\
 	font-util.h			\
+	font-history.c			\
+	font-history.h			\
+	font-history-model.c		\
+	font-history-model.h		\
 	str-util.c			\
 	str-util.h			\
 	color.c				\
