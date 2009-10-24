@@ -185,6 +185,25 @@ gl_font_util_validate_family (const gchar *family)
 }
 
 
+/****************************************************************************/
+/* Test if font is installed.                                               */
+/****************************************************************************/
+gboolean
+gl_font_util_is_family_installed (const gchar *family)
+{
+        const GList *installed_families;
+        GList       *p;
+
+        installed_families = gl_font_util_get_all_families ();
+
+        p = g_list_find_custom ((GList *)installed_families,
+                                family,
+                                (GCompareFunc)g_utf8_collate);
+
+        return (p != NULL);
+}
+
+
 
 /*
  * Local Variables:       -- emacs

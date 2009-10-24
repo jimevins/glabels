@@ -63,14 +63,15 @@ struct _glFontHistoryModelClass {
 };
 
 
-GType                gl_font_history_model_get_type        (void) G_GNUC_CONST;
+GType                gl_font_history_model_get_type         (void) G_GNUC_CONST;
 
-glFontHistoryModel  *gl_font_history_model_new             (guint               n);
+glFontHistoryModel  *gl_font_history_model_new              (guint               n);
 
-void                 gl_font_history_model_add_family      (glFontHistoryModel *this,
-                                                            const gchar        *family);
+void                 gl_font_history_model_add_family       (glFontHistoryModel *this,
+                                                             const gchar        *family);
 
-const GList         *gl_font_history_model_get_family_list (glFontHistoryModel *this);
+GList               *gl_font_history_model_get_family_list  (glFontHistoryModel *this);
+void                 gl_font_history_model_free_family_list (GList              *list);
 
 
 G_END_DECLS

@@ -218,8 +218,6 @@ gl_label_text_init (glLabelText *ltext)
 
         ltext->priv->size_changed      = TRUE;
 
-        gl_font_history_model_add_family (gl_font_history, DEFAULT_FONT_FAMILY);
-
 	g_signal_connect (G_OBJECT(ltext->priv->buffer), "changed",
 			  G_CALLBACK(buffer_changed_cb), ltext);
 }

@@ -114,11 +114,11 @@ gl_font_combo_menu_class_init (glFontComboMenuClass *class)
 static void
 gl_font_combo_menu_init (glFontComboMenu *this)
 {
-        gint         i;
-        GtkWidget   *menu_item;
-        GtkWidget   *sub_menu;
-        const GList *list;
-        GList       *p;
+        gint          i;
+        GtkWidget    *menu_item;
+        GtkWidget    *sub_menu;
+        const GList  *list;
+        GList        *p;
 
 	this->priv = g_new0 (glFontComboMenuPrivate, 1);
 
@@ -272,7 +272,7 @@ new_font_sub_menu (glFontComboMenu *this,
 static void
 font_history_changed_cb (glFontComboMenu     *this)
 {
-        const GList *list;
+        GList *list;
 
         /*
          * Remove old sub menu
@@ -292,6 +292,8 @@ font_history_changed_cb (glFontComboMenu     *this)
         gtk_menu_item_set_submenu (GTK_MENU_ITEM (this->priv->recent_menu_item),
                                    this->priv->recent_sub_menu);
         gtk_widget_set_sensitive (this->priv->recent_menu_item, list != NULL);
+
+        gl_font_history_model_free_family_list (list);
 }
 
 
