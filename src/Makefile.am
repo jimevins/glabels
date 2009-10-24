@@ -191,8 +191,8 @@ glabels_SOURCES = 			\
 	color-combo-menu.h		\
 	color-combo-color-menu-item.c	\
 	color-combo-color-menu-item.h	\
-	color-combo-history.c		\
-	color-combo-history.h		\
+	color-history-model.c		\
+	color-history-model.h		\
 	color-swatch.c			\
 	color-swatch.h			\
 	font-combo.c			\

@@ -57,8 +57,7 @@ struct _glFontHistoryModelClass {
          * Signals
          */
         void (*changed)     (glFontHistoryModel     *this,
-                             gpointer           user_data);
-
+                             gpointer                user_data);
 
 };
 

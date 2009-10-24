@@ -1,6 +1,6 @@
 /*
- *  font-history-model.c
- *  Copyright (C) 2009  Jim Evins <evins@snaught.com>.
+ *  color-history-model.c
+ *  Copyright (C) 2008-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -20,24 +20,23 @@
 
 #include <config.h>
 
-#include "font-history-model.h"
+#include "color-history-model.h"
 
 #include <gconf/gconf-client.h>
 
-#include <libglabels/libglabels.h>
 #include "marshal.h"
 
 
 #define BASE_KEY          "/apps/glabels"
-#define RECENT_FONTS_KEY  BASE_KEY "/recent-fonts"
+#define RECENT_COLORS_KEY  BASE_KEY "/recent-colors"
 
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
-/** GL_FONT_HISTORY_MODEL Private fields */
-struct _glFontHistoryModelPrivate {
+/** GL_COLOR_HISTORY_MODEL Private fields */
+struct _glColorHistoryModelPrivate {
 
 	GConfClient *gconf_client;
 
@@ -61,37 +60,39 @@ static guint signals[LAST_SIGNAL] = {0};
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_font_history_model_finalize      (GObject             *object);
+static void gl_color_history_model_finalize     (GObject             *object);
 
 static void conf_notify_cb                      (GConfClient         *client,
                                                  guint                cnxn_id,
                                                  GConfEntry          *entry,
-                                                 glFontHistoryModel  *this);
+                                                 glColorHistoryModel *this);
+
+static GSList *get_color_list                   (glColorHistoryModel *this);
 
 
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
 /*****************************************************************************/
-G_DEFINE_TYPE (glFontHistoryModel, gl_font_history_model, G_TYPE_OBJECT);
+G_DEFINE_TYPE (glColorHistoryModel, gl_color_history_model, G_TYPE_OBJECT);
 
 
 /*****************************************************************************/
 /* Class Init Function.                                                      */
 /*****************************************************************************/
 static void
-gl_font_history_model_class_init (glFontHistoryModelClass *class)
+gl_color_history_model_class_init (glColorHistoryModelClass *class)
 {
         GObjectClass  *gobject_class = (GObjectClass *) class;
 
-        gl_font_history_model_parent_class = g_type_class_peek_parent (class);
+        gl_color_history_model_parent_class = g_type_class_peek_parent (class);
 
-        gobject_class->finalize = gl_font_history_model_finalize;
+        gobject_class->finalize = gl_color_history_model_finalize;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glFontHistoryModelClass, changed),
+			      G_STRUCT_OFFSET (glColorHistoryModelClass, changed),
 			      NULL, NULL,
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -103,9 +104,9 @@ gl_font_history_model_class_init (glFontHistoryModelClass *class)
 /* Object Instance Init Function.                                            */
 /*****************************************************************************/
 static void
-gl_font_history_model_init (glFontHistoryModel *this)
+gl_color_history_model_init (glColorHistoryModel *this)
 {
-        this->priv = g_new0 (glFontHistoryModelPrivate, 1);
+        this->priv = g_new0 (glColorHistoryModelPrivate, 1);
 
         this->priv->gconf_client = gconf_client_get_default ();
 
@@ -117,7 +118,7 @@ gl_font_history_model_init (glFontHistoryModel *this)
                               NULL);
 
         gconf_client_notify_add (this->priv->gconf_client,
-                                 RECENT_FONTS_KEY,
+                                 RECENT_COLORS_KEY,
                                  (GConfClientNotifyFunc)conf_notify_cb, this,
                                  NULL, NULL);
 }
@@ -127,29 +128,29 @@ gl_font_history_model_init (glFontHistoryModel *this)
 /* Finalize Method.                                                          */
 /*****************************************************************************/
 static void
-gl_font_history_model_finalize (GObject *object)
+gl_color_history_model_finalize (GObject *object)
 {
-        glFontHistoryModel    *this;
+        glColorHistoryModel   *this;
 
-        g_return_if_fail (object && IS_GL_FONT_HISTORY_MODEL (object));
-        this = GL_FONT_HISTORY_MODEL (object);
+        g_return_if_fail (object && IS_GL_COLOR_HISTORY_MODEL (object));
+        this = GL_COLOR_HISTORY_MODEL (object);
 
         g_object_unref (G_OBJECT(this->priv->gconf_client));
         g_free (this->priv);
 
-        G_OBJECT_CLASS (gl_font_history_model_parent_class)->finalize (object);
+        G_OBJECT_CLASS (gl_color_history_model_parent_class)->finalize (object);
 }
 
 
 /*****************************************************************************/
 /** New Object Generator.                                                    */
 /*****************************************************************************/
-glFontHistoryModel *
-gl_font_history_model_new (guint n)
+glColorHistoryModel *
+gl_color_history_model_new (guint n)
 {
-        glFontHistoryModel *this;
+        glColorHistoryModel *this;
 
-        this = g_object_new (TYPE_GL_FONT_HISTORY_MODEL, NULL);
+        this = g_object_new (TYPE_GL_COLOR_HISTORY_MODEL, NULL);
 
         this->priv->max_n = n;
 
@@ -158,55 +159,50 @@ gl_font_history_model_new (guint n)
 
 
 /*****************************************************************************/
-/* Add font to history.                                                      */
+/* Add color to history.                                                      */
 /*****************************************************************************/
 void
-gl_font_history_model_add_family (glFontHistoryModel *this,
-                                  const gchar        *family)
+gl_color_history_model_add_color (glColorHistoryModel *this,
+                                  guint                color)
 {
-        GSList *list = NULL;
-        GList  *old_list;
-        GList  *p;
-        GSList *ps;
+        GSList  *list = NULL;
+        GSList  *old_list;
+        GSList  *p;
 
         /*
-         * Start new list with this family.
+         * Start new list with this color.
          */
-        list = g_slist_append (list, (gchar *)family);
+        list = g_slist_append (list, GINT_TO_POINTER (color));
 
         /*
-         * Transfer old list to new list, ignoring any duplicate of this family
+         * Transfer old list to new list, ignoring any duplicate of this color
          */
-        old_list = gl_font_history_model_get_family_list (this);
+        old_list = get_color_list (this);
         for ( p = old_list; p; p=p->next )
         {
-                if ( lgl_str_utf8_casecmp (family, p->data) )
+                if ( color != (guint)GPOINTER_TO_INT (p->data) )
                 {
                         list = g_slist_append (list, p->data);
                 }
-                else
-                {
-                        g_free (p->data);
-                }
         }
-        g_list_free (old_list);
+        g_slist_free (old_list);
 
         /*
          * Truncate list to maximum size
          */
         while (g_slist_length (list) > this->priv->max_n)
         {
-                ps = g_slist_last (list);
-                list = g_slist_remove_link (list, ps);
-                g_slist_free_1 (ps);
+                p = g_slist_last (list);
+                list = g_slist_remove_link (list, p);
+                g_slist_free_1 (p);
         }
 
         /*
          * Update conf
          */
         gconf_client_set_list (this->priv->gconf_client,
-                               RECENT_FONTS_KEY,
-                               GCONF_VALUE_STRING,
+                               RECENT_COLORS_KEY,
+                               GCONF_VALUE_INT,
                                list,
                                NULL);
 }
@@ -219,64 +215,53 @@ static void
 conf_notify_cb (GConfClient         *client,
                 guint                cnxn_id,
                 GConfEntry          *entry,
-                glFontHistoryModel  *this)
+                glColorHistoryModel  *this)
 {
         g_signal_emit (G_OBJECT(this), signals[CHANGED], 0);
 }
 
 
 /*****************************************************************************/
-/* Get list of font families.                                                */
+/* Get list of colors.                                                       */
 /*****************************************************************************/
-GList *
-gl_font_history_model_get_family_list (glFontHistoryModel *this)
+static GSList *
+get_color_list (glColorHistoryModel *this)
 {
-        GList  *list = NULL;
-        GSList *tmp_list;
-        GSList *p;
+        GSList *list;
 
         /*
-         * Get family list.
+         * Get color list.
          */
-	tmp_list = gconf_client_get_list (this->priv->gconf_client,
-                                          RECENT_FONTS_KEY,
-                                          GCONF_VALUE_STRING,
-                                          NULL);
-
-        /*
-         * Proof read family list; transfer storage to new list.
-         */
-        for (p=tmp_list; p != NULL; p=p->next)
-        {
-                if ( gl_font_util_is_family_installed (p->data) )
-                {
-                        list = g_list_append (list, p->data);
-                }
-                else
-                {
-                        g_free (p->data);
-                }
-        }
-        g_slist_free (tmp_list);
-
+	list = gconf_client_get_list (this->priv->gconf_client,
+                                      RECENT_COLORS_KEY,
+                                      GCONF_VALUE_INT,
+                                      NULL);
         return list;
 }
 
 
 /*****************************************************************************/
-/* Free font family list.                                                    */
+/* Get color.                                                                */
 /*****************************************************************************/
-void
-gl_font_history_model_free_family_list (GList *list)
+guint
+gl_color_history_model_get_color (glColorHistoryModel *this,
+                                  guint                i)
 {
-        GList *p;
+        guint   color = 0;
+        GSList *list;
+        GSList *p;
 
-        for ( p = list; p; p=p->next )
+        list = get_color_list (this);
+        p = g_slist_nth (list, i);
+        if (p)
         {
-                g_free (p->data);
+                color = GPOINTER_TO_INT (p->data);
         }
-        g_list_free (list);
+        g_slist_free (list);
+
+        return color;
 }
+
 
 
 

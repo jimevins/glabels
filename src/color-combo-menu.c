@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "color-combo-color-menu-item.h"
-#include "color-combo-history.h"
+#include "color-history-model.h"
 #include "color.h"
 #include "marshal.h"
 
@@ -122,7 +122,7 @@ static ColorTableEntry color_table[] =
 
 };
 
-static glColorComboHistory *custom_color_history = NULL;
+static glColorHistoryModel *custom_color_history = NULL;
 
 
 /*===========================================*/
@@ -195,7 +195,7 @@ gl_color_combo_menu_init (glColorComboMenu *this)
          */
         if ( !custom_color_history )
         {
-                custom_color_history = gl_color_combo_history_new (PALETTE_COLS);
+                custom_color_history = gl_color_history_model_new (PALETTE_COLS);
         }
 
 
@@ -307,7 +307,7 @@ load_custom_color_history (glColorComboMenu *this)
 
         for ( i=0; i < PALETTE_COLS; i++ )
         {
-                color = gl_color_combo_history_get_color (custom_color_history, i);
+                color = gl_color_history_model_get_color (custom_color_history, i);
 
                 if (color)
                 {
@@ -386,7 +386,7 @@ custom_menu_item_activate_cb (glColorComboMenu *this)
                                               (color.green >>8),
                                               (color.blue  >>8));
 
-                gl_color_combo_history_add_color (custom_color_history,
+                gl_color_history_model_add_color (custom_color_history,
                                                   this->priv->color);
 
                 g_signal_emit (this, signals[COLOR_CHANGED], 0,
@@ -431,8 +431,7 @@ history_menu_item_activate_cb (GtkMenuItem      *item,
 
         i = gl_color_combo_color_menu_item_get_id (GL_COLOR_COMBO_COLOR_MENU_ITEM (item));
 
-        this->priv->color = gl_color_combo_history_get_color (custom_color_history,
-                                                              i);
+        this->priv->color = gl_color_history_model_get_color (custom_color_history, i);
 
         g_signal_emit (this, signals[COLOR_CHANGED], 0,
                        this->priv->color, FALSE);
