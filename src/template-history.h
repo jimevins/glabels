@@ -1,6 +1,6 @@
 /*
- *  prefs.h
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  template-history.h
+ *  Copyright (C) 2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -18,38 +18,25 @@
  *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __PREFS_H__
-#define __PREFS_H__
+#ifndef __GL_TEMPLATE_HISTORY_H__
+#define __GL_TEMPLATE_HISTORY_H__
 
-#include "prefs-model.h"
+
+#include "template-history-model.h"
+
 
 G_BEGIN_DECLS
 
 
-
-extern glPrefsModel *gl_prefs;
-
+glTemplateHistoryModel *gl_template_history;
 
 
-void          gl_prefs_init                (void);
-
-const gchar  *gl_prefs_get_page_size       (void);
-
-lglUnitsType  gl_prefs_get_units           (void);
-
-const gchar  *gl_prefs_get_units_string    (void);
-
-gdouble       gl_prefs_get_units_per_point (void);
-
-gdouble       gl_prefs_get_units_step_size (void);
-
-gint          gl_prefs_get_units_precision (void);
+void            gl_template_history_init (void);
 
 
 G_END_DECLS
 
-#endif /* __PREFS_H__ */
-
+#endif /* __GL_TEMPLATE_HISTORY_H__ */
 
 
 

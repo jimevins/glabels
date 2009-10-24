@@ -53,6 +53,7 @@ Makefile.in.in
 /po/*.gmo
 /po/POTFILES
 /po/stamp-it
+/po/glabels.pot
 
 /help/glabels-*.omf
 /help/*/.xml2po.mo

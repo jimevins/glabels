@@ -128,6 +128,7 @@ main (int argc, char **argv)
         gl_merge_init ();
         lgl_db_init ();
 	gl_prefs_init ();
+        gl_template_history_init ();
         gl_font_history_init ();
 
         /* now print the files */

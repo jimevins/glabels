@@ -29,6 +29,7 @@
 #include <libglabels/libglabels.h>
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
+#include "template-history.h"
 #include "str-util.h"
 #include "combo-util.h"
 #include "builder-util.h"
@@ -37,6 +38,8 @@
 
 #include "debug.h"
 
+
+#define HISTORY_SIZE 5
 
 /*===========================================*/
 /* Private types                             */
@@ -111,7 +114,7 @@ static gchar *get_layout_desc                  (const lglTemplate      *template
 static gchar *get_label_size_desc              (const lglTemplate      *template);
 static void   load_recent_list                 (GtkListStore           *store,
                                                 GtkTreeSelection       *selection,
-                                                GSList                 *list);
+                                                GList                  *list);
 static void   load_search_all_list             (GtkListStore           *store,
                                                 GtkTreeSelection       *selection,
                                                 GList                  *list);
@@ -209,6 +212,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         static gchar      *object_ids[] = { "wdgt_media_select_hbox", NULL };
         GError            *error = NULL;
         GtkWidget         *hbox;
+        GList             *recent_list = NULL;
         GList             *brands = NULL;
         GList             *page_sizes = NULL;
         GList             *categories = NULL;
@@ -279,7 +283,8 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
         gtk_tree_view_append_column (GTK_TREE_VIEW (media_select->priv->recent_treeview), column);
         recent_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (media_select->priv->recent_treeview));
-        load_recent_list (media_select->priv->recent_store, recent_selection, gl_prefs->recent_templates);
+        recent_list = gl_template_history_model_get_name_list (gl_template_history);
+        load_recent_list (media_select->priv->recent_store, recent_selection, recent_list);
 
         page_size_id = gl_prefs_get_page_size ();
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
@@ -357,7 +362,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         g_free (page_size_name);
 
         gtk_widget_show_all (GTK_WIDGET (media_select));
-        if ( gl_prefs->recent_templates )
+        if ( recent_list )
         {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (media_select->priv->notebook),
                                                media_select->priv->recent_page_num);
@@ -367,6 +372,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (media_select->priv->notebook),
                                                media_select->priv->search_all_page_num);
         }
+        gl_template_history_model_free_name_list (recent_list);
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
@@ -734,9 +740,9 @@ get_label_size_desc (const lglTemplate *template)
 static void
 load_recent_list (GtkListStore           *store,
                   GtkTreeSelection       *selection,
-                  GSList                  *list)
+                  GList                  *list)
 {
-        GSList      *p;
+        GList       *p;
         GtkTreeIter  iter;
         lglTemplate *template;
         GdkPixbuf   *pixbuf;

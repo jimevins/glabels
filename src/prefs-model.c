@@ -69,8 +69,6 @@
 
 #define PREF_MAX_RECENTS                    "/max-recents"
 
-#define PREF_RECENT_TEMPLATES               "/recent-templates"
-#define PREF_MAX_RECENT_TEMPLATES           "/max-recent-templates"
 
 /* Default values */
 #define DEFAULT_UNITS_STRING_US    units_to_string (LGL_UNITS_INCH)
@@ -350,17 +348,6 @@ gl_prefs_model_save_settings (glPrefsModel *prefs_model)
 			      prefs_model->max_recents,
 			      NULL);
 
-	/* Recent templates */
-	gconf_client_set_list (prefs_model->gconf_client,
-			       BASE_KEY PREF_RECENT_TEMPLATES,
-                               GCONF_VALUE_STRING,
-                               prefs_model->recent_templates,
-                               NULL);
-	gconf_client_set_int (prefs_model->gconf_client,
-			      BASE_KEY PREF_MAX_RECENT_TEMPLATES,
-			      prefs_model->max_recent_templates,
-			      NULL);
-
 
 	gconf_client_suggest_sync (prefs_model->gconf_client, NULL);
 	
@@ -509,22 +496,6 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 			 BASE_KEY PREF_MAX_RECENTS,
 			 -1);
 
-	/* Recent templates */
-        for (p=prefs_model->recent_templates; p != NULL; p=p->next)
-        {
-                g_free (p->data);
-        }
-        g_slist_free (prefs_model->recent_templates);
-	prefs_model->recent_templates =
-		gconf_client_get_list (prefs_model->gconf_client,
-                                       BASE_KEY PREF_RECENT_TEMPLATES,
-                                       GCONF_VALUE_STRING,
-                                       NULL);
-	prefs_model->max_recent_templates =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_MAX_RECENT_TEMPLATES,
-			 5);
-
 
 	/* Proof read the default page size -- it must be a valid id. */
 	/* (For compatability with older versions.) */
@@ -536,18 +507,6 @@ gl_prefs_model_load_settings (glPrefsModel *prefs_model)
 		paper = NULL;
 	}
 
-        /* Proof read the recent templates list.  Make sure the template names */
-        /* are valid.  Remove from list if not. */
-        for (p=prefs_model->recent_templates; p != NULL; p=p_next)
-        {
-                p_next = p->next;
-
-                if ( !lgl_db_does_template_name_exist (p->data) )
-                {
-                        g_free (p->data);
-                        prefs_model->recent_templates = g_slist_delete_link (prefs_model->recent_templates, p);
-                }
-        }
 
 	gl_debug (DEBUG_PREFS, "max_recents = %d", prefs_model->max_recents);
 

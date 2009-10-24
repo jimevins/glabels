@@ -116,6 +116,7 @@ main (int argc, char **argv)
 	gl_mini_preview_pixbuf_cache_init ();
 	gl_merge_init ();
 	gl_recent_init ();
+        gl_template_history_init ();
         gl_font_history_init ();
 	
 

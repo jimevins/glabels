@@ -164,53 +164,6 @@ gl_prefs_get_units_string (void)
 	}
 }
 
-/****************************************************************************/
-/* Add template to recent template list.                                    */
-/****************************************************************************/
-void
-gl_prefs_add_recent_template (const gchar *name)
-{
-        GSList *p;
-
-        /*
-         * If already in list, remove that entry.
-         */
-        p = g_slist_find_custom (gl_prefs->recent_templates,
-                                 name,
-                                 (GCompareFunc)lgl_str_utf8_casecmp);
-        if (p)
-        {
-                gl_prefs->recent_templates =
-                        g_slist_remove_link (gl_prefs->recent_templates, p);
-                g_free (p->data);
-                g_slist_free_1 (p);
-        }
-
-        /*
-         * Now prepend to list.
-         */
-        gl_prefs->recent_templates =
-                g_slist_prepend (gl_prefs->recent_templates, g_strdup (name));
-
-        /*
-         * Truncate list to maximum size
-         */
-        while (g_slist_length (gl_prefs->recent_templates) > gl_prefs->max_recent_templates)
-        {
-                p = g_slist_last (gl_prefs->recent_templates);
-                gl_prefs->recent_templates =
-                        g_slist_remove_link (gl_prefs->recent_templates, p);
-                g_free (p->data);
-                g_slist_free_1 (p);
-        }
-
-        /*
-         * Sync to disk.
-         */
-        gl_prefs_model_save_settings (gl_prefs);
-}
-
-
 
 
 /*

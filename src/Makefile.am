@@ -171,6 +171,10 @@ glabels_SOURCES = 			\
 	mini-preview-pixbuf-cache.h	\
 	wdgt-media-select.c		\
 	wdgt-media-select.h		\
+	template-history.c		\
+	template-history.h		\
+	template-history-model.c	\
+	template-history-model.h	\
 	mini-preview.c			\
 	mini-preview.h			\
 	mini-label-preview.c		\
@@ -290,6 +294,10 @@ glabels_batch_SOURCES = 		\
 	font-history.h			\
 	font-history-model.c		\
 	font-history-model.h		\
+	template-history.c		\
+	template-history.h		\
+	template-history-model.c	\
+	template-history-model.h	\
 	str-util.c			\
 	str-util.h			\
 	color.c				\

@@ -24,7 +24,7 @@
 
 #include <glib/gi18n.h>
 
-#include "prefs.h"
+#include "template-history.h"
 #include "file-util.h"
 #include "marshal.h"
 
@@ -408,7 +408,7 @@ gl_label_set_template (glLabel     *label,
 		g_signal_emit (G_OBJECT(label), signals[CHANGED], 0);
 
                 name = lgl_template_get_name (template);
-                gl_prefs_add_recent_template (name);
+                gl_template_history_model_add_name (gl_template_history, name);
                 g_free (name);
 	}
 

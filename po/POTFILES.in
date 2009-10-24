@@ -141,6 +141,10 @@ src/str-util.c
 src/str-util.h
 src/template-designer.c
 src/template-designer.h
+src/template-history.c
+src/template-history.h
+src/template-history-model.c
+src/template-history-model.h
 src/text-node.c
 src/text-node.h
 src/ui.c

@@ -92,9 +92,6 @@ struct _glPrefsModel {
 	/* Recent files */
 	gint              max_recents;
 
-	/* Recent templates */
-        GSList           *recent_templates;
-	gint              max_recent_templates;
 };
 
 struct _glPrefsModelClass {
