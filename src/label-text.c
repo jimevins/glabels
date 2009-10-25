@@ -872,8 +872,6 @@ draw_text_real (glLabelObject *object,
                 glMergeRecord *record,
                 guint          color)
 {
-        gdouble          x0, y0;
-        cairo_matrix_t   matrix;
 	gdouble          object_w, object_h;
 	gdouble          raw_w, raw_h;
 	gchar           *text;
@@ -894,9 +892,6 @@ draw_text_real (glLabelObject *object,
 
 
 	gl_debug (DEBUG_LABEL, "START");
-
-        gl_label_object_get_position (object, &x0, &y0);
-        gl_label_object_get_matrix (object, &matrix);
 
 	gl_label_object_get_size (object, &object_w, &object_h);
 	gl_label_object_get_raw_size (object, &raw_w, &raw_h);
