@@ -52,7 +52,7 @@ typedef struct _glPrefsModelPrivate   glPrefsModelPrivate;
 
 
 struct _glPrefsModel {
-	GObject          *object;
+	GObject           parent;
 
 	GConfClient      *gconf_client;
 
