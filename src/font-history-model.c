@@ -25,6 +25,7 @@
 #include <gconf/gconf-client.h>
 
 #include <libglabels/libglabels.h>
+#include "font-util.h"
 #include "marshal.h"
 
 

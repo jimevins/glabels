@@ -181,9 +181,15 @@ lgl_xml_set_default_units
 </SECTION>
 
 <SECTION>
-<FILE>enums</FILE>
-<INCLUDE>libglabels/enums.h</INCLUDE>
-lglUnitsType
+<FILE>units</FILE>
+<INCLUDE>libglabels/units.h</INCLUDE>
+lglUnits
+lgl_units_get_id
+lgl_units_from_id
+lgl_units_get_name
+lgl_units_from_name
+lgl_units_get_points_per_unit
+lgl_units_get_units_per_point
 </SECTION>
 
 <SECTION>

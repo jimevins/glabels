@@ -40,6 +40,7 @@
 #include "label-barcode.h"
 #include "xml-label-04.h"
 #include "str-util.h"
+#include "prefs.h"
 
 #include "debug.h"
 
@@ -1145,6 +1146,7 @@ static xmlDocPtr
 xml_label_to_doc (glLabel          *label,
 		  glXMLLabelStatus *status)
 {
+        lglUnits    units;
 	xmlDocPtr   doc;
 	xmlNsPtr    ns;
 	glMerge    *merge;
@@ -1152,6 +1154,9 @@ xml_label_to_doc (glLabel          *label,
 	gl_debug (DEBUG_XML, "START");
 
 	LIBXML_TEST_VERSION;
+
+        units = gl_prefs_model_get_units (gl_prefs);
+        lgl_xml_set_default_units (units);
 
 	doc = xmlNewDoc ((xmlChar *)"1.0");
 	doc->xmlRootNode = xmlNewDocNode (doc, NULL, (xmlChar *)"Glabels-document", NULL);

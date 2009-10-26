@@ -28,6 +28,7 @@
 
 #include "prefs.h"
 #include "builder-util.h"
+#include "units-util.h"
 
 #include "object-editor-private.h"
 
@@ -60,6 +61,7 @@
 void
 gl_object_editor_prepare_position_page (glObjectEditor *editor)
 {
+        lglUnits      units;
 	const gchar  *units_string;
 	gdouble       climb_rate;
 	gint          digits;
@@ -76,10 +78,11 @@ gl_object_editor_prepare_position_page (glObjectEditor *editor)
                                      NULL);
 
 	/* Get configuration information */
-	units_string = gl_prefs_get_units_string ();
-	editor->priv->units_per_point = gl_prefs_get_units_per_point ();
-	climb_rate = gl_prefs_get_units_step_size ();
-	digits = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+	units_string = lgl_units_get_name (units);
+	editor->priv->units_per_point = lgl_units_get_units_per_point (units);
+	climb_rate = gl_units_util_get_step_size (units);
+	digits = gl_units_util_get_precision (units);
 
 	/* Modify widgets based on configuration */
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->pos_x_spin), digits);
@@ -212,6 +215,7 @@ gl_object_editor_get_position (glObjectEditor      *editor,
 void
 position_prefs_changed_cb (glObjectEditor *editor)
 {
+        lglUnits      units;
 	const gchar  *units_string;
 	gdouble       climb_rate;
 	gint          digits;
@@ -219,10 +223,11 @@ position_prefs_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
         /* Get new configuration information */
-        units_string = gl_prefs_get_units_string ();
-        editor->priv->units_per_point = gl_prefs_get_units_per_point ();
-        climb_rate = gl_prefs_get_units_step_size ();
-        digits = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+        units_string = lgl_units_get_name (units);
+        editor->priv->units_per_point = lgl_units_get_units_per_point (units);
+        climb_rate = gl_units_util_get_step_size (units);
+        digits = gl_units_util_get_precision (units);
 
 	/* Update characteristics of x_spin/y_spin */
         editor->priv->stop_signals = TRUE;

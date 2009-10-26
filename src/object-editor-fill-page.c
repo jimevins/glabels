@@ -78,7 +78,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 	
 	editor->priv->fill_color_combo = gl_color_combo_new (_("No Fill"),
                                                              GL_COLOR_NO_FILL,
-                                                             gl_prefs->default_fill_color);
+                                                             gl_prefs_model_get_default_fill_color (gl_prefs));
         gtk_box_pack_start (GTK_BOX (editor->priv->fill_color_hbox),
                             editor->priv->fill_color_combo,
                             FALSE, FALSE, 0);
@@ -90,7 +90,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
 	gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);
 	gtk_widget_set_sensitive (editor->priv->fill_key_combo, FALSE);
 	gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->fill_color_combo),
-                                  gl_prefs->default_fill_color);
+                                  gl_prefs_model_get_default_fill_color (gl_prefs));
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->fill_page_vbox);

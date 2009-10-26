@@ -268,7 +268,8 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 
 	gtk_container_add (GTK_CONTAINER (this), this->priv->tool_bar);
 
-        this->priv->font_family_combo = gl_font_combo_new (gl_prefs->default_font_family);
+        this->priv->font_family_combo =
+                gl_font_combo_new (gl_prefs_model_get_default_font_family (gl_prefs));
         gtk_container_add (GTK_CONTAINER (this->priv->font_family_eventbox),
                            this->priv->font_family_combo);
 
@@ -277,7 +278,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                 gl_color_combo_button_new (pixbuf,
                                            _("Default"),
                                            GL_COLOR_TEXT_DEFAULT,
-                                           gl_prefs->default_text_color);
+                                           gl_prefs_model_get_default_text_color (gl_prefs));
         gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->text_color_button),
                                           GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
@@ -289,7 +290,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                 gl_color_combo_button_new (pixbuf,
                                            _("No Fill"),
                                            GL_COLOR_NO_FILL,
-                                           gl_prefs->default_fill_color);
+                                           gl_prefs_model_get_default_fill_color (gl_prefs));
         gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->fill_color_button),
                                           GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
@@ -301,7 +302,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
                 gl_color_combo_button_new (pixbuf,
                                            _("No Line"),
                                            GL_COLOR_NO_LINE,
-                                           gl_prefs->default_line_color);
+                                           gl_prefs_model_get_default_line_color (gl_prefs));
 	gl_color_combo_button_set_relief (GL_COLOR_COMBO_BUTTON(this->priv->line_color_button),
                                           GTK_RELIEF_NONE);
 	g_object_unref (G_OBJECT (pixbuf));
@@ -319,7 +320,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 
 	/* Font size entry widget */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->font_size_spin),
-				   gl_prefs->default_font_size);
+				   gl_prefs_model_get_default_font_size (gl_prefs));
 
 	g_signal_connect (G_OBJECT (this->priv->font_size_spin),
 			  "changed", G_CALLBACK (font_size_changed_cb), this);
@@ -327,46 +328,46 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 
 	/* Bold and Italic toggles */
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_bold_toggle),
-					   (gl_prefs->default_font_weight == PANGO_WEIGHT_BOLD));
+					   (gl_prefs_model_get_default_font_weight (gl_prefs) == PANGO_WEIGHT_BOLD));
 	g_signal_connect (G_OBJECT (this->priv->font_bold_toggle),
 			  "toggled", G_CALLBACK (font_bold_toggled_cb), this);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_italic_toggle),
-					   gl_prefs->default_font_italic_flag);
+					   gl_prefs_model_get_default_font_italic_flag (gl_prefs));
 	g_signal_connect (G_OBJECT (this->priv->font_italic_toggle),
 			  "toggled", G_CALLBACK (font_italic_toggled_cb), this);
 
 
 	/* Text alignment radio group */
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio),
-					   (gl_prefs->default_text_alignment == PANGO_ALIGN_LEFT));
+					   (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_LEFT));
 	g_signal_connect (G_OBJECT (this->priv->text_align_left_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio),
-					   (gl_prefs->default_text_alignment == PANGO_ALIGN_CENTER));
+					   (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_CENTER));
 	g_signal_connect (G_OBJECT (this->priv->text_align_center_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
-					   (gl_prefs->default_text_alignment == PANGO_ALIGN_RIGHT));
+					   (gl_prefs_model_get_default_text_alignment (gl_prefs) == PANGO_ALIGN_RIGHT));
 	g_signal_connect (G_OBJECT (this->priv->text_align_right_radio),
 			  "toggled", G_CALLBACK (text_align_toggled_cb), this);
 
 	/* Text color widget */
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON (this->priv->text_color_button),
-                                         gl_prefs->default_text_color);
+                                         gl_prefs_model_get_default_text_color (gl_prefs));
 	g_signal_connect (G_OBJECT (this->priv->text_color_button),
 			  "color_changed",
 			  G_CALLBACK (text_color_changed_cb), this);
 
 	/* Fill color widget */
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON (this->priv->fill_color_button),
-                                         gl_prefs->default_fill_color);
+                                         gl_prefs_model_get_default_fill_color (gl_prefs));
 	g_signal_connect (G_OBJECT (this->priv->fill_color_button),
 			  "color_changed",
 			  G_CALLBACK (fill_color_changed_cb), this);
 
 	/* Line color widget */
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON (this->priv->line_color_button),
-                                         gl_prefs->default_line_color);
+                                         gl_prefs_model_get_default_line_color (gl_prefs));
 	g_signal_connect (G_OBJECT (this->priv->line_color_button),
 			  "color_changed",
 			  G_CALLBACK (line_color_changed_cb), this);
@@ -918,11 +919,11 @@ text_color_changed_cb (glColorComboButton   *cc,
 
 	if (is_default)
         {
-		text_color_node->color = gl_prefs->default_text_color;
+		text_color_node->color = gl_prefs_model_get_default_text_color (gl_prefs);
 		gl_view_set_selection_text_color (this->priv->view,
 						  text_color_node);
 		gl_view_set_default_text_color   (this->priv->view,
-						  gl_prefs->default_text_color);
+						  text_color_node->color);
 	}
         else
         {

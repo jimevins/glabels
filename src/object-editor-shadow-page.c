@@ -31,6 +31,7 @@
 #include "color.h"
 #include "combo-util.h"
 #include "builder-util.h"
+#include "units-util.h"
 
 #include "object-editor-private.h"
 
@@ -66,6 +67,7 @@ static void shadow_color_radio_toggled_cb  (glObjectEditor        *editor);
 void
 gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 {
+        lglUnits      units;
 	const gchar  *units_string;
 	gdouble       climb_rate;
 	gint          digits;
@@ -97,10 +99,11 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
 	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->shadow_key_combo));
 
 	/* Get configuration information */
-	units_string = gl_prefs_get_units_string ();
-	editor->priv->units_per_point = gl_prefs_get_units_per_point ();
-	climb_rate = gl_prefs_get_units_step_size ();
-	digits = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+	units_string = lgl_units_get_name (units);
+	editor->priv->units_per_point = lgl_units_get_units_per_point (units);
+	climb_rate = gl_units_util_get_step_size (units);
+	digits = gl_units_util_get_precision (units);
 
 	/* Modify widgets based on configuration */
 	gtk_spin_button_set_digits (GTK_SPIN_BUTTON(editor->priv->shadow_x_spin), digits);
@@ -403,6 +406,7 @@ gl_object_editor_get_shadow_opacity (glObjectEditor      *editor)
 void
 shadow_prefs_changed_cb (glObjectEditor *editor)
 {
+        lglUnits      units;
 	const gchar  *units_string;
 	gdouble       climb_rate;
 	gint          digits;
@@ -410,10 +414,11 @@ shadow_prefs_changed_cb (glObjectEditor *editor)
 	gl_debug (DEBUG_EDITOR, "START");
 
         /* Get new configuration information */
-        units_string = gl_prefs_get_units_string ();
-        editor->priv->units_per_point = gl_prefs_get_units_per_point ();
-        climb_rate = gl_prefs_get_units_step_size ();
-        digits = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+        units_string = lgl_units_get_name (units);
+        editor->priv->units_per_point = lgl_units_get_units_per_point (units);
+        climb_rate = gl_units_util_get_step_size (units);
+        digits = gl_units_util_get_precision (units);
 
 	/* Update characteristics of x_spin/y_spin */
         editor->priv->stop_signals = TRUE;

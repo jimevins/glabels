@@ -31,6 +31,7 @@
 #include "xml-label.h"
 #include "prefs.h"
 #include "file.h"
+#include "units-util.h"
 
 #include "debug.h"
 
@@ -355,13 +356,13 @@ gl_window_set_label (glWindow    *window,
 
 	gl_view_zoom_to_fit (GL_VIEW(window->view));
 
-	if (gl_prefs->grid_visible) {
+	if (gl_prefs_model_get_grid_visible (gl_prefs)) {
 		gl_view_show_grid (GL_VIEW(window->view));
 	} else {
 		gl_view_hide_grid (GL_VIEW(window->view));
 	}
 
-	if (gl_prefs->markup_visible) {
+	if (gl_prefs_model_get_markup_visible (gl_prefs)) {
 		gl_view_show_markup (GL_VIEW(window->view));
 	} else {
 		gl_view_hide_markup (GL_VIEW(window->view));
@@ -548,17 +549,19 @@ pointer_moved_cb (glView   *view,
 		  gdouble   y,
 		  glWindow *window)
 {
-	gchar *string;
-	gdouble units_per_point;
-	gint    units_precision;
+	gchar    *string;
+        lglUnits  units;
+	gdouble   units_per_point;
+	gint      units_precision;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-	units_per_point = gl_prefs_get_units_per_point ();
-	units_precision = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+	units_per_point = lgl_units_get_units_per_point (units);
+	units_precision = gl_units_util_get_precision (units);
 
 	string = g_strdup_printf ("%.*f, %.*f",
 				  units_precision, x*units_per_point,

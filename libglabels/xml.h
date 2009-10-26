@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
-#include "enums.h"
+#include "units.h"
 
 #define LGL_XML_NAME_SPACE "http://snaught.com/glabels/2.2/"
 
@@ -100,7 +100,7 @@ gchar *  lgl_xml_get_node_content  (xmlNodePtr    node);
 /*
  * Misc functions
  */
-void     lgl_xml_set_default_units (lglUnitsType   units);
+void     lgl_xml_set_default_units (lglUnits      units);
 
 G_END_DECLS
 

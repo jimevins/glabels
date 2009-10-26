@@ -1,5 +1,5 @@
 /*
- *  prefs.h
+ *  units-util.h
  *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
@@ -18,23 +18,22 @@
  *  along with gLabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __PREFS_H__
-#define __PREFS_H__
+#ifndef __UNITS_UTIL_H__
+#define __UNITS_UTIL_H__
 
-#include "prefs-model.h"
+#include <libglabels/libglabels.h>
 
 G_BEGIN_DECLS
 
 
-extern glPrefsModel *gl_prefs;
+gdouble       gl_units_util_get_step_size (lglUnits units);
 
-
-void          gl_prefs_init                (void);
+gint          gl_units_util_get_precision (lglUnits units);
 
 
 G_END_DECLS
 
-#endif /* __PREFS_H__ */
+#endif /* __UNITS_UTIL_H__ */
 
 
 

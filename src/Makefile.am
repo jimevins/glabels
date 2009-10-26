@@ -223,6 +223,8 @@ glabels_SOURCES = 			\
 	combo-util.h			\
 	builder-util.c			\
 	builder-util.h			\
+	units-util.c			\
+	units-util.h			\
 	str-util.c			\
 	str-util.h			\
 	color.c				\

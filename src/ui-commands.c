@@ -409,13 +409,12 @@ gl_ui_cmd_view_property_bar_toggle (GtkToggleAction *action,
 
         state =  gtk_toggle_action_get_active (action);
 
-        gl_prefs->property_toolbar_visible = state;
+        gl_prefs_model_set_property_toolbar_visible (gl_prefs, state);
         if (state) {
                 gtk_widget_show (GTK_WIDGET (window->property_bar));
         } else {
                 gtk_widget_hide (GTK_WIDGET (window->property_bar));
         }
-        gl_prefs_model_save_settings (gl_prefs);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
@@ -446,8 +445,7 @@ gl_ui_cmd_view_grid_toggle (GtkToggleAction *action,
                 }
         }
 
-        gl_prefs->grid_visible = state;
-        gl_prefs_model_save_settings (gl_prefs);
+        gl_prefs_model_set_grid_visible (gl_prefs, state);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
@@ -478,8 +476,7 @@ gl_ui_cmd_view_markup_toggle (GtkToggleAction *action,
                 }
         }
 
-        gl_prefs->markup_visible = state;
-        gl_prefs_model_save_settings (gl_prefs);
+        gl_prefs_model_set_markup_visible (gl_prefs, state);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }

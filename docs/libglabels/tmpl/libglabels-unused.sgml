@@ -1,3 +1,27 @@
+<!-- ##### SECTION ./tmpl/enums.sgml:Long_Description ##### -->
+<para>
+This section defines enumerations used to interact with libglabels.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/enums.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/enums.sgml:Short_Description ##### -->
+Common enumerations used by libglabels
+
+
+<!-- ##### SECTION ./tmpl/enums.sgml:Stability_Level ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/enums.sgml:Title ##### -->
+Enumerations
+
+
 <!-- ##### SECTION ./tmpl/init.sgml:Long_Description ##### -->
 <para>
 
@@ -1247,6 +1271,20 @@ the CSS2 Specification (Section 4.3.2).
 
 @templates: 
 @utf8_filename: 
+
+<!-- ##### ENUM lglUnitsType ##### -->
+<para>
+This enumeration defines a set of units of distance supported by the libglabels XML distance
+attributes.
+</para>
+
+@LGL_UNITS_POINT: Points.  Encoded as "pt" in XML distance attributes.
+@LGL_UNITS_INCH: Inches.  Encoded as "in" in XML distance attributes.
+@LGL_UNITS_MM: Millmeters.  Encoded as "mm" in XML distance attributes.
+@LGL_UNITS_CM: Centimeters.  Encoded as "cm" in XML distance attributes.
+@LGL_UNITS_PICA: Picas.  Encoded as "pc" in XML distance attributes.
+@LGL_UNITS_FIRST: First enumeration.  Used for generic iteration through supported units..
+@LGL_UNITS_LAST: Last enumeration.  Used for generic iteration through supported units.
 
 <!-- ##### FUNCTION lgl_category_free_id_list ##### -->
 <para>

@@ -27,7 +27,7 @@ This structure defines a paper (page) size.
 @name: Localized paper size name.
 @width: Width of paper in points.
 @height: Height of paper in points.
-@pwg_size: 
+@pwg_size: Paper size string as defined in PWG 5101.1-2002.
 
 <!-- ##### FUNCTION lgl_paper_new ##### -->
 <para>

@@ -946,16 +946,14 @@ view_ui_item_toggled_cb (GtkToggleAction *action,
 
 	if (strcmp (name, "ViewMainToolBar") == 0)
 	{
-		gl_prefs->main_toolbar_visible = state;
+                gl_prefs_model_set_main_toolbar_visible (gl_prefs, state);
 		set_app_main_toolbar_style (ui);
-		gl_prefs_model_save_settings (gl_prefs);
 	}
 
 	if (strcmp (name, "ViewDrawingToolBar") == 0)
 	{
-		gl_prefs->drawing_toolbar_visible = state;
+		gl_prefs_model_set_drawing_toolbar_visible (gl_prefs, state);
 		set_app_drawing_toolbar_style (ui);
-		gl_prefs_model_save_settings (gl_prefs);
 	}
 
 	gl_debug (DEBUG_UI, "");
@@ -976,11 +974,11 @@ set_app_main_toolbar_style (GtkUIManager *ui)
 			
 	/* Updated view menu */
 	gl_ui_util_set_verb_state (ui, "/ui/ViewMenu/ViewMainToolBar",
-				   gl_prefs->main_toolbar_visible);
+				   gl_prefs_model_get_main_toolbar_visible (gl_prefs));
 
 	toolbar = gtk_ui_manager_get_widget (ui, "/MainToolBar");
 
-	if (gl_prefs->main_toolbar_visible) {
+	if (gl_prefs_model_get_main_toolbar_visible (gl_prefs)) {
 		gtk_widget_show_all (toolbar);
 	} else {
 		gtk_widget_hide (toolbar);
@@ -1004,13 +1002,13 @@ set_app_drawing_toolbar_style (GtkUIManager *ui)
 			
 	/* Updated view menu */
 	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewDrawingToolBar",
-				   gl_prefs->drawing_toolbar_visible);
+				   gl_prefs_model_get_drawing_toolbar_visible (gl_prefs));
 
 	toolbar = gtk_ui_manager_get_widget (ui, "/DrawingToolBar");
 
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);
 
-	if (gl_prefs->drawing_toolbar_visible) {
+	if (gl_prefs_model_get_drawing_toolbar_visible (gl_prefs)) {
 		gtk_widget_show_all (toolbar);
 	} else {
 		gtk_widget_hide (toolbar);
@@ -1031,10 +1029,10 @@ set_view_style (GtkUIManager *ui)
 	g_return_if_fail (ui && GTK_IS_UI_MANAGER(ui));
 			
 	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewGrid",
-				   gl_prefs->grid_visible);
+				   gl_prefs_model_get_grid_visible (gl_prefs));
 
 	gl_ui_util_set_verb_state (ui, "/ui/MenuBar/ViewMenu/ViewMarkup",
-				   gl_prefs->markup_visible);
+				   gl_prefs_model_get_markup_visible (gl_prefs));
 
 	gl_debug (DEBUG_UI, "END");
 }

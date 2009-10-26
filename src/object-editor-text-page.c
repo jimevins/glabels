@@ -96,7 +96,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
 
 	editor->priv->text_color_combo = gl_color_combo_new (_("Default"),
                                                              GL_COLOR_TEXT_DEFAULT,
-                                                             gl_prefs->default_text_color);
+                                                             gl_prefs_model_get_default_text_color (gl_prefs));
         gtk_box_pack_start (GTK_BOX (editor->priv->text_color_hbox),
                             editor->priv->text_color_combo,
                             FALSE, FALSE, 0);
@@ -504,7 +504,7 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_key_radio))) {
 		color_node->field_flag = TRUE;
-		color_node->color = gl_prefs->default_text_color;
+		color_node->color = gl_prefs_model_get_default_text_color (gl_prefs);
 		color_node->key = 
 			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
         } else {
@@ -514,7 +514,7 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
                                                   &is_default);
 
                 if (is_default) {
-                        color_node->color = gl_prefs->default_text_color;
+                        color_node->color = gl_prefs_model_get_default_text_color (gl_prefs);
                 } else {
                         color_node->color = color;
                 }

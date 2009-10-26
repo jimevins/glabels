@@ -19,7 +19,8 @@ libglabels_la_SOURCES =		\
 	libglabels-private.h	\
 	db.h			\
 	db.c			\
-	enums.h			\
+	units.h			\
+	units.c			\
 	paper.h			\
 	paper.c			\
 	category.h		\
@@ -40,7 +41,7 @@ libglabels_la_SOURCES =		\
 libglabelsinclude_HEADERS = 	\
 	libglabels.h		\
 	db.h                    \
-	enums.h			\
+	units.h			\
 	paper.h			\
 	category.h		\
 	template.h		\

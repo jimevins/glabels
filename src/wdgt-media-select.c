@@ -286,7 +286,7 @@ gl_wdgt_media_select_construct (glWdgtMediaSelect *media_select)
         recent_list = gl_template_history_model_get_name_list (gl_template_history);
         load_recent_list (media_select->priv->recent_store, recent_selection, recent_list);
 
-        page_size_id = gl_prefs_get_page_size ();
+        page_size_id = gl_prefs_model_get_default_page_size (gl_prefs);
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
 
         /* Brand selection control */
@@ -668,15 +668,15 @@ get_layout_desc (const lglTemplate *template)
 static gchar *
 get_label_size_desc (const lglTemplate *template)
 {
-        lglUnitsType               units;
+        lglUnits                   units;
         const gchar               *units_string;
         gdouble                    units_per_point;
         const lglTemplateFrame    *frame;
         gchar                     *string = NULL;
 
-        units           = gl_prefs_get_units ();
-        units_string    = gl_prefs_get_units_string ();
-        units_per_point = gl_prefs_get_units_per_point ();
+        units           = gl_prefs_model_get_units (gl_prefs);
+        units_string    = lgl_units_get_name (units);
+        units_per_point = lgl_units_get_units_per_point (units);
 
         frame = (lglTemplateFrame *)template->frames->data;
 

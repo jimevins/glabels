@@ -187,6 +187,7 @@ gl_cairo_round_label_path (cairo_t           *cr,
                 waste = 0.0;
         }
 
+	cairo_new_path (cr);
         cairo_arc (cr, w/2, h/2, w/2+waste, 0.0, 2*G_PI);
 	cairo_close_path (cr);
 

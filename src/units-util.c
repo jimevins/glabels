@@ -1,5 +1,5 @@
 /*
- *  prefs.c
+ *  units-util.c
  *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
@@ -20,14 +20,10 @@
 
 #include <config.h>
 
-#include "prefs.h"
-
-#include <glib/gi18n.h>
-#include <libglabels/libglabels.h>
+#include "units-util.h"
 
 #include "debug.h"
 
-glPrefsModel      *gl_prefs     = NULL;
 
 /*========================================================*/
 /* Private macros and constants.                          */
@@ -49,18 +45,47 @@ glPrefsModel      *gl_prefs     = NULL;
 /*========================================================*/
 
 
-/*****************************************************************************/
-/* Initialize preferences module.                                            */
-/*****************************************************************************/
-void 
-gl_prefs_init (void)
+/****************************************************************************/
+/* Get step size for desired units.                                         */
+/****************************************************************************/
+gdouble
+gl_units_util_get_step_size (lglUnits units)
 {
-	gl_debug (DEBUG_PREFS, "START");
 
-	gl_prefs = gl_prefs_model_new ();
-
-	gl_debug (DEBUG_PREFS, "END");
+	switch (units) {
+	case LGL_UNITS_POINT:
+		return 0.1;	/* points */
+	case LGL_UNITS_INCH:
+		return 0.001;	/* inches */
+	case LGL_UNITS_MM:
+		return 0.1;	/* mm */
+	default:
+		g_message ("Illegal units");	/* Should not happen */
+		return 1.0;
+	}
 }
+
+
+/****************************************************************************/
+/* Get precision for desired units.                                         */
+/****************************************************************************/
+gint
+gl_units_util_get_precision (lglUnits units)
+{
+
+	switch (units) {
+	case LGL_UNITS_POINT:
+		return 1;	/* points */
+	case LGL_UNITS_INCH:
+		return 3;	/* inches */
+	case LGL_UNITS_MM:
+		return 1;	/* mm */
+	default:
+		g_message ("Illegal units");	/* Should not happen */
+		return 1.0;
+	}
+}
+
 
 
 

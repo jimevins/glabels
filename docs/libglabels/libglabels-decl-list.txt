@@ -6,11 +6,6 @@ lgl_xml_paper_parse_paper_node
 </SECTION>
 
 <SECTION>
-<FILE>enums</FILE>
-lglUnitsType
-</SECTION>
-
-<SECTION>
 <FILE>xml-category</FILE>
 lgl_xml_category_read_categories_from_file
 lgl_xml_category_parse_categories_doc
@@ -57,6 +52,17 @@ lgl_db_print_known_papers
 lgl_db_print_known_categories
 lgl_db_print_known_templates
 lgl_db_print_aliases
+</SECTION>
+
+<SECTION>
+<FILE>units</FILE>
+lglUnits
+lgl_units_get_id
+lgl_units_from_id
+lgl_units_get_name
+lgl_units_from_name
+lgl_units_get_points_per_unit
+lgl_units_get_units_per_point
 </SECTION>
 
 <SECTION>

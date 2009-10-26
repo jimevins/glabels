@@ -33,41 +33,15 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define POINTS_PER_POINT    1.0 /* internal units are points. */
-#define POINTS_PER_INCH    72.0
-#define POINTS_PER_MM       2.83464566929
-#define POINTS_PER_CM       (10.0*POINTS_PER_MM)
-#define POINTS_PER_PICA     (1.0/12.0)
-
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
-
-typedef struct {
-	xmlChar     *name;
-	gdouble      points_per_unit;
-} UnitTableEntry;
 
 /*========================================================*/
 /* Private globals.                                       */
 /*========================================================*/
 
-static UnitTableEntry unit_table[] = {
-
-	/* These names are identical to the absolute length units supported in
-	   the CSS2 Specification (Section 4.3.2) */
-
-	/* This table must be sorted exactly as the enumerations in lglUnitsType */
-
-	/* [LGL_UNITS_POINT] */   {(xmlChar *)"pt",      POINTS_PER_POINT},
-	/* [LGL_UNITS_INCH]  */   {(xmlChar *)"in",      POINTS_PER_INCH},
-	/* [LGL_UNITS_MM]    */   {(xmlChar *)"mm",      POINTS_PER_MM},
-	/* [LGL_UNITS_CM]    */   {(xmlChar *)"cm",      POINTS_PER_CM},
-	/* [LGL_UNITS_PICA]  */   {(xmlChar *)"pc",      POINTS_PER_PICA},
-
-};
-
-static lglUnitsType  default_units        = LGL_UNITS_POINT;
+static lglUnits  default_units        = LGL_UNITS_POINT;
 
 
 /****************************************************************************/
@@ -299,29 +273,26 @@ lgl_xml_get_prop_length (xmlNodePtr   node,
 {
 	gdouble  val;
 	xmlChar *string;
-	xmlChar *unit;
-	gint     i;
+	xmlChar *unit_id;
+        lglUnits units;
 
 	string = xmlGetProp (node, (xmlChar *)property);
 	if ( string != NULL ) {
 
-		val = g_strtod ((gchar *)string, (gchar **)&unit);
+		val = g_strtod ((gchar *)string, (gchar **)&unit_id);
 
-		if (unit != string) {
-			unit = (xmlChar *)g_strchug ((gchar *)unit);
-			if (strlen ((char *)unit) > 0 ) {
-				for (i=LGL_UNITS_FIRST; i<=LGL_UNITS_LAST; i++) {
-					if (xmlStrcasecmp (unit, unit_table[i].name) == 0) {
-						val *= unit_table[i].points_per_unit;
-						break;
-					}
-				}
-				if (i>LGL_UNITS_LAST) {
-					g_message ("Line %ld, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
-						   xmlGetLineNo (node), node->name, property,
-						   unit);
-				}
-			}
+		if (unit_id != string) {
+			unit_id = (xmlChar *)g_strchug ((gchar *)unit_id);
+                        units = lgl_units_from_id ((gchar *)unit_id);
+                        if (units != LGL_UNITS_INVALID)
+                        {
+                                val *= lgl_units_get_points_per_unit (units);
+                        }
+                        else
+                        {
+                                g_message ("Line %ld, Node \"%s\", Property \"%s\": Unknown unit \"%s\", assuming points",
+                                           xmlGetLineNo (node), node->name, property, unit_id);
+                        }
 		}
 		else {
 			val = 0.0;
@@ -458,12 +429,12 @@ lgl_xml_set_prop_length (xmlNodePtr    node,
 	gchar  *string_unit;
 
 	/* Convert to default units */
-	val /= unit_table[default_units].points_per_unit;
+	val *= lgl_units_get_units_per_point (default_units);
 
 	/* Guarantee "C" locale by use of g_ascii_formatd */
 	string = g_ascii_formatd (buffer, G_ASCII_DTOSTR_BUF_SIZE, "%g", val);
 
-	string_unit = g_strdup_printf ("%s%s", string, unit_table[default_units].name);
+	string_unit = g_strdup_printf ("%s%s", string, lgl_units_get_id (default_units));
 	xmlSetProp (node, (xmlChar *)property, (xmlChar *)string_unit);
         g_free (string_unit);
 }
@@ -517,14 +488,14 @@ lgl_xml_get_node_content (xmlNodePtr   node)
 
 /**
  * lgl_xml_set_default_units:
- * @units:       default units selection (#lglUnitsType)
+ * @units:       default units selection (#lglUnits)
  *
  * Set the default units when formatting lengths.  See
  * lgl_xml_set_prop_length().
  *
  */
 void
-lgl_xml_set_default_units (lglUnitsType   units)
+lgl_xml_set_default_units (lglUnits   units)
 {
 	g_return_if_fail ((units >= LGL_UNITS_FIRST) && (units <= LGL_UNITS_LAST));
 

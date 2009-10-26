@@ -387,16 +387,16 @@ gl_view_init (glView *view)
         /*
          * Defaults from preferences
          */
-	gl_view_set_default_font_family       (view, gl_prefs->default_font_family);
-	gl_view_set_default_font_size         (view, gl_prefs->default_font_size);
-	gl_view_set_default_font_weight       (view, gl_prefs->default_font_weight);
-	gl_view_set_default_font_italic_flag  (view, gl_prefs->default_font_italic_flag);
-	gl_view_set_default_text_color        (view, gl_prefs->default_text_color);
-	gl_view_set_default_text_alignment    (view, gl_prefs->default_text_alignment);
-	gl_view_set_default_text_line_spacing (view, gl_prefs->default_text_line_spacing);
-	gl_view_set_default_line_width        (view, gl_prefs->default_line_width);
-	gl_view_set_default_line_color        (view, gl_prefs->default_line_color);
-	gl_view_set_default_fill_color        (view, gl_prefs->default_fill_color);
+	gl_view_set_default_font_family       (view, gl_prefs_model_get_default_font_family (gl_prefs));
+	gl_view_set_default_font_size         (view, gl_prefs_model_get_default_font_size (gl_prefs));
+	gl_view_set_default_font_weight       (view, gl_prefs_model_get_default_font_weight (gl_prefs));
+	gl_view_set_default_font_italic_flag  (view, gl_prefs_model_get_default_font_italic_flag (gl_prefs));
+	gl_view_set_default_text_color        (view, gl_prefs_model_get_default_text_color (gl_prefs));
+	gl_view_set_default_text_alignment    (view, gl_prefs_model_get_default_text_alignment (gl_prefs));
+	gl_view_set_default_text_line_spacing (view, gl_prefs_model_get_default_text_line_spacing (gl_prefs));
+	gl_view_set_default_line_width        (view, gl_prefs_model_get_default_line_width (gl_prefs));
+	gl_view_set_default_line_color        (view, gl_prefs_model_get_default_line_color (gl_prefs));
+	gl_view_set_default_fill_color        (view, gl_prefs_model_get_default_fill_color (gl_prefs));
 
 	gl_debug (DEBUG_VIEW, "END");
 }

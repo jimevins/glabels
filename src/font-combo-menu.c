@@ -118,7 +118,6 @@ gl_font_combo_menu_init (glFontComboMenu *this)
         GtkWidget    *menu_item;
         GtkWidget    *sub_menu;
         const GList  *list;
-        GList        *p;
 
 	this->priv = g_new0 (glFontComboMenuPrivate, 1);
 

@@ -1,0 +1,89 @@
+<!-- ##### SECTION Title ##### -->
+Units
+
+<!-- ##### SECTION Short_Description ##### -->
+Type to represent units of distance supported by libglabels
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section defines a type to represent the varios units of distance
+supported by libglabels.  It also defines a set of related functions.
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM lglUnits ##### -->
+<para>
+This enumeration defines supported units of distance.
+</para>
+
+@LGL_UNITS_POINT: Points.
+@LGL_UNITS_INCH: Inches.
+@LGL_UNITS_MM: Millimeters
+@LGL_UNITS_CM: Centimeters
+@LGL_UNITS_PICA: Picas
+@LGL_UNITS_FIRST: First supported unit.  (Used for bounds checking and iteration through supported units.)
+@LGL_UNITS_LAST: Last supported unit.  (Used for bounds checking and iteration through supported units.)
+@LGL_UNITS_INVALID: Invalid unit.  (Returned by libglabels units functions when a supported unit cannot be determined.)
+
+<!-- ##### FUNCTION lgl_units_get_id ##### -->
+<para>
+
+</para>
+
+@units: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_units_from_id ##### -->
+<para>
+
+</para>
+
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_units_get_name ##### -->
+<para>
+
+</para>
+
+@units: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_units_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_units_get_points_per_unit ##### -->
+<para>
+
+</para>
+
+@units: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_units_get_units_per_point ##### -->
+<para>
+
+</para>
+
+@units: 
+@Returns: 
+
+

@@ -78,7 +78,7 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 
 	editor->priv->line_color_combo = gl_color_combo_new (_("No Line"),
                                                              GL_COLOR_NO_LINE,
-                                                             gl_prefs->default_line_color);
+                                                             gl_prefs_model_get_default_line_color (gl_prefs));
         gtk_box_pack_start (GTK_BOX (editor->priv->line_color_hbox),
                             editor->priv->line_color_combo,
                             FALSE, FALSE, 0);
@@ -90,9 +90,9 @@ gl_object_editor_prepare_line_page (glObjectEditor *editor)
 	gtk_widget_set_sensitive (editor->priv->line_color_combo, TRUE);
     gtk_widget_set_sensitive (editor->priv->line_key_combo, FALSE);	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->line_width_spin),
-				   gl_prefs->default_line_width);
+				   gl_prefs_model_get_default_line_width (gl_prefs));
 	gl_color_combo_set_color (GL_COLOR_COMBO(editor->priv->line_color_combo),
-                                  gl_prefs->default_line_color);
+                                  gl_prefs_model_get_default_line_color (gl_prefs));
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->line_page_vbox);

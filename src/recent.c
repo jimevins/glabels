@@ -139,7 +139,8 @@ gl_recent_create_menu (void)
                 gtk_recent_chooser_menu_new_for_manager (model);
         gtk_recent_chooser_menu_set_show_numbers (GTK_RECENT_CHOOSER_MENU (recent_menu), FALSE);
         gtk_recent_chooser_set_show_icons (GTK_RECENT_CHOOSER (recent_menu), TRUE);
-        gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (recent_menu), gl_prefs->max_recents);
+        gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (recent_menu),
+                                      gl_prefs_model_get_max_recents (gl_prefs));
         gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (recent_menu), GTK_RECENT_SORT_MRU);
         gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (recent_menu), TRUE);
 

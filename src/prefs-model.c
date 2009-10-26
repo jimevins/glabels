@@ -25,6 +25,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <string.h>
+#include <gconf/gconf-client.h>
 
 #include <libglabels/libglabels.h>
 #include "marshal.h"
@@ -58,7 +59,6 @@
 #define PREF_DEFAULT_FILL_COLOR             "/default-fill-color"
 
 #define PREF_MAIN_TOOLBAR_VISIBLE           "/main-toolbar-visible"
-#define PREF_MAIN_TOOLBAR_BUTTONS_STYLE     "/main-toolbar-buttons-style"
 
 #define PREF_DRAWING_TOOLBAR_VISIBLE        "/drawing-toolbar-visible"
 
@@ -71,11 +71,11 @@
 
 
 /* Default values */
-#define DEFAULT_UNITS_STRING_US    units_to_string (LGL_UNITS_INCH)
-#define DEFAULT_PAGE_SIZE_US       "US-Letter"
+#define DEFAULT_UNITS_STRING_US     lgl_units_get_id (LGL_UNITS_INCH)
+#define DEFAULT_PAGE_SIZE_US        "US-Letter"
 
-#define DEFAULT_UNITS_STRING_METRIC units_to_string (LGL_UNITS_MM)
-#define DEFAULT_PAGE_SIZE_METRIC   "A4"
+#define DEFAULT_UNITS_STRING_METRIC lgl_units_get_id (LGL_UNITS_MM)
+#define DEFAULT_PAGE_SIZE_METRIC    "A4"
 
 #define DEFAULT_FONT_FAMILY        "Sans"
 #define DEFAULT_FONT_SIZE          14.0
@@ -94,6 +94,12 @@
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
+
+struct _glPrefsModelPrivate {
+
+	GConfClient *gconf_client;
+
+};
 
 enum {
 	CHANGED,
@@ -135,9 +141,6 @@ static gdouble        get_float                    (GConfClient         *client,
 						    const gchar         *key,
 						    gdouble              def);
 
-static lglUnitsType   string_to_units              (const gchar         *string);
-static const gchar   *units_to_string              (lglUnitsType         units);
-
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -171,22 +174,24 @@ gl_prefs_model_class_init (glPrefsModelClass *class)
 
 
 static void
-gl_prefs_model_init (glPrefsModel *prefs_model)
+gl_prefs_model_init (glPrefsModel *this)
 {
 	gl_debug (DEBUG_PREFS, "START");
 
-        prefs_model->gconf_client = gconf_client_get_default ();
+        this->priv = g_new0 (glPrefsModelPrivate, 1);
 
-        g_return_if_fail (prefs_model->gconf_client != NULL);
+        this->priv->gconf_client = gconf_client_get_default ();
+
+        g_return_if_fail (this->priv->gconf_client != NULL);
  
-        gconf_client_add_dir (prefs_model->gconf_client,
+        gconf_client_add_dir (this->priv->gconf_client,
                               BASE_KEY,
                               GCONF_CLIENT_PRELOAD_ONELEVEL,
                               NULL);
          
-        gconf_client_notify_add (prefs_model->gconf_client,
+        gconf_client_notify_add (this->priv->gconf_client,
                                  BASE_KEY,
-                                 (GConfClientNotifyFunc)notify_cb, prefs_model,
+                                 (GConfClientNotifyFunc)notify_cb, this,
                                  NULL, NULL);
 
 	gl_debug (DEBUG_PREFS, "END");
@@ -196,15 +201,14 @@ gl_prefs_model_init (glPrefsModel *prefs_model)
 static void
 gl_prefs_model_finalize (GObject *object)
 {
-	glPrefsModel *prefs_model = GL_PREFS_MODEL (object);
+	glPrefsModel *this = GL_PREFS_MODEL (object);
 
 	gl_debug (DEBUG_PREFS, "START");
 
 	g_return_if_fail (object && GL_IS_PREFS_MODEL (object));
 
-	g_object_unref (G_OBJECT(prefs_model->gconf_client));
-	g_free (prefs_model->default_page_size);
-	g_free (prefs_model->default_font_family);
+	g_object_unref (G_OBJECT(this->priv->gconf_client));
+        g_free (this->priv);
 
 	G_OBJECT_CLASS (gl_prefs_model_parent_class)->finalize (object);
 
@@ -218,302 +222,614 @@ gl_prefs_model_finalize (GObject *object)
 glPrefsModel *
 gl_prefs_model_new (void)
 {
-	glPrefsModel *prefs_model;
+	glPrefsModel *this;
 
 	gl_debug (DEBUG_PREFS, "START");
 
-	prefs_model = GL_PREFS_MODEL (g_object_new (gl_prefs_model_get_type(), NULL));
+	this = GL_PREFS_MODEL (g_object_new (gl_prefs_model_get_type(), NULL));
 
 	gl_debug (DEBUG_PREFS, "END");
 
-	return prefs_model;
+	return this;
 }
 
 
 /*****************************************************************************/
-/* Save all settings.                                                        */
-/*****************************************************************************/
-void 
-gl_prefs_model_save_settings (glPrefsModel *prefs_model)
-{
-	gl_debug (DEBUG_PREFS, "START");
-	
-	g_return_if_fail (prefs_model && GL_IS_PREFS_MODEL(prefs_model));
-	g_return_if_fail (prefs_model->gconf_client != NULL);
-
-	/* We are saving settings because presumably some of them have been changed. */
-	g_signal_emit (G_OBJECT(prefs_model), signals[CHANGED], 0);
-
-	/* Units */
-	gconf_client_set_string (prefs_model->gconf_client,
-				 BASE_KEY PREF_UNITS,
-				 units_to_string(prefs_model->units),
-				 NULL);
-        lgl_xml_set_default_units (prefs_model->units);
-
-	/* Default page size */
-	gconf_client_set_string (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_PAGE_SIZE,
-				 prefs_model->default_page_size,
-				 NULL);
-
-
-	/* Text properties */
-	gconf_client_set_string (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_FONT_FAMILY,
-				 prefs_model->default_font_family,
-				 NULL);
-
-	gconf_client_set_float  (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_FONT_SIZE,
-				 prefs_model->default_font_size,
-				 NULL);
-
-	gconf_client_set_string (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
-				 gl_str_util_weight_to_string(prefs_model->default_font_weight),
-				 NULL);
-
-	gconf_client_set_int    (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_TEXT_COLOR,
-				 prefs_model->default_text_color,
-				 NULL);
-
-	gconf_client_set_string (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
-				 gl_str_util_align_to_string(prefs_model->default_text_alignment),
-				 NULL);
-
-	gconf_client_set_float  (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
-				 prefs_model->default_text_line_spacing,
-				 NULL);
-
-	/* Line properties */
-	gconf_client_set_float  (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_LINE_WIDTH,
-				 prefs_model->default_line_width,
-				 NULL);
-
-	gconf_client_set_int    (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_LINE_COLOR,
-				 prefs_model->default_line_color,
-				 NULL);
-
-
-	/* Fill properties */
-	gconf_client_set_int    (prefs_model->gconf_client,
-				 BASE_KEY PREF_DEFAULT_FILL_COLOR,
-				 prefs_model->default_fill_color,
-				 NULL);
-
-
-	/* Main Toolbar */
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
-			       prefs_model->main_toolbar_visible,
-			       NULL);
-
-	gconf_client_set_int (prefs_model->gconf_client,
-			      BASE_KEY PREF_MAIN_TOOLBAR_BUTTONS_STYLE,
-			      prefs_model->main_toolbar_buttons_style,
-			      NULL);
-
-	/* Drawing Toolbar */
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
-			       prefs_model->drawing_toolbar_visible,
-			       NULL);
-
-	/* Property Toolbar */
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
-			       prefs_model->property_toolbar_visible,
-			       NULL);
-
-	/* View properties */
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_GRID_VISIBLE,
-			       prefs_model->grid_visible,
-			       NULL);
-
-	gconf_client_set_bool (prefs_model->gconf_client,
-			       BASE_KEY PREF_MARKUP_VISIBLE,
-			       prefs_model->markup_visible,
-			       NULL);
-
-	/* Recent files */
-	gconf_client_set_int (prefs_model->gconf_client,
-			      BASE_KEY PREF_MAX_RECENTS,
-			      prefs_model->max_recents,
-			      NULL);
-
-
-	gconf_client_suggest_sync (prefs_model->gconf_client, NULL);
-	
-	gl_debug (DEBUG_PREFS, "END");
-}
-
-
-/*****************************************************************************/
-/* Load all settings.                                                        */
+/* Set units.                                                                */
 /*****************************************************************************/
 void
-gl_prefs_model_load_settings (glPrefsModel *prefs_model)
+gl_prefs_model_set_units (glPrefsModel     *this,
+                          lglUnits          units)
 {
-        const gchar *pgsize, *default_units_string, *default_page_size;
-	gchar    *string;
-	lglPaper *paper;
-        GSList   *p, *p_next;
+	gconf_client_set_string (this->priv->gconf_client,
+				 BASE_KEY PREF_UNITS,
+				 lgl_units_get_id (units),
+				 NULL);
+}
 
-	gl_debug (DEBUG_PREFS, "START");
-	
-	g_return_if_fail (prefs_model && GL_IS_PREFS_MODEL(prefs_model));
-	g_return_if_fail (prefs_model->gconf_client != NULL);
 
-        /* Make educated guess about locale defaults. */
+/*****************************************************************************/
+/* Get units.                                                                */
+/*****************************************************************************/
+lglUnits
+gl_prefs_model_get_units (glPrefsModel     *this)
+{
+        const gchar  *pgsize;
+        const gchar  *default_units_string;
+        gchar        *string;
+        lglUnits      units;
+
+        /* Make educated guess about locale default. */
         pgsize = gtk_paper_size_get_default ();
-        if ( strcmp (pgsize,GTK_PAPER_NAME_LETTER) == 0 )
+        if ( strcmp (pgsize, GTK_PAPER_NAME_LETTER) == 0 )
         {
                 default_units_string = DEFAULT_UNITS_STRING_US;
-                default_page_size    = DEFAULT_PAGE_SIZE_US;
         }
         else
         {
                 default_units_string = DEFAULT_UNITS_STRING_METRIC;
-                default_page_size    = DEFAULT_PAGE_SIZE_METRIC;
         }
 
-	/* Units */
-	string =
-		get_string (prefs_model->gconf_client,
-			    BASE_KEY PREF_UNITS,
-			    default_units_string);
-	prefs_model->units = string_to_units( string );
-	g_free( string );
-        lgl_xml_set_default_units (prefs_model->units);
+	string = get_string (this->priv->gconf_client,
+                             BASE_KEY PREF_UNITS,
+                             default_units_string);
+	units = lgl_units_from_id (string);
+	g_free (string);
+
+        /* If invalid, make an educated guess from locale. */
+        if (units == LGL_UNITS_INVALID)
+        {
+                if ( strcmp (pgsize, GTK_PAPER_NAME_LETTER) == 0 )
+                {
+                        units = LGL_UNITS_INCH;
+                }
+                else
+                {
+                        units = LGL_UNITS_MM;
+                }
+        }
+
+        return units;
+}
 
 
-	/* Page size */
-        g_free (prefs_model->default_page_size);
-	prefs_model->default_page_size =
-		get_string (prefs_model->gconf_client,
-			    BASE_KEY PREF_DEFAULT_PAGE_SIZE,
-			    default_page_size);
-
-	/* Text properties */
-        g_free (prefs_model->default_font_family);
-	prefs_model->default_font_family =
-		get_string (prefs_model->gconf_client,
-			    BASE_KEY PREF_DEFAULT_FONT_FAMILY,
-			    DEFAULT_FONT_FAMILY);
-
-	prefs_model->default_font_size =
-		get_float (prefs_model->gconf_client,
-			   BASE_KEY PREF_DEFAULT_FONT_SIZE,
-			   DEFAULT_FONT_SIZE);
-
-	string =
-		get_string (prefs_model->gconf_client,
-			    BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
-			    DEFAULT_FONT_WEIGHT_STRING);
-	prefs_model->default_font_weight = gl_str_util_string_to_weight( string );
-	g_free( string );
-
-	prefs_model->default_text_color =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_DEFAULT_TEXT_COLOR,
-			 DEFAULT_TEXT_COLOR);
-
-	string =
-		get_string (prefs_model->gconf_client,
-			    BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
-			    DEFAULT_TEXT_ALIGN_STRING);
-	prefs_model->default_text_alignment = gl_str_util_string_to_align( string );
-	g_free( string );
-
-	prefs_model->default_text_line_spacing =
-		get_float (prefs_model->gconf_client,
-			   BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
-			   DEFAULT_TEXT_LINE_SPACING);
-
-	gl_debug (DEBUG_PREFS, "text_line_spacing = %f", prefs_model->default_text_line_spacing);
-
-	/* Line properties */
-	prefs_model->default_line_width =
-		get_float (prefs_model->gconf_client,
-			   BASE_KEY PREF_DEFAULT_LINE_WIDTH,
-			   DEFAULT_LINE_WIDTH);
-	prefs_model->default_line_color =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_DEFAULT_LINE_COLOR,
-			 DEFAULT_LINE_COLOR);
-
-	/* Fill properties */
-	prefs_model->default_fill_color =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_DEFAULT_FILL_COLOR,
-			 DEFAULT_FILL_COLOR);
+/*****************************************************************************/
+/* Set default page size.                                                    */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_page_size (glPrefsModel     *this,
+                                      const gchar      *page_size)
+{
+	gconf_client_set_string (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_PAGE_SIZE,
+				 page_size,
+				 NULL);
+}
 
 
-	/* User Inferface/Main Toolbar */
-	prefs_model->main_toolbar_visible =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
-			  TRUE);
+/*****************************************************************************/
+/* Get default page size.                                                    */
+/*****************************************************************************/
+gchar *
+gl_prefs_model_get_default_page_size (glPrefsModel     *this)
+{
+        const gchar *pgsize;
+        const gchar *default_page_size;
+        gchar       *page_size;
+	lglPaper    *paper;
 
-	prefs_model->main_toolbar_buttons_style =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_MAIN_TOOLBAR_BUTTONS_STYLE,
-			 GL_TOOLBAR_SYSTEM);
+        /* Make educated guess about locale default. */
+        pgsize = gtk_paper_size_get_default ();
+        if ( strcmp (pgsize, GTK_PAPER_NAME_LETTER) == 0 )
+        {
+                default_page_size = DEFAULT_PAGE_SIZE_US;
+        }
+        else
+        {
+                default_page_size = DEFAULT_PAGE_SIZE_METRIC;
+        }
 
-	/* User Inferface/Drawing Toolbar */
-	prefs_model->drawing_toolbar_visible =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
-			  TRUE);
-
-	/* User Inferface/Property Toolbar */
-	prefs_model->property_toolbar_visible =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
-			  TRUE);
-
-	/* View properties */
-	prefs_model->grid_visible =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_GRID_VISIBLE,
-			  TRUE);
-
-	prefs_model->markup_visible =
-		get_bool (prefs_model->gconf_client,
-			  BASE_KEY PREF_MARKUP_VISIBLE,
-			  TRUE);
-
-	/* Recent files */
-	prefs_model->max_recents =
-		get_int (prefs_model->gconf_client,
-			 BASE_KEY PREF_MAX_RECENTS,
-			 -1);
-
+	page_size = get_string (this->priv->gconf_client,
+                                BASE_KEY PREF_DEFAULT_PAGE_SIZE,
+                                default_page_size);
 
 	/* Proof read the default page size -- it must be a valid id. */
 	/* (For compatability with older versions.) */
-	paper = lgl_db_lookup_paper_from_id (prefs_model->default_page_size);
+	paper = lgl_db_lookup_paper_from_id (page_size);
 	if ( paper == NULL ) {
-		prefs_model->default_page_size = g_strdup (DEFAULT_PAGE_SIZE_US);
+                g_free (page_size);
+		page_size = g_strdup (DEFAULT_PAGE_SIZE_US);
 	} else {
 		lgl_paper_free (paper);
-		paper = NULL;
 	}
 
+        return page_size;
+}
 
-	gl_debug (DEBUG_PREFS, "max_recents = %d", prefs_model->max_recents);
+
+/*****************************************************************************/
+/* Set default font family.                                                  */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_font_family (glPrefsModel     *this,
+                                        const gchar      *family)
+{
+	gconf_client_set_string (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_FONT_FAMILY,
+				 family,
+				 NULL);
+}
 
 
-	g_signal_emit (G_OBJECT(prefs_model), signals[CHANGED], 0);
+/*****************************************************************************/
+/* Get default font family.                                                  */
+/*****************************************************************************/
+gchar *
+gl_prefs_model_get_default_font_family (glPrefsModel     *this)
+{
+        gchar *family;
 
-	gl_debug (DEBUG_PREFS, "END");
+        family = get_string (this->priv->gconf_client,
+                             BASE_KEY PREF_DEFAULT_FONT_FAMILY,
+                             DEFAULT_FONT_FAMILY);
+
+        return family;
+}
+
+
+/*****************************************************************************/
+/* Set default font size.                                                    */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_font_size (glPrefsModel     *this,
+                                      gdouble           size)
+{
+	gconf_client_set_float (this->priv->gconf_client,
+                                BASE_KEY PREF_DEFAULT_FONT_SIZE,
+                                size,
+                                NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default font size.                                                    */
+/*****************************************************************************/
+gdouble
+gl_prefs_model_get_default_font_size (glPrefsModel     *this)
+{
+        gdouble size;
+
+	size = get_float (this->priv->gconf_client,
+                          BASE_KEY PREF_DEFAULT_FONT_SIZE,
+                          DEFAULT_FONT_SIZE);
+
+        return size;
+}
+
+
+/*****************************************************************************/
+/* Set default font weight.                                                  */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_font_weight (glPrefsModel     *this,
+                                        PangoWeight       weight)
+{
+	gconf_client_set_string (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
+				 gl_str_util_weight_to_string(weight),
+				 NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default font weight.                                                  */
+/*****************************************************************************/
+PangoWeight
+gl_prefs_model_get_default_font_weight (glPrefsModel     *this)
+{
+        gchar       *string;
+        PangoWeight  weight;
+
+	string = get_string (this->priv->gconf_client,
+                             BASE_KEY PREF_DEFAULT_FONT_WEIGHT,
+                             DEFAULT_FONT_WEIGHT_STRING);
+	weight = gl_str_util_string_to_weight (string);
+	g_free (string);
+
+        return weight;
+}
+
+
+/*****************************************************************************/
+/* Set default font italic flag.                                             */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_font_italic_flag (glPrefsModel     *this,
+                                             gboolean          italic_flag)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_DEFAULT_FONT_ITALIC_FLAG,
+			       italic_flag,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default font italic flag.                                             */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_default_font_italic_flag (glPrefsModel     *this)
+{
+        gboolean italic_flag;
+
+	italic_flag = get_bool (this->priv->gconf_client,
+                                BASE_KEY PREF_DEFAULT_FONT_ITALIC_FLAG,
+                                DEFAULT_FONT_ITALIC_FLAG);
+
+        return italic_flag;
+}
+
+
+/*****************************************************************************/
+/* Set default text color.                                                   */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_text_color (glPrefsModel     *this,
+                                       guint             color)
+{
+	gconf_client_set_int    (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_TEXT_COLOR,
+				 color,
+				 NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default text color.                                                   */
+/*****************************************************************************/
+guint
+gl_prefs_model_get_default_text_color (glPrefsModel     *this)
+{
+        guint color;
+
+	color =	get_int (this->priv->gconf_client,
+			 BASE_KEY PREF_DEFAULT_TEXT_COLOR,
+			 DEFAULT_TEXT_COLOR);
+
+        return color;
+}
+
+
+/*****************************************************************************/
+/* Set default text alignment.                                               */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_text_alignment (glPrefsModel     *this,
+                                           PangoAlignment    alignment)
+{
+	gconf_client_set_string (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
+				 gl_str_util_align_to_string(alignment),
+				 NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default text alignment.                                               */
+/*****************************************************************************/
+PangoAlignment
+gl_prefs_model_get_default_text_alignment (glPrefsModel     *this)
+{
+        gchar          *string;
+        PangoAlignment  alignment;
+
+	string = get_string (this->priv->gconf_client,
+                             BASE_KEY PREF_DEFAULT_TEXT_ALIGNMENT,
+                             DEFAULT_TEXT_ALIGN_STRING);
+	alignment = gl_str_util_string_to_align (string);
+	g_free (string);
+
+        return alignment;
+}
+
+
+/*****************************************************************************/
+/* Set default text line spacing.                                            */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_text_line_spacing (glPrefsModel     *this,
+                                              gdouble           spacing)
+{
+	gconf_client_set_float  (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
+				 spacing,
+				 NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default text line spacing.                                            */
+/*****************************************************************************/
+gdouble
+gl_prefs_model_get_default_text_line_spacing (glPrefsModel     *this)
+{
+        gdouble spacing;
+
+	spacing = get_float (this->priv->gconf_client,
+                             BASE_KEY PREF_DEFAULT_TEXT_LINE_SPACING,
+                             DEFAULT_TEXT_LINE_SPACING);
+
+        return spacing;
+}
+
+
+/*****************************************************************************/
+/* Set default line width.                                                   */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_line_width (glPrefsModel     *this,
+                                       gdouble           width)
+{
+	gconf_client_set_float  (this->priv->gconf_client,
+				 BASE_KEY PREF_DEFAULT_LINE_WIDTH,
+				 width,
+				 NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default line width.                                                   */
+/*****************************************************************************/
+gdouble
+gl_prefs_model_get_default_line_width (glPrefsModel     *this)
+{
+        gdouble width;
+
+	width = get_float (this->priv->gconf_client,
+			   BASE_KEY PREF_DEFAULT_LINE_WIDTH,
+			   DEFAULT_LINE_WIDTH);
+
+        return width;
+}
+
+
+/*****************************************************************************/
+/* Set default line color.                                                   */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_line_color (glPrefsModel     *this,
+                                       guint             color)
+{
+	gconf_client_set_int (this->priv->gconf_client,
+                              BASE_KEY PREF_DEFAULT_LINE_COLOR,
+                              color,
+                              NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default line color.                                                   */
+/*****************************************************************************/
+guint
+gl_prefs_model_get_default_line_color (glPrefsModel     *this)
+{
+        guint color;
+
+	color = get_int (this->priv->gconf_client,
+			 BASE_KEY PREF_DEFAULT_LINE_COLOR,
+			 DEFAULT_LINE_COLOR);
+
+        return color;
+}
+
+
+/*****************************************************************************/
+/* Set default fill color.                                                   */
+/*****************************************************************************/
+void
+gl_prefs_model_set_default_fill_color (glPrefsModel     *this,
+                                       guint             color)
+{
+	gconf_client_set_int (this->priv->gconf_client,
+                              BASE_KEY PREF_DEFAULT_FILL_COLOR,
+                              color,
+                              NULL);
+}
+
+
+/*****************************************************************************/
+/* Get default fill color.                                                   */
+/*****************************************************************************/
+guint
+gl_prefs_model_get_default_fill_color (glPrefsModel     *this)
+{
+        guint color;
+
+	color = get_int (this->priv->gconf_client,
+			 BASE_KEY PREF_DEFAULT_FILL_COLOR,
+			 DEFAULT_FILL_COLOR);
+
+        return color;
+}
+
+
+/*****************************************************************************/
+/* Set main toolbar visible flag.                                            */
+/*****************************************************************************/
+void
+gl_prefs_model_set_main_toolbar_visible (glPrefsModel     *this,
+                                         gboolean          visible)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
+			       visible,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get main toolbar visible flag.                                            */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_main_toolbar_visible (glPrefsModel     *this)
+{
+        gboolean visible;
+
+	visible = get_bool (this->priv->gconf_client,
+                            BASE_KEY PREF_MAIN_TOOLBAR_VISIBLE,
+                            TRUE);
+
+        return visible;
+}
+
+
+/*****************************************************************************/
+/* Set drawing toolbar visible flag.                                         */
+/*****************************************************************************/
+void
+gl_prefs_model_set_drawing_toolbar_visible (glPrefsModel     *this,
+                                            gboolean          visible)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
+			       visible,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get drawing toolbar visible flag.                                         */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_drawing_toolbar_visible (glPrefsModel     *this)
+{
+        gboolean visible;
+
+	visible = get_bool (this->priv->gconf_client,
+                            BASE_KEY PREF_DRAWING_TOOLBAR_VISIBLE,
+                            TRUE);
+
+        return visible;
+}
+
+
+/*****************************************************************************/
+/* Set property toolbar visible flag.                                        */
+/*****************************************************************************/
+void
+gl_prefs_model_set_property_toolbar_visible (glPrefsModel     *this,
+                                             gboolean          visible)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
+			       visible,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get property toolbar visible flag.                                        */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_property_toolbar_visible (glPrefsModel     *this)
+{
+        gboolean visible;
+
+	visible = get_bool (this->priv->gconf_client,
+                            BASE_KEY PREF_PROPERTY_TOOLBAR_VISIBLE,
+                            TRUE);
+
+        return visible;
+}
+
+
+/*****************************************************************************/
+/* Set grid visible flag.                                                    */
+/*****************************************************************************/
+void
+gl_prefs_model_set_grid_visible (glPrefsModel     *this,
+                                 gboolean          visible)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_GRID_VISIBLE,
+			       visible,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get grid visible flag.                                                    */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_grid_visible (glPrefsModel     *this)
+{
+        gboolean visible;
+
+	visible = get_bool (this->priv->gconf_client,
+                            BASE_KEY PREF_GRID_VISIBLE,
+                            TRUE);
+
+        return visible;
+}
+
+
+/*****************************************************************************/
+/* Set markup visible flag.                                                  */
+/*****************************************************************************/
+void
+gl_prefs_model_set_markup_visible (glPrefsModel     *this,
+                                   gboolean          visible)
+{
+	gconf_client_set_bool (this->priv->gconf_client,
+			       BASE_KEY PREF_MARKUP_VISIBLE,
+			       visible,
+			       NULL);
+}
+
+
+/*****************************************************************************/
+/* Get markup visible flag.                                                  */
+/*****************************************************************************/
+gboolean
+gl_prefs_model_get_markup_visible (glPrefsModel     *this)
+{
+        gboolean visible;
+
+	visible = get_bool (this->priv->gconf_client,
+                            BASE_KEY PREF_MARKUP_VISIBLE,
+                            TRUE);
+
+        return visible;
+}
+
+
+/*****************************************************************************/
+/* Set max recents.                                                          */
+/*****************************************************************************/
+void
+gl_prefs_model_set_max_recents (glPrefsModel     *this,
+                                gint              max_recents)
+{
+	gconf_client_set_int (this->priv->gconf_client,
+			      BASE_KEY PREF_MAX_RECENTS,
+			      max_recents,
+			      NULL);
+}
+
+
+/*****************************************************************************/
+/* Get max recents.                                                          */
+/*****************************************************************************/
+gint
+gl_prefs_model_get_max_recents (glPrefsModel     *this)
+{
+        gint max_recents;
+
+	max_recents = get_int (this->priv->gconf_client,
+                               BASE_KEY PREF_MAX_RECENTS,
+                               -1);
+
+        return max_recents;
 }
 
 
@@ -524,11 +840,11 @@ static void
 notify_cb (GConfClient  *client,
 	   guint         cnxn_id,
 	   GConfEntry   *entry,
-	   glPrefsModel *prefs_model)
+	   glPrefsModel *this)
 {
 	gl_debug (DEBUG_PREFS, "Key was changed: %s", entry->key);
 
-	gl_prefs_model_load_settings (prefs_model);
+	g_signal_emit (G_OBJECT(this), signals[CHANGED], 0);
 }
 
 
@@ -641,48 +957,6 @@ get_float (GConfClient *client,
 	} else {
 		return def;
 
-	}
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Utilities to deal with units.                                   */
-/*---------------------------------------------------------------------------*/
-static lglUnitsType
-string_to_units (const gchar *string)
-{
-	lglUnitsType units;
-
-	if (g_ascii_strcasecmp (string, "Points") == 0) {
-		units = LGL_UNITS_POINT;
-	} else if (g_ascii_strcasecmp (string, "Inches") == 0) {
-		units = LGL_UNITS_INCH;
-	} else if (g_ascii_strcasecmp (string, "Millimeters") == 0) {
-		units = LGL_UNITS_MM;
-	} else {
-		units = LGL_UNITS_INCH;
-	}
-
-	return units;
-}
-
-
-static const
-gchar *units_to_string (lglUnitsType units)
-{
-	switch (units) {
-	case LGL_UNITS_POINT:
-		return "Points";
-		break;
-	case LGL_UNITS_INCH:
-		return "Inches";
-		break;
-	case LGL_UNITS_MM:
-		return "Millimeters";
-		break;
-	default:
-		return "Inches";
-		break;
 	}
 }
 

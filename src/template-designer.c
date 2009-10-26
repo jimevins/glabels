@@ -34,6 +34,7 @@
 #include "print-op-dialog.h"
 #include "combo-util.h"
 #include "builder-util.h"
+#include "units-util.h"
 
 #include "debug.h"
 
@@ -385,6 +386,7 @@ gl_template_designer_new (GtkWindow *parent)
 static void
 gl_template_designer_construct (glTemplateDesigner *dialog)
 {
+        lglUnits    units;
 	GdkPixbuf  *logo;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -393,10 +395,11 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
 	g_return_if_fail (dialog->priv != NULL);
 
 	/* Initialize units stuff from prefs */
-	dialog->priv->units_string    = gl_prefs_get_units_string ();
-        dialog->priv->units_per_point = gl_prefs_get_units_per_point ();
-        dialog->priv->climb_rate      = gl_prefs_get_units_step_size ();
-        dialog->priv->digits          = gl_prefs_get_units_precision ();
+        units = gl_prefs_model_get_units (gl_prefs);
+	dialog->priv->units_string    = lgl_units_get_name (units);
+        dialog->priv->units_per_point = lgl_units_get_units_per_point (units);
+        dialog->priv->climb_rate      = gl_units_util_get_step_size (units);
+        dialog->priv->digits          = gl_units_util_get_precision (units);
 
 	gtk_window_set_title (GTK_WINDOW(dialog), _("gLabels Template Designer"));
 
@@ -552,7 +555,7 @@ construct_pg_size_page (glTemplateDesigner      *dialog,
 	page_sizes = lgl_db_get_paper_name_list ();
 	gl_combo_util_set_strings (GTK_COMBO_BOX (dialog->priv->pg_size_combo), page_sizes);
 	lgl_db_free_paper_name_list (page_sizes);
-	default_page_size_id = gl_prefs_get_page_size ();
+	default_page_size_id = gl_prefs_model_get_default_page_size (gl_prefs);
 	default_page_size_name = lgl_db_lookup_paper_name_from_id (default_page_size_id);
 	gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), default_page_size_name);
 	g_free (default_page_size_name);
@@ -1116,8 +1119,12 @@ cancel_cb (glTemplateDesigner *dialog)
 static void
 apply_cb (glTemplateDesigner *dialog)
 {
+        lglUnits     units;
 	lglTemplate *template;
         gchar       *name;
+
+        units = gl_prefs_model_get_units (gl_prefs);
+        lgl_xml_set_default_units (units);
 	
 	template = build_template (dialog);
 	lgl_db_register_template (template);

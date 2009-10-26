@@ -1,5 +1,5 @@
 /*
- *  enums.h
+ *  units.h
  *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
@@ -18,14 +18,17 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __ENUMS_H__
-#define __ENUMS_H__
+#ifndef __LGL_UNITS_H__
+#define __LGL_UNITS_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-/* Units of distance */
+
+/*
+ * Units of distance
+ */
 typedef enum {
 	LGL_UNITS_POINT, /* encoded as "pt" */
 	LGL_UNITS_INCH,  /* encoded as "in" */
@@ -35,13 +38,25 @@ typedef enum {
 
 	LGL_UNITS_FIRST = LGL_UNITS_POINT,
 	LGL_UNITS_LAST  = LGL_UNITS_PICA,
-} lglUnitsType;
+
+        LGL_UNITS_INVALID = -1,
+} lglUnits;
+
+
+const gchar *lgl_units_get_id               (lglUnits     units);
+lglUnits     lgl_units_from_id              (const gchar *id);
+
+const gchar *lgl_units_get_name             (lglUnits     units);
+lglUnits     lgl_units_from_name            (const gchar *name);
+
+gdouble      lgl_units_get_points_per_unit  (lglUnits     units);
+gdouble      lgl_units_get_units_per_point  (lglUnits     units);
 
 
 G_END_DECLS
 
 
-#endif /* __ENUMS_H__ */
+#endif /* __LGL_UNITS_H__ */
 
 
 

@@ -31,6 +31,7 @@
 #include "mini-preview-pixbuf-cache.h"
 #include "prefs.h"
 #include "font-history.h"
+#include "template-history.h"
 #include "debug.h"
 #include "window.h"
 #include "file.h"
