@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CATEGORY_H__
-#define __CATEGORY_H__
+#ifndef __LGL_CATEGORY_H__
+#define __LGL_CATEGORY_H__
 
 #include <glib.h>
 
@@ -48,7 +48,7 @@ void              lgl_category_free                (lglCategory       *category)
 
 G_END_DECLS
 
-#endif
+#endif /* __LGL_CATEGORY_H__ */
 
 
 

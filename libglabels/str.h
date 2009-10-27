@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __STR_H__
-#define __STR_H__
+#ifndef __LGL_STR_H__
+#define __LGL_STR_H__
 
 #include <glib.h>
 
@@ -31,7 +31,7 @@ gint  lgl_str_utf8_casecmp (const gchar *s1,
 G_END_DECLS
 
 
-#endif /* __STR_H__ */
+#endif /* __LGL_STR_H__ */
 
 
 

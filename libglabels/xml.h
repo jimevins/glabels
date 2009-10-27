@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XML_H__
-#define __XML_H__
+#ifndef __LGL_XML_H__
+#define __LGL_XML_H__
 
 #include <glib.h>
 #include <libxml/tree.h>
@@ -105,7 +105,7 @@ void     lgl_xml_set_default_units (lglUnits      units);
 G_END_DECLS
 
 
-#endif /* __XML_H__ */
+#endif /* __LGL_XML_H__ */
 
 
 

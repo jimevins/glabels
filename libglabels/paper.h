@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __PAPER_H__
-#define __PAPER_H__
+#ifndef __LGL_PAPER_H__
+#define __LGL_PAPER_H__
 
 #include <glib.h>
 
@@ -56,7 +56,7 @@ void                 lgl_paper_free                (lglPaper         *paper);
 
 G_END_DECLS
 
-#endif
+#endif /* __LGL_PAPER_H__ */
 
 
 

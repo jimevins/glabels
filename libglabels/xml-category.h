@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XML_CATEGORY_H__
-#define __XML_CATEGORY_H__
+#ifndef __LGL_XML_CATEGORY_H__
+#define __LGL_XML_CATEGORY_H__
 
 #include <glib.h>
 #include <libxml/tree.h>
@@ -37,7 +37,7 @@ lglCategory *lgl_xml_category_parse_category_node       (xmlNodePtr    category_
 
 G_END_DECLS
 
-#endif /* __XML_CATEGORY_H__ */
+#endif /* __LGL_XML_CATEGORY_H__ */
 
 
 

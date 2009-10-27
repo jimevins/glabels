@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __TEMPLATE_H__
-#define __TEMPLATE_H__
+#ifndef __LGL_TEMPLATE_H__
+#define __LGL_TEMPLATE_H__
 
 #include <glib.h>
 
@@ -369,7 +369,7 @@ void                 lgl_template_markup_free          (lglTemplateMarkup       
 
 G_END_DECLS
 
-#endif
+#endif /* __LGL_TEMPLATE_H__ */
 
 
 

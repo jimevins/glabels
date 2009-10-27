@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __DB_H__
-#define __DB_H__
+#ifndef __LGL_DB_H__
+#define __LGL_DB_H__
 
 #include <glib.h>
 
@@ -137,7 +137,7 @@ void           lgl_db_print_aliases                  (const lglTemplate    *temp
 
 G_END_DECLS
 
-#endif
+#endif /* __LGL_DB_H__ */
 
 
 

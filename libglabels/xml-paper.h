@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XML_PAPER_H__
-#define __XML_PAPER_H__
+#ifndef __LGL_XML_PAPER_H__
+#define __LGL_XML_PAPER_H__
 
 #include <glib.h>
 #include <libxml/tree.h>
@@ -37,7 +37,7 @@ lglPaper    *lgl_xml_paper_parse_paper_node      (xmlNodePtr    paper_node);
 
 G_END_DECLS
 
-#endif /* __XML_PAPER_H__ */
+#endif /* __LGL_XML_PAPER_H__ */
 
 
 

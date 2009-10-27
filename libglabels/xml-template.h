@@ -18,8 +18,8 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __XML_TEMPLATE_H__
-#define __XML_TEMPLATE_H__
+#ifndef __LGL_XML_TEMPLATE_H__
+#define __LGL_XML_TEMPLATE_H__
 
 #include <glib.h>
 #include <libxml/tree.h>
@@ -47,7 +47,7 @@ void         lgl_xml_template_create_template_node     (const lglTemplate *templ
 
 G_END_DECLS
 
-#endif /* __XML_TEMPLATE_H__ */
+#endif /* __LGL_XML_TEMPLATE_H__ */
 
 
 
