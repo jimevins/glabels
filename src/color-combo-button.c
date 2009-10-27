@@ -296,40 +296,76 @@ button_clicked_cb( glColorComboButton *this )
 /* Menu positioning function.                                                */
 /*****************************************************************************/
 static void
-menu_position_function (GtkMenu  *menu,
-                        gint     *x,
-                        gint     *y,
-                        gboolean *push_in,
-                        gpointer  user_data)
+menu_position_function (GtkMenu            *menu,
+                        gint               *x,
+                        gint               *y,
+                        gboolean           *push_in,
+                        glColorComboButton *this)
 {
-        glColorComboButton *this = GL_COLOR_COMBO_BUTTON (user_data);
+        GdkScreen          *screen;
+        gint                w_screen, h_screen;
         GdkWindow          *window;
-        gint                x1, y1;
-        gint                menu_h, menu_w;
+        gint                x_window, y_window;
+        GtkAllocation      *allocation;
+        gint                x_this, y_this, h_this;
+        GtkRequisition      menu_requisition;
+        gint                h_menu, w_menu;
 
+        /*
+         * Screen size
+         */
+        screen = gtk_widget_get_screen (GTK_WIDGET (this));
+        w_screen = gdk_screen_get_width (screen);
+        h_screen = gdk_screen_get_height (screen);
+
+        /*
+         * Absolute position of "this" window on screen.
+         */
         window = gtk_widget_get_window (GTK_WIDGET (this));
+        gdk_window_get_origin (window, &x_window, &y_window);
 
-        gdk_window_get_origin (window, &x1, &y1);
-        *x = x1 + GTK_WIDGET (this)->allocation.x;
-        *y = y1 + GTK_WIDGET (this)->allocation.y +
-                GTK_WIDGET (this)->allocation.height;
+        /*
+         *  Position and size of "this" inside window
+         */
+        allocation = &GTK_WIDGET (this)->allocation;
+        x_this = allocation->x;
+        y_this = allocation->y;
+        h_this = allocation->height;
+
+        /*
+         * Size of menu.
+         */
+        gtk_widget_size_request (this->priv->menu, &menu_requisition);
+        h_menu = menu_requisition.height;
+        w_menu = menu_requisition.width;
+
+        /*
+         * Default position anchored to lower left corner of "this".
+         */
+        *x = x_window + x_this;
+        *y = y_window + y_this + h_this;
                 
-        menu_h = this->priv->menu->allocation.height;
-        menu_w = this->priv->menu->allocation.width;
-
-        if ((*y + menu_h) > gdk_screen_height ())
+        /*
+         * Adjust vertical position if menu if extends past bottom of screen.
+         */
+        if ( (*y + h_menu) > h_screen )
         {
-                *y = y1 + GTK_WIDGET (this)->allocation.y - menu_h;
+                *y = y_window + y_this - h_menu;
+
                 if ( *y < 0 )
                 {
-                        *y = gdk_screen_height () - menu_h;
+                        *y = h_screen - h_menu;
                 }
         }
 
-        if ((*x + menu_w) > gdk_screen_width ())
+        /*
+         * Adjust horizontal position if menu if extends past edge of screen.
+         */
+        if ( (*x + w_menu) > w_screen )
         {
-                *x = gdk_screen_width () - menu_w;
+                *x = w_screen - w_menu;
         }
+
 
         *push_in = TRUE;
 }
@@ -358,7 +394,7 @@ dropdown_button_press_event_cb (GtkWidget          *widget,
 
                 gtk_menu_popup (GTK_MENU (this->priv->menu),
                                 NULL, NULL,
-                                menu_position_function, this,
+                                (GtkMenuPositionFunc)menu_position_function, this,
                                 event->button, event->time);
                 break;
 
