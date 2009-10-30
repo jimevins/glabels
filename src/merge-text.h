@@ -30,6 +30,7 @@ G_BEGIN_DECLS
  * name               type             description
  * ---------------------------------------------------------------------------
  * delim              gchar            Field delimiter.
+ * line1_has_keys     gboolean         Do we harvest key names from line 1?
  *
  */
 

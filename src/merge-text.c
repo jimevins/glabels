@@ -34,8 +34,14 @@
 /*===========================================*/
 
 struct _glMergeTextPrivate {
+
 	gchar             delim;
+        gboolean          line1_has_keys;
+
 	FILE             *fp;
+
+        GPtrArray        *keys;
+        gint              n_fields_max;
 };
 
 enum {
@@ -45,6 +51,7 @@ enum {
 enum {
 	ARG_0,
 	ARG_DELIM,
+	ARG_LINE1_HAS_KEYS,
 };
 
 
@@ -69,6 +76,10 @@ static void           gl_merge_text_get_property    (GObject          *object,
 						     GValue           *value,
 						     GParamSpec       *pspec);
 
+static gchar         *key_from_index                (glMergeText      *merge_text,
+                                                     gint              i_field);
+static void           clear_keys                    (glMergeText      *merge_text);
+
 static GList         *gl_merge_text_get_key_list    (glMerge          *merge);
 static gchar         *gl_merge_text_get_primary_key (glMerge          *merge);
 static void           gl_merge_text_open            (glMerge          *merge);
@@ -81,6 +92,7 @@ static GList         *parse_line                    (FILE             *fp,
 						     gchar             delim);
 static gchar         *parse_field                   (gchar            *raw_field);
 static void           free_fields                   (GList           **fields);
+
 
 
 /*****************************************************************************/
@@ -109,6 +121,13 @@ gl_merge_text_class_init (glMergeTextClass *class)
 				    0, 0x7F, ',',
 				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
+	g_object_class_install_property
+                (object_class,
+                 ARG_LINE1_HAS_KEYS,
+                 g_param_spec_boolean ("line1_has_keys", NULL, NULL,
+                                       FALSE,
+                                       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+
 	object_class->finalize = gl_merge_text_finalize;
 
 	merge_class->get_key_list    = gl_merge_text_get_key_list;
@@ -129,6 +148,8 @@ gl_merge_text_init (glMergeText *merge_text)
 
 	merge_text->priv = g_new0 (glMergeTextPrivate, 1);
 
+        merge_text->priv->keys = g_ptr_array_new ();
+
 	gl_debug (DEBUG_MERGE, "END");
 }
 
@@ -137,11 +158,14 @@ static void
 gl_merge_text_finalize (GObject *object)
 {
 	glMergeText *merge_text = GL_MERGE_TEXT (object);
+        gint         i;
 
 	gl_debug (DEBUG_MERGE, "START");
 
 	g_return_if_fail (object && GL_IS_MERGE_TEXT (object));
 
+        clear_keys (merge_text);
+        g_ptr_array_free (merge_text->priv->keys, TRUE);
 	g_free (merge_text->priv);
 
 	G_OBJECT_CLASS (gl_merge_text_parent_class)->finalize (object);
@@ -169,6 +193,12 @@ gl_merge_text_set_property (GObject      *object,
 		merge_text->priv->delim = g_value_get_char (value);
 		gl_debug (DEBUG_MERGE, "ARG \"delim\" = \"%c\"",
 			  merge_text->priv->delim);
+		break;
+
+        case ARG_LINE1_HAS_KEYS:
+                merge_text->priv->line1_has_keys = g_value_get_boolean (value);
+		gl_debug (DEBUG_MERGE, "ARG \"line1_has_keys\" = \"%d\"",
+			  merge_text->priv->line1_has_keys);
 		break;
 
         default:
@@ -199,12 +229,51 @@ gl_merge_text_get_property (GObject     *object,
 		g_value_set_char (value, merge_text->priv->delim);
 		break;
 
+        case ARG_LINE1_HAS_KEYS:
+                g_value_set_boolean (value, merge_text->priv->line1_has_keys);
+                break;
+
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
                 break;
 
         }
 
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Lookup key name from zero based index.                                    */
+/*---------------------------------------------------------------------------*/
+static gchar *
+key_from_index (glMergeText  *merge_text,
+                gint          i_field)
+{
+        if ( merge_text->priv->line1_has_keys &&
+             (i_field < merge_text->priv->keys->len) )
+        {
+                return g_strdup (g_ptr_array_index (merge_text->priv->keys, i_field));
+        }
+        else
+        {
+                return g_strdup_printf ("%d", i_field+1);
+        }
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Clear stored keys.                                                        */
+/*---------------------------------------------------------------------------*/
+static void
+clear_keys (glMergeText      *merge_text)
+{
+        gint i;
+
+        for ( i = 0; i < merge_text->priv->keys->len; i++ )
+        {
+                g_free (g_ptr_array_index (merge_text->priv->keys, i));
+        }
+        merge_text->priv->keys->len = 0;
 }
 
 
@@ -218,32 +287,27 @@ gl_merge_text_get_key_list (glMerge *merge)
 	GList         *record_list, *p_rec;
 	glMergeRecord *record;
 	GList         *p_field;
-	gint           i_field, n_fields, n_fields_max = 0;
+	gint           i_field, n_fields_line, n_fields;
 	GList         *key_list;
 	
-	/* Field keys are simply column numbers. */
-
 	gl_debug (DEBUG_MERGE, "BEGIN");
 
 	merge_text = GL_MERGE_TEXT (merge);
 
-	record_list = (GList *)gl_merge_get_record_list (merge);
+        if ( merge_text->priv->line1_has_keys )
+        {
+                n_fields = merge_text->priv->keys->len;
+        }
+        else
+        {
+                n_fields = merge_text->priv->n_fields_max;
+        }
 
-	for ( p_rec=record_list; p_rec!=NULL; p_rec=p_rec->next ) {
-		record = (glMergeRecord *)p_rec->data;
-
-		n_fields = 0;
-		for ( p_field=record->field_list; p_field!=NULL; p_field=p_field->next ) {
-			n_fields++;
-		}
-		if ( n_fields > n_fields_max ) n_fields_max = n_fields;
-	}
-
-	key_list = NULL;
-	for (i_field=1; i_field <= n_fields_max; i_field++) {
-		key_list = g_list_append (key_list, g_strdup_printf ("%d", i_field));
-	}
-
+        key_list = NULL;
+        for ( i_field=0; i_field < n_fields; i_field++ )
+        {
+                key_list = g_list_append (key_list, key_from_index(merge_text, i_field));
+        }
 
 	gl_debug (DEBUG_MERGE, "END");
 
@@ -258,7 +322,7 @@ static gchar *
 gl_merge_text_get_primary_key (glMerge *merge)
 {
 	/* For now, let's always assume the first column is the primary key. */
-	return g_strdup ("1");
+        return key_from_index (GL_MERGE_TEXT (merge), 0);
 }
 
 
@@ -271,15 +335,38 @@ gl_merge_text_open (glMerge *merge)
 	glMergeText *merge_text;
 	gchar       *src;
 
+        GList       *line1_fields;
+        GList       *p;
+
 	merge_text = GL_MERGE_TEXT (merge);
 
 	src = gl_merge_get_src (merge);
 
-	if (src != NULL) {
+	if (src != NULL)
+        {
 		merge_text->priv->fp = fopen (src, "r");
+                g_free (src);
+
+                clear_keys (merge_text);
+                merge_text->priv->n_fields_max = 0;
+
+                if ( merge_text->priv->line1_has_keys )
+                {
+                        /*
+                         * Extract keys from first line and discard line
+                         */
+
+                        line1_fields = parse_line (merge_text->priv->fp, merge_text->priv->delim);
+                        for ( p = line1_fields; p != NULL; p = p->next )
+                        {
+                                g_ptr_array_add (merge_text->priv->keys, g_strdup (p->data));
+                        }
+                        free_fields (&line1_fields);
+                }
+
 	}
 
-	g_free (src);
+
 }
 
 
@@ -321,10 +408,6 @@ gl_merge_text_get_record (glMerge *merge)
 	delim = merge_text->priv->delim;
 	fp    = merge_text->priv->fp;
 
-	if (fp == NULL) {
-		return NULL;
-	}
-	       
 	fields = parse_line (fp, delim);
 	if ( fields == NULL ) {
 		return NULL;
@@ -332,11 +415,10 @@ gl_merge_text_get_record (glMerge *merge)
 
 	record = g_new0 (glMergeRecord, 1);
 	record->select_flag = TRUE;
-	i_field = 1;
-	for (p=fields; p != NULL; p=p->next) {
+	for (p=fields, i_field=0; p != NULL; p=p->next, i_field++) {
 
 		field = g_new0 (glMergeField, 1);
-		field->key = g_strdup_printf ("%d", i_field++);
+                field->key = key_from_index (merge_text, i_field);
 #ifndef CSV_ALWAYS_UTF8
 		field->value = g_locale_to_utf8 (p->data, -1, NULL, NULL, NULL);
 #else
@@ -346,6 +428,11 @@ gl_merge_text_get_record (glMerge *merge)
 		record->field_list = g_list_append (record->field_list, field);
 	}
 	free_fields (&fields);
+
+        if ( i_field > merge_text->priv->n_fields_max )
+        {
+                merge_text->priv->n_fields_max = i_field;
+        }
 
 	return record;
 }
@@ -360,11 +447,19 @@ gl_merge_text_copy (glMerge *dst_merge,
 {
 	glMergeText *dst_merge_text;
 	glMergeText *src_merge_text;
+        gint         i;
 
 	dst_merge_text = GL_MERGE_TEXT (dst_merge);
 	src_merge_text = GL_MERGE_TEXT (src_merge);
 
-	dst_merge_text->priv->delim = src_merge_text->priv->delim;
+	dst_merge_text->priv->delim          = src_merge_text->priv->delim;
+	dst_merge_text->priv->line1_has_keys = src_merge_text->priv->line1_has_keys;
+
+        for ( i=0; i < src_merge_text->priv->keys->len; i++ )
+        {
+                g_ptr_array_add (dst_merge_text->priv->keys,
+                                 g_strdup ((gchar *)g_ptr_array_index (src_merge_text->priv->keys, i)));
+        }
 }
 
 
@@ -398,6 +493,10 @@ parse_line (FILE  *fp,
 	enum { BEGIN, NORMAL, QUOTED, QUOTED_QUOTE1,
                NORMAL_ESCAPED, QUOTED_ESCAPED, DONE } state;
 
+	if (fp == NULL) {
+		return NULL;
+	}
+	       
 	state = BEGIN;
 	string = g_string_new( "" );
 	while ( state != DONE ) {

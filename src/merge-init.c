@@ -54,36 +54,60 @@ gl_merge_init (void)
 
 	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
 				   "Text/Comma",
-				   _("Text file with comma delimeters (CSV)"),
+				   _("Text: Comma Separated Values (CSV)"),
 				   GL_MERGE_SRC_IS_FILE,
 				   "delim", ',',
 				   NULL);
 
 	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
+				   "Text/Comma/Line1Keys",
+				   _("Text: Comma Separated Values (CSV) with keys on line 1"),
+				   GL_MERGE_SRC_IS_FILE,
+				   "delim", ',',
+                                   "line1_has_keys", TRUE,
+				   NULL);
+
+	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
+				   "Text/Tab",
+				   _("Text: Tab Separated Values (TSV)"),
+				   GL_MERGE_SRC_IS_FILE,
+				   "delim", '\t',
+				   NULL);
+
+	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
+				   "Text/Tab/Line1Keys",
+				   _("Text: Tab Separated Values (TSV) with keys on line 1"),
+				   GL_MERGE_SRC_IS_FILE,
+				   "delim", '\t',
+                                   "line1_has_keys", TRUE,
+				   NULL);
+
+	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
 				   "Text/Colon",
-				   _("Text file with colon delimeters"),
+				   _("Text: Colon separated values"),
 				   GL_MERGE_SRC_IS_FILE,
 				   "delim", ':',
 				   NULL);
 
 	gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
-				   "Text/Tab",
-				   _("Text file with tab delimeters"),
+				   "Text/Colon/Line1Keys",
+				   _("Text: Colon separated values with keys on line 1"),
 				   GL_MERGE_SRC_IS_FILE,
-				   "delim", '\t',
+				   "delim", ':',
+                                   "line1_has_keys", TRUE,
 				   NULL);
 
 #ifdef HAVE_LIBEBOOK
 
 	gl_merge_register_backend (GL_TYPE_MERGE_EVOLUTION,
 				   "ebook/eds",
-				   _("Data from default Evolution Addressbook"),
+				   _("Evolution Addressbook"),
 				   GL_MERGE_SRC_IS_FIXED,
 				   NULL);
 
 	gl_merge_register_backend (GL_TYPE_MERGE_VCARD,
 				   "ebook/vcard",
-				   _("Data from a file containing VCards"),
+				   _("VCards"),
 				   GL_MERGE_SRC_IS_FILE,
 				   NULL);
 
