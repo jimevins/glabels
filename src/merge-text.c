@@ -460,6 +460,8 @@ gl_merge_text_copy (glMerge *dst_merge,
                 g_ptr_array_add (dst_merge_text->priv->keys,
                                  g_strdup ((gchar *)g_ptr_array_index (src_merge_text->priv->keys, i)));
         }
+
+	dst_merge_text->priv->n_fields_max   = src_merge_text->priv->n_fields_max;
 }
 
 
