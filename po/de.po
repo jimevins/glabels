@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-06 20:49+0200\n"
-"PO-Revision-Date: 2009-09-20 18:09+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2009-10-30 01:19+0000\n"
+"PO-Revision-Date: 2009-11-03 19:40+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,111 +32,111 @@ msgstr "POSTNET-9 (ZIP+4)"
 msgid "POSTNET-11 (DPBC)"
 msgstr "POSTNET-11 (DPBC)"
 
-#: ../src/bc.c:77
+#: ../src/bc.c:79
 msgid "CEPNET"
 msgstr "CEPNET"
 
-#: ../src/bc.c:80
+#: ../src/bc.c:82
 msgid "EAN (any)"
 msgstr "EAN (any)"
 
-#: ../src/bc.c:83
+#: ../src/bc.c:85
 msgid "EAN-8"
 msgstr "EAN-8"
 
-#: ../src/bc.c:86
+#: ../src/bc.c:88
 msgid "EAN-8 +2"
 msgstr "EAN-8 +2"
 
-#: ../src/bc.c:89
+#: ../src/bc.c:91
 msgid "EAN-8 +5"
 msgstr "EAN-8 +5"
 
-#: ../src/bc.c:92
+#: ../src/bc.c:94
 msgid "EAN-13"
 msgstr "EAN-13"
 
-#: ../src/bc.c:95
+#: ../src/bc.c:97
 msgid "EAN-13 +2"
 msgstr "EAN-13 +2"
 
-#: ../src/bc.c:98
+#: ../src/bc.c:100
 msgid "EAN-13 +5"
 msgstr "EAN-13 +5"
 
-#: ../src/bc.c:101
+#: ../src/bc.c:103
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A oder UPC-E)"
 
-#: ../src/bc.c:104
+#: ../src/bc.c:106
 msgid "UPC-A"
 msgstr "UPC-A"
 
-#: ../src/bc.c:107
+#: ../src/bc.c:109
 msgid "UPC-A +2"
 msgstr "UPC-A +2"
 
-#: ../src/bc.c:110
+#: ../src/bc.c:112
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc.c:113
+#: ../src/bc.c:115
 msgid "UPC-E"
 msgstr "UPC-E"
 
-#: ../src/bc.c:116
+#: ../src/bc.c:118
 msgid "UPC-E +2"
 msgstr "UPC-E +2"
 
-#: ../src/bc.c:119
+#: ../src/bc.c:121
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc.c:122
+#: ../src/bc.c:124
 msgid "ISBN"
 msgstr "ISBN"
 
-#: ../src/bc.c:125
+#: ../src/bc.c:127
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc.c:128
+#: ../src/bc.c:130
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc.c:131
+#: ../src/bc.c:133
 msgid "Code 128"
 msgstr "Code 128"
 
-#: ../src/bc.c:134
+#: ../src/bc.c:136
 msgid "Code 128C"
 msgstr "Code 128C"
 
-#: ../src/bc.c:137
+#: ../src/bc.c:139
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc.c:140
+#: ../src/bc.c:142
 msgid "Interleaved 2 of 5"
 msgstr "Interleaved 2 of 5"
 
-#: ../src/bc.c:143
+#: ../src/bc.c:145
 msgid "Codabar"
 msgstr "Codabar"
 
-#: ../src/bc.c:146
+#: ../src/bc.c:148
 msgid "MSI"
 msgstr "MSI"
 
-#: ../src/bc.c:149
+#: ../src/bc.c:151
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:152
+#: ../src/bc.c:158
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc.c:155
+#: ../src/bc.c:165
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -262,28 +262,33 @@ msgstr "Weiß"
 
 #: ../src/color-combo-menu.c:116
 #, c-format
-msgid "10% Gray"
-msgstr "10% Grau"
+#| msgid "10% Gray"
+msgid "10\\% Gray"
+msgstr "10\\% Grau"
 
 #: ../src/color-combo-menu.c:117
 #, c-format
-msgid "25% Gray"
-msgstr "25% Grau"
+#| msgid "25% Gray"
+msgid "25\\% Gray"
+msgstr "25\\% Grau"
 
 #: ../src/color-combo-menu.c:118
 #, c-format
-msgid "40% Gray"
-msgstr "40% Grau"
+#| msgid "40% Gray"
+msgid "40\\% Gray"
+msgstr "40\\% Grau"
 
 #: ../src/color-combo-menu.c:119
 #, c-format
-msgid "50% Gray"
-msgstr "50% Grau"
+#| msgid "50% Gray"
+msgid "50\\% Gray"
+msgstr "50\\% Grau"
 
 #: ../src/color-combo-menu.c:120
 #, c-format
-msgid "60% Gray"
-msgstr "60% Grau"
+#| msgid "60% Gray"
+msgid "60\\% Gray"
+msgstr "60\\% Grau"
 
 #: ../src/color-combo-menu.c:121
 msgid "Black"
@@ -324,8 +329,7 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:346 ../src/file.c:362
 msgid "Please select a file or supply a valid file name"
-msgstr ""
-"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:359
 msgid "File does not exist"
@@ -374,85 +378,120 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:772
 msgid "Your changes will be lost if you don't save them."
-msgstr ""
-"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:775
 msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
-#: ../src/font-combo-menu.c:127
+#: ../src/font-combo-menu.c:137
+#| msgid "Recent templates"
+msgid "Recent fonts"
+msgstr "Zuletzt benutzte Schriften"
+
+#: ../src/font-combo-menu.c:152
 msgid "Proportional fonts"
 msgstr "Proportionale Schriften"
 
-#: ../src/font-combo-menu.c:142
+#: ../src/font-combo-menu.c:160
 msgid "Fixed-width fonts"
 msgstr "Dicktengleiche Schriften"
 
-#: ../src/font-combo-menu.c:157
+#: ../src/font-combo-menu.c:168
 msgid "All fonts"
 msgstr "Alle Schriften"
 
-#: ../src/glabels-batch.c:51
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr "Aa"
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr "abcdefghijklmnopqrstuvwxyz"
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr "0123456789 .:,;(*!?)"
+
+#: ../src/font-combo-menu-item.c:157
+msgid "Sample text"
+msgstr "Beispieltext"
+
+#: ../src/glabels-batch.c:52
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "Ausgabe-Dateiname festlegen (Vorgabe: »output.pdf«)"
 
-#: ../src/glabels-batch.c:51 ../src/glabels-batch.c:65
+#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
 msgid "filename"
 msgstr "Dateiname"
 
-#: ../src/glabels-batch.c:53
+#: ../src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "Anzahl der Blätter (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:53
+#: ../src/glabels-batch.c:54
 msgid "sheets"
 msgstr "Blätter"
 
-#: ../src/glabels-batch.c:55
+#: ../src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "Anzahl der Kopien (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:55
+#: ../src/glabels-batch.c:56
 msgid "copies"
 msgstr "Kopien"
 
-#: ../src/glabels-batch.c:57
+#: ../src/glabels-batch.c:58
 msgid "first label on first sheet (default=1)"
 msgstr "Erstes Etikett auf dem ersten Blatt (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:57
+#: ../src/glabels-batch.c:58
 msgid "first"
 msgstr "Erste"
 
-#: ../src/glabels-batch.c:59
+#: ../src/glabels-batch.c:60
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "Begrenzungen drucken (um Druckausrichtung zu testen)"
 
-#: ../src/glabels-batch.c:61
+#: ../src/glabels-batch.c:62
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "Spiegelbildlich drucken"
 
-#: ../src/glabels-batch.c:63
+#: ../src/glabels-batch.c:64
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:11
 msgid "print crop marks"
 msgstr "Schnittmarken drucken"
 
-#: ../src/glabels-batch.c:65
+#: ../src/glabels-batch.c:66
 msgid "input file for merging"
 msgstr "Eingabedatei zum Mischen"
 
-#: ../src/glabels-batch.c:67 ../src/glabels.c:62
+#: ../src/glabels-batch.c:68 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[DATEI...]"
 
-#: ../src/glabels-batch.c:96
+#: ../src/glabels-batch.c:97
 msgid "Print files created with gLabels."
 msgstr "Mit gLabels erstellte Dateien drucken."
 
-#: ../src/glabels-batch.c:104 ../src/glabels.c:87
+#: ../src/glabels-batch.c:105 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -462,18 +501,18 @@ msgstr ""
 "Rufen Sie %s --help« auf, um eine vollständige Liste der verfügbaren "
 "Befehlszeilenoptionen zu sehen.\n"
 
-#: ../src/glabels-batch.c:146
+#: ../src/glabels-batch.c:149
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr ""
 "Dokumentverarbeitung kann mit gLabels-Datei %s nicht ausgeführt werden\n"
 
-#: ../src/glabels-batch.c:180
+#: ../src/glabels-batch.c:183
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
 
-#: ../src/glabels.c:79
+#: ../src/glabels.c:81
 msgid "Launch gLabels label and business card designer."
 msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
 
@@ -510,70 +549,88 @@ msgid "Couldn't get contacts."
 msgstr "Kontakte konnten nicht geholt werden."
 
 #: ../src/merge-init.c:57
-msgid "Text file with comma delimeters (CSV)"
-msgstr "Textdatei mit Kommata als Trennern (CSV)"
+msgid "Text: Comma Separated Values (CSV)"
+msgstr "Text: Durch Kommata getrennte Werte (CSV)"
 
 #: ../src/merge-init.c:64
-msgid "Text file with colon delimeters"
-msgstr "Textdatei mit Semikola als Trennern"
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr "Text: Durch Kommata getrennte Werte (CSV) mit Schlüsseln in Zeile 1"
 
-#: ../src/merge-init.c:71
-msgid "Text file with tab delimeters"
-msgstr "Textdatei mit Tabulatoren als Trennern"
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
-#: ../src/merge-init.c:80
-msgid "Data from default Evolution Addressbook"
-msgstr "Daten aus dem vorgegebenen Evolution-Adressbuch"
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
-#: ../src/merge-init.c:86
-msgid "Data from a file containing VCards"
-msgstr "Daten aus einer Datei, die VCards enthält"
+#: ../src/merge-init.c:87
+msgid "Text: Colon separated values"
+msgstr "Text: Durch Semikola getrennte Werte"
 
-#: ../src/merge-properties-dialog.c:279
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr "Text: Durch Semikola getrennte Werte mit Schlüsseln in Zeile 1"
+
+#: ../src/merge-init.c:104
+#| msgid "Data from default Evolution Addressbook"
+msgid "Evolution Addressbook"
+msgstr "Evolution-Adressbuch"
+
+#: ../src/merge-init.c:110
+#| msgid "Tent Cards"
+msgid "VCards"
+msgstr "VCards"
+
+#: ../src/merge-properties-dialog.c:282
 msgid "Merge Properties"
 msgstr "Mischeinstellungen"
 
-#: ../src/merge-properties-dialog.c:305 ../src/merge-properties-dialog.c:421
+#: ../src/merge-properties-dialog.c:308 ../src/merge-properties-dialog.c:424
 msgid "Select merge-database source"
 msgstr "Wählen Sie die einzumischende Datenquelle"
 
-#: ../src/merge-properties-dialog.c:316 ../src/merge-properties-dialog.c:443
+#: ../src/merge-properties-dialog.c:319 ../src/merge-properties-dialog.c:446
 msgid "N/A"
 msgstr "Nicht verfügbar"
 
-#: ../src/merge-properties-dialog.c:342
+#: ../src/merge-properties-dialog.c:345
 msgid "Select"
 msgstr "Markieren"
 
-#: ../src/merge-properties-dialog.c:349
+#: ../src/merge-properties-dialog.c:352
 msgid "Record/Field"
 msgstr "Feld"
 
-#: ../src/merge-properties-dialog.c:357
+#: ../src/merge-properties-dialog.c:360
 #: ../data/builder/object-editor.builder.h:10
 msgid "Data"
 msgstr "Wert"
 
-#: ../src/merge-properties-dialog.c:436
+#: ../src/merge-properties-dialog.c:439
 msgid "Fixed"
 msgstr "Fixiert"
 
-#: ../src/new-label-dialog.c:112
+#: ../src/new-label-dialog.c:114
 msgid "<b>Media type</b>"
 msgstr "<b>Medientyp</b>"
 
-#: ../src/new-label-dialog.c:122
+#: ../src/new-label-dialog.c:124
 msgid "<b>Label orientation</b>"
 msgstr "<b>Ausrichtung des Etiketts</b>"
 
-#: ../src/object-editor-bc-page.c:91 ../src/object-editor-shadow-page.c:91
-#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:337
-#: ../src/ui-property-bar.c:278
+#: ../src/object-editor-bc-page.c:91 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
+#: ../src/ui-property-bar.c:279
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:343
-#: ../src/ui-property-bar.c:290
+#: ../src/object-editor-edit-page.c:76
+msgid "Insert merge field"
+msgstr "Datenfeld einfügen"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:345
+#: ../src/ui-property-bar.c:291
 msgid "No Fill"
 msgstr "Keine Füllung"
 
@@ -590,26 +647,10 @@ msgstr "Alle Bilder"
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
-#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:340
-#: ../src/ui-property-bar.c:302
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
+#: ../src/ui-property-bar.c:303
 msgid "No Line"
 msgstr "Keine Linie"
-
-#. Should not happen
-#: ../src/prefs.c:156 ../src/prefs.c:163
-#: ../data/builder/object-editor.builder.h:42
-#: ../data/builder/prefs-dialog.builder.h:22
-msgid "points"
-msgstr "Punkte"
-
-#: ../src/prefs.c:158 ../data/builder/object-editor.builder.h:41
-#: ../data/builder/template-designer.builder.h:64
-msgid "inches"
-msgstr "Zoll"
-
-#: ../src/prefs.c:160
-msgid "mm"
-msgstr "mm"
 
 #: ../src/prefs-dialog.c:172 ../data/builder/prefs-dialog.builder.h:21
 msgid "gLabels Preferences"
@@ -722,7 +763,7 @@ msgstr "Etikett ze_ntrieren"
 msgid "Fill color"
 msgstr "Füllfarbe"
 
-#: ../src/stock.c:94 ../data/builder/property-bar.builder.h:7
+#: ../src/stock.c:94 ../data/builder/property-bar.builder.h:8
 msgid "Line color"
 msgstr "Linienfarbe"
 
@@ -734,51 +775,51 @@ msgstr "Verknüpft"
 msgid "Not Linked"
 msgstr "Nicht verknüpft"
 
-#: ../src/template-designer.c:401
+#: ../src/template-designer.c:404
 msgid "gLabels Template Designer"
 msgstr "gLabels Vorlagen-Designer"
 
-#: ../src/template-designer.c:456
+#: ../src/template-designer.c:459
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: ../src/template-designer.c:495
+#: ../src/template-designer.c:498
 msgid "Name and Description"
 msgstr "Name und Beschreibung"
 
-#: ../src/template-designer.c:543
+#: ../src/template-designer.c:546
 msgid "Page Size"
 msgstr "Seitenformat"
 
-#: ../src/template-designer.c:609
+#: ../src/template-designer.c:612
 msgid "Label or Card Shape"
 msgstr "Form des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:655
+#: ../src/template-designer.c:658
 msgid "Label or Card Size"
 msgstr "Größe des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:751
+#: ../src/template-designer.c:754
 msgid "Label Size (round)"
 msgstr "Etikettengröße (rund)"
 
-#: ../src/template-designer.c:829
+#: ../src/template-designer.c:832
 msgid "Label Size (CD/DVD)"
 msgstr "Etikettengröße (CD/DVD)"
 
-#: ../src/template-designer.c:917
+#: ../src/template-designer.c:920
 msgid "Number of Layouts"
 msgstr "Anzahl der Layouts"
 
-#: ../src/template-designer.c:981
+#: ../src/template-designer.c:984
 msgid "Layout(s)"
 msgstr "Layout(s)"
 
-#: ../src/template-designer.c:1086
+#: ../src/template-designer.c:1089
 msgid "Design Completed"
 msgstr "Design ist komplett"
 
-#: ../src/template-designer.c:1259
+#: ../src/template-designer.c:1266
 msgid ""
 "<span foreground='red' weight='bold'>Brand and part# match an existing "
 "template!</span>"
@@ -1017,7 +1058,7 @@ msgid "Select, move and modify objects"
 msgstr "Objekte auswählen, bewegen, ändern"
 
 #: ../src/ui.c:263 ../src/view-text.c:501
-#: ../data/builder/object-editor.builder.h:31
+#: ../data/builder/object-editor.builder.h:30
 msgid "Text"
 msgstr "Text"
 
@@ -1033,7 +1074,7 @@ msgstr "Rechteck"
 msgid "Create box/rectangle object"
 msgstr "Rechteck-Objekt erzeugen"
 
-#: ../src/ui.c:277 ../data/builder/object-editor.builder.h:20
+#: ../src/ui.c:277 ../data/builder/object-editor.builder.h:19
 msgid "Line"
 msgstr "Linie"
 
@@ -1209,8 +1250,7 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:433
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
-"ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:439
 msgid "Grid"
@@ -1218,8 +1258,7 @@ msgstr "Raster"
 
 #: ../src/ui.c:441
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
-"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:447
 msgid "Markup"
@@ -1249,30 +1288,30 @@ msgstr ""
 "Die Sichtbarkeit der Zeichenwerkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui-commands.c:1100
+#: ../src/ui-commands.c:1097
 msgid "Glabels includes contributions from:"
 msgstr "Glabels entstand unter Mitwirkung von:"
 
-#: ../src/ui-commands.c:1106
+#: ../src/ui-commands.c:1103
 msgid "See the file AUTHORS for additional credits,"
 msgstr "Lesen die Datei AUTHORS für zusätzliche Danksagungen,"
 
-#: ../src/ui-commands.c:1107
+#: ../src/ui-commands.c:1104
 msgid "or visit http://glabels.sourceforge.net/"
 msgstr "oder besuchen Sie http://glabels.sourceforge.net/"
 
-#: ../src/ui-commands.c:1119
+#: ../src/ui-commands.c:1116
 msgid "A label and business card creation program.\n"
 msgstr "Eine Anwendung zum Erstellen von Etiketten und Visitenkarten.\n"
 
-#: ../src/ui-commands.c:1123
+#: ../src/ui-commands.c:1120
 msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
 "Christian Neumair <christian-neumair@web.de>\n"
 "Mario Blättermann <mariobl@gnome.org>"
 
-#: ../src/ui-commands.c:1126
+#: ../src/ui-commands.c:1123
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1292,7 +1331,7 @@ msgstr ""
 "Dieses Programm wird verteilt in der Hoffnung, dass es nützlich ist, aber\n"
 "OHNE JEDE GARANTIE; Weitere Details in der GNU General Public License.\n"
 
-#: ../src/ui-commands.c:1153
+#: ../src/ui-commands.c:1150
 msgid "glabels"
 msgstr "glabels"
 
@@ -1334,110 +1373,110 @@ msgstr "Eigenschaften des Text-Objekts"
 msgid "gLabels Error!"
 msgstr "gLabels-Fehler!"
 
-#: ../src/wdgt-media-select.c:290 ../src/wdgt-media-select.c:294
-#: ../src/wdgt-media-select.c:299 ../src/wdgt-media-select.c:308
-#: ../src/wdgt-media-select.c:311 ../src/wdgt-media-select.c:405
-#: ../src/wdgt-media-select.c:618 ../src/wdgt-media-select.c:627
+#: ../src/wdgt-media-select.c:295 ../src/wdgt-media-select.c:299
+#: ../src/wdgt-media-select.c:304 ../src/wdgt-media-select.c:313
+#: ../src/wdgt-media-select.c:316 ../src/wdgt-media-select.c:411
+#: ../src/wdgt-media-select.c:624 ../src/wdgt-media-select.c:633
 msgid "Any"
 msgstr "Beliebig"
 
-#: ../src/wdgt-media-select.c:653
+#: ../src/wdgt-media-select.c:659
 #, c-format
 msgid "%d per sheet"
 msgstr "%d pro Seite"
 
-#: ../src/wdgt-media-select.c:684
+#: ../src/wdgt-media-select.c:690
 #, c-format
 msgid "%s x %s %s"
 msgstr "%s x %s %s"
 
-#: ../src/wdgt-media-select.c:689
+#: ../src/wdgt-media-select.c:695
 #, c-format
 msgid "%.5g x %.5g %s"
 msgstr "%.5g x %.5g %s"
 
-#: ../src/wdgt-media-select.c:700 ../src/wdgt-media-select.c:714
+#: ../src/wdgt-media-select.c:706 ../src/wdgt-media-select.c:720
 #, c-format
 msgid "%s %s diameter"
 msgstr "%s %s Durchmesser"
 
-#: ../src/wdgt-media-select.c:704 ../src/wdgt-media-select.c:718
+#: ../src/wdgt-media-select.c:710 ../src/wdgt-media-select.c:724
 #, c-format
 msgid "%.5g %s diameter"
 msgstr "%.5g %s Durchmesser"
 
-#: ../src/wdgt-media-select.c:793
+#: ../src/wdgt-media-select.c:799
 msgid "No recent templates found."
 msgstr "Keine zuletzt benutzten Vorlagen gefunden."
 
-#: ../src/wdgt-media-select.c:794
+#: ../src/wdgt-media-select.c:800
 msgid "Try selecting a template from the \"Search all templates\" page."
 msgstr ""
 "Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
 
-#: ../src/wdgt-media-select.c:874
+#: ../src/wdgt-media-select.c:880
 msgid "No match."
 msgstr "Keine Treffer."
 
-#: ../src/wdgt-media-select.c:875
+#: ../src/wdgt-media-select.c:881
 msgid "Try selecting a different brand, page size or category."
 msgstr ""
 "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
-#: ../src/window.c:256
+#: ../src/window.c:257
 msgid "(none) - gLabels"
 msgstr "(Unbenannt) - gLabels"
 
-#: ../src/window.c:435
+#: ../src/window.c:436
 msgid "(modified)"
 msgstr "(geändert)"
 
-#: ../src/xml-label-04.c:75 ../src/xml-label.c:320
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:321
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Fehlerhafter root node = »%s«"
 
-#: ../src/xml-label-04.c:123 ../src/xml-label.c:403
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:404
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "fehlerhafter node =  »%s«"
 
-#: ../src/xml-label.c:187 ../src/xml-label.c:225
+#: ../src/xml-label.c:188 ../src/xml-label.c:226
 msgid "xmlParseFile error"
 msgstr "Fehler: xmlParseFile error"
 
-#: ../src/xml-label.c:262
+#: ../src/xml-label.c:263
 msgid "No document root"
 msgstr "Kein document root"
 
-#: ../src/xml-label.c:270
+#: ../src/xml-label.c:271
 msgid "Importing from glabels 0.1 format"
 msgstr "Aus dem glabels 0.1-Format wird importiert"
 
-#: ../src/xml-label.c:279
+#: ../src/xml-label.c:280
 msgid "Importing from glabels 0.4 format"
 msgstr "Aus dem glabels 0.4-Format wird importiert"
 
-#: ../src/xml-label.c:288
+#: ../src/xml-label.c:289
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Unbekannter glabels-Namensraum -- %s wird verwendet"
 
-#: ../src/xml-label.c:357
+#: ../src/xml-label.c:358
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "Ungültiger Node im Dokument-Node = »%s«"
 
-#: ../src/xml-label.c:850
+#: ../src/xml-label.c:851
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1092 ../libglabels/xml-template.c:664
+#: ../src/xml-label.c:1093 ../libglabels/xml-template.c:664
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
-#: ../src/xml-label.c:1099
+#: ../src/xml-label.c:1100
 msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der xml-Datei."
 
@@ -1479,6 +1518,36 @@ msgstr ""
 #, c-format
 msgid "Generic %s full page template"
 msgstr "Allgemeine Ganzseitenvorlage %s"
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/units.c:65 ../data/builder/object-editor.builder.h:41
+#: ../data/builder/prefs-dialog.builder.h:22
+msgid "points"
+msgstr "Punkte"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/units.c:66 ../data/builder/object-editor.builder.h:40
+#: ../data/builder/template-designer.builder.h:64
+msgid "inches"
+msgstr "Zoll"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/units.c:68
+msgid "cm"
+msgstr "cm"
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/units.c:69
+msgid "picas"
+msgstr "picas"
 
 #: ../libglabels/xml-template.c:221
 msgid "Missing name or brand/part attributes."
@@ -1596,93 +1665,89 @@ msgid "Height:"
 msgstr "Höhe"
 
 #: ../data/builder/object-editor.builder.h:17
-msgid "Insert merge field"
-msgstr "Datenfeld einfügen"
-
-#: ../data/builder/object-editor.builder.h:18
 msgid "Key:"
 msgstr "Schlüssel:"
 
-#: ../data/builder/object-editor.builder.h:19
+#: ../data/builder/object-editor.builder.h:18
 msgid "Length:"
 msgstr "Länge:"
 
-#: ../data/builder/object-editor.builder.h:21
+#: ../data/builder/object-editor.builder.h:20
 #: ../data/builder/prefs-dialog.builder.h:12
 msgid "Line Spacing:"
 msgstr "Zeilenabstand:"
 
-#: ../data/builder/object-editor.builder.h:22
+#: ../data/builder/object-editor.builder.h:21
 msgid "Literal:"
 msgstr "Literale:"
 
-#: ../data/builder/object-editor.builder.h:23
+#: ../data/builder/object-editor.builder.h:22
 msgid "Opacity:"
 msgstr "Transparenz:"
 
-#: ../data/builder/object-editor.builder.h:24
+#: ../data/builder/object-editor.builder.h:23
 msgid "Position"
 msgstr "Position"
 
-#: ../data/builder/object-editor.builder.h:25
+#: ../data/builder/object-editor.builder.h:24
 msgid "Reset image size"
 msgstr "Bildgröße zurücksetzen"
 
-#: ../data/builder/object-editor.builder.h:26
+#: ../data/builder/object-editor.builder.h:25
 msgid "Shadow"
 msgstr "Schattierung"
 
-#: ../data/builder/object-editor.builder.h:27
+#: ../data/builder/object-editor.builder.h:26
 msgid "Size"
 msgstr "Breite"
 
-#: ../data/builder/object-editor.builder.h:28
+#: ../data/builder/object-editor.builder.h:27
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../data/builder/object-editor.builder.h:29
+#: ../data/builder/object-editor.builder.h:28
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/builder/object-editor.builder.h:30
+#: ../data/builder/object-editor.builder.h:29
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/builder/object-editor.builder.h:32
+#: ../data/builder/object-editor.builder.h:31
 #: ../data/builder/prefs-dialog.builder.h:20
 #: ../data/builder/template-designer.builder.h:61
 msgid "Width:"
 msgstr "Breite:"
 
-#: ../data/builder/object-editor.builder.h:33
+#: ../data/builder/object-editor.builder.h:32
 msgid "X Offset:"
 msgstr "X-Versatz:"
 
-#: ../data/builder/object-editor.builder.h:34
+#: ../data/builder/object-editor.builder.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/builder/object-editor.builder.h:35
+#: ../data/builder/object-editor.builder.h:34
 msgid "Y Offset:"
 msgstr "Y-Versatz:"
 
-#: ../data/builder/object-editor.builder.h:36
+#: ../data/builder/object-editor.builder.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/builder/object-editor.builder.h:37
+#: ../data/builder/object-editor.builder.h:36
 msgid "degrees"
 msgstr "Grad"
 
-#: ../data/builder/object-editor.builder.h:38
+#: ../data/builder/object-editor.builder.h:37
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/builder/object-editor.builder.h:39
+#: ../data/builder/object-editor.builder.h:38
 msgid "digits:"
 msgstr "Zeichen:"
 
-#: ../data/builder/object-editor.builder.h:40
+#: ../data/builder/object-editor.builder.h:39
 msgid "format:"
 msgstr "Format:"
 
@@ -1760,26 +1825,30 @@ msgid "Center align"
 msgstr "Zentrieren"
 
 #: ../data/builder/property-bar.builder.h:4
+msgid "Font family"
+msgstr "Schriftfamilie"
+
+#: ../data/builder/property-bar.builder.h:5
 msgid "Font size"
 msgstr "Schriftgröße"
 
-#: ../data/builder/property-bar.builder.h:5
+#: ../data/builder/property-bar.builder.h:6
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../data/builder/property-bar.builder.h:6
+#: ../data/builder/property-bar.builder.h:7
 msgid "Left align"
 msgstr "Linksbündig"
 
-#: ../data/builder/property-bar.builder.h:8
+#: ../data/builder/property-bar.builder.h:9
 msgid "Line width"
 msgstr "Linienbreite"
 
-#: ../data/builder/property-bar.builder.h:9
+#: ../data/builder/property-bar.builder.h:10
 msgid "Right align"
 msgstr "Rechtsbündig"
 
-#: ../data/builder/property-bar.builder.h:10
+#: ../data/builder/property-bar.builder.h:11
 msgid "Text color"
 msgstr "Textfarbe"
 
@@ -1952,8 +2021,7 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/builder/template-designer.builder.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your "
-"template."
+"Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2670,23 +2738,29 @@ msgstr "Rechteckige Kopieretiketten"
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
 
+#~ msgid "Text file with comma delimeters (CSV)"
+#~ msgstr "Textdatei mit Kommata als Trennern (CSV)"
+
+#~ msgid "Text file with colon delimeters"
+#~ msgstr "Textdatei mit Semikola als Trennern"
+
+#~ msgid "Text file with tab delimeters"
+#~ msgstr "Textdatei mit Tabulatoren als Trennern"
+
+#~ msgid "Data from a file containing VCards"
+#~ msgstr "Daten aus einer Datei, die VCards enthält"
+
 #~ msgid "Brand:"
 #~ msgstr "Marke:"
 
 #~ msgid "Category:"
 #~ msgstr "Kategorie:"
 
-#~ msgid "Recent templates"
-#~ msgstr "Zuletzt benutzte Vorlagen"
-
 #~ msgid "Search all templates"
 #~ msgstr "Alle Vorlagen durchsuchen"
 
 #~ msgid "<b>Print control (Simple)</b>"
 #~ msgstr "<b>Drucksteuerung (Einfach)</b>"
-
-#~ msgid "Font family"
-#~ msgstr "Schriftfamilie"
 
 #~ msgid "- gLabels label designer"
 #~ msgstr "- gLabels Etiketten-Designer"
