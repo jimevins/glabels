@@ -2,8 +2,8 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "2.2">
-  <!ENTITY manrevision "2.2">
+  <!ENTITY appversion "2.2.6">
+  <!ENTITY manrevision "2.2.6">
   <!ENTITY date "December 2007">
   <!ENTITY app "<application>gLabels</application>">
   <!-- Information about the entities
@@ -35,7 +35,7 @@
       	</para>
     </abstract>
     <copyright> 
-      <year>2003-2007</year> 
+      <year>2003-2009</year> 
       <holder>Jim Evins</holder> 
     </copyright>
     	<publisher> 
@@ -84,8 +84,18 @@
 <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-		<revnumber>gLabels Manual V&manrevision;</revnumber> 
-		<date>&date;</date> 
+		<revnumber>gLabels Manual V2.2.6</revnumber> 
+		<date>October 2009</date> 
+		<revdescription> 
+	  		<para role="author">Mario Blättermann
+	    	<email>mariobl@gnome.org</email>
+	  		</para>
+	  		<para role="publisher">Jim Evins</para>
+		</revdescription> 
+      </revision> 
+      <revision> 
+		<revnumber>gLabels Manual V2.2</revnumber> 
+		<date>December 2007</date> 
 		<revdescription> 
 	  		<para role="author">Jim Evins
 	    	<email>evins@snaught.com</email>
@@ -425,7 +435,7 @@
             <term><guilabel>Print control (Simple)</guilabel></term>
 	    <listitem> 
 
-	      <para>For simple labels or cards (no document merge), the job
+	      <para>For simple labels or cards (no document merge), the <guilabel>labels</guilabel>
                 tabbed section contains the following copy controls.</para>
 
 	      <!-- ==== Figure ==== -->
@@ -457,7 +467,7 @@
 	    <listitem> 
 
 	      <para>For labels or cards using the document merge (also known
-                as "mail merge") capability, the job tabbed section contains
+                as "mail merge") capability, the <guilabel>labels</guilabel> tabbed section contains
                 the following merge controls instead of copy controls.</para>
 
 	      <!-- ==== Figure ==== -->
@@ -1188,7 +1198,7 @@
       feature.</para>
 
     <sect2 id="merge-ex1">
-      <title>Example 1: Name Tags</title>
+      <title>Example 1: Name Tags Using a CSV File</title>
   
       <para>In this example we are organizing an orientation party for the new
         crew members of our ship.  We have a list of freshman crew members that we
@@ -1303,7 +1313,7 @@ Name,Department,SN
     </sect2>
 
     <sect2 id="merge-ex2">
-      <title>Example 2: Address Labels</title>
+      <title>Example 2: Address Labels Using a CSV File</title>
   
       <para>In this example we are going to throw a party and need to print mailing
         address labels for our invitations.  We have a list of our closest friends
@@ -1400,6 +1410,120 @@ Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
 
       <!-- ==== Figure ==== -->
       <figure id="merge-ex2-4-fig"> 
+	<title>Address labels preview</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-4.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our address labels and start mailing
+        our party invitations.</para>
+
+    </sect2>
+
+<sect2 id="merge-ex3">
+      <title>Example 3: Address Labels Using the <application>Evolution</application> Addressbook</title>
+  
+      <para>Our last party was a great success, and now we need to print mailing
+        address labels for the invitations to a new one. To simplify this, we can use
+	the <application>Evolution</application> addressbook, because the address
+	data of	all our friends is stored there.</para>
+
+      <note>
+	<para>Depending on how your copy of &app; was packaged, this option could be unavailable.
+	  Support for the <application>Evolution</application> addressbook will only be available
+	  if the <application>evolution-data-server</application> and its development files
+	  were present when &app; was built. Please keep this in mind if you build &app;
+	  directly from source.</para>
+	
+	<para>If the &app; package from your distribution lacks this support,
+	  you may wish to contact the package maintainer or file a bug against the package
+	  to request it.</para>
+      </note>
+
+      <para>In <application>glabels</application> we have created a new &app;
+        document using the Avery 5512 "Address Labels" template. Next we use the
+        <menuchoice> <guimenu>Objects</guimenu>
+        <guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to display
+        the <guilabel>Merge properties</guilabel> dialog. We use this dialog to
+        select the source type (in our case <guilabel>Data from default Evolution
+	addressbook</guilabel>) as shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex3-1-fig"> 
+	<title>Merge properties dialog</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex3-1.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Once we have chosen <guilabel>Data from default Evolution addressbook
+	</guilabel> as our merge source, we will get a full list of its content. Initially,
+	all entries are checked. Assuming we were planning a really big party, we could
+	leave this selection untouched (but let's keep our budget in mind). We will now select or
+	unselect certain entries by clicking on the appropriate checkboxes, or we could use
+	the <guibutton>Select all</guibutton> and <guibutton>Unselect all
+	</guibutton> buttons to activate or deactivate all entries in the address book.</para>
+ 
+      <para>We can also view each entry in more detail by clicking on the appropriate
+        expander (the little triangles) as shown. Once we are satisfied with the
+        selections in this dialog, we will click the <guibutton>OK</guibutton> button to
+	accept the changes.</para>
+
+      <para>Now we start adding objects to our glabels document as shown.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex3-2-fig"> 
+	<title>Adding objects</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex3-2.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>In this example we have a single text object again. This text object contains
+        all of our merge fields organized on multiple lines as a mailing address.</para>
+
+      <para>Now we can print our address labels by selecting the
+        <menuchoice> <guimenu>File</guimenu>
+        <guimenuitem>Print</guimenuitem> </menuchoice> menu item. This will display
+        the print dialog as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex3-3-fig"> 
+	<title>Printing address labels</title> 
+	<screenshot> 
+	  <mediaobject> 
+	    <imageobject><imagedata
+	       fileref="figures/merge-ex2-3.png" format="PNG"/> 
+	    </imageobject>
+	  </mediaobject> 
+	</screenshot> 
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <para>Just to make sure our labels are going to look okay, we select the
+        <guilabel>Print outlines</guilabel> option and click
+        <guibutton>Print Preview</guibutton>. This will display a print preview dialog
+        as shown below.</para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="merge-ex3-4-fig"> 
 	<title>Address labels preview</title> 
 	<screenshot> 
 	  <mediaobject> 

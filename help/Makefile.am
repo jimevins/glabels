@@ -17,6 +17,8 @@ DOC_FIGURES = figures/glabels-template-cd.png      	\
 	      figures/merge-ex2-2.png			\
 	      figures/merge-ex2-3.png			\
 	      figures/merge-ex2-4.png			\
+	      figures/merge-ex3-1.png			\
+	      figures/merge-ex3-2.png			\
 	      figures/object-editor-sidebar.png		\
 	      figures/print-copies.png			\
 	      figures/print-merge.png
