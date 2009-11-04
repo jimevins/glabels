@@ -509,7 +509,7 @@ print_label (PrintInfo     *pi,
 	/* of the current label */
 	cairo_translate (pi->cr, x, y);
 
-	//clip_to_outline (pi, label);
+	clip_to_outline (pi, label);
 
 	cairo_save (pi->cr);
 
