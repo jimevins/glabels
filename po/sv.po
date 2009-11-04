@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-06 22:20+0200\n"
-"PO-Revision-Date: 2009-10-06 22:23+0100\n"
+"POT-Creation-Date: 2009-11-04 06:28+0100\n"
+"PO-Revision-Date: 2009-11-04 06:37+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "filnamn"
 
 #: ../src/glabels-batch.c:56
 msgid "number of sheets (default=1)"
-msgstr ""
+msgstr "antal ark (standard=1)"
 
 #: ../src/glabels-batch.c:56
 msgid "sheets"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../src/glabels-batch.c:58
 msgid "number of copies (default=1)"
-msgstr ""
+msgstr "antal kopior (standard=1)"
 
 #: ../src/glabels-batch.c:58
 msgid "copies"
@@ -71,7 +71,7 @@ msgstr ""
 #: ../src/glabels-batch.c:66
 #: ../data/glade/print-custom-widget.glade.h:4
 msgid "print crop marks"
-msgstr ""
+msgstr "skriv ut beskäringsmarkeringar"
 
 #: ../src/glabels-batch.c:68
 msgid "input file for merging"
@@ -235,7 +235,7 @@ msgstr ""
 
 #: ../src/ui.c:99
 msgid "Customize Properties Toolbar"
-msgstr ""
+msgstr "Anpassa egenskapsverktygsrad"
 
 #: ../src/ui.c:100
 msgid "_Objects"
@@ -247,11 +247,11 @@ msgstr "_Skapa"
 
 #: ../src/ui.c:102
 msgid "_Order"
-msgstr ""
+msgstr "_Ordna"
 
 #: ../src/ui.c:103
 msgid "_Rotate/Flip"
-msgstr ""
+msgstr "_Rotera/Vänd"
 
 #: ../src/ui.c:104
 msgid "Align _Horizontal"
@@ -405,7 +405,7 @@ msgstr "Zooma in"
 
 #: ../src/ui.c:233
 msgid "Increase magnification"
-msgstr ""
+msgstr "Öka förstorning"
 
 #: ../src/ui.c:238
 msgid "Zoom out"
@@ -413,11 +413,11 @@ msgstr "Zooma ut"
 
 #: ../src/ui.c:240
 msgid "Decrease magnification"
-msgstr ""
+msgstr "Minska förstorning"
 
 #: ../src/ui.c:245
 msgid "Zoom 1 to 1"
-msgstr ""
+msgstr "Zooma 1 till 1"
 
 #: ../src/ui.c:247
 msgid "Restore scale to 100%"
@@ -678,9 +678,8 @@ msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr ""
 
 #: ../src/ui.c:491
-#, fuzzy
 msgid "Show tooltips for main toolbar"
-msgstr "Visa verktygstips"
+msgstr "Visa verktygstips för huvudverktygsrad"
 
 #: ../src/ui.c:499
 msgid "Show tooltips for drawing toolbar"
@@ -694,9 +693,8 @@ msgstr "Standard"
 
 #: ../src/ui-property-bar.c:1239
 #: ../src/object-editor.c:599
-#, fuzzy
 msgid "No line"
-msgstr "Ingen"
+msgstr "Ingen linje"
 
 #: ../src/ui-property-bar.c:1247
 #: ../src/object-editor.c:606
@@ -705,7 +703,7 @@ msgstr ""
 
 #: ../src/ui-sidebar.c:152
 msgid "Object properties"
-msgstr ""
+msgstr "Objektegenskaper"
 
 #: ../src/ui-commands.c:1084
 msgid "Glabels includes contributions from:"
@@ -729,7 +727,7 @@ msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
 "\n"
 "Skicka synpunkter på översättningen till\n"
-"tp-sv@listor.tp-sv.se"
+"<tp-sv@listor.tp-sv.se>."
 
 #: ../src/ui-commands.c:1110
 msgid ""
@@ -1254,7 +1252,7 @@ msgstr "Alla"
 #: ../src/wdgt-media-select.c:643
 #, c-format
 msgid "%d per sheet"
-msgstr ""
+msgstr "%d per ark"
 
 #: ../src/wdgt-media-select.c:673
 #, c-format
@@ -1297,7 +1295,7 @@ msgstr ""
 #. This is the default custom color
 #: ../src/mygal/color-palette.c:389
 msgid "custom"
-msgstr ""
+msgstr "anpassad"
 
 #. "Custom" color - we'll pop up a GtkColorButton
 #: ../src/mygal/color-palette.c:431
@@ -1326,7 +1324,7 @@ msgstr "mörkgrön 2"
 
 #: ../src/mygal/color-palette.c:576
 msgid "navy"
-msgstr ""
+msgstr "marin"
 
 #: ../src/mygal/color-palette.c:577
 #: ../src/mygal/color-palette.c:633
@@ -1339,7 +1337,7 @@ msgstr "lila 2"
 
 #: ../src/mygal/color-palette.c:579
 msgid "very dark gray"
-msgstr ""
+msgstr "mycket mörk grå"
 
 #: ../src/mygal/color-palette.c:582
 #: ../src/mygal/color-palette.c:638
@@ -1386,7 +1384,7 @@ msgstr "orange"
 
 #: ../src/mygal/color-palette.c:594
 msgid "lime"
-msgstr ""
+msgstr "lime"
 
 #: ../src/mygal/color-palette.c:595
 msgid "dull green"
@@ -1398,7 +1396,7 @@ msgstr ""
 
 #: ../src/mygal/color-palette.c:597
 msgid "sky blue #2"
-msgstr ""
+msgstr "himmelsblå 2"
 
 #: ../src/mygal/color-palette.c:598
 #: ../src/mygal/color-palette.c:637
@@ -1407,7 +1405,7 @@ msgstr "lila"
 
 #: ../src/mygal/color-palette.c:599
 msgid "gray"
-msgstr ""
+msgstr "grå"
 
 #: ../src/mygal/color-palette.c:602
 #: ../src/mygal/color-palette.c:634
@@ -1416,7 +1414,7 @@ msgstr "magenta"
 
 #: ../src/mygal/color-palette.c:603
 msgid "bright orange"
-msgstr ""
+msgstr "klarorange"
 
 #: ../src/mygal/color-palette.c:604
 #: ../src/mygal/color-palette.c:635
@@ -1434,7 +1432,7 @@ msgstr "cyan"
 
 #: ../src/mygal/color-palette.c:607
 msgid "bright blue"
-msgstr ""
+msgstr "klarblå"
 
 #: ../src/mygal/color-palette.c:608
 #: ../src/mygal/color-palette.c:625
@@ -1465,7 +1463,7 @@ msgstr "ljusgrön"
 
 #: ../src/mygal/color-palette.c:616
 msgid "light cyan"
-msgstr ""
+msgstr "ljuscyan"
 
 #: ../src/mygal/color-palette.c:617
 #: ../src/mygal/color-palette.c:627
@@ -1487,7 +1485,7 @@ msgstr ""
 
 #: ../src/mygal/color-palette.c:628
 msgid "dark purple"
-msgstr ""
+msgstr "mörklila"
 
 #: ../src/mygal/color-palette.c:630
 msgid "sky blue"
@@ -1495,7 +1493,7 @@ msgstr "himmelsblå"
 
 #: ../src/critical-error-handler.c:73
 msgid "gLabels Fatal Error!"
-msgstr ""
+msgstr "Ödesdigert fel i gLabels!"
 
 #: ../src/warning-handler.c:73
 msgid "gLabels Error!"
@@ -1566,7 +1564,7 @@ msgstr "Format:"
 
 #: ../data/glade/merge-properties-dialog.glade.h:4
 msgid "Location:"
-msgstr ""
+msgstr "Plats:"
 
 #: ../data/glade/merge-properties-dialog.glade.h:5
 msgid "Select all"
@@ -1782,7 +1780,7 @@ msgstr "Millimeter"
 
 #: ../data/glade/prefs-dialog.glade.h:15
 msgid "Object defaults"
-msgstr ""
+msgstr "Objektstandard"
 
 #: ../data/glade/prefs-dialog.glade.h:16
 msgid "Points"
@@ -1804,7 +1802,7 @@ msgstr "US Letter"
 
 #: ../data/glade/print-custom-widget.glade.h:1
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>Alternativ</b>"
 
 #: ../data/glade/print-custom-widget.glade.h:2
 msgid "<b>Print control (Merge)</b>"
@@ -1820,7 +1818,7 @@ msgstr "Fet"
 
 #: ../data/glade/property-bar.glade.h:2
 msgid "Center align"
-msgstr ""
+msgstr "Centerjustera"
 
 #: ../data/glade/property-bar.glade.h:4
 msgid "Font family"
@@ -1836,7 +1834,7 @@ msgstr "Kursiv"
 
 #: ../data/glade/property-bar.glade.h:7
 msgid "Left align"
-msgstr ""
+msgstr "Vänsterjustera"
 
 #: ../data/glade/property-bar.glade.h:9
 msgid "Line width"
@@ -1844,7 +1842,7 @@ msgstr "Radbredd"
 
 #: ../data/glade/property-bar.glade.h:10
 msgid "Right align"
-msgstr ""
+msgstr "Högerjustera"
 
 #: ../data/glade/property-bar.glade.h:11
 msgid "Text Color"
@@ -1868,7 +1866,7 @@ msgstr ""
 
 #: ../data/glade/template-designer.glade.h:4
 msgid "1. Outer radius:"
-msgstr ""
+msgstr "1. Yttre radie:"
 
 #: ../data/glade/template-designer.glade.h:5
 msgid "1. Radius:"
@@ -1884,7 +1882,7 @@ msgstr "2. Höjd:"
 
 #: ../data/glade/template-designer.glade.h:8
 msgid "2. Inner radius:"
-msgstr ""
+msgstr "2. Inre radie:"
 
 #: ../data/glade/template-designer.glade.h:9
 msgid "2. Waste (overprint allowed):"
@@ -2699,7 +2697,7 @@ msgstr "Etikettdesignern gLabels"
 #: ../data/mime/glabels.keys.in.h:1
 #: ../data/mime/glabels.xml.in.h:1
 msgid "gLabels Project File"
-msgstr ""
+msgstr "gLabels-projektfil"
 
 #: ../barcode-0.98/compat/getopt.c:583
 #, c-format
