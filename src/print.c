@@ -509,15 +509,15 @@ print_label (PrintInfo     *pi,
 	/* of the current label */
 	cairo_translate (pi->cr, x, y);
 
-	clip_to_outline (pi, label);
+	//clip_to_outline (pi, label);
 
 	cairo_save (pi->cr);
 
         /* Special transformations. */
 	if (label->rotate_flag) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
-		cairo_rotate (pi->cr, -M_PI/2.0);
-		cairo_translate (pi->cr, -width, 0.0);
+		cairo_rotate (pi->cr, M_PI/2.0);
+		cairo_translate (pi->cr, 0.0, -height);
 	}
 	if ( reverse_flag ) {
 		cairo_translate (pi->cr, width, 0.0);

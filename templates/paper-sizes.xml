@@ -31,11 +31,11 @@
 <Glabels-paper-sizes>
 
   <!-- Most popular (at top of list) -->
-  <Paper-size id="US-Letter"    _name="US Letter"    pwg_size="na_letter"    width="8.5in" height="11in"/>
   <Paper-size id="A4"           _name="A4"           pwg_size="iso_a4"       width="210mm" height="297mm"/>
+  <Paper-size id="US-Letter"    _name="US Letter"    pwg_size="na_letter"    width="8.5in" height="11in"/>
 
   <!-- Other US paper sizes -->
-  <Paper-size id="US-Legal"     _name="US Legal"     pwg_size="na_legal"     width="8.5in" height="14in"/>
+  <Paper-size id="US-Legal"     _name="US Legal"     pwg_size="na_legal"     width="8.5in"  height="14in"/>
   <Paper-size id="US-Executive" _name="US Executive" pwg_size="na_executive" width="7.25in" height="10.5in"/>
 
   <!-- Other ISO A series sizes -->
@@ -62,5 +62,12 @@
   <Paper-size id="B8"           _name="B8"           pwg_size="iso_b8"       width="62mm"   height="88mm"/>
   <Paper-size id="B9"           _name="B9"           pwg_size="iso_b9"       width="44mm"   height="62mm"/>
   <Paper-size id="B10"          _name="B10"          pwg_size="iso_b10"      width="31mm"   height="44mm"/>
+
+  <!-- Envelopes -->
+  <Paper-size id="number10"     _name="#10 Envelope"     pwg_size="na_number-10" width="4.125in" height="9.5in"/>
+  <Paper-size id="monarch"      _name="Monarch Envelope" pwg_size="na_monarch"   width="3.875in" height="7.5in"/>
+  <Paper-size id="c5"           _name="C5"               pwg_size="iso_c5"       width="162mm"   height="229mm"/>
+  <Paper-size id="c6"           _name="C6"               pwg_size="iso_c6"       width="114mm"   height="162mm"/>
+  <Paper-size id="dl"           _name="DL"               pwg_size="iso_dl"       width="110mm"   height="220mm"/>
 
 </Glabels-paper-sizes>
