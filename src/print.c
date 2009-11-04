@@ -509,6 +509,8 @@ print_label (PrintInfo     *pi,
 	/* of the current label */
 	cairo_translate (pi->cr, x, y);
 
+	cairo_save (pi->cr);
+
 	clip_to_outline (pi, label);
 
 	cairo_save (pi->cr);
@@ -527,6 +529,8 @@ print_label (PrintInfo     *pi,
         gl_label_draw (label, pi->cr, FALSE, record);
 
 	cairo_restore (pi->cr); /* From special transformations. */
+
+	cairo_restore (pi->cr); /* From clip to outline. */
 
 	if (outline_flag) {
 		draw_outline (pi, label);
