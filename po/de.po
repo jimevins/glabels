@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-10 17:00+0200\n"
-"PO-Revision-Date: 2009-05-10 17:09+0100\n"
+"POT-Creation-Date: 2009-11-04 21:53+0100\n"
+"PO-Revision-Date: 2009-11-04 21:53+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1329,7 +1329,7 @@ msgstr "Dunkles Grün"
 
 #: ../src/mygal/color-palette.c:586 ../src/mygal/color-palette.c:639
 msgid "dull blue"
-msgstr ""
+msgstr "Mattes Blau"
 
 #: ../src/mygal/color-palette.c:587 ../src/mygal/color-palette.c:640
 msgid "blue"
@@ -1337,7 +1337,7 @@ msgstr "Blau"
 
 #: ../src/mygal/color-palette.c:588
 msgid "dull purple"
-msgstr ""
+msgstr "Mattes Purpur"
 
 #: ../src/mygal/color-palette.c:589
 msgid "dark grey"
