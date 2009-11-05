@@ -342,7 +342,7 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 		g_free (gdk_color);
 	}
 	
-	if (!color_node->field_flag) {
+	if (!color_node->field_flag || !merge_flag) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->bc_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);

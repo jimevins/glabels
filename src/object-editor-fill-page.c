@@ -143,7 +143,7 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 
 	}
 	
-	if (!color_node->field_flag) {
+	if (!color_node->field_flag || !merge_flag) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->fill_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, TRUE);

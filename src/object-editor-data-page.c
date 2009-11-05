@@ -155,7 +155,7 @@ gl_object_editor_set_data (glObjectEditor      *editor,
 
         gtk_widget_set_sensitive (editor->priv->data_key_radio, merge_flag);
  
-        if (!text_node->field_flag) {
+        if (!text_node->field_flag || !merge_flag) {
  
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                               (editor->priv->data_literal_radio), TRUE); 

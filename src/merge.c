@@ -685,7 +685,7 @@ gl_merge_eval_key (glMergeRecord *record,
 
 	gl_debug (DEBUG_MERGE, "START");
 
-	if ( (record != NULL) ) {
+	if ( (record != NULL) && (key != NULL) ) {
 		for (p = record->field_list; p != NULL; p = p->next) {
 			field = (glMergeField *) p->data;
 

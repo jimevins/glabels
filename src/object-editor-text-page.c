@@ -476,7 +476,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
         g_free (gdk_color);
 	}
 	
-	if (!text_color_node->field_flag) {
+	if (!text_color_node->field_flag || !merge_flag) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->text_color_radio), TRUE); 
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, TRUE);
