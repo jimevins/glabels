@@ -157,7 +157,7 @@ gl_object_editor_set_image (glObjectEditor      *editor,
 
         gtk_widget_set_sensitive (editor->priv->img_key_radio, merge_flag);
  
-        if (!text_node->field_flag) {
+        if (!text_node->field_flag || !merge_flag) {
  
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                               (editor->priv->img_file_radio), TRUE); 

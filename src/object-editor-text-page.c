@@ -465,7 +465,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
                                           text_color_node->color);
 	}
 	
-	if (!text_color_node->field_flag) {
+	if (!text_color_node->field_flag || !merge_flag) {
 		gl_debug (DEBUG_EDITOR, "color field false");
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						  (editor->priv->text_color_radio), TRUE); 

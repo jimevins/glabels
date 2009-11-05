@@ -819,13 +819,16 @@ xml_parse_merge_fields (xmlNodePtr  node,
 	merge = gl_merge_new (string);
 	g_free (string);
 
-	string = lgl_xml_get_prop_string (node, "src", NULL);
-	gl_merge_set_src (merge, string);
-	g_free (string);
+        if (merge)
+        {
+                string = lgl_xml_get_prop_string (node, "src", NULL);
+                gl_merge_set_src (merge, string);
+                g_free (string);
 
-	gl_label_set_merge (label, merge);
+                gl_label_set_merge (label, merge);
 
-	g_object_unref (G_OBJECT(merge));
+                g_object_unref (G_OBJECT(merge));
+        }
 
 	gl_debug (DEBUG_XML, "END");
 }
