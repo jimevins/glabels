@@ -155,10 +155,25 @@
   <!-- DATA BECKER 0526 Address Labels.                                    -->
   <!-- =================================================================== -->
   <Template brand="DataBecker" part="0526" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
     <Label-rectangle id="0" width="198.425pt" height="102.047pt" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="9pt"/>
       <Layout nx="3" ny="8" x0="3.93386e-16pt" y0="15.5906pt" dx="198.425pt" dy="102.047pt"/>
     </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- DATA BECKER 0562 CD Labels.                                         -->
+  <!-- =================================================================== -->
+  <Template brand="DataBecker" part="0562" size="A4" _description="CD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="58mm" hole="20.6375mm" waste="2mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="1" ny="2" x0="5mm" y0="5mm" dx="120mm" dy="171mm"/>
+      <Layout nx="1" ny="1" x0="89mm" y0="90mm" dx="120mm" dy="120mm"/>
+    </Label-cd>
   </Template>
 
   <!-- =================================================================== -->

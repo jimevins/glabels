@@ -18,6 +18,18 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Zweckform 3477: Adress labels                                       -->
+  <!-- =================================================================== -->
+  <Template brand="Zweckform" part="3477" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="105mm" height="41mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="7" x0="0mm" y0="4.93mm" dx="105mm" dy="41mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Zweckform 3651: Rectangular Labels, 52 x 29.5 mm, 40 per sheet      -->
   <!-- =================================================================== -->
   <Template brand="Zweckform" part="3651" size="A4" _description="Rectangular Labels">
