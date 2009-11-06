@@ -9,6 +9,7 @@
 Makefile
 Makefile.in
 Makefile.in.in
+glabels-*.tar.gz
 
 #
 # Explicit files and patterns
