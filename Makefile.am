@@ -3,8 +3,6 @@
 LIB_BARCODE_DIR = barcode-0.98
 LIB_IEC16022_DIR = iec16022-0.2.1
 
-#distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
-
 SUBDIRS = \
 	po \
 	$(LIB_BARCODE_DIR) \
@@ -23,6 +21,7 @@ EXTRA_DIST = \
 	COPYING-LIBGLABELS \
 	AUTHORS \
 	ChangeLog \
+	ChangeLog.pre-2.2 \
 	INSTALL \
 	NEWS \
 	TODO \
@@ -36,3 +35,17 @@ EXTRA_DIST = \
 DISTCLEANFILES = gnome-doc-utils.make
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+
+dist-hook:
+	@if test -d "$(srcdir)/.git"; \
+	then \
+		echo Creating ChangeLog && \
+		(GIT_DIR=$(top_srcdir)/.git \
+		  ./missing --run git log -M -C --name-status --date=short --no-color) | \
+		  fmt --split-only > ChangeLog.tmp \
+		&& mv -f ChangeLog.tmp $(top_distdir)/ChangeLog \
+		|| ( rm -f ChangeLog.tmp ; \
+		  echo Failed to generate ChangeLog >&2 ); \
+	else \
+		echo A git clone is required to generate a ChangeLog >&2; \
+	fi
