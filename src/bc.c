@@ -151,6 +151,9 @@ static const Backend backends[] = {
 	{ "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
 	  TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
+	{ "Code93", N_("Code 93"), gl_barcode_gnubarcode_new,
+	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+
 #endif /* HAVE_LIBBARCODE */
 
 #ifdef HAVE_LIBIEC16022

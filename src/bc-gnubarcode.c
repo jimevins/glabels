@@ -164,6 +164,8 @@ gl_barcode_gnubarcode_new (const gchar    *id,
 		flags = BARCODE_MSI;
 	} else if (g_ascii_strcasecmp (id, "PLS") == 0) {
 		flags = BARCODE_PLS;
+	} else if (g_ascii_strcasecmp (id, "Code93") == 0) {
+		flags = BARCODE_93;
 	} else {
 		g_message( "Illegal barcode id %s", id );
 		flags = BARCODE_ANY;
