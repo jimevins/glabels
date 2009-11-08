@@ -12,10 +12,6 @@ INCLUDES = \
 	$(LIBQRENCODE_CFLAGS)					\
 	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DPREFIX=\""$(prefix)"\"                        	\
-	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\
-	-DDATADIR=\""$(datadir)"\"                      	\
-	-DLIBDIR=\""$(libdir)"\"                        	\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_BUILDER_DIR=\""$(datadir)/glabels/builder/"\"	\
 	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"		\

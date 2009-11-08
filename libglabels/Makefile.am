@@ -2,7 +2,6 @@ templatesdir = $(datadir)/glabels/templates
 
 INCLUDES = \
 	$(LIBGLABELS_CFLAGS)				\
-	-DDATADIR=\""$(datadir)"\"			\
 	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\" \
 	$(DISABLE_DEPRECATED_CFLAGS)
 
