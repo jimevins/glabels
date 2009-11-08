@@ -193,18 +193,17 @@ static GList *
 gl_merge_vcard_get_key_list (glMerge *merge)
 {
         glMergeVCard   *merge_vcard;
-        GList          *key_list;
+        GList          *key_list = NULL;
+        EContactField   field_id;
         
         gl_debug (DEBUG_MERGE, "BEGIN");
 
         merge_vcard = GL_MERGE_VCARD (merge);
 
-        /* extremely simple approach until I can list the available keys from the
-         * server, and return them. */
-        key_list = NULL;
-        key_list = g_list_append (key_list, g_strdup ("full_name"));
-        key_list = g_list_append (key_list, g_strdup ("home_address"));
-        key_list = g_list_append (key_list, g_strdup ("work_address"));
+        for ( field_id = E_CONTACT_FIELD_FIRST; field_id <= E_CONTACT_LAST_SIMPLE_STRING; field_id++ )
+        {
+                key_list = g_list_append (key_list, g_strdup (e_contact_pretty_name (field_id)));
+        }
 
         gl_debug (DEBUG_MERGE, "END");
 
@@ -218,8 +217,7 @@ gl_merge_vcard_get_key_list (glMerge *merge)
 static gchar *
 gl_merge_vcard_get_primary_key (glMerge *merge)
 {
-        /* For now, let's always assume the full name is the primary key. */
-        return g_strdup ("full_name");
+        return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
 
 
@@ -271,6 +269,7 @@ gl_merge_vcard_get_record (glMerge *merge)
 {
         glMergeVCard  *merge_vcard;
         glMergeRecord *record;
+        EContactField  field_id;
         glMergeField  *field;
 
         char *vcard;
@@ -294,26 +293,21 @@ gl_merge_vcard_get_record (glMerge *merge)
          * into the glMergeRecord structure. When done, free up the resources for
          * that contact */
 
-        /* get the full name */
-        field = g_new0 (glMergeField, 1);
-        field->key = g_strdup ("full_name");
-        field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_FULL_NAME));
+        for ( field_id = E_CONTACT_FIELD_FIRST; field_id <= E_CONTACT_LAST_SIMPLE_STRING; field_id++ )
+        {
+                gchar *value;
+                value = g_strdup (e_contact_get_const (contact, field_id));
 
-        record->field_list = g_list_append (record->field_list, field);
+                if (value) {
+                        field = g_new0 (glMergeField, 1);
+                        field->key = g_strdup (e_contact_pretty_name (field_id));
+                        field->value = value;
+                        record->field_list = g_list_prepend (record->field_list, field);
+                }
+        }
 
-        /* get the home address */
-        field = g_new0 (glMergeField, 1);
-        field->key = g_strdup ("home_address");
-        field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_HOME));
+        record->field_list = g_list_reverse (record->field_list);
 
-        record->field_list = g_list_append (record->field_list, field);
-
-        /* get the work address */
-        field = g_new0 (glMergeField, 1);
-        field->key = g_strdup ("work_address");
-        field->value = g_strdup (e_contact_get_const(contact, E_CONTACT_ADDRESS_LABEL_WORK));
-
-        record->field_list = g_list_append (record->field_list, field);
 
         /* free the contact */
         g_object_unref (contact);
@@ -363,17 +357,31 @@ parse_next_vcard (FILE *fp)
 
         vcard = g_malloc0(size);
 
-        while (fgets(line, sizeof(line), fp) && found_end == FALSE) {
-                if (found_begin == TRUE) {
-                        if (g_str_has_prefix(line, "END:VCARD")) { found_end = TRUE; }
-                } else {
-                        if (g_str_has_prefix(line, "BEGIN:VCARD")) { found_begin = TRUE; } 
-                        else { continue; }/* skip lines not in a vcard */
+        while (fgets(line, sizeof(line), fp) && found_end == FALSE)
+        {
+                if (found_begin == TRUE)
+                {
+                        if (g_ascii_strncasecmp(line, "END:VCARD", strlen("END:VCARD")) == 0)
+                        {
+                                found_end = TRUE;
+                        }
+                }
+                else
+                {
+                        if (g_ascii_strncasecmp(line, "BEGIN:VCARD", strlen("BEGIN:VCARD")) == 0)
+                        {
+                                found_begin = TRUE;
+                        } 
+                        else
+                        {
+                                continue; /* skip lines not in a vcard */
+                        }
                 }
 
                 /* if the buffer passed us isn't big enough, reallocate it */
                 cursize += strlen(line);
-                if (cursize >= size) {
+                if (cursize >= size)
+                {
                         size *= 2;
                         vcard = (char *)g_realloc(vcard, size); /* aborts program on error */
                 }

@@ -363,7 +363,7 @@ gl_merge_evolution_open (glMerge *merge)
                 *field_id = e_contact_field_id(iter->data);
 
                 /* above this value, the data aren't strings anymore */
-                if (*field_id >= E_CONTACT_LAST_SIMPLE_STRING) {
+                if (*field_id > E_CONTACT_LAST_SIMPLE_STRING) {
                         g_free (field_id);
                         continue;
                 }
