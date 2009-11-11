@@ -1,3 +1,21 @@
+* gLabels 2.2.6 (stable) release.  Release date 2009-11-11
+
+- Fixed drawing artifact with round labels.
+- Fixed several memory issues.
+- Fixed several UI inconsistencies when changing merge source.
+- Fixed potiential crash when doing a document merge.
+- Now makes a better guess at locale defaults (page size and units).
+- Updated user documentation (Mario Blättermann).
+- Updated swedish translation (Daniel Nylander).
+- Updated german translation (Mario Blättermann).
+- Updated russian translation (Alexandre Prokoudine)
+- Updated french translation (Claude Paroz)
+- New chinese translation (Careon)
+- New catalan translation (David Planella)
+- Updated german translation of user documentation (Mario Blättermann).
+- New templates.
+
+
 * gLabels 2.2.5 (stable) release.  Release date 2009-04-30
 
 - Fixed spinbutton/adjustment bugs that made glabels unusable with Gtk 2.16.
