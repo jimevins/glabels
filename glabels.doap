@@ -6,7 +6,7 @@
 
   <name xml:lang="en">glabels</name>
   <shortdesc xml:lang="en">gLabels label designer</shortdesc>
-  <homepage rdf:resource="http://glabels.sourceforge.net" />
+  <homepage rdf:resource="http://glabels.org" />
   <mailing-list rdf:resource="https://lists.sourceforge.net/lists/listinfo/glabels-devel" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#productivity" />
 

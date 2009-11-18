@@ -51,6 +51,7 @@
 #define COMPAT01_NAME_SPACE "http://snaught.com/glabels/0.1/"
 #define COMPAT04_NAME_SPACE "http://snaught.com/glabels/0.4/"
 #define COMPAT20_NAME_SPACE "http://snaught.com/glabels/2.0/"
+#define COMPAT22_NAME_SPACE "http://snaught.com/glabels/2.2/"
 
 
 /*========================================================*/
@@ -284,6 +285,7 @@ xml_doc_to_label (xmlDocPtr         doc,
 
         /* Test for current namespaces. */
         if ( !xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT20_NAME_SPACE) &&
+             !xmlSearchNsByHref (doc, root, (xmlChar *)COMPAT22_NAME_SPACE) &&
              !xmlSearchNsByHref (doc, root, (xmlChar *)LGL_XML_NAME_SPACE) )
         {
                 g_message (_("Unknown glabels Namespace -- Using %s"),

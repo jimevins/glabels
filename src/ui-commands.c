@@ -1101,7 +1101,7 @@ gl_ui_cmd_help_about (GtkAction *action,
                 "Austin Henry",
                 " ",
                 _("See the file AUTHORS for additional credits,"),
-                _("or visit http://glabels.sourceforge.net/"),
+                _("or visit http://glabels.org/"),
                 NULL
         };
         
@@ -1115,7 +1115,7 @@ gl_ui_cmd_help_about (GtkAction *action,
 
         const gchar *about_text = _("A label and business card creation program.\n");
 
-        const gchar *url = "http://glabels.sourceforge.net";
+        const gchar *url = "http://glabels.org";
 
         const gchar *translator_credits = _("translator-credits");
 
