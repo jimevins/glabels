@@ -67,6 +67,7 @@ glabels-*.tar.gz
 /docs/libglabels/libglabels-decl.txt
 /docs/libglabels/libglabels-undeclared.txt
 /docs/libglabels/libglabels-unused.txt
+/docs/libglabels/libglabels-undocumented.txt
 /docs/libglabels/libglabels.args
 /docs/libglabels/libglabels.hierarchy
 /docs/libglabels/libglabels.interfaces
