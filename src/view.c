@@ -3158,8 +3158,6 @@ static gboolean
 enter_notify_event_cb (glView            *view,
                        GdkEventCrossing  *event)
 {
-        gtk_widget_grab_focus(GTK_WIDGET (view->canvas));
-
         return FALSE;
 }
 
@@ -3341,6 +3339,8 @@ button_press_event_cb (glView            *view,
         gdouble             x, y;
         glViewObject       *view_object;
         glViewObjectHandle  handle;
+
+        gtk_widget_grab_focus(GTK_WIDGET (view->canvas));
 
 	cr = gdk_cairo_create (GTK_LAYOUT (view->canvas)->bin_window);
 
