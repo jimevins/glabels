@@ -248,7 +248,7 @@ menu_position_function (GtkMenu       *menu,
         gint                w_screen, h_screen;
         GdkWindow          *window;
         gint                x_window, y_window;
-        GtkAllocation      *allocation;
+        GtkAllocation       allocation;
         gint                x_this, y_this, h_this;
         GtkRequisition      menu_requisition;
         gint                h_menu, w_menu;
@@ -269,10 +269,10 @@ menu_position_function (GtkMenu       *menu,
         /*
          *  Position and size of "this" inside window
          */
-        allocation = &GTK_WIDGET (this)->allocation;
-        x_this = allocation->x;
-        y_this = allocation->y;
-        h_this = allocation->height;
+        gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+        x_this = allocation.x;
+        y_this = allocation.y;
+        h_this = allocation.height;
 
         /*
          * Size of menu.

@@ -328,7 +328,7 @@ gl_view_init (glView *view)
 	gtk_widget_modify_bg (GTK_WIDGET (view->canvas), GTK_STATE_NORMAL, bg_color);
 	g_free (bg_color);
 
-        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->canvas), GTK_CAN_FOCUS);
+        gtk_widget_set_can_focus (GTK_WIDGET (view->canvas), TRUE);
 
         gtk_widget_add_events (GTK_WIDGET (view->canvas),
                                (GDK_FOCUS_CHANGE_MASK   |
@@ -2675,19 +2675,21 @@ gl_view_zoom_out (glView *view)
 void
 gl_view_zoom_to_fit (glView *view)
 {
-	gint    w_view, h_view;
-	gdouble w_label, h_label;
-	gdouble x_scale, y_scale, scale;
+        GtkAllocation  allocation;
+	gint           w_view, h_view;
+	gdouble        w_label, h_label;
+	gdouble        x_scale, y_scale, scale;
 
 	gl_debug (DEBUG_VIEW, "");
 
-	if ( ! GTK_WIDGET_VISIBLE(view)) {
+	if ( ! gtk_widget_get_window (GTK_WIDGET (view)) ) {
 		set_zoom_real (view, 1.0, TRUE);
 		return;
 	}
 
-	w_view = GTK_WIDGET(view)->allocation.width;
-	h_view = GTK_WIDGET(view)->allocation.height;
+        gtk_widget_get_allocation (GTK_WIDGET (view), &allocation);
+	w_view = allocation.width;
+	h_view = allocation.height;
 
 	gl_label_get_size (GL_LABEL(view->label), &w_label, &h_label);
 
@@ -3237,8 +3239,6 @@ static gboolean
 focus_in_event_cb (glView            *view,
                    GdkEventFocus     *event)
 {
-        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->canvas), GTK_HAS_FOCUS);
-
         return FALSE;
 }
 
@@ -3250,8 +3250,6 @@ static gboolean
 focus_out_event_cb (glView            *view,
                     GdkEventFocus     *event)
 {
-        GTK_WIDGET_UNSET_FLAGS (GTK_WIDGET (view->canvas), GTK_HAS_FOCUS);
-
         return FALSE;
 }
 

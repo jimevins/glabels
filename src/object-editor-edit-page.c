@@ -76,8 +76,9 @@ gl_object_editor_prepare_edit_page (glObjectEditor       *editor)
 	editor->priv->edit_insert_field_button = gl_field_button_new (_("Insert merge field"));
         gtk_box_pack_start (GTK_BOX (editor->priv->edit_insert_field_vbox),
                             editor->priv->edit_insert_field_button, FALSE, FALSE, 0);
-        GTK_WIDGET_UNSET_FLAGS (editor->priv->edit_insert_field_button,
-                                GTK_CAN_FOCUS | GTK_CAN_DEFAULT);
+
+        gtk_widget_set_can_focus (editor->priv->edit_insert_field_button, FALSE);
+        gtk_widget_set_can_default (editor->priv->edit_insert_field_button, FALSE);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->edit_page_vbox);

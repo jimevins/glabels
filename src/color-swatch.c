@@ -96,7 +96,7 @@ gl_color_swatch_class_init (glColorSwatchClass *class)
 static void
 gl_color_swatch_init (glColorSwatch *this)
 {
-        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (this), GTK_NO_WINDOW);
+        gtk_widget_set_has_window (GTK_WIDGET (this), FALSE);
 
 	this->priv = g_new0 (glColorSwatchPrivate, 1);
 }
@@ -191,8 +191,9 @@ static gboolean
 expose_event_cb (GtkWidget      *widget,
                  GdkEventExpose *event)
 {
-        GdkWindow *window;
-	cairo_t   *cr;
+        GdkWindow     *window;
+	cairo_t       *cr;
+        GtkAllocation  allocation;
 
         window = gtk_widget_get_window (widget);
 
@@ -203,7 +204,8 @@ expose_event_cb (GtkWidget      *widget,
 			event->area.width, event->area.height);
 	cairo_clip (cr);
 
-        cairo_translate (cr, widget->allocation.x, widget->allocation.y);
+        gtk_widget_get_allocation (widget, &allocation);
+        cairo_translate (cr, allocation.x, allocation.y);
 
 	draw_swatch (GL_COLOR_SWATCH (widget), cr);
 
@@ -220,20 +222,22 @@ static void
 draw_swatch (glColorSwatch *this,
              cairo_t       *cr)
 {
-        GtkStyle  *style;
-        gdouble    w, h;
-        guint      fill_color, line_color;
+        GtkAllocation  allocation;
+        GtkStyle      *style;
+        gdouble        w, h;
+        guint          fill_color, line_color;
 
 
         cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
 
-        w = GTK_WIDGET (this)->allocation.width;
-        h = GTK_WIDGET (this)->allocation.height;
+        gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+        w = allocation.width;
+        h = allocation.height;
 
 
         style = gtk_widget_get_style (GTK_WIDGET (this));
-        if ( GTK_WIDGET_IS_SENSITIVE (GTK_WIDGET (this)) )
+        if ( gtk_widget_is_sensitive (GTK_WIDGET (this)) )
         {
                 fill_color = this->priv->color;
                 line_color = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);

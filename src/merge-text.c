@@ -158,7 +158,6 @@ static void
 gl_merge_text_finalize (GObject *object)
 {
 	glMergeText *merge_text = GL_MERGE_TEXT (object);
-        gint         i;
 
 	gl_debug (DEBUG_MERGE, "START");
 
@@ -284,10 +283,7 @@ static GList *
 gl_merge_text_get_key_list (glMerge *merge)
 {
 	glMergeText   *merge_text;
-	GList         *record_list, *p_rec;
-	glMergeRecord *record;
-	GList         *p_field;
-	gint           i_field, n_fields_line, n_fields;
+	gint           i_field, n_fields;
 	GList         *key_list;
 	
 	gl_debug (DEBUG_MERGE, "BEGIN");

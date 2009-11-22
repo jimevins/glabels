@@ -100,7 +100,7 @@ gl_mini_label_preview_class_init (glMiniLabelPreviewClass *class)
 static void
 gl_mini_label_preview_init (glMiniLabelPreview *this)
 {
-        GTK_WIDGET_SET_FLAGS (GTK_WIDGET (this), GTK_NO_WINDOW);
+        gtk_widget_set_has_window (GTK_WIDGET (this), FALSE);
 
 	this->priv = g_new0 (glMiniLabelPreviewPrivate, 1);
 }
@@ -203,8 +203,9 @@ static gboolean
 expose_event_cb (GtkWidget      *widget,
                  GdkEventExpose *event)
 {
-        GdkWindow *window;
-	cairo_t   *cr;
+        GdkWindow     *window;
+	cairo_t       *cr;
+        GtkAllocation  allocation;
 
         window = gtk_widget_get_window (widget);
 
@@ -215,7 +216,8 @@ expose_event_cb (GtkWidget      *widget,
 			event->area.width, event->area.height);
 	cairo_clip (cr);
 
-        cairo_translate (cr, widget->allocation.x, widget->allocation.y);
+        gtk_widget_get_allocation (widget, &allocation);
+        cairo_translate (cr, allocation.x, allocation.y);
 
 	draw_preview (GL_MINI_LABEL_PREVIEW (widget), cr);
 
@@ -232,6 +234,7 @@ static void
 draw_preview (glMiniLabelPreview *this,
               cairo_t            *cr)
 {
+        GtkAllocation           allocation;
         GtkStyle               *style;
         gdouble                 w, h;
         guint                   fill_color, line_color, shadow_color;
@@ -240,12 +243,13 @@ draw_preview (glMiniLabelPreview *this,
         gdouble                 scale;
 
 
-        w = GTK_WIDGET (this)->allocation.width;
-        h = GTK_WIDGET (this)->allocation.height;
+        gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+        w = allocation.width;
+        h = allocation.height;
 
 
         style = gtk_widget_get_style (GTK_WIDGET (this));
-        if ( GTK_WIDGET_IS_SENSITIVE (GTK_WIDGET (this)) )
+        if ( gtk_widget_is_sensitive (GTK_WIDGET (this)) )
         {
                 fill_color   = gl_color_from_gdk_color (&style->light[GTK_STATE_NORMAL]);
                 line_color   = gl_color_from_gdk_color (&style->fg[GTK_STATE_NORMAL]);

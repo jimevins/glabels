@@ -224,7 +224,7 @@ gl_mini_preview_init (glMiniPreview *this)
         gtk_event_box_set_visible_window (GTK_EVENT_BOX (this), FALSE);
 
         this->priv->canvas = gtk_drawing_area_new ();
-        GTK_WIDGET_SET_FLAGS (this->priv->canvas, GTK_NO_WINDOW);
+        gtk_widget_set_has_window(this->priv->canvas, FALSE);
         gtk_container_add (GTK_CONTAINER (this), this->priv->canvas);
 
         g_signal_connect (G_OBJECT (this->priv->canvas), "expose-event",
@@ -555,14 +555,16 @@ static gdouble
 set_transform_and_get_scale (glMiniPreview *this,
                              cairo_t       *cr)
 {
-	lglTemplate *template = this->priv->template;
-        gdouble      w, h;
-        gdouble      scale;
-        gdouble      offset_x, offset_y;
+	lglTemplate   *template = this->priv->template;
+        GtkAllocation  allocation;
+        gdouble        w, h;
+        gdouble        scale;
+        gdouble        offset_x, offset_y;
 
         /* Establish scale and origin. */
-        w = GTK_WIDGET (this)->allocation.width;
-        h = GTK_WIDGET (this)->allocation.height;
+        gtk_widget_get_allocation (GTK_WIDGET (this), &allocation);
+        w = allocation.width;
+        h = allocation.height;
 
         /* establish scale. */
         scale = MIN( (w - 2*MARGIN - 2*SHADOW_OFFSET)/template->page_width,
@@ -752,6 +754,7 @@ expose_event_cb (GtkWidget       *widget,
 {
         GdkWindow     *window;
 	cairo_t       *cr;
+        GtkAllocation  allocation;
 
 	gl_debug (DEBUG_MINI_PREVIEW, "START");
 
@@ -765,7 +768,9 @@ expose_event_cb (GtkWidget       *widget,
 			event->area.x, event->area.y,
 			event->area.width, event->area.height);
 	cairo_clip (cr);
-        cairo_translate (cr, widget->allocation.x, widget->allocation.y);
+
+        gtk_widget_get_allocation (widget, &allocation);
+        cairo_translate (cr, allocation.x, allocation.y);
 	
 	draw (this, cr);
 

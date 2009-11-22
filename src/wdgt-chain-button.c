@@ -229,6 +229,7 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
 				 GdkEventExpose    *eevent,
 				 glWdgtChainButton *button)
 {
+  GtkAllocation        allocation;
   GdkPoint             points[3];
   GdkPoint             buf;
   GtkShadowType	       shadow;
@@ -241,8 +242,9 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
 
   g_return_val_if_fail (GL_WDGT_IS_CHAIN_BUTTON (button), FALSE);
 
-  points[0].x = widget->allocation.width / 2;
-  points[0].y = widget->allocation.height / 2;
+  gtk_widget_get_allocation (widget, &allocation);
+  points[0].x = allocation.width / 2;
+  points[0].y = allocation.height / 2;
 
   which_line = (widget == button->line1) ? 1 : -1;
 
@@ -268,7 +270,7 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
       points[1].x = points[0].x - SHORT_LINE;
       points[1].y = points[0].y;
       points[2].x = points[1].x;
-      points[2].y = (which_line == 1) ? widget->allocation.height - 1 : 0;
+      points[2].y = (which_line == 1) ? allocation.height - 1 : 0;
       shadow = GTK_SHADOW_ETCHED_IN;
       break;
     case GL_WDGT_CHAIN_RIGHT:
@@ -276,14 +278,14 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
       points[1].x = points[0].x + SHORT_LINE;
       points[1].y = points[0].y;
       points[2].x = points[1].x;
-      points[2].y = (which_line == 1) ? widget->allocation.height - 1 : 0;
+      points[2].y = (which_line == 1) ? allocation.height - 1 : 0;
       shadow = GTK_SHADOW_ETCHED_OUT;
       break;
     case GL_WDGT_CHAIN_TOP:
       points[0].y += SHORT_LINE;
       points[1].x = points[0].x;
       points[1].y = points[0].y - SHORT_LINE;
-      points[2].x = (which_line == 1) ? widget->allocation.width - 1 : 0;
+      points[2].x = (which_line == 1) ? allocation.width - 1 : 0;
       points[2].y = points[1].y;
       shadow = GTK_SHADOW_ETCHED_OUT;
       break;
@@ -291,7 +293,7 @@ gl_wdgt_chain_button_draw_lines (GtkWidget         *widget,
       points[0].y -= SHORT_LINE;
       points[1].x = points[0].x;
       points[1].y = points[0].y + SHORT_LINE;
-      points[2].x = (which_line == 1) ? widget->allocation.width - 1 : 0;
+      points[2].x = (which_line == 1) ? allocation.width - 1 : 0;
       points[2].y = points[1].y;
       shadow = GTK_SHADOW_ETCHED_IN;
       break;
