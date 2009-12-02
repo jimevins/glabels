@@ -21,42 +21,17 @@
 #ifndef __VIEW_TEXT_H__
 #define __VIEW_TEXT_H__
 
-#include "view-object.h"
-#include "label-text.h"
+#include "view.h"
+#include <gdk/gdk.h>
+
+#include "view.h"
+#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
 
-#define GL_TYPE_VIEW_TEXT            (gl_view_text_get_type ())
-#define GL_VIEW_TEXT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_TEXT, glViewText))
-#define GL_VIEW_TEXT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_TEXT, glViewTextClass))
-#define GL_IS_VIEW_TEXT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW_TEXT))
-#define GL_IS_VIEW_TEXT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW_TEXT))
-
-typedef struct _glViewText          glViewText;
-typedef struct _glViewTextClass     glViewTextClass;
-
-typedef struct _glViewTextPrivate   glViewTextPrivate;
-
-struct _glViewText {
-	glViewObject       parent_object;
-
-	glViewTextPrivate *priv;
-};
-
-struct _glViewTextClass {
-	glViewObjectClass  parent_class;
-};
-
-
-GType          gl_view_text_get_type (void) G_GNUC_CONST;
-
-glViewObject  *gl_view_text_new      (glLabelText *object,
-                                      glView      *view);
-
-
 /* cursor for creating text objects */
-GdkCursor *gl_view_text_get_create_cursor (void);
+GdkCursor *gl_view_text_get_create_cursor           (void);
 
 /* Object creation handlers. */
 void       gl_view_text_create_button_press_event   (glView *view,

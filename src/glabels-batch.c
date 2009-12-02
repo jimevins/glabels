@@ -81,6 +81,7 @@ main (int argc, char **argv)
         gchar             *abs_fn;
         glLabel           *label = NULL;
         glMerge           *merge = NULL;
+        const lglTemplate *template;
         lglTemplateFrame  *frame;
         glXMLLabelStatus   status;
         glPrintOp         *print_op;
@@ -148,7 +149,8 @@ main (int argc, char **argv)
                                 }
                         }
                         abs_fn = gl_file_util_make_absolute ( output );
-                        frame = (lglTemplateFrame *)label->template->frames->data;
+                        template = gl_label_get_template (label);
+                        frame = (lglTemplateFrame *)template->frames->data;
 
                         print_op = gl_print_op_new (label);
                         gl_print_op_set_filename        (print_op, abs_fn);

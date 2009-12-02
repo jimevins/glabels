@@ -56,8 +56,8 @@ GType        gl_ui_sidebar_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gl_ui_sidebar_new               (void);
 
-void         gl_ui_sidebar_set_view          (glUISidebar       *sidebar,
-					      glView            *view);
+void         gl_ui_sidebar_set_label         (glUISidebar       *sidebar,
+					      glLabel           *label);
 
 
 G_END_DECLS

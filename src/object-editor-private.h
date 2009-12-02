@@ -30,7 +30,8 @@ struct _glObjectEditorPrivate {
 	GtkBuilder *builder;
 	GtkWidget  *editor_vbox;
 
-        glLabel    *label;
+        glLabel        *label;
+        glLabelObject  *object;
 
 	gdouble     units_per_point;
 
@@ -171,8 +172,7 @@ extern gint gl_object_editor_signals[LAST_SIGNAL];
 
 void gl_object_editor_prepare_position_page     (glObjectEditor        *editor);
 
-void gl_object_editor_prepare_size_page         (glObjectEditor        *editor,
-						 glObjectEditorOption   option);
+void gl_object_editor_prepare_size_page         (glObjectEditor        *editor);
 
 void gl_object_editor_prepare_lsize_page        (glObjectEditor        *editor);
 
@@ -200,6 +200,209 @@ void lsize_prefs_changed_cb                     (glObjectEditor        *editor);
 void size_prefs_changed_cb                      (glObjectEditor        *editor);
 void position_prefs_changed_cb                  (glObjectEditor        *editor);
 void shadow_prefs_changed_cb                    (glObjectEditor        *editor);
+
+
+/*
+ * Position Page
+ */
+void        gl_object_editor_set_position         (glObjectEditor      *editor,
+						   gdouble              x,
+						   gdouble              y);
+
+void        gl_object_editor_set_max_position     (glObjectEditor      *editor,
+						   gdouble              x_max,
+						   gdouble              y_max);
+
+void        gl_object_editor_get_position         (glObjectEditor      *editor,
+						   gdouble             *x,
+						   gdouble             *y);
+
+/*
+ * Size Page
+ */
+void        gl_object_editor_set_size             (glObjectEditor      *editor,
+						   gdouble              w,
+						   gdouble              h);
+
+void        gl_object_editor_set_max_size         (glObjectEditor      *editor,
+						   gdouble              w_max,
+						   gdouble              h_max);
+
+void        gl_object_editor_set_base_size        (glObjectEditor      *editor,
+						   gdouble              w_max,
+						   gdouble              h_max);
+
+void        gl_object_editor_get_size             (glObjectEditor      *editor,
+						   gdouble             *w,
+						   gdouble             *h);
+
+
+/*
+ * Line Size Page
+ */
+void        gl_object_editor_set_lsize            (glObjectEditor      *editor,
+						   gdouble              dx,
+						   gdouble              dy);
+
+void        gl_object_editor_set_max_lsize        (glObjectEditor      *editor,
+						   gdouble              dx_max,
+						   gdouble              dy_max);
+
+void        gl_object_editor_get_lsize            (glObjectEditor      *editor,
+						   gdouble             *dx,
+						   gdouble             *dy);
+
+
+/*
+ * Fill Page
+ */
+void        gl_object_editor_set_fill_color       (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
+
+glColorNode* gl_object_editor_get_fill_color      (glObjectEditor      *editor);
+
+
+/*
+ * Line/Outline Page
+ */
+void        gl_object_editor_set_line_color       (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
+
+glColorNode* gl_object_editor_get_line_color      (glObjectEditor      *editor);
+
+void        gl_object_editor_set_line_width       (glObjectEditor      *editor,
+						   gdouble              width);
+
+gdouble     gl_object_editor_get_line_width       (glObjectEditor      *editor);
+
+
+/*
+ * Image Page
+ */
+void        gl_object_editor_set_image            (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glTextNode          *text_node);
+
+glTextNode *gl_object_editor_get_image            (glObjectEditor      *editor);
+
+
+/*
+ * Text Page
+ */
+void        gl_object_editor_set_font_family      (glObjectEditor      *editor,
+						   const gchar         *font_family);
+
+gchar      *gl_object_editor_get_font_family      (glObjectEditor      *editor);
+
+void        gl_object_editor_set_font_size        (glObjectEditor      *editor,
+						   gdouble              font_size);
+
+gdouble     gl_object_editor_get_font_size        (glObjectEditor      *editor);
+
+void        gl_object_editor_set_font_weight      (glObjectEditor      *editor,
+						   PangoWeight          font_weight);
+
+PangoWeight gl_object_editor_get_font_weight      (glObjectEditor      *editor);
+
+void        gl_object_editor_set_font_italic_flag (glObjectEditor      *editor,
+						   gboolean             font_italic_flag);
+
+gboolean    gl_object_editor_get_font_italic_flag (glObjectEditor      *editor);
+
+void        gl_object_editor_set_text_alignment   (glObjectEditor      *editor,
+						   PangoAlignment       text_alignment);
+
+PangoAlignment gl_object_editor_get_text_alignment (glObjectEditor      *editor);
+
+void        gl_object_editor_set_text_line_spacing (glObjectEditor      *editor,
+						   gdouble               text_line_spacing);
+
+gdouble     gl_object_editor_get_text_line_spacing (glObjectEditor      *editor);
+
+void        gl_object_editor_set_text_color       (glObjectEditor       *editor,
+						   gboolean              merge_flag,
+						   glColorNode          *text_color_node);
+
+glColorNode* gl_object_editor_get_text_color      (glObjectEditor      *editor);
+
+void        gl_object_editor_set_text_auto_shrink (glObjectEditor      *editor,
+						   gboolean             auto_shrink);
+
+gboolean    gl_object_editor_get_text_auto_shrink (glObjectEditor      *editor);
+
+
+/*
+ * Edit Text Page
+ */
+void        gl_object_editor_set_text_buffer      (glObjectEditor      *editor,
+						   GtkTextBuffer       *buffer);
+
+/*
+ * Barcode Page
+ */
+void        gl_object_editor_set_bc_style         (glObjectEditor      *editor,
+						   gchar               *id,
+						   gboolean             text_flag,
+						   gboolean             checksum_flag,
+						   guint                format_digits);
+
+void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
+						   gchar              **id,
+						   gboolean            *text_flag,
+						   gboolean            *checksum_flag,
+						   guint               *format_digits);
+
+void        gl_object_editor_set_bc_color         (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
+
+glColorNode* gl_object_editor_get_bc_color        (glObjectEditor      *editor);
+
+
+/*
+ * Barcode Data Page
+ */
+void        gl_object_editor_set_data             (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glTextNode          *text_node);
+
+glTextNode *gl_object_editor_get_data             (glObjectEditor      *editor);
+
+
+/*
+ * Shadow Page
+ */
+void        gl_object_editor_set_shadow_state     (glObjectEditor      *editor,
+						   gboolean             state);
+
+void        gl_object_editor_set_shadow_offset    (glObjectEditor      *editor,
+						   gdouble              x,
+						   gdouble              y);
+
+void        gl_object_editor_set_shadow_color     (glObjectEditor      *editor,
+						   gboolean             merge_flag,
+						   glColorNode         *color_node);
+
+void        gl_object_editor_set_shadow_opacity   (glObjectEditor      *editor,
+						   gdouble              alpha);
+
+void        gl_object_editor_set_max_shadow_offset(glObjectEditor      *editor,
+						   gdouble              x_max,
+						   gdouble              y_max);
+
+
+gboolean    gl_object_editor_get_shadow_state     (glObjectEditor      *editor);
+
+void        gl_object_editor_get_shadow_offset    (glObjectEditor      *editor,
+						   gdouble             *x,
+						   gdouble             *y);
+
+glColorNode* gl_object_editor_get_shadow_color    (glObjectEditor      *editor);
+
+gdouble     gl_object_editor_get_shadow_opacity   (glObjectEditor      *editor);
+
 
 G_END_DECLS
 

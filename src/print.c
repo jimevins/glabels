@@ -54,8 +54,8 @@ typedef struct _PrintInfo {
         cairo_t    *cr;
 
 	/* gLabels Template */
-	lglTemplate *template;
-	gboolean     label_rotate_flag;
+	const lglTemplate *template;
+	gboolean           rotate_flag;
 
 	/* page size */
 	gdouble page_width;
@@ -330,26 +330,31 @@ print_info_new (cairo_t          *cr,
 		glLabel          *label)
 {
 	PrintInfo            *pi = g_new0 (PrintInfo, 1);
+        const lglTemplate    *template;
+        gboolean              rotate_flag;
 
 	gl_debug (DEBUG_PRINT, "START");
 
 	g_return_val_if_fail (label && GL_IS_LABEL (label), NULL);
 
-	g_return_val_if_fail (label->template, NULL);
-	g_return_val_if_fail (label->template->paper_id, NULL);
-	g_return_val_if_fail (label->template->page_width > 0, NULL);
-	g_return_val_if_fail (label->template->page_height > 0, NULL);
+        template    = gl_label_get_template (label);
+        rotate_flag = gl_label_get_rotate_flag (label);
+
+	g_return_val_if_fail (template, NULL);
+	g_return_val_if_fail (template->paper_id, NULL);
+	g_return_val_if_fail (template->page_width > 0, NULL);
+	g_return_val_if_fail (template->page_height > 0, NULL);
 
 	pi->cr = cr;
 
 	gl_debug (DEBUG_PRINT,
-		  "setting page size = \"%s\"", label->template->paper_id);
+		  "setting page size = \"%s\"", template->paper_id);
 
-	pi->page_width  = label->template->page_width;
-	pi->page_height = label->template->page_height;
+	pi->page_width  = template->page_width;
+	pi->page_height = template->page_height;
 
-	pi->template = label->template;
-	pi->label_rotate_flag = label->rotate_flag;
+	pi->template = template;
+	pi->rotate_flag = rotate_flag;
 
 	gl_debug (DEBUG_PRINT, "END");
 
@@ -516,7 +521,7 @@ print_label (PrintInfo     *pi,
 	cairo_save (pi->cr);
 
         /* Special transformations. */
-	if (label->rotate_flag) {
+	if (pi->rotate_flag) {
 		gl_debug (DEBUG_PRINT, "Rotate flag set");
 		cairo_rotate (pi->cr, M_PI/2.0);
 		cairo_translate (pi->cr, 0.0, -height);
@@ -556,7 +561,7 @@ draw_outline (PrintInfo *pi,
 	cairo_set_source_rgb (pi->cr, OUTLINE_RGB_ARGS);
 	cairo_set_line_width (pi->cr, OUTLINE_WIDTH);
 
-        gl_cairo_label_path (pi->cr, label->template, FALSE, FALSE);
+        gl_cairo_label_path (pi->cr, pi->template, FALSE, FALSE);
 
         cairo_stroke (pi->cr);
 
@@ -575,7 +580,7 @@ clip_to_outline (PrintInfo *pi,
 {
 	gl_debug (DEBUG_PRINT, "START");
 
-        gl_cairo_label_path (pi->cr, label->template, FALSE, TRUE);
+        gl_cairo_label_path (pi->cr, pi->template, FALSE, TRUE);
 
         cairo_set_fill_rule (pi->cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_clip (pi->cr);

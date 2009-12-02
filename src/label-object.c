@@ -38,13 +38,23 @@
 #define DEFAULT_SHADOW_Y_OFFSET (3.6)
 #define DEFAULT_SHADOW_OPACITY  (0.5)
 
+#define HANDLE_FILL_RGBA_ARGS      0.0,   0.75,  0.0,   0.4
+#define HANDLE_OUTLINE_RGBA_ARGS   0.0,   0.0,   0.0,   0.8
+
+#define HANDLE_OUTLINE_WIDTH_PIXELS   1.0
+#define HANDLE_PIXELS 7
+
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glLabelObjectPrivate {
+
 	gchar             *name;
+
+        gboolean           selected_flag;
+
 	gdouble            x, y;
 	gdouble            w, h;
         cairo_matrix_t     matrix;
@@ -59,13 +69,8 @@ struct _glLabelObjectPrivate {
 };
 
 enum {
-	CHANGED,
-	MOVED,
-	FLIP_ROTATE,
-	TOP,
-	BOTTOM,
-        REMOVED,
-	LAST_SIGNAL
+        CHANGED,
+        LAST_SIGNAL
 };
 
 
@@ -73,21 +78,18 @@ enum {
 /* Private globals.                                       */
 /*========================================================*/
 
-static guint signals[LAST_SIGNAL] = {0};
-
 static guint instance = 0;
+
+static guint signals[LAST_SIGNAL] = {0};
 
 
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void gl_label_object_finalize      (GObject            *object);
+static void     gl_label_object_finalize  (GObject            *object);
 
-static void merge_changed_cb              (glLabel            *label,
-					   glLabelObject      *object);
-
-static void set_size                      (glLabelObject      *object,
+static void     set_size                  (glLabelObject      *object,
 					   gdouble             w,
 					   gdouble             h);
 
@@ -109,60 +111,15 @@ gl_label_object_class_init (glLabelObjectClass *class)
 
 	object_class->finalize = gl_label_object_finalize;
 
-	class->set_size = set_size;
+	class->set_size     = set_size;
+	class->draw_handles = gl_label_object_draw_handles_box; /* Default style */
+	class->handle_at    = gl_label_object_box_handle_at;    /* Default style */
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (glLabelObjectClass, changed),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-
-	signals[MOVED] =
-		g_signal_new ("moved",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glLabelObjectClass, moved),
-			      NULL, NULL,
-			      gl_marshal_VOID__DOUBLE_DOUBLE,
-			      G_TYPE_NONE,
-			      2, G_TYPE_DOUBLE, G_TYPE_DOUBLE);
-	signals[FLIP_ROTATE] =
-		g_signal_new ("flip_rotate",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glLabelObjectClass, flip_rotate),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-	signals[TOP] =
-		g_signal_new ("top",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glLabelObjectClass, top),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-
-	signals[BOTTOM] =
-		g_signal_new ("bottom",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glLabelObjectClass, bottom),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-	signals[REMOVED] =
-		g_signal_new ("removed",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glLabelObjectClass, removed),
 			      NULL, NULL,
 			      gl_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -272,11 +229,10 @@ gl_label_object_dup (glLabelObject *src_object,
 
 	gl_color_node_free (&shadow_color_node);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(src_object)->copy != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(src_object)->copy != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(src_object)->copy (dst_object, src_object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -286,18 +242,39 @@ gl_label_object_dup (glLabelObject *src_object,
 
 
 /*****************************************************************************/
+/* Copy object interesting object data to clipboard.                         */
+/*****************************************************************************/
+void
+gl_label_object_copy_to_clipboard (glLabelObject     *object,
+                                   GtkClipboard      *clipboard)
+{
+        gl_debug (DEBUG_LABEL, "START");
+
+        g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->copy_to_clipboard != NULL )
+        {
+		/* We have an object specific method, use it */
+		GL_LABEL_OBJECT_GET_CLASS(object)->copy_to_clipboard (object, clipboard);
+	}
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
 /* Emit "changed" signal (for derived objects).                              */
 /*****************************************************************************/
 void
 gl_label_object_emit_changed (glLabelObject *object)
 {
-	gl_debug (DEBUG_LABEL, "START");
+        gl_debug (DEBUG_LABEL, "START");
 
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+        g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
 
-	gl_debug (DEBUG_LABEL, "END");
+        gl_debug (DEBUG_LABEL, "END");
 }
 
 
@@ -316,20 +293,15 @@ gl_label_object_set_parent (glLabelObject *object,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
 	old_parent = object->parent;
-	if ( old_parent != NULL ) {
-		g_signal_handlers_disconnect_by_func (old_parent,
-						      G_CALLBACK(merge_changed_cb),
-						      object);
-		gl_label_remove_object( old_parent, object );
+	if ( old_parent != NULL )
+        {
+                g_object_ref (object);
+		gl_label_delete_object( old_parent, object );
 	}
-	gl_label_add_object( label, object );
+        object->parent = label;
+	gl_label_add_object (label, object);
 
-	g_signal_connect (G_OBJECT(label), "merge_changed",
-			  G_CALLBACK(merge_changed_cb), object);
-
-	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
-
-	gl_debug (DEBUG_LABEL, "END");
+        gl_label_object_emit_changed (object);
 }
 
 
@@ -350,38 +322,39 @@ gl_label_object_get_parent (glLabelObject *object)
 
 
 /*****************************************************************************/
-/* Set remove object from parent.                                            */
+/* Select object.                                                            */
 /*****************************************************************************/
 void
-gl_label_object_remove (glLabelObject *object)
+gl_label_object_select (glLabelObject     *object)
 {
-	glLabel *parent;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	parent = object->parent;
-	if ( parent != NULL ) {
-		g_signal_handlers_disconnect_by_func (parent,
-						      G_CALLBACK(merge_changed_cb),
-						      object);
-		gl_label_remove_object (parent, object);
-
-                g_signal_emit (G_OBJECT(object), signals[REMOVED], 0);
-
-                g_object_unref (G_OBJECT(object));
-	}
+        object->priv->selected_flag = TRUE;
+}
 
 
-	gl_debug (DEBUG_LABEL, "END");
+/*****************************************************************************/
+/* Unselect object.                                                          */
+/*****************************************************************************/
+void
+gl_label_object_unselect (glLabelObject     *object)
+{
+        object->priv->selected_flag = FALSE;
+}
+
+
+/*****************************************************************************/
+/* Is object selected?                                                       */
+/*****************************************************************************/
+gboolean
+gl_label_object_is_selected (glLabelObject     *object)
+{
+        return object->priv->selected_flag;
 }
 
 
 /*****************************************************************************/
 /* Set name of object.                                                       */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_name (glLabelObject *object,
 			  gchar         *name)
 {
@@ -392,7 +365,7 @@ gl_label_object_set_name (glLabelObject *object,
 	g_free(object->priv->name);
 	object->priv->name = name;
 
-	g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
+        gl_label_object_emit_changed (object);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -417,28 +390,27 @@ gl_label_object_get_name (glLabelObject *object)
 /*****************************************************************************/
 /* Set position of object.                                                   */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_position (glLabelObject *object,
 			      gdouble        x,
 			      gdouble        y)
 {
-	gdouble dx, dy;
+	gdouble  dx, dy;
 
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (x != object->priv->x) || (y != object->priv->y) ) {
-
+	if ( (x != object->priv->x) || (y != object->priv->y) )
+        {
 		dx = x - object->priv->x;
 		dy = y - object->priv->y;
 
 		object->priv->x = x;
 		object->priv->y = y;
-
-		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
-
 	}
+
+        gl_label_object_emit_changed (object);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -447,7 +419,7 @@ gl_label_object_set_position (glLabelObject *object,
 /*****************************************************************************/
 /* Set position of object relative to old position.                          */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_position_relative (glLabelObject *object,
 				       gdouble        dx,
 				       gdouble        dy)
@@ -456,18 +428,17 @@ gl_label_object_set_position_relative (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (dx != 0.0) || (dy != 0.0) ) {
-
+	if ( (dx != 0.0) || (dy != 0.0) )
+        {
 		object->priv->x += dx;
 		object->priv->y += dy;
 
 		gl_debug (DEBUG_LABEL, "       x = %f, y= %f",
 			  object->priv->x,
 			  object->priv->y);
-
-		g_signal_emit (G_OBJECT(object), signals[MOVED], 0, dx, dy);
-
 	}
+
+        gl_label_object_emit_changed (object);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -502,12 +473,12 @@ set_size (glLabelObject *object,
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( (object->priv->w != w) || (object->priv->h != h) ) {
-
+	if ( (object->priv->w != w) || (object->priv->h != h) )
+        {
 		object->priv->w = w;
 		object->priv->h = h;
 
-		g_signal_emit (G_OBJECT(object), signals[CHANGED], 0);
+                gl_label_object_emit_changed (object);
 	}
 }
 
@@ -515,7 +486,7 @@ set_size (glLabelObject *object,
 /*****************************************************************************/
 /* Set size of object.                                                       */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_size (glLabelObject *object,
 			  gdouble        w,
 			  gdouble        h)
@@ -524,15 +495,13 @@ gl_label_object_set_size (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
 
 		object->priv->aspect_ratio = h / w;
-
 	}
-
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -541,7 +510,7 @@ gl_label_object_set_size (glLabelObject *object,
 /*****************************************************************************/
 /* Set size of object honoring current aspect ratio.                         */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_size_honor_aspect (glLabelObject *object,
 				       gdouble        w,
 				       gdouble        h)
@@ -550,21 +519,19 @@ gl_label_object_set_size_honor_aspect (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( h > w*object->priv->aspect_ratio ) {
-
+	if ( h > w*object->priv->aspect_ratio )
+        {
 		h = w * object->priv->aspect_ratio;
-
-	} else {
-
+	}
+        else
+        {
 		w = h / object->priv->aspect_ratio;
-
 	}
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_size != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_size (object, w, h);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -598,15 +565,14 @@ gl_label_object_get_size (glLabelObject *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_size != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_size != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->get_size (object, w, h);
-
-	} else {
-
+	}
+        else
+        {
 		gl_label_object_get_raw_size (object, w, h);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -669,23 +635,21 @@ gl_label_object_can_text (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL )
+        {
 		return TRUE;
-
-	} else {
-
-		return FALSE;
-
 	}
-
+        else
+        {
+		return FALSE;
+	}
 }
 
 
 /*****************************************************************************/
 /* Set font family for all text contained in object.                         */
 /*****************************************************************************/
-void
+void    
 gl_label_object_set_font_family (glLabelObject     *object,
 				 const gchar       *font_family)
 {
@@ -693,11 +657,11 @@ gl_label_object_set_font_family (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL ) {
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family != NULL )
+        {
 
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_family (object, font_family);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -707,7 +671,7 @@ gl_label_object_set_font_family (glLabelObject     *object,
 /****************************************************************************/
 /* Set font size for all text contained in object.                          */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_font_size (glLabelObject     *object,
 			       gdouble            font_size)
 {
@@ -715,11 +679,10 @@ gl_label_object_set_font_size (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_size != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_size != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_size (object, font_size);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -729,7 +692,7 @@ gl_label_object_set_font_size (glLabelObject     *object,
 /****************************************************************************/
 /* Set font weight for all text contained in object.                        */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_font_weight (glLabelObject     *object,
 				 PangoWeight        font_weight)
 {
@@ -737,11 +700,10 @@ gl_label_object_set_font_weight (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_weight != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_weight != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_weight (object, font_weight);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -751,7 +713,7 @@ gl_label_object_set_font_weight (glLabelObject     *object,
 /****************************************************************************/
 /* Set font italic flag for all text contained in object.                   */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_font_italic_flag (glLabelObject     *object,
 				      gboolean           font_italic_flag)
 {
@@ -759,12 +721,10 @@ gl_label_object_set_font_italic_flag (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag != NULL )
+        {
 		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag (object,
-									 font_italic_flag);
-
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_font_italic_flag (object, font_italic_flag);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -774,7 +734,7 @@ gl_label_object_set_font_italic_flag (glLabelObject     *object,
 /****************************************************************************/
 /* Set text alignment for all text contained in object.                     */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_text_alignment (glLabelObject     *object,
 				    PangoAlignment     text_alignment)
 {
@@ -782,12 +742,10 @@ gl_label_object_set_text_alignment (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment != NULL )
+        {
 		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment (object,
-								       text_alignment);
-
+		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_alignment (object, text_alignment);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -797,7 +755,7 @@ gl_label_object_set_text_alignment (glLabelObject     *object,
 /****************************************************************************/
 /* Set text line spacing for all text contained in object.                  */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_text_line_spacing (glLabelObject     *object,
 			               gdouble            text_line_spacing)
 {
@@ -805,11 +763,10 @@ gl_label_object_set_text_line_spacing (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_line_spacing != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_line_spacing != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_line_spacing (object, text_line_spacing);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -819,7 +776,7 @@ gl_label_object_set_text_line_spacing (glLabelObject     *object,
 /****************************************************************************/
 /* Set text color for all text contained in object.                         */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_text_color (glLabelObject     *object,
 				glColorNode       *text_color_node)
 {
@@ -827,11 +784,10 @@ gl_label_object_set_text_color (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_text_color (object, text_color_node);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -850,11 +806,10 @@ gl_label_object_get_font_family (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), NULL);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_family != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_family != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_family (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -875,11 +830,10 @@ gl_label_object_get_font_size (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_size != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_size != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_size (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -900,11 +854,10 @@ gl_label_object_get_font_weight (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), PANGO_WEIGHT_NORMAL);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_weight (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -925,11 +878,10 @@ gl_label_object_get_font_italic_flag (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_italic_flag != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_font_italic_flag != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_font_italic_flag (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -950,11 +902,10 @@ gl_label_object_get_text_alignment (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), PANGO_ALIGN_LEFT);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_alignment (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -975,11 +926,10 @@ gl_label_object_get_text_line_spacing (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_line_spacing != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_line_spacing != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_line_spacing (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1000,11 +950,10 @@ gl_label_object_get_text_color (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_text_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_text_color (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1023,14 +972,13 @@ gl_label_object_can_fill (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL )
+        {
 		return TRUE;
-
-	} else {
-
+	}
+        else
+        {
 		return FALSE;
-
 	}
 
 }
@@ -1039,7 +987,7 @@ gl_label_object_can_fill (glLabelObject     *object)
 /****************************************************************************/
 /* Set fill color for object.                                               */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_fill_color (glLabelObject     *object,
 				glColorNode       *fill_color_node)
 {
@@ -1047,11 +995,10 @@ gl_label_object_set_fill_color (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_fill_color (object, fill_color_node);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1070,11 +1017,10 @@ gl_label_object_get_fill_color (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_fill_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_fill_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_fill_color (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1093,14 +1039,13 @@ gl_label_object_can_line_color (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL )
+        {
 		return TRUE;
-
-	} else {
-
+	}
+        else
+        {
 		return FALSE;
-
 	}
 
 }
@@ -1109,7 +1054,7 @@ gl_label_object_can_line_color (glLabelObject     *object)
 /****************************************************************************/
 /* Set line color for object.                                               */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_line_color (glLabelObject     *object,
 				glColorNode       *line_color_node)
 {
@@ -1117,11 +1062,10 @@ gl_label_object_set_line_color (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_color (object, line_color_node);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1140,11 +1084,10 @@ gl_label_object_get_line_color (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_color != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_color != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_line_color (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1163,14 +1106,13 @@ gl_label_object_can_line_width (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL )
+        {
 		return TRUE;
-
-	} else {
-
+	}
+        else
+        {
 		return FALSE;
-
 	}
 
 }
@@ -1179,7 +1121,7 @@ gl_label_object_can_line_width (glLabelObject     *object)
 /****************************************************************************/
 /* Set line width for object.                                               */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_line_width (glLabelObject     *object,
 				gdouble            line_width)
 {
@@ -1187,11 +1129,10 @@ gl_label_object_set_line_width (glLabelObject     *object,
 
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width != NULL )
+        {
 		/* We have an object specific method, use it */
 		GL_LABEL_OBJECT_GET_CLASS(object)->set_line_width (object, line_width);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1210,11 +1151,10 @@ gl_label_object_get_line_width (glLabelObject     *object)
 
 	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), 0.0);
 
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_width != NULL ) {
-
+	if ( GL_LABEL_OBJECT_GET_CLASS(object)->get_line_width != NULL )
+        {
 		/* We have an object specific method, use it */
 		ret = GL_LABEL_OBJECT_GET_CLASS(object)->get_line_width (object);
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1226,7 +1166,7 @@ gl_label_object_get_line_width (glLabelObject     *object)
 /****************************************************************************/
 /* Set shadow state of object.                                              */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_shadow_state (glLabelObject     *object,
 				  gboolean           state)
 {
@@ -1237,7 +1177,6 @@ gl_label_object_set_shadow_state (glLabelObject     *object,
 	if (object->priv->shadow_state != state)
 	{
 		object->priv->shadow_state = state;
-		gl_label_object_emit_changed (object);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1261,7 +1200,7 @@ gl_label_object_get_shadow_state (glLabelObject     *object)
 /****************************************************************************/
 /* Set offset of object's shadow.                                           */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_shadow_offset (glLabelObject     *object,
 				   gdouble            x,
 				   gdouble            y)
@@ -1274,8 +1213,6 @@ gl_label_object_set_shadow_offset (glLabelObject     *object,
 	{
 		object->priv->shadow_x = x;
 		object->priv->shadow_y = y;
-
-		gl_label_object_emit_changed (object);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1304,7 +1241,7 @@ gl_label_object_get_shadow_offset (glLabelObject     *object,
 /****************************************************************************/
 /* Set color of object's shadow.                                            */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_shadow_color (glLabelObject     *object,
 				  glColorNode       *color_node)
 {
@@ -1316,7 +1253,6 @@ gl_label_object_set_shadow_color (glLabelObject     *object,
 	{
 		gl_color_node_free (&(object->priv->shadow_color_node));
 		object->priv->shadow_color_node = gl_color_node_dup (color_node);
-		gl_label_object_emit_changed (GL_LABEL_OBJECT(object));
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1340,7 +1276,7 @@ gl_label_object_get_shadow_color (glLabelObject     *object)
 /****************************************************************************/
 /* Set opacity of object's shadow.                                          */
 /****************************************************************************/
-void
+void    
 gl_label_object_set_shadow_opacity (glLabelObject     *object,
 				    gdouble            alpha)
 {
@@ -1351,7 +1287,6 @@ gl_label_object_set_shadow_opacity (glLabelObject     *object,
 	if (object->priv->shadow_opacity != alpha)
 	{
 		object->priv->shadow_opacity = alpha;
-		gl_label_object_emit_changed (object);
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1387,8 +1322,6 @@ gl_label_object_flip_horiz (glLabelObject *object)
         cairo_matrix_init_scale (&flip_matrix, -1.0, 1.0);
         cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &flip_matrix);
 
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
-
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -1407,8 +1340,6 @@ gl_label_object_flip_vert (glLabelObject *object)
 
         cairo_matrix_init_scale (&flip_matrix, 1.0, -1.0);
         cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &flip_matrix);
-
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1429,8 +1360,6 @@ gl_label_object_rotate (glLabelObject *object,
 
         cairo_matrix_init_rotate (&rotate_matrix, theta_degs*(G_PI/180.));
         cairo_matrix_multiply (&object->priv->matrix, &object->priv->matrix, &rotate_matrix);
-
-	g_signal_emit (G_OBJECT(object), signals[FLIP_ROTATE], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1466,57 +1395,6 @@ gl_label_object_get_matrix (glLabelObject  *object,
 }
 
 
-/****************************************************************************/
-/* Bring label object to front/top.                                         */
-/****************************************************************************/
-void
-gl_label_object_raise_to_top (glLabelObject *object)
-{
-	glLabel *label;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	label = object->parent;
-
-	gl_label_raise_object_to_top (label, object);
-
-	g_signal_emit (G_OBJECT(object), signals[TOP], 0);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/****************************************************************************/
-/* Send label object to rear/bottom.                                        */
-/****************************************************************************/
-void
-gl_label_object_lower_to_bottom (glLabelObject *object)
-{
-	glLabel *label;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	label = object->parent;
-
-	gl_label_lower_object_to_bottom (label, object);
-
-	g_signal_emit (G_OBJECT(object), signals[BOTTOM], 0);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/*--------------------------------------------------------------------------*/
-/* PRIVATE.  Label's merge data changed callback.                           */
-/*--------------------------------------------------------------------------*/
-static void
-merge_changed_cb (glLabel       *label,
-		  glLabelObject *object)
-{
-	gl_label_object_emit_changed (object);
-}
-
-
 /*****************************************************************************/
 /* Draw object                                                               */
 /*****************************************************************************/
@@ -1542,8 +1420,8 @@ gl_label_object_draw (glLabelObject *object,
         cairo_save (cr);
         cairo_translate (cr, x0, y0);
 
-        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_shadow != NULL ) {
-
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_shadow != NULL )
+        {
                 shadow_state = gl_label_object_get_shadow_state (object);
 
                 if ( shadow_state )
@@ -1563,8 +1441,8 @@ gl_label_object_draw (glLabelObject *object,
                 }
         }
 
-        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL ) {
-
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL )
+        {
                 cairo_save (cr);
                 cairo_transform (cr, &matrix);
 
@@ -1579,6 +1457,361 @@ gl_label_object_draw (glLabelObject *object,
         cairo_restore (cr);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is object located at coordinates.                                         */
+/*****************************************************************************/
+gboolean
+gl_label_object_is_located_at (glLabelObject     *object,
+                               cairo_t           *cr,
+                               gdouble            x_pixels,
+                               gdouble            y_pixels)
+{
+        gboolean            ret_val = FALSE;
+        gdouble             x0, y0;
+        cairo_matrix_t      matrix;
+        gdouble             x, y;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), FALSE);
+
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL )
+        {
+
+                gl_label_object_get_position (object, &x0, &y0);
+                gl_label_object_get_matrix (object, &matrix);
+
+                cairo_save (cr);
+
+                cairo_translate (cr, x0, y0);
+                cairo_transform (cr, &matrix);
+
+                x = x_pixels;
+                y = y_pixels;
+                cairo_device_to_user (cr, &x, &y);
+
+                ret_val = GL_LABEL_OBJECT_GET_CLASS(object)->object_at (object, cr, x, y);
+
+                cairo_restore (cr);
+        }
+
+	gl_debug (DEBUG_LABEL, "END");
+
+        return ret_val;
+}
+
+
+/*****************************************************************************/
+/* Draw object handles                                                       */
+/*****************************************************************************/
+void
+gl_label_object_draw_handles (glLabelObject     *object,
+                              cairo_t           *cr)
+{
+        gdouble        x0, y0;
+        cairo_matrix_t matrix;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
+
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL )
+        {
+
+                gl_label_object_get_position (object, &x0, &y0);
+                gl_label_object_get_matrix (object, &matrix);
+
+                cairo_save (cr);
+
+                cairo_translate (cr, x0, y0);
+                cairo_transform (cr, &matrix);
+
+                GL_LABEL_OBJECT_GET_CLASS(object)->draw_handles (object, cr);
+
+                cairo_restore (cr);
+        }
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Draw individual handle                                                   */
+/*--------------------------------------------------------------------------*/
+static void
+draw_handle (cairo_t                *cr,
+             glLabelObject          *object,
+             gdouble                 x_handle,
+             gdouble                 y_handle)
+{
+        gdouble scale_x, scale_y;
+
+
+        gl_debug (DEBUG_VIEW, "START");
+
+        cairo_save (cr);
+
+        cairo_translate (cr, x_handle, y_handle);
+
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        cairo_scale (cr, scale_x, scale_y);
+
+        cairo_rectangle (cr,
+                         -HANDLE_PIXELS/2.0, -HANDLE_PIXELS/2.0,
+                         HANDLE_PIXELS, HANDLE_PIXELS);
+
+        cairo_set_source_rgba (cr, HANDLE_FILL_RGBA_ARGS);
+        cairo_fill_preserve (cr);
+                               
+        cairo_set_line_width (cr, HANDLE_OUTLINE_WIDTH_PIXELS);
+        cairo_set_source_rgba (cr, HANDLE_OUTLINE_RGBA_ARGS);
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
+
+        gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Create handle path                                                       */
+/*--------------------------------------------------------------------------*/
+static void
+create_handle_path (cairo_t                *cr,
+                    glLabelObject          *object,
+                    gdouble                 x_handle,
+                    gdouble                 y_handle)
+{
+        gdouble scale_x, scale_y;
+
+
+        gl_debug (DEBUG_VIEW, "START");
+
+        cairo_save (cr);
+
+        cairo_translate (cr, x_handle, y_handle);
+
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        cairo_scale (cr, scale_x, scale_y);
+
+        cairo_rectangle (cr,
+                         -HANDLE_PIXELS/2.0, -HANDLE_PIXELS/2.0,
+                         HANDLE_PIXELS, HANDLE_PIXELS);
+
+        cairo_restore (cr);
+
+        gl_debug (DEBUG_VIEW, "END");
+}
+
+
+/*****************************************************************************/
+/* Draw box style handles.                                                   */
+/*****************************************************************************/
+void
+gl_label_object_draw_handles_box (glLabelObject     *object,
+                                  cairo_t           *cr)
+{
+        gdouble w, h;
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        /* North */
+        draw_handle (cr, object, w/2, 0);
+
+        /* North East */
+        draw_handle (cr, object, w, 0);
+
+        /* East */
+        draw_handle (cr, object, w, h/2);
+
+        /* South East */
+        draw_handle (cr, object, w, h);
+
+        /* South */
+        draw_handle (cr, object, w/2, h);
+
+        /* South West */
+        draw_handle (cr, object, 0, h);
+
+        /* West */
+        draw_handle (cr, object, 0, h/2);
+
+        /* North West */
+        draw_handle (cr, object, 0, 0);
+}
+
+
+/*****************************************************************************/
+/* Draw line style handles.                                                  */
+/*****************************************************************************/
+void
+gl_label_object_draw_handles_line (glLabelObject     *object,
+                                   cairo_t           *cr)
+{
+        gdouble w, h;
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        /* P2 */
+        draw_handle (cr, object, w, h);
+
+        /* P1 */
+        draw_handle (cr, object, 0, 0);
+}
+
+
+/*****************************************************************************/
+/* Get handle at given coordinates, if any.                                  */
+/*****************************************************************************/
+glLabelObjectHandle
+gl_label_object_handle_at (glLabelObject     *object,
+                           cairo_t           *cr,
+                           gdouble            x_pixels,
+                           gdouble            y_pixels)
+{
+        glLabelObjectHandle handle = GL_LABEL_OBJECT_HANDLE_NONE;
+        gdouble             x0, y0;
+        cairo_matrix_t      matrix;
+        gdouble             x, y;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_val_if_fail (object && GL_IS_LABEL_OBJECT (object), handle);
+
+        if ( GL_LABEL_OBJECT_GET_CLASS(object)->draw_object != NULL )
+        {
+
+                gl_label_object_get_position (object, &x0, &y0);
+                gl_label_object_get_matrix (object, &matrix);
+
+                cairo_save (cr);
+
+                cairo_translate (cr, x0, y0);
+                cairo_transform (cr, &matrix);
+
+                x = x_pixels;
+                y = y_pixels;
+                cairo_device_to_user (cr, &x, &y);
+
+                handle = GL_LABEL_OBJECT_GET_CLASS(object)->handle_at (object, cr, x, y);
+
+                cairo_restore (cr);
+        }
+
+	gl_debug (DEBUG_LABEL, "END");
+
+        return handle;
+}
+
+
+/*****************************************************************************/
+/* Get handle at given coordinates for box style handles, if any.            */
+/*****************************************************************************/
+glLabelObjectHandle
+gl_label_object_box_handle_at (glLabelObject     *object,
+                               cairo_t           *cr,
+                               gdouble            x,
+                               gdouble            y)
+{
+        gdouble w, h;
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        /* South East */
+        create_handle_path (cr, object, w, h);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_SE;
+        }
+        
+        /* South West */
+        create_handle_path (cr, object, 0, h);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_SW;
+        }
+
+        /* North East */
+        create_handle_path (cr, object, w, 0);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_NE;
+        }
+
+        /* North West */
+        create_handle_path (cr, object, 0, 0);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_NW;
+        }
+
+        /* East */
+        create_handle_path (cr, object, w, h/2);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_E;
+        }
+
+        /* South */
+        create_handle_path (cr, object, w/2, h);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_S;
+        }
+
+        /* West */
+        create_handle_path (cr, object, 0, h/2);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_W;
+        }
+
+        /* North */
+        create_handle_path (cr, object, w/2, 0);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_N;
+        }
+
+        return GL_LABEL_OBJECT_HANDLE_NONE;
+}
+
+
+/*****************************************************************************/
+/* Get handle at given coordinates for line style handles, if any.           */
+/*****************************************************************************/
+glLabelObjectHandle
+gl_label_object_line_handle_at (glLabelObject     *object,
+                                cairo_t           *cr,
+                                gdouble            x,
+                                gdouble            y)
+{
+        gdouble w, h;
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        /* P2 */
+        create_handle_path (cr, object, w, h);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_P2;
+        }
+        
+        /* P1 */
+        create_handle_path (cr, object, 0, h);
+        if (cairo_in_fill (cr, x, y))
+        {
+                return GL_LABEL_OBJECT_HANDLE_P1;
+        }
+
+        return GL_LABEL_OBJECT_HANDLE_NONE;
 }
 
 

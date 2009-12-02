@@ -50,10 +50,11 @@ struct _glWindow {
 
 	GtkUIManager            *ui;
 
-	GtkWidget               *view;
-
 	GtkWidget               *hbox;
 
+	glLabel                 *label;
+
+	GtkWidget               *view;
 	glUIPropertyBar         *property_bar;
 	glUISidebar             *sidebar;
 

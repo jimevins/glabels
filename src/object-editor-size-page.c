@@ -65,8 +65,7 @@ static void h_spin_cb                           (glObjectEditor        *editor);
 /* PRIVATE.  Prepare size page.                                             */
 /*--------------------------------------------------------------------------*/
 void
-gl_object_editor_prepare_size_page (glObjectEditor       *editor,
-				    glObjectEditorOption  option)
+gl_object_editor_prepare_size_page (glObjectEditor       *editor)
 {
         lglUnits      units;
 	const gchar  *units_string;
@@ -111,11 +110,6 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 					climb_rate, 10.0*climb_rate);
 	gtk_label_set_text (GTK_LABEL(editor->priv->size_h_units_label), units_string);
 
-	/* Un-hide */
-	gtk_widget_show_all (editor->priv->size_page_vbox);
-	if (option != GL_OBJECT_EDITOR_SIZE_IMAGE_PAGE) {
-		gtk_widget_hide (editor->priv->size_reset_image_button);
-	}
 
 	/* Connect signals */
 	g_signal_connect_swapped (G_OBJECT (editor->priv->size_aspect_checkbutton),
@@ -130,13 +124,10 @@ gl_object_editor_prepare_size_page (glObjectEditor       *editor,
 				  "changed",
 				  G_CALLBACK (h_spin_cb),
 				  G_OBJECT (editor));
-
-	if (option == GL_OBJECT_EDITOR_SIZE_IMAGE_PAGE) {
-		g_signal_connect_swapped (G_OBJECT (editor->priv->size_reset_image_button),
-					  "clicked",
-					  G_CALLBACK (size_reset_cb),
-					  G_OBJECT (editor));
-	}
+        g_signal_connect_swapped (G_OBJECT (editor->priv->size_reset_image_button),
+                                  "clicked",
+                                  G_CALLBACK (size_reset_cb),
+                                  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -197,9 +188,7 @@ w_spin_cb (glObjectEditor *editor)
                 editor->priv->stop_signals = FALSE;
         }
                                                                                 
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
+        gl_object_editor_size_changed_cb (editor);
                                                                                 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -232,9 +221,7 @@ h_spin_cb (glObjectEditor *editor)
                 editor->priv->stop_signals = FALSE;
         }
                                                                                 
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
+        gl_object_editor_size_changed_cb (editor);
                                                                                 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -285,11 +272,9 @@ size_reset_cb (glObjectEditor *editor)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->size_h_spin),
 				   h_base);
 
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[SIZE_CHANGED], 0);
-
         editor->priv->stop_signals = FALSE;
+
+        gl_object_editor_size_changed_cb (editor);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }

@@ -23,7 +23,7 @@
 
 #include <gtk/gtk.h>
 
-#include "view.h"
+#include "label.h"
 
 G_BEGIN_DECLS
 
@@ -57,8 +57,8 @@ GType        gl_ui_property_bar_get_type          (void) G_GNUC_CONST;
 
 GtkWidget   *gl_ui_property_bar_new               (void);
 
-void         gl_ui_property_bar_set_view          (glUIPropertyBar *this,
-						   glView          *view);
+void         gl_ui_property_bar_set_label         (glUIPropertyBar *this,
+						   glLabel         *label);
 
 
 G_END_DECLS

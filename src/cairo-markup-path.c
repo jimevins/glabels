@@ -107,11 +107,13 @@ gl_cairo_markup_margin_path (cairo_t                *cr,
                              const lglTemplateMarkup *markup,
                              glLabel                *label)
 {
+	const lglTemplate      *template;
 	const lglTemplateFrame *frame;
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         switch (frame->shape) {
 
@@ -144,12 +146,14 @@ gl_cairo_markup_margin_rect_path (cairo_t                 *cr,
                                   const lglTemplateMarkup *markup,
                                   glLabel                 *label)
 {
+        const lglTemplate      *template;
         const lglTemplateFrame *frame;
         gdouble                 w, h, r, m;
 
         gl_debug (DEBUG_PATH, "START");
 
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         m = markup->margin.size;
 
@@ -184,12 +188,14 @@ gl_cairo_markup_margin_round_path (cairo_t                 *cr,
                                    const lglTemplateMarkup *markup,
                                    glLabel                 *label)
 {
+	const lglTemplate      *template;
 	const lglTemplateFrame *frame;
 	gdouble                 r, m;
 
 	gl_debug (DEBUG_PATH, "START");
 
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
 
 	r = frame->round.r;
 	m = markup->margin.size;
@@ -209,6 +215,7 @@ gl_cairo_markup_margin_cd_path (cairo_t                 *cr,
                                 const lglTemplateMarkup *markup,
                                 glLabel                 *label)
 {
+	const lglTemplate      *template;
 	const lglTemplateFrame *frame;
 	gdouble                 m, r1, r2;
 	gdouble                 theta1, theta2;
@@ -217,7 +224,8 @@ gl_cairo_markup_margin_cd_path (cairo_t                 *cr,
 
 	gl_debug (DEBUG_PATH, "START");
 
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
 
         lgl_template_frame_get_size (frame, &w, &h);
         xc = w/2.0;

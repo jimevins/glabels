@@ -100,11 +100,11 @@ gl_object_editor_prepare_lsize_page (glObjectEditor       *editor)
 	/* Connect signals */
 	g_signal_connect_swapped (G_OBJECT (editor->priv->lsize_r_spin),
 				  "changed",
-				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_CALLBACK (gl_object_editor_size_changed_cb),
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->lsize_theta_spin),
 				  "changed",
-				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_CALLBACK (gl_object_editor_size_changed_cb),
 				  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");

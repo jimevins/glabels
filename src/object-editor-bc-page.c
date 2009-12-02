@@ -205,8 +205,7 @@ style_changed_cb (glObjectEditor       *editor)
 						  !editor->priv->data_format_fixed_flag);
 		}
  
-                /* Emit our "changed" signal */
-                g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+                gl_object_editor_changed_cb (editor);
         }
                                                                                 
         g_free (style_string);
@@ -411,16 +410,13 @@ bc_radio_toggled_cb (glObjectEditor *editor)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_color_radio))) {
                 gtk_widget_set_sensitive (editor->priv->bc_color_combo, TRUE);
                 gtk_widget_set_sensitive (editor->priv->bc_key_combo, FALSE);
-    } else {
+        } else {
                 gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
                 gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
 		
 	}
  
-    /* Emit our "changed" signal */
-    g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
- 
-    gl_debug (DEBUG_EDITOR, "END");
+        gl_object_editor_changed_cb (editor);
 }
 
 

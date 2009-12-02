@@ -42,15 +42,15 @@
 /*===========================================*/
 
 static void gl_cairo_rect_label_path             (cairo_t                *cr,
-                                                  lglTemplate            *template,
+                                                  const lglTemplate      *template,
                                                   gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 static void gl_cairo_round_label_path            (cairo_t                *cr,
-                                                  lglTemplate            *template,
+                                                  const lglTemplate      *template,
                                                   gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 static void gl_cairo_cd_label_path               (cairo_t                *cr,
-                                                  lglTemplate            *template,
+                                                  const lglTemplate      *template,
                                                   gboolean                rotate_flag,
                                                   gboolean                waste_flag);
 
@@ -60,7 +60,7 @@ static void gl_cairo_cd_label_path               (cairo_t                *cr,
 /*--------------------------------------------------------------------------*/
 void
 gl_cairo_label_path (cairo_t           *cr,
-                     lglTemplate       *template,
+                     const lglTemplate *template,
                      gboolean           rotate_flag,
                      gboolean           waste_flag)
 {
@@ -98,7 +98,7 @@ gl_cairo_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_rect_label_path (cairo_t           *cr,
-                          lglTemplate       *template,
+                          const lglTemplate *template,
                           gboolean           rotate_flag,
                           gboolean           waste_flag)
 {
@@ -157,7 +157,7 @@ gl_cairo_rect_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_round_label_path (cairo_t           *cr,
-                           lglTemplate       *template,
+                           const lglTemplate *template,
                            gboolean           rotate_flag,
                            gboolean           waste_flag)
 {
@@ -200,7 +200,7 @@ gl_cairo_round_label_path (cairo_t           *cr,
 /*--------------------------------------------------------------------------*/
 static void
 gl_cairo_cd_label_path (cairo_t           *cr,
-                        lglTemplate       *template,
+                        const lglTemplate *template,
                         gboolean           rotate_flag,
                         gboolean           waste_flag)
 {

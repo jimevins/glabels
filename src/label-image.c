@@ -59,6 +59,9 @@ static void gl_label_image_finalize      (GObject           *object);
 static void copy                         (glLabelObject     *dst_object,
 					  glLabelObject     *src_object);
 
+static void copy_to_clipboard            (glLabelObject     *object,
+                                          GtkClipboard      *clipboard);
+
 static void set_size                     (glLabelObject     *object,
                                           gdouble            w,
                                           gdouble            h);
@@ -67,6 +70,11 @@ static void draw_object                  (glLabelObject     *object,
                                           cairo_t           *cr,
                                           gboolean           screen_flag,
                                           glMergeRecord     *record);
+
+static gboolean object_at                (glLabelObject     *object,
+                                          cairo_t           *cr,
+                                          gdouble            x_pixels,
+                                          gdouble            y_pixels);
 
 
 /*****************************************************************************/
@@ -83,10 +91,12 @@ gl_label_image_class_init (glLabelImageClass *class)
 
 	gl_label_image_parent_class = g_type_class_peek_parent (class);
 
-	label_object_class->copy           = copy;
-	label_object_class->set_size       = set_size;
-        label_object_class->draw_object    = draw_object;
-        label_object_class->draw_shadow    = NULL;
+	label_object_class->copy              = copy;
+	label_object_class->copy_to_clipboard = copy_to_clipboard;
+	label_object_class->set_size          = set_size;
+        label_object_class->draw_object       = draw_object;
+        label_object_class->draw_shadow       = NULL;
+        label_object_class->object_at         = object_at;
 
 	object_class->finalize = gl_label_image_finalize;
 }
@@ -180,6 +190,30 @@ copy (glLabelObject *dst_object,
 
 	gl_label_image_set_filename (new_limage, filename);
 	gl_text_node_free (&filename);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Private.  Copy pixbuf to clipboard.                                       */
+/*---------------------------------------------------------------------------*/
+static void
+copy_to_clipboard (glLabelObject     *object,
+                   GtkClipboard      *clipboard)
+{
+        glLabelImage *limage;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
+
+        limage = GL_LABEL_IMAGE (object);
+
+        if ( limage->priv->pixbuf != NULL )
+        {
+                gtk_clipboard_set_image (clipboard, limage->priv->pixbuf);
+        }
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -357,6 +391,30 @@ draw_object (glLabelObject *object,
 	cairo_restore (cr);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is object at coordinates?                                                 */
+/*****************************************************************************/
+static gboolean
+object_at (glLabelObject *object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+        gdouble           w, h;
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 

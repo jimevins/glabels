@@ -130,8 +130,7 @@ data_radio_toggled_cb (glObjectEditor *editor)
 					  !editor->priv->data_format_fixed_flag);
 	}
  
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        gl_object_editor_changed_cb (editor);
  
         gl_debug (DEBUG_WDGT, "END");
 }

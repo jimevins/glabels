@@ -1151,10 +1151,11 @@ static xmlDocPtr
 xml_label_to_doc (glLabel          *label,
 		  glXMLLabelStatus *status)
 {
-        lglUnits    units;
-	xmlDocPtr   doc;
-	xmlNsPtr    ns;
-	glMerge    *merge;
+        lglUnits           units;
+	xmlDocPtr          doc;
+	xmlNsPtr           ns;
+        const lglTemplate *template;
+	glMerge           *merge;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1169,7 +1170,8 @@ xml_label_to_doc (glLabel          *label,
 	ns = xmlNewNs (doc->xmlRootNode, (xmlChar *)LGL_XML_NAME_SPACE, NULL);
 	xmlSetNs (doc->xmlRootNode, ns);
 
-	lgl_xml_template_create_template_node (label->template, doc->xmlRootNode, ns);
+        template = gl_label_get_template (label);
+	lgl_xml_template_create_template_node (template, doc->xmlRootNode, ns);
 
 	xml_create_objects (doc->xmlRootNode, ns, label);
 
@@ -1198,16 +1200,21 @@ xml_create_objects (xmlNodePtr  root,
 		    glLabel    *label)
 {
 	xmlNodePtr     node;
+        gboolean       rotate_flag;
+        const GList   *object_list;
 	GList         *p;
 	glLabelObject *object;
 
 	gl_debug (DEBUG_XML, "START");
 
+        rotate_flag = gl_label_get_rotate_flag (label);
+        object_list = gl_label_get_object_list (label);
+
 	node = xmlNewChild (root, ns, (xmlChar *)"Objects", NULL);
 	lgl_xml_set_prop_string (node, "id", "0");
-	lgl_xml_set_prop_boolean (node, "rotate", label->rotate_flag);
+	lgl_xml_set_prop_boolean (node, "rotate", rotate_flag);
 
-	for (p = label->objects; p != NULL; p = p->next) {
+	for (p = (GList *)object_list; p != NULL; p = p->next) {
 
 		object = GL_LABEL_OBJECT(p->data);
 

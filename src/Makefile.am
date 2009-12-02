@@ -79,8 +79,6 @@ glabels_SOURCES = 			\
 	hig.h				\
 	view.c				\
 	view.h				\
-	view-object.c			\
-	view-object.h			\
 	view-box.c			\
 	view-box.h			\
 	view-ellipse.c			\

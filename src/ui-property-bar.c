@@ -47,7 +47,7 @@
 
 struct _glUIPropertyBarPrivate {
 
-	glView     *view;
+	glLabel    *label;
 
 	GtkBuilder *builder;
 
@@ -94,7 +94,8 @@ static void     gl_ui_property_bar_finalize      (GObject              *object);
 
 static void     gl_ui_property_bar_construct     (glUIPropertyBar      *this);
 
-static void     selection_changed_cb             (glUIPropertyBar      *this);
+static void     selection_changed_cb             (glUIPropertyBar      *this,
+                                                  glLabel              *label);
 
 static void     font_family_changed_cb           (GtkComboBox          *combo,
 						  glUIPropertyBar      *this);
@@ -187,9 +188,9 @@ gl_ui_property_bar_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_PROPERTY_BAR (object));
 
-	if (this->priv->view)
+	if (this->priv->label)
         {
-		g_object_unref (G_OBJECT(this->priv->view));
+		g_object_unref (G_OBJECT(this->priv->label));
 	}
         if (this->priv->builder)
         {
@@ -387,67 +388,65 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 /* Fill widgets with default values.                                        */
 /****************************************************************************/
 static void
-reset_to_default_properties (glView          *view,
+reset_to_default_properties (glLabel         *label,
 			     glUIPropertyBar *this)
 {
+        gchar *family;
 
-	gl_font_combo_set_family (GL_FONT_COMBO (this->priv->font_family_combo),
-                                  view->default_font_family);
+        family = gl_label_get_default_font_family (label);
+	gl_font_combo_set_family (GL_FONT_COMBO (this->priv->font_family_combo), family);
+        g_free (family);
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->font_size_spin),
-				   view->default_font_size);
+				   gl_label_get_default_font_size (label));
 
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_bold_toggle),
-					   (view->default_font_weight == PANGO_WEIGHT_BOLD));
+					   (gl_label_get_default_font_weight (label) == PANGO_WEIGHT_BOLD));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->font_italic_toggle),
-					   view->default_font_italic_flag);
+					   gl_label_get_default_font_italic_flag (label));
 
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio),
-					   (view->default_text_alignment == PANGO_ALIGN_LEFT));
+					   (gl_label_get_default_text_alignment (label) == PANGO_ALIGN_LEFT));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio),
-					   (view->default_text_alignment == PANGO_ALIGN_CENTER));
+					   (gl_label_get_default_text_alignment (label) == PANGO_ALIGN_CENTER));
 	gtk_toggle_tool_button_set_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio),
-					   (view->default_text_alignment == PANGO_ALIGN_RIGHT));
+					   (gl_label_get_default_text_alignment (label) == PANGO_ALIGN_RIGHT));
 
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON(this->priv->text_color_button),
-                                         view->default_text_color);
+                                         gl_label_get_default_text_color (label));
 
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON(this->priv->fill_color_button),
-                                         view->default_fill_color);
+                                         gl_label_get_default_fill_color (label));
 
 	gl_color_combo_button_set_color (GL_COLOR_COMBO_BUTTON(this->priv->line_color_button),
-                                         view->default_line_color);
+                                         gl_label_get_default_line_color (label));
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON(this->priv->line_width_spin),
-				   view->default_line_width);
+				   gl_label_get_default_line_width (label));
 }
 
 
 /****************************************************************************/
-/* Set view associated with property_bar.                                   */
+/* Set label associated with property_bar.                                  */
 /****************************************************************************/
 void
-gl_ui_property_bar_set_view (glUIPropertyBar *this,
-			     glView          *view)
+gl_ui_property_bar_set_label (glUIPropertyBar *this,
+                              glLabel         *label)
 {
-	glLabel   *label;
-
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	label = view->label;
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
 	set_doc_items_sensitive (this, TRUE);
 
-	this->priv->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
+	this->priv->label = GL_LABEL (g_object_ref (G_OBJECT (label)));
 
-	reset_to_default_properties (view, this);
+	reset_to_default_properties (label, this);
 
-	g_signal_connect_swapped (G_OBJECT(view), "selection_changed",
+	g_signal_connect_swapped (G_OBJECT(label), "selection_changed",
 				  G_CALLBACK(selection_changed_cb), this);
 
-	g_signal_connect_swapped (G_OBJECT(view->label), "changed",
+	g_signal_connect_swapped (G_OBJECT(label), "changed",
 				  G_CALLBACK(selection_changed_cb), this);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
@@ -455,16 +454,17 @@ gl_ui_property_bar_set_view (glUIPropertyBar *this,
 
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "selection state changed" callback.                        */
+/* PRIVATE.  Label "selection state changed" callback.                       */
 /*---------------------------------------------------------------------------*/
 static void
-update_text_properties (glView *view,
+update_text_properties (glLabel         *label,
 			glUIPropertyBar *this)
 {
 	gboolean        can_text, is_first_object;
 	gboolean        is_same_font_family, is_same_font_size;
 	gboolean        is_same_text_color, is_same_is_italic;
 	gboolean        is_same_is_bold, is_same_align;
+	GList          *selection_list;
 	GList          *p;
 	glLabelObject  *object;
 	gchar          *selection_font_family, *font_family;
@@ -475,7 +475,7 @@ update_text_properties (glView *view,
 	gboolean        selection_is_bold, is_bold;
 	PangoAlignment  selection_align, align;
 
-	can_text = gl_view_can_selection_text (view);
+	can_text = gl_label_can_selection_text (label);
 	set_text_items_sensitive (this, can_text);
 
 	if (!can_text) 
@@ -496,10 +496,11 @@ update_text_properties (glView *view,
         
 	is_first_object = TRUE;
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next)
+        selection_list = gl_label_get_selection_list (label);
+	for (p = selection_list; p != NULL; p = p->next)
         {
 
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		object = GL_LABEL_OBJECT (p->data);
 		if (!gl_label_object_can_text (object)) 
 			continue;
 
@@ -563,6 +564,8 @@ update_text_properties (glView *view,
 		is_first_object = FALSE;
 	}
 
+        g_list_free (selection_list);
+
 	if (is_same_font_family && (selection_font_family != NULL)) 
 		gl_debug (DEBUG_PROPERTY_BAR, "same font family = %s", 
 			  selection_font_family);
@@ -620,17 +623,18 @@ update_text_properties (glView *view,
 
 
 static void
-update_fill_color (glView *view,
+update_fill_color (glLabel         *label,
 		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_fill_color;
+        GList *selection_list;
 	GList *p;
 	glLabelObject *object;
 	guint selection_fill_color, fill_color;
 	glColorNode *fill_color_node;
 
-	can = gl_view_can_selection_fill (view);
+	can = gl_label_can_selection_fill (label);
 	set_fill_items_sensitive (this, can);
 
 	if (!can) 
@@ -639,11 +643,13 @@ update_fill_color (glView *view,
 	is_same_fill_color = TRUE;
 	is_first_object = TRUE;
         selection_fill_color = 0;
+
+        selection_list = gl_label_get_selection_list (label);
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next)
+	for (p = selection_list; p != NULL; p = p->next)
         {
 
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		object = GL_LABEL_OBJECT (p->data);
 		if (!gl_label_object_can_fill (object)) 
 			continue;
 
@@ -674,6 +680,8 @@ update_fill_color (glView *view,
 		is_first_object = FALSE;
 	}
 
+        g_list_free (selection_list);
+
 	if (is_same_fill_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same fill color = %08x", selection_fill_color);
@@ -684,17 +692,18 @@ update_fill_color (glView *view,
 
 
 static void
-update_line_color (glView *view,
+update_line_color (glLabel         *label,
 		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_line_color;
+        GList *selection_list;
 	GList *p;
 	glLabelObject *object;
 	guint selection_line_color, line_color;
 	glColorNode *line_color_node;
 
-	can = gl_view_can_selection_line_color (view);
+	can = gl_label_can_selection_line_color (label);
 	set_line_color_items_sensitive (this, can);
 
 	if (!can) 
@@ -703,11 +712,13 @@ update_line_color (glView *view,
 	is_same_line_color = TRUE;
 	is_first_object = TRUE;
         selection_line_color = 0;
+
+        selection_list = gl_label_get_selection_list (label);
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next)
+	for (p = selection_list; p != NULL; p = p->next)
         {
 
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		object = GL_LABEL_OBJECT (p->data);
 		if (!gl_label_object_can_line_color (object)) 
 			continue;
 
@@ -738,6 +749,8 @@ update_line_color (glView *view,
 		is_first_object = FALSE;
 	}
 
+        g_list_free (selection_list);
+
 	if (is_same_line_color)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line color = %08x", selection_line_color);
@@ -748,16 +761,17 @@ update_line_color (glView *view,
 
 
 static void
-update_line_width (glView *view,
+update_line_width (glLabel         *label,
 		   glUIPropertyBar *this)
 {
 	gboolean can, is_first_object;
 	gboolean is_same_line_width;
+	GList *selection_list;
 	GList *p;
 	glLabelObject *object;
 	gdouble selection_line_width, line_width;
 
-	can = gl_view_can_selection_line_width (view);
+	can = gl_label_can_selection_line_width (label);
 	set_line_width_items_sensitive (this, can);
 
 	if (!can) 
@@ -766,11 +780,13 @@ update_line_width (glView *view,
 	is_same_line_width = TRUE;
 	is_first_object = TRUE;
         selection_line_width = 0;
+
+        selection_list = gl_label_get_selection_list (label);
 	
-	for (p = view->selected_object_list; p != NULL; p = p->next)
+	for (p = selection_list; p != NULL; p = p->next)
         {
 
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
+		object = GL_LABEL_OBJECT (p->data);
 		if (!gl_label_object_can_line_width (object)) 
 			continue;
 
@@ -790,6 +806,8 @@ update_line_width (glView *view,
 		is_first_object = FALSE;
 	}
 
+        g_list_free (selection_list);
+
 	if (is_same_line_width)
         {
 		gl_debug (DEBUG_PROPERTY_BAR, "same line width = %g", selection_line_width);
@@ -804,11 +822,10 @@ update_line_width (glView *view,
 
 
 static void 
-selection_changed_cb (glUIPropertyBar *this)
+selection_changed_cb (glUIPropertyBar *this,
+                      glLabel         *label)
 {
-	glView *view = this->priv->view;
-	
-	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (this && GL_IS_UI_PROPERTY_BAR (this));
 
 	if (this->priv->stop_signals) return;
@@ -816,18 +833,18 @@ selection_changed_cb (glUIPropertyBar *this)
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	if (gl_view_is_selection_empty (view))
+	if (gl_label_is_selection_empty (label))
         {
 		/* No selection: make all controls active. */
-		reset_to_default_properties (view, this);
+		reset_to_default_properties (label, this);
 		set_doc_items_sensitive (this, TRUE);
 	}
         else
         {
-		update_text_properties (view, this);
-		update_fill_color (view, this);
-		update_line_color (view, this);
-		update_line_width (view, this);
+		update_text_properties (label, this);
+		update_fill_color (label, this);
+		update_line_color (label, this);
+		update_line_width (label, this);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
@@ -853,10 +870,10 @@ font_family_changed_cb (GtkComboBox     *combo,
 	font_family = gl_font_combo_get_family (GL_FONT_COMBO (combo));
 	if ( strlen(font_family) )
         {
-		gl_view_set_selection_font_family (this->priv->view,
-						   font_family);
-		gl_view_set_default_font_family   (this->priv->view,
-						   font_family);
+		gl_label_set_selection_font_family (this->priv->label,
+                                                    font_family);
+		gl_label_set_default_font_family   (this->priv->label,
+                                                    font_family);
 	}
 	g_free (font_family);
 
@@ -882,10 +899,10 @@ font_size_changed_cb (GtkSpinButton        *spin,
 
 	font_size = gtk_spin_button_get_value (spin);
 
-	gl_view_set_selection_font_size (this->priv->view,
-					 font_size);
-	gl_view_set_default_font_size   (this->priv->view,
-					 font_size);
+	gl_label_set_selection_font_size (this->priv->label,
+					  font_size);
+	gl_label_set_default_font_size   (this->priv->label,
+                                          font_size);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
@@ -920,17 +937,17 @@ text_color_changed_cb (glColorComboButton   *cc,
 	if (is_default)
         {
 		text_color_node->color = gl_prefs_model_get_default_text_color (gl_prefs);
-		gl_view_set_selection_text_color (this->priv->view,
-						  text_color_node);
-		gl_view_set_default_text_color   (this->priv->view,
-						  text_color_node->color);
+		gl_label_set_selection_text_color (this->priv->label,
+                                                   text_color_node);
+		gl_label_set_default_text_color   (this->priv->label,
+						   text_color_node->color);
 	}
         else
         {
-		gl_view_set_selection_text_color (this->priv->view,
-						  text_color_node);
-		gl_view_set_default_text_color   (this->priv->view,
-						  text_color_node->color);
+		gl_label_set_selection_text_color (this->priv->label,
+                                                   text_color_node);
+		gl_label_set_default_text_color   (this->priv->label,
+						   text_color_node->color);
 	}
 
 	gl_color_node_free (&text_color_node);
@@ -970,17 +987,17 @@ fill_color_changed_cb (glColorComboButton   *cc,
         {
 
 		fill_color_node->color = GL_COLOR_NONE;
-		gl_view_set_selection_fill_color (this->priv->view,
-						  fill_color_node);
-		gl_view_set_default_fill_color   (this->priv->view,
-						  fill_color_node->color);
+		gl_label_set_selection_fill_color (this->priv->label,
+                                                   fill_color_node);
+		gl_label_set_default_fill_color   (this->priv->label,
+                                                   fill_color_node->color);
 	}
         else
         {
-		gl_view_set_selection_fill_color (this->priv->view,
-						  fill_color_node);
-		gl_view_set_default_fill_color   (this->priv->view,
-						  fill_color_node->color);
+		gl_label_set_selection_fill_color (this->priv->label,
+                                                   fill_color_node);
+		gl_label_set_default_fill_color   (this->priv->label,
+                                                   fill_color_node->color);
 	}
 	gl_color_node_free (&fill_color_node);
 	
@@ -1017,17 +1034,17 @@ line_color_changed_cb (glColorComboButton   *cc,
 	if (is_default)
         {
 		line_color_node->color = GL_COLOR_NONE;
-		gl_view_set_selection_line_color (this->priv->view,
-						  line_color_node);
-		gl_view_set_default_line_color   (this->priv->view,
-						  line_color_node->color);
+		gl_label_set_selection_line_color (this->priv->label,
+                                                   line_color_node);
+		gl_label_set_default_line_color   (this->priv->label,
+                                                   line_color_node->color);
 	}
         else
         {
-		gl_view_set_selection_line_color (this->priv->view,
-						  line_color_node);
-		gl_view_set_default_line_color   (this->priv->view,
-						  line_color_node->color);
+		gl_label_set_selection_line_color (this->priv->label,
+                                                   line_color_node);
+		gl_label_set_default_line_color   (this->priv->label,
+                                                   line_color_node->color);
 	}
 	gl_color_node_free (&line_color_node);
 
@@ -1051,14 +1068,14 @@ line_width_changed_cb (GtkSpinButton        *spin,
 
 	gl_debug (DEBUG_PROPERTY_BAR, "START");
 
-	if (this->priv->view)
+	if (this->priv->label)
         {
 		line_width = gtk_spin_button_get_value (spin);
 
-		gl_view_set_selection_line_width (this->priv->view,
-						  line_width);
-		gl_view_set_default_line_width   (this->priv->view,
-						  line_width);
+		gl_label_set_selection_line_width (this->priv->label,
+                                                   line_width);
+		gl_label_set_default_line_width   (this->priv->label,
+                                                   line_width);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
@@ -1087,8 +1104,8 @@ font_bold_toggled_cb (GtkToggleToolButton  *toggle,
 
 	weight = state ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL;
 
-	gl_view_set_selection_font_weight (this->priv->view, weight);
-	gl_view_set_default_font_weight   (this->priv->view, weight);
+	gl_label_set_selection_font_weight (this->priv->label, weight);
+	gl_label_set_default_font_weight   (this->priv->label, weight);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
@@ -1112,14 +1129,14 @@ font_italic_toggled_cb (GtkToggleToolButton  *toggle,
 
 	state = gtk_toggle_tool_button_get_active (toggle);
 
-	gl_view_set_selection_font_italic_flag (this->priv->view, state);
-	gl_view_set_default_font_italic_flag   (this->priv->view, state);
+	gl_label_set_selection_font_italic_flag (this->priv->label, state);
+	gl_label_set_default_font_italic_flag   (this->priv->label, state);
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");
 
 	this->priv->stop_signals = FALSE;
 }
-						  
+
 
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Text align toggled callback.                                    */
@@ -1135,26 +1152,26 @@ text_align_toggled_cb (GtkToggleToolButton  *toggle,
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_left_radio)))
 	{		
-		gl_view_set_selection_text_alignment (this->priv->view,
-						      PANGO_ALIGN_LEFT);
-		gl_view_set_default_text_alignment   (this->priv->view,
-						      PANGO_ALIGN_LEFT);
+		gl_label_set_selection_text_alignment (this->priv->label,
+                                                       PANGO_ALIGN_LEFT);
+		gl_label_set_default_text_alignment   (this->priv->label,
+                                                       PANGO_ALIGN_LEFT);
 	}
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_center_radio)))
 	{		
-		gl_view_set_selection_text_alignment (this->priv->view,
-						      PANGO_ALIGN_CENTER);
-		gl_view_set_default_text_alignment   (this->priv->view,
-						      PANGO_ALIGN_CENTER);
+		gl_label_set_selection_text_alignment (this->priv->label,
+                                                       PANGO_ALIGN_CENTER);
+		gl_label_set_default_text_alignment   (this->priv->label,
+                                                       PANGO_ALIGN_CENTER);
 	}
 
 	if (gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (this->priv->text_align_right_radio)))
 	{
-		gl_view_set_selection_text_alignment (this->priv->view,
-						      PANGO_ALIGN_RIGHT);
-		gl_view_set_default_text_alignment   (this->priv->view,
-						      PANGO_ALIGN_RIGHT);
+		gl_label_set_selection_text_alignment (this->priv->label,
+                                                       PANGO_ALIGN_RIGHT);
+		gl_label_set_default_text_alignment   (this->priv->label,
+                                                       PANGO_ALIGN_RIGHT);
 	}
 
 	gl_debug (DEBUG_PROPERTY_BAR, "END");

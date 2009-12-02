@@ -73,10 +73,15 @@ static void  set_line_color                 (glLabelObject       *object,
 
 static glColorNode *get_line_color          (glLabelObject       *object);
 
-static void    draw_object                (glLabelObject     *object,
-                                           cairo_t           *cr,
-                                           gboolean           screen_flag,
-                                           glMergeRecord     *record);
+static void     draw_object                 (glLabelObject       *object,
+                                             cairo_t             *cr,
+                                             gboolean             screen_flag,
+                                             glMergeRecord       *record);
+
+static gboolean object_at                   (glLabelObject       *object,
+                                             cairo_t             *cr,
+                                             gdouble              x_pixels,
+                                             gdouble              y_pixels);
 
 
 /*****************************************************************************/
@@ -99,6 +104,7 @@ gl_label_barcode_class_init (glLabelBarcodeClass *class)
 	label_object_class->get_line_color = get_line_color;
         label_object_class->draw_object    = draw_object;
         label_object_class->draw_shadow    = NULL;
+        label_object_class->object_at      = object_at;
 
 	object_class->finalize = gl_label_barcode_finalize;
 }
@@ -108,7 +114,6 @@ static void
 gl_label_barcode_init (glLabelBarcode *lbc)
 {
 	lbc->priv = g_new0 (glLabelBarcodePrivate, 1);
-	lbc->priv->color_node = gl_color_node_new_default ();
 	lbc->priv->text_node  = gl_text_node_new_from_text ("");
 }
 
@@ -135,11 +140,21 @@ gl_label_barcode_finalize (GObject *object)
 GObject *
 gl_label_barcode_new (glLabel *label)
 {
-	glLabelBarcode *lbc;
+	glLabelBarcode      *lbc;
+	glColorNode         *line_color_node;
 
 	lbc = g_object_new (gl_label_barcode_get_type(), NULL);
 
-	gl_label_object_set_parent (GL_LABEL_OBJECT(lbc), label);
+        if (label != NULL)
+        {
+                gl_label_object_set_parent (GL_LABEL_OBJECT(lbc), label);
+
+                line_color_node = gl_color_node_new_default ();
+
+                line_color_node->color = gl_label_get_default_line_color(label);
+
+                lbc->priv->color_node = line_color_node;
+        }
 
 	return G_OBJECT (lbc);
 }
@@ -488,6 +503,30 @@ draw_object (glLabelObject *object,
 	g_free (id);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is object at coordinates?                                                 */
+/*****************************************************************************/
+static gboolean
+object_at (glLabelObject *object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+        gdouble           w, h;
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 

@@ -240,13 +240,15 @@ create_custom_widget_cb (GtkPrintOperation *operation,
                                                  NULL };
         GError                 *error = NULL;
 	glPrintOpDialog        *op = GL_PRINT_OP_DIALOG (operation);
+        const lglTemplate      *template;
         const lglTemplateFrame *frame;
 	GtkWidget              *hbox;
         glMerge                *merge = NULL;
         GdkPixbuf              *pixbuf;
 
 
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
         op->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	builder = gtk_builder_new ();
@@ -282,7 +284,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 
         /* ---- Install preview. ---- */
         op->priv->preview = gl_mini_preview_new (MINI_PREVIEW_MIN_HEIGHT, MINI_PREVIEW_MIN_WIDTH);
-        gl_mini_preview_set_template (GL_MINI_PREVIEW(op->priv->preview), label->template);
+        gl_mini_preview_set_template (GL_MINI_PREVIEW(op->priv->preview), template);
         gl_mini_preview_set_label (GL_MINI_PREVIEW(op->priv->preview), label);
         gtk_box_pack_start (GTK_BOX(hbox), op->priv->preview, TRUE, TRUE, 0);
         gtk_widget_show_all (op->priv->preview);

@@ -213,6 +213,11 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
+        if (color_node == NULL)
+        {
+                return;
+        }
+
         editor->priv->stop_signals = TRUE;
 
 	gtk_widget_set_sensitive (editor->priv->shadow_key_radio, merge_flag);
@@ -466,8 +471,7 @@ shadow_enable_check_toggled_cb (glObjectEditor *editor)
 
         gtk_widget_set_sensitive (editor->priv->shadow_controls_table, state);
 
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        gl_object_editor_changed_cb (editor);
 
         gl_debug (DEBUG_EDITOR, "END");
 }
@@ -492,8 +496,7 @@ shadow_color_radio_toggled_cb (glObjectEditor *editor)
 		
 	}
  
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        gl_object_editor_changed_cb (editor);
  
         gl_debug (DEBUG_EDITOR, "END");
 }

@@ -22,14 +22,7 @@
 
 #include "view-ellipse.h"
 
-#include <glib/gi18n.h>
-#include <glib.h>
-#include <math.h>
-
-#include "cairo-ellipse-path.h"
-#include "color.h"
-#include "object-editor.h"
-#include "stock.h"
+#include "label-ellipse.h"
 
 #include "pixmaps/cursor_ellipse.xbm"
 #include "pixmaps/cursor_ellipse_mask.xbm"
@@ -46,9 +39,6 @@
 /* Private types.                                         */
 /*========================================================*/
 
-struct _glViewEllipsePrivate {
-};
-
 
 /*========================================================*/
 /* Private globals.                                       */
@@ -58,321 +48,6 @@ struct _glViewEllipsePrivate {
 /*========================================================*/
 /* Private function prototypes.                           */
 /*========================================================*/
-
-static void       gl_view_ellipse_finalize          (GObject          *object);
-
-static GtkWidget *construct_properties_editor       (glViewObject     *view_object);
-
-static void       update_object_from_editor_cb      (glObjectEditor   *editor,
-						     glLabelObject    *object);
-
-static void       update_editor_from_object_cb      (glLabelObject    *object,
-						     glObjectEditor   *editor);
-
-static void       update_editor_from_move_cb        (glLabelObject    *object,
-						     gdouble           dx,
-						     gdouble           dy,
-						     glObjectEditor   *editor);
-
-static gboolean   object_at                         (glViewObject     *view_object,
-                                                     cairo_t          *cr,
-                                                     gdouble           x,
-                                                     gdouble           y);
-
-
-/*****************************************************************************/
-/* Boilerplate object stuff.                                                 */
-/*****************************************************************************/
-G_DEFINE_TYPE (glViewEllipse, gl_view_ellipse, GL_TYPE_VIEW_OBJECT);
-
-
-static void
-gl_view_ellipse_class_init (glViewEllipseClass *class)
-{
-	GObjectClass      *object_class      = G_OBJECT_CLASS (class);
-	glViewObjectClass *view_object_class = GL_VIEW_OBJECT_CLASS (class);
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_view_ellipse_parent_class = g_type_class_peek_parent (class);
-
-	object_class->finalize = gl_view_ellipse_finalize;
-
-	view_object_class->construct_editor = construct_properties_editor;
-	view_object_class->object_at        = object_at;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-static void
-gl_view_ellipse_init (glViewEllipse *view_ellipse)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	view_ellipse->priv = g_new0 (glViewEllipsePrivate, 1);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-static void
-gl_view_ellipse_finalize (GObject *object)
-{
-        glViewEllipse *view_ellipse = GL_VIEW_ELLIPSE (object);
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (object && GL_IS_VIEW_ELLIPSE (object));
-
-        g_free (view_ellipse->priv);
-
-	G_OBJECT_CLASS (gl_view_ellipse_parent_class)->finalize (object);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* NEW ellipse object view.                                                  */
-/*****************************************************************************/
-glViewObject *
-gl_view_ellipse_new (glLabelEllipse *object,
-                     glView         *view)
-{
-	glViewEllipse         *view_ellipse;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (object && GL_IS_LABEL_ELLIPSE (object), NULL);
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-	
-	view_ellipse = g_object_new (gl_view_ellipse_get_type(), NULL);
-
-	gl_view_object_set_object (GL_VIEW_OBJECT(view_ellipse),
-				   GL_LABEL_OBJECT(object),
-				   GL_VIEW_OBJECT_HANDLES_BOX);
-	gl_view_object_set_view (GL_VIEW_OBJECT(view_ellipse), view);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return GL_VIEW_OBJECT (view_ellipse);
-}
-
-
-/*****************************************************************************/
-/* Create a properties dialog for a ellipse object.                          */
-/*****************************************************************************/
-static GtkWidget *
-construct_properties_editor (glViewObject *view_object)
-{
-	GtkWidget          *editor;
-	glViewEllipse      *view_ellipse = (glViewEllipse *)view_object;
-	glLabelObject      *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	object = gl_view_object_get_object (GL_VIEW_OBJECT(view_ellipse));
-
-	/* Build editor. */
-	editor = gl_object_editor_new (GL_STOCK_ELLIPSE, _("Ellipse object properties"),
-                                       object->parent,
-				       GL_OBJECT_EDITOR_SHADOW_PAGE,
-				       GL_OBJECT_EDITOR_POSITION_PAGE,
-				       GL_OBJECT_EDITOR_SIZE_PAGE,
-				       GL_OBJECT_EDITOR_FILL_PAGE,
-				       GL_OBJECT_EDITOR_LINE_PAGE,
-				       0);
-	
-	/* Update */
-	update_editor_from_object_cb (object, GL_OBJECT_EDITOR(editor));
-	update_editor_from_move_cb (object, 0, 0, GL_OBJECT_EDITOR(editor));
-
-	/* Connect signals. */
-	g_signal_connect (G_OBJECT (editor), "changed",
-			  G_CALLBACK(update_object_from_editor_cb), object);
-	g_signal_connect (G_OBJECT (object), "changed",
-			  G_CALLBACK (update_editor_from_object_cb), editor);
-	g_signal_connect (G_OBJECT (object), "moved",
-			  G_CALLBACK (update_editor_from_move_cb), editor);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return editor;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  editor "changed" callback.                                      */
-/*---------------------------------------------------------------------------*/
-static void
-update_object_from_editor_cb (glObjectEditor *editor,
-			      glLabelObject  *object)
-{
-	gdouble            x, y, w, h;
-	glColorNode       *line_color_node;
-	gdouble            line_width;
-	glColorNode	  *fill_color_node;
-	gboolean           shadow_state;
-	gdouble            shadow_x, shadow_y;
-	glColorNode	  *shadow_color_node;
-	gdouble            shadow_opacity;
-	
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_editor_from_object_cb,
-					 editor);
-	g_signal_handlers_block_by_func (G_OBJECT(object),
-					 update_editor_from_move_cb,
-					 editor);
-
-	gl_object_editor_get_position (editor, &x, &y);
-	gl_label_object_set_position (object, x, y);
-
-	gl_object_editor_get_size (editor, &w, &h);
-	gl_label_object_set_size (object, w, h);
-
-	fill_color_node = gl_object_editor_get_fill_color (editor);
-	gl_label_object_set_fill_color (object, fill_color_node);
-	gl_color_node_free (&fill_color_node);
-
-	line_color_node = gl_object_editor_get_line_color (editor);
-	gl_label_object_set_line_color (object, line_color_node);
-	gl_color_node_free (&line_color_node);
-
-	line_width = gl_object_editor_get_line_width (editor);
-	gl_label_object_set_line_width (object, line_width);
-
-	shadow_state = gl_object_editor_get_shadow_state (editor);
-	gl_label_object_set_shadow_state (object, shadow_state);
-
-	gl_object_editor_get_shadow_offset (editor, &shadow_x, &shadow_y);
-	gl_label_object_set_shadow_offset (object, shadow_x, shadow_y);
-
-	shadow_color_node = gl_object_editor_get_shadow_color (editor);
-	gl_label_object_set_shadow_color (object, shadow_color_node);
-	gl_color_node_free (&shadow_color_node);
-
-	shadow_opacity = gl_object_editor_get_shadow_opacity (editor);
-	gl_label_object_set_shadow_opacity (object, shadow_opacity);
-
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_editor_from_object_cb,
-					   editor);
-	g_signal_handlers_unblock_by_func (G_OBJECT(object),
-					   update_editor_from_move_cb,
-					   editor);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label object "changed" callback.                                 */
-/*---------------------------------------------------------------------------*/
-static void
-update_editor_from_object_cb (glLabelObject  *object,
-			      glObjectEditor *editor)
-{
-	gdouble            w, h;
-	glColorNode       *line_color_node;
-	gdouble            line_width;
-	glColorNode       *fill_color_node;
-	gboolean           shadow_state;
-	gdouble            shadow_x, shadow_y;
-	glColorNode	  *shadow_color_node;
-	gdouble            shadow_opacity;
-	glMerge	          *merge;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_label_object_get_size (object, &w, &h);
-	gl_object_editor_set_size (editor, w, h);
-	merge = gl_label_get_merge (GL_LABEL(object->parent));
-	
-	fill_color_node = gl_label_object_get_fill_color (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_fill_color (editor, (merge != NULL), fill_color_node);
-	gl_color_node_free (&fill_color_node);
-
-	line_color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_line_color (editor, (merge != NULL), line_color_node);
-	gl_color_node_free (&line_color_node);
-
-	line_width = gl_label_object_get_line_width (GL_LABEL_OBJECT(object));
-	gl_object_editor_set_line_width (editor, line_width);
-
-	shadow_state = gl_label_object_get_shadow_state (object);
-	gl_object_editor_set_shadow_state (editor, shadow_state);
-
-	gl_label_object_get_shadow_offset (object, &shadow_x, &shadow_y);
-	gl_object_editor_set_shadow_offset (editor, shadow_x, shadow_y);
-
-	shadow_color_node = gl_label_object_get_shadow_color (object);
-	gl_object_editor_set_shadow_color (editor, (merge != NULL), shadow_color_node);
-	gl_color_node_free (&shadow_color_node);
-
-	shadow_opacity = gl_label_object_get_shadow_opacity (object);
-	gl_object_editor_set_shadow_opacity (editor, shadow_opacity);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. label object "moved" callback.                                   */
-/*---------------------------------------------------------------------------*/
-static void
-update_editor_from_move_cb (glLabelObject    *object,
-			    gdouble           dx,
-			    gdouble           dy,
-			    glObjectEditor   *editor)
-{
-	gdouble            x, y;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	gl_label_object_get_position (object, &x, &y);
-	gl_object_editor_set_position (editor, x, y);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Is object at (x,y)?                                                       */
-/*****************************************************************************/
-static gboolean
-object_at (glViewObject  *view_object,
-           cairo_t       *cr,
-           gdouble        x,
-           gdouble        y)
-{
-	glLabelObject    *object;
-        gdouble           w, h;
-        gdouble           line_width;
-
-        object = gl_view_object_get_object (view_object);
-
-        gl_label_object_get_size (object, &w, &h);
-
-        gl_cairo_ellipse_path (cr, w/2, h/2);
-
-        if (cairo_in_fill (cr, x, y))
-        {
-                return TRUE;
-        }
-
-        line_width = gl_label_object_get_line_width (object);
-        cairo_set_line_width (cr, line_width);
-        if (cairo_in_stroke (cr, x, y))
-        {
-                return TRUE;
-        }
-
-        return FALSE;
-}
 
 
 /*****************************************************************************/
@@ -415,28 +90,12 @@ gl_view_ellipse_create_button_press_event   (glView *view,
                                              gdouble y)
 {
 	GObject             *object;
-	glColorNode         *fill_color_node;
-	glColorNode         *line_color_node;
 
-        gl_view_unselect_all (view);
+        gl_label_unselect_all (view->label);
 
-        fill_color_node = gl_color_node_new_default ();
-        line_color_node = gl_color_node_new_default ();
-		
         object = gl_label_ellipse_new (view->label);
         gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
         gl_label_object_set_size (GL_LABEL_OBJECT(object), 0.0, 0.0);
-        line_color_node->color = gl_color_set_opacity (gl_view_get_default_line_color(view), 0.5);
-        fill_color_node->color = gl_color_set_opacity (gl_view_get_default_fill_color(view), 0.5);
-        gl_label_object_set_line_width (GL_LABEL_OBJECT(object),
-                                        gl_view_get_default_line_width(view));
-        gl_label_object_set_line_color (GL_LABEL_OBJECT(object),
-                                        line_color_node);
-        gl_label_object_set_fill_color (GL_LABEL_OBJECT(object),
-                                        fill_color_node);
-
-        gl_color_node_free (&fill_color_node);
-        gl_color_node_free (&line_color_node);
 
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
@@ -470,13 +129,8 @@ gl_view_ellipse_create_button_release_event (glView *view,
                                              gdouble x,
                                              gdouble y)
 {
-	glColorNode         *fill_color_node;
-	glColorNode         *line_color_node;
         gdouble              w, h;
 
-        fill_color_node = gl_color_node_new_default ();
-        line_color_node = gl_color_node_new_default ();
-		
         if ((view->create_x0 == x) && (view->create_y0 == y)) {
                 x = view->create_x0 + 36.0;
                 y = view->create_y0 + 36.0;
@@ -486,12 +140,6 @@ gl_view_ellipse_create_button_release_event (glView *view,
         w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
         h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
         gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
-        line_color_node->color = gl_view_get_default_line_color(view);
-        gl_label_object_set_line_color (GL_LABEL_OBJECT(view->create_object), line_color_node);
-        fill_color_node->color = gl_view_get_default_fill_color(view);
-        gl_label_object_set_fill_color (GL_LABEL_OBJECT(view->create_object), fill_color_node);
-        gl_color_node_free (&fill_color_node);
-        gl_color_node_free (&line_color_node);
 }
 
 

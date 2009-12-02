@@ -176,8 +176,10 @@ void
 gl_file_properties (glLabel   *label,
 		    glWindow  *window)
 {
-	GtkWidget    *dialog;
-        gchar        *name;
+        const lglTemplate *template;
+        gboolean           rotate_flag;
+	GtkWidget         *dialog;
+        gchar             *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -192,19 +194,21 @@ gl_file_properties (glLabel   *label,
 	g_signal_connect (G_OBJECT(dialog), "response",
 			  G_CALLBACK (properties_response), dialog);
 
-        if (label->template->paper_id != NULL) {
+        template    = gl_label_get_template (label);
+        rotate_flag = gl_label_get_rotate_flag (label);
+
+        if (template->paper_id != NULL) {
                 gl_new_label_dialog_set_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
-                                                           label->template->paper_id,
+                                                           template->paper_id,
                                                            NULL);
         }
-        name = lgl_template_get_name (label->template);
+        name = lgl_template_get_name (template);
         if (name != NULL) {
                 gl_new_label_dialog_set_template_name (GL_NEW_LABEL_DIALOG (dialog), name);
         }
         g_free (name);
 
-        gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog),
-					      label->rotate_flag);
+        gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog), rotate_flag);
 
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_widget_show_all (GTK_WIDGET (dialog));

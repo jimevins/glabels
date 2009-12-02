@@ -146,9 +146,12 @@ void
 gl_color_swatch_set_color (glColorSwatch *this,
                            guint          color)
 {
-        this->priv->color = color;
+        if ( color != this->priv->color )
+        {
+                this->priv->color = color;
 
-        redraw (this);
+                redraw (this);
+        }
 }
 
 

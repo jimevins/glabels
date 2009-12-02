@@ -183,13 +183,15 @@ gl_print_op_construct (glPrintOp      *op,
                        glLabel        *label)
 {
         glMerge                *merge = NULL;
+        const lglTemplate      *template;
         const lglTemplateFrame *frame;
 
 	op->priv->label              = label;
 	op->priv->force_outline_flag = FALSE;
 
-        merge = gl_label_get_merge (label);
-        frame = (lglTemplateFrame *)label->template->frames->data;
+        merge    = gl_label_get_merge (label);
+        template = gl_label_get_template (label);
+        frame    = (lglTemplateFrame *)template->frames->data;
 
         op->priv->merge_flag         = (merge != NULL);
         op->priv->n_sheets           = 1;
@@ -385,13 +387,15 @@ static void
 set_page_size (glPrintOp  *op,
                glLabel    *label)
 {
-        GtkPaperSize *psize;
-        GtkPageSetup *su;
-        lglPaper     *paper;
+        const lglTemplate *template;
+        GtkPaperSize      *psize;
+        GtkPageSetup      *su;
+        lglPaper          *paper;
 
 	gl_debug (DEBUG_PRINT, "begin");
 
-        paper = lgl_db_lookup_paper_from_id (label->template->paper_id);
+        template = gl_label_get_template (label);
+        paper = lgl_db_lookup_paper_from_id (template->paper_id);
 
         if (!paper)
         {
@@ -406,12 +410,12 @@ set_page_size (glPrintOp  *op,
         {
                 psize = gtk_paper_size_new_custom (paper->id,
                                                    paper->name,
-                                                   label->template->page_width,
-                                                   label->template->page_height,
+                                                   template->page_width,
+                                                   template->page_height,
                                                    GTK_UNIT_POINTS);
                 gl_debug (DEBUG_PRINT, "Using custom size = %g x %g points",
-                          label->template->page_width,
-                          label->template->page_height);
+                          template->page_width,
+                          template->page_height);
 
         }
         else

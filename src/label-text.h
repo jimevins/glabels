@@ -30,12 +30,12 @@ G_BEGIN_DECLS
 #define GL_LABEL_TEXT_MARGIN 3.0
 
 
-#define GL_TYPE_LABEL_TEXT               (gl_label_text_get_type ())
-#define GL_LABEL_TEXT(obj)               (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_TEXT, glLabelText))
-#define GL_LABEL_TEXT_CLASS(klass)       (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL_TEXT, glLabelTextClass))
-#define GL_IS_LABEL_TEXT(obj)            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_LABEL_TEXT))
-#define GL_IS_LABEL_TEXT_CLASS(klass)    (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_LABEL_TEXT))
-#define GL_COLOR_COMBO_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GL_TYPE_LABEL_TEXT, glLabelTextClass))
+#define GL_TYPE_LABEL_TEXT              (gl_label_text_get_type ())
+#define GL_LABEL_TEXT(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_LABEL_TEXT, glLabelText))
+#define GL_LABEL_TEXT_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_LABEL_TEXT, glLabelTextClass))
+#define GL_IS_LABEL_TEXT(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_LABEL_TEXT))
+#define GL_IS_LABEL_TEXT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_LABEL_TEXT))
+#define GL_LABEL_TEXT_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GL_TYPE_LABEL_TEXT, glLabelTextClass))
 
 
 typedef struct _glLabelText          glLabelText;

@@ -22,6 +22,13 @@
 
 #include "view.h"
 
+#include "view-box.h"
+#include "view-ellipse.h"
+#include "view-line.h"
+#include "view-image.h"
+#include "view-text.h"
+#include "view-barcode.h"
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -31,14 +38,6 @@
 #include "label.h"
 #include "cairo-label-path.h"
 #include "cairo-markup-path.h"
-#include "view-object.h"
-#include "view-box.h"
-#include "view-ellipse.h"
-#include "view-line.h"
-#include "view-image.h"
-#include "view-text.h"
-#include "view-barcode.h"
-#include "xml-label.h"
 #include "color.h"
 #include "prefs.h"
 #include "marshal.h"
@@ -74,7 +73,6 @@
 /*==========================================================================*/
 
 enum {
-	SELECTION_CHANGED,
 	CONTEXT_MENU_ACTIVATE,
 	ZOOM_CHANGED,
 	POINTER_MOVED,
@@ -89,9 +87,6 @@ enum {
 /*==========================================================================*/
 
 static guint signals[LAST_SIGNAL] = {0};
-
-/* "CLIPBOARD" selection */
-static GdkAtom clipboard_atom = GDK_NONE;
 
 static gdouble zooms[] = {
 	8.00,
@@ -138,9 +133,6 @@ static void       label_changed_cb                (glView         *view);
 
 static void       label_resized_cb                (glView         *view);
 
-static void       label_object_added_cb           (glView         *view,
-                                                   glLabelObject  *object);
-
 static void       draw_layers                     (glView         *view,
                                                    cairo_t        *cr);
 
@@ -159,34 +151,9 @@ static void       draw_highlight_layer            (glView         *view,
 static void       draw_select_region_layer        (glView         *view,
                                                    cairo_t        *cr);
 
-static void       select_object_real              (glView         *view,
-						   glViewObject   *view_object);
-static void       unselect_object_real            (glView         *view,
-						   glViewObject   *view_object);
-
-static glViewObject *view_view_object_at          (glView         *view,
-                                                   cairo_t        *cr,
-						   gdouble         x,
-                                                   gdouble         y);
-
 static void       set_zoom_real                   (glView         *view,
 						   gdouble         zoom,
 						   gboolean        scale_to_fit_flag);
-
-static void       selection_clear_cb              (GtkWidget         *widget,
-                                                   GdkEventSelection *event,
-                                                   glView            *view);
-
-static void       selection_get_cb                (GtkWidget         *widget,
-                                                   GtkSelectionData  *selection_data,
-                                                   guint              info,
-                                                   guint              time,
-                                                   glView            *view);
-
-static void       selection_received_cb           (GtkWidget         *widget,
-                                                   GtkSelectionData  *selection_data,
-                                                   guint              time,
-                                                   glView            *view);
 
 static gboolean   focus_in_event_cb               (glView            *view,
                                                    GdkEventFocus     *event);
@@ -212,6 +179,10 @@ static gboolean   button_release_event_cb         (glView            *view,
 static gboolean   key_press_event_cb              (glView            *view,
                                                    GdkEventKey       *event);
 
+static void       resize_event                    (glView            *view,
+                                                   cairo_t           *cr,
+                                                   gdouble            x,
+                                                   gdouble            y);
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -229,16 +200,6 @@ gl_view_class_init (glViewClass *class)
 	gl_view_parent_class = g_type_class_peek_parent (class);
 
 	object_class->finalize = gl_view_finalize;
-
-	signals[SELECTION_CHANGED] =
-		g_signal_new ("selection_changed",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (glViewClass, selection_changed),
-			      NULL, NULL,
-			      gl_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
 
 	signals[CONTEXT_MENU_ACTIVATE] =
 		g_signal_new ("context_menu_activate",
@@ -306,10 +267,7 @@ gl_view_init (glView *view)
 	view->grid_visible         = TRUE;
 	view->grid_spacing         = 9;
 	view->markup_visible       = TRUE;
-	view->default_font_family  = NULL;
 	view->mode                 = GL_VIEW_MODE_ARROW;
-	view->object_list          = NULL;
-	view->selected_object_list = NULL;
 	view->zoom                 = 1.0;
 	view->home_scale           = get_home_scale (view);
 
@@ -364,40 +322,6 @@ gl_view_init (glView *view)
 	g_signal_connect_swapped (G_OBJECT (view->canvas), "key-press-event",
 				  G_CALLBACK (key_press_event_cb), view);
 
-        /*
-         * Clipboard
-         */
-	view->have_selection       = FALSE;
-	view->selection_data       = NULL;
-	view->invisible            = gtk_invisible_new ();
-	if (!clipboard_atom) {
-		clipboard_atom = gdk_atom_intern ("GLABELS_CLIPBOARD", FALSE);
-	}
-	gtk_selection_add_target (view->invisible,
-				  clipboard_atom, GDK_SELECTION_TYPE_STRING, 1);
-	g_signal_connect (G_OBJECT (view->invisible),
-			  "selection_clear_event",
-			  G_CALLBACK (selection_clear_cb), view);
-	g_signal_connect (G_OBJECT (view->invisible), "selection_get",
-			  G_CALLBACK (selection_get_cb), view);
-	g_signal_connect (G_OBJECT (view->invisible),
-			  "selection_received",
-			  G_CALLBACK (selection_received_cb), view);
-
-        /*
-         * Defaults from preferences
-         */
-	gl_view_set_default_font_family       (view, gl_prefs_model_get_default_font_family (gl_prefs));
-	gl_view_set_default_font_size         (view, gl_prefs_model_get_default_font_size (gl_prefs));
-	gl_view_set_default_font_weight       (view, gl_prefs_model_get_default_font_weight (gl_prefs));
-	gl_view_set_default_font_italic_flag  (view, gl_prefs_model_get_default_font_italic_flag (gl_prefs));
-	gl_view_set_default_text_color        (view, gl_prefs_model_get_default_text_color (gl_prefs));
-	gl_view_set_default_text_alignment    (view, gl_prefs_model_get_default_text_alignment (gl_prefs));
-	gl_view_set_default_text_line_spacing (view, gl_prefs_model_get_default_text_line_spacing (gl_prefs));
-	gl_view_set_default_line_width        (view, gl_prefs_model_get_default_line_width (gl_prefs));
-	gl_view_set_default_line_color        (view, gl_prefs_model_get_default_line_color (gl_prefs));
-	gl_view_set_default_fill_color        (view, gl_prefs_model_get_default_fill_color (gl_prefs));
-
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -410,11 +334,7 @@ gl_view_finalize (GObject *object)
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GL_IS_VIEW (object));
-
-	if (view->default_font_family) {
-		g_free (view->default_font_family);
-	}
+	g_return_if_fail (GL_IS_VIEW (view));
 
 	G_OBJECT_CLASS (gl_view_parent_class)->finalize (object);
 
@@ -451,43 +371,18 @@ static void
 gl_view_construct (glView  *view,
                    glLabel *label)
 {
-        GList            *p_obj;
-        glLabelObject    *object;
-
 	gl_debug (DEBUG_VIEW, "START");
 
 	g_return_if_fail (GL_IS_VIEW (view));
 
 	view->label = label;
 
-        for (p_obj = label->objects; p_obj != NULL; p_obj = p_obj->next)
-        {
-                object = GL_LABEL_OBJECT (p_obj->data);
-
-                if (GL_IS_LABEL_BOX (object)) {
-                        gl_view_box_new (GL_LABEL_BOX(object), view);
-                } else if (GL_IS_LABEL_ELLIPSE (object)) {
-                        gl_view_ellipse_new (GL_LABEL_ELLIPSE(object), view);
-                } else if (GL_IS_LABEL_LINE (object)) {
-                        gl_view_line_new (GL_LABEL_LINE(object), view);
-                } else if (GL_IS_LABEL_IMAGE (object)) {
-                        gl_view_image_new (GL_LABEL_IMAGE(object), view);
-                } else if (GL_IS_LABEL_TEXT (object)) {
-                        gl_view_text_new (GL_LABEL_TEXT(object), view);
-                } else if (GL_IS_LABEL_BARCODE (object)) {
-                        gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
-                } else {
-                        /* Should not happen! */
-                        g_message ("Invalid label object type.");
-                }
-        }
-
+	g_signal_connect_swapped (G_OBJECT (view->label), "selection_changed",
+                                  G_CALLBACK (label_changed_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->label), "changed",
                                   G_CALLBACK (label_changed_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->label), "size_changed",
                                   G_CALLBACK (label_resized_cb), view);
-	g_signal_connect_swapped (G_OBJECT (view->label), "object_added",
-                                  G_CALLBACK (label_object_added_cb), view);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -754,40 +649,6 @@ label_resized_cb (glView  *view)
 
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Handle new label object.                                        */
-/*---------------------------------------------------------------------------*/
-static void
-label_object_added_cb (glView         *view,
-                       glLabelObject  *object)
-{
-        glViewObject *view_object;
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-        if (GL_IS_LABEL_BOX (object)) {
-                view_object = gl_view_box_new (GL_LABEL_BOX(object), view);
-        } else if (GL_IS_LABEL_ELLIPSE (object)) {
-                view_object = gl_view_ellipse_new (GL_LABEL_ELLIPSE(object), view);
-        } else if (GL_IS_LABEL_LINE (object)) {
-                view_object = gl_view_line_new (GL_LABEL_LINE(object), view);
-        } else if (GL_IS_LABEL_IMAGE (object)) {
-                view_object = gl_view_image_new (GL_LABEL_IMAGE(object), view);
-        } else if (GL_IS_LABEL_TEXT (object)) {
-                view_object = gl_view_text_new (GL_LABEL_TEXT(object), view);
-        } else if (GL_IS_LABEL_BARCODE (object)) {
-                view_object = gl_view_barcode_new (GL_LABEL_BARCODE(object), view);
-        } else {
-                /* Should not happen! */
-                view_object = NULL;
-                g_message ("Invalid label object type.");
-        }
-
-        gl_view_select_object (view, view_object);
-}
-
-
-/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Create, draw and order layers.                                  */
 /*---------------------------------------------------------------------------*/
 static void
@@ -847,10 +708,15 @@ static void
 draw_bg_layer (glView  *view,
                cairo_t *cr)
 {
+        const lglTemplate *template;
+        gboolean           rotate_flag;
+
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-        gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
+        template    = gl_label_get_template (view->label);
+        rotate_flag = gl_label_get_rotate_flag (view->label);
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
         cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
@@ -865,10 +731,11 @@ static void
 draw_grid_layer (glView  *view,
                  cairo_t *cr)
 {
+        const lglTemplate         *template;
+	const lglTemplateFrame    *frame;
 	gdouble                    w, h;
 	gdouble                    x, y;
 	gdouble                    x0, y0;
-	const lglTemplateFrame    *frame;
 
 	gl_debug (DEBUG_VIEW, "START");
 
@@ -878,7 +745,8 @@ draw_grid_layer (glView  *view,
         if (view->grid_visible)
         {
 
-                frame = (lglTemplateFrame *)view->label->template->frames->data;
+                template = gl_label_get_template (view->label);
+                frame = (lglTemplateFrame *)template->frames->data;
 
                 gl_label_get_size (view->label, &w, &h);
 	
@@ -927,8 +795,9 @@ static void
 draw_markup_layer (glView  *view,
                    cairo_t *cr)
 {
-	glLabel                   *label;
+	const lglTemplate         *template;
 	const lglTemplateFrame    *frame;
+        gboolean                   rotate_flag;
 	GList                     *p;
 	lglTemplateMarkup         *markup;
         gdouble                    width, height;
@@ -939,12 +808,13 @@ draw_markup_layer (glView  *view,
         if (view->markup_visible)
         {
 
-                label      = view->label;
-                frame = (lglTemplateFrame *)view->label->template->frames->data;
+                template    = gl_label_get_template (view->label);
+                frame       = (lglTemplateFrame *)template->frames->data;
+                rotate_flag = gl_label_get_rotate_flag (view->label);
 
                 cairo_save (cr);
 
-                if (label->rotate_flag)
+                if (rotate_flag)
                 {
                         lgl_template_frame_get_size (frame, &width, &height);
                         cairo_rotate (cr, -M_PI/2.0);
@@ -958,7 +828,7 @@ draw_markup_layer (glView  *view,
                 {
                         markup = (lglTemplateMarkup *)p->data;
 
-                        gl_cairo_markup_path (cr, markup, label);
+                        gl_cairo_markup_path (cr, markup, view->label);
 
                         cairo_stroke (cr);
                 }
@@ -987,10 +857,16 @@ static void
 draw_fg_layer (glView  *view,
                cairo_t *cr)
 {
+        const lglTemplate *template;
+        gboolean           rotate_flag;
+
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
-        gl_cairo_label_path (cr, view->label->template, view->label->rotate_flag, FALSE);
+        template    = gl_label_get_template (view->label);
+        rotate_flag = gl_label_get_rotate_flag (view->label);
+
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
         cairo_set_line_width (cr, OUTLINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
         cairo_set_source_rgb (cr, OUTLINE_RGB_ARGS);
@@ -1005,8 +881,9 @@ static void
 draw_highlight_layer (glView  *view,
                       cairo_t *cr)
 {
+	GList            *selection_list;
 	GList            *p_obj;
-	glViewObject     *view_object;
+	glLabelObject    *object;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
@@ -1014,12 +891,16 @@ draw_highlight_layer (glView  *view,
 
         cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
-	for (p_obj = view->selected_object_list; p_obj != NULL; p_obj = p_obj->next)
-        {
-		view_object = GL_VIEW_OBJECT (p_obj->data);
+        selection_list = gl_label_get_selection_list (view->label);
 
-                gl_view_object_draw_handles (view_object, cr);
+	for (p_obj = selection_list; p_obj != NULL; p_obj = p_obj->next)
+        {
+		object = GL_LABEL_OBJECT (p_obj->data);
+
+                gl_label_object_draw_handles (object, cr);
 	}
+
+        g_list_free (selection_list);
 
         cairo_restore (cr);
 }
@@ -1173,22 +1054,22 @@ gl_view_object_create_mode (glView            *view,
 	switch (type)
         {
 	case GL_LABEL_OBJECT_BOX:
-		cursor = gl_view_box_get_create_cursor ();
+                cursor = gl_view_box_get_create_cursor ();
 		break;
 	case GL_LABEL_OBJECT_ELLIPSE:
-		cursor = gl_view_ellipse_get_create_cursor ();
+                cursor = gl_view_ellipse_get_create_cursor ();
 		break;
 	case GL_LABEL_OBJECT_LINE:
-		cursor = gl_view_line_get_create_cursor ();
+                cursor = gl_view_line_get_create_cursor ();
 		break;
 	case GL_LABEL_OBJECT_IMAGE:
-		cursor = gl_view_image_get_create_cursor ();
+                cursor = gl_view_image_get_create_cursor ();
 		break;
 	case GL_LABEL_OBJECT_TEXT:
-		cursor = gl_view_text_get_create_cursor ();
+                cursor = gl_view_text_get_create_cursor ();
 		break;
 	case GL_LABEL_OBJECT_BARCODE:
-		cursor = gl_view_barcode_get_create_cursor ();
+                cursor = gl_view_barcode_get_create_cursor ();
 		break;
 	default:
 		g_message ("Invalid label object type.");/*Should not happen!*/
@@ -1201,1400 +1082,6 @@ gl_view_object_create_mode (glView            *view,
 	view->mode = GL_VIEW_MODE_OBJECT_CREATE;
         view->state = GL_VIEW_IDLE;
 	view->create_type = type;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Select given object (adding to current selection).                        */
-/*****************************************************************************/
-void
-gl_view_select_object (glView       *view,
-		       glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	select_object_real (view, view_object);
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Unselect given object (removing from current selection).                  */
-/*****************************************************************************/
-void
-gl_view_unselect_object (glView       *view,
-			 glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	unselect_object_real (view, view_object);
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Select all items.                                                         */
-/*****************************************************************************/
-void
-gl_view_select_all (glView *view)
-{
-	GList *p, *p_next;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	/* 1st unselect anything already selected. */
-	for (p = view->selected_object_list; p != NULL; p = p_next) {
-		p_next = p->next;
-		unselect_object_real (view, GL_VIEW_OBJECT (p->data));
-	}
-
-	/* Finally select all objects. */
-	for (p = view->object_list; p != NULL; p = p->next) {
-		select_object_real (view, GL_VIEW_OBJECT (p->data));
-	}
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Remove all selections                                                     */
-/*****************************************************************************/
-void
-gl_view_unselect_all (glView *view)
-{
-	GList *p;
-	GList *p_next;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p_next) {
-		p_next = p->next;
-		unselect_object_real (view, GL_VIEW_OBJECT (p->data));
-	}
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Select all objects within given rectangular region (adding to selection). */
-/*****************************************************************************/
-void
-gl_view_select_region (glView        *view,
-                       glLabelRegion *region)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-        gdouble        r_x1, r_y1;
-        gdouble        r_x2, r_y2;
-        glLabelRegion  obj_extent;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-        r_x1 = MIN (region->x1, region->x2);
-        r_y1 = MIN (region->y1, region->y2);
-        r_x2 = MAX (region->x1, region->x2);
-        r_y2 = MAX (region->y1, region->y2);
-
-	for (p = view->object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT(p->data);
-		if (!gl_view_is_object_selected (view, view_object))
-                {
-
-			object = gl_view_object_get_object (view_object);
-
-			gl_label_object_get_extent (object, &obj_extent);
-			if ((obj_extent.x1 >= r_x1) &&
-                            (obj_extent.x2 <= r_x2) &&
-                            (obj_extent.y1 >= r_y1) &&
-                            (obj_extent.y2 <= r_y2))
-                        {
-				select_object_real (view, view_object);
-			}
-
-		}
-	}
-
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Select an object.                                                */
-/*---------------------------------------------------------------------------*/
-static void
-select_object_real (glView       *view,
-		    glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
-
-	if (!gl_view_is_object_selected (view, view_object)) {
-		view->selected_object_list =
-		    g_list_append (view->selected_object_list, view_object);
-	}
-	gtk_widget_grab_focus (GTK_WIDGET (view->canvas));
-
-        gl_view_update (view);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Un-select object.                                               */
-/*---------------------------------------------------------------------------*/
-static void
-unselect_object_real (glView       *view,
-		      glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (GL_IS_VIEW_OBJECT (view_object));
-
-	view->selected_object_list =
-	    g_list_remove (view->selected_object_list, view_object);
-
-        gl_view_update (view);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Return object at (x,y).                                          */
-/*---------------------------------------------------------------------------*/
-static glViewObject *
-view_view_object_at (glView  *view,
-                     cairo_t *cr,
-                     gdouble  x,
-                     gdouble  y)
-{
-	GList            *p_obj;
-	glViewObject     *view_object;
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-
-	for (p_obj = g_list_last (view->object_list); p_obj != NULL; p_obj = p_obj->prev)
-        {
-
-		view_object = GL_VIEW_OBJECT (p_obj->data);
-
-                if (gl_view_object_at (view_object, cr, x, y))
-                {
-                        return view_object;
-                }
-
-	}
-
-        return NULL;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE. Return object handle at (x,y).                                   */
-/*---------------------------------------------------------------------------*/
-static glViewObject *
-view_handle_at (glView             *view,
-                cairo_t            *cr,
-                gdouble             x,
-                gdouble             y,
-                glViewObjectHandle *handle)
-{
-	GList            *p_obj;
-	glViewObject     *view_object;
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-
-	for (p_obj = g_list_last (view->selected_object_list); p_obj != NULL; p_obj = p_obj->prev)
-        {
-
-		view_object = GL_VIEW_OBJECT (p_obj->data);
-
-                if ((*handle = gl_view_object_handle_at (view_object, cr, x, y)))
-                {
-                        return view_object;
-                }
-
-	}
-
-        return NULL;
-}
-
-
-/*****************************************************************************/
-/* Is the object in our current selection?                                   */
-/*****************************************************************************/
-gboolean
-gl_view_is_object_selected (glView       *view,
-			    glViewObject *view_object)
-{
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-	g_return_val_if_fail (GL_IS_VIEW_OBJECT (view_object), FALSE);
-
-	if (g_list_find (view->selected_object_list, view_object) == NULL) {
-		return FALSE;
-	}
-	return TRUE;
-}
-
-
-/*****************************************************************************/
-/* Is our current selection empty?                                           */
-/*****************************************************************************/
-gboolean
-gl_view_is_selection_empty (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	if (view->selected_object_list == NULL) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
-
-
-/*****************************************************************************/
-/* Is our current selection atomic?  I.e. only one item selected.            */
-/*****************************************************************************/
-gboolean
-gl_view_is_selection_atomic (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	if (view->selected_object_list == NULL)
-		return FALSE;
-	if (view->selected_object_list->next == NULL)
-		return TRUE;
-	return FALSE;
-}
-
-
-/*****************************************************************************/
-/* Delete selected objects. (Bypass clipboard)                               */
-/*****************************************************************************/
-void
-gl_view_delete_selection (glView *view)
-{
-	GList         *object_list;
-	GList         *p;
-	GList         *p_next;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	object_list = view->selected_object_list;
-	view->selected_object_list = NULL;
-	g_signal_emit (G_OBJECT(view), signals[SELECTION_CHANGED], 0);
-
-	for (p = object_list; p != NULL; p = p_next) {
-		p_next = p->next;
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-                gl_label_object_remove (object);
-	}
-
-        g_list_free (object_list);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Get object property editor of first selected object.                      */
-/*****************************************************************************/
-GtkWidget *
-gl_view_get_editor (glView *view)
-{
-	glViewObject *view_object;
-	GtkWidget    *editor = NULL;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-
-	if (!gl_view_is_selection_empty (view)) {
-
-		view_object = GL_VIEW_OBJECT(view->selected_object_list->data);
-		editor = gl_view_object_get_editor (view_object);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return editor;
-}
-
-
-/*****************************************************************************/
-/* Raise selected items to top.                                              */
-/*****************************************************************************/
-void
-gl_view_raise_selection (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_raise_to_top (object);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Lower selected items to bottom.                                           */
-/*****************************************************************************/
-void
-gl_view_lower_selection (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_lower_to_bottom (object);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Rotate selected objects by given angle.                                   */
-/*****************************************************************************/
-void
-gl_view_rotate_selection (glView *view,
-			  gdouble theta_degs)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_rotate (object, theta_degs);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Rotate selected objects 90 degrees left.                                  */
-/*****************************************************************************/
-void
-gl_view_rotate_selection_left (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_rotate (object, -90.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Rotate selected objects 90 degrees right.                                 */
-/*****************************************************************************/
-void
-gl_view_rotate_selection_right (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_rotate (object, 90.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Flip selected objects horizontally.                                       */
-/*****************************************************************************/
-void
-gl_view_flip_selection_horiz (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_flip_horiz (object);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Flip selected objects vertically.                                         */
-/*****************************************************************************/
-void
-gl_view_flip_selection_vert (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_flip_vert (object);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to left most edge.                                 */
-/*****************************************************************************/
-void
-gl_view_align_selection_left (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dx, x1_min;
-        glLabelRegion  obj_extent;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find left most edge */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-        x1_min = obj_extent.x1;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		if ( obj_extent.x1 < x1_min ) x1_min = obj_extent.x1;
-	}
-
-	/* now adjust the object positions to line up the left edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dx = x1_min - obj_extent.x1;
-		gl_label_object_set_position_relative (object, dx, 0.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to right most edge.                                */
-/*****************************************************************************/
-void
-gl_view_align_selection_right (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dx, x2_max;
-        glLabelRegion  obj_extent;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find right most edge */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-        x2_max = obj_extent.x2;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		if ( obj_extent.x2 > x2_max ) x2_max = obj_extent.x2;
-	}
-
-	/* now adjust the object positions to line up the right edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dx = x2_max - obj_extent.x2;
-		gl_label_object_set_position_relative (object, dx, 0.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to horizontal center of objects.                   */
-/*****************************************************************************/
-void
-gl_view_align_selection_hcenter (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dx;
-	gdouble        dxmin;
-	gdouble        xsum, xavg;
-        glLabelRegion  obj_extent;
-	gdouble        xcenter;
-	gint           n;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find average center of objects */
-	xsum = 0.0;
-	n = 0;
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		xsum += (obj_extent.x1 + obj_extent.x2) / 2.0;
-		n++;
-	}
-	xavg = xsum / n;
-
-	/* find center of object closest to average center */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-	dxmin = fabs (xavg - (obj_extent.x1 + obj_extent.x2)/2.0);
-	xcenter = (obj_extent.x1 + obj_extent.x2)/2.0;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dx = fabs (xavg - (obj_extent.x1 + obj_extent.x2)/2.0);
-		if ( dx < dxmin )
-                {
-			dxmin = dx;
-			xcenter = (obj_extent.x1 + obj_extent.x2)/2.0;
-		}
-	}
-
-	/* now adjust the object positions to line up this center */
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dx = xcenter - (obj_extent.x1 + obj_extent.x2)/2.0;
-		gl_label_object_set_position_relative (object, dx, 0.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to top most edge.                                  */
-/*****************************************************************************/
-void
-gl_view_align_selection_top (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dy, y1_min;
-        glLabelRegion  obj_extent;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find top most edge */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-        y1_min = obj_extent.y1;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		if ( obj_extent.y1 < y1_min ) y1_min = obj_extent.y1;
-	}
-
-	/* now adjust the object positions to line up the top edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dy = y1_min - obj_extent.y1;
-		gl_label_object_set_position_relative (object, 0.0, dy);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to bottom most edge.                               */
-/*****************************************************************************/
-void
-gl_view_align_selection_bottom (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dy, y2_max;
-        glLabelRegion  obj_extent;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find bottom most edge */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-        y2_max = obj_extent.y2;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		if ( obj_extent.y2 > y2_max ) y2_max = obj_extent.y2;
-	}
-
-	/* now adjust the object positions to line up the bottom edges */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dy = y2_max - obj_extent.y2;
-		gl_label_object_set_position_relative (object, 0.0, dy);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Align selected objects to viertical center of objects.                    */
-/*****************************************************************************/
-void
-gl_view_align_selection_vcenter (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dy;
-	gdouble        dymin;
-	gdouble        ysum, yavg;
-        glLabelRegion  obj_extent;
-	gdouble        ycenter;
-	gint           n;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view) &&
-			  !gl_view_is_selection_atomic (view));
-
-	/* find average center of objects */
-	ysum = 0.0;
-	n = 0;
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		ysum += (obj_extent.y1 + obj_extent.y2) / 2.0;
-		n++;
-	}
-	yavg = ysum / n;
-
-	/* find center of object closest to average center */
-	p = view->selected_object_list;
-	view_object = GL_VIEW_OBJECT (p->data);
-	object = gl_view_object_get_object (view_object);
-	gl_label_object_get_extent (object, &obj_extent);
-	dymin = fabs (yavg - (obj_extent.y1 + obj_extent.y2)/2.0);
-	ycenter = (obj_extent.y1 + obj_extent.y2)/2.0;
-	for (p = p->next; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dy = fabs (yavg - (obj_extent.y1 + obj_extent.y2)/2.0);
-		if ( dy < dymin )
-                {
-			dymin = dy;
-			ycenter = (obj_extent.y1 + obj_extent.y2)/2.0;
-		}
-	}
-
-	/* now adjust the object positions to line up this center */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		dy = ycenter - (obj_extent.y1 + obj_extent.y2)/2.0;
-		gl_label_object_set_position_relative (object, 0.0, dy);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Center selected objects to in center of label.                            */
-/*****************************************************************************/
-void
-gl_view_center_selection_horiz (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dx;
-	gdouble        x_label_center;
-	gdouble        x_obj_center;
-	glLabelRegion  obj_extent;
-	gdouble        w, h;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view));
-
-	gl_label_get_size (view->label, &w, &h);
-	x_label_center = w / 2.0;
-
-	/* adjust the object positions */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		x_obj_center = (obj_extent.x1 + obj_extent.x2) / 2.0;
-		dx = x_label_center - x_obj_center;
-		gl_label_object_set_position_relative (object, dx, 0.0);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Center selected objects to in center of label.                            */
-/*****************************************************************************/
-void
-gl_view_center_selection_vert (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-	gdouble        dy;
-	gdouble        y_label_center;
-	gdouble        y_obj_center;
-	glLabelRegion  obj_extent;
-	gdouble        w, h;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	g_return_if_fail (!gl_view_is_selection_empty (view));
-
-	gl_label_get_size (view->label, &w, &h);
-	y_label_center = h / 2.0;
-
-	/* adjust the object positions */
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-		view_object = GL_VIEW_OBJECT (p->data);
-		object = gl_view_object_get_object (view_object);
-		gl_label_object_get_extent (object, &obj_extent);
-		y_obj_center = (obj_extent.y1 + obj_extent.y2) / 2.0;
-		dy = y_label_center - y_obj_center;
-		gl_label_object_set_position_relative (object, 0.0, dy);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Move selected objects                                                     */
-/*****************************************************************************/
-void
-gl_view_move_selection (glView  *view,
-			gdouble  dx,
-			gdouble  dy)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_position_relative (object, dx, dy);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Can text properties be set for selection?                                 */
-/*****************************************************************************/
-gboolean
-gl_view_can_selection_text (glView *view)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	for (p = view->selected_object_list; p != NULL; p = p->next)
-        {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		if (gl_label_object_can_text (object))
-                {
-			return TRUE;
-		}
-
-	}
-
-	return FALSE;
-}
-
-
-/*****************************************************************************/
-/* Set font family for all text contained in selected objects.               */
-/*****************************************************************************/
-void
-gl_view_set_selection_font_family (glView      *view,
-				   const gchar *font_family)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_font_family (object, font_family);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set font size for all text contained in selected objects.                 */
-/*****************************************************************************/
-void
-gl_view_set_selection_font_size (glView  *view,
-				 gdouble  font_size)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_font_size (object, font_size);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set font weight for all text contained in selected objects.               */
-/*****************************************************************************/
-void
-gl_view_set_selection_font_weight (glView      *view,
-				   PangoWeight  font_weight)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_font_weight (object, font_weight);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set font italic flag for all text contained in selected objects.          */
-/*****************************************************************************/
-void
-gl_view_set_selection_font_italic_flag (glView   *view,
-					gboolean  font_italic_flag)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_font_italic_flag (object, font_italic_flag);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set text alignment for all text contained in selected objects.            */
-/*****************************************************************************/
-void
-gl_view_set_selection_text_alignment (glView            *view,
-				      PangoAlignment     text_alignment)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_text_alignment (object, text_alignment);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set text line spacing for all text contained in selected objects.         */
-/*****************************************************************************/
-void
-gl_view_set_selection_text_line_spacing (glView  *view,
-				         gdouble  text_line_spacing)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_text_line_spacing (object, text_line_spacing);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Set text color for all text contained in selected objects.                */
-/*****************************************************************************/
-void
-gl_view_set_selection_text_color (glView      *view,
-				  glColorNode *text_color_node)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_text_color (object, text_color_node);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Can fill properties be set for selection?                                 */
-/*****************************************************************************/
-gboolean
-gl_view_can_selection_fill (glView *view)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		if (gl_label_object_can_fill (object)) {
-			return TRUE;
-		}
-
-	}
-
-	return FALSE;
-}
-
-
-/*****************************************************************************/
-/* Set fill color for all selected objects.                                  */
-/*****************************************************************************/
-void
-gl_view_set_selection_fill_color (glView      *view,
-				  glColorNode *fill_color_node)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_fill_color (object, fill_color_node);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Can line color properties be set for selection?                           */
-/*****************************************************************************/
-gboolean
-gl_view_can_selection_line_color (glView *view)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		if (gl_label_object_can_line_color (object)) {
-			return TRUE;
-		}
-
-	}
-
-	return FALSE;
-}
-
-
-/*****************************************************************************/
-/* Set line color for all selected objects.                                  */
-/*****************************************************************************/
-void
-gl_view_set_selection_line_color (glView      *view,
-				  glColorNode *line_color_node)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_line_color (object, line_color_node);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* Can line width properties be set for selection?                           */
-/*****************************************************************************/
-gboolean
-gl_view_can_selection_line_width (glView *view)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		if (gl_label_object_can_line_width (object)) {
-			return TRUE;
-		}
-
-	}
-
-	return FALSE;
-}
-
-
-/*****************************************************************************/
-/* Set line width for all selected objects.                                  */
-/*****************************************************************************/
-void
-gl_view_set_selection_line_width (glView  *view,
-				  gdouble  line_width)
-{
-	GList         *p;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-		object = gl_view_object_get_object(GL_VIEW_OBJECT (p->data));
-		gl_label_object_set_line_width (object, line_width);
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* "Cut" selected items and place in clipboard selections.                   */
-/*****************************************************************************/
-void
-gl_view_cut (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	gl_view_copy (view);
-	gl_view_delete_selection (view);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* "Copy" selected items to clipboard selections.                            */
-/*****************************************************************************/
-void
-gl_view_copy (glView *view)
-{
-	GList         *p;
-	glViewObject  *view_object;
-	glLabelObject *object;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	if (view->selected_object_list) {
-
-		if ( view->selection_data ) {
-			g_object_unref (view->selection_data);
-		}
-		view->selection_data = GL_LABEL(gl_label_new ());
-		gl_label_set_template (view->selection_data, view->label->template);
-		gl_label_set_rotate_flag (view->selection_data, view->label->rotate_flag);
-
-		for (p = view->selected_object_list; p != NULL; p = p->next) {
-
-			view_object = GL_VIEW_OBJECT (p->data);
-			object = gl_view_object_get_object (view_object);
-
-			gl_label_object_dup (object, view->selection_data);
-
-		}
-
-		gtk_selection_owner_set (view->invisible,
-					 clipboard_atom, GDK_CURRENT_TIME);
-		view->have_selection = TRUE;
-
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*****************************************************************************/
-/* "Paste" from private clipboard selection.                                 */
-/*****************************************************************************/
-void
-gl_view_paste (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	gtk_selection_convert (GTK_WIDGET (view->invisible),
-			       clipboard_atom, GDK_SELECTION_TYPE_STRING,
-			       GDK_CURRENT_TIME);
 
 	gl_debug (DEBUG_VIEW, "END");
 }
@@ -2805,434 +1292,6 @@ gl_view_is_zoom_min (glView *view)
 
 
 /*---------------------------------------------------------------------------*/
-/* PRIVATE.  Handle "selection-clear" signal.                                */
-/*---------------------------------------------------------------------------*/
-static void
-selection_clear_cb (GtkWidget         *widget,
-		    GdkEventSelection *event,
-		    glView            *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->have_selection = FALSE;
-	g_object_unref (view->selection_data);
-	view->selection_data = NULL;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Handle "selection-get" signal.                                  */
-/*---------------------------------------------------------------------------*/
-static void
-selection_get_cb (GtkWidget        *widget,
-		  GtkSelectionData *sd,
-		  guint             info,
-		  guint             time,
-		  glView           *view)
-{
-	gchar            *buffer;
-	glXMLLabelStatus  status;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	if (view->have_selection) {
-
-		buffer = gl_xml_label_save_buffer (view->selection_data,
-						   &status);
-		gtk_selection_data_set (sd,
-					GDK_SELECTION_TYPE_STRING, 8,
-					(guchar *)buffer, strlen (buffer));
-		g_free (buffer);
-	}
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Handle "selection-received" signal.  (Result of Paste)          */
-/*---------------------------------------------------------------------------*/
-static void
-selection_received_cb (GtkWidget        *widget,
-		       GtkSelectionData *sd,
-		       guint             time,
-		       glView           *view)
-{
-	glLabel          *label = NULL;
-	glXMLLabelStatus  status;
-	GList            *p, *p_next;
-	glLabelObject    *object, *newobject;
-
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	if (gtk_selection_data_get_length (sd) < 0)
-        {
-		return;
-	}
-	if (gtk_selection_data_get_data_type (sd) != GDK_SELECTION_TYPE_STRING)
-        {
-		return;
-	}
-
-	gl_view_unselect_all (view);
-
-	label = gl_xml_label_open_buffer ((gchar *)gtk_selection_data_get_data (sd), &status);
-	for (p = label->objects; p != NULL; p = p_next)
-        {
-		p_next = p->next;
-
-		object = (glLabelObject *) p->data;
-		newobject = gl_label_object_dup (object, view->label);
-
-		gl_debug (DEBUG_VIEW, "object pasted");
-	}
-	g_object_unref (label);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default font family.                                                 */
-/****************************************************************************/
-void
-gl_view_set_default_font_family (glView      *view,
-				 const gchar *font_family)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	if (view->default_font_family) {
-		g_free (view->default_font_family);
-	}
-	view->default_font_family = g_strdup (font_family);
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default font size.                                                   */
-/****************************************************************************/
-void
-gl_view_set_default_font_size (glView  *view,
-			       gdouble  font_size)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_font_size = font_size;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default font weight.                                                 */
-/****************************************************************************/
-void
-gl_view_set_default_font_weight (glView      *view,
-				 PangoWeight  font_weight)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_font_weight = font_weight;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default font italic flag.                                            */
-/****************************************************************************/
-void
-gl_view_set_default_font_italic_flag (glView   *view,
-				      gboolean  font_italic_flag)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_font_italic_flag = font_italic_flag;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default text color.                                                  */
-/****************************************************************************/
-void
-gl_view_set_default_text_color (glView *view,
-				guint   text_color)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_text_color = text_color;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default text alignment.                                              */
-/****************************************************************************/
-void
-gl_view_set_default_text_alignment (glView           *view,
-				    PangoAlignment    text_alignment)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_text_alignment = text_alignment;
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default text line spacing.                                           */
-/****************************************************************************/
-void
-gl_view_set_default_text_line_spacing (glView  *view,
-			               gdouble  text_line_spacing)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_text_line_spacing = text_line_spacing;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default line width.                                                  */
-/****************************************************************************/
-void
-gl_view_set_default_line_width (glView  *view,
-				gdouble  line_width)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_line_width = line_width;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default line color.                                                  */
-/****************************************************************************/
-void
-gl_view_set_default_line_color (glView *view,
-				guint   line_color)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_line_color = line_color;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Set default fill color.                                                  */
-/****************************************************************************/
-void
-gl_view_set_default_fill_color (glView *view,
-				guint   fill_color)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->default_fill_color = fill_color;
-
-	gl_debug (DEBUG_VIEW, "END");
-}
-
-
-/****************************************************************************/
-/* Get default font family.                                                 */
-/****************************************************************************/
-gchar *
-gl_view_get_default_font_family (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), NULL);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return g_strdup (view->default_font_family);
-}
-
-
-/****************************************************************************/
-/* Get default font size.                                                   */
-/****************************************************************************/
-gdouble
-gl_view_get_default_font_size (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 12.0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_font_size;
-}
-
-
-/****************************************************************************/
-/* Get default font weight.                                                 */
-/****************************************************************************/
-PangoWeight
-gl_view_get_default_font_weight (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), PANGO_WEIGHT_NORMAL);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_font_weight;
-}
-
-
-/****************************************************************************/
-/* Get default font italic flag.                                            */
-/****************************************************************************/
-gboolean
-gl_view_get_default_font_italic_flag (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), FALSE);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_font_italic_flag;
-}
-
-
-/****************************************************************************/
-/* Get default text color.                                                  */
-/****************************************************************************/
-guint
-gl_view_get_default_text_color (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_text_color;
-}
-
-
-/****************************************************************************/
-/* Get default text alignment.                                              */
-/****************************************************************************/
-PangoAlignment
-gl_view_get_default_text_alignment (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), PANGO_ALIGN_LEFT);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_text_alignment;
-}
-
-
-/****************************************************************************/
-/* Get default text line spacing.                                           */
-/****************************************************************************/
-gdouble
-gl_view_get_default_text_line_spacing (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_text_line_spacing;
-}
-
-
-/****************************************************************************/
-/* Get default line width.                                                  */
-/****************************************************************************/
-gdouble
-gl_view_get_default_line_width (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 1.0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_line_width;
-}
-
-
-/****************************************************************************/
-/* Get default line color.                                                  */
-/****************************************************************************/
-guint
-gl_view_get_default_line_color (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_line_color;
-}
-
-
-/****************************************************************************/
-/* Get default fill color.                                                  */
-/****************************************************************************/
-guint
-gl_view_get_default_fill_color (glView *view)
-{
-	gl_debug (DEBUG_VIEW, "START");
-
-	g_return_val_if_fail (view && GL_IS_VIEW (view), 0);
-
-	gl_debug (DEBUG_VIEW, "END");
-
-	return view->default_fill_color;
-}
-
-
-/*---------------------------------------------------------------------------*/
 /* PRIVATE.  Focus in event handler.                                         */
 /*---------------------------------------------------------------------------*/
 static gboolean
@@ -3293,7 +1352,7 @@ motion_notify_event_cb (glView            *view,
         gdouble             scale;
         gdouble             x, y;
         GdkCursor          *cursor;
-        glViewObjectHandle  handle;
+        glLabelObjectHandle handle;
 
         bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (view->canvas));
         window = gtk_widget_get_window (view->canvas);
@@ -3327,12 +1386,12 @@ motion_notify_event_cb (glView            *view,
                 {
 
                 case GL_VIEW_IDLE:
-                        if ( gl_view_is_selection_atomic (view) &&
-                             view_handle_at (view, cr, event->x, event->y, &handle) )
+                        if ( gl_label_is_selection_atomic (view->label) &&
+                             gl_label_get_handle_at (view->label, cr, event->x, event->y, &handle) )
                         {
                                 cursor = gdk_cursor_new (GDK_CROSSHAIR);
                         }
-                        else if (view_view_object_at (view, cr, event->x, event->y))
+                        else if (gl_label_object_at (view->label, cr, event->x, event->y))
                         {
                                 cursor = gdk_cursor_new (GDK_FLEUR);
                         }
@@ -3358,7 +1417,7 @@ motion_notify_event_cb (glView            *view,
                         break;
 
                 case GL_VIEW_ARROW_MOVE:
-                        gl_view_move_selection (view,
+                        gl_label_move_selection (view->label,
                                                 (x - view->move_last_x),
                                                 (y - view->move_last_y));
                         view->move_last_x = x;
@@ -3366,12 +1425,7 @@ motion_notify_event_cb (glView            *view,
                         break;
 
                 case GL_VIEW_ARROW_RESIZE:
-                        gl_view_object_resize_event (view->resize_object,
-                                                     view->resize_handle,
-                                                     view->resize_honor_aspect,
-                                                     cr,
-                                                     event->x,
-                                                     event->y);
+                        resize_event (view, cr, event->x, event->y);
                         break;
 
                 default:
@@ -3449,8 +1503,8 @@ button_press_event_cb (glView            *view,
 	cairo_t            *cr;
         gdouble             scale;
         gdouble             x, y;
-        glViewObject       *view_object;
-        glViewObjectHandle  handle;
+        glLabelObject      *object;
+        glLabelObjectHandle handle;
 
         gtk_widget_grab_focus(GTK_WIDGET (view->canvas));
 
@@ -3479,36 +1533,36 @@ button_press_event_cb (glView            *view,
                 switch (view->mode)
                 {
                 case GL_VIEW_MODE_ARROW:
-                        if ( gl_view_is_selection_atomic (view) &&
-                             (view_object = view_handle_at (view, cr, event->x, event->y, &handle)) )
+                        if ( gl_label_is_selection_atomic (view->label) &&
+                             (object = gl_label_get_handle_at (view->label, cr, event->x, event->y, &handle)) )
                         {
-                                view->resize_object = view_object;
+                                view->resize_object = object;
                                 view->resize_handle = handle;
                                 view->resize_honor_aspect = event->state & GDK_CONTROL_MASK;
 
                                 view->state = GL_VIEW_ARROW_RESIZE;
                         }
-                        else if ((view_object = view_view_object_at (view, cr, event->x, event->y)))
+                        else if ((object = gl_label_object_at (view->label, cr, event->x, event->y)))
                         {
                                 if (event->state & GDK_CONTROL_MASK)
                                 {
-                                        if (gl_view_is_object_selected (view, view_object))
+                                        if (gl_label_object_is_selected (object))
                                         {
                                                 /* Un-selecting a selected item */
-                                                gl_view_unselect_object (view, view_object);
+                                                gl_label_unselect_object (view->label, object);
                                         } else {
                                                 /* Add to current selection */
-                                                gl_view_select_object (view, view_object);
+                                                gl_label_select_object (view->label, object);
                                         }
                                 }
                                 else
                                 {
-                                        if (!gl_view_is_object_selected (view, view_object))
+                                        if (!gl_label_object_is_selected (object))
                                         {
                                                 /* remove any selections before adding */
-                                                gl_view_unselect_all (view);
+                                                gl_label_unselect_all (view->label);
                                                 /* Add to current selection */
-                                                gl_view_select_object (view, view_object);
+                                                gl_label_select_object (view->label, object);
                                         }
                                 }
                                 view->move_last_x = x;
@@ -3520,7 +1574,7 @@ button_press_event_cb (glView            *view,
                         {
                                 if (!(event->state & GDK_CONTROL_MASK))
                                 {
-                                        gl_view_unselect_all (view);
+                                        gl_label_unselect_all (view->label);
                                 }
 
                                 view->select_region_visible = TRUE;
@@ -3654,7 +1708,7 @@ button_release_event_cb (glView            *view,
                                 view->select_region.x2 = x;
                                 view->select_region.y2 = y;
 
-                                gl_view_select_region (view, &view->select_region);
+                                gl_label_select_region (view->label, &view->select_region);
 
                                 view->state = GL_VIEW_IDLE;
                                 break;
@@ -3698,6 +1752,8 @@ button_release_event_cb (glView            *view,
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         gdk_window_set_cursor (window, cursor);
                         gdk_cursor_unref (cursor);
+
+                        gl_label_select_object (view->label, view->create_object);
                         break;
 
 
@@ -3734,23 +1790,23 @@ key_press_event_cb (glView            *view,
 
                 case GDK_Left:
                 case GDK_KP_Left:
-                        gl_view_move_selection (view, -1.0 / (view->zoom), 0.0);
+                        gl_label_move_selection (view->label, -1.0 / (view->zoom), 0.0);
                         break;
                 case GDK_Up:
                 case GDK_KP_Up:
-                        gl_view_move_selection (view, 0.0, -1.0 / (view->zoom));
+                        gl_label_move_selection (view->label, 0.0, -1.0 / (view->zoom));
                         break;
                 case GDK_Right:
                 case GDK_KP_Right:
-                        gl_view_move_selection (view, 1.0 / (view->zoom), 0.0);
+                        gl_label_move_selection (view->label, 1.0 / (view->zoom), 0.0);
                         break;
                 case GDK_Down:
                 case GDK_KP_Down:
-                        gl_view_move_selection (view, 0.0, 1.0 / (view->zoom));
+                        gl_label_move_selection (view->label, 0.0, 1.0 / (view->zoom));
                         break;
                 case GDK_Delete:
                 case GDK_KP_Delete:
-                        gl_view_delete_selection (view);
+                        gl_label_delete_selection (view->label);
                         cursor = gdk_cursor_new (GDK_LEFT_PTR);
                         gdk_window_set_cursor (window, cursor);
                         gdk_cursor_unref (cursor);
@@ -3762,6 +1818,184 @@ key_press_event_cb (glView            *view,
         }
         return TRUE;    /* We handled this or we were dragging. */
 }
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Resize object.                                                  */
+/*---------------------------------------------------------------------------*/
+static void
+resize_event (glView             *view,
+              cairo_t            *cr,
+              gdouble             x,
+              gdouble             y)
+{
+        cairo_matrix_t matrix;
+        gdouble        x0, y0, x1, y1, x2, y2;
+        gdouble        w, h;
+        gdouble        dx=0, dy=0;
+
+	gl_debug (DEBUG_VIEW, "x,y world = %g, %g", x, y);
+
+        /*
+         * Change to item relative coordinates
+         */
+        cairo_save (cr);
+        gl_label_object_get_position (view->resize_object, &x0, &y0);
+        cairo_translate (cr, x0, y0);
+        gl_label_object_get_matrix (view->resize_object, &matrix);
+        cairo_transform (cr, &matrix);
+
+        /*
+         * Initialize origin and 2 corners in object relative coordinates.
+         */
+        x0 = 0.0;
+        y0 = 0.0;
+
+        x1 = 0.0;
+        y1 = 0.0;
+
+        gl_label_object_get_size (view->resize_object, &x2, &y2);
+
+	gl_debug (DEBUG_VIEW, "x0,y0 object = %g, %g", x0, y0);
+	gl_debug (DEBUG_VIEW, "x1,y1 object = %g, %g", x1, y1);
+	gl_debug (DEBUG_VIEW, "x2,y2 object = %g, %g", x2, y2);
+
+        /*
+         * Translate x,y into object relative coordinates.
+         */
+        cairo_device_to_user (cr, &x, &y);
+
+	gl_debug (DEBUG_VIEW, "x,y object = %g, %g", x, y);
+        
+        /*
+         * Get new size
+         */
+        switch (view->resize_handle)
+        {
+
+        case GL_LABEL_OBJECT_HANDLE_NW:
+                w = MAX (x2 - x, 0);
+                h = MAX (y2 - y, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_N:
+                w = x2 - x1;
+                h = MAX (y2 - y, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_NE:
+                w = MAX (x - x1, 0);
+                h = MAX (y2 - y, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_E:
+                w = MAX (x - x1, 0);
+                h = y2 - y1;
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_SE:
+                w = MAX (x - x1, 0);
+                h = MAX (y - y1, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_S:
+                w = x2 - x1;
+                h = MAX (y - y1, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_SW:
+                w = MAX (x2 - x, 0);
+                h = MAX (y - y1, 0);
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_W:
+                w = MAX (x2 - x, 0);
+                h = y2 - y1;
+                break;
+        case GL_LABEL_OBJECT_HANDLE_P1:
+                x1 = x;
+                y1 = y;
+                dx = (x2 - x);
+                dy = (y2 - y);
+                x0 = x0 + x1;
+                y0 = y0 + y1;
+                break;
+
+        case GL_LABEL_OBJECT_HANDLE_P2:
+                dx = x - x1;
+                dy = y - y1;
+                x0 = x0 + x1;
+                y0 = y0 + y1;
+                break;
+
+        default:
+                g_print ("Invalid handle.\n");  /* Should not happen! */
+
+        }
+        if ( (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P1) &&
+             (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P2) )
+        {
+                if ( view->resize_honor_aspect )
+                {
+                        gl_label_object_set_size_honor_aspect (view->resize_object, w, h);
+                }
+                else
+                {
+                        gl_label_object_set_size (view->resize_object, w, h);
+                }
+
+                /*
+                 * Query the new size in case it was constrained.
+                 */
+                gl_label_object_get_size (view->resize_object, &w, &h);
+
+                /*
+                 * Get new position
+                 */
+                switch (view->resize_handle)
+                {
+
+                case GL_LABEL_OBJECT_HANDLE_NW:
+                        x0 += x2 - w;
+                        y0 += y2 - h;
+                        break;
+
+                case GL_LABEL_OBJECT_HANDLE_N:
+                case GL_LABEL_OBJECT_HANDLE_NE:
+                        /* x unchanged */
+                        y0 += y2 - h;
+                        break;
+
+                case GL_LABEL_OBJECT_HANDLE_E:
+                case GL_LABEL_OBJECT_HANDLE_SE:
+                case GL_LABEL_OBJECT_HANDLE_S:
+                        /* unchanged */
+                        break;
+
+                case GL_LABEL_OBJECT_HANDLE_SW:
+                case GL_LABEL_OBJECT_HANDLE_W:
+                        x0 += x2 - w;
+                        /* y unchanged */
+                        break;
+
+                default:
+                        g_print ("Invalid handle.\n");  /* Should not happen! */
+                }
+        }
+        else
+        {
+                gl_label_object_set_size (view->resize_object, dx, dy);
+        }
+
+        /*
+         * Put new origin back into world coordinates and set.
+         */
+        cairo_user_to_device (cr, &x0, &y0);
+        cairo_restore (cr);
+        cairo_device_to_user (cr, &x0, &y0);
+        gl_label_object_set_position (view->resize_object, x0, y0);
+}
+
 
 
 

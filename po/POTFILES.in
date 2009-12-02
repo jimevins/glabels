@@ -171,8 +171,6 @@ src/view-image.c
 src/view-image.h
 src/view-line.c
 src/view-line.h
-src/view-object.c
-src/view-object.h
 src/view-text.c
 src/view-text.h
 src/warning-handler.c

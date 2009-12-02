@@ -22,10 +22,12 @@
 #define __LABEL_OBJECT_H__
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 #include <pango/pango.h>
 #include <cairo.h>
 
 G_BEGIN_DECLS
+
 
 typedef enum {
         GL_LABEL_OBJECT_TEXT,
@@ -36,6 +38,21 @@ typedef enum {
         GL_LABEL_OBJECT_BARCODE,
         GL_LABEL_OBJECT_N_TYPES
 } glLabelObjectType;
+
+
+typedef enum {
+        GL_LABEL_OBJECT_HANDLE_NONE = 0,
+        GL_LABEL_OBJECT_HANDLE_N,
+        GL_LABEL_OBJECT_HANDLE_E,
+        GL_LABEL_OBJECT_HANDLE_W,
+        GL_LABEL_OBJECT_HANDLE_S,
+        GL_LABEL_OBJECT_HANDLE_NW,
+        GL_LABEL_OBJECT_HANDLE_NE,
+        GL_LABEL_OBJECT_HANDLE_SE,
+        GL_LABEL_OBJECT_HANDLE_SW,
+        GL_LABEL_OBJECT_HANDLE_P1,
+        GL_LABEL_OBJECT_HANDLE_P2,
+} glLabelObjectHandle;
 
 
 #define GL_TYPE_LABEL_OBJECT              (gl_label_object_get_type ())
@@ -66,16 +83,12 @@ struct _glLabelObjectClass {
         GObjectClass          parent_class;
 
         /*
-         * Methods
+         * Set/Get Methods
          */
 
         void              (*set_size)             (glLabelObject     *object,
                                                    gdouble            w,
                                                    gdouble            h);
-
-        void              (*get_size)             (glLabelObject     *object,
-                                                   gdouble           *w,
-                                                   gdouble           *h);
 
         void              (*set_font_family)      (glLabelObject     *object,
                                                    const gchar       *font_family);
@@ -92,8 +105,8 @@ struct _glLabelObjectClass {
         void              (*set_text_alignment)   (glLabelObject     *object,
                                                    PangoAlignment     text_alignment);
 
-        void              (*set_text_line_spacing) (glLabelObject    *object,
-                                                    gdouble           text_line_spacing);
+        void              (*set_text_line_spacing)(glLabelObject     *object,
+                                                   gdouble            text_line_spacing);
 
         void              (*set_text_color)       (glLabelObject     *object,
                                                    glColorNode       *text_color_node);
@@ -107,7 +120,11 @@ struct _glLabelObjectClass {
         void              (*set_line_width)       (glLabelObject     *object,
                                                    gdouble            line_width);
 
-        gchar            *(*get_font_family)      (glLabelObject     *object);
+        void              (*get_size)             (glLabelObject     *object,
+                                                   gdouble           *w,
+                                                   gdouble           *h);
+
+        gchar *           (*get_font_family)      (glLabelObject     *object);
 
         gdouble           (*get_font_size)        (glLabelObject     *object);
 
@@ -119,16 +136,20 @@ struct _glLabelObjectClass {
 
         gdouble           (*get_text_line_spacing) (glLabelObject    *object);
 
-        glColorNode*      (*get_text_color)       (glLabelObject     *object);
+        glColorNode *     (*get_text_color)       (glLabelObject     *object);
 
-        glColorNode*      (*get_fill_color)       (glLabelObject     *object);
+        glColorNode *     (*get_fill_color)       (glLabelObject     *object);
 
-        glColorNode*      (*get_line_color)       (glLabelObject     *object);
+        glColorNode *     (*get_line_color)       (glLabelObject     *object);
 
         gdouble           (*get_line_width)       (glLabelObject     *object);
 
-        void              (*copy)                 (glLabelObject     *dst_object,
+        void              (*copy)                 (glLabelObject     *dst_object
+,
                                                    glLabelObject     *src_object);
+
+        void              (*copy_to_clipboard)    (glLabelObject     *object,
+                                                   GtkClipboard      *clipboard);
 
         /*
          * Draw methods
@@ -143,31 +164,33 @@ struct _glLabelObjectClass {
                                          gboolean       screen_flag,
                                          glMergeRecord *record);
 
+        void        (*draw_handles)     (glLabelObject *object,
+                                         cairo_t       *cr);
+
+        /*
+         * Cairo context query methods
+         */
+        gboolean            (*object_at) (glLabelObject     *object,
+                                          cairo_t           *cr,
+                                          gdouble            x_pixels,
+                                          gdouble            y_pixels);
+
+        glLabelObjectHandle (*handle_at) (glLabelObject     *object,
+                                          cairo_t           *cr,
+                                          gdouble            x_pixels,
+                                          gdouble            y_pixels);
+
 
         /*
          * Signals
          */
-        void (*changed)     (glLabelObject     *object,
-                             gpointer            user_data);
 
-        void (*moved)       (glLabelObject     *object,
-                             gdouble            dx,
-                             gdouble            dy,
-                             gpointer           user_data);
-
-        void (*flip_rotate) (glLabelObject     *object,
-                             gpointer           user_data);
-
-        void (*top)         (glLabelObject     *object,
-                             gpointer           user_data);
-
-        void (*bottom)      (glLabelObject     *object,
-                             gpointer           user_data);
-
-        void (*removed)     (glLabelObject     *object,
-                             gpointer            user_data);
+        void        (*changed) (glLabelObject *object,
+                                gpointer       user_data);
 
 };
+
+
 
 GType          gl_label_object_get_type              (void) G_GNUC_CONST;
 
@@ -177,8 +200,12 @@ GObject       *gl_label_object_new                   (glLabel           *label);
 glLabelObject *gl_label_object_dup                   (glLabelObject     *src_object,
                                                       glLabel           *label);
 
-void           gl_label_object_emit_changed          (glLabelObject     *object);
 
+void           gl_label_object_copy_to_clipboard     (glLabelObject     *object,
+                                                      GtkClipboard      *clipboard);
+
+
+void           gl_label_object_emit_changed          (glLabelObject     *object);
 
 void           gl_label_object_set_parent            (glLabelObject     *object,
                                                       glLabel           *label);
@@ -186,7 +213,9 @@ void           gl_label_object_set_parent            (glLabelObject     *object,
 glLabel       *gl_label_object_get_parent            (glLabelObject     *object);
 
 
-void           gl_label_object_remove                (glLabelObject     *object);
+void           gl_label_object_select                (glLabelObject     *object);
+void           gl_label_object_unselect              (glLabelObject     *object);
+gboolean       gl_label_object_is_selected           (glLabelObject     *object);
 
 void           gl_label_object_set_name              (glLabelObject     *object,
                                                       gchar             *name);
@@ -202,10 +231,6 @@ void           gl_label_object_set_position_relative (glLabelObject     *object,
                                                       gdouble            dx,
                                                       gdouble            dy);
 
-void           gl_label_object_get_position          (glLabelObject     *object,
-                                                      gdouble           *x,
-                                                      gdouble           *y);
-
 void           gl_label_object_set_size              (glLabelObject     *object,
                                                       gdouble            w,
                                                       gdouble            h);
@@ -213,19 +238,6 @@ void           gl_label_object_set_size              (glLabelObject     *object,
 void           gl_label_object_set_size_honor_aspect (glLabelObject     *object,
                                                       gdouble            w,
                                                       gdouble            h);
-
-void           gl_label_object_get_size              (glLabelObject     *object,
-                                                      gdouble           *w,
-                                                      gdouble           *h);
-
-void           gl_label_object_get_raw_size          (glLabelObject     *object,
-                                                      gdouble           *w,
-                                                      gdouble           *h);
-
-void           gl_label_object_get_extent            (glLabelObject     *object,
-                                                      glLabelRegion     *region);
-
-gboolean       gl_label_object_can_text              (glLabelObject     *object);
 
 void           gl_label_object_set_font_family       (glLabelObject     *object,
                                                       const gchar       *font_family);
@@ -248,62 +260,15 @@ void           gl_label_object_set_text_color        (glLabelObject     *object,
 void           gl_label_object_set_text_line_spacing (glLabelObject     *object,
                                                       gdouble            text_line_spacing);
 
-
-gchar           *gl_label_object_get_font_family       (glLabelObject     *object);
-
-gdouble          gl_label_object_get_font_size         (glLabelObject     *object);
-
-PangoWeight      gl_label_object_get_font_weight       (glLabelObject     *object);
-
-gboolean         gl_label_object_get_font_italic_flag  (glLabelObject     *object);
-
-PangoAlignment   gl_label_object_get_text_alignment    (glLabelObject     *object);
-
-gdouble          gl_label_object_get_text_line_spacing (glLabelObject     *object);
-
-glColorNode     *gl_label_object_get_text_color        (glLabelObject     *object);
-
-
-gboolean       gl_label_object_can_fill              (glLabelObject     *object);
-
 void           gl_label_object_set_fill_color        (glLabelObject     *object,
                                                       glColorNode       *fill_color_node);
-
-glColorNode*   gl_label_object_get_fill_color        (glLabelObject     *object);
-
-
-gboolean       gl_label_object_can_line_color        (glLabelObject     *object);
 
 void           gl_label_object_set_line_color        (glLabelObject     *object,
                                                       glColorNode       *line_color_node);
 
-glColorNode   *gl_label_object_get_line_color        (glLabelObject     *object);
-
-gboolean       gl_label_object_can_line_width        (glLabelObject     *object);
-
 void           gl_label_object_set_line_width        (glLabelObject     *object,
                                                       gdouble            line_width);
 
-gdouble        gl_label_object_get_line_width        (glLabelObject     *object);
-
-
-void           gl_label_object_raise_to_top          (glLabelObject     *object);
-
-void           gl_label_object_lower_to_bottom       (glLabelObject     *object);
-
-
-void           gl_label_object_flip_horiz            (glLabelObject     *object);
-
-void           gl_label_object_flip_vert             (glLabelObject     *object);
-
-void           gl_label_object_rotate                (glLabelObject     *object,
-                                                      gdouble            theta_degs);
-
-void           gl_label_object_set_matrix            (glLabelObject     *object,
-                                                      cairo_matrix_t    *matrix);
-
-void           gl_label_object_get_matrix            (glLabelObject     *object,
-                                                      cairo_matrix_t    *matrix);
 
 void           gl_label_object_set_shadow_state      (glLabelObject     *object,
                                                       gboolean           state);
@@ -318,6 +283,68 @@ void           gl_label_object_set_shadow_color      (glLabelObject     *object,
 void           gl_label_object_set_shadow_opacity    (glLabelObject     *object,
                                                       gdouble            alpha);
 
+
+void           gl_label_object_flip_horiz            (glLabelObject     *object);
+
+void           gl_label_object_flip_vert             (glLabelObject     *object);
+
+void           gl_label_object_rotate                (glLabelObject     *object,
+                                                      gdouble            theta_degs);
+
+void           gl_label_object_set_matrix            (glLabelObject     *object,
+                                                      cairo_matrix_t    *matrix);
+
+
+void           gl_label_object_get_position          (glLabelObject     *object,
+                                                      gdouble           *x,
+                                                      gdouble           *y);
+
+void           gl_label_object_get_size              (glLabelObject     *object,
+                                                      gdouble           *w,
+                                                      gdouble           *h);
+
+void           gl_label_object_get_raw_size          (glLabelObject     *object,
+                                                      gdouble           *w,
+                                                      gdouble           *h);
+
+void           gl_label_object_get_extent            (glLabelObject     *object,
+                                                      glLabelRegion     *region);
+
+gboolean       gl_label_object_can_text              (glLabelObject     *object);
+
+
+gchar         *gl_label_object_get_font_family       (glLabelObject     *object);
+
+gdouble        gl_label_object_get_font_size         (glLabelObject     *object);
+
+PangoWeight    gl_label_object_get_font_weight       (glLabelObject     *object);
+
+gboolean       gl_label_object_get_font_italic_flag  (glLabelObject     *object);
+
+PangoAlignment gl_label_object_get_text_alignment    (glLabelObject     *object);
+
+gdouble        gl_label_object_get_text_line_spacing (glLabelObject     *object);
+
+glColorNode   *gl_label_object_get_text_color        (glLabelObject     *object);
+
+
+gboolean       gl_label_object_can_fill              (glLabelObject     *object);
+
+glColorNode*   gl_label_object_get_fill_color        (glLabelObject     *object);
+
+
+gboolean       gl_label_object_can_line_color        (glLabelObject     *object);
+
+glColorNode   *gl_label_object_get_line_color        (glLabelObject     *object);
+
+gboolean       gl_label_object_can_line_width        (glLabelObject     *object);
+
+gdouble        gl_label_object_get_line_width        (glLabelObject     *object);
+
+
+void           gl_label_object_get_matrix            (glLabelObject     *object,
+                                                      cairo_matrix_t    *matrix);
+
 gboolean       gl_label_object_get_shadow_state      (glLabelObject     *object);
 
 void           gl_label_object_get_shadow_offset     (glLabelObject     *object,
@@ -328,11 +355,48 @@ glColorNode*   gl_label_object_get_shadow_color      (glLabelObject     *object)
 
 gdouble        gl_label_object_get_shadow_opacity    (glLabelObject     *object);
 
+
 void           gl_label_object_draw                  (glLabelObject     *object,
                                                       cairo_t           *cr,
                                                       gboolean           screen_flag,
                                                       glMergeRecord     *record);
 
+gboolean       gl_label_object_is_located_at         (glLabelObject     *object,
+                                                      cairo_t           *cr,
+                                                      gdouble            x_pixels,
+                                                      gdouble            y_pixels);
+
+void           gl_label_object_draw_handles          (glLabelObject     *object,
+                                                      cairo_t           *cr);
+
+glLabelObjectHandle gl_label_object_handle_at        (glLabelObject     *object,
+                                                      cairo_t           *cr,
+                                                      gdouble            x_pixels,
+                                                      gdouble            y_pixels);
+
+
+/*
+ * Specific handle drawing methods.
+ */
+void           gl_label_object_draw_handles_box      (glLabelObject     *object,
+                                                      cairo_t           *cr);
+
+void           gl_label_object_draw_handles_line     (glLabelObject     *object,
+                                                      cairo_t           *cr);
+
+
+/*
+ * Specific handle query methods.
+ */
+glLabelObjectHandle gl_label_object_box_handle_at    (glLabelObject     *object,
+                                                      cairo_t           *cr,
+                                                      gdouble            x,
+                                                      gdouble            y);
+
+glLabelObjectHandle gl_label_object_line_handle_at   (glLabelObject     *object,
+                                                      cairo_t           *cr,
+                                                      gdouble            x,
+                                                      gdouble            y);
 
 
 

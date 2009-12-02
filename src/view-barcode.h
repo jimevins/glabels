@@ -21,42 +21,14 @@
 #ifndef __VIEW_BARCODE_H__
 #define __VIEW_BARCODE_H__
 
-#include "view-object.h"
-#include "label-barcode.h"
+#include "view.h"
+#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
 
-#define GL_TYPE_VIEW_BARCODE            (gl_view_barcode_get_type ())
-#define GL_VIEW_BARCODE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_BARCODE, glViewBarcode))
-#define GL_VIEW_BARCODE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_BARCODE, glViewBarcodeClass))
-#define GL_IS_VIEW_BARCODE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW_BARCODE))
-#define GL_IS_VIEW_BARCODE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW_BARCODE))
-
-typedef struct _glViewBarcode          glViewBarcode;
-typedef struct _glViewBarcodeClass     glViewBarcodeClass;
-
-typedef struct _glViewBarcodePrivate   glViewBarcodePrivate;
-
-struct _glViewBarcode {
-	glViewObject              parent_object;
-
-	glViewBarcodePrivate     *priv;
-};
-
-struct _glViewBarcodeClass {
-	glViewObjectClass         parent_class;
-};
-
-
-GType          gl_view_barcode_get_type (void) G_GNUC_CONST;
-
-glViewObject  *gl_view_barcode_new      (glLabelBarcode *object,
-                                         glView         *view);
-
-
 /* cursor for creating barcode objects */
-GdkCursor *gl_view_barcode_get_create_cursor (void);
+GdkCursor *gl_view_barcode_get_create_cursor           (void);
 
 /* Object creation handlers. */
 void       gl_view_barcode_create_button_press_event   (glView *view,

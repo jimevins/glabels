@@ -21,42 +21,14 @@
 #ifndef __VIEW_LINE_H__
 #define __VIEW_LINE_H__
 
-#include "view-object.h"
-#include "label-line.h"
+#include "view.h"
+#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
 
-#define GL_TYPE_VIEW_LINE            (gl_view_line_get_type ())
-#define GL_VIEW_LINE(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GL_TYPE_VIEW_LINE, glViewLine))
-#define GL_VIEW_LINE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GL_TYPE_VIEW_LINE, glViewLineClass))
-#define GL_IS_VIEW_LINE(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GL_TYPE_VIEW_LINE))
-#define GL_IS_VIEW_LINE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GL_TYPE_VIEW_LINE))
-
-typedef struct _glViewLine          glViewLine;
-typedef struct _glViewLineClass     glViewLineClass;
-
-typedef struct _glViewLinePrivate   glViewLinePrivate;
-
-struct _glViewLine {
-	glViewObject       parent_object;
-
-	glViewLinePrivate *priv;
-};
-
-struct _glViewLineClass {
-	glViewObjectClass  parent_class;
-};
-
-
-GType          gl_view_line_get_type (void) G_GNUC_CONST;
-
-glViewObject  *gl_view_line_new      (glLabelLine *object,
-                                      glView     *view);
-
-
 /* cursor for creating line objects */
-GdkCursor *gl_view_line_get_create_cursor (void);
+GdkCursor *gl_view_line_get_create_cursor           (void);
 
 /* Object creation handlers. */
 void       gl_view_line_create_button_press_event   (glView *view,

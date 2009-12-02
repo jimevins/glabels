@@ -172,6 +172,11 @@ gl_object_editor_set_line_color (glObjectEditor      *editor,
 {
 	gl_debug (DEBUG_EDITOR, "START");
 
+        if (color_node == NULL)
+        {
+                return;
+        }
+
         editor->priv->stop_signals = TRUE;
 
 	gl_debug (DEBUG_EDITOR, "color field %s(%d) / %X", color_node->key, color_node->field_flag, color_node->color);
@@ -264,8 +269,7 @@ line_radio_toggled_cb (glObjectEditor *editor)
 		
 	}
  
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        gl_object_editor_changed_cb (editor);
  
         gl_debug (DEBUG_EDITOR, "END");
 }

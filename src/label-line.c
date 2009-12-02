@@ -69,6 +69,11 @@ static void    draw_shadow                (glLabelObject     *object,
                                            gboolean           screen_flag,
                                            glMergeRecord     *record);
 
+static gboolean object_at                 (glLabelObject     *object,
+                                           cairo_t           *cr,
+                                           gdouble            x_pixels,
+                                           gdouble            y_pixels);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -91,6 +96,9 @@ gl_label_line_class_init (glLabelLineClass *class)
 	label_object_class->get_line_width = get_line_width;
         label_object_class->draw_object    = draw_object;
         label_object_class->draw_shadow    = draw_shadow;
+	label_object_class->draw_handles   = gl_label_object_draw_handles_line;
+        label_object_class->object_at      = object_at;
+	label_object_class->handle_at      = gl_label_object_line_handle_at;
 
 	object_class->finalize = gl_label_line_finalize;
 }
@@ -100,7 +108,6 @@ static void
 gl_label_line_init (glLabelLine *lline)
 {
 	lline->priv = g_new0 (glLabelLinePrivate, 1);
-	lline->priv->line_color_node = gl_color_node_new_default ();
 }
 
 
@@ -124,11 +131,22 @@ gl_label_line_finalize (GObject *object)
 GObject *
 gl_label_line_new (glLabel *label)
 {
-	glLabelLine *lline;
+	glLabelLine         *lline;
+	glColorNode         *line_color_node;
 
 	lline = g_object_new (gl_label_line_get_type(), NULL);
 
-	gl_label_object_set_parent (GL_LABEL_OBJECT(lline), label);
+        if (label != NULL)
+        {
+                gl_label_object_set_parent (GL_LABEL_OBJECT(lline), label);
+
+                line_color_node = gl_color_node_new_default ();
+
+                line_color_node->color = gl_label_get_default_line_color(label);
+
+                lline->priv->line_width      = gl_label_get_default_line_width(label);
+                lline->priv->line_color_node = line_color_node;
+        }
 
 	return G_OBJECT (lline);
 }
@@ -324,6 +342,34 @@ draw_shadow (glLabelObject *object,
 	gl_color_node_free (&shadow_color_node);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is object at coordinates?                                                 */
+/*****************************************************************************/
+static gboolean
+object_at (glLabelObject *object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+        gdouble           w, h;
+        gdouble           line_width;
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_move_to (cr, 0, 0);
+        cairo_line_to (cr, w, h);
+
+        line_width = gl_label_object_get_line_width (object);
+        cairo_set_line_width (cr, line_width);
+        if (cairo_in_stroke (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 

@@ -83,3 +83,4 @@ glabels-*.tar.gz
 .*.swp
 *.orig
 *.rej
+gmon.out

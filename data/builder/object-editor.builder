@@ -52,6 +52,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="scrollable">True</property>
+                <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkVBox" id="edit_page_vbox">
                     <property name="visible">True</property>
@@ -233,7 +234,6 @@
                                   <object class="GtkImage" id="image1">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-bold</property>
-                                    <property name="icon-size">4</property>
                                   </object>
                                 </child>
                               </object>
@@ -252,7 +252,6 @@
                                   <object class="GtkImage" id="image2">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-italic</property>
-                                    <property name="icon-size">4</property>
                                   </object>
                                 </child>
                               </object>
@@ -415,7 +414,6 @@
                                   <object class="GtkImage" id="image3">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-justify-left</property>
-                                    <property name="icon-size">4</property>
                                   </object>
                                 </child>
                               </object>
@@ -434,7 +432,6 @@
                                   <object class="GtkImage" id="image4">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-justify-center</property>
-                                    <property name="icon-size">4</property>
                                   </object>
                                 </child>
                               </object>
@@ -453,7 +450,6 @@
                                   <object class="GtkImage" id="image5">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-justify-right</property>
-                                    <property name="icon-size">4</property>
                                   </object>
                                 </child>
                               </object>

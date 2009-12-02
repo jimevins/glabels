@@ -37,15 +37,6 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define DEFAULT_FONT_FAMILY       "Sans"
-#define DEFAULT_FONT_SIZE         14.0
-#define DEFAULT_FONT_WEIGHT       PANGO_WEIGHT_NORMAL
-#define DEFAULT_FONT_ITALIC_FLAG  FALSE
-#define DEFAULT_ALIGN             PANGO_ALIGN_LEFT
-#define DEFAULT_COLOR             GL_COLOR (0,0,0)
-#define DEFAULT_TEXT_LINE_SPACING 1.0
-#define DEFAULT_AUTO_SHRINK       FALSE
-
 #define FONT_SCALE (72.0/96.0)
 
 
@@ -85,6 +76,9 @@ static void gl_label_text_finalize      (GObject          *object);
 
 static void copy                        (glLabelObject    *dst_object,
 					 glLabelObject    *src_object);
+
+static void copy_to_clipboard           (glLabelObject    *object,
+                                         GtkClipboard     *clipboard);
 
 static void buffer_changed_cb           (GtkTextBuffer    *textbuffer,
 					 glLabelText      *ltext);
@@ -152,6 +146,11 @@ static gdouble         auto_shrink_font_size       (cairo_t          *cr,
                                                     gchar            *text,
                                                     gdouble           width);
 
+static gboolean        object_at                   (glLabelObject    *object,
+                                                    cairo_t          *cr,
+                                                    gdouble           x_pixels,
+                                                    gdouble           y_pixels);
+
 
 /*****************************************************************************/
 /* Object infrastructure.                                                    */
@@ -172,6 +171,8 @@ gl_label_text_class_init (glLabelTextClass *class)
 
 	label_object_class->copy                  = copy;
 
+	label_object_class->copy_to_clipboard     = copy_to_clipboard;
+
 	label_object_class->get_size              = get_size;
 
 	label_object_class->set_font_family       = set_font_family;
@@ -190,6 +191,7 @@ gl_label_text_class_init (glLabelTextClass *class)
 	label_object_class->get_text_color        = get_text_color;
         label_object_class->draw_object           = draw_object;
         label_object_class->draw_shadow           = draw_shadow;
+        label_object_class->object_at             = object_at;
 
 	object_class->finalize = gl_label_text_finalize;
 }
@@ -205,16 +207,6 @@ gl_label_text_init (glLabelText *ltext)
 
 	ltext->priv->tag_table         = gtk_text_tag_table_new ();
 	ltext->priv->buffer            = gtk_text_buffer_new (ltext->priv->tag_table);
-
-	ltext->priv->font_family       = g_strdup(DEFAULT_FONT_FAMILY);
-	ltext->priv->font_size         = DEFAULT_FONT_SIZE;
-	ltext->priv->font_weight       = DEFAULT_FONT_WEIGHT;
-	ltext->priv->font_italic_flag  = DEFAULT_FONT_ITALIC_FLAG;
-	ltext->priv->align             = DEFAULT_ALIGN;
-	ltext->priv->color_node        = gl_color_node_new_default ();
-	ltext->priv->color_node->color = DEFAULT_COLOR;
-	ltext->priv->line_spacing      = DEFAULT_TEXT_LINE_SPACING;
-	ltext->priv->auto_shrink       = DEFAULT_AUTO_SHRINK;
 
         ltext->priv->size_changed      = TRUE;
 
@@ -249,11 +241,27 @@ gl_label_text_finalize (GObject *object)
 GObject *
 gl_label_text_new (glLabel *label)
 {
-	glLabelText *ltext;
+	glLabelText   *ltext;
+        glColorNode   *color_node;
 
 	ltext = g_object_new (gl_label_text_get_type(), NULL);
 
-	gl_label_object_set_parent (GL_LABEL_OBJECT(ltext), label);
+        if (label != NULL)
+        {
+                gl_label_object_set_parent (GL_LABEL_OBJECT(ltext), label);
+
+                color_node = gl_color_node_new_default ();
+
+                color_node->color = gl_label_get_default_text_color (label);
+
+                ltext->priv->font_family      = gl_label_get_default_font_family (label);
+                ltext->priv->font_size        = gl_label_get_default_font_size (label);
+                ltext->priv->font_weight      = gl_label_get_default_font_weight (label);
+                ltext->priv->font_italic_flag = gl_label_get_default_font_italic_flag (label);
+                ltext->priv->align            = gl_label_get_default_text_alignment (label);
+		ltext->priv->color_node       = color_node;	  
+                ltext->priv->line_spacing     = gl_label_get_default_text_line_spacing (label);
+        }
 
 	return G_OBJECT (ltext);
 }
@@ -295,6 +303,33 @@ copy (glLabelObject *dst_object,
 
 	gl_color_node_free (&text_color_node);
 	gl_text_node_lines_free (&lines);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Private.  Copy text to clipboard.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+copy_to_clipboard (glLabelObject     *object,
+                   GtkClipboard      *clipboard)
+{
+        glLabelText *ltext;
+	GtkTextIter  start, end;
+	gchar       *text;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (object && GL_IS_LABEL_TEXT (object));
+
+        ltext = GL_LABEL_TEXT (object);
+
+	gtk_text_buffer_get_bounds (ltext->priv->buffer, &start, &end);
+	text = gtk_text_buffer_get_text (ltext->priv->buffer,
+					 &start, &end, FALSE);
+
+        gtk_clipboard_set_text (clipboard, text, -1);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1039,6 +1074,30 @@ auto_shrink_font_size (cairo_t     *cr,
         }
 
         return new_size;
+}
+
+
+/*****************************************************************************/
+/* Is object at coordinates?                                                 */
+/*****************************************************************************/
+static gboolean
+object_at (glLabelObject *object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+        gdouble           w, h;
+
+        gl_label_object_get_size (object, &w, &h);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 

@@ -44,10 +44,7 @@
 
 struct _glUISidebarPrivate {
 
-	glView              *view;
-
-	GtkWidget           *child;
-	GtkWidget           *empty_child;
+	GtkWidget           *editor;
 };
 
 /*===========================================================================*/
@@ -62,9 +59,6 @@ struct _glUISidebarPrivate {
 static void     gl_ui_sidebar_finalize      (GObject              *object);
 
 static void     gl_ui_sidebar_construct     (glUISidebar          *sidebar);
-
-static void     selection_changed_cb        (glView               *view,
-					     glUISidebar          *sidebar);
 
 
 /****************************************************************************/
@@ -109,9 +103,6 @@ gl_ui_sidebar_finalize (GObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GL_IS_UI_SIDEBAR (object));
 
-	if (sidebar->priv->view) {
-		g_object_unref (G_OBJECT(sidebar->priv->view));
-	}
 	g_free (sidebar->priv);
 
 	G_OBJECT_CLASS (gl_ui_sidebar_parent_class)->finalize (object);
@@ -150,71 +141,27 @@ gl_ui_sidebar_construct (glUISidebar       *sidebar)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	sidebar->priv->empty_child = gl_object_editor_new (GL_STOCK_PROPERTIES,
-							   _("Object properties"),
-                                                           NULL,
-							   GL_OBJECT_EDITOR_EMPTY,
-							   NULL);
+	sidebar->priv->editor = gl_object_editor_new ();
+	gtk_widget_show (sidebar->priv->editor);
 
-	sidebar->priv->child = g_object_ref (sidebar->priv->empty_child);
-	gtk_widget_show (sidebar->priv->child);
-	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->priv->child);
-
-	gtk_widget_set_sensitive (GTK_WIDGET (sidebar), FALSE);
+	gtk_container_add (GTK_CONTAINER(sidebar), sidebar->priv->editor);
 
 	gl_debug (DEBUG_UI, "END");
 }
 
 
 /****************************************************************************/
-/* Set view associated with sidebar.                                        */
+/* Set label associated with sidebar.                                       */
 /****************************************************************************/
 void
-gl_ui_sidebar_set_view (glUISidebar *sidebar,
-			glView      *view)
+gl_ui_sidebar_set_label (glUISidebar *sidebar,
+                         glLabel     *label)
 {
 	gl_debug (DEBUG_UI, "START");
 
-	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	gtk_widget_set_sensitive (GTK_WIDGET (sidebar), TRUE);
-
-	sidebar->priv->view = GL_VIEW (g_object_ref (G_OBJECT (view)));
-
-	g_signal_connect (G_OBJECT(view), "selection_changed",
-			  G_CALLBACK(selection_changed_cb), sidebar);
-
-	gl_debug (DEBUG_UI, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  View "selection state changed" callback.                        */
-/*---------------------------------------------------------------------------*/
-static void 
-selection_changed_cb (glView      *view,
-		      glUISidebar *sidebar)
-{
-	gl_debug (DEBUG_UI, "START");
-
-	g_return_if_fail (view && GL_IS_VIEW (view));
-	g_return_if_fail (sidebar && GL_IS_UI_SIDEBAR (sidebar));
-
-	gtk_container_remove (GTK_CONTAINER(sidebar), sidebar->priv->child);
-
-	if (gl_view_is_selection_empty (view) || !gl_view_is_selection_atomic (view)) {
-
-		sidebar->priv->child = g_object_ref (sidebar->priv->empty_child);
-		
-	} else {
-
-		sidebar->priv->child = g_object_ref (gl_view_get_editor (view));
-
-	}
-
-	gtk_widget_show (sidebar->priv->child);
-
-	gtk_box_pack_start (GTK_BOX(sidebar), sidebar->priv->child, TRUE, TRUE, 0);
+        gl_object_editor_set_label (GL_OBJECT_EDITOR (sidebar->priv->editor), label);
 
 	gl_debug (DEBUG_UI, "END");
 }

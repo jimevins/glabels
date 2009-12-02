@@ -136,8 +136,7 @@ img_radio_toggled_cb (glObjectEditor *editor)
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, TRUE);
         }
  
-        /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+        gl_object_editor_changed_cb (editor);
  
         gl_debug (DEBUG_WDGT, "END");
 }
@@ -228,24 +227,29 @@ update_preview_cb (GtkFileChooser *file_chooser, gpointer data)
         GtkWidget *preview;
         char *filename;
         GdkPixbuf *pixbuf;
-        gboolean have_preview;
+
+        gl_debug (DEBUG_EDITOR, "START");
 
         preview = GTK_WIDGET (data);
         filename = gtk_file_chooser_get_preview_filename (file_chooser);
 
         if (filename) {
+                gl_debug (DEBUG_EDITOR, "filename =\"%s\"", filename);
                 pixbuf = gdk_pixbuf_new_from_file_at_size (filename, 128, 128, NULL);
-                have_preview = (pixbuf != NULL);
+                if (pixbuf != NULL)
+                {
+                        gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
+                        g_object_unref (G_OBJECT (pixbuf));
+
+                        gtk_file_chooser_set_preview_widget_active (file_chooser,
+                                                                    TRUE);
+                }
                 g_free (filename);
-
-                gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
-                g_object_unref (G_OBJECT (pixbuf));
-
-                gtk_file_chooser_set_preview_widget_active (file_chooser,
-                                                            have_preview);
         } else {
                 gtk_file_chooser_set_preview_widget_active (file_chooser, FALSE);
         }
+
+        gl_debug (DEBUG_EDITOR, "END");
 }
 
 
@@ -341,8 +345,7 @@ img_selection_changed_cb (glObjectEditor *editor)
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER(editor->priv->img_file_button));
         if (filename != NULL)
         {
-                /* Emit our "changed" signal */
-                g_signal_emit (G_OBJECT (editor), gl_object_editor_signals[CHANGED], 0);
+                gl_object_editor_changed_cb (editor);
         }
         g_free (filename);
 

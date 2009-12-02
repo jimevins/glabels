@@ -79,6 +79,11 @@ static void    draw_shadow                (glLabelObject     *object,
                                            gboolean           screen_flag,
                                            glMergeRecord     *record);
 
+static gboolean object_at                 (glLabelObject     *object,
+                                           cairo_t           *cr,
+                                           gdouble            x_pixels,
+                                           gdouble            y_pixels);
+
 
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
@@ -103,6 +108,7 @@ gl_label_ellipse_class_init (glLabelEllipseClass *class)
 	label_object_class->get_line_width = get_line_width;
         label_object_class->draw_object    = draw_object;
         label_object_class->draw_shadow    = draw_shadow;
+        label_object_class->object_at      = object_at;
 
 	object_class->finalize = gl_label_ellipse_finalize;
 }
@@ -112,8 +118,6 @@ static void
 gl_label_ellipse_init (glLabelEllipse *lellipse)
 {
 	lellipse->priv = g_new0 (glLabelEllipsePrivate, 1);
-	lellipse->priv->line_color_node = gl_color_node_new_default ();
-	lellipse->priv->fill_color_node = gl_color_node_new_default ();
 }
 
 
@@ -138,11 +142,26 @@ gl_label_ellipse_finalize (GObject *object)
 GObject *
 gl_label_ellipse_new (glLabel *label)
 {
-	glLabelEllipse *lellipse;
+	glLabelEllipse      *lellipse;
+	glColorNode         *fill_color_node;
+	glColorNode         *line_color_node;
 
 	lellipse = g_object_new (gl_label_ellipse_get_type(), NULL);
 
-	gl_label_object_set_parent (GL_LABEL_OBJECT(lellipse), label);
+        if (label != NULL)
+        {
+                gl_label_object_set_parent (GL_LABEL_OBJECT(lellipse), label);
+
+                fill_color_node = gl_color_node_new_default ();
+                line_color_node = gl_color_node_new_default ();
+
+                line_color_node->color = gl_label_get_default_line_color(label);
+                fill_color_node->color = gl_label_get_default_fill_color(label);
+
+                lellipse->priv->line_width      = gl_label_get_default_line_width(label);
+                lellipse->priv->line_color_node = line_color_node;
+                lellipse->priv->fill_color_node = fill_color_node;
+        }
 
 	return G_OBJECT (lellipse);
 }
@@ -406,6 +425,38 @@ draw_shadow (glLabelObject *object,
 	gl_color_node_free (&shadow_color_node);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is object at coordinates?                                                 */
+/*****************************************************************************/
+static gboolean
+object_at (glLabelObject *object,
+           cairo_t       *cr,
+           gdouble        x,
+           gdouble        y)
+{
+        gdouble           w, h;
+        gdouble           line_width;
+
+        gl_label_object_get_size (object, &w, &h);
+
+        gl_cairo_ellipse_path (cr, w/2, h/2);
+
+        if (cairo_in_fill (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        line_width = gl_label_object_get_line_width (object);
+        cairo_set_line_width (cr, line_width);
+        if (cairo_in_stroke (cr, x, y))
+        {
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 

@@ -68,7 +68,7 @@ static gboolean window_delete_event_cb (glWindow      *window,
 					GdkEvent      *event,
 					gpointer       user_data);
 
-static void     selection_changed_cb   (glView        *view,
+static void     selection_changed_cb   (glLabel       *label,
 					glWindow      *window);
 
 static void   context_menu_activate_cb (glView       *view,
@@ -340,6 +340,8 @@ gl_window_set_label (glWindow    *window,
 	g_return_if_fail (GL_IS_WINDOW (window));
 	g_return_if_fail (GL_IS_LABEL (label));
 
+        window->label = label;
+
 	gl_label_clear_modified (label);
 
 	set_window_title (window, label);
@@ -350,7 +352,7 @@ gl_window_set_label (glWindow    *window,
 	}
 
 	window->view = gl_view_new (label);
-	gtk_box_pack_start (GTK_BOX (window->hbox), window->view,TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (window->hbox), window->view, TRUE, TRUE, 0);
 
 	gtk_widget_show_all (window->view);
 
@@ -370,15 +372,15 @@ gl_window_set_label (glWindow    *window,
 
 	gl_ui_update_all (window->ui, GL_VIEW(window->view));
 
-	gl_ui_property_bar_set_view (window->property_bar, GL_VIEW(window->view));
-	gl_ui_sidebar_set_view (window->sidebar, GL_VIEW(window->view));
+	gl_ui_property_bar_set_label (window->property_bar, window->label);
+	gl_ui_sidebar_set_label (window->sidebar, window->label);
 
 	string = g_strdup_printf ("%3.0f%%",
 				  100.0*gl_view_get_zoom (GL_VIEW(window->view)));
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
 	g_free (string);
 
-	g_signal_connect (G_OBJECT(window->view), "selection_changed",
+	g_signal_connect (G_OBJECT(window->label), "selection_changed",
 			  G_CALLBACK(selection_changed_cb), window);
 
 	g_signal_connect (G_OBJECT(window->view), "context_menu_activate",
@@ -471,15 +473,15 @@ window_delete_event_cb (glWindow      *window,
 /** PRIVATE.  View "selection state changed" callback.                       */
 /*---------------------------------------------------------------------------*/
 static void 
-selection_changed_cb (glView   *view,
+selection_changed_cb (glLabel  *label,
 		      glWindow *window)
 {
 	gl_debug (DEBUG_WINDOW, "START");
 
-	g_return_if_fail (view && GL_IS_VIEW (view));
+	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-	gl_ui_update_selection_verbs (window->ui, view);
+	gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view));
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -499,7 +501,7 @@ context_menu_activate_cb (glView       *view,
         g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-        if (gl_view_is_selection_empty (view)) {
+        if (gl_label_is_selection_empty (view->label)) {
 
 		gtk_menu_popup (GTK_MENU (window->empty_selection_context_menu),
 				NULL, NULL, NULL, NULL, button, activate_time);
