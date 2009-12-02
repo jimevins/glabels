@@ -687,12 +687,12 @@ get_label_size_desc (const lglTemplate *template)
 
                         xstr = gl_str_util_fraction_to_string (frame->rect.w*units_per_point);
                         ystr = gl_str_util_fraction_to_string (frame->rect.h*units_per_point);
-                        string = g_strdup_printf (_("%s x %s %s"),
+                        string = g_strdup_printf ("%s × %s %s",
                                                   xstr, ystr, units_string);
                         g_free (xstr);
                         g_free (ystr);
                 } else {
-                        string = g_strdup_printf (_("%.5g x %.5g %s"),
+                        string = g_strdup_printf ("%.5g × %.5g %s",
                                                   frame->rect.w*units_per_point,
                                                   frame->rect.h*units_per_point,
                                                   units_string);
@@ -703,13 +703,15 @@ get_label_size_desc (const lglTemplate *template)
                         gchar *dstr;
 
                         dstr = gl_str_util_fraction_to_string (2.0*frame->round.r*units_per_point);
-                        string = g_strdup_printf (_("%s %s diameter"),
-                                                  dstr, units_string);
+                        string = g_strdup_printf ("%s %s %s",
+                                                  dstr, units_string,
+                                                  _("diameter"));
                         g_free (dstr);
                 } else {
-                        string = g_strdup_printf (_("%.5g %s diameter"),
+                        string = g_strdup_printf ("%.5g %s %s",
                                                   2.0*frame->round.r*units_per_point,
-                                                  units_string);
+                                                  units_string,
+                                                  _("diameter"));
                 }
                 break;
         case LGL_TEMPLATE_FRAME_SHAPE_CD:
@@ -717,13 +719,15 @@ get_label_size_desc (const lglTemplate *template)
                         gchar *dstr;
 
                         dstr = gl_str_util_fraction_to_string (2.0*frame->cd.r1*units_per_point);
-                        string = g_strdup_printf (_("%s %s diameter"),
-                                                  dstr, units_string);
+                        string = g_strdup_printf ("%s %s %s",
+                                                  dstr, units_string,
+                                                  _("diameter"));
                         g_free (dstr);
                 } else {
-                        string = g_strdup_printf (_("%.5g %s diameter"),
+                        string = g_strdup_printf ("%.5g %s %s",
                                                   2.0*frame->cd.r1*units_per_point,
-                                                  units_string);
+                                                  units_string,
+                                                  _("diameter"));
                 }
                 break;
         default:
