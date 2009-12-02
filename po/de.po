@@ -1,15 +1,15 @@
 # German translation of glabels.
-# Copyright (C) 2001-2008 Jim Evins <evins@snaught.com>
+# Copyright (C) 2001-2009 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
 # Mario Blättermann <mariobl@gnome.org>, 2008, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels HEAD\n"
+"Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2009-10-30 01:19+0000\n"
-"PO-Revision-Date: 2009-11-03 19:40+0100\n"
+"POT-Creation-Date: 2009-11-18 15:20+0000\n"
+"PO-Revision-Date: 2009-12-02 20:18+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -132,11 +132,16 @@ msgstr "MSI"
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:158
+#: ../src/bc.c:154
+#| msgid "Code 39"
+msgid "Code 93"
+msgstr "Code 93"
+
+#: ../src/bc.c:161
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc.c:165
+#: ../src/bc.c:168
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -262,31 +267,26 @@ msgstr "Weiß"
 
 #: ../src/color-combo-menu.c:116
 #, c-format
-#| msgid "10% Gray"
 msgid "10\\% Gray"
 msgstr "10\\% Grau"
 
 #: ../src/color-combo-menu.c:117
 #, c-format
-#| msgid "25% Gray"
 msgid "25\\% Gray"
 msgstr "25\\% Grau"
 
 #: ../src/color-combo-menu.c:118
 #, c-format
-#| msgid "40% Gray"
 msgid "40\\% Gray"
 msgstr "40\\% Grau"
 
 #: ../src/color-combo-menu.c:119
 #, c-format
-#| msgid "50% Gray"
 msgid "50\\% Gray"
 msgstr "50\\% Grau"
 
 #: ../src/color-combo-menu.c:120
 #, c-format
-#| msgid "60% Gray"
 msgid "60\\% Gray"
 msgstr "60\\% Grau"
 
@@ -385,7 +385,6 @@ msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
 #: ../src/font-combo-menu.c:137
-#| msgid "Recent templates"
 msgid "Recent fonts"
 msgstr "Zuletzt benutzte Schriften"
 
@@ -573,12 +572,10 @@ msgid "Text: Colon separated values with keys on line 1"
 msgstr "Text: Durch Semikola getrennte Werte mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:104
-#| msgid "Data from default Evolution Addressbook"
 msgid "Evolution Addressbook"
 msgstr "Evolution-Adressbuch"
 
 #: ../src/merge-init.c:110
-#| msgid "Tent Cards"
 msgid "VCards"
 msgstr "VCards"
 
@@ -1297,8 +1294,9 @@ msgid "See the file AUTHORS for additional credits,"
 msgstr "Lesen die Datei AUTHORS für zusätzliche Danksagungen,"
 
 #: ../src/ui-commands.c:1104
-msgid "or visit http://glabels.sourceforge.net/"
-msgstr "oder besuchen Sie http://glabels.sourceforge.net/"
+#| msgid "or visit http://glabels.sourceforge.net/"
+msgid "or visit http://glabels.org/"
+msgstr "oder besuchen Sie http://glabels.org/"
 
 #: ../src/ui-commands.c:1116
 msgid "A label and business card creation program.\n"
@@ -1431,52 +1429,52 @@ msgstr "(Unbenannt) - gLabels"
 msgid "(modified)"
 msgstr "(geändert)"
 
-#: ../src/xml-label-04.c:75 ../src/xml-label.c:321
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:323
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Fehlerhafter root node = »%s«"
 
-#: ../src/xml-label-04.c:123 ../src/xml-label.c:404
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:406
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "fehlerhafter node =  »%s«"
 
-#: ../src/xml-label.c:188 ../src/xml-label.c:226
+#: ../src/xml-label.c:189 ../src/xml-label.c:227
 msgid "xmlParseFile error"
 msgstr "Fehler: xmlParseFile error"
 
-#: ../src/xml-label.c:263
+#: ../src/xml-label.c:264
 msgid "No document root"
 msgstr "Kein document root"
 
-#: ../src/xml-label.c:271
+#: ../src/xml-label.c:272
 msgid "Importing from glabels 0.1 format"
 msgstr "Aus dem glabels 0.1-Format wird importiert"
 
-#: ../src/xml-label.c:280
+#: ../src/xml-label.c:281
 msgid "Importing from glabels 0.4 format"
 msgstr "Aus dem glabels 0.4-Format wird importiert"
 
-#: ../src/xml-label.c:289
+#: ../src/xml-label.c:291
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Unbekannter glabels-Namensraum -- %s wird verwendet"
 
-#: ../src/xml-label.c:358
+#: ../src/xml-label.c:360
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "Ungültiger Node im Dokument-Node = »%s«"
 
-#: ../src/xml-label.c:851
+#: ../src/xml-label.c:856
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1093 ../libglabels/xml-template.c:664
+#: ../src/xml-label.c:1098 ../libglabels/xml-template.c:664
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
-#: ../src/xml-label.c:1100
+#: ../src/xml-label.c:1105
 msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der xml-Datei."
 
@@ -1811,8 +1809,7 @@ msgstr "Wählen Sie die vorgegebenen Eigenschaften für neue Objekte."
 msgid "Select locale specific behavior."
 msgstr "Wählen Sie hier Einstellungen gemäß Ihrer Sprache/Ihres Landes."
 
-#. Most popular (at top of list)
-#: ../data/builder/prefs-dialog.builder.h:19 ../templates/paper-sizes.xml.h:29
+#: ../data/builder/prefs-dialog.builder.h:19 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "US-Letter"
 
@@ -2177,102 +2174,124 @@ msgstr "gLabels Etiketten-Designer"
 msgid "gLabels Project File"
 msgstr "gLabels-Projektdatei"
 
-#. Other ISO A series sizes
+#. Envelopes
 #: ../templates/paper-sizes.xml.h:2
+msgid "#10 Envelope"
+msgstr "#10-Briefumschlag"
+
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:4
 msgid "A0"
 msgstr "A0"
 
-#: ../templates/paper-sizes.xml.h:3
+#: ../templates/paper-sizes.xml.h:5
 msgid "A1"
 msgstr "A1"
 
-#: ../templates/paper-sizes.xml.h:4
+#: ../templates/paper-sizes.xml.h:6
 msgid "A10"
 msgstr "A10"
 
-#: ../templates/paper-sizes.xml.h:5
+#: ../templates/paper-sizes.xml.h:7
 msgid "A2"
 msgstr "A2"
 
-#: ../templates/paper-sizes.xml.h:6
+#: ../templates/paper-sizes.xml.h:8
 msgid "A3"
 msgstr "A3"
 
-#: ../templates/paper-sizes.xml.h:7
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:10
 msgid "A4"
 msgstr "A4"
 
-#: ../templates/paper-sizes.xml.h:8
+#: ../templates/paper-sizes.xml.h:11
 msgid "A5"
 msgstr "A5"
 
-#: ../templates/paper-sizes.xml.h:9
+#: ../templates/paper-sizes.xml.h:12
 msgid "A6"
 msgstr "A6"
 
-#: ../templates/paper-sizes.xml.h:10
+#: ../templates/paper-sizes.xml.h:13
 msgid "A7"
 msgstr "A7"
 
-#: ../templates/paper-sizes.xml.h:11
+#: ../templates/paper-sizes.xml.h:14
 msgid "A8"
 msgstr "A8"
 
-#: ../templates/paper-sizes.xml.h:12
+#: ../templates/paper-sizes.xml.h:15
 msgid "A9"
 msgstr "A9"
 
 #. ISO B series sizes
-#: ../templates/paper-sizes.xml.h:14
+#: ../templates/paper-sizes.xml.h:17
 msgid "B0"
 msgstr "B0"
 
-#: ../templates/paper-sizes.xml.h:15
+#: ../templates/paper-sizes.xml.h:18
 msgid "B1"
 msgstr "B1"
 
-#: ../templates/paper-sizes.xml.h:16
+#: ../templates/paper-sizes.xml.h:19
 msgid "B10"
 msgstr "B10"
 
-#: ../templates/paper-sizes.xml.h:17
+#: ../templates/paper-sizes.xml.h:20
 msgid "B2"
 msgstr "B2"
 
-#: ../templates/paper-sizes.xml.h:18
+#: ../templates/paper-sizes.xml.h:21
 msgid "B3"
 msgstr "B3"
 
-#: ../templates/paper-sizes.xml.h:19
+#: ../templates/paper-sizes.xml.h:22
 msgid "B4"
 msgstr "B4"
 
-#: ../templates/paper-sizes.xml.h:20
+#: ../templates/paper-sizes.xml.h:23
 msgid "B5"
 msgstr "B5"
 
-#: ../templates/paper-sizes.xml.h:21
+#: ../templates/paper-sizes.xml.h:24
 msgid "B6"
 msgstr "B6"
 
-#: ../templates/paper-sizes.xml.h:22
+#: ../templates/paper-sizes.xml.h:25
 msgid "B7"
 msgstr "B7"
 
-#: ../templates/paper-sizes.xml.h:23
+#: ../templates/paper-sizes.xml.h:26
 msgid "B8"
 msgstr "B8"
 
-#: ../templates/paper-sizes.xml.h:24
+#: ../templates/paper-sizes.xml.h:27
 msgid "B9"
 msgstr "B9"
 
-#: ../templates/paper-sizes.xml.h:25
+#: ../templates/paper-sizes.xml.h:28
+msgid "C5"
+msgstr "C5"
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "C6"
+msgstr "C6"
+
+#: ../templates/paper-sizes.xml.h:30
+msgid "DL"
+msgstr "DIN lang"
+
+#: ../templates/paper-sizes.xml.h:31
+msgid "Monarch Envelope"
+msgstr "Monarch-Briefumschlag"
+
+#: ../templates/paper-sizes.xml.h:32
 msgid "US Executive"
 msgstr "US Executive"
 
 #. Other US paper sizes
-#: ../templates/paper-sizes.xml.h:27
+#: ../templates/paper-sizes.xml.h:34
 msgid "US Legal"
 msgstr "US Legal"
 
@@ -2738,35 +2757,3 @@ msgstr "Rechteckige Kopieretiketten"
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
 
-#~ msgid "Text file with comma delimeters (CSV)"
-#~ msgstr "Textdatei mit Kommata als Trennern (CSV)"
-
-#~ msgid "Text file with colon delimeters"
-#~ msgstr "Textdatei mit Semikola als Trennern"
-
-#~ msgid "Text file with tab delimeters"
-#~ msgstr "Textdatei mit Tabulatoren als Trennern"
-
-#~ msgid "Data from a file containing VCards"
-#~ msgstr "Daten aus einer Datei, die VCards enthält"
-
-#~ msgid "Brand:"
-#~ msgstr "Marke:"
-
-#~ msgid "Category:"
-#~ msgstr "Kategorie:"
-
-#~ msgid "Search all templates"
-#~ msgstr "Alle Vorlagen durchsuchen"
-
-#~ msgid "<b>Print control (Simple)</b>"
-#~ msgstr "<b>Drucksteuerung (Einfach)</b>"
-
-#~ msgid "- gLabels label designer"
-#~ msgstr "- gLabels Etiketten-Designer"
-
-#~ msgid "- batch process gLabels label files"
-#~ msgstr "- Stapelverarbeitung von gLabels-Dateien"
-
-#~ msgid "Show tooltips"
-#~ msgstr "Minihilfen anzeigen"
