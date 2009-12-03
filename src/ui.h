@@ -35,8 +35,6 @@ void          gl_ui_unref                  (GtkUIManager      *ui);
 void          gl_ui_update_all             (GtkUIManager      *ui,
 					    glView            *view);
 
-void          gl_ui_update_nodoc           (GtkUIManager      *ui);
-
 void          gl_ui_update_modified_verbs  (GtkUIManager      *ui,
 					    glLabel           *label);
 
@@ -45,6 +43,9 @@ void          gl_ui_update_selection_verbs (GtkUIManager      *ui,
 
 void          gl_ui_update_zoom_verbs      (GtkUIManager      *ui,
 					    glView            *view);
+
+void          gl_ui_update_paste_verbs     (GtkUIManager      *ui,
+                                            gboolean           can_paste);
 
 void          gl_ui_update_undo_redo_verbs (GtkUIManager      *ui,
 					    glLabel           *label);

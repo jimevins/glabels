@@ -635,7 +635,6 @@ static gchar* doc_verbs [] = {
 	"/ui/MenuBar/FileMenu/FileClose",
 	"/ui/MenuBar/EditMenu/EditCut",
 	"/ui/MenuBar/EditMenu/EditCopy",
-	"/ui/MenuBar/EditMenu/EditPaste",
 	"/ui/MenuBar/EditMenu/EditDelete",
 	"/ui/MenuBar/EditMenu/EditSelectAll",
 	"/ui/MenuBar/EditMenu/EditUnSelectAll",
@@ -673,6 +672,12 @@ static gchar* doc_verbs [] = {
 
 static gchar* doc_modified_verbs [] = {
 	"/ui/MenuBar/FileMenu/FileSave",
+
+	NULL
+};
+
+static gchar* paste_verbs [] = {
+	"/ui/MenuBar/EditMenu/EditPaste",
 
 	NULL
 };
@@ -770,6 +775,7 @@ gl_ui_new (glWindow *window)
 
 
 	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
+	gl_ui_util_set_verb_list_sensitive (ui, paste_verbs, FALSE);
 
 	gl_debug (DEBUG_UI, "END");
 
@@ -821,28 +827,14 @@ gl_ui_update_all (GtkUIManager *ui,
 				       !gl_view_is_zoom_min (view));
 
 	gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
-					    !gl_label_is_selection_empty (view->label));
+					    !gl_label_is_selection_empty (label));
 
 	gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs,
-					    gl_label_is_selection_atomic (view->label));
+					    gl_label_is_selection_atomic (label));
 
 	gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs,
-					    !gl_label_is_selection_empty (view->label)
-					    && !gl_label_is_selection_atomic (view->label));
-
-	gl_debug (DEBUG_UI, "END");
-}
-
-
-/*****************************************************************************/
-/** Update all verbs of given UI component to "no document" state.           */
-/*****************************************************************************/
-void
-gl_ui_update_nodoc (GtkUIManager *ui)
-{
-	gl_debug (DEBUG_UI, "START");
-
-	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
+					    !gl_label_is_selection_empty (label)
+					    && !gl_label_is_selection_atomic (label));
 
 	gl_debug (DEBUG_UI, "END");
 }
@@ -901,6 +893,21 @@ gl_ui_update_zoom_verbs (GtkUIManager *ui,
 				       !gl_view_is_zoom_max (view));
 	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/ViewMenu/ViewZoomOut",
 				       !gl_view_is_zoom_min (view));
+
+	gl_debug (DEBUG_UI, "END");
+}
+
+
+/*****************************************************************************/
+/** Update paste verbs of given UI component.                                */
+/*****************************************************************************/
+void
+gl_ui_update_paste_verbs (GtkUIManager      *ui,
+                          gboolean           can_paste)
+{
+	gl_debug (DEBUG_UI, "START");
+
+	gl_ui_util_set_verb_list_sensitive (ui, paste_verbs, can_paste);
 
 	gl_debug (DEBUG_UI, "END");
 }

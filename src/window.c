@@ -46,6 +46,8 @@
 #define CURSOR_INFO_WIDTH     150
 #define ZOOM_INFO_WIDTH        50
 
+#define GLABELS_CLIPBOARD gdk_atom_intern ("GLABELS", FALSE)
+
 
 /*===========================================================================*/
 /* Private globals                                                           */
@@ -92,6 +94,10 @@ static void     name_changed_cb        (glLabel       *label,
 					glWindow      *window);
 
 static void     modified_changed_cb    (glLabel       *label,
+					glWindow      *window);
+
+static void     clipboard_changed_cb   (GtkClipboard  *clipboard,
+                                        GdkEvent      *event,
 					glWindow      *window);
 
 
@@ -333,7 +339,8 @@ void
 gl_window_set_label (glWindow    *window,
 		     glLabel     *label)
 {
-	gchar *string;
+	gchar             *string;
+        GtkClipboard      *clipboard;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
@@ -380,6 +387,11 @@ gl_window_set_label (glWindow    *window,
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
 	g_free (string);
 
+        clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window), GLABELS_CLIPBOARD);
+        gl_ui_update_paste_verbs (window->ui,
+                                  gtk_clipboard_wait_is_text_available (clipboard));
+
+
 	g_signal_connect (G_OBJECT(window->label), "selection_changed",
 			  G_CALLBACK(selection_changed_cb), window);
 
@@ -400,6 +412,9 @@ gl_window_set_label (glWindow    *window,
 
 	g_signal_connect (G_OBJECT(label), "modified_changed",
 			  G_CALLBACK(modified_changed_cb), window);
+
+	g_signal_connect (G_OBJECT(clipboard), "owner_change",
+			  G_CALLBACK(clipboard_changed_cb), window);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -626,6 +641,22 @@ modified_changed_cb (glLabel  *label,
 	set_window_title (window, label);
 
 	gl_ui_update_modified_verbs (window->ui, label);
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
+
+static void
+clipboard_changed_cb (GtkClipboard *clipboard,
+                      GdkEvent     *event,
+                      glWindow     *window)
+{
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+        gl_ui_update_paste_verbs (window->ui,
+                                  gtk_clipboard_wait_is_text_available (clipboard));
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
