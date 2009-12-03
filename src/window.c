@@ -46,8 +46,6 @@
 #define CURSOR_INFO_WIDTH     150
 #define ZOOM_INFO_WIDTH        50
 
-#define GLABELS_CLIPBOARD gdk_atom_intern ("GLABELS", FALSE)
-
 
 /*===========================================================================*/
 /* Private globals                                                           */
@@ -99,6 +97,13 @@ static void     modified_changed_cb    (glLabel       *label,
 static void     clipboard_changed_cb   (GtkClipboard  *clipboard,
                                         GdkEvent      *event,
 					glWindow      *window);
+
+static void     focus_widget_changed_cb(GtkWindow     *gtk_window,
+                                        GtkWidget     *widget,
+					glWindow      *window);
+
+static void     set_paste_sensitivity  (glWindow      *window,
+                                        GtkWidget     *focus_widget);
 
 
 /****************************************************************************/
@@ -226,7 +231,9 @@ gl_window_finalize (GObject *object)
 static void
 gl_window_destroy (GtkObject *gtk_object)
 {
-	glWindow *window;
+	glWindow          *window;
+        GtkClipboard      *glabels_clipboard;
+        GtkClipboard      *std_clipboard;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
@@ -239,6 +246,18 @@ gl_window_destroy (GtkObject *gtk_object)
         if (window->ui) {
 		gl_ui_unref(window->ui);
 		window->ui = NULL;
+        }
+
+        if (window->label)
+        {
+                glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                              GL_UI_GLABELS_CLIPBOARD);
+
+                g_signal_handlers_disconnect_by_func (G_OBJECT (glabels_clipboard),
+                                                      G_CALLBACK (clipboard_changed_cb),
+                                                      window);
+
+		g_object_unref (window->label);
         }
 
 	if (GTK_OBJECT_CLASS (gl_window_parent_class)->destroy) {
@@ -340,14 +359,15 @@ gl_window_set_label (glWindow    *window,
 		     glLabel     *label)
 {
 	gchar             *string;
-        GtkClipboard      *clipboard;
+        GtkClipboard      *glabels_clipboard;
+        GtkWidget         *focus_widget;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (GL_IS_WINDOW (window));
 	g_return_if_fail (GL_IS_LABEL (label));
 
-        window->label = label;
+        window->label = g_object_ref (label);
 
 	gl_label_clear_modified (label);
 
@@ -387,9 +407,9 @@ gl_window_set_label (glWindow    *window,
 	gtk_label_set_text (GTK_LABEL(window->zoom_info), string);
 	g_free (string);
 
-        clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window), GLABELS_CLIPBOARD);
-        gl_ui_update_paste_verbs (window->ui,
-                                  gtk_clipboard_wait_is_text_available (clipboard));
+
+        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GL_UI_GLABELS_CLIPBOARD);
 
 
 	g_signal_connect (G_OBJECT(window->label), "selection_changed",
@@ -413,8 +433,15 @@ gl_window_set_label (glWindow    *window,
 	g_signal_connect (G_OBJECT(label), "modified_changed",
 			  G_CALLBACK(modified_changed_cb), window);
 
-	g_signal_connect (G_OBJECT(clipboard), "owner_change",
+	g_signal_connect (G_OBJECT(glabels_clipboard), "owner_change",
 			  G_CALLBACK(clipboard_changed_cb), window);
+
+	g_signal_connect (G_OBJECT(window), "set_focus",
+			  G_CALLBACK(focus_widget_changed_cb), window);
+
+        /* Initialize "Paste" sensitivity. */
+        focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
+        set_paste_sensitivity (window, focus_widget);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -496,7 +523,7 @@ selection_changed_cb (glLabel  *label,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-	gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view));
+        gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view));
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -646,21 +673,80 @@ modified_changed_cb (glLabel  *label,
 }
 
 
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Clipboard "owner change" callback.                             */
+/*---------------------------------------------------------------------------*/
 static void
 clipboard_changed_cb (GtkClipboard *clipboard,
                       GdkEvent     *event,
                       glWindow     *window)
 {
+        GtkWidget    *focus_widget;
+
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-        gl_ui_update_paste_verbs (window->ui,
-                                  gtk_clipboard_wait_is_text_available (clipboard));
+        focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
+        set_paste_sensitivity (window, focus_widget);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
+
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Window "set-focus" callback.                                   */
+/*---------------------------------------------------------------------------*/
+static void
+focus_widget_changed_cb (GtkWindow *gtk_window,
+                         GtkWidget *widget,
+                         glWindow  *window)
+{
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+        if (widget)
+        {
+                gl_debug (DEBUG_WINDOW, "SET-FOCUS %x %s\n",
+                          widget,
+                          G_OBJECT_TYPE_NAME (widget));
+
+                set_paste_sensitivity (window, widget);
+        }
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Set paste sensitivity.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+set_paste_sensitivity (glWindow  *window,
+                       GtkWidget *focus_widget)
+{
+        GtkClipboard *glabels_clipboard;
+
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GL_UI_GLABELS_CLIPBOARD);
+
+        if ( focus_widget == GL_VIEW(window->view)->canvas )
+        {
+                gl_ui_update_paste_verbs (window->ui,
+                                          gtk_clipboard_wait_is_text_available (glabels_clipboard));
+        }
+        else
+        {
+                gl_ui_update_paste_verbs (window->ui, FALSE);
+        }
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
 
 
 /*

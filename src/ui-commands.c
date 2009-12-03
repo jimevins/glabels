@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include "ui.h"
 #include "view.h"
 #include "file.h"
 #include "template-designer.h"
@@ -257,14 +258,21 @@ void
 gl_ui_cmd_edit_cut (GtkAction *action,
                     glWindow  *window)
 {
+        GtkClipboard  *glabels_clipboard;
+        GtkClipboard  *std_clipboard;
+
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        gl_label_cut_selection (GL_VIEW(window->view)->label,
-                                GTK_WIDGET (window));
+        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GL_UI_GLABELS_CLIPBOARD);
 
+        std_clipboard     = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GDK_SELECTION_CLIPBOARD);
+
+        gl_label_cut_selection (window->label, glabels_clipboard, std_clipboard);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
@@ -277,15 +285,21 @@ void
 gl_ui_cmd_edit_copy (GtkAction *action,
                      glWindow  *window)
 {
-        GtkClipboard *clipboard;
+        GtkClipboard  *glabels_clipboard;
+        GtkClipboard  *std_clipboard;
 
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        gl_label_copy_selection (GL_VIEW(window->view)->label,
-                                 GTK_WIDGET (window));
+        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GL_UI_GLABELS_CLIPBOARD);
+
+        std_clipboard     = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GDK_SELECTION_CLIPBOARD);
+
+        gl_label_copy_selection (window->label, glabels_clipboard, std_clipboard);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }
@@ -298,15 +312,21 @@ void
 gl_ui_cmd_edit_paste (GtkAction *action,
                       glWindow  *window)
 {
-        GtkClipboard *clipboard;
+        GtkClipboard  *glabels_clipboard;
+        GtkClipboard  *std_clipboard;
 
         gl_debug (DEBUG_COMMANDS, "START");
 
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        gl_label_paste (GL_VIEW(window->view)->label,
-                        GTK_WIDGET (window));
+        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GL_UI_GLABELS_CLIPBOARD);
+
+        std_clipboard     = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GDK_SELECTION_CLIPBOARD);
+
+        gl_label_paste (window->label, glabels_clipboard, std_clipboard);
 
         gl_debug (DEBUG_COMMANDS, "END");
 }

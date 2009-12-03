@@ -866,15 +866,25 @@ gl_ui_update_selection_verbs (GtkUIManager *ui,
 {
 	gl_debug (DEBUG_UI, "START");
 
-	gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
-					    !gl_label_is_selection_empty (view->label));
+        if ( gtk_widget_has_focus (GTK_WIDGET (view->canvas)) )
+        {
 
-	gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs,
-					    gl_label_is_selection_atomic (view->label));
+                gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
+                                                    !gl_label_is_selection_empty (view->label));
 
-	gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs,
-					    !gl_label_is_selection_empty (view->label)
-					    && !gl_label_is_selection_atomic (view->label));
+                gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs,
+                                                    gl_label_is_selection_atomic (view->label));
+
+                gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs,
+                                                    !gl_label_is_selection_empty (view->label)
+                                                    && !gl_label_is_selection_atomic (view->label));
+        }
+        else
+        {
+                gl_ui_util_set_verb_list_sensitive (ui, selection_verbs, FALSE);
+                gl_ui_util_set_verb_list_sensitive (ui, atomic_selection_verbs, FALSE);
+                gl_ui_util_set_verb_list_sensitive (ui, multi_selection_verbs, FALSE);
+        }
 
 	gl_debug (DEBUG_UI, "END");
 }

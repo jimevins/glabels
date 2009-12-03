@@ -80,6 +80,8 @@ glabels-*.tar.gz
 #
 *~
 *.bak
+\#*\#
+.\#*
 .*.swp
 *.orig
 *.rej

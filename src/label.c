@@ -38,8 +38,6 @@
 /* Private macros and constants.                          */
 /*========================================================*/
 
-#define GLABELS_CLIPBOARD gdk_atom_intern ("GLABELS", FALSE)
-
 
 /*========================================================*/
 /* Private types.                                         */
@@ -2164,14 +2162,14 @@ gl_label_set_selection_line_width (glLabel  *label,
 /*****************************************************************************/
 void
 gl_label_cut_selection (glLabel       *label,
-                        GtkWidget     *owner)
+                        GtkClipboard  *glabels_clipboard,
+                        GtkClipboard  *std_clipboard)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
-	g_return_if_fail (owner && GTK_IS_WIDGET (owner));
 
-	gl_label_copy_selection (label, owner);
+	gl_label_copy_selection (label, glabels_clipboard, std_clipboard);
 	gl_label_delete_selection (label);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -2183,10 +2181,10 @@ gl_label_cut_selection (glLabel       *label,
 /*****************************************************************************/
 void
 gl_label_copy_selection (glLabel       *label,
-                         GtkWidget     *owner)
+                         GtkClipboard  *glabels_clipboard,
+                         GtkClipboard  *std_clipboard)
 {
 	GList             *selection_list;
-        GtkClipboard      *clipboard;
         glLabel           *label_copy;
 	GList             *p;
 	glLabelObject     *object;
@@ -2197,13 +2195,11 @@ gl_label_copy_selection (glLabel       *label,
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
-	g_return_if_fail (owner && GTK_IS_WIDGET (owner));
 
         selection_list = gl_label_get_selection_list (label);
 
 	if (selection_list)
         {
-                clipboard = gtk_widget_get_clipboard (owner, GLABELS_CLIPBOARD);
 		label_copy = GL_LABEL(gl_label_new ());
 
 		gl_label_set_template (label_copy, label->priv->template);
@@ -2218,7 +2214,7 @@ gl_label_copy_selection (glLabel       *label,
 
                 buffer = gl_xml_label_save_buffer (label_copy, &status);
                 
-                gtk_clipboard_set_text (clipboard, buffer, -1);
+                gtk_clipboard_set_text (glabels_clipboard, buffer, -1);
 
                 g_free (buffer);
                 g_object_unref (G_OBJECT (label_copy));
@@ -2231,11 +2227,9 @@ gl_label_copy_selection (glLabel       *label,
          */
         if ( gl_label_is_selection_atomic (label) )
         {
-                clipboard = gtk_widget_get_clipboard (owner, GDK_SELECTION_CLIPBOARD);
-
                 object = GL_LABEL_OBJECT (selection_list->data);
 
-                gl_label_object_copy_to_clipboard (object, clipboard);
+                gl_label_object_copy_to_clipboard (object, std_clipboard);
         }
 
         g_list_free (selection_list);
@@ -2249,18 +2243,14 @@ gl_label_copy_selection (glLabel       *label,
 /*****************************************************************************/
 void
 gl_label_paste (glLabel       *label,
-                GtkWidget     *owner)
+                GtkClipboard  *glabels_clipboard,
+                GtkClipboard  *std_clipboard)
 {
-        GtkClipboard      *clipboard;
-
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
-	g_return_if_fail (owner && GTK_IS_WIDGET (owner));
 
-        clipboard = gtk_widget_get_clipboard (owner, GLABELS_CLIPBOARD);
-
-        gtk_clipboard_request_text (clipboard,
+        gtk_clipboard_request_text (glabels_clipboard,
                                     (GtkClipboardTextReceivedFunc)paste_received_cb,
                                     label);
 

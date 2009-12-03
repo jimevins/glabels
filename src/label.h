@@ -253,13 +253,16 @@ void          gl_label_set_selection_line_width (glLabel        *label,
  * Clipboard operations
  */
 void          gl_label_cut_selection             (glLabel       *label,
-                                                  GtkWidget     *owner);
+                                                  GtkClipboard  *glabels_clipboard,
+                                                  GtkClipboard  *std_clipboard);
 
 void          gl_label_copy_selection            (glLabel       *label,
-                                                  GtkWidget     *owner);
+                                                  GtkClipboard  *glabels_clipboard,
+                                                  GtkClipboard  *std_clipboard);
 
 void          gl_label_paste                     (glLabel       *label,
-                                                  GtkWidget     *owner);
+                                                  GtkClipboard  *glabels_clipboard,
+                                                  GtkClipboard  *std_clipboard);
 
 
 /*
