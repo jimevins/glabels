@@ -43,7 +43,8 @@ void          gl_ui_update_modified_verbs  (GtkUIManager      *ui,
 					    glLabel           *label);
 
 void          gl_ui_update_selection_verbs (GtkUIManager      *ui,
-					    glView            *view);
+					    glView            *view,
+                                            gboolean           has_focus);
 
 void          gl_ui_update_zoom_verbs      (GtkUIManager      *ui,
 					    glView            *view);

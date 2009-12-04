@@ -102,8 +102,8 @@ static void     focus_widget_changed_cb(GtkWindow     *gtk_window,
                                         GtkWidget     *widget,
 					glWindow      *window);
 
-static void     set_paste_sensitivity  (glWindow      *window,
-                                        GtkWidget     *focus_widget);
+static void     set_copy_paste_sensitivity  (glWindow      *window,
+                                             GtkWidget     *focus_widget);
 
 
 /****************************************************************************/
@@ -441,7 +441,7 @@ gl_window_set_label (glWindow    *window,
 
         /* Initialize "Paste" sensitivity. */
         focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
-        set_paste_sensitivity (window, focus_widget);
+        set_copy_paste_sensitivity (window, focus_widget);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -523,7 +523,7 @@ selection_changed_cb (glLabel  *label,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
-        gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view));
+        gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view), TRUE);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -688,7 +688,7 @@ clipboard_changed_cb (GtkClipboard *clipboard,
 	g_return_if_fail (window && GL_IS_WINDOW (window));
 
         focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
-        set_paste_sensitivity (window, focus_widget);
+        set_copy_paste_sensitivity (window, focus_widget);
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
@@ -712,7 +712,7 @@ focus_widget_changed_cb (GtkWindow *gtk_window,
                           widget,
                           G_OBJECT_TYPE_NAME (widget));
 
-                set_paste_sensitivity (window, widget);
+                set_copy_paste_sensitivity (window, widget);
         }
 
 	gl_debug (DEBUG_WINDOW, "END");
@@ -723,8 +723,8 @@ focus_widget_changed_cb (GtkWindow *gtk_window,
 /** PRIVATE.  Set paste sensitivity.                                         */
 /*---------------------------------------------------------------------------*/
 static void
-set_paste_sensitivity (glWindow  *window,
-                       GtkWidget *focus_widget)
+set_copy_paste_sensitivity (glWindow  *window,
+                            GtkWidget *focus_widget)
 {
         GtkClipboard *glabels_clipboard;
 
@@ -737,11 +737,15 @@ set_paste_sensitivity (glWindow  *window,
 
         if ( focus_widget == GL_VIEW(window->view)->canvas )
         {
+                gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view), TRUE);
+
                 gl_ui_update_paste_verbs (window->ui,
                                           gtk_clipboard_wait_is_text_available (glabels_clipboard));
+
         }
         else
         {
+                gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view), FALSE);
                 gl_ui_update_paste_verbs (window->ui, FALSE);
         }
 

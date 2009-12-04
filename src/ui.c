@@ -862,13 +862,13 @@ gl_ui_update_modified_verbs (GtkUIManager *ui,
 /*****************************************************************************/
 void
 gl_ui_update_selection_verbs (GtkUIManager *ui,
-			      glView       *view)
+			      glView       *view,
+                              gboolean      has_focus)
 {
 	gl_debug (DEBUG_UI, "START");
 
-        if ( gtk_widget_has_focus (GTK_WIDGET (view->canvas)) )
+        if ( has_focus )
         {
-
                 gl_ui_util_set_verb_list_sensitive (ui, selection_verbs,
                                                     !gl_label_is_selection_empty (view->label));
 
