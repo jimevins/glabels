@@ -284,6 +284,7 @@ set_object (glObjectEditor  *editor,
         gchar         *title;
         gchar         *s;
         GtkTextBuffer *buffer;
+        gint           old_page, new_page;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -299,6 +300,8 @@ set_object (glObjectEditor  *editor,
                 editor->priv->object = g_object_ref (object);
 
                 object_changed_cb (object, editor);
+
+                old_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (editor->priv->notebook));
 
                 if (GL_IS_LABEL_BOX (object))
                 {
@@ -428,6 +431,19 @@ set_object (glObjectEditor  *editor,
                 gtk_widget_set_sensitive (editor->priv->title_label, TRUE);
 
                 gtk_widget_show (editor->priv->notebook);
+
+                /* if the old active page is no longer visible, set to 1st visible page. */
+                new_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (editor->priv->notebook));
+                if ( old_page != new_page )
+                {
+                        /* Trick: try in reverse order, only the last visible attempt will stick. */
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 5);
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 4);
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 3);
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 2);
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 1);
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 0);
+                }
 
                 g_signal_connect (G_OBJECT (object), "changed",
                                   G_CALLBACK (object_changed_cb), editor);
