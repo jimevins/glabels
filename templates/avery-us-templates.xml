@@ -40,7 +40,7 @@
   <!-- ******************************************************************** -->
 
   <!-- =================================================================== -->
-  <!-- Avery 5160 family: Address Labels, 1'' x 2_5/8'', 30 per sheet    x -->
+  <!-- Avery 5160 family: Address Labels, 2_5/8'' x 1'', 20 per sheet      -->
   <!-- =================================================================== -->
   <Template brand="Avery" part="5160" size="US-Letter" _description="Address Labels">
     <Meta category="label"/>
@@ -49,40 +49,41 @@
       <Markup-margin size="0.0625in"/>
       <Layout nx="3" ny="10" x0="0.1875in" y0="0.5in" dx="2.75in" dy="1in"/>
     </Label-rectangle>
-    <Alias brand="Avery" part="5260"/>
-    <Alias brand="Avery" part="5510"/>
-    <Alias brand="Avery" part="5520"/>
-    <Alias brand="Avery" part="5560"/>
-    <Alias brand="Avery" part="5810"/>
-    <Alias brand="Avery" part="5920"/>
-    <Alias brand="Avery" part="5960"/>
-    <Alias brand="Avery" part="5970"/>
-    <Alias brand="Avery" part="5971"/>
-    <Alias brand="Avery" part="5972"/>
-    <Alias brand="Avery" part="5979"/>
-    <Alias brand="Avery" part="5980"/>
-    <Alias brand="Avery" part="6231"/>
-    <Alias brand="Avery" part="6233"/>
-    <Alias brand="Avery" part="6245"/>
-    <Alias brand="Avery" part="6460"/>
-    <Alias brand="Avery" part="6498"/>
-    <Alias brand="Avery" part="8160"/>
-    <Alias brand="Avery" part="8250"/>
-    <Alias brand="Avery" part="8460"/>
-    <Alias brand="Avery" part="8560"/>
-    <Alias brand="Avery" part="8620"/>
-    <Alias brand="Avery" part="8660"/>
-    <Alias brand="Avery" part="8810"/>
-    <Alias brand="Avery" part="8920"/>
-    <Alias brand="Avery" part="8930"/>
-    <Alias brand="Avery" part="15160"/>
-    <Alias brand="Avery" part="18160"/>
-    <Alias brand="Avery" part="18660"/>
-    <Alias brand="Avery" part="25160"/>
     <!-- Look alikes -->
     <Alias brand="Maco" part="ll5805"/>
     <Alias brand="Worldlabel" part="OL875"/>
   </Template>
+
+  <Template brand="Avery" part="5260" equiv="5160"/>
+  <Template brand="Avery" part="5510" equiv="5160"/>
+  <Template brand="Avery" part="5520" equiv="5160"/>
+  <Template brand="Avery" part="5560" equiv="5160"/>
+  <Template brand="Avery" part="5810" equiv="5160"/>
+  <Template brand="Avery" part="5920" equiv="5160"/>
+  <Template brand="Avery" part="5960" equiv="5160"/>
+  <Template brand="Avery" part="5970" equiv="5160"/>
+  <Template brand="Avery" part="5971" equiv="5160"/>
+  <Template brand="Avery" part="5972" equiv="5160"/>
+  <Template brand="Avery" part="5979" equiv="5160"/>
+  <Template brand="Avery" part="5980" equiv="5160"/>
+  <Template brand="Avery" part="6231" equiv="5160"/>
+  <Template brand="Avery" part="6233" equiv="5160"/>
+  <Template brand="Avery" part="6245" equiv="5160"/>
+  <Template brand="Avery" part="6460" equiv="5160"/>
+  <Template brand="Avery" part="6498" equiv="5160"/>
+  <Template brand="Avery" part="8160" equiv="5160"/>
+  <Template brand="Avery" part="8250" equiv="5160"/>
+  <Template brand="Avery" part="8460" equiv="5160"/>
+  <Template brand="Avery" part="8560" equiv="5160"/>
+  <Template brand="Avery" part="8620" equiv="5160"/>
+  <Template brand="Avery" part="8660" equiv="5160"/>
+  <Template brand="Avery" part="8810" equiv="5160"/>
+  <Template brand="Avery" part="8920" equiv="5160"/>
+  <Template brand="Avery" part="8930" equiv="5160"/>
+  <Template brand="Avery" part="15160" equiv="5160"/>
+  <Template brand="Avery" part="18160" equiv="5160"/>
+  <Template brand="Avery" part="18660" equiv="5160"/>
+  <Template brand="Avery" part="25160" equiv="5160"/>
 
   <!-- =================================================================== -->
   <!-- Avery 5161 family: Address Labels, 1'' x 4'', 20 per sheet        x -->

@@ -30,6 +30,7 @@
 
 #include "libglabels-private.h"
 
+#include "db.h"
 #include "paper.h"
 
 /*===========================================*/
@@ -97,6 +98,58 @@ lgl_template_new (const gchar         *brand,
         lgl_template_add_alias (template, alias);
 
 	return template;
+}
+
+
+/**
+ * lgl_template_new_from_equiv:
+ *   @brand:        Template brand
+ *   @part:         Template part name/number
+ *   @equiv_part:   Name of equivalent part to base template on
+ *
+ * Create a new template structure based on an existing template.  The
+ * created template will be a duplicate of the original template, except with
+ * the new part name/number.
+ *
+ * Returns: pointer to a newly allocated #lglTemplate structure.
+ *
+ */
+lglTemplate *
+lgl_template_new_from_equiv (const gchar          *brand,
+                             const gchar          *part,
+                             const gchar          *equiv_part)
+{
+        lglTemplate      *template;
+        GList            *p_alias;
+        lglTemplateAlias *alias;
+
+        template = lgl_db_lookup_template_from_brand_part (brand, equiv_part);
+        if (template)
+        {
+                g_free (template->part);
+                g_free (template->equiv_part);
+
+                template->part       = g_strdup (part);
+                template->equiv_part = g_strdup (equiv_part);
+
+                for ( p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next )
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+                        lgl_template_alias_free (alias);
+                }
+                g_list_free (template->aliases);
+                template->aliases = NULL;
+
+                alias = lgl_template_alias_new (brand, part);
+                lgl_template_add_alias (template, alias);
+        }
+        else
+        {
+                g_message (_("Equivalent part (\"%s\") for \"%s\", not previously defined."),
+                           equiv_part, part);
+        }
+
+        return template;
 }
 
 
@@ -761,6 +814,9 @@ lgl_template_dup (const lglTemplate *orig_template)
                                      orig_template->paper_id,
                                      orig_template->page_width,
                                      orig_template->page_height);
+
+        template->equiv_part  = g_strdup (orig_template->equiv_part);
+        template->product_url = g_strdup (orig_template->product_url);
 
 	for ( p=orig_template->aliases; p != NULL; p=p->next )
         {

@@ -25,6 +25,7 @@
 
 #include "paper.h"
 #include "category.h"
+#include "vendor.h"
 #include "template.h"
 
 G_BEGIN_DECLS
@@ -91,6 +92,18 @@ gboolean       lgl_db_is_category_id_known           (const gchar         *id);
 
 
 /*
+ * Vendor
+ */
+GList         *lgl_db_get_vendor_name_list           (void);
+
+void           lgl_db_free_vendor_name_list          (GList               *names);
+
+lglVendor     *lgl_db_lookup_vendor_from_name        (const gchar         *name);
+
+gboolean       lgl_db_is_vendor_name_known           (const gchar         *name);
+
+
+/*
  * Template brands
  */
 GList         *lgl_db_get_brand_list                 (const gchar         *paper_id,
@@ -120,6 +133,9 @@ GList         *lgl_db_get_template_name_list_all     (const gchar         *brand
 void           lgl_db_free_template_name_list        (GList               *names);
 
 lglTemplate   *lgl_db_lookup_template_from_name      (const gchar         *name);
+
+lglTemplate   *lgl_db_lookup_template_from_brand_part(const gchar         *brand,
+                                                      const gchar         *part);
 
 
 /*

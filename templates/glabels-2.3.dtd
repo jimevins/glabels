@@ -1,5 +1,5 @@
 <!--
-  glabels-2.2.dtd
+  glabels-2.3.dtd
 
   This file is a part of the glabels template database.
  
@@ -103,6 +103,16 @@
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Top-level glabels vendors data base                                  -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!ELEMENT Glabels-vendors (Vendor*)>
+<!ATTLIST Glabels-vendors
+                 xmlns           %STRING_TYPE;           #IMPLIED
+>
+
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Top-level glabels template data base                                 -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
@@ -145,17 +155,27 @@
 >
 
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Vendor                                                               -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!ELEMENT Vendor EMPTY>
+<!ATTLIST Vendor
+                 name            %STRING_TYPE;           #REQUIRED
+                 url             %STRING_TYPE;           #IMPLIED
+>
+
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Template Section                                                     -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!ENTITY % label_element  "Label-rectangle | Label-round | Label-cd">
 <!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle | Markup-rect">
 
-<!ELEMENT Template (Meta*, (%label_element;)+, Alias*)>
+<!ELEMENT Template (Meta*, (%label_element;)*, Alias*)>
 <!ATTLIST Template
                  brand           %STRING_TYPE;           #REQUIRED
                  part            %STRING_TYPE;           #REQUIRED
                  name            %STRING_TYPE;           #IMPLIED
-                 size            %STRING_TYPE;           #REQUIRED
+	         equiv           %STRING_TYPE;           #IMPLIED
+                 size            %STRING_TYPE;           #IMPLIED
                  width           %LENGTH_TYPE;           #IMPLIED
                  height          %LENGTH_TYPE;           #IMPLIED
                  description     %STRING_TYPE;           #IMPLIED
@@ -164,7 +184,8 @@
 
 <!ELEMENT Meta EMPTY>
 <!ATTLIST Meta
-                 category        %STRING_TYPE;           #REQUIRED
+                 product_url     %STRING_TYPE;           #IMPLIED
+                 category        %STRING_TYPE;           #IMPLIED
 >
 
 <!ELEMENT Label-rectangle ((%markup_element;)*, Layout+)>
@@ -289,7 +310,11 @@
 >
 
 <!ENTITY % shadow_attrs
-                 ""
+                 "shadow          %BOOLEAN_TYPE;         #IMPLIED
+		  shadow_x        %FLOAT_TYPE;           #IMPLIED
+		  shadow_y        %FLOAT_TYPE;           #IMPLIED
+		  shadow_color    %UINT_TYPE;            #IMPLIED
+		  shadow_opacity  %FLOAT_TYPE;           #IMPLIED"
 >
 
 <!ELEMENT Object-text (Span)>

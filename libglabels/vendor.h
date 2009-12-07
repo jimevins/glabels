@@ -1,6 +1,6 @@
 /*
- *  xml-template.h
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  vendor.h
+ *  Copyright (C) 2003-2009  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of libglabels.
  *
@@ -18,36 +18,38 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __LGL_XML_TEMPLATE_H__
-#define __LGL_XML_TEMPLATE_H__
+#ifndef __LGL_VENDOR_H__
+#define __LGL_VENDOR_H__
 
 #include <glib.h>
-#include <libxml/tree.h>
-
-#include "template.h"
 
 G_BEGIN_DECLS
 
-void         lgl_xml_template_read_templates_from_file (const gchar       *utf8_filename);
 
-void         lgl_xml_template_parse_templates_doc      (const xmlDocPtr    templates_doc);
+/*
+ *   lglVendor structure
+ */
+typedef struct _lglVendor lglVendor;
 
-lglTemplate *lgl_xml_template_parse_template_node      (const xmlNodePtr   template_node);
+struct _lglVendor {
+	gchar               *name;           /* Vendor name */
+	gchar               *url;            /* Vendor URL */
+};
 
 
-gint         lgl_xml_template_write_templates_to_file  (GList             *templates,
-							const gchar       *utf8_filename);
+/*
+ * Vendor construction
+ */
+lglVendor           *lgl_vendor_new                (gchar           *name);
 
-gint         lgl_xml_template_write_template_to_file   (const lglTemplate *template,
-							const gchar       *utf8_filename);
+lglVendor           *lgl_vendor_dup                (const lglVendor *orig);
 
-void         lgl_xml_template_create_template_node     (const lglTemplate *template,
-							xmlNodePtr         root,
-							const xmlNsPtr     ns);
+void                 lgl_vendor_free               (lglVendor       *vendor);
+
 
 G_END_DECLS
 
-#endif /* __LGL_XML_TEMPLATE_H__ */
+#endif /* __LGL_VENDOR_H__ */
 
 
 

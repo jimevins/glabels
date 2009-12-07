@@ -32,6 +32,7 @@
 
 #include "xml-paper.h"
 #include "xml-category.h"
+#include "xml-vendor.h"
 #include "xml-template.h"
 
 
@@ -46,6 +47,7 @@
 
 static GList *papers     = NULL;
 static GList *categories = NULL;
+static GList *vendors    = NULL;
 static GList *templates  = NULL;
 
 static GHashTable *template_cache = NULL;
@@ -66,9 +68,12 @@ static GList *read_categories              (void);
 static GList *read_category_files_from_dir (GList       *categories,
                                             const gchar *dirname);
 
-static GList *read_templates               (void);
-static GList *read_template_files_from_dir (GList       *templates,
-                                            const gchar *dirname);
+static GList *read_vendors                 (void);
+static GList *read_vendor_files_from_dir   (GList       *vendors,
+					    const gchar *dirname);
+
+static void   read_templates               (void);
+static void   read_template_files_from_dir (const gchar *dirname);
 
 static lglTemplate *template_full_page     (const gchar *page_size);
 
@@ -85,8 +90,8 @@ static lglTemplate *template_full_page     (const gchar *page_size);
  * choose to call lgl_db_init() at startup to minimize the impact of the first libglabels call
  * on GUI response time.
  *
- * This function initializes its paper definitions, category definitions, and its template
- * database.. It will search both system and user template directories to locate
+ * This function initializes its paper definitions, category definitions, vendor definitions,
+ * and its template database. It will search both system and user template directories to locate
  * this data.
  */
 void
@@ -94,6 +99,7 @@ lgl_db_init (void)
 {
 	lglPaper    *paper_other;
         lglCategory *category_user_defined;
+        lglTemplate *template;
         GList       *page_sizes;
         GList       *p;
 
@@ -124,12 +130,22 @@ lgl_db_init (void)
 	}
 
         /*
+         * Vendors
+         */
+	if (!vendors)
+        {
+                vendors = read_vendors ();
+	}
+
+        /*
          * Templates
          */
 	if (!templates)
         {
 
-                templates = read_templates ();
+                init_template_cache ();
+
+                read_templates ();
 
                 /* Create and append generic full page templates. */
                 page_sizes = lgl_db_get_paper_id_list ();
@@ -137,13 +153,12 @@ lgl_db_init (void)
                 {
                         if ( !lgl_db_is_paper_id_other (p->data) )
                         {
-                                templates = g_list_append (templates,
-                                                           template_full_page (p->data));
+                                template = template_full_page (p->data);
+                                _lgl_db_register_template_internal (template);
+                                lgl_template_free (template);
                         }
                 }
                 lgl_db_free_paper_id_list (page_sizes);
-
-                init_template_cache ();
 	}
 }
 
@@ -507,8 +522,7 @@ read_paper_files_from_dir (GList       *papers,
 
 		if (extension != NULL) {
 
-			if ( ASCII_EQUAL (extension, ".paper") ||
-			     ASCII_EQUAL (filename, "paper-sizes.xml") )
+			if ( ASCII_EQUAL (filename, "paper-sizes.xml") )
                         {
 
 				full_filename =
@@ -900,8 +914,7 @@ read_category_files_from_dir (GList       *categories,
 
 		if (extension != NULL) {
 
-			if ( ASCII_EQUAL (extension, ".category") ||
-			     ASCII_EQUAL (filename, "categories.xml") )
+			if ( ASCII_EQUAL (filename, "categories.xml") )
                         {
 
 				full_filename =
@@ -947,6 +960,242 @@ lgl_db_print_known_categories (void)
 		category = (lglCategory *) p->data;
 
 		g_print ("CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
+
+	}
+	g_print ("\n");
+
+}
+
+
+/*===========================================*/
+/* Vendor db functions.                       */
+/*===========================================*/
+
+/**
+ * lgl_db_get_vendor_name_list:
+ *
+ * Get a list of all localized vendor names known to libglabels.
+ *
+ * Returns: a list of localized vendor names.
+ *
+ */
+GList *
+lgl_db_get_vendor_name_list (void)
+{
+	GList           *names = NULL;
+	GList           *p;
+	lglVendor       *vendor;
+
+	if (!papers)
+        {
+		lgl_db_init ();
+	}
+
+	for ( p=vendors; p != NULL; p=p->next )
+        {
+		vendor = (lglVendor *)p->data;
+		names = g_list_append (names, g_strdup (vendor->name));
+	}
+
+	return names;
+}
+
+
+/**
+ * lgl_db_free_vendor_name_list:
+ * @names: List of localized vendor name strings to be freed.
+ *
+ * Free up all storage associated with a name list obtained with
+ * lgl_db_get_vendor_name_list().
+ *
+ */
+void
+lgl_db_free_vendor_name_list (GList *names)
+{
+	GList *p;
+
+	for (p = names; p != NULL; p = p->next)
+        {
+		g_free (p->data);
+		p->data = NULL;
+	}
+
+	g_list_free (names);
+}
+
+
+/**
+ * lgl_db_lookup_vendor_from_name:
+ * @name: localized vendor name string
+ *
+ * Lookup vendor definition from localized vendor name string.
+ *
+ * Returns: pointer to a newly allocated #lglVendor structure.
+ *
+ */
+lglVendor *
+lgl_db_lookup_vendor_from_name (const gchar *name)
+{
+	GList       *p;
+	lglVendor   *vendor;
+
+	if (!papers)
+        {
+		lgl_db_init ();
+	}
+
+	if (name == NULL)
+        {
+		/* If no name, return first vendor as a default */
+		return lgl_vendor_dup ((lglVendor *) vendors->data);
+	}
+
+	for (p = vendors; p != NULL; p = p->next)
+        {
+		vendor = (lglVendor *) p->data;
+		if (UTF8_EQUAL (vendor->name, name))
+                {
+			return lgl_vendor_dup (vendor);
+		}
+	}
+
+	return NULL;
+}
+
+
+/**
+ * lgl_db_is_vendor_name_known:
+ * @name: vendor name to test
+ *
+ * Determine if given vendor id is known to libglabels.
+ *
+ * Returns: TRUE if id is known, otherwise FALSE.
+ *
+ */
+gboolean
+lgl_db_is_vendor_name_known (const gchar *name)
+{
+	GList       *p;
+	lglVendor   *vendor;
+
+	if (!papers)
+        {
+		lgl_db_init ();
+	}
+
+	if (name == NULL)
+        {
+		return FALSE;
+	}
+
+	for (p = vendors; p != NULL; p = p->next)
+        {
+		vendor = (lglVendor *) p->data;
+		if (UTF8_EQUAL (vendor->name, name))
+                {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+
+static GList *
+read_vendors (void)
+{
+	gchar *data_dir;
+	GList *vendors = NULL;
+
+	data_dir = LGL_SYSTEM_DATA_DIR;
+	vendors = read_vendor_files_from_dir (vendors, data_dir);
+	g_free (data_dir);
+
+	data_dir = LGL_USER_DATA_DIR;
+	vendors = read_vendor_files_from_dir (vendors, data_dir);
+	g_free (data_dir);
+
+	return vendors;
+}
+
+
+static GList *
+read_vendor_files_from_dir (GList      *vendors,
+			   const gchar *dirname)
+{
+	GDir        *dp;
+	const gchar *filename, *extension;
+	gchar       *full_filename = NULL;
+	GError      *gerror = NULL;
+	GList       *new_vendors = NULL;
+
+	if (dirname == NULL) {
+		return vendors;
+	}
+
+	if (!g_file_test (dirname, G_FILE_TEST_EXISTS)) {
+		return vendors;
+	}
+
+	dp = g_dir_open (dirname, 0, &gerror);
+	if (gerror != NULL) {
+	        g_message ("cannot open data directory: %s", gerror->message );
+		return vendors;
+	}
+
+	while ((filename = g_dir_read_name (dp)) != NULL) {
+
+		extension = strrchr (filename, '.');
+
+		if (extension != NULL) {
+
+			if ( ASCII_EQUAL (filename, "vendor-sizes.xml") )
+                        {
+
+				full_filename =
+				    g_build_filename (dirname, filename, NULL);
+				new_vendors =
+				    lgl_xml_vendor_read_vendors_from_file (full_filename);
+				g_free (full_filename);
+
+				vendors = g_list_concat (vendors, new_vendors);
+				new_vendors = NULL;
+
+			}
+
+		}
+
+	}
+
+	g_dir_close (dp);
+
+	return vendors;
+}
+
+
+/**
+ * lgl_db_print_known_vendors:
+ *
+ * For debugging purposes: print a list of all vendor definitions known to
+ * libglabels.
+ *
+ */
+void
+lgl_db_print_known_vendors (void)
+{
+	GList       *p;
+	lglVendor   *vendor;
+
+	if (!papers) {
+		lgl_db_init ();
+	}
+
+	g_print ("%s():\n", __FUNCTION__);
+	for (p = vendors; p != NULL; p = p->next) {
+		vendor = (lglVendor *) p->data;
+
+		g_print ("VENDOR name=\"%s\", url=\"%s\"\n",
+			 vendor->name, vendor->url);
 
 	}
 	g_print ("\n");
@@ -1036,6 +1285,17 @@ lgl_db_free_brand_list (GList *brands)
 /*===========================================*/
 /* Template db functions.                    */
 /*===========================================*/
+
+void
+_lgl_db_register_template_internal (const lglTemplate   *template)
+{
+        lglTemplate *template_copy;
+
+        template_copy = lgl_template_dup (template);
+        templates = g_list_append (templates, template_copy);
+        add_to_template_cache (template_copy);
+}
+
 
 /**
  * lgl_db_register_template:
@@ -1376,28 +1636,74 @@ lgl_db_lookup_template_from_name (const gchar *name)
 }
 
 
+/**
+ * lgl_db_lookup_template_from_brand_part:
+ * @brand: brand name string
+ * @part:  part name string
+ *
+ * Lookup template in template database from brand and part strings.
+ *
+ * Returns: pointer to a newly allocated #lglTemplate structure.
+ *
+ */
+lglTemplate *
+lgl_db_lookup_template_from_brand_part(const gchar *brand,
+                                       const gchar *part)
+{
+        gchar            *name;
+	GList            *p_alias;
+	lglTemplate      *template;
+        lglTemplateAlias *alias;
+        gchar            *candidate_name;
+	lglTemplate      *new_template;
+
+	if (!templates)
+        {
+		lgl_db_init ();
+	}
+
+	if ((brand == NULL) || (part == NULL))
+        {
+		/* If no name, return first template as a default */
+		return lgl_template_dup ((lglTemplate *) templates->data);
+	}
+
+        name = g_strdup_printf ("%s %s", brand, part);
+        template = g_hash_table_lookup (template_cache, name);
+
+        if (template)
+        {
+                for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
+                {
+                        alias = (lglTemplateAlias *)p_alias->data;
+                        candidate_name = g_strdup_printf ("%s %s", alias->brand, alias->part);
+
+                        if ( UTF8_EQUAL (candidate_name, name) )
+                        {
+                                g_free (candidate_name);
+                                new_template = lgl_template_dup (template);
+                                g_free (new_template->brand);
+                                new_template->brand = g_strdup (alias->brand);
+                                g_free (new_template->part);
+                                new_template->part = g_strdup (alias->part);
+                                g_free (name);
+                                return new_template;
+                        }
+
+                        g_free (candidate_name);
+                }
+        }
+
+	/* No matching template has been found so return the first template */
+        g_free (name);
+	return lgl_template_dup ((lglTemplate *) templates->data);
+}
+
+
 static void
 init_template_cache (void)
 {
-	GList            *p_tmplt, *p_alias;
-	lglTemplate      *template;
-        lglTemplateAlias *alias;
-        gchar            *name;
-
         template_cache = g_hash_table_new (g_str_hash, g_str_equal);
-
-        for ( p_tmplt=templates; p_tmplt != NULL; p_tmplt=p_tmplt->next )
-        {
-		template = (lglTemplate *) p_tmplt->data;
-
-                for ( p_alias=template->aliases; p_alias != NULL; p_alias=p_alias->next )
-                {
-                        alias = (lglTemplateAlias *)p_alias->data;
-                        name = g_strdup_printf ("%s %s", alias->brand, alias->part);
-
-                        g_hash_table_insert (template_cache, name, template);
-                }
-        }
 }
 
 
@@ -1418,11 +1724,10 @@ add_to_template_cache (lglTemplate *template)
 }
 
 
-static GList *
+void
 read_templates (void)
 {
 	gchar       *data_dir;
-	GList       *templates = NULL;
         GList       *p;
         lglTemplate *template;
 
@@ -1430,7 +1735,7 @@ read_templates (void)
          * User defined templates.  Add to user-defined category.
          */
 	data_dir = LGL_USER_DATA_DIR;
-	templates = read_template_files_from_dir (templates, data_dir);
+	read_template_files_from_dir (data_dir);
 	g_free (data_dir);
         for ( p=templates; p != NULL; p=p->next )
         {
@@ -1442,41 +1747,37 @@ read_templates (void)
          * System templates.
          */
 	data_dir = LGL_SYSTEM_DATA_DIR;
-	templates = read_template_files_from_dir (templates, data_dir);
+	read_template_files_from_dir (data_dir);
 	g_free (data_dir);
 
 	if (templates == NULL)
         {
 		g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
 	}
-
-	return templates;
 }
 
 
-static GList *
-read_template_files_from_dir (GList       *templates,
-			      const gchar *dirname)
+void
+read_template_files_from_dir (const gchar *dirname)
 {
 	GDir        *dp;
 	const gchar *filename, *extension, *extension2;
 	gchar       *full_filename = NULL;
 	GError      *gerror = NULL;
-	GList       *new_templates = NULL;
 
 	if (dirname == NULL)
-		return templates;
+		return;
 
 	if (!g_file_test (dirname, G_FILE_TEST_EXISTS))
         {
-		return templates;
+		return;
 	}
 
 	dp = g_dir_open (dirname, 0, &gerror);
 	if (gerror != NULL)
         {
 	        g_message ("cannot open data directory: %s", gerror->message );
-		return templates;
+		return;
 	}
 
 	while ((filename = g_dir_read_name (dp)) != NULL)
@@ -1490,19 +1791,13 @@ read_template_files_from_dir (GList       *templates,
                 {
 
 			full_filename = g_build_filename (dirname, filename, NULL);
-			new_templates =
-				lgl_xml_template_read_templates_from_file (full_filename);
+                        lgl_xml_template_read_templates_from_file (full_filename);
 			g_free (full_filename);
-
-			templates = g_list_concat (templates, new_templates);
-			new_templates = NULL;
 		}
 
 	}
 
 	g_dir_close (dp);
-
-	return templates;
 }
 
 

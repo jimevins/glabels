@@ -52,21 +52,24 @@ struct _lglTemplate {
 
 	gchar               *brand;
         gchar               *part;
+        gchar               *equiv_part;
+
 	gchar               *description;
 	gchar               *paper_id;
 	gdouble              page_width;
 	gdouble              page_height;
 
-	/* List of (lglTemplateAlias *) aliase structures. */
-	GList               *aliases;
-
-        /* List of (gchar *) category ids. */
-	GList               *category_ids;
+        /* Meta information. */
+        gchar               *product_url;   /* URL to manufacturer's product website. */
+	GList               *category_ids;  /* List of (gchar *) category ids. */
 
 	/* List of (lglTemplateFrame *) label frame structures.
 	 * Currently glabels only supports a single label frame per
 	 * template. */
 	GList               *frames;
+
+	/* Deprecated: List of (lglTemplateAlias *) alias structures. */
+	GList               *aliases;
 
 };
 
@@ -289,6 +292,10 @@ lglTemplate         *lgl_template_new                  (const gchar          *br
                                                         const gchar          *paper_id,
                                                         gdouble               page_width,
                                                         gdouble               page_height);
+
+lglTemplate         *lgl_template_new_from_equiv       (const gchar          *brand,
+                                                        const gchar          *part,
+                                                        const gchar          *equiv_part);
 
 void                 lgl_template_add_alias            (lglTemplate          *template,
                                                         lglTemplateAlias     *alias);

@@ -24,6 +24,7 @@
 #include <glib.h>
 
 #include "str.h"
+#include "template.h"
 
 /* Data system and user data directories.  (must free w/ g_free()) */
 #define LGL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
@@ -34,6 +35,8 @@
 
 #define UTF8_EQUAL(s1,s2) (!lgl_str_utf8_casecmp (s1, s2))
 #define ASCII_EQUAL(s1,s2) (!g_ascii_strcasecmp (s1, s2))
+
+void _lgl_db_register_template_internal (const lglTemplate   *template);
 
 
 #endif /* __LIBGLABELS_PRIVATE_H__ */

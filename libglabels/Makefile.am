@@ -24,12 +24,16 @@ libglabels_la_SOURCES =		\
 	paper.c			\
 	category.h		\
 	category.c		\
+	vendor.h		\
+	vendor.c		\
 	template.h		\
 	template.c		\
 	xml-paper.h		\
 	xml-paper.c		\
 	xml-category.h		\
 	xml-category.c		\
+	xml-vendor.h		\
+	xml-vendor.c		\
 	xml-template.h		\
 	xml-template.c		\
 	xml.h			\

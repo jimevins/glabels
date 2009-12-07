@@ -64,7 +64,8 @@ static void  xml_parse_markup_rect_node     (xmlNodePtr              markup_node
 static void  xml_parse_alias_node           (xmlNodePtr              alias_node,
 					     lglTemplate            *template);
 
-static void  xml_create_meta_node           (const gchar                  *category,
+static void  xml_create_meta_node           (const gchar                  *attr,
+                                             const gchar                  *value,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_label_node          (const lglTemplateFrame       *frame,
@@ -99,7 +100,7 @@ static void  xml_create_alias_node          (const lglTemplateAlias       *alias
  * Returns: a list of #lglTemplate structures.
  *
  */
-GList *
+void
 lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 {
 	gchar      *filename;
@@ -111,22 +112,20 @@ lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	if (!filename) {
 		g_message ("Utf8 filename conversion error");
-		return NULL;
+		return;
 	}
 
 	templates_doc = xmlParseFile (filename);
 	if (!templates_doc) {
 		g_message ("\"%s\" is not a glabels template file (not XML)",
 		      filename);
-		return templates;
+		return;
 	}
 
-	templates = lgl_xml_template_parse_templates_doc (templates_doc);
+	lgl_xml_template_parse_templates_doc (templates_doc);
 
 	g_free (filename);
 	xmlFreeDoc (templates_doc);
-
-	return templates;
 }
 
 
@@ -139,11 +138,10 @@ lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
  * Returns: a list of #lglTemplate structures.
  *
  */
-GList *
+void
 lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 {
 	
-	GList       *templates = NULL;
 	xmlNodePtr   root, node;
 	lglTemplate *template;
 
@@ -153,19 +151,20 @@ lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 	if (!root || !root->name) {
 		g_message ("\"%s\" is not a glabels template file (no root node)",
 			   templates_doc->URL);
-		return templates;
+		return;
 	}
 	if (!lgl_xml_is_node (root, "Glabels-templates")) {
 		g_message ("\"%s\" is not a glabels template file (wrong root node)",
 		      templates_doc->URL);
-		return templates;
+		return;
 	}
 
 	for (node = root->xmlChildrenNode; node != NULL; node = node->next) {
 
 		if (lgl_xml_is_node (node, "Template")) {
 			template = lgl_xml_template_parse_template_node (node);
-			templates = g_list_append (templates, template);
+                        _lgl_db_register_template_internal (template);
+                        lgl_template_free (template);
 		} else {
 			if ( !xmlNodeIsText(node) ) {
 				if (!lgl_xml_is_node (node,"comment")) {
@@ -174,8 +173,6 @@ lgl_xml_template_parse_templates_doc (const xmlDocPtr templates_doc)
 			}
 		}
 	}
-
-	return templates;
 }
 
 
@@ -194,10 +191,11 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	gchar                 *brand;
         gchar                 *part;
 	gchar                 *name;
+        gchar                 *equiv_part;
 	gchar                 *description;
 	gchar                 *paper_id;
 	gdouble                page_width, page_height;
-	lglPaper               *paper = NULL;
+	lglPaper              *paper = NULL;
 	lglTemplate           *template;
 	xmlNodePtr             node;
         gchar                **v;
@@ -221,6 +219,10 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			g_message (_("Missing name or brand/part attributes."));
                 }
         }
+
+
+        equiv_part = lgl_xml_get_prop_string (template_node, "equiv", NULL);
+
 
 	description = lgl_xml_get_prop_i18n_string (template_node, "description", NULL);
 	paper_id = lgl_xml_get_prop_string (template_node, "size", NULL);
@@ -254,8 +256,23 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 		paper = NULL;
 	}
 
-	template = lgl_template_new (brand, part, description,
-                                     paper_id, page_width, page_height);
+
+        if (!equiv_part)
+        {
+                template = lgl_template_new (brand, part, description,
+                                             paper_id, page_width, page_height);
+        }
+        else
+        {
+                template = lgl_template_new_from_equiv (brand, part, equiv_part);
+
+                if (!template)
+                {
+			g_message (_("Forward references not supported."));
+                        return NULL;
+                }
+        }
+
 
 	for (node = template_node->xmlChildrenNode; node != NULL;
 	     node = node->next) {
@@ -280,6 +297,7 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 
 	g_free (brand);
 	g_free (part);
+	g_free (equiv_part);
 	g_free (description);
 	g_free (paper_id);
 
@@ -293,11 +311,18 @@ static void
 xml_parse_meta_node (xmlNodePtr   meta_node,
 		     lglTemplate *template)
 {
+        gchar               *product_url;
 	gchar               *category;
 
-	category = lgl_xml_get_prop_string (meta_node, "category", NULL);
+        product_url = lgl_xml_get_prop_string (meta_node, "product_url", NULL);
+        if ( product_url != NULL )
+        {
+                g_free (template->product_url);
+                template->product_url = product_url;
+        }
 
-	if (category != NULL)
+	category = lgl_xml_get_prop_string (meta_node, "category", NULL);
+	if ( category != NULL )
 	{
 		lgl_template_add_category (template, category);
 		g_free (category);
@@ -746,9 +771,10 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 			xml_create_alias_node ( alias, node, ns );
 		}
 	}
+        xml_create_meta_node ("product_url", template->product_url, node, ns );
 	for ( p=template->category_ids; p != NULL; p=p->next )
         {
-                xml_create_meta_node ( p->data, node, ns );
+                xml_create_meta_node ( "category", p->data, node, ns );
 	}
 	for ( p=template->frames; p != NULL; p=p->next )
         {
@@ -759,17 +785,21 @@ lgl_xml_template_create_template_node (const lglTemplate *template,
 }
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Template->Meta Node.                                   */
+/* PRIVATE.  Add XML Template->Meta Node with category.                     */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_meta_node (const gchar      *category,
-		      xmlNodePtr        root,
-		      const xmlNsPtr    ns)
+xml_create_meta_node (const gchar      *attr,
+                      const gchar      *value,
+                      xmlNodePtr        root,
+                      const xmlNsPtr    ns)
 {
 	xmlNodePtr node;
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Meta", NULL);
-	lgl_xml_set_prop_string (node, "category", category);
+        if ( value != NULL )
+        {
+                node = xmlNewChild (root, ns, (xmlChar *)"Meta", NULL);
+                lgl_xml_set_prop_string (node, attr, value);
+        }
 
 }
 
