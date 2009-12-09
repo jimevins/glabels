@@ -340,7 +340,11 @@ gl_merge_text_open (glMerge *merge)
 
 	if (src != NULL)
         {
-		merge_text->priv->fp = fopen (src, "r");
+		if (g_utf8_strlen(src, -1) == 1 && src[0] == '-')
+			merge_text->priv->fp = stdin;
+		else
+			merge_text->priv->fp = fopen (src, "r");
+
                 g_free (src);
 
                 clear_keys (merge_text);
