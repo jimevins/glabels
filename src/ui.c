@@ -61,6 +61,11 @@ static void set_app_drawing_toolbar_style  (GtkUIManager    *ui);
 
 static void set_view_style                 (GtkUIManager    *ui);
 
+static void descend_menu_set_always_show_image (GtkMenu *menu);
+
+static void set_additional_properties      (GtkUIManager    *ui);
+
+
 static void connect_proxy_cb               (GtkUIManager    *ui,
 					    GtkAction       *action,
 					    GtkWidget       *proxy,
@@ -774,6 +779,8 @@ gl_ui_new (glWindow *window)
 				   recent_menu);
 
 
+        set_additional_properties (ui);
+
 	gl_ui_util_set_verb_list_sensitive (ui, doc_verbs, FALSE);
 	gl_ui_util_set_verb_list_sensitive (ui, paste_verbs, FALSE);
 
@@ -1052,6 +1059,74 @@ set_view_style (GtkUIManager *ui)
 				   gl_prefs_model_get_markup_visible (gl_prefs));
 
 	gl_debug (DEBUG_UI, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Descend menu, set "always-show-image" for all image menu items.*/
+/*---------------------------------------------------------------------------*/
+static void
+descend_menu_set_always_show_image (GtkMenu *menu)
+{
+        GList       *children, *p;
+        GtkWidget   *submenu;
+        GtkWidget   *menu_item;
+
+        children = gtk_container_get_children (GTK_CONTAINER (menu));
+
+        for ( p = children; p != NULL; p = p->next )
+        {
+                menu_item = GTK_WIDGET (p->data);
+
+                submenu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+                if ( submenu )
+                {
+                        descend_menu_set_always_show_image (GTK_MENU (submenu));
+                }
+                else if ( GTK_IS_IMAGE_MENU_ITEM (menu_item) )
+                {
+                        g_object_set (menu_item, "always-show-image", TRUE, NULL);
+                }
+        }
+}
+
+
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Set additional properties.                                     */
+/*---------------------------------------------------------------------------*/
+static void
+set_additional_properties (GtkUIManager *ui)
+{
+        GtkWidget  *menu;
+        GtkWidget  *menu_item;
+
+        /*
+         * Set "always-show-image" property for all Object menuitems.  This is
+         * necessary because, as of Gtk-2.18, images are not shown by default
+         * and you really need these visual cues for these menu items.
+         */
+        menu_item = gtk_ui_manager_get_widget (ui, "/MenuBar/ObjectsMenu/");
+        menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+        descend_menu_set_always_show_image (GTK_MENU (menu));
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/MenuBar/ObjectsMenu/ObjectsMergeProperties");
+        g_object_set (menu_item, "always-show-image", FALSE, NULL); /* Leave this one out. */
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsOrderMenu/");
+        menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+        descend_menu_set_always_show_image (GTK_MENU (menu));
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsRotateFlipMenu/");
+        menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+        descend_menu_set_always_show_image (GTK_MENU (menu));
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsAlignHorizMenu/");
+        menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+        descend_menu_set_always_show_image (GTK_MENU (menu));
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsAlignVertMenu/");
+        menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
+        descend_menu_set_always_show_image (GTK_MENU (menu));
 }
 
 
