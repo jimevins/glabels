@@ -232,8 +232,7 @@ static void
 gl_window_destroy (GtkObject *gtk_object)
 {
 	glWindow          *window;
-        GtkClipboard      *glabels_clipboard;
-        GtkClipboard      *std_clipboard;
+        GtkClipboard      *clipboard;
 
 	gl_debug (DEBUG_WINDOW, "START");
 
@@ -250,10 +249,10 @@ gl_window_destroy (GtkObject *gtk_object)
 
         if (window->label)
         {
-                glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
-                                                              GL_UI_GLABELS_CLIPBOARD);
+                clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                                      GDK_SELECTION_CLIPBOARD);
 
-                g_signal_handlers_disconnect_by_func (G_OBJECT (glabels_clipboard),
+                g_signal_handlers_disconnect_by_func (G_OBJECT (clipboard),
                                                       G_CALLBACK (clipboard_changed_cb),
                                                       window);
 
@@ -359,7 +358,7 @@ gl_window_set_label (glWindow    *window,
 		     glLabel     *label)
 {
 	gchar             *string;
-        GtkClipboard      *glabels_clipboard;
+        GtkClipboard      *clipboard;
         GtkWidget         *focus_widget;
 
 	gl_debug (DEBUG_WINDOW, "START");
@@ -408,8 +407,8 @@ gl_window_set_label (glWindow    *window,
 	g_free (string);
 
 
-        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
-                                                      GL_UI_GLABELS_CLIPBOARD);
+        clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+                                              GDK_SELECTION_CLIPBOARD);
 
 
 	g_signal_connect (G_OBJECT(window->label), "selection_changed",
@@ -433,7 +432,7 @@ gl_window_set_label (glWindow    *window,
 	g_signal_connect (G_OBJECT(label), "modified_changed",
 			  G_CALLBACK(modified_changed_cb), window);
 
-	g_signal_connect (G_OBJECT(glabels_clipboard), "owner_change",
+	g_signal_connect (G_OBJECT(clipboard), "owner_change",
 			  G_CALLBACK(clipboard_changed_cb), window);
 
 	g_signal_connect (G_OBJECT(window), "set_focus",
@@ -726,22 +725,15 @@ static void
 set_copy_paste_sensitivity (glWindow  *window,
                             GtkWidget *focus_widget)
 {
-        GtkClipboard *glabels_clipboard;
-
 	gl_debug (DEBUG_WINDOW, "START");
 
 	g_return_if_fail (window && GL_IS_WINDOW (window));
-
-        glabels_clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
-                                                      GL_UI_GLABELS_CLIPBOARD);
 
         if ( focus_widget == GL_VIEW(window->view)->canvas )
         {
                 gl_ui_update_selection_verbs (window->ui, GL_VIEW (window->view), TRUE);
 
-                gl_ui_update_paste_verbs (window->ui,
-                                          gtk_clipboard_wait_is_text_available (glabels_clipboard));
-
+                gl_ui_update_paste_verbs (window->ui, gl_label_can_paste (window->label));
         }
         else
         {

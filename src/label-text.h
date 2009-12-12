@@ -61,7 +61,12 @@ GObject       *gl_label_text_new             (glLabel          *label);
 void           gl_label_text_set_lines       (glLabelText      *ltext,
                                               GList            *lines);
 
+void           gl_label_text_set_text        (glLabelText      *ltext,
+                                              const gchar      *text);
+
 GtkTextBuffer *gl_label_text_get_buffer      (glLabelText      *ltext);
+
+gchar         *gl_label_text_get_text        (glLabelText      *ltext);
 
 GList         *gl_label_text_get_lines       (glLabelText      *ltext);
 

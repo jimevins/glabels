@@ -57,6 +57,9 @@ GObject         *gl_label_image_new          (glLabel       *label);
 void             gl_label_image_set_filename (glLabelImage  *limage,
 					      glTextNode    *filename);
 
+void             gl_label_image_set_pixbuf   (glLabelImage  *limage,
+					      GdkPixbuf     *pixbuf);
+
 glTextNode      *gl_label_image_get_filename (glLabelImage  *limage);
 
 const GdkPixbuf *gl_label_image_get_pixbuf   (glLabelImage  *limage,

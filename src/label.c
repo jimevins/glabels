@@ -29,6 +29,8 @@
 #include "file-util.h"
 #include "xml-label.h"
 #include "prefs.h"
+#include "label-text.h"
+#include "label-image.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -78,8 +80,13 @@ struct _glLabelPrivate {
 	
 	/* Default object fill properties */
 	guint              default_fill_color;
-
 };
+
+typedef struct {
+        gchar             *xml_buffer;
+        gchar             *text;
+        GdkPixbuf         *pixbuf;
+} ClipboardData;
 
 enum {
 	SELECTION_CHANGED,
@@ -115,9 +122,30 @@ static void do_modify              (glLabel       *label);
 static void begin_selection_op     (glLabel       *label);
 static void end_selection_op       (glLabel       *label);
 
-static void paste_received_cb      (GtkClipboard  *clipboard,
-                                    const gchar   *buffer,
-                                    glLabel       *label);
+static void clipboard_get_cb       (GtkClipboard     *clipboard,
+                                    GtkSelectionData *selection_data,
+                                    guint             info,
+                                    ClipboardData    *data);
+
+static void clipboard_clear_cb     (GtkClipboard     *clipboard,
+                                    ClipboardData    *data);
+
+static void receive_targets_cb     (GtkClipboard     *clipboard,
+                                    GdkAtom          *targets,
+                                    gint              n_targets,
+                                    glLabel          *label);
+
+static void paste_xml_received_cb  (GtkClipboard     *clipboard,
+                                    GtkSelectionData *selection_data,
+                                    glLabel          *label);
+
+static void paste_text_received_cb (GtkClipboard     *clipboard,
+                                    const gchar      *text,
+                                    glLabel          *label);
+
+static void paste_image_received_cb(GtkClipboard     *clipboard,
+                                    GdkPixbuf        *pixbuf,
+                                    glLabel          *label);
 
 
 /*****************************************************************************/
@@ -1868,7 +1896,7 @@ gl_label_set_selection_font_family (glLabel      *label,
 /*****************************************************************************/
 void
 gl_label_set_selection_font_size (glLabel  *label,
-				 gdouble  font_size)
+                                  gdouble   font_size)
 {
         GList         *selection_list;
 	GList         *p;
@@ -1997,7 +2025,7 @@ gl_label_set_selection_text_alignment (glLabel        *label,
 /*****************************************************************************/
 void
 gl_label_set_selection_text_line_spacing (glLabel  *label,
-				         gdouble  text_line_spacing)
+                                          gdouble   text_line_spacing)
 {
         GList         *selection_list;
 	GList         *p;
@@ -2030,7 +2058,7 @@ gl_label_set_selection_text_line_spacing (glLabel  *label,
 /*****************************************************************************/
 void
 gl_label_set_selection_text_color (glLabel      *label,
-				  glColorNode *text_color_node)
+                                   glColorNode  *text_color_node)
 {
         GList         *selection_list;
 	GList         *p;
@@ -2063,7 +2091,7 @@ gl_label_set_selection_text_color (glLabel      *label,
 /*****************************************************************************/
 void
 gl_label_set_selection_fill_color (glLabel      *label,
-				  glColorNode *fill_color_node)
+                                   glColorNode  *fill_color_node)
 {
         GList         *selection_list;
 	GList         *p;
@@ -2096,7 +2124,7 @@ gl_label_set_selection_fill_color (glLabel      *label,
 /*****************************************************************************/
 void
 gl_label_set_selection_line_color (glLabel      *label,
-				  glColorNode *line_color_node)
+                                   glColorNode  *line_color_node)
 {
         GList         *selection_list;
 	GList         *p;
@@ -2161,15 +2189,13 @@ gl_label_set_selection_line_width (glLabel  *label,
 /* "Cut" selected items and place on clipboard.                              */
 /*****************************************************************************/
 void
-gl_label_cut_selection (glLabel       *label,
-                        GtkClipboard  *glabels_clipboard,
-                        GtkClipboard  *std_clipboard)
+gl_label_cut_selection (glLabel       *label)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-	gl_label_copy_selection (label, glabels_clipboard, std_clipboard);
+	gl_label_copy_selection (label);
 	gl_label_delete_selection (label);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -2180,10 +2206,9 @@ gl_label_cut_selection (glLabel       *label,
 /* "Copy" selected items to clipboard.                                       */
 /*****************************************************************************/
 void
-gl_label_copy_selection (glLabel       *label,
-                         GtkClipboard  *glabels_clipboard,
-                         GtkClipboard  *std_clipboard)
+gl_label_copy_selection (glLabel       *label)
 {
+        GtkClipboard      *clipboard;
 	GList             *selection_list;
         glLabel           *label_copy;
 	GList             *p;
@@ -2192,14 +2217,34 @@ gl_label_copy_selection (glLabel       *label,
         glXMLLabelStatus   status;
         const GdkPixbuf   *pixbuf;
 
+        ClipboardData     *data;
+
+        static GtkTargetEntry glabels_targets[] = { { "application/glabels", 0, 0 },
+                                                    { "text/xml",            0, 0 },
+        };
+
+        GtkTargetList  *target_list;
+        GtkTargetEntry *target_table;
+        guint           n_targets;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
+
+        clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 
         selection_list = gl_label_get_selection_list (label);
 
 	if (selection_list)
         {
+
+                data = g_new0 (ClipboardData, 1);
+
+                target_list = gtk_target_list_new (glabels_targets, G_N_ELEMENTS(glabels_targets));
+
+                /*
+                 * Serialize selection by encoding as an XML label document.
+                 */
 		label_copy = GL_LABEL(gl_label_new ());
 
 		gl_label_set_template (label_copy, label->priv->template);
@@ -2212,25 +2257,52 @@ gl_label_copy_selection (glLabel       *label,
 			gl_label_object_dup (object, label_copy);
 		}
 
-                buffer = gl_xml_label_save_buffer (label_copy, &status);
-                
-                gtk_clipboard_set_text (glabels_clipboard, buffer, -1);
+                data->xml_buffer = gl_xml_label_save_buffer (label_copy, &status);
 
-                g_free (buffer);
                 g_object_unref (G_OBJECT (label_copy));
 
+
+                /*
+                 * Is it an atomic text selection?  If so, also make available as text.
+                 */
+                if ( gl_label_is_selection_atomic (label) &&
+                     GL_IS_LABEL_TEXT (selection_list->data) )
+                {
+                        glLabelText *text_object = GL_LABEL_TEXT (selection_list->data);
+
+                        gtk_target_list_add_text_targets (target_list, 1);
+
+                        data->text = gl_label_text_get_text (text_object);
+                }
+
+
+                /*
+                 * Is it an atomic image selection?  If so, also make available as pixbuf.
+                 */
+                if ( gl_label_is_selection_atomic (label) &&
+                     GL_IS_LABEL_IMAGE (selection_list->data) )
+                {
+                        glLabelImage       *image_object = GL_LABEL_IMAGE (selection_list->data);
+                        const GdkPixbuf    *pixbuf = gl_label_image_get_pixbuf (image_object, NULL);
+
+                        gtk_target_list_add_image_targets (target_list, 2, TRUE);
+
+                        data->pixbuf = g_object_ref (G_OBJECT (pixbuf));
+                }
+
+
+                target_table = gtk_target_table_new_from_list (target_list, &n_targets);
+
+                gtk_clipboard_set_with_data (clipboard,
+                                             target_table, n_targets,
+                                             (GtkClipboardGetFunc)clipboard_get_cb,
+                                             (GtkClipboardClearFunc)clipboard_clear_cb,
+                                             data);
+
+                gtk_target_table_free (target_table, n_targets);
+                gtk_target_list_unref (target_list);
 	}
 
-        /*
-         * We may also want to make text and images available on standard
-         * clipboard.
-         */
-        if ( gl_label_is_selection_atomic (label) )
-        {
-                object = GL_LABEL_OBJECT (selection_list->data);
-
-                gl_label_object_copy_to_clipboard (object, std_clipboard);
-        }
 
         g_list_free (selection_list);
 
@@ -2239,52 +2311,249 @@ gl_label_copy_selection (glLabel       *label,
 
 
 /*****************************************************************************/
-/* "Paste" from private clipboard selection.                                 */
+/* "Paste" from clipboard.                                                   */
 /*****************************************************************************/
 void
-gl_label_paste (glLabel       *label,
-                GtkClipboard  *glabels_clipboard,
-                GtkClipboard  *std_clipboard)
+gl_label_paste (glLabel       *label)
 {
+        GtkClipboard  *clipboard;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-        gtk_clipboard_request_text (glabels_clipboard,
-                                    (GtkClipboardTextReceivedFunc)paste_received_cb,
-                                    label);
+        clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+        gtk_clipboard_request_targets (clipboard,
+                                       (GtkClipboardTargetsReceivedFunc)receive_targets_cb,
+                                       label);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Is there anything that can be pasted?                                     */
+/*****************************************************************************/
+gboolean
+gl_label_can_paste (glLabel       *label)
+{
+        GtkClipboard *clipboard;
+        gboolean      can_flag;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+        can_flag = gtk_clipboard_wait_is_target_available (clipboard,
+                                                           gdk_atom_intern("application/glabels", TRUE))
+                || gtk_clipboard_wait_is_text_available (clipboard)
+                || gtk_clipboard_wait_is_image_available (clipboard);
+
+	gl_debug (DEBUG_LABEL, "END");
+        return can_flag;
+}
+
+
+/****************************************************************************/
+/* Clipboard "Get" function.                                                */
+/****************************************************************************/
+static void
+clipboard_get_cb (GtkClipboard     *clipboard,
+                  GtkSelectionData *selection_data,
+                  guint             info,
+                  ClipboardData    *data)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+        switch (info)
+        {
+
+        case 0:
+                gtk_selection_data_set (selection_data,
+                                        gtk_selection_data_get_target (selection_data),
+                                        8,
+                                        data->xml_buffer, strlen (data->xml_buffer));
+                break;
+
+        case 1:
+                gtk_selection_data_set_text (selection_data, data->text, -1);
+                break;
+
+        case 2:
+                gtk_selection_data_set_pixbuf (selection_data, data->pixbuf);
+                break;
+
+        default:
+                g_assert_not_reached ();
+                break;
+
+        }
 
 	gl_debug (DEBUG_LABEL, "END");
 }
 
 
 /****************************************************************************/
-/* Paste received callback.                                                 */
+/* Clipboard "Clear" function.                                              */
 /****************************************************************************/
 static void
-paste_received_cb (GtkClipboard *clipboard,
-                   const gchar  *buffer,
-                   glLabel      *label)
+clipboard_clear_cb (GtkClipboard     *clipboard,
+                    ClipboardData    *data)
 {
+	gl_debug (DEBUG_LABEL, "START");
+
+        g_free (data->xml_buffer);
+        g_free (data->text);
+        if (data->pixbuf)
+        {
+                g_object_unref (data->pixbuf);
+        }
+
+        g_free (data);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Deal with clipboard data.                                                */
+/****************************************************************************/
+static void
+receive_targets_cb (GtkClipboard *clipboard,
+                    GdkAtom      *targets,
+                    gint          n_targets,
+                    glLabel      *label)
+{
+        gint i;
+
+        /*
+         * Application/glabels
+         */
+        for ( i = 0; i < n_targets; i++ )
+        {
+                if ( strcmp(gdk_atom_name(targets[i]), "application/glabels") == 0 )
+                {
+                        gtk_clipboard_request_contents (clipboard,
+                                                        gdk_atom_intern("application/glabels", TRUE),
+                                                        (GtkClipboardReceivedFunc)paste_xml_received_cb,
+                                                        label);
+                        return;
+                }
+        }
+
+        /*
+         * Text
+         */
+        if ( gtk_targets_include_text (targets, n_targets) )
+        {
+                gtk_clipboard_request_text (clipboard,
+                                            (GtkClipboardTextReceivedFunc)paste_text_received_cb,
+                                            label);
+                return;
+        }
+
+        /*
+         * Image
+         */
+        if ( gtk_targets_include_image (targets, n_targets, TRUE) )
+        {
+                gtk_clipboard_request_image (clipboard,
+                                             (GtkClipboardImageReceivedFunc)paste_image_received_cb,
+                                             label);
+                return;
+        }
+}
+
+
+/****************************************************************************/
+/* Paste received glabels XML callback.                                     */
+/****************************************************************************/
+static void
+paste_xml_received_cb (GtkClipboard     *clipboard,
+                       GtkSelectionData *selection_data,
+                       glLabel          *label)
+{
+        const gchar      *xml_buffer;
         glLabel          *label_copy;
         glXMLLabelStatus  status;
         GList            *p;
         glLabelObject    *object, *newobject;
 
-        label_copy = gl_xml_label_open_buffer (buffer, &status);
+	gl_debug (DEBUG_LABEL, "START");
 
+        xml_buffer = gtk_selection_data_get_data (selection_data);
+
+        /*
+         * Deserialize XML label document and extract objects.
+         */
+        label_copy = gl_xml_label_open_buffer (xml_buffer, &status);
         if ( label_copy )
         {
+                gl_label_unselect_all (label);
+
                 for (p = label_copy->priv->object_list; p != NULL; p = p->next)
                 {
                         object = (glLabelObject *) p->data;
                         newobject = gl_label_object_dup (object, label);
+
+                        gl_label_select_object (label, newobject);
 
                         gl_debug (DEBUG_LABEL, "object pasted");
                 }
 
                 g_object_unref (G_OBJECT (label_copy));
         }
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Paste received text callback.                                            */
+/****************************************************************************/
+static void
+paste_text_received_cb (GtkClipboard     *clipboard,
+                        const gchar      *text,
+                        glLabel          *label)
+{
+        glLabelObject    *object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_unselect_all (label);
+
+        object = GL_LABEL_OBJECT (gl_label_text_new (label));
+        gl_label_text_set_text (GL_LABEL_TEXT (object), text);
+        gl_label_object_set_position (object, 18, 18);
+
+        gl_label_select_object (label, object);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Paste received image callback.                                           */
+/****************************************************************************/
+static void
+paste_image_received_cb (GtkClipboard     *clipboard,
+                         GdkPixbuf        *pixbuf,
+                         glLabel          *label)
+{
+        glLabelObject    *object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_unselect_all (label);
+
+        object = GL_LABEL_OBJECT (gl_label_image_new (label));
+        gl_label_image_set_pixbuf (GL_LABEL_IMAGE (object), pixbuf);
+        gl_label_object_set_position (object, 18, 18);
+
+        gl_label_select_object (label, object);
+
+	gl_debug (DEBUG_LABEL, "END");
 }
 
 

@@ -148,9 +148,6 @@ struct _glLabelObjectClass {
 ,
                                                    glLabelObject     *src_object);
 
-        void              (*copy_to_clipboard)    (glLabelObject     *object,
-                                                   GtkClipboard      *clipboard);
-
         /*
          * Draw methods
          */
@@ -199,10 +196,6 @@ GObject       *gl_label_object_new                   (glLabel           *label);
 
 glLabelObject *gl_label_object_dup                   (glLabelObject     *src_object,
                                                       glLabel           *label);
-
-
-void           gl_label_object_copy_to_clipboard     (glLabelObject     *object,
-                                                      GtkClipboard      *clipboard);
 
 
 void           gl_label_object_emit_changed          (glLabelObject     *object);

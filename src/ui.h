@@ -29,9 +29,6 @@
 G_BEGIN_DECLS
 
 
-#define GL_UI_GLABELS_CLIPBOARD gdk_atom_intern ("GLABELS", FALSE)
-
-
 GtkUIManager *gl_ui_new                    (glWindow          *window);
 
 void          gl_ui_unref                  (GtkUIManager      *ui);

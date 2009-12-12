@@ -242,27 +242,6 @@ gl_label_object_dup (glLabelObject *src_object,
 
 
 /*****************************************************************************/
-/* Copy object interesting object data to clipboard.                         */
-/*****************************************************************************/
-void
-gl_label_object_copy_to_clipboard (glLabelObject     *object,
-                                   GtkClipboard      *clipboard)
-{
-        gl_debug (DEBUG_LABEL, "START");
-
-        g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
-
-	if ( GL_LABEL_OBJECT_GET_CLASS(object)->copy_to_clipboard != NULL )
-        {
-		/* We have an object specific method, use it */
-		GL_LABEL_OBJECT_GET_CLASS(object)->copy_to_clipboard (object, clipboard);
-	}
-
-        gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/*****************************************************************************/
 /* Emit "changed" signal (for derived objects).                              */
 /*****************************************************************************/
 void

@@ -77,9 +77,6 @@ static void gl_label_text_finalize      (GObject          *object);
 static void copy                        (glLabelObject    *dst_object,
 					 glLabelObject    *src_object);
 
-static void copy_to_clipboard           (glLabelObject    *object,
-                                         GtkClipboard     *clipboard);
-
 static void buffer_changed_cb           (GtkTextBuffer    *textbuffer,
 					 glLabelText      *ltext);
 
@@ -170,8 +167,6 @@ gl_label_text_class_init (glLabelTextClass *class)
 	gl_label_text_parent_class = g_type_class_peek_parent (class);
 
 	label_object_class->copy                  = copy;
-
-	label_object_class->copy_to_clipboard     = copy_to_clipboard;
 
 	label_object_class->get_size              = get_size;
 
@@ -308,33 +303,6 @@ copy (glLabelObject *dst_object,
 }
 
 
-/*---------------------------------------------------------------------------*/
-/* Private.  Copy text to clipboard.                                         */
-/*---------------------------------------------------------------------------*/
-static void
-copy_to_clipboard (glLabelObject     *object,
-                   GtkClipboard      *clipboard)
-{
-        glLabelText *ltext;
-	GtkTextIter  start, end;
-	gchar       *text;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	g_return_if_fail (object && GL_IS_LABEL_TEXT (object));
-
-        ltext = GL_LABEL_TEXT (object);
-
-	gtk_text_buffer_get_bounds (ltext->priv->buffer, &start, &end);
-	text = gtk_text_buffer_get_text (ltext->priv->buffer,
-					 &start, &end, FALSE);
-
-        gtk_clipboard_set_text (clipboard, text, -1);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
 /*****************************************************************************/
 /* Set object params.                                                        */
 /*****************************************************************************/
@@ -356,6 +324,23 @@ gl_label_text_set_lines (glLabelText *ltext,
 
 	gl_debug (DEBUG_LABEL, "END");
 }
+
+
+void
+gl_label_text_set_text (glLabelText *ltext,
+                        const gchar *text)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+	g_return_if_fail (ltext && GL_IS_LABEL_TEXT (ltext));
+
+	gtk_text_buffer_set_text (ltext->priv->buffer, text, -1);
+
+        ltext->priv->size_changed = TRUE;
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
 
 /*****************************************************************************/
 /* Get object params.                                                        */
@@ -385,6 +370,22 @@ gl_label_text_get_lines (glLabelText *ltext)
 	g_free (text);
 
 	return lines;
+}
+
+
+gchar *
+gl_label_text_get_text (glLabelText      *ltext)
+{
+	GtkTextIter  start, end;
+	gchar       *text;
+
+	g_return_val_if_fail (ltext && GL_IS_LABEL_TEXT (ltext), NULL);
+
+	gtk_text_buffer_get_bounds (ltext->priv->buffer, &start, &end);
+	text = gtk_text_buffer_get_text (ltext->priv->buffer,
+					 &start, &end, FALSE);
+
+	return text;
 }
 
 
