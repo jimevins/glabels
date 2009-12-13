@@ -850,6 +850,7 @@ object_changed_cb (glLabelObject  *object,
                 bc_data = gl_label_barcode_get_data (GL_LABEL_BARCODE(object));
                 gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
                                             &id, &text_flag, &cs_flag, &format_digits);
+                line_color_node   = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));
 
                 gl_object_editor_set_size (editor, w, h);
                 gl_object_editor_set_data (editor, (merge != NULL), bc_data);
