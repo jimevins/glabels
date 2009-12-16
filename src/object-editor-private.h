@@ -77,6 +77,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *fill_page_vbox;
 	GtkWidget  *fill_color_hbox;
 	GtkWidget  *fill_color_combo;
+	GtkWidget  *fill_key_hbox;
 	GtkWidget  *fill_key_combo;
 	GtkWidget  *fill_key_radio;
 	GtkWidget  *fill_color_radio;
@@ -87,12 +88,14 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *line_color_hbox;
 	GtkWidget  *line_color_combo;
 	GtkWidget  *line_key_radio;
+	GtkWidget  *line_key_hbox;
 	GtkWidget  *line_key_combo;
 
 	GtkWidget  *img_page_vbox;
 	GtkWidget  *img_file_radio;
 	GtkWidget  *img_key_radio;
 	GtkWidget  *img_file_button;
+	GtkWidget  *img_key_hbox;
 	GtkWidget  *img_key_combo;
 
 	GtkWidget  *text_page_vbox;
@@ -105,6 +108,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *text_color_hbox;
 	GtkWidget  *text_color_combo;
 	GtkWidget  *text_color_key_radio;
+	GtkWidget  *text_color_key_hbox;
 	GtkWidget  *text_color_key_combo;
 	GtkWidget  *text_left_toggle;
 	GtkWidget  *text_center_toggle;
@@ -125,12 +129,14 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *bc_color_hbox;
 	GtkWidget  *bc_color_combo;
 	GtkWidget  *bc_key_radio;
+	GtkWidget  *bc_key_hbox;
 	GtkWidget  *bc_key_combo;
 
 	GtkWidget  *data_page_vbox;
 	GtkWidget  *data_literal_radio;
 	GtkWidget  *data_key_radio;
 	GtkWidget  *data_text_entry;
+	GtkWidget  *data_key_hbox;
 	GtkWidget  *data_key_combo;
 	GtkWidget  *data_format_label;
 	GtkWidget  *data_ex_label;
@@ -149,6 +155,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *shadow_key_radio;
 	GtkWidget  *shadow_color_hbox;
 	GtkWidget  *shadow_color_combo;
+	GtkWidget  *shadow_key_hbox;
 	GtkWidget  *shadow_key_combo;
 	GtkWidget  *shadow_opacity_spin;
 	gdouble     shadow_x;

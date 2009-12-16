@@ -29,7 +29,7 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
-#include "combo-util.h"
+#include "field-button.h"
 #include "builder-util.h"
 
 #include "object-editor-private.h"
@@ -71,7 +71,7 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
         gl_builder_util_get_widgets (editor->priv->builder,
                                      "fill_page_vbox",   &editor->priv->fill_page_vbox,
                                      "fill_color_hbox",  &editor->priv->fill_color_hbox,
-                                     "fill_key_combo",   &editor->priv->fill_key_combo,
+                                     "fill_key_hbox",    &editor->priv->fill_key_hbox,
                                      "fill_key_radio",   &editor->priv->fill_key_radio,
                                      "fill_color_radio", &editor->priv->fill_color_radio,
                                      NULL);
@@ -83,7 +83,10 @@ gl_object_editor_prepare_fill_page (glObjectEditor *editor)
                             editor->priv->fill_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->fill_key_combo));
+        editor->priv->fill_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->fill_key_hbox),
+                            editor->priv->fill_key_combo,
+                            TRUE, TRUE, 0);
 
 	/* Modify widgets based on configuration */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->fill_color_radio), TRUE);
@@ -158,8 +161,8 @@ gl_object_editor_set_fill_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->fill_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->fill_key_combo, TRUE);
 		
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo),
-                                               color_node->key);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->fill_key_combo),
+                                         color_node->key);
 	}
 	
         editor->priv->stop_signals = FALSE;
@@ -185,7 +188,7 @@ gl_object_editor_get_fill_color (glObjectEditor      *editor)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->fill_key_radio))) {
 		color_node->field_flag = TRUE;
 		color_node->key = 
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->fill_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->fill_key_combo));
         } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

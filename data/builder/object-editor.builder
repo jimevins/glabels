@@ -10,10 +10,12 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkVBox" id="editor_vbox">
             <property name="visible">True</property>
             <property name="border_width">6</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkHBox" id="title_hbox">
@@ -57,6 +59,7 @@
                   <object class="GtkVBox" id="edit_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkHBox" id="hbox30">
@@ -124,6 +127,7 @@
                   <object class="GtkVBox" id="text_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox65">
@@ -293,6 +297,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox42">
@@ -352,16 +357,11 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox45">
+                                  <object class="GtkHBox" id="text_color_key_hbox">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkComboBox" id="text_color_key_combo">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="position">0</property>
-                                      </packing>
+                                      <placeholder/>
                                     </child>
                                   </object>
                                   <packing>
@@ -552,6 +552,7 @@
                   <object class="GtkVBox" id="line_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox71">
@@ -631,6 +632,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox38">
@@ -690,16 +692,11 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox41">
+                                  <object class="GtkHBox" id="line_key_hbox">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkComboBox" id="line_key_combo">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="position">0</property>
-                                      </packing>
+                                      <placeholder/>
                                     </child>
                                   </object>
                                   <packing>
@@ -742,6 +739,7 @@
                   <object class="GtkVBox" id="fill_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkHBox" id="hbox73">
                         <property name="visible">True</property>
@@ -762,6 +760,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox5">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox50">
@@ -822,16 +821,11 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox53">
+                                  <object class="GtkHBox" id="fill_key_hbox">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkComboBox" id="fill_key_combo">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="position">0</property>
-                                      </packing>
+                                      <placeholder/>
                                     </child>
                                   </object>
                                   <packing>
@@ -874,6 +868,7 @@
                   <object class="GtkVBox" id="img_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox74">
@@ -934,8 +929,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="img_key_combo">
+                          <object class="GtkHBox" id="img_key_hbox">
                             <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -967,6 +965,7 @@
                   <object class="GtkVBox" id="data_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox76">
@@ -1024,8 +1023,11 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="data_key_combo">
+                          <object class="GtkHBox" id="data_key_hbox">
                             <property name="visible">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -1155,6 +1157,7 @@
                   <object class="GtkVBox" id="bc_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkHBox" id="hbox79">
@@ -1237,6 +1240,7 @@
                         <child>
                           <object class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkHBox" id="hbox46">
@@ -1296,16 +1300,11 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkHBox" id="hbox49">
+                                  <object class="GtkHBox" id="bc_key_hbox">
                                     <property name="visible">True</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkComboBox" id="bc_key_combo">
-                                        <property name="visible">True</property>
-                                      </object>
-                                      <packing>
-                                        <property name="position">0</property>
-                                      </packing>
+                                      <placeholder/>
                                     </child>
                                   </object>
                                   <packing>
@@ -1527,6 +1526,7 @@
                   <object class="GtkVBox" id="lsize_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkTable" id="table7">
@@ -1781,6 +1781,7 @@
                   <object class="GtkVBox" id="shadow_page_vbox">
                     <property name="visible">True</property>
                     <property name="border_width">12</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkCheckButton" id="shadow_enable_check">
@@ -1800,6 +1801,7 @@
                     <child>
                       <object class="GtkVBox" id="shadow_controls_table">
                         <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkHBox" id="hbox63">
@@ -1933,6 +1935,7 @@
                             <child>
                               <object class="GtkVBox" id="vbox7">
                                 <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox57">
@@ -1994,16 +1997,11 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkHBox" id="hbox60">
+                                      <object class="GtkHBox" id="shadow_key_hbox">
                                         <property name="visible">True</property>
                                         <property name="spacing">12</property>
                                         <child>
-                                          <object class="GtkComboBox" id="shadow_key_combo">
-                                            <property name="visible">True</property>
-                                          </object>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
+                                          <placeholder/>
                                         </child>
                                       </object>
                                       <packing>

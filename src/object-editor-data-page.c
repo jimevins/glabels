@@ -28,7 +28,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "combo-util.h"
+#include "field-button.h"
 #include "builder-util.h"
 
 #include "object-editor-private.h"
@@ -72,10 +72,13 @@ gl_object_editor_prepare_data_page (glObjectEditor *editor)
                                      "data_literal_radio", &editor->priv->data_literal_radio,
                                      "data_key_radio",     &editor->priv->data_key_radio,
                                      "data_text_entry",    &editor->priv->data_text_entry,
-                                     "data_key_combo",     &editor->priv->data_key_combo,
+                                     "data_key_hbox",      &editor->priv->data_key_hbox,
                                      NULL);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->data_key_combo));
+        editor->priv->data_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->data_key_hbox),
+                            editor->priv->data_key_combo,
+                            TRUE, TRUE, 0);
 
 	/* Un-hide */
 	gtk_widget_show_all (editor->priv->data_page_vbox);
@@ -187,8 +190,8 @@ gl_object_editor_set_data (glObjectEditor      *editor,
 					  !editor->priv->data_format_fixed_flag);
                                                                                 
 
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo),
-                                               text_node->data);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->data_key_combo),
+                                         text_node->data);
         }
                                                                                 
 
@@ -218,7 +221,7 @@ gl_object_editor_get_data (glObjectEditor      *editor)
         } else {
                 text_node->field_flag = TRUE;
                 text_node->data =
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->data_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->data_key_combo));
         }
  
 	gl_debug (DEBUG_EDITOR, "text_node: field_flag=%d, data=%s",

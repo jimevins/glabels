@@ -31,7 +31,7 @@
 #include "color.h"
 #include "font-combo.h"
 #include "font-util.h"
-#include "combo-util.h"
+#include "field-button.h"
 #include "builder-util.h"
 
 #include "object-editor-private.h"
@@ -81,7 +81,7 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                                      "text_color_hbox",        &editor->priv->text_color_hbox,
                                      "text_color_radio",       &editor->priv->text_color_radio,
                                      "text_color_key_radio",   &editor->priv->text_color_key_radio,
-                                     "text_color_key_combo",   &editor->priv->text_color_key_combo,
+                                     "text_color_key_hbox",    &editor->priv->text_color_key_hbox,
                                      "text_left_toggle",       &editor->priv->text_left_toggle,
                                      "text_center_toggle",     &editor->priv->text_center_toggle,
                                      "text_right_toggle",      &editor->priv->text_right_toggle,
@@ -101,7 +101,11 @@ gl_object_editor_prepare_text_page (glObjectEditor       *editor)
                             editor->priv->text_color_combo,
                             FALSE, FALSE, 0);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->text_color_key_combo));
+        editor->priv->text_color_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->text_color_key_hbox),
+                            editor->priv->text_color_key_combo,
+                            TRUE, TRUE, 0);
+
 
 	/* Modify widgets */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->text_color_radio), TRUE);
@@ -488,7 +492,7 @@ gl_object_editor_set_text_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->text_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->text_color_key_combo, TRUE);
 		
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo), "");
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->text_color_key_combo), "");
 	}
 
         editor->priv->stop_signals = FALSE;
@@ -515,7 +519,7 @@ gl_object_editor_get_text_color (glObjectEditor      *editor)
 		color_node->field_flag = TRUE;
 		color_node->color = gl_prefs_model_get_default_text_color (gl_prefs);
 		color_node->key = 
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->text_color_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->text_color_key_combo));
         } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

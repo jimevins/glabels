@@ -29,7 +29,7 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
-#include "combo-util.h"
+#include "field-button.h"
 #include "builder-util.h"
 #include "units-util.h"
 
@@ -86,7 +86,7 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
                                      "shadow_color_radio",    &editor->priv->shadow_color_radio,
                                      "shadow_key_radio",      &editor->priv->shadow_key_radio,
                                      "shadow_color_hbox",     &editor->priv->shadow_color_hbox,
-                                     "shadow_key_combo",      &editor->priv->shadow_key_combo,
+                                     "shadow_key_hbox",       &editor->priv->shadow_key_hbox,
                                      "shadow_opacity_spin",   &editor->priv->shadow_opacity_spin,
                                      NULL);
 
@@ -96,7 +96,11 @@ gl_object_editor_prepare_shadow_page (glObjectEditor *editor)
         gtk_container_add (GTK_CONTAINER (editor->priv->shadow_color_hbox),
                            editor->priv->shadow_color_combo);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->shadow_key_combo));
+        editor->priv->shadow_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->shadow_key_hbox),
+                            editor->priv->shadow_key_combo,
+                            TRUE, TRUE, 0);
+
 
 	/* Get configuration information */
         units = gl_prefs_model_get_units (gl_prefs);
@@ -245,8 +249,8 @@ gl_object_editor_set_shadow_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->shadow_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->shadow_key_combo, TRUE);
 		
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->shadow_key_combo),
-                                               color_node->key);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->shadow_key_combo),
+                                         color_node->key);
 	}
 	
         editor->priv->stop_signals = FALSE;
@@ -372,7 +376,7 @@ gl_object_editor_get_shadow_color (glObjectEditor      *editor)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->shadow_key_radio))) {
 		color_node->field_flag = TRUE;
 		color_node->key = 
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->shadow_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->shadow_key_combo));
         } else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

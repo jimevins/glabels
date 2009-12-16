@@ -580,7 +580,6 @@ set_key_names (glObjectEditor      *editor,
                glMerge             *merge)
 {
         GList     *keys;
-	GtkWidget *combo;
 	GtkWidget *button;
 	gboolean   fixed_flag;
 	gboolean   state;
@@ -693,29 +692,29 @@ set_key_names (glObjectEditor      *editor,
                 keys = g_list_append (keys, g_strdup (""));
 	}
 
-	combo = editor->priv->img_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->img_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 
 	button = editor->priv->edit_insert_field_button;
         gl_field_button_set_keys (GL_FIELD_BUTTON(button), keys);
 
-	combo = editor->priv->data_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->data_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 		
-	combo = editor->priv->fill_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->fill_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 
-	combo = editor->priv->text_color_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->text_color_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 
-	combo = editor->priv->line_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->line_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 		
-	combo = editor->priv->bc_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->bc_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 		
-	combo = editor->priv->shadow_key_combo;
-        gl_combo_util_set_strings (GTK_COMBO_BOX (combo), keys);
+	button = editor->priv->shadow_key_combo;
+        gl_field_button_set_keys (GL_FIELD_BUTTON (button), keys);
 
 	gl_merge_free_key_list (&keys);
  

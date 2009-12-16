@@ -29,6 +29,7 @@
 #include "prefs.h"
 #include "color-combo.h"
 #include "color.h"
+#include "field-button.h"
 #include "combo-util.h"
 #include "builder-util.h"
 
@@ -77,7 +78,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
                                      "bc_text_check",     &editor->priv->bc_text_check,
                                      "bc_cs_check",       &editor->priv->bc_cs_check,
                                      "bc_color_hbox",     &editor->priv->bc_color_hbox,
-                                     "bc_key_combo",      &editor->priv->bc_key_combo,
+                                     "bc_key_hbox",       &editor->priv->bc_key_hbox,
                                      "bc_key_radio",      &editor->priv->bc_key_radio,
                                      "bc_color_radio",    &editor->priv->bc_color_radio,
                                      "data_format_label", &editor->priv->data_format_label,
@@ -95,8 +96,12 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
                             editor->priv->bc_color_combo,
                             FALSE, FALSE, 0);
 
+        editor->priv->bc_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->bc_key_hbox),
+                            editor->priv->bc_key_combo,
+                            TRUE, TRUE, 0);
+
 	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_style_combo));
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->bc_key_combo));
 
 	/* Load barcode styles */
 	styles = gl_barcode_get_styles_list ();
@@ -257,7 +262,7 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 	g_free (ex_string);
 
         gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), 
-				   format_digits);
+                                   format_digits);
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
 		gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
@@ -349,8 +354,8 @@ gl_object_editor_set_bc_color (glObjectEditor      *editor,
 		gtk_widget_set_sensitive (editor->priv->bc_color_combo, FALSE);
 		gtk_widget_set_sensitive (editor->priv->bc_key_combo, TRUE);
 		
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo),
-                                               color_node->key);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->bc_key_combo),
+                                           color_node->key);
 	}	
 	
         editor->priv->stop_signals = FALSE;
@@ -377,7 +382,7 @@ gl_object_editor_get_bc_color (glObjectEditor      *editor)
 		color_node->field_flag = TRUE;
 		color_node->color = gl_prefs_model_get_default_line_color (gl_prefs);
 		color_node->key = 
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->bc_key_combo));
 	} else {
 		color_node->field_flag = FALSE;
 		color_node->key = NULL;

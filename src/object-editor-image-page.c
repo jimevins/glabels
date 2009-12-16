@@ -27,7 +27,7 @@
 #include <math.h>
 
 #include "prefs.h"
-#include "combo-util.h"
+#include "field-button.h"
 #include "builder-util.h"
 
 #include "object-editor-private.h"
@@ -80,10 +80,14 @@ gl_object_editor_prepare_image_page (glObjectEditor *editor)
                                      "img_file_radio",  &editor->priv->img_file_radio,
                                      "img_key_radio",   &editor->priv->img_key_radio,
                                      "img_file_button", &editor->priv->img_file_button,
-                                     "img_key_combo",   &editor->priv->img_key_combo,
+                                     "img_key_hbox",    &editor->priv->img_key_hbox,
                                      NULL);
 
-	gl_combo_util_add_text_model ( GTK_COMBO_BOX(editor->priv->img_key_combo));
+        editor->priv->img_key_combo = gl_field_button_new (NULL);
+        gtk_box_pack_start (GTK_BOX (editor->priv->img_key_hbox),
+                            editor->priv->img_key_combo,
+                            TRUE, TRUE, 0);
+
 
 	/* Modify file button properties. */
 	add_image_filters_to_chooser (GTK_FILE_CHOOSER (editor->priv->img_file_button));
@@ -177,8 +181,8 @@ gl_object_editor_set_image (glObjectEditor      *editor,
                 gtk_widget_set_sensitive (editor->priv->img_file_button, FALSE);
                 gtk_widget_set_sensitive (editor->priv->img_key_combo, TRUE);
                                                                                 
-		gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo),
-                                               text_node->data);
+		gl_field_button_set_key (GL_FIELD_BUTTON (editor->priv->img_key_combo),
+                                         text_node->data);
         }
                                                                                 
         editor->priv->stop_signals = FALSE;
@@ -206,7 +210,7 @@ gl_object_editor_get_image (glObjectEditor      *editor)
         } else {
                 text_node->field_flag = TRUE;
                 text_node->data =
-			gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->img_key_combo));
+			gl_field_button_get_key (GL_FIELD_BUTTON (editor->priv->img_key_combo));
         }
  
 	gl_debug (DEBUG_EDITOR, "text_node: field_flag=%d, data=%s",

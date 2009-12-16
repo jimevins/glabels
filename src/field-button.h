@@ -56,6 +56,9 @@ struct _glFieldButtonClass {
                               gchar         *key,
                               gpointer       user_data);
 
+        void (*changed)      (glFieldButton *object,
+                              gpointer       user_data);
+
 };
 
 
@@ -65,6 +68,12 @@ GtkWidget       *gl_field_button_new               (const gchar     *name);
 
 void             gl_field_button_set_keys          (glFieldButton   *this,
                                                     GList           *key_list);
+
+void             gl_field_button_set_key           (glFieldButton   *this,
+                                                    const gchar     *key);
+
+gchar           *gl_field_button_get_key           (glFieldButton   *this);
+
 
 G_END_DECLS
 

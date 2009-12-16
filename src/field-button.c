@@ -37,6 +37,9 @@
 /** GL_FIELD_BUTTON Private fields */
 struct _glFieldButtonPrivate {
 
+        gboolean    label_is_key;
+        gchar      *key;
+
         GtkWidget  *label;
 
         GtkWidget  *menu;
@@ -44,6 +47,7 @@ struct _glFieldButtonPrivate {
 
 enum {
         KEY_SELECTED,
+        CHANGED,
         LAST_SIGNAL
 };
 
@@ -102,6 +106,15 @@ gl_field_button_class_init (glFieldButtonClass *class)
                               NULL, NULL,
                               gl_marshal_VOID__STRING,
                               G_TYPE_NONE, 1, G_TYPE_STRING);
+
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_OBJECT_CLASS_TYPE (gobject_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (glFieldButtonClass, changed),
+                              NULL, NULL,
+                              gl_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
 }
 
 
@@ -159,7 +172,14 @@ gl_field_button_new (const gchar  *name)
 
         this = g_object_new (TYPE_GL_FIELD_BUTTON, NULL);
 
-        gtk_label_set_text (GTK_LABEL (this->priv->label), name);
+        if ( name )
+        {
+                gtk_label_set_text (GTK_LABEL (this->priv->label), name);
+        }
+        else
+        {
+                this->priv->label_is_key = TRUE;
+        }
 
         this->priv->menu = gl_field_button_menu_new ();
 
@@ -183,8 +203,40 @@ gl_field_button_set_keys (glFieldButton  *this,
 {
         gl_field_button_menu_set_keys (GL_FIELD_BUTTON_MENU (this->priv->menu),
                                        key_list);
+        this->priv->key = g_strdup (key_list->data);
+        if ( this->priv->label_is_key )
+        {
+                gtk_label_set_text (GTK_LABEL (this->priv->label), key_list->data);
+        }
 
         gtk_widget_show_all (this->priv->menu);
+}
+
+
+/*****************************************************************************/
+/* Set current key.                                                          */
+/*****************************************************************************/
+void
+gl_field_button_set_key (glFieldButton   *this,
+                         const gchar     *key)
+{
+        g_free (this->priv->key);
+        this->priv->key = g_strdup (key);
+
+        if ( this->priv->label_is_key )
+        {
+                gtk_label_set_text (GTK_LABEL (this->priv->label), key);
+        }
+}
+
+
+/*****************************************************************************/
+/* Get current key.                                                        */
+/*****************************************************************************/
+gchar *
+gl_field_button_get_key (glFieldButton   *this)
+{
+        return g_strdup (this->priv->key);
 }
 
 
@@ -301,10 +353,19 @@ button_press_event_cb (GtkWidget      *widget,
 /*****************************************************************************/
 static void
 menu_key_selected_cb (glFieldButtonMenu     *menu,
-                      gchar                 *field,
+                      gchar                 *key,
                       glFieldButton         *this)
 {
-        g_signal_emit (this, signals[KEY_SELECTED], 0, field);
+        if (this->priv->label_is_key)
+        {
+                gtk_label_set_text (GTK_LABEL (this->priv->label), key);
+        }
+
+        g_free (this->priv->key);
+        this->priv->key = g_strdup (key);
+
+        g_signal_emit (this, signals[KEY_SELECTED], 0, key);
+        g_signal_emit (this, signals[CHANGED], 0);
 }
 
 
