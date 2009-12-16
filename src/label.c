@@ -2213,9 +2213,7 @@ gl_label_copy_selection (glLabel       *label)
         glLabel           *label_copy;
 	GList             *p;
 	glLabelObject     *object;
-        gchar             *buffer;
         glXMLLabelStatus   status;
-        const GdkPixbuf   *pixbuf;
 
         ClipboardData     *data;
 
@@ -2225,7 +2223,7 @@ gl_label_copy_selection (glLabel       *label)
 
         GtkTargetList  *target_list;
         GtkTargetEntry *target_table;
-        guint           n_targets;
+        gint            n_targets;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -2373,7 +2371,7 @@ clipboard_get_cb (GtkClipboard     *clipboard,
                 gtk_selection_data_set (selection_data,
                                         gtk_selection_data_get_target (selection_data),
                                         8,
-                                        data->xml_buffer, strlen (data->xml_buffer));
+                                        (guchar *)data->xml_buffer, strlen (data->xml_buffer));
                 break;
 
         case 1:
@@ -2474,7 +2472,7 @@ paste_xml_received_cb (GtkClipboard     *clipboard,
                        GtkSelectionData *selection_data,
                        glLabel          *label)
 {
-        const gchar      *xml_buffer;
+        gchar            *xml_buffer;
         glLabel          *label_copy;
         glXMLLabelStatus  status;
         GList            *p;
@@ -2482,7 +2480,7 @@ paste_xml_received_cb (GtkClipboard     *clipboard,
 
 	gl_debug (DEBUG_LABEL, "START");
 
-        xml_buffer = gtk_selection_data_get_data (selection_data);
+        xml_buffer = (gchar *)gtk_selection_data_get_data (selection_data);
 
         /*
          * Deserialize XML label document and extract objects.
