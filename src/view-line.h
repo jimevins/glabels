@@ -22,7 +22,7 @@
 #define __VIEW_LINE_H__
 
 #include "view.h"
-#include <gdk/gdk.h>
+
 
 G_BEGIN_DECLS
 

@@ -22,10 +22,7 @@
 #define __VIEW_TEXT_H__
 
 #include "view.h"
-#include <gdk/gdk.h>
 
-#include "view.h"
-#include <gdk/gdk.h>
 
 G_BEGIN_DECLS
 
