@@ -163,8 +163,10 @@ glabels_SOURCES = 			\
 	mini-preview-pixbuf.h		\
 	mini-preview-pixbuf-cache.c	\
 	mini-preview-pixbuf-cache.h	\
-	wdgt-media-select.c		\
-	wdgt-media-select.h		\
+	media-select.c			\
+	media-select.h			\
+	message-bar.c			\
+	message-bar.h			\
 	template-history.c		\
 	template-history.h		\
 	template-history-model.c	\

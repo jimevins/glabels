@@ -5,7 +5,7 @@ builderdir = $(datadir)/glabels/builder/
 builder_DATA = \
 	property-bar.builder		\
 	print-op-dialog-custom-widget.builder	\
-	wdgt-media-select.builder	\
+	media-select.builder		\
 	merge-properties-dialog.builder	\
 	template-designer.builder	\
 	prefs-dialog.builder		\

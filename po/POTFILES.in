@@ -81,6 +81,8 @@ src/label-text.c
 src/label-text.h
 #src/marshal.c
 #src/marshal.h
+src/media-select.c
+src/media-select.h
 src/merge.c
 src/merge.h
 src/merge-evolution.c
@@ -131,6 +133,8 @@ src/print-op.c
 src/print-op-dialog.c
 src/print-op-dialog.h
 src/print-op.h
+src/message-bar.c
+src/message-bar.h
 src/recent.c
 src/recent.h
 src/rotate-label-button.c
@@ -177,8 +181,6 @@ src/warning-handler.c
 src/warning-handler.h
 src/wdgt-chain-button.c
 src/wdgt-chain-button.h
-src/wdgt-media-select.c
-src/wdgt-media-select.h
 src/window.c
 src/window.h
 src/xml-label-04.c

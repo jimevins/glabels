@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "hig.h"
-#include "wdgt-media-select.h"
+#include "media-select.h"
 #include "rotate-label-button.h"
 
 #include "debug.h"
@@ -53,10 +53,10 @@ struct _glNewLabelDialogPrivate {
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void       gl_new_label_dialog_finalize        (GObject               *object);
+static void       gl_new_label_dialog_finalize        (GObject           *object);
 
-static void       template_changed_cb                 (glWdgtMediaSelect     *select,
-						       gpointer               data);
+static void       template_changed_cb                 (glMediaSelect     *select,
+						       gpointer           data);
 
 
 /*****************************************************************************/
@@ -118,7 +118,7 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, GL_HIG_PAD1);
 
-	dialog->priv->media_select = gl_wdgt_media_select_new ();
+	dialog->priv->media_select = gl_media_select_new ();
         gtk_container_add (GTK_CONTAINER (frame), dialog->priv->media_select);
 
         label = gtk_label_new (_("<b>Label orientation</b>"));
@@ -132,7 +132,7 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
         gtk_container_add (GTK_CONTAINER (frame), dialog->priv->rotate_label);
 
 	/* Sync template name from media select with rotate widget. */
-	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select));
+	name = gl_media_select_get_name (GL_MEDIA_SELECT (dialog->priv->media_select));
 	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
                                                   name);
 
@@ -188,15 +188,15 @@ gl_new_label_dialog_new (GtkWindow    *win)
 /* PRIVATE.  New template changed callback.                                  */
 /*---------------------------------------------------------------------------*/
 static void
-template_changed_cb (glWdgtMediaSelect *select,
-		     gpointer           data)
+template_changed_cb (glMediaSelect *select,
+		     gpointer       data)
 {
 	glNewLabelDialog  *dialog = GL_NEW_LABEL_DIALOG (data);
 	gchar             *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (select));
+	name = gl_media_select_get_name (GL_MEDIA_SELECT (select));
 
 	gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (dialog->priv->rotate_label),
                                                   name);
@@ -219,7 +219,7 @@ gl_new_label_dialog_get_template_name (glNewLabelDialog *dialog)
 {
 	gchar *name;
 
-	name = gl_wdgt_media_select_get_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select));
+	name = gl_media_select_get_name (GL_MEDIA_SELECT (dialog->priv->media_select));
 
 	return name;
 }
@@ -232,7 +232,7 @@ void
 gl_new_label_dialog_set_template_name (glNewLabelDialog *dialog,
 				       gchar            *name)
 {
-	gl_wdgt_media_select_set_name (GL_WDGT_MEDIA_SELECT (dialog->priv->media_select), name);
+	gl_media_select_set_name (GL_MEDIA_SELECT (dialog->priv->media_select), name);
 }
 
 
@@ -240,12 +240,12 @@ gl_new_label_dialog_set_template_name (glNewLabelDialog *dialog,
 /* Get current filter parameters.                                            */
 /*****************************************************************************/
 void
-gl_new_label_dialog_get_filter_parameters (glNewLabelDialog *dialog,
-					   gchar           **page_size_id,
-					   gchar           **category_id)
+gl_new_label_dialog_get_filter_parameters (glNewLabelDialog  *dialog,
+					   gchar            **page_size_id,
+					   gchar            **category_id)
 {
-	gl_wdgt_media_select_get_filter_parameters (
-		GL_WDGT_MEDIA_SELECT (dialog->priv->media_select),
+	gl_media_select_get_filter_parameters (
+		GL_MEDIA_SELECT (dialog->priv->media_select),
 		page_size_id, category_id);
 }
 
@@ -258,8 +258,8 @@ gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *dialog,
 					   const gchar      *page_size_id,
 					   const gchar      *category_id)
 {
-	gl_wdgt_media_select_set_filter_parameters (
-		GL_WDGT_MEDIA_SELECT (dialog->priv->media_select),
+	gl_media_select_set_filter_parameters (
+		GL_MEDIA_SELECT (dialog->priv->media_select),
 		page_size_id, category_id);
 }
 
