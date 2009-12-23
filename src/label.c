@@ -1428,7 +1428,7 @@ gl_label_flip_selection_vert (glLabel *label)
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
-        gl_label_checkpoint (label, _("Flip verically"));
+        gl_label_checkpoint (label, _("Flip vertically"));
 
         begin_selection_op (label);
 
