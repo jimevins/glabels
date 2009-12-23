@@ -175,6 +175,20 @@ static GtkActionEntry entries[] = {
 
 
 	/* Edit action entries. */
+	{ "EditUndo",
+	  GTK_STOCK_UNDO,
+	  N_("Undo"),
+	  "<control>Z",
+	  N_("Undo"),
+	  G_CALLBACK (gl_ui_cmd_edit_undo) },
+
+	{ "EditRedo",
+	  GTK_STOCK_REDO,
+	  N_("Redo"),
+	  "<shift><control>Z",
+	  N_("Redo"),
+	  G_CALLBACK (gl_ui_cmd_edit_redo) },
+
 	{ "EditCut",
 	  GTK_STOCK_CUT,
 	  N_("Cut"),
@@ -500,6 +514,9 @@ static const gchar *ui_info =
 "			<menuitem action='FileQuit' />"
 "		</menu>"
 "		<menu action='EditMenu'>"
+"			<menuitem action='EditUndo' />"
+"			<menuitem action='EditRedo' />"
+"			<separator />"
 "			<menuitem action='EditCut' />"
 "			<menuitem action='EditCopy' />"
 "			<menuitem action='EditPaste' />"
@@ -638,6 +655,8 @@ static gchar* doc_verbs [] = {
 	"/ui/MenuBar/FileMenu/FileSaveAs",
 	"/ui/MenuBar/FileMenu/FilePrint",
 	"/ui/MenuBar/FileMenu/FileClose",
+	"/ui/MenuBar/EditMenu/EditUndo",
+	"/ui/MenuBar/EditMenu/EditRedo",
 	"/ui/MenuBar/EditMenu/EditCut",
 	"/ui/MenuBar/EditMenu/EditCopy",
 	"/ui/MenuBar/EditMenu/EditDelete",
@@ -937,7 +956,25 @@ void
 gl_ui_update_undo_redo_verbs (GtkUIManager *ui,
 			      glLabel      *label)
 {
+        GtkWidget  *menu_item;
+        gchar      *description;
+        gchar      *menu_label;
+
 	gl_debug (DEBUG_UI, "START");
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/MenuBar/EditMenu/EditUndo");
+        description = gl_label_get_undo_description (label);
+        menu_label = g_strdup_printf ("%s: %s", _("Undo"), description);
+        gtk_menu_item_set_label (GTK_MENU_ITEM (menu_item), menu_label);
+        g_free (menu_label);
+        g_free (description);
+
+        menu_item = gtk_ui_manager_get_widget (ui, "/MenuBar/EditMenu/EditRedo");
+        description = gl_label_get_redo_description (label);
+        menu_label = g_strdup_printf ("%s: %s", _("Redo"), description);
+        gtk_menu_item_set_label (GTK_MENU_ITEM (menu_item), menu_label);
+        g_free (menu_label);
+        g_free (description);
 
 	gl_ui_util_set_verb_sensitive (ui, "/ui/MenuBar/EditMenu/EditUndo",
 				       gl_label_can_undo (label));

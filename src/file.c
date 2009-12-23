@@ -142,8 +142,8 @@ new_response (GtkDialog *dialog,
 		template = lgl_db_lookup_template_from_name (sheet_name);
 
 		label = GL_LABEL(gl_label_new ());
-		gl_label_set_template (label, template);
-		gl_label_set_rotate_flag (label, rotate_flag);
+		gl_label_set_template (label, template, FALSE);
+		gl_label_set_rotate_flag (label, rotate_flag, FALSE);
 
 		lgl_template_free (template);
 
@@ -249,8 +249,9 @@ properties_response (GtkDialog *dialog,
 		template = lgl_db_lookup_template_from_name (sheet_name);
 
                 label = GL_LABEL(g_object_get_data (G_OBJECT (dialog), "label"));
-                gl_label_set_template (label, template);
-                gl_label_set_rotate_flag (label, rotate_flag);
+
+                gl_label_set_template (label, template, TRUE);
+                gl_label_set_rotate_flag (label, rotate_flag, TRUE);
 
 		break;
 

@@ -56,13 +56,16 @@ struct _glLabelTextClass {
 
 GType          gl_label_text_get_type        (void) G_GNUC_CONST;
 
-GObject       *gl_label_text_new             (glLabel          *label);
+GObject       *gl_label_text_new             (glLabel          *label,
+                                              gboolean          checkpoint);
 
 void           gl_label_text_set_lines       (glLabelText      *ltext,
-                                              GList            *lines);
+                                              GList            *lines,
+                                              gboolean          checkpoint);
 
 void           gl_label_text_set_text        (glLabelText      *ltext,
-                                              const gchar      *text);
+                                              const gchar      *text,
+                                              gboolean          checkpoint);
 
 GtkTextBuffer *gl_label_text_get_buffer      (glLabelText      *ltext);
 
@@ -71,7 +74,8 @@ gchar         *gl_label_text_get_text        (glLabelText      *ltext);
 GList         *gl_label_text_get_lines       (glLabelText      *ltext);
 
 void           gl_label_text_set_auto_shrink (glLabelText      *ltext,
-					      gboolean          auto_shrink);
+					      gboolean          auto_shrink,
+                                              gboolean          checkpoint);
 
 gboolean       gl_label_text_get_auto_shrink (glLabelText      *ltext);
 

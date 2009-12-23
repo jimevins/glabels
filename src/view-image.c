@@ -92,9 +92,10 @@ gl_view_image_create_button_press_event   (glView *view,
 
         gl_label_unselect_all (view->label);
 
-        object = gl_label_image_new (view->label);
-        gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
-        gl_label_object_set_size (GL_LABEL_OBJECT(object), 0.0, 0.0);
+        object = gl_label_image_new (view->label, TRUE);
+
+        gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
+        gl_label_object_set_size (GL_LABEL_OBJECT(object), 0.0, 0.0, FALSE);
 
         view->create_object = GL_LABEL_OBJECT (object);
         view->create_x0 = x;
@@ -113,10 +114,12 @@ gl_view_image_create_motion_event     (glView *view,
         gdouble w, h;
 
         gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
-                                      MIN (x, view->create_x0), MIN (y, view->create_y0));
+                                      MIN (x, view->create_x0), MIN (y, view->create_y0),
+                                      FALSE);
+
         w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
         h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
+        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
 }
 
 
@@ -135,10 +138,12 @@ gl_view_image_create_button_release_event (glView *view,
                 y = view->create_y0 + 36.0;
         }
         gl_label_object_set_position (GL_LABEL_OBJECT(view->create_object),
-                                      MIN (x, view->create_x0), MIN (y, view->create_y0));
+                                      MIN (x, view->create_x0), MIN (y, view->create_y0),
+                                      FALSE);
+
         w = MAX (x, view->create_x0) - MIN (x, view->create_x0);
         h = MAX (y, view->create_y0) - MIN (y, view->create_y0);
-        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h);
+        gl_label_object_set_size (GL_LABEL_OBJECT(view->create_object), w, h, FALSE);
 }
 
 

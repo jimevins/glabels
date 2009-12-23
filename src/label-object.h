@@ -74,8 +74,6 @@ typedef struct _glLabelObjectPrivate   glLabelObjectPrivate;
 struct _glLabelObject {
         GObject               object;
 
-        glLabel              *parent;
-
         glLabelObjectPrivate *priv;
 };
 
@@ -88,37 +86,48 @@ struct _glLabelObjectClass {
 
         void              (*set_size)             (glLabelObject     *object,
                                                    gdouble            w,
-                                                   gdouble            h);
+                                                   gdouble            h,
+                                                   gboolean           checkpoint);
 
         void              (*set_font_family)      (glLabelObject     *object,
-                                                   const gchar       *font_family);
+                                                   const gchar       *font_family,
+                                                   gboolean           checkpoint);
 
         void              (*set_font_size)        (glLabelObject     *object,
-                                                   gdouble            font_size);
+                                                   gdouble            font_size,
+                                                   gboolean           checkpoint);
 
         void              (*set_font_weight)      (glLabelObject     *object,
-                                                   PangoWeight        font_weight);
+                                                   PangoWeight        font_weight,
+                                                   gboolean           checkpoint);
 
         void              (*set_font_italic_flag) (glLabelObject     *object,
-                                                   gboolean           font_italic_flag);
+                                                   gboolean           font_italic_flag,
+                                                   gboolean           checkpoint);
 
         void              (*set_text_alignment)   (glLabelObject     *object,
-                                                   PangoAlignment     text_alignment);
+                                                   PangoAlignment     text_alignment,
+                                                   gboolean           checkpoint);
 
         void              (*set_text_line_spacing)(glLabelObject     *object,
-                                                   gdouble            text_line_spacing);
+                                                   gdouble            text_line_spacing,
+                                                   gboolean           checkpoint);
 
         void              (*set_text_color)       (glLabelObject     *object,
-                                                   glColorNode       *text_color_node);
+                                                   glColorNode       *text_color_node,
+                                                   gboolean           checkpoint);
 
         void              (*set_fill_color)       (glLabelObject     *object,
-                                                   glColorNode       *fill_color_node);
+                                                   glColorNode       *fill_color_node,
+                                                   gboolean           checkpoint);
 
         void              (*set_line_color)       (glLabelObject     *object,
-                                                   glColorNode       *line_color_node);
+                                                   glColorNode       *line_color_node,
+                                                   gboolean           checkpoint);
 
         void              (*set_line_width)       (glLabelObject     *object,
-                                                   gdouble            line_width);
+                                                   gdouble            line_width,
+                                                   gboolean           checkpoint);
 
         void              (*get_size)             (glLabelObject     *object,
                                                    gdouble           *w,
@@ -218,63 +227,81 @@ gchar         *gl_label_object_get_name              (glLabelObject     *object)
 
 void           gl_label_object_set_position          (glLabelObject     *object,
                                                       gdouble            x,
-                                                      gdouble            y);
+                                                      gdouble            y,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_position_relative (glLabelObject     *object,
                                                       gdouble            dx,
-                                                      gdouble            dy);
+                                                      gdouble            dy,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_size              (glLabelObject     *object,
                                                       gdouble            w,
-                                                      gdouble            h);
+                                                      gdouble            h,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_size_honor_aspect (glLabelObject     *object,
                                                       gdouble            w,
-                                                      gdouble            h);
+                                                      gdouble            h,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_font_family       (glLabelObject     *object,
-                                                      const gchar       *font_family);
+                                                      const gchar       *font_family,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_font_size         (glLabelObject     *object,
-                                                      gdouble            font_size);
+                                                      gdouble            font_size,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_font_weight       (glLabelObject     *object,
-                                                      PangoWeight        font_weight);
+                                                      PangoWeight        font_weight,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_font_italic_flag  (glLabelObject     *object,
-                                                      gboolean           font_italic_flag);
+                                                      gboolean           font_italic_flag,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_text_alignment    (glLabelObject     *object,
-                                                      PangoAlignment     text_alignment);
+                                                      PangoAlignment     text_alignment,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_text_color        (glLabelObject     *object,
-                                                      glColorNode       *text_color_node);
+                                                      glColorNode       *text_color_node,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_text_line_spacing (glLabelObject     *object,
-                                                      gdouble            text_line_spacing);
+                                                      gdouble            text_line_spacing,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_fill_color        (glLabelObject     *object,
-                                                      glColorNode       *fill_color_node);
+                                                      glColorNode       *fill_color_node,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_line_color        (glLabelObject     *object,
-                                                      glColorNode       *line_color_node);
+                                                      glColorNode       *line_color_node,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_line_width        (glLabelObject     *object,
-                                                      gdouble            line_width);
+                                                      gdouble            line_width,
+                                                      gboolean           checkpoint);
 
 
 void           gl_label_object_set_shadow_state      (glLabelObject     *object,
-                                                      gboolean           state);
+                                                      gboolean           state,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_shadow_offset     (glLabelObject     *object,
                                                       gdouble            x,
-                                                      gdouble            y);
+                                                      gdouble            y,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_shadow_color      (glLabelObject     *object,
-                                                      glColorNode       *color_node);
+                                                      glColorNode       *color_node,
+                                                      gboolean           checkpoint);
 
 void           gl_label_object_set_shadow_opacity    (glLabelObject     *object,
-                                                      gdouble            alpha);
+                                                      gdouble            alpha,
+                                                      gboolean           checkpoint);
 
 
 void           gl_label_object_flip_horiz            (glLabelObject     *object);

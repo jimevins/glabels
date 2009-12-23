@@ -505,7 +505,7 @@ response_cb (glMergePropertiesDialog *dialog,
 	switch (response) {
 
 	case GTK_RESPONSE_OK:
-		gl_label_set_merge (dialog->priv->label, dialog->priv->merge);
+		gl_label_set_merge (dialog->priv->label, dialog->priv->merge, TRUE);
 		gtk_widget_hide (GTK_WIDGET (dialog));
 		break;
 	case GTK_RESPONSE_CANCEL:

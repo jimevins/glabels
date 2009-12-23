@@ -347,7 +347,7 @@ xml_parse_label (xmlNodePtr        root,
 				return NULL;
 			}
 			lgl_db_register_template (template);
-			gl_label_set_template (label, template);
+			gl_label_set_template (label, template, FALSE);
 			lgl_template_free (template);
 		} else if (lgl_xml_is_node (child_node, "Objects")) {
 			xml_parse_objects (child_node, label);
@@ -385,7 +385,7 @@ xml_parse_objects (xmlNodePtr  node,
 	gl_debug (DEBUG_XML, "START");
 
 	rotate_flag = lgl_xml_get_prop_boolean (node, "rotate", FALSE);
-	gl_label_set_rotate_flag (label, rotate_flag);
+	gl_label_set_rotate_flag (label, rotate_flag, FALSE);
 
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
@@ -430,27 +430,27 @@ xml_parse_object_text (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_text_new (label);
+	object = gl_label_text_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* implied size attrs */
 	w = lgl_xml_get_prop_length (node, "w", 0);
 	h = lgl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* justify attr */
 	string = lgl_xml_get_prop_string (node, "justify", NULL);
 	align = gl_str_util_string_to_align (string);
 	g_free (string);
-	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align);
+	gl_label_object_set_text_alignment (GL_LABEL_OBJECT(object), align, FALSE);
 
 	/* auto_shrink attr */
 	auto_shrink = lgl_xml_get_prop_boolean (node, "auto_shrink", FALSE);
-	gl_label_text_set_auto_shrink (GL_LABEL_TEXT(object), auto_shrink);
+	gl_label_text_set_auto_shrink (GL_LABEL_TEXT(object), auto_shrink, FALSE);
 
 	/* affine attrs */
 	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
@@ -492,21 +492,21 @@ xml_parse_object_box (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_box_new (label);
+	object = gl_label_box_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* size attrs */
 	w = lgl_xml_get_prop_length (node, "w", 0);
 	h = lgl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* line attrs */
 	line_width = lgl_xml_get_prop_length (node, "line_width", 1.0);
-	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
+	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width, FALSE);
 	
 	line_color_node = gl_color_node_new_default ();
 	string = lgl_xml_get_prop_string (node, "line_color_field", NULL);
@@ -516,7 +516,7 @@ xml_parse_object_box (xmlNodePtr  node,
 	} else {
 		line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);
 	}
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node, FALSE);
 	gl_color_node_free (&line_color_node);
 
 
@@ -529,7 +529,7 @@ xml_parse_object_box (xmlNodePtr  node,
 	} else {
 		fill_color_node->color = lgl_xml_get_prop_uint (node, "fill_color", 0);
 	}
-	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node);
+	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node, FALSE);
 	gl_color_node_free (&fill_color_node);
 	
 	/* affine attrs */
@@ -559,21 +559,21 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_ellipse_new (label);
+	object = gl_label_ellipse_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* size attrs */
 	w = lgl_xml_get_prop_length (node, "w", 0);
 	h = lgl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* line attrs */
 	line_width = lgl_xml_get_prop_length (node, "line_width", 1.0);
-	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
+	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width, FALSE);
 
 	line_color_node = gl_color_node_new_default ();
 	string = lgl_xml_get_prop_string (node, "line_color_field", NULL);
@@ -583,7 +583,7 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 	} else {
 		line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);		
 	}
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node, FALSE);
 	gl_color_node_free (&line_color_node);
 
 
@@ -596,7 +596,7 @@ xml_parse_object_ellipse (xmlNodePtr  node,
 	} else {
 		fill_color_node->color = lgl_xml_get_prop_uint (node, "fill_color", 0);
 	}
-	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node);
+	gl_label_object_set_fill_color (GL_LABEL_OBJECT(object), fill_color_node, FALSE);
 	gl_color_node_free (&fill_color_node);
 
 	/* affine attrs */
@@ -625,21 +625,21 @@ xml_parse_object_line (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_line_new (label);
+	object = gl_label_line_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* length attrs */
 	dx = lgl_xml_get_prop_length (node, "dx", 0);
 	dy = lgl_xml_get_prop_length (node, "dy", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), dx, dy);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), dx, dy, FALSE);
 
 	/* line attrs */
 	line_width = lgl_xml_get_prop_length (node, "line_width", 1.0);
-	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width);
+	gl_label_object_set_line_width (GL_LABEL_OBJECT(object), line_width, FALSE);
 	
 	line_color_node = gl_color_node_new_default ();
 	string = lgl_xml_get_prop_string (node, "line_color_field", NULL);
@@ -649,7 +649,7 @@ xml_parse_object_line (xmlNodePtr  node,
 	} else {
 		line_color_node->color = lgl_xml_get_prop_uint (node, "line_color", 0);		
 	}
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node);
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), line_color_node, FALSE);
 	gl_color_node_free (&line_color_node);
 
 	/* affine attrs */
@@ -677,12 +677,12 @@ xml_parse_object_image (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_image_new (label);
+	object = gl_label_image_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* src or field attr */
 	string = lgl_xml_get_prop_string (node, "src", NULL);
@@ -690,7 +690,7 @@ xml_parse_object_image (xmlNodePtr  node,
 		filename = g_new0 (glTextNode, 1);
 		filename->field_flag = FALSE;
 		filename->data = g_strdup ((gchar *)string);
-		gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+		gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename, FALSE);
 		gl_text_node_free (&filename);
 		xmlFree (string);
 	} else {
@@ -699,7 +699,7 @@ xml_parse_object_image (xmlNodePtr  node,
 			filename = g_new0 (glTextNode, 1);
 			filename->field_flag = TRUE;
 			filename->data = g_strdup ((gchar *)string);
-			gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+			gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename, FALSE);
 			gl_text_node_free (&filename);
 			xmlFree (string);
 		} else {
@@ -710,7 +710,7 @@ xml_parse_object_image (xmlNodePtr  node,
 	/* size attrs */
 	w = lgl_xml_get_prop_length (node, "w", 0);
 	h = lgl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* affine attrs */
 	xml_parse_affine_attrs (node, GL_LABEL_OBJECT(object));
@@ -742,17 +742,17 @@ xml_parse_object_barcode (xmlNodePtr  node,
 
 	gl_debug (DEBUG_XML, "START");
 
-	object = gl_label_barcode_new (label);
+	object = gl_label_barcode_new (label, FALSE);
 
 	/* position attrs */
 	x = lgl_xml_get_prop_length (node, "x", 0.0);
 	y = lgl_xml_get_prop_length (node, "y", 0.0);
-	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y);
+	gl_label_object_set_position (GL_LABEL_OBJECT(object), x, y, FALSE);
 
 	/* size attrs */
 	w = lgl_xml_get_prop_length (node, "w", 0);
 	h = lgl_xml_get_prop_length (node, "h", 0);
-	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* prop attrs */
 	id = lgl_xml_get_prop_string (node, "style", NULL);
@@ -760,7 +760,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	checksum_flag = lgl_xml_get_prop_boolean (node, "checksum", TRUE);
 	format_digits = lgl_xml_get_prop_uint (node, "format", 10);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    (gchar *)id, text_flag, checksum_flag, format_digits);
+				    (gchar *)id, text_flag, checksum_flag, format_digits, FALSE);
 	g_free (id);
 	
 	color_node = gl_color_node_new_default ();
@@ -771,7 +771,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	} else {
 		color_node->color = lgl_xml_get_prop_uint (node, "color", 0);		
 	}
-	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node);
+	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node, FALSE);
 	gl_color_node_free (&color_node);
 
 	/* data or field attr */
@@ -780,7 +780,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 		text_node = g_new0 (glTextNode, 1);
 		text_node->field_flag = FALSE;
 		text_node->data = string;
-		gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
+		gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node, FALSE);
 		gl_text_node_free (&text_node);
 	} else {
 		string = lgl_xml_get_prop_string (node, "field", NULL);
@@ -788,7 +788,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 			text_node = g_new0 (glTextNode, 1);
 			text_node->field_flag = TRUE;
 			text_node->data = string;
-			gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node);
+			gl_label_barcode_set_data (GL_LABEL_BARCODE(object), text_node, FALSE);
 			gl_text_node_free (&text_node);
 		} else {
 			g_message ("Missing Object-barcode data or field attr");
@@ -827,7 +827,7 @@ xml_parse_merge_fields (xmlNodePtr  node,
                 gl_merge_set_src (merge, string);
                 g_free (string);
 
-                gl_label_set_merge (label, merge);
+                gl_label_set_merge (label, merge, FALSE);
 
                 g_object_unref (G_OBJECT(merge));
         }
@@ -926,22 +926,22 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 
 	/* Font family attr */
 	font_family = lgl_xml_get_prop_string (node, "font_family", "Sans");
-	gl_label_object_set_font_family (object, font_family);
+	gl_label_object_set_font_family (object, font_family, FALSE);
 	g_free (font_family);
 
 	/* Font size attr */
 	font_size = lgl_xml_get_prop_double (node, "font_size", 0.0);
-	gl_label_object_set_font_size (object, font_size);
+	gl_label_object_set_font_size (object, font_size, FALSE);
 
 	/* Font weight attr */
 	string = lgl_xml_get_prop_string (node, "font_weight", NULL);
 	font_weight = gl_str_util_string_to_weight (string);
 	g_free (string);
-	gl_label_object_set_font_weight (object, font_weight);
+	gl_label_object_set_font_weight (object, font_weight, FALSE);
 
 	/* Font italic flag attr */
 	font_italic_flag = lgl_xml_get_prop_boolean (node, "font_italic", FALSE);
-	gl_label_object_set_font_italic_flag (object, font_italic_flag);
+	gl_label_object_set_font_italic_flag (object, font_italic_flag, FALSE);
 
 	/* Text color attr */
 	color_node = gl_color_node_new_default ();
@@ -952,13 +952,12 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	} else {
 		color_node->color = lgl_xml_get_prop_uint (node, "color", 0);		
 	}
-	gl_label_object_set_text_color (object, color_node);
+	gl_label_object_set_text_color (object, color_node, FALSE);
 	gl_color_node_free (&color_node);
 	
-
 	/* Text line spacing attr  */
 	text_line_spacing = lgl_xml_get_prop_double (node, "line_spacing", 1.0);
-	gl_label_object_set_text_line_spacing (object, text_line_spacing); 
+	gl_label_object_set_text_line_spacing (object, text_line_spacing, FALSE); 
 
 	/* Now descend children, and build lines of text nodes */
 	lines = NULL;
@@ -1007,7 +1006,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 		lines = g_list_append (lines, text_nodes);
 		text_nodes = NULL;
 	}
-	gl_label_text_set_lines (GL_LABEL_TEXT(object), lines);
+	gl_label_text_set_lines (GL_LABEL_TEXT(object), lines, FALSE);
 	gl_text_node_lines_free (&lines);
 
 	gl_debug (DEBUG_XML, "END");
@@ -1052,13 +1051,13 @@ xml_parse_shadow_attrs (xmlNodePtr        node,
 	gchar           *string;
 
 	shadow_state = lgl_xml_get_prop_boolean (node, "shadow", FALSE);
-	gl_label_object_set_shadow_state (object, shadow_state);
+	gl_label_object_set_shadow_state (object, shadow_state, FALSE);
 
 	if (shadow_state)
 	{
 		shadow_x = lgl_xml_get_prop_length (node, "shadow_x", 0.0);
 		shadow_y = lgl_xml_get_prop_length (node, "shadow_y", 0.0);
-		gl_label_object_set_shadow_offset (object, shadow_x, shadow_y);
+		gl_label_object_set_shadow_offset (object, shadow_x, shadow_y, FALSE);
 		
 		shadow_color_node = gl_color_node_new_default ();
 		string = lgl_xml_get_prop_string (node, "shadow_color_field", NULL);
@@ -1068,11 +1067,11 @@ xml_parse_shadow_attrs (xmlNodePtr        node,
 		} else {
 			shadow_color_node->color = lgl_xml_get_prop_uint (node, "shadow_color", 0);		
 		}
-		gl_label_object_set_shadow_color (object, shadow_color_node);
+		gl_label_object_set_shadow_color (object, shadow_color_node, FALSE);
 		gl_color_node_free (&shadow_color_node);
 
 		shadow_opacity = lgl_xml_get_prop_double (node, "shadow_opacity", 1.0);
-		gl_label_object_set_shadow_opacity (object, shadow_opacity);
+		gl_label_object_set_shadow_opacity (object, shadow_opacity, FALSE);
 	}
 }
 

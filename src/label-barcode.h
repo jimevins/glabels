@@ -52,17 +52,22 @@ struct _glLabelBarcodeClass {
 
 GType           gl_label_barcode_get_type  (void) G_GNUC_CONST;
 
-GObject        *gl_label_barcode_new       (glLabel        *label);
+GObject        *gl_label_barcode_new       (glLabel        *label,
+                                            gboolean        checkpoint);
 
 void            gl_label_barcode_set_data  (glLabelBarcode *lbc,
-					    glTextNode     *text_node);
+					    glTextNode     *text_node,
+                                            gboolean        checkpoint);
+
 void            gl_label_barcode_set_props (glLabelBarcode *lbc,
 					    gchar          *id,
 					    gboolean        text_flag,
 					    gboolean        checksum_flag,
-					    guint           format_digits);
+					    guint           format_digits,
+                                            gboolean        checkpoint);
 
 glTextNode     *gl_label_barcode_get_data  (glLabelBarcode *lbc);
+
 void            gl_label_barcode_get_props (glLabelBarcode *lbc,
 					    gchar         **id,
 					    gboolean       *text_flag,

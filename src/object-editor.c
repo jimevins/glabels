@@ -753,6 +753,7 @@ object_changed_cb (glLabelObject  *object,
         gdouble          shadow_x, shadow_y;
         glColorNode     *shadow_color_node;
         gdouble          shadow_opacity;
+        glLabel         *label;
         glMerge         *merge;
 
         gl_debug (DEBUG_EDITOR, "BEGIN");
@@ -764,7 +765,8 @@ object_changed_cb (glLabelObject  *object,
         gl_label_object_get_position (object, &x, &y);
         gl_object_editor_set_position (editor, x, y);
 
-        merge = gl_label_get_merge (GL_LABEL(object->parent));
+        label = gl_label_object_get_parent (object);
+        merge = gl_label_get_merge (label);
 
 
         if ( GL_IS_LABEL_BOX (object) || GL_IS_LABEL_ELLIPSE (object) )
@@ -888,7 +890,6 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 {
         glLabelObject     *object = editor->priv->object;
         gdouble            x, y;
-        gdouble            w, h;
         glColorNode       *line_color_node;
         gdouble            line_width;
         glColorNode       *fill_color_node;
@@ -902,6 +903,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         gboolean           auto_shrink;
         glTextNode        *filename;
         const GdkPixbuf   *pixbuf;
+        gdouble            w, h;
         gdouble            image_w, image_h;
         gdouble            new_w, new_h;
         glTextNode        *bc_data;
@@ -920,21 +922,19 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
 
 
         gl_object_editor_get_position (editor, &x, &y);
-        gl_label_object_set_position (object, x, y);
+        gl_label_object_set_position (object, x, y, TRUE);
 
 
         if ( GL_IS_LABEL_BOX (object) || GL_IS_LABEL_ELLIPSE (object) )
         {
 
-                gl_object_editor_get_size (editor, &w, &h);
                 fill_color_node   = gl_object_editor_get_fill_color (editor);
                 line_color_node   = gl_object_editor_get_line_color (editor);
                 line_width        = gl_object_editor_get_line_width (editor);
 
-                gl_label_object_set_size (object, w, h);
-                gl_label_object_set_fill_color (object, fill_color_node);
-                gl_label_object_set_line_color (object, line_color_node);
-                gl_label_object_set_line_width (object, line_width);
+                gl_label_object_set_fill_color (object, fill_color_node, TRUE);
+                gl_label_object_set_line_color (object, line_color_node, TRUE);
+                gl_label_object_set_line_width (object, line_width, TRUE);
 
                 gl_color_node_free (&fill_color_node);
                 gl_color_node_free (&line_color_node);
@@ -943,13 +943,11 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         else if (GL_IS_LABEL_LINE (object))
         {
 
-                gl_object_editor_get_lsize (editor, &w, &h);
                 line_color_node   = gl_object_editor_get_line_color (editor);
                 line_width        = gl_object_editor_get_line_width (editor);
 
-                gl_label_object_set_size (object, w, h);
-                gl_label_object_set_line_color (object, line_color_node);
-                gl_label_object_set_line_width (object, line_width);
+                gl_label_object_set_line_color (object, line_color_node, TRUE);
+                gl_label_object_set_line_width (object, line_width, TRUE);
 
                 gl_color_node_free (&line_color_node);
 
@@ -957,13 +955,12 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         else if ( GL_IS_LABEL_IMAGE (object) )
         {
 
-                gl_object_editor_get_size (editor, &w, &h);
                 filename = gl_object_editor_get_image (editor);
 
-                gl_label_object_set_size (object, w, h);
-                gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename);
+                gl_label_image_set_filename (GL_LABEL_IMAGE(object), filename, TRUE);
 
                 /* Setting filename may have modified the size. */
+                gl_object_editor_get_size (editor, &w, &h);
                 gl_label_object_get_size (object, &new_w, &new_h);
                 if ( (new_w != w) || (new_h != h) )
                 {
@@ -982,7 +979,6 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         else if (GL_IS_LABEL_TEXT (object))
         {
 
-                gl_object_editor_get_size (editor, &w, &h);
                 font_family       = gl_object_editor_get_font_family (editor);
                 font_size         = gl_object_editor_get_font_size (editor);
                 font_weight       = gl_object_editor_get_font_weight (editor);
@@ -992,15 +988,14 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 text_line_spacing = gl_object_editor_get_text_line_spacing (editor);
                 auto_shrink       = gl_object_editor_get_text_auto_shrink (editor);
 
-                gl_label_object_set_size (object, w, h);
-                gl_label_object_set_font_family (object, font_family);
-                gl_label_object_set_font_size (object, font_size);
-                gl_label_object_set_font_weight (object, font_weight);
-                gl_label_object_set_font_italic_flag (object, font_italic_flag);
-                gl_label_object_set_text_color (object, text_color_node);
-                gl_label_object_set_text_alignment (object, align);
-                gl_label_object_set_text_line_spacing (object, text_line_spacing);
-                gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink);
+                gl_label_object_set_font_family (object, font_family, TRUE);
+                gl_label_object_set_font_size (object, font_size, TRUE);
+                gl_label_object_set_font_weight (object, font_weight, TRUE);
+                gl_label_object_set_font_italic_flag (object, font_italic_flag, TRUE);
+                gl_label_object_set_text_color (object, text_color_node, TRUE);
+                gl_label_object_set_text_alignment (object, align, TRUE);
+                gl_label_object_set_text_line_spacing (object, text_line_spacing, TRUE);
+                gl_label_text_set_auto_shrink (GL_LABEL_TEXT (object), auto_shrink, TRUE);
 
                 gl_color_node_free (&text_color_node);
                 g_free (font_family);
@@ -1009,17 +1004,15 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         else if (GL_IS_LABEL_BARCODE (object))
         {
 
-                gl_object_editor_get_size (editor, &w, &h);
                 line_color_node = gl_object_editor_get_bc_color (editor);
                 bc_data = gl_object_editor_get_data (editor);
                 gl_object_editor_get_bc_style (editor,
                                                &id, &text_flag, &cs_flag, &format_digits);
 
-                gl_label_object_set_size (object, w, h);
-                gl_label_object_set_line_color (object, line_color_node);
-                gl_label_barcode_set_data (GL_LABEL_BARCODE(object), bc_data);
+                gl_label_object_set_line_color (object, line_color_node, TRUE);
+                gl_label_barcode_set_data (GL_LABEL_BARCODE(object), bc_data, TRUE);
                 gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-                                            id, text_flag, cs_flag, format_digits);
+                                            id, text_flag, cs_flag, format_digits, TRUE);
 
                 gl_color_node_free (&line_color_node);
                 gl_text_node_free (&bc_data);
@@ -1033,11 +1026,10 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         shadow_color_node = gl_object_editor_get_shadow_color (editor);
         shadow_opacity    = gl_object_editor_get_shadow_opacity (editor);
 
-        gl_label_object_set_position (object, x, y);
-        gl_label_object_set_shadow_state (object, shadow_state);
-        gl_label_object_set_shadow_offset (object, shadow_x, shadow_y);
-        gl_label_object_set_shadow_color (object, shadow_color_node);
-        gl_label_object_set_shadow_opacity (object, shadow_opacity);
+        gl_label_object_set_shadow_state (object, shadow_state, TRUE);
+        gl_label_object_set_shadow_offset (object, shadow_x, shadow_y, TRUE);
+        gl_label_object_set_shadow_color (object, shadow_color_node, TRUE);
+        gl_label_object_set_shadow_opacity (object, shadow_opacity, TRUE);
 
         gl_color_node_free (&shadow_color_node);
 
@@ -1072,7 +1064,7 @@ gl_object_editor_size_changed_cb (glObjectEditor *editor)
                 gl_object_editor_get_size (editor, &w, &h);
         }
 
-        gl_label_object_set_size (object, w, h);
+        gl_label_object_set_size (object, w, h, TRUE);
 
 
         editor->priv->stop_signals = FALSE;

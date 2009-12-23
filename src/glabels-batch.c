@@ -26,6 +26,7 @@
 
 #include <libglabels/libglabels.h>
 #include "merge-init.h"
+#include "template-history.h"
 #include "xml-label.h"
 #include "print.h"
 #include "print-op.h"
@@ -142,7 +143,7 @@ main (int argc, char **argv)
                         if (input != NULL) {
                                 if (merge != NULL) {
                                         gl_merge_set_src(merge, input);
-                                        gl_label_set_merge(label, merge);
+                                        gl_label_set_merge(label, merge, FALSE);
                                 } else {
                                         fprintf ( stderr,
                                                   _("cannot perform document merge with glabels file %s\n"),

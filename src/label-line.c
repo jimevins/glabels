@@ -20,6 +20,7 @@
 
 #include "label-line.h"
 
+#include <glib/gi18n.h>
 #include <glib.h>
 
 #include "debug.h"
@@ -50,10 +51,12 @@ static void    copy                       (glLabelObject     *dst_object,
 					   glLabelObject     *src_object);
 
 static void    set_line_color             (glLabelObject     *object,
-					   glColorNode       *line_color_node);
+					   glColorNode       *line_color_node,
+                                           gboolean           checkpoint);
 
 static void    set_line_width             (glLabelObject     *object,
-					   gdouble            line_width);
+					   gdouble            line_width,
+                                           gboolean           checkpoint);
 
 static glColorNode   *get_line_color      (glLabelObject     *object);
 
@@ -129,7 +132,8 @@ gl_label_line_finalize (GObject *object)
 /* NEW label "line" object.                                               */
 /*****************************************************************************/
 GObject *
-gl_label_line_new (glLabel *label)
+gl_label_line_new (glLabel *label,
+                   gboolean checkpoint)
 {
 	glLabelLine         *lline;
 	glColorNode         *line_color_node;
@@ -138,7 +142,10 @@ gl_label_line_new (glLabel *label)
 
         if (label != NULL)
         {
-                gl_label_object_set_parent (GL_LABEL_OBJECT(lline), label);
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Create line object"));
+                }
 
                 line_color_node = gl_color_node_new_default ();
 
@@ -146,6 +153,9 @@ gl_label_line_new (glLabel *label)
 
                 lline->priv->line_width      = gl_label_get_default_line_width(label);
                 lline->priv->line_color_node = line_color_node;
+
+                gl_label_add_object (label, GL_LABEL_OBJECT (lline));
+                gl_label_object_set_parent (GL_LABEL_OBJECT (lline), label);
         }
 
 	return G_OBJECT (lline);
@@ -172,8 +182,8 @@ copy (glLabelObject *dst_object,
 	line_width = get_line_width (src_object);
 	line_color_node = get_line_color (src_object);
 
-	set_line_width (dst_object, line_width);
-	set_line_color (dst_object, line_color_node);
+	set_line_width (dst_object, line_width, FALSE);
+	set_line_color (dst_object, line_color_node, FALSE);
 
 	gl_color_node_free (&line_color_node);
 	
@@ -186,14 +196,22 @@ copy (glLabelObject *dst_object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_color (glLabelObject *object,
-		glColorNode   *line_color_node)
+		glColorNode   *line_color_node,
+                gboolean       checkpoint)
 {
 	glLabelLine *lline = (glLabelLine *)object;
+        glLabel     *label;
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
-	if ( !gl_color_node_equal (lline->priv->line_color_node, line_color_node)) {
-		
+	if ( !gl_color_node_equal (lline->priv->line_color_node, line_color_node))
+        {
+                if ( checkpoint )
+                {
+                        gl_label_object_get_parent (GL_LABEL_OBJECT (lline));
+                        gl_label_checkpoint (label, _("Line color"));
+                }
+
 		gl_color_node_free (&(lline->priv->line_color_node ));
 		lline->priv->line_color_node = gl_color_node_dup (line_color_node);
 		
@@ -207,13 +225,22 @@ set_line_color (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_width (glLabelObject *object,
-		gdouble        line_width)
+		gdouble        line_width,
+                gboolean       checkpoint)
 {
 	glLabelLine *lline = (glLabelLine *)object;
+        glLabel     *label;
 
 	g_return_if_fail (lline && GL_IS_LABEL_LINE (lline));
 
-	if ( lline->priv->line_width != line_width ) {
+	if ( lline->priv->line_width != line_width )
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lline));
+                        gl_label_checkpoint (label, _("Line width"));
+                }
+
 		lline->priv->line_width = line_width;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lline));
 	}

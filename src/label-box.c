@@ -20,6 +20,7 @@
 
 #include "label-box.h"
 
+#include <glib/gi18n.h>
 #include <glib.h>
 
 #include "debug.h"
@@ -51,13 +52,16 @@ static void    copy                       (glLabelObject   *dst_object,
 					   glLabelObject   *src_object);
 
 static void    set_fill_color             (glLabelObject   *object,
-					   glColorNode     *fill_color_node);
+					   glColorNode     *fill_color_node,
+                                           gboolean         checkpoint);
 
 static void    set_line_color             (glLabelObject   *object,
-					   glColorNode     *line_color_node);
+					   glColorNode     *line_color_node,
+                                           gboolean         checkpoint);
 
 static void    set_line_width             (glLabelObject   *object,
-					   gdouble          line_width);
+					   gdouble          line_width,
+                                           gboolean         checkpoint);
 
 static glColorNode*   get_fill_color      (glLabelObject   *object);
 
@@ -136,7 +140,8 @@ gl_label_box_finalize (GObject *object)
 /* NEW label "box" object.                                                   */
 /*****************************************************************************/
 GObject *
-gl_label_box_new (glLabel *label)
+gl_label_box_new (glLabel *label,
+                  gboolean checkpoint)
 {
 	glLabelBox          *lbox;
 	glColorNode         *fill_color_node;
@@ -146,7 +151,10 @@ gl_label_box_new (glLabel *label)
 
         if (label != NULL)
         {
-                gl_label_object_set_parent (GL_LABEL_OBJECT(lbox), label);
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Create box object"));
+                }
 
                 fill_color_node = gl_color_node_new_default ();
                 line_color_node = gl_color_node_new_default ();
@@ -157,6 +165,9 @@ gl_label_box_new (glLabel *label)
                 lbox->priv->line_width      = gl_label_get_default_line_width(label);
                 lbox->priv->line_color_node = line_color_node;
                 lbox->priv->fill_color_node = fill_color_node;
+
+                gl_label_add_object (label, GL_LABEL_OBJECT (lbox));
+                gl_label_object_set_parent (GL_LABEL_OBJECT (lbox), label);
         }
 
 	return G_OBJECT (lbox);
@@ -185,9 +196,9 @@ copy (glLabelObject *dst_object,
 	line_color_node = get_line_color (src_object);
 	fill_color_node = get_fill_color (src_object);
 
-	set_line_width (dst_object, line_width);
-	set_line_color (dst_object, line_color_node);
-	set_fill_color (dst_object, fill_color_node);
+	set_line_width (dst_object, line_width, FALSE);
+	set_line_color (dst_object, line_color_node, FALSE);
+	set_fill_color (dst_object, fill_color_node, FALSE);
 	
 	gl_color_node_free (&line_color_node);
 	gl_color_node_free (&fill_color_node);
@@ -201,21 +212,30 @@ copy (glLabelObject *dst_object,
 /*---------------------------------------------------------------------------*/
 static void
 set_fill_color (glLabelObject *object,
-		glColorNode   *fill_color_node)
+		glColorNode   *fill_color_node,
+                gboolean       checkpoint)
 {
 	glLabelBox *lbox = (glLabelBox *)object;
+        glLabel    *label;
 	
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if (!gl_color_node_equal (lbox->priv->fill_color_node, fill_color_node)) {
+	if (!gl_color_node_equal (lbox->priv->fill_color_node, fill_color_node))
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbox));
+                        gl_label_checkpoint (label, _("Fill color"));
+                }
 
 		gl_color_node_free (&(lbox->priv->fill_color_node));
 		lbox->priv->fill_color_node = gl_color_node_dup (fill_color_node);
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}
+
 	gl_debug (DEBUG_LABEL, "END");
 }
 
@@ -225,13 +245,22 @@ set_fill_color (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_color (glLabelObject *object,
-		glColorNode   *line_color_node)
+		glColorNode   *line_color_node,
+                gboolean       checkpoint)
 {
 	glLabelBox *lbox = (glLabelBox *)object;
+        glLabel    *label;
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if ( !gl_color_node_equal (lbox->priv->line_color_node, line_color_node )) {
+	if ( !gl_color_node_equal (lbox->priv->line_color_node, line_color_node ))
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbox));
+                        gl_label_checkpoint (label, _("Line color"));
+                }
+
 		gl_color_node_free (&(lbox->priv->line_color_node));
 		lbox->priv->line_color_node = gl_color_node_dup (line_color_node);
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
@@ -244,13 +273,22 @@ set_line_color (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_width (glLabelObject *object,
-		gdouble        line_width)
+		gdouble        line_width,
+                gboolean       checkpoint)
 {
 	glLabelBox *lbox = (glLabelBox *)object;
+        glLabel    *label;
 
 	g_return_if_fail (lbox && GL_IS_LABEL_BOX (lbox));
 
-	if ( lbox->priv->line_width != line_width ) {
+	if ( lbox->priv->line_width != line_width )
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbox));
+                        gl_label_checkpoint (label, _("Line width"));
+                }
+
 		lbox->priv->line_width = line_width;
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbox));
 	}

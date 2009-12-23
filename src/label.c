@@ -49,8 +49,10 @@ struct _glLabelPrivate {
 
 	gchar       *filename;
 	gint         compression;
-	gboolean     modified_flag;
 	gint         untitled_instance;
+
+	gboolean     modified_flag;
+        GTimeVal     time_stamp;
 
         lglTemplate *template;
         gboolean     rotate_flag;
@@ -80,6 +82,12 @@ struct _glLabelPrivate {
 	
 	/* Default object fill properties */
 	guint              default_fill_color;
+
+        /* Undo/Redo state */
+        GQueue      *undo_stack;
+        GQueue      *redo_stack;
+        gboolean     cp_cleared_flag;
+        gchar       *cp_desc;
 };
 
 typedef struct {
@@ -97,6 +105,21 @@ enum {
 	SIZE_CHANGED,
 	LAST_SIGNAL
 };
+
+typedef struct {
+        gchar       *description;
+
+	gboolean     modified_flag;
+        GTimeVal     time_stamp;
+
+        lglTemplate *template;
+        gboolean     rotate_flag;
+
+        GList       *object_list;
+
+	glMerge     *merge;
+
+} State;
 
 
 /*========================================================*/
@@ -146,6 +169,17 @@ static void paste_text_received_cb (GtkClipboard     *clipboard,
 static void paste_image_received_cb(GtkClipboard     *clipboard,
                                     GdkPixbuf        *pixbuf,
                                     glLabel          *label);
+
+static void   stack_clear          (GQueue           *stack);
+static void   stack_push_state     (GQueue           *stack,
+                                    State            *state);
+static State *stack_pop_state      (GQueue           *stack);
+
+static State *state_new            (glLabel          *this,
+                                    const gchar      *description);
+static void   state_free           (State            *state);
+static void   state_restore        (State            *state,
+                                    glLabel          *this);
 
 
 /*****************************************************************************/
@@ -231,16 +265,19 @@ gl_label_init (glLabel *label)
 
 	label->priv = g_new0 (glLabelPrivate, 1);
 
-	label->priv->template     = NULL;
-	label->priv->rotate_flag  = FALSE;
-        label->priv->object_list  = NULL;
+	label->priv->template      = NULL;
+	label->priv->rotate_flag   = FALSE;
+        label->priv->object_list   = NULL;
 
 	label->priv->filename      = NULL;
 	label->priv->modified_flag = FALSE;
 	label->priv->compression   = 9;
 
-	label->priv->merge        = NULL;
-	label->priv->pixbuf_cache = gl_pixbuf_cache_new ();
+	label->priv->merge         = NULL;
+	label->priv->pixbuf_cache  = gl_pixbuf_cache_new ();
+
+        label->priv->undo_stack    = g_queue_new ();
+        label->priv->redo_stack    = g_queue_new ();
 
         /*
          * Defaults from preferences
@@ -284,6 +321,12 @@ gl_label_finalize (GObject *object)
 	}
 	gl_pixbuf_cache_free (label->priv->pixbuf_cache);
         g_free (label->priv->default_font_family);
+
+        stack_clear (label->priv->undo_stack);
+        stack_clear (label->priv->redo_stack);
+
+        g_queue_free (label->priv->undo_stack);
+        g_queue_free (label->priv->redo_stack);
 
 	g_free (label->priv);
 
@@ -439,6 +482,8 @@ gl_label_clear_modified (glLabel *label)
 
 	if ( label->priv->modified_flag )
         {
+
+                g_get_current_time (&label->priv->time_stamp);
 		label->priv->modified_flag = FALSE;
 
 		g_signal_emit (G_OBJECT(label), signals[MODIFIED_CHANGED], 0);
@@ -519,7 +564,8 @@ end_selection_op (glLabel  *label)
 /****************************************************************************/
 void
 gl_label_set_template (glLabel           *label,
-		       const lglTemplate *template)
+		       const lglTemplate *template,
+                       gboolean           checkpoint)
 {
         gchar *name;
 
@@ -531,6 +577,11 @@ gl_label_set_template (glLabel           *label,
 	if ((label->priv->template == NULL) ||
             !lgl_template_do_templates_match (template, label->priv->template))
         {
+
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Label properties"));
+                }
 
 		lgl_template_free (label->priv->template);
 		label->priv->template = lgl_template_dup (template);
@@ -562,7 +613,8 @@ gl_label_get_template (glLabel            *label)
 /****************************************************************************/
 void
 gl_label_set_rotate_flag (glLabel *label,
-			  gboolean rotate_flag)
+			  gboolean rotate_flag,
+                          gboolean checkpoint)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -570,6 +622,11 @@ gl_label_set_rotate_flag (glLabel *label,
 
 	if (rotate_flag != label->priv->rotate_flag)
         {
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Label properties"));
+                }
+
 		label->priv->rotate_flag = rotate_flag;
 
                 do_modify (label);
@@ -632,11 +689,17 @@ gl_label_get_size (glLabel *label,
 /****************************************************************************/
 void
 gl_label_set_merge (glLabel *label,
-		    glMerge *merge)
+		    glMerge *merge,
+                    gboolean checkpoint)
 {
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
+
+        if ( checkpoint )
+        {
+                gl_label_checkpoint (label, _("Merge properties"));
+        }
 
 	if ( label->priv->merge != NULL )
         {
@@ -689,7 +752,7 @@ gl_label_add_object (glLabel       *label,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
-	object->parent = label;
+	gl_label_object_set_parent (object, label);
 	label->priv->object_list = g_list_append (label->priv->object_list, object);
 
         g_signal_connect (G_OBJECT (object), "changed",
@@ -749,6 +812,7 @@ gl_label_select_object (glLabel       *label,
 
         gl_label_object_select (object);
 
+        label->priv->cp_cleared_flag = TRUE;
 	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -769,6 +833,7 @@ gl_label_unselect_object (glLabel       *label,
 
         gl_label_object_unselect (object);
 
+        label->priv->cp_cleared_flag = TRUE;
 	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -795,6 +860,7 @@ gl_label_select_all (glLabel       *label)
                 gl_label_object_select (object);
         }
 
+        label->priv->cp_cleared_flag = TRUE;
 	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -821,6 +887,7 @@ gl_label_unselect_all (glLabel       *label)
                 gl_label_object_unselect (object);
         }
 
+        label->priv->cp_cleared_flag = TRUE;
 	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -863,6 +930,7 @@ gl_label_select_region (glLabel       *label,
                 }
 	}
 
+        label->priv->cp_cleared_flag = TRUE;
 	g_signal_emit (G_OBJECT(label), signals[SELECTION_CHANGED], 0);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -1112,6 +1180,8 @@ gl_label_delete_selection (glLabel       *label)
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
+        gl_label_checkpoint (label, _("Delete"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1143,6 +1213,10 @@ gl_label_raise_selection_to_top (glLabel       *label)
 
 	gl_debug (DEBUG_LABEL, "START");
 
+        gl_label_checkpoint (label, _("Bring to front"));
+
+        begin_selection_op (label);
+
         selection_list = gl_label_get_selection_list (label);
 
         for ( p = selection_list; p != NULL; p = p->next )
@@ -1156,6 +1230,8 @@ gl_label_raise_selection_to_top (glLabel       *label)
 	label->priv->object_list = g_list_concat (label->priv->object_list, selection_list);
 
         do_modify (label);
+
+        end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1173,6 +1249,10 @@ gl_label_lower_selection_to_bottom (glLabel       *label)
 
 	gl_debug (DEBUG_LABEL, "START");
 
+        gl_label_checkpoint (label, _("Send to back"));
+
+        begin_selection_op (label);
+
         selection_list = gl_label_get_selection_list (label);
 
         for ( p = selection_list; p != NULL; p = p->next )
@@ -1186,6 +1266,8 @@ gl_label_lower_selection_to_bottom (glLabel       *label)
 	label->priv->object_list = g_list_concat (selection_list, label->priv->object_list);
 
         do_modify (label);
+
+        end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1207,6 +1289,8 @@ gl_label_rotate_selection (glLabel *label,
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
         begin_selection_op (label);
+
+        gl_label_checkpoint (label, _("Rotate"));
 
         selection_list = gl_label_get_selection_list (label);
 
@@ -1241,6 +1325,8 @@ gl_label_rotate_selection_left (glLabel *label)
 
         begin_selection_op (label);
 
+        gl_label_checkpoint (label, _("Rotate left"));
+
         selection_list = gl_label_get_selection_list (label);
 
         for ( p = selection_list; p != NULL; p = p->next )
@@ -1271,6 +1357,8 @@ gl_label_rotate_selection_right (glLabel *label)
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
+
+        gl_label_checkpoint (label, _("Rotate right"));
 
         begin_selection_op (label);
 
@@ -1305,6 +1393,8 @@ gl_label_flip_selection_horiz (glLabel *label)
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
+        gl_label_checkpoint (label, _("Flip horizontally"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1337,6 +1427,8 @@ gl_label_flip_selection_vert (glLabel *label)
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
+
+        gl_label_checkpoint (label, _("Flip verically"));
 
         begin_selection_op (label);
 
@@ -1376,6 +1468,8 @@ gl_label_align_selection_left (glLabel *label)
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
 
+        gl_label_checkpoint (label, _("Align left"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1401,7 +1495,7 @@ gl_label_align_selection_left (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dx = x1_min - obj_extent.x1;
-		gl_label_object_set_position_relative (object, dx, 0.0);
+		gl_label_object_set_position_relative (object, dx, 0.0, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1431,6 +1525,8 @@ gl_label_align_selection_right (glLabel *label)
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
 
+        gl_label_checkpoint (label, _("Align right"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1456,7 +1552,7 @@ gl_label_align_selection_right (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dx = x2_max - obj_extent.x2;
-		gl_label_object_set_position_relative (object, dx, 0.0);
+		gl_label_object_set_position_relative (object, dx, 0.0, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1489,6 +1585,8 @@ gl_label_align_selection_hcenter (glLabel *label)
 
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
+
+        gl_label_checkpoint (label, _("Align horizontal center"));
 
         begin_selection_op (label);
 
@@ -1534,7 +1632,7 @@ gl_label_align_selection_hcenter (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dx = xcenter - (obj_extent.x1 + obj_extent.x2)/2.0;
-		gl_label_object_set_position_relative (object, dx, 0.0);
+		gl_label_object_set_position_relative (object, dx, 0.0, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1564,6 +1662,8 @@ gl_label_align_selection_top (glLabel *label)
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
 
+        gl_label_checkpoint (label, _("Align tops"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1589,7 +1689,7 @@ gl_label_align_selection_top (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dy = y1_min - obj_extent.y1;
-		gl_label_object_set_position_relative (object, 0.0, dy);
+		gl_label_object_set_position_relative (object, 0.0, dy, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1619,6 +1719,8 @@ gl_label_align_selection_bottom (glLabel *label)
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
 
+        gl_label_checkpoint (label, _("Align bottoms"));
+
         begin_selection_op (label);
 
         selection_list = gl_label_get_selection_list (label);
@@ -1644,7 +1746,7 @@ gl_label_align_selection_bottom (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dy = y2_max - obj_extent.y2;
-		gl_label_object_set_position_relative (object, 0.0, dy);
+		gl_label_object_set_position_relative (object, 0.0, dy, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1677,6 +1779,8 @@ gl_label_align_selection_vcenter (glLabel *label)
 
 	g_return_if_fail (!gl_label_is_selection_empty (label) &&
 			  !gl_label_is_selection_atomic (label));
+
+        gl_label_checkpoint (label, _("Align vertical center"));
 
         begin_selection_op (label);
 
@@ -1722,7 +1826,7 @@ gl_label_align_selection_vcenter (glLabel *label)
 
 		gl_label_object_get_extent (object, &obj_extent);
 		dy = ycenter - (obj_extent.y1 + obj_extent.y2)/2.0;
-		gl_label_object_set_position_relative (object, 0.0, dy);
+		gl_label_object_set_position_relative (object, 0.0, dy, FALSE);
 	}
 
         g_list_free (selection_list);
@@ -1754,6 +1858,8 @@ gl_label_center_selection_horiz (glLabel *label)
 
 	g_return_if_fail (!gl_label_is_selection_empty (label));
 
+        gl_label_checkpoint (label, _("Center horizontally"));
+
         begin_selection_op (label);
 
 	gl_label_get_size (label, &w, &h);
@@ -1768,7 +1874,7 @@ gl_label_center_selection_horiz (glLabel *label)
 		gl_label_object_get_extent (object, &obj_extent);
 		x_obj_center = (obj_extent.x1 + obj_extent.x2) / 2.0;
 		dx = x_label_center - x_obj_center;
-		gl_label_object_set_position_relative (object, dx, 0.0);
+		gl_label_object_set_position_relative (object, dx, 0.0, FALSE);
 	}
         g_list_free (selection_list);
 
@@ -1799,6 +1905,8 @@ gl_label_center_selection_vert (glLabel *label)
 
 	g_return_if_fail (!gl_label_is_selection_empty (label));
 
+        gl_label_checkpoint (label, _("Center vertically"));
+
         begin_selection_op (label);
 
 	gl_label_get_size (label, &w, &h);
@@ -1813,7 +1921,7 @@ gl_label_center_selection_vert (glLabel *label)
 		gl_label_object_get_extent (object, &obj_extent);
 		y_obj_center = (obj_extent.y1 + obj_extent.y2) / 2.0;
 		dy = y_label_center - y_obj_center;
-		gl_label_object_set_position_relative (object, 0.0, dy);
+		gl_label_object_set_position_relative (object, 0.0, dy, FALSE);
 	}
         g_list_free (selection_list);
 
@@ -1847,7 +1955,7 @@ gl_label_move_selection (glLabel  *label,
         {
 		object = GL_LABEL_OBJECT (p->data);
 
-		gl_label_object_set_position_relative (object, dx, dy);
+		gl_label_object_set_position_relative (object, dx, dy, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -1880,7 +1988,7 @@ gl_label_set_selection_font_family (glLabel      *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_font_family (object, font_family);
+		gl_label_object_set_font_family (object, font_family, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -1913,7 +2021,7 @@ gl_label_set_selection_font_size (glLabel  *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_font_size (object, font_size);
+		gl_label_object_set_font_size (object, font_size, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -1939,16 +2047,19 @@ gl_label_set_selection_font_weight (glLabel      *label,
 
 	g_return_if_fail (label && GL_IS_LABEL (label));
 
+        begin_selection_op (label);
+
         selection_list = gl_label_get_selection_list (label);
 
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_font_weight (object, font_weight);
+		gl_label_object_set_font_weight (object, font_weight, TRUE);
 	}
 
         g_list_free (selection_list);
 
+        end_selection_op (label);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
@@ -1976,7 +2087,7 @@ gl_label_set_selection_font_italic_flag (glLabel   *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_font_italic_flag (object, font_italic_flag);
+		gl_label_object_set_font_italic_flag (object, font_italic_flag, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2009,7 +2120,7 @@ gl_label_set_selection_text_alignment (glLabel        *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_text_alignment (object, text_alignment);
+		gl_label_object_set_text_alignment (object, text_alignment, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2042,7 +2153,7 @@ gl_label_set_selection_text_line_spacing (glLabel  *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_text_line_spacing (object, text_line_spacing);
+		gl_label_object_set_text_line_spacing (object, text_line_spacing, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2075,7 +2186,7 @@ gl_label_set_selection_text_color (glLabel      *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_text_color (object, text_color_node);
+		gl_label_object_set_text_color (object, text_color_node, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2108,7 +2219,7 @@ gl_label_set_selection_fill_color (glLabel      *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_fill_color (object, fill_color_node);
+		gl_label_object_set_fill_color (object, fill_color_node, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2141,7 +2252,7 @@ gl_label_set_selection_line_color (glLabel      *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_line_color (object, line_color_node);
+		gl_label_object_set_line_color (object, line_color_node, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2174,7 +2285,7 @@ gl_label_set_selection_line_width (glLabel  *label,
 	for (p = selection_list; p != NULL; p = p->next)
         {
 		object = GL_LABEL_OBJECT (p->data);
-		gl_label_object_set_line_width (object, line_width);
+		gl_label_object_set_line_width (object, line_width, TRUE);
 	}
 
         g_list_free (selection_list);
@@ -2245,14 +2356,14 @@ gl_label_copy_selection (glLabel       *label)
                  */
 		label_copy = GL_LABEL(gl_label_new ());
 
-		gl_label_set_template (label_copy, label->priv->template);
-		gl_label_set_rotate_flag (label_copy, label->priv->rotate_flag);
+		gl_label_set_template (label_copy, label->priv->template, FALSE);
+		gl_label_set_rotate_flag (label_copy, label->priv->rotate_flag, FALSE);
 
 		for (p = selection_list; p != NULL; p = p->next)
                 {
 			object = GL_LABEL_OBJECT (p->data);
 
-			gl_label_object_dup (object, label_copy);
+			gl_label_add_object (label_copy, gl_label_object_dup (object, label_copy));
 		}
 
                 data->xml_buffer = gl_xml_label_save_buffer (label_copy, &status);
@@ -2480,6 +2591,8 @@ paste_xml_received_cb (GtkClipboard     *clipboard,
 
 	gl_debug (DEBUG_LABEL, "START");
 
+        gl_label_checkpoint (label, _("Paste"));
+
         xml_buffer = (gchar *)gtk_selection_data_get_data (selection_data);
 
         /*
@@ -2494,6 +2607,7 @@ paste_xml_received_cb (GtkClipboard     *clipboard,
                 {
                         object = (glLabelObject *) p->data;
                         newobject = gl_label_object_dup (object, label);
+                        gl_label_add_object( label, newobject );
 
                         gl_label_select_object (label, newobject);
 
@@ -2519,11 +2633,13 @@ paste_text_received_cb (GtkClipboard     *clipboard,
 
 	gl_debug (DEBUG_LABEL, "START");
 
+        gl_label_checkpoint (label, _("Paste"));
+
         gl_label_unselect_all (label);
 
-        object = GL_LABEL_OBJECT (gl_label_text_new (label));
-        gl_label_text_set_text (GL_LABEL_TEXT (object), text);
-        gl_label_object_set_position (object, 18, 18);
+        object = GL_LABEL_OBJECT (gl_label_text_new (label, FALSE));
+        gl_label_text_set_text (GL_LABEL_TEXT (object), text, FALSE);
+        gl_label_object_set_position (object, 18, 18, FALSE);
 
         gl_label_select_object (label, object);
 
@@ -2543,11 +2659,13 @@ paste_image_received_cb (GtkClipboard     *clipboard,
 
 	gl_debug (DEBUG_LABEL, "START");
 
+        gl_label_checkpoint (label, _("Paste"));
+
         gl_label_unselect_all (label);
 
-        object = GL_LABEL_OBJECT (gl_label_image_new (label));
-        gl_label_image_set_pixbuf (GL_LABEL_IMAGE (object), pixbuf);
-        gl_label_object_set_position (object, 18, 18);
+        object = GL_LABEL_OBJECT (gl_label_image_new (label, FALSE));
+        gl_label_image_set_pixbuf (GL_LABEL_IMAGE (object), pixbuf, FALSE);
+        gl_label_object_set_position (object, 18, 18, FALSE);
 
         gl_label_select_object (label, object);
 
@@ -2975,12 +3093,101 @@ gl_label_get_handle_at (glLabel             *label,
 
 
 /****************************************************************************/
+/* Checkpoint state.                                                        */
+/****************************************************************************/
+void
+gl_label_checkpoint (glLabel       *this,
+                     const gchar   *description)
+{
+        State *state;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        /*
+         * Do not perform consecutive checkpoints that are identical.
+         * E.g. moving an object by dragging, would produce a large number
+         * of incremental checkpoints -- what we really want is a single
+         * checkpoint so that we can undo the entire dragging effort with
+         * one "undo"
+         */
+        if ( this->priv->cp_cleared_flag
+             || (this->priv->cp_desc == NULL)
+             || (strcmp (description, this->priv->cp_desc) != 0) )
+        {
+
+                /* Sever old redo "thread" */
+                stack_clear (this->priv->redo_stack);
+
+                /* Save state onto undo stack. */
+                state = state_new (this, description);
+                stack_push_state (this->priv->undo_stack, state);
+
+                /* Track consecutive checkpoints. */
+                this->priv->cp_cleared_flag = FALSE;
+                this->priv->cp_desc         = g_strdup (description);
+        }
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Undo.                                                                    */
+/****************************************************************************/
+void
+gl_label_undo (glLabel       *this)
+{
+        State *state_old;
+        State *state_now;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        state_old = stack_pop_state (this->priv->undo_stack);
+        state_now = state_new (this, state_old->description);
+
+        stack_push_state (this->priv->redo_stack, state_now);
+
+        state_restore (state_old, this);
+        state_free (state_old);
+
+        this->priv->cp_cleared_flag = TRUE;
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Redo.                                                                    */
+/****************************************************************************/
+void
+gl_label_redo (glLabel       *this)
+{
+        State *state_old;
+        State *state_now;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        state_old = stack_pop_state (this->priv->redo_stack);
+        state_now = state_new (this, state_old->description);
+
+        stack_push_state (this->priv->undo_stack, state_now);
+
+        state_restore (state_old, this);
+        state_free (state_old);
+
+        this->priv->cp_cleared_flag = TRUE;
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
 /* Can undo?                                                                */
 /****************************************************************************/
 gboolean
-gl_label_can_undo (glLabel *label)
+gl_label_can_undo (glLabel *this)
 {
-	return FALSE;
+	return (!g_queue_is_empty (this->priv->undo_stack));
 }
 
 
@@ -2988,9 +3195,221 @@ gl_label_can_undo (glLabel *label)
 /* Can redo?                                                                */
 /****************************************************************************/
 gboolean
-gl_label_can_redo (glLabel *label)
+gl_label_can_redo (glLabel *this)
 {
-	return FALSE;
+	return (!g_queue_is_empty (this->priv->redo_stack));
+}
+
+
+/****************************************************************************/
+/* Get undo description string.                                             */
+/****************************************************************************/
+gchar *
+gl_label_get_undo_description (glLabel *this)
+{
+        State *state;
+        gchar *description;
+
+        state = g_queue_peek_head (this->priv->undo_stack);
+        if ( state )
+        {
+                description = g_strdup (state->description);
+        }
+        else
+        {
+                description = g_strdup ("");
+        }
+
+        return description;
+}
+
+
+/****************************************************************************/
+/* Get redo description string.                                             */
+/****************************************************************************/
+gchar *
+gl_label_get_redo_description (glLabel *this)
+{
+        State *state;
+        gchar *description;
+
+        state = g_queue_peek_head (this->priv->redo_stack);
+        if ( state )
+        {
+                description = g_strdup (state->description);
+        }
+        else
+        {
+                description = g_strdup ("");
+        }
+
+        return description;
+}
+
+
+/****************************************************************************/
+/* Clear undo or redo stack.                                                */
+/****************************************************************************/
+static void
+stack_clear (GQueue *stack)
+{
+        State *state;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        while ( (state = g_queue_pop_head (stack)) != NULL )
+        {
+                state_free (state);
+        }
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Push state onto stack.                                                   */
+/****************************************************************************/
+static void
+stack_push_state (GQueue *stack,
+                  State  *state)
+{
+	gl_debug (DEBUG_LABEL, "START");
+
+        g_queue_push_head( stack, state );
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Pop state from stack.                                                    */
+/****************************************************************************/
+static State *
+stack_pop_state (GQueue *stack)
+{
+        State *state;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        state = g_queue_pop_head (stack);
+
+	gl_debug (DEBUG_LABEL, "END");
+        return state;
+}
+
+
+/****************************************************************************/
+/* New state from label.                                                    */
+/****************************************************************************/
+static State *
+state_new (glLabel       *this,
+           const gchar   *description)
+{
+        State          *state;
+        GList          *p_obj;
+        glLabelObject  *object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        state = g_new0 (State, 1);
+
+        state->description = g_strdup (description);
+
+        state->template    = lgl_template_dup (this->priv->template);
+        state->rotate_flag = this->priv->rotate_flag;
+
+        for ( p_obj = this->priv->object_list; p_obj != NULL; p_obj = p_obj->next )
+        {
+                object = GL_LABEL_OBJECT (p_obj->data);
+
+                state->object_list = g_list_append (state->object_list,
+                                                    gl_label_object_dup (object, this));
+        }
+
+        state->merge = gl_merge_dup (this->priv->merge);
+
+        state->modified_flag = this->priv->modified_flag;
+        state->time_stamp    = this->priv->time_stamp;
+
+
+	gl_debug (DEBUG_LABEL, "END");
+        return state;
+}
+
+
+/****************************************************************************/
+/* Restore label from saved state.                                          */
+/****************************************************************************/
+static void
+state_free (State   *state)
+{
+        GList          *p_obj;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        g_free (state->description);
+
+        lgl_template_free (state->template);
+        if ( state->merge )
+        {
+                g_object_unref (G_OBJECT (state->merge));
+        }
+
+        for ( p_obj = state->object_list; p_obj != NULL; p_obj = p_obj->next )
+        {
+                g_object_unref (G_OBJECT (p_obj->data));
+        }
+        g_list_free (state->object_list);
+
+        g_free (state);
+
+	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/****************************************************************************/
+/* Restore label from saved state.                                          */
+/****************************************************************************/
+static void
+state_restore (State   *state,
+               glLabel *this)
+               
+{
+        GList          *p_obj, *p_next;
+        glLabelObject  *object;
+
+	gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_set_rotate_flag (this, state->rotate_flag, FALSE);
+        gl_label_set_template (this, state->template, FALSE);
+
+        for ( p_obj = this->priv->object_list; p_obj != NULL; p_obj = p_next )
+        {
+                p_next = p_obj->next; /* Hold on to next; delete is destructive */
+                object = GL_LABEL_OBJECT (p_obj->data);
+
+                gl_label_delete_object (this, object);
+        }
+
+        for ( p_obj = state->object_list; p_obj != NULL; p_obj = p_obj->next )
+        {
+                object = GL_LABEL_OBJECT (p_obj->data);
+
+                gl_label_add_object (this, gl_label_object_dup (object, this));
+        }
+	g_signal_emit (G_OBJECT(this), signals[SELECTION_CHANGED], 0);
+
+        gl_label_set_merge (this, state->merge, FALSE);
+        
+
+        if ( !state->modified_flag &&
+             (state->time_stamp.tv_sec  == this->priv->time_stamp.tv_sec) &&
+             (state->time_stamp.tv_usec == this->priv->time_stamp.tv_usec) )
+        {
+                gl_label_clear_modified (this);
+        }
+
+	gl_debug (DEBUG_LABEL, "END");
 }
 
 

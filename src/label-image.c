@@ -22,6 +22,7 @@
 
 #include "label-image.h"
 
+#include <glib/gi18n.h>
 #include <glib.h>
 #include <gdk/gdk.h>
 
@@ -61,7 +62,8 @@ static void copy                         (glLabelObject     *dst_object,
 
 static void set_size                     (glLabelObject     *object,
                                           gdouble            w,
-                                          gdouble            h);
+                                          gdouble            h,
+                                          gboolean           checkpoint);
 
 static void draw_object                  (glLabelObject     *object,
                                           cairo_t           *cr,
@@ -122,13 +124,15 @@ static void
 gl_label_image_finalize (GObject *object)
 {
 	glLabelObject *lobject = GL_LABEL_OBJECT (object);
-	glLabelImage  *limage  = GL_LABEL_IMAGE (object);;
+	glLabelImage  *limage  = GL_LABEL_IMAGE (object);
+        glLabel       *label;
 	GHashTable    *pixbuf_cache;
 
 	g_return_if_fail (object && GL_IS_LABEL_IMAGE (object));
 
 	if (!limage->priv->filename->field_flag) {
-		pixbuf_cache = gl_label_get_pixbuf_cache (lobject->parent);
+                label = gl_label_object_get_parent (lobject);
+		pixbuf_cache = gl_label_get_pixbuf_cache (label);
 		gl_pixbuf_cache_remove_pixbuf (pixbuf_cache,
 					       limage->priv->filename->data);
 	}
@@ -143,13 +147,23 @@ gl_label_image_finalize (GObject *object)
 /* NEW label "image" object.                                                 */
 /*****************************************************************************/
 GObject *
-gl_label_image_new (glLabel *label)
+gl_label_image_new (glLabel *label,
+                    gboolean checkpoint)
 {
 	glLabelImage *limage;
 
 	limage = g_object_new (gl_label_image_get_type(), NULL);
 
-	gl_label_object_set_parent (GL_LABEL_OBJECT(limage), label);
+        if (label != NULL)
+        {
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Create image object"));
+                }
+
+                gl_label_add_object (label, GL_LABEL_OBJECT (limage));
+                gl_label_object_set_parent (GL_LABEL_OBJECT (limage), label);
+        }
 
 	return G_OBJECT (limage);
 }
@@ -166,6 +180,7 @@ copy (glLabelObject *dst_object,
 	glLabelImage     *new_limage = (glLabelImage *)dst_object;
 	glTextNode       *filename;
 	GdkPixbuf        *pixbuf;
+        glLabel          *label;
 	GHashTable       *pixbuf_cache;
 
 	gl_debug (DEBUG_LABEL, "START");
@@ -179,12 +194,13 @@ copy (glLabelObject *dst_object,
 	if ( !filename->field_flag && (filename->data != NULL) ) {
 		pixbuf = limage->priv->pixbuf;
 		if ( pixbuf != default_pixbuf ) {
-			pixbuf_cache = gl_label_get_pixbuf_cache (dst_object->parent);
+                        label = gl_label_object_get_parent (dst_object);
+			pixbuf_cache = gl_label_get_pixbuf_cache (label);
 			gl_pixbuf_cache_add_pixbuf (pixbuf_cache, filename->data, pixbuf);
 		}
 	}
 
-	gl_label_image_set_filename (new_limage, filename);
+	gl_label_image_set_filename (new_limage, filename, FALSE);
 	gl_text_node_free (&filename);
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -197,7 +213,8 @@ copy (glLabelObject *dst_object,
 static void
 set_size (glLabelObject *object,
 	  gdouble        w,
-	  gdouble        h)
+	  gdouble        h,
+          gboolean       checkpoint)
 {
 	g_return_if_fail (object && GL_IS_LABEL_OBJECT (object));
 
@@ -211,7 +228,7 @@ set_size (glLabelObject *object,
                 h = MIN_IMAGE_SIZE;
         }
 
-	GL_LABEL_OBJECT_CLASS (gl_label_image_parent_class)->set_size (object, w, h);
+	GL_LABEL_OBJECT_CLASS (gl_label_image_parent_class)->set_size (object, w, h, checkpoint);
 }
 
 
@@ -220,9 +237,11 @@ set_size (glLabelObject *object,
 /*****************************************************************************/
 void
 gl_label_image_set_filename (glLabelImage *limage,
-			     glTextNode   *filename)
+			     glTextNode   *filename,
+                             gboolean      checkpoint)
 {
 	glTextNode  *old_filename;
+        glLabel     *label;
 	GHashTable  *pixbuf_cache;
 	GdkPixbuf   *pixbuf;
 	gdouble      image_w, image_h, aspect_ratio, w, h;
@@ -239,7 +258,14 @@ gl_label_image_set_filename (glLabelImage *limage,
 		return;
 	}
 
-	pixbuf_cache = gl_label_get_pixbuf_cache (GL_LABEL_OBJECT(limage)->parent);
+        label = gl_label_object_get_parent (GL_LABEL_OBJECT (limage));
+
+        if ( checkpoint )
+        {
+                gl_label_checkpoint (label, _("Set image"));
+        }
+
+	pixbuf_cache = gl_label_get_pixbuf_cache (label);
 
 	/* Remove reference to previous pixbuf from cache, if needed. */
 	if ( !old_filename->field_flag && (old_filename->data != NULL) ) {
@@ -277,7 +303,7 @@ gl_label_image_set_filename (glLabelImage *limage,
 	} else {
 		w = h / aspect_ratio;
 	}
-	gl_label_object_set_size (GL_LABEL_OBJECT(limage), w, h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(limage), w, h, FALSE);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
 
@@ -287,9 +313,11 @@ gl_label_image_set_filename (glLabelImage *limage,
 
 void
 gl_label_image_set_pixbuf (glLabelImage  *limage,
-                           GdkPixbuf     *pixbuf)
+                           GdkPixbuf     *pixbuf,
+                           gboolean       checkpoint)
 {
 	glTextNode  *old_filename;
+        glLabel     *label;
 	GHashTable  *pixbuf_cache;
         gchar       *name;
 	gdouble      image_w, image_h;
@@ -301,7 +329,14 @@ gl_label_image_set_pixbuf (glLabelImage  *limage,
 
 	old_filename = limage->priv->filename;
 
-	pixbuf_cache = gl_label_get_pixbuf_cache (GL_LABEL_OBJECT(limage)->parent);
+        label = gl_label_object_get_parent (GL_LABEL_OBJECT (limage));
+
+        if ( checkpoint )
+        {
+                gl_label_checkpoint (label, _("Set image"));
+        }
+
+	pixbuf_cache = gl_label_get_pixbuf_cache (label);
 
 	/* Remove reference to previous pixbuf from cache, if needed. */
 	if ( !old_filename->field_flag && (old_filename->data != NULL) ) {
@@ -322,7 +357,7 @@ gl_label_image_set_pixbuf (glLabelImage  *limage,
 
 	image_w = gdk_pixbuf_get_width (limage->priv->pixbuf);
 	image_h = gdk_pixbuf_get_height (limage->priv->pixbuf);
-	gl_label_object_set_size (GL_LABEL_OBJECT(limage), image_w, image_h);
+	gl_label_object_set_size (GL_LABEL_OBJECT(limage), image_w, image_h, FALSE);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(limage));
 

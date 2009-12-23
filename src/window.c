@@ -105,6 +105,9 @@ static void     focus_widget_changed_cb(GtkWindow     *gtk_window,
 static void     set_copy_paste_sensitivity  (glWindow      *window,
                                              GtkWidget     *focus_widget);
 
+static void     label_changed_cb       (glLabel       *label,
+					glWindow      *window);
+
 
 /****************************************************************************/
 /* Boilerplate Object stuff.                                                */
@@ -442,6 +445,9 @@ gl_window_set_label (glWindow    *window,
         focus_widget = gtk_window_get_focus (GTK_WINDOW (window));
         set_copy_paste_sensitivity (window, focus_widget);
 
+	g_signal_connect (G_OBJECT(label), "changed",
+			  G_CALLBACK(label_changed_cb), window);
+
 	gl_debug (DEBUG_WINDOW, "END");
 }
 
@@ -670,6 +676,25 @@ modified_changed_cb (glLabel  *label,
 
 	gl_debug (DEBUG_WINDOW, "END");
 }
+
+
+/*---------------------------------------------------------------------------*/
+/** PRIVATE.  Label "changed" callback.                                      */
+/*---------------------------------------------------------------------------*/
+static void
+label_changed_cb (glLabel  *label,
+                  glWindow *window)
+{
+	gl_debug (DEBUG_WINDOW, "START");
+
+	g_return_if_fail (label && GL_IS_LABEL (label));
+	g_return_if_fail (window && GL_IS_WINDOW (window));
+
+	gl_ui_update_undo_redo_verbs (window->ui, label);
+
+	gl_debug (DEBUG_WINDOW, "END");
+}
+
 
 
 /*---------------------------------------------------------------------------*/

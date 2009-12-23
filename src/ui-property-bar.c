@@ -439,9 +439,9 @@ gl_ui_property_bar_set_label (glUIPropertyBar *this,
 
 	set_doc_items_sensitive (this, TRUE);
 
-	this->priv->label = GL_LABEL (g_object_ref (G_OBJECT (label)));
-
 	reset_to_default_properties (label, this);
+
+	this->priv->label = GL_LABEL (g_object_ref (G_OBJECT (label)));
 
 	g_signal_connect_swapped (G_OBJECT(label), "selection_changed",
 				  G_CALLBACK(selection_changed_cb), this);

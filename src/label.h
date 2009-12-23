@@ -107,13 +107,15 @@ void          gl_label_clear_modified          (glLabel       *label);
 gboolean      gl_label_is_modified             (glLabel       *label);
 
 
-void               gl_label_set_template       (glLabel            *label,
-						const lglTemplate  *template);
+void          gl_label_set_template            (glLabel            *label,
+						const lglTemplate  *template,
+                                                gboolean            checkpoint);
 
 const lglTemplate *gl_label_get_template       (glLabel            *label);
 
 void          gl_label_set_rotate_flag         (glLabel       *label,
-						gboolean       rotate_flag);
+						gboolean       rotate_flag,
+                                                gboolean       checkpoint);
 
 gboolean      gl_label_get_rotate_flag         (glLabel       *label);
 
@@ -123,7 +125,8 @@ void          gl_label_get_size                (glLabel       *label,
 
 
 void          gl_label_set_merge               (glLabel       *label,
-						glMerge       *merge);
+						glMerge       *merge,
+                                                gboolean       checkpoint);
 
 glMerge      *gl_label_get_merge               (glLabel       *label);
 
@@ -335,15 +338,20 @@ glLabelObject *gl_label_get_handle_at          (glLabel             *label,
                                                 glLabelObjectHandle *handle);
 
 
-
-
-
 /*
  * Undo/Redo methods
  */
-gboolean      gl_label_can_undo                (glLabel       *label);
+void          gl_label_checkpoint              (glLabel       *label,
+                                                const gchar   *description);
 
+gboolean      gl_label_can_undo                (glLabel       *label);
 gboolean      gl_label_can_redo                (glLabel       *label);
+
+gchar        *gl_label_get_undo_description    (glLabel       *label);
+gchar        *gl_label_get_redo_description    (glLabel       *label);
+
+void          gl_label_undo                    (glLabel       *label);
+void          gl_label_redo                    (glLabel       *label);
 
 
 G_END_DECLS

@@ -69,7 +69,8 @@ static void  get_size                       (glLabelObject       *object,
 					     gdouble             *h);
 
 static void  set_line_color                 (glLabelObject       *object,
-					     glColorNode         *line_color);
+					     glColorNode         *line_color,
+                                             gboolean             checkpoint);
 
 static glColorNode *get_line_color          (glLabelObject       *object);
 
@@ -138,7 +139,8 @@ gl_label_barcode_finalize (GObject *object)
 /* NEW label "barcode" object.                                               */
 /*****************************************************************************/
 GObject *
-gl_label_barcode_new (glLabel *label)
+gl_label_barcode_new (glLabel *label,
+                      gboolean checkpoint)
 {
 	glLabelBarcode      *lbc;
 	glColorNode         *line_color_node;
@@ -147,13 +149,19 @@ gl_label_barcode_new (glLabel *label)
 
         if (label != NULL)
         {
-                gl_label_object_set_parent (GL_LABEL_OBJECT(lbc), label);
+                if ( checkpoint )
+                {
+                        gl_label_checkpoint (label, _("Create barcode object"));
+                }
 
                 line_color_node = gl_color_node_new_default ();
 
                 line_color_node->color = gl_label_get_default_line_color(label);
 
                 lbc->priv->color_node = line_color_node;
+
+                gl_label_add_object (label, GL_LABEL_OBJECT (lbc));
+                gl_label_object_set_parent (GL_LABEL_OBJECT (lbc), label);
         }
 
 	return G_OBJECT (lbc);
@@ -185,9 +193,9 @@ copy (glLabelObject *dst_object,
 	gl_label_barcode_get_props (lbc, &id, &text_flag, &checksum_flag, &format_digits);
 	color_node = get_line_color (src_object);
 
-	gl_label_barcode_set_data (new_lbc, text_node);
-	gl_label_barcode_set_props (new_lbc, id, text_flag, checksum_flag, format_digits);
-	set_line_color (dst_object, color_node);
+	gl_label_barcode_set_data (new_lbc, text_node, FALSE);
+	gl_label_barcode_set_props (new_lbc, id, text_flag, checksum_flag, format_digits, FALSE);
+	set_line_color (dst_object, color_node, FALSE);
 
 	gl_color_node_free (&color_node);
 	gl_text_node_free (&text_node);
@@ -202,19 +210,27 @@ copy (glLabelObject *dst_object,
 /*****************************************************************************/
 void
 gl_label_barcode_set_data (glLabelBarcode *lbc,
-			   glTextNode     *text_node)
+			   glTextNode     *text_node,
+                           gboolean        checkpoint)
 {
+        glLabel *label;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-	if (!gl_text_node_equal (lbc->priv->text_node, text_node)) {
-
+	if (!gl_text_node_equal (lbc->priv->text_node, text_node))
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbc));
+                        gl_label_checkpoint (label, _("Barcode data"));
+                }
+                
 		gl_text_node_free (&lbc->priv->text_node);
 		lbc->priv->text_node = gl_text_node_dup (text_node);
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -226,8 +242,11 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 			    gchar          *id,
 			    gboolean        text_flag,
 			    gboolean        checksum_flag,
-			    guint           format_digits)
+			    guint           format_digits,
+                            gboolean        checkpoint)
 {
+        glLabel *label;
+
 	gl_debug (DEBUG_LABEL, "START");
 
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
@@ -236,7 +255,13 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 	     || (g_ascii_strcasecmp (lbc->priv->id, id) != 0)
 	     || (lbc->priv->text_flag != text_flag)
 	     || (lbc->priv->checksum_flag != checksum_flag)
-	     || (lbc->priv->format_digits != format_digits)) {
+	     || (lbc->priv->format_digits != format_digits))
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbc));
+                        gl_label_checkpoint (label, _("Barcode property"));
+                }
 
 		lbc->priv->id               = g_strdup (id);
 		lbc->priv->text_flag        = text_flag;
@@ -244,7 +269,6 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 		lbc->priv->format_digits    = format_digits;
 
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
-
 	}
 
 	gl_debug (DEBUG_LABEL, "END");
@@ -349,14 +373,22 @@ get_size (glLabelObject *object,
 /*---------------------------------------------------------------------------*/
 static void
 set_line_color (glLabelObject *object,
-		glColorNode   *line_color_node)
+		glColorNode   *line_color_node,
+                gboolean       checkpoint)
 {
 	glLabelBarcode *lbarcode = (glLabelBarcode *)object;
+        glLabel        *label;
 
 	g_return_if_fail (lbarcode && GL_IS_LABEL_BARCODE (lbarcode));
 
-	if ( !gl_color_node_equal(lbarcode->priv->color_node, line_color_node) ) {
-		
+	if ( !gl_color_node_equal(lbarcode->priv->color_node, line_color_node) )
+        {
+                if ( checkpoint )
+                {
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lbarcode));
+                        gl_label_checkpoint (label, _("Barcode data"));
+                }
+
 		gl_color_node_free (&(lbarcode->priv->color_node));
 		lbarcode->priv->color_node = gl_color_node_dup (line_color_node);
 		gl_label_object_emit_changed (GL_LABEL_OBJECT(lbarcode));

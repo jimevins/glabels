@@ -1621,7 +1621,7 @@ print_test_cb (glTemplateDesigner      *dialog)
 	label = gl_label_new ();
 
 	template = build_template (dialog);
-	gl_label_set_template (GL_LABEL(label), template);
+	gl_label_set_template (GL_LABEL(label), template, FALSE);
 
 	print_op = gl_print_op_dialog_new (GL_LABEL(label));
 	gl_print_op_force_outline (GL_PRINT_OP (print_op));

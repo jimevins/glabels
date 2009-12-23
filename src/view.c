@@ -1932,16 +1932,17 @@ resize_event (glView             *view,
                 g_print ("Invalid handle.\n");  /* Should not happen! */
 
         }
+
         if ( (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P1) &&
              (view->resize_handle != GL_LABEL_OBJECT_HANDLE_P2) )
         {
                 if ( view->resize_honor_aspect )
                 {
-                        gl_label_object_set_size_honor_aspect (view->resize_object, w, h);
+                        gl_label_object_set_size_honor_aspect (view->resize_object, w, h, TRUE);
                 }
                 else
                 {
-                        gl_label_object_set_size (view->resize_object, w, h);
+                        gl_label_object_set_size (view->resize_object, w, h, TRUE);
                 }
 
                 /*
@@ -1984,7 +1985,7 @@ resize_event (glView             *view,
         }
         else
         {
-                gl_label_object_set_size (view->resize_object, dx, dy);
+                gl_label_object_set_size (view->resize_object, dx, dy, TRUE);
         }
 
         /*
@@ -1993,7 +1994,7 @@ resize_event (glView             *view,
         cairo_user_to_device (cr, &x0, &y0);
         cairo_restore (cr);
         cairo_device_to_user (cr, &x0, &y0);
-        gl_label_object_set_position (view->resize_object, x0, y0);
+        gl_label_object_set_position (view->resize_object, x0, y0, FALSE);
 }
 
 

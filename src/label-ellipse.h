@@ -50,7 +50,8 @@ struct _glLabelEllipseClass {
 
 GType           gl_label_ellipse_get_type       (void) G_GNUC_CONST;
 
-GObject        *gl_label_ellipse_new            (glLabel        *label);
+GObject        *gl_label_ellipse_new            (glLabel        *label,
+                                                 gboolean        checkpoint);
 
 G_END_DECLS
 

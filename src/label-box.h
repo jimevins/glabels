@@ -50,7 +50,8 @@ struct _glLabelBoxClass {
 
 GType         gl_label_box_get_type       (void) G_GNUC_CONST;
 
-GObject      *gl_label_box_new            (glLabel    *label);
+GObject      *gl_label_box_new            (glLabel    *label,
+                                           gboolean    checkpoint);
 
 G_END_DECLS
 

@@ -67,6 +67,12 @@ void gl_ui_cmd_edit_undo                (GtkAction   *action,
 void gl_ui_cmd_edit_redo                (GtkAction   *action,
 					 glWindow    *window);
 
+void gl_ui_cmd_edit_undo                (GtkAction   *action,
+					 glWindow    *window);
+
+void gl_ui_cmd_edit_redo                (GtkAction   *action,
+					 glWindow    *window);
+
 void gl_ui_cmd_edit_cut                 (GtkAction   *action,
 					 glWindow    *window);
 

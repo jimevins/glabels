@@ -252,6 +252,42 @@ gl_ui_cmd_file_quit (GtkAction *action,
 
 
 /****************************************************************************/
+/** Edit/Undo command.                                                      */
+/****************************************************************************/
+void
+gl_ui_cmd_edit_undo (GtkAction *action,
+                     glWindow  *window)
+{
+        gl_debug (DEBUG_COMMANDS, "START");
+
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
+
+        gl_label_undo (GL_LABEL (GL_VIEW (window->view)->label));
+
+        gl_debug (DEBUG_COMMANDS, "END");
+}
+
+
+/****************************************************************************/
+/** Edit/Redo command.                                                      */
+/****************************************************************************/
+void
+gl_ui_cmd_edit_redo (GtkAction *action,
+                     glWindow  *window)
+{
+        gl_debug (DEBUG_COMMANDS, "START");
+
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
+
+        gl_label_redo (GL_LABEL (GL_VIEW (window->view)->label));
+
+        gl_debug (DEBUG_COMMANDS, "END");
+}
+
+
+/****************************************************************************/
 /** Edit/Cut command.                                                       */
 /****************************************************************************/
 void 
@@ -732,8 +768,8 @@ gl_ui_cmd_objects_raise (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_raise_selection_to_top (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_raise_selection_to_top (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -753,8 +789,8 @@ gl_ui_cmd_objects_lower (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_lower_selection_to_bottom (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_lower_selection_to_bottom (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -774,8 +810,8 @@ gl_ui_cmd_objects_rotate_left (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_rotate_selection_left (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_rotate_selection_left (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -795,8 +831,8 @@ gl_ui_cmd_objects_rotate_right (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_rotate_selection_right (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_rotate_selection_right (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -816,8 +852,8 @@ gl_ui_cmd_objects_flip_horiz (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_flip_selection_horiz (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_flip_selection_horiz (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -837,8 +873,8 @@ gl_ui_cmd_objects_flip_vert (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_flip_selection_vert (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_flip_selection_vert (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -858,8 +894,8 @@ gl_ui_cmd_objects_align_left (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_left (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_left (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -879,8 +915,8 @@ gl_ui_cmd_objects_align_right (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_right (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_right (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -900,8 +936,8 @@ gl_ui_cmd_objects_align_hcenter (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_hcenter (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_hcenter (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -921,8 +957,8 @@ gl_ui_cmd_objects_align_top (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_top (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_top (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -942,8 +978,8 @@ gl_ui_cmd_objects_align_bottom (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_bottom (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_bottom (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -963,8 +999,8 @@ gl_ui_cmd_objects_align_vcenter (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_align_selection_vcenter (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_align_selection_vcenter (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -984,8 +1020,8 @@ gl_ui_cmd_objects_center_horiz (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_center_selection_horiz (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_center_selection_horiz (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
@@ -1005,8 +1041,8 @@ gl_ui_cmd_objects_center_vert (GtkAction *action,
         g_return_if_fail (action && GTK_IS_ACTION(action));
         g_return_if_fail (window && GL_IS_WINDOW(window));
 
-        if (window->view != NULL) {
-                gl_label_center_selection_vert (GL_VIEW(window->view)->label);
+        if (window->label != NULL) {
+                gl_label_center_selection_vert (window->label);
         }
 
         gl_debug (DEBUG_COMMANDS, "END");
