@@ -548,6 +548,11 @@ realize_cb (glView  *view)
 
 	gl_debug (DEBUG_VIEW, "START");
 
+	if (view->zoom_to_fit_flag) {
+		/* Maintain best fit zoom */
+		gl_view_zoom_to_fit (view);
+	}
+
 	gl_debug (DEBUG_VIEW, "END");
 }
 
@@ -1170,7 +1175,8 @@ gl_view_zoom_to_fit (glView *view)
 	gl_debug (DEBUG_VIEW, "");
 
 	if ( ! gtk_widget_get_window (GTK_WIDGET (view)) ) {
-		set_zoom_real (view, 1.0, TRUE);
+                /* Delay until realized. */
+                view->zoom_to_fit_flag = TRUE;
 		return;
 	}
 
