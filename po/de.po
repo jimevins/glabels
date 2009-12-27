@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-03 19:02+0100\n"
-"PO-Revision-Date: 2009-12-02 20:18+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2009-12-23 22:48+0000\n"
+"PO-Revision-Date: 2009-12-28 00:27+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -310,78 +310,76 @@ msgstr "Schwerwiegender Fehler in gLabels!"
 msgid "New Label or Card"
 msgstr "Neues Etikett oder neue Karte"
 
-#: ../src/file.c:190
+#: ../src/file.c:190 ../src/label.c:583 ../src/label.c:627
 msgid "Label properties"
 msgstr "Etiketten-Eigenschaften"
 
-#: ../src/file.c:295 ../src/file.c:585
+#: ../src/file.c:296 ../src/file.c:586
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../src/file.c:300 ../src/file.c:590
+#: ../src/file.c:301 ../src/file.c:591
 msgid "gLabels documents"
 msgstr "gLabels-Dokumente"
 
-#: ../src/file.c:347 ../src/file.c:648
+#: ../src/file.c:348 ../src/file.c:649
 msgid "Empty file name selection"
 msgstr "Auswahl des Dateinamens ist leer"
 
-#: ../src/file.c:350 ../src/file.c:366
+#: ../src/file.c:351 ../src/file.c:367
 msgid "Please select a file or supply a valid file name"
-msgstr ""
-"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:363
+#: ../src/file.c:364
 msgid "File does not exist"
 msgstr "Datei existiert nicht"
 
-#: ../src/file.c:438
+#: ../src/file.c:439
 #, c-format
 msgid "Could not open file \"%s\""
 msgstr "Datei »%s« konnte nicht geöffnet werden"
 
-#: ../src/file.c:441
+#: ../src/file.c:442
 msgid "Not a supported file format"
 msgstr "Kein unterstütztes Dateiformat"
 
-#: ../src/file.c:519 ../src/file.c:698
+#: ../src/file.c:520 ../src/file.c:699
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Datei »%s« konnte nicht gespeichert werden"
 
-#: ../src/file.c:523 ../src/file.c:702
+#: ../src/file.c:524 ../src/file.c:703
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Fehler während des Speicherns. Datei wurde noch nicht gespeichert."
 
-#: ../src/file.c:563
+#: ../src/file.c:564
 #, c-format
 msgid "Save \"%s\" as"
 msgstr "»%s« speichern unter"
 
-#: ../src/file.c:651
+#: ../src/file.c:652
 msgid "Please supply a valid file name"
 msgstr "Bitte geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:672
+#: ../src/file.c:673
 #, c-format
 msgid "Overwrite file \"%s\"?"
 msgstr "Datei »%s« überschreiben?"
 
-#: ../src/file.c:676
+#: ../src/file.c:677
 msgid "File already exists."
 msgstr "Datei existiert bereits."
 
-#: ../src/file.c:772
+#: ../src/file.c:773
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
-#: ../src/file.c:776
+#: ../src/file.c:777
 msgid "Your changes will be lost if you don't save them."
-msgstr ""
-"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
-#: ../src/file.c:779
+#: ../src/file.c:780
 msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
@@ -432,66 +430,66 @@ msgstr "0123456789 .:,;(*!?)"
 msgid "Sample text"
 msgstr "Beispieltext"
 
-#: ../src/glabels-batch.c:51
+#: ../src/glabels-batch.c:52
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "Ausgabe-Dateiname festlegen (Vorgabe: »output.pdf«)"
 
-#: ../src/glabels-batch.c:51 ../src/glabels-batch.c:65
+#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
 msgid "filename"
 msgstr "Dateiname"
 
-#: ../src/glabels-batch.c:53
+#: ../src/glabels-batch.c:54
 msgid "number of sheets (default=1)"
 msgstr "Anzahl der Blätter (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:53
+#: ../src/glabels-batch.c:54
 msgid "sheets"
 msgstr "Blätter"
 
-#: ../src/glabels-batch.c:55
+#: ../src/glabels-batch.c:56
 msgid "number of copies (default=1)"
 msgstr "Anzahl der Kopien (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:55
+#: ../src/glabels-batch.c:56
 msgid "copies"
 msgstr "Kopien"
 
-#: ../src/glabels-batch.c:57
+#: ../src/glabels-batch.c:58
 msgid "first label on first sheet (default=1)"
 msgstr "Erstes Etikett auf dem ersten Blatt (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:57
+#: ../src/glabels-batch.c:58
 msgid "first"
 msgstr "Erste"
 
-#: ../src/glabels-batch.c:59
+#: ../src/glabels-batch.c:60
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "Begrenzungen drucken (um Druckausrichtung zu testen)"
 
-#: ../src/glabels-batch.c:61
+#: ../src/glabels-batch.c:62
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "Spiegelbildlich drucken"
 
-#: ../src/glabels-batch.c:63
+#: ../src/glabels-batch.c:64
 #: ../data/builder/print-op-dialog-custom-widget.builder.h:11
 msgid "print crop marks"
 msgstr "Schnittmarken drucken"
 
-#: ../src/glabels-batch.c:65
+#: ../src/glabels-batch.c:66
 msgid "input file for merging"
 msgstr "Eingabedatei zum Mischen"
 
-#: ../src/glabels-batch.c:67 ../src/glabels.c:64
+#: ../src/glabels-batch.c:68 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[DATEI...]"
 
-#: ../src/glabels-batch.c:97
+#: ../src/glabels-batch.c:98
 msgid "Print files created with gLabels."
 msgstr "Mit gLabels erstellte Dateien drucken."
 
-#: ../src/glabels-batch.c:105 ../src/glabels.c:89
+#: ../src/glabels-batch.c:106 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -501,13 +499,13 @@ msgstr ""
 "Rufen Sie %s --help« auf, um eine vollständige Liste der verfügbaren "
 "Befehlszeilenoptionen zu sehen.\n"
 
-#: ../src/glabels-batch.c:147
+#: ../src/glabels-batch.c:149
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr ""
 "Dokumentverarbeitung kann mit gLabels-Datei %s nicht ausgeführt werden\n"
 
-#: ../src/glabels-batch.c:182
+#: ../src/glabels-batch.c:184
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
@@ -516,17 +514,249 @@ msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
 msgid "Launch gLabels label and business card designer."
 msgstr "gLabels Etiketten- und Visitenkarten-Designer ausführen."
 
-#: ../src/label-barcode.c:450
+#: ../src/label-barcode.c:154 ../src/ui.c:319
+msgid "Create barcode object"
+msgstr "Strichcodeobjekt erzeugen"
+
+#: ../src/label-barcode.c:227 ../src/label-barcode.c:389
+#| msgid "Barcode data empty"
+msgid "Barcode data"
+msgstr "Strichcode-Daten"
+
+#: ../src/label-barcode.c:263
+#| msgid "Barcode object properties"
+msgid "Barcode property"
+msgstr "Strichcode-Eigenschaft"
+
+#: ../src/label-barcode.c:482
 msgid "Barcode data empty"
 msgstr "Strichcode-Daten sind leer"
 
-#: ../src/label-barcode.c:454
+#: ../src/label-barcode.c:486
 msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
-#: ../src/label.c:327
+#: ../src/label-box.c:156
+#| msgid "Create text object"
+msgid "Create box object"
+msgstr "Rahmenobjekt erzeugen"
+
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
+#: ../data/builder/property-bar.builder.h:3
+msgid "Fill color"
+msgstr "Füllfarbe"
+
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../src/stock.c:94 ../data/builder/property-bar.builder.h:8
+msgid "Line color"
+msgstr "Linienfarbe"
+
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/builder/property-bar.builder.h:9
+msgid "Line width"
+msgstr "Linienbreite"
+
+#: ../src/label.c:398
 msgid "Untitled"
 msgstr "Unbenannt"
+
+#: ../src/label.c:701 ../src/ui.c:422
+msgid "Merge properties"
+msgstr "Mischeinstellungen"
+
+#: ../src/label.c:1183 ../src/ui.c:215
+msgid "Delete"
+msgstr "Löschen"
+
+#: ../src/label.c:1216 ../src/ui.c:324
+msgid "Bring to front"
+msgstr "Ganz nach vorn"
+
+#: ../src/label.c:1252 ../src/ui.c:331
+msgid "Send to back"
+msgstr "Ganz nach hinten"
+
+#: ../src/label.c:1293
+#| msgid "Rotated"
+msgid "Rotate"
+msgstr "Drehen"
+
+#: ../src/label.c:1328 ../src/ui.c:338
+msgid "Rotate left"
+msgstr "Links drehen"
+
+#: ../src/label.c:1361 ../src/ui.c:345
+msgid "Rotate right"
+msgstr "Rechts drehen"
+
+#: ../src/label.c:1396 ../src/ui.c:352
+msgid "Flip horizontally"
+msgstr "Horizontal spiegeln"
+
+#: ../src/label.c:1431 ../src/ui.c:359
+msgid "Flip vertically"
+msgstr "Vertikal spiegeln"
+
+#: ../src/label.c:1471 ../src/ui.c:366
+msgid "Align left"
+msgstr "Linksbündig"
+
+#: ../src/label.c:1528 ../src/ui.c:373
+msgid "Align right"
+msgstr "Rechtsbündig"
+
+#: ../src/label.c:1589 ../src/ui.c:380
+msgid "Align horizontal center"
+msgstr "Horizontal mittig anordnen"
+
+#: ../src/label.c:1665 ../src/ui.c:387
+msgid "Align tops"
+msgstr "Oben bündig"
+
+#: ../src/label.c:1722 ../src/ui.c:394
+msgid "Align bottoms"
+msgstr "Unten bündig"
+
+#: ../src/label.c:1783 ../src/ui.c:401
+msgid "Align vertical center"
+msgstr "Vertikal mittig anordnen"
+
+#: ../src/label.c:1861 ../src/ui.c:408
+msgid "Center horizontally"
+msgstr "Horizontal zentrieren"
+
+#: ../src/label.c:1908 ../src/ui.c:415
+msgid "Center vertically"
+msgstr "Vertikal zentrieren"
+
+#: ../src/label.c:2594 ../src/label.c:2636 ../src/label.c:2662 ../src/ui.c:208
+msgid "Paste"
+msgstr "Einfügen"
+
+#: ../src/label-ellipse.c:160
+#| msgid "Create line object"
+msgid "Create ellipse object"
+msgstr "Ellipsenobjekt erzeugen"
+
+#: ../src/label-image.c:161 ../src/ui.c:312
+msgid "Create image object"
+msgstr "Bildobjekt erzeugen"
+
+#: ../src/label-image.c:265 ../src/label-image.c:336
+#| msgid "Reset image size"
+msgid "Set image"
+msgstr "Bild festlegen"
+
+#: ../src/label-line.c:147 ../src/ui.c:298
+msgid "Create line object"
+msgstr "Linienobjekt erzeugen"
+
+#: ../src/label-object.c:383 ../src/label-object.c:416
+msgid "Move"
+msgstr "Verschieben"
+
+#: ../src/label-object.c:467
+#| msgid "Page size:"
+msgid "Resize"
+msgstr "Größe ändern"
+
+#: ../src/label-object.c:1185
+#| msgid "Shadow"
+msgid "Shadow state"
+msgstr "Schattierung"
+
+#: ../src/label-object.c:1228
+#| msgid "Shadow"
+msgid "Shadow offset"
+msgstr "Schattierungsfarbe"
+
+#: ../src/label-object.c:1276
+#| msgid "Shadow"
+msgid "Shadow color"
+msgstr "Schattierungsversatz"
+
+#: ../src/label-object.c:1319
+#| msgid "Shadow"
+msgid "Shadow opacity"
+msgstr "Schattierungstransparenz"
+
+#: ../src/label-text.c:266 ../src/ui.c:284
+msgid "Create text object"
+msgstr "Textobjekt erzeugen"
+
+#: ../src/label-text.c:438
+msgid "Typing"
+msgstr ""
+
+#: ../src/label-text.c:573 ../data/builder/property-bar.builder.h:4
+msgid "Font family"
+msgstr "Schriftfamilie"
+
+#: ../src/label-text.c:611 ../data/builder/property-bar.builder.h:5
+msgid "Font size"
+msgstr "Schriftgröße"
+
+#: ../src/label-text.c:644
+#| msgid "Rotate right"
+msgid "Font weight"
+msgstr "Schriftstärke"
+
+#: ../src/label-text.c:677 ../data/builder/property-bar.builder.h:6
+msgid "Italic"
+msgstr "Kursiv"
+
+#: ../src/label-text.c:710
+#| msgid "Align left"
+msgid "Align text"
+msgstr "Text anordnen"
+
+#: ../src/label-text.c:743
+#| msgid "Line Spacing:"
+msgid "Line spacing"
+msgstr "Linienabstand"
+
+#: ../src/label-text.c:776 ../data/builder/property-bar.builder.h:11
+msgid "Text color"
+msgstr "Textfarbe"
+
+#: ../src/label-text.c:920
+msgid "Auto shrink"
+msgstr "Automatisch schrumpfen"
+
+#: ../src/media-select.c:307 ../src/media-select.c:311
+#: ../src/media-select.c:316 ../src/media-select.c:325
+#: ../src/media-select.c:328 ../src/media-select.c:422
+#: ../src/media-select.c:635 ../src/media-select.c:644
+msgid "Any"
+msgstr "Beliebig"
+
+#: ../src/media-select.c:670
+#, c-format
+msgid "%d per sheet"
+msgstr "%d pro Seite"
+
+#: ../src/media-select.c:719 ../src/media-select.c:725
+#: ../src/media-select.c:735 ../src/media-select.c:741
+msgid "diameter"
+msgstr "Durchmesser"
+
+#: ../src/media-select.c:822
+msgid "No recent templates found."
+msgstr "Keine zuletzt benutzten Vorlagen gefunden."
+
+#: ../src/media-select.c:824
+msgid "Try selecting a template from the \"Search all templates\" page."
+msgstr ""
+"Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
+
+#: ../src/media-select.c:909
+msgid "No match."
+msgstr "Keine Treffer."
+
+#: ../src/media-select.c:911
+msgid "Try selecting a different brand, page size or category."
+msgstr ""
+"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
 #: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
 msgid "None"
@@ -562,8 +792,7 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr ""
-"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -618,37 +847,37 @@ msgstr "<b>Medientyp</b>"
 msgid "<b>Label orientation</b>"
 msgstr "<b>Ausrichtung des Etiketts</b>"
 
-#: ../src/object-editor-bc-page.c:91 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:159 ../src/object-editor.c:444
+#: ../src/object-editor.c:159 ../src/object-editor.c:460
 msgid "Object properties"
 msgstr "Objekteigenschaften"
 
-#: ../src/object-editor.c:306
+#: ../src/object-editor.c:309
 msgid "Box object properties"
 msgstr "Eigenschaften des Rechteck-Objekts"
 
-#: ../src/object-editor.c:325
+#: ../src/object-editor.c:328
 msgid "Ellipse object properties"
 msgstr "Eigenschaften des Ellipsen-Objekts"
 
-#: ../src/object-editor.c:344
+#: ../src/object-editor.c:347
 msgid "Line object properties"
 msgstr "Eigenschaften des Linien-Objekts"
 
-#: ../src/object-editor.c:361
+#: ../src/object-editor.c:364
 msgid "Image object properties"
 msgstr "Eigenschaften des Bild-Objekts"
 
-#: ../src/object-editor.c:378
+#: ../src/object-editor.c:381
 msgid "Text object properties"
 msgstr "Eigenschaften des Text-Objekts"
 
-#: ../src/object-editor.c:400
+#: ../src/object-editor.c:403
 msgid "Barcode object properties"
 msgstr "Eigenschaften des Strichcode-Objekts"
 
@@ -661,15 +890,15 @@ msgstr "Datenfeld einfügen"
 msgid "No Fill"
 msgstr "Keine Füllung"
 
-#: ../src/object-editor-image-page.c:274
+#: ../src/object-editor-image-page.c:278
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../src/object-editor-image-page.c:279
+#: ../src/object-editor-image-page.c:283
 msgid "All Images"
 msgstr "Alle Bilder"
 
-#: ../src/object-editor-image-page.c:294
+#: ../src/object-editor-image-page.c:298
 #, c-format
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
@@ -786,14 +1015,6 @@ msgstr "Mitte"
 msgid "Label Ce_nter"
 msgstr "Etikett ze_ntrieren"
 
-#: ../src/stock.c:93 ../data/builder/property-bar.builder.h:3
-msgid "Fill color"
-msgstr "Füllfarbe"
-
-#: ../src/stock.c:94 ../data/builder/property-bar.builder.h:8
-msgid "Line color"
-msgstr "Linienfarbe"
-
 #: ../src/stock.c:95 ../src/stock.c:97
 msgid "Linked"
 msgstr "Verknüpft"
@@ -855,492 +1076,415 @@ msgstr ""
 "Vorlage gefunden!</span>"
 
 #. Menu entries.
-#: ../src/ui.c:88
+#: ../src/ui.c:93
 msgid "_File"
 msgstr "_Datei"
 
-#: ../src/ui.c:89
+#: ../src/ui.c:94
 msgid "Open Recent _Files"
 msgstr "_Zuletzt geöffnete Dateien"
 
-#: ../src/ui.c:90
+#: ../src/ui.c:95
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../src/ui.c:91
+#: ../src/ui.c:96
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../src/ui.c:92
+#: ../src/ui.c:97
 msgid "Customize Main Toolbar"
 msgstr "Werkzeugleiste anpassen"
 
-#: ../src/ui.c:93
+#: ../src/ui.c:98
 msgid "Customize Drawing Toolbar"
 msgstr "Zeichenwerkzeugleiste anpassen"
 
-#: ../src/ui.c:94
+#: ../src/ui.c:99
 msgid "Customize Properties Toolbar"
 msgstr "Eigenschaften-Werkzeugleiste anpassen"
 
-#: ../src/ui.c:95
+#: ../src/ui.c:100
 msgid "_Objects"
 msgstr "_Objekte"
 
-#: ../src/ui.c:96
+#: ../src/ui.c:101
 msgid "_Create"
 msgstr "_Erzeugen"
 
-#: ../src/ui.c:97
+#: ../src/ui.c:102
 msgid "_Order"
 msgstr "_Anordnung"
 
-#: ../src/ui.c:98
+#: ../src/ui.c:103
 msgid "_Rotate/Flip"
 msgstr "D_rehen/Spiegeln"
 
-#: ../src/ui.c:99
+#: ../src/ui.c:104
 msgid "Align _Horizontal"
 msgstr "_Horizontal"
 
-#: ../src/ui.c:100
+#: ../src/ui.c:105
 msgid "Align _Vertical"
 msgstr "_Vertikal"
 
-#: ../src/ui.c:101
+#: ../src/ui.c:106
 msgid "_Help"
 msgstr "_Hilfe"
 
 #. Popup entries.
-#: ../src/ui.c:104 ../src/ui.c:105
+#: ../src/ui.c:109 ../src/ui.c:110
 msgid "Context Menu"
 msgstr "Kontextmenü"
 
-#: ../src/ui.c:110
+#: ../src/ui.c:115
 msgid "_New"
 msgstr "_Neu"
 
-#: ../src/ui.c:112
+#: ../src/ui.c:117
 msgid "Create a new file"
 msgstr "Eine neue Datei erstellen"
 
-#: ../src/ui.c:117
+#: ../src/ui.c:122
 msgid "_Open..."
 msgstr "Ö_ffnen …"
 
-#: ../src/ui.c:119
+#: ../src/ui.c:124
 msgid "Open a file"
 msgstr "Eine Datei öffnen"
 
-#: ../src/ui.c:124
+#: ../src/ui.c:129
 msgid "_Save"
 msgstr "_Speichern"
 
-#: ../src/ui.c:126
+#: ../src/ui.c:131
 msgid "Save current file"
 msgstr "Die aktuelle Datei speichern"
 
-#: ../src/ui.c:131
+#: ../src/ui.c:136
 msgid "Save _As..."
 msgstr "Speichern _unter …"
 
-#: ../src/ui.c:133
+#: ../src/ui.c:138
 msgid "Save the current file to a different name"
 msgstr "Die aktuelle Datei unter einem anderen Dateinamen speichern"
 
-#: ../src/ui.c:138
+#: ../src/ui.c:143
 msgid "_Print..."
 msgstr "_Drucken …"
 
-#: ../src/ui.c:140
+#: ../src/ui.c:145
 msgid "Print the current file"
 msgstr "Die aktuelle Datei drucken"
 
-#: ../src/ui.c:145
+#: ../src/ui.c:150
 msgid "Properties..."
 msgstr "Einstellungen …"
 
-#: ../src/ui.c:147
+#: ../src/ui.c:152
 msgid "Modify document properties"
 msgstr "Dokumenteigenschaften ändern"
 
-#: ../src/ui.c:152
+#: ../src/ui.c:157
 msgid "Template _Designer..."
 msgstr "Vorlagen-_Designer …"
 
-#: ../src/ui.c:154
+#: ../src/ui.c:159
 msgid "Create a custom template"
 msgstr "Eine neue benutzerdefinierte Vorlage erstellen"
 
-#: ../src/ui.c:159
+#: ../src/ui.c:164
 msgid "_Close"
 msgstr "S_chließen"
 
-#: ../src/ui.c:161
+#: ../src/ui.c:166
 msgid "Close the current file"
 msgstr "Die aktuelle Datei schließen"
 
-#: ../src/ui.c:166
+#: ../src/ui.c:171
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: ../src/ui.c:168
+#: ../src/ui.c:173
 msgid "Quit the program"
 msgstr "Das Programm beenden"
 
-#: ../src/ui.c:175
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
+#| msgid "Red"
+msgid "Redo"
+msgstr "Wiederholen"
+
+#: ../src/ui.c:194
 msgid "Cut"
 msgstr "Ausschneiden"
 
-#: ../src/ui.c:177
+#: ../src/ui.c:196
 msgid "Cut the selection"
 msgstr "Die Markierung ausschneiden"
 
-#: ../src/ui.c:182
+#: ../src/ui.c:201
 msgid "Copy"
 msgstr "Kopieren"
 
-#: ../src/ui.c:184
+#: ../src/ui.c:203
 msgid "Copy the selection"
 msgstr "Die Markierung kopieren"
 
-#: ../src/ui.c:189
-msgid "Paste"
-msgstr "Einfügen"
-
-#: ../src/ui.c:191
+#: ../src/ui.c:210
 msgid "Paste the clipboard"
 msgstr "Inhalt der Zwischenablage einfügen"
 
-#: ../src/ui.c:196
-msgid "Delete"
-msgstr "Löschen"
-
-#: ../src/ui.c:198
+#: ../src/ui.c:217
 msgid "Delete the selected objects"
 msgstr "Die markierten Objekte löschen"
 
-#: ../src/ui.c:203
+#: ../src/ui.c:222
 msgid "Select All"
 msgstr "Alles markieren"
 
-#: ../src/ui.c:205
+#: ../src/ui.c:224
 msgid "Select all objects"
 msgstr "Alle Objekte markieren"
 
-#: ../src/ui.c:210
+#: ../src/ui.c:229
 msgid "Un-select All"
 msgstr "Alle Markierungen löschen"
 
-#: ../src/ui.c:212
+#: ../src/ui.c:231
 msgid "Remove all selections"
 msgstr "Alle Auswahlen aufheben"
 
-#: ../src/ui.c:217
+#: ../src/ui.c:236
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/ui.c:219
+#: ../src/ui.c:238
 msgid "Configure the application"
 msgstr "Die Anwendung konfigurieren"
 
-#: ../src/ui.c:226
+#: ../src/ui.c:245
 msgid "Zoom in"
 msgstr "Vergrößern"
 
-#: ../src/ui.c:228
+#: ../src/ui.c:247
 msgid "Increase magnification"
 msgstr "Vergrößern"
 
-#: ../src/ui.c:233
+#: ../src/ui.c:252
 msgid "Zoom out"
 msgstr "Verkleinern"
 
-#: ../src/ui.c:235
+#: ../src/ui.c:254
 msgid "Decrease magnification"
 msgstr "Verkleinern"
 
-#: ../src/ui.c:240
+#: ../src/ui.c:259
 msgid "Zoom 1 to 1"
 msgstr "Vergrößerung 1:1"
 
-#: ../src/ui.c:242
+#: ../src/ui.c:261
 msgid "Restore scale to 100%"
 msgstr "Maßstab auf 100% wiederherstellen"
 
-#: ../src/ui.c:247
+#: ../src/ui.c:266
 msgid "Zoom to fit"
 msgstr "Einpassen"
 
-#: ../src/ui.c:249
+#: ../src/ui.c:268
 msgid "Set scale to fit window"
 msgstr "In Fenster einpassen"
 
-#: ../src/ui.c:256
+#: ../src/ui.c:275
 msgid "Select Mode"
 msgstr "Modus auswählen"
 
-#: ../src/ui.c:258
+#: ../src/ui.c:277
 msgid "Select, move and modify objects"
 msgstr "Objekte auswählen, bewegen, ändern"
 
-#: ../src/ui.c:263 ../src/view-text.c:102
+#: ../src/ui.c:282 ../src/view-text.c:102
 #: ../data/builder/object-editor.builder.h:30
 msgid "Text"
 msgstr "Text"
 
-#: ../src/ui.c:265
-msgid "Create text object"
-msgstr "Textobjekt erzeugen"
-
-#: ../src/ui.c:270
+#: ../src/ui.c:289
 msgid "Box"
 msgstr "Rechteck"
 
-#: ../src/ui.c:272
+#: ../src/ui.c:291
 msgid "Create box/rectangle object"
 msgstr "Rechteck-Objekt erzeugen"
 
-#: ../src/ui.c:277 ../data/builder/object-editor.builder.h:19
+#: ../src/ui.c:296 ../data/builder/object-editor.builder.h:19
 msgid "Line"
 msgstr "Linie"
 
-#: ../src/ui.c:279
-msgid "Create line object"
-msgstr "Linienobjekt erzeugen"
-
-#: ../src/ui.c:284
+#: ../src/ui.c:303
 msgid "Ellipse"
 msgstr "Ellipse"
 
-#: ../src/ui.c:286
+#: ../src/ui.c:305
 msgid "Create ellipse/circle object"
 msgstr "Ellipsen- oder Kreisobjekt erzeugen"
 
-#: ../src/ui.c:291 ../data/builder/object-editor.builder.h:16
+#: ../src/ui.c:310 ../data/builder/object-editor.builder.h:16
 msgid "Image"
 msgstr "Bild"
 
-#: ../src/ui.c:293
-msgid "Create image object"
-msgstr "Bildobjekt erzeugen"
-
-#: ../src/ui.c:298
+#: ../src/ui.c:317
 msgid "Barcode"
 msgstr "Strichcode"
 
-#: ../src/ui.c:300
-msgid "Create barcode object"
-msgstr "Strichcodeobjekt erzeugen"
-
-#: ../src/ui.c:305
-msgid "Bring to front"
-msgstr "Ganz nach vorn"
-
-#: ../src/ui.c:307
+#: ../src/ui.c:326
 msgid "Raise object to top"
 msgstr "Objekt im Ebenenstapel nach oben verschieben"
 
-#: ../src/ui.c:312
-msgid "Send to back"
-msgstr "Ganz nach hinten"
-
-#: ../src/ui.c:314
+#: ../src/ui.c:333
 msgid "Lower object to bottom"
 msgstr "Objekt im Ebenenstapel nach unten verschieben"
 
-#: ../src/ui.c:319
-msgid "Rotate left"
-msgstr "Links drehen"
-
-#: ../src/ui.c:321
+#: ../src/ui.c:340
 msgid "Rotate object 90 degrees counter-clockwise"
 msgstr "Objekt um 90 Grad gegen den Uhrzeigersinn drehen"
 
-#: ../src/ui.c:326
-msgid "Rotate right"
-msgstr "Rechts drehen"
-
-#: ../src/ui.c:328
+#: ../src/ui.c:347
 msgid "Rotate object 90 degrees clockwise"
 msgstr "Objekt um 90 Grad im Uhrzeigersinn drehen"
 
-#: ../src/ui.c:333
-msgid "Flip horizontally"
-msgstr "Horizontal spiegeln"
-
-#: ../src/ui.c:335
+#: ../src/ui.c:354
 msgid "Flip object horizontally"
 msgstr "Objekt horizontal spiegeln"
 
-#: ../src/ui.c:340
-msgid "Flip vertically"
-msgstr "Vertikal spiegeln"
-
-#: ../src/ui.c:342
+#: ../src/ui.c:361
 msgid "Flip object vertically"
 msgstr "Objekt vertikal spiegeln"
 
-#: ../src/ui.c:347
-msgid "Align left"
-msgstr "Linksbündig"
-
-#: ../src/ui.c:349
+#: ../src/ui.c:368
 msgid "Align objects to left edges"
 msgstr "Objekte am linken Rand anordnen"
 
-#: ../src/ui.c:354
-msgid "Align right"
-msgstr "Rechtsbündig"
-
-#: ../src/ui.c:356
+#: ../src/ui.c:375
 msgid "Align objects to right edges"
 msgstr "Objekte am rechten Rand anordnen"
 
-#: ../src/ui.c:361
-msgid "Align horizontal center"
-msgstr "Horizontal mittig anordnen"
-
-#: ../src/ui.c:363
+#: ../src/ui.c:382
 msgid "Align objects to horizontal centers"
 msgstr "Objekte an der horizontalen Mitte anordnen"
 
-#: ../src/ui.c:368
-msgid "Align tops"
-msgstr "Oben bündig"
-
-#: ../src/ui.c:370
+#: ../src/ui.c:389
 msgid "Align objects to top edges"
 msgstr "Objekte am oberen Rand anordnen"
 
-#: ../src/ui.c:375
-msgid "Align bottoms"
-msgstr "Unten bündig"
-
-#: ../src/ui.c:377
+#: ../src/ui.c:396
 msgid "Align objects to bottom edges"
 msgstr "Objekte am unteren Rand anordnen"
 
-#: ../src/ui.c:382
-msgid "Align vertical center"
-msgstr "Vertikal mittig anordnen"
-
-#: ../src/ui.c:384
+#: ../src/ui.c:403
 msgid "Align objects to vertical centers"
 msgstr "Objekte an der vertikalen Mitte anordnen"
 
-#: ../src/ui.c:389
-msgid "Center horizontally"
-msgstr "Horizontal zentrieren"
-
-#: ../src/ui.c:391
+#: ../src/ui.c:410
 msgid "Center objects to horizontal label center"
 msgstr "Objekte zur horizontalen Mitte des Etiketts zentrieren"
 
-#: ../src/ui.c:396
-msgid "Center vertically"
-msgstr "Vertikal zentrieren"
-
-#: ../src/ui.c:398
+#: ../src/ui.c:417
 msgid "Center objects to vertical label center"
 msgstr "Objekte zur vertikalen Mitte des Etiketts zentrieren"
 
-#: ../src/ui.c:403
-msgid "Merge properties"
-msgstr "Mischeinstellungen"
-
-#: ../src/ui.c:405
+#: ../src/ui.c:424
 msgid "Edit merge properties"
 msgstr "Mischeinstellungen bearbeiten"
 
-#: ../src/ui.c:412
+#: ../src/ui.c:431
 msgid "Contents"
 msgstr "Inhalte"
 
-#: ../src/ui.c:414
+#: ../src/ui.c:433
 msgid "Open glabels manual"
 msgstr "Das gLabels-Handbuch öffnen"
 
-#: ../src/ui.c:419
+#: ../src/ui.c:438
 msgid "About..."
 msgstr "Info …"
 
-#: ../src/ui.c:421
+#: ../src/ui.c:440
 msgid "About glabels"
 msgstr "Info zu gLabels"
 
 # CHECK
-#: ../src/ui.c:431
+#: ../src/ui.c:450
 msgid "Property toolbar"
 msgstr "Eigenschaften-Werkzeugleiste"
 
-#: ../src/ui.c:433
+#: ../src/ui.c:452
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
-"ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
 
-#: ../src/ui.c:439
+#: ../src/ui.c:458
 msgid "Grid"
 msgstr "Raster"
 
-#: ../src/ui.c:441
+#: ../src/ui.c:460
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
-"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
-#: ../src/ui.c:447
+#: ../src/ui.c:466
 msgid "Markup"
 msgstr "Markierungen"
 
-#: ../src/ui.c:449
+#: ../src/ui.c:468
 msgid "Change the visibility of markup lines in the current window"
 msgstr "Die Sichtbarkeit von Markierungslinien im aktuellen Fenster ändern"
 
-#: ../src/ui.c:460
+#: ../src/ui.c:479
 msgid "Main toolbar"
 msgstr "Haupt-Werkzeugleiste"
 
-#: ../src/ui.c:462
+#: ../src/ui.c:481
 msgid "Change the visibility of the main toolbar in the current window"
 msgstr ""
 "Die Sichtbarkeit der Haupt-Werkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui.c:468
+#: ../src/ui.c:487
 msgid "Drawing toolbar"
 msgstr "Zeichenwerkzeugleiste"
 
-#: ../src/ui.c:470
+#: ../src/ui.c:489
 msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr ""
 "Die Sichtbarkeit der Zeichenwerkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui-commands.c:1125
+#: ../src/ui-commands.c:1134
 msgid "Glabels includes contributions from:"
 msgstr "Glabels entstand unter Mitwirkung von:"
 
-#: ../src/ui-commands.c:1131
+#: ../src/ui-commands.c:1140
 msgid "See the file AUTHORS for additional credits,"
 msgstr "Lesen die Datei AUTHORS für zusätzliche Danksagungen,"
 
-#: ../src/ui-commands.c:1132
+#: ../src/ui-commands.c:1141
 msgid "or visit http://glabels.org/"
 msgstr "oder besuchen Sie http://glabels.org/"
 
-#: ../src/ui-commands.c:1144
+#: ../src/ui-commands.c:1153
 msgid "A label and business card creation program.\n"
 msgstr "Eine Anwendung zum Erstellen von Etiketten und Visitenkarten.\n"
 
-#: ../src/ui-commands.c:1148
+#: ../src/ui-commands.c:1157
 msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
 "Christian Neumair <christian-neumair@web.de>\n"
 "Mario Blättermann <mariobl@gnome.org>"
 
-#: ../src/ui-commands.c:1151
+#: ../src/ui-commands.c:1160
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1360,7 +1504,7 @@ msgstr ""
 "Dieses Programm wird verteilt in der Hoffnung, dass es nützlich ist, aber\n"
 "OHNE JEDE GARANTIE; Weitere Details in der GNU General Public License.\n"
 
-#: ../src/ui-commands.c:1178
+#: ../src/ui-commands.c:1187
 msgid "glabels"
 msgstr "glabels"
 
@@ -1368,46 +1512,11 @@ msgstr "glabels"
 msgid "gLabels Error!"
 msgstr "gLabels-Fehler!"
 
-#: ../src/wdgt-media-select.c:295 ../src/wdgt-media-select.c:299
-#: ../src/wdgt-media-select.c:304 ../src/wdgt-media-select.c:313
-#: ../src/wdgt-media-select.c:316 ../src/wdgt-media-select.c:411
-#: ../src/wdgt-media-select.c:624 ../src/wdgt-media-select.c:633
-msgid "Any"
-msgstr "Beliebig"
-
-#: ../src/wdgt-media-select.c:659
-#, c-format
-msgid "%d per sheet"
-msgstr "%d pro Seite"
-
-#: ../src/wdgt-media-select.c:708 ../src/wdgt-media-select.c:714
-#: ../src/wdgt-media-select.c:724 ../src/wdgt-media-select.c:730
-msgid "diameter"
-msgstr "Durchmesser"
-
-#: ../src/wdgt-media-select.c:803
-msgid "No recent templates found."
-msgstr "Keine zuletzt benutzten Vorlagen gefunden."
-
-#: ../src/wdgt-media-select.c:804
-msgid "Try selecting a template from the \"Search all templates\" page."
-msgstr ""
-"Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
-
-#: ../src/wdgt-media-select.c:884
-msgid "No match."
-msgstr "Keine Treffer."
-
-#: ../src/wdgt-media-select.c:885
-msgid "Try selecting a different brand, page size or category."
-msgstr ""
-"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
-
-#: ../src/window.c:282
+#: ../src/window.c:284
 msgid "(none) - gLabels"
 msgstr "(Unbenannt) - gLabels"
 
-#: ../src/window.c:480
+#: ../src/window.c:485
 msgid "(modified)"
 msgstr "(geändert)"
 
@@ -1452,25 +1561,25 @@ msgstr "Ungültiger Node im Dokument-Node = »%s«"
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1098 ../libglabels/xml-template.c:664
+#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:689
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
-#: ../src/xml-label.c:1105
+#: ../src/xml-label.c:1104
 msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der xml-Datei."
 
 #. Create and append an "Other" entry.
-#: ../libglabels/db.c:109
+#: ../libglabels/db.c:115
 msgid "Other"
 msgstr "Andere"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:122
+#: ../libglabels/db.c:128
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: ../libglabels/db.c:473
+#: ../libglabels/db.c:488
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1478,7 +1587,7 @@ msgstr ""
 "Die Definitionen der Papiergrößen konnten nicht gefunden werden. Libglabels "
 "ist möglicherweise nicht korrekt installiert!"
 
-#: ../libglabels/db.c:866
+#: ../libglabels/db.c:880
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1486,7 +1595,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:1450
+#: ../libglabels/db.c:1755
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1494,10 +1603,15 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1527
+#: ../libglabels/db.c:1822
 #, c-format
 msgid "Generic %s full page template"
 msgstr "Allgemeine Ganzseitenvorlage %s"
+
+#: ../libglabels/template.c:148
+#, c-format
+msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
+msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
 
 #. The ids are identical to the absolute length units supported in
 #. the CSS2 Specification (Section 4.3.2)
@@ -1529,30 +1643,34 @@ msgstr "cm"
 msgid "picas"
 msgstr "picas"
 
-#: ../libglabels/xml-template.c:221
+#: ../libglabels/xml-template.c:219
 msgid "Missing name or brand/part attributes."
 msgstr "Name oder Attribute für Marke/Nummer fehlen."
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: ../libglabels/xml-template.c:238
+#: ../libglabels/xml-template.c:240
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
 
-#: ../libglabels/xml-template.c:250
+#: ../libglabels/xml-template.c:252
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
 
-#: ../libglabels/xml-template.c:609
+#: ../libglabels/xml-template.c:271
+msgid "Forward references not supported."
+msgstr "Vorwärtsreferenzen werden nicht unterstützt."
+
+#: ../libglabels/xml-template.c:634
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Benötigte Attribute »brand« oder »part« fehlt, missbilligter Name wird "
 "versucht. "
 
-#: ../libglabels/xml-template.c:619
+#: ../libglabels/xml-template.c:644
 msgid "Name attribute also missing."
 msgstr "Name des Attributs fehlt ebenfalls."
 
@@ -1803,33 +1921,13 @@ msgstr "Fett"
 msgid "Center align"
 msgstr "Zentrieren"
 
-#: ../data/builder/property-bar.builder.h:4
-msgid "Font family"
-msgstr "Schriftfamilie"
-
-#: ../data/builder/property-bar.builder.h:5
-msgid "Font size"
-msgstr "Schriftgröße"
-
-#: ../data/builder/property-bar.builder.h:6
-msgid "Italic"
-msgstr "Kursiv"
-
 #: ../data/builder/property-bar.builder.h:7
 msgid "Left align"
 msgstr "Linksbündig"
 
-#: ../data/builder/property-bar.builder.h:9
-msgid "Line width"
-msgstr "Linienbreite"
-
 #: ../data/builder/property-bar.builder.h:10
 msgid "Right align"
 msgstr "Rechtsbündig"
-
-#: ../data/builder/property-bar.builder.h:11
-msgid "Text color"
-msgstr "Textfarbe"
 
 #: ../data/builder/template-designer.builder.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
@@ -2000,8 +2098,7 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/builder/template-designer.builder.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your "
-"template."
+"Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
