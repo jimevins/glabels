@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!--
+  maco-us-templates.xml
+  This file is a part of the glabels template database.
+ 
+  Copyright (c) 2001-2009 Jim Evins
+ 
+  Permission is hereby granted, free of charge, to any person
+  obtaining a copy of this software and associated documentation
+  files (the "Software"), to deal in the Software without
+  restriction, including without limitation the rights to use,
+  copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following
+  conditions:
+ 
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+ 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+  OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<Glabels-templates>
+
+
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+  <!--                                                                      -->
+  <!-- Maco US-Letter products                                              -->
+  <!--                                                                      -->
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+
+
+  <Template brand="Maco" part="LL5805" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="2.625in" height="1in" round="0.0625in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="10" x0="0.1875in" y0="0.5in" dx="2.75in" dy="1in"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <Template brand="Maco" part="ML-1225" size="US-Letter" _description="Round Labels">
+    <Meta category="label"/>
+    <Meta category="round-label"/>
+    <Label-round id="0" radius="1.25in" waste="0pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="4" x0="0.21in" y0="0.425in" dx="2.75in" dy="2.515in"/>
+    </Label-round>
+  </Template>
+
+
+</Glabels-templates>
+
+
+
+

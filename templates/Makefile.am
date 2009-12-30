@@ -14,12 +14,14 @@ templates_DATA = \
 	avery-us-templates.xml \
 	avery-iso-templates.xml \
 	avery-other-templates.xml \
-	zweckform-iso-templates.xml \
 	brother-other-templates.xml \
 	dymo-other-templates.xml \
+	maco-us-templates.xml \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
-	misc-other-templates.xml
+	misc-other-templates.xml \
+	worldlabel-us-templates.xml \
+	zweckform-iso-templates.xml
 
 EXTRA_DIST = $(templates_DATA) $(dtd_DATA)
 
