@@ -96,8 +96,6 @@
       <Markup-margin size="9pt"/>
       <Layout nx="1" ny="2" x0="0in" y0="0in" dx="0in" dy="5.5in"/>
     </Label-rectangle>
-    <!-- Look alikes -->
-    <Alias brand="ULine" part="S-5044"/>
   </Template>
 
   <Template brand="Avery" part="5526" equiv="5126"/>
@@ -708,8 +706,6 @@
       <Markup-margin size="0.0625in"/>
       <Layout nx="1" ny="1" x0="0" y0="0" dx="0" dy="0"/>
     </Label-rectangle>
-    <!-- Look alikes -->
-    <Alias brand="IP Invent It!" part="#00064-3"/>
   </Template>
 
   <Template brand="Avery" part="3114" equiv="8165"/>

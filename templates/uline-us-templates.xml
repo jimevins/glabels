@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-  vendors.xml
+  uline-us-templates.xml
   This file is a part of the glabels template database.
  
   Copyright (c) 2001-2009 Jim Evins
@@ -28,16 +28,31 @@
   OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<Glabels-vendors>
-
-  <Vendor name="Avery"          url="http://www.avery.com/"           />
-  <Vendor name="Brother"        url="http://www.brother-usa.com/"     />
-  <Vendor name="Dymo"           url="http://global.dymo.com/"         />
-  <Vendor name="Maco"           url="http://www.maco.com/"            />
-  <Vendor name="Online Labels"  url="http://www.onlinelabels.com/"    />
-  <Vendor name="Uline"          url="http://www.uline.com/"           />
-  <Vendor name="Worldlabel"     url="http://www.worldlabel.com/"      />
-  <Vendor name="Zweckform"      url="http://www.avery-zweckform.com/" />
+<Glabels-templates>
 
 
-</Glabels-vendors>
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+  <!--                                                                      -->
+  <!-- Uline US-Letter products                                             -->
+  <!--                                                                      -->
+  <!-- ******************************************************************** -->
+  <!-- ******************************************************************** -->
+
+
+  <Template brand="Uline" part="S-5044" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="8.5in" height="5.5in" round="0in" x_waste="0in" y_waste="0in">
+      <Markup-margin size="9pt"/>
+      <Layout nx="1" ny="2" x0="0in" y0="0in" dx="0in" dy="5.5in"/>
+    </Label-rectangle>
+  </Template>
+
+
+</Glabels-templates>
+
+
+
+
