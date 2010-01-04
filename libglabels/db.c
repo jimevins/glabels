@@ -1490,7 +1490,7 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
                 {
                         name = g_strdup_printf ("%s %s", template->brand, template->part);
                         names = g_list_insert_sorted (names, name,
-                                                      (GCompareFunc)g_utf8_collate);
+                                                      (GCompareFunc)lgl_str_part_name_cmp);
                 }
 	}
 
@@ -1545,7 +1545,7 @@ lgl_db_get_template_name_list_all (const gchar *brand,
                                 {
                                         name = g_strdup_printf ("%s %s", alias->brand, alias->part);
                                         names = g_list_insert_sorted (names, name,
-                                                                      (GCompareFunc)g_utf8_collate);
+                                                                      (GCompareFunc)lgl_str_part_name_cmp);
                                 }
 			}
 		}

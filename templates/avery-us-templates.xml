@@ -472,7 +472,6 @@
   <Template brand="Avery" part="27881" equiv="5371"/>
   <Template brand="Avery" part="27882" equiv="5371"/>
   <Template brand="Avery" part="28371" equiv="5371"/>
-  <Template brand="Avery" part="28373" equiv="5371"/>
   <Template brand="Avery" part="28876" equiv="5371"/>
   <Template brand="Avery" part="28877" equiv="5371"/>
 
@@ -783,6 +782,7 @@
 
   <Template brand="Avery" part="3612" equiv="8373"/>
   <Template brand="Avery" part="5881" equiv="8373"/>
+  <Template brand="Avery" part="8869" equiv="8373"/>
   <Template brand="Avery" part="28373" equiv="8373"/>
 
 
