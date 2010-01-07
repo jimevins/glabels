@@ -319,7 +319,6 @@ gl_label_finalize (GObject *object)
         {
 		g_object_unref (G_OBJECT(label->priv->merge));
 	}
-	gl_pixbuf_cache_free (label->priv->pixbuf_cache);
         g_free (label->priv->default_font_family);
 
         stack_clear (label->priv->undo_stack);
@@ -327,6 +326,8 @@ gl_label_finalize (GObject *object)
 
         g_queue_free (label->priv->undo_stack);
         g_queue_free (label->priv->redo_stack);
+
+	gl_pixbuf_cache_free (label->priv->pixbuf_cache);
 
 	g_free (label->priv);
 
