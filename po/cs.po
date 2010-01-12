@@ -1,1848 +1,1902 @@
 # cs translation of Glabels.
-# Copyright (C) 2005 THE Glabels'S COPYRIGHT HOLDER
+# Copyright (C) 2005, 2009 THE Glabels'S COPYRIGHT HOLDER.
 # This file is distributed under the same license as the Glabels package.
-# David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005
-# Zbynek Mrkvicka <zbynek@oachot.cz>, 2005
-# 
+# David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
+# Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
+# Marek Černocký <marek@manet.cz>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: Glabels 2.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-22 11:49-0500\n"
-"PO-Revision-Date: 2005-02-02 21:35+0100\n"
-"Last-Translator: David Makovský (Yakeen) <yakeen@sannyas-on.net>\n"
-"Language-Team: cs <cs@li.org>\n"
+"POT-Creation-Date: 2010-01-13 00:57+0100\n"
+"PO-Revision-Date: 2009-11-25 11:18+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: src/glabels.c:116
-msgid "Could not initialize Bonobo!\n"
-msgstr "Nepodařila se inicializace Bonobo serveru!\n"
+#: ../src/glabels.c:75 ../src/glabels-batch.c:70
+msgid "[FILE...]"
+msgstr "[SOUBOR…]"
 
-#: src/glabels-batch.c:52
-msgid "print this message"
-msgstr "tisk této zprávy"
+#: ../src/glabels.c:91
+msgid "- gLabels label designer"
+msgstr "- návrhář etiket gLabels"
 
-#: src/glabels-batch.c:54
-msgid "print the version of glabels-batch being used"
-msgstr "vypíše verzi glabels-batch, která je používána"
+#: ../src/glabels-batch.c:54
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "nastavit název výstupního souboru  (výchozí=„output.ps“)"
 
-#: src/glabels-batch.c:56
-msgid "set output filename (default=\"output.ps\")"
-msgstr "nastavte jméno souboru výstupu  (standartně=\"output.ps\")"
-
-#: src/glabels-batch.c:56 src/glabels-batch.c:70
+#: ../src/glabels-batch.c:54 ../src/glabels-batch.c:68
 msgid "filename"
 msgstr "název souboru"
 
-#: src/glabels-batch.c:58
+#: ../src/glabels-batch.c:56
 msgid "number of sheets (default=1)"
-msgstr "počet stránek (standartně=1)"
+msgstr "počet stran (výchozí=1)"
 
-#: src/glabels-batch.c:58
+#: ../src/glabels-batch.c:56
 msgid "sheets"
-msgstr "sešity"
+msgstr "stran"
 
-#: src/glabels-batch.c:60
+#: ../src/glabels-batch.c:58
 msgid "number of copies (default=1)"
-msgstr "počet kopií (standartní nastavení = 1)"
+msgstr "počet kopií (výchozí = 1)"
 
-#: src/glabels-batch.c:60
+#: ../src/glabels-batch.c:58
 msgid "copies"
-msgstr "kopie"
+msgstr "kopií"
 
-#: src/glabels-batch.c:62
+#: ../src/glabels-batch.c:60
 msgid "first label on first sheet (default=1)"
-msgstr "první etiketa na prvním listu (standartně=1)"
+msgstr "první etiketa na prvním listu (výchozí=1)"
 
-#: src/glabels-batch.c:62
+#: ../src/glabels-batch.c:60
 msgid "first"
 msgstr "první"
 
-#: src/glabels-batch.c:64 src/print-dialog.c:336
+#: ../src/glabels-batch.c:62 ../data/glade/print-custom-widget.glade.h:6
 msgid "print outlines (to test printer alignment)"
 msgstr "tisk obrysů (test zarovnávání tiskárny)"
 
-#: src/glabels-batch.c:66 src/print-dialog.c:344
+#: ../src/glabels-batch.c:64 ../data/glade/print-custom-widget.glade.h:5
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "obrácený tisk (např. převrácený obrázek)"
+msgstr "obrácený tisk (např. zrcadlený obrázek)"
 
-#: src/glabels-batch.c:68 src/print-dialog.c:351
+#: ../src/glabels-batch.c:66 ../data/glade/print-custom-widget.glade.h:4
 msgid "print crop marks"
 msgstr "tisknout značky pro ořez"
 
-#: src/glabels-batch.c:70
+#: ../src/glabels-batch.c:68
 msgid "input file for merging"
 msgstr "vstupní soubor pro sloučení"
 
-#: src/glabels-batch.c:107
-msgid "[OPTION...] GLABELS_FILE..."
-msgstr ""
+#: ../src/glabels-batch.c:96
+msgid "- batch process gLabels label files"
+msgstr "- dávkové zpracování souborů s etiketami gLabels"
 
-#: src/glabels-batch.c:127
-#, c-format
-msgid "missing glabels file\n"
-msgstr "chybí soubor programu glabels\n"
-
-#: src/glabels-batch.c:158
+#: ../src/glabels-batch.c:142
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr ""
+msgstr "nelze provést sloučení dokumentu se souborem aplikace gLabels %s\n"
 
-#: src/glabels-batch.c:182
+#: ../src/glabels-batch.c:164
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "nepodařilo se otevřít soubor programu glabels %s\n"
+msgstr "nelze otevřít soubor aplikace gLabels %s\n"
 
-#: src/window.c:244
+#: ../src/window.c:259
 msgid "(none) - gLabels"
-msgstr "(žádný) - gLabels"
+msgstr "(žádné) - gLabels"
 
-#: src/window.c:414
+#: ../src/window.c:432
 msgid "(modified)"
-msgstr "(modifikováno)"
+msgstr "(změněno)"
 
-#: src/stock.c:65 data/ui/glabels-ui.xml.h:162
+#: ../src/stock.c:72
 msgid "_Select Mode"
-msgstr "Mód výběru"
+msgstr "Režim _výběru"
 
-#: src/stock.c:66 data/ui/glabels-ui.xml.h:163
+#: ../src/stock.c:73
 msgid "_Text"
 msgstr "_Text"
 
-#: src/stock.c:67 data/ui/glabels-ui.xml.h:148
+#: ../src/stock.c:74
 msgid "_Line"
 msgstr "Čár_a"
 
-#: src/stock.c:68 data/ui/glabels-ui.xml.h:130
+#: ../src/stock.c:75
 msgid "_Box"
 msgstr "O_bdélník"
 
-#: src/stock.c:69 data/ui/glabels-ui.xml.h:141
+#: ../src/stock.c:76
 msgid "_Ellipse"
 msgstr "_Elipsa"
 
-#: src/stock.c:70 data/ui/glabels-ui.xml.h:146
+#: ../src/stock.c:77
 msgid "_Image"
 msgstr "Obrá_zek"
 
-#: src/stock.c:71 data/ui/glabels-ui.xml.h:11
+#: ../src/stock.c:78
 msgid "Bar_code"
 msgstr "Čárový _kód"
 
-#: src/stock.c:72
+#: ../src/stock.c:79
 msgid "_Merge Properties"
-msgstr "Vlastnosti sloučení"
+msgstr "Vlastnosti _sloučení"
 
-#: src/stock.c:73
+#: ../src/stock.c:80
 msgid "Object _Properties"
-msgstr "Nastavení objektu"
+msgstr "Vlastnosti _objektu"
 
-#: src/stock.c:74 data/ui/glabels-ui.xml.h:13
+#: ../src/stock.c:81
 msgid "Bring to _Front"
-msgstr "Vynést dopředu"
+msgstr "Přenést do_předu"
 
-#: src/stock.c:75 data/ui/glabels-ui.xml.h:109
+#: ../src/stock.c:82
 msgid "Send to _Back"
-msgstr "Poslat _dozadu"
+msgstr "Přenést do_zadu"
 
-#: src/stock.c:76 data/ui/glabels-ui.xml.h:96
+#: ../src/stock.c:83
 msgid "Rotate _Left"
 msgstr "Otočit do_leva"
 
-#: src/stock.c:77 data/ui/glabels-ui.xml.h:97
+#: ../src/stock.c:84
 msgid "Rotate _Right"
 msgstr "Otočit do_prava"
 
-#: src/stock.c:78 data/ui/glabels-ui.xml.h:52
+#: ../src/stock.c:85
 msgid "Flip _Horizontally"
-msgstr "Převrátit _vodorovně"
+msgstr "Překlopit _vodorovně"
 
-#: src/stock.c:79 data/ui/glabels-ui.xml.h:53
+#: ../src/stock.c:86
 msgid "Flip _Vertically"
-msgstr "Převrátit _svisle"
+msgstr "Překlopit _svisle"
 
-#: src/stock.c:80 data/ui/glabels-ui.xml.h:147
+#: ../src/stock.c:87
 msgid "_Lefts"
-msgstr "Nalevo"
+msgstr "Do_leva"
 
-#: src/stock.c:81 data/ui/glabels-ui.xml.h:159
+#: ../src/stock.c:88
 msgid "_Rights"
-msgstr "Napravo"
+msgstr "Dop_rava"
 
-#: src/stock.c:82 data/ui/glabels-ui.xml.h:131
+#: ../src/stock.c:89
 msgid "_Centers"
-msgstr "_Nastřed"
+msgstr "Na_střed"
 
-#: src/stock.c:83 data/ui/glabels-ui.xml.h:164
+#: ../src/stock.c:90
 msgid "_Tops"
-msgstr "Nahoru"
+msgstr "Na_horu"
 
-#: src/stock.c:84
+#: ../src/stock.c:91
 msgid "Bottoms"
-msgstr "Naspod"
+msgstr "_Dolů"
 
-#: src/stock.c:85
+#: ../src/stock.c:92
 msgid "Centers"
 msgstr "Nastřed"
 
-#: src/stock.c:86 src/stock.c:87 data/ui/glabels-ui.xml.h:62
+#: ../src/stock.c:93 ../src/stock.c:94
 msgid "Label Ce_nter"
-msgstr "Střed etikety"
+msgstr "Stře_d etikety"
 
-#: src/stock.c:88 data/ui/glabels-ui.xml.h:51
+#: ../src/stock.c:95 ../data/glade/property-bar.glade.h:3
 msgid "Fill color"
 msgstr "Barva výplně"
 
-#: src/stock.c:89 data/ui/glabels-ui.xml.h:64
+#: ../src/stock.c:96 ../data/glade/property-bar.glade.h:8
 msgid "Line color"
-msgstr "Barva čáry"
+msgstr "Barva obrysu"
 
-#: src/stock.c:90 src/stock.c:92
+#: ../src/stock.c:97 ../src/stock.c:99
 msgid "Linked"
-msgstr "Spojeno"
+msgstr "Svázáno"
 
-#: src/stock.c:91 src/stock.c:93
+#: ../src/stock.c:98 ../src/stock.c:100
 msgid "Not Linked"
-msgstr "Nespojeno"
+msgstr "Nesvázáno"
 
-#: src/ui-property-bar.c:345 src/object-editor.c:499
+#. Menu entries.
+#: ../src/ui.c:93
+msgid "_File"
+msgstr "_Soubor"
+
+#: ../src/ui.c:94
+msgid "Open Recent _Files"
+msgstr "Otevřít nedávné _soubory"
+
+#: ../src/ui.c:95
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: ../src/ui.c:96
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: ../src/ui.c:97
+msgid "Customize Main Toolbar"
+msgstr "Přizpůsobit hlavní panel"
+
+#: ../src/ui.c:98
+msgid "Customize Drawing Toolbar"
+msgstr "Přizpůsobit panel kreslení"
+
+#: ../src/ui.c:99
+msgid "Customize Properties Toolbar"
+msgstr "Přizpůsobit panel vlastností"
+
+#: ../src/ui.c:100
+msgid "_Objects"
+msgstr "_Objekty"
+
+#: ../src/ui.c:101
+msgid "_Create"
+msgstr "_Vytvořit"
+
+#: ../src/ui.c:102
+msgid "_Order"
+msgstr "_Pořadí"
+
+#: ../src/ui.c:103
+msgid "_Rotate/Flip"
+msgstr "_Otočit/Překlopit"
+
+#: ../src/ui.c:104
+msgid "Align _Horizontal"
+msgstr "Zarovnat _vodorovně"
+
+#: ../src/ui.c:105
+msgid "Align _Vertical"
+msgstr "Zarovnat _svisle"
+
+#: ../src/ui.c:106
+msgid "_Help"
+msgstr "_Nápověda"
+
+#. Popup entries.
+#: ../src/ui.c:109 ../src/ui.c:110
+msgid "Context Menu"
+msgstr "Kontextová nabídka"
+
+#: ../src/ui.c:115
+msgid "_New"
+msgstr "_Nový"
+
+#: ../src/ui.c:117
+msgid "Create a new file"
+msgstr "Vytvořit nový soubor"
+
+#: ../src/ui.c:122
+msgid "_Open..."
+msgstr "_Otevřít…"
+
+#: ../src/ui.c:124
+msgid "Open a file"
+msgstr "Otevřít soubor"
+
+#: ../src/ui.c:129
+msgid "_Save"
+msgstr "_Uložit"
+
+#: ../src/ui.c:131
+msgid "Save current file"
+msgstr "Uložit současný soubor"
+
+#: ../src/ui.c:136
+msgid "Save _As..."
+msgstr "Uložit _jako…"
+
+#: ../src/ui.c:138
+msgid "Save the current file to a different name"
+msgstr "Uložit současný soubor s jiným názvem"
+
+#: ../src/ui.c:143
+msgid "_Print..."
+msgstr "_Tisk…"
+
+#: ../src/ui.c:145
+msgid "Print the current file"
+msgstr "Vytisknout současný soubor"
+
+#: ../src/ui.c:150
+msgid "Properties..."
+msgstr "Vlastnosti…"
+
+#: ../src/ui.c:152
+msgid "Modify document properties"
+msgstr "Upravit vlastnosti dokumentu"
+
+#: ../src/ui.c:157
+msgid "Template _Designer..."
+msgstr "Návrhář š_ablon…"
+
+#: ../src/ui.c:159
+msgid "Create a custom template"
+msgstr "Vytvořit vlastní šablonu"
+
+#: ../src/ui.c:164
+msgid "_Close"
+msgstr "_Zavřít"
+
+#: ../src/ui.c:166
+msgid "Close the current file"
+msgstr "Zavřít současný soubor"
+
+#: ../src/ui.c:171
+msgid "_Quit"
+msgstr "U_končit"
+
+#: ../src/ui.c:173
+msgid "Quit the program"
+msgstr "Ukončit aplikaci"
+
+#: ../src/ui.c:180
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: ../src/ui.c:182
+msgid "Cut the selection"
+msgstr "Vyjmout výběr"
+
+#: ../src/ui.c:187
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: ../src/ui.c:189
+msgid "Copy the selection"
+msgstr "Kopírovat výběr"
+
+#: ../src/ui.c:194
+msgid "Paste"
+msgstr "Vložit"
+
+#: ../src/ui.c:196
+msgid "Paste the clipboard"
+msgstr "Vložit ze schránky"
+
+#: ../src/ui.c:201
+msgid "Delete"
+msgstr "Smazat"
+
+#: ../src/ui.c:203
+msgid "Delete the selected objects"
+msgstr "Smazat vybrané objekty"
+
+#: ../src/ui.c:208
+msgid "Select All"
+msgstr "Vybrat vše"
+
+#: ../src/ui.c:210
+msgid "Select all objects"
+msgstr "Vybrat všechny objekty"
+
+#: ../src/ui.c:215
+msgid "Un-select All"
+msgstr "Zrušit výběr"
+
+#: ../src/ui.c:217
+msgid "Remove all selections"
+msgstr "Zrušit výběr všecho"
+
+#: ../src/ui.c:222
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: ../src/ui.c:224
+msgid "Configure the application"
+msgstr "Nastavit aplikaci"
+
+#: ../src/ui.c:231
+msgid "Zoom in"
+msgstr "Přiblížit"
+
+#: ../src/ui.c:233
+msgid "Increase magnification"
+msgstr "Zvětšit přiblížení"
+
+#: ../src/ui.c:238
+msgid "Zoom out"
+msgstr "Oddálit"
+
+#: ../src/ui.c:240
+msgid "Decrease magnification"
+msgstr "Zmenšit přiblížení"
+
+#: ../src/ui.c:245
+msgid "Zoom 1 to 1"
+msgstr "Přiblížení 1:1"
+
+#: ../src/ui.c:247
+msgid "Restore scale to 100%"
+msgstr "Obnovit měřítko na 100%"
+
+#: ../src/ui.c:252
+msgid "Zoom to fit"
+msgstr "Přizpůsobit velikosti"
+
+#: ../src/ui.c:254
+msgid "Set scale to fit window"
+msgstr "Přizpůsobit měřítko velikosti okna"
+
+#: ../src/ui.c:261
+msgid "Select Mode"
+msgstr "Režim výběru"
+
+#: ../src/ui.c:263
+msgid "Select, move and modify objects"
+msgstr "Výběr, přesun a úpravy objektů"
+
+#: ../src/ui.c:268 ../src/view-text.c:494
+#: ../data/glade/object-editor.glade.h:32
+msgid "Text"
+msgstr "Text"
+
+#: ../src/ui.c:270
+msgid "Create text object"
+msgstr "Vytvořit textový objekt"
+
+#: ../src/ui.c:275
+msgid "Box"
+msgstr "Obdélník"
+
+#: ../src/ui.c:277
+msgid "Create box/rectangle object"
+msgstr "Vytvořit čtverec/obdélník"
+
+#: ../src/ui.c:282 ../data/glade/object-editor.glade.h:20
+msgid "Line"
+msgstr "Čára"
+
+#: ../src/ui.c:284
+msgid "Create line object"
+msgstr "Vytvořit čáru"
+
+#: ../src/ui.c:289
+msgid "Ellipse"
+msgstr "Elipsa"
+
+#: ../src/ui.c:291
+msgid "Create ellipse/circle object"
+msgstr "Vytvořit elipsu/kruh"
+
+#: ../src/ui.c:296 ../data/glade/object-editor.glade.h:16
+msgid "Image"
+msgstr "Obrázek"
+
+#: ../src/ui.c:298
+msgid "Create image object"
+msgstr "Vytvořit objekt s obrázkem"
+
+#: ../src/ui.c:303
+msgid "Barcode"
+msgstr "Čárový kód"
+
+#: ../src/ui.c:305
+msgid "Create barcode object"
+msgstr "Vytvořit objekt s čárovým kódem"
+
+#: ../src/ui.c:310
+msgid "Bring to front"
+msgstr "Přenést dopředu"
+
+#: ../src/ui.c:312
+msgid "Raise object to top"
+msgstr "Vyzvednout objekt nahoru"
+
+#: ../src/ui.c:317
+msgid "Send to back"
+msgstr "Přenést dozadu"
+
+#: ../src/ui.c:319
+msgid "Lower object to bottom"
+msgstr "Poslat objekt dozadu"
+
+#: ../src/ui.c:324
+msgid "Rotate left"
+msgstr "Otočit doleva"
+
+#: ../src/ui.c:326
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr "Otočit objekt o 90° proti směru hodinových ručiček"
+
+#: ../src/ui.c:331
+msgid "Rotate right"
+msgstr "Otočit doprava"
+
+#: ../src/ui.c:333
+msgid "Rotate object 90 degrees clockwise"
+msgstr "Otočit objekt o 90° po směru hodinových ručiček"
+
+#: ../src/ui.c:338
+msgid "Flip horizontally"
+msgstr "Překlopit vodorovně"
+
+#: ../src/ui.c:340
+msgid "Flip object horizontally"
+msgstr "Překlopit objekt vodorovně"
+
+#: ../src/ui.c:345
+msgid "Flip vertically"
+msgstr "Překlopit svisle"
+
+#: ../src/ui.c:347
+msgid "Flip object vertically"
+msgstr "Překlopit objekt svisle"
+
+#: ../src/ui.c:352
+msgid "Align left"
+msgstr "Zarovnat doleva"
+
+#: ../src/ui.c:354
+msgid "Align objects to left edges"
+msgstr "Zarovnat objekty levou hranou"
+
+#: ../src/ui.c:359
+msgid "Align right"
+msgstr "Zarovnat doprava"
+
+#: ../src/ui.c:361
+msgid "Align objects to right edges"
+msgstr "Zarovnat objekty pravou hranou"
+
+#: ../src/ui.c:366
+msgid "Align horizontal center"
+msgstr "Zarovnat vodorovně na střed"
+
+#: ../src/ui.c:368
+msgid "Align objects to horizontal centers"
+msgstr "Zarovnat objekty vodorovně na střed"
+
+#: ../src/ui.c:373
+msgid "Align tops"
+msgstr "Zarovnat nahoru"
+
+#: ../src/ui.c:375
+msgid "Align objects to top edges"
+msgstr "Zarovnat objekty horní hranou"
+
+#: ../src/ui.c:380
+msgid "Align bottoms"
+msgstr "Zarovnat dolů"
+
+#: ../src/ui.c:382
+msgid "Align objects to bottom edges"
+msgstr "Zarovnat objekty dolní hranou"
+
+#: ../src/ui.c:387
+msgid "Align vertical center"
+msgstr "Zarovnat svisle na střed"
+
+#: ../src/ui.c:389
+msgid "Align objects to vertical centers"
+msgstr "Zarovnat objekty svisle na střed"
+
+#: ../src/ui.c:394
+msgid "Center horizontally"
+msgstr "Vystředit vodorovně"
+
+#: ../src/ui.c:396
+msgid "Center objects to horizontal label center"
+msgstr "Vystředit objekty vodorovně na střed etikety"
+
+#: ../src/ui.c:401
+msgid "Center vertically"
+msgstr "Vystředit  svisle"
+
+#: ../src/ui.c:403
+msgid "Center objects to vertical label center"
+msgstr "Vystředit  objekty svisle na střed etikety"
+
+#: ../src/ui.c:408
+msgid "Merge properties"
+msgstr "Vlastnosti sloučení"
+
+#: ../src/ui.c:410
+msgid "Edit merge properties"
+msgstr "Upravit vlastnosti sloučení"
+
+#: ../src/ui.c:417
+msgid "Contents"
+msgstr "Obsah"
+
+#: ../src/ui.c:419
+msgid "Open glabels manual"
+msgstr "Otevřít příručku gLabels"
+
+#: ../src/ui.c:424
+msgid "About..."
+msgstr "O aplikaci…"
+
+#: ../src/ui.c:426
+msgid "About glabels"
+msgstr "O aplikaci gLabels"
+
+#: ../src/ui.c:436
+msgid "Property toolbar"
+msgstr "Panel vlastností"
+
+#: ../src/ui.c:438
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "Změnit zobrazení panelu vlastností v současném okně"
+
+#: ../src/ui.c:444 ../src/ui.c:489 ../src/ui.c:497
+msgid "Show tooltips"
+msgstr "Zobrazovat tipy"
+
+#: ../src/ui.c:446
+msgid "Show tooltips for property toolbar"
+msgstr "Zobrazovat tipy v panelu vlastností"
+
+#: ../src/ui.c:452
+msgid "Grid"
+msgstr "Mřížka"
+
+#: ../src/ui.c:454
+msgid "Change the visibility of the grid in the current window"
+msgstr "Změnit zobrazení mřížky v současném okně"
+
+#: ../src/ui.c:460
+msgid "Markup"
+msgstr "Ohraničení"
+
+#: ../src/ui.c:462
+msgid "Change the visibility of markup lines in the current window"
+msgstr "Změnit zobrazení hraničních čar v současném okně"
+
+#: ../src/ui.c:473
+msgid "Main toolbar"
+msgstr "Hlavní panel"
+
+#: ../src/ui.c:475
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "Změnit zobrazení hlavního panelu nástrojů v současném okně"
+
+#: ../src/ui.c:481
+msgid "Drawing toolbar"
+msgstr "Panel kreslení"
+
+#: ../src/ui.c:483
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "Změnit zobrazení panelu kreslení v současném okně"
+
+#: ../src/ui.c:491
+msgid "Show tooltips for main toolbar"
+msgstr "Zobrazovat tipy v hlavním panelu"
+
+#: ../src/ui.c:499
+msgid "Show tooltips for drawing toolbar"
+msgstr "Zobrazovat tipy v panelu kreslení"
+
+#: ../src/ui-property-bar.c:1232 ../src/object-editor.c:587
+#: ../src/object-editor.c:593
 msgid "Default"
 msgstr "Výchozí"
 
-#: src/ui-property-bar.c:360 src/object-editor.c:512
+#: ../src/ui-property-bar.c:1239 ../src/object-editor.c:599
+msgid "No line"
+msgstr "Bez obrysu"
+
+#: ../src/ui-property-bar.c:1247 ../src/object-editor.c:606
 msgid "No fill"
 msgstr "Bez výplně"
 
-#: src/ui-property-bar.c:375 src/object-editor.c:505
-msgid "No line"
-msgstr ""
-
-#: src/ui-sidebar.c:180
+#: ../src/ui-sidebar.c:152
 msgid "Object properties"
 msgstr "Vlastnosti objektu"
 
-#: src/commands.c:385
-msgid ""
-"A label and business card creation program for GNOME.\n"
-" \n"
-"Glabels is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version.\n"
-" \n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
-msgstr ""
-"Program pro tvorbu etiket a vizitek v prostředí GNOME.\n"
-" \n"
-"Glabels je svobodný software, můžete s ním nakládat podle GPL licence verze "
-"2, nebo jakoukoliv pozdější.\n"
-" \n"
-"Program je distribuován s nadějí, že bude nápomocen, ale je distribuován bez "
-"ručení záruky, tak jak je uvedeno v GPL Licenci verze 2. Pro další detaily "
-"si přečtěte tuto licenci.\n"
+#: ../src/ui-commands.c:1084
+msgid "Glabels includes contributions from:"
+msgstr "Aplikace gLabels obsahuje příspěvky od:"
 
-#: src/commands.c:399
+#: ../src/ui-commands.c:1090
 msgid "See the file AUTHORS for additional credits,"
-msgstr "Prohlédněte si soubor AUTHORS pro dodatečné informace,"
+msgstr "Doplňující informace o zásluhách najdete v souboru AUTHORS,"
 
-#: src/commands.c:400
+#: ../src/ui-commands.c:1091
 msgid "or visit http://glabels.sourceforge.net/"
 msgstr "nebo navštivte http://glabels.sourceforge.net/"
 
-#: src/commands.c:409
-msgid " "
-msgstr ""
+#: ../src/ui-commands.c:1103
+msgid "A label and business card creation program.\n"
+msgstr "Program na vytváření etiket a vizitek.\n"
 
-#: src/commands.c:424
+#: ../src/ui-commands.c:1107
+msgid "translator-credits"
+msgstr ""
+"David Makovský <yakeen@sannyas-on.net>\n"
+"Zbyněk Mrkvička <zbynek@oachot.cz>\n"
+"Marek Černocký <marek@manet.cz>"
+
+#: ../src/ui-commands.c:1110
+msgid ""
+"Glabels is free software; you can redistribute it and/or modify it\n"
+"under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful, but\n"
+"WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
+"the GNU General Public License for more details.\n"
+msgstr ""
+"Aplikace gLabels je svobodný software: Můžete jej dále šířit a/nebo "
+"upravovat za podmínek licence GNU General Public License v podobě, v jaké ji "
+"vydala Free Software Foundation, a to buď ve verzi 2 této licence nebo (dle "
+"vaší volby) v libovolné novější verzi.\n"
+"\n"
+"Tento program je šířen ve víře, že bude užitečný, ale BEZ JAKÝCHKOLIV ZÁRUK, "
+"a to i bez předpokládané záruky na PRODEJNOST nebo VHODNOST PRO KONKRÉTNÍ "
+"ÚČEL. Více podrobností najdete přímo v licenci GNU General Public License.\n"
+
+#: ../src/ui-commands.c:1136
 msgid "glabels"
 msgstr "glabels"
 
-#: src/file.c:100
+#: ../src/file.c:91
 msgid "New Label or Card"
 msgstr "Nová etiketa či vizitka"
 
-#: src/file.c:132 src/file.c:304
-msgid "Media Type"
-msgstr "Typ média"
-
-#: src/file.c:138 src/file.c:310
-msgid "Label orientation"
-msgstr "Orientace etikety"
-
-#: src/file.c:269
+#: ../src/file.c:191
 msgid "Label properties"
 msgstr "Vlastnosti etikety"
 
-#: src/file.c:452 src/file.c:870
+#: ../src/file.c:292 ../src/file.c:578
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: src/file.c:457 src/file.c:875
+#: ../src/file.c:297 ../src/file.c:583
 msgid "gLabels documents"
 msgstr "Dokumenty gLabels"
 
-#: src/file.c:505 src/file.c:617 src/file.c:934 src/file.c:1130
+#: ../src/file.c:343 ../src/file.c:640
 msgid "Empty file name selection"
-msgstr "Prázdné pole jména souboru"
+msgstr "Prázdné pole s názvem souboru"
 
-#: src/file.c:506 src/file.c:520 src/file.c:618 src/file.c:632
+#: ../src/file.c:346 ../src/file.c:362
 msgid "Please select a file or supply a valid file name"
-msgstr "Vyberte, prosím, soubor, nebo vypište platné jméno souboru"
+msgstr "Vyberte, prosím, soubor, nebo zadejte platný název souboru"
 
-#: src/file.c:519 src/file.c:631
+#: ../src/file.c:359
 msgid "File does not exist"
 msgstr "Soubor neexistuje"
 
-#: src/file.c:563 data/ui/glabels-ui.xml.h:74
-msgid "Open"
-msgstr "Otevřít"
-
-#: src/file.c:565
-msgid "Open label"
-msgstr "Otevřít etiketu"
-
-#: src/file.c:707
+#: ../src/file.c:433
 #, c-format
 msgid "Could not open file \"%s\""
-msgstr "nepodařilo se otevřít soubor \"%s\""
+msgstr "Nelze otevřít soubor „%s“"
 
-#: src/file.c:715
+#: ../src/file.c:436
 msgid "Not a supported file format"
 msgstr "Formát tohoto souboru není podporován"
 
-#: src/file.c:797 src/file.c:979 src/file.c:1174
+#: ../src/file.c:513 ../src/file.c:690
 #, c-format
 msgid "Could not save file \"%s\""
-msgstr "Nepodařilo se uložit soubor \"%s\""
+msgstr "Nelze uložit soubor „%s“"
 
-#: src/file.c:805 src/file.c:987 src/file.c:1182
+#: ../src/file.c:517 ../src/file.c:694
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Při ukládání se vyskytla chyba. Soubor nebyl uložen."
 
-#: src/file.c:848 src/file.c:1048
+#: ../src/file.c:556
 #, c-format
 msgid "Save \"%s\" as"
-msgstr "Uložit \"%s\" jako"
+msgstr "Uložit „%s“ jako"
 
-#: src/file.c:935 src/file.c:1131
+#: ../src/file.c:643
 msgid "Please supply a valid file name"
-msgstr "Prosím vepište platné jméno souboru"
+msgstr "Zadejte prosím platný název souboru"
 
-#: src/file.c:952 src/file.c:1147
+#: ../src/file.c:664
 #, c-format
 msgid "Overwrite file \"%s\"?"
-msgstr "Přepsat soubor \"%s\"?"
+msgstr "Přepsat soubor „%s“?"
 
-#: src/file.c:960 src/file.c:1155
+#: ../src/file.c:668
 msgid "File already exists."
 msgstr "Soubor již existuje."
 
-#: src/file.c:1271
+#: ../src/file.c:764
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Uložit před zavřením změny v dokumentu \"%s\"?"
+msgstr "Uložit před zavřením změny v dokumentu „%s“?"
 
-#: src/file.c:1279
+#: ../src/file.c:768
 msgid "Your changes will be lost if you don't save them."
-msgstr "Vaše změny budou ztraceny pokud je neuložíte."
+msgstr "Vaše změny budou ztraceny, pokud je neuložíte."
 
-#: src/file.c:1282
+#: ../src/file.c:771
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
 #. Should not happen
-#: src/prefs.c:156 src/prefs.c:163 data/glade/prefs-dialog.glade.h:23
-#: data/glade/object-editor.glade.h:37
+#: ../src/prefs.c:159 ../src/prefs.c:166
+#: ../data/glade/object-editor.glade.h:43
+#: ../data/glade/prefs-dialog.glade.h:22
 msgid "points"
-msgstr "bodů"
+msgstr "body"
 
-#: src/prefs.c:158 data/glade/object-editor.glade.h:36
-#: data/glade/template-designer.glade.h:74
+#: ../src/prefs.c:161 ../data/glade/object-editor.glade.h:42
+#: ../data/glade/template-designer.glade.h:64
 msgid "inches"
 msgstr "palce"
 
-#: src/prefs.c:160
+#: ../src/prefs.c:163
 msgid "mm"
 msgstr "mm"
 
-#: src/prefs-dialog.c:248 data/glade/prefs-dialog.glade.h:22
+#: ../src/prefs-dialog.c:162 ../data/glade/prefs-dialog.glade.h:21
 msgid "gLabels Preferences"
-msgstr "Nastavení programu gLabels"
-
-#.
-#. * Submenu: Order
-#.
-#: src/view.c:3574 data/ui/glabels-ui.xml.h:154
-msgid "_Order"
-msgstr "_Pořadí"
-
-#.
-#. * Submenu: Rotate/Flip
-#.
-#: src/view.c:3595 data/ui/glabels-ui.xml.h:160
-msgid "_Rotate/Flip"
-msgstr "_Rotace/Převrácení"
-
-#.
-#. * Submenu: Align Horizontally
-#.
-#: src/view.c:3628
-msgid "Align _Horizontally"
-msgstr "Zarovnat _vodorovně"
-
-#.
-#. * Submenu: Align Vertically
-#.
-#: src/view.c:3667
-msgid "Align _Vertically"
-msgstr "Zarovnat _svisle"
-
-#: src/view.c:3728 data/ui/glabels-ui.xml.h:137
-msgid "_Delete"
-msgstr "_Smazat"
+msgstr "Předvolby gLabels"
 
 #. Build editor.
-#: src/view-box.c:224
+#: ../src/view-box.c:175
 msgid "Box object properties"
-msgstr "Vlastnosti obdélníku/čtverce"
+msgstr "Vlastnosti obdélníku"
 
 #. Build editor.
-#: src/view-ellipse.c:224
+#: ../src/view-ellipse.c:175
 msgid "Ellipse object properties"
 msgstr "Vlastnosti elipsy"
 
 #. Build editor.
-#: src/view-line.c:224
+#: ../src/view-line.c:174
 msgid "Line object properties"
 msgstr "Vlastnosti čáry"
 
 #. Build editor.
-#: src/view-image.c:223
+#: ../src/view-image.c:174
 msgid "Image object properties"
 msgstr "Vlastnosti obrázku"
 
 #. Build editor.
-#: src/view-text.c:251
+#: ../src/view-text.c:178
 msgid "Text object properties"
 msgstr "Vlastnosti textu"
 
-#: src/view-text.c:563 data/glade/object-editor.glade.h:28
-msgid "Text"
-msgstr "Text"
-
 #. Build editor.
-#: src/view-barcode.c:210
+#: ../src/view-barcode.c:174
 msgid "Barcode object properties"
 msgstr "Vlastnosti čárového kódu"
 
-#: src/view-barcode.c:580 src/print.c:1089
-msgid "Invalid barcode data"
-msgstr "Neplatná data čárového kódu"
+#: ../src/object-editor-image-page.c:270
+msgid "All Files"
+msgstr "Všechny soubory"
 
-#: src/merge-properties-dialog.c:231
+#: ../src/object-editor-image-page.c:275
+msgid "All Images"
+msgstr "Všechny obrázky"
+
+#: ../src/object-editor-image-page.c:290
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/merge-properties-dialog.c:263
 msgid "Merge Properties"
-msgstr "Nastavení sloučení"
+msgstr "Vlastnosti sloučení"
 
-#. ---- Source section ----
-#: src/merge-properties-dialog.c:237
-msgid "Source"
-msgstr "Zdroj"
-
-#: src/merge-properties-dialog.c:245
-msgid "Format:"
-msgstr "Formát:"
-
-#. Location line
-#: src/merge-properties-dialog.c:273
-msgid "Location:"
-msgstr "Umístění:"
-
-#: src/merge-properties-dialog.c:282 src/merge-properties-dialog.c:393
+#: ../src/merge-properties-dialog.c:289 ../src/merge-properties-dialog.c:397
 msgid "Select merge-database source"
 msgstr "Výběr databázového zdroje pro sloučení"
 
-#: src/merge-properties-dialog.c:289 src/merge-properties-dialog.c:404
+#: ../src/merge-properties-dialog.c:298 ../src/merge-properties-dialog.c:417
 msgid "N/A"
-msgstr "Není k dispozici"
+msgstr "Neurčeno"
 
-#. ---- Sample Fields section ----
-#: src/merge-properties-dialog.c:300
-msgid "Record selection/preview:"
-msgstr "Náhled na záznam výběru"
-
-#: src/merge-properties-dialog.c:326
+#: ../src/merge-properties-dialog.c:324
 msgid "Select"
 msgstr "Výběr"
 
-#: src/merge-properties-dialog.c:334
+#: ../src/merge-properties-dialog.c:332
 msgid "Record/Field"
 msgstr "Záznam/Pole"
 
-#: src/merge-properties-dialog.c:342 data/glade/object-editor.glade.h:9
+#: ../src/merge-properties-dialog.c:340 ../data/glade/object-editor.glade.h:10
 msgid "Data"
 msgstr "Data"
 
-#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:81
-msgid "Print"
-msgstr "Tisk"
+#: ../src/merge-properties-dialog.c:410
+msgid "Fixed"
+msgstr "Napevno"
 
-#: src/print-dialog.c:281
-msgid "_Job"
-msgstr "Úloha"
-
-#: src/print-dialog.c:286
-msgid "P_rinter"
-msgstr "_Tiskárna"
-
-#. ----------- Add simple-copies widget ------------
-#: src/print-dialog.c:314
-msgid "Copies"
-msgstr "Kopie"
-
-#. ------- Add merge control widget ------------
-#: src/print-dialog.c:322
-msgid "Document merge control"
-msgstr "Kontrola sloučení dokumentu"
-
-#. ----------- Add custom print options area ------------
-#: src/print-dialog.c:330
-msgid "Options"
-msgstr "Možnosti"
-
-#: src/print-dialog.c:553 src/print-dialog.c:592
-msgid "Print preview"
-msgstr "Náhled tisku"
-
-#: src/template-designer.c:409 data/glade/template-designer.glade.h:73
-msgid "gLabels Template Designer"
-msgstr "Návrhář šablon gLabels"
-
-#: src/bc.c:60
-msgid "POSTNET (any)"
-msgstr "POSTNET (jakýkoli)"
-
-#: src/bc.c:63
-msgid "POSTNET-5 (ZIP only)"
-msgstr "POSTNET-5 (pouze ZIP)"
-
-#: src/bc.c:66
-msgid "POSTNET-9 (ZIP+4)"
-msgstr ""
-
-#: src/bc.c:69
-msgid "POSTNET-11 (DPBC)"
-msgstr ""
-
-#: src/bc.c:72
-msgid "EAN (any)"
-msgstr "EAN (jakýkoli)"
-
-#: src/bc.c:75
-msgid "EAN-8"
-msgstr ""
-
-#: src/bc.c:78
-msgid "EAN-8 +2"
-msgstr ""
-
-#: src/bc.c:81
-msgid "EAN-8 +5"
-msgstr ""
-
-#: src/bc.c:84
-msgid "EAN-13"
-msgstr ""
-
-#: src/bc.c:87
-msgid "EAN-13 +2"
-msgstr ""
-
-#: src/bc.c:90
-msgid "EAN-13 +5"
-msgstr ""
-
-#: src/bc.c:93
-msgid "UPC (UPC-A or UPC-E)"
-msgstr "UPC (UPC-A nebo UPC-E)"
-
-#: src/bc.c:96
-msgid "UPC-A"
-msgstr ""
-
-#: src/bc.c:99
-msgid "UPC-A +2"
-msgstr ""
-
-#: src/bc.c:102
-msgid "UPC-A +5"
-msgstr ""
-
-#: src/bc.c:105
-msgid "UPC-E"
-msgstr ""
-
-#: src/bc.c:108
-msgid "UPC-E +2"
-msgstr ""
-
-#: src/bc.c:111
-msgid "UPC-E +5"
-msgstr ""
-
-#: src/bc.c:114
-msgid "ISBN"
-msgstr ""
-
-#: src/bc.c:117
-msgid "ISBN +5"
-msgstr ""
-
-#: src/bc.c:120
-msgid "Code 39"
-msgstr ""
-
-#: src/bc.c:123
-msgid "Code 128"
-msgstr ""
-
-#: src/bc.c:126
-msgid "Code 128C"
-msgstr ""
-
-#: src/bc.c:129
-msgid "Code 128B"
-msgstr ""
-
-#: src/bc.c:132
-msgid "Interleaved 2 of 5"
-msgstr ""
-
-#: src/bc.c:135
-msgid "Codabar"
-msgstr ""
-
-#: src/bc.c:138
-msgid "MSI"
-msgstr ""
-
-#: src/bc.c:141
-msgid "Plessey"
-msgstr ""
-
-#: src/label.c:569
-msgid "Untitled"
-msgstr "Nepojmenovaný"
-
-#: src/xml-label.c:176 src/xml-label.c:213
-msgid "xmlParseFile error"
-msgstr "chyba (xmlParseFile)"
-
-#: src/xml-label.c:250
-msgid "No document root"
-msgstr ""
-
-#: src/xml-label.c:264
-msgid "Importing from glabels 0.1 format"
-msgstr "Importuji formát glabels verze 0.1"
-
-#: src/xml-label.c:272
-msgid "Importing from glabels 0.4 format"
-msgstr "Importuji formát glabels verze 0.4"
-
-#: src/xml-label.c:279
-msgid "Importing from glabels 1.91 format"
-msgstr "Importuji formát glabels verze 1.91"
-
-#: src/xml-label.c:282
-msgid "bad document, unknown glabels Namespace"
-msgstr ""
-
-#: src/xml-label.c:311 src/xml-label-04.c:75 src/xml-label-191.c:131
-#, c-format
-msgid "Bad root node = \"%s\""
-msgstr ""
-
-#: src/xml-label.c:348 src/xml-label-191.c:165
-#, c-format
-msgid "bad node in Document node =  \"%s\""
-msgstr ""
-
-#: src/xml-label.c:393 src/xml-label-04.c:123 src/xml-label-191.c:197
-#, c-format
-msgid "bad node =  \"%s\""
-msgstr ""
-
-#: src/xml-label.c:796 src/xml-label-191.c:605
-#, c-format
-msgid "bad node in Data node =  \"%s\""
-msgstr ""
-
-#: src/xml-label.c:962 libglabels/xml-template.c:535
-msgid "Utf8 conversion error."
-msgstr "Chyba při konverzi UTF-8"
-
-#: src/xml-label.c:969 libglabels/xml-template.c:542
-msgid "Problem saving xml file."
-msgstr "Problém s ukládáním dat do xml."
-
-#. This should always be an id, but just in case a name
-#. slips by!
-#: src/xml-label-191.c:680 libglabels/xml-template.c:199
-#, c-format
-msgid "Unknown page size id \"%s\", trying as name"
-msgstr ""
-
-#: src/xml-label-191.c:690 libglabels/xml-template.c:209
-#, c-format
-msgid "Unknown page size id or name \"%s\""
-msgstr ""
-
-#: src/merge.c:172 src/merge.c:213 src/merge.c:399 src/merge.c:402
-msgid "None"
-msgstr "Žádný"
-
-#: src/merge-init.c:53
-msgid "Text file with comma delimeters (CSV)"
-msgstr "Text se středníky jako oddělovači sloupců (CSV)"
-
-#: src/merge-init.c:60
-msgid "Text file with colon delimeters"
-msgstr "Text s dvojtečkami jako oddělovači sloupců"
-
-#: src/merge-init.c:67
-msgid "Text file with tab delimeters"
-msgstr "Text s tabulátory jako oddělovači sloupců"
-
-#: src/wdgt-image-select.c:201 data/glade/object-editor.glade.h:11
-msgid "File:"
-msgstr "Soubor:"
-
-#: src/wdgt-image-select.c:245 data/glade/object-editor.glade.h:16
-msgid "Key:"
-msgstr "Klíč:"
-
-#: src/wdgt-print-copies.c:179
-msgid "Sheets:"
-msgstr "Stránky:"
-
-#: src/wdgt-print-copies.c:197
+#. ===================================================================
+#: ../src/print-op.c:237 ../src/wdgt-print-copies.c:171
+#: ../data/templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Etikety"
 
-#: src/wdgt-print-copies.c:200
+#: ../src/template-designer.c:358
+msgid "gLabels Template Designer"
+msgstr "Návrhář šablon gLabels"
+
+#: ../src/template-designer.c:419
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: ../src/template-designer.c:463
+msgid "Name and Description"
+msgstr "Název a popis"
+
+#: ../src/template-designer.c:516
+msgid "Page Size"
+msgstr "Velikost stránky"
+
+#: ../src/template-designer.c:587
+msgid "Label or Card Shape"
+msgstr "Tvar etikety či vizitky"
+
+#: ../src/template-designer.c:637
+msgid "Label or Card Size"
+msgstr "Velikost etikety či vizitky"
+
+#: ../src/template-designer.c:737
+msgid "Label Size (round)"
+msgstr "Velikost etikety (oválná)"
+
+#: ../src/template-designer.c:820
+msgid "Label Size (CD/DVD)"
+msgstr "Velikost etikety (CD/DVD)"
+
+#: ../src/template-designer.c:913
+msgid "Number of Layouts"
+msgstr "Počet rozvržení"
+
+#: ../src/template-designer.c:976
+msgid "Layout(s)"
+msgstr "Rozvržení"
+
+#: ../src/template-designer.c:1087
+msgid "Design Completed"
+msgstr "Návrh byl dokončen"
+
+#: ../src/template-designer.c:1253
+msgid ""
+"<span foreground='red' weight='bold'>Brand and part# match an existing "
+"template!</span>"
+msgstr ""
+"<span foreground='red' weight='bold'>Značka a produktové číslo odpovídají "
+"již existující šabloně!</span>"
+
+#: ../src/bc.c:67
+msgid "POSTNET (any)"
+msgstr "POSTNET (jakýkoli)"
+
+#: ../src/bc.c:70
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (pouze PSČ)"
+
+#: ../src/bc.c:73
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (PSČ+4)"
+
+#: ../src/bc.c:76
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc.c:79
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:82
+msgid "EAN (any)"
+msgstr "EAN (jakýkoli)"
+
+#: ../src/bc.c:85
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc.c:88
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc.c:91
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc.c:94
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc.c:97
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc.c:100
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc.c:103
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A nebo UPC-E)"
+
+#: ../src/bc.c:106
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc.c:109
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc.c:112
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc.c:115
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc.c:118
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc.c:121
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc.c:124
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc.c:127
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc.c:130
+msgid "Code 39"
+msgstr "Code 39"
+
+#: ../src/bc.c:133
+msgid "Code 128"
+msgstr "Code 128"
+
+#: ../src/bc.c:136
+msgid "Code 128C"
+msgstr "Code 128C"
+
+#: ../src/bc.c:139
+msgid "Code 128B"
+msgstr "Code 128B"
+
+#: ../src/bc.c:142
+msgid "Interleaved 2 of 5"
+msgstr "Prokládaný 2 z 5"
+
+#: ../src/bc.c:145
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc.c:148
+msgid "MSI"
+msgstr "MSI"
+
+#: ../src/bc.c:151
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:154
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/label.c:531
+msgid "Untitled"
+msgstr "Nepojmenovaný"
+
+#: ../src/label-barcode.c:426
+msgid "Barcode data empty"
+msgstr "Data pro čárový kód jsou prázdná"
+
+#: ../src/label-barcode.c:430
+msgid "Invalid barcode data"
+msgstr "Data pro čárový kód jsou neplatná"
+
+#: ../src/xml-label.c:189 ../src/xml-label.c:226
+msgid "xmlParseFile error"
+msgstr "chyba xmlParseFile"
+
+#: ../src/xml-label.c:262
+msgid "No document root"
+msgstr "Schází kořen dokumentu"
+
+#: ../src/xml-label.c:270
+msgid "Importing from glabels 0.1 format"
+msgstr "Importuje se z formátu glabels verze 0.1"
+
+#: ../src/xml-label.c:279
+msgid "Importing from glabels 0.4 format"
+msgstr "Importuje se z formátu glabels verze 0.4"
+
+#: ../src/xml-label.c:288
+#, c-format
+msgid "Unknown glabels Namespace -- Using %s"
+msgstr "Neznámý jmenný prostor pro gLabels -- použije se %s"
+
+#: ../src/xml-label.c:319 ../src/xml-label-04.c:79
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "Neplatný kořenový uzel = „%s“"
+
+#: ../src/xml-label.c:356
+#, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "neplatný uzel v uzlu Document = „%s“"
+
+#: ../src/xml-label.c:401 ../src/xml-label-04.c:127
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "neplatný uzel = „%s“"
+
+#: ../src/xml-label.c:843
+#, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "neplatný uzel v uzlu Data = „%s“"
+
+#: ../src/xml-label.c:1080 ../libglabels/xml-template.c:670
+msgid "Utf8 conversion error."
+msgstr "Chyba při převodu UTF-8"
+
+#: ../src/xml-label.c:1087
+msgid "Problem saving xml file."
+msgstr "Problém při ukládání do souboru xml."
+
+#: ../src/merge.c:170 ../src/merge.c:211 ../src/merge.c:375 ../src/merge.c:378
+msgid "None"
+msgstr "Žádný"
+
+#: ../src/merge-init.c:59
+msgid "Text file with comma delimeters (CSV)"
+msgstr "Textový soubor se sloupci oddělenými středníky (CSV)"
+
+#: ../src/merge-init.c:66
+msgid "Text file with colon delimeters"
+msgstr "Textový soubor se sloupci oddělenými dvojtečkami"
+
+#: ../src/merge-init.c:73
+msgid "Text file with tab delimeters"
+msgstr "Textový soubor se sloupci oddělenými tabelátory"
+
+#: ../src/merge-init.c:82
+msgid "Data from default Evolution Addressbook"
+msgstr "Data z výchozího adresáře Evolution"
+
+#: ../src/merge-init.c:88
+msgid "Data from a file containing VCards"
+msgstr "Data ze souboru obsahujícího kontakty ve formátu VCards"
+
+#: ../src/merge-evolution.c:309
+msgid "Couldn't construct query"
+msgstr "Nelze sestavit dotaz"
+
+#: ../src/merge-evolution.c:315 ../src/merge-evolution.c:326
+msgid "Couldn't open addressbook."
+msgstr "Nelze otevřít adresář."
+
+#: ../src/merge-evolution.c:341
+msgid "Couldn't list available fields."
+msgstr "Nelze vytvořit seznam dostupných polí."
+
+#: ../src/merge-evolution.c:377
+msgid "Couldn't get contacts."
+msgstr "Nelze získat kontakt."
+
+#: ../src/wdgt-print-copies.c:153
+msgid "Sheets:"
+msgstr "Stránky:"
+
+#: ../src/wdgt-print-copies.c:173
 msgid "from:"
 msgstr "od:"
 
-#: src/wdgt-print-copies.c:207
+#: ../src/wdgt-print-copies.c:178
 msgid "to:"
-msgstr "komu:"
+msgstr "do:"
 
-#: src/wdgt-print-merge.c:178
+#: ../src/wdgt-print-merge.c:154
 msgid "Start on label"
 msgstr "Začít na etiketě"
 
-#: src/wdgt-print-merge.c:186
+#: ../src/wdgt-print-merge.c:159
 msgid "on 1st sheet"
 msgstr "na první stránce"
 
-#: src/wdgt-print-merge.c:195
+#: ../src/wdgt-print-merge.c:168
 msgid "Copies:"
 msgstr "Kopie:"
 
-#: src/wdgt-print-merge.c:201
+#: ../src/wdgt-print-merge.c:173
 msgid "Collate"
-msgstr "Shromáždit"
+msgstr "Seřadit"
 
-#: src/wdgt-media-select.c:269 data/glade/template-designer.glade.h:29
-msgid "Description:"
-msgstr "Popis:"
+#: ../src/wdgt-media-select.c:288 ../src/wdgt-media-select.c:292
+#: ../src/wdgt-media-select.c:297 ../src/wdgt-media-select.c:306
+#: ../src/wdgt-media-select.c:309 ../src/wdgt-media-select.c:402
+#: ../src/wdgt-media-select.c:609 ../src/wdgt-media-select.c:618
+msgid "Any"
+msgstr "Libovolná"
 
-#: src/wdgt-media-select.c:279 data/glade/template-designer.glade.h:53
-msgid "Page size:"
-msgstr "Velikost stránky:"
-
-#: src/wdgt-media-select.c:290
-msgid "Label size:"
-msgstr "Velikost etikety:"
-
-#: src/wdgt-media-select.c:301
-msgid "Layout:"
-msgstr "Rozvržení:"
-
-#: src/wdgt-media-select.c:578
-#, c-format
-msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d  (%d na stránku)"
-
-#: src/wdgt-media-select.c:582
+#: ../src/wdgt-media-select.c:643
 #, c-format
 msgid "%d per sheet"
 msgstr "%d na stránku"
 
-#: src/wdgt-media-select.c:614
+#: ../src/wdgt-media-select.c:673
 #, c-format
 msgid "%s x %s %s"
-msgstr "%s x %s %s"
+msgstr "%s × %s %s"
 
-#: src/wdgt-media-select.c:619
+#: ../src/wdgt-media-select.c:678
 #, c-format
 msgid "%.5g x %.5g %s"
-msgstr "%.5g x %.5g %s"
+msgstr "%.5g × %.5g %s"
 
-#: src/wdgt-media-select.c:630 src/wdgt-media-select.c:644
+#: ../src/wdgt-media-select.c:689 ../src/wdgt-media-select.c:703
 #, c-format
 msgid "%s %s diameter"
-msgstr "%s %s průměr"
+msgstr "průměr %s %s"
 
-#: src/wdgt-media-select.c:634 src/wdgt-media-select.c:648
+#: ../src/wdgt-media-select.c:693 ../src/wdgt-media-select.c:707
 #, c-format
 msgid "%.5g %s diameter"
-msgstr "%.5g %s průměr"
+msgstr "průměr %.5g %s"
 
-#: src/wdgt-rotate-label.c:193
-msgid "Rotate"
-msgstr "Rotovat"
+#: ../src/wdgt-media-select.c:781
+msgid "No recent templates found."
+msgstr "Nenalezeny žádné nedávno použité šablony."
+
+#: ../src/wdgt-media-select.c:782
+msgid "Try selecting a template from the \"Search all templates\" page."
+msgstr "Zkuste vybrat šablonu na kartě „Vyhledat ve všech šablonách“."
+
+#: ../src/wdgt-media-select.c:861
+msgid "No match."
+msgstr "Žádná neodpovídá."
+
+#: ../src/wdgt-media-select.c:862
+msgid "Try selecting a different brand, page size or category."
+msgstr "Zkuste vybrat jinou značku, velikost stránky nebo kategorii."
 
 #. This is the default custom color
-#: src/mygal/color-palette.c:396
+#: ../src/mygal/color-palette.c:389
 msgid "custom"
 msgstr "vlastní"
 
-#. "Custom" color - we'll pop up a GnomeColorPicker
-#: src/mygal/color-palette.c:438
+#. "Custom" color - we'll pop up a GtkColorButton
+#: ../src/mygal/color-palette.c:431
 msgid "Custom Color:"
 msgstr "Vlastní barva"
 
-#: src/mygal/color-palette.c:446
+#: ../src/mygal/color-palette.c:439
 msgid "Choose Custom Color"
 msgstr "Vyberte vlastní barvu"
 
-#: src/mygal/color-palette.c:579
+#: ../src/mygal/color-palette.c:572
 msgid "black"
 msgstr "černá"
 
-#: src/mygal/color-palette.c:580
+#: ../src/mygal/color-palette.c:573
 msgid "light brown"
 msgstr "světle hnědá"
 
-#: src/mygal/color-palette.c:581
+#: ../src/mygal/color-palette.c:574
 msgid "brown gold"
 msgstr "zlatohnědá"
 
-#: src/mygal/color-palette.c:582
+#: ../src/mygal/color-palette.c:575
 msgid "dark green #2"
-msgstr "tmavě zelená #2"
+msgstr "tmavě zelená č. 2"
 
-#: src/mygal/color-palette.c:583
+#: ../src/mygal/color-palette.c:576
 msgid "navy"
 msgstr "námořnická modř"
 
-#: src/mygal/color-palette.c:584 src/mygal/color-palette.c:640
+#: ../src/mygal/color-palette.c:577 ../src/mygal/color-palette.c:633
 msgid "dark blue"
 msgstr "tmavě modrá"
 
-#: src/mygal/color-palette.c:585
+#: ../src/mygal/color-palette.c:578
 msgid "purple #2"
-msgstr "purpurová #2"
+msgstr "purpurová č. 2"
 
-#: src/mygal/color-palette.c:586
+#: ../src/mygal/color-palette.c:579
 msgid "very dark gray"
 msgstr "velmi tmavě šedá"
 
-#: src/mygal/color-palette.c:589 src/mygal/color-palette.c:645
+#: ../src/mygal/color-palette.c:582 ../src/mygal/color-palette.c:638
 msgid "dark red"
 msgstr "tmavě červená"
 
-#: src/mygal/color-palette.c:590
+#: ../src/mygal/color-palette.c:583
 msgid "red-orange"
 msgstr "červenooranžová"
 
-#: src/mygal/color-palette.c:591
+#: ../src/mygal/color-palette.c:584
 msgid "gold"
 msgstr "zlatá"
 
-#: src/mygal/color-palette.c:592
+#: ../src/mygal/color-palette.c:585
 msgid "dark green"
 msgstr "tmavě zelená"
 
-#: src/mygal/color-palette.c:593 src/mygal/color-palette.c:646
+#: ../src/mygal/color-palette.c:586 ../src/mygal/color-palette.c:639
 msgid "dull blue"
-msgstr "mdlá modř"
+msgstr "matná modrá"
 
-#: src/mygal/color-palette.c:594 src/mygal/color-palette.c:647
+#: ../src/mygal/color-palette.c:587 ../src/mygal/color-palette.c:640
 msgid "blue"
 msgstr "modrá"
 
-#: src/mygal/color-palette.c:595
+#: ../src/mygal/color-palette.c:588
 msgid "dull purple"
-msgstr "mdlý purpur"
+msgstr "matná purpurová"
 
-#: src/mygal/color-palette.c:596
+#: ../src/mygal/color-palette.c:589
 msgid "dark grey"
 msgstr "tmavě šedá"
 
-#: src/mygal/color-palette.c:599
+#: ../src/mygal/color-palette.c:592
 msgid "red"
 msgstr "červená"
 
-#: src/mygal/color-palette.c:600
+#: ../src/mygal/color-palette.c:593
 msgid "orange"
 msgstr "oranžová"
 
-#: src/mygal/color-palette.c:601
+#: ../src/mygal/color-palette.c:594
 msgid "lime"
 msgstr "citrónová"
 
-#: src/mygal/color-palette.c:602
+#: ../src/mygal/color-palette.c:595
 msgid "dull green"
-msgstr "mdlá zeleň"
+msgstr "matná zelená"
 
-#: src/mygal/color-palette.c:603
+#: ../src/mygal/color-palette.c:596
 msgid "dull blue #2"
-msgstr "mdlá modř #2"
+msgstr "matná modrá č. 2"
 
-#: src/mygal/color-palette.c:604
+#: ../src/mygal/color-palette.c:597
 msgid "sky blue #2"
-msgstr "nebeská modř #2"
+msgstr "nebeská modř č. 2"
 
-#: src/mygal/color-palette.c:605 src/mygal/color-palette.c:644
+#: ../src/mygal/color-palette.c:598 ../src/mygal/color-palette.c:637
 msgid "purple"
 msgstr "purpurová"
 
-#: src/mygal/color-palette.c:606
+#: ../src/mygal/color-palette.c:599
 msgid "gray"
 msgstr "šedá"
 
-#: src/mygal/color-palette.c:609 src/mygal/color-palette.c:641
+#: ../src/mygal/color-palette.c:602 ../src/mygal/color-palette.c:634
 msgid "magenta"
 msgstr "fialová"
 
-#: src/mygal/color-palette.c:610
+#: ../src/mygal/color-palette.c:603
 msgid "bright orange"
 msgstr "jasně oranžová"
 
-#: src/mygal/color-palette.c:611 src/mygal/color-palette.c:642
+#: ../src/mygal/color-palette.c:604 ../src/mygal/color-palette.c:635
 msgid "yellow"
 msgstr "žludá"
 
-#: src/mygal/color-palette.c:612
+#: ../src/mygal/color-palette.c:605
 msgid "green"
 msgstr "zelená"
 
-#: src/mygal/color-palette.c:613 src/mygal/color-palette.c:643
+#: ../src/mygal/color-palette.c:606 ../src/mygal/color-palette.c:636
 msgid "cyan"
 msgstr "azurová"
 
-#: src/mygal/color-palette.c:614
+#: ../src/mygal/color-palette.c:607
 msgid "bright blue"
 msgstr "jasně modrá"
 
-#: src/mygal/color-palette.c:615 src/mygal/color-palette.c:632
+#: ../src/mygal/color-palette.c:608 ../src/mygal/color-palette.c:625
 msgid "red purple"
 msgstr "červenofialová"
 
-#: src/mygal/color-palette.c:616
+#: ../src/mygal/color-palette.c:609
 msgid "light grey"
 msgstr "světle šedá"
 
-#: src/mygal/color-palette.c:619 src/mygal/color-palette.c:636
+#: ../src/mygal/color-palette.c:612 ../src/mygal/color-palette.c:629
 msgid "pink"
 msgstr "růžová"
 
-#: src/mygal/color-palette.c:620
+#: ../src/mygal/color-palette.c:613
 msgid "light orange"
 msgstr "světle oranžová"
 
-#: src/mygal/color-palette.c:621 src/mygal/color-palette.c:633
+#: ../src/mygal/color-palette.c:614 ../src/mygal/color-palette.c:626
 msgid "light yellow"
 msgstr "světle žlutá"
 
-#: src/mygal/color-palette.c:622
+#: ../src/mygal/color-palette.c:615
 msgid "light green"
 msgstr "světle zelená"
 
-#: src/mygal/color-palette.c:623
+#: ../src/mygal/color-palette.c:616
 msgid "light cyan"
 msgstr "světle azurová"
 
-#: src/mygal/color-palette.c:624 src/mygal/color-palette.c:634
+#: ../src/mygal/color-palette.c:617 ../src/mygal/color-palette.c:627
 msgid "light blue"
 msgstr "světle modrá"
 
-#: src/mygal/color-palette.c:625 src/mygal/color-palette.c:638
+#: ../src/mygal/color-palette.c:618 ../src/mygal/color-palette.c:631
 msgid "light purple"
 msgstr "světle purpurová"
 
-#: src/mygal/color-palette.c:626
+#: ../src/mygal/color-palette.c:619
 msgid "white"
 msgstr "bílá"
 
-#: src/mygal/color-palette.c:631
+#: ../src/mygal/color-palette.c:624
 msgid "purplish blue"
 msgstr "fialovomodrá"
 
-#: src/mygal/color-palette.c:635
+#: ../src/mygal/color-palette.c:628
 msgid "dark purple"
 msgstr "tmavě purpurová"
 
-#: src/mygal/color-palette.c:637
+#: ../src/mygal/color-palette.c:630
 msgid "sky blue"
 msgstr "nebeská modř"
 
-#: libglabels/template.c:848
-#, c-format
-msgid "Generic %s full page"
-msgstr ""
+#: ../src/critical-error-handler.c:73
+msgid "gLabels Fatal Error!"
+msgstr "Kritická chyba aplikace gLabels!"
 
-#: libglabels/template.c:897
-msgid "No template files found!"
-msgstr "Nenalezeny šablony!"
+#: ../src/warning-handler.c:73
+msgid "gLabels Error!"
+msgstr "Chyba aplikace gLabels!"
 
 #. Create and append an "Other" entry.
-#: libglabels/paper.c:67
+#: ../libglabels/db.c:118
 msgid "Other"
 msgstr "Jiné"
 
-#: libglabels/paper.c:361
-msgid "No paper files found!"
+#. Create and append a "User defined" entry.
+#: ../libglabels/db.c:131
+msgid "User defined"
+msgstr "Definované uživatelem"
+
+#: ../libglabels/db.c:482
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
 msgstr ""
-
-#: data/ui/glabels-ui.xml.h:1
-msgid "About glabels"
-msgstr "O programu glabels"
-
-#: data/ui/glabels-ui.xml.h:2
-msgid "About..."
-msgstr "O programu"
-
-#: data/ui/glabels-ui.xml.h:3
-msgid "Align _Horizontal"
-msgstr "Zarovnat _vodorovně"
-
-#: data/ui/glabels-ui.xml.h:4
-msgid "Align _Vertical"
-msgstr "Zarovnat _svisle"
-
-#: data/ui/glabels-ui.xml.h:5
-msgid "Align objects to bottoms"
-msgstr "Zarovnat objekty dolů"
-
-#: data/ui/glabels-ui.xml.h:6
-msgid "Align objects to horizontal centers"
-msgstr "Zarovnat objekty vodorovně na střed"
-
-#: data/ui/glabels-ui.xml.h:7
-msgid "Align objects to left edges"
-msgstr "Zarovnat objekty dle levého kraje"
-
-#: data/ui/glabels-ui.xml.h:8
-msgid "Align objects to right edges"
-msgstr "Zarovnat objekty dle pravého kraje"
-
-#: data/ui/glabels-ui.xml.h:9
-msgid "Align objects to tops"
-msgstr "Zarovnat objekty nahoru"
-
-#: data/ui/glabels-ui.xml.h:10
-msgid "Align objects to vertical centers"
-msgstr "Zarovnat objekty svisle na střed"
-
-#: data/ui/glabels-ui.xml.h:12
-msgid "Bold"
-msgstr "Tučně"
-
-#: data/ui/glabels-ui.xml.h:14
-msgid "Center align"
-msgstr "Na střed"
-
-#: data/ui/glabels-ui.xml.h:15
-msgid "Center objects to horizontal label center"
-msgstr "Vycentrovat objekty vodorovně na střed etikety"
-
-#: data/ui/glabels-ui.xml.h:16
-msgid "Center objects to vertical label center"
-msgstr "Vycentrovat objekty svisle na střed etikety"
-
-#: data/ui/glabels-ui.xml.h:17
-msgid "Change the visibility of markup lines in the current window"
-msgstr "Změnit viditelnost hraničních čar v okně"
-
-#: data/ui/glabels-ui.xml.h:18
-msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr "Změnit viditelnost panelu kreslení v okně"
-
-#: data/ui/glabels-ui.xml.h:19
-msgid "Change the visibility of the grid in the current window"
-msgstr "Změnit viditelnost mřížky v okně"
-
-#: data/ui/glabels-ui.xml.h:20
-msgid "Change the visibility of the main toolbar in the current window"
-msgstr "Změnit viditelnost hlavního panelu nástrojů v okně"
-
-#: data/ui/glabels-ui.xml.h:21
-msgid "Change the visibility of the property toolbar in the current window"
-msgstr "Změnit viditelnost panelu vlastností v okně"
-
-#: data/ui/glabels-ui.xml.h:22
-msgid "Close"
-msgstr "Zavřít"
-
-#: data/ui/glabels-ui.xml.h:23
-msgid "Close the current file"
-msgstr "Zavřít tento soubor"
-
-#: data/ui/glabels-ui.xml.h:24
-msgid "Configure the application"
-msgstr "Konfigurovat aplikaci"
-
-#: data/ui/glabels-ui.xml.h:25
-msgid "Contents"
-msgstr "Obsah"
-
-#: data/ui/glabels-ui.xml.h:26
-msgid "Copy"
-msgstr "Kopírovat"
-
-#: data/ui/glabels-ui.xml.h:27
-msgid "Copy the selection"
-msgstr "Kopírovat výběr"
-
-#: data/ui/glabels-ui.xml.h:28
-msgid "Create a custom template"
-msgstr "Vytvořit vlastní šablonu"
-
-#: data/ui/glabels-ui.xml.h:29
-msgid "Create a new document"
-msgstr "Vytvořit nový dokument"
-
-#: data/ui/glabels-ui.xml.h:30
-msgid "Create barcode object"
-msgstr "Vložit čárový kód"
-
-#: data/ui/glabels-ui.xml.h:31
-msgid "Create box/rectangle object"
-msgstr "Vytvořit čtverec/obdélník"
-
-#: data/ui/glabels-ui.xml.h:32
-msgid "Create ellipse/circle object"
-msgstr "Vytvořit elipsu/kruh"
-
-#: data/ui/glabels-ui.xml.h:33
-msgid "Create image object"
-msgstr "Vložit obrázek"
-
-#: data/ui/glabels-ui.xml.h:34
-msgid "Create line object"
-msgstr "Vložit čáru"
-
-#: data/ui/glabels-ui.xml.h:35
-msgid "Create text object"
-msgstr "Vložit text"
-
-#: data/ui/glabels-ui.xml.h:36
-msgid "Cu_t"
-msgstr "_Vyjmout"
-
-#: data/ui/glabels-ui.xml.h:37
-msgid "Customize"
-msgstr "Přizpůsobit"
-
-#: data/ui/glabels-ui.xml.h:38
-msgid "Customize Drawing Toolbar"
-msgstr "Přizpůsobit panel kreslení"
-
-#: data/ui/glabels-ui.xml.h:39
-msgid "Customize Main Toolbar"
-msgstr "Přizpůsobit hlavní panel"
-
-#: data/ui/glabels-ui.xml.h:40
-msgid "Customize Property Toolbar"
-msgstr "Přizpůsobit panel vlastností"
-
-#: data/ui/glabels-ui.xml.h:41
-msgid "Customize toolbars"
-msgstr "Přizpůsobit panely"
-
-#: data/ui/glabels-ui.xml.h:42
-msgid "Cut"
-msgstr "Vyjmout"
-
-#: data/ui/glabels-ui.xml.h:43
-msgid "Cut the selection"
-msgstr "Vyjmout výběr"
-
-#: data/ui/glabels-ui.xml.h:44
-msgid "Decrease magnification"
-msgstr "Zmenšit"
-
-#: data/ui/glabels-ui.xml.h:45
-msgid "Delete"
-msgstr "Smazat"
-
-#: data/ui/glabels-ui.xml.h:46
-msgid "Delete the selected objects"
-msgstr "Smazat vybrané objekty"
-
-#: data/ui/glabels-ui.xml.h:47
-msgid "Drawing toolbar"
-msgstr "Panl kreslení"
-
-#: data/ui/glabels-ui.xml.h:48
-msgid "Dump XML"
-msgstr "Vypsat XML"
-
-#: data/ui/glabels-ui.xml.h:49
-msgid "Dump the UI Xml description"
-msgstr "Vypsat popis UI v XML"
-
-#: data/ui/glabels-ui.xml.h:50
-msgid "Edit merge properties"
-msgstr "Upravit vlastnosti sloučení"
-
-#: data/ui/glabels-ui.xml.h:54
-msgid "Flip object horizontally"
-msgstr "Převrátit objekt vodorovně"
-
-#: data/ui/glabels-ui.xml.h:55
-msgid "Flip object vertically"
-msgstr "Převrátit objekt svisle"
-
-#: data/ui/glabels-ui.xml.h:56
-msgid "Font name"
-msgstr "Název fontu"
-
-#: data/ui/glabels-ui.xml.h:57
-msgid "Font selector"
-msgstr "Výběr fontu"
-
-#: data/ui/glabels-ui.xml.h:58
-msgid "Font size"
-msgstr "Velikost fontu"
-
-#: data/ui/glabels-ui.xml.h:59
-msgid "Icon and _Text"
-msgstr "Ikony a text"
-
-#: data/ui/glabels-ui.xml.h:60
-msgid "Increase magnification"
-msgstr "Zvětšit"
-
-#: data/ui/glabels-ui.xml.h:61
-msgid "Italic"
-msgstr "Kurzíva"
-
-#: data/ui/glabels-ui.xml.h:63
-msgid "Left align"
-msgstr "Nalevo"
-
-#: data/ui/glabels-ui.xml.h:65
-msgid "Line width"
-msgstr "Šířka čáry"
-
-#: data/ui/glabels-ui.xml.h:66
-msgid "Lower object to bottom"
-msgstr "Poslat objekt dozadu"
-
-#: data/ui/glabels-ui.xml.h:67
-msgid "M_arkup"
-msgstr "Ohraničení"
-
-#: data/ui/glabels-ui.xml.h:68
-msgid "Main toolbar"
-msgstr "Hlavní panel"
-
-#: data/ui/glabels-ui.xml.h:69
-msgid "Markup"
-msgstr "Ohraničení"
-
-#: data/ui/glabels-ui.xml.h:70
-msgid "Modify document properties"
-msgstr "Upravit vlastnosti dokumentu"
-
-#: data/ui/glabels-ui.xml.h:71
-msgid "New"
-msgstr "Nový"
-
-#: data/ui/glabels-ui.xml.h:72
-msgid "Object property editor"
-msgstr "Editor vlastností objektu"
-
-#: data/ui/glabels-ui.xml.h:73
-msgid "Only show icons in the main toolbar"
-msgstr "Zobraz v hlavním panelu jen ikony"
-
-#: data/ui/glabels-ui.xml.h:75
-msgid "Open a file"
-msgstr "Otevřít soubor"
-
-#: data/ui/glabels-ui.xml.h:76
-msgid "Open the glabels manual"
-msgstr "Otevřít mauál programu"
-
-#: data/ui/glabels-ui.xml.h:77
-msgid "Paste"
-msgstr "Vložit"
-
-#: data/ui/glabels-ui.xml.h:78
-msgid "Paste the clipboard"
-msgstr "Vložit ze schránky"
-
-#: data/ui/glabels-ui.xml.h:79
-msgid "Pr_eferences..."
-msgstr "_Nastavení"
-
-#: data/ui/glabels-ui.xml.h:80
-msgid "Preferences"
-msgstr "Nastavení"
-
-#: data/ui/glabels-ui.xml.h:82
-msgid "Print the current file"
-msgstr "Tisk tohoto souboru"
-
-#: data/ui/glabels-ui.xml.h:83
-msgid "Proper_ties..."
-msgstr "Nas_tavení..."
-
-#: data/ui/glabels-ui.xml.h:84
-msgid "Properties"
-msgstr "Nastavení"
-
-#: data/ui/glabels-ui.xml.h:85
-msgid "Property toolbar"
-msgstr "Panel vlastností"
-
-#: data/ui/glabels-ui.xml.h:86
-msgid "Quit"
-msgstr "Konec"
-
-#: data/ui/glabels-ui.xml.h:87
-msgid "Quit the program"
-msgstr "Ukončit program"
-
-#: data/ui/glabels-ui.xml.h:88
-msgid "Raise object to top"
-msgstr "Vynést objekt dopředu"
-
-#: data/ui/glabels-ui.xml.h:89
-msgid "Recent _Files"
-msgstr "Otevřít nedávné"
-
-#: data/ui/glabels-ui.xml.h:90
-msgid "Redo"
-msgstr "Znovu"
-
-#: data/ui/glabels-ui.xml.h:91
-msgid "Redo the undone action"
-msgstr "Provést znovu vrácenou akci"
-
-#: data/ui/glabels-ui.xml.h:92
-msgid "Remove all selections"
-msgstr "Odstranit všechna označení"
-
-#: data/ui/glabels-ui.xml.h:94
-#, no-c-format
-msgid "Restore scale to 100%"
-msgstr "Vrátit měřítko na 100%"
-
-#: data/ui/glabels-ui.xml.h:95
-msgid "Right align"
-msgstr "Napravo"
-
-#: data/ui/glabels-ui.xml.h:98
-msgid "Rotate object 90 clockwise"
-msgstr "Otočit objekt o 90° po směru hodinových ručiček"
-
-#: data/ui/glabels-ui.xml.h:99
-msgid "Rotate object 90 counter-clockwise"
-msgstr "Otočit objekt o 90° proti směru hodinových ručiček"
-
-#: data/ui/glabels-ui.xml.h:100
-msgid "Save"
-msgstr "Uložit"
-
-#: data/ui/glabels-ui.xml.h:101
-msgid "Save As"
-msgstr "Uložit jako"
-
-#: data/ui/glabels-ui.xml.h:102
-msgid "Save _As..."
-msgstr "Uložit _jako..."
-
-#: data/ui/glabels-ui.xml.h:103
-msgid "Save the current file"
-msgstr "Uložit tento soubor"
-
-#: data/ui/glabels-ui.xml.h:104
-msgid "Save the current file with a different name"
-msgstr "Uložit tento soubor s jiným jménem"
-
-#: data/ui/glabels-ui.xml.h:105
-msgid "Select All"
+"Nelze najít definice velikostí papíru. Možná není správně nainstalovaná "
+"knihovna libglabels!"
+
+#: ../libglabels/db.c:875
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Nelze najít definice kategorií. Možná není správně nainstalovaná knihovna "
+"libglabels!"
+
+#: ../libglabels/db.c:1461
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Nelze najít žádný soubor s šablonou. Možná není správně nainstalovaná "
+"knihovna libglabels!"
+
+#: ../libglabels/db.c:1538
+#, c-format
+msgid "Generic %s full page template"
+msgstr "Obecná šablona na celou stranu %s"
+
+#: ../libglabels/xml-template.c:227
+msgid "Missing name or brand/part attributes."
+msgstr "Schází atributy název nebo značka/produkt."
+
+#. This should always be an id, but just in case a name
+#. slips by!
+#: ../libglabels/xml-template.c:244
+#, c-format
+msgid "Unknown page size id \"%s\", trying as name"
+msgstr "Neznámé ID velikosti papíru „%s“, zkusí se použít jako název"
+
+#: ../libglabels/xml-template.c:256
+#, c-format
+msgid "Unknown page size id or name \"%s\""
+msgstr "Neznámé ID nebo název velikosti stránky „%s“"
+
+#: ../libglabels/xml-template.c:615
+msgid ""
+"Missing required \"brand\" or \"part\" attribute, trying deprecated name."
+msgstr ""
+"Schází vyžadované atributy „značka“ nebo „produkt“, zkouší se použít "
+"nepřípustný název."
+
+#: ../libglabels/xml-template.c:625
+msgid "Name attribute also missing."
+msgstr "Schází také název atributu."
+
+#: ../data/glade/merge-properties-dialog.glade.h:1
+msgid "<b>Record selection/preview</b>"
+msgstr "<b>Výběr/náhled záznamu</b>"
+
+#: ../data/glade/merge-properties-dialog.glade.h:2
+msgid "<b>Source</b>"
+msgstr "<b>Zdroj</b>"
+
+#: ../data/glade/merge-properties-dialog.glade.h:3
+msgid "Format:"
+msgstr "Formát:"
+
+#: ../data/glade/merge-properties-dialog.glade.h:4
+msgid "Location:"
+msgstr "Umístění:"
+
+#: ../data/glade/merge-properties-dialog.glade.h:5
+msgid "Select all"
 msgstr "Vybrat vše"
 
-#: data/ui/glabels-ui.xml.h:106
-msgid "Select _All"
-msgstr "Vybr_at vše"
-
-#: data/ui/glabels-ui.xml.h:107
-msgid "Select all objects"
-msgstr "Vybrat všechny objekty"
-
-#: data/ui/glabels-ui.xml.h:108
-msgid "Select, move and modify objects"
-msgstr "Označení, posun a změna objektů"
-
-#: data/ui/glabels-ui.xml.h:110
-msgid "Set main toolbar button style according to desktop default"
-msgstr ""
-"Nastavit tlačítka na hlavním panelu stejně jako je základní nastavení "
-"prostředí"
-
-#: data/ui/glabels-ui.xml.h:111
-msgid "Show _Tooltips"
-msgstr "Ukazovat tipy"
-
-#: data/ui/glabels-ui.xml.h:112
-msgid "Show both icons and texts in the main toolbar"
-msgstr "Zobrazit ikony a popisy v hlavní nástrojové liště"
-
-#: data/ui/glabels-ui.xml.h:113
-msgid "Show tooltips in the drawing toolbar"
-msgstr "Ukazovat tipy v panelu kreslení"
-
-#: data/ui/glabels-ui.xml.h:114
-msgid "Show tooltips in the main toolbar"
-msgstr "Ukazovat tipy v hlavním panelu"
-
-#: data/ui/glabels-ui.xml.h:115
-msgid "Show tooltips in the property toolbar"
-msgstr "Ukazovat tipy v panelu vlastností"
-
-#: data/ui/glabels-ui.xml.h:116
-msgid "Template Designer"
-msgstr "Návrhář šablon"
-
-#: data/ui/glabels-ui.xml.h:117
-msgid "Template _Designer..."
-msgstr "Návrhář š_ablon..."
-
-#: data/ui/glabels-ui.xml.h:118
-msgid "Text color"
-msgstr "Barva textu"
-
-#: data/ui/glabels-ui.xml.h:119
-msgid "U_n-select All"
-msgstr "Odz_načit vše"
-
-#: data/ui/glabels-ui.xml.h:120
-msgid "Un-select All"
-msgstr "Odznačit vše"
-
-#: data/ui/glabels-ui.xml.h:121
-msgid "Undo"
-msgstr "Zpět"
-
-#: data/ui/glabels-ui.xml.h:122
-msgid "Undo the last action"
-msgstr "Vrátit o akci zpět"
-
-#: data/ui/glabels-ui.xml.h:123
-msgid "Zoom _1:1"
-msgstr "Zvětšení 1:1"
-
-#: data/ui/glabels-ui.xml.h:124
-msgid "Zoom _In"
-msgstr "Zvětšit"
-
-#: data/ui/glabels-ui.xml.h:125
-msgid "Zoom _Out"
-msgstr "Zmenšit"
-
-#: data/ui/glabels-ui.xml.h:126
-msgid "Zoom to _fit"
-msgstr "Přizpůsobit velikosti"
-
-#: data/ui/glabels-ui.xml.h:127
-msgid "Zoom to fit window"
-msgstr "Přizpůsobit velikosti okna"
-
-#: data/ui/glabels-ui.xml.h:128
-msgid "_About..."
-msgstr "_O programu..."
-
-#: data/ui/glabels-ui.xml.h:129
-msgid "_Bottoms"
-msgstr "Naspod"
-
-#: data/ui/glabels-ui.xml.h:132
-msgid "_Close"
-msgstr "_Zavřít"
-
-#: data/ui/glabels-ui.xml.h:133
-msgid "_Contents"
-msgstr "_Obsah"
-
-#: data/ui/glabels-ui.xml.h:134
-msgid "_Copy"
-msgstr "_Kopírovat"
-
-#: data/ui/glabels-ui.xml.h:135
-msgid "_Create Object"
-msgstr "_Vytvořit objekt"
-
-#: data/ui/glabels-ui.xml.h:136
-msgid "_Debug"
-msgstr "_Debugování"
-
-#: data/ui/glabels-ui.xml.h:138
-msgid "_Desktop Default"
-msgstr "Přednastavení prostředí"
-
-#: data/ui/glabels-ui.xml.h:139
-msgid "_Drawing Toolbar"
-msgstr "Panel _kreslení"
-
-#: data/ui/glabels-ui.xml.h:140
-msgid "_Edit"
-msgstr "_Upravit"
-
-#: data/ui/glabels-ui.xml.h:142
-msgid "_File"
-msgstr "_Soubor"
-
-#: data/ui/glabels-ui.xml.h:143
-msgid "_Grid"
-msgstr "_Mřížka"
-
-#: data/ui/glabels-ui.xml.h:144
-msgid "_Help"
-msgstr "_Nápověda"
-
-#: data/ui/glabels-ui.xml.h:145
-msgid "_Icon"
-msgstr "_Ikona"
-
-#: data/ui/glabels-ui.xml.h:149
-msgid "_Main Toolbar"
-msgstr "_Hlavní panel"
-
-#: data/ui/glabels-ui.xml.h:150
-msgid "_Merge Properties..."
-msgstr "Nastavení sloučení"
-
-#: data/ui/glabels-ui.xml.h:151
-msgid "_New"
-msgstr "_Nový"
-
-#: data/ui/glabels-ui.xml.h:152
-msgid "_Objects"
-msgstr "_Objekty"
-
-#: data/ui/glabels-ui.xml.h:153
-msgid "_Open..."
-msgstr "_Otevřít"
-
-#: data/ui/glabels-ui.xml.h:155
-msgid "_Paste"
-msgstr "Vl_ožit"
-
-#: data/ui/glabels-ui.xml.h:156
-msgid "_Print..."
-msgstr "_Tisk..."
-
-#: data/ui/glabels-ui.xml.h:157
-msgid "_Property Toolbar"
-msgstr "Panel _vlastností"
-
-#: data/ui/glabels-ui.xml.h:158
-msgid "_Quit"
-msgstr "_Konec"
-
-#: data/ui/glabels-ui.xml.h:161
-msgid "_Save"
-msgstr "_Uložit"
-
-#: data/ui/glabels-ui.xml.h:165
-msgid "_View"
-msgstr "_Zobrazit"
-
-#: data/glade/prefs-dialog.glade.h:1
-msgid "   "
-msgstr ""
-
-#: data/glade/prefs-dialog.glade.h:2 data/glade/object-editor.glade.h:1
-#: data/glade/template-designer.glade.h:5
-msgid "*"
-msgstr ""
-
-#: data/glade/prefs-dialog.glade.h:3
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">Výchozí velikost stránky</span>"
-
-#: data/glade/prefs-dialog.glade.h:4
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">Výplň</span>"
-
-#: data/glade/prefs-dialog.glade.h:5
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">Čára</span>"
-
-#: data/glade/prefs-dialog.glade.h:6
-msgid "<span weight=\"bold\">Text</span>"
-msgstr ""
-
-#: data/glade/prefs-dialog.glade.h:7
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">Jednotky</span>"
-
-#: data/glade/prefs-dialog.glade.h:8 data/glade/object-editor.glade.h:4
-msgid "Alignment:"
-msgstr "Zarovnání:"
-
-#: data/glade/prefs-dialog.glade.h:9 data/glade/object-editor.glade.h:8
-msgid "Color:"
-msgstr "Barva:"
-
-#: data/glade/prefs-dialog.glade.h:10
-msgid "Font:"
-msgstr "Font:"
-
-#: data/glade/prefs-dialog.glade.h:11
-msgid "ISO A4"
-msgstr ""
-
-#: data/glade/prefs-dialog.glade.h:12
-msgid "Inches"
-msgstr "Palce"
-
-#: data/glade/prefs-dialog.glade.h:13 data/glade/object-editor.glade.h:19
-msgid "Line Spacing:"
-msgstr "Řádkování:"
-
-#: data/glade/prefs-dialog.glade.h:14
-msgid "Locale"
-msgstr "Místní zvyklosti"
-
-#: data/glade/prefs-dialog.glade.h:15
-msgid "Millimeters"
-msgstr "Milimetry"
-
-#: data/glade/prefs-dialog.glade.h:16
-msgid "Object defaults"
-msgstr "Výchozí hodnoty objektu"
-
-#: data/glade/prefs-dialog.glade.h:17
-msgid "Points"
-msgstr "Body"
-
-#: data/glade/prefs-dialog.glade.h:18
-msgid "Select default properties for new objects."
-msgstr "Vyberte výchozí nastavení pro nové objekty"
-
-#: data/glade/prefs-dialog.glade.h:19
-msgid "Select locale specific behavior."
-msgstr "Zvolte specifické chování pro místní zvyklosti."
-
-#. Most popular (at top of list)
-#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:29
-msgid "US Letter"
-msgstr ""
-
-#: data/glade/prefs-dialog.glade.h:21 data/glade/object-editor.glade.h:29
-#: data/glade/template-designer.glade.h:72
-msgid "Width:"
-msgstr "Šířka:"
-
-#: data/glade/object-editor.glade.h:2
+#: ../data/glade/merge-properties-dialog.glade.h:6
+msgid "Unselect all"
+msgstr "Zrušit výběr"
+
+#: ../data/glade/merge-properties-dialog.glade.h:7
+#: ../data/glade/object-editor.glade.h:39
+msgid "dialog1"
+msgstr "dialog1"
+
+#: ../data/glade/new-label-dialog.glade.h:1
+msgid "<b>Label orientation</b>"
+msgstr "<b>Orientace etikety</b>"
+
+#: ../data/glade/new-label-dialog.glade.h:2
+msgid "<b>Media type</b>"
+msgstr "<b>Typ média</b>"
+
+#: ../data/glade/object-editor.glade.h:2
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/glade/object-editor.glade.h:3
 msgid "00000000000 00000"
-msgstr ""
+msgstr "00000000000 00000"
 
-#: data/glade/object-editor.glade.h:3
+#: ../data/glade/object-editor.glade.h:4
 msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Vlastnosti objektu xxx</span>"
 
-#: data/glade/object-editor.glade.h:5
-msgid "Allow merge to automatically shrink text"
-msgstr "Při sloučení povolit automatické smrštění textu"
+#: ../data/glade/object-editor.glade.h:5 ../data/glade/prefs-dialog.glade.h:7
+msgid "Alignment:"
+msgstr "Zarovnání:"
 
-#: data/glade/object-editor.glade.h:6
+#: ../data/glade/object-editor.glade.h:6
+msgid "Allow merge to automatically shrink text"
+msgstr "Při sloučení povolit automatické zúžení textu"
+
+#: ../data/glade/object-editor.glade.h:7
 msgid "Angle:"
 msgstr "Úhel:"
 
-#: data/glade/object-editor.glade.h:7
+#: ../data/glade/object-editor.glade.h:8
 msgid "Checksum"
 msgstr "Kontrolní součet"
 
-#: data/glade/object-editor.glade.h:10
+#: ../data/glade/object-editor.glade.h:9 ../data/glade/prefs-dialog.glade.h:8
+msgid "Color:"
+msgstr "Barva:"
+
+#: ../data/glade/object-editor.glade.h:11
+msgid "Enable shadow"
+msgstr "Zapnout stín"
+
+#: ../data/glade/object-editor.glade.h:12
 msgid "Family:"
 msgstr "Rodina:"
 
-#: data/glade/object-editor.glade.h:12
+#: ../data/glade/object-editor.glade.h:13
+msgid "File:"
+msgstr "Soubor:"
+
+#: ../data/glade/object-editor.glade.h:14
 msgid "Fill"
 msgstr "Výplň"
 
-#: data/glade/object-editor.glade.h:13 data/glade/template-designer.glade.h:33
+#: ../data/glade/object-editor.glade.h:15
+#: ../data/glade/template-designer.glade.h:30
 msgid "Height:"
 msgstr "Výška:"
 
-#: data/glade/object-editor.glade.h:14
-msgid "Image"
-msgstr "Obrázek"
-
-#: data/glade/object-editor.glade.h:15
+#: ../data/glade/object-editor.glade.h:17
 msgid "Insert merge field"
 msgstr "Vložit pole pro sloučení"
 
-#: data/glade/object-editor.glade.h:17
+#: ../data/glade/object-editor.glade.h:18
+msgid "Key:"
+msgstr "Klíč:"
+
+#: ../data/glade/object-editor.glade.h:19
 msgid "Length:"
 msgstr "Délka:"
 
-#: data/glade/object-editor.glade.h:18
-msgid "Line"
-msgstr "Čára"
+#: ../data/glade/object-editor.glade.h:21
+#: ../data/glade/prefs-dialog.glade.h:12
+msgid "Line Spacing:"
+msgstr "Řádkování:"
 
-#: data/glade/object-editor.glade.h:20
+#: ../data/glade/object-editor.glade.h:22
 msgid "Literal:"
-msgstr "Písmena:"
+msgstr "Znaky:"
 
-#: data/glade/object-editor.glade.h:21
-msgid "Load image"
-msgstr "Načíst obrázek"
+#: ../data/glade/object-editor.glade.h:23
+msgid "Opacity:"
+msgstr "Krytí:"
 
-#: data/glade/object-editor.glade.h:22
+#: ../data/glade/object-editor.glade.h:24
 msgid "Position"
 msgstr "Pozice"
 
-#: data/glade/object-editor.glade.h:23
+#: ../data/glade/object-editor.glade.h:25
 msgid "Reset image size"
-msgstr "Resetovat velikost obrázku"
+msgstr "Původní velikost obrázku"
 
-#: data/glade/object-editor.glade.h:24
+#: ../data/glade/object-editor.glade.h:26
+msgid "Select A File"
+msgstr "Výběr souboru"
+
+#: ../data/glade/object-editor.glade.h:27
+msgid "Shadow"
+msgstr "Stín"
+
+#: ../data/glade/object-editor.glade.h:28
 msgid "Size"
 msgstr "Velikost"
 
-#: data/glade/object-editor.glade.h:25
+#: ../data/glade/object-editor.glade.h:29
 msgid "Size:"
 msgstr "Velikost:"
 
-#: data/glade/object-editor.glade.h:26
+#: ../data/glade/object-editor.glade.h:30
 msgid "Style"
 msgstr "Styl"
 
-#: data/glade/object-editor.glade.h:27
+#: ../data/glade/object-editor.glade.h:31
 msgid "Style:"
 msgstr "Styl:"
 
-#: data/glade/object-editor.glade.h:30
+#: ../data/glade/object-editor.glade.h:33
+#: ../data/glade/prefs-dialog.glade.h:20
+#: ../data/glade/template-designer.glade.h:61
+msgid "Width:"
+msgstr "Šířka:"
+
+#: ../data/glade/object-editor.glade.h:34
+msgid "X Offset:"
+msgstr "Posun X:"
+
+#: ../data/glade/object-editor.glade.h:35
 msgid "X:"
 msgstr "X:"
 
-#: data/glade/object-editor.glade.h:31
+#: ../data/glade/object-editor.glade.h:36
+msgid "Y Offset:"
+msgstr "Posun Y:"
+
+#: ../data/glade/object-editor.glade.h:37
 msgid "Y:"
 msgstr "Y:"
 
-#: data/glade/object-editor.glade.h:32
+#: ../data/glade/object-editor.glade.h:38
 msgid "degrees"
 msgstr "stupně"
 
-#: data/glade/object-editor.glade.h:33
-msgid "dialog1"
-msgstr ""
-
-#: data/glade/object-editor.glade.h:34
+#: ../data/glade/object-editor.glade.h:40
 msgid "digits:"
 msgstr "číslic:"
 
-#: data/glade/object-editor.glade.h:35
+#: ../data/glade/object-editor.glade.h:41
 msgid "format:"
 msgstr "formát:"
 
-#: data/glade/template-designer.glade.h:1
-msgid "  "
-msgstr ""
+#: ../data/glade/prefs-dialog.glade.h:1
+msgid "   "
+msgstr "   "
 
-#: data/glade/template-designer.glade.h:2
+#: ../data/glade/prefs-dialog.glade.h:2
+msgid "<span weight=\"bold\">Default page size</span>"
+msgstr "<span weight=\"bold\">Výchozí velikost stránky</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:3
+msgid "<span weight=\"bold\">Fill</span>"
+msgstr "<span weight=\"bold\">Výplň</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:4
+msgid "<span weight=\"bold\">Line</span>"
+msgstr "<span weight=\"bold\">Obrys</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:5
+msgid "<span weight=\"bold\">Text</span>"
+msgstr "<span weight=\"bold\">Text</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:6
+msgid "<span weight=\"bold\">Units</span>"
+msgstr "<span weight=\"bold\">Jednotky</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:9
+msgid "Font:"
+msgstr "Písmo:"
+
+#: ../data/glade/prefs-dialog.glade.h:10
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: ../data/glade/prefs-dialog.glade.h:11
+msgid "Inches"
+msgstr "Palce"
+
+#: ../data/glade/prefs-dialog.glade.h:13
+msgid "Locale"
+msgstr "Národní prostředí"
+
+#: ../data/glade/prefs-dialog.glade.h:14
+msgid "Millimeters"
+msgstr "Milimetry"
+
+#: ../data/glade/prefs-dialog.glade.h:15
+msgid "Object defaults"
+msgstr "Výchozí hodnoty objektu"
+
+#: ../data/glade/prefs-dialog.glade.h:16
+msgid "Points"
+msgstr "Body"
+
+#: ../data/glade/prefs-dialog.glade.h:17
+msgid "Select default properties for new objects."
+msgstr "Vyberte výchozí vlastnosti pro nové objekty."
+
+#: ../data/glade/prefs-dialog.glade.h:18
+msgid "Select locale specific behavior."
+msgstr "Vyberte specifické chování pro národní prostředí."
+
+#. Most popular (at top of list)
+#: ../data/glade/prefs-dialog.glade.h:19
+#: ../data/templates/paper-sizes.xml.h:29
+msgid "US Letter"
+msgstr "US Letter"
+
+#: ../data/glade/print-custom-widget.glade.h:1
+msgid "<b>Options</b>"
+msgstr "<b>Volby</b>"
+
+#: ../data/glade/print-custom-widget.glade.h:2
+msgid "<b>Print control (Merge)</b>"
+msgstr "<b>Ovládání tisku (slučování)</b>"
+
+#: ../data/glade/print-custom-widget.glade.h:3
+msgid "<b>Print control (Simple)</b>"
+msgstr "<b>Ovládání tisku (jednoduchý)</b>"
+
+#: ../data/glade/property-bar.glade.h:1
+msgid "Bold"
+msgstr "Tučně"
+
+#: ../data/glade/property-bar.glade.h:2
+msgid "Center align"
+msgstr "Na střed"
+
+#: ../data/glade/property-bar.glade.h:4
+msgid "Font family"
+msgstr "Rodina písma"
+
+#: ../data/glade/property-bar.glade.h:5
+msgid "Font size"
+msgstr "Velikost písma"
+
+#: ../data/glade/property-bar.glade.h:6
+msgid "Italic"
+msgstr "Kurzíva"
+
+#: ../data/glade/property-bar.glade.h:7
+msgid "Left align"
+msgstr "Zarovnání vlevo"
+
+#: ../data/glade/property-bar.glade.h:9
+msgid "Line width"
+msgstr "Tloušťka obrysu"
+
+#: ../data/glade/property-bar.glade.h:10
+msgid "Right align"
+msgstr "Zarovnání vpravo"
+
+#: ../data/glade/property-bar.glade.h:11
+msgid "Text Color"
+msgstr "Barva textu"
+
+#: ../data/glade/property-bar.glade.h:12
+msgid "Text color"
+msgstr "Barva textu"
+
+#: ../data/glade/template-designer.glade.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(např. \"Adresní štítky,\" \"Vizitky,\" ...)"
+msgstr "(např. „Adresní štítky“, „Vizitky“, …)"
 
-#: data/glade/template-designer.glade.h:3
+#: ../data/glade/template-designer.glade.h:2
 msgid "(e.g., 8163A)"
 msgstr "(např. 8163A)"
 
-#: data/glade/template-designer.glade.h:4
+#: ../data/glade/template-designer.glade.h:3
 msgid "(e.g., Avery, Acme, ...)"
-msgstr "(např. Avery, Acme, ...)"
+msgstr "(např. Avery, Acme, …)"
 
-#: data/glade/template-designer.glade.h:6
+#: ../data/glade/template-designer.glade.h:4
 msgid "1. Outer radius:"
 msgstr "1. Vnější poloměr:"
 
-#: data/glade/template-designer.glade.h:7
+#: ../data/glade/template-designer.glade.h:5
 msgid "1. Radius:"
 msgstr "1. Poloměr:"
 
-#: data/glade/template-designer.glade.h:8
+#: ../data/glade/template-designer.glade.h:6
 msgid "1. Width:"
 msgstr "1. Šířka:"
 
-#: data/glade/template-designer.glade.h:9
+#: ../data/glade/template-designer.glade.h:7
 msgid "2. Height:"
 msgstr "2. Výška:"
 
-#: data/glade/template-designer.glade.h:10
+#: ../data/glade/template-designer.glade.h:8
 msgid "2. Inner radius:"
 msgstr "2. Vnitřní poloměr:"
 
-#: data/glade/template-designer.glade.h:11
+#: ../data/glade/template-designer.glade.h:9
 msgid "2. Waste (overprint allowed):"
-msgstr "2. Odsazení (povolený přetisk):"
+msgstr "2. Odsazení (umožňuje přetisk):"
 
-#: data/glade/template-designer.glade.h:12
+#: ../data/glade/template-designer.glade.h:10
 msgid "3. Clipping width:"
-msgstr "3. Šířka výstřižku:"
+msgstr "3. Šířka oříznutí:"
 
-#: data/glade/template-designer.glade.h:13
+#: ../data/glade/template-designer.glade.h:11
 msgid "3. Margin"
 msgstr "3. Okraj"
 
-#: data/glade/template-designer.glade.h:14
+#: ../data/glade/template-designer.glade.h:12
 msgid "3. Round (radius of corner):"
 msgstr "3. Zaoblení (poloměr rohu):"
 
-#: data/glade/template-designer.glade.h:15
+#: ../data/glade/template-designer.glade.h:13
 msgid "4. Clipping height:"
-msgstr "4. Výška výstřižku:"
+msgstr "4. Výška oříznutí:"
 
-#: data/glade/template-designer.glade.h:16
+#: ../data/glade/template-designer.glade.h:14
 msgid "4. Horiz. waste (overprint allowed):"
-msgstr "4. Horizontální odsazení (povolený přetisk):"
+msgstr "4. Vodorovné odsazení (umožňuje přetisk):"
 
-#: data/glade/template-designer.glade.h:17
+#: ../data/glade/template-designer.glade.h:15
 msgid "5. Vert. waste (overprint allowed):"
-msgstr "5. Vert. odsazení (povolený přetisk):"
+msgstr "5. Svislé odsazení (umožňuje přetisk):"
 
-#: data/glade/template-designer.glade.h:18
+#: ../data/glade/template-designer.glade.h:16
 msgid "5. Waste (overprint allowed):"
-msgstr "5. Odsazení (povolený přetisk):"
+msgstr "5. Odsazení (umožňuje přetisk):"
 
-#: data/glade/template-designer.glade.h:19
+#: ../data/glade/template-designer.glade.h:17
 msgid "6. Margin"
 msgstr "6. Okraj"
 
-#: data/glade/template-designer.glade.h:20
+#: ../data/glade/template-designer.glade.h:18
 msgid "Brand/Manufacturer:"
 msgstr "Značka/Výrobce:"
 
-#: data/glade/template-designer.glade.h:21
+#: ../data/glade/template-designer.glade.h:19
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (včetně vizitkových CD)"
 
-#: data/glade/template-designer.glade.h:22
+#: ../data/glade/template-designer.glade.h:20
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -1855,28 +1909,28 @@ msgstr ""
 "Gratulujeme!\n"
 "\n"
 "Dokončili jste návrh šablony gLabels.\n"
-"Pokud si přejete návrh přijmout a uložit, klikněte na \"Použít\".\n"
+"Pokud si přejete návrh přijmout a uložit, klikněte na „Použít“.\n"
 "\n"
-"Jinak klikněte na \"Zrušit\" pro zahození návrhu či na\n"
-"\"Zpět\" pro další úpravy tohoto návrhu."
+"V opačném případě klikněte na „Zrušit“ pro zahození návrhu\n"
+"nebo na „Zpět“ pro další úpravy tohoto návrhu."
 
-#: data/glade/template-designer.glade.h:30
-msgid "Design Completed"
-msgstr "Návrh byl dokončen"
+#: ../data/glade/template-designer.glade.h:27
+msgid "Description:"
+msgstr "Popis:"
 
-#: data/glade/template-designer.glade.h:31
+#: ../data/glade/template-designer.glade.h:28
 msgid "Distance from left edge (x0):"
 msgstr "Vzdálenost od levého okraje (x0):"
 
-#: data/glade/template-designer.glade.h:32
+#: ../data/glade/template-designer.glade.h:29
 msgid "Distance from top edge (y0):"
 msgstr "Vzdálenost od horního okraje (y0):"
 
-#: data/glade/template-designer.glade.h:34
+#: ../data/glade/template-designer.glade.h:31
 msgid "Horizontal pitch (dx):"
 msgstr "Vodorovná rozteč (dx):"
 
-#: data/glade/template-designer.glade.h:35
+#: ../data/glade/template-designer.glade.h:32
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -1890,110 +1944,83 @@ msgstr ""
 "jednoduché mřížce. Většina šablon potřebuje jedno rozvržení jako v\n"
 "prvním příkladu. Druhý příklad ilustruje dvě rozvržení."
 
-#: data/glade/template-designer.glade.h:40
-msgid "Label Size (CD/DVD)"
-msgstr "Velikost etikety (CD/DVD)"
-
-#: data/glade/template-designer.glade.h:41
-msgid "Label Size (Round)"
-msgstr "Velikost etikety (oválná)"
-
-#: data/glade/template-designer.glade.h:42
-msgid "Label or Card Shape"
-msgstr "Tvar etikety či vizitky"
-
-#: data/glade/template-designer.glade.h:43
-msgid "Label or Card Size (Rectangular)"
-msgstr "Velikost etikety či vizitky (obdélníková)"
-
-#: data/glade/template-designer.glade.h:44
+#: ../data/glade/template-designer.glade.h:37
 msgid "Layout #1"
-msgstr "Rozvržení #1"
+msgstr "Rozvržení č. 1"
 
-#: data/glade/template-designer.glade.h:45
+#: ../data/glade/template-designer.glade.h:38
 msgid "Layout #2"
-msgstr "Rozvržení #2"
+msgstr "Rozvržení č. 2"
 
-#: data/glade/template-designer.glade.h:46
-msgid "Layout(s)"
-msgstr "Rozvržení"
-
-#: data/glade/template-designer.glade.h:47
-msgid "Name and Description"
-msgstr "Název a popis"
-
-#: data/glade/template-designer.glade.h:48
+#: ../data/glade/template-designer.glade.h:39
 msgid "Number across (nx):"
 msgstr "Počet napříč (nx):"
 
-#: data/glade/template-designer.glade.h:49
+#: ../data/glade/template-designer.glade.h:40
 msgid "Number down (ny):"
-msgstr "Počet dolů (ny):"
+msgstr "Počet svisle (ny):"
 
-#: data/glade/template-designer.glade.h:50
-msgid "Number of Layouts"
-msgstr "Počet rozvržení"
-
-#: data/glade/template-designer.glade.h:51
+#: ../data/glade/template-designer.glade.h:41
 msgid "Number of layouts:"
 msgstr "Počet rozvržení:"
 
-#: data/glade/template-designer.glade.h:52
-msgid "Page Size"
-msgstr "Velikost stránky"
+#: ../data/glade/template-designer.glade.h:42
+#: ../data/glade/wdgt-media-select.glade.h:3
+msgid "Page size:"
+msgstr "Velikost stránky:"
 
-#: data/glade/template-designer.glade.h:54
+#: ../data/glade/template-designer.glade.h:43
 msgid "Part #:"
-msgstr "Část #:"
+msgstr "Produktové číslo:"
 
-#: data/glade/template-designer.glade.h:55
+#: ../data/glade/template-designer.glade.h:44
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
 msgstr ""
-"Vyplňte, prosím, následující informace o šabloně."
+"Vyplňte, prosím, následující identifikační informace o papíru pro šablonu."
 
-#: data/glade/template-designer.glade.h:56
+#: ../data/glade/template-designer.glade.h:45
 msgid "Please enter the following layout information."
 msgstr "Vyplňte, prosím, následující informaci o rozvržení."
 
-#: data/glade/template-designer.glade.h:57
+#: ../data/glade/template-designer.glade.h:46
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
 msgstr ""
-"Vyplňte, prosím, následující parametry velikosti jedné etikety ve "
-"vaší šabloně."
+"Vyplňte, prosím, následující parametry velikosti jedné etikety ve vaší "
+"šabloně."
 
-#: data/glade/template-designer.glade.h:58
+#: ../data/glade/template-designer.glade.h:47
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
 msgstr ""
-"Vyplňte, prosím, následující parametry velikosti jedné etikety nebo vizitky ve "
-"vaší šabloně."
+"Vyplňte, prosím, následující parametry velikosti jedné etikety nebo vizitky "
+"ve vaší šabloně."
 
-#: data/glade/template-designer.glade.h:59
+#: ../data/glade/template-designer.glade.h:48
 msgid "Please select the basic shape of the labels or cards."
 msgstr "Vyberte, prosím, základní tvar etiket nebo vizitek."
 
-#: data/glade/template-designer.glade.h:60
+#: ../data/glade/template-designer.glade.h:49
 msgid "Please select the page size of the template stationery."
-msgstr "Vyberte, prosím, velikost stránky šablony."
+msgstr "Vyberte, prosím, velikost stránky papíru pro šablonu."
 
-#: data/glade/template-designer.glade.h:61
+#: ../data/glade/template-designer.glade.h:50
 msgid "Print test sheet"
 msgstr "Vytisknout testovací stránku"
 
-#: data/glade/template-designer.glade.h:62
+#: ../data/glade/template-designer.glade.h:51
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "Obdélníkový nebo čtvercový (může mít zaoblené rohy)"
 
-#: data/glade/template-designer.glade.h:63
+#: ../data/glade/template-designer.glade.h:52
 msgid "Round"
 msgstr "Oválný"
 
-#: data/glade/template-designer.glade.h:64
+#: ../data/glade/template-designer.glade.h:53
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2001,7 +2028,7 @@ msgstr ""
 "Šablony, které potřebují\n"
 "dvě rozvržení."
 
-#: data/glade/template-designer.glade.h:66
+#: ../data/glade/template-designer.glade.h:55
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2009,476 +2036,695 @@ msgstr ""
 "Šablony, které potřebují\n"
 "jedno rozvržení."
 
-#: data/glade/template-designer.glade.h:68
+#: ../data/glade/template-designer.glade.h:57
 msgid "Vertical pitch (dy):"
 msgstr "Svislá rozteč (dy):"
 
-#: data/glade/template-designer.glade.h:69
+#: ../data/glade/template-designer.glade.h:58
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
-"Vítejte v Návrháři šablon programu gLabels.\n"
+"Vítejte v návrháři šablon aplikace gLabels.\n"
 "\n"
 "Tento dialog vám pomůže při vytváření vlastní šablony gLabels."
 
+#: ../data/glade/template-designer.glade.h:62
+msgid "cd_size_page"
+msgstr "karta_velikost_cd"
+
+#: ../data/glade/template-designer.glade.h:63
+msgid "finish_page"
+msgstr "karta_dokončení"
+
+#: ../data/glade/template-designer.glade.h:65
+msgid "layout_page"
+msgstr "karta_rozvržení"
+
+#: ../data/glade/template-designer.glade.h:66
+msgid "name_page"
+msgstr "karta_název"
+
+#: ../data/glade/template-designer.glade.h:67
+msgid "nlayouts_page"
+msgstr "karta_počet_rozvržení"
+
+#: ../data/glade/template-designer.glade.h:68
+msgid "pg_size_page"
+msgstr "karta_velikost_strany"
+
+#: ../data/glade/template-designer.glade.h:69
+msgid "rect_size_page"
+msgstr "karta_velikost_obdélníku"
+
+#: ../data/glade/template-designer.glade.h:70
+msgid "round_size_page"
+msgstr "karta_velikost_ovalu"
+
+#: ../data/glade/template-designer.glade.h:71
+msgid "shape_page"
+msgstr "karta_tvar"
+
+#: ../data/glade/template-designer.glade.h:72
+msgid "start_page"
+msgstr "karta_úvod"
+
+#: ../data/glade/wdgt-media-select.glade.h:1
+msgid "Brand:"
+msgstr "Značka:"
+
+#: ../data/glade/wdgt-media-select.glade.h:2
+msgid "Category:"
+msgstr "Kategorie:"
+
+#: ../data/glade/wdgt-media-select.glade.h:4
+msgid "Recent templates"
+msgstr "Nedávno použité šablony"
+
+#: ../data/glade/wdgt-media-select.glade.h:5
+msgid "Search all templates"
+msgstr "Vyhledat ve všech šablonách"
+
+#: ../data/glade/wdgt-rotate-label.glade.h:1
+msgid "Rotate"
+msgstr "Otočit"
+
 #. Other ISO A series sizes
-#: data/templates/paper-sizes.xml.h:2
+#: ../data/templates/paper-sizes.xml.h:2
 msgid "A0"
-msgstr ""
+msgstr "A0"
 
-#: data/templates/paper-sizes.xml.h:3
+#: ../data/templates/paper-sizes.xml.h:3
 msgid "A1"
-msgstr ""
+msgstr "A1"
 
-#: data/templates/paper-sizes.xml.h:4
+#: ../data/templates/paper-sizes.xml.h:4
 msgid "A10"
-msgstr ""
+msgstr "A10"
 
-#: data/templates/paper-sizes.xml.h:5
+#: ../data/templates/paper-sizes.xml.h:5
 msgid "A2"
-msgstr ""
+msgstr "A2"
 
-#: data/templates/paper-sizes.xml.h:6
+#: ../data/templates/paper-sizes.xml.h:6
 msgid "A3"
-msgstr ""
+msgstr "A3"
 
-#: data/templates/paper-sizes.xml.h:7
+#: ../data/templates/paper-sizes.xml.h:7
 msgid "A4"
-msgstr ""
+msgstr "A4"
 
-#: data/templates/paper-sizes.xml.h:8
+#: ../data/templates/paper-sizes.xml.h:8
 msgid "A5"
-msgstr ""
+msgstr "A5"
 
-#: data/templates/paper-sizes.xml.h:9
+#: ../data/templates/paper-sizes.xml.h:9
 msgid "A6"
-msgstr ""
+msgstr "A6"
 
-#: data/templates/paper-sizes.xml.h:10
+#: ../data/templates/paper-sizes.xml.h:10
 msgid "A7"
-msgstr ""
+msgstr "A7"
 
-#: data/templates/paper-sizes.xml.h:11
+#: ../data/templates/paper-sizes.xml.h:11
 msgid "A8"
-msgstr ""
+msgstr "A8"
 
-#: data/templates/paper-sizes.xml.h:12
+#: ../data/templates/paper-sizes.xml.h:12
 msgid "A9"
-msgstr ""
+msgstr "A9"
 
 #. ISO B series sizes
-#: data/templates/paper-sizes.xml.h:14
+#: ../data/templates/paper-sizes.xml.h:14
 msgid "B0"
-msgstr ""
+msgstr "B0"
 
-#: data/templates/paper-sizes.xml.h:15
+#: ../data/templates/paper-sizes.xml.h:15
 msgid "B1"
-msgstr ""
+msgstr "B1"
 
-#: data/templates/paper-sizes.xml.h:16
+#: ../data/templates/paper-sizes.xml.h:16
 msgid "B10"
-msgstr ""
+msgstr "B10"
 
-#: data/templates/paper-sizes.xml.h:17
+#: ../data/templates/paper-sizes.xml.h:17
 msgid "B2"
-msgstr ""
+msgstr "B2"
 
-#: data/templates/paper-sizes.xml.h:18
+#: ../data/templates/paper-sizes.xml.h:18
 msgid "B3"
-msgstr ""
+msgstr "B3"
 
-#: data/templates/paper-sizes.xml.h:19
+#: ../data/templates/paper-sizes.xml.h:19
 msgid "B4"
-msgstr ""
+msgstr "B4"
 
-#: data/templates/paper-sizes.xml.h:20
+#: ../data/templates/paper-sizes.xml.h:20
 msgid "B5"
-msgstr ""
+msgstr "B5"
 
-#: data/templates/paper-sizes.xml.h:21
+#: ../data/templates/paper-sizes.xml.h:21
 msgid "B6"
-msgstr ""
+msgstr "B6"
 
-#: data/templates/paper-sizes.xml.h:22
+#: ../data/templates/paper-sizes.xml.h:22
 msgid "B7"
-msgstr ""
+msgstr "B7"
 
-#: data/templates/paper-sizes.xml.h:23
+#: ../data/templates/paper-sizes.xml.h:23
 msgid "B8"
-msgstr ""
+msgstr "B8"
 
-#: data/templates/paper-sizes.xml.h:24
+#: ../data/templates/paper-sizes.xml.h:24
 msgid "B9"
-msgstr ""
+msgstr "B9"
 
-#: data/templates/paper-sizes.xml.h:25
+#: ../data/templates/paper-sizes.xml.h:25
 msgid "US Executive"
-msgstr ""
+msgstr "US Executive"
 
 #. Other US paper sizes
-#: data/templates/paper-sizes.xml.h:27
+#: ../data/templates/paper-sizes.xml.h:27
 msgid "US Legal"
-msgstr ""
+msgstr "US Legal"
+
+#: ../data/templates/categories.xml.h:1
+msgid "Any card"
+msgstr "Libovolná karta"
+
+#: ../data/templates/categories.xml.h:2
+msgid "Any label"
+msgstr "Libovolná etiketa"
+
+#: ../data/templates/categories.xml.h:3
+msgid "Business cards"
+msgstr "Vizitky"
+
+#: ../data/templates/categories.xml.h:4
+msgid "CD/DVD or other media"
+msgstr "CD/DVD nebo jiná média"
+
+#: ../data/templates/categories.xml.h:5
+msgid "Mailing/shipping products"
+msgstr "Poštovní/přepravní produkty"
+
+#: ../data/templates/categories.xml.h:6
+msgid "Rectangular labels"
+msgstr "Obdélníkové etikety"
+
+#: ../data/templates/categories.xml.h:7
+msgid "Round labels"
+msgstr "Oválné etikety"
+
+#: ../data/templates/categories.xml.h:8
+msgid "Square labels"
+msgstr "Čtvercové etikety"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:2
-#: data/templates/zweckform-iso-templates.xml.h:2
+#: ../data/templates/avery-iso-templates.xml.h:2
+#: ../data/templates/avery-us-templates.xml.h:2
+#: ../data/templates/dymo-other-templates.xml.h:4
+#: ../data/templates/misc-iso-templates.xml.h:2
+#: ../data/templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
 msgstr "Adresní etikety"
 
 #. ===================================================================
-#. ============================================================
-#. ===================================================================
-#. ======================================================
-#: data/templates/avery-us-templates.xml.h:4
-#: data/templates/avery-iso-templates.xml.h:4
-#: data/templates/zweckform-iso-templates.xml.h:6
-#: data/templates/misc-us-templates.xml.h:3
-#: data/templates/misc-iso-templates.xml.h:17
-msgid "Business Cards"
-msgstr "Vizitky"
-
-#: data/templates/avery-us-templates.xml.h:5
-msgid "CD/DVD Labels (Disc Labels)"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:7
-msgid "Diskette Labels"
-msgstr "Disketové etikety"
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:9
-msgid "Filing Labels"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:11
-msgid "Full Sheet Labels"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:13
-msgid "Large Round Labels"
-msgstr "Velké oválné etikety"
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:15
-msgid "Name Badge Labels"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:17
-msgid "Return Address Labels"
-msgstr "Zpáteční adresa"
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:19
-msgid "Shipping Labels"
-msgstr "Dopravní etikety"
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:21
-msgid "Small Round Labels"
-msgstr "Malé oválné etikety"
-
-#. ===================================================================
-#: data/templates/avery-us-templates.xml.h:23
-msgid "Square Labels"
-msgstr "Čtvercové etikety"
-
-#: data/templates/avery-us-templates.xml.h:24
-msgid "Video Tape Face Labels"
-msgstr ""
-
-#: data/templates/avery-us-templates.xml.h:25
-msgid "Video Tape Spine Labels"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:2
+#: ../data/templates/avery-iso-templates.xml.h:4
 msgid "Address labels"
 msgstr "Adresní etikety"
 
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:6
+msgid "Allround labels"
+msgstr "Univerzální etikety"
+
+#. ============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:8
+#: ../data/templates/avery-us-templates.xml.h:4
+#: ../data/templates/misc-iso-templates.xml.h:12
+#: ../data/templates/misc-us-templates.xml.h:4
+#: ../data/templates/zweckform-iso-templates.xml.h:6
+msgid "Business Cards"
+msgstr "Vizitky"
+
 #. ===============================================================
-#: data/templates/avery-iso-templates.xml.h:6
+#: ../data/templates/avery-iso-templates.xml.h:10
 msgid "CD Booklet"
-msgstr ""
+msgstr "Přebal CD"
 
 #. ===============================================================
-#: data/templates/avery-iso-templates.xml.h:8
+#: ../data/templates/avery-iso-templates.xml.h:12
 msgid "CD Inlet"
-msgstr ""
+msgstr "Vsuvky do krabičky na CD"
 
 #. ===============================================================
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:10
-#: data/templates/zweckform-iso-templates.xml.h:8
-#: data/templates/misc-us-templates.xml.h:5
-#: data/templates/misc-iso-templates.xml.h:21
+#: ../data/templates/avery-iso-templates.xml.h:14
+#: ../data/templates/avery-us-templates.xml.h:6
+#: ../data/templates/misc-iso-templates.xml.h:16
+#: ../data/templates/misc-us-templates.xml.h:8
+#: ../data/templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
-msgstr "CD/DVD etikety"
+msgstr "Etikety na CD/DVD"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:12
+#: ../data/templates/avery-iso-templates.xml.h:16
+#: ../data/templates/avery-us-templates.xml.h:12
+msgid "Diskette Labels"
+msgstr "Etikety na diskety"
+
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:18
 msgid "Diskette labels"
-msgstr "Disketové etikety"
+msgstr "Etikety na diskety"
 
 #. ===============================================================
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:14
-#: data/templates/zweckform-iso-templates.xml.h:14
-#: data/templates/misc-iso-templates.xml.h:35
+#: ../data/templates/avery-iso-templates.xml.h:20
+#: ../data/templates/misc-iso-templates.xml.h:36
+#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "Poštovní etikety"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:16
+#: ../data/templates/avery-iso-templates.xml.h:22
 msgid "Mailing labels"
 msgstr "Poštovní etikety"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:18
+#: ../data/templates/avery-iso-templates.xml.h:24
 msgid "Mini Address Labels"
-msgstr ""
+msgstr "Mini adresní etikety"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:20
+#: ../data/templates/avery-iso-templates.xml.h:26
+msgid "Mini Labels"
+msgstr "Mini etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:28
 msgid "Shipping labels"
+msgstr "Přepravní etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-other-templates.xml.h:2
+msgid "File Folder Labels"
+msgstr "Etikety na složky"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:8
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "Etikety na CD/DVD (diskové etikety)"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:10
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "Etikety na CD/DVD (hřbetní etikety)"
+
+#. the LSK labels can be torn in half down the center
+#: ../data/templates/avery-us-templates.xml.h:14
+msgid "Divider Labels"
+msgstr "Rozdělovací etikety na karty"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:16
+msgid "Filing Labels"
+msgstr "Etikety na kartotéky"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:18
+msgid "Full Sheet Labels"
+msgstr "Celostránkové etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:20
+msgid "ID Labels"
+msgstr "Identifikační etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:22
+msgid "Index Cards"
+msgstr "Indexové karty"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:24
+msgid "Large Round Labels"
+msgstr "Velké oválné etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:26
+msgid "Name Badge Labels"
+msgstr "Etikety na jmenovky"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:28
+msgid "Post cards"
+msgstr "Pohlednice"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:30
+#: ../data/templates/dymo-other-templates.xml.h:12
+msgid "Return Address Labels"
+msgstr "Zpáteční adresa"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:32
+#: ../data/templates/misc-us-templates.xml.h:28
+msgid "Round Labels"
+msgstr "Oválné etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:34
+msgid "Shipping Labels"
 msgstr "Dopravní etikety"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:4
+#: ../data/templates/avery-us-templates.xml.h:36
+msgid "Small Round Labels"
+msgstr "Malé oválné etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:38
+msgid "Square Labels"
+msgstr "Čtvercové etikety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:40
+msgid "Tent Cards"
+msgstr "Přáníčka"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:42
+msgid "Video Tape Face Labels"
+msgstr "Etikety na čelní stranu videokazety"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:44
+msgid "Video Tape Spine Labels"
+msgstr "Etikety na hřbet videokazet"
+
+#: ../data/templates/brother-other-templates.xml.h:1
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Víceúčelové etikety 17×54 mm"
+
+#: ../data/templates/brother-other-templates.xml.h:2
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Přepravní etikety 62×100 mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../data/templates/brother-other-templates.xml.h:20
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Standardní adresní etikety 29×90 mm"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:2
+msgid "3.5in Diskette"
+msgstr "3,5ʺ disketa"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:6
+msgid "File Folder"
+msgstr "Kancelářská složka"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:8
+msgid "Hanging Folder"
+msgstr "Závěsná složka"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:10
+msgid "Large Address Labels"
+msgstr "Velké adresní etikety"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:14
+msgid "Shipping Address Labels"
+msgstr "Přepravní adresní etikety"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:4
+#: ../data/templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
-msgstr ""
+msgstr "Univerzální etikety"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:10
-msgid "Correction and Cover-up Labels"
-msgstr ""
+#: ../data/templates/misc-iso-templates.xml.h:6
+msgid "Arch File Labels"
+msgstr "Etikety na pořadače"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:12
-msgid "Lever Arch File Labels"
-msgstr ""
+#: ../data/templates/misc-iso-templates.xml.h:8
+msgid "Arch File Labels (large)"
+msgstr "Etikety na pořadače (velké)"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:16
-msgid "QSL-Karten Etiketten 70mm x 50,8mm"
-msgstr ""
+#: ../data/templates/misc-iso-templates.xml.h:10
+msgid "Arch File Labels (small)"
+msgstr "Etikety na pořadače (malé)"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:18
-msgid "Rectangular Copier Labels"
-msgstr ""
+#: ../data/templates/misc-iso-templates.xml.h:14
+msgid "CD Labels"
+msgstr "Etikety na CD"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:20
-#: data/templates/misc-iso-templates.xml.h:44
+#: ../data/templates/misc-iso-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:12
+msgid "CD/DVD Labels (face only)"
+msgstr "Etikety na CD/DVD (pouze předek)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:20
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "Etikety standardního formátu na CD/DVD (pouze předek)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:22
+msgid "Diskette Labels (face only)"
+msgstr "Etikety na diskety (pouze předek)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:24
+msgid "EPSON Photo Stickers 16"
+msgstr "Samolepky EPSON Photo Stickers 16"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:26
+msgid "Etiketten"
+msgstr "Etikety"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:28
+msgid "Fridge Magnet Stickers"
+msgstr "Reklamní magnetky na ledničku"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:30
+msgid "General Labels"
+msgstr "Obecné etikety"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:32
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "Etikety na inkoustový/laserový tisk 70×37 mm"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:38
+msgid "Mailing Labels-2 columns"
+msgstr "Poštovní etikety - 2 sloupce"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:40
+msgid "Mailing Labels-3 columns"
+msgstr "Poštovní etikety - 3 sloupce"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:42
+#: ../data/templates/misc-us-templates.xml.h:26
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "PRO CD Labels 2-up (pouze povrch)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:44
+#: ../data/templates/zweckform-iso-templates.xml.h:24
 msgid "Rectangular Labels"
 msgstr "Obdélníkové etikety"
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:22
-msgid "Video Labels (back)"
-msgstr "Video etikety (zadní strana)"
+#: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Video Labels (face only)"
+msgstr "Etikety na videokazety (pouze předek)"
 
-#: data/templates/misc-us-templates.xml.h:1
+#. ===================================================================
+#: ../data/templates/misc-other-templates.xml.h:2
+msgid "Multi-Purpose Labels"
+msgstr "Víceúčelové etikety"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "Vizitkové CD"
 
-#: data/templates/misc-us-templates.xml.h:4
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:6
 msgid "CD Template Rectangles"
-msgstr ""
+msgstr "Obdélníkové šablony na CD"
 
-#: data/templates/misc-us-templates.xml.h:6
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:10
 msgid "CD/DVD Labels (Face Only)"
-msgstr ""
+msgstr "Etikety na CD/DVD (pouze povrch)"
 
 #. ===================================================================
-#: data/templates/misc-us-templates.xml.h:7
-#: data/templates/misc-iso-templates.xml.h:23
-msgid "CD/DVD Labels (face only)"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/misc-us-templates.xml.h:9
+#: ../data/templates/misc-us-templates.xml.h:14
 msgid "Cassette Labels"
-msgstr "Kazetové etikety"
+msgstr "Etikety na kazety"
 
 #. ===================================================================
-#: data/templates/misc-us-templates.xml.h:11
+#: ../data/templates/misc-us-templates.xml.h:16
 msgid "DLT Labels"
-msgstr "DLT etikety"
+msgstr "Etikety na pásky DLT"
 
 #. ===================================================================
-#: data/templates/misc-us-templates.xml.h:13
+#: ../data/templates/misc-us-templates.xml.h:20
 msgid "Microtube labels"
-msgstr ""
+msgstr "Etikety na zkumavky"
 
-#: data/templates/misc-us-templates.xml.h:14
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Mini-CD Labels"
-msgstr ""
+msgstr "Etikety na Mini-CD"
 
-#: data/templates/misc-us-templates.xml.h:15
+#: ../data/templates/misc-us-templates.xml.h:23
 msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr ""
+msgstr "PRO CD Labels 2-up (pouze hřbet)"
 
-#: data/templates/misc-us-templates.xml.h:16
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "PRO CD Labels 2-up (Face only)"
-msgstr ""
+msgstr "PRO CD Labels 2-up (pouze povrch)"
 
-#: data/templates/misc-us-templates.xml.h:17
-#: data/templates/misc-iso-templates.xml.h:42
-msgid "PRO CD Labels 2-up (face only)"
-msgstr ""
-
-#: data/templates/misc-us-templates.xml.h:18
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Slimline CD Case (rightside up)"
-msgstr ""
+msgstr "Tenká krabička na CD (pravá strana)"
 
-#: data/templates/misc-us-templates.xml.h:19
+#: ../data/templates/misc-us-templates.xml.h:31
 msgid "Slimline CD Case (upside down)"
-msgstr ""
-
-#: data/templates/misc-iso-templates.xml.h:1
-msgid "Agipa 119488: Business Cards"
-msgstr "Agipa 119488: Vizitky"
+msgstr "Tenká krabička na CD (horní strana)"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:3
-msgid "Allround Labels --24"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:10
+msgid "Correction and Cover-up Labels"
+msgstr "Opravné a přelepovací etikety"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:5
-msgid "Allround Labels --44"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:12
+msgid "File Back Labels"
+msgstr "Etikety do diáře"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:7
-msgid "Allround Labels --64"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:14
+msgid "Lever Arch File Labels"
+msgstr "Etikety na pákové pořadače"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:9
-msgid "Allround Labels --65"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:18
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "Víceúčelové odnímatelné etikety"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:11
-msgid "Arch File Labels"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:20
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "Etikety na QSL karty 70mm × 50,8mm"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:13
-msgid "Arch File Labels (large)"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:22
+msgid "Rectangular Copier Labels"
+msgstr "Obdélníkové etikety do kopírky"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:15
-msgid "Arch File Labels (small)"
-msgstr ""
+#: ../data/templates/zweckform-iso-templates.xml.h:26
+msgid "Video Labels (back)"
+msgstr "Video etikety (zadní strana)"
 
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:19
-msgid "CD Labels"
-msgstr "CD etikety"
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:25
-msgid "CD/DVD Labels Standard Format (face only)"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:27
-msgid "Diskette Labels (face only)"
-msgstr "Disketové etikety (pouze předek)"
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:29
-msgid "EPSON Photo Stickers 16"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:31
-msgid "Etiketten"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:33
-msgid "Fridge Magnet Stickers"
-msgstr ""
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:37
-msgid "Mailing Labels --14"
-msgstr "Poštovní etikety --14"
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:39
-msgid "Mailing Labels-2 columns"
-msgstr "Poštovní etikety-2 sloupce"
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:41
-msgid "Mailing Labels-3 columns"
-msgstr "Poštovní etikety-3 sloupce"
-
-#. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:46
-msgid "Video Labels (face only)"
-msgstr "Video etikety (pouze předek)"
-
-#: data/desktop/glabels.desktop.in.h:1
+#: ../data/desktop/glabels.desktop.in.h:1
 msgid "Create labels, business cards and media covers"
 msgstr "Vytvářejte etikety, vizitky a obaly médií"
 
-#: data/desktop/glabels.desktop.in.h:2
+#: ../data/desktop/glabels.desktop.in.h:2
 msgid "gLabels Label Designer"
 msgstr "Návrhář etiket gLabels"
 
-#: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
+#: ../data/mime/glabels.keys.in.h:1 ../data/mime/glabels.xml.in.h:1
 msgid "gLabels Project File"
-msgstr ""
+msgstr "Projektový soubor gLabels"
 
-#~ msgid "Only show icons in the drawing toolbar"
-#~ msgstr "Zobrazv panelu kreslení jen ikony "
+#: ../barcode-0.98/compat/getopt.c:583
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: přepínač „%s“ je nejednoznačný\n"
 
-#~ msgid "Set drawing toolbar button style according to desktop default"
-#~ msgstr ""
-#~ "Nastavit tlačítka na panelu kreslení stejně jako je základní nastavení "
-#~ "prostředí"
+#: ../barcode-0.98/compat/getopt.c:607
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: přepínač „--%s“ neumožňuje argument\n"
 
-#, fuzzy
-#~ msgid "Show both icons and texts in the drawing toolbar"
-#~ msgstr "Ukazovat tipy v panelu kreslení"
+#: ../barcode-0.98/compat/getopt.c:612
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: přepínač „%c%s“ neumožňuje argument\n"
 
-#~ msgid "Object _Properties..."
-#~ msgstr "Možnosti objektu"
+#: ../barcode-0.98/compat/getopt.c:629
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: přepínač „-%s“ vyžaduje argument\n"
 
-#~ msgid "Display units"
-#~ msgstr "Jednotky zobrazení"
+#. --option
+#: ../barcode-0.98/compat/getopt.c:658
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: nerozpoznaný přepínač „--%s“\n"
 
-#~ msgid "Default page size"
-#~ msgstr "Standartní velikost stránky"
+#. +option or -option
+#: ../barcode-0.98/compat/getopt.c:662
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: nerozpoznaný přepínač „%c%s“\n"
 
-#~ msgid "Outline"
-#~ msgstr "Obrys"
+#. 1003.2 specifies the format of this message.
+#: ../barcode-0.98/compat/getopt.c:688
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: nedovolený přepínač -- %c\n"
 
-#~ msgid "Edit line object properties"
-#~ msgstr "Editace nastavení objektu řádky"
+#: ../barcode-0.98/compat/getopt.c:691
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: neplatný přepínač -- %c\n"
 
-#~ msgid "Edit text object properties"
-#~ msgstr "Editace nastavení objektu text"
-
-#~ msgid "Edit text:"
-#~ msgstr "Editace textu:"
-
-#~ msgid "Maintain current aspect ratio"
-#~ msgstr "Udržet současný poměr stran"
-
-#~ msgid "Open %s"
-#~ msgstr "Otevřít %s"
+#: ../barcode-0.98/compat/getopt.c:727
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: přepínač vyžaduje argument -- %c\n"
