@@ -234,5 +234,5 @@ libglabels/xml-template.h
 [type: gettext/xml]templates/misc-iso-templates.xml
 [type: gettext/xml]templates/misc-other-templates.xml
 [type: gettext/xml]templates/uline-us-templates.xml
-[type: gettext/xml]templates/worldlabel-us-templates.xml 
+[type: gettext/xml]templates/worldlabel-us-templates.xml
 [type: gettext/xml]templates/zweckform-iso-templates.xml
