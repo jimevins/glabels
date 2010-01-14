@@ -229,7 +229,10 @@ libglabels/xml-template.h
 [type: gettext/xml]templates/avery-other-templates.xml
 [type: gettext/xml]templates/brother-other-templates.xml
 [type: gettext/xml]templates/dymo-other-templates.xml
+[type: gettext/xml]templates/maco-us-templates.xml
 [type: gettext/xml]templates/misc-us-templates.xml
 [type: gettext/xml]templates/misc-iso-templates.xml
 [type: gettext/xml]templates/misc-other-templates.xml
+[type: gettext/xml]templates/uline-us-templates.xml
+[type: gettext/xml]templates/worldlabel-us-templates.xml 
 [type: gettext/xml]templates/zweckform-iso-templates.xml
