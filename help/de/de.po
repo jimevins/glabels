@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels2\n"
-"POT-Creation-Date: 2009-11-04 04:07+0000\n"
-"PO-Revision-Date: 2009-11-04 20:33+0100\n"
+"POT-Creation-Date: 2010-01-09 14:14+0000\n"
+"PO-Revision-Date: 2010-01-16 19:18+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -93,13 +93,17 @@ msgstr "translated"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/glabels.xml:1464(None)
-msgid "@@image: 'figures/merge-ex3-1.png'; md5=32fa57781b819430f19cd3cac6807622"
+#| msgid ""
+#| "@@image: 'figures/merge-ex2-2.png'; md5=f69a7e0ae86f66b0d70d39a7757918fa"
+msgid "@@image: 'figures/merge-ex3-1.png'; md5=b0c387b5fcfd730b2ae75172895ff5b8"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/glabels.xml:1492(None)
-msgid "@@image: 'figures/merge-ex3-2.png'; md5=1d49763e4006ea07792d7d1b805002ce"
+#| msgid ""
+#| "@@image: 'figures/merge-ex1-2.png'; md5=d03979f010e20e98532258edb20b1bc0"
+msgid "@@image: 'figures/merge-ex3-2.png'; md5=09f105e133657345e6e478a464e5b49f"
 msgstr "translated"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -2806,6 +2810,14 @@ msgstr ""
 #: C/glabels.xml:0(None)
 msgid "translator-credits"
 msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex3-1.png'; md5=32fa57781b819430f19cd3cac6807622"
+#~ msgstr "translated"
+
+#~ msgid ""
+#~ "@@image: 'figures/merge-ex3-2.png'; md5=1d49763e4006ea07792d7d1b805002ce"
+#~ msgstr "translated"
 
 #~ msgid ""
 #~ "@@image: 'figures/merge-ex2-1.png'; md5=d48a99d65408584eae2603a0c07610da"
