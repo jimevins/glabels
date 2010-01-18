@@ -84,6 +84,16 @@
     </Label-round>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Avery 5026 family: File folder labels.                              -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="5026" size="US-Letter" _description="File Folder Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="3.4375in" height="0.9375in" round="0.0625in" waste="5pt">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="9" x0="0.49755in" y0="0.51125in" dx="4.0674in" dy="1.13in"/>
+    </Label-rectangle>
+  </Template>
 
   <!-- =================================================================== -->
   <!-- Avery 5126 family: Shipping Labels.                                 -->
@@ -677,6 +687,58 @@
     <Label-rectangle id="0" width="126pt" height="90pt" round="4.464pt" x_waste="6.768pt" y_waste="0pt">
       <Markup-margin size="9pt"/>
       <Layout nx="4" ny="8" x0="36pt" y0="36pt" dx="139.536pt" dy="90pt"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Avery 6573 family: Shipping Labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6573" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="8.12992in" height="5in" round="0.0625in" waste="0">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="1" ny="2" x0="0.18504in" y0="0.5in" dx="0" dy="5in"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Avery 6871 family: Shipping Labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6871" size="US-Letter" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="2.375in" height="1.25in" round="0.0625in" waste="0.125in">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="3" ny="6" x0="0.3725in" y0="1.125in" dx="2.69in" dy="1.5in"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Avery 6873 family: Shipping Labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6873" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="3.75in" height="2.0in" round="0.0625in" waste="0.125">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="4" x0="0.375in" y0="1.125in" dx="4.0in" dy="2.25in"/>
+    </Label-rectangle>
+  </Template>
+
+
+  <!-- =================================================================== -->
+  <!-- Avery 6874 family: Shipping Labels.                                 -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="6874" size="US-Letter" _description="Shipping Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="3.75in" height="3.0in" round="0.0625in" waste="0.125">
+      <Markup-margin size="0.0625in"/>
+      <Layout nx="2" ny="3" x0="0.375in" y0="0.625in" dx="4.0in" dy="3.375in"/>
     </Label-rectangle>
   </Template>
 
