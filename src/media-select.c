@@ -770,6 +770,14 @@ load_recent_list (glMediaSelect      *this,
 
         gtk_list_store_clear (store);
 
+
+        if ( this->priv->recent_info_bar )
+        {
+                gtk_container_remove (GTK_CONTAINER (this->priv->recent_info_vbox),
+                                      this->priv->recent_info_bar);
+                this->priv->recent_info_bar = NULL;
+        }
+
         if (list)
         {
 
@@ -808,12 +816,6 @@ load_recent_list (glMediaSelect      *this,
                 gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
                 gtk_tree_selection_select_iter (selection, &iter);
 
-                if ( this->priv->recent_info_bar )
-                {
-                        gtk_container_remove (GTK_CONTAINER (this->priv->recent_info_vbox),
-                                              this->priv->recent_info_bar);
-                        this->priv->recent_info_bar = NULL;
-                }
         }
         else
         {
@@ -857,6 +859,13 @@ load_search_all_list (glMediaSelect      *this,
 
         gtk_list_store_clear (store);
 
+        if ( this->priv->search_all_info_bar )
+        {
+                gtk_container_remove (GTK_CONTAINER (this->priv->search_all_info_vbox),
+                                      this->priv->search_all_info_bar);
+                this->priv->search_all_info_bar = NULL;
+        }
+
         if (list)
         {
 
@@ -895,12 +904,6 @@ load_search_all_list (glMediaSelect      *this,
                 gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
                 gtk_tree_selection_select_iter (selection, &iter);
 
-                if ( this->priv->search_all_info_bar )
-                {
-                        gtk_container_remove (GTK_CONTAINER (this->priv->search_all_info_vbox),
-                                              this->priv->search_all_info_bar);
-                        this->priv->search_all_info_bar = NULL;
-                }
         }
         else
         {
