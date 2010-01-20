@@ -2,14 +2,14 @@
 # Copyright (C) 2001-2009 Jim Evins <evins@snaught.com>
 # Marcus Bauer <m@7n7.de>, 2001.
 # Christian Neumair <christian-neumair@web.de>, 2002.
-# Mario Blättermann <mariobl@gnome.org>, 2008, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2008-2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2009-12-23 22:48+0000\n"
-"PO-Revision-Date: 2009-12-28 00:27+0100\n"
+"POT-Creation-Date: 2010-01-18 23:24+0000\n"
+"PO-Revision-Date: 2010-01-20 19:07+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -310,7 +310,7 @@ msgstr "Schwerwiegender Fehler in gLabels!"
 msgid "New Label or Card"
 msgstr "Neues Etikett oder neue Karte"
 
-#: ../src/file.c:190 ../src/label.c:583 ../src/label.c:627
+#: ../src/file.c:190 ../src/label.c:584 ../src/label.c:628
 msgid "Label properties"
 msgstr "Etiketten-Eigenschaften"
 
@@ -328,7 +328,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:351 ../src/file.c:367
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:364
 msgid "File does not exist"
@@ -377,7 +378,8 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:777
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:780
 msgid "Close without saving"
@@ -519,12 +521,10 @@ msgid "Create barcode object"
 msgstr "Strichcodeobjekt erzeugen"
 
 #: ../src/label-barcode.c:227 ../src/label-barcode.c:389
-#| msgid "Barcode data empty"
 msgid "Barcode data"
 msgstr "Strichcode-Daten"
 
 #: ../src/label-barcode.c:263
-#| msgid "Barcode object properties"
 msgid "Barcode property"
 msgstr "Strichcode-Eigenschaft"
 
@@ -537,7 +537,6 @@ msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
 #: ../src/label-box.c:156
-#| msgid "Create text object"
 msgid "Create box object"
 msgstr "Rahmenobjekt erzeugen"
 
@@ -556,85 +555,83 @@ msgstr "Linienfarbe"
 msgid "Line width"
 msgstr "Linienbreite"
 
-#: ../src/label.c:398
+#: ../src/label.c:399
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: ../src/label.c:701 ../src/ui.c:422
+#: ../src/label.c:702 ../src/ui.c:422
 msgid "Merge properties"
 msgstr "Mischeinstellungen"
 
-#: ../src/label.c:1183 ../src/ui.c:215
+#: ../src/label.c:1184 ../src/ui.c:215
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/label.c:1216 ../src/ui.c:324
+#: ../src/label.c:1217 ../src/ui.c:324
 msgid "Bring to front"
 msgstr "Ganz nach vorn"
 
-#: ../src/label.c:1252 ../src/ui.c:331
+#: ../src/label.c:1253 ../src/ui.c:331
 msgid "Send to back"
 msgstr "Ganz nach hinten"
 
-#: ../src/label.c:1293
-#| msgid "Rotated"
+#: ../src/label.c:1294
 msgid "Rotate"
 msgstr "Drehen"
 
-#: ../src/label.c:1328 ../src/ui.c:338
+#: ../src/label.c:1329 ../src/ui.c:338
 msgid "Rotate left"
 msgstr "Links drehen"
 
-#: ../src/label.c:1361 ../src/ui.c:345
+#: ../src/label.c:1362 ../src/ui.c:345
 msgid "Rotate right"
 msgstr "Rechts drehen"
 
-#: ../src/label.c:1396 ../src/ui.c:352
+#: ../src/label.c:1397 ../src/ui.c:352
 msgid "Flip horizontally"
 msgstr "Horizontal spiegeln"
 
-#: ../src/label.c:1431 ../src/ui.c:359
+#: ../src/label.c:1432 ../src/ui.c:359
 msgid "Flip vertically"
 msgstr "Vertikal spiegeln"
 
-#: ../src/label.c:1471 ../src/ui.c:366
+#: ../src/label.c:1472 ../src/ui.c:366
 msgid "Align left"
 msgstr "Linksbündig"
 
-#: ../src/label.c:1528 ../src/ui.c:373
+#: ../src/label.c:1529 ../src/ui.c:373
 msgid "Align right"
 msgstr "Rechtsbündig"
 
-#: ../src/label.c:1589 ../src/ui.c:380
+#: ../src/label.c:1590 ../src/ui.c:380
 msgid "Align horizontal center"
 msgstr "Horizontal mittig anordnen"
 
-#: ../src/label.c:1665 ../src/ui.c:387
+#: ../src/label.c:1666 ../src/ui.c:387
 msgid "Align tops"
 msgstr "Oben bündig"
 
-#: ../src/label.c:1722 ../src/ui.c:394
+#: ../src/label.c:1723 ../src/ui.c:394
 msgid "Align bottoms"
 msgstr "Unten bündig"
 
-#: ../src/label.c:1783 ../src/ui.c:401
+#: ../src/label.c:1784 ../src/ui.c:401
 msgid "Align vertical center"
 msgstr "Vertikal mittig anordnen"
 
-#: ../src/label.c:1861 ../src/ui.c:408
+#: ../src/label.c:1862 ../src/ui.c:408
 msgid "Center horizontally"
 msgstr "Horizontal zentrieren"
 
-#: ../src/label.c:1908 ../src/ui.c:415
+#: ../src/label.c:1909 ../src/ui.c:415
 msgid "Center vertically"
 msgstr "Vertikal zentrieren"
 
-#: ../src/label.c:2594 ../src/label.c:2636 ../src/label.c:2662 ../src/ui.c:208
+#: ../src/label.c:2595 ../src/label.c:2637 ../src/label.c:2663 ../src/ui.c:208
 msgid "Paste"
 msgstr "Einfügen"
 
 #: ../src/label-ellipse.c:160
-#| msgid "Create line object"
 msgid "Create ellipse object"
 msgstr "Ellipsenobjekt erzeugen"
 
@@ -643,7 +640,6 @@ msgid "Create image object"
 msgstr "Bildobjekt erzeugen"
 
 #: ../src/label-image.c:265 ../src/label-image.c:336
-#| msgid "Reset image size"
 msgid "Set image"
 msgstr "Bild festlegen"
 
@@ -656,27 +652,22 @@ msgid "Move"
 msgstr "Verschieben"
 
 #: ../src/label-object.c:467
-#| msgid "Page size:"
 msgid "Resize"
 msgstr "Größe ändern"
 
 #: ../src/label-object.c:1185
-#| msgid "Shadow"
 msgid "Shadow state"
 msgstr "Schattierung"
 
 #: ../src/label-object.c:1228
-#| msgid "Shadow"
 msgid "Shadow offset"
 msgstr "Schattierungsfarbe"
 
 #: ../src/label-object.c:1276
-#| msgid "Shadow"
 msgid "Shadow color"
 msgstr "Schattierungsversatz"
 
 #: ../src/label-object.c:1319
-#| msgid "Shadow"
 msgid "Shadow opacity"
 msgstr "Schattierungstransparenz"
 
@@ -686,7 +677,7 @@ msgstr "Textobjekt erzeugen"
 
 #: ../src/label-text.c:438
 msgid "Typing"
-msgstr ""
+msgstr "Texteingabe"
 
 #: ../src/label-text.c:573 ../data/builder/property-bar.builder.h:4
 msgid "Font family"
@@ -697,7 +688,6 @@ msgid "Font size"
 msgstr "Schriftgröße"
 
 #: ../src/label-text.c:644
-#| msgid "Rotate right"
 msgid "Font weight"
 msgstr "Schriftstärke"
 
@@ -706,12 +696,10 @@ msgid "Italic"
 msgstr "Kursiv"
 
 #: ../src/label-text.c:710
-#| msgid "Align left"
 msgid "Align text"
 msgstr "Text anordnen"
 
 #: ../src/label-text.c:743
-#| msgid "Line Spacing:"
 msgid "Line spacing"
 msgstr "Linienabstand"
 
@@ -792,7 +780,8 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr ""
+"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -1214,7 +1203,6 @@ msgid "Undo"
 msgstr "Rückgängig"
 
 #: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
-#| msgid "Red"
 msgid "Redo"
 msgstr "Wiederholen"
 
@@ -1423,7 +1411,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:452
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:458
 msgid "Grid"
@@ -1431,7 +1420,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:460
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:466
 msgid "Markup"
@@ -2098,7 +2088,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/builder/template-designer.builder.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2408,10 +2399,14 @@ msgid "Square labels"
 msgstr "Quadratische Etiketten"
 
 #. ===================================================================
+#. ********************************************************************
+#. ===================================================================
 #: ../templates/avery-us-templates.xml.h:2
 #: ../templates/avery-iso-templates.xml.h:2
 #: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/maco-us-templates.xml.h:2
 #: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:1
 #: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
 msgstr "Adressaufkleber"
@@ -2436,6 +2431,7 @@ msgstr "Visitenkarten"
 #: ../templates/avery-iso-templates.xml.h:14
 #: ../templates/misc-us-templates.xml.h:8
 #: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/worldlabel-us-templates.xml.h:2
 #: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
 msgstr "CD/DVD-Etiketten"
@@ -2453,6 +2449,7 @@ msgstr "CD/DVD-Etiketten (Spine Labels)"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:12
 #: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "Diskettenaufkleber"
 
@@ -2463,78 +2460,96 @@ msgstr "Etiketten für Trennblätter"
 
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:16
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "File Folder Labels"
+msgstr "Aktenordner-Etiketten"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "Ordneretiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/avery-us-templates.xml.h:20
+#: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
 msgstr "Ganzseitige Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:20
+#: ../templates/avery-us-templates.xml.h:22
 msgid "ID Labels"
 msgstr "Etiketten für Archivierungsordner"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:22
+#: ../templates/avery-us-templates.xml.h:24
 msgid "Index Cards"
 msgstr "Indexkarten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:24
+#: ../templates/avery-us-templates.xml.h:26
 msgid "Large Round Labels"
 msgstr "Große runde Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:26
+#: ../templates/avery-us-templates.xml.h:28
 msgid "Name Badge Labels"
 msgstr "Namensschild-Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:28
+#: ../templates/avery-us-templates.xml.h:30
 msgid "Post cards"
 msgstr "Postkarten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:30
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:32
 #: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "Rückantwort-Adressaufkleber"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/maco-us-templates.xml.h:3
 #: ../templates/misc-us-templates.xml.h:28
+#: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Runde Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:34
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:36
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
 msgstr "Versandetiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:36
+#: ../templates/avery-us-templates.xml.h:38
 msgid "Small Round Labels"
 msgstr "Kleine runde Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:38
+#: ../templates/avery-us-templates.xml.h:40
 msgid "Square Labels"
 msgstr "Quadratische Etiketten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:40
+#: ../templates/avery-us-templates.xml.h:42
 msgid "Tent Cards"
 msgstr "Klappkarten"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:42
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "Etiketten für Videokassetten (Vorderseite)"
 
 #. ===================================================================
-#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/avery-us-templates.xml.h:46
+#: ../templates/worldlabel-us-templates.xml.h:12
 msgid "Video Tape Spine Labels"
 msgstr "Etiketten für Videokassetten (Rückseite)"
 
@@ -2591,11 +2606,6 @@ msgstr "Mini-Etiketten"
 #: ../templates/avery-iso-templates.xml.h:28
 msgid "Shipping labels"
 msgstr "Versandaufkleber"
-
-#. ===================================================================
-#: ../templates/avery-other-templates.xml.h:2
-msgid "File Folder Labels"
-msgstr "Aktenordner-Etiketten"
 
 #: ../templates/brother-other-templates.xml.h:1
 msgid "Multi Purpose Labels 17mm x 54mm"
