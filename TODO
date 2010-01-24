@@ -22,8 +22,7 @@ Goals for 2.3.x (current development branch for 3.0):
 
 	-  New font selector widget family
 
-	-  Ability to select/unselect individual records during a
-	   merge-print.
+	-  Undo, Redo capability
 
 	-  Improve documentation and translation maintainance
 
@@ -36,8 +35,6 @@ Possible Goals for future branches:
 	   to exist within a single object.  Basically each text object
 	   will be a mini word processor.  The bounding box for the object
 	   will act like a page, where lines wrap on the word boundary.
-
-	-  Undo, Redo capability
 
 	-  Text effects.  (follow contour, non-rectangular text boxes,
 	   ...)
@@ -65,6 +62,9 @@ Possible Goals for future branches:
 
 	-  Allow for management of custom templates
 	   (i.e. delete, rename, edit).
+
+	-  Ability to select/unselect individual records during a
+	   merge-print.
 
 	-  See https://sourceforge.net/tracker/?atid=445119&group_id=46122&func=browse
 	   for additional ideas.
