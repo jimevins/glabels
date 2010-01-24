@@ -252,7 +252,7 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 	g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
 	if ( ((lbc->priv->id == NULL) && (id != NULL))
-	     || (g_ascii_strcasecmp (lbc->priv->id, id) != 0)
+	     || ((lbc->priv->id != NULL) && (id != NULL) && (g_ascii_strcasecmp (lbc->priv->id, id) != 0))
 	     || (lbc->priv->text_flag != text_flag)
 	     || (lbc->priv->checksum_flag != checksum_flag)
 	     || (lbc->priv->format_digits != format_digits))
