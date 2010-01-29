@@ -87,6 +87,27 @@ gl_units_util_get_precision (lglUnits units)
 }
 
 
+/****************************************************************************/
+/* Get grid size for desired units.                                         */
+/****************************************************************************/
+gdouble
+gl_units_util_get_grid_size (lglUnits units)
+{
+
+	switch (units) {
+	case LGL_UNITS_POINT:
+		return 10.0;
+	case LGL_UNITS_INCH:
+		return 0.125 * lgl_units_get_points_per_unit (units);
+	case LGL_UNITS_MM:
+		return 5     * lgl_units_get_points_per_unit (units);
+	default:
+		g_message ("Illegal units");	/* Should not happen */
+		return 10;
+	}
+}
+
+
 
 
 /*

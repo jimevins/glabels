@@ -40,6 +40,7 @@
 #include "cairo-markup-path.h"
 #include "color.h"
 #include "prefs.h"
+#include "units-util.h"
 #include "marshal.h"
 
 #include "debug.h"
@@ -49,21 +50,24 @@
 /* Private macros and constants.                                            */
 /*==========================================================================*/
 
-#define BG_COLOR        GL_COLOR (192, 192, 192)
+#define BG_COLOR        GL_COLOR (204, 204, 204)
 
 #define PAPER_RGB_ARGS          1.0,   1.0,   1.0
+#define SHADOW_RGB_ARGS         0.2,   0.2,   0.2
 #define GRID_RGB_ARGS           0.753, 0.753, 0.753
 #define MARKUP_RGB_ARGS         0.94,  0.39,  0.39
-#define OUTLINE_RGB_ARGS        0.68,  0.85,  0.90
+#define OUTLINE_RGB_ARGS        0.0,   0.0,   0.0
 #define SELECT_LINE_RGBA_ARGS   0.0,   0.0,   1.0,   0.5
 #define SELECT_FILL_RGBA_ARGS   0.75,  0.75,  1.0,   0.5
 
 #define GRID_LINE_WIDTH_PIXELS    1.0
 #define MARKUP_LINE_WIDTH_PIXELS  1.0
-#define OUTLINE_WIDTH_PIXELS      3.0
+#define OUTLINE_WIDTH_PIXELS      1.0
 #define SELECT_LINE_WIDTH_PIXELS  3.0
 
 #define ZOOMTOFIT_PAD   16
+
+#define SHADOW_OFFSET_PIXELS (ZOOMTOFIT_PAD/4)
 
 #define POINTS_PER_MM    2.83464566929
 
@@ -118,6 +122,8 @@ static void       gl_view_construct               (glView         *view,
                                                    glLabel        *label);
 
 static gdouble    get_home_scale                  (glView         *view);
+
+static void       prefs_changed_cb                (glView         *view);
 
 static gboolean   expose_cb                       (glView         *view,
                                                    GdkEventExpose *event);
@@ -258,14 +264,17 @@ gl_view_class_init (glViewClass *class)
 static void
 gl_view_init (glView *view)
 {
+        lglUnits   units;
 	GtkWidget *wscroll;
 	GdkColor  *bg_color;
 
 	gl_debug (DEBUG_VIEW, "START");
 
+        units = gl_prefs_model_get_units (gl_prefs);
+
 	view->label                = NULL;
 	view->grid_visible         = TRUE;
-	view->grid_spacing         = 9;
+	view->grid_spacing         = gl_units_util_get_grid_size (units);
 	view->markup_visible       = TRUE;
 	view->mode                 = GL_VIEW_MODE_ARROW;
 	view->zoom                 = 1.0;
@@ -297,6 +306,8 @@ gl_view_init (glView *view)
                                 GDK_BUTTON_RELEASE_MASK |
                                 GDK_KEY_PRESS_MASK));
 
+        g_signal_connect_swapped (G_OBJECT (gl_prefs), "changed",
+                                  G_CALLBACK (prefs_changed_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->canvas), "expose-event",
 				  G_CALLBACK (expose_cb), view);
 	g_signal_connect_swapped (G_OBJECT (view->canvas), "realize",
@@ -437,6 +448,21 @@ get_home_scale (glView *view)
 	if ( (scale < 0.25) || (scale > 4.0) ) return 1.0;
 
 	return scale;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Prefs "changed" callback.                                                 */
+/*---------------------------------------------------------------------------*/
+static void
+prefs_changed_cb (glView         *view)
+{
+        lglUnits   units;
+
+        units = gl_prefs_model_get_units (gl_prefs);
+	view->grid_spacing = gl_units_util_get_grid_size (units);
+
+        gl_view_update (view);
 }
 
 
@@ -713,16 +739,27 @@ static void
 draw_bg_layer (glView  *view,
                cairo_t *cr)
 {
+        gdouble            scale;
         const lglTemplate *template;
         gboolean           rotate_flag;
 
 	g_return_if_fail (view && GL_IS_VIEW (view));
 	g_return_if_fail (view->label && GL_IS_LABEL (view->label));
 
+        scale = view->home_scale * view->zoom;
+
         template    = gl_label_get_template (view->label);
         rotate_flag = gl_label_get_rotate_flag (view->label);
-        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
 
+        cairo_save (cr);
+        cairo_translate (cr, SHADOW_OFFSET_PIXELS/scale, SHADOW_OFFSET_PIXELS/scale);
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
+        cairo_set_source_rgb (cr, SHADOW_RGB_ARGS);
+        cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
+        cairo_fill (cr);
+        cairo_restore (cr);
+
+        gl_cairo_label_path (cr, template, rotate_flag, FALSE);
         cairo_set_source_rgb (cr, PAPER_RGB_ARGS);
         cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
         cairo_fill (cr);
@@ -737,6 +774,7 @@ draw_grid_layer (glView  *view,
                  cairo_t *cr)
 {
         const lglTemplate         *template;
+        gboolean                   rotate_flag;
 	const lglTemplateFrame    *frame;
 	gdouble                    w, h;
 	gdouble                    x, y;
@@ -750,14 +788,15 @@ draw_grid_layer (glView  *view,
         if (view->grid_visible)
         {
 
-                template = gl_label_get_template (view->label);
-                frame = (lglTemplateFrame *)template->frames->data;
+                template    = gl_label_get_template (view->label);
+                rotate_flag = gl_label_get_rotate_flag (view->label);
+                frame       = (lglTemplateFrame *)template->frames->data;
 
                 gl_label_get_size (view->label, &w, &h);
 	
                 if (frame->shape == LGL_TEMPLATE_FRAME_SHAPE_RECT) {
-                        x0 = 0.0;
-                        y0 = 0.0;
+                        x0 = view->grid_spacing;
+                        y0 = view->grid_spacing;
                 } else {
                         /* round labels, adjust grid to line up with center of label. */
                         x0 = fmod (w/2.0, view->grid_spacing);
@@ -767,18 +806,21 @@ draw_grid_layer (glView  *view,
 
                 cairo_save (cr);
 
+                gl_cairo_label_path (cr, template, rotate_flag, FALSE);
+                cairo_clip (cr);
+
                 cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
                 cairo_set_line_width (cr, GRID_LINE_WIDTH_PIXELS/(view->home_scale * view->zoom));
                 cairo_set_source_rgb (cr, GRID_RGB_ARGS);
 
-                for ( x=x0+view->grid_spacing; x < w; x += view->grid_spacing )
+                for ( x=x0; x < w; x += view->grid_spacing )
                 {
                         cairo_move_to (cr, x, 0);
                         cairo_line_to (cr, x, h);
                         cairo_stroke (cr);
                 }
 
-                for ( y=y0+view->grid_spacing; y < h; y += view->grid_spacing )
+                for ( y=y0; y < h; y += view->grid_spacing )
                 {
                         cairo_move_to (cr, 0, y);
                         cairo_line_to (cr, w, y);
@@ -970,20 +1012,6 @@ gl_view_hide_grid (glView *view)
 	g_return_if_fail (view && GL_IS_VIEW (view));
 
         view->grid_visible = FALSE;
-        gl_view_update (view);
-}
-
-
-/*****************************************************************************/
-/* Set grid spacing.                                                         */
-/*****************************************************************************/
-void
-gl_view_set_grid_spacing (glView  *view,
-			  gdouble  spacing)
-{
-	g_return_if_fail (view && GL_IS_VIEW (view));
-
-	view->grid_spacing = spacing;
         gl_view_update (view);
 }
 

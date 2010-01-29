@@ -136,9 +136,6 @@ void       gl_view_show_grid               (glView            *view);
 
 void       gl_view_hide_grid               (glView            *view);
 
-void       gl_view_set_grid_spacing        (glView            *view,
-					    gdouble            spacing);
-
 void       gl_view_show_markup             (glView            *view);
 
 void       gl_view_hide_markup             (glView            *view);

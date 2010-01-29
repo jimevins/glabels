@@ -30,6 +30,8 @@ gdouble       gl_units_util_get_step_size (lglUnits units);
 
 gint          gl_units_util_get_precision (lglUnits units);
 
+gdouble       gl_units_util_get_grid_size (lglUnits units);
+
 
 G_END_DECLS
 
