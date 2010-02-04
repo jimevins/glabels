@@ -26,15 +26,17 @@ of peel-off labels or cards.
 
 @brand: Brand name of label or card.  E.g. "Avery."
 @part: Part name or number of label or card.  E.g. "8160."
+@equiv_part: 
 @description: A description of the template.  E.g. "Mailing labels."
 @paper_id: A paper ID.  E.g. "A4" or "US-Letter."
 @page_width: Page width in points.  Used only if paper_id is "Other."
 @page_height: Page height in points.  Used only if paper_id is "Other."
-@aliases: A list of alternate names for this template.  Often a single template can be used for
-multiple products.
+@product_url: 
 @category_ids: A list of category IDs that this template belongs to.
 @frames: A list of (#lglTemplateFrame *) structures.  GLabels currently only supports one frame
 per template -- future versions may support multiple frames per template.
+@aliases: A list of alternate names for this template.  Often a single template can be used for
+multiple products.
 
 <!-- ##### STRUCT lglTemplateAlias ##### -->
 <para>

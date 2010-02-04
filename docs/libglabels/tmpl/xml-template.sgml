@@ -25,7 +25,6 @@ template files and document files.
 </para>
 
 @utf8_filename: 
-@Returns: 
 
 
 <!-- ##### FUNCTION lgl_xml_template_parse_templates_doc ##### -->
@@ -34,7 +33,6 @@ template files and document files.
 </para>
 
 @templates_doc: 
-@Returns: 
 
 
 <!-- ##### FUNCTION lgl_xml_template_parse_template_node ##### -->

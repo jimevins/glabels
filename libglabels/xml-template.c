@@ -47,6 +47,8 @@ static void  xml_parse_meta_node            (xmlNodePtr              label_node,
 					     lglTemplate            *template);
 static void  xml_parse_label_rectangle_node (xmlNodePtr              label_node,
 					     lglTemplate            *template);
+static void  xml_parse_label_ellipse_node   (xmlNodePtr              label_node,
+					     lglTemplate            *template);
 static void  xml_parse_label_round_node     (xmlNodePtr              label_node,
 					     lglTemplate            *template);
 static void  xml_parse_label_cd_node        (xmlNodePtr              label_node,
@@ -60,6 +62,8 @@ static void  xml_parse_markup_line_node     (xmlNodePtr              markup_node
 static void  xml_parse_markup_circle_node   (xmlNodePtr              markup_node,
 					     lglTemplateFrame       *frame);
 static void  xml_parse_markup_rect_node     (xmlNodePtr              markup_node,
+					     lglTemplateFrame       *frame);
+static void  xml_parse_markup_ellipse_node  (xmlNodePtr              markup_node,
 					     lglTemplateFrame       *frame);
 static void  xml_parse_alias_node           (xmlNodePtr              alias_node,
 					     lglTemplate            *template);
@@ -84,6 +88,9 @@ static void  xml_create_markup_circle_node  (const lglTemplateMarkup      *circl
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_markup_rect_node    (const lglTemplateMarkup      *circle,
+					     xmlNodePtr                    root,
+					     const xmlNsPtr                ns);
+static void  xml_create_markup_ellipse_node (const lglTemplateMarkup      *circle,
 					     xmlNodePtr                    root,
 					     const xmlNsPtr                ns);
 static void  xml_create_alias_node          (const lglTemplateAlias       *alias,
@@ -280,6 +287,8 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 			xml_parse_meta_node (node, template);
 		} else if (lgl_xml_is_node (node, "Label-rectangle")) {
 			xml_parse_label_rectangle_node (node, template);
+		} else if (lgl_xml_is_node (node, "Label-ellipse")) {
+			xml_parse_label_ellipse_node (node, template);
 		} else if (lgl_xml_is_node (node, "Label-round")) {
 			xml_parse_label_round_node (node, template);
 		} else if (lgl_xml_is_node (node, "Label-cd")) {
@@ -329,6 +338,7 @@ xml_parse_meta_node (xmlNodePtr   meta_node,
 	}
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Template->Label-rectangle Node.                      */
 /*--------------------------------------------------------------------------*/
@@ -373,6 +383,8 @@ xml_parse_label_rectangle_node (xmlNodePtr   label_node,
 			xml_parse_markup_circle_node (node, frame);
 		} else if (lgl_xml_is_node (node, "Markup-rect")) {
 			xml_parse_markup_rect_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-ellipse")) {
+			xml_parse_markup_ellipse_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
 			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -382,6 +394,55 @@ xml_parse_label_rectangle_node (xmlNodePtr   label_node,
 
 	g_free (id);
 }
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label-ellipse Node.                        */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_label_ellipse_node (xmlNodePtr   label_node,
+                              lglTemplate *template)
+{
+	gchar               *id;
+	gchar               *tmp;
+	gdouble              waste;
+	gdouble              w, h;
+	lglTemplateFrame    *frame;
+	xmlNodePtr           node;
+
+	id      = lgl_xml_get_prop_string (label_node, "id", NULL);
+
+	w       = lgl_xml_get_prop_length (label_node, "width", 0);
+	h       = lgl_xml_get_prop_length (label_node, "height", 0);
+        waste   = lgl_xml_get_prop_length (label_node, "waste", 0);
+
+	frame = lgl_template_frame_ellipse_new ((gchar *)id, w, h, waste);
+	lgl_template_add_frame (template, frame);
+
+	for (node = label_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (lgl_xml_is_node (node, "Layout")) {
+			xml_parse_layout_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-margin")) {
+			xml_parse_markup_margin_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-line")) {
+			xml_parse_markup_line_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-circle")) {
+			xml_parse_markup_circle_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-rect")) {
+			xml_parse_markup_rect_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-ellipse")) {
+			xml_parse_markup_ellipse_node (node, frame);
+		} else if (!xmlNodeIsText (node)) {
+			if (!lgl_xml_is_node (node, "comment")) {
+				g_message ("bad node =  \"%s\"",node->name);
+			}
+		}
+	}
+
+	g_free (id);
+}
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Template->Label-round Node.                          */
@@ -415,6 +476,8 @@ xml_parse_label_round_node (xmlNodePtr   label_node,
 			xml_parse_markup_circle_node (node, frame);
 		} else if (lgl_xml_is_node (node, "Markup-rect")) {
 			xml_parse_markup_rect_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-ellipse")) {
+			xml_parse_markup_ellipse_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
 			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -460,6 +523,8 @@ xml_parse_label_cd_node (xmlNodePtr   label_node,
 			xml_parse_markup_circle_node (node, frame);
 		} else if (lgl_xml_is_node (node, "Markup-rect")) {
 			xml_parse_markup_rect_node (node, frame);
+		} else if (lgl_xml_is_node (node, "Markup-ellipse")) {
+			xml_parse_markup_ellipse_node (node, frame);
 		} else if (!xmlNodeIsText (node)) {
 			if (!lgl_xml_is_node (node, "comment")) {
 				g_message ("bad node =  \"%s\"",node->name);
@@ -583,6 +648,7 @@ xml_parse_markup_circle_node (xmlNodePtr          markup_node,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Template->Label->Markup-rect Node.                   */
 /*--------------------------------------------------------------------------*/
@@ -611,6 +677,36 @@ xml_parse_markup_rect_node (xmlNodePtr          markup_node,
 	}
 
 }
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML Template->Label->Markup-ellipse Node.                */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_markup_ellipse_node (xmlNodePtr          markup_node,
+                               lglTemplateFrame   *frame)
+{
+	gdouble     x1, y1, w, h, r;
+	xmlNodePtr  node;
+
+	x1 = lgl_xml_get_prop_length (markup_node, "x1", 0);
+	y1 = lgl_xml_get_prop_length (markup_node, "y1", 0);
+	w  = lgl_xml_get_prop_length (markup_node, "w", 0);
+	h  = lgl_xml_get_prop_length (markup_node, "h", 0);
+
+	lgl_template_frame_add_markup (frame, lgl_template_markup_ellipse_new (x1, y1, w, h));
+
+	for (node = markup_node->xmlChildrenNode; node != NULL;
+	     node = node->next) {
+		if (!xmlNodeIsText (node)) {
+			if (!lgl_xml_is_node (node, "comment")) {
+				g_message ("bad node =  \"%s\"",node->name);
+			}
+		}
+	}
+
+}
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Parse XML Template->Alias Node.                                */
@@ -828,6 +924,14 @@ xml_create_label_node (const lglTemplateFrame  *frame,
 		lgl_xml_set_prop_length (node, "y_waste", frame->rect.y_waste);
 		break;
 
+	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+		node = xmlNewChild(root, ns, (xmlChar *)"Label-ellipse", NULL);
+		lgl_xml_set_prop_string (node, "id",     frame->all.id);
+		lgl_xml_set_prop_length (node, "width",  frame->ellipse.w);
+		lgl_xml_set_prop_length (node, "height", frame->ellipse.h);
+		lgl_xml_set_prop_length (node, "waste",  frame->ellipse.waste);
+		break;
+
 	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
 		node = xmlNewChild(root, ns, (xmlChar *)"Label-round", NULL);
 		lgl_xml_set_prop_string (node, "id",      frame->all.id);
@@ -870,6 +974,9 @@ xml_create_label_node (const lglTemplateFrame  *frame,
 			break;
 		case LGL_TEMPLATE_MARKUP_RECT:
 			xml_create_markup_rect_node (markup, node, ns);
+			break;
+		case LGL_TEMPLATE_MARKUP_ELLIPSE:
+			xml_create_markup_ellipse_node (markup, node, ns);
 			break;
 		default:
 			g_message ("Unknown markup type");
@@ -957,6 +1064,7 @@ xml_create_markup_circle_node (const lglTemplateMarkup *markup,
 
 }
 
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Template->Label->Markup-rect Node.                     */
 /*--------------------------------------------------------------------------*/
@@ -976,6 +1084,27 @@ xml_create_markup_rect_node (const lglTemplateMarkup *markup,
 	lgl_xml_set_prop_length (node, "r",  markup->rect.r);
 
 }
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Template->Label->Markup-ellipse Node.                  */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_markup_ellipse_node (const lglTemplateMarkup *markup,
+                                xmlNodePtr               root,
+                                const xmlNsPtr           ns)
+{
+	xmlNodePtr  node;
+
+	node = xmlNewChild(root, ns, (xmlChar *)"Markup-ellipse", NULL);
+
+	lgl_xml_set_prop_length (node, "x1", markup->ellipse.x1);
+	lgl_xml_set_prop_length (node, "y1", markup->ellipse.y1);
+	lgl_xml_set_prop_length (node, "w",  markup->ellipse.w);
+	lgl_xml_set_prop_length (node, "h",  markup->ellipse.h);
+
+}
+
 
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  Add XML Template->Alias Node.                                  */

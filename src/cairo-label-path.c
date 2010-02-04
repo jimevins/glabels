@@ -45,6 +45,10 @@ static void gl_cairo_rect_label_path             (cairo_t                *cr,
                                                   const lglTemplate      *template,
                                                   gboolean                rotate_flag,
                                                   gboolean                waste_flag);
+static void gl_cairo_ellipse_label_path          (cairo_t                *cr,
+                                                  const lglTemplate      *template,
+                                                  gboolean                rotate_flag,
+                                                  gboolean                waste_flag);
 static void gl_cairo_round_label_path            (cairo_t                *cr,
                                                   const lglTemplate      *template,
                                                   gboolean                rotate_flag,
@@ -74,6 +78,10 @@ gl_cairo_label_path (cairo_t           *cr,
 
         case LGL_TEMPLATE_FRAME_SHAPE_RECT:
                 gl_cairo_rect_label_path (cr, template, rotate_flag, waste_flag);
+                break;
+
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                gl_cairo_ellipse_label_path (cr, template, rotate_flag, waste_flag);
                 break;
 
         case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
@@ -147,6 +155,47 @@ gl_cairo_rect_label_path (cairo_t           *cr,
                 cairo_arc_negative (cr, w-r+x_waste, r-y_waste,   r, 2*G_PI,   3*G_PI/2);
                 cairo_close_path (cr);
         }
+
+        gl_debug (DEBUG_PATH, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Create elliptical label path                                             */
+/*--------------------------------------------------------------------------*/
+static void
+gl_cairo_ellipse_label_path (cairo_t           *cr,
+                             const lglTemplate *template,
+                             gboolean           rotate_flag,
+                             gboolean           waste_flag)
+{
+        const lglTemplateFrame *frame;
+        gdouble                 w, h;
+        gdouble                 waste;
+
+        gl_debug (DEBUG_PATH, "START");
+
+        frame = (lglTemplateFrame *)template->frames->data;
+
+        if (rotate_flag)
+        {
+                lgl_template_frame_get_size (frame, &h, &w);
+        }
+        else
+        {
+                lgl_template_frame_get_size (frame, &w, &h);
+        }
+
+        waste = 0.0;
+        if (waste_flag)
+        {
+                waste = frame->ellipse.waste;
+        }
+
+        cairo_save (cr);
+        cairo_translate (cr, -waste, -waste);
+        gl_cairo_ellipse_path (cr, (w+waste)/2.0, (h+waste)/2.0);
+        cairo_restore (cr);
 
         gl_debug (DEBUG_PATH, "END");
 }

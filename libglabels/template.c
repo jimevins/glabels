@@ -410,6 +410,41 @@ lgl_template_frame_rect_new  (const gchar         *id,
 
 
 /**
+ * lgl_template_frame_ellipse_new:
+ *   @id:      ID of frame.  (This should currently always be "0").
+ *   @w:       width of frame in points.
+ *   @h:       height of frame in points.
+ *   @r:       radius of rounded corners in points.  (Should be 0 for square corners.)
+ *   @x_waste: Amount of overprint to allow in the horizontal direction.
+ *   @y_waste: Amount of overprint to allow in the vertical direction.
+ *
+ * This function creates a new template frame for an elliptical label or card.
+ *
+ * Returns: Pointer to newly allocated #lglTemplateFrame structure.
+ *
+ */
+lglTemplateFrame *
+lgl_template_frame_ellipse_new  (const gchar         *id,
+                                 gdouble              w,
+                                 gdouble              h,
+                                 gdouble              waste)
+{
+	lglTemplateFrame *frame;
+
+	frame = g_new0 (lglTemplateFrame, 1);
+
+	frame->shape = LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE;
+	frame->ellipse.id = g_strdup (id);
+
+	frame->ellipse.w = w;
+	frame->ellipse.h = h;
+	frame->ellipse.waste = waste;
+
+	return frame;
+}
+
+
+/**
  * lgl_template_frame_round_new:
  *   @id:      ID of frame.  (This should currently always be "0").
  *   @r:       radius of label in points.
@@ -498,6 +533,10 @@ lgl_template_frame_get_size (const lglTemplateFrame *frame,
 	case LGL_TEMPLATE_FRAME_SHAPE_RECT:
 		*w = frame->rect.w;
 		*h = frame->rect.h;
+		break;
+	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+		*w = frame->ellipse.w;
+		*h = frame->ellipse.h;
 		break;
 	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
 		*w = 2.0 * frame->round.r;
@@ -790,6 +829,38 @@ lgl_template_markup_rect_new (gdouble x1,
 
 
 /**
+ * lgl_template_markup_ellipse_new:
+ *   @x1: x coordinate of top-left corner of ellipse.
+ *   @y1: y coordinate of top-left corner of ellipse.
+ *   @w:  width of ellipse.
+ *   @h:  height of ellipse.
+ *
+ * This function creates a new ellipse markup structure.
+ *
+ * Returns: a newly allocated #lglTemplateMarkup structure.
+ *
+ */
+lglTemplateMarkup *
+lgl_template_markup_ellipse_new (gdouble x1,
+                                 gdouble y1,
+                                 gdouble w,
+                                 gdouble h)
+{
+	lglTemplateMarkup *markup;
+
+	markup = g_new0 (lglTemplateMarkup, 1);
+
+	markup->type        = LGL_TEMPLATE_MARKUP_ELLIPSE;
+	markup->ellipse.x1     = x1;
+	markup->ellipse.y1     = y1;
+	markup->ellipse.w      = w;
+	markup->ellipse.h      = h;
+
+	return markup;
+}
+
+
+/**
  * lgl_template_dup:
  *   @orig_template: Template to duplicate.
  *
@@ -979,6 +1050,14 @@ lgl_template_frame_dup (const lglTemplateFrame *orig_frame)
                                                      orig_frame->rect.r,
                                                      orig_frame->rect.x_waste,
                                                      orig_frame->rect.y_waste);
+		break;
+
+	case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+		frame =
+			lgl_template_frame_ellipse_new (orig_frame->all.id,
+                                                        orig_frame->ellipse.w,
+                                                        orig_frame->ellipse.h,
+                                                        orig_frame->ellipse.waste);
 		break;
 
 	case LGL_TEMPLATE_FRAME_SHAPE_ROUND:

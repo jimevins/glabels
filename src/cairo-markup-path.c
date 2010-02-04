@@ -49,6 +49,10 @@ static void       gl_cairo_markup_margin_rect_path    (cairo_t                 *
                                                        const lglTemplateMarkup *markup,
                                                        glLabel                 *label);
 
+static void       gl_cairo_markup_margin_ellipse_path (cairo_t                 *cr,
+                                                       const lglTemplateMarkup *markup,
+                                                       glLabel                 *label);
+
 static void       gl_cairo_markup_margin_round_path   (cairo_t                 *cr,
                                                        const lglTemplateMarkup *markup,
                                                        glLabel                 *label);
@@ -64,6 +68,9 @@ static void       gl_cairo_markup_circle_path         (cairo_t                 *
                                                        const lglTemplateMarkup *markup);
 
 static void       gl_cairo_markup_rect_path           (cairo_t                 *cr,
+                                                       const lglTemplateMarkup *markup);
+
+static void       gl_cairo_markup_ellipse_path        (cairo_t                 *cr,
                                                        const lglTemplateMarkup *markup);
 
 
@@ -89,6 +96,9 @@ gl_cairo_markup_path (cairo_t                 *cr,
                 break;
         case LGL_TEMPLATE_MARKUP_RECT:
                 gl_cairo_markup_rect_path (cr, markup);
+                break;
+        case LGL_TEMPLATE_MARKUP_ELLIPSE:
+                gl_cairo_markup_ellipse_path (cr, markup);
                 break;
         default:
                 g_message ("Unknown template markup type");
@@ -119,6 +129,10 @@ gl_cairo_markup_margin_path (cairo_t                *cr,
 
         case LGL_TEMPLATE_FRAME_SHAPE_RECT:
                 gl_cairo_markup_margin_rect_path (cr, markup, label);
+                break;
+
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                gl_cairo_markup_margin_ellipse_path (cr, markup, label);
                 break;
 
         case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
@@ -175,6 +189,38 @@ gl_cairo_markup_margin_rect_path (cairo_t                 *cr,
                 cairo_arc_negative (cr, m+w-r, m+r,   r, 2*G_PI,   3*G_PI/2);
                 cairo_close_path (cr);
         }
+
+        gl_debug (DEBUG_PATH, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw elliptical margin.                                         */
+/*---------------------------------------------------------------------------*/
+static void
+gl_cairo_markup_margin_ellipse_path (cairo_t                 *cr,
+                                     const lglTemplateMarkup *markup,
+                                     glLabel                 *label)
+{
+        const lglTemplate      *template;
+        const lglTemplateFrame *frame;
+        gdouble                 w, h, r, m;
+
+        gl_debug (DEBUG_PATH, "START");
+
+        template = gl_label_get_template (label);
+        frame = (lglTemplateFrame *)template->frames->data;
+
+        m = markup->margin.size;
+
+        lgl_template_frame_get_size (frame, &w, &h);
+	w = w - 2*m;
+	h = h - 2*m;
+
+        cairo_save (cr);
+        cairo_translate (cr, m, m);
+        gl_cairo_ellipse_path (cr, w/2.0, h/2.0);
+        cairo_restore (cr);
 
         gl_debug (DEBUG_PATH, "END");
 }
@@ -322,6 +368,29 @@ gl_cairo_markup_rect_path (cairo_t                 *cr,
                 cairo_arc_negative (cr, x1+w-r, y1+r,   r, 2*G_PI,   3*G_PI/2);
                 cairo_close_path (cr);
         }
+
+	gl_debug (DEBUG_PATH, "END");
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* PRIVATE.  Draw ellipse markup.                                            */
+/*---------------------------------------------------------------------------*/
+static void
+gl_cairo_markup_ellipse_path (cairo_t                 *cr,
+                              const lglTemplateMarkup *markup)
+{
+        gdouble x1 = markup->ellipse.x1;
+        gdouble y1 = markup->ellipse.y1;
+        gdouble w  = markup->ellipse.w;
+        gdouble h  = markup->ellipse.h;
+
+	gl_debug (DEBUG_PATH, "START");
+
+        cairo_save (cr);
+        cairo_translate (cr, x1, y1);
+        gl_cairo_ellipse_path (cr, w/2.0, h/2.0);
+        cairo_restore (cr);
 
 	gl_debug (DEBUG_PATH, "END");
 }

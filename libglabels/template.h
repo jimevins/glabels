@@ -32,6 +32,7 @@ typedef struct _lglTemplateAlias           lglTemplateAlias;
 typedef union  _lglTemplateFrame           lglTemplateFrame;
 typedef struct _lglTemplateFrameAll        lglTemplateFrameAll;
 typedef struct _lglTemplateFrameRect       lglTemplateFrameRect;
+typedef struct _lglTemplateFrameEllipse    lglTemplateFrameEllipse;
 typedef struct _lglTemplateFrameRound      lglTemplateFrameRound;
 typedef struct _lglTemplateFrameCD         lglTemplateFrameCD;
 
@@ -42,6 +43,7 @@ typedef struct _lglTemplateMarkupMargin    lglTemplateMarkupMargin;
 typedef struct _lglTemplateMarkupLine      lglTemplateMarkupLine;
 typedef struct _lglTemplateMarkupCircle    lglTemplateMarkupCircle;
 typedef struct _lglTemplateMarkupRect      lglTemplateMarkupRect;
+typedef struct _lglTemplateMarkupEllipse   lglTemplateMarkupEllipse;
 
 typedef struct _lglTemplateOrigin          lglTemplateOrigin;
 
@@ -89,6 +91,7 @@ struct _lglTemplateAlias {
  */
 typedef enum {
 	LGL_TEMPLATE_FRAME_SHAPE_RECT,
+	LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE,
 	LGL_TEMPLATE_FRAME_SHAPE_ROUND,
 	LGL_TEMPLATE_FRAME_SHAPE_CD,
 } lglTemplateFrameShape;
@@ -125,6 +128,21 @@ struct _lglTemplateFrameRect {
         gdouble               y_waste;  /* Amount of vert overprint allowed. */
 };
 
+struct _lglTemplateFrameEllipse {
+
+        /* Begin Common Fields */
+	lglTemplateFrameShape shape;    /* Always LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE. */
+
+	gchar                *id;       /* Id, currently always "0" */
+	GList                *layouts;  /* List of lglTemplateLayouts */
+	GList                *markups;  /* List of lglTemplateMarkups */
+        /* End Common Fields */
+
+        gdouble               w;        /* Width */
+        gdouble               h;        /* Height */
+        gdouble               waste;    /* Amount of overprint allowed. */
+};
+
 struct _lglTemplateFrameRound {
 
         /* Begin Common Fields */
@@ -158,12 +176,13 @@ struct _lglTemplateFrameCD {
 
 union _lglTemplateFrame{
 
-	lglTemplateFrameShape shape;
+	lglTemplateFrameShape   shape;
 
-	lglTemplateFrameAll   all;
-	lglTemplateFrameRect  rect;
-	lglTemplateFrameRound round;
-	lglTemplateFrameCD    cd;
+	lglTemplateFrameAll     all;
+	lglTemplateFrameRect    rect;
+	lglTemplateFrameEllipse ellipse;
+	lglTemplateFrameRound   round;
+	lglTemplateFrameCD      cd;
 };
 
 
@@ -192,6 +211,7 @@ typedef enum {
 	LGL_TEMPLATE_MARKUP_LINE,
 	LGL_TEMPLATE_MARKUP_CIRCLE,
 	LGL_TEMPLATE_MARKUP_RECT,
+	LGL_TEMPLATE_MARKUP_ELLIPSE,
 } lglTemplateMarkupType;
 
 
@@ -230,14 +250,23 @@ struct _lglTemplateMarkupRect {
         gdouble                r;      /* Radius of corners. */
 };
 
+struct _lglTemplateMarkupEllipse {
+
+	lglTemplateMarkupType  type;   /* Always LGL_TEMPLATE_MARKUP_ELLIPSE */
+
+        gdouble                x1, y1; /* Upper left corner */
+        gdouble                w, h;   /* Width and height. */
+};
+
 union _lglTemplateMarkup {
 
-	lglTemplateMarkupType   type;
+	lglTemplateMarkupType    type;
 
-	lglTemplateMarkupMargin margin;
-	lglTemplateMarkupLine   line;
-	lglTemplateMarkupCircle circle;
-	lglTemplateMarkupRect   rect;
+	lglTemplateMarkupMargin  margin;
+	lglTemplateMarkupLine    line;
+	lglTemplateMarkupCircle  circle;
+	lglTemplateMarkupRect    rect;
+	lglTemplateMarkupEllipse ellipse;
 };
 
 
@@ -306,6 +335,9 @@ void                 lgl_template_add_category         (lglTemplate          *te
 void                 lgl_template_add_frame            (lglTemplate          *template,
                                                         lglTemplateFrame     *frame);
 
+lglTemplateAlias    *lgl_template_alias_new            (const gchar          *brand,
+                                                        const gchar          *part);
+
 lglTemplateFrame    *lgl_template_frame_rect_new       (const gchar          *id,
                                                         gdouble               w,
                                                         gdouble               h,
@@ -313,8 +345,10 @@ lglTemplateFrame    *lgl_template_frame_rect_new       (const gchar          *id
                                                         gdouble               x_waste,
                                                         gdouble               y_waste);
 
-lglTemplateAlias    *lgl_template_alias_new            (const gchar          *brand,
-                                                        const gchar          *part);
+lglTemplateFrame    *lgl_template_frame_ellipse_new    (const gchar          *id,
+                                                        gdouble               w,
+                                                        gdouble               h,
+                                                        gdouble               waste);
 
 lglTemplateFrame    *lgl_template_frame_round_new      (const gchar          *id,
                                                         gdouble               r,
@@ -356,6 +390,11 @@ lglTemplateMarkup   *lgl_template_markup_rect_new      (gdouble               x1
                                                         gdouble               w,
                                                         gdouble               h,
                                                         gdouble               r);
+
+lglTemplateMarkup   *lgl_template_markup_ellipse_new   (gdouble               x1,
+                                                        gdouble               y1,
+                                                        gdouble               w,
+                                                        gdouble               h);
 
 lglTemplate         *lgl_template_dup                  (const lglTemplate    *orig_template);
 

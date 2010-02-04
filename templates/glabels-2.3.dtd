@@ -75,7 +75,7 @@
                                 CBR        |
                                 MSI        |
                                 PLS        |
-				IEC16022)"
+                                IEC16022)"
                                -->
 
 <!-- Data encoding method -->
@@ -166,7 +166,7 @@
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Template Section                                                     -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-<!ENTITY % label_element  "Label-rectangle | Label-round | Label-cd">
+<!ENTITY % label_element  "Label-rectangle | Label-round | Label-ellipse | Label-cd">
 <!ENTITY % markup_element "Markup-margin | Markup-line | Markup-circle | Markup-rect">
 
 <!ELEMENT Template (Meta*, (%label_element;)*, Alias*)>
@@ -174,7 +174,7 @@
                  brand           %STRING_TYPE;           #REQUIRED
                  part            %STRING_TYPE;           #REQUIRED
                  name            %STRING_TYPE;           #IMPLIED
-	         equiv           %STRING_TYPE;           #IMPLIED
+                 equiv           %STRING_TYPE;           #IMPLIED
                  size            %STRING_TYPE;           #IMPLIED
                  width           %LENGTH_TYPE;           #IMPLIED
                  height          %LENGTH_TYPE;           #IMPLIED
@@ -203,6 +203,14 @@
 <!ATTLIST Label-round
                  id              %STRING_TYPE;           #REQUIRED
                  radius          %LENGTH_TYPE;           #REQUIRED
+                 waste           %LENGTH_TYPE;           #IMPLIED
+>
+
+<!ELEMENT Label-ellipse ((%markup_element;)*, Layout+)>
+<!ATTLIST Label-ellipse
+                 id              %STRING_TYPE;           #REQUIRED
+                 width           %LENGTH_TYPE;           #REQUIRED
+                 height          %LENGTH_TYPE;           #REQUIRED
                  waste           %LENGTH_TYPE;           #IMPLIED
 >
 
@@ -311,10 +319,10 @@
 
 <!ENTITY % shadow_attrs
                  "shadow          %BOOLEAN_TYPE;         #IMPLIED
-		  shadow_x        %FLOAT_TYPE;           #IMPLIED
-		  shadow_y        %FLOAT_TYPE;           #IMPLIED
-		  shadow_color    %UINT_TYPE;            #IMPLIED
-		  shadow_opacity  %FLOAT_TYPE;           #IMPLIED"
+                  shadow_x        %FLOAT_TYPE;           #IMPLIED
+                  shadow_y        %FLOAT_TYPE;           #IMPLIED
+                  shadow_color    %UINT_TYPE;            #IMPLIED
+                  shadow_opacity  %FLOAT_TYPE;           #IMPLIED"
 >
 
 <!ELEMENT Object-text (Span)>
@@ -422,7 +430,7 @@
                  font_weight     %FONT_WEIGHT_TYPE;      #IMPLIED
                  font_italic     %BOOLEAN_TYPE;          #IMPLIED
                  color           %UINT_TYPE;             #IMPLIED
-				 color_field     %STRING_TYPE;           #IMPLIED
+                 color_field     %STRING_TYPE;           #IMPLIED
                  line_spacing    %LENGTH_TYPE;           #IMPLIED
 >
 
