@@ -184,7 +184,11 @@ gl_xml_label_open (const gchar      *utf8_filename,
 	filename = g_filename_from_utf8 (utf8_filename, -1, NULL, NULL, NULL);
 	g_return_val_if_fail (filename, NULL);
 
+#ifndef HAVE_XML_PARSE_HUGE
 	doc = xmlParseFile (filename);
+#else
+        doc = xmlReadFile (filename, NULL, XML_PARSE_HUGE);
+#endif
 	if (!doc) {
 		g_message (_("xmlParseFile error"));
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
@@ -221,9 +225,13 @@ gl_xml_label_open_buffer (const gchar      *buffer,
 
 	gl_debug (DEBUG_XML, "START");
 
+#ifndef HAVE_XML_PARSE_HUGE
 	doc = xmlParseDoc ((xmlChar *) buffer);
+#else
+        doc = xmlReadDoc ((xmlChar *) buffer, NULL, NULL, XML_PARSE_HUGE);
+#endif
 	if (!doc) {
-		g_message (_("xmlParseFile error"));
+		g_message (_("xmlParseDoc error"));
 		*status = XML_LABEL_ERROR_OPEN_PARSE;
 		return NULL;
 	}

@@ -11,6 +11,7 @@ INCLUDES = \
 	-I$(LIB_BARCODE_DIR)					\
 	-I$(LIB_IEC16022_DIR)					\
 	$(GLABELS_CFLAGS) 					\
+	$(HAVE_XML_PARSE_HUGE)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DPREFIX=\""$(prefix)"\"                        	\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"                	\

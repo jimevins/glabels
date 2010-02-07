@@ -130,6 +130,15 @@ AC_SUBST(MYGAL_LIBS)
 
 
 dnl ---------------------------------------------------------------------------
+dnl - Is XML_PARSE_HUGE available?
+dnl ---------------------------------------------------------------------------
+PKG_CHECK_MODULES(XML_PARSE_HUGE, libxml-2.0 >= 2.7.0,
+                  HAVE_XML_PARSE_HUGE="-DHAVE_XML_PARSE_HUGE",
+                  HAVE_XML_PARSE_HUGE="-UHAVE_XML_PARSE_HUGE")
+AC_SUBST(HAVE_XML_PARSE_HUGE)
+
+
+dnl ---------------------------------------------------------------------------
 dnl - Enable deprecation testing
 dnl ---------------------------------------------------------------------------
 AC_ARG_ENABLE(deprecations,
