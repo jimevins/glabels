@@ -1108,7 +1108,7 @@ msgstr "xmlParseFile-Fehler"
 #: ../src/xml-label.c:234
 #| msgid "xmlParseFile error"
 msgid "xmlParseDoc error"
-msgstr "xmlParseFile-Fehler"
+msgstr "xmlParseDoc-Fehler"
 
 #: ../src/xml-label.c:270
 msgid "No document root"
