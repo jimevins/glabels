@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Glabels 2.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-13 00:57+0100\n"
-"PO-Revision-Date: 2009-11-25 11:18+0100\n"
+"POT-Creation-Date: 2010-02-11 01:39+0100\n"
+"PO-Revision-Date: 2010-02-07 23:18+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1095,52 +1095,56 @@ msgstr "Data pro čárový kód jsou prázdná"
 msgid "Invalid barcode data"
 msgstr "Data pro čárový kód jsou neplatná"
 
-#: ../src/xml-label.c:189 ../src/xml-label.c:226
+#: ../src/xml-label.c:193
 msgid "xmlParseFile error"
 msgstr "chyba xmlParseFile"
 
-#: ../src/xml-label.c:262
+#: ../src/xml-label.c:234
+msgid "xmlParseDoc error"
+msgstr "chyba xmlParseDoc"
+
+#: ../src/xml-label.c:270
 msgid "No document root"
 msgstr "Schází kořen dokumentu"
 
-#: ../src/xml-label.c:270
+#: ../src/xml-label.c:278
 msgid "Importing from glabels 0.1 format"
 msgstr "Importuje se z formátu glabels verze 0.1"
 
-#: ../src/xml-label.c:279
+#: ../src/xml-label.c:287
 msgid "Importing from glabels 0.4 format"
 msgstr "Importuje se z formátu glabels verze 0.4"
 
-#: ../src/xml-label.c:288
+#: ../src/xml-label.c:296
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Neznámý jmenný prostor pro gLabels -- použije se %s"
 
-#: ../src/xml-label.c:319 ../src/xml-label-04.c:79
+#: ../src/xml-label.c:327 ../src/xml-label-04.c:79
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Neplatný kořenový uzel = „%s“"
 
-#: ../src/xml-label.c:356
+#: ../src/xml-label.c:364
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "neplatný uzel v uzlu Document = „%s“"
 
-#: ../src/xml-label.c:401 ../src/xml-label-04.c:127
+#: ../src/xml-label.c:409 ../src/xml-label-04.c:127
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "neplatný uzel = „%s“"
 
-#: ../src/xml-label.c:843
+#: ../src/xml-label.c:851
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "neplatný uzel v uzlu Data = „%s“"
 
-#: ../src/xml-label.c:1080 ../libglabels/xml-template.c:670
+#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:670
 msgid "Utf8 conversion error."
 msgstr "Chyba při převodu UTF-8"
 
-#: ../src/xml-label.c:1087
+#: ../src/xml-label.c:1095
 msgid "Problem saving xml file."
 msgstr "Problém při ukládání do souboru xml."
 
