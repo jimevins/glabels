@@ -289,6 +289,18 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	g_free (description);
 	g_free (paper_id);
 
+        /*
+         * Create a default full-page frame, if a known frame type was not found.
+         */
+        if ( template->frames == NULL )
+        {
+                lglTemplateFrame    *frame;
+
+                frame = lgl_template_frame_rect_new ("0", page_width, page_height, 0, 0, 0);
+                lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0, 0, 0, 0));
+                lgl_template_add_frame (template, frame);
+        }
+
 	return template;
 }
 
