@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Glabels 2.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-11 01:39+0100\n"
-"PO-Revision-Date: 2010-02-07 23:18+0100\n"
+"POT-Creation-Date: 2010-02-18 18:30+0100\n"
+"PO-Revision-Date: 2010-02-16 13:51+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr "tisknout značky pro ořez"
 
 #: ../src/glabels-batch.c:68
 msgid "input file for merging"
-msgstr "vstupní soubor pro sloučení"
+msgstr "vstupní soubor pro slučování"
 
 #: ../src/glabels-batch.c:96
 msgid "- batch process gLabels label files"
@@ -82,7 +82,7 @@ msgstr "- dávkové zpracování souborů s etiketami gLabels"
 #: ../src/glabels-batch.c:142
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr "nelze provést sloučení dokumentu se souborem aplikace gLabels %s\n"
+msgstr "nelze provést slučování dokumentu se souborem aplikace gLabels %s\n"
 
 #: ../src/glabels-batch.c:164
 #, c-format
@@ -127,7 +127,7 @@ msgstr "Čárový _kód"
 
 #: ../src/stock.c:79
 msgid "_Merge Properties"
-msgstr "Vlastnosti _sloučení"
+msgstr "Vlastnosti _slučování"
 
 #: ../src/stock.c:80
 msgid "Object _Properties"
@@ -594,11 +594,11 @@ msgstr "Vystředit  objekty svisle na střed etikety"
 
 #: ../src/ui.c:408
 msgid "Merge properties"
-msgstr "Vlastnosti sloučení"
+msgstr "Vlastnosti slučování"
 
 #: ../src/ui.c:410
 msgid "Edit merge properties"
-msgstr "Upravit vlastnosti sloučení"
+msgstr "Upravit vlastnosti slučování"
 
 #: ../src/ui.c:417
 msgid "Contents"
@@ -879,11 +879,11 @@ msgstr "%s (*.%s)"
 
 #: ../src/merge-properties-dialog.c:263
 msgid "Merge Properties"
-msgstr "Vlastnosti sloučení"
+msgstr "Vlastnosti slučování"
 
 #: ../src/merge-properties-dialog.c:289 ../src/merge-properties-dialog.c:397
 msgid "Select merge-database source"
-msgstr "Výběr databázového zdroje pro sloučení"
+msgstr "Výběr databázového zdroje pro slučování"
 
 #: ../src/merge-properties-dialog.c:298 ../src/merge-properties-dialog.c:417
 msgid "N/A"
@@ -1140,7 +1140,7 @@ msgstr "neplatný uzel = „%s“"
 msgid "bad node in Data node =  \"%s\""
 msgstr "neplatný uzel v uzlu Data = „%s“"
 
-#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:670
+#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:682
 msgid "Utf8 conversion error."
 msgstr "Chyba při převodu UTF-8"
 
@@ -1154,7 +1154,7 @@ msgstr "Žádný"
 
 #: ../src/merge-init.c:59
 msgid "Text file with comma delimeters (CSV)"
-msgstr "Textový soubor se sloupci oddělenými středníky (CSV)"
+msgstr "Textový soubor se sloupci oddělenými čárkami (CSV)"
 
 #: ../src/merge-init.c:66
 msgid "Text file with colon delimeters"
@@ -1162,7 +1162,7 @@ msgstr "Textový soubor se sloupci oddělenými dvojtečkami"
 
 #: ../src/merge-init.c:73
 msgid "Text file with tab delimeters"
-msgstr "Textový soubor se sloupci oddělenými tabelátory"
+msgstr "Textový soubor se sloupci oddělenými tabulátory"
 
 #: ../src/merge-init.c:82
 msgid "Data from default Evolution Addressbook"
@@ -1513,14 +1513,14 @@ msgstr "Neznámé ID velikosti papíru „%s“, zkusí se použít jako název"
 msgid "Unknown page size id or name \"%s\""
 msgstr "Neznámé ID nebo název velikosti stránky „%s“"
 
-#: ../libglabels/xml-template.c:615
+#: ../libglabels/xml-template.c:627
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Schází vyžadované atributy „značka“ nebo „produkt“, zkouší se použít "
 "nepřípustný název."
 
-#: ../libglabels/xml-template.c:625
+#: ../libglabels/xml-template.c:637
 msgid "Name attribute also missing."
 msgstr "Schází také název atributu."
 
@@ -1580,7 +1580,7 @@ msgstr "Zarovnání:"
 
 #: ../data/glade/object-editor.glade.h:6
 msgid "Allow merge to automatically shrink text"
-msgstr "Při sloučení povolit automatické zúžení textu"
+msgstr "Při slučování povolit automatické zúžení textu"
 
 #: ../data/glade/object-editor.glade.h:7
 msgid "Angle:"
@@ -1617,7 +1617,7 @@ msgstr "Výška:"
 
 #: ../data/glade/object-editor.glade.h:17
 msgid "Insert merge field"
-msgstr "Vložit pole pro sloučení"
+msgstr "Vložit pole pro slučování"
 
 #: ../data/glade/object-editor.glade.h:18
 msgid "Key:"
