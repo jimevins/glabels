@@ -1,0 +1,1717 @@
+# Czech translation for glabels help.
+# Copyright (C) 2010 glabels's COPYRIGHT HOLDER
+# This file is distributed under the same license as the glabels help.
+# Marek Černocký <marek@manet.cz>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels glabels_2_2\n"
+"POT-Creation-Date: 2010-02-09 14:35+0000\n"
+"PO-Revision-Date: 2010-02-17 00:52+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:195(None)
+msgid "@@image: 'figures/main-window-empty.png'; md5=226b58f05f4171531066358a29cda1a7"
+msgstr "@@image: 'figures/main-window-empty.png'; md5=226b58f05f4171531066358a29cda1a7"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:447(None)
+msgid "@@image: 'figures/print-copies.png'; md5=ebb4d08810a67cc9cd7ec6ddd7b52fb0"
+msgstr "@@image: 'figures/print-copies.png'; md5=ebb4d08810a67cc9cd7ec6ddd7b52fb0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:479(None)
+msgid "@@image: 'figures/print-merge.png'; md5=ffe6027513a10f7ba940c350c1dc5717"
+msgstr "@@image: 'figures/print-merge.png'; md5=ffe6027513a10f7ba940c350c1dc5717"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:790(None)
+msgid "@@image: 'figures/object-editor-sidebar.png'; md5=14eace177c1f5bfe36022acbbd6a9f0e"
+msgstr "@@image: 'figures/object-editor-sidebar.png'; md5=14eace177c1f5bfe36022acbbd6a9f0e"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1231(None)
+msgid "@@image: 'figures/merge-ex1-1.png'; md5=55a97963022047cdad6aa198b5ed698e"
+msgstr "@@image: 'figures/merge-ex1-1.png'; md5=55a97963022047cdad6aa198b5ed698e"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1256(None)
+msgid "@@image: 'figures/merge-ex1-2.png'; md5=d03979f010e20e98532258edb20b1bc0"
+msgstr "@@image: 'figures/merge-ex1-2.png'; md5=d03979f010e20e98532258edb20b1bc0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1284(None)
+msgid "@@image: 'figures/merge-ex1-3.png'; md5=94e382ccdfbc2fe5d320010d2ef10c61"
+msgstr "@@image: 'figures/merge-ex1-3.png'; md5=94e382ccdfbc2fe5d320010d2ef10c61"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1302(None)
+msgid "@@image: 'figures/merge-ex1-4.png'; md5=e72810bc3c191df6c8b2ad0cb1131021"
+msgstr "@@image: 'figures/merge-ex1-4.png'; md5=e72810bc3c191df6c8b2ad0cb1131021"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1348(None)
+msgid "@@image: 'figures/merge-ex2-1.png'; md5=4f062158be21bfadc4adfbdcf5d0206f"
+msgstr "@@image: 'figures/merge-ex2-1.png'; md5=4f062158be21bfadc4adfbdcf5d0206f"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1374(None)
+msgid "@@image: 'figures/merge-ex2-2.png'; md5=f69a7e0ae86f66b0d70d39a7757918fa"
+msgstr "@@image: 'figures/merge-ex2-2.png'; md5=f69a7e0ae86f66b0d70d39a7757918fa"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1399(None)
+#: C/glabels.xml:1513(None)
+msgid "@@image: 'figures/merge-ex2-3.png'; md5=f5134b9e911ebdd17d4a5b36a5ba56d0"
+msgstr "@@image: 'figures/merge-ex2-3.png'; md5=f5134b9e911ebdd17d4a5b36a5ba56d0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1417(None)
+#: C/glabels.xml:1531(None)
+msgid "@@image: 'figures/merge-ex2-4.png'; md5=29a60e970cb026aecf75543203494b00"
+msgstr "@@image: 'figures/merge-ex2-4.png'; md5=29a60e970cb026aecf75543203494b00"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1464(None)
+msgid "@@image: 'figures/merge-ex3-1.png'; md5=b0c387b5fcfd730b2ae75172895ff5b8"
+msgstr "@@image: 'figures/merge-ex3-1.png'; md5=b0c387b5fcfd730b2ae75172895ff5b8"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1492(None)
+msgid "@@image: 'figures/merge-ex3-2.png'; md5=09f105e133657345e6e478a464e5b49f"
+msgstr "@@image: 'figures/merge-ex3-2.png'; md5=09f105e133657345e6e478a464e5b49f"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1767(None)
+msgid "@@image: 'figures/glabels-template-label.png'; md5=b7db4090373462b8d45feb22d4cd5646"
+msgstr "@@image: 'figures/glabels-template-label.png'; md5=b7db4090373462b8d45feb22d4cd5646"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:1888(None)
+msgid "@@image: 'figures/glabels-template-cd.png'; md5=145b49a5380de63ffa9451d2bbb81934"
+msgstr "@@image: 'figures/glabels-template-cd.png'; md5=145b49a5380de63ffa9451d2bbb81934"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/glabels.xml:2150(None)
+msgid "@@image: 'figures/glabels-template-layout.png'; md5=a8adcff0584be1f0275bc2a169a580df"
+msgstr "@@image: 'figures/glabels-template-layout.png'; md5=a8adcff0584be1f0275bc2a169a580df"
+
+#: C/glabels.xml:31(title)
+msgid "<application>gLabels</application> Manual V2.2.6"
+msgstr "Příručka V2.2.6 k aplikaci <application>gLabels</application>"
+
+#: C/glabels.xml:33(para)
+msgid "User manual for the <application>gLabels</application> label and business card creation program"
+msgstr "Uživatelská příručka k aplikaci <application>gLabels</application> na vytváření etiket a vizitek"
+
+#: C/glabels.xml:38(year)
+msgid "2003-2009"
+msgstr "2003-2009"
+
+#: C/glabels.xml:39(holder)
+#: C/glabels.xml:42(publishername)
+#: C/glabels.xml:93(para)
+#: C/glabels.xml:103(para)
+msgid "Jim Evins"
+msgstr "Jim Evins"
+
+#: C/glabels.xml:2(para)
+msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or in the file COPYING-DOCS distributed with this manual."
+msgstr "Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type=\"help\" url=\"ghelp:fdl\">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou."
+
+#: C/glabels.xml:12(para)
+msgid "This manual is part of a collection of GNOME manuals distributed under the GFDL. If you want to distribute this manual separately from the collection, you can do so by adding a copy of the license to the manual, as described in section 6 of the license."
+msgstr "Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence."
+
+#: C/glabels.xml:19(para)
+msgid "Many of the names used by companies to distinguish their products and services are claimed as trademarks. Where those names appear in any GNOME documentation, and the members of the GNOME Documentation Project are made aware of those trademarks, then the names are in capital letters or initial capital letters."
+msgstr "Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku."
+
+#: C/glabels.xml:35(para)
+msgid "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr "DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE"
+
+#: C/glabels.xml:55(para)
+msgid "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
+msgstr "ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ."
+
+#: C/glabels.xml:28(para)
+msgid "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
+msgstr "DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <placeholder-1/>"
+
+#: C/glabels.xml:52(firstname)
+msgid "Jim"
+msgstr "Jim"
+
+#: C/glabels.xml:53(surname)
+msgid "Evins"
+msgstr "Evins"
+
+#: C/glabels.xml:87(revnumber)
+msgid "gLabels Manual V2.2.6"
+msgstr "Příručka V2.2.6 k aplikaci gLabels"
+
+#: C/glabels.xml:88(date)
+msgid "October 2009"
+msgstr "Říjen 2009"
+
+#: C/glabels.xml:90(para)
+msgid "Mario Blättermann <email>mariobl@gnome.org</email>"
+msgstr "Mario Blättermann <email>mariobl@gnome.org</email>"
+
+#: C/glabels.xml:97(revnumber)
+msgid "gLabels Manual V2.2"
+msgstr "Příručka V2.2 k aplikaci gLabels"
+
+#: C/glabels.xml:98(date)
+msgid "December 2007"
+msgstr "Prosinec 2007"
+
+#: C/glabels.xml:100(para)
+msgid "Jim Evins <email>evins@snaught.com</email>"
+msgstr "Jim Evins <email>evins@snaught.com</email>"
+
+#: C/glabels.xml:108(releaseinfo)
+msgid "This manual describes version 2.2.6 of <application>gLabels</application>."
+msgstr "Tato příručka popisuje aplikaci <application>gLabels</application> ve verzi 2.2.6."
+
+#: C/glabels.xml:111(title)
+msgid "Feedback"
+msgstr "Ohlasy"
+
+#: C/glabels.xml:112(para)
+msgid "To report a bug or make a suggestion regarding the <application>gLabels</application> application or this manual, follow the directions in the <ulink url=\"http://glabels.sourceforge.net/contact/\" type=\"http\"><application>gLabels</application> Contact Page</ulink>."
+msgstr "Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci <application>Stejný GNOME</application> nebo této příručce, postupujte dle instrukcí na <ulink url=\"http://glabels.sourceforge.net/contact/\" type=\"http\">kontaktní stránce <application>gLabels</application></ulink>."
+
+#: C/glabels.xml:121(primary)
+msgid "gLabels"
+msgstr "gLabels"
+
+#: C/glabels.xml:124(primary)
+msgid "glabels"
+msgstr "glabels"
+
+#: C/glabels.xml:135(title)
+msgid "Introduction"
+msgstr "Úvod"
+
+#: C/glabels.xml:137(para)
+msgid "The <application>gLabels</application> application is a lightweight program for creating labels and business cards for the <systemitem>GNOME desktop</systemitem> environment. It is designed to work with various laser/ink-jet peel-off label and business card sheets that you'll find at most office supply stores."
+msgstr "Aplikace <application>gLabels</application> je jednoduchý program na vytváření etiket a vizitek pro <systemitem>pracovní prostředí GNOME</systemitem>. Je navržená pro práci s různými samolepicími etiketami a vizitkami rozmístěnými na listech pro laserový/inkoustový tisk, které najdete v každém obchodě s kancelářskými potřebami."
+
+#: C/glabels.xml:158(title)
+msgid "Getting Started"
+msgstr "Začínáme"
+
+#: C/glabels.xml:161(title)
+msgid "To Start <application>gLabels</application>"
+msgstr "Jak spustit aplikaci <application>gLabels</application>"
+
+#: C/glabels.xml:162(para)
+msgid "You can start <application>gLabels</application> in the following ways:"
+msgstr "Aplikaci <application>gLabels</application> můžete spustit následujícími způsoby:"
+
+#: C/glabels.xml:166(term)
+msgid "<guimenu>Applications</guimenu> menu"
+msgstr "Nabídka <guimenu>Aplikace</guimenu>"
+
+#: C/glabels.xml:168(para)
+msgid "Choose <menuchoice><guisubmenu>Office</guisubmenu><guimenuitem>gLabels</guimenuitem></menuchoice>."
+msgstr "Zvolte <menuchoice><guisubmenu>Kancelář</guisubmenu><guimenuitem>Návrhář etiket gLabels</guimenuitem></menuchoice>."
+
+#: C/glabels.xml:176(term)
+msgid "Command line"
+msgstr "Příkazový řádek"
+
+#: C/glabels.xml:178(para)
+msgid "Type <command>glabels</command>, then press <keycap>Return</keycap>:"
+msgstr "Napište příkaz <command>glabels</command> a zmáčkněte <keycap>Enter</keycap>:"
+
+#: C/glabels.xml:186(title)
+msgid "When You Start <application>gLabels</application>"
+msgstr "Když spustíte aplikaci <application>gLabels</application>"
+
+#: C/glabels.xml:187(para)
+msgid "When you start <application>gLabels</application>, the following window is displayed."
+msgstr "Když spustíte aplikaci <application>gLabels</application>, zobrazí se následující okno."
+
+#: C/glabels.xml:191(title)
+msgid "<application>gLabels</application> Start Up Window"
+msgstr "Okno <application>gLabels</application> po spuštění"
+
+#. for example, the items on the menubar and on the toolbar. This section is optional.
+#: C/glabels.xml:205(para)
+msgid "The <application>gLabels</application> window contains the following elements:"
+msgstr "Okno <application>gLabels</application> obsahuje následující části:"
+
+#: C/glabels.xml:209(term)
+msgid "Menubar."
+msgstr "Panel nabídek."
+
+#: C/glabels.xml:211(para)
+msgid "The menus on the menubar contain all of the commands you need to create and edit labels and business cards in <application>gLabels</application>."
+msgstr "Nabídky v panelu nabídek obsahují všechny příkazy potřebné k vytváření a úpravám etiket a vizitek v aplikaci <application>gLabels</application>."
+
+#: C/glabels.xml:217(term)
+msgid "Main toolbar."
+msgstr "Hlavní panel nástrojů."
+
+#: C/glabels.xml:219(para)
+msgid "The main toolbar contains a subset of common File and Edit commands that you can access from the menubar."
+msgstr "Hlavní panel nástrojů obsahuje podmnožinu běžných příkazů pro práci se soubory a k úpravám z těch, které jsou dostupné v panelu nabídek."
+
+#: C/glabels.xml:224(term)
+msgid "Drawing toolbar."
+msgstr "Panel kreslení."
+
+#: C/glabels.xml:226(para)
+msgid "The drawing toolbar contains a subset of commands for editing the current <application>gLabels</application> document."
+msgstr "Panel kreslení obsahuje podmnožinu běžných příkazů k úpravám aktuálního dokumentu <application>gLabels</application>."
+
+#: C/glabels.xml:231(term)
+msgid "Display area."
+msgstr "Zobrazovací oblast"
+
+#: C/glabels.xml:233(para)
+msgid "The display area is the main drawing interface to <application>gLabels</application>."
+msgstr "Zobrazovací oblast je hlavní rozhraní aplikace <application>gLabels</application> sloužící ke kreslení."
+
+#: C/glabels.xml:238(term)
+msgid "Object sidebar."
+msgstr "Postranní panel objektů."
+
+#: C/glabels.xml:240(para)
+msgid "The object sidebar provides an interface for viewing and editing all properties of an individual object."
+msgstr "Postranní panel objektů poskytuje rozhraní na prohlížení a úpravu všech vlastností jednotlivých objektů."
+
+#: C/glabels.xml:245(term)
+msgid "Properties toolbar."
+msgstr "Panel vlastností."
+
+#: C/glabels.xml:247(para)
+msgid "The properties toolbar contains a set of tools to manipulate the properties of selected objects and set default properties for new objects."
+msgstr "Panel vlastností obsahuje sadu nástrojů na úpravu vlastností vybraných objektů a nastavení výchozích vlastností pro nové objekty."
+
+#: C/glabels.xml:253(term)
+msgid "Statusbar."
+msgstr "Stavový panel."
+
+#: C/glabels.xml:255(para)
+msgid "The statusbar displays information about current <application>gLabels</application> activity and contextual information about the menu items."
+msgstr "Stavový panel zobrazuje informace o aktuální činnosti aplikace <application>gLabels</application> a kontextové informace o položkách nabídky."
+
+#: C/glabels.xml:271(title)
+msgid "Usage"
+msgstr "Použití"
+
+#: C/glabels.xml:275(title)
+msgid "To Create a New Label or Card"
+msgstr "Jak vytvořit novou etiketu nebo vizitku"
+
+#: C/glabels.xml:277(para)
+msgid "To create a new label or business card, choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> to display the <guilabel>New Label or Card</guilabel> dialog. Select the media type and orientation for the new document, then click <guibutton>OK</guibutton>. A new document is displayed in the display area of the <application>gLabels</application> window."
+msgstr "Když chcete vytvořit novou etiketu nebo vizitku, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Nový</guimenuitem></menuchoice> a zobrazí se dialogové okno <guilabel>Nová etiketa či vizitka</guilabel>. Vyberte pro nový dokument typ média a orientaci a klikněte na <guibutton>OK</guibutton>. Nový dokument se zobrazí v zobrazovací oblasti okna <application>gLabels</application>."
+
+#: C/glabels.xml:286(para)
+msgid "If your particular media type is missing from this dialog, see <xref linkend=\"glabels-create-template\"/>"
+msgstr "V případě, že vaše konkrétní médium v tomto dialogovém okně schází, přečtěte si <xref linkend=\"glabels-create-template\"/>."
+
+#: C/glabels.xml:293(title)
+msgid "To Open a File"
+msgstr "Jak otevřít soubor"
+
+#: C/glabels.xml:295(para)
+msgid "To open a file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> to display the <guilabel>Open File</guilabel> dialog. Select the file that you want to open, then click <guibutton>OK</guibutton>. The file is displayed in the display area of the <application>gLabels</application> window."
+msgstr "Soubor otevřete pomocí volby <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Otevřít</guimenuitem></menuchoice>, která zobrazí dialogové okno <guilabel>Otevření souboru</guilabel>. Vyberte soubor, který chcete otevřít a klikněte na <guibutton>OK</guibutton>. Soubor se zobrazí v zobrazovací oblasti okna <application>gLabels</application>."
+
+#: C/glabels.xml:302(para)
+msgid "You can also open multiple files in <application>gLabels</application>. The application creates a separate application window for each open file."
+msgstr "V aplikaci <application>gLabels</application> můžete otevřít i více souborů naráz. Aplikace pro každý otevřený soubor vytvoří zvláštní okno."
+
+#: C/glabels.xml:306(para)
+msgid "The application records the paths and filenames of the most recent files that you have edited and displays the files as menu items on the <menuchoice><guimenu>File</guimenu><guisubmenu>Recent Files</guisubmenu></menuchoice> menu."
+msgstr "Pro soubory nedávno otevřené k úpravě si aplikace zaznamenává cesty a názvy a tyto soubory potom zobrazuje v nabídce <menuchoice><guimenu>Soubor</guimenu><guisubmenu>Otevřít nedávné soubory</guisubmenu></menuchoice>."
+
+#: C/glabels.xml:316(title)
+msgid "To Open Multiple Files from a Command Line"
+msgstr "Jak otevřít více souborů z příkazové řádky"
+
+#: C/glabels.xml:318(para)
+msgid "You can run <application>gLabels</application> from a command line and open a single file or multiple files. To open multiple files from a command line, type the following command, then press <keycap>Return</keycap>:"
+msgstr "Aplikaci <application>gLabels</application> můžete spustit z příkazového řádku a otevřít při tom jeden nebo více souborů. Pokud chcete otevřít z příkazového řádku více souborů, napište následující příkaz a zmáčkněte <keycap>Enter</keycap>:"
+
+#: C/glabels.xml:324(replaceable)
+msgid "file1.glabels file2.glabels file3.glabels"
+msgstr "soubor1.glabels soubor2.glabels soubor3.glabels"
+
+#: C/glabels.xml:323(command)
+msgid "glabels <placeholder-1/>"
+msgstr "glabels <placeholder-1/>"
+
+#: C/glabels.xml:327(para)
+msgid "When the application starts, the files that you specify are displayed in separate <application>gLabels</application> windows."
+msgstr "Po spuštění aplikace se každý ze zadaných souborů zobrazí ve zvláštním okně <application>gLabels</application>."
+
+#: C/glabels.xml:334(title)
+msgid "To Save a File"
+msgstr "Jak uložit soubor"
+
+#: C/glabels.xml:336(para)
+msgid "You can save files in the following ways:"
+msgstr "Soubory můžete uložit následujícími způsoby:"
+
+#: C/glabels.xml:341(para)
+msgid "To save changes to an existing file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>."
+msgstr "Pro uložení změn do stávajícího souboru, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Uložit</guimenuitem></menuchoice>."
+
+#: C/glabels.xml:348(para)
+msgid "To save a new file or to save an existing file under a new filename, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></menuchoice>. Enter a name for the file in the <guilabel>Save As</guilabel> dialog box, then click <guibutton>OK</guibutton>."
+msgstr "Pro uložení nového souboru nebo uložení stávajícího souboru pod novým názvem, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Uložit jako</guimenuitem></menuchoice>. V dialogovém okně <guilabel>Uložit jako</guilabel> zadejte pro soubor název a klikněte na <guibutton>OK</guibutton>."
+
+#: C/glabels.xml:361(title)
+msgid "To Change Label Properties"
+msgstr "Jak změnit vlastnosti etikety"
+
+#: C/glabels.xml:363(para)
+msgid "To change the media type and/or orientation of a label, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> to display the <guilabel>Label properties</guilabel> dialog. Select the new media type and orientation for the document, then click <guibutton>OK</guibutton>."
+msgstr "Pokud chcete změnit typ média a/nebo orientaci etiket, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Vlastnosti</guimenuitem></menuchoice> a zobrazí se dialogové okno <guilabel>Vlastnosti etikety</guilabel>. Zvolte pro dokument nový typ média a orientaci a klikněte na <guibutton>OK</guibutton>."
+
+#: C/glabels.xml:374(title)
+msgid "To Create a Custom Template"
+msgstr "Jak vytvořit vlastní šablonu"
+
+#: C/glabels.xml:376(para)
+msgid "To create a new custom template, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Template Designer ...</guimenuitem></menuchoice> to display the <guilabel>Template Designer</guilabel> dialog. This dialog will assist you in creating a custom template for most types of label or card stationery that you may encounter."
+msgstr "Když chcete vytvořit novou vlastní šablonu, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Návrhář šablon…</guimenuitem></menuchoice> a zobrazí se dialogové okno <guilabel>Návrhář šablon gLabels</guilabel>. Toto dialogové okno vás provede vytvořením vlastní šablony pro většinu typů etiket nebo vizitek, se kterými se můžete setkat."
+
+#: C/glabels.xml:383(para)
+msgid "If you prefer, you can create your templates manually. For this option see <xref linkend=\"glabels-manual-create-template\"/>"
+msgstr "Pokud dáváte přednost ručnímu vytvoření šablon, přečtěte si <xref linkend=\"glabels-manual-create-template\"/>"
+
+#: C/glabels.xml:391(title)
+msgid "To Close a File"
+msgstr "Jak zavřít soubor"
+
+#: C/glabels.xml:393(para)
+msgid "To close the current document, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Close</guimenuitem></menuchoice> to close the application window. If the current document is modified, a confirmation dialog will be presented, allowing you to save the document or cancel the command. If the window being closed is the only open window, <application>gLabels</application> will exit."
+msgstr "Když chcete aktuální dokument zavřít, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Zavřít</guimenuitem></menuchoice> a zavřete tím aplikační okno. Pokud byl aktuální dokument změněn, zobrazí se potvrzovací dialogové okno, kde můžete dokument uložit nebo příkaz zrušit. Pokud je zavírané okno jediné otevřené, ukončí se celá aplikace <application>gLabels</application>."
+
+#: C/glabels.xml:405(title)
+msgid "To Quit <application>gLabels</application>"
+msgstr "Jak ukončit <application>gLabels</application>"
+
+#: C/glabels.xml:407(para)
+msgid "To quit <application>gLabels</application>, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice>. This is equivalent to closing all open windows. See <xref linkend=\"glabels-close-file\"/>."
+msgstr "Když chcete aplikaci <application>gLabels</application> ukončit, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Ukončit</guimenuitem></menuchoice>. Odpovídá to zavření všech otevřených oken. Viz <xref linkend=\"glabels-close-file\"/>."
+
+#: C/glabels.xml:417(title)
+msgid "To Print Labels or Cards"
+msgstr "Jak vytisknout etikety nebo vizitky"
+
+#: C/glabels.xml:419(para)
+msgid "To print labels or cards, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> to display the <guilabel>Print</guilabel> dialog. Once print options have been selected, click <guilabel>Print</guilabel> to print the labels or cards. To simply preview the results, click <guilabel>Print Preview</guilabel> instead."
+msgstr "Když chcete vytisknout etikety nebo vizitky, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Tisk</guimenuitem></menuchoice> a zobrazí se dialogové okno <guilabel>Tisk</guilabel>. Až nastavíte volby tisku, klikněte na <guilabel>Tisk</guilabel> a etikety nebo vizitky se vytisknou. Pokud se chcete jen podívat na náhled, klikněte místo toho na <guilabel>Náhled tisku</guilabel>."
+
+#: C/glabels.xml:426(para)
+msgid "The <guilabel>Print</guilabel> dialog allows you to specify the following print options:"
+msgstr "V dialogovém okně <guilabel>Tisk</guilabel> můžete nastavit následující volby tisku:"
+
+#: C/glabels.xml:430(title)
+msgid "The Labels Tab of the Print Dialog"
+msgstr "Karta Etikety v dialogovém okně Tisk"
+
+#: C/glabels.xml:435(guilabel)
+msgid "Print control (Simple)"
+msgstr "Ovládání tisku (jednoduchý)"
+
+#: C/glabels.xml:438(para)
+msgid "For simple labels or cards (no document merge), the <guilabel>labels</guilabel> tabbed section contains the following copy controls."
+msgstr "Pro jednoduché etikety nebo vizitky (bez slučování dokumentů), obsahuje karta <guilabel>Etikety</guilabel> následující prvky."
+
+#: C/glabels.xml:443(title)
+msgid "Print Copy Controls"
+msgstr "Ovládací prvky tisku kopií"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:454(para)
+msgid "The number of copies of the label can be selected by choosing the number of full sheets to print, or a specific subset of labels on a single sheet."
+msgstr "Počet kopií etikety můžete vybrat zvolením počtu plných listů, které se mají vytisknout, a nebo vybrat jen část etiket na jednom listu."
+
+#: C/glabels.xml:458(para)
+msgid "The mini-preview can also be used to graphically select the subset of labels by clicking the first label on the mini-preview and dragging to the last label."
+msgstr "Mini-náhled můžete také použít ke grafickému výběru části etiket tak, že kliknete na první etiketu v mini-náhledu a táhnete až na poslední etiketu."
+
+#: C/glabels.xml:466(guilabel)
+msgid "Print control (Merge)"
+msgstr "Ovládání tisku (slučování)"
+
+#: C/glabels.xml:469(para)
+msgid "For labels or cards using the document merge (also known as \"mail merge\") capability, the <guilabel>labels</guilabel> tabbed section contains the following merge controls instead of copy controls."
+msgstr "Pro etikety nebo vizitky používající slučování dokumentů (někdy také nazývané „hromadná korespondence“), obsahuje karta <guilabel>Etikety</guilabel> následující ovládací prvky slučování lišící se od ovládacích prvků jednoduchého tisku."
+
+#: C/glabels.xml:475(title)
+msgid "Print Document Merge Controls"
+msgstr "Ovládací prvky tisku slučovaných dokumentů"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:486(para)
+msgid "The total number of labels or cards printed is the product of the number of records in the merge source and the number of copies selected. If multiple copies are selected, these can be either collated (copies of the same record grouped together) or un-collated (one copy each record is printed before next copy)."
+msgstr "Celkový počet etiket nebo vizitek je dán počtem záznamů ve zdroji slučování a počtem vybraných kopií. Jestliže je vybráno více kopií, mohou být také uspořádané (kopie ze stejného záznamu seskupené spolu) nebo neuspořádané (kopie jednotlivých záznamů za sebou)."
+
+#: C/glabels.xml:493(para)
+msgid "Printing can begin on any label on the first sheet. This can be selected with the <guilabel>Start on label</guilabel> spinbutton."
+msgstr "Tisk může začínat na libovolné etiketě na prvním listu. Tu můžete vybrat pomocí číselníku <guilabel>Začít na etiketě</guilabel>."
+
+#: C/glabels.xml:497(para)
+msgid "The mini-preview can also be used to graphically select this first label, by clicking on the desired label in the mini-preview."
+msgstr "Mini-náhled můžete také použít ke grafickému výběru první etikety tak, že na ni v mini-náhledu kliknete."
+
+#: C/glabels.xml:504(guilabel)
+msgid "Options"
+msgstr "Volby"
+
+#: C/glabels.xml:506(para)
+msgid "The following options can also be selected."
+msgstr "Můžete rovněž vybrat následující volby."
+
+#: C/glabels.xml:509(guilabel)
+msgid "print outlines"
+msgstr "tisk obrysů"
+
+#: C/glabels.xml:510(para)
+msgid "Print outlines of labels. This option is useful for dry-runs, to test printer alignment."
+msgstr "Tisk obrysů etiket. Tato volba je použitelná k tisku nanečisto, k otestování lícování."
+
+#: C/glabels.xml:514(guilabel)
+msgid "print in reverse"
+msgstr "obrácený tisk"
+
+#: C/glabels.xml:515(para)
+msgid "Prints the labels as mirror images. This option is useful for printing on clear labels that will be viewed from the reverse side (e.g. in a car window)."
+msgstr "Tisknout etikety zrcadlově. Tato volba je použitelná pro tisk na čiré etikety, na které se bude dívat z druhé strany (např. na okně auta)."
+
+#: C/glabels.xml:520(guilabel)
+msgid "print crop marks"
+msgstr "tisknout značky pro ořez"
+
+#: C/glabels.xml:521(para)
+msgid "Prints crop marks along the edge of the sheet. This option is useful for printing on blank stock, to be cut after printing. This option does not work well with all templates."
+msgstr "Tisknout ořezové značky podél hran listu. Tato volba je použitelná pro tisk na čisté listy, které se budou po tisku rozřezávat. Tato volba nepracuje úplně správně se všemi šablonami."
+
+#: C/glabels.xml:536(title)
+msgid "To Create New Objects"
+msgstr "Jak vytvořit nový objekt"
+
+#: C/glabels.xml:538(para)
+msgid "Objects are created by choosing the appropriate selection under the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Create Object</guimenuitem></menuchoice> submenu or the <guilabel>Drawing Toolbar</guilabel>. This will place the display area into object creation mode as indicated by its cursor. To return to the default object selection mode without creating an object, choose <menuchoice><guimenu>Objects</guimenu><guimenuitem>Select Mode</guimenuitem></menuchoice>. This will return the display area's cursor to the default selection arrow."
+msgstr "Objekty se vytvářejí příslušným výběrem v podnabídce <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Vytvořit</guimenuitem></menuchoice> nebo na <guilabel>Panelu kreslení</guilabel>. Zobrazovací oblast se přepne do režimu vytváření objektu, což je indikováno patřičným ukazatelem. Do výchozího režimu výběru objektů se můžete vrátit, aniž byste nějaký objekt vytvořili, volbou <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Režim výběru</guimenuitem></menuchoice>. Ukazatel pro zobrazovací oblast se změní zpět na výchozí šipku."
+
+#: C/glabels.xml:548(para)
+msgid "The following describes the object creation mode for each object type:"
+msgstr "Zde je popis režimu vytváření objektu pro jednotlivé typy objektů:"
+
+#: C/glabels.xml:554(term)
+#: C/glabels.xml:1123(guilabel)
+msgid "Text"
+msgstr "Text"
+
+#: C/glabels.xml:556(para)
+msgid "Click the desired location of the upper left corner of the text object. New text objects are initialized with the string \"Text.\" To change this text, or other properties, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního rohu objektu text. Nový textový objekt se vytvoří s počátečním řetězcem „Text“. Jak tento text nebo další vlastnosti změnit uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:564(term)
+msgid "Box"
+msgstr "Obdélník"
+
+#: C/glabels.xml:566(para)
+msgid "Click the desired location of the upper left corner of the box object and drag to the desired location of the lower right corner. If you simply click in a single location, a square box will be created. To change properties of the box object, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního rohu objektu obdélník a táhněte k požadovanému umístění pravého dolního rohu. Když jednoduše kliknete na jednom místě, vytvoří se čtverec. Jak změnit vlastnosti obdélníku uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:575(term)
+#: C/glabels.xml:1149(guilabel)
+msgid "Line"
+msgstr "Čára"
+
+#: C/glabels.xml:577(para)
+msgid "Click the desired location of one end of the line object and drag to the desired location of the other end. If you simply click in a single location, a diagonal line will be created. To change properties of the line object, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního konce objektu čára a táhněte k požadovanému umístění pravého dolního konce. Když jednoduše kliknete na jednom místě, vytvoří diagonální úsečka. Jak změnit vlastnosti čáry uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:586(term)
+msgid "Ellipse"
+msgstr "Elipsa"
+
+#: C/glabels.xml:588(para)
+msgid "Click the desired location of the upper left corner of the ellipse object and drag to the desired location of the lower right corner. If you simply click in a single location, a circle will be created. To change properties of the ellipse object, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního rohu objektu elipsa a táhněte k požadovanému umístění pravého dolního rohu. Když jednoduše kliknete na jednom místě, vytvoří se kruh. Jak změnit vlastnosti elipsy uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:597(term)
+msgid "Image"
+msgstr "Obrázek"
+
+#: C/glabels.xml:599(para)
+msgid "Click the desired location of the upper left corner of the image object and drag to the desired location of the lower right corner. If you simply click in a single location, a square will be created. New image objects are initialized with a simple checkerboard image. To change this image, or other properties of the image object, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního rohu objektu obrázku a táhněte k požadovanému umístění pravého dolního rohu. Když jednoduše kliknete na jednom místě, vytvoří se čtverec. Nový obrázkový objekt se vytvoří s jednoduchým počátečním obrázkem šachovnice. Jak změnit tento obrázek a další vlastnosti uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:610(term)
+msgid "Barcode"
+msgstr "Čárový kód"
+
+#: C/glabels.xml:612(para)
+msgid "Click the desired location of the upper left corner of the barcode object. New barcode objects are initialized to a POSTNET barcode with representative data. To change data and properties of the barcode object, see <xref linkend=\"glabels-object-properties\"/>."
+msgstr "Klikněte na požadované umístění levého horního rohu objektu čárového kódu. Nový objekt čárového kódu se vytvoří jako čárový kód POSTNET s ukázkovými daty. Jak tato data nebo další vlastnosti změnit uvádí <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:627(title)
+msgid "To Select Objects"
+msgstr "Jak vybrat objekty"
+
+#: C/glabels.xml:629(para)
+msgid "A prerequisite for performing operations on objects is the selection of individual objects or groups of objects. The display area must be in the object selection mode to create new selections, as indicated by an arrow cursor. The object selection mode is selected by the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Select Mode</guimenuitem></menuchoice> menu item, or the corresponding command on the <guilabel>Drawing Toolbar</guilabel>."
+msgstr "Předpokladem k provádění operací s objekty je výběr jednoho či skupiny více objektů. Aby bylo možné výběr provést, musí být zobrazovací oblast v režimu výběru objektů, což je indikováno kurzorem v podobě šipky. Režim výběru objektů se zvolí pomocí <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Režim výběru</guimenuitem></menuchoice> nebo odpovídajícím příkazem na <guilabel>Panelu kreslení</guilabel>."
+
+#: C/glabels.xml:642(term)
+msgid "Selecting a single object"
+msgstr "Výběr jednoho objektu"
+
+#: C/glabels.xml:644(para)
+msgid "A single object can be selected simply by clicking on the desired object in the display area. Once selected the object will be highlighted with a set of resizing handles."
+msgstr "Jeden objekt vyberete prostým kliknutím na něj v zobrazovací oblasti. Vybraný objekt bude zvýrazněný sadou úchopů sloužících ke změně velikosti"
+
+#: C/glabels.xml:652(term)
+msgid "Aggregate object selections"
+msgstr "Přidávání objektů do výběru"
+
+#: C/glabels.xml:654(para)
+msgid "Multiple objects can be selected by first selecting the first object as above and then by holding the <keycap>Ctrl</keycap> key while selecting additional objects. Individual objects can be added to an existing selection at any time by holding the <keycap>Ctrl</keycap> key while selecting the desired objects. All objects can also be selected by using the <menuchoice><guimenu>Edit</guimenu><guimenuitem>Select All</guimenuitem></menuchoice> menu item. All objects in an aggregate object selection will be highlighted."
+msgstr "Více objektů můžete vybrat tak, že vyberete první dříve uvedeným způsobem a po té budete držet klávesu <keycap>Ctrl</keycap> a vybírat další objekty. Jednotlivé objekty lze přidat do stávajícího výběru kdykoliv držením klávesy <keycap>Ctrl</keycap> během vybírání požadovaných objektů. Všechny objekty můžete vybrat pomocí položky nabídky <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Vybrat vše</guimenuitem></menuchoice>. Všechny objekty ve výběru jsou zvýrazněné."
+
+#: C/glabels.xml:668(term)
+msgid "Area selections"
+msgstr "Výběr oblasti"
+
+#: C/glabels.xml:670(para)
+msgid "Multiple objects can also be selected by clicking an empty area and dragging to form a rectangular area. When released, all objects contained in the area will form an aggregate selection. An area selection can be used to add to an existing selection by holding the <keycap>Ctrl</keycap> key while performing the selection."
+msgstr "Více objektů lze rovněž vybrat zmáčknutím tlačítka myši na prázdném místě a tažením obdélníkové oblasti. Po uvolnění tlačítka se všechny objekty obsažené v takovéto oblasti naráz vyberou. Výběr pomocí oblasti lez použít k přidání ke stávajícímu výběru podržením klávesy <keycap>Ctrl</keycap> během provádění výběru."
+
+#: C/glabels.xml:680(term)
+msgid "Unselecting objects"
+msgstr "Zrušení výběru objektů"
+
+#: C/glabels.xml:682(para)
+msgid "Individual objects can be removed from an existing selection by holding the <keycap>Ctrl</keycap> key while clicking on a previously selected object. An entire selection can be dismissed by using the <menuchoice><guimenu>Edit</guimenu><guimenuitem>Un-select All</guimenuitem></menuchoice> menu item or by simply clicking any empty space in the display area. Once an object is unselected its highlight is removed."
+msgstr "Jednotlivé objekty lze z výběru odebrat podržením klávesy <keycap>Ctrl</keycap> a klikáním na označené objekty. Veškerý výběr můžete zrušit pomocí nabídky <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Zrušit výběr</guimenuitem></menuchoice> nebo jednoduchým kliknutím na prázdné místo v zobrazovací oblasti. Jakmile je u objektu zrušen výběr, zmizí i jeho zvýraznění."
+
+#: C/glabels.xml:699(title)
+msgid "Clipboard Commands"
+msgstr "Příkazy pro práci se schránkou"
+
+#: C/glabels.xml:701(para)
+msgid "Object selections can be manipulated using the standard clipboard operations <guimenuitem>Cut</guimenuitem>, <guimenuitem>Copy</guimenuitem>, <guimenuitem>Paste</guimenuitem>, and <guimenuitem>Delete</guimenuitem>."
+msgstr "S vybranými objekty lze manipulovat pomocí standardních operací se schránkou <guimenuitem>Vyjmout</guimenuitem>, <guimenuitem>Kopírovat</guimenuitem>, <guimenuitem>Vložit</guimenuitem> a <guimenuitem>Smazat</guimenuitem>."
+
+#: C/glabels.xml:712(keycap)
+#: C/glabels.xml:728(keycap)
+#: C/glabels.xml:744(keycap)
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: C/glabels.xml:712(keycap)
+msgid "X"
+msgstr "X"
+
+#: C/glabels.xml:714(guimenuitem)
+msgid "Cut"
+msgstr "Vyjmout"
+
+#: C/glabels.xml:718(para)
+msgid "Moves selected objects to the clipboard. The objects are then available for pasting back into the current document or another document."
+msgstr "Přesune vybrané objekty do schránky. Objekty jsou potom přístupné pro vkládání zpátky do aktuálního dokumentu nebo jiného dokumentu."
+
+#: C/glabels.xml:728(keycap)
+msgid "C"
+msgstr "C"
+
+#: C/glabels.xml:730(guimenuitem)
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: C/glabels.xml:734(para)
+msgid "Copies selected objects to the clipboard without deleting them. The objects are then available for pasting back into the current document or another document."
+msgstr "Zkopíruje vybrané objekty do schránky, aniž by byly vymazány. Objekty jsou potom přístupné pro vkládání zpátky do aktuálního dokumentu nebo jiného dokumentu."
+
+#: C/glabels.xml:744(keycap)
+msgid "V"
+msgstr "V"
+
+#: C/glabels.xml:746(guimenuitem)
+msgid "Paste"
+msgstr "Vložit"
+
+#: C/glabels.xml:750(para)
+msgid "Pastes objects from the clipboard into the current document. <application>gLabels</application> can only paste objects from another <application>gLabels</application> document."
+msgstr "Vloží objekty ze schránky do aktuálního dokumentu. Aplikace <application>gLabels</application> umí vkládat pouze objekty z jiného dokumentu <application>gLabels</application>."
+
+#: C/glabels.xml:760(keycap)
+#: C/glabels.xml:762(guimenuitem)
+msgid "Delete"
+msgstr "Smazat"
+
+#: C/glabels.xml:766(para)
+msgid "Deletes selected objects without placing them on the clipboard."
+msgstr "Smaže vybrané objekty, aniž by byly umístěny do schránky."
+
+#: C/glabels.xml:777(title)
+msgid "To Edit Object Properties"
+msgstr "Jak upravit vlastnosti objektu"
+
+#: C/glabels.xml:779(para)
+msgid "Most object properties can be modified through the object editor sidebar, illustrated below. To use the object editor, a single object must first be selected. See <xref linkend=\"glabels-select-objects\"/>."
+msgstr "Většinu vlastností objektů lze upravit přes editor objektů v postranním panelu, který je vyobrazený níže. Abyste mohli editor objektů používat, musíte nejdříve vybrat jeden objekt. Viz <xref linkend=\"glabels-select-objects\"/>."
+
+#: C/glabels.xml:786(title)
+msgid "Object Editor Sidebar"
+msgstr "Editor objektů z postranního panelu"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:797(para)
+msgid "The object editor will contain a subset of the following tabbed sections, depending on object type:"
+msgstr "Editor objektů bude obsahovat některé z následujících karet, které závisí na typu objektu:"
+
+#: C/glabels.xml:801(title)
+msgid "Text Tabbed Section (Text objects)"
+msgstr "Karta Text (textové objekty)"
+
+#: C/glabels.xml:803(para)
+msgid "This section contains a small editor for changing the content of a text object. It also contains a dropdown menu of available document merge keys, that can be inserted into text."
+msgstr "Tato karta obsahuje malý editor na úpravu obsahu textového objektu. Rovněž obsahuje vyskakovací nabídku dostupných klíčů slučování dokumentů, které lze do textu vkládat."
+
+#: C/glabels.xml:810(title)
+msgid "Image Tabbed Section (Image objecs)"
+msgstr "Karta Obrázek (obrázkové objekty)"
+
+#: C/glabels.xml:812(para)
+msgid "This section contains a file entry with preview to select image files. The browse button can be used to easily locate image files. Alternatively, a document merge key can be used instead to provide a filename at print time."
+msgstr "Tato karta obsahuje pole na zadání souboru s obrázkem. Přes tlačítko procházení můžete soubor snadno najít. Druhou možností je použití klíče pro slučování dokumentů, který poskytne název souboru až během tisku."
+
+#: C/glabels.xml:820(title)
+msgid "Data Tabbed Section (Barcode objecs)"
+msgstr "Karta Data (objekty čárových kódů)"
+
+#: C/glabels.xml:822(para)
+msgid "This section contains a text entry to enter literal barcode data. Alternatively, a document merge key can be used to provide this data at print time."
+msgstr "Tato karta obsahuje textové pole na zadání dat pro čárový kód. Druhou možností je použití klíče pro slučování dokumentů, přes který jsou data poskytována až během tisku."
+
+#: C/glabels.xml:829(title)
+msgid "Style Tabbed Section (Text objects)"
+msgstr "Karta Styl (textové objekty)"
+
+#: C/glabels.xml:831(para)
+msgid "This section contains controls to select text properties, including font family, font size, font weight, color, and text justification."
+msgstr "Tato karta obsahuje ovládací prvky na výběr vlastností textu, včetně typu písma, velikosti písma, tloušťky písma, barvy a zarovnání textu."
+
+#: C/glabels.xml:838(title)
+msgid "Style Tabbed Section (Barcode objecs)"
+msgstr "Karta Styl (objekty čárových kódů)"
+
+#: C/glabels.xml:840(para)
+msgid "This section contains controls to select barcode properties, including barcode style, color, whether to print text, and whether to include a checksum digit."
+msgstr "Tato karta obsahuje ovládací prvky na výběr vlastností čárového kódu, včetně stylu čárového kódu, barvy, zda tisknout text a zda vkládat číslo s kontrolním součtem."
+
+#: C/glabels.xml:847(title)
+msgid "Line Tabbed Section"
+msgstr "Karta Čára"
+
+#: C/glabels.xml:849(para)
+msgid "This section contains controls to select properties of lines and outlines. These properties include line width and color."
+msgstr "Tato karta obsahuje ovládací prvky na výběr vlastností čar a obrysů. Tyto vlastnosti zahrnují tloušťku čáry a její barvu."
+
+#: C/glabels.xml:855(title)
+msgid "Fill Tabbed Section"
+msgstr "Karta Výplň"
+
+#: C/glabels.xml:857(para)
+msgid "This section contains controls to select fill properties of box and ellipse objects. Currently the only fill property is fill color."
+msgstr "Tato karta obsahuje ovládací prvky na výběr vlastností výplně objektů obdélníků a elips. V současnosti obsahuje pouze barvu výplně."
+
+#: C/glabels.xml:864(title)
+msgid "Size Tabbed Section (All except line objects)"
+msgstr "Karta Velikost (všechny objekty vyjma čar)"
+
+#: C/glabels.xml:866(para)
+msgid "This section contains controls to select the width and height of an object. A checkbox is provided, so that the current aspect ratio can be locked while manipulating the width and height controls. Image objects also provide a button to reset the size to the image's natural size (Assumes 72DPI)."
+msgstr "Tato karta obsahuje ovládací prvky na výběr šířky a výšky objektu. K dispozici je zaškrtávací pole, kterým můžete zamknout poměr stran během úprav šířky a výšky. U obrázků je k dispozici rovněž tlačítko, kterým můžete nastavit reálné rozměry obrázku (předpokládá se 72 DPI)."
+
+#: C/glabels.xml:875(title)
+msgid "Size Tabbed Section (Line objects)"
+msgstr "Karta Velikost (objekty čar)"
+
+#: C/glabels.xml:877(para)
+msgid "This section contains controls to select the length and angle of a line object."
+msgstr "Tato karta obsahuje ovládací prvky pro výběr délky a úhlu čáry."
+
+#: C/glabels.xml:883(title)
+msgid "Position Tabbed Section"
+msgstr "Karta Pozice"
+
+#: C/glabels.xml:885(para)
+msgid "This section contains controls to change the position of an object."
+msgstr "Tato karta obsahuje ovládací prvky pro změnu pozice objektu."
+
+#: C/glabels.xml:892(title)
+msgid "Shadow Tabbed Section (All except image and barcode objects)"
+msgstr "Karta Stín (všechny objekty vyjma obrázků a čárových kódů)"
+
+#: C/glabels.xml:894(para)
+msgid "This section contains controls to add a shadow to an object."
+msgstr "Tato karta obsahuje ovládací prvky pro přidání stínu k objektu."
+
+#: C/glabels.xml:903(title)
+msgid "Other Manipulations of Objects"
+msgstr "Ostatní manipulace s objekty"
+
+#: C/glabels.xml:905(para)
+msgid "Objects can also be manipulated in the following ways."
+msgstr "S objekty lze manipulovat ještě následujícími způsoby:"
+
+#: C/glabels.xml:908(title)
+msgid "Moving and Resizing Objects"
+msgstr "Přesouvání a změna velikosti objektů"
+
+#: C/glabels.xml:910(para)
+msgid "Objects can be moved by simply clicking on a selected object and dragging the object to its new location. If the object is part of an aggregate selection, all objects in the selection will move with the object being dragged, maintaining their relative positions to one another. If no object is selected, clicking on an object will create a new selection containing that object. See <xref linkend=\"glabels-select-objects\"/>."
+msgstr "Objekty lze přesunout kliknutím na vybraný objekt a tažením objektu na nové místo. Pokud je objekt součástí skupiny označených objektů, budou se s objektem přesouvat všechny vybrané objekty, ale jejich vzájemná pozice zůstane zachovaná. Pokud není žádný objekt vybraný, kliknutí na objekt provede nový výběr tohoto objektu. Viz <xref linkend=\"glabels-select-objects\"/>."
+
+#: C/glabels.xml:918(para)
+msgid "A selected object can be resized by clicking one of its resize handle and dragging it to obtain the new size."
+msgstr "U vybraných objektů můžete měnit jejich velikost kliknutím na úchop pro změnu velikosti a jeho tažením tak, abyste dosáhli správné velikost."
+
+#: C/glabels.xml:924(title)
+msgid "Changing Stacking Order"
+msgstr "Změna pořadí objektů"
+
+#: C/glabels.xml:926(para)
+msgid "Stacking order refers to relative position in the z-axis of objects. That is when objects overlap, which object will appear on top of the other. By default, newer objects will appear above older objects. To change this order, select one or more objects and choose <menuchoice><guimenu>Objects</guimenu><guimenuitem>Order</guimenuitem><guimenuitem>Bring to Front</guimenuitem></menuchoice> to raise the selection to the top of the stacking order, or choose <menuchoice><guimenu>Objects</guimenu><guimenuitem>Order</guimenuitem><guimenuitem>Send to Back</guimenuitem></menuchoice> to lower the selection to the bottom of the stacking order. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr "Pořadí objektů představuje jejich relativní polohu v ose z. Prakticky to určuje při překrývání objektů, který z nich bude nahoře a který vespod. Standardně se nové objekty vytvářejí nad staršími objekty. Když chcete toto pořadí změnit, jeden nebo více objektů vyberte a zvolte <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Pořadí</guimenuitem><guimenuitem>Přenést dopředu</guimenuitem></menuchoice> pro vynesení výběru na nejvyšší pozici nebo <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Pořadí</guimenuitem><guimenuitem>Přenést dozadu</guimenuitem></menuchoice> pro zatlačení výběru úplně dospod. Tyto položky nabídky jsou přístupné i po kliknutí pravým tlačítkem v zobrazovací oblasti za předpokladu, že jsou vybrané nějaké objekty."
+
+#: C/glabels.xml:944(title)
+msgid "Rotating and Flipping Objects"
+msgstr "Otáčení a překlápění objektů"
+
+#: C/glabels.xml:946(para)
+msgid "Objects can be rotated 90 degrees in either direction, or flipped horizontally or vertically, by choosing the appropriate menuitem in the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Rotate/Flip</guimenuitem></menuchoice> sub-menu. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr "Objekty lze otáčet po 90stupňových krocích v obou směrech nebo je překlápět svisle nebo vodorovně a to volbou příslušné položky v podnabídce <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Otočit/Překlopit</guimenuitem></menuchoice>. Tyto položky nabídky jsou přístupné i po kliknutí pravým tlačítkem v zobrazovací oblasti za předpokladu, že jsou vybrané nějaké objekty."
+
+#: C/glabels.xml:956(title)
+msgid "Aligning Objects"
+msgstr "Zarovnávání objektů"
+
+#: C/glabels.xml:958(para)
+msgid "Objects can be aligned horizontally or vertically, relative to one another, or relative to the center line of the label, by choosing the appropriate menuitem from the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Align Horizontal</guimenuitem></menuchoice> or <menuchoice><guimenu>Objects</guimenu><guimenuitem>Align Horizontal</guimenuitem></menuchoice> sub-menus. These menuitems are also available by right-clicking the display area when there is a non-empty selection."
+msgstr "Objekty lze zarovnávat vodorovně nebo svisle, relativně vůči sobě nebo relativně ke středové čáře etikety, volbou příslušné položky z podnabídky <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Zarovnat vodorovně</guimenuitem></menuchoice> nebo <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Zarovnat svisle</guimenuitem></menuchoice>. Tyto položky nabídky jsou přístupné i po kliknutí pravým tlačítkem v zobrazovací oblasti za předpokladu, že jsou vybrané nějaké objekty."
+
+#: C/glabels.xml:971(title)
+msgid "Using the Property Bar"
+msgstr "Používání panelu vlastností"
+
+#: C/glabels.xml:973(para)
+msgid "The property bar can be used to change some common properties of objects en-masse. These properties include font family, font size, font weight, text alignment, text color, fill color, line or outline color, and line width. The property bar also controls the defaults for these properties for any newly created objects."
+msgstr "Panel vlastností lze použít ke změně některých běžných vlastností objektů jako celku. Tyto vlastnosti zahrnují typ písma, velikost písma, tloušťku písma, zarovnání textu, barvu textu, barvu výplně, barvu čáry nebo obrysu a tloušťku čáry. Přes panel vlastností může také zadat výchozí hodnoty těchto vlastností pro nově vytvářené objekty."
+
+#: C/glabels.xml:988(title)
+msgid "Performing a Document Merge"
+msgstr "Provádění slučování dokumentů"
+
+#: C/glabels.xml:990(para)
+msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that allows a unique label or card to be printed for each record in an external data source."
+msgstr "Slučování dokumentů (někdy také nazývané „hromadná korespondence“) je mocná funkce, která umožňuje vytisknout na etikety nebo vizitky různé texty podle jednotlivých záznamů v externím zdroji dat."
+
+#: C/glabels.xml:994(para)
+msgid ""
+"The first step to performing a document merge is to prepare a source document that contains your merge data. This data could be mailing addresses or any other data that you wish to create unique labels or cards for. Currently back-ends only exist for text files and the evolution data server -- others are planned. The currently supported text-file format is very simple: each line is a record; fields are delimited by commas (CSV), tabs, or colons; and newlines can be embedded into fields by using the \"\\n"
+"\" entity. This file could be created using any text editor or could be created by another program or script. A common way of creating CSV files is to export them from a spreadsheet program."
+msgstr ""
+"Prvním krokem při slučování dokumentů je příprava zdrojového dokumentu, který má obsahovat slučovaná data. Tato data mohou být poštovní adresy nebo jakákoliv jiná data, pro která si přejete vytvořit jedinečné etikety nebo vizitky. V současnosti jsou zatím jako zdroje podporované pouze textové soubory a datový server Evolution, jiné jsou v plánu. Současně podporovaný formát textových souborů je velmi jednoduchý: co řádek, to záznam; pole jsou oddělená čárkami (CSV), tabulátory nebo dvojtečkami; řádky jsou zakončené pomocí znaku „\\n"
+"“. Takovýto soubor jde vytvořit v libovolném textovém editoru nebo jiným programem nebo skriptem. Obvyklým způsobem vytváření souborů CSV je jejich export z tabulkového kalkulátoru."
+
+#: C/glabels.xml:1006(para)
+msgid "A label must then be configured to \"point at\" this data file. To configure the merge properties of a document, choose <menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to display the <guilabel>merge properties</guilabel> dialog. This dialog is used to select the exact data file format and file name (location) of the merge data."
+msgstr "Etiketa musí být nastavená tak, aby „ukazovala na“ takovýto datový soubor. Abyste nastavili vlastnosti slučování dokumentu, zvolte položku nabídky <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Vlastnosti slučování</guimenuitem></menuchoice>, zobrazí se dialogové okno <guilabel>vlastnosti slučování</guilabel>. Toto dialogové okno slouží k výběru přesného formátu datového souboru a názvu (umístění) souboru se slučovanými daty."
+
+#: C/glabels.xml:1014(para)
+msgid "Finally, once the label has been configured for a data file, field keys can be inserted into text objects and used as source or data for barcode objects and image filenames for image objects. See <xref linkend=\"glabels-object-properties\"/> for more information on using merge data for these object types."
+msgstr "Nakonec, až je etiketa nastavená pro datový soubor, je zapotřebí vložit klíče polí do textových objektů a použít klíče polí jako zdroje nebo data pro objekty čárových kódů a jako názvy souborů pro obrázkové objekty. Více informací o použití slučovaných dat pro tyto typy objektů viz <xref linkend=\"glabels-object-properties\"/>."
+
+#: C/glabels.xml:1020(para)
+msgid "Now that your label is configured, <application>gLabels</application> will print a unique label for each record in your source document -- substituting fields from each record for field keys in the all text, barcode, and image objects."
+msgstr "Nyní, když máte svoji etiketu nastavenou, bude aplikace <application>gLabels</application> tisknout jednotlivé etikety odlišné pro každý záznam ve vašem zdrojovém dokumentu - do klíčů polí se ve všech textech budou dosazovat pole z jednotlivých záznamů."
+
+#: C/glabels.xml:1025(para)
+msgid "See <xref linkend=\"glabels-merge-tutorial\"/> for a detailed tutorial on the document merge feature."
+msgstr "Podrobný průvodce funkcí slučování dokumentů viz <xref linkend=\"glabels-merge-tutorial\"/>."
+
+#: C/glabels.xml:1040(title)
+msgid "Settings"
+msgstr "Nastavení"
+
+#: C/glabels.xml:1041(para)
+msgid "To configure <application>gLabels</application>, choose <menuchoice><guimenu>Settings</guimenu><guimenuitem>Preferences</guimenuitem></menuchoice>. The <guilabel>Preferences</guilabel> dialog contains the following tabbed sections:"
+msgstr "Když chcete v aplikaci <application>gLabels</application> změnit nastavení, zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Předvolby</guimenuitem></menuchoice>. Dialogové okno <guilabel>Předvolby gLabels</guilabel> obsahuje následující karty:"
+
+#: C/glabels.xml:1062(title)
+msgid "Locale"
+msgstr "Národní prostředí"
+
+#: C/glabels.xml:1066(guilabel)
+msgid "Units"
+msgstr "Jednotky"
+
+#: C/glabels.xml:1068(para)
+msgid "Use this radio button group to specify your preferred units. Select one of the following options:"
+msgstr "Tento skupinový přepínač použijte k určení svých upřednostňovaných jednotek. Vyberte jednu z následujících možností:"
+
+#: C/glabels.xml:1073(guilabel)
+msgid "Points"
+msgstr "Body"
+
+#: C/glabels.xml:1074(para)
+msgid "Use points (1 point = 1/72 in = 0.352778 mm)."
+msgstr "Použít body (1 bod = 1/72 palce = 0,352778 mm)."
+
+#: C/glabels.xml:1078(guilabel)
+msgid "Inches"
+msgstr "Palce"
+
+#: C/glabels.xml:1079(para)
+msgid "Use inches."
+msgstr "Použít palce (1 palec = 25,4 mm)."
+
+#: C/glabels.xml:1083(guilabel)
+msgid "Millimeters"
+msgstr "Milimetry"
+
+#: C/glabels.xml:1084(para)
+msgid "Use millimeters."
+msgstr "Použít milimetry."
+
+#: C/glabels.xml:1087(para)
+msgid "Default: <guilabel>Inches</guilabel>."
+msgstr "Výchozí : <guilabel>Palce</guilabel>."
+
+#: C/glabels.xml:1093(guilabel)
+msgid "Default page size"
+msgstr "Výchozí velikost stránky"
+
+#: C/glabels.xml:1095(para)
+msgid "Use this radio button group to specify your preferred page size. This will make it quicker for you to locate media types when creating a new label or card."
+msgstr "Tento skupinový přepínač použijte k určení své upřednostňované velikosti stránky. Urychlí vám to hledání typu média při vytváření nové etikety nebo vizitky."
+
+#: C/glabels.xml:1101(guilabel)
+msgid "US Letter"
+msgstr "US Letter"
+
+#: C/glabels.xml:1102(para)
+msgid "Most of your media will be of the US Letter page size (8.5 x 11 inches)."
+msgstr "Většina vašich médií má velikost stránky US Letter (8,5 × 11 palců)."
+
+#: C/glabels.xml:1106(guilabel)
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: C/glabels.xml:1107(para)
+msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
+msgstr "Většina vašich médií má velikost stránky ISO A4 (210 × 297 mm)."
+
+#: C/glabels.xml:1110(para)
+msgid "Default: <guilabel>US Letter</guilabel>."
+msgstr "Výchozí: <guilabel>US Letter</guilabel>."
+
+#: C/glabels.xml:1119(title)
+msgid "Object defaults"
+msgstr "Výchozí hodnoty objektu"
+
+#: C/glabels.xml:1125(para)
+msgid "Use these controls to set the default properties of new text objects. These properties are"
+msgstr "Použijte tyto ovládací prvky k nastavení výchozích vlastností nových textových objektů. Tyto vlastnosti jsou:"
+
+#: C/glabels.xml:1130(guilabel)
+msgid "Font"
+msgstr "Písmo"
+
+#: C/glabels.xml:1131(para)
+msgid "These controls are used to select font family and font size, and whether the font should bold or in italics."
+msgstr "Tyto ovládací prvky slouží k nastavení rodiny písma a velikosti písma a zda by mělo být písmo tučné nebo kurzívou."
+
+#: C/glabels.xml:1136(guilabel)
+#: C/glabels.xml:1161(guilabel)
+#: C/glabels.xml:1176(guilabel)
+msgid "Color"
+msgstr "Barva"
+
+#: C/glabels.xml:1137(para)
+msgid "This control selects the default text color."
+msgstr "Tímto ovládacím prvkem se vybírá výchozí barva textu."
+
+#: C/glabels.xml:1141(guilabel)
+msgid "Alignment"
+msgstr "Zarovnání"
+
+#: C/glabels.xml:1142(para)
+msgid "These controls are used to select the default text alignment (left, center or right)."
+msgstr "Tyto ovládací prvky slouží k výběru výchozího zarovnání textu (vlevo, na střed nebo vpravo)."
+
+#: C/glabels.xml:1151(para)
+msgid "Use these controls to set the default properties of lines and outlines of new objects. These properties are"
+msgstr "Použijte tyto ovládací prvky k nastavení výchozích vlastností čar a obrysů nových objektů. Tyto vlastnosti jsou:"
+
+#: C/glabels.xml:1156(guilabel)
+msgid "Width"
+msgstr "Šířka"
+
+#: C/glabels.xml:1157(para)
+msgid "This control selects the default line width."
+msgstr "Tímto ovládacím prvkem se vybírá výchozí šířka čáry."
+
+#: C/glabels.xml:1162(para)
+msgid "This control selects the default line color."
+msgstr "Tímto ovládacím prvkem se vybírá výchozí barva čáry."
+
+#: C/glabels.xml:1169(guilabel)
+msgid "Fill"
+msgstr "Výplň"
+
+#: C/glabels.xml:1171(para)
+msgid "Use these controls to set the default fill properties of new objects. These properties are"
+msgstr "Použijte tyto ovládací prvky k nastavení výchozích vlastností výplně nových objektů. Tyto vlastnosti jsou:"
+
+#: C/glabels.xml:1177(para)
+msgid "This control selects the default fill color."
+msgstr "Tento ovládací prvek slouží k výběru výchozí barvy výplně."
+
+#: C/glabels.xml:1191(title)
+msgid "Document Merge Tutorial"
+msgstr "Průvodce slučováním dokumentů"
+
+#: C/glabels.xml:1193(para)
+msgid "Document Merge (sometimes called \"Mail Merge\") is a powerful feature that allows a unique label or card to be printed for each record in an external data source. It is however, the most mis-understood feature of <application>gLabels</application>. The following examples will step through a couple of common tasks using the document merge feature."
+msgstr "Slučování dokumentů (někdy také nazývané „hromadná korespondence“) je mocná funkce, díky které můžete tisknout odlišné etikety nebo vizitky pro každý záznam v externím zdroji dat. Je však také ze všech funkcí aplikace <application>gLabels</application> nejnáročnější na pochopení. Následující příklady vás provedou dvojicí obvyklých úloh, které používají funkci slučování dokumentů."
+
+#: C/glabels.xml:1201(title)
+msgid "Example 1: Name Tags Using a CSV File"
+msgstr "Příklad 1: Jmenovky s použitím souboru CSV"
+
+#: C/glabels.xml:1203(para)
+msgid "In this example we are organizing an orientation party for the new crew members of our ship. We have a list of freshman crew members that we created in <application>gnumeric</application> and exported as the following CSV file. We could have created this file by using a text editor, but heck it is the 23rd century."
+msgstr "V tomto příkladu pořádáme seznamovací párty pro nové členy osádky naší lodi. Máme seznam nováčků v osádce, který jsme vytvořili v aplikaci <application>gnumeric</application> a následně jej vyexportovali do souboru CSV. Mohli bychom jej vytvořit i v textovém editoru, ale žijeme přece v 21. století."
+
+#: C/glabels.xml:1209(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"Name,Department,SN\n"
+"\"Jim Kirk\",Management,\"SC937-0176 CEC\"\n"
+"\"Mr. Spock\",Sciences,S179-276SP\n"
+"\"Leonard McCoy\",Medicine,unknown\n"
+"\"Montgomery Scott\",Engineering,SE-197-54T\n"
+"      "
+msgstr ""
+"\n"
+"jmeno,zarazeni,cislo\n"
+"\"Jiří Kroupa\",vedení,\"SC937-0176 CEC\"\n"
+"\"prof. Hrbolek\",vědec,S179-276SP\n"
+"\"MUDr. Kroupová\",lékař,unknown\n"
+"\"Viktor Hujer\",technik,SE-197-54T\n"
+"      "
+
+#: C/glabels.xml:1217(para)
+msgid "In <application>gLabels</application> we have created a new <application>gLabels</application> document using the Avery 5395 \"Name Badge Labels\" template. Next we use the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to display the <guilabel>merge properties</guilabel> dialog. We use this dialog to select the source type (in our case CSV) and the merge source (filename) as shown."
+msgstr "V aplikaci <application>gLabels</application> máme vytvořený dokument vycházející ze šablony Avery 5395 „Etikety na jmenovky“. Nyní použijeme položku nabídky <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Vlastnosti slučování</guimenuitem></menuchoice> a zobrazí se nám dialogové okno <guilabel>vlastnosti slučování</guilabel>. Toto dialogové okno použijeme k výběru typu zdroje (v našem případě CSV) a vlastního zdroje (souboru), jak můžete vidět níže."
+
+#: C/glabels.xml:1227(title)
+#: C/glabels.xml:1344(title)
+#: C/glabels.xml:1460(title)
+msgid "Merge properties dialog"
+msgstr "Dialogové okno vlastností slučování"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1238(para)
+msgid "Before applying the merge source, we uncheck the first record since it is only column headers from our original <application>gnumeric</application> spreadsheet and would simply waste our first label. We could also unselect any other records that we didn't want to print a label for."
+msgstr "Před použitím zdroje slučování zrušíme zaškrtnutí prvního záznamu, protože ten obsahuje pouze záhlaví sloupců z naší původní tabulky v <application>gnumeric</application> a akorát bychom tím zničili první etiketu. Stejným způsobem můžeme zrušit zaškrtnutí kteréhokoliv záznamu, který nechceme vytisknout."
+
+#: C/glabels.xml:1243(para)
+#: C/glabels.xml:1361(para)
+msgid "We can also view each record in more detail by clicking on the appropriate expander (the little triangles) as shown. Once we are satisfied with the selections in this dialog we click <guibutton>OK</guibutton> to accept the changes."
+msgstr "U každého záznamu si také můžeme prohlédnou všechny údaje po jeho rozbalení kliknutím na malý trojúhelníček. Až jsme s výběrem v dialogovém okně spokojení, klikneme na <guibutton>OK</guibutton> a změny se použijí."
+
+#: C/glabels.xml:1248(para)
+#: C/glabels.xml:1366(para)
+msgid "Now we start adding objects to our <application>gLabels</application> document as shown."
+msgstr "Nyní můžeme začít s přidáváním objektů do svého dokumentu <application>gLabels</application>, jak je zobrazeno níže."
+
+#: C/glabels.xml:1252(title)
+#: C/glabels.xml:1370(title)
+#: C/glabels.xml:1488(title)
+msgid "Adding objects"
+msgstr "Přidávání objektů"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1263(para)
+msgid "In this example we have added three text objects and a barcode object. The first text object contains only simple literal text (\"Hello, my name is\"). The second text object contains a single merge field (\"${1}\") corresponding to the first field of a record (first column of a line) which contains the new crew member's full name. The third text field contains both literal text (\"Department: \") followed by a single merge field (\"${2}\") corresponding to the second field or the crew member's department. The barcode object is configured to use field (or key) \"3\" which contains our crew member's starfleet serial number."
+msgstr "V tomto příkladu máme přidané tři textové objekty a čárový kód. První textový objekt obsahuje pouze prostý text („Ahoj, jmenuji se“). Druhý textový objekt obsahuje jedno slučované pole („${1}“), které odpovídá prvnímu poli v záznamu (první sloupec v řádku) a které obsahuje celé jméno nového člena osádky. Třetí textové pole obsahuje jak text („Zařazení: “), tak za ním následuje jedno slučované pole („${2}“), které odpovídá druhému poli se zařazením člena posádky. Objekt s čárovým kódem je nastavený na použití pole (klíče) „3“, které obsahuje identifikační číslo člena posádky."
+
+#: C/glabels.xml:1273(para)
+msgid "Now we can print our name tags by selecting the <menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> menu item. This will display print dialog as shown below."
+msgstr "Nyní můžeme své jmenovky vytisknout pomocí položky nabídky <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Tisk</guimenuitem></menuchoice>. Zobrazí se dialogové okno jako na následujícím obrázku."
+
+#: C/glabels.xml:1280(title)
+msgid "Printing name tags"
+msgstr "Tisk jmenovek"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1291(para)
+#: C/glabels.xml:1406(para)
+#: C/glabels.xml:1520(para)
+msgid "Just to make sure our labels are going to look okay, we select the <guilabel>Print outlines</guilabel> option and click <guibutton>Print Preview</guibutton>. This will display a print preview dialog as shown below."
+msgstr "Nyní zkontrolujeme, zda vypadají etikety jak mají. Vybereme možnost <guilabel>Tisk obrysů</guilabel> a klikneme na <guibutton>Náhled tisku</guibutton>. Zobrazí se dialogové okno s náhledem tisku, stejně jako na následujícím obrázku."
+
+#: C/glabels.xml:1298(title)
+msgid "Name tags preview"
+msgstr "Náhled jmenovek"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1309(para)
+msgid "Everything looks good, so we can now load up our printer with the appropriate label stock, print our name tags and start beaming our guests aboard."
+msgstr "Vše vypadá v pořádku, takže můžeme do tiskárny vložit správný list s etiketami, vytisknout jmenovky a vzhůru na palubu nalodit naše hosty."
+
+#: C/glabels.xml:1316(title)
+msgid "Example 2: Address Labels Using a CSV File"
+msgstr "Příklad 2: Adresní štítky s použitím souboru CSV"
+
+#: C/glabels.xml:1318(para)
+msgid "In this example we are going to throw a party and need to print mailing address labels for our invitations. We have a list of our closest friends that we created in <application>gnumeric</application> and exported as the following CSV file. It should be noted that not everyone has a middle initial or a two line address."
+msgstr "V tomto příkladu se chystáme uspořádat večírek a potřebujeme vytisknout adresní štítky na své pozvánky. Máme seznam svých nejbližších přátel, který jsem vytvořili v aplikaci <application>gnumeric</application> a vyexportovali jej jako soubor CSV. Povšimněte si, že ne všichni mají přezdívku nebo dvouřádkovou adresu."
+
+#: C/glabels.xml:1324(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP\n"
+",,,,,,,\n"
+"Critter,Ess,S,\"123 Faux St.\",,Alexandria,VA,22310\n"
+"Doe,John,,\"Apt 1X\",\"451 Mystery St.\",Trenton,NJ,08601\n"
+"Summers,Joyce,,\"1630 Revello Dr\",,Sunnydale,CA,95037\n"
+"McGarret,Steve,O,\"404 Piikoi Street\",,Honolulu,HI,96813\n"
+"Kramer,Cosmo,,\"Apt 5B\",\"129 W. 81 St.\",\"New York\",NY,10024-7207\n"
+"      "
+msgstr ""
+"\n"
+"PRIJMENI,JMENO,PREZDIVKA,ADR1,ADR2,MESTO,PSC\n"
+",,,,,,,\n"
+"Pacovský,Tomáš,,\"U dvou akordů\",\"Křižíkova 506\",Praha,\"123 00\"\n"
+"Pacovský,František,Ozzák,\"Křižíkova 62\",,\"Praha - Vinohrady\",\"110 00\"\n"
+"Divićová,Marcela,,\"Náměstí míru 1\",,Praha,\"150 00\"\n"
+"Bůček,Alexandr,Lexa,\"U Jezevce\",\"Nitranská 7\",Praha,\"160 13\"\n"
+"Bůčková,Alexandra,,\"Korunní 18\",,Praha,\"100 24\"\n"
+"      "
+
+#: C/glabels.xml:1334(para)
+msgid "In <application>gLabels</application> we have created a new <application>gLabels</application> document using the Avery 5512 \"Address Labels\" template. Next we use the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to display the <guilabel>merge properties</guilabel> dialog. We use this dialog to select the source type (in our case CSV) and the merge source (filename) as shown."
+msgstr "V aplikaci <application>gLabels</application> vytvoříme nový dokument ze šablony Avery L7162 „Poštovní etikety“. Následně použijeme položku nabídky <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Vlastnosti slučování</guimenuitem></menuchoice> a zobrazí se nám dialogové okno <guilabel>vlastností slučování</guilabel>. V tomto dialogovém okně vybereme typ zdroje (v našem případě CSV) a konkrétní zdroj (název souboru) pro slučování, jak můžete vidět na následujícím obrázku."
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1355(para)
+msgid "Before applying the merge source, we uncheck the first record since it is only column headers from our original <application>gnumeric</application> spreadsheet and would simply waste our first label. We also unselect the second record which is empty (an artifact of our original spreadsheet). We could also unselect any other records that we didn't want to print a label for."
+msgstr "Před tím, než zdroj pro slučován použijeme, zrušíme zaškrtnutí prvního záznamu, protože ten obsahuje pouze záhlaví sloupců z původní tabulky v <application>gnumeric</application> a akorát bychom tím znehodnotili první etiketu. Zrušíme zaškrtnutí i druhého záznamu, protože je prázdný (což je pozůstatek z tabulkového kalkulátoru). A stejným způsobem můžeme vyřadit kterýkoliv jiný záznam, který nechceme na etikety vytisknout."
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1381(para)
+msgid "In this example we have a single text object. This text object contains all of our merge fields organized on multiple lines as a mailing address. Notice that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each located with no other text on their own lines. When <application>gLabels</application> encounters a field as the only text on a line, it will not expand the line if the field is empty."
+msgstr "V tomto příkladu máme jen jeden textový objekt. Tento textový objekt obsahuje všechna slučovaná pole uspořádaná v několika řádcích představujících poštovní adresu. Všimněte si, že pole ${4} a ${5} (ta odpovídají ADR1 a ADR2) jsou umístěná na samostatných řádcích bez jakéhokoliv dalšího textu. Pokud aplikace <application>gLabels</application> narazí na pole, které je jediným textem na řádku a toto pole je prázdné, řádek nebude ve výsledku zabírat žádné místo."
+
+#: C/glabels.xml:1388(para)
+msgid "Now we can print our address labels by selecting the <menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> menu item. This will display print dialog as shown below."
+msgstr "Nyní se můžeme pustit do tisku adresních etiket pomocí volby <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Tisk</guimenuitem></menuchoice> v nabídce. Zobrazí se dialogové okno tisku jako na následujícím obrázku."
+
+#: C/glabels.xml:1395(title)
+#: C/glabels.xml:1509(title)
+msgid "Printing address labels"
+msgstr "Tisk etiket s adresami"
+
+#: C/glabels.xml:1413(title)
+#: C/glabels.xml:1527(title)
+msgid "Address labels preview"
+msgstr "Náhled etiket s adresami"
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1424(para)
+#: C/glabels.xml:1538(para)
+msgid "Everything looks good, so we can now load up our printer with the appropriate label stock, print our address labels and start mailing our party invitations."
+msgstr "Vše vypadá dobře a tak můžeme vložit do tiskárny správný list s etiketami, vytisknout adresní štítky a začít rozesílat pozvánky na večírek."
+
+#: C/glabels.xml:1431(title)
+msgid "Example 3: Address Labels Using the <application>Evolution</application> Addressbook"
+msgstr "Příklad 3: Adresní štítky s použitím adresáře aplikace <application>Evolution</application>"
+
+#: C/glabels.xml:1433(para)
+msgid "Our last party was a great success, and now we need to print mailing address labels for the invitations to a new one. To simplify this, we can use the <application>Evolution</application> addressbook, because the address data of all our friends is stored there."
+msgstr "Náš předchozí večírek měl velký úspěch a my nyní chceme vytisknout adresní štítky pro pozvánky na další takový. Abychom si to zjednodušili, můžeme použít adresář aplikace <application>Evolution</application>, protože adresy všech našich přátel máme uložené v něm."
+
+#: C/glabels.xml:1439(para)
+msgid "Depending on how your copy of <application>gLabels</application> was packaged, this option could be unavailable. Support for the <application>Evolution</application> addressbook will only be available if the <application>evolution-data-server</application> and its development files were present when <application>gLabels</application> was built. Please keep this in mind if you build <application>gLabels</application> directly from source."
+msgstr "V závislosti na tom, jak byl připravený váš balíček <application>gLabels</application>, nemusí být tato funkčnost dostupná. Podpora pro adresář <application>Evolution</application> je dostupná jen v případě, že byl při překladu aplikace <application>gLabels</application> k dispozici <application>evolution-data-server</application> a k němu vývojářské soubory. Mějte toto na paměti, pokud si aplikaci překládáte sami ze zdrojových kódů."
+
+#: C/glabels.xml:1445(para)
+msgid "If the <application>gLabels</application> package from your distribution lacks this support, you may wish to contact the package maintainer or file a bug against the package to request it."
+msgstr "Pokud balíček <application>gLabels</application> ve vaší distribuci tuto podporu postrádá, můžete zkusit kontaktovat správce balíčku nebo to zkusit nahlásit jako chybu."
+
+#: C/glabels.xml:1450(para)
+msgid "In <application>glabels</application> we have created a new <application>gLabels</application> document using the Avery 5512 \"Address Labels\" template. Next we use the <menuchoice><guimenu>Objects</guimenu><guimenuitem>Merge Properties</guimenuitem></menuchoice> menu item to display the <guilabel>Merge properties</guilabel> dialog. We use this dialog to select the source type (in our case <guilabel>Data from default Evolution addressbook</guilabel>) as shown."
+msgstr "V aplikaci <application>glabels</application> vytvoříme nový dokument ze šablony Avery L7162 „Poštovní etikety“. Potom v nabídce zvolíme <menuchoice><guimenu>Objekty</guimenu><guimenuitem>Vlastnosti slučování</guimenuitem></menuchoice>, aby se nám zobrazilo dialogové okno <guilabel>Vlastnosti slučování</guilabel>. V něm vybereme typ zdroje (v našem případě <guilabel>Data z výchozího adresáře Evolution</guilabel>), jak je ukázáno na obrázku."
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1471(para)
+msgid "Once we have chosen <guilabel>Data from default Evolution addressbook </guilabel> as our merge source, we will get a full list of its content. Initially, all entries are checked. Assuming we were planning a really big party, we could leave this selection untouched (but let's keep our budget in mind). We will now select or unselect certain entries by clicking on the appropriate checkboxes, or we could use the <guibutton>Select all</guibutton> and <guibutton>Unselect all </guibutton> buttons to activate or deactivate all entries in the address book."
+msgstr "Když máme jako zdroj slučování vybráno <guilabel>Data z výchozího adresáře Evolution</guilabel>, obdržíme úplný seznam jeho obsahu. Na začátku jsou zaškrtnuté všechny položky. Předpokládá se, že budeme pořádat opravdu velký večírek a tak bychom mohli ponechat výběr jak je (ale uvědomte si kolik to bude stát). Nyní některé záznamy kliknutím na příslušné zaškrtávací políčko vyřadíme nebo naopak vybereme, případně můžeme použít tlačítka <guibutton>Vybrat vše</guibutton> a <guibutton>Zrušit výběr</guibutton> pro aktivování nebo deaktivování všech záznamů v adresáři."
+
+#: C/glabels.xml:1479(para)
+msgid "We can also view each entry in more detail by clicking on the appropriate expander (the little triangles) as shown. Once we are satisfied with the selections in this dialog, we will click the <guibutton>OK</guibutton> button to accept the changes."
+msgstr "U každého záznamu si také můžeme prohlédnou všechny údaje po jeho rozbalení kliknutím na malý trojúhelníček. Až jsme s výběrem v dialogovém okně spokojení, klikneme na <guibutton>OK</guibutton> a změny se použijí."
+
+#: C/glabels.xml:1484(para)
+msgid "Now we start adding objects to our glabels document as shown."
+msgstr "Nyní můžeme začít s přidáváním objektů do svého dokumentu glabels, jak bylo ukázáno dříve."
+
+#. ==== End of Figure ====
+#: C/glabels.xml:1499(para)
+msgid "In this example we have a single text object again. This text object contains all of our merge fields organized on multiple lines as a mailing address."
+msgstr "V tomto příkladu máme opět jen jeden textový objekt. Ten obsahuje všechna slučovaná pole uspořádaná v několika řádcích, představujících poštovní adresy."
+
+#: C/glabels.xml:1502(para)
+msgid "Now we can print our address labels by selecting the <menuchoice><guimenu>File</guimenu><guimenuitem>Print</guimenuitem></menuchoice> menu item. This will display the print dialog as shown below."
+msgstr "Nyní můžeme své etikety s adresami vytisknout volbou položky nabídky <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Tisk</guimenuitem></menuchoice>. Zobrazí se dialogové okno tisku, jak jej můžete vidět níže."
+
+#: C/glabels.xml:1551(title)
+msgid "Manually Creating New Templates"
+msgstr "Ruční vytváření šablon"
+
+#: C/glabels.xml:1553(para)
+msgid "Predefined templates are defined by XML files located in <filename>${prefix}/share/glabels/</filename>, where <filename>${prefix}</filename> is usually something like <filename>/usr/local</filename> or <filename>/usr</filename> depending on the configuration option <filename>prefix</filename>. <application>gLabels</application> will use all files of the form <filename>*-templates.xml</filename> or <filename>*.template</filename>, that it finds in <filename>${prefix}/share/glabels/</filename> and <filename>${HOME}/.glabels/</filename>. Additional templates can be added by creating additional <filename>*.template</filename> files in either of these directories."
+msgstr "Předdefinované šablony jsou definované soubory XML umístěnými v <filename>${prefix}/share/glabels/</filename>, kde <filename>${prefix}</filename> je obvykle <filename>/usr/local</filename> nebo <filename>/usr</filename>, v závislosti na volbě nastavení <filename>prefix</filename> při překladu programu. Aplikace <application>gLabels</application> použije všechny soubory s názvem v podobě <filename>*-templates.xml</filename> nebo <filename>*.template</filename>, které nalezne v <filename>${prefix}/share/glabels/</filename> a <filename>${HOME}/.glabels/</filename>. Další šablony si můžete přidat vytvořením dalších souborů <filename>*.template</filename> v jedné z těchto složek."
+
+#: C/glabels.xml:1566(para)
+msgid "The format for these files is defined in the DTD: <ulink url=\"http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt\" type=\"http\">glabels-2.2.dtd</ulink>. (This DTD also describes other XML formats used by <application>gLabels</application>.)"
+msgstr "Formát těchto souborů je dán v DTD: <ulink url=\"http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt\" type=\"http\">glabels-2.2.dtd</ulink>. (Toto DTD popisuje i ostatní formáty XML používané v aplikaci <application>gLabels</application>.)"
+
+#: C/glabels.xml:1572(title)
+msgid "Assumptions/caveats"
+msgstr "Předpoklady/upozornění"
+
+#: C/glabels.xml:1575(para)
+msgid "A sheet contains only one size of label or card (if a sheet contains more than one size of item, it can be split into multiple templates for multiple pass printing)"
+msgstr "Stránka obsahuje etiketu nebo vizitku pouze jedné velikosti (pokud má stránka obsahovat více než jednu velikost položky, můžete ji rozdělit do více šablon a vytisknout na vícekrát)"
+
+#: C/glabels.xml:1580(para)
+msgid "Distances can be expressed in units of <emphasis>pt</emphasis>, <emphasis>in</emphasis>, <emphasis>mm</emphasis>, <emphasis>cm</emphasis>, or <emphasis>pc</emphasis>. For example: \"<literal>1.0in</literal>\" or \"<literal>2.54cm</literal>\". If no units are specified, computer points (<emphasis>pt</emphasis>) will be assumed (1 <emphasis>pt</emphasis> = 1/72 <emphasis>in</emphasis> = 0.352778 <emphasis>mm</emphasis>)."
+msgstr "Rozměry mohou být uváděny v jednotkách <emphasis>pt</emphasis>, <emphasis>in</emphasis>, <emphasis>mm</emphasis>, <emphasis>cm</emphasis> nebo <emphasis>pc</emphasis>. Například: „<literal>1.0in</literal>“ nebo „<literal>2.54cm</literal>“. Pokud není žádná jednotka uvedená, budou předpokládány body <emphasis>pt</emphasis>  (1 <emphasis>pt</emphasis> = 1/72 <emphasis>in</emphasis> = 0,352778 <emphasis>mm</emphasis>)."
+
+#: C/glabels.xml:1593(title)
+msgid "Template Files"
+msgstr "Soubory šablon"
+
+#: C/glabels.xml:1595(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <replaceable>...templates...</replaceable>\n"
+"\n"
+"&lt;/Glabels-templates&gt;\n"
+"      "
+msgstr ""
+"\n"
+"&lt;?xml version=\"1.0\"?&gt;\n"
+"&lt;Glabels-templates&gt;\n"
+"\n"
+"   <replaceable>…šablony…</replaceable>\n"
+"\n"
+"&lt;/Glabels-templates&gt;\n"
+"      "
+
+#: C/glabels.xml:1607(title)
+msgid "Example Template"
+msgstr "Příklad šablony"
+
+#: C/glabels.xml:1608(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"  &lt;Template brand=\"Avery\" part=\"8160\" size=\"US-Letter\" description=\"Mailing Labels\"&gt;\n"
+"    &lt;Label-rectangle id=\"0\" width=\"189pt\" height=\"72pt\" round=\"5pt\"&gt;\n"
+"      &lt;Markup-margin size=\"5pt\"/&gt;\n"
+"      &lt;Layout nx=\"3\" ny=\"10\" x0=\"11.25pt\" y0=\"36pt\" dx=\"200pt\" dy=\"72pt\"/&gt;\n"
+"    &lt;/Label-rectangle&gt;\n"
+"    &lt;Alias brand=\"Avery\" part=\"5160\"/&gt;\n"
+"    &lt;Alias brand=\"Avery\" part=\"6233\"/&gt;\n"
+"  &lt;/Template&gt;\n"
+"      "
+msgstr ""
+"\n"
+"  &lt;Template brand=\"Avery\" part=\"8160\" size=\"US-Letter\" _description=\"Mailing Labels\"&gt;\n"
+"    &lt;Label-rectangle id=\"0\" width=\"189pt\" height=\"72pt\" round=\"5pt\"&gt;\n"
+"      &lt;Markup-margin size=\"5pt\"/&gt;\n"
+"      &lt;Layout nx=\"3\" ny=\"10\" x0=\"11.25pt\" y0=\"36pt\" dx=\"200pt\" dy=\"72pt\"/&gt;\n"
+"    &lt;/Label-rectangle&gt;\n"
+"    &lt;Alias brand=\"Avery\" part=\"5160\"/&gt;\n"
+"    &lt;Alias brand=\"Avery\" part=\"6233\"/&gt;\n"
+"  &lt;/Template&gt;\n"
+"      "
+
+#: C/glabels.xml:1621(title)
+msgid "Template Node"
+msgstr "Uzel Template"
+
+#: C/glabels.xml:1623(para)
+msgid "A <emphasis>Template</emphasis> node describes a single stationary product. It must contain one instance of any type of Label node (<emphasis>Label-rectangle</emphasis>, <emphasis>Label-round</emphasis>, or <emphasis>Label-cd</emphasis>). This node can be followed by zero or more <emphasis>Alias</emphasis> nodes."
+msgstr "Uzel <emphasis>Template</emphasis> popisuje jeden pevně daný výrobek. Musí obsahovat jednu instanci libovolného uzlu Label (<emphasis>Label-rectangle</emphasis>, <emphasis>Label-round</emphasis> nebo <emphasis>Label-cd</emphasis>). Tento uzel může být následován žádným nebo více uzly <emphasis>Alias</emphasis>."
+
+#: C/glabels.xml:1637(para)
+#: C/glabels.xml:1712(para)
+#: C/glabels.xml:1789(para)
+#: C/glabels.xml:1834(para)
+#: C/glabels.xml:1910(para)
+#: C/glabels.xml:1943(para)
+#: C/glabels.xml:1994(para)
+#: C/glabels.xml:2037(para)
+#: C/glabels.xml:2096(para)
+#: C/glabels.xml:2173(para)
+msgid "Property"
+msgstr "Vlastnost"
+
+#: C/glabels.xml:1640(para)
+#: C/glabels.xml:1715(para)
+#: C/glabels.xml:1792(para)
+#: C/glabels.xml:1837(para)
+#: C/glabels.xml:1913(para)
+#: C/glabels.xml:1946(para)
+#: C/glabels.xml:1997(para)
+#: C/glabels.xml:2040(para)
+#: C/glabels.xml:2099(para)
+#: C/glabels.xml:2176(para)
+msgid "Description"
+msgstr "Popis"
+
+#: C/glabels.xml:1646(para)
+#: C/glabels.xml:2182(para)
+msgid "brand"
+msgstr "brand"
+
+#: C/glabels.xml:1648(para)
+msgid "Brand or manufacturer of stationary product. E.g. \"Avery\""
+msgstr "Značka nebo výrobce pevně daného výrobku. Např. \"S&K Label\""
+
+#: C/glabels.xml:1653(para)
+#: C/glabels.xml:2188(para)
+msgid "part"
+msgstr "part"
+
+#: C/glabels.xml:1655(para)
+msgid "Part number or name of stationary product. E.g. \"8160\""
+msgstr "Produktové číslo nebo název pevně daného výrobku. Např. \"8160\""
+
+#: C/glabels.xml:1660(para)
+#: C/glabels.xml:1919(para)
+msgid "size"
+msgstr "size"
+
+#: C/glabels.xml:1662(para)
+msgid "Size of sheet. E.g., \"US-Letter,\" \"A4\", ..."
+msgstr "Velikost stránky. Např. \"A4\", \"US-Letter\""
+
+#: C/glabels.xml:1666(para)
+msgid "description"
+msgstr "description"
+
+#: C/glabels.xml:1668(para)
+msgid "Description of stationary product. E.g, \"Mailing Labels.\""
+msgstr "Popis pevně daného produktu. Např. \"Mailing Labels.\""
+
+#: C/glabels.xml:1673(para)
+msgid "_description"
+msgstr "_description"
+
+#: C/glabels.xml:1675(para)
+msgid "Translatable description of stationary product. E.g, \"Mailing Labels.\" (Only useful for predefined templates)"
+msgstr "Popis pevně daného produktu s možností překladu. Např. \"Mailing Labels.\" (Použitelné pouze pro předdefinované šablony)"
+
+#: C/glabels.xml:1681(para)
+#: C/glabels.xml:1727(para)
+#: C/glabels.xml:1857(para)
+msgid "width"
+msgstr "width"
+
+#: C/glabels.xml:1683(para)
+msgid "Page width. Only valid if size=\"Other\""
+msgstr "Šířka stránky. Platné jen v případě, že size=\"Other\""
+
+#: C/glabels.xml:1687(para)
+#: C/glabels.xml:1731(para)
+#: C/glabels.xml:1864(para)
+msgid "height"
+msgstr "height"
+
+#: C/glabels.xml:1689(para)
+msgid "Page height. Only valid if size=\"Other\""
+msgstr "Výška stránky. Platné jen v případě, že size=\"Other\""
+
+#: C/glabels.xml:1699(title)
+msgid "Label-rectangle Node"
+msgstr "Uzel Label-rectangle"
+
+#: C/glabels.xml:1701(para)
+msgid "A <emphasis>Label-rectangle</emphasis> node describes the dimensions of a single label or business card that is rectangular in shape (may have rounded edges)."
+msgstr "Uzel <emphasis>Label-rectangle</emphasis> popisuje rozměry jedné etikety nebo vizitky, která má obdélníkový tvar (může mít zaoblené rohy)."
+
+#: C/glabels.xml:1721(para)
+#: C/glabels.xml:1798(para)
+#: C/glabels.xml:1843(para)
+msgid "id"
+msgstr "id"
+
+#: C/glabels.xml:1723(para)
+#: C/glabels.xml:1800(para)
+#: C/glabels.xml:1845(para)
+msgid "Reserved for future use. Should always be 0."
+msgstr "Rezervované pro pozdější použití. Vždy by mělo být nastavené  na 0."
+
+#: C/glabels.xml:1728(para)
+msgid "Width of label/card"
+msgstr "Šířka etikety/vizitky"
+
+#: C/glabels.xml:1732(para)
+msgid "Height of label/card"
+msgstr "Výška etikety/vizitky"
+
+#: C/glabels.xml:1735(para)
+msgid "round"
+msgstr "round"
+
+#: C/glabels.xml:1737(para)
+msgid "Radius of corners. For items with square edges (business cards), the radius should be 0."
+msgstr "Poloměr rohů. Pro položky s ostrými rohy (např. vizitky) by mělo být nastaveno na 0."
+
+#: C/glabels.xml:1742(para)
+msgid "x_waste"
+msgstr "x_waste"
+
+#: C/glabels.xml:1744(para)
+msgid "Amount of horizontal waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr "Velikost dovoleného vodorovného odsazení (umožňuje přetisk). To je užitečné kvůli zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé pozadí, ale např. obrázkové."
+
+#: C/glabels.xml:1750(para)
+msgid "y_waste"
+msgstr "y_waste"
+
+#: C/glabels.xml:1752(para)
+msgid "Amount of vertical waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr "Velikost dovoleného svislého odsazení (umožňuje přetisk). To je užitečné kvůli zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé pozadí, ale např. obrázkové."
+
+#: C/glabels.xml:1763(title)
+msgid "Label-rectangle Parameters"
+msgstr "Parametry uzlu Label-rectangle"
+
+#: C/glabels.xml:1777(title)
+msgid "Label-round Node"
+msgstr "Uzel Label-round"
+
+#: C/glabels.xml:1779(para)
+msgid "A <emphasis>Label-round</emphasis> node describes the dimensions of a simple round label (not a CD)."
+msgstr "Uzel <emphasis>Label-round</emphasis> popisuje rozměry jedné zaoblené etikety (ne CD)."
+
+#: C/glabels.xml:1804(para)
+#: C/glabels.xml:1849(para)
+#: C/glabels.xml:2015(para)
+msgid "radius"
+msgstr "radius"
+
+#: C/glabels.xml:1805(para)
+msgid "Radius (1/2 diameter) of label"
+msgstr "Poloměr (½ průměru) etikety"
+
+#: C/glabels.xml:1808(para)
+#: C/glabels.xml:1871(para)
+msgid "waste"
+msgstr "waste"
+
+#: C/glabels.xml:1810(para)
+#: C/glabels.xml:1873(para)
+msgid "Amount of waste (over-print) to allow. This is useful for minimizing alignment problems when using non-white backgrounds (e.g. images)."
+msgstr "Velikost dovoleného odsazení (umožňuje přetisk). To je užitečné kvůli zamezení problémům se zarovnáním v situaci, kdy se nepoužívá bílé pozadí, ale např. obrázkové."
+
+#: C/glabels.xml:1822(title)
+msgid "Label-cd Node"
+msgstr "Uzel Label-cd"
+
+#: C/glabels.xml:1824(para)
+msgid "A <emphasis>Label-cd</emphasis> node describes the dimensions of a CD, DVD, or business card CD."
+msgstr "Uzel <emphasis>Label-cd</emphasis> popisuje rozměry etiket na CD, DVD nebo vizitkové CD."
+
+#: C/glabels.xml:1850(para)
+msgid "Outer radius of label"
+msgstr "Vnější poloměr etikety"
+
+#: C/glabels.xml:1853(para)
+msgid "hole"
+msgstr "hole"
+
+#: C/glabels.xml:1854(para)
+msgid "Radius of concentric hole"
+msgstr "Poloměr středové díry"
+
+#: C/glabels.xml:1859(para)
+msgid "If present, the label is clipped to the given width. (Useful for \"business card CDs\")."
+msgstr "Pokud je zadáno, bude etiketa oříznuta na uvedenou šířku. (Vhodné pro „vizitková CD“)."
+
+#: C/glabels.xml:1866(para)
+msgid "If present, the label is clipped to the given height. (Useful for \"business card CDs\")."
+msgstr "Pokud je zadáno, bude etiketa oříznuta na uvedenou výšku. (Vhodné pro „vizitková CD“)."
+
+#: C/glabels.xml:1884(title)
+msgid "CD Label Parameters"
+msgstr "Parametry etiket na CD"
+
+#: C/glabels.xml:1898(title)
+msgid "Markup-margin Node"
+msgstr "Uzel Markup-margin"
+
+#: C/glabels.xml:1900(para)
+msgid "A <emphasis>Markup-margin</emphasis> describes a margin along all edges of a label."
+msgstr "Uzel <emphasis>Markup-margin</emphasis> popisuje okraj podél všech hran etikety."
+
+#: C/glabels.xml:1921(para)
+msgid "Size of the margin. I.e. the distance of the margin line from the edge of the card/label."
+msgstr "Velikost okraje. Např. vzdálenost hranice okraje od hrany etikety/vizitky."
+
+#: C/glabels.xml:1932(title)
+msgid "Markup-line Node"
+msgstr "Uzel Markup-line"
+
+#: C/glabels.xml:1934(para)
+msgid "A <emphasis>Markup-line</emphasis> describes a markup line."
+msgstr "Uzel <emphasis>Markup-line</emphasis> popisuje značku v podobě čáry."
+
+#: C/glabels.xml:1952(para)
+#: C/glabels.xml:2046(para)
+msgid "x1"
+msgstr "x1"
+
+#: C/glabels.xml:1954(para)
+msgid "x coordinate of 1st endpoint of the line segment."
+msgstr "x-ová souřadnice počátku úsečky"
+
+#: C/glabels.xml:1958(para)
+#: C/glabels.xml:2052(para)
+msgid "y1"
+msgstr "y1"
+
+#: C/glabels.xml:1960(para)
+msgid "y coordinate of 1st endpoint of the line segment."
+msgstr "y-ová souřadnice počátku úsečky"
+
+#: C/glabels.xml:1964(para)
+msgid "x2"
+msgstr "x2"
+
+#: C/glabels.xml:1966(para)
+msgid "x coordinate of 2nd endpoint of the line segment."
+msgstr "x-ová souřadnice konce úsečky"
+
+#: C/glabels.xml:1970(para)
+msgid "y2"
+msgstr "y2"
+
+#: C/glabels.xml:1972(para)
+msgid "y coordinate of 2nd endpoint of the line segment."
+msgstr "y-ová souřadnice konce úsečky"
+
+#: C/glabels.xml:1982(title)
+msgid "Markup-circle Node"
+msgstr "Uzel Markup-circle"
+
+#: C/glabels.xml:1984(para)
+msgid "A <emphasis>Markup-circle</emphasis> describes a markup circle."
+msgstr "Uzel <emphasis>Markup-circle</emphasis> popisuje značku v podobě kruhu."
+
+#: C/glabels.xml:2003(para)
+#: C/glabels.xml:2119(para)
+msgid "x0"
+msgstr "x0"
+
+#: C/glabels.xml:2005(para)
+msgid "x coordinate of circle origin (center)."
+msgstr "x-ová souřadnice středu kruhu"
+
+#: C/glabels.xml:2009(para)
+#: C/glabels.xml:2126(para)
+msgid "y0"
+msgstr "y0"
+
+#: C/glabels.xml:2011(para)
+msgid "y coordinate of circle origin (center)."
+msgstr "y-ová souřadnice středu kruhu"
+
+#: C/glabels.xml:2016(para)
+msgid "Radius of circle."
+msgstr "Poloměr kruhu."
+
+#: C/glabels.xml:2025(title)
+msgid "Markup-rect Node"
+msgstr "Uzel Markup-rect"
+
+#: C/glabels.xml:2027(para)
+msgid "A <emphasis>Markup-rect</emphasis> describes a markup rectangle."
+msgstr "Uzel <emphasis>Markup-rect</emphasis> popisuje značku v podobě obdélníku."
+
+#: C/glabels.xml:2048(para)
+msgid "x coordinate of upper left corner of rectangle."
+msgstr "x-ová souřadnice levého horního rohu obdélníku."
+
+#: C/glabels.xml:2054(para)
+msgid "y coordinate of upper left corner of rectangle."
+msgstr "y-ová souřadnice levého horního rohu obdélníku."
+
+#: C/glabels.xml:2058(para)
+msgid "w"
+msgstr "w"
+
+#: C/glabels.xml:2060(para)
+msgid "Width of rectangle."
+msgstr "Šířka obdélníku."
+
+#: C/glabels.xml:2064(para)
+msgid "h"
+msgstr "h"
+
+#: C/glabels.xml:2066(para)
+msgid "Height of rectangle."
+msgstr "Výška obdélníku."
+
+#: C/glabels.xml:2070(para)
+msgid "r"
+msgstr "r"
+
+#: C/glabels.xml:2071(para)
+msgid "Radius of rounded corners of rectangle."
+msgstr "Poloměr zakulacených rohů obdélníku."
+
+#: C/glabels.xml:2080(title)
+msgid "Layout Node"
+msgstr "Uzel Layout"
+
+#: C/glabels.xml:2082(para)
+msgid "A label node may contain multiple <emphasis>Layout</emphasis> children. If labels are arranged in a simple grid pattern, only one layout is needed. However, if labels are arranged in multiple grids, such as a running bond pattern, multiple <emphasis>layout</emphasis> tags can be used. Note: a single label can always be treated as a grid of one."
+msgstr "Uzel typu Label může obsahovat více potomků <emphasis>Layout</emphasis>. V případě, že jsou etikety rozmístěné do jednoduché pravidelné mřížky, postačuje jeden uzel Layout. Pokud ale jsou etikety rozmístěné ve více mřížkách, např. mají podobu cihlové zdi, musí se použít více značek <emphasis>layout</emphasis>. Poznámka: jedna etiketa může být vždy považována za mřížku s jednou buňkou."
+
+#: C/glabels.xml:2105(para)
+msgid "nx"
+msgstr "nx"
+
+#: C/glabels.xml:2107(para)
+msgid "Number of labels/cards across in the grid (horizontal)"
+msgstr "Počet etiket/vizitek v mřížce (vodorovně)"
+
+#: C/glabels.xml:2112(para)
+msgid "ny"
+msgstr "ny"
+
+#: C/glabels.xml:2114(para)
+msgid "Number of labels/cards up and down in the grid (vertical)"
+msgstr "Počet etiket/vizitek v mřížce (svisle)"
+
+#: C/glabels.xml:2121(para)
+msgid "Distance from left edge of sheet to the left edge of the left column of cards/labels in the layout."
+msgstr "Vzdálenost od levé hrany stránky k levé hraně levého sloupce etiket/vizitek v rozvržení."
+
+#: C/glabels.xml:2128(para)
+msgid "Distance from the top edge of sheet to the top edge of the top row of labels/cards in the layout."
+msgstr "Vzdálenost od horní hrany stránky k horní hraně horní řady etiket/vizitek v rozvržení."
+
+#: C/glabels.xml:2133(para)
+msgid "dx"
+msgstr "dx"
+
+#: C/glabels.xml:2134(para)
+msgid "Horizontal pitch of grid."
+msgstr "Vodorovná rozteč mřížky."
+
+#: C/glabels.xml:2137(para)
+msgid "dy"
+msgstr "dy"
+
+#: C/glabels.xml:2138(para)
+msgid "Vertical pitch of grid."
+msgstr "Svislá rozteč mřížky."
+
+#: C/glabels.xml:2146(title)
+msgid "Layout Parameters"
+msgstr "Parametry uzlu Layout"
+
+#: C/glabels.xml:2160(title)
+msgid "Alias Node"
+msgstr "Uzel Alias"
+
+#: C/glabels.xml:2162(para)
+msgid "An <emphasis>Alias</emphasis> node provides the name of a product with the same size and layout characteristics as the parent template."
+msgstr "Uzel <emphasis>Alias</emphasis> uvádí názvy výrobků se stejnými rozměry a rozvržením, jako má rodičovská šablona."
+
+#: C/glabels.xml:2184(para)
+msgid "The brand or manufacturer of the equivalent product."
+msgstr "Značka nebo výrobce odpovídajícího výrobku."
+
+#: C/glabels.xml:2190(para)
+msgid "The part number or name of the equivalent product."
+msgstr "Produktové číslo nebo název odpovídajícího výrobku."
+
+#: C/glabels.xml:2226(title)
+msgid "About <application>gLabels</application>"
+msgstr "O aplikaci <application>gLabels</application>"
+
+#: C/glabels.xml:2227(para)
+msgid "<application>gLabels</application> was written by Jim Evins (<email>evins@snaught.com</email>). To find more information about <application>gLabels</application>, please visit the <ulink url=\"http://glabels.sourceforge.net\" type=\"http\">gLabels Web page</ulink>."
+msgstr "Aplikaci <application>gLabels</application> napsal Jim Evins (<email>evins@snaught.com</email>).  Pokud chcete o aplikaci <application>gLabels</application> najít více informací, navštivte prosím <ulink url=\"http://glabels.sourceforge.net\" type=\"http\">webovou stránku gLabels</ulink>."
+
+#: C/glabels.xml:2232(para)
+msgid "To report a bug or make a suggestion regarding this application or this manual, follow the directions at the <ulink url=\"http://glabels.sourceforge.net/contact/\" type=\"http\"><application>gLabels</application> Contact Page</ulink>."
+msgstr "Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k této aplikaci nebo této příručce, postupujte dle instrukcí na <ulink url=\"http://glabels.sourceforge.net/contact/\" type=\"http\">kontaktní stránce <application>gLabels</application></ulink>."
+
+#: C/glabels.xml:2238(para)
+msgid "This program is distributed under the terms of the GNU General Public license as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. A copy of this license can be found at this <ulink url=\"ghelp:gpl\" type=\"help\">link</ulink>, or in the file COPYING included with the source code of this program."
+msgstr "Tento program je šířen podle ustanovení GNU General Public License, vydávané Free Software Foundation; a to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv pozdější verze. Kopii této licence naleznete pod tímto <ulink url=\"ghelp:gpl\" type=\"help\">odkazem</ulink> nebo v souboru COPYING přiloženém ke zdrojovým kódům tohoto programu. "
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/glabels.xml:0(None)
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>, 2010"
+
