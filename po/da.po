@@ -1,0 +1,3079 @@
+# Danish translation for glabels.
+# Copyright (C) 2010 glabels's COPYRIGHT HOLDER.
+# This file is distributed under the same license as the glabels package.
+# Joe Hansen (joedalton2@yahoo.dk), 2010.
+#
+# https://sourceforge.net/tracker/?func=detail&aid=2955732&group_id=46122&atid=445116
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glabels glabels_2_2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-23 22:54+0100\n"
+"PO-Revision-Date: 2010-02-20 14:52+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/bc.c:65
+msgid "POSTNET (any)"
+msgstr "POSTNET (alle)"
+
+#: ../src/bc.c:68
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (kun ZIP)"
+
+#: ../src/bc.c:71
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: ../src/bc.c:74
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc.c:79
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:82
+msgid "EAN (any)"
+msgstr "EAN (alle)"
+
+#: ../src/bc.c:85
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc.c:88
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc.c:91
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc.c:94
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc.c:97
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc.c:100
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc.c:103
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A eller UPC-E)"
+
+#: ../src/bc.c:106
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc.c:109
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc.c:112
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc.c:115
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc.c:118
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc.c:121
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc.c:124
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc.c:127
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc.c:130
+msgid "Code 39"
+msgstr "Kode 39"
+
+#: ../src/bc.c:133
+msgid "Code 128"
+msgstr "Kode 128"
+
+#: ../src/bc.c:136
+msgid "Code 128C"
+msgstr "Kode 128C"
+
+#: ../src/bc.c:139
+msgid "Code 128B"
+msgstr "Kode 128B"
+
+# joe kom.: to provide blank leaves in (a book) for notes or written comments.
+# kender ikke et dansk udtryk for det her. indflyttet, eller interfolierede
+#: ../src/bc.c:142
+msgid "Interleaved 2 of 5"
+msgstr "Interfolierede 2 af 5"
+
+# hvad er dettte. Codabar is a linear barcode symbology developed in 1972 by Pitney Bowes Corp.
+#: ../src/bc.c:145
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc.c:148
+msgid "MSI"
+msgstr "MSI"
+
+# navn? The Plessey Company plc was a British-based international electronics, defence and telecommunications company.
+#: ../src/bc.c:151
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:154
+#, fuzzy
+msgid "Code 93"
+msgstr "Kode 39"
+
+#: ../src/bc.c:161
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:168
+msgid "IEC18004 (QRCode)"
+msgstr ""
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+#, fuzzy
+msgid "Default Color"
+msgstr "Standard"
+
+#: ../src/color-combo-menu.c:83
+#, fuzzy
+msgid "Dark Red"
+msgstr "mørkerød"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr ""
+
+#: ../src/color-combo-menu.c:85
+msgid "Dark Goldenrod"
+msgstr ""
+
+#: ../src/color-combo-menu.c:86
+#, fuzzy
+msgid "Dark Green"
+msgstr "mørkegrøn"
+
+#: ../src/color-combo-menu.c:87
+msgid "Dark Cyan"
+msgstr ""
+
+#: ../src/color-combo-menu.c:88
+msgid "Navy Blue"
+msgstr ""
+
+#: ../src/color-combo-menu.c:89
+#, fuzzy
+msgid "Dark Violet"
+msgstr "mørkeblå"
+
+#: ../src/color-combo-menu.c:91
+#, fuzzy
+msgid "Red"
+msgstr "rød"
+
+#: ../src/color-combo-menu.c:92
+#, fuzzy
+msgid "Orange"
+msgstr "orange"
+
+#: ../src/color-combo-menu.c:93
+msgid "Dark Yellow"
+msgstr ""
+
+#: ../src/color-combo-menu.c:94
+#, fuzzy
+msgid "Medium green"
+msgstr "sløv grøn"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr ""
+
+#: ../src/color-combo-menu.c:96
+#, fuzzy
+msgid "Blue"
+msgstr "blå"
+
+#: ../src/color-combo-menu.c:97
+#, fuzzy
+msgid "Purple"
+msgstr "purple"
+
+#: ../src/color-combo-menu.c:99
+msgid "Salmon"
+msgstr ""
+
+#: ../src/color-combo-menu.c:100
+#, fuzzy
+msgid "Gold"
+msgstr "guld"
+
+#: ../src/color-combo-menu.c:101
+#, fuzzy
+msgid "Yellow"
+msgstr "gul"
+
+#: ../src/color-combo-menu.c:102
+#, fuzzy
+msgid "Green"
+msgstr "grøn"
+
+# turkis eller cyan
+#: ../src/color-combo-menu.c:103
+#, fuzzy
+msgid "Cyan"
+msgstr "turkis"
+
+#: ../src/color-combo-menu.c:104
+#, fuzzy
+msgid "SkyBlue"
+msgstr "skyblå"
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr ""
+
+#: ../src/color-combo-menu.c:107
+#, fuzzy
+msgid "Pink"
+msgstr "lilla"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr ""
+
+#: ../src/color-combo-menu.c:109
+#, fuzzy
+msgid "Light Yellow"
+msgstr "lysegul"
+
+#: ../src/color-combo-menu.c:110
+#, fuzzy
+msgid "Light Green"
+msgstr "lysegrøn"
+
+#: ../src/color-combo-menu.c:111
+#, fuzzy
+msgid "Light Cyan"
+msgstr "lys turkis"
+
+#: ../src/color-combo-menu.c:112
+msgid "Slate Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:113
+#, fuzzy
+msgid "Thistle"
+msgstr "hvid"
+
+#: ../src/color-combo-menu.c:115
+#, fuzzy
+msgid "White"
+msgstr "hvid"
+
+#: ../src/color-combo-menu.c:116
+#, c-format
+msgid "10\\% Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:117
+#, c-format
+msgid "25\\% Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:118
+#, c-format
+msgid "40\\% Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:119
+#, c-format
+msgid "50\\% Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:120
+#, c-format
+msgid "60\\% Gray"
+msgstr ""
+
+#: ../src/color-combo-menu.c:121
+#, fuzzy
+msgid "Black"
+msgstr "sort"
+
+#: ../src/color-combo-menu.c:249 ../src/color-combo-menu.c:368
+#, fuzzy
+msgid "Custom Color"
+msgstr "Tilpasset farve:"
+
+#: ../src/color-combo-menu.c:314
+#, fuzzy, c-format
+msgid "Custom Color #%u"
+msgstr "Tilpasset farve:"
+
+#: ../src/critical-error-handler.c:70
+msgid "gLabels Fatal Error!"
+msgstr "gLabels - fatal fejl!"
+
+#: ../src/file.c:86
+msgid "New Label or Card"
+msgstr "Ny etiket eller kort"
+
+#: ../src/file.c:190 ../src/label.c:584 ../src/label.c:628
+msgid "Label properties"
+msgstr "Etiketegenskaber"
+
+#: ../src/file.c:296 ../src/file.c:586
+msgid "All files"
+msgstr "Alle filer"
+
+#: ../src/file.c:301 ../src/file.c:591
+msgid "gLabels documents"
+msgstr "Dokumenter for gLabels"
+
+#: ../src/file.c:348 ../src/file.c:649
+msgid "Empty file name selection"
+msgstr "Tøm filnavnsmarkering"
+
+#: ../src/file.c:351 ../src/file.c:367
+msgid "Please select a file or supply a valid file name"
+msgstr "Vælg venligst en fil eller angiv et gyldigt filnavn"
+
+#: ../src/file.c:364
+msgid "File does not exist"
+msgstr "Fil eksisterer ikke"
+
+#: ../src/file.c:439
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "Kunne ikke åbne fil \"%s\""
+
+#: ../src/file.c:442
+msgid "Not a supported file format"
+msgstr "Ikke et understøttet filformat"
+
+#: ../src/file.c:520 ../src/file.c:699
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "Kunne ikke gemme fil \"%s\""
+
+#: ../src/file.c:524 ../src/file.c:703
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "Fejl opstod under gemmning. Filen er ikke gemt."
+
+#: ../src/file.c:564
+#, c-format
+msgid "Save \"%s\" as"
+msgstr "Gem \"%s\" som"
+
+#: ../src/file.c:652
+msgid "Please supply a valid file name"
+msgstr "Angiv venligst et gyldigt filnavn"
+
+#: ../src/file.c:673
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "Overskriv fil \"%s\"?"
+
+#: ../src/file.c:677
+msgid "File already exists."
+msgstr "Filen eksisterer allerede."
+
+#: ../src/file.c:773
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Gem ændringer til dokument \"%s\" før lukning?"
+
+#: ../src/file.c:777
+msgid "Your changes will be lost if you don't save them."
+msgstr "Dine ændringer vil gå tabt, hvis du ikke gemmer dem."
+
+#: ../src/file.c:780
+msgid "Close without saving"
+msgstr "Luk uden at gemme"
+
+#: ../src/font-combo-menu.c:137
+#, fuzzy
+msgid "Recent fonts"
+msgstr "Seneste skabeloner"
+
+#: ../src/font-combo-menu.c:152
+msgid "Proportional fonts"
+msgstr ""
+
+#: ../src/font-combo-menu.c:160
+msgid "Fixed-width fonts"
+msgstr ""
+
+#: ../src/font-combo-menu.c:168
+#, fuzzy
+msgid "All fonts"
+msgstr "Alle filer"
+
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:157
+msgid "Sample text"
+msgstr ""
+
+#: ../src/glabels-batch.c:52
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "angiv filnavn for uddata (standard=output.pdf)"
+
+#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
+msgid "filename"
+msgstr "filnavn"
+
+#: ../src/glabels-batch.c:54
+msgid "number of sheets (default=1)"
+msgstr "antal ark (ark=1)"
+
+#: ../src/glabels-batch.c:54
+msgid "sheets"
+msgstr "ark"
+
+#: ../src/glabels-batch.c:56
+msgid "number of copies (default=1)"
+msgstr "antal kopier (standard=1)"
+
+#: ../src/glabels-batch.c:56
+msgid "copies"
+msgstr "kopier"
+
+#: ../src/glabels-batch.c:58
+msgid "first label on first sheet (default=1)"
+msgstr "første etiket på første ark (standard=1)"
+
+#: ../src/glabels-batch.c:58
+msgid "first"
+msgstr "første"
+
+#: ../src/glabels-batch.c:60
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:13
+msgid "print outlines (to test printer alignment)"
+msgstr "udskriv omkreds (for at teste printeropsætning)"
+
+#: ../src/glabels-batch.c:62
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:12
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "udskriv omvendt (det vil sige et spejlbillede)"
+
+# tilføjet af joe: crop marks: Marks that show where a publication page will be trimmed
+#: ../src/glabels-batch.c:64
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:11
+msgid "print crop marks"
+msgstr "udskriv beskæringsmærker"
+
+#: ../src/glabels-batch.c:66
+msgid "input file for merging"
+msgstr "inddatafil for sammenflet"
+
+#: ../src/glabels-batch.c:68 ../src/glabels.c:64
+msgid "[FILE...]"
+msgstr "[FIL...]"
+
+#: ../src/glabels-batch.c:98
+msgid "Print files created with gLabels."
+msgstr ""
+
+#: ../src/glabels-batch.c:106 ../src/glabels.c:89
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+
+#: ../src/glabels-batch.c:149
+#, c-format
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "kan ikke udføre dokumentsammenfletning med glabelsfil %s\n"
+
+#: ../src/glabels-batch.c:184
+#, c-format
+msgid "cannot open glabels file %s\n"
+msgstr "kan ikke åbne glabelsfil %s\n"
+
+#: ../src/glabels.c:81
+#, fuzzy
+msgid "Launch gLabels label and business card designer."
+msgstr "Et program til oprettelse af etiketter og forretningskort.\n"
+
+#: ../src/label-barcode.c:154 ../src/ui.c:319
+msgid "Create barcode object"
+msgstr "Opret stregkodeobjekt"
+
+#: ../src/label-barcode.c:227 ../src/label-barcode.c:389
+#, fuzzy
+msgid "Barcode data"
+msgstr "Stregkodedata er tomme"
+
+#: ../src/label-barcode.c:263
+#, fuzzy
+msgid "Barcode property"
+msgstr "Egenskaber for stregkodeobjekt"
+
+#: ../src/label-barcode.c:482
+msgid "Barcode data empty"
+msgstr "Stregkodedata er tomme"
+
+#: ../src/label-barcode.c:486
+msgid "Invalid barcode data"
+msgstr "Ugyldige stregkodedata"
+
+#: ../src/label-box.c:156
+#, fuzzy
+msgid "Create box object"
+msgstr "Opret tekstobjekt"
+
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
+#: ../data/builder/property-bar.builder.h:3
+msgid "Fill color"
+msgstr "Fyld farve"
+
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../src/stock.c:94 ../data/builder/property-bar.builder.h:8
+msgid "Line color"
+msgstr "Linjefarve"
+
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/builder/property-bar.builder.h:9
+msgid "Line width"
+msgstr "Linjebredde"
+
+#: ../src/label.c:399
+msgid "Untitled"
+msgstr "Uden titel"
+
+#: ../src/label.c:702 ../src/ui.c:422
+msgid "Merge properties"
+msgstr "Sammenføj egenskaber"
+
+#: ../src/label.c:1184 ../src/ui.c:215
+msgid "Delete"
+msgstr "Slet"
+
+#: ../src/label.c:1217 ../src/ui.c:324
+msgid "Bring to front"
+msgstr "Hent frem"
+
+#: ../src/label.c:1253 ../src/ui.c:331
+msgid "Send to back"
+msgstr "Send tilbage"
+
+#: ../src/label.c:1294
+msgid "Rotate"
+msgstr "Roter"
+
+#: ../src/label.c:1329 ../src/ui.c:338
+msgid "Rotate left"
+msgstr "Roter mod venstre"
+
+#: ../src/label.c:1362 ../src/ui.c:345
+msgid "Rotate right"
+msgstr "Roter til højre"
+
+#: ../src/label.c:1397 ../src/ui.c:352
+msgid "Flip horizontally"
+msgstr "Vend vandret"
+
+#: ../src/label.c:1432 ../src/ui.c:359
+msgid "Flip vertically"
+msgstr "Vend lodret"
+
+#: ../src/label.c:1472 ../src/ui.c:366
+msgid "Align left"
+msgstr "Juster venstre"
+
+#: ../src/label.c:1529 ../src/ui.c:373
+msgid "Align right"
+msgstr "Juster højre"
+
+#: ../src/label.c:1590 ../src/ui.c:380
+msgid "Align horizontal center"
+msgstr "Juster vandret centrum"
+
+#: ../src/label.c:1666 ../src/ui.c:387
+msgid "Align tops"
+msgstr "Juster øverst"
+
+#: ../src/label.c:1723 ../src/ui.c:394
+msgid "Align bottoms"
+msgstr "Juster nederste kanter"
+
+# openoffice: juster lodret centreret
+#: ../src/label.c:1784 ../src/ui.c:401
+msgid "Align vertical center"
+msgstr "Juster lodret centreret"
+
+#: ../src/label.c:1862 ../src/ui.c:408
+msgid "Center horizontally"
+msgstr "Centrer vandret"
+
+#: ../src/label.c:1909 ../src/ui.c:415
+msgid "Center vertically"
+msgstr "Centrer lodret"
+
+#: ../src/label.c:2595 ../src/label.c:2637 ../src/label.c:2663 ../src/ui.c:208
+msgid "Paste"
+msgstr "Indsæt"
+
+#: ../src/label-ellipse.c:160
+#, fuzzy
+msgid "Create ellipse object"
+msgstr "Opret linjeobjekt"
+
+#: ../src/label-image.c:161 ../src/ui.c:312
+msgid "Create image object"
+msgstr "Opret billedeobjekt"
+
+#: ../src/label-image.c:265 ../src/label-image.c:336
+#, fuzzy
+msgid "Set image"
+msgstr "Nulstil billedstørrelse"
+
+#: ../src/label-line.c:147 ../src/ui.c:298
+msgid "Create line object"
+msgstr "Opret linjeobjekt"
+
+#: ../src/label-object.c:383 ../src/label-object.c:416
+msgid "Move"
+msgstr ""
+
+#: ../src/label-object.c:467
+#, fuzzy
+msgid "Resize"
+msgstr "Sidestørrelse:"
+
+#: ../src/label-object.c:1185
+#, fuzzy
+msgid "Shadow state"
+msgstr "Skygge"
+
+#: ../src/label-object.c:1228
+#, fuzzy
+msgid "Shadow offset"
+msgstr "Skygge"
+
+#: ../src/label-object.c:1276
+#, fuzzy
+msgid "Shadow color"
+msgstr "Skygge"
+
+#: ../src/label-object.c:1319
+#, fuzzy
+msgid "Shadow opacity"
+msgstr "Skygge"
+
+#: ../src/label-text.c:266 ../src/ui.c:284
+msgid "Create text object"
+msgstr "Opret tekstobjekt"
+
+#: ../src/label-text.c:438
+#, fuzzy
+msgid "Typing"
+msgstr "lilla"
+
+# skrifttypefamilie
+#: ../src/label-text.c:573 ../data/builder/property-bar.builder.h:4
+msgid "Font family"
+msgstr "Skriftfamilie"
+
+# skrifttypestørrelse
+#: ../src/label-text.c:611 ../data/builder/property-bar.builder.h:5
+msgid "Font size"
+msgstr "Skriftstørrelse"
+
+#: ../src/label-text.c:644
+#, fuzzy
+msgid "Font weight"
+msgstr "Roter til højre"
+
+#: ../src/label-text.c:677 ../data/builder/property-bar.builder.h:6
+msgid "Italic"
+msgstr "Kursiv"
+
+#: ../src/label-text.c:710
+#, fuzzy
+msgid "Align text"
+msgstr "Juster venstre"
+
+#: ../src/label-text.c:743
+#, fuzzy
+msgid "Line spacing"
+msgstr "Linjemellemrum:"
+
+#: ../src/label-text.c:776 ../data/builder/property-bar.builder.h:11
+msgid "Text color"
+msgstr "Tekstfarve"
+
+#: ../src/label-text.c:920
+msgid "Auto shrink"
+msgstr ""
+
+#: ../src/media-select.c:307 ../src/media-select.c:311
+#: ../src/media-select.c:316 ../src/media-select.c:325
+#: ../src/media-select.c:328 ../src/media-select.c:422
+#: ../src/media-select.c:635 ../src/media-select.c:644
+msgid "Any"
+msgstr "Alle"
+
+#: ../src/media-select.c:670
+#, c-format
+msgid "%d per sheet"
+msgstr "%d per ark"
+
+#: ../src/media-select.c:719 ../src/media-select.c:725
+#: ../src/media-select.c:735 ../src/media-select.c:741
+#, fuzzy
+msgid "diameter"
+msgstr "%s %s diameter"
+
+#: ../src/media-select.c:824
+msgid "No recent templates found."
+msgstr "Ingen seneste skabeloner fundet."
+
+#: ../src/media-select.c:826
+msgid "Try selecting a template from the \"Search all templates\" page."
+msgstr "Forsøg med at vælge en skabelon fra siden \"Søg i alle skabeloner\"."
+
+#: ../src/media-select.c:912
+msgid "No match."
+msgstr "Intet resultat."
+
+#: ../src/media-select.c:914
+msgid "Try selecting a different brand, page size or category."
+msgstr "Forsøg med at vælge et andet mærke, sidestørrrelse eller kategori."
+
+#: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
+msgid "None"
+msgstr "Ingen"
+
+#: ../src/merge-evolution.c:316
+msgid "Couldn't construct query"
+msgstr "Kunne ikke konstruere forespørgsel"
+
+#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
+msgid "Couldn't open addressbook."
+msgstr "Kunne ikke åbne adressebog."
+
+#: ../src/merge-evolution.c:348
+msgid "Couldn't list available fields."
+msgstr "Kunne ikke vise tilgængelige felter."
+
+#: ../src/merge-evolution.c:384
+msgid "Couldn't get contacts."
+msgstr "Kunne ikke få kontakt."
+
+#: ../src/merge-init.c:57
+msgid "Text: Comma Separated Values (CSV)"
+msgstr ""
+
+#: ../src/merge-init.c:64
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr ""
+
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:87
+msgid "Text: Colon separated values"
+msgstr ""
+
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:104
+#, fuzzy
+msgid "Evolution Addressbook"
+msgstr "Data fra standardadressebog i Evolution"
+
+# nogen der ved hvad tent er? Open-tran har den ikke.
+#: ../src/merge-init.c:110
+#, fuzzy
+msgid "VCards"
+msgstr "Tent-kort"
+
+#: ../src/merge-properties-dialog.c:282
+msgid "Merge Properties"
+msgstr "Sammenføj egenskaber"
+
+# den forstår jeg ikke helt.
+#: ../src/merge-properties-dialog.c:308 ../src/merge-properties-dialog.c:424
+msgid "Select merge-database source"
+msgstr "Vælg sammenføj-databasekilde"
+
+#: ../src/merge-properties-dialog.c:319 ../src/merge-properties-dialog.c:446
+msgid "N/A"
+msgstr "-"
+
+#: ../src/merge-properties-dialog.c:345
+msgid "Select"
+msgstr "Vælg"
+
+#: ../src/merge-properties-dialog.c:352
+msgid "Record/Field"
+msgstr "Optag/felt"
+
+#: ../src/merge-properties-dialog.c:360
+#: ../data/builder/object-editor.builder.h:10
+msgid "Data"
+msgstr "Data"
+
+#: ../src/merge-properties-dialog.c:439
+msgid "Fixed"
+msgstr "Rettet"
+
+#: ../src/new-label-dialog.c:114
+msgid "<b>Media type</b>"
+msgstr "<b>Medietype</b>"
+
+#: ../src/new-label-dialog.c:124
+msgid "<b>Label orientation</b>"
+msgstr "<b>Etiketorientering</b>"
+
+#: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
+#: ../src/ui-property-bar.c:280
+msgid "Default"
+msgstr "Standard"
+
+#: ../src/object-editor.c:159 ../src/object-editor.c:460
+msgid "Object properties"
+msgstr "Objektegenskaber"
+
+#: ../src/object-editor.c:309
+msgid "Box object properties"
+msgstr "Boksobjekt - egenskaber"
+
+#: ../src/object-editor.c:328
+msgid "Ellipse object properties"
+msgstr "Egenskaber for ellipseobjekt"
+
+#: ../src/object-editor.c:347
+msgid "Line object properties"
+msgstr "Linjeobjekt - egenskaber"
+
+#: ../src/object-editor.c:364
+msgid "Image object properties"
+msgstr "Billedobjekt - egenskaber"
+
+#: ../src/object-editor.c:381
+msgid "Text object properties"
+msgstr "Tekstobjekt - egenskaber"
+
+#: ../src/object-editor.c:403
+msgid "Barcode object properties"
+msgstr "Egenskaber for stregkodeobjekt"
+
+#: ../src/object-editor-edit-page.c:76
+msgid "Insert merge field"
+msgstr "Indsæt sammenføjningsfelt"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:345
+#: ../src/ui-property-bar.c:292
+#, fuzzy
+msgid "No Fill"
+msgstr "Ingen fyld"
+
+#: ../src/object-editor-image-page.c:278
+msgid "All Files"
+msgstr "Alle filer"
+
+#: ../src/object-editor-image-page.c:283
+msgid "All Images"
+msgstr "Alle billeder"
+
+#: ../src/object-editor-image-page.c:298
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
+#: ../src/ui-property-bar.c:304
+#, fuzzy
+msgid "No Line"
+msgstr "Ingen linje"
+
+#: ../src/prefs-dialog.c:172 ../data/builder/prefs-dialog.builder.h:21
+msgid "gLabels Preferences"
+msgstr "Indstillinger for gLabels"
+
+#. ===================================================================
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:217
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:6
+#: ../templates/misc-iso-templates.xml.h:34
+msgid "Labels"
+msgstr "Etiketter"
+
+#: ../src/rotate-label-button.c:122
+#, fuzzy
+msgid "Normal"
+msgstr "Format:"
+
+#: ../src/rotate-label-button.c:133
+#, fuzzy
+msgid "Rotated"
+msgstr "Roter"
+
+#: ../src/stock.c:70
+msgid "_Select Mode"
+msgstr "_Vælg tilstand"
+
+#: ../src/stock.c:71
+msgid "_Text"
+msgstr "_Tekst"
+
+#: ../src/stock.c:72
+msgid "_Line"
+msgstr "_Linje"
+
+#: ../src/stock.c:73
+msgid "_Box"
+msgstr "_Boks"
+
+#: ../src/stock.c:74
+msgid "_Ellipse"
+msgstr "_Ellipse"
+
+#: ../src/stock.c:75
+msgid "_Image"
+msgstr "_Billede"
+
+#: ../src/stock.c:76
+msgid "Bar_code"
+msgstr "Streg_kode"
+
+# eller flet egenskaber
+#: ../src/stock.c:77
+msgid "_Merge Properties"
+msgstr "_Sammenføj egenskaber"
+
+#: ../src/stock.c:78
+msgid "Object _Properties"
+msgstr "Objekt_egenskaber"
+
+#: ../src/stock.c:79
+msgid "Bring to _Front"
+msgstr "Hent _frem"
+
+#: ../src/stock.c:80
+msgid "Send to _Back"
+msgstr "Send til_bage"
+
+#: ../src/stock.c:81
+msgid "Rotate _Left"
+msgstr "Roter til _venstre"
+
+#: ../src/stock.c:82
+msgid "Rotate _Right"
+msgstr "Roter til _højre"
+
+#: ../src/stock.c:83
+msgid "Flip _Horizontally"
+msgstr "Vend _vandret"
+
+#: ../src/stock.c:84
+msgid "Flip _Vertically"
+msgstr "Vend _lodret"
+
+# godt nok i tvivl her
+#: ../src/stock.c:85
+msgid "_Lefts"
+msgstr "_Venstredrejninger"
+
+# godt nok i tvivl her
+#: ../src/stock.c:86
+msgid "_Rights"
+msgstr "_Højredrejninger"
+
+#: ../src/stock.c:87
+msgid "_Centers"
+msgstr "_Centrum"
+
+#: ../src/stock.c:88
+msgid "_Tops"
+msgstr "_Øverste"
+
+#: ../src/stock.c:89
+msgid "Bottoms"
+msgstr "Nederste kanter"
+
+#: ../src/stock.c:90
+msgid "Centers"
+msgstr "Centrum"
+
+#: ../src/stock.c:91 ../src/stock.c:92
+msgid "Label Ce_nter"
+msgstr "Etiketce_ntrum"
+
+#: ../src/stock.c:95 ../src/stock.c:97
+msgid "Linked"
+msgstr "Forbundet"
+
+#: ../src/stock.c:96 ../src/stock.c:98
+msgid "Not Linked"
+msgstr "Ikke forbundet"
+
+#: ../src/template-designer.c:404
+msgid "gLabels Template Designer"
+msgstr "gLabels - skabelondesigner"
+
+#: ../src/template-designer.c:459
+msgid "Welcome"
+msgstr "Velkommen"
+
+#: ../src/template-designer.c:498
+msgid "Name and Description"
+msgstr "Navn og beskrivelse"
+
+#: ../src/template-designer.c:546
+msgid "Page Size"
+msgstr "Sidestørrelse"
+
+#: ../src/template-designer.c:612
+msgid "Label or Card Shape"
+msgstr "Etiket- eller kortform"
+
+#: ../src/template-designer.c:658
+msgid "Label or Card Size"
+msgstr "Etiket- eller kortstørrelse"
+
+# rund eller afrundet!
+#: ../src/template-designer.c:754
+msgid "Label Size (round)"
+msgstr "Etiketstørrelse (rund)"
+
+#: ../src/template-designer.c:832
+msgid "Label Size (CD/DVD)"
+msgstr "Etiketstørrelse (cd/dvd)"
+
+#: ../src/template-designer.c:920
+msgid "Number of Layouts"
+msgstr "Antal layout"
+
+#: ../src/template-designer.c:984
+msgid "Layout(s)"
+msgstr "Layout"
+
+#: ../src/template-designer.c:1089
+msgid "Design Completed"
+msgstr "Design færdigt"
+
+#: ../src/template-designer.c:1266
+msgid ""
+"<span foreground='red' weight='bold'>Brand and part# match an existing "
+"template!</span>"
+msgstr ""
+"<span foreground='red' weight='bold'>Mærk og del#-match en eksisterende "
+"skabelon!</span>"
+
+#. Menu entries.
+#: ../src/ui.c:93
+msgid "_File"
+msgstr "_Fil"
+
+#: ../src/ui.c:94
+msgid "Open Recent _Files"
+msgstr "Åbn seneste _filer"
+
+#: ../src/ui.c:95
+msgid "_Edit"
+msgstr "_Rediger"
+
+#: ../src/ui.c:96
+msgid "_View"
+msgstr "_Vis"
+
+#: ../src/ui.c:97
+msgid "Customize Main Toolbar"
+msgstr "Tilpas hovedværktøjsbjælke"
+
+#: ../src/ui.c:98
+msgid "Customize Drawing Toolbar"
+msgstr "Tilpas tegneværktøjsbjælke"
+
+#: ../src/ui.c:99
+msgid "Customize Properties Toolbar"
+msgstr "Tilpas værktøjsbjælke for egenskaber"
+
+#: ../src/ui.c:100
+msgid "_Objects"
+msgstr "_Objekter"
+
+#: ../src/ui.c:101
+msgid "_Create"
+msgstr "_Opret"
+
+#: ../src/ui.c:102
+msgid "_Order"
+msgstr "_Orden"
+
+#: ../src/ui.c:103
+msgid "_Rotate/Flip"
+msgstr "_Roter/vend"
+
+#: ../src/ui.c:104
+msgid "Align _Horizontal"
+msgstr "Juster _vandret"
+
+#: ../src/ui.c:105
+msgid "Align _Vertical"
+msgstr "Juster _lodret"
+
+#: ../src/ui.c:106
+msgid "_Help"
+msgstr "_Hjælp"
+
+#. Popup entries.
+#: ../src/ui.c:109 ../src/ui.c:110
+msgid "Context Menu"
+msgstr "Kontekstmenu"
+
+#: ../src/ui.c:115
+msgid "_New"
+msgstr "_Ny"
+
+#: ../src/ui.c:117
+msgid "Create a new file"
+msgstr "Opret en ny fil"
+
+#: ../src/ui.c:122
+msgid "_Open..."
+msgstr "_Åbn..."
+
+#: ../src/ui.c:124
+msgid "Open a file"
+msgstr "Åbn en fil"
+
+#: ../src/ui.c:129
+msgid "_Save"
+msgstr "_Gem"
+
+#: ../src/ui.c:131
+msgid "Save current file"
+msgstr "Gem aktuel fil"
+
+#: ../src/ui.c:136
+msgid "Save _As..."
+msgstr "Gem _som..."
+
+#: ../src/ui.c:138
+msgid "Save the current file to a different name"
+msgstr "Gem den aktuelle fil med et andet navn"
+
+#: ../src/ui.c:143
+msgid "_Print..."
+msgstr "_Udskriv..."
+
+#: ../src/ui.c:145
+msgid "Print the current file"
+msgstr "Udskriv den aktuelle fil"
+
+#: ../src/ui.c:150
+msgid "Properties..."
+msgstr "Egenskaber..."
+
+#: ../src/ui.c:152
+msgid "Modify document properties"
+msgstr "Ændre dokumentegenskaber"
+
+#: ../src/ui.c:157
+msgid "Template _Designer..."
+msgstr "Skabelon_designer..."
+
+#: ../src/ui.c:159
+msgid "Create a custom template"
+msgstr "Opret en tilpasset skabelon"
+
+#: ../src/ui.c:164
+msgid "_Close"
+msgstr "_Luk"
+
+#: ../src/ui.c:166
+msgid "Close the current file"
+msgstr "Luk den nuværende fil"
+
+#: ../src/ui.c:171
+msgid "_Quit"
+msgstr "_Afslut"
+
+#: ../src/ui.c:173
+msgid "Quit the program"
+msgstr "Afslut programmet"
+
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
+msgid "Undo"
+msgstr ""
+
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
+msgid "Redo"
+msgstr ""
+
+#: ../src/ui.c:194
+msgid "Cut"
+msgstr "Klip"
+
+#: ../src/ui.c:196
+msgid "Cut the selection"
+msgstr "Klip markeringen ud"
+
+#: ../src/ui.c:201
+msgid "Copy"
+msgstr "Kopier"
+
+#: ../src/ui.c:203
+msgid "Copy the selection"
+msgstr "Kopier markeringen"
+
+#: ../src/ui.c:210
+msgid "Paste the clipboard"
+msgstr "Indsæt fra udklipsholderen"
+
+#: ../src/ui.c:217
+msgid "Delete the selected objects"
+msgstr "Slet de valgte objekter"
+
+#: ../src/ui.c:222
+msgid "Select All"
+msgstr "Vælg alle"
+
+#: ../src/ui.c:224
+msgid "Select all objects"
+msgstr "Vælg alle objekter"
+
+#: ../src/ui.c:229
+msgid "Un-select All"
+msgstr "Fravælg alle"
+
+#: ../src/ui.c:231
+msgid "Remove all selections"
+msgstr "Fjern alle markeringer"
+
+#: ../src/ui.c:236
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#: ../src/ui.c:238
+msgid "Configure the application"
+msgstr "Konfigurere programmet"
+
+#: ../src/ui.c:245
+msgid "Zoom in"
+msgstr "Zoom ind"
+
+#: ../src/ui.c:247
+msgid "Increase magnification"
+msgstr "Øg forstørrelse"
+
+#: ../src/ui.c:252
+msgid "Zoom out"
+msgstr "Zoom ud"
+
+#: ../src/ui.c:254
+msgid "Decrease magnification"
+msgstr "Formindsk forstørrelse"
+
+#: ../src/ui.c:259
+msgid "Zoom 1 to 1"
+msgstr "Zoom 1 til 1"
+
+#: ../src/ui.c:261
+msgid "Restore scale to 100%"
+msgstr "Gendan skala til 100 %"
+
+#: ../src/ui.c:266
+msgid "Zoom to fit"
+msgstr "Zoomtilpasning"
+
+#: ../src/ui.c:268
+msgid "Set scale to fit window"
+msgstr "Angiv skala der passer til vinduet"
+
+#: ../src/ui.c:275
+msgid "Select Mode"
+msgstr "Vælg tilstand"
+
+#: ../src/ui.c:277
+msgid "Select, move and modify objects"
+msgstr "Vælg, flyt eller ændre objekter"
+
+#: ../src/ui.c:282 ../src/view-text.c:102
+#: ../data/builder/object-editor.builder.h:30
+msgid "Text"
+msgstr "Tekst"
+
+#: ../src/ui.c:289
+msgid "Box"
+msgstr "Boks"
+
+#: ../src/ui.c:291
+msgid "Create box/rectangle object"
+msgstr "Opret boks-/rektangelobjekt"
+
+#: ../src/ui.c:296 ../data/builder/object-editor.builder.h:19
+msgid "Line"
+msgstr "Linje"
+
+#: ../src/ui.c:303
+msgid "Ellipse"
+msgstr "Ellipse"
+
+#: ../src/ui.c:305
+msgid "Create ellipse/circle object"
+msgstr "Opret ellipse-/cirkelobjekt"
+
+#: ../src/ui.c:310 ../data/builder/object-editor.builder.h:16
+msgid "Image"
+msgstr "Billede"
+
+#: ../src/ui.c:317
+msgid "Barcode"
+msgstr "Stregkode"
+
+#: ../src/ui.c:326
+msgid "Raise object to top"
+msgstr "Hæv objekt til toppen"
+
+#: ../src/ui.c:333
+msgid "Lower object to bottom"
+msgstr "Sænk objekt til bunden"
+
+#: ../src/ui.c:340
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr "Roter objekt 90 grader mod uret"
+
+#: ../src/ui.c:347
+msgid "Rotate object 90 degrees clockwise"
+msgstr "Roter objekt 90 grader med uret"
+
+#: ../src/ui.c:354
+msgid "Flip object horizontally"
+msgstr "Vend objekt vandret"
+
+#: ../src/ui.c:361
+msgid "Flip object vertically"
+msgstr "Vend objekt lodret"
+
+#: ../src/ui.c:368
+msgid "Align objects to left edges"
+msgstr "Juster objekter til de venstre hjørner"
+
+#: ../src/ui.c:375
+msgid "Align objects to right edges"
+msgstr "Juster objekter til højre hjørner"
+
+#: ../src/ui.c:382
+msgid "Align objects to horizontal centers"
+msgstr "Juster objekter til vandrette centrum"
+
+#: ../src/ui.c:389
+msgid "Align objects to top edges"
+msgstr "Juster objekter til øverste hjørner"
+
+#: ../src/ui.c:396
+msgid "Align objects to bottom edges"
+msgstr "Juster objekter til den nederste kants hjørner"
+
+#: ../src/ui.c:403
+msgid "Align objects to vertical centers"
+msgstr "Juster objekter til lodret centreret"
+
+#: ../src/ui.c:410
+msgid "Center objects to horizontal label center"
+msgstr "Centrer objekter til vandret etiketcentrum"
+
+#: ../src/ui.c:417
+msgid "Center objects to vertical label center"
+msgstr "Centrer objekter til lodret etiketcentrum"
+
+#: ../src/ui.c:424
+msgid "Edit merge properties"
+msgstr "Rediger sammenføjningsegenskaber"
+
+#: ../src/ui.c:431
+msgid "Contents"
+msgstr "Indhold"
+
+#: ../src/ui.c:433
+msgid "Open glabels manual"
+msgstr "Åbn glabels' manual"
+
+#: ../src/ui.c:438
+msgid "About..."
+msgstr "Om..."
+
+#: ../src/ui.c:440
+msgid "About glabels"
+msgstr "Om glabels"
+
+#: ../src/ui.c:450
+msgid "Property toolbar"
+msgstr "Egenskabsværktøjsbjælke"
+
+#: ../src/ui.c:452
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "Ændr synligheden på egenskabsværktøjsbjælken i det nuværende vindue"
+
+#: ../src/ui.c:458
+msgid "Grid"
+msgstr "Gitter"
+
+#: ../src/ui.c:460
+msgid "Change the visibility of the grid in the current window"
+msgstr "Ændr synligheden på gitteret i det nuværende vindue"
+
+#: ../src/ui.c:466
+msgid "Markup"
+msgstr "Opmærkning"
+
+#: ../src/ui.c:468
+msgid "Change the visibility of markup lines in the current window"
+msgstr "Ændr synligheden på opmærkningslinjerne i det nuværende vindue"
+
+#: ../src/ui.c:479
+msgid "Main toolbar"
+msgstr "Hovedværktøjsbjælke"
+
+#: ../src/ui.c:481
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "Ændr synligheden på hovedværktøjsbjælken i det nuværende vindue"
+
+#: ../src/ui.c:487
+msgid "Drawing toolbar"
+msgstr "Tegneværktøjsbjælke"
+
+#: ../src/ui.c:489
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "Ændr synligheden på tegneværktøjsbjælken i det nuværende vindue"
+
+#: ../src/ui-commands.c:1134
+msgid "Glabels includes contributions from:"
+msgstr "Glabels har modtaget bidrag fra:"
+
+#: ../src/ui-commands.c:1140
+msgid "See the file AUTHORS for additional credits,"
+msgstr "Se filen AUTHORS for yderligere oversigt over bidragydere,"
+
+#: ../src/ui-commands.c:1141
+#, fuzzy
+msgid "or visit http://glabels.org/"
+msgstr "eller besøg http://glabels.sourceforge.net/"
+
+#: ../src/ui-commands.c:1153
+msgid "A label and business card creation program.\n"
+msgstr "Et program til oprettelse af etiketter og forretningskort.\n"
+
+#: ../src/ui-commands.c:1157
+msgid "translator-credits"
+msgstr ""
+"Joe Hansen, 2010.\n"
+"\n"
+"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Mere info: http://www.dansk-gruppen.dk"
+
+#: ../src/ui-commands.c:1160
+#, fuzzy
+msgid ""
+"gLabels is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"gLabels is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+msgstr ""
+"Glabels er er fri software. Du kan redistribuere og/eller modificere\n"
+"det under de betingelser som er angivet i GNU General Public License,\n"
+"som er udgivet af Free Software Foundation. Enten version 2 af licensen\n"
+"eller (efter eget valg) enhver senere version.\n"
+"\n"
+"Dette program distribueres i håb om at det vil vise sig nyttigt, men\n"
+"UDEN NOGEN FORM FOR GARANTI, uden selv de underforståede garantier\n"
+"omkring SALGBARHED eller EGNETHED TIL ET BESTEMT FORMÅL. Yderligere\n"
+"detaljer kan læses i GNU General Public License.\n"
+
+#: ../src/ui-commands.c:1187
+msgid "glabels"
+msgstr "glabels"
+
+#: ../src/warning-handler.c:69
+msgid "gLabels Error!"
+msgstr "gLabels - fejl!"
+
+#: ../src/window.c:284
+msgid "(none) - gLabels"
+msgstr "(ingen) - gLabels"
+
+#: ../src/window.c:485
+msgid "(modified)"
+msgstr "(ændret)"
+
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:323
+#, c-format
+msgid "Bad root node = \"%s\""
+msgstr "Ugyldig rodknude = \"%s\""
+
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:406
+#, c-format
+msgid "bad node =  \"%s\""
+msgstr "dårlig knude =  \"%s\""
+
+#: ../src/xml-label.c:189 ../src/xml-label.c:227
+msgid "xmlParseFile error"
+msgstr "xmlParseFile-fejl"
+
+#: ../src/xml-label.c:264
+msgid "No document root"
+msgstr "Ingen dokumentrod"
+
+#: ../src/xml-label.c:272
+msgid "Importing from glabels 0.1 format"
+msgstr "Importerer fra glabels 0.1 format"
+
+#: ../src/xml-label.c:281
+msgid "Importing from glabels 0.4 format"
+msgstr "Importerer fra glabels 0.4 format"
+
+#: ../src/xml-label.c:291
+#, c-format
+msgid "Unknown glabels Namespace -- Using %s"
+msgstr "Ukendt glabelsnavnerum -- bruger %s"
+
+#: ../src/xml-label.c:360
+#, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "dårlig knude i dokumentknude =  \"%s\""
+
+#: ../src/xml-label.c:856
+#, c-format
+msgid "bad node in Data node =  \"%s\""
+msgstr "dårlig knude i dataknude =  \"%s\""
+
+#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:785
+msgid "Utf8 conversion error."
+msgstr "Utf8 - konverteringsfejl."
+
+# Kunne ikke gemme xml-fil.
+#: ../src/xml-label.c:1104
+msgid "Problem saving xml file."
+msgstr "Problem under gemning af xml-fil."
+
+#. Create and append an "Other" entry.
+#: ../libglabels/db.c:115
+msgid "Other"
+msgstr "Anden"
+
+#. Create and append a "User defined" entry.
+#: ../libglabels/db.c:128
+msgid "User defined"
+msgstr "Brugerdefineret"
+
+#: ../libglabels/db.c:488
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Kunne ikke finde definitioner for papirstørrelse. Libglabels er måske ikke "
+"installeret korrekt!"
+
+#: ../libglabels/db.c:880
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Kunne ikke finde definitioner for kategorier. Libglabels er måske ikke "
+"installeret korrekt!"
+
+#: ../libglabels/db.c:1755
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Kunne ikke finde skabelonfiler. Libglabels er måske ikke installeret korrekt!"
+
+#: ../libglabels/db.c:1822
+#, c-format
+msgid "Generic %s full page template"
+msgstr "Generisk %s hel sideskabelon"
+
+#: ../libglabels/template.c:148
+#, c-format
+msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
+msgstr ""
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/units.c:65 ../data/builder/object-editor.builder.h:41
+#: ../data/builder/prefs-dialog.builder.h:22
+msgid "points"
+msgstr "punkter"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/units.c:66 ../data/builder/object-editor.builder.h:40
+#: ../data/builder/template-designer.builder.h:64
+msgid "inches"
+msgstr "tommer"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/units.c:68
+msgid "cm"
+msgstr ""
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/units.c:69
+msgid "picas"
+msgstr ""
+
+#: ../libglabels/xml-template.c:226
+msgid "Missing name or brand/part attributes."
+msgstr "Manglende navn eller mærke-/delattributter."
+
+#. This should always be an id, but just in case a name
+#. slips by!
+#: ../libglabels/xml-template.c:247
+#, c-format
+msgid "Unknown page size id \"%s\", trying as name"
+msgstr "Ukendt sidestørrelse-id \"%s\", forsøger som navn"
+
+#: ../libglabels/xml-template.c:259
+#, c-format
+msgid "Unknown page size id or name \"%s\""
+msgstr "Ukendt sidestørrelse-id eller navn \"%s\""
+
+#: ../libglabels/xml-template.c:278
+msgid "Forward references not supported."
+msgstr ""
+
+#: ../libglabels/xml-template.c:730
+msgid ""
+"Missing required \"brand\" or \"part\" attribute, trying deprecated name."
+msgstr "Mangler krævet mærke- eller delattribut, forsøger forældet navn."
+
+#: ../libglabels/xml-template.c:740
+msgid "Name attribute also missing."
+msgstr "Navneattribut mangler også."
+
+#.
+#. * Local Variables:       -- emacs
+#. * mode: C                -- emacs
+#. * c-basic-offset: 8      -- emacs
+#. * tab-width: 8           -- emacs
+#. * indent-tabs-mode: nil  -- emacs
+#. * End:                   -- emacs
+#.
+#: ../data/builder/merge-properties-dialog.builder.h:1
+msgid "<b>Record selection/preview</b>"
+msgstr "<b>Optag markering/forhåndsvisning</b>"
+
+#: ../data/builder/merge-properties-dialog.builder.h:2
+msgid "<b>Source</b>"
+msgstr "<b>Kilde</b>"
+
+#: ../data/builder/merge-properties-dialog.builder.h:3
+msgid "Format:"
+msgstr "Format:"
+
+#: ../data/builder/merge-properties-dialog.builder.h:4
+msgid "Location:"
+msgstr "Placering:"
+
+#: ../data/builder/merge-properties-dialog.builder.h:5
+msgid "Select all"
+msgstr "Vælg alle"
+
+#: ../data/builder/merge-properties-dialog.builder.h:6
+msgid "Unselect all"
+msgstr "Fravælg alle"
+
+#: ../data/builder/object-editor.builder.h:2
+#, no-c-format
+msgid "%"
+msgstr "%"
+
+#: ../data/builder/object-editor.builder.h:3
+msgid "00000000000 00000"
+msgstr "00000000000 00000"
+
+#: ../data/builder/object-editor.builder.h:4
+msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Xxx-objektegenskaber</span>"
+
+#: ../data/builder/object-editor.builder.h:5
+#: ../data/builder/prefs-dialog.builder.h:7
+msgid "Alignment:"
+msgstr "Justering:"
+
+#: ../data/builder/object-editor.builder.h:6
+msgid "Allow merge to automatically shrink text"
+msgstr "Tillader automatisk at sammenføjning kan formindske tekst"
+
+#: ../data/builder/object-editor.builder.h:7
+msgid "Angle:"
+msgstr "Vinkel:"
+
+# Tjekbeløb
+#: ../data/builder/object-editor.builder.h:8
+msgid "Checksum"
+msgstr "Kontrolsum"
+
+#: ../data/builder/object-editor.builder.h:9
+#: ../data/builder/prefs-dialog.builder.h:8
+msgid "Color:"
+msgstr "Farve:"
+
+#: ../data/builder/object-editor.builder.h:11
+msgid "Enable shadow"
+msgstr "Slå skygge til"
+
+#: ../data/builder/object-editor.builder.h:12
+msgid "Family:"
+msgstr "Familie:"
+
+#: ../data/builder/object-editor.builder.h:13
+msgid "File:"
+msgstr "Fil:"
+
+#: ../data/builder/object-editor.builder.h:14
+msgid "Fill"
+msgstr "Fyld"
+
+#: ../data/builder/object-editor.builder.h:15
+#: ../data/builder/template-designer.builder.h:30
+msgid "Height:"
+msgstr "Højde:"
+
+#: ../data/builder/object-editor.builder.h:17
+msgid "Key:"
+msgstr "Nøgle:"
+
+#: ../data/builder/object-editor.builder.h:18
+msgid "Length:"
+msgstr "Længde:"
+
+#: ../data/builder/object-editor.builder.h:20
+#: ../data/builder/prefs-dialog.builder.h:12
+msgid "Line Spacing:"
+msgstr "Linjemellemrum:"
+
+#: ../data/builder/object-editor.builder.h:21
+msgid "Literal:"
+msgstr "Bogstavelig:"
+
+#: ../data/builder/object-editor.builder.h:22
+msgid "Opacity:"
+msgstr "Ugennemsigtighed:"
+
+#: ../data/builder/object-editor.builder.h:23
+msgid "Position"
+msgstr "Placering"
+
+#: ../data/builder/object-editor.builder.h:24
+msgid "Reset image size"
+msgstr "Nulstil billedstørrelse"
+
+#: ../data/builder/object-editor.builder.h:25
+msgid "Shadow"
+msgstr "Skygge"
+
+#: ../data/builder/object-editor.builder.h:26
+msgid "Size"
+msgstr "Størrelse"
+
+#: ../data/builder/object-editor.builder.h:27
+msgid "Size:"
+msgstr "Størrelse:"
+
+#: ../data/builder/object-editor.builder.h:28
+msgid "Style"
+msgstr "Stil"
+
+#: ../data/builder/object-editor.builder.h:29
+msgid "Style:"
+msgstr "Stil:"
+
+#: ../data/builder/object-editor.builder.h:31
+#: ../data/builder/prefs-dialog.builder.h:20
+#: ../data/builder/template-designer.builder.h:61
+msgid "Width:"
+msgstr "Bredde:"
+
+#: ../data/builder/object-editor.builder.h:32
+msgid "X Offset:"
+msgstr "X-forskydning:"
+
+#: ../data/builder/object-editor.builder.h:33
+msgid "X:"
+msgstr "X:"
+
+#: ../data/builder/object-editor.builder.h:34
+msgid "Y Offset:"
+msgstr "Y-forskydning:"
+
+#: ../data/builder/object-editor.builder.h:35
+msgid "Y:"
+msgstr "Y:"
+
+#: ../data/builder/object-editor.builder.h:36
+msgid "degrees"
+msgstr "grader"
+
+#: ../data/builder/object-editor.builder.h:37
+msgid "dialog1"
+msgstr "dialog 1"
+
+#: ../data/builder/object-editor.builder.h:38
+msgid "digits:"
+msgstr "tal:"
+
+#: ../data/builder/object-editor.builder.h:39
+msgid "format:"
+msgstr "format:"
+
+#: ../data/builder/prefs-dialog.builder.h:1
+msgid "   "
+msgstr "   "
+
+#: ../data/builder/prefs-dialog.builder.h:2
+msgid "<span weight=\"bold\">Default page size</span>"
+msgstr "<span weight=\"bold\">Standard for sidestørrelse</span>"
+
+#: ../data/builder/prefs-dialog.builder.h:3
+msgid "<span weight=\"bold\">Fill</span>"
+msgstr "<span weight=\"bold\">Fyld</span>"
+
+#: ../data/builder/prefs-dialog.builder.h:4
+msgid "<span weight=\"bold\">Line</span>"
+msgstr "<span weight=\"bold\">Linje</span>"
+
+#: ../data/builder/prefs-dialog.builder.h:5
+msgid "<span weight=\"bold\">Text</span>"
+msgstr "<span weight=\"bold\">Tekst</span>"
+
+#: ../data/builder/prefs-dialog.builder.h:6
+msgid "<span weight=\"bold\">Units</span>"
+msgstr "<span weight=\"bold\">Enheder</span>"
+
+#: ../data/builder/prefs-dialog.builder.h:9
+msgid "Font:"
+msgstr "Skrifttype:"
+
+#: ../data/builder/prefs-dialog.builder.h:10
+msgid "ISO A4"
+msgstr "ISO A4"
+
+#: ../data/builder/prefs-dialog.builder.h:11
+msgid "Inches"
+msgstr "Tommer"
+
+#: ../data/builder/prefs-dialog.builder.h:13
+msgid "Locale"
+msgstr "Sprog"
+
+#: ../data/builder/prefs-dialog.builder.h:14
+msgid "Millimeters"
+msgstr "Millimeter"
+
+#: ../data/builder/prefs-dialog.builder.h:15
+msgid "Object defaults"
+msgstr "Objektstandarder"
+
+#: ../data/builder/prefs-dialog.builder.h:16
+msgid "Points"
+msgstr "Punkter"
+
+#: ../data/builder/prefs-dialog.builder.h:17
+msgid "Select default properties for new objects."
+msgstr "Vælg standardegenskaber for nye objekter."
+
+#: ../data/builder/prefs-dialog.builder.h:18
+msgid "Select locale specific behavior."
+msgstr "Vælg opførsel specifikt efter lokalt område."
+
+#: ../data/builder/prefs-dialog.builder.h:19 ../templates/paper-sizes.xml.h:35
+msgid "US Letter"
+msgstr "US Letter"
+
+#: ../data/builder/property-bar.builder.h:1
+msgid "Bold"
+msgstr "Fed"
+
+#: ../data/builder/property-bar.builder.h:2
+msgid "Center align"
+msgstr "Centrumjustering"
+
+#: ../data/builder/property-bar.builder.h:7
+msgid "Left align"
+msgstr "Venstrejustering"
+
+#: ../data/builder/property-bar.builder.h:10
+msgid "Right align"
+msgstr "Højrejustering"
+
+#: ../data/builder/template-designer.builder.h:1
+msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
+msgstr "(f.eks., \"E-post-etiketter,\" \"Forretningskort,\" ...)"
+
+#: ../data/builder/template-designer.builder.h:2
+msgid "(e.g., 8163A)"
+msgstr "(f.eks., 8163A)"
+
+#: ../data/builder/template-designer.builder.h:3
+msgid "(e.g., Avery, Acme, ...)"
+msgstr "(f.eks, Carlsberg, LEGO, ...)"
+
+#: ../data/builder/template-designer.builder.h:4
+msgid "1. Outer radius:"
+msgstr "1. Ydre radius:"
+
+#: ../data/builder/template-designer.builder.h:5
+msgid "1. Radius:"
+msgstr "1. Radius:"
+
+#: ../data/builder/template-designer.builder.h:6
+msgid "1. Width:"
+msgstr "1. Bredde:"
+
+#: ../data/builder/template-designer.builder.h:7
+msgid "2. Height:"
+msgstr "2. Højde:"
+
+#: ../data/builder/template-designer.builder.h:8
+msgid "2. Inner radius:"
+msgstr "2. Indre radius:"
+
+#: ../data/builder/template-designer.builder.h:9
+msgid "2. Waste (overprint allowed):"
+msgstr "2. Overskud (overudskrivning tilladt):"
+
+#: ../data/builder/template-designer.builder.h:10
+msgid "3. Clipping width:"
+msgstr "3. Klippebredde:"
+
+#: ../data/builder/template-designer.builder.h:11
+msgid "3. Margin"
+msgstr "3. Margen"
+
+#: ../data/builder/template-designer.builder.h:12
+msgid "3. Round (radius of corner):"
+msgstr "3. Rund (radius på hjørne):"
+
+# ingen forslag på open-tran
+#: ../data/builder/template-designer.builder.h:13
+msgid "4. Clipping height:"
+msgstr "4. Klippehøjde:"
+
+#: ../data/builder/template-designer.builder.h:14
+msgid "4. Horiz. waste (overprint allowed):"
+msgstr "4. Vandret affald (overudskrivning tilladt):"
+
+#: ../data/builder/template-designer.builder.h:15
+msgid "5. Vert. waste (overprint allowed):"
+msgstr "5. Lodret affald (overudskrivning tilladt):"
+
+#: ../data/builder/template-designer.builder.h:16
+msgid "5. Waste (overprint allowed):"
+msgstr "5. Affald (overudskrivning tilladt):"
+
+#: ../data/builder/template-designer.builder.h:17
+msgid "6. Margin"
+msgstr "6. Margen"
+
+#: ../data/builder/template-designer.builder.h:18
+msgid "Brand/Manufacturer:"
+msgstr "Mærke/producent:"
+
+#: ../data/builder/template-designer.builder.h:19
+msgid "CD/DVD (including credit card CDs)"
+msgstr "Cd/dvd (inklusiv kreditkorts-cd'er)"
+
+#: ../data/builder/template-designer.builder.h:20
+msgid ""
+"Congratulations!\n"
+"\n"
+"You have completed the gLabels Template Designer.\n"
+"If you wish to accept and save your design, click \"Apply.\"\n"
+"\n"
+"Otherwise, you may click \"Cancel\" to abandon your design\n"
+"or \"Back\" to continue editing this design."
+msgstr ""
+"Tillykke!\n"
+"\n"
+"Du har fuldført glabels' skabelondesigner.\n"
+"Hvis du ønsker at acceptere og gemme dit design så klik på \"Anvend.\"\n"
+"\n"
+"Ellers kan du trykke \"Afbryd\" for at droppe dit design\n"
+"eller \"Tilbage\" for at fortsætte med at redigere dette design."
+
+#: ../data/builder/template-designer.builder.h:27
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#: ../data/builder/template-designer.builder.h:28
+msgid "Distance from left edge (x0):"
+msgstr "Afstand fra venstre hjørne (x0):"
+
+#: ../data/builder/template-designer.builder.h:29
+msgid "Distance from top edge (y0):"
+msgstr "Afstand fra øverste hjørne (y0):"
+
+#: ../data/builder/template-designer.builder.h:31
+msgid "Horizontal pitch (dx):"
+msgstr "Vandret afstand (dx):"
+
+#: ../data/builder/template-designer.builder.h:32
+msgid ""
+"How many layouts will your template contain? \n"
+"\n"
+"A layout is a set of labels or cards that can be arranged in a simple grid.\n"
+"Most templates only need one layout, as in the first example.\n"
+"The second example illustrates when two layouts are needed."
+msgstr ""
+"Hvor mange layout vil din skabelon indeholde? \n"
+"\n"
+"Et layout er et sæt af etiketter eller kort som kan arrangeres i et simpelt\n"
+"gitter. De fleste skabeloner skal kun bruge et layout, som i det første\n"
+"eksempel. Det andet eksempel illustrerer hvornår 2 layout er nødvendige."
+
+#: ../data/builder/template-designer.builder.h:37
+msgid "Layout #1"
+msgstr "Layout #1"
+
+#: ../data/builder/template-designer.builder.h:38
+msgid "Layout #2"
+msgstr "Layout #2"
+
+# hvad er dette?
+#: ../data/builder/template-designer.builder.h:39
+msgid "Number across (nx):"
+msgstr "Antal på tværs (nx):"
+
+# hvad er dette?
+#: ../data/builder/template-designer.builder.h:40
+msgid "Number down (ny):"
+msgstr "Antal ned (ny):"
+
+#: ../data/builder/template-designer.builder.h:41
+msgid "Number of layouts:"
+msgstr "Antal layout:"
+
+#: ../data/builder/template-designer.builder.h:42
+msgid "Page size:"
+msgstr "Sidestørrelse:"
+
+#: ../data/builder/template-designer.builder.h:43
+msgid "Part #:"
+msgstr "Del #:"
+
+#: ../data/builder/template-designer.builder.h:44
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
+msgstr ""
+"Indtast venligst den følgende identifikationsinformation om den stationære "
+"skabelon."
+
+#: ../data/builder/template-designer.builder.h:45
+msgid "Please enter the following layout information."
+msgstr "Indtast venligst den følgende layoutinformation."
+
+#: ../data/builder/template-designer.builder.h:46
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
+msgstr ""
+"Indtast de følgende størrelsesparametre på en enkelt etiket i din skabelon."
+
+#: ../data/builder/template-designer.builder.h:47
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Indtast venligst de følgende størrelsesparametre på en enkelt etiket eller "
+"kort i din skabelon."
+
+#: ../data/builder/template-designer.builder.h:48
+msgid "Please select the basic shape of the labels or cards."
+msgstr "Vælg venligst den grundlæggende form på etiketterne eller kortene."
+
+#: ../data/builder/template-designer.builder.h:49
+msgid "Please select the page size of the template stationery."
+msgstr "Vælg venligst sidestørrelsen på den stationære skabelon."
+
+#: ../data/builder/template-designer.builder.h:50
+msgid "Print test sheet"
+msgstr "Udskriv testark"
+
+#: ../data/builder/template-designer.builder.h:51
+msgid "Rectangular or square (can have rounded corners)"
+msgstr "Rektangulær eller firkant (kan have afrundede hjørner)"
+
+# rund eller afrundet
+#: ../data/builder/template-designer.builder.h:52
+msgid "Round"
+msgstr "Rund"
+
+#: ../data/builder/template-designer.builder.h:53
+msgid ""
+"Templates needing\n"
+"two layouts."
+msgstr ""
+"Skabeloner der\n"
+"kræver to layout."
+
+#: ../data/builder/template-designer.builder.h:55
+msgid ""
+"Templates needing only\n"
+"one layout."
+msgstr ""
+"Skabeloner der kun\n"
+"kræver et layout."
+
+#: ../data/builder/template-designer.builder.h:57
+msgid "Vertical pitch (dy):"
+msgstr "Lodret afstand (dy):"
+
+#: ../data/builder/template-designer.builder.h:58
+msgid ""
+"Welcome to the gLabels Template Designer.\n"
+"\n"
+"This dialog will assist you in the creation of a custom gLabels template."
+msgstr ""
+"Velkommen til gLabels' skabelondesigner.\n"
+"\n"
+"Denne guide vil assistere dig i oprettelsen af en tilpasset gLabels-skabelon."
+
+#: ../data/builder/template-designer.builder.h:62
+msgid "cd_size_page"
+msgstr "cd_størrelse_side"
+
+#: ../data/builder/template-designer.builder.h:63
+msgid "finish_page"
+msgstr "afslut_side"
+
+#: ../data/builder/template-designer.builder.h:65
+msgid "layout_page"
+msgstr "layout_side"
+
+#: ../data/builder/template-designer.builder.h:66
+msgid "name_page"
+msgstr "navn_side"
+
+#: ../data/builder/template-designer.builder.h:67
+msgid "nlayouts_page"
+msgstr "nlayout_side"
+
+# ingen ide om de her
+#: ../data/builder/template-designer.builder.h:68
+msgid "pg_size_page"
+msgstr "pg_størrelse_side"
+
+#: ../data/builder/template-designer.builder.h:69
+msgid "rect_size_page"
+msgstr "rect_størrelse_side"
+
+#: ../data/builder/template-designer.builder.h:70
+msgid "round_size_page"
+msgstr "rund_størrelse_side"
+
+#: ../data/builder/template-designer.builder.h:71
+msgid "shape_page"
+msgstr "form_side"
+
+#: ../data/builder/template-designer.builder.h:72
+msgid "start_page"
+msgstr "start_side"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:1
+#, fuzzy
+msgid "<b>Copies</b>"
+msgstr "<b>Indstillinger</b>"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:2
+#, fuzzy
+msgid "<b>Merge Control</b>"
+msgstr "<b>Udskrivningskontrol (sammenføj)</b>"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:3
+msgid "<b>Options</b>"
+msgstr "<b>Indstillinger</b>"
+
+# oversættelse hentet fra dia
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:4
+msgid "Collate"
+msgstr "Saml ind"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:5
+msgid "Copies:"
+msgstr "Kopier:"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:7
+msgid "Sheets:"
+msgstr "Ark:"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:8
+msgid "Start on label"
+msgstr "Start på etiket"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:9
+msgid "from:"
+msgstr "fra:"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:10
+msgid "on 1st sheet"
+msgstr "på 1. ark"
+
+#: ../data/builder/print-op-dialog-custom-widget.builder.h:14
+msgid "to:"
+msgstr "til:"
+
+#: ../data/desktop/glabels.desktop.in.h:1
+msgid "Create labels, business cards and media covers"
+msgstr "Opret etiketter, forretningskort og mediecovere"
+
+#: ../data/desktop/glabels.desktop.in.h:2
+msgid "gLabels Label Designer"
+msgstr "gLabels' etiketdesigner"
+
+#: ../data/mime/glabels.keys.in.h:1 ../data/mime/glabels.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "gLabels' projektfil"
+
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:2
+msgid "#10 Envelope"
+msgstr ""
+
+#. Other ISO A series sizes
+#: ../templates/paper-sizes.xml.h:4
+msgid "A0"
+msgstr "A0"
+
+#: ../templates/paper-sizes.xml.h:5
+msgid "A1"
+msgstr "A1"
+
+#: ../templates/paper-sizes.xml.h:6
+msgid "A10"
+msgstr "A10"
+
+#: ../templates/paper-sizes.xml.h:7
+msgid "A2"
+msgstr "A2"
+
+#: ../templates/paper-sizes.xml.h:8
+msgid "A3"
+msgstr "A3"
+
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:10
+msgid "A4"
+msgstr "A4"
+
+#: ../templates/paper-sizes.xml.h:11
+msgid "A5"
+msgstr "A5"
+
+#: ../templates/paper-sizes.xml.h:12
+msgid "A6"
+msgstr "A6"
+
+#: ../templates/paper-sizes.xml.h:13
+msgid "A7"
+msgstr "A7"
+
+#: ../templates/paper-sizes.xml.h:14
+msgid "A8"
+msgstr "A8"
+
+#: ../templates/paper-sizes.xml.h:15
+msgid "A9"
+msgstr "A9"
+
+#. ISO B series sizes
+#: ../templates/paper-sizes.xml.h:17
+msgid "B0"
+msgstr "B0"
+
+#: ../templates/paper-sizes.xml.h:18
+msgid "B1"
+msgstr "B1"
+
+#: ../templates/paper-sizes.xml.h:19
+msgid "B10"
+msgstr "B10"
+
+#: ../templates/paper-sizes.xml.h:20
+msgid "B2"
+msgstr "B2"
+
+#: ../templates/paper-sizes.xml.h:21
+msgid "B3"
+msgstr "B3"
+
+#: ../templates/paper-sizes.xml.h:22
+msgid "B4"
+msgstr "B4"
+
+#: ../templates/paper-sizes.xml.h:23
+msgid "B5"
+msgstr "B5"
+
+#: ../templates/paper-sizes.xml.h:24
+msgid "B6"
+msgstr "B6"
+
+#: ../templates/paper-sizes.xml.h:25
+msgid "B7"
+msgstr "B7"
+
+#: ../templates/paper-sizes.xml.h:26
+msgid "B8"
+msgstr "B8"
+
+#: ../templates/paper-sizes.xml.h:27
+msgid "B9"
+msgstr "B9"
+
+#: ../templates/paper-sizes.xml.h:28
+msgid "C5"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "C6"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:30
+msgid "DL"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:31
+msgid "Monarch Envelope"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:32
+msgid "US Executive"
+msgstr "US Executive"
+
+#. Other US paper sizes
+#: ../templates/paper-sizes.xml.h:34
+msgid "US Legal"
+msgstr "US Legal"
+
+#: ../templates/categories.xml.h:1
+msgid "Any card"
+msgstr "Ethvert kort"
+
+#: ../templates/categories.xml.h:2
+msgid "Any label"
+msgstr "Enhver etiket"
+
+#: ../templates/categories.xml.h:3
+msgid "Business cards"
+msgstr "Forretningskort"
+
+#: ../templates/categories.xml.h:4
+msgid "CD/DVD or other media"
+msgstr "Cd/dvd eller andet medie"
+
+#: ../templates/categories.xml.h:5
+msgid "Mailing/shipping products"
+msgstr "Post-/forsendelsesprodukter"
+
+#: ../templates/categories.xml.h:6
+msgid "Rectangular labels"
+msgstr "Rektangulære etiketter"
+
+#: ../templates/categories.xml.h:7
+msgid "Round labels"
+msgstr "Afrundede etiketter"
+
+#: ../templates/categories.xml.h:8
+msgid "Square labels"
+msgstr "Firkantede etiketter"
+
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/maco-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:1
+#: ../templates/zweckform-iso-templates.xml.h:2
+msgid "Address Labels"
+msgstr "Adresseetiketter"
+
+#. ===================================================================
+#. ============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:4
+#: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:6
+msgid "Business Cards"
+msgstr "Forretningskort"
+
+#. ===================================================================
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/worldlabel-us-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:8
+msgid "CD/DVD Labels"
+msgstr "Cd-/dvd-etiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:8
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "Cd-/dvd-etiketter (disketteetiketter)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:10
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "Cd/dvd-etiketter (rygetiketter)"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/worldlabel-us-templates.xml.h:3
+msgid "Diskette Labels"
+msgstr "Disketteetiketter"
+
+#. the LSK labels can be torn in half down the center
+#: ../templates/avery-us-templates.xml.h:14
+msgid "Divider Labels"
+msgstr "Adskillelsesetiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "File Folder Labels"
+msgstr "Filmappeetiketter"
+
+# manglende l i filing? ja medmindre det betyder arkiveringsetiketter 
+# som måske også giver lidt mere mening.
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:5
+msgid "Filing Labels"
+msgstr "Arkiveringsetiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:20
+#: ../templates/worldlabel-us-templates.xml.h:6
+msgid "Full Sheet Labels"
+msgstr "Fuldarksetiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:22
+msgid "ID Labels"
+msgstr "Id-etiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:24
+msgid "Index Cards"
+msgstr "Indekskort"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:26
+msgid "Large Round Labels"
+msgstr "Store afrundede etiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:28
+msgid "Name Badge Labels"
+msgstr "Navneskiltsetiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:30
+msgid "Post cards"
+msgstr "Postkort"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:8
+msgid "Return Address Labels"
+msgstr "Returadresseetiketter"
+
+# runde eller afrundede
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/worldlabel-us-templates.xml.h:9
+msgid "Round Labels"
+msgstr "Runde etiketter"
+
+#. ===================================================================
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:36
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:10
+msgid "Shipping Labels"
+msgstr "Forsendelsesetiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:38
+msgid "Small Round Labels"
+msgstr "Små runde etiketter"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:40
+msgid "Square Labels"
+msgstr "Firkantetiketter"
+
+# nogen der ved hvad tent er? Open-tran har den ikke.
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:42
+msgid "Tent Cards"
+msgstr "Tent-kort"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/worldlabel-us-templates.xml.h:11
+msgid "Video Tape Face Labels"
+msgstr "Frontetiketter til videobånd"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:46
+#: ../templates/worldlabel-us-templates.xml.h:12
+msgid "Video Tape Spine Labels"
+msgstr "Rygetiketter til videobånd"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:4
+msgid "Address labels"
+msgstr "Adresseetiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:6
+msgid "Allround labels"
+msgstr "Allroundetiketter"
+
+#. ===============================================================
+#: ../templates/avery-iso-templates.xml.h:10
+msgid "CD Booklet"
+msgstr "Cd-brochure"
+
+# nogen med et bedre ord?
+#. ===============================================================
+#: ../templates/avery-iso-templates.xml.h:12
+msgid "CD Inlet"
+msgstr "Cd-inlet"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:18
+msgid "Diskette labels"
+msgstr "Disketteetiketter"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/misc-us-templates.xml.h:18
+#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/zweckform-iso-templates.xml.h:16
+msgid "Mailing Labels"
+msgstr "Postetiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
+msgid "Mailing labels"
+msgstr "Postetiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:24
+msgid "Mini Address Labels"
+msgstr "Miniadresseetiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:26
+msgid "Mini Labels"
+msgstr "Minietiketter"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:28
+msgid "Shipping labels"
+msgstr "Forsendelsesetiketter"
+
+#: ../templates/brother-other-templates.xml.h:1
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "Multietiketter 17mm x 54mm"
+
+#: ../templates/brother-other-templates.xml.h:2
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "Forsendelsesetiketter 62mm x 100mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../templates/brother-other-templates.xml.h:20
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "Standardadresseetiketter 29mm x 90mm"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:2
+msgid "3.5in Diskette"
+msgstr "3,5 tomme diskette"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:6
+msgid "File Folder"
+msgstr "Filmappe"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:8
+msgid "Hanging Folder"
+msgstr "Hængemappe"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:10
+msgid "Large Address Labels"
+msgstr "Store adresseetiketter"
+
+#. ===================================================================
+#: ../templates/dymo-other-templates.xml.h:14
+msgid "Shipping Address Labels"
+msgstr "Forsendelsesadresseetiketter"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:2
+msgid "Business Card CD"
+msgstr "Forretningskort-cd"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:6
+msgid "CD Template Rectangles"
+msgstr "Cd-skabelon - rektangler"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:10
+msgid "CD/DVD Labels (Face Only)"
+msgstr "Cd/dvd-etiketter (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:18
+msgid "CD/DVD Labels (face only)"
+msgstr "Cd/dvd-etiketter (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:14
+msgid "Cassette Labels"
+msgstr "Kassetteetiketter"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:16
+msgid "DLT Labels"
+msgstr "DLT-etiketter"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:20
+msgid "Microtube labels"
+msgstr "Mikrotubeetiketter"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:22
+msgid "Mini-CD Labels"
+msgstr "Mini-cd-etiketter"
+
+#: ../templates/misc-us-templates.xml.h:23
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "PRO CD-etiketter 2-up (kun cd-ryg)"
+
+#: ../templates/misc-us-templates.xml.h:24
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "PRO CD-etiketter 2-up (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:26
+#: ../templates/misc-iso-templates.xml.h:42
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "PRO CD-etiketter 2-up (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:30
+msgid "Slimline CD Case (rightside up)"
+msgstr "Tynd cd-kasette (vendt korrekt)"
+
+#: ../templates/misc-us-templates.xml.h:31
+msgid "Slimline CD Case (upside down)"
+msgstr "Tynd cd-kasette (omvendt)"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:4
+msgid "Allround Labels"
+msgstr "Allroundetiketter"
+
+# i tvivl om der med arch her menes buet
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:6
+msgid "Arch File Labels"
+msgstr "Buet filetiketter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
+msgid "Arch File Labels (large)"
+msgstr "Buet filetiketter (stor)"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:10
+msgid "Arch File Labels (small)"
+msgstr "Buet filetiketter (lille)"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
+msgid "CD Labels"
+msgstr "Cd-etiketter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:20
+msgid "CD/DVD Labels Standard Format (face only)"
+msgstr "Cd/dvd-etiketter i standardformat (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:22
+msgid "Diskette Labels (face only)"
+msgstr "Disketteetiketter (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:24
+msgid "EPSON Photo Stickers 16"
+msgstr "EPSONs fotostickers 16"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:26
+msgid "Etiketten"
+msgstr "Etiketter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:28
+msgid "Fridge Magnet Stickers"
+msgstr "Klistermærker til køleskabsmagneter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:30
+msgid "General Labels"
+msgstr "Generelle etiketter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:32
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "Inkjet-/laseretiketter 70x37mm"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:38
+msgid "Mailing Labels-2 columns"
+msgstr "Postetiketter - 2 kolonner"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:40
+msgid "Mailing Labels-3 columns"
+msgstr "Postetiketter - 3 kolonner"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:44
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Rectangular Labels"
+msgstr "Rektangulære etiketter"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:46
+msgid "Video Labels (face only)"
+msgstr "Videoetiketter (kun front)"
+
+#. ===================================================================
+#: ../templates/misc-other-templates.xml.h:2
+msgid "Multi-Purpose Labels"
+msgstr "Etiketter til flere formål"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:10
+msgid "Correction and Cover-up Labels"
+msgstr "Rettelses- og overdækningsetiketter"
+
+# helt blank på hvad det her er
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:12
+msgid "File Back Labels"
+msgstr "Filrygetiketter"
+
+# ved ikke hvad det her er for en sag!!!
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:14
+msgid "Lever Arch File Labels"
+msgstr "Leverbuetfiletiketter"
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:18
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "Klister-/Løfteetiketter til flere formål"
+
+# er det mon en form for specifik tysk etiket?
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:20
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten-etiketter 70mm x 50,8mm"
+
+# Copier = navn?
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:22
+msgid "Rectangular Copier Labels"
+msgstr "Rektangulær Copieretiketter"
+
+# oe unormal sammensætning på dansk? derfor skal der være bindestreg?
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:26
+msgid "Video Labels (back)"
+msgstr "Video-etiketter (bagside)"
+
+#~ msgid "- gLabels label designer"
+#~ msgstr "- glabels etiketdesigner"
+
+#~ msgid "- batch process gLabels label files"
+#~ msgstr "- kør gLabels' etiketfiler i skriptproces"
+
+#~ msgid "Show tooltips"
+#~ msgstr "Vis værktøjsfif"
+
+#~ msgid "Show tooltips for property toolbar"
+#~ msgstr "Vis værktøjsfif for egenskabsværktøjsbjælke"
+
+#~ msgid "Show tooltips for main toolbar"
+#~ msgstr "Vis værktøjsfif for hovedværktøjsbjælken"
+
+#~ msgid "Show tooltips for drawing toolbar"
+#~ msgstr "Vis værktøjsfif for tegneværktøjsbjælken"
+
+#~ msgid "xmlParseDoc error"
+#~ msgstr "xmlParseDoc-fejl"
+
+#~ msgid "Text file with comma delimeters (CSV)"
+#~ msgstr "Tekstfil med kommaadskillelsestegn (CSV)"
+
+#~ msgid "Text file with colon delimeters"
+#~ msgstr "Tekstfil med kolonadskillelsestegn"
+
+#~ msgid "Text file with tab delimeters"
+#~ msgstr "Tekstfil med indrykadskillelsestegn"
+
+#~ msgid "Data from a file containing VCards"
+#~ msgstr "Data fra en fil indeholdende VKort (VCards)"
+
+#~ msgid "%s x %s %s"
+#~ msgstr "%s x %s %s"
+
+#~ msgid "%.5g x %.5g %s"
+#~ msgstr "%.5g x %.5g %s"
+
+#~ msgid "%.5g %s diameter"
+#~ msgstr "%.5g %s diameter"
+
+#~ msgid "custom"
+#~ msgstr "tilpasset"
+
+#~ msgid "Choose Custom Color"
+#~ msgstr "Vælg tilpasset farve"
+
+#~ msgid "light brown"
+#~ msgstr "lysebrun"
+
+#~ msgid "brown gold"
+#~ msgstr "guldbrun"
+
+#~ msgid "dark green #2"
+#~ msgstr "mørkegrøn #2"
+
+#~ msgid "navy"
+#~ msgstr "navyblå"
+
+#~ msgid "purple #2"
+#~ msgstr "purple #2"
+
+#~ msgid "very dark gray"
+#~ msgstr "meget mørkegrå"
+
+#~ msgid "red-orange"
+#~ msgstr "rød/orange"
+
+# hentet fra GNOME gtkhtml (har dog ikke selv hørt om sløv blå før)
+#~ msgid "dull blue"
+#~ msgstr "sløv blå"
+
+#~ msgid "dull purple"
+#~ msgstr "sløv lilla"
+
+#~ msgid "dark grey"
+#~ msgstr "mørkegrå"
+
+#~ msgid "lime"
+#~ msgstr "lime"
+
+#~ msgid "dull blue #2"
+#~ msgstr "sløv blå #2"
+
+#~ msgid "sky blue #2"
+#~ msgstr "skyblå #2"
+
+#~ msgid "gray"
+#~ msgstr "grå"
+
+#~ msgid "magenta"
+#~ msgstr "magenta"
+
+#~ msgid "bright orange"
+#~ msgstr "lys orange"
+
+#~ msgid "bright blue"
+#~ msgstr "lyseblå"
+
+#~ msgid "red purple"
+#~ msgstr "rød purple"
+
+#~ msgid "light grey"
+#~ msgstr "lysegrå"
+
+#~ msgid "light orange"
+#~ msgstr "lys orange"
+
+#~ msgid "light blue"
+#~ msgstr "lyseblå"
+
+#~ msgid "light purple"
+#~ msgstr "lys purple"
+
+#~ msgid "purplish blue"
+#~ msgstr "violet"
+
+#~ msgid "dark purple"
+#~ msgstr "mørk lilla"
+
+#~ msgid "Select A File"
+#~ msgstr "Vælg en fil"
+
+#~ msgid "<b>Print control (Simple)</b>"
+#~ msgstr "<b>Udskrivningskontrol (enkel)</b>"
+
+#~ msgid "Text Color"
+#~ msgstr "Tekstfarve"
+
+#~ msgid "Brand:"
+#~ msgstr "Mærke:"
+
+#~ msgid "Category:"
+#~ msgstr "Kategori:"
+
+#~ msgid "Search all templates"
+#~ msgstr "Søg i alle skabeloner"
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: Tilvalg »%s« er tvetydigt\n"
+
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: Tilvalg »--%s« tillader ikke et argument\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: Tilvalg »%c%s« tillader ikke et argument\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: Tilvalg »%s« kræver et argument\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: Ukendt tilvalg »--%s«\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: Ukendt tilvalg »%c%s«\n"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: Ugyldigt tilvalg -- %c\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: Ugyldigt tilvalg -- %c\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: Tilvalg kræver et argument -- %c\n"
