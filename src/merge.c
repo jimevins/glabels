@@ -26,7 +26,7 @@
 #include <gobject/gvaluecollector.h>
 #include <string.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 
 #include "debug.h"
 

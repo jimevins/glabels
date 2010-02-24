@@ -27,7 +27,7 @@
 #include <time.h>
 #include <ctype.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "label.h"
 #include "cairo-label-path.h"
 

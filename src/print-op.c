@@ -28,7 +28,7 @@
 #include <time.h>
 #include <ctype.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "print.h"
 #include "label.h"
 

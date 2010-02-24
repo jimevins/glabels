@@ -24,7 +24,7 @@
 
 #include <glib.h>
 
-#include "libglabels/libglabels.h"
+#include <libglabels.h>
 #include "mini-preview-pixbuf.h"
 
 #include "debug.h"

@@ -23,7 +23,7 @@
 #include "prefs.h"
 
 #include <glib/gi18n.h>
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 
 #include "debug.h"
 

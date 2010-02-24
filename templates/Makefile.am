@@ -1,11 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
-dtddir = $(datadir)/glabels/dtd
+dtddir = $(datadir)/$(LIBGLABELS)/dtd
 
 dtd_DATA = \
 	glabels-2.3.dtd
 
-templatesdir = $(datadir)/glabels/templates
+templatesdir = $(datadir)/$(LIBGLABELS)/templates
 
 templates_DATA = \
 	paper-sizes.xml \

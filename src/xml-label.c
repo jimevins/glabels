@@ -29,7 +29,7 @@
 #include <libxml/xinclude.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "label.h"
 #include "label-object.h"
 #include "label-text.h"

@@ -24,7 +24,7 @@
 
 #include <glib/gi18n.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "label-text.h"
 #include "label-box.h"
 #include "label-line.h"

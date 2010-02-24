@@ -27,7 +27,7 @@
 #include <string.h>
 #include <gconf/gconf-client.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "marshal.h"
 #include "str-util.h"
 #include "color.h"

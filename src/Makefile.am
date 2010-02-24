@@ -4,8 +4,7 @@ SUBDIRS= pixmaps stock-pixmaps
 bin_PROGRAMS = glabels glabels-batch
 
 INCLUDES = \
-	-I$(top_srcdir) 					\
-	-I$(top_builddir) 					\
+	-I$(top_builddir)/libglabels				\
 	$(GLABELS_CFLAGS) 					\
 	$(LIBEBOOK_CFLAGS)					\
 	$(LIBBARCODE_CFLAGS)					\
@@ -13,8 +12,8 @@ INCLUDES = \
 	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLABELS_BUILDER_DIR=\""$(datadir)/glabels/builder/"\"	\
 	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"		\
+	-DGLABELS_BUILDER_DIR=\""$(datadir)/glabels/builder/"\"	\
 	-DGLABELS_PIXMAP_DIR=\""$(datadir)/pixmaps/glabels/"\"	\
 	-DG_LOG_DOMAIN=\""glabels\""
 
@@ -22,7 +21,7 @@ glabels_LDFLAGS = -export-dynamic
 
 glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
-	../libglabels/libglabels.la		\
+	../libglabels/$(LIBGLABELS).la		\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
@@ -32,7 +31,7 @@ glabels_batch_LDFLAGS = -export-dynamic
 
 glabels_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
-	../libglabels/libglabels.la		\
+	../libglabels/$(LIBGLABELS).la		\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
@@ -321,8 +320,8 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): ../libglabels/libglabels.la
+$(bin_PROGRAMS): ../libglabels/$(LIBGLABELS).la
 
-../libglabels/libglabels.la:
+../libglabels/$(LIBGLABELS).la:
 	cd ../libglabels; $(MAKE)
 

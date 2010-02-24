@@ -27,7 +27,7 @@
 #include <string.h>
 #include <math.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "prefs.h"
 #include "mini-preview.h"
 #include "mini-preview-pixbuf-cache.h"

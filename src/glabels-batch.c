@@ -24,7 +24,7 @@
 
 #include <math.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "merge-init.h"
 #include "template-history.h"
 #include "xml-label.h"

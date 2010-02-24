@@ -1,8 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.52)
+AC_PREREQ(2.63)
 
-AC_INIT(glabels, 2.3.pre0svn, http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116)
+AC_INIT([glabels],[2.3.pre0svn],[http://sourceforge.net/tracker/?func=add&group_id=46122&atid=445116])
 AC_CONFIG_SRCDIR(src/glabels.c)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -16,20 +16,27 @@ IT_PROG_INTLTOOL([0.21])
 
 PKG_PROG_PKG_CONFIG
 
-AC_PROG_LIBTOOL
+LT_INIT
 
 GNOME_DOC_INIT
 GTK_DOC_CHECK(1.0)
 
-AC_ISC_POSIX
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
 AC_PROG_INSTALL
 
 GNOME_COMPILE_WARNINGS
 
-AC_PATH_PROG(GLIB_GENMARSHAL,    glib-genmarshal)
-AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)
+AC_PATH_PROG(GLIB_GENMARSHAL,         glib-genmarshal)
+AC_PATH_PROG(GDK_PIXBUF_CSOURCE,      gdk-pixbuf-csource)
+AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
+AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
 
+dnl ---------------------------------------------------------------------------
+dnl - LIBGLABELS branch
+dnl ---------------------------------------------------------------------------
+LIBGLABELS=libglabels-3.0
+AC_SUBST(LIBGLABELS)
 
 dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS API versioning
@@ -46,13 +53,12 @@ dnl    increment current, and set revision to 0.
 dnl 5. If any interfaces have been added since the last public release, then increment age.
 dnl 6. If any interfaces have been removed since the last public release, then set age
 dnl    to 0.
-LIBGLABELS_C=5
-LIBGLABELS_R=1
+LIBGLABELS_C=7
+LIBGLABELS_R=0
 LIBGLABELS_A=0
 
-LIBGLABELS_VERSION_INFO=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
-AC_SUBST(LIBGLABELS_VERSION_INFO)
-
+LIBGLABELS_API_VERSION=${LIBGLABELS_C}:${LIBGLABELS_R}:${LIBGLABELS_A}
+AC_SUBST(LIBGLABELS_API_VERSION)
 
 dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
@@ -83,12 +89,12 @@ AC_SUBST(LIBIEC16022_REQUIRED)
 dnl ---------------------------------------------------------------------------
 dnl - GLABELS prerequisites
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(GLABELS, \
-glib-2.0 >= $GLIB_REQUIRED \
-gtk+-2.0 >= $GTK_REQUIRED \
-gconf-2.0 >= $GCONF_REQUIRED \
-libxml-2.0 >= $LIBXML_REQUIRED \
-)
+PKG_CHECK_MODULES(GLABELS, [\
+	glib-2.0 >= $GLIB_REQUIRED \
+	gtk+-2.0 >= $GTK_REQUIRED \
+	gconf-2.0 >= $GCONF_REQUIRED \
+	libxml-2.0 >= $LIBXML_REQUIRED \
+])
 
 AC_SUBST(GLABELS_CFLAGS)
 AC_SUBST(GLABELS_LIBS)
@@ -97,11 +103,11 @@ AC_SUBST(GLABELS_LIBS)
 dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS more modest prerequisites
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(LIBGLABELS, \
-glib-2.0 >= $GLIB_REQUIRED \
-gconf-2.0 >= $GCONF_REQUIRED \
-libxml-2.0 >= $LIBXML_REQUIRED \
-)
+PKG_CHECK_MODULES(LIBGLABELS, [\
+	glib-2.0 >= $GLIB_REQUIRED \
+	gconf-2.0 >= $GCONF_REQUIRED \
+	libxml-2.0 >= $LIBXML_REQUIRED \
+])
 
 AC_SUBST(LIBGLABELS_CFLAGS)
 AC_SUBST(LIBGLABELS_LIBS)
@@ -111,8 +117,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check for optional evolution data server
 dnl ---------------------------------------------------------------------------
 AC_ARG_WITH(libebook,
-	    [AC_HELP_STRING([--without-libebook],
-                            [build without Evolution Data Server support])])
+	    [AS_HELP_STRING([--without-libebook],[build without Evolution Data Server support])])
 have_libebook=no
 if test "x$with_libebook" != xno; then
 	PKG_CHECK_MODULES(LIBEBOOK, libebook-1.2 >= $LIBEBOOK_REQUIRED,
@@ -130,8 +135,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check for optional GNU Barcode backend
 dnl ---------------------------------------------------------------------------
 AC_ARG_WITH(libbarcode,
-	    [AC_HELP_STRING([--without-libbarcode],
-                            [build without GNU Barcode support])])
+	    [AS_HELP_STRING([--without-libbarcode],[build without GNU Barcode support])])
 have_libbarcode=no
 if test "x$with_libbarcode" != xno; then
    AC_CHECK_LIB(barcode, Barcode_Create,
@@ -153,8 +157,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check for optional QRencode Barcode backend
 dnl ---------------------------------------------------------------------------
 AC_ARG_WITH(libqrencode,
-	    [AC_HELP_STRING([--without-libqrencode],
-                            [build without QR code support])])
+	    [AS_HELP_STRING([--without-libqrencode],[build without QR code support])])
 have_libqrencode=no
 if test "x$with_libqrencode" != xno; then
 	PKG_CHECK_MODULES(LIBQRENCODE, libqrencode >= $LIBQRENCODE_REQUIRED,
@@ -174,8 +177,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check for IEC16022 Barcode backend
 dnl ---------------------------------------------------------------------------
 AC_ARG_WITH(libiec16022,
-	    [AC_HELP_STRING([--without-libiec16022],
-                            [build without IEC 16022 support])])
+	    [AS_HELP_STRING([--without-libiec16022],[build without IEC 16022 support])])
 have_libiec16022=no
 if test "x$with_libiec16022" != xno; then
 	PKG_CHECK_MODULES(LIBIEC16022, libiec16022 >= $LIBIEC16022_REQUIRED,
@@ -195,8 +197,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Enable deprecation testing
 dnl ---------------------------------------------------------------------------
 AC_ARG_ENABLE(deprecations,
-              [AC_HELP_STRING([--enable-deprecations],
-                              [warn about deprecated usages [default=no]])],,
+              [AS_HELP_STRING([--enable-deprecations],[warn about deprecated usages [default=no]])],,
               [enable_deprecations=no])
 
 if test "x$enable_deprecations" = "xyes"; then
@@ -211,27 +212,19 @@ fi
 
 
 dnl ---------------------------------------------------------------------------
-dnl - Is freedesktop mime dbase available?
+dnl - Disable updating of mime and desktop databases
 dnl ---------------------------------------------------------------------------
-AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
-AM_CONDITIONAL(HAVE_NEW_MIME, test x$UPDATE_MIME_DATABASE != xno)
-
-AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database, no)
-AM_CONDITIONAL(HAVE_NEWER_MIME, test x$UPDATE_DESKTOP_DATABASE != xno)
-
-AC_ARG_ENABLE(update-mimedb, AC_HELP_STRING([--disable-update-mimedb],
-              [disable the update-mime-database after install [default=no]]),,
+AC_ARG_ENABLE(update-mimedb, AS_HELP_STRING([--disable-update-mimedb],[disable the update-mime-database after install [default=no]]),,
               enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
-AC_ARG_ENABLE(update-desktopdb, AC_HELP_STRING([--disable-update-desktopdb],
-              [disable the update-desktop-database after install [default=no]]),,
+AC_ARG_ENABLE(update-desktopdb, AS_HELP_STRING([--disable-update-desktopdb],[disable the update-desktop-database after install [default=no]]),,
               enable_update_desktopdb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_DESKTOPDB, test x$enable_update_desktopdb = xyes)
 
 
 dnl ---------------------------------------------------------------------------
-dnl - Supported languages
+dnl - i18n support
 dnl ---------------------------------------------------------------------------
 GETTEXT_PACKAGE=glabels
 AC_SUBST(GETTEXT_PACKAGE)
@@ -243,10 +236,10 @@ AM_GLIB_GNU_GETTEXT
 dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.
 dnl ---------------------------------------------------------------------------
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 libglabels/Makefile
-libglabels/libglabels.pc
+libglabels/${LIBGLABELS}.pc
 src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile
@@ -263,6 +256,7 @@ docs/Makefile
 docs/libglabels/Makefile
 glabels.spec
 ])
+AC_OUTPUT
 
 
 dnl ---------------------------------------------------------------------------

@@ -22,7 +22,7 @@
 
 #include <glib/gi18n.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "warning-handler.h"
 #include "critical-error-handler.h"
 #include "stock.h"

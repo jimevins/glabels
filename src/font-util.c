@@ -26,7 +26,7 @@
 #include <pango/pango.h>
 #include <pango/pangocairo.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 
 
 /****************************************************************************/

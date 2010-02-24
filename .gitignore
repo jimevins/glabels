@@ -16,6 +16,7 @@ glabels-*.tar.gz
 #
 /aclocal.m4
 /autom4te.cache
+/autoscan.log
 /config.guess
 /config.h
 /config.h.in
@@ -23,11 +24,13 @@ glabels-*.tar.gz
 /config.status
 /config.sub
 /configure
+/configure.scan
 /depcomp
 /glabels.spec
 /gnome-doc-utils.make
 /gtk-doc.make
 /install-sh
+/INSTALL
 /intltool-extract.in
 /intltool-merge.in
 /intltool-update.in
@@ -39,7 +42,7 @@ glabels-*.tar.gz
 /stamp-h1
 /xmldocs.make
 
-/libglabels/libglabels.pc
+/libglabels/libglabels*.pc
 
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h

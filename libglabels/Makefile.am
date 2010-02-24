@@ -1,20 +1,18 @@
-templatesdir = $(datadir)/glabels/templates
+templatesdir = $(datadir)/$(LIBGLABELS)/templates
 
 INCLUDES = \
 	$(LIBGLABELS_CFLAGS)				\
 	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\" \
 	$(DISABLE_DEPRECATED_CFLAGS)
 
-libglabels_la_LDFLAGS=\
-        -version-info $(LIBGLABELS_VERSION_INFO) \
+libglabels_3_0_la_LDFLAGS=\
+        -version-info $(LIBGLABELS_API_VERSION) \
         $(LIBGLABELS_LIBS) \
         -no-undefined 
 
-lib_LTLIBRARIES = libglabels.la
+lib_LTLIBRARIES = libglabels-3.0.la
 
-libglabelsincludedir=$(includedir)/libglabels
-
-libglabels_la_SOURCES =		\
+libglabels_3_0_la_SOURCES =		\
 	libglabels-private.h	\
 	db.h			\
 	db.c			\
@@ -41,8 +39,14 @@ libglabels_la_SOURCES =		\
 	str.h			\
 	str.c
 
-libglabelsinclude_HEADERS = 	\
-	libglabels.h		\
+libglabels_3_0includedir=$(includedir)/$(LIBGLABELS)
+
+libglabels_3_0include_HEADERS = 	\
+	libglabels.h
+
+libglabels_3_0subincludedir=$(includedir)/$(LIBGLABELS)/libglabels
+
+libglabels_3_0subinclude_HEADERS = 	\
 	db.h                    \
 	units.h			\
 	paper.h			\
@@ -55,8 +59,8 @@ libglabelsinclude_HEADERS = 	\
 	str.h			
 
 EXTRA_DIST =			\
-	libglabels.pc.in
+	$(LIBGLABELS).pc.in
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libglabels.pc
+pkgconfig_DATA = $(LIBGLABELS).pc
 

@@ -24,7 +24,7 @@
 
 #include <math.h>
 
-#include "libglabels/db.h"
+#include <libglabels.h>
 #include "cairo-label-path.h"
 #include "marshal.h"
 #include "color.h"

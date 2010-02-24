@@ -24,7 +24,7 @@
 
 #include <gconf/gconf-client.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "marshal.h"
 
 

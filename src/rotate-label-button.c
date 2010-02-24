@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 #include <math.h>
 
-#include <libglabels/libglabels.h>
+#include <libglabels.h>
 #include "mini-label-preview.h"
 #include "hig.h"
 #include "marshal.h"

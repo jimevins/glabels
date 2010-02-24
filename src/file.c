@@ -31,7 +31,7 @@
 #include "file-util.h"
 #include "window.h"
 #include "new-label-dialog.h"
-#include "libglabels/libglabels.h"
+#include <libglabels.h>
 
 #include "debug.h"
 
