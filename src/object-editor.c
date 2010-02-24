@@ -112,6 +112,7 @@ gl_object_editor_class_init (glObjectEditorClass *class)
 static void
 gl_object_editor_init (glObjectEditor *editor)
 {
+        gchar        *builder_filename;
         static gchar *object_ids[] = { "editor_vbox",
                                        "adjustment1",  "adjustment2",  "adjustment3",
                                        "adjustment4",  "adjustment5",  "adjustment6",
@@ -128,10 +129,9 @@ gl_object_editor_init (glObjectEditor *editor)
 
         editor->priv->builder = gtk_builder_new ();
 
-        gtk_builder_add_objects_from_file (editor->priv->builder,
-                                           GLABELS_BUILDER_DIR "object-editor.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "object-editor.builder", NULL);
+        gtk_builder_add_objects_from_file (editor->priv->builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);

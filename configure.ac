@@ -33,10 +33,16 @@ AC_PATH_PROG(UPDATE_MIME_DATABASE,    update-mime-database)
 AC_PATH_PROG(UPDATE_DESKTOP_DATABASE, update-desktop-database)
 
 dnl ---------------------------------------------------------------------------
+dnl - GLABELS branch
+dnl ---------------------------------------------------------------------------
+GLABELS_BRANCH=glabels-3.0
+AC_SUBST(GLABELS_BRANCH)
+
+dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS branch
 dnl ---------------------------------------------------------------------------
-LIBGLABELS=libglabels-3.0
-AC_SUBST(LIBGLABELS)
+LIBGLABELS_BRANCH=libglabels-3.0
+AC_SUBST(LIBGLABELS_BRANCH)
 
 dnl ---------------------------------------------------------------------------
 dnl - LIBGLABELS API versioning
@@ -239,7 +245,7 @@ dnl ---------------------------------------------------------------------------
 AC_CONFIG_FILES([
 Makefile
 libglabels/Makefile
-libglabels/${LIBGLABELS}.pc
+libglabels/${LIBGLABELS_BRANCH}.pc
 src/Makefile
 src/pixmaps/Makefile
 src/stock-pixmaps/Makefile

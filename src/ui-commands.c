@@ -1126,6 +1126,7 @@ gl_ui_cmd_help_about (GtkAction *action,
 {
         static GtkWidget *about = NULL;
 
+        gchar            *pixbuf_filename;
         GdkPixbuf        *pixbuf = NULL;
         
         const gchar *authors[] = {
@@ -1181,7 +1182,9 @@ gl_ui_cmd_help_about (GtkAction *action,
 
         } else {
         
-                pixbuf = gdk_pixbuf_new_from_file (GLABELS_PIXMAP_DIR "glabels-splash.png", NULL);
+                pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "glabels-splash.png", NULL);
+                pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+                g_free (pixbuf_filename);
 
                 about = gtk_about_dialog_new ();
                 gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(about), _("glabels"));

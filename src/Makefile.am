@@ -12,16 +12,15 @@ INCLUDES = \
 	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps/"\"		\
-	-DGLABELS_BUILDER_DIR=\""$(datadir)/glabels/builder/"\"	\
-	-DGLABELS_PIXMAP_DIR=\""$(datadir)/pixmaps/glabels/"\"	\
+	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps"\"		\
+	-DGLABELS_DATA_DIR=\""$(datadir)/$(GLABELS_BRANCH)"\"	\
 	-DG_LOG_DOMAIN=\""glabels\""
 
 glabels_LDFLAGS = -export-dynamic
 
 glabels_LDADD = 				\
 	$(GLABELS_LIBS)				\
-	../libglabels/$(LIBGLABELS).la		\
+	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
@@ -31,7 +30,7 @@ glabels_batch_LDFLAGS = -export-dynamic
 
 glabels_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
-	../libglabels/$(LIBGLABELS).la		\
+	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
 	$(LIBQRENCODE_LIBS)			\
@@ -320,8 +319,8 @@ EXTRA_DIST = \
 
 CLEANFILES = $(BUILT_SOURCES)
 
-$(bin_PROGRAMS): ../libglabels/$(LIBGLABELS).la
+$(bin_PROGRAMS): ../libglabels/$(LIBGLABELS_BRANCH).la
 
-../libglabels/$(LIBGLABELS).la:
+../libglabels/$(LIBGLABELS_BRANCH).la:
 	cd ../libglabels; $(MAKE)
 

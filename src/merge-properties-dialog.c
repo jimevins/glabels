@@ -142,6 +142,7 @@ gl_merge_properties_dialog_class_init (glMergePropertiesDialogClass *class)
 static void
 gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 {
+        gchar             *builder_filename;
 	GtkBuilder        *builder;
         static gchar      *object_ids[] = { "merge_properties_vbox", NULL };
         GError            *error = NULL;
@@ -165,10 +166,9 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
         builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "merge-properties-dialog.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "merge-properties-dialog.builder", NULL);
+        gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);

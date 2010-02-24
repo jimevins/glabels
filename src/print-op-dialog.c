@@ -232,6 +232,7 @@ static GObject *
 create_custom_widget_cb (GtkPrintOperation *operation,
                          glLabel           *label)
 {
+        gchar                  *builder_filename;
 	GtkBuilder             *builder;
         static gchar           *object_ids[] = { "print_custom_widget_hbox",
                                                  "adjustment1", "adjustment2",
@@ -252,10 +253,9 @@ create_custom_widget_cb (GtkPrintOperation *operation,
         op->priv->labels_per_sheet = lgl_template_frame_get_n_labels (frame);
 
 	builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "print-op-dialog-custom-widget.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "print-op-dialog-custom-widget.builder", NULL);
+        gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);

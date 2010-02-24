@@ -230,6 +230,7 @@ gl_ui_property_bar_new (void)
 static void
 gl_ui_property_bar_construct (glUIPropertyBar   *this)
 {
+        gchar         *builder_filename;
 	GtkBuilder    *builder;
         static gchar  *object_ids[] = { "property_toolbar",
                                         "adjustment1", "adjustment2",
@@ -242,10 +243,9 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 	this->priv->stop_signals = TRUE;
 
         builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "property-bar.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "property-bar.builder", NULL);
+        gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);

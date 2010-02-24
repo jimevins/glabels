@@ -42,14 +42,6 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define ICON_PIXMAP        (GLABELS_ICON_DIR "glabels.png")
-
-#define EX_RECT_IMAGE      (GLABELS_PIXMAP_DIR "ex-rect-size.png")
-#define EX_ROUND_IMAGE     (GLABELS_PIXMAP_DIR "ex-round-size.png")
-#define EX_CD_IMAGE        (GLABELS_PIXMAP_DIR "ex-cd-size.png")
-#define EX_NLAYOUTS_IMAGE1 (GLABELS_PIXMAP_DIR "ex-1layout.png")
-#define EX_NLAYOUTS_IMAGE2 (GLABELS_PIXMAP_DIR "ex-2layouts.png")
-
 #define DEFAULT_MARGIN 9.0
 
 #define DEFAULT_RECT_W      252.0
@@ -289,6 +281,7 @@ gl_template_designer_class_init (glTemplateDesignerClass *class)
 static void
 gl_template_designer_init (glTemplateDesigner *dialog)
 {
+        gchar             *builder_filename;
         static gchar      *object_ids[] = { "start_page",
                                             "name_page",
                                             "pg_size_page",
@@ -317,10 +310,9 @@ gl_template_designer_init (glTemplateDesigner *dialog)
 	dialog->priv = g_new0 (glTemplateDesignerPrivate, 1);
 
         dialog->priv->builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (dialog->priv->builder,
-                                           GLABELS_BUILDER_DIR "template-designer.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "template-designer.builder", NULL);
+        gtk_builder_add_objects_from_file (dialog->priv->builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
@@ -387,6 +379,7 @@ static void
 gl_template_designer_construct (glTemplateDesigner *dialog)
 {
         lglUnits    units;
+        gchar      *logo_filename;
 	GdkPixbuf  *logo;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -403,7 +396,9 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
 
 	gtk_window_set_title (GTK_WINDOW(dialog), _("gLabels Template Designer"));
 
-	logo = gdk_pixbuf_new_from_file (ICON_PIXMAP, NULL);
+        logo_filename = g_build_filename (GLABELS_ICON_DIR, "glabels.png", NULL);
+	logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
+        g_free (logo_filename);
 
         /* Costruct and append pages (must be same order as PAGE_NUM enums. */
 	construct_start_page (dialog, logo);
@@ -628,6 +623,7 @@ static void
 construct_rect_size_page (glTemplateDesigner      *dialog,
 			  GdkPixbuf               *logo)
 {
+        gchar           *pixbuf_filename;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -664,7 +660,9 @@ construct_rect_size_page (glTemplateDesigner      *dialog,
                                          TRUE);
 
 	/* Initialize illustration. */
-	pixbuf = gdk_pixbuf_new_from_file (EX_RECT_IMAGE, NULL);
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-rect-size.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->rect_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
@@ -730,6 +728,7 @@ static void
 construct_round_size_page (glTemplateDesigner      *dialog,
 			   GdkPixbuf               *logo)
 {
+        gchar           *pixbuf_filename;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -760,7 +759,9 @@ construct_round_size_page (glTemplateDesigner      *dialog,
                                          TRUE);
 
 	/* Initialize illustration. */
-	pixbuf = gdk_pixbuf_new_from_file (EX_ROUND_IMAGE, NULL);
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-round-size.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->round_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
@@ -802,6 +803,7 @@ static void
 construct_cd_size_page (glTemplateDesigner      *dialog,
 			GdkPixbuf               *logo)
 {
+        gchar           *pixbuf_filename;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -838,7 +840,9 @@ construct_cd_size_page (glTemplateDesigner      *dialog,
                                          TRUE);
 
 	/* Initialize illustration. */
-	pixbuf = gdk_pixbuf_new_from_file (EX_CD_IMAGE, NULL);
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-cd-size.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->cd_image), pixbuf);
 
 	/* Apply units to spinbuttons and units labels. */
@@ -900,6 +904,7 @@ static void
 construct_nlayouts_page (glTemplateDesigner      *dialog,
 			 GdkPixbuf               *logo)
 {
+        gchar           *pixbuf_filename;
 	GdkPixbuf       *pixbuf;
 
 	gl_debug (DEBUG_TEMPLATE, "START");
@@ -930,9 +935,13 @@ construct_nlayouts_page (glTemplateDesigner      *dialog,
 
 
 	/* Initialize illustrations. */
-	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE1, NULL);
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-1layout.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image1), pixbuf);
-	pixbuf = gdk_pixbuf_new_from_file (EX_NLAYOUTS_IMAGE2, NULL);
+        pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "ex-2layouts.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
+        g_free (pixbuf_filename);
 	gtk_image_set_from_pixbuf (GTK_IMAGE(dialog->priv->nlayouts_image2), pixbuf);
 
 	gl_debug (DEBUG_TEMPLATE, "END");

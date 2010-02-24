@@ -98,7 +98,7 @@ main (int argc, char **argv)
 	gl_warning_handler_init();
 
 	/* Set default icon */
-	icon_file = GLABELS_ICON_DIR "glabels.png";
+	icon_file = g_build_filename (GLABELS_ICON_DIR, "glabels.png", NULL);
 	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
 	{
 		g_message ("Could not find %s", icon_file);
@@ -107,6 +107,7 @@ main (int argc, char **argv)
 	{
 		gtk_window_set_default_icon_from_file (icon_file, NULL);
 	}
+        g_free (icon_file);
 
 	
 	/* Initialize subsystems */

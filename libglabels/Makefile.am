@@ -1,4 +1,4 @@
-templatesdir = $(datadir)/$(LIBGLABELS)/templates
+templatesdir = $(datadir)/$(LIBGLABELS_BRANCH)/templates
 
 INCLUDES = \
 	$(LIBGLABELS_CFLAGS)				\
@@ -39,12 +39,12 @@ libglabels_3_0_la_SOURCES =		\
 	str.h			\
 	str.c
 
-libglabels_3_0includedir=$(includedir)/$(LIBGLABELS)
+libglabels_3_0includedir=$(includedir)/$(LIBGLABELS_BRANCH)
 
 libglabels_3_0include_HEADERS = 	\
 	libglabels.h
 
-libglabels_3_0subincludedir=$(includedir)/$(LIBGLABELS)/libglabels
+libglabels_3_0subincludedir=$(includedir)/$(LIBGLABELS_BRANCH)/libglabels
 
 libglabels_3_0subinclude_HEADERS = 	\
 	db.h                    \
@@ -59,8 +59,8 @@ libglabels_3_0subinclude_HEADERS = 	\
 	str.h			
 
 EXTRA_DIST =			\
-	$(LIBGLABELS).pc.in
+	$(LIBGLABELS_BRANCH).pc.in
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(LIBGLABELS).pc
+pkgconfig_DATA = $(LIBGLABELS_BRANCH).pc
 

@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-builderdir = $(datadir)/glabels/builder/
+builderdir = $(datadir)/$(GLABELS_BRANCH)/builder/
 
 builder_DATA = \
 	property-bar.builder		\

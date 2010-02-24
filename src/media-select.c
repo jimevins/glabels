@@ -218,6 +218,7 @@ gl_media_select_new (void)
 static void
 gl_media_select_construct (glMediaSelect *this)
 {
+        gchar             *builder_filename;
         GtkBuilder        *builder;
         static gchar      *object_ids[] = { "media_select_hbox", NULL };
         GError            *error = NULL;
@@ -240,10 +241,9 @@ gl_media_select_construct (glMediaSelect *this)
         g_return_if_fail (this->priv != NULL);
 
         builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (builder,
-                                           GLABELS_BUILDER_DIR "media-select.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "media-select.builder", NULL);
+        gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);

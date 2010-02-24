@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-glabels_pixmapsdir = $(datadir)/pixmaps/glabels
+glabels_pixmapsdir = $(datadir)/$(GLABELS_BRANCH)/pixmaps
 
 glabels_pixmaps_DATA = \
 	glabels-splash.png	\

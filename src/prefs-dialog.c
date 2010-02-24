@@ -139,6 +139,7 @@ gl_prefs_dialog_class_init (glPrefsDialogClass *class)
 static void
 gl_prefs_dialog_init (glPrefsDialog *dialog)
 {
+        gchar        *builder_filename;
         static gchar *object_ids[] = { "prefs_notebook",
                                        "adjustment1",  "adjustment2",  "adjustment3",
                                        NULL };
@@ -149,10 +150,9 @@ gl_prefs_dialog_init (glPrefsDialog *dialog)
 	dialog->priv = g_new0 (glPrefsDialogPrivate, 1);
 
         dialog->priv->builder = gtk_builder_new ();
-        gtk_builder_add_objects_from_file (dialog->priv->builder,
-                                           GLABELS_BUILDER_DIR "prefs-dialog.builder",
-                                           object_ids,
-                                           &error);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "prefs-dialog.builder", NULL);
+        gtk_builder_add_objects_from_file (dialog->priv->builder, builder_filename, object_ids, &error);
+        g_free (builder_filename);
 	if (error) {
 		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
