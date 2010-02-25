@@ -1,7 +1,7 @@
 
 SUBDIRS= pixmaps stock-pixmaps
 
-bin_PROGRAMS = glabels glabels-batch
+bin_PROGRAMS = glabels-3 glabels-3-batch
 
 INCLUDES = \
 	-I$(top_builddir)/libglabels				\
@@ -13,12 +13,13 @@ INCLUDES = \
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGLABELS_LOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLABELS_ICON_DIR=\""$(datadir)/pixmaps"\"		\
+	-DGLABELS_ICON=\""$(GLABELS_BRANCH).png"\"		\
 	-DGLABELS_DATA_DIR=\""$(datadir)/$(GLABELS_BRANCH)"\"	\
 	-DG_LOG_DOMAIN=\""glabels\""
 
-glabels_LDFLAGS = -export-dynamic
+glabels_3_LDFLAGS = -export-dynamic
 
-glabels_LDADD = 				\
+glabels_3_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
@@ -26,9 +27,9 @@ glabels_LDADD = 				\
 	$(LIBQRENCODE_LIBS)			\
 	$(LIBIEC16022_LIBS)
 
-glabels_batch_LDFLAGS = -export-dynamic
+glabels_3_batch_LDFLAGS = -export-dynamic
 
-glabels_batch_LDADD = 				\
+glabels_3_batch_LDADD = 				\
 	$(GLABELS_LIBS)				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
@@ -40,7 +41,7 @@ BUILT_SOURCES = 			\
 	marshal.c			\
 	marshal.h			
 
-glabels_SOURCES = 			\
+glabels_3_SOURCES = 			\
 	glabels.c			\
 	warning-handler.c		\
 	warning-handler.h		\
@@ -228,7 +229,7 @@ glabels_SOURCES = 			\
 	$(BUILT_SOURCES)
 
 
-glabels_batch_SOURCES = 		\
+glabels_3_batch_SOURCES = 		\
 	glabels-batch.c			\
 	file-util.h			\
 	file-util.c			\

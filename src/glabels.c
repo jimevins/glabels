@@ -98,7 +98,7 @@ main (int argc, char **argv)
 	gl_warning_handler_init();
 
 	/* Set default icon */
-	icon_file = g_build_filename (GLABELS_ICON_DIR, "glabels.png", NULL);
+	icon_file = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
 	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS))
 	{
 		g_message ("Could not find %s", icon_file);

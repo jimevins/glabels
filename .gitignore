@@ -47,9 +47,12 @@ glabels-*.tar.gz
 /src/marshal.[ch]
 /src/stock-pixmaps/stockpixbufs.h
 /src/glabels
+/src/glabels-3
 /src/glabels-batch
+/src/glabels-3-batch
 
-/data/desktop/glabels.desktop
+/data/desktop/glabels*.desktop
+
 /data/mime/glabels.keys
 /data/mime/glabels.xml
 

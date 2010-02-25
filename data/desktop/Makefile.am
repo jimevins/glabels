@@ -2,7 +2,7 @@
 
 @INTLTOOL_DESKTOP_RULE@
 
-DESKTOP_IN_FILES = glabels.desktop.in
+DESKTOP_IN_FILES = $(GLABELS_BRANCH).desktop.in
 DESKTOP_FILES =$(DESKTOP_IN_FILES:.desktop.in=.desktop)
 
 desktopdir = $(datadir)/applications

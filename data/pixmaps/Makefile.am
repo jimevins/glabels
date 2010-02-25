@@ -14,12 +14,12 @@ glabels_pixmaps_DATA = \
 glabels_app_icondir = $(datadir)/pixmaps
 
 glabels_app_icon_DATA = \
-	glabels.png
+	$(GLABELS_BRANCH).png
 
-glabels_mime_icondir = $(datadir)/pixmaps
+glabels_mime_icondir = $(datadir)/icons/hicolor/48x48/mimetypes
 
 glabels_mime_icon_DATA = \
-	glabels-application-x-glabels.png
+	$(GLABELS_BRANCH)-application-x-glabels.png
 
 EXTRA_DIST = $(glabels_pixmaps_DATA)   \
 	     $(glabels_app_icon_DATA)  \
