@@ -19,7 +19,7 @@ glabels_app_icon_DATA = \
 glabels_mime_icondir = $(datadir)/icons/hicolor/48x48/mimetypes
 
 glabels_mime_icon_DATA = \
-	$(GLABELS_BRANCH)-application-x-glabels.png
+	application-x-glabels.png
 
 EXTRA_DIST = $(glabels_pixmaps_DATA)   \
 	     $(glabels_app_icon_DATA)  \

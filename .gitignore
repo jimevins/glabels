@@ -53,8 +53,7 @@ glabels-*.tar.gz
 
 /data/desktop/glabels*.desktop
 
-/data/mime/glabels.keys
-/data/mime/glabels.xml
+/data/mime/glabels*.xml
 
 /po/.intltool-merge-cache
 /po/*.gmo
