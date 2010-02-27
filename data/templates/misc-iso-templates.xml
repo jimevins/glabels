@@ -607,7 +607,7 @@
   </Template>
 
   <!-- =================================================================== -->
-  <!-- Geha Z53.  Address Labels.                                      -->
+  <!-- Geha Z53.  Address Labels.                                     	   -->
   <!-- =================================================================== -->
   <Template brand="Geha" part="Z53" size="A4" _description="Address Labels">
     <Meta category="label"/>
@@ -619,6 +619,17 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Staples STAP14 Mailing Labels.                                      -->
+  <!-- =================================================================== -->
+  <Template brand="Staples" part="STAP14" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="99mm" height="38mm" round="2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3mm"/>
+      <Layout nx="2" ny="7" x0="5mm" y0="15mm" dx="102mm" dy="38mm"/>
+    </Label-rectangle>
+  </Template>
 
   <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->
