@@ -54,6 +54,7 @@ lglTemplateFrameShape
 lglTemplateFrame
 lglTemplateFrameAll
 lglTemplateFrameRect
+lglTemplateFrameEllipse
 lglTemplateFrameRound
 lglTemplateFrameCD
 <SUBSECTION Layout Structure>

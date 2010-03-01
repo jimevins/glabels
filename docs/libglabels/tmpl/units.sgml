@@ -6,7 +6,7 @@ Type to represent units of distance supported by libglabels
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-This section defines a type to represent the varios units of distance
+This section defines a type to represent the various units of distance
 supported by libglabels.  It also defines a set of related functions.
 
 </para>

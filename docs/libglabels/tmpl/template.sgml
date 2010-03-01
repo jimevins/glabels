@@ -24,14 +24,14 @@ This is the main structure of a libglabels template.  A template represents a si
 of peel-off labels or cards.
 </para>
 
-@brand: Brand name of label or card.  E.g. "Avery."
+@brand: Vendor or brand name of label or card.  E.g. "Avery."
 @part: Part name or number of label or card.  E.g. "8160."
-@equiv_part: 
+@equiv_part: Part name or number of a part with identical layout.  Must be from same vendor.
 @description: A description of the template.  E.g. "Mailing labels."
 @paper_id: A paper ID.  E.g. "A4" or "US-Letter."
 @page_width: Page width in points.  Used only if paper_id is "Other."
 @page_height: Page height in points.  Used only if paper_id is "Other."
-@product_url: 
+@product_url: URL to a webpage describing product.
 @category_ids: A list of category IDs that this template belongs to.
 @frames: A list of (#lglTemplateFrame *) structures.  GLabels currently only supports one frame
 per template -- future versions may support multiple frames per template.
@@ -53,6 +53,7 @@ This enumeration defines frame types that are supported by libglabels
 </para>
 
 @LGL_TEMPLATE_FRAME_SHAPE_RECT: A rectangular frame.  (May have rounded corners.)
+@LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE: An elliptical frame.
 @LGL_TEMPLATE_FRAME_SHAPE_ROUND: A round frame.
 @LGL_TEMPLATE_FRAME_SHAPE_CD: A CD or DVD frame.  (Includes credit-card style CDs.)
 
@@ -90,6 +91,19 @@ This structure defines the frame for a rectangular label or card.
 @r: Radius of corners in points.
 @x_waste: Amount of horizontal over-print to allow in points.
 @y_waste: Amount of vertical over-print to allow in points.
+
+<!-- ##### STRUCT lglTemplateFrameEllipse ##### -->
+<para>
+This structure defines the frame for an elliptical label or card.
+</para>
+
+@shape: Common field.  Always #LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE for #lglTemplateFrameEllipse.
+@id: Common field.  See #lglTemplateFrameAll.
+@layouts:  Common field.  See #lglTemplateFrameAll.
+@markups:  Common field.  See #lglTemplateFrameAll.
+@w: Width of label or card in points.
+@h: Height of label or card in points.
+@waste: Amount of over-print to allow in points.
 
 <!-- ##### STRUCT lglTemplateFrameRound ##### -->
 <para>
@@ -144,6 +158,7 @@ This enumeration defines markup types that are supported by libglabels
 @LGL_TEMPLATE_MARKUP_LINE: A simple line segment.
 @LGL_TEMPLATE_MARKUP_CIRCLE: A circle.
 @LGL_TEMPLATE_MARKUP_RECT: A rectangle.  Possibly with rounded corners.
+@LGL_TEMPLATE_MARKUP_ELLIPSE: An ellipse.
 
 <!-- ##### UNION lglTemplateMarkup ##### -->
 <para>

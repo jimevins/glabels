@@ -69,16 +69,16 @@ glabels-*.tar.gz
 /docs/libglabels/*.stamp
 /docs/libglabels/xml/
 /docs/libglabels/html/
-/docs/libglabels/libglabels-decl.txt
-/docs/libglabels/libglabels-decl-list.txt
-/docs/libglabels/libglabels-undeclared.txt
-/docs/libglabels/libglabels-unused.txt
-/docs/libglabels/libglabels-undocumented.txt
-/docs/libglabels/libglabels.args
-/docs/libglabels/libglabels.hierarchy
-/docs/libglabels/libglabels.interfaces
-/docs/libglabels/libglabels.prerequisites
-/docs/libglabels/libglabels.signals
+/docs/libglabels/libglabels*-decl.txt
+/docs/libglabels/libglabels*-decl-list.txt
+/docs/libglabels/libglabels*-undeclared.txt
+/docs/libglabels/libglabels*-unused.txt
+/docs/libglabels/libglabels*-undocumented.txt
+/docs/libglabels/libglabels*.args
+/docs/libglabels/libglabels*.hierarchy
+/docs/libglabels/libglabels*.interfaces
+/docs/libglabels/libglabels*.prerequisites
+/docs/libglabels/libglabels*.signals
 
 #
 # Ignore artifacts from editors, patching, etc.
