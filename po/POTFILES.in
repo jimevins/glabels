@@ -217,10 +217,9 @@ libglabels/xml-template.h
 [type: gettext/glade]data/builder/template-designer.builder
 [type: gettext/glade]data/builder/print-op-dialog-custom-widget.builder
 
-[type: gettext/ini]data/desktop/glabels.desktop.in
+[type: gettext/ini]data/desktop/glabels-3.0.desktop.in
 
-[type: gettext/keys]data/mime/glabels.keys.in
-[type: gettext/xml]data/mime/glabels.xml.in
+[type: gettext/xml]data/mime/glabels-3.0.xml.in
 
 [type: gettext/xml]templates/paper-sizes.xml
 [type: gettext/xml]templates/categories.xml

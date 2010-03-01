@@ -232,7 +232,7 @@ AM_CONDITIONAL(ENABLE_UPDATE_DESKTOPDB, test x$enable_update_desktopdb = xyes)
 dnl ---------------------------------------------------------------------------
 dnl - i18n support
 dnl ---------------------------------------------------------------------------
-GETTEXT_PACKAGE=glabels
+GETTEXT_PACKAGE=${GLABELS_BRANCH}
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 

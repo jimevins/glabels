@@ -59,12 +59,12 @@ glabels-*.tar.gz
 /po/*.gmo
 /po/POTFILES
 /po/stamp-it
-/po/glabels.pot
+/po/glabels*.pot
 
 /help/glabels-*.omf
 /help/*/.xml2po.mo
-/help/*/glabels.xml
-!/help/C/glabels.xml
+/help/*/glabels*.xml
+!/help/C/glabels*.xml
 
 /docs/libglabels/*.stamp
 /docs/libglabels/xml/
