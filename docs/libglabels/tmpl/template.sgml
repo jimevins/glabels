@@ -208,6 +208,17 @@ This structure defines a simple rectangle markup.  The rectangle can have rounde
 @h: Height of rectangle in points.
 @r: Radius of corners in points.  Should be zero for sharp corners.
 
+<!-- ##### STRUCT lglTemplateMarkupEllipse ##### -->
+<para>
+This structure defines a simple elliptical markup.
+</para>
+
+@type: Common field.  Always #LGL_TEMPLATE_MARKUP_ELLIPSE for #lglTemplateMarkupEllipse.
+@x1: Distance (in points) of left edge of markup from left edge of label or card.
+@y1: Distance (in points) of top edge of markup from top edge of label or card.
+@w: Width of rectangle in points.
+@h: Height of rectangle in points.
+
 <!-- ##### STRUCT lglTemplateOrigin ##### -->
 <para>
 This structure represents the cartesian coordinates of the origin of a label or card on the page.
@@ -229,6 +240,17 @@ relative to the upper left corner of the page.
 @paper_id: 
 @page_width: 
 @page_height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_new_from_equiv ##### -->
+<para>
+
+</para>
+
+@brand: 
+@part: 
+@equiv_part: 
 @Returns: 
 
 
@@ -363,6 +385,18 @@ relative to the upper left corner of the page.
 @r: 
 @x_waste: 
 @y_waste: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_ellipse_new ##### -->
+<para>
+
+</para>
+
+@id: 
+@w: 
+@h: 
+@waste: 
 @Returns: 
 
 
@@ -527,6 +561,18 @@ relative to the upper left corner of the page.
 @w: 
 @h: 
 @r: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_markup_ellipse_new ##### -->
+<para>
+
+</para>
+
+@x1: 
+@y1: 
+@w: 
+@h: 
 @Returns: 
 
 

@@ -49,12 +49,7 @@
 
 /**
  * lgl_vendor_new:
- * @id:       Id of vendor definition. (E.g. US-Letter, A4, etc.)  Should be
- *            unique.
  * @name:     Localized name of vendor.
- * @width:    Width of vendor in points.
- * @height:   Height of vendor in points.
- * @pwg_size: PWG 5101.1-2002 size name.
  *
  * Allocates and constructs a new #lglVendor structure.
  *

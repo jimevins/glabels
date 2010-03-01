@@ -414,9 +414,7 @@ lgl_template_frame_rect_new  (const gchar         *id,
  *   @id:      ID of frame.  (This should currently always be "0").
  *   @w:       width of frame in points.
  *   @h:       height of frame in points.
- *   @r:       radius of rounded corners in points.  (Should be 0 for square corners.)
- *   @x_waste: Amount of overprint to allow in the horizontal direction.
- *   @y_waste: Amount of overprint to allow in the vertical direction.
+ *   @waste:   Amount of overprint to allow in points.
  *
  * This function creates a new template frame for an elliptical label or card.
  *

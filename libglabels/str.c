@@ -86,10 +86,15 @@ lgl_str_utf8_casecmp (const gchar *s1,
  *
  * Compare two UTF-8 strings representing part names or numbers.  This function
  * uses a natural sort order:
+ *
  *  - Ignores case.
+ *
  *  - Strings are divided into chunks (numeric and non-numeric)
+ *
  *  - Non-numeric chunks are compared character by character
+ *
  *  - Numerical chunks are compared numerically, so that "20" precedes "100".
+ *
  *  - Comparison of chunks is performed left to right until the first difference
  *    is encountered or all chunks evaluate as equal.
  *

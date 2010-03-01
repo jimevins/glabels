@@ -1,0 +1,53 @@
+<!-- ##### SECTION Title ##### -->
+The lglVendor Structure
+
+<!-- ##### SECTION Short_Description ##### -->
+Vendor definitions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes a structure for representing vendor data.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT lglVendor ##### -->
+<para>
+This structure defines a vendor.
+</para>
+
+@name: Vendor name.  (e.g. "Avery")
+@url: URL to vendor website
+
+<!-- ##### FUNCTION lgl_vendor_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_vendor_dup ##### -->
+<para>
+
+</para>
+
+@orig: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_vendor_free ##### -->
+<para>
+
+</para>
+
+@vendor: 
+
+

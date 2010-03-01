@@ -104,8 +104,6 @@ static void  xml_create_alias_node          (const lglTemplateAlias       *alias
  *
  * Read glabels templates from template file.
  *
- * Returns: a list of #lglTemplate structures.
- *
  */
 void
 lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
@@ -141,8 +139,6 @@ lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
  * @templates_doc:  libxml #xmlDocPtr tree, representing template file.
  *
  * Read glabels templates from a libxml #xmlDocPtr tree.
- *
- * Returns: a list of #lglTemplate structures.
  *
  */
 void

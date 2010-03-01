@@ -1,0 +1,46 @@
+<!-- ##### SECTION Title ##### -->
+XML Vendor Functions
+
+<!-- ##### SECTION Short_Description ##### -->
+Functions to parse glabels XML vendor descriptions
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This section describes several functions for parsing vendor XML description files.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION lgl_xml_vendor_read_vendors_from_file ##### -->
+<para>
+
+</para>
+
+@utf8_filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_vendor_parse_vendors_doc ##### -->
+<para>
+
+</para>
+
+@vendors_doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_xml_vendor_parse_vendor_node ##### -->
+<para>
+
+</para>
+
+@vendor_node: 
+@Returns: 
+
+

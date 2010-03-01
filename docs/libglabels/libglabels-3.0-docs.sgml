@@ -14,6 +14,7 @@
     <xi:include href="xml/template.xml"/>
     <xi:include href="xml/paper.xml"/>
     <xi:include href="xml/category.xml"/>
+    <xi:include href="xml/vendor.xml"/>
   </chapter>
 
   <chapter>
@@ -21,6 +22,7 @@
     <xi:include href="xml/xml-paper.xml"/>
     <xi:include href="xml/xml-category.xml"/>
     <xi:include href="xml/xml-template.xml"/>
+    <xi:include href="xml/xml-vendor.xml"/>
     <xi:include href="xml/xml.xml"/>
   </chapter>
 
