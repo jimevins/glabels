@@ -38,9 +38,9 @@
 	<Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-PE8008-2204.shtml"/>
-    <Label-rectangle id="0" width="48.8mm" height="25.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="0" width="48.4mm" height="25.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="4" ny="10" x0="8mm" y0="21.5mm" dx="48.8mm" dy="25.4mm"/>
+      <Layout nx="4" ny="10" x0="8mm" y0="21.5mm" dx="48.4mm" dy="25.4mm"/>
     </Label-rectangle>
   </Template>
 
@@ -157,7 +157,7 @@
     <Meta product_url="http://www.pearl.de/a-VM5221-2204.shtml"/>
     <Label-rectangle id="0" width="70mm" height="70mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="3" ny="4" x0="0mm" y0="9mm" dx="70mm" dy="70mm"/>
+      <Layout nx="3" ny="4" x0="0mm" y0="8.5mm" dx="70mm" dy="70mm"/>
     </Label-rectangle>
   </Template>
 
@@ -168,7 +168,7 @@
 	<Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-VM6083-2204.shtml"/>
-    <Label-rectangle id="0" width="25.4mm" height="16.9mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="0" width="25.4mm" height="16.9mm" round="1.5mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="2mm"/>
       <Layout nx="7" ny="16" x0="9mm" y0="13mm" dx="27.9mm" dy="16.9mm"/>
     </Label-rectangle>
@@ -209,7 +209,7 @@
     <Meta product_url="http://www.pearl.de/a-VM6102-2202.shtml"/>
     <Label-rectangle id="0" width="45mm" height="55mm" round="0mm" x_waste="5mm" y_waste="5mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="3" ny="4" x0="27mm" y0="22.5mm" dx="55mm" dy="65mm"/>
+      <Layout nx="3" ny="4" x0="27mm" y0="23.5mm" dx="55mm" dy="65mm"/>
     </Label-rectangle>
   </Template>
 
@@ -233,9 +233,9 @@
 	<Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-VM6232-2201.shtml"/>
-    <Label-rectangle id="0" width="96.5mm" height="42.3mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="0" width="96.5mm" height="42.1mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="2mm"/>
-      <Layout nx="2" ny="6" x0="8.5mm" y0="21.5mm" dx="96.5mm" dy="42mm"/>
+      <Layout nx="2" ny="6" x0="8.5mm" y0="21mm" dx="96.5mm" dy="42.1mm"/>
     </Label-rectangle>
   </Template>
 
@@ -259,9 +259,9 @@
 	<Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-VM6234-2204.shtml"/>
-    <Label-rectangle id="0" width="99.1mm" height="57mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="0" width="99.1mm" height="57mm" round="2.5mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="5" x0="5mm" y0="6mm" dx="99.1mm" dy="60mm"/>
+      <Layout nx="2" ny="5" x0="5mm" y0="6mm" dx="102.1mm" dy="57mm"/>
     </Label-rectangle>
   </Template>
 
@@ -285,9 +285,9 @@
 	<Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-VM6398-2204.shtml"/>
-    <Label-rectangle id="0" width="20mm" height="25mm" round="0mm" x_waste="0mm" y_waste="0mm">
+    <Label-rectangle id="0" width="19.6mm" height="25mm" round="1.2mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="1.5mm"/>
-      <Layout nx="9" ny="10" x0="4.5mm" y0="10mm" dx="23mm" dy="27.5mm"/>
+      <Layout nx="9" ny="10" x0="4.5mm" y0="10mm" dx="22.6mm" dy="28mm"/>
     </Label-rectangle>
   </Template>
 
@@ -315,9 +315,9 @@
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Meta product_url="http://www.pearl.de/a-VM5019-2014.shtml"/>
-    <Label-rectangle id="0" width="85mm" height="54mm" round="0mm" x_waste="5mm" y_waste="0mm">
+    <Label-rectangle id="0" width="85mm" height="54.2mm" round="0mm" x_waste="5mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="5" x0="14mm" y0="14mm" dx="95mm" dy="54mm"/>
+      <Layout nx="2" ny="5" x0="13.5mm" y0="13.5mm" dx="95mm" dy="54.2mm"/>
     </Label-rectangle>
   </Template>
 
@@ -328,9 +328,9 @@
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-VM5040-2002.shtml"/>
-    <Label-rectangle id="0" width="45mm" height="55mm" round="0mm" x_waste="5mm" y_waste="5mm">
+    <Label-rectangle id="0" width="45mm" height="54.5mm" round="0mm" x_waste="5mm" y_waste="5mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="3" ny="4" x0="27mm" y0="24mm" dx="55mm" dy="65mm"/>
+      <Layout nx="3" ny="4" x0="28mm" y0="24.5mm" dx="55mm" dy="64.5mm"/>
     </Label-rectangle>
   </Template>
 
@@ -341,9 +341,9 @@
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Meta product_url="http://www.pearl.de/a-VM5061-2014.shtml"/>
-    <Label-rectangle id="0" width="86mm" height="54mm" round="0mm" x_waste="2.5mm" y_waste="1mm">
+    <Label-rectangle id="0" width="86mm" height="53.8mm" round="0mm" x_waste="2.5mm" y_waste="1mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="5" x0="16.5mm" y0="10mm" dx="91mm" dy="56mm"/>
+      <Layout nx="2" ny="5" x0="16.5mm" y0="10mm" dx="91mm" dy="55.8mm"/>
     </Label-rectangle>
   </Template>
 
@@ -382,7 +382,7 @@
     <Meta product_url="http://www.pearl.de/a-VM6067-5026.shtml"/>
     <Label-rectangle id="0" width="85mm" height="54mm" round="0mm" x_waste="5mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="5" x0="15mm" y0="14mm" dx="95mm" dy="54mm"/>
+      <Layout nx="2" ny="5" x0="15mm" y0="13mm" dx="95mm" dy="54mm"/>
     </Label-rectangle>
   </Template>
 
@@ -406,7 +406,7 @@
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Meta product_url="http://www.pearl.de/a-VM6200-2013.shtml"/>
-    <Label-rectangle id="0" width="180mm" height="50mm" round="0mm" x_waste="0mm" y_waste="2.5mm">
+    <Label-rectangle id="0" width="180mm" height="50mm" round="3mm" x_waste="0mm" y_waste="2.5mm">
       <Markup-rect x1="3.2mm" y1="3.2mm" w="83.6mm" h="43.6mm"/>
 	  <Markup-rect x1="93.2mm" y1="3.2mm" w="83.6mm" h="43.6mm"/>
 	  <Markup-line x1="90mm" y1="0mm" x2="90mm" y2="50mm"/>
@@ -425,7 +425,7 @@
     <Meta category="card"/>
     <Meta product_url="http://www.pearl.de/a-VM6253-2013.shtml"/>
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="5" x0="17mm" y0="6mm" dx="87mm" dy="59mm"/>
+      <Layout nx="2" ny="5" x0="16.5mm" y0="6mm" dx="90mm" dy="55.5mm"/>
     </Label-rectangle>
   </Template>
 
@@ -473,9 +473,9 @@
     <Meta category="business-card"/>
 	<Meta print="mirrored"/>
     <Meta product_url="http://www.pearl.de/a-VM5112-2411.shtml"/>
-    <Label-rectangle id="0" width="85mm" height="54.25mm" round="0mm" x_waste="7.5mm" y_waste="7.5mm">
+    <Label-rectangle id="0" width="85mm" height="54.25mm" round="3.5mm" x_waste="7mm" y_waste="7.5mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="4" x0="12mm" y0="18mm" dx="100mm" dy="69.25mm"/>
+      <Layout nx="2" ny="4" x0="12mm" y0="21mm" dx="100mm" dy="68.75mm"/>
     </Label-rectangle>
   </Template>
 
@@ -487,10 +487,10 @@
     <Meta category="business-card"/>
 	<Meta print="mirrored"/>
     <Meta product_url="http://www.pearl.de/a-VM6310-2013.shtml"/>
-    <Label-rectangle id="0" width="85mm" height="54.25mm" round="0mm" x_waste="7.5mm" y_waste="7.5mm">
+    <Label-rectangle id="0" width="85mm" height="53.5mm" round="2.5mm" x_waste="7.5mm" y_waste="7.5mm">
       <Markup-margin size="3.2mm"/>
-      <Layout nx="2" ny="4" x0="12mm" y0="18mm" dx="100mm" dy="69.2mm"/>
-      <Layout nx="2" ny="4" x0="12mm" y0="18mm" dx="100mm" dy="69.2mm"/>
+      <Layout nx="2" ny="4" x0="12mm" y0="18mm" dx="100mm" dy="69mm"/>
+      <Layout nx="2" ny="4" x0="12mm" y0="18mm" dx="100mm" dy="69mm"/>
     </Label-rectangle>
   </Template>
 </Glabels-templates>
