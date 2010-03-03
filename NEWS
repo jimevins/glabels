@@ -1,3 +1,19 @@
+* gLabels 2.2.7 (stable) release.  Release date 2010-03-01
+
+- Fixed limitation on encoded image sizes (fix only valid if libxml 2.7+ is installed)
+- Fixed focus behavior of canvas so that focus does not get stolen when
+  highlighting text in the object editor
+- New Slovenian translation (Andrej Žnidaršič)
+- New Danish translation (Joe Hansen)
+- Updated Czech translation (Marek Cernocky)
+- Updated German translation (Mario Blättermann)
+- Updated German help manual translation (Mario Blättermann)
+- New French translation of help manual (Alain Lojewski and Claude Paroz)
+- New Czech translation of help manual (Marek Cernocky)
+- New Spanish translation of help manual (Jorge González)
+- New templates
+
+
 * gLabels 2.2.6 (stable) release.  Release date 2009-11-11
 
 - Fixed drawing artifact with round labels.
@@ -5,14 +21,14 @@
 - Fixed several UI inconsistencies when changing merge source.
 - Fixed potiential crash when doing a document merge.
 - Now makes a better guess at locale defaults (page size and units).
-- Updated user documentation (Mario Bl�ttermann).
+- Updated user documentation (Mario Blättermann).
 - Updated swedish translation (Daniel Nylander).
-- Updated german translation (Mario Bl�ttermann).
+- Updated german translation (Mario Blättermann).
 - Updated russian translation (Alexandre Prokoudine)
 - Updated french translation (Claude Paroz)
 - New chinese translation (Careon)
 - New catalan translation (David Planella)
-- Updated german translation of user documentation (Mario Bl�ttermann).
+- Updated german translation of user documentation (Mario Blättermann).
 - New templates.
 
 
@@ -20,7 +36,7 @@
 
 - Fixed spinbutton/adjustment bugs that made glabels unusable with Gtk 2.16.
 - Fixed default preview colors in color combos.
-- Updated german translation (Mario Bl�ttermann).
+- Updated german translation (Mario Blättermann).
 - New templates.
 
 
@@ -139,7 +155,7 @@
 - Replaced libbonoboui with GtkUIManager (now requires Gnome 2.10 and GTK+ 2.6)
 - Updated Russian translation (Vitaly Lipatov)
 - Updated Spanish translation (Sergio Rivadero)
-- Updated Czech translation (David Makovsk� and Zbynek Mrkvick)
+- Updated Czech translation (David Makovský and Zbynek Mrkvick)
 - Updated Italian translation (Daniele Medri)
 - Added documentation for libglabels
 - Minor bug fixes and cleanup
