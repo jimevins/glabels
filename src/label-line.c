@@ -208,7 +208,7 @@ set_line_color (glLabelObject *object,
         {
                 if ( checkpoint )
                 {
-                        gl_label_object_get_parent (GL_LABEL_OBJECT (lline));
+                        label = gl_label_object_get_parent (GL_LABEL_OBJECT (lline));
                         gl_label_checkpoint (label, _("Line color"));
                 }
 

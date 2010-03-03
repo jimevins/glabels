@@ -31,6 +31,7 @@ TEMPLATE DATABASE:
 
    The XML files in the "templates/" subdirectory constitute the glabels
    label database.  No copyright is claimed on the facts contained within
-   the database.  However, to clear up any ambiguity, the files themselves
-   are licensed using the MIT/X license -- see 'COPYING-TEMPLATES' in this
-   directory for details.
+   the database and can be used for any purpose.  However, to clear up any
+   ambiguity, the DTD file that defines the format of these files is
+   licensed using the MIT/X license, as close to public domain as one can
+   get -- see 'COPYING-TEMPLATES' in this directory for details.

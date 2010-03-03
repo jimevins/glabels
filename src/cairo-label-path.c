@@ -24,6 +24,8 @@
 
 #include <math.h>
 
+#include "cairo-ellipse-path.h"
+
 #include "debug.h"
 
 

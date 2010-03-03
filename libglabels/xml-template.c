@@ -110,7 +110,6 @@ lgl_xml_template_read_templates_from_file (const gchar *utf8_filename)
 {
 	gchar      *filename;
 	xmlDocPtr   templates_doc;
-	GList      *templates = NULL;
 
 	LIBXML_TEST_VERSION;
 
@@ -400,7 +399,6 @@ xml_parse_label_ellipse_node (xmlNodePtr   label_node,
                               lglTemplate *template)
 {
 	gchar               *id;
-	gchar               *tmp;
 	gdouble              waste;
 	gdouble              w, h;
 	lglTemplateFrame    *frame;
@@ -682,7 +680,7 @@ static void
 xml_parse_markup_ellipse_node (xmlNodePtr          markup_node,
                                lglTemplateFrame   *frame)
 {
-	gdouble     x1, y1, w, h, r;
+	gdouble     x1, y1, w, h;
 	xmlNodePtr  node;
 
 	x1 = lgl_xml_get_prop_length (markup_node, "x1", 0);

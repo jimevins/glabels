@@ -148,8 +148,6 @@ lgl_xml_vendor_parse_vendor_node (xmlNodePtr vendor_node)
 {
 	lglVendor             *vendor;
 	gchar                 *name;
-        gchar                 *url;
-
 
 	LIBXML_TEST_VERSION;
 

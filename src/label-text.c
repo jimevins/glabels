@@ -447,8 +447,6 @@ static void
 buffer_changed_cb (GtkTextBuffer *textbuffer,
                    glLabelText   *ltext)
 {
-        glLabel *label;
-
         ltext->priv->size_changed = TRUE;
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));

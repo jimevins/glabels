@@ -24,6 +24,8 @@
 
 #include <math.h>
 
+#include "cairo-ellipse-path.h"
+
 #include "debug.h"
 
 
@@ -204,7 +206,7 @@ gl_cairo_markup_margin_ellipse_path (cairo_t                 *cr,
 {
         const lglTemplate      *template;
         const lglTemplateFrame *frame;
-        gdouble                 w, h, r, m;
+        gdouble                 w, h, m;
 
         gl_debug (DEBUG_PATH, "START");
 

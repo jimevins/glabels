@@ -1739,6 +1739,9 @@ build_template (glTemplateDesigner      *dialog)
                                                   w/upp, h/upp,
                                                   waste/upp);
 		break;
+        default:
+                g_assert_not_reached ();
+		break;
 	}
 	lgl_template_add_frame (template, frame);
 
