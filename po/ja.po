@@ -1,1927 +1,1903 @@
-# glabels ja.po
-# Copyright (C) 2001-2004 Free Software Foundation, Inc.
-# Takeshi Aihana <aihana@gnome.gr.jp>, 2001-2004.
+# glabels ja.po.
+# Copyright (C) 2001-2005,2007-2010 Free Software Foundation, Inc.
+# Takeshi Aihana <takeshi.aihana@gmail.com>, 2001-2005,2007-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glabels 2.0.0\n"
-"POT-Creation-Date: 2004-08-15 18:13-0400\n"
-"PO-Revision-Date: 2004-08-11 08:44+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"Project-Id-Version: glabels glabels_2_2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-06 00:33+0900\n"
+"PO-Revision-Date: 2010-03-06 00:31+0900\n"
+"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/glabels.c:55
-msgid "Show view debugging messages."
-msgstr "表示のデバッグ・メッセージを表示する"
+#: ../src/glabels.c:75 ../src/glabels-batch.c:70
+msgid "[FILE...]"
+msgstr "[FILE...]"
 
-#: src/glabels.c:58
-msgid "Show item debugging messages."
-msgstr "アイテムのデバッグ・メッセージを表示する"
+#: ../src/glabels.c:91
+msgid "- gLabels label designer"
+msgstr "- gLabels ラベル・デザイナ"
 
-#: src/glabels.c:61
-msgid "Show printing debugging messages."
-msgstr "印刷のデバッグ・メッセージを表示する"
+#: ../src/glabels-batch.c:54
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "出力するファイル名を指定する (デフォルト = \"output.pdf\")"
 
-#: src/glabels.c:64
-msgid "Show prefs debugging messages."
-msgstr "設定のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:67
-msgid "Show file debugging messages."
-msgstr "ファイルのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:70
-msgid "Show document debugging messages."
-msgstr "ドキュメントのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:73
-msgid "Show template debugging messages."
-msgstr "テンプレートのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:76
-msgid "Show paper debugging messages."
-msgstr "設定の用紙のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:79
-msgid "Show xml debugging messages."
-msgstr "XML のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:82
-msgid "Show document merge debugging messages."
-msgstr "ドキュメント結合のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:85
-msgid "Show commands debugging messages."
-msgstr "コマンドのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:88
-msgid "Show undo debugging messages."
-msgstr "Undo のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:91
-msgid "Show recent debugging messages."
-msgstr "最近開いたファイルのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:94
-msgid "Show window debugging messages."
-msgstr "ウィンドウのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:97
-msgid "Show ui debugging messages."
-msgstr "GUI のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:100
-msgid "Show property_bar debugging messages."
-msgstr "設定バーのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:103
-msgid "Show media select widget debugging messages."
-msgstr "メディア選択ウィジットのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:106
-msgid "Show mini preview widget debugging messages."
-msgstr "プレビュー・ウィジットのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:109
-msgid "Show pixbuf cache debugging messages."
-msgstr "pixbuf cache のデバッグ・メッセージを表示する"
-
-#: src/glabels.c:112
-msgid "Show widget debugging messages."
-msgstr "ウィジットのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:115
-msgid "Show object editor debugging messages."
-msgstr "オブジェクト・エディタのデバッグメッセージを表示する"
-
-#: src/glabels.c:118
-msgid "Turn on all debugging messages."
-msgstr "全てのデバッグ・メッセージを表示する"
-
-#: src/glabels.c:187
-msgid "Could not initialize Bonobo!\n"
-msgstr "Bonobo を初期化することができませんでした！\n"
-
-#: src/glabels-batch.c:48
-msgid "print this message"
-msgstr "このメッセージを表示する"
-
-#: src/glabels-batch.c:50
-msgid "print the version of glabels-batch being used"
-msgstr "使用している gLabel のバージョンを表示する"
-
-#: src/glabels-batch.c:52
-msgid "set output filename (default=\"output.ps\")"
-msgstr "出力するファイル名を指定する (デフォルト = \"output.ps\")"
-
-#: src/glabels-batch.c:52
+#: ../src/glabels-batch.c:54 ../src/glabels-batch.c:68
 msgid "filename"
 msgstr "ファイル名"
 
-#: src/glabels-batch.c:54
+#: ../src/glabels-batch.c:56
 msgid "number of sheets (default=1)"
 msgstr "用紙の数 (デフォルト = 1)"
 
-#: src/glabels-batch.c:54
+#: ../src/glabels-batch.c:56
 msgid "sheets"
 msgstr "用紙の数"
 
-#: src/glabels-batch.c:56
+#: ../src/glabels-batch.c:58
 msgid "number of copies (default=1)"
 msgstr "コピーの数 (デフォルト = 1)"
 
-#: src/glabels-batch.c:56
+#: ../src/glabels-batch.c:58
 msgid "copies"
 msgstr "コピーの数"
 
-#: src/glabels-batch.c:58 src/print-dialog.c:336
+#: ../src/glabels-batch.c:60
+msgid "first label on first sheet (default=1)"
+msgstr "最初のシートで最初のラベル (デフォルト = 1)"
+
+#: ../src/glabels-batch.c:60
+msgid "first"
+msgstr "first"
+
+#: ../src/glabels-batch.c:62 ../data/glade/print-custom-widget.glade.h:6
 msgid "print outlines (to test printer alignment)"
 msgstr "アウトラインを印刷する (印刷時の配置を確認するため)"
 
-#: src/glabels-batch.c:60 src/print-dialog.c:344
+#: ../src/glabels-batch.c:64 ../data/glade/print-custom-widget.glade.h:5
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "(画像をミラーするように) 反転して印刷する"
 
-#: src/glabels-batch.c:96
-msgid "[OPTION...] GLABELS_FILE..."
-msgstr "[オプション...] ファイル名..."
+#: ../src/glabels-batch.c:66 ../data/glade/print-custom-widget.glade.h:4
+msgid "print crop marks"
+msgstr "端のマークを揃えて印刷する"
 
-#: src/glabels-batch.c:116
+#: ../src/glabels-batch.c:68
+msgid "input file for merging"
+msgstr "ファイルをマージする"
+
+#: ../src/glabels-batch.c:96
+msgid "- batch process gLabels label files"
+msgstr "- gLabels のラベル・ファイルをバッチ処理する"
+
+#: ../src/glabels-batch.c:142
 #, c-format
-msgid "missing glabels file\n"
-msgstr "gLabel で使用するファイルがありません\n"
+msgid "cannot perform document merge with glabels file %s\n"
+msgstr "gLabels ファイル %s とドキュメントを結合できません\n"
 
-#: src/glabels-batch.c:157
+#: ../src/glabels-batch.c:164
 #, c-format
 msgid "cannot open glabels file %s\n"
-msgstr "gLabel で使用するファイル %s が開けません\n"
+msgstr "gLabels のファイル %s を開けません\n"
 
-#: src/window.c:244
+#: ../src/window.c:259
 msgid "(none) - gLabels"
 msgstr "(なし) - gLabels"
 
-#: src/window.c:414
+#: ../src/window.c:432
 msgid "(modified)"
 msgstr "(変更済み)"
 
-#: src/stock.c:65 data/ui/glabels-ui.xml.h:165
+#: ../src/stock.c:72
 msgid "_Select Mode"
 msgstr "選択モード(_S)"
 
-#: src/stock.c:66 data/ui/glabels-ui.xml.h:166
+#: ../src/stock.c:73
 msgid "_Text"
 msgstr "文字(_T)"
 
-#: src/stock.c:67 data/ui/glabels-ui.xml.h:151
+#: ../src/stock.c:74
 msgid "_Line"
 msgstr "直線(_L)"
 
-#: src/stock.c:68 data/ui/glabels-ui.xml.h:133
+#: ../src/stock.c:75
 msgid "_Box"
 msgstr "矩形(_B)"
 
-#: src/stock.c:69 data/ui/glabels-ui.xml.h:144
+#: ../src/stock.c:76
 msgid "_Ellipse"
 msgstr "楕円(_E)"
 
-#: src/stock.c:70 data/ui/glabels-ui.xml.h:149
+#: ../src/stock.c:77
 msgid "_Image"
 msgstr "画像(_I)"
 
-#: src/stock.c:71 data/ui/glabels-ui.xml.h:11
+#: ../src/stock.c:78
 msgid "Bar_code"
 msgstr "バーコード(_C)"
 
-#: src/stock.c:72
+#: ../src/stock.c:79
 msgid "_Merge Properties"
 msgstr "結合プロパティ(_M)"
 
-#: src/stock.c:73
+#: ../src/stock.c:80
 msgid "Object _Properties"
 msgstr "オブジェクトのプロパティ(_P)"
 
-#: src/stock.c:74 data/ui/glabels-ui.xml.h:13
+#: ../src/stock.c:81
 msgid "Bring to _Front"
 msgstr "前に持ってくる(_F)"
 
-#: src/stock.c:75 data/ui/glabels-ui.xml.h:110
+#: ../src/stock.c:82
 msgid "Send to _Back"
 msgstr "後ろにまわす(_B)"
 
-#: src/stock.c:76 data/ui/glabels-ui.xml.h:97
+#: ../src/stock.c:83
 msgid "Rotate _Left"
 msgstr "左に回転(_L)"
 
-#: src/stock.c:77 data/ui/glabels-ui.xml.h:98
+#: ../src/stock.c:84
 msgid "Rotate _Right"
 msgstr "右に回転(_R)"
 
-#: src/stock.c:78 data/ui/glabels-ui.xml.h:52
+#: ../src/stock.c:85
 msgid "Flip _Horizontally"
 msgstr "水平方向にフリップ(_H)"
 
-#: src/stock.c:79 data/ui/glabels-ui.xml.h:53
+#: ../src/stock.c:86
 msgid "Flip _Vertically"
 msgstr "垂直方向にフリップ(_V)"
 
-#: src/stock.c:80 data/ui/glabels-ui.xml.h:150
+#: ../src/stock.c:87
 msgid "_Lefts"
 msgstr "左端(_L)"
 
-#: src/stock.c:81 data/ui/glabels-ui.xml.h:162
+#: ../src/stock.c:88
 msgid "_Rights"
 msgstr "右端(_R)"
 
-#: src/stock.c:82 data/ui/glabels-ui.xml.h:134
+#: ../src/stock.c:89
 msgid "_Centers"
 msgstr "中央(_C)"
 
-#: src/stock.c:83 data/ui/glabels-ui.xml.h:167
+#: ../src/stock.c:90
 msgid "_Tops"
 msgstr "上端(_T)"
 
-#: src/stock.c:84
+#: ../src/stock.c:91
 msgid "Bottoms"
 msgstr "下部"
 
-#: src/stock.c:85
+#: ../src/stock.c:92
 msgid "Centers"
 msgstr "中央"
 
-#: src/stock.c:86 src/stock.c:87 data/ui/glabels-ui.xml.h:62
+#: ../src/stock.c:93 ../src/stock.c:94
 msgid "Label Ce_nter"
 msgstr "ラベルの中心(_N)"
 
-#: src/stock.c:88 data/ui/glabels-ui.xml.h:51
+#: ../src/stock.c:95 ../data/glade/property-bar.glade.h:3
 msgid "Fill color"
 msgstr "色で塗りつぶします"
 
-#: src/stock.c:89 data/ui/glabels-ui.xml.h:64
+#: ../src/stock.c:96 ../data/glade/property-bar.glade.h:8
 msgid "Line color"
 msgstr "線の色を選択します"
 
-#: src/stock.c:90 src/stock.c:92
+#: ../src/stock.c:97 ../src/stock.c:99
 msgid "Linked"
 msgstr "結合済"
 
-#: src/stock.c:91 src/stock.c:93
+#: ../src/stock.c:98 ../src/stock.c:100
 msgid "Not Linked"
 msgstr "結合なし"
 
-#: src/ui-property-bar.c:345 src/object-editor.c:499
+#. Menu entries.
+#: ../src/ui.c:93
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: ../src/ui.c:94
+msgid "Open Recent _Files"
+msgstr "最近開いたファイル(_F)"
+
+#: ../src/ui.c:95
+msgid "_Edit"
+msgstr "編集(_E)"
+
+#: ../src/ui.c:96
+msgid "_View"
+msgstr "表示(_V)"
+
+#: ../src/ui.c:97
+msgid "Customize Main Toolbar"
+msgstr "メイン・ツールバー"
+
+#: ../src/ui.c:98
+msgid "Customize Drawing Toolbar"
+msgstr "描画ツールバー"
+
+#: ../src/ui.c:99
+msgid "Customize Properties Toolbar"
+msgstr "プロパティ・ツールバー"
+
+#: ../src/ui.c:100
+msgid "_Objects"
+msgstr "オブジェクト(_O)"
+
+#: ../src/ui.c:101
+msgid "_Create"
+msgstr "オブジェクトの生成(_C)"
+
+#: ../src/ui.c:102
+msgid "_Order"
+msgstr "整列(_O)"
+
+#: ../src/ui.c:103
+msgid "_Rotate/Flip"
+msgstr "回転/フリップ(_R)"
+
+#: ../src/ui.c:104
+msgid "Align _Horizontal"
+msgstr "水平方向に配置(_H)"
+
+#: ../src/ui.c:105
+msgid "Align _Vertical"
+msgstr "垂直方向に配置(_V)"
+
+#: ../src/ui.c:106
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#. Popup entries.
+#: ../src/ui.c:109 ../src/ui.c:110
+msgid "Context Menu"
+msgstr "コンテキスト・メニュー"
+
+#: ../src/ui.c:115
+msgid "_New"
+msgstr "新規(_N)"
+
+#: ../src/ui.c:117
+msgid "Create a new file"
+msgstr "新しいファイルを作成します"
+
+#: ../src/ui.c:122
+msgid "_Open..."
+msgstr "開く(_O)..."
+
+#: ../src/ui.c:124
+msgid "Open a file"
+msgstr "ファイルを開きます"
+
+#: ../src/ui.c:129
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: ../src/ui.c:131
+msgid "Save current file"
+msgstr "このファイルを保存します"
+
+#: ../src/ui.c:136
+msgid "Save _As..."
+msgstr "別名で保存(_A)..."
+
+#: ../src/ui.c:138
+msgid "Save the current file to a different name"
+msgstr "このファイルに別の名前を付けて保存します"
+
+#: ../src/ui.c:143
+msgid "_Print..."
+msgstr "印刷(_P)..."
+
+#: ../src/ui.c:145
+msgid "Print the current file"
+msgstr "このファイルを印刷します"
+
+#: ../src/ui.c:150
+msgid "Properties..."
+msgstr "プロパティ..."
+
+#: ../src/ui.c:152
+msgid "Modify document properties"
+msgstr "ドキュメントのプロパティを修正します"
+
+#: ../src/ui.c:157
+msgid "Template _Designer..."
+msgstr "テンプレート・デザイナ(_D)..."
+
+#: ../src/ui.c:159
+msgid "Create a custom template"
+msgstr "独自のテンプレートを作成します"
+
+#: ../src/ui.c:164
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#: ../src/ui.c:166
+msgid "Close the current file"
+msgstr "このファイルを閉じます"
+
+#: ../src/ui.c:171
+msgid "_Quit"
+msgstr "終了(_Q)"
+
+#: ../src/ui.c:173
+msgid "Quit the program"
+msgstr "gLabels を終了します"
+
+#: ../src/ui.c:180
+msgid "Cut"
+msgstr "切り取り"
+
+#: ../src/ui.c:182
+msgid "Cut the selection"
+msgstr "選択範囲を切り取ります"
+
+#: ../src/ui.c:187
+msgid "Copy"
+msgstr "コピー"
+
+#: ../src/ui.c:189
+msgid "Copy the selection"
+msgstr "選択範囲をコピーします"
+
+#: ../src/ui.c:194
+msgid "Paste"
+msgstr "貼り付け"
+
+#: ../src/ui.c:196
+msgid "Paste the clipboard"
+msgstr "クリップボードの内容を貼り付けます"
+
+#: ../src/ui.c:201
+msgid "Delete"
+msgstr "削除"
+
+#: ../src/ui.c:203
+msgid "Delete the selected objects"
+msgstr "選択したオブジェクトを削除します"
+
+#: ../src/ui.c:208
+msgid "Select All"
+msgstr "全て選択"
+
+#: ../src/ui.c:210
+msgid "Select all objects"
+msgstr "全てのオブジェクトを選択します"
+
+#: ../src/ui.c:215
+msgid "Un-select All"
+msgstr "全て選択解除"
+
+#: ../src/ui.c:217
+msgid "Remove all selections"
+msgstr "選択範囲を解除します"
+
+#: ../src/ui.c:222
+msgid "Preferences"
+msgstr "gLabels の設定"
+
+#: ../src/ui.c:224
+msgid "Configure the application"
+msgstr "gLabels の設定を変更します"
+
+#: ../src/ui.c:231
+msgid "Zoom in"
+msgstr "拡大"
+
+#: ../src/ui.c:233
+msgid "Increase magnification"
+msgstr "拡大率を上げます"
+
+#: ../src/ui.c:238
+msgid "Zoom out"
+msgstr "縮小"
+
+#: ../src/ui.c:240
+msgid "Decrease magnification"
+msgstr "拡大率を下げます"
+
+#: ../src/ui.c:245
+msgid "Zoom 1 to 1"
+msgstr "拡大率 1:1"
+
+#: ../src/ui.c:247
+msgid "Restore scale to 100%"
+msgstr "拡大率を 100% に戻します"
+
+#: ../src/ui.c:252
+msgid "Zoom to fit"
+msgstr "ウィンドウにあわせる"
+
+#: ../src/ui.c:254
+msgid "Set scale to fit window"
+msgstr "ウィンドウの大きさに合わせます"
+
+#: ../src/ui.c:261
+msgid "Select Mode"
+msgstr "選択モード"
+
+#: ../src/ui.c:263
+msgid "Select, move and modify objects"
+msgstr "オブジェクトの選択や移動、編集を行います"
+
+#: ../src/ui.c:268 ../src/view-text.c:494
+#: ../data/glade/object-editor.glade.h:32
+msgid "Text"
+msgstr "文字"
+
+#: ../src/ui.c:270
+msgid "Create text object"
+msgstr "文字オブジェクトを作成します"
+
+#: ../src/ui.c:275
+msgid "Box"
+msgstr "矩形"
+
+#: ../src/ui.c:277
+msgid "Create box/rectangle object"
+msgstr "四角/三角のオブジェクトを作成します"
+
+#: ../src/ui.c:282 ../data/glade/object-editor.glade.h:20
+msgid "Line"
+msgstr "直線"
+
+#: ../src/ui.c:284
+msgid "Create line object"
+msgstr "直線オブジェクトを作成します"
+
+#: ../src/ui.c:289
+msgid "Ellipse"
+msgstr "楕円"
+
+#: ../src/ui.c:291
+msgid "Create ellipse/circle object"
+msgstr "楕円/円オブジェクトを作成します"
+
+#: ../src/ui.c:296 ../data/glade/object-editor.glade.h:16
+msgid "Image"
+msgstr "画像"
+
+#: ../src/ui.c:298
+msgid "Create image object"
+msgstr "画像オブジェクトを作成します"
+
+#: ../src/ui.c:303
+msgid "Barcode"
+msgstr "バーコード"
+
+#: ../src/ui.c:305
+msgid "Create barcode object"
+msgstr "バーコード・オブジェクトを作成します"
+
+#: ../src/ui.c:310
+msgid "Bring to front"
+msgstr "前面に持ってくる"
+
+#: ../src/ui.c:312
+msgid "Raise object to top"
+msgstr "オブジェクトを前面に持ってきます"
+
+#: ../src/ui.c:317
+msgid "Send to back"
+msgstr "後ろにまわす(_B)"
+
+#: ../src/ui.c:319
+msgid "Lower object to bottom"
+msgstr "オブジェクトを後ろにまわします"
+
+#: ../src/ui.c:324
+msgid "Rotate left"
+msgstr "左に回転する"
+
+#: ../src/ui.c:326
+msgid "Rotate object 90 degrees counter-clockwise"
+msgstr "オブジェクトを反時計回りに 90°回転させます"
+
+#: ../src/ui.c:331
+msgid "Rotate right"
+msgstr "右に回転する"
+
+#: ../src/ui.c:333
+msgid "Rotate object 90 degrees clockwise"
+msgstr "オブジェクトを時計回りに 90°回転させます"
+
+#: ../src/ui.c:338
+msgid "Flip horizontally"
+msgstr "水平方向にフリップする"
+
+#: ../src/ui.c:340
+msgid "Flip object horizontally"
+msgstr "オブジェクトを水平方向にひっくり返します"
+
+#: ../src/ui.c:345
+msgid "Flip vertically"
+msgstr "垂直方向にフリップする"
+
+#: ../src/ui.c:347
+msgid "Flip object vertically"
+msgstr "オブジェクトを垂直方向にひっくり返します"
+
+#: ../src/ui.c:352
+msgid "Align left"
+msgstr "左寄せ"
+
+#: ../src/ui.c:354
+msgid "Align objects to left edges"
+msgstr "オブジェクトを左端に配置します"
+
+#: ../src/ui.c:359
+msgid "Align right"
+msgstr "右寄せ"
+
+#: ../src/ui.c:361
+msgid "Align objects to right edges"
+msgstr "オブジェクトを右端に配置します"
+
+#: ../src/ui.c:366
+msgid "Align horizontal center"
+msgstr "中央寄せ (水平方向)"
+
+#: ../src/ui.c:368
+msgid "Align objects to horizontal centers"
+msgstr "オブジェクトを水平方向の中心に配置します"
+
+#: ../src/ui.c:373
+msgid "Align tops"
+msgstr "上寄せ"
+
+#: ../src/ui.c:375
+msgid "Align objects to top edges"
+msgstr "オブジェクトを上端に配置します"
+
+#: ../src/ui.c:380
+msgid "Align bottoms"
+msgstr "下寄せ"
+
+#: ../src/ui.c:382
+msgid "Align objects to bottom edges"
+msgstr "オブジェクトを下端に配置します"
+
+#: ../src/ui.c:387
+msgid "Align vertical center"
+msgstr "中央寄せ (垂直方向)"
+
+#: ../src/ui.c:389
+msgid "Align objects to vertical centers"
+msgstr "オブジェクトを垂直方向の中心に配置します"
+
+#: ../src/ui.c:394
+msgid "Center horizontally"
+msgstr "水平移動"
+
+#: ../src/ui.c:396
+msgid "Center objects to horizontal label center"
+msgstr "オブジェクトをラベルの中心に水平移動します"
+
+#: ../src/ui.c:401
+msgid "Center vertically"
+msgstr "垂直移動"
+
+#: ../src/ui.c:403
+msgid "Center objects to vertical label center"
+msgstr "オブジェクトをラベルの中心に垂直移動します"
+
+#: ../src/ui.c:408
+msgid "Merge properties"
+msgstr "プロパティの結合"
+
+#: ../src/ui.c:410
+msgid "Edit merge properties"
+msgstr "結合したプロパティを編集します"
+
+#: ../src/ui.c:417
+msgid "Contents"
+msgstr "目次"
+
+#: ../src/ui.c:419
+msgid "Open glabels manual"
+msgstr "gLabels のマニュアルを開きます"
+
+#: ../src/ui.c:424
+msgid "About..."
+msgstr "情報..."
+
+#: ../src/ui.c:426
+msgid "About glabels"
+msgstr "gLabels について"
+
+#: ../src/ui.c:436
+msgid "Property toolbar"
+msgstr "プロパティのツールバー"
+
+#: ../src/ui.c:438
+msgid "Change the visibility of the property toolbar in the current window"
+msgstr "プロパティ・ツールバーの表示/非表示を変更します"
+
+#: ../src/ui.c:444 ../src/ui.c:489 ../src/ui.c:497
+msgid "Show tooltips"
+msgstr "ツールチップの表示"
+
+#: ../src/ui.c:446
+msgid "Show tooltips for property toolbar"
+msgstr "プロパティ・ツールバーにツールチップを表示します"
+
+#: ../src/ui.c:452
+msgid "Grid"
+msgstr "グリッド"
+
+#: ../src/ui.c:454
+msgid "Change the visibility of the grid in the current window"
+msgstr "ラベルのグリッド (格子線) の表示/非表示を変更します"
+
+#: ../src/ui.c:460
+msgid "Markup"
+msgstr "マークアップ"
+
+#: ../src/ui.c:462
+msgid "Change the visibility of markup lines in the current window"
+msgstr "ラベルの外枠線の表示/非表示を変更します"
+
+#: ../src/ui.c:473
+msgid "Main toolbar"
+msgstr "メイン・ツールバー"
+
+#: ../src/ui.c:475
+msgid "Change the visibility of the main toolbar in the current window"
+msgstr "メイン・ツールバーの表示/非表示を変更します"
+
+#: ../src/ui.c:481
+msgid "Drawing toolbar"
+msgstr "ツールバーの表示方法"
+
+#: ../src/ui.c:483
+msgid "Change the visibility of the drawing toolbar in the current window"
+msgstr "ツールバーの表示/非表示を変更します"
+
+#: ../src/ui.c:491
+msgid "Show tooltips for main toolbar"
+msgstr "メイン・ツールバーにツールチップを表示します"
+
+#: ../src/ui.c:499
+msgid "Show tooltips for drawing toolbar"
+msgstr "ツールバーにツールチップを表示します"
+
+#: ../src/ui-property-bar.c:1232 ../src/object-editor.c:587
+#: ../src/object-editor.c:593
 msgid "Default"
 msgstr "デフォルト"
 
-#: src/ui-property-bar.c:360 src/object-editor.c:512
-msgid "No fill"
-msgstr "塗りつぶさない"
-
-#: src/ui-property-bar.c:375 src/object-editor.c:505
+#: ../src/ui-property-bar.c:1239 ../src/object-editor.c:599
 msgid "No line"
 msgstr "線を消す"
 
-#: src/ui-sidebar.c:180
+#: ../src/ui-property-bar.c:1247 ../src/object-editor.c:606
+msgid "No fill"
+msgstr "塗りつぶさない"
+
+#: ../src/ui-sidebar.c:152
 msgid "Object properties"
 msgstr "オブジェクトのプロパティ"
 
-#: src/commands.c:385
-msgid ""
-"A label and business card creation program for GNOME.\n"
-" \n"
-"Glabels is free software; you can redistribute it and/or modify it under the "
-"terms of the GNU General Public License as published by the Free Software "
-"Foundation; either version 2 of the License, or (at your option) any later "
-"version.\n"
-" \n"
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details.\n"
-msgstr ""
-"GNOME 向けのラベル/ビジネスカードの作成プログラムです。\n"
-"\n"
-"Glabels はフリーソフトです。フリーソフトウェア財団が定める GNU 一般公有使用許"
-"諾契約書の第2版もしくはそれ以降のバージョンの下で複製、改編、再配布が認められ"
-"ています。\n"
-"\n"
-"このプログラムが役に立つことを望む中で配布されていますが、完全無保証です。販"
-"売目的または商用目的の保証はありません。詳細については GNU 一般公有使用許諾契"
-"約書を参照して下さい。\n"
+#: ../src/ui-commands.c:1084
+msgid "Glabels includes contributions from:"
+msgstr "gLabels の開発に貢献してくれた方々:"
 
-#: src/commands.c:399
+#: ../src/ui-commands.c:1090
 msgid "See the file AUTHORS for additional credits,"
 msgstr "補足のクレジットについては AUTHORS ファイルをご覧になるか、"
 
-#: src/commands.c:400
+#: ../src/ui-commands.c:1091
 msgid "or visit http://glabels.sourceforge.net/"
 msgstr "または http://glabels.sourceforge.net/ を訪れてみて下さい。"
 
-#: src/commands.c:409
-msgid " "
-msgstr " "
+#: ../src/ui-commands.c:1103
+msgid "A label and business card creation program.\n"
+msgstr "ラベルと名刺をデザインするプログラムです。\n"
 
-#: src/commands.c:424
+#: ../src/ui-commands.c:1107
+msgid "translator-credits"
+msgstr ""
+"相花 毅 <takeshi.aihana@gmail.com>\n"
+"日本GNOMEユーザー会 http://www.gnome.gr.jp"
+
+#: ../src/ui-commands.c:1110
+msgid ""
+"Glabels is free software; you can redistribute it and/or modify it\n"
+"under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2 of the License, or\n"
+"(at your option) any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful, but\n"
+"WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
+"the GNU General Public License for more details.\n"
+msgstr ""
+"gLabels はフリーソフトウェアです。すなわち、フリーソフトウェア財団が定める\n"
+"GNU 一般公衆使用許諾契約書の第2版もしくは (オプションで) それ以降のバージョン"
+"の\n"
+"下で複製や改編、再配布が認められています。\n"
+"\n"
+"このプログラムが役に立つことを望む中で配布されていますが、完全無保証です。\n"
+"販売目的または商用目的の保証はありません。\n"
+"詳細については GNU 一般公衆使用許諾契約書をご覧下さい。\n"
+
+#: ../src/ui-commands.c:1136
 msgid "glabels"
 msgstr "gLabels"
 
-#: src/file.c:100
+#: ../src/file.c:91
 msgid "New Label or Card"
 msgstr "新規ラベルまたはカード"
 
-#: src/file.c:132 src/file.c:304
-msgid "Media Type"
-msgstr "メディアの種類"
-
-#: src/file.c:138 src/file.c:310
-msgid "Label orientation"
-msgstr "ラベルの向き"
-
-#: src/file.c:269
+#: ../src/file.c:191
 msgid "Label properties"
 msgstr "ラベルのプロパティ"
 
-#: src/file.c:452 src/file.c:870
+#: ../src/file.c:292 ../src/file.c:578
 msgid "All files"
 msgstr "全てのファイル"
 
-#: src/file.c:457 src/file.c:875
+#: ../src/file.c:297 ../src/file.c:583
 msgid "gLabels documents"
 msgstr "gLabels のドキュメント"
 
-#: src/file.c:505 src/file.c:617 src/file.c:934 src/file.c:1130
+#: ../src/file.c:343 ../src/file.c:640
 msgid "Empty file name selection"
 msgstr "ファイル名の入力欄が空です"
 
-#: src/file.c:506 src/file.c:520 src/file.c:618 src/file.c:632
+#: ../src/file.c:346 ../src/file.c:362
 msgid "Please select a file or supply a valid file name"
 msgstr "既存のファイルを選択するか、または正しいファイル名を指定して下さい。"
 
-#: src/file.c:519 src/file.c:631
+#: ../src/file.c:359
 msgid "File does not exist"
 msgstr "ファイルがありません。"
 
-#: src/file.c:563 data/ui/glabels-ui.xml.h:75
-msgid "Open"
-msgstr "開く"
-
-#: src/file.c:565
-msgid "Open label"
-msgstr "ラベルを開きます"
-
-#: src/file.c:707
+#: ../src/file.c:433
 #, c-format
 msgid "Could not open file \"%s\""
 msgstr "ファイル \"%s\" が開けませんでした"
 
-#: src/file.c:715
+#: ../src/file.c:436
 msgid "Not a supported file format"
 msgstr "サポートしていないファイル形式です。"
 
-#: src/file.c:797 src/file.c:979 src/file.c:1174
+#: ../src/file.c:513 ../src/file.c:690
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "ファイル \"%s\" を保存できませんでした"
 
-#: src/file.c:805 src/file.c:987 src/file.c:1182
+#: ../src/file.c:517 ../src/file.c:694
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "データ保存中にエラーが発生しました。データはまだ保存されていません。"
 
-#: src/file.c:848 src/file.c:1048
+#: ../src/file.c:556
 #, c-format
 msgid "Save \"%s\" as"
 msgstr "\"%s\" に名前を付けて保存"
 
-#: src/file.c:935 src/file.c:1131
+#: ../src/file.c:643
 msgid "Please supply a valid file name"
 msgstr "正しいファイル名を指定して下さい"
 
-#: src/file.c:952 src/file.c:1147
+#: ../src/file.c:664
 #, c-format
 msgid "Overwrite file \"%s\"?"
 msgstr "ファイル \"%s\" に上書きしますか？"
 
-#: src/file.c:960 src/file.c:1155
+#: ../src/file.c:668
 msgid "File already exists."
 msgstr "ファイルが既に存在します。"
 
-#: src/file.c:1271
+#: ../src/file.c:764
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "終了する前にドキュメント \"%s\" に対する変更を保存しますか？"
+msgstr "終了する前にドキュメント \"%s\" に対する変更点を保存しますか？"
 
-#: src/file.c:1279
+#: ../src/file.c:768
 msgid "Your changes will be lost if you don't save them."
 msgstr "保存しないと変更したデータを失うことになります。"
 
-#: src/file.c:1282
+#: ../src/file.c:771
 msgid "Close without saving"
 msgstr "保存せずに閉じる"
 
 #. Should not happen
-#: src/prefs.c:156 src/prefs.c:163 data/glade/prefs-dialog.glade.h:23
-#: data/glade/object-editor.glade.h:37
+#: ../src/prefs.c:159 ../src/prefs.c:166
+#: ../data/glade/object-editor.glade.h:43
+#: ../data/glade/prefs-dialog.glade.h:22
 msgid "points"
 msgstr "ポイント"
 
-#: src/prefs.c:158 data/glade/object-editor.glade.h:36
-#: data/glade/template-designer.glade.h:74
+#: ../src/prefs.c:161 ../data/glade/object-editor.glade.h:42
+#: ../data/glade/template-designer.glade.h:64
 msgid "inches"
 msgstr "[インチ]"
 
-#: src/prefs.c:160
+#: ../src/prefs.c:163
 msgid "mm"
 msgstr "[ミリ]"
 
-#: src/prefs-dialog.c:248 data/glade/prefs-dialog.glade.h:22
+#: ../src/prefs-dialog.c:162 ../data/glade/prefs-dialog.glade.h:21
 msgid "gLabels Preferences"
 msgstr "gLabels の設定"
 
-#.
-#. * Submenu: Order
-#.
-#: src/view.c:3570 data/ui/glabels-ui.xml.h:157
-msgid "_Order"
-msgstr "順序(_O)"
-
-#.
-#. * Submenu: Rotate/Flip
-#.
-#: src/view.c:3591 data/ui/glabels-ui.xml.h:163
-msgid "_Rotate/Flip"
-msgstr "回転/フリップ(_R)"
-
-#.
-#. * Submenu: Align Horizontally
-#.
-#: src/view.c:3624
-msgid "Align _Horizontally"
-msgstr "水平方向に配置(_H)"
-
-#.
-#. * Submenu: Align Vertically
-#.
-#: src/view.c:3663
-msgid "Align _Vertically"
-msgstr "垂直方向に配置(_V)"
-
-#: src/view.c:3724 data/ui/glabels-ui.xml.h:140
-msgid "_Delete"
-msgstr "削除(_D)"
-
 #. Build editor.
-#: src/view-box.c:223
+#: ../src/view-box.c:175
 msgid "Box object properties"
 msgstr "矩形オブジェクトのプロパティ"
 
 #. Build editor.
-#: src/view-ellipse.c:223
+#: ../src/view-ellipse.c:175
 msgid "Ellipse object properties"
 msgstr "楕円オブジェクトのプロパティ"
 
 #. Build editor.
-#: src/view-line.c:223
+#: ../src/view-line.c:174
 msgid "Line object properties"
 msgstr "直線オブジェクトのプロパティ"
 
 #. Build editor.
-#: src/view-image.c:222
+#: ../src/view-image.c:174
 msgid "Image object properties"
 msgstr "画像オブジェクトのプロパティ"
 
 #. Build editor.
-#: src/view-text.c:250
+#: ../src/view-text.c:178
 msgid "Text object properties"
 msgstr "文字オブジェクトのプロパティ"
 
-#: src/view-text.c:562 data/glade/object-editor.glade.h:28
-msgid "Text"
-msgstr "文字"
-
 #. Build editor.
-#: src/view-barcode.c:209
+#: ../src/view-barcode.c:174
 msgid "Barcode object properties"
 msgstr "バーコード・オブジェクトのプロパティ"
 
-#: src/view-barcode.c:579 src/print.c:1088
-msgid "Invalid barcode data"
-msgstr "おかしなバーコード・データ"
+#: ../src/object-editor-image-page.c:270
+msgid "All Files"
+msgstr "全てのファイル"
 
-#: src/merge-properties-dialog.c:231
+#: ../src/object-editor-image-page.c:275
+msgid "All Images"
+msgstr "全ての画像"
+
+#: ../src/object-editor-image-page.c:290
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/merge-properties-dialog.c:263
 msgid "Merge Properties"
 msgstr "結合プロパティ"
 
-#. ---- Source section ----
-#: src/merge-properties-dialog.c:237
-msgid "Source"
-msgstr "ソース"
-
-#: src/merge-properties-dialog.c:245
-msgid "Format:"
-msgstr "書式:"
-
-#. Location line
-#: src/merge-properties-dialog.c:273
-msgid "Location:"
-msgstr "場所:"
-
-#: src/merge-properties-dialog.c:282 src/merge-properties-dialog.c:393
+#: ../src/merge-properties-dialog.c:289 ../src/merge-properties-dialog.c:397
 msgid "Select merge-database source"
 msgstr "結合データベース・ソースの選択"
 
-#: src/merge-properties-dialog.c:289 src/merge-properties-dialog.c:404
+#: ../src/merge-properties-dialog.c:298 ../src/merge-properties-dialog.c:417
 msgid "N/A"
 msgstr "N/A"
 
-#. ---- Sample Fields section ----
-#: src/merge-properties-dialog.c:300
-msgid "Record selection/preview:"
-msgstr "選択範囲/プレビューの記録:"
-
-#: src/merge-properties-dialog.c:326
+#: ../src/merge-properties-dialog.c:324
 msgid "Select"
 msgstr "選択"
 
-#: src/merge-properties-dialog.c:334
+#: ../src/merge-properties-dialog.c:332
 msgid "Record/Field"
 msgstr "レコード/フィールド"
 
-#: src/merge-properties-dialog.c:342 data/glade/object-editor.glade.h:9
+#: ../src/merge-properties-dialog.c:340 ../data/glade/object-editor.glade.h:10
 msgid "Data"
 msgstr "データ"
 
-#: src/print-dialog.c:266 data/ui/glabels-ui.xml.h:82
-msgid "Print"
-msgstr "印刷"
+#: ../src/merge-properties-dialog.c:410
+msgid "Fixed"
+msgstr "固定"
 
-#: src/print-dialog.c:281
-msgid "_Job"
-msgstr "ジョブ(_J)"
+#. ===================================================================
+#: ../src/print-op.c:237 ../src/wdgt-print-copies.c:171
+#: ../data/templates/misc-iso-templates.xml.h:34
+msgid "Labels"
+msgstr "ラベル"
 
-#: src/print-dialog.c:286
-msgid "P_rinter"
-msgstr "プリンタ(_R)"
-
-#. ----------- Add simple-copies widget ------------
-#: src/print-dialog.c:314
-msgid "Copies"
-msgstr "コピー"
-
-#. ------- Add merge control widget ------------
-#: src/print-dialog.c:322
-msgid "Document merge control"
-msgstr "ドキュメントをコントロールにマージする"
-
-#. ----------- Add custom print options area ------------
-#: src/print-dialog.c:330
-msgid "Options"
-msgstr "オプション"
-
-#: src/print-dialog.c:351
-msgid "print crop marks"
-msgstr "端のマークを揃えて印刷する"
-
-#: src/print-dialog.c:553 src/print-dialog.c:592
-msgid "Print preview"
-msgstr "印刷プレビュー"
-
-#: src/template-designer.c:409 data/glade/template-designer.glade.h:73
+#: ../src/template-designer.c:358
 msgid "gLabels Template Designer"
 msgstr "gLabels テンプレート・デザイナ"
 
-#: src/bc.c:60
+#: ../src/template-designer.c:419
+msgid "Welcome"
+msgstr "ようこそ"
+
+#: ../src/template-designer.c:463
+msgid "Name and Description"
+msgstr "名前と説明"
+
+#: ../src/template-designer.c:516
+msgid "Page Size"
+msgstr "用紙の大きさ"
+
+#: ../src/template-designer.c:587
+msgid "Label or Card Shape"
+msgstr "ラベルまたはカードの形状"
+
+#: ../src/template-designer.c:637
+msgid "Label or Card Size"
+msgstr "ラベルまたはカードの大きさ"
+
+#: ../src/template-designer.c:737
+msgid "Label Size (round)"
+msgstr "ラベルの大きさ (円)"
+
+#: ../src/template-designer.c:820
+msgid "Label Size (CD/DVD)"
+msgstr "ラベルの大きさ (CD/DVD)"
+
+#: ../src/template-designer.c:913
+msgid "Number of Layouts"
+msgstr "レイアウトの数"
+
+#: ../src/template-designer.c:976
+msgid "Layout(s)"
+msgstr "レイアウト"
+
+#: ../src/template-designer.c:1087
+msgid "Design Completed"
+msgstr "デザインが完了しました"
+
+#: ../src/template-designer.c:1253
+msgid ""
+"<span foreground='red' weight='bold'>Brand and part# match an existing "
+"template!</span>"
+msgstr ""
+"<span foreground='red' weight='bold'>ブランド/製造元とパーツ番号が既存のテン"
+"プレートと同じです！</span>"
+
+#: ../src/bc.c:67
 msgid "POSTNET (any)"
 msgstr "POSTNET (何でも)"
 
-#: src/bc.c:63
+#: ../src/bc.c:70
 msgid "POSTNET-5 (ZIP only)"
 msgstr "POSTNET-5 (ZIP のみ)"
 
-#: src/bc.c:66
+#: ../src/bc.c:73
 msgid "POSTNET-9 (ZIP+4)"
 msgstr "POSTNET-9 (ZIP+4)"
 
-#: src/bc.c:69
+#: ../src/bc.c:76
 msgid "POSTNET-11 (DPBC)"
 msgstr "POSTNET-11 (DPBC)"
 
-#: src/bc.c:72
+#: ../src/bc.c:79
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:82
 msgid "EAN (any)"
 msgstr "EAN (何でも)"
 
-#: src/bc.c:75
+#: ../src/bc.c:85
 msgid "EAN-8"
 msgstr "EAN-8"
 
-#: src/bc.c:78
+#: ../src/bc.c:88
 msgid "EAN-8 +2"
 msgstr "EAN-8 +2"
 
-#: src/bc.c:81
+#: ../src/bc.c:91
 msgid "EAN-8 +5"
 msgstr "EAN-8 +5"
 
-#: src/bc.c:84
+#: ../src/bc.c:94
 msgid "EAN-13"
 msgstr "EAN-13"
 
-#: src/bc.c:87
+#: ../src/bc.c:97
 msgid "EAN-13 +2"
 msgstr "EAN-13 +2"
 
-#: src/bc.c:90
+#: ../src/bc.c:100
 msgid "EAN-13 +5"
 msgstr "EAN-13 +5"
 
-#: src/bc.c:93
+#: ../src/bc.c:103
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A または UPC-E)"
 
-#: src/bc.c:96
+#: ../src/bc.c:106
 msgid "UPC-A"
 msgstr "UPC-A"
 
-#: src/bc.c:99
+#: ../src/bc.c:109
 msgid "UPC-A +2"
 msgstr "UPC-A +2"
 
-#: src/bc.c:102
+#: ../src/bc.c:112
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: src/bc.c:105
+#: ../src/bc.c:115
 msgid "UPC-E"
 msgstr "UPC-E"
 
-#: src/bc.c:108
+#: ../src/bc.c:118
 msgid "UPC-E +2"
 msgstr "UPC-E +2"
 
-#: src/bc.c:111
+#: ../src/bc.c:121
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: src/bc.c:114
+#: ../src/bc.c:124
 msgid "ISBN"
 msgstr "ISBN"
 
-#: src/bc.c:117
+#: ../src/bc.c:127
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: src/bc.c:120
+#: ../src/bc.c:130
 msgid "Code 39"
 msgstr "Code 39"
 
-#: src/bc.c:123
+#: ../src/bc.c:133
 msgid "Code 128"
 msgstr "Code 128"
 
-#: src/bc.c:126
+#: ../src/bc.c:136
 msgid "Code 128C"
 msgstr "Code 128C"
 
-#: src/bc.c:129
+#: ../src/bc.c:139
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: src/bc.c:132
+#: ../src/bc.c:142
 msgid "Interleaved 2 of 5"
 msgstr "綴じ込み 2/5"
 
-#: src/bc.c:135
+#: ../src/bc.c:145
 msgid "Codabar"
 msgstr "Codabar"
 
-#: src/bc.c:138
+#: ../src/bc.c:148
 msgid "MSI"
 msgstr "MSI"
 
-#: src/bc.c:141
+#: ../src/bc.c:151
 msgid "Plessey"
 msgstr "Plessey"
 
-#: src/label.c:569
+#: ../src/bc.c:154
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/label.c:531
 msgid "Untitled"
 msgstr "タイトルなし"
 
-#: src/xml-label.c:176 src/xml-label.c:213
+#: ../src/label-barcode.c:426
+msgid "Barcode data empty"
+msgstr "バーコード・データが空です"
+
+#: ../src/label-barcode.c:430
+msgid "Invalid barcode data"
+msgstr "バーコード・データが間違っています"
+
+#: ../src/xml-label.c:193
 msgid "xmlParseFile error"
 msgstr "xmlParseFile エラー"
 
-#: src/xml-label.c:250
+#: ../src/xml-label.c:234
+msgid "xmlParseDoc error"
+msgstr "xmlParseDoc エラー"
+
+#: ../src/xml-label.c:270
 msgid "No document root"
 msgstr "root ドキュメントではありません"
 
-#: src/xml-label.c:264
+#: ../src/xml-label.c:278
 msgid "Importing from glabels 0.1 format"
 msgstr "gLabels 0.1 形式からインポートする"
 
-#: src/xml-label.c:272
+#: ../src/xml-label.c:287
 msgid "Importing from glabels 0.4 format"
 msgstr "gLabels 0.4 形式からインポートする"
 
-#: src/xml-label.c:279
-msgid "Importing from glabels 1.91 format"
-msgstr "gLabels 1.91 形式からインポートする"
+#: ../src/xml-label.c:296
+#, c-format
+msgid "Unknown glabels Namespace -- Using %s"
+msgstr "glabels の名前空間が不明です -- %s を利用して下さい"
 
-#: src/xml-label.c:282
-msgid "bad document, unknown glabels Namespace"
-msgstr "ドキュメントの種類が間違っています。Glabels 名前空間が見つかりません。"
-
-#: src/xml-label.c:311 src/xml-label-04.c:75 src/xml-label-191.c:131
+#: ../src/xml-label.c:327 ../src/xml-label-04.c:79
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "おかしな root のノード = \"%s\""
 
-#: src/xml-label.c:348 src/xml-label-191.c:165
+#: ../src/xml-label.c:364
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "Document ノードにおかしな root のノード = \"%s\""
 
-#: src/xml-label.c:393 src/xml-label-04.c:123 src/xml-label-191.c:197
+#: ../src/xml-label.c:409 ../src/xml-label-04.c:127
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "おかしなノード = \"%s\""
 
-#: src/xml-label.c:796 src/xml-label-191.c:605
+#: ../src/xml-label.c:851
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "Data ノードにおかしなノード = \"%s\""
 
-#: src/xml-label.c:962 libglabels/xml-template.c:535
+#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:682
 msgid "Utf8 conversion error."
 msgstr "Utf8 変換エラーです。"
 
-#: src/xml-label.c:969 libglabels/xml-template.c:542
+#: ../src/xml-label.c:1095
 msgid "Problem saving xml file."
 msgstr "XML ファイルの保存で問題があります"
 
-#. This should always be an id, but just in case a name
-#. slips by!
-#: src/xml-label-191.c:680 libglabels/xml-template.c:199
-#, c-format
-msgid "Unknown page size id \"%s\", trying as name"
-msgstr "不明なページ・サイズの ID \"%s\" です。名前として扱います。"
-
-#: src/xml-label-191.c:690 libglabels/xml-template.c:209
-#, c-format
-msgid "Unknown page size id or name \"%s\""
-msgstr "不明なページ・サイズの ID または名前 \"%s\" です。"
-
-#: src/merge.c:172 src/merge.c:213 src/merge.c:399 src/merge.c:402
+#: ../src/merge.c:170 ../src/merge.c:211 ../src/merge.c:375 ../src/merge.c:378
 msgid "None"
 msgstr "なし"
 
-#: src/merge-init.c:53
+#: ../src/merge-init.c:59
 msgid "Text file with comma delimeters (CSV)"
 msgstr "コンマで区切ったテキスト・ファイル (CSV)"
 
-#: src/merge-init.c:60
+#: ../src/merge-init.c:66
 msgid "Text file with colon delimeters"
 msgstr "コロンで区切ったテキスト・ファイル"
 
-#: src/merge-init.c:67
+#: ../src/merge-init.c:73
 msgid "Text file with tab delimeters"
 msgstr "タブで区切ったテキスト・ファイル"
 
-#: src/wdgt-image-select.c:201 data/glade/object-editor.glade.h:11
-msgid "File:"
-msgstr "ファイル:"
+#: ../src/merge-init.c:82
+msgid "Data from default Evolution Addressbook"
+msgstr "Evolution アドレス帳のデータ"
 
-#: src/wdgt-image-select.c:245 data/glade/object-editor.glade.h:16
-msgid "Key:"
-msgstr "キー:"
+#: ../src/merge-init.c:88
+msgid "Data from a file containing VCards"
+msgstr "VCards 形式のデータを含むファイル"
 
-#: src/wdgt-print-copies.c:179
+#: ../src/merge-evolution.c:309
+msgid "Couldn't construct query"
+msgstr "クエリを構築できませんでした"
+
+#: ../src/merge-evolution.c:315 ../src/merge-evolution.c:326
+msgid "Couldn't open addressbook."
+msgstr "アドレス帳を開けませんでした"
+
+#: ../src/merge-evolution.c:341
+msgid "Couldn't list available fields."
+msgstr "利用可能な領域の一覧を生成できませんでした"
+
+#: ../src/merge-evolution.c:377
+msgid "Couldn't get contacts."
+msgstr "連絡先を取得できませんでした"
+
+#: ../src/wdgt-print-copies.c:153
 msgid "Sheets:"
 msgstr "用紙:"
 
-#: src/wdgt-print-copies.c:197
-msgid "Labels"
-msgstr "ラベル"
-
-#: src/wdgt-print-copies.c:200
+#: ../src/wdgt-print-copies.c:173
 msgid "from:"
 msgstr "開始:"
 
-#: src/wdgt-print-copies.c:207
+#: ../src/wdgt-print-copies.c:178
 msgid "to:"
 msgstr "終了:"
 
-#: src/wdgt-print-merge.c:178
+#: ../src/wdgt-print-merge.c:154
 msgid "Start on label"
 msgstr "ラベルの開始"
 
-#: src/wdgt-print-merge.c:186
+#: ../src/wdgt-print-merge.c:159
 msgid "on 1st sheet"
 msgstr "(最初のシート)"
 
-#: src/wdgt-print-merge.c:195
+#: ../src/wdgt-print-merge.c:168
 msgid "Copies:"
 msgstr "コピー:"
 
-#: src/wdgt-print-merge.c:201
+#: ../src/wdgt-print-merge.c:173
 msgid "Collate"
 msgstr "製本"
 
-#: src/wdgt-media-select.c:269 data/glade/template-designer.glade.h:29
-msgid "Description:"
-msgstr "説明:"
+#: ../src/wdgt-media-select.c:288 ../src/wdgt-media-select.c:292
+#: ../src/wdgt-media-select.c:297 ../src/wdgt-media-select.c:306
+#: ../src/wdgt-media-select.c:309 ../src/wdgt-media-select.c:402
+#: ../src/wdgt-media-select.c:609 ../src/wdgt-media-select.c:618
+msgid "Any"
+msgstr "いずれか"
 
-#: src/wdgt-media-select.c:279 data/glade/template-designer.glade.h:53
-msgid "Page size:"
-msgstr "用紙のサイズ:"
-
-#: src/wdgt-media-select.c:290
-msgid "Label size:"
-msgstr "ラベルのサイズ:"
-
-#: src/wdgt-media-select.c:301
-msgid "Layout:"
-msgstr "レイアウト:"
-
-#: src/wdgt-media-select.c:578
-#, c-format
-msgid "%d x %d  (%d per sheet)"
-msgstr "%d x %d  (%d 個/シート)"
-
-#: src/wdgt-media-select.c:582
+#: ../src/wdgt-media-select.c:643
 #, c-format
 msgid "%d per sheet"
 msgstr "%d /シート"
 
-#: src/wdgt-media-select.c:614
+#: ../src/wdgt-media-select.c:673
 #, c-format
 msgid "%s x %s %s"
 msgstr "%s x %s %s"
 
-#: src/wdgt-media-select.c:619
+#: ../src/wdgt-media-select.c:678
 #, c-format
 msgid "%.5g x %.5g %s"
 msgstr "%.5g x %.5g %s"
 
-#: src/wdgt-media-select.c:630 src/wdgt-media-select.c:644
+#: ../src/wdgt-media-select.c:689 ../src/wdgt-media-select.c:703
 #, c-format
 msgid "%s %s diameter"
 msgstr "%s %s 倍率"
 
-#: src/wdgt-media-select.c:634 src/wdgt-media-select.c:648
+#: ../src/wdgt-media-select.c:693 ../src/wdgt-media-select.c:707
 #, c-format
 msgid "%.5g %s diameter"
 msgstr "%.5g %s 倍率"
 
-#: src/wdgt-rotate-label.c:193
-msgid "Rotate"
-msgstr "回転させる"
+#: ../src/wdgt-media-select.c:781
+msgid "No recent templates found."
+msgstr "最近開いたテンプレートはありません"
+
+#: ../src/wdgt-media-select.c:782
+msgid "Try selecting a template from the \"Search all templates\" page."
+msgstr ""
+"\"全てのテンプレートから検索する\" のページからテンプレートを一つ選択してみて"
+"下さい。"
+
+#: ../src/wdgt-media-select.c:861
+msgid "No match."
+msgstr "見つかりません"
+
+#: ../src/wdgt-media-select.c:862
+msgid "Try selecting a different brand, page size or category."
+msgstr "別のブランドや用紙の大きさ、またはカテゴリを指定してみて下さい。"
 
 #. This is the default custom color
-#: src/mygal/color-palette.c:396
+#: ../src/mygal/color-palette.c:389
 msgid "custom"
 msgstr "カスタム"
 
-#. "Custom" color - we'll pop up a GnomeColorPicker
-#: src/mygal/color-palette.c:438
+#. "Custom" color - we'll pop up a GtkColorButton
+#: ../src/mygal/color-palette.c:431
 msgid "Custom Color:"
 msgstr "カスタム色:"
 
-#: src/mygal/color-palette.c:446
+#: ../src/mygal/color-palette.c:439
 msgid "Choose Custom Color"
 msgstr "カスタム・カラーの選択"
 
-#: src/mygal/color-palette.c:579
+#: ../src/mygal/color-palette.c:572
 msgid "black"
 msgstr "黒"
 
-#: src/mygal/color-palette.c:580
+#: ../src/mygal/color-palette.c:573
 msgid "light brown"
 msgstr "淡い茶"
 
-#: src/mygal/color-palette.c:581
+#: ../src/mygal/color-palette.c:574
 msgid "brown gold"
 msgstr "茶銀"
 
-#: src/mygal/color-palette.c:582
+#: ../src/mygal/color-palette.c:575
 msgid "dark green #2"
 msgstr "暗い緑 #2"
 
-#: src/mygal/color-palette.c:583
+#: ../src/mygal/color-palette.c:576
 msgid "navy"
 msgstr "ネービー"
 
-#: src/mygal/color-palette.c:584 src/mygal/color-palette.c:640
+#: ../src/mygal/color-palette.c:577 ../src/mygal/color-palette.c:633
 msgid "dark blue"
 msgstr "暗い青"
 
-#: src/mygal/color-palette.c:585
+#: ../src/mygal/color-palette.c:578
 msgid "purple #2"
 msgstr "紫 #2"
 
-#: src/mygal/color-palette.c:586
+#: ../src/mygal/color-palette.c:579
 msgid "very dark gray"
 msgstr "とても暗い灰"
 
-#: src/mygal/color-palette.c:589 src/mygal/color-palette.c:645
+#: ../src/mygal/color-palette.c:582 ../src/mygal/color-palette.c:638
 msgid "dark red"
 msgstr "暗い赤"
 
-#: src/mygal/color-palette.c:590
+#: ../src/mygal/color-palette.c:583
 msgid "red-orange"
 msgstr "赤みの橙"
 
-#: src/mygal/color-palette.c:591
+#: ../src/mygal/color-palette.c:584
 msgid "gold"
 msgstr "金"
 
-#: src/mygal/color-palette.c:592
+#: ../src/mygal/color-palette.c:585
 msgid "dark green"
 msgstr "暗い緑"
 
-#: src/mygal/color-palette.c:593 src/mygal/color-palette.c:646
+#: ../src/mygal/color-palette.c:586 ../src/mygal/color-palette.c:639
 msgid "dull blue"
 msgstr "くすんだ青"
 
-#: src/mygal/color-palette.c:594 src/mygal/color-palette.c:647
+#: ../src/mygal/color-palette.c:587 ../src/mygal/color-palette.c:640
 msgid "blue"
 msgstr "青"
 
-#: src/mygal/color-palette.c:595
+#: ../src/mygal/color-palette.c:588
 msgid "dull purple"
 msgstr "くすんだ紫"
 
-#: src/mygal/color-palette.c:596
+#: ../src/mygal/color-palette.c:589
 msgid "dark grey"
 msgstr "暗い灰"
 
-#: src/mygal/color-palette.c:599
+#: ../src/mygal/color-palette.c:592
 msgid "red"
 msgstr "赤"
 
-#: src/mygal/color-palette.c:600
+#: ../src/mygal/color-palette.c:593
 msgid "orange"
 msgstr "橙"
 
-#: src/mygal/color-palette.c:601
+#: ../src/mygal/color-palette.c:594
 msgid "lime"
 msgstr "ライム"
 
-#: src/mygal/color-palette.c:602
+#: ../src/mygal/color-palette.c:595
 msgid "dull green"
 msgstr "くすんだ緑"
 
-#: src/mygal/color-palette.c:603
+#: ../src/mygal/color-palette.c:596
 msgid "dull blue #2"
 msgstr "くすんだ青 #2"
 
-#: src/mygal/color-palette.c:604
+#: ../src/mygal/color-palette.c:597
 msgid "sky blue #2"
 msgstr "スカイブルー #2"
 
-#: src/mygal/color-palette.c:605 src/mygal/color-palette.c:644
+#: ../src/mygal/color-palette.c:598 ../src/mygal/color-palette.c:637
 msgid "purple"
 msgstr "紫"
 
-#: src/mygal/color-palette.c:606
+#: ../src/mygal/color-palette.c:599
 msgid "gray"
 msgstr "灰"
 
-#: src/mygal/color-palette.c:609 src/mygal/color-palette.c:641
+#: ../src/mygal/color-palette.c:602 ../src/mygal/color-palette.c:634
 msgid "magenta"
 msgstr "マゼンタ"
 
-#: src/mygal/color-palette.c:610
+#: ../src/mygal/color-palette.c:603
 msgid "bright orange"
 msgstr "明るい橙"
 
-#: src/mygal/color-palette.c:611 src/mygal/color-palette.c:642
+#: ../src/mygal/color-palette.c:604 ../src/mygal/color-palette.c:635
 msgid "yellow"
 msgstr "黄"
 
-#: src/mygal/color-palette.c:612
+#: ../src/mygal/color-palette.c:605
 msgid "green"
 msgstr "緑"
 
-#: src/mygal/color-palette.c:613 src/mygal/color-palette.c:643
+#: ../src/mygal/color-palette.c:606 ../src/mygal/color-palette.c:636
 msgid "cyan"
 msgstr "シアン"
 
-#: src/mygal/color-palette.c:614
+#: ../src/mygal/color-palette.c:607
 msgid "bright blue"
 msgstr "明るい青"
 
-#: src/mygal/color-palette.c:615 src/mygal/color-palette.c:632
+#: ../src/mygal/color-palette.c:608 ../src/mygal/color-palette.c:625
 msgid "red purple"
 msgstr "赤紫"
 
-#: src/mygal/color-palette.c:616
+#: ../src/mygal/color-palette.c:609
 msgid "light grey"
 msgstr "淡い灰"
 
-#: src/mygal/color-palette.c:619 src/mygal/color-palette.c:636
+#: ../src/mygal/color-palette.c:612 ../src/mygal/color-palette.c:629
 msgid "pink"
 msgstr "ピンク"
 
-#: src/mygal/color-palette.c:620
+#: ../src/mygal/color-palette.c:613
 msgid "light orange"
 msgstr "淡い橙"
 
-#: src/mygal/color-palette.c:621 src/mygal/color-palette.c:633
+#: ../src/mygal/color-palette.c:614 ../src/mygal/color-palette.c:626
 msgid "light yellow"
 msgstr "淡い黄"
 
-#: src/mygal/color-palette.c:622
+#: ../src/mygal/color-palette.c:615
 msgid "light green"
 msgstr "淡い緑"
 
-#: src/mygal/color-palette.c:623
+#: ../src/mygal/color-palette.c:616
 msgid "light cyan"
 msgstr "淡いシアン"
 
-#: src/mygal/color-palette.c:624 src/mygal/color-palette.c:634
+#: ../src/mygal/color-palette.c:617 ../src/mygal/color-palette.c:627
 msgid "light blue"
 msgstr "淡い青"
 
-#: src/mygal/color-palette.c:625 src/mygal/color-palette.c:638
+#: ../src/mygal/color-palette.c:618 ../src/mygal/color-palette.c:631
 msgid "light purple"
 msgstr "淡い紫"
 
-#: src/mygal/color-palette.c:626
+#: ../src/mygal/color-palette.c:619
 msgid "white"
 msgstr "白"
 
-#: src/mygal/color-palette.c:631
+#: ../src/mygal/color-palette.c:624
 msgid "purplish blue"
 msgstr "紫みの青"
 
-#: src/mygal/color-palette.c:635
+#: ../src/mygal/color-palette.c:628
 msgid "dark purple"
 msgstr "暗い紫"
 
-#: src/mygal/color-palette.c:637
+#: ../src/mygal/color-palette.c:630
 msgid "sky blue"
 msgstr "スカイブルー"
 
-#: libglabels/template.c:848
-#, c-format
-msgid "Generic %s full page"
-msgstr "Generic %s フル・ページ"
+#: ../src/critical-error-handler.c:73
+msgid "gLabels Fatal Error!"
+msgstr "gLabels で致命的なエラーが発生しました！"
 
-#: libglabels/template.c:897
-msgid "No template files found!"
-msgstr "テンプレート・ファイルが見つかりません！"
+#: ../src/warning-handler.c:73
+msgid "gLabels Error!"
+msgstr "gLabels のエラーです！"
 
 #. Create and append an "Other" entry.
-#: libglabels/paper.c:67
+#: ../libglabels/db.c:118
 msgid "Other"
 msgstr "その他"
 
-#: libglabels/paper.c:361
-msgid "No paper files found!"
-msgstr "用紙ふぃあるが見つかりません！"
-
-#: data/ui/glabels-ui.xml.h:1
-msgid "About glabels"
-msgstr "gLabels について"
-
-#: data/ui/glabels-ui.xml.h:2
-msgid "About..."
-msgstr "情報..."
-
-#: data/ui/glabels-ui.xml.h:3
-msgid "Align _Horizontal"
-msgstr "水平方向に配置(_H)"
-
-#: data/ui/glabels-ui.xml.h:4
-msgid "Align _Vertical"
-msgstr "垂直方向に配置(_V)"
-
-#: data/ui/glabels-ui.xml.h:5
-msgid "Align objects to bottoms"
-msgstr "オブジェクトを下端に配置します"
-
-#: data/ui/glabels-ui.xml.h:6
-msgid "Align objects to horizontal centers"
-msgstr "オブジェクトを水平方向の中心に配置します"
-
-#: data/ui/glabels-ui.xml.h:7
-msgid "Align objects to left edges"
-msgstr "オブジェクトを左端に配置します"
-
-#: data/ui/glabels-ui.xml.h:8
-msgid "Align objects to right edges"
-msgstr "オブジェクトを右端に配置します"
-
-#: data/ui/glabels-ui.xml.h:9
-msgid "Align objects to tops"
-msgstr "オブジェクトを上端に配置します"
-
-#: data/ui/glabels-ui.xml.h:10
-msgid "Align objects to vertical centers"
-msgstr "オブジェクトを垂直方向の中心に配置します"
-
-#: data/ui/glabels-ui.xml.h:12
-msgid "Bold"
-msgstr "文字を太字にします"
-
-#: data/ui/glabels-ui.xml.h:14
-msgid "Center align"
-msgstr "中央に揃えます"
-
-#: data/ui/glabels-ui.xml.h:15
-msgid "Center objects to horizontal label center"
-msgstr "オブジェクトをラベルの中心に水平移動します"
-
-#: data/ui/glabels-ui.xml.h:16
-msgid "Center objects to vertical label center"
-msgstr "オブジェクトをラベルの中心に垂直移動します"
-
-#: data/ui/glabels-ui.xml.h:17
-msgid "Change the visibility of markup lines in the current window"
-msgstr "ラベルの外枠線の表示/非表示を変更します"
-
-#: data/ui/glabels-ui.xml.h:18
-msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr "ツールバーの表示/非表示を変更します"
-
-#: data/ui/glabels-ui.xml.h:19
-msgid "Change the visibility of the grid in the current window"
-msgstr "ラベルのグリッド (格子線) の表示/非表示を変更します"
-
-#: data/ui/glabels-ui.xml.h:20
-msgid "Change the visibility of the main toolbar in the current window"
-msgstr "メイン・ツールバーの表示/非表示を変更します"
-
-#: data/ui/glabels-ui.xml.h:21
-msgid "Change the visibility of the property toolbar in the current window"
-msgstr "プロパティ・ツールバーの表示/非表示を変更します"
-
-#: data/ui/glabels-ui.xml.h:22
-msgid "Close"
-msgstr "閉じる"
-
-#: data/ui/glabels-ui.xml.h:23
-msgid "Close the current file"
-msgstr "このファイルを閉じます"
-
-#: data/ui/glabels-ui.xml.h:24
-msgid "Configure the application"
-msgstr "gLabel の設定を変更します"
-
-#: data/ui/glabels-ui.xml.h:25
-msgid "Contents"
-msgstr "目次"
-
-#: data/ui/glabels-ui.xml.h:26
-msgid "Copy"
-msgstr "コピー"
-
-#: data/ui/glabels-ui.xml.h:27
-msgid "Copy the selection"
-msgstr "選択範囲をコピーします"
-
-#: data/ui/glabels-ui.xml.h:28
-msgid "Create a custom template"
-msgstr "カスタム・テンプレートを生成します"
-
-#: data/ui/glabels-ui.xml.h:29
-msgid "Create a new document"
-msgstr "新しいドキュメントを作成します"
-
-#: data/ui/glabels-ui.xml.h:30
-msgid "Create barcode object"
-msgstr "バーコード・オブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:31
-msgid "Create box/rectangle object"
-msgstr "四角/三角のオブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:32
-msgid "Create ellipse/circle object"
-msgstr "楕円/円オブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:33
-msgid "Create image object"
-msgstr "画像オブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:34
-msgid "Create line object"
-msgstr "直線オブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:35
-msgid "Create text object"
-msgstr "文字オブジェクトを作成します"
-
-#: data/ui/glabels-ui.xml.h:36
-msgid "Cu_t"
-msgstr "切り取り(_T)"
-
-#: data/ui/glabels-ui.xml.h:37
-msgid "Customize"
-msgstr "カスタマイズ"
-
-#: data/ui/glabels-ui.xml.h:38
-msgid "Customize Drawing Toolbar"
-msgstr "ツールバー"
-
-#: data/ui/glabels-ui.xml.h:39
-msgid "Customize Main Toolbar"
-msgstr "メイン・ツールバー"
-
-#: data/ui/glabels-ui.xml.h:40
-msgid "Customize Property Toolbar"
-msgstr "プロパティ・ツールバー"
-
-#: data/ui/glabels-ui.xml.h:41
-msgid "Customize toolbars"
-msgstr "ツールバーのカスタマイズ"
-
-#: data/ui/glabels-ui.xml.h:42
-msgid "Cut"
-msgstr "切り取り"
-
-#: data/ui/glabels-ui.xml.h:43
-msgid "Cut the selection"
-msgstr "選択範囲を切り取ります"
-
-#: data/ui/glabels-ui.xml.h:44
-msgid "Decrease magnification"
-msgstr "拡大率を下げます"
-
-#: data/ui/glabels-ui.xml.h:45
-msgid "Delete"
-msgstr "削除"
-
-#: data/ui/glabels-ui.xml.h:46
-msgid "Delete the selected objects"
-msgstr "選択したオブジェクトを削除します"
-
-#: data/ui/glabels-ui.xml.h:47
-msgid "Drawing toolbar"
-msgstr "ツールバーの表示方法"
-
-#: data/ui/glabels-ui.xml.h:48
-msgid "Dump XML"
-msgstr "XML のダンプ"
-
-#: data/ui/glabels-ui.xml.h:49
-msgid "Dump the UI Xml description"
-msgstr "GUI の XML 記述をダンプ表示します"
-
-#: data/ui/glabels-ui.xml.h:50
-msgid "Edit merge properties"
-msgstr "結合プロパティを編集します"
-
-#: data/ui/glabels-ui.xml.h:54
-msgid "Flip object horizontally"
-msgstr "オブジェクトを水平方向にひっくり返します"
-
-#: data/ui/glabels-ui.xml.h:55
-msgid "Flip object vertically"
-msgstr "オブジェクトを垂直方向にひっくり返します"
-
-#: data/ui/glabels-ui.xml.h:56
-msgid "Font name"
-msgstr "フォント名です"
-
-#: data/ui/glabels-ui.xml.h:57
-msgid "Font selector"
-msgstr "フォント・セレクタ"
-
-#: data/ui/glabels-ui.xml.h:58
-msgid "Font size"
-msgstr "フォント・サイズです"
-
-#: data/ui/glabels-ui.xml.h:59
-msgid "Icon and _Text"
-msgstr "アイコンとラベル(_T)"
-
-#: data/ui/glabels-ui.xml.h:60
-msgid "Increase magnification"
-msgstr "拡大率を上げます"
-
-#: data/ui/glabels-ui.xml.h:61
-msgid "Italic"
-msgstr "文字を斜体にします"
-
-#: data/ui/glabels-ui.xml.h:63
-msgid "Left align"
-msgstr "左に寄せませす"
-
-#: data/ui/glabels-ui.xml.h:65
-msgid "Line width"
-msgstr "線の幅を選択します"
-
-#: data/ui/glabels-ui.xml.h:66
-msgid "Lower object to bottom"
-msgstr "オブジェクトを後ろに回します"
-
-#: data/ui/glabels-ui.xml.h:67
-msgid "M_arkup"
-msgstr "マークアップ(_A)"
-
-#: data/ui/glabels-ui.xml.h:68
-msgid "Main toolbar"
-msgstr "メイン・ツールバー"
-
-#: data/ui/glabels-ui.xml.h:69
-msgid "Markup"
-msgstr "マークアップ"
-
-#: data/ui/glabels-ui.xml.h:70
-msgid "Modify document properties"
-msgstr "ドキュメントのプロパティを修正します"
-
-#: data/ui/glabels-ui.xml.h:71
-msgid "New"
-msgstr "新規"
-
-#: data/ui/glabels-ui.xml.h:72
-msgid "Object property editor"
-msgstr "オブジェクト・プロパティのエディタ"
-
-#: data/ui/glabels-ui.xml.h:73
-msgid "Only show icons in the drawing toolbar"
-msgstr "ツールバーの中にアイコンのみ表示します"
-
-#: data/ui/glabels-ui.xml.h:74
-msgid "Only show icons in the main toolbar"
-msgstr "メイン・ツールバーの中にアイコンのみ表示します"
-
-#: data/ui/glabels-ui.xml.h:76
-msgid "Open a file"
-msgstr "ファイルを開きます"
-
-#: data/ui/glabels-ui.xml.h:77
-msgid "Open the glabels manual"
-msgstr "gLabeles のマニュアルを開きます"
-
-#: data/ui/glabels-ui.xml.h:78
-msgid "Paste"
-msgstr "貼り付け"
-
-#: data/ui/glabels-ui.xml.h:79
-msgid "Paste the clipboard"
-msgstr "クリップボードの内容を貼り付けます"
-
-#: data/ui/glabels-ui.xml.h:80
-msgid "Pr_eferences..."
-msgstr "設定(_E)..."
-
-#: data/ui/glabels-ui.xml.h:81
-msgid "Preferences"
-msgstr "gLabel の設定"
-
-#: data/ui/glabels-ui.xml.h:83
-msgid "Print the current file"
-msgstr "このファイルを印刷します"
-
-#: data/ui/glabels-ui.xml.h:84
-msgid "Proper_ties..."
-msgstr "プロパティ(_T)..."
-
-#: data/ui/glabels-ui.xml.h:85
-msgid "Properties"
-msgstr "プロパティ"
-
-#: data/ui/glabels-ui.xml.h:86
-msgid "Property toolbar"
-msgstr "プロパティのツールバー"
-
-#: data/ui/glabels-ui.xml.h:87
-msgid "Quit"
-msgstr "終了"
-
-#: data/ui/glabels-ui.xml.h:88
-msgid "Quit the program"
-msgstr "gLabels を終了します"
-
-#: data/ui/glabels-ui.xml.h:89
-msgid "Raise object to top"
-msgstr "オブジェクトを前に持ってきます"
-
-#: data/ui/glabels-ui.xml.h:90
-msgid "Recent _Files"
-msgstr "最近開いたファイル(_F)"
-
-#: data/ui/glabels-ui.xml.h:91
-msgid "Redo"
-msgstr "やり直し"
-
-#: data/ui/glabels-ui.xml.h:92
-msgid "Redo the undone action"
-msgstr "完了していない操作をやり直します"
-
-#: data/ui/glabels-ui.xml.h:93
-msgid "Remove all selections"
-msgstr "選択範囲を解除します"
-
-#: data/ui/glabels-ui.xml.h:95
-#, no-c-format
-msgid "Restore scale to 100%"
-msgstr "拡大率を 100% に戻します"
-
-#: data/ui/glabels-ui.xml.h:96
-msgid "Right align"
-msgstr "右に寄せます"
-
-#: data/ui/glabels-ui.xml.h:99
-msgid "Rotate object 90 clockwise"
-msgstr "オブジェクトを時計回りに 90°回転させます"
-
-#: data/ui/glabels-ui.xml.h:100
-msgid "Rotate object 90 counter-clockwise"
-msgstr "オブジェクトを反時計回りに 90°回転させます"
-
-#: data/ui/glabels-ui.xml.h:101
-msgid "Save"
-msgstr "保存"
-
-#: data/ui/glabels-ui.xml.h:102
-msgid "Save As"
-msgstr "名前を付けて保存"
-
-#: data/ui/glabels-ui.xml.h:103
-msgid "Save _As..."
-msgstr "別名で保存(_A)..."
-
-#: data/ui/glabels-ui.xml.h:104
-msgid "Save the current file"
-msgstr "このファイルを保存します"
-
-#: data/ui/glabels-ui.xml.h:105
-msgid "Save the current file with a different name"
-msgstr "このデータに別の名前を付けて保存します"
-
-#: data/ui/glabels-ui.xml.h:106
-msgid "Select All"
+#. Create and append a "User defined" entry.
+#: ../libglabels/db.c:131
+msgid "User defined"
+msgstr "指定する"
+
+#: ../libglabels/db.c:482
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"用紙の大きさを定義したファイルが見つかりませんでした (libglabels が正しくイン"
+"ストールされていない可能性があります)"
+
+#: ../libglabels/db.c:875
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"カテゴリを定義したファイルが見つかりませんでした (libglabels が正しくインス"
+"トールされていない可能性があります)"
+
+#: ../libglabels/db.c:1461
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"テンプレート・ファイルが見つかりませんでした (libglabels が正しくインストール"
+"されていない可能性があります)"
+
+#: ../libglabels/db.c:1538
+#, c-format
+msgid "Generic %s full page template"
+msgstr "一般的な %s の全ページ・テンプレート"
+
+#: ../libglabels/xml-template.c:227
+msgid "Missing name or brand/part attributes."
+msgstr "名前またはブランド/パーツ番号といった属性がありません。"
+
+#. This should always be an id, but just in case a name
+#. slips by!
+#: ../libglabels/xml-template.c:244
+#, c-format
+msgid "Unknown page size id \"%s\", trying as name"
+msgstr "ページ・サイズの ID \"%s\" が不明なので名前として扱います。"
+
+#: ../libglabels/xml-template.c:256
+#, c-format
+msgid "Unknown page size id or name \"%s\""
+msgstr "ページ・サイズの ID または名前 \"%s\" が不明です。"
+
+#: ../libglabels/xml-template.c:627
+msgid ""
+"Missing required \"brand\" or \"part\" attribute, trying deprecated name."
+msgstr ""
+"必須となる \"ブランド名\" や \"パート番号\" といった属性が見つかりません (廃"
+"止した名前を試してみて下さい)"
+
+#: ../libglabels/xml-template.c:637
+msgid "Name attribute also missing."
+msgstr "名前も見つかりません"
+
+#: ../data/glade/merge-properties-dialog.glade.h:1
+msgid "<b>Record selection/preview</b>"
+msgstr "<b>レコードの選択/プレビュー</b>"
+
+#: ../data/glade/merge-properties-dialog.glade.h:2
+msgid "<b>Source</b>"
+msgstr "<b>ソース</b>"
+
+#: ../data/glade/merge-properties-dialog.glade.h:3
+msgid "Format:"
+msgstr "書式:"
+
+#: ../data/glade/merge-properties-dialog.glade.h:4
+msgid "Location:"
+msgstr "場所:"
+
+#: ../data/glade/merge-properties-dialog.glade.h:5
+msgid "Select all"
 msgstr "全て選択"
 
-#: data/ui/glabels-ui.xml.h:107
-msgid "Select _All"
-msgstr "全て選択(_A)"
-
-#: data/ui/glabels-ui.xml.h:108
-msgid "Select all objects"
-msgstr "全てのオブジェクトを選択します"
-
-#: data/ui/glabels-ui.xml.h:109
-msgid "Select, move and modify objects"
-msgstr "オブジェクトの選択、移動、編集を行います"
-
-#: data/ui/glabels-ui.xml.h:111
-msgid "Set drawing toolbar button style according to desktop default"
-msgstr "デスクトップの設定に従ってツールバーを表示します"
-
-#: data/ui/glabels-ui.xml.h:112
-msgid "Set main toolbar button style according to desktop default"
-msgstr "デスクトップの設定に従ってメイン・ツールバーを表示します"
-
-#: data/ui/glabels-ui.xml.h:113
-msgid "Show _Tooltips"
-msgstr "ツールチップの表示(_T)"
-
-#: data/ui/glabels-ui.xml.h:114
-msgid "Show both icons and texts in the drawing toolbar"
-msgstr "ツールバーにアイコンとラベルの両方を表示します"
-
-#: data/ui/glabels-ui.xml.h:115
-msgid "Show both icons and texts in the main toolbar"
-msgstr "メイン・ツールバーにアイコンとラベルの両方を表示します"
-
-#: data/ui/glabels-ui.xml.h:116
-msgid "Show tooltips in the drawing toolbar"
-msgstr "ツールバーにツールチップを表示します"
-
-#: data/ui/glabels-ui.xml.h:117
-msgid "Show tooltips in the main toolbar"
-msgstr "メイン・ツールバーにツールチップを表示します"
-
-#: data/ui/glabels-ui.xml.h:118
-msgid "Show tooltips in the property toolbar"
-msgstr "プロパティ・ツールバーにツールチップを表示します"
-
-#: data/ui/glabels-ui.xml.h:119
-msgid "Template Designer"
-msgstr "テンプレート・デザイナ"
-
-#: data/ui/glabels-ui.xml.h:120
-msgid "Template _Designer..."
-msgstr "テンプレート・デザイナ(_D)..."
-
-#: data/ui/glabels-ui.xml.h:121
-msgid "Text color"
-msgstr "文字の色を選択します"
-
-#: data/ui/glabels-ui.xml.h:122
-msgid "U_n-select All"
-msgstr "全て選択解除(_N)"
-
-#: data/ui/glabels-ui.xml.h:123
-msgid "Un-select All"
+#: ../data/glade/merge-properties-dialog.glade.h:6
+msgid "Unselect all"
 msgstr "全て選択解除"
 
-#: data/ui/glabels-ui.xml.h:124
-msgid "Undo"
-msgstr "元に戻す"
+#: ../data/glade/merge-properties-dialog.glade.h:7
+#: ../data/glade/object-editor.glade.h:39
+msgid "dialog1"
+msgstr "dialog1"
 
-#: data/ui/glabels-ui.xml.h:125
-msgid "Undo the last action"
-msgstr "最後の操作を取り消します"
+#: ../data/glade/new-label-dialog.glade.h:1
+msgid "<b>Label orientation</b>"
+msgstr "<b>ラベルの向き</b>"
 
-#: data/ui/glabels-ui.xml.h:126
-msgid "Zoom _1:1"
-msgstr "拡大率 1:1(_1)"
+#: ../data/glade/new-label-dialog.glade.h:2
+msgid "<b>Media type</b>"
+msgstr "<b>メディアの種類</b>"
 
-#: data/ui/glabels-ui.xml.h:127
-msgid "Zoom _In"
-msgstr "拡大(_I)"
+#: ../data/glade/object-editor.glade.h:2
+#, no-c-format
+msgid "%"
+msgstr "%"
 
-#: data/ui/glabels-ui.xml.h:128
-msgid "Zoom _Out"
-msgstr "縮小(_O)"
-
-#: data/ui/glabels-ui.xml.h:129
-msgid "Zoom to _fit"
-msgstr "ウィンドウにあわせる(_F)"
-
-#: data/ui/glabels-ui.xml.h:130
-msgid "Zoom to fit window"
-msgstr "ウィンドウのサイズに合わせます"
-
-#: data/ui/glabels-ui.xml.h:131
-msgid "_About..."
-msgstr "情報(_A)..."
-
-#: data/ui/glabels-ui.xml.h:132
-msgid "_Bottoms"
-msgstr "下部(_B)"
-
-#: data/ui/glabels-ui.xml.h:135
-msgid "_Close"
-msgstr "閉じる(_C)"
-
-#: data/ui/glabels-ui.xml.h:136
-msgid "_Contents"
-msgstr "目次(_C)"
-
-#: data/ui/glabels-ui.xml.h:137
-msgid "_Copy"
-msgstr "複写(_C)"
-
-#: data/ui/glabels-ui.xml.h:138
-msgid "_Create Object"
-msgstr "オブジェクトの生成(_C)"
-
-#: data/ui/glabels-ui.xml.h:139
-msgid "_Debug"
-msgstr "デバッグ(_D)"
-
-#: data/ui/glabels-ui.xml.h:141
-msgid "_Desktop Default"
-msgstr "デスクトップ設定(_D)"
-
-#: data/ui/glabels-ui.xml.h:142
-msgid "_Drawing Toolbar"
-msgstr "ツールバー(_D)"
-
-#: data/ui/glabels-ui.xml.h:143
-msgid "_Edit"
-msgstr "編集(_E)"
-
-#: data/ui/glabels-ui.xml.h:145
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: data/ui/glabels-ui.xml.h:146
-msgid "_Grid"
-msgstr "グリッド(_G)"
-
-#: data/ui/glabels-ui.xml.h:147
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: data/ui/glabels-ui.xml.h:148
-msgid "_Icon"
-msgstr "アイコン(_I)"
-
-#: data/ui/glabels-ui.xml.h:152
-msgid "_Main Toolbar"
-msgstr "メイン・ツールバー(_M)"
-
-#: data/ui/glabels-ui.xml.h:153
-msgid "_Merge Properties..."
-msgstr "結合プロパティ(_M)..."
-
-#: data/ui/glabels-ui.xml.h:154
-msgid "_New"
-msgstr "新規(_N)"
-
-#: data/ui/glabels-ui.xml.h:155
-msgid "_Objects"
-msgstr "オブジェクト(_O)"
-
-#: data/ui/glabels-ui.xml.h:156
-msgid "_Open..."
-msgstr "開く(_O)..."
-
-#: data/ui/glabels-ui.xml.h:158
-msgid "_Paste"
-msgstr "貼り付け(_P)"
-
-#: data/ui/glabels-ui.xml.h:159
-msgid "_Print..."
-msgstr "印刷(_P)..."
-
-#: data/ui/glabels-ui.xml.h:160
-msgid "_Property Toolbar"
-msgstr "プロパティ・ツールバー(_P)"
-
-#: data/ui/glabels-ui.xml.h:161
-msgid "_Quit"
-msgstr "終了(_Q)"
-
-#: data/ui/glabels-ui.xml.h:164
-msgid "_Save"
-msgstr "保存(_S)"
-
-#: data/ui/glabels-ui.xml.h:168
-msgid "_View"
-msgstr "表示(_V)"
-
-#: data/glade/prefs-dialog.glade.h:1
-msgid "   "
-msgstr "   "
-
-#: data/glade/prefs-dialog.glade.h:2 data/glade/object-editor.glade.h:1
-#: data/glade/template-designer.glade.h:5
-msgid "*"
-msgstr "*"
-
-#: data/glade/prefs-dialog.glade.h:3
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">ページ・サイズの初期値</span>"
-
-#: data/glade/prefs-dialog.glade.h:4
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">塗りつぶし</span>"
-
-#: data/glade/prefs-dialog.glade.h:5
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">線</span>"
-
-#: data/glade/prefs-dialog.glade.h:6
-msgid "<span weight=\"bold\">Text</span>"
-msgstr "<span weight=\"bold\">文字</span>"
-
-#: data/glade/prefs-dialog.glade.h:7
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">単位</span>"
-
-#: data/glade/prefs-dialog.glade.h:8 data/glade/object-editor.glade.h:4
-msgid "Alignment:"
-msgstr "位置:"
-
-#: data/glade/prefs-dialog.glade.h:9 data/glade/object-editor.glade.h:8
-msgid "Color:"
-msgstr "色:"
-
-#: data/glade/prefs-dialog.glade.h:10
-msgid "Font:"
-msgstr "フォント:"
-
-#: data/glade/prefs-dialog.glade.h:11
-msgid "ISO A4"
-msgstr "ISO A4 版"
-
-#: data/glade/prefs-dialog.glade.h:12
-msgid "Inches"
-msgstr "インチ"
-
-#: data/glade/prefs-dialog.glade.h:13 data/glade/object-editor.glade.h:19
-msgid "Line Spacing:"
-msgstr "行間:"
-
-#: data/glade/prefs-dialog.glade.h:14
-msgid "Locale"
-msgstr "ローケル"
-
-#: data/glade/prefs-dialog.glade.h:15
-msgid "Millimeters"
-msgstr "ミリ"
-
-#: data/glade/prefs-dialog.glade.h:16
-msgid "Object defaults"
-msgstr "オブジェクトのデフォルト"
-
-#: data/glade/prefs-dialog.glade.h:17
-msgid "Points"
-msgstr "ポイント"
-
-#: data/glade/prefs-dialog.glade.h:18
-msgid "Select default properties for new objects."
-msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
-
-#: data/glade/prefs-dialog.glade.h:19
-msgid "Select locale specific behavior."
-msgstr "利用する言語 (ロケール) に依存する動作を選択して下さい。"
-
-#: data/glade/prefs-dialog.glade.h:20 data/templates/paper-sizes.xml.h:25
-msgid "US Letter"
-msgstr "US レター"
-
-#: data/glade/prefs-dialog.glade.h:21 data/glade/object-editor.glade.h:29
-#: data/glade/template-designer.glade.h:72
-msgid "Width:"
-msgstr "幅:"
-
-#: data/glade/object-editor.glade.h:2
+#: ../data/glade/object-editor.glade.h:3
 msgid "00000000000 00000"
 msgstr "00000000000 00000"
 
-#: data/glade/object-editor.glade.h:3
+#: ../data/glade/object-editor.glade.h:4
 msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"larger\">Xxx オブジェクトのプロパティ</span>"
 
-#: data/glade/object-editor.glade.h:5
+#: ../data/glade/object-editor.glade.h:5 ../data/glade/prefs-dialog.glade.h:7
+msgid "Alignment:"
+msgstr "位置:"
+
+#: ../data/glade/object-editor.glade.h:6
 msgid "Allow merge to automatically shrink text"
 msgstr "自動的に文字を小さくして結合できるようにする"
 
-#: data/glade/object-editor.glade.h:6
+#: ../data/glade/object-editor.glade.h:7
 msgid "Angle:"
 msgstr "角度:"
 
-#: data/glade/object-editor.glade.h:7
+#: ../data/glade/object-editor.glade.h:8
 msgid "Checksum"
 msgstr "チェックサム"
 
-#: data/glade/object-editor.glade.h:10
+#: ../data/glade/object-editor.glade.h:9 ../data/glade/prefs-dialog.glade.h:8
+msgid "Color:"
+msgstr "色:"
+
+#: ../data/glade/object-editor.glade.h:11
+msgid "Enable shadow"
+msgstr "影を付ける"
+
+#: ../data/glade/object-editor.glade.h:12
 msgid "Family:"
 msgstr "ファミリ:"
 
-#: data/glade/object-editor.glade.h:12
+#: ../data/glade/object-editor.glade.h:13
+msgid "File:"
+msgstr "ファイル:"
+
+#: ../data/glade/object-editor.glade.h:14
 msgid "Fill"
 msgstr "塗りつぶし"
 
-#: data/glade/object-editor.glade.h:13 data/glade/template-designer.glade.h:33
+#: ../data/glade/object-editor.glade.h:15
+#: ../data/glade/template-designer.glade.h:30
 msgid "Height:"
 msgstr "高さ:"
 
-#: data/glade/object-editor.glade.h:14
-msgid "Image"
-msgstr "画像"
-
-#: data/glade/object-editor.glade.h:15
+#: ../data/glade/object-editor.glade.h:17
 msgid "Insert merge field"
 msgstr "結合フィールドの挿入"
 
-#: data/glade/object-editor.glade.h:17
+#: ../data/glade/object-editor.glade.h:18
+msgid "Key:"
+msgstr "キー:"
+
+#: ../data/glade/object-editor.glade.h:19
 msgid "Length:"
 msgstr "長さ:"
 
-#: data/glade/object-editor.glade.h:18
-msgid "Line"
-msgstr "直線"
+#: ../data/glade/object-editor.glade.h:21
+#: ../data/glade/prefs-dialog.glade.h:12
+msgid "Line Spacing:"
+msgstr "行間:"
 
-#: data/glade/object-editor.glade.h:20
+#: ../data/glade/object-editor.glade.h:22
 msgid "Literal:"
 msgstr "リテラル:"
 
-#: data/glade/object-editor.glade.h:21
-msgid "Load image"
-msgstr "画像の読み込み"
+#: ../data/glade/object-editor.glade.h:23
+msgid "Opacity:"
+msgstr "透明度:"
 
-#: data/glade/object-editor.glade.h:22
+#: ../data/glade/object-editor.glade.h:24
 msgid "Position"
 msgstr "位置"
 
-#: data/glade/object-editor.glade.h:23
+#: ../data/glade/object-editor.glade.h:25
 msgid "Reset image size"
 msgstr "画像サイズのリセット"
 
-#: data/glade/object-editor.glade.h:24
+#: ../data/glade/object-editor.glade.h:26
+msgid "Select A File"
+msgstr "ファイルの選択"
+
+#: ../data/glade/object-editor.glade.h:27
+msgid "Shadow"
+msgstr "影"
+
+#: ../data/glade/object-editor.glade.h:28
 msgid "Size"
-msgstr "サイズ"
+msgstr "大きさ"
 
-#: data/glade/object-editor.glade.h:25
+#: ../data/glade/object-editor.glade.h:29
 msgid "Size:"
-msgstr "サイズ:"
+msgstr "大きさ:"
 
-#: data/glade/object-editor.glade.h:26
+#: ../data/glade/object-editor.glade.h:30
 msgid "Style"
 msgstr "スタイル"
 
-#: data/glade/object-editor.glade.h:27
+#: ../data/glade/object-editor.glade.h:31
 msgid "Style:"
 msgstr "スタイル:"
 
-#: data/glade/object-editor.glade.h:30
+#: ../data/glade/object-editor.glade.h:33
+#: ../data/glade/prefs-dialog.glade.h:20
+#: ../data/glade/template-designer.glade.h:61
+msgid "Width:"
+msgstr "幅:"
+
+#: ../data/glade/object-editor.glade.h:34
+msgid "X Offset:"
+msgstr "横方向のズレ:"
+
+#: ../data/glade/object-editor.glade.h:35
 msgid "X:"
 msgstr "X:"
 
-#: data/glade/object-editor.glade.h:31
+#: ../data/glade/object-editor.glade.h:36
+msgid "Y Offset:"
+msgstr "縦方向のズレ:"
+
+#: ../data/glade/object-editor.glade.h:37
 msgid "Y:"
 msgstr "Y:"
 
-#: data/glade/object-editor.glade.h:32
+#: ../data/glade/object-editor.glade.h:38
 msgid "degrees"
 msgstr "度"
 
-#: data/glade/object-editor.glade.h:33
-msgid "dialog1"
-msgstr "dialog1"
-
-#: data/glade/object-editor.glade.h:34
+#: ../data/glade/object-editor.glade.h:40
 msgid "digits:"
 msgstr "桁数:"
 
-#: data/glade/object-editor.glade.h:35
+#: ../data/glade/object-editor.glade.h:41
 msgid "format:"
 msgstr "書式:"
 
-#: data/glade/template-designer.glade.h:1
-msgid "  "
-msgstr "  "
+#: ../data/glade/prefs-dialog.glade.h:1
+msgid "   "
+msgstr "   "
 
-#: data/glade/template-designer.glade.h:2
+#: ../data/glade/prefs-dialog.glade.h:2
+msgid "<span weight=\"bold\">Default page size</span>"
+msgstr "<span weight=\"bold\">ページ・サイズの初期値</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:3
+msgid "<span weight=\"bold\">Fill</span>"
+msgstr "<span weight=\"bold\">塗りつぶし</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:4
+msgid "<span weight=\"bold\">Line</span>"
+msgstr "<span weight=\"bold\">線</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:5
+msgid "<span weight=\"bold\">Text</span>"
+msgstr "<span weight=\"bold\">文字</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:6
+msgid "<span weight=\"bold\">Units</span>"
+msgstr "<span weight=\"bold\">単位</span>"
+
+#: ../data/glade/prefs-dialog.glade.h:9
+msgid "Font:"
+msgstr "フォント:"
+
+#: ../data/glade/prefs-dialog.glade.h:10
+msgid "ISO A4"
+msgstr "ISO A4 版"
+
+#: ../data/glade/prefs-dialog.glade.h:11
+msgid "Inches"
+msgstr "インチ"
+
+#: ../data/glade/prefs-dialog.glade.h:13
+msgid "Locale"
+msgstr "ローケル"
+
+#: ../data/glade/prefs-dialog.glade.h:14
+msgid "Millimeters"
+msgstr "ミリ"
+
+#: ../data/glade/prefs-dialog.glade.h:15
+msgid "Object defaults"
+msgstr "オブジェクトのデフォルト"
+
+#: ../data/glade/prefs-dialog.glade.h:16
+msgid "Points"
+msgstr "ポイント"
+
+#: ../data/glade/prefs-dialog.glade.h:17
+msgid "Select default properties for new objects."
+msgstr "新規に作成するオブジェクトのデフォルト値を選択して下さい。"
+
+#: ../data/glade/prefs-dialog.glade.h:18
+msgid "Select locale specific behavior."
+msgstr "利用する言語 (ロケール) に依存するパラメータを選択して下さい。"
+
+#. Most popular (at top of list)
+#: ../data/glade/prefs-dialog.glade.h:19
+#: ../data/templates/paper-sizes.xml.h:29
+msgid "US Letter"
+msgstr "US レター"
+
+#: ../data/glade/print-custom-widget.glade.h:1
+msgid "<b>Options</b>"
+msgstr "<b>オプション</b>"
+
+#: ../data/glade/print-custom-widget.glade.h:2
+msgid "<b>Print control (Merge)</b>"
+msgstr "<b>印刷の制御 (結合)</b>"
+
+#: ../data/glade/print-custom-widget.glade.h:3
+msgid "<b>Print control (Simple)</b>"
+msgstr "<b>印刷の制御 (簡易)</b>"
+
+#: ../data/glade/property-bar.glade.h:1
+msgid "Bold"
+msgstr "太字"
+
+#: ../data/glade/property-bar.glade.h:2
+msgid "Center align"
+msgstr "中央寄せ"
+
+#: ../data/glade/property-bar.glade.h:4
+msgid "Font family"
+msgstr "フォント名"
+
+#: ../data/glade/property-bar.glade.h:5
+msgid "Font size"
+msgstr "フォントの大きさ"
+
+#: ../data/glade/property-bar.glade.h:6
+msgid "Italic"
+msgstr "イタリック"
+
+#: ../data/glade/property-bar.glade.h:7
+msgid "Left align"
+msgstr "左寄せ"
+
+#: ../data/glade/property-bar.glade.h:9
+msgid "Line width"
+msgstr "線幅"
+
+#: ../data/glade/property-bar.glade.h:10
+msgid "Right align"
+msgstr "右寄せ"
+
+#: ../data/glade/property-bar.glade.h:11
+msgid "Text Color"
+msgstr "文字の色"
+
+#: ../data/glade/property-bar.glade.h:12
+msgid "Text color"
+msgstr "文字の色"
+
+#: ../data/glade/template-designer.glade.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
 msgstr "(例: \"封筒のラベル\", \"名刺\", ...)"
 
-#: data/glade/template-designer.glade.h:3
+#: ../data/glade/template-designer.glade.h:2
 msgid "(e.g., 8163A)"
 msgstr "(例: 8163A)"
 
-#: data/glade/template-designer.glade.h:4
+#: ../data/glade/template-designer.glade.h:3
 msgid "(e.g., Avery, Acme, ...)"
 msgstr "(例: Avery, Acme, ...)"
 
-#: data/glade/template-designer.glade.h:6
+#: ../data/glade/template-designer.glade.h:4
 msgid "1. Outer radius:"
 msgstr "1. 外径:"
 
-#: data/glade/template-designer.glade.h:7
+#: ../data/glade/template-designer.glade.h:5
 msgid "1. Radius:"
 msgstr "1. 半径:"
 
-#: data/glade/template-designer.glade.h:8
+#: ../data/glade/template-designer.glade.h:6
 msgid "1. Width:"
 msgstr "1. 幅:"
 
-#: data/glade/template-designer.glade.h:9
+#: ../data/glade/template-designer.glade.h:7
 msgid "2. Height:"
 msgstr "2. 高さ:"
 
-#: data/glade/template-designer.glade.h:10
+#: ../data/glade/template-designer.glade.h:8
 msgid "2. Inner radius:"
 msgstr "2. インナーの半径:"
 
-#: data/glade/template-designer.glade.h:11
+#: ../data/glade/template-designer.glade.h:9
 msgid "2. Waste (overprint allowed):"
 msgstr "2. 余分な部分 (重ね刷り可):"
 
-#: data/glade/template-designer.glade.h:12
+#: ../data/glade/template-designer.glade.h:10
 msgid "3. Clipping width:"
 msgstr "3. クリッピングの幅:"
 
-#: data/glade/template-designer.glade.h:13
+#: ../data/glade/template-designer.glade.h:11
 msgid "3. Margin"
 msgstr "3. 余白"
 
-#: data/glade/template-designer.glade.h:14
+#: ../data/glade/template-designer.glade.h:12
 msgid "3. Round (radius of corner):"
 msgstr "3. コーナー (角度):"
 
-#: data/glade/template-designer.glade.h:15
+#: ../data/glade/template-designer.glade.h:13
 msgid "4. Clipping height:"
 msgstr "4. クリッピングの高さ:"
 
-#: data/glade/template-designer.glade.h:16
+#: ../data/glade/template-designer.glade.h:14
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. 水平方向の余分な部分 (重ね刷り可):"
 
-#: data/glade/template-designer.glade.h:17
+#: ../data/glade/template-designer.glade.h:15
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. 垂直方向の余分な部分 (重ね刷り可):"
 
-#: data/glade/template-designer.glade.h:18
+#: ../data/glade/template-designer.glade.h:16
 msgid "5. Waste (overprint allowed):"
 msgstr "5. 余分な部分 (重ね刷り可):"
 
-#: data/glade/template-designer.glade.h:19
+#: ../data/glade/template-designer.glade.h:17
 msgid "6. Margin"
 msgstr "6. 余白"
 
-#: data/glade/template-designer.glade.h:20
+#: ../data/glade/template-designer.glade.h:18
 msgid "Brand/Manufacturer:"
 msgstr "ブランド/製造元:"
 
-#: data/glade/template-designer.glade.h:21
+#: ../data/glade/template-designer.glade.h:19
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD の形 (含むクレジット・カード CD)"
 
-#: data/glade/template-designer.glade.h:22
+#: ../data/glade/template-designer.glade.h:20
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -1933,29 +1909,29 @@ msgid ""
 msgstr ""
 "おめでとうございます！\n"
 "\n"
-"gLabels テンプレートの生成が完了しました。\n"
+"gLabels のテンプレートが完成しました。\n"
 "このデザインを採用し保存する場合は、[適用] をクリックして下さい。\n"
 "\n"
 "[キャンセル] をクリックするとデザインを破棄することができます。\n"
 "または [戻る] をクリックするとやり直すことが可能です。"
 
-#: data/glade/template-designer.glade.h:30
-msgid "Design Completed"
-msgstr "デザインが完了しました"
+#: ../data/glade/template-designer.glade.h:27
+msgid "Description:"
+msgstr "説明:"
 
-#: data/glade/template-designer.glade.h:31
+#: ../data/glade/template-designer.glade.h:28
 msgid "Distance from left edge (x0):"
 msgstr "左上隅からの距離 (x0):"
 
-#: data/glade/template-designer.glade.h:32
+#: ../data/glade/template-designer.glade.h:29
 msgid "Distance from top edge (y0):"
 msgstr "左上隅からの距離 (y0):"
 
-#: data/glade/template-designer.glade.h:34
+#: ../data/glade/template-designer.glade.h:31
 msgid "Horizontal pitch (dx):"
 msgstr "水平方向のピッチ (dx):"
 
-#: data/glade/template-designer.glade.h:35
+#: ../data/glade/template-designer.glade.h:32
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -1971,105 +1947,78 @@ msgstr ""
 "す。\n"
 "二番目のサンプルでは、二つのレイアウトが必要な場合を図にしたものです。"
 
-#: data/glade/template-designer.glade.h:40
-msgid "Label Size (CD/DVD)"
-msgstr "ラベルのサイズ (CD/DVD)"
-
-#: data/glade/template-designer.glade.h:41
-msgid "Label Size (Round)"
-msgstr "ラベルのサイズ (円)"
-
-#: data/glade/template-designer.glade.h:42
-msgid "Label or Card Shape"
-msgstr "ラベルまたはカードの形状"
-
-#: data/glade/template-designer.glade.h:43
-msgid "Label or Card Size (Rectangular)"
-msgstr "ラベルまたはカードのサイズ (長方形)"
-
-#: data/glade/template-designer.glade.h:44
+#: ../data/glade/template-designer.glade.h:37
 msgid "Layout #1"
 msgstr "レイアウト #1:"
 
-#: data/glade/template-designer.glade.h:45
+#: ../data/glade/template-designer.glade.h:38
 msgid "Layout #2"
 msgstr "レイアウト #2:"
 
-#: data/glade/template-designer.glade.h:46
-msgid "Layout(s)"
-msgstr "レイアウト"
-
-#: data/glade/template-designer.glade.h:47
-msgid "Name and Description"
-msgstr "名前と説明"
-
-#: data/glade/template-designer.glade.h:48
+#: ../data/glade/template-designer.glade.h:39
 msgid "Number across (nx):"
 msgstr "横方向の数 (nx):"
 
-#: data/glade/template-designer.glade.h:49
+#: ../data/glade/template-designer.glade.h:40
 msgid "Number down (ny):"
 msgstr "縦方向の数 (ny):"
 
-#: data/glade/template-designer.glade.h:50
-msgid "Number of Layouts"
-msgstr "レイアウトの数"
-
-#: data/glade/template-designer.glade.h:51
+#: ../data/glade/template-designer.glade.h:41
 msgid "Number of layouts:"
 msgstr "レイアウトの数:"
 
-#: data/glade/template-designer.glade.h:52
-msgid "Page Size"
-msgstr "用紙のサイズ"
+#: ../data/glade/template-designer.glade.h:42
+#: ../data/glade/wdgt-media-select.glade.h:3
+msgid "Page size:"
+msgstr "用紙の大きさ:"
 
-#: data/glade/template-designer.glade.h:54
+#: ../data/glade/template-designer.glade.h:43
 msgid "Part #:"
-msgstr "パート番号"
+msgstr "パーツ番号"
 
-#: data/glade/template-designer.glade.h:55
+#: ../data/glade/template-designer.glade.h:44
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
-msgstr "テンプレートの識別情報を入力して下さい。"
+msgstr "テンプレートの識別情報を入力して下さい:"
 
-#: data/glade/template-designer.glade.h:56
+#: ../data/glade/template-designer.glade.h:45
 msgid "Please enter the following layout information."
 msgstr "レイアウト情報を入力して下さい。"
 
-#: data/glade/template-designer.glade.h:57
+#: ../data/glade/template-designer.glade.h:46
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
-msgstr "テンプレートのラベル単体のサイズをそれぞれ入力して下さい。"
+msgstr "テンプレートのラベル単体の大きさをそれぞれ入力して下さい。"
 
-#: data/glade/template-designer.glade.h:58
+#: ../data/glade/template-designer.glade.h:47
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
-msgstr "テンプレートのラベルまたはカード単体のサイズをそれぞれ入力して下さい。"
+msgstr "テンプレートのラベルまたはカード単体の大きさをそれぞれ入力して下さい。"
 
-#: data/glade/template-designer.glade.h:59
+#: ../data/glade/template-designer.glade.h:48
 msgid "Please select the basic shape of the labels or cards."
 msgstr "ラベルまたはカードの基本的な形状を選択して下さい。"
 
-#: data/glade/template-designer.glade.h:60
+#: ../data/glade/template-designer.glade.h:49
 msgid "Please select the page size of the template stationery."
-msgstr "テンプレート用紙のサイズを選択して下さい。"
+msgstr "テンプレート用紙の大きさを選択して下さい。"
 
-#: data/glade/template-designer.glade.h:61
+#: ../data/glade/template-designer.glade.h:50
 msgid "Print test sheet"
 msgstr "用紙のテスト印刷"
 
-#: data/glade/template-designer.glade.h:62
+#: ../data/glade/template-designer.glade.h:51
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "長方形または正方形 (コーナーを丸くすることも可)"
 
-#: data/glade/template-designer.glade.h:63
+#: ../data/glade/template-designer.glade.h:52
 msgid "Round"
 msgstr "円"
 
-#: data/glade/template-designer.glade.h:64
+#: ../data/glade/template-designer.glade.h:53
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -2077,7 +2026,7 @@ msgstr ""
 "レイアウトが二つ必要な\n"
 "テンプレート"
 
-#: data/glade/template-designer.glade.h:66
+#: ../data/glade/template-designer.glade.h:55
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -2085,11 +2034,11 @@ msgstr ""
 "レイアウトが一つだけで\n"
 "十分なレイアウト"
 
-#: data/glade/template-designer.glade.h:68
+#: ../data/glade/template-designer.glade.h:57
 msgid "Vertical pitch (dy):"
 msgstr "垂直方向のピッチ (dy):"
 
-#: data/glade/template-designer.glade.h:69
+#: ../data/glade/template-designer.glade.h:58
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2097,361 +2046,684 @@ msgid ""
 msgstr ""
 "gLabels のテンプレート・デザイナへようこそ。\n"
 "\n"
-"このデザイナでは gLabels のカスタム・テンプレートの作成をお手伝いします。"
+"このデザイナでは gLabels で利用する\n"
+"独自テンプレートの作成をお手伝いします。"
 
-#: data/templates/paper-sizes.xml.h:1
+#: ../data/glade/template-designer.glade.h:62
+msgid "cd_size_page"
+msgstr "cd_size_page"
+
+#: ../data/glade/template-designer.glade.h:63
+msgid "finish_page"
+msgstr "finish_page"
+
+#: ../data/glade/template-designer.glade.h:65
+msgid "layout_page"
+msgstr "layout_page"
+
+#: ../data/glade/template-designer.glade.h:66
+msgid "name_page"
+msgstr "name_page"
+
+#: ../data/glade/template-designer.glade.h:67
+msgid "nlayouts_page"
+msgstr "nlayouts_page"
+
+#: ../data/glade/template-designer.glade.h:68
+msgid "pg_size_page"
+msgstr "pg_size_page"
+
+#: ../data/glade/template-designer.glade.h:69
+msgid "rect_size_page"
+msgstr "rect_size_page"
+
+#: ../data/glade/template-designer.glade.h:70
+msgid "round_size_page"
+msgstr "round_size_page"
+
+#: ../data/glade/template-designer.glade.h:71
+msgid "shape_page"
+msgstr "shape_page"
+
+#: ../data/glade/template-designer.glade.h:72
+msgid "start_page"
+msgstr "start_page"
+
+#: ../data/glade/wdgt-media-select.glade.h:1
+msgid "Brand:"
+msgstr "ブランド:"
+
+#: ../data/glade/wdgt-media-select.glade.h:2
+msgid "Category:"
+msgstr "カテゴリ:"
+
+#: ../data/glade/wdgt-media-select.glade.h:4
+msgid "Recent templates"
+msgstr "最近開いたテンプレート"
+
+#: ../data/glade/wdgt-media-select.glade.h:5
+msgid "Search all templates"
+msgstr "全てのテンプレートから検索する"
+
+#: ../data/glade/wdgt-rotate-label.glade.h:1
+msgid "Rotate"
+msgstr "回転させる"
+
+#. Other ISO A series sizes
+#: ../data/templates/paper-sizes.xml.h:2
 msgid "A0"
 msgstr "A0版"
 
-#: data/templates/paper-sizes.xml.h:2
+#: ../data/templates/paper-sizes.xml.h:3
 msgid "A1"
 msgstr "A1版"
 
-#: data/templates/paper-sizes.xml.h:3
+#: ../data/templates/paper-sizes.xml.h:4
 msgid "A10"
 msgstr "A10版"
 
-#: data/templates/paper-sizes.xml.h:4
+#: ../data/templates/paper-sizes.xml.h:5
 msgid "A2"
 msgstr "A2版"
 
-#: data/templates/paper-sizes.xml.h:5
+#: ../data/templates/paper-sizes.xml.h:6
 msgid "A3"
 msgstr "A3版"
 
-#: data/templates/paper-sizes.xml.h:6
+#: ../data/templates/paper-sizes.xml.h:7
 msgid "A4"
 msgstr "A4版"
 
-#: data/templates/paper-sizes.xml.h:7
+#: ../data/templates/paper-sizes.xml.h:8
 msgid "A5"
 msgstr "A5版"
 
-#: data/templates/paper-sizes.xml.h:8
+#: ../data/templates/paper-sizes.xml.h:9
 msgid "A6"
 msgstr "A6版"
 
-#: data/templates/paper-sizes.xml.h:9
+#: ../data/templates/paper-sizes.xml.h:10
 msgid "A7"
 msgstr "A7版"
 
-#: data/templates/paper-sizes.xml.h:10
+#: ../data/templates/paper-sizes.xml.h:11
 msgid "A8"
 msgstr "A8版"
 
-#: data/templates/paper-sizes.xml.h:11
+#: ../data/templates/paper-sizes.xml.h:12
 msgid "A9"
 msgstr "A9版"
 
-#: data/templates/paper-sizes.xml.h:12
+#. ISO B series sizes
+#: ../data/templates/paper-sizes.xml.h:14
 msgid "B0"
 msgstr "B0版"
 
-#: data/templates/paper-sizes.xml.h:13
+#: ../data/templates/paper-sizes.xml.h:15
 msgid "B1"
 msgstr "B1版"
 
-#: data/templates/paper-sizes.xml.h:14
+#: ../data/templates/paper-sizes.xml.h:16
 msgid "B10"
 msgstr "B10版"
 
-#: data/templates/paper-sizes.xml.h:15
+#: ../data/templates/paper-sizes.xml.h:17
 msgid "B2"
 msgstr "B2版"
 
-#: data/templates/paper-sizes.xml.h:16
+#: ../data/templates/paper-sizes.xml.h:18
 msgid "B3"
 msgstr "B3版"
 
-#: data/templates/paper-sizes.xml.h:17
+#: ../data/templates/paper-sizes.xml.h:19
 msgid "B4"
 msgstr "B4版"
 
-#: data/templates/paper-sizes.xml.h:18
+#: ../data/templates/paper-sizes.xml.h:20
 msgid "B5"
 msgstr "B5版"
 
-#: data/templates/paper-sizes.xml.h:19
+#: ../data/templates/paper-sizes.xml.h:21
 msgid "B6"
 msgstr "B6版"
 
-#: data/templates/paper-sizes.xml.h:20
+#: ../data/templates/paper-sizes.xml.h:22
 msgid "B7"
 msgstr "B7版"
 
-#: data/templates/paper-sizes.xml.h:21
+#: ../data/templates/paper-sizes.xml.h:23
 msgid "B8"
 msgstr "B8版"
 
-#: data/templates/paper-sizes.xml.h:22
+#: ../data/templates/paper-sizes.xml.h:24
 msgid "B9"
 msgstr "B9版"
 
-#: data/templates/paper-sizes.xml.h:23
+#: ../data/templates/paper-sizes.xml.h:25
 msgid "US Executive"
 msgstr "US エグゼクティブ"
 
-#: data/templates/paper-sizes.xml.h:24
+#. Other US paper sizes
+#: ../data/templates/paper-sizes.xml.h:27
 msgid "US Legal"
 msgstr "US リーガル"
 
-#: data/templates/avery-us-templates.xml.h:1
-#: data/templates/zweckform-iso-templates.xml.h:1
+#: ../data/templates/categories.xml.h:1
+msgid "Any card"
+msgstr "いずれのカード"
+
+#: ../data/templates/categories.xml.h:2
+msgid "Any label"
+msgstr "いずれのラベル"
+
+#: ../data/templates/categories.xml.h:3
+msgid "Business cards"
+msgstr "名刺"
+
+#: ../data/templates/categories.xml.h:4
+msgid "CD/DVD or other media"
+msgstr "CD/DVD またはその他のメディア"
+
+#: ../data/templates/categories.xml.h:5
+msgid "Mailing/shipping products"
+msgstr "郵送/出荷する製品"
+
+#: ../data/templates/categories.xml.h:6
+msgid "Rectangular labels"
+msgstr "長方形のラベル"
+
+#: ../data/templates/categories.xml.h:7
+msgid "Round labels"
+msgstr "丸いラベル"
+
+#: ../data/templates/categories.xml.h:8
+msgid "Square labels"
+msgstr "正方形のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:2
+#: ../data/templates/avery-us-templates.xml.h:2
+#: ../data/templates/dymo-other-templates.xml.h:4
+#: ../data/templates/misc-iso-templates.xml.h:2
+#: ../data/templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
 msgstr "宛名のラベル"
 
-#: data/templates/avery-us-templates.xml.h:2
-#: data/templates/avery-iso-templates.xml.h:2
-#: data/templates/zweckform-iso-templates.xml.h:3
-#: data/templates/misc-us-templates.xml.h:2
-#: data/templates/misc-iso-templates.xml.h:9
-msgid "Business Cards"
-msgstr "名刺"
-
-#: data/templates/avery-us-templates.xml.h:3
-msgid "CD/DVD Labels (Disc Labels)"
-msgstr "CD/DVD のラベル (Disc ラベル)"
-
-#: data/templates/avery-us-templates.xml.h:4
-msgid "Diskette Labels"
-msgstr "フロッピーのラベル"
-
-#: data/templates/avery-us-templates.xml.h:5
-msgid "Filing Labels"
-msgstr "ファイル・バインダーのラベル"
-
-#: data/templates/avery-us-templates.xml.h:6
-msgid "Full Sheet Labels"
-msgstr "全用紙のラベル"
-
-#: data/templates/avery-us-templates.xml.h:7
-msgid "Large Round Labels"
-msgstr "大きな矩形のラベル"
-
-#: data/templates/avery-us-templates.xml.h:8
-msgid "Name Badge Labels"
-msgstr "名前つきバッジのラベル"
-
-#: data/templates/avery-us-templates.xml.h:9
-msgid "Return Address Labels"
-msgstr "返信用宛名のラベル"
-
-#: data/templates/avery-us-templates.xml.h:10
-msgid "Shipping Labels"
-msgstr "出荷ラベル"
-
-#: data/templates/avery-us-templates.xml.h:11
-msgid "Small Round Labels"
-msgstr "小さな矩形のラベル"
-
-#: data/templates/avery-us-templates.xml.h:12
-msgid "Square Labels"
-msgstr "矩形のラベル"
-
-#: data/templates/avery-us-templates.xml.h:13
-msgid "Video Tape Face Labels"
-msgstr "ビデオ・テープの表面ラベル"
-
-#: data/templates/avery-us-templates.xml.h:14
-msgid "Video Tape Spine Labels"
-msgstr "ビデオ・テープの背面ラベル"
-
-#: data/templates/avery-iso-templates.xml.h:1
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:4
 msgid "Address labels"
 msgstr "宛名のラベル"
 
-#: data/templates/avery-iso-templates.xml.h:3
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:6
+msgid "Allround labels"
+msgstr "汎用的なラベル"
+
+#. ============================================================
+#. ===================================================================
+#. ********************************************************************
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:8
+#: ../data/templates/avery-us-templates.xml.h:4
+#: ../data/templates/misc-iso-templates.xml.h:12
+#: ../data/templates/misc-us-templates.xml.h:4
+#: ../data/templates/zweckform-iso-templates.xml.h:6
+msgid "Business Cards"
+msgstr "名刺"
+
+#. ===============================================================
+#: ../data/templates/avery-iso-templates.xml.h:10
 msgid "CD Booklet"
 msgstr "CD の小冊子"
 
-#: data/templates/avery-iso-templates.xml.h:4
+#. ===============================================================
+#: ../data/templates/avery-iso-templates.xml.h:12
 msgid "CD Inlet"
 msgstr "CD のインレット"
 
-#: data/templates/avery-iso-templates.xml.h:5
-#: data/templates/zweckform-iso-templates.xml.h:4
-#: data/templates/misc-us-templates.xml.h:4
-#: data/templates/misc-iso-templates.xml.h:10
+#. ===============================================================
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:14
+#: ../data/templates/avery-us-templates.xml.h:6
+#: ../data/templates/misc-iso-templates.xml.h:16
+#: ../data/templates/misc-us-templates.xml.h:8
+#: ../data/templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
 msgstr "CD/DVD のラベル"
 
-#: data/templates/avery-iso-templates.xml.h:6
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:16
+#: ../data/templates/avery-us-templates.xml.h:12
+msgid "Diskette Labels"
+msgstr "フロッピーのラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:18
 msgid "Diskette labels"
 msgstr "フロッピーのラベル"
 
-#: data/templates/avery-iso-templates.xml.h:7
-#: data/templates/zweckform-iso-templates.xml.h:7
-#: data/templates/misc-iso-templates.xml.h:17
+#. ===============================================================
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:20
+#: ../data/templates/misc-iso-templates.xml.h:36
+#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "封筒のラベル"
 
-#: data/templates/avery-iso-templates.xml.h:8
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:22
 msgid "Mailing labels"
 msgstr "封筒のラベル"
 
-#: data/templates/avery-iso-templates.xml.h:9
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:24
 msgid "Mini Address Labels"
 msgstr "小さな宛名のラベル"
 
-#: data/templates/avery-iso-templates.xml.h:10
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:26
+msgid "Mini Labels"
+msgstr "ミニ・ラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-iso-templates.xml.h:28
 msgid "Shipping labels"
 msgstr "出荷ラベル"
 
-#: data/templates/zweckform-iso-templates.xml.h:2
+#. ===================================================================
+#: ../data/templates/avery-other-templates.xml.h:2
+msgid "File Folder Labels"
+msgstr "ファイル・フォルダのラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:8
+msgid "CD/DVD Labels (Disc Labels)"
+msgstr "CD/DVD のラベル (Disc ラベル)"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:10
+msgid "CD/DVD Labels (Spine Labels)"
+msgstr "CD/DVD のラベル (Spine ラベル)"
+
+#. the LSK labels can be torn in half down the center
+#: ../data/templates/avery-us-templates.xml.h:14
+msgid "Divider Labels"
+msgstr "ドライバのラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:16
+msgid "Filing Labels"
+msgstr "ファイル・バインダーのラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:18
+msgid "Full Sheet Labels"
+msgstr "全用紙のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:20
+msgid "ID Labels"
+msgstr "ID のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:22
+msgid "Index Cards"
+msgstr "目録のカード"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:24
+msgid "Large Round Labels"
+msgstr "大きな丸のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:26
+msgid "Name Badge Labels"
+msgstr "名前つきバッジのラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:28
+msgid "Post cards"
+msgstr "はがき"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:30
+#: ../data/templates/dymo-other-templates.xml.h:12
+msgid "Return Address Labels"
+msgstr "返信用宛名のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:32
+#: ../data/templates/misc-us-templates.xml.h:28
+msgid "Round Labels"
+msgstr "角が丸いラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:34
+msgid "Shipping Labels"
+msgstr "出荷ラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:36
+msgid "Small Round Labels"
+msgstr "小さな丸いラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:38
+msgid "Square Labels"
+msgstr "正方形のラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:40
+msgid "Tent Cards"
+msgstr "テントのカード"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:42
+msgid "Video Tape Face Labels"
+msgstr "ビデオ・テープの表面ラベル"
+
+#. ===================================================================
+#: ../data/templates/avery-us-templates.xml.h:44
+msgid "Video Tape Spine Labels"
+msgstr "ビデオ・テープの背面ラベル"
+
+#: ../data/templates/brother-other-templates.xml.h:1
+msgid "Multi Purpose Labels 17mm x 54mm"
+msgstr "多目的ラベル 17mm x 54mm"
+
+#: ../data/templates/brother-other-templates.xml.h:2
+msgid "Shipping Labels 62mm x 100mm"
+msgstr "出荷ラベル 62mm x 100mm"
+
+#.
+#. *********************************************************************
+#. *********************************************************************
+#. Labels for the Brother QL-500/550/650 PC Label Printers
+#.
+#. These templates work with the Brother Linux Printer CUPS Driver.  It
+#. is unknown if these work correctly with the foomatic print driver for
+#. these printers.
+#.
+#. One difference from typical templates is that the template size is
+#. not the actual media size - it is the size of the printable area,
+#. which is smaller than the media size.  This is because (at least with
+#. the Brother driver) coordinates are relative the corner of this area.
+#.
+#. *********************************************************************
+#. *********************************************************************
+#.
+#: ../data/templates/brother-other-templates.xml.h:20
+msgid "Standard Address Labels 29mm x 90mm"
+msgstr "標準的な宛名のラベル 29mm x 90mm"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:2
+msgid "3.5in Diskette"
+msgstr "3.5インチのフロッピーディスク"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:6
+msgid "File Folder"
+msgstr "ファイルのフォルダ"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:8
+msgid "Hanging Folder"
+msgstr "つり下げ式のフォルダ"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:10
+msgid "Large Address Labels"
+msgstr "大きな宛名のラベル"
+
+#. ===================================================================
+#: ../data/templates/dymo-other-templates.xml.h:14
+msgid "Shipping Address Labels"
+msgstr "出荷ラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:4
+#: ../data/templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
 msgstr "汎用的なラベル"
 
-#: data/templates/zweckform-iso-templates.xml.h:5
-msgid "Correction and Cover-up Labels"
-msgstr "コレクションとカバーのラベル"
-
-#: data/templates/zweckform-iso-templates.xml.h:6
-msgid "Lever Arch File Labels"
-msgstr "レバー・アーチ・ファイルのラベル"
-
-#: data/templates/zweckform-iso-templates.xml.h:8
-msgid "QSL-Karten Etiketten 70mm x 50,8mm"
-msgstr "QSL-Karten Etiketten (70mm x 50.8mm)"
-
-#: data/templates/zweckform-iso-templates.xml.h:9
-msgid "Rectangular Copier Labels"
-msgstr "長方形のコピー機のラベル"
-
-#: data/templates/zweckform-iso-templates.xml.h:10
-#: data/templates/misc-iso-templates.xml.h:22
-msgid "Rectangular Labels"
-msgstr "長方形のラベル"
-
-#: data/templates/zweckform-iso-templates.xml.h:11
-msgid "Video Labels (back)"
-msgstr "ビデオのラベル (裏側)"
-
-#: data/templates/misc-us-templates.xml.h:1
-msgid "Business Card CD"
-msgstr "名刺 CD"
-
-#: data/templates/misc-us-templates.xml.h:3
-msgid "CD Template Rectangles"
-msgstr "CD テンプレート (長方形)"
-
-#: data/templates/misc-us-templates.xml.h:5
-msgid "CD/DVD Labels (Face Only)"
-msgstr "CD/DVD のラベル (外側のみ)"
-
-#: data/templates/misc-us-templates.xml.h:6
-#: data/templates/misc-iso-templates.xml.h:11
-msgid "CD/DVD Labels (face only)"
-msgstr "CD/DVD のラベル (外側のみ)"
-
-#: data/templates/misc-us-templates.xml.h:7
-msgid "DLT Labels"
-msgstr "DLT のラベル"
-
-#: data/templates/misc-us-templates.xml.h:8
-msgid "Microtube labels"
-msgstr "マイクロチューブのラベル"
-
-#: data/templates/misc-us-templates.xml.h:9
-msgid "Mini-CD Labels"
-msgstr "ミニ CD のラベル"
-
-#: data/templates/misc-us-templates.xml.h:10
-msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr "PRO CD のラベル二枚 (CD 格納ケースのみ)"
-
-#: data/templates/misc-us-templates.xml.h:11
-msgid "PRO CD Labels 2-up (Face only)"
-msgstr "PRO CD ラベル二枚 (外側のみ)"
-
-#: data/templates/misc-us-templates.xml.h:12
-#: data/templates/misc-iso-templates.xml.h:21
-msgid "PRO CD Labels 2-up (face only)"
-msgstr "PRO CD ラベル二枚 (外側のみ)"
-
-#: data/templates/misc-us-templates.xml.h:13
-msgid "Slimline CD Case (rightside up)"
-msgstr "薄い CD フォルダ (右側)"
-
-#: data/templates/misc-us-templates.xml.h:14
-msgid "Slimline CD Case (upside down)"
-msgstr "薄い CD フォルダ (上側)"
-
-#: data/templates/misc-iso-templates.xml.h:1
-msgid "Agipa 119488: Business Cards"
-msgstr "Agipa 119488: 名刺"
-
-#: data/templates/misc-iso-templates.xml.h:2
-msgid "Allround Labels --24"
-msgstr "汎用的なラベル --24"
-
-#: data/templates/misc-iso-templates.xml.h:3
-msgid "Allround Labels --44"
-msgstr "汎用的なラベル --44"
-
-#: data/templates/misc-iso-templates.xml.h:4
-msgid "Allround Labels --64"
-msgstr "汎用的なラベル --64"
-
-#: data/templates/misc-iso-templates.xml.h:5
-msgid "Allround Labels --65"
-msgstr "汎用的なラベル --65"
-
-#: data/templates/misc-iso-templates.xml.h:6
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:6
 msgid "Arch File Labels"
 msgstr "アーチ・ファイルのラベル"
 
-#: data/templates/misc-iso-templates.xml.h:7
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:8
 msgid "Arch File Labels (large)"
 msgstr "アーチ・ファイルのラベル (大)"
 
-#: data/templates/misc-iso-templates.xml.h:8
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:10
 msgid "Arch File Labels (small)"
 msgstr "アーチ・ファイルのラベル (小)"
 
-#: data/templates/misc-iso-templates.xml.h:12
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:14
+msgid "CD Labels"
+msgstr "CD のラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:12
+msgid "CD/DVD Labels (face only)"
+msgstr "CD/DVD のラベル (外側のみ)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:20
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "CD/DVD のラベル標準書式 (外側のみ)"
 
-#: data/templates/misc-iso-templates.xml.h:13
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:22
 msgid "Diskette Labels (face only)"
 msgstr "フロッピーのラベル (外側のみ)"
 
-#: data/templates/misc-iso-templates.xml.h:14
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:24
 msgid "EPSON Photo Stickers 16"
 msgstr "EPSON フォト・ステッカー 16"
 
-#: data/templates/misc-iso-templates.xml.h:15
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:26
 msgid "Etiketten"
 msgstr "Etiketten"
 
-#: data/templates/misc-iso-templates.xml.h:16
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:28
 msgid "Fridge Magnet Stickers"
 msgstr "冷蔵庫に貼る磁気ステッカ"
 
-#: data/templates/misc-iso-templates.xml.h:18
-msgid "Mailing Labels --14"
-msgstr "封筒のラベル --14"
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:30
+msgid "General Labels"
+msgstr "一般的なラベル"
 
-#: data/templates/misc-iso-templates.xml.h:19
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:32
+msgid "Inkjet/Laser Labels 70x37mm"
+msgstr "インクジェット/レーザ印刷用のラベル 70x37mm"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:38
 msgid "Mailing Labels-2 columns"
 msgstr "封筒のラベル (二列)"
 
-#: data/templates/misc-iso-templates.xml.h:20
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:40
 msgid "Mailing Labels-3 columns"
 msgstr "封筒のラベル (三列)"
 
-#: data/templates/misc-iso-templates.xml.h:23
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:42
+#: ../data/templates/misc-us-templates.xml.h:26
+msgid "PRO CD Labels 2-up (face only)"
+msgstr "PRO CD ラベル二枚 (外側のみ)"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:44
+#: ../data/templates/zweckform-iso-templates.xml.h:24
+msgid "Rectangular Labels"
+msgstr "長方形のラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:46
 msgid "Video Labels (face only)"
 msgstr "ビデオのラベル (外側のみ)"
 
-#: data/desktop/glabels.desktop.in.h:1
-msgid "Create labels, business cards and media covers"
-msgstr "ラベルや名刺、メディアのカバーを生成します"
+#. ===================================================================
+#: ../data/templates/misc-other-templates.xml.h:2
+msgid "Multi-Purpose Labels"
+msgstr "多目的ラベル"
 
-#: data/desktop/glabels.desktop.in.h:2
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:2
+msgid "Business Card CD"
+msgstr "名刺 CD"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:6
+msgid "CD Template Rectangles"
+msgstr "CD テンプレート (長方形)"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:10
+msgid "CD/DVD Labels (Face Only)"
+msgstr "CD/DVD のラベル (外側のみ)"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:14
+msgid "Cassette Labels"
+msgstr "カセットのラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:16
+msgid "DLT Labels"
+msgstr "DLT のラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:20
+msgid "Microtube labels"
+msgstr "マイクロチューブのラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
+msgid "Mini-CD Labels"
+msgstr "ミニ CD のラベル"
+
+#: ../data/templates/misc-us-templates.xml.h:23
+msgid "PRO CD Labels 2-up (CD spine only)"
+msgstr "PRO CD のラベル二枚 (CD 格納ケースのみ)"
+
+#: ../data/templates/misc-us-templates.xml.h:24
+msgid "PRO CD Labels 2-up (Face only)"
+msgstr "PRO CD ラベル二枚 (外側のみ)"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:30
+msgid "Slimline CD Case (rightside up)"
+msgstr "薄い CD フォルダ (右側)"
+
+#: ../data/templates/misc-us-templates.xml.h:31
+msgid "Slimline CD Case (upside down)"
+msgstr "薄い CD フォルダ (上側)"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:10
+msgid "Correction and Cover-up Labels"
+msgstr "コレクションとカバーのラベル"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:12
+msgid "File Back Labels"
+msgstr "ファイルのラベル"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:14
+msgid "Lever Arch File Labels"
+msgstr "レバー・アーチ・ファイルのラベル"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:18
+msgid "Multi-purpose Stick+Lift Labels"
+msgstr "多目的 Stick+Lift のラベル"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:20
+msgid "QSL-Karten Etiketten 70mm x 50,8mm"
+msgstr "QSL-Karten Etiketten (70mm x 50.8mm)"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:22
+msgid "Rectangular Copier Labels"
+msgstr "長方形のコピー機のラベル"
+
+#. ===================================================================
+#: ../data/templates/zweckform-iso-templates.xml.h:26
+msgid "Video Labels (back)"
+msgstr "ビデオのラベル (裏側)"
+
+#: ../data/desktop/glabels.desktop.in.h:1
+msgid "Create labels, business cards and media covers"
+msgstr "ラベルや名刺、メディアのジャケットをデザインします"
+
+#: ../data/desktop/glabels.desktop.in.h:2
 msgid "gLabels Label Designer"
 msgstr "gLabels ラベル・デザイナ"
 
-#: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
+#: ../data/mime/glabels.keys.in.h:1 ../data/mime/glabels.xml.in.h:1
 msgid "gLabels Project File"
 msgstr "gLabels のプロジェクト・ファイル"
+
+#: ../barcode-0.98/compat/getopt.c:583
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: オプションの `%s` はあいまいです\n"
+
+#: ../barcode-0.98/compat/getopt.c:607
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: オプションの `--%s` は引数を取ることはできません\n"
+
+#: ../barcode-0.98/compat/getopt.c:612
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: オプションの `%c%s` は引数を取ることはできません\n"
+
+#: ../barcode-0.98/compat/getopt.c:629
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: オプションの `%s` には引数が必要です\n"
+
+#. --option
+#: ../barcode-0.98/compat/getopt.c:658
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: 認識できないオプション `--%s`\n"
+
+#. +option or -option
+#: ../barcode-0.98/compat/getopt.c:662
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: 認識できないオプション `%c%s`\n"
+
+#. 1003.2 specifies the format of this message.
+#: ../barcode-0.98/compat/getopt.c:688
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: 不正なオプション-- %c\n"
+
+#: ../barcode-0.98/compat/getopt.c:691
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: 不正なオプション -- %c\n"
+
+#: ../barcode-0.98/compat/getopt.c:727
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: オプションには引数が必要です -- %c\n"
