@@ -25,11 +25,13 @@
 
 G_BEGIN_DECLS
 
-gint  lgl_str_utf8_casecmp  (const gchar *s1,
-                             const gchar *s2);
+gint   lgl_str_utf8_casecmp    (const gchar *s1,
+                                const gchar *s2);
 
-gint  lgl_str_part_name_cmp (const gchar *s1,
-                             const gchar *s2);
+gint   lgl_str_part_name_cmp   (const gchar *s1,
+                                const gchar *s2);
+
+gchar *lgl_str_format_fraction (gdouble      x);
 
 G_END_DECLS
 

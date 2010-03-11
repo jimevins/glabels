@@ -40,6 +40,8 @@
 #define MARGIN 2
 #define SHADOW_OFFSET 3
 
+#define ARROW_SCALE 0.35
+#define ARROW_RGBA_ARGS 1.0, 0.0, 0.0, 0.05
 
 /*===========================================*/
 /* Private types                             */
@@ -72,6 +74,9 @@ struct _glMiniPreviewPrivate {
 	gint            first_i;
 	gint            last_i;
 	gint            prev_i;
+
+        gboolean        draw_arrow_flag;
+        gboolean        rotate_flag;
 
         gboolean        update_scheduled_flag;
 
@@ -139,6 +144,11 @@ static void     draw_labels                    (glMiniPreview          *this,
 						cairo_t                *cr,
 						lglTemplate            *template,
 						gdouble                 line_width);
+static void     draw_arrow                     (glMiniPreview          *this,
+                                                cairo_t                *cr,
+                                                gdouble                 width,
+                                                gdouble                 height);
+
 static void     draw_rich_preview              (glMiniPreview          *this,
 						cairo_t                *cr);
 
@@ -394,6 +404,36 @@ gl_mini_preview_highlight_range (glMiniPreview *this,
         }
 
 	gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/****************************************************************************/
+/* Set draw arrow.                                                          */
+/****************************************************************************/
+void
+gl_mini_preview_set_draw_arrow (glMiniPreview     *this,
+                                gboolean           draw_arrow_flag)
+{
+        if ( draw_arrow_flag != this->priv->draw_arrow_flag )
+        {
+                this->priv->draw_arrow_flag = draw_arrow_flag;
+                redraw (this);
+        }
+}
+
+
+/****************************************************************************/
+/* Set rotate flag.                                                         */
+/****************************************************************************/
+void
+gl_mini_preview_set_rotate (glMiniPreview     *this,
+                            gboolean           rotate_flag)
+{
+        if ( rotate_flag != this->priv->rotate_flag )
+        {
+                this->priv->rotate_flag = rotate_flag;
+                redraw (this);
+        }
 }
 
 
@@ -858,7 +898,13 @@ draw (glMiniPreview  *this,
 			    template->page_width, template->page_height,
 			    1.0/scale);
 
-		draw_labels (this, cr, template, 1.0/scale);
+		draw_labels (this, cr, template, 2.0/scale);
+
+                if (this->priv->draw_arrow_flag)
+                {
+                        draw_arrow (this, cr,
+                                    template->page_width, template->page_height);
+                }
 
                 if (this->priv->label)
                 {
@@ -971,7 +1017,7 @@ draw_labels (glMiniPreview *this,
         if (this->priv->label)
         {
                 /* Outlines are more subtle when doing a rich preview. */
-                outline_color   = gl_color_set_opacity (base_color, 0.05);
+                outline_color   = gl_color_set_opacity (base_color, 0.25);
         }
         else
         {
@@ -1004,6 +1050,46 @@ draw_labels (glMiniPreview *this,
         g_free (origins);
 
         gl_debug (DEBUG_MINI_PREVIEW, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* Draw arrow to indicate top of labels.                                    */
+/*--------------------------------------------------------------------------*/
+static void
+draw_arrow  (glMiniPreview      *this,
+             cairo_t            *cr,
+             gdouble             width,
+             gdouble             height)
+{
+        gdouble min;
+
+        cairo_save (cr);
+
+        min = MIN (width, height);
+
+        cairo_translate (cr, width/2, height/2);
+        cairo_scale (cr, 1, -1);
+        if ( this->priv->rotate_flag )
+        {
+                cairo_rotate (cr, -M_PI/2.0);
+        }
+
+        cairo_new_path (cr);
+        cairo_move_to (cr, 0, -min*ARROW_SCALE/2);
+        cairo_line_to (cr, 0, min*ARROW_SCALE);
+
+        cairo_new_sub_path (cr);
+        cairo_move_to (cr, -min*ARROW_SCALE/2, min*ARROW_SCALE/2);
+        cairo_line_to (cr, 0, min*ARROW_SCALE);
+        cairo_line_to (cr, min*ARROW_SCALE/2, min*ARROW_SCALE/2);
+
+        cairo_set_line_width (cr, 0.25*min*ARROW_SCALE);
+        cairo_set_source_rgba (cr, ARROW_RGBA_ARGS);
+
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
 }
 
 

@@ -22,6 +22,7 @@
 #define __LGL_TEMPLATE_H__
 
 #include <glib.h>
+#include "units.h"
 
 G_BEGIN_DECLS
 
@@ -285,19 +286,24 @@ struct _lglTemplateOrigin {
 /* 
  * Template query functions
  */
-gchar                     *lgl_template_get_name             (const lglTemplate   *template);
+gchar                     *lgl_template_get_name                (const lglTemplate   *template);
 
-gboolean                   lgl_template_do_templates_match   (const lglTemplate   *template1,
-                                                              const lglTemplate   *template2);
+gboolean                   lgl_template_do_templates_match      (const lglTemplate   *template1,
+                                                                 const lglTemplate   *template2);
 
-gboolean                   lgl_template_does_brand_match     (const lglTemplate   *template,
-                                                              const gchar         *brand);
+gboolean                   lgl_template_does_brand_match        (const lglTemplate   *template,
+                                                                 const gchar         *brand);
 
-gboolean                   lgl_template_does_page_size_match (const lglTemplate   *template,
-                                                              const gchar         *paper_id);
+gboolean                   lgl_template_does_page_size_match    (const lglTemplate   *template,
+                                                                 const gchar         *paper_id);
 
-gboolean                   lgl_template_does_category_match  (const lglTemplate   *template,
-                                                              const gchar         *category_id);
+gboolean                   lgl_template_does_category_match     (const lglTemplate   *template,
+                                                                 const gchar         *category_id);
+
+gboolean                   lgl_template_are_templates_identical (const lglTemplate   *template1,
+                                                                 const lglTemplate   *template2);
+
+
 
 
 /*
@@ -310,6 +316,13 @@ void                 lgl_template_frame_get_size       (const lglTemplateFrame  
 gint                 lgl_template_frame_get_n_labels   (const lglTemplateFrame    *frame);
 
 lglTemplateOrigin   *lgl_template_frame_get_origins    (const lglTemplateFrame    *frame);
+
+gchar               *lgl_template_frame_get_layout_description (const lglTemplateFrame *frame);
+
+gchar               *lgl_template_frame_get_size_description   (const lglTemplateFrame *frame,
+                                                                lglUnits                units);
+
+
 
 
 /*

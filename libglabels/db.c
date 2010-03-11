@@ -1149,7 +1149,7 @@ read_vendor_files_from_dir (GList      *vendors,
 
 		if (extension != NULL) {
 
-			if ( ASCII_EQUAL (filename, "vendor-sizes.xml") )
+			if ( ASCII_EQUAL (filename, "vendors.xml") )
                         {
 
 				full_filename =
@@ -1556,6 +1556,77 @@ lgl_db_get_template_name_list_all (const gchar *brand,
 
 
 /**
+ * lgl_db_get_similar_template_name_list:
+ * @name:     Name of template under test.
+ *
+ * Get a list of all valid names and aliases of templates in the template database that
+ * have the same size and layout characteristics as the given template.
+ *
+ * Returns: a list of template names and aliases.
+ */
+GList *
+lgl_db_get_similar_template_name_list (const gchar  *name)
+{
+	GList            *p_tmplt, *p_alias;
+	lglTemplate      *template1;
+	lglTemplate      *template2;
+	lglTemplateAlias *alias;
+        gchar            *name2;
+	GList            *names = NULL;
+
+	if (!templates)
+        {
+		lgl_db_init ();
+	}
+
+        if ( !name )
+        {
+                return NULL;
+        }
+
+        template1 = lgl_db_lookup_template_from_name (name);
+        if ( !template1 )
+        {
+                return NULL;
+        }
+
+        for (p_alias = template1->aliases; p_alias != NULL; p_alias = p_alias->next)
+        {
+                alias = (lglTemplateAlias *)p_alias->data;
+
+                name2 = g_strdup_printf ("%s %s", alias->brand, alias->part);
+                if ( !UTF8_EQUAL (name2, name) )
+                {
+                        names = g_list_insert_sorted (names, name2,
+                                                      (GCompareFunc)lgl_str_part_name_cmp);
+                }
+        }
+
+	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+        {
+		template2 = (lglTemplate *) p_tmplt->data;
+
+                if ( lgl_template_are_templates_identical (template1, template2) )
+                {
+			for (p_alias = template2->aliases; p_alias != NULL; p_alias = p_alias->next)
+                        {
+                                alias = (lglTemplateAlias *)p_alias->data;
+
+                                name2 = g_strdup_printf ("%s %s", alias->brand, alias->part);
+                                if ( !UTF8_EQUAL (name2, name) )
+                                {
+                                        names = g_list_insert_sorted (names, name2,
+                                                                      (GCompareFunc)lgl_str_part_name_cmp);
+                                }
+			}
+		}
+	}
+
+	return names;
+}
+
+
+/**
  * lgl_db_free_template_name_list:
  * @names: List of template name strings to be freed.
  *
@@ -1819,7 +1890,7 @@ template_full_page (const gchar *paper_id)
 	}
 
 	part = g_strdup_printf ("%s-Full-Page", paper->id);
-	desc = g_strdup_printf (_("Generic %s full page template"), paper->name);
+	desc = g_strdup_printf (_("%s full page label"), paper->name);
 
 	template = lgl_template_new ("Generic", part, desc,
                                      paper_id, paper->width, paper->height);

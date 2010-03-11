@@ -26,8 +26,6 @@
 
 G_BEGIN_DECLS
 
-gchar              *gl_str_util_fraction_to_string    (gdouble            x);
-
 const gchar        *gl_str_util_align_to_string       (PangoAlignment     align);
 PangoAlignment      gl_str_util_string_to_align       (const gchar       *string);
 

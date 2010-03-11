@@ -18,11 +18,15 @@
  *  along with libglabels.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//#include <config.h>
+#include <config.h>
 
 #include "str.h"
 
 #include <string.h>
+#include <math.h>
+
+#define FRAC_EPSILON 0.00005
+
 
 /*===========================================*/
 /* Private types                             */
@@ -214,6 +218,41 @@ span_non_digits (gchar **p)
         }
 
         return chunk;
+}
+
+
+/****************************************************************************/
+/* Create fractional representation of number, if possible.                 */
+/****************************************************************************/
+gchar *
+lgl_str_format_fraction (gdouble x)
+{
+	static gdouble denom[] = { 1., 2., 3., 4., 8., 16., 32., 0. };
+	gint i;
+	gdouble product, remainder;
+	gint n, d;
+
+	for ( i=0; denom[i] != 0.0; i++ ) {
+		product = x * denom[i];
+		remainder = fabs(product - ((gint)(product+0.5)));
+		if ( remainder < FRAC_EPSILON ) break;
+	}
+
+	if ( denom[i] == 0.0 ) {
+		/* None of our denominators work. */
+		return g_strdup_printf ("%.5g", x);
+	}
+	if ( denom[i] == 1.0 ) {
+		/* Simple integer. */
+		return g_strdup_printf ("%d", (gint)x);
+	}
+	n = (gint)( x * denom[i] + 0.5 );
+	d = (gint)denom[i];
+	if ( n > d ) {
+		return g_strdup_printf ("%d_%d/%d", (n/d), (n%d), d);
+	} else {
+		return g_strdup_printf ("%d/%d", (n%d), d);
+	}
 }
 
 

@@ -130,6 +130,8 @@ GList         *lgl_db_get_template_name_list_all     (const gchar         *brand
                                                       const gchar         *paper_id,
                                                       const gchar         *category_id);
 
+GList         *lgl_db_get_similar_template_name_list (const gchar         *name);
+
 void           lgl_db_free_template_name_list        (GList               *names);
 
 lglTemplate   *lgl_db_lookup_template_from_name      (const gchar         *name);
@@ -148,6 +150,8 @@ void           lgl_db_print_known_categories         (void);
 void           lgl_db_print_known_templates          (void);
 
 void           lgl_db_print_aliases                  (const lglTemplate    *template);
+
+void           lgl_db_print_known_vendors            (void);
 
 
 

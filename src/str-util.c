@@ -25,43 +25,6 @@
 #include <string.h>
 #include <math.h>
 
-#define FRAC_EPSILON 0.00005
-
-
-/****************************************************************************/
-/* Create fractional representation of number, if possible.                 */
-/****************************************************************************/
-gchar *
-gl_str_util_fraction_to_string (gdouble x)
-{
-	static gdouble denom[] = { 1., 2., 3., 4., 8., 16., 32., 0. };
-	gint i;
-	gdouble product, remainder;
-	gint n, d;
-
-	for ( i=0; denom[i] != 0.0; i++ ) {
-		product = x * denom[i];
-		remainder = fabs(product - ((gint)(product+0.5)));
-		if ( remainder < FRAC_EPSILON ) break;
-	}
-
-	if ( denom[i] == 0.0 ) {
-		/* None of our denominators work. */
-		return g_strdup_printf ("%.5g", x);
-	}
-	if ( denom[i] == 1.0 ) {
-		/* Simple integer. */
-		return g_strdup_printf ("%d", (gint)x);
-	}
-	n = (gint)( x * denom[i] + 0.5 );
-	d = (gint)denom[i];
-	if ( n > d ) {
-		return g_strdup_printf ("%d_%d/%d", (n/d), (n%d), d);
-	} else {
-		return g_strdup_printf ("%d/%d", (n%d), d);
-	}
-}
-
 
 /****************************************************************************/
 /* Utilities to deal with PangoAlignment types.                             */

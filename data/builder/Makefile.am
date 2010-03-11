@@ -5,7 +5,7 @@ builderdir = $(datadir)/$(GLABELS_BRANCH)/builder/
 builder_DATA = \
 	property-bar.builder		\
 	print-op-dialog-custom-widget.builder	\
-	media-select.builder		\
+	new-label-dialog.builder	\
 	merge-properties-dialog.builder	\
 	template-designer.builder	\
 	prefs-dialog.builder		\

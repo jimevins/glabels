@@ -83,6 +83,12 @@ void       gl_mini_preview_highlight_range     (glMiniPreview     *this,
                                                 gint               first_label,
                                                 gint               last_label);
 
+void       gl_mini_preview_set_draw_arrow      (glMiniPreview     *this,
+                                                gboolean           draw_arrow_flag);
+
+void       gl_mini_preview_set_rotate          (glMiniPreview     *this,
+                                                gboolean           rotate_flag);
+
 
 /*
  * If label is set, the preview will be rich.

@@ -180,7 +180,7 @@ lgl_template_get_name (const lglTemplate  *template)
  * This function tests if the given templates match.  This is a simple test that only tests
  * the brand and part name/number. It does not test if they are actually identical.
  *
- * Returns:  TRUE if the two template matche.
+ * Returns:  TRUE if the two templates match.
  *
  */
 gboolean
@@ -280,6 +280,108 @@ lgl_template_does_category_match  (const lglTemplate  *template,
         }
 
         return FALSE;
+}
+
+
+/**
+ * lgl_template_are_templates_identical:
+ *   @template1:  Pointer to 1st template structure to test
+ *   @template2:  Pointer to 2nd template structure to test
+ *
+ * This function tests if the given templates have identical size and layout properties.
+ *
+ * Returns:  TRUE if the two templates are identical.
+ *
+ */
+gboolean
+lgl_template_are_templates_identical (const lglTemplate   *template1,
+                                      const lglTemplate   *template2)
+{
+        lglTemplateFrame  *frame1;
+        lglTemplateFrame  *frame2;
+        GList             *p1;
+        GList             *p2;
+        lglTemplateLayout *layout1;
+        lglTemplateLayout *layout2;
+        gboolean           match_found;
+
+
+        if (!UTF8_EQUAL (template1->paper_id, template2->paper_id) ||
+            (template1->page_width  != template2->page_width)      ||
+            (template1->page_height != template2->page_height))
+        {
+                return FALSE;
+        }
+
+        frame1 = (lglTemplateFrame *)template1->frames->data;
+        frame2 = (lglTemplateFrame *)template2->frames->data;
+
+        if ( frame1->shape != frame2->shape )
+        {
+                return FALSE;
+        }
+
+        switch ( frame1->shape )
+        {
+
+        case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                if ((frame1->rect.w != frame2->rect.w) ||
+                    (frame1->rect.h != frame2->rect.h))
+                {
+                        return FALSE;
+                }
+                break;
+
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                if ((frame1->ellipse.w != frame2->ellipse.w) ||
+                    (frame1->ellipse.h != frame2->ellipse.h))
+                {
+                        return FALSE;
+                }
+                break;
+
+        case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                if ((frame1->round.r != frame2->round.r))
+                {
+                        return FALSE;
+                }
+                break;
+
+        case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                if ((frame1->cd.r1 != frame2->cd.r1) ||
+                    (frame1->cd.r2 != frame2->cd.r2))
+                {
+                        return FALSE;
+                }
+        }
+
+        for ( p1 = frame1->all.layouts; p1; p1 = p1->next )
+        {
+                layout1 = (lglTemplateLayout *)p1->data;
+
+                match_found = FALSE;
+                for ( p2 = frame2->all.layouts; p2 && !match_found; p2 = p2->next )
+                {
+                        layout2 = (lglTemplateLayout *)p2->data;
+
+                        if ( (layout1->nx == layout2->nx) &&
+                             (layout1->ny == layout2->ny) &&
+                             (layout1->x0 == layout2->x0) &&
+                             (layout1->y0 == layout2->y0) &&
+                             (layout1->dx == layout2->dx) &&
+                             (layout1->dy == layout2->dy) )
+                        {
+                                match_found = TRUE;
+                        }
+
+                }
+                if ( !match_found )
+                {
+                        return FALSE;
+                }
+        }
+
+        return TRUE;
 }
 
 
@@ -585,6 +687,134 @@ lgl_template_frame_get_n_labels (const lglTemplateFrame *frame)
 	}
 
 	return n_labels;
+}
+
+
+/**
+ * lgl_template_frame_get_layout_description
+ * @frame: #lglTemplateFrame structure to query
+ *
+ * Get a description of the label layout including number of labels per sheet.
+ *
+ * Returns: a newly allocation description string.
+ *
+ */
+gchar *
+lgl_template_frame_get_layout_description (const lglTemplateFrame *frame)
+{
+        gint                    n_labels;
+        gchar                  *string;
+        lglTemplateLayout      *layout;
+
+        n_labels = lgl_template_frame_get_n_labels (frame);
+
+        if ( frame->all.layouts && (frame->all.layouts->next == NULL) )
+        {
+                layout = (lglTemplateLayout *)frame->all.layouts->data;
+                string = g_strdup_printf ("%d × %d (%d %s)", layout->nx, layout->ny, n_labels, _("per sheet"));
+        }
+        else
+        {
+                string = g_strdup_printf (_("%d %s"), n_labels, _("per sheet"));
+        }
+
+        return string;
+}
+
+
+/**
+ * lgl_template_frame_get_size_description
+ * @frame: #lglTemplateFrame structure to query
+ * @units: #lglUnits
+ *
+ * Get a description of the label size.
+ *
+ * Returns: a newly allocation description string.
+ *
+ */
+gchar *
+lgl_template_frame_get_size_description (const lglTemplateFrame *frame,
+                                         lglUnits                units)
+{
+        const gchar               *units_string;
+        gdouble                    units_per_point;
+        gchar                     *string = NULL;
+
+        units_string    = lgl_units_get_name (units);
+        units_per_point = lgl_units_get_units_per_point (units);
+
+        switch (frame->shape) {
+        case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                if ( units == LGL_UNITS_INCH ) {
+                        gchar *xstr, *ystr;
+
+                        xstr = lgl_str_format_fraction (frame->rect.w*units_per_point);
+                        ystr = lgl_str_format_fraction (frame->rect.h*units_per_point);
+                        string = g_strdup_printf ("%s × %s %s",
+                                                  xstr, ystr, units_string);
+                        g_free (xstr);
+                        g_free (ystr);
+                } else {
+                        string = g_strdup_printf ("%.5g × %.5g %s",
+                                                  frame->rect.w*units_per_point,
+                                                  frame->rect.h*units_per_point,
+                                                  units_string);
+                }
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                if ( units == LGL_UNITS_INCH ) {
+                        gchar *xstr, *ystr;
+
+                        xstr = lgl_str_format_fraction (frame->ellipse.w*units_per_point);
+                        ystr = lgl_str_format_fraction (frame->ellipse.h*units_per_point);
+                        string = g_strdup_printf ("%s × %s %s",
+                                                  xstr, ystr, units_string);
+                        g_free (xstr);
+                        g_free (ystr);
+                } else {
+                        string = g_strdup_printf ("%.5g × %.5g %s",
+                                                  frame->ellipse.w*units_per_point,
+                                                  frame->ellipse.h*units_per_point,
+                                                  units_string);
+                }
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                if ( units == LGL_UNITS_INCH ) {
+                        gchar *dstr;
+
+                        dstr = lgl_str_format_fraction (2.0*frame->round.r*units_per_point);
+                        string = g_strdup_printf ("%s %s %s",
+                                                  dstr, units_string,
+                                                  _("diameter"));
+                        g_free (dstr);
+                } else {
+                        string = g_strdup_printf ("%.5g %s %s",
+                                                  2.0*frame->round.r*units_per_point,
+                                                  units_string,
+                                                  _("diameter"));
+                }
+                break;
+        case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                if ( units == LGL_UNITS_INCH ) {
+                        gchar *dstr;
+
+                        dstr = lgl_str_format_fraction (2.0*frame->cd.r1*units_per_point);
+                        string = g_strdup_printf ("%s %s %s",
+                                                  dstr, units_string,
+                                                  _("diameter"));
+                        g_free (dstr);
+                } else {
+                        string = g_strdup_printf ("%.5g %s %s",
+                                                  2.0*frame->cd.r1*units_per_point,
+                                                  units_string,
+                                                  _("diameter"));
+                }
+                break;
+        default:
+                break;
+        }
+
+        return string;
 }
 
 

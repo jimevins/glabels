@@ -111,7 +111,7 @@ gl_rotate_label_button_init (glRotateLabelButton *this)
 
         this->priv = g_new0 (glRotateLabelButtonPrivate, 1);
 
-        gtk_container_set_border_width (GTK_CONTAINER (this), GL_HIG_PAD2);
+        gtk_box_set_spacing (GTK_BOX (this), GL_HIG_PAD2);
 
         this->priv->no_rotate_radio = gtk_radio_button_new (NULL);
         gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (this->priv->no_rotate_radio),
@@ -134,12 +134,8 @@ gl_rotate_label_button_init (glRotateLabelButton *this)
         gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
         gtk_container_add (GTK_CONTAINER (this->priv->rotate_radio), vbox);
 
-        gtk_box_pack_start (GTK_BOX (this),
-                            this->priv->no_rotate_radio,
-                            FALSE, FALSE, GL_HIG_PAD1);
-        gtk_box_pack_start (GTK_BOX (this),
-                            this->priv->rotate_radio,
-                            FALSE, FALSE, GL_HIG_PAD1);
+        gtk_box_pack_start (GTK_BOX (this), this->priv->no_rotate_radio, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (this), this->priv->rotate_radio, FALSE, FALSE, 0);
         
         /* Connect signals to controls */
 	g_signal_connect (G_OBJECT (this->priv->no_rotate_radio),
