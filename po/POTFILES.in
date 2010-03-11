@@ -81,8 +81,12 @@ src/label-text.c
 src/label-text.h
 #src/marshal.c
 #src/marshal.h
-src/media-select.c
-src/media-select.h
+src/media-combo.c
+src/media-combo.h
+src/media-combo-menu.c
+src/media-combo-menu.h
+src/media-combo-menu-item.c
+src/media-combo-menu-item.h
 src/merge.c
 src/merge.h
 src/merge-evolution.c
@@ -211,6 +215,7 @@ libglabels/xml-template.c
 libglabels/xml-template.h
 
 [type: gettext/glade]data/builder/merge-properties-dialog.builder
+[type: gettext/glade]data/builder/new-label-dialog.builder
 [type: gettext/glade]data/builder/object-editor.builder
 [type: gettext/glade]data/builder/prefs-dialog.builder
 [type: gettext/glade]data/builder/property-bar.builder
