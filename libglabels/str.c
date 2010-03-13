@@ -227,7 +227,12 @@ span_non_digits (gchar **p)
 gchar *
 lgl_str_format_fraction (gdouble x)
 {
-	static gdouble denom[] = { 1., 2., 3., 4., 8., 16., 32., 0. };
+	static gdouble denom[]        = {  1.,  2., 3.,  4.,  8.,  16.,  32.,  0. };
+        static gchar  *denom_string[] = { "1", "₂", "₃", "₄", "₈", "₁₆", "₃₂", NULL };
+        static gchar  *num_string[]   = {  "⁰",  "¹",  "²",  "³",  "⁴",  "⁵",  "⁶",  "⁷",  "⁸",  "⁹",
+                                          "¹⁰", "¹¹", "¹²", "¹³", "¹⁴", "¹⁵", "¹⁶", "¹⁷", "¹⁸", "¹⁹",
+                                          "²⁰", "²¹", "²²", "²³", "²⁴", "²⁵", "²⁶", "²⁷", "²⁸", "²⁹",
+                                          "³⁰", "³¹" };
 	gint i;
 	gdouble product, remainder;
 	gint n, d;
@@ -249,9 +254,9 @@ lgl_str_format_fraction (gdouble x)
 	n = (gint)( x * denom[i] + 0.5 );
 	d = (gint)denom[i];
 	if ( n > d ) {
-		return g_strdup_printf ("%d_%d/%d", (n/d), (n%d), d);
+		return g_strdup_printf ("%d%s/%s", (n/d), num_string[n%d], denom_string[i]);
 	} else {
-		return g_strdup_printf ("%d/%d", (n%d), d);
+		return g_strdup_printf ("%s/%s", num_string[n%d], denom_string[i]);
 	}
 }
 
