@@ -375,7 +375,11 @@ set_info (glNewLabelDialog  *this,
         list_string = g_string_new ("");
         for ( p = list; p; p = p->next )
         {
-                g_string_append_printf (list_string, "%s\n", (char *)p->data);
+                g_string_append (list_string, (char *)p->data);
+                if ( p->next )
+                {
+                        g_string_append (list_string, "\n");
+                }
         }
         gtk_label_set_text (GTK_LABEL (this->priv->similar_label), list_string->str);
 

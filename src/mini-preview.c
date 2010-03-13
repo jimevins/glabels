@@ -41,7 +41,7 @@
 #define SHADOW_OFFSET 3
 
 #define ARROW_SCALE 0.35
-#define ARROW_RGBA_ARGS 1.0, 0.0, 0.0, 0.05
+#define ARROW_RGBA_ARGS 1.0, 0.0, 0.0, 0.25
 
 /*===========================================*/
 /* Private types                             */
@@ -145,9 +145,7 @@ static void     draw_labels                    (glMiniPreview          *this,
 						lglTemplate            *template,
 						gdouble                 line_width);
 static void     draw_arrow                     (glMiniPreview          *this,
-                                                cairo_t                *cr,
-                                                gdouble                 width,
-                                                gdouble                 height);
+                                                cairo_t                *cr);
 
 static void     draw_rich_preview              (glMiniPreview          *this,
 						cairo_t                *cr);
@@ -902,8 +900,7 @@ draw (glMiniPreview  *this,
 
                 if (this->priv->draw_arrow_flag)
                 {
-                        draw_arrow (this, cr,
-                                    template->page_width, template->page_height);
+                        draw_arrow (this, cr);
                 }
 
                 if (this->priv->label)
@@ -1058,17 +1055,25 @@ draw_labels (glMiniPreview *this,
 /*--------------------------------------------------------------------------*/
 static void
 draw_arrow  (glMiniPreview      *this,
-             cairo_t            *cr,
-             gdouble             width,
-             gdouble             height)
+             cairo_t            *cr)
 {
-        gdouble min;
+        lglTemplateFrame  *frame;
+        lglTemplateOrigin *origins;
+        gdouble            width, height, min;
+        gdouble            x0, y0;
+
+        frame = (lglTemplateFrame *)this->priv->template->frames->data;
+
+        lgl_template_frame_get_size (frame, &width, &height);
+        origins = lgl_template_frame_get_origins (frame);
+        x0 = origins[0].x;
+        y0 = origins[0].y;
+        min = MIN (width, height);
+        g_free (origins);
 
         cairo_save (cr);
 
-        min = MIN (width, height);
-
-        cairo_translate (cr, width/2, height/2);
+        cairo_translate (cr, x0 + width/2, y0 + height/2);
         cairo_scale (cr, 1, -1);
         if ( this->priv->rotate_flag )
         {
@@ -1076,7 +1081,7 @@ draw_arrow  (glMiniPreview      *this,
         }
 
         cairo_new_path (cr);
-        cairo_move_to (cr, 0, -min*ARROW_SCALE/2);
+        cairo_move_to (cr, 0, -min*ARROW_SCALE);
         cairo_line_to (cr, 0, min*ARROW_SCALE);
 
         cairo_new_sub_path (cr);
