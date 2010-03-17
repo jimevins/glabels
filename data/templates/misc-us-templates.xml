@@ -72,6 +72,18 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Neato 69143: Jewel Case Booklet                                     -->
+  <!-- =================================================================== -->
+  <Template brand="Neato" part="69143" size="US-Letter" _description="Jewel Case Booklet">
+    <Meta category="media"/>
+    <Label-rectangle id="0" width="4.75in" height="9.5in" round="0in" x_waste="0in" y_waste="0in">
+      <Markup-margin size="0.125in"/>
+      <Markup-line x1="0in" y1="4.75in" x2="4.75in" y2="4.75in"/>
+      <Layout nx="1" ny="1" x0="1.875in" y0="0.75in" dx="4.75in" dy="9.5in"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- CD STOMPER PRO CD Label Refills, (Face Only)                      * -->
   <!-- =================================================================== -->
   <Template brand="Stomper" part="PRO CD" size="US-Letter"

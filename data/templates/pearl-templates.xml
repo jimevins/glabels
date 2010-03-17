@@ -422,8 +422,6 @@
     <Meta category="business-card"/>
     <Meta product_url="http://www.pearl.de/a-VM6253-2013.shtml"/>
     <Label-rectangle id="0" width="85mm" height="54mm" round="0mm" x_waste="1mm" y_waste="2.5mm">
-    <Meta category="card"/>
-    <Meta product_url="http://www.pearl.de/a-VM6253-2013.shtml"/>
       <Markup-margin size="3.2mm"/>
       <Layout nx="2" ny="5" x0="16.5mm" y0="6mm" dx="90mm" dy="55.5mm"/>
     </Label-rectangle>
