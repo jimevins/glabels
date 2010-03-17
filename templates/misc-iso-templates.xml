@@ -213,9 +213,9 @@
   </Template>
 
   <!-- ====================================================== -->
-  <!-- Alpi 02793: Business Cards, 50,8 x 90 mm, 10 per sheet -->
+  <!-- APLI 02793: Business Cards, 50,8 x 90 mm, 10 per sheet -->
   <!-- ====================================================== -->
-  <Template brand="Alpi" part="02793" size="A4" _description="Business Cards">
+  <Template brand="APLI" part="02793" size="A4" _description="Business Cards">
     <Meta category="card"/>
     <Meta category="business-card"/>
     <Label-rectangle id="0" width="255.118" height="144" round="0">
@@ -474,6 +474,17 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Ryman P14 Universal labels.                                         -->
+  <!-- =================================================================== -->
+  <Template brand="Ryman" part="P14" size="A4" _description="Universal Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="99.1mm" height="38.1mm" round="0.2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="7" x0="4.2mm" y0="13.8mm" dx="102mm" dy="38.1mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
   <!-- Ryman Standard CD/DVD Labels.                                       -->
   <!-- =================================================================== -->
   <Template brand="Ryman" part="Standard CD/DVD" size="A4" _description="CD/DVD Labels">
@@ -532,6 +543,19 @@
       <Markup-margin size="0pt"/>
       <Layout nx="2" ny="5" x0="42.5197pt" y0="38.2677pt" dx="269.291pt" dy="153.071pt"/>
     </Label-rectangle>
+  </Template>
+
+  <!-- =================================================================== -->
+  <!-- DECAdry DLW-1734: Mailing Labels.                                   -->
+  <!-- =================================================================== -->
+  <Template brand="DECAdry" part="DLW-1734" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="99.1mm" height="67.7mm" round="2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.175mm"/>
+      <Layout nx="2" ny="4" x0="4.65mm" y0="13.1mm" dx="101.5mm" dy="67.7mm"/>
+    </Label-rectangle>
+    <Alias brand="DECAdry" part="OLW-4734"/>
   </Template>
 
   <!-- =================================================================== -->
