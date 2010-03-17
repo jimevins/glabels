@@ -1,19 +1,21 @@
 # French translation of glabels.
 # Copyright (C) 2001 Jim Evins <evins@snaught.com>
 # Olivier Berger <oberger@gnu.org>
-# Florent Morel <florent@taket.org>, 2001, 2004
+# Florent Morel <florent@taket.org>, 2001, 2004.
+# Bruno Brouard <annoa.b@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 10:07+0200\n"
-"PO-Revision-Date: 2009-08-26 11:10+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
-"Language-Team: French <gnomefr@traduc.org>\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2010-03-17 03:58+0000\n"
+"PO-Revision-Date: 2010-03-06 12:00+0100\n"
+"Last-Translator: Bruno Brouard <annoa.b@gmail.com>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../src/glabels.c:75 ../src/glabels-batch.c:70
 msgid "[FILE...]"
@@ -21,15 +23,15 @@ msgstr "[FICHIER...]"
 
 #: ../src/glabels.c:91
 msgid "- gLabels label designer"
-msgstr "- créateur de patrons gLabels"
+msgstr "- créateur d'étiquettes gLabels"
 
 #: ../src/glabels-batch.c:54
 msgid "set output filename (default=\"output.pdf\")"
-msgstr "définit le fichier de sortie (défaut=\"output.pdf\")"
+msgstr "définit le nom du fichier de sortie (défaut=\"output.pdf\")"
 
 #: ../src/glabels-batch.c:54 ../src/glabels-batch.c:68
 msgid "filename"
-msgstr "nom de fichier"
+msgstr "nom du fichier"
 
 #: ../src/glabels-batch.c:56
 msgid "number of sheets (default=1)"
@@ -41,7 +43,7 @@ msgstr "nombre de pages (défaut=1)"
 # src/print_copies.c:170
 #: ../src/glabels-batch.c:56
 msgid "sheets"
-msgstr "feuilles"
+msgstr "pages"
 
 #: ../src/glabels-batch.c:58
 msgid "number of copies (default=1)"
@@ -69,20 +71,20 @@ msgstr "première"
 # src/print_dialog.c:152
 #: ../src/glabels-batch.c:62 ../data/glade/print-custom-widget.glade.h:6
 msgid "print outlines (to test printer alignment)"
-msgstr "imprimer des bordures (pour tester l'alignement de l'imprimante)"
+msgstr "imprime des bordures (pour tester l'alignement de l'imprimante)"
 
 # src/print_dialog.c:160
 #: ../src/glabels-batch.c:64 ../data/glade/print-custom-widget.glade.h:5
 msgid "print in reverse (i.e. a mirror image)"
-msgstr "imprimer à l'envers (i.e. une image miroir)"
+msgstr "imprime à l'envers (i.e. une image miroir)"
 
 #: ../src/glabels-batch.c:66 ../data/glade/print-custom-widget.glade.h:4
 msgid "print crop marks"
-msgstr "imprimer les guides de coupe"
+msgstr "imprime les guides de coupe"
 
 #: ../src/glabels-batch.c:68
 msgid "input file for merging"
-msgstr "fichier d'entrée pour la fusion"
+msgstr "nom du fichier d'entrée pour la fusion"
 
 #: ../src/glabels-batch.c:96
 msgid "- batch process gLabels label files"
@@ -109,7 +111,7 @@ msgstr "impossible d'ouvrir le fichier glabels %s\n"
 
 #: ../src/window.c:259
 msgid "(none) - gLabels"
-msgstr "(vide) - gLabels"
+msgstr "(aucun) - gLabels"
 
 #: ../src/window.c:432
 msgid "(modified)"
@@ -243,15 +245,15 @@ msgstr "En _haut"
 
 #: ../src/stock.c:91
 msgid "Bottoms"
-msgstr "En _bas"
+msgstr "En bas"
 
 #: ../src/stock.c:92
 msgid "Centers"
-msgstr "_Centré"
+msgstr "Centrés"
 
 #: ../src/stock.c:93 ../src/stock.c:94
 msgid "Label Ce_nter"
-msgstr "Centre de l'étiquette"
+msgstr "Ce_ntre de l'étiquette"
 
 #: ../src/stock.c:95 ../data/glade/property-bar.glade.h:3
 msgid "Fill color"
@@ -302,7 +304,7 @@ msgstr "_Affichage"
 
 #: ../src/ui.c:97
 msgid "Customize Main Toolbar"
-msgstr "Personnaliser le barre d'outils principale"
+msgstr "Personnaliser la barre d'outils principale"
 
 #: ../src/ui.c:98
 msgid "Customize Drawing Toolbar"
@@ -310,7 +312,7 @@ msgstr "Personnaliser la barre d'outils dessin"
 
 #: ../src/ui.c:99
 msgid "Customize Properties Toolbar"
-msgstr "Personnaliser la barre d'outils de propriétés"
+msgstr "Personnaliser la barre d'outils propriétés"
 
 #: ../src/ui.c:100
 msgid "_Objects"
@@ -330,7 +332,7 @@ msgstr "_Ordre"
 # src/rotate_select.c:169
 #: ../src/ui.c:103
 msgid "_Rotate/Flip"
-msgstr "_Rotation/Renversement"
+msgstr "_Rotation/Retournement"
 
 #: ../src/ui.c:104
 msgid "Align _Horizontal"
@@ -395,7 +397,7 @@ msgstr "_Enregistrer"
 # src/menu.c:172
 #: ../src/ui.c:131
 msgid "Save current file"
-msgstr "Enregistrer le fichier en cours"
+msgstr "Enregistre le fichier en cours"
 
 # src/file.c:271 src/mdi.c:660
 # src/file.c:271 src/mdi.c:666
@@ -443,7 +445,7 @@ msgstr "Modifier les propriétés du document"
 
 #: ../src/ui.c:157
 msgid "Template _Designer..."
-msgstr "_Créateur de patrons..."
+msgstr "_Créateur de modèles..."
 
 # src/tools.c:70
 # src/tools.c:70
@@ -451,7 +453,7 @@ msgstr "_Créateur de patrons..."
 # src/menu.c:106 src/menu.c:197
 #: ../src/ui.c:159
 msgid "Create a custom template"
-msgstr "Créer un patron personnalisé"
+msgstr "Crée un modèle personnalisé"
 
 #: ../src/ui.c:164
 msgid "_Close"
@@ -463,7 +465,7 @@ msgstr "_Fermer"
 # src/menu.c:172
 #: ../src/ui.c:166
 msgid "Close the current file"
-msgstr "Ferme le fichier en cours"
+msgstr "Ferme le fichier actuel"
 
 #: ../src/ui.c:171
 msgid "_Quit"
@@ -603,7 +605,7 @@ msgstr "Remet l'échelle à 100%"
 # src/menu.c:127 src/menu.c:217
 #: ../src/ui.c:252
 msgid "Zoom to fit"
-msgstr "Adapter le zoom à la taille de la fenêtre"
+msgstr "Adapte le zoom à la taille de la fenêtre"
 
 #: ../src/ui.c:254
 msgid "Set scale to fit window"
@@ -728,7 +730,7 @@ msgstr "Avancer au premier plan"
 
 #: ../src/ui.c:312
 msgid "Raise object to top"
-msgstr "Remonte l'objet au plus haut niveau"
+msgstr "Remonte l'objet au premier plan"
 
 # src/display.c:1173 src/display.c:1221
 # src/display.c:1176 src/display.c:1224
@@ -805,7 +807,7 @@ msgstr "Aligne les objets sur leur bordure droite"
 
 #: ../src/ui.c:366
 msgid "Align horizontal center"
-msgstr "Aligner centré horizontalement"
+msgstr "Aligner le centre horizontalement"
 
 #: ../src/ui.c:368
 msgid "Align objects to horizontal centers"
@@ -829,7 +831,7 @@ msgstr "Aligne les objets d'après leur base"
 
 #: ../src/ui.c:387
 msgid "Align vertical center"
-msgstr "Aligner centré verticalement"
+msgstr "Aligner le centre verticalement"
 
 #: ../src/ui.c:389
 msgid "Align objects to vertical centers"
@@ -841,7 +843,7 @@ msgstr "Centrer horizontalement"
 
 #: ../src/ui.c:396
 msgid "Center objects to horizontal label center"
-msgstr "Aligne les objets horizontalement au centre de l'étiquette"
+msgstr "Centre les objets horizontalement par rapport à l'étiquette"
 
 #: ../src/ui.c:401
 msgid "Center vertically"
@@ -849,7 +851,7 @@ msgstr "Centrer verticalement"
 
 #: ../src/ui.c:403
 msgid "Center objects to vertical label center"
-msgstr "Aligne les objets verticalement au centre de l'étiquette"
+msgstr "Centre les objets verticalement par rapport à l'étiquette"
 
 # src/item_text.c:467
 # src/item_text.c:467
@@ -865,7 +867,7 @@ msgstr "Propriétés de fusion"
 # src/menu.c:133
 #: ../src/ui.c:410
 msgid "Edit merge properties"
-msgstr "Édite les propriétés de fusion"
+msgstr "Modifie les propriétés de fusion"
 
 #: ../src/ui.c:417
 msgid "Contents"
@@ -894,7 +896,7 @@ msgstr "Barre d'outils de propriétés"
 #: ../src/ui.c:438
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Afficher ou non la barre d'outils de propriétés dans la fenêtre actuelle"
+"Affiche ou pas la barre d'outils de propriétés dans la fenêtre actuelle"
 
 #: ../src/ui.c:444 ../src/ui.c:489 ../src/ui.c:497
 msgid "Show tooltips"
@@ -902,7 +904,7 @@ msgstr "Afficher les infos-bulles"
 
 #: ../src/ui.c:446
 msgid "Show tooltips for property toolbar"
-msgstr "Afficher les info-bulles dans la barre d'outils de propriétés"
+msgstr "Affiche les info-bulles dans la barre d'outils de propriétés"
 
 #: ../src/ui.c:452
 msgid "Grid"
@@ -910,7 +912,7 @@ msgstr "Grille"
 
 #: ../src/ui.c:454
 msgid "Change the visibility of the grid in the current window"
-msgstr "Afficher ou non la grille dans la fenêtre actuelle"
+msgstr "Affiche ou pas la grille dans la fenêtre actuelle"
 
 # src/preferences.c:213
 #: ../src/ui.c:460
@@ -919,7 +921,7 @@ msgstr "Marges"
 
 #: ../src/ui.c:462
 msgid "Change the visibility of markup lines in the current window"
-msgstr "Afficher ou non les lignes de marges dans la fenêtre actuelle"
+msgstr "Affiche ou pas les lignes de marges dans la fenêtre actuelle"
 
 #: ../src/ui.c:473
 msgid "Main toolbar"
@@ -927,7 +929,7 @@ msgstr "Barre d'outils principale"
 
 #: ../src/ui.c:475
 msgid "Change the visibility of the main toolbar in the current window"
-msgstr "Afficher ou non la barre d'outils principale dans la fenêtre actuelle"
+msgstr "Affiche ou pas la barre d'outils principale dans la fenêtre actuelle"
 
 #: ../src/ui.c:481
 msgid "Drawing toolbar"
@@ -935,7 +937,7 @@ msgstr "Barre d'outils dessin"
 
 #: ../src/ui.c:483
 msgid "Change the visibility of the drawing toolbar in the current window"
-msgstr "Afficher ou non la barre d'outils dessin dans la fenêtre actuelle"
+msgstr "Affiche ou pas la barre d'outils dessin dans la fenêtre actuelle"
 
 #: ../src/ui.c:491
 msgid "Show tooltips for main toolbar"
@@ -943,7 +945,7 @@ msgstr "Afficher les info-bulles dans la barre d'outils principale"
 
 #: ../src/ui.c:499
 msgid "Show tooltips for drawing toolbar"
-msgstr "Afficher les info-bulles dans la barre d'outils de dessin"
+msgstr "Affiche les info-bulles dans la barre d'outils de dessin"
 
 # src/display.c:1157 src/display.c:1205
 # src/display.c:1160 src/display.c:1208
@@ -978,7 +980,8 @@ msgstr "Glabels contient des contributions de :"
 
 #: ../src/ui-commands.c:1090
 msgid "See the file AUTHORS for additional credits,"
-msgstr "Voir le fichier AUTHORS pour des remerciements supplémentaires,"
+msgstr "Consultez le fichier AUTHORS\n"
+"pour des remerciements supplémentaires,"
 
 #: ../src/ui-commands.c:1091
 msgid "or visit http://glabels.sourceforge.net/"
@@ -993,7 +996,8 @@ msgid "translator-credits"
 msgstr ""
 "Olivier Berger <oberger@gnu.org>\n"
 "Florent Morel <florent@taket.org>, 2001, 2004\n"
-"Claude Paroz <claude@2xlibre.net>, 2007"
+"Claude Paroz <claude@2xlibre.net>, 2007\n"
+"Bruno Brouard <annoa.b@gmail.com>, 2010"
 
 # src/menu.c:185
 # src/menu.c:185
@@ -1011,15 +1015,15 @@ msgid ""
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
 "the GNU General Public License for more details.\n"
 msgstr ""
-"Glabels est un logiciel libre ; vous pouvez le redistribuer et/ou le "
-"modifier conformément aux dispositions de la Licence Publique Générale GNU, "
-"telle que publiée par la Free Software Foundation ; version 2 de la licence, "
+"Glabels est un logiciel libre ; vous pouvez le redistribuer et/ou\n"
+" le modifier conformément aux dispositions de la Licence Publique Générale GNU,\n"
+"telle que publiée par la Free Software Foundation ; version 2 de la licence,\n"
 "ou encore (à votre choix) toute version ultérieure.\n"
 " \n"
-"Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE "
-"GARANTIE ; sans même la garantie implicite de COMMERCIALISATION ou "
-"D'ADAPTATION A UN OBJET PARTICULIER. Pour plus de détails, voir la Licence "
-"Publique Générale GNU.\n"
+"Ce programme est distribué dans l'espoir qu'il sera utile, mais\n"
+"SANS AUCUNE GARANTIE ; sans même la garantie implicite de \n"
+"COMMERCIALISATION ou D'ADAPTATION A UN OBJET PARTICULIER.\n"
+"Pour plus de détails, voir la Licence Publique Générale GNU.\n"
 
 # src/print_copies.c:210
 # src/print_copies.c:210
@@ -1100,7 +1104,7 @@ msgstr "Impossible d'enregistrer « %s »"
 msgid "Error encountered during save.  The file is still not saved."
 msgstr ""
 "Erreur rencontrée durant l'enregistrement. Le fichier n'est toujours pas "
-"enregistré. "
+"enregistré."
 
 # src/file.c:278
 # src/file.c:278
@@ -1131,7 +1135,7 @@ msgstr "Ce fichier existe déjà."
 #: ../src/file.c:764
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Enregistrer les changements du document « %s » avant de fermer ?"
+msgstr "Enregistrer les modifications du document « %s » avant de fermer ?"
 
 #: ../src/file.c:768
 msgid "Your changes will be lost if you don't save them."
@@ -1293,7 +1297,7 @@ msgstr "Données"
 # src/merge_properties.c:168
 #: ../src/merge-properties-dialog.c:410
 msgid "Fixed"
-msgstr "Fixe"
+msgstr "Fixé"
 
 # src/print_copies.c:210
 # src/print_copies.c:210
@@ -1307,7 +1311,7 @@ msgstr "Étiquettes"
 
 #: ../src/template-designer.c:358
 msgid "gLabels Template Designer"
-msgstr "Créateur de patrons gLabels"
+msgstr "Créateur de modèles gLabels"
 
 #: ../src/template-designer.c:419
 msgid "Welcome"
@@ -1379,7 +1383,7 @@ msgid ""
 "template!</span>"
 msgstr ""
 "<span foreground='red' weight='bold'>La marque et le numéro d'article "
-"correspondent à un patron existant.</span>"
+"correspondent à un modèle existant.</span>"
 
 #: ../src/bc.c:67
 msgid "POSTNET (any)"
@@ -1525,23 +1529,31 @@ msgstr "Données de code-barre invalides"
 # src/label.c:186 src/label.c:211
 # src/label.c:170 src/label.c:194
 # src/label.c:168 src/label.c:192
-#: ../src/xml-label.c:189 ../src/xml-label.c:226
+#: ../src/xml-label.c:193
 msgid "xmlParseFile error"
 msgstr "erreur xmlParseFile"
+
+# src/label.c:186 src/label.c:211
+# src/label.c:186 src/label.c:211
+# src/label.c:170 src/label.c:194
+# src/label.c:168 src/label.c:192
+#: ../src/xml-label.c:234
+msgid "xmlParseDoc error"
+msgstr "erreur xmlParseDoc"
 
 # src/label.c:243
 # src/label.c:244
 # src/label.c:225
 # src/label.c:223
-#: ../src/xml-label.c:262
+#: ../src/xml-label.c:270
 msgid "No document root"
 msgstr "Pas de racine de document"
 
-#: ../src/xml-label.c:270
+#: ../src/xml-label.c:278
 msgid "Importing from glabels 0.1 format"
 msgstr "Import depuis le format glabels 0.1"
 
-#: ../src/xml-label.c:279
+#: ../src/xml-label.c:287
 msgid "Importing from glabels 0.4 format"
 msgstr "Import depuis le format glabels 0.4"
 
@@ -1549,7 +1561,7 @@ msgstr "Import depuis le format glabels 0.4"
 # src/label.c:249
 # src/label.c:236
 # src/label.c:234
-#: ../src/xml-label.c:288
+#: ../src/xml-label.c:296
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Espace de nom glabels inconnu -- Utilisation de %s"
@@ -1558,47 +1570,47 @@ msgstr "Espace de nom glabels inconnu -- Utilisation de %s"
 # src/label.c:254
 # src/label.c:241
 # src/label.c:239
-#: ../src/xml-label.c:319 ../src/xml-label-04.c:79
+#: ../src/xml-label.c:327 ../src/xml-label-04.c:79
 #, c-format
 msgid "Bad root node = \"%s\""
-msgstr "Mauvais noeud racine = \"%s\""
+msgstr "Mauvais nœud racine = \"%s\""
 
 # src/label.c:253
 # src/label.c:254
 # src/label.c:241
 # src/label.c:239
-#: ../src/xml-label.c:356
+#: ../src/xml-label.c:364
 #, c-format
 msgid "bad node in Document node =  \"%s\""
-msgstr "Mauvais noeud racine = \"%s\""
+msgstr "mauvais nœud racine = \"%s\""
 
 # src/label.c:298
 # src/label.c:301
 # src/label.c:294
 # src/label.c:290
-#: ../src/xml-label.c:401 ../src/xml-label-04.c:127
+#: ../src/xml-label.c:409 ../src/xml-label-04.c:127
 #, c-format
 msgid "bad node =  \"%s\""
-msgstr "mauvais noeud =  \"%s\""
+msgstr "mauvais nœud = \"%s\""
 
 # src/label.c:298
 # src/label.c:301
 # src/label.c:294
 # src/label.c:290
-#: ../src/xml-label.c:840
+#: ../src/xml-label.c:851
 #, c-format
 msgid "bad node in Data node =  \"%s\""
-msgstr "mauvais noeud de données =  \"%s\""
+msgstr "mauvais nœud de données = \"%s\""
 
-#: ../src/xml-label.c:1077 ../libglabels/xml-template.c:670
+#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:682
 msgid "Utf8 conversion error."
-msgstr "Erreur de conversion Utf8"
+msgstr "Erreur de conversion UTF8."
 
 # src/label.c:487
 # src/label.c:493
 # src/label.c:589
 # src/label.c:587
-#: ../src/xml-label.c:1084
+#: ../src/xml-label.c:1095
 msgid "Problem saving xml file."
 msgstr "Problème de sauvegarde du fichier xml."
 
@@ -1754,11 +1766,11 @@ msgstr "%.5g %s diamètre"
 
 #: ../src/wdgt-media-select.c:781
 msgid "No recent templates found."
-msgstr "Aucun patron récent trouvé."
+msgstr "Aucun modèle récent trouvé."
 
 #: ../src/wdgt-media-select.c:782
 msgid "Try selecting a template from the \"Search all templates\" page."
-msgstr "Essayez de sélectionner un patron dans l'onglet « Tous les patrons »."
+msgstr "Essayez de sélectionner un modèle dans l'onglet « Tous les modèles »."
 
 #: ../src/wdgt-media-select.c:861
 msgid "No match."
@@ -1767,7 +1779,8 @@ msgstr "Aucune correspondance."
 #: ../src/wdgt-media-select.c:862
 msgid "Try selecting a different brand, page size or category."
 msgstr ""
-"Essayez de sélectionner une marque, une taille de page ou une catégorie différente."
+"Essayez de sélectionner une marque, une taille de page ou une catégorie "
+"différente."
 
 # src/merge_ui_text.c:334
 # src/merge_ui_text.c:334
@@ -1835,7 +1848,7 @@ msgstr "rouge orange"
 
 #: ../src/mygal/color-palette.c:584
 msgid "gold"
-msgstr "jaune"
+msgstr "or"
 
 #: ../src/mygal/color-palette.c:585
 msgid "dark green"
@@ -2023,7 +2036,7 @@ msgstr ""
 #: ../libglabels/db.c:1538
 #, c-format
 msgid "Generic %s full page template"
-msgstr "Patron générique de page entière %s"
+msgstr "Modèle générique de page entière %s"
 
 #: ../libglabels/xml-template.c:227
 msgid "Missing name or brand/part attributes."
@@ -2034,21 +2047,21 @@ msgstr "Attribut nom ou marque manquant."
 #: ../libglabels/xml-template.c:244
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
-msgstr "Taille de papier avec id « %s » inconnue, essai avec le nom"
+msgstr "Identifiant de taille de papier « %s » inconnu, essai avec le nom"
 
 #: ../libglabels/xml-template.c:256
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "Identifiant ou nom de taille de papier « %s » inconnu"
 
-#: ../libglabels/xml-template.c:615
+#: ../libglabels/xml-template.c:627
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Attribut « brand » (marque) ou « part » (article) manquant, essai avec un "
 "ancien nom."
 
-#: ../libglabels/xml-template.c:625
+#: ../libglabels/xml-template.c:637
 msgid "Name attribute also missing."
 msgstr "L'attribut nom manque également."
 
@@ -2439,13 +2452,13 @@ msgstr "Sélectionner les propriétés par défaut pour les nouveaux objets."
 
 #: ../data/glade/prefs-dialog.glade.h:18
 msgid "Select locale specific behavior."
-msgstr "Sélectionnez les paramètres de localisation"
+msgstr "Sélectionnez les paramètres de localisation."
 
 #. Most popular (at top of list)
 #: ../data/glade/prefs-dialog.glade.h:19
 #: ../data/templates/paper-sizes.xml.h:29
 msgid "US Letter"
-msgstr "Letter US"
+msgstr "Lettre US"
 
 # src/print.c:171
 # src/print.c:171
@@ -2517,15 +2530,15 @@ msgstr "Couleur du texte"
 
 #: ../data/glade/template-designer.glade.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(ex : « Étiquettes de publipostage », « Cartes de visite », ...)"
+msgstr "(ex. : « Étiquettes de publipostage », « Cartes de visite », ...)"
 
 #: ../data/glade/template-designer.glade.h:2
 msgid "(e.g., 8163A)"
-msgstr "(ex : 8163A)"
+msgstr "(ex. : 8163A)"
 
 #: ../data/glade/template-designer.glade.h:3
 msgid "(e.g., Avery, Acme, ...)"
-msgstr "(ex : Avery, Acme, ...)"
+msgstr "(ex. : Avery, Acme, ...)"
 
 #: ../data/glade/template-designer.glade.h:4
 msgid "1. Outer radius:"
@@ -2609,10 +2622,10 @@ msgid ""
 "or \"Back\" to continue editing this design."
 msgstr ""
 "Félicitations !\n"
-"Vous avez terminé la création d'un patron gLabels.\n"
-"Si vous voulez accepter et sauver votre création, cliquez sur « Appliquer ».\n"
+"Vous avez terminé la création d'un modèle gLabels.\n"
+"Si vous voulez accepter et enregistrer votre création, cliquez sur « Appliquer ».\n"
 "\n"
-"Dans le cas contraire, vous pouvez cliquer sur « Annuler » pour abandonner "
+"Dans le cas contraire, cliquez sur « Annuler » pour abandonner\n"
 "votre création ou « Précédent » pour continuer d'éditer cette création."
 
 # src/media_select.c:216
@@ -2629,7 +2642,7 @@ msgstr "Distance par rapport au bord gauche (x0) :"
 
 #: ../data/glade/template-designer.glade.h:29
 msgid "Distance from top edge (y0):"
-msgstr "Distance pas rapport au bord haut (y0) :"
+msgstr "Distance par rapport au bord haut (y0) :"
 
 #: ../data/glade/template-designer.glade.h:31
 msgid "Horizontal pitch (dx):"
@@ -2643,11 +2656,11 @@ msgid ""
 "Most templates only need one layout, as in the first example.\n"
 "The second example illustrates when two layouts are needed."
 msgstr ""
-"Combien de dispositions votre patron contiendra-t-il ?\n"
+"Combien de dispositions votre modèle contiendra-t-il ?\n"
 "\n"
 "Une disposition est un ensemble d'étiquettes ou de cartes qui peuvent être "
-"rangés sur une simple grille.\n"
-"La plupart des patrons n'ont besoin que d'une disposition, comme pour le "
+"rangés sur une grille simple.\n"
+"La plupart des modèles n'ont besoin que d'une seule disposition, comme pour le "
 "premier exemple.\n"
 "Le deuxième exemple illustre le cas où deux dispositions sont nécessaires."
 
@@ -2696,24 +2709,24 @@ msgstr "N° Ref :"
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
-msgstr "Entrez les informations suivantes à propos du fabricant de papier."
+msgstr "Saisissez les informations suivantes à propos du fabricant de papier."
 
 #: ../data/glade/template-designer.glade.h:45
 msgid "Please enter the following layout information."
-msgstr "Entrez les informations suivantes sur la disposition."
+msgstr "Saisissez les informations suivantes sur la disposition."
 
 #: ../data/glade/template-designer.glade.h:46
 msgid ""
 "Please enter the following size parameters of a single label in your "
 "template."
-msgstr "Entrez les paramètres de taille suivants pour une étiquette."
+msgstr "Saisissez les paramètres de taille suivants pour une étiquette."
 
 #: ../data/glade/template-designer.glade.h:47
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
 msgstr ""
-"Entrez les paramètres de taille suivant pour une carte ou une étiquette."
+"Entrez les paramètres de taille suivant pour une carte ou une étiquette de votre modèle."
 
 #: ../data/glade/template-designer.glade.h:48
 msgid "Please select the basic shape of the labels or cards."
@@ -2735,14 +2748,14 @@ msgstr "Rectangulaire ou carré (éventuellement à bords arrondis)"
 
 #: ../data/glade/template-designer.glade.h:52
 msgid "Round"
-msgstr "Rond"
+msgstr "Circulaire"
 
 #: ../data/glade/template-designer.glade.h:53
 msgid ""
 "Templates needing\n"
 "two layouts."
 msgstr ""
-"Patron nécessitant\n"
+"Modèle nécessitant\n"
 "deux dispositions."
 
 #: ../data/glade/template-designer.glade.h:55
@@ -2750,7 +2763,7 @@ msgid ""
 "Templates needing only\n"
 "one layout."
 msgstr ""
-"Patron nécessitant\n"
+"Modèle nécessitant\n"
 "une disposition."
 
 #: ../data/glade/template-designer.glade.h:57
@@ -2763,8 +2776,8 @@ msgid ""
 "\n"
 "This dialog will assist you in the creation of a custom gLabels template."
 msgstr ""
-"Bienvenue dans le créateur de patrons de gLabels.\n"
-"Ce questionnaire va vous aider à créer un patron personnalisé pour glabels."
+"Bienvenue dans le créateur de modèles de gLabels.\n"
+"Ce questionnaire va vous aider à créer un modèle personnalisé pour glabels."
 
 #: ../data/glade/template-designer.glade.h:62
 msgid "cd_size_page"
@@ -2820,11 +2833,11 @@ msgstr "Catégorie :"
 # src/menu.c:106 src/menu.c:197
 #: ../data/glade/wdgt-media-select.glade.h:4
 msgid "Recent templates"
-msgstr "Patrons récents"
+msgstr "Modèles récents"
 
 #: ../data/glade/wdgt-media-select.glade.h:5
 msgid "Search all templates"
-msgstr "Tous les patrons"
+msgstr "Tous les modèles"
 
 # src/rotate_select.c:187
 # src/rotate_select.c:187
@@ -3041,7 +3054,7 @@ msgstr "Étiquettes de disquette"
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:20
 #: ../data/templates/misc-iso-templates.xml.h:36
-#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:20
 #: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "Étiquettes de publipostage"
@@ -3151,7 +3164,7 @@ msgstr "Étiquettes d'adresse de retour"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
-#: ../data/templates/misc-us-templates.xml.h:28
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Round Labels"
 msgstr "Étiquettes rondes"
 
@@ -3193,7 +3206,7 @@ msgstr "Étiquettes de dos de cassette vidéo"
 
 #: ../data/templates/brother-other-templates.xml.h:1
 msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr "Étiquettes multi usages 17x54 mm"
+msgstr "Étiquettes multi-usages 17x54 mm"
 
 #: ../data/templates/brother-other-templates.xml.h:2
 msgid "Shipping Labels 62mm x 100mm"
@@ -3328,7 +3341,7 @@ msgstr "Étiquettes de publipostage (3 colonnes)"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:42
-#: ../data/templates/misc-us-templates.xml.h:26
+#: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "Étiquettes pour CD (2 ex, face uniquement)"
 
@@ -3340,6 +3353,11 @@ msgstr "Étiquettes rectangulaires"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Universal Labels"
+msgstr "Étiquettes universelles"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "Étiquettes de vidéos (face uniquement)"
 
@@ -3382,29 +3400,34 @@ msgid "DLT Labels"
 msgstr "Étiquettes DLT"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:20
+#: ../data/templates/misc-us-templates.xml.h:18
+msgid "Jewel Case Booklet"
+msgstr "Livret de CD « Jewel »"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "Étiquettes microtube"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:22
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "Étiquettes mini-CD"
 
-#: ../data/templates/misc-us-templates.xml.h:23
+#: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "Étiquettes pour CD (2 ex, tranche uniquement)"
 
-#: ../data/templates/misc-us-templates.xml.h:24
+#: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "Étiquettes pour CD (2 ex, face uniquement)"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:30
+#: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Boîtier CD mince (côté droit en haut)"
 
-#: ../data/templates/misc-us-templates.xml.h:31
+#: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Boîtier CD mince (à l'envers)"
 
@@ -3426,7 +3449,7 @@ msgstr "Étiquettes pour classeurs à levier"
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:18
 msgid "Multi-purpose Stick+Lift Labels"
-msgstr "Étiquettes enlevables multi-usages"
+msgstr "Étiquettes repositionnables multi-usages"
 
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:20
@@ -3445,7 +3468,7 @@ msgstr "Étiquettes vidéo (dos)"
 
 #: ../data/desktop/glabels.desktop.in.h:1
 msgid "Create labels, business cards and media covers"
-msgstr "Crée des étiquettes et des cartes de visite"
+msgstr "Crée des étiquettes, des cartes de visite et des pochettes multimédia"
 
 #: ../data/desktop/glabels.desktop.in.h:2
 msgid "gLabels Label Designer"
@@ -3462,7 +3485,7 @@ msgstr "Fichier de projet gLabels"
 #: ../barcode-0.98/compat/getopt.c:583
 #, c-format
 msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s : l'option « %s » ambiguë\n"
+msgstr "%s : l'option « %s » est ambiguë\n"
 
 #: ../barcode-0.98/compat/getopt.c:607
 #, c-format
