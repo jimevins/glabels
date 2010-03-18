@@ -239,7 +239,7 @@
   <!-- =================================================================== -->
   <!-- APLI 01293:  General Labels.                                        -->
   <!-- =================================================================== -->
-  <Template brand="Apli" part="01293" size="A4" _description="General Labels">
+  <Template brand="APLI" part="01293" size="A4" _description="General Labels">
     <Meta category="label"/>
     <Label-rectangle id="0" width="198.425pt" height="94.3937pt" round="0pt" x_waste="0pt" y_waste="0pt">
       <Markup-margin size="0pt"/>
@@ -631,7 +631,30 @@
     </Label-rectangle>
   </Template>
 
+  <!-- =================================================================== -->
+  <!-- Geha Z53.  Address Labels.                                     	   -->
+  <!-- =================================================================== -->
+  <Template brand="Geha" part="Z53" size="A4" _description="Address Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Meta product_url="http://www.geha.de/index.php?id=1047&amp;pid=30767"/>
+    <Label-rectangle id="0" width="99.1mm" height="38.1mm" round="0.2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3.2mm"/>
+      <Layout nx="2" ny="7" x0="3mm" y0="15.9mm" dx="101.6mm" dy="38.1mm"/>
+    </Label-rectangle>
+  </Template>
 
+  <!-- =================================================================== -->
+  <!-- Staples STAP14 Mailing Labels.                                      -->
+  <!-- =================================================================== -->
+  <Template brand="Staples" part="STAP14" size="A4" _description="Mailing Labels">
+    <Meta category="label"/>
+    <Meta category="rectangle-label"/>
+    <Label-rectangle id="0" width="99mm" height="38mm" round="2mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3mm"/>
+      <Layout nx="2" ny="7" x0="5mm" y0="15mm" dx="102mm" dy="38mm"/>
+    </Label-rectangle>
+  </Template>
 
   <!-- ******************************************************************** -->
   <!-- Misc. A6 products.                                                   -->

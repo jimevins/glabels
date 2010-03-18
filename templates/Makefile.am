@@ -20,6 +20,7 @@ templates_DATA = \
 	misc-us-templates.xml \
 	misc-iso-templates.xml \
 	misc-other-templates.xml \
+	pearl-iso-templates.xml \
 	uline-us-templates.xml \
 	worldlabel-us-templates.xml \
 	zweckform-iso-templates.xml

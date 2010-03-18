@@ -186,6 +186,7 @@
 <!ATTLIST Meta
                  product_url     %STRING_TYPE;           #IMPLIED
                  category        %STRING_TYPE;           #IMPLIED
+                 print           %STRING_TYPE;           #IMPLIED
 >
 
 <!ELEMENT Label-rectangle ((%markup_element;)*, Layout+)>
@@ -250,7 +251,7 @@
                  y1              %LENGTH_TYPE;           #REQUIRED
                  w               %LENGTH_TYPE;           #REQUIRED
                  h               %LENGTH_TYPE;           #REQUIRED
-                 r               %LENGTH_TYPE;           #REQUIRED
+                 r               %LENGTH_TYPE;           "0 pt"
 >
 
 <!ELEMENT Layout EMPTY>
