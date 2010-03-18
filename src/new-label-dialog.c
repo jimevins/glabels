@@ -345,10 +345,13 @@ set_info (glNewLabelDialog  *this,
 
         if ( vendor && vendor->url )
         {
+                gchar *escaped_url;
                 gchar *markup;
 
-                markup = g_strdup_printf ("<a href='%s'>%s</a>", vendor->url, vendor->name);
+                escaped_url = g_markup_escape_text (vendor->url, -1);
+                markup = g_strdup_printf ("<a href='%s'>%s</a>", escaped_url, vendor->name);
                 gtk_label_set_markup (GTK_LABEL (this->priv->vendor_label), markup);
+                g_free (escaped_url);
                 g_free (markup);
         }
         else
@@ -359,10 +362,13 @@ set_info (glNewLabelDialog  *this,
 
         if ( template->product_url )
         {
+                gchar *escaped_url;
                 gchar *markup;
 
-                markup = g_strdup_printf ("<a href='%s'>%s</a>", template->product_url, template->part);
+                escaped_url = g_markup_escape_text (template->product_url, -1);
+                markup = g_strdup_printf ("<a href='%s'>%s</a>", escaped_url, template->part);
                 gtk_label_set_markup (GTK_LABEL (this->priv->part_label), markup);
+                g_free (escaped_url);
                 g_free (markup);
         }
         else
