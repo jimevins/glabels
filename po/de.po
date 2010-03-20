@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-01-18 23:24+0000\n"
-"PO-Revision-Date: 2010-01-20 19:07+0100\n"
+"POT-Creation-Date: 2010-03-18 14:46+0000\n"
+"PO-Revision-Date: 2010-03-20 15:09+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -328,8 +328,7 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:351 ../src/file.c:367
 msgid "Please select a file or supply a valid file name"
-msgstr ""
-"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:364
 msgid "File does not exist"
@@ -378,8 +377,7 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:777
 msgid "Your changes will be lost if you don't save them."
-msgstr ""
-"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:780
 msgid "Close without saving"
@@ -679,72 +677,42 @@ msgstr "Textobjekt erzeugen"
 msgid "Typing"
 msgstr "Texteingabe"
 
-#: ../src/label-text.c:573 ../data/builder/property-bar.builder.h:4
+#: ../src/label-text.c:571 ../data/builder/property-bar.builder.h:4
 msgid "Font family"
 msgstr "Schriftfamilie"
 
-#: ../src/label-text.c:611 ../data/builder/property-bar.builder.h:5
+#: ../src/label-text.c:609 ../data/builder/property-bar.builder.h:5
 msgid "Font size"
 msgstr "Schriftgröße"
 
-#: ../src/label-text.c:644
+#: ../src/label-text.c:642
 msgid "Font weight"
 msgstr "Schriftstärke"
 
-#: ../src/label-text.c:677 ../data/builder/property-bar.builder.h:6
+#: ../src/label-text.c:675 ../data/builder/property-bar.builder.h:6
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../src/label-text.c:710
+#: ../src/label-text.c:708
 msgid "Align text"
 msgstr "Text anordnen"
 
-#: ../src/label-text.c:743
+#: ../src/label-text.c:741
 msgid "Line spacing"
 msgstr "Linienabstand"
 
-#: ../src/label-text.c:776 ../data/builder/property-bar.builder.h:11
+#: ../src/label-text.c:774 ../data/builder/property-bar.builder.h:11
 msgid "Text color"
 msgstr "Textfarbe"
 
-#: ../src/label-text.c:920
+#: ../src/label-text.c:918
 msgid "Auto shrink"
 msgstr "Automatisch schrumpfen"
 
-#: ../src/media-select.c:307 ../src/media-select.c:311
-#: ../src/media-select.c:316 ../src/media-select.c:325
-#: ../src/media-select.c:328 ../src/media-select.c:422
-#: ../src/media-select.c:635 ../src/media-select.c:644
-msgid "Any"
-msgstr "Beliebig"
-
-#: ../src/media-select.c:670
-#, c-format
-msgid "%d per sheet"
-msgstr "%d pro Seite"
-
-#: ../src/media-select.c:719 ../src/media-select.c:725
-#: ../src/media-select.c:735 ../src/media-select.c:741
-msgid "diameter"
-msgstr "Durchmesser"
-
-#: ../src/media-select.c:822
-msgid "No recent templates found."
-msgstr "Keine zuletzt benutzten Vorlagen gefunden."
-
-#: ../src/media-select.c:824
-msgid "Try selecting a template from the \"Search all templates\" page."
-msgstr ""
-"Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« auszuwählen."
-
-#: ../src/media-select.c:909
-msgid "No match."
-msgstr "Keine Treffer."
-
-#: ../src/media-select.c:911
-msgid "Try selecting a different brand, page size or category."
-msgstr ""
-"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
+#: ../src/media-combo-menu.c:130
+#| msgid "No recent templates found."
+msgid "Recent templates"
+msgstr "Zuletzt benutzte Vorlagen"
 
 #: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
 msgid "None"
@@ -780,8 +748,7 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr ""
-"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -827,14 +794,6 @@ msgstr "Wert"
 #: ../src/merge-properties-dialog.c:439
 msgid "Fixed"
 msgstr "Fixiert"
-
-#: ../src/new-label-dialog.c:114
-msgid "<b>Media type</b>"
-msgstr "<b>Medientyp</b>"
-
-#: ../src/new-label-dialog.c:124
-msgid "<b>Label orientation</b>"
-msgstr "<b>Ausrichtung des Etiketts</b>"
 
 #: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
@@ -1012,51 +971,51 @@ msgstr "Verknüpft"
 msgid "Not Linked"
 msgstr "Nicht verknüpft"
 
-#: ../src/template-designer.c:404
+#: ../src/template-designer.c:397
 msgid "gLabels Template Designer"
 msgstr "gLabels Vorlagen-Designer"
 
-#: ../src/template-designer.c:459
+#: ../src/template-designer.c:454
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: ../src/template-designer.c:498
+#: ../src/template-designer.c:493
 msgid "Name and Description"
 msgstr "Name und Beschreibung"
 
-#: ../src/template-designer.c:546
+#: ../src/template-designer.c:541
 msgid "Page Size"
 msgstr "Seitenformat"
 
-#: ../src/template-designer.c:612
+#: ../src/template-designer.c:607
 msgid "Label or Card Shape"
 msgstr "Form des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:658
+#: ../src/template-designer.c:654
 msgid "Label or Card Size"
 msgstr "Größe des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:754
+#: ../src/template-designer.c:753
 msgid "Label Size (round)"
 msgstr "Etikettengröße (rund)"
 
-#: ../src/template-designer.c:832
+#: ../src/template-designer.c:834
 msgid "Label Size (CD/DVD)"
 msgstr "Etikettengröße (CD/DVD)"
 
-#: ../src/template-designer.c:920
+#: ../src/template-designer.c:925
 msgid "Number of Layouts"
 msgstr "Anzahl der Layouts"
 
-#: ../src/template-designer.c:984
+#: ../src/template-designer.c:993
 msgid "Layout(s)"
 msgstr "Layout(s)"
 
-#: ../src/template-designer.c:1089
+#: ../src/template-designer.c:1098
 msgid "Design Completed"
 msgstr "Design ist komplett"
 
-#: ../src/template-designer.c:1266
+#: ../src/template-designer.c:1275
 msgid ""
 "<span foreground='red' weight='bold'>Brand and part# match an existing "
 "template!</span>"
@@ -1411,8 +1370,7 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:452
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
-"ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:458
 msgid "Grid"
@@ -1420,8 +1378,7 @@ msgstr "Raster"
 
 #: ../src/ui.c:460
 msgid "Change the visibility of the grid in the current window"
-msgstr ""
-"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:466
 msgid "Markup"
@@ -1451,30 +1408,30 @@ msgstr ""
 "Die Sichtbarkeit der Zeichenwerkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui-commands.c:1134
+#: ../src/ui-commands.c:1135
 msgid "Glabels includes contributions from:"
 msgstr "Glabels entstand unter Mitwirkung von:"
 
-#: ../src/ui-commands.c:1140
+#: ../src/ui-commands.c:1141
 msgid "See the file AUTHORS for additional credits,"
 msgstr "Lesen die Datei AUTHORS für zusätzliche Danksagungen,"
 
-#: ../src/ui-commands.c:1141
+#: ../src/ui-commands.c:1142
 msgid "or visit http://glabels.org/"
 msgstr "oder besuchen Sie http://glabels.org/"
 
-#: ../src/ui-commands.c:1153
+#: ../src/ui-commands.c:1154
 msgid "A label and business card creation program.\n"
 msgstr "Eine Anwendung zum Erstellen von Etiketten und Visitenkarten.\n"
 
-#: ../src/ui-commands.c:1157
+#: ../src/ui-commands.c:1158
 msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
 "Christian Neumair <christian-neumair@web.de>\n"
 "Mario Blättermann <mariobl@gnome.org>"
 
-#: ../src/ui-commands.c:1160
+#: ../src/ui-commands.c:1161
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1494,7 +1451,7 @@ msgstr ""
 "Dieses Programm wird verteilt in der Hoffnung, dass es nützlich ist, aber\n"
 "OHNE JEDE GARANTIE; Weitere Details in der GNU General Public License.\n"
 
-#: ../src/ui-commands.c:1187
+#: ../src/ui-commands.c:1190
 msgid "glabels"
 msgstr "glabels"
 
@@ -1551,7 +1508,7 @@ msgstr "Ungültiger Node im Dokument-Node = »%s«"
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:689
+#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:779
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
@@ -1585,7 +1542,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:1755
+#: ../libglabels/db.c:1826
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1593,15 +1550,31 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1822
+#: ../libglabels/db.c:1893
 #, c-format
-msgid "Generic %s full page template"
-msgstr "Allgemeine Ganzseitenvorlage %s"
+#| msgid "Generic %s full page template"
+msgid "%s full page label"
+msgstr "Ganzseitenetikett %s"
 
 #: ../libglabels/template.c:148
 #, c-format
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
+
+#: ../libglabels/template.c:714 ../libglabels/template.c:718
+#| msgid "%d per sheet"
+msgid "per sheet"
+msgstr "pro Seite"
+
+#: ../libglabels/template.c:718
+#, c-format
+msgid "%d %s"
+msgstr "%d %s"
+
+#: ../libglabels/template.c:788 ../libglabels/template.c:794
+#: ../libglabels/template.c:804 ../libglabels/template.c:810
+msgid "diameter"
+msgstr "Durchmesser"
 
 #. The ids are identical to the absolute length units supported in
 #. the CSS2 Specification (Section 4.3.2)
@@ -1633,34 +1606,34 @@ msgstr "cm"
 msgid "picas"
 msgstr "picas"
 
-#: ../libglabels/xml-template.c:219
+#: ../libglabels/xml-template.c:221
 msgid "Missing name or brand/part attributes."
 msgstr "Name oder Attribute für Marke/Nummer fehlen."
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: ../libglabels/xml-template.c:240
+#: ../libglabels/xml-template.c:242
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
 
-#: ../libglabels/xml-template.c:252
+#: ../libglabels/xml-template.c:254
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
 
-#: ../libglabels/xml-template.c:271
+#: ../libglabels/xml-template.c:273
 msgid "Forward references not supported."
 msgstr "Vorwärtsreferenzen werden nicht unterstützt."
 
-#: ../libglabels/xml-template.c:634
+#: ../libglabels/xml-template.c:724
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Benötigte Attribute »brand« oder »part« fehlt, missbilligter Name wird "
 "versucht. "
 
-#: ../libglabels/xml-template.c:644
+#: ../libglabels/xml-template.c:734
 msgid "Name attribute also missing."
 msgstr "Name des Attributs fehlt ebenfalls."
 
@@ -1695,6 +1668,73 @@ msgstr "Alles markieren"
 #: ../data/builder/merge-properties-dialog.builder.h:6
 msgid "Unselect all"
 msgstr "Markierung aufheben"
+
+#: ../data/builder/new-label-dialog.builder.h:1
+msgid ""
+"1\n"
+"2\n"
+"3\n"
+"4"
+msgstr ""
+"1\n"
+"2\n"
+"3\n"
+"4"
+
+#: ../data/builder/new-label-dialog.builder.h:5
+#| msgid "<b>Source</b>"
+msgid "<b>Select media</b>"
+msgstr "<b>Medium auswählen</b>"
+
+#: ../data/builder/new-label-dialog.builder.h:6
+#: ../data/builder/template-designer.builder.h:27
+msgid "Description:"
+msgstr "Beschreibung:"
+
+#: ../data/builder/new-label-dialog.builder.h:7
+#| msgid "format:"
+msgid "Information"
+msgstr "Information"
+
+#: ../data/builder/new-label-dialog.builder.h:8
+#| msgid "Page size:"
+msgid "Label size:"
+msgstr "Etikettengröße:"
+
+#: ../data/builder/new-label-dialog.builder.h:9
+#| msgid "Layout(s)"
+msgid "Layout:"
+msgstr "Anordnung:"
+
+#: ../data/builder/new-label-dialog.builder.h:10
+msgid "Orientation:"
+msgstr "Ausrichtung:"
+
+#: ../data/builder/new-label-dialog.builder.h:11
+#: ../data/builder/template-designer.builder.h:42
+msgid "Page size:"
+msgstr "Seitenformat:"
+
+#: ../data/builder/new-label-dialog.builder.h:12
+#: ../data/builder/template-designer.builder.h:43
+msgid "Part #:"
+msgstr "Nummer:"
+
+#: ../data/builder/new-label-dialog.builder.h:13
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ../data/builder/new-label-dialog.builder.h:14
+msgid "Similar products:"
+msgstr "Ähnliche Produkte:"
+
+#: ../data/builder/new-label-dialog.builder.h:15
+msgid "Template:"
+msgstr "Vorlage:"
+
+#: ../data/builder/new-label-dialog.builder.h:16
+msgid "Vendor:"
+msgstr "Hersteller:"
 
 #: ../data/builder/object-editor.builder.h:2
 #, no-c-format
@@ -2015,10 +2055,6 @@ msgstr ""
 "Vorlage zu verwerfen, oder auf »Zurück«,\n"
 "um die Vorlage erneut zu bearbeiten."
 
-#: ../data/builder/template-designer.builder.h:27
-msgid "Description:"
-msgstr "Beschreibung:"
-
 #: ../data/builder/template-designer.builder.h:28
 msgid "Distance from left edge (x0):"
 msgstr "Abstand vom linken Rand (x0):"
@@ -2066,14 +2102,6 @@ msgstr "Anzahl vertikal (ny):"
 msgid "Number of layouts:"
 msgstr "Anzahl der Layouts:"
 
-#: ../data/builder/template-designer.builder.h:42
-msgid "Page size:"
-msgstr "Seitenformat:"
-
-#: ../data/builder/template-designer.builder.h:43
-msgid "Part #:"
-msgstr "Nummer:"
-
 #: ../data/builder/template-designer.builder.h:44
 msgid ""
 "Please enter the following identifying information about the template "
@@ -2088,8 +2116,7 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/builder/template-designer.builder.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your "
-"template."
+"Please enter the following size parameters of a single label in your template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2233,15 +2260,16 @@ msgstr "auf erster Seite"
 msgid "to:"
 msgstr "bis:"
 
-#: ../data/desktop/glabels.desktop.in.h:1
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "Create labels, business cards and media covers"
 msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
 
-#: ../data/desktop/glabels.desktop.in.h:2
-msgid "gLabels Label Designer"
-msgstr "gLabels Etiketten-Designer"
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+#| msgid "gLabels Label Designer"
+msgid "gLabels Label Designer 3"
+msgstr "gLabels Etiketten-Designer 3"
 
-#: ../data/mime/glabels.keys.in.h:1 ../data/mime/glabels.xml.in.h:1
+#: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
 msgstr "gLabels-Projektdatei"
 
@@ -2513,7 +2541,7 @@ msgstr "Rückantwort-Adressaufkleber"
 #. ===================================================================
 #: ../templates/avery-us-templates.xml.h:34
 #: ../templates/maco-us-templates.xml.h:3
-#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-us-templates.xml.h:30
 #: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "Runde Etiketten"
@@ -2581,7 +2609,7 @@ msgstr "Diskettenaufkleber"
 #. ===============================================================
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:20
-#: ../templates/misc-us-templates.xml.h:18
+#: ../templates/misc-us-templates.xml.h:20
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
@@ -2693,35 +2721,41 @@ msgid "DLT Labels"
 msgstr "DLT-Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:20
+#: ../templates/misc-us-templates.xml.h:18
+#| msgid "CD Booklet"
+msgid "Jewel Case Booklet"
+msgstr "Einleger für CD-Boxen"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "Microtube-Etiketten"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:22
+#: ../templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "Mini-CD-Etiketten"
 
-#: ../templates/misc-us-templates.xml.h:23
+#: ../templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO-CD-Etiketten 2-up (nur CD-Spine)"
 
-#: ../templates/misc-us-templates.xml.h:24
+#: ../templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:26
+#: ../templates/misc-us-templates.xml.h:28
 #: ../templates/misc-iso-templates.xml.h:42
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
 #. ===================================================================
-#: ../templates/misc-us-templates.xml.h:30
+#: ../templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Slimline CD Case (normal)"
 
-#: ../templates/misc-us-templates.xml.h:31
+#: ../templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Slimline CD Case (umgekehrt)"
 
@@ -2804,6 +2838,12 @@ msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:46
+#| msgid "General Labels"
+msgid "Universal Labels"
+msgstr "Universelle Etiketten"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
 
@@ -2846,6 +2886,27 @@ msgstr "Rechteckige Kopieretiketten"
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
+
+#~ msgid "Any"
+#~ msgstr "Beliebig"
+
+#~ msgid "Try selecting a template from the \"Search all templates\" page."
+#~ msgstr ""
+#~ "Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« "
+#~ "auszuwählen."
+
+#~ msgid "No match."
+#~ msgstr "Keine Treffer."
+
+#~ msgid "Try selecting a different brand, page size or category."
+#~ msgstr ""
+#~ "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
+
+#~ msgid "<b>Media type</b>"
+#~ msgstr "<b>Medientyp</b>"
+
+#~ msgid "<b>Label orientation</b>"
+#~ msgstr "<b>Ausrichtung des Etiketts</b>"
 
 #~ msgid "%s x %s %s"
 #~ msgstr "%s x %s %s"
