@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels_2_2\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-02-07 01:29+0000\n"
-"PO-Revision-Date: 2010-02-09 11:31+0100\n"
+"POT-Creation-Date: 2010-03-17 06:38+0000\n"
+"PO-Revision-Date: 2010-03-20 15:04+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -625,7 +625,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:438
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:444 ../src/ui.c:489 ../src/ui.c:497
 msgid "Show tooltips"
@@ -642,7 +643,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:454
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:460
 msgid "Markup"
@@ -766,7 +768,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:346 ../src/file.c:362
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:359
 msgid "File does not exist"
@@ -815,14 +818,16 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:768
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:771
 msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
 #. Should not happen
-#: ../src/prefs.c:159 ../src/prefs.c:166 ../data/glade/object-editor.glade.h:43
+#: ../src/prefs.c:159 ../src/prefs.c:166
+#: ../data/glade/object-editor.glade.h:43
 #: ../data/glade/prefs-dialog.glade.h:22
 msgid "points"
 msgstr "Punkte"
@@ -1106,7 +1111,6 @@ msgid "xmlParseFile error"
 msgstr "xmlParseFile-Fehler"
 
 #: ../src/xml-label.c:234
-#| msgid "xmlParseFile error"
 msgid "xmlParseDoc error"
 msgstr "xmlParseDoc-Fehler"
 
@@ -1147,7 +1151,7 @@ msgstr "fehlerhafter node =  »%s«"
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:670
+#: ../src/xml-label.c:1088 ../libglabels/xml-template.c:682
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
@@ -1522,14 +1526,14 @@ msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
 msgid "Unknown page size id or name \"%s\""
 msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
 
-#: ../libglabels/xml-template.c:615
+#: ../libglabels/xml-template.c:627
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Benötigtes Attribut »brand« oder »part« fehlt, missbilligter Name wird "
 "versucht. "
 
-#: ../libglabels/xml-template.c:625
+#: ../libglabels/xml-template.c:637
 msgid "Name attribute also missing."
 msgstr "Name des Attributs fehlt ebenfalls."
 
@@ -1636,7 +1640,8 @@ msgstr "Schlüssel:"
 msgid "Length:"
 msgstr "Länge:"
 
-#: ../data/glade/object-editor.glade.h:21 ../data/glade/prefs-dialog.glade.h:12
+#: ../data/glade/object-editor.glade.h:21
+#: ../data/glade/prefs-dialog.glade.h:12
 msgid "Line Spacing:"
 msgstr "Zeilenabstand:"
 
@@ -1680,7 +1685,8 @@ msgstr "Stil"
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/glade/object-editor.glade.h:33 ../data/glade/prefs-dialog.glade.h:20
+#: ../data/glade/object-editor.glade.h:33
+#: ../data/glade/prefs-dialog.glade.h:20
 #: ../data/glade/template-designer.glade.h:61
 msgid "Width:"
 msgstr "Breite:"
@@ -1774,7 +1780,8 @@ msgid "Select locale specific behavior."
 msgstr "Wählen Sie hier Einstellungen gemäß Ihrer Sprache/Ihres Landes."
 
 #. Most popular (at top of list)
-#: ../data/glade/prefs-dialog.glade.h:19 ../data/templates/paper-sizes.xml.h:29
+#: ../data/glade/prefs-dialog.glade.h:19
+#: ../data/templates/paper-sizes.xml.h:29
 msgid "US Letter"
 msgstr "US-Letter"
 
@@ -2000,7 +2007,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/glade/template-designer.glade.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -2321,7 +2329,7 @@ msgstr "Diskettenaufkleber"
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:20
 #: ../data/templates/misc-iso-templates.xml.h:36
-#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:20
 #: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "Adressaufkleber"
@@ -2409,7 +2417,7 @@ msgstr "Rückantwort-Adressaufkleber"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
-#: ../data/templates/misc-us-templates.xml.h:28
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Round Labels"
 msgstr "Runde Etiketten"
 
@@ -2576,7 +2584,7 @@ msgstr "Adressaufkleber 3-spaltig"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:42
-#: ../data/templates/misc-us-templates.xml.h:26
+#: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
@@ -2588,6 +2596,11 @@ msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Universal Labels"
+msgstr "Universelle Etiketten"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "Video-Etiketten (nur Vorderseite)"
 
@@ -2622,29 +2635,34 @@ msgid "DLT Labels"
 msgstr "DLT-Etiketten"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:20
+#: ../data/templates/misc-us-templates.xml.h:18
+msgid "Jewel Case Booklet"
+msgstr "Einleger für CD-Boxen"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "Microtube-Etiketten"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:22
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "Mini-CD-Etiketten"
 
-#: ../data/templates/misc-us-templates.xml.h:23
+#: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO-CD-Etiketten 2-up (nur CD-Spine)"
 
-#: ../data/templates/misc-us-templates.xml.h:24
+#: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO-CD-Etiketten 2-up (nur Vorderseite)"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:30
+#: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Slimline CD Case (normal)"
 
-#: ../data/templates/misc-us-templates.xml.h:31
+#: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Slimline CD Case (umgekehrt)"
 
