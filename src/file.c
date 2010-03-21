@@ -54,12 +54,10 @@ static gchar *save_path = NULL;
 /*===========================================*/
 /* Local function prototypes.                */
 /*===========================================*/
-static void new_response                     (GtkDialog         *dialog,
-					      gint               response,
+static void new_complete                     (GtkDialog         *dialog,
 					      gpointer           user_data);
 
-static void properties_response              (GtkDialog         *dialog,
-					      gint               response,
+static void properties_complete              (GtkDialog         *dialog,
 					      gpointer           user_data);
 
 static void open_response                    (GtkDialog         *chooser,
@@ -87,8 +85,7 @@ gl_file_new (glWindow  *window)
 
 	g_object_set_data (G_OBJECT (dialog), "parent_window", window);
 
-	g_signal_connect (G_OBJECT(dialog), "response",
-			  G_CALLBACK (new_response), dialog);
+	g_signal_connect (G_OBJECT(dialog), "complete", G_CALLBACK (new_complete), dialog);
 
 	if (page_size != NULL) {
 		gl_new_label_dialog_set_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
@@ -112,8 +109,7 @@ gl_file_new (glWindow  *window)
 /* PRIVATE.  New "ok" button callback.                                       */
 /*---------------------------------------------------------------------------*/
 static void
-new_response (GtkDialog *dialog,
-	      gint       response,
+new_complete (GtkDialog *dialog,
 	      gpointer   user_data)
 {
 	lglTemplate *template;
@@ -123,48 +119,38 @@ new_response (GtkDialog *dialog,
 
 	gl_debug (DEBUG_FILE, "START");
 
-	switch (response) {
+        gl_new_label_dialog_get_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
+                                                   &page_size,
+                                                   &category);
 
-	case GTK_RESPONSE_OK:
+        if (sheet_name != NULL)
+        {
+                g_free (sheet_name);
+        }
 
-		gl_new_label_dialog_get_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
-							    &page_size,
-							    &category);
+        sheet_name = gl_new_label_dialog_get_template_name (GL_NEW_LABEL_DIALOG (dialog));
 
-		if (sheet_name != NULL)
-			g_free (sheet_name);
-		sheet_name =
-			gl_new_label_dialog_get_template_name (GL_NEW_LABEL_DIALOG (dialog));
+        rotate_flag = gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		rotate_flag =
-			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
+        template = lgl_db_lookup_template_from_name (sheet_name);
 
-		template = lgl_db_lookup_template_from_name (sheet_name);
+        label = GL_LABEL(gl_label_new ());
+        gl_label_set_template (label, template, FALSE);
+        gl_label_set_rotate_flag (label, rotate_flag, FALSE);
 
-		label = GL_LABEL(gl_label_new ());
-		gl_label_set_template (label, template, FALSE);
-		gl_label_set_rotate_flag (label, rotate_flag, FALSE);
+        lgl_template_free (template);
 
-		lgl_template_free (template);
-
-		window =
-			GL_WINDOW (g_object_get_data (G_OBJECT (dialog),
-						      "parent_window"));
-		if ( gl_window_is_empty (window) ) {
-			gl_window_set_label (window, label);
-		} else {
-			new_window = gl_window_new_from_label (label);
-			gtk_widget_show_all (new_window);
-		}
+        window = GL_WINDOW (g_object_get_data (G_OBJECT (dialog), "parent_window"));
+        if ( gl_window_is_empty (window) )
+        {
+                gl_window_set_label (window, label);
+        }
+        else
+        {
+                new_window = gl_window_new_from_label (label);
+                gtk_widget_show_all (new_window);
+        }
 		
-		break;
-
-	default:
-		break;
-	}
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-
 	gl_debug (DEBUG_FILE, "END");
 }
 
@@ -191,8 +177,7 @@ gl_file_properties (glLabel   *label,
 
 	g_object_set_data (G_OBJECT (dialog), "label", label);
 
-	g_signal_connect (G_OBJECT(dialog), "response",
-			  G_CALLBACK (properties_response), dialog);
+	g_signal_connect (G_OBJECT(dialog), "complete", G_CALLBACK (properties_complete), dialog);
 
         template    = gl_label_get_template (label);
         rotate_flag = gl_label_get_rotate_flag (label);
@@ -221,45 +206,33 @@ gl_file_properties (glLabel   *label,
 /* PRIVATE.  Properties "ok" button callback.                                */
 /*---------------------------------------------------------------------------*/
 static void
-properties_response (GtkDialog *dialog,
-	      gint       response,
-	      gpointer   user_data)
+properties_complete (GtkDialog *dialog,
+                     gpointer   user_data)
 {
 	lglTemplate *template;
 	glLabel     *label;
 
 	gl_debug (DEBUG_FILE, "START");
 
-	switch (response) {
+        gl_new_label_dialog_get_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
+                                                   &page_size,
+                                                   &category);
 
-	case GTK_RESPONSE_OK:
+        if (sheet_name != NULL)
+        {
+                g_free (sheet_name);
+        }
 
-		gl_new_label_dialog_get_filter_parameters (GL_NEW_LABEL_DIALOG (dialog),
-							    &page_size,
-							    &category);
+        sheet_name = gl_new_label_dialog_get_template_name (GL_NEW_LABEL_DIALOG (dialog));
 
-		if (sheet_name != NULL)
-			g_free (sheet_name);
-		sheet_name =
-			gl_new_label_dialog_get_template_name (GL_NEW_LABEL_DIALOG (dialog));
+        rotate_flag = gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
 
-		rotate_flag =
-			gl_new_label_dialog_get_rotate_state (GL_NEW_LABEL_DIALOG (dialog));
+        template = lgl_db_lookup_template_from_name (sheet_name);
 
-		template = lgl_db_lookup_template_from_name (sheet_name);
+        label = GL_LABEL(g_object_get_data (G_OBJECT (dialog), "label"));
 
-                label = GL_LABEL(g_object_get_data (G_OBJECT (dialog), "label"));
-
-                gl_label_set_template (label, template, TRUE);
-                gl_label_set_rotate_flag (label, rotate_flag, TRUE);
-
-		break;
-
-	default:
-		break;
-	}
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
+        gl_label_set_template (label, template, TRUE);
+        gl_label_set_rotate_flag (label, rotate_flag, TRUE);
 
 	gl_debug (DEBUG_FILE, "END");
 }

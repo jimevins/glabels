@@ -25,19 +25,21 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "hig.h"
+#include "marshal.h"
 #include "builder-util.h"
 #include "prefs.h"
-#include "template-history.h"
+#include "media-select.h"
+#include "mini-label-preview.h"
 #include "mini-preview.h"
-#include "media-combo.h"
-#include "rotate-label-button.h"
 
 #include "debug.h"
 
 
-#define MINI_PREVIEW_MIN_HEIGHT 300
-#define MINI_PREVIEW_MIN_WIDTH  256
+#define LABEL_PREVIEW_WIDTH  96
+#define LABEL_PREVIEW_HEIGHT 96
+
+#define MINI_PREVIEW_MIN_WIDTH  300
+#define MINI_PREVIEW_MIN_HEIGHT 360
 
 
 /*===========================================*/
@@ -48,10 +50,21 @@ struct _glNewLabelDialogPrivate {
 
         GtkBuilder *builder;
 
-	GtkWidget  *preview_vbox;
+	GtkWidget  *template_page_vbox;
         GtkWidget  *combo_hbox;
-	GtkWidget  *rotate_hbox;
+        GtkWidget  *combo;
 
+	GtkWidget  *rotate_page_vbox;
+        GtkWidget  *normal_radio;
+	GtkWidget  *rotated_radio;
+        GtkWidget  *normal_preview_hbox;
+	GtkWidget  *rotated_preview_hbox;
+        GtkWidget  *normal_preview;
+	GtkWidget  *rotated_preview;
+
+	GtkWidget  *confirm_page_vbox;
+	GtkWidget  *preview_vbox;
+        GtkWidget  *preview;
         GtkWidget  *desc_label;
         GtkWidget  *page_size_label;
         GtkWidget  *label_size_label;
@@ -59,10 +72,18 @@ struct _glNewLabelDialogPrivate {
         GtkWidget  *vendor_label;
         GtkWidget  *part_label;
         GtkWidget  *similar_label;
+};
 
-        GtkWidget  *preview;
-        GtkWidget  *combo;
-        GtkWidget  *rotate_button;
+/* Page numbers for traversing GtkAssistant */
+enum {
+        TEMPLATE_PAGE_NUM = 0,
+        ROTATE_PAGE_NUM,
+        CONFIRM_PAGE_NUM
+};
+
+enum {
+        COMPLETE,
+        LAST_SIGNAL
 };
 
 
@@ -70,12 +91,21 @@ struct _glNewLabelDialogPrivate {
 /* Private globals                           */
 /*===========================================*/
 
+static gint signals[LAST_SIGNAL] = { 0 };
+
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
 static void       gl_new_label_dialog_finalize        (GObject           *object);
+
+static void       cancel_cb                           (glNewLabelDialog  *this);
+static void       apply_cb                            (glNewLabelDialog  *this);
+static void       close_cb                            (glNewLabelDialog  *this);
+
+static gint       forward_page_function               (gint               current_page,
+                                                       glNewLabelDialog  *this);
 
 static void       combo_changed_cb                    (glNewLabelDialog  *this);
 static void       rotate_toggled_cb                   (glNewLabelDialog  *this);
@@ -89,7 +119,7 @@ static void       set_info                            (glNewLabelDialog  *this,
 /*****************************************************************************/
 /* Boilerplate object stuff.                                                 */
 /*****************************************************************************/
-G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_ASSISTANT);
 
 
 /*****************************************************************************/
@@ -105,6 +135,16 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
   	gl_new_label_dialog_parent_class = g_type_class_peek_parent (class);
 
   	object_class->finalize = gl_new_label_dialog_finalize;
+
+        signals[COMPLETE] =
+            g_signal_new ("complete",
+                          G_OBJECT_CLASS_TYPE(object_class),
+                          G_SIGNAL_RUN_LAST,
+                          G_STRUCT_OFFSET (glNewLabelDialogClass, complete),
+                          NULL, NULL,
+                          gl_marshal_VOID__VOID,
+                          G_TYPE_NONE, 0);
+
 }
 
 
@@ -115,12 +155,16 @@ static void
 gl_new_label_dialog_init (glNewLabelDialog *this)
 {
 	GtkWidget    *vbox;
+        gchar        *logo_filename;
+        GdkPixbuf    *logo;
         GtkBuilder   *builder;
         gchar        *builder_filename;
-        static gchar *object_ids[] = { "new_label_dialog_hbox", NULL };
+        static gchar *object_ids[] = { "template_page_vbox",
+                                       "rotate_page_vbox",
+                                       "confirm_page_vbox",
+                                       NULL };
         GError       *error = NULL;
         GtkWidget    *new_label_dialog_hbox;
-        gchar        *name;
 
 	gl_debug (DEBUG_FILE, "START");
 
@@ -128,19 +172,9 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 
 	this->priv = g_new0 (glNewLabelDialogPrivate, 1);
 
-	gtk_container_set_border_width (GTK_CONTAINER (this), GL_HIG_PAD1);
-
-	gtk_dialog_set_has_separator (GTK_DIALOG (this), FALSE);
-	gtk_dialog_add_buttons (GTK_DIALOG (this),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                GTK_STOCK_OK, GTK_RESPONSE_OK,
-                                NULL);
-        gtk_dialog_set_default_response (GTK_DIALOG (this), GTK_RESPONSE_OK);
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (this), TRUE);
-	gtk_window_set_modal (GTK_WINDOW (this), TRUE);
-
-        vbox = gtk_dialog_get_content_area (GTK_DIALOG (this));
-
+        logo_filename = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
+	logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
+        g_free (logo_filename);
 
         builder = gtk_builder_new ();
         builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "new-label-dialog.builder", NULL);
@@ -153,10 +187,15 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 	}
 
         gl_builder_util_get_widgets (builder,
-                                     "new_label_dialog_hbox",  &new_label_dialog_hbox,
-                                     "preview_vbox",           &this->priv->preview_vbox,
+                                     "template_page_vbox",     &this->priv->template_page_vbox,
                                      "combo_hbox",             &this->priv->combo_hbox,
-                                     "rotate_hbox",            &this->priv->rotate_hbox,
+                                     "rotate_page_vbox",       &this->priv->rotate_page_vbox,
+                                     "normal_radio",           &this->priv->normal_radio,
+                                     "rotated_radio",          &this->priv->rotated_radio,
+                                     "normal_preview_hbox",    &this->priv->normal_preview_hbox,
+                                     "rotated_preview_hbox",   &this->priv->rotated_preview_hbox,
+                                     "confirm_page_vbox",      &this->priv->confirm_page_vbox,
+                                     "preview_vbox",           &this->priv->preview_vbox,
                                      "desc_label",             &this->priv->desc_label,
                                      "page_size_label",        &this->priv->page_size_label,
                                      "label_size_label",       &this->priv->label_size_label,
@@ -166,29 +205,47 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
                                      "similar_label",          &this->priv->similar_label,
                                      NULL);
 
-        gtk_container_add (GTK_CONTAINER (vbox), new_label_dialog_hbox);
         this->priv->builder = builder;
+
+        gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->template_page_vbox);
+        gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->template_page_vbox, _("Select Product"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->template_page_vbox, logo);
+        gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->template_page_vbox, GTK_ASSISTANT_PAGE_INTRO);
+
+        this->priv->combo = gl_media_select_new ();
+        gtk_container_add (GTK_CONTAINER (this->priv->combo_hbox), this->priv->combo);
+
+        gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->rotate_page_vbox);
+        gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, _("Choose Orientation"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, logo);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, TRUE);
+
+        this->priv->normal_preview = gl_mini_label_preview_new (LABEL_PREVIEW_WIDTH, LABEL_PREVIEW_HEIGHT);
+        gtk_container_add (GTK_CONTAINER (this->priv->normal_preview_hbox), this->priv->normal_preview);
+        this->priv->rotated_preview = gl_mini_label_preview_new (LABEL_PREVIEW_WIDTH, LABEL_PREVIEW_HEIGHT);
+        gtk_container_add (GTK_CONTAINER (this->priv->rotated_preview_hbox), this->priv->rotated_preview);
+
+        gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->confirm_page_vbox);
+        gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, _("Review"));
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, logo);
+        gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, GTK_ASSISTANT_PAGE_CONFIRM);
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, TRUE);
 
         this->priv->preview = gl_mini_preview_new (MINI_PREVIEW_MIN_HEIGHT, MINI_PREVIEW_MIN_WIDTH);
         gl_mini_preview_set_draw_arrow (GL_MINI_PREVIEW (this->priv->preview), TRUE);
         gl_mini_preview_set_rotate (GL_MINI_PREVIEW (this->priv->preview), FALSE);
         gtk_container_add (GTK_CONTAINER (this->priv->preview_vbox), this->priv->preview);
 
-        this->priv->combo = gl_media_combo_new ();
-        gtk_container_add (GTK_CONTAINER (this->priv->combo_hbox), this->priv->combo);
+        gtk_assistant_set_forward_page_func (GTK_ASSISTANT (this), (GtkAssistantPageFunc)forward_page_function, this, NULL);
 
-        this->priv->rotate_button = gl_rotate_label_button_new ();
-        gtk_container_add (GTK_CONTAINER (this->priv->rotate_hbox), this->priv->rotate_button);
+	g_signal_connect_swapped (G_OBJECT(this), "cancel", G_CALLBACK(cancel_cb), this);
+	g_signal_connect_swapped (G_OBJECT(this), "apply",  G_CALLBACK(apply_cb),  this);
+	g_signal_connect_swapped (G_OBJECT(this), "close",  G_CALLBACK(close_cb),  this);
 
-	g_signal_connect_swapped (G_OBJECT (this->priv->combo), "changed",
-			  G_CALLBACK (combo_changed_cb), this);
-	g_signal_connect_swapped (G_OBJECT (this->priv->rotate_button), "changed",
-			  G_CALLBACK (rotate_toggled_cb), this);
+	g_signal_connect_swapped (G_OBJECT (this->priv->combo),         "changed", G_CALLBACK (combo_changed_cb),  this);
+	g_signal_connect_swapped (G_OBJECT (this->priv->normal_radio),  "toggled", G_CALLBACK (rotate_toggled_cb), this);
+	g_signal_connect_swapped (G_OBJECT (this->priv->rotated_radio), "toggled", G_CALLBACK (rotate_toggled_cb), this);
 
-        name = get_default_name ();
-        gl_media_combo_set_name (GL_MEDIA_COMBO (this->priv->combo), name);
-        gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (this->priv->rotate_button), name);
-        g_free (name);
         combo_changed_cb (this);
 
 	gl_debug (DEBUG_FILE, "END");
@@ -237,6 +294,84 @@ gl_new_label_dialog_new (GtkWindow    *win)
 }
 
 
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Handle non-linear forward traversal.                           */
+/*--------------------------------------------------------------------------*/
+static gint
+forward_page_function (gint              current_page,
+                       glNewLabelDialog *this)
+{
+        gchar                     *name;
+        lglTemplate               *template;
+        const lglTemplateFrame    *frame;
+        gdouble                    w, h;
+
+        switch (current_page)
+        {
+        case TEMPLATE_PAGE_NUM:
+                name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
+                if ( name != NULL )
+                {
+                        template = lgl_db_lookup_template_from_name (name);
+                        frame    = (lglTemplateFrame *)template->frames->data;
+                        lgl_template_frame_get_size (frame, &w, &h);
+
+                        if ( w == h )
+                        {
+                                /* Skip rotate page for square and circular labels. */
+                                return CONFIRM_PAGE_NUM;
+                        }
+                }
+                return ROTATE_PAGE_NUM;
+
+        case ROTATE_PAGE_NUM:
+                return CONFIRM_PAGE_NUM;
+
+        case CONFIRM_PAGE_NUM:
+        default:
+                return -1;
+        }
+
+        return -1;
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  cancel callback.                                               */
+/*--------------------------------------------------------------------------*/
+static void
+cancel_cb (glNewLabelDialog *this)
+{
+                                                                               
+	gtk_widget_destroy (GTK_WIDGET(this));
+
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  apply callback                                                 */
+/*--------------------------------------------------------------------------*/
+static void
+apply_cb (glNewLabelDialog *this)
+{
+
+        g_signal_emit (G_OBJECT (this), signals[COMPLETE], 0);
+
+}
+
+                         
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  close callback                                                 */
+/*--------------------------------------------------------------------------*/
+static void
+close_cb (glNewLabelDialog *this)
+{
+                                                                               
+	gtk_widget_destroy (GTK_WIDGET(this));
+
+}
+
+                         
 /*---------------------------------------------------------------------------*/
 /* PRIVATE.  Template changed callback.                                      */
 /*---------------------------------------------------------------------------*/
@@ -247,11 +382,16 @@ combo_changed_cb (glNewLabelDialog  *this)
 
 	gl_debug (DEBUG_FILE, "START");
 
-	name = gl_media_combo_get_name (GL_MEDIA_COMBO (this->priv->combo));
+	name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
+
+        gl_mini_label_preview_set_by_name (GL_MINI_LABEL_PREVIEW (this->priv->normal_preview),  name, FALSE);
+        gl_mini_label_preview_set_by_name (GL_MINI_LABEL_PREVIEW (this->priv->rotated_preview), name, TRUE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this->priv->normal_radio), TRUE);
 
 	gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
-        gl_rotate_label_button_set_template_name (GL_ROTATE_LABEL_BUTTON (this->priv->rotate_button), name);
         set_info (this, name);
+
+        gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->template_page_vbox, (name != NULL));
 
 	g_free (name);
 
@@ -269,45 +409,10 @@ rotate_toggled_cb (glNewLabelDialog  *this)
 
 	gl_debug (DEBUG_FILE, "START");
 
-        state = gl_rotate_label_button_get_state (GL_ROTATE_LABEL_BUTTON (this->priv->rotate_button));
+        state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio));
         gl_mini_preview_set_rotate (GL_MINI_PREVIEW (this->priv->preview), state);
 
 	gl_debug (DEBUG_FILE, "END");
-}
-
-
-/*---------------------------------------------------------------------------*/
-/* PRIVATE.  Get default template name.                                      */
-/*---------------------------------------------------------------------------*/
-static gchar *
-get_default_name (void)
-{
-        gchar *name = NULL;
-        GList *list;
-
-        list = gl_template_history_model_get_name_list (gl_template_history);
-
-        if ( list )
-        {
-                name = g_strdup (list->data);
-                gl_template_history_model_free_name_list (list);
-        }
-        else
-        {
-                gchar *page_size;
-
-                page_size = gl_prefs_model_get_default_page_size (gl_prefs);
-                list = lgl_db_get_template_name_list_all (NULL, page_size, NULL);
-                g_free (page_size);
-
-                if ( list )
-                {
-                        name = g_strdup (list->data);
-                        lgl_db_free_template_name_list (list);
-                }
-        }
-
-        return name;
 }
 
 
@@ -406,7 +511,7 @@ gl_new_label_dialog_get_template_name (glNewLabelDialog *this)
 {
 	gchar *name;
 
-	name = gl_media_combo_get_name (GL_MEDIA_COMBO (this->priv->combo));
+	name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
 
 	return name;
 }
@@ -420,7 +525,7 @@ gl_new_label_dialog_set_template_name (glNewLabelDialog *this,
 				       gchar            *name)
 {
 	gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
-	gl_media_combo_set_name (GL_MEDIA_COMBO (this->priv->combo), name);
+	gl_media_select_set_name (GL_MEDIA_SELECT (this->priv->combo), name);
         set_info (this, name);
 }
 
@@ -453,7 +558,7 @@ gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *this,
 gboolean
 gl_new_label_dialog_get_rotate_state (glNewLabelDialog *this)
 {
-	return gl_rotate_label_button_get_state (GL_ROTATE_LABEL_BUTTON (this->priv->rotate_button));
+	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio));
 }
 
 
@@ -464,7 +569,7 @@ void
 gl_new_label_dialog_set_rotate_state (glNewLabelDialog *this,
 				      gboolean          state)
 {
-        gl_rotate_label_button_set_state (GL_ROTATE_LABEL_BUTTON (this->priv->rotate_button), state);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio), state);
         gl_mini_preview_set_rotate (GL_MINI_PREVIEW (this->priv->preview), state);
 }
 

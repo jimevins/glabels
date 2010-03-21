@@ -45,7 +45,7 @@ typedef struct _glNewLabelDialogPrivate  glNewLabelDialogPrivate;
 
 struct _glNewLabelDialog
 {
-	GtkDialog                parent_instance;
+	GtkAssistant             parent_instance;
 
 	glNewLabelDialogPrivate *priv;
 
@@ -53,7 +53,9 @@ struct _glNewLabelDialog
 
 struct  _glNewLabelDialogClass
 {
-	GtkDialogClass           parent_class;
+	GtkAssistantClass        parent_class;
+
+        void (*complete) (glNewLabelDialog *this, gpointer user_data);
 };
 
 

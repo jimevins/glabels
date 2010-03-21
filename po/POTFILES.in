@@ -81,12 +81,8 @@ src/label-text.c
 src/label-text.h
 #src/marshal.c
 #src/marshal.h
-src/media-combo.c
-src/media-combo.h
-src/media-combo-menu.c
-src/media-combo-menu.h
-src/media-combo-menu-item.c
-src/media-combo-menu-item.h
+src/media-select.c
+src/media-select.h
 src/merge.c
 src/merge.h
 src/merge-evolution.c
@@ -141,8 +137,6 @@ src/message-bar.c
 src/message-bar.h
 src/recent.c
 src/recent.h
-src/rotate-label-button.c
-src/rotate-label-button.h
 src/stock.c
 src/stock.h
 src/str-util.c

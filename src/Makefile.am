@@ -162,12 +162,8 @@ glabels_3_SOURCES = 			\
 	mini-preview-pixbuf.h		\
 	mini-preview-pixbuf-cache.c	\
 	mini-preview-pixbuf-cache.h	\
-	media-combo.c			\
-	media-combo.h			\
-	media-combo-menu.c		\
-	media-combo-menu.h		\
-	media-combo-menu-item.c		\
-	media-combo-menu-item.h		\
+	media-select.c			\
+	media-select.h			\
 	message-bar.c			\
 	message-bar.h			\
 	template-history.c		\
@@ -178,8 +174,6 @@ glabels_3_SOURCES = 			\
 	mini-preview.h			\
 	mini-label-preview.c		\
 	mini-label-preview.h		\
-	rotate-label-button.c		\
-	rotate-label-button.h		\
 	wdgt-chain-button.c		\
 	wdgt-chain-button.h		\
 	field-button.c			\
