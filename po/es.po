@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-03-17 03:58+0000\n"
-"PO-Revision-Date: 2010-03-17 07:36+0100\n"
+"POT-Creation-Date: 2010-03-17 06:38+0000\n"
+"PO-Revision-Date: 2010-03-21 18:12+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -707,18 +707,6 @@ msgstr ""
 "Sergio Rivadero <sergiorivadero@argentina.com>, 2005"
 
 #: ../src/ui-commands.c:1110
-#| msgid ""
-#| "A label and business card creation program for GNOME.\n"
-#| " \n"
-#| "Glabels is free software; you can redistribute it and/or modify it under "
-#| "the terms of the GNU General Public License as published by the Free "
-#| "Software Foundation; either version 2 of the License, or (at your option) "
-#| "any later version.\n"
-#| " \n"
-#| "This program is distributed in the hope that it will be useful, but "
-#| "WITHOUT ANY WARRANTY; without even the implied warranty of "
-#| "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
-#| "Public License for more details.\n"
 msgid ""
 "Glabels is free software; you can redistribute it and/or modify it\n"
 "under the terms of the GNU General Public License as published by\n"
@@ -1125,7 +1113,6 @@ msgstr "Importando desde formato glabels 0.4"
 
 #: ../src/xml-label.c:296
 #, c-format
-#| msgid "bad document, unknown glabels Namespace"
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Espacio de nombres de glabels desconocido -- Usando %s"
 
@@ -1186,12 +1173,10 @@ msgid "Couldn't construct query"
 msgstr "No se pudo construir la consulta"
 
 #: ../src/merge-evolution.c:315 ../src/merge-evolution.c:326
-#| msgid "Could not open file \"%s\""
 msgid "Couldn't open addressbook."
 msgstr "No se pudo abrir la libreta de direcciones."
 
 #: ../src/merge-evolution.c:341
-#| msgid "Could not save file \"%s\""
 msgid "Couldn't list available fields."
 msgstr "No se pudo listar los campos disponibles."
 
@@ -1260,7 +1245,6 @@ msgid "%.5g %s diameter"
 msgstr "Diámetro %.5g %s"
 
 #: ../src/wdgt-media-select.c:781
-#| msgid "No template files found!"
 msgid "No recent templates found."
 msgstr "No se encontraron plantillas recientes."
 
@@ -1276,7 +1260,7 @@ msgstr "Sin coincidencia."
 
 #: ../src/wdgt-media-select.c:862
 msgid "Try selecting a different brand, page size or category."
-msgstr ""
+msgstr "Intente seleccionar otra marca, tamaño de página o categoría."
 
 #. This is the default custom color
 #: ../src/mygal/color-palette.c:389
@@ -1469,7 +1453,6 @@ msgid "gLabels Fatal Error!"
 msgstr "Error fatal de gLables"
 
 #: ../src/warning-handler.c:73
-#| msgid "gLabels Preferences"
 msgid "gLabels Error!"
 msgstr "Error de gLabels"
 
@@ -1480,7 +1463,6 @@ msgstr "Otros"
 
 #. Create and append a "User defined" entry.
 #: ../libglabels/db.c:131
-#| msgid "Insert merge field"
 msgid "User defined"
 msgstr "Definido por el usuario"
 
@@ -1540,7 +1522,6 @@ msgid "<b>Record selection/preview</b>"
 msgstr "Selección de registros/Vista previa"
 
 #: ../data/glade/merge-properties-dialog.glade.h:2
-#| msgid "Source"
 msgid "<b>Source</b>"
 msgstr "<b>Origen</b>"
 
@@ -1553,12 +1534,10 @@ msgid "Location:"
 msgstr "Ubicación:"
 
 #: ../data/glade/merge-properties-dialog.glade.h:5
-#| msgid "Select All"
 msgid "Select all"
 msgstr "Seleccionar todo"
 
 #: ../data/glade/merge-properties-dialog.glade.h:6
-#| msgid "Un-select All"
 msgid "Unselect all"
 msgstr "Deseleccionar todo"
 
@@ -1568,12 +1547,10 @@ msgid "dialog1"
 msgstr "dialogo1"
 
 #: ../data/glade/new-label-dialog.glade.h:1
-#| msgid "Label orientation"
 msgid "<b>Label orientation</b>"
 msgstr "<b>Orientación de la etiqueta</b>"
 
 #: ../data/glade/new-label-dialog.glade.h:2
-#| msgid "Media Type"
 msgid "<b>Media type</b>"
 msgstr "<b>Tipo de medio</b>"
 
@@ -1666,7 +1643,6 @@ msgid "Reset image size"
 msgstr "Restablecer el tamaño de la imagen"
 
 #: ../data/glade/object-editor.glade.h:26
-#| msgid "Select All"
 msgid "Select A File"
 msgstr "Seleccionar un archivo"
 
@@ -1791,7 +1767,6 @@ msgid "US Letter"
 msgstr "Carta"
 
 #: ../data/glade/print-custom-widget.glade.h:1
-#| msgid "Options"
 msgid "<b>Options</b>"
 msgstr "<b>Opciones</b>"
 
@@ -1812,7 +1787,6 @@ msgid "Center align"
 msgstr "Centrado"
 
 #: ../data/glade/property-bar.glade.h:4
-#| msgid "Font name"
 msgid "Font family"
 msgstr "Familia tipográfica"
 
@@ -1837,7 +1811,6 @@ msgid "Right align"
 msgstr "Alineación derecha"
 
 #: ../data/glade/property-bar.glade.h:11
-#| msgid "Text color"
 msgid "Text Color"
 msgstr "Color del texto"
 
@@ -2124,7 +2097,6 @@ msgid "Category:"
 msgstr "Categoría:"
 
 #: ../data/glade/wdgt-media-select.glade.h:4
-#| msgid "Recent _Files"
 msgid "Recent templates"
 msgstr "Plantillas recientes"
 
@@ -2240,12 +2212,10 @@ msgid "Any card"
 msgstr "Cualquier tarjeta"
 
 #: ../data/templates/categories.xml.h:2
-#| msgid "Open label"
 msgid "Any label"
 msgstr "Cualquier etiqueta"
 
 #: ../data/templates/categories.xml.h:3
-#| msgid "Business Cards"
 msgid "Business cards"
 msgstr "Tarjetas de negocio"
 
@@ -2258,17 +2228,14 @@ msgid "Mailing/shipping products"
 msgstr ""
 
 #: ../data/templates/categories.xml.h:6
-#| msgid "Rectangular Labels"
 msgid "Rectangular labels"
 msgstr "Etiquetas rectangulares"
 
 #: ../data/templates/categories.xml.h:7
-#| msgid "Large Round Labels"
 msgid "Round labels"
 msgstr "Etiquetas redondeadas"
 
 #: ../data/templates/categories.xml.h:8
-#| msgid "Square Labels"
 msgid "Square labels"
 msgstr "Etiquetas cuadradas"
 
@@ -2357,7 +2324,6 @@ msgstr "Etiquetas de dirección pequeñas"
 
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:26
-#| msgid "Mini-CD Labels"
 msgid "Mini Labels"
 msgstr "Minietiquetas"
 
@@ -2534,7 +2500,6 @@ msgstr "Etiquetas de dirección"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:14
-#| msgid "Mini Address Labels"
 msgid "Shipping Address Labels"
 msgstr "Etiquetas de dirección para transporte"
 
@@ -2587,7 +2552,7 @@ msgstr "Etiquetas para disquette (sólo cara)"
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:24
 msgid "EPSON Photo Stickers 16"
-msgstr ""
+msgstr "Pegatinas EPSON Photo Stickers 16"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:26
@@ -2597,11 +2562,10 @@ msgstr "Etiketten"
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:28
 msgid "Fridge Magnet Stickers"
-msgstr ""
+msgstr "Pegatinas magnéticas para frigorífico"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:30
-#| msgid "Mailing Labels"
 msgid "General Labels"
 msgstr "Etiquetas generales"
 
@@ -2625,7 +2589,7 @@ msgstr "Etiquetas de correo - 3 columnas"
 #: ../data/templates/misc-iso-templates.xml.h:42
 #: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
-msgstr ""
+msgstr "PRO CD Labels 2-up (sólo la cara)"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:44
@@ -2635,7 +2599,6 @@ msgstr "Etiquetas rectangulares"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
-#| msgid "Mailing Labels"
 msgid "Universal Labels"
 msgstr "Etiquetas universales"
 
@@ -2646,7 +2609,6 @@ msgstr "Etiqeutas de video (solo frente)"
 
 #. ===================================================================
 #: ../data/templates/misc-other-templates.xml.h:2
-#| msgid "Microtube labels"
 msgid "Multi-Purpose Labels"
 msgstr "Etiquetas multipropósito"
 
@@ -2659,7 +2621,7 @@ msgstr "CD-tarjeta"
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:6
 msgid "CD Template Rectangles"
-msgstr ""
+msgstr "Plantilla de rectángulos de CD"
 
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:10
@@ -2742,7 +2704,7 @@ msgstr ""
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:20
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
-msgstr ""
+msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
 
 # REVISAR
 #. ===================================================================
@@ -2770,50 +2732,50 @@ msgstr "Archivo de projecto gLabels"
 #: ../barcode-0.98/compat/getopt.c:583
 #, c-format
 msgid "%s: option `%s' is ambiguous\n"
-msgstr ""
+msgstr "%s: la opción «%s» es ambigua\n"
 
 #: ../barcode-0.98/compat/getopt.c:607
 #, c-format
 msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr ""
+msgstr "%s: la opción «--%s» no admite un argumento\n"
 
 #: ../barcode-0.98/compat/getopt.c:612
 #, c-format
 msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr ""
+msgstr "%s: la opción «%c%s» no admite un argumento\n"
 
 #: ../barcode-0.98/compat/getopt.c:629
 #, c-format
 msgid "%s: option `%s' requires an argument\n"
-msgstr ""
+msgstr "%s: la opción «%s» necesita un argumento\n"
 
 #. --option
 #: ../barcode-0.98/compat/getopt.c:658
 #, c-format
 msgid "%s: unrecognized option `--%s'\n"
-msgstr ""
+msgstr "%s: no se reconoce la opción «--%s»\n"
 
 #. +option or -option
 #: ../barcode-0.98/compat/getopt.c:662
 #, c-format
 msgid "%s: unrecognized option `%c%s'\n"
-msgstr ""
+msgstr "%s: no se reconoce la opción «%c%s»\n"
 
 #. 1003.2 specifies the format of this message.
 #: ../barcode-0.98/compat/getopt.c:688
 #, c-format
 msgid "%s: illegal option -- %c\n"
-msgstr ""
+msgstr "%s: opción ilegal -- %c\n"
 
 #: ../barcode-0.98/compat/getopt.c:691
 #, c-format
 msgid "%s: invalid option -- %c\n"
-msgstr ""
+msgstr "%s: opción no válida -- %c\n"
 
 #: ../barcode-0.98/compat/getopt.c:727
 #, c-format
 msgid "%s: option requires an argument -- %c\n"
-msgstr ""
+msgstr "%s: la opción necesita un argumento -- %c\n"
 
 #~ msgid "Could not initialize Bonobo!\n"
 #~ msgstr "No se puede inicializar Bonobo!\n"
