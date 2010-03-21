@@ -209,6 +209,7 @@ libglabels/xml-template.c
 libglabels/xml-template.h
 
 [type: gettext/glade]data/builder/merge-properties-dialog.builder
+[type: gettext/glade]data/builder/media-select.builder
 [type: gettext/glade]data/builder/new-label-dialog.builder
 [type: gettext/glade]data/builder/object-editor.builder
 [type: gettext/glade]data/builder/prefs-dialog.builder
