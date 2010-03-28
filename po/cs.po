@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Glabels package.
 # David Makovský (Yakeen) <yakeen@sannyas-on.net>, 2005.
 # Zbynek Mrkvicka <zbynek@oachot.cz>, 2005.
-# Marek Černocký <marek@manet.cz>, 2009.
+# Marek Černocký <marek@manet.cz>, 2009, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Glabels 2.0.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-18 18:30+0100\n"
-"PO-Revision-Date: 2010-02-16 13:51+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
+"POT-Creation-Date: 2010-03-21 17:13+0000\n"
+"PO-Revision-Date: 2010-03-20 11:12+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2311,7 +2312,7 @@ msgstr "Etikety na diskety"
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:20
 #: ../data/templates/misc-iso-templates.xml.h:36
-#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:20
 #: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "Poštovní etikety"
@@ -2399,7 +2400,7 @@ msgstr "Zpáteční adresa"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
-#: ../data/templates/misc-us-templates.xml.h:28
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Round Labels"
 msgstr "Oválné etikety"
 
@@ -2566,7 +2567,7 @@ msgstr "Poštovní etikety - 3 sloupce"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:42
-#: ../data/templates/misc-us-templates.xml.h:26
+#: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD Labels 2-up (pouze povrch)"
 
@@ -2578,6 +2579,11 @@ msgstr "Obdélníkové etikety"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Universal Labels"
+msgstr "Univerzální etikety"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "Etikety na videokazety (pouze předek)"
 
@@ -2612,29 +2618,34 @@ msgid "DLT Labels"
 msgstr "Etikety na pásky DLT"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:20
+#: ../data/templates/misc-us-templates.xml.h:18
+msgid "Jewel Case Booklet"
+msgstr "Přebal do krabičky na CD"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "Etikety na zkumavky"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:22
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "Etikety na Mini-CD"
 
-#: ../data/templates/misc-us-templates.xml.h:23
+#: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO CD Labels 2-up (pouze hřbet)"
 
-#: ../data/templates/misc-us-templates.xml.h:24
+#: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO CD Labels 2-up (pouze povrch)"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:30
+#: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Tenká krabička na CD (pravá strana)"
 
-#: ../data/templates/misc-us-templates.xml.h:31
+#: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Tenká krabička na CD (horní strana)"
 
@@ -2732,3 +2743,4 @@ msgstr "%s: neplatný přepínač -- %c\n"
 #, c-format
 msgid "%s: option requires an argument -- %c\n"
 msgstr "%s: přepínač vyžaduje argument -- %c\n"
+
