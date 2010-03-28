@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-02-11 00:40+0000\n"
-"PO-Revision-Date: 2010-02-11 21:14+0100\n"
+"POT-Creation-Date: 2010-03-20 14:05+0000\n"
+"PO-Revision-Date: 2010-03-20 17:02+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1170,7 +1170,7 @@ msgid "bad node in Data node =  \"%s\""
 msgstr "slabo vozlišče v podatkovnem vozlišču  = \"%s\""
 
 #: ../src/xml-label.c:1088
-#: ../libglabels/xml-template.c:670
+#: ../libglabels/xml-template.c:682
 msgid "Utf8 conversion error."
 msgstr "Napaka pretvarjanja Utf8."
 
@@ -1554,11 +1554,11 @@ msgstr "Neznan id velikosti strani \"%s\", poskušanje kot ime"
 msgid "Unknown page size id or name \"%s\""
 msgstr "Neznan id velikosti strani ali ime \"%s\""
 
-#: ../libglabels/xml-template.c:615
+#: ../libglabels/xml-template.c:627
 msgid "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr "Zahtevan atribut \"znamka\" ali \"del\" manjka; poskušanje s skrajšanim imenom. "
 
-#: ../libglabels/xml-template.c:625
+#: ../libglabels/xml-template.c:637
 msgid "Name attribute also missing."
 msgstr "Atributi imena manjkajo."
 
@@ -2340,7 +2340,7 @@ msgstr "Nalepke disket"
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:20
 #: ../data/templates/misc-iso-templates.xml.h:36
-#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:20
 #: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "Poštne nalepke"
@@ -2428,7 +2428,7 @@ msgstr "Nalepke za naslov vračila"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
-#: ../data/templates/misc-us-templates.xml.h:28
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Round Labels"
 msgstr "Okrogle nalepke"
 
@@ -2595,7 +2595,7 @@ msgstr "Poštne nalepke - 3 stolpci"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:42
-#: ../data/templates/misc-us-templates.xml.h:26
+#: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD nalepke 2-up (le ploskev)"
 
@@ -2607,6 +2607,11 @@ msgstr "Pravokotne nalepke"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Universal Labels"
+msgstr "Splošne oznake"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "Video nalepke (le ploskev)"
 
@@ -2641,29 +2646,34 @@ msgid "DLT Labels"
 msgstr "Nalepke DLT"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:20
+#: ../data/templates/misc-us-templates.xml.h:18
+msgid "Jewel Case Booklet"
+msgstr "Knjižica škatlice z dragulji"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "Nalepke Microtube"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:22
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "Nalepke mini CD-jev"
 
-#: ../data/templates/misc-us-templates.xml.h:23
+#: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO CD nalepke 2-up (le rob CD)"
 
-#: ../data/templates/misc-us-templates.xml.h:24
+#: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO CD nalepke 2-up (le ploskev)"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:30
+#: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "Ozko CD ohišje (od desne navzgor)"
 
-#: ../data/templates/misc-us-templates.xml.h:31
+#: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "Ozko CD ohišje (od zgoraj navzdol)"
 
