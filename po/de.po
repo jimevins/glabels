@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-03-18 14:46+0000\n"
-"PO-Revision-Date: 2010-03-20 15:09+0100\n"
+"POT-Creation-Date: 2010-03-29 03:11+0000\n"
+"PO-Revision-Date: 2010-03-29 16:28+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -306,80 +306,80 @@ msgstr "Benutzerdefinierte Farbe #%u"
 msgid "gLabels Fatal Error!"
 msgstr "Schwerwiegender Fehler in gLabels!"
 
-#: ../src/file.c:86
+#: ../src/file.c:84
 msgid "New Label or Card"
 msgstr "Neues Etikett oder neue Karte"
 
-#: ../src/file.c:190 ../src/label.c:584 ../src/label.c:628
+#: ../src/file.c:176 ../src/label.c:584 ../src/label.c:628
 msgid "Label properties"
 msgstr "Etiketten-Eigenschaften"
 
-#: ../src/file.c:296 ../src/file.c:586
+#: ../src/file.c:269 ../src/file.c:559
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../src/file.c:301 ../src/file.c:591
+#: ../src/file.c:274 ../src/file.c:564
 msgid "gLabels documents"
 msgstr "gLabels-Dokumente"
 
-#: ../src/file.c:348 ../src/file.c:649
+#: ../src/file.c:321 ../src/file.c:622
 msgid "Empty file name selection"
 msgstr "Auswahl des Dateinamens ist leer"
 
-#: ../src/file.c:351 ../src/file.c:367
+#: ../src/file.c:324 ../src/file.c:340
 msgid "Please select a file or supply a valid file name"
 msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:364
+#: ../src/file.c:337
 msgid "File does not exist"
 msgstr "Datei existiert nicht"
 
-#: ../src/file.c:439
+#: ../src/file.c:412
 #, c-format
 msgid "Could not open file \"%s\""
 msgstr "Datei »%s« konnte nicht geöffnet werden"
 
-#: ../src/file.c:442
+#: ../src/file.c:415
 msgid "Not a supported file format"
 msgstr "Kein unterstütztes Dateiformat"
 
-#: ../src/file.c:520 ../src/file.c:699
+#: ../src/file.c:493 ../src/file.c:672
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Datei »%s« konnte nicht gespeichert werden"
 
-#: ../src/file.c:524 ../src/file.c:703
+#: ../src/file.c:497 ../src/file.c:676
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Fehler während des Speicherns. Datei wurde noch nicht gespeichert."
 
-#: ../src/file.c:564
+#: ../src/file.c:537
 #, c-format
 msgid "Save \"%s\" as"
 msgstr "»%s« speichern unter"
 
-#: ../src/file.c:652
+#: ../src/file.c:625
 msgid "Please supply a valid file name"
 msgstr "Bitte geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:673
+#: ../src/file.c:646
 #, c-format
 msgid "Overwrite file \"%s\"?"
 msgstr "Datei »%s« überschreiben?"
 
-#: ../src/file.c:677
+#: ../src/file.c:650
 msgid "File already exists."
 msgstr "Datei existiert bereits."
 
-#: ../src/file.c:773
+#: ../src/file.c:746
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
-#: ../src/file.c:777
+#: ../src/file.c:750
 msgid "Your changes will be lost if you don't save them."
 msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
-#: ../src/file.c:780
+#: ../src/file.c:753
 msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
@@ -709,10 +709,46 @@ msgstr "Textfarbe"
 msgid "Auto shrink"
 msgstr "Automatisch schrumpfen"
 
-#: ../src/media-combo-menu.c:130
-#| msgid "No recent templates found."
-msgid "Recent templates"
-msgstr "Zuletzt benutzte Vorlagen"
+#: ../src/media-select.c:349 ../src/media-select.c:353
+#: ../src/media-select.c:358 ../src/media-select.c:367
+#: ../src/media-select.c:370 ../src/media-select.c:502
+#: ../src/media-select.c:671 ../src/media-select.c:841
+#: ../src/media-select.c:850
+msgid "Any"
+msgstr "Beliebig"
+
+#: ../src/media-select.c:939
+#| msgid "Recent templates"
+msgid "No recent templates found."
+msgstr "Keine zuletzt benutzte Vorlagen gefunden"
+
+#: ../src/media-select.c:941
+#| msgid "Try selecting a template from the \"Search all templates\" page."
+msgid "Try selecting a template in the \"Search all\" tab."
+msgstr ""
+"Bitte versuchen Sie, eine Vorlage im Reiter »Alle durchsuchen« auszuwählen."
+
+#: ../src/media-select.c:1032
+msgid "No match."
+msgstr "Keine Treffer."
+
+#: ../src/media-select.c:1034
+msgid "Try selecting a different brand, page size or category."
+msgstr ""
+"Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
+
+#: ../src/media-select.c:1128
+#| msgid "Create a custom template"
+msgid "No custom templates found."
+msgstr "Keine benutzerdefinierten Vorlage gefunden."
+
+#: ../src/media-select.c:1130
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+"Sie können versuchen, neue Vorlagen zu erstellen oder die mitgelieferten "
+"Vorlagen im Reiter »Alle durchsuchen« zu durchsuchen."
 
 #: ../src/merge.c:169 ../src/merge.c:210 ../src/merge.c:374 ../src/merge.c:377
 msgid "None"
@@ -795,6 +831,21 @@ msgstr "Wert"
 msgid "Fixed"
 msgstr "Fixiert"
 
+#: ../src/new-label-dialog.c:211
+#| msgid "Select Mode"
+msgid "Select Product"
+msgstr "Produkt auswählen"
+
+#: ../src/new-label-dialog.c:219
+#| msgid "Orientation:"
+msgid "Choose Orientation"
+msgstr "Ausrichtung wählen"
+
+#: ../src/new-label-dialog.c:229
+#| msgid "Preview"
+msgid "Review"
+msgstr "Überprüfen"
+
 #: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
@@ -866,14 +917,6 @@ msgstr "gLabels-Einstellungen"
 #: ../templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Labels"
-
-#: ../src/rotate-label-button.c:122
-msgid "Normal"
-msgstr "Normal"
-
-#: ../src/rotate-label-button.c:133
-msgid "Rotated"
-msgstr "Gedreht"
 
 #: ../src/stock.c:70
 msgid "_Select Mode"
@@ -1517,16 +1560,16 @@ msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der xml-Datei."
 
 #. Create and append an "Other" entry.
-#: ../libglabels/db.c:115
+#: ../libglabels/db.c:254
 msgid "Other"
 msgstr "Andere"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:128
+#: ../libglabels/db.c:263
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: ../libglabels/db.c:488
+#: ../libglabels/db.c:634
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1534,7 +1577,7 @@ msgstr ""
 "Die Definitionen der Papiergrößen konnten nicht gefunden werden. Libglabels "
 "ist möglicherweise nicht korrekt installiert!"
 
-#: ../libglabels/db.c:880
+#: ../libglabels/db.c:1026
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1542,7 +1585,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:1826
+#: ../libglabels/db.c:2021
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1550,9 +1593,8 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:1893
+#: ../libglabels/db.c:2088
 #, c-format
-#| msgid "Generic %s full page template"
 msgid "%s full page label"
 msgstr "Ganzseitenetikett %s"
 
@@ -1562,7 +1604,6 @@ msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
 
 #: ../libglabels/template.c:714 ../libglabels/template.c:718
-#| msgid "%d per sheet"
 msgid "per sheet"
 msgstr "pro Seite"
 
@@ -1669,6 +1710,35 @@ msgstr "Alles markieren"
 msgid "Unselect all"
 msgstr "Markierung aufheben"
 
+#: ../data/builder/media-select.builder.h:1
+msgid "Brand:"
+msgstr "Marke:"
+
+#: ../data/builder/media-select.builder.h:2
+msgid "Category:"
+msgstr "Kategorie:"
+
+#: ../data/builder/media-select.builder.h:3
+#| msgid "Custom Color"
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: ../data/builder/media-select.builder.h:4
+#: ../data/builder/new-label-dialog.builder.h:10
+#: ../data/builder/template-designer.builder.h:42
+msgid "Page size:"
+msgstr "Seitenformat:"
+
+#: ../data/builder/media-select.builder.h:5
+#| msgid "Recent fonts"
+msgid "Recent"
+msgstr "Zuletzt benutzt"
+
+#: ../data/builder/media-select.builder.h:6
+#| msgid "Select all"
+msgid "Search all"
+msgstr "Alle durchsuchen"
+
 #: ../data/builder/new-label-dialog.builder.h:1
 msgid ""
 "1\n"
@@ -1682,9 +1752,12 @@ msgstr ""
 "4"
 
 #: ../data/builder/new-label-dialog.builder.h:5
-#| msgid "<b>Source</b>"
-msgid "<b>Select media</b>"
-msgstr "<b>Medium auswählen</b>"
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+"Wählen Sie ein Etikett oder eine Karte aus Hunderten von mitgelieferten "
+"Vorlagen oder erstellen Sie Ihre eigene Vorlage."
 
 #: ../data/builder/new-label-dialog.builder.h:6
 #: ../data/builder/template-designer.builder.h:27
@@ -1692,49 +1765,53 @@ msgid "Description:"
 msgstr "Beschreibung:"
 
 #: ../data/builder/new-label-dialog.builder.h:7
-#| msgid "format:"
-msgid "Information"
-msgstr "Information"
-
-#: ../data/builder/new-label-dialog.builder.h:8
-#| msgid "Page size:"
 msgid "Label size:"
 msgstr "Etikettengröße:"
 
-#: ../data/builder/new-label-dialog.builder.h:9
-#| msgid "Layout(s)"
+#: ../data/builder/new-label-dialog.builder.h:8
 msgid "Layout:"
 msgstr "Anordnung:"
 
-#: ../data/builder/new-label-dialog.builder.h:10
-msgid "Orientation:"
-msgstr "Ausrichtung:"
+#: ../data/builder/new-label-dialog.builder.h:9
+msgid "Normal"
+msgstr "Normal"
 
 #: ../data/builder/new-label-dialog.builder.h:11
-#: ../data/builder/template-designer.builder.h:42
-msgid "Page size:"
-msgstr "Seitenformat:"
-
-#: ../data/builder/new-label-dialog.builder.h:12
 #: ../data/builder/template-designer.builder.h:43
 msgid "Part #:"
 msgstr "Nummer:"
 
+#: ../data/builder/new-label-dialog.builder.h:12
+msgid "Please review and confirm your selection."
+msgstr "Bitte überprüfen und bestätigen Sie Ihre Auswahl."
+
 #: ../data/builder/new-label-dialog.builder.h:13
-msgid "Preview"
-msgstr "Vorschau"
+msgid "Rotated"
+msgstr "Gedreht"
 
 #: ../data/builder/new-label-dialog.builder.h:14
-msgid "Similar products:"
-msgstr "Ähnliche Produkte:"
+msgid "Select orientation of label content."
+msgstr "Wählen Sie die Ausrichtung des Inhalts des Etiketts."
 
 #: ../data/builder/new-label-dialog.builder.h:15
-msgid "Template:"
-msgstr "Vorlage:"
+msgid "Similar products:"
+msgstr "Ähnliche Produkte:"
 
 #: ../data/builder/new-label-dialog.builder.h:16
 msgid "Vendor:"
 msgstr "Hersteller:"
+
+#: ../data/builder/new-label-dialog.builder.h:17
+msgid "page 1"
+msgstr "Seite 1"
+
+#: ../data/builder/new-label-dialog.builder.h:18
+msgid "page 2"
+msgstr "Seite 2"
+
+#: ../data/builder/new-label-dialog.builder.h:19
+msgid "page 3"
+msgstr "Seite 3"
 
 #: ../data/builder/object-editor.builder.h:2
 #, no-c-format
@@ -2265,7 +2342,6 @@ msgid "Create labels, business cards and media covers"
 msgstr "Erstellen von Etiketten, Visitenkarten und Medien-Covern"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
-#| msgid "gLabels Label Designer"
 msgid "gLabels Label Designer 3"
 msgstr "gLabels Etiketten-Designer 3"
 
@@ -2722,7 +2798,6 @@ msgstr "DLT-Etiketten"
 
 #. ===================================================================
 #: ../templates/misc-us-templates.xml.h:18
-#| msgid "CD Booklet"
 msgid "Jewel Case Booklet"
 msgstr "Einleger für CD-Boxen"
 
@@ -2838,7 +2913,6 @@ msgstr "Rechteckige Etiketten"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:46
-#| msgid "General Labels"
 msgid "Universal Labels"
 msgstr "Universelle Etiketten"
 
@@ -2886,33 +2960,3 @@ msgstr "Rechteckige Kopieretiketten"
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
-
-#~ msgid "Any"
-#~ msgstr "Beliebig"
-
-#~ msgid "Try selecting a template from the \"Search all templates\" page."
-#~ msgstr ""
-#~ "Bitte versuchen Sie, eine Vorlage in »Alle Vorlagen durchsuchen« "
-#~ "auszuwählen."
-
-#~ msgid "No match."
-#~ msgstr "Keine Treffer."
-
-#~ msgid "Try selecting a different brand, page size or category."
-#~ msgstr ""
-#~ "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
-
-#~ msgid "<b>Media type</b>"
-#~ msgstr "<b>Medientyp</b>"
-
-#~ msgid "<b>Label orientation</b>"
-#~ msgstr "<b>Ausrichtung des Etiketts</b>"
-
-#~ msgid "%s x %s %s"
-#~ msgstr "%s x %s %s"
-
-#~ msgid "%.5g x %.5g %s"
-#~ msgstr "%.5g x %.5g %s"
-
-#~ msgid "%.5g %s diameter"
-#~ msgstr "%.5g %s Durchmesser"
