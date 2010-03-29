@@ -31,6 +31,7 @@
 #include "prefs.h"
 #include "message-bar.h"
 #include "template-history.h"
+#include "template-designer.h"
 #include "str-util.h"
 #include "combo-util.h"
 #include "builder-util.h"
@@ -57,6 +58,8 @@ enum {
 
 struct _glMediaSelectPrivate {
 
+        gulong        db_notify_id;
+
         GtkBuilder   *builder;
 
         GtkWidget    *notebook;
@@ -79,6 +82,16 @@ struct _glMediaSelectPrivate {
         GtkWidget    *search_all_treeview;
         GtkListStore *search_all_store;
 
+        gint          custom_page_num;
+        GtkWidget    *custom_tab_vbox;
+        GtkWidget    *custom_info_vbox;
+        GtkWidget    *custom_info_bar;
+        GtkWidget    *custom_treeview;
+        GtkListStore *custom_store;
+        GtkWidget    *custom_add_button;
+        GtkWidget    *custom_edit_button;
+        GtkWidget    *custom_delete_button;
+
         /* Prevent recursion */
 	gboolean    stop_signals;
 };
@@ -93,7 +106,7 @@ enum {
 /* Private globals                           */
 /*===========================================*/
 
-static gint media_select_signals[LAST_SIGNAL] = { 0 };
+static gint signals[LAST_SIGNAL] = { 0 };
 
 
 /*===========================================*/
@@ -104,10 +117,18 @@ static void   gl_media_select_finalize   (GObject                *object);
 
 static void   gl_media_select_construct  (glMediaSelect          *this);
 
-static void   filter_changed_cb          (GtkComboBox            *combo,
-                                          gpointer                user_data);
+static void   filter_changed_cb          (glMediaSelect          *this);
 
 static void   selection_changed_cb       (GtkTreeSelection       *selection,
+                                          gpointer                user_data);
+
+static void   custom_add_clicked_cb      (GtkButton              *button,
+                                          gpointer                user_data);
+
+static void   custom_edit_clicked_cb     (GtkButton              *button,
+                                          gpointer                user_data);
+
+static void   custom_delete_clicked_cb   (GtkButton              *button,
                                           gpointer                user_data);
 
 static void   page_changed_cb            (GtkNotebook            *notebook,
@@ -115,7 +136,14 @@ static void   page_changed_cb            (GtkNotebook            *notebook,
                                           guint                   page_num,
                                           gpointer                user_data);
 
+static void   db_changed_cb              (glMediaSelect          *this);
+
 static void   load_recent_list           (glMediaSelect          *this,
+                                          GtkListStore           *store,
+                                          GtkTreeSelection       *selection,
+                                          GList                  *list);
+
+static void   load_custom_list          (glMediaSelect          *this,
                                           GtkListStore           *store,
                                           GtkTreeSelection       *selection,
                                           GList                  *list);
@@ -143,7 +171,7 @@ gl_media_select_class_init (glMediaSelectClass *class)
 
         object_class->finalize = gl_media_select_finalize;
 
-        media_select_signals[CHANGED] =
+        signals[CHANGED] =
             g_signal_new ("changed",
                           G_OBJECT_CLASS_TYPE(object_class),
                           G_SIGNAL_RUN_LAST,
@@ -176,6 +204,11 @@ gl_media_select_finalize (GObject *object)
 
         g_return_if_fail (object != NULL);
         g_return_if_fail (GL_IS_MEDIA_SELECT (object));
+
+        if (this->priv->db_notify_id)
+        {
+                lgl_db_notify_remove (this->priv->db_notify_id);
+        }
 
         if (this->priv->builder)
         {
@@ -216,7 +249,9 @@ gl_media_select_construct (glMediaSelect *this)
 {
         gchar             *builder_filename;
         GtkBuilder        *builder;
-        static gchar      *object_ids[] = { "media_select_hbox", NULL };
+        static gchar      *object_ids[] = { "media_select_hbox",
+                                            "custom_buttons_sizegroup",
+                                            NULL };
         GError            *error = NULL;
         GtkWidget         *hbox;
         GList             *recent_list = NULL;
@@ -226,10 +261,12 @@ gl_media_select_construct (glMediaSelect *this)
         GList             *search_all_names = NULL;
         const gchar       *page_size_id;
         gchar             *page_size_name;
+        GList             *custom_list = NULL;
         GtkCellRenderer   *renderer;
         GtkTreeViewColumn *column;
         GtkTreeSelection  *recent_selection;
         GtkTreeSelection  *search_all_selection;
+        GtkTreeSelection  *custom_selection;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
@@ -258,6 +295,12 @@ gl_media_select_construct (glMediaSelect *this)
                                      "category_combo",         &this->priv->category_combo,
                                      "search_all_info_vbox",   &this->priv->search_all_info_vbox,
                                      "search_all_treeview",    &this->priv->search_all_treeview,
+                                     "custom_tab_vbox",        &this->priv->custom_tab_vbox,
+                                     "custom_info_vbox",       &this->priv->custom_info_vbox,
+                                     "custom_treeview",        &this->priv->custom_treeview,
+                                     "custom_add_button",      &this->priv->custom_add_button,
+                                     "custom_edit_button",     &this->priv->custom_edit_button,
+                                     "custom_delete_button",   &this->priv->custom_delete_button,
                                      NULL);
 
         gtk_container_add (GTK_CONTAINER (this), hbox);
@@ -269,6 +312,9 @@ gl_media_select_construct (glMediaSelect *this)
         this->priv->search_all_page_num =
                 gtk_notebook_page_num (GTK_NOTEBOOK (this->priv->notebook),
                                        this->priv->search_all_tab_vbox);
+        this->priv->custom_page_num =
+                gtk_notebook_page_num (GTK_NOTEBOOK (this->priv->notebook),
+                                       this->priv->custom_tab_vbox);
 
         gtk_widget_show_all (GTK_WIDGET (this));
 
@@ -347,21 +393,59 @@ gl_media_select_construct (glMediaSelect *this)
         load_search_all_list (this, this->priv->search_all_store, search_all_selection, search_all_names);
         lgl_db_free_template_name_list (search_all_names);
 
+        /* Custom templates treeview */
+        this->priv->custom_store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_STRING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (this->priv->custom_treeview),
+                                 GTK_TREE_MODEL (this->priv->custom_store));
+        renderer = gtk_cell_renderer_pixbuf_new ();
+        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+                                                           "pixbuf", PREVIEW_COLUMN,
+                                                           "stock-id", PREVIEW_COLUMN_STOCK,
+                                                           "stock-size", PREVIEW_COLUMN_STOCK_SIZE,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (this->priv->custom_treeview), column);
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+                                                           "markup", DESCRIPTION_COLUMN,
+                                                           NULL);
+        gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (this->priv->custom_treeview), column);
+        custom_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
+        custom_list = lgl_db_get_template_name_list_all (NULL, NULL, "user-defined");
+        load_custom_list (this, this->priv->custom_store, custom_selection, custom_list);
+        lgl_db_free_template_name_list (custom_list);
+
+        page_size_id = gl_prefs_model_get_default_page_size (gl_prefs);
+        page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
+
         /* Connect signals to controls */
-        g_signal_connect (G_OBJECT (this->priv->brand_combo), "changed",
-                          G_CALLBACK (filter_changed_cb),
-                          this);
-        g_signal_connect (G_OBJECT (this->priv->page_size_combo), "changed",
-                          G_CALLBACK (filter_changed_cb),
-                          this);
-        g_signal_connect (G_OBJECT (this->priv->category_combo), "changed",
-                          G_CALLBACK (filter_changed_cb),
-                          this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->brand_combo), "changed",
+                                  G_CALLBACK (filter_changed_cb),
+                                  this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->page_size_combo), "changed",
+                                  G_CALLBACK (filter_changed_cb),
+                                  this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->category_combo), "changed",
+                                  G_CALLBACK (filter_changed_cb),
+                                  this);
         g_signal_connect (G_OBJECT (recent_selection), "changed",
                           G_CALLBACK (selection_changed_cb),
                           this);
         g_signal_connect (G_OBJECT (search_all_selection), "changed",
                           G_CALLBACK (selection_changed_cb),
+                          this);
+        g_signal_connect (G_OBJECT (custom_selection), "changed",
+                          G_CALLBACK (selection_changed_cb),
+                          this);
+        g_signal_connect (G_OBJECT (this->priv->custom_add_button), "clicked",
+                          G_CALLBACK (custom_add_clicked_cb),
+                          this);
+        g_signal_connect (G_OBJECT (this->priv->custom_edit_button), "clicked",
+                          G_CALLBACK (custom_edit_clicked_cb),
+                          this);
+        g_signal_connect (G_OBJECT (this->priv->custom_delete_button), "clicked",
+                          G_CALLBACK (custom_delete_clicked_cb),
                           this);
         g_signal_connect (G_OBJECT (this->priv->notebook), "switch-page",
                           G_CALLBACK (page_changed_cb),
@@ -381,6 +465,8 @@ gl_media_select_construct (glMediaSelect *this)
         }
         gl_template_history_model_free_name_list (recent_list);
 
+        this->priv->db_notify_id = lgl_db_notify_add ((lglDbNotifyFunc)db_changed_cb, this);
+
         gl_debug (DEBUG_MEDIA_SELECT, "END");
 }
 
@@ -389,10 +475,8 @@ gl_media_select_construct (glMediaSelect *this)
 /* PRIVATE.  modify widget due to change in selection                       */
 /*--------------------------------------------------------------------------*/
 static void
-filter_changed_cb (GtkComboBox *combo,
-                   gpointer     user_data)
+filter_changed_cb (glMediaSelect *this)
 {
-        glMediaSelect     *this = GL_MEDIA_SELECT (user_data);
         gchar             *brand;
         gchar             *page_size_name, *page_size_id;
         gchar             *category_name, *category_id;
@@ -432,8 +516,7 @@ filter_changed_cb (GtkComboBox *combo,
                 g_free (category_id);
 
                 /* Emit our "changed" signal */
-                g_signal_emit (G_OBJECT (user_data),
-                               media_select_signals[CHANGED], 0);
+                g_signal_emit (G_OBJECT (this), signals[CHANGED], 0);
         }
         g_free (brand);
         g_free (page_size_name);
@@ -453,17 +536,86 @@ static void
 selection_changed_cb (GtkTreeSelection       *selection,
                       gpointer                user_data)
 {
-        glMediaSelect *this = GL_MEDIA_SELECT (user_data);
+        glMediaSelect     *this = GL_MEDIA_SELECT (user_data);
+        GtkTreeSelection  *custom_selection;
 
 	if (this->priv->stop_signals) return;
 
         gl_debug (DEBUG_MEDIA_SELECT, "START");
 
+        custom_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
+        gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_edit_button),
+                                  gtk_tree_selection_get_mode (custom_selection) != GTK_SELECTION_NONE );
+        gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_delete_button),
+                                  gtk_tree_selection_get_mode (custom_selection) != GTK_SELECTION_NONE );
+
+        if (gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
+
         /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (user_data),
-                       media_select_signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT (user_data), signals[CHANGED], 0);
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Custom add button clicked callback.                            */
+/*--------------------------------------------------------------------------*/
+static void
+custom_add_clicked_cb (GtkButton  *button,
+                       gpointer    user_data)
+{
+        glMediaSelect *this = GL_MEDIA_SELECT (user_data);
+        GtkWidget     *window;
+        GtkWidget     *dialog;
+
+        window = gtk_widget_get_toplevel (GTK_WIDGET (this));
+        
+        dialog = gl_template_designer_new (GTK_WINDOW (window));
+
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+        gtk_widget_show (dialog);
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Custom edit button clicked callback.                           */
+/*--------------------------------------------------------------------------*/
+static void
+custom_edit_clicked_cb (GtkButton  *button,
+                        gpointer    user_data)
+{
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Custom delete button clicked callback.                         */
+/*--------------------------------------------------------------------------*/
+static void
+custom_delete_clicked_cb (GtkButton  *button,
+                          gpointer    user_data)
+{
+        glMediaSelect     *this = GL_MEDIA_SELECT (user_data);
+        GtkTreeSelection  *selection;
+        GtkTreeIter        iter;
+        GtkTreeModel      *model;        
+        gchar             *name;
+
+	this->priv->stop_signals = TRUE;
+
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
+
+        if (!gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
+        {
+                gtk_tree_selection_get_selected (selection, &model, &iter);
+                gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
+
+                lgl_db_delete_template_by_name (name);
+
+                g_free (name);
+        }
+
+	this->priv->stop_signals = FALSE;
 }
 
 
@@ -488,10 +640,64 @@ page_changed_cb (GtkNotebook            *notebook,
 	this->priv->current_page_num = page_num;
 
         /* Emit our "changed" signal */
-        g_signal_emit (G_OBJECT (user_data),
-                       media_select_signals[CHANGED], 0);
+        g_signal_emit (G_OBJECT (user_data), signals[CHANGED], 0);
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  DB changed notification callback.                              */
+/*--------------------------------------------------------------------------*/
+static void
+db_changed_cb (glMediaSelect *this)
+{
+        gchar             *brand;
+        gchar             *page_size_name, *page_size_id;
+        gchar             *category_name, *category_id;
+        GtkTreeSelection  *selection;
+        GList             *list;
+
+	this->priv->stop_signals = TRUE;
+
+        /* Update search all page. */
+        brand = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->brand_combo));
+        page_size_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->page_size_combo));
+        category_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->category_combo));
+        if ( brand && strlen(brand) &&
+             page_size_name && strlen(page_size_name) &&
+             category_name && strlen(category_name) )
+        {
+                if (!g_utf8_collate (brand, _("Any")))
+                {
+                        g_free (brand);
+                        brand = NULL;
+                }
+                page_size_id = lgl_db_lookup_paper_id_from_name (page_size_name);
+                category_id = lgl_db_lookup_category_id_from_name (category_name);
+                list = lgl_db_get_template_name_list_all (brand, page_size_id, category_id);
+                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->search_all_treeview));
+                load_search_all_list (this, this->priv->search_all_store, selection, list);
+                lgl_db_free_template_name_list (list);
+                g_free (page_size_id);
+                g_free (category_id);
+        }
+        g_free (brand);
+        g_free (page_size_name);
+        g_free (category_name);
+
+        /* Update custom page. */
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
+        list = lgl_db_get_template_name_list_all (NULL, NULL, "user-defined");
+        load_custom_list (this, this->priv->custom_store, selection, list);
+        lgl_db_free_template_name_list (list);
+
+	this->priv->stop_signals = FALSE;
+
+        /* Emit our "changed" signal */
+        g_signal_emit (G_OBJECT (this), signals[CHANGED], 0);
+
+        filter_changed_cb (this);
 }
 
 
@@ -517,6 +723,10 @@ gl_media_select_get_name (glMediaSelect *this)
         else if (page_num == this->priv->search_all_page_num)
         {
                 selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->search_all_treeview));
+        }
+        else if (page_num == this->priv->custom_page_num)
+        {
+                selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
         }
         else
         {
@@ -728,7 +938,7 @@ load_recent_list (glMediaSelect      *this,
                                                                           GTK_BUTTONS_NONE,
                                                                           "%s", _("No recent templates found."));
                 gl_message_bar_format_secondary_text (GL_MESSAGE_BAR (this->priv->recent_info_bar),
-                                                      "%s", _("Try selecting a template from the \"Search all templates\" page."));
+                                                      "%s", _("Try selecting a template in the \"Search all\" tab."));
 
                 gtk_box_pack_start (GTK_BOX (this->priv->recent_info_vbox),
                                     this->priv->recent_info_bar,
@@ -830,6 +1040,104 @@ load_search_all_list (glMediaSelect      *this,
 
                 gtk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
 
+        }
+
+        gl_debug (DEBUG_MEDIA_SELECT, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Load list store from template name list.                       */
+/*--------------------------------------------------------------------------*/
+static void
+load_custom_list (glMediaSelect      *this,
+                  GtkListStore       *store,
+                  GtkTreeSelection   *selection,
+                  GList              *list)
+{
+        GList            *p;
+        GtkTreeIter       iter;
+        lglUnits          units;
+        lglTemplate      *template;
+        lglTemplateFrame *frame;
+        GdkPixbuf        *pixbuf;
+        gchar            *size;
+        gchar            *layout;
+        gchar            *description;
+
+        gl_debug (DEBUG_MEDIA_SELECT, "START");
+
+        gtk_list_store_clear (store);
+
+
+        if ( this->priv->custom_info_bar )
+        {
+                gtk_container_remove (GTK_CONTAINER (this->priv->custom_info_vbox),
+                                      this->priv->custom_info_bar);
+                this->priv->custom_info_bar = NULL;
+        }
+
+        if (list)
+        {
+
+                units = gl_prefs_model_get_units (gl_prefs);
+
+                for ( p=list; p!=NULL; p=p->next )
+                {
+
+                        gl_debug (DEBUG_MEDIA_SELECT, "p->data = \"%s\"", p->data);
+
+                        template = lgl_db_lookup_template_from_name (p->data);
+                        frame    = (lglTemplateFrame *)template->frames->data;
+                        pixbuf   = gl_mini_preview_pixbuf_cache_get_pixbuf (p->data);
+
+                        size     = lgl_template_frame_get_size_description (frame, units);
+                        layout   = lgl_template_frame_get_layout_description (frame);
+                        description = g_strdup_printf ("<b>%s: %s</b>\n%s\n%s",
+                                                       (gchar *)p->data,
+                                                       template->description,
+                                                       size,
+                                                       layout);
+                        g_free (size);
+                        g_free (layout);
+
+                        lgl_template_free (template);
+
+                        gtk_list_store_append (store, &iter);
+                        gtk_list_store_set (store, &iter,
+                                            NAME_COLUMN, p->data,
+                                            PREVIEW_COLUMN, pixbuf,
+                                            DESCRIPTION_COLUMN, description,
+                                            -1);
+
+                        g_object_unref (G_OBJECT (pixbuf));
+                        g_free (description);
+                }
+
+                gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+                gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+                gtk_tree_selection_select_iter (selection, &iter);
+
+                gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_edit_button), TRUE);
+                gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_delete_button), TRUE);
+        }
+        else
+        {
+                this->priv->custom_info_bar = gl_message_bar_new (GTK_MESSAGE_INFO,
+                                                                          GTK_BUTTONS_NONE,
+                                                                          "%s", _("No custom templates found."));
+                gl_message_bar_format_secondary_text (GL_MESSAGE_BAR (this->priv->custom_info_bar),
+                                                      "%s", _("You may create new templates or try searching for pre-defined templates in the \"Search all\" tab."));
+
+                gtk_box_pack_start (GTK_BOX (this->priv->custom_info_vbox),
+                                    this->priv->custom_info_bar,
+                                    FALSE, FALSE, 0);
+                gtk_widget_show_all (this->priv->custom_info_bar);
+
+                gtk_tree_selection_set_mode (selection, GTK_SELECTION_NONE);
+
+                gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_edit_button), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_delete_button), FALSE);
         }
 
         gl_debug (DEBUG_MEDIA_SELECT, "END");

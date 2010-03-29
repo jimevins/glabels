@@ -24,6 +24,7 @@
 
 #include <glib/gi18n.h>
 #include <glib.h>
+#include <glib-object.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -40,24 +41,63 @@
 /* Private types                             */
 /*===========================================*/
 
+#define TYPE_LGL_DB_MODEL              (lgl_db_model_get_type ())
+#define LGL_DB_MODEL(obj)              (G_TYPE_CHECK_INSTANCE_CAST ((obj), TYPE_LGL_DB_MODEL, lglDbModel))
+#define LGL_DB_MODEL_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST ((klass), TYPE_LGL_DB_MODEL, lglDbModelClass))
+#define IS_LGL_DB_MODEL(obj)           (G_TYPE_CHECK_INSTANCE_TYPE ((obj), TYPE_LGL_DB_MODEL))
+#define IS_LGL_DB_MODEL_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), TYPE_LGL_DB_MODEL))
+#define LGL_DB_MODEL_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), TYPE_LGL_DB_MODEL, lglDbModelClass))
+
+
+typedef struct _lglDbModel          lglDbModel;
+typedef struct _lglDbModelClass     lglDbModelClass;
+
+
+struct _lglDbModel {
+        GObject     parent;
+
+        GList      *papers;
+        GList      *categories;
+        GList      *vendors;
+        GList      *templates;
+
+        GHashTable *template_cache;
+};
+
+
+struct _lglDbModelClass {
+        GObjectClass  parent_class;
+
+        /*
+         * Signals
+         */
+        void (*changed)     (lglDbModel *this,
+                             gpointer    user_data);
+
+};
+
+
+enum {
+        CHANGED,
+        LAST_SIGNAL
+};
+
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
 
-static GList *papers     = NULL;
-static GList *categories = NULL;
-static GList *vendors    = NULL;
-static GList *templates  = NULL;
+static guint signals[LAST_SIGNAL] = {0};
 
-static GHashTable *template_cache = NULL;
+static lglDbModel *model = NULL;
 
 
 /*===========================================*/
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void   init_template_cache          (void);
+static void   lgl_db_model_finalize        (GObject     *object);
+
 static void   add_to_template_cache        (lglTemplate *template);
 
 static GList *read_papers                  (void);
@@ -76,6 +116,106 @@ static void   read_templates               (void);
 static void   read_template_files_from_dir (const gchar *dirname);
 
 static lglTemplate *template_full_page     (const gchar *page_size);
+
+
+/*****************************************************************************/
+/* Object infrastructure.                                                    */
+/*****************************************************************************/
+G_DEFINE_TYPE (lglDbModel, lgl_db_model, G_TYPE_OBJECT);
+
+
+/*****************************************************************************/
+/* Class Init Function.                                                      */
+/*****************************************************************************/
+static void
+lgl_db_model_class_init (lglDbModelClass *class)
+{
+        GObjectClass  *gobject_class = (GObjectClass *) class;
+
+        lgl_db_model_parent_class = g_type_class_peek_parent (class);
+
+        gobject_class->finalize = lgl_db_model_finalize;
+
+        signals[CHANGED] =
+                g_signal_new ("changed",
+                              G_OBJECT_CLASS_TYPE (gobject_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (lglDbModelClass, changed),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
+}
+
+
+/*****************************************************************************/
+/* Object Instance Init Function.                                            */
+/*****************************************************************************/
+static void
+lgl_db_model_init (lglDbModel *this)
+{
+        this->template_cache = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)lgl_template_free);
+}
+
+
+/*****************************************************************************/
+/* Finalize Method.                                                          */
+/*****************************************************************************/
+static void
+lgl_db_model_finalize (GObject *object)
+{
+        lglDbModel    *this;
+        GList         *p;
+
+        g_return_if_fail (object && IS_LGL_DB_MODEL (object));
+        this = LGL_DB_MODEL (object);
+
+        g_hash_table_unref (this->template_cache);
+
+	for (p = this->papers; p != NULL; p = p->next)
+        {
+		g_free (p->data);
+		p->data = NULL;
+	}
+	g_list_free (this->papers);
+
+	for (p = this->categories; p != NULL; p = p->next)
+        {
+		g_free (p->data);
+		p->data = NULL;
+	}
+	g_list_free (this->categories);
+
+	for (p = this->vendors; p != NULL; p = p->next)
+        {
+		g_free (p->data);
+		p->data = NULL;
+	}
+	g_list_free (this->vendors);
+
+	for (p = this->templates; p != NULL; p = p->next)
+        {
+		lgl_template_free ((lglTemplate *)p->data);
+		p->data = NULL;
+	}
+	g_list_free (this->templates);
+
+        G_OBJECT_CLASS (lgl_db_model_parent_class)->finalize (object);
+}
+
+
+/*****************************************************************************/
+/** New Object Generator.                                                    */
+/*****************************************************************************/
+lglDbModel *
+lgl_db_model_new (void)
+{
+        lglDbModel *this;
+
+        this = g_object_new (TYPE_LGL_DB_MODEL, NULL);
+
+        return this;
+}
 
 
 /*===========================================*/
@@ -103,63 +243,69 @@ lgl_db_init (void)
         GList       *page_sizes;
         GList       *p;
 
+        model = lgl_db_model_new ();
+
         /*
          * Paper definitions
          */
-	if (!papers)
-        {
+        model->papers = read_papers ();
 
-                papers = read_papers ();
-
-                /* Create and append an "Other" entry. */
-                paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0, NULL);
-                papers = g_list_append (papers, paper_other);
-
-	}
+        /* Create and append an "Other" entry. */
+        paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0, NULL);
+        model->papers = g_list_append (model->papers, paper_other);
 
         /*
          * Categories
          */
-	if (!categories)
-        {
-                categories = read_categories ();
+        model->categories = read_categories ();
 
-                /* Create and append a "User defined" entry. */
-                category_user_defined = lgl_category_new ("user-defined", _("User defined"));
-                categories = g_list_append (categories, category_user_defined);
-	}
+        /* Create and append a "User defined" entry. */
+        category_user_defined = lgl_category_new ("user-defined", _("User defined"));
+        model->categories = g_list_append (model->categories, category_user_defined);
 
         /*
          * Vendors
          */
-	if (!vendors)
-        {
-                vendors = read_vendors ();
-	}
+        model->vendors = read_vendors ();
 
         /*
          * Templates
          */
-	if (!templates)
+        read_templates ();
+
+        /* Create and append generic full page templates. */
+        page_sizes = lgl_db_get_paper_id_list ();
+        for ( p=page_sizes; p != NULL; p=p->next )
         {
-
-                init_template_cache ();
-
-                read_templates ();
-
-                /* Create and append generic full page templates. */
-                page_sizes = lgl_db_get_paper_id_list ();
-                for ( p=page_sizes; p != NULL; p=p->next )
+                if ( !lgl_db_is_paper_id_other (p->data) )
                 {
-                        if ( !lgl_db_is_paper_id_other (p->data) )
-                        {
-                                template = template_full_page (p->data);
-                                _lgl_db_register_template_internal (template);
-                                lgl_template_free (template);
-                        }
+                        template = template_full_page (p->data);
+                        _lgl_db_register_template_internal (template);
+                        lgl_template_free (template);
                 }
-                lgl_db_free_paper_id_list (page_sizes);
+        }
+        lgl_db_free_paper_id_list (page_sizes);
+
+}
+
+
+gulong
+lgl_db_notify_add (lglDbNotifyFunc func,
+                   gpointer        user_data)
+{
+	if (!model)
+        {
+		lgl_db_init ();
 	}
+
+        return g_signal_connect_swapped (G_OBJECT (model), "changed", G_CALLBACK (func), user_data);
+}
+
+
+void
+lgl_db_notify_remove  (gulong id)
+{
+        g_signal_handler_disconnect (G_OBJECT (model), id);
 }
 
 
@@ -182,12 +328,12 @@ lgl_db_get_paper_id_list (void)
 	GList           *p;
 	lglPaper        *paper;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for ( p=papers; p != NULL; p=p->next )
+	for ( p=model->papers; p != NULL; p=p->next )
         {
 		paper = (lglPaper *)p->data;
 		ids = g_list_append (ids, g_strdup (paper->id));
@@ -235,12 +381,12 @@ lgl_db_get_paper_name_list (void)
 	GList           *p;
 	lglPaper        *paper;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for ( p=papers; p != NULL; p=p->next )
+	for ( p=model->papers; p != NULL; p=p->next )
         {
 		paper = (lglPaper *)p->data;
 		names = g_list_append (names, g_strdup (paper->name));
@@ -288,7 +434,7 @@ lgl_db_lookup_paper_from_name (const gchar *name)
 	GList       *p;
 	lglPaper    *paper;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -296,10 +442,10 @@ lgl_db_lookup_paper_from_name (const gchar *name)
 	if (name == NULL)
         {
 		/* If no name, return first paper as a default */
-		return lgl_paper_dup ((lglPaper *) papers->data);
+		return lgl_paper_dup ((lglPaper *) model->papers->data);
 	}
 
-	for (p = papers; p != NULL; p = p->next)
+	for (p = model->papers; p != NULL; p = p->next)
         {
 		paper = (lglPaper *) p->data;
 		if (UTF8_EQUAL (paper->name, name))
@@ -327,7 +473,7 @@ lgl_db_lookup_paper_from_id (const gchar *id)
 	GList       *p;
 	lglPaper    *paper;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -335,10 +481,10 @@ lgl_db_lookup_paper_from_id (const gchar *id)
 	if (id == NULL)
         {
 		/* If no id, return first paper as a default */
-		return lgl_paper_dup ((lglPaper *) papers->data);
+		return lgl_paper_dup ((lglPaper *) model->papers->data);
 	}
 
-	for (p = papers; p != NULL; p = p->next)
+	for (p = model->papers; p != NULL; p = p->next)
         {
 		paper = (lglPaper *) p->data;
 		if (ASCII_EQUAL (paper->id, id))
@@ -426,7 +572,7 @@ lgl_db_is_paper_id_known (const gchar *id)
 	GList       *p;
 	lglPaper    *paper;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -436,7 +582,7 @@ lgl_db_is_paper_id_known (const gchar *id)
 		return FALSE;
 	}
 
-	for (p = papers; p != NULL; p = p->next)
+	for (p = model->papers; p != NULL; p = p->next)
         {
 		paper = (lglPaper *) p->data;
 		if (ASCII_EQUAL (paper->id, id))
@@ -559,12 +705,12 @@ lgl_db_print_known_papers (void)
 	GList       *p;
 	lglPaper    *paper;
 
-	if (!papers) {
+	if (!model) {
 		lgl_db_init ();
 	}
 
 	g_print ("%s():\n", __FUNCTION__);
-	for (p = papers; p != NULL; p = p->next) {
+	for (p = model->papers; p != NULL; p = p->next) {
 		paper = (lglPaper *) p->data;
 
 		g_print ("PAPER id=\"%s\", name=\"%s\", width=%gpts, height=%gpts\n",
@@ -595,12 +741,12 @@ lgl_db_get_category_id_list (void)
 	GList           *p;
 	lglCategory     *category;
 
-	if (!categories)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for ( p=categories; p != NULL; p=p->next )
+	for ( p=model->categories; p != NULL; p=p->next )
         {
 		category = (lglCategory *)p->data;
 		ids = g_list_append (ids, g_strdup (category->id));
@@ -648,12 +794,12 @@ lgl_db_get_category_name_list (void)
 	GList           *p;
 	lglCategory     *category;
 
-	if (!categories)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for ( p=categories; p != NULL; p=p->next )
+	for ( p=model->categories; p != NULL; p=p->next )
         {
 		category = (lglCategory *)p->data;
 		names = g_list_append (names, g_strdup (category->name));
@@ -701,7 +847,7 @@ lgl_db_lookup_category_from_name (const gchar *name)
 	GList       *p;
 	lglCategory *category;
 
-	if (!categories)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -709,10 +855,10 @@ lgl_db_lookup_category_from_name (const gchar *name)
 	if (name == NULL)
         {
 		/* If no name, return first category as a default */
-		return lgl_category_dup ((lglCategory *) categories->data);
+		return lgl_category_dup ((lglCategory *) model->categories->data);
 	}
 
-	for (p = categories; p != NULL; p = p->next)
+	for (p = model->categories; p != NULL; p = p->next)
         {
 		category = (lglCategory *) p->data;
 		if (UTF8_EQUAL (category->name, name))
@@ -740,7 +886,7 @@ lgl_db_lookup_category_from_id (const gchar *id)
 	GList       *p;
 	lglCategory *category;
 
-	if (!categories)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -748,10 +894,10 @@ lgl_db_lookup_category_from_id (const gchar *id)
 	if (id == NULL)
         {
 		/* If no id, return first category as a default */
-		return lgl_category_dup ((lglCategory *) categories->data);
+		return lgl_category_dup ((lglCategory *) model->categories->data);
 	}
 
-	for (p = categories; p != NULL; p = p->next)
+	for (p = model->categories; p != NULL; p = p->next)
         {
 		category = (lglCategory *) p->data;
 		if (ASCII_EQUAL (category->id, id))
@@ -839,7 +985,7 @@ lgl_db_is_category_id_known (const gchar *id)
 	GList       *p;
 	lglCategory *category;
 
-	if (!categories)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -849,7 +995,7 @@ lgl_db_is_category_id_known (const gchar *id)
 		return FALSE;
 	}
 
-	for (p = categories; p != NULL; p = p->next)
+	for (p = model->categories; p != NULL; p = p->next)
         {
 		category = (lglCategory *) p->data;
 		if (ASCII_EQUAL (category->id, id))
@@ -951,12 +1097,12 @@ lgl_db_print_known_categories (void)
 	GList       *p;
 	lglCategory *category;
 
-	if (!categories) {
+	if (!model) {
 		lgl_db_init ();
 	}
 
 	g_print ("%s():\n", __FUNCTION__);
-	for (p = categories; p != NULL; p = p->next) {
+	for (p = model->categories; p != NULL; p = p->next) {
 		category = (lglCategory *) p->data;
 
 		g_print ("CATEGORY id=\"%s\", name=\"%s\"\n", category->id, category->name);
@@ -986,12 +1132,12 @@ lgl_db_get_vendor_name_list (void)
 	GList           *p;
 	lglVendor       *vendor;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for ( p=vendors; p != NULL; p=p->next )
+	for ( p=model->vendors; p != NULL; p=p->next )
         {
 		vendor = (lglVendor *)p->data;
 		names = g_list_append (names, g_strdup (vendor->name));
@@ -1039,7 +1185,7 @@ lgl_db_lookup_vendor_from_name (const gchar *name)
 	GList       *p;
 	lglVendor   *vendor;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1047,10 +1193,10 @@ lgl_db_lookup_vendor_from_name (const gchar *name)
 	if (name == NULL)
         {
 		/* If no name, return first vendor as a default */
-		return lgl_vendor_dup ((lglVendor *) vendors->data);
+		return lgl_vendor_dup ((lglVendor *) model->vendors->data);
 	}
 
-	for (p = vendors; p != NULL; p = p->next)
+	for (p = model->vendors; p != NULL; p = p->next)
         {
 		vendor = (lglVendor *) p->data;
 		if (UTF8_EQUAL (vendor->name, name))
@@ -1078,7 +1224,7 @@ lgl_db_is_vendor_name_known (const gchar *name)
 	GList       *p;
 	lglVendor   *vendor;
 
-	if (!papers)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1088,7 +1234,7 @@ lgl_db_is_vendor_name_known (const gchar *name)
 		return FALSE;
 	}
 
-	for (p = vendors; p != NULL; p = p->next)
+	for (p = model->vendors; p != NULL; p = p->next)
         {
 		vendor = (lglVendor *) p->data;
 		if (UTF8_EQUAL (vendor->name, name))
@@ -1186,12 +1332,12 @@ lgl_db_print_known_vendors (void)
 	GList       *p;
 	lglVendor   *vendor;
 
-	if (!papers) {
+	if (!model) {
 		lgl_db_init ();
 	}
 
 	g_print ("%s():\n", __FUNCTION__);
-	for (p = vendors; p != NULL; p = p->next) {
+	for (p = model->vendors; p != NULL; p = p->next) {
 		vendor = (lglVendor *) p->data;
 
 		g_print ("VENDOR name=\"%s\", url=\"%s\"\n",
@@ -1228,12 +1374,12 @@ lgl_db_get_brand_list (const gchar *paper_id,
 	lglTemplateAlias *alias;
 	GList            *brands = NULL;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
 		if (lgl_template_does_page_size_match (template, paper_id) &&
@@ -1292,7 +1438,7 @@ _lgl_db_register_template_internal (const lglTemplate   *template)
         lglTemplate *template_copy;
 
         template_copy = lgl_template_dup (template);
-        templates = g_list_append (templates, template_copy);
+        model->templates = g_list_append (model->templates, template_copy);
         add_to_template_cache (template_copy);
 }
 
@@ -1313,7 +1459,7 @@ lgl_db_register_template (const lglTemplate *template)
         gchar       *dir, *filename, *abs_filename;
         gint         bytes_written;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1338,8 +1484,9 @@ lgl_db_register_template (const lglTemplate *template)
                 {
                         template_copy = lgl_template_dup (template);
                         lgl_template_add_category (template_copy, "user-defined");
-                        templates = g_list_append (templates, template_copy);
+                        model->templates = g_list_append (model->templates, template_copy);
                         add_to_template_cache (template_copy);
+                        g_signal_emit (G_OBJECT (model), signals[CHANGED], 0);
                         return LGL_DB_REG_OK;
                 }
                 else
@@ -1352,6 +1499,61 @@ lgl_db_register_template (const lglTemplate *template)
 		g_message ("Cannot register new template with unknown page size.");
                 return LGL_DB_REG_BAD_PAPER_ID;
 	}
+
+}
+
+
+lglDbDeleteStatus
+lgl_db_delete_template_by_name (const gchar *name)
+{
+        lglTemplate *template, *template1;
+        gchar       *dir, *filename, *abs_filename;
+        GList       *p;
+
+	if (!model)
+        {
+		lgl_db_init ();
+	}
+
+        if (!lgl_db_does_template_name_exist (name))
+        {
+                return LGL_DB_DELETE_DOES_NOT_EXIST;
+        }
+
+        template = lgl_db_lookup_template_from_name (name);
+        if ( lgl_template_does_category_match (template, "user-defined") )
+        {
+		dir = LGL_USER_DATA_DIR;
+		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
+		abs_filename = g_build_filename (dir, filename, NULL);
+
+                g_unlink (abs_filename);
+
+		g_free (dir);
+		g_free (filename);
+		g_free (abs_filename);
+
+                for ( p=model->templates; p != NULL; p=p->next )
+                {
+                        template1 = (lglTemplate *)p->data;
+
+                        if ( lgl_template_do_templates_match (template, template1) )
+                        {
+                                model->templates = g_list_delete_link (model->templates, p);
+                                g_hash_table_remove (model->template_cache, name);
+                                break;
+                        }
+                }
+
+                lgl_template_free (template);
+
+                g_signal_emit (G_OBJECT (model), signals[CHANGED], 0);
+                return LGL_DB_DELETE_OK;
+        }
+        else
+        {
+                return LGL_DB_DELETE_NOT_USER_DEFINED;
+        }
 
 }
 
@@ -1373,7 +1575,7 @@ lgl_db_does_template_exist (const gchar *brand,
 	lglTemplate      *template;
         lglTemplateAlias *alias;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1383,7 +1585,7 @@ lgl_db_does_template_exist (const gchar *brand,
 		return FALSE;
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
 		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
@@ -1419,7 +1621,7 @@ lgl_db_does_template_name_exist (const gchar *name)
         lglTemplateAlias *alias;
         gchar            *candidate_name;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1429,7 +1631,7 @@ lgl_db_does_template_name_exist (const gchar *name)
 		return FALSE;
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
 		for (p_alias = template->aliases; p_alias != NULL; p_alias = p_alias->next)
@@ -1475,12 +1677,12 @@ lgl_db_get_template_name_list_unique (const gchar *brand,
         gchar       *name;
 	GList       *names = NULL;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
 
@@ -1525,12 +1727,12 @@ lgl_db_get_template_name_list_all (const gchar *brand,
         gchar            *name;
 	GList            *names = NULL;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template = (lglTemplate *) p_tmplt->data;
 		if (lgl_template_does_page_size_match (template, paper_id) &&
@@ -1574,7 +1776,7 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
         gchar            *name2;
 	GList            *names = NULL;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1602,7 +1804,7 @@ lgl_db_get_similar_template_name_list (const gchar  *name)
                 }
         }
 
-	for (p_tmplt = templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
+	for (p_tmplt = model->templates; p_tmplt != NULL; p_tmplt = p_tmplt->next)
         {
 		template2 = (lglTemplate *) p_tmplt->data;
 
@@ -1667,7 +1869,7 @@ lgl_db_lookup_template_from_name (const gchar *name)
         gchar            *candidate_name;
 	lglTemplate      *new_template;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1675,10 +1877,10 @@ lgl_db_lookup_template_from_name (const gchar *name)
 	if (name == NULL)
         {
 		/* If no name, return first template as a default */
-		return lgl_template_dup ((lglTemplate *) templates->data);
+		return lgl_template_dup ((lglTemplate *) model->templates->data);
 	}
 
-        template = g_hash_table_lookup (template_cache, name);
+        template = g_hash_table_lookup (model->template_cache, name);
 
         if (template)
         {
@@ -1703,7 +1905,7 @@ lgl_db_lookup_template_from_name (const gchar *name)
         }
 
 	/* No matching template has been found so return the first template */
-	return lgl_template_dup ((lglTemplate *) templates->data);
+	return lgl_template_dup ((lglTemplate *) model->templates->data);
 }
 
 
@@ -1728,7 +1930,7 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
         gchar            *candidate_name;
 	lglTemplate      *new_template;
 
-	if (!templates)
+	if (!model)
         {
 		lgl_db_init ();
 	}
@@ -1736,11 +1938,11 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
 	if ((brand == NULL) || (part == NULL))
         {
 		/* If no name, return first template as a default */
-		return lgl_template_dup ((lglTemplate *) templates->data);
+		return lgl_template_dup ((lglTemplate *) model->templates->data);
 	}
 
         name = g_strdup_printf ("%s %s", brand, part);
-        template = g_hash_table_lookup (template_cache, name);
+        template = g_hash_table_lookup (model->template_cache, name);
 
         if (template)
         {
@@ -1767,14 +1969,7 @@ lgl_db_lookup_template_from_brand_part(const gchar *brand,
 
 	/* No matching template has been found so return the first template */
         g_free (name);
-	return lgl_template_dup ((lglTemplate *) templates->data);
-}
-
-
-static void
-init_template_cache (void)
-{
-        template_cache = g_hash_table_new (g_str_hash, g_str_equal);
+	return lgl_template_dup ((lglTemplate *) model->templates->data);
 }
 
 
@@ -1790,7 +1985,7 @@ add_to_template_cache (lglTemplate *template)
                 alias = (lglTemplateAlias *)p_alias->data;
                 name = g_strdup_printf ("%s %s", alias->brand, alias->part);
 
-                g_hash_table_insert (template_cache, name, template);
+                g_hash_table_insert (model->template_cache, name, template);
         }
 }
 
@@ -1808,7 +2003,7 @@ read_templates (void)
 	data_dir = LGL_USER_DATA_DIR;
 	read_template_files_from_dir (data_dir);
 	g_free (data_dir);
-        for ( p=templates; p != NULL; p=p->next )
+        for ( p=model->templates; p != NULL; p=p->next )
         {
                 template = (lglTemplate *)p->data;
                 lgl_template_add_category (template, "user-defined");
@@ -1821,7 +2016,7 @@ read_templates (void)
 	read_template_files_from_dir (data_dir);
 	g_free (data_dir);
 
-	if (templates == NULL)
+	if (model->templates == NULL)
         {
 		g_critical (_("Unable to locate any template files.  Libglabels may not be installed correctly!"));
 	}
@@ -1929,8 +2124,13 @@ lgl_db_print_known_templates (void)
 	GList       *p;
 	lglTemplate *template;
 
+        if (!model)
+        {
+                lgl_db_init ();
+        }
+
 	g_print ("%s():\n", __FUNCTION__);
-	for (p=templates; p!=NULL; p=p->next)
+	for (p=model->templates; p!=NULL; p=p->next)
         {
 		template = (lglTemplate *)p->data;
 
@@ -1955,6 +2155,11 @@ lgl_db_print_aliases (const lglTemplate *template)
 {
 	GList            *p;
         lglTemplateAlias *alias;
+
+        if (!model)
+        {
+                lgl_db_init ();
+        }
 
 	g_print ("%s():\n", __FUNCTION__);
 	for (p=template->aliases; p!=NULL; p=p->next)

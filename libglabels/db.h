@@ -38,10 +38,35 @@ typedef enum
         LGL_DB_REG_FILE_WRITE_ERROR  = -3
 } lglDbRegStatus;
 
+typedef enum
+{
+        LGL_DB_DELETE_OK                =  0,
+        LGL_DB_DELETE_DOES_NOT_EXIST    = -1,
+        LGL_DB_DELETE_NOT_USER_DEFINED  = -2,
+        LGL_DB_DELETE_FILE_ERROR        = -3
+} lglDbDeleteStatus;
+
+
+typedef void  (*lglDbNotifyFunc) (gpointer user_data);
+
+
+
+
 /*
  * Module initialization
  */
 void           lgl_db_init                           (void);
+
+
+
+/*
+ * Notification
+ */
+gulong         lgl_db_notify_add                     (lglDbNotifyFunc      func,
+                                                      gpointer             user_data);
+
+void           lgl_db_notify_remove                  (gulong               id);
+
 
 
 /*
@@ -116,6 +141,8 @@ void           lgl_db_free_brand_list                (GList               *brand
  * Templates
  */
 lglDbRegStatus lgl_db_register_template              (const lglTemplate   *template);
+
+lglDbDeleteStatus lgl_db_delete_template_by_name        (const gchar         *name);
 
 gboolean       lgl_db_does_template_exist            (const gchar         *brand,
                                                       const gchar         *part);

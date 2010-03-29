@@ -22,8 +22,7 @@
                   <object class="GtkLabel" id="label19">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Choose label or card product from hundreds of predefined templates.  You may also
-define your own templates.</property>
+                    <property name="label" translatable="yes">Choose label or card product from hundreds of predefined templates or define your own.</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

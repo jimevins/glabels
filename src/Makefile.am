@@ -1,5 +1,5 @@
 
-SUBDIRS= pixmaps stock-pixmaps
+SUBDIRS= ../libglabels pixmaps stock-pixmaps
 
 bin_PROGRAMS = glabels-3 glabels-3-batch
 
