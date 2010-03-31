@@ -549,8 +549,6 @@ selection_changed_cb (GtkTreeSelection       *selection,
         gtk_widget_set_sensitive (GTK_WIDGET (this->priv->custom_delete_button),
                                   gtk_tree_selection_get_mode (custom_selection) != GTK_SELECTION_NONE );
 
-        if (gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
-
         /* Emit our "changed" signal */
         g_signal_emit (G_OBJECT (user_data), signals[CHANGED], 0);
 
