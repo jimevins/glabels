@@ -294,6 +294,21 @@
   </Template>
 
 
+  <!-- ============================================================ -->
+  <!-- Avery 38931 Family: Rectangular Labels                       -->
+  <!-- ============================================================ -->
+  <Template brand="Avery" part="38931" size="A4" description="Rectangular Labels">
+    <Meta category="label"/>
+    <Meta category="mail"/>
+    <Label-rectangle id="0" width="70mm" height="25mm" round="0mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="3mm"/>
+      <Layout nx="3" ny="11" x0="0mm" y0="10mm" dx="70mm" dy="25mm"/>
+    </Label-rectangle>
+    <Alias brand="Avery" part="DL33"/>
+    <Alias brand="Avery" part="CR33"/>
+  </Template>
+
+
 </Glabels-templates>
 
 
