@@ -98,7 +98,6 @@ gl_file_new (glWindow  *window)
 	}
 	gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog), rotate_flag);
 
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
 	gl_debug (DEBUG_FILE, "END");
@@ -195,7 +194,6 @@ gl_file_properties (glLabel   *label,
 
         gl_new_label_dialog_set_rotate_state (GL_NEW_LABEL_DIALOG (dialog), rotate_flag);
 
-        gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
 	gl_debug (DEBUG_FILE, "END");
