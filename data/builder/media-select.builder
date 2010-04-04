@@ -331,8 +331,6 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -341,9 +339,9 @@
   </object>
   <object class="GtkSizeGroup" id="custom_buttons_sizegroup">
     <widgets>
-      <widget name="custom_add_button"/>
-      <widget name="custom_edit_button"/>
       <widget name="custom_delete_button"/>
+      <widget name="custom_edit_button"/>
+      <widget name="custom_add_button"/>
     </widgets>
   </object>
 </interface>
