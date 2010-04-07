@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-03-17 06:38+0000\n"
-"PO-Revision-Date: 2010-03-21 18:12+0100\n"
+"POT-Creation-Date: 2010-04-04 11:43+0000\n"
+"PO-Revision-Date: 2010-04-07 18:45+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1471,24 +1471,30 @@ msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"No se pudieron ubicar las definiciones del tamaño del papel. Puede que "
+"libglabels no esté instalado correctamente."
 
 #: ../libglabels/db.c:875
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"No se pudieron ubicar las definiciones de categorías. Puede que libglabels "
+"no esté instalado correctamente."
 
 #: ../libglabels/db.c:1461
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
+"No se pudo ubicar ningún archivo de plantilla. Puede que libglabels no esté "
+"instalado correctamente."
 
 #: ../libglabels/db.c:1538
-#, fuzzy, c-format
+#, c-format
 #| msgid "Generic %s full page"
 msgid "Generic %s full page template"
-msgstr "Página completa genérica %s"
+msgstr "Página de plantilla genérica %s"
 
 #: ../libglabels/xml-template.c:227
 msgid "Missing name or brand/part attributes."
@@ -1510,16 +1516,17 @@ msgstr "Código \"%s\" o nombre de página desconocido"
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
+"Falta el atributo requerido «marca» o «parte», intentándolo con un nombre "
+"obsoleto."
 
 #: ../libglabels/xml-template.c:637
 msgid "Name attribute also missing."
 msgstr "También falta el atributo del nombre."
 
 #: ../data/glade/merge-properties-dialog.glade.h:1
-#, fuzzy
 #| msgid "Record selection/preview:"
 msgid "<b>Record selection/preview</b>"
-msgstr "Selección de registros/Vista previa"
+msgstr "<b>Grabar la selección/vista previa</b>"
 
 #: ../data/glade/merge-properties-dialog.glade.h:2
 msgid "<b>Source</b>"
@@ -1772,11 +1779,11 @@ msgstr "<b>Opciones</b>"
 
 #: ../data/glade/print-custom-widget.glade.h:2
 msgid "<b>Print control (Merge)</b>"
-msgstr ""
+msgstr "<b>Control de impresión (mezclar)</b>"
 
 #: ../data/glade/print-custom-widget.glade.h:3
 msgid "<b>Print control (Simple)</b>"
-msgstr ""
+msgstr "<b>Control de impresión (simple)</b>"
 
 #: ../data/glade/property-bar.glade.h:1
 msgid "Bold"
@@ -2050,7 +2057,7 @@ msgstr ""
 
 #: ../data/glade/template-designer.glade.h:62
 msgid "cd_size_page"
-msgstr ""
+msgstr "tamaño_de_página_de_cd"
 
 #: ../data/glade/template-designer.glade.h:63
 msgid "finish_page"
@@ -2058,11 +2065,11 @@ msgstr ""
 
 #: ../data/glade/template-designer.glade.h:65
 msgid "layout_page"
-msgstr ""
+msgstr "página_de_distribución"
 
 #: ../data/glade/template-designer.glade.h:66
 msgid "name_page"
-msgstr ""
+msgstr "nombre_de_la_página"
 
 #: ../data/glade/template-designer.glade.h:67
 msgid "nlayouts_page"
@@ -2334,29 +2341,26 @@ msgstr "Etiquetas de envío"
 
 #. ===================================================================
 #: ../data/templates/avery-other-templates.xml.h:2
-#, fuzzy
 #| msgid "Filing Labels"
 msgid "File Folder Labels"
-msgstr "Etiquetas para archivado"
+msgstr ""
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:8
 msgid "CD/DVD Labels (Disc Labels)"
-msgstr "Etiquetas de CD/DVD"
+msgstr "Etiquetas de CD/DVD (etiquetas de discos)"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:10
-#, fuzzy
 #| msgid "CD/DVD Labels (Disc Labels)"
 msgid "CD/DVD Labels (Spine Labels)"
-msgstr "Etiquetas de CD/DVD"
+msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 
 #. the LSK labels can be torn in half down the center
 #: ../data/templates/avery-us-templates.xml.h:14
-#, fuzzy
 #| msgid "CD Labels"
 msgid "Divider Labels"
-msgstr "Etiquetas para CD"
+msgstr "Etiquetas divisoras"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:16
@@ -2377,10 +2381,9 @@ msgstr "Etiquetas para CD"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:22
-#, fuzzy
 #| msgid "Business Cards"
 msgid "Index Cards"
-msgstr "Tarjetas de negocio"
+msgstr "Fichas"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:24
@@ -2406,10 +2409,9 @@ msgstr "Etiquetas de dirección de remitente"
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
 #: ../data/templates/misc-us-templates.xml.h:30
-#, fuzzy
 #| msgid "Large Round Labels"
 msgid "Round Labels"
-msgstr "Etiquetas redondeadas grandes"
+msgstr "Etiquetas redondeadas"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:34
@@ -2443,13 +2445,12 @@ msgstr "Etiquetas de video (lateral)"
 
 #: ../data/templates/brother-other-templates.xml.h:1
 msgid "Multi Purpose Labels 17mm x 54mm"
-msgstr ""
+msgstr "Etiquetas multipropósito de 17mm x 54mm"
 
 #: ../data/templates/brother-other-templates.xml.h:2
-#, fuzzy
 #| msgid "Shipping Labels"
 msgid "Shipping Labels 62mm x 100mm"
-msgstr "Etiquetas de envío"
+msgstr "Etiquetas de envío de 62mm x 100mm"
 
 #.
 #. *********************************************************************
@@ -2469,15 +2470,14 @@ msgstr "Etiquetas de envío"
 #. *********************************************************************
 #.
 #: ../data/templates/brother-other-templates.xml.h:20
-#, fuzzy
 #| msgid "Return Address Labels"
 msgid "Standard Address Labels 29mm x 90mm"
-msgstr "Etiquetas de dirección de remitente"
+msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:2
 msgid "3.5in Diskette"
-msgstr ""
+msgstr "Disquete de 3.5 pulgadas"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:6
@@ -2493,10 +2493,9 @@ msgstr ""
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:10
-#, fuzzy
 #| msgid "Address Labels"
 msgid "Large Address Labels"
-msgstr "Etiquetas de dirección"
+msgstr "Etiquetas grandes de dirección"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:14
@@ -2710,7 +2709,7 @@ msgstr "QSL-Karten Etiketten 70mm x 50,8mm"
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:22
 msgid "Rectangular Copier Labels"
-msgstr ""
+msgstr "Etiquetas para copiadoras rectangulares"
 
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:26
