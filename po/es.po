@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-04-04 11:43+0000\n"
-"PO-Revision-Date: 2010-04-07 18:45+0200\n"
+"POT-Creation-Date: 2010-04-07 16:45+0000\n"
+"PO-Revision-Date: 2010-04-11 13:57+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "archivo de entrada para combinar"
 
 #: ../src/glabels-batch.c:96
 msgid "- batch process gLabels label files"
-msgstr ""
+msgstr "- procesador de lotes de archivos de etiquetas gLabels"
 
 #: ../src/glabels-batch.c:142
 #, c-format
@@ -1492,7 +1492,6 @@ msgstr ""
 
 #: ../libglabels/db.c:1538
 #, c-format
-#| msgid "Generic %s full page"
 msgid "Generic %s full page template"
 msgstr "Página de plantilla genérica %s"
 
@@ -1524,7 +1523,6 @@ msgid "Name attribute also missing."
 msgstr "También falta el atributo del nombre."
 
 #: ../data/glade/merge-properties-dialog.glade.h:1
-#| msgid "Record selection/preview:"
 msgid "<b>Record selection/preview</b>"
 msgstr "<b>Grabar la selección/vista previa</b>"
 
@@ -2061,7 +2059,7 @@ msgstr "tamaño_de_página_de_cd"
 
 #: ../data/glade/template-designer.glade.h:63
 msgid "finish_page"
-msgstr ""
+msgstr "finish_page"
 
 #: ../data/glade/template-designer.glade.h:65
 msgid "layout_page"
@@ -2073,27 +2071,27 @@ msgstr "nombre_de_la_página"
 
 #: ../data/glade/template-designer.glade.h:67
 msgid "nlayouts_page"
-msgstr ""
+msgstr "nlayouts_page"
 
 #: ../data/glade/template-designer.glade.h:68
 msgid "pg_size_page"
-msgstr ""
+msgstr "pg_size_page"
 
 #: ../data/glade/template-designer.glade.h:69
 msgid "rect_size_page"
-msgstr ""
+msgstr "rect_size_page"
 
 #: ../data/glade/template-designer.glade.h:70
 msgid "round_size_page"
-msgstr ""
+msgstr "round_size_page"
 
 #: ../data/glade/template-designer.glade.h:71
 msgid "shape_page"
-msgstr ""
+msgstr "shape_page"
 
 #: ../data/glade/template-designer.glade.h:72
 msgid "start_page"
-msgstr ""
+msgstr "start_page"
 
 #: ../data/glade/wdgt-media-select.glade.h:1
 msgid "Brand:"
@@ -2232,7 +2230,7 @@ msgstr "CD/DVD u otros soportes"
 
 #: ../data/templates/categories.xml.h:5
 msgid "Mailing/shipping products"
-msgstr ""
+msgstr "Productos para correo/envío"
 
 #: ../data/templates/categories.xml.h:6
 msgid "Rectangular labels"
@@ -2262,10 +2260,9 @@ msgstr "Etiquetas de dirección"
 
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:6
-#, fuzzy
 #| msgid "Small Round Labels"
 msgid "Allround labels"
-msgstr "Etiquetas redondeadas pequeñas"
+msgstr "Etiquetas redondas"
 
 #. ============================================================
 #. ===================================================================
@@ -2341,7 +2338,6 @@ msgstr "Etiquetas de envío"
 
 #. ===================================================================
 #: ../data/templates/avery-other-templates.xml.h:2
-#| msgid "Filing Labels"
 msgid "File Folder Labels"
 msgstr ""
 
@@ -2352,13 +2348,11 @@ msgstr "Etiquetas de CD/DVD (etiquetas de discos)"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:10
-#| msgid "CD/DVD Labels (Disc Labels)"
 msgid "CD/DVD Labels (Spine Labels)"
 msgstr "Etiquetas de CD/DVD (etiquetas laterales)"
 
 #. the LSK labels can be torn in half down the center
 #: ../data/templates/avery-us-templates.xml.h:14
-#| msgid "CD Labels"
 msgid "Divider Labels"
 msgstr "Etiquetas divisoras"
 
@@ -2374,14 +2368,12 @@ msgstr "Etiquetas de página completa"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:20
-#, fuzzy
 #| msgid "CD Labels"
 msgid "ID Labels"
-msgstr "Etiquetas para CD"
+msgstr "Etiquetas de identificación"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:22
-#| msgid "Business Cards"
 msgid "Index Cards"
 msgstr "Fichas"
 
@@ -2409,7 +2401,6 @@ msgstr "Etiquetas de dirección de remitente"
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
 #: ../data/templates/misc-us-templates.xml.h:30
-#| msgid "Large Round Labels"
 msgid "Round Labels"
 msgstr "Etiquetas redondeadas"
 
@@ -2448,7 +2439,6 @@ msgid "Multi Purpose Labels 17mm x 54mm"
 msgstr "Etiquetas multipropósito de 17mm x 54mm"
 
 #: ../data/templates/brother-other-templates.xml.h:2
-#| msgid "Shipping Labels"
 msgid "Shipping Labels 62mm x 100mm"
 msgstr "Etiquetas de envío de 62mm x 100mm"
 
@@ -2470,7 +2460,6 @@ msgstr "Etiquetas de envío de 62mm x 100mm"
 #. *********************************************************************
 #.
 #: ../data/templates/brother-other-templates.xml.h:20
-#| msgid "Return Address Labels"
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "Etiquetas de dirección estándar de 29mm x 90mm"
 
@@ -2481,10 +2470,9 @@ msgstr "Disquete de 3.5 pulgadas"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:6
-#, fuzzy
 #| msgid "Fill color"
 msgid "File Folder"
-msgstr "Color de relleno"
+msgstr ""
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:8
@@ -2493,7 +2481,6 @@ msgstr ""
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:10
-#| msgid "Address Labels"
 msgid "Large Address Labels"
 msgstr "Etiquetas grandes de dirección"
 
@@ -2507,25 +2494,25 @@ msgstr "Etiquetas de dirección para transporte"
 #: ../data/templates/misc-iso-templates.xml.h:4
 #: ../data/templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
-msgstr ""
+msgstr "Etiquetas redondas"
 
 # REVISAR
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:6
 msgid "Arch File Labels"
-msgstr ""
+msgstr "Etiquetas de dossier"
 
 # REVISAR
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:8
 msgid "Arch File Labels (large)"
-msgstr ""
+msgstr "Etiquetas de dossier (grandes)"
 
 # REVISAR
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:10
 msgid "Arch File Labels (small)"
-msgstr ""
+msgstr "Etiquetas de dossier (pequeñas)"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:14
@@ -2571,7 +2558,7 @@ msgstr "Etiquetas generales"
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:32
 msgid "Inkjet/Laser Labels 70x37mm"
-msgstr ""
+msgstr "Etiquetas para impresora de inyección/láser de 70x37mm"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:38
@@ -2639,10 +2626,9 @@ msgstr "Etiquetas DLT"
 
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:18
-#, fuzzy
 #| msgid "CD Booklet"
 msgid "Jewel Case Booklet"
-msgstr "Tapa de CD"
+msgstr "Libreto de CD «Jewel»"
 
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:22
@@ -2657,36 +2643,35 @@ msgstr "Etiquetas Mini-CD"
 # REVISAR
 #: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
-msgstr ""
+msgstr "Etiquetas para CD (sólo el lateral del CD)"
 
 # REVISAR
 #: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
-msgstr ""
+msgstr "Etiquetas para CD (sólo carátula)"
 
 # REVISAR
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
-msgstr ""
+msgstr "Caja extraplana de CD (boca arriba)"
 
 # REVISAR
 #: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
-msgstr ""
+msgstr "Caja extraplana de CD (boca abajo)"
 
 # REVISAR
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:10
 msgid "Correction and Cover-up Labels"
-msgstr ""
+msgstr "Etiquetas de corrección y cubrimiento"
 
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:12
-#, fuzzy
 #| msgid "Filing Labels"
 msgid "File Back Labels"
-msgstr "Etiquetas para archivado"
+msgstr "Etiquetas de archivo"
 
 # REVISAR
 #. ===================================================================
@@ -2697,7 +2682,7 @@ msgstr ""
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:18
 msgid "Multi-purpose Stick+Lift Labels"
-msgstr ""
+msgstr "Etiquetas reusables multipropósito"
 
 # REVISAR
 #. ===================================================================
