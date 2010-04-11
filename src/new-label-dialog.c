@@ -92,7 +92,7 @@ gl_new_label_dialog_init (glNewLabelDialog *dialog)
 
 	dialog->priv = g_new0 (glNewLabelDialogPrivate, 1);
 
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
+	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD1);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_buttons (GTK_DIALOG(dialog),
