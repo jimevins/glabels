@@ -47,6 +47,7 @@
 /*========================================================*/
 
 struct _glViewImagePrivate {
+        int place_holder; /* Place holder for future private data. */
 };
 
 /*========================================================*/

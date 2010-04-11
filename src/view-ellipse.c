@@ -48,6 +48,7 @@
 /*========================================================*/
 
 struct _glViewEllipsePrivate {
+        int place_holder; /* Place holder for future private data. */
 };
 
 /*========================================================*/

@@ -46,6 +46,7 @@
 /*========================================================*/
 
 struct _glViewBarcodePrivate {
+        int place_holder; /* Place holder for future private data. */
 };
 
 /*========================================================*/
