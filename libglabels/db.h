@@ -144,6 +144,9 @@ lglDbRegStatus lgl_db_register_template              (const lglTemplate   *templ
 
 lglDbDeleteStatus lgl_db_delete_template_by_name        (const gchar         *name);
 
+lglDbDeleteStatus lgl_db_delete_template_by_brand_part  (const gchar         *brand,
+                                                         const gchar         *part);
+
 gboolean       lgl_db_does_template_exist            (const gchar         *brand,
                                                       const gchar         *part);
 

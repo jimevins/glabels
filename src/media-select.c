@@ -583,6 +583,31 @@ static void
 custom_edit_clicked_cb (GtkButton  *button,
                         gpointer    user_data)
 {
+        glMediaSelect     *this = GL_MEDIA_SELECT (user_data);
+        GtkTreeSelection  *selection;
+        GtkTreeIter        iter;
+        GtkTreeModel      *model;
+        gchar             *name;
+        GtkWidget         *window;
+        GtkWidget         *dialog;
+
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->custom_treeview));
+
+        if (!gtk_tree_selection_get_mode (selection) == GTK_SELECTION_NONE)
+        {
+                gtk_tree_selection_get_selected (selection, &model, &iter);
+                gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
+
+                window = gtk_widget_get_toplevel (GTK_WIDGET (this));
+
+                dialog = gl_template_designer_new (GTK_WINDOW (window));
+                gl_template_designer_set_from_name (GL_TEMPLATE_DESIGNER (dialog), name);
+
+                gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+                gtk_widget_show (dialog);
+
+                g_free (name);
+        }
 }
 
 
@@ -609,6 +634,7 @@ custom_delete_clicked_cb (GtkButton  *button,
                 gtk_tree_model_get (model, &iter, NAME_COLUMN, &name, -1);
 
                 lgl_db_delete_template_by_name (name);
+                gl_mini_preview_pixbuf_cache_delete_by_name (name);
 
                 g_free (name);
         }
@@ -657,6 +683,12 @@ db_changed_cb (glMediaSelect *this)
         GList             *list;
 
 	this->priv->stop_signals = TRUE;
+
+        /* Update recent page. */
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (this->priv->recent_treeview));
+        list = gl_template_history_model_get_name_list (gl_template_history);
+        load_recent_list (this, this->priv->recent_store, selection, list);
+        lgl_db_free_template_name_list (list);
 
         /* Update search all page. */
         brand = gtk_combo_box_get_active_text (GTK_COMBO_BOX (this->priv->brand_combo));

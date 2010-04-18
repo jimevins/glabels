@@ -66,6 +66,10 @@
 
 struct _glTemplateDesignerPrivate
 {
+        gboolean         edit_flag;
+        gchar           *edit_brand;
+        gchar           *edit_part;
+
         GtkBuilder      *builder;
 
 	/* Assistant pages */
@@ -336,6 +340,9 @@ gl_template_designer_finalize (GObject *object)
 	g_return_if_fail (GL_IS_TEMPLATE_DESIGNER (dialog));
 	g_return_if_fail (dialog->priv != NULL);
 
+        g_free (dialog->priv->edit_brand);
+        g_free (dialog->priv->edit_part);
+
         if (dialog->priv->builder)
         {
                 g_object_unref (dialog->priv->builder);
@@ -394,13 +401,13 @@ gl_template_designer_construct (glTemplateDesigner *dialog)
         dialog->priv->climb_rate      = gl_units_util_get_step_size (units);
         dialog->priv->digits          = gl_units_util_get_precision (units);
 
-	gtk_window_set_title (GTK_WINDOW(dialog), _("gLabels Template Designer"));
+	gtk_window_set_title (GTK_WINDOW(dialog), _("New gLabels Template"));
 
         logo_filename = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
 	logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
         g_free (logo_filename);
 
-        /* Costruct and append pages (must be same order as PAGE_NUM enums. */
+        /* Construct and append pages (must be same order as PAGE_NUM enums. */
 	construct_start_page (dialog, logo);
 	construct_name_page (dialog, logo);
 	construct_pg_size_page (dialog, logo);
@@ -1110,6 +1117,123 @@ construct_finish_page (glTemplateDesigner      *dialog,
 }
 
 
+/*****************************************************************************/
+/* Initialize dialog from existing template.                                 */
+/*****************************************************************************/
+void
+gl_template_designer_set_from_name (glTemplateDesigner *dialog,
+                                    const gchar        *name)
+{
+        lglTemplate      *template;
+        gdouble           upp;
+        lglTemplateFrame *frame;
+        gchar            *paper_name;
+        GList            *p, *p_layout1, *p_layout2;
+
+	gtk_window_set_title (GTK_WINDOW(dialog), _("Edit gLabels Template"));
+
+        template = lgl_db_lookup_template_from_name (name);
+        if ( lgl_template_does_category_match (template, "user-defined") )
+        {
+
+                dialog->priv->stop_signals = TRUE;
+
+                dialog->priv->edit_flag  = TRUE;
+                dialog->priv->edit_brand = g_strdup (template->brand);
+                dialog->priv->edit_part  = g_strdup (template->part);
+
+                upp = dialog->priv->units_per_point;
+
+                gtk_entry_set_text (GTK_ENTRY (dialog->priv->brand_entry),       template->brand);
+                gtk_entry_set_text (GTK_ENTRY (dialog->priv->part_num_entry),    template->part);
+                gtk_entry_set_text (GTK_ENTRY (dialog->priv->description_entry), template->description);
+
+
+                paper_name = lgl_db_lookup_paper_name_from_id (template->paper_id);
+                gl_combo_util_set_active_text (GTK_COMBO_BOX (dialog->priv->pg_size_combo), paper_name);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->pg_w_spin), template->page_width*upp);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->pg_h_spin), template->page_height*upp);
+                g_free (paper_name);
+
+
+                frame = (lglTemplateFrame *)template->frames->data;
+                switch (frame->shape)
+                {
+                case LGL_TEMPLATE_FRAME_SHAPE_RECT:
+                default:
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->shape_rect_radio), TRUE);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_w_spin),       frame->rect.w*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_h_spin),       frame->rect.h*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_r_spin),       frame->rect.r*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_x_waste_spin), frame->rect.x_waste*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_y_waste_spin), frame->rect.y_waste*upp);
+                        break;
+
+                case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
+                        break;
+
+                case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->shape_round_radio), TRUE);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_r_spin),      frame->round.r*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin),  frame->round.waste*upp);
+                        break;
+
+                case LGL_TEMPLATE_FRAME_SHAPE_CD:
+                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->shape_cd_radio), TRUE);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_radius_spin),    frame->cd.r1*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_hole_spin),      frame->cd.r2*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_w_spin),         frame->cd.w*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_h_spin),         frame->cd.h*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_waste_spin),  frame->round.waste*upp);
+                        break;
+
+                }
+                for ( p = frame->all.markups; p != NULL; p=p->next )
+                {
+                        lglTemplateMarkup *markup = (lglTemplateMarkup *)p->data;
+
+                        if ( markup->type == LGL_TEMPLATE_MARKUP_MARGIN )
+                        {
+                                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->rect_margin_spin),  markup->margin.size*upp);
+                                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->round_margin_spin), markup->margin.size*upp);
+                                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->cd_margin_spin),    markup->margin.size*upp);
+                        }
+                }
+
+
+                p_layout1 = g_list_nth (frame->all.layouts, 0);
+                p_layout2 = g_list_nth (frame->all.layouts, 1);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->nlayouts_spin), p_layout2 ? 2 : 1 );
+                if ( p_layout1 )
+                {
+                        lglTemplateLayout *layout1 = (lglTemplateLayout *)p_layout1->data;
+
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_nx_spin), layout1->nx);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_ny_spin), layout1->ny);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_x0_spin), layout1->x0*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_y0_spin), layout1->y0*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dx_spin), layout1->dx*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout1_dy_spin), layout1->dy*upp);
+                }
+                if ( p_layout2 )
+                {
+                        lglTemplateLayout *layout2 = (lglTemplateLayout *)p_layout2->data;
+
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_nx_spin), layout2->nx);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_ny_spin), layout2->ny);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_x0_spin), layout2->x0*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_y0_spin), layout2->y0*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dx_spin), layout2->dx*upp);
+                        gtk_spin_button_set_value (GTK_SPIN_BUTTON(dialog->priv->layout2_dy_spin), layout2->dy*upp);
+                }
+
+
+                dialog->priv->stop_signals = FALSE;
+
+        }
+}
+
+
 /*--------------------------------------------------------------------------*/
 /* PRIVATE.  cancel callback.                                               */
 /*--------------------------------------------------------------------------*/
@@ -1134,6 +1258,15 @@ apply_cb (glTemplateDesigner *dialog)
 
         units = gl_prefs_model_get_units (gl_prefs);
         lgl_xml_set_default_units (units);
+
+        if (dialog->priv->edit_flag)
+        {
+                lgl_db_delete_template_by_brand_part (dialog->priv->edit_brand, dialog->priv->edit_part);
+
+                name = g_strdup_printf ("%s %s", dialog->priv->edit_brand, dialog->priv->edit_part);
+                gl_mini_preview_pixbuf_cache_delete_by_name (name);
+                g_free (name);
+        }
 	
 	template = build_template (dialog);
 	lgl_db_register_template (template);
@@ -1265,36 +1398,41 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 	part_num = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1));
 	desc     = gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->description_entry), 0, -1);
 
+        gtk_image_clear (GTK_IMAGE (dialog->priv->name_warning_image));
+        gtk_label_set_text (GTK_LABEL (dialog->priv->name_warning_label), "");
 
-	if (brand && brand[0] && part_num && part_num[0] &&
-            lgl_db_does_template_exist (brand, part_num))
+	if (brand && brand[0] && part_num && part_num[0])
         {
-                gtk_image_set_from_stock (GTK_IMAGE (dialog->priv->name_warning_image),
-                                          GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_BUTTON);
-                gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label),
-                                    _("<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"));
+
+                if (lgl_db_does_template_exist (brand, part_num))
+                {
+                        /* Make exception for currently edited template. */
+                        if ( dialog->priv->edit_brand && !lgl_str_utf8_casecmp (brand, dialog->priv->edit_brand) &&
+                             dialog->priv->edit_part  && !lgl_str_utf8_casecmp (part_num, dialog->priv->edit_part) )
+                        {
+                                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog), dialog->priv->name_page, TRUE);
+                        }
+                        else
+                        {
+                                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog), dialog->priv->name_page, FALSE);
+
+                                gtk_image_set_from_stock (GTK_IMAGE (dialog->priv->name_warning_image),
+                                                          GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_BUTTON);
+                                gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label),
+                                                      _("<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"));
+
+                        }
+                }
+                else
+                {
+                        gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog), dialog->priv->name_page, TRUE);
+                }
+
         }
         else
         {
-                gtk_image_clear (GTK_IMAGE (dialog->priv->name_warning_image));
-                gtk_label_set_text (GTK_LABEL (dialog->priv->name_warning_label), "");
+                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog), dialog->priv->name_page, FALSE);
         }
-
-	if (brand && brand[0] && part_num && part_num[0] && desc && desc[0] &&
-            !lgl_db_does_template_exist (brand, part_num))
-        {
-
-                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
-                                                 dialog->priv->name_page,
-                                                 TRUE);
-	}
-        else
-        {
-
-                gtk_assistant_set_page_complete (GTK_ASSISTANT (dialog),
-                                                 dialog->priv->name_page,
-                                                 FALSE);
-	}
 
 	g_free (brand);
 	g_free (part_num);

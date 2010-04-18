@@ -43,7 +43,7 @@ static GHashTable *mini_preview_pixbuf_cache = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-
+
 /*****************************************************************************/
 /* Create a new hash table to keep track of cached mini preview pixbufs.     */
 /*****************************************************************************/
@@ -56,7 +56,7 @@ gl_mini_preview_pixbuf_cache_init (void)
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "START");
 
-	mini_preview_pixbuf_cache = g_hash_table_new (g_str_hash, g_str_equal);
+	mini_preview_pixbuf_cache = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
 
         names = lgl_db_get_template_name_list_unique (NULL, NULL, NULL);
         for ( p=names; p != NULL; p=p->next )
@@ -71,6 +71,7 @@ gl_mini_preview_pixbuf_cache_init (void)
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END pixbuf_cache=%p", mini_preview_pixbuf_cache);
 }
+
 
 /*****************************************************************************/
 /* Add pixbuf to cache by template.                                          */
@@ -100,6 +101,7 @@ gl_mini_preview_pixbuf_cache_add_by_template (lglTemplate *template)
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
 
+
 /*****************************************************************************/
 /* Add pixbuf to cache by name.                                              */
 /*****************************************************************************/
@@ -119,6 +121,21 @@ gl_mini_preview_pixbuf_cache_add_by_name (gchar      *name)
 
 	gl_debug (DEBUG_PIXBUF_CACHE, "END");
 }
+
+
+/*****************************************************************************/
+/* Delete pixbuf from cache by name.                                         */
+/*****************************************************************************/
+void
+gl_mini_preview_pixbuf_cache_delete_by_name (gchar *name)
+{
+	gl_debug (DEBUG_PIXBUF_CACHE, "START");
+
+        g_hash_table_remove (mini_preview_pixbuf_cache, name);
+
+	gl_debug (DEBUG_PIXBUF_CACHE, "END");
+}
+
 
 /*****************************************************************************/
 /* Get pixbuf.                                                               */

@@ -1558,6 +1558,23 @@ lgl_db_delete_template_by_name (const gchar *name)
 }
 
 
+lglDbDeleteStatus
+lgl_db_delete_template_by_brand_part (const gchar  *brand,
+                                      const gchar  *part)
+{
+        gchar             *name;
+        lglDbDeleteStatus  status;
+
+        name = g_strdup_printf ("%s %s", brand, part);
+
+        status = lgl_db_delete_template_by_name (name);
+
+        g_free (name);
+
+        return status;
+}
+
+
 /**
  * lgl_db_does_template_exist:
  * @brand: Brand name.

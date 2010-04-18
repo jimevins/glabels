@@ -58,7 +58,10 @@ struct  _glTemplateDesignerClass
 
 GType           gl_template_designer_get_type               (void) G_GNUC_CONST;
 
-GtkWidget      *gl_template_designer_new                    (GtkWindow *parent);
+GtkWidget      *gl_template_designer_new                    (GtkWindow          *parent);
+
+void            gl_template_designer_set_from_name          (glTemplateDesigner *dialog,
+                                                             const gchar        *name);
 
 
 G_END_DECLS
