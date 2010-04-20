@@ -1,3 +1,18 @@
+* gLabels 2.2.8 (stable) release.  Release date 2010-04-19
+
+- Fix crash caused by new g_new macros in glib-2.24.0
+- Removed extra padding in "New label" dialog
+- New Norwegian bokmål translation (Kjartan Maraas)
+- New Portuguese translation (Filipe Roque)
+- Updated Japanese translation (Takeshi AIHANA)
+- Updated Spanish translation (Jorge González)
+- Updated Fresh translation (Bruno Brouard)
+- Updated German translation (Mario Blättermann)
+- Updated Slovenian translation (Andrej Žnidaršič)
+- Updated Czech translation (Marek Černocký)
+- New templates
+
+
 * gLabels 2.2.7 (stable) release.  Release date 2010-03-01
 
 - Fixed limitation on encoded image sizes (fix only valid if libxml 2.7+ is installed)
