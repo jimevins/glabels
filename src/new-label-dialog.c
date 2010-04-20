@@ -50,20 +50,20 @@ struct _glNewLabelDialogPrivate {
 
         GtkBuilder *builder;
 
-	GtkWidget  *template_page_vbox;
+        GtkWidget  *template_page_vbox;
         GtkWidget  *combo_hbox;
         GtkWidget  *combo;
 
-	GtkWidget  *rotate_page_vbox;
+        GtkWidget  *rotate_page_vbox;
         GtkWidget  *normal_radio;
-	GtkWidget  *rotated_radio;
+        GtkWidget  *rotated_radio;
         GtkWidget  *normal_preview_hbox;
-	GtkWidget  *rotated_preview_hbox;
+        GtkWidget  *rotated_preview_hbox;
         GtkWidget  *normal_preview;
-	GtkWidget  *rotated_preview;
+        GtkWidget  *rotated_preview;
 
-	GtkWidget  *confirm_page_vbox;
-	GtkWidget  *preview_vbox;
+        GtkWidget  *confirm_page_vbox;
+        GtkWidget  *preview_vbox;
         GtkWidget  *preview;
         GtkWidget  *desc_label;
         GtkWidget  *page_size_label;
@@ -128,13 +128,13 @@ G_DEFINE_TYPE (glNewLabelDialog, gl_new_label_dialog, GTK_TYPE_ASSISTANT);
 static void
 gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
+        GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	gl_debug (DEBUG_FILE, "");
-	
-  	gl_new_label_dialog_parent_class = g_type_class_peek_parent (class);
+        gl_debug (DEBUG_FILE, "");
 
-  	object_class->finalize = gl_new_label_dialog_finalize;
+        gl_new_label_dialog_parent_class = g_type_class_peek_parent (class);
+
+        object_class->finalize = gl_new_label_dialog_finalize;
 
         signals[COMPLETE] =
             g_signal_new ("complete",
@@ -154,7 +154,7 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 static void
 gl_new_label_dialog_init (glNewLabelDialog *this)
 {
-	GtkWidget    *vbox;
+        GtkWidget    *vbox;
         gchar        *logo_filename;
         GdkPixbuf    *logo;
         GtkBuilder   *builder;
@@ -166,25 +166,21 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         GError       *error = NULL;
         GtkWidget    *new_label_dialog_hbox;
 
-	gl_debug (DEBUG_FILE, "START");
+        gl_debug (DEBUG_FILE, "START");
 
-	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (this));
+        g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (this));
 
-	this->priv = g_new0 (glNewLabelDialogPrivate, 1);
-
-        logo_filename = g_build_filename (GLABELS_ICON_DIR, GLABELS_ICON, NULL);
-	logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
-        g_free (logo_filename);
+        this->priv = g_new0 (glNewLabelDialogPrivate, 1);
 
         builder = gtk_builder_new ();
         builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "new-label-dialog.builder", NULL);
         gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
-	if (error) {
-		g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
+        if (error) {
+                g_critical ("%s\n\ngLabels may not be installed correctly!", error->message);
                 g_error_free (error);
-		return;
-	}
+                return;
+        }
 
         gl_builder_util_get_widgets (builder,
                                      "template_page_vbox",     &this->priv->template_page_vbox,
@@ -209,16 +205,24 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->template_page_vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->template_page_vbox, _("Select Product"));
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->template_page_vbox, logo);
         gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->template_page_vbox, GTK_ASSISTANT_PAGE_INTRO);
+        logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-select.png", NULL);
+        logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->template_page_vbox, logo);
+        g_free (logo_filename);
+        g_object_unref (logo);
 
         this->priv->combo = gl_media_select_new ();
         gtk_container_add (GTK_CONTAINER (this->priv->combo_hbox), this->priv->combo);
 
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->rotate_page_vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, _("Choose Orientation"));
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, logo);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, TRUE);
+        logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-rotate.png", NULL);
+        logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->rotate_page_vbox, logo);
+        g_free (logo_filename);
+        g_object_unref (logo);
 
         this->priv->normal_preview = gl_mini_label_preview_new (LABEL_PREVIEW_WIDTH, LABEL_PREVIEW_HEIGHT);
         gtk_container_add (GTK_CONTAINER (this->priv->normal_preview_hbox), this->priv->normal_preview);
@@ -227,9 +231,13 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 
         gtk_assistant_append_page (GTK_ASSISTANT (this), this->priv->confirm_page_vbox);
         gtk_assistant_set_page_title (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, _("Review"));
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, logo);
         gtk_assistant_set_page_type (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, GTK_ASSISTANT_PAGE_CONFIRM);
         gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, TRUE);
+        logo_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "new-confirm.png", NULL);
+        logo = gdk_pixbuf_new_from_file (logo_filename, NULL);
+        gtk_assistant_set_page_header_image (GTK_ASSISTANT (this), this->priv->confirm_page_vbox, logo);
+        g_free (logo_filename);
+        g_object_unref (logo);
 
         this->priv->preview = gl_mini_preview_new (MINI_PREVIEW_MIN_HEIGHT, MINI_PREVIEW_MIN_WIDTH);
         gl_mini_preview_set_draw_arrow (GL_MINI_PREVIEW (this->priv->preview), TRUE);
@@ -238,17 +246,17 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 
         gtk_assistant_set_forward_page_func (GTK_ASSISTANT (this), (GtkAssistantPageFunc)forward_page_function, this, NULL);
 
-	g_signal_connect_swapped (G_OBJECT(this), "cancel", G_CALLBACK(cancel_cb), this);
-	g_signal_connect_swapped (G_OBJECT(this), "apply",  G_CALLBACK(apply_cb),  this);
-	g_signal_connect_swapped (G_OBJECT(this), "close",  G_CALLBACK(close_cb),  this);
+        g_signal_connect_swapped (G_OBJECT(this), "cancel", G_CALLBACK(cancel_cb), this);
+        g_signal_connect_swapped (G_OBJECT(this), "apply",  G_CALLBACK(apply_cb),  this);
+        g_signal_connect_swapped (G_OBJECT(this), "close",  G_CALLBACK(close_cb),  this);
 
-	g_signal_connect_swapped (G_OBJECT (this->priv->combo),         "changed", G_CALLBACK (combo_changed_cb),  this);
-	g_signal_connect_swapped (G_OBJECT (this->priv->normal_radio),  "toggled", G_CALLBACK (rotate_toggled_cb), this);
-	g_signal_connect_swapped (G_OBJECT (this->priv->rotated_radio), "toggled", G_CALLBACK (rotate_toggled_cb), this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->combo),         "changed", G_CALLBACK (combo_changed_cb),  this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->normal_radio),  "toggled", G_CALLBACK (rotate_toggled_cb), this);
+        g_signal_connect_swapped (G_OBJECT (this->priv->rotated_radio), "toggled", G_CALLBACK (rotate_toggled_cb), this);
 
         combo_changed_cb (this);
 
-	gl_debug (DEBUG_FILE, "END");
+        gl_debug (DEBUG_FILE, "END");
 }
 
 
@@ -258,20 +266,20 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
 static void 
 gl_new_label_dialog_finalize (GObject *object)
 {
-	glNewLabelDialog* this = GL_NEW_LABEL_DIALOG (object);;
-	
-	gl_debug (DEBUG_FILE, "START");
+        glNewLabelDialog* this = GL_NEW_LABEL_DIALOG (object);;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (this));
-	g_return_if_fail (this->priv != NULL);
+        gl_debug (DEBUG_FILE, "START");
+
+        g_return_if_fail (object != NULL);
+        g_return_if_fail (GL_IS_NEW_LABEL_DIALOG (this));
+        g_return_if_fail (this->priv != NULL);
 
         g_object_unref (G_OBJECT (this->priv->builder));
-	g_free (this->priv);
+        g_free (this->priv);
 
-	G_OBJECT_CLASS (gl_new_label_dialog_parent_class)->finalize (object);
+        G_OBJECT_CLASS (gl_new_label_dialog_parent_class)->finalize (object);
 
-	gl_debug (DEBUG_FILE, "END");
+        gl_debug (DEBUG_FILE, "END");
 
 }
 
@@ -282,15 +290,15 @@ gl_new_label_dialog_finalize (GObject *object)
 GtkWidget *
 gl_new_label_dialog_new (GtkWindow    *win)
 {
-	GtkWidget *this;
+        GtkWidget *this;
 
-	gl_debug (DEBUG_FILE, "");
+        gl_debug (DEBUG_FILE, "");
 
-	this = GTK_WIDGET (g_object_new (GL_TYPE_NEW_LABEL_DIALOG, NULL));
+        this = GTK_WIDGET (g_object_new (GL_TYPE_NEW_LABEL_DIALOG, NULL));
 
-	gtk_window_set_transient_for (GTK_WINDOW (this), win);
+        gtk_window_set_transient_for (GTK_WINDOW (this), win);
 
-	return this;
+        return this;
 }
 
 
@@ -343,7 +351,7 @@ static void
 cancel_cb (glNewLabelDialog *this)
 {
                                                                                
-	gtk_widget_destroy (GTK_WIDGET(this));
+        gtk_widget_destroy (GTK_WIDGET(this));
 
 }
 
@@ -367,7 +375,7 @@ static void
 close_cb (glNewLabelDialog *this)
 {
                                                                                
-	gtk_widget_destroy (GTK_WIDGET(this));
+        gtk_widget_destroy (GTK_WIDGET(this));
 
 }
 
@@ -378,24 +386,24 @@ close_cb (glNewLabelDialog *this)
 static void
 combo_changed_cb (glNewLabelDialog  *this)
 {
-	gchar             *name;
+        gchar             *name;
 
-	gl_debug (DEBUG_FILE, "START");
+        gl_debug (DEBUG_FILE, "START");
 
-	name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
+        name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
 
         gl_mini_label_preview_set_by_name (GL_MINI_LABEL_PREVIEW (this->priv->normal_preview),  name, FALSE);
         gl_mini_label_preview_set_by_name (GL_MINI_LABEL_PREVIEW (this->priv->rotated_preview), name, TRUE);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this->priv->normal_radio), TRUE);
 
-	gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
+        gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
         set_info (this, name);
 
         gtk_assistant_set_page_complete (GTK_ASSISTANT (this), this->priv->template_page_vbox, (name != NULL));
 
-	g_free (name);
+        g_free (name);
 
-	gl_debug (DEBUG_FILE, "END");
+        gl_debug (DEBUG_FILE, "END");
 }
 
 
@@ -407,12 +415,12 @@ rotate_toggled_cb (glNewLabelDialog  *this)
 {
         gboolean state;
 
-	gl_debug (DEBUG_FILE, "START");
+        gl_debug (DEBUG_FILE, "START");
 
         state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio));
         gl_mini_preview_set_rotate (GL_MINI_PREVIEW (this->priv->preview), state);
 
-	gl_debug (DEBUG_FILE, "END");
+        gl_debug (DEBUG_FILE, "END");
 }
 
 
@@ -509,11 +517,11 @@ set_info (glNewLabelDialog  *this,
 gchar *
 gl_new_label_dialog_get_template_name (glNewLabelDialog *this)
 {
-	gchar *name;
+        gchar *name;
 
-	name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
+        name = gl_media_select_get_name (GL_MEDIA_SELECT (this->priv->combo));
 
-	return name;
+        return name;
 }
 
 
@@ -522,10 +530,10 @@ gl_new_label_dialog_get_template_name (glNewLabelDialog *this)
 /*****************************************************************************/
 void
 gl_new_label_dialog_set_template_name (glNewLabelDialog *this,
-				       gchar            *name)
+                                       gchar            *name)
 {
-	gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
-	gl_media_select_set_name (GL_MEDIA_SELECT (this->priv->combo), name);
+        gl_mini_preview_set_by_name (GL_MINI_PREVIEW (this->priv->preview), name);
+        gl_media_select_set_name (GL_MEDIA_SELECT (this->priv->combo), name);
         set_info (this, name);
 }
 
@@ -535,8 +543,8 @@ gl_new_label_dialog_set_template_name (glNewLabelDialog *this,
 /*****************************************************************************/
 void
 gl_new_label_dialog_get_filter_parameters (glNewLabelDialog  *this,
-					   gchar            **page_size_id,
-					   gchar            **category_id)
+                                           gchar            **page_size_id,
+                                           gchar            **category_id)
 {
 }
 
@@ -546,8 +554,8 @@ gl_new_label_dialog_get_filter_parameters (glNewLabelDialog  *this,
 /*****************************************************************************/
 void
 gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *this,
-					   const gchar      *page_size_id,
-					   const gchar      *category_id)
+                                           const gchar      *page_size_id,
+                                           const gchar      *category_id)
 {
 }
 
@@ -558,7 +566,7 @@ gl_new_label_dialog_set_filter_parameters (glNewLabelDialog *this,
 gboolean
 gl_new_label_dialog_get_rotate_state (glNewLabelDialog *this)
 {
-	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio));
+        return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio));
 }
 
 
@@ -567,7 +575,7 @@ gl_new_label_dialog_get_rotate_state (glNewLabelDialog *this)
 /*****************************************************************************/
 void
 gl_new_label_dialog_set_rotate_state (glNewLabelDialog *this,
-				      gboolean          state)
+                                      gboolean          state)
 {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (this->priv->rotated_radio), state);
         gl_mini_preview_set_rotate (GL_MINI_PREVIEW (this->priv->preview), state);
