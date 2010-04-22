@@ -1437,9 +1437,16 @@ _lgl_db_register_template_internal (const lglTemplate   *template)
 {
         lglTemplate *template_copy;
 
-        template_copy = lgl_template_dup (template);
-        model->templates = g_list_append (model->templates, template_copy);
-        add_to_template_cache (template_copy);
+        if (!lgl_db_does_template_exist (template->brand, template->part))
+        {
+                template_copy = lgl_template_dup (template);
+                model->templates = g_list_append (model->templates, template_copy);
+                add_to_template_cache (template_copy);
+        }
+        else
+        {
+		g_message ("Duplicate template: %s %s.", template->brand, template->part);
+        }
 }
 
 

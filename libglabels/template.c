@@ -1474,6 +1474,39 @@ compare_origins (gconstpointer a,
 }
 
 
+/**
+ * lgl_template_print:
+ *   @template: template
+ *
+ * Print template details (for debugging purposes).
+ *
+ */
+void
+lgl_template_print (const lglTemplate *template)
+{
+        GList            *p;
+        lglTemplateAlias *alias;
+
+        g_print ("---- %s( TEMPLATE=%p ) ----\n", __FUNCTION__, template);
+
+        g_print("brand=\"%s\", part=\"%s\", description=\"%s\"\n",
+                template->brand, template->part, template->description);
+
+        g_print("paper_id=\"%s\", page_width=%g, page_height=%g\n",
+                template->paper_id, template->page_width, template->page_height);
+
+        for (p=template->aliases; p!=NULL; p=p->next)
+        {
+                alias = (lglTemplateAlias *)p->data;
+                g_print("Alias: brand=\"%s\", part=\"%s\"\n", alias->brand, alias->part);
+
+        }
+
+        g_print ("\n");
+
+}
+
+
 
 /*
  * Local Variables:       -- emacs

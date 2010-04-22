@@ -34,26 +34,13 @@
   <!-- =================================================================== -->
   <!-- PEARL: Adress Labels, 48.8mm x 25.4mm, 40 per sheet                 -->
   <!-- =================================================================== -->
-  <Template brand="PEARL" part="PE 8008, PE 8018" size="A4" description="Adressetiketten">
+  <Template brand="PEARL" part="PE-8008, PE-8018" size="A4" description="Adressetiketten">
     <Meta category="label"/>
     <Meta category="rectangle-label"/>
     <Meta product_url="http://www.pearl.de/a-PE8008-2204.shtml"/>
     <Label-rectangle id="0" width="48.4mm" height="25.4mm" round="0mm" x_waste="0mm" y_waste="0mm">
       <Markup-margin size="3.2mm"/>
       <Layout nx="4" ny="10" x0="8mm" y0="21.5mm" dx="48.4mm" dy="25.4mm"/>
-    </Label-rectangle>
-  </Template>
-
-  <!-- =================================================================== -->
-  <!-- PEARL: Adress Labels, 70mm x 36mm, 24 per sheet                     -->
-  <!-- =================================================================== -->
-  <Template brand="PEARL" part="PE-8004, PE-8014" size="A4" description="Adress-Etiketten">
-    <Meta category="label"/>
-    <Meta category="rectangle-label"/>
-    <Meta product_url="http://www.pearl.de/a-PE8004-2204.shtml"/>
-    <Label-rectangle id="0" width="70mm" height="36mm" round="0mm" x_waste="0mm" y_waste="0mm">
-      <Markup-margin size="3.2mm"/>
-      <Layout nx="3" ny="8" x0="0mm" y0="4.8mm" dx="70mm" dy="36mm"/>
     </Label-rectangle>
   </Template>
 

@@ -426,6 +426,12 @@ lglTemplateMarkup   *lgl_template_markup_dup           (const lglTemplateMarkup 
 void                 lgl_template_markup_free          (lglTemplateMarkup          *markup);
 
 
+/*
+ * Debugging functions.
+ */
+void                 lgl_template_print                (const lglTemplate          *template);
+
+
 G_END_DECLS
 
 #endif /* __LGL_TEMPLATE_H__ */
