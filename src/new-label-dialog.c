@@ -110,8 +110,6 @@ static gint       forward_page_function               (gint               curren
 static void       combo_changed_cb                    (glNewLabelDialog  *this);
 static void       rotate_toggled_cb                   (glNewLabelDialog  *this);
 
-static gchar     *get_default_name                    (void);
-
 static void       set_info                            (glNewLabelDialog  *this,
                                                        const gchar       *name);
 
@@ -154,7 +152,6 @@ gl_new_label_dialog_class_init (glNewLabelDialogClass *class)
 static void
 gl_new_label_dialog_init (glNewLabelDialog *this)
 {
-        GtkWidget    *vbox;
         gchar        *logo_filename;
         GdkPixbuf    *logo;
         GtkBuilder   *builder;
@@ -164,7 +161,6 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
                                        "confirm_page_vbox",
                                        NULL };
         GError       *error = NULL;
-        GtkWidget    *new_label_dialog_hbox;
 
         gl_debug (DEBUG_FILE, "START");
 

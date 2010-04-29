@@ -1534,7 +1534,7 @@ lgl_db_delete_template_by_name (const gchar *name)
 		filename = g_strdup_printf ("%s_%s.template", template->brand, template->part);
 		abs_filename = g_build_filename (dir, filename, NULL);
 
-                g_unlink (abs_filename);
+                g_free (abs_filename);
 
 		g_free (dir);
 		g_free (filename);
