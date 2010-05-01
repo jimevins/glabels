@@ -1032,7 +1032,6 @@ draw_text_real (glLabelObject *object,
         PangoStyle       style;
         PangoLayout     *layout;
         PangoFontDescription *desc;
-        gdouble          scale_x, scale_y;
         cairo_font_options_t *font_options;
         PangoContext         *context;
 
@@ -1069,17 +1068,7 @@ draw_text_real (glLabelObject *object,
         }
 
 
-        /*
-         * Workaround for pango Bug#341481.
-         * Render font at device scale and scale font size accordingly.
-         */
-        scale_x = 1.0;
-        scale_y = 1.0;
-        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
-        scale_x = fabs (scale_x);
-        scale_y = fabs (scale_y);
         cairo_save (cr);
-        cairo_scale (cr, scale_x, scale_y);
 
         layout = pango_cairo_create_layout (cr);
 
@@ -1093,26 +1082,26 @@ draw_text_real (glLabelObject *object,
         pango_font_description_set_family (desc, font_family);
         pango_font_description_set_weight (desc, font_weight);
         pango_font_description_set_style  (desc, style);
-        pango_font_description_set_size   (desc, font_size * PANGO_SCALE / scale_x);
+        pango_font_description_set_size   (desc, font_size * PANGO_SCALE);
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
 
         pango_layout_set_text (layout, text, -1);
-        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE / scale_x);
+        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE);
         if (raw_w == 0.0)
         {
                 pango_layout_set_width (layout, -1);
         }
         else
         {
-                pango_layout_set_width (layout, object_w * PANGO_SCALE / scale_x);
+                pango_layout_set_width (layout, object_w * PANGO_SCALE);
         }
         pango_layout_set_wrap (layout, PANGO_WRAP_CHAR);
         pango_layout_set_alignment (layout, alignment);
 
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
-        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN/scale_x, 0);
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
         pango_cairo_show_layout (cr, layout);
 
         cairo_restore (cr);
