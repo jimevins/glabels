@@ -243,6 +243,20 @@
   </Template>
 
   <!-- =================================================================== -->
+  <!-- Avery 8658 family: Identification labels                            -->
+  <!-- =================================================================== -->
+  <Template brand="Avery" part="8658" size="A4" description="Identification Labels">
+    <Meta category="label"/>
+    <Label-rectangle id="0" width="25.4mm" height="10mm" round="1mm" x_waste="0mm" y_waste="0mm">
+      <Markup-margin size="2mm"/>
+      <Layout nx="7" ny="27" x0="5mm" y0="13mm" dx="28.5mm" dy="10.14mm"/>
+    </Label-rectangle>
+  </Template>
+
+  <Template brand="Avery" part="J8658" equiv="8658" />
+  <Template brand="Avery" part="L8658" equiv="8658" />
+
+  <!-- =================================================================== -->
   <!-- Avery 8666 family: Diskette labels (face only), 70 x 52 mm, 10 per  -->
   <!-- =================================================================== -->
   <Template brand="Avery" part="8666" size="A4" _description="Diskette labels">
