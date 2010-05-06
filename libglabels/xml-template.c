@@ -201,6 +201,8 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	lglTemplate           *template;
 	xmlNodePtr             node;
         gchar                **v;
+        lglTemplateFrame      *frame;
+
 
 	brand = lgl_xml_get_prop_string (template_node, "brand", NULL);
 	part  = lgl_xml_get_prop_string (template_node, "part", NULL);
@@ -304,6 +306,27 @@ lgl_xml_template_parse_template_node (const xmlNodePtr template_node)
 	g_free (equiv_part);
 	g_free (description);
 	g_free (paper_id);
+
+        /*
+         * Create a default full-page frame, if a known frame type was not found.
+         */
+        if ( template->frames == NULL )
+        {
+                g_message ("%s %s: missing valid frame node", template->brand, template->part);
+                frame = lgl_template_frame_rect_new ("0", page_width, page_height, 0, 0, 0);
+                lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0, 0, 0, 0));
+                lgl_template_add_frame (template, frame);
+        }
+
+        /*
+         * Create a default 1x1 layout, if layout is missing.
+         */
+        frame = (lglTemplateFrame *)template->frames->data;
+        if ( frame->all.layouts == NULL )
+        {
+                g_message ("%s %s: missing layout node", template->brand, template->part);
+                lgl_template_frame_add_layout (frame, lgl_template_layout_new (1, 1, 0, 0, 0, 0));
+        }
 
 	return template;
 }

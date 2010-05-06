@@ -249,7 +249,7 @@ lgl_str_format_fraction (gdouble x)
 	}
 	if ( denom[i] == 1.0 ) {
 		/* Simple integer. */
-		return g_strdup_printf ("%.0g", x);
+		return g_strdup_printf ("%.0f", x);
 	}
 	n = (gint)( x * denom[i] + 0.5 );
 	d = (gint)denom[i];
