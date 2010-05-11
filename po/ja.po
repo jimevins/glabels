@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-06 00:33+0900\n"
-"PO-Revision-Date: 2010-03-06 00:31+0900\n"
+"POT-Creation-Date: 2010-05-11 23:03+0900\n"
+"PO-Revision-Date: 2010-05-11 23:01+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -426,7 +426,7 @@ msgstr "選択モード"
 msgid "Select, move and modify objects"
 msgstr "オブジェクトの選択や移動、編集を行います"
 
-#: ../src/ui.c:268 ../src/view-text.c:494
+#: ../src/ui.c:268 ../src/view-text.c:495
 #: ../data/glade/object-editor.glade.h:32
 msgid "Text"
 msgstr "文字"
@@ -829,32 +829,32 @@ msgid "gLabels Preferences"
 msgstr "gLabels の設定"
 
 #. Build editor.
-#: ../src/view-box.c:175
+#: ../src/view-box.c:176
 msgid "Box object properties"
 msgstr "矩形オブジェクトのプロパティ"
 
 #. Build editor.
-#: ../src/view-ellipse.c:175
+#: ../src/view-ellipse.c:176
 msgid "Ellipse object properties"
 msgstr "楕円オブジェクトのプロパティ"
 
 #. Build editor.
-#: ../src/view-line.c:174
+#: ../src/view-line.c:175
 msgid "Line object properties"
 msgstr "直線オブジェクトのプロパティ"
 
 #. Build editor.
-#: ../src/view-image.c:174
+#: ../src/view-image.c:175
 msgid "Image object properties"
 msgstr "画像オブジェクトのプロパティ"
 
 #. Build editor.
-#: ../src/view-text.c:178
+#: ../src/view-text.c:179
 msgid "Text object properties"
 msgstr "文字オブジェクトのプロパティ"
 
 #. Build editor.
-#: ../src/view-barcode.c:174
+#: ../src/view-barcode.c:175
 msgid "Barcode object properties"
 msgstr "バーコード・オブジェクトのプロパティ"
 
@@ -2306,7 +2306,7 @@ msgstr "フロッピーのラベル"
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:20
 #: ../data/templates/misc-iso-templates.xml.h:36
-#: ../data/templates/misc-us-templates.xml.h:18
+#: ../data/templates/misc-us-templates.xml.h:20
 #: ../data/templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "封筒のラベル"
@@ -2394,7 +2394,7 @@ msgstr "返信用宛名のラベル"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:32
-#: ../data/templates/misc-us-templates.xml.h:28
+#: ../data/templates/misc-us-templates.xml.h:30
 msgid "Round Labels"
 msgstr "角が丸いラベル"
 
@@ -2561,7 +2561,7 @@ msgstr "封筒のラベル (三列)"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:42
-#: ../data/templates/misc-us-templates.xml.h:26
+#: ../data/templates/misc-us-templates.xml.h:28
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "PRO CD ラベル二枚 (外側のみ)"
 
@@ -2573,6 +2573,11 @@ msgstr "長方形のラベル"
 
 #. ===================================================================
 #: ../data/templates/misc-iso-templates.xml.h:46
+msgid "Universal Labels"
+msgstr "普通のラベル"
+
+#. ===================================================================
+#: ../data/templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "ビデオのラベル (外側のみ)"
 
@@ -2607,29 +2612,34 @@ msgid "DLT Labels"
 msgstr "DLT のラベル"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:20
+#: ../data/templates/misc-us-templates.xml.h:18
+msgid "Jewel Case Booklet"
+msgstr "CD の小冊子"
+
+#. ===================================================================
+#: ../data/templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "マイクロチューブのラベル"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:22
+#: ../data/templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "ミニ CD のラベル"
 
-#: ../data/templates/misc-us-templates.xml.h:23
+#: ../data/templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "PRO CD のラベル二枚 (CD 格納ケースのみ)"
 
-#: ../data/templates/misc-us-templates.xml.h:24
+#: ../data/templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "PRO CD ラベル二枚 (外側のみ)"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:30
+#: ../data/templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "薄い CD フォルダ (右側)"
 
-#: ../data/templates/misc-us-templates.xml.h:31
+#: ../data/templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "薄い CD フォルダ (上側)"
 
