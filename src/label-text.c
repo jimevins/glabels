@@ -40,14 +40,18 @@
 
 #define FONT_SCALE (72.0/96.0)
 
+#define HANDLE_OUTLINE_RGBA_ARGS   0.5,   0.5,   0.5,   0.75
+#define HANDLE_OUTLINE_WIDTH_PIXELS   2.0
+
 
 /*========================================================*/
 /* Private types.                                         */
 /*========================================================*/
 
 struct _glLabelTextPrivate {
-	GtkTextTagTable *tag_table;
-	GtkTextBuffer   *buffer;
+
+        GtkTextTagTable *tag_table;
+        GtkTextBuffer   *buffer;
 
 	gchar           *font_family;
 	gdouble          font_size;
@@ -132,6 +136,11 @@ static gdouble         get_text_line_spacing       (glLabelObject    *object);
 
 static glColorNode*    get_text_color              (glLabelObject    *object);
 
+static void            set_text_path               (glLabelText      *this,
+                                                    cairo_t          *cr,
+                                                    gboolean          screen_flag,
+                                                    glMergeRecord    *record);
+
 static void            draw_object                 (glLabelObject    *object,
                                                     cairo_t          *cr,
                                                     gboolean          screen_flag,
@@ -160,6 +169,9 @@ static gboolean        object_at                   (glLabelObject    *object,
                                                     cairo_t          *cr,
                                                     gdouble           x_pixels,
                                                     gdouble           y_pixels);
+
+static void            draw_handles                (glLabelObject    *object,
+                                                    cairo_t          *cr);
 
 
 /*****************************************************************************/
@@ -200,6 +212,7 @@ gl_label_text_class_init (glLabelTextClass *class)
         label_object_class->draw_object           = draw_object;
         label_object_class->draw_shadow           = draw_shadow;
         label_object_class->object_at             = object_at;
+        label_object_class->draw_handles          = draw_handles;
 
 	object_class->finalize = gl_label_text_finalize;
 }
@@ -941,182 +954,6 @@ gl_label_text_get_auto_shrink (glLabelText      *ltext)
 
 
 /*****************************************************************************/
-/* Draw object method.                                                       */
-/*****************************************************************************/
-static void
-draw_object (glLabelObject *object,
-             cairo_t       *cr,
-             gboolean       screen_flag,
-             glMergeRecord *record)
-{
-	glColorNode     *color_node;
-	guint            color;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	color_node = gl_label_object_get_text_color (object);
-	color = gl_color_node_expand (color_node, record);
-        if (color_node->field_flag && screen_flag)
-        {
-                color = GL_COLOR_MERGE_DEFAULT;
-        }
-	gl_color_node_free (&color_node);
-	
-        draw_text_real (object, cr, screen_flag, record, color);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/*****************************************************************************/
-/* Draw shadow method.                                                       */
-/*****************************************************************************/
-static void
-draw_shadow (glLabelObject *object,
-             cairo_t       *cr,
-             gboolean       screen_flag,
-             glMergeRecord *record)
-{
-	glColorNode     *color_node;
-	guint            color;
-	glColorNode     *shadow_color_node;
-	gdouble          shadow_opacity;
-	guint            shadow_color;
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	color_node = gl_label_object_get_text_color (object);
-	color = gl_color_node_expand (color_node, record);
-        if (color_node->field_flag && screen_flag)
-        {
-                color = GL_COLOR_MERGE_DEFAULT;
-        }
-	gl_color_node_free (&color_node);
-	
-	shadow_color_node = gl_label_object_get_shadow_color (object);
-	if (shadow_color_node->field_flag)
-	{
-		shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
-	}
-	shadow_opacity = gl_label_object_get_shadow_opacity (object);
-	shadow_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, color);
-	gl_color_node_free (&shadow_color_node);
-
-        draw_text_real (object, cr, screen_flag, record, shadow_color);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/*****************************************************************************/
-/* Draw text.                                                                */
-/*****************************************************************************/
-static void
-draw_text_real (glLabelObject *object,
-                cairo_t       *cr,
-                gboolean       screen_flag,
-                glMergeRecord *record,
-                guint          color)
-{
-	gdouble          object_w, object_h;
-	gdouble          raw_w, raw_h;
-	gchar           *text;
-	GList           *lines;
-	gchar           *font_family;
-	gdouble          font_size;
-	PangoWeight      font_weight;
-	gboolean         font_italic_flag;
-        gboolean         auto_shrink;
-	gdouble          text_line_spacing;
-        PangoAlignment   alignment;
-        PangoStyle       style;
-        PangoLayout     *layout;
-        PangoFontDescription *desc;
-        cairo_font_options_t *font_options;
-        PangoContext         *context;
-
-
-	gl_debug (DEBUG_LABEL, "START");
-
-	gl_label_object_get_size (object, &object_w, &object_h);
-	gl_label_object_get_raw_size (object, &raw_w, &raw_h);
-	lines = gl_label_text_get_lines (GL_LABEL_TEXT (object));
-	font_family = gl_label_object_get_font_family (object);
-	font_size = gl_label_object_get_font_size (object) * FONT_SCALE;
-	font_weight = gl_label_object_get_font_weight (object);
-	font_italic_flag = gl_label_object_get_font_italic_flag (object);
-
-	alignment = gl_label_object_get_text_alignment (object);
-	text_line_spacing =
-		gl_label_object_get_text_line_spacing (object);
-        auto_shrink = gl_label_text_get_auto_shrink (GL_LABEL_TEXT (object));
-
-	text = gl_text_node_lines_expand (lines, record);
-
-        style = font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
-
-
-        if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
-        {
-                font_size = auto_shrink_font_size (cr,
-                                                   font_family,
-                                                   font_size,
-                                                   font_weight,
-                                                   style,
-                                                   text,
-                                                   object_w);
-        }
-
-
-        cairo_save (cr);
-
-        layout = pango_cairo_create_layout (cr);
-
-        font_options = cairo_font_options_create ();
-        cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
-        context = pango_layout_get_context (layout);
-        pango_cairo_context_set_font_options (context, font_options);
-        cairo_font_options_destroy (font_options);
-
-        desc = pango_font_description_new ();
-        pango_font_description_set_family (desc, font_family);
-        pango_font_description_set_weight (desc, font_weight);
-        pango_font_description_set_style  (desc, style);
-        pango_font_description_set_size   (desc, font_size * PANGO_SCALE);
-        pango_layout_set_font_description (layout, desc);
-        pango_font_description_free       (desc);
-
-        pango_layout_set_text (layout, text, -1);
-        pango_layout_set_spacing (layout, font_size * (text_line_spacing-1) * PANGO_SCALE);
-        if (raw_w == 0.0)
-        {
-                pango_layout_set_width (layout, -1);
-        }
-        else
-        {
-                pango_layout_set_width (layout, object_w * PANGO_SCALE);
-        }
-        pango_layout_set_wrap (layout, PANGO_WRAP_CHAR);
-        pango_layout_set_alignment (layout, alignment);
-
-
-        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
-        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
-        pango_cairo_show_layout (cr, layout);
-
-        cairo_restore (cr);
-
-        g_object_unref (layout);
-
-
-	gl_text_node_lines_free (&lines);
-	g_free (font_family);
-
-	gl_debug (DEBUG_LABEL, "END");
-}
-
-
-/*****************************************************************************/
 /* Automatically shrink text size to fit within horizontal width.            */
 /*****************************************************************************/
 static gdouble
@@ -1141,7 +978,7 @@ auto_shrink_font_size (cairo_t     *cr,
         pango_font_description_set_weight (desc, weight);
         pango_font_description_set_style  (desc, style);
         pango_font_description_set_size   (desc, size * PANGO_SCALE);
-        
+
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
 
@@ -1178,6 +1015,185 @@ auto_shrink_font_size (cairo_t     *cr,
 
 
 /*****************************************************************************/
+/* Update pango layout.                                                      */
+/*****************************************************************************/
+static void
+set_text_path (glLabelText      *this,
+               cairo_t          *cr,
+               gboolean          screen_flag,
+               glMergeRecord    *record)
+{
+        gdouble               object_w, object_h;
+        gdouble               raw_w, raw_h;
+        gchar                *text;
+        GList                *lines;
+        gdouble               font_size;
+        gboolean              auto_shrink;
+        PangoLayout          *layout;
+        PangoStyle            style;
+        PangoFontDescription *desc;
+        cairo_font_options_t *font_options;
+        PangoContext         *context;
+
+
+        gl_debug (DEBUG_LABEL, "START");
+
+        cairo_save (cr);
+
+        gl_label_object_get_size (GL_LABEL_OBJECT (this), &object_w, &object_h);
+        gl_label_object_get_raw_size (GL_LABEL_OBJECT (this), &raw_w, &raw_h);
+
+        lines = gl_label_text_get_lines (this);
+        text = gl_text_node_lines_expand (lines, record);
+
+        style = this->priv->font_italic_flag ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
+        font_size   = this->priv->font_size;
+        auto_shrink = gl_label_text_get_auto_shrink (this);
+        if (!screen_flag && record && auto_shrink && (raw_w != 0.0))
+        {
+                font_size = auto_shrink_font_size (cr,
+                                                   this->priv->font_family,
+                                                   this->priv->font_size * FONT_SCALE,
+                                                   this->priv->font_weight,
+                                                   style,
+                                                   text,
+                                                   object_w);
+        }
+
+
+        layout = pango_cairo_create_layout (cr);
+
+        font_options = cairo_font_options_create ();
+        cairo_font_options_set_hint_style (font_options, CAIRO_HINT_STYLE_NONE);
+        context = pango_layout_get_context (layout);
+        pango_cairo_context_set_font_options (context, font_options);
+        cairo_font_options_destroy (font_options);
+
+        desc = pango_font_description_new ();
+        pango_font_description_set_family (desc, this->priv->font_family);
+        pango_font_description_set_weight (desc, this->priv->font_weight);
+        pango_font_description_set_size   (desc, font_size * FONT_SCALE * PANGO_SCALE);
+        pango_font_description_set_style  (desc, style);
+        pango_layout_set_font_description (layout, desc);
+        pango_font_description_free       (desc);
+
+        pango_layout_set_text (layout, text, -1);
+        pango_layout_set_spacing (layout, font_size * (this->priv->line_spacing-1) * PANGO_SCALE);
+        if (raw_w == 0.0)
+        {
+                pango_layout_set_width (layout, -1);
+        }
+        else
+        {
+                pango_layout_set_width (layout, object_w * PANGO_SCALE);
+        }
+        pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
+        pango_layout_set_alignment (layout, this->priv->align);
+
+
+        cairo_move_to (cr, GL_LABEL_TEXT_MARGIN, 0);
+        pango_cairo_layout_path (cr, layout);
+
+        g_object_unref (layout);
+        gl_text_node_lines_free (&lines);
+
+        cairo_restore (cr);
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Draw object method.                                                       */
+/*****************************************************************************/
+static void
+draw_object (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        glColorNode     *color_node;
+        guint            color;
+
+        gl_debug (DEBUG_LABEL, "START");
+
+        color_node = gl_label_object_get_text_color (object);
+        color = gl_color_node_expand (color_node, record);
+        if (color_node->field_flag && screen_flag)
+        {
+                color = GL_COLOR_MERGE_DEFAULT;
+        }
+        gl_color_node_free (&color_node);
+
+        draw_text_real (object, cr, screen_flag, record, color);
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Draw shadow method.                                                       */
+/*****************************************************************************/
+static void
+draw_shadow (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        glColorNode     *color_node;
+        guint            color;
+        glColorNode     *shadow_color_node;
+        gdouble          shadow_opacity;
+        guint            shadow_color;
+
+        gl_debug (DEBUG_LABEL, "START");
+
+        color_node = gl_label_object_get_text_color (object);
+        color = gl_color_node_expand (color_node, record);
+        if (color_node->field_flag && screen_flag)
+        {
+                color = GL_COLOR_MERGE_DEFAULT;
+        }
+        gl_color_node_free (&color_node);
+
+        shadow_color_node = gl_label_object_get_shadow_color (object);
+        if (shadow_color_node->field_flag)
+        {
+                shadow_color_node->color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+        }
+        shadow_opacity = gl_label_object_get_shadow_opacity (object);
+        shadow_color = gl_color_shadow (shadow_color_node->color, shadow_opacity, color);
+        gl_color_node_free (&shadow_color_node);
+
+        draw_text_real (object, cr, screen_flag, record, shadow_color);
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Draw text.                                                                */
+/*****************************************************************************/
+static void
+draw_text_real (glLabelObject *object,
+                cairo_t       *cr,
+                gboolean       screen_flag,
+                glMergeRecord *record,
+                guint          color)
+{
+        gl_debug (DEBUG_LABEL, "START");
+
+        set_text_path (GL_LABEL_TEXT (object), cr, screen_flag, record);
+
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
+        cairo_fill (cr);
+
+        gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
 /* Is object at coordinates?                                                 */
 /*****************************************************************************/
 static gboolean
@@ -1190,15 +1206,60 @@ object_at (glLabelObject *object,
 
         gl_label_object_get_size (object, &w, &h);
 
-        cairo_rectangle (cr, 0.0, 0.0, w, h);
-
-        if (cairo_in_fill (cr, x, y))
+        if ( (x >= 0) && (x <= w) && (y >= 0) && (y <= h) )
         {
-                return TRUE;
+                set_text_path (GL_LABEL_TEXT (object), cr, TRUE, NULL);
+                if (cairo_in_fill (cr, x, y))
+                {
+                        return TRUE;
+                }
+        }
+
+        if (gl_label_object_is_selected (object))
+        {
+                cairo_rectangle (cr, 0, 0, w, h);
+                if (cairo_in_stroke (cr, x, y))
+                {
+                        return TRUE;
+                }
         }
 
         return FALSE;
 }
+
+
+/*****************************************************************************/
+/* Draw text style handles.                                                  */
+/*****************************************************************************/
+static void
+draw_handles (glLabelObject     *object,
+              cairo_t           *cr)
+{
+        gdouble w, h;
+        gdouble scale_x, scale_y;
+        gdouble dashes[2] = { 2, 2 };
+
+        gl_label_object_get_size (GL_LABEL_OBJECT(object), &w, &h);
+
+        cairo_save (cr);
+
+        cairo_rectangle (cr, 0, 0, w, h);
+
+        scale_x = 1.0;
+        scale_y = 1.0;
+        cairo_device_to_user_distance (cr, &scale_x, &scale_y);
+        cairo_scale (cr, scale_x, scale_y);
+
+        cairo_set_dash (cr, dashes, 2, 0);
+        cairo_set_line_width (cr, HANDLE_OUTLINE_WIDTH_PIXELS);
+        cairo_set_source_rgba (cr, HANDLE_OUTLINE_RGBA_ARGS);
+        cairo_stroke (cr);
+
+        cairo_restore (cr);
+
+        gl_label_object_draw_handles_box (object, cr);
+}
+
 
 
 
