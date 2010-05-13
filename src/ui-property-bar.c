@@ -243,7 +243,7 @@ gl_ui_property_bar_construct (glUIPropertyBar   *this)
 	this->priv->stop_signals = TRUE;
 
         builder = gtk_builder_new ();
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "property-bar.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "property-bar.ui", NULL);
         gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
 	if (error) {

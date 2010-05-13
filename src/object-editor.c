@@ -129,7 +129,7 @@ gl_object_editor_init (glObjectEditor *editor)
 
         editor->priv->builder = gtk_builder_new ();
 
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "object-editor.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "object-editor.ui", NULL);
         gtk_builder_add_objects_from_file (editor->priv->builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
 	if (error) {

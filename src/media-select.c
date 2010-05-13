@@ -274,7 +274,7 @@ gl_media_select_construct (glMediaSelect *this)
         g_return_if_fail (this->priv != NULL);
 
         builder = gtk_builder_new ();
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "media-select.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "media-select.ui", NULL);
         gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
 	if (error) {

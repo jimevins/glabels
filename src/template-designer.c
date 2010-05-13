@@ -314,7 +314,7 @@ gl_template_designer_init (glTemplateDesigner *dialog)
 	dialog->priv = g_new0 (glTemplateDesignerPrivate, 1);
 
         dialog->priv->builder = gtk_builder_new ();
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "template-designer.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "template-designer.ui", NULL);
         gtk_builder_add_objects_from_file (dialog->priv->builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
 	if (error) {

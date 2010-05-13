@@ -252,7 +252,7 @@ src/stock-pixmaps/Makefile
 data/Makefile
 data/pixmaps/Makefile
 data/mime/Makefile
-data/builder/Makefile
+data/ui/Makefile
 data/desktop/Makefile
 data/man/Makefile
 templates/Makefile

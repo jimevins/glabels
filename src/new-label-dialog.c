@@ -169,7 +169,7 @@ gl_new_label_dialog_init (glNewLabelDialog *this)
         this->priv = g_new0 (glNewLabelDialogPrivate, 1);
 
         builder = gtk_builder_new ();
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "new-label-dialog.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "new-label-dialog.ui", NULL);
         gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
         if (error) {

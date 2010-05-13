@@ -166,7 +166,7 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
         builder = gtk_builder_new ();
-        builder_filename = g_build_filename (GLABELS_DATA_DIR, "builder", "merge-properties-dialog.builder", NULL);
+        builder_filename = g_build_filename (GLABELS_DATA_DIR, "ui", "merge-properties-dialog.ui", NULL);
         gtk_builder_add_objects_from_file (builder, builder_filename, object_ids, &error);
         g_free (builder_filename);
 	if (error) {
