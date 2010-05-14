@@ -3,17 +3,19 @@
 # Copyright (C) 2010 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
-"POT-Creation-Date: 2010-02-18 17:31+0000\n"
-"PO-Revision-Date: 2010-02-19 12:52+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-11 14:10+0000\n"
+"PO-Revision-Date: 2010-05-14 19:22+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -535,7 +537,7 @@ msgstr ""
 
 #: C/glabels.xml:316(title)
 msgid "To Open Multiple Files from a Command Line"
-msgstr ""
+msgstr "Abrir múltiples archivo desde una línea de comandos"
 
 #: C/glabels.xml:318(para)
 msgid ""
@@ -550,7 +552,7 @@ msgstr ""
 
 #: C/glabels.xml:323(command)
 msgid "glabels <placeholder-1/>"
-msgstr ""
+msgstr "glabels <placeholder-1/>"
 
 #: C/glabels.xml:327(para)
 msgid ""
@@ -598,7 +600,7 @@ msgstr ""
 
 #: C/glabels.xml:374(title)
 msgid "To Create a Custom Template"
-msgstr ""
+msgstr "Crear una plantilla personalizada"
 
 #: C/glabels.xml:376(para)
 msgid ""
@@ -631,7 +633,7 @@ msgstr ""
 
 #: C/glabels.xml:405(title)
 msgid "To Quit <application>gLabels</application>"
-msgstr ""
+msgstr "Salir de <application>gLabels</application>"
 
 #: C/glabels.xml:407(para)
 msgid ""
@@ -643,7 +645,7 @@ msgstr ""
 
 #: C/glabels.xml:417(title)
 msgid "To Print Labels or Cards"
-msgstr ""
+msgstr "Imprimir etiquetas o tarjetas"
 
 #: C/glabels.xml:419(para)
 msgid ""
@@ -659,10 +661,12 @@ msgid ""
 "The <guilabel>Print</guilabel> dialog allows you to specify the following "
 "print options:"
 msgstr ""
+"El diálogo <guilabel>Imprimir</guilabel> le permite especificar las "
+"siguientes opciones:"
 
 #: C/glabels.xml:430(title)
 msgid "The Labels Tab of the Print Dialog"
-msgstr ""
+msgstr "La solapa Etiquetas del diálogo Imprimir"
 
 #: C/glabels.xml:435(guilabel)
 msgid "Print control (Simple)"
@@ -771,7 +775,7 @@ msgstr ""
 
 #: C/glabels.xml:536(title)
 msgid "To Create New Objects"
-msgstr ""
+msgstr "Crear objetos nuevos"
 
 #: C/glabels.xml:538(para)
 msgid ""
@@ -852,7 +856,7 @@ msgstr ""
 
 #: C/glabels.xml:610(term)
 msgid "Barcode"
-msgstr ""
+msgstr "Código de barras"
 
 #: C/glabels.xml:612(para)
 msgid ""
@@ -919,7 +923,7 @@ msgstr ""
 
 #: C/glabels.xml:680(term)
 msgid "Unselecting objects"
-msgstr ""
+msgstr "Deseleccionar objetos"
 
 #: C/glabels.xml:682(para)
 msgid ""
@@ -933,7 +937,7 @@ msgstr ""
 
 #: C/glabels.xml:699(title)
 msgid "Clipboard Commands"
-msgstr ""
+msgstr "Comandos del portapapeles"
 
 #: C/glabels.xml:701(para)
 msgid ""
@@ -1001,7 +1005,7 @@ msgstr ""
 
 #: C/glabels.xml:777(title)
 msgid "To Edit Object Properties"
-msgstr ""
+msgstr "Editar las propiedades del objeto"
 
 #: C/glabels.xml:779(para)
 msgid ""
@@ -1143,7 +1147,7 @@ msgstr ""
 
 #: C/glabels.xml:908(title)
 msgid "Moving and Resizing Objects"
-msgstr ""
+msgstr "Mover y redimensionar objetos"
 
 #: C/glabels.xml:910(para)
 msgid ""
@@ -1182,7 +1186,7 @@ msgstr ""
 
 #: C/glabels.xml:944(title)
 msgid "Rotating and Flipping Objects"
-msgstr ""
+msgstr "Rotar y voltear objetos"
 
 #: C/glabels.xml:946(para)
 msgid ""
@@ -1195,7 +1199,7 @@ msgstr ""
 
 #: C/glabels.xml:956(title)
 msgid "Aligning Objects"
-msgstr ""
+msgstr "Alinear objetos"
 
 #: C/glabels.xml:958(para)
 msgid ""
@@ -1210,7 +1214,7 @@ msgstr ""
 
 #: C/glabels.xml:971(title)
 msgid "Using the Property Bar"
-msgstr ""
+msgstr "Usar la barra de propiedades"
 
 #: C/glabels.xml:973(para)
 msgid ""
@@ -1223,7 +1227,7 @@ msgstr ""
 
 #: C/glabels.xml:988(title)
 msgid "Performing a Document Merge"
-msgstr ""
+msgstr "Realizar la fusión de un documento"
 
 #: C/glabels.xml:990(para)
 msgid ""
@@ -1319,7 +1323,7 @@ msgstr "Pulgadas"
 
 #: C/glabels.xml:1079(para)
 msgid "Use inches."
-msgstr ""
+msgstr "Usar pulgadas."
 
 #: C/glabels.xml:1083(guilabel)
 msgid "Millimeters"
@@ -1327,15 +1331,15 @@ msgstr "Milímetros"
 
 #: C/glabels.xml:1084(para)
 msgid "Use millimeters."
-msgstr ""
+msgstr "Usar milímetros."
 
 #: C/glabels.xml:1087(para)
 msgid "Default: <guilabel>Inches</guilabel>."
-msgstr ""
+msgstr "Predeterminado: <guilabel>Pulgadas</guilabel>."
 
 #: C/glabels.xml:1093(guilabel)
 msgid "Default page size"
-msgstr ""
+msgstr "Tamaño de página predeterminado"
 
 #: C/glabels.xml:1095(para)
 msgid ""
@@ -1355,7 +1359,7 @@ msgstr ""
 
 #: C/glabels.xml:1106(guilabel)
 msgid "ISO A4"
-msgstr ""
+msgstr "ISO A4"
 
 #: C/glabels.xml:1107(para)
 msgid "Most of your media will be of the ISO A4 page size (210 x 297 mm)."
@@ -1632,7 +1636,7 @@ msgstr ""
 
 #: C/glabels.xml:1395(title) C/glabels.xml:1509(title)
 msgid "Printing address labels"
-msgstr ""
+msgstr "Imprimir etiquetas de dirección"
 
 #: C/glabels.xml:1413(title) C/glabels.xml:1527(title)
 msgid "Address labels preview"
@@ -1778,7 +1782,7 @@ msgstr ""
 
 #: C/glabels.xml:1593(title)
 msgid "Template Files"
-msgstr ""
+msgstr "Archivos de plantilla"
 
 #: C/glabels.xml:1595(programlisting)
 #, no-wrap
@@ -1795,7 +1799,7 @@ msgstr ""
 
 #: C/glabels.xml:1607(title)
 msgid "Example Template"
-msgstr ""
+msgstr "Plantilla de ejemplo"
 
 #: C/glabels.xml:1608(programlisting)
 #, no-wrap
@@ -2265,4 +2269,6 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/glabels.xml:0(None)
 msgid "translator-credits"
-msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+msgstr ""
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2010\n"
+"Jorge González <jorgegonz@svn.gnome.org>, 2010"
