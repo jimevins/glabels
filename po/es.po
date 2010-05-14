@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-04-07 16:45+0000\n"
-"PO-Revision-Date: 2010-04-11 13:57+0200\n"
+"POT-Creation-Date: 2010-05-11 14:10+0000\n"
+"PO-Revision-Date: 2010-05-14 11:35+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -426,7 +426,7 @@ msgstr "Modo de selección"
 msgid "Select, move and modify objects"
 msgstr "Seleccionar, mover y modificar objetos"
 
-#: ../src/ui.c:268 ../src/view-text.c:494
+#: ../src/ui.c:268 ../src/view-text.c:495
 #: ../data/glade/object-editor.glade.h:32
 msgid "Text"
 msgstr "Texto"
@@ -831,32 +831,32 @@ msgid "gLabels Preferences"
 msgstr "Preferencias de gLabels"
 
 #. Build editor.
-#: ../src/view-box.c:175
+#: ../src/view-box.c:176
 msgid "Box object properties"
 msgstr "Propiedades del rectángulo"
 
 #. Build editor.
-#: ../src/view-ellipse.c:175
+#: ../src/view-ellipse.c:176
 msgid "Ellipse object properties"
 msgstr "Propiedades del elipse"
 
 #. Build editor.
-#: ../src/view-line.c:174
+#: ../src/view-line.c:175
 msgid "Line object properties"
 msgstr "Propiedades de la línea"
 
 #. Build editor.
-#: ../src/view-image.c:174
+#: ../src/view-image.c:175
 msgid "Image object properties"
 msgstr "Propiedades de la imagen"
 
 #. Build editor.
-#: ../src/view-text.c:178
+#: ../src/view-text.c:179
 msgid "Text object properties"
 msgstr "Propiedades del texto"
 
 #. Build editor.
-#: ../src/view-barcode.c:174
+#: ../src/view-barcode.c:175
 msgid "Barcode object properties"
 msgstr "Propiedades del código de barras"
 
@@ -2260,7 +2260,6 @@ msgstr "Etiquetas de dirección"
 
 #. ===================================================================
 #: ../data/templates/avery-iso-templates.xml.h:6
-#| msgid "Small Round Labels"
 msgid "Allround labels"
 msgstr "Etiquetas redondas"
 
@@ -2339,7 +2338,7 @@ msgstr "Etiquetas de envío"
 #. ===================================================================
 #: ../data/templates/avery-other-templates.xml.h:2
 msgid "File Folder Labels"
-msgstr ""
+msgstr "Etiquetas de carpetas de archivos"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:8
@@ -2368,7 +2367,6 @@ msgstr "Etiquetas de página completa"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:20
-#| msgid "CD Labels"
 msgid "ID Labels"
 msgstr "Etiquetas de identificación"
 
@@ -2422,7 +2420,7 @@ msgstr "Etiquetas cuadradas"
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:40
 msgid "Tent Cards"
-msgstr ""
+msgstr "Tarjetas de visita"
 
 #. ===================================================================
 #: ../data/templates/avery-us-templates.xml.h:42
@@ -2470,14 +2468,13 @@ msgstr "Disquete de 3.5 pulgadas"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:6
-#| msgid "Fill color"
 msgid "File Folder"
-msgstr ""
+msgstr "Carpeta de archivos"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:8
 msgid "Hanging Folder"
-msgstr ""
+msgstr "Carpeta pendiente"
 
 #. ===================================================================
 #: ../data/templates/dymo-other-templates.xml.h:10
@@ -2626,7 +2623,6 @@ msgstr "Etiquetas DLT"
 
 #. ===================================================================
 #: ../data/templates/misc-us-templates.xml.h:18
-#| msgid "CD Booklet"
 msgid "Jewel Case Booklet"
 msgstr "Libreto de CD «Jewel»"
 
@@ -2669,7 +2665,6 @@ msgstr "Etiquetas de corrección y cubrimiento"
 
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:12
-#| msgid "Filing Labels"
 msgid "File Back Labels"
 msgstr "Etiquetas de archivo"
 
@@ -2677,7 +2672,7 @@ msgstr "Etiquetas de archivo"
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:14
 msgid "Lever Arch File Labels"
-msgstr ""
+msgstr "Colocar etiquetas de dossier"
 
 #. ===================================================================
 #: ../data/templates/zweckform-iso-templates.xml.h:18
