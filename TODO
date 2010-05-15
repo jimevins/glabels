@@ -24,6 +24,9 @@ Goals for 2.3.x (current development branch for 3.0):
 
 	-  Undo, Redo capability
 
+	-  Allow for management of custom templates
+	   (i.e. delete, rename, edit).
+
 	-  Improve documentation and translation maintainance
 
 	-  Code cleanup
@@ -59,9 +62,6 @@ Possible Goals for future branches:
 	   grid.  The possible grid spacing should be appropriate
 	   for the current units selected (e.g. .1 points, .01 mm,
 	   1/64 inch, 0.001 inch).
-
-	-  Allow for management of custom templates
-	   (i.e. delete, rename, edit).
 
 	-  Ability to select/unselect individual records during a
 	   merge-print.
