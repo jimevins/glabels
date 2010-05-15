@@ -208,14 +208,14 @@ libglabels/xml-paper.h
 libglabels/xml-template.c
 libglabels/xml-template.h
 
-[type: gettext/glade]data/builder/merge-properties-dialog.builder
-[type: gettext/glade]data/builder/media-select.builder
-[type: gettext/glade]data/builder/new-label-dialog.builder
-[type: gettext/glade]data/builder/object-editor.builder
-[type: gettext/glade]data/builder/prefs-dialog.builder
-[type: gettext/glade]data/builder/property-bar.builder
-[type: gettext/glade]data/builder/template-designer.builder
-[type: gettext/glade]data/builder/print-op-dialog-custom-widget.builder
+[type: gettext/glade]data/ui/merge-properties-dialog.ui
+[type: gettext/glade]data/ui/media-select.ui
+[type: gettext/glade]data/ui/new-label-dialog.ui
+[type: gettext/glade]data/ui/object-editor.ui
+[type: gettext/glade]data/ui/prefs-dialog.ui
+[type: gettext/glade]data/ui/property-bar.ui
+[type: gettext/glade]data/ui/template-designer.ui
+[type: gettext/glade]data/ui/print-op-dialog-custom-widget.ui
 
 [type: gettext/ini]data/desktop/glabels-3.0.desktop.in
 
