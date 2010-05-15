@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-03-29 03:11+0000\n"
-"PO-Revision-Date: 2010-03-29 16:28+0100\n"
+"POT-Creation-Date: 2010-05-11 23:20+0000\n"
+"PO-Revision-Date: 2010-05-15 23:08+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -310,76 +310,76 @@ msgstr "Schwerwiegender Fehler in gLabels!"
 msgid "New Label or Card"
 msgstr "Neues Etikett oder neue Karte"
 
-#: ../src/file.c:176 ../src/label.c:584 ../src/label.c:628
+#: ../src/file.c:175 ../src/label.c:584 ../src/label.c:628
 msgid "Label properties"
 msgstr "Etiketten-Eigenschaften"
 
-#: ../src/file.c:269 ../src/file.c:559
+#: ../src/file.c:267 ../src/file.c:557
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../src/file.c:274 ../src/file.c:564
+#: ../src/file.c:272 ../src/file.c:562
 msgid "gLabels documents"
 msgstr "gLabels-Dokumente"
 
-#: ../src/file.c:321 ../src/file.c:622
+#: ../src/file.c:319 ../src/file.c:620
 msgid "Empty file name selection"
 msgstr "Auswahl des Dateinamens ist leer"
 
-#: ../src/file.c:324 ../src/file.c:340
+#: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
 msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:337
+#: ../src/file.c:335
 msgid "File does not exist"
 msgstr "Datei existiert nicht"
 
-#: ../src/file.c:412
+#: ../src/file.c:410
 #, c-format
 msgid "Could not open file \"%s\""
 msgstr "Datei »%s« konnte nicht geöffnet werden"
 
-#: ../src/file.c:415
+#: ../src/file.c:413
 msgid "Not a supported file format"
 msgstr "Kein unterstütztes Dateiformat"
 
-#: ../src/file.c:493 ../src/file.c:672
+#: ../src/file.c:491 ../src/file.c:670
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Datei »%s« konnte nicht gespeichert werden"
 
-#: ../src/file.c:497 ../src/file.c:676
+#: ../src/file.c:495 ../src/file.c:674
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Fehler während des Speicherns. Datei wurde noch nicht gespeichert."
 
-#: ../src/file.c:537
+#: ../src/file.c:535
 #, c-format
 msgid "Save \"%s\" as"
 msgstr "»%s« speichern unter"
 
-#: ../src/file.c:625
+#: ../src/file.c:623
 msgid "Please supply a valid file name"
 msgstr "Bitte geben Sie einen gültigen Dateinamen an"
 
-#: ../src/file.c:646
+#: ../src/file.c:644
 #, c-format
 msgid "Overwrite file \"%s\"?"
 msgstr "Datei »%s« überschreiben?"
 
-#: ../src/file.c:650
+#: ../src/file.c:648
 msgid "File already exists."
 msgstr "Datei existiert bereits."
 
-#: ../src/file.c:746
+#: ../src/file.c:744
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
-#: ../src/file.c:750
+#: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
 msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
-#: ../src/file.c:753
+#: ../src/file.c:751
 msgid "Close without saving"
 msgstr "Schließen, ohne zu speichern"
 
@@ -669,80 +669,77 @@ msgstr "Schattierungsversatz"
 msgid "Shadow opacity"
 msgstr "Schattierungstransparenz"
 
-#: ../src/label-text.c:266 ../src/ui.c:284
+#: ../src/label-text.c:279 ../src/ui.c:284
 msgid "Create text object"
 msgstr "Textobjekt erzeugen"
 
-#: ../src/label-text.c:438
+#: ../src/label-text.c:451
 msgid "Typing"
 msgstr "Texteingabe"
 
-#: ../src/label-text.c:571 ../data/builder/property-bar.builder.h:4
+#: ../src/label-text.c:584 ../data/builder/property-bar.builder.h:4
 msgid "Font family"
 msgstr "Schriftfamilie"
 
-#: ../src/label-text.c:609 ../data/builder/property-bar.builder.h:5
+#: ../src/label-text.c:622 ../data/builder/property-bar.builder.h:5
 msgid "Font size"
 msgstr "Schriftgröße"
 
-#: ../src/label-text.c:642
+#: ../src/label-text.c:655
 msgid "Font weight"
 msgstr "Schriftstärke"
 
-#: ../src/label-text.c:675 ../data/builder/property-bar.builder.h:6
+#: ../src/label-text.c:688 ../data/builder/property-bar.builder.h:6
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../src/label-text.c:708
+#: ../src/label-text.c:721
 msgid "Align text"
 msgstr "Text anordnen"
 
-#: ../src/label-text.c:741
+#: ../src/label-text.c:754
 msgid "Line spacing"
 msgstr "Linienabstand"
 
-#: ../src/label-text.c:774 ../data/builder/property-bar.builder.h:11
+#: ../src/label-text.c:787 ../data/builder/property-bar.builder.h:11
 msgid "Text color"
 msgstr "Textfarbe"
 
-#: ../src/label-text.c:918
+#: ../src/label-text.c:931
 msgid "Auto shrink"
 msgstr "Automatisch schrumpfen"
 
 #: ../src/media-select.c:349 ../src/media-select.c:353
 #: ../src/media-select.c:358 ../src/media-select.c:367
 #: ../src/media-select.c:370 ../src/media-select.c:502
-#: ../src/media-select.c:671 ../src/media-select.c:841
-#: ../src/media-select.c:850
+#: ../src/media-select.c:701 ../src/media-select.c:871
+#: ../src/media-select.c:880
 msgid "Any"
 msgstr "Beliebig"
 
-#: ../src/media-select.c:939
-#| msgid "Recent templates"
+#: ../src/media-select.c:969
 msgid "No recent templates found."
 msgstr "Keine zuletzt benutzte Vorlagen gefunden"
 
-#: ../src/media-select.c:941
-#| msgid "Try selecting a template from the \"Search all templates\" page."
+#: ../src/media-select.c:971
 msgid "Try selecting a template in the \"Search all\" tab."
 msgstr ""
 "Bitte versuchen Sie, eine Vorlage im Reiter »Alle durchsuchen« auszuwählen."
 
-#: ../src/media-select.c:1032
+#: ../src/media-select.c:1062
 msgid "No match."
 msgstr "Keine Treffer."
 
-#: ../src/media-select.c:1034
+#: ../src/media-select.c:1064
 msgid "Try selecting a different brand, page size or category."
 msgstr ""
 "Versuchen Sie eine andere Marke, Seitengröße oder Kategorie auszuwählen."
 
-#: ../src/media-select.c:1128
-#| msgid "Create a custom template"
+#: ../src/media-select.c:1158
 msgid "No custom templates found."
 msgstr "Keine benutzerdefinierten Vorlage gefunden."
 
-#: ../src/media-select.c:1130
+#: ../src/media-select.c:1160
 msgid ""
 "You may create new templates or try searching for pre-defined templates in "
 "the \"Search all\" tab."
@@ -831,18 +828,19 @@ msgstr "Wert"
 msgid "Fixed"
 msgstr "Fixiert"
 
-#: ../src/new-label-dialog.c:211
-#| msgid "Select Mode"
+#: ../src/mini-preview.c:1073
+msgid "Up"
+msgstr "Nach oben"
+
+#: ../src/new-label-dialog.c:203
 msgid "Select Product"
 msgstr "Produkt auswählen"
 
-#: ../src/new-label-dialog.c:219
-#| msgid "Orientation:"
+#: ../src/new-label-dialog.c:215
 msgid "Choose Orientation"
 msgstr "Ausrichtung wählen"
 
 #: ../src/new-label-dialog.c:229
-#| msgid "Preview"
 msgid "Review"
 msgstr "Überprüfen"
 
@@ -1014,51 +1012,57 @@ msgstr "Verknüpft"
 msgid "Not Linked"
 msgstr "Nicht verknüpft"
 
-#: ../src/template-designer.c:397
-msgid "gLabels Template Designer"
-msgstr "gLabels Vorlagen-Designer"
+#: ../src/template-designer.c:404
+#| msgid "gLabels Template Designer"
+msgid "New gLabels Template"
+msgstr "Neue gLabels-Vorlage"
 
-#: ../src/template-designer.c:454
+#: ../src/template-designer.c:461
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: ../src/template-designer.c:493
+#: ../src/template-designer.c:500
 msgid "Name and Description"
 msgstr "Name und Beschreibung"
 
-#: ../src/template-designer.c:541
+#: ../src/template-designer.c:548
 msgid "Page Size"
 msgstr "Seitenformat"
 
-#: ../src/template-designer.c:607
+#: ../src/template-designer.c:614
 msgid "Label or Card Shape"
 msgstr "Form des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:654
+#: ../src/template-designer.c:661
 msgid "Label or Card Size"
 msgstr "Größe des neuen Etiketts oder der neuen Karte"
 
-#: ../src/template-designer.c:753
+#: ../src/template-designer.c:760
 msgid "Label Size (round)"
 msgstr "Etikettengröße (rund)"
 
-#: ../src/template-designer.c:834
+#: ../src/template-designer.c:841
 msgid "Label Size (CD/DVD)"
 msgstr "Etikettengröße (CD/DVD)"
 
-#: ../src/template-designer.c:925
+#: ../src/template-designer.c:932
 msgid "Number of Layouts"
 msgstr "Anzahl der Layouts"
 
-#: ../src/template-designer.c:993
+#: ../src/template-designer.c:1000
 msgid "Layout(s)"
 msgstr "Layout(s)"
 
-#: ../src/template-designer.c:1098
+#: ../src/template-designer.c:1105
 msgid "Design Completed"
 msgstr "Design ist komplett"
 
-#: ../src/template-designer.c:1275
+#: ../src/template-designer.c:1133
+#| msgid "gLabels Template Designer"
+msgid "Edit gLabels Template"
+msgstr "gLabels-Vorlage bearbeiten"
+
+#: ../src/template-designer.c:1422
 msgid ""
 "<span foreground='red' weight='bold'>Brand and part# match an existing "
 "template!</span>"
@@ -1551,7 +1555,7 @@ msgstr "Ungültiger Node im Dokument-Node = »%s«"
 msgid "bad node in Data node =  \"%s\""
 msgstr "Ungültiger Node im Daten-Node = »%s«"
 
-#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:779
+#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
@@ -1585,7 +1589,7 @@ msgstr ""
 "Es war nicht möglich, Kategorie-Definitionen zu finden. Libglabels könnte "
 "möglicherweise nicht korrekt installiert sein!"
 
-#: ../libglabels/db.c:2021
+#: ../libglabels/db.c:2045
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1593,7 +1597,7 @@ msgstr ""
 "Es konnten keine Vorlagendateien gefunden werden. Möglicherweise ist "
 "libglabels nicht korrekt installiert!"
 
-#: ../libglabels/db.c:2088
+#: ../libglabels/db.c:2112
 #, c-format
 msgid "%s full page label"
 msgstr "Ganzseitenetikett %s"
@@ -1647,34 +1651,34 @@ msgstr "cm"
 msgid "picas"
 msgstr "picas"
 
-#: ../libglabels/xml-template.c:221
+#: ../libglabels/xml-template.c:223
 msgid "Missing name or brand/part attributes."
 msgstr "Name oder Attribute für Marke/Nummer fehlen."
 
 #. This should always be an id, but just in case a name
 #. slips by!
-#: ../libglabels/xml-template.c:242
+#: ../libglabels/xml-template.c:244
 #, c-format
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "Unbekannte Kennung der Seitengröße »%s«, wird als Name versucht"
 
-#: ../libglabels/xml-template.c:254
+#: ../libglabels/xml-template.c:256
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "Unbekannte Kennung der Seitengröße oder Name »%s«"
 
-#: ../libglabels/xml-template.c:273
+#: ../libglabels/xml-template.c:275
 msgid "Forward references not supported."
 msgstr "Vorwärtsreferenzen werden nicht unterstützt."
 
-#: ../libglabels/xml-template.c:724
+#: ../libglabels/xml-template.c:747
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
 msgstr ""
 "Benötigte Attribute »brand« oder »part« fehlt, missbilligter Name wird "
 "versucht. "
 
-#: ../libglabels/xml-template.c:734
+#: ../libglabels/xml-template.c:757
 msgid "Name attribute also missing."
 msgstr "Name des Attributs fehlt ebenfalls."
 
@@ -1719,7 +1723,6 @@ msgid "Category:"
 msgstr "Kategorie:"
 
 #: ../data/builder/media-select.builder.h:3
-#| msgid "Custom Color"
 msgid "Custom"
 msgstr "Benutzerdefiniert"
 
@@ -1730,12 +1733,10 @@ msgid "Page size:"
 msgstr "Seitenformat:"
 
 #: ../data/builder/media-select.builder.h:5
-#| msgid "Recent fonts"
 msgid "Recent"
 msgstr "Zuletzt benutzt"
 
 #: ../data/builder/media-select.builder.h:6
-#| msgid "Select all"
 msgid "Search all"
 msgstr "Alle durchsuchen"
 
