@@ -27,11 +27,19 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <math.h>
 
 #include "libglabels-private.h"
 
 #include "db.h"
 #include "paper.h"
+
+/*===========================================*/
+/* Private macros and constants.             */
+/*===========================================*/
+
+/* Allowed error when comparing dimensions. (0.5pts ~= .007in ~= .2mm) */
+#define EPSILON 0.5
 
 /*===========================================*/
 /* Private types                             */
@@ -325,31 +333,31 @@ lgl_template_are_templates_identical (const lglTemplate   *template1,
         {
 
         case LGL_TEMPLATE_FRAME_SHAPE_RECT:
-                if ((frame1->rect.w != frame2->rect.w) ||
-                    (frame1->rect.h != frame2->rect.h))
+                if ( (fabs(frame1->rect.w - frame2->rect.w) > EPSILON) ||
+                     (fabs(frame1->rect.h - frame2->rect.h) > EPSILON) )
                 {
                         return FALSE;
                 }
                 break;
 
         case LGL_TEMPLATE_FRAME_SHAPE_ELLIPSE:
-                if ((frame1->ellipse.w != frame2->ellipse.w) ||
-                    (frame1->ellipse.h != frame2->ellipse.h))
+                if ( (fabs(frame1->ellipse.w - frame2->ellipse.w) > EPSILON) ||
+                     (fabs(frame1->ellipse.h - frame2->ellipse.h) > EPSILON) )
                 {
                         return FALSE;
                 }
                 break;
 
         case LGL_TEMPLATE_FRAME_SHAPE_ROUND:
-                if ((frame1->round.r != frame2->round.r))
+                if ( fabs(frame1->round.r - frame2->round.r) > EPSILON )
                 {
                         return FALSE;
                 }
                 break;
 
         case LGL_TEMPLATE_FRAME_SHAPE_CD:
-                if ((frame1->cd.r1 != frame2->cd.r1) ||
-                    (frame1->cd.r2 != frame2->cd.r2))
+                if ( (fabs(frame1->cd.r1 - frame2->cd.r1) > EPSILON) ||
+                     (fabs(frame1->cd.r2 - frame2->cd.r2) > EPSILON) )
                 {
                         return FALSE;
                 }
@@ -366,10 +374,10 @@ lgl_template_are_templates_identical (const lglTemplate   *template1,
 
                         if ( (layout1->nx == layout2->nx) &&
                              (layout1->ny == layout2->ny) &&
-                             (layout1->x0 == layout2->x0) &&
-                             (layout1->y0 == layout2->y0) &&
-                             (layout1->dx == layout2->dx) &&
-                             (layout1->dy == layout2->dy) )
+                             (fabs(layout1->x0 - layout2->x0) < EPSILON) &&
+                             (fabs(layout1->y0 - layout2->y0) < EPSILON) &&
+                             (fabs(layout1->dx - layout2->dx) < EPSILON) &&
+                             (fabs(layout1->dy - layout2->dy) < EPSILON) )
                         {
                                 match_found = TRUE;
                         }
