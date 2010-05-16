@@ -1,8 +1,8 @@
-templatesdir = $(datadir)/$(LIBGLABELS_BRANCH)/templates
+configdir = $(datadir)/$(LIBGLABELS_BRANCH)
 
 INCLUDES = \
 	$(LIBGLABELS_CFLAGS)				\
-	-DLIBGLABELS_TEMPLATE_DIR=\""$(templatesdir)"\" \
+	-DLIBGLABELS_CONFIG_DIR=\""$(configdir)"\" \
 	$(DISABLE_DEPRECATED_CFLAGS)
 
 libglabels_3_0_la_LDFLAGS=\

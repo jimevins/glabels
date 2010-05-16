@@ -26,10 +26,6 @@
 #include "str.h"
 #include "template.h"
 
-/* Data system and user data directories.  (must free w/ g_free()) */
-#define LGL_SYSTEM_DATA_DIR g_build_filename (LIBGLABELS_TEMPLATE_DIR, NULL)
-#define LGL_USER_DATA_DIR   g_build_filename (g_get_home_dir (), ".glabels", NULL)
-
 #undef  G_LOG_DOMAIN
 #define G_LOG_DOMAIN "LibGlabels"
 
