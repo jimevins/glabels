@@ -27,6 +27,7 @@
 
 #include "bc-postnet.h"
 #include "bc-gnubarcode.h"
+#include "bc-zint.h"
 #include "bc-iec16022.h"
 #include "bc-iec18004.h"
 
@@ -155,6 +156,13 @@ static const Backend backends[] = {
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 #endif /* HAVE_LIBBARCODE */
+
+#ifdef HAVE_LIBZINT
+
+	{ "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
+	  TRUE, TRUE, FALSE, FALSE, "[00]001234560000000018", TRUE, 16},
+
+#endif /* HAVE_LIBZINT */
 
 #ifdef HAVE_LIBIEC16022
 

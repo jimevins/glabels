@@ -80,6 +80,7 @@ LIBEBOOK_REQUIRED=2.28.0
 LIBBARCODE_REQUIRED=0.98
 LIBQRENCODE_REQUIRED=3.1.0
 LIBIEC16022_REQUIRED=0.2.4
+LIBZINT_REQUIRED=2.3.1
 
 dnl Make above strings available for packaging files (e.g. rpm spec files)
 AC_SUBST(GLIB_REQUIRED)
@@ -90,6 +91,7 @@ AC_SUBST(LIBEBOOK_REQUIRED)
 AC_SUBST(LIBBARCODE_REQUIRED)
 AC_SUBST(LIBQRENCODE_REQUIRED)
 AC_SUBST(LIBIEC16022_REQUIRED)
+AC_SUBST(LIBZINT_REQUIRED)
 
 
 dnl ---------------------------------------------------------------------------
@@ -156,6 +158,27 @@ if test "x$have_libbarcode" = "xyes"; then
 	AC_SUBST(LIBBARCODE_LIBS)
 else
 	help_libbarcode="(See http://www.gnu.org/software/barcode/barcode.html)"
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl - Check for optional Zint backend
+dnl ---------------------------------------------------------------------------
+AC_ARG_WITH(libzint,
+	    [AS_HELP_STRING([--without-libzint],[build without Zint Barcode support])])
+have_libzint=no
+if test "x$with_libzint" != xno; then
+   AC_CHECK_LIB(zint, ZBarcode_Create,
+		[have_libzint=yes], [have_libzint=no])
+fi
+
+if test "x$have_libzint" = "xyes"; then
+	AC_DEFINE(HAVE_LIBZINT,1,[Define to 1 for Zint Barcode support])
+	LIBZINT_CFLAGS=""
+	LIBZINT_LIBS="-lzint"
+	AC_SUBST(LIBZINT_CFLAGS)
+	AC_SUBST(LIBZINT_LIBS)
+else
+	help_libzint="(See http://www.zint.org.uk)"
 fi
 
 
@@ -288,6 +311,7 @@ Optional barcode backends:
         GNU Barcode ............. ${have_libbarcode} ${help_libbarcode}
         QR Code ................. ${have_libqrencode} ${help_libqrencode}
         IEC 16022 ............... ${have_libiec16022} ${help_libiec16022}
+        Zint .................... ${have_libzint} ${help_libzint}
 
 
 "

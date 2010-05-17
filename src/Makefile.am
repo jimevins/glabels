@@ -8,6 +8,7 @@ INCLUDES = \
 	$(GLABELS_CFLAGS) 					\
 	$(LIBEBOOK_CFLAGS)					\
 	$(LIBBARCODE_CFLAGS)					\
+	$(LIBZINT_CFLAGS)						\
 	$(LIBQRENCODE_CFLAGS)					\
 	$(LIBIEC16022_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
@@ -24,6 +25,7 @@ glabels_3_LDADD = 				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
+	$(LIBZINT_LIBS)				\
 	$(LIBQRENCODE_LIBS)			\
 	$(LIBIEC16022_LIBS)
 
@@ -34,6 +36,7 @@ glabels_3_batch_LDADD = 				\
 	../libglabels/$(LIBGLABELS_BRANCH).la	\
 	$(LIBEBOOK_LIBS)		 	\
 	$(LIBBARCODE_LIBS)		 	\
+	$(LIBZINT_LIBS)				\
 	$(LIBQRENCODE_LIBS)			\
 	$(LIBIEC16022_LIBS)
 
@@ -118,6 +121,8 @@ glabels_3_SOURCES = 			\
 	bc.h				\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
+	bc-zint.c		\
+	bc-zint.h 	\
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
@@ -239,6 +244,8 @@ glabels_3_batch_SOURCES = 		\
 	bc.h				\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
+	bc-zint.c		\
+	bc-zint.h		\
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
