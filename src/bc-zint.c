@@ -98,7 +98,6 @@ gl_barcode_zint_new (const gchar          *id,
 	symbol->scale = (w / symbol->width);
 	symbol->height = h / symbol->scale; /* height always in standard size */
 
-
 	/* Convert Sums provided by zint encode */
 	gbc = render_zint(symbol, text_flag);
 
