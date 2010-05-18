@@ -35,8 +35,8 @@
 /*========================================================*/
 /* Private macros and constants.                          */
 /*========================================================*/
-#define SHRINK_AMOUNT 0.15	/* shrink bars to account for ink spreading */
-#define FONT_SCALE    0.95	/* Shrink fonts just a hair */
+#define DEFAULT_W 144
+#define DEFAULT_H  72
 
 
 /*===========================================*/
@@ -51,7 +51,7 @@ gint module_is_set(struct zint_symbol *symbol, gint y_coord, gint x_coord);
 /* Generate intermediate representation of barcode.                          */
 /*****************************************************************************/
 glBarcode *
-gl_barcode_zint_new (const gchar    *id,
+gl_barcode_zint_new (const gchar          *id,
 			   gboolean        text_flag,
 			   gboolean        checksum_flag,
 			   gdouble         w,
@@ -64,6 +64,13 @@ gl_barcode_zint_new (const gchar    *id,
 	gint		     result;
 
 	symbol = ZBarcode_Create();
+
+        /* Auto set to default size */
+        if ( (w == 0) && (h == 0) )
+        {
+                w = DEFAULT_W;
+                h = DEFAULT_H;
+        }
 
 	/* Assign type flag.  Pre-filter by length for subtypes. */
 	if (g_ascii_strcasecmp (id, "GS1-128") == 0) {
@@ -259,7 +266,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 		xoffset -= (strlen(symbol->text) / 2) * 5.0;
 
 		for (p = symbol->text; *p != 0; p++) {
-			if (p != symbol->text && *p == '(') xoffset += 3.0;
+			if (p != (gchar *)symbol->text && *p == '(') xoffset += 3.0;
 			bchar = g_new0 (glBarcodeChar, 1);
 			bchar->x = (textpos + xoffset) * scaler;
 			bchar->y = default_text_posn;
