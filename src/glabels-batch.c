@@ -26,6 +26,7 @@
 
 #include <glib/gi18n.h>
 #include <libgnome/libgnome.h>
+#include <locale.h>
 
 #include "merge-init.h"
 #include "xml-label.h"
@@ -88,6 +89,8 @@ main (int argc, char **argv)
         glXMLLabelStatus   status;
         glPrintOp         *print_op;
 	gchar	          *utf8_filename;
+
+        setlocale(LC_ALL, "");
 
         bindtextdomain (GETTEXT_PACKAGE, GLABELS_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
