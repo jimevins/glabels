@@ -122,9 +122,9 @@ gl_barcode_zint_new (const gchar          *id,
  *--------------------------------------------------------------------------*/
 static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 
-	glBarcode     *gbc;
-	glBarcodeLine *line;
-	glBarcodeChar *bchar;
+        glBarcode           *gbc;
+        glBarcodeShapeLine  *line;
+        glBarcodeShapeAlpha *bchar;
 	
 	gint i, r, block_width, latch, this_row;
 	gfloat textpos, large_bar_height, preset_height, row_height, row_posn = 0.0;
@@ -226,7 +226,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 				} 
 				if(latch == 1) {
 					/* a bar */
-                                        line = g_new0 (glBarcodeLine, 1);
+                                        line = gl_barcode_shape_line_new ();
 
 					line->width = block_width * scaler;
 					/* glBarcodeLine centers based on width, counter-act!!! */
@@ -241,7 +241,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 					}
 					latch = 0;
 					// g_message ("Zint Adding Line at: %f x %f dim: %f x %f", line->x, line->y, line->width, line->length);
-					gbc->lines = g_list_append (gbc->lines, line);
+                                        gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
 				} else {
 					/* a space */
 					latch = 1;
@@ -267,12 +267,12 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 
 		for (p = symbol->text; *p != 0; p++) {
 			if (p != (gchar *)symbol->text && *p == '(') xoffset += 3.0;
-			bchar = g_new0 (glBarcodeChar, 1);
+                        bchar = gl_barcode_shape_alpha_new ();
 			bchar->x = (textpos + xoffset) * scaler;
 			bchar->y = default_text_posn;
 			bchar->fsize = 8.0 * scaler;
 			bchar->c = (gchar) *p;
-			gbc->chars = g_list_append (gbc->chars, bchar);
+                        gl_barcode_add_shape (gbc, (glBarcodeShape *)bchar);
 			// Poor mans kerning
 			if (*p == '(') {
 				xoffset += 3.0;

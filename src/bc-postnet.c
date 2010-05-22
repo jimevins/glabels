@@ -83,10 +83,10 @@ gl_barcode_postnet_new (const gchar    *id,
 			gdouble         h,
 			const gchar    *digits)
 {
-	gchar         *code, *p;
-	glBarcode     *gbc;
-	glBarcodeLine *line;
-	gdouble        x;
+        gchar              *code, *p;
+        glBarcode          *gbc;
+        glBarcodeShapeLine *line;
+        gdouble             x;
 
 	/* Validate code length for all subtypes. */
 	if ( (g_ascii_strcasecmp (id, "POSTNET") == 0) ) {
@@ -128,7 +128,7 @@ gl_barcode_postnet_new (const gchar    *id,
 	/* Now traverse the code string and create a list of lines */
 	x = POSTNET_HORIZ_MARGIN;
 	for (p = code; *p != 0; p++) {
-		line = g_new0 (glBarcodeLine, 1);
+                line = gl_barcode_shape_line_new ();
 		line->x = x;
 		line->y = POSTNET_VERT_MARGIN;
 		if (*p == '0') {
@@ -140,7 +140,7 @@ gl_barcode_postnet_new (const gchar    *id,
 		}
 		line->width = POSTNET_BAR_WIDTH;
 
-		gbc->lines = g_list_append (gbc->lines, line);
+                gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
 
 		x += POSTNET_BAR_PITCH;
 	}
@@ -149,8 +149,6 @@ gl_barcode_postnet_new (const gchar    *id,
 
 	gbc->width = x + POSTNET_HORIZ_MARGIN;
 	gbc->height = POSTNET_FULLBAR_HEIGHT + 2 * POSTNET_VERT_MARGIN;
-
-	gbc->chars = NULL;
 
 	return gbc;
 }

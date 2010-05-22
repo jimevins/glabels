@@ -95,10 +95,10 @@ render_iec16022 (const gchar *grid,
                  gdouble      w,
                  gdouble      h)
 {
-        glBarcode     *gbc;
-        glBarcodeLine *line;
-        gint           x, y;
-        gdouble        aspect_ratio, pixel_size;
+        glBarcode          *gbc;
+        glBarcodeShapeLine *line;
+        gint                x, y;
+        gdouble             aspect_ratio, pixel_size;
 
 	/* Treat requested size as a bounding box, scale to maintain aspect
 	 * ratio while fitting it in this bounding box. */
@@ -127,12 +127,12 @@ render_iec16022 (const gchar *grid,
 
                         if (*grid++)
                         {
-                                line = g_new0 (glBarcodeLine, 1);
+                                line = gl_barcode_shape_line_new ();
                                 line->x      = x*pixel_size + pixel_size/2.0;
                                 line->y      = y*pixel_size;
                                 line->length = pixel_size;
                                 line->width  = pixel_size;
-                                gbc->lines = g_list_append (gbc->lines, line);
+                                gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
                         }
 
                 }

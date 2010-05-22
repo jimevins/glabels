@@ -26,19 +26,91 @@
 
 G_BEGIN_DECLS
 
-typedef struct {
-	gdouble x, y, length, width;
-} glBarcodeLine;
+typedef enum {
+        GL_BARCODE_SHAPE_LINE,
+        GL_BARCODE_SHAPE_ALPHA,
+} glBarcodeShapeType;
 
 typedef struct {
-	gdouble x, y, fsize;
-	gchar c;
-} glBarcodeChar;
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type;
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+} glBarcodeShapeAny;
+
+/*
+ * glBarcodeShapeLine:
+ *
+ * @ =  origin (x,y) from top left corner of barcode
+ *
+ *              +--@--+
+ *              |     |
+ *              |     |
+ *              |     |
+ *              |     | length
+ *              |     |
+ *              |     |
+ *              |     |
+ *              +-----+
+ *               width
+ */
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_LINE. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+        gdouble             length;
+        gdouble             width;
+
+} glBarcodeShapeLine;
+
+/*
+ * glBarcodeShapeAlpha:
+ *
+ * @ =  origin (x,y) from top left corner of barcode
+ *
+ *              ____ ------------
+ *             /    \           ^
+ *            /  /\  \          |
+ *           /  /__\  \         |
+ *          /  ______  \        | ~fsize
+ *         /  /      \  \       |
+ *        /__/        \__\      |
+ *                              v
+ *       @ ----------------------
+ */
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_ALPHA. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+        gdouble             fsize;
+        gchar               c;
+
+} glBarcodeShapeAlpha;
+
+typedef union {
+
+        glBarcodeShapeType    type;
+        glBarcodeShapeAny     any;
+
+        glBarcodeShapeLine    line;
+        glBarcodeShapeAlpha   alpha;
+
+} glBarcodeShape;
 
 typedef struct {
 	gdouble width, height;
-	GList *lines;		/* List of glBarcodeLine */
-	GList *chars;		/* List of glBarcodeChar */
+	GList *shapes;		/* List of glBarcodeShape */
 } glBarcode;
 
 typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
@@ -53,6 +125,9 @@ typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
 #define GL_BARCODE_FONT_WEIGHT      PANGO_WEIGHT_NORMAL
 
 
+glBarcodeShapeLine  *gl_barcode_shape_line_new  (void);
+glBarcodeShapeAlpha *gl_barcode_shape_alpha_new (void);
+
 glBarcode       *gl_barcode_new              (const gchar    *id,
 					      gboolean        text_flag,
 					      gboolean        checksum_flag,
@@ -61,6 +136,9 @@ glBarcode       *gl_barcode_new              (const gchar    *id,
 					      const gchar    *digits);
 
 void             gl_barcode_free             (glBarcode     **bc);
+
+void             gl_barcode_add_shape        (glBarcode      *bc,
+                                              glBarcodeShape *shape);
 
 GList           *gl_barcode_get_styles_list  (void);
 void             gl_barcode_free_styles_list (GList          *styles_list);

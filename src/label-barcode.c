@@ -419,24 +419,25 @@ draw_object (glLabelObject *object,
              gboolean       screen_flag,
              glMergeRecord *record)
 {
-        gdouble             x0, y0;
-        cairo_matrix_t      matrix;
-	glBarcode          *gbc;
-	glBarcodeLine      *line;
-	glBarcodeChar      *bchar;
-	GList              *li;
-	gdouble             y_offset;
-        PangoLayout        *layout;
+        gdouble               x0, y0;
+        cairo_matrix_t        matrix;
+        glBarcode            *gbc;
+        glBarcodeShape       *shape;
+        glBarcodeShapeLine   *line;
+        glBarcodeShapeAlpha  *bchar;
+        GList                *p;
+        gdouble               y_offset;
+        PangoLayout          *layout;
         PangoFontDescription *desc;
-	gchar              *text, *cstring;
-	glTextNode         *text_node;
-	gchar              *id;
-	gboolean            text_flag;
-	gboolean            checksum_flag;
-	guint               color;
-	glColorNode        *color_node;
-	guint               format_digits;
-	gdouble             w, h;
+        gchar                *text, *cstring;
+        glTextNode           *text_node;
+        gchar                *id;
+        gboolean              text_flag;
+        gboolean              checksum_flag;
+        guint                 color;
+        glColorNode          *color_node;
+        guint                 format_digits;
+        gdouble               w, h;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -493,36 +494,50 @@ draw_object (glLabelObject *object,
 
 	} else {
 
-		for (li = gbc->lines; li != NULL; li = li->next) {
-			line = (glBarcodeLine *) li->data;
+		for (p = gbc->shapes; p != NULL; p = p->next) {
+                        shape = (glBarcodeShape *)p->data;
+                        switch (shape->type)
+                        {
 
-			cairo_move_to (cr, line->x, line->y);
-			cairo_line_to (cr, line->x, line->y + line->length);
-			cairo_set_line_width (cr, line->width);
-			cairo_stroke (cr);
-		}
+                        case GL_BARCODE_SHAPE_LINE:
+                                line = (glBarcodeShapeLine *) shape;
 
-		for (li = gbc->chars; li != NULL; li = li->next) {
-			bchar = (glBarcodeChar *) li->data;
+                                cairo_move_to (cr, line->x, line->y);
+                                cairo_line_to (cr, line->x, line->y + line->length);
+                                cairo_set_line_width (cr, line->width);
+                                cairo_stroke (cr);
 
-                        layout = pango_cairo_create_layout (cr);
+                                break;
 
-                        desc = pango_font_description_new ();
-                        pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
-                        pango_font_description_set_size   (desc, bchar->fsize * PANGO_SCALE * FONT_SCALE);
-                        pango_layout_set_font_description (layout, desc);
-                        pango_font_description_free       (desc);
+                        case GL_BARCODE_SHAPE_ALPHA:
+                                bchar = (glBarcodeShapeAlpha *) shape;
 
-			cstring = g_strdup_printf ("%c", bchar->c);
-                        pango_layout_set_text (layout, cstring, -1);
-			g_free (cstring);
+                                layout = pango_cairo_create_layout (cr);
 
-                        y_offset = 0.2 * bchar->fsize;
+                                desc = pango_font_description_new ();
+                                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                                pango_font_description_set_size   (desc, bchar->fsize * PANGO_SCALE * FONT_SCALE);
+                                pango_layout_set_font_description (layout, desc);
+                                pango_font_description_free       (desc);
 
-			cairo_move_to (cr, bchar->x, bchar->y-y_offset);
-                        pango_cairo_show_layout (cr, layout);
+                                cstring = g_strdup_printf ("%c", bchar->c);
+                                pango_layout_set_text (layout, cstring, -1);
+                                g_free (cstring);
 
-                        g_object_unref (layout);
+                                y_offset = 0.2 * bchar->fsize;
+
+                                cairo_move_to (cr, bchar->x, bchar->y-y_offset);
+                                pango_cairo_show_layout (cr, layout);
+
+                                g_object_unref (layout);
+
+                                break;
+
+                        default:
+                                g_assert_not_reached ();
+                                break;
+
+                        }
 
 		}
 
