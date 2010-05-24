@@ -1070,7 +1070,7 @@ draw_arrow  (glMiniPreview      *this,
         PangoFontDescription *desc;
         PangoRectangle        rect;
 
-        const gchar          *up = _("Up");
+        const gchar          *up = C_("Direction towards top of label", "Up");
 
         frame = (lglTemplateFrame *)this->priv->template->frames->data;
 
