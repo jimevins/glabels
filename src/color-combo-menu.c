@@ -113,11 +113,16 @@ static ColorTableEntry color_table[] =
         { GL_COLOR (216, 191, 216), N_("Thistle") },
 
         { GL_COLOR (255, 255, 255), N_("White") },
-        { GL_COLOR (230, 230, 230), N_("10\% Gray") },
-        { GL_COLOR (192, 192, 192), N_("25\% Gray") },
-        { GL_COLOR (153, 153, 153), N_("40\% Gray") },
-        { GL_COLOR (128, 128, 128), N_("50\% Gray") },
-        { GL_COLOR (102, 102, 102), N_("60\% Gray") },
+        /* xgettext: no-c-format */
+        { GL_COLOR (230, 230, 230), N_("10% Gray") },
+        /* xgettext: no-c-format */
+        { GL_COLOR (192, 192, 192), N_("25% Gray") },
+        /* xgettext: no-c-format */
+        { GL_COLOR (153, 153, 153), N_("40% Gray") },
+        /* xgettext: no-c-format */
+        { GL_COLOR (128, 128, 128), N_("50% Gray") },
+        /* xgettext: no-c-format */
+        { GL_COLOR (102, 102, 102), N_("60% Gray") },
         { GL_COLOR (  0,   0,   0), N_("Black") },
 
 };
