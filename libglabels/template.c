@@ -723,7 +723,7 @@ lgl_template_frame_get_layout_description (const lglTemplateFrame *frame)
         }
         else
         {
-                string = g_strdup_printf (_("%d %s"), n_labels, _("per sheet"));
+                string = g_strdup_printf ("%d %s", n_labels, _("per sheet"));
         }
 
         return string;

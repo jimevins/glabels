@@ -346,16 +346,16 @@ gl_media_select_construct (glMediaSelect *this)
         /* Brand selection control */
         gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->brand_combo));
         brands = lgl_db_get_brand_list (NULL, NULL);
-        brands = g_list_prepend (brands, g_strdup (_("Any")));
+        brands = g_list_prepend (brands, g_strdup (C_("Brand", "Any")));
         gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->brand_combo), brands);
         lgl_db_free_brand_list (brands);
         gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->brand_combo),
-                                       _("Any"));
+                                       C_("Brand", "Any"));
 
         /* Page size selection control */
         gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->page_size_combo));
         page_sizes = lgl_db_get_paper_name_list ();
-        page_sizes = g_list_prepend (page_sizes, g_strdup (_("Any")));
+        page_sizes = g_list_prepend (page_sizes, g_strdup (C_("Page size", "Any")));
         gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->page_size_combo), page_sizes);
         lgl_db_free_paper_name_list (page_sizes);
         gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->page_size_combo),
@@ -364,10 +364,10 @@ gl_media_select_construct (glMediaSelect *this)
         /* Category selection control */
         gl_combo_util_add_text_model (GTK_COMBO_BOX (this->priv->category_combo));
         categories = lgl_db_get_category_name_list ();
-        categories = g_list_prepend (categories, g_strdup (_("Any")));
+        categories = g_list_prepend (categories, g_strdup (C_("Category", "Any")));
         gl_combo_util_set_strings (GTK_COMBO_BOX (this->priv->category_combo), categories);
         gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->category_combo),
-                                       _("Any"));
+                                       C_("Category", "Any"));
         lgl_db_free_category_name_list (categories);
 
         /* Search all treeview */
@@ -499,7 +499,7 @@ filter_changed_cb (glMediaSelect *this)
                 gl_debug (DEBUG_MEDIA_SELECT, "brand = \"%s\"", brand);
                 gl_debug (DEBUG_MEDIA_SELECT, "page_size_name = \"%s\"", page_size_name);
                 gl_debug (DEBUG_MEDIA_SELECT, "category_name = \"%s\"", category_name);
-                if (!g_utf8_collate (brand, _("Any")))
+                if (!g_utf8_collate (brand, C_("Brand", "Any")))
                 {
                         g_free (brand);
                         brand = NULL;
@@ -698,7 +698,7 @@ db_changed_cb (glMediaSelect *this)
              page_size_name && strlen(page_size_name) &&
              category_name && strlen(category_name) )
         {
-                if (!g_utf8_collate (brand, _("Any")))
+                if (!g_utf8_collate (brand, C_("Brand", "Any")))
                 {
                         g_free (brand);
                         brand = NULL;
@@ -868,7 +868,7 @@ gl_media_select_set_filter_parameters (glMediaSelect  *this,
         page_size_name = lgl_db_lookup_paper_name_from_id (page_size_id);
         if (page_size_name == NULL)
         {
-                page_size_name = g_strdup (_("Any"));
+                page_size_name = g_strdup (C_("Page size", "Any"));
         }
 
         gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->page_size_combo),
@@ -877,7 +877,7 @@ gl_media_select_set_filter_parameters (glMediaSelect  *this,
         category_name = lgl_db_lookup_category_name_from_id (category_id);
         if (category_name == NULL)
         {
-                category_name = g_strdup (_("Any"));
+                category_name = g_strdup (C_("Category", "Any"));
         }
 
         gl_combo_util_set_active_text (GTK_COMBO_BOX (this->priv->category_combo),
@@ -964,9 +964,8 @@ load_recent_list (glMediaSelect      *this,
         }
         else
         {
-                this->priv->recent_info_bar = gl_message_bar_new (GTK_MESSAGE_INFO,
-                                                                          GTK_BUTTONS_NONE,
-                                                                          "%s", _("No recent templates found."));
+                this->priv->recent_info_bar = gl_message_bar_new (GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,
+                                                                  "%s", _("No recent templates found."));
                 gl_message_bar_format_secondary_text (GL_MESSAGE_BAR (this->priv->recent_info_bar),
                                                       "%s", _("Try selecting a template in the \"Search all\" tab."));
 
@@ -1057,9 +1056,9 @@ load_search_all_list (glMediaSelect      *this,
         }
         else
         {
-                this->priv->search_all_info_bar = gl_message_bar_new (GTK_MESSAGE_INFO,
-                                                                              GTK_BUTTONS_NONE,
-                                                                              "%s", _("No match."));
+                /* Translators: "No match" means that for the given template search criteria, there
+                 * were no matches found. */
+                this->priv->search_all_info_bar = gl_message_bar_new (GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, "%s", _("No match."));
                 gl_message_bar_format_secondary_text (GL_MESSAGE_BAR (this->priv->search_all_info_bar),
                                                       "%s", _("Try selecting a different brand, page size or category."));
 

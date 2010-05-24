@@ -436,6 +436,10 @@ type_changed_cb (GtkWidget               *widget,
 				  G_CALLBACK (src_changed_cb), dialog);
 		break;
 	case GL_MERGE_SRC_IS_FIXED:
+                /* Translators: "Fixed" here means that for the given document-merge method, there are
+                 * no further choices to further define the source of data.  E.g. if you select the
+                 * evolution-data-server, there are no further choices -- the source is "Fixed."
+                 */
 		dialog->priv->src_entry = gtk_label_new (_("Fixed"));
 		gtk_misc_set_alignment (GTK_MISC (dialog->priv->src_entry), 0.0, 0.5);
 

@@ -1077,7 +1077,7 @@
                               <object class="GtkLabel" id="data_ex_label">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">00000000000 00000</property>
+                                <property name="label">00000000000 00000</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>

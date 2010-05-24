@@ -264,6 +264,9 @@ lgl_db_init (void)
         model->papers = read_papers ();
 
         /* Create and append an "Other" entry. */
+        /* Translators: "Other" here means other page size.  Meaning a page size
+         * other than the standard ones that libglabels knows about such as
+         * "letter", "A4", etc. */
         paper_other = lgl_paper_new ("Other", _("Other"), 0.0, 0.0, NULL);
         model->papers = g_list_append (model->papers, paper_other);
 

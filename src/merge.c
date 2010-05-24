@@ -166,6 +166,8 @@ gl_merge_get_descriptions (void)
 	GList   *p;
 	Backend *backend;
 
+        /* Translators: "None" here means that no document-merge source or
+         * method has been selected. */
 	descriptions = g_list_append (descriptions, g_strdup(_("None")));
 
 	for ( p=backends; p!=NULL; p=p->next) {
