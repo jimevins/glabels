@@ -93,6 +93,8 @@ gl_debug_init (void)
 		debug_flags |= GLABELS_DEBUG_PATH;
 	if (g_getenv ("GLABELS_DEBUG_FIELD_BUTTON") != NULL)
 		debug_flags |= GLABELS_DEBUG_FIELD_BUTTON;
+	if (g_getenv ("GLABELS_DEBUG_BARCODE") != NULL)
+		debug_flags |= GLABELS_DEBUG_BARCODE;
 }
 
 

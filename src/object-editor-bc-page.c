@@ -57,8 +57,9 @@
 /* Local function prototypes                 */
 /*===========================================*/
 
-static void style_changed_cb     (glObjectEditor       *editor);
-static void bc_radio_toggled_cb  (glObjectEditor       *editor);
+static void style_changed_cb            (glObjectEditor       *editor);
+static void bc_radio_toggled_cb         (glObjectEditor       *editor);
+static void data_digits_spin_changed_cb (glObjectEditor       *editor);
 
 
 /*--------------------------------------------------------------------------*/
@@ -148,7 +149,7 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 				  G_OBJECT (editor));
 	g_signal_connect_swapped (G_OBJECT (editor->priv->data_digits_spin),
 				  "changed",
-				  G_CALLBACK (gl_object_editor_changed_cb),
+				  G_CALLBACK (data_digits_spin_changed_cb),
 				  G_OBJECT (editor));
 
 	gl_debug (DEBUG_EDITOR, "END");
@@ -186,12 +187,8 @@ style_changed_cb (glObjectEditor       *editor)
                                           gl_barcode_csum_optional (id));
                                                                                 
 		editor->priv->data_format_fixed_flag = !gl_barcode_can_freeform (id);
-		digits = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin));
-		if (editor->priv->data_format_fixed_flag) {
-			digits = gl_barcode_get_prefered_n(id);
-			gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), 
-						   digits);
-		}
+                digits = gl_barcode_get_prefered_n(id);
+                gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), digits);
                                                                                 
 		ex_string = gl_barcode_default_digits (id, digits);
 		gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
@@ -421,6 +418,35 @@ bc_radio_toggled_cb (glObjectEditor *editor)
 		
 	}
  
+        gl_object_editor_changed_cb (editor);
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  digits spin changed callback.                                  */
+/*--------------------------------------------------------------------------*/
+static void
+data_digits_spin_changed_cb (glObjectEditor *editor)
+{
+        gchar          *style_string;
+        const gchar    *id;
+        guint           digits;
+        gchar          *ex_string;
+
+        if (editor->priv->stop_signals) return;
+
+        style_string = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
+        if ( *style_string != 0 ) {
+                id = gl_barcode_name_to_id (style_string);
+
+                digits = gtk_spin_button_get_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin));
+                ex_string = gl_barcode_default_digits (id, digits);
+                gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
+        }
+
+        g_free (style_string);
+        g_free (ex_string);
+
         gl_object_editor_changed_cb (editor);
 }
 

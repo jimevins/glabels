@@ -87,25 +87,20 @@ gl_barcode_zint_new (const gchar          *id,
 	}
 	*/
 
-	// g_message ("Zint Requested Dimensions: %f x %f", w, h);
-
 	result = ZBarcode_Encode(symbol, (unsigned char *)digits, 0);
 	if (result) {
 		ZBarcode_Delete (symbol);
-		g_message ("Zint Error: %s", symbol->errtxt);
+		gl_debug (DEBUG_BARCODE, "Zint Error: %s", symbol->errtxt);
 		return NULL;
 	}
 
 	/* Scale calculated after height, always maintain aspect ratio */
-	// symbol->height = (h > 0.0 ? (gint)h : 50);
 	symbol->scale = (w / symbol->width);
-	symbol->height = h / symbol->scale; // height always in standard size
+	symbol->height = h / symbol->scale; /* height always in standard size */
 
 
 	/* Convert Sums provided by zint encode */
 	gbc = render_zint(symbol, text_flag);
-
-	// g_message ("Zint Barcode Dimensions: %f x %f", gbc->width, gbc->height);
 
 	ZBarcode_Delete(symbol);
 
@@ -149,7 +144,6 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	if (symbol->height < 15) {
 		symbol->height = 15;
 	}
-	// symbol->height = 50;
 
 	if(text_flag && strlen(symbol->text) != 0) {
 		textheight = 9.0;
@@ -157,7 +151,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	} else {
 		textheight = textoffset = 0.0;
 	}
-	// Update height for texts
+	/* Update height for texts */
 	symbol->height -= textheight + textoffset;
 
 	large_bar_count = 0;
@@ -240,7 +234,6 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 						line->length = (row_height - 5.0) * scaler;
 					}
 					latch = 0;
-					// g_message ("Zint Adding Line at: %f x %f dim: %f x %f", line->x, line->y, line->width, line->length);
                                         gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
 				} else {
 					/* a space */
@@ -254,14 +247,11 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	/* That's done the actual data area, everything else is human-friendly */
 
 
-
-
-
 	/* Add the text */
 	xoffset -= comp_offset;
 
 	if (text_flag) {
-		// caculate start xoffset to center text
+		/* caculate start xoffset to center text */
 		xoffset = symbol->width / 2.0;
 		xoffset -= (strlen(symbol->text) / 2) * 5.0;
 
@@ -273,7 +263,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 			bchar->fsize = 8.0 * scaler;
 			bchar->c = (gchar) *p;
                         gl_barcode_add_shape (gbc, (glBarcodeShape *)bchar);
-			// Poor mans kerning
+			/* Poor mans kerning */
 			if (*p == '(') {
 				xoffset += 3.0;
 			} else if (*p == ')') {
