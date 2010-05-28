@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-05-24 23:49+0000\n"
-"PO-Revision-Date: 2010-05-26 08:45+0200\n"
+"POT-Creation-Date: 2010-05-27 00:09+0000\n"
+"PO-Revision-Date: 2010-05-26 20:31+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "Code 93"
 
 #: ../src/bc.c:162
 msgid "GS1-128"
-msgstr ""
+msgstr "GS1-128"
 
 #: ../src/bc.c:169
 msgid "IEC16022 (DataMatrix)"
@@ -248,9 +248,8 @@ msgid "Light Yellow"
 msgstr "Amarillo claro"
 
 #: ../src/color-combo-menu.c:110
-#, fuzzy
 msgid "Light Green"
-msgstr "verde claro"
+msgstr "Verde claro"
 
 #: ../src/color-combo-menu.c:111
 msgid "Light Cyan"
@@ -261,43 +260,37 @@ msgid "Slate Gray"
 msgstr "Gris pizarra"
 
 #: ../src/color-combo-menu.c:113
-#, fuzzy
 msgid "Thistle"
-msgstr "blanco"
+msgstr "Cardo"
 
 #: ../src/color-combo-menu.c:115
 msgid "White"
 msgstr "Blanco"
 
 #: ../src/color-combo-menu.c:117
-#, fuzzy, no-c-format
-#| msgid "10\\% Gray"
+#, no-c-format
 msgid "10% Gray"
-msgstr "10\\% Gris"
+msgstr "Gris 10\\%"
 
 #: ../src/color-combo-menu.c:119
-#, fuzzy, no-c-format
-#| msgid "25\\% Gray"
+#, no-c-format
 msgid "25% Gray"
-msgstr "25\\% Gris"
+msgstr "Gris 25\\%"
 
 #: ../src/color-combo-menu.c:121
-#, fuzzy, no-c-format
-#| msgid "40\\% Gray"
+#, no-c-format
 msgid "40% Gray"
-msgstr "40\\% Gris"
+msgstr "Gris 40\\%"
 
 #: ../src/color-combo-menu.c:123
-#, fuzzy, no-c-format
-#| msgid "50\\% Gray"
+#, no-c-format
 msgid "50% Gray"
-msgstr "50\\% Gris"
+msgstr "Gris 50\\%"
 
 #: ../src/color-combo-menu.c:125
-#, fuzzy, no-c-format
-#| msgid "60\\% Gray"
+#, no-c-format
 msgid "60% Gray"
-msgstr "60\\% Gris"
+msgstr "Gris 60\\%"
 
 #: ../src/color-combo-menu.c:126
 msgid "Black"
@@ -394,9 +387,8 @@ msgid "Close without saving"
 msgstr "Cerrar sin guardar"
 
 #: ../src/font-combo-menu.c:137
-#, fuzzy
 msgid "Recent fonts"
-msgstr "Plantillas recientes"
+msgstr "Tipografías recientes"
 
 #: ../src/font-combo-menu.c:152
 msgid "Proportional fonts"
@@ -438,9 +430,8 @@ msgid "0123456789 .:,;(*!?)"
 msgstr "0123456789 .:,;(*!?)"
 
 #: ../src/font-combo-menu-item.c:157
-#, fuzzy
 msgid "Sample text"
-msgstr "Datos de ejemplo"
+msgstr "Texto de ejemplo"
 
 #: ../src/glabels-batch.c:52
 msgid "set output filename (default=\"output.pdf\")"
@@ -544,9 +535,8 @@ msgid "Invalid barcode data"
 msgstr "Datos de código de barras no válidos"
 
 #: ../src/label-box.c:156
-#, fuzzy
 msgid "Create box object"
-msgstr "Crear un cuadro de texto"
+msgstr "Crear un objeto de caja"
 
 #: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
 #: ../data/ui/property-bar.ui.h:3
@@ -640,18 +630,16 @@ msgid "Paste"
 msgstr "Pegar"
 
 #: ../src/label-ellipse.c:160
-#, fuzzy
 msgid "Create ellipse object"
-msgstr "Crear una línea"
+msgstr "Crear un objeto elipse"
 
 #: ../src/label-image.c:161 ../src/ui.c:312
 msgid "Create image object"
 msgstr "Crear una imagen"
 
 #: ../src/label-image.c:265 ../src/label-image.c:336
-#, fuzzy
 msgid "Set image"
-msgstr "Restablecer el tamaño de la imagen"
+msgstr "Establecer imagen"
 
 #: ../src/label-line.c:147 ../src/ui.c:298
 msgid "Create line object"
@@ -666,33 +654,28 @@ msgid "Resize"
 msgstr "Redimensionar"
 
 #: ../src/label-object.c:1185
-#, fuzzy
 msgid "Shadow state"
-msgstr "Sombra"
+msgstr "Estado de la sombra"
 
 #: ../src/label-object.c:1228
-#, fuzzy
 msgid "Shadow offset"
-msgstr "Sombra"
+msgstr "Desplazamiento de la sombra"
 
 #: ../src/label-object.c:1276
-#, fuzzy
 msgid "Shadow color"
-msgstr "Sombra"
+msgstr "Color de la sombra"
 
 #: ../src/label-object.c:1319
-#, fuzzy
 msgid "Shadow opacity"
-msgstr "Sombra"
+msgstr "Opacidad de la sombra"
 
 #: ../src/label-text.c:279 ../src/ui.c:284
 msgid "Create text object"
 msgstr "Crear un cuadro de texto"
 
 #: ../src/label-text.c:451
-#, fuzzy
 msgid "Typing"
-msgstr "rosa"
+msgstr "Tecleo"
 
 #: ../src/label-text.c:584 ../data/ui/property-bar.ui.h:4
 msgid "Font family"
@@ -703,23 +686,20 @@ msgid "Font size"
 msgstr "Tamaño de fuente"
 
 #: ../src/label-text.c:655
-#, fuzzy
 msgid "Font weight"
-msgstr "Rotar a la derecha"
+msgstr "Peso de la tipografía"
 
 #: ../src/label-text.c:688 ../data/ui/property-bar.ui.h:6
 msgid "Italic"
 msgstr "Itálica"
 
 #: ../src/label-text.c:721
-#, fuzzy
 msgid "Align text"
-msgstr "Alinear a la izquierda"
+msgstr "Alinear texto"
 
 #: ../src/label-text.c:754
-#, fuzzy
 msgid "Line spacing"
-msgstr "Espaciado:"
+msgstr "Espaciado de líneas"
 
 #: ../src/label-text.c:787 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
@@ -731,8 +711,6 @@ msgstr "Autocontraer"
 
 #: ../src/media-select.c:349 ../src/media-select.c:353
 #: ../src/media-select.c:502 ../src/media-select.c:701
-#, fuzzy
-#| msgid "Any"
 msgctxt "Brand"
 msgid "Any"
 msgstr "Cualquiera"
@@ -746,8 +724,6 @@ msgstr "Cualquiera"
 
 #: ../src/media-select.c:367 ../src/media-select.c:370
 #: ../src/media-select.c:880
-#, fuzzy
-#| msgid "Any"
 msgctxt "Category"
 msgid "Any"
 msgstr "Cualquiera"
@@ -774,9 +750,8 @@ msgid "Try selecting a different brand, page size or category."
 msgstr "Intente seleccionar otra marca, tamaño de página o categoría."
 
 #: ../src/media-select.c:1157
-#, fuzzy
 msgid "No custom templates found."
-msgstr "No se encontraron plantillas recientes."
+msgstr "No se encontraron plantillas personalizadas."
 
 #: ../src/media-select.c:1159
 msgid ""
@@ -834,9 +809,8 @@ msgid "Text: Colon separated values with keys on line 1"
 msgstr "Texto: valores separados por dos puntos con claves en la línea 1"
 
 #: ../src/merge-init.c:104
-#, fuzzy
 msgid "Evolution Addressbook"
-msgstr "Datos de la libreta de direcciones predeterminada de Evolution"
+msgstr "Libreta de direcciones de Evolution"
 
 #: ../src/merge-init.c:110
 msgid "VCards"
@@ -884,16 +858,14 @@ msgid "Select Product"
 msgstr "Seleccionar producto"
 
 #: ../src/new-label-dialog.c:215
-#, fuzzy
-#| msgid "Label orientation"
 msgid "Choose Orientation"
-msgstr "Orientación de la etiqueta"
+msgstr "Seleccionar orientación"
 
 #: ../src/new-label-dialog.c:229
 msgid "Review"
 msgstr "Revisar"
 
-#: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
 msgid "Default"
@@ -951,7 +923,6 @@ msgstr "%s (*.%s)"
 
 #: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
 #: ../src/ui-property-bar.c:304
-#, fuzzy
 msgid "No Line"
 msgstr "Sin línea"
 
@@ -1063,9 +1034,8 @@ msgid "Not Linked"
 msgstr "No enlazado"
 
 #: ../src/template-designer.c:404
-#, fuzzy
 msgid "New gLabels Template"
-msgstr "Diseñador de plantillas gLabels"
+msgstr "Plantilla nueva de gLabels"
 
 #: ../src/template-designer.c:461
 msgid "Welcome"
@@ -1108,9 +1078,8 @@ msgid "Design Completed"
 msgstr "Diseño completo"
 
 #: ../src/template-designer.c:1133
-#, fuzzy
 msgid "Edit gLabels Template"
-msgstr "Diseñador de plantillas gLabels"
+msgstr "Editar plantilla de gLabels"
 
 #: ../src/template-designer.c:1422
 msgid ""
@@ -1507,9 +1476,8 @@ msgid "See the file AUTHORS for additional credits,"
 msgstr "Vea el archivo AUTHORS, "
 
 #: ../src/ui-commands.c:1142
-#, fuzzy
 msgid "or visit http://glabels.org/"
-msgstr "o visite http://glabels.sourceforge.net/"
+msgstr "o visite http://glabels.org/"
 
 #: ../src/ui-commands.c:1154
 msgid "A label and business card creation program.\n"
@@ -1658,15 +1626,13 @@ msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "No se definió previamente la parte equivalente («%s») para «%s»."
 
 #: ../libglabels/template.c:722 ../libglabels/template.c:726
-#, fuzzy
 msgid "per sheet"
-msgstr "%d por hoja"
+msgstr "por hoja"
 
 #: ../libglabels/template.c:796 ../libglabels/template.c:802
 #: ../libglabels/template.c:812 ../libglabels/template.c:818
-#, fuzzy
 msgid "diameter"
-msgstr "Diámetro %s %s"
+msgstr "diámetro"
 
 #. The ids are identical to the absolute length units supported in
 #. the CSS2 Specification (Section 4.3.2)
@@ -1770,9 +1736,8 @@ msgid "Category:"
 msgstr "Categoría:"
 
 #: ../data/ui/media-select.ui.h:3
-#, fuzzy
 msgid "Custom"
-msgstr "personalizado"
+msgstr "Personalizada"
 
 #: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
 #: ../data/ui/template-designer.ui.h:42
@@ -1780,15 +1745,12 @@ msgid "Page size:"
 msgstr "Tamaño de la página:"
 
 #: ../data/ui/media-select.ui.h:5
-#, fuzzy
-#| msgid "Recent _Files"
 msgid "Recent"
-msgstr "Archivos _recientes"
+msgstr "Reciente"
 
 #: ../data/ui/media-select.ui.h:6
-#, fuzzy
 msgid "Search all"
-msgstr "Seleccionar todo"
+msgstr "Buscar todo"
 
 #: ../data/ui/new-label-dialog.ui.h:1
 msgid ""
@@ -1811,9 +1773,8 @@ msgid "Layout:"
 msgstr "Disposición:"
 
 #: ../data/ui/new-label-dialog.ui.h:5
-#, fuzzy
 msgid "Normal"
-msgstr "Formato:"
+msgstr "Normal"
 
 #: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
 msgid "Part #:"
@@ -1824,9 +1785,8 @@ msgid "Please review and confirm your selection."
 msgstr "Por favor, revise y confirme su selección."
 
 #: ../data/ui/new-label-dialog.ui.h:9
-#, fuzzy
 msgid "Rotated"
-msgstr "Rotar"
+msgstr "Rotada"
 
 #: ../data/ui/new-label-dialog.ui.h:10
 msgid "Select orientation of label content."
@@ -2273,9 +2233,8 @@ msgstr ""
 "Este diálogo le asistirá en la creación de una plantilla personalizada."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-#, fuzzy
 msgid "<b>Copies</b>"
-msgstr "<b>Opciones</b>"
+msgstr "<b>Copias</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:2
 #, fuzzy
@@ -2920,17 +2879,13 @@ msgstr "Etiquetas multipropósito"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:4
-#, fuzzy
-#| msgid "Address Labels"
 msgid "Address Labels (STAMPIT)"
-msgstr "Etiquetas de dirección"
+msgstr "Etiquetas de dirección (STAMPIT)"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:6
-#, fuzzy
-#| msgid "Diskette labels"
 msgid "Bottle labels"
-msgstr "Etiquetas de disquette"
+msgstr "Etiquetas de botella"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:10
@@ -2967,10 +2922,8 @@ msgstr "Tarjetas de negocio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
-#, fuzzy
-#| msgid "Allround labels"
 msgid "Floppy disk labels"
-msgstr "Etiquetas redondas"
+msgstr "Etiquetas de disquete"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:24
@@ -2986,24 +2939,18 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:28
-#, fuzzy
-#| msgid "Labels"
 msgid "Labels A4"
-msgstr "Etiquetas"
+msgstr "Etiquetas A4"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
-#, fuzzy
-#| msgid "Labels"
 msgid "Labels A5"
-msgstr "Etiquetas"
+msgstr "Etiquetas A5"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:32
-#, fuzzy
-#| msgid "Labels"
 msgid "Labels A6"
-msgstr "Etiquetas"
+msgstr "Etiquetas A6"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:34
@@ -3029,10 +2976,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
-#, fuzzy
-#| msgid "About glabels"
 msgid "Photo labels"
-msgstr "Acerca de glabels"
+msgstr "Etiquetas para fotos"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
@@ -3041,10 +2986,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
-#, fuzzy
-#| msgid "Square labels"
 msgid "SD card labels"
-msgstr "Etiquetas cuadradas"
+msgstr "Etiquetas para tarjetas SD"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
@@ -3058,10 +3001,8 @@ msgstr ""
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
-#, fuzzy
-#| msgid "Square labels"
 msgid "Self-adhesive labels"
-msgstr "Etiquetas cuadradas"
+msgstr "Etiquetas autoadhesivas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
