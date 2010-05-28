@@ -1,0 +1,118 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="printfile">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      How to print your labels and cards.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>To print labels and cards</title>
+
+      <p>To print labels or cards, choose
+        <guiseq><gui>File</gui><gui>Print</gui>
+	</guiseq> to display the <gui>Print</gui> dialog.
+        Once print options have been selected, click <gui>Print</gui>
+        to print the labels or cards.  To simply preview the results,
+        click <gui>Print Preview</gui> instead.</p>
+
+      <p>The <gui>Print</gui> dialog allows you to specify the
+        following print options:</p>
+
+      <section>
+	<title>The Labels Tab of the Print Dialog</title>
+
+	<section>
+            <title>Print control (Simple)</title>
+
+	      <p>For simple labels or cards (no document merge), the job
+                tabbed section contains the following copy controls.</p>
+
+	      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/print-copies.png" mime="image/png" style="right">
+      		<p>Print Copy Controls</p>
+    		</media>
+	      <!-- ==== End of Figure ==== -->
+
+	      <p>The number of copies of the label can be selected by
+                choosing the number of full sheets to print, or a specific
+                subset of labels on a single sheet.</p>
+
+	      <p>The mini-preview can also be used to graphically select
+                the subset of labels by clicking the first label on the
+                mini-preview and dragging to the last label.</p>
+
+	  </section>
+
+	  <section>
+            <title>Print control (Merge)</title>
+
+	      <p>For labels or cards using the document merge (also known
+                as "mail merge") capability, the job tabbed section contains
+                the following merge controls instead of copy controls.</p>
+
+	      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/print-merge.png" mime="image/png" style="right">
+      		<p>Print Document Merge Controls</p>
+    		</media>
+	      <!-- ==== End of Figure ==== -->
+
+	      <p>The total number of labels or cards printed is the
+                product of the number of records in the merge source and
+                the number of copies selected.  If multiple copies are
+                selected, these can be either collated (copies of the
+                same record grouped together) or un-collated (one copy
+                each record is printed before next copy).</p>
+
+	      <p>Printing can begin on any label on the first sheet.
+                This can be selected with the <gui>Start on
+                label</gui> spinbutton.</p>
+
+	      <p>The mini-preview can also be used to graphically select
+                this first label, by clicking on the desired label in the
+                mini-preview.</p>
+
+	  </section>
+
+	  <section> 
+	  <title>Options</title>
+	      <p>The following options can also be selected.</p>
+	      <list>
+		<item>
+		  <p><gui>print outlines</gui></p>
+		  <p>Print outlines of labels.  This option is useful for
+                    dry-runs, to test printer alignment.</p>
+		</item>
+		<item>
+		  <p><gui>print in reverse</gui></p>
+		  <p>Prints the labels as mirror images.  This option is
+                    useful for printing on clear labels that will be viewed
+                    from the reverse side (e.g. in a car window).</p>
+		</item>
+		<item>
+		  <p><gui>print crop marks</gui></p>
+		  <p>Prints crop marks along the edge of the sheet.
+                    This option is useful for printing on blank stock, to
+                    be cut after printing.  This option does not work well
+                    with all templates.</p>
+		</item>
+	      </list>
+	</section>
+       </section>
+
+</page>

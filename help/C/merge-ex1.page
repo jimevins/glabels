@@ -1,0 +1,110 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="merge-ex1">
+
+  <info>
+    <link type="guide" xref="merge#merge-ex"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+       Create name tags from a CSV file.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Example 1: Name Tags</title>
+
+      <p>In this example we are organizing an orientation party for the new
+        crew members of our ship.  We have a list of freshman crew members that we
+        created in <app>gnumeric</app> and exported as the following
+        CSV file.  We could have created this file by using a text editor, but heck it
+        is the 23rd century.</p>
+
+      <code>
+Name,Department,SN
+"Jim Kirk",Management,"SC937-0176 CEC"
+"Mr. Spock",Sciences,S179-276SP
+"Leonard McCoy",Medicine,unknown
+"Montgomery Scott",Engineering,SE-197-54T
+      </code>
+
+      <p>In <app>gLabels</app> we have created a new glabels
+        document using the Avery 5395 "Name Badge Labels" template.  Next we use the
+        <guiseq> <gui>Objects</gui>
+        <gui>Merge Properties</gui> </guiseq> menu item to display
+        the <gui>merge properties</gui> dialog.  We use this dialog to
+        select the source type (in our case CSV) and the merge source (filename) as
+        shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex1-1.png" mime="image/png" style="right">
+      		<p>Merge properties dialog</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Before applying the merge source, we uncheck the first record since it is only
+        column headers from our original <app>gnumeric</app> spreadsheet
+        and would simply waste our first label.  We could also unselect any other records
+        that we didn't want to print a label for.</p>
+
+      <p>We can also view each record in more detail by clicking on the appropriate
+        expander (the little triangles) as shown.  Once we are satisfied with the
+        selections in this dialog we click <gui>OK</gui> to accept the
+        changes.</p>
+
+      <p>Now we start adding objects to our glabels document as shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex1-2.png" mime="image/png" style="right">
+      		<p>Adding objects</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>In this example we have added three text objects and a barcode object.  The
+        first text object contains only simple literal text ("Hello, my name is").  The
+        second text object contains a single merge field ("${1}") corresponding to the
+        first field of a record (first column of a line) which contains the new crew
+        member's full name.  The third text field contains both literal text
+        ("Department: ") followed by a single merge field ("${2}") corresponding to
+        the second field or the crew member's department.  The barcode object is
+        configured to use field (or key) "3" which contains our crew member's
+        starfleet serial number.</p>
+
+      <p>Now we can print our name tags by selecting the
+        <guiseq> <gui>File</gui>
+        <gui>Print</gui> </guiseq> menu item.  This will display
+        print dialog as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex1-3.png" mime="image/png" style="right">
+      		<p>Printing name tags</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Just to make sure our labels are going to look okay, we select the
+        <gui>Print outlines</gui> option and click
+        <gui>Print Preview</gui>.  This will display a print preview dialog
+        as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex1-4.png" mime="image/png" style="right">
+      		<p>Name tags preview</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our name tags and start beaming our guests
+        aboard.</p>
+
+
+</page>

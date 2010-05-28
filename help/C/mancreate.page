@@ -1,0 +1,488 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="mancreate">
+
+  <info>
+    <link type="guide" xref="index#advanced"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      Create your templates manually.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Manually creating new templates</title>
+
+    <p>Predefined templates are defined by XML files located in
+      <file>${prefix}/share/glabels/</file>,
+      where <file>${prefix}</file> is usually something like
+      <file>/usr/local</file> or <file>/usr</file> depending
+      on the configuration option <file>prefix</file>.  gLabels will
+      use all files of the form <file>*-templates.xml</file>
+      or <file>*.template</file>, that it finds in
+      <file>${prefix}/share/glabels/</file> and
+      <file>${HOME}/.glabels/</file>.
+      Additional templates can be added by creating additional
+      <file>*.template</file> files in either of these directories.
+      </p>
+
+    <p>The format for these files is defined in the DTD:
+      <link href="http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt">glabels-2.2.dtd</link>.
+      (This DTD also describes other XML formats used by glabels.)</p>
+
+    <section id="template-assumptions">
+      <title>Assumptions/caveats</title>
+      <list>
+	<item>
+	  <p>A sheet contains only one size of label or card (if a sheet
+            contains more than one size of item, it can be split into
+             multiple templates for multiple pass printing)</p>
+	</item>
+	<item>
+	  <p>Distances can be expressed in units of <em>pt</em>,
+            <em>in</em>, <em>mm</em>,
+            <em>cm</em>, or <em>pc</em>.  For example:
+            "<literal>1.0in</literal>" or "<literal>2.54cm</literal>".  If no
+            units are specified, computer points (<em>pt</em>) will
+            be assumed (1 <em>pt</em> =
+            1/72 <em>in</em> = 0.352778 <em>mm</em>).
+            </p>
+	</item>
+      </list>
+    </section>
+
+    <section id="template-file">
+      <title>Template Files</title>
+
+      <code>
+&lt;?xml version="1.0"?&gt;
+&lt;Glabels-templates&gt;
+
+   <replaceable>...templates...</replaceable>
+
+&lt;/Glabels-templates&gt;
+      </code>
+    </section>
+
+
+    <section id="template-example">
+      <title>Example Template</title>
+      <code>
+  &lt;Template brand="Avery" part="8160" size="US-Letter" description="Mailing Labels"&gt;
+    &lt;Meta category="label"/&gt;
+    &lt;Meta category="mail"/&gt;
+    &lt;Meta product_url="http://www.avery.com/avery/en_us/"/&gt;
+    &lt;Label-rectangle id="0" width="189pt" height="72pt" round="5pt"&gt;
+      &lt;Markup-margin size="5pt"/&gt;
+      &lt;Layout nx="3" ny="10" x0="11.25pt" y0="36pt" dx="200pt" dy="72pt"/&gt;
+    &lt;/Label-rectangle&gt;
+    &lt;Alias brand="Avery" part="5160"/&gt;
+    &lt;Alias brand="Avery" part="6233"/&gt;
+  &lt;/Template&gt;
+      </code>
+    </section>
+
+    <section id="template-template-node">
+      <title>Template Node</title>
+
+      <p>A <em>Template</em> node describes a single stationary
+        product.  It must contain one instance of any type of Label node
+        (<em>Label-rectangle</em>,
+        <em>Label-round</em>, or <em>Label-cd</em>).
+        This node can be followed by zero or more 
+        <em>Alias</em> nodes.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>brand</p></td>  <td><p>Brand or manufacturer of stationary product. E.g. "Avery"</p></td>
+  </tr>
+  <tr>
+    <td><p>part</p></td> <td><p>Part number or name of stationary product. E.g. "8160"</p></td>
+  </tr>
+  <tr>
+    <td><p>size</p></td> <td><p>Size of sheet.  E.g., "US-Letter," "A4", ...</p></td>
+  </tr>
+  <tr>
+    <td><p>description</p></td> <td><p>Description of stationary product.  E.g, "Mailing Labels."</p></td>
+  </tr>
+  <tr>
+    <td><p>_description</p></td>  <td><p>Translatable description of stationary product. E.g, "Mailing Labels." (Only useful for predefined templates)</p></td>
+  </tr>
+  <tr>
+    <td><p>width</p></td>  <td><p>Page width.  Only valid if size="Other"</p></td>
+  </tr>
+  <tr>
+    <td><p>height</p></td>  <td><p>Page height.  Only valid if size="Other"</p></td>
+  </tr>
+</table>
+
+</section>
+
+    <section id="template-template-node">
+      <title>Meta Node</title>
+
+      <p>A <em>Meta</em> node contains some additional properties of that product.
+	This node may appear more than once, with a subnode each.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Subnode</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>category</p></td>  <td><p>The category which this product is assigned to. The value
+	of this category is used by the <app>gLabels'</app> template chooser to filter the 
+	view to display only mailing labels, or labels in common and suppress any other products
+	which the user don't want to find. One product can be assigned to several categories.</p></td>
+  </tr>
+  <tr>
+    <td><p>product_url</p></td> <td><p>This address points to the vendor's website. Ideally, 
+	the link shows the URL of that certain product, if available.</p></td>
+  </tr>
+</table>
+
+</section>
+
+    <section id="template-label-rectangle-node">
+      <title>Label-rectangle Node</title>
+
+      <p>A <em>Label-rectangle</em> node describes the
+        dimensions of a single label or business card that is rectangular
+        in shape (may have rounded edges).</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>id</p></td>  <td><p>Reserved for future use.  Should always be 0.</p></td>
+  </tr>
+  <tr>
+    <td><p>width</p></td> <td><p>Width of label/card</p></td>
+  </tr>
+  <tr>
+    <td><p>height</p></td> <td><p>Heigth of label/card</p></td>
+  </tr>
+  <tr>
+    <td><p>round</p></td> <td><p>Radius of corners.  For items with square edges (business cards), the radius should be 0.</p></td>
+  </tr>
+  <tr>
+    <td><p>x_waste</p></td>  <td><p>Amount of horizontal waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</p></td>
+  </tr>
+  <tr>
+    <td><p>y_waste</p></td>  <td><p>Amount of vertical waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</p></td>
+  </tr>
+</table>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/glabels-template-label.png" mime="image/png" style="right">
+      		<p>Label-rectangle parameters</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+	</section>
+
+    <section id="template-label-rectangle-node">
+      <title>Label-ellipse Node</title>
+
+      <p>A <em>Label-ellipse</em> node describes the
+        dimensions of a single label or business card that is elliptic
+        in shape.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>id</p></td>  <td><p>Reserved for future use.  Should always be 0.</p></td>
+  </tr>
+  <tr>
+    <td><p>width</p></td> <td><p>Width of the ellipse</p></td>
+  </tr>
+  <tr>
+    <td><p>height</p></td> <td><p>Heigth of the ellipse</p></td>
+  </tr>
+  <tr>
+    <td><p>waste</p></td>  <td><p>Amount of waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</p></td>
+  </tr>
+</table>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/glabels-template-ellipse.png" mime="image/png" style="right">
+      		<p>Label-ellipse parameters</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+	</section>
+
+    <section id="template-label-round-node">
+      <title>Label-round Node</title>
+
+      <p>A <em>Label-round</em> node describes the dimensions
+        of a simple round label (not a CD).</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>id</p></td>  <td><p>Reserved for future use.  Should always be 0.</p></td>
+  </tr>
+  <tr>
+    <td><p>radius</p></td> <td><p>Radius (1/2 diameter) of label</p></td>
+  </tr>
+  <tr>
+    <td><p>waste</p></td>  <td><p>Amount of waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</p></td>
+  </tr>
+</table>
+    </section>
+
+    <section id="template-label-cd-node">
+      <title>Label-cd Node</title>
+
+      <p>A <em>Label-round</em> node describes the dimensions
+        of a CD, DVD, or business card CD.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>id</p></td>  <td><p>Reserved for future use.  Should always be 0.</p></td>
+  </tr>
+  <tr>
+    <td><p>radius</p></td> <td><p>Outer radius of label</p></td>
+  </tr>
+  <tr>
+    <td><p>hole</p></td>  <td><p>Radius of concentric hole</p></td>
+  </tr>
+  <tr>
+    <td><p>width</p></td> <td><p>If present, the label is clipped to the given width.
+                  (Useful for "business card CDs").</p></td>
+  </tr>  <tr>
+    <td><p>heigth</p></td> <td><p>If present, the label is clipped to the given height.
+                  (Useful for "business card CDs").</p></td>
+  </tr>  <tr>
+    <td><p>waste</p></td> <td><p>Amount of waste (over-print) to allow.  This is useful
+                  for minimizing alignment problems when using non-white
+                  backgrounds (e.g. images).</p></td>
+  </tr>
+</table>
+
+	      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/glabels-template-cd.png" mime="image/png" style="right">
+      		<p>CD label parameters</p>
+    		</media>
+	      <!-- ==== End of Figure ==== -->
+    </section>
+
+    <section id="template-markup-margin-node">
+      <title>Markup-margin Node</title>
+
+      <p>A <em>Markup-margin</em> describes a margin along
+        all edges of a label.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>size</p></td>  <td><p>Size of the margin.  I.e. the distance of the margin
+                  line from the edge of the card/label.</p></td>
+  </tr>
+</table>
+    </section>
+
+    <section id="template-markup-line-node">
+      <title>Markup-line Node</title>
+
+      <p>A <em>Markup-line</em> describes a markup line.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>x1</p></td>  <td><p>x coordinate of 1st endpoint of the line segment.</p></td>
+  </tr>
+  <tr>
+    <td><p>y1</p></td>  <td><p>y coordinate of 1st endpoint of the line segment.</p></td>
+  </tr>
+  <tr>
+    <td><p>x2</p></td>  <td><p>x coordinate of 2st endpoint of the line segment.</p></td>
+  </tr>
+  <tr>
+    <td><p>y2</p></td>  <td><p>y coordinate of 2st endpoint of the line segment.</p></td>
+  </tr>
+</table>
+    </section>
+
+    <section id="template-markup-circle-node">
+      <title>Markup-circle Node</title>
+
+      <p>A <em>Markup-circle</em> describes a markup circle.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>x0</p></td>  <td><p>x coordinate of circle origin (center).</p></td>
+  </tr>
+  <tr>
+    <td><p>y0</p></td>  <td><p>y coordinate of circle origin (center).</p></td>
+  </tr>
+  <tr>
+    <td><p>radius</p></td>  <td><p>Radius of circle.</p></td>
+  </tr>
+</table>
+    </section>
+
+    <section id="template-markup-rect-node">
+      <title>Markup-rect Node</title>
+
+      <p>A <em>Markup-rect</em> describes a markup rectangle.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>x1</p></td>  <td><p>x coordinate of upper left corner of rectangle.</p></td>
+  </tr>
+  <tr>
+    <td><p>y1</p></td>  <td><p>y coordinate of upper left corner of rectangle.</p></td>
+  </tr>
+  <tr>
+    <td><p>w</p></td>  <td><p>Width of rectangle.</p></td>
+  </tr>
+  <tr>
+    <td><p>h</p></td>  <td><p>Height of rectangle.</p></td>
+  </tr>
+  <tr>
+    <td><p>r</p></td>  <td><p>Radius of rounded corners of rectangle.</p></td>
+  </tr>
+</table>
+    </section>
+
+    <section id="template-layout-node">
+      <title>Layout Node</title>
+
+      <p>A label node may contain multiple <em>Layout</em>
+        children.  If labels are arranged in a simple grid pattern, only
+        one layout is needed.  However, if labels are arranged in multiple
+        grids, such as a running bond pattern, multiple
+        <em>layout</em> tags can be used.  Note: a single label
+        can always be treated as a grid of one.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>nx</p></td>  <td><p>Number of labels/cards across in the grid (horizontal)</p></td>
+  </tr>
+  <tr>
+    <td><p>ny</p></td>  <td><p>Number of labels/cards across in the grid (vertical)</p></td>
+  </tr>
+  <tr>
+    <td><p>x0</p></td>  <td><p>Distance from left edge of sheet to the left edge of
+                  the left column of cards/labels in the layout.</p></td>
+  </tr>
+  <tr>
+    <td><p>y0</p></td>  <td><p>Distance from the top edge of sheet to the top edge of
+                  the top row of labels/cards in the layout.</p></td>
+  </tr>
+  <tr>
+    <td><p>dx</p></td>  <td><p>Horizontal pitch of grid.</p></td>
+  </tr>
+  <tr>
+    <td><p>dy</p></td>  <td><p>Vertical pitch of grid.</p></td>
+  </tr>
+</table>
+
+	      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/glabels-template-layout.png" mime="image/png" style="right">
+      		<p>Layout Parameters</p>
+    		</media>
+	      <!-- ==== End of Figure ==== -->
+    </section>
+
+    <section id="template-alias-node">
+      <title>Alias Node</title>
+
+      <p>An <em>Alias</em> node provides the name of a
+        product with the same size and layout characteristics as the
+        parent template.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>brand</p></td>  <td><p>The brand or manufacturer of the equivalent product.</p></td>
+  </tr>
+  <tr>
+    <td><p>part</p></td>  <td><p>The part number of the equivalent product.</p></td>
+  </tr>
+</table>
+
+    </section>
+
+
+</page>

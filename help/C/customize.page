@@ -1,0 +1,129 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="customize">
+
+  <info>
+    <link type="guide" xref="index#advanced"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>Customize <app>gLabels</app> to match your needs.</desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+    
+  <!-- ============= Customization ============================= -->
+  <!-- Use this section to describe how to customize the application. -->
+    <title>Settings</title> 
+    <p>To configure <app>gLabels</app>, choose 
+      <guiseq> 
+	<gui>Settings</gui> 
+	<gui>Preferences</gui> 
+      </guiseq>. The 
+      <gui>Preferences</gui> dialog contains the following tabbed
+      sections:</p>
+
+  <section id="prefs-locale" style="2column">
+    <title>Locale</title>
+	<section>
+	<title>Units</title>
+	<p>Use this radio button group to specify your preferred units.
+              Select one of the following options:</p>
+	   <list>
+		<item>
+		<p><gui>Points</gui></p>
+		<p>Use points (1 point = 1/72 in = 0.352778 mm).</p>
+		</item>
+		<item>
+		<p><gui>Inches</gui></p>
+		<p>Use Inches.</p>
+		</item>
+		<item>
+		<p><gui>Millimeters</gui></p>
+		<p>Use Millimeters.</p>
+		</item>
+	   </list>
+	   <p>Default: <gui>Inches</gui>.</p>
+	</section>
+
+	<section>
+	<title>Default page size</title>
+	<p>Use this radio button group to specify your prefered page size.
+              This will make it quicker for you to locate media types when creating a new
+              label or card.</p>
+	   <list>
+		<item>
+		<p><gui>US Letter</gui></p>
+		<p>Most of your media will be of the US Letter page size (8.5 x 11 inches).</p>
+		</item>
+		<item>
+		<p><gui>ISO A4</gui></p>
+		<p>Most of your media will be of the ISO A4 page size (210 x 297 mm).</p>
+		</item>
+	   </list>
+	   <p>Default: <gui>US Letter</gui>.</p>		
+	</section>
+    </section>
+
+  <section id="prefs-defaults" style="2column">
+    <title>Object Defaults</title>
+
+	<section>
+	<title>Text</title>
+	<p>Use these controls to set the default properties of new text objects.
+              These properties are:</p>
+	   <list>
+		<item>
+		<p><gui>Font</gui></p>
+		<p>These controls are used to select font family and font size, and
+                  whether the font should bold or in italics.</p>
+		</item>
+		<item>
+		<p><gui>Color</gui></p>
+		<p>This control selects the default text color.</p>
+		</item>
+		<item>
+		<p><gui>Alignment</gui></p>
+		<p>These controls are used to select the default text alignment (left, center or right).</p>
+		</item>
+	   </list>
+	</section>
+
+	<section>
+	<title>Line</title>
+	<p>Use these controls to set the default properties of lines and outlines of
+              new objects.  These properties are:</p>
+	   <list>
+		<item>
+		<p><gui>Width</gui></p>
+		<p>These controls are selects the default line width.</p>
+		</item>
+		<item>
+		<p><gui>Color</gui></p>
+		<p>This control selects the default line color.</p>
+		</item>
+	   </list>
+	</section>
+
+	<section>
+	<title>Fill</title>
+	<p>Use these controls to set the default fill properties of
+              new objects.  These properties are:</p>
+	   <list>
+		<item>
+		<p><gui>Color</gui></p>
+		<p>These controls are selects the default fill color.</p>
+		</item>
+	   </list>
+	</section>
+	</section>
+
+</page>

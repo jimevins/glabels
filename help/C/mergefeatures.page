@@ -1,0 +1,65 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="mergefeatures">
+
+  <info>
+    <link type="guide" xref="index#merging"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+       What you may expect from a document merge.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Performing a document merge</title>
+
+      <p>Document Merge (sometimes called "Mail Merge") is a powerful
+        feature that allows a unique label or card to be printed for each
+        record in an external data source.</p>
+
+      <p>The first step to performing a document merge is to prepare
+        a source document that contains your merge data.  This data could
+        be mailing addresses or any other data that you wish to create
+        unique labels or cards for.  Currently back-ends only exist for
+        text files and the evolution data server -- others are planned.  The currently
+        supported text-file format is very simple:  each line is a record;
+        fields are delimited by commas (CSV), tabs, or colons; and newlines
+        can be embedded into fields by using the "\n" entity.  This file
+        could be created using any text editor or could be created by
+        another program or script.  A common way of creating CSV files is
+	to export them from a spreadsheet program.</p>
+
+      <p>A label must then be configured to "point at" this data file.
+        To configure the merge properties of a document, choose
+        <guiseq><gui>Objects</gui>
+        <gui>Merge Properties</gui></guiseq> menu item
+        to display the <gui>merge properties</gui> dialog.  This
+        dialog is used to select the exact data file format and file
+        name (location) of the merge data.</p>
+
+      <p>Finally, once the label has been configured for a data file,
+        field keys can be inserted into text objects and used as source
+        or data for barcode objects and image filenames for image objects.
+        See <link xref="editprop" /> for more information
+        on using merge data for these object types.</p>
+
+      <p>Now that your label is configured, <app>gLabels</app> will print a unique
+        label for each record in your source document -- substituting fields
+        from each record for field keys in the all text, barcode, and
+        image objects.</p>
+
+      <p>See <link xref="merge" /> for a detailed
+        tutorial on the document merge feature.</p>
+
+</page>
