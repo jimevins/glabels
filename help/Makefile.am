@@ -3,8 +3,7 @@ include $(top_srcdir)/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
 DOC_MODULE = $(GLABELS_BRANCH)
-DOC_ENTITIES = legal.xml 
-DOC_INCLUDES =
+DOC_ID = glabels
 DOC_FIGURES = figures/glabels-template-cd.png      	\
               figures/glabels-template-label.png	\
 	      figures/glabels-template-layout.png	\
@@ -20,5 +19,27 @@ DOC_FIGURES = figures/glabels-template-cd.png      	\
 	      figures/object-editor-sidebar.png		\
 	      figures/print-copies.png			\
 	      figures/print-merge.png
+
+DOC_PAGES = \
+		about.page		\
+		basicusage.page		\
+		createnew.page		\
+		customize.page		\
+		customtemplate.page	\
+		editprop.page		\
+		index.page		\
+		labelprop.page		\
+		license.page		\
+		mancreate.page		\
+		merge-ex1.page		\
+		merge-ex2.page		\
+		merge-ex3.page		\
+		merge-ex4.page		\
+		mergefeatures.page	\
+		merge.page		\
+		multifile.page		\
+		newlabel.page		\
+		printfile.page		\
+		select.page
 
 DOC_LINGUAS = cs de es fr sl
