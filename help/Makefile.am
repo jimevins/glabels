@@ -3,7 +3,7 @@ include $(top_srcdir)/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
 DOC_MODULE = $(GLABELS_BRANCH)
-DOC_ID = glabels
+DOC_ID = glabels-3.0
 DOC_FIGURES = figures/glabels-template-cd.png      	\
               figures/glabels-template-label.png	\
 	      figures/glabels-template-layout.png	\
