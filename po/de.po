@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.3.0\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-05-24 23:49+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-27 22:36-0400\n"
 "PO-Revision-Date: 2010-05-25 17:31+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -332,7 +332,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -381,7 +382,8 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -712,20 +714,17 @@ msgstr "Automatisch schrumpfen"
 
 #: ../src/media-select.c:349 ../src/media-select.c:353
 #: ../src/media-select.c:502 ../src/media-select.c:701
-#| msgid "Any"
 msgctxt "Brand"
 msgid "Any"
 msgstr "Beliebig"
 
 #: ../src/media-select.c:358 ../src/media-select.c:871
-#| msgid "Any"
 msgctxt "Page size"
 msgid "Any"
 msgstr "Beliebig"
 
 #: ../src/media-select.c:367 ../src/media-select.c:370
 #: ../src/media-select.c:880
-#| msgid "Any"
 msgctxt "Category"
 msgid "Any"
 msgstr "Beliebig"
@@ -798,7 +797,8 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr ""
+"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -865,7 +865,7 @@ msgstr "Ausrichtung wählen"
 msgid "Review"
 msgstr "Überprüfen"
 
-#: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
 msgid "Default"
@@ -1435,7 +1435,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:452
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:458
 msgid "Grid"
@@ -1443,7 +1444,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:460
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:466
 msgid "Markup"
@@ -2174,7 +2176,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."

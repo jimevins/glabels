@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-05-24 23:49+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-27 22:36-0400\n"
 "PO-Revision-Date: 2010-05-26 08:45+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -271,31 +271,26 @@ msgstr "Blanco"
 
 #: ../src/color-combo-menu.c:117
 #, fuzzy, no-c-format
-#| msgid "10\\% Gray"
 msgid "10% Gray"
 msgstr "10\\% Gris"
 
 #: ../src/color-combo-menu.c:119
 #, fuzzy, no-c-format
-#| msgid "25\\% Gray"
 msgid "25% Gray"
 msgstr "25\\% Gris"
 
 #: ../src/color-combo-menu.c:121
 #, fuzzy, no-c-format
-#| msgid "40\\% Gray"
 msgid "40% Gray"
 msgstr "40\\% Gris"
 
 #: ../src/color-combo-menu.c:123
 #, fuzzy, no-c-format
-#| msgid "50\\% Gray"
 msgid "50% Gray"
 msgstr "50\\% Gris"
 
 #: ../src/color-combo-menu.c:125
 #, fuzzy, no-c-format
-#| msgid "60\\% Gray"
 msgid "60% Gray"
 msgstr "60\\% Gris"
 
@@ -732,14 +727,12 @@ msgstr "Autocontraer"
 #: ../src/media-select.c:349 ../src/media-select.c:353
 #: ../src/media-select.c:502 ../src/media-select.c:701
 #, fuzzy
-#| msgid "Any"
 msgctxt "Brand"
 msgid "Any"
 msgstr "Cualquiera"
 
 #: ../src/media-select.c:358 ../src/media-select.c:871
 #, fuzzy
-#| msgid "Any"
 msgctxt "Page size"
 msgid "Any"
 msgstr "Cualquiera"
@@ -747,7 +740,6 @@ msgstr "Cualquiera"
 #: ../src/media-select.c:367 ../src/media-select.c:370
 #: ../src/media-select.c:880
 #, fuzzy
-#| msgid "Any"
 msgctxt "Category"
 msgid "Any"
 msgstr "Cualquiera"
@@ -885,7 +877,6 @@ msgstr "Seleccionar producto"
 
 #: ../src/new-label-dialog.c:215
 #, fuzzy
-#| msgid "Label orientation"
 msgid "Choose Orientation"
 msgstr "Orientación de la etiqueta"
 
@@ -893,7 +884,7 @@ msgstr "Orientación de la etiqueta"
 msgid "Review"
 msgstr "Revisar"
 
-#: ../src/object-editor-bc-page.c:92 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
 #: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
 msgid "Default"
@@ -1781,7 +1772,6 @@ msgstr "Tamaño de la página:"
 
 #: ../data/ui/media-select.ui.h:5
 #, fuzzy
-#| msgid "Recent _Files"
 msgid "Recent"
 msgstr "Archivos _recientes"
 
@@ -2921,14 +2911,12 @@ msgstr "Etiquetas multipropósito"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:4
 #, fuzzy
-#| msgid "Address Labels"
 msgid "Address Labels (STAMPIT)"
 msgstr "Etiquetas de dirección"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:6
 #, fuzzy
-#| msgid "Diskette labels"
 msgid "Bottle labels"
 msgstr "Etiquetas de disquette"
 
@@ -2940,42 +2928,36 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:12
 #, fuzzy
-#| msgid "Business cards"
 msgid "Business cards high glossy"
 msgstr "Tarjetas de negocio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:14
 #, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched"
 msgstr "Tarjetas de negocio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:16
 #, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched dull"
 msgstr "Tarjetas de negocio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:18
 #, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched glossy"
 msgstr "Tarjetas de negocio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
 #, fuzzy
-#| msgid "Allround labels"
 msgid "Floppy disk labels"
 msgstr "Etiquetas redondas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:24
 #, fuzzy
-#| msgid "Business cards"
 msgid "Foldable business cards"
 msgstr "Tarjetas de negocio"
 
@@ -2987,21 +2969,18 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:28
 #, fuzzy
-#| msgid "Labels"
 msgid "Labels A4"
 msgstr "Etiquetas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:30
 #, fuzzy
-#| msgid "Labels"
 msgid "Labels A5"
 msgstr "Etiquetas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:32
 #, fuzzy
-#| msgid "Labels"
 msgid "Labels A6"
 msgstr "Etiquetas"
 
@@ -3018,7 +2997,6 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:38
 #, fuzzy
-#| msgid "name_page"
 msgid "Name plates"
 msgstr "nombre_de_la_página"
 
@@ -3030,7 +3008,6 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
 #, fuzzy
-#| msgid "About glabels"
 msgid "Photo labels"
 msgstr "Acerca de glabels"
 
@@ -3042,7 +3019,6 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
 #, fuzzy
-#| msgid "Square labels"
 msgid "SD card labels"
 msgstr "Etiquetas cuadradas"
 
@@ -3059,7 +3035,6 @@ msgstr ""
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
 #, fuzzy
-#| msgid "Square labels"
 msgid "Self-adhesive labels"
 msgstr "Etiquetas cuadradas"
 
