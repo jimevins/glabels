@@ -1,0 +1,37 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="merge">
+
+  <info>
+    <link type="guide" xref="index#merging"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+       Merge a data source to create multiple documents.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Document merge tutorial</title>
+
+    <p>Document Merge (sometimes called "Mail Merge") is a powerful
+      feature that allows a unique label or card to be printed for each
+      record in an external data source.  It is however, the most mis-understood
+      feature of <app>glabels</app>.  The following examples
+      will step through a couple of common tasks using the document merge
+      feature.</p>
+
+  <section id="merge-ex" style="2column">
+  </section>
+
+</page>

@@ -1,0 +1,35 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="newlabel">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      Create a new label or card in <app>gLabels</app>.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>To create a new label or card</title>
+
+    <p>To create a new label or business card, choose 
+        <guiseq><gui>File</gui><gui>New</gui></guiseq>
+	to display the <gui>New Label or Card</gui> dialog. Select
+        the media type and orientation for the new document,
+	then click <gui>OK</gui>. A new document is
+	displayed in the display area of the <app>gLabels</app>
+        window. </p>
+
+</page>

@@ -1,0 +1,229 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="editprop">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      Change the properties of objects.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>To edit object properties</title>
+
+    <section id="glabels-object-properties">
+
+      <p>Most object properties can be modified through the object
+        editor sidebar, illustrated below.  To use the object editor,
+        a single object must first be selected.  See
+        <link xref="select" />.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/object-editor-sidebar.png" mime="image/png" style="right">
+      		<p>Print Copy Controls</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>The object editor will contain a subset of the following
+        tabbed sections, depending on object type:</p>
+
+      <section id="object-editor-text">
+	<title>Text Tabbed Section (Text objects)</title>
+
+	<p>This section contains a small editor for changing the content
+          of a text object.  It also contains a dropdown menu of available
+          document merge keys, that can be inserted into text.</p>
+
+      </section>
+
+      <section id="object-editor-image">
+	<title>Image Tabbed Section (Image objecs)</title>
+
+	<p>This section contains a file entry with preview to select
+          image files.  The browse button can be used to easily locate
+          image files.  Alternatively, a document merge key can be used
+          instead to provide a filename at print time.</p>
+
+      </section>
+
+      <section id="object-editor-data">
+	<title>Data Tabbed Section (Barcode objecs)</title>
+
+	<p>This section contains a text entry to enter literal barcode
+          data.  Alternatively, a document merge key can be used to
+          provide this data at print time.</p>
+
+      </section>
+
+      <section id="object-editor-style">
+	<title>Style Tabbed Section (Text objects)</title>
+
+	<p>This section contains controls to select text properties,
+          including font family, font size, font weight, color, and
+          text justification.</p>
+
+      </section>
+
+      <section id="object-editor-barcode">
+	<title>Style Tabbed Section (Barcode objecs)</title>
+
+	<p>This section contains controls to select barcode properties,
+          including barcode style, color, whether to print text, and whether
+          to include a checksum digit.</p>
+
+      </section>
+
+      <section id="object-editor-line">
+	<title>Line Tabbed Section</title>
+
+	<p>This section contains controls to select properties of lines
+          and outlines.  These properties include line width and color.</p>
+
+      </section>
+
+      <section id="object-editor-fill">
+	<title>Fill Tabbed Section</title>
+
+	<p>This section contains controls to select fill properties of box
+          and ellipse objects.  Currently the only fill property is fill
+          color.</p>
+
+      </section>
+
+      <section id="object-editor-size">
+	<title>Size Tabbed Section (All except line objects)</title>
+
+	<p>This section contains controls to select the width and height
+          of an object.  A checkbox is provided, so that the current aspect
+          ratio can be locked while manipulating the width and height controls.
+          Image objects also provide a button to reset the size to the
+          image's natural size (Assumes 72DPI).</p>
+
+      </section>
+
+      <section id="object-editor-size-line">
+	<title>Size Tabbed Section (Line objects)</title>
+
+	<p>This section contains controls to select the length and angle
+          of a line object.</p>
+
+      </section>
+
+      <section id="object-editor-position">
+	<title>Position Tabbed Section</title>
+
+	<p>This section contains controls to change the position of an
+          object.</p>
+
+      </section>
+
+
+      <section id="object-editor-shadow">
+	<title>Shadow Tabbed Section (All except image and barcode objects)</title>
+
+	<p>This section contains controls to add a shadow to an object.</p>
+
+      </section>
+
+
+    </section>
+
+<!-- ============= Other Manipulations of Objects ========= -->
+    <section id="glabels-object-manipulation"> 
+      <title>Other Manipulations of Objects</title>
+
+      <p>Objects can also be manipulated in the following ways.</p>
+
+      <section id="other-moving-resizing">
+	<title>Moving and Resizing Objects</title>
+
+	<p>Objects can be moved by simply clicking on a selected
+          object and dragging the object to its new location.  If the object
+          is part of an aggregate selection, all objects in the selection
+          will move with the object being dragged, maintaining their relative
+          positions to one another.  If no object is selected, clicking on
+          an object will create a new selection containing that object.
+          See <link xref="select" />.</p>
+
+	<p>A selected object can be resized by clicking one of its resize
+          handle and dragging it to obtain the new size.</p>
+
+      </section>
+
+      <section id="other-stacking-order">
+	<title>Changing Stacking Order</title>
+
+	<p>Stacking order refers to relative position in the z-axis of
+          objects.  That is when objects overlap, which object will appear
+          on top of the other.  By default, newer objects will appear above
+          older objects.  To change this order, select one or more objects
+          and choose <guiseq> <gui>Objects</gui>
+          <gui>Order</gui>
+          <gui>Bring to Front</gui> </guiseq>
+          to raise the selection to the top of the stacking
+          order, or choose <guiseq> <gui>Objects</gui>
+          <gui>Order</gui>
+          <gui>Send to Back</gui> </guiseq>
+          to lower the selection to the bottom of the
+          stacking order.  These menuitems are also available by right-clicking
+          the display area when there is a non-empty selection.</p>
+
+      </section>
+
+      <section id="other-rotating-flipping">
+	<title>Rotating and Flipping Objects</title>
+
+	<p>Objects can be rotated 90 degrees in either direction, or flipped
+          horizontally or vertically, by choosing the appropriate menuitem
+          in the  <guiseq> <gui>Objects</gui>
+          <gui>Rotate/Flip</gui> </guiseq> sub-menu.  These
+          menuitems are also available by right-clicking
+          the display area when there is a non-empty selection.</p>
+
+      </section>
+
+      <section id="other-alignment">
+	<title>Aligning Objects</title>
+
+	<p>Objects can be aligned horizontally or vertically, relative to
+          one another, or relative to the center line of the label, by
+          choosing the appropriate menuitem from the  <guiseq>
+          <gui>Objects</gui>
+          <gui>Align Horizontal</gui>
+          </guiseq> or  <guiseq> <gui>Objects</gui>
+          <gui>Align Horizontal</gui> </guiseq> sub-menus.
+          These menuitems are also available by right-clicking
+          the display area when there is a non-empty selection.</p>
+
+      </section>
+
+      <section id="other-property-bar">
+	<title>Using the Property Bar</title>
+
+	<p>The property bar can be used to change some common properties
+          of objects en-masse.  These properties include font family, font
+          size, font weight, text alignment, text color, fill color, line
+          or outline color, and line width.  The property bar also controls
+          the defaults for these properties for any newly created objects.
+          </p>
+
+      </section>
+
+
+
+    </section>
+
+</page>

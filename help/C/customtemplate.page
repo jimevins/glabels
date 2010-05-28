@@ -1,0 +1,38 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="customtemplate">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      Create your own templates for stationery products.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>To create a custom template</title>
+
+      <p>To create a new custom template, choose 
+        <guiseq><gui>File</gui>
+	<gui>Template Designer ...</gui></guiseq>
+	to display the <gui>Template Designer</gui> dialog.
+        This dialog will assist you in creating a custom template for
+        most types of label or card stationery that you may encounter.</p>
+
+      <p>If you prefer, you can create your templates manually.
+        For this option see <link xref="mancreate"/>
+      </p>
+
+</page>

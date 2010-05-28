@@ -1,0 +1,109 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="merge-ex2">
+
+  <info>
+    <link type="guide" xref="merge#merge-ex"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+       Create address labels from a CSV file.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Example 2: Address labels</title>
+
+      <p>In this example we are going to throw a party and need to print mailing
+        address labels for our invitations.  We have a list of our closest friends
+        that we created in <app>gnumeric</app> and exported as the
+        following CSV file.  It should be noted that not everyone has a middle initial or
+        a two line address.</p>
+
+      <code>
+LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP
+,,,,,,,
+Critter,Ess,S,"123 Faux St.",,Alexandria,VA,22310
+Doe,John,,"Apt 1X","451 Mystery St.",Trenton,NJ,08601
+Summers,Joyce,,"1630 Revello Dr",,Sunnydale,CA,95037
+McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
+Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
+      </code>
+
+      <p>In <app>glabels</app> we have created a new glabels
+        document using the Avery 5512 "Address Labels" template.  Next we use the
+        <guiseq> <gui>Objects</gui>
+        <gui>Merge Properties</gui> </guiseq> menu item to display
+        the <gui>merge properties</gui> dialog.  We use this dialog to
+        select the source type (in our case CSV) and the merge source (filename) as
+        shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex2-1.png" mime="image/png" style="right">
+      		<p>Merge properties dialog</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Before applying the merge source, we uncheck the first record since it is only
+        column headers from our original <app>gnumeric</app> spreadsheet
+        and would simply waste our first label.  We also unselect the second record
+        which is empty (an artifact of our original spreadsheet).  We could also unselect
+        any other records that we didn't want to print a label for.</p>
+
+      <p>We can also view each record in more detail by clicking on the appropriate
+        expander (the little triangles) as shown.  Once we are satisfied with the
+        selections in this dialog we click <gui>OK</gui> to accept the
+        changes.</p>
+
+      <p>Now we start adding objects to our glabels document as shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex2-2.png" mime="image/png" style="right">
+      		<p>Adding objects</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>In this example we have a single text object.  This text object contains
+        all of our merge fields organized on multiple lines as a mailing address.
+        Notice that fields ${4} and ${5} (corresponding to ADDR1 and ADDR2) are each
+        located with no other text on their own lines.  When
+        <app>glabels</app> encounters a field as the only text on
+        a line, it will not expand the line if the field is empty.</p>
+
+      <p>Now we can print our address labels by selecting the
+        <guiseq> <gui>File</gui>
+        <gui>Print</gui> </guiseq> menu item.  This will display
+        print dialog as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex2-3.png" mime="image/png" style="right">
+      		<p>Printing address labels</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Just to make sure our labels are going to look okay, we select the
+        <gui>Print outlines</gui> option and click
+        <gui>Print Preview</gui>.  This will display a print preview dialog
+        as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex2-4.png" mime="image/png" style="right">
+      		<p>Address labels preview</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our address labels and start mailing
+        our party invitations.</p>
+
+</page>

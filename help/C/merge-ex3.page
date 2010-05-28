@@ -1,0 +1,109 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="merge-ex3">
+
+  <info>
+    <link type="guide" xref="merge#merge-ex"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+       Create address labels from the <app>Evolution</app> address book entries.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>Example 3: Address Labels Using the <app>Evolution</app> Addressbook</title>
+
+      <p>Our last party was a great success, and now we need to print mailing
+        address labels for the invitations to a new one. To simplify this, we can use
+	the <app>Evolution</app> addressbook, because the address
+	data of	all our friends is stored there.</p>
+
+      <note>
+	<p>Depending on how your copy of <app>gLabels</app> was packaged, this option could be unavailable.
+	  Support for the <app>Evolution</app> addressbook will only be available
+	  if the <app>evolution-data-server</app> and its development files
+	  were present when <app>gLabels</app> was built. Please keep this in mind if you build <app>gLabels</app>
+	  directly from source.</p>
+	
+	<p>If the <app>gLabels</app> package from your distribution lacks this support,
+	  you may wish to contact the package maintainer or file a bug against the package
+	  to request it.</p>
+      </note>
+
+      <p>In <app>glabels</app> we have created a new <app>gLabels</app>
+        document using the Avery 5512 "Address Labels" template. Next we use the
+        <guiseq> <gui>Objects</gui>
+        <gui>Merge Properties</gui></guiseq> menu item to display
+        the <gui>Merge properties</gui> dialog. We use this dialog to
+        select the source type (in our case <gui>Data from default Evolution
+	addressbook</gui>) as shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex3-1.png" mime="image/png" style="right">
+      		<p>Merge properties dialog</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Once we have chosen <gui>Data from default Evolution addressbook
+	</gui> as our merge source, we will get a full list of its content. Initially,
+	all entries are checked. Assuming we were planning a really big party, we could
+	leave this selection untouched (but let's keep our budget in mind). We will now select or
+	unselect certain entries by clicking on the appropriate checkboxes, or we could use
+	the <gui>Select all</gui> and <gui>Unselect all
+	</gui> buttons to activate or deactivate all entries in the address book.</p>
+ 
+      <p>We can also view each entry in more detail by clicking on the appropriate
+        expander (the little triangles) as shown. Once we are satisfied with the
+        selections in this dialog, we will click the <gui>OK</gui> button to
+	accept the changes.</p>
+
+      <p>Now we start adding objects to our glabels document as shown.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex3-2.png" mime="image/png" style="right">
+      		<p>Adding objects</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>In this example we have a single text object again. This text object contains
+        all of our merge fields organized on multiple lines as a mailing address.</p>
+
+      <p>Now we can print our address labels by selecting the
+        <guiseq> <gui>File</gui>
+        <gui>Print</gui> </guiseq> menu item. This will display
+        the print dialog as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex2-3.png" mime="image/png" style="right">
+      		<p>Printing address labels</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Just to make sure our labels are going to look okay, we select the
+        <gui>Print outlines</gui> option and click
+        <gui>Print Preview</gui>. This will display a print preview dialog
+        as shown below.</p>
+
+      <!-- ==== Figure ==== -->
+		<media type="image" src="figures/merge-ex3-4.png" mime="image/png" style="right">
+      		<p>Addess labels preview</p>
+    		</media>
+      <!-- ==== End of Figure ==== -->
+
+      <p>Everything looks good, so we can now load up our printer with
+        the appropriate label stock, print our address labels and start mailing
+        our party invitations.</p>
+
+
+</page>

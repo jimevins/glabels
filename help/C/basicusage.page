@@ -1,0 +1,90 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="basicusage">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      Handling files and quit the application.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+   <title>Basic usage</title>
+    
+    <section>
+    <title>To open a file</title>
+
+      <p>To open a file, choose 
+        <guiseq><gui>File</gui><gui>Open</gui>
+	</guiseq> to display the <gui>Open File</gui> dialog.
+        Select the file that you want to open, then click
+        <gui>OK</gui>. The file is displayed in the display area
+        of the <app>gLabels</app> window. </p>
+
+      <p>You can also open multiple files in
+        <app>gLabels</app>. The application creates a separate
+        application window for each open file.</p>
+
+      <p>The application records the paths and filenames of the
+        most recent files that you have edited and displays the files as menu
+        items on the <guiseq><gui>File</gui><gui>Recent Files</gui>
+        </guiseq> menu.</p>
+     </section>
+
+     <section id="closefile">
+    <title>To close a file</title>
+
+      <p>To close the current document, choose
+        <guiseq><gui>File</gui>
+        <gui>Close</gui></guiseq> to close the application
+        window.  If the current document is modified, a confirmation dialog
+        will be presented, allowing you to save the document or cancel
+        the command.  If the window being closed is the only open window,
+        <app>gLabels</app> will exit.</p>
+     </section>
+     
+     <section>
+    <title>To save a file</title>
+
+      <p>You can save files in the following ways:</p>
+
+      <list><item>
+
+	  <p>To save changes to an existing file, choose 
+            <guiseq><gui>File</gui>
+            <gui>Save</gui></guiseq>. </p>
+
+	</item>
+        <item>
+
+	  <p>To save a new file or to save an existing file under a new
+            filename, choose <guiseq><gui>File</gui>
+            <gui>Save As</gui></guiseq>. Enter a name
+            for the file in the <gui>Save As</gui> dialog box,
+            then click <gui>OK</gui>.</p>
+
+	</item>
+      </list>
+     </section>
+
+     <section>
+    <title>To quit <app>gLabels</app></title>
+
+      <p>To quit <app>gLabels</app>, choose <guiseq><gui>File</gui>
+        <gui>Quit</gui></guiseq>. This is equivalent to closing all open windows. 
+        See <link xref="basicusage#closefile"/>.</p>
+     </section>
+</page>

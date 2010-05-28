@@ -1,0 +1,129 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="select">
+
+  <info>
+    <link type="guide" xref="index#usage"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+      How to select objects.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+    <title>To select objects</title>
+
+      <p>A prerequisite for performing operations on objects is the
+        selection of individual objects or groups of objects.  The
+        display area must be in the object selection mode to create new
+        selections, as indicated by an arrow cursor.  The object
+        selection mode is selected by the
+        <guiseq><gui>Objects</gui>
+        <gui>Select Mode</gui></guiseq> menu item,
+        or the corresponding command on the <gui>Drawing
+        Toolbar</gui>.</p>
+
+      <section>
+	  <title>Selecting a single object</title>
+	    <p>A single object can be selected simply by clicking
+             on the desired object in the display area.
+             Once selected the object will be highlighted with a set of
+             resizing handles.</p>
+	</section>
+
+	<section>
+	  <title>Aggregate object selections</title>
+	    <p>Multiple objects can be selected by first selecting the first
+              object as above and then by holding the <key>Ctrl</key>
+              key while selecting additional objects.
+              Individual objects can be added to an existing selection
+              at any time by holding the <key>Ctrl</key> key while
+              selecting the desired objects.  All objects can also be
+              selected by using the <guiseq><gui>Edit</gui>
+              <gui>Select All</gui></guiseq>
+              menu item.  All objects in an aggregate object selection will be
+              highlighted.</p>
+	</section>
+
+	<section>
+	  <title>Area selections</title>
+	  
+	    <p>Multiple objects can also be selected by clicking an empty
+              area and dragging to form a rectangular area.  When released,
+              all objects contained in the area will form an aggregate
+              selection.  An area selection can be used to add to an existing
+              selection by holding the <key>Ctrl</key> key while
+              performing the selection.</p>
+	  
+	</section>
+
+	<section>
+	  <title>Unselecting objects</title>
+	  
+	    <p>Individual objects can be removed from an existing
+              selection by holding the <key>Ctrl</key> key while
+              clicking on a previously selected object.  An entire selection
+              can be dismissed by using the <guiseq>
+	      <gui>Edit</gui> <gui>Un-select All</gui>
+              </guiseq> menu item
+              or by simply clicking any empty space in the display area.
+              Once an object is unselected its highlight is removed.</p>
+	  
+	</section>
+
+    <section id="clipboard"> 
+      <title>Clipboard Commands</title>
+
+      <p>Object selections can be manipulated using the standard clipboard
+        operations <gui>Cut</gui>,
+        <gui>Copy</gui>, <gui>Paste</gui>,
+        and <gui>Delete</gui>.</p>
+
+	<section>
+	  <title><gui>Cut</gui> (<keyseq><key>Ctrl</key><key>X</key></keyseq>)</title>
+	  
+	    <p>Moves selected objects to the clipboard.  The objects are
+              then available for pasting back into the current document or
+              another document.</p>
+	  
+	</section>
+
+	<section>
+	  <title><gui>Copy</gui> (<keyseq><key>Ctrl</key><key>C</key></keyseq>)</title>
+	  
+	    <p>Copies selected objects to the clipboard without deleting
+              them.  The objects are then available for pasting back into
+              the current document or another document.</p>
+	  
+	</section>
+
+	<section>
+	  <title><gui>Paste</gui> (<keyseq><key>Ctrl</key><key>V</key></keyseq>)</title>
+	  
+	    <p>Pastes objects from the clipboard into the current document.
+              <app>gLabels</app> can only paste objects from
+              another <app>gLabels</app> document.</p>
+	  
+	</section>
+
+	<section>
+	  <title><gui>Delete</gui> (<key>Del</key>)</title>
+	  
+	    <p>Deletes selected objects without placing them on the
+              clipboard.</p>
+	  
+	</section>
+       </section>
+
+</page>

@@ -1,0 +1,50 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="index">
+
+  <info>
+    <title type="link">gLabels label and business card designer</title>
+    <title type="text">gLabels label and business card designer</title>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+  <title>
+    <media type="image" mime="image/png" src="figures/glabels-logo.png">gLabels logo</media>
+    gLabels label and business card designer
+  </title>
+
+  <section id="intro" style="2column">
+    <title>Introduction</title>
+     <p>
+	The <app>gLabels</app> application is a lightweight program for creating labels and 
+	business cards for the GNOME desktop environment. It is designed to work with 
+	various laser/ink-jet peel-off label and business card sheets that you'll find 
+	at most office supply stores.
+     </p>
+  </section>
+
+  <section id="usage" style="2column">
+    <title>Usage</title>
+  </section>
+
+  <section id="merging" style="2column">
+    <title>Document Merging</title>
+  </section>
+
+  <section id="advanced" style="2column">
+    <title>Advanced usage</title>
+  </section>
+
+</page>
