@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels.help.glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-11 14:10+0000\n"
-"PO-Revision-Date: 2010-05-14 19:22+0200\n"
+"POT-Creation-Date: 2010-05-15 18:24+0000\n"
+"PO-Revision-Date: 2010-05-29 11:12+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -395,7 +395,7 @@ msgstr ""
 
 #: C/glabels.xml:186(title)
 msgid "When You Start <application>gLabels</application>"
-msgstr ""
+msgstr "Al iniciar <application>gLabels</application>"
 
 #: C/glabels.xml:187(para)
 msgid ""
@@ -764,7 +764,7 @@ msgstr ""
 
 #: C/glabels.xml:520(guilabel)
 msgid "print crop marks"
-msgstr ""
+msgstr "imprimir marcas de corte"
 
 #: C/glabels.xml:521(para)
 msgid ""
@@ -868,7 +868,7 @@ msgstr ""
 
 #: C/glabels.xml:627(title)
 msgid "To Select Objects"
-msgstr ""
+msgstr "Seleccionar objetos"
 
 #: C/glabels.xml:629(para)
 msgid ""
@@ -883,7 +883,7 @@ msgstr ""
 
 #: C/glabels.xml:642(term)
 msgid "Selecting a single object"
-msgstr ""
+msgstr "Seleccionar un único objeto"
 
 #: C/glabels.xml:644(para)
 msgid ""
@@ -1520,7 +1520,7 @@ msgstr ""
 #: C/glabels.xml:1252(title) C/glabels.xml:1370(title)
 #: C/glabels.xml:1488(title)
 msgid "Adding objects"
-msgstr ""
+msgstr "Añadir objetos"
 
 #. ==== End of Figure ====
 #: C/glabels.xml:1263(para)
@@ -1735,7 +1735,7 @@ msgstr ""
 
 #: C/glabels.xml:1551(title)
 msgid "Manually Creating New Templates"
-msgstr ""
+msgstr "Crear manualmente plantillas nuevas"
 
 #: C/glabels.xml:1553(para)
 msgid ""
@@ -1845,7 +1845,7 @@ msgstr "Descripción"
 
 #: C/glabels.xml:1646(para) C/glabels.xml:2182(para)
 msgid "brand"
-msgstr ""
+msgstr "marca"
 
 #: C/glabels.xml:1648(para)
 msgid "Brand or manufacturer of stationary product. E.g. \"Avery\""
@@ -1877,7 +1877,7 @@ msgstr ""
 
 #: C/glabels.xml:1673(para)
 msgid "_description"
-msgstr ""
+msgstr "_descripción"
 
 #: C/glabels.xml:1675(para)
 msgid ""
@@ -1926,7 +1926,7 @@ msgstr ""
 
 #: C/glabels.xml:1732(para)
 msgid "Height of label/card"
-msgstr ""
+msgstr "Altura de la etiqueta/tarjeta"
 
 #: C/glabels.xml:1735(para)
 msgid "round"
@@ -1940,7 +1940,7 @@ msgstr ""
 
 #: C/glabels.xml:1742(para)
 msgid "x_waste"
-msgstr ""
+msgstr "x_waste"
 
 #: C/glabels.xml:1744(para)
 msgid ""
@@ -1950,7 +1950,7 @@ msgstr ""
 
 #: C/glabels.xml:1750(para)
 msgid "y_waste"
-msgstr ""
+msgstr "y_waste"
 
 #: C/glabels.xml:1752(para)
 msgid ""
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: C/glabels.xml:1853(para)
 msgid "hole"
-msgstr ""
+msgstr "agujero"
 
 #: C/glabels.xml:1854(para)
 msgid "Radius of concentric hole"
@@ -2078,7 +2078,7 @@ msgstr ""
 
 #: C/glabels.xml:1970(para)
 msgid "y2"
-msgstr ""
+msgstr "y2"
 
 #: C/glabels.xml:1972(para)
 msgid "y coordinate of 2nd endpoint of the line segment."
@@ -2110,7 +2110,7 @@ msgstr ""
 
 #: C/glabels.xml:2016(para)
 msgid "Radius of circle."
-msgstr ""
+msgstr "Radio del círculo."
 
 #: C/glabels.xml:2025(title)
 msgid "Markup-rect Node"
@@ -2134,7 +2134,7 @@ msgstr "w"
 
 #: C/glabels.xml:2060(para)
 msgid "Width of rectangle."
-msgstr ""
+msgstr "Anchura del rectángulo."
 
 #: C/glabels.xml:2064(para)
 msgid "h"
@@ -2142,7 +2142,7 @@ msgstr "h"
 
 #: C/glabels.xml:2066(para)
 msgid "Height of rectangle."
-msgstr ""
+msgstr "Altura del rectángulo."
 
 #: C/glabels.xml:2070(para)
 msgid "r"
@@ -2167,7 +2167,7 @@ msgstr ""
 
 #: C/glabels.xml:2105(para)
 msgid "nx"
-msgstr ""
+msgstr "nx"
 
 #: C/glabels.xml:2107(para)
 msgid "Number of labels/cards across in the grid (horizontal)"
@@ -2175,7 +2175,7 @@ msgstr ""
 
 #: C/glabels.xml:2112(para)
 msgid "ny"
-msgstr ""
+msgstr "ny"
 
 #: C/glabels.xml:2114(para)
 msgid "Number of labels/cards up and down in the grid (vertical)"
@@ -2195,7 +2195,7 @@ msgstr ""
 
 #: C/glabels.xml:2133(para)
 msgid "dx"
-msgstr ""
+msgstr "dx"
 
 #: C/glabels.xml:2134(para)
 msgid "Horizontal pitch of grid."
@@ -2203,7 +2203,7 @@ msgstr ""
 
 #: C/glabels.xml:2137(para)
 msgid "dy"
-msgstr ""
+msgstr "dy"
 
 #: C/glabels.xml:2138(para)
 msgid "Vertical pitch of grid."
