@@ -251,7 +251,7 @@ draw_swatch (glColorSwatch *this,
                 line_color = gl_color_from_gdk_color (&style->fg[GTK_STATE_INSENSITIVE]);
         }
 
-        cairo_rectangle( cr, 0, 0, w-1, h-1 );
+        cairo_rectangle( cr, 1, 1, w-2, h-2 );
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (fill_color));
         cairo_fill_preserve( cr );

@@ -246,7 +246,7 @@ draw_sample (glFontSample *this,
 
         cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
 
-        cairo_rectangle( cr, 0, 0, w-1, h-1 );
+        cairo_rectangle( cr, 1, 1, w-2, h-2 );
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (fill_color));
         cairo_fill_preserve( cr );
@@ -265,7 +265,7 @@ draw_sample (glFontSample *this,
         pango_font_description_set_family (desc, this->priv->font_family);
         pango_font_description_set_weight (desc, PANGO_WEIGHT_NORMAL);
         pango_font_description_set_style  (desc, PANGO_STYLE_NORMAL);
-        pango_font_description_set_size   (desc, 0.6 * h * PANGO_SCALE);
+        pango_font_description_set_size   (desc, 0.6 * (h-1) * PANGO_SCALE);
         
         pango_layout_set_font_description (layout, desc);
         pango_font_description_free       (desc);
