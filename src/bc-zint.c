@@ -100,7 +100,7 @@ gl_barcode_zint_new (const gchar          *id,
   /*
 	 * With the size and scale set, send a request to Zint renderer
 	 */
-	if (!ZBarcode_Render(symbol, (unsigned int) text_flag)) {
+	if (!ZBarcode_Render(symbol, (unsigned int) !text_flag)) {
 		ZBarcode_Delete(symbol);
 		g_message("Zint Rendering Error: %s", symbol->errtxt);
 		return NULL;
@@ -127,9 +127,9 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
 
-	zint_render      *render;
-	zint_render_line *zline;
-	zint_render_char *zchar;
+	struct zint_render      *render;
+	struct zint_render_line *zline;
+	struct zint_render_char *zchar;
 
 	render = symbol->rendered;
 	gbc = g_new0(glBarcode, 1);
@@ -149,6 +149,9 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 		line->y = (double) zline->y;
 
 		gbc->lines = g_list_append (gbc->lines, line);
+
+		// g_message ("Zint Adding Line at: %f x %f dim: %f x %f", line->x, line->y, line->width, line->length);
+		zline = zline->next;
 	}
 
 	/*
