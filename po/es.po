@@ -1,13 +1,14 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-05-27 00:09+0000\n"
-"PO-Revision-Date: 2010-05-26 20:31+0200\n"
+"POT-Creation-Date: 2010-05-28 18:04+0000\n"
+"PO-Revision-Date: 2010-05-30 11:37+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -510,9 +511,8 @@ msgid "cannot open glabels file %s\n"
 msgstr "No se puede abrir el archivo %s\n"
 
 #: ../src/glabels.c:81
-#, fuzzy
 msgid "Launch gLabels label and business card designer."
-msgstr "Un programa de creación de etiquetas y tarjetas de visita.\n"
+msgstr "Lanzar el diseñador de etiquetas y de tarjetas de visita gLabels."
 
 #: ../src/label-barcode.c:154 ../src/ui.c:319
 msgid "Create barcode object"
@@ -716,8 +716,6 @@ msgid "Any"
 msgstr "Cualquiera"
 
 #: ../src/media-select.c:358 ../src/media-select.c:871
-#, fuzzy
-#| msgid "Any"
 msgctxt "Page size"
 msgid "Any"
 msgstr "Cualquiera"
@@ -733,11 +731,8 @@ msgid "No recent templates found."
 msgstr "No se encontraron plantillas recientes."
 
 #: ../src/media-select.c:970
-#, fuzzy
 msgid "Try selecting a template in the \"Search all\" tab."
-msgstr ""
-"Inténtelo seleccionando una plantilla en la página «Buscar todas las "
-"plantillas»."
+msgstr "Inténtelo seleccionando una plantilla en la solapa «Buscar todo."
 
 #. Translators: "No match" means that for the given template search criteria, there
 #. * were no matches found.
@@ -1490,7 +1485,6 @@ msgstr ""
 "Sergio Rivadero <sergiorivadero@argentina.com>, 2005"
 
 #: ../src/ui-commands.c:1161
-#, fuzzy
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1502,13 +1496,13 @@ msgid ""
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
 "GNU General Public License for more details.\n"
 msgstr ""
-"Glabels es software libre; Puede modificarlo y redistribuirlo\n"
+"gLabels es software libre; Puede modificarlo y redistribuirlo\n"
 " bajo los términos de la Licencia Pública General de GNU tal\n"
 "como es publicada por la Free Software Foundation; ya sea la \n"
 "versión 2 de dicha licencia, o (a su opción) cualquier otra versión \n"
 "posterior.\n"
 "\n"
-"Este programa se distribuye con la esperanza que le será útil, pero\n"
+"gLabels se distribuye con la esperanza de que le será útil, pero\n"
 "SIN NINGUNA GARANTÍA; incluso sin la garantía implícita de\n"
 "MERCANTILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR; \n"
 "Para más detalles vea la Licencia Pública General de GNU.\n"
@@ -1616,9 +1610,9 @@ msgstr ""
 "instalado correctamente."
 
 #: ../libglabels/db.c:2128
-#, fuzzy, c-format
+#, c-format
 msgid "%s full page label"
-msgstr "Página de plantilla genérica %s"
+msgstr "Etiqueta a página completa %s"
 
 #: ../libglabels/template.c:156
 #, c-format
@@ -2017,7 +2011,7 @@ msgstr "Alineación derecha"
 
 #: ../data/ui/template-designer.ui.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
-msgstr "(por ej., \"Etiquetas para correo,\" \"Tarjetas de negocio,\" ...)"
+msgstr "(por ej., \"Etiquetas para correo,\" \"Tarjetas de visita,\" ...)"
 
 #: ../data/ui/template-designer.ui.h:2
 msgid "(e.g., 8163A)"
@@ -2237,9 +2231,8 @@ msgid "<b>Copies</b>"
 msgstr "<b>Copias</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-#, fuzzy
 msgid "<b>Merge Control</b>"
-msgstr "<b>Control de impresión (mezclar)</b>"
+msgstr "<b>Control de mezcla</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "<b>Options</b>"
@@ -2275,12 +2268,11 @@ msgstr "hasta:"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:1
 msgid "Create labels, business cards and media covers"
-msgstr "Crear etiquetas, tarjetas de negocios y portadas"
+msgstr "Crear etiquetas, tarjetas de visita y portadas"
 
 #: ../data/desktop/glabels-3.0.desktop.in.h:2
-#, fuzzy
 msgid "gLabels Label Designer 3"
-msgstr "Diseñador de etiquetas gLabels"
+msgstr "Diseñador de etiquetas gLabels 3"
 
 #: ../data/mime/glabels-3.0.xml.in.h:1
 msgid "gLabels Project File"
@@ -2418,7 +2410,7 @@ msgstr "Cualquier etiqueta"
 #. ===================================================================
 #: ../templates/categories.xml.h:3 ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita"
 
 #: ../templates/categories.xml.h:4
 msgid "CD/DVD or other media"
@@ -2466,7 +2458,7 @@ msgstr "Etiquetas de dirección"
 #: ../templates/misc-iso-templates.xml.h:12
 #: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita"
 
 #. ===================================================================
 #. ===============================================================
@@ -2890,35 +2882,27 @@ msgstr "Etiquetas de botella"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:10
 msgid "Business cards glossy, both sides printable"
-msgstr ""
+msgstr "Tarjetas de visita satinadas, imprimibles por ambas caras"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:12
-#, fuzzy
-#| msgid "Business cards"
 msgid "Business cards high glossy"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita muy satinadas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:14
-#, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita perforadas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:16
-#, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched dull"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita perforadas mate"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:18
-#, fuzzy
-#| msgid "Business cards"
 msgid "Business cards punched glossy"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita perforadas satinadas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:22
@@ -2927,15 +2911,13 @@ msgstr "Etiquetas de disquete"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:24
-#, fuzzy
-#| msgid "Business cards"
 msgid "Foldable business cards"
-msgstr "Tarjetas de negocio"
+msgstr "Tarjetas de visita plegables"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:26
 msgid "Foldable business cards glossy/dull"
-msgstr ""
+msgstr "Etiquetas de visita plegables brillantes/mate"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:28
@@ -2955,24 +2937,22 @@ msgstr "Etiquetas A6"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:34
 msgid "Membership cards"
-msgstr ""
+msgstr "Tarjetas de socio"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:36
 msgid "Membership cards, both sides printable"
-msgstr ""
+msgstr "Tarjetas de socio, imprimible por ambas caras"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:38
-#, fuzzy
-#| msgid "name_page"
 msgid "Name plates"
-msgstr "nombre_de_la_página"
+msgstr "Placas de nombre"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:40
 msgid "Passport photo labels glossy"
-msgstr ""
+msgstr "Etiquetas satinadas para fotos de pasaporte"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:42
@@ -2982,7 +2962,7 @@ msgstr "Etiquetas para fotos"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:44
 msgid "Photo labels semiglossy"
-msgstr ""
+msgstr "Etiquetas para fotos semi-satinadas"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:48
@@ -2992,12 +2972,12 @@ msgstr "Etiquetas para tarjetas SD"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:50
 msgid "Self-adhesive film transparent"
-msgstr ""
+msgstr "Capa transparente autoadhesiva"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:52
 msgid "Self-adhesive film weatherproof"
-msgstr ""
+msgstr "Capa autoadhesiva resistente a la intemperie"
 
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:54
@@ -3007,7 +2987,7 @@ msgstr "Etiquetas autoadhesivas"
 #. ===================================================================
 #: ../templates/pearl-iso-templates.xml.h:56
 msgid "Self-adhesive window film"
-msgstr ""
+msgstr "Capa autoadhesiva para ventanas"
 
 # REVISAR
 #. ===================================================================
