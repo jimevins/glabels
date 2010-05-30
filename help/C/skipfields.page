@@ -1,0 +1,57 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="guide"
+      id="mergeskipfields">
+
+  <info>
+    <link type="guide" xref="index#merging"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-05-04" status="incomplete"/>
+    <desc>
+	How to skip blank address lines when doing a document merge.
+    </desc>
+    <credit type="author">
+      <name>Jim Evins</name>
+      <email>evins@snaught.com</email>
+    </credit>
+    <credit type="author">
+      <name>Mario Blättermann</name>
+      <email>mariobl@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+  </info>
+
+  <title>Skipping blank address lines</title>
+
+  <p>This feature can be best described by a simple example.  In the
+  following CSV file, column 5 (ADDR2) contains the second address line
+  for each record.  This field is empty in records 1 and 2, but not in
+  record 3. (For this feature to work, the field must be completely
+  empty -- any text, including spaces will defeat this feature.)</p>
+
+  <code>
+  LAST,FIRST,MI,ADDR1,ADDR2,CITY,STATE,ZIP
+  Summers,Joyce,,"1630 Revello Dr",,Sunnydale,CA,95037
+  McGarret,Steve,O,"404 Piikoi Street",,Honolulu,HI,96813
+  Kramer,Cosmo,,"Apt 5B","129 W. 81 St.","New York",NY,10024-7207
+  </code>
+
+  <p>In the following screenshot, a single multiline text object has been
+  created to format these addresses.  Notice that ${ADDR2} representing
+  the second address line is on a line by itself.  (Any additional text
+  on this line, including spaces would defeat this feature.)</p>
+
+  <media type="image" src="figures/skip-fields-screenshot.png" mime="image/png" style="right">
+  <p>Multi-line address</p>
+  </media>
+
+  <p>Printing this label results in the following output.  Notice that the
+  line containing the ${ADDR2} field is completely skipped for the first
+  two records, without printing a blank line.</p>
+
+  <media type="image" src="figures/skip-fields-output.png" mime="image/png" style="right">
+  <p>Output</p>
+  </media>
+
+</page>
