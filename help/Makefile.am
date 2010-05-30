@@ -40,6 +40,7 @@ DOC_PAGES = \
 		multifile.page		\
 		newlabel.page		\
 		printfile.page		\
-		select.page
+		select.page		\
+		skipfields.page
 
 DOC_LINGUAS = cs de es fr sl
