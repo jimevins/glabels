@@ -386,6 +386,7 @@ object_at (glLabelObject *object,
 
         gl_label_object_get_size (object, &w, &h);
 
+        cairo_new_path (cr);
         cairo_move_to (cr, 0, 0);
         cairo_line_to (cr, w, h);
 

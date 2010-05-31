@@ -477,6 +477,7 @@ object_at (glLabelObject *object,
 
         gl_label_object_get_size (object, &w, &h);
 
+        cairo_new_path (cr);
         cairo_rectangle (cr, 0.0, 0.0, w, h);
 
         if (cairo_in_fill (cr, x, y))

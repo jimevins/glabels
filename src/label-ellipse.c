@@ -478,6 +478,7 @@ object_at (glLabelObject *object,
 
         gl_label_object_get_size (object, &w, &h);
 
+        cairo_new_path (cr);
         gl_cairo_ellipse_path (cr, w/2, h/2);
 
         if (cairo_in_fill (cr, x, y))

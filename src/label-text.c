@@ -1208,6 +1208,7 @@ object_at (glLabelObject *object,
 
         if ( (x >= 0) && (x <= w) && (y >= 0) && (y <= h) )
         {
+                cairo_new_path (cr);
                 set_text_path (GL_LABEL_TEXT (object), cr, TRUE, NULL);
                 if (cairo_in_fill (cr, x, y))
                 {
@@ -1217,6 +1218,7 @@ object_at (glLabelObject *object,
 
         if (gl_label_object_is_selected (object))
         {
+                cairo_new_path (cr);
                 cairo_rectangle (cr, 0, 0, w, h);
                 if (cairo_in_stroke (cr, x, y))
                 {
