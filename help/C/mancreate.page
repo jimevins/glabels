@@ -25,20 +25,17 @@
     <title>Manually creating new templates</title>
 
     <p>Predefined templates are defined by XML files located in
-      <file>${prefix}/share/glabels/</file>,
-      where <file>${prefix}</file> is usually something like
-      <file>/usr/local</file> or <file>/usr</file> depending
-      on the configuration option <file>prefix</file>.  gLabels will
-      use all files of the form <file>*-templates.xml</file>
-      or <file>*.template</file>, that it finds in
-      <file>${prefix}/share/glabels/</file> and
-      <file>${HOME}/.glabels/</file>.
-      Additional templates can be added by creating additional
-      <file>*.template</file> files in either of these directories.
+      either <file>/usr/share/libglabels-3.0/templates/</file> or
+      <file>/usr/local/share/libglabels-3.0/templates/</file>,
+      depending on where glabels was installed.  Glabels will
+      also search for user defined templates in the directory
+      <file>${HOME}/.config/libglabels/templates/</file>.  User
+      defined template files should be named with a 
+      <file>*.template</file> extension.
       </p>
 
     <p>The format for these files is defined in the DTD:
-      <link href="http://glabels.sourceforge.net/doc/glabels-2.0.dtd.txt">glabels-2.2.dtd</link>.
+      <link href="http://glabels.org/xmlns/2.3/glabels-2.3.dtd.txt">glabels-2.3.dtd</link>.
       (This DTD also describes other XML formats used by glabels.)</p>
 
     <section id="template-assumptions">
@@ -201,9 +198,12 @@
 </table>
 
       <!-- ==== Figure ==== -->
-		<media type="image" src="figures/glabels-template-label.png" mime="image/png" style="right">
+      <figure>
+      		<desc>Label-rectangle parameters</desc>
+		<media type="image" src="figures/glabels-template-rect-label.png" mime="image/png" style="right">
       		<p>Label-rectangle parameters</p>
     		</media>
+      </figure>
       <!-- ==== End of Figure ==== -->
 	</section>
 
@@ -238,9 +238,11 @@
 </table>
 
       <!-- ==== Figure ==== -->
-		<media type="image" src="figures/glabels-template-ellipse.png" mime="image/png" style="right">
-      		<p>Label-ellipse parameters</p>
+      <figure>
+      		<desc>Label-ellipse parameters</desc>
+		<media type="image" src="figures/glabels-template-ellipse-label.png" mime="image/png" style="right">
     		</media>
+      </figure>
       <!-- ==== End of Figure ==== -->
 	</section>
 
@@ -269,6 +271,15 @@
                   backgrounds (e.g. images).</p></td>
   </tr>
 </table>
+
+      <!-- ==== Figure ==== -->
+      <figure>
+      		<desc>Label-ellipse parameters</desc>
+		<media type="image" src="figures/glabels-template-circle-label.png" mime="image/png" style="right">
+      		<p>Label-ellipse parameters</p>
+    		</media>
+      </figure>
+      <!-- ==== End of Figure ==== -->
     </section>
 
     <section id="template-label-cd-node">
@@ -307,11 +318,22 @@
 </table>
 
 	      <!-- ==== Figure ==== -->
-		<media type="image" src="figures/glabels-template-cd.png" mime="image/png" style="right">
+	      <figure>
+      		<desc>Label-cd parameters</desc>
+		<media type="image" src="figures/glabels-template-cd-label.png" mime="image/png" style="right">
       		<p>CD label parameters</p>
     		</media>
+	      </figure>
 	      <!-- ==== End of Figure ==== -->
     </section>
+
+    <section id="template-markup">
+      <title>Markup Nodes</title>
+
+      <p>Templates may contain optional markup nodes.  These nodes are used to describe
+      a simple set of markup lines that are visible in the glabels drawing canvas, but
+      not visible when printed.  These lines can represent margins, fold lines, center lines,
+      special areas, or other helpful hints to the user of a template.</p>
 
     <section id="template-markup-margin-node">
       <title>Markup-margin Node</title>
@@ -414,6 +436,35 @@
 </table>
     </section>
 
+    <section id="template-markup-ellipse-node">
+      <title>Markup-ellipse Node</title>
+
+      <p>A <em>Markup-ellipse</em> describes a markup ellipse.</p>
+
+<table frame="all" rules="rows">
+  <tr>
+    <td><p>Property</p></td>  <td><p>Description</p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>  <td><p></p></td>
+  </tr>
+  <tr>
+    <td><p>x1</p></td>  <td><p>x coordinate of upper left corner of ellipse.</p></td>
+  </tr>
+  <tr>
+    <td><p>y1</p></td>  <td><p>y coordinate of upper left corner of ellipse.</p></td>
+  </tr>
+  <tr>
+    <td><p>w</p></td>  <td><p>Width of ellipse.</p></td>
+  </tr>
+  <tr>
+    <td><p>h</p></td>  <td><p>Height of ellipse.</p></td>
+  </tr>
+</table>
+    </section>
+
+    </section>
+
     <section id="template-layout-node">
       <title>Layout Node</title>
 
@@ -454,9 +505,12 @@
 </table>
 
 	      <!-- ==== Figure ==== -->
+	      <figure>
+      		<desc>Layout parameters</desc>
 		<media type="image" src="figures/glabels-template-layout.png" mime="image/png" style="right">
       		<p>Layout Parameters</p>
     		</media>
+	      </figure>
 	      <!-- ==== End of Figure ==== -->
     </section>
 
