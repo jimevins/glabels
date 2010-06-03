@@ -1,8 +1,86 @@
+* gLabels 2.3.0 (unstable) release.  Release date 2010-06-06
+
+- Removed use of deprecations in platform:
+  - Migrated from libglade to GtkBuilder
+  - Removed all dependencies on libgnome and libgnomeui
+  - Removed all GTK+ and GLIB deprecations as of GNOME 2.30
+  - Use accessor functions in GTK+ and GLIB
+- Major refactoring of code
+- Added Undo/Redo capability
+- GnuBarcode backend is now optional and is no longer distributed with glabels
+- IEC16022 (datamatrix) barcode backend is now optional and is no longer
+  distributed with glabels
+- Added optional IEC18004 (QRCode) barcode backend
+- Added optional Zint barcode backend (currently ony supports GS1-128, but
+  other barcodes will be supported by this backend in the future).
+- Now uses "XDG Base Directory Specification" to locate user templates
+- New wizard based "New Label" dialog
+- Can now manage user created templates from within glabels
+- New "Insert Field" button
+- Allow pasting of images and text from other apps as new objects
+- Fixed focus problems which prevented proper copy and paste operation
+  within the text editor
+- CSV merge backend can now harvest 1st line of CSV file for field names
+- New font selection widget
+- New color selection widget
+- Support parallel installation with older versions of glabels
+- Updated license to GPL3+
+
+
+* gLabels 2.2.8 (stable) release.  Release date 2010-04-19
+
+- Fix crash caused by new g_new macros in glib-2.24.0
+- Removed extra padding in "New label" dialog
+- New Norwegian bokmål translation (Kjartan Maraas)
+- New Portuguese translation (Filipe Roque)
+- Updated Japanese translation (Takeshi AIHANA)
+- Updated Spanish translation (Jorge González)
+- Updated Fresh translation (Bruno Brouard)
+- Updated German translation (Mario Blättermann)
+- Updated Slovenian translation (Andrej Žnidaršič)
+- Updated Czech translation (Marek Černocký)
+- New templates
+
+
+* gLabels 2.2.7 (stable) release.  Release date 2010-03-01
+
+- Fixed limitation on encoded image sizes (fix only valid if libxml 2.7+ is installed)
+- Fixed focus behavior of canvas so that focus does not get stolen when
+  highlighting text in the object editor
+- New Slovenian translation (Andrej Žnidaršič)
+- New Danish translation (Joe Hansen)
+- Updated Czech translation (Marek Cernocky)
+- Updated German translation (Mario Blättermann)
+- Updated German help manual translation (Mario Blättermann)
+- New French translation of help manual (Alain Lojewski and Claude Paroz)
+- New Czech translation of help manual (Marek Cernocky)
+- New Spanish translation of help manual (Jorge González)
+- New templates
+
+
+* gLabels 2.2.6 (stable) release.  Release date 2009-11-11
+
+- Fixed drawing artifact with round labels.
+- Fixed several memory issues.
+- Fixed several UI inconsistencies when changing merge source.
+- Fixed potiential crash when doing a document merge.
+- Now makes a better guess at locale defaults (page size and units).
+- Updated user documentation (Mario Blättermann).
+- Updated swedish translation (Daniel Nylander).
+- Updated german translation (Mario Blättermann).
+- Updated russian translation (Alexandre Prokoudine)
+- Updated french translation (Claude Paroz)
+- New chinese translation (Careon)
+- New catalan translation (David Planella)
+- Updated german translation of user documentation (Mario Blättermann).
+- New templates.
+
+
 * gLabels 2.2.5 (stable) release.  Release date 2009-04-30
 
 - Fixed spinbutton/adjustment bugs that made glabels unusable with Gtk 2.16.
 - Fixed default preview colors in color combos.
-- Updated german translation (Mario Bl�ttermann).
+- Updated german translation (Mario Blättermann).
 - New templates.
 
 
@@ -121,7 +199,7 @@
 - Replaced libbonoboui with GtkUIManager (now requires Gnome 2.10 and GTK+ 2.6)
 - Updated Russian translation (Vitaly Lipatov)
 - Updated Spanish translation (Sergio Rivadero)
-- Updated Czech translation (David Makovsk� and Zbynek Mrkvick)
+- Updated Czech translation (David Makovský and Zbynek Mrkvick)
 - Updated Italian translation (Daniele Medri)
 - Added documentation for libglabels
 - Minor bug fixes and cleanup
@@ -140,7 +218,7 @@
 - New cleaned-up icon
 - Added option to glabels-batch to allow selection of first label.
 - Added options to glabels-batch to allow selection of merge source and crop marks.
-  (José Dapena Paz)
+  (JosÃ© Dapena Paz)
 - Updated french translation (Florent Morel)
 - Fixed translation problem with object editor labels
 - Minor bug fixes and cleanup
