@@ -2183,7 +2183,7 @@ copy_old_custom_files (void)
 
                 if (dir)
                 {
-                        while (name = g_dir_read_name (dir))
+                        while ((name = g_dir_read_name (dir)) != NULL)
                         {
                                 old_full_name = g_build_filename (old_dir_name, name, NULL);
                                 new_full_name = g_build_filename (new_dir_name, name, NULL);

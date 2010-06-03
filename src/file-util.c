@@ -37,7 +37,7 @@ gl_file_util_add_extension (const gchar *orig_filename)
 	if (extension == NULL) {
 		new_filename = g_strconcat (orig_filename, ".glabels", NULL);
 	} else {
-		if (g_strcasecmp (extension, ".glabels") != 0) {
+		if (g_ascii_strcasecmp (extension, ".glabels") != 0) {
 			new_filename =
 			    g_strconcat (orig_filename, ".glabels", NULL);
 		} else {
@@ -61,7 +61,7 @@ gl_file_util_remove_extension (const gchar *orig_filename)
 
 	extension = strrchr (new_filename, '.');
 	if (extension != NULL) {
-		if (g_strcasecmp (extension, ".glabels") == 0) {
+		if (g_ascii_strcasecmp (extension, ".glabels") == 0) {
 			*extension = 0; /* truncate string, rm extension */
 		}
 	}

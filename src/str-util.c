@@ -49,11 +49,11 @@ PangoAlignment
 gl_str_util_string_to_align (const gchar *string)
 {
 
-	if (g_strcasecmp (string, "Left") == 0) {
+	if (g_ascii_strcasecmp (string, "Left") == 0) {
 		return PANGO_ALIGN_LEFT;
-	} else if (g_strcasecmp (string, "Center") == 0) {
+	} else if (g_ascii_strcasecmp (string, "Center") == 0) {
 		return PANGO_ALIGN_CENTER;
-	} else if (g_strcasecmp (string, "Right") == 0) {
+	} else if (g_ascii_strcasecmp (string, "Right") == 0) {
 		return PANGO_ALIGN_RIGHT;
 	} else {
 		return PANGO_ALIGN_LEFT;
@@ -83,9 +83,9 @@ PangoWeight
 gl_str_util_string_to_weight (const gchar *string)
 {
 
-	if (g_strcasecmp (string, "Regular") == 0) {
+	if (g_ascii_strcasecmp (string, "Regular") == 0) {
 		return PANGO_WEIGHT_NORMAL;
-	} else if (g_strcasecmp (string, "Bold") == 0) {
+	} else if (g_ascii_strcasecmp (string, "Bold") == 0) {
 		return PANGO_WEIGHT_BOLD;
 	} else {
 		return PANGO_WEIGHT_NORMAL;
