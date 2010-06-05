@@ -19,6 +19,9 @@ template files and document files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lgl_xml_template_read_templates_from_file ##### -->
 <para>
 

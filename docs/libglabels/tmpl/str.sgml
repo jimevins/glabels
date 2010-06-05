@@ -18,6 +18,9 @@ possible use to a user of libglabels.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lgl_str_utf8_casecmp ##### -->
 <para>
 
@@ -35,6 +38,15 @@ possible use to a user of libglabels.
 
 @s1: 
 @s2: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_str_format_fraction ##### -->
+<para>
+
+</para>
+
+@x: 
 @Returns: 
 
 

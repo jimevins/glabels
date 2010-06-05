@@ -17,6 +17,9 @@ This section describes several functions for parsing vendor XML description file
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lgl_xml_vendor_read_vendors_from_file ##### -->
 <para>
 

@@ -18,6 +18,9 @@ and related functions.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT lglPaper ##### -->
 <para>
 This structure defines a paper (page) size.

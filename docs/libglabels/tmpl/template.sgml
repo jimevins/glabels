@@ -18,6 +18,9 @@ describes functions to help create and interpret these structures.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT lglTemplate ##### -->
 <para>
 This is the main structure of a libglabels template.  A template represents a single sheet
@@ -347,6 +350,16 @@ relative to the upper left corner of the page.
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_template_are_templates_identical ##### -->
+<para>
+
+</para>
+
+@template1: 
+@template2: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lgl_template_alias_new ##### -->
 <para>
 
@@ -488,6 +501,25 @@ relative to the upper left corner of the page.
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_template_frame_get_layout_description ##### -->
+<para>
+
+</para>
+
+@frame: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_template_frame_get_size_description ##### -->
+<para>
+
+</para>
+
+@frame: 
+@units: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lgl_template_layout_new ##### -->
 <para>
 
@@ -591,5 +623,13 @@ relative to the upper left corner of the page.
 </para>
 
 @markup: 
+
+
+<!-- ##### FUNCTION lgl_template_print ##### -->
+<para>
+
+</para>
+
+@template: 
 
 

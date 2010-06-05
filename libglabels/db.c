@@ -305,6 +305,15 @@ lgl_db_init (void)
 }
 
 
+/**
+ * lgl_db_notify_add:
+ * @func: Callback function to be called when database changes.
+ * @user_data: Passback user data to supply to callback function.
+ *
+ * Register a notification callback function to be called when the database changes.
+ *
+ * Returns: an ID for this notification registration.
+ */
 gulong
 lgl_db_notify_add (lglDbNotifyFunc func,
                    gpointer        user_data)
@@ -318,6 +327,12 @@ lgl_db_notify_add (lglDbNotifyFunc func,
 }
 
 
+/**
+ * lgl_db_notify_remove:
+ * @id: ID of notification registration to cancel (see lgl_db_notify_add()).
+ *
+ * Cancel a previous registration a notification callback function.
+ */
 void
 lgl_db_notify_remove  (gulong id)
 {
@@ -1526,6 +1541,16 @@ lgl_db_register_template (const lglTemplate *template)
 }
 
 
+/**
+ * lgl_db_delete_template_by_name:
+ * @name:  Name of template to be deleted.
+ *
+ * Delete a user defined template.  This function deletes a template from
+ * the template database. The individual XML file in the user template
+ * directory will also be removed.
+ *
+ * Returns: Status of registration attempt (#lglDbDeleteStatus)
+ */
 lglDbDeleteStatus
 lgl_db_delete_template_by_name (const gchar *name)
 {
@@ -1581,6 +1606,17 @@ lgl_db_delete_template_by_name (const gchar *name)
 }
 
 
+/**
+ * lgl_db_delete_template_by_brand_part:
+ * @brand:  Brand name or vendor of template to be deleted.
+ * @part:   Part name or number of template to be deleted.
+ *
+ * Delete a user defined template.  This function deletes a template from
+ * the template database. The individual XML file in the user template
+ * directory will also be removed.
+ *
+ * Returns: Status of registration attempt (#lglDbDeleteStatus)
+ */
 lglDbDeleteStatus
 lgl_db_delete_template_by_brand_part (const gchar  *brand,
                                       const gchar  *part)

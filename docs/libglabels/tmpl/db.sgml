@@ -18,6 +18,9 @@ the LibGlabels template database.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM lglDbRegStatus ##### -->
 <para>
 This enumeration defines a set of possible return values for lgl_db_register_template().
@@ -28,11 +31,48 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 @LGL_DB_REG_BRAND_PART_EXISTS: Registration failed because template with same brand and part name/number already exists.
 @LGL_DB_REG_FILE_WRITE_ERROR: Registration failed because an error while writing to disk.
 
+<!-- ##### ENUM lglDbDeleteStatus ##### -->
+<para>
+This enumeration defines a set of possible return values for lgl_db_delete_template_by_name() or lgl_db_delete_template_by_brand_part().
+</para>
+
+@LGL_DB_DELETE_OK: Deletion successful.
+@LGL_DB_DELETE_DOES_NOT_EXIST: Deletion failed because template with given brand and part name/number does not exist.
+@LGL_DB_DELETE_NOT_USER_DEFINED: Deletion failed because given template is not a user defined template.
+@LGL_DB_DELETE_FILE_ERROR: Deletion failed because of an error while attempting to remove template from disk.
+
 <!-- ##### FUNCTION lgl_db_init ##### -->
 <para>
 
 </para>
 
+@void: 
+
+
+<!-- ##### USER_FUNCTION lglDbNotifyFunc ##### -->
+<para>
+Defines the type of notify callback function to be called when database changes.
+</para>
+
+@user_data: Pointer to user data that is passed to the notify function.
+
+
+<!-- ##### FUNCTION lgl_db_notify_add ##### -->
+<para>
+
+</para>
+
+@func: 
+@user_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_notify_remove ##### -->
+<para>
+
+</para>
+
+@id: 
 
 
 <!-- ##### FUNCTION lgl_db_get_paper_id_list ##### -->
@@ -40,6 +80,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -56,6 +97,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -126,6 +168,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -142,6 +185,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -225,6 +269,25 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_db_delete_template_by_brand_part ##### -->
+<para>
+
+</para>
+
+@brand: 
+@part: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lgl_db_delete_template_by_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lgl_db_does_template_exist ##### -->
 <para>
 
@@ -266,6 +329,15 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 @Returns: 
 
 
+<!-- ##### FUNCTION lgl_db_get_similar_template_name_list ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lgl_db_free_template_name_list ##### -->
 <para>
 
@@ -298,6 +370,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -332,6 +405,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION lgl_db_print_known_categories ##### -->
@@ -339,6 +413,7 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION lgl_db_print_known_templates ##### -->
@@ -346,6 +421,15 @@ This enumeration defines a set of possible return values for lgl_db_register_tem
 
 </para>
 
+@void: 
+
+
+<!-- ##### FUNCTION lgl_db_print_known_vendors ##### -->
+<para>
+
+</para>
+
+@void: 
 
 
 <!-- ##### FUNCTION lgl_db_print_aliases ##### -->

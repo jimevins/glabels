@@ -19,6 +19,9 @@ supported by libglabels.  It also defines a set of related functions.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM lglUnits ##### -->
 <para>
 This enumeration defines supported units of distance.

@@ -221,9 +221,15 @@ span_non_digits (gchar **p)
 }
 
 
-/****************************************************************************/
-/* Create fractional representation of number, if possible.                 */
-/****************************************************************************/
+/**
+ * lgl_str_format_fraction:
+ * @x: Floating point number to convert to fractional notation
+ *
+ * Create fractional representation of number, if possible.  Uses UTF-8 superscripts and
+ * subscripts for numerator and denominator values respecively.
+ *
+ * Returns: UTF-8 string containing fractional representation of x.
+ */
 gchar *
 lgl_str_format_fraction (gdouble x)
 {

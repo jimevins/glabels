@@ -18,6 +18,9 @@ XML category definition files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lgl_xml_category_read_categories_from_file ##### -->
 <para>
 

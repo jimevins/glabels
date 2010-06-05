@@ -18,6 +18,9 @@ XML paper definition files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lgl_xml_paper_read_papers_from_file ##### -->
 <para>
 

@@ -17,6 +17,9 @@ This section describes a structure for representing vendor data.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT lglVendor ##### -->
 <para>
 This structure defines a vendor.

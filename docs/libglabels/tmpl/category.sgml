@@ -18,6 +18,9 @@ functions.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT lglCategory ##### -->
 <para>
 This structure defines a category.
