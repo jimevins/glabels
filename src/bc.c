@@ -319,7 +319,7 @@ gl_barcode_add_shape (glBarcode      *bc,
 	g_return_if_fail (bc);
 	g_return_if_fail (shape);
 
-        bc->shapes = g_list_append (bc->shapes, shape);
+        bc->shapes = g_list_prepend (bc->shapes, shape);
 }
 
 
@@ -333,10 +333,10 @@ gl_barcode_get_styles_list  (void)
 	GList *list = NULL;
 
 	for (i=0; backends[i].id != NULL; i++) {
-		list = g_list_append (list, g_strdup (gettext (backends[i].name)));
+		list = g_list_prepend (list, g_strdup (gettext (backends[i].name)));
 	}
 
-	return list;
+	return g_list_reverse (list);
 }
 
 
