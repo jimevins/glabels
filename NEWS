@@ -13,6 +13,7 @@
 - Added optional IEC18004 (QRCode) barcode backend
 - Added optional Zint barcode backend (currently ony supports GS1-128, but
   other barcodes will be supported by this backend in the future).
+  (Samual Lown)
 - Now uses "XDG Base Directory Specification" to locate user templates
 - New wizard based "New Label" dialog
 - Can now manage user created templates from within glabels
@@ -25,6 +26,13 @@
 - New color selection widget
 - Support parallel installation with older versions of glabels
 - Updated license to GPL3+
+- Full translations of application strings for this release:
+   - German (Mario Blättermann)
+   - Spanish (Daniel Mustieles)
+   - Brazilian Portuguese (Michel Recondo)
+   - Danish (Joe Hansen)
+   - French (Claude Paroz)
+   - Slovenian (Andrej Žnidaršič)
 
 
 * gLabels 2.2.8 (stable) release.  Release date 2010-04-19
