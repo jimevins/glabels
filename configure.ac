@@ -70,8 +70,8 @@ dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
 dnl ---------------------------------------------------------------------------
 dnl Required dependencies
-GLIB_REQUIRED=2.22.0
-GTK_REQUIRED=2.18.0
+GLIB_REQUIRED=2.24.0
+GTK_REQUIRED=2.20.0
 GCONF_REQUIRED=2.28.0
 LIBXML_REQUIRED=2.7.0
 

@@ -10,7 +10,7 @@
 - GnuBarcode backend is now optional and is no longer distributed with glabels
 - IEC16022 (datamatrix) barcode backend is now optional and is no longer
   distributed with glabels
-- Added optional IEC18004 (QRCode) barcode backend
+- Added optional IEC18004 (QRCode) barcode backend (Daniel Mueller)
 - Added optional Zint barcode backend (currently ony supports GS1-128, but
   other barcodes will be supported by this backend in the future).
   (Samual Lown)
