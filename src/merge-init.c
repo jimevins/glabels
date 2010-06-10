@@ -97,6 +97,21 @@ gl_merge_init (void)
                                    "line1_has_keys", TRUE,
 				   NULL);
 
+        gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
+                                   "Text/Semicolon",
+                                   _("Text: Semicolon separated values"),
+                                   GL_MERGE_SRC_IS_FILE,
+                                   "delim", ';',
+                                   NULL);
+
+        gl_merge_register_backend (GL_TYPE_MERGE_TEXT,
+                                   "Text/Semicolon/Line1Keys",
+                                   _("Text: Semicolon separated values with keys on line 1"),
+                                   GL_MERGE_SRC_IS_FILE,
+                                   "delim", ';',
+                                   "line1_has_keys", TRUE,
+                                   NULL);
+
 #ifdef HAVE_LIBEBOOK
 
 	gl_merge_register_backend (GL_TYPE_MERGE_EVOLUTION,
