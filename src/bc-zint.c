@@ -74,6 +74,10 @@ gl_barcode_zint_new (const gchar          *id,
 	/* Assign type flag.  Pre-filter by length for subtypes. */
 	if (g_ascii_strcasecmp (id, "GS1-128") == 0) {
 		symbol->symbology = BARCODE_EAN128;
+	} else if (g_ascii_strcasecmp (id, "GTIN-13") == 0) {
+		symbol->symbology = BARCODE_EANX;
+	} else if (g_ascii_strcasecmp (id, "GTIN-14") == 0) {
+		symbol->symbology = BARCODE_EAN14;
 	} else {
 		g_message( "Illegal barcode id %s", id );
 		ZBarcode_Delete (symbol);
@@ -100,7 +104,7 @@ gl_barcode_zint_new (const gchar          *id,
   /*
 	 * With the size and scale set, send a request to Zint renderer
 	 */
-	if (!ZBarcode_Render(symbol, (unsigned int) !text_flag)) {
+	if (!ZBarcode_Render(symbol, (unsigned int) !text_flag, (float) w, (float) h)) {
 		ZBarcode_Delete(symbol);
 		g_message("Zint Rendering Error: %s", symbol->errtxt);
 		return NULL;
@@ -127,9 +131,13 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	glBarcodeLine *line;
 	glBarcodeChar *bchar;
 
-	struct zint_render      *render;
-	struct zint_render_line *zline;
-	struct zint_render_char *zchar;
+	struct zint_render        *render;
+	struct zint_render_line   *zline;
+	struct zint_render_string *zstring;
+
+  gchar *p;
+  gint length;
+  gdouble xoffset, width, char_width;
 
 	render = symbol->rendered;
 	gbc = g_new0(glBarcode, 1);
@@ -142,11 +150,11 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
   while (zline) {
 	  line = g_new0 (glBarcodeLine, 1);
 
-		line->width = (double) zline->width;
-		line->length = (double) zline->length;
+		line->width = (gdouble) zline->width;
+		line->length = (gdouble) zline->length;
 		/* glBarcodeLine centers based on width, counter-act!!! */
-		line->x = (double) (zline->x + (zline->width / 2.0));
-		line->y = (double) zline->y;
+		line->x = (gdouble) (zline->x + (zline->width / 2.0));
+		line->y = (gdouble) zline->y;
 
 		gbc->lines = g_list_append (gbc->lines, line);
 
@@ -157,24 +165,44 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	/*
 	 * Repeat loop for characters
 	 */
-	zchar = render->chars;
+	zstring = render->strings;
 	if (text_flag) {
-		while (zchar) {
-			bchar = g_new0 (glBarcodeChar, 1);
-			bchar->x = (double) zchar->x;
-			bchar->y = (double) zchar->y;
-			bchar->fsize = (double) zchar->fsize;
-			bchar->c = (gchar) zchar->c;
-			gbc->chars = g_list_append (gbc->chars, bchar);
-			zchar = zchar->next;
+		while (zstring) {
+
+      // Guess the first position based on width or number of characters
+      length = strlen(zstring->text);
+      width = zstring->width;
+      if (width > 0) {
+        char_width = width / length;
+      } else {
+        // No width, set our own by removing 30% of height
+        char_width = zstring->fsize - (zstring->fsize * 0.3);
+        width = char_width * length;
+      }
+      xoffset = zstring->x - (width / 2.0);
+
+      for (p = (gchar *) zstring->text; *p != 0; p++) {
+
+        bchar = g_new0 (glBarcodeChar, 1);
+        bchar->x = xoffset;
+        bchar->y = (gdouble) zstring->y;
+        bchar->fsize = (gdouble) zstring->fsize;
+        bchar->c = (gchar) *p;
+
+        gbc->chars = g_list_append (gbc->chars, bchar);
+
+        xoffset += char_width;
+      }
+
+			zstring = zstring->next;
 		}
 	}
 
 	/*
 	 * Finally add complete sizes
 	 */
-  gbc->width = (gdouble) render->width;
-	gbc->height = (gdouble) render->height;
+  //gbc->width = (gdouble) render->width;
+	//gbc->height = (gdouble) render->height;
 
 	
 	return gbc;
