@@ -409,10 +409,10 @@ draw_shadow (glLabelObject *object,
 	glColorNode   *shadow_color_node;
         guint          shadow_color;
 	gdouble        shadow_opacity;
-	guint          shadow_line_color;
-	guint          shadow_fill_color;
 
 	gl_debug (DEBUG_LABEL, "START");
+
+        cairo_save (cr);
 
         gl_label_object_get_size (object, &w, &h);
 
@@ -438,26 +438,49 @@ draw_shadow (glLabelObject *object,
 		shadow_color = GL_COLOR_SHADOW_MERGE_DEFAULT;
 	}
 	shadow_opacity = gl_label_object_get_shadow_opacity (object);
-	shadow_line_color = gl_color_shadow (shadow_color, shadow_opacity, line_color_node->color);
-	shadow_fill_color = gl_color_shadow (shadow_color, shadow_opacity, fill_color_node->color);
+	shadow_color = gl_color_set_opacity (shadow_color, shadow_opacity);
 	
 
-        cairo_rectangle (cr, 0.0, 0.0, w, h);
+        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_color));
 
+        if ( GL_COLOR_F_ALPHA (fill_color) )
+        {
+                if ( GL_COLOR_F_ALPHA (line_color) )
+                {
+                        /* Has FILL and OUTLINE: adjust size to account for line width. */
+                        cairo_rectangle (cr,
+                                         -line_width/2, -line_width/2,
+                                         w+line_width, h+line_width);
 
-        /* Draw fill shadow */
-        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_fill_color));
-        cairo_fill_preserve (cr);
+                }
+                else
+                {
+                        /* Has FILL but no OUTLINE. */
+                        cairo_rectangle (cr, 0.0, 0.0, w, h);
+                }
 
-        /* Draw outline shadow */
-        cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (shadow_line_color));
-        cairo_set_line_width (cr, line_width);
-        cairo_stroke (cr);
+                /* Draw shadow */
+                cairo_fill (cr);
+        }
+        else
+        {
+                if ( GL_COLOR_F_ALPHA (line_color) )
+                {
+                        /* Has only OUTLINE. */
+                        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+                        /* Draw shadow of outline */
+                        cairo_set_line_width (cr, line_width);
+                        cairo_stroke (cr);
+                }
+        }
 
 
 	gl_color_node_free (&line_color_node);
 	gl_color_node_free (&fill_color_node);
 	gl_color_node_free (&shadow_color_node);
+
+        cairo_restore (cr);
 
 	gl_debug (DEBUG_LABEL, "END");
 }
