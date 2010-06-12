@@ -145,6 +145,9 @@ void gl_ui_cmd_objects_create_image     (GtkAction   *action,
 void gl_ui_cmd_objects_create_barcode   (GtkAction   *action,
 					 glWindow    *window);
 
+void gl_ui_cmd_objects_properties       (GtkAction   *action,
+                                         glWindow    *window);
+
 void gl_ui_cmd_objects_raise            (GtkAction   *action,
 					 glWindow    *window);
 

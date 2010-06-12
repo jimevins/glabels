@@ -756,6 +756,24 @@ gl_ui_cmd_objects_create_barcode (GtkAction *action,
 
 
 /*****************************************************************************/
+/** Objects/Properties command.                                              */
+/*****************************************************************************/
+void
+gl_ui_cmd_objects_properties (GtkAction   *action,
+                              glWindow    *window)
+{
+        gl_debug (DEBUG_COMMANDS, "START");
+
+        g_return_if_fail (action && GTK_IS_ACTION(action));
+        g_return_if_fail (window && GL_IS_WINDOW(window));
+
+        gtk_widget_show (gl_ui_sidebar_get_object_editor (window->sidebar));
+
+        gl_debug (DEBUG_COMMANDS, "END");
+}
+
+
+/*****************************************************************************/
 /** Objects/Raise command.                                                   */
 /*****************************************************************************/
 void

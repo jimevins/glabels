@@ -60,6 +60,10 @@ struct _glObjectEditor
 struct  _glObjectEditorClass
 {
 	GtkVBoxClass             parent_class;
+
+	void (*visibility_changed) (glObjectEditor   *editor,
+                                    gpointer          user_data);
+
 };
 
 

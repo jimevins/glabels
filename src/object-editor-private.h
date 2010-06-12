@@ -35,6 +35,8 @@ struct _glObjectEditorPrivate {
 
 	gdouble     units_per_point;
 
+	GtkWidget  *close_button;
+
 	GtkWidget  *title_image;
 	GtkWidget  *title_label;
 	GtkWidget  *notebook;
@@ -166,14 +168,6 @@ struct _glObjectEditorPrivate {
         /* Prevent recursion */
 	gboolean    stop_signals;
 };
-
-enum {
-	CHANGED,
-	SIZE_CHANGED,
-	LAST_SIGNAL
-};
-
-extern gint gl_object_editor_signals[LAST_SIGNAL];
 
 
 

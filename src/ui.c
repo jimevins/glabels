@@ -319,6 +319,13 @@ static GtkActionEntry entries[] = {
 	  N_("Create barcode object"),
 	  G_CALLBACK (gl_ui_cmd_objects_create_barcode) },
 	
+	{ "ObjectsProperties",
+	  GL_STOCK_PROPERTIES,
+	  N_("Properties"),
+	  NULL,
+	  N_("Edit object properties"),
+	  G_CALLBACK (gl_ui_cmd_objects_properties) },
+
 	{ "ObjectsRaise",
 	  GL_STOCK_ORDER_TOP,
 	  N_("Bring to front"),
@@ -551,6 +558,8 @@ static const gchar *ui_info =
 "				<menuitem action='ObjectsCreateBarcode' />"
 "			</menu>"
 "			<separator />"
+"		        <menuitem action='ObjectsProperties' />"
+"			<separator />"
 "			<menu action='ObjectsOrderMenu'>"
 "				<menuitem action='ObjectsRaise' />"
 "				<menuitem action='ObjectsLower' />"
@@ -613,6 +622,8 @@ static const gchar *ui_info =
 "	</toolbar>"
 ""
 "	<popup action='ContextMenu'>"
+"		<menuitem action='ObjectsProperties' />"
+"		<separator />"
 "		<menu action='ObjectsOrderMenu'>"
 "			<menuitem action='ObjectsRaise' />"
 "			<menuitem action='ObjectsLower' />"
@@ -675,6 +686,7 @@ static gchar* doc_verbs [] = {
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateEllipse",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateImage",
 	"/ui/MenuBar/ObjectsMenu/ObjectsCreateMenu/ObjectsCreateBarcode",
+	"/ui/MenuBar/ObjectsMenu/ObjectsProperties",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsRaise",
 	"/ui/MenuBar/ObjectsMenu/ObjectsOrderMenu/ObjectsLower",
 	"/ui/MenuBar/ObjectsMenu/ObjectsRotateFlipMenu/ObjectsRotateLeft",
@@ -724,6 +736,7 @@ static gchar* selection_verbs [] = {
 };
 
 static gchar* atomic_selection_verbs [] = {
+	"/ui/MenuBar/ObjectsMenu/ObjectsProperties",
 
 	NULL
 };
@@ -1146,8 +1159,8 @@ set_additional_properties (GtkUIManager *ui)
         menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));
         descend_menu_set_always_show_image (GTK_MENU (menu));
 
-        menu_item = gtk_ui_manager_get_widget (ui, "/MenuBar/ObjectsMenu/ObjectsMergeProperties");
-        g_object_set (menu_item, "always-show-image", FALSE, NULL); /* Leave this one out. */
+        menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsProperties");
+        g_object_set (menu_item, "always-show-image", TRUE, NULL);
 
         menu_item = gtk_ui_manager_get_widget (ui, "/ContextMenu/ObjectsOrderMenu/");
         menu = gtk_menu_item_get_submenu (GTK_MENU_ITEM (menu_item));

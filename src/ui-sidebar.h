@@ -59,6 +59,8 @@ GtkWidget   *gl_ui_sidebar_new               (void);
 void         gl_ui_sidebar_set_label         (glUISidebar       *sidebar,
 					      glLabel           *label);
 
+GtkWidget   *gl_ui_sidebar_get_object_editor (glUISidebar       *sidebar);
+
 
 G_END_DECLS
 

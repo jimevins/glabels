@@ -56,10 +56,17 @@
 /* Private data types                        */
 /*===========================================*/
 
+enum {
+	VISIBILITY_CHANGED,
+	LAST_SIGNAL
+};
+
 
 /*===========================================*/
 /* Private globals                           */
 /*===========================================*/
+
+static guint signals[LAST_SIGNAL] = {0};
 
 
 /*===========================================*/
@@ -70,6 +77,8 @@ static void gl_object_editor_finalize           (GObject              *object);
 
 static void set_object                          (glObjectEditor       *editor,
                                                  glLabelObject        *object);
+
+static void close_button_clicked_cb             (glObjectEditor       *editor);
 
 static void prefs_changed_cb                    (glObjectEditor       *editor);
 
@@ -105,7 +114,17 @@ gl_object_editor_class_init (glObjectEditorClass *class)
 	
   	gl_object_editor_parent_class = g_type_class_peek_parent (class);
 
-  	object_class->finalize = gl_object_editor_finalize;  	
+        object_class->finalize = gl_object_editor_finalize;
+
+        signals[VISIBILITY_CHANGED] =
+                g_signal_new ("visibility_changed",
+                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (glObjectEditorClass, visibility_changed),
+                              NULL, NULL,
+                              gl_marshal_VOID__VOID,
+                              G_TYPE_NONE,
+                              0);
 }
 
 
@@ -139,10 +158,11 @@ gl_object_editor_init (glObjectEditor *editor)
 	}
 
         gl_builder_util_get_widgets (editor->priv->builder,
-                                     "editor_vbox", &editor->priv->editor_vbox,
-                                     "title_image", &editor->priv->title_image,
-                                     "title_label", &editor->priv->title_label,
-                                     "notebook",    &editor->priv->notebook,
+                                     "editor_vbox",  &editor->priv->editor_vbox,
+                                     "close_button", &editor->priv->close_button,
+                                     "title_image",  &editor->priv->title_image,
+                                     "title_label",  &editor->priv->title_label,
+                                     "notebook",     &editor->priv->notebook,
                                      NULL);
 
 	gtk_box_pack_start (GTK_BOX(editor),
@@ -167,6 +187,9 @@ gl_object_editor_init (glObjectEditor *editor)
 	/* Hide all notebook pages to start with. */
 	gtk_widget_hide_all (editor->priv->notebook);
 	gtk_widget_set_no_show_all (editor->priv->notebook, TRUE);
+
+	g_signal_connect_swapped (G_OBJECT (editor->priv->close_button), "clicked",
+				  G_CALLBACK (close_button_clicked_cb), editor);
 
 	gl_debug (DEBUG_EDITOR, "END");
 }
@@ -445,6 +468,8 @@ set_object (glObjectEditor  *editor,
                         gtk_notebook_set_current_page (GTK_NOTEBOOK (editor->priv->notebook), 0);
                 }
 
+                gtk_widget_show (GTK_WIDGET (editor));
+
                 g_signal_connect (G_OBJECT (object), "changed",
                                   G_CALLBACK (object_changed_cb), editor);
         }
@@ -469,6 +494,16 @@ set_object (glObjectEditor  *editor,
         }
 
 	gl_debug (DEBUG_EDITOR, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE. Close button "clicked" callback.                                */
+/*--------------------------------------------------------------------------*/
+static void
+close_button_clicked_cb (glObjectEditor       *editor)
+{
+        gtk_widget_hide (GTK_WIDGET (editor));
 }
 
 

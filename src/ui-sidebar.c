@@ -165,6 +165,20 @@ gl_ui_sidebar_set_label (glUISidebar *sidebar,
 }
 
 
+/****************************************************************************/
+/* Get object editor widget.                                                */
+/****************************************************************************/
+GtkWidget *
+gl_ui_sidebar_get_object_editor (glUISidebar *sidebar)
+{
+	gl_debug (DEBUG_UI, "START");
+
+	gl_debug (DEBUG_UI, "END");
+
+        return sidebar->priv->editor;
+}
+
+
 
 /*
  * Local Variables:       -- emacs
