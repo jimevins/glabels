@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 23:12+0200\n"
+"POT-Creation-Date: 2010-06-12 10:33-0400\n"
 "PO-Revision-Date: 2010-05-25 14:52+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -569,7 +569,7 @@ msgstr "Linjebredde"
 msgid "Untitled"
 msgstr "Uden titel"
 
-#: ../src/label.c:702 ../src/ui.c:422
+#: ../src/label.c:702 ../src/ui.c:429
 msgid "Merge properties"
 msgstr "Sammenføj egenskaber"
 
@@ -577,11 +577,11 @@ msgstr "Sammenføj egenskaber"
 msgid "Delete"
 msgstr "Slet"
 
-#: ../src/label.c:1217 ../src/ui.c:324
+#: ../src/label.c:1217 ../src/ui.c:331
 msgid "Bring to front"
 msgstr "Hent frem"
 
-#: ../src/label.c:1253 ../src/ui.c:331
+#: ../src/label.c:1253 ../src/ui.c:338
 msgid "Send to back"
 msgstr "Send tilbage"
 
@@ -589,52 +589,52 @@ msgstr "Send tilbage"
 msgid "Rotate"
 msgstr "Roter"
 
-#: ../src/label.c:1329 ../src/ui.c:338
+#: ../src/label.c:1329 ../src/ui.c:345
 msgid "Rotate left"
 msgstr "Roter mod venstre"
 
-#: ../src/label.c:1362 ../src/ui.c:345
+#: ../src/label.c:1362 ../src/ui.c:352
 msgid "Rotate right"
 msgstr "Roter til højre"
 
-#: ../src/label.c:1397 ../src/ui.c:352
+#: ../src/label.c:1397 ../src/ui.c:359
 msgid "Flip horizontally"
 msgstr "Vend vandret"
 
-#: ../src/label.c:1432 ../src/ui.c:359
+#: ../src/label.c:1432 ../src/ui.c:366
 msgid "Flip vertically"
 msgstr "Vend lodret"
 
-#: ../src/label.c:1472 ../src/ui.c:366
+#: ../src/label.c:1472 ../src/ui.c:373
 msgid "Align left"
 msgstr "Juster venstre"
 
-#: ../src/label.c:1529 ../src/ui.c:373
+#: ../src/label.c:1529 ../src/ui.c:380
 msgid "Align right"
 msgstr "Juster højre"
 
-#: ../src/label.c:1590 ../src/ui.c:380
+#: ../src/label.c:1590 ../src/ui.c:387
 msgid "Align horizontal center"
 msgstr "Juster vandret centrum"
 
-#: ../src/label.c:1666 ../src/ui.c:387
+#: ../src/label.c:1666 ../src/ui.c:394
 msgid "Align tops"
 msgstr "Juster øverst"
 
-#: ../src/label.c:1723 ../src/ui.c:394
+#: ../src/label.c:1723 ../src/ui.c:401
 msgid "Align bottoms"
 msgstr "Juster nederste kanter"
 
 # openoffice: juster lodret centreret
-#: ../src/label.c:1784 ../src/ui.c:401
+#: ../src/label.c:1784 ../src/ui.c:408
 msgid "Align vertical center"
 msgstr "Juster lodret centreret"
 
-#: ../src/label.c:1862 ../src/ui.c:408
+#: ../src/label.c:1862 ../src/ui.c:415
 msgid "Center horizontally"
 msgstr "Centrer vandret"
 
-#: ../src/label.c:1909 ../src/ui.c:415
+#: ../src/label.c:1909 ../src/ui.c:422
 msgid "Center vertically"
 msgstr "Centrer lodret"
 
@@ -820,12 +820,22 @@ msgstr "Tekst: Kolonadskilte værdier"
 msgid "Text: Colon separated values with keys on line 1"
 msgstr "Tekst: Kolonadskilte værdier med nøgler på linje 1"
 
-#: ../src/merge-init.c:104
+#: ../src/merge-init.c:102
+#, fuzzy
+msgid "Text: Semicolon separated values"
+msgstr "Tekst: Kolonadskilte værdier"
+
+#: ../src/merge-init.c:109
+#, fuzzy
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr "Tekst: Kolonadskilte værdier med nøgler på linje 1"
+
+#: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
 msgstr "Evolutionadressebog"
 
 # bør nok være VCard (formatnavn ifølge wiki)
-#: ../src/merge-init.c:110
+#: ../src/merge-init.c:125
 msgid "VCards"
 msgstr "VCards"
 
@@ -850,7 +860,7 @@ msgstr "Vælg"
 msgid "Record/Field"
 msgstr "Optag/felt"
 
-#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:10
 msgid "Data"
 msgstr "Data"
 
@@ -885,31 +895,31 @@ msgstr "Gennemse"
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:159 ../src/object-editor.c:460
+#: ../src/object-editor.c:179 ../src/object-editor.c:485
 msgid "Object properties"
 msgstr "Objektegenskaber"
 
-#: ../src/object-editor.c:309
+#: ../src/object-editor.c:332
 msgid "Box object properties"
 msgstr "Boksobjekt - egenskaber"
 
-#: ../src/object-editor.c:328
+#: ../src/object-editor.c:351
 msgid "Ellipse object properties"
 msgstr "Egenskaber for ellipseobjekt"
 
-#: ../src/object-editor.c:347
+#: ../src/object-editor.c:370
 msgid "Line object properties"
 msgstr "Linjeobjekt - egenskaber"
 
-#: ../src/object-editor.c:364
+#: ../src/object-editor.c:387
 msgid "Image object properties"
 msgstr "Billedobjekt - egenskaber"
 
-#: ../src/object-editor.c:381
+#: ../src/object-editor.c:404
 msgid "Text object properties"
 msgstr "Tekstobjekt - egenskaber"
 
-#: ../src/object-editor.c:403
+#: ../src/object-editor.c:426
 msgid "Barcode object properties"
 msgstr "Egenskaber for stregkodeobjekt"
 
@@ -1241,11 +1251,11 @@ msgstr "_Afslut"
 msgid "Quit the program"
 msgstr "Afslut programmet"
 
-#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:980
 msgid "Undo"
 msgstr "Fortryd"
 
-#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:987
 msgid "Redo"
 msgstr "Gendan"
 
@@ -1337,7 +1347,7 @@ msgstr "Vælg tilstand"
 msgid "Select, move and modify objects"
 msgstr "Vælg, flyt eller ændre objekter"
 
-#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:30
 msgid "Text"
 msgstr "Tekst"
 
@@ -1349,7 +1359,7 @@ msgstr "Boks"
 msgid "Create box/rectangle object"
 msgstr "Opret boks-/rektangelobjekt"
 
-#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:19
 msgid "Line"
 msgstr "Linje"
 
@@ -1361,7 +1371,7 @@ msgstr "Ellipse"
 msgid "Create ellipse/circle object"
 msgstr "Opret ellipse-/cirkelobjekt"
 
-#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:16
 msgid "Image"
 msgstr "Billede"
 
@@ -1369,139 +1379,149 @@ msgstr "Billede"
 msgid "Barcode"
 msgstr "Stregkode"
 
+#: ../src/ui.c:324
+#, fuzzy
+msgid "Properties"
+msgstr "Egenskaber..."
+
 #: ../src/ui.c:326
+#, fuzzy
+msgid "Edit object properties"
+msgstr "Linjeobjekt - egenskaber"
+
+#: ../src/ui.c:333
 msgid "Raise object to top"
 msgstr "Hæv objekt til toppen"
 
-#: ../src/ui.c:333
+#: ../src/ui.c:340
 msgid "Lower object to bottom"
 msgstr "Sænk objekt til bunden"
 
-#: ../src/ui.c:340
+#: ../src/ui.c:347
 msgid "Rotate object 90 degrees counter-clockwise"
 msgstr "Roter objekt 90 grader mod uret"
 
-#: ../src/ui.c:347
+#: ../src/ui.c:354
 msgid "Rotate object 90 degrees clockwise"
 msgstr "Roter objekt 90 grader med uret"
 
-#: ../src/ui.c:354
+#: ../src/ui.c:361
 msgid "Flip object horizontally"
 msgstr "Vend objekt vandret"
 
-#: ../src/ui.c:361
+#: ../src/ui.c:368
 msgid "Flip object vertically"
 msgstr "Vend objekt lodret"
 
-#: ../src/ui.c:368
+#: ../src/ui.c:375
 msgid "Align objects to left edges"
 msgstr "Juster objekter til de venstre hjørner"
 
-#: ../src/ui.c:375
+#: ../src/ui.c:382
 msgid "Align objects to right edges"
 msgstr "Juster objekter til højre hjørner"
 
-#: ../src/ui.c:382
+#: ../src/ui.c:389
 msgid "Align objects to horizontal centers"
 msgstr "Juster objekter til vandrette centrum"
 
-#: ../src/ui.c:389
+#: ../src/ui.c:396
 msgid "Align objects to top edges"
 msgstr "Juster objekter til øverste hjørner"
 
-#: ../src/ui.c:396
+#: ../src/ui.c:403
 msgid "Align objects to bottom edges"
 msgstr "Juster objekter til den nederste kants hjørner"
 
-#: ../src/ui.c:403
+#: ../src/ui.c:410
 msgid "Align objects to vertical centers"
 msgstr "Juster objekter til lodret centreret"
 
-#: ../src/ui.c:410
+#: ../src/ui.c:417
 msgid "Center objects to horizontal label center"
 msgstr "Centrer objekter til vandret etiketcentrum"
 
-#: ../src/ui.c:417
+#: ../src/ui.c:424
 msgid "Center objects to vertical label center"
 msgstr "Centrer objekter til lodret etiketcentrum"
 
-#: ../src/ui.c:424
+#: ../src/ui.c:431
 msgid "Edit merge properties"
 msgstr "Rediger sammenføjningsegenskaber"
 
-#: ../src/ui.c:431
+#: ../src/ui.c:438
 msgid "Contents"
 msgstr "Indhold"
 
-#: ../src/ui.c:433
+#: ../src/ui.c:440
 msgid "Open glabels manual"
 msgstr "Åbn glabels' manual"
 
-#: ../src/ui.c:438
+#: ../src/ui.c:445
 msgid "About..."
 msgstr "Om..."
 
-#: ../src/ui.c:440
+#: ../src/ui.c:447
 msgid "About glabels"
 msgstr "Om glabels"
 
-#: ../src/ui.c:450
+#: ../src/ui.c:457
 msgid "Property toolbar"
 msgstr "Egenskabsværktøjsbjælke"
 
-#: ../src/ui.c:452
+#: ../src/ui.c:459
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr "Ændr synligheden på egenskabsværktøjsbjælken i det nuværende vindue"
 
-#: ../src/ui.c:458
+#: ../src/ui.c:465
 msgid "Grid"
 msgstr "Gitter"
 
-#: ../src/ui.c:460
+#: ../src/ui.c:467
 msgid "Change the visibility of the grid in the current window"
 msgstr "Ændr synligheden på gitteret i det nuværende vindue"
 
-#: ../src/ui.c:466
+#: ../src/ui.c:473
 msgid "Markup"
 msgstr "Opmærkning"
 
-#: ../src/ui.c:468
+#: ../src/ui.c:475
 msgid "Change the visibility of markup lines in the current window"
 msgstr "Ændr synligheden på opmærkningslinjerne i det nuværende vindue"
 
-#: ../src/ui.c:479
+#: ../src/ui.c:486
 msgid "Main toolbar"
 msgstr "Hovedværktøjsbjælke"
 
-#: ../src/ui.c:481
+#: ../src/ui.c:488
 msgid "Change the visibility of the main toolbar in the current window"
 msgstr "Ændr synligheden på hovedværktøjsbjælken i det nuværende vindue"
 
-#: ../src/ui.c:487
+#: ../src/ui.c:494
 msgid "Drawing toolbar"
 msgstr "Tegneværktøjsbjælke"
 
-#: ../src/ui.c:489
+#: ../src/ui.c:496
 msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr "Ændr synligheden på tegneværktøjsbjælken i det nuværende vindue"
 
-#: ../src/ui-commands.c:1135
+#: ../src/ui-commands.c:1153
 msgid "Glabels includes contributions from:"
 msgstr "Glabels har modtaget bidrag fra:"
 
-#: ../src/ui-commands.c:1141
+#: ../src/ui-commands.c:1159
 msgid "See the file AUTHORS for additional credits,"
 msgstr "Se filen AUTHORS for yderligere oversigt over bidragydere,"
 
-#: ../src/ui-commands.c:1142
+#: ../src/ui-commands.c:1160
 msgid "or visit http://glabels.org/"
 msgstr "eller besøg http://glabels.org/"
 
-#: ../src/ui-commands.c:1154
+#: ../src/ui-commands.c:1172
 msgid "A label and business card creation program.\n"
 msgstr "Et program til oprettelse af etiketter og forretningskort.\n"
 
-#: ../src/ui-commands.c:1158
+#: ../src/ui-commands.c:1176
 msgid "translator-credits"
 msgstr ""
 "Joe Hansen, 2010.\n"
@@ -1509,7 +1529,7 @@ msgstr ""
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
 
-#: ../src/ui-commands.c:1161
+#: ../src/ui-commands.c:1179
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1531,7 +1551,7 @@ msgstr ""
 "omkring SALGBARHED eller EGNETHED TIL ET BESTEMT FORMÅL. Yderligere\n"
 "detaljer kan læses i GNU General Public License.\n"
 
-#: ../src/ui-commands.c:1190
+#: ../src/ui-commands.c:1208
 msgid "glabels"
 msgstr "glabels"
 
@@ -1610,7 +1630,7 @@ msgstr "Anden"
 msgid "User defined"
 msgstr "Brugerdefineret"
 
-#: ../libglabels/db.c:650
+#: ../libglabels/db.c:665
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1618,7 +1638,7 @@ msgstr ""
 "Kunne ikke finde definitioner for papirstørrelse. Libglabels er måske ikke "
 "installeret korrekt!"
 
-#: ../libglabels/db.c:1042
+#: ../libglabels/db.c:1057
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1626,14 +1646,14 @@ msgstr ""
 "Kunne ikke finde definitioner for kategorier. Libglabels er måske ikke "
 "installeret korrekt!"
 
-#: ../libglabels/db.c:2061
+#: ../libglabels/db.c:2097
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
 "Kunne ikke finde skabelonfiler. Libglabels er måske ikke installeret korrekt!"
 
-#: ../libglabels/db.c:2128
+#: ../libglabels/db.c:2164
 #, c-format
 msgid "%s full page label"
 msgstr "%s hel sideetiket"
@@ -1656,13 +1676,13 @@ msgstr "diameter"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:41
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "punkter"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "tommer"
@@ -1845,112 +1865,116 @@ msgstr "Vinkel:"
 msgid "Checksum"
 msgstr "Kontrolsum"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:8
+msgid "Close sidebar."
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:8
 msgid "Color:"
 msgstr "Farve:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:11
 msgid "Enable shadow"
 msgstr "Slå skygge til"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "Familie:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "File:"
 msgstr "Fil:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:14
 msgid "Fill"
 msgstr "Fyld"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Højde:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "Nøgle:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:18
 msgid "Length:"
 msgstr "Længde:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:12
 msgid "Line Spacing:"
 msgstr "Linjemellemrum:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "Bogstavelig:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Opacity:"
 msgstr "Ugennemsigtighed:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "Position"
 msgstr "Placering"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "Reset image size"
 msgstr "Nulstil billedstørrelse"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Shadow"
 msgstr "Skygge"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size"
 msgstr "Størrelse"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Bredde:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "X Offset:"
 msgstr "X-forskydning:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y Offset:"
 msgstr "Y-forskydning:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "degrees"
 msgstr "grader"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "dialog1"
 msgstr "dialog 1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "digits:"
 msgstr "tal:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "format:"
 msgstr "format:"
 

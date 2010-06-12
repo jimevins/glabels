@@ -4,26 +4,496 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels\n"
-"Report-Msgid-Bugs-To: \n" 
-"POT-Creation-Date: 2009-05-17 14:09+0800\n" 
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-12 10:33-0400\n"
 "PO-Revision-Date: 2009-05-19 20:16-0400\n"
-"Last-Translator: Careon <zzbusagain@yahoo.com.cn>\n" 
-"Language-Team: Careon <zzbusagain@yahoo.com.cn>\n" 
-"MIME-Version: 1.0\n" 
-"Content-Type: text/plain; charset=UTF-8\n" 
-"Content-Transfer-Encoding: 8bit\n" 
-"X-Poedit-Language: Chinese\n" 
-"X-Poedit-Country: CHINA\n" 
-"X-Poedit-SourceCharset: utf-8\n" 
-#: ../src/glabels.c:66 ../src/glabels-batch.c:69
+"Last-Translator: Careon <zzbusagain@yahoo.com.cn>\n"
+"Language-Team: Careon <zzbusagain@yahoo.com.cn>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../src/bc.c:66
+msgid "POSTNET (any)"
+msgstr "POSTNET (通用)"
+
+#: ../src/bc.c:69
+msgid "POSTNET-5 (ZIP only)"
+msgstr "POSTNET-5 (用于邮编)"
+
+#: ../src/bc.c:72
+msgid "POSTNET-9 (ZIP+4)"
+msgstr "POSTNET-9 (ZIP+4)"
+
+#: ../src/bc.c:75
+msgid "POSTNET-11 (DPBC)"
+msgstr "POSTNET-11 (DPBC)"
+
+#: ../src/bc.c:80
+msgid "CEPNET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:83
+msgid "EAN (any)"
+msgstr "EAN (通用)"
+
+#: ../src/bc.c:86
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: ../src/bc.c:89
+msgid "EAN-8 +2"
+msgstr "EAN-8 +2"
+
+#: ../src/bc.c:92
+msgid "EAN-8 +5"
+msgstr "EAN-8 +5"
+
+#: ../src/bc.c:95
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: ../src/bc.c:98
+msgid "EAN-13 +2"
+msgstr "EAN-13 +2"
+
+#: ../src/bc.c:101
+msgid "EAN-13 +5"
+msgstr "EAN-13 +5"
+
+#: ../src/bc.c:104
+msgid "UPC (UPC-A or UPC-E)"
+msgstr "UPC (UPC-A 或者 UPC-E)"
+
+#: ../src/bc.c:107
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: ../src/bc.c:110
+msgid "UPC-A +2"
+msgstr "UPC-A +2"
+
+#: ../src/bc.c:113
+msgid "UPC-A +5"
+msgstr "UPC-A +5"
+
+#: ../src/bc.c:116
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: ../src/bc.c:119
+msgid "UPC-E +2"
+msgstr "UPC-E +2"
+
+#: ../src/bc.c:122
+msgid "UPC-E +5"
+msgstr "UPC-E +5"
+
+#: ../src/bc.c:125
+msgid "ISBN"
+msgstr "ISBN"
+
+#: ../src/bc.c:128
+msgid "ISBN +5"
+msgstr "ISBN +5"
+
+#: ../src/bc.c:131
+msgid "Code 39"
+msgstr "Code 39"
+
+#: ../src/bc.c:134
+msgid "Code 128"
+msgstr "Code 128"
+
+#: ../src/bc.c:137
+msgid "Code 128C"
+msgstr "Code 128C"
+
+#: ../src/bc.c:140
+msgid "Code 128B"
+msgstr "Code 128B"
+
+#: ../src/bc.c:143
+msgid "Interleaved 2 of 5"
+msgstr "Interleaved 2 of 5"
+
+#: ../src/bc.c:146
+msgid "Codabar"
+msgstr "Codabar"
+
+#: ../src/bc.c:149
+msgid "MSI"
+msgstr "MSI"
+
+#: ../src/bc.c:152
+msgid "Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:155
+#, fuzzy
+msgid "Code 93"
+msgstr "Code 39"
+
+#: ../src/bc.c:162
+msgid "GS1-128"
+msgstr ""
+
+#: ../src/bc.c:169
+msgid "IEC16022 (DataMatrix)"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:176
+msgid "IEC18004 (QRCode)"
+msgstr ""
+
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
+msgid "Default Color"
+msgstr "默认颜色"
+
+#: ../src/color-combo-menu.c:83
+msgid "Dark Red"
+msgstr "暗红"
+
+#: ../src/color-combo-menu.c:84
+msgid "Brown"
+msgstr "棕色"
+
+#: ../src/color-combo-menu.c:85
+msgid "Dark Goldenrod"
+msgstr "暗黄"
+
+#: ../src/color-combo-menu.c:86
+msgid "Dark Green"
+msgstr "暗绿"
+
+#: ../src/color-combo-menu.c:87
+msgid "Dark Cyan"
+msgstr "暗品红"
+
+#: ../src/color-combo-menu.c:88
+msgid "Navy Blue"
+msgstr "海水蓝"
+
+#: ../src/color-combo-menu.c:89
+msgid "Dark Violet"
+msgstr "紫黑"
+
+#: ../src/color-combo-menu.c:91
+msgid "Red"
+msgstr "红色"
+
+#: ../src/color-combo-menu.c:92
+msgid "Orange"
+msgstr "桔红"
+
+#: ../src/color-combo-menu.c:93
+msgid "Dark Yellow"
+msgstr "暗黄"
+
+#: ../src/color-combo-menu.c:94
+msgid "Medium green"
+msgstr "中等绿"
+
+#: ../src/color-combo-menu.c:95
+msgid "Turquoise"
+msgstr "蓝绿"
+
+#: ../src/color-combo-menu.c:96
+msgid "Blue"
+msgstr "蓝色"
+
+#: ../src/color-combo-menu.c:97
+msgid "Purple"
+msgstr "紫红"
+
+#: ../src/color-combo-menu.c:99
+msgid "Salmon"
+msgstr "马哈鱼色"
+
+#: ../src/color-combo-menu.c:100
+msgid "Gold"
+msgstr "金黄"
+
+#: ../src/color-combo-menu.c:101
+msgid "Yellow"
+msgstr "黄色"
+
+#: ../src/color-combo-menu.c:102
+msgid "Green"
+msgstr "绿色"
+
+#: ../src/color-combo-menu.c:103
+msgid "Cyan"
+msgstr "蓝绿色"
+
+#: ../src/color-combo-menu.c:104
+msgid "SkyBlue"
+msgstr "天空蓝"
+
+#: ../src/color-combo-menu.c:105
+msgid "Violet"
+msgstr "紫色"
+
+#: ../src/color-combo-menu.c:107
+msgid "Pink"
+msgstr "粉红"
+
+#: ../src/color-combo-menu.c:108
+msgid "Khaki"
+msgstr "浅棕黄色"
+
+#: ../src/color-combo-menu.c:109
+msgid "Light Yellow"
+msgstr "浅黄"
+
+#: ../src/color-combo-menu.c:110
+msgid "Light Green"
+msgstr "浅绿"
+
+#: ../src/color-combo-menu.c:111
+msgid "Light Cyan"
+msgstr "浅品红色"
+
+#: ../src/color-combo-menu.c:112
+msgid "Slate Gray"
+msgstr "石灰白"
+
+#: ../src/color-combo-menu.c:113
+msgid "Thistle"
+msgstr ""
+
+#: ../src/color-combo-menu.c:115
+msgid "White"
+msgstr "白色"
+
+#: ../src/color-combo-menu.c:117
+#, no-c-format
+msgid "10% Gray"
+msgstr "10% 灰色"
+
+#: ../src/color-combo-menu.c:119
+#, no-c-format
+msgid "25% Gray"
+msgstr "25% 灰色"
+
+#: ../src/color-combo-menu.c:121
+#, no-c-format
+msgid "40% Gray"
+msgstr "40% 灰色"
+
+#: ../src/color-combo-menu.c:123
+#, no-c-format
+msgid "50% Gray"
+msgstr "50% 灰色"
+
+#: ../src/color-combo-menu.c:125
+#, no-c-format
+msgid "60% Gray"
+msgstr "60% 灰色"
+
+#: ../src/color-combo-menu.c:126
+msgid "Black"
+msgstr "黑色"
+
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
+msgid "Custom Color"
+msgstr "自定义颜色"
+
+#: ../src/color-combo-menu.c:319
+#, c-format
+msgid "Custom Color #%u"
+msgstr "自定义颜色 #%u"
+
+#: ../src/critical-error-handler.c:70
+msgid "gLabels Fatal Error!"
+msgstr "gLabels出现严重错误！"
+
+#: ../src/file.c:84
+msgid "New Label or Card"
+msgstr "新建标签或名片"
+
+#: ../src/file.c:175 ../src/label.c:584 ../src/label.c:628
+msgid "Label properties"
+msgstr "标签属性"
+
+#: ../src/file.c:267 ../src/file.c:557
+msgid "All files"
+msgstr "全部文件"
+
+#: ../src/file.c:272 ../src/file.c:562
+msgid "gLabels documents"
+msgstr "gLabels文件(.glabels)"
+
+#: ../src/file.c:319 ../src/file.c:620
+msgid "Empty file name selection"
+msgstr "没有选择文件"
+
+#: ../src/file.c:322 ../src/file.c:338
+msgid "Please select a file or supply a valid file name"
+msgstr "请选择文件，或输入文件名"
+
+#: ../src/file.c:335
+msgid "File does not exist"
+msgstr "文件不存在"
+
+#: ../src/file.c:410
+#, c-format
+msgid "Could not open file \"%s\""
+msgstr "无法打开文件 \"%s\""
+
+#: ../src/file.c:413
+msgid "Not a supported file format"
+msgstr "不支持的文件格式"
+
+#: ../src/file.c:491 ../src/file.c:670
+#, c-format
+msgid "Could not save file \"%s\""
+msgstr "无法保存文件 \"%s\""
+
+#: ../src/file.c:495 ../src/file.c:674
+msgid "Error encountered during save.  The file is still not saved."
+msgstr "保存时出错。文件没有保存。"
+
+#: ../src/file.c:535
+#, c-format
+msgid "Save \"%s\" as"
+msgstr " \"%s\" 另存为"
+
+#: ../src/file.c:623
+msgid "Please supply a valid file name"
+msgstr "请输入文件名"
+
+#: ../src/file.c:644
+#, c-format
+msgid "Overwrite file \"%s\"?"
+msgstr "覆盖文件 \"%s\"？"
+
+#: ../src/file.c:648
+msgid "File already exists."
+msgstr "已有同名文件。"
+
+#: ../src/file.c:744
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "在关闭前先保存文件 \"%s\"？"
+
+#: ../src/file.c:748
+msgid "Your changes will be lost if you don't save them."
+msgstr "如果不保存，所做的更改会丢失。"
+
+#: ../src/file.c:751
+msgid "Close without saving"
+msgstr "关闭(不保存)"
+
+#: ../src/font-combo-menu.c:137
+#, fuzzy
+msgid "Recent fonts"
+msgstr "最近的模板"
+
+#: ../src/font-combo-menu.c:152
+msgid "Proportional fonts"
+msgstr ""
+
+#: ../src/font-combo-menu.c:160
+msgid "Fixed-width fonts"
+msgstr ""
+
+#: ../src/font-combo-menu.c:168
+#, fuzzy
+msgid "All fonts"
+msgstr "全部文件"
+
+#.
+#. * Allow text samples to be localized.
+#. *
+#. * FIXME: if we could extract enough meta information from the fonts
+#. * themselves, perhaps rather than setting these globally for the
+#. * current locale, they could be unique to each font family.
+#.
+#: ../src/font-combo-menu-item.c:132
+msgctxt "Short sample text"
+msgid "Aa"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:134
+msgctxt "Lower case sample text"
+msgid "abcdefghijklmnopqrstuvwxyz"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:136
+msgctxt "Upper case sample text"
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:138
+msgctxt "Numbers and special characters sample text"
+msgid "0123456789 .:,;(*!?)"
+msgstr ""
+
+#: ../src/font-combo-menu-item.c:157
+msgid "Sample text"
+msgstr ""
+
+#: ../src/glabels-batch.c:52
+msgid "set output filename (default=\"output.pdf\")"
+msgstr "输出文件名(默认值=\"output.pdf\")"
+
+#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
+msgid "filename"
+msgstr "文件名"
+
+#: ../src/glabels-batch.c:54
+msgid "number of sheets (default=1)"
+msgstr "每页数量(默认值=1)"
+
+#: ../src/glabels-batch.c:54
+msgid "sheets"
+msgstr "数量"
+
+#: ../src/glabels-batch.c:56
+msgid "number of copies (default=1)"
+msgstr "副本数量(默认值=1)"
+
+#: ../src/glabels-batch.c:56
+msgid "copies"
+msgstr "副本"
+
+#: ../src/glabels-batch.c:58
+msgid "first label on first sheet (default=1)"
+msgstr "第1页的第1个标签 (默认值=1)"
+
+#: ../src/glabels-batch.c:58
+msgid "first"
+msgstr "第1个"
+
+#: ../src/glabels-batch.c:60 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+msgid "print outlines (to test printer alignment)"
+msgstr "打印外框线(用于校正打印机)"
+
+#: ../src/glabels-batch.c:62 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+msgid "print in reverse (i.e. a mirror image)"
+msgstr "反转打印 (例如对称)"
+
+#: ../src/glabels-batch.c:64 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+msgid "print crop marks"
+msgstr "打印裁剪标记"
+
+#: ../src/glabels-batch.c:66
+msgid "input file for merging"
+msgstr "输入要插入的文件名"
+
+#: ../src/glabels-batch.c:68 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[文件...]"
 
-#: ../src/glabels.c:83
-msgid "Launch gLabels label and business card designer."
-msgstr "启动gLabels标签和名片设计软件。"
+#: ../src/glabels-batch.c:98
+msgid "Print files created with gLabels."
+msgstr "打印gLabels文件。"
 
-#: ../src/glabels.c:91 ../src/glabels-batch.c:105
+#: ../src/glabels-batch.c:106 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -32,180 +502,617 @@ msgstr ""
 "%s\n"
 "运行'%s --help'来查看可用的命令参数。\n"
 
-#: ../src/glabels-batch.c:53
-msgid "set output filename (default=\"output.pdf\")"
-msgstr "输出文件名(默认值=\"output.pdf\")"
-
-#: src/glabels-batch.c:56 src/glabels-batch.c:70
-msgid "filename"
-msgstr "文件名"
-
-#: src/glabels-batch.c:54
-msgid "number of sheets (default=1)"
-msgstr "每页数量(默认值=1)"
-
-#: src/glabels-batch.c:54
-msgid "sheets"
-msgstr "数量"
-
-#: src/glabels-batch.c:56
-msgid "number of copies (default=1)"
-msgstr "副本数量(默认值=1)"
-
-#: src/glabels-batch.c:56
-msgid "copies"
-msgstr "副本"
-
-#: ../src/glabels-batch.c:59
-msgid "first label on first sheet (default=1)"
-msgstr "第1页的第1个标签 (默认值=1)"
-
-#: ../src/glabels-batch.c:59
-msgid "first"
-msgstr "第1个"
-
-#: src/glabels-batch.c:64 src/print-dialog.c:336
-msgid "print outlines (to test printer alignment)"
-msgstr "打印外框线(用于校正打印机)"
-
-#: src/glabels-batch.c:66 src/print-dialog.c:344
-msgid "print in reverse (i.e. a mirror image)"
-msgstr "反转打印 (例如对称)"
-
-#: ../src/glabels-batch.c:65 ../data/builder/print-custom-widget.glade.h:4
-msgid "print crop marks"
-msgstr "打印裁剪标记"
-
-#: ../src/glabels-batch.c:67
-msgid "input file for merging"
-msgstr "输入要插入的文件名"
-
-#: ../src/glabels-batch.c:97
-msgid "Print files created with gLabels."
-msgstr "打印gLabels文件。"
-
-#: ../src/glabels-batch.c:147
+#: ../src/glabels-batch.c:149
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
-msgstr ""
-"无法合并glabels文件%s \n"
+msgstr "无法合并glabels文件%s \n"
 
-#: ../src/glabels-batch.c:169
+#: ../src/glabels-batch.c:184
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "无法打开glabels文件 %s\n"
 
-#: ../src/window.c:259
-msgid "(none) - gLabels"
-msgstr "(无) - gLabels"
+#: ../src/glabels.c:81
+msgid "Launch gLabels label and business card designer."
+msgstr "启动gLabels标签和名片设计软件。"
 
-#: src/window.c:414
-msgid "(modified)"
-msgstr "(已修改)"
+#: ../src/label-barcode.c:154 ../src/ui.c:319
+msgid "Create barcode object"
+msgstr "新建条形码"
 
-#: src/stock.c:65 data/ui/glabels-ui.xml.h:162
-msgid "_Select Mode"
-msgstr "选择模式(_S)"
+#: ../src/label-barcode.c:227 ../src/label-barcode.c:389
+#, fuzzy
+msgid "Barcode data"
+msgstr "空条形码数据"
 
-#: src/stock.c:66 data/ui/glabels-ui.xml.h:163
-msgid "_Text"
-msgstr "文字(_T)"
+#: ../src/label-barcode.c:263
+#, fuzzy
+msgid "Barcode property"
+msgstr "条形码属性"
 
-#: src/stock.c:67 data/ui/glabels-ui.xml.h:148
-msgid "_Line"
-msgstr "线条(_L)"
+#: ../src/label-barcode.c:483
+msgid "Barcode data empty"
+msgstr "空条形码数据"
 
-#: src/stock.c:68 data/ui/glabels-ui.xml.h:130
-msgid "_Box"
-msgstr "矩形(_B)"
+#: ../src/label-barcode.c:487
+msgid "Invalid barcode data"
+msgstr "条形码数据无效"
 
-#: src/stock.c:69 data/ui/glabels-ui.xml.h:141
-msgid "_Ellipse"
-msgstr "椭圆(_E)"
+#: ../src/label-box.c:156
+#, fuzzy
+msgid "Create box object"
+msgstr "新建文字对象"
 
-#: src/stock.c:70 
-msgid "_Image"
-msgstr "图片(_I)"
-
-#: src/stock.c:71 data/ui/glabels-ui.xml.h:11
-msgid "Bar_code"
-msgstr "条形码(_C)"
-
-#: src/stock.c:72
-msgid "_Merge Properties"
-msgstr "合并属性(_M)"
-
-#: src/stock.c:73
-msgid "Object _Properties"
-msgstr "对象属性(_P)"
-
-#: src/stock.c:74 data/ui/glabels-ui.xml.h:13
-msgid "Bring to _Front"
-msgstr "移到上层(_F)"
-
-#: src/stock.c:75 data/ui/glabels-ui.xml.h:109
-msgid "Send to _Back"
-msgstr "移到下层(_B)"
-
-#: src/stock.c:76 data/ui/glabels-ui.xml.h:96
-msgid "Rotate _Left"
-msgstr "向左旋转(_L)"
-
-#: src/stock.c:77 data/ui/glabels-ui.xml.h:97
-msgid "Rotate _Right"
-msgstr "向右旋转(_R)"
-
-#: src/stock.c:78 data/ui/glabels-ui.xml.h:52
-msgid "Flip _Horizontally"
-msgstr "水平翻转(_H)"
-
-#: src/stock.c:79 data/ui/glabels-ui.xml.h:53
-msgid "Flip _Vertically"
-msgstr "垂直翻转(_V)"
-
-#: src/stock.c:80 data/ui/glabels-ui.xml.h:147
-msgid "_Lefts"
-msgstr "靠左(_L)"
-
-#: src/stock.c:81 data/ui/glabels-ui.xml.h:159
-msgid "_Rights"
-msgstr "靠右(_R)"
-
-#: src/stock.c:82 data/ui/glabels-ui.xml.h:131
-msgid "_Centers"
-msgstr "居中(_C)"
-
-#: src/stock.c:83 data/ui/glabels-ui.xml.h:164
-msgid "_Tops"
-msgstr "顶部(_T)"
-
-#: src/stock.c:84
-msgid "Bottoms"
-msgstr "底部"
-
-#: src/stock.c:85
-msgid "Centers"
-msgstr "居中"
-
-#: src/stock.c:86 src/stock.c:87 data/ui/glabels-ui.xml.h:62
-msgid "Label Ce_nter"
-msgstr "标签中心(_N)"
-
-#: src/stock.c:88 data/ui/glabels-ui.xml.h:51
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
+#: ../data/ui/property-bar.ui.h:3
 msgid "Fill color"
 msgstr "填充色"
 
-#: src/stock.c:89 data/ui/glabels-ui.xml.h:64
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../src/stock.c:94 ../data/ui/property-bar.ui.h:8
 msgid "Line color"
 msgstr "线条颜色"
 
-#: src/stock.c:90 src/stock.c:92
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
+#: ../data/ui/property-bar.ui.h:9
+msgid "Line width"
+msgstr "线宽"
+
+#: ../src/label.c:399
+msgid "Untitled"
+msgstr "未命名"
+
+#: ../src/label.c:702 ../src/ui.c:429
+msgid "Merge properties"
+msgstr "合并属性"
+
+#: ../src/label.c:1184 ../src/ui.c:215
+msgid "Delete"
+msgstr "删除"
+
+#: ../src/label.c:1217 ../src/ui.c:331
+msgid "Bring to front"
+msgstr "移到上层"
+
+#: ../src/label.c:1253 ../src/ui.c:338
+msgid "Send to back"
+msgstr "移到下层"
+
+#: ../src/label.c:1294
+#, fuzzy
+msgid "Rotate"
+msgstr "旋转"
+
+#: ../src/label.c:1329 ../src/ui.c:345
+msgid "Rotate left"
+msgstr "向左旋转"
+
+#: ../src/label.c:1362 ../src/ui.c:352
+msgid "Rotate right"
+msgstr "向右旋转"
+
+#: ../src/label.c:1397 ../src/ui.c:359
+msgid "Flip horizontally"
+msgstr "水平翻转"
+
+#: ../src/label.c:1432 ../src/ui.c:366
+msgid "Flip vertically"
+msgstr "垂直翻转"
+
+#: ../src/label.c:1472 ../src/ui.c:373
+msgid "Align left"
+msgstr "左对齐"
+
+#: ../src/label.c:1529 ../src/ui.c:380
+msgid "Align right"
+msgstr "右对齐"
+
+#: ../src/label.c:1590 ../src/ui.c:387
+msgid "Align horizontal center"
+msgstr "水平中心共线"
+
+#: ../src/label.c:1666 ../src/ui.c:394
+msgid "Align tops"
+msgstr "顶端对齐"
+
+#: ../src/label.c:1723 ../src/ui.c:401
+msgid "Align bottoms"
+msgstr "底部对齐"
+
+#: ../src/label.c:1784 ../src/ui.c:408
+msgid "Align vertical center"
+msgstr "垂直中心共线"
+
+#: ../src/label.c:1862 ../src/ui.c:415
+msgid "Center horizontally"
+msgstr "水平居中"
+
+#: ../src/label.c:1909 ../src/ui.c:422
+msgid "Center vertically"
+msgstr "垂直居中"
+
+#: ../src/label.c:2595 ../src/label.c:2637 ../src/label.c:2663 ../src/ui.c:208
+msgid "Paste"
+msgstr "粘贴"
+
+#: ../src/label-ellipse.c:160
+#, fuzzy
+msgid "Create ellipse object"
+msgstr "新建线条对象"
+
+#: ../src/label-image.c:161 ../src/ui.c:312
+msgid "Create image object"
+msgstr "新建图片对象"
+
+#: ../src/label-image.c:265 ../src/label-image.c:336
+#, fuzzy
+msgid "Set image"
+msgstr "恢复图片大小"
+
+#: ../src/label-line.c:147 ../src/ui.c:298
+msgid "Create line object"
+msgstr "新建线条对象"
+
+#: ../src/label-object.c:383 ../src/label-object.c:416
+msgid "Move"
+msgstr ""
+
+#: ../src/label-object.c:467
+#, fuzzy
+msgid "Resize"
+msgstr "纸张大小"
+
+#: ../src/label-object.c:1185
+#, fuzzy
+msgid "Shadow state"
+msgstr "阴影"
+
+#: ../src/label-object.c:1228
+#, fuzzy
+msgid "Shadow offset"
+msgstr "阴影"
+
+#: ../src/label-object.c:1276
+#, fuzzy
+msgid "Shadow color"
+msgstr "阴影"
+
+#: ../src/label-object.c:1319
+#, fuzzy
+msgid "Shadow opacity"
+msgstr "阴影"
+
+#: ../src/label-text.c:279 ../src/ui.c:284
+msgid "Create text object"
+msgstr "新建文字对象"
+
+#: ../src/label-text.c:451
+msgid "Typing"
+msgstr ""
+
+#: ../src/label-text.c:584 ../data/ui/property-bar.ui.h:4
+msgid "Font family"
+msgstr "字体系列"
+
+#: ../src/label-text.c:622 ../data/ui/property-bar.ui.h:5
+msgid "Font size"
+msgstr "字体大小"
+
+#: ../src/label-text.c:655
+#, fuzzy
+msgid "Font weight"
+msgstr "向右旋转"
+
+#: ../src/label-text.c:688 ../data/ui/property-bar.ui.h:6
+msgid "Italic"
+msgstr "斜体"
+
+#: ../src/label-text.c:721
+#, fuzzy
+msgid "Align text"
+msgstr "左对齐"
+
+#: ../src/label-text.c:754
+#, fuzzy
+msgid "Line spacing"
+msgstr "线条间隔："
+
+#: ../src/label-text.c:787 ../data/ui/property-bar.ui.h:11
+#, fuzzy
+msgid "Text color"
+msgstr "文字颜色"
+
+#: ../src/label-text.c:931
+msgid "Auto shrink"
+msgstr ""
+
+#: ../src/media-select.c:349 ../src/media-select.c:353
+#: ../src/media-select.c:502 ../src/media-select.c:701
+#, fuzzy
+msgctxt "Brand"
+msgid "Any"
+msgstr "通用"
+
+#: ../src/media-select.c:358 ../src/media-select.c:871
+#, fuzzy
+msgctxt "Page size"
+msgid "Any"
+msgstr "通用"
+
+#: ../src/media-select.c:367 ../src/media-select.c:370
+#: ../src/media-select.c:880
+#, fuzzy
+msgctxt "Category"
+msgid "Any"
+msgstr "通用"
+
+#: ../src/media-select.c:968
+msgid "No recent templates found."
+msgstr "最近没有使用模板。"
+
+#: ../src/media-select.c:970
+#, fuzzy
+msgid "Try selecting a template in the \"Search all\" tab."
+msgstr "请从 \"查找全部模板\" 页面中选择一个模板。"
+
+#. Translators: "No match" means that for the given template search criteria, there
+#. * were no matches found.
+#: ../src/media-select.c:1061
+msgid "No match."
+msgstr "不相符。"
+
+#: ../src/media-select.c:1063
+msgid "Try selecting a different brand, page size or category."
+msgstr "请选择其它品牌，纸张尺寸或类型。"
+
+#: ../src/media-select.c:1157
+#, fuzzy
+msgid "No custom templates found."
+msgstr "最近没有使用模板。"
+
+#: ../src/media-select.c:1159
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+
+#. Translators: "None" here means that no document-merge source or
+#. * method has been selected.
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
+msgid "None"
+msgstr "无"
+
+#: ../src/merge-evolution.c:316
+msgid "Couldn't construct query"
+msgstr "不能查询数据组"
+
+#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
+msgid "Couldn't open addressbook."
+msgstr "不能打开通迅录"
+
+#: ../src/merge-evolution.c:348
+msgid "Couldn't list available fields."
+msgstr "无法显示有效区域。"
+
+#: ../src/merge-evolution.c:384
+msgid "Couldn't get contacts."
+msgstr "无法读取通迅录信息。"
+
+#: ../src/merge-init.c:57
+msgid "Text: Comma Separated Values (CSV)"
+msgstr ""
+
+#: ../src/merge-init.c:64
+msgid "Text: Comma Separated Values (CSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:72
+msgid "Text: Tab Separated Values (TSV)"
+msgstr ""
+
+#: ../src/merge-init.c:79
+msgid "Text: Tab Separated Values (TSV) with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:87
+msgid "Text: Colon separated values"
+msgstr ""
+
+#: ../src/merge-init.c:94
+msgid "Text: Colon separated values with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:102
+msgid "Text: Semicolon separated values"
+msgstr ""
+
+#: ../src/merge-init.c:109
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr ""
+
+#: ../src/merge-init.c:119
+#, fuzzy
+msgid "Evolution Addressbook"
+msgstr "从Evolution导出的通迅录"
+
+#: ../src/merge-init.c:125
+#, fuzzy
+msgid "VCards"
+msgstr "夹纸条"
+
+#: ../src/merge-properties-dialog.c:282
+msgid "Merge Properties"
+msgstr "合并属性"
+
+#: ../src/merge-properties-dialog.c:308 ../src/merge-properties-dialog.c:424
+msgid "Select merge-database source"
+msgstr "选择要插入的数据"
+
+#: ../src/merge-properties-dialog.c:319 ../src/merge-properties-dialog.c:450
+msgid "N/A"
+msgstr "无"
+
+#: ../src/merge-properties-dialog.c:345
+msgid "Select"
+msgstr "选择"
+
+#: ../src/merge-properties-dialog.c:352
+msgid "Record/Field"
+msgstr "记录/区域"
+
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:10
+msgid "Data"
+msgstr "数据"
+
+#. Translators: "Fixed" here means that for the given document-merge method, there are
+#. * no further choices to further define the source of data.  E.g. if you select the
+#. * evolution-data-server, there are no further choices -- the source is "Fixed."
+#.
+#: ../src/merge-properties-dialog.c:443
+msgid "Fixed"
+msgstr "固定值"
+
+#. Translators: "Up" refers to the direction towards the top of a label.
+#: ../src/mini-preview.c:1074
+msgid "Up"
+msgstr ""
+
+#: ../src/new-label-dialog.c:203
+#, fuzzy
+msgid "Select Product"
+msgstr "模式选择"
+
+#: ../src/new-label-dialog.c:215
+msgid "Choose Orientation"
+msgstr ""
+
+#: ../src/new-label-dialog.c:229
+msgid "Review"
+msgstr ""
+
+#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
+#: ../src/ui-property-bar.c:280
+msgid "Default"
+msgstr "默认值"
+
+#: ../src/object-editor.c:179 ../src/object-editor.c:485
+msgid "Object properties"
+msgstr "对象属性"
+
+#: ../src/object-editor.c:332
+msgid "Box object properties"
+msgstr "矩形属性"
+
+#: ../src/object-editor.c:351
+msgid "Ellipse object properties"
+msgstr "椭圆属性"
+
+#: ../src/object-editor.c:370
+msgid "Line object properties"
+msgstr "线条属性"
+
+#: ../src/object-editor.c:387
+msgid "Image object properties"
+msgstr "图片属性"
+
+#: ../src/object-editor.c:404
+msgid "Text object properties"
+msgstr "文字属性"
+
+#: ../src/object-editor.c:426
+msgid "Barcode object properties"
+msgstr "条形码属性"
+
+#: ../src/object-editor-edit-page.c:76
+msgid "Insert merge field"
+msgstr "插入合并区域"
+
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:345
+#: ../src/ui-property-bar.c:292
+msgid "No Fill"
+msgstr "没有填充"
+
+#: ../src/object-editor-image-page.c:278
+msgid "All Files"
+msgstr "全部文件"
+
+#: ../src/object-editor-image-page.c:283
+msgid "All Images"
+msgstr "全部图片"
+
+#: ../src/object-editor-image-page.c:298
+#, c-format
+msgid "%s (*.%s)"
+msgstr "%s (*.%s)"
+
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
+#: ../src/ui-property-bar.c:304
+msgid "No Line"
+msgstr "没有线条"
+
+#: ../src/prefs-dialog.c:172 ../data/ui/prefs-dialog.ui.h:21
+msgid "gLabels Preferences"
+msgstr "gLabels参数"
+
+#. ===================================================================
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:217
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#: ../templates/misc-iso-templates.xml.h:34
+msgid "Labels"
+msgstr "标签"
+
+#: ../src/stock.c:70
+msgid "_Select Mode"
+msgstr "选择模式(_S)"
+
+#: ../src/stock.c:71
+msgid "_Text"
+msgstr "文字(_T)"
+
+#: ../src/stock.c:72
+msgid "_Line"
+msgstr "线条(_L)"
+
+#: ../src/stock.c:73
+msgid "_Box"
+msgstr "矩形(_B)"
+
+#: ../src/stock.c:74
+msgid "_Ellipse"
+msgstr "椭圆(_E)"
+
+#: ../src/stock.c:75
+msgid "_Image"
+msgstr "图片(_I)"
+
+#: ../src/stock.c:76
+msgid "Bar_code"
+msgstr "条形码(_C)"
+
+#: ../src/stock.c:77
+msgid "_Merge Properties"
+msgstr "合并属性(_M)"
+
+#: ../src/stock.c:78
+msgid "Object _Properties"
+msgstr "对象属性(_P)"
+
+#: ../src/stock.c:79
+msgid "Bring to _Front"
+msgstr "移到上层(_F)"
+
+#: ../src/stock.c:80
+msgid "Send to _Back"
+msgstr "移到下层(_B)"
+
+#: ../src/stock.c:81
+msgid "Rotate _Left"
+msgstr "向左旋转(_L)"
+
+#: ../src/stock.c:82
+msgid "Rotate _Right"
+msgstr "向右旋转(_R)"
+
+#: ../src/stock.c:83
+msgid "Flip _Horizontally"
+msgstr "水平翻转(_H)"
+
+#: ../src/stock.c:84
+msgid "Flip _Vertically"
+msgstr "垂直翻转(_V)"
+
+#: ../src/stock.c:85
+msgid "_Lefts"
+msgstr "靠左(_L)"
+
+#: ../src/stock.c:86
+msgid "_Rights"
+msgstr "靠右(_R)"
+
+#: ../src/stock.c:87
+msgid "_Centers"
+msgstr "居中(_C)"
+
+#: ../src/stock.c:88
+msgid "_Tops"
+msgstr "顶部(_T)"
+
+#: ../src/stock.c:89
+msgid "Bottoms"
+msgstr "底部"
+
+#: ../src/stock.c:90
+msgid "Centers"
+msgstr "居中"
+
+#: ../src/stock.c:91 ../src/stock.c:92
+msgid "Label Ce_nter"
+msgstr "标签中心(_N)"
+
+#: ../src/stock.c:95 ../src/stock.c:97
 msgid "Linked"
 msgstr "相连"
 
-#: src/stock.c:91 src/stock.c:93
+#: ../src/stock.c:96 ../src/stock.c:98
 msgid "Not Linked"
 msgstr "不相连"
+
+#: ../src/template-designer.c:404
+#, fuzzy
+msgid "New gLabels Template"
+msgstr "gLabels 模板设计工具r"
+
+#: ../src/template-designer.c:461
+msgid "Welcome"
+msgstr "欢迎"
+
+#: ../src/template-designer.c:500
+msgid "Name and Description"
+msgstr "名称和说明"
+
+#: ../src/template-designer.c:548
+msgid "Page Size"
+msgstr "纸张尺寸"
+
+#: ../src/template-designer.c:614
+msgid "Label or Card Shape"
+msgstr "标签或名片形状"
+
+#: ../src/template-designer.c:661
+msgid "Label or Card Size"
+msgstr "标签或名片尺寸"
+
+#: ../src/template-designer.c:760
+msgid "Label Size (round)"
+msgstr "标签尺寸(圆形)"
+
+#: ../src/template-designer.c:841
+msgid "Label Size (CD/DVD)"
+msgstr "标签尺寸(CD/DVD)"
+
+#: ../src/template-designer.c:932
+msgid "Number of Layouts"
+msgstr "布局个数"
+
+#: ../src/template-designer.c:1000
+msgid "Layout(s)"
+msgstr "布局"
+
+#: ../src/template-designer.c:1105
+msgid "Design Completed"
+msgstr "设计完成"
+
+#: ../src/template-designer.c:1133
+#, fuzzy
+msgid "Edit gLabels Template"
+msgstr "gLabels 模板设计工具r"
+
+#: ../src/template-designer.c:1422
+msgid ""
+"<span foreground='red' weight='bold'>Brand and part# match an existing "
+"template!</span>"
+msgstr "<span foreground='red' weight='bold'>模板中已有的品牌和规格</span>"
 
 #. Menu entries.
 #: ../src/ui.c:93
@@ -341,365 +1248,280 @@ msgstr "退出(_Q)"
 msgid "Quit the program"
 msgstr "退出程序"
 
-#: ../src/ui.c:180
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:980
+msgid "Undo"
+msgstr ""
+
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:987
+#, fuzzy
+msgid "Redo"
+msgstr "红色"
+
+#: ../src/ui.c:194
 msgid "Cut"
 msgstr "剪切"
 
-#: ../src/ui.c:182
+#: ../src/ui.c:196
 msgid "Cut the selection"
 msgstr "剪切选中的内容"
 
-#: ../src/ui.c:187
+#: ../src/ui.c:201
 msgid "Copy"
 msgstr "复制"
 
-#: ../src/ui.c:189
+#: ../src/ui.c:203
 msgid "Copy the selection"
 msgstr "复制选中的内容"
 
-#: ../src/ui.c:194
-msgid "Paste"
-msgstr "粘贴"
-
-#: ../src/ui.c:196
+#: ../src/ui.c:210
 msgid "Paste the clipboard"
 msgstr "粘贴到剪贴板"
 
-#: ../src/ui.c:201
-msgid "Delete"
-msgstr "删除"
-
-#: ../src/ui.c:203
+#: ../src/ui.c:217
 msgid "Delete the selected objects"
 msgstr "删除选中的对象"
 
-#: ../src/ui.c:208
+#: ../src/ui.c:222
 msgid "Select All"
 msgstr "全选"
 
-#: ../src/ui.c:210
+#: ../src/ui.c:224
 msgid "Select all objects"
 msgstr "选中全部对象"
 
-#: ../src/ui.c:215
+#: ../src/ui.c:229
 msgid "Un-select All"
 msgstr "取消全选"
 
-#: ../src/ui.c:217
+#: ../src/ui.c:231
 msgid "Remove all selections"
 msgstr "删除全部选中的内容"
 
-#: ../src/ui.c:222
+#: ../src/ui.c:236
 msgid "Preferences"
 msgstr "参数"
 
-#: ../src/ui.c:224
+#: ../src/ui.c:238
 msgid "Configure the application"
 msgstr "对程序进行设置"
 
-#: ../src/ui.c:231
+#: ../src/ui.c:245
 msgid "Zoom in"
 msgstr "放大"
 
-#: ../src/ui.c:233
+#: ../src/ui.c:247
 msgid "Increase magnification"
 msgstr "放大"
 
-#: ../src/ui.c:238
+#: ../src/ui.c:252
 msgid "Zoom out"
 msgstr "缩小"
 
-#: ../src/ui.c:240
+#: ../src/ui.c:254
 msgid "Decrease magnification"
 msgstr "缩小"
 
-#: ../src/ui.c:245
+#: ../src/ui.c:259
 msgid "Zoom 1 to 1"
 msgstr "1:1 缩放"
 
-#: ../src/ui.c:247
+#: ../src/ui.c:261
 msgid "Restore scale to 100%"
 msgstr "缩放到实际大小的 100% "
 
-#: ../src/ui.c:252
+#: ../src/ui.c:266
 msgid "Zoom to fit"
 msgstr "最佳比例"
 
-#: ../src/ui.c:254
+#: ../src/ui.c:268
 msgid "Set scale to fit window"
 msgstr "缩放到适合窗口"
 
-#: ../src/ui.c:261
+#: ../src/ui.c:275
 msgid "Select Mode"
 msgstr "模式选择"
 
-#: ../src/ui.c:263
+#: ../src/ui.c:277
 msgid "Select, move and modify objects"
 msgstr "选择，移动或删除对象"
 
-#: ../src/ui.c:268 ../src/view-text.c:494
-#: ../data/builder/object-editor.glade.h:32
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:30
 msgid "Text"
 msgstr "文字"
 
-#: ../src/ui.c:270
-msgid "Create text object"
-msgstr "新建文字对象"
-
-#: ../src/ui.c:275
+#: ../src/ui.c:289
 msgid "Box"
 msgstr "矩形"
 
-#: ../src/ui.c:277
+#: ../src/ui.c:291
 msgid "Create box/rectangle object"
 msgstr "新建矩形对象"
 
-#: ../src/ui.c:282 ../data/builder/object-editor.glade.h:20
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:19
 msgid "Line"
 msgstr "线条"
 
-#: ../src/ui.c:284
-msgid "Create line object"
-msgstr "新建线条对象"
-
-#: ../src/ui.c:289
+#: ../src/ui.c:303
 msgid "Ellipse"
 msgstr "椭圆"
 
-#: ../src/ui.c:291
+#: ../src/ui.c:305
 msgid "Create ellipse/circle object"
 msgstr "新建 椭圆/圆 对象"
 
-#: ../src/ui.c:296 ../data/builder/object-editor.glade.h:16
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:16
 msgid "Image"
 msgstr "图片"
 
-#: ../src/ui.c:298
-msgid "Create image object"
-msgstr "新建图片对象"
-
-#: ../src/ui.c:303
+#: ../src/ui.c:317
 msgid "Barcode"
 msgstr "条形码"
 
-#: ../src/ui.c:305
-msgid "Create barcode object"
-msgstr "新建条形码"
+#: ../src/ui.c:324
+#, fuzzy
+msgid "Properties"
+msgstr "属性..."
 
-#: ../src/ui.c:310
-msgid "Bring to front"
-msgstr "移到上层"
+#: ../src/ui.c:326
+#, fuzzy
+msgid "Edit object properties"
+msgstr "线条属性"
 
-#: ../src/ui.c:312
+#: ../src/ui.c:333
 msgid "Raise object to top"
 msgstr "移到最顶端"
 
-#: ../src/ui.c:317
-msgid "Send to back"
-msgstr "移到下层"
-
-#: ../src/ui.c:319
+#: ../src/ui.c:340
 msgid "Lower object to bottom"
 msgstr "把下层对象移到最底层"
 
-#: ../src/ui.c:324
-msgid "Rotate left"
-msgstr "向左旋转"
-
-#: ../src/ui.c:326
+#: ../src/ui.c:347
 msgid "Rotate object 90 degrees counter-clockwise"
 msgstr "向左旋转90度"
 
-#: ../src/ui.c:331
-msgid "Rotate right"
-msgstr "向右旋转"
-
-#: ../src/ui.c:333
+#: ../src/ui.c:354
 msgid "Rotate object 90 degrees clockwise"
 msgstr "向右旋转90度"
 
-#: ../src/ui.c:338
-msgid "Flip horizontally"
-msgstr "水平翻转"
-
-#: ../src/ui.c:340
+#: ../src/ui.c:361
 msgid "Flip object horizontally"
 msgstr "水平翻转对象"
 
-#: ../src/ui.c:345
-msgid "Flip vertically"
-msgstr "垂直翻转"
-
-#: ../src/ui.c:347
+#: ../src/ui.c:368
 msgid "Flip object vertically"
 msgstr "垂直翻转对象"
 
-#: ../src/ui.c:352
-msgid "Align left"
-msgstr "左对齐"
-
-#: ../src/ui.c:354
+#: ../src/ui.c:375
 msgid "Align objects to left edges"
 msgstr "多个对象与左边界对齐"
 
-#: ../src/ui.c:359
-msgid "Align right"
-msgstr "右对齐"
-
-#: ../src/ui.c:361
+#: ../src/ui.c:382
 msgid "Align objects to right edges"
 msgstr "多个对象与左边界对齐"
 
-#: ../src/ui.c:366
-msgid "Align horizontal center"
-msgstr "水平中心共线"
-
-#: ../src/ui.c:368
+#: ../src/ui.c:389
 msgid "Align objects to horizontal centers"
 msgstr "多个对象的水平中心共线"
 
-#: ../src/ui.c:373
-msgid "Align tops"
-msgstr "顶端对齐"
-
-#: ../src/ui.c:375
+#: ../src/ui.c:396
 msgid "Align objects to top edges"
 msgstr "多个对象与上边界对齐"
 
-#: ../src/ui.c:380
-msgid "Align bottoms"
-msgstr "底部对齐"
-
-#: ../src/ui.c:382
+#: ../src/ui.c:403
 msgid "Align objects to bottom edges"
 msgstr "多个对象与下边界对齐"
 
-#: ../src/ui.c:387
-msgid "Align vertical center"
-msgstr "垂直中心共线"
-
-#: ../src/ui.c:389
+#: ../src/ui.c:410
 msgid "Align objects to vertical centers"
 msgstr "多个对象的垂直中心共线"
 
-#: ../src/ui.c:394
-msgid "Center horizontally"
-msgstr "水平居中"
-
-#: ../src/ui.c:396
+#: ../src/ui.c:417
 msgid "Center objects to horizontal label center"
 msgstr "对象中心与水平中心重合"
 
-#: ../src/ui.c:401
-msgid "Center vertically"
-msgstr "垂直居中"
-
-#: ../src/ui.c:403
+#: ../src/ui.c:424
 msgid "Center objects to vertical label center"
 msgstr "对象中心与垂直中心重合"
 
-#: ../src/ui.c:408
-msgid "Merge properties"
-msgstr "合并属性"
-
-#: ../src/ui.c:410
+#: ../src/ui.c:431
 msgid "Edit merge properties"
 msgstr "编辑合并属性"
 
-#: ../src/ui.c:417
+#: ../src/ui.c:438
 msgid "Contents"
 msgstr "内容"
 
-#: ../src/ui.c:419
+#: ../src/ui.c:440
 msgid "Open glabels manual"
 msgstr "打开glabels帮助手册"
 
-#: ../src/ui.c:424
+#: ../src/ui.c:445
 msgid "About..."
 msgstr "关于..."
 
-#: ../src/ui.c:426
+#: ../src/ui.c:447
 msgid "About glabels"
 msgstr "关于glabels"
 
 # CHECK
-#: ../src/ui.c:436
+#: ../src/ui.c:457
 msgid "Property toolbar"
 msgstr "属性栏"
 
-#: ../src/ui.c:438
+#: ../src/ui.c:459
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr "改变当前窗口中属性栏的可视性"
 
-#: ../src/ui.c:444
+#: ../src/ui.c:465
 msgid "Grid"
 msgstr "单元格"
 
-#: ../src/ui.c:446
+#: ../src/ui.c:467
 msgid "Change the visibility of the grid in the current window"
 msgstr "改变当前窗口中单元格的可视性"
 
-#: ../src/ui.c:452
+#: ../src/ui.c:473
 msgid "Markup"
 msgstr "标记"
 
-#: ../src/ui.c:454
+#: ../src/ui.c:475
 msgid "Change the visibility of markup lines in the current window"
 msgstr "改变当前窗口中标记线条的可视性"
 
-#: ../src/ui.c:465
+#: ../src/ui.c:486
 msgid "Main toolbar"
 msgstr "主工具栏"
 
-#: ../src/ui.c:467
+#: ../src/ui.c:488
 msgid "Change the visibility of the main toolbar in the current window"
 msgstr "改变当前窗口中主工具栏的可视性"
 
-#: ../src/ui.c:473
+#: ../src/ui.c:494
 msgid "Drawing toolbar"
 msgstr "绘图栏"
 
-#: ../src/ui.c:475
+#: ../src/ui.c:496
 msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr "改变当前窗口中绘图栏的可视性"
 
-#: ../src/ui-property-bar.c:279 ../src/prefs-dialog.c:328
-#: ../src/object-editor-bc-page.c:93 ../src/object-editor-text-page.c:93
-#: ../src/object-editor-shadow-page.c:93
-msgid "Default"
-msgstr "默认值"
-
-#: ../src/ui-property-bar.c:291 ../src/prefs-dialog.c:334
-#: ../src/object-editor-fill-page.c:79
-msgid "No Fill"
-msgstr "没有填充"
-
-#: ../src/ui-property-bar.c:303 ../src/prefs-dialog.c:331
-#: ../src/object-editor-line-page.c:81
-msgid "No Line"
-msgstr "没有线条"
-
-#: ../src/ui-sidebar.c:152
-msgid "Object properties"
-msgstr "对象属性"
-
-#: ../src/ui-commands.c:1064
+#: ../src/ui-commands.c:1153
 msgid "Glabels includes contributions from:"
 msgstr "Glabels 包括的发布内容来自："
 
-#: ../src/ui-commands.c:1070
+#: ../src/ui-commands.c:1159
 msgid "See the file AUTHORS for additional credits,"
 msgstr "查看AUTHORS文件来获得更多信息，"
 
-#: ../src/ui-commands.c:1071
-msgid "or visit http://glabels.sourceforge.net/"
+#: ../src/ui-commands.c:1160
+#, fuzzy
+msgid "or visit http://glabels.org/"
 msgstr "或者访问 http://glabels.sourceforge.net/"
 
-#: ../src/ui-commands.c:1083
+#: ../src/ui-commands.c:1172
 msgid "A label and business card creation program.\n"
 msgstr "一个标签和名片设计程序。\n"
 
-#: ../src/ui-commands.c:1087
+#: ../src/ui-commands.c:1176
 msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
@@ -707,17 +1529,18 @@ msgstr ""
 "Mario Blättermann <mariobl@gnome.org>\n"
 "Careone <zzbusagain@yahoo.com.cn>"
 
-#: ../src/ui-commands.c:1090
+#: ../src/ui-commands.c:1179
+#, fuzzy
 msgid ""
-"Glabels is free software; you can redistribute it and/or modify it\n"
-"under the terms of the GNU General Public License as published by\n"
-"the Free Software Foundation; either version 2 of the License, or\n"
+"gLabels is free software: you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation, either version 3 of the License, or\n"
 "(at your option) any later version.\n"
 "\n"
-"This program is distributed in the hope that it will be useful, but\n"
-"WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
-"the GNU General Public License for more details.\n"
+"gLabels is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
 msgstr ""
 "Glabels is free software; you can redistribute it and/or modify it\n"
 "under the terms of the GNU General Public License as published by\n"
@@ -729,743 +1552,154 @@ msgstr ""
 "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See\n"
 "the GNU General Public License for more details.\n"
 
-#: ../src/ui-commands.c:1116
+#: ../src/ui-commands.c:1208
 msgid "glabels"
 msgstr "glabels"
 
-#: ../src/file.c:91
-msgid "New Label or Card"
-msgstr "新建标签或名片"
-
-#: ../src/file.c:191
-msgid "Label properties"
-msgstr "标签属性"
-
-#: ../src/file.c:292 ../src/file.c:578
-msgid "All files"
-msgstr "全部文件"
-
-#: ../src/file.c:297 ../src/file.c:583
-msgid "gLabels documents"
-msgstr "gLabels文件(.glabels)"
-
-#: ../src/file.c:343 ../src/file.c:640
-msgid "Empty file name selection"
-msgstr "没有选择文件"
-
-#: ../src/file.c:346 ../src/file.c:362
-msgid "Please select a file or supply a valid file name"
-msgstr "请选择文件，或输入文件名"
-
-#: src/file.c:519 src/file.c:631
-msgid "File does not exist"
-msgstr "文件不存在"
-
-#: ../src/file.c:433
-#, c-format
-msgid "Could not open file \"%s\""
-msgstr "无法打开文件 \"%s\""
-
-#: src/file.c:715
-msgid "Not a supported file format"
-msgstr "不支持的文件格式"
-
-#: ../src/file.c:513 ../src/file.c:690
-#, c-format
-msgid "Could not save file \"%s\""
-msgstr "无法保存文件 \"%s\""
-
-#: src/file.c:805 src/file.c:987 src/file.c:1182
-msgid "Error encountered during save.  The file is still not saved."
-msgstr "保存时出错。文件没有保存。"
-
-#: ../src/file.c:556
-#, c-format
-msgid "Save \"%s\" as"
-msgstr " \"%s\" 另存为"
-
-#: src/file.c:935 src/file.c:1131
-msgid "Please supply a valid file name"
-msgstr "请输入文件名"
-
-#: ../src/file.c:664
-#, c-format
-msgid "Overwrite file \"%s\"?"
-msgstr "覆盖文件 \"%s\"？"
-
-#: src/file.c:960 src/file.c:1155
-msgid "File already exists."
-msgstr "已有同名文件。"
-
-#: src/file.c:1271
-#, c-format
-msgid "Save changes to document \"%s\" before closing?"
-msgstr "在关闭前先保存文件 \"%s\"？"
-
-#: src/file.c:1279
-msgid "Your changes will be lost if you don't save them."
-msgstr "如果不保存，所做的更改会丢失。"
-
-#: src/file.c:1282
-msgid "Close without saving"
-msgstr "关闭(不保存)"
-
-#. Should not happen
-#: ../src/prefs.c:159 ../src/prefs.c:166
-#: ../data/builder/object-editor.glade.h:43
-#: ../data/builder/prefs-dialog.glade.h:22
-msgid "points"
-msgstr "像素"
-
-#: src/prefs.c:158 data/glade/object-editor.glade.h:36
-#: data/glade/template-designer.glade.h:74
-msgid "inches"
-msgstr "英寸"
-
-#: src/prefs.c:160
-msgid "mm"
-msgstr "mm"
-
-#: src/prefs-dialog.c:248 data/glade/prefs-dialog.glade.h:22
-msgid "gLabels Preferences"
-msgstr "gLabels参数"
-
-#. Build editor.
-#: ../src/view-box.c:175
-msgid "Box object properties"
-msgstr "矩形属性"
-
-#. Build editor.
-#: src/view-ellipse.c:224
-msgid "Ellipse object properties"
-msgstr "椭圆属性"
-
-#. Build editor.
-#: src/view-line.c:224
-msgid "Line object properties"
-msgstr "线条属性"
-
-#. Build editor.
-#: src/view-image.c:223
-msgid "Image object properties"
-msgstr "图片属性"
-
-#. Build editor.
-#: src/view-text.c:251
-msgid "Text object properties"
-msgstr "文字属性"
-
-#. Build editor.
-#: ../src/view-barcode.c:174
-msgid "Barcode object properties"
-msgstr "条形码属性"
-
-#: ../src/object-editor-image-page.c:267
-msgid "All Files"
-msgstr "全部文件"
-
-#: ../src/object-editor-image-page.c:272
-msgid "All Images"
-msgstr "全部图片"
-
-#: ../src/object-editor-image-page.c:287
-#, c-format
-msgid "%s (*.%s)"
-msgstr "%s (*.%s)"
-
-#: ../src/merge-properties-dialog.c:271
-msgid "Merge Properties"
-msgstr "合并属性"
-
-#: ../src/merge-properties-dialog.c:297 ../src/merge-properties-dialog.c:405
-msgid "Select merge-database source"
-msgstr "选择要插入的数据"
-
-#: ../src/merge-properties-dialog.c:306 ../src/merge-properties-dialog.c:425
-msgid "N/A"
-msgstr "无"
-
-#: ../src/merge-properties-dialog.c:332
-msgid "Select"
-msgstr "选择"
-
-#: ../src/merge-properties-dialog.c:340
-msgid "Record/Field"
-msgstr "记录/区域"
-
-#: ../src/merge-properties-dialog.c:348
-#: ../data/builder/object-editor.glade.h:10
-msgid "Data"
-msgstr "数据"
-
-#: ../src/merge-properties-dialog.c:418
-msgid "Fixed"
-msgstr "固定值"
-
-#. ===================================================================
-#: ../src/print-op.c:242 ../src/wdgt-print-copies.c:171
-#: ../data/templates/misc-iso-templates.xml.h:34
-msgid "Labels"
-msgstr "标签"
-
-#: ../src/template-designer.c:411
-msgid "gLabels Template Designer"
-msgstr "gLabels 模板设计工具r"
-
-#: ../src/template-designer.c:481
-msgid "Welcome"
-msgstr "欢迎"
-
-#: ../src/template-designer.c:534
-msgid "Name and Description"
-msgstr "名称和说明"
-
-#: ../src/template-designer.c:595
-msgid "Page Size"
-msgstr "纸张尺寸"
-
-#: ../src/template-designer.c:675
-msgid "Label or Card Shape"
-msgstr "标签或名片形状"
-
-#: ../src/template-designer.c:735
-msgid "Label or Card Size"
-msgstr "标签或名片尺寸"
-
-#: ../src/template-designer.c:844
-msgid "Label Size (round)"
-msgstr "标签尺寸(圆形)"
-
-#: ../src/template-designer.c:935
-msgid "Label Size (CD/DVD)"
-msgstr "标签尺寸(CD/DVD)"
-
-#: ../src/template-designer.c:1036
-msgid "Number of Layouts"
-msgstr "布局个数"
-
-#: ../src/template-designer.c:1110
-msgid "Layout(s)"
-msgstr "布局"
-
-#: ../src/template-designer.c:1229
-msgid "Design Completed"
-msgstr "设计完成"
-
-#: ../src/template-designer.c:1396
-msgid ""
-"<span foreground='red' weight='bold'>Brand and part# match an existing "
-"template!</span>"
-msgstr ""
-"<span foreground='red' weight='bold'>模板中已有的品牌和规格</span>"
-
-#: ../src/bc.c:67
-msgid "POSTNET (any)"
-msgstr "POSTNET (通用)"
-
-#: ../src/bc.c:70
-msgid "POSTNET-5 (ZIP only)"
-msgstr "POSTNET-5 (用于邮编)"
-
-#: ../src/bc.c:73
-msgid "POSTNET-9 (ZIP+4)"
-msgstr "POSTNET-9 (ZIP+4)"
-
-#: ../src/bc.c:76
-msgid "POSTNET-11 (DPBC)"
-msgstr "POSTNET-11 (DPBC)"
-
-#: ../src/bc.c:79
-msgid "CEPNET"
-msgstr "CEPNET"
-
-#: ../src/bc.c:82
-msgid "EAN (any)"
-msgstr "EAN (通用)"
-
-#: ../src/bc.c:85
-msgid "EAN-8"
-msgstr "EAN-8"
-
-#: ../src/bc.c:88
-msgid "EAN-8 +2"
-msgstr "EAN-8 +2"
-
-#: ../src/bc.c:91
-msgid "EAN-8 +5"
-msgstr "EAN-8 +5"
-
-#: ../src/bc.c:94
-msgid "EAN-13"
-msgstr "EAN-13"
-
-#: ../src/bc.c:97
-msgid "EAN-13 +2"
-msgstr "EAN-13 +2"
-
-#: ../src/bc.c:100
-msgid "EAN-13 +5"
-msgstr "EAN-13 +5"
-
-#: ../src/bc.c:103
-msgid "UPC (UPC-A or UPC-E)"
-msgstr "UPC (UPC-A 或者 UPC-E)"
-
-#: ../src/bc.c:106
-msgid "UPC-A"
-msgstr "UPC-A"
-
-#: ../src/bc.c:109
-msgid "UPC-A +2"
-msgstr "UPC-A +2"
-
-#: ../src/bc.c:112
-msgid "UPC-A +5"
-msgstr "UPC-A +5"
-
-#: ../src/bc.c:115
-msgid "UPC-E"
-msgstr "UPC-E"
-
-#: ../src/bc.c:118
-msgid "UPC-E +2"
-msgstr "UPC-E +2"
-
-#: ../src/bc.c:121
-msgid "UPC-E +5"
-msgstr "UPC-E +5"
-
-#: ../src/bc.c:124
-msgid "ISBN"
-msgstr "ISBN"
-
-#: ../src/bc.c:127
-msgid "ISBN +5"
-msgstr "ISBN +5"
-
-#: ../src/bc.c:130
-msgid "Code 39"
-msgstr "Code 39"
-
-#: ../src/bc.c:133
-msgid "Code 128"
-msgstr "Code 128"
-
-#: ../src/bc.c:136
-msgid "Code 128C"
-msgstr "Code 128C"
-
-#: ../src/bc.c:139
-msgid "Code 128B"
-msgstr "Code 128B"
-
-#: ../src/bc.c:142
-msgid "Interleaved 2 of 5"
-msgstr "Interleaved 2 of 5"
-
-#: ../src/bc.c:145
-msgid "Codabar"
-msgstr "Codabar"
-
-#: ../src/bc.c:148
-msgid "MSI"
-msgstr "MSI"
-
-#: ../src/bc.c:151
-msgid "Plessey"
-msgstr "Plessey"
-
-#: ../src/bc.c:154
-msgid "IEC16022 (DataMatrix)"
-msgstr "IEC16022 (DataMatrix)"
-
-#: ../src/label.c:531
-msgid "Untitled"
-msgstr "未命名"
-
-#: ../src/label-barcode.c:426
-msgid "Barcode data empty"
-msgstr "空条形码数据"
-
-#: ../src/label-barcode.c:430
-msgid "Invalid barcode data"
-msgstr "条形码数据无效"
-
-#: ../src/xml-label.c:189 ../src/xml-label.c:226
-msgid "xmlParseFile error"
-msgstr "xml文件语法错误"
-
-#: ../src/xml-label.c:262
-msgid "No document root"
-msgstr "没有文档根"
-
-#: ../src/xml-label.c:270
-msgid "Importing from glabels 0.1 format"
-msgstr "导入glabels 0.1格式"
-
-#: src/xml-label.c:272
-msgid "Importing from glabels 0.4 format"
-msgstr "导入glabels 0.4格式"
-
-#: ../src/xml-label.c:288
-#, c-format
-msgid "Unknown glabels Namespace -- Using %s"
-msgstr "未知的glabels文件名称 -- 使用 %s"
-
-#: ../src/xml-label.c:319 ../src/xml-label-04.c:79
+#: ../src/warning-handler.c:69
+msgid "gLabels Error!"
+msgstr "gLabels错误！"
+
+#: ../src/window.c:284
+msgid "(none) - gLabels"
+msgstr "(无) - gLabels"
+
+#: ../src/window.c:485
+msgid "(modified)"
+msgstr "(已修改)"
+
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:323
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "错误的根地址 = \"%s\""
 
-#: ../src/xml-label.c:356
-#, c-format
-msgid "bad node in Document node =  \"%s\""
-msgstr "文档地址内有错误点 =  \"%s\""
-
-#: src/xml-label.c:393 src/xml-label-04.c:123 src/xml-label-191.c:197
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:406
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "错误点 =  \"%s\""
 
-#: src/xml-label.c:796 src/xml-label-191.c:605
+#: ../src/xml-label.c:189 ../src/xml-label.c:227
+msgid "xmlParseFile error"
+msgstr "xml文件语法错误"
+
+#: ../src/xml-label.c:264
+msgid "No document root"
+msgstr "没有文档根"
+
+#: ../src/xml-label.c:272
+msgid "Importing from glabels 0.1 format"
+msgstr "导入glabels 0.1格式"
+
+#: ../src/xml-label.c:281
+msgid "Importing from glabels 0.4 format"
+msgstr "导入glabels 0.4格式"
+
+#: ../src/xml-label.c:291
+#, c-format
+msgid "Unknown glabels Namespace -- Using %s"
+msgstr "未知的glabels文件名称 -- 使用 %s"
+
+#: ../src/xml-label.c:360
+#, c-format
+msgid "bad node in Document node =  \"%s\""
+msgstr "文档地址内有错误点 =  \"%s\""
+
+#: ../src/xml-label.c:856
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "数据地址内有错误点 =  \"%s\""
 
-#: src/xml-label.c:962 libglabels/xml-template.c:535
+#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "UTF-8编码转换错误。"
 
-#: src/xml-label.c:969 libglabels/xml-template.c:542
+#: ../src/xml-label.c:1104
 msgid "Problem saving xml file."
 msgstr "保存xml文件时出错。"
 
-#: ../src/merge.c:170 ../src/merge.c:211 ../src/merge.c:375 ../src/merge.c:378
-msgid "None"
-msgstr "无"
-
-#: ../src/merge-init.c:59
-msgid "Text file with comma delimeters (CSV)"
-msgstr "用逗号分隔的文本文件 (CSV)"
-
-#: src/merge-init.c:60
-msgid "Text file with colon delimeters"
-msgstr "用冒号分隔的文本文件 (CSV)"
-
-#: src/merge-init.c:67
-msgid "Text file with tab delimeters"
-msgstr "用制表符分隔的文本文件 (CSV)"
-
-#: ../src/merge-init.c:82
-msgid "Data from default Evolution Addressbook"
-msgstr "从Evolution导出的通迅录"
-
-#: ../src/merge-init.c:88
-msgid "Data from a file containing VCards"
-msgstr "从VCards文件导出的数据"
-
-#: ../src/merge-evolution.c:309
-msgid "Couldn't construct query"
-msgstr "不能查询数据组"
-
-#: ../src/merge-evolution.c:315 ../src/merge-evolution.c:326
-msgid "Couldn't open addressbook."
-msgstr "不能打开通迅录"
-
-#: ../src/merge-evolution.c:341
-msgid "Couldn't list available fields."
-msgstr "无法显示有效区域。"
-
-#: ../src/merge-evolution.c:377
-msgid "Couldn't get contacts."
-msgstr "无法读取通迅录信息。"
-
-#: ../src/color-combo.c:210
-msgid "Default Color"
-msgstr "默认颜色"
-
-#: ../src/color-combo-menu.c:86
-msgid "Dark Red"
-msgstr "暗红"
-
-#: ../src/color-combo-menu.c:87
-msgid "Brown"
-msgstr "棕色"
-
-#: ../src/color-combo-menu.c:88
-msgid "Dark Goldenrod"
-msgstr "暗黄"
-
-#: ../src/color-combo-menu.c:89
-msgid "Dark Green"
-msgstr "暗绿"
-
-#: ../src/color-combo-menu.c:90
-msgid "Dark Cyan"
-msgstr "暗品红"
-
-#: ../src/color-combo-menu.c:91
-msgid "Navy Blue"
-msgstr "海水蓝"
-
-#: ../src/color-combo-menu.c:92
-msgid "Dark Violet"
-msgstr "紫黑"
-
-#: ../src/color-combo-menu.c:94
-msgid "Red"
-msgstr "红色"
-
-#: ../src/color-combo-menu.c:95
-msgid "Orange"
-msgstr "桔红"
-
-#: ../src/color-combo-menu.c:96
-msgid "Dark Yellow"
-msgstr "暗黄"
-
-#: ../src/color-combo-menu.c:97
-msgid "Medium green"
-msgstr "中等绿"
-
-#: ../src/color-combo-menu.c:98
-msgid "Turquoise"
-msgstr "蓝绿"
-
-#: ../src/color-combo-menu.c:99
-msgid "Blue"
-msgstr "蓝色"
-
-#: ../src/color-combo-menu.c:100
-msgid "Purple"
-msgstr "紫红"
-
-#: ../src/color-combo-menu.c:102
-msgid "Salmon"
-msgstr "马哈鱼色"
-
-#: ../src/color-combo-menu.c:103
-msgid "Gold"
-msgstr "金黄"
-
-#: ../src/color-combo-menu.c:104
-msgid "Yellow"
-msgstr "黄色"
-
-#: ../src/color-combo-menu.c:105
-msgid "Green"
-msgstr "绿色"
-
-#: ../src/color-combo-menu.c:106
-msgid "Cyan"
-msgstr "蓝绿色"
-
-#: ../src/color-combo-menu.c:107
-msgid "SkyBlue"
-msgstr "天空蓝"
-
-#: ../src/color-combo-menu.c:108
-msgid "Violet"
-msgstr "紫色"
-
-#: ../src/color-combo-menu.c:110
-msgid "Pink"
-msgstr "粉红"
-
-#: ../src/color-combo-menu.c:111
-msgid "Khaki"
-msgstr "浅棕黄色"
-
-#: ../src/color-combo-menu.c:112
-msgid "Light Yellow"
-msgstr "浅黄"
-
-#: ../src/color-combo-menu.c:113
-msgid "Light Green"
-msgstr "浅绿"
-
-#: ../src/color-combo-menu.c:114
-msgid "Light Cyan"
-msgstr "浅品红色"
-
-#: ../src/color-combo-menu.c:115
-msgid "Slate Gray"
-msgstr "石灰白"
-
-#: ../src/color-combo-menu.c:116
-msgid "Thistle"
-msgstr ""
-
-#: ../src/color-combo-menu.c:118
-msgid "White"
-msgstr "白色"
-
-#: ../src/color-combo-menu.c:119
-#, c-format
-msgid "10% Gray"
-msgstr "10% 灰色"
-
-#: ../src/color-combo-menu.c:120
-#, c-format
-msgid "25% Gray"
-msgstr "25% 灰色"
-
-#: ../src/color-combo-menu.c:121
-#, c-format
-msgid "40% Gray"
-msgstr "40% 灰色"
-
-#: ../src/color-combo-menu.c:122
-#, c-format
-msgid "50% Gray"
-msgstr "50% 灰色"
-
-#: ../src/color-combo-menu.c:123
-#, c-format
-msgid "60% Gray"
-msgstr "60% 灰色"
-
-#: ../src/color-combo-menu.c:124
-msgid "Black"
-msgstr "黑色"
-
-#: ../src/color-combo-menu.c:252 ../src/color-combo-menu.c:369
-msgid "Custom Color"
-msgstr "自定义颜色"
-
-#: ../src/color-combo-menu.c:317
-#, c-format
-msgid "Custom Color #%u"
-msgstr "自定义颜色 #%u"
-
-#: ../src/wdgt-print-copies.c:153
-msgid "Sheets:"
-msgstr "页码："
-
-#: ../src/wdgt-print-copies.c:173
-msgid "from:"
-msgstr "从："
-
-#: ../src/wdgt-print-copies.c:179
-msgid "to:"
-msgstr "到："
-
-#: ../src/wdgt-print-merge.c:154
-msgid "Start on label"
-msgstr "启动后直接打开标签"
-
-#: ../src/wdgt-print-merge.c:161
-msgid "on 1st sheet"
-msgstr "在第1页"
-
-#: ../src/wdgt-print-merge.c:170
-msgid "Copies:"
-msgstr "副本"
-
-#: ../src/wdgt-print-merge.c:176
-msgid "Collate"
-msgstr "集合"
-
-#: ../src/wdgt-media-select.c:290 ../src/wdgt-media-select.c:294
-#: ../src/wdgt-media-select.c:299 ../src/wdgt-media-select.c:308
-#: ../src/wdgt-media-select.c:311 ../src/wdgt-media-select.c:404
-#: ../src/wdgt-media-select.c:611 ../src/wdgt-media-select.c:620
-msgid "Any"
-msgstr "通用"
-
-#: ../src/wdgt-media-select.c:645
-#, c-format
-msgid "%d per sheet"
-msgstr "每页 %d"
-
-#: ../src/wdgt-media-select.c:675
-#, c-format
-msgid "%s x %s %s"
-msgstr "%s x %s %s"
-
-#: ../src/wdgt-media-select.c:680
-#, c-format
-msgid "%.5g x %.5g %s"
-msgstr "%.5g x %.5g %s"
-
-#: ../src/wdgt-media-select.c:691 ../src/wdgt-media-select.c:705
-#, c-format
-msgid "%s %s diameter"
-msgstr "%s %s 直径"
-
-#: ../src/wdgt-media-select.c:695 ../src/wdgt-media-select.c:709
-#, c-format
-msgid "%.5g %s diameter"
-msgstr "%.5g %s 直径"
-
-#: ../src/wdgt-media-select.c:783
-msgid "No recent templates found."
-msgstr "最近没有使用模板。"
-
-#: ../src/wdgt-media-select.c:784
-msgid "Try selecting a template from the \"Search all templates\" page."
-msgstr "请从 \"查找全部模板\" 页面中选择一个模板。"
-
-#: ../src/wdgt-media-select.c:863
-msgid "No match."
-msgstr "不相符。"
-
-#: ../src/wdgt-media-select.c:864
-msgid "Try selecting a different brand, page size or category."
-msgstr "请选择其它品牌，纸张尺寸或类型。"
-
-#: ../src/wdgt-rotate-label.c:129
-msgid "Normal"
-msgstr "正常"
-
-#: ../src/wdgt-rotate-label.c:130
-msgid "Rotated"
-msgstr "旋转"
-
-#: ../src/critical-error-handler.c:73
-msgid "gLabels Fatal Error!"
-msgstr "gLabels出现严重错误！"
-
-#: ../src/warning-handler.c:73
-msgid "gLabels Error!"
-msgstr "gLabels错误！"
-
 #. Create and append an "Other" entry.
-#: ../libglabels/db.c:118
+#. Translators: "Other" here means other page size.  Meaning a page size
+#. * other than the standard ones that libglabels knows about such as
+#. * "letter", "A4", etc.
+#: ../libglabels/db.c:270
 msgid "Other"
 msgstr "其它"
 
 #. Create and append a "User defined" entry.
-#: ../libglabels/db.c:131
+#: ../libglabels/db.c:279
 msgid "User defined"
 msgstr "自定义的"
 
-#: ../libglabels/db.c:482
+#: ../libglabels/db.c:665
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
 msgstr "找不到纸张尺寸定义文件。可能是glabels的库文件没有正确安装。"
 
-#: ../libglabels/db.c:875
+#: ../libglabels/db.c:1057
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
-msgstr ""
-"找不到类型定义文件。可能是glabels的库文件没有正确安装。"
+msgstr "找不到类型定义文件。可能是glabels的库文件没有正确安装。"
 
-#: ../libglabels/db.c:1461
+#: ../libglabels/db.c:2097
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
-msgstr ""
-"找不到模板文件。可能是glabels的库文件没有正确安装。"
+msgstr "找不到模板文件。可能是glabels的库文件没有正确安装。"
 
-#: ../libglabels/db.c:1538
-#, c-format
-msgid "Generic %s full page template"
+#: ../libglabels/db.c:2164
+#, fuzzy, c-format
+msgid "%s full page label"
 msgstr "普通的整页模板 %s"
 
-#: ../libglabels/xml-template.c:227
+#: ../libglabels/template.c:156
+#, c-format
+msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
+msgstr ""
+
+#: ../libglabels/template.c:722 ../libglabels/template.c:726
+#, fuzzy
+msgid "per sheet"
+msgstr "每页 %d"
+
+#: ../libglabels/template.c:796 ../libglabels/template.c:802
+#: ../libglabels/template.c:812 ../libglabels/template.c:818
+#, fuzzy
+msgid "diameter"
+msgstr "%s %s 直径"
+
+#. The ids are identical to the absolute length units supported in
+#. the CSS2 Specification (Section 4.3.2)
+#. This table must be sorted exactly as the enumerations in lglUnits
+#. [LGL_UNITS_POINT]
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:41
+#: ../data/ui/prefs-dialog.ui.h:22
+msgid "points"
+msgstr "像素"
+
+#. [LGL_UNITS_INCH]
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
+#: ../data/ui/template-designer.ui.h:62
+msgid "inches"
+msgstr "英寸"
+
+#. [LGL_UNITS_MM]
+#: ../libglabels/units.c:67
+msgid "mm"
+msgstr "mm"
+
+#. [LGL_UNITS_CM]
+#: ../libglabels/units.c:68
+msgid "cm"
+msgstr ""
+
+#. [LGL_UNITS_PICA]
+#: ../libglabels/units.c:69
+msgid "picas"
+msgstr ""
+
+#: ../libglabels/xml-template.c:223
 msgid "Missing name or brand/part attributes."
 msgstr "名称或品牌/规格 属性不完整。"
 
@@ -1476,396 +1710,426 @@ msgstr "名称或品牌/规格 属性不完整。"
 msgid "Unknown page size id \"%s\", trying as name"
 msgstr "未知的纸张大小id \"%s\"，请试着用纸张规格"
 
-#: src/xml-label-191.c:690 libglabels/xml-template.c:209
+#: ../libglabels/xml-template.c:256
 #, c-format
 msgid "Unknown page size id or name \"%s\""
 msgstr "未知的纸张大小id或规格 \"%s\""
 
-#: ../libglabels/xml-template.c:615
+#: ../libglabels/xml-template.c:275
+msgid "Forward references not supported."
+msgstr ""
+
+#: ../libglabels/xml-template.c:747
 msgid ""
 "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
-msgstr ""
-"\"品牌\" 或者 \"规格\" 属性不完整，请尝试改变字母大小写。"
+msgstr "\"品牌\" 或者 \"规格\" 属性不完整，请尝试改变字母大小写。"
 
-#: ../libglabels/xml-template.c:625
+#: ../libglabels/xml-template.c:757
 msgid "Name attribute also missing."
 msgstr "名称属性也不完整。"
 
-#: ../data/builder/merge-properties-dialog.glade.h:1
+#.
+#. * Local Variables:       -- emacs
+#. * mode: C                -- emacs
+#. * c-basic-offset: 8      -- emacs
+#. * tab-width: 8           -- emacs
+#. * indent-tabs-mode: nil  -- emacs
+#. * End:                   -- emacs
+#.
+#: ../data/ui/merge-properties-dialog.ui.h:1
 msgid "<b>Record selection/preview</b>"
 msgstr "<b>记录选择/预览</b>"
 
-#: ../data/builder/merge-properties-dialog.glade.h:2
+#: ../data/ui/merge-properties-dialog.ui.h:2
 msgid "<b>Source</b>"
 msgstr "<b>来源</b>"
 
-#: ../data/builder/merge-properties-dialog.glade.h:3
+#: ../data/ui/merge-properties-dialog.ui.h:3
 msgid "Format:"
 msgstr "格式："
 
-#: ../data/builder/merge-properties-dialog.glade.h:4
+#: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Location:"
 msgstr "位置："
 
-#: ../data/builder/merge-properties-dialog.glade.h:5
+#: ../data/ui/merge-properties-dialog.ui.h:5
 msgid "Select all"
 msgstr "全选"
 
-#: ../data/builder/merge-properties-dialog.glade.h:6
+#: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
 msgstr "取消全选"
 
-#: ../data/builder/merge-properties-dialog.glade.h:7
-#: ../data/builder/object-editor.glade.h:39
-msgid "dialog1"
-msgstr "对话框1"
+#: ../data/ui/media-select.ui.h:1
+msgid "Brand:"
+msgstr "品牌："
 
-#: ../data/builder/new-label-dialog.glade.h:1
-msgid "<b>Label orientation</b>"
-msgstr "<b>标签方向</b>"
+#: ../data/ui/media-select.ui.h:2
+msgid "Category:"
+msgstr "类型："
 
-#: ../data/builder/new-label-dialog.glade.h:2
-msgid "<b>Media type</b>"
-msgstr "<b>介质类型</b>"
+#: ../data/ui/media-select.ui.h:3
+#, fuzzy
+msgid "Custom"
+msgstr "剪切"
 
-#: ../data/builder/object-editor.glade.h:2
+#: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
+#: ../data/ui/template-designer.ui.h:42
+msgid "Page size:"
+msgstr "纸张大小"
+
+#: ../data/ui/media-select.ui.h:5
+msgid "Recent"
+msgstr ""
+
+#: ../data/ui/media-select.ui.h:6
+#, fuzzy
+msgid "Search all"
+msgstr "全选"
+
+#: ../data/ui/new-label-dialog.ui.h:1
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
+msgid "Description:"
+msgstr "说明："
+
+#: ../data/ui/new-label-dialog.ui.h:3
+#, fuzzy
+msgid "Label size:"
+msgstr "纸张大小"
+
+#: ../data/ui/new-label-dialog.ui.h:4
+#, fuzzy
+msgid "Layout:"
+msgstr "布局"
+
+#: ../data/ui/new-label-dialog.ui.h:5
+msgid "Normal"
+msgstr "正常"
+
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
+msgid "Part #:"
+msgstr "规格 #:"
+
+#: ../data/ui/new-label-dialog.ui.h:8
+msgid "Please review and confirm your selection."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:9
+msgid "Rotated"
+msgstr "旋转"
+
+#: ../data/ui/new-label-dialog.ui.h:10
+msgid "Select orientation of label content."
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:11
+msgid "Similar products:"
+msgstr ""
+
+#: ../data/ui/new-label-dialog.ui.h:12
+msgid "Vendor:"
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:2
 #, no-c-format
 msgid "%"
 msgstr "%"
 
-#: ../data/builder/object-editor.glade.h:3
-msgid "00000000000 00000"
-msgstr "00000000000 00000"
-
-#: ../data/builder/object-editor.glade.h:4
+#: ../data/ui/object-editor.ui.h:3
 msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Xxx对象属性</span>"
 
-#: ../data/builder/object-editor.glade.h:5
-#: ../data/builder/prefs-dialog.glade.h:7
+#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:7
 msgid "Alignment:"
 msgstr "对齐："
 
-#: ../data/builder/object-editor.glade.h:6
+#: ../data/ui/object-editor.ui.h:5
 msgid "Allow merge to automatically shrink text"
 msgstr "自动调整和缩放文字"
 
-#: ../data/builder/object-editor.glade.h:7
+#: ../data/ui/object-editor.ui.h:6
 msgid "Angle:"
 msgstr "角度："
 
-#: ../data/builder/object-editor.glade.h:8
+#: ../data/ui/object-editor.ui.h:7
 msgid "Checksum"
 msgstr "校验值"
 
-#: ../data/builder/object-editor.glade.h:9
-#: ../data/builder/prefs-dialog.glade.h:8
+#: ../data/ui/object-editor.ui.h:8
+msgid "Close sidebar."
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:8
 msgid "Color:"
 msgstr "颜色："
 
-#: ../data/builder/object-editor.glade.h:11
+#: ../data/ui/object-editor.ui.h:11
 msgid "Enable shadow"
 msgstr "使用阴影"
 
-#: ../data/builder/object-editor.glade.h:12
+#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "系列："
 
-#: ../data/builder/object-editor.glade.h:13
+#: ../data/ui/object-editor.ui.h:13
 msgid "File:"
 msgstr "文件："
 
-#: ../data/builder/object-editor.glade.h:14
+#: ../data/ui/object-editor.ui.h:14
 msgid "Fill"
 msgstr "填充"
 
-#: ../data/builder/object-editor.glade.h:15
-#: ../data/builder/template-designer.glade.h:30
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "高度："
 
-#: ../data/builder/object-editor.glade.h:17
-msgid "Insert merge field"
-msgstr "插入合并区域"
-
-#: ../data/builder/object-editor.glade.h:18
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "键值："
 
-#: ../data/builder/object-editor.glade.h:19
+#: ../data/ui/object-editor.ui.h:18
 msgid "Length:"
 msgstr "长度："
 
-#: ../data/builder/object-editor.glade.h:21
-#: ../data/builder/prefs-dialog.glade.h:12
+#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:12
 msgid "Line Spacing:"
 msgstr "线条间隔："
 
-#: ../data/builder/object-editor.glade.h:22
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "文字："
 
-#: ../data/builder/object-editor.glade.h:23
+#: ../data/ui/object-editor.ui.h:22
 msgid "Opacity:"
 msgstr "不透明："
 
-#: ../data/builder/object-editor.glade.h:24
+#: ../data/ui/object-editor.ui.h:23
 msgid "Position"
 msgstr "位置"
 
-#: ../data/builder/object-editor.glade.h:25
+#: ../data/ui/object-editor.ui.h:24
 msgid "Reset image size"
 msgstr "恢复图片大小"
 
-#: ../data/builder/object-editor.glade.h:26
-msgid "Select A File"
-msgstr "选择一个文件"
-
-#: ../data/builder/object-editor.glade.h:27
+#: ../data/ui/object-editor.ui.h:25
 msgid "Shadow"
 msgstr "阴影"
 
-#: ../data/builder/object-editor.glade.h:28
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size"
 msgstr "尺寸"
 
-#: ../data/builder/object-editor.glade.h:29
+#: ../data/ui/object-editor.ui.h:27
 msgid "Size:"
 msgstr "尺寸："
 
-#: ../data/builder/object-editor.glade.h:30
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style"
 msgstr "规格"
 
-#: ../data/builder/object-editor.glade.h:31
+#: ../data/ui/object-editor.ui.h:29
 msgid "Style:"
 msgstr "规格："
 
-#: ../data/builder/object-editor.glade.h:33
-#: ../data/builder/prefs-dialog.glade.h:20
-#: ../data/builder/template-designer.glade.h:61
+#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "宽度："
 
-#: ../data/builder/object-editor.glade.h:34
+#: ../data/ui/object-editor.ui.h:32
 msgid "X Offset:"
 msgstr "X 偏移量："
 
-#: ../data/builder/object-editor.glade.h:35
+#: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/builder/object-editor.glade.h:36
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y Offset:"
 msgstr "Y 偏移量："
 
-#: ../data/builder/object-editor.glade.h:37
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/builder/object-editor.glade.h:38
+#: ../data/ui/object-editor.ui.h:36
 msgid "degrees"
 msgstr "度数"
 
-#: ../data/builder/object-editor.glade.h:40
+#: ../data/ui/object-editor.ui.h:37
+msgid "dialog1"
+msgstr "对话框1"
+
+#: ../data/ui/object-editor.ui.h:38
 msgid "digits:"
 msgstr "数字位数："
 
-#: ../data/builder/object-editor.glade.h:41
+#: ../data/ui/object-editor.ui.h:39
 msgid "format:"
 msgstr "格式："
 
-#: ../data/builder/prefs-dialog.glade.h:1
+#: ../data/ui/prefs-dialog.ui.h:1
 msgid "   "
 msgstr "   "
 
-#: ../data/builder/prefs-dialog.glade.h:2
+#: ../data/ui/prefs-dialog.ui.h:2
 msgid "<span weight=\"bold\">Default page size</span>"
 msgstr "<span weight=\"bold\">默认纸张尺寸</span>"
 
-#: ../data/builder/prefs-dialog.glade.h:3
+#: ../data/ui/prefs-dialog.ui.h:3
 msgid "<span weight=\"bold\">Fill</span>"
 msgstr "<span weight=\"bold\">填充</span>"
 
-#: ../data/builder/prefs-dialog.glade.h:4
+#: ../data/ui/prefs-dialog.ui.h:4
 msgid "<span weight=\"bold\">Line</span>"
 msgstr "<span weight=\"bold\">线条</span>"
 
-#: ../data/builder/prefs-dialog.glade.h:5
+#: ../data/ui/prefs-dialog.ui.h:5
 msgid "<span weight=\"bold\">Text</span>"
 msgstr "<span weight=\"bold\">文字</span>"
 
-#: ../data/builder/prefs-dialog.glade.h:6
+#: ../data/ui/prefs-dialog.ui.h:6
 msgid "<span weight=\"bold\">Units</span>"
 msgstr "<span weight=\"bold\">单位</span>"
 
-#: ../data/builder/prefs-dialog.glade.h:9
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Font:"
 msgstr "字体："
 
-#: ../data/builder/prefs-dialog.glade.h:10
+#: ../data/ui/prefs-dialog.ui.h:10
 msgid "ISO A4"
 msgstr ""
 
-#: ../data/builder/prefs-dialog.glade.h:11
+#: ../data/ui/prefs-dialog.ui.h:11
 msgid "Inches"
 msgstr "英寸"
 
-#: ../data/builder/prefs-dialog.glade.h:13
+#: ../data/ui/prefs-dialog.ui.h:13
 msgid "Locale"
 msgstr "本地化"
 
-#: ../data/builder/prefs-dialog.glade.h:14
+#: ../data/ui/prefs-dialog.ui.h:14
 msgid "Millimeters"
 msgstr "毫米"
 
-#: ../data/builder/prefs-dialog.glade.h:15
+#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Object defaults"
 msgstr "对象默认值"
 
-#: ../data/builder/prefs-dialog.glade.h:16
+#: ../data/ui/prefs-dialog.ui.h:16
 msgid "Points"
 msgstr "像素"
 
-#: ../data/builder/prefs-dialog.glade.h:17
+#: ../data/ui/prefs-dialog.ui.h:17
 msgid "Select default properties for new objects."
 msgstr "为新对象选择默认属性"
 
-#: data/glade/prefs-dialog.glade.h:19
+#: ../data/ui/prefs-dialog.ui.h:18
 msgid "Select locale specific behavior."
 msgstr "本地化设置"
 
-#. Most popular (at top of list)
-#: ../data/builder/prefs-dialog.glade.h:19
-#: ../data/templates/paper-sizes.xml.h:29
+#: ../data/ui/prefs-dialog.ui.h:19 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "美国信封"
 
-#: ../data/builder/print-custom-widget.glade.h:1
-msgid "<b>Options</b>"
-msgstr "<b>选项</b>"
-
-#: ../data/builder/print-custom-widget.glade.h:2
-msgid "<b>Print control (Merge)</b>"
-msgstr "<b>打印控制(合并)</b>"
-
-#: ../data/builder/print-custom-widget.glade.h:3
-msgid "<b>Print control (Simple)</b>"
-msgstr "<b>打印控制(简单)</b>"
-
-#: ../data/builder/property-bar.glade.h:1
+#: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
 msgstr "粗体"
 
-#: ../data/builder/property-bar.glade.h:2
+#: ../data/ui/property-bar.ui.h:2
 msgid "Center align"
 msgstr "中心对齐"
 
-#: ../data/builder/property-bar.glade.h:4
-msgid "Font family"
-msgstr "字体系列"
-
-#: ../data/builder/property-bar.glade.h:5
-msgid "Font size"
-msgstr "字体大小"
-
-#: ../data/builder/property-bar.glade.h:6
-msgid "Italic"
-msgstr "斜体"
-
-#: ../data/builder/property-bar.glade.h:7
+#: ../data/ui/property-bar.ui.h:7
 msgid "Left align"
 msgstr "左对齐"
 
-#: ../data/builder/property-bar.glade.h:9
-msgid "Line width"
-msgstr "线宽"
-
-#: ../data/builder/property-bar.glade.h:10
+#: ../data/ui/property-bar.ui.h:10
 msgid "Right align"
 msgstr "右对齐"
 
-#: ../data/builder/property-bar.glade.h:11
-msgid "Text Color"
-msgstr "文字颜色"
-
-#: ../data/builder/template-designer.glade.h:1
+#: ../data/ui/template-designer.ui.h:1
 msgid "(e.g., \"Mailing Labels,\" \"Business Cards,\" ...)"
 msgstr "(例如：信封标签，名片...)"
 
-#: ../data/builder/template-designer.glade.h:2
+#: ../data/ui/template-designer.ui.h:2
 msgid "(e.g., 8163A)"
 msgstr "(例如：8163A)"
 
-#: ../data/builder/template-designer.glade.h:3
+#: ../data/ui/template-designer.ui.h:3
 msgid "(e.g., Avery, Acme, ...)"
 msgstr "(例如：Avery, Acme, ...)"
 
-#: ../data/builder/template-designer.glade.h:4
+#: ../data/ui/template-designer.ui.h:4
 msgid "1. Outer radius:"
 msgstr "1. 外半径："
 
-#: data/glade/template-designer.glade.h:7
+#: ../data/ui/template-designer.ui.h:5
 msgid "1. Radius:"
 msgstr "1. 半径："
 
-#: data/glade/template-designer.glade.h:8
+#: ../data/ui/template-designer.ui.h:6
 msgid "1. Width:"
 msgstr "1. 宽度："
 
-#: data/glade/template-designer.glade.h:9
+#: ../data/ui/template-designer.ui.h:7
 msgid "2. Height:"
 msgstr "2. 高度："
 
-#: data/glade/template-designer.glade.h:10
+#: ../data/ui/template-designer.ui.h:8
 msgid "2. Inner radius:"
 msgstr "2. 内半径："
 
-#: data/glade/template-designer.glade.h:11
+#: ../data/ui/template-designer.ui.h:9
 msgid "2. Waste (overprint allowed):"
 msgstr "2. 余量(允许叠印)："
 
-#: data/glade/template-designer.glade.h:12
+#: ../data/ui/template-designer.ui.h:10
 msgid "3. Clipping width:"
 msgstr "3. 限宽："
 
-#: data/glade/template-designer.glade.h:13
+#: ../data/ui/template-designer.ui.h:11
 msgid "3. Margin"
 msgstr "3. 页边"
 
-#: data/glade/template-designer.glade.h:14
+#: ../data/ui/template-designer.ui.h:12
 msgid "3. Round (radius of corner):"
 msgstr "3. 环绕 (半径):"
 
-#: data/glade/template-designer.glade.h:15
+#: ../data/ui/template-designer.ui.h:13
 msgid "4. Clipping height:"
 msgstr "4. 限高："
 
-#: data/glade/template-designer.glade.h:16
+#: ../data/ui/template-designer.ui.h:14
 msgid "4. Horiz. waste (overprint allowed):"
 msgstr "4. 水平余量(允许叠印)："
 
-#: data/glade/template-designer.glade.h:17
+#: ../data/ui/template-designer.ui.h:15
 msgid "5. Vert. waste (overprint allowed):"
 msgstr "5. 垂直余量(允许叠印)："
 
-#: data/glade/template-designer.glade.h:18
+#: ../data/ui/template-designer.ui.h:16
 msgid "5. Waste (overprint allowed):"
 msgstr "5. 余量(允许叠印)："
 
-#: data/glade/template-designer.glade.h:19
+#: ../data/ui/template-designer.ui.h:17
 msgid "6. Margin"
 msgstr "6. 页边"
 
-#: data/glade/template-designer.glade.h:20
+#: ../data/ui/template-designer.ui.h:18
 msgid "Brand/Manufacturer:"
 msgstr "品牌/制造商："
 
-#: data/glade/template-designer.glade.h:21
+#: ../data/ui/template-designer.ui.h:19
 msgid "CD/DVD (including credit card CDs)"
 msgstr "CD/DVD (包括信用卡CD)"
 
-#: data/glade/template-designer.glade.h:22
+#: ../data/ui/template-designer.ui.h:20
 msgid ""
 "Congratulations!\n"
 "\n"
@@ -1883,23 +2147,19 @@ msgstr ""
 "否则请点击 \"取消\" 来放弃设计，\n"
 "或者点击 \"后退\" 继续设计。"
 
-#: ../data/builder/template-designer.glade.h:27
-msgid "Description:"
-msgstr "说明："
-
-#: data/glade/template-designer.glade.h:31
+#: ../data/ui/template-designer.ui.h:28
 msgid "Distance from left edge (x0):"
 msgstr "到左边界的距离 (x0):"
 
-#: data/glade/template-designer.glade.h:32
+#: ../data/ui/template-designer.ui.h:29
 msgid "Distance from top edge (y0):"
 msgstr "到上边界的距离 (y0):"
 
-#: data/glade/template-designer.glade.h:34
+#: ../data/ui/template-designer.ui.h:31
 msgid "Horizontal pitch (dx):"
 msgstr "水平栅距 (dx):"
 
-#: data/glade/template-designer.glade.h:35
+#: ../data/ui/template-designer.ui.h:32
 msgid ""
 "How many layouts will your template contain? \n"
 "\n"
@@ -1913,77 +2173,69 @@ msgstr ""
 "绝大多数模板只需要1个布局，如第1个例子所示。\n"
 "第2个图例说明了需要2个布局的例子。"
 
-#: ../data/builder/template-designer.glade.h:37
+#: ../data/ui/template-designer.ui.h:37
 msgid "Layout #1"
 msgstr "布局 #1"
 
-#: data/glade/template-designer.glade.h:45
+#: ../data/ui/template-designer.ui.h:38
 msgid "Layout #2"
 msgstr "布局 #2"
 
-#: data/glade/template-designer.glade.h:48
+#: ../data/ui/template-designer.ui.h:39
 msgid "Number across (nx):"
 msgstr "数字交叉 (nx):"
 
-#: data/glade/template-designer.glade.h:49
+#: ../data/ui/template-designer.ui.h:40
 msgid "Number down (ny):"
 msgstr "数字向下 (ny):"
 
-#: data/glade/template-designer.glade.h:51
+#: ../data/ui/template-designer.ui.h:41
 msgid "Number of layouts:"
 msgstr "布局个数："
 
-#: data/glade/template-designer.glade.h:52
-msgid "Page size:"
-msgstr "纸张大小"
-
-#: data/glade/template-designer.glade.h:54
-msgid "Part #:"
-msgstr "规格 #:"
-
-#: ../data/builder/template-designer.glade.h:44
+#: ../data/ui/template-designer.ui.h:44
 msgid ""
 "Please enter the following identifying information about the template "
 "stationery."
 msgstr "请输入模板的备注信息。"
 
-#: data/glade/template-designer.glade.h:56
+#: ../data/ui/template-designer.ui.h:45
 msgid "Please enter the following layout information."
 msgstr "请输入下面的布局数据。"
 
-#: data/glade/template-designer.glade.h:57
+#: ../data/ui/template-designer.ui.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr "请在模板里输入单个标签的尺寸数据。"
 
-#: ../data/builder/template-designer.glade.h:47
+#: ../data/ui/template-designer.ui.h:47
 msgid ""
 "Please enter the following size parameters of a single label or card in your "
 "template."
-msgstr ""
-"请在模板里输入单个标签或名片的尺寸数据。"
+msgstr "请在模板里输入单个标签或名片的尺寸数据。"
 
-#: data/glade/template-designer.glade.h:59
+#: ../data/ui/template-designer.ui.h:48
 msgid "Please select the basic shape of the labels or cards."
 msgstr "请选择标签或名片的基本形状。"
 
-#: data/glade/template-designer.glade.h:60
+#: ../data/ui/template-designer.ui.h:49
 msgid "Please select the page size of the template stationery."
 msgstr "请选择模板所采用的纸张大小。"
 
-#: data/glade/template-designer.glade.h:61
+#: ../data/ui/template-designer.ui.h:50
 msgid "Print test sheet"
 msgstr "打印测试页"
 
-#: data/glade/template-designer.glade.h:62
+#: ../data/ui/template-designer.ui.h:51
 msgid "Rectangular or square (can have rounded corners)"
 msgstr "长方形或正方形(可以倒圆角)"
 
-#: data/glade/template-designer.glade.h:63
+#: ../data/ui/template-designer.ui.h:52
 msgid "Round"
 msgstr "圆形"
 
-#: data/glade/template-designer.glade.h:64
+#: ../data/ui/template-designer.ui.h:53
 msgid ""
 "Templates needing\n"
 "two layouts."
@@ -1991,7 +2243,7 @@ msgstr ""
 "模板需要\n"
 "2个布局 "
 
-#: data/glade/template-designer.glade.h:66
+#: ../data/ui/template-designer.ui.h:55
 msgid ""
 "Templates needing only\n"
 "one layout."
@@ -1999,11 +2251,11 @@ msgstr ""
 "模板需要\n"
 "1个布局 "
 
-#: ../data/builder/template-designer.glade.h:57
+#: ../data/ui/template-designer.ui.h:57
 msgid "Vertical pitch (dy):"
 msgstr "垂直栅距 (dy):"
 
-#: ../data/builder/template-designer.glade.h:58
+#: ../data/ui/template-designer.ui.h:58
 msgid ""
 "Welcome to the gLabels Template Designer.\n"
 "\n"
@@ -2013,198 +2265,227 @@ msgstr ""
 "\n"
 "请参照下面的步骤来制作一个你需要的 gLabels 模板。"
 
-#: ../data/builder/template-designer.glade.h:62
-msgid "cd_size_page"
-msgstr "光盘尺寸"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
+#, fuzzy
+msgid "<b>Copies</b>"
+msgstr "<b>选项</b>"
 
-#: ../data/builder/template-designer.glade.h:63
-msgid "finish_page"
-msgstr "完成"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#, fuzzy
+msgid "<b>Merge Control</b>"
+msgstr "<b>打印控制(合并)</b>"
 
-#: ../data/builder/template-designer.glade.h:65
-msgid "layout_page"
-msgstr "布局"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
+msgid "<b>Options</b>"
+msgstr "<b>选项</b>"
 
-#: ../data/builder/template-designer.glade.h:66
-msgid "name_page"
-msgstr "名称"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+msgid "Collate"
+msgstr "集合"
 
-#: ../data/builder/template-designer.glade.h:67
-msgid "nlayouts_page"
-msgstr "多层布局"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Copies:"
+msgstr "副本"
 
-#: ../data/builder/template-designer.glade.h:68
-msgid "pg_size_page"
-msgstr "纸张大小"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:7
+msgid "Sheets:"
+msgstr "页码："
 
-#: ../data/builder/template-designer.glade.h:69
-msgid "rect_size_page"
-msgstr "矩形尺寸"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:8
+msgid "Start on label"
+msgstr "启动后直接打开标签"
 
-#: ../data/builder/template-designer.glade.h:70
-msgid "round_size_page"
-msgstr "圆形尺寸"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:9
+msgid "from:"
+msgstr "从："
 
-#: ../data/builder/template-designer.glade.h:71
-msgid "shape_page"
-msgstr "形状"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:10
+msgid "on 1st sheet"
+msgstr "在第1页"
 
-#: ../data/builder/template-designer.glade.h:72
-msgid "start_page"
-msgstr "起始页"
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:14
+msgid "to:"
+msgstr "到："
 
-#: ../data/builder/wdgt-media-select.glade.h:1
-msgid "Brand:"
-msgstr "品牌："
+#: ../data/desktop/glabels-3.0.desktop.in.h:1
+msgid "Create labels, business cards and media covers"
+msgstr "制作标签，名片和光盘盒封面"
 
-#: ../data/builder/wdgt-media-select.glade.h:2
-msgid "Category:"
-msgstr "类型："
+#: ../data/desktop/glabels-3.0.desktop.in.h:2
+#, fuzzy
+msgid "gLabels Label Designer 3"
+msgstr "gLabels标签设计工具"
 
-#: ../data/builder/wdgt-media-select.glade.h:4
-msgid "Recent templates"
-msgstr "最近的模板"
+#: ../data/mime/glabels-3.0.xml.in.h:1
+msgid "gLabels Project File"
+msgstr "gLabels工程文件"
 
-#: ../data/builder/wdgt-media-select.glade.h:5
-msgid "Search all templates"
-msgstr "查找全部模板"
+#. Envelopes
+#: ../templates/paper-sizes.xml.h:2
+msgid "#10 Envelope"
+msgstr ""
 
 #. Other ISO A series sizes
-#: ../data/templates/paper-sizes.xml.h:2
+#: ../templates/paper-sizes.xml.h:4
 msgid "A0"
 msgstr "A0"
 
-#: ../data/templates/paper-sizes.xml.h:3
+#: ../templates/paper-sizes.xml.h:5
 msgid "A1"
 msgstr "A1"
 
-#: ../data/templates/paper-sizes.xml.h:4
+#: ../templates/paper-sizes.xml.h:6
 msgid "A10"
 msgstr "A10"
 
-#: ../data/templates/paper-sizes.xml.h:5
+#: ../templates/paper-sizes.xml.h:7
 msgid "A2"
 msgstr "A2"
 
-#: ../data/templates/paper-sizes.xml.h:6
+#: ../templates/paper-sizes.xml.h:8
 msgid "A3"
 msgstr "A3"
 
-#: ../data/templates/paper-sizes.xml.h:7
+#. Most popular (at top of list)
+#: ../templates/paper-sizes.xml.h:10
 msgid "A4"
 msgstr "A4"
 
-#: ../data/templates/paper-sizes.xml.h:8
+#: ../templates/paper-sizes.xml.h:11
 msgid "A5"
 msgstr "A5"
 
-#: ../data/templates/paper-sizes.xml.h:9
+#: ../templates/paper-sizes.xml.h:12
 msgid "A6"
 msgstr "A6"
 
-#: ../data/templates/paper-sizes.xml.h:10
+#: ../templates/paper-sizes.xml.h:13
 msgid "A7"
 msgstr "A7"
 
-#: ../data/templates/paper-sizes.xml.h:11
+#: ../templates/paper-sizes.xml.h:14
 msgid "A8"
 msgstr "A8"
 
-#: ../data/templates/paper-sizes.xml.h:12
+#: ../templates/paper-sizes.xml.h:15
 msgid "A9"
 msgstr "A9"
 
 #. ISO B series sizes
-#: ../data/templates/paper-sizes.xml.h:14
+#: ../templates/paper-sizes.xml.h:17
 msgid "B0"
 msgstr "B0"
 
-#: ../data/templates/paper-sizes.xml.h:15
+#: ../templates/paper-sizes.xml.h:18
 msgid "B1"
 msgstr "B1"
 
-#: ../data/templates/paper-sizes.xml.h:16
+#: ../templates/paper-sizes.xml.h:19
 msgid "B10"
 msgstr "B10"
 
-#: ../data/templates/paper-sizes.xml.h:17
+#: ../templates/paper-sizes.xml.h:20
 msgid "B2"
 msgstr "B2"
 
-#: ../data/templates/paper-sizes.xml.h:18
+#: ../templates/paper-sizes.xml.h:21
 msgid "B3"
 msgstr "B3"
 
-#: ../data/templates/paper-sizes.xml.h:19
+#: ../templates/paper-sizes.xml.h:22
 msgid "B4"
 msgstr "B4"
 
-#: ../data/templates/paper-sizes.xml.h:20
+#: ../templates/paper-sizes.xml.h:23
 msgid "B5"
 msgstr "B5"
 
-#: ../data/templates/paper-sizes.xml.h:21
+#: ../templates/paper-sizes.xml.h:24
 msgid "B6"
 msgstr "B6"
 
-#: ../data/templates/paper-sizes.xml.h:22
+#: ../templates/paper-sizes.xml.h:25
 msgid "B7"
 msgstr "B7"
 
-#: ../data/templates/paper-sizes.xml.h:23
+#: ../templates/paper-sizes.xml.h:26
 msgid "B8"
 msgstr "B8"
 
-#: ../data/templates/paper-sizes.xml.h:24
+#: ../templates/paper-sizes.xml.h:27
 msgid "B9"
 msgstr "B9"
-#: data/templates/paper-sizes.xml.h:25
+
+#: ../templates/paper-sizes.xml.h:28
+msgid "C5"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:29
+msgid "C6"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:30
+msgid "DL"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:31
+msgid "Monarch Envelope"
+msgstr ""
+
+#: ../templates/paper-sizes.xml.h:32
 msgid "US Executive"
 msgstr "美国常用"
 
 #. Other US paper sizes
-#: data/templates/paper-sizes.xml.h:27
+#: ../templates/paper-sizes.xml.h:34
 msgid "US Legal"
 msgstr "美国国标"
 
-#: ../data/templates/categories.xml.h:1
+#: ../templates/categories.xml.h:1
 msgid "Any card"
 msgstr "通用名片"
 
-#: ../data/templates/categories.xml.h:2
+#: ../templates/categories.xml.h:2
 msgid "Any label"
 msgstr "通用标签"
 
-#: ../data/templates/categories.xml.h:3
+#. ===================================================================
+#: ../templates/categories.xml.h:3 ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
 msgstr "名片"
 
-#: ../data/templates/categories.xml.h:4
+#: ../templates/categories.xml.h:4
 msgid "CD/DVD or other media"
 msgstr "CD/DVD 或其它光盘"
 
-#: ../data/templates/categories.xml.h:5
+#: ../templates/categories.xml.h:5
 msgid "Mailing/shipping products"
 msgstr "信件/快递包裹"
 
-#: ../data/templates/categories.xml.h:6
+#: ../templates/categories.xml.h:6
 msgid "Rectangular labels"
 msgstr "长方形标签"
 
-#: ../data/templates/categories.xml.h:7
+#. ===================================================================
+#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:46
 msgid "Round labels"
 msgstr "圆形标签"
 
-#: ../data/templates/categories.xml.h:8
+#: ../templates/categories.xml.h:8
 msgid "Square labels"
 msgstr "正方形标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:2
-#: ../data/templates/avery-iso-templates.xml.h:2
-#: ../data/templates/dymo-other-templates.xml.h:4
-#: ../data/templates/misc-iso-templates.xml.h:2
-#: ../data/templates/zweckform-iso-templates.xml.h:2
+#. ********************************************************************
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:2
+#: ../templates/dymo-other-templates.xml.h:4
+#: ../templates/maco-us-templates.xml.h:2
+#: ../templates/misc-iso-templates.xml.h:2
+#: ../templates/pearl-iso-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:1
+#: ../templates/zweckform-iso-templates.xml.h:2
 msgid "Address Labels"
 msgstr "通迅录标签"
 
@@ -2213,178 +2494,204 @@ msgstr "通迅录标签"
 #. ===================================================================
 #. ********************************************************************
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:4
-#: ../data/templates/avery-iso-templates.xml.h:8
-#: ../data/templates/misc-us-templates.xml.h:4
-#: ../data/templates/misc-iso-templates.xml.h:12
-#: ../data/templates/zweckform-iso-templates.xml.h:6
+#: ../templates/avery-us-templates.xml.h:4
+#: ../templates/avery-iso-templates.xml.h:8
+#: ../templates/misc-us-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:6
 msgid "Business Cards"
 msgstr "名片"
 
 #. ===================================================================
 #. ===============================================================
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:6
-#: ../data/templates/avery-iso-templates.xml.h:14
-#: ../data/templates/misc-us-templates.xml.h:8
-#: ../data/templates/misc-iso-templates.xml.h:16
-#: ../data/templates/zweckform-iso-templates.xml.h:8
+#: ../templates/avery-us-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:14
+#: ../templates/misc-us-templates.xml.h:8
+#: ../templates/misc-iso-templates.xml.h:16
+#: ../templates/pearl-iso-templates.xml.h:20
+#: ../templates/worldlabel-us-templates.xml.h:2
+#: ../templates/zweckform-iso-templates.xml.h:8
 msgid "CD/DVD Labels"
 msgstr "CD/DVD 光盘标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:8
+#: ../templates/avery-us-templates.xml.h:8
 msgid "CD/DVD Labels (Disc Labels)"
 msgstr "CD/DVD 光盘标签(光盘盘面)"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:10
+#: ../templates/avery-us-templates.xml.h:10
 msgid "CD/DVD Labels (Spine Labels)"
 msgstr "CD/DVD 光盘标签(光盘盒内衬纸)"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:12
-#: ../data/templates/avery-iso-templates.xml.h:16
+#: ../templates/avery-us-templates.xml.h:12
+#: ../templates/avery-iso-templates.xml.h:16
+#: ../templates/worldlabel-us-templates.xml.h:3
 msgid "Diskette Labels"
 msgstr "软盘标签"
 
 #. the LSK labels can be torn in half down the center
-#: ../data/templates/avery-us-templates.xml.h:14
+#: ../templates/avery-us-templates.xml.h:14
 msgid "Divider Labels"
 msgstr "分隔标签"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:9
+#: ../templates/avery-us-templates.xml.h:16
+#: ../templates/avery-other-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:4
+msgid "File Folder Labels"
+msgstr "文件夹标签"
+
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:18
+#: ../templates/worldlabel-us-templates.xml.h:5
 msgid "Filing Labels"
 msgstr "档案标签"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:11
+#: ../templates/avery-us-templates.xml.h:20
+#: ../templates/worldlabel-us-templates.xml.h:6
 msgid "Full Sheet Labels"
 msgstr "整页标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:20
+#: ../templates/avery-us-templates.xml.h:22
 msgid "ID Labels"
 msgstr "编号卡片"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:22
+#: ../templates/avery-us-templates.xml.h:24
 msgid "Index Cards"
 msgstr "索引卡片"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:24
+#: ../templates/avery-us-templates.xml.h:26
 msgid "Large Round Labels"
 msgstr "大圆标签"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:15
+#: ../templates/avery-us-templates.xml.h:28
 msgid "Name Badge Labels"
 msgstr "铭牌标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:28
+#: ../templates/avery-us-templates.xml.h:30
 msgid "Post cards"
 msgstr "贺卡/明信片"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:17
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:32
+#: ../templates/dymo-other-templates.xml.h:12
+#: ../templates/worldlabel-us-templates.xml.h:8
 msgid "Return Address Labels"
 msgstr "退回地址标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:32
+#: ../templates/avery-us-templates.xml.h:34
+#: ../templates/maco-us-templates.xml.h:3
+#: ../templates/misc-us-templates.xml.h:30
+#: ../templates/worldlabel-us-templates.xml.h:9
 msgid "Round Labels"
 msgstr "圆标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:34
+#. ********************************************************************
+#: ../templates/avery-us-templates.xml.h:36
+#: ../templates/uline-us-templates.xml.h:2
+#: ../templates/worldlabel-us-templates.xml.h:10
 msgid "Shipping Labels"
 msgstr "物流标签"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:21
+#: ../templates/avery-us-templates.xml.h:38
 msgid "Small Round Labels"
 msgstr "小圆标签"
 
 #. ===================================================================
-#: data/templates/avery-us-templates.xml.h:23
+#: ../templates/avery-us-templates.xml.h:40
 msgid "Square Labels"
 msgstr "正方形标签"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:40
+#: ../templates/avery-us-templates.xml.h:42
 msgid "Tent Cards"
 msgstr "夹纸条"
 
 #. ===================================================================
-#: ../data/templates/avery-us-templates.xml.h:42
+#: ../templates/avery-us-templates.xml.h:44
+#: ../templates/worldlabel-us-templates.xml.h:11
 msgid "Video Tape Face Labels"
 msgstr "录像带正面标签"
 
-#: data/templates/avery-us-templates.xml.h:25
+#. ===================================================================
+#: ../templates/avery-us-templates.xml.h:46
+#: ../templates/worldlabel-us-templates.xml.h:12
 msgid "Video Tape Spine Labels"
 msgstr "录像带背面标签"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:2
+#: ../templates/avery-iso-templates.xml.h:4
 msgid "Address labels"
 msgstr "通迅录标签"
 
 #. ===================================================================
-#: ../data/templates/avery-iso-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:6
 msgid "Allround labels"
 msgstr "通用标签"
 
 #. ===============================================================
-#: data/templates/avery-iso-templates.xml.h:6
+#: ../templates/avery-iso-templates.xml.h:10
 msgid "CD Booklet"
 msgstr "CD集标签"
 
 #. ===============================================================
-#: data/templates/avery-iso-templates.xml.h:8
+#: ../templates/avery-iso-templates.xml.h:12
 msgid "CD Inlet"
 msgstr "CD单盒"
 
 #. ===================================================================
-#: ../data/templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:18
 msgid "Diskette labels"
 msgstr "软盘标签"
 
 #. ===============================================================
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:14
-#: data/templates/zweckform-iso-templates.xml.h:14
-#: data/templates/misc-iso-templates.xml.h:35
+#: ../templates/avery-iso-templates.xml.h:20
+#: ../templates/misc-us-templates.xml.h:20
+#: ../templates/misc-iso-templates.xml.h:36
+#: ../templates/zweckform-iso-templates.xml.h:16
 msgid "Mailing Labels"
 msgstr "信封标签"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:16
+#: ../templates/avery-iso-templates.xml.h:22
 msgid "Mailing labels"
 msgstr "信封标签"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:18
+#: ../templates/avery-iso-templates.xml.h:24
 msgid "Mini Address Labels"
 msgstr "地址标签"
 
 #. ===================================================================
-#: data/templates/avery-iso-templates.xml.h:20
+#: ../templates/avery-iso-templates.xml.h:26
+#, fuzzy
+msgid "Mini Labels"
+msgstr "微型CD的标签"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:28
 msgid "Shipping labels"
 msgstr "物流标签"
 
-#. ===================================================================
-#: ../data/templates/avery-other-templates.xml.h:2
-msgid "File Folder Labels"
-msgstr "文件夹标签"
-
-#: ../data/templates/brother-other-templates.xml.h:1
+#: ../templates/brother-other-templates.xml.h:1
 msgid "Multi Purpose Labels 17mm x 54mm"
 msgstr "多用途标签 17mm x 54mm"
 
-#: ../data/templates/brother-other-templates.xml.h:2
+#: ../templates/brother-other-templates.xml.h:2
 msgid "Shipping Labels 62mm x 100mm"
 msgstr "物流标签 62mm x 100mm"
 
@@ -2405,266 +2712,460 @@ msgstr "物流标签 62mm x 100mm"
 #. *********************************************************************
 #. *********************************************************************
 #.
-#: ../data/templates/brother-other-templates.xml.h:20
+#: ../templates/brother-other-templates.xml.h:20
 msgid "Standard Address Labels 29mm x 90mm"
 msgstr "标准通迅录 29mm x 90mm"
 
 #. ===================================================================
-#: ../data/templates/dymo-other-templates.xml.h:2
+#: ../templates/dymo-other-templates.xml.h:2
 msgid "3.5in Diskette"
 msgstr "3.5英寸软盘"
 
 #. ===================================================================
-#: ../data/templates/dymo-other-templates.xml.h:6
+#: ../templates/dymo-other-templates.xml.h:6
 msgid "File Folder"
 msgstr "文件夹"
 
 #. ===================================================================
-#: ../data/templates/dymo-other-templates.xml.h:8
+#: ../templates/dymo-other-templates.xml.h:8
 msgid "Hanging Folder"
 msgstr "挂起的公文夹"
 
 #. ===================================================================
-#: ../data/templates/dymo-other-templates.xml.h:10
+#: ../templates/dymo-other-templates.xml.h:10
 msgid "Large Address Labels"
 msgstr "大地址标签"
 
 #. ===================================================================
-#: ../data/templates/dymo-other-templates.xml.h:14
+#: ../templates/dymo-other-templates.xml.h:14
 msgid "Shipping Address Labels"
 msgstr "物流地址标签"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:2
+#: ../templates/misc-us-templates.xml.h:2
 msgid "Business Card CD"
 msgstr "名片CD"
 
 #. ===================================================================
-#: ../data/templates/misc-us-templates.xml.h:6
+#: ../templates/misc-us-templates.xml.h:6
 msgid "CD Template Rectangles"
 msgstr "CD方盒 (方形外包装)"
+
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:10
 msgid "CD/DVD Labels (Face Only)"
 msgstr "CD/DVD光盘贴纸(盘面)"
 
-
-#: data/templates/misc-us-templates.xml.h:7
-#: data/templates/misc-iso-templates.xml.h:23
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:12
+#: ../templates/misc-iso-templates.xml.h:18
 msgid "CD/DVD Labels (face only)"
 msgstr "CD/DVD光盘贴纸(盘面)"
 
-
-#: data/templates/misc-us-templates.xml.h:9
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:14
 msgid "Cassette Labels"
 msgstr "磁带盒标签"
 
-
-#: data/templates/misc-us-templates.xml.h:11
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:16
 msgid "DLT Labels"
 msgstr "DLT标签"
 
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:18
+#, fuzzy
+msgid "Jewel Case Booklet"
+msgstr "CD集标签"
 
-#: data/templates/misc-us-templates.xml.h:13
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:22
 msgid "Microtube labels"
 msgstr "细管标签"
 
-#: data/templates/misc-us-templates.xml.h:14
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:24
 msgid "Mini-CD Labels"
 msgstr "微型CD的标签"
 
-#: data/templates/misc-us-templates.xml.h:15
+#: ../templates/misc-us-templates.xml.h:25
 msgid "PRO CD Labels 2-up (CD spine only)"
 msgstr "超级CD标签 2-向上(光盘盘面)"
 
-#: data/templates/misc-us-templates.xml.h:16
+#: ../templates/misc-us-templates.xml.h:26
 msgid "PRO CD Labels 2-up (Face only)"
 msgstr "超级CD标签 2-向上(封面)"
 
-#: data/templates/misc-us-templates.xml.h:17
-#: data/templates/misc-iso-templates.xml.h:42
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:28
+#: ../templates/misc-iso-templates.xml.h:42
 msgid "PRO CD Labels 2-up (face only)"
 msgstr "超级CD标签 2-向上(封面)"
 
-#: data/templates/misc-us-templates.xml.h:13
+#. ===================================================================
+#: ../templates/misc-us-templates.xml.h:32
 msgid "Slimline CD Case (rightside up)"
 msgstr "CD收集盒(右侧在上)"
 
-#: data/templates/misc-us-templates.xml.h:19
+#: ../templates/misc-us-templates.xml.h:33
 msgid "Slimline CD Case (upside down)"
 msgstr "CD收集盒(盖子在下)"
 
 #. ===================================================================
-#: ../data/templates/misc-iso-templates.xml.h:4
-#: ../data/templates/zweckform-iso-templates.xml.h:4
+#: ../templates/misc-iso-templates.xml.h:4
+#: ../templates/zweckform-iso-templates.xml.h:4
 msgid "Allround Labels"
 msgstr "通用标签"
 
-#: data/templates/misc-iso-templates.xml.h:11
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:6
 msgid "Arch File Labels"
 msgstr "档案标签"
 
-#: data/templates/misc-iso-templates.xml.h:13
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:8
 msgid "Arch File Labels (large)"
 msgstr "档案标签(大)"
 
-#: data/templates/misc-iso-templates.xml.h:15
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:10
 msgid "Arch File Labels (small)"
 msgstr "档案标签(小)"
 
-#: data/templates/misc-iso-templates.xml.h:19
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:14
 msgid "CD Labels"
 msgstr "CD标签"
 
-#: data/templates/misc-iso-templates.xml.h:25
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:20
 msgid "CD/DVD Labels Standard Format (face only)"
 msgstr "CD/DVD光盘贴纸标准格式(正面)"
 
-#: data/templates/misc-iso-templates.xml.h:27
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:22
 msgid "Diskette Labels (face only)"
 msgstr "软盘标签 (封面)"
 
-#: data/templates/misc-iso-templates.xml.h:29
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:24
 msgid "EPSON Photo Stickers 16"
 msgstr "爱普生(EPSON)相片纸"
 
-#: data/templates/misc-iso-templates.xml.h:31
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:26
 msgid "Etiketten"
 msgstr "包装标签"
 
-#: data/templates/misc-iso-templates.xml.h:33
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:28
 msgid "Fridge Magnet Stickers"
 msgstr "冰箱贴纸"
 
 #. ===================================================================
-#: ../data/templates/misc-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:30
 msgid "General Labels"
 msgstr "通用标签"
 
 #. ===================================================================
-#: ../data/templates/misc-iso-templates.xml.h:32
+#: ../templates/misc-iso-templates.xml.h:32
 msgid "Inkjet/Laser Labels 70x37mm"
 msgstr "喷墨/激光打印纸 70x37mm"
 
 #. ===================================================================
-#: data/templates/misc-iso-templates.xml.h:37
-msgid "Mailing Labels --14"
-msgstr "信封标签 --14"
-
-#: data/templates/misc-iso-templates.xml.h:39
+#: ../templates/misc-iso-templates.xml.h:38
 msgid "Mailing Labels-2 columns"
 msgstr "信封标签-2栏"
 
-#: data/templates/misc-iso-templates.xml.h:41
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:40
 msgid "Mailing Labels-3 columns"
 msgstr "信封标签-3栏"
 
 #. ===================================================================
-#: ../data/templates/misc-iso-templates.xml.h:44
-#: ../data/templates/zweckform-iso-templates.xml.h:24
+#: ../templates/misc-iso-templates.xml.h:44
+#: ../templates/zweckform-iso-templates.xml.h:24
 msgid "Rectangular Labels"
 msgstr "长方形标签"
 
 #. ===================================================================
-#: ../data/templates/misc-iso-templates.xml.h:46
+#: ../templates/misc-iso-templates.xml.h:46
+#, fuzzy
+msgid "Universal Labels"
+msgstr "通用标签"
+
+#. ===================================================================
+#: ../templates/misc-iso-templates.xml.h:48
 msgid "Video Labels (face only)"
 msgstr "录像带标签(正面)"
 
 #. ===================================================================
-#: ../data/templates/misc-other-templates.xml.h:2
+#: ../templates/misc-other-templates.xml.h:2
 msgid "Multi-Purpose Labels"
 msgstr "多用途标签"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:10
+#: ../templates/pearl-iso-templates.xml.h:4
+#, fuzzy
+msgid "Address Labels (STAMPIT)"
+msgstr "通迅录标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:6
+#, fuzzy
+msgid "Bottle labels"
+msgstr "软盘标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:10
+msgid "Business cards glossy, both sides printable"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:12
+#, fuzzy
+msgid "Business cards high glossy"
+msgstr "名片"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:14
+#, fuzzy
+msgid "Business cards punched"
+msgstr "名片"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:16
+#, fuzzy
+msgid "Business cards punched dull"
+msgstr "名片"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:18
+#, fuzzy
+msgid "Business cards punched glossy"
+msgstr "名片"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:22
+#, fuzzy
+msgid "Floppy disk labels"
+msgstr "通用标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:24
+#, fuzzy
+msgid "Foldable business cards"
+msgstr "名片"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:26
+msgid "Foldable business cards glossy/dull"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:28
+#, fuzzy
+msgid "Labels A4"
+msgstr "标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:30
+#, fuzzy
+msgid "Labels A5"
+msgstr "标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:32
+#, fuzzy
+msgid "Labels A6"
+msgstr "标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:34
+msgid "Membership cards"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:36
+msgid "Membership cards, both sides printable"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:38
+#, fuzzy
+msgid "Name plates"
+msgstr "名称"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:40
+msgid "Passport photo labels glossy"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:42
+#, fuzzy
+msgid "Photo labels"
+msgstr "关于glabels"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:44
+msgid "Photo labels semiglossy"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:48
+#, fuzzy
+msgid "SD card labels"
+msgstr "正方形标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:50
+msgid "Self-adhesive film transparent"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:52
+msgid "Self-adhesive film weatherproof"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:54
+#, fuzzy
+msgid "Self-adhesive labels"
+msgstr "正方形标签"
+
+#. ===================================================================
+#: ../templates/pearl-iso-templates.xml.h:56
+msgid "Self-adhesive window film"
+msgstr ""
+
+#. ===================================================================
+#: ../templates/zweckform-iso-templates.xml.h:10
 msgid "Correction and Cover-up Labels"
 msgstr "改错贴纸标签"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:12
+#: ../templates/zweckform-iso-templates.xml.h:12
 msgid "File Back Labels"
 msgstr "文件备案标签"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:14
+#: ../templates/zweckform-iso-templates.xml.h:14
 msgid "Lever Arch File Labels"
 msgstr "装订档案标签"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:18
 msgid "Multi-purpose Stick+Lift Labels"
 msgstr "多用途 易事贴"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:20
+#: ../templates/zweckform-iso-templates.xml.h:20
 msgid "QSL-Karten Etiketten 70mm x 50,8mm"
 msgstr ""
 
 #. ===================================================================
-#: data/templates/zweckform-iso-templates.xml.h:18
+#: ../templates/zweckform-iso-templates.xml.h:22
 msgid "Rectangular Copier Labels"
 msgstr "长方形复写标签"
 
 #. ===================================================================
-#: ../data/templates/zweckform-iso-templates.xml.h:26
+#: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "录像带标签(背面)"
 
-#. ===================================================================
-#: data/desktop/glabels.desktop.in.h:1
-msgid "Create labels, business cards and media covers"
-msgstr "制作标签，名片和光盘盒封面"
+#~ msgid "Text file with comma delimeters (CSV)"
+#~ msgstr "用逗号分隔的文本文件 (CSV)"
 
-#: data/desktop/glabels.desktop.in.h:2
-msgid "gLabels Label Designer"
-msgstr "gLabels标签设计工具"
+#~ msgid "Text file with colon delimeters"
+#~ msgstr "用冒号分隔的文本文件 (CSV)"
 
-#: data/mime/glabels.keys.in.h:1 data/mime/glabels.xml.in.h:1
-msgid "gLabels Project File"
-msgstr "gLabels工程文件"
+#~ msgid "Text file with tab delimeters"
+#~ msgstr "用制表符分隔的文本文件 (CSV)"
 
-#: ../barcode-0.98/compat/getopt.c:583
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: 选项 `%s' 有歧义\n"
+#~ msgid "Data from a file containing VCards"
+#~ msgstr "从VCards文件导出的数据"
 
-#: ../barcode-0.98/compat/getopt.c:607
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: 选项 `--%s' 不支持附加参数\n"
+#~ msgid "%s x %s %s"
+#~ msgstr "%s x %s %s"
 
-#: ../barcode-0.98/compat/getopt.c:612
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: 选项 `%c%s' 不支持附加参数\n"
+#~ msgid "%.5g x %.5g %s"
+#~ msgstr "%.5g x %.5g %s"
 
-#: ../barcode-0.98/compat/getopt.c:629
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: 选项 `%s' 需要附加参数\n"
+#~ msgid "%.5g %s diameter"
+#~ msgstr "%.5g %s 直径"
 
-#. --option
-#: ../barcode-0.98/compat/getopt.c:658
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: 未知的选项 '--%s'\n"
+#~ msgid "<b>Label orientation</b>"
+#~ msgstr "<b>标签方向</b>"
 
-#. +option or -option
-#: ../barcode-0.98/compat/getopt.c:662
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: 未知的选项 `%c%s'\n"
+#~ msgid "<b>Media type</b>"
+#~ msgstr "<b>介质类型</b>"
 
-#. 1003.2 specifies the format of this message.
-#: ../barcode-0.98/compat/getopt.c:688
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: 非法的选项 -- %c\n"
+#~ msgid "00000000000 00000"
+#~ msgstr "00000000000 00000"
 
-#: ../barcode-0.98/compat/getopt.c:691
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: 无效的选项 -- %c\n"
+#~ msgid "Select A File"
+#~ msgstr "选择一个文件"
 
-#: ../barcode-0.98/compat/getopt.c:727
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: 选项需要附加参数 -- %c\n"
+#~ msgid "<b>Print control (Simple)</b>"
+#~ msgstr "<b>打印控制(简单)</b>"
+
+#~ msgid "cd_size_page"
+#~ msgstr "光盘尺寸"
+
+#~ msgid "finish_page"
+#~ msgstr "完成"
+
+#~ msgid "layout_page"
+#~ msgstr "布局"
+
+#~ msgid "nlayouts_page"
+#~ msgstr "多层布局"
+
+#~ msgid "pg_size_page"
+#~ msgstr "纸张大小"
+
+#~ msgid "rect_size_page"
+#~ msgstr "矩形尺寸"
+
+#~ msgid "round_size_page"
+#~ msgstr "圆形尺寸"
+
+#~ msgid "shape_page"
+#~ msgstr "形状"
+
+#~ msgid "start_page"
+#~ msgstr "起始页"
+
+#~ msgid "Search all templates"
+#~ msgstr "查找全部模板"
+
+#~ msgid "Mailing Labels --14"
+#~ msgstr "信封标签 --14"
+
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: 选项 `%s' 有歧义\n"
+
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: 选项 `--%s' 不支持附加参数\n"
+
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: 选项 `%c%s' 不支持附加参数\n"
+
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: 选项 `%s' 需要附加参数\n"
+
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: 未知的选项 '--%s'\n"
+
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: 未知的选项 `%c%s'\n"
+
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: 非法的选项 -- %c\n"
+
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: 无效的选项 -- %c\n"
+
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: 选项需要附加参数 -- %c\n"

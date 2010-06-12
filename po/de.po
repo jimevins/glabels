@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-06-10 00:35+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-12 10:33-0400\n"
 "PO-Revision-Date: 2010-06-10 20:02+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -332,7 +332,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -381,7 +382,8 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -558,7 +560,7 @@ msgstr "Linienbreite"
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: ../src/label.c:702 ../src/ui.c:422
+#: ../src/label.c:702 ../src/ui.c:429
 msgid "Merge properties"
 msgstr "Mischeinstellungen"
 
@@ -566,11 +568,11 @@ msgstr "Mischeinstellungen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/label.c:1217 ../src/ui.c:324
+#: ../src/label.c:1217 ../src/ui.c:331
 msgid "Bring to front"
 msgstr "Ganz nach vorn"
 
-#: ../src/label.c:1253 ../src/ui.c:331
+#: ../src/label.c:1253 ../src/ui.c:338
 msgid "Send to back"
 msgstr "Ganz nach hinten"
 
@@ -578,51 +580,51 @@ msgstr "Ganz nach hinten"
 msgid "Rotate"
 msgstr "Drehen"
 
-#: ../src/label.c:1329 ../src/ui.c:338
+#: ../src/label.c:1329 ../src/ui.c:345
 msgid "Rotate left"
 msgstr "Links drehen"
 
-#: ../src/label.c:1362 ../src/ui.c:345
+#: ../src/label.c:1362 ../src/ui.c:352
 msgid "Rotate right"
 msgstr "Rechts drehen"
 
-#: ../src/label.c:1397 ../src/ui.c:352
+#: ../src/label.c:1397 ../src/ui.c:359
 msgid "Flip horizontally"
 msgstr "Horizontal spiegeln"
 
-#: ../src/label.c:1432 ../src/ui.c:359
+#: ../src/label.c:1432 ../src/ui.c:366
 msgid "Flip vertically"
 msgstr "Vertikal spiegeln"
 
-#: ../src/label.c:1472 ../src/ui.c:366
+#: ../src/label.c:1472 ../src/ui.c:373
 msgid "Align left"
 msgstr "Linksbündig"
 
-#: ../src/label.c:1529 ../src/ui.c:373
+#: ../src/label.c:1529 ../src/ui.c:380
 msgid "Align right"
 msgstr "Rechtsbündig"
 
-#: ../src/label.c:1590 ../src/ui.c:380
+#: ../src/label.c:1590 ../src/ui.c:387
 msgid "Align horizontal center"
 msgstr "Horizontal mittig anordnen"
 
-#: ../src/label.c:1666 ../src/ui.c:387
+#: ../src/label.c:1666 ../src/ui.c:394
 msgid "Align tops"
 msgstr "Oben bündig"
 
-#: ../src/label.c:1723 ../src/ui.c:394
+#: ../src/label.c:1723 ../src/ui.c:401
 msgid "Align bottoms"
 msgstr "Unten bündig"
 
-#: ../src/label.c:1784 ../src/ui.c:401
+#: ../src/label.c:1784 ../src/ui.c:408
 msgid "Align vertical center"
 msgstr "Vertikal mittig anordnen"
 
-#: ../src/label.c:1862 ../src/ui.c:408
+#: ../src/label.c:1862 ../src/ui.c:415
 msgid "Center horizontally"
 msgstr "Horizontal zentrieren"
 
-#: ../src/label.c:1909 ../src/ui.c:415
+#: ../src/label.c:1909 ../src/ui.c:422
 msgid "Center vertically"
 msgstr "Vertikal zentrieren"
 
@@ -795,7 +797,8 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr ""
+"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -841,7 +844,7 @@ msgstr "Markieren"
 msgid "Record/Field"
 msgstr "Feld"
 
-#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:10
 msgid "Data"
 msgstr "Wert"
 
@@ -876,31 +879,31 @@ msgstr "Überprüfen"
 msgid "Default"
 msgstr "Standard"
 
-#: ../src/object-editor.c:159 ../src/object-editor.c:460
+#: ../src/object-editor.c:179 ../src/object-editor.c:485
 msgid "Object properties"
 msgstr "Objekteigenschaften"
 
-#: ../src/object-editor.c:309
+#: ../src/object-editor.c:332
 msgid "Box object properties"
 msgstr "Eigenschaften des Rechteck-Objekts"
 
-#: ../src/object-editor.c:328
+#: ../src/object-editor.c:351
 msgid "Ellipse object properties"
 msgstr "Eigenschaften des Ellipsen-Objekts"
 
-#: ../src/object-editor.c:347
+#: ../src/object-editor.c:370
 msgid "Line object properties"
 msgstr "Eigenschaften des Linien-Objekts"
 
-#: ../src/object-editor.c:364
+#: ../src/object-editor.c:387
 msgid "Image object properties"
 msgstr "Eigenschaften des Bild-Objekts"
 
-#: ../src/object-editor.c:381
+#: ../src/object-editor.c:404
 msgid "Text object properties"
 msgstr "Eigenschaften des Text-Objekts"
 
-#: ../src/object-editor.c:403
+#: ../src/object-editor.c:426
 msgid "Barcode object properties"
 msgstr "Eigenschaften des Strichcode-Objekts"
 
@@ -1228,11 +1231,11 @@ msgstr "_Beenden"
 msgid "Quit the program"
 msgstr "Das Programm beenden"
 
-#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:980
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:987
 msgid "Redo"
 msgstr "Wiederholen"
 
@@ -1324,7 +1327,7 @@ msgstr "Modus auswählen"
 msgid "Select, move and modify objects"
 msgstr "Objekte auswählen, bewegen, ändern"
 
-#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:30
 msgid "Text"
 msgstr "Text"
 
@@ -1336,7 +1339,7 @@ msgstr "Rechteck"
 msgid "Create box/rectangle object"
 msgstr "Rechteck-Objekt erzeugen"
 
-#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:19
 msgid "Line"
 msgstr "Linie"
 
@@ -1348,7 +1351,7 @@ msgstr "Ellipse"
 msgid "Create ellipse/circle object"
 msgstr "Ellipsen- oder Kreisobjekt erzeugen"
 
-#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:16
 msgid "Image"
 msgstr "Bild"
 
@@ -1356,152 +1359,164 @@ msgstr "Bild"
 msgid "Barcode"
 msgstr "Strichcode"
 
+#: ../src/ui.c:324
+#, fuzzy
+msgid "Properties"
+msgstr "Einstellungen …"
+
 #: ../src/ui.c:326
+#, fuzzy
+msgid "Edit object properties"
+msgstr "Eigenschaften des Linien-Objekts"
+
+#: ../src/ui.c:333
 msgid "Raise object to top"
 msgstr "Objekt im Ebenenstapel nach oben verschieben"
 
-#: ../src/ui.c:333
+#: ../src/ui.c:340
 msgid "Lower object to bottom"
 msgstr "Objekt im Ebenenstapel nach unten verschieben"
 
-#: ../src/ui.c:340
+#: ../src/ui.c:347
 msgid "Rotate object 90 degrees counter-clockwise"
 msgstr "Objekt um 90 Grad gegen den Uhrzeigersinn drehen"
 
-#: ../src/ui.c:347
+#: ../src/ui.c:354
 msgid "Rotate object 90 degrees clockwise"
 msgstr "Objekt um 90 Grad im Uhrzeigersinn drehen"
 
-#: ../src/ui.c:354
+#: ../src/ui.c:361
 msgid "Flip object horizontally"
 msgstr "Objekt horizontal spiegeln"
 
-#: ../src/ui.c:361
+#: ../src/ui.c:368
 msgid "Flip object vertically"
 msgstr "Objekt vertikal spiegeln"
 
-#: ../src/ui.c:368
+#: ../src/ui.c:375
 msgid "Align objects to left edges"
 msgstr "Objekte am linken Rand anordnen"
 
-#: ../src/ui.c:375
+#: ../src/ui.c:382
 msgid "Align objects to right edges"
 msgstr "Objekte am rechten Rand anordnen"
 
-#: ../src/ui.c:382
+#: ../src/ui.c:389
 msgid "Align objects to horizontal centers"
 msgstr "Objekte an der horizontalen Mitte anordnen"
 
-#: ../src/ui.c:389
+#: ../src/ui.c:396
 msgid "Align objects to top edges"
 msgstr "Objekte am oberen Rand anordnen"
 
-#: ../src/ui.c:396
+#: ../src/ui.c:403
 msgid "Align objects to bottom edges"
 msgstr "Objekte am unteren Rand anordnen"
 
-#: ../src/ui.c:403
+#: ../src/ui.c:410
 msgid "Align objects to vertical centers"
 msgstr "Objekte an der vertikalen Mitte anordnen"
 
-#: ../src/ui.c:410
+#: ../src/ui.c:417
 msgid "Center objects to horizontal label center"
 msgstr "Objekte zur horizontalen Mitte des Etiketts zentrieren"
 
-#: ../src/ui.c:417
+#: ../src/ui.c:424
 msgid "Center objects to vertical label center"
 msgstr "Objekte zur vertikalen Mitte des Etiketts zentrieren"
 
-#: ../src/ui.c:424
+#: ../src/ui.c:431
 msgid "Edit merge properties"
 msgstr "Mischeinstellungen bearbeiten"
 
-#: ../src/ui.c:431
+#: ../src/ui.c:438
 msgid "Contents"
 msgstr "Inhalte"
 
-#: ../src/ui.c:433
+#: ../src/ui.c:440
 msgid "Open glabels manual"
 msgstr "Das gLabels-Handbuch öffnen"
 
-#: ../src/ui.c:438
+#: ../src/ui.c:445
 msgid "About..."
 msgstr "Info …"
 
-#: ../src/ui.c:440
+#: ../src/ui.c:447
 msgid "About glabels"
 msgstr "Info zu gLabels"
 
 # CHECK
-#: ../src/ui.c:450
+#: ../src/ui.c:457
 msgid "Property toolbar"
 msgstr "Eigenschaften-Werkzeugleiste"
 
-#: ../src/ui.c:452
+#: ../src/ui.c:459
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
-#: ../src/ui.c:458
+#: ../src/ui.c:465
 msgid "Grid"
 msgstr "Raster"
 
-#: ../src/ui.c:460
+#: ../src/ui.c:467
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
-#: ../src/ui.c:466
+#: ../src/ui.c:473
 msgid "Markup"
 msgstr "Markierungen"
 
-#: ../src/ui.c:468
+#: ../src/ui.c:475
 msgid "Change the visibility of markup lines in the current window"
 msgstr "Die Sichtbarkeit von Markierungslinien im aktuellen Fenster ändern"
 
-#: ../src/ui.c:479
+#: ../src/ui.c:486
 msgid "Main toolbar"
 msgstr "Haupt-Werkzeugleiste"
 
-#: ../src/ui.c:481
+#: ../src/ui.c:488
 msgid "Change the visibility of the main toolbar in the current window"
 msgstr ""
 "Die Sichtbarkeit der Haupt-Werkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui.c:487
+#: ../src/ui.c:494
 msgid "Drawing toolbar"
 msgstr "Zeichenwerkzeugleiste"
 
-#: ../src/ui.c:489
+#: ../src/ui.c:496
 msgid "Change the visibility of the drawing toolbar in the current window"
 msgstr ""
 "Die Sichtbarkeit der Zeichenwerkzeugleiste im aktuellen Fenster einschalten/"
 "ausschalten"
 
-#: ../src/ui-commands.c:1135
+#: ../src/ui-commands.c:1153
 msgid "Glabels includes contributions from:"
 msgstr "Glabels entstand unter Mitwirkung von:"
 
-#: ../src/ui-commands.c:1141
+#: ../src/ui-commands.c:1159
 msgid "See the file AUTHORS for additional credits,"
 msgstr "Lesen die Datei AUTHORS für zusätzliche Danksagungen,"
 
-#: ../src/ui-commands.c:1142
+#: ../src/ui-commands.c:1160
 msgid "or visit http://glabels.org/"
 msgstr "oder besuchen Sie http://glabels.org/"
 
-#: ../src/ui-commands.c:1154
+#: ../src/ui-commands.c:1172
 msgid "A label and business card creation program.\n"
 msgstr "Eine Anwendung zum Erstellen von Etiketten und Visitenkarten.\n"
 
-#: ../src/ui-commands.c:1158
+#: ../src/ui-commands.c:1176
 msgid "translator-credits"
 msgstr ""
 "Marcus Bauer <m@7n7.de>\n"
 "Christian Neumair <christian-neumair@web.de>\n"
 "Mario Blättermann <mariobl@gnome.org>"
 
-#: ../src/ui-commands.c:1161
+#: ../src/ui-commands.c:1179
 msgid ""
 "gLabels is free software: you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -1521,7 +1536,7 @@ msgstr ""
 "Dieses Programm wird verteilt in der Hoffnung, dass es nützlich ist, aber\n"
 "OHNE JEDE GARANTIE; Weitere Details in der GNU General Public License.\n"
 
-#: ../src/ui-commands.c:1190
+#: ../src/ui-commands.c:1208
 msgid "glabels"
 msgstr "glabels"
 
@@ -1646,13 +1661,13 @@ msgstr "Durchmesser"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:41
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:40
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "Zoll"
@@ -1833,112 +1848,116 @@ msgstr "Winkel:"
 msgid "Checksum"
 msgstr "Prüfsumme"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:8
+msgid "Close sidebar."
+msgstr ""
+
+#: ../data/ui/object-editor.ui.h:9 ../data/ui/prefs-dialog.ui.h:8
 msgid "Color:"
 msgstr "Farbe:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:11
 msgid "Enable shadow"
 msgstr "Schattierung aktivieren"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:12
 msgid "Family:"
 msgstr "Familie:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:13
 msgid "File:"
 msgstr "Datei:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:14
 msgid "Fill"
 msgstr "Füllen"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:15 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Höhe"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:17
 msgid "Key:"
 msgstr "Schlüssel:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:18
 msgid "Length:"
 msgstr "Länge:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:20 ../data/ui/prefs-dialog.ui.h:12
 msgid "Line Spacing:"
 msgstr "Zeilenabstand:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:21
 msgid "Literal:"
 msgstr "Literale:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:22
 msgid "Opacity:"
 msgstr "Transparenz:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:23
 msgid "Position"
 msgstr "Position"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:24
 msgid "Reset image size"
 msgstr "Bildgröße zurücksetzen"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:25
 msgid "Shadow"
 msgstr "Schattierung"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:26
 msgid "Size"
 msgstr "Breite"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:27
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:28
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:29
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:31 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Breite:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:32
 msgid "X Offset:"
 msgstr "X-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:33
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:34
 msgid "Y Offset:"
 msgstr "Y-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:35
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:36
 msgid "degrees"
 msgstr "Grad"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:37
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:38
 msgid "digits:"
 msgstr "Zeichen:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:39
 msgid "format:"
 msgstr "Format:"
 
@@ -2179,7 +2198,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
