@@ -118,7 +118,7 @@ gl_object_editor_init (glObjectEditor *editor)
                                        "adjustment4",  "adjustment5",  "adjustment6",
                                        "adjustment7",  "adjustment8",  "adjustment9",
                                        "adjustment10", "adjustment11", "adjustment12",
-                                       "adjustment13",
+                                       "adjustment13", "page_sizegroup", "width_sizegroup",
                                        NULL };
         GError       *error = NULL;
         gchar        *s;

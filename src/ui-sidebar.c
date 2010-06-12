@@ -123,8 +123,6 @@ gl_ui_sidebar_new (void)
 
 	sidebar = g_object_new (gl_ui_sidebar_get_type (), NULL);
 
-	gtk_widget_set_size_request (GTK_WIDGET (sidebar), DEFAULT_SIDEBAR_WIDTH, -1);
-
 	gl_ui_sidebar_construct (sidebar);
 
 	gl_debug (DEBUG_UI, "END");

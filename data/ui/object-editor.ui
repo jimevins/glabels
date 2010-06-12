@@ -54,7 +54,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="scrollable">True</property>
-                <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkVBox" id="edit_page_vbox">
                     <property name="visible">True</property>
@@ -2237,5 +2236,25 @@
     <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+  </object>
+  <object class="GtkSizeGroup" id="page_sizegroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="edit_page_vbox"/>
+      <widget name="text_page_vbox"/>
+      <widget name="line_page_vbox"/>
+      <widget name="fill_page_vbox"/>
+      <widget name="img_page_vbox"/>
+      <widget name="data_page_vbox"/>
+      <widget name="size_page_vbox"/>
+      <widget name="lsize_page_vbox"/>
+      <widget name="shadow_page_vbox"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="width_sizegroup">
+    <widgets>
+      <widget name="notebook"/>
+      <widget name="title_hbox"/>
+    </widgets>
   </object>
 </interface>
