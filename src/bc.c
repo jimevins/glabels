@@ -159,8 +159,8 @@ static const Backend backends[] = {
 
 #ifdef HAVE_LIBZINT
 
-        { "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
-	  TRUE, TRUE, FALSE, FALSE, "[00]001234560000000018", TRUE, 16},
+	{ "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
+	  TRUE, TRUE, FALSE, FALSE, "[00]001234560000000018", TRUE, 22},
 
 	{ "GTIN-13", N_("GTIN-13"), gl_barcode_zint_new,
 	  TRUE, TRUE, FALSE, FALSE, "000000000000", FALSE, 13},
