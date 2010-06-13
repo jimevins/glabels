@@ -373,7 +373,7 @@ set_object (glObjectEditor  *editor,
                         gtk_widget_hide     (editor->priv->edit_page_vbox);
                         gtk_widget_hide     (editor->priv->bc_page_vbox);
                         gtk_widget_hide     (editor->priv->data_page_vbox);
-                        gtk_widget_hide     (editor->priv->shadow_page_vbox);
+                        gtk_widget_show_all (editor->priv->shadow_page_vbox);
                 }
                 else if (GL_IS_LABEL_TEXT (object))
                 {

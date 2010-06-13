@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 
+#include "pixbuf-util.h"
 #include "pixmaps/checkerboard.xpm"
 
 #include "debug.h"
@@ -70,6 +71,11 @@ static void draw_object                  (glLabelObject     *object,
                                           gboolean           screen_flag,
                                           glMergeRecord     *record);
 
+static void draw_shadow                  (glLabelObject     *object,
+                                          cairo_t           *cr,
+                                          gboolean           screen_flag,
+                                          glMergeRecord     *record);
+
 static gboolean object_at                (glLabelObject     *object,
                                           cairo_t           *cr,
                                           gdouble            x_pixels,
@@ -93,7 +99,7 @@ gl_label_image_class_init (glLabelImageClass *class)
 	label_object_class->copy              = copy;
 	label_object_class->set_size          = set_size;
         label_object_class->draw_object       = draw_object;
-        label_object_class->draw_shadow       = NULL;
+        label_object_class->draw_shadow       = draw_shadow;
         label_object_class->object_at         = object_at;
 
 	object_class->finalize = gl_label_image_finalize;
@@ -418,7 +424,6 @@ draw_object (glLabelObject *object,
              gboolean       screen_flag,
              glMergeRecord *record)
 {
-        gdouble          x0, y0;
 	gdouble          w, h;
 	const GdkPixbuf *pixbuf;
 	gint             image_w, image_h;
@@ -426,7 +431,6 @@ draw_object (glLabelObject *object,
 	gl_debug (DEBUG_LABEL, "START");
 
 	gl_label_object_get_size (object, &w, &h);
-        gl_label_object_get_position (object, &x0, &y0);
 
 	pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE (object), record);
 	image_w = gdk_pixbuf_get_width (pixbuf);
@@ -443,6 +447,56 @@ draw_object (glLabelObject *object,
 	cairo_restore (cr);
 
 	gl_debug (DEBUG_LABEL, "END");
+}
+
+
+/*****************************************************************************/
+/* Draw shadow method.                                                       */
+/*****************************************************************************/
+static void
+draw_shadow (glLabelObject *object,
+             cairo_t       *cr,
+             gboolean       screen_flag,
+             glMergeRecord *record)
+{
+        gdouble          w, h;
+        const GdkPixbuf *pixbuf;
+        GdkPixbuf       *shadow_pixbuf;
+        gint             image_w, image_h;
+        glColorNode     *shadow_color_node;
+        guint            shadow_color;
+        gdouble          shadow_opacity;
+
+        gl_debug (DEBUG_LABEL, "START");
+
+        gl_label_object_get_size (object, &w, &h);
+
+        shadow_color_node = gl_label_object_get_shadow_color (object);
+        shadow_color = gl_color_node_expand (shadow_color_node, record);
+        if (shadow_color_node->field_flag && screen_flag)
+        {
+                shadow_color = GL_COLOR_SHADOW_MERGE_DEFAULT;
+        }
+        shadow_opacity = gl_label_object_get_shadow_opacity (object);
+
+        pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE (object), record);
+        image_w = gdk_pixbuf_get_width (pixbuf);
+        image_h = gdk_pixbuf_get_height (pixbuf);
+        shadow_pixbuf = gl_pixbuf_util_create_shadow_pixbuf (pixbuf, shadow_color, shadow_opacity);
+
+        cairo_save (cr);
+
+        cairo_rectangle (cr, 0.0, 0.0, w, h);
+
+        cairo_scale (cr, w/image_w, h/image_h);
+        gdk_cairo_set_source_pixbuf (cr, (GdkPixbuf *)shadow_pixbuf, 0, 0);
+        cairo_fill (cr);
+
+        cairo_restore (cr);
+
+        g_object_unref (G_OBJECT (shadow_pixbuf));
+
+        gl_debug (DEBUG_LABEL, "END");
 }
 
 
