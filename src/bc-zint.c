@@ -59,8 +59,9 @@ gl_barcode_zint_new (const gchar          *id,
 {
 	glBarcode           *gbc;
 	struct zint_symbol  *symbol;
-	gint                 type;
-	gint		     result;
+	gint                type;
+	gint                result;
+	gchar               errtxt[100];
 
 	symbol = ZBarcode_Create();
 
@@ -92,9 +93,18 @@ gl_barcode_zint_new (const gchar          *id,
 
 	result = ZBarcode_Encode(symbol, (unsigned char *)digits, 0);
 	if (result) {
-		ZBarcode_Delete (symbol);
 		gl_debug (DEBUG_BARCODE, "Zint Error: %s", symbol->errtxt);
-		return NULL;
+		strcpy(errtxt, symbol->errtxt);
+		ZBarcode_Delete (symbol);
+		// Invalid! Print out a Code128 barcode instead with message
+		symbol = ZBarcode_Create();
+		symbol->symbology = BARCODE_CODE128;
+		result = ZBarcode_Encode(symbol, (unsigned char *)errtxt, 0);
+		if (result) {
+			gl_debug (DEBUG_BARCODE, "Zint Error: %s", symbol->errtxt);
+			ZBarcode_Delete (symbol);
+		  return NULL;
+		}
 	}
 
 	/* Scale calculated after height, always maintain aspect ratio */
@@ -106,7 +116,7 @@ gl_barcode_zint_new (const gchar          *id,
 	 */
 	if (!ZBarcode_Render(symbol, (unsigned int) !text_flag, (float) w, (float) h)) {
 		ZBarcode_Delete(symbol);
-		g_message("Zint Rendering Error: %s", symbol->errtxt);
+		gl_debug(DEBUG_BARCODE, "Zint Rendering Error: %s", symbol->errtxt);
 		return NULL;
 	}
 
