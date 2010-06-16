@@ -2,18 +2,18 @@
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-#
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-05-28 18:04+0000\n"
-"PO-Revision-Date: 2010-05-30 11:37+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"POT-Creation-Date: 2010-06-13 00:44+0000\n"
+"PO-Revision-Date: 2010-06-13 18:20+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"Language-Team: ES <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/bc.c:66
@@ -633,11 +633,11 @@ msgstr "Pegar"
 msgid "Create ellipse object"
 msgstr "Crear un objeto elipse"
 
-#: ../src/label-image.c:161 ../src/ui.c:312
+#: ../src/label-image.c:167 ../src/ui.c:312
 msgid "Create image object"
 msgstr "Crear una imagen"
 
-#: ../src/label-image.c:265 ../src/label-image.c:336
+#: ../src/label-image.c:271 ../src/label-image.c:342
 msgid "Set image"
 msgstr "Establecer imagen"
 
@@ -803,11 +803,19 @@ msgstr "Texto: valores separados por dos puntos"
 msgid "Text: Colon separated values with keys on line 1"
 msgstr "Texto: valores separados por dos puntos con claves en la línea 1"
 
-#: ../src/merge-init.c:104
+#: ../src/merge-init.c:102
+msgid "Text: Semicolon separated values"
+msgstr "Texto: valores separados por punto y coma"
+
+#: ../src/merge-init.c:109
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr "Texto: valores separados por punto y coma con claves en la línea 1"
+
+#: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
 msgstr "Libreta de direcciones de Evolution"
 
-#: ../src/merge-init.c:110
+#: ../src/merge-init.c:125
 msgid "VCards"
 msgstr "Tarjetas de visita"
 
@@ -1585,7 +1593,7 @@ msgstr "Otros"
 msgid "User defined"
 msgstr "Definido por el usuario"
 
-#: ../libglabels/db.c:650
+#: ../libglabels/db.c:665
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1593,7 +1601,7 @@ msgstr ""
 "No se pudieron ubicar las definiciones del tamaño del papel. Puede que "
 "libglabels no esté instalado correctamente."
 
-#: ../libglabels/db.c:1042
+#: ../libglabels/db.c:1057
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1601,7 +1609,7 @@ msgstr ""
 "No se pudieron ubicar las definiciones de categorías. Puede que libglabels "
 "no esté instalado correctamente."
 
-#: ../libglabels/db.c:2061
+#: ../libglabels/db.c:2097
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
@@ -1609,7 +1617,7 @@ msgstr ""
 "No se pudo ubicar ningún archivo de plantilla. Puede que libglabels no esté "
 "instalado correctamente."
 
-#: ../libglabels/db.c:2128
+#: ../libglabels/db.c:2164
 #, c-format
 msgid "%s full page label"
 msgstr "Etiqueta a página completa %s"
