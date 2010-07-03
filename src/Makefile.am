@@ -155,6 +155,8 @@ glabels_3_SOURCES = 			\
 	xml-label-04.h			\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
+	svg-cache.c			\
+	svg-cache.h			\
 	merge.c				\
 	merge.h				\
 	merge-init.c			\
@@ -280,6 +282,8 @@ glabels_3_batch_SOURCES = 		\
 	xml-label-04.h			\
 	pixbuf-cache.c			\
 	pixbuf-cache.h			\
+	svg-cache.c			\
+	svg-cache.h			\
 	merge.c				\
 	merge.h				\
 	merge-init.c			\

@@ -28,6 +28,7 @@
 #include "merge.h"
 #include "color.h"
 #include "pixbuf-cache.h"
+#include "svg-cache.h"
 
 G_BEGIN_DECLS
 
@@ -131,6 +132,9 @@ void          gl_label_set_merge               (glLabel       *label,
 glMerge      *gl_label_get_merge               (glLabel       *label);
 
 GHashTable   *gl_label_get_pixbuf_cache        (glLabel       *label);
+
+
+GHashTable   *gl_label_get_svg_cache           (glLabel       *label);
 
 
 void          gl_label_add_object              (glLabel       *label,

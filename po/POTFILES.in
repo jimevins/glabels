@@ -141,6 +141,8 @@ src/stock.c
 src/stock.h
 src/str-util.c
 src/str-util.h
+src/svg-cache.c
+src/svg-cache.h
 src/template-designer.c
 src/template-designer.h
 src/template-history.c

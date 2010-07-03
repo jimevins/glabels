@@ -104,6 +104,9 @@ static void           xml_parse_data           (xmlNodePtr        node,
 static void           xml_parse_pixdata        (xmlNodePtr        node,
 						glLabel          *label);
 
+static void           xml_parse_file_node      (xmlNodePtr        node,
+						glLabel          *label);
+
 static void           xml_parse_toplevel_span  (xmlNodePtr        node,
 						glLabelObject    *object);
 
@@ -116,43 +119,50 @@ static void           xml_parse_shadow_attrs   (xmlNodePtr        node,
 static xmlDocPtr      xml_label_to_doc         (glLabel          *label,
 						glXMLLabelStatus *status);
 
-static void           xml_create_objects       (xmlNodePtr        root,
+static void           xml_create_objects       (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabel          *label);
 
-static void           xml_create_object_text   (xmlNodePtr        root,
+static void           xml_create_object_text   (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_object_box    (xmlNodePtr        root,
+static void           xml_create_object_box    (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_object_line   (xmlNodePtr        root,
+static void           xml_create_object_line   (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_object_ellipse(xmlNodePtr        root,
+static void           xml_create_object_ellipse(xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_object_image  (xmlNodePtr        root,
+static void           xml_create_object_image  (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_object_barcode(xmlNodePtr        root,
+static void           xml_create_object_barcode(xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabelObject    *object);
 
-static void           xml_create_merge_fields  (xmlNodePtr        root,
+static void           xml_create_merge_fields  (xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabel          *label);
 
-static void           xml_create_data          (xmlNodePtr        root,
+static void           xml_create_data          (xmlDocPtr         doc,
+                                                xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabel          *label);
 
-static void           xml_create_pixdata       (xmlNodePtr        root,
+static void           xml_create_pixdata       (xmlNodePtr        parent,
+						xmlNsPtr          ns,
+						glLabel          *label,
+						gchar            *name);
+
+static void           xml_create_file_svg      (xmlDocPtr         doc,
+                                                xmlNodePtr        parent,
 						xmlNsPtr          ns,
 						glLabel          *label,
 						gchar            *name);
@@ -851,6 +861,8 @@ xml_parse_data (xmlNodePtr  node,
 
 		if (lgl_xml_is_node (child, "Pixdata")) {
 			xml_parse_pixdata (child, label);
+		} else if (lgl_xml_is_node (child, "File")) {
+			xml_parse_file_node (child, label);
 		} else {
 			if (!xmlNodeIsText (child)) {
 				g_message (_("bad node in Data node =  \"%s\""),
@@ -864,7 +876,7 @@ xml_parse_data (xmlNodePtr  node,
 
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Parse XML pixbuf data tag.                                     */
+/* PRIVATE.  Parse XML embedded Pixdata node.                               */
 /*--------------------------------------------------------------------------*/
 static void
 xml_parse_pixdata (xmlNodePtr  node,
@@ -901,6 +913,40 @@ xml_parse_pixdata (xmlNodePtr  node,
 	g_free (pixdata);
 
 	gl_debug (DEBUG_XML, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
+/* PRIVATE.  Parse XML embedded File node.                                  */
+/*--------------------------------------------------------------------------*/
+static void
+xml_parse_file_node (xmlNodePtr  node,
+                     glLabel    *label)
+{
+	gchar      *name, *format;
+        gchar      *content;
+	GHashTable *svg_cache;
+
+	name    = lgl_xml_get_prop_string (node, "name", NULL);
+	format  = lgl_xml_get_prop_string (node, "format", NULL);
+
+        if ( format && (lgl_str_utf8_casecmp (format, "SVG") == 0) )
+        {
+                content = lgl_xml_get_node_content (node);
+
+		svg_cache = gl_label_get_svg_cache (label);
+                gl_svg_cache_add_svg (svg_cache, name, content);
+
+                g_free (content);
+        }
+        else
+        {
+                g_message (_("Unknown embedded file format: \"%s\""), format);
+                
+        }
+
+        g_free (name);
+        g_free (format);
 }
 
 
@@ -1181,7 +1227,7 @@ xml_label_to_doc (glLabel          *label,
 		g_object_unref (G_OBJECT(merge));
 	}
 
-	xml_create_data (doc->xmlRootNode, ns, label);
+	xml_create_data (doc, doc->xmlRootNode, ns, label);
 
 	gl_debug (DEBUG_XML, "END");
 
@@ -1194,7 +1240,7 @@ xml_label_to_doc (glLabel          *label,
 /* PRIVATE.  Add XML Objects Node                                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_objects (xmlNodePtr  root,
+xml_create_objects (xmlNodePtr  parent,
 		    xmlNsPtr    ns,
 		    glLabel    *label)
 {
@@ -1209,7 +1255,7 @@ xml_create_objects (xmlNodePtr  root,
         rotate_flag = gl_label_get_rotate_flag (label);
         object_list = gl_label_get_object_list (label);
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Objects", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Objects", NULL);
 	lgl_xml_set_prop_string (node, "id", "0");
 	lgl_xml_set_prop_boolean (node, "rotate", rotate_flag);
 
@@ -1243,7 +1289,7 @@ xml_create_objects (xmlNodePtr  root,
 /* PRIVATE.  Add XML Objects->Object-text Node                              */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_text (xmlNodePtr     root,
+xml_create_object_text (xmlNodePtr     parent,
 			xmlNsPtr       ns,
 			glLabelObject *object)
 {
@@ -1255,7 +1301,7 @@ xml_create_object_text (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-text", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-text", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1292,7 +1338,7 @@ xml_create_object_text (xmlNodePtr     root,
 /* PRIVATE.  Add XML Objects->Object-box Node                               */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_box (xmlNodePtr     root,
+xml_create_object_box (xmlNodePtr     parent,
 		       xmlNsPtr       ns,
 		       glLabelObject *object)
 {
@@ -1305,7 +1351,7 @@ xml_create_object_box (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-box", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-box", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1358,7 +1404,7 @@ xml_create_object_box (xmlNodePtr     root,
 /* PRIVATE.  Add XML Objects->Object-ellipse Node                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_ellipse (xmlNodePtr     root,
+xml_create_object_ellipse (xmlNodePtr     parent,
 			   xmlNsPtr       ns,
 			   glLabelObject *object)
 {
@@ -1371,7 +1417,7 @@ xml_create_object_ellipse (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-ellipse", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-ellipse", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1425,7 +1471,7 @@ xml_create_object_ellipse (xmlNodePtr     root,
 /* PRIVATE.  Add XML Objects->Object-line Node                              */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_line (xmlNodePtr     root,
+xml_create_object_line (xmlNodePtr     parent,
 			xmlNsPtr       ns,
 			glLabelObject *object)
 {
@@ -1437,7 +1483,7 @@ xml_create_object_line (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-line", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-line", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1479,7 +1525,7 @@ xml_create_object_line (xmlNodePtr     root,
 /* PRIVATE.  Add XML Objects->Object-image Node                             */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_image (xmlNodePtr     root,
+xml_create_object_image (xmlNodePtr     parent,
 			 xmlNsPtr       ns,
 			 glLabelObject *object)
 {
@@ -1490,7 +1536,7 @@ xml_create_object_image (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-image", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-image", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1525,7 +1571,7 @@ xml_create_object_image (xmlNodePtr     root,
 /* PRIVATE.  Add XML Objects->Object-barcode Node                           */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_object_barcode (xmlNodePtr     root,
+xml_create_object_barcode (xmlNodePtr     parent,
 			   xmlNsPtr       ns,
 			   glLabelObject *object)
 {
@@ -1541,7 +1587,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Object-barcode", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Object-barcode", NULL);
 
 	/* position attrs */
 	gl_label_object_get_position (object, &x, &y);
@@ -1598,7 +1644,7 @@ xml_create_object_barcode (xmlNodePtr     root,
 /* PRIVATE.  Add XML Label Merge Fields Node                                */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_merge_fields (xmlNodePtr  root,
+xml_create_merge_fields (xmlNodePtr  parent,
 			 xmlNsPtr    ns,
 			 glLabel    *label)
 {
@@ -1610,7 +1656,7 @@ xml_create_merge_fields (xmlNodePtr  root,
 
 	merge = gl_label_get_merge (label);
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Merge", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Merge", NULL);
 
 	string = gl_merge_get_name (merge);
 	lgl_xml_set_prop_string (node, "type", string);
@@ -1630,23 +1676,34 @@ xml_create_merge_fields (xmlNodePtr  root,
 /* PRIVATE.  Add XML Label Data Node                                        */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_data (xmlNodePtr  root,
+xml_create_data (xmlDocPtr   doc,
+                 xmlNodePtr  parent,
 		 xmlNsPtr    ns,
 		 glLabel    *label)
 {
 	xmlNodePtr  node;
+	GHashTable *cache;
 	GList      *name_list, *p;
-	GHashTable *pixbuf_cache;
 
 	gl_debug (DEBUG_XML, "START");
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Data", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Data", NULL);
 
-	pixbuf_cache = gl_label_get_pixbuf_cache (label);
-	name_list = gl_pixbuf_cache_get_name_list (pixbuf_cache);
+	cache = gl_label_get_pixbuf_cache (label);
+	name_list = gl_pixbuf_cache_get_name_list (cache);
 
 	for (p = name_list; p != NULL; p=p->next) {
 		xml_create_pixdata (node, ns, label, p->data);
+	}
+
+	gl_pixbuf_cache_free_name_list (name_list);
+
+
+	cache = gl_label_get_svg_cache (label);
+	name_list = gl_svg_cache_get_name_list (cache);
+
+	for (p = name_list; p != NULL; p=p->next) {
+		xml_create_file_svg (doc, node, ns, label, p->data);
 	}
 
 	gl_pixbuf_cache_free_name_list (name_list);
@@ -1657,10 +1714,10 @@ xml_create_data (xmlNodePtr  root,
 
 
 /*--------------------------------------------------------------------------*/
-/* PRIVATE.  Add XML Label Data Pixbuf Node                                 */
+/* PRIVATE.  Add XML Label Data embedded Pixdata Node                       */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_pixdata (xmlNodePtr  root,
+xml_create_pixdata (xmlNodePtr  parent,
 		    xmlNsPtr    ns,
 		    glLabel    *label,
 		    gchar      *name)
@@ -1685,7 +1742,7 @@ xml_create_pixdata (xmlNodePtr  root,
 		stream = gdk_pixdata_serialize (pixdata, &stream_length);
 		base64 = g_base64_encode (stream, stream_length);
 
-		node = xmlNewChild (root, ns, (xmlChar *)"Pixdata", (xmlChar *)base64);
+		node = xmlNewChild (parent, ns, (xmlChar *)"Pixdata", (xmlChar *)base64);
 		lgl_xml_set_prop_string (node, "name", name);
 		lgl_xml_set_prop_string (node, "encoding", "Base64");
 
@@ -1702,10 +1759,47 @@ xml_create_pixdata (xmlNodePtr  root,
 
 
 /*--------------------------------------------------------------------------*/
+/* PRIVATE.  Add XML Label Data embedded SVG file Node                      */
+/*--------------------------------------------------------------------------*/
+static void
+xml_create_file_svg (xmlDocPtr   doc,
+                     xmlNodePtr  parent,
+                     xmlNsPtr    ns,
+                     glLabel    *label,
+                     gchar      *name)
+{
+	xmlNodePtr  node;
+	xmlNodePtr  cdata_section_node;
+	GHashTable *svg_cache;
+        gchar      *svg_data;
+
+	gl_debug (DEBUG_XML, "START");
+
+	svg_cache = gl_label_get_svg_cache (label);
+
+	svg_data = gl_svg_cache_get_contents (svg_cache, name);
+	if ( svg_data != NULL ) {
+
+		node = xmlNewChild (parent, ns, (xmlChar *)"File", NULL);
+		lgl_xml_set_prop_string (node, "name", name);
+		lgl_xml_set_prop_string (node, "format", "SVG");
+
+                cdata_section_node = xmlNewCDataBlock (doc, (xmlChar *)svg_data, strlen (svg_data));
+                xmlAddChild (node, cdata_section_node);
+
+		g_free (svg_data);
+	}
+
+
+	gl_debug (DEBUG_XML, "END");
+}
+
+
+/*--------------------------------------------------------------------------*/
 /* PRIVATE.  Create top-level Span node.                                    */
 /*--------------------------------------------------------------------------*/
 static void
-xml_create_toplevel_span (xmlNodePtr        root,
+xml_create_toplevel_span (xmlNodePtr        parent,
 			  xmlNsPtr          ns,
 			  glLabelText      *object_text)
 {
@@ -1721,7 +1815,7 @@ xml_create_toplevel_span (xmlNodePtr        root,
 	glTextNode       *text_node;
 	xmlNodePtr        child;
 
-	node = xmlNewChild (root, ns, (xmlChar *)"Span", NULL);
+	node = xmlNewChild (parent, ns, (xmlChar *)"Span", NULL);
 
 	/* All span attrs at top level. */
 	font_family = gl_label_object_get_font_family (GL_LABEL_OBJECT(object_text));

@@ -742,7 +742,6 @@ object_changed_cb (glLabelObject  *object,
         PangoAlignment   align;
         gdouble          text_line_spacing;
         gboolean         auto_shrink;
-        const GdkPixbuf *pixbuf;
         gdouble          image_w, image_h;
         glTextNode      *filename;
         glTextNode      *bc_data;
@@ -804,11 +803,9 @@ object_changed_cb (glLabelObject  *object,
         {
 
                 gl_label_object_get_size (object, &w, &h);
-                pixbuf   = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
                 filename = gl_label_image_get_filename (GL_LABEL_IMAGE(object));
 
-                image_w = gdk_pixbuf_get_width (pixbuf);
-                image_h = gdk_pixbuf_get_height (pixbuf);
+                gl_label_image_get_base_size (GL_LABEL_IMAGE(object), &image_w, &image_h);
 
                 gl_object_editor_set_size (editor, w, h);
                 gl_object_editor_set_base_size (editor, image_w, image_h);
@@ -902,7 +899,6 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
         gdouble            text_line_spacing;
         gboolean           auto_shrink;
         glTextNode        *filename;
-        const GdkPixbuf   *pixbuf;
         gdouble            w, h;
         gdouble            image_w, image_h;
         gdouble            new_w, new_h;
@@ -968,9 +964,7 @@ gl_object_editor_changed_cb (glObjectEditor *editor)
                 }
 
                 /* It may also have a new base size. */
-                pixbuf = gl_label_image_get_pixbuf (GL_LABEL_IMAGE(object), NULL);
-                image_w = gdk_pixbuf_get_width (pixbuf);
-                image_h = gdk_pixbuf_get_height (pixbuf);
+                gl_label_image_get_base_size (GL_LABEL_IMAGE(object), &image_w, &image_h);
                 gl_object_editor_set_base_size (editor, image_w, image_h);
 
                 gl_text_node_free (&filename);

@@ -50,23 +50,30 @@ struct _glLabelImageClass {
 	glLabelObjectClass    parent_class;
 };
 
-GType            gl_label_image_get_type     (void) G_GNUC_CONST;
+GType            gl_label_image_get_type       (void) G_GNUC_CONST;
 
-GObject         *gl_label_image_new          (glLabel       *label,
-                                              gboolean       checkpoint);
+GObject         *gl_label_image_new            (glLabel       *label,
+                                                gboolean       checkpoint);
 
-void             gl_label_image_set_filename (glLabelImage  *limage,
-					      glTextNode    *filename,
-                                              gboolean       checkpoint);
+void             gl_label_image_set_filename   (glLabelImage  *limage,
+                                                glTextNode    *filename,
+                                                gboolean       checkpoint);
 
-void             gl_label_image_set_pixbuf   (glLabelImage  *limage,
-					      GdkPixbuf     *pixbuf,
-                                              gboolean       checkpoint);
+void             gl_label_image_set_pixbuf     (glLabelImage  *limage,
+                                                GdkPixbuf     *pixbuf,
+                                                gboolean       checkpoint);
 
-glTextNode      *gl_label_image_get_filename (glLabelImage  *limage);
+GdkPixbuf       *gl_label_image_get_pixbuf     (glLabelImage  *limage,
+                                                glMergeRecord *record);
 
-const GdkPixbuf *gl_label_image_get_pixbuf   (glLabelImage  *limage,
-					      glMergeRecord *record);
+RsvgHandle      *gl_label_image_get_svg_handle (glLabelImage  *this,
+                                                glMergeRecord *record);
+
+glTextNode      *gl_label_image_get_filename   (glLabelImage  *limage);
+
+void             gl_label_image_get_base_size  (glLabelImage *this,
+                                                gdouble      *w,
+                                                gdouble      *h);
 
 G_END_DECLS
 

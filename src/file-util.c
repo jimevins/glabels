@@ -90,6 +90,25 @@ gl_file_util_make_absolute (const gchar *filename)
 }
 
 
+/****************************************************************************/
+/* Test for given extension.                                                */
+/****************************************************************************/
+gboolean
+gl_file_util_is_extension (const gchar       *filename,
+                           const gchar       *ext_test)
+{
+        gchar *ext;
+
+        ext = strrchr (filename, '.');
+        if ( ext != NULL )
+        {
+                return (g_ascii_strcasecmp (ext, ext_test) == 0);
+        }
+
+        return FALSE;
+}
+
+
 
 /*
  * Local Variables:       -- emacs

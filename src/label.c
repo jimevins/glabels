@@ -62,6 +62,7 @@ struct _glLabelPrivate {
 	glMerge     *merge;
 
 	GHashTable  *pixbuf_cache;
+	GHashTable  *svg_cache;
 
         /* Delay changed signals while operating on selections of multiple objects. */
         gboolean     selection_op_flag;
@@ -275,6 +276,7 @@ gl_label_init (glLabel *label)
 
 	label->priv->merge         = NULL;
 	label->priv->pixbuf_cache  = gl_pixbuf_cache_new ();
+	label->priv->svg_cache     = gl_svg_cache_new ();
 
         label->priv->undo_stack    = g_queue_new ();
         label->priv->redo_stack    = g_queue_new ();
@@ -328,6 +330,7 @@ gl_label_finalize (GObject *object)
         g_queue_free (label->priv->redo_stack);
 
 	gl_pixbuf_cache_free (label->priv->pixbuf_cache);
+	gl_svg_cache_free (label->priv->svg_cache);
 
 	g_free (label->priv);
 
@@ -738,6 +741,16 @@ GHashTable *
 gl_label_get_pixbuf_cache (glLabel       *label)
 {
 	return label->priv->pixbuf_cache;
+}
+
+
+/****************************************************************************/
+/* Get svg cache.                                                           */
+/****************************************************************************/
+GHashTable *
+gl_label_get_svg_cache (glLabel       *label)
+{
+	return label->priv->svg_cache;
 }
 
 
@@ -2392,12 +2405,14 @@ gl_label_copy_selection (glLabel       *label)
                 if ( gl_label_is_selection_atomic (label) &&
                      GL_IS_LABEL_IMAGE (selection_list->data) )
                 {
-                        glLabelImage       *image_object = GL_LABEL_IMAGE (selection_list->data);
-                        const GdkPixbuf    *pixbuf = gl_label_image_get_pixbuf (image_object, NULL);
+                        glLabelImage  *image_object = GL_LABEL_IMAGE (selection_list->data);
+                        GdkPixbuf     *pixbuf = gl_label_image_get_pixbuf (image_object, NULL);
 
-                        gtk_target_list_add_image_targets (target_list, 2, TRUE);
-
-                        data->pixbuf = g_object_ref (G_OBJECT (pixbuf));
+                        if (pixbuf)
+                        {
+                                gtk_target_list_add_image_targets (target_list, 2, TRUE);
+                                data->pixbuf = pixbuf;
+                        }
                 }
 
 

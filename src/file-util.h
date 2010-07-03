@@ -30,6 +30,9 @@ gchar              *gl_file_util_remove_extension      (const gchar       *orig_
 
 gchar              *gl_file_util_make_absolute         (const gchar       *filename);
 
+gboolean            gl_file_util_is_extension          (const gchar       *filename,
+                                                        const gchar       *ext_test);
+
 G_END_DECLS
 
 #endif /* __FILE_UTIL_H__ */

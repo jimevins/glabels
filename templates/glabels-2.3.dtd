@@ -81,6 +81,9 @@
 <!-- Data encoding method -->
 <!ENTITY % DATA_ENCODING_TYPE "(None | Base64)">
 
+<!-- Inline file format type -->
+<!ENTITY % FILE_FORMAT_TYPE "(SVG)">
+
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Top-level glabels paper data base                                    -->
@@ -415,7 +418,7 @@
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- Data Section                                                         -->
 <!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-<!ENTITY % data_element "Pixdata">
+<!ENTITY % data_element "Pixdata | File">
 
 <!ELEMENT Data (%data_element;)*>
 
@@ -424,6 +427,13 @@
 <!ATTLIST Pixdata
                  name            %STRING_TYPE;           #REQUIRED
                  encoding        %DATA_ENCODING_TYPE;    "Base64"
+>
+
+<!-- Inline File -->
+<!ELEMENT File (#PCDATA)>
+<!ATTLIST File
+                 name            %STRING_TYPE;           #REQUIRED
+                 format          %FILE_FORMAT_TYPE;      "SVG"
 >
 
 

@@ -85,6 +85,8 @@ gl_debug_init (void)
 		debug_flags |= GLABELS_DEBUG_MINI_PREVIEW;
 	if (g_getenv ("GLABELS_DEBUG_PIXBUF_CACHE") != NULL)
 		debug_flags |= GLABELS_DEBUG_PIXBUF_CACHE;
+	if (g_getenv ("GLABELS_DEBUG_SVG_CACHE") != NULL)
+		debug_flags |= GLABELS_DEBUG_SVG_CACHE;
 	if (g_getenv ("GLABELS_DEBUG_EDITOR") != NULL)
 		debug_flags |= GLABELS_DEBUG_EDITOR;
 	if (g_getenv ("GLABELS_DEBUG_WDGT") != NULL)
