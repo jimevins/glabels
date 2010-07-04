@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-06-10 18:06+0000\n"
-"PO-Revision-Date: 2010-06-11 17:13+0100\n"
+"POT-Creation-Date: 2010-07-03 03:15+0000\n"
+"PO-Revision-Date: 2010-07-03 11:22+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -321,8 +321,8 @@ msgid "New Label or Card"
 msgstr "Nova nalepka ali vizitka"
 
 #: ../src/file.c:175
-#: ../src/label.c:584
-#: ../src/label.c:628
+#: ../src/label.c:587
+#: ../src/label.c:631
 msgid "Label properties"
 msgstr "Lastnosti nalepke"
 
@@ -581,97 +581,97 @@ msgstr "Barva črte"
 msgid "Line width"
 msgstr "Širine vrstice"
 
-#: ../src/label.c:399
+#: ../src/label.c:402
 msgid "Untitled"
 msgstr "Brez naslova"
 
-#: ../src/label.c:702
+#: ../src/label.c:705
 #: ../src/ui.c:422
 msgid "Merge properties"
 msgstr "Lastnosti združevanja"
 
-#: ../src/label.c:1184
+#: ../src/label.c:1197
 #: ../src/ui.c:215
 msgid "Delete"
 msgstr "Izbriši"
 
-#: ../src/label.c:1217
+#: ../src/label.c:1230
 #: ../src/ui.c:324
 msgid "Bring to front"
 msgstr "Prinesi v ospredje"
 
-#: ../src/label.c:1253
+#: ../src/label.c:1266
 #: ../src/ui.c:331
 msgid "Send to back"
 msgstr "Pošlji nazaj"
 
-#: ../src/label.c:1294
+#: ../src/label.c:1307
 msgid "Rotate"
 msgstr "Zavrti"
 
-#: ../src/label.c:1329
+#: ../src/label.c:1342
 #: ../src/ui.c:338
 msgid "Rotate left"
 msgstr "Zavrti levo"
 
-#: ../src/label.c:1362
+#: ../src/label.c:1375
 #: ../src/ui.c:345
 msgid "Rotate right"
 msgstr "Zavrti desno"
 
-#: ../src/label.c:1397
+#: ../src/label.c:1410
 #: ../src/ui.c:352
 msgid "Flip horizontally"
 msgstr "Zrcali vodoravno"
 
-#: ../src/label.c:1432
+#: ../src/label.c:1445
 #: ../src/ui.c:359
 msgid "Flip vertically"
 msgstr "Zrcali navpično"
 
-#: ../src/label.c:1472
+#: ../src/label.c:1485
 #: ../src/ui.c:366
 msgid "Align left"
 msgstr "Poravnava levo"
 
-#: ../src/label.c:1529
+#: ../src/label.c:1542
 #: ../src/ui.c:373
 msgid "Align right"
 msgstr "Poravnava desno"
 
-#: ../src/label.c:1590
+#: ../src/label.c:1603
 #: ../src/ui.c:380
 msgid "Align horizontal center"
 msgstr "Poravnava vodoravne sredine"
 
-#: ../src/label.c:1666
+#: ../src/label.c:1679
 #: ../src/ui.c:387
 msgid "Align tops"
 msgstr "Poravnava vrhov"
 
-#: ../src/label.c:1723
+#: ../src/label.c:1736
 #: ../src/ui.c:394
 msgid "Align bottoms"
 msgstr "Poravnava dnov"
 
-#: ../src/label.c:1784
+#: ../src/label.c:1797
 #: ../src/ui.c:401
 msgid "Align vertical center"
 msgstr "Poravnava navpične sredine"
 
-#: ../src/label.c:1862
+#: ../src/label.c:1875
 #: ../src/ui.c:408
 msgid "Center horizontally"
 msgstr "Sredini vodoravno"
 
-#: ../src/label.c:1909
+#: ../src/label.c:1922
 #: ../src/ui.c:415
 msgid "Center vertically"
 msgstr "Sredini navpično"
 
-#: ../src/label.c:2595
-#: ../src/label.c:2637
-#: ../src/label.c:2663
+#: ../src/label.c:2610
+#: ../src/label.c:2652
+#: ../src/label.c:2678
 #: ../src/ui.c:208
 msgid "Paste"
 msgstr "Prilepi"
@@ -680,13 +680,13 @@ msgstr "Prilepi"
 msgid "Create ellipse object"
 msgstr "Ustvarjanje elipso"
 
-#: ../src/label-image.c:161
+#: ../src/label-image.c:199
 #: ../src/ui.c:312
 msgid "Create image object"
 msgstr "Ustvarjanje slikovnega predmeta"
 
-#: ../src/label-image.c:265
-#: ../src/label-image.c:336
+#: ../src/label-image.c:332
+#: ../src/label-image.c:473
 msgid "Set image"
 msgstr "Nastavi sliko"
 
@@ -1606,55 +1606,60 @@ msgid "(modified)"
 msgstr " (spremenjeno)"
 
 #: ../src/xml-label-04.c:75
-#: ../src/xml-label.c:323
+#: ../src/xml-label.c:333
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Slabo korensko vozlišče = \"%s\""
 
 #: ../src/xml-label-04.c:123
-#: ../src/xml-label.c:406
+#: ../src/xml-label.c:416
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "slabo vozlišče = \"%s\""
 
-#: ../src/xml-label.c:189
-#: ../src/xml-label.c:227
+#: ../src/xml-label.c:199
+#: ../src/xml-label.c:237
 msgid "xmlParseFile error"
 msgstr "napaka xml datoteke razčlenjevanja"
 
-#: ../src/xml-label.c:264
+#: ../src/xml-label.c:274
 msgid "No document root"
 msgstr "Ni korena dokumenta"
 
-#: ../src/xml-label.c:272
+#: ../src/xml-label.c:282
 msgid "Importing from glabels 0.1 format"
 msgstr "Uvažanje iz zapisa glables 0.1"
 
-#: ../src/xml-label.c:281
+#: ../src/xml-label.c:291
 msgid "Importing from glabels 0.4 format"
 msgstr "Uvažanje iz zapisa glables 0.4"
 
-#: ../src/xml-label.c:291
+#: ../src/xml-label.c:301
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Neznan imenski prostor glables -- uporaba %s"
 
-#: ../src/xml-label.c:360
+#: ../src/xml-label.c:370
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "slabo vozlišče v vozlišču dokumenta = \"%s\""
 
-#: ../src/xml-label.c:856
+#: ../src/xml-label.c:868
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "slabo vozlišče v podatkovnem vozlišču  = \"%s\""
 
-#: ../src/xml-label.c:1097
+#: ../src/xml-label.c:944
+#, c-format
+msgid "Unknown embedded file format: \"%s\""
+msgstr "Neznana vključena vrsta datoteke:  \"%s\""
+
+#: ../src/xml-label.c:1143
 #: ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Napaka pretvarjanja Utf8."
 
-#: ../src/xml-label.c:1104
+#: ../src/xml-label.c:1150
 msgid "Problem saving xml file."
 msgstr "Težava med shranjevanjem xml datoteke."
 
@@ -2309,7 +2314,7 @@ msgstr "<b>Možnosti</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "Collate"
-msgstr "Združi"
+msgstr "Zberi"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
 msgid "Copies:"
