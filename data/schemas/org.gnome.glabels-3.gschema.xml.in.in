@@ -1,0 +1,180 @@
+<schemalist>
+
+
+  <schema id="org.gnome.glabels-3" path="/apps/glabels-3/" gettext-domain="@GETTEXT_PACKAGE@">
+    <child name="ui" schema="org.gnome.glabels.ui"/>
+    <child name="locale" schema="org.gnome.glabels.locale"/>
+    <child name="objects" schema="org.gnome.glabels.objects"/>
+    <child name="history" schema="org.gnome.glabels.history"/>
+  </schema>
+
+
+  <schema id="org.gnome.glabels-3.ui" path="/apps/glabels-3/ui/" gettext-domain="@GETTEXT_PACKAGE@">
+
+    <key name="main-toolbar-visible" type="b">
+      <default>true</default>
+      <_summary>Show/hide main toolbar.</_summary>
+      <_description>Controls visibility of main toolbar.</_description>
+    </key>
+
+    <key name="drawing-toolbar-visible" type="b">
+      <default>true</default>
+      <_summary>Show/hide drawing toolbar.</_summary>
+      <_description>Controls visibility of drawing toolbar.</_description>
+    </key>
+
+    <key name="property-toolbar-visible" type="b">
+      <default>true</default>
+      <_summary>Show/hide property toolbar.</_summary>
+      <_description>Controls visibility of property toolbar.</_description>
+    </key>
+
+    <key name="grid-visible" type="b">
+      <default>false</default>
+      <_summary>Show/hide grid.</_summary>
+      <_description>Controls visibility of grid.</_description>
+    </key>
+
+    <key name="markup-visible" type="b">
+      <default>true</default>
+      <_summary>Show/hide markup.</_summary>
+      <_description>Controls visibility of markup lines.</_description>
+    </key>
+
+    <key name="max-recents" type="i">
+      <default>-1</default>
+      <_summary>Maximum recent files.</_summary>
+      <_description>Controls maximum number of recent files tracked.</_description>
+    </key>
+
+  </schema>
+
+
+  <schema id="org.gnome.glabels-3.locale" path="/apps/glabels-3/locale/" gettext-domain="@GETTEXT_PACKAGE@">
+
+    <key name="units" type="s">
+      <choices>
+	<choice value=""/>
+	<choice value="pt"/>
+	<choice value="in"/>
+	<choice value="mm"/>
+      </choices>
+      <default>''</default>
+      <_summary>Units.</_summary>
+      <_description>The default unit of measurement.</_description>
+    </key>
+
+    <key name="default-page-size" type="s">
+      <choices>
+	<choice value=""/>
+	<choice value="A4"/>
+	<choice value="US-Letter"/>
+      </choices>
+      <default>''</default>
+      <_summary>Default page size.</_summary>
+      <_description>The prefered page size when searching templates.</_description>
+    </key>
+
+  </schema>
+
+
+  <schema id="org.gnome.glabels-3.objects" path="/apps/glabels-3/objects/" gettext-domain="@GETTEXT_PACKAGE@">
+    <key name="default-font-family" type="s">
+      <default>'Sans'</default>
+      <_summary>Default font family.</_summary>
+      <_description>The default font family for new text objects.</_description>
+    </key>
+
+    <key name="default-font-size" type="d">
+      <range min="0.01" max="250"/>
+      <default>12</default>
+      <_summary>Default font size.</_summary>
+      <_description>The default font size for new text objects.</_description>
+    </key>
+
+    <key name="default-font-weight" type="s">
+      <choices>
+	<choice value="Regular"/>
+	<choice value="Bold"/>
+      </choices>
+      <default>'Regular'</default>
+      <_summary>Default font weight.</_summary>
+      <_description>The default font weight for new text objects.</_description>
+    </key>
+
+    <key name="default-font-italic-flag" type="b">
+      <default>false</default>
+      <_summary>Default font italic flag.</_summary>
+      <_description>The default font italic state for new text objects.</_description>
+    </key>
+
+    <key name="default-text-color" type="u">
+      <default>0x000000ff</default>
+      <_summary>Default text color.</_summary>
+      <_description>The default color of text for new text objects (0xRRGGBBAA).</_description>
+    </key>
+
+    <key name="default-text-alignment" type="s">
+      <choices>
+	<choice value="Left"/>
+	<choice value="Center"/>
+	<choice value="Right"/>
+      </choices>
+      <default>'Left'</default>
+      <_summary>Default text alignment.</_summary>
+      <_description>The default text alignment for new text objects.</_description>
+    </key>
+
+    <key name="default-text-line-spacing" type="d">
+      <range min="0.1" max="5"/>
+      <default>1.0</default>
+      <_summary>Default text line spacing.</_summary>
+      <_description>The default line spacing for new text objects.</_description>
+    </key>
+
+    <key name="default-line-width" type="d">
+      <range min="0.25" max="10"/>
+      <default>1.0</default>
+      <_summary>Default line width.</_summary>
+      <_description>The default line width for new objects.</_description>
+    </key>
+
+    <key name="default-line-color" type="u">
+      <default>0x000000ff</default>
+      <_summary>Default line color.</_summary>
+      <_description>The default line color new objects (0xRRGGBBAA).</_description>
+    </key>
+
+    <key name="default-fill-color" type="u">
+      <default>0x00ff00ff</default>
+      <_summary>Default fill color.</_summary>
+      <_description>The default fill color new objects (0xRRGGBBAA).</_description>
+    </key>
+
+  </schema>
+
+
+  <schema id="org.gnome.glabels-3.history" path="/apps/glabels-3/history/" gettext-domain="@GETTEXT_PACKAGE@">
+
+    <key name="recent-templates" type="as">
+      <default>[]</default>
+      <_summary>Recent templates.</_summary>
+      <_description>Recently used templates.</_description>
+    </key>
+
+    <key name="recent-fonts" type="as">
+      <default>[]</default>
+      <_summary>Recent fonts.</_summary>
+      <_description>Recently used font families.</_description>
+    </key>
+
+    <key name="recent-colors" type="au">
+      <default>[]</default>
+      <_summary>Recent colors.</_summary>
+      <_description>Recently created custom colors.</_description>
+    </key>
+
+  </schema>
+
+
+</schemalist>

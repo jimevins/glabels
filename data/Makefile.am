@@ -1,5 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = desktop man mime pixmaps ui
+SUBDIRS = \
+	desktop \
+	man \
+	mime \
+	pixmaps \
+	schemas \
+	ui
 
 
