@@ -182,7 +182,7 @@ gl_barcode_zint_new (const gchar          *id,
 static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 	
 	int i;
-	double string_offset;
+	double string_offset, x;
 
         glBarcode           *gbc;
         glBarcodeShapeLine  *line;
@@ -215,8 +215,11 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
 		for ( zstring = render->strings; zstring != NULL; zstring = zstring->next ) {
 			string_offset = (double) zstring->x - (((6.0 / 9.0) * zstring->length * zstring->fsize) / 2);
 			for(i = 0; i < zstring->length; i++) {
+        x = 0.0;
+        // Poor man's kerning
+        if (zstring->text[i] == '(') { x = 0.18; }
 				bchar = gl_barcode_shape_alpha_new();
-				bchar->x = (double) string_offset + ((6.0 / 9.0) * i * zstring->fsize);
+				bchar->x = (double) string_offset + ((((6.0 / 9.0) * i) + x) * zstring->fsize);
 				bchar->y = (double) zstring->y;
 				bchar->fsize = (double) zstring->fsize;
 				bchar->c = (char) zstring->text[i];

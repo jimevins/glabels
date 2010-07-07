@@ -1053,6 +1053,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 		}
 
 	}
+  g_free (strip_regex);
 	if ( text_nodes ) {
 		/* Store last line. */
 		lines = g_list_append (lines, text_nodes);
