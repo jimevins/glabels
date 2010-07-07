@@ -967,6 +967,7 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	GList            *lines, *text_nodes;
 	xmlNodePtr        child;
 	glTextNode       *text_node;
+	GRegex					 *strip_regex;
 
 	gl_debug (DEBUG_XML, "START");
 
@@ -1008,22 +1009,10 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 	/* Now descend children, and build lines of text nodes */
 	lines = NULL;
 	text_nodes = NULL;
+	strip_regex = g_regex_new("\\A\\n\\s*|\\n\\s*\\Z", 0, 0, NULL);
 	for (child = node->xmlChildrenNode; child != NULL; child = child->next) {
 
-		if (xmlNodeIsText (child)) {
-			gchar *data = lgl_xml_get_node_content (child); 
-
-			/* Hack: if the first char is LF, it's an xml formatting string */
-			if (data[0] != '\n') { 
-				/* Literal text */
-				text_node = g_new0 (glTextNode, 1);
-				text_node->field_flag = FALSE;
-				text_node->data = g_strdup ((gchar *)data);
-				text_nodes = g_list_append (text_nodes, text_node);
-			}
-			g_free (data);
-
-		} else if (lgl_xml_is_node (child, "Span")) {
+		if (lgl_xml_is_node (child, "Span")) {
 
 			g_message ("Unexpected rich text (not supported, yet!)");
 
@@ -1041,6 +1030,23 @@ xml_parse_toplevel_span  (xmlNodePtr        node,
 			/* Store line. */
 			lines = g_list_append (lines, text_nodes);
 			text_nodes = NULL;
+
+    } else if (xmlNodeIsText (child)) {
+			gchar *orig_data = lgl_xml_get_node_content (child); 
+			gchar *data;
+
+			/* Literal text */
+
+			/* Stip out white space before and after */
+			data = g_regex_replace(strip_regex, orig_data, -1, 0, "", 0, NULL);
+			g_free (orig_data);
+
+			text_node = g_new0 (glTextNode, 1);
+			text_node->field_flag = FALSE;
+			text_node->data = g_strdup ((gchar *)data);
+			text_nodes = g_list_append (text_nodes, text_node);
+
+			g_free (data);
 
 		} else {
 			g_message ("Unexpected Span child: \"%s\"", child->name);
