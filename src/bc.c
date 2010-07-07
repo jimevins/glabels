@@ -235,13 +235,13 @@ static const Backend backends[] = {
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 	{ "EAN", N_("European Article Number (EAN)"), gl_barcode_zint_new,
-	  TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 13},
+	  TRUE, TRUE, TRUE, FALSE, "000000000000", FALSE, 13},
 
 	{ "GMTX", N_("Grid Matrix"),  gl_barcode_zint_new,
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
-	  TRUE, TRUE, FALSE, FALSE, "[00]001234560000000018", TRUE, 16},
+	  TRUE, TRUE, TRUE, FALSE, "[01]00000000000000", FALSE, 18},
 
 	{ "RSS14", N_("GS1 DataBar-14"), gl_barcode_zint_new,
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -255,7 +255,7 @@ static const Backend backends[] = {
 	{ "RSSS", N_("GS1 DataBar-14 Stacked"), gl_barcode_zint_new,
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-	{ "RSSSO", N_("GS1 DataBar-14 Stacked Omnidirectional"), gl_barcode_zint_new,
+	{ "RSSSO", N_("GS1 DataBar-14 Stacked Omni."), gl_barcode_zint_new,
 	  TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 	{ "RSSSE", N_("GS1 DataBar Extended Stacked"), gl_barcode_zint_new,
