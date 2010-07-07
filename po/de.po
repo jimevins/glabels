@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-07-03 03:15+0000\n"
-"PO-Revision-Date: 2010-07-05 00:45+0100\n"
+"POT-Creation-Date: 2010-07-07 03:16+0000\n"
+"PO-Revision-Date: 2010-07-07 11:58+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -634,11 +634,11 @@ msgstr "Einfügen"
 msgid "Create ellipse object"
 msgstr "Ellipsenobjekt erzeugen"
 
-#: ../src/label-image.c:199 ../src/ui.c:312
+#: ../src/label-image.c:200 ../src/ui.c:312
 msgid "Create image object"
 msgstr "Bildobjekt erzeugen"
 
-#: ../src/label-image.c:332 ../src/label-image.c:473
+#: ../src/label-image.c:333 ../src/label-image.c:474
 msgid "Set image"
 msgstr "Bild festlegen"
 
@@ -841,7 +841,7 @@ msgstr "Markieren"
 msgid "Record/Field"
 msgstr "Feld"
 
-#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:8
 msgid "Data"
 msgstr "Wert"
 
@@ -937,7 +937,7 @@ msgstr "gLabels-Einstellungen"
 
 #. ===================================================================
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:217
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 #: ../templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Labels"
@@ -1086,13 +1086,9 @@ msgstr "Design ist komplett"
 msgid "Edit gLabels Template"
 msgstr "gLabels-Vorlage bearbeiten"
 
-#: ../src/template-designer.c:1422
-msgid ""
-"<span foreground='red' weight='bold'>Brand and part# match an existing "
-"template!</span>"
-msgstr ""
-"<span foreground='red' weight='bold'>Für diese Marke und Nummer wurde eine "
-"Vorlage gefunden!</span>"
+#: ../src/template-designer.c:1423
+msgid "Brand and part# match an existing template!"
+msgstr "Für diese Marke und Nummer wurde eine Vorlage gefunden!"
 
 #. Menu entries.
 #: ../src/ui.c:93
@@ -1324,7 +1320,8 @@ msgstr "Modus auswählen"
 msgid "Select, move and modify objects"
 msgstr "Objekte auswählen, bewegen, ändern"
 
-#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:28
+#: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Text"
 
@@ -1336,7 +1333,8 @@ msgstr "Rechteck"
 msgid "Create box/rectangle object"
 msgstr "Rechteck-Objekt erzeugen"
 
-#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Linie"
 
@@ -1348,7 +1346,7 @@ msgstr "Ellipse"
 msgid "Create ellipse/circle object"
 msgstr "Ellipsen- oder Kreisobjekt erzeugen"
 
-#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:14
 msgid "Image"
 msgstr "Bild"
 
@@ -1638,12 +1636,24 @@ msgstr "Ganzseitenetikett %s"
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Äquivalenter Teil »%s« für »%s« wurde zuvor nicht definiert."
 
-#: ../libglabels/template.c:722 ../libglabels/template.c:726
-msgid "per sheet"
-msgstr "pro Seite"
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/template.c:727
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr "%d × %d (%d pro Seite)"
 
-#: ../libglabels/template.c:796 ../libglabels/template.c:802
-#: ../libglabels/template.c:812 ../libglabels/template.c:818
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/template.c:732
+#, c-format
+msgid "%d per sheet"
+msgstr "%d pro Seite"
+
+#: ../libglabels/template.c:802 ../libglabels/template.c:808
+#: ../libglabels/template.c:818 ../libglabels/template.c:824
 msgid "diameter"
 msgstr "Durchmesser"
 
@@ -1651,13 +1661,13 @@ msgstr "Durchmesser"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:39
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "Punkte"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:38
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "Zoll"
@@ -1717,24 +1727,24 @@ msgstr "Name des Attributs fehlt ebenfalls."
 #. * End:                   -- emacs
 #.
 #: ../data/ui/merge-properties-dialog.ui.h:1
-msgid "<b>Record selection/preview</b>"
-msgstr "<b>Feldauswahl/Vorschau</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:2
-msgid "<b>Source</b>"
-msgstr "<b>Quelle</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:3
 msgid "Format:"
 msgstr "Format:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:4
+#: ../data/ui/merge-properties-dialog.ui.h:2
 msgid "Location:"
 msgstr "Ort:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:5
+#: ../data/ui/merge-properties-dialog.ui.h:3
+msgid "Record selection/preview"
+msgstr "Feldauswahl/Vorschau"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Alles markieren"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+msgid "Source"
+msgstr "Quelle"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
@@ -1818,132 +1828,128 @@ msgstr "Hersteller:"
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:3
-msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Xxx-Objekteigenschaften</span>"
-
-#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:7
+#: ../data/ui/object-editor.ui.h:3 ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Ausrichtung:"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:4
 msgid "Allow merge to automatically shrink text"
 msgstr "Automatisches Anpassen der Textgröße erlauben"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:5
 msgid "Angle:"
 msgstr "Winkel:"
 
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:6
 msgid "Checksum"
 msgstr "Prüfsumme"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:7 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Farbe:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:9
 msgid "Enable shadow"
 msgstr "Schattierung aktivieren"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:10
 msgid "Family:"
 msgstr "Familie:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:11
 msgid "File:"
 msgstr "Datei:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:12 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Füllen"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Höhe"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:15
 msgid "Key:"
 msgstr "Schlüssel:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:16
 msgid "Length:"
 msgstr "Länge:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Zeilenabstand:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:19
 msgid "Literal:"
 msgstr "Literale:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:20
 msgid "Opacity:"
 msgstr "Transparenz:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:21
 msgid "Position"
 msgstr "Position"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:22
 msgid "Reset image size"
 msgstr "Bildgröße zurücksetzen"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:23
 msgid "Shadow"
 msgstr "Schattierung"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:24
 msgid "Size"
 msgstr "Breite"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:25
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:26
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:27
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:29 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Breite:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:30
 msgid "X Offset:"
 msgstr "X-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:31
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:32
 msgid "Y Offset:"
 msgstr "Y-Versatz:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:33
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:34
 msgid "degrees"
 msgstr "Grad"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:35
 msgid "dialog1"
 msgstr "dialog1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:36
 msgid "digits:"
 msgstr "Zeichen:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:37
 msgid "format:"
 msgstr "Format:"
 
@@ -1951,65 +1957,53 @@ msgstr "Format:"
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/prefs-dialog.ui.h:2
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">Vorgegebene Seitengröße</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:3
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">Füllung</span>"
-
 #: ../data/ui/prefs-dialog.ui.h:4
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">Linie</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:5
-msgid "<span weight=\"bold\">Text</span>"
-msgstr "<span weight=\"bold\">Text</span>"
+msgid "Default page size"
+msgstr "Vorgegebene Seitengröße"
 
 #: ../data/ui/prefs-dialog.ui.h:6
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">Einheiten</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Font:"
 msgstr "Schrift:"
 
-#: ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/prefs-dialog.ui.h:7
 msgid "ISO A4"
 msgstr "A4"
 
-#: ../data/ui/prefs-dialog.ui.h:11
+#: ../data/ui/prefs-dialog.ui.h:8
 msgid "Inches"
 msgstr "Zoll"
 
-#: ../data/ui/prefs-dialog.ui.h:13
+#: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
 msgstr "Spracheinstellung"
 
-#: ../data/ui/prefs-dialog.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:12
 msgid "Millimeters"
 msgstr "Millimeter"
 
-#: ../data/ui/prefs-dialog.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:13
 msgid "Object defaults"
 msgstr "Objekt-Vorgaben"
 
-#: ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:14
 msgid "Points"
 msgstr "Punkte"
 
-#: ../data/ui/prefs-dialog.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
 msgstr "Wählen Sie die vorgegebenen Eigenschaften für neue Objekte."
 
-#: ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
 msgstr "Wählen Sie hier Einstellungen gemäß Ihrer Sprache/Ihres Landes."
 
-#: ../data/ui/prefs-dialog.ui.h:19 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "US-Letter"
+
+#: ../data/ui/prefs-dialog.ui.h:19
+msgid "Units"
+msgstr "Einheiten"
 
 #: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
@@ -2249,24 +2243,24 @@ msgstr ""
 "gLabels-Vorlage unterstützen."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "<b>Copies</b>"
-msgstr "<b>Kopien</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-msgid "<b>Merge Control</b>"
-msgstr "<b>Mischsteuerung</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "<b>Options</b>"
-msgstr "<b>Optionen</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "Collate"
 msgstr "Zuordnen"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+msgid "Copies"
+msgstr "Kopien"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
 msgstr "Kopien:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Merge Control"
+msgstr "Mischsteuerung"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Options"
+msgstr "Optionen"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
@@ -3036,58 +3030,3 @@ msgstr "Rechteckige Kopieretiketten"
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
 
-#~ msgid "%d %s"
-#~ msgstr "%d %s"
-
-#~ msgid ""
-#~ "1\n"
-#~ "2\n"
-#~ "3\n"
-#~ "4"
-#~ msgstr ""
-#~ "1\n"
-#~ "2\n"
-#~ "3\n"
-#~ "4"
-
-#~ msgid "page 1"
-#~ msgstr "Seite 1"
-
-#~ msgid "page 2"
-#~ msgstr "Seite 2"
-
-#~ msgid "page 3"
-#~ msgstr "Seite 3"
-
-#~ msgid "00000000000 00000"
-#~ msgstr "00000000000 00000"
-
-#~ msgid "cd_size_page"
-#~ msgstr "cd_size_page"
-
-#~ msgid "finish_page"
-#~ msgstr "finish_page"
-
-#~ msgid "layout_page"
-#~ msgstr "layout_page"
-
-#~ msgid "name_page"
-#~ msgstr "name_page"
-
-#~ msgid "nlayouts_page"
-#~ msgstr "nlayouts_page"
-
-#~ msgid "pg_size_page"
-#~ msgstr "pg_size_page"
-
-#~ msgid "rect_size_page"
-#~ msgstr "rect_size_page"
-
-#~ msgid "round_size_page"
-#~ msgstr "round_size_page"
-
-#~ msgid "shape_page"
-#~ msgstr "shape_page"
-
-#~ msgid "start_page"
-#~ msgstr "start_page"
