@@ -719,11 +719,17 @@ lgl_template_frame_get_layout_description (const lglTemplateFrame *frame)
         if ( frame->all.layouts && (frame->all.layouts->next == NULL) )
         {
                 layout = (lglTemplateLayout *)frame->all.layouts->data;
-                string = g_strdup_printf ("%d × %d (%d %s)", layout->nx, layout->ny, n_labels, _("per sheet"));
+                /*
+                 * Translators: 1st %d = number of labels across a page,
+                 *              2nd %d = number of labels down a page,
+                 *              3rd %d = total number of labels on a page (sheet).
+                 */
+                string = g_strdup_printf (_("%d × %d (%d per sheet)"), layout->nx, layout->ny, n_labels);
         }
         else
         {
-                string = g_strdup_printf ("%d %s", n_labels, _("per sheet"));
+                /* Translators: %d is the total number of labels on a page (sheet). */
+                string = g_strdup_printf (_("%d per sheet"), n_labels);
         }
 
         return string;

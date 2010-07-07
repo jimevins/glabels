@@ -33,7 +33,7 @@
                 <child>
                   <object class="GtkLabel" id="title_label">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;span weight="bold" size="larger"&gt;Xxx object properties&lt;/span&gt;</property>
+                    <property name="label">&lt;span weight="bold" size="larger"&gt;Xxx object properties&lt;/span&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
                   <packing>

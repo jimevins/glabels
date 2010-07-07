@@ -1393,6 +1393,7 @@ static void
 name_page_changed_cb (glTemplateDesigner *dialog)
 {
 	gchar *brand, *part_num, *desc;
+        gchar *string;
 
 	brand    = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->brand_entry), 0, -1));
 	part_num = g_strstrip (gtk_editable_get_chars (GTK_EDITABLE(dialog->priv->part_num_entry), 0, -1));
@@ -1418,8 +1419,10 @@ name_page_changed_cb (glTemplateDesigner *dialog)
 
                                 gtk_image_set_from_stock (GTK_IMAGE (dialog->priv->name_warning_image),
                                                           GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_BUTTON);
-                                gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label),
-                                                      _("<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"));
+                                string = g_strdup_printf ("<span foreground='red' weight='bold'>%s</span>",
+                                                          _("Brand and part# match an existing template!"));
+                                gtk_label_set_markup (GTK_LABEL (dialog->priv->name_warning_label), string);
+                                g_free (string);
 
                         }
                 }
