@@ -29,6 +29,7 @@
 #include <librsvg/rsvg-cairo.h>
 
 #include "pixbuf-util.h"
+#include "file-util.h"
 #include "pixmaps/checkerboard.xpm"
 
 #include "debug.h"
@@ -474,6 +475,7 @@ gl_label_image_set_pixbuf (glLabelImage  *this,
         }
 
         pixbuf_cache = gl_label_get_pixbuf_cache (label);
+        svg_cache = gl_label_get_svg_cache (label);
 
         /* Remove reference to previous item. */
         switch (this->priv->type)

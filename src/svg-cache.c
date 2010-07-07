@@ -116,7 +116,6 @@ gl_svg_cache_add_svg (GHashTable  *svg_cache,
                       const gchar *contents)
 {
         CacheRecord *test_record, *record;
-        RsvgHandle  *svg_handle;
 
         gl_debug (DEBUG_SVG_CACHE, "START");
 
@@ -130,7 +129,7 @@ gl_svg_cache_add_svg (GHashTable  *svg_cache,
         record = g_new0 (CacheRecord, 1);
         record->key        = g_strdup (name);
         record->references = 0; /* No references yet. */
-        record->svg_handle = rsvg_handle_new_from_data (contents, strlen(contents), NULL);
+        record->svg_handle = rsvg_handle_new_from_data ((guchar *)contents, strlen(contents), NULL);
         record->contents   = g_strdup (contents);
 
         g_hash_table_insert (svg_cache, record->key, record);
@@ -168,7 +167,7 @@ gl_svg_cache_get_handle (GHashTable *svg_cache,
         file = g_file_new_for_path (name);
         if ( g_file_load_contents (file, NULL, &buffer, &length, NULL, NULL) )
         {
-                svg_handle = rsvg_handle_new_from_data (buffer, length, NULL);
+                svg_handle = rsvg_handle_new_from_data ((guchar *)buffer, length, NULL);
                 if ( svg_handle != NULL) {
                         record = g_new0 (CacheRecord, 1);
                         record->key        = g_strdup (name);
@@ -195,8 +194,6 @@ gl_svg_cache_get_contents (GHashTable *svg_cache,
                            gchar      *name)
 {
         CacheRecord *record;
-        RsvgHandle  *svg_handle = NULL;
-        GFile       *file;
 
         gl_debug (DEBUG_SVG_CACHE, "START svg_cache=%p", svg_cache);
 
