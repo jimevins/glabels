@@ -591,7 +591,7 @@ set_font_family (glLabelObject *object,
 
         ltext->priv->size_changed = TRUE;
 
-        gl_font_history_model_add_family (gl_font_history, ltext->priv->font_family);
+        // gl_font_history_model_add_family (gl_font_history, ltext->priv->font_family);
 
 	gl_label_object_emit_changed (GL_LABEL_OBJECT(ltext));
 
