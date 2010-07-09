@@ -27,6 +27,7 @@
 #include <libglabels.h>
 #include "merge-init.h"
 #include "template-history.h"
+#include "font-history.h"
 #include "xml-label.h"
 #include "print.h"
 #include "print-op.h"
@@ -130,6 +131,7 @@ main (int argc, char **argv)
         lgl_db_init ();
 	gl_prefs_init ();
 	gl_template_history_init ();
+	gl_font_history_init ();
 
         /* now print the files */
         for (p = file_list; p; p = p->next) {
