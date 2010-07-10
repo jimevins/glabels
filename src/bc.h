@@ -1,6 +1,6 @@
 /*
  *  bc.h
- *  Copyright (C) 2001-2009  Jim Evins <evins@snaught.com>.
+ *  Copyright (C) 2001-2010  Jim Evins <evins@snaught.com>.
  *
  *  This file is part of gLabels.
  *
@@ -26,9 +26,20 @@
 
 G_BEGIN_DECLS
 
+
+#define GL_BARCODE_FONT_FAMILY      "Sans"
+#define GL_BARCODE_FONT_WEIGHT      PANGO_WEIGHT_NORMAL
+
+
+/*******************************/
+/* Barcode Drawing Primitives. */
+/*******************************/
+
 typedef enum {
         GL_BARCODE_SHAPE_LINE,
+        GL_BARCODE_SHAPE_BOX,
         GL_BARCODE_SHAPE_ALPHA,
+        GL_BARCODE_SHAPE_STRING,
 } glBarcodeShapeType;
 
 typedef struct {
@@ -71,6 +82,35 @@ typedef struct {
 } glBarcodeShapeLine;
 
 /*
+ * glBarcodeShapeBox:
+ *
+ * @ =  origin (x,y) from top left corner of barcode
+ *
+ *              @---------+
+ *              |         |
+ *              |         |
+ *              |         |
+ *              |         | height
+ *              |         |
+ *              |         |
+ *              |         |
+ *              +---------+
+ *                 width
+ */
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_LINE. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+        gdouble             width;
+        gdouble             height;
+
+} glBarcodeShapeBox;
+
+/*
  * glBarcodeShapeAlpha:
  *
  * @ =  origin (x,y) from top left corner of barcode
@@ -98,42 +138,77 @@ typedef struct {
 
 } glBarcodeShapeAlpha;
 
+/*
+ * glBarcodeShapeString:
+ *
+ * @ =  origin (x,y) from top left corner of barcode
+ *
+ *              ____        _  ------------------
+ *             /    \      | |                  ^
+ *            /  /\  \     | |                  |
+ *           /  /__\  \    | |___     ____      |
+ *          /  ______  \   | ._  \   /  __|     | ~fsize
+ *         /  /      \  \  | |_)  | |  (__      |
+ *        /__/        \__\ |_.___/   \____|     |
+ *                                              v
+ *       @ --------------------------------------
+ */
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_ALPHA. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+        gdouble             fsize;
+        gchar              *str;
+
+} glBarcodeShapeString;
+
 typedef union {
 
         glBarcodeShapeType    type;
         glBarcodeShapeAny     any;
 
         glBarcodeShapeLine    line;
+        glBarcodeShapeBox     box;
         glBarcodeShapeAlpha   alpha;
+        glBarcodeShapeString  string;
 
 } glBarcodeShape;
 
+glBarcodeShapeLine   *gl_barcode_shape_line_new   (void);
+glBarcodeShapeBox    *gl_barcode_shape_box_new    (void);
+glBarcodeShapeAlpha  *gl_barcode_shape_alpha_new  (void);
+glBarcodeShapeString *gl_barcode_shape_string_new (void);
+
+void                  gl_barcode_shape_free       (glBarcodeShape *shape);
+
+
+/********************************/
+/* Barcode Intermediate Format. */
+/********************************/
+
 typedef struct {
-	gdouble width, height;
-	GList *shapes;		/* List of glBarcodeShape */
+        gdouble width, height;
+        GList *shapes;    /* List of glBarcodeShape */
 } glBarcode;
 
-typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
-					gboolean        text_flag,
-					gboolean        checksum_flag,
-					gdouble         w,
-					gdouble         h,
-					const gchar    *digits);
+typedef glBarcode *(*glBarcodeNewFunc)       (const gchar    *id,
+                                              gboolean        text_flag,
+                                              gboolean        checksum_flag,
+                                              gdouble         w,
+                                              gdouble         h,
+                                              const gchar    *digits);
 
-
-#define GL_BARCODE_FONT_FAMILY      "Sans"
-#define GL_BARCODE_FONT_WEIGHT      PANGO_WEIGHT_NORMAL
-
-
-glBarcodeShapeLine  *gl_barcode_shape_line_new  (void);
-glBarcodeShapeAlpha *gl_barcode_shape_alpha_new (void);
 
 glBarcode       *gl_barcode_new              (const gchar    *id,
-					      gboolean        text_flag,
-					      gboolean        checksum_flag,
-					      gdouble         w,
-					      gdouble         h,
-					      const gchar    *digits);
+                                              gboolean        text_flag,
+                                              gboolean        checksum_flag,
+                                              gdouble         w,
+                                              gdouble         h,
+                                              const gchar    *digits);
 
 void             gl_barcode_free             (glBarcode     **bc);
 
@@ -144,7 +219,7 @@ GList           *gl_barcode_get_styles_list  (void);
 void             gl_barcode_free_styles_list (GList          *styles_list);
 
 gchar           *gl_barcode_default_digits   (const gchar    *id,
-					      guint            n);
+                                              guint            n);
 
 gboolean         gl_barcode_can_text         (const gchar    *id);
 gboolean         gl_barcode_text_optional    (const gchar    *id);
@@ -157,6 +232,7 @@ guint            gl_barcode_get_prefered_n   (const gchar    *id);
 
 const gchar     *gl_barcode_id_to_name       (const gchar    *id);
 const gchar     *gl_barcode_name_to_id       (const gchar    *name);
+
 
 G_END_DECLS
 

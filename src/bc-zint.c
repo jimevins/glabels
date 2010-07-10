@@ -179,62 +179,55 @@ gl_barcode_zint_new (const gchar          *id,
  * internal  Zint code to convert directly to glBarcode representation.
  *
  *--------------------------------------------------------------------------*/
-static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag) {
+static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
+{
+        glBarcode            *gbc;
+        glBarcodeShapeBox    *box;
+        glBarcodeShapeString *bstring;
 	
-	int i;
-	double string_offset, x;
+        struct zint_render        *render;
+        struct zint_render_line   *zline;
+        struct zint_render_string *zstring;
 
-        glBarcode           *gbc;
-        glBarcodeShapeLine  *line;
-        glBarcodeShapeAlpha *bchar;
+
+        render = symbol->rendered;
+        gbc = g_new0(glBarcode, 1);
 	
-	struct zint_render      *render;
-	struct zint_render_line *zline;
-	struct zint_render_string *zstring;
+        for ( zline = render->lines; zline != NULL; zline = zline->next )
+        {
+                box = gl_barcode_shape_box_new ();
 
-	render = symbol->rendered;
-	gbc = g_new0(glBarcode, 1);
-	
-	
-	for ( zline = render->lines; zline != NULL; zline = zline->next ) {
-		line = gl_barcode_shape_line_new ();
+                box->x      = (gdouble) zline->x;
+                box->y      = (gdouble) zline->y;
+                box->width  = (gdouble) zline->width;
+                box->height = (gdouble) zline->length;
 
-		line->width = (double) zline->width;
-		line->length = (double) zline->length;
-		/* glBarcodeLine centers based on width, counter-act!!! */
-		line->x = (double) (zline->x + (zline->width / 2.0));
-		line->y = (double) zline->y;
-
-		gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
-	}
+                gl_barcode_add_shape (gbc, (glBarcodeShape *)box);
+        }
 
 	/*
 	 * Repeat loop for characters
 	 */
-	if(text_flag) {
-		for ( zstring = render->strings; zstring != NULL; zstring = zstring->next ) {
-			string_offset = (double) zstring->x - (((6.0 / 9.0) * zstring->length * zstring->fsize) / 2);
-			for(i = 0; i < zstring->length; i++) {
-        x = 0.0;
-        // Poor man's kerning
-        if (zstring->text[i] == '(') { x = 0.18; }
-				bchar = gl_barcode_shape_alpha_new();
-				bchar->x = (double) string_offset + ((((6.0 / 9.0) * i) + x) * zstring->fsize);
-				bchar->y = (double) zstring->y;
-				bchar->fsize = (double) zstring->fsize;
-				bchar->c = (char) zstring->text[i];
-				gl_barcode_add_shape (gbc, (glBarcodeShape *)bchar);
-			}
-		}
-	}
+        if(text_flag)
+        {
+                for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )
+                {
+                        bstring = gl_barcode_shape_string_new();
+                        bstring->x = (double) zstring->x - (((6.0 / 9.0) * zstring->length * zstring->fsize) / 2);
+                        bstring->y = (double) zstring->y;
+                        bstring->fsize = (double) zstring->fsize;
+                        bstring->str   = g_strndup (zstring->text, zstring->length);
+                        gl_barcode_add_shape (gbc, (glBarcodeShape *)bstring);
+                }
+        }
 
-	/*
-	 * Finally add complete sizes
-	 */
-	gbc->width = (gdouble) render->width;
-	gbc->height = (gdouble) render->height;
+        /*
+         * Finally add complete sizes
+         */
+        gbc->width = (gdouble) render->width;
+        gbc->height = (gdouble) render->height;
 
-	return gbc;
+        return gbc;
 }
 
 #endif /* HAVE_LIBZINT */

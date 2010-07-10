@@ -424,7 +424,9 @@ draw_object (glLabelObject *object,
         glBarcode            *gbc;
         glBarcodeShape       *shape;
         glBarcodeShapeLine   *line;
+        glBarcodeShapeBox    *box;
         glBarcodeShapeAlpha  *bchar;
+        glBarcodeShapeString *bstring;
         GList                *p;
         gdouble               y_offset;
         PangoLayout          *layout;
@@ -509,6 +511,14 @@ draw_object (glLabelObject *object,
 
                                 break;
 
+                        case GL_BARCODE_SHAPE_BOX:
+                                box = (glBarcodeShapeBox *) shape;
+
+                                cairo_rectangle (cr, box->x, box->y, box->width, box->height);
+                                cairo_fill (cr);
+
+                                break;
+
                         case GL_BARCODE_SHAPE_ALPHA:
                                 bchar = (glBarcodeShapeAlpha *) shape;
 
@@ -527,6 +537,28 @@ draw_object (glLabelObject *object,
                                 y_offset = 0.2 * bchar->fsize;
 
                                 cairo_move_to (cr, bchar->x, bchar->y-y_offset);
+                                pango_cairo_show_layout (cr, layout);
+
+                                g_object_unref (layout);
+
+                                break;
+
+                        case GL_BARCODE_SHAPE_STRING:
+                                bstring = (glBarcodeShapeString *) shape;
+
+                                layout = pango_cairo_create_layout (cr);
+
+                                desc = pango_font_description_new ();
+                                pango_font_description_set_family (desc, GL_BARCODE_FONT_FAMILY);
+                                pango_font_description_set_size   (desc, bstring->fsize * PANGO_SCALE * FONT_SCALE);
+                                pango_layout_set_font_description (layout, desc);
+                                pango_font_description_free       (desc);
+
+                                pango_layout_set_text (layout, bstring->str, -1);
+
+                                y_offset = 0.2 * bstring->fsize;
+
+                                cairo_move_to (cr, bstring->x, bstring->y-y_offset);
                                 pango_cairo_show_layout (cr, layout);
 
                                 g_object_unref (layout);

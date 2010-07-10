@@ -441,6 +441,19 @@ gl_barcode_shape_line_new (void)
 
 
 /*****************************************************************************/
+/* Allocate new Box shape.                                                   */
+/*****************************************************************************/
+glBarcodeShapeBox *
+gl_barcode_shape_box_new (void)
+{
+        glBarcodeShapeBox *box_shape = g_new0 (glBarcodeShapeBox, 1);
+        box_shape->type = GL_BARCODE_SHAPE_BOX;
+
+        return box_shape;
+}
+
+
+/*****************************************************************************/
 /* Allocate new Alpha shape.                                                 */
 /*****************************************************************************/
 glBarcodeShapeAlpha *
@@ -450,6 +463,40 @@ gl_barcode_shape_alpha_new (void)
         alpha_shape->type = GL_BARCODE_SHAPE_ALPHA;
 
         return alpha_shape;
+}
+
+
+/*****************************************************************************/
+/* Allocate new String shape.                                                */
+/*****************************************************************************/
+glBarcodeShapeString *
+gl_barcode_shape_string_new (void)
+{
+        glBarcodeShapeString *string_shape = g_new0 (glBarcodeShapeString, 1);
+        string_shape->type = GL_BARCODE_SHAPE_STRING;
+
+        return string_shape;
+}
+
+
+/*****************************************************************************/
+/* Free a shape primitive.                                                   */
+/*****************************************************************************/
+void
+gl_barcode_shape_free (glBarcodeShape *shape)
+{
+        switch (shape->type)
+        {
+
+        case GL_BARCODE_SHAPE_STRING:
+                g_free (shape->string.str);
+                break;
+
+        default:
+                break;
+        }
+
+        g_free (shape);
 }
 
 
@@ -492,7 +539,7 @@ gl_barcode_free (glBarcode **gbc)
 	if (*gbc != NULL) {
 
 		for (p = (*gbc)->shapes; p != NULL; p = p->next) {
-			g_free (p->data);
+			gl_barcode_shape_free ((glBarcodeShape *)p->data);
 			p->data = NULL;
 		}
 		g_list_free ((*gbc)->shapes);
