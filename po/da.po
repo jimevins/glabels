@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels glabels_2_2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 23:12+0200\n"
+"POT-Creation-Date: 2010-07-10 00:37-0400\n"
 "PO-Revision-Date: 2010-05-25 14:52+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -74,7 +74,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A eller UPC-E)"
 
-#: ../src/bc.c:107
+#: ../src/bc.c:107 ../src/bc.c:348
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -86,7 +86,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc.c:116
+#: ../src/bc.c:116 ../src/bc.c:351
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -98,7 +98,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc.c:125
+#: ../src/bc.c:125 ../src/bc.c:288
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -106,11 +106,11 @@ msgstr "ISBN"
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc.c:131
+#: ../src/bc.c:131 ../src/bc.c:204
 msgid "Code 39"
 msgstr "Kode 39"
 
-#: ../src/bc.c:134
+#: ../src/bc.c:134 ../src/bc.c:216
 msgid "Code 128"
 msgstr "Kode 128"
 
@@ -124,12 +124,12 @@ msgstr "Kode 128B"
 
 # joe kom.: to provide blank leaves in (a book) for notes or written comments.
 # kender ikke et dansk udtryk for det her. indflyttet, eller interfolierede
-#: ../src/bc.c:143
+#: ../src/bc.c:143 ../src/bc.c:285
 msgid "Interleaved 2 of 5"
 msgstr "Interfolierede 2 af 5"
 
 # hvad er dettte. Codabar is a linear barcode symbology developed in 1972 by Pitney Bowes Corp.
-#: ../src/bc.c:146
+#: ../src/bc.c:146 ../src/bc.c:180
 msgid "Codabar"
 msgstr "Codabar"
 
@@ -142,19 +142,258 @@ msgstr "MSI"
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:155
+#: ../src/bc.c:155 ../src/bc.c:213
 msgid "Code 93"
 msgstr "Kode 93"
 
 #: ../src/bc.c:162
+msgid "Australia Post Standard"
+msgstr ""
+
+#: ../src/bc.c:165
+msgid "Australia Post Reply Paid"
+msgstr ""
+
+#: ../src/bc.c:168
+msgid "Australia Post Route Code"
+msgstr ""
+
+#: ../src/bc.c:171
+msgid "Australia Post Redirect"
+msgstr ""
+
+#: ../src/bc.c:174
+msgid "Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:177
+msgid "Aztec Rune"
+msgstr ""
+
+#: ../src/bc.c:183
+#, fuzzy
+msgid "Code One"
+msgstr "Kode 39"
+
+#: ../src/bc.c:186
+#, fuzzy
+msgid "Code 11"
+msgstr "Kode 128"
+
+#: ../src/bc.c:189
+#, fuzzy
+msgid "Code 16K"
+msgstr "Kode 128"
+
+#: ../src/bc.c:192
+msgid "Code 2 of 5 Matrix"
+msgstr ""
+
+#: ../src/bc.c:195
+msgid "Code 2 of 5 IATA"
+msgstr ""
+
+#: ../src/bc.c:198
+msgid "Code 2 of 5 Data Logic"
+msgstr ""
+
+#: ../src/bc.c:201
+msgid "Code 32 (Italian Pharmacode)"
+msgstr ""
+
+#: ../src/bc.c:207
+#, fuzzy
+msgid "Code 39 Extended"
+msgstr "Kode 39"
+
+#: ../src/bc.c:210
+#, fuzzy
+msgid "Code 49"
+msgstr "Kode 39"
+
+#: ../src/bc.c:219
+msgid "Code 128 (Mode C supression)"
+msgstr ""
+
+#: ../src/bc.c:222
+msgid "DAFT Code"
+msgstr ""
+
+#: ../src/bc.c:225
+#, fuzzy
+msgid "Data Matrix"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:228
+msgid "Deutsche Post Leitcode"
+msgstr ""
+
+#: ../src/bc.c:231
+msgid "Deutsche Post Identcode"
+msgstr ""
+
+#: ../src/bc.c:234
+msgid "Dutch Post KIX Code"
+msgstr ""
+
+#: ../src/bc.c:237
+msgid "European Article Number (EAN)"
+msgstr ""
+
+#: ../src/bc.c:240
+msgid "Grid Matrix"
+msgstr ""
+
+#: ../src/bc.c:243
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc.c:169
+#: ../src/bc.c:246
+msgid "GS1 DataBar-14"
+msgstr ""
+
+#: ../src/bc.c:255
+msgid "GS1 DataBar-14 Stacked"
+msgstr ""
+
+#: ../src/bc.c:258
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr ""
+
+#: ../src/bc.c:261
+msgid "GS1 DataBar Extended Stacked"
+msgstr ""
+
+#: ../src/bc.c:264
+#, fuzzy
+msgid "HIBC Code 128"
+msgstr "Kode 128"
+
+#: ../src/bc.c:267
+#, fuzzy
+msgid "HIBC Code 39"
+msgstr "Kode 39"
+
+#: ../src/bc.c:270
+#, fuzzy
+msgid "HIBC Data Matrix"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:273
+#, fuzzy
+msgid "HIBC QR Code"
+msgstr "IEC18004 (QRCode)"
+
+#: ../src/bc.c:276
+msgid "HIBC PDF417"
+msgstr ""
+
+#: ../src/bc.c:279
+msgid "HIBC Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:282
+msgid "HIBC Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:291
+msgid "ITF-14"
+msgstr ""
+
+#: ../src/bc.c:294
+msgid "Japanese Postal"
+msgstr ""
+
+#: ../src/bc.c:297
+msgid "Korean Postal"
+msgstr ""
+
+#: ../src/bc.c:300
+msgid "LOGMARS"
+msgstr ""
+
+#: ../src/bc.c:303
+msgid "Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:306
+msgid "Micro QR Code"
+msgstr ""
+
+# navn? The Plessey Company plc was a British-based international electronics, defence and telecommunications company.
+#: ../src/bc.c:309
+#, fuzzy
+msgid "MSI Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:312
+msgid "NVE-18"
+msgstr ""
+
+#: ../src/bc.c:315
+msgid "PDF417"
+msgstr ""
+
+#: ../src/bc.c:318
+msgid "PDF417 Truncated"
+msgstr ""
+
+#: ../src/bc.c:321
+#, fuzzy
+msgid "PLANET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:324
+#, fuzzy
+msgid "PostNet"
+msgstr "Indsæt"
+
+#: ../src/bc.c:327
+#, fuzzy
+msgid "Pharmacode"
+msgstr "Stregkode"
+
+#: ../src/bc.c:330
+#, fuzzy
+msgid "Pharmacode 2-track"
+msgstr "Stregkodedata"
+
+#: ../src/bc.c:333
+msgid "Pharmazentral Nummer (PZN)"
+msgstr ""
+
+#: ../src/bc.c:336
+msgid "QR Code"
+msgstr ""
+
+#: ../src/bc.c:339
+msgid "Royal Mail 4-State"
+msgstr ""
+
+#: ../src/bc.c:342
+#, fuzzy
+msgid "Telepen"
+msgstr "Slet"
+
+#: ../src/bc.c:345
+msgid "Telepen Numeric"
+msgstr ""
+
+#: ../src/bc.c:354
+msgid "USPS One Code"
+msgstr ""
+
+# navn? The Plessey Company plc was a British-based international electronics, defence and telecommunications company.
+#: ../src/bc.c:357
+#, fuzzy
+msgid "UK Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:364
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc.c:176
+#: ../src/bc.c:371
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -324,7 +563,7 @@ msgstr "gLabels - fatal fejl!"
 msgid "New Label or Card"
 msgstr "Ny etiket eller kort"
 
-#: ../src/file.c:175 ../src/label.c:584 ../src/label.c:628
+#: ../src/file.c:175 ../src/label.c:587 ../src/label.c:631
 msgid "Label properties"
 msgstr "Etiketegenskaber"
 
@@ -444,64 +683,64 @@ msgstr "0123456789 .:,;(*!?)"
 msgid "Sample text"
 msgstr "Prøvetekst"
 
-#: ../src/glabels-batch.c:52
+#: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "angiv filnavn for uddata (standard=output.pdf)"
 
-#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
 msgid "filename"
 msgstr "filnavn"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
 msgstr "antal ark (ark=1)"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "sheets"
 msgstr "ark"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
 msgstr "antal kopier (standard=1)"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "copies"
 msgstr "kopier"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
 msgstr "første etiket på første ark (standard=1)"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first"
 msgstr "første"
 
-#: ../src/glabels-batch.c:60 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "udskriv omkreds (for at teste printeropsætning)"
 
-#: ../src/glabels-batch.c:62 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "udskriv omvendt (det vil sige et spejlbillede)"
 
 # tilføjet af joe: crop marks: Marks that show where a publication page will be trimmed
-#: ../src/glabels-batch.c:64 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print crop marks"
 msgstr "udskriv beskæringsmærker"
 
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:67
 msgid "input file for merging"
 msgstr "inddatafil for sammenflet"
 
-#: ../src/glabels-batch.c:68 ../src/glabels.c:64
+#: ../src/glabels-batch.c:69 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[FIL...]"
 
-#: ../src/glabels-batch.c:98
+#: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
 msgstr "Udskriv filer oprettet med gLabels."
 
-#: ../src/glabels-batch.c:106 ../src/glabels.c:89
+#: ../src/glabels-batch.c:107 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -511,12 +750,12 @@ msgstr ""
 "Kør '%s --help' for at se en fuldstændig liste over tilgængelige "
 "kommandolinjetilvalg.\n"
 
-#: ../src/glabels-batch.c:149
+#: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr "kan ikke udføre dokumentsammenfletning med glabelsfil %s\n"
 
-#: ../src/glabels-batch.c:184
+#: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "kan ikke åbne glabelsfil %s\n"
@@ -538,11 +777,11 @@ msgstr "Stregkodedata"
 msgid "Barcode property"
 msgstr "Egenskaber for stregkode"
 
-#: ../src/label-barcode.c:483
+#: ../src/label-barcode.c:485
 msgid "Barcode data empty"
 msgstr "Stregkodedata er tomme"
 
-#: ../src/label-barcode.c:487
+#: ../src/label-barcode.c:489
 msgid "Invalid barcode data"
 msgstr "Ugyldige stregkodedata"
 
@@ -565,80 +804,80 @@ msgstr "Linjefarve"
 msgid "Line width"
 msgstr "Linjebredde"
 
-#: ../src/label.c:399
+#: ../src/label.c:402
 msgid "Untitled"
 msgstr "Uden titel"
 
-#: ../src/label.c:702 ../src/ui.c:422
+#: ../src/label.c:705 ../src/ui.c:422
 msgid "Merge properties"
 msgstr "Sammenføj egenskaber"
 
-#: ../src/label.c:1184 ../src/ui.c:215
+#: ../src/label.c:1197 ../src/ui.c:215
 msgid "Delete"
 msgstr "Slet"
 
-#: ../src/label.c:1217 ../src/ui.c:324
+#: ../src/label.c:1230 ../src/ui.c:324
 msgid "Bring to front"
 msgstr "Hent frem"
 
-#: ../src/label.c:1253 ../src/ui.c:331
+#: ../src/label.c:1266 ../src/ui.c:331
 msgid "Send to back"
 msgstr "Send tilbage"
 
-#: ../src/label.c:1294
+#: ../src/label.c:1307
 msgid "Rotate"
 msgstr "Roter"
 
-#: ../src/label.c:1329 ../src/ui.c:338
+#: ../src/label.c:1342 ../src/ui.c:338
 msgid "Rotate left"
 msgstr "Roter mod venstre"
 
-#: ../src/label.c:1362 ../src/ui.c:345
+#: ../src/label.c:1375 ../src/ui.c:345
 msgid "Rotate right"
 msgstr "Roter til højre"
 
-#: ../src/label.c:1397 ../src/ui.c:352
+#: ../src/label.c:1410 ../src/ui.c:352
 msgid "Flip horizontally"
 msgstr "Vend vandret"
 
-#: ../src/label.c:1432 ../src/ui.c:359
+#: ../src/label.c:1445 ../src/ui.c:359
 msgid "Flip vertically"
 msgstr "Vend lodret"
 
-#: ../src/label.c:1472 ../src/ui.c:366
+#: ../src/label.c:1485 ../src/ui.c:366
 msgid "Align left"
 msgstr "Juster venstre"
 
-#: ../src/label.c:1529 ../src/ui.c:373
+#: ../src/label.c:1542 ../src/ui.c:373
 msgid "Align right"
 msgstr "Juster højre"
 
-#: ../src/label.c:1590 ../src/ui.c:380
+#: ../src/label.c:1603 ../src/ui.c:380
 msgid "Align horizontal center"
 msgstr "Juster vandret centrum"
 
-#: ../src/label.c:1666 ../src/ui.c:387
+#: ../src/label.c:1679 ../src/ui.c:387
 msgid "Align tops"
 msgstr "Juster øverst"
 
-#: ../src/label.c:1723 ../src/ui.c:394
+#: ../src/label.c:1736 ../src/ui.c:394
 msgid "Align bottoms"
 msgstr "Juster nederste kanter"
 
 # openoffice: juster lodret centreret
-#: ../src/label.c:1784 ../src/ui.c:401
+#: ../src/label.c:1797 ../src/ui.c:401
 msgid "Align vertical center"
 msgstr "Juster lodret centreret"
 
-#: ../src/label.c:1862 ../src/ui.c:408
+#: ../src/label.c:1875 ../src/ui.c:408
 msgid "Center horizontally"
 msgstr "Centrer vandret"
 
-#: ../src/label.c:1909 ../src/ui.c:415
+#: ../src/label.c:1922 ../src/ui.c:415
 msgid "Center vertically"
 msgstr "Centrer lodret"
 
-#: ../src/label.c:2595 ../src/label.c:2637 ../src/label.c:2663 ../src/ui.c:208
+#: ../src/label.c:2610 ../src/label.c:2652 ../src/label.c:2678 ../src/ui.c:208
 msgid "Paste"
 msgstr "Indsæt"
 
@@ -646,11 +885,11 @@ msgstr "Indsæt"
 msgid "Create ellipse object"
 msgstr "Opret ellipseobjekt"
 
-#: ../src/label-image.c:161 ../src/ui.c:312
+#: ../src/label-image.c:200 ../src/ui.c:312
 msgid "Create image object"
 msgstr "Opret billedeobjekt"
 
-#: ../src/label-image.c:265 ../src/label-image.c:336
+#: ../src/label-image.c:333 ../src/label-image.c:474
 msgid "Set image"
 msgstr "Angiv billede"
 
@@ -820,12 +1059,22 @@ msgstr "Tekst: Kolonadskilte værdier"
 msgid "Text: Colon separated values with keys on line 1"
 msgstr "Tekst: Kolonadskilte værdier med nøgler på linje 1"
 
-#: ../src/merge-init.c:104
+#: ../src/merge-init.c:102
+#, fuzzy
+msgid "Text: Semicolon separated values"
+msgstr "Tekst: Kolonadskilte værdier"
+
+#: ../src/merge-init.c:109
+#, fuzzy
+msgid "Text: Semicolon separated values with keys on line 1"
+msgstr "Tekst: Kolonadskilte værdier med nøgler på linje 1"
+
+#: ../src/merge-init.c:119
 msgid "Evolution Addressbook"
 msgstr "Evolutionadressebog"
 
 # bør nok være VCard (formatnavn ifølge wiki)
-#: ../src/merge-init.c:110
+#: ../src/merge-init.c:125
 msgid "VCards"
 msgstr "VCards"
 
@@ -850,7 +1099,7 @@ msgstr "Vælg"
 msgid "Record/Field"
 msgstr "Optag/felt"
 
-#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:8
 msgid "Data"
 msgstr "Data"
 
@@ -946,7 +1195,7 @@ msgstr "Indstillinger for gLabels"
 
 #. ===================================================================
 #: ../src/print-op.c:205 ../src/print-op-dialog.c:217
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 #: ../templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Etiketter"
@@ -1099,10 +1348,9 @@ msgstr "Design færdigt"
 msgid "Edit gLabels Template"
 msgstr "Rediger gLabels-skabelon"
 
-#: ../src/template-designer.c:1422
-msgid ""
-"<span foreground='red' weight='bold'>Brand and part# match an existing "
-"template!</span>"
+#: ../src/template-designer.c:1423
+#, fuzzy
+msgid "Brand and part# match an existing template!"
 msgstr ""
 "<span foreground='red' weight='bold'>Mærk og del#-match en eksisterende "
 "skabelon!</span>"
@@ -1337,7 +1585,8 @@ msgstr "Vælg tilstand"
 msgid "Select, move and modify objects"
 msgstr "Vælg, flyt eller ændre objekter"
 
-#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:28
+#: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Tekst"
 
@@ -1349,7 +1598,8 @@ msgstr "Boks"
 msgid "Create box/rectangle object"
 msgstr "Opret boks-/rektangelobjekt"
 
-#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Linje"
 
@@ -1361,7 +1611,7 @@ msgstr "Ellipse"
 msgid "Create ellipse/circle object"
 msgstr "Opret ellipse-/cirkelobjekt"
 
-#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:14
 msgid "Image"
 msgstr "Billede"
 
@@ -1547,53 +1797,58 @@ msgstr "(ingen) - gLabels"
 msgid "(modified)"
 msgstr "(ændret)"
 
-#: ../src/xml-label-04.c:75 ../src/xml-label.c:323
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:333
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Ugyldig rodknude = \"%s\""
 
-#: ../src/xml-label-04.c:123 ../src/xml-label.c:406
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:416
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "dårlig knude =  \"%s\""
 
-#: ../src/xml-label.c:189 ../src/xml-label.c:227
+#: ../src/xml-label.c:199 ../src/xml-label.c:237
 msgid "xmlParseFile error"
 msgstr "xmlParseFile-fejl"
 
-#: ../src/xml-label.c:264
+#: ../src/xml-label.c:274
 msgid "No document root"
 msgstr "Ingen dokumentrod"
 
-#: ../src/xml-label.c:272
+#: ../src/xml-label.c:282
 msgid "Importing from glabels 0.1 format"
 msgstr "Importerer fra glabels 0.1 format"
 
-#: ../src/xml-label.c:281
+#: ../src/xml-label.c:291
 msgid "Importing from glabels 0.4 format"
 msgstr "Importerer fra glabels 0.4 format"
 
-#: ../src/xml-label.c:291
+#: ../src/xml-label.c:301
 #, c-format
 msgid "Unknown glabels Namespace -- Using %s"
 msgstr "Ukendt glabelsnavnerum -- bruger %s"
 
-#: ../src/xml-label.c:360
+#: ../src/xml-label.c:370
 #, c-format
 msgid "bad node in Document node =  \"%s\""
 msgstr "dårlig knude i dokumentknude =  \"%s\""
 
-#: ../src/xml-label.c:856
+#: ../src/xml-label.c:868
 #, c-format
 msgid "bad node in Data node =  \"%s\""
 msgstr "dårlig knude i dataknude =  \"%s\""
 
-#: ../src/xml-label.c:1097 ../libglabels/xml-template.c:802
+#: ../src/xml-label.c:944
+#, fuzzy, c-format
+msgid "Unknown embedded file format: \"%s\""
+msgstr "Ukendt sidestørrelse-id eller navn \"%s\""
+
+#: ../src/xml-label.c:1150 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Utf8 - konverteringsfejl."
 
 # Kunne ikke gemme xml-fil.
-#: ../src/xml-label.c:1104
+#: ../src/xml-label.c:1157
 msgid "Problem saving xml file."
 msgstr "Problem under gemning af xml-fil."
 
@@ -1610,7 +1865,7 @@ msgstr "Anden"
 msgid "User defined"
 msgstr "Brugerdefineret"
 
-#: ../libglabels/db.c:650
+#: ../libglabels/db.c:665
 msgid ""
 "Unable to locate paper size definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1618,7 +1873,7 @@ msgstr ""
 "Kunne ikke finde definitioner for papirstørrelse. Libglabels er måske ikke "
 "installeret korrekt!"
 
-#: ../libglabels/db.c:1042
+#: ../libglabels/db.c:1057
 msgid ""
 "Unable to locate category definitions.  Libglabels may not be installed "
 "correctly!"
@@ -1626,14 +1881,14 @@ msgstr ""
 "Kunne ikke finde definitioner for kategorier. Libglabels er måske ikke "
 "installeret korrekt!"
 
-#: ../libglabels/db.c:2061
+#: ../libglabels/db.c:2097
 msgid ""
 "Unable to locate any template files.  Libglabels may not be installed "
 "correctly!"
 msgstr ""
 "Kunne ikke finde skabelonfiler. Libglabels er måske ikke installeret korrekt!"
 
-#: ../libglabels/db.c:2128
+#: ../libglabels/db.c:2164
 #, c-format
 msgid "%s full page label"
 msgstr "%s hel sideetiket"
@@ -1643,12 +1898,24 @@ msgstr "%s hel sideetiket"
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Tilsvarende del (\"%s\") for \"%s\", er ikke tidligere defineret."
 
-#: ../libglabels/template.c:722 ../libglabels/template.c:726
-msgid "per sheet"
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/template.c:727
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr ""
+
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/template.c:732
+#, fuzzy, c-format
+msgid "%d per sheet"
 msgstr "per ark"
 
-#: ../libglabels/template.c:796 ../libglabels/template.c:802
-#: ../libglabels/template.c:812 ../libglabels/template.c:818
+#: ../libglabels/template.c:802 ../libglabels/template.c:808
+#: ../libglabels/template.c:818 ../libglabels/template.c:824
 msgid "diameter"
 msgstr "diameter"
 
@@ -1656,13 +1923,13 @@ msgstr "diameter"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:39
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "punkter"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:38
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "tommer"
@@ -1723,24 +1990,26 @@ msgstr "Navneattribut mangler også."
 #. * End:                   -- emacs
 #.
 #: ../data/ui/merge-properties-dialog.ui.h:1
-msgid "<b>Record selection/preview</b>"
-msgstr "<b>Optag markering/forhåndsvisning</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:2
-msgid "<b>Source</b>"
-msgstr "<b>Kilde</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:3
 msgid "Format:"
 msgstr "Format:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:4
+#: ../data/ui/merge-properties-dialog.ui.h:2
 msgid "Location:"
 msgstr "Placering:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:5
+#: ../data/ui/merge-properties-dialog.ui.h:3
+#, fuzzy
+msgid "Record selection/preview"
+msgstr "<b>Optag markering/forhåndsvisning</b>"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Vælg alle"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+#, fuzzy
+msgid "Source"
+msgstr "<b>Kilde</b>"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
@@ -1824,133 +2093,129 @@ msgstr "Producent:"
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:3
-msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Xxx-objektegenskaber</span>"
-
-#: ../data/ui/object-editor.ui.h:4 ../data/ui/prefs-dialog.ui.h:7
+#: ../data/ui/object-editor.ui.h:3 ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Justering:"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:4
 msgid "Allow merge to automatically shrink text"
 msgstr "Tillader automatisk at sammenføjning kan formindske tekst"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:5
 msgid "Angle:"
 msgstr "Vinkel:"
 
 # Tjekbeløb
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:6
 msgid "Checksum"
 msgstr "Kontrolsum"
 
-#: ../data/ui/object-editor.ui.h:8 ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:7 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Farve:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:9
 msgid "Enable shadow"
 msgstr "Slå skygge til"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:10
 msgid "Family:"
 msgstr "Familie:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:11
 msgid "File:"
 msgstr "Fil:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:12 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Fyld"
 
-#: ../data/ui/object-editor.ui.h:14 ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Højde:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:15
 msgid "Key:"
 msgstr "Nøgle:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:16
 msgid "Length:"
 msgstr "Længde:"
 
-#: ../data/ui/object-editor.ui.h:19 ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Linjemellemrum:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:19
 msgid "Literal:"
 msgstr "Bogstavelig:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:20
 msgid "Opacity:"
 msgstr "Ugennemsigtighed:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:21
 msgid "Position"
 msgstr "Placering"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:22
 msgid "Reset image size"
 msgstr "Nulstil billedstørrelse"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:23
 msgid "Shadow"
 msgstr "Skygge"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:24
 msgid "Size"
 msgstr "Størrelse"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:25
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:26
 msgid "Style"
 msgstr "Stil"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:27
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../data/ui/object-editor.ui.h:30 ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:29 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Bredde:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:30
 msgid "X Offset:"
 msgstr "X-forskydning:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:31
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:32
 msgid "Y Offset:"
 msgstr "Y-forskydning:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:33
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:34
 msgid "degrees"
 msgstr "grader"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:35
 msgid "dialog1"
 msgstr "dialog 1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:36
 msgid "digits:"
 msgstr "tal:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:37
 msgid "format:"
 msgstr "format:"
 
@@ -1958,65 +2223,55 @@ msgstr "format:"
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/prefs-dialog.ui.h:2
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">Standard for sidestørrelse</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:3
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">Fyld</span>"
-
 #: ../data/ui/prefs-dialog.ui.h:4
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">Linje</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:5
-msgid "<span weight=\"bold\">Text</span>"
-msgstr "<span weight=\"bold\">Tekst</span>"
+#, fuzzy
+msgid "Default page size"
+msgstr "Nulstil billedstørrelse"
 
 #: ../data/ui/prefs-dialog.ui.h:6
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">Enheder</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Font:"
 msgstr "Skrifttype:"
 
-#: ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/prefs-dialog.ui.h:7
 msgid "ISO A4"
 msgstr "ISO A4"
 
-#: ../data/ui/prefs-dialog.ui.h:11
+#: ../data/ui/prefs-dialog.ui.h:8
 msgid "Inches"
 msgstr "Tommer"
 
-#: ../data/ui/prefs-dialog.ui.h:13
+#: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
 msgstr "Sprog"
 
-#: ../data/ui/prefs-dialog.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:12
 msgid "Millimeters"
 msgstr "Millimeter"
 
-#: ../data/ui/prefs-dialog.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:13
 msgid "Object defaults"
 msgstr "Objektstandarder"
 
-#: ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:14
 msgid "Points"
 msgstr "Punkter"
 
-#: ../data/ui/prefs-dialog.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
 msgstr "Vælg standardegenskaber for nye objekter."
 
-#: ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
 msgstr "Vælg opførsel specifikt efter lokalt område."
 
-#: ../data/ui/prefs-dialog.ui.h:19 ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "US Letter"
+
+#: ../data/ui/prefs-dialog.ui.h:19
+#, fuzzy
+msgid "Units"
+msgstr "Uden titel"
 
 #: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
@@ -2255,26 +2510,29 @@ msgstr ""
 "\n"
 "Denne guide vil assistere dig i oprettelsen af en tilpasset gLabels-skabelon."
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "<b>Copies</b>"
-msgstr "<b>Kopier</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-msgid "<b>Merge Control</b>"
-msgstr "<b>Sammenføjningskontrol</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "<b>Options</b>"
-msgstr "<b>Indstillinger</b>"
-
 # oversættelse hentet fra dia
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:1
 msgid "Collate"
 msgstr "Saml ind"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#, fuzzy
+msgid "Copies"
+msgstr "Kopier:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
 msgstr "Kopier:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#, fuzzy
+msgid "Merge Control"
+msgstr "<b>Sammenføjningskontrol</b>"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#, fuzzy
+msgid "Options"
+msgstr "<b>Indstillinger</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
@@ -3060,3 +3318,24 @@ msgstr "Rektangulær Copieretiketter"
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "Video-etiketter (bagside)"
+
+#~ msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">Xxx-objektegenskaber</span>"
+
+#~ msgid "<span weight=\"bold\">Default page size</span>"
+#~ msgstr "<span weight=\"bold\">Standard for sidestørrelse</span>"
+
+#~ msgid "<span weight=\"bold\">Fill</span>"
+#~ msgstr "<span weight=\"bold\">Fyld</span>"
+
+#~ msgid "<span weight=\"bold\">Line</span>"
+#~ msgstr "<span weight=\"bold\">Linje</span>"
+
+#~ msgid "<span weight=\"bold\">Text</span>"
+#~ msgstr "<span weight=\"bold\">Tekst</span>"
+
+#~ msgid "<span weight=\"bold\">Units</span>"
+#~ msgstr "<span weight=\"bold\">Enheder</span>"
+
+#~ msgid "<b>Copies</b>"
+#~ msgstr "<b>Kopier</b>"

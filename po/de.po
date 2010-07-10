@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-07-07 03:16+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-10 00:37-0400\n"
 "PO-Revision-Date: 2010-07-07 11:58+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -68,7 +68,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A oder UPC-E)"
 
-#: ../src/bc.c:107
+#: ../src/bc.c:107 ../src/bc.c:348
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -80,7 +80,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc.c:116
+#: ../src/bc.c:116 ../src/bc.c:351
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -92,7 +92,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc.c:125
+#: ../src/bc.c:125 ../src/bc.c:288
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -100,11 +100,11 @@ msgstr "ISBN"
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc.c:131
+#: ../src/bc.c:131 ../src/bc.c:204
 msgid "Code 39"
 msgstr "Code 39"
 
-#: ../src/bc.c:134
+#: ../src/bc.c:134 ../src/bc.c:216
 msgid "Code 128"
 msgstr "Code 128"
 
@@ -116,11 +116,11 @@ msgstr "Code 128C"
 msgid "Code 128B"
 msgstr "Code 128B"
 
-#: ../src/bc.c:143
+#: ../src/bc.c:143 ../src/bc.c:285
 msgid "Interleaved 2 of 5"
 msgstr "Interleaved 2 of 5"
 
-#: ../src/bc.c:146
+#: ../src/bc.c:146 ../src/bc.c:180
 msgid "Codabar"
 msgstr "Codabar"
 
@@ -132,19 +132,256 @@ msgstr "MSI"
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:155
+#: ../src/bc.c:155 ../src/bc.c:213
 msgid "Code 93"
 msgstr "Code 93"
 
 #: ../src/bc.c:162
+msgid "Australia Post Standard"
+msgstr ""
+
+#: ../src/bc.c:165
+msgid "Australia Post Reply Paid"
+msgstr ""
+
+#: ../src/bc.c:168
+msgid "Australia Post Route Code"
+msgstr ""
+
+#: ../src/bc.c:171
+msgid "Australia Post Redirect"
+msgstr ""
+
+#: ../src/bc.c:174
+msgid "Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:177
+msgid "Aztec Rune"
+msgstr ""
+
+#: ../src/bc.c:183
+#, fuzzy
+msgid "Code One"
+msgstr "Code 39"
+
+#: ../src/bc.c:186
+#, fuzzy
+msgid "Code 11"
+msgstr "Code 128"
+
+#: ../src/bc.c:189
+#, fuzzy
+msgid "Code 16K"
+msgstr "Code 128"
+
+#: ../src/bc.c:192
+msgid "Code 2 of 5 Matrix"
+msgstr ""
+
+#: ../src/bc.c:195
+msgid "Code 2 of 5 IATA"
+msgstr ""
+
+#: ../src/bc.c:198
+msgid "Code 2 of 5 Data Logic"
+msgstr ""
+
+#: ../src/bc.c:201
+msgid "Code 32 (Italian Pharmacode)"
+msgstr ""
+
+#: ../src/bc.c:207
+#, fuzzy
+msgid "Code 39 Extended"
+msgstr "Code 39"
+
+#: ../src/bc.c:210
+#, fuzzy
+msgid "Code 49"
+msgstr "Code 39"
+
+#: ../src/bc.c:219
+msgid "Code 128 (Mode C supression)"
+msgstr ""
+
+#: ../src/bc.c:222
+msgid "DAFT Code"
+msgstr ""
+
+#: ../src/bc.c:225
+#, fuzzy
+msgid "Data Matrix"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:228
+msgid "Deutsche Post Leitcode"
+msgstr ""
+
+#: ../src/bc.c:231
+msgid "Deutsche Post Identcode"
+msgstr ""
+
+#: ../src/bc.c:234
+msgid "Dutch Post KIX Code"
+msgstr ""
+
+#: ../src/bc.c:237
+msgid "European Article Number (EAN)"
+msgstr ""
+
+#: ../src/bc.c:240
+msgid "Grid Matrix"
+msgstr ""
+
+#: ../src/bc.c:243
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc.c:169
+#: ../src/bc.c:246
+msgid "GS1 DataBar-14"
+msgstr ""
+
+#: ../src/bc.c:255
+msgid "GS1 DataBar-14 Stacked"
+msgstr ""
+
+#: ../src/bc.c:258
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr ""
+
+#: ../src/bc.c:261
+msgid "GS1 DataBar Extended Stacked"
+msgstr ""
+
+#: ../src/bc.c:264
+#, fuzzy
+msgid "HIBC Code 128"
+msgstr "Code 128"
+
+#: ../src/bc.c:267
+#, fuzzy
+msgid "HIBC Code 39"
+msgstr "Code 39"
+
+#: ../src/bc.c:270
+#, fuzzy
+msgid "HIBC Data Matrix"
+msgstr "IEC16022 (DataMatrix)"
+
+#: ../src/bc.c:273
+#, fuzzy
+msgid "HIBC QR Code"
+msgstr "IEC18004 (QRCode)"
+
+#: ../src/bc.c:276
+msgid "HIBC PDF417"
+msgstr ""
+
+#: ../src/bc.c:279
+msgid "HIBC Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:282
+msgid "HIBC Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:291
+msgid "ITF-14"
+msgstr ""
+
+#: ../src/bc.c:294
+msgid "Japanese Postal"
+msgstr ""
+
+#: ../src/bc.c:297
+msgid "Korean Postal"
+msgstr ""
+
+#: ../src/bc.c:300
+msgid "LOGMARS"
+msgstr ""
+
+#: ../src/bc.c:303
+msgid "Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:306
+msgid "Micro QR Code"
+msgstr ""
+
+#: ../src/bc.c:309
+#, fuzzy
+msgid "MSI Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:312
+msgid "NVE-18"
+msgstr ""
+
+#: ../src/bc.c:315
+msgid "PDF417"
+msgstr ""
+
+#: ../src/bc.c:318
+msgid "PDF417 Truncated"
+msgstr ""
+
+#: ../src/bc.c:321
+#, fuzzy
+msgid "PLANET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:324
+#, fuzzy
+msgid "PostNet"
+msgstr "Einfügen"
+
+#: ../src/bc.c:327
+#, fuzzy
+msgid "Pharmacode"
+msgstr "Strichcode"
+
+#: ../src/bc.c:330
+#, fuzzy
+msgid "Pharmacode 2-track"
+msgstr "Strichcode-Daten"
+
+#: ../src/bc.c:333
+msgid "Pharmazentral Nummer (PZN)"
+msgstr ""
+
+#: ../src/bc.c:336
+msgid "QR Code"
+msgstr ""
+
+#: ../src/bc.c:339
+msgid "Royal Mail 4-State"
+msgstr ""
+
+#: ../src/bc.c:342
+#, fuzzy
+msgid "Telepen"
+msgstr "Löschen"
+
+#: ../src/bc.c:345
+msgid "Telepen Numeric"
+msgstr ""
+
+#: ../src/bc.c:354
+msgid "USPS One Code"
+msgstr ""
+
+#: ../src/bc.c:357
+#, fuzzy
+msgid "UK Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:364
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (DataMatrix)"
 
-#: ../src/bc.c:176
+#: ../src/bc.c:371
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRCode)"
 
@@ -332,7 +569,8 @@ msgstr "Auswahl des Dateinamens ist leer"
 
 #: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
-msgstr "Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
+msgstr ""
+"Bitte wählen Sie eine Datei oder geben Sie einen gültigen Dateinamen an"
 
 #: ../src/file.c:335
 msgid "File does not exist"
@@ -381,7 +619,8 @@ msgstr "Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
 #: ../src/file.c:748
 msgid "Your changes will be lost if you don't save them."
-msgstr "Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
+msgstr ""
+"Nicht gespeicherte Änderungen gehen verloren, wenn Sie nicht speichern."
 
 #: ../src/file.c:751
 msgid "Close without saving"
@@ -434,63 +673,63 @@ msgstr "0123456789 .:,;(*!?)"
 msgid "Sample text"
 msgstr "Beispieltext"
 
-#: ../src/glabels-batch.c:52
+#: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "Ausgabe-Dateiname festlegen (Vorgabe: »output.pdf«)"
 
-#: ../src/glabels-batch.c:52 ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
 msgid "filename"
 msgstr "Dateiname"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
 msgstr "Anzahl der Blätter (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "sheets"
 msgstr "Blätter"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
 msgstr "Anzahl der Kopien (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "copies"
 msgstr "Kopien"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
 msgstr "Erstes Etikett auf dem ersten Blatt (Vorgabe: 1)"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first"
 msgstr "Erste"
 
-#: ../src/glabels-batch.c:60 ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "Begrenzungen drucken (um Druckausrichtung zu testen)"
 
-#: ../src/glabels-batch.c:62 ../data/ui/print-op-dialog-custom-widget.ui.h:12
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "Spiegelbildlich drucken"
 
-#: ../src/glabels-batch.c:64 ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print crop marks"
 msgstr "Schnittmarken drucken"
 
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:67
 msgid "input file for merging"
 msgstr "Eingabedatei zum Mischen"
 
-#: ../src/glabels-batch.c:68 ../src/glabels.c:64
+#: ../src/glabels-batch.c:69 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[DATEI...]"
 
-#: ../src/glabels-batch.c:98
+#: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
 msgstr "Mit gLabels erstellte Dateien drucken."
 
-#: ../src/glabels-batch.c:106 ../src/glabels.c:89
+#: ../src/glabels-batch.c:107 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -500,13 +739,13 @@ msgstr ""
 "Rufen Sie %s --help« auf, um eine vollständige Liste der verfügbaren "
 "Befehlszeilenoptionen zu sehen.\n"
 
-#: ../src/glabels-batch.c:149
+#: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr ""
 "Dokumentverarbeitung kann mit gLabels-Datei %s nicht ausgeführt werden\n"
 
-#: ../src/glabels-batch.c:184
+#: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "glabels-Datei %s kann nicht geöffnet werden\n"
@@ -527,11 +766,11 @@ msgstr "Strichcode-Daten"
 msgid "Barcode property"
 msgstr "Strichcode-Eigenschaft"
 
-#: ../src/label-barcode.c:483
+#: ../src/label-barcode.c:485
 msgid "Barcode data empty"
 msgstr "Strichcode-Daten sind leer"
 
-#: ../src/label-barcode.c:487
+#: ../src/label-barcode.c:489
 msgid "Invalid barcode data"
 msgstr "Ungültige Strichcode-Daten"
 
@@ -795,7 +1034,8 @@ msgstr "Text: Durch Tabulatoren getrennte Werte (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
+msgstr ""
+"Text: Durch Tabulatoren getrennte Werte (TSV) mit Schlüsseln in Zeile 1"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -1438,7 +1678,8 @@ msgstr "Eigenschaften-Werkzeugleiste"
 #: ../src/ui.c:452
 msgid "Change the visibility of the property toolbar in the current window"
 msgstr ""
-"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder ausschalten"
+"Die Sichtbarkeit der Werkzeugleiste im aktuellen Fenster ein- oder "
+"ausschalten"
 
 #: ../src/ui.c:458
 msgid "Grid"
@@ -1446,7 +1687,8 @@ msgstr "Raster"
 
 #: ../src/ui.c:460
 msgid "Change the visibility of the grid in the current window"
-msgstr "Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
+msgstr ""
+"Die Sichtbarkeit des Rasters im aktuellen Fenster ein- oder ausschalten"
 
 #: ../src/ui.c:466
 msgid "Markup"
@@ -1581,11 +1823,11 @@ msgstr "Ungültiger Node im Daten-Node = »%s«"
 msgid "Unknown embedded file format: \"%s\""
 msgstr "Unbekanntes eingebettetes Dateiformat: »%s«"
 
-#: ../src/xml-label.c:1143 ../libglabels/xml-template.c:802
+#: ../src/xml-label.c:1150 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Fehler in der UTF8-Umwandlung."
 
-#: ../src/xml-label.c:1150
+#: ../src/xml-label.c:1157
 msgid "Problem saving xml file."
 msgstr "Problem beim Speichern der XML-Datei."
 
@@ -2178,7 +2420,8 @@ msgstr "Bitte geben Sie die folgenden Layout-Informationen ein."
 
 #: ../data/ui/template-designer.ui.h:46
 msgid ""
-"Please enter the following size parameters of a single label in your template."
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr ""
 "Bitte geben Sie die folgenden Größenwerte des einzelnen Etiketts in Ihrer "
 "Vorlage an."
@@ -3029,4 +3272,3 @@ msgstr "Rechteckige Kopieretiketten"
 #: ../templates/zweckform-iso-templates.xml.h:26
 msgid "Video Labels (back)"
 msgstr "Video-Etiketten (Rückseite)"
-

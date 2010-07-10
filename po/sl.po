@@ -1,21 +1,22 @@
 # Slovenian translation for glabels.
 # Copyright (C) 2009 glabels's COPYRIGHT HOLDER
 # This file is distributed under the same license as the glabels package.
-#
+# 
 # Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009 - 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
-"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-07-03 03:15+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-10 00:37-0400\n"
 "PO-Revision-Date: 2010-07-03 11:22+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -72,7 +73,7 @@ msgstr "EAN-13 +5"
 msgid "UPC (UPC-A or UPC-E)"
 msgstr "UPC (UPC-A or UPC-E)"
 
-#: ../src/bc.c:107
+#: ../src/bc.c:107 ../src/bc.c:348
 msgid "UPC-A"
 msgstr "UPC-A"
 
@@ -84,7 +85,7 @@ msgstr "UPC-A +2"
 msgid "UPC-A +5"
 msgstr "UPC-A +5"
 
-#: ../src/bc.c:116
+#: ../src/bc.c:116 ../src/bc.c:351
 msgid "UPC-E"
 msgstr "UPC-E"
 
@@ -96,7 +97,7 @@ msgstr "UPC-E +2"
 msgid "UPC-E +5"
 msgstr "UPC-E +5"
 
-#: ../src/bc.c:125
+#: ../src/bc.c:125 ../src/bc.c:288
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -104,11 +105,11 @@ msgstr "ISBN"
 msgid "ISBN +5"
 msgstr "ISBN +5"
 
-#: ../src/bc.c:131
+#: ../src/bc.c:131 ../src/bc.c:204
 msgid "Code 39"
 msgstr "Koda 39"
 
-#: ../src/bc.c:134
+#: ../src/bc.c:134 ../src/bc.c:216
 msgid "Code 128"
 msgstr "Koda 128"
 
@@ -120,11 +121,11 @@ msgstr "Koda 128C"
 msgid "Code 128B"
 msgstr "Koda 128B"
 
-#: ../src/bc.c:143
+#: ../src/bc.c:143 ../src/bc.c:285
 msgid "Interleaved 2 of 5"
 msgstr "Prepleteno 2 od 5"
 
-#: ../src/bc.c:146
+#: ../src/bc.c:146 ../src/bc.c:180
 msgid "Codabar"
 msgstr "Številka črtne kode"
 
@@ -136,24 +137,260 @@ msgstr "MSI"
 msgid "Plessey"
 msgstr "Plessey"
 
-#: ../src/bc.c:155
+#: ../src/bc.c:155 ../src/bc.c:213
 msgid "Code 93"
 msgstr "Koda 93"
 
 #: ../src/bc.c:162
+msgid "Australia Post Standard"
+msgstr ""
+
+#: ../src/bc.c:165
+msgid "Australia Post Reply Paid"
+msgstr ""
+
+#: ../src/bc.c:168
+msgid "Australia Post Route Code"
+msgstr ""
+
+#: ../src/bc.c:171
+msgid "Australia Post Redirect"
+msgstr ""
+
+#: ../src/bc.c:174
+msgid "Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:177
+msgid "Aztec Rune"
+msgstr ""
+
+#: ../src/bc.c:183
+#, fuzzy
+msgid "Code One"
+msgstr "Koda 39"
+
+#: ../src/bc.c:186
+#, fuzzy
+msgid "Code 11"
+msgstr "Koda 128"
+
+#: ../src/bc.c:189
+#, fuzzy
+msgid "Code 16K"
+msgstr "Koda 128"
+
+#: ../src/bc.c:192
+msgid "Code 2 of 5 Matrix"
+msgstr ""
+
+#: ../src/bc.c:195
+msgid "Code 2 of 5 IATA"
+msgstr ""
+
+#: ../src/bc.c:198
+msgid "Code 2 of 5 Data Logic"
+msgstr ""
+
+#: ../src/bc.c:201
+msgid "Code 32 (Italian Pharmacode)"
+msgstr ""
+
+#: ../src/bc.c:207
+#, fuzzy
+msgid "Code 39 Extended"
+msgstr "Koda 39"
+
+#: ../src/bc.c:210
+#, fuzzy
+msgid "Code 49"
+msgstr "Koda 39"
+
+#: ../src/bc.c:219
+msgid "Code 128 (Mode C supression)"
+msgstr ""
+
+#: ../src/bc.c:222
+msgid "DAFT Code"
+msgstr ""
+
+#: ../src/bc.c:225
+#, fuzzy
+msgid "Data Matrix"
+msgstr "IEC16022 (Podatkovna matrika)"
+
+#: ../src/bc.c:228
+msgid "Deutsche Post Leitcode"
+msgstr ""
+
+#: ../src/bc.c:231
+msgid "Deutsche Post Identcode"
+msgstr ""
+
+#: ../src/bc.c:234
+msgid "Dutch Post KIX Code"
+msgstr ""
+
+#: ../src/bc.c:237
+msgid "European Article Number (EAN)"
+msgstr ""
+
+#: ../src/bc.c:240
+msgid "Grid Matrix"
+msgstr ""
+
+#: ../src/bc.c:243
 msgid "GS1-128"
 msgstr "GS1-128"
 
-#: ../src/bc.c:169
+#: ../src/bc.c:246
+msgid "GS1 DataBar-14"
+msgstr ""
+
+#: ../src/bc.c:255
+msgid "GS1 DataBar-14 Stacked"
+msgstr ""
+
+#: ../src/bc.c:258
+msgid "GS1 DataBar-14 Stacked Omni."
+msgstr ""
+
+#: ../src/bc.c:261
+msgid "GS1 DataBar Extended Stacked"
+msgstr ""
+
+#: ../src/bc.c:264
+#, fuzzy
+msgid "HIBC Code 128"
+msgstr "Koda 128"
+
+#: ../src/bc.c:267
+#, fuzzy
+msgid "HIBC Code 39"
+msgstr "Koda 39"
+
+#: ../src/bc.c:270
+#, fuzzy
+msgid "HIBC Data Matrix"
+msgstr "IEC16022 (Podatkovna matrika)"
+
+#: ../src/bc.c:273
+#, fuzzy
+msgid "HIBC QR Code"
+msgstr "IEC18004 (QRKoda)"
+
+#: ../src/bc.c:276
+msgid "HIBC PDF417"
+msgstr ""
+
+#: ../src/bc.c:279
+msgid "HIBC Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:282
+msgid "HIBC Aztec Code"
+msgstr ""
+
+#: ../src/bc.c:291
+msgid "ITF-14"
+msgstr ""
+
+#: ../src/bc.c:294
+msgid "Japanese Postal"
+msgstr ""
+
+#: ../src/bc.c:297
+msgid "Korean Postal"
+msgstr ""
+
+#: ../src/bc.c:300
+msgid "LOGMARS"
+msgstr ""
+
+#: ../src/bc.c:303
+msgid "Micro PDF417"
+msgstr ""
+
+#: ../src/bc.c:306
+msgid "Micro QR Code"
+msgstr ""
+
+#: ../src/bc.c:309
+#, fuzzy
+msgid "MSI Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:312
+msgid "NVE-18"
+msgstr ""
+
+#: ../src/bc.c:315
+msgid "PDF417"
+msgstr ""
+
+#: ../src/bc.c:318
+msgid "PDF417 Truncated"
+msgstr ""
+
+#: ../src/bc.c:321
+#, fuzzy
+msgid "PLANET"
+msgstr "CEPNET"
+
+#: ../src/bc.c:324
+#, fuzzy
+msgid "PostNet"
+msgstr "Prilepi"
+
+#: ../src/bc.c:327
+#, fuzzy
+msgid "Pharmacode"
+msgstr "Črtna koda"
+
+#: ../src/bc.c:330
+#, fuzzy
+msgid "Pharmacode 2-track"
+msgstr "Podatki črtne kode"
+
+#: ../src/bc.c:333
+msgid "Pharmazentral Nummer (PZN)"
+msgstr ""
+
+#: ../src/bc.c:336
+msgid "QR Code"
+msgstr ""
+
+#: ../src/bc.c:339
+msgid "Royal Mail 4-State"
+msgstr ""
+
+#: ../src/bc.c:342
+#, fuzzy
+msgid "Telepen"
+msgstr "Izbriši"
+
+#: ../src/bc.c:345
+msgid "Telepen Numeric"
+msgstr ""
+
+#: ../src/bc.c:354
+msgid "USPS One Code"
+msgstr ""
+
+#: ../src/bc.c:357
+#, fuzzy
+msgid "UK Plessey"
+msgstr "Plessey"
+
+#: ../src/bc.c:364
 msgid "IEC16022 (DataMatrix)"
 msgstr "IEC16022 (Podatkovna matrika)"
 
-#: ../src/bc.c:176
+#: ../src/bc.c:371
 msgid "IEC18004 (QRCode)"
 msgstr "IEC18004 (QRKoda)"
 
-#: ../src/color-combo-button.c:198
-#: ../src/color-combo.c:178
+#: ../src/color-combo-button.c:198 ../src/color-combo.c:178
 msgid "Default Color"
 msgstr "Privzeta barva"
 
@@ -302,8 +539,7 @@ msgstr "60% siva"
 msgid "Black"
 msgstr "Črna"
 
-#: ../src/color-combo-menu.c:254
-#: ../src/color-combo-menu.c:373
+#: ../src/color-combo-menu.c:254 ../src/color-combo-menu.c:373
 msgid "Custom Color"
 msgstr "Barva po meri"
 
@@ -320,29 +556,23 @@ msgstr "Usodna napaka gLables!"
 msgid "New Label or Card"
 msgstr "Nova nalepka ali vizitka"
 
-#: ../src/file.c:175
-#: ../src/label.c:587
-#: ../src/label.c:631
+#: ../src/file.c:175 ../src/label.c:587 ../src/label.c:631
 msgid "Label properties"
 msgstr "Lastnosti nalepke"
 
-#: ../src/file.c:267
-#: ../src/file.c:557
+#: ../src/file.c:267 ../src/file.c:557
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: ../src/file.c:272
-#: ../src/file.c:562
+#: ../src/file.c:272 ../src/file.c:562
 msgid "gLabels documents"
 msgstr "Dokumenti gLabels"
 
-#: ../src/file.c:319
-#: ../src/file.c:620
+#: ../src/file.c:319 ../src/file.c:620
 msgid "Empty file name selection"
 msgstr "Prazen izbor imena datoteke"
 
-#: ../src/file.c:322
-#: ../src/file.c:338
+#: ../src/file.c:322 ../src/file.c:338
 msgid "Please select a file or supply a valid file name"
 msgstr "Izberite datoteko ali vpišite veljavno ime datoteke"
 
@@ -359,14 +589,12 @@ msgstr "Datoteke \"%s\" ni mogoče odpreti"
 msgid "Not a supported file format"
 msgstr "Ni podprt zapis datoteke"
 
-#: ../src/file.c:491
-#: ../src/file.c:670
+#: ../src/file.c:491 ../src/file.c:670
 #, c-format
 msgid "Could not save file \"%s\""
 msgstr "Datoteke \"%s\" ni mogoče shraniti"
 
-#: ../src/file.c:495
-#: ../src/file.c:674
+#: ../src/file.c:495 ../src/file.c:674
 msgid "Error encountered during save.  The file is still not saved."
 msgstr "Med shranjevanjem je prišlo do napake. Datoteka še vedno ni shranjena."
 
@@ -448,83 +676,78 @@ msgstr "0123456789 .:,;(*!?)"
 msgid "Sample text"
 msgstr "Vzorčno besedilo"
 
-#: ../src/glabels-batch.c:52
+#: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "nastavi odvodno ime datoteke (privzeto=\"output.pdf\")"
 
-#: ../src/glabels-batch.c:52
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:53 ../src/glabels-batch.c:67
 msgid "filename"
 msgstr "ime datoteke"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
 msgstr "število delovnih listov (privzeto=1)"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "sheets"
 msgstr "delovni listi"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
 msgstr "število kopij (privzeto=1)"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "copies"
 msgstr "kopije"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
 msgstr "prva nalepka na prvem delovnem listu (privzeto=1)"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first"
 msgstr "prva"
 
-#: ../src/glabels-batch.c:60
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:13
+#: ../src/glabels-batch.c:61 ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "natisni orise (za preizkus poravnave tiskalnika)"
 
-#: ../src/glabels-batch.c:62
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:12
+#: ../src/glabels-batch.c:63 ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "natisni obrnjeno (to je zrcalna slika)"
 
-#: ../src/glabels-batch.c:64
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:11
+#: ../src/glabels-batch.c:65 ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print crop marks"
 msgstr "natisni oznake obrezave"
 
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:67
 msgid "input file for merging"
 msgstr "vhodna datoteka za združevanje"
 
-#: ../src/glabels-batch.c:68
-#: ../src/glabels.c:64
+#: ../src/glabels-batch.c:69 ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[DATOTEKA...]"
 
-#: ../src/glabels-batch.c:98
+#: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
 msgstr "Tiskanje datotek ustvarjenih z gLables."
 
-#: ../src/glabels-batch.c:106
-#: ../src/glabels.c:89
+#: ../src/glabels-batch.c:107 ../src/glabels.c:89
 #, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Zaženite '%s --help' za ogled celotnega seznama razpoložljivih možnosti ukazne vrstice.\n"
+"Zaženite '%s --help' za ogled celotnega seznama razpoložljivih možnosti "
+"ukazne vrstice.\n"
 
-#: ../src/glabels-batch.c:149
+#: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr "združevanja dokumenta z glabels datoteko %s ni mogoče izvesti\n"
 
-#: ../src/glabels-batch.c:184
+#: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "Datoteke glables %s ni mogoče odpreti\n"
@@ -533,13 +756,11 @@ msgstr "Datoteke glables %s ni mogoče odpreti\n"
 msgid "Launch gLabels label and business card designer."
 msgstr "Zagon snovalnika nalepk in poslovnih vizitk gLabels. "
 
-#: ../src/label-barcode.c:154
-#: ../src/ui.c:319
+#: ../src/label-barcode.c:154 ../src/ui.c:319
 msgid "Create barcode object"
 msgstr "Ustvarjanje predmeta črtne kode"
 
-#: ../src/label-barcode.c:227
-#: ../src/label-barcode.c:389
+#: ../src/label-barcode.c:227 ../src/label-barcode.c:389
 msgid "Barcode data"
 msgstr "Podatki črtne kode"
 
@@ -547,11 +768,11 @@ msgstr "Podatki črtne kode"
 msgid "Barcode property"
 msgstr "Lastnost črtne kode"
 
-#: ../src/label-barcode.c:483
+#: ../src/label-barcode.c:485
 msgid "Barcode data empty"
 msgstr "Podatki črtne kode so prazni"
 
-#: ../src/label-barcode.c:487
+#: ../src/label-barcode.c:489
 msgid "Invalid barcode data"
 msgstr "Neveljavni podatki črtne kode"
 
@@ -559,24 +780,17 @@ msgstr "Neveljavni podatki črtne kode"
 msgid "Create box object"
 msgstr "Ustvari okvir"
 
-#: ../src/label-box.c:230
-#: ../src/label-ellipse.c:232
-#: ../src/stock.c:93
+#: ../src/label-box.c:230 ../src/label-ellipse.c:232 ../src/stock.c:93
 #: ../data/ui/property-bar.ui.h:3
 msgid "Fill color"
 msgstr "Barva polnila"
 
-#: ../src/label-box.c:261
-#: ../src/label-ellipse.c:261
-#: ../src/label-line.c:212
-#: ../src/stock.c:94
-#: ../data/ui/property-bar.ui.h:8
+#: ../src/label-box.c:261 ../src/label-ellipse.c:261 ../src/label-line.c:212
+#: ../src/stock.c:94 ../data/ui/property-bar.ui.h:8
 msgid "Line color"
 msgstr "Barva črte"
 
-#: ../src/label-box.c:289
-#: ../src/label-ellipse.c:290
-#: ../src/label-line.c:241
+#: ../src/label-box.c:289 ../src/label-ellipse.c:290 ../src/label-line.c:241
 #: ../data/ui/property-bar.ui.h:9
 msgid "Line width"
 msgstr "Širine vrstice"
@@ -585,23 +799,19 @@ msgstr "Širine vrstice"
 msgid "Untitled"
 msgstr "Brez naslova"
 
-#: ../src/label.c:705
-#: ../src/ui.c:422
+#: ../src/label.c:705 ../src/ui.c:422
 msgid "Merge properties"
 msgstr "Lastnosti združevanja"
 
-#: ../src/label.c:1197
-#: ../src/ui.c:215
+#: ../src/label.c:1197 ../src/ui.c:215
 msgid "Delete"
 msgstr "Izbriši"
 
-#: ../src/label.c:1230
-#: ../src/ui.c:324
+#: ../src/label.c:1230 ../src/ui.c:324
 msgid "Bring to front"
 msgstr "Prinesi v ospredje"
 
-#: ../src/label.c:1266
-#: ../src/ui.c:331
+#: ../src/label.c:1266 ../src/ui.c:331
 msgid "Send to back"
 msgstr "Pošlji nazaj"
 
@@ -609,70 +819,55 @@ msgstr "Pošlji nazaj"
 msgid "Rotate"
 msgstr "Zavrti"
 
-#: ../src/label.c:1342
-#: ../src/ui.c:338
+#: ../src/label.c:1342 ../src/ui.c:338
 msgid "Rotate left"
 msgstr "Zavrti levo"
 
-#: ../src/label.c:1375
-#: ../src/ui.c:345
+#: ../src/label.c:1375 ../src/ui.c:345
 msgid "Rotate right"
 msgstr "Zavrti desno"
 
-#: ../src/label.c:1410
-#: ../src/ui.c:352
+#: ../src/label.c:1410 ../src/ui.c:352
 msgid "Flip horizontally"
 msgstr "Zrcali vodoravno"
 
-#: ../src/label.c:1445
-#: ../src/ui.c:359
+#: ../src/label.c:1445 ../src/ui.c:359
 msgid "Flip vertically"
 msgstr "Zrcali navpično"
 
-#: ../src/label.c:1485
-#: ../src/ui.c:366
+#: ../src/label.c:1485 ../src/ui.c:366
 msgid "Align left"
 msgstr "Poravnava levo"
 
-#: ../src/label.c:1542
-#: ../src/ui.c:373
+#: ../src/label.c:1542 ../src/ui.c:373
 msgid "Align right"
 msgstr "Poravnava desno"
 
-#: ../src/label.c:1603
-#: ../src/ui.c:380
+#: ../src/label.c:1603 ../src/ui.c:380
 msgid "Align horizontal center"
 msgstr "Poravnava vodoravne sredine"
 
-#: ../src/label.c:1679
-#: ../src/ui.c:387
+#: ../src/label.c:1679 ../src/ui.c:387
 msgid "Align tops"
 msgstr "Poravnava vrhov"
 
-#: ../src/label.c:1736
-#: ../src/ui.c:394
+#: ../src/label.c:1736 ../src/ui.c:394
 msgid "Align bottoms"
 msgstr "Poravnava dnov"
 
-#: ../src/label.c:1797
-#: ../src/ui.c:401
+#: ../src/label.c:1797 ../src/ui.c:401
 msgid "Align vertical center"
 msgstr "Poravnava navpične sredine"
 
-#: ../src/label.c:1875
-#: ../src/ui.c:408
+#: ../src/label.c:1875 ../src/ui.c:408
 msgid "Center horizontally"
 msgstr "Sredini vodoravno"
 
-#: ../src/label.c:1922
-#: ../src/ui.c:415
+#: ../src/label.c:1922 ../src/ui.c:415
 msgid "Center vertically"
 msgstr "Sredini navpično"
 
-#: ../src/label.c:2610
-#: ../src/label.c:2652
-#: ../src/label.c:2678
-#: ../src/ui.c:208
+#: ../src/label.c:2610 ../src/label.c:2652 ../src/label.c:2678 ../src/ui.c:208
 msgid "Paste"
 msgstr "Prilepi"
 
@@ -680,23 +875,19 @@ msgstr "Prilepi"
 msgid "Create ellipse object"
 msgstr "Ustvarjanje elipso"
 
-#: ../src/label-image.c:199
-#: ../src/ui.c:312
+#: ../src/label-image.c:200 ../src/ui.c:312
 msgid "Create image object"
 msgstr "Ustvarjanje slikovnega predmeta"
 
-#: ../src/label-image.c:332
-#: ../src/label-image.c:473
+#: ../src/label-image.c:333 ../src/label-image.c:474
 msgid "Set image"
 msgstr "Nastavi sliko"
 
-#: ../src/label-line.c:147
-#: ../src/ui.c:298
+#: ../src/label-line.c:147 ../src/ui.c:298
 msgid "Create line object"
 msgstr "Ustvarjanje črte"
 
-#: ../src/label-object.c:383
-#: ../src/label-object.c:416
+#: ../src/label-object.c:383 ../src/label-object.c:416
 msgid "Move"
 msgstr "Premakni"
 
@@ -720,8 +911,7 @@ msgstr "Barva sence"
 msgid "Shadow opacity"
 msgstr "Prekrivnost sence"
 
-#: ../src/label-text.c:279
-#: ../src/ui.c:284
+#: ../src/label-text.c:279 ../src/ui.c:284
 msgid "Create text object"
 msgstr "Ustvarjanje besedilnega predmeta"
 
@@ -729,13 +919,11 @@ msgstr "Ustvarjanje besedilnega predmeta"
 msgid "Typing"
 msgstr "Tipkanje"
 
-#: ../src/label-text.c:584
-#: ../data/ui/property-bar.ui.h:4
+#: ../src/label-text.c:584 ../data/ui/property-bar.ui.h:4
 msgid "Font family"
 msgstr "Družina pisav"
 
-#: ../src/label-text.c:622
-#: ../data/ui/property-bar.ui.h:5
+#: ../src/label-text.c:622 ../data/ui/property-bar.ui.h:5
 msgid "Font size"
 msgstr "Velikost pisave"
 
@@ -743,8 +931,7 @@ msgstr "Velikost pisave"
 msgid "Font weight"
 msgstr "Teža pisave"
 
-#: ../src/label-text.c:688
-#: ../data/ui/property-bar.ui.h:6
+#: ../src/label-text.c:688 ../data/ui/property-bar.ui.h:6
 msgid "Italic"
 msgstr "Ležeče"
 
@@ -756,8 +943,7 @@ msgstr "Poravnaj besedilo"
 msgid "Line spacing"
 msgstr "Razmik med vrsticami"
 
-#: ../src/label-text.c:787
-#: ../data/ui/property-bar.ui.h:11
+#: ../src/label-text.c:787 ../data/ui/property-bar.ui.h:11
 msgid "Text color"
 msgstr "Barva besedila"
 
@@ -765,22 +951,18 @@ msgstr "Barva besedila"
 msgid "Auto shrink"
 msgstr "Samodejno skrči"
 
-#: ../src/media-select.c:349
-#: ../src/media-select.c:353
-#: ../src/media-select.c:502
-#: ../src/media-select.c:701
+#: ../src/media-select.c:349 ../src/media-select.c:353
+#: ../src/media-select.c:502 ../src/media-select.c:701
 msgctxt "Brand"
 msgid "Any"
 msgstr "Vse"
 
-#: ../src/media-select.c:358
-#: ../src/media-select.c:871
+#: ../src/media-select.c:358 ../src/media-select.c:871
 msgctxt "Page size"
 msgid "Any"
 msgstr "Vse"
 
-#: ../src/media-select.c:367
-#: ../src/media-select.c:370
+#: ../src/media-select.c:367 ../src/media-select.c:370
 #: ../src/media-select.c:880
 msgctxt "Category"
 msgid "Any"
@@ -809,15 +991,16 @@ msgid "No custom templates found."
 msgstr "Predlog po meri ni mogoče najti."
 
 #: ../src/media-select.c:1159
-msgid "You may create new templates or try searching for pre-defined templates in the \"Search all\" tab."
-msgstr "Ustvarite lahko nove predloge ali poskusite z iskanje pred-določenih predlog v zavihku \"Išči vse\"."
+msgid ""
+"You may create new templates or try searching for pre-defined templates in "
+"the \"Search all\" tab."
+msgstr ""
+"Ustvarite lahko nove predloge ali poskusite z iskanje pred-določenih predlog "
+"v zavihku \"Išči vse\"."
 
 #. Translators: "None" here means that no document-merge source or
 #. * method has been selected.
-#: ../src/merge.c:171
-#: ../src/merge.c:212
-#: ../src/merge.c:376
-#: ../src/merge.c:379
+#: ../src/merge.c:171 ../src/merge.c:212 ../src/merge.c:376 ../src/merge.c:379
 msgid "None"
 msgstr "Brez"
 
@@ -825,8 +1008,7 @@ msgstr "Brez"
 msgid "Couldn't construct query"
 msgstr "Poizvedbe ni mogoče izgraditi"
 
-#: ../src/merge-evolution.c:322
-#: ../src/merge-evolution.c:333
+#: ../src/merge-evolution.c:322 ../src/merge-evolution.c:333
 msgid "Couldn't open addressbook."
 msgstr "Imenika ni mogoče odpreti."
 
@@ -852,7 +1034,8 @@ msgstr "Besedilo: s tabulatorjem ločene vrednosti (TSV)"
 
 #: ../src/merge-init.c:79
 msgid "Text: Tab Separated Values (TSV) with keys on line 1"
-msgstr "Besedilo: s tabulatorjem ločene vrednosti (TSV) s ključi v prvi vrstici"
+msgstr ""
+"Besedilo: s tabulatorjem ločene vrednosti (TSV) s ključi v prvi vrstici"
 
 #: ../src/merge-init.c:87
 msgid "Text: Colon separated values"
@@ -882,13 +1065,11 @@ msgstr "Vizitke VCard"
 msgid "Merge Properties"
 msgstr "Lastnosti združevanja"
 
-#: ../src/merge-properties-dialog.c:308
-#: ../src/merge-properties-dialog.c:424
+#: ../src/merge-properties-dialog.c:308 ../src/merge-properties-dialog.c:424
 msgid "Select merge-database source"
 msgstr "Izbor vira podatkovne zbirke za združevanje"
 
-#: ../src/merge-properties-dialog.c:319
-#: ../src/merge-properties-dialog.c:450
+#: ../src/merge-properties-dialog.c:319 ../src/merge-properties-dialog.c:450
 msgid "N/A"
 msgstr "N/A"
 
@@ -900,8 +1081,7 @@ msgstr "Izberi"
 msgid "Record/Field"
 msgstr "Posnemi/polje"
 
-#: ../src/merge-properties-dialog.c:360
-#: ../data/ui/object-editor.ui.h:9
+#: ../src/merge-properties-dialog.c:360 ../data/ui/object-editor.ui.h:8
 msgid "Data"
 msgstr "Podatki"
 
@@ -930,16 +1110,13 @@ msgstr "Izberite usmerite"
 msgid "Review"
 msgstr "Pregled"
 
-#: ../src/object-editor-bc-page.c:93
-#: ../src/object-editor-shadow-page.c:93
-#: ../src/object-editor-text-page.c:97
-#: ../src/prefs-dialog.c:339
+#: ../src/object-editor-bc-page.c:93 ../src/object-editor-shadow-page.c:93
+#: ../src/object-editor-text-page.c:97 ../src/prefs-dialog.c:339
 #: ../src/ui-property-bar.c:280
 msgid "Default"
 msgstr "Privzeto"
 
-#: ../src/object-editor.c:159
-#: ../src/object-editor.c:460
+#: ../src/object-editor.c:159 ../src/object-editor.c:460
 msgid "Object properties"
 msgstr "Lastnosti predmeta"
 
@@ -971,8 +1148,7 @@ msgstr "Lastnosti črtne kode"
 msgid "Insert merge field"
 msgstr "Vstavi polje združevanja"
 
-#: ../src/object-editor-fill-page.c:79
-#: ../src/prefs-dialog.c:345
+#: ../src/object-editor-fill-page.c:79 ../src/prefs-dialog.c:345
 #: ../src/ui-property-bar.c:292
 msgid "No Fill"
 msgstr "Brez polnila"
@@ -990,21 +1166,18 @@ msgstr "Vse slike"
 msgid "%s (*.%s)"
 msgstr "%s (*.%s)"
 
-#: ../src/object-editor-line-page.c:79
-#: ../src/prefs-dialog.c:342
+#: ../src/object-editor-line-page.c:79 ../src/prefs-dialog.c:342
 #: ../src/ui-property-bar.c:304
 msgid "No Line"
 msgstr "Brez črte"
 
-#: ../src/prefs-dialog.c:172
-#: ../data/ui/prefs-dialog.ui.h:21
+#: ../src/prefs-dialog.c:172 ../data/ui/prefs-dialog.ui.h:21
 msgid "gLabels Preferences"
 msgstr "Nastavitve programa"
 
 #. ===================================================================
-#: ../src/print-op.c:205
-#: ../src/print-op-dialog.c:217
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#: ../src/print-op.c:205 ../src/print-op-dialog.c:217
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 #: ../templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Nalepke"
@@ -1093,18 +1266,15 @@ msgstr "Dna"
 msgid "Centers"
 msgstr "Središča"
 
-#: ../src/stock.c:91
-#: ../src/stock.c:92
+#: ../src/stock.c:91 ../src/stock.c:92
 msgid "Label Ce_nter"
 msgstr "Sre_dišče nalepke"
 
-#: ../src/stock.c:95
-#: ../src/stock.c:97
+#: ../src/stock.c:95 ../src/stock.c:97
 msgid "Linked"
 msgstr "Povezano"
 
-#: ../src/stock.c:96
-#: ../src/stock.c:98
+#: ../src/stock.c:96 ../src/stock.c:98
 msgid "Not Linked"
 msgstr "Nepovezano"
 
@@ -1156,9 +1326,12 @@ msgstr "Snovanje je končano"
 msgid "Edit gLabels Template"
 msgstr "Uredi predlogo gLabels"
 
-#: ../src/template-designer.c:1422
-msgid "<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"
-msgstr "<span foreground='red' weight='bold'>Znamka in številka dela se skladata z obstoječo predlogo!</span>"
+#: ../src/template-designer.c:1423
+#, fuzzy
+msgid "Brand and part# match an existing template!"
+msgstr ""
+"<span foreground='red' weight='bold'>Znamka in številka dela se skladata z "
+"obstoječo predlogo!</span>"
 
 #. Menu entries.
 #: ../src/ui.c:93
@@ -1218,8 +1391,7 @@ msgid "_Help"
 msgstr "Pomo_č"
 
 #. Popup entries.
-#: ../src/ui.c:109
-#: ../src/ui.c:110
+#: ../src/ui.c:109 ../src/ui.c:110
 msgid "Context Menu"
 msgstr "Vsebinski meni"
 
@@ -1295,15 +1467,11 @@ msgstr "_Končaj"
 msgid "Quit the program"
 msgstr "Končanje programa"
 
-#: ../src/ui.c:180
-#: ../src/ui.c:182
-#: ../src/ui.c:967
+#: ../src/ui.c:180 ../src/ui.c:182 ../src/ui.c:967
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: ../src/ui.c:187
-#: ../src/ui.c:189
-#: ../src/ui.c:974
+#: ../src/ui.c:187 ../src/ui.c:189 ../src/ui.c:974
 msgid "Redo"
 msgstr "Uveljavi"
 
@@ -1395,9 +1563,8 @@ msgstr "Način izbiranja"
 msgid "Select, move and modify objects"
 msgstr "Izbor, premikanje in spreminjanje predmetov"
 
-#: ../src/ui.c:282
-#: ../src/view-text.c:102
-#: ../data/ui/object-editor.ui.h:29
+#: ../src/ui.c:282 ../src/view-text.c:102 ../data/ui/object-editor.ui.h:28
+#: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Besedilo"
 
@@ -1409,8 +1576,8 @@ msgstr "Okvir"
 msgid "Create box/rectangle object"
 msgstr "Ustvarjanje okvirja/pravokotnika"
 
-#: ../src/ui.c:296
-#: ../data/ui/object-editor.ui.h:18
+#: ../src/ui.c:296 ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Črta"
 
@@ -1422,8 +1589,7 @@ msgstr "Elipsa"
 msgid "Create ellipse/circle object"
 msgstr "Ustvarjanje elipse/kroga"
 
-#: ../src/ui.c:310
-#: ../data/ui/object-editor.ui.h:15
+#: ../src/ui.c:310 ../data/ui/object-editor.ui.h:14
 msgid "Image"
 msgstr "Slika"
 
@@ -1581,7 +1747,8 @@ msgid ""
 msgstr ""
 "gLabels je prosto programje; lahko ga redistribuirate in/ali\n"
 "spreminjate pod pogoji GNU General Public Licence kot je objavljena\n"
-"s strani Free Software Foundation; ali različico 2 Licence ali (na vašo željo)\n"
+"s strani Free Software Foundation; ali različico 2 Licence ali (na vašo "
+"željo)\n"
 " katerakoli kasnejša različica.\n"
 "\n"
 "Ta program je distribuiran v upanju da bo uporaben,\n"
@@ -1605,20 +1772,17 @@ msgstr "(brez) - gLabels"
 msgid "(modified)"
 msgstr " (spremenjeno)"
 
-#: ../src/xml-label-04.c:75
-#: ../src/xml-label.c:333
+#: ../src/xml-label-04.c:75 ../src/xml-label.c:333
 #, c-format
 msgid "Bad root node = \"%s\""
 msgstr "Slabo korensko vozlišče = \"%s\""
 
-#: ../src/xml-label-04.c:123
-#: ../src/xml-label.c:416
+#: ../src/xml-label-04.c:123 ../src/xml-label.c:416
 #, c-format
 msgid "bad node =  \"%s\""
 msgstr "slabo vozlišče = \"%s\""
 
-#: ../src/xml-label.c:199
-#: ../src/xml-label.c:237
+#: ../src/xml-label.c:199 ../src/xml-label.c:237
 msgid "xmlParseFile error"
 msgstr "napaka xml datoteke razčlenjevanja"
 
@@ -1654,12 +1818,11 @@ msgstr "slabo vozlišče v podatkovnem vozlišču  = \"%s\""
 msgid "Unknown embedded file format: \"%s\""
 msgstr "Neznana vključena vrsta datoteke:  \"%s\""
 
-#: ../src/xml-label.c:1143
-#: ../libglabels/xml-template.c:802
+#: ../src/xml-label.c:1150 ../libglabels/xml-template.c:802
 msgid "Utf8 conversion error."
 msgstr "Napaka pretvarjanja Utf8."
 
-#: ../src/xml-label.c:1150
+#: ../src/xml-label.c:1157
 msgid "Problem saving xml file."
 msgstr "Težava med shranjevanjem xml datoteke."
 
@@ -1677,16 +1840,26 @@ msgid "User defined"
 msgstr "Uporabniško določeno"
 
 #: ../libglabels/db.c:665
-msgid "Unable to locate paper size definitions.  Libglabels may not be installed correctly!"
-msgstr "Definicij velikosti papirja ni mogoče najti. Libglabels morda ni pravilno nameščen!"
+msgid ""
+"Unable to locate paper size definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Definicij velikosti papirja ni mogoče najti. Libglabels morda ni pravilno "
+"nameščen!"
 
 #: ../libglabels/db.c:1057
-msgid "Unable to locate category definitions.  Libglabels may not be installed correctly!"
-msgstr "Definicij kategorije ni mogoče najti. Libglabels morda ni pravilno nameščen!"
+msgid ""
+"Unable to locate category definitions.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Definicij kategorije ni mogoče najti. Libglabels morda ni pravilno nameščen!"
 
 #: ../libglabels/db.c:2097
-msgid "Unable to locate any template files.  Libglabels may not be installed correctly!"
-msgstr "Datotek predlog ni mogoče najti. Libglabels morda ni pravilno nameščen!"
+msgid ""
+"Unable to locate any template files.  Libglabels may not be installed "
+"correctly!"
+msgstr ""
+"Datotek predlog ni mogoče najti. Libglabels morda ni pravilno nameščen!"
 
 #: ../libglabels/db.c:2164
 #, c-format
@@ -1698,15 +1871,24 @@ msgstr "%s nalepka cele strani"
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Enakovredni del (\"%s\") za \"%s\", ni predhodno določen."
 
-#: ../libglabels/template.c:722
-#: ../libglabels/template.c:726
-msgid "per sheet"
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/template.c:727
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr ""
+
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/template.c:732
+#, fuzzy, c-format
+msgid "%d per sheet"
 msgstr "na list"
 
-#: ../libglabels/template.c:796
-#: ../libglabels/template.c:802
-#: ../libglabels/template.c:812
-#: ../libglabels/template.c:818
+#: ../libglabels/template.c:802 ../libglabels/template.c:808
+#: ../libglabels/template.c:818 ../libglabels/template.c:824
 msgid "diameter"
 msgstr "premer"
 
@@ -1714,15 +1896,13 @@ msgstr "premer"
 #. the CSS2 Specification (Section 4.3.2)
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
-#: ../libglabels/units.c:65
-#: ../data/ui/object-editor.ui.h:40
+#: ../libglabels/units.c:65 ../data/ui/object-editor.ui.h:39
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "točke"
 
 #. [LGL_UNITS_INCH]
-#: ../libglabels/units.c:66
-#: ../data/ui/object-editor.ui.h:39
+#: ../libglabels/units.c:66 ../data/ui/object-editor.ui.h:38
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "palcev"
@@ -1763,8 +1943,11 @@ msgid "Forward references not supported."
 msgstr "Posredovanje sklicev ni podprto."
 
 #: ../libglabels/xml-template.c:747
-msgid "Missing required \"brand\" or \"part\" attribute, trying deprecated name."
-msgstr "Zahtevan atribut \"znamka\" ali \"del\" manjka; poskušanje s skrajšanim imenom. "
+msgid ""
+"Missing required \"brand\" or \"part\" attribute, trying deprecated name."
+msgstr ""
+"Zahtevan atribut \"znamka\" ali \"del\" manjka; poskušanje s skrajšanim "
+"imenom. "
 
 #: ../libglabels/xml-template.c:757
 msgid "Name attribute also missing."
@@ -1779,24 +1962,26 @@ msgstr "Atributi imena manjkajo."
 #. * End:                   -- emacs
 #.
 #: ../data/ui/merge-properties-dialog.ui.h:1
-msgid "<b>Record selection/preview</b>"
-msgstr "<b>Posnemi izbiro/predogled</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:2
-msgid "<b>Source</b>"
-msgstr "<b>Vir</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:3
 msgid "Format:"
 msgstr "Zapis:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:4
+#: ../data/ui/merge-properties-dialog.ui.h:2
 msgid "Location:"
 msgstr "Mesto:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:5
+#: ../data/ui/merge-properties-dialog.ui.h:3
+#, fuzzy
+msgid "Record selection/preview"
+msgstr "<b>Posnemi izbiro/predogled</b>"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Izberi vse"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+#, fuzzy
+msgid "Source"
+msgstr "<b>Vir</b>"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
@@ -1814,8 +1999,7 @@ msgstr "Kategorija:"
 msgid "Custom"
 msgstr "Po meri"
 
-#: ../data/ui/media-select.ui.h:4
-#: ../data/ui/new-label-dialog.ui.h:6
+#: ../data/ui/media-select.ui.h:4 ../data/ui/new-label-dialog.ui.h:6
 #: ../data/ui/template-designer.ui.h:42
 msgid "Page size:"
 msgstr "Velikost strani:"
@@ -1829,11 +2013,14 @@ msgid "Search all"
 msgstr "Išči vse"
 
 #: ../data/ui/new-label-dialog.ui.h:1
-msgid "Choose label or card product from hundreds of predefined templates or define your own."
-msgstr "Izberite nalepko ali kartico med stotinami pred-določenimi predlogami ali določite svojo."
+msgid ""
+"Choose label or card product from hundreds of predefined templates or define "
+"your own."
+msgstr ""
+"Izberite nalepko ali kartico med stotinami pred-določenimi predlogami ali "
+"določite svojo."
 
-#: ../data/ui/new-label-dialog.ui.h:2
-#: ../data/ui/template-designer.ui.h:27
+#: ../data/ui/new-label-dialog.ui.h:2 ../data/ui/template-designer.ui.h:27
 msgid "Description:"
 msgstr "Opis:"
 
@@ -1849,8 +2036,7 @@ msgstr "Razpored:"
 msgid "Normal"
 msgstr "Običajna"
 
-#: ../data/ui/new-label-dialog.ui.h:7
-#: ../data/ui/template-designer.ui.h:43
+#: ../data/ui/new-label-dialog.ui.h:7 ../data/ui/template-designer.ui.h:43
 msgid "Part #:"
 msgstr "Del št:"
 
@@ -1879,137 +2065,128 @@ msgstr "Ponudnik:"
 msgid "%"
 msgstr "%"
 
-#: ../data/ui/object-editor.ui.h:3
-msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">lastnosti predmeta Xxx</span>"
-
-#: ../data/ui/object-editor.ui.h:4
-#: ../data/ui/prefs-dialog.ui.h:7
+#: ../data/ui/object-editor.ui.h:3 ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Poravnava:"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:4
 msgid "Allow merge to automatically shrink text"
 msgstr "Dovoli samodejno skrčenje besedila ob združevanju"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:5
 msgid "Angle:"
 msgstr "Kot:"
 
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:6
 msgid "Checksum"
 msgstr "Nadzorna vsota"
 
-#: ../data/ui/object-editor.ui.h:8
-#: ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:7 ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Barva:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:9
 msgid "Enable shadow"
 msgstr "Omogoči senco"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:10
 msgid "Family:"
 msgstr "Družina:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:11
 msgid "File:"
 msgstr "Datoteka:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:12 ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Polnilo"
 
-#: ../data/ui/object-editor.ui.h:14
-#: ../data/ui/template-designer.ui.h:30
+#: ../data/ui/object-editor.ui.h:13 ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Višina:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:15
 msgid "Key:"
 msgstr "Ključ:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:16
 msgid "Length:"
 msgstr "Dolžina:"
 
-#: ../data/ui/object-editor.ui.h:19
-#: ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:18 ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Razmik vrstic:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:19
 msgid "Literal:"
 msgstr "Dosledno:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:20
 msgid "Opacity:"
 msgstr "Prosojnost:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:21
 msgid "Position"
 msgstr "Lega"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:22
 msgid "Reset image size"
 msgstr "Ponastavi velikost slike"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:23
 msgid "Shadow"
 msgstr "Senca"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:24
 msgid "Size"
 msgstr "Velikost"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:25
 msgid "Size:"
 msgstr "Velikost:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:26
 msgid "Style"
 msgstr "Slog"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:27
 msgid "Style:"
 msgstr "Slog:"
 
-#: ../data/ui/object-editor.ui.h:30
-#: ../data/ui/prefs-dialog.ui.h:20
+#: ../data/ui/object-editor.ui.h:29 ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Širina:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:30
 msgid "X Offset:"
 msgstr "Odmik X osi:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:31
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:32
 msgid "Y Offset:"
 msgstr "Odmik Y osi:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:33
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:34
 msgid "degrees"
 msgstr "stopinje"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:35
 msgid "dialog1"
 msgstr "pogovorno okno 1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:36
 msgid "digits:"
 msgstr "številke:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:37
 msgid "format:"
 msgstr "oblika:"
 
@@ -2017,66 +2194,55 @@ msgstr "oblika:"
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/prefs-dialog.ui.h:2
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">Privzeta velikost strani</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:3
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">Polnilo</span>"
-
 #: ../data/ui/prefs-dialog.ui.h:4
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">Črta</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:5
-msgid "<span weight=\"bold\">Text</span>"
-msgstr "<span weight=\"bold\">Besedilo</span>"
+#, fuzzy
+msgid "Default page size"
+msgstr "Ponastavi velikost slike"
 
 #: ../data/ui/prefs-dialog.ui.h:6
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">Enote</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Font:"
 msgstr "Pisava:"
 
-#: ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/prefs-dialog.ui.h:7
 msgid "ISO A4"
 msgstr "ISO A4"
 
-#: ../data/ui/prefs-dialog.ui.h:11
+#: ../data/ui/prefs-dialog.ui.h:8
 msgid "Inches"
 msgstr "Palci"
 
-#: ../data/ui/prefs-dialog.ui.h:13
+#: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
 msgstr "Jezikovna oznaka"
 
-#: ../data/ui/prefs-dialog.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:12
 msgid "Millimeters"
 msgstr "Milimetri"
 
-#: ../data/ui/prefs-dialog.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:13
 msgid "Object defaults"
 msgstr "Privzete vrednosti predmeta"
 
-#: ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:14
 msgid "Points"
 msgstr "Točke"
 
-#: ../data/ui/prefs-dialog.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
 msgstr "Izbor privzeti lastnosti za nove predmete."
 
-#: ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
 msgstr "Izberite z jezikovno oznako določeno obnašanje."
 
-#: ../data/ui/prefs-dialog.ui.h:19
-#: ../templates/paper-sizes.xml.h:35
+#: ../data/ui/prefs-dialog.ui.h:18 ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "Ameriško pismo"
+
+#: ../data/ui/prefs-dialog.ui.h:19
+#, fuzzy
+msgid "Units"
+msgstr "Brez naslova"
 
 #: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
@@ -2183,7 +2349,8 @@ msgstr ""
 "Čestitamo!\n"
 "\n"
 "Dokončali ste snovanje predloge gLables.\n"
-"V primeru, da želite sprejeti in shraniti vaše oblikovanje, kliknite \"Uporabi.\"\n"
+"V primeru, da želite sprejeti in shraniti vaše oblikovanje, kliknite "
+"\"Uporabi.\"\n"
 "\n"
 "V nasprotnem primeru lahko kliknete \"Prekliči\" in program končate\n"
 "ali pa \"Nazaj\" za nadaljevanje oblikovanja."
@@ -2210,7 +2377,8 @@ msgid ""
 msgstr ""
 "Koliko razporeditev bo vsebovala vaša predloga? \n"
 "\n"
-"Razporeditev je niz nalepk ali vizitk, ki je lahko urejen v preprosto mrežo.\n"
+"Razporeditev je niz nalepk ali vizitk, ki je lahko urejen v preprosto "
+"mrežo.\n"
 "Večina predlog potrebuje le eno razporeditev, kot na prvem primeru.\n"
 "Drugi primer vsebuje dve razporeditvi. "
 
@@ -2235,7 +2403,9 @@ msgid "Number of layouts:"
 msgstr "Število razporeditev:"
 
 #: ../data/ui/template-designer.ui.h:44
-msgid "Please enter the following identifying information about the template stationery."
+msgid ""
+"Please enter the following identifying information about the template "
+"stationery."
 msgstr "Vnesite podrobnosti določitve predloge pisalnih pripomočkov."
 
 #: ../data/ui/template-designer.ui.h:45
@@ -2243,12 +2413,18 @@ msgid "Please enter the following layout information."
 msgstr "Vnesite sledeče podrobnosti razporeditve."
 
 #: ../data/ui/template-designer.ui.h:46
-msgid "Please enter the following size parameters of a single label in your template."
+msgid ""
+"Please enter the following size parameters of a single label in your "
+"template."
 msgstr "Vnesite sledeče parametre velikosti posamezne nalepke v vaši predlogi."
 
 #: ../data/ui/template-designer.ui.h:47
-msgid "Please enter the following size parameters of a single label or card in your template."
-msgstr "Vnesite sledeče parametre velikosti posamezne nalepke ali poslovne vizitke v vaši predlogi."
+msgid ""
+"Please enter the following size parameters of a single label or card in your "
+"template."
+msgstr ""
+"Vnesite sledeče parametre velikosti posamezne nalepke ali poslovne vizitke v "
+"vaši predlogi."
 
 #: ../data/ui/template-designer.ui.h:48
 msgid "Please select the basic shape of the labels or cards."
@@ -2301,24 +2477,27 @@ msgstr ""
 "To pogovorno okno vam bo pomagalo pri ustvarjanju predloge gLables po meri."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "<b>Copies</b>"
-msgstr "<b>Kopije</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-msgid "<b>Merge Control</b>"
-msgstr "<b>Nadzor združevanja</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "<b>Options</b>"
-msgstr "<b>Možnosti</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "Collate"
 msgstr "Zberi"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+#, fuzzy
+msgid "Copies"
+msgstr "Kopije:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
 msgstr "Kopije:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#, fuzzy
+msgid "Merge Control"
+msgstr "<b>Nadzor združevanja</b>"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#, fuzzy
+msgid "Options"
+msgstr "<b>Možnosti</b>"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
@@ -2482,8 +2661,7 @@ msgid "Any label"
 msgstr "Katerakoli nalepka"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:3
-#: ../templates/pearl-iso-templates.xml.h:8
+#: ../templates/categories.xml.h:3 ../templates/pearl-iso-templates.xml.h:8
 msgid "Business cards"
 msgstr "Poslovne nalepke"
 
@@ -2500,8 +2678,7 @@ msgid "Rectangular labels"
 msgstr "Pravokotne nalepke"
 
 #. ===================================================================
-#: ../templates/categories.xml.h:7
-#: ../templates/pearl-iso-templates.xml.h:46
+#: ../templates/categories.xml.h:7 ../templates/pearl-iso-templates.xml.h:46
 msgid "Round labels"
 msgstr "Okrogle nalepke"
 
@@ -3090,136 +3267,221 @@ msgstr "Pravokotne kopirne nalepke"
 msgid "Video Labels (back)"
 msgstr "Video nalepke (zadnja stran)"
 
+#~ msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">lastnosti predmeta Xxx</span>"
+
+#~ msgid "<span weight=\"bold\">Default page size</span>"
+#~ msgstr "<span weight=\"bold\">Privzeta velikost strani</span>"
+
+#~ msgid "<span weight=\"bold\">Fill</span>"
+#~ msgstr "<span weight=\"bold\">Polnilo</span>"
+
+#~ msgid "<span weight=\"bold\">Line</span>"
+#~ msgstr "<span weight=\"bold\">Črta</span>"
+
+#~ msgid "<span weight=\"bold\">Text</span>"
+#~ msgstr "<span weight=\"bold\">Besedilo</span>"
+
+#~ msgid "<span weight=\"bold\">Units</span>"
+#~ msgstr "<span weight=\"bold\">Enote</span>"
+
+#~ msgid "<b>Copies</b>"
+#~ msgstr "<b>Kopije</b>"
+
 #~ msgid "- gLabels label designer"
 #~ msgstr "- snovalnik nalepk gLabels"
+
 #~ msgid "- batch process gLabels label files"
 #~ msgstr "- paketno obdelovanje datotek gLabels nalepk"
+
 #~ msgid "Show tooltips"
 #~ msgstr "Pokaži namige"
+
 #~ msgid "Show tooltips for property toolbar"
 #~ msgstr "Pokaži namige za orodno vrstico lastnosti"
+
 #~ msgid "Show tooltips for main toolbar"
 #~ msgstr "Pokaži namige za glavno orodno vrstico"
+
 #~ msgid "Show tooltips for drawing toolbar"
 #~ msgstr "Pokaži namige za orodno vrstico risanja"
+
 #~ msgid "xmlParseDoc error"
 #~ msgstr "napaka xmlParseDoc"
+
 #~ msgid "Text file with comma delimeters (CSV)"
 #~ msgstr "Besedila datoteka ločena z vejicami (CSV)"
+
 #~ msgid "Text file with colon delimeters"
 #~ msgstr "Besedila datoteka ločena s stolpci"
+
 #~ msgid "Text file with tab delimeters"
 #~ msgstr "Besedila datoteka ločena s tabulatorji"
+
 #~ msgid "Data from a file containing VCards"
 #~ msgstr "Podatki iz datoteke, ki vsebuje VCards"
+
 #~ msgid "%s x %s %s"
 #~ msgstr "%s x %s %s"
+
 #~ msgid "%.5g x %.5g %s"
 #~ msgstr "%.5g x %.5g %s"
+
 #~ msgid "%.5g %s diameter"
 #~ msgstr "%.5g %s premer"
+
 #~ msgid "Choose Custom Color"
 #~ msgstr "Izberite barvo po meri"
+
 #~ msgid "light brown"
 #~ msgstr "svetlo rjava"
+
 #~ msgid "brown gold"
 #~ msgstr "rjavo-zlata"
+
 #~ msgid "dark green #2"
 #~ msgstr "temno zelena 2"
+
 #~ msgid "navy"
 #~ msgstr "mornarska"
+
 #~ msgid "dark blue"
 #~ msgstr "temno modra"
+
 #~ msgid "purple #2"
 #~ msgstr "vijolična 2"
+
 #~ msgid "very dark gray"
 #~ msgstr "zelo temno siva"
+
 #~ msgid "red-orange"
 #~ msgstr "rdeče-oranžna"
+
 #~ msgid "dull blue"
 #~ msgstr "mračno modra"
+
 #~ msgid "dull purple"
 #~ msgstr "mračno vijolična"
+
 #~ msgid "dark grey"
 #~ msgstr "temno siva"
+
 #~ msgid "lime"
 #~ msgstr "rumeno-zelena"
+
 #~ msgid "dull blue #2"
 #~ msgstr "mračno modra 2"
+
 #~ msgid "sky blue #2"
 #~ msgstr "nebeško modra 2"
+
 #~ msgid "gray"
 #~ msgstr "siva"
+
 #~ msgid "magenta"
 #~ msgstr "škrlatna"
+
 #~ msgid "bright orange"
 #~ msgstr "bistro oranžna"
+
 #~ msgid "bright blue"
 #~ msgstr "bistro modra"
+
 #~ msgid "red purple"
 #~ msgstr "rdeče vijolična"
+
 #~ msgid "light grey"
 #~ msgstr "svetlo siva"
+
 #~ msgid "light orange"
 #~ msgstr "svetlo oranžna"
+
 #~ msgid "light blue"
 #~ msgstr "svetlo modra"
+
 #~ msgid "light purple"
 #~ msgstr "svetlo vijolična"
+
 #~ msgid "purplish blue"
 #~ msgstr "vijolično modra"
+
 #~ msgid "dark purple"
 #~ msgstr "temo vijolična"
+
 #~ msgid "<b>Label orientation</b>"
 #~ msgstr "<b>Usmeritev nalepke</b>"
+
 #~ msgid "<b>Media type</b>"
 #~ msgstr "<b>Vrsta medija</b>"
+
 #~ msgid "00000000000 00000"
 #~ msgstr "00000000000 00000"
+
 #~ msgid "Select A File"
 #~ msgstr "Izbor datoteke"
+
 #~ msgid "<b>Print control (Simple)</b>"
 #~ msgstr "<b>Nadzor tiskanja (preprost)</b>"
+
 #~ msgid "Text Color"
 #~ msgstr "Barva besedila"
+
 #~ msgid "cd_size_page"
 #~ msgstr "stran_velikosti_cd"
+
 #~ msgid "finish_page"
 #~ msgstr "končna_stran"
+
 #~ msgid "layout_page"
 #~ msgstr "razporeditvena_stran"
+
 #~ msgid "nlayouts_page"
 #~ msgstr "št_razporeditev_stran"
+
 #~ msgid "pg_size_page"
 #~ msgstr "stran_velikosti_strani"
+
 #~ msgid "rect_size_page"
 #~ msgstr "pravokotna_stran"
+
 #~ msgid "round_size_page"
 #~ msgstr "okrogla_stran"
+
 #~ msgid "shape_page"
 #~ msgstr "oblikovna_stran"
+
 #~ msgid "start_page"
 #~ msgstr "začetna_sran"
+
 #~ msgid "Recent templates"
 #~ msgstr "Nedavne predloge"
+
 #~ msgid "Search all templates"
 #~ msgstr "Išči po vseh predlogah"
+
 #~ msgid "%s: option `%s' is ambiguous\n"
 #~ msgstr "%s: možnost `%s' je dvoumna\n"
+
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
 #~ msgstr "%s: možnost `--%s' ne dovoli argumenta\n"
+
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
 #~ msgstr "%s: možnost `%c%s' ne dovoli argumenta\n"
+
 #~ msgid "%s: option `%s' requires an argument\n"
 #~ msgstr "%s: možnost `%s' zahteva argument\n"
+
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: nepoznana možnost `--%s'\n"
+
 #~ msgid "%s: unrecognized option `%c%s'\n"
 #~ msgstr "%s: nepoznana možnost `%c%s'\n"
+
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: neveljavna možnost -- %c\n"
+
 #~ msgid "%s: invalid option -- %c\n"
 #~ msgstr "%s: neveljavna možnost -- %c\n"
+
 #~ msgid "%s: option requires an argument -- %c\n"
 #~ msgstr "%s: možnost zahteva argument -- %c\n"
-

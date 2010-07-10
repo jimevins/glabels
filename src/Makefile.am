@@ -123,13 +123,8 @@ glabels_3_SOURCES = 			\
 	bc.h				\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
-<<<<<<< HEAD
 	bc-zint.c			\
 	bc-zint.h 			\
-=======
-	bc-zint.c		\
-	bc-zint.h 	\
->>>>>>> Forwardporting changes for zint barcode support
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
@@ -255,13 +250,8 @@ glabels_3_batch_SOURCES = 		\
 	bc.h				\
 	bc-gnubarcode.c			\
 	bc-gnubarcode.h			\
-<<<<<<< HEAD
 	bc-zint.c			\
 	bc-zint.h			\
-=======
-	bc-zint.c		\
-	bc-zint.h		\
->>>>>>> Forwardporting changes for zint barcode support
 	bc-postnet.c			\
 	bc-postnet.h			\
 	bc-iec16022.c			\
