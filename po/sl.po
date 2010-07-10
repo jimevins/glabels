@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glabels master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-07-03 03:15+0000\n"
-"PO-Revision-Date: 2010-07-03 11:22+0100\n"
+"POT-Creation-Date: 2010-07-10 08:40+0000\n"
+"PO-Revision-Date: 2010-07-10 11:04+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -448,68 +448,68 @@ msgstr "0123456789 .:,;(*!?)"
 msgid "Sample text"
 msgstr "Vzorčno besedilo"
 
-#: ../src/glabels-batch.c:52
+#: ../src/glabels-batch.c:53
 msgid "set output filename (default=\"output.pdf\")"
 msgstr "nastavi odvodno ime datoteke (privzeto=\"output.pdf\")"
 
-#: ../src/glabels-batch.c:52
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:53
+#: ../src/glabels-batch.c:67
 msgid "filename"
 msgstr "ime datoteke"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "number of sheets (default=1)"
 msgstr "število delovnih listov (privzeto=1)"
 
-#: ../src/glabels-batch.c:54
+#: ../src/glabels-batch.c:55
 msgid "sheets"
 msgstr "delovni listi"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "number of copies (default=1)"
 msgstr "število kopij (privzeto=1)"
 
-#: ../src/glabels-batch.c:56
+#: ../src/glabels-batch.c:57
 msgid "copies"
 msgstr "kopije"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first label on first sheet (default=1)"
 msgstr "prva nalepka na prvem delovnem listu (privzeto=1)"
 
-#: ../src/glabels-batch.c:58
+#: ../src/glabels-batch.c:59
 msgid "first"
 msgstr "prva"
 
-#: ../src/glabels-batch.c:60
+#: ../src/glabels-batch.c:61
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:13
 msgid "print outlines (to test printer alignment)"
 msgstr "natisni orise (za preizkus poravnave tiskalnika)"
 
-#: ../src/glabels-batch.c:62
+#: ../src/glabels-batch.c:63
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:12
 msgid "print in reverse (i.e. a mirror image)"
 msgstr "natisni obrnjeno (to je zrcalna slika)"
 
-#: ../src/glabels-batch.c:64
+#: ../src/glabels-batch.c:65
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:11
 msgid "print crop marks"
 msgstr "natisni oznake obrezave"
 
-#: ../src/glabels-batch.c:66
+#: ../src/glabels-batch.c:67
 msgid "input file for merging"
 msgstr "vhodna datoteka za združevanje"
 
-#: ../src/glabels-batch.c:68
+#: ../src/glabels-batch.c:69
 #: ../src/glabels.c:64
 msgid "[FILE...]"
 msgstr "[DATOTEKA...]"
 
-#: ../src/glabels-batch.c:98
+#: ../src/glabels-batch.c:99
 msgid "Print files created with gLabels."
 msgstr "Tiskanje datotek ustvarjenih z gLables."
 
-#: ../src/glabels-batch.c:106
+#: ../src/glabels-batch.c:107
 #: ../src/glabels.c:89
 #, c-format
 msgid ""
@@ -519,12 +519,12 @@ msgstr ""
 "%s\n"
 "Zaženite '%s --help' za ogled celotnega seznama razpoložljivih možnosti ukazne vrstice.\n"
 
-#: ../src/glabels-batch.c:149
+#: ../src/glabels-batch.c:151
 #, c-format
 msgid "cannot perform document merge with glabels file %s\n"
 msgstr "združevanja dokumenta z glabels datoteko %s ni mogoče izvesti\n"
 
-#: ../src/glabels-batch.c:184
+#: ../src/glabels-batch.c:186
 #, c-format
 msgid "cannot open glabels file %s\n"
 msgstr "Datoteke glables %s ni mogoče odpreti\n"
@@ -680,13 +680,13 @@ msgstr "Prilepi"
 msgid "Create ellipse object"
 msgstr "Ustvarjanje elipso"
 
-#: ../src/label-image.c:199
+#: ../src/label-image.c:200
 #: ../src/ui.c:312
 msgid "Create image object"
 msgstr "Ustvarjanje slikovnega predmeta"
 
-#: ../src/label-image.c:332
-#: ../src/label-image.c:473
+#: ../src/label-image.c:333
+#: ../src/label-image.c:474
 msgid "Set image"
 msgstr "Nastavi sliko"
 
@@ -901,7 +901,7 @@ msgid "Record/Field"
 msgstr "Posnemi/polje"
 
 #: ../src/merge-properties-dialog.c:360
-#: ../data/ui/object-editor.ui.h:9
+#: ../data/ui/object-editor.ui.h:8
 msgid "Data"
 msgstr "Podatki"
 
@@ -1004,7 +1004,7 @@ msgstr "Nastavitve programa"
 #. ===================================================================
 #: ../src/print-op.c:205
 #: ../src/print-op-dialog.c:217
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 #: ../templates/misc-iso-templates.xml.h:34
 msgid "Labels"
 msgstr "Nalepke"
@@ -1156,9 +1156,9 @@ msgstr "Snovanje je končano"
 msgid "Edit gLabels Template"
 msgstr "Uredi predlogo gLabels"
 
-#: ../src/template-designer.c:1422
-msgid "<span foreground='red' weight='bold'>Brand and part# match an existing template!</span>"
-msgstr "<span foreground='red' weight='bold'>Znamka in številka dela se skladata z obstoječo predlogo!</span>"
+#: ../src/template-designer.c:1423
+msgid "Brand and part# match an existing template!"
+msgstr "Znamka in številka dela se skladata z obstoječo predlogo!"
 
 #. Menu entries.
 #: ../src/ui.c:93
@@ -1397,7 +1397,8 @@ msgstr "Izbor, premikanje in spreminjanje predmetov"
 
 #: ../src/ui.c:282
 #: ../src/view-text.c:102
-#: ../data/ui/object-editor.ui.h:29
+#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/prefs-dialog.ui.h:17
 msgid "Text"
 msgstr "Besedilo"
 
@@ -1410,7 +1411,8 @@ msgid "Create box/rectangle object"
 msgstr "Ustvarjanje okvirja/pravokotnika"
 
 #: ../src/ui.c:296
-#: ../data/ui/object-editor.ui.h:18
+#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Line"
 msgstr "Črta"
 
@@ -1423,7 +1425,7 @@ msgid "Create ellipse/circle object"
 msgstr "Ustvarjanje elipse/kroga"
 
 #: ../src/ui.c:310
-#: ../data/ui/object-editor.ui.h:15
+#: ../data/ui/object-editor.ui.h:14
 msgid "Image"
 msgstr "Slika"
 
@@ -1698,15 +1700,26 @@ msgstr "%s nalepka cele strani"
 msgid "Equivalent part (\"%s\") for \"%s\", not previously defined."
 msgstr "Enakovredni del (\"%s\") za \"%s\", ni predhodno določen."
 
-#: ../libglabels/template.c:722
-#: ../libglabels/template.c:726
-msgid "per sheet"
-msgstr "na list"
+#.
+#. * Translators: 1st %d = number of labels across a page,
+#. *              2nd %d = number of labels down a page,
+#. *              3rd %d = total number of labels on a page (sheet).
+#.
+#: ../libglabels/template.c:727
+#, c-format
+msgid "%d × %d (%d per sheet)"
+msgstr "%d × %d (%d na list)"
 
-#: ../libglabels/template.c:796
+#. Translators: %d is the total number of labels on a page (sheet).
+#: ../libglabels/template.c:732
+#, c-format
+msgid "%d per sheet"
+msgstr "%d na list"
+
 #: ../libglabels/template.c:802
-#: ../libglabels/template.c:812
+#: ../libglabels/template.c:808
 #: ../libglabels/template.c:818
+#: ../libglabels/template.c:824
 msgid "diameter"
 msgstr "premer"
 
@@ -1715,14 +1728,14 @@ msgstr "premer"
 #. This table must be sorted exactly as the enumerations in lglUnits
 #. [LGL_UNITS_POINT]
 #: ../libglabels/units.c:65
-#: ../data/ui/object-editor.ui.h:40
+#: ../data/ui/object-editor.ui.h:39
 #: ../data/ui/prefs-dialog.ui.h:22
 msgid "points"
 msgstr "točke"
 
 #. [LGL_UNITS_INCH]
 #: ../libglabels/units.c:66
-#: ../data/ui/object-editor.ui.h:39
+#: ../data/ui/object-editor.ui.h:38
 #: ../data/ui/template-designer.ui.h:62
 msgid "inches"
 msgstr "palcev"
@@ -1779,24 +1792,24 @@ msgstr "Atributi imena manjkajo."
 #. * End:                   -- emacs
 #.
 #: ../data/ui/merge-properties-dialog.ui.h:1
-msgid "<b>Record selection/preview</b>"
-msgstr "<b>Posnemi izbiro/predogled</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:2
-msgid "<b>Source</b>"
-msgstr "<b>Vir</b>"
-
-#: ../data/ui/merge-properties-dialog.ui.h:3
 msgid "Format:"
 msgstr "Zapis:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:4
+#: ../data/ui/merge-properties-dialog.ui.h:2
 msgid "Location:"
 msgstr "Mesto:"
 
-#: ../data/ui/merge-properties-dialog.ui.h:5
+#: ../data/ui/merge-properties-dialog.ui.h:3
+msgid "Record selection/preview"
+msgstr "Posnemi izbiro/predogled"
+
+#: ../data/ui/merge-properties-dialog.ui.h:4
 msgid "Select all"
 msgstr "Izberi vse"
+
+#: ../data/ui/merge-properties-dialog.ui.h:5
+msgid "Source"
+msgstr "Vir"
 
 #: ../data/ui/merge-properties-dialog.ui.h:6
 msgid "Unselect all"
@@ -1880,136 +1893,133 @@ msgid "%"
 msgstr "%"
 
 #: ../data/ui/object-editor.ui.h:3
-msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">lastnosti predmeta Xxx</span>"
-
-#: ../data/ui/object-editor.ui.h:4
-#: ../data/ui/prefs-dialog.ui.h:7
+#: ../data/ui/prefs-dialog.ui.h:2
 msgid "Alignment:"
 msgstr "Poravnava:"
 
-#: ../data/ui/object-editor.ui.h:5
+#: ../data/ui/object-editor.ui.h:4
 msgid "Allow merge to automatically shrink text"
 msgstr "Dovoli samodejno skrčenje besedila ob združevanju"
 
-#: ../data/ui/object-editor.ui.h:6
+#: ../data/ui/object-editor.ui.h:5
 msgid "Angle:"
 msgstr "Kot:"
 
-#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/object-editor.ui.h:6
 msgid "Checksum"
 msgstr "Nadzorna vsota"
 
-#: ../data/ui/object-editor.ui.h:8
-#: ../data/ui/prefs-dialog.ui.h:8
+#: ../data/ui/object-editor.ui.h:7
+#: ../data/ui/prefs-dialog.ui.h:3
 msgid "Color:"
 msgstr "Barva:"
 
-#: ../data/ui/object-editor.ui.h:10
+#: ../data/ui/object-editor.ui.h:9
 msgid "Enable shadow"
 msgstr "Omogoči senco"
 
-#: ../data/ui/object-editor.ui.h:11
+#: ../data/ui/object-editor.ui.h:10
 msgid "Family:"
 msgstr "Družina:"
 
-#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/object-editor.ui.h:11
 msgid "File:"
 msgstr "Datoteka:"
 
-#: ../data/ui/object-editor.ui.h:13
+#: ../data/ui/object-editor.ui.h:12
+#: ../data/ui/prefs-dialog.ui.h:5
 msgid "Fill"
 msgstr "Polnilo"
 
-#: ../data/ui/object-editor.ui.h:14
+#: ../data/ui/object-editor.ui.h:13
 #: ../data/ui/template-designer.ui.h:30
 msgid "Height:"
 msgstr "Višina:"
 
-#: ../data/ui/object-editor.ui.h:16
+#: ../data/ui/object-editor.ui.h:15
 msgid "Key:"
 msgstr "Ključ:"
 
-#: ../data/ui/object-editor.ui.h:17
+#: ../data/ui/object-editor.ui.h:16
 msgid "Length:"
 msgstr "Dolžina:"
 
-#: ../data/ui/object-editor.ui.h:19
-#: ../data/ui/prefs-dialog.ui.h:12
+#: ../data/ui/object-editor.ui.h:18
+#: ../data/ui/prefs-dialog.ui.h:10
 msgid "Line Spacing:"
 msgstr "Razmik vrstic:"
 
-#: ../data/ui/object-editor.ui.h:20
+#: ../data/ui/object-editor.ui.h:19
 msgid "Literal:"
 msgstr "Dosledno:"
 
-#: ../data/ui/object-editor.ui.h:21
+#: ../data/ui/object-editor.ui.h:20
 msgid "Opacity:"
 msgstr "Prosojnost:"
 
-#: ../data/ui/object-editor.ui.h:22
+#: ../data/ui/object-editor.ui.h:21
 msgid "Position"
 msgstr "Lega"
 
-#: ../data/ui/object-editor.ui.h:23
+#: ../data/ui/object-editor.ui.h:22
 msgid "Reset image size"
 msgstr "Ponastavi velikost slike"
 
-#: ../data/ui/object-editor.ui.h:24
+#: ../data/ui/object-editor.ui.h:23
 msgid "Shadow"
 msgstr "Senca"
 
-#: ../data/ui/object-editor.ui.h:25
+#: ../data/ui/object-editor.ui.h:24
 msgid "Size"
 msgstr "Velikost"
 
-#: ../data/ui/object-editor.ui.h:26
+#: ../data/ui/object-editor.ui.h:25
 msgid "Size:"
 msgstr "Velikost:"
 
-#: ../data/ui/object-editor.ui.h:27
+#: ../data/ui/object-editor.ui.h:26
 msgid "Style"
 msgstr "Slog"
 
-#: ../data/ui/object-editor.ui.h:28
+#: ../data/ui/object-editor.ui.h:27
 msgid "Style:"
 msgstr "Slog:"
 
-#: ../data/ui/object-editor.ui.h:30
+#: ../data/ui/object-editor.ui.h:29
 #: ../data/ui/prefs-dialog.ui.h:20
 #: ../data/ui/template-designer.ui.h:61
 msgid "Width:"
 msgstr "Širina:"
 
-#: ../data/ui/object-editor.ui.h:31
+#: ../data/ui/object-editor.ui.h:30
 msgid "X Offset:"
 msgstr "Odmik X osi:"
 
-#: ../data/ui/object-editor.ui.h:32
+#: ../data/ui/object-editor.ui.h:31
 msgid "X:"
 msgstr "X:"
 
-#: ../data/ui/object-editor.ui.h:33
+#: ../data/ui/object-editor.ui.h:32
 msgid "Y Offset:"
 msgstr "Odmik Y osi:"
 
-#: ../data/ui/object-editor.ui.h:34
+#: ../data/ui/object-editor.ui.h:33
 msgid "Y:"
 msgstr "Y:"
 
-#: ../data/ui/object-editor.ui.h:35
+#: ../data/ui/object-editor.ui.h:34
 msgid "degrees"
 msgstr "stopinje"
 
-#: ../data/ui/object-editor.ui.h:36
+#: ../data/ui/object-editor.ui.h:35
 msgid "dialog1"
 msgstr "pogovorno okno 1"
 
-#: ../data/ui/object-editor.ui.h:37
+#: ../data/ui/object-editor.ui.h:36
 msgid "digits:"
 msgstr "številke:"
 
-#: ../data/ui/object-editor.ui.h:38
+#: ../data/ui/object-editor.ui.h:37
 msgid "format:"
 msgstr "oblika:"
 
@@ -2017,66 +2027,54 @@ msgstr "oblika:"
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/prefs-dialog.ui.h:2
-msgid "<span weight=\"bold\">Default page size</span>"
-msgstr "<span weight=\"bold\">Privzeta velikost strani</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:3
-msgid "<span weight=\"bold\">Fill</span>"
-msgstr "<span weight=\"bold\">Polnilo</span>"
-
 #: ../data/ui/prefs-dialog.ui.h:4
-msgid "<span weight=\"bold\">Line</span>"
-msgstr "<span weight=\"bold\">Črta</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:5
-msgid "<span weight=\"bold\">Text</span>"
-msgstr "<span weight=\"bold\">Besedilo</span>"
+msgid "Default page size"
+msgstr "Privzeta velikost strani"
 
 #: ../data/ui/prefs-dialog.ui.h:6
-msgid "<span weight=\"bold\">Units</span>"
-msgstr "<span weight=\"bold\">Enote</span>"
-
-#: ../data/ui/prefs-dialog.ui.h:9
 msgid "Font:"
 msgstr "Pisava:"
 
-#: ../data/ui/prefs-dialog.ui.h:10
+#: ../data/ui/prefs-dialog.ui.h:7
 msgid "ISO A4"
 msgstr "ISO A4"
 
-#: ../data/ui/prefs-dialog.ui.h:11
+#: ../data/ui/prefs-dialog.ui.h:8
 msgid "Inches"
 msgstr "Palci"
 
-#: ../data/ui/prefs-dialog.ui.h:13
+#: ../data/ui/prefs-dialog.ui.h:11
 msgid "Locale"
 msgstr "Jezikovna oznaka"
 
-#: ../data/ui/prefs-dialog.ui.h:14
+#: ../data/ui/prefs-dialog.ui.h:12
 msgid "Millimeters"
 msgstr "Milimetri"
 
-#: ../data/ui/prefs-dialog.ui.h:15
+#: ../data/ui/prefs-dialog.ui.h:13
 msgid "Object defaults"
 msgstr "Privzete vrednosti predmeta"
 
-#: ../data/ui/prefs-dialog.ui.h:16
+#: ../data/ui/prefs-dialog.ui.h:14
 msgid "Points"
 msgstr "Točke"
 
-#: ../data/ui/prefs-dialog.ui.h:17
+#: ../data/ui/prefs-dialog.ui.h:15
 msgid "Select default properties for new objects."
 msgstr "Izbor privzeti lastnosti za nove predmete."
 
-#: ../data/ui/prefs-dialog.ui.h:18
+#: ../data/ui/prefs-dialog.ui.h:16
 msgid "Select locale specific behavior."
 msgstr "Izberite z jezikovno oznako določeno obnašanje."
 
-#: ../data/ui/prefs-dialog.ui.h:19
+#: ../data/ui/prefs-dialog.ui.h:18
 #: ../templates/paper-sizes.xml.h:35
 msgid "US Letter"
 msgstr "Ameriško pismo"
+
+#: ../data/ui/prefs-dialog.ui.h:19
+msgid "Units"
+msgstr "Enote"
 
 #: ../data/ui/property-bar.ui.h:1
 msgid "Bold"
@@ -2301,24 +2299,24 @@ msgstr ""
 "To pogovorno okno vam bo pomagalo pri ustvarjanju predloge gLables po meri."
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:1
-msgid "<b>Copies</b>"
-msgstr "<b>Kopije</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
-msgid "<b>Merge Control</b>"
-msgstr "<b>Nadzor združevanja</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
-msgid "<b>Options</b>"
-msgstr "<b>Možnosti</b>"
-
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:4
 msgid "Collate"
 msgstr "Zberi"
 
-#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:2
+msgid "Copies"
+msgstr "Kopije"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:3
 msgid "Copies:"
 msgstr "Kopije:"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:5
+msgid "Merge Control"
+msgstr "Nadzor združevanja"
+
+#: ../data/ui/print-op-dialog-custom-widget.ui.h:6
+msgid "Options"
+msgstr "Možnosti"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:7
 msgid "Sheets:"
@@ -3090,6 +3088,20 @@ msgstr "Pravokotne kopirne nalepke"
 msgid "Video Labels (back)"
 msgstr "Video nalepke (zadnja stran)"
 
+#~ msgid "<span weight=\"bold\" size=\"larger\">Xxx object properties</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">lastnosti predmeta Xxx</span>"
+#~ msgid "<span weight=\"bold\">Default page size</span>"
+#~ msgstr "<span weight=\"bold\">Privzeta velikost strani</span>"
+#~ msgid "<span weight=\"bold\">Fill</span>"
+#~ msgstr "<span weight=\"bold\">Polnilo</span>"
+#~ msgid "<span weight=\"bold\">Line</span>"
+#~ msgstr "<span weight=\"bold\">Črta</span>"
+#~ msgid "<span weight=\"bold\">Text</span>"
+#~ msgstr "<span weight=\"bold\">Besedilo</span>"
+#~ msgid "<span weight=\"bold\">Units</span>"
+#~ msgstr "<span weight=\"bold\">Enote</span>"
+#~ msgid "<b>Copies</b>"
+#~ msgstr "<b>Kopije</b>"
 #~ msgid "- gLabels label designer"
 #~ msgstr "- snovalnik nalepk gLabels"
 #~ msgid "- batch process gLabels label files"
