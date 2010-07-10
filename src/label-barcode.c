@@ -428,7 +428,7 @@ draw_object (glLabelObject *object,
         glBarcodeShapeAlpha  *bchar;
         glBarcodeShapeString *bstring;
         GList                *p;
-        gdouble               y_offset;
+        gdouble               x_offset, y_offset;
         PangoLayout          *layout;
         PangoFontDescription *desc;
         gchar                *text, *cstring;
@@ -440,6 +440,8 @@ draw_object (glLabelObject *object,
         glColorNode          *color_node;
         guint                 format_digits;
         gdouble               w, h;
+        gint                  iw, ih;
+        gdouble               layout_width;
 
 	gl_debug (DEBUG_LABEL, "START");
 
@@ -556,9 +558,13 @@ draw_object (glLabelObject *object,
 
                                 pango_layout_set_text (layout, bstring->str, -1);
 
+                                pango_layout_get_size (layout, &iw, &ih);
+                                layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
+
+                                x_offset = layout_width / 2.0;
                                 y_offset = 0.2 * bstring->fsize;
 
-                                cairo_move_to (cr, bstring->x, bstring->y-y_offset);
+                                cairo_move_to (cr, (bstring->x - x_offset), (bstring->y - y_offset));
                                 pango_cairo_show_layout (cr, layout);
 
                                 g_object_unref (layout);

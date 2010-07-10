@@ -213,7 +213,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
                 for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )
                 {
                         bstring = gl_barcode_shape_string_new();
-                        bstring->x = (double) zstring->x - (((6.0 / 9.0) * zstring->length * zstring->fsize) / 2);
+                        bstring->x = (double) zstring->x;
                         bstring->y = (double) zstring->y;
                         bstring->fsize = (double) zstring->fsize;
                         bstring->str   = g_strndup (zstring->text, zstring->length);
