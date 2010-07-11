@@ -217,8 +217,6 @@ render_pass1 (struct Barcode_Item *bci,
 {
 	gint                 validbits = BARCODE_NO_ASCII;
 	glBarcode           *gbc;
-	glBarcodeShapeLine  *line;
-	glBarcodeShapeAlpha *bchar;
 	gdouble              scalef = 1.0;
 	gdouble              x;
 	gint                 i, j, barlen;
@@ -315,12 +313,7 @@ render_pass1 (struct Barcode_Item *bci,
 					yr -= (isdigit (*p) ? 20 : 10) * scalef;
 				}
 			}
-                        line = gl_barcode_shape_line_new ();
-			line->x = x0;
-			line->y = y0;
-			line->length = yr;
-			line->width = (j * scalef) - SHRINK_AMOUNT;
-                        gl_barcode_add_shape (gbc, (glBarcodeShape *)line);
+                        gl_barcode_add_line (gbc, x0, y0, yr, (j * scalef) - SHRINK_AMOUNT);
 		}
 		x += j * scalef;
 
@@ -342,17 +335,13 @@ render_pass1 (struct Barcode_Item *bci,
 				g_message ("impossible data: %s", p);
 				continue;
 			}
-                        bchar = gl_barcode_shape_alpha_new ();
-			bchar->x = f1 * scalef + bci->margin;
+			x0 = f1 * scalef + bci->margin;
 			if (mode == '-') {
-				bchar->y =
-				    bci->margin + bci->height - 8 * scalef;
+				y0 = bci->margin + bci->height - 8 * scalef;
 			} else {
-				bchar->y = bci->margin;
+				y0 = bci->margin;
 			}
-			bchar->fsize = f2 * FONT_SCALE * scalef;
-			bchar->c = c;
-                        gl_barcode_add_shape (gbc, (glBarcodeShape *)bchar);
+                        gl_barcode_add_char (gbc, x0, y0, (f2 * FONT_SCALE * scalef), c);
 		}
 	}
 

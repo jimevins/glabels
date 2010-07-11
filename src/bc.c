@@ -382,6 +382,11 @@ static const Backend backends[] = {
 /* Private function prototypes.                           */
 /*========================================================*/
 
+static void gl_barcode_add_shape        (glBarcode      *bc,
+                                         glBarcodeShape *shape);
+
+static void gl_barcode_shape_free       (glBarcodeShape *shape);
+
 
 /*---------------------------------------------------------------------------*/
 /* Convert id to index into above table.                                     */
@@ -424,79 +429,6 @@ name_to_index (const gchar *name)
 
 	g_message( "Unknown barcode name \"%s\"", name );
 	return 0;
-}
-
-
-/*****************************************************************************/
-/* Allocate new Line shape.                                                  */
-/*****************************************************************************/
-glBarcodeShapeLine *
-gl_barcode_shape_line_new (void)
-{
-        glBarcodeShapeLine *line_shape = g_new0 (glBarcodeShapeLine, 1);
-        line_shape->type = GL_BARCODE_SHAPE_LINE;
-
-        return line_shape;
-}
-
-
-/*****************************************************************************/
-/* Allocate new Box shape.                                                   */
-/*****************************************************************************/
-glBarcodeShapeBox *
-gl_barcode_shape_box_new (void)
-{
-        glBarcodeShapeBox *box_shape = g_new0 (glBarcodeShapeBox, 1);
-        box_shape->type = GL_BARCODE_SHAPE_BOX;
-
-        return box_shape;
-}
-
-
-/*****************************************************************************/
-/* Allocate new Alpha shape.                                                 */
-/*****************************************************************************/
-glBarcodeShapeAlpha *
-gl_barcode_shape_alpha_new (void)
-{
-        glBarcodeShapeAlpha *alpha_shape = g_new0 (glBarcodeShapeAlpha, 1);
-        alpha_shape->type = GL_BARCODE_SHAPE_ALPHA;
-
-        return alpha_shape;
-}
-
-
-/*****************************************************************************/
-/* Allocate new String shape.                                                */
-/*****************************************************************************/
-glBarcodeShapeString *
-gl_barcode_shape_string_new (void)
-{
-        glBarcodeShapeString *string_shape = g_new0 (glBarcodeShapeString, 1);
-        string_shape->type = GL_BARCODE_SHAPE_STRING;
-
-        return string_shape;
-}
-
-
-/*****************************************************************************/
-/* Free a shape primitive.                                                   */
-/*****************************************************************************/
-void
-gl_barcode_shape_free (glBarcodeShape *shape)
-{
-        switch (shape->type)
-        {
-
-        case GL_BARCODE_SHAPE_STRING:
-                g_free (shape->string.str);
-                break;
-
-        default:
-                break;
-        }
-
-        g_free (shape);
 }
 
 
@@ -552,9 +484,98 @@ gl_barcode_free (glBarcode **gbc)
 
 
 /*****************************************************************************/
-/* Add shape to barcode.                                                     */
+/* Add a line.                                                               */
 /*****************************************************************************/
 void
+gl_barcode_add_line (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         length,
+                     gdouble         width)
+{
+        glBarcodeShapeLine *line_shape = g_new0 (glBarcodeShapeLine, 1);
+        line_shape->type = GL_BARCODE_SHAPE_LINE;
+
+        line_shape->x      = x;
+        line_shape->y      = y;
+        line_shape->length = length;
+        line_shape->width  = width;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)line_shape);
+}
+
+
+/*****************************************************************************/
+/* Add box.                                                                  */
+/*****************************************************************************/
+void
+gl_barcode_add_box (glBarcode      *bc,
+                    gdouble         x,
+                    gdouble         y,
+                    gdouble         width,
+                    gdouble         height)
+{
+        glBarcodeShapeBox *box_shape = g_new0 (glBarcodeShapeBox, 1);
+        box_shape->type = GL_BARCODE_SHAPE_BOX;
+
+        box_shape->x      = x;
+        box_shape->y      = y;
+        box_shape->width  = width;
+        box_shape->height = height;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)box_shape);
+}
+
+
+/*****************************************************************************/
+/* Add character.                                                            */
+/*****************************************************************************/
+void
+gl_barcode_add_char (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         fsize,
+                     gchar           c)
+{
+        glBarcodeShapeChar *char_shape = g_new0 (glBarcodeShapeChar, 1);
+        char_shape->type = GL_BARCODE_SHAPE_CHAR;
+
+        char_shape->x      = x;
+        char_shape->y      = y;
+        char_shape->fsize  = fsize;
+        char_shape->c      = c;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)char_shape);
+}
+
+
+/*****************************************************************************/
+/* Add string.                                                               */
+/*****************************************************************************/
+void
+gl_barcode_add_string (glBarcode      *bc,
+                       gdouble         x,
+                       gdouble         y,
+                       gdouble         fsize,
+                       gchar          *string,
+                       gsize           length)
+{
+        glBarcodeShapeString *string_shape = g_new0 (glBarcodeShapeString, 1);
+        string_shape->type = GL_BARCODE_SHAPE_STRING;
+
+        string_shape->x      = x;
+        string_shape->y      = y;
+        string_shape->fsize  = fsize;
+        string_shape->string = g_strndup(string, length);
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)string_shape);
+}
+
+
+/*****************************************************************************/
+/* Add shape to barcode.                                                     */
+/*****************************************************************************/
+static void
 gl_barcode_add_shape (glBarcode      *bc,
                       glBarcodeShape *shape)
 {
@@ -562,6 +583,27 @@ gl_barcode_add_shape (glBarcode      *bc,
 	g_return_if_fail (shape);
 
         bc->shapes = g_list_prepend (bc->shapes, shape);
+}
+
+
+/*****************************************************************************/
+/* Free a shape primitive.                                                   */
+/*****************************************************************************/
+static void
+gl_barcode_shape_free (glBarcodeShape *shape)
+{
+        switch (shape->type)
+        {
+
+        case GL_BARCODE_SHAPE_STRING:
+                g_free (shape->string.string);
+                break;
+
+        default:
+                break;
+        }
+
+        g_free (shape);
 }
 
 

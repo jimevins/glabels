@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 typedef enum {
         GL_BARCODE_SHAPE_LINE,
         GL_BARCODE_SHAPE_BOX,
-        GL_BARCODE_SHAPE_ALPHA,
+        GL_BARCODE_SHAPE_CHAR,
         GL_BARCODE_SHAPE_STRING,
 } glBarcodeShapeType;
 
@@ -100,7 +100,7 @@ typedef struct {
 typedef struct {
 
         /* Begin Common Fields */
-        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_LINE. */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_BOX. */
         gdouble             x;
         gdouble             y;
         /* End Common Fields */
@@ -111,7 +111,7 @@ typedef struct {
 } glBarcodeShapeBox;
 
 /*
- * glBarcodeShapeAlpha:
+ * glBarcodeShapeChar:
  *
  * @ =  origin (x,y) from top left corner of barcode
  *
@@ -128,7 +128,7 @@ typedef struct {
 typedef struct {
 
         /* Begin Common Fields */
-        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_ALPHA. */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_CHAR. */
         gdouble             x;
         gdouble             y;
         /* End Common Fields */
@@ -136,7 +136,7 @@ typedef struct {
         gdouble             fsize;
         gchar               c;
 
-} glBarcodeShapeAlpha;
+} glBarcodeShapeChar;
 
 /*
  * glBarcodeShapeString:
@@ -157,13 +157,13 @@ typedef struct {
 typedef struct {
 
         /* Begin Common Fields */
-        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_ALPHA. */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_STRING. */
         gdouble             x;
         gdouble             y;
         /* End Common Fields */
 
         gdouble             fsize;
-        gchar              *str;
+        gchar              *string;
 
 } glBarcodeShapeString;
 
@@ -174,17 +174,10 @@ typedef union {
 
         glBarcodeShapeLine    line;
         glBarcodeShapeBox     box;
-        glBarcodeShapeAlpha   alpha;
+        glBarcodeShapeChar    bchar;
         glBarcodeShapeString  string;
 
 } glBarcodeShape;
-
-glBarcodeShapeLine   *gl_barcode_shape_line_new   (void);
-glBarcodeShapeBox    *gl_barcode_shape_box_new    (void);
-glBarcodeShapeAlpha  *gl_barcode_shape_alpha_new  (void);
-glBarcodeShapeString *gl_barcode_shape_string_new (void);
-
-void                  gl_barcode_shape_free       (glBarcodeShape *shape);
 
 
 /********************************/
@@ -213,8 +206,31 @@ glBarcode       *gl_barcode_new              (const gchar    *id,
 
 void             gl_barcode_free             (glBarcode     **bc);
 
-void             gl_barcode_add_shape        (glBarcode      *bc,
-                                              glBarcodeShape *shape);
+void             gl_barcode_add_line         (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         length,
+                                              gdouble         width);
+
+void             gl_barcode_add_box          (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         width,
+                                              gdouble         height);
+
+void             gl_barcode_add_char         (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         fsize,
+                                              gchar           c);
+
+void             gl_barcode_add_string       (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         fsize,
+                                              gchar          *string,
+                                              gsize           length);
+
 
 GList           *gl_barcode_get_styles_list  (void);
 void             gl_barcode_free_styles_list (GList          *styles_list);

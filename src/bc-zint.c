@@ -59,7 +59,6 @@ gl_barcode_zint_new (const gchar          *id,
 {
 	glBarcode           *gbc;
 	struct zint_symbol  *symbol;
-	gint                 type;
 	gint		     result;
 
 	symbol = ZBarcode_Create();
@@ -182,9 +181,7 @@ gl_barcode_zint_new (const gchar          *id,
 static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 {
         glBarcode            *gbc;
-        glBarcodeShapeBox    *box;
-        glBarcodeShapeString *bstring;
-	
+
         struct zint_render        *render;
         struct zint_render_line   *zline;
         struct zint_render_string *zstring;
@@ -195,14 +192,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 	
         for ( zline = render->lines; zline != NULL; zline = zline->next )
         {
-                box = gl_barcode_shape_box_new ();
-
-                box->x      = (gdouble) zline->x;
-                box->y      = (gdouble) zline->y;
-                box->width  = (gdouble) zline->width;
-                box->height = (gdouble) zline->length;
-
-                gl_barcode_add_shape (gbc, (glBarcodeShape *)box);
+                gl_barcode_add_box (gbc, zline->x, zline->y, zline->width, zline->length);
         }
 
 	/*
@@ -212,12 +202,9 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
         {
                 for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )
                 {
-                        bstring = gl_barcode_shape_string_new();
-                        bstring->x = (double) zstring->x;
-                        bstring->y = (double) zstring->y;
-                        bstring->fsize = (double) zstring->fsize;
-                        bstring->str   = g_strndup (zstring->text, zstring->length);
-                        gl_barcode_add_shape (gbc, (glBarcodeShape *)bstring);
+                        gl_barcode_add_string (gbc,
+                                               zstring->x, zstring->y,
+                                               zstring->fsize, (gchar *)zstring->text, zstring->length);
                 }
         }
 

@@ -425,7 +425,7 @@ draw_object (glLabelObject *object,
         glBarcodeShape       *shape;
         glBarcodeShapeLine   *line;
         glBarcodeShapeBox    *box;
-        glBarcodeShapeAlpha  *bchar;
+        glBarcodeShapeChar   *bchar;
         glBarcodeShapeString *bstring;
         GList                *p;
         gdouble               x_offset, y_offset;
@@ -521,8 +521,8 @@ draw_object (glLabelObject *object,
 
                                 break;
 
-                        case GL_BARCODE_SHAPE_ALPHA:
-                                bchar = (glBarcodeShapeAlpha *) shape;
+                        case GL_BARCODE_SHAPE_CHAR:
+                                bchar = (glBarcodeShapeChar *) shape;
 
                                 layout = pango_cairo_create_layout (cr);
 
@@ -556,7 +556,7 @@ draw_object (glLabelObject *object,
                                 pango_layout_set_font_description (layout, desc);
                                 pango_font_description_free       (desc);
 
-                                pango_layout_set_text (layout, bstring->str, -1);
+                                pango_layout_set_text (layout, bstring->string, -1);
 
                                 pango_layout_get_size (layout, &iw, &ih);
                                 layout_width = (gdouble)iw / (gdouble)PANGO_SCALE;
