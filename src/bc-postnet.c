@@ -122,7 +122,7 @@ gl_barcode_postnet_new (const gchar    *id,
 		return NULL;
 	}
 
-	gbc = g_new0 (glBarcode, 1);
+	gbc = gl_barcode_new ();
 
 	/* Now traverse the code string and create a list of lines */
 	x = POSTNET_HORIZ_MARGIN;

@@ -188,7 +188,7 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 
 
         render = symbol->rendered;
-        gbc = g_new0(glBarcode, 1);
+        gbc = gl_barcode_new ();
 	
         for ( zline = render->lines; zline != NULL; zline = zline->next )
         {

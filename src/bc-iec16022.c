@@ -115,7 +115,7 @@ render_iec16022 (const gchar *grid,
                 pixel_size = MIN_PIXEL_SIZE;
         }
 
-        gbc = g_new0 (glBarcode, 1);
+        gbc = gl_barcode_new ();
 
         /* Now traverse the code string and create a list of boxes */
         for ( y = i_height-1; y >= 0; y-- )

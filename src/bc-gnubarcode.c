@@ -282,7 +282,7 @@ render_pass1 (struct Barcode_Item *bci,
 		bci->height = i * scalef;
 	}
 
-	gbc = g_new0 (glBarcode, 1);
+	gbc = gl_barcode_new ();
 
 	/* Now traverse the code string and create a list of lines */
 	x = bci->margin + (bci->partial[0] - '0') * scalef;

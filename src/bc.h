@@ -31,6 +31,50 @@ G_BEGIN_DECLS
 #define GL_BARCODE_FONT_WEIGHT      PANGO_WEIGHT_NORMAL
 
 
+/********************************/
+/* Barcode Intermediate Format. */
+/********************************/
+
+typedef struct {
+
+        gdouble  width;
+        gdouble  height;
+
+        GList   *shapes;    /* List of glBarcodeShape drawing primitives */
+
+} glBarcode;
+
+
+glBarcode       *gl_barcode_new              (void);
+
+void             gl_barcode_free             (glBarcode     **bc);
+
+void             gl_barcode_add_line         (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         length,
+                                              gdouble         width);
+
+void             gl_barcode_add_box          (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         width,
+                                              gdouble         height);
+
+void             gl_barcode_add_char         (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         fsize,
+                                              gchar           c);
+
+void             gl_barcode_add_string       (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         fsize,
+                                              gchar          *string,
+                                              gsize           length);
+
+
 /*******************************/
 /* Barcode Drawing Primitives. */
 /*******************************/
@@ -178,77 +222,6 @@ typedef union {
         glBarcodeShapeString  string;
 
 } glBarcodeShape;
-
-
-/********************************/
-/* Barcode Intermediate Format. */
-/********************************/
-
-typedef struct {
-        gdouble width, height;
-        GList *shapes;    /* List of glBarcodeShape */
-} glBarcode;
-
-typedef glBarcode *(*glBarcodeNewFunc)       (const gchar    *id,
-                                              gboolean        text_flag,
-                                              gboolean        checksum_flag,
-                                              gdouble         w,
-                                              gdouble         h,
-                                              const gchar    *digits);
-
-
-glBarcode       *gl_barcode_new              (const gchar    *id,
-                                              gboolean        text_flag,
-                                              gboolean        checksum_flag,
-                                              gdouble         w,
-                                              gdouble         h,
-                                              const gchar    *digits);
-
-void             gl_barcode_free             (glBarcode     **bc);
-
-void             gl_barcode_add_line         (glBarcode      *bc,
-                                              gdouble         x,
-                                              gdouble         y,
-                                              gdouble         length,
-                                              gdouble         width);
-
-void             gl_barcode_add_box          (glBarcode      *bc,
-                                              gdouble         x,
-                                              gdouble         y,
-                                              gdouble         width,
-                                              gdouble         height);
-
-void             gl_barcode_add_char         (glBarcode      *bc,
-                                              gdouble         x,
-                                              gdouble         y,
-                                              gdouble         fsize,
-                                              gchar           c);
-
-void             gl_barcode_add_string       (glBarcode      *bc,
-                                              gdouble         x,
-                                              gdouble         y,
-                                              gdouble         fsize,
-                                              gchar          *string,
-                                              gsize           length);
-
-
-GList           *gl_barcode_get_styles_list  (void);
-void             gl_barcode_free_styles_list (GList          *styles_list);
-
-gchar           *gl_barcode_default_digits   (const gchar    *id,
-                                              guint            n);
-
-gboolean         gl_barcode_can_text         (const gchar    *id);
-gboolean         gl_barcode_text_optional    (const gchar    *id);
-
-gboolean         gl_barcode_can_csum         (const gchar    *id);
-gboolean         gl_barcode_csum_optional    (const gchar    *id);
-
-gboolean         gl_barcode_can_freeform     (const gchar    *id);
-guint            gl_barcode_get_prefered_n   (const gchar    *id);
-
-const gchar     *gl_barcode_id_to_name       (const gchar    *id);
-const gchar     *gl_barcode_name_to_id       (const gchar    *name);
 
 
 G_END_DECLS

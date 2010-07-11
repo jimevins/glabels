@@ -21,7 +21,6 @@
 #ifndef __LABEL_BARCODE_H__
 #define __LABEL_BARCODE_H__
 
-#include "bc.h"
 #include "text-node.h"
 #include "label-object.h"
 

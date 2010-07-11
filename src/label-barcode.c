@@ -25,6 +25,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <pango/pangocairo.h>
+#include "bc-backends.h"
 
 #include "debug.h"
 
@@ -323,30 +324,30 @@ get_size (glLabelObject *object,
 	gl_label_object_get_raw_size (object, &w_parent, &h_parent);
 
 	if (lbc->priv->text_node->field_flag) {
-		data = gl_barcode_default_digits (lbc->priv->id,
-						  lbc->priv->format_digits);
+		data = gl_barcode_backends_default_digits (lbc->priv->id,
+                                                           lbc->priv->format_digits);
 	} else {
 		data = gl_text_node_expand (lbc->priv->text_node, NULL);
 	}
 
-	gbc = gl_barcode_new (lbc->priv->id,
-			      lbc->priv->text_flag,
-			      lbc->priv->checksum_flag,
-			      w_parent,
-			      h_parent,
-			      data);
+	gbc = gl_barcode_backends_new_barcode (lbc->priv->id,
+                                               lbc->priv->text_flag,
+                                               lbc->priv->checksum_flag,
+                                               w_parent,
+                                               h_parent,
+                                               data);
 	g_free (data);
 
 	if ( gbc == NULL ) {
 		/* Try again with default digits. */
-		data = gl_barcode_default_digits (lbc->priv->id,
+		data = gl_barcode_backends_default_digits (lbc->priv->id,
 						  lbc->priv->format_digits);
-		gbc = gl_barcode_new (lbc->priv->id,
-				      lbc->priv->text_flag,
-				      lbc->priv->checksum_flag,
-				      w_parent,
-				      h_parent,
-				      data);
+		gbc = gl_barcode_backends_new_barcode (lbc->priv->id,
+                                                       lbc->priv->text_flag,
+                                                       lbc->priv->checksum_flag,
+                                                       w_parent,
+                                                       h_parent,
+                                                       data);
                 g_free (data);
 	}
 
@@ -465,10 +466,10 @@ draw_object (glLabelObject *object,
 	text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
         text = gl_text_node_expand (text_node, record);
 	if (text_node->field_flag && screen_flag) {
-		text = gl_barcode_default_digits (id, format_digits);
+		text = gl_barcode_backends_default_digits (id, format_digits);
 	}
 
-	gbc = gl_barcode_new (id, text_flag, checksum_flag, w, h, text);
+	gbc = gl_barcode_backends_new_barcode (id, text_flag, checksum_flag, w, h, text);
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
 
