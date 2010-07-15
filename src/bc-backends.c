@@ -168,34 +168,34 @@ static const Backend backends[] = {
 #ifdef HAVE_LIBZINT
 
         { "AUSP", N_("Australia Post Standard"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678901234567890123", TRUE, 23},
 
         { "AUSRP", N_("Australia Post Reply Paid"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
         { "AUSRT", N_("Australia Post Route Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
         { "AUSRD", N_("Australia Post Redirect"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
         { "AZTEC", N_("Aztec Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "1234567890", TRUE, 10},
           
         { "AZRUN", N_("Aztec Rune"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "255", TRUE, 3},
 
         { "CBR", N_("Codabar"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "ABCDABCDAB", TRUE, 10},
 
         { "Code1", N_("Code One"),  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "Code11", N_("Code 11"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
         { "C16K", N_("Code 16K"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
           
         { "C25M", N_("Code 2 of 5 Matrix"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -207,7 +207,7 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "Code32", N_("Code 32 (Italian Pharmacode)"),  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "12345678", TRUE, 8},
 
         { "Code39", N_("Code 39"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -216,7 +216,7 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "Code49", N_("Code 49"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "Code93", N_("Code 93"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -228,46 +228,46 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
         { "DAFT", N_("DAFT Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, FALSE, FALSE, "DAFTDAFTDAFTDAFT", TRUE, 16},
 
         { "DMTX", N_("Data Matrix"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "DPL", N_("Deutsche Post Leitcode"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
         { "DPI", N_("Deutsche Post Identcode"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "12345678901", TRUE, 11},
           
         { "KIX", N_("Dutch Post KIX Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "EAN", N_("European Article Number (EAN)"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "000000000000", FALSE, 13},
+        { "EAN", N_("EAN"), gl_barcode_zint_new,
+          TRUE, TRUE, TRUE, FALSE, "1234567890123", FALSE, 13},
 
         { "GMTX", N_("Grid Matrix"),  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "[01]00000000000000", FALSE, 18},
+          TRUE, TRUE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
 
         { "RSS14", N_("GS1 DataBar-14"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
         { "RSSLTD", "GS1 DataBar-14 Limited",  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
         { "RSSEXP", "GS1 DataBar Extended",  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
           
         { "RSSS", N_("GS1 DataBar-14 Stacked"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "RSSSO", N_("GS1 DataBar-14 Stacked Omni."), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "RSSSE", N_("GS1 DataBar Extended Stacked"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
 
         { "HIBC128", N_("HIBC Code 128"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -276,16 +276,16 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "HIBCDM", N_("HIBC Data Matrix"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "HIBCQR", N_("HIBC QR Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "HIBCPDF", N_("HIBC PDF417"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "HIBCMPDF", N_("HIBC Micro PDF417"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "HIBCAZ", N_("HIBC Aztec Code"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -294,58 +294,58 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "ISBN", N_("ISBN"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "123456789", FALSE, 9},
 
         { "ITF14", N_("ITF-14"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "JAPAN", N_("Japanese Postal"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "KOREA", N_("Korean Postal"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "123456", FALSE, 6},
 
         { "LOGM", N_("LOGMARS"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "MPDF", N_("Micro PDF417"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "MQR", N_("Micro QR Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "MSI", N_("MSI Plessey"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "NVE", N_("NVE-18"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "12345678901234567", FALSE, 17},
 
         { "PDF", N_("PDF417"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "PDFT", N_("PDF417 Truncated"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "PLAN", N_("PLANET"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "POSTNET", N_("PostNet"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "PHARMA", N_("Pharmacode"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "00000", TRUE, 5},
+          FALSE, FALSE, TRUE, FALSE, "123456", FALSE, 6},
 
         { "PHARMA2", N_("Pharmacode 2-track"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678", FALSE, 8},
 
         { "PZN", N_("Pharmazentral Nummer (PZN)"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          TRUE, TRUE, TRUE, FALSE, "123456", FALSE, 6},
 
         { "QR", N_("QR Code"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "RM4", N_("Royal Mail 4-State"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "TELE", N_("Telepen"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
@@ -354,13 +354,13 @@ static const Backend backends[] = {
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
         { "UPC-A", N_("UPC-A"),  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "00000000000", FALSE, 11},
+          TRUE, TRUE, TRUE, FALSE, "12345678901", FALSE, 11},
           
         { "UPC-E", N_("UPC-E"),  gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "000000", FALSE, 6},
+          TRUE, TRUE, TRUE, FALSE, "1234567", FALSE, 7},
           
         { "USPS", N_("USPS One Code"), gl_barcode_zint_new,
-          TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
+          FALSE, FALSE, TRUE, FALSE, "12345678901234567890", TRUE, 20},
 
         { "PLS", N_("UK Plessey"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
