@@ -165,12 +165,12 @@ gl_color_history_model_add_color (glColorHistoryModel *this,
 
         new[0] = color;
 
-        for ( i = 0; (i < this->priv->max_n) && (i < n); i++ )
+        for ( i = 0; (i < (this->priv->max_n-1)) && (i < n); i++ )
         {
                 new[i+1] = old[i];
         }
 
-        set_color_array (this, new, i);
+        set_color_array (this, new, i+1);
 
         g_free (old);
         g_free (new);
@@ -233,14 +233,14 @@ set_color_array (glColorHistoryModel *this,
 
         for ( i = 0; i < n_elements; i++ )
         {
-                child_values[i] = g_variant_ref_sink (g_variant_new_uint32 (array[i]));
+                child_values[i] = g_variant_new_uint32 (array[i]);
         }
 
-        g_variant_new_array (G_VARIANT_TYPE ("u"), child_values, n_elements);
+        value = g_variant_new_array (G_VARIANT_TYPE_UINT32, child_values, n_elements);
 
         g_settings_set_value (this->priv->history, "recent-colors", value);
 
-        g_variant_unref (value);
+        g_free (child_values);
 }
 
 

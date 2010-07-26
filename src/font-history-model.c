@@ -153,20 +153,25 @@ gl_font_history_model_add_family (glFontHistoryModel *this,
 {
         gchar **old;
         gchar **new;
-        gint    i;
+        gint    i, j;
 
-        old = g_settings_get_strv (this->priv->history, "recent-templates");
+        old = g_settings_get_strv (this->priv->history, "recent-fonts");
                                    
         new = g_new0 (gchar *, this->priv->max_n+1);
 
+        /* Put in first slot. */
         new[0] = g_strdup (family);
 
-        for ( i = 0; (i < (this->priv->max_n-1)) && old[i]; i++ )
+        /* Push everthing else down, pruning any duplicate found. */
+        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
         {
-                new[i+1] = g_strdup (old[i]);
+                if ( lgl_str_utf8_casecmp (family, old[i]) != 0 )
+                {
+                        new[j++] = g_strdup (old[i]);
+                }
         }
 
-        g_settings_set_strv (this->priv->history, "recent-templates",
+        g_settings_set_strv (this->priv->history, "recent-fonts",
                              (const gchar * const *)new);
 
         g_strfreev (old);
@@ -194,7 +199,7 @@ gl_font_history_model_get_family_list (glFontHistoryModel *this)
         GList  *list = NULL;
         gint    i;
 
-        strv = g_settings_get_strv (this->priv->history, "recent-templates");
+        strv = g_settings_get_strv (this->priv->history, "recent-fonts");
 
         /*
          * Proof read name list; transfer storage to new list.

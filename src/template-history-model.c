@@ -144,7 +144,7 @@ gl_template_history_model_new (guint n)
 
 
 /*****************************************************************************/
-/* Add template to history.                                                      */
+/* Add template to history.                                                  */
 /*****************************************************************************/
 void
 gl_template_history_model_add_name (glTemplateHistoryModel *this,
@@ -152,17 +152,22 @@ gl_template_history_model_add_name (glTemplateHistoryModel *this,
 {
         gchar **old;
         gchar **new;
-        gint    i;
+        gint    i, j;
 
         old = g_settings_get_strv (this->priv->history, "recent-templates");
                                    
         new = g_new0 (gchar *, this->priv->max_n+1);
 
+        /* Put in first slot. */
         new[0] = g_strdup (name);
 
-        for ( i = 0; (i < (this->priv->max_n-1)) && old[i]; i++ )
+        /* Push everthing else down, pruning any duplicate found. */
+        for ( i = 0, j = 1; (j < (this->priv->max_n-1)) && old[i]; i++ )
         {
-                new[i+1] = g_strdup (old[i]);
+                if ( lgl_str_utf8_casecmp (name, old[i]) != 0 )
+                {
+                        new[j++] = g_strdup (old[i]);
+                }
         }
 
         g_settings_set_strv (this->priv->history, "recent-templates",
