@@ -242,6 +242,20 @@
     </Label-round>
   </Template>
 
+
+  <!-- =================================================================== -->
+  <!-- Staples 598385 CD/DVD Labels.                                       -->
+  <!-- =================================================================== -->
+  <Template brand="Staples" part="598385" size="US-Letter" _description="CD/DVD Labels">
+    <Meta category="label"/>
+    <Meta category="media"/>
+    <Label-cd id="0" radius="2.312in" hole="0.8125in" waste="0.065in">
+      <Markup-margin size="0.125in"/>
+      <Layout nx="1" ny="2" x0="2in" y0="0.6875in" dx="4.754in" dy="5in"/>
+    </Label-cd>
+  </Template>
+
+
 </Glabels-templates>
 
 
