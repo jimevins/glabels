@@ -1,19 +1,19 @@
 # Spanish translation of glabels.
 # sergio rivadero <sergiorivadero@argentina.com>, 2005.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: glabels 2.1.0\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=46122&ati\n"
-"POT-Creation-Date: 2010-07-09 00:38+0000\n"
-"PO-Revision-Date: 2010-07-10 10:39+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"POT-Creation-Date: 2010-08-03 01:58+0000\n"
+"PO-Revision-Date: 2010-08-05 10:17+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"Language-Team: es <gnome-es-list@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/bc.c:66
@@ -1085,9 +1085,6 @@ msgid "Edit gLabels Template"
 msgstr "Editar plantilla de gLabels"
 
 #: ../src/template-designer.c:1423
-#| msgid ""
-#| "<span foreground='red' weight='bold'>Brand and part# match an existing "
-#| "template!</span>"
 msgid "Brand and part# match an existing template!"
 msgstr "La marca y el número de parte coinciden con una plantilla existente"
 
@@ -1640,14 +1637,12 @@ msgstr "No se definió previamente la parte equivalente («%s») para «%s»."
 #.
 #: ../libglabels/template.c:727
 #, c-format
-#| msgid "%d x %d  (%d per sheet)"
 msgid "%d × %d (%d per sheet)"
 msgstr "%d x %d  (%d por hoja)"
 
 #. Translators: %d is the total number of labels on a page (sheet).
 #: ../libglabels/template.c:732
 #, c-format
-#| msgid "per sheet"
 msgid "%d per sheet"
 msgstr "%d por hoja"
 
@@ -1734,7 +1729,6 @@ msgid "Location:"
 msgstr "Ubicación:"
 
 #: ../data/ui/merge-properties-dialog.ui.h:3
-#| msgid "<b>Record selection/preview</b>"
 msgid "Record selection/preview"
 msgstr "Grabar la selección/vista previa"
 
@@ -1743,7 +1737,6 @@ msgid "Select all"
 msgstr "Seleccionar todo"
 
 #: ../data/ui/merge-properties-dialog.ui.h:5
-#| msgid "<b>Source</b>"
 msgid "Source"
 msgstr "Origen"
 
@@ -2003,7 +1996,6 @@ msgid "US Letter"
 msgstr "Carta"
 
 #: ../data/ui/prefs-dialog.ui.h:19
-#| msgid "Untitled"
 msgid "Units"
 msgstr "Unidades"
 
@@ -2253,12 +2245,10 @@ msgid "Copies:"
 msgstr "Copias:"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:5
-#| msgid "<b>Merge Control</b>"
 msgid "Merge Control"
 msgstr "Control de mezcla"
 
 #: ../data/ui/print-op-dialog-custom-widget.ui.h:6
-#| msgid "<b>Options</b>"
 msgid "Options"
 msgstr "Opciones"
 
@@ -2631,9 +2621,14 @@ msgstr "Interior de CD"
 msgid "Diskette labels"
 msgstr "Etiquetas de disquette"
 
-#. ===============================================================
 #. ===================================================================
 #: ../templates/avery-iso-templates.xml.h:20
+msgid "Identification Labels"
+msgstr "Etiquetas de identificación"
+
+#. ===============================================================
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:22
 #: ../templates/misc-us-templates.xml.h:20
 #: ../templates/misc-iso-templates.xml.h:36
 #: ../templates/zweckform-iso-templates.xml.h:16
@@ -2641,22 +2636,30 @@ msgid "Mailing Labels"
 msgstr "Etiquetas de correo"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:22
+#: ../templates/avery-iso-templates.xml.h:24
 msgid "Mailing labels"
 msgstr "Etiquetas de correo"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:24
+#: ../templates/avery-iso-templates.xml.h:26
 msgid "Mini Address Labels"
 msgstr "Etiquetas de dirección pequeñas"
 
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:26
+#: ../templates/avery-iso-templates.xml.h:28
 msgid "Mini Labels"
 msgstr "Minietiquetas"
 
+#. ============================================================
 #. ===================================================================
-#: ../templates/avery-iso-templates.xml.h:28
+#: ../templates/avery-iso-templates.xml.h:30
+#: ../templates/misc-iso-templates.xml.h:44
+#: ../templates/zweckform-iso-templates.xml.h:24
+msgid "Rectangular Labels"
+msgstr "Etiquetas rectangulares"
+
+#. ===================================================================
+#: ../templates/avery-iso-templates.xml.h:32
 msgid "Shipping labels"
 msgstr "Etiquetas de envío"
 
@@ -2863,12 +2866,6 @@ msgstr "Etiquetas de correo - 2 columnas"
 #: ../templates/misc-iso-templates.xml.h:40
 msgid "Mailing Labels-3 columns"
 msgstr "Etiquetas de correo - 3 columnas"
-
-#. ===================================================================
-#: ../templates/misc-iso-templates.xml.h:44
-#: ../templates/zweckform-iso-templates.xml.h:24
-msgid "Rectangular Labels"
-msgstr "Etiquetas rectangulares"
 
 #. ===================================================================
 #: ../templates/misc-iso-templates.xml.h:46
