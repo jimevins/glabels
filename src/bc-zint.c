@@ -123,6 +123,7 @@ gl_barcode_zint_new (const gchar          *id,
 	if (g_ascii_strcasecmp (id, "TELEX") == 0) { symbol->symbology = BARCODE_TELEPEN_NUM; }
 	if (g_ascii_strcasecmp (id, "JAPAN") == 0) { symbol->symbology = BARCODE_JAPANPOST; }
 	if (g_ascii_strcasecmp (id, "KOREA") == 0) { symbol->symbology = BARCODE_KOREAPOST; }
+	if (g_ascii_strcasecmp (id, "MAXI") == 0) { symbol->symbology = BARCODE_MAXICODE; }
 	if (g_ascii_strcasecmp (id, "MPDF") == 0) { symbol->symbology = BARCODE_MICROPDF417; }
 	if (g_ascii_strcasecmp (id, "MSI") == 0) { symbol->symbology = BARCODE_MSI_PLESSEY; }
 	if (g_ascii_strcasecmp (id, "MQR") == 0) { symbol->symbology = BARCODE_MICROQR; }
@@ -173,19 +174,16 @@ gl_barcode_zint_new (const gchar          *id,
 
 /*--------------------------------------------------------------------------
  * PRIVATE. Render to glBarcode the provided Zint symbol.
- *
- * Based on the SVG output from Zint library, handles lots of otherwise
- * internal  Zint code to convert directly to glBarcode representation.
- *
  *--------------------------------------------------------------------------*/
 static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
 {
         glBarcode            *gbc;
 
-        struct zint_render        *render;
-        struct zint_render_line   *zline;
-        struct zint_render_string *zstring;
-
+        struct zint_render         *render;
+        struct zint_render_line    *zline;
+        struct zint_render_string  *zstring;
+        struct zint_render_ring    *zring;
+        struct zint_render_hexagon *zhexagon;
 
         render = symbol->rendered;
         gbc = gl_barcode_new ();
@@ -195,9 +193,16 @@ static glBarcode *render_zint(struct zint_symbol *symbol, gboolean text_flag)
                 gl_barcode_add_box (gbc, zline->x, zline->y, zline->width, zline->length);
         }
 
-	/*
-	 * Repeat loop for characters
-	 */
+        for ( zring = render->rings; zring != NULL; zring = zring->next )
+        {
+                gl_barcode_add_ring (gbc, zring->x, zring->y, zring->radius, zring->line_width);
+        }
+
+        for ( zhexagon = render->hexagons; zhexagon != NULL; zhexagon = zhexagon->next )
+        {
+                gl_barcode_add_hexagon (gbc, zhexagon->x, zhexagon->y);
+        }
+
         if(text_flag)
         {
                 for ( zstring = render->strings; zstring != NULL; zstring = zstring->next )

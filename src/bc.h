@@ -74,6 +74,15 @@ void             gl_barcode_add_string       (glBarcode      *bc,
                                               gchar          *string,
                                               gsize           length);
 
+void             gl_barcode_add_ring         (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y,
+                                              gdouble         radius,
+                                              gdouble         line_width);
+
+void             gl_barcode_add_hexagon      (glBarcode      *bc,
+                                              gdouble         x,
+                                              gdouble         y);
 
 /*******************************/
 /* Barcode Drawing Primitives. */
@@ -84,6 +93,8 @@ typedef enum {
         GL_BARCODE_SHAPE_BOX,
         GL_BARCODE_SHAPE_CHAR,
         GL_BARCODE_SHAPE_STRING,
+        GL_BARCODE_SHAPE_RING,
+        GL_BARCODE_SHAPE_HEXAGON,
 } glBarcodeShapeType;
 
 typedef struct {
@@ -211,6 +222,69 @@ typedef struct {
 
 } glBarcodeShapeString;
 
+/*
+ * glBarcodeShapeRing:
+ *
+ * @ = origin (x,y) is centre of circle
+ *
+ *                v  line_width
+ *           _.-""""-._
+ *         .'   ____   `.
+ *        /   .'  ^ `.   \
+ *       |   /        \   |
+ *       |   |    @---|---|------
+ *       |   \        /   |     ^
+ *        \   `.____.'   /      | radius
+ *         `._    ...._.'.......|
+ *            `-....-'
+ */
+
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_RING. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+        gdouble             radius;
+        gdouble             line_width;
+
+} glBarcodeShapeRing;
+
+/*
+ * glBarcodeShapeHexagon;
+ *
+ * @ = origin (x,y) is top of hexagon
+ *
+ *                  @
+ *              _-"   "-_
+ *          _-"           "-_
+ *       +"                   "+
+ *       |                     |
+ *       |                     |
+ *       |                     |
+ *       |                     |
+ *       |                     |
+ *       +_                   _+
+ *         "-_             _-"
+ *            "-_       _-"
+ *               "-_ _-"
+ *                  "
+ *
+ * NOTE: For Maxicode hexagons height is always 1.02mm, width is always 0.88mm
+ */
+
+typedef struct {
+
+        /* Begin Common Fields */
+        glBarcodeShapeType  type; /* Always GL_BARCODE_SHAPE_HEXAGON. */
+        gdouble             x;
+        gdouble             y;
+        /* End Common Fields */
+
+} glBarcodeShapeHexagon;
+
 typedef union {
 
         glBarcodeShapeType    type;
@@ -220,6 +294,8 @@ typedef union {
         glBarcodeShapeBox     box;
         glBarcodeShapeChar    bchar;
         glBarcodeShapeString  string;
+        glBarcodeShapeRing    ring;
+        glBarcodeShapeHexagon hexagon;
 
 } glBarcodeShape;
 

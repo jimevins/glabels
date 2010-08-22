@@ -182,6 +182,44 @@ gl_barcode_add_string (glBarcode      *bc,
         gl_barcode_add_shape (bc, (glBarcodeShape *)string_shape);
 }
 
+/*****************************************************************************/
+/* Add ring.                                                                 */
+/*****************************************************************************/
+void
+gl_barcode_add_ring (glBarcode      *bc,
+                     gdouble         x,
+                     gdouble         y,
+                     gdouble         radius,
+                     gdouble         line_width)
+{
+        glBarcodeShapeRing *ring_shape = g_new0 (glBarcodeShapeRing, 1);
+        ring_shape->type = GL_BARCODE_SHAPE_RING;
+
+        ring_shape->x          = x;
+        ring_shape->y          = y;
+        ring_shape->radius     = radius;
+        ring_shape->line_width = line_width;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)ring_shape);
+}
+
+/*****************************************************************************/
+/* Add hexagon.                                                              */
+/*****************************************************************************/
+void
+gl_barcode_add_hexagon (glBarcode      *bc,
+                        gdouble         x,
+                        gdouble         y)
+{
+        glBarcodeShapeHexagon *hexagon_shape = g_new0 (glBarcodeShapeHexagon, 1);
+        hexagon_shape->type = GL_BARCODE_SHAPE_HEXAGON;
+
+        hexagon_shape->x      = x;
+        hexagon_shape->y      = y;
+
+        gl_barcode_add_shape (bc, (glBarcodeShape *)hexagon_shape);
+}
+
 
 /*****************************************************************************/
 /* Add shape to barcode.                                                     */

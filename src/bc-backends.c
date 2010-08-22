@@ -308,6 +308,9 @@ static const Backend backends[] = {
         { "LOGM", N_("LOGMARS"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
+        { "MAXI", N_("Maxicode"), gl_barcode_zint_new,
+          FALSE, FALSE, FALSE, FALSE, "0000000000", TRUE, 10},
+
         { "MPDF", N_("Micro PDF417"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
