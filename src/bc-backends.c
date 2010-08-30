@@ -54,6 +54,13 @@ typedef glBarcode *(*glBarcodeNewFunc) (const gchar    *id,
 typedef struct {
         gchar            *id;
         gchar            *name;
+} Backend;
+
+
+typedef struct {
+        gchar            *backend_id;
+        gchar            *id;
+        gchar            *name;
         glBarcodeNewFunc  new_barcode;
         gboolean          can_text;
         gboolean          text_optional;
@@ -62,7 +69,7 @@ typedef struct {
         gchar            *default_digits;
         gboolean          can_freeform;
         guint             prefered_n;
-} Backend;
+} Style;
 
 
 /*========================================================*/
@@ -71,320 +78,340 @@ typedef struct {
 
 static const Backend backends[] = {
 
-        { "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
+        { "built-in",    N_("Built-in") },
+#ifdef HAVE_LIBBARCODE
+        { "gnu-barcode", "GNU Barcode" },
+#endif
+#ifdef HAVE_LIBZINT
+        { "zint",        "Zint" },
+#endif
+#ifdef HAVE_LIBIEC16022
+        { "libiec16022", "IEC16022" },
+#endif
+#ifdef HAVE_LIBQRENCODE
+        { "libqrencode", "QREncode" },
+#endif
+
+        { NULL, NULL }
+};
+
+
+static const Style styles[] = {
+
+        { "built-in", "POSTNET", N_("POSTNET (any)"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
-        { "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-5", N_("POSTNET-5 (ZIP only)"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345", FALSE, 5},
 
-        { "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-9", N_("POSTNET-9 (ZIP+4)"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789", FALSE, 9},
 
-        { "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
+        { "built-in", "POSTNET-11", N_("POSTNET-11 (DPBC)"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345-6789-12", FALSE, 11},
 
-        { "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
+        { "built-in", "CEPNET", N_("CEPNET"), gl_barcode_postnet_new,
           FALSE, FALSE, TRUE, FALSE, "12345-678", FALSE, 8},
 
 #ifdef HAVE_LIBBARCODE
 
-        { "EAN", N_("EAN (any)"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN", N_("EAN (any)"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
 
-        { "EAN-8", N_("EAN-8"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-8", N_("EAN-8"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "0000000", FALSE, 7},
 
-        { "EAN-8+2", N_("EAN-8 +2"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-8+2", N_("EAN-8 +2"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "0000000 00", FALSE, 9},
 
-        { "EAN-8+5", N_("EAN-8 +5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-8+5", N_("EAN-8 +5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "0000000 00000", FALSE, 12},
 
-        { "EAN-13", N_("EAN-13"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-13", N_("EAN-13"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000000000", FALSE, 12},
 
-        { "EAN-13+2", N_("EAN-13 +2"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-13+2", N_("EAN-13 +2"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000000000 00", FALSE, 14},
 
-        { "EAN-13+5", N_("EAN-13 +5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "EAN-13+5", N_("EAN-13 +5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000000000 00000", FALSE, 17},
 
-        { "UPC", N_("UPC (UPC-A or UPC-E)"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC", N_("UPC (UPC-A or UPC-E)"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
 
-        { "UPC-A", N_("UPC-A"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-A", N_("UPC-A"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "00000000000", FALSE, 11},
 
-        { "UPC-A+2", N_("UPC-A +2"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-A+2", N_("UPC-A +2"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "00000000000 00", FALSE, 13},
 
-        { "UPC-A+5", N_("UPC-A +5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-A+5", N_("UPC-A +5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "00000000000 00000", FALSE, 16},
 
-        { "UPC-E", N_("UPC-E"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-E", N_("UPC-E"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000", FALSE, 6},
 
-        { "UPC-E+2", N_("UPC-E +2"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-E+2", N_("UPC-E +2"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000 00", FALSE, 8},
 
-        { "UPC-E+5", N_("UPC-E +5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "UPC-E+5", N_("UPC-E +5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "000000 00000", FALSE, 11},
 
-        { "ISBN", N_("ISBN"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "ISBN", N_("ISBN"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0-00000-000-0", FALSE, 10},
 
-        { "ISBN+5", N_("ISBN +5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "ISBN+5", N_("ISBN +5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0-00000-000-0 00000", FALSE, 15},
 
-        { "Code39", N_("Code 39"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "Code39", N_("Code 39"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "Code128", N_("Code 128"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "Code128", N_("Code 128"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "Code128C", N_("Code 128C"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "Code128C", N_("Code 128C"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code128B", N_("Code 128B"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "Code128B", N_("Code 128B"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "I25", N_("Interleaved 2 of 5"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "I25", N_("Interleaved 2 of 5"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "CBR", N_("Codabar"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "CBR", N_("Codabar"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "MSI", N_("MSI"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "MSI", N_("MSI"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "PLS", N_("Plessey"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, TRUE, "0000000000", TRUE, 10},
 
-        { "Code93", N_("Code 93"), gl_barcode_gnubarcode_new,
+        { "gnu-barcode", "Code93", N_("Code 93"), gl_barcode_gnubarcode_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 #endif /* HAVE_LIBBARCODE */
 
 #ifdef HAVE_LIBZINT
 
-        { "AUSP", N_("Australia Post Standard"), gl_barcode_zint_new,
+        { "zint", "AUSP", N_("Australia Post Standard"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678901234567890123", TRUE, 23},
 
-        { "AUSRP", N_("Australia Post Reply Paid"), gl_barcode_zint_new,
+        { "zint", "AUSRP", N_("Australia Post Reply Paid"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
-        { "AUSRT", N_("Australia Post Route Code"), gl_barcode_zint_new,
+        { "zint", "AUSRT", N_("Australia Post Route Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
-        { "AUSRD", N_("Australia Post Redirect"), gl_barcode_zint_new,
+        { "zint", "AUSRD", N_("Australia Post Redirect"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
-        { "AZTEC", N_("Aztec Code"), gl_barcode_zint_new,
+        { "zint", "AZTEC", N_("Aztec Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "1234567890", TRUE, 10},
           
-        { "AZRUN", N_("Aztec Rune"), gl_barcode_zint_new,
+        { "zint", "AZRUN", N_("Aztec Rune"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "255", TRUE, 3},
 
-        { "CBR", N_("Codabar"), gl_barcode_zint_new,
+        { "zint", "CBR", N_("Codabar"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "ABCDABCDAB", TRUE, 10},
 
-        { "Code1", N_("Code One"),  gl_barcode_zint_new,
+        { "zint", "Code1", N_("Code One"),  gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code11", N_("Code 11"), gl_barcode_zint_new,
+        { "zint", "Code11", N_("Code 11"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "C16K", N_("Code 16K"), gl_barcode_zint_new,
+        { "zint", "C16K", N_("Code 16K"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "C25M", N_("Code 2 of 5 Matrix"),  gl_barcode_zint_new,
+        { "zint", "C25M", N_("Code 2 of 5 Matrix"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "C25I", N_("Code 2 of 5 IATA"),  gl_barcode_zint_new,
+        { "zint", "C25I", N_("Code 2 of 5 IATA"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "C25DL", N_("Code 2 of 5 Data Logic"),  gl_barcode_zint_new,
+        { "zint", "C25DL", N_("Code 2 of 5 Data Logic"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code32", N_("Code 32 (Italian Pharmacode)"),  gl_barcode_zint_new,
+        { "zint", "Code32", N_("Code 32 (Italian Pharmacode)"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "12345678", TRUE, 8},
 
-        { "Code39", N_("Code 39"), gl_barcode_zint_new,
+        { "zint", "Code39", N_("Code 39"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "Code39E", N_("Code 39 Extended"),  gl_barcode_zint_new,
+        { "zint", "Code39E", N_("Code 39 Extended"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code49", N_("Code 49"), gl_barcode_zint_new,
+        { "zint", "Code49", N_("Code 49"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code93", N_("Code 93"), gl_barcode_zint_new,
+        { "zint", "Code93", N_("Code 93"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "Code128", N_("Code 128"), gl_barcode_zint_new,
+        { "zint", "Code128", N_("Code 128"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "Code128B", N_("Code 128 (Mode C supression)"), gl_barcode_zint_new,
+        { "zint", "Code128B", N_("Code 128 (Mode C supression)"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
           
-        { "DAFT", N_("DAFT Code"), gl_barcode_zint_new,
+        { "zint", "DAFT", N_("DAFT Code"), gl_barcode_zint_new,
           FALSE, FALSE, FALSE, FALSE, "DAFTDAFTDAFTDAFT", TRUE, 16},
 
-        { "DMTX", N_("Data Matrix"), gl_barcode_zint_new,
+        { "zint", "DMTX", N_("Data Matrix"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "DPL", N_("Deutsche Post Leitcode"), gl_barcode_zint_new,
+        { "zint", "DPL", N_("Deutsche Post Leitcode"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
-        { "DPI", N_("Deutsche Post Identcode"), gl_barcode_zint_new,
+        { "zint", "DPI", N_("Deutsche Post Identcode"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "12345678901", TRUE, 11},
           
-        { "KIX", N_("Dutch Post KIX Code"), gl_barcode_zint_new,
+        { "zint", "KIX", N_("Dutch Post KIX Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "EAN", N_("EAN"), gl_barcode_zint_new,
+        { "zint", "EAN", N_("EAN"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567890123", FALSE, 13},
 
-        { "GMTX", N_("Grid Matrix"),  gl_barcode_zint_new,
+        { "zint", "GMTX", N_("Grid Matrix"),  gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
+        { "zint", "GS1-128", N_("GS1-128"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
 
-        { "RSS14", N_("GS1 DataBar-14"), gl_barcode_zint_new,
+        { "zint", "RSS14", N_("GS1 DataBar-14"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
-        { "RSSLTD", "GS1 DataBar-14 Limited",  gl_barcode_zint_new,
+        { "zint", "RSSLTD", "GS1 DataBar-14 Limited",  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567890123", TRUE, 13},
           
-        { "RSSEXP", "GS1 DataBar Extended",  gl_barcode_zint_new,
+        { "zint", "RSSEXP", "GS1 DataBar Extended",  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
           
-        { "RSSS", N_("GS1 DataBar-14 Stacked"), gl_barcode_zint_new,
+        { "zint", "RSSS", N_("GS1 DataBar-14 Stacked"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "RSSSO", N_("GS1 DataBar-14 Stacked Omni."), gl_barcode_zint_new,
+        { "zint", "RSSSO", N_("GS1 DataBar-14 Stacked Omni."), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "RSSSE", N_("GS1 DataBar Extended Stacked"), gl_barcode_zint_new,
+        { "zint", "RSSSE", N_("GS1 DataBar Extended Stacked"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "[01]12345678901234", FALSE, 18},
 
-        { "HIBC128", N_("HIBC Code 128"), gl_barcode_zint_new,
+        { "zint", "HIBC128", N_("HIBC Code 128"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBC39", N_("HIBC Code 39"), gl_barcode_zint_new,
+        { "zint", "HIBC39", N_("HIBC Code 39"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBCDM", N_("HIBC Data Matrix"), gl_barcode_zint_new,
+        { "zint", "HIBCDM", N_("HIBC Data Matrix"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBCQR", N_("HIBC QR Code"), gl_barcode_zint_new,
+        { "zint", "HIBCQR", N_("HIBC QR Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBCPDF", N_("HIBC PDF417"), gl_barcode_zint_new,
+        { "zint", "HIBCPDF", N_("HIBC PDF417"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBCMPDF", N_("HIBC Micro PDF417"), gl_barcode_zint_new,
+        { "zint", "HIBCMPDF", N_("HIBC Micro PDF417"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "HIBCAZ", N_("HIBC Aztec Code"), gl_barcode_zint_new,
+        { "zint", "HIBCAZ", N_("HIBC Aztec Code"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "I25", N_("Interleaved 2 of 5"), gl_barcode_zint_new,
+        { "zint", "I25", N_("Interleaved 2 of 5"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "ISBN", N_("ISBN"), gl_barcode_zint_new,
+        { "zint", "ISBN", N_("ISBN"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "123456789", FALSE, 9},
 
-        { "ITF14", N_("ITF-14"), gl_barcode_zint_new,
+        { "zint", "ITF14", N_("ITF-14"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "JAPAN", N_("Japanese Postal"), gl_barcode_zint_new,
+        { "zint", "JAPAN", N_("Japanese Postal"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "KOREA", N_("Korean Postal"), gl_barcode_zint_new,
+        { "zint", "KOREA", N_("Korean Postal"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "123456", FALSE, 6},
 
-        { "LOGM", N_("LOGMARS"), gl_barcode_zint_new,
+        { "zint", "LOGM", N_("LOGMARS"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "MAXI", N_("Maxicode"), gl_barcode_zint_new,
+        { "zint", "MAXI", N_("Maxicode"), gl_barcode_zint_new,
           FALSE, FALSE, FALSE, FALSE, "0000000000", TRUE, 10},
 
-        { "MPDF", N_("Micro PDF417"), gl_barcode_zint_new,
+        { "zint", "MPDF", N_("Micro PDF417"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "MQR", N_("Micro QR Code"), gl_barcode_zint_new,
+        { "zint", "MQR", N_("Micro QR Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "MSI", N_("MSI Plessey"), gl_barcode_zint_new,
+        { "zint", "MSI", N_("MSI Plessey"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "NVE", N_("NVE-18"), gl_barcode_zint_new,
+        { "zint", "NVE", N_("NVE-18"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "12345678901234567", FALSE, 17},
 
-        { "PDF", N_("PDF417"), gl_barcode_zint_new,
+        { "zint", "PDF", N_("PDF417"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "PDFT", N_("PDF417 Truncated"), gl_barcode_zint_new,
+        { "zint", "PDFT", N_("PDF417 Truncated"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "PLAN", N_("PLANET"), gl_barcode_zint_new,
+        { "zint", "PLAN", N_("PLANET"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "POSTNET", N_("PostNet"), gl_barcode_zint_new,
+        { "zint", "POSTNET", N_("PostNet"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "PHARMA", N_("Pharmacode"), gl_barcode_zint_new,
+        { "zint", "PHARMA", N_("Pharmacode"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "123456", FALSE, 6},
 
-        { "PHARMA2", N_("Pharmacode 2-track"), gl_barcode_zint_new,
+        { "zint", "PHARMA2", N_("Pharmacode 2-track"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", FALSE, 8},
 
-        { "PZN", N_("Pharmazentral Nummer (PZN)"), gl_barcode_zint_new,
+        { "zint", "PZN", N_("Pharmazentral Nummer (PZN)"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "123456", FALSE, 6},
 
-        { "QR", N_("QR Code"), gl_barcode_zint_new,
+        { "zint", "QR", N_("QR Code"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "RM4", N_("Royal Mail 4-State"), gl_barcode_zint_new,
+        { "zint", "RM4", N_("Royal Mail 4-State"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "TELE", N_("Telepen"), gl_barcode_zint_new,
+        { "zint", "TELE", N_("Telepen"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "TELEX", N_("Telepen Numeric"), gl_barcode_zint_new,
+        { "zint", "TELEX", N_("Telepen Numeric"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
-        { "UPC-A", N_("UPC-A"),  gl_barcode_zint_new,
+        { "zint", "UPC-A", N_("UPC-A"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "12345678901", FALSE, 11},
           
-        { "UPC-E", N_("UPC-E"),  gl_barcode_zint_new,
+        { "zint", "UPC-E", N_("UPC-E"),  gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "1234567", FALSE, 7},
           
-        { "USPS", N_("USPS One Code"), gl_barcode_zint_new,
+        { "zint", "USPS", N_("USPS One Code"), gl_barcode_zint_new,
           FALSE, FALSE, TRUE, FALSE, "12345678901234567890", TRUE, 20},
 
-        { "PLS", N_("UK Plessey"), gl_barcode_zint_new,
+        { "zint", "PLS", N_("UK Plessey"), gl_barcode_zint_new,
           TRUE, TRUE, TRUE, FALSE, "0000000000", TRUE, 10},
 
 #endif /* HAVE_LIBZINT */
 
 #ifdef HAVE_LIBIEC16022
 
-        { "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
+        { "libiec16022", "IEC16022", N_("IEC16022 (DataMatrix)"), gl_barcode_iec16022_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
 #endif /* HAVE_LIBIEC16022 */
 
 #ifdef HAVE_LIBQRENCODE
 
-        { "IEC18004", N_("IEC18004 (QRCode)"), gl_barcode_iec18004_new,
+        { "libqrencode", "IEC18004", N_("IEC18004 (QRCode)"), gl_barcode_iec18004_new,
           FALSE, FALSE, TRUE, FALSE, "12345678", TRUE, 8},
 
 #endif /* HAVE_LIBQRENCODE */
 
-        { NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
+        { NULL, NULL, NULL, NULL, FALSE, FALSE, FALSE, FALSE, NULL, FALSE, 0}
 
 };
 
@@ -393,23 +420,30 @@ static const Backend backends[] = {
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static gint id_to_index   (const gchar *id);
-static gint name_to_index (const gchar *name);
+static gint backend_id_to_index   (const gchar *id);
+static gint backend_name_to_index (const gchar *name);
+static gint style_id_to_index     (const gchar *backend_id,
+                                   const gchar *id);
+static gint style_name_to_index   (const gchar *backend_id,
+                                   const gchar *name);
 
 /*---------------------------------------------------------------------------*/
-/* Convert id to index into above table.                                     */
+/* Convert backend id to index into backends table.                          */
 /*---------------------------------------------------------------------------*/
 static gint
-id_to_index (const gchar *id)
+backend_id_to_index (const gchar *id)
 {
         gint i;
 
-        if (id == 0) {
+        if (id == NULL)
+        {
                 return 0; /* NULL request default. I.e., the first element. */
         }
 
-        for (i=0; backends[i].id != NULL; i++) {
-                if (g_ascii_strcasecmp (id, backends[i].id) == 0) {
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if (g_ascii_strcasecmp (id, backends[i].id) == 0)
+                {
                         return i;
                 }
         }
@@ -420,17 +454,106 @@ id_to_index (const gchar *id)
 
 
 /*---------------------------------------------------------------------------*/
-/* Convert name to index into above table.                                   */
+/* Convert backend name to index into backends table.                        */
 /*---------------------------------------------------------------------------*/
 static gint
-name_to_index (const gchar *name)
+backend_name_to_index (const gchar *name)
 {
         gint i;
 
-        g_return_val_if_fail (name!=NULL, 0);
+        if (name == NULL)
+        {
+                return 0; /* NULL request default. I.e., the first element. */
+        }
 
-        for (i=0; backends[i].id != NULL; i++) {
-                if (strcmp (name, gettext (backends[i].name)) == 0) {
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if (strcmp (name, gettext (backends[i].name)) == 0)
+                {
+                        return i;
+                }
+        }
+
+        g_message( "Unknown barcode name \"%s\"", name );
+        return 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Convert style id to index into styles table.                              */
+/*---------------------------------------------------------------------------*/
+static gint
+style_id_to_index (const gchar *backend_id,
+                   const gchar *id)
+{
+        gint i;
+
+        if (backend_id == NULL)
+        {
+                return 0; /* NULL request default. I.e., the first element. */
+        }
+
+        if (id == NULL)
+        {
+                /* Search for first element with given backend_id. */
+                for (i=0; styles[i].id != NULL; i++)
+                {
+                        if (g_ascii_strcasecmp (backend_id, styles[i].backend_id) == 0)
+                        {
+                                return i;
+                        }
+                }
+                g_message( "Unknown barcode backend id \"%s\"", backend_id );
+                return 0;
+        }
+
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if ((g_ascii_strcasecmp (backend_id, styles[i].backend_id) == 0) &&
+                    (g_ascii_strcasecmp (id, styles[i].id) == 0))
+                {
+                        return i;
+                }
+        }
+
+        g_message( "Unknown barcode id \"%s\"", id );
+        return 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/* Convert style name to index into styles table.                            */
+/*---------------------------------------------------------------------------*/
+static gint
+style_name_to_index (const gchar *backend_id,
+                     const gchar *name)
+{
+        gint i;
+
+        if (backend_id == NULL)
+        {
+                return 0; /* NULL request default. I.e., the first element. */
+        }
+
+        if (name == NULL)
+        {
+                /* Search for first element with given backend_id. */
+                for (i=0; styles[i].id != NULL; i++)
+                {
+                        if (g_ascii_strcasecmp (backend_id, styles[i].backend_id) == 0)
+                        {
+                                return i;
+                        }
+                }
+                g_message( "Unknown barcode backend id \"%s\"", backend_id );
+                return 0;
+        }
+
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if ((g_ascii_strcasecmp (backend_id, styles[i].backend_id) == 0) &&
+                    (strcmp (name, gettext (styles[i].name)) == 0))
+                {
                         return i;
                 }
         }
@@ -441,16 +564,102 @@ name_to_index (const gchar *name)
 
 
 /*****************************************************************************/
-/* Get a list of names for valid barcode styles.                             */
+/* Get a list of names for configured backends.                              */
 /*****************************************************************************/
 GList *
-gl_barcode_backends_get_styles_list  (void)
+gl_barcode_backends_get_backend_list (void)
 {
         gint   i;
         GList *list = NULL;
 
-        for (i=0; backends[i].id != NULL; i++) {
+        for (i=0; backends[i].id != NULL; i++)
+        {
                 list = g_list_prepend (list, g_strdup (gettext (backends[i].name)));
+        }
+
+        return g_list_reverse (list);
+}
+
+
+/*****************************************************************************/
+/* Free up a previously allocated list of backend names.                     */
+/*****************************************************************************/
+void
+gl_barcode_backends_free_backend_list (GList *backend_list)
+{
+        GList *p;
+
+        for (p=backend_list; p != NULL; p=p->next)
+        {
+                g_free (p->data);
+                p->data = NULL;
+        }
+
+        g_list_free (backend_list);
+}
+
+
+/*****************************************************************************/
+/* Convert backend id to name.                                               */
+/*****************************************************************************/
+const gchar *
+gl_barcode_backends_backend_id_to_name (const gchar *backend_id)
+{
+        return gettext (backends[backend_id_to_index (backend_id)].name);
+}
+
+
+/*****************************************************************************/
+/* Convert backend name to id.                                               */
+/*****************************************************************************/
+const gchar *
+gl_barcode_backends_backend_name_to_id (const gchar *backend_name)
+{
+        return backends[backend_name_to_index (backend_name)].id;
+}
+
+
+/*****************************************************************************/
+/* Guess backend id from style id (for backwards compatability).             */
+/*****************************************************************************/
+const gchar *
+gl_barcode_backends_guess_backend_id (const gchar *id)
+{
+        gint i;
+
+        if (id == NULL)
+        {
+                return styles[0].backend_id;
+        }
+
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if (g_ascii_strcasecmp (id, styles[i].id) == 0)
+                {
+                        return styles[i].backend_id;
+                }
+        }
+
+        g_message( "Unknown barcode id \"%s\"", id );
+        return styles[0].backend_id;
+}
+
+
+/*****************************************************************************/
+/* Get a list of names for valid barcode styles.                             */
+/*****************************************************************************/
+GList *
+gl_barcode_backends_get_styles_list  (const gchar *backend_id)
+{
+        gint   i;
+        GList *list = NULL;
+
+        for (i=0; styles[i].id != NULL; i++)
+        {
+                if ( g_ascii_strcasecmp (styles[i].backend_id, backend_id) == 0 )
+                {
+                        list = g_list_prepend (list, g_strdup (gettext (styles[i].name)));
+                }
         }
 
         return g_list_reverse (list);
@@ -465,7 +674,8 @@ gl_barcode_backends_free_styles_list (GList *styles_list)
 {
         GList *p;
 
-        for (p=styles_list; p != NULL; p=p->next) {
+        for (p=styles_list; p != NULL; p=p->next)
+        {
                 g_free (p->data);
                 p->data = NULL;
         }
@@ -475,24 +685,46 @@ gl_barcode_backends_free_styles_list (GList *styles_list)
 
 
 /*****************************************************************************/
+/* Convert style to text.                                                    */
+/*****************************************************************************/
+const gchar *
+gl_barcode_backends_style_id_to_name (const gchar *backend_id,
+                                      const gchar *id)
+{
+        return gettext (styles[style_id_to_index (backend_id, id)].name);
+}
+
+
+/*****************************************************************************/
+/* Convert name to style.                                                    */
+/*****************************************************************************/
+const gchar *
+gl_barcode_backends_style_name_to_id (const gchar *backend_id,
+                                      const gchar *name)
+{
+        return styles[style_name_to_index (backend_id, name)].id;
+}
+
+
+/*****************************************************************************/
 /* Return an appropriate set of digits for the given barcode style.          */
 /*****************************************************************************/
 gchar *
-gl_barcode_backends_default_digits (const gchar *id,
-                           guint        n)
+gl_barcode_backends_style_default_digits (const gchar *backend_id,
+                                          const gchar *id,
+                                          guint        n)
 {
         int i;
 
-        i = id_to_index (id);
+        i = style_id_to_index (backend_id, id);
 
-        if (backends[i].can_freeform) {
-
+        if (styles[i].can_freeform)
+        {
                 return g_strnfill (MAX (n,1), '0');
-
-        } else {
-
-                return g_strdup (backends[i].default_digits);
-
+        }
+        else
+        {
+                return g_strdup (styles[i].default_digits);
         }
 }
 
@@ -501,16 +733,18 @@ gl_barcode_backends_default_digits (const gchar *id,
 /* Query text capabilities.                                                  */
 /*****************************************************************************/
 gboolean
-gl_barcode_backends_can_text (const gchar *id)
+gl_barcode_backends_style_can_text (const gchar *backend_id,
+                                    const gchar *id)
 {
-        return backends[id_to_index (id)].can_text;
+        return styles[style_id_to_index (backend_id, id)].can_text;
 }
 
 
 gboolean
-gl_barcode_backends_text_optional (const gchar *id)
+gl_barcode_backends_style_text_optional (const gchar *backend_id,
+                                         const gchar *id)
 {
-        return backends[id_to_index (id)].text_optional;
+        return styles[style_id_to_index (backend_id, id)].text_optional;
 }
 
 
@@ -518,16 +752,18 @@ gl_barcode_backends_text_optional (const gchar *id)
 /* Query checksum capabilities.                                              */
 /*****************************************************************************/
 gboolean
-gl_barcode_backends_can_csum (const gchar *id)
+gl_barcode_backends_style_can_csum (const gchar *backend_id,
+                                    const gchar *id)
 {
-        return backends[id_to_index (id)].can_checksum;
+        return styles[style_id_to_index (backend_id, id)].can_checksum;
 }
 
 
 gboolean
-gl_barcode_backends_csum_optional (const gchar *id)
+gl_barcode_backends_style_csum_optional (const gchar *backend_id,
+                                         const gchar *id)
 {
-        return backends[id_to_index (id)].checksum_optional;
+        return styles[style_id_to_index (backend_id, id)].checksum_optional;
 }
 
 
@@ -535,9 +771,10 @@ gl_barcode_backends_csum_optional (const gchar *id)
 /* Query if freeform input is allowed.                                       */
 /*****************************************************************************/
 gboolean
-gl_barcode_backends_can_freeform     (const gchar    *id)
+gl_barcode_backends_style_can_freeform (const gchar *backend_id,
+                                        const gchar    *id)
 {
-        return backends[id_to_index (id)].can_freeform;
+        return styles[style_id_to_index (backend_id, id)].can_freeform;
 }
 
 
@@ -545,31 +782,10 @@ gl_barcode_backends_can_freeform     (const gchar    *id)
 /* Query prefered number of digits of input.                                 */
 /*****************************************************************************/
 guint
-gl_barcode_backends_get_prefered_n (const gchar    *id)
+gl_barcode_backends_style_get_prefered_n (const gchar *backend_id,
+                                          const gchar *id)
 {
-        return backends[id_to_index (id)].prefered_n;
-}
-
-
-/*****************************************************************************/
-/* Convert style to text.                                                    */
-/*****************************************************************************/
-const gchar *
-gl_barcode_backends_id_to_name (const gchar *id)
-{
-        return gettext (backends[id_to_index (id)].name);
-}
-
-
-/*****************************************************************************/
-/* Convert name to style.                                                    */
-/*****************************************************************************/
-const gchar *
-gl_barcode_backends_name_to_id (const gchar *name)
-{
-        g_return_val_if_fail (name!=NULL, backends[0].id);
-
-        return backends[name_to_index (name)].id;
+        return styles[style_id_to_index (backend_id, id)].prefered_n;
 }
 
 
@@ -577,7 +793,8 @@ gl_barcode_backends_name_to_id (const gchar *name)
 /* Call appropriate barcode backend to create barcode in intermediate format.*/
 /*****************************************************************************/
 glBarcode *
-gl_barcode_backends_new_barcode (const gchar    *id,
+gl_barcode_backends_new_barcode (const gchar    *backend_id,
+                                 const gchar    *id,
                                  gboolean        text_flag,
                                  gboolean        checksum_flag,
                                  gdouble         w,
@@ -589,13 +806,14 @@ gl_barcode_backends_new_barcode (const gchar    *id,
 
         g_return_val_if_fail (digits!=NULL, NULL);
 
-        i = id_to_index (id);
-        gbc = backends[i].new_barcode (backends[i].id,
-                                       text_flag,
-                                       checksum_flag,
-                                       w,
-                                       h,
-                                       digits);
+        i = style_id_to_index (backend_id, id);
+
+        gbc = styles[i].new_barcode (styles[i].id,
+                                     text_flag,
+                                     checksum_flag,
+                                     w,
+                                     h,
+                                     digits);
 
         return gbc;
 }

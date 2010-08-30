@@ -1159,9 +1159,23 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkHBox" id="hbox79">
+                      <object class="GtkTable" id="table1">
                         <property name="visible">True</property>
-                        <property name="spacing">12</property>
+                        <property name="n_rows">2</property>
+                        <property name="n_columns">2</property>
+                        <property name="column_spacing">6</property>
+                        <property name="row_spacing">6</property>
+                        <child>
+                          <object class="GtkLabel" id="bc_be_label">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Backend engine:</property>
+                          </object>
+                          <packing>
+                            <property name="x_options">GTK_FILL</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
                         <child>
                           <object class="GtkLabel" id="bc_style_label">
                             <property name="visible">True</property>
@@ -1169,17 +1183,34 @@
                             <property name="label" translatable="yes">Style:</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                            <property name="x_options">GTK_FILL</property>
+                            <property name="y_options"></property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkComboBox" id="bc_style_combo">
                             <property name="visible">True</property>
+                            <property name="button_sensitivity">on</property>
                           </object>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="bc_backend_combo">
+                            <property name="visible">True</property>
+                            <property name="button_sensitivity">on</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="y_options"></property>
                           </packing>
                         </child>
                       </object>
@@ -1252,6 +1283,7 @@
                                     <property name="receives_default">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="focus_on_click">False</property>
+                                    <property name="active">True</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
@@ -2240,22 +2272,22 @@
   <object class="GtkSizeGroup" id="page_sizegroup">
     <property name="mode">both</property>
     <widgets>
-      <widget name="edit_page_vbox"/>
-      <widget name="text_page_vbox"/>
-      <widget name="line_page_vbox"/>
-      <widget name="fill_page_vbox"/>
-      <widget name="img_page_vbox"/>
-      <widget name="data_page_vbox"/>
-      <widget name="bc_page_vbox"/>
-      <widget name="size_page_vbox"/>
-      <widget name="lsize_page_vbox"/>
       <widget name="shadow_page_vbox"/>
+      <widget name="lsize_page_vbox"/>
+      <widget name="size_page_vbox"/>
+      <widget name="bc_page_vbox"/>
+      <widget name="data_page_vbox"/>
+      <widget name="img_page_vbox"/>
+      <widget name="fill_page_vbox"/>
+      <widget name="line_page_vbox"/>
+      <widget name="text_page_vbox"/>
+      <widget name="edit_page_vbox"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="width_sizegroup">
     <widgets>
-      <widget name="title_hbox"/>
       <widget name="notebook"/>
+      <widget name="title_hbox"/>
     </widgets>
   </object>
 </interface>

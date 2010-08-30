@@ -38,6 +38,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
+#include "bc-backends.h"
 #include "xml-label-04.h"
 #include "str-util.h"
 #include "prefs.h"
@@ -744,6 +745,7 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gdouble             w, h;
 	gchar              *string;
 	glTextNode         *text_node;
+	gchar              *backend_id;
 	gchar              *id;
 	gboolean            text_flag;
 	gboolean            checksum_flag;
@@ -765,12 +767,18 @@ xml_parse_object_barcode (xmlNodePtr  node,
 	gl_label_object_set_size (GL_LABEL_OBJECT(object), w, h, FALSE);
 
 	/* prop attrs */
+	backend_id = lgl_xml_get_prop_string (node, "backend", NULL);
 	id = lgl_xml_get_prop_string (node, "style", NULL);
+        if ( !backend_id )
+        {
+                backend_id = g_strdup (gl_barcode_backends_guess_backend_id (id));
+        }
 	text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
 	checksum_flag = lgl_xml_get_prop_boolean (node, "checksum", TRUE);
 	format_digits = lgl_xml_get_prop_uint (node, "format", 10);
 	gl_label_barcode_set_props (GL_LABEL_BARCODE(object),
-				    (gchar *)id, text_flag, checksum_flag, format_digits, FALSE);
+				    backend_id, id, text_flag, checksum_flag, format_digits, FALSE);
+	g_free (backend_id);
 	g_free (id);
 	
 	color_node = gl_color_node_new_default ();
@@ -1586,6 +1594,7 @@ xml_create_object_barcode (xmlNodePtr     parent,
 	gdouble           x, y;
 	gdouble           w, h;
 	glTextNode       *text_node;
+	gchar            *backend_id;
 	gchar            *id;
 	gboolean          text_flag;
 	gboolean          checksum_flag;
@@ -1608,11 +1617,13 @@ xml_create_object_barcode (xmlNodePtr     parent,
 
 	/* Barcode properties attrs */
 	gl_label_barcode_get_props (GL_LABEL_BARCODE(object),
-				    &id, &text_flag, &checksum_flag, &format_digits);
+				    &backend_id, &id, &text_flag, &checksum_flag, &format_digits);
+	lgl_xml_set_prop_string (node, "backend", backend_id);
 	lgl_xml_set_prop_string (node, "style", id);
 	lgl_xml_set_prop_boolean (node, "text", text_flag);
 	lgl_xml_set_prop_boolean (node, "checksum", checksum_flag);
 	
+	g_free (backend_id);
 	g_free (id);
 	
 	color_node = gl_label_object_get_line_color (GL_LABEL_OBJECT(object));

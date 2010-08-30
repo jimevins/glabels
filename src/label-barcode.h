@@ -59,6 +59,7 @@ void            gl_label_barcode_set_data  (glLabelBarcode *lbc,
                                             gboolean        checkpoint);
 
 void            gl_label_barcode_set_props (glLabelBarcode *lbc,
+                                            gchar          *backend_id,
 					    gchar          *id,
 					    gboolean        text_flag,
 					    gboolean        checksum_flag,
@@ -68,6 +69,7 @@ void            gl_label_barcode_set_props (glLabelBarcode *lbc,
 glTextNode     *gl_label_barcode_get_data  (glLabelBarcode *lbc);
 
 void            gl_label_barcode_get_props (glLabelBarcode *lbc,
+					    gchar         **backend_id,
 					    gchar         **id,
 					    gboolean       *text_flag,
 					    gboolean       *checksum_flag,

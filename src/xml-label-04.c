@@ -31,6 +31,7 @@
 #include "label-ellipse.h"
 #include "label-image.h"
 #include "label-barcode.h"
+#include "bc-backends.h"
 #include "str-util.h"
 
 #include "debug.h"
@@ -439,6 +440,7 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 			   glLabelBarcode *object)
 {
 	xmlChar       *id;
+        const gchar   *backend_id;
 	gboolean       text_flag;
 	glColorNode   *color_node;
 	gdouble        scale;
@@ -451,13 +453,14 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 	color_node->color = lgl_xml_get_prop_uint (node, "color", 0);
 
 	id = xmlGetProp (node, (xmlChar *)"style");
+        backend_id = gl_barcode_backends_guess_backend_id (id);
 
 	text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
 	scale =	lgl_xml_get_prop_double (node, "scale", 1.0);
 	if (scale == 0.0) {
 		scale = 0.5; /* Set to a valid value */
 	}
-	gl_label_barcode_set_props (object, (gchar *)id, text_flag, TRUE, 0, FALSE);
+	gl_label_barcode_set_props (object, (gchar *)id, (gchar *)backend_id, text_flag, TRUE, 0, FALSE);
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node, FALSE);
 
 	child = node->xmlChildrenNode;

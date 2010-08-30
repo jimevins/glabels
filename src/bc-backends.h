@@ -27,30 +27,48 @@
 G_BEGIN_DECLS
 
 
-GList           *gl_barcode_backends_get_styles_list  (void);
-void             gl_barcode_backends_free_styles_list (GList          *styles_list);
+GList           *gl_barcode_backends_get_backend_list     (void);
+void             gl_barcode_backends_free_backend_list    (GList          *backend_list);
 
-gchar           *gl_barcode_backends_default_digits   (const gchar    *id,
-                                                       guint           n);
+const gchar     *gl_barcode_backends_backend_id_to_name   (const gchar    *backend_id);
+const gchar     *gl_barcode_backends_backend_name_to_id   (const gchar    *backend_name);
 
-gboolean         gl_barcode_backends_can_text         (const gchar    *id);
-gboolean         gl_barcode_backends_text_optional    (const gchar    *id);
+const gchar     *gl_barcode_backends_guess_backend_id     (const gchar    *id);
 
-gboolean         gl_barcode_backends_can_csum         (const gchar    *id);
-gboolean         gl_barcode_backends_csum_optional    (const gchar    *id);
+GList           *gl_barcode_backends_get_styles_list      (const gchar    *backend_id);
+void             gl_barcode_backends_free_styles_list     (GList          *styles_list);
 
-gboolean         gl_barcode_backends_can_freeform     (const gchar    *id);
-guint            gl_barcode_backends_get_prefered_n   (const gchar    *id);
+const gchar     *gl_barcode_backends_style_id_to_name     (const gchar    *backend_id,
+                                                           const gchar    *id);
+const gchar     *gl_barcode_backends_style_name_to_id     (const gchar    *backend_id,
+                                                           const gchar    *name);
 
-const gchar     *gl_barcode_backends_id_to_name       (const gchar    *id);
-const gchar     *gl_barcode_backends_name_to_id       (const gchar    *name);
+gchar           *gl_barcode_backends_style_default_digits (const gchar    *backend_id,
+                                                           const gchar    *id,
+                                                           guint           n);
 
-glBarcode       *gl_barcode_backends_new_barcode      (const gchar    *id,
-                                                       gboolean        text_flag,
-                                                       gboolean        checksum_flag,
-                                                       gdouble         w,
-                                                       gdouble         h,
-                                                       const gchar    *digits);
+gboolean         gl_barcode_backends_style_can_text       (const gchar    *backend_id,
+                                                           const gchar    *id);
+gboolean         gl_barcode_backends_style_text_optional  (const gchar    *backend_id,
+                                                           const gchar    *id);
+
+gboolean         gl_barcode_backends_style_can_csum       (const gchar    *backend_id,
+                                                           const gchar    *id);
+gboolean         gl_barcode_backends_style_csum_optional  (const gchar    *backend_id,
+                                                           const gchar    *id);
+
+gboolean         gl_barcode_backends_style_can_freeform   (const gchar    *backend_id,
+                                                           const gchar    *id);
+guint            gl_barcode_backends_style_get_prefered_n (const gchar    *backend_id,
+                                                           const gchar    *id);
+
+glBarcode       *gl_barcode_backends_new_barcode          (const gchar    *backend_id,
+                                                           const gchar    *id,
+                                                           gboolean        text_flag,
+                                                           gboolean        checksum_flag,
+                                                           gdouble         w,
+                                                           gdouble         h,
+                                                           const gchar    *digits);
 
 
 

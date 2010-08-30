@@ -122,6 +122,7 @@ struct _glObjectEditorPrivate {
 	GtkWidget  *edit_insert_field_button;
 
 	GtkWidget  *bc_page_vbox;
+	GtkWidget  *bc_backend_combo;
 	GtkWidget  *bc_style_combo;
 	GtkWidget  *bc_text_check;
 	GtkWidget  *bc_cs_check;
@@ -349,13 +350,18 @@ void        gl_object_editor_set_text_buffer      (glObjectEditor      *editor,
 /*
  * Barcode Page
  */
+void        gl_object_editor_load_bc_styles       (glObjectEditor      *editor,
+                                                   const gchar         *backend_id);
+
 void        gl_object_editor_set_bc_style         (glObjectEditor      *editor,
-						   gchar               *id,
+                                                   const gchar         *backend_id,
+						   const gchar         *id,
 						   gboolean             text_flag,
 						   gboolean             checksum_flag,
 						   guint                format_digits);
 
 void        gl_object_editor_get_bc_style         (glObjectEditor      *editor,
+                                                   gchar              **backend_id,
 						   gchar              **id,
 						   gboolean            *text_flag,
 						   gboolean            *checksum_flag,
