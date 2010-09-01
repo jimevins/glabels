@@ -264,7 +264,6 @@ void
 gl_object_editor_load_bc_styles (glObjectEditor      *editor,
                                  const gchar         *backend_id)
 {
-	const gchar *backend_name;
         GList       *styles;
  
 	gl_debug (DEBUG_EDITOR, "START");
@@ -286,23 +285,20 @@ gl_object_editor_load_bc_styles (glObjectEditor      *editor,
 /* Set barcode style.                                                        */
 /*****************************************************************************/
 void
-gl_object_editor_set_bc_style (glObjectEditor      *editor,
-			       const gchar         *backend_id,
-			       const gchar         *id,
-			       gboolean             text_flag,
-			       gboolean             checksum_flag,
-			       guint                format_digits)
+gl_object_editor_set_bc_style (glObjectEditor            *editor,
+			       const glLabelBarcodeStyle *bc_style)
 {
 	const gchar *backend_name;
 	const gchar *style_name;
 	gchar       *ex_string;
+        gint         format_digits;
  
 	gl_debug (DEBUG_EDITOR, "START");
 
         editor->priv->stop_signals = TRUE;
 
-        backend_name = gl_barcode_backends_backend_id_to_name (backend_id);
-        style_name   = gl_barcode_backends_style_id_to_name (backend_id, id);
+        backend_name = gl_barcode_backends_backend_id_to_name (bc_style->backend_id);
+        style_name   = gl_barcode_backends_style_id_to_name (bc_style->backend_id, bc_style->id);
 
 	gl_combo_util_set_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo),
                                        backend_name);
@@ -310,28 +306,28 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
                                        style_name);
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check),
-                                      text_flag);
+                                      bc_style->text_flag);
  
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (editor->priv->bc_cs_check),
-                                      checksum_flag);
+                                      bc_style->checksum_flag);
 
 	gtk_widget_set_sensitive (editor->priv->bc_text_check,
-				  gl_barcode_backends_style_text_optional (backend_id, id));
+				  gl_barcode_backends_style_text_optional (bc_style->backend_id, bc_style->id));
 	gtk_widget_set_sensitive (editor->priv->bc_cs_check,
-				  gl_barcode_backends_style_csum_optional (backend_id, id));
+				  gl_barcode_backends_style_csum_optional (bc_style->backend_id, bc_style->id));
 
-	editor->priv->data_format_fixed_flag = !gl_barcode_backends_style_can_freeform (backend_id, id);
+	editor->priv->data_format_fixed_flag = !gl_barcode_backends_style_can_freeform (bc_style->backend_id, bc_style->id);
 
+        format_digits = bc_style->format_digits;
 	if (editor->priv->data_format_fixed_flag) {
-		format_digits = gl_barcode_backends_style_get_prefered_n (backend_id, id);
+		format_digits = gl_barcode_backends_style_get_prefered_n (bc_style->backend_id, bc_style->id);
 	}
 
-	ex_string = gl_barcode_backends_style_default_digits (backend_id, id, format_digits);
+	ex_string = gl_barcode_backends_style_default_digits (bc_style->backend_id, bc_style->id, format_digits);
 	gtk_label_set_text (GTK_LABEL(editor->priv->data_ex_label), ex_string);
 	g_free (ex_string);
 
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), 
-                                   format_digits);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (editor->priv->data_digits_spin), format_digits);
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->data_literal_radio))) {
 		gtk_widget_set_sensitive (editor->priv->data_format_label, FALSE);
@@ -356,41 +352,39 @@ gl_object_editor_set_bc_style (glObjectEditor      *editor,
 /*****************************************************************************/
 /* Query barcode style.                                                      */
 /*****************************************************************************/
-void
-gl_object_editor_get_bc_style (glObjectEditor      *editor,
-                               gchar              **backend_id,
-			       gchar              **id,
-			       gboolean            *text_flag,
-			       gboolean            *checksum_flag,
-			       guint               *format_digits)
+glLabelBarcodeStyle *
+gl_object_editor_get_bc_style (glObjectEditor      *editor)
 {
-        gchar *backend_name;
-        gchar *style_name;
+        gchar       *backend_name;
+        const gchar *backend_id;
+        gchar       *style_name;
+        const gchar *id;
+
+        glLabelBarcodeStyle *bc_style;
 
 	gl_debug (DEBUG_EDITOR, "START");
                                                                                 
-        backend_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
-        *backend_id = g_strdup (gl_barcode_backends_backend_name_to_id (backend_name));
+        backend_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_backend_combo));
+        backend_id = gl_barcode_backends_backend_name_to_id (backend_name);
 
-        style_name =
-		gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
-        *id = g_strdup (gl_barcode_backends_style_name_to_id (*backend_id, style_name));
-                                                                                
-        *text_flag =
-            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check));
-                                                                                
-        *checksum_flag =
-            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_cs_check));
-                                                                                
+        style_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (editor->priv->bc_style_combo));
+        id = gl_barcode_backends_style_name_to_id (backend_id, style_name);
 
-	*format_digits =
-		gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->data_digits_spin));
+        bc_style = gl_label_barcode_style_new ();
+
+        gl_label_barcode_style_set_backend_id (bc_style, backend_id);
+        gl_label_barcode_style_set_style_id (bc_style, id);
+
+        bc_style->text_flag     = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_text_check));
+        bc_style->checksum_flag = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (editor->priv->bc_cs_check));
+	bc_style->format_digits = gtk_spin_button_get_value (GTK_SPIN_BUTTON(editor->priv->data_digits_spin));
 
         g_free (backend_name);
         g_free (style_name);
 
 	gl_debug (DEBUG_EDITOR, "END");
+
+        return bc_style;
 }
 
 

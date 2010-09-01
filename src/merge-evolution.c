@@ -82,13 +82,13 @@ static void           gl_merge_evolution_get_property    (GObject          *obje
                                                           GValue           *value,
                                                           GParamSpec       *pspec);
 
-static GList         *gl_merge_evolution_get_key_list    (glMerge          *merge);
-static gchar         *gl_merge_evolution_get_primary_key (glMerge          *merge);
+static GList         *gl_merge_evolution_get_key_list    (const glMerge    *merge);
+static gchar         *gl_merge_evolution_get_primary_key (const glMerge    *merge);
 static void           gl_merge_evolution_open            (glMerge          *merge);
 static void           gl_merge_evolution_close           (glMerge          *merge);
 static glMergeRecord *gl_merge_evolution_get_record      (glMerge          *merge);
 static void           gl_merge_evolution_copy            (glMerge          *dst_merge,
-                                                          glMerge          *src_merge);
+                                                          const glMerge    *src_merge);
 
 /* utility function prototypes go here */
 static void           free_field_list                    (GList *fields);
@@ -227,7 +227,7 @@ gl_merge_evolution_get_property (GObject     *object,
 /* Get key list.                                                            */
 /*--------------------------------------------------------------------------*/
 static GList *
-gl_merge_evolution_get_key_list (glMerge *merge)
+gl_merge_evolution_get_key_list (const glMerge *merge)
 {
         glMergeEvolution   *merge_evolution;
         GList              *key_list = NULL;
@@ -259,7 +259,7 @@ gl_merge_evolution_get_key_list (glMerge *merge)
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
 static gchar *
-gl_merge_evolution_get_primary_key (glMerge *merge)
+gl_merge_evolution_get_primary_key (const glMerge *merge)
 {
         return g_strdup (e_contact_pretty_name(E_CONTACT_FILE_AS));
 }
@@ -500,8 +500,8 @@ gl_merge_evolution_get_record (glMerge *merge)
 /* Copy merge_evolution specific fields.                                     */
 /*---------------------------------------------------------------------------*/
 static void
-gl_merge_evolution_copy (glMerge *dst_merge,
-                    glMerge *src_merge)
+gl_merge_evolution_copy (glMerge       *dst_merge,
+                         const glMerge *src_merge)
 {
         GList *src_iter, *dst_iter;
 

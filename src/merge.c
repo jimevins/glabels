@@ -69,21 +69,21 @@ static GList *backends = NULL;
 /* Private function prototypes.                           */
 /*========================================================*/
 
-static void           gl_merge_finalize      (GObject        *object);
+static void           gl_merge_finalize      (GObject              *object);
 
-static void           merge_open             (glMerge        *merge);
+static void           merge_open             (glMerge              *merge);
 
-static void           merge_close            (glMerge        *merge);
+static void           merge_close            (glMerge              *merge);
 
-static glMergeRecord *merge_get_record       (glMerge        *merge);
+static glMergeRecord *merge_get_record       (glMerge              *merge);
 
-static void           merge_free_record      (glMergeRecord **record);
+static void           merge_free_record      (glMergeRecord       **record);
 
-static glMergeRecord *merge_dup_record       (glMergeRecord  *record);
+static glMergeRecord *merge_dup_record       (const glMergeRecord  *record);
 
-static void           merge_free_record_list (GList         **record_list);
+static void           merge_free_record_list (GList               **record_list);
 
-static GList         *merge_dup_record_list  (GList          *record_list);
+static GList         *merge_dup_record_list  (GList                *record_list);
 
 
 
@@ -276,7 +276,7 @@ gl_merge_finalize (GObject *object)
 /* New merge object.                                                         */
 /*****************************************************************************/
 glMerge *
-gl_merge_new (gchar *name)
+gl_merge_new (const gchar *name)
 {
 	glMerge *merge = NULL;
 	GList   *p;
@@ -314,7 +314,7 @@ gl_merge_new (gchar *name)
 /* Duplicate merge.                                                         */
 /*****************************************************************************/
 glMerge *
-gl_merge_dup (glMerge *src_merge)
+gl_merge_dup (const glMerge *src_merge)
 {
 	glMerge    *dst_merge;
 
@@ -351,7 +351,7 @@ gl_merge_dup (glMerge *src_merge)
 /* Get name of merge.                                                        */
 /*****************************************************************************/
 gchar *
-gl_merge_get_name (glMerge *merge)
+gl_merge_get_name (const glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "");
 
@@ -368,7 +368,7 @@ gl_merge_get_name (glMerge *merge)
 /* Get description of merge.                                                 */
 /*****************************************************************************/
 gchar *
-gl_merge_get_description (glMerge *merge)
+gl_merge_get_description (const glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "");
 
@@ -385,7 +385,7 @@ gl_merge_get_description (glMerge *merge)
 /* Get source type of merge.                                                 */
 /*****************************************************************************/
 glMergeSrcType
-gl_merge_get_src_type (glMerge *merge)
+gl_merge_get_src_type (const glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "");
 
@@ -402,8 +402,8 @@ gl_merge_get_src_type (glMerge *merge)
 /* Set src of merge.                                                         */
 /*****************************************************************************/
 void
-gl_merge_set_src (glMerge *merge,
-		  gchar   *src)
+gl_merge_set_src (glMerge       *merge,
+		  const gchar   *src)
 {
 	GList         *record_list = NULL;
 	glMergeRecord *record;
@@ -458,7 +458,7 @@ gl_merge_set_src (glMerge *merge,
 /* Get src of merge.                                                         */
 /*****************************************************************************/
 gchar *
-gl_merge_get_src (glMerge *merge)
+gl_merge_get_src (const glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "");
 
@@ -475,7 +475,7 @@ gl_merge_get_src (glMerge *merge)
 /* Get Key List.                                                             */
 /*****************************************************************************/
 GList *
-gl_merge_get_key_list (glMerge *merge)
+gl_merge_get_key_list (const glMerge *merge)
 {
 	GList *key_list = NULL;
 
@@ -523,7 +523,7 @@ gl_merge_free_key_list (GList **key_list)
 /* Get Key List.                                                             */
 /*****************************************************************************/
 gchar *
-gl_merge_get_primary_key (glMerge *merge)
+gl_merge_get_primary_key (const glMerge *merge)
 {
 	gchar *key = NULL;
 
@@ -643,7 +643,7 @@ merge_free_record (glMergeRecord **record)
 /* Duplicate a merge record (list of fields)                                 */
 /*---------------------------------------------------------------------------*/
 static glMergeRecord *
-merge_dup_record (glMergeRecord *record)
+merge_dup_record (const glMergeRecord *record)
 {
 	glMergeRecord *dest_record;
 	GList         *p;
@@ -676,8 +676,8 @@ merge_dup_record (glMergeRecord *record)
 /* Find key in given record and evaluate.                                    */
 /*****************************************************************************/
 gchar *
-gl_merge_eval_key (glMergeRecord *record,
-		   gchar         *key)
+gl_merge_eval_key (const glMergeRecord *record,
+		   const gchar         *key)
 		   
 {
 	GList        *p;
@@ -706,7 +706,7 @@ gl_merge_eval_key (glMergeRecord *record,
 /* Read all records from merge source.                                       */
 /*****************************************************************************/
 const GList *
-gl_merge_get_record_list (glMerge *merge)
+gl_merge_get_record_list (const glMerge *merge)
 {
 	gl_debug (DEBUG_MERGE, "");
 	      
@@ -769,7 +769,7 @@ merge_dup_record_list (GList *record_list)
 /* Count selected records.                                                   */
 /*****************************************************************************/
 gint
-gl_merge_get_record_count (glMerge *merge)
+gl_merge_get_record_count (const glMerge *merge)
 {
 	GList *p;
 	glMergeRecord *record;

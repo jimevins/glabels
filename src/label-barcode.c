@@ -42,13 +42,11 @@
 /*========================================================*/
 
 struct _glLabelBarcodePrivate {
-        glTextNode     *text_node;
-        gchar          *backend_id;
-        gchar          *id;
-        glColorNode    *color_node;
-        gboolean        text_flag;
-        gboolean        checksum_flag;
-        guint           format_digits;
+
+        glTextNode          *text_node;
+        glLabelBarcodeStyle *style;
+        glColorNode         *color_node;
+
 };
 
 
@@ -129,7 +127,7 @@ gl_label_barcode_finalize (GObject *object)
         g_return_if_fail (object && GL_IS_LABEL_BARCODE (object));
 
         gl_text_node_free (&lbc->priv->text_node);
-        g_free (lbc->priv->id);
+        gl_label_barcode_style_free (lbc->priv->style);
         gl_color_node_free (&(lbc->priv->color_node));
         g_free (lbc->priv);
 
@@ -145,6 +143,7 @@ gl_label_barcode_new (glLabel *label,
                       gboolean checkpoint)
 {
         glLabelBarcode      *lbc;
+        glLabelBarcodeStyle *style;
         glColorNode         *line_color_node;
 
         lbc = g_object_new (gl_label_barcode_get_type(), NULL);
@@ -157,19 +156,16 @@ gl_label_barcode_new (glLabel *label,
                 }
 
                 /* Default barcode style and properties. */
-                lbc->priv->backend_id = g_strdup (gl_barcode_backends_backend_name_to_id (NULL));
-                lbc->priv->id         = g_strdup (gl_barcode_backends_style_name_to_id (lbc->priv->backend_id,
-                                                                                        NULL));
-                lbc->priv->text_flag     = gl_barcode_backends_style_can_text (lbc->priv->backend_id,
-                                                                               lbc->priv->id);
-                lbc->priv->checksum_flag = gl_barcode_backends_style_can_csum (lbc->priv->backend_id,
-                                                                               lbc->priv->id);
-                lbc->priv->format_digits = gl_barcode_backends_style_get_prefered_n (lbc->priv->backend_id,
-                                                                                     lbc->priv->id);
+                style = gl_label_barcode_style_new ();
+                gl_label_barcode_style_set_backend_id (style, gl_barcode_backends_backend_name_to_id (NULL));
+                gl_label_barcode_style_set_style_id (style, gl_barcode_backends_style_name_to_id (style->backend_id, NULL));
+                style->text_flag     = gl_barcode_backends_style_can_text (style->backend_id, style->id);
+                style->checksum_flag = gl_barcode_backends_style_can_csum (style->backend_id, style->id);
+                style->format_digits = gl_barcode_backends_style_get_prefered_n (style->backend_id, style->id);
+                lbc->priv->style = style;
 
                 line_color_node = gl_color_node_new_default ();
                 line_color_node->color = gl_label_get_default_line_color(label);
-
                 lbc->priv->color_node = line_color_node;
 
                 gl_label_add_object (label, GL_LABEL_OBJECT (lbc));
@@ -190,12 +186,8 @@ copy (glLabelObject *dst_object,
         glLabelBarcode      *lbc     = (glLabelBarcode *)src_object;
         glLabelBarcode      *new_lbc = (glLabelBarcode *)dst_object;
         glTextNode          *text_node;
-        gchar               *backend_id;
-        gchar               *id;
-        gboolean             text_flag;
-        gboolean             checksum_flag;
+        glLabelBarcodeStyle *style;
         glColorNode         *color_node;
-        guint                format_digits;
 
         gl_debug (DEBUG_LABEL, "START");
 
@@ -203,17 +195,15 @@ copy (glLabelObject *dst_object,
         g_return_if_fail (new_lbc && GL_IS_LABEL_BARCODE (new_lbc));
 
         text_node = gl_label_barcode_get_data (lbc);
-        gl_label_barcode_get_props (lbc, &backend_id, &id, &text_flag, &checksum_flag, &format_digits);
+        style = gl_label_barcode_get_style (lbc);
         color_node = get_line_color (src_object);
 
         gl_label_barcode_set_data (new_lbc, text_node, FALSE);
-        gl_label_barcode_set_props (new_lbc, backend_id, id, text_flag, checksum_flag, format_digits, FALSE);
+        gl_label_barcode_set_style (new_lbc, style, FALSE);
         set_line_color (dst_object, color_node, FALSE);
 
         gl_color_node_free (&color_node);
         gl_text_node_free (&text_node);
-        g_free (backend_id);
-        g_free (id);
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -223,9 +213,9 @@ copy (glLabelObject *dst_object,
 /* Set object params.                                                        */
 /*****************************************************************************/
 void
-gl_label_barcode_set_data (glLabelBarcode *lbc,
-                           glTextNode     *text_node,
-                           gboolean        checkpoint)
+gl_label_barcode_set_data (glLabelBarcode   *lbc,
+                           const glTextNode *text_node,
+                           gboolean          checkpoint)
 {
         glLabel *label;
 
@@ -252,13 +242,9 @@ gl_label_barcode_set_data (glLabelBarcode *lbc,
 
 
 void
-gl_label_barcode_set_props (glLabelBarcode *lbc,
-                            gchar          *backend_id,
-                            gchar          *id,
-                            gboolean        text_flag,
-                            gboolean        checksum_flag,
-                            guint           format_digits,
-                            gboolean        checkpoint)
+gl_label_barcode_set_style (glLabelBarcode            *lbc,
+                            const glLabelBarcodeStyle *style,
+                            gboolean                   checkpoint)
 {
         glLabel *label;
 
@@ -266,13 +252,7 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
 
         g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
 
-        if ( ((lbc->priv->backend_id == NULL) && (backend_id != NULL))
-             || ((lbc->priv->id == NULL) && (id != NULL))
-             || ((lbc->priv->backend_id != NULL) && (backend_id != NULL) && (g_ascii_strcasecmp (lbc->priv->backend_id, backend_id) != 0))
-             || ((lbc->priv->id != NULL) && (id != NULL) && (g_ascii_strcasecmp (lbc->priv->id, id) != 0))
-             || (lbc->priv->text_flag != text_flag)
-             || (lbc->priv->checksum_flag != checksum_flag)
-             || (lbc->priv->format_digits != format_digits))
+        if ( !gl_label_barcode_style_is_equal (style, lbc->priv->style) )
         {
                 if ( checkpoint )
                 {
@@ -280,11 +260,8 @@ gl_label_barcode_set_props (glLabelBarcode *lbc,
                         gl_label_checkpoint (label, _("Barcode property"));
                 }
 
-                lbc->priv->backend_id       = g_strdup (backend_id);
-                lbc->priv->id               = g_strdup (id);
-                lbc->priv->text_flag        = text_flag;
-                lbc->priv->checksum_flag    = checksum_flag;
-                lbc->priv->format_digits    = format_digits;
+                gl_label_barcode_style_free (lbc->priv->style);
+                lbc->priv->style = gl_label_barcode_style_dup (style);
 
                 gl_label_object_emit_changed (GL_LABEL_OBJECT(lbc));
         }
@@ -305,21 +282,12 @@ gl_label_barcode_get_data (glLabelBarcode *lbc)
 }
 
 
-void
-gl_label_barcode_get_props (glLabelBarcode *lbc,
-                            gchar          **backend_id,
-                            gchar          **id,
-                            gboolean       *text_flag,
-                            gboolean       *checksum_flag,
-                            guint          *format_digits)
+glLabelBarcodeStyle *
+gl_label_barcode_get_style (glLabelBarcode *lbc)
 {
-        g_return_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc));
+        g_return_val_if_fail (lbc && GL_IS_LABEL_BARCODE (lbc), NULL);
 
-        *backend_id       = g_strdup (lbc->priv->backend_id);
-        *id               = g_strdup (lbc->priv->id);
-        *text_flag        = lbc->priv->text_flag;
-        *checksum_flag    = lbc->priv->checksum_flag;
-        *format_digits    = lbc->priv->format_digits;
+        return gl_label_barcode_style_dup (lbc->priv->style);
 }
 
 
@@ -343,17 +311,17 @@ get_size (glLabelObject *object,
         gl_label_object_get_raw_size (object, &w_parent, &h_parent);
 
         if (lbc->priv->text_node->field_flag) {
-                data = gl_barcode_backends_style_default_digits (lbc->priv->backend_id,
-                                                                 lbc->priv->id,
-                                                                 lbc->priv->format_digits);
+                data = gl_barcode_backends_style_default_digits (lbc->priv->style->backend_id,
+                                                                 lbc->priv->style->id,
+                                                                 lbc->priv->style->format_digits);
         } else {
                 data = gl_text_node_expand (lbc->priv->text_node, NULL);
         }
 
-        gbc = gl_barcode_backends_new_barcode (lbc->priv->backend_id,
-                                               lbc->priv->id,
-                                               lbc->priv->text_flag,
-                                               lbc->priv->checksum_flag,
+        gbc = gl_barcode_backends_new_barcode (lbc->priv->style->backend_id,
+                                               lbc->priv->style->id,
+                                               lbc->priv->style->text_flag,
+                                               lbc->priv->style->checksum_flag,
                                                w_parent,
                                                h_parent,
                                                data);
@@ -361,13 +329,13 @@ get_size (glLabelObject *object,
 
         if ( gbc == NULL ) {
                 /* Try again with default digits. */
-                data = gl_barcode_backends_style_default_digits (lbc->priv->backend_id,
-                                                                 lbc->priv->id,
-                                                                 lbc->priv->format_digits);
-                gbc = gl_barcode_backends_new_barcode (lbc->priv->backend_id,
-                                                       lbc->priv->id,
-                                                       lbc->priv->text_flag,
-                                                       lbc->priv->checksum_flag,
+                data = gl_barcode_backends_style_default_digits (lbc->priv->style->backend_id,
+                                                                 lbc->priv->style->id,
+                                                                 lbc->priv->style->format_digits);
+                gbc = gl_barcode_backends_new_barcode (lbc->priv->style->backend_id,
+                                                       lbc->priv->style->id,
+                                                       lbc->priv->style->text_flag,
+                                                       lbc->priv->style->checksum_flag,
                                                        w_parent,
                                                        h_parent,
                                                        data);
@@ -459,13 +427,9 @@ draw_object (glLabelObject *object,
         PangoFontDescription *desc;
         gchar                *text, *cstring;
         glTextNode           *text_node;
-        gchar                *backend_id;
-        gchar                *id;
-        gboolean              text_flag;
-        gboolean              checksum_flag;
+        glLabelBarcodeStyle  *style;
         guint                 color;
         glColorNode          *color_node;
-        guint                 format_digits;
         gdouble               w, h;
         gint                  iw, ih;
         gdouble               layout_width;
@@ -476,8 +440,7 @@ draw_object (glLabelObject *object,
         gl_label_object_get_matrix (object, &matrix);
 
         text_node = gl_label_barcode_get_data (GL_LABEL_BARCODE (object));
-        gl_label_barcode_get_props (GL_LABEL_BARCODE (object),
-                                    &backend_id, &id, &text_flag, &checksum_flag, &format_digits);
+        style = gl_label_barcode_get_style (GL_LABEL_BARCODE (object));
 
         color_node = gl_label_object_get_line_color (object);
         color = gl_color_node_expand (color_node, record);
@@ -485,17 +448,16 @@ draw_object (glLabelObject *object,
         {
                 color = GL_COLOR_MERGE_DEFAULT;
         }
-        gl_color_node_free (&color_node);
 
         gl_label_object_get_size (object, &w, &h);
 
         text_node = gl_label_barcode_get_data(GL_LABEL_BARCODE(object));
         text = gl_text_node_expand (text_node, record);
         if (text_node->field_flag && screen_flag) {
-                text = gl_barcode_backends_style_default_digits (backend_id, id, format_digits);
+                text = gl_barcode_backends_style_default_digits (style->backend_id, style->id, style->format_digits);
         }
 
-        gbc = gl_barcode_backends_new_barcode (backend_id, id, text_flag, checksum_flag, w, h, text);
+        gbc = gl_barcode_backends_new_barcode (style->backend_id, style->id, style->text_flag, style->checksum_flag, w, h, text);
 
         cairo_set_source_rgba (cr, GL_COLOR_RGBA_ARGS (color));
 
@@ -635,8 +597,8 @@ draw_object (glLabelObject *object,
 
         g_free (text);
         gl_text_node_free (&text_node);
-        g_free (backend_id);
-        g_free (id);
+        gl_label_barcode_style_free (style);
+        gl_color_node_free (&color_node);
 
         gl_debug (DEBUG_LABEL, "END");
 }
@@ -665,6 +627,129 @@ object_at (glLabelObject *object,
 
         return FALSE;
 }
+
+
+/*****************************************************************************/
+/* Barcode style utilities.                                                  */
+/*****************************************************************************/
+glLabelBarcodeStyle *
+gl_label_barcode_style_new (void)
+{
+        return g_new0 (glLabelBarcodeStyle, 1);
+}
+
+
+glLabelBarcodeStyle *
+gl_label_barcode_style_dup (const glLabelBarcodeStyle *style)
+{
+        glLabelBarcodeStyle *style2;
+
+        style2 = gl_label_barcode_style_new ();
+
+        /* Shallow copy first. */
+        *style2 = *style;
+
+        /* Now go deep. */
+        style2->backend_id = g_strdup (style->backend_id);
+        style2->id         = g_strdup (style->id);
+
+        return style2;
+}
+
+
+void
+gl_label_barcode_style_free (glLabelBarcodeStyle *style)
+{
+        if ( style )
+        {
+                g_free (style->backend_id);
+                g_free (style->id);
+
+                g_free (style);
+        }
+}
+
+
+gboolean
+gl_label_barcode_style_is_equal (const glLabelBarcodeStyle *style1,
+                                 const glLabelBarcodeStyle *style2)
+{
+
+        /* First take care of the case of either or both being NULL. */
+        if ( style1 == NULL )
+        {
+                return ( style2 == NULL );
+        }
+        else
+        {
+                if ( style2 == NULL )
+                {
+                        return FALSE;
+                }
+        }
+
+        /* Compare field by field, bail on first difference. */
+        if ( style1->text_flag != style2->text_flag )
+        {
+                return FALSE;
+        }
+        if ( style1->checksum_flag != style2->checksum_flag )
+        {
+                return FALSE;
+        }
+        if ( style1->format_digits != style2->format_digits )
+        {
+                return FALSE;
+        }
+        if ( style1->backend_id && style2->backend_id )
+        {
+                if ( strcmp (style1->backend_id, style2->backend_id) != 0 )
+                {
+                        return FALSE;
+                }
+        }
+        else
+        {
+                if ( style1->backend_id != style2->backend_id )
+                {
+                        return FALSE;
+                }
+        }
+        if ( style1->id && style2->id )
+        {
+                if ( strcmp (style1->id, style2->id) != 0 )
+                {
+                        return FALSE;
+                }
+        }
+        else
+        {
+                if ( style1->id != style2->id )
+                {
+                        return FALSE;
+                }
+        }
+
+        /* Passed all tests. */
+        return TRUE;
+}
+
+
+void
+gl_label_barcode_style_set_backend_id (glLabelBarcodeStyle *style,
+                                       const gchar         *backend_id)
+{
+        style->backend_id = g_strdup (backend_id);
+}
+
+
+void
+gl_label_barcode_style_set_style_id (glLabelBarcodeStyle *style,
+                                     const gchar         *id)
+{
+        style->id = g_strdup (id);
+}
+
 
 
 

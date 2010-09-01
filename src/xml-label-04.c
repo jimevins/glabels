@@ -439,28 +439,31 @@ static void
 xml04_parse_barcode_props (xmlNodePtr    node,
 			   glLabelBarcode *object)
 {
-	xmlChar       *id;
-        const gchar   *backend_id;
-	gboolean       text_flag;
-	glColorNode   *color_node;
-	gdouble        scale;
-	xmlNodePtr     child;
-	glTextNode    *text_node;
+	gchar               *id;
+        const gchar         *backend_id;
+        glLabelBarcodeStyle *style;
+	glColorNode         *color_node;
+	xmlNodePtr           child;
+	glTextNode          *text_node;
 
 	gl_debug (DEBUG_XML, "START");
 
 	color_node = gl_color_node_new_default ();
 	color_node->color = lgl_xml_get_prop_uint (node, "color", 0);
 
-	id = xmlGetProp (node, (xmlChar *)"style");
-        backend_id = gl_barcode_backends_guess_backend_id (id);
+        style = gl_label_barcode_style_new ();
 
-	text_flag = lgl_xml_get_prop_boolean (node, "text", FALSE);
-	scale =	lgl_xml_get_prop_double (node, "scale", 1.0);
-	if (scale == 0.0) {
-		scale = 0.5; /* Set to a valid value */
-	}
-	gl_label_barcode_set_props (object, (gchar *)id, (gchar *)backend_id, text_flag, TRUE, 0, FALSE);
+	id = lgl_xml_get_prop_string (node, "style", "POSTNET");
+        backend_id = gl_barcode_backends_guess_backend_id (id);
+        gl_label_barcode_style_set_backend_id (style, backend_id);
+        gl_label_barcode_style_set_style_id (style, id);
+
+	style->text_flag     = lgl_xml_get_prop_boolean (node, "text", FALSE);
+        style->checksum_flag = TRUE;
+        style->format_digits = 0;
+
+	gl_label_barcode_set_style (object, style, FALSE);
+
 	gl_label_object_set_line_color (GL_LABEL_OBJECT(object), color_node, FALSE);
 
 	child = node->xmlChildrenNode;
@@ -478,7 +481,8 @@ xml04_parse_barcode_props (xmlNodePtr    node,
 
 	gl_color_node_free (&color_node);
 	gl_text_node_free (&text_node);
-	xmlFree (id);
+	g_free (id);
+        gl_label_barcode_style_free (style);
 
 	gl_debug (DEBUG_XML, "END");
 }

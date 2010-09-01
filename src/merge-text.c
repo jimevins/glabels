@@ -80,13 +80,13 @@ static gchar         *key_from_index                (glMergeText      *merge_tex
                                                      gint              i_field);
 static void           clear_keys                    (glMergeText      *merge_text);
 
-static GList         *gl_merge_text_get_key_list    (glMerge          *merge);
-static gchar         *gl_merge_text_get_primary_key (glMerge          *merge);
+static GList         *gl_merge_text_get_key_list    (const glMerge    *merge);
+static gchar         *gl_merge_text_get_primary_key (const glMerge    *merge);
 static void           gl_merge_text_open            (glMerge          *merge);
 static void           gl_merge_text_close           (glMerge          *merge);
 static glMergeRecord *gl_merge_text_get_record      (glMerge          *merge);
 static void           gl_merge_text_copy            (glMerge          *dst_merge,
-						     glMerge          *src_merge);
+						     const glMerge    *src_merge);
 
 static GList         *parse_line                    (FILE             *fp,
 						     gchar             delim);
@@ -280,7 +280,7 @@ clear_keys (glMergeText      *merge_text)
 /* Get key list.                                                            */
 /*--------------------------------------------------------------------------*/
 static GList *
-gl_merge_text_get_key_list (glMerge *merge)
+gl_merge_text_get_key_list (const glMerge *merge)
 {
 	glMergeText   *merge_text;
 	gint           i_field, n_fields;
@@ -315,7 +315,7 @@ gl_merge_text_get_key_list (glMerge *merge)
 /* Get "primary" key.                                                       */
 /*--------------------------------------------------------------------------*/
 static gchar *
-gl_merge_text_get_primary_key (glMerge *merge)
+gl_merge_text_get_primary_key (const glMerge *merge)
 {
 	/* For now, let's always assume the first column is the primary key. */
         return key_from_index (GL_MERGE_TEXT (merge), 0);
@@ -442,8 +442,8 @@ gl_merge_text_get_record (glMerge *merge)
 /* Copy merge_text specific fields.                                          */
 /*---------------------------------------------------------------------------*/
 static void
-gl_merge_text_copy (glMerge *dst_merge,
-		    glMerge *src_merge)
+gl_merge_text_copy (glMerge       *dst_merge,
+		    const glMerge *src_merge)
 {
 	glMergeText *dst_merge_text;
 	glMergeText *src_merge_text;
