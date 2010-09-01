@@ -71,6 +71,7 @@ void
 gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 {
 	GList        *backends = NULL;
+        GList        *p;
 
 	gl_debug (DEBUG_EDITOR, "START");
 
@@ -112,6 +113,14 @@ gl_object_editor_prepare_bc_page (glObjectEditor       *editor)
 	backends = gl_barcode_backends_get_backend_list ();
 	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_backend_combo),
                                    backends);
+
+        /* Kludge: Load styles for each backend once, so that when they are loaded for real the size of
+         * of the widget has already been established and does't cause the sidebar to change size. */
+        for ( p = backends; p != NULL; p=p->next )
+        {
+                gl_object_editor_load_bc_styles (editor, gl_barcode_backends_backend_name_to_id ((gchar *)p->data));
+        }
+
 	gl_barcode_backends_free_backend_list (backends);
 
 	/* Modify widgets */
@@ -271,8 +280,7 @@ gl_object_editor_load_bc_styles (glObjectEditor      *editor,
         editor->priv->stop_signals = TRUE;
 
 	styles = gl_barcode_backends_get_styles_list (backend_id);
-	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo),
-                                   styles);
+	gl_combo_util_set_strings (GTK_COMBO_BOX(editor->priv->bc_style_combo), styles);
 	gl_barcode_backends_free_styles_list (styles);
 
         editor->priv->stop_signals = FALSE;
