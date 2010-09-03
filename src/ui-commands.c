@@ -1133,6 +1133,9 @@ gl_ui_cmd_help_about (GtkAction *action,
                 "Jim Evins",
                 " ",
                 _("Glabels includes contributions from:"),
+                "Mario Blättermann",
+                "Robin Stuart",
+                "Samual Lown",
                 "Frederic Ruaudel",
                 "Wayne Schuller",
                 "Emmanuel Pacaud",
@@ -1142,14 +1145,19 @@ gl_ui_cmd_help_about (GtkAction *action,
                 _("or visit http://glabels.org/"),
                 NULL
         };
-        
-        const gchar *artists[] = {
-                "Nestor Di",
+
+        const gchar *documenters[] = {
                 "Jim Evins",
+                "Mario Blättermann",
                 NULL
         };
         
-        const gchar *copy_text = "Copyright \xc2\xa9 2001-2009 Jim Evins";
+        const gchar *artists[] = {
+                "Jim Evins",
+                NULL
+        };
+
+        const gchar *copy_text = "Copyright \xc2\xa9 2001-2010 Jim Evins";
 
         const gchar *about_text = _("A label and business card creation program.\n");
 
@@ -1182,23 +1190,24 @@ gl_ui_cmd_help_about (GtkAction *action,
 
         } else {
         
-                pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "glabels-splash.png", NULL);
+                pixbuf_filename = g_build_filename (GLABELS_DATA_DIR, "pixmaps", "glabels-logo.png", NULL);
                 pixbuf = gdk_pixbuf_new_from_file (pixbuf_filename, NULL);
                 g_free (pixbuf_filename);
 
                 about = gtk_about_dialog_new ();
-                gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(about), _("glabels"));
+                gtk_window_set_title              (GTK_WINDOW(about),       _("About glabels"));
+                gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(about), "glabels");
                 gtk_about_dialog_set_version      (GTK_ABOUT_DIALOG(about), VERSION);
                 gtk_about_dialog_set_copyright    (GTK_ABOUT_DIALOG(about), copy_text);
                 gtk_about_dialog_set_comments     (GTK_ABOUT_DIALOG(about), about_text);
                 gtk_about_dialog_set_website      (GTK_ABOUT_DIALOG(about), url);
                 gtk_about_dialog_set_logo         (GTK_ABOUT_DIALOG(about), pixbuf);
 
-                gtk_about_dialog_set_authors      (GTK_ABOUT_DIALOG(about), authors);
-                gtk_about_dialog_set_artists      (GTK_ABOUT_DIALOG(about), artists);
-                gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about),
-                                                         translator_credits);
-                gtk_about_dialog_set_license   (GTK_ABOUT_DIALOG(about), license);
+                gtk_about_dialog_set_authors            (GTK_ABOUT_DIALOG(about), authors);
+                gtk_about_dialog_set_documenters        (GTK_ABOUT_DIALOG(about), documenters);
+                gtk_about_dialog_set_artists            (GTK_ABOUT_DIALOG(about), artists);
+                gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG(about), translator_credits);
+                gtk_about_dialog_set_license            (GTK_ABOUT_DIALOG(about), license);
         
                 gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
 

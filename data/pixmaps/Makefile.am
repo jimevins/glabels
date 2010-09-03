@@ -3,8 +3,7 @@
 glabels_pixmapsdir = $(datadir)/$(GLABELS_BRANCH)/pixmaps
 
 glabels_pixmaps_DATA = \
-	glabels-splash.png	\
-	glabels-about-logo.png	\
+	glabels-logo.png	\
 	new-select.png		\
 	new-rotate.png		\
 	new-confirm.png		\
