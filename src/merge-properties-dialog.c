@@ -30,7 +30,6 @@
 #include "merge.h"
 #include "combo-util.h"
 #include "builder-util.h"
-#include "hig.h"
 
 #include "debug.h"
 
@@ -154,8 +153,6 @@ gl_merge_properties_dialog_init (glMergePropertiesDialog *dialog)
 	dialog->priv = g_new0 (glMergePropertiesDialogPrivate, 1);
 
         vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-
- 	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD1);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_button (GTK_DIALOG (dialog),

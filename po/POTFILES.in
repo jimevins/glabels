@@ -64,7 +64,6 @@ src/font-util.c
 src/font-util.h
 src/glabels-batch.c
 src/glabels.c
-src/hig.h
 src/label-barcode.c
 src/label-barcode.h
 src/label-box.c

@@ -80,7 +80,6 @@ glabels_3_SOURCES = 			\
 	prefs-model.h 			\
 	prefs-dialog.c 			\
 	prefs-dialog.h 			\
-	hig.h				\
 	view.c				\
 	view.h				\
 	view-box.c			\
@@ -320,7 +319,6 @@ glabels_3_batch_SOURCES = 		\
 	color.h				\
 	debug.c 			\
 	debug.h 			\
-	hig.h				\
 	cairo-label-path.c		\
 	cairo-label-path.h		\
 	cairo-ellipse-path.c		\

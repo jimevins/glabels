@@ -26,7 +26,6 @@
 #include <gtk/gtk.h>
 
 #include "prefs.h"
-#include "hig.h"
 #include "color-combo.h"
 #include "color.h"
 #include "font-combo.h"
@@ -158,8 +157,6 @@ gl_prefs_dialog_init (glPrefsDialog *dialog)
                 g_error_free (error);
 		return;
 	}
-
-	gtk_container_set_border_width (GTK_CONTAINER(dialog), GL_HIG_PAD2);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG(dialog), FALSE);
 	gtk_dialog_add_button (GTK_DIALOG(dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
