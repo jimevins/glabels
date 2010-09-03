@@ -2,6 +2,8 @@
 
 src/bc.c
 src/bc.h
+src/bc-backends.c
+src/bc-backends.h
 src/bc-gnubarcode.c
 src/bc-gnubarcode.h
 src/bc-iec16022.c
